@@ -1,65 +1,106 @@
 const prepareConfig = require('./prepareConfig')
-const attachConfig = require('./attachConfig')
-const addFilesToArchive = require('./addFilesToArchive')
 const generateHandler = require('./generateHandler')
 const { promisify } = require('util')
 const fs = require('fs')
-const uuidv4 = require('uuid/v4')
+const ZipPlugin = require('zip-webpack-plugin')
+const webpack = require('webpack')
 
 const readFileAsync = promisify(fs.readFile)
+const writeFileAsync = promisify(fs.writeFile)
 const pathJs = require('path')
-
-const archiver = require('archiver')
 
 const CONFIG_FILE = 'bearer.config.json'
 const HANDLER_NAME = 'index.js'
-const archive = archiver('zip', {
-  zlib: { level: 9 }
-})
 
-module.exports = (output, handler, { path, scenarioUuid }, emitter) => {
-  output.on('close', () => {
-    emitter.emit('buildArtifact:output:close', pathJs.resolve(output.path))
-  })
-
-  output.on('end', () => {
-    emitter.emit('buildArtifact:output:end')
-  })
-
-  archive.on('warning', err => {
-    if (err.code === 'ENOENT') {
-      emitter.emit('buildArtifact:archive:warning:ENOENT', err)
-    } else {
-      throw err
-    }
-  })
-
-  archive.pipe(output)
-
-  emitter.emit('buildArtifact:start', { scenarioUuid })
-
-  prepareConfig(path, scenarioUuid)
-    .then(async config => {
-      emitter.emit('buildArtifact:configured', { intents: config.intents })
-
-      await attachConfig(archive, JSON.stringify(config, null, 2), {
-        name: CONFIG_FILE
-      })
-
-      archive.append(generateHandler(config), { name: HANDLER_NAME })
-
-      await addFilesToArchive(archive, path)
+class AddConfigWebpackPlugin {
+  constructor(options) {
+    this.options = options
+  }
+  apply(compiler) {
+    const { config } = this.options
+    compiler.hooks.thisCompilation.tap('emit', compilation => {
+      compilation.assets[CONFIG_FILE] = {
+        source() {
+          return config
+        },
+        size() {
+          return config.length
+        }
+      }
     })
-    .then(() => {
-      archive.finalize()
-    })
-    .catch(console.error)
+  }
+}
+
+module.exports = async (output, handler, { path, scenarioUuid }, emitter) => {
+  const artifactDirectory = pathJs.dirname(pathJs.resolve(output.path))
+  const buildDirectory = pathJs.join(artifactDirectory, 'build')
+  const handlerBuildPath = pathJs.join(buildDirectory, HANDLER_NAME)
+  let config
+
+  if (!fs.existsSync(buildDirectory)) {
+    fs.mkdirSync(buildDirectory)
+  }
+
+  try {
+    config = await prepareConfig(path, scenarioUuid)
+    emitter.emit('buildArtifact:configured', { intents: config.intents })
+    await writeFileAsync(handlerBuildPath, generateHandler(config))
+  } catch (e) {
+    console.log(e)
+  }
 
   return new Promise((resolve, reject) => {
-    output.on('close', () => {
-      resolve(archive)
-    })
-
-    archive.on('error', reject)
+    webpack(
+      {
+        mode: 'production',
+        target: 'node',
+        entry: handlerBuildPath,
+        output: {
+          libraryTarget: 'commonjs',
+          path: artifactDirectory,
+          filename: 'index.js'
+        },
+        resolve: {
+          extensions: ['.ts', '.tsx', '.js']
+        },
+        module: {
+          rules: [
+            {
+              test: /\.tsx?$/,
+              loader: 'awesome-typescript-loader',
+              exclude: [
+                pathJs.join(pathJs.resolve(path), 'node_modules'),
+                /node_modules/
+              ]
+            }
+          ]
+        },
+        stats: {
+          colors: true,
+          modules: true,
+          reasons: true,
+          errorDetails: true
+        },
+        plugins: [
+          new AddConfigWebpackPlugin({
+            config: JSON.stringify(config, null, 2)
+          }),
+          new ZipPlugin({
+            path: artifactDirectory,
+            filename: `${scenarioUuid}.zip`
+          })
+        ]
+      },
+      (err, stats) => {
+        if (err || stats.hasErrors()) {
+          console.log(err)
+          console.log(stats.compilation.errors)
+          reject(err, stats)
+          // Handle errors here
+        } else {
+          resolve(stats)
+        }
+      }
+    )
   })
 }

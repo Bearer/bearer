@@ -4,6 +4,16 @@ const path = require('path')
 const fs = require('fs')
 const { promisify } = require('util')
 const readFileAsync = promisify(fs.readFile)
+const ts = require('typescript')
+
+function eventuallyTranspile(ext, source) {
+  let code = { outputText: source }
+  if (ext === '.ts')
+    code = ts.transpileModule(source, {
+      compilerOptions: { module: ts.ModuleKind.CommonJS }
+    })
+  return JSON.stringify(code)
+}
 
 const AUTH_CONFIG_FILE = 'auth.config.json'
 
@@ -14,18 +24,23 @@ module.exports = (codePath, scenarioUuid) => {
 
   return globby([
     `${fullPath}/*.js`,
+    `${fullPath}/*.ts`,
     `!${fullPath}/node_modules`,
     `!${fullPath}/*.test.js`,
-    `!${fullPath}/*.spec.js`
+    `!${fullPath}/*.spec.js`,
+    `!${fullPath}/*.test.ts`,
+    `!${fullPath}/*.spec.ts`
   ]).then(files =>
     files
       .reduce(async (acc, f) => {
-        let code = await readFileAsync(f)
+        let code = await readFileAsync(f, { encoding: 'utf8' })
+        code = eventuallyTranspile(path.extname(f), code)
+        code = JSON.parse(code).outputText
 
         let exports = {}
-        let sandbox = { module: { exports } }
+        let sandbox = { module: { exports }, exports }
 
-        const script = new vm.Script(`((require) => {${code.toString()}})`)
+        const script = new vm.Script(`((require) => {${code}})`)
         vm.createContext(sandbox)
 
         try {
