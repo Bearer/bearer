@@ -1,0 +1,15 @@
+version: "3"
+services:
+  bearer:
+    image: node:8.11
+    volumes:
+      - ~/.bearerrc:/root/.bearerrc
+      - ~/.npmrc:/root/.npmrc
+      - ./:/scenario
+      - local:/usr/local/
+    ports:
+      - "3333:3333"
+    working_dir: /scenario
+
+volumes:
+  local:

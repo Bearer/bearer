@@ -45,3 +45,9 @@ To deploy to dev env use:
 ```bash
 $ BEARER_ENV=dev bearer deploy
 ```
+
+**To Deploy with docker**
+
+```bash
+$ docker-compose run --rm bearer bash deploy.sh
+```
