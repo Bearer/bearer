@@ -2,12 +2,12 @@
   "compilerOptions": {
     "allowSyntheticDefaultImports": true,
     "allowUnreachableCode": false,
-    "declaration": true,
     "experimentalDecorators": true,
-    "moduleResolution": "node",
     "module": "es2015",
-    "target": "es2015"
+    "target": "es2015",
+    "moduleResolution": "node",
+    "outDir": "build/compiled",
+    "declaration": true
   },
-  "include": ["src"],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules/"]
 }
