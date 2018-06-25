@@ -71,7 +71,7 @@
     "ts-jest": "^22.4.6"
   },
   "dependencies": {
-    "@stencil/core": "^0.9.11",
+    "@stencil/core": "https://github.com/Bearer/stencil#feature-typescript-custom-transformers",
     "babel-plugin-inline-dotenv": "^1.1.2",
     "fbemitter": "^2.1.1",
     "rc": "^1.2.8",
