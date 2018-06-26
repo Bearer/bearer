@@ -1,5 +1,4 @@
-import { Component, Prop } from '@bearer/core'
-import { classnames } from '@bearer/core'
+import { Component, Prop, classnames } from '@bearer/core'
 
 @Component({
   tag: 'bearer-alert',
