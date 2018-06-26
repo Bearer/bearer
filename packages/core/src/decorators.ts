@@ -1,7 +1,8 @@
+import * as d from '@bearer/stencil-core/dist/declarations/index'
+
 export * from './decorators/Component'
 export * from './decorators/Intent'
 
-import * as d from '@bearer/stencil-core/dist/declarations'
 export {
   ComponentDidLoad,
   ComponentDidUnload,

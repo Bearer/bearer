@@ -1,5 +1,6 @@
 import Bearer from './Bearer'
-import { Intent, BearerFetch, IntentType, BearerComponent } from './decorators'
+import { Intent, BearerFetch, IntentType } from './decorators/Intent'
+import { BearerComponent } from './decorators/Component'
 import fetch from 'jest-fetch-mock'
 
 const SCENARIO_ID = '1234'
