@@ -4,8 +4,7 @@ require('dotenv').config({
 
 module.exports = {
   transform: {
-    '^.+\\.tsx?$': 'ts-jest',
-    '^.*\\.d\\.ts$': 'ts-jest'
+    '^.+\\.tsx?$': 'ts-jest'
   },
   testRegex: '(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$',
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
