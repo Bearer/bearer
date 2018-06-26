@@ -1,4 +1,4 @@
-import { Component, State } from '@stencil/core'
+import { Component, State } from '@bearer/core'
 
 @Component({
   tag: 'app-ui'

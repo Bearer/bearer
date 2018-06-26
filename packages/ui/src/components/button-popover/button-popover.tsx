@@ -1,4 +1,4 @@
-import { Component, State, Prop, Listen, Method } from '@stencil/core'
+import { Component, State, Prop, Listen, Method } from '@bearer/core'
 
 @Component({
   tag: 'bearer-button-popover',

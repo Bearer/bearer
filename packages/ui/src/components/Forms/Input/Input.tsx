@@ -5,7 +5,7 @@ import {
   Event,
   EventEmitter
   // Watch
-} from '@stencil/core'
+} from '@bearer/core'
 
 @Component({
   tag: 'bearer-input',

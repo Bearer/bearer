@@ -1,4 +1,4 @@
-import { Component, Element, Listen, Prop, State } from '@stencil/core'
+import { Component, Element, Listen, Prop, State } from '@bearer/core'
 
 const NAVIGATOR_AUTH_SCREEN_NAME = 'BEARER-NAVIGATOR-AUTH-SCREEN'
 

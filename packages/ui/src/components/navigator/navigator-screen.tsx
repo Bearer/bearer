@@ -6,7 +6,7 @@ import {
   Event,
   EventEmitter,
   Listen
-} from '@stencil/core'
+} from '@bearer/core'
 
 @Component({
   tag: 'bearer-navigator-screen',

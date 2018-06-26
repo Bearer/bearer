@@ -1,4 +1,4 @@
-import { Component, Prop } from '@stencil/core'
+import { Component, Prop } from '@bearer/core'
 import { createStore, combineReducers } from 'redux'
 import { Store } from '@stencil/redux'
 import singers from '../navigator/data.json'

@@ -1,4 +1,4 @@
-import { Component } from '@stencil/core'
+import { Component } from '@bearer/core'
 import singers from '../navigator/data.json'
 
 const SINGERS = singers

@@ -1,4 +1,4 @@
-import { Component, State } from '@stencil/core'
+import { Component, State } from '@bearer/core'
 import { FieldSet } from '../ui/Forms/FieldSet'
 
 @Component({

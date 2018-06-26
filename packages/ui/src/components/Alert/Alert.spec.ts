@@ -1,4 +1,4 @@
-import { flush, render } from '@stencil/core/testing'
+import { flush, render } from '@bearer/core/testing'
 import { Alert } from './Alert'
 
 describe('alert', () => {

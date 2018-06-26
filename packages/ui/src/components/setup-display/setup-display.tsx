@@ -1,4 +1,4 @@
-import { Component, Prop, State } from '@stencil/core'
+import { Component, Prop, State } from '@bearer/core'
 
 import Bearer from '@bearer/core'
 

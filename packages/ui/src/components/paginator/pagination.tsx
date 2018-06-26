@@ -1,4 +1,4 @@
-import { Component, Prop, Event, EventEmitter } from '@stencil/core'
+import { Component, Prop, Event, EventEmitter } from '@bearer/core'
 import logic from './logic'
 
 @Component({

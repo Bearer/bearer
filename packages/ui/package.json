@@ -21,13 +21,12 @@
     "publish:demo": "cd demo && yarn install && yarn publish:demo"
   },
   "dependencies": {
-    "@bearer/core": "^0.1.1",
+    "@bearer/core": "^0.1.4-0",
     "@stencil/redux": "^0.0.4",
     "@stencil/sass": "^0.0.5",
     "bootstrap": "^4.1.0"
   },
   "devDependencies": {
-    "@stencil/core": "^0.9.11",
     "@stencil/dev-server": "latest",
     "@stencil/utils": "latest",
     "@types/jest": "^23.1.1",
