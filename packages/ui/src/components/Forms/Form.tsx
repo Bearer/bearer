@@ -6,7 +6,7 @@ import {
   Listen,
   Method,
   EventEmitter
-} from '@stencil/core'
+} from '@bearer/core'
 import { FieldSet } from './Fieldset'
 
 @Component({

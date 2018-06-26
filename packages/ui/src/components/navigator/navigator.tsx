@@ -1,4 +1,4 @@
-import { Component, State, Listen, Element } from '@stencil/core'
+import { Component, State, Listen, Element } from '@bearer/core'
 
 @Component({
   tag: 'bearer-navigator',

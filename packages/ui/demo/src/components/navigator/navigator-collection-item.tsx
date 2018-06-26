@@ -1,4 +1,4 @@
-import { Component, Prop } from '@stencil/core'
+import { Component, Prop } from '@bearer/core'
 
 @Component({
   tag: 'navigator-collection-item',

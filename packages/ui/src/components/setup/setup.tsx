@@ -5,7 +5,7 @@ import {
   Event,
   EventEmitter,
   Prop
-} from '@stencil/core'
+} from '@bearer/core'
 import Bearer, { BearerState } from '@bearer/core'
 import { FieldSet } from '../Forms/Fieldset'
 import { OAuth2SetupType } from './setup-types'

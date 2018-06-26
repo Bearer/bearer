@@ -1,4 +1,4 @@
-import { Component, Prop, Element, Event, EventEmitter } from '@stencil/core'
+import { Component, Prop, Element, Event, EventEmitter } from '@bearer/core'
 
 @Component({
   tag: 'bearer-select',

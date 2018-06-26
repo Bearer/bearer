@@ -5,7 +5,7 @@ import {
   Prop,
   State,
   Watch
-} from '@stencil/core'
+} from '@bearer/core'
 
 @Component({
   tag: 'bearer-navigator-collection',

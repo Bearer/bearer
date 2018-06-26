@@ -1,4 +1,4 @@
-import { Component, Prop } from '@stencil/core'
+import { Component, Prop } from '@bearer/core'
 import { classnames } from '@bearer/core'
 
 @Component({
@@ -17,7 +17,8 @@ export class Alert {
     | 'warning'
     | 'info'
     | 'light'
-    | 'dark' = 'primary'
+    | 'dark' =
+    'primary'
 
   render() {
     const classes = classnames({

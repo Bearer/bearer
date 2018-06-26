@@ -6,7 +6,7 @@ import {
   EventEmitter,
   Element,
   Prop
-} from '@stencil/core'
+} from '@bearer/core'
 import Bearer, { Events } from '@bearer/core'
 
 @Component({

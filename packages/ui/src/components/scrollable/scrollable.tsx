@@ -1,4 +1,4 @@
-import { Component, Listen, Prop, State, Method, Element } from '@stencil/core'
+import { Component, Listen, Prop, State, Method, Element } from '@bearer/core'
 import { Store } from '@stencil/redux'
 
 @Component({

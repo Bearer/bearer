@@ -1,4 +1,4 @@
-import { Component, Listen, Method, Prop, State } from '@stencil/core'
+import { Component, Listen, Method, Prop, State } from '@bearer/core'
 import Bearer from '@bearer/core'
 
 @Component({
@@ -19,7 +19,8 @@ export class BearerDropdownButton {
     | 'warning'
     | 'info'
     | 'light'
-    | 'dark' = 'primary'
+    | 'dark' =
+    'primary'
 
   toggleDisplay = e => {
     e.preventDefault()

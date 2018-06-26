@@ -1,4 +1,4 @@
-import { Component } from '@stencil/core'
+import { Component } from '@bearer/core'
 import dataSingers from './data.json'
 const singers = dataSingers.map(
   (singer, index) =>

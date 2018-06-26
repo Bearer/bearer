@@ -1,4 +1,4 @@
-import { Component } from '@stencil/core'
+import { Component } from '@bearer/core'
 import '@stencil/router'
 import Bearer from '@bearer/core'
 

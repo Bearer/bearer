@@ -1,4 +1,4 @@
-import { Component, Event, EventEmitter } from '@stencil/core'
+import { Component, Event, EventEmitter } from '@bearer/core'
 
 @Component({
   tag: 'app-navigator-next'

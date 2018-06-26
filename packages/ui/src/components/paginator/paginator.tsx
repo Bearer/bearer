@@ -1,4 +1,4 @@
-import { Component, Listen, Prop, State, Method } from '@stencil/core'
+import { Component, Listen, Prop, State, Method } from '@bearer/core'
 
 @Component({
   tag: 'bearer-paginator',
