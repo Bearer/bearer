@@ -12,7 +12,7 @@ export {
   EventEmitter,
   EventListenerEnable,
   FunctionalComponent
-} from '@stencil/core/dist/declarations'
+} from '@bearer/stencil-core/dist/declarations'
 
 export interface BearerComponentOptions {
   bearer?: {
