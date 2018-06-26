@@ -4,7 +4,7 @@
  * and imports for stencil collections that might be configured in your stencil.config.js file
  */
 
-import '@stencil/core';
+import '@bearer/stencil-core';
 
 declare global {
   namespace JSX {

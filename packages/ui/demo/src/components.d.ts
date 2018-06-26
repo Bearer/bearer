@@ -3,7 +3,7 @@
  * It contains typing information for all components that exist in this project.
  */
 
-import '@stencil/core';
+import '@bearer/stencil-core';
 
 declare global {
   namespace JSX {
