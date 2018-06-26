@@ -23,7 +23,7 @@ jobs:
       #    # fallback to using the latest cache if no exact match is found
       #    - v1-dependencies-
       - run: yarn install --frozen-lockfile
-      - run: yarn run lerna bootstrap
+      - run: yarn run lerna bootstrap --ci
       # - save_cache:
       #    paths:
       #      - node_modules
