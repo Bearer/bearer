@@ -1,6 +1,6 @@
 {
   "name": "@bearer/core",
-  "version": "0.1.4-0",
+  "version": "0.1.4-1",
   "description": "Bearer Core",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -76,6 +76,7 @@
     "fbemitter": "^2.1.1",
     "rc": "^1.2.8",
     "redux": "^4.0.0",
+    "rollup-plugin-alias": "^1.4.0",
     "rollup-plugin-env": "^0.21.4",
     "rollup-plugin-replace": "^2.0.0",
     "typescript": "^2.9.2"
