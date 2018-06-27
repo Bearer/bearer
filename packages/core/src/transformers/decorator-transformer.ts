@@ -10,10 +10,20 @@ function filterParams(
   )
 }
 
-export default function DecoratorTransdormer(): ts.TransformerFactory<
-  ts.SourceFile
-> {
+type TransformerOptions = {
+  verbose?: true
+}
+export default function DecoratorTransdormer({
+  verbose
+}: TransformerOptions = {}): ts.TransformerFactory<ts.SourceFile> {
+  function log(...args) {
+    if (verbose) {
+      console.log.apply(this, args)
+    }
+  }
+
   return transformContext => {
+    log('[BEARER]', 'Using Decorator Transformer')
     function visitDecoratorCall(node: ts.CallExpression) {
       return ts.updateCall(node, node.expression, node.typeArguments, [
         filterParams(node.arguments[0] as ts.ObjectLiteralExpression)
@@ -73,9 +83,18 @@ export default function DecoratorTransdormer(): ts.TransformerFactory<
         }
         case ts.SyntaxKind.Decorator: {
           const decoNode = node as ts.Decorator
+          log(
+            '[BEARER]',
+            'decorator',
+            decoNode.expression.getChildCount() &&
+              decoNode.getChildAt(1).getText()
+          )
           if (
             decoNode.expression.getChildCount() &&
-            decoNode.getChildAt(0).getText() === 'Component'
+            decoNode
+              .getChildAt(0)
+              .getText()
+              .match(/^Component/)
           ) {
             return visitDecorator(node as ts.Decorator)
           }
@@ -85,11 +104,8 @@ export default function DecoratorTransdormer(): ts.TransformerFactory<
     }
 
     return tsSourceFile => {
+      log('[BEARER]', 'exploring', tsSourceFile.fileName)
       return visit(tsSourceFile) as ts.SourceFile
     }
   }
 }
-
-// function getDecoractorName(node: ts.Decorator): string {
-//   return node.expression.
-// }
