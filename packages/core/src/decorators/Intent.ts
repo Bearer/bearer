@@ -13,9 +13,10 @@ const IntentMapper = {
 const MISSING_SCENARIO_ID =
   'Scenario ID is missing. Add BearerComponent above @Component({...}) decorator'
 
-// Property Decorator
-// How to use it
+// Usage
 // @Intent('intentName') propertyName: BearerFetch
+// or
+// @Intent('intentNameResource',IntentType.GetResource ) propertyName: BearerFetch
 export function Intent(
   intentName: string,
   type: IntentType = IntentType.GetCollection
@@ -47,12 +48,20 @@ export function Intent(
   }
 }
 
+// Usage
+// @SaveStateItent() propertyName: BearerFetch
+// or
+// @SaveStateItent(IntentType.GetResource ) propertyName: BearerFetch
 export function SaveStateItent(
   type: IntentType = IntentType.GetCollection
 ): (target: any, key: string) => void {
   return Intent('saveState', type)
 }
 
+// Usage
+// @RetrieveStateItent() propertyName: BearerFetch
+// or
+// @RetrieveStateItent(IntentType.GetResource ) propertyName: BearerFetch
 export function RetrieveStateItent(
   type: IntentType = IntentType.GetCollection
 ): (target: any, key: string) => void {
