@@ -3,7 +3,6 @@ const path = require('path')
 const inquirer = require('inquirer')
 const Case = require('case')
 const fs = require('fs')
-const util = require('util')
 
 const INTENT = 'intent'
 const SCREEN = 'screen'

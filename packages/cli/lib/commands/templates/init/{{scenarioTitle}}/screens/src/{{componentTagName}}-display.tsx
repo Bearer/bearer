@@ -9,6 +9,7 @@ import '@bearer/ui'
 @Component({
   tag: '{{componentTagName}}-display',
   styleUrl: '{{scenarioTitle}}.css',
+  bearer: { role: 'display' },
   shadow: true
 })
 export class {{scenarioTitle}}Display {

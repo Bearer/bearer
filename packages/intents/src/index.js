@@ -50,4 +50,62 @@ const GetObject = {
   }
 }
 
-module.exports = { Intent, GetCollection, GetObject, StoreObject }
+const SaveState = {
+  intent(action) {
+    return (event, _context, callback) => {
+      const { referenceId } = event.queryStringParameters
+      client
+        .get(`api/v1/items/${referenceId}`)
+        .then(response => {
+          console.log('[BEARER]', 'received', response.data)
+          const state = response.data.Item
+          action(
+            event.accessToken,
+            event.queryStringParameters,
+            event.body,
+            state,
+            result => {
+              client
+                .put(`api/v1/items/${referenceId}`, {
+                  ...result,
+                  ReadAllowed: true
+                })
+                .then(data => {
+                  console.log('[BEARER]', 'success', data)
+                  callback(null, response.data.Item)
+                })
+                .catch(e => {
+                  console.error('[BEARER]', 'error', e)
+                  callback(`Error : ${e}`)
+                })
+            }
+          )
+        })
+        .catch(response => {
+          action(
+            event.accessToken,
+            event.queryStringParameters,
+            event.body,
+            {},
+            result => {
+              client
+                .post(`api/v1/items`, {
+                  ...result,
+                  ReadAllowed: true
+                })
+                .then(data => {
+                  console.log('[BEARER]', 'success', data)
+                  callback(null, response.data.Item)
+                })
+                .catch(e => {
+                  console.error('[BEARER]', 'error', e)
+                  callback(`Error : ${e}`)
+                })
+            }
+          )
+        })
+    }
+  }
+}
+
+module.exports = { Intent, GetCollection, GetObject, StoreObject, SaveState }
