@@ -6,7 +6,7 @@
   "author": "Radek Molenda <radek@bearer.com>",
   "license": "MIT",
   "engines": {
-    "node": ">=8.11.0 <10"
+    "node": ">=8.11.0"
   },
   "bin": {
     "bearer": "./bin/index.js"
