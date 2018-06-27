@@ -15,9 +15,14 @@ export {
   FunctionalComponent
 } from '@bearer/stencil-core/dist/declarations'
 
+export enum BearerComponentRoleEnum {
+  Display = 'display',
+  Action = 'action'
+}
+
 export interface BearerComponentOptions {
   bearer?: {
-    role: 'display' | 'action'
+    role: BearerComponentRoleEnum
   }
 }
 export interface IBearerComponent {
