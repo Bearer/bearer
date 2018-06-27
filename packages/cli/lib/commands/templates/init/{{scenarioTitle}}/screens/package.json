@@ -21,7 +21,6 @@
     "@bearer/ui": "latest"
   },
   "devDependencies": {
-    "@bearer/stencil-core": "latest",
     "@stencil/dev-server": "latest",
     "@stencil/utils": "latest",
     "@types/jest": "latest",
