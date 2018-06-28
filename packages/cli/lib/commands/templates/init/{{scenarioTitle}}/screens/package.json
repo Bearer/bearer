@@ -18,7 +18,8 @@
   },
   "dependencies": {
     "@bearer/core": "latest",
-    "@bearer/ui": "latest"
+    "@bearer/ui": "latest",
+    "axios": "^0.18.0"
   },
   "devDependencies": {
     "@stencil/dev-server": "latest",
