@@ -71,7 +71,7 @@
     "ts-jest": "^22.4.6"
   },
   "dependencies": {
-    "@bearer/stencil-core": "0.9.11-1",
+    "@bearer/stencil-core": "0.10.0-9-1",
     "babel-plugin-inline-dotenv": "^1.1.2",
     "fbemitter": "^2.1.1",
     "rc": "^1.2.8",
