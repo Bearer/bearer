@@ -11,6 +11,10 @@ export function generateUniqueId(n) {
   return text
 }
 
+export function storeSetup(payload: any) {
+  return postSetup({ ...payload, ReadAllowed: false })
+}
+
 export function storeSecret(referenceId: string, payload: any) {
   return putItem(referenceId, { ...payload, ReadAllowed: false })
 }
@@ -36,6 +40,17 @@ export function removeData(referenceId: string) {
     {},
     {
       method: 'DELETE'
+    }
+  )
+}
+
+function postSetup(payload: any) {
+  const request = requests.itemRequest()
+  return request(
+    {},
+    {
+      method: 'POST',
+      body: JSON.stringify(payload)
     }
   )
 }

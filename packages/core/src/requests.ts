@@ -1,11 +1,8 @@
 /* global fetch */
 import Bearer from './Bearer'
 
-// Requests
-export function intentRequest({ intentName, scenarioId }) {
-  const url = `${
-    Bearer.config.integrationHost
-  }api/v1/${scenarioId}/${intentName}`
+export function bearerRequest(uri: string) {
+  const url = `${Bearer.config.integrationHost}api/v1/${uri}`
 
   return function(params = {}, init = {}) {
     const defaultInit = {
@@ -39,12 +36,21 @@ export function intentRequest({ intentName, scenarioId }) {
               resolve(data)
             }
           })
-          .catch(e => console.log('Unexpected error 🖕', e))
+          .catch(e => console.log('Unexpected error 😞', e))
       })
     })
   }
 }
 
+export function itemRequest() {
+  return bearerRequest('')
+}
+
+export function intentRequest({ intentName, scenarioId }) {
+  return bearerRequest(`${scenarioId}/${intentName}`)
+}
+
 export default {
-  intentRequest
+  intentRequest,
+  itemRequest
 }
