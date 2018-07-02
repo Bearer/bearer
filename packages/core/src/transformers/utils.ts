@@ -3,7 +3,10 @@ import * as ts from 'typescript'
 export function isDecoratorNamed(name: string) {
   return (decorator: ts.Decorator): boolean => {
     if (decorator.expression.getChildCount()) {
-      return decorator.expression.getChildren()[0].getText() === name
+      console.log(decorator.expression.getChildren()[0])
+      const child = decorator.expression.getChildren()[0]
+      console.log('[BEARER]', 'child', child.getText())
+      return child ? child.getText() === name : false
     }
     return false
   }
