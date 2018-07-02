@@ -1,21 +1,29 @@
 import * as ts from 'typescript'
+import * as d from './declarations'
+import { isBearerComponent } from './utils'
 
 function filterParams(
   params: ts.ObjectLiteralExpression
 ): ts.ObjectLiteralExpression {
-  return ts.createObjectLiteral(
+  // return ts.createObjectLiteral(
+  console.log(
+    '[BEARER]',
+    'params.properties',
+    // params.properties,
+    params.properties.map(p => p.name.getText())
+  )
+
+  return ts.updateObjectLiteral(
+    params,
     params.properties.filter(p => {
-      return p.name.getText() !== 'bearer'
+      return p.name && p.name.getText() !== 'bearer'
     })
   )
 }
 
-type TransformerOptions = {
-  verbose?: true
-}
 export default function DecoratorTransdormer({
   verbose
-}: TransformerOptions = {}): ts.TransformerFactory<ts.SourceFile> {
+}: d.PluginOptions = {}): ts.TransformerFactory<ts.SourceFile> {
   function log(...args) {
     if (verbose) {
       console.log.apply(this, args)
@@ -74,20 +82,20 @@ export default function DecoratorTransdormer({
 
     function visit(node: ts.Node): ts.VisitResult<ts.Node> {
       switch (node.kind) {
+        case ts.SyntaxKind.Decorator: {
+          const decoNode = node as ts.Decorator
+          if (isBearerComponent(node as ts.Decorator)) {
+            return visitDecorator(node as ts.Decorator)
+          } else {
+            return ts.visitEachChild(node, visit, transformContext)
+          }
+        }
         case ts.SyntaxKind.ClassDeclaration: {
           return ts.visitEachChild(
             visitClass(node as ts.ClassDeclaration),
             visit,
             transformContext
           )
-        }
-        case ts.SyntaxKind.Decorator: {
-          const decoNode = node as ts.Decorator
-          if (isComponentDecorator(node as ts.Decorator)) {
-            return visitDecorator(node as ts.Decorator)
-          } else {
-            return ts.visitEachChild(node, visit, transformContext)
-          }
         }
       }
       return ts.visitEachChild(node, visit, transformContext)
@@ -98,17 +106,4 @@ export default function DecoratorTransdormer({
       return visit(tsSourceFile) as ts.SourceFile
     }
   }
-}
-
-function isComponentDecorator(node: ts.Decorator): boolean {
-  return (
-    node.expression.getChildCount() &&
-    Boolean(
-      node.expression
-        .getChildAt(1)
-        .getText()
-        .match(/^Component/)
-    )
-  )
-  // return false
 }
