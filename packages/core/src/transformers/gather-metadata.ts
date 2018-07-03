@@ -2,6 +2,12 @@ import * as ts from 'typescript'
 import * as d from './declarations'
 import { isBearerComponent, getComponentDecoratorTagName } from './utils'
 
+const find = (ary, fun) => {
+  for (let el in ary) {
+    let obj = ary[el]
+    if (fun(obj)) return obj
+  }
+}
 function gatherMetadata(
   metadatas: d.PluginMetadata
 ): ts.TransformerFactory<ts.SourceFile> {
@@ -9,7 +15,7 @@ function gatherMetadata(
     function visitClassDeclaration(nodeClass: ts.ClassDeclaration): void {
       //add component inforamtion to metadata
       if (nodeClass.decorators) {
-        const ComponentDecorator = nodeClass.decorators.find(isBearerComponent)
+        const ComponentDecorator = find(nodeClass.decorators, isBearerComponent)
         if (ComponentDecorator) {
           metadatas.components.push({
             tag: getComponentDecoratorTagName(ComponentDecorator)

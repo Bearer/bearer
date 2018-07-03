@@ -2,15 +2,21 @@ import * as ts from 'typescript'
 import * as d from './declarations'
 import { isBearerComponent } from './utils'
 
+const inScope = (components, tag) => {
+  for (let component in components) {
+    if (components[component].tag === tag) return true
+  }
+  return false
+}
+
 export default (
   metadatas: d.PluginMetadata
 ): ts.TransformerFactory<ts.SourceFile> => {
   return (transformContext: ts.TransformationContext) => {
-    const scopableTagNames = new Set(metadatas.components.map(m => m.tag))
     const SCOPE = process.env.TAG_NAMES_SCOPE
 
     function getNewTagName(tagName: string) {
-      if (SCOPE && scopableTagNames.has(tagName)) {
+      if (SCOPE && inScope(metadatas.components, tagName)) {
         return `${SCOPE}-${tagName}`
       }
       return tagName
