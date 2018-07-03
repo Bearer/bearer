@@ -6,22 +6,25 @@ function filterParams(
   params: ts.ObjectLiteralExpression
 ): ts.ObjectLiteralExpression {
   // return ts.createObjectLiteral(
-  console.log(
-    '[BEARER]',
-    'params.properties',
-    // params.properties,
-    params.properties.map(p => p.name.getText())
-  )
+  // console.log(
+  //   '[BEARER]',
+  //   'params.properties',
+  //   // params.properties,
+  //   params.properties.map(p => p.name.getText())
+  // )
 
-  return ts.updateObjectLiteral(
-    params,
-    params.properties.filter(p => {
-      return p.name && p.name.getText() !== 'bearer'
-    })
-  )
+  return params
+  // return ts.updateObjectLiteral(
+  //   params,
+  //   params.properties.filter(p => {
+  //     if (!p.name)
+  //       console.log("Cédric: ", p)
+  //     return p.name && p.name.getText() !== 'bearer'
+  //   })
+  // )
 }
 
-export default function DecoratorTransdormer({
+export default function DecoratorTransformer({
   verbose
 }: d.PluginOptions = {}): ts.TransformerFactory<ts.SourceFile> {
   function log(...args) {
@@ -47,9 +50,12 @@ export default function DecoratorTransdormer({
     }
 
     function visitClass(classNode: ts.ClassDeclaration): ts.ClassDeclaration {
+      console.log("Cédric ", classNode.decorators)
       return ts.updateClassDeclaration(
         classNode,
-        classNode.decorators,
+        [
+          ...classNode.decorators
+        ],
         classNode.modifiers,
         classNode.name,
         classNode.typeParameters,
@@ -58,7 +64,7 @@ export default function DecoratorTransdormer({
           ...classNode.members,
           ts.createGetAccessor(
             undefined,
-            [],
+            [ts.createToken(ts.SyntaxKind.StaticKeyword)],
             'BEARER_ID',
             undefined,
             undefined,

@@ -1,7 +1,7 @@
 import * as ts from 'typescript'
 import * as d from './declarations'
 import gatherMetadata from './gather-metadata'
-import scopeTagNames from './scoped-tag-names'
+// import scopeTagNames from './scoped-tag-names'
 import decoratorTransformers from './decorator-transformer'
 
 export function Transformers(
@@ -11,7 +11,6 @@ export function Transformers(
 
   return [
     gatherMetadata(metadatas),
-    scopeTagNames(metadatas),
     decoratorTransformers(options)
   ]
 }
