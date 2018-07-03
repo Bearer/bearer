@@ -1,6 +1,7 @@
 import BearerConfig from './BearerConfig'
 import fbemitter from 'fbemitter'
 import Events from './EventNames'
+import * as postRobot from 'post-robot'
 
 const BEARER_WINDOW_KEY = 'BEARER'
 const IFRAME_NAME = 'BEARER-IFRAME'
@@ -65,25 +66,25 @@ class Bearer {
     this._maybeInitialized = promise
   }
 
-  messageReceived = ({ data: { event_id, data } }) => {
-    switch (event_id) {
-      case Events.BEARER_SESSION_INITIALIZED: {
-        console.log('[BEARER]', 'session initialized')
-        this.isSessionInitialized = true
-        this.allowIntegrationRequests()
-        break
-      }
-      case Events.BEARER_AUTHORIZED: {
-        console.log('[BEARER]', 'Scenario authorized', data['scenarioId'])
-        const scenarioId: string = data['scenarioId']
-        localStorage.setItem(authorizedKey(scenarioId), AUTHORIZED)
-        Bearer.emitter.emit(Events.SCENARIO_AUTHORIZED, {
-          authorized: true,
-          scenarioId
-        })
-        break
-      }
-    }
+  bearerSessionInitialized = () => {
+    console.log('[BEARER]', 'session initialized')
+    this.isSessionInitialized = true
+    this.allowIntegrationRequests()
+  }
+
+  bearerAuthorized = ({ data: { scenarioId } }) => {
+    console.log('[BEARER]', 'Scenario authorized', scenarioId)
+    localStorage.setItem(authorizedKey(scenarioId), AUTHORIZED)
+    Bearer.emitter.emit(Events.SCENARIO_AUTHORIZED, {
+      authorized: true,
+      scenarioId
+    })
+  }
+
+  bearerCookieSetup = event => {
+    console.log('[BEARER]', 'cookie setup')
+    document.cookie = event.data.cookie
+    event.data.syncCookies(document.cookie)
   }
 
   hasAuthorized = scenarioId =>
@@ -102,7 +103,12 @@ class Bearer {
       typeof window !== 'undefined' &&
       !document.querySelector(`#${IFRAME_NAME}`)
     ) {
-      window.addEventListener('message', this.messageReceived)
+      postRobot.on(
+        Events.BEARER_SESSION_INITIALIZED,
+        this.bearerSessionInitialized
+      )
+      postRobot.on(Events.BEARER_AUTHORIZED, this.bearerAuthorized)
+      postRobot.on(Events.BEARER_COOKIE_SETUP, this.bearerCookieSetup)
       this.iframe = document.createElement('iframe')
       this.iframe.src = `${this.bearerConfig.integrationHost}v1/user/initialize`
       this.iframe.id = IFRAME_NAME
