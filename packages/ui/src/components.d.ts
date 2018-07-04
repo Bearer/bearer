@@ -1019,7 +1019,7 @@ declare global {
 
   namespace StencilComponents {
     interface BearerSetupDisplay {
-      'setupId': string;
+      'scenarioId': string;
     }
   }
 
@@ -1042,7 +1042,7 @@ declare global {
   }
   namespace JSXElements {
     export interface BearerSetupDisplayAttributes extends HTMLAttributes {
-      'setupId'?: string;
+      'scenarioId'?: string;
     }
   }
 }

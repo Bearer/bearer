@@ -43,7 +43,7 @@ export function bearerRequest(uri: string) {
 }
 
 export function itemRequest() {
-  return bearerRequest('')
+  return bearerRequest('items')
 }
 
 export function intentRequest({ intentName, scenarioId }) {

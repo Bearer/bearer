@@ -12,7 +12,7 @@ import "@bearer/ui";
 export class {{scenarioTitle}}SetupDisplay {
   render() {
     return (
-      <bearer-setup-display setup-id="BEARER_SCENARIO_ID" />
+      <bearer-setup-display scenarioId="BEARER_SCENARIO_ID" />
     )
   }
 }
