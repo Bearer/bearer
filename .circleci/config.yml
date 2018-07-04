@@ -39,16 +39,6 @@ jobs:
           root: ~/repo
           paths: .
 
-  # deploy_demo:
-  #   <<: *defaults
-  #   steps:
-  #     - attach_workspace:
-  #         at: ~/repo
-  #     - run:
-  #         name: Authenticate through NPM registry
-  #         command: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > ~/repo/.npmrc
-  #     - run: yarn run lerna exec yarn publish:demo --scope=@bearer/ui
-
   deploy_storybook:
     <<: *defaults
     steps:
@@ -75,12 +65,6 @@ workflows:
       - deploy_storybook:
           requires:
             - build
-          #filters:
-            #branches:
-              #only: master
-      # - deploy_demo:
-      #     requires:
-      #       - build
-      #     filters:
-      #       branches:
-      #         only: master
+          filters:
+            branches:
+              only: master
