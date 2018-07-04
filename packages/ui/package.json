@@ -11,14 +11,17 @@
     "dist/"
   ],
   "scripts": {
+    "build-storybook": "stencil build && build-storybook -s www",
+    "storybook": "start-storybook -p 9006 -s www",
     "build": "stencil build",
     "dev": "stencil build --dev --watch --serve",
     "serve": "stencil-dev-server",
-    "start": "npm run dev",
+    "start": "sd concurrent \"npm run dev\" \"npm run storybook\"",
     "test": "jest --no-cache",
     "test.watch": "jest --watch --no-cache",
     "prepublishOnly": "yarn build",
     "publish:demo": "cd demo && yarn install && yarn publish:demo"
+
   },
   "dependencies": {
     "@bearer/core": "^0.13.1",
@@ -30,6 +33,24 @@
   "devDependencies": {
     "@stencil/dev-server": "latest",
     "@stencil/utils": "latest",
+    "@storybook/addon-a11y": "4.0.0-alpha.9",
+    "autoprefixer": "^8.6.0",
+    "@storybook/addon-actions": "4.0.0-alpha.9",
+    "@storybook/addon-backgrounds": "4.0.0-alpha.9",
+    "@storybook/addon-centered": "4.0.0-alpha.9",
+    "@storybook/addon-events": "4.0.0-alpha.9",
+    "@storybook/addon-jest": "4.0.0-alpha.9",
+    "@storybook/addon-knobs": "4.0.0-alpha.9",
+    "@storybook/addon-links": "4.0.0-alpha.9",
+    "@storybook/addon-notes": "4.0.0-alpha.9",
+    "@storybook/addon-options": "4.0.0-alpha.9",
+    "@storybook/addon-storyshots": "4.0.0-alpha.9",
+    "@storybook/addon-storysource": "4.0.0-alpha.9",
+    "@storybook/addon-viewport": "4.0.0-alpha.9",
+    "@storybook/addons": "4.0.0-alpha.9",
+    "@storybook/core": "4.0.0-alpha.9",
+    "@storybook/core-events": "4.0.0-alpha.9",
+    "@storybook/html": "4.0.0-alpha.9",
     "@types/jest": "^23.1.1",
     "jest": "^23.0.1"
   },

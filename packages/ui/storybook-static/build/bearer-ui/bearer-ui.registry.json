@@ -1,0 +1,85 @@
+{
+  "namespace": "BearerUi",
+  "fsNamespace": "bearer-ui",
+  "loader": "../bearer-ui.js",
+  "global": "bearer-ui.global.js",
+  "core": "bearer-ui.qdxi3kr6.js",
+  "corePolyfilled": "bearer-ui.eohoekdz.js",
+  "components": {
+    "auth-config": {
+      "$": "wnsbmrff"
+    },
+    "bearer-alert": {
+      "$": "nnvci42a"
+    },
+    "bearer-badge": {
+      "$": "phlqj3xa"
+    },
+    "bearer-button": {
+      "$": "209hlrp1"
+    },
+    "bearer-button-popover": {
+      "$": "pjmq0suk"
+    },
+    "bearer-checkbox": {
+      "$": "xd4quoew"
+    },
+    "bearer-dropdown-button": {
+      "$": "fdc75qpq"
+    },
+    "bearer-form": {
+      "$": "xd4quoew"
+    },
+    "bearer-input": {
+      "$": "r2e7nqva"
+    },
+    "bearer-loading": {
+      "$": "z9c76qfu"
+    },
+    "bearer-navigator": {
+      "$": "7ylbz9gq"
+    },
+    "bearer-navigator-auth-screen": {
+      "$": "naxh6zkx"
+    },
+    "bearer-navigator-back": {
+      "$": "evnnybsw"
+    },
+    "bearer-navigator-collection": {
+      "$": "nokz1bon"
+    },
+    "bearer-navigator-screen": {
+      "$": "naxh6zkx"
+    },
+    "bearer-pagination": {
+      "$": "eggxu8ub"
+    },
+    "bearer-paginator": {
+      "$": "eggxu8ub"
+    },
+    "bearer-popover-navigator": {
+      "$": "pjmq0suk"
+    },
+    "bearer-radio": {
+      "$": "xd4quoew"
+    },
+    "bearer-scrollable": {
+      "$": "jdqpqg0o"
+    },
+    "bearer-select": {
+      "$": "xd4quoew"
+    },
+    "bearer-setup": {
+      "$": "nnvci42a"
+    },
+    "bearer-setup-display": {
+      "$": "phlqj3xa"
+    },
+    "bearer-textarea": {
+      "$": "xd4quoew"
+    },
+    "bearer-typography": {
+      "$": "np1wgyci"
+    }
+  }
+}
