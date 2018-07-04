@@ -5,7 +5,7 @@
 defaults: &defaults
   working_directory: ~/repo
   docker:
-    - image: circleci/node:9.11
+    - image: arbornetworks-docker-public-docker.bintray.io/circleci-node-aws:8.4.0
 
 version: 2
 jobs:
@@ -51,8 +51,6 @@ jobs:
 
   deploy_storybook:
     <<: *defaults
-    docker:
-      - image: arbornetworks-docker-public-docker.bintray.io/circleci-node-aws:8.4.0
     steps:
       - attach_workspace:
           at: ~/repo
