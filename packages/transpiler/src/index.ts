@@ -23,9 +23,7 @@ export default class Transpiler {
       let fileName = path.basename(filePath)
       program.getCompilerOptions()
 
-      let res = ts.transform(sourceFile, [
-        ComponentTransformer({ verbose: true })
-      ])
+      let res = ts.transform(sourceFile, [ComponentTransformer()])
 
       const resultFile = ts.createSourceFile(
         'tmp.ts',
@@ -43,8 +41,6 @@ export default class Transpiler {
         res.transformed[0],
         resultFile
       )
-
-      console.log(result)
 
       fs.writeFileSync(path.join(outDir, fileName), result)
     })

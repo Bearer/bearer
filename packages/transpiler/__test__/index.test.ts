@@ -2,6 +2,7 @@ import Transpiler from '../src/index'
 import * as fs from 'fs-extra'
 import * as path from 'path'
 import * as ts from 'typescript'
+import decoratorNames from './utils'
 
 const BUILD_DIRECTORY = path.join(__dirname, '.build')
 const SRC_DIRECTORY = path.join(__dirname, 'files')
@@ -51,5 +52,5 @@ test('Adding BEARER_ID and SCENARIO_ID props', async () => {
   const builtFilePath = path.join(BUILD_DIRECTORY, 'classComponent.ts')
   const program = ts.createProgram([builtFilePath], options)
   let sourceFile = program.getSourceFile(builtFilePath)
-  console.log()
+  expect(decoratorNames(sourceFile)).toEqual(['Component', 'Prop', 'Prop'])
 })
