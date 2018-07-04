@@ -65,7 +65,7 @@ jobs:
           command: aws configure set default.s3.signature_version s3v4
       - run:
           name: Deploy
-          command: cd ~/repo/packages/ui/storybook-static && aws s3 sync . s3://ui.docs.bearer.sh/ --delete --region eu-west-3
+          command: cd packages/ui/storybook-static && aws s3 sync . s3://ui.docs.bearer.sh/ --delete --region eu-west-3
 
 workflows:
   version: 2
