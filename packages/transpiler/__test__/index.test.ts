@@ -1,0 +1,28 @@
+import Transpiler from '../src/index'
+import * as fs from 'fs-extra'
+import * as path from 'path'
+import * as ts from 'typescript'
+
+const BUILD_DIRECTORY = path.join(__dirname, '.build')
+
+afterEach(() => {
+  fs.remove(BUILD_DIRECTORY)
+})
+
+test('invoking transpiler', async () => {
+  let options = {
+    noEmitOnError: true,
+    noImplicitAny: true,
+    target: ts.ScriptTarget.ES5,
+    module: ts.ModuleKind.CommonJS,
+    outDir: path.resolve(BUILD_DIRECTORY)
+  }
+
+  let filePaths = [path.join(__dirname, 'files', 'exportObject.ts')]
+  let transpiler = new Transpiler(options)
+  await transpiler.run(filePaths)
+
+  expect(
+    fs.existsSync(path.join(BUILD_DIRECTORY, 'exportObject.ts'))
+  ).toBeTruthy()
+})
