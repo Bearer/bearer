@@ -39,21 +39,47 @@ jobs:
           root: ~/repo
           paths: .
 
-  deploy_demo:
+  # deploy_demo:
+  #   <<: *defaults
+  #   steps:
+  #     - attach_workspace:
+  #         at: ~/repo
+  #     - run:
+  #         name: Authenticate through NPM registry
+  #         command: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > ~/repo/.npmrc
+  #     - run: yarn run lerna exec yarn publish:demo --scope=@bearer/ui
+
+  deploy_storybook:
     <<: *defaults
+    docker:
+      - image: arbornetworks-docker-public-docker.bintray.io/circleci-node-aws:8.4.0
     steps:
       - attach_workspace:
           at: ~/repo
       - run:
           name: Authenticate through NPM registry
           command: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > ~/repo/.npmrc
-      - run: yarn run lerna exec yarn publish:demo --scope=@bearer/ui
+      - run:
+          name: Build Storybook
+          command: yarn run lerna run build-storybook --scope=@bearer/ui
+      - run:
+          name: Prepare deploy
+          command: aws configure set default.s3.signature_version s3v4
+      - run:
+          name: Deploy
+          command: cd ~/repo/packages/ui/storybook-static && aws s3 sync . s3://ui.docs.bearer.sh/ --delete --region eu-west-3
 
 workflows:
   version: 2
   btd:
     jobs:
       - build
+      - deploy_storybook:
+          requires:
+            - build
+          #filters:
+            #branches:
+              #only: master
       # - deploy_demo:
       #     requires:
       #       - build
