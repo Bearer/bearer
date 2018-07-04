@@ -49,38 +49,40 @@ export default function DecoratorTransformer({
       return ts.visitEachChild(node, visitDecorator, transformContext)
     }
 
+    const propDecorator = ts.createDecorator(
+      ts.createCall(
+        ts.createIdentifier('Prop') as ts.Expression,
+        undefined,
+        undefined
+      )
+    )
+
     function visitClass(classNode: ts.ClassDeclaration): ts.ClassDeclaration {
-      console.log("Cédric ", classNode.decorators)
+      console.log(classNode.name)
       return ts.updateClassDeclaration(
         classNode,
-        [
-          ...classNode.decorators
-        ],
+        classNode.decorators,
         classNode.modifiers,
         classNode.name,
         classNode.typeParameters,
         classNode.heritageClauses,
         [
           ...classNode.members,
-          ts.createGetAccessor(
+          ts.createProperty(
+            [propDecorator],
             undefined,
-            [ts.createToken(ts.SyntaxKind.StaticKeyword)],
             'BEARER_ID',
             undefined,
             undefined,
-            ts.createBlock([
-              ts.createReturn(ts.createIdentifier('this.SCENARIO_ID'))
-            ])
+            undefined
           ),
-          ts.createGetAccessor(
+          ts.createProperty(
             undefined,
             [],
             'SCENARIO_ID',
             undefined,
             undefined,
-            ts.createBlock([
-              ts.createReturn(ts.createIdentifier('"BEARER_SCENARIO_ID"'))
-            ])
+            ts.createStringLiteral('BEARER_SCENARIO_ID')
           )
         ]
       )
