@@ -8,24 +8,6 @@ const { parsed: parsedConfig } = dotenv.config()
 
 const isProduction = process.env.NODE_ENV === 'production'
 
-if (isProduction) {
-  const { parsed: parsedSample } = dotenv.config({
-    path: '.env.example'
-  })
-
-  const requiredKeys = new Set(Object.keys(parsedSample || {}))
-
-  const setEquality = (set1, set2) =>
-    set1.size === set2.size && Array.from(set1).every(item => set2.has(item))
-
-  const configuredKeys = new Set(
-    Object.keys(parsedConfig || {}).filter(key => parsedConfig[key])
-  )
-  if (!setEquality(requiredKeys, configuredKeys)) {
-    console.warn('Missing configuration, please check .env.* files')
-  }
-}
-
 function plugins() {
   const base = [
     commonjs(),
