@@ -1,13 +1,12 @@
 {
   "compilerOptions": {
-    "outdir": "dist/",
     "allowSyntheticDefaultImports": true,
     "allowUnreachableCode": false,
     "experimentalDecorators": true,
     "module": "es6",
     "target": "es6",
     "moduleResolution": "node",
-    "outDir": "build/compiled",
+    "outDir": "dist/",
     "declaration": true
   },
   "include": ["src/"],
