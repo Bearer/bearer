@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "outdir": "dist/",
     "allowSyntheticDefaultImports": true,
     "allowUnreachableCode": false,
     "experimentalDecorators": true,
@@ -9,5 +10,6 @@
     "outDir": "build/compiled",
     "declaration": true
   },
+  "include": ["src/"],
   "exclude": ["node_modules/"]
 }
