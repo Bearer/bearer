@@ -2,3 +2,4 @@ node_modules/
 .stencil/
 dist/
 www/
+storybook-static/

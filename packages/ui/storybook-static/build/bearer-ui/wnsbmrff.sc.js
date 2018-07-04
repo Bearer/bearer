@@ -1,2 +1,0 @@
-/*! Built with http://stenciljs.com */
-const{h:t}=window.BearerUi;import"./chunk-721a4283.js";class e{handleSubmit(){}render(){return t("form",{onSubmit:()=>this.handleSubmit()},t("bearer-input",{type:"text",label:"hello",controlName:"hello",value:"Hello",hint:"hello"}),t("bearer-input",{type:"submit",onSubmit:()=>this.handleSubmit()}))}static get is(){return"auth-config"}static get encapsulation(){return"shadow"}static get events(){return[{name:"submit",method:"submit",bubbles:!0,cancelable:!0,composed:!0}]}static get style(){return""}}export{e as AuthConfig};
