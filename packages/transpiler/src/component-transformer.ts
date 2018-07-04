@@ -108,7 +108,7 @@ export default function ComponentTransformer({
 function isComponentDecorator(node: ts.Decorator): boolean {
   return (
     node.expression &&
-    node.expression.expression &&
-    node.expression.expression.escapedText === 'Component'
+    node.expression['expression'] &&
+    node.expression['expression'].escapedText === 'Component'
   )
 }
