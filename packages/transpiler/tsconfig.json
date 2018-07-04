@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "allowSyntheticDefaultImports": true,
+    "allowUnreachableCode": false,
+    "experimentalDecorators": true,
+    "module": "es6",
+    "target": "es6",
+    "moduleResolution": "node",
+    "outDir": "build/compiled",
+    "declaration": true
+  },
+  "exclude": ["node_modules/"]
+}
