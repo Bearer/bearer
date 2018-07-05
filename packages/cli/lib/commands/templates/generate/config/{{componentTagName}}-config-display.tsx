@@ -1,5 +1,5 @@
 /*
-  The purpose of this component is to save scenario credentials.
+  The purpose of this component is to save scenario configuration.
 */
 
 import { Component } from "@bearer/core";
