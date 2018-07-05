@@ -18,6 +18,11 @@ const generate = (emitter, { rootPathRc }) => async env => {
     process.exit(1)
   }
 
+  if (env.config) {
+    generateConfig({ emitter, rootPathRc })
+    return
+  }
+
   if (env.setup) {
     generateSetup({ emitter, rootPathRc })
     return
@@ -57,6 +62,36 @@ const generate = (emitter, { rootPathRc }) => async env => {
       break
     default:
   }
+}
+
+async function generateConfig({ emitter, rootPathRc }) {
+  const authConfig = require(path.dirname(rootPathRc) +
+    '/intents/auth.config.json')
+  const scenariorc = fs.readFileSync(path.dirname(rootPathRc) + '/.scenariorc')
+  const scenarioId = scenariorc
+    .toString()
+    .split('=')[1]
+    .replace(/[\n\r]+/g, '')
+    .trim()
+
+  const vars = {
+    scenarioTitle: Case.camel(scenarioId),
+    componentTagName: Case.kebab(scenarioId),
+    fields: authConfig.config ? JSON.stringify(authConfig.config) : '[]'
+  }
+  const inDir = path.join(__dirname, 'templates/generate/config')
+  const outDir = path.join(path.dirname(rootPathRc), '/screens/src/')
+
+  await del(`${outDir}*config*.tsx`).then(paths => {
+    console.log('Deleted files and folders:\n', paths.join('\n'));
+  });
+
+  copy(inDir, outDir, vars, (err, createdFiles) => {
+    if (err) throw err
+    createdFiles.forEach(filePath =>
+      emitter.emit('generateIntent:fileGenerated', filePath)
+    )
+  })
 }
 
 async function generateSetup({ emitter, rootPathRc }) {
@@ -143,6 +178,7 @@ module.exports = {
       )
       // .option('-t, --type <intentType>', 'Intent type.')
       .option('--setup', 'generate setup file')
+      .option('--config', 'generate config file')
       .action(generate(emitter, config))
   }
 }

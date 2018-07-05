@@ -7,18 +7,18 @@ import { Component, State } from '@bearer/core'
 import '@bearer/ui'
 
 @Component({
-  tag: '{{componentTagName}}-setup',
+  tag: '{{componentTagName}}-config',
   shadow: true
 })
-export class {{scenarioTitle}}Setup {
+export class {{scenarioTitle}}Config {
   @State() fields = {{fields}}
-  @State() innerListener = `setup_success:BEARER_SCENARIO_ID`
+  @State() innerListener = `config_success:BEARER_SCENARIO_ID`
   render() {
     return (
       <div>
         <bearer-dropdown-button innerListener={this.innerListener}>
-          <span slot="buttonText">Setup component</span>
-          <bearer-setup scenarioId="BEARER_SCENARIO_ID" fields={this.fields} />
+          <span slot="buttonText">Config component</span>
+          <bearer-config scenarioId="BEARER_SCENARIO_ID" fields={this.fields} />
         </bearer-dropdown-button>
       </div>
     )

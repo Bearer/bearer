@@ -616,6 +616,77 @@ declare global {
 declare global {
 
   namespace StencilComponents {
+    interface BearerConfigDisplay {
+      'scenarioId': string;
+    }
+  }
+
+  interface HTMLBearerConfigDisplayElement extends StencilComponents.BearerConfigDisplay, HTMLStencilElement {}
+
+  var HTMLBearerConfigDisplayElement: {
+    prototype: HTMLBearerConfigDisplayElement;
+    new (): HTMLBearerConfigDisplayElement;
+  };
+  interface HTMLElementTagNameMap {
+    'bearer-config-display': HTMLBearerConfigDisplayElement;
+  }
+  interface ElementTagNameMap {
+    'bearer-config-display': HTMLBearerConfigDisplayElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      'bearer-config-display': JSXElements.BearerConfigDisplayAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface BearerConfigDisplayAttributes extends HTMLAttributes {
+      'scenarioId'?: string;
+    }
+  }
+}
+
+
+declare global {
+
+  namespace StencilComponents {
+    interface BearerConfig {
+      'fields': Array<any> | string;
+      'referenceId': string;
+      'scenarioId': string;
+    }
+  }
+
+  interface HTMLBearerConfigElement extends StencilComponents.BearerConfig, HTMLStencilElement {}
+
+  var HTMLBearerConfigElement: {
+    prototype: HTMLBearerConfigElement;
+    new (): HTMLBearerConfigElement;
+  };
+  interface HTMLElementTagNameMap {
+    'bearer-config': HTMLBearerConfigElement;
+  }
+  interface ElementTagNameMap {
+    'bearer-config': HTMLBearerConfigElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      'bearer-config': JSXElements.BearerConfigAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface BearerConfigAttributes extends HTMLAttributes {
+      'fields'?: Array<any> | string;
+      'onStepCompleted'?: (event: CustomEvent) => void;
+      'referenceId'?: string;
+      'scenarioId'?: string;
+    }
+  }
+}
+
+
+declare global {
+
+  namespace StencilComponents {
     interface BearerDropdownButton {
       'btnKind': 'primary'
     | 'secondary'

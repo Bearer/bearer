@@ -77,6 +77,9 @@ module.exports = async ({ scenarioUuid }, emitter, config) => {
     emitter.emit('screens:generateSetupComponent')
     await exec('bearer generate --setup', { cwd: screensDirectory })
 
+    emitter.emit('screens:generateConfigComponent')
+    await exec('bearer generate --config', { cwd: screensDirectory })
+
     emitter.emit('screens:buildingDist')
     await exec('yarn build', {
       cwd: screensDirectory,

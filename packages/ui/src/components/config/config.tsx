@@ -8,18 +8,17 @@ import {
 } from '@bearer/core'
 import Bearer, { BearerState } from '@bearer/core'
 import { FieldSet } from '../Forms/Fieldset'
-import { OAuth2SetupType, EmailSetupType, KeySetupType } from './setup-types'
 
 type TSetupPayload = {
   Item: { referenceId: string }
 }
 
 @Component({
-  tag: 'bearer-setup',
-  styleUrl: 'setup.scss',
+  tag: 'bearer-config',
+  styleUrl: 'config.scss',
   shadow: true
 })
-export class BearerSetup {
+export class BearerConfig {
   @Prop() fields: Array<any> | string = []
   @Prop() referenceId: string
   @Prop() scenarioId: string
@@ -46,33 +45,19 @@ export class BearerSetup {
       .then((item: TSetupPayload) => {
         this.loading = false
         console.log(`${this.scenarioId}`)
-        Bearer.emitter.emit(`setup_success:${this.scenarioId}`, {
+        Bearer.emitter.emit(`config_success:${this.scenarioId}`, {
           referenceID: item.Item.referenceId
         })
       })
       .catch(() => {
         this.error = true
         this.loading = false
-        Bearer.emitter.emit(`setup_error:${this.scenarioId}`, {})
+        Bearer.emitter.emit(`config_error:${this.scenarioId}`, {})
       })
   }
 
   componentWillLoad() {
-    if (typeof this.fields !== 'string') {
-      this.fieldSet = new FieldSet(this.fields as Array<any>)
-      return
-    }
-    switch (this.fields) {
-      case 'email':
-        this.fieldSet = new FieldSet(EmailSetupType)
-        break
-      case 'type':
-        this.fieldSet = new FieldSet(KeySetupType)
-        break
-      case 'oauth2':
-      default:
-        this.fieldSet = new FieldSet(OAuth2SetupType)
-    }
+    this.fieldSet = new FieldSet(this.fields as Array<any>)
   }
 
   render() {
