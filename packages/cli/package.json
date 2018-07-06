@@ -16,7 +16,7 @@
     "requirements-check": "node scripts/check-version.js"
   },
   "dependencies": {
-    "@bearer/intents": "latest",
+    "@bearer/intents": "^0.9.0",
     "@bearer/transpiler": "^0.9.0",
     "amazon-cognito-identity-js": "^2.0.3",
     "archiver": "^2.1.1",
