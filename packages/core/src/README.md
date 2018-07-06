@@ -7,7 +7,7 @@
 BearerComponent decorator let us inject BearerSpecific code to your WebComponent. It is mandatory to use it if you use `Intent` decorator
 
 ```js
-import { Component } from '@bearer/stencil-core'
+import { Component } from '@bearer/core'
 import { BearerComponent } from '@bearer/core'
 
 @BearerComponent
@@ -24,7 +24,7 @@ class MyComponent {
 If your component needs fetch capabilities then you'll need to use `Intent` decorator like this
 
 ```js
-import { Component } from '@bearer/stencil-core'
+import { Component } from '@bearer/core'
 import { BearerComponent, Intent, BearerFetch } from '@bearer/core'
 
 @BearerComponent
@@ -47,7 +47,7 @@ class MyComponent {
 Advanced usage
 
 ```js
-import { Component } from '@bearer/stencil-core'
+import { Component } from '@bearer/core'
 import { BearerComponent, Intent, BearerFetch, IntentType } from '@bearer/core'
 
 @BearerComponent
