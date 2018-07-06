@@ -3,7 +3,7 @@
   This file has been generated automatically and should not be edited.
 */
 
-import { Component, State } from '@bearer/core'
+import { Component, State, Prop } from '@bearer/core'
 import '@bearer/ui'
 
 @Component({
@@ -11,6 +11,7 @@ import '@bearer/ui'
   shadow: true
 })
 export class {{scenarioTitle}}Setup {
+  @Prop() onSetupSuccess: (detail: any) => void = (_any: any) => {}
   @State() fields = {{fields}}
   @State() innerListener = `setup_success:BEARER_SCENARIO_ID`
   render() {
@@ -18,7 +19,7 @@ export class {{scenarioTitle}}Setup {
       <div>
         <bearer-dropdown-button innerListener={this.innerListener}>
           <span slot="buttonText">Setup component</span>
-          <bearer-setup scenarioId="BEARER_SCENARIO_ID" fields={this.fields} />
+          <bearer-setup onSetupSuccess={this.onSetupSuccess} scenarioId="BEARER_SCENARIO_ID" fields={this.fields} />
         </bearer-dropdown-button>
       </div>
     )
