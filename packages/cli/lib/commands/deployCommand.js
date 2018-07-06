@@ -50,14 +50,18 @@ const deploy = (emitter, config) => async ({ path = '.' }) => {
 
   fs.writeFileSync(pathJs.join(rootPathRc), ini.stringify(scenarioConfigUpdate))
 
-  await deployScenario({ path, scenarioUuid }, emitter, config)
-  const setupUrl = `https://demo.bearer.tech/?scenarioUuid=${scenarioUuid}&scenarioTagName=${scenarioTitle}&name=${scenarioTitle}&orgId=${OrgId}&stage=${BearerEnv}`
+  try {
+    await deployScenario({ path, scenarioUuid }, emitter, config)
+    const setupUrl = `https://demo.bearer.tech/?scenarioUuid=${scenarioUuid}&scenarioTagName=${scenarioTitle}&name=${scenarioTitle}&orgId=${OrgId}&stage=${BearerEnv}`
 
-  emitter.emit('deploy:finished', {
-    scenarioUuid,
-    scenarioTitle,
-    setupUrl
-  })
+    emitter.emit('deploy:finished', {
+      scenarioUuid,
+      scenarioTitle,
+      setupUrl
+    })
+  } catch (e) {
+    console.log(e)
+  }
 }
 module.exports = {
   useWith: (program, emitter, config) => {

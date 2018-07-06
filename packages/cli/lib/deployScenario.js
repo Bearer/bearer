@@ -109,6 +109,6 @@ module.exports = async ({ scenarioUuid }, emitter, config) => {
     emitter.emit('screen:upload:success')
     await invalidateCloudFront(emitter, calculatedConfig)
   } catch (e) {
-    console.log(e)
+    throw e
   }
 }
