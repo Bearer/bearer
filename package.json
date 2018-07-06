@@ -6,7 +6,7 @@
     ]
   },
   "scripts": {
-    "lerna-publish": "lerna clean && lerna bootstrap && lerna publish"
+    "lerna-publish": "lerna clean --yes && lerna bootstrap && lerna publish"
   },
   "license": "MIT",
   "husky": {
