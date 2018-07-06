@@ -19,13 +19,11 @@ const generate = (emitter, { rootPathRc }) => async env => {
   }
 
   if (env.config) {
-    generateTemplates({ emitter, 'config', rootPathRc })
-    return
+    return generateTemplates({ emitter, templateType: 'config', rootPathRc })
   }
 
   if (env.setup) {
-    generateTemplates({ emitter, 'setup', rootPathRc })
-    return
+    return generateTemplates({ emitter, templateType: 'setup', rootPathRc })
   }
 
   const { template, name } = await inquirer.prompt([
@@ -77,14 +75,16 @@ async function generateTemplates({ emitter, templateType, rootPathRc }) {
   const vars = {
     scenarioTitle: Case.camel(scenarioId),
     componentTagName: Case.kebab(scenarioId),
-    fields: authConfig[templateType] ? JSON.stringify(authConfig[templateType]) : '[]'
+    fields: authConfig[templateType]
+      ? JSON.stringify(authConfig[templateType])
+      : '[]'
   }
   const inDir = path.join(__dirname, `templates/generate/${templateType}`)
   const outDir = path.join(path.dirname(rootPathRc), '/screens/src/')
 
   await del(`${outDir}*${templateType}*.tsx`).then(paths => {
-    console.log('Deleted files and folders:\n', paths.join('\n'));
-  });
+    console.log('Deleted files and folders:\n', paths.join('\n'))
+  })
 
   copy(inDir, outDir, vars, (err, createdFiles) => {
     if (err) throw err
