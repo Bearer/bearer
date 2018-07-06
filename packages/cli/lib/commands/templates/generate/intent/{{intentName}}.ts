@@ -1,9 +1,4 @@
-import { {{intentType}} } from '@bearer/intents'
-
-type TContext = {
-  accessToken: string,
-  [key: string]: any
-}
+import { {{intentType}}, TContext } from '@bearer/intents'
 
 export default class {{intentName}}Intent {
   static intentName: string = '{{intentName}}'

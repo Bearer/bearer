@@ -1,6 +1,11 @@
 const axios = require('axios')
 const { sendSuccessMessage, sendErrorMessage } = require('./lambda')
 
+type TContext = {
+  accessToken: string,
+  [key: string]: any
+}
+
 const Intent = {
   getCollection: (callback, { collection }) => {
     if (collection) {
@@ -133,5 +138,6 @@ module.exports = {
   GetObject,
   SaveState,
   STATE_CLIENT,
-  RetrieveState
+  RetrieveState,
+  TContext
 }
