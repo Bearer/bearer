@@ -1,12 +1,12 @@
-import {
+import Bearer, {
   Component,
   State,
   Element,
   Event,
   EventEmitter,
-  Prop
+  Prop,
+  BearerState
 } from '@bearer/core'
-import Bearer, { BearerState } from '@bearer/core'
 import { FieldSet } from '../Forms/Fieldset'
 import { OAuth2SetupType, EmailSetupType, KeySetupType } from './setup-types'
 
