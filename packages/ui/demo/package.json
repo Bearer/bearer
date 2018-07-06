@@ -11,7 +11,7 @@
   ],
   "scripts": {
     "build": "stencil build --prerender",
-    "dev": "sd concurrent \"stencil build --dev --watch\" \"stencil-dev-server\" ",
+    "dev": "stencil build --dev --watch --serve",
     "serve": "stencil-dev-server",
     "start": "npm run dev",
     "test": "jest --no-cache",
@@ -19,7 +19,7 @@
     "publish:demo": "yarn build && node scripts/publish.js"
   },
   "dependencies": {
-    "@bearer/core": "0.1.1",
+    "@bearer/core": "^0.1.1",
     "@bearer/ui": "0.1.1",
     "@stencil/core.": "0.9.11",
     "@stencil/sass": "^0.0.5",
