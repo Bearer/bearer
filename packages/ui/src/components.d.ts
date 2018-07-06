@@ -1149,7 +1149,7 @@ declare global {
   namespace JSXElements {
     export interface BearerSetupAttributes extends HTMLAttributes {
       'fields'?: Array<any> | string;
-      'onStepCompleted'?: (event: CustomEvent) => void;
+      'onSetupSuccess'?: (event: CustomEvent) => void;
       'referenceId'?: string;
       'scenarioId'?: string;
     }

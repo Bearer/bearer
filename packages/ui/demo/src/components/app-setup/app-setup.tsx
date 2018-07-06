@@ -7,7 +7,7 @@ import Bearer, { Component, State } from '@bearer/core'
 export class AppSetup {
   @State() scenarioId: string = 'alice-setup-demo'
   @State() fields = 'oauth2'
-  @State() referenceID: string
+  @State() referenceId: string
 
   scenarioIdChanged = ({ detail }) => {
     this.scenarioId = detail
@@ -18,7 +18,7 @@ export class AppSetup {
     This is an easy way but probably not the most secure.
    */
   componentWillLoad() {
-    this.referenceID = window.localStorage.getItem('fakeReference') || ''
+    this.referenceId = window.localStorage.getItem('fakeReference') || ''
   }
 
   componentDidLoad() {
@@ -28,8 +28,8 @@ export class AppSetup {
       Here is how to capture the referenceID
      */
     Bearer.emitter.addListener(`setup_success:${this.scenarioId}`, data => {
-      window.localStorage.setItem('fakeReference', data.referenceID)
-      this.referenceID = data.referenceID
+      window.localStorage.setItem('fakeReference', data.referenceId)
+      this.referenceId = data.referenceId
     })
   }
 
@@ -43,7 +43,7 @@ export class AppSetup {
           <bearer-setup
             scenarioId={this.scenarioId}
             fields={this.fields}
-            referenceId={this.referenceID}
+            referenceId={this.referenceId}
           />
         </bearer-dropdown-button>
         <div class="down">

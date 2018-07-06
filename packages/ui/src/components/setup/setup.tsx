@@ -25,7 +25,7 @@ export class BearerSetup {
   @Prop() scenarioId: string
 
   @Element() element: HTMLElement
-  @Event() stepCompleted: EventEmitter
+  @Event() setupSuccess: EventEmitter
 
   @State() fieldSet: FieldSet
   @State() error: boolean = false
@@ -38,17 +38,15 @@ export class BearerSetup {
       return { key: el.controlName, value: el.value }
     })
     BearerState.storeSetup(
-      formSet.reduce(
-        (acc, obj) => ({ ...acc, [obj['key']]: obj['value'] }),
-        {}
-      )
+      formSet.reduce((acc, obj) => ({ ...acc, [obj['key']]: obj['value'] }), {})
     )
       .then((item: TSetupPayload) => {
         this.loading = false
-        console.log(`${this.scenarioId}`)
+        const referenceId = item.Item.referenceId
         Bearer.emitter.emit(`setup_success:${this.scenarioId}`, {
-          referenceID: item.Item.referenceId
+          referenceId
         })
+        this.setupSuccess.emit({ referenceId })
       })
       .catch(() => {
         this.error = true

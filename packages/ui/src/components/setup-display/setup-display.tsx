@@ -13,7 +13,7 @@ export class BearerSetupDisplay {
 
   componentDidLoad() {
     Bearer.emitter.addListener(`setup_success:${this.scenarioId}`, data => {
-      this.setupId = data.referenceID
+      this.setupId = data.referenceId
       this.isSetup = true
     })
   }
