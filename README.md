@@ -25,7 +25,7 @@ _Now You should be able to go into each packages and run existing command (ex: y
 
 We use [Lerna](https://github.com/lerna/lerna) to manage dependencies.
 
-### ⚠️ How to publish packages ️⚠️
+### ⚠️ Publish packages ️⚠️
 
 ```bash
 yarn lerna-publish
