@@ -7,35 +7,29 @@
   "module": "dist/main.es.js",
   "author": "Bearer",
   "license": "UNLICENSED",
-  "files": [
-    "dist/"
-  ],
+  "files": ["dist/"],
   "scripts": {
     "start": "yarn build",
     "build": "per-env",
-    "build:development": "concurrently \"yarn build:bundle -w \" \"yarn build:transformers -w\"",
-    "build:production": "NODE_ENV=production yarn build:bundle && yarn build:transformers",
+    "build:development":
+      "concurrently \"yarn build:bundle -w \" \"yarn build:transformers -w\"",
+    "build:production":
+      "NODE_ENV=production yarn build:bundle && yarn build:transformers",
     "build:bundle": "rollup -c",
-    "build:transformers": "tsc src/transformers/* --outDir dist/transformers -d",
+    "build:transformers":
+      "tsc src/transformers/* --outDir dist/transformers -d",
     "prepublish": "yarn build:production",
-    "prepublishOnly": "BUILD=distribution NODE_ENV=production yarn build:production",
+    "prepublishOnly":
+      "BUILD=distribution NODE_ENV=production yarn build:production",
     "test": "jest"
   },
   "jest": {
-    "moduleFileExtensions": [
-      "ts",
-      "tsx",
-      "js"
-    ],
+    "moduleFileExtensions": ["ts", "tsx", "js"],
     "transform": {
       "^.+\\.(ts|tsx)$": "<rootDir>/preprocessor.js"
     },
-    "testMatch": [
-      "**/__tests__/*.+(ts|tsx|js)"
-    ],
-    "setupFiles": [
-      "./jest.setup.js"
-    ]
+    "testMatch": ["**/__tests__/*.+(ts|tsx|js)"],
+    "setupFiles": ["./jest.setup.js"]
   },
   "repository": {
     "type": "git",
@@ -74,6 +68,7 @@
     "@stencil/core": "0.10.0-11",
     "babel-plugin-inline-dotenv": "^1.1.2",
     "fbemitter": "^2.1.1",
+    "post-robot": "^8.0.26",
     "rc": "^1.2.8",
     "redux": "^4.0.0",
     "rollup-plugin-env": "^0.21.4",

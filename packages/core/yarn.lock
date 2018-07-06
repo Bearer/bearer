@@ -1451,6 +1451,18 @@ create-hmac@^1.1.0, create-hmac@^1.1.2, create-hmac@^1.1.4:
     safe-buffer "^5.0.1"
     sha.js "^2.4.8"
 
+cross-domain-safe-weakmap@^1.0.1:
+  version "1.0.20"
+  resolved "https://registry.yarnpkg.com/cross-domain-safe-weakmap/-/cross-domain-safe-weakmap-1.0.20.tgz#d047546260b4535bb373af31babde64a209681d6"
+  dependencies:
+    cross-domain-utils "^2.0.0"
+
+cross-domain-utils@^2.0.0:
+  version "2.0.10"
+  resolved "https://registry.yarnpkg.com/cross-domain-utils/-/cross-domain-utils-2.0.10.tgz#4ee5962d61523e92fbe07a6d4d461c6e6f5f1878"
+  dependencies:
+    zalgo-promise "^1.0.11"
+
 cross-spawn@^5.0.1, cross-spawn@^5.1.0:
   version "5.1.0"
   resolved "https://registry.yarnpkg.com/cross-spawn/-/cross-spawn-5.1.0.tgz#e8bd0efee58fcff6f8f94510a0a554bbfa235449"
@@ -4474,6 +4486,14 @@ posix-character-classes@^0.1.0:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/posix-character-classes/-/posix-character-classes-0.1.1.tgz#01eac0fe3b5af71a2a6c02feabb8c1fef7e00eab"
 
+post-robot@^8.0.26:
+  version "8.0.26"
+  resolved "https://registry.yarnpkg.com/post-robot/-/post-robot-8.0.26.tgz#59267577fc37a0e69ae26b90c3394d979d18a31c"
+  dependencies:
+    cross-domain-safe-weakmap "^1.0.1"
+    cross-domain-utils "^2.0.0"
+    zalgo-promise "^1.0.3"
+
 prelude-ls@~1.1.2:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/prelude-ls/-/prelude-ls-1.1.2.tgz#21932a549f5e52ffd9a827f570e04be62a97da54"
@@ -5997,3 +6017,7 @@ yargs@~3.10.0:
     cliui "^2.1.0"
     decamelize "^1.0.0"
     window-size "0.1.0"
+
+zalgo-promise@^1.0.11, zalgo-promise@^1.0.3:
+  version "1.0.28"
+  resolved "https://registry.yarnpkg.com/zalgo-promise/-/zalgo-promise-1.0.28.tgz#d21b31c060fbb159af9d48f0e67dd31ce4091b33"
