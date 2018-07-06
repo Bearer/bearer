@@ -1,5 +1,5 @@
 {
-  "name": "{{scenarioTitle}}-intents",
+  "name": "{{componentTagName}}-intents",
   "version": "0.0.1",
   "description": "{{scenarioTitle}} intents",
   "main": "index.js",
