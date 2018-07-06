@@ -21,8 +21,7 @@
   "dependencies": {
     "@bearer/core": "0.1.1",
     "@bearer/ui": "0.1.1",
-    "@bearer/stencil-core": "^0.9.11",
-    "@stencil/router": "0.2.1",
+    "@stencil/core.": "0.9.11",
     "@stencil/sass": "^0.0.5",
     "redux": "^4.0.0"
   },
@@ -49,7 +48,7 @@
   "homepage": "https://github.com/ionic-team/stencil",
   "jest": {
     "transform": {
-      "^.+\\.(ts|tsx)$": "<rootDir>/node_modules/@bearer/stencil-core/testing/jest.preprocessor.js"
+      "^.+\\.(ts|tsx)$": "<rootDir>/node_modules/@stencil/core/testing/jest.preprocessor.js"
     },
     "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(tsx?|jsx?)$",
     "moduleFileExtensions": [

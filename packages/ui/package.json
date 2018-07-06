@@ -27,7 +27,6 @@
     "bootstrap": "^4.1.0"
   },
   "devDependencies": {
-    "@bearer/stencil-core": "^0.9.11-1",
     "@stencil/dev-server": "latest",
     "@stencil/utils": "latest",
     "@types/jest": "^23.1.1",

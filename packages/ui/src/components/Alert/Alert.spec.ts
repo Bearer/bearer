@@ -1,4 +1,4 @@
-import { render } from '@bearer/stencil-core/testing'
+import { render } from '@stencil/core/testing'
 import { Alert } from './Alert'
 
 describe('alert', () => {

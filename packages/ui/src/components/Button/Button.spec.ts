@@ -1,4 +1,4 @@
-import { render } from '@bearer/stencil-core/testing'
+import { render } from '@stencil/core/testing'
 import { Button } from './Button'
 
 describe('button', () => {
