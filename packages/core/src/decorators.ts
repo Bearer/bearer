@@ -1,4 +1,4 @@
-import * as d from '@bearer/stencil-core/dist/declarations/index'
+import * as d from '@stencil/core/dist/declarations/index'
 
 export * from './decorators/Component'
 export * from './decorators/Intent'
@@ -13,7 +13,7 @@ export {
   EventEmitter,
   EventListenerEnable,
   FunctionalComponent
-} from '@bearer/stencil-core/dist/declarations'
+} from '@stencil/core/dist/declarations'
 
 export enum BearerComponentRoleEnum {
   Display = 'display',

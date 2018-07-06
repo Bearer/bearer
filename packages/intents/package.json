@@ -1,6 +1,6 @@
 {
   "name": "@bearer/intents",
-  "version": "0.7.1",
+  "version": "0.8.0",
   "description": "Bearer Intents",
   "main": "src/index.js",
   "author": "Bearer",

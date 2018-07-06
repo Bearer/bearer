@@ -10,7 +10,7 @@ exports.config = {
       type: 'www',
       serviceWorker: false,
       resourcesUrl: process.env.CDN_HOST,
-      baseUrl: '/prerender',
+      baseUrl: '/prerender'
     }
   ],
   plugins: [...plugins()]

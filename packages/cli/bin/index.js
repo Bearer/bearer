@@ -18,6 +18,8 @@ const initCmd = require('../lib/commands/initCommand')
 const signupCmd = require('../lib/commands/signupCommand')
 const loginCmd = require('../lib/commands/loginCommand')
 
+const startCmd = require('../lib/commands/startCommand')
+
 const cliOutput = require('../lib/cliOutput.js')
 
 const cli = new CLI(program, emitter, config)
@@ -30,5 +32,6 @@ cli.use(generateCmd)
 cli.use(deployCmd)
 cli.use(signupCmd)
 cli.use(loginCmd)
+cli.use(startCmd)
 
 cli.parse(process.argv)

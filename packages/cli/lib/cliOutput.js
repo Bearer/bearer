@@ -187,12 +187,6 @@ module.exports = emitter => {
     term('\n')
   })
 
-  emitter.on('screens:installingDependencies', () => {
-    term.white('Bearer: ')
-    term.yellow('Installing screens dependencies.')
-    term('\n')
-  })
-
   emitter.on('screens:generateSetupComponent', () => {
     term.white('Bearer: ')
     term.yellow('Generating setup component.')
@@ -365,6 +359,87 @@ module.exports = emitter => {
     term('\n')
     term.white('Error: ')
     term.red(message)
+    term('\n')
+  })
+
+  /* ********* Start output ********* */
+
+  emitter.on('start:prepare:buildFolder', () => {
+    term.white('Bearer: ')
+    term.yellow('Generating .build folder ')
+    term('\n')
+  })
+
+  emitter.on('start:prepare:stencilConfig', () => {
+    term.white('Bearer: ')
+    term.yellow('Generating stencil configuration')
+    term('\n')
+  })
+
+  emitter.on('start:prepare:copyFile', file => {
+    term.white('Bearer: ')
+    term.yellow(`Copied: ${file}`)
+    term('\n')
+  })
+
+  emitter.on('start:symlinkNodeModules', () => {
+    term.white('Bearer: ')
+    term.yellow('Symlinking node_modules')
+    term('\n')
+  })
+
+  emitter.on('start:symlinkPackage', () => {
+    term.white('Bearer: ')
+    term.yellow('Symlinking package.json')
+    term('\n')
+  })
+
+  emitter.on('start:prepare:installingDependencies', () => {
+    term.white('Bearer: ')
+    term.yellow('Installing screens dependencies.')
+    term('\n')
+  })
+
+  emitter.on('start:watchers', () => {
+    term.white('Bearer: ')
+    term.yellow('Starting watchers')
+    term('\n')
+  })
+
+  emitter.on('start:watchers:stdout', ({ name, data }) => {
+    term.white('Bearer: ')
+    term.yellow(`[watcher:${name}] `)
+    term.green(data)
+  })
+
+  emitter.on('start:watchers:stderr', ({ name, data }) => {
+    term.white('Bearer: ')
+    term.yellow(`[watcher:${name}] `)
+    term.green(data)
+  })
+
+  emitter.on('start:watchers:close', ({ name, code }) => {
+    term.white('Bearer: ')
+    term.yellow(`[watcher:${name}] closed exit code: ${code}\n`)
+  })
+
+  // emitter.emit('start:watchers:stencil:stdout', )
+
+  emitter.on('start:prepare:failed', ({ error }) => {
+    term.white('Bearer: ')
+    term.red('Prepare : An error occured')
+    term('\n')
+    term.white('    Error: ')
+    term.red(error)
+    term('\n')
+  })
+
+  emitter.on('start:failed', ({ error }) => {
+    term.white('Bearer: ')
+    term.red('An error occured')
+    term('\n')
+    term.white('    Error: ')
+    term.red(error)
     term('\n')
   })
 }

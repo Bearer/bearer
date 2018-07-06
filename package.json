@@ -5,6 +5,9 @@
       "git add"
     ]
   },
+  "scripts": {
+    "lerna-publish": "lerna clean && lerna bootstrap && lerna publish"
+  },
   "license": "MIT",
   "husky": {
     "hooks": {

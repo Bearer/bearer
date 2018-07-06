@@ -9,6 +9,6 @@
     "outDir": "dist/",
     "declaration": true
   },
-  "include": ["src/"],
+  "include": ["src/", "bin/"],
   "exclude": ["node_modules/"]
 }
