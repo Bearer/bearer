@@ -2,6 +2,9 @@ import * as ts from 'typescript'
 import * as fs from 'fs-extra'
 import * as path from 'path'
 import * as chokidar from 'chokidar'
+import { getSourceCode } from './utils'
+import PropInjector from './transformers/prop-injector'
+import PropImporter from './transformers/prop-importer'
 
 export default class Transpiler {
   private watcher: any
@@ -89,6 +92,8 @@ export default class Transpiler {
   get transformers(): ts.CustomTransformers {
     return {
       before: [
+        PropImporter({ verbose: true }),
+        PropInjector({ verbose: true }),
         dumpSourceCode(this.SCREENS_DIRECTORY, this.BUILD_DIRECTORY)({
           verbose: true
         })
@@ -134,7 +139,7 @@ export default class Transpiler {
     let output = this.service.getEmitOutput(fileName)
 
     if (!output.emitSkipped) {
-      console.log(`Emitting ${fileName} like a pro`)
+      console.log(`Emitting ${fileName} like a pro!!!`)
     } else {
       console.log(`Emitting ${fileName} failed`)
       this.logErrors(fileName)
@@ -179,21 +184,6 @@ export default class Transpiler {
   }
 }
 
-function getSourceCode(tsSourceFile): string {
-  const resultFile = ts.createSourceFile(
-    'tmp.ts',
-    '',
-    ts.ScriptTarget.Latest,
-    /*setParentNodes*/ false,
-    ts.ScriptKind.TS
-  )
-  const printer = ts.createPrinter({
-    newLine: ts.NewLineKind.LineFeed
-  })
-
-  return printer.printNode(ts.EmitHint.Unspecified, tsSourceFile, resultFile)
-}
-
 type TransformerOptions = {
   verbose?: true
 }
@@ -204,7 +194,6 @@ function dumpSourceCode(srcDirectory, buildDirectory) {
   }: TransformerOptions = {}): ts.TransformerFactory<ts.SourceFile> {
     return transformContext => {
       return tsSourceFile => {
-        const { base, dir } = path.parse(tsSourceFile.fileName)
         let outPath = tsSourceFile.fileName
           .replace(srcDirectory, buildDirectory)
           .replace(/js$/, 'ts')

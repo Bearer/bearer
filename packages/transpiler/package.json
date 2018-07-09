@@ -6,9 +6,7 @@
   "types": "dist/index.d.ts",
   "author": "Bearer",
   "license": "UNLICENSED",
-  "files": [
-    "dist/"
-  ],
+  "files": ["dist/"],
   "bin": {
     "bearer-tst": "./dist/bin/bearer-tst.js"
   },
@@ -20,20 +18,12 @@
     "test": "jest"
   },
   "jest": {
-    "moduleFileExtensions": [
-      "ts",
-      "tsx",
-      "js"
-    ],
+    "moduleFileExtensions": ["ts", "tsx", "js"],
     "transform": {
       "^.+\\.(ts|tsx)$": "<rootDir>/preprocessor.js"
     },
-    "testMatch": [
-      "**/__tests__/*.+(ts|tsx|js)"
-    ],
-    "setupFiles": [
-      "./jest.setup.js"
-    ]
+    "testMatch": ["**/__tests__/*.+(ts|tsx|js)"],
+    "setupFiles": ["./jest.setup.js"]
   },
   "repository": {
     "type": "git",
@@ -42,7 +32,7 @@
   "devDependencies": {
     "@types/fs-extra": "^5.0.3",
     "@types/jest": "^23.1.1",
-    "@types/node": "^10.5.1",
+    "@types/node": "^10.5.2",
     "jest": "^23.1.0",
     "ts-jest": "^22.4.6"
   },

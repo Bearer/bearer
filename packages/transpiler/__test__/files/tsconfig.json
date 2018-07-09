@@ -1,0 +1,7 @@
+{
+  "noEmitOnError": true,
+  "noImplicitAny": true,
+  "target": "ES5",
+  "module": "CommonJS",
+  "outDir": "../.build"
+}
