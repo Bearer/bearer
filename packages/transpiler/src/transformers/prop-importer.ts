@@ -1,3 +1,10 @@
+/*
+ * Checks if there is an `import { Component } from '@bearer/core'` in the source code
+ * and adds the following if it is included:
+ * 
+ * `import { Prop } from '@bearer/core';`
+ * 
+ */
 import * as ts from 'typescript'
 
 import bearer from './bearer'

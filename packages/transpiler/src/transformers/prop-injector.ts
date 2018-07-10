@@ -1,3 +1,8 @@
+/*
+ * Checks if class is decorated with @Component decorator
+ * and injects the `@Prop() BEARER_ID: string;` into class definition
+ * 
+ */
 import * as ts from 'typescript'
 
 import decorator from './decorator-helpers'
