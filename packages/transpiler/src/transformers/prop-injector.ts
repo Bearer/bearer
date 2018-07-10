@@ -2,7 +2,6 @@ import * as ts from 'typescript'
 
 import decorator from './decorator-helpers'
 import bearer from './bearer'
-import { getSourceCode } from '../utils'
 
 type TransformerOptions = {
   verbose?: true
@@ -41,9 +40,7 @@ export default function ComponentTransformer({
     }
 
     return tsSourceFile => {
-      const updated = visit(tsSourceFile) as ts.SourceFile
-      console.log(ts.updateSourceFileNode(tsSourceFile, updated.statements))
-      return updated
+      return visit(tsSourceFile) as ts.SourceFile
     }
   }
 }

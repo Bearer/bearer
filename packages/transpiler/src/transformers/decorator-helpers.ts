@@ -1,6 +1,4 @@
 import * as ts from 'typescript'
-import bearer from './bearer'
-import { getSourceCode } from '../utils'
 
 export function name(node: ts.Decorator): string {
   let name: any = ''

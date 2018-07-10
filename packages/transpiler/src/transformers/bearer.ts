@@ -1,5 +1,4 @@
 import * as ts from 'typescript'
-import { getSourceCode } from '../utils'
 
 export function addBearerIdProp(
   classNode: ts.ClassDeclaration
@@ -63,31 +62,6 @@ export function coreImport(node: ts.ImportDeclaration): boolean {
   return node.moduleSpecifier.getText() === "'@bearer/core'"
 }
 
-export function addImport(
-  node: ts.ImportDeclaration,
-  libName: string
-): ts.ImportDeclaration {
-  console.log(
-    node.importClause.namedBindings['elements']
-      .filter(n => typeof n !== undefined)
-      .map(n => n.kind)
-  )
-
-  let id = ts.updateImportDeclaration(
-    /* import declaration */ node,
-    /* decorators */ node.decorators,
-    /* modifiers */ node.modifiers,
-    /* importClause */ ts.updateImportClause(
-      node.importClause,
-      undefined,
-      undefined
-    ),
-    /* moduleSpecifier */ node.moduleSpecifier
-  )
-  console.log(getSourceCode(id))
-  return id
-}
-
 function propDecorator() {
   return ts.createDecorator(
     ts.createCall(
@@ -99,7 +73,6 @@ function propDecorator() {
 }
 
 export default {
-  addImport,
   addBearerIdProp,
   hasImport,
   coreImport
