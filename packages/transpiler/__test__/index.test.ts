@@ -1,5 +1,7 @@
 import bearer from '../src/transformers/bearer'
-test('bearer addImport updates the import clause', () => {})
+test('it works', () => {
+  expect(1).toBe(1)
+})
 // test('invoking transpiler', async () => {
 //   let transpiler = new Transpiler(SRC_DIRECTORY)
 //   await transpiler.run()

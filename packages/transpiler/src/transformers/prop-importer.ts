@@ -14,20 +14,7 @@ export default function PropImporter({
     }
   }
 
-  return transformContext => {
-    function visit(node: ts.Node): ts.VisitResult<ts.Node> {
-      switch (node.kind) {
-        case ts.SyntaxKind.ImportDeclaration: {
-          let modified = node
-          if (bearer.coreImport(node as ts.ImportDeclaration)) {
-            modified = bearer.addImport(node as ts.ImportDeclaration, 'Prop')
-          }
-          return ts.visitEachChild(modified, visit, transformContext)
-        }
-      }
-      return ts.visitEachChild(node, visit, transformContext)
-    }
-
+  return _transformContext => {
     return tsSourceFile => {
       if (
         bearer.hasImport(tsSourceFile, 'Component') &&

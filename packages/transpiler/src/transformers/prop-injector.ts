@@ -17,12 +17,10 @@ export default function ComponentTransformer({
     }
   }
 
-  var propAdded = false
   return transformContext => {
     function visit(node: ts.Node): ts.VisitResult<ts.Node> {
       switch (node.kind) {
         case ts.SyntaxKind.ClassDeclaration: {
-          propAdded = true
           if (
             decorator.classDecoratedWithName(
               node as ts.ClassDeclaration,
@@ -43,7 +41,9 @@ export default function ComponentTransformer({
     }
 
     return tsSourceFile => {
-      return visit(tsSourceFile) as ts.SourceFile
+      const updated = visit(tsSourceFile) as ts.SourceFile
+      console.log(ts.updateSourceFileNode(tsSourceFile, updated.statements))
+      return updated
     }
   }
 }
