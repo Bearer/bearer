@@ -83,7 +83,10 @@ const ensureSetupAndConfigComponents = rootLevel => {
 
 const start = (emitter, config) => async ({ open, install }) => {
   try {
-    const { buildDirectory, rootLevel } = await prepare(emitter, config)({
+    const { buildDirectory, rootLevel, screensDirectory } = await prepare(
+      emitter,
+      config
+    )({
       install
     })
 
