@@ -1,6 +1,5 @@
 import * as d from '@stencil/core/dist/declarations/index'
 
-export * from './decorators/Component'
 export * from './decorators/Intent'
 
 export {

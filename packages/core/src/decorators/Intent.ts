@@ -31,6 +31,7 @@ export function Intent(
       }
 
       return function(...args) {
+        console.log('[BEARER]', 'target', target)
         const scenarioId = target['SCENARIO_ID']
         // use setupId prop or retrieve it from the context
 
@@ -67,10 +68,6 @@ export function SaveStateIntent(
 ): IDecorator {
   return function(target: any, key: string): void {
     const getter = (): BearerFetch => {
-      if (!target['SCENARIO_ID']) {
-        console.warn(MISSING_SCENARIO_ID)
-      }
-
       return function(
         params: { body?: any; [key: string]: any } = {},
         init: Object = {}

@@ -1,6 +1,5 @@
 import Bearer from './Bearer'
 import { Intent, BearerFetch, IntentType } from './decorators/Intent'
-import { BearerComponent } from './decorators/Component'
 import fetch from 'jest-fetch-mock'
 
 const SCENARIO_ID = '1234'
@@ -18,13 +17,14 @@ describe('Intent decorator', () => {
     Bearer.instance['allowIntegrationRequests']()
   })
 
-  @BearerComponent
   class IntentDecorated {
     @Intent('getCollectionIntent') getCollectionIntentProp: BearerFetch
     @Intent('getResourceIntent', IntentType.GetResource)
     getResourceIntentProp: BearerFetch
 
-    SCENARIO_ID: string = SCENARIO_ID
+    get SCENARIO_ID(): string {
+      return SCENARIO_ID
+    }
   }
 
   const decoratedInstance = new IntentDecorated()
@@ -56,7 +56,7 @@ describe('Intent decorator', () => {
         .catch(a => console.log(a))
 
       expect(fetch).toBeCalledWith(
-        'http://localhost:5555/api/v1/BEARER_SCENARIO_ID/getCollectionIntent?page=1&setupId=&integrationId=42',
+        'http://localhost:5555/api/v1/1234/getCollectionIntent?page=1&setupId=&integrationId=42',
         commonParams
       )
 
@@ -91,26 +91,12 @@ describe('Intent decorator', () => {
         .catch(a => console.log(a))
 
       expect(fetch).toBeCalledWith(
-        'http://localhost:5555/api/v1/BEARER_SCENARIO_ID/getResourceIntent?setupId=&integrationId=42',
+        'http://localhost:5555/api/v1/1234/getResourceIntent?setupId=&integrationId=42',
 
         commonParams
       )
 
       expect(success).toBeCalledWith({ object: item })
-    })
-  })
-
-  describe('BearerComponent', () => {
-    it('rejects if no scenario_id is not provided', async () => {
-      class MissingBearerComponentDecorator {
-        @Intent('rejectedIntent') rejectedIntent: BearerFetch
-        SCENARIO_ID: string = null
-      }
-
-      const instance = new MissingBearerComponentDecorator()
-      await expect(instance.rejectedIntent()).rejects.toThrow(
-        'Scenario ID is missing. Please add @Component decorator above your class definition'
-      )
     })
   })
 })

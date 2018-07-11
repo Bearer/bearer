@@ -1,6 +1,5 @@
-import { Component, BearerComponent, Intent, BearerFetch } from '@bearer/core'
+import { Component } from '@bearer/core'
 
-@BearerComponent
 @Component({
   tag: '{{componentTagName}}',
   styleUrl: '{{screenName}}.css',

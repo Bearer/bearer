@@ -1,6 +1,5 @@
-import { Component, BearerComponent, Intent, BearerFetch } from '@bearer/core'
+import { Component, Intent, BearerFetch } from '@bearer/core'
 
-@BearerComponent
 @Component({
   tag: 'list-star-wars-characters',
   styleUrl: 'ListStarWarsCharacters.css',

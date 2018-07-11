@@ -2,32 +2,14 @@
 
 ## Use decorators
 
-### BearerComponent
-
-BearerComponent decorator let us inject BearerSpecific code to your WebComponent. It is mandatory to use it if you use `Intent` decorator
-
-```js
-import { Component } from '@bearer/core'
-import { BearerComponent } from '@bearer/core'
-
-@BearerComponent
-@Component({
-  tag: 'ny-component-tag-name'
-})
-class MyComponent {
-  ....
-}
-```
-
 ### Intent
 
 If your component needs fetch capabilities then you'll need to use `Intent` decorator like this
 
 ```js
 import { Component } from '@bearer/core'
-import { BearerComponent, Intent, BearerFetch } from '@bearer/core'
+import { Intent, BearerFetch } from '@bearer/core'
 
-@BearerComponent
 @Component({
   tag: 'my-component-tag-name'
 })
@@ -48,9 +30,8 @@ Advanced usage
 
 ```js
 import { Component } from '@bearer/core'
-import { BearerComponent, Intent, BearerFetch, IntentType } from '@bearer/core'
+import { Intent, BearerFetch, IntentType } from '@bearer/core'
 
-@BearerComponent
 @Component({
   tag: 'ny-component-tag-name'
 })
