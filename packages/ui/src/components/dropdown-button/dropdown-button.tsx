@@ -7,7 +7,7 @@ import Bearer from '@bearer/core'
   shadow: true
 })
 export class BearerDropdownButton {
-  @State() visible: boolean = process.env.NODE_ENV === 'development'
+  @State() visible: boolean = process.env.BUILD !== 'distribution'
   @Prop() opened: boolean
   @Prop() innerListener: string
   @Prop()
