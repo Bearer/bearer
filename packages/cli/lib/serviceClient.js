@@ -45,7 +45,7 @@ module.exports = url => {
         { Key, type },
         { Authorization: token }
       ),
-    deployScenario: (event, OrgId, scenarioTitle) =>
+    deployScenario: (eventName, OrgId, scenarioTitle) =>
       new Promise((resolve, reject) => {
         request(
           {
@@ -54,7 +54,7 @@ module.exports = url => {
             json: true,
             body: {
               query: `mutation DeployScenario {
-                deployScenario(state: "${event}", organizationIdentifier: "${OrgId}", scenarioIdentifier: "${scenarioTitle}") {
+                deployScenario(state: "${eventName}", organizationIdentifier: "${OrgId}", scenarioIdentifier: "${scenarioTitle}") {
                   errors {
                     field
                     messages
