@@ -134,6 +134,7 @@ module.exports = {
         await developerPortal(emitter, "deployed", calculatedConfig)
         resolve()
       } catch (e) {
+        await developerPortal(emitter, "cancelled", calculatedConfig)
         reject(e)
       }
     })
