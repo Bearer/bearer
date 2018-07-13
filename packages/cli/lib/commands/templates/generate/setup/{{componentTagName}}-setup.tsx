@@ -17,7 +17,7 @@ export class {{scenarioTitle}}Setup {
   render() {
     return (
       <div>
-        <bearer-dropdown-button innerListener={this.innerListener} btnProps={{ content: "Setup component" }}>
+        <bearer-dropdown-button innerListener={this.innerListener} btnProps={ { content: "Setup component" } }>
           <bearer-setup onSetupSuccess={this.onSetupSuccess} scenarioId="BEARER_SCENARIO_ID" fields={this.fields} />
         </bearer-dropdown-button>
       </div>
