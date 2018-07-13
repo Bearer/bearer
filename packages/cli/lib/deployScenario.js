@@ -11,6 +11,7 @@ const assembly = require('./assemblyScenario')
 const storeCredentials = require('./storeCredentials')
 const refreshToken = require('./refreshToken')
 const invalidateCloudFront = require('./invalidateCloudFront')
+const developerPortal = require('./developerPortal')
 
 const AUTH_CONFIG_FILE = 'auth.config.json'
 
@@ -126,8 +127,11 @@ module.exports = {
         if (ExpiresAt < Date.now()) {
           calculatedConfig = await refreshToken(config, emitter)
         }
+        await developerPortal(emitter, "predeploy", calculatedConfig)
         await deployIntents({ scenarioUuid }, emitter, calculatedConfig)
+        await developerPortal(emitter, "deploying", calculatedConfig)
         await deployScreens({ scenarioUuid }, emitter, calculatedConfig)
+        await developerPortal(emitter, "deployed", calculatedConfig)
         resolve()
       } catch (e) {
         reject(e)

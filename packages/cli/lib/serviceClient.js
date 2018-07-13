@@ -45,6 +45,35 @@ module.exports = url => {
         { Key, type },
         { Authorization: token }
       ),
+    deployScenario: (event, OrgId, scenarioTitle) =>
+      new Promise((resolve, reject) => {
+        request(
+          {
+            method: 'POST',
+            uri: url,
+            json: true,
+            body: {
+              query: `mutation DeployScenario {
+                deployScenario(state: "${event}", organizationIdentifier: "${OrgId}", scenarioIdentifier: "${scenarioTitle}") {
+                  errors {
+                    field
+                    messages
+                  }
+                  scenario {
+                    identifier
+                    state
+                    name
+                  }
+                }
+              }`
+            },
+            headers: {}
+          },
+          (err, res) => {
+            if (err) reject(err)
+            else resolve(res.body.data.deployScenario)
+          })
+      }),
     upload: (content, headers = {}) =>
       new Promise((resolve, reject) => {
         request(
