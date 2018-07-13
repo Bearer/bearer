@@ -14,7 +14,6 @@ module.exports = (
     try {
       const res = await client.deployScenario(event, OrgId, scenarioTitle)
 
-      console.log(JSON.stringify(res))
       if (!res.errors) {
         emitter.emit('developerPortalUpdate:success')
       } else {
