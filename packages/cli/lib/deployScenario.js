@@ -129,7 +129,6 @@ module.exports = {
         }
         await developerPortal(emitter, "predeploy", calculatedConfig)
         await deployIntents({ scenarioUuid }, emitter, calculatedConfig)
-        await developerPortal(emitter, "deploying", calculatedConfig)
         await deployScreens({ scenarioUuid }, emitter, calculatedConfig)
         await developerPortal(emitter, "deployed", calculatedConfig)
         resolve()
