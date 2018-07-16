@@ -6,6 +6,7 @@ const express = require('express')
 const startLocalDevelopmentServer = require('./startLocalDevelopmentServer')
 
 const { spawn, execSync } = require('child_process')
+const chokidar = require('chokidar')
 
 function createEvenIfItExists(target, sourcePath) {
   try {
@@ -35,8 +36,48 @@ function childProcessClose(emitter, name) {
   }
 }
 
+function watchNonTSFiles(watchedPath, destPath) {
+  return new Promise((resolve, reject) => {
+    function callback(error) {
+      if (error) {
+        console.log('error', error)
+      }
+    }
+    watcher = chokidar.watch(watchedPath + '/**', {
+      ignored: /\.tsx?$/,
+      persistent: true,
+      followSymlinks: false
+    })
+
+    watcher.on('ready', () => {
+      resolve(watcher)
+    })
+
+    watcher.on('all', (event, filePath) => {
+      const relativePath = filePath.replace(watchedPath, '')
+      const targetPath = path.join(destPath, relativePath)
+      // Creating symlink
+      if (event == 'add') {
+        console.log('creating symlink', filePath, targetPath)
+        fs.ensureSymlink(filePath, targetPath, callback)
+      }
+
+      // // Deleting symlink
+      if (event == 'unlink') {
+        console.log('deleting symlink')
+        fs.unlink(targetPath, err => {
+          if (err) throw err
+          console.log(targetPath + ' was deleted')
+        })
+      }
+    })
+  })
+}
+
 function prepare(emitter, config) {
-  return async ({ install = true } = { install: true }) => {
+  return async (
+    { install = true, watchMode = true } = { install: true, watchMode: true }
+  ) => {
     try {
       const {
         rootPathRc,
@@ -45,13 +86,15 @@ function prepare(emitter, config) {
       const rootLevel = path.dirname(rootPathRc)
       const screensDirectory = path.join(rootLevel, 'screens')
       const buildDirectory = path.join(rootLevel, '.build')
+      const buildSrcDirectory = path.join(buildDirectory, 'src')
 
       // Create hidden folder
       emitter.emit('start:prepare:buildFolder')
       if (!fs.existsSync(buildDirectory)) {
         fs.mkdirSync(buildDirectory)
-        fs.mkdirSync(path.join(buildDirectory, 'src'))
+        fs.mkdirSync(buildSrcDirectory)
       }
+      fs.emptyDirSync(buildSrcDirectory)
 
       // Symlink node_modules
       emitter.emit('start:symlinkNodeModules')
@@ -87,6 +130,20 @@ function prepare(emitter, config) {
         })
       })
 
+      createEvenIfItExists(
+        path.join(buildDirectory, 'global'),
+        path.join(buildSrcDirectory, 'global')
+      )
+
+      // Link non typescript files
+      const watcher = await watchNonTSFiles(
+        screensDirectory,
+        path.join(buildDirectory, 'src')
+      )
+      if (!watchMode) {
+        watcher.close()
+      }
+
       if (install) {
         emitter.emit('start:prepare:installingDependencies')
         execSync('yarn install', { cwd: rootLevel })
@@ -113,87 +170,91 @@ const ensureSetupAndConfigComponents = rootLevel => {
   })
 }
 
-const start = (emitter, config) => async ({ open, install }) => {
-  const {
-    bearerConfig: { OrgId },
-    scenarioConfig: { scenarioTitle }
-  } = config
+const start = (emitter, config) => async ({ open, install, watcher }) => {
+  return new Promise(async (resolve, reject) => {
+    const {
+      bearerConfig: { OrgId },
+      scenarioConfig: { scenarioTitle }
+    } = config
+    const scenarioUuid = `${OrgId}-${scenarioTitle}`
 
-  const scenarioUuid = `${OrgId}-${scenarioTitle}`
+    try {
+      const { buildDirectory, rootLevel } = await prepare(emitter, config)({
+        install,
+        watchMode: watcher
+      })
 
-  try {
-    const { buildDirectory, rootLevel } = await prepare(emitter, config)({
-      install
-    })
+      ensureSetupAndConfigComponents(rootLevel)
+      emitter.emit('start:watchers')
+      
+      if(watcher) {
+        fs.watchFile(
+         path.join(rootLevel, 'auth.config.json'),
+         { persistent: true, interval: 250 },
+         () => ensureSetupAndConfigComponents(rootLevel)
+       )
+      }
+   /* start local development server */
+   const { host, port } = await startLocalDevelopmentServer(
+    rootLevel,
+    scenarioUuid,
+    emitter,
+    config
+  )
+  const integrationHost = `http://${host}:${port}`
 
-    ensureSetupAndConfigComponents(rootLevel)
+  /* Start bearer transpiler phase */
+  const bearerTranspiler = spawn(
+    'node',
+    [path.join(__dirname, '..', 'startTranspiler.js'), watcher ? null : '--no-watcher'],
+    {
+      cwd: screensDirectory,
+      env: {
+        ...process.env,
+        BEARER_SCENARIO_ID: scenarioUuid,
+        BEARER_INTEGRATION_HOST: integrationHost
+      },
+      stdio: ['pipe', 'pipe', 'pipe', 'ipc']
+    }
+  )
 
-    emitter.emit('start:watchers')
+  const BEARER = 'bearer-transpiler'
+  bearerTranspiler.stdout.on('data', childProcessStdout(emitter, BEARER))
+  bearerTranspiler.stderr.on('data', childProcessStderr(emitter, BEARER))
+  bearerTranspiler.on('close', childProcessClose(emitter, BEARER))
 
-    fs.watchFile(
-      path.join(rootLevel, 'auth.config.json'),
-      { persistent: true, interval: 250 },
-      () => ensureSetupAndConfigComponents(rootLevel)
-    )
-
-    /* start local development server */
-    const { host, port } = await startLocalDevelopmentServer(
-      rootLevel,
-      scenarioUuid,
-      emitter,
-      config
-    )
-    const integrationHost = `http://${host}:${port}`
-
-    /* Start bearer transpiler phase */
-    const bearerTranspiler = spawn(
-      'node',
-      [path.join(__dirname, '..', 'startTranspiler.js')],
-      {
-        cwd: rootLevel,
+  bearerTranspiler.on('message', ({ event }) => {
+    if (event === 'transpiler:initialized') {
+      /* Start stencil */
+      const args = ['start']
+      if (!open) {
+        args.push('--no-open')
+      }
+      const stencil = spawn('yarn', args, {
+        cwd: buildDirectory,
         env: {
           ...process.env,
           BEARER_SCENARIO_ID: scenarioUuid,
           BEARER_INTEGRATION_HOST: integrationHost
-        },
-        stdio: ['pipe', 'pipe', 'pipe', 'ipc']
-      }
-    )
-
-    const BEARER = 'bearer-transpiler'
-    bearerTranspiler.stdout.on('data', childProcessStdout(emitter, BEARER))
-    bearerTranspiler.stderr.on('data', childProcessStderr(emitter, BEARER))
-    bearerTranspiler.on('close', childProcessClose(emitter, BEARER))
-
-    bearerTranspiler.on('message', ({ event }) => {
-      if (event === 'transpiler:initialized') {
-        /* Start stencil */
-        const args = ['start']
-        if (!open) {
-          args.push('--no-open')
         }
-        const stencil = spawn('yarn', args, {
-          cwd: buildDirectory,
-          env: {
-            ...process.env,
-            BEARER_SCENARIO_ID: scenarioUuid,
-            BEARER_INTEGRATION_HOST: integrationHost
-          }
-        })
+      })
 
-        const STENCIL = 'stencil'
+      const STENCIL = 'stencil'
 
-        stencil.stdout.on('data', childProcessStdout(emitter, STENCIL))
-        stencil.stderr.on('data', childProcessStderr(emitter, STENCIL))
-        stencil.on('close', childProcessClose(emitter, STENCIL))
-      }
-    })
-  } catch (e) {
-    emitter.emit('start:failed', { error: e })
-  }
+      stencil.stdout.on('data', childProcessStdout(emitter, STENCIL))
+      stencil.stderr.on('data', childProcessStderr(emitter, STENCIL))
+      stencil.on('close', childProcessClose(emitter, STENCIL))
+    }
+  })
+    } catch (e) {
+      emitter.emit('start:failed', { error: e })
+      reject(e)
+    }
+  })
 }
 
 module.exports = {
+  start,
   prepare,
   useWith: (program, emitter, config) => {
     program
@@ -205,6 +266,7 @@ module.exports = {
       )
       .option('--no-open', 'Do not open web browser')
       .option('--no-install', 'Do not run yarn|npm install')
+      .option('--no-watcher', 'Setup without watching files')
       .action(start(emitter, config))
   }
 }

@@ -3,7 +3,7 @@ const fs = require('fs')
 const util = require('util')
 const exec = util.promisify(require('child_process').exec)
 
-const { prepare } = require('./commands/startCommand')
+const { start } = require('./commands/startCommand')
 const buildArtifact = require('./buildArtifact')
 const pushScenario = require('./pushScenario')
 const pushScreens = require('./pushScreens')
@@ -29,7 +29,7 @@ function buildIntents(rootLevel, scenarioUuid, emitter, config) {
       const output = fs.createWriteStream(scenarioArtifact)
 
       emitter.emit('intents:installingDependencies')
-      await exec('yarn install', { cwd: intentsDirectory })
+      await exec('yarn install', { cwd: rootLevel })
 
       await buildArtifact(
         output,
@@ -52,6 +52,8 @@ const deployIntents = ({ scenarioUuid }, emitter, config) =>
       emitter.emit('rootPath:doesntExist')
       process.exit(1)
     }
+    const authConfigFilePath = pathJs.join(rootLevel, AUTH_CONFIG_FILE)
+    await storeCredentials(authConfigFilePath, config, emitter)
 
     const rootLevel = pathJs.dirname(rootPathRc)
 
@@ -87,21 +89,15 @@ const deployScreens = ({ scenarioUuid }, emitter, config) =>
     } = config
 
     try {
-      const { buildDirectory: screensDirectory } = await prepare(
-        emitter,
-        config
-      )()
+      const prepare = start(emitter, config)
+      const { buildDirectory: screensDirectory } = await prepare({
+        watcher: false,
+        open: false
+      })
       if (!screensDirectory) {
         process.exit(1)
         return false
       }
-
-      emitter.emit('screens:generateSetupComponent')
-      await exec('bearer generate --setup', { cwd: screensDirectory })
-
-      emitter.emit('screens:generateConfigComponent')
-      await exec('bearer generate --config', { cwd: screensDirectory })
-
       emitter.emit('screens:buildingDist')
       await exec('yarn build', {
         cwd: screensDirectory,
@@ -120,7 +116,8 @@ const deployScreens = ({ scenarioUuid }, emitter, config) =>
       await invalidateCloudFront(emitter, config)
       return resolve()
     } catch (e) {
-      return reject(e)
+      emitter.emit('screen:upload:failed', { error: e })
+      reject(e)
     }
   })
 
@@ -137,13 +134,13 @@ module.exports = {
         if (ExpiresAt < Date.now()) {
           calculatedConfig = await refreshToken(config, emitter)
         }
-        await developerPortal(emitter, "predeploy", calculatedConfig)
+        await developerPortal(emitter, 'predeploy', calculatedConfig)
         await deployIntents({ scenarioUuid }, emitter, calculatedConfig)
         await deployScreens({ scenarioUuid }, emitter, calculatedConfig)
-        await developerPortal(emitter, "deployed", calculatedConfig)
+        await developerPortal(emitter, 'deployed', calculatedConfig)
         resolve()
       } catch (e) {
-        await developerPortal(emitter, "cancelled", calculatedConfig)
+        await developerPortal(emitter, 'cancelled', calculatedConfig)
         reject(e)
       }
     })
