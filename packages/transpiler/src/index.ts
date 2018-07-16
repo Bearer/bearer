@@ -14,7 +14,7 @@ export default class Transpiler {
   private service: ts.LanguageService
   private rootFileNames: string[] = []
 
-  constructor(private readonly SCREENS_DIRECTORY = process.cwd()) {
+  constructor(private readonly ROOT_DIRECTORY = process.cwd()) {
     const config = ts.readConfigFile(
       path.join(this.BUILD_DIRECTORY, 'tsconfig.json'),
       ts.sys.readFile
@@ -22,7 +22,7 @@ export default class Transpiler {
     const parsed = ts.parseJsonConfigFileContent(
       config,
       ts.sys,
-      this.SCREENS_DIRECTORY
+      this.SRC_DIRECTORY
     )
     this.rootFileNames = parsed.fileNames
   }
@@ -33,7 +33,6 @@ export default class Transpiler {
     }
   ) {
     this.watchNonTSFiles()
-
     fs.emptyDirSync(this.BUILD_SRC_DIRECTORY)
 
     // ensure global directory: quick and dirty
@@ -67,8 +66,8 @@ export default class Transpiler {
       servicesHost,
       ts.createDocumentRegistry()
     )
-
-    // Now let's watch the files
+    console.log('[BEARER]', 'this.rootFileNames', this.rootFileNames)
+    // // Now let's watch the files
     this.rootFileNames.forEach(fileName => {
       files[fileName] = { version: 0 }
       // First time around, emit all files
@@ -108,7 +107,7 @@ export default class Transpiler {
         PropImporter({ verbose }),
         PropInjector({ verbose }),
         PropBearerContextInjector({ verbose }),
-        dumpSourceCode(this.SCREENS_DIRECTORY, this.BUILD_DIRECTORY)({
+        dumpSourceCode(this.SRC_DIRECTORY, this.BUILD_SRC_DIRECTORY)({
           verbose: true
         })
       ],
@@ -134,7 +133,7 @@ export default class Transpiler {
       const targetPath = path.join(this.BUILD_SRC_DIRECTORY, relativePath)
       // Creating symlink
       if (event == 'add' || event == 'addDir') {
-        console.log('creating symlink')
+        console.log('creating symlink', filePath, targetPath)
         fs.ensureSymlink(filePath, targetPath, callback)
       }
 
@@ -196,11 +195,11 @@ export default class Transpiler {
   }
 
   private get SRC_DIRECTORY(): string {
-    return path.join(this.SCREENS_DIRECTORY, 'src')
+    return path.join(this.ROOT_DIRECTORY, 'screens')
   }
 
   private get BUILD_DIRECTORY(): string {
-    return path.join(this.SCREENS_DIRECTORY, '.build')
+    return path.join(this.ROOT_DIRECTORY, '.build')
   }
 
   private get BUILD_SRC_DIRECTORY(): string {

@@ -44,7 +44,7 @@ function prepare(emitter, config) {
       } = config
       const rootLevel = path.dirname(rootPathRc)
       const screensDirectory = path.join(rootLevel, 'screens')
-      const buildDirectory = path.join(screensDirectory, '.build')
+      const buildDirectory = path.join(rootLevel, '.build')
 
       // Create hidden folder
       emitter.emit('start:prepare:buildFolder')
@@ -55,19 +55,17 @@ function prepare(emitter, config) {
 
       // Symlink node_modules
       emitter.emit('start:symlinkNodeModules')
-      const nodeModuleLink = path.join(buildDirectory, 'node_modules')
       createEvenIfItExists(
-        path.join(screensDirectory, 'node_modules'),
-        nodeModuleLink
+        path.join(rootLevel, 'node_modules'),
+        path.join(buildDirectory, 'node_modules')
       )
 
       // symlink package.json
       emitter.emit('start:symlinkPackage')
 
-      const packageLink = path.join(buildDirectory, 'package.json')
       createEvenIfItExists(
-        path.join(screensDirectory, 'package.json'),
-        packageLink
+        path.join(rootLevel, 'package.json'),
+        path.join(buildDirectory, 'package.json')
       )
 
       // Copy stencil.config.json
@@ -91,7 +89,7 @@ function prepare(emitter, config) {
 
       if (install) {
         emitter.emit('start:prepare:installingDependencies')
-        execSync('yarn install', { cwd: screensDirectory })
+        execSync('yarn install', { cwd: rootLevel })
       }
 
       return {
@@ -124,10 +122,7 @@ const start = (emitter, config) => async ({ open, install }) => {
   const scenarioUuid = `${OrgId}-${scenarioTitle}`
 
   try {
-    const { buildDirectory, rootLevel, screensDirectory } = await prepare(
-      emitter,
-      config
-    )({
+    const { buildDirectory, rootLevel } = await prepare(emitter, config)({
       install
     })
 
@@ -136,7 +131,7 @@ const start = (emitter, config) => async ({ open, install }) => {
     emitter.emit('start:watchers')
 
     fs.watchFile(
-      path.join(rootLevel, 'intents', 'auth.config.json'),
+      path.join(rootLevel, 'auth.config.json'),
       { persistent: true, interval: 250 },
       () => ensureSetupAndConfigComponents(rootLevel)
     )
@@ -155,7 +150,7 @@ const start = (emitter, config) => async ({ open, install }) => {
       'node',
       [path.join(__dirname, '..', 'startTranspiler.js')],
       {
-        cwd: screensDirectory,
+        cwd: rootLevel,
         env: {
           ...process.env,
           BEARER_SCENARIO_ID: scenarioUuid,
