@@ -13,8 +13,6 @@ import '@bearer/ui'
 })
 export class {{scenarioTitle}}Display {
   render() {
-    return (
-      <bearer-typography as="h1" kind="h1">🎉🎉 display component 🎉🎉</bearer-typography>
-    )
+    return (null)
   }
 }

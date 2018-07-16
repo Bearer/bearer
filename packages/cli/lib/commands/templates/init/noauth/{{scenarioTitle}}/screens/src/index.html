@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0">
+  <title>{{scenarioTitle}} scenario</title>
+  <script src="/build/{{componentTagName}}.js"></script>
+  <style>
+    body {
+      padding: 50px;
+    }
+
+    hr {
+      margin: 20px 0;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Setup component</h1>
+  <{{componentTagName}}-setup>
+  </{{componentTagName}}-setup>
+  <{{componentTagName}}-setup-display>
+  </{{componentTagName}}-setup-display>
+  <hr />
+  <h1>Action component</h1>
+  <{{componentTagName}} setup-id="CHANGE_ME">
+  </{{componentTagName}}>
+  <hr />
+  <h1>Display component</h1>
+  <{{componentTagName}}-display setup-id="CHANGE_ME">
+  </{{componentTagName}}-display>
+</body>
+
+</html>
