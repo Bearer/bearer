@@ -23,7 +23,6 @@ const DEFAULT_ACTION_EXAMPLE = `
 async function generateTemplates({ emitter, templateType, rootPathRc }) {
   const authConfig = require(path.join(
     path.dirname(rootPathRc),
-    'intents',
     'auth.config.json'
   ))
 
