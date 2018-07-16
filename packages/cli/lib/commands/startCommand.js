@@ -2,7 +2,7 @@ const path = require('path')
 const fs = require('fs-extra')
 const copy = require('copy-template-dir')
 const Case = require('case')
-const express = require('express')
+const chokidar = require('chokidar')
 const startLocalDevelopmentServer = require('./startLocalDevelopmentServer')
 
 const { spawn, execSync } = require('child_process')
@@ -35,39 +35,79 @@ function childProcessClose(emitter, name) {
   }
 }
 
+function watchNonTSFiles(watchedPath, destPath) {
+  return new Promise((resolve, reject) => {
+    function callback(error) {
+      if (error) {
+        console.log('error', error)
+      }
+    }
+    watcher = chokidar.watch(watchedPath + '/**', {
+      ignored: /\.tsx?$/,
+      persistent: true,
+      followSymlinks: false
+    })
+
+    watcher.on('ready', () => {
+      resolve(watcher)
+    })
+
+    watcher.on('all', (event, filePath) => {
+      const relativePath = filePath.replace(watchedPath, '')
+      const targetPath = path.join(destPath, relativePath)
+      // Creating symlink
+      if (event == 'add') {
+        console.log('creating symlink', filePath, targetPath)
+        fs.ensureSymlink(filePath, targetPath, callback)
+      }
+      // // Deleting symlink
+      if (event == 'unlink') {
+        console.log('deleting symlink')
+        fs.unlink(targetPath, err => {
+          if (err) throw err
+          console.log(targetPath + ' was deleted')
+        })
+      }
+    })
+  })
+}
+
 function prepare(emitter, config) {
-  return async ({ install = true } = { install: true }) => {
+  return async (
+    { install = true, watchMode = true } = { install: true, watchMode: true }
+  ) => {
     try {
       const {
         rootPathRc,
         scenarioConfig: { scenarioTitle }
       } = config
+
       const rootLevel = path.dirname(rootPathRc)
       const screensDirectory = path.join(rootLevel, 'screens')
       const buildDirectory = path.join(screensDirectory, '.build')
+      const buildSrcDirectory = path.join(buildDirectory, 'src')
 
       // Create hidden folder
       emitter.emit('start:prepare:buildFolder')
       if (!fs.existsSync(buildDirectory)) {
         fs.mkdirSync(buildDirectory)
-        fs.mkdirSync(path.join(buildDirectory, 'src'))
+        fs.mkdirSync(buildSrcDirectory)
       }
+      fs.emptyDirSync(buildSrcDirectory)
 
       // Symlink node_modules
       emitter.emit('start:symlinkNodeModules')
-      const nodeModuleLink = path.join(buildDirectory, 'node_modules')
       createEvenIfItExists(
         path.join(screensDirectory, 'node_modules'),
-        nodeModuleLink
+        path.join(buildDirectory, 'node_modules')
       )
 
       // symlink package.json
       emitter.emit('start:symlinkPackage')
 
-      const packageLink = path.join(buildDirectory, 'package.json')
       createEvenIfItExists(
         path.join(screensDirectory, 'package.json'),
-        packageLink
+        path.join(buildDirectory, 'package.json')
       )
 
       // Copy stencil.config.json
@@ -88,6 +128,21 @@ function prepare(emitter, config) {
           resolve()
         })
       })
+
+      createEvenIfItExists(
+        path.join(buildDirectory, 'global'),
+        path.join(buildSrcDirectory, 'global')
+      )
+
+      // Link non TS files
+      const watcher = await watchNonTSFiles(
+        path.join(screensDirectory, 'src'),
+        path.join(buildDirectory, 'src')
+      )
+
+      if (!watchMode) {
+        watcher.close()
+      }
 
       if (install) {
         emitter.emit('start:prepare:installingDependencies')

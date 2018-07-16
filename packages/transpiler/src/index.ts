@@ -32,14 +32,6 @@ export default class Transpiler {
       module: ts.ModuleKind.CommonJS
     }
   ) {
-    this.watchNonTSFiles()
-
-    fs.emptyDirSync(this.BUILD_SRC_DIRECTORY)
-
-    // ensure global directory: quick and dirty
-    // TODO: find another way to have the global present within src directory
-    this.ensureGlobalLinked()
-
     const files: ts.MapLike<{ version: number }> = {}
     const servicesHost: ts.LanguageServiceHost = {
       getScriptFileNames: () => this.rootFileNames,
@@ -114,39 +106,6 @@ export default class Transpiler {
       ],
       after: []
     }
-  }
-
-  private watchNonTSFiles() {
-    function callback(error) {
-      if (error) {
-        console.log('error', error)
-      }
-    }
-
-    this.watcher = chokidar.watch(this.SRC_DIRECTORY + '/**', {
-      ignored: /\.tsx?$/,
-      persistent: true,
-      followSymlinks: false
-    })
-
-    this.watcher.on('all', (event, filePath) => {
-      const relativePath = filePath.replace(this.SRC_DIRECTORY, '')
-      const targetPath = path.join(this.BUILD_SRC_DIRECTORY, relativePath)
-      // Creating symlink
-      if (event == 'add' || event == 'addDir') {
-        console.log('creating symlink')
-        fs.ensureSymlink(filePath, targetPath, callback)
-      }
-
-      // // Deleting symlink
-      if (event == 'unlink') {
-        console.log('deleting symlink')
-        fs.unlink(targetPath, err => {
-          if (err) throw err
-          console.log(targetPath + ' was deleted')
-        })
-      }
-    })
   }
 
   emitFile(fileName: string) {
