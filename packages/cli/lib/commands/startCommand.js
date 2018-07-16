@@ -170,7 +170,7 @@ const ensureSetupAndConfigComponents = rootLevel => {
   })
 }
 
-const start = (emitter, config) => async ({ open, install }) => {
+const start = (emitter, config) => async ({ open, install, watcher }) => {
   const {
     bearerConfig: { OrgId },
     scenarioConfig: { scenarioTitle }
@@ -183,18 +183,20 @@ const start = (emitter, config) => async ({ open, install }) => {
       emitter,
       config
     )({
-      install
+      install,
+      watchMode: watcher
     })
 
     ensureSetupAndConfigComponents(rootLevel)
 
     emitter.emit('start:watchers')
-
-    fs.watchFile(
-      path.join(rootLevel, 'intents', 'auth.config.json'),
-      { persistent: true, interval: 250 },
-      () => ensureSetupAndConfigComponents(rootLevel)
-    )
+    if (watcher) {
+      fs.watchFile(
+        path.join(rootLevel, 'intents', 'auth.config.json'),
+        { persistent: true, interval: 250 },
+        () => ensureSetupAndConfigComponents(rootLevel)
+      )
+    }
 
     /* start local development server */
     const { host, port } = await startLocalDevelopmentServer(
@@ -208,7 +210,10 @@ const start = (emitter, config) => async ({ open, install }) => {
     /* Start bearer transpiler phase */
     const bearerTranspiler = spawn(
       'node',
-      [path.join(__dirname, '..', 'startTranspiler.js')],
+      [
+        path.join(__dirname, '..', 'startTranspiler.js'),
+        watcher ? null : '--no-watcher'
+      ].filter(el => el),
       {
         cwd: screensDirectory,
         env: {
@@ -254,7 +259,7 @@ const start = (emitter, config) => async ({ open, install }) => {
 }
 
 module.exports = {
-  prepare,
+  start,
   useWith: (program, emitter, config) => {
     program
       .command('start')
@@ -265,6 +270,7 @@ module.exports = {
       )
       .option('--no-open', 'Do not open web browser')
       .option('--no-install', 'Do not run yarn|npm install')
+      .option('--no-watcher', 'Run transpiler only once')
       .action(start(emitter, config))
   }
 }
