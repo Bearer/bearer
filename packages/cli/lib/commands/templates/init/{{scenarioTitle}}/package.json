@@ -19,12 +19,16 @@
   },
   "dependencies": {
     "@bearer/core": "latest",
-    "@bearer/ui": "latest"
+    "@bearer/intents": "latest",
+    "@bearer/ui": "latest",
+    "axios": "^0.18.0"
   },
   "devDependencies": {
+    "@bearer/bearer-cli": "latest",
     "@stencil/dev-server": "latest",
     "@stencil/utils": "latest",
     "@types/jest": "latest",
+    "@types/node": "latest",
     "jest": "latest"
   },
   "license": "MIT",

@@ -338,6 +338,13 @@ module.exports = emitter => {
     term('\n')
   })
 
+  emitter.on('deploy:failed', ({ error }) => {
+    term.white('Bearer: ')
+    term.red(`Scenario deploy failed `)
+    term(error.stdout)
+    term('\n')
+  })
+
   emitter.on('invalidateCloudFront:success', () => {
     term.white('Bearer: ')
     term.yellow('Screen invalidation success.')
@@ -439,7 +446,7 @@ module.exports = emitter => {
     term.red('An error occured')
     term('\n')
     term.white('    Error: ')
-    term.red(error)
+    term.red(error.toString())
     term('\n')
   })
 

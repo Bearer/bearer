@@ -1,8 +1,0 @@
-{
-  "authorizationURL": null,
-  "tokenURL": null,
-  "authType": "oauth2",
-  "config": {
-    "scope": []
-  }
-}

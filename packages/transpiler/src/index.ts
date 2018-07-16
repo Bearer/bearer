@@ -1,7 +1,7 @@
 import * as ts from 'typescript'
 import * as fs from 'fs-extra'
 import * as path from 'path'
-import * as chokidar from 'chokidar'
+
 import { getSourceCode } from './utils'
 import ReplaceIntentDecorators from './transformers/replace-intent-decorator'
 import BearerScenarioIdInjector from './transformers/scenario-id-accessor-injector'
@@ -10,11 +10,14 @@ import PropBearerContextInjector from './transformers/prop-bearer-context-inject
 import PropImporter from './transformers/prop-importer'
 
 export default class Transpiler {
-  private watcher: any
   private service: ts.LanguageService
   private rootFileNames: string[] = []
+  private subscribers: ts.MapLike<Array<() => void>> = {}
 
-  constructor(private readonly SCREENS_DIRECTORY = process.cwd()) {
+  constructor(
+    private ROOT_DIRECTORY = process.cwd(),
+    private watchFiles = true
+  ) {
     const config = ts.readConfigFile(
       path.join(this.BUILD_DIRECTORY, 'tsconfig.json'),
       ts.sys.readFile
@@ -22,7 +25,7 @@ export default class Transpiler {
     const parsed = ts.parseJsonConfigFileContent(
       config,
       ts.sys,
-      this.SCREENS_DIRECTORY
+      this.SRC_DIRECTORY
     )
     this.rootFileNames = parsed.fileNames
   }
@@ -32,14 +35,8 @@ export default class Transpiler {
       module: ts.ModuleKind.CommonJS
     }
   ) {
-    this.watchNonTSFiles()
-
-    fs.emptyDirSync(this.BUILD_SRC_DIRECTORY)
-
     // ensure global directory: quick and dirty
     // TODO: find another way to have the global present within src directory
-    this.ensureGlobalLinked()
-
     const files: ts.MapLike<{ version: number }> = {}
     const servicesHost: ts.LanguageServiceHost = {
       getScriptFileNames: () => this.rootFileNames,
@@ -49,7 +46,6 @@ export default class Transpiler {
         if (!fs.existsSync(fileName)) {
           return undefined
         }
-
         return ts.ScriptSnapshot.fromString(
           fs.readFileSync(fileName).toString()
         )
@@ -67,36 +63,50 @@ export default class Transpiler {
       servicesHost,
       ts.createDocumentRegistry()
     )
-
     // Now let's watch the files
     this.rootFileNames.forEach(fileName => {
       files[fileName] = { version: 0 }
       // First time around, emit all files
-
       this.emitFile(fileName)
 
-      // Add a watch on the file to handle next change
-      fs.watchFile(
-        fileName,
-        { persistent: true, interval: 250 },
-        (curr, prev) => {
-          // Check timestamp
-          if (+curr.mtime <= +prev.mtime) {
-            return
+      if (this.watchFiles) {
+        // Add a watch on the file to handle next change
+        fs.watchFile(
+          fileName,
+          { persistent: true, interval: 250 },
+          (curr, prev) => {
+            // Check timestamp
+            if (+curr.mtime <= +prev.mtime) {
+              return
+            }
+            // Update the version to signal a change in the file
+            files[fileName].version++
+            // write the changes to disk
+            this.emitFile(fileName)
           }
-          // Update the version to signal a change in the file
-          files[fileName].version++
-          // write the changes to disk
-          this.emitFile(fileName)
-        }
-      )
+        )
+      }
     })
+    if (!this.watchFiles) {
+      this.stop()
+      process.exit(0)
+    }
   }
 
   stop() {
-    if (this.watcher) {
-      this.watcher.close()
-    }
+    this.rootFileNames.forEach(fileName => {
+      fs.unwatchFile(fileName)
+    })
+    this.trigger('STOP')
+  }
+
+  on(event: string, callback: () => void) {
+    this.subscribers[event] = this.subscribers[event] || []
+    this.subscribers[event].push(callback)
+  }
+
+  private trigger = (eventName: string) => {
+    ;(this.subscribers[eventName] || []).forEach(callback => callback())
   }
 
   get transformers(): ts.CustomTransformers {
@@ -108,7 +118,7 @@ export default class Transpiler {
         PropImporter({ verbose }),
         PropInjector({ verbose }),
         PropBearerContextInjector({ verbose }),
-        dumpSourceCode(this.SCREENS_DIRECTORY, this.BUILD_DIRECTORY)({
+        dumpSourceCode(this.SRC_DIRECTORY, this.BUILD_SRC_DIRECTORY)({
           verbose: true
         })
       ],
@@ -116,41 +126,8 @@ export default class Transpiler {
     }
   }
 
-  private watchNonTSFiles() {
-    function callback(error) {
-      if (error) {
-        console.log('error', error)
-      }
-    }
-
-    this.watcher = chokidar.watch(this.SRC_DIRECTORY + '/**', {
-      ignored: /\.tsx?$/,
-      persistent: true,
-      followSymlinks: false
-    })
-
-    this.watcher.on('all', (event, filePath) => {
-      const relativePath = filePath.replace(this.SRC_DIRECTORY, '')
-      const targetPath = path.join(this.BUILD_SRC_DIRECTORY, relativePath)
-      // Creating symlink
-      if (event == 'add' || event == 'addDir') {
-        console.log('creating symlink')
-        fs.ensureSymlink(filePath, targetPath, callback)
-      }
-
-      // // Deleting symlink
-      if (event == 'unlink') {
-        console.log('deleting symlink')
-        fs.unlink(targetPath, err => {
-          if (err) throw err
-          console.log(targetPath + ' was deleted')
-        })
-      }
-    })
-  }
-
   emitFile(fileName: string) {
-    let output = this.service.getEmitOutput(fileName)
+    const output = this.service.getEmitOutput(fileName)
 
     if (!output.emitSkipped) {
       console.log(`Emitting ${fileName}`)
@@ -185,22 +162,12 @@ export default class Transpiler {
     })
   }
 
-  private ensureGlobalLinked() {
-    fs.ensureSymlink(
-      path.join(this.BUILD_DIRECTORY, 'global'),
-      path.join(this.BUILD_SRC_DIRECTORY, 'global'),
-      () => {
-        console.log('Linked globals')
-      }
-    )
-  }
-
   private get SRC_DIRECTORY(): string {
-    return path.join(this.SCREENS_DIRECTORY, 'src')
+    return path.join(this.ROOT_DIRECTORY, 'screens')
   }
 
   private get BUILD_DIRECTORY(): string {
-    return path.join(this.SCREENS_DIRECTORY, '.build')
+    return path.join(this.ROOT_DIRECTORY, '.build')
   }
 
   private get BUILD_SRC_DIRECTORY(): string {

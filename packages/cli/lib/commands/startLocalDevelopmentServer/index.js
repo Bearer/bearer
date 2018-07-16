@@ -18,9 +18,8 @@ async function startLocalDevelopmentServer(
 ) {
   return new Promise(async (resolve, reject) => {
     try {
-      const { config: devIntentsContext } = await explorer.search(
-        path.join(rootLevel, 'intents')
-      )
+      const { config: devIntentsContext } =
+        (await explorer.search(path.join(rootLevel, 'intents'))) || {}
       const { buildIntents } = require(path.join(
         __dirname,
         '..',
@@ -38,8 +37,7 @@ async function startLocalDevelopmentServer(
       fs.ensureDirSync(buildDir)
 
       await new Promise((resolve, reject) => {
-        fs
-          .createReadStream(intentsArtifact)
+        fs.createReadStream(intentsArtifact)
           .pipe(unzip.Extract({ path: buildDir }))
           .on('close', resolve)
           .on('error', reject)
