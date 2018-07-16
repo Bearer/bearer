@@ -6,6 +6,7 @@ module.exports = (
   {
     DeploymentUrl,
     bearerConfig: {
+      OrgId,
       authorization: {
         AuthenticationResult: { IdToken: token }
       }
@@ -16,7 +17,7 @@ module.exports = (
   emitter.emit('assemblyScenario:start')
 
   return deploymentClient
-    .assemblyScenario(token, { bucketKey: scenarioTitle })
+    .assemblyScenario(token, { bucketKey: scenarioTitle, OrgId, scenarioTitle })
     .then(response => {
       if (response.statusCode === 201) {
         emitter.emit('assemblyScenario:success', response.body)

@@ -13,6 +13,7 @@ const rootPathRc = findUp.sync('.scenariorc')
 let setup = {
   DeploymentUrl: 'https://developer.bearer.sh/v1/',
   IntegrationServiceUrl: 'https://int.bearer.sh/api/v1/',
+  DeveloperPortalAPIUrl: 'https://app.bearer.sh/graphql',
   BearerEnv: 'production'
 }
 

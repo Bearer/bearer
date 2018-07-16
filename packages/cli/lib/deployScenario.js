@@ -10,6 +10,7 @@ const pushScreens = require('./pushScreens')
 const assembly = require('./assemblyScenario')
 const refreshToken = require('./refreshToken')
 const invalidateCloudFront = require('./invalidateCloudFront')
+const developerPortal = require('./developerPortal')
 
 function buildIntents(rootLevel, scenarioUuid, emitter, config) {
   return new Promise(async (resolve, reject) => {
@@ -136,10 +137,13 @@ module.exports = {
         if (ExpiresAt < Date.now()) {
           calculatedConfig = await refreshToken(config, emitter)
         }
+        await developerPortal(emitter, "predeploy", calculatedConfig)
         await deployIntents({ scenarioUuid }, emitter, calculatedConfig)
         await deployScreens({ scenarioUuid }, emitter, calculatedConfig)
+        await developerPortal(emitter, "deployed", calculatedConfig)
         resolve()
       } catch (e) {
+        await developerPortal(emitter, "cancelled", calculatedConfig)
         reject(e)
       }
     })
