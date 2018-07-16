@@ -144,26 +144,8 @@ export default class Transpiler {
     })
   }
 
-  private ensureGlobalLinked() {
-    fs.ensureSymlink(
-      path.join(this.BUILD_DIRECTORY, 'global'),
-      path.join(this.BUILD_SRC_DIRECTORY, 'global'),
-      () => {
-        console.log('Linked globals')
-      }
-    )
-  }
-
-  private get SRC_DIRECTORY(): string {
-    return path.join(this.SCREENS_DIRECTORY, 'src')
-  }
-
   private get BUILD_DIRECTORY(): string {
     return path.join(this.SCREENS_DIRECTORY, '.build')
-  }
-
-  private get BUILD_SRC_DIRECTORY(): string {
-    return path.join(this.BUILD_DIRECTORY, 'src')
   }
 }
 
