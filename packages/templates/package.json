@@ -1,0 +1,48 @@
+{
+  "name": "@bearer/templates",
+  "version": "0.13.2",
+  "description": "Bearer templates",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "author": "Bearer",
+  "license": "UNLICENSED",
+  "files": [
+    "dist/"
+  ],
+  "scripts": {
+    "start": "yarn build",
+    "build": "tsc -p tsconfig.json",
+    "prepublish": "yarn build",
+    "prepublishOnly": "yarn build",
+    "test": "jest"
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js"
+    ],
+    "transform": {
+      "^.+\\.(ts|tsx)$": "<rootDir>/preprocessor.js"
+    },
+    "testMatch": [
+      "**/__tests__/*.+(ts|tsx|js)"
+    ],
+    "setupFiles": [
+      "./jest.setup.js"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "github:Bearer/bearer"
+  },
+  "dependencies": {
+    "typescript": "^2.9.2"
+  },
+  "devDependencies": {
+    "@types/jest": "^23.1.5",
+    "@types/node": "^10.5.2",
+    "jest": "^23.4.0",
+    "ts-jest": "^23.0.0"
+  }
+}

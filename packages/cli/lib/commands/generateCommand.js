@@ -4,21 +4,11 @@ const path = require('path')
 const inquirer = require('inquirer')
 const Case = require('case')
 const intents = require('@bearer/intents')
+const templates = require('@bearer/templates')
 const rc = require('rc')
 
 const INTENT = 'intent'
 const SCREEN = 'screen'
-const DEFAULT_ACTION_EXAMPLE = `
-  static action(context: TContext, params: any, callback: (params: any) => void) {
-    //... your code goes here
-    // use the client defined in client.ts to fetch real object like that:
-    // CLIENT.get(\`/people/\${params.id}\`, { headers: headersFor(context.accessToken) })
-    //   .then(({ data }) => {
-    //     callback({ object: data });
-    //   });
-    callback({ object: {}})
-  }
-`
 
 async function generateTemplates({ emitter, templateType, rootPathRc }) {
   const authConfig = require(path.join(
@@ -126,12 +116,13 @@ const choices = Object.keys(intents)
     value: intent
   }))
 
-function getActionExample(intent) {
-  const actionExample = intent.template
-  if (actionExample) {
-    return actionExample
-  }
-  return DEFAULT_ACTION_EXAMPLE
+function getActionExample(intent, authType) {
+  return templates.authType.intent
+  // const actionExample = intent.template
+  // if (actionExample) {
+  //   return actionExample
+  // }
+  // return DEFAULT_ACTION_EXAMPLE
 }
 async function generateIntent({ emitter, rootPathRc, name }) {
   const { intentType } = await inquirer.prompt([
@@ -142,7 +133,12 @@ async function generateIntent({ emitter, rootPathRc, name }) {
       choices
     }
   ])
-  const actionExample = getActionExample(intents[intentType])
+  const authConfig = require(path.join(
+    path.dirname(rootPathRc),
+    'intents',
+    'auth.config.json'
+  ))
+  const actionExample = getActionExample(intents[intentType], authConfig.authType)
   const vars = { intentName: name, intentType, actionExample }
   const inDir = path.join(__dirname, 'templates/generate/intent')
   const outDir = path.join(path.dirname(rootPathRc), 'intents')
