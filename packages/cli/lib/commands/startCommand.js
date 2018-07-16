@@ -178,78 +178,84 @@ const start = (emitter, config) => async ({ open, install, watcher }) => {
     } = config
     const scenarioUuid = `${OrgId}-${scenarioTitle}`
 
-    try {
-      const { buildDirectory, rootLevel } = await prepare(emitter, config)({
-        install,
-        watchMode: watcher
-      })
+    // try {
+    const { buildDirectory, rootLevel, screensDirectory } = await prepare(
+      emitter,
+      config
+    )({
+      install,
+      watchMode: watcher
+    })
 
-      ensureSetupAndConfigComponents(rootLevel)
-      emitter.emit('start:watchers')
-      
-      if(watcher) {
-        fs.watchFile(
-         path.join(rootLevel, 'auth.config.json'),
-         { persistent: true, interval: 250 },
-         () => ensureSetupAndConfigComponents(rootLevel)
-       )
-      }
-   /* start local development server */
-   const { host, port } = await startLocalDevelopmentServer(
-    rootLevel,
-    scenarioUuid,
-    emitter,
-    config
-  )
-  const integrationHost = `http://${host}:${port}`
+    ensureSetupAndConfigComponents(rootLevel)
+    emitter.emit('start:watchers')
 
-  /* Start bearer transpiler phase */
-  const bearerTranspiler = spawn(
-    'node',
-    [path.join(__dirname, '..', 'startTranspiler.js'), watcher ? null : '--no-watcher'],
-    {
-      cwd: screensDirectory,
-      env: {
-        ...process.env,
-        BEARER_SCENARIO_ID: scenarioUuid,
-        BEARER_INTEGRATION_HOST: integrationHost
-      },
-      stdio: ['pipe', 'pipe', 'pipe', 'ipc']
+    if (watcher) {
+      fs.watchFile(
+        path.join(rootLevel, 'auth.config.json'),
+        { persistent: true, interval: 250 },
+        () => ensureSetupAndConfigComponents(rootLevel)
+      )
     }
-  )
+    /* start local development server */
+    const { host, port } = await startLocalDevelopmentServer(
+      rootLevel,
+      scenarioUuid,
+      emitter,
+      config
+    )
+    const integrationHost = `http://${host}:${port}`
 
-  const BEARER = 'bearer-transpiler'
-  bearerTranspiler.stdout.on('data', childProcessStdout(emitter, BEARER))
-  bearerTranspiler.stderr.on('data', childProcessStderr(emitter, BEARER))
-  bearerTranspiler.on('close', childProcessClose(emitter, BEARER))
-
-  bearerTranspiler.on('message', ({ event }) => {
-    if (event === 'transpiler:initialized') {
-      /* Start stencil */
-      const args = ['start']
-      if (!open) {
-        args.push('--no-open')
-      }
-      const stencil = spawn('yarn', args, {
-        cwd: buildDirectory,
+    /* Start bearer transpiler phase */
+    const bearerTranspiler = spawn(
+      'node',
+      [
+        path.join(__dirname, '..', 'startTranspiler.js'),
+        watcher ? null : '--no-watcher'
+      ],
+      {
+        cwd: screensDirectory,
         env: {
           ...process.env,
           BEARER_SCENARIO_ID: scenarioUuid,
           BEARER_INTEGRATION_HOST: integrationHost
+        },
+        stdio: ['pipe', 'pipe', 'pipe', 'ipc']
+      }
+    )
+
+    const BEARER = 'bearer-transpiler'
+    bearerTranspiler.stdout.on('data', childProcessStdout(emitter, BEARER))
+    bearerTranspiler.stderr.on('data', childProcessStderr(emitter, BEARER))
+    bearerTranspiler.on('close', childProcessClose(emitter, BEARER))
+
+    bearerTranspiler.on('message', ({ event }) => {
+      if (event === 'transpiler:initialized') {
+        /* Start stencil */
+        const args = ['start']
+        if (!open) {
+          args.push('--no-open')
         }
-      })
+        const stencil = spawn('yarn', args, {
+          cwd: buildDirectory,
+          env: {
+            ...process.env,
+            BEARER_SCENARIO_ID: scenarioUuid,
+            BEARER_INTEGRATION_HOST: integrationHost
+          }
+        })
 
-      const STENCIL = 'stencil'
+        const STENCIL = 'stencil'
 
-      stencil.stdout.on('data', childProcessStdout(emitter, STENCIL))
-      stencil.stderr.on('data', childProcessStderr(emitter, STENCIL))
-      stencil.on('close', childProcessClose(emitter, STENCIL))
-    }
-  })
-    } catch (e) {
-      emitter.emit('start:failed', { error: e })
-      reject(e)
-    }
+        stencil.stdout.on('data', childProcessStdout(emitter, STENCIL))
+        stencil.stderr.on('data', childProcessStderr(emitter, STENCIL))
+        stencil.on('close', childProcessClose(emitter, STENCIL))
+      }
+    })
+    // } catch (e) {
+    //   emitter.emit('start:failed', { error: e })
+    //   reject(e)
+    // }
   })
 }
 

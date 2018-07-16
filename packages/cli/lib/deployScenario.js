@@ -52,8 +52,6 @@ const deployIntents = ({ scenarioUuid }, emitter, config) =>
       emitter.emit('rootPath:doesntExist')
       process.exit(1)
     }
-    const authConfigFilePath = pathJs.join(rootLevel, AUTH_CONFIG_FILE)
-    await storeCredentials(authConfigFilePath, config, emitter)
 
     const rootLevel = pathJs.dirname(rootPathRc)
 
@@ -127,9 +125,9 @@ module.exports = {
   buildIntents,
   deployScenario: ({ scenarioUuid }, emitter, config) =>
     new Promise(async (resolve, reject) => {
+      let calculatedConfig = config
       try {
         const { ExpiresAt } = config.bearerConfig
-        let calculatedConfig = config
 
         if (ExpiresAt < Date.now()) {
           calculatedConfig = await refreshToken(config, emitter)

@@ -446,7 +446,7 @@ module.exports = emitter => {
     term.red('An error occured')
     term('\n')
     term.white('    Error: ')
-    term.red(error)
+    term.red(error.toString())
     term('\n')
   })
 
