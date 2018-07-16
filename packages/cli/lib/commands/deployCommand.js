@@ -59,8 +59,10 @@ const deploy = (emitter, config) => async ({ path = '.' }) => {
       scenarioTitle,
       setupUrl
     })
-  } catch (e) {
-    console.log(e)
+  } catch (error) {
+    emitter.emit('deploy:failed', {
+      error
+    })
   }
 }
 module.exports = {
