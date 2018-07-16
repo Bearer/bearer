@@ -23,7 +23,7 @@ const login = (emitter, config) => async ({ email }) => {
       }
     ])
 
-    const res = await client.login({ Username, AccessToken })
+    const res = await client.login({ Username, Password: AccessToken })
 
     let ExpiresAt
     switch (res.statusCode) {
