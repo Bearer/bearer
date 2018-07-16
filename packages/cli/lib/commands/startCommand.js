@@ -198,16 +198,8 @@ const start = (emitter, config) => async ({ open, install, watcher }) => {
       )
     }
 
-    /* start local development server */
-    const { host, port } = await startLocalDevelopmentServer(
-      rootLevel,
-      scenarioUuid,
-      emitter,
-      config
-    )
-    const integrationHost = `http://${host}:${port}`
-
     /* Start bearer transpiler phase */
+    const BEARER = 'bearer-transpiler'
     const bearerTranspiler = spawn(
       'node',
       [
@@ -218,41 +210,49 @@ const start = (emitter, config) => async ({ open, install, watcher }) => {
         cwd: screensDirectory,
         env: {
           ...process.env,
-          BEARER_SCENARIO_ID: scenarioUuid,
-          BEARER_INTEGRATION_HOST: integrationHost
+          BEARER_SCENARIO_ID: scenarioUuid
         },
         stdio: ['pipe', 'pipe', 'pipe', 'ipc']
       }
     )
-
-    const BEARER = 'bearer-transpiler'
     bearerTranspiler.stdout.on('data', childProcessStdout(emitter, BEARER))
     bearerTranspiler.stderr.on('data', childProcessStderr(emitter, BEARER))
     bearerTranspiler.on('close', childProcessClose(emitter, BEARER))
 
-    bearerTranspiler.on('message', ({ event }) => {
-      if (event === 'transpiler:initialized') {
-        /* Start stencil */
-        const args = ['start']
-        if (!open) {
-          args.push('--no-open')
-        }
-        const stencil = spawn('yarn', args, {
-          cwd: buildDirectory,
-          env: {
-            ...process.env,
-            BEARER_SCENARIO_ID: scenarioUuid,
-            BEARER_INTEGRATION_HOST: integrationHost
+    if (watcher) {
+      /* start local development server */
+      const { host, port } = await startLocalDevelopmentServer(
+        rootLevel,
+        scenarioUuid,
+        emitter,
+        config
+      )
+      const integrationHost = `http://${host}:${port}`
+
+      bearerTranspiler.on('message', ({ event }) => {
+        if (event === 'transpiler:initialized') {
+          /* Start stencil */
+          const args = ['start']
+          if (!open) {
+            args.push('--no-open')
           }
-        })
+          const stencil = spawn('yarn', args, {
+            cwd: buildDirectory,
+            env: {
+              ...process.env,
+              BEARER_SCENARIO_ID: scenarioUuid,
+              BEARER_INTEGRATION_HOST: integrationHost
+            }
+          })
 
-        const STENCIL = 'stencil'
+          const STENCIL = 'stencil'
 
-        stencil.stdout.on('data', childProcessStdout(emitter, STENCIL))
-        stencil.stderr.on('data', childProcessStderr(emitter, STENCIL))
-        stencil.on('close', childProcessClose(emitter, STENCIL))
-      }
-    })
+          stencil.stdout.on('data', childProcessStdout(emitter, STENCIL))
+          stencil.stderr.on('data', childProcessStderr(emitter, STENCIL))
+          stencil.on('close', childProcessClose(emitter, STENCIL))
+        }
+      })
+    }
   } catch (e) {
     emitter.emit('start:failed', { error: e })
   }
