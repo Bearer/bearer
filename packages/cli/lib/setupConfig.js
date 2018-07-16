@@ -11,14 +11,22 @@ const bearerConfig = rc('bearer')
 const rootPathRc = findUp.sync('.scenariorc')
 
 let setup = {
-  DeploymentUrl: 'https://developer.staging.bearer.sh/v1/',
-  IntegrationServiceUrl: 'https://int.staging.bearer.sh/api/v1/',
-  BearerEnv: 'staging',
-  DeveloperPortalAPIUrl: 'https://app.bearer.sh/graphql'
+  DeploymentUrl: 'https://developer.bearer.sh/v1/',
+  IntegrationServiceUrl: 'https://int.bearer.sh/api/v1/',
+  DeveloperPortalAPIUrl: 'https://app.bearer.sh/graphql',
+  BearerEnv: 'production'
 }
 
 module.exports = () => {
   const { BEARER_ENV } = process.env
+
+  if (BEARER_ENV === 'staging') {
+    setup = {
+      DeploymentUrl: 'https://developer.staging.bearer.sh/v1/',
+      IntegrationServiceUrl: 'https://int.staging.bearer.sh/api/v1/',
+      BearerEnv: 'staging'
+    }
+  }
 
   if (BEARER_ENV === 'dev') {
     setup = {
