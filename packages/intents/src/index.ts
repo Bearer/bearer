@@ -52,6 +52,8 @@ class BaseIntent {
 export class SaveState extends BaseIntent {
   static get template() {
     return `
+  STATE_CLIENT.defaults.baseURL = 'https://int.bearer.sh/'
+
   static action(
     _context,
     _params,
@@ -127,6 +129,8 @@ export class SaveState extends BaseIntent {
 export class RetrieveState extends BaseIntent {
   static get template(): string {
     return `
+  STATE_CLIENT.defaults.baseURL = 'https://int.bearer.sh/'
+
   static action(_context: TContext, _params: any, state, callback) => {
     callback({ items: state.items.map(({name}) => name) })
   }
