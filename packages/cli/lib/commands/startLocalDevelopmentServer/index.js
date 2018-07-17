@@ -77,6 +77,19 @@ async function startLocalDevelopmentServer(
         )
       }
 
+      router.options('*', ctx => {
+        ctx.header('Access-Control-Allow-Origin', '*')
+        ctx.header(
+          'Access-Control-Allow-Methods',
+          'GET,PUT,POST,DELETE,OPTIONS'
+        )
+        ctx.header(
+          'Access-Control-Allow-Headers',
+          'Content-Type, Authorization, Content-Length, X-Requested-With'
+        )
+        ctx.status(200)
+        ctx.body()
+      })
       server.use(router.routes())
       server.use(router.allowedMethods())
       getPort({ port: 3000 }).then(port => {
@@ -85,7 +98,7 @@ async function startLocalDevelopmentServer(
           emitter.emit('start:localServer:endpoints', {
             endpoints: router.stack
           })
-          resolve(`https://localhost:${port}/`)
+          resolve(`http://127.0.0.1:${port}/`)
         })
       })
     } catch (e) {
