@@ -1,12 +1,13 @@
 import { Component, Listen, Prop, State, Method, Element } from '@bearer/core'
 import { Store } from '@stencil/redux'
 
+import { TCollectionRenderer } from './types'
 @Component({
   tag: 'bearer-scrollable',
   styleUrl: 'scrollable.scss'
 })
 export class BearerScrollable {
-  @Prop() renderCollection: (collection: Array<any>) => any
+  @Prop() renderCollection: TCollectionRenderer
   @Prop() renderFetching: () => any
   @Prop() perPage: number = 5
   @Prop() fetcher: ({ page: number }) => Promise<{ items: Array<any> }>
@@ -55,8 +56,14 @@ export class BearerScrollable {
     if (this.fetching && !this.collection.length) {
       return null
     }
-    return this.renderCollection(this.collection)
+    return (this.renderCollection || this.renderCollectionDefault)(
+      this.collection
+    )
   }
+
+  renderCollectionDefault: TCollectionRenderer = collection => (
+    <bearer-navigator-collection data={collection} />
+  )
 
   _renderFetching = () =>
     this.renderFetching ? this.renderFetching() : <bearer-loading />
