@@ -117,13 +117,9 @@ const choices = Object.keys(intents)
   }))
 
 function getActionExample(intent, authType) {
-  return templates.authType.intent
-  // const actionExample = intent.template
-  // if (actionExample) {
-  //   return actionExample
-  // }
-  // return DEFAULT_ACTION_EXAMPLE
+  return templates[authType][intent]
 }
+
 async function generateIntent({ emitter, rootPathRc, name }) {
   const { intentType } = await inquirer.prompt([
     {
