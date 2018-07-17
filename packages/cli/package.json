@@ -17,6 +17,7 @@
   },
   "dependencies": {
     "@bearer/intents": "^0.13.2",
+    "@bearer/templates": "^0.13.2",
     "@bearer/transpiler": "^0.15.2",
     "@koa/cors": "^2.2.2",
     "amazon-cognito-identity-js": "^2.0.3",
