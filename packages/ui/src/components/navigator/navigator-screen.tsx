@@ -17,7 +17,7 @@ export class BearerNavigatorScreen {
   @State() visible: boolean = false
   @State() data: any
 
-  @Prop() navigationTitle: any
+  @Prop() navigationTitle: ((data: any) => string) | string
   @Prop()
   renderFunc: <T>(
     params: {

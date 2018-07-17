@@ -31,6 +31,13 @@ import {
   FieldSet,
 } from './components/Forms/Fieldset';
 import {
+  TMember,
+  TMemberRenderer,
+} from './components/navigator/types';
+import {
+  TCollectionRenderer,
+} from './components/scrollable/types';
+import {
   Store,
 } from '@stencil/redux';
 
@@ -789,7 +796,8 @@ declare global {
   namespace StencilComponents {
     interface BearerNavigatorCollection {
       'data': any;
-      'renderFunc': (member: any) => void;
+      'displayMemberProp': string;
+      'renderFunc': TMemberRenderer<TMember>;
     }
   }
 
@@ -813,8 +821,9 @@ declare global {
   namespace JSXElements {
     export interface BearerNavigatorCollectionAttributes extends HTMLAttributes {
       'data'?: any;
+      'displayMemberProp'?: string;
       'onCompleteScreen'?: (event: CustomEvent) => void;
-      'renderFunc'?: (member: any) => void;
+      'renderFunc'?: TMemberRenderer<TMember>;
     }
   }
 }
@@ -824,9 +833,9 @@ declare global {
 
   namespace StencilComponents {
     interface BearerNavigatorScreen {
-      'getTitle': () => any;
+      'getTitle': () => string;
       'name': string;
-      'navigationTitle': any;
+      'navigationTitle': ((data: any) => string) | string;
       'renderFunc': <T>(
     params: {
       next: (data: any) => void
@@ -859,7 +868,7 @@ declare global {
   namespace JSXElements {
     export interface BearerNavigatorScreenAttributes extends HTMLAttributes {
       'name'?: string;
-      'navigationTitle'?: any;
+      'navigationTitle'?: ((data: any) => string) | string;
       'onNavigatorGoBack'?: (event: CustomEvent) => void;
       'onStepCompleted'?: (event: CustomEvent) => void;
       'renderFunc'?: <T>(
@@ -878,7 +887,9 @@ declare global {
 
   namespace StencilComponents {
     interface BearerNavigator {
-
+      'btnProps': JSXElements.BearerButtonAttributes;
+      'direction': string;
+      'display': string;
     }
   }
 
@@ -901,7 +912,9 @@ declare global {
   }
   namespace JSXElements {
     export interface BearerNavigatorAttributes extends HTMLAttributes {
-
+      'btnProps'?: JSXElements.BearerButtonAttributes;
+      'direction'?: string;
+      'display'?: string;
     }
   }
 }
@@ -998,46 +1011,11 @@ declare global {
 declare global {
 
   namespace StencilComponents {
-    interface BearerPopoverNavigator {
-      'btnProps': JSXElements.BearerButtonAttributes;
-      'direction': string;
-    }
-  }
-
-  interface HTMLBearerPopoverNavigatorElement extends StencilComponents.BearerPopoverNavigator, HTMLStencilElement {}
-
-  var HTMLBearerPopoverNavigatorElement: {
-    prototype: HTMLBearerPopoverNavigatorElement;
-    new (): HTMLBearerPopoverNavigatorElement;
-  };
-  interface HTMLElementTagNameMap {
-    'bearer-popover-navigator': HTMLBearerPopoverNavigatorElement;
-  }
-  interface ElementTagNameMap {
-    'bearer-popover-navigator': HTMLBearerPopoverNavigatorElement;
-  }
-  namespace JSX {
-    interface IntrinsicElements {
-      'bearer-popover-navigator': JSXElements.BearerPopoverNavigatorAttributes;
-    }
-  }
-  namespace JSXElements {
-    export interface BearerPopoverNavigatorAttributes extends HTMLAttributes {
-      'btnProps'?: JSXElements.BearerButtonAttributes;
-      'direction'?: string;
-    }
-  }
-}
-
-
-declare global {
-
-  namespace StencilComponents {
     interface BearerScrollable {
       'fetcher': ({ page: number }) => Promise<{ items: Array<any> }>;
       'perPage': number;
       'reducer': string;
-      'renderCollection': (collection: Array<any>) => any;
+      'renderCollection': TCollectionRenderer;
       'renderFetching': () => any;
       'reset': () => void;
       'store': Store;
@@ -1066,7 +1044,7 @@ declare global {
       'fetcher'?: ({ page: number }) => Promise<{ items: Array<any> }>;
       'perPage'?: number;
       'reducer'?: string;
-      'renderCollection'?: (collection: Array<any>) => any;
+      'renderCollection'?: TCollectionRenderer;
       'renderFetching'?: () => any;
       'store'?: Store;
     }
