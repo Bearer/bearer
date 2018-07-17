@@ -20,7 +20,7 @@ async function generateTemplates({ emitter, templateType, rootPathRc }) {
   const scenarioConfig = rc('scenario')
   const { scenarioTitle } = scenarioConfig
 
-  const configKey = `${templateType}Screen`
+  const configKey = `${templateType}Screens`
 
   const vars = {
     scenarioTitle: Case.camel(scenarioTitle),
