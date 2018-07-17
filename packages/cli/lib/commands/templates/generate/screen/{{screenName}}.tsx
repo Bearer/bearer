@@ -9,7 +9,7 @@ export class {{screenName}} {
   render() {
     return (
       <div class="root">
-        <bearer-typography as="h2" style="h2">
+        <bearer-typography as="h2">
           {{screenName}} Component
         </bearer-typography>
       </div>
