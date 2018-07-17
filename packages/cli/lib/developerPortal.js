@@ -20,9 +20,9 @@ module.exports = (
         emitter.emit('developerPortalUpdate:failed', res.errors)
       }
 
-      resolve('done')
+      return resolve('done')
     } catch (e) {
       emitter.emit('developerPortalUpdate:error', e)
-      reject(e)
+      return reject(e)
     }
   })

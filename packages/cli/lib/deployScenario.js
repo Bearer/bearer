@@ -2,7 +2,6 @@ const pathJs = require('path')
 const fs = require('fs')
 const util = require('util')
 const exec = util.promisify(require('child_process').exec)
-
 const { prepare } = require('./commands/startCommand')
 const buildArtifact = require('./buildArtifact')
 const pushScenario = require('./pushScenario')
@@ -97,6 +96,7 @@ const deployScreens = ({ scenarioUuid }, emitter, config) =>
       }
 
       emitter.emit('screens:generateSetupComponent')
+
       await exec('bearer generate --setup', { cwd: screensDirectory })
 
       emitter.emit('screens:generateConfigComponent')
@@ -120,6 +120,7 @@ const deployScreens = ({ scenarioUuid }, emitter, config) =>
       await invalidateCloudFront(emitter, config)
       return resolve()
     } catch (e) {
+      emitter.emit('deployScenario:deployScreens:error', e)
       return reject(e)
     }
   })
@@ -138,13 +139,13 @@ module.exports = {
         if (ExpiresAt < Date.now()) {
           calculatedConfig = await refreshToken(config, emitter)
         }
-        await developerPortal(emitter, "predeploy", calculatedConfig)
+        await developerPortal(emitter, 'predeploy', calculatedConfig)
         await deployIntents({ scenarioUuid }, emitter, calculatedConfig)
         await deployScreens({ scenarioUuid }, emitter, calculatedConfig)
-        await developerPortal(emitter, "deployed", calculatedConfig)
+        await developerPortal(emitter, 'deployed', calculatedConfig)
         resolve()
       } catch (e) {
-        await developerPortal(emitter, "cancelled", calculatedConfig)
+        await developerPortal(emitter, 'cancelled', calculatedConfig)
         reject(e)
       }
     })

@@ -259,6 +259,7 @@ const start = (emitter, config) => async ({ open, install, watcher }) => {
 }
 
 module.exports = {
+  prepare,
   start,
   useWith: (program, emitter, config) => {
     program

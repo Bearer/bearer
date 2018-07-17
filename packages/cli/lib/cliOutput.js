@@ -458,4 +458,13 @@ module.exports = emitter => {
     term(endpoints.map(i => i.path).join(', '))
     term('\n')
   })
+
+  emitter.on('deployScenario:deployScreens:error', ({ message }) => {
+    term.white('Bearer: ')
+    term.red('An error occured')
+    term('\n')
+    term.white('Error: ')
+    term.red(message)
+    term('\n')
+  })
 }
