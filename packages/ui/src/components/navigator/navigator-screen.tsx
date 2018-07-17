@@ -44,10 +44,10 @@ export class BearerNavigatorScreen {
 
   @Method()
   getTitle() {
-    if (typeof this.navigationTitle === 'string') {
-      return this.navigationTitle
+    if (typeof this.navigationTitle === 'function') {
+      return this.navigationTitle(this.data)
     }
-    return this.navigationTitle(this.data)
+    return this.navigationTitle
   }
 
   @Listen('completeScreen')
