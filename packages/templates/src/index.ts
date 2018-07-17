@@ -1,6 +1,6 @@
-import * as oauth2 from './oauth2'
-import * as apikey from './apikey'
-import * as noauth from './noauth'
+import oauth2 from './oauth2'
+import apikey from './apikey'
+import noauth from './noauth'
 
 export default {
   oauth2,
