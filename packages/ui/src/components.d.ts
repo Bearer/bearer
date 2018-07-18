@@ -25,8 +25,6 @@ declare global {
   interface HTMLAttributes {}
 }
 
-import '@stencil/redux';
-
 import {
   FieldSet,
 } from './components/Forms/Fieldset';
@@ -37,9 +35,6 @@ import {
 import {
   TCollectionRenderer,
 } from './components/scrollable/types';
-import {
-  Store,
-} from '@stencil/redux';
 
 declare global {
 
@@ -1017,11 +1012,10 @@ declare global {
     interface BearerScrollable {
       'fetcher': ({ page: number }) => Promise<{ items: Array<any> }>;
       'perPage': number;
-      'reducer': string;
       'renderCollection': TCollectionRenderer;
       'renderFetching': () => any;
+      'rendererProps': JSXElements.BearerNavigatorCollectionAttributes;
       'reset': () => void;
-      'store': Store;
     }
   }
 
@@ -1046,10 +1040,9 @@ declare global {
     export interface BearerScrollableAttributes extends HTMLAttributes {
       'fetcher'?: ({ page: number }) => Promise<{ items: Array<any> }>;
       'perPage'?: number;
-      'reducer'?: string;
       'renderCollection'?: TCollectionRenderer;
       'renderFetching'?: () => any;
-      'store'?: Store;
+      'rendererProps'?: JSXElements.BearerNavigatorCollectionAttributes;
     }
   }
 }
