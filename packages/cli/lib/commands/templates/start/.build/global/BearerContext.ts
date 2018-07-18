@@ -1,4 +1,7 @@
 class BearerContext {
+  private state: { [key: string]: any} = {}
+  private subscribers: Array<any> = []
+  
   constructor() {
     console.log('[BEARER]', 'BearerContext init')
   }
@@ -14,7 +17,7 @@ class BearerContext {
     console.log('[BEARER]', 'setSetupId', setupId)
     this._setupId = setupId
   }
-  
+
   get configId(): string {
     return this._configId
   }
@@ -22,6 +25,21 @@ class BearerContext {
   set configId(configId) {
     console.log('[BEARER]', 'setConfigId', configId)
     this._configId = configId
+  }
+
+  subscribe = (component: any) => {
+    this.subscribers.push(component)
+  }
+
+  unsubscribe = (component: any) => {
+    this.subscribers.filter(subscriber => subscriber === component)
+  }
+
+  update = (field, value)=> {
+    this.state[field] = value
+    this.subscribers.map(component => {
+      component.updateFromState(this.state)
+    })
   }
 }
 
