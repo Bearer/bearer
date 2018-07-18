@@ -17,18 +17,27 @@ export default class Transpiler {
 
   constructor(
     private readonly SCREENS_DIRECTORY = process.cwd(),
-    private watchFiles = true
+    private watchFiles = true,
+    private buildFolder = '.build'
   ) {
     const config = ts.readConfigFile(
       path.join(this.BUILD_DIRECTORY, 'tsconfig.json'),
       ts.sys.readFile
     )
+
+    if (config.error) {
+      throw new Error(config.error.messageText as string)
+    }
+
     const parsed = ts.parseJsonConfigFileContent(
       config,
       ts.sys,
       this.SCREENS_DIRECTORY
     )
     this.rootFileNames = parsed.fileNames
+    if (!this.rootFileNames.length) {
+      console.warn('[BEARER]', 'No file to trnaspile')
+    }
   }
 
   run(
@@ -169,7 +178,7 @@ export default class Transpiler {
   }
 
   private get BUILD_DIRECTORY(): string {
-    return path.join(this.SCREENS_DIRECTORY, '.build')
+    return path.join(this.SCREENS_DIRECTORY, this.buildFolder)
   }
 }
 
