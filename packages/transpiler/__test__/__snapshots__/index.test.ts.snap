@@ -3,7 +3,8 @@
 exports[`Transpiler integration test FullComponent.tsx match expectation 1`] = `
 Object {
   "file": "FullComponent.tsx",
-  "postContent": "import { Component, Intent, BearerFetch } from '@bearer/core';
+  "postContent": "import { Prop } from \\"@bearer/core\\";
+import { Component, Intent, BearerFetch } from '@bearer/core';
 @Component({
     tag: 'list-repositories',
     styleUrl: 'ListRepositories.css',
@@ -15,6 +16,7 @@ export class ListRepositories {
         return <bearer-scrollable fetcher={this.fetcher}/>;
     }
     constructor() { Intent('ListRepositories')(this, \\"fetcher\\"); }
+    get SCENARIO_ID() { return \\"SPONGE_BOB\\"; }
     @Prop()
     BEARER_ID: string;
     @Prop({ \\"context\\": \\"bearer\\" })

@@ -15,6 +15,7 @@ const transpiler = new Transpiler(
 
 describe('Transpiler integration test', () => {
   beforeAll(() => {
+    process.env.BEARER_SCENARIO_ID = 'SPONGE_BOB'
     fs.readdirSync(postFolder).forEach(file => {
       if (file !== 'tsconfig.json') {
         fs.unlinkSync(path.join(postFolder, file))
