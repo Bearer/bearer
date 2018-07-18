@@ -72,7 +72,7 @@ class StateIntentBase extends BaseIntent {
 
 export class SaveState extends StateIntentBase {
   static get display() {
-    return 'SaveState => Save the State'
+    return 'SaveState'
   }
 
   static intent(action) {
@@ -131,7 +131,7 @@ export class SaveState extends StateIntentBase {
 
 export class RetrieveState extends StateIntentBase {
   static get display() {
-    return 'RetrieveState => Retrieve the State'
+    return 'RetrieveState'
   }
 
   static intent(action) {
@@ -162,7 +162,7 @@ export class RetrieveState extends StateIntentBase {
 
 export class GetCollection extends GenericIntentBase {
   static get display() {
-    return 'GetCollection => Retrieve a Collection'
+    return 'GetCollection'
   }
 
   static intent(action) {
@@ -175,7 +175,7 @@ export class GetCollection extends GenericIntentBase {
 
 export class GetObject extends GenericIntentBase {
   static get display() {
-    return 'GetObject => Retrieve one Resource'
+    return 'GetObject'
   }
 
   static intent(action) {
