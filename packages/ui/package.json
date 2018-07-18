@@ -11,7 +11,7 @@
     "dist/"
   ],
   "scripts": {
-    "build-storybook": "stencil build && build-storybook -s www",
+    "build:storybook": "stencil build && build-storybook -s www",
     "storybook": "start-storybook -p 9006 -s www",
     "build": "stencil build",
     "dev": "stencil build --dev --watch --serve",
