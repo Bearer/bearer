@@ -25,7 +25,6 @@
   "dependencies": {
     "@bearer/core": "^0.17.4",
     "@stencil/core": "0.10.2",
-    "@stencil/redux": "^0.0.4",
     "@stencil/sass": "^0.0.5",
     "bootstrap": "^4.1.0"
   },
