@@ -35,6 +35,12 @@ export const STATE_CLIENT = axios.create({
 })
 
 class BaseIntent {
+  static display(): string {
+    throw new Error(
+      'Extending class needs to implement `static intent(action)` method'
+    )
+  }
+
   static intent(
     action
   ): (event: any, context: any, callback: (...args: any[]) => any) => any {
@@ -65,6 +71,10 @@ class StateIntentBase extends BaseIntent {
 }
 
 export class SaveState extends StateIntentBase {
+  static display() {
+    return 'SaveState => Save the State'
+  }
+
   static intent(action) {
     return (event, _context, callback) => {
       const { referenceId } = event.queryStringParameters
@@ -120,6 +130,10 @@ export class SaveState extends StateIntentBase {
 }
 
 export class RetrieveState extends StateIntentBase {
+  static display() {
+    return 'RetrieveState => Retrieve the State'
+  }
+
   static intent(action) {
     return (event, _context, callback) => {
       const { referenceId } = event.queryStringParameters
@@ -147,6 +161,10 @@ export class RetrieveState extends StateIntentBase {
 }
 
 export class GetCollection extends GenericIntentBase {
+  static display() {
+    return 'GetCollection => Retrieve a Collection'
+  }
+
   static intent(action) {
     return (event, _context, callback) =>
       action(event.context, event.queryStringParameters, result => {
@@ -156,6 +174,10 @@ export class GetCollection extends GenericIntentBase {
 }
 
 export class GetObject extends GenericIntentBase {
+  static display() {
+    return 'GetObject => Retrieve one Resource'
+  }
+
   static intent(action) {
     return (event, _context, callback) =>
       action(event.context, event.queryStringParameters, result => {

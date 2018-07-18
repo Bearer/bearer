@@ -121,7 +121,7 @@ const globalChoices = Object.keys(intents)
   .filter(intent => typeof intents[intent].isGlobalIntent !== 'undefined')
   .filter(intent => intents[intent].isGlobalIntent())
   .map(intent => ({
-    name: intent,
+    name: intents[intent].display(),
     value: intent
   }))
   .sort((a, b) => (a.name > b.name))
@@ -130,12 +130,14 @@ const stateChoices = Object.keys(intents)
   .filter(intent => typeof intents[intent].isStateIntent !== 'undefined')
   .filter(intent => intents[intent].isStateIntent())
   .map(intent => ({
-    name: intent,
+    name: intents[intent].display(),
     value: intent
   }))
   .sort((a, b) => (a.name > b.name))
 
-const choices = globalChoices.concat(stateChoices)
+const choices = globalChoices
+  .concat([new inquirer.Separator()])
+  .concat(stateChoices)
 
 function getActionExample(intentType, authType) {
   return templates[authType][intentType]
