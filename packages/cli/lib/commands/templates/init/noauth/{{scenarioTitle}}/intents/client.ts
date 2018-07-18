@@ -1,10 +1,14 @@
 import axios from 'axios'
 
-export const CLIENT = axios.create({
-  baseURL: 'https://swapi.co/api/',
-  timeout: 5000,
-  headers: {
-    Accept: 'application/json',
+export default function() {
+  const headers = {
+    'Accept': 'application/json',
     'User-Agent': 'Bearer'
   }
-})
+
+  return axios.create({
+    baseURL: 'https://api.example.com/v1',
+    timeout: 5000,
+    headers
+  })
+}
