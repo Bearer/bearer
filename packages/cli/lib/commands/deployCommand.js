@@ -19,7 +19,6 @@ const deploy = (emitter, config) => async ({ path = '.' }) => {
   const { OrgId } = mergedConfig
 
   const inquireScenarioTitle = () => {
-    emitter.emit('scenarioTitle:missing')
     return inquirer.prompt([
       {
         message: 'Scenario title (e.g. attachPullRequest)?',
@@ -29,6 +28,7 @@ const deploy = (emitter, config) => async ({ path = '.' }) => {
     ])
   }
   if (!scenarioTitle) {
+    emitter.emit('scenarioTitle:missing')
     try {
       const answers = await inquireScenarioTitle()
       scenarioTitle = answers.scenarioTitle

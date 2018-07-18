@@ -4,10 +4,9 @@ require('../scripts/check-version')
 const { version } = require('../package.json')
 const { CLI } = require('../lib/cli')
 const setupConfig = require('../lib/setupConfig')
+const Emitter = require('../lib/emitter')
 
-const EventEmitter = require('events')
-
-const emitter = new EventEmitter()
+const emitter = new Emitter()
 const inquirer = require('inquirer')
 
 const config = setupConfig()
