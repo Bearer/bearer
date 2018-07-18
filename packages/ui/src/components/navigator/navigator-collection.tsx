@@ -41,7 +41,7 @@ export class BearerNavigatorCollection {
   }
 
   defaultRender: TMemberRenderer<TMember> = (member: TMember) =>
-    member['displayMemberProp']
+    member[this.displayMemberProp]
 
   render() {
     if (this.collection.length === 0) {
