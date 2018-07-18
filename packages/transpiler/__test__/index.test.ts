@@ -5,13 +5,12 @@ import { idText } from 'typescript'
 
 const fixtures = path.join(__dirname, '__fixtures__')
 const preFolder = path.join(fixtures, 'pre')
-const postFolder = path.join(fixtures, 'post')
-const postExpectFolder = path.join(fixtures, 'post-expectations')
+const postFolder = path.join(fixtures, '../../.build')
 
 const transpiler = new Transpiler(
   __dirname + '/__fixtures__/pre/',
   false,
-  '../post/'
+  '../../../.build/'
 )
 
 describe('Transpiler integration test', () => {
@@ -33,17 +32,15 @@ describe('Transpiler integration test', () => {
           done()
         })
       })
+
       it('match expectation', done => {
         expect.assertions(1)
         fs.readFile(path.join(postFolder, file), 'utf8', (e, postContent) => {
-          fs.readFile(
-            path.join(postExpectFolder, file),
-            'utf8',
-            (e, postContentExpected) => {
-              expect(postContent).toMatch(postContentExpected)
-              done()
-            }
-          )
+          expect({
+            postContent,
+            file
+          }).toMatchSnapshot()
+          done()
         })
       })
     })

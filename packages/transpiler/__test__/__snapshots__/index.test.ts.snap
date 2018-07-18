@@ -1,0 +1,38 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Transpiler integration test FullComponent.tsx match expectation 1`] = `
+Object {
+  "file": "FullComponent.tsx",
+  "postContent": "import { Component, Intent, BearerFetch } from '@bearer/core';
+@Component({
+    tag: 'list-repositories',
+    styleUrl: 'ListRepositories.css',
+    shadow: true
+})
+export class ListRepositories {
+    private fetcher: BearerFetch;
+    render() {
+        return <bearer-scrollable fetcher={this.fetcher}/>;
+    }
+    constructor() { Intent('ListRepositories')(this, \\"fetcher\\"); }
+    @Prop()
+    BEARER_ID: string;
+    @Prop({ \\"context\\": \\"bearer\\" })
+    bearerContext: any;
+    @Prop()
+    setupId: string;
+    componentDidLoad() { if (this.setupId) {
+        this.bearerContext.setupId = this.setupId;
+    } }
+}
+",
+}
+`;
+
+exports[`Transpiler integration test exportObject.ts match expectation 1`] = `
+Object {
+  "file": "exportObject.ts",
+  "postContent": "export default {};
+",
+}
+`;
