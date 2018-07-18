@@ -207,7 +207,7 @@ function inImportClause(node: ts.ImportClause, libName: string): boolean {
 export function hasImport(node: ts.Node, libName: string): boolean {
   let has = false
   function visit(node: ts.Node) {
-    if (node.kind === ts.SyntaxKind.ImportDeclaration) {
+    if (ts.isImportDeclaration(node)) {
       let n = node as ts.ImportDeclaration
       has =
         has ||

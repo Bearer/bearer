@@ -134,12 +134,6 @@
     opn "^5.1.0"
     tiny-lr "^1.0.5"
 
-"@stencil/redux@^0.0.4":
-  version "0.0.4"
-  resolved "https://registry.yarnpkg.com/@stencil/redux/-/redux-0.0.4.tgz#eb4a003b4c48b431206fea272df06d941a6736a5"
-  dependencies:
-    path-to-regexp "^1.7.0"
-
 "@stencil/sass@^0.0.5":
   version "0.0.5"
   resolved "https://registry.yarnpkg.com/@stencil/sass/-/sass-0.0.5.tgz#eaa5145c2b46c64a6fce9629a3f3fca43a0bd1ab"
@@ -6493,12 +6487,6 @@ path-parse@^1.0.5:
 path-to-regexp@0.1.7:
   version "0.1.7"
   resolved "https://registry.yarnpkg.com/path-to-regexp/-/path-to-regexp-0.1.7.tgz#df604178005f522f15eb4490e7247a1bfaa67f8c"
-
-path-to-regexp@^1.7.0:
-  version "1.7.0"
-  resolved "https://registry.yarnpkg.com/path-to-regexp/-/path-to-regexp-1.7.0.tgz#59fde0f435badacba103a84e9d3bc64e96b9937d"
-  dependencies:
-    isarray "0.0.1"
 
 path-type@^1.0.0:
   version "1.1.0"

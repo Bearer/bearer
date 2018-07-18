@@ -73,17 +73,6 @@ const bundles = [
       file: 'dist/plugins.js',
       format: 'cjs'
     }
-  },
-  {
-    input: 'src/state.ts',
-    output: {
-      file: 'dist/state.js',
-      format: 'es'
-    },
-    plugins: [
-      ...plugins(),
-      copy({ 'src/declarations': 'dist/declarations', verbose: true })
-    ]
   }
 ]
 

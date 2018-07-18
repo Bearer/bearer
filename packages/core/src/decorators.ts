@@ -14,6 +14,24 @@ export {
   FunctionalComponent
 } from '@stencil/core/dist/declarations'
 
+/**
+ *  BearerState Decorator
+ */
+
+export interface IBearerStateDecoratorOptions {
+  mappedPropperty?: string
+}
+
+export interface IBearerStateDecorator<T> {
+  (options?: IBearerStateDecoratorOptions): T
+}
+
+/**
+ *  Component Decorator
+ */
+
+export declare const BearerState: IBearerStateDecorator<any>
+
 export enum BearerComponentRoleEnum {
   Display = 'display',
   Action = 'action'

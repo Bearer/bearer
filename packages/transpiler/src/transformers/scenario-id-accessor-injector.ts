@@ -18,21 +18,18 @@ export default function ComponentTransformer({
   return transformContext => {
     function visit(node: ts.Node): ts.VisitResult<ts.Node> {
       // TODO: filter components which really need it
-      switch (node.kind) {
-        case ts.SyntaxKind.ClassDeclaration: {
-          if (
-            decorator.classDecoratedWithName(
-              node as ts.ClassDeclaration,
-              'Component'
-            )
-          ) {
-            return ts.visitEachChild(
-              bearer.addBearerScenarioIdAccessor(node as ts.ClassDeclaration),
-              visit,
-              transformContext
-            )
-          }
-        }
+      if (
+        ts.isClassDeclaration(node) &&
+        decorator.classDecoratedWithName(
+          node as ts.ClassDeclaration,
+          'Component'
+        )
+      ) {
+        return ts.visitEachChild(
+          bearer.addBearerScenarioIdAccessor(node as ts.ClassDeclaration),
+          visit,
+          transformContext
+        )
       }
       return ts.visitEachChild(node, visit, transformContext)
     }

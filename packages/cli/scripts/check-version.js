@@ -2,7 +2,7 @@ const semver = require('semver')
 const term = require('terminal-kit').terminal
 const updateNotifier = require('update-notifier')
 
-const pkg = require('../package.json')
+const pkg = require('../../package.json')
 const version = pkg.engines.node
 
 // Check if a new version is available

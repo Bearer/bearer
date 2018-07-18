@@ -16,7 +16,8 @@ export class Button {
     | 'warning'
     | 'info'
     | 'light'
-    | 'dark'
+    | 'dark' =
+    'primary'
   @Prop() size: 'md' | 'sm' | 'lg' = 'md'
   @Prop() as: string = 'button'
 

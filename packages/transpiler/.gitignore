@@ -3,3 +3,4 @@ node_modules
 .rpt2_cache
 dist/
 .build/
+**/__fixtures__/post/**

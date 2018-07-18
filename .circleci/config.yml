@@ -49,7 +49,7 @@ jobs:
           command: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > ~/repo/.npmrc
       - run:
           name: Build Storybook
-          command: yarn run lerna run build-storybook --scope=@bearer/ui
+          command: yarn run lerna run build:storybook --scope=@bearer/ui
       - run:
           name: Prepare deploy
           command: aws configure set default.s3.signature_version s3v4

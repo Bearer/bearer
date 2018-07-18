@@ -38,23 +38,18 @@ export default function ComponentTransformer({
 }: TransformerOptions = {}): ts.TransformerFactory<ts.SourceFile> {
   return transformContext => {
     function visit(node: ts.Node): ts.VisitResult<ts.Node> {
-      switch (node.kind) {
-        case ts.SyntaxKind.ClassDeclaration: {
-          if (
-            decorator.classDecoratedWithName(
-              node as ts.ClassDeclaration,
-              'Component'
-            )
-          ) {
-            return ts.visitEachChild(
-              injectContext(node as ts.ClassDeclaration),
-              visit,
-              transformContext
-            )
-          } else {
-            return ts.visitEachChild(node, visit, transformContext)
-          }
-        }
+      if (
+        ts.isClassDeclaration(node) &&
+        decorator.classDecoratedWithName(
+          node as ts.ClassDeclaration,
+          'Component'
+        )
+      ) {
+        return ts.visitEachChild(
+          injectContext(node as ts.ClassDeclaration),
+          visit,
+          transformContext
+        )
       }
       return ts.visitEachChild(node, visit, transformContext)
     }
