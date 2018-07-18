@@ -26,6 +26,7 @@ export class Intent {
 }
 
 export const STATE_CLIENT = axios.create({
+  baseURL: 'https://int.staging.bearer.sh',
   timeout: 5000,
   headers: {
     Accept: 'application/json',
