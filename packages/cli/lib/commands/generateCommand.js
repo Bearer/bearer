@@ -118,7 +118,6 @@ async function generateScreen({ emitter, rootPathRc }) {
 }
 
 const globalChoices = Object.keys(intents)
-  .filter(intent => typeof intents[intent].isGlobalIntent !== 'undefined')
   .filter(intent => intents[intent].isGlobalIntent)
   .map(intent => ({
     name: intents[intent].display,
@@ -127,7 +126,6 @@ const globalChoices = Object.keys(intents)
   .sort((a, b) => (a.name > b.name))
 
 const stateChoices = Object.keys(intents)
-  .filter(intent => typeof intents[intent].isStateIntent !== 'undefined')
   .filter(intent => intents[intent].isStateIntent)
   .map(intent => ({
     name: intents[intent].display,
