@@ -52,7 +52,7 @@ const deploy = (emitter, config) => async ({ path = '.' }) => {
 
   try {
     await deployScenario({ path, scenarioUuid }, emitter, config)
-    const setupUrl = `https://demo.bearer.tech/?scenarioUuid=${scenarioUuid}&scenarioTagName=${scenarioTitle}&name=${scenarioTitle}&orgId=${OrgId}&stage=${BearerEnv}`
+    const setupUrl = `https://app.bearer.sh/scenarios/${scenarioUuid}/preview`
 
     emitter.emit('deploy:finished', {
       scenarioUuid,
