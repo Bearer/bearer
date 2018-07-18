@@ -188,12 +188,14 @@ const start = (emitter, config) => async ({ open, install, watcher }) => {
     })
 
     /* start local development server */
-    const integrationHost = await startLocalDevelopmentServer(
-      rootLevel,
-      scenarioUuid,
-      emitter,
-      config
-    )
+    // const integrationHost = await startLocalDevelopmentServer(
+    //   rootLevel,
+    //   scenarioUuid,
+    //   emitter,
+    //   config
+    // )
+
+    const integrationHost = 'https://int.staging.bearer.sh/'
 
     ensureSetupAndConfigComponents(rootLevel)
 
