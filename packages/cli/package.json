@@ -16,7 +16,7 @@
   },
   "scripts": {
     "start": "yarn build",
-    "templates": "copyfiles \"./templates/**/*\" dist/lib/commands/",
+    "templates": "copyfiles \"./templates/**/*\" dist/src/lib/commands/",
     "build": "yarn templates && tsc -p tsconfig.json",
     "prepublish": "yarn build",
     "prepublishOnly": "yarn build",
