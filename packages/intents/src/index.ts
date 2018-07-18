@@ -44,7 +44,27 @@ class BaseIntent {
   }
 }
 
-export class SaveState extends BaseIntent {
+class GenericIntentBase extends BaseIntent {
+  static isStateIntent(): boolean {
+    return false 
+  }
+
+  static isGlobalIntent(): boolean {
+    return true
+  }
+}
+
+class StateIntentBase extends BaseIntent {
+  static isStateIntent(): boolean {
+    return true 
+  }
+
+  static isGlobalIntent(): boolean {
+    return false 
+  }
+}
+
+export class SaveState extends StateIntentBase {
   static intent(action) {
     return (event, _context, callback) => {
       const { referenceId } = event.queryStringParameters
@@ -99,7 +119,7 @@ export class SaveState extends BaseIntent {
   }
 }
 
-export class RetrieveState extends BaseIntent {
+export class RetrieveState extends StateIntentBase {
   static intent(action) {
     return (event, _context, callback) => {
       const { referenceId } = event.queryStringParameters
@@ -126,7 +146,7 @@ export class RetrieveState extends BaseIntent {
   }
 }
 
-export class GetCollection extends BaseIntent {
+export class GetCollection extends GenericIntentBase {
   static intent(action) {
     return (event, _context, callback) =>
       action(event.context, event.queryStringParameters, result => {
@@ -135,7 +155,7 @@ export class GetCollection extends BaseIntent {
   }
 }
 
-export class GetObject extends BaseIntent {
+export class GetObject extends GenericIntentBase {
   static intent(action) {
     return (event, _context, callback) =>
       action(event.context, event.queryStringParameters, result => {
