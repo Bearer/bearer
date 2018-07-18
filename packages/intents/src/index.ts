@@ -35,7 +35,7 @@ export const STATE_CLIENT = axios.create({
 })
 
 class BaseIntent {
-  static display(): string {
+  static get display(): string {
     throw new Error(
       'Extending class needs to implement `static intent(action)` method'
     )
@@ -51,27 +51,27 @@ class BaseIntent {
 }
 
 class GenericIntentBase extends BaseIntent {
-  static isStateIntent(): boolean {
+  static get isStateIntent(): boolean {
     return false 
   }
 
-  static isGlobalIntent(): boolean {
+  static get isGlobalIntent(): boolean {
     return true
   }
 }
 
 class StateIntentBase extends BaseIntent {
-  static isStateIntent(): boolean {
+  static get isStateIntent(): boolean {
     return true 
   }
 
-  static isGlobalIntent(): boolean {
+  static get isGlobalIntent(): boolean {
     return false 
   }
 }
 
 export class SaveState extends StateIntentBase {
-  static display() {
+  static get display() {
     return 'SaveState => Save the State'
   }
 
@@ -130,7 +130,7 @@ export class SaveState extends StateIntentBase {
 }
 
 export class RetrieveState extends StateIntentBase {
-  static display() {
+  static get display() {
     return 'RetrieveState => Retrieve the State'
   }
 
@@ -161,7 +161,7 @@ export class RetrieveState extends StateIntentBase {
 }
 
 export class GetCollection extends GenericIntentBase {
-  static display() {
+  static get display() {
     return 'GetCollection => Retrieve a Collection'
   }
 
@@ -174,7 +174,7 @@ export class GetCollection extends GenericIntentBase {
 }
 
 export class GetObject extends GenericIntentBase {
-  static display() {
+  static get display() {
     return 'GetObject => Retrieve one Resource'
   }
 
