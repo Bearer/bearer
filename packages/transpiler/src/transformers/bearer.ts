@@ -279,8 +279,14 @@ function ensureHasImportFromCore(
 export function ensureBearerContextInjected(
   classNode: ts.ClassDeclaration
 ): ts.ClassDeclaration {
-  // TODO: return classNode if already present
-  return addBearerContextProp(classNode)
+  const has: boolean = ts.forEachChild(
+    classNode,
+    node =>
+      ts.isPropertyDeclaration(node) &&
+      node.name['escapedText'] == Component.bearerContext
+  )
+
+  return has ? classNode : addBearerContextProp(classNode)
 }
 
 export function ensureWatchImported(

@@ -3,7 +3,7 @@
  */
 import * as ts from 'typescript'
 import { propDecoratedWithName } from './decorator-helpers'
-import { ensureWatchImported } from './bearer'
+import { ensureWatchImported, ensureBearerContextInjected } from './bearer'
 import { Decorators, Component } from './constants'
 
 type TransformerOptions = {
@@ -27,7 +27,7 @@ export default function BearerStateInjector({
       function visit(node: ts.Node): ts.VisitResult<ts.Node> {
         if (ts.isClassDeclaration(node)) {
           // Ensures we have context available
-          const withInjectedContext = ensureInjectedContext(node)
+          const withInjectedContext = ensureBearerContextInjected(node)
 
           // Inject prop watcher
           const withInjectedWatcher = injectPropertyWatcher(withInjectedContext)
@@ -92,16 +92,6 @@ function injectStateUpdateLogic(
       )
     ]
   )
-}
-
-/**
- * TODO
- */
-
-function ensureInjectedContext(
-  classNode: ts.ClassDeclaration
-): ts.ClassDeclaration {
-  return classNode
 }
 
 /**
