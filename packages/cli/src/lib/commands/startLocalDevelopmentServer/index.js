@@ -6,8 +6,8 @@ const unzip = require('unzip')
 const fs = require('fs-extra')
 const cosmiconfig = require('cosmiconfig')
 
-const LOCAL_INTENTS_DEV_CONFIGURATION = 'devIntents'
-const explorer = cosmiconfig(LOCAL_INTENTS_DEV_CONFIGURATION)
+const LOCAL_DEV_CONFIGURATION = 'dev'
+const explorer = cosmiconfig(LOCAL_DEV_CONFIGURATION)
 
 const router = new Router({ prefix: '/api/v1/' })
 
