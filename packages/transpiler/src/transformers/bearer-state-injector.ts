@@ -4,9 +4,14 @@
 import * as ts from 'typescript'
 import {
   propDecoratedWithName,
-  hasPropDecoratedWithName
+  hasPropDecoratedWithName,
+  hasDecoratorNamed
 } from './decorator-helpers'
-import { ensureWatchImported, ensureBearerContextInjected } from './bearer'
+import {
+  ensureWatchImported,
+  ensureBearerContextInjected,
+  ensurePropImported
+} from './bearer'
 import { Decorators, Component } from './constants'
 
 /**
@@ -33,16 +38,23 @@ export default function BearerStateInjector({
 
       const propsDecorator = extractDecoratedPropertyInformation(tsSourceFile)
       // Inject Imports if needed: Watch
-      const preparedSourceFile = ensureWatchImported(tsSourceFile)
+      const preparedSourceFile = ensurePropImported(
+        ensureWatchImported(tsSourceFile)
+      )
 
       function visit(node: ts.Node): ts.VisitResult<ts.Node> {
         if (ts.isClassDeclaration(node)) {
           // Ensures we have context available
           const withInjectedContext = ensureBearerContextInjected(node)
 
+          // Append @Prop() decorator to before @BearerState
+          const withPropDecoratorToDeclaration = addPropDecoratorToPropDeclaration(
+            withInjectedContext
+          )
+
           // Inject prop watcher
           const withInjectedWatcher = injectPropertyWatcher(
-            withInjectedContext,
+            withPropDecoratorToDeclaration,
             propsDecorator
           )
 
@@ -55,6 +67,7 @@ export default function BearerStateInjector({
             withComponentLifecyleHooked,
             propsDecorator
           )
+
           return bearerStateReadyComponent
         }
         return ts.visitEachChild(node, visit, transformContext)
@@ -238,6 +251,53 @@ function injectPropertyWatcher(
       )
     ]
   )
+}
+/**
+ * Add @Prop() before @BearerState
+ * withPropDecoratorToDeclaration
+ */
+
+function addPropDecoratorToPropDeclaration(
+  classNode: ts.ClassDeclaration
+): ts.ClassDeclaration {
+  return ts.updateClassDeclaration(
+    classNode,
+    classNode.decorators,
+    classNode.modifiers,
+    classNode.name,
+    classNode.typeParameters,
+    classNode.heritageClauses,
+    classNode.members.map(appendPropDecoratorIdNeeded)
+  )
+}
+
+function appendPropDecoratorIdNeeded(
+  element: ts.ClassElement
+): ts.ClassElement {
+  if (
+    ts.isPropertyDeclaration(element) &&
+    hasDecoratorNamed(element as ts.PropertyDeclaration, Decorators.BearerState)
+  ) {
+    return ts.updateProperty(
+      element,
+      [
+        ...element.decorators,
+        ts.createDecorator(
+          ts.createCall(
+            ts.createIdentifier(Decorators.Prop),
+            undefined,
+            undefined
+          )
+        )
+      ],
+      element.modifiers,
+      element.name,
+      element.questionToken,
+      element.type,
+      element.initializer
+    )
+  }
+  return element
 }
 
 /**

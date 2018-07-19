@@ -54,7 +54,7 @@ export function propDecoratedWithName(
   return props
 }
 
-function hasDecoratorNamed(
+export function hasDecoratorNamed(
   propDeclaration: ts.PropertyDeclaration,
   name: string
 ): boolean {

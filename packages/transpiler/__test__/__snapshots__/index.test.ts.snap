@@ -10,9 +10,11 @@ Object {
 export class FullComponent {
     private fetcher: BearerFetch;
     @BearerState()
+    @Prop()
     attachedPullRequests: Array<any>;
-    @BearerState({ statePropName: 'whatever' })
-    somethingElse: Array<any>;
+    @BearerState({ statePropName: 'goats' })
+    @Prop()
+    ducks: Array<any>;
     private fetchResource: BearerFetch;
     render() {
         return <bearer-scrollable fetcher={this.fetcher}/>;
@@ -30,11 +32,11 @@ export class FullComponent {
     } }
     @Watch(\\"attachedPullRequests\\")
     _notifyBearerStateHandler(newValue) { this.bearerContext.update(\\"attachedPullRequests\\", newValue); }
-    @Watch(\\"somethingElse\\")
-    _notifyBearerStateHandler(newValue) { this.bearerContext.update('whatever', newValue); }
+    @Watch(\\"ducks\\")
+    _notifyBearerStateHandler(newValue) { this.bearerContext.update('goats', newValue); }
     componentWillLoad() { this.bearerContext.subscribe(this); }
     componentDidUnload() { this.bearerContext.unsubscribe(this); }
-    bearerUpdateFromState = state => { this.attachedPullRequests = state[\\"attachedPullRequests\\"]; this.somethingElse = state['whatever']; };
+    bearerUpdateFromState = state => { this.attachedPullRequests = state[\\"attachedPullRequests\\"]; this.ducks = state['goats']; };
 }
 ",
 }
