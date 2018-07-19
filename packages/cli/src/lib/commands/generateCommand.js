@@ -117,7 +117,7 @@ async function generateScreen({ emitter, rootPathRc }) {
   })
 }
 
-const choices = (intents, propertyFlag) =>
+const filteredChoices = (intents, propertyFlag) =>
   Object.keys(intents)
     .filter(intent => intents[intent][propertyFlag])
     .map(intent => ({
@@ -126,10 +126,10 @@ const choices = (intents, propertyFlag) =>
     }))
     .sort((a, b) => a.name > b.name)
 
-const allChoices = [
-  ...choices(intents, 'isGlobalIntent'),
+const choices = [
+  ...filteredChoices(intents, 'isGlobalIntent'),
   new inquirer.Separator(),
-  ...choices(intents, 'isStateIntent')
+  ...filteredChoices(intents, 'isStateIntent')
 ]
 
 function getActionExample(intentType, authType) {
@@ -142,7 +142,7 @@ async function generateIntent({ emitter, rootPathRc }) {
       message: 'What type of intent do you want to generate',
       type: 'list',
       name: 'intentType',
-      allChoices
+      choices
     }
   ])
   const name = await askForName()
