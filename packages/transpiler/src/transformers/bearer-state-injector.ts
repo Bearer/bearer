@@ -10,7 +10,7 @@ import {
 import {
   ensureWatchImported,
   ensureBearerContextInjected,
-  ensurePropImported
+  ensureStateImported
 } from './bearer'
 import { Decorators, Component } from './constants'
 
@@ -38,7 +38,7 @@ export default function BearerStateInjector({
 
       const propsDecorator = extractDecoratedPropertyInformation(tsSourceFile)
       // Inject Imports if needed: Watch
-      const preparedSourceFile = ensurePropImported(
+      const preparedSourceFile = ensureStateImported(
         ensureWatchImported(tsSourceFile)
       )
 
@@ -267,11 +267,11 @@ function addPropDecoratorToPropDeclaration(
     classNode.name,
     classNode.typeParameters,
     classNode.heritageClauses,
-    classNode.members.map(appendPropDecoratorIdNeeded)
+    classNode.members.map(appendStateDecoratorIfNeeded)
   )
 }
 
-function appendPropDecoratorIdNeeded(
+function appendStateDecoratorIfNeeded(
   element: ts.ClassElement
 ): ts.ClassElement {
   if (
@@ -284,7 +284,7 @@ function appendPropDecoratorIdNeeded(
         ...element.decorators,
         ts.createDecorator(
           ts.createCall(
-            ts.createIdentifier(Decorators.Prop),
+            ts.createIdentifier(Decorators.State),
             undefined,
             undefined
           )

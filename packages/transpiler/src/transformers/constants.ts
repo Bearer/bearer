@@ -1,7 +1,8 @@
 export const Decorators = {
-  Watch: 'Watch',
-  Prop: 'Prop',
   Component: 'Component',
+  Prop: 'Prop',
+  State: 'State',
+  Watch: 'Watch',
   BearerState: 'BearerState',
   Intent: 'Intent'
 }

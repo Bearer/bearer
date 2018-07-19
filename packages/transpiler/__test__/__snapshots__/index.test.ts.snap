@@ -3,17 +3,17 @@
 exports[`Transpiler integration test FullComponent.tsx match expectation 1`] = `
 Object {
   "file": "FullComponent.tsx",
-  "postContent": "import { Component, Intent, BearerFetch, IntentType, BearerState, Prop, Watch } from '@bearer/core';
+  "postContent": "import { Component, Intent, BearerFetch, IntentType, BearerState, Prop, Watch, State } from '@bearer/core';
 @Component({
     tag: 'full-component'
 })
 export class FullComponent {
     private fetcher: BearerFetch;
     @BearerState()
-    @Prop()
+    @State()
     attachedPullRequests: Array<any>;
     @BearerState({ statePropName: 'goats' })
-    @Prop()
+    @State()
     ducks: Array<any>;
     private fetchResource: BearerFetch;
     render() {

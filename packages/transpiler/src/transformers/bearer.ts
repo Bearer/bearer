@@ -299,6 +299,12 @@ export function ensurePropImported(tsSourceFile: ts.SourceFile): ts.SourceFile {
   return ensureHasImportFromCore(tsSourceFile, Decorators.Prop)
 }
 
+export function ensureStateImported(
+  tsSourceFile: ts.SourceFile
+): ts.SourceFile {
+  return ensureHasImportFromCore(tsSourceFile, Decorators.State)
+}
+
 function propDecorator() {
   return ts.createDecorator(
     ts.createCall(
