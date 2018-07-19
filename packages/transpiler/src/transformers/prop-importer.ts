@@ -27,6 +27,7 @@ export default function PropImporter({
         bearer.hasImport(tsSourceFile, 'Component') &&
         !bearer.hasImport(tsSourceFile, 'Prop')
       ) {
+        // TODO: update if existing one
         return ts.updateSourceFileNode(tsSourceFile, [
           ts.createImportDeclaration(
             undefined,
