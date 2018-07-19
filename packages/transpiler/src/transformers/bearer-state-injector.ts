@@ -12,6 +12,8 @@ import { Decorators, Component } from './constants'
 /**
  * TODOS:
  *  * add typing on newValue parameter of the watch handler
+ *  * create or update method declarations componentWillLoad componentDidUnload
+ *  * create or update watcher if one already exist
  */
 
 type TransformerOptions = {
@@ -120,7 +122,6 @@ function injectStateUpdateLogic(
 function updateComponentLifecycle(
   classNode: ts.ClassDeclaration
 ): ts.ClassDeclaration {
-  // TODO: override and append if it exists
   const componentWillLoad = ts.createCall(
     ts.createPropertyAccess(
       ts.createThis(),
@@ -181,7 +182,6 @@ function injectPropertyWatcher(
   classNode: ts.ClassDeclaration,
   propsDecoratedMeta: Array<IDecoratedPropInformation>
 ): ts.ClassDeclaration {
-  // TODO: override if one already exist
   return ts.updateClassDeclaration(
     classNode,
     classNode.decorators,
@@ -240,7 +240,6 @@ function injectPropertyWatcher(
   )
 }
 
-// function getDecoratedProp(classNode: ts.ClassDeclaration): null |
 /**
  *  Not a declaration file and contains a @BearerState propertyDecorator
  */
@@ -256,10 +255,12 @@ function needProcessing(sourceFile: ts.SourceFile): boolean {
       hasPropDecoratedWithName(node, Decorators.BearerState)
   )
 }
+
 interface IDecoratedPropInformation {
   componentPropName: string
   statePropName: string
 }
+
 function extractDecoratedPropertyInformation(
   tsSourceFile: ts.SourceFile
 ): Array<IDecoratedPropInformation> {
