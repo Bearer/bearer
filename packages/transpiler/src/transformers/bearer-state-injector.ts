@@ -98,7 +98,15 @@ function needProcessing(sourceFile: ts.SourceFile): boolean {
     return false
   }
 
-  const shouldProcess = false
+  let shouldProcess = false
+  ts.forEachChild(sourceFile, node => {
+    if (ts.isClassDeclaration(node)) {
+      shouldProcess = propDecoratedWithName(
+        node as ts.ClassDeclaration,
+        'BearerState'
+      )
+    }
+  })
 
   return shouldProcess
 }
