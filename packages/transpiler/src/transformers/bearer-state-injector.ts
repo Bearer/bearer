@@ -71,28 +71,66 @@ function ensureInjectedContext(
 }
 
 /**
- * TODO
+ * Add subscription methods to component lifecycle
  */
-
 function updateComponentLifecycle(
   classNode: ts.ClassDeclaration
 ): ts.ClassDeclaration {
-  // componentWillLoad() {
-  //   this.context.subscribe(this)
-  // }
-  // componentDidUnload() {
-  //   this.context.unsubscribe(this)
-  // }
-  return classNode
+  // TODO: override and append if it exists
+  const componentWillLoad = ts.createCall(
+    ts.createPropertyAccess(ts.createThis(), 'context.subscribe'),
+    undefined,
+    [ts.createThis()]
+  )
+
+  const componentDidUnload = ts.createCall(
+    ts.createPropertyAccess(ts.createThis(), 'context.unsubscribe'),
+    undefined,
+    [ts.createThis()]
+  )
+
+  return ts.updateClassDeclaration(
+    classNode,
+    classNode.decorators,
+    classNode.modifiers,
+    classNode.name,
+    classNode.typeParameters,
+    classNode.heritageClauses,
+    [
+      ...classNode.members,
+      ts.createMethod(
+        undefined,
+        undefined,
+        undefined,
+        'componentWillLoad',
+        undefined,
+        undefined,
+        undefined,
+        undefined,
+        ts.createBlock([ts.createStatement(componentWillLoad)])
+      ),
+      ts.createMethod(
+        undefined,
+        undefined,
+        undefined,
+        'componentDidUnload',
+        undefined,
+        undefined,
+        undefined,
+        undefined,
+        ts.createBlock([ts.createStatement(componentDidUnload)])
+      )
+    ]
+  )
 }
 
 /**
  * Add or update State Watcher
  */
-
 function injectPropertyWatcher(
   classNode: ts.ClassDeclaration
 ): ts.ClassDeclaration {
+  // TODO: make it dynamic
   const propName = 'propName'
   // TODO: override if one already exist
   return ts.updateClassDeclaration(
