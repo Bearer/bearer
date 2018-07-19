@@ -48,8 +48,7 @@ export default function BearerStateInjector({
 }
 
 /**
- * TODO
- *
+ * Inject methods to auto update component
  */
 function injectStateUpdateLogic(
   classNode: ts.ClassDeclaration
@@ -89,17 +88,6 @@ function injectStateUpdateLogic(
           ])
         )
       )
-      // ts.createMethod(
-      //   undefined,
-      //   undefined,
-      //   undefined,
-      //   'componentWillLoad',
-      //   undefined,
-      //   undefined,
-      //   undefined,
-      //   undefined,
-      //   ts.createBlock([ts.createStatement(componentWillLoad)])
-      // )
     ]
   )
 }
