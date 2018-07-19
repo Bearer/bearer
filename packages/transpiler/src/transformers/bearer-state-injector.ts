@@ -50,7 +50,8 @@ export default function BearerStateInjector({
           )
           // Add update logic method
           const bearerStateReadyComponent = injectStateUpdateLogic(
-            withComponentLifecyleHooked
+            withComponentLifecyleHooked,
+            propsDecorator
           )
           return bearerStateReadyComponent
         }
@@ -66,12 +67,9 @@ export default function BearerStateInjector({
  * Inject methods to auto update component
  */
 function injectStateUpdateLogic(
-  classNode: ts.ClassDeclaration
+  classNode: ts.ClassDeclaration,
+  propsDecoratedMeta: Array<IDecoratedPropInformation>
 ): ts.ClassDeclaration {
-  // TODO : dynamic propName / dynamic statePropName
-  const propName = 'attachedPullRequests'
-  const statePropName = 'attachedPullRequests'
-
   return ts.updateClassDeclaration(
     classNode,
     classNode.decorators,
@@ -81,6 +79,7 @@ function injectStateUpdateLogic(
     classNode.heritageClauses,
     [
       ...classNode.members,
+
       ts.createProperty(
         undefined,
         undefined,
@@ -93,14 +92,22 @@ function injectStateUpdateLogic(
           [ts.createParameter(undefined, undefined, undefined, state)],
           undefined,
           undefined,
-          ts.createBlock([
-            ts.createStatement(
-              ts.createAssignment(
-                ts.createPropertyAccess(ts.createThis(), propName),
-                ts.createElementAccess(state, ts.createLiteral(statePropName))
+          ts.createBlock(
+            propsDecoratedMeta.map(meta =>
+              ts.createStatement(
+                ts.createAssignment(
+                  ts.createPropertyAccess(
+                    ts.createThis(),
+                    meta.componentPropName
+                  ),
+                  ts.createElementAccess(
+                    state,
+                    ts.createLiteral(meta.statePropName)
+                  )
+                )
               )
             )
-          ])
+          )
         )
       )
     ]
