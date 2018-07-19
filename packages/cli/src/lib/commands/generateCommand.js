@@ -133,9 +133,7 @@ const stateChoices = Object.keys(intents)
   }))
   .sort((a, b) => (a.name > b.name))
 
-const choices = globalChoices
-  .concat([new inquirer.Separator()])
-  .concat(stateChoices)
+const choices = [...globalChoices, inquirer.Separator(), ...stateChoices]
 
 function getActionExample(intentType, authType) {
   return templates[authType][intentType]
