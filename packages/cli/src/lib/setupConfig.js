@@ -27,6 +27,8 @@ module.exports = () => {
     setup = {
       DeploymentUrl: 'https://developer.dev.bearer.sh/v1/',
       IntegrationServiceUrl: 'https://int.dev.bearer.sh/api/v1/',
+      IntegrationServiceHost: 'https://int.dev.bearer.sh/',
+      DeveloperPortalAPIUrl: 'https://app.bearer.sh/graphql',
       BearerEnv: 'dev'
     }
   }
