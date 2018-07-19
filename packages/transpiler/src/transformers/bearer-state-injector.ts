@@ -3,6 +3,8 @@
  */
 import * as ts from 'typescript'
 import { propDecoratedWithName } from './decorator-helpers'
+import bearer, { ensureWatchImported } from './bearer'
+
 type TransformerOptions = {
   verbose?: true
 }
@@ -17,7 +19,7 @@ export default function BearerStateInjector({
       }
 
       // Inject Imports if needed: Watch
-      const preparedSourceFile = ensureInjectedWatchDecorator(tsSourceFile)
+      const preparedSourceFile = ensureWatchImported(tsSourceFile)
 
       function visit(node: ts.Node): ts.VisitResult<ts.Node> {
         if (ts.isClassDeclaration(node)) {
@@ -82,12 +84,6 @@ function injectPropertyWatcher(
   //   this.context.update('attachedPullRequests', newValue)
   // }
   return classNode
-}
-
-function ensureInjectedWatchDecorator(
-  sourceFile: ts.SourceFile
-): ts.SourceFile {
-  return sourceFile
 }
 
 /**

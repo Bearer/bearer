@@ -7,7 +7,7 @@
  */
 import * as ts from 'typescript'
 
-import bearer from './bearer'
+import { ensurePropImported, hasImport } from './bearer'
 
 type TransformerOptions = {
   verbose?: true
@@ -15,33 +15,13 @@ type TransformerOptions = {
 export default function PropImporter({
   verbose
 }: TransformerOptions = {}): ts.TransformerFactory<ts.SourceFile> {
-  function log(...args) {
-    if (verbose) {
-      console.log.apply(this, args)
-    }
-  }
-
   return _transformContext => {
     return tsSourceFile => {
       if (
-        bearer.hasImport(tsSourceFile, 'Component') &&
-        !bearer.hasImport(tsSourceFile, 'Prop')
+        hasImport(tsSourceFile, 'Component') &&
+        !hasImport(tsSourceFile, 'Prop')
       ) {
-        // TODO: update if existing one
-        return ts.updateSourceFileNode(tsSourceFile, [
-          ts.createImportDeclaration(
-            undefined,
-            undefined,
-            ts.createImportClause(
-              undefined,
-              ts.createNamedImports([
-                ts.createImportSpecifier(undefined, ts.createIdentifier('Prop'))
-              ])
-            ),
-            ts.createLiteral('@bearer/core')
-          ),
-          ...tsSourceFile.statements
-        ])
+        return ensurePropImported(tsSourceFile)
       }
       return tsSourceFile
     }

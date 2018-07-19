@@ -216,8 +216,71 @@ export function hasImport(node: ts.SourceFile, libName: string): boolean {
   return has
 }
 
-export function coreImport(node: ts.ImportDeclaration): boolean {
+function coreImport(node: ts.ImportDeclaration): boolean {
   return Boolean(node.moduleSpecifier['text'].toString().match(/@bearer\/core/))
+}
+
+function ensureHasImportFromCore(
+  tsSourceFile: ts.SourceFile,
+  importName: string
+): ts.SourceFile {
+  if (hasImport(tsSourceFile, importName)) {
+    return tsSourceFile
+  }
+
+  const predicate = (statement: ts.Statement): boolean =>
+    ts.isImportDeclaration(statement) && coreImport(statement)
+
+  const importDeclaration =
+    (tsSourceFile.statements.find(predicate) as ts.ImportDeclaration) ||
+    ts.createImportDeclaration(
+      undefined,
+      undefined,
+      ts.createImportClause(undefined, ts.createNamedImports([])),
+      ts.createLiteral('@bearer/core')
+    )
+
+  const elements = (importDeclaration.importClause
+    .namedBindings as ts.NamedImports).elements
+
+  const clauseWithNamedImport = ts.updateImportDeclaration(
+    importDeclaration,
+    importDeclaration.decorators,
+    importDeclaration.modifiers,
+    ts.updateImportClause(
+      importDeclaration.importClause,
+      importDeclaration.importClause.name,
+      ts.createNamedImports([
+        ...elements,
+        ts.createImportSpecifier(undefined, ts.createIdentifier(importName))
+      ])
+    ),
+    importDeclaration.moduleSpecifier
+  )
+
+  const statements = [
+    clauseWithNamedImport,
+    ...tsSourceFile.statements.filter(el => !predicate(el))
+  ]
+
+  return ts.updateSourceFileNode(
+    tsSourceFile,
+    statements,
+    tsSourceFile.isDeclarationFile,
+    tsSourceFile.referencedFiles,
+    tsSourceFile.typeReferenceDirectives,
+    tsSourceFile.hasNoDefaultLib
+  )
+}
+
+export function ensureWatchImported(
+  tsSourceFile: ts.SourceFile
+): ts.SourceFile {
+  return ensureHasImportFromCore(tsSourceFile, 'Watch')
+}
+
+export function ensurePropImported(tsSourceFile: ts.SourceFile): ts.SourceFile {
+  return ensureHasImportFromCore(tsSourceFile, 'Prop')
 }
 
 function propDecorator() {
