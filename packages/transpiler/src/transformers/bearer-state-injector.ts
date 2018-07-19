@@ -32,7 +32,7 @@ export default function BearerStateInjector({
 }: TransformerOptions = {}): ts.TransformerFactory<ts.SourceFile> {
   return transformContext => {
     return tsSourceFile => {
-      if (!needProcessing(tsSourceFile)) {
+      if (!hasBearerStateDecorator(tsSourceFile)) {
         return tsSourceFile
       }
 
@@ -303,7 +303,7 @@ function appendPropDecoratorIdNeeded(
 /**
  *  Not a declaration file and contains a @BearerState propertyDecorator
  */
-function needProcessing(sourceFile: ts.SourceFile): boolean {
+function hasBearerStateDecorator(sourceFile: ts.SourceFile): boolean {
   if (sourceFile.isDeclarationFile) {
     return false
   }
