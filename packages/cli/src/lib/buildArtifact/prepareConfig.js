@@ -31,7 +31,7 @@ module.exports = (codePath, scenarioUuid) => {
       .then(async config => {
         try {
           config.auth = JSON.parse(
-            await readFileAsync(path.join(fullPath, AUTH_CONFIG_FILE))
+            await readFileAsync(path.join(fullPath, '..', AUTH_CONFIG_FILE))
           )
           return config
         } catch (e) {

@@ -203,7 +203,7 @@ const start = (emitter, config) => async ({ open, install, watcher }) => {
     emitter.emit('start:watchers')
     if (watcher) {
       fs.watchFile(
-        path.join(rootLevel, 'intents', 'auth.config.json'),
+        path.join(rootLevel, 'auth.config.json'),
         { persistent: true, interval: 250 },
         () => ensureSetupAndConfigComponents(rootLevel)
       )
