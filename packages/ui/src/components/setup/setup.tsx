@@ -5,7 +5,7 @@ import Bearer, {
   Event,
   EventEmitter,
   Prop,
-  BearerState
+  StateManager
 } from '@bearer/core'
 import { FieldSet } from '../Forms/Fieldset'
 import { OAuth2SetupType, EmailSetupType, KeySetupType } from './setup-types'
@@ -37,7 +37,7 @@ export class BearerSetup {
     const formSet = this.fieldSet.map(el => {
       return { key: el.controlName, value: el.value }
     })
-    BearerState.storeSetup(
+    StateManager.storeSetup(
       formSet.reduce((acc, obj) => ({ ...acc, [obj['key']]: obj['value'] }), {})
     )
       .then((item: TSetupPayload) => {

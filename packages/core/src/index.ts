@@ -6,7 +6,7 @@ import EventNames from './EventNames'
 
 import * as bearerState from './BearerState'
 export * from './decorators'
-export const BearerState = bearerState
+export const StateManager = bearerState
 export const Events = EventNames
 export const requests = Requests
 export const debug = Debug
