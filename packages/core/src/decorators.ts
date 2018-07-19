@@ -23,11 +23,12 @@ export interface IBearerStateDecoratorOptions {
 }
 
 export interface IBearerStateDecorator<T> {
-  (options?: IBearerStateDecoratorOptions): T
+  (): T
 }
 
-export declare const BearerState: IBearerStateDecorator<any>
-
+export const BearerState: IBearerStateDecorator<any> = (
+  options?: IBearerStateDecoratorOptions
+) => (target: any, key: string): void => {}
 /**
  *  Component Decorator
  */
