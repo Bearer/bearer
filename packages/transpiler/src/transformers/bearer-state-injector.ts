@@ -10,6 +10,8 @@ type TransformerOptions = {
   verbose?: true
 }
 
+const state = ts.createIdentifier('state')
+
 export default function BearerStateInjector({
   verbose
 }: TransformerOptions = {}): ts.TransformerFactory<ts.SourceFile> {
@@ -57,7 +59,6 @@ function injectStateUpdateLogic(
   // TODO : dynamic propName / dynamic statePropName
   const propName = 'attachedPullRequests'
   const statePropName = 'attachedPullRequests'
-  const state = ts.createIdentifier('state')
   return ts.updateClassDeclaration(
     classNode,
     classNode.decorators,
