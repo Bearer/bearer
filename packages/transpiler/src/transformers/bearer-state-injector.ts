@@ -3,7 +3,7 @@
  */
 import * as ts from 'typescript'
 import { propDecoratedWithName } from './decorator-helpers'
-import bearer, { ensureWatchImported } from './bearer'
+import { ensureWatchImported } from './bearer'
 
 type TransformerOptions = {
   verbose?: true
@@ -47,6 +47,10 @@ export default function BearerStateInjector({
   }
 }
 
+/**
+ * TODO
+ *
+ */
 function injectStateUpdateLogic(
   classNode: ts.ClassDeclaration
 ): ts.ClassDeclaration {
@@ -56,11 +60,19 @@ function injectStateUpdateLogic(
   return classNode
 }
 
+/**
+ * TODO
+ */
+
 function ensureInjectedContext(
   classNode: ts.ClassDeclaration
 ): ts.ClassDeclaration {
   return classNode
 }
+
+/**
+ * TODO
+ */
 
 function updateComponentLifecycle(
   classNode: ts.ClassDeclaration
@@ -74,16 +86,53 @@ function updateComponentLifecycle(
   return classNode
 }
 
+/**
+ * Add or update State Watcher
+ */
+
 function injectPropertyWatcher(
   classNode: ts.ClassDeclaration
 ): ts.ClassDeclaration {
-  // overrides if one exist
-  // @Watch('attachedPullRequests')
-  // changeRepo(newValue: any) {
-  //   console.log('[BEARER]', 'attachedPullRequests updated')
-  //   this.context.update('attachedPullRequests', newValue)
-  // }
-  return classNode
+  const propName = 'propName'
+  // TODO: override if one already exist
+  return ts.updateClassDeclaration(
+    classNode,
+    classNode.decorators,
+    classNode.modifiers,
+    classNode.name,
+    classNode.typeParameters,
+    classNode.heritageClauses,
+    [
+      ...classNode.members,
+      ts.createMethod(
+        [
+          ts.createDecorator(
+            ts.createCall(
+              ts.createIdentifier('Watch') as ts.Expression,
+              undefined,
+              [ts.createLiteral(propName)]
+            )
+          )
+        ],
+        undefined,
+        undefined,
+        ts.createIdentifier('_notifyBearerStateHandler'),
+        undefined,
+        undefined,
+        undefined,
+        undefined,
+        ts.createBlock([
+          ts.createStatement(
+            ts.createCall(
+              ts.createPropertyAccess(ts.createThis(), 'context.update'),
+              undefined,
+              [ts.createLiteral(propName), ts.createThis()]
+            )
+          )
+        ])
+      )
+    ]
+  )
 }
 
 /**
