@@ -128,7 +128,7 @@ const choices = (intents, propertyFlag) =>
 
 const allChoices = [
   ...choices(intents, 'isGlobalIntent'),
-  inquirer.Separator(),
+  new inquirer.Separator(),
   ...choices(intents, 'isStateIntent')
 ]
 
