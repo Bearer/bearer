@@ -54,10 +54,54 @@ export default function BearerStateInjector({
 function injectStateUpdateLogic(
   classNode: ts.ClassDeclaration
 ): ts.ClassDeclaration {
-  // updateFromState = state => {
-  //   this.attachedPullRequests = state['attachedPullRequests']
-  // }
-  return classNode
+  // TODO : dynamic propName / dynamic statePropName
+  const propName = 'attachedPullRequests'
+  const statePropName = 'attachedPullRequests'
+  const state = ts.createIdentifier('state')
+  return ts.updateClassDeclaration(
+    classNode,
+    classNode.decorators,
+    classNode.modifiers,
+    classNode.name,
+    classNode.typeParameters,
+    classNode.heritageClauses,
+    [
+      ...classNode.members,
+      ts.createProperty(
+        undefined,
+        undefined,
+        'updateFromState',
+        undefined,
+        undefined,
+        ts.createArrowFunction(
+          undefined,
+          undefined,
+          [ts.createParameter(undefined, undefined, undefined, state)],
+          undefined,
+          undefined,
+          ts.createBlock([
+            ts.createStatement(
+              ts.createAssignment(
+                ts.createPropertyAccess(ts.createThis(), propName),
+                ts.createElementAccess(state, ts.createLiteral(statePropName))
+              )
+            )
+          ])
+        )
+      )
+      // ts.createMethod(
+      //   undefined,
+      //   undefined,
+      //   undefined,
+      //   'componentWillLoad',
+      //   undefined,
+      //   undefined,
+      //   undefined,
+      //   undefined,
+      //   ts.createBlock([ts.createStatement(componentWillLoad)])
+      // )
+    ]
+  )
 }
 
 /**
