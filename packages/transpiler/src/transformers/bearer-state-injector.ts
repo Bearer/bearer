@@ -4,6 +4,7 @@
 import * as ts from 'typescript'
 import { propDecoratedWithName } from './decorator-helpers'
 import { ensureWatchImported } from './bearer'
+import { Decorators, Component } from './constants'
 
 type TransformerOptions = {
   verbose?: true
@@ -110,13 +111,19 @@ function updateComponentLifecycle(
 ): ts.ClassDeclaration {
   // TODO: override and append if it exists
   const componentWillLoad = ts.createCall(
-    ts.createPropertyAccess(ts.createThis(), 'context.subscribe'),
+    ts.createPropertyAccess(
+      ts.createThis(),
+      `${Component.COMPONENT_BEARER_CONTEXT_PROP}.subscribe`
+    ),
     undefined,
     [ts.createThis()]
   )
 
   const componentDidUnload = ts.createCall(
-    ts.createPropertyAccess(ts.createThis(), 'context.unsubscribe'),
+    ts.createPropertyAccess(
+      ts.createThis(),
+      `${Component.COMPONENT_BEARER_CONTEXT_PROP}.unsubscribe`
+    ),
     undefined,
     [ts.createThis()]
   )
@@ -134,7 +141,7 @@ function updateComponentLifecycle(
         undefined,
         undefined,
         undefined,
-        'componentWillLoad',
+        Component.componentWillLoad,
         undefined,
         undefined,
         undefined,
@@ -145,7 +152,7 @@ function updateComponentLifecycle(
         undefined,
         undefined,
         undefined,
-        'componentDidUnload',
+        Component.componentDidUnload,
         undefined,
         undefined,
         undefined,
@@ -178,7 +185,7 @@ function injectPropertyWatcher(
         [
           ts.createDecorator(
             ts.createCall(
-              ts.createIdentifier('Watch') as ts.Expression,
+              ts.createIdentifier(Decorators.Watch) as ts.Expression,
               undefined,
               [ts.createLiteral(propName)]
             )
@@ -194,7 +201,10 @@ function injectPropertyWatcher(
         ts.createBlock([
           ts.createStatement(
             ts.createCall(
-              ts.createPropertyAccess(ts.createThis(), 'context.update'),
+              ts.createPropertyAccess(
+                ts.createThis(),
+                `${Component.COMPONENT_BEARER_CONTEXT_PROP}.update`
+              ),
               undefined,
               [ts.createLiteral(propName), ts.createThis()]
             )
@@ -218,7 +228,7 @@ function needProcessing(sourceFile: ts.SourceFile): boolean {
     if (ts.isClassDeclaration(node)) {
       shouldProcess = propDecoratedWithName(
         node as ts.ClassDeclaration,
-        'BearerState'
+        Decorators.BearerState
       )
     }
   })

@@ -27,9 +27,9 @@ export class FullComponent {
         this.bearerContext.setupId = this.setupId;
     } }
     @Watch(\\"propName\\")
-    _notifyBearerStateHandler() { this.context.update(\\"propName\\", this); }
-    componentWillLoad() { this.context.subscribe(this); }
-    componentDidUnload() { this.context.unsubscribe(this); }
+    _notifyBearerStateHandler() { this.bearerContext.update(\\"propName\\", this); }
+    componentWillLoad() { this.bearerContext.subscribe(this); }
+    componentDidUnload() { this.bearerContext.unsubscribe(this); }
     bearerUpdateFromState = state => { this.attachedPullRequests = state[\\"attachedPullRequests\\"]; };
 }
 ",
