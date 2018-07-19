@@ -189,47 +189,35 @@ export function addComponentDidLoad(
 }
 
 function inImportClause(node: ts.ImportClause, libName: string): boolean {
-  const inImport =
-    node.namedBindings
-      .getChildren()
-      .filter(n => n.kind === ts.SyntaxKind.SyntaxList)
-      .map(n =>
-        n
-          .getChildren()
-          .filter(cn => cn.kind === ts.SyntaxKind.ImportSpecifier)
-          .map(cn => cn.getText())
-      )[0]
-      .findIndex(v => v === libName) !== -1
-
-  return inImport
+  return (
+    ts.forEachChild(node, (node: ts.Node) => {
+      if (ts.isNamedImports(node)) {
+        return node.elements.reduce((included, element: ts.ImportSpecifier) => {
+          return included || element.name.text === libName
+        }, false)
+      }
+    }) || false
+  )
 }
 
-export function hasImport(node: ts.Node, libName: string): boolean {
+export function hasImport(node: ts.SourceFile, libName: string): boolean {
   let has = false
-  function visit(node: ts.Node) {
-    if (ts.isImportDeclaration(node)) {
-      let n = node as ts.ImportDeclaration
-      has =
-        has ||
-        (coreImport(n) &&
-          n.importClause &&
-          inImportClause(n.importClause, libName))
+  ts.forEachChild(node, node => {
+    if (
+      ts.isImportDeclaration(node) &&
+      coreImport(node) &&
+      node.importClause &&
+      inImportClause(node.importClause, libName)
+    ) {
+      has = true
     }
-    ts.forEachChild(node, visit)
-  }
-
-  visit(node)
+  })
 
   return has
 }
 
 export function coreImport(node: ts.ImportDeclaration): boolean {
-  return Boolean(
-    node.moduleSpecifier
-      .getText()
-      .toString()
-      .match(/@bearer\/core/)
-  )
+  return Boolean(node.moduleSpecifier['text'].toString().match(/@bearer\/core/))
 }
 
 function propDecorator() {
