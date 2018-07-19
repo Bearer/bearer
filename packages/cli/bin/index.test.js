@@ -1,8 +1,8 @@
-const CLI = require('../lib/cli').CLI
+const CLI = require('../src/lib/cli').CLI
 
-const deployCmd = require('../lib/commands/deployCommand')
-const initCmd = require('../lib/commands/initCommand')
-const generateCmd = require('../lib/commands/generateCommand')
+const deployCmd = require('../src/lib/commands/deployCommand')
+const initCmd = require('../src/lib/commands/initCommand')
+const generateCmd = require('../src/lib/commands/generateCommand')
 
 const program = require('commander')
 

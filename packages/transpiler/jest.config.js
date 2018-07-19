@@ -4,5 +4,6 @@ module.exports = {
   },
   testRegex: '(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$',
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
-  automock: false
+  automock: false,
+  testPathIgnorePatterns: ['/node_modules/', '/__fixtures__/']
 }

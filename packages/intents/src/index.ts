@@ -8,19 +8,22 @@ export type TContext = {
 }
 
 export class Intent {
-  static getCollection(callback, { collection }) {
+  static getCollection(
+    callback,
+    { collection, error }: { collection?: any; error?: any }
+  ) {
     if (collection) {
       sendSuccessMessage(callback, collection)
     } else {
-      sendErrorMessage(callback, { error: 'Error' })
+      sendErrorMessage(callback, { error: error || 'Unkown error' })
     }
   }
 
-  static getObject(callback, { object }) {
+  static getObject(callback, { object, error }: { object?: any; error?: any }) {
     if (object) {
       sendSuccessMessage(callback, object)
     } else {
-      sendErrorMessage(callback, { error: 'Error' })
+      sendErrorMessage(callback, { error: error || 'Unkown error' })
     }
   }
 }

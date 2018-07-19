@@ -26,12 +26,10 @@ export function Intent(
 ): IDecorator {
   return function(target: any, key: string): void {
     const getter = (): BearerFetch => {
-      if (!target['SCENARIO_ID']) {
-        console.warn(MISSING_SCENARIO_ID)
-      }
-
       return function(...args) {
-        console.log('[BEARER]', 'target', target)
+        if (!target['SCENARIO_ID']) {
+          console.warn(MISSING_SCENARIO_ID)
+        }
         const scenarioId = target['SCENARIO_ID']
         // use setupId prop or retrieve it from the context
 

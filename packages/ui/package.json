@@ -1,6 +1,6 @@
 {
   "name": "@bearer/ui",
-  "version": "0.15.5",
+  "version": "0.17.5",
   "description": "Bearer UI helper",
   "main": "dist/bearer-ui.js",
   "module": "dist/esm/index.js",
@@ -11,7 +11,7 @@
     "dist/"
   ],
   "scripts": {
-    "build-storybook": "stencil build && build-storybook -s www",
+    "build:storybook": "stencil build && build-storybook -s www",
     "storybook": "start-storybook -p 9006 -s www",
     "build": "stencil build",
     "dev": "stencil build --dev --watch --serve",
@@ -23,9 +23,8 @@
     "publish:demo": "cd demo && yarn install && yarn publish:demo"
   },
   "dependencies": {
-    "@bearer/core": "^0.15.5",
+    "@bearer/core": "^0.17.5",
     "@stencil/core": "0.10.2",
-    "@stencil/redux": "^0.0.4",
     "@stencil/sass": "^0.0.5",
     "bootstrap": "^4.1.0"
   },

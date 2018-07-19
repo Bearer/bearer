@@ -1,0 +1,53 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Transpiler integration test FullComponent.tsx match expectation 1`] = `
+Object {
+  "file": "FullComponent.tsx",
+  "postContent": "import { Prop } from \\"@bearer/core\\";
+import { Component, Intent, BearerFetch, IntentType } from '@bearer/core';
+@Component({
+    tag: 'list-repositories',
+    styleUrl: 'ListRepositories.css',
+    shadow: true
+})
+export class ListRepositories {
+    private fetcher: BearerFetch;
+    private fetchResource: BearerFetch;
+    render() {
+        return <bearer-scrollable fetcher={this.fetcher}/>;
+    }
+    constructor() { Intent('ListRepositories')(this, \\"fetcher\\"); Intent('getPullRequest', IntentType.GetResource)(this, \\"fetchResource\\"); }
+    get SCENARIO_ID() { return \\"SPONGE_BOB\\"; }
+    @Prop()
+    BEARER_ID: string;
+    @Prop({ \\"context\\": \\"bearer\\" })
+    bearerContext: any;
+    @Prop()
+    setupId: string;
+    componentDidLoad() { if (this.setupId) {
+        this.bearerContext.setupId = this.setupId;
+    } }
+}
+",
+}
+`;
+
+exports[`Transpiler integration test exportObject.ts match expectation 1`] = `
+Object {
+  "file": "exportObject.ts",
+  "postContent": "class SpongeBobHelper {
+    private name: string;
+    constructor(name: string) {
+        this.name = name;
+    }
+}
+export class PatrickHelper {
+    constructor() { }
+}
+export default {
+    spongeHelper: SpongeBobHelper,
+    patrickHelper: PatrickHelper
+};
+",
+}
+`;

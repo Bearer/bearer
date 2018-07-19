@@ -6,7 +6,7 @@
     ]
   },
   "scripts": {
-    "lerna-publish": "lerna clean --yes && lerna bootstrap && lerna publish",
+    "lerna-publish": "lerna clean --yes && lerna bootstrap && lerna publish --conventional-commits",
     "test": "lerna run --parallel test"
   },
   "license": "MIT",

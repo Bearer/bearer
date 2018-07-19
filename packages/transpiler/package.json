@@ -1,6 +1,6 @@
 {
   "name": "@bearer/transpiler",
-  "version": "0.15.2",
+  "version": "0.17.4",
   "description": "Bearer transpiler",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -15,22 +15,6 @@
     "prepublish": "yarn build",
     "prepublishOnly": "yarn build",
     "test": "jest"
-  },
-  "jest": {
-    "moduleFileExtensions": [
-      "ts",
-      "tsx",
-      "js"
-    ],
-    "transform": {
-      "^.+\\.(ts|tsx)$": "<rootDir>/preprocessor.js"
-    },
-    "testMatch": [
-      "**/__tests__/*.+(ts|tsx|js)"
-    ],
-    "setupFiles": [
-      "./jest.setup.js"
-    ]
   },
   "repository": {
     "type": "git",

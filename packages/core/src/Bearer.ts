@@ -10,14 +10,16 @@ const IFRAME_NAME = 'BEARER-IFRAME'
 class Bearer {
   static emitter: fbemitter.EventEmitter = new fbemitter.EventEmitter()
   private static _instance: Bearer
-  public static init(config: any): Bearer {
+  public static init(config: any = {}): Bearer {
     if (process.env.NODE_ENV === 'development') {
       if (this._instance) {
         console.warn('One instance is already configured, reaplacing it')
       }
     }
-
-    this._instance = new Bearer(config || window[BEARER_CONFIG_KEY] || {})
+    this._instance = new Bearer({
+      ...config,
+      ...(window[BEARER_CONFIG_KEY] || {})
+    })
 
     return this.instance
   }
@@ -41,6 +43,7 @@ class Bearer {
 
   constructor(args) {
     this.bearerConfig = new BearerConfig(args || {})
+    console.info('[BEARER]', 'config initialized with', args)
     this.maybeInitialized = new Promise((resolve, reject) => {
       this.allowIntegrationRequests = resolve
     })

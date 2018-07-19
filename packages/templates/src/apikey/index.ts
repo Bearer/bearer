@@ -26,7 +26,7 @@ export default {
   static action(context: TContext, params: any, callback: (params: any) => void) {
     //... your code goes here
     // use the client defined in client.ts to fetch real object like that:
-    // CLIENT.get('/people', { headers: headersFor(context.accessToken) }).then(({ data }) => {
+    // Client(context.accessToken).get('/people').then(({ data }) => {
     //   callback({ collection: data.results });
     // });
     callback({ collection: []})
@@ -36,7 +36,7 @@ export default {
   static action(context: TContext, params: any, callback: (params: any) => void) {
     //... your code goes here
     // use the client defined in client.ts to fetch real object like that:
-    // CLIENT.get(\`/people/\${params.id}\`, { headers: headersFor(context.accessToken) })
+    // Client(context.accessToken).get(\`/people/\${params.id}\`)
     //   .then(({ data }) => {
     //     callback({ object: data });
     //   });

@@ -32,7 +32,7 @@ export function classDecoratedWithName(
 export function using(node: ts.Node, decoratorName: string): boolean {
   let usedInCode = false
   function visit(node: ts.Node) {
-    if (node.kind == ts.SyntaxKind.Decorator)
+    if (ts.isDecorator(node))
       usedInCode = usedInCode || hasName(node as ts.Decorator, decoratorName)
     ts.forEachChild(node, visit)
   }
