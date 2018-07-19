@@ -1,13 +1,17 @@
-import { Component, Intent, BearerFetch, IntentType } from '@bearer/core'
+import {
+  Component,
+  Intent,
+  BearerFetch,
+  IntentType,
+  BearerState
+} from '@bearer/core'
 
 @Component({
-  tag: 'list-repositories',
-  styleUrl: 'ListRepositories.css',
-  shadow: true
+  tag: 'full-component'
 })
-export class ListRepositories {
+export class FullComponent {
   @Intent('ListRepositories') fetcher: BearerFetch
-
+  @BearerState() attachedPullRequests: Array<any>
   @Intent('getPullRequest', IntentType.GetResource)
   fetchResource: BearerFetch
 
