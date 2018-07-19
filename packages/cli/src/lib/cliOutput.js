@@ -82,10 +82,6 @@ module.exports = emitter => {
     term.white('Bearer: ')
     term.yellow('Intents created.')
     term('\n')
-
-    term.white('PackageManager: ')
-    term.yellow(JSON.stringify(body))
-    term('\n')
   })
 
   emitter.on('assemblyScenario:failed', response => {
