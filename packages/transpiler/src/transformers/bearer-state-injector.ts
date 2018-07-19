@@ -2,7 +2,10 @@
  *
  */
 import * as ts from 'typescript'
-import { propDecoratedWithName } from './decorator-helpers'
+import {
+  propDecoratedWithName,
+  hasPropDecoratedWithName
+} from './decorator-helpers'
 import { ensureWatchImported, ensureBearerContextInjected } from './bearer'
 import { Decorators, Component } from './constants'
 
@@ -20,6 +23,9 @@ export default function BearerStateInjector({
       if (!needProcessing(tsSourceFile)) {
         return tsSourceFile
       }
+
+      const propsDecorator = extractDecoratedPropertyInformation(tsSourceFile)
+      console.log('[BEARER]', 'propsDecorator', propsDecorator)
 
       // Inject Imports if needed: Watch
       const preparedSourceFile = ensureWatchImported(tsSourceFile)
@@ -59,6 +65,7 @@ function injectStateUpdateLogic(
   // TODO : dynamic propName / dynamic statePropName
   const propName = 'attachedPullRequests'
   const statePropName = 'attachedPullRequests'
+
   return ts.updateClassDeclaration(
     classNode,
     classNode.decorators,
@@ -206,6 +213,7 @@ function injectPropertyWatcher(
   )
 }
 
+// function getDecoratedProp(classNode: ts.ClassDeclaration): null |
 /**
  *  Not a declaration file and contains a @BearerState propertyDecorator
  */
@@ -214,15 +222,45 @@ function needProcessing(sourceFile: ts.SourceFile): boolean {
     return false
   }
 
-  let shouldProcess = false
-  ts.forEachChild(sourceFile, node => {
-    if (ts.isClassDeclaration(node)) {
-      shouldProcess = propDecoratedWithName(
-        node as ts.ClassDeclaration,
-        Decorators.BearerState
+  return ts.forEachChild(
+    sourceFile,
+    node =>
+      ts.isClassDeclaration(node) &&
+      hasPropDecoratedWithName(node, Decorators.BearerState)
+  )
+}
+interface IDecoratedPropInformation {
+  componentPropName: string
+  statePropName: string
+}
+function extractDecoratedPropertyInformation(
+  tsSourceFile: ts.SourceFile
+): Array<IDecoratedPropInformation> {
+  return (
+    ts.forEachChild(
+      tsSourceFile,
+      node =>
+        ts.isClassDeclaration(node) &&
+        propDecoratedWithName(node, Decorators.BearerState)
+    ) || []
+  ).map(prop => {
+    const decoratorOptions = (prop.decorators[0]
+      .expression as ts.CallExpression).arguments[0]
+    const componentPropName: string = prop.name['escapedText']
+
+    let statePropName = componentPropName
+
+    if (decoratorOptions && ts.isObjectLiteralExpression(decoratorOptions)) {
+      const stateNameOption = decoratorOptions.properties.find(
+        prop => prop.name['escapedText'] == 'statePropName'
       )
+      if (stateNameOption) {
+        statePropName = stateNameOption['initializer']
+      }
+    }
+    return {
+      componentPropName,
+      statePropName
     }
   })
-
-  return shouldProcess
 }

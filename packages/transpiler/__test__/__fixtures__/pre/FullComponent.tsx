@@ -12,6 +12,8 @@ import {
 export class FullComponent {
   @Intent('ListRepositories') fetcher: BearerFetch
   @BearerState() attachedPullRequests: Array<any>
+  @BearerState({ statePropName: 'whatever' })
+  somethingElse: Array<any>
   @Intent('getPullRequest', IntentType.GetResource)
   fetchResource: BearerFetch
 
