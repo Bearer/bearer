@@ -114,7 +114,7 @@ function updateComponentLifecycle(
   const componentWillLoad = ts.createCall(
     ts.createPropertyAccess(
       ts.createThis(),
-      `${Component.COMPONENT_BEARER_CONTEXT_PROP}.subscribe`
+      `${Component.bearerContext}.subscribe`
     ),
     undefined,
     [ts.createThis()]
@@ -123,7 +123,7 @@ function updateComponentLifecycle(
   const componentDidUnload = ts.createCall(
     ts.createPropertyAccess(
       ts.createThis(),
-      `${Component.COMPONENT_BEARER_CONTEXT_PROP}.unsubscribe`
+      `${Component.bearerContext}.unsubscribe`
     ),
     undefined,
     [ts.createThis()]
@@ -204,7 +204,7 @@ function injectPropertyWatcher(
             ts.createCall(
               ts.createPropertyAccess(
                 ts.createThis(),
-                `${Component.COMPONENT_BEARER_CONTEXT_PROP}.update`
+                `${Component.bearerContext}.update`
               ),
               undefined,
               [ts.createLiteral(propName), ts.createThis()]

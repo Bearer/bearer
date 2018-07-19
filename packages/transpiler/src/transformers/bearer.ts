@@ -1,5 +1,5 @@
 import * as ts from 'typescript'
-
+import { Decorators, Component, Module } from './constants'
 // @Prop() BEARER_ID: string;
 export function addBearerIdProp(
   classNode: ts.ClassDeclaration
@@ -69,7 +69,7 @@ function addBearerContextProp(
         [
           ts.createDecorator(
             ts.createCall(
-              ts.createIdentifier('Prop') as ts.Expression,
+              ts.createIdentifier(Decorators.Prop) as ts.Expression,
               undefined,
               [
                 ts.createObjectLiteral([
@@ -83,7 +83,7 @@ function addBearerContextProp(
           )
         ],
         undefined,
-        'bearerContext',
+        Component.bearerContext,
         undefined,
         ts.createKeywordTypeNode(ts.SyntaxKind.AnyKeyword),
         undefined
@@ -109,14 +109,14 @@ export function addSetupIdProp(
         [
           ts.createDecorator(
             ts.createCall(
-              ts.createIdentifier('Prop') as ts.Expression,
+              ts.createIdentifier(Decorators.Prop) as ts.Expression,
               undefined,
               undefined
             )
           )
         ],
         undefined,
-        'setupId',
+        Component.setupId,
         undefined,
         ts.createKeywordTypeNode(ts.SyntaxKind.StringKeyword),
         undefined
@@ -131,23 +131,24 @@ function methodeNamed(name: string): (node: ts.Node) => boolean {
     (node as ts.MethodDeclaration).name.getText() === name
 }
 
-const COMPONENT_DID_LOAD = 'componentDidLoad'
-
 // componentDidLoad(){ this.bearer.setupId = this.setupId }
 export function addComponentDidLoad(
   classNode: ts.ClassDeclaration
 ): ts.ClassDeclaration {
   const assignSetupId = ts.createStatement(
     ts.createAssignment(
-      ts.createPropertyAccess(ts.createThis(), 'bearerContext.setupId'),
-      ts.createPropertyAccess(ts.createThis(), 'setupId')
+      ts.createPropertyAccess(
+        ts.createThis(),
+        [Component.bearerContext, Component.setupId].join('.')
+      ),
+      ts.createPropertyAccess(ts.createThis(), Component.setupId)
     )
   )
   const ifSetupIdPresent = ts.createIf(
-    ts.createPropertyAccess(ts.createThis(), 'setupId'),
+    ts.createPropertyAccess(ts.createThis(), Component.setupId),
     ts.createBlock([assignSetupId])
   )
-  const predicate = methodeNamed(COMPONENT_DID_LOAD)
+  const predicate = methodeNamed(Component.componentDidLoad)
   const members = classNode.members.filter(n => !predicate(n))
 
   const componentDidLoad: ts.MethodDeclaration =
@@ -156,7 +157,7 @@ export function addComponentDidLoad(
       /* decorators */ undefined,
       /* modifiers */ undefined,
       /* asteriskToken */ undefined,
-      COMPONENT_DID_LOAD,
+      Component.componentDidLoad,
       /* questionToken */ undefined,
       /* typeParameters */ undefined,
       /* parameters */ undefined,
@@ -217,7 +218,9 @@ export function hasImport(node: ts.SourceFile, libName: string): boolean {
 }
 
 function coreImport(node: ts.ImportDeclaration): boolean {
-  return Boolean(node.moduleSpecifier['text'].toString().match(/@bearer\/core/))
+  return Boolean(
+    node.moduleSpecifier['text'].toString().match(Module.BEARER_CORE_MODULE)
+  )
 }
 
 function ensureHasImportFromCore(
@@ -237,7 +240,7 @@ function ensureHasImportFromCore(
       undefined,
       undefined,
       ts.createImportClause(undefined, ts.createNamedImports([])),
-      ts.createLiteral('@bearer/core')
+      ts.createLiteral(Module.BEARER_CORE_MODULE)
     )
 
   const elements = (importDeclaration.importClause
@@ -283,17 +286,17 @@ export function ensureBearerContextInjected(
 export function ensureWatchImported(
   tsSourceFile: ts.SourceFile
 ): ts.SourceFile {
-  return ensureHasImportFromCore(tsSourceFile, 'Watch')
+  return ensureHasImportFromCore(tsSourceFile, Decorators.Watch)
 }
 
 export function ensurePropImported(tsSourceFile: ts.SourceFile): ts.SourceFile {
-  return ensureHasImportFromCore(tsSourceFile, 'Prop')
+  return ensureHasImportFromCore(tsSourceFile, Decorators.Prop)
 }
 
 function propDecorator() {
   return ts.createDecorator(
     ts.createCall(
-      ts.createIdentifier('Prop') as ts.Expression,
+      ts.createIdentifier(Decorators.Prop) as ts.Expression,
       undefined,
       undefined
     )

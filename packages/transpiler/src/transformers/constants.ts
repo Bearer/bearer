@@ -2,13 +2,16 @@ export const Decorators = {
   Watch: 'Watch',
   Prop: 'Prop',
   Component: 'Component',
-  BearerState: 'BearerState'
+  BearerState: 'BearerState',
+  Intent: 'Intent'
 }
 
 export const Component = {
-  COMPONENT_BEARER_CONTEXT_PROP: 'bearerContext',
+  bearerContext: 'bearerContext',
   componentWillLoad: 'componentWillLoad',
-  componentDidUnload: 'componentDidUnload'
+  componentDidUnload: 'componentDidUnload',
+  componentDidLoad: 'componentDidLoad',
+  setupId: 'setupId'
 }
 
 export const Module = {

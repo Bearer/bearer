@@ -16,6 +16,7 @@
  */
 import * as ts from 'typescript'
 import decorator from './decorator-helpers'
+import { Decorators } from './constants'
 
 type TransformerOptions = {
   verbose?: true
@@ -103,7 +104,7 @@ export default function ComponentTransformer({
     ) {
       if (
         node.decorators &&
-        decorator.name(node.decorators[0] as ts.Decorator) === 'Intent'
+        decorator.name(node.decorators[0] as ts.Decorator) === Decorators.Intent
       ) {
         registeredIntents.push(node)
         return ts.createProperty(
@@ -161,7 +162,7 @@ export default function ComponentTransformer({
           return ts.createStatement(
             ts.createCall(
               ts.createCall(
-                ts.createIdentifier('Intent') as ts.Expression,
+                ts.createIdentifier(Decorators.Intent) as ts.Expression,
                 undefined,
                 call.arguments
               ),

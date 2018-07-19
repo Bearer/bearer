@@ -8,7 +8,7 @@
 import * as ts from 'typescript'
 
 import { ensurePropImported, hasImport } from './bearer'
-
+import { Decorators } from './constants'
 type TransformerOptions = {
   verbose?: true
 }
@@ -18,8 +18,8 @@ export default function PropImporter({
   return _transformContext => {
     return tsSourceFile => {
       if (
-        hasImport(tsSourceFile, 'Component') &&
-        !hasImport(tsSourceFile, 'Prop')
+        hasImport(tsSourceFile, Decorators.Component) &&
+        !hasImport(tsSourceFile, Decorators.Prop)
       ) {
         return ensurePropImported(tsSourceFile)
       }
