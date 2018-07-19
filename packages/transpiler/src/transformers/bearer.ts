@@ -53,7 +53,7 @@ export function addBearerScenarioIdAccessor(
 }
 
 // @Prop({ context: 'bearer' }) bearerContext: any
-export function addBearerContextProp(
+function addBearerContextProp(
   classNode: ts.ClassDeclaration
 ): ts.ClassDeclaration {
   return ts.updateClassDeclaration(
@@ -273,6 +273,13 @@ function ensureHasImportFromCore(
   )
 }
 
+export function ensureBearerContextInjected(
+  classNode: ts.ClassDeclaration
+): ts.ClassDeclaration {
+  // TODO: return classNode if already present
+  return addBearerContextProp(classNode)
+}
+
 export function ensureWatchImported(
   tsSourceFile: ts.SourceFile
 ): ts.SourceFile {
@@ -300,5 +307,6 @@ export default {
   addSetupIdProp,
   addComponentDidLoad,
   hasImport,
-  coreImport
+  coreImport,
+  ensureBearerContextInjected
 }

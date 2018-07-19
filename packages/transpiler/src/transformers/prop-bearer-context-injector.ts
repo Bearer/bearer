@@ -28,7 +28,7 @@ type TransformerOptions = {
 }
 
 function injectContext(node: ts.ClassDeclaration): ts.Node {
-  const withContextProp = bearer.addBearerContextProp(node)
+  const withContextProp = bearer.ensureBearerContextInjected(node)
   const withSetupProp = bearer.addSetupIdProp(withContextProp)
   return bearer.addComponentDidLoad(withSetupProp)
 }
