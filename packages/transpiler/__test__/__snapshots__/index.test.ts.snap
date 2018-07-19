@@ -11,6 +11,8 @@ export class FullComponent {
     private fetcher: BearerFetch;
     @BearerState()
     attachedPullRequests: Array<any>;
+    @BearerState({ statePropName: 'whatever' })
+    somethingElse: Array<any>;
     private fetchResource: BearerFetch;
     render() {
         return <bearer-scrollable fetcher={this.fetcher}/>;
