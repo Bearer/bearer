@@ -8,6 +8,7 @@ import BearerScenarioIdInjector from './transformers/scenario-id-accessor-inject
 import PropInjector from './transformers/prop-injector'
 import PropBearerContextInjector from './transformers/prop-bearer-context-injector'
 import PropImporter from './transformers/prop-importer'
+import BearerStateInjector from './transformers/bearer-state-injector'
 
 export default class Transpiler {
   private watcher: any
@@ -133,6 +134,7 @@ export default class Transpiler {
         PropImporter({ verbose }),
         PropInjector({ verbose }),
         PropBearerContextInjector({ verbose }),
+        BearerStateInjector({ verbose }),
         dumpSourceCode(this.SCREENS_DIRECTORY, this.BUILD_DIRECTORY)({
           verbose: true
         })
