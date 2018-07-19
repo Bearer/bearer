@@ -9,6 +9,11 @@ import {
 import { ensureWatchImported, ensureBearerContextInjected } from './bearer'
 import { Decorators, Component } from './constants'
 
+/**
+ * TODOS:
+ *  * add typing on newValue parameter of the watch handler
+ */
+
 type TransformerOptions = {
   verbose?: true
 }
@@ -25,8 +30,6 @@ export default function BearerStateInjector({
       }
 
       const propsDecorator = extractDecoratedPropertyInformation(tsSourceFile)
-      console.log('[BEARER]', 'propsDecorator', propsDecorator)
-
       // Inject Imports if needed: Watch
       const preparedSourceFile = ensureWatchImported(tsSourceFile)
 
@@ -36,7 +39,10 @@ export default function BearerStateInjector({
           const withInjectedContext = ensureBearerContextInjected(node)
 
           // Inject prop watcher
-          const withInjectedWatcher = injectPropertyWatcher(withInjectedContext)
+          const withInjectedWatcher = injectPropertyWatcher(
+            withInjectedContext,
+            propsDecorator
+          )
 
           // Append logic to componentWillLoad/componentDidUnload
           const withComponentLifecyleHooked = updateComponentLifecycle(
@@ -165,10 +171,9 @@ function updateComponentLifecycle(
  * Add or update State Watcher
  */
 function injectPropertyWatcher(
-  classNode: ts.ClassDeclaration
+  classNode: ts.ClassDeclaration,
+  propsDecoratedMeta: Array<IDecoratedPropInformation>
 ): ts.ClassDeclaration {
-  // TODO: make it dynamic
-  const propName = 'propName'
   // TODO: override if one already exist
   return ts.updateClassDeclaration(
     classNode,
@@ -179,35 +184,50 @@ function injectPropertyWatcher(
     classNode.heritageClauses,
     [
       ...classNode.members,
-      ts.createMethod(
-        [
-          ts.createDecorator(
-            ts.createCall(
-              ts.createIdentifier(Decorators.Watch) as ts.Expression,
-              undefined,
-              [ts.createLiteral(propName)]
+      ...propsDecoratedMeta.map(meta =>
+        ts.createMethod(
+          [
+            ts.createDecorator(
+              ts.createCall(
+                ts.createIdentifier(Decorators.Watch) as ts.Expression,
+                undefined,
+                [ts.createLiteral(meta.componentPropName)]
+              )
             )
-          )
-        ],
-        undefined,
-        undefined,
-        ts.createIdentifier('_notifyBearerStateHandler'),
-        undefined,
-        undefined,
-        undefined,
-        undefined,
-        ts.createBlock([
-          ts.createStatement(
-            ts.createCall(
-              ts.createPropertyAccess(
-                ts.createThis(),
-                `${Component.bearerContext}.update`
-              ),
+          ],
+          undefined,
+          undefined,
+          ts.createIdentifier('_notifyBearerStateHandler'),
+          undefined,
+          undefined,
+          [
+            ts.createParameter(
               undefined,
-              [ts.createLiteral(propName), ts.createThis()]
+              undefined,
+              undefined,
+              'newValue',
+              undefined,
+              undefined,
+              undefined
             )
-          )
-        ])
+          ],
+          undefined,
+          ts.createBlock([
+            ts.createStatement(
+              ts.createCall(
+                ts.createPropertyAccess(
+                  ts.createThis(),
+                  `${Component.bearerContext}.update`
+                ),
+                undefined,
+                [
+                  ts.createLiteral(meta.statePropName),
+                  ts.createIdentifier('newValue')
+                ]
+              )
+            )
+          ])
+        )
       )
     ]
   )

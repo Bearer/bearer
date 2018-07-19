@@ -28,8 +28,10 @@ export class FullComponent {
     componentDidLoad() { if (this.setupId) {
         this.bearerContext.setupId = this.setupId;
     } }
-    @Watch(\\"propName\\")
-    _notifyBearerStateHandler() { this.bearerContext.update(\\"propName\\", this); }
+    @Watch(\\"attachedPullRequests\\")
+    _notifyBearerStateHandler(newValue) { this.bearerContext.update(\\"attachedPullRequests\\", newValue); }
+    @Watch(\\"somethingElse\\")
+    _notifyBearerStateHandler(newValue) { this.bearerContext.update('whatever', newValue); }
     componentWillLoad() { this.bearerContext.subscribe(this); }
     componentDidUnload() { this.bearerContext.unsubscribe(this); }
     bearerUpdateFromState = state => { this.attachedPullRequests = state[\\"attachedPullRequests\\"]; };
