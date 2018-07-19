@@ -17,7 +17,7 @@ export default class Transpiler {
   private subscribers: ts.MapLike<Array<() => void>> = {}
 
   constructor(
-    private readonly SCREENS_DIRECTORY = process.cwd(),
+    private readonly ROOT_DIRECTORY = process.cwd(),
     private watchFiles = true,
     private buildFolder = '.build'
   ) {
@@ -135,7 +135,7 @@ export default class Transpiler {
         PropInjector({ verbose }),
         PropBearerContextInjector({ verbose }),
         BearerStateInjector({ verbose }),
-        dumpSourceCode(this.SCREENS_DIRECTORY, this.BUILD_DIRECTORY)({
+        dumpSourceCode(this.SCREENS_DIRECTORY, this.BUILD_SCR_DIRECTORY)({
           verbose: true
         })
       ],
@@ -180,7 +180,15 @@ export default class Transpiler {
   }
 
   private get BUILD_DIRECTORY(): string {
-    return path.join(this.SCREENS_DIRECTORY, this.buildFolder)
+    return path.join(this.ROOT_DIRECTORY, this.buildFolder)
+  }
+
+  private get BUILD_SCR_DIRECTORY(): string {
+    return path.join(this.BUILD_DIRECTORY, 'src')
+  }
+
+  private get SCREENS_DIRECTORY(): string {
+    return path.join(this.ROOT_DIRECTORY, 'screens')
   }
 }
 
