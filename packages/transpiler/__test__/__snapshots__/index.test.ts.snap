@@ -3,15 +3,14 @@
 exports[`Transpiler integration test FullComponent.tsx match expectation 1`] = `
 Object {
   "file": "FullComponent.tsx",
-  "postContent": "import { Prop } from \\"@bearer/core\\";
-import { Component, Intent, BearerFetch, IntentType } from '@bearer/core';
+  "postContent": "import { Component, Intent, BearerFetch, IntentType, BearerState, Prop, Watch } from '@bearer/core';
 @Component({
-    tag: 'list-repositories',
-    styleUrl: 'ListRepositories.css',
-    shadow: true
+    tag: 'full-component'
 })
-export class ListRepositories {
+export class FullComponent {
     private fetcher: BearerFetch;
+    @BearerState()
+    attachedPullRequests: Array<any>;
     private fetchResource: BearerFetch;
     render() {
         return <bearer-scrollable fetcher={this.fetcher}/>;
@@ -27,6 +26,8 @@ export class ListRepositories {
     componentDidLoad() { if (this.setupId) {
         this.bearerContext.setupId = this.setupId;
     } }
+    @Watch(\\"propName\\")
+    _notifyBearerStateHandler() { this.context.update(\\"propName\\", this); }
 }
 ",
 }
@@ -48,6 +49,68 @@ export default {
     spongeHelper: SpongeBobHelper,
     patrickHelper: PatrickHelper
 };
+",
+}
+`;
+
+exports[`Transpiler integration test overrides-decorator.tsx match expectation 1`] = `
+Object {
+  "file": "overrides-decorator.tsx",
+  "postContent": "import { Component, Intent, BearerFetch, IntentType, Prop } from '@bearer/core';
+@Component({
+    tag: 'overrides-decorator-full'
+})
+class OverridesDecorarotFull {
+    private fetcher: BearerFetch;
+    private memberFetcher: BearerFetch;
+    constructor() { Intent('collectionIntent')(this, \\"fetcher\\"); Intent('collectionIntent', IntentType.GetResource)(this, \\"memberFetcher\\"); }
+    componentWillLoad() {
+        console.log('componentWillLoad');
+    }
+    componentDidUnload() {
+        console.log('componentDidUnload');
+    }
+    get SCENARIO_ID() { return \\"SPONGE_BOB\\"; }
+    @Prop()
+    BEARER_ID: string;
+    @Prop({ \\"context\\": \\"bearer\\" })
+    bearerContext: any;
+    @Prop()
+    setupId: string;
+    componentDidLoad() { if (this.setupId) {
+        this.bearerContext.setupId = this.setupId;
+    } console.log('componentDidLoad'); }
+}
+",
+}
+`;
+
+exports[`Transpiler integration test overrides-decorator-less.1.tsx match expectation 1`] = `
+Object {
+  "file": "overrides-decorator-less.1.tsx",
+  "postContent": "import { Component, Prop } from '@bearer/core';
+@Component({
+    tag: 'overrides-decorator-less'
+})
+class OverridesDecorarotLess {
+    constructor() { }
+    componentWillLoad() {
+        console.log('componentWillLoad');
+    }
+    componentDidUnload() {
+        console.log('componentDidUnload');
+    }
+    get SCENARIO_ID() { return \\"SPONGE_BOB\\"; }
+    @Prop()
+    BEARER_ID: string;
+    @Prop({ \\"context\\": \\"bearer\\" })
+    bearerContext: any;
+    @Prop()
+    setupId: string;
+    componentDidLoad() { if (this.setupId) {
+        this.bearerContext.setupId = this.setupId;
+    } console.log('componentDidLoad'); }
+}
 ",
 }
 `;
