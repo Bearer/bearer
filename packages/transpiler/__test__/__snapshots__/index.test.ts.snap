@@ -30,7 +30,7 @@ export class FullComponent {
     _notifyBearerStateHandler() { this.context.update(\\"propName\\", this); }
     componentWillLoad() { this.context.subscribe(this); }
     componentDidUnload() { this.context.unsubscribe(this); }
-    updateFromState = state => { this.attachedPullRequests = state[\\"attachedPullRequests\\"]; };
+    bearerUpdateFromState = state => { this.attachedPullRequests = state[\\"attachedPullRequests\\"]; };
 }
 ",
 }

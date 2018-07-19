@@ -70,7 +70,7 @@ function injectStateUpdateLogic(
       ts.createProperty(
         undefined,
         undefined,
-        'updateFromState',
+        'bearerUpdateFromState',
         undefined,
         undefined,
         ts.createArrowFunction(

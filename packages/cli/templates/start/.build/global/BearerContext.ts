@@ -38,7 +38,7 @@ class BearerContext {
   update = (field, value) => {
     this.state[field] = value
     this.subscribers.map(component => {
-      component.updateFromState(this.state)
+      component.bearerUpdateFromState(this.state)
     })
   }
 }
