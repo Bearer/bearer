@@ -26,7 +26,10 @@ export default {
   static action(context: TContext, params: any, callback: (params: any) => void) {
     //... your code goes here
     // use the client defined in client.ts to fetch real object like that:
-    // Client(context.authAccess.accessToken).get('/people').then(({ data }) => {
+    // Client(
+    //  context.authAccess.username, 
+    //  context.authAccess.password
+    // ).get('/people').then(({ data }) => {
     //   callback({ collection: data.results });
     // });
     callback({ collection: []})
@@ -36,7 +39,10 @@ export default {
   static action(context: TContext, params: any, callback: (params: any) => void) {
     //... your code goes here
     // use the client defined in client.ts to fetch real object like that:
-    // Client(context.authAccess.accessToken).get(\`/people/\${params.id}\`)
+    // Client(
+    //  context.authAccess.username, 
+    //  context.authAccess.password
+    // ).get(\`/people/\${params.id}\`)
     //   .then(({ data }) => {
     //     callback({ object: data });
     //   });

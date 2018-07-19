@@ -1,0 +1,15 @@
+{
+  "authType": "basicAuth",
+  "setupScreens": [
+    {
+      "type": "text",
+      "label": "Username",
+      "controlName": "username"
+    },
+    {
+      "type": "password",
+      "label": "Password",
+      "controlName": "password"
+    }
+  ]
+}
