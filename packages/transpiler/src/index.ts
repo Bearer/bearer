@@ -23,13 +23,14 @@ export default class Transpiler {
   private rootFileNames: string[] = []
   private subscribers: ts.MapLike<Array<() => void>> = {}
 
-  private readonly ROOT_DIRECTORY = process.cwd()
+  private readonly ROOT_DIRECTORY
   private watchFiles = true
   private buildFolder = '.build'
   private srcFolder = 'screens'
 
   constructor(options?: Partial<TranpilerOptions>) {
     Object.assign(this, options)
+    this.ROOT_DIRECTORY = this.ROOT_DIRECTORY || process.cwd()
     const config = ts.readConfigFile(
       path.join(this.BUILD_DIRECTORY, 'tsconfig.json'),
       ts.sys.readFile
@@ -215,7 +216,6 @@ function dumpSourceCode(srcDirectory, buildDirectory) {
           .replace(srcDirectory, buildDirectory)
           .replace(/js$/, 'ts')
           .replace(/jsx$/, 'tsx')
-
         fs.ensureFileSync(outPath)
         fs.writeFileSync(outPath, getSourceCode(tsSourceFile))
 
