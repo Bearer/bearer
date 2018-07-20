@@ -19,7 +19,8 @@
   },
   "include": [
     "screens",
-    "types/jsx.d.ts"
+    "types/jsx.d.ts",
+    ".build/src/components.d.ts"
   ],
   "exclude": [
     "node_modules"
