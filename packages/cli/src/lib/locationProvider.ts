@@ -7,6 +7,9 @@ export default class LocationProvider {
     this.scenarioRoot = path.dirname(this.config.scenarioConfig.config)
   }
 
+  scenarioRootFile(filename: string): string {
+    return path.join(this.scenarioRoot, filename)
+  }
   // ~/screens
   get srcScreenDir(): string {
     return path.join(this.scenarioRoot, 'screens')
