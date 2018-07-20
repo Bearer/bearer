@@ -7,8 +7,6 @@ const setupConfig = require('../src/lib/setupConfig')
 const Emitter = require('../src/lib/emitter')
 
 const emitter = new Emitter()
-const inquirer = require('inquirer')
-
 const config = setupConfig()
 const program = require('commander')
 const deployCmd = require('../src/lib/commands/deployCommand')

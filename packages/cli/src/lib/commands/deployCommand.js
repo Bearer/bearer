@@ -5,7 +5,7 @@ const ini = require('ini')
 const pathJs = require('path')
 const Case = require('case')
 
-const deploy = (emitter, config) => async ({ path = '.' }) => {
+const deploy = (emitter, config, locator) => async ({ path = '.' }) => {
   emitter.emit('deploy:started')
   const { rootPathRc, BearerEnv } = config
 
@@ -51,7 +51,7 @@ const deploy = (emitter, config) => async ({ path = '.' }) => {
   fs.writeFileSync(pathJs.join(rootPathRc), ini.stringify(scenarioConfigUpdate))
 
   try {
-    await deployScenario({ path, scenarioUuid }, emitter, config)
+    await deployScenario({ path, scenarioUuid }, emitter, config, locator)
     const setupUrl = `https://demo.bearer.tech/?scenarioUuid=${scenarioUuid}&scenarioTagName=${scenarioTitle}&name=${scenarioTitle}&orgId=${OrgId}&stage=${BearerEnv}`
 
     emitter.emit('deploy:finished', {
@@ -66,7 +66,7 @@ const deploy = (emitter, config) => async ({ path = '.' }) => {
   }
 }
 module.exports = {
-  useWith: (program, emitter, config) => {
+  useWith: (program, emitter, config, locator) => {
     program
       .command('deploy')
       .description(
@@ -74,6 +74,6 @@ module.exports = {
     $ bearer deploy
 `
       )
-      .action(deploy(emitter, config))
+      .action(deploy(emitter, config, locator))
   }
 }
