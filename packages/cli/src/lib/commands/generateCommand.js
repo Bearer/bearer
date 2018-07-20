@@ -21,11 +21,6 @@ async function generateTemplates({ emitter, templateType, rootPathRc }) {
 
   const configKey = `${templateType}Screens`
 
-  const vars = {
-    scenarioTitle: Case.camel(scenarioTitle),
-    componentTagName: Case.kebab(scenarioTitle),
-    fields: authConfig[configKey] ? JSON.stringify(authConfig[configKey]) : '[]'
-  }
   const inDir = path.join(__dirname, `templates/generate/${templateType}`)
   const outDir = path.join(path.dirname(rootPathRc), '/screens/.build/src/')
 
@@ -33,12 +28,20 @@ async function generateTemplates({ emitter, templateType, rootPathRc }) {
     console.log('Deleted files and folders:\n', paths.join('\n'))
   })
 
-  copy(inDir, outDir, vars, (err, createdFiles) => {
-    if (err) throw err
-    createdFiles.forEach(filePath =>
-      emitter.emit('generateIntent:fileGenerated', filePath)
-    )
-  })
+  if (authConfig[configKey] && authConfig[configKey].length > 0) {
+    const vars = {
+      scenarioTitle: Case.camel(scenarioTitle),
+      componentTagName: Case.kebab(scenarioTitle),
+      fields: JSON.stringify(authConfig[configKey])
+    }
+
+    copy(inDir, outDir, vars, (err, createdFiles) => {
+      if (err) throw err
+      createdFiles.forEach(filePath =>
+        emitter.emit('generateIntent:fileGenerated', filePath)
+      )
+    })
+  }
 }
 
 const generate = (emitter, { rootPathRc }) => async env => {
