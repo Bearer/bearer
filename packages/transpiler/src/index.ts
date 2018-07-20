@@ -10,17 +10,27 @@ import PropBearerContextInjector from './transformers/prop-bearer-context-inject
 import PropImporter from './transformers/prop-importer'
 import BearerStateInjector from './transformers/bearer-state-injector'
 
+export type TranpilerOptions = {
+  ROOT_DIRECTORY?: string
+  watchFiles?: boolean
+  buildFolder?: string
+  srcFolder?: string
+}
+
 export default class Transpiler {
   private watcher: any
   private service: ts.LanguageService
   private rootFileNames: string[] = []
   private subscribers: ts.MapLike<Array<() => void>> = {}
 
-  constructor(
-    private readonly ROOT_DIRECTORY = process.cwd(),
-    private watchFiles = true,
-    private buildFolder = '.build'
-  ) {
+  private readonly ROOT_DIRECTORY = process.cwd()
+  private watchFiles = true
+  private buildFolder = '.build'
+  private srcFolder = 'screens'
+
+  constructor(options?: Partial<TranpilerOptions>) {
+    Object.assign(this, options)
+    console.log('[BEARER]', 'this', this)
     const config = ts.readConfigFile(
       path.join(this.BUILD_DIRECTORY, 'tsconfig.json'),
       ts.sys.readFile
@@ -188,7 +198,7 @@ export default class Transpiler {
   }
 
   private get SCREENS_DIRECTORY(): string {
-    return path.join(this.ROOT_DIRECTORY, 'screens')
+    return path.join(this.ROOT_DIRECTORY, this.srcFolder)
   }
 }
 
