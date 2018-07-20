@@ -30,7 +30,6 @@ export default class Transpiler {
 
   constructor(options?: Partial<TranpilerOptions>) {
     Object.assign(this, options)
-    console.log('[BEARER]', 'this', this)
     const config = ts.readConfigFile(
       path.join(this.BUILD_DIRECTORY, 'tsconfig.json'),
       ts.sys.readFile
