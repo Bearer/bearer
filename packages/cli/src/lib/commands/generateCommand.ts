@@ -8,7 +8,6 @@ import * as templates from '@bearer/templates'
 import * as rc from 'rc'
 import Locator from '../locationProvider'
 
-console.log('[BEARER]', 'intents', intents)
 const INTENT = 'intent'
 const SCREEN = 'screen'
 enum TemplateTypes {
