@@ -15,12 +15,16 @@ const init = emitter => async scenarioTitle => {
           value: 'oauth2'
         },
         {
-          name: 'NoAuth',
-          value: 'noauth'
+          name: 'Basic Auth',
+          value: 'basicauth'
         },
         {
           name: 'API Key',
           value: 'apikey'
+        },
+        {
+          name: 'NoAuth',
+          value: 'noauth'
         }
       ]
     }
