@@ -1,4 +1,4 @@
-import fs, { watchFile } from 'fs'
+import fs from 'fs'
 import Transpiler, { TranpilerOptions } from '../src'
 import path from 'path'
 
