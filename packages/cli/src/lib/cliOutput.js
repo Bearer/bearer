@@ -22,6 +22,10 @@ module.exports = emitter => {
     term('\n')
   })
 
+  emitter.on('buildArtifact:error', errors => {
+    errors.forEach(line => console.log(line))
+    term('\n')
+  })
   emitter.on('buildArtifact:configured', ({ intents }) => {
     const intentNames = intents.map(intent => Object.keys(intent))
     term.white('Bearer: ')

@@ -15,55 +15,60 @@ const archive = archiver('zip', {
 })
 
 module.exports = async (output, handler, { path, scenarioUuid }, emitter) => {
-  output.on('close', () => {
-    emitter.emit('buildArtifact:output:close', pathJs.resolve(output.path))
-  })
+  try {
+    output.on('close', () => {
+      emitter.emit('buildArtifact:output:close', pathJs.resolve(output.path))
+    })
 
-  output.on('end', () => {
-    emitter.emit('buildArtifact:output:end')
-  })
+    output.on('end', () => {
+      emitter.emit('buildArtifact:output:end')
+    })
 
-  archive.on('warning', err => {
-    if (err.code === 'ENOENT') {
-      emitter.emit('buildArtifact:archive:warning:ENOENT', err)
-    } else {
-      throw err
-    }
-  })
+    archive.on('warning', err => {
+      if (err.code === 'ENOENT') {
+        emitter.emit('buildArtifact:archive:warning:ENOENT', err)
+      } else {
+        throw err
+      }
+    })
 
-  archive.pipe(output)
+    archive.pipe(output)
 
-  emitter.emit('buildArtifact:start', { scenarioUuid })
-  // generate javascript files
-  // copy package.json
-  // create config
-  // zip
+    emitter.emit('buildArtifact:start', { scenarioUuid })
+    // generate javascript files
+    // copy package.json
+    // create config
+    // zip
 
-  await transpileIntents(path)
+    const result = await transpileIntents(path)
+    console.log(result)
 
-  await prepareConfig(path, scenarioUuid)
-    .then(async config => {
-      emitter.emit('buildArtifact:configured', { intents: config.intents })
+    await prepareConfig(path, scenarioUuid)
+      .then(async config => {
+        emitter.emit('buildArtifact:configured', { intents: config.intents })
 
-      await attachConfig(archive, JSON.stringify(config, null, 2), {
-        name: CONFIG_FILE
+        await attachConfig(archive, JSON.stringify(config, null, 2), {
+          name: CONFIG_FILE
+        })
+
+        archive.append(generateHandler(config), { name: HANDLER_NAME })
+        await addFilesToArchive(archive, path)
+      })
+      .then(() => {
+        archive.finalize()
+      })
+      .catch(console.error)
+
+    return new Promise((resolve, reject) => {
+      output.on('close', () => {
+        resolve(archive)
       })
 
-      archive.append(generateHandler(config), { name: HANDLER_NAME })
-      await addFilesToArchive(archive, path)
+      archive.on('error', reject)
     })
-    .then(() => {
-      archive.finalize()
-    })
-    .catch(console.error)
-
-  return new Promise((resolve, reject) => {
-    output.on('close', () => {
-      resolve(archive)
-    })
-
-    archive.on('error', reject)
-  })
+  } catch (error) {
+    emitter.emit('buildArtifact:error', error)
+  }
 }
 
 function transpileIntents(path) {
@@ -116,9 +121,7 @@ function transpileIntents(path) {
         },
         (err, stats) => {
           if (err || stats.hasErrors()) {
-            // TODO: print better error messages
-            console.log('[BEARER]', 'stats', stats.toJson('verbose'))
-            reject(false)
+            reject(stats.toJson('verbose').errors)
           } else {
             resolve(true)
           }
