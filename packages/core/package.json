@@ -69,7 +69,7 @@
     "ts-jest": "^22.4.6"
   },
   "dependencies": {
-    "@stencil/core": "0.10.2",
+    "@stencil/core": "^0.10.7",
     "babel-plugin-inline-dotenv": "^1.1.2",
     "fbemitter": "^2.1.1",
     "post-robot": "^8.0.26",

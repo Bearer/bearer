@@ -30,9 +30,9 @@
     esutils "^2.0.2"
     js-tokens "^3.0.0"
 
-"@stencil/core@0.10.2":
-  version "0.10.2"
-  resolved "https://registry.yarnpkg.com/@stencil/core/-/core-0.10.2.tgz#2f860031d6c391e0d0ec2ebd0d817d65d428eae7"
+"@stencil/core@^0.10.7":
+  version "0.10.7"
+  resolved "https://registry.yarnpkg.com/@stencil/core/-/core-0.10.7.tgz#66a98c428e43bcbf262914fc50bb374ccbbdb1a4"
   dependencies:
     chokidar "2.0.3"
     jsdom "11.5.1"
