@@ -18,7 +18,7 @@
     "jsxFactory": "h"
   },
   "include": [
-    "src",
+    "screens",
     "types/jsx.d.ts"
   ],
   "exclude": [
