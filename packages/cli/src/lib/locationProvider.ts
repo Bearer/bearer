@@ -3,8 +3,11 @@ import * as path from 'path'
 
 export default class LocationProvider {
   scenarioRoot: string
+  scenarioRc: string
+
   constructor(private readonly config: ScenarioConfig) {
-    this.scenarioRoot = path.dirname(this.config.scenarioConfig.config)
+    this.scenarioRc = this.config.scenarioConfig.config
+    this.scenarioRoot = path.dirname(this.scenarioRc)
   }
 
   scenarioRootFile(filename: string): string {
