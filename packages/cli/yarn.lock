@@ -3724,7 +3724,7 @@ mute-stream@0.0.7:
   version "0.0.7"
   resolved "https://registry.yarnpkg.com/mute-stream/-/mute-stream-0.0.7.tgz#3075ce93bc21b8fab43e1bc4da7e8115ed1e7bab"
 
-nan@^2.9.2:
+nan@^2.9.2, nan@~2.10.0:
   version "2.10.0"
   resolved "https://registry.yarnpkg.com/nan/-/nan-2.10.0.tgz#96d0cd610ebd58d4b4de9cc0c6828cda99c7548f"
 
@@ -3839,7 +3839,7 @@ node-notifier@^5.2.1:
     shellwords "^0.1.1"
     which "^1.3.0"
 
-node-pre-gyp@^0.10.0:
+node-pre-gyp@^0.10.0, node-pre-gyp@^0.10.3:
   version "0.10.3"
   resolved "https://registry.yarnpkg.com/node-pre-gyp/-/node-pre-gyp-0.10.3.tgz#3070040716afdc778747b61b6887bf78880b80fc"
   dependencies:
@@ -4560,7 +4560,7 @@ request-promise-native@^1.0.5:
     stealthy-require "^1.1.0"
     tough-cookie ">=2.3.3"
 
-request@^2.83.0, request@^2.85.0:
+request@^2.83.0, request@^2.85.0, request@^2.87.0:
   version "2.87.0"
   resolved "https://registry.yarnpkg.com/request/-/request-2.87.0.tgz#32f00235cd08d482b4d0d68db93a829c0ed5756e"
   dependencies:
@@ -4957,6 +4957,14 @@ split2@^1.0.0:
 sprintf-js@~1.0.2:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/sprintf-js/-/sprintf-js-1.0.3.tgz#04e6926f662895354f3dd015203633b857297e2c"
+
+sqlite3@^4.0.2:
+  version "4.0.2"
+  resolved "https://registry.yarnpkg.com/sqlite3/-/sqlite3-4.0.2.tgz#1bbeb68b03ead5d499e42a3a1b140064791c5a64"
+  dependencies:
+    nan "~2.10.0"
+    node-pre-gyp "^0.10.3"
+    request "^2.87.0"
 
 sshpk@^1.7.0:
   version "1.14.2"

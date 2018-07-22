@@ -58,6 +58,7 @@
     "rc": "^1.2.7",
     "request": "^2.85.0",
     "semver": "^5.5.0",
+    "sqlite3": "^4.0.2",
     "stream-buffers": "^3.0.1",
     "terminal-kit": "^1.15.1",
     "ts-loader": "^4.4.1",

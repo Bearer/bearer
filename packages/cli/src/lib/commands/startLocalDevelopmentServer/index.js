@@ -5,6 +5,7 @@ const Router = require('koa-router')
 const unzip = require('unzip')
 const fs = require('fs-extra')
 const cosmiconfig = require('cosmiconfig')
+const storage = require('./storage')
 
 const LOCAL_DEV_CONFIGURATION = 'dev'
 const explorer = cosmiconfig(LOCAL_DEV_CONFIGURATION)
@@ -50,6 +51,8 @@ async function startLocalDevelopmentServer(
         'bearer.config.json'
       ))
 
+      const port = await getPort({ port: 3000 })
+      const bearerBaseURL = `http://localhost:${port}/`
       for (let intent of intents) {
         const intentName = Object.keys(intent)[0]
         const endpoint = `${integration_uuid}/${intentName}`
@@ -57,13 +60,16 @@ async function startLocalDevelopmentServer(
           endpoint,
           (ctx, next) =>
             new Promise((resolve, reject) => {
+              console.log('Body is: ', ctx.request.body)
               lambdas[intentName](
                 {
                   context: {
                     ...devIntentsContext.global,
-                    ...devIntentsContext[intentName]
+                    ...devIntentsContext[intentName],
+                    bearerBaseURL
                   },
-                  queryStringParameters: ctx.query
+                  queryStringParameters: ctx.query,
+                  body: ctx.request.body
                 },
                 {},
                 (err, datum) => {
@@ -79,15 +85,17 @@ async function startLocalDevelopmentServer(
 
       server.use(router.routes())
       server.use(router.allowedMethods())
-      getPort({ port: 3000 }).then(port => {
-        server.listen(port, () => {
-          emitter.emit('start:localServer:start', { port })
-          emitter.emit('start:localServer:endpoints', {
-            endpoints: router.stack
-          })
-          resolve(`http://localhost:${port}/`)
+      server.use(storage.routes())
+      server.use(storage.allowedMethods())
+
+      server.listen(port, () => {
+        emitter.emit('start:localServer:start', { port })
+        emitter.emit('start:localServer:endpoints', {
+          endpoints: router.stack
         })
       })
+
+      resolve(bearerBaseURL)
     } catch (e) {
       reject(e)
     }

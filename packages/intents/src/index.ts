@@ -79,9 +79,15 @@ export class SaveState extends StateIntentBase {
   }
 
   static intent(action) {
-    return (event, _context, callback) => {
+    return (event, context, callback) => {
       const { referenceId } = event.queryStringParameters
-      STATE_CLIENT.get(`api/v1/items/${referenceId}`)
+      const baseURL =
+        event.context.bearerBaseURL || STATE_CLIENT.defaults.baseURL
+      STATE_CLIENT.request({
+        method: 'get',
+        url: `api/v1/items/${referenceId}`,
+        baseURL
+      })
         .then(response => {
           console.log('[BEARER]', 'received', response.data)
           const state = response.data.Item
@@ -91,9 +97,14 @@ export class SaveState extends StateIntentBase {
             event.body,
             state,
             result => {
-              STATE_CLIENT.put(`api/v1/items/${referenceId}`, {
-                ...result,
-                ReadAllowed: true
+              STATE_CLIENT.request({
+                method: 'put',
+                url: `api/v1/items/${referenceId}`,
+                baseURL,
+                data: {
+                  ...result,
+                  ReadAllowed: true
+                }
               })
                 .then(data => {
                   console.log('[BEARER]', 'success', data)
@@ -113,9 +124,14 @@ export class SaveState extends StateIntentBase {
             event.body,
             {},
             result => {
-              STATE_CLIENT.post(`api/v1/items`, {
-                ...result,
-                ReadAllowed: true
+              STATE_CLIENT.request({
+                method: 'post',
+                url: `api/v1/items`,
+                baseURL,
+                data: {
+                  ...result,
+                  ReadAllowed: true
+                }
               })
                 .then(data => {
                   console.log('[BEARER]', 'success', data)
@@ -138,10 +154,16 @@ export class RetrieveState extends StateIntentBase {
   }
 
   static intent(action) {
-    return (event, _context, callback) => {
+    return (event, context, callback) => {
       const { referenceId } = event.queryStringParameters
+      const baseURL =
+        event.context.bearerBaseURL || STATE_CLIENT.defaults.baseURL
 
-      STATE_CLIENT.get(`/api/v1/items/${referenceId}`)
+      STATE_CLIENT.request({
+        method: 'get',
+        url: `/api/v1/items/${referenceId}`,
+        baseURL
+      })
         .then(response => {
           if (response.data.error) {
             callback('No data found')
