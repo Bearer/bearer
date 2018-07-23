@@ -11,7 +11,9 @@ module.exports = (
         AuthenticationResult: { IdToken: token }
       }
     },
-    DeploymentUrl
+    DeploymentUrl,
+    DeveloperPortalAPIUrl,
+    credentials
   }
 ) =>
   new Promise(async (resolve, reject) => {
@@ -19,6 +21,16 @@ module.exports = (
 
     try {
       const deploymentServiceClient = serviceClient(DeploymentUrl)
+
+      const devPortalClient = serviceClient(DeveloperPortalAPIUrl)
+      const {
+        body: {
+          data: {
+            findUser: { token: devPortalToken }
+          }
+        }
+      } = await devPortalClient.getDevPoratlToken(credentials)
+      console.log(devPortalToken)
 
       const res = await deploymentServiceClient.signedUrl(token, Key, 'intent')
 

@@ -109,10 +109,10 @@ export function deployScreens({ scenarioUuid }, emitter, config, locator) {
 
       emitter.emit('screens:generateSetupComponent')
 
-      await execPromise('bearer generate --setup', { cwd: buildDirectory })
+      //await execPromise('bearer generate --setup', { cwd: buildDirectory })
 
       emitter.emit('screens:generateConfigComponent')
-      await execPromise('bearer generate --config', { cwd: buildDirectory })
+      //await execPromise('bearer generate --config', { cwd: buildDirectory })
 
       emitter.emit('screens:buildingDist')
       await execPromise('yarn build', {
@@ -125,7 +125,7 @@ export function deployScreens({ scenarioUuid }, emitter, config, locator) {
       })
 
       emitter.emit('screens:pushingDist')
-      await pushScreens(buildDirectory, scenarioTitle, OrgId, emitter, config)
+      await pushScreens(buildDirectory, emitter, config)
 
       emitter.emit('screen:upload:success')
       await invalidateCloudFront(emitter, config)

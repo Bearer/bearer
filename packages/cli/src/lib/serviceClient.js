@@ -45,6 +45,15 @@ module.exports = url => {
         { Key, type },
         { Authorization: token }
       ),
+    getDevPoratlToken: ({ Username, infrastructurePassword }) =>
+      requestPromise(url, 'POST', '', {
+        query: `query FindUser {
+        findUser(email: "${Username}", infrastructurePassword: "${infrastructurePassword}") {
+          token
+        }
+      }
+      `
+      }),
     deployScenario: (eventName, OrgId, scenarioTitle) =>
       requestPromise(
         url,

@@ -2,39 +2,46 @@ const fs = require('fs') // from node.js
 const path = require('path') // from node.js
 const globby = require('globby')
 const mime = require('mime-types')
-const rc = require('rc')
 const serviceClient = require('./serviceClient')
 
 const DIST_DIRECTORY = 'dist'
 const WWW_DIRECTORY = 'www'
 
 async function asyncForEach(array, callback) {
-  for (let index = 0; index < array.length; index++) {
+  for (let index = 0; index < array.length; index += 1) {
     await callback(array[index], index, array)
   }
 }
 
-const pushScreens = async (
-  screensDirectory,
-  scenarioTitle,
-  OrgId,
-  emitter,
-  {
+const pushScreens = async (screensDirectory, emitter, config) => {
+  const {
     DeploymentUrl,
+    scenarioTitle,
+    OrgId,
+    DeveloperPortalAPIUrl,
     bearerConfig: {
       authorization: {
         AuthenticationResult: { IdToken: token }
       }
-    }
-  }
-) =>
-  new Promise(async (resolve, reject) => {
+    },
+    credentials
+  } = config
+  return new Promise(async (resolve, reject) => {
     const configuration = {
       distPath: path.join(screensDirectory, DIST_DIRECTORY),
       wwwPath: path.join(screensDirectory, WWW_DIRECTORY)
     }
 
     const integrationsClient = serviceClient(DeploymentUrl)
+    const devPortalClient = serviceClient(DeveloperPortalAPIUrl)
+    const {
+      body: {
+        data: {
+          findUser: { token: devPortalToken }
+        }
+      }
+    } = await devPortalClient.getDevPoratlToken(credentials)
+    console.log(devPortalToken)
     try {
       emitter.emit('screen:upload:start')
 
@@ -74,5 +81,6 @@ const pushScreens = async (
       reject(e)
     }
   })
+}
 
 module.exports = pushScreens

@@ -31,6 +31,9 @@ module.exports = () => {
   const configuration = {
     ...setup,
     HandlerBase: 'index.js',
+    get OrgId() {
+      return this.bearerConfig.OrgId
+    },
     get bearerConfig() {
       return rc('bearer')
     },
