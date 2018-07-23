@@ -145,7 +145,7 @@ export class SaveState extends StateIntentBase {
               }
             })
               .then((response: TStateData) => {
-                console.log('[BEARER]', 'success', data)
+                console.log('[BEARER]', 'success', response.data)
                 callback(null, {
                   meta: {
                     referenceId: response.data.Item.referenceId

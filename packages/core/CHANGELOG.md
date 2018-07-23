@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.22.3"></a>
+## [0.22.3](https://github.com/Bearer/bearer/compare/v0.22.3-0...v0.22.3) (2018-07-23)
+
+
+### Bug Fixes
+
+* **core:** handle non consistent payload ([2d409bb](https://github.com/Bearer/bearer/commit/2d409bb))
+
+
+
+
 <a name="0.21.0"></a>
 # [0.21.0](https://github.com/Bearer/bearer/compare/v0.20.2...v0.21.0) (2018-07-23)
 
