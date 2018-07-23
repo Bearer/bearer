@@ -108,7 +108,14 @@ export class SaveState extends StateIntentBase {
             })
               .then(data => {
                 console.log('[BEARER]', 'success', data)
-                callback(null, result)
+                callback(null, {
+                  meta: {
+                    referenceId: referenceId
+                  },
+                  data: {
+                    ...result
+                  }
+                })
               })
               .catch(e => {
                 console.error('[BEARER]', 'error', e)
@@ -135,7 +142,14 @@ export class SaveState extends StateIntentBase {
             })
               .then(data => {
                 console.log('[BEARER]', 'success', data)
-                callback(null, result)
+                callback(null, {
+                  meta: {
+                    referenceId: data.Item.referenceId
+                  },
+                  data: {
+                    ...result
+                  }
+                })
               })
               .catch(e => {
                 console.error('[BEARER]', 'error', e)
