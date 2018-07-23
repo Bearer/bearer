@@ -19,6 +19,10 @@ export default class LocationProvider {
   get srcScreenDir(): string {
     return path.join(this.scenarioRoot, 'screens')
   }
+  // ~/intents
+  get srcIntentDir(): string {
+    return path.join(this.scenarioRoot, 'intents')
+  }
 
   // ~/.build/
   get buildDir(): string {

@@ -179,7 +179,7 @@ async function generateIntent({
   const actionExample = getActionExample(intentType, authConfig.authType)
   const vars = { intentName: name, intentType, actionExample }
   const inDir = path.join(__dirname, 'templates/generate/intent')
-  const outDir = locator.scenarioRootFile('intents')
+  const outDir = locator.srcIntentDir
 
   copy(inDir, outDir, vars, (err, createdFiles) => {
     if (err) throw err
