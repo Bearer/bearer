@@ -82,7 +82,7 @@ at this point you can use the CLI as follow
 Additional tip
 
 ```bash
-echo 'alias bl="/path/bearer/bearer/packages/cli/bin/index.js"' >> ~/.zshrc # or .bashrc or everything else you use
+echo 'alias bl="/path/bearer/bearer/packages/cli/dist/bin/index.js"' >> ~/.zshrc # or .bashrc or everything else you use
 
 # within a scenario
 bl start
