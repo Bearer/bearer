@@ -138,9 +138,17 @@ export function RetrieveStateIntent(
 export function GetCollectionIntent(promise): Promise<any> {
   return new Promise((resolve, reject) => {
     promise
-      .then(collection => {
-        resolve({ items: collection })
-      })
+      .then(
+        ({
+          collection,
+          referenceId
+        }: {
+          collection: Array<any>
+          referenceId?: string
+        }) => {
+          resolve({ items: collection, referenceId })
+        }
+      )
       .catch(e => {
         reject({ items: [], err: e })
       })
@@ -150,8 +158,8 @@ export function GetCollectionIntent(promise): Promise<any> {
 export function GetResourceIntent(promise): Promise<any> {
   return new Promise((resolve, reject) => {
     promise
-      .then(resource => {
-        resolve({ object: resource })
+      .then(({ data, referenceId }: { data: any; referenceId?: string }) => {
+        resolve({ object: data, referenceId })
       })
       .catch(e => {
         reject({ object: null, err: e })
