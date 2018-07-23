@@ -80,7 +80,10 @@ export class BearerPopoverNavigator {
 
   get screenNodes() {
     return this.el.shadowRoot
-      ? this.el.shadowRoot.querySelector('slot:not([name])')['assignedNodes']()
+      ? this.el.shadowRoot
+          .querySelector('slot:not([name])')
+          ['assignedNodes']()
+          .filter(node => node.willAppear)
       : []
   }
 
