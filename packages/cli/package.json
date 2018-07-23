@@ -25,7 +25,7 @@
     "requirements-check": "node ./check-version.js"
   },
   "dependencies": {
-    "@bearer/intents": "^0.19.0",
+    "@bearer/intents": "^0.22.1",
     "@bearer/templates": "^0.22.0",
     "@bearer/transpiler": "^0.22.0",
     "@koa/cors": "^2.2.2",
