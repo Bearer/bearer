@@ -7,7 +7,9 @@ export default class LocationProvider {
 
   constructor(private readonly config: ScenarioConfig) {
     this.scenarioRc = this.config.scenarioConfig.config
-    this.scenarioRoot = path.dirname(this.scenarioRc)
+    if (this.scenarioRc) {
+      this.scenarioRoot = path.dirname(this.scenarioRc)
+    }
   }
 
   scenarioRootFile(filename: string): string {
