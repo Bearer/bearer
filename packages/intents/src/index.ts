@@ -79,71 +79,71 @@ export class SaveState extends StateIntentBase {
   }
 
   static intent(action) {
-    return (event, context, callback) => {
+    return async (event, context, callback) => {
       const { referenceId } = event.queryStringParameters
       const baseURL =
         event.context.bearerBaseURL || STATE_CLIENT.defaults.baseURL
-      STATE_CLIENT.request({
-        method: 'get',
-        url: `api/v1/items/${referenceId}`,
-        baseURL
-      })
-        .then(response => {
-          console.log('[BEARER]', 'received', response.data)
-          const state = response.data.Item
-          action(
-            event.context,
-            event.queryStringParameters,
-            event.body,
-            state,
-            result => {
-              STATE_CLIENT.request({
-                method: 'put',
-                url: `api/v1/items/${referenceId}`,
-                baseURL,
-                data: {
-                  ...result,
-                  ReadAllowed: true
-                }
-              })
-                .then(data => {
-                  console.log('[BEARER]', 'success', data)
-                  callback(null, result)
-                })
-                .catch(e => {
-                  console.error('[BEARER]', 'error', e)
-                  callback(`Error : ${e}`)
-                })
-            }
-          )
+      try {
+        const response = await STATE_CLIENT.request({
+          method: 'get',
+          url: `api/v1/items/${referenceId}`,
+          baseURL
         })
-        .catch(response => {
-          action(
-            event.context,
-            event.queryStringParameters,
-            event.body,
-            {},
-            result => {
-              STATE_CLIENT.request({
-                method: 'post',
-                url: `api/v1/items`,
-                baseURL,
-                data: {
-                  ...result,
-                  ReadAllowed: true
-                }
+        console.log('[BEARER]', 'received', response.data)
+        const state = response.data.Item
+        action(
+          event.context,
+          event.queryStringParameters,
+          event.body,
+          state,
+          result => {
+            STATE_CLIENT.request({
+              method: 'put',
+              url: `api/v1/items/${referenceId}`,
+              baseURL,
+              data: {
+                ...result,
+                ReadAllowed: true
+              }
+            })
+              .then(data => {
+                console.log('[BEARER]', 'success', data)
+                callback(null, result)
               })
-                .then(data => {
-                  console.log('[BEARER]', 'success', data)
-                  callback(null, result)
-                })
-                .catch(e => {
-                  console.error('[BEARER]', 'error', e)
-                  callback(`Error : ${e}`)
-                })
-            }
-          )
-        })
+              .catch(e => {
+                console.error('[BEARER]', 'error', e)
+                callback(`Error : ${e}`)
+              })
+          }
+        )
+      } catch (e) {
+        console.log(e)
+        action(
+          event.context,
+          event.queryStringParameters,
+          event.body,
+          {},
+          result => {
+            STATE_CLIENT.request({
+              method: 'post',
+              url: `api/v1/items`,
+              baseURL,
+              data: {
+                ...result,
+                ReadAllowed: true
+              }
+            })
+              .then(data => {
+                console.log('[BEARER]', 'success', data)
+                callback(null, result)
+              })
+              .catch(e => {
+                console.error('[BEARER]', 'error', e)
+                callback(`Error : ${e}`)
+              })
+          }
+        )
+      }
     }
   }
 }
