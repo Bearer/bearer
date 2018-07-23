@@ -9,6 +9,8 @@ Object {
 })
 export class FullComponent {
     private fetcher: BearerFetch;
+    @RetrieveStateIntent()
+    retrieve: BearerFetch;
     @BearerState()
     @State()
     attachedPullRequests: Array<any>;
@@ -37,6 +39,8 @@ export class FullComponent {
     componentWillLoad() { this.bearerContext.subscribe(this); }
     componentDidUnload() { this.bearerContext.unsubscribe(this); }
     bearerUpdateFromState = state => { this.attachedPullRequests = state[\\"attachedPullRequests\\"]; this.ducks = state['goats']; };
+    @Prop()
+    referenceId: string;
 }
 ",
 }

@@ -9,6 +9,7 @@ import PropInjector from './transformers/prop-injector'
 import PropBearerContextInjector from './transformers/prop-bearer-context-injector'
 import PropImporter from './transformers/prop-importer'
 import BearerStateInjector from './transformers/bearer-state-injector'
+import BearerReferenceIdInjector from './transformers/reference-id-injector'
 
 export type TranpilerOptions = {
   ROOT_DIRECTORY?: string
@@ -145,6 +146,7 @@ export default class Transpiler {
         PropInjector({ verbose }),
         PropBearerContextInjector({ verbose }),
         BearerStateInjector({ verbose }),
+        BearerReferenceIdInjector({ verbose }),
         dumpSourceCode(this.SCREENS_DIRECTORY, this.BUILD_SCR_DIRECTORY)({
           verbose: true
         })
