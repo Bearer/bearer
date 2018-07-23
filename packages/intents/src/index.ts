@@ -1,4 +1,4 @@
-import axios, { AxiosInstance } from 'axios'
+import axios, { AxiosInstance, AxiosResponse } from 'axios'
 
 import { sendSuccessMessage, sendErrorMessage } from './lambda'
 
@@ -6,6 +6,10 @@ export type TContext = {
   accessToken: string
   [key: string]: any
 }
+
+export type TStateData = AxiosResponse<{
+  Item: any
+}>
 
 export class Intent {
   static getCollection(
@@ -108,7 +112,14 @@ export class SaveState extends StateIntentBase {
             })
               .then(data => {
                 console.log('[BEARER]', 'success', data)
-                callback(null, result)
+                callback(null, {
+                  meta: {
+                    referenceId: referenceId
+                  },
+                  data: {
+                    ...result
+                  }
+                })
               })
               .catch(e => {
                 console.error('[BEARER]', 'error', e)
@@ -133,9 +144,16 @@ export class SaveState extends StateIntentBase {
                 ReadAllowed: true
               }
             })
-              .then(data => {
+              .then((response: TStateData) => {
                 console.log('[BEARER]', 'success', data)
-                callback(null, result)
+                callback(null, {
+                  meta: {
+                    referenceId: response.data.Item.referenceId
+                  },
+                  data: {
+                    ...result
+                  }
+                })
               })
               .catch(e => {
                 console.error('[BEARER]', 'error', e)
@@ -173,7 +191,13 @@ export class RetrieveState extends StateIntentBase {
               event.context,
               event.queryStringParameters,
               response.data.Item,
-              state => callback(null, state)
+              state =>
+                callback(null, {
+                  meta: {
+                    referenceId: response.data.Item.referenceId
+                  },
+                  data: state
+                })
             )
           }
         })
