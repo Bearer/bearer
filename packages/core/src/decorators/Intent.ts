@@ -26,23 +26,31 @@ export function Intent(
 ): IDecorator {
   return function(target: any, key: string): void {
     const getter = (): BearerFetch => {
-      return function(...args) {
+      return function(params = {}, init = {}) {
         if (!target['SCENARIO_ID']) {
           console.warn(MISSING_SCENARIO_ID)
         }
         const scenarioId = target['SCENARIO_ID']
-        // use setupId prop or retrieve it from the context
-
         if (!scenarioId) {
           return Promise.reject(new Error(MISSING_SCENARIO_ID))
         } else {
           const intent = intentRequest({
             intentName,
             scenarioId,
-            setupId: retrieveSetupId(target),
-            configId: retrieveConfigId(target)
+            setupId: retrieveSetupId(target)
           })
-          return IntentMapper[type](intent.apply(null, [...args]))
+          const referenceId = retrieveReferenceId(this)
+          const baseQuery = referenceId ? { referenceId } : {}
+
+          return IntentMapper[type](
+            intent.apply(null, [
+              {
+                ...params,
+                ...baseQuery
+              },
+              init
+            ])
+          )
         }
       }
     }
@@ -80,12 +88,14 @@ export function SaveStateIntent(
           const intent = intentRequest({
             intentName: 'SaveState',
             scenarioId,
-            setupId: retrieveSetupId(target),
-            configId: retrieveConfigId(target)
+            setupId: retrieveSetupId(this)
           })
+          const referenceId = retrieveReferenceId(this)
+          const baseQuery = referenceId ? { referenceId } : {}
+
           return IntentMapper[type](
             intent.apply(null, [
-              { ...query },
+              { ...query, ...baseQuery },
               { ...init, method: 'PUT', body: JSON.stringify(body) }
             ])
           )
@@ -104,30 +114,15 @@ export function SaveStateIntent(
   }
 }
 
-const MISSING_SETUP_ID =
-  'setupId is missing. Please provide setupId  (setupId|setup-id) '
-
-const MISSING_CONFIG_ID =
-  'setupId is missing. Please provide configId  (configId|config-id) '
-
 function retrieveSetupId(target: any) {
   const setupId =
-    target['setupId'] ||
+    target.setupId ||
     (target['bearerContext'] && target['bearerContext']['setupId'])
-  if (!setupId) {
-    console.warn(MISSING_SETUP_ID)
-  }
   return setupId
 }
 
-function retrieveConfigId(target: any) {
-  const configId =
-    target['configId'] ||
-    (target['bearerContext'] && target['bearerContext']['configId'])
-  if (!configId) {
-    console.warn(MISSING_CONFIG_ID)
-  }
-  return configId
+function retrieveReferenceId(target: any) {
+  return target.referenceId
 }
 
 // Usage
