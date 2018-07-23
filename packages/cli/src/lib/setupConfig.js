@@ -6,10 +6,6 @@ const fs = require('fs')
 const ini = require('ini')
 const path = require('path')
 
-const scenarioConfig = rc('scenario')
-const bearerConfig = rc('bearer')
-const rootPathRc = findUp.sync('.scenariorc')
-
 const IntegrationServiceHost = 'https://int.staging.bearer.sh/'
 
 let setup = {
@@ -32,19 +28,36 @@ module.exports = () => {
       BearerEnv: 'dev'
     }
   }
-
-  return {
+  const configuration = {
     ...setup,
     HandlerBase: 'index.js',
-    bearerConfig,
-    scenarioConfig,
-    rootPathRc,
+    get bearerConfig() {
+      return rc('bearer')
+    },
+    get scenarioConfig() {
+      return rc('scenario')
+    },
+    get scenarioTitle() {
+      return this.scenarioConfig.scenarioTitle
+    },
+    get rootPathRc() {
+      return findUp.sync('.scenariorc')
+    },
     storeBearerConfig(config) {
       const { OrgId, Username, ExpiresAt, authorization } = config
       fs.writeFileSync(
         this.bearerConfig.config || path.join(os.homedir(), '.bearerrc'),
         ini.stringify({ OrgId, Username, ExpiresAt, authorization })
       )
+    },
+    setScenarioConfig(config) {
+      const { scenarioTitle, scenarioId } = config
+      console.log(this.rootPathRc)
+      fs.writeFileSync(
+        this.rootPathRc,
+        ini.stringify({ scenarioTitle, scenarioId })
+      )
     }
   }
+  return configuration
 }
