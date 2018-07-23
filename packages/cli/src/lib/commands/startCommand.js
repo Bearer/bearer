@@ -87,7 +87,7 @@ function prepare(emitter, config) {
 
       const rootLevel = path.dirname(rootPathRc)
       const screensDirectory = path.join(rootLevel, 'screens')
-      const buildDirectory = path.join(screensDirectory, '.build')
+      const buildDirectory = path.join(rootLevel, '.build')
       const buildSrcDirectory = path.join(buildDirectory, 'src')
 
       // Create hidden folder
@@ -101,7 +101,7 @@ function prepare(emitter, config) {
       // Symlink node_modules
       emitter.emit('start:symlinkNodeModules')
       createEvenIfItExists(
-        path.join(screensDirectory, 'node_modules'),
+        path.join(rootLevel, 'node_modules'),
         path.join(buildDirectory, 'node_modules')
       )
 
@@ -109,7 +109,7 @@ function prepare(emitter, config) {
       emitter.emit('start:symlinkPackage')
 
       createEvenIfItExists(
-        path.join(screensDirectory, 'package.json'),
+        path.join(rootLevel, 'package.json'),
         path.join(buildDirectory, 'package.json')
       )
 
@@ -139,7 +139,7 @@ function prepare(emitter, config) {
       )
       // Link non TS files
       const watcher = await watchNonTSFiles(
-        path.join(screensDirectory, 'src'),
+        path.join(screensDirectory),
         path.join(buildDirectory, 'src')
       )
 
@@ -149,7 +149,7 @@ function prepare(emitter, config) {
 
       if (install) {
         emitter.emit('start:prepare:installingDependencies')
-        execSync('yarn install', { cwd: screensDirectory })
+        execSync('yarn install', { cwd: rootLevel })
       }
 
       return {
@@ -203,7 +203,7 @@ const start = (emitter, config) => async ({ open, install, watcher }) => {
     emitter.emit('start:watchers')
     if (watcher) {
       fs.watchFile(
-        path.join(rootLevel, 'intents', 'auth.config.json'),
+        path.join(rootLevel, 'auth.config.json'),
         { persistent: true, interval: 250 },
         () => ensureSetupAndConfigComponents(rootLevel)
       )
@@ -218,7 +218,7 @@ const start = (emitter, config) => async ({ open, install, watcher }) => {
         watcher ? null : '--no-watcher'
       ].filter(el => el),
       {
-        cwd: screensDirectory,
+        cwd: rootLevel,
         env: {
           ...process.env,
           BEARER_SCENARIO_ID: scenarioUuid,

@@ -20,7 +20,7 @@ async function startLocalDevelopmentServer(
   return new Promise(async (resolve, reject) => {
     try {
       const { config: devIntentsContext } =
-        (await explorer.search(path.join(rootLevel, 'intents'))) || {}
+        (await explorer.search(rootLevel)) || {}
       const { buildIntents } = require(path.join(
         __dirname,
         '..',

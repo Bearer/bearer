@@ -1,21 +1,23 @@
 import fs from 'fs'
-import Transpiler from '../src'
+import Transpiler, { TranpilerOptions } from '../src'
 import path from 'path'
-import { idText } from 'typescript'
 
 const fixtures = path.join(__dirname, '__fixtures__')
 const preFolder = path.join(fixtures, 'pre')
-const postFolder = path.join(fixtures, '../../.build')
+const postFolder = path.join(fixtures, '../../.build/src')
 
-const transpiler = new Transpiler(
-  __dirname + '/__fixtures__/pre/',
-  false,
-  '../../../.build/'
-)
+const options: TranpilerOptions = {
+  ROOT_DIRECTORY: fixtures,
+  watchFiles: false,
+  buildFolder: '../../.build/',
+  srcFolder: 'pre'
+}
+const transpiler = new Transpiler(options)
 
 describe('Transpiler integration test', () => {
   beforeAll(() => {
     process.env.BEARER_SCENARIO_ID = 'SPONGE_BOB'
+    console.log('[BEARER]', 'postFolder', postFolder)
     fs.readdirSync(postFolder).forEach(file => {
       if (file !== 'tsconfig.json') {
         fs.unlinkSync(path.join(postFolder, file))
@@ -47,20 +49,3 @@ describe('Transpiler integration test', () => {
     })
   })
 })
-// test('invoking transpiler', async () => {
-//   let transpiler = new Transpiler(SRC_DIRECTORY)
-//   await transpiler.run()
-//   expect(
-//     fs.existsSync(path.join(BUILD_DIRECTORY, 'exportObject.ts'))
-//   ).toBeTruthy()
-//   expect(
-//     fs.existsSync(path.join(BUILD_DIRECTORY, 'classComponent.ts'))
-//   ).toBeTruthy()
-// })
-
-// test('Adding BEARER_ID prop', async () => {
-//   pending('circular calls')
-//   let transpiler = new Transpiler(SRC_DIRECTORY)
-//   await transpiler.run()
-//   const builtFilePath = path.join(BUILD_DIRECTORY, 'classComponent.ts')
-// })

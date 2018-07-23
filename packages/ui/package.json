@@ -1,6 +1,6 @@
 {
   "name": "@bearer/ui",
-  "version": "0.19.1",
+  "version": "0.20.0",
   "description": "Bearer UI helper",
   "main": "dist/bearer-ui.js",
   "module": "dist/esm/index.js",
@@ -24,7 +24,7 @@
   },
   "dependencies": {
     "@bearer/core": "^0.19.1",
-    "@stencil/core": "0.10.2",
+    "@stencil/core": "^0.10.7",
     "@stencil/sass": "^0.0.5",
     "bootstrap": "^4.1.0"
   },

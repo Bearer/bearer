@@ -10,17 +10,27 @@ import PropBearerContextInjector from './transformers/prop-bearer-context-inject
 import PropImporter from './transformers/prop-importer'
 import BearerStateInjector from './transformers/bearer-state-injector'
 
+export type TranpilerOptions = {
+  ROOT_DIRECTORY?: string
+  watchFiles?: boolean
+  buildFolder?: string
+  srcFolder?: string
+}
+
 export default class Transpiler {
   private watcher: any
   private service: ts.LanguageService
   private rootFileNames: string[] = []
   private subscribers: ts.MapLike<Array<() => void>> = {}
 
-  constructor(
-    private readonly SCREENS_DIRECTORY = process.cwd(),
-    private watchFiles = true,
-    private buildFolder = '.build'
-  ) {
+  private readonly ROOT_DIRECTORY
+  private watchFiles = true
+  private buildFolder = '.build'
+  private srcFolder = 'screens'
+
+  constructor(options?: Partial<TranpilerOptions>) {
+    Object.assign(this, options)
+    this.ROOT_DIRECTORY = this.ROOT_DIRECTORY || process.cwd()
     const config = ts.readConfigFile(
       path.join(this.BUILD_DIRECTORY, 'tsconfig.json'),
       ts.sys.readFile
@@ -135,7 +145,7 @@ export default class Transpiler {
         PropInjector({ verbose }),
         PropBearerContextInjector({ verbose }),
         BearerStateInjector({ verbose }),
-        dumpSourceCode(this.SCREENS_DIRECTORY, this.BUILD_DIRECTORY)({
+        dumpSourceCode(this.SCREENS_DIRECTORY, this.BUILD_SCR_DIRECTORY)({
           verbose: true
         })
       ],
@@ -180,7 +190,15 @@ export default class Transpiler {
   }
 
   private get BUILD_DIRECTORY(): string {
-    return path.join(this.SCREENS_DIRECTORY, this.buildFolder)
+    return path.join(this.ROOT_DIRECTORY, this.buildFolder)
+  }
+
+  private get BUILD_SCR_DIRECTORY(): string {
+    return path.join(this.BUILD_DIRECTORY, 'src')
+  }
+
+  private get SCREENS_DIRECTORY(): string {
+    return path.join(this.ROOT_DIRECTORY, this.srcFolder)
   }
 }
 
@@ -198,7 +216,6 @@ function dumpSourceCode(srcDirectory, buildDirectory) {
           .replace(srcDirectory, buildDirectory)
           .replace(/js$/, 'ts')
           .replace(/jsx$/, 'tsx')
-
         fs.ensureFileSync(outPath)
         fs.writeFileSync(outPath, getSourceCode(tsSourceFile))
 

@@ -248,8 +248,8 @@ align-text@^0.1.1, align-text@^0.1.3:
     repeat-string "^1.5.2"
 
 amazon-cognito-identity-js@^2.0.3:
-  version "2.0.15"
-  resolved "https://registry.yarnpkg.com/amazon-cognito-identity-js/-/amazon-cognito-identity-js-2.0.15.tgz#f6d03fff623035597efbba3dde5592218d1afd7c"
+  version "2.0.16"
+  resolved "https://registry.yarnpkg.com/amazon-cognito-identity-js/-/amazon-cognito-identity-js-2.0.16.tgz#1a94a438d36d9b11ea2df87e5760b5b9057b4738"
   dependencies:
     buffer "4.9.1"
     crypto-browserify "1.0.9"
@@ -476,8 +476,8 @@ atob@^2.1.1:
   resolved "https://registry.yarnpkg.com/atob/-/atob-2.1.1.tgz#ae2d5a729477f289d60dd7f96a6314a22dd6c22a"
 
 aws-sdk@^2.224.1:
-  version "2.277.1"
-  resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.277.1.tgz#cbf0f740951ddad5a03402b2b499c4e537ea38bb"
+  version "2.278.1"
+  resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.278.1.tgz#eb4c696f53fca381fd8de9b26edd96bdb5c9e859"
   dependencies:
     buffer "4.9.1"
     events "1.1.1"
@@ -1843,8 +1843,8 @@ extend-shallow@^3.0.0, extend-shallow@^3.0.2:
     is-extendable "^1.0.1"
 
 extend@~3.0.1:
-  version "3.0.1"
-  resolved "https://registry.yarnpkg.com/extend/-/extend-3.0.1.tgz#a755ea7bc1adfcc5a31ce7e762dbaadc5e636444"
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/extend/-/extend-3.0.2.tgz#f8b1136b4071fbd8eb140aff858b1019ec2915fa"
 
 external-editor@^2.1.0:
   version "2.2.0"
@@ -5034,7 +5034,7 @@ stream-shift@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/stream-shift/-/stream-shift-1.0.0.tgz#d5c752825e5367e786f78e18e445ea223a155952"
 
-string-kit@^0.7.10:
+string-kit@^0.7.12:
   version "0.7.12"
   resolved "https://registry.yarnpkg.com/string-kit/-/string-kit-0.7.12.tgz#d0557cbd812274c4b121f633fe4a8372892b91d1"
   dependencies:
@@ -5167,14 +5167,14 @@ term-size@^1.2.0:
     execa "^0.7.0"
 
 terminal-kit@^1.15.1:
-  version "1.17.12"
-  resolved "https://registry.yarnpkg.com/terminal-kit/-/terminal-kit-1.17.12.tgz#467305a0140f40b2ea9e7474509510c625e88076"
+  version "1.17.13"
+  resolved "https://registry.yarnpkg.com/terminal-kit/-/terminal-kit-1.17.13.tgz#a8faf0f5dc587984d5159afe1d54864ea1b30fdd"
   dependencies:
     "@cronvel/get-pixels" "^3.3.1"
     async-kit "^2.2.4"
     ndarray "^1.0.18"
     nextgen-events "^1.1.0"
-    string-kit "^0.7.10"
+    string-kit "^0.7.12"
     tree-kit "^0.5.27"
 
 test-exclude@^4.2.1:

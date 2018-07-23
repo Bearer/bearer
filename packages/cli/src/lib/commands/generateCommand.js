@@ -13,7 +13,6 @@ const SCREEN = 'screen'
 async function generateTemplates({ emitter, templateType, rootPathRc }) {
   const authConfig = require(path.join(
     path.dirname(rootPathRc),
-    'intents',
     'auth.config.json'
   ))
 
@@ -148,7 +147,6 @@ async function generateIntent({ emitter, rootPathRc }) {
   const name = await askForName()
   const authConfig = require(path.join(
     path.dirname(rootPathRc),
-    'intents',
     'auth.config.json'
   ))
   const actionExample = getActionExample(intentType, authConfig.authType)

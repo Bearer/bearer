@@ -3,6 +3,33 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.20.2"></a>
+## [0.20.2](https://github.com/Bearer/bearer/compare/v0.20.1...v0.20.2) (2018-07-20)
+
+
+
+
+**Note:** Version bump only for package @bearer/bearer-cli
+
+<a name="0.20.1"></a>
+## [0.20.1](https://github.com/Bearer/bearer/compare/v0.20.0...v0.20.1) (2018-07-20)
+
+
+
+
+**Note:** Version bump only for package @bearer/bearer-cli
+
+<a name="0.20.0"></a>
+# [0.20.0](https://github.com/Bearer/bearer/compare/v0.19.1...v0.20.0) (2018-07-20)
+
+
+### Features
+
+* **templates:** Add BasicAuth and update Client ([#120](https://github.com/Bearer/bearer/issues/120)) ([afc0192](https://github.com/Bearer/bearer/commit/afc0192))
+
+
+
+
 <a name="0.19.0"></a>
 # [0.19.0](https://github.com/Bearer/bearer/compare/v0.18.0...v0.19.0) (2018-07-19)
 
