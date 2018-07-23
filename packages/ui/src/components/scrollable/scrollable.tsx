@@ -24,11 +24,12 @@ export class BearerScrollable {
     if (this.hasMore) {
       this.fetching = true
       this.fetcher({ page: this.page })
-        .then(({ items }) => {
-          this.hasMore = items.length === this.perPage
-          this.collection = [...this.collection, ...items]
+        .then((data: { items: Array<any> }) => {
+          this.hasMore = data.items.length === this.perPage
+          this.collection = [...this.collection, ...data.items]
           this.fetching = false
           this.page = this.page + 1
+          return data
         })
         .catch(() => {
           this.fetching = false

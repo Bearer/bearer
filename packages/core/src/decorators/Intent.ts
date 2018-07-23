@@ -140,13 +140,13 @@ export function GetCollectionIntent(promise): Promise<any> {
     promise
       .then(
         ({
-          collection,
-          referenceId
+          data,
+          collection
         }: {
+          data: Array<any>
           collection: Array<any>
-          referenceId?: string
         }) => {
-          resolve({ items: collection, referenceId })
+          resolve({ items: data || collection })
         }
       )
       .catch(e => {
