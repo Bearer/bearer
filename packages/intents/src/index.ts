@@ -17,7 +17,7 @@ export class Intent {
     { collection, error }: { collection?: any; error?: any }
   ) {
     if (collection) {
-      sendSuccessMessage(callback, collection)
+      sendSuccessMessage(callback, { data: collection })
     } else {
       sendErrorMessage(callback, { error: error || 'Unkown error' })
     }
@@ -25,7 +25,7 @@ export class Intent {
 
   static getObject(callback, { object, error }: { object?: any; error?: any }) {
     if (object) {
-      sendSuccessMessage(callback, object)
+      sendSuccessMessage(callback, { data: object })
     } else {
       sendErrorMessage(callback, { error: error || 'Unkown error' })
     }
