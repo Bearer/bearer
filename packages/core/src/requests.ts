@@ -1,7 +1,10 @@
 /* global fetch */
 import Bearer from './Bearer'
 
-export function bearerRequest(uri: string, baseParams = {}) {
+export function bearerRequest(
+  uri: string,
+  baseParams = {}
+): (params: any, init?: any) => Promise<any> {
   const url = `${Bearer.config.integrationHost}api/v1/${uri}`
 
   return function(params = {}, init = {}) {
@@ -47,8 +50,16 @@ export function itemRequest() {
   return bearerRequest('items')
 }
 
-export function intentRequest({ intentName, scenarioId, setupId, configId }) {
-  return bearerRequest(`${scenarioId}/${intentName}`, { setupId, configId })
+export function intentRequest({
+  intentName,
+  scenarioId,
+  setupId
+}: {
+  intentName: string
+  scenarioId: string
+  setupId: string
+}) {
+  return bearerRequest(`${scenarioId}/${intentName}`, { setupId })
 }
 
 export default {

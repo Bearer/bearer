@@ -56,7 +56,7 @@ describe('Intent decorator', () => {
         .catch(a => console.log(a))
 
       expect(fetch).toBeCalledWith(
-        'http://localhost:5555/api/v1/1234/getCollectionIntent?page=1&setupId=&configId=&integrationId=42',
+        'http://localhost:5555/api/v1/1234/getCollectionIntent?page=1&setupId=&integrationId=42',
         commonParams
       )
 
@@ -91,7 +91,7 @@ describe('Intent decorator', () => {
         .catch(a => console.log(a))
 
       expect(fetch).toBeCalledWith(
-        'http://localhost:5555/api/v1/1234/getResourceIntent?setupId=&configId=&integrationId=42',
+        'http://localhost:5555/api/v1/1234/getResourceIntent?setupId=&integrationId=42',
 
         commonParams
       )
