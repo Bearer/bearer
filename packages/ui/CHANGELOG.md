@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.22.3"></a>
+## [0.22.3](https://github.com/ionic-team/stencil-component-starter/compare/v0.22.3-0...v0.22.3) (2018-07-23)
+
+
+### Bug Fixes
+
+* **core:** handle non consistent payload ([2d409bb](https://github.com/ionic-team/stencil-component-starter/commit/2d409bb))
+
+
+
+
 <a name="0.21.2"></a>
 ## [0.21.2](https://github.com/ionic-team/stencil-component-starter/compare/v0.21.1...v0.21.2) (2018-07-23)
 
