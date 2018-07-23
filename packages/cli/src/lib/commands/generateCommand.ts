@@ -1,20 +1,29 @@
-const copy = require('copy-template-dir')
-const del = require('del')
-const path = require('path')
-const inquirer = require('inquirer')
-const Case = require('case')
-const intents = require('@bearer/intents')
-const templates = require('@bearer/templates')
-const rc = require('rc')
+import * as copy from 'copy-template-dir'
+import * as del from 'del'
+import * as path from 'path'
+import * as inquirer from 'inquirer'
+import * as Case from 'case'
+import * as intents from '@bearer/intents'
+import * as templates from '@bearer/templates'
+import * as rc from 'rc'
+import Locator from '../locationProvider'
 
 const INTENT = 'intent'
 const SCREEN = 'screen'
-
-async function generateTemplates({ emitter, templateType, rootPathRc }) {
-  const authConfig = require(path.join(
-    path.dirname(rootPathRc),
-    'auth.config.json'
-  ))
+enum TemplateTypes {
+  config = 'config',
+  setup = 'setup'
+}
+async function generateTemplates({
+  emitter,
+  templateType,
+  locator
+}: {
+  emitter: any
+  templateType: TemplateTypes
+  locator: Locator
+}) {
+  const authConfig = require(locator.scenarioRootFile('auth.config.json'))
 
   const scenarioConfig = rc('scenario')
   const { scenarioTitle } = scenarioConfig
@@ -22,7 +31,7 @@ async function generateTemplates({ emitter, templateType, rootPathRc }) {
   const configKey = `${templateType}Screens`
 
   const inDir = path.join(__dirname, `templates/generate/${templateType}`)
-  const outDir = path.join(path.dirname(rootPathRc), '/screens/.build/src/')
+  const outDir = locator.buildScreenDir
 
   await del(`${outDir}*${templateType}*.tsx`).then(paths => {
     console.log('Deleted files and folders:\n', paths.join('\n'))
@@ -44,18 +53,27 @@ async function generateTemplates({ emitter, templateType, rootPathRc }) {
   }
 }
 
-const generate = (emitter, { rootPathRc }) => async env => {
-  if (!rootPathRc) {
+const generate = (emitter, {}, locator: Locator) => async env => {
+  const { scenarioRoot } = locator
+  if (!scenarioRoot) {
     emitter.emit('rootPath:doesntExist')
     process.exit(1)
   }
 
   if (env.config) {
-    return generateTemplates({ emitter, templateType: 'config', rootPathRc })
+    return generateTemplates({
+      emitter,
+      templateType: TemplateTypes.config,
+      locator
+    })
   }
 
   if (env.setup) {
-    return generateTemplates({ emitter, templateType: 'setup', rootPathRc })
+    return generateTemplates({
+      emitter,
+      templateType: TemplateTypes.setup,
+      locator
+    })
   }
 
   const { template } = await inquirer.prompt([
@@ -76,7 +94,7 @@ const generate = (emitter, { rootPathRc }) => async env => {
     }
   ])
 
-  const params = { emitter, rootPathRc }
+  const params = { emitter, locator }
 
   switch (template) {
     case INTENT:
@@ -101,7 +119,13 @@ async function askForName() {
   return name
 }
 
-async function generateScreen({ emitter, rootPathRc }) {
+async function generateScreen({
+  emitter,
+  locator
+}: {
+  locator: Locator
+  emitter: any
+}) {
   const name = await askForName()
   const componentName = Case.pascal(name)
   const vars = {
@@ -109,7 +133,7 @@ async function generateScreen({ emitter, rootPathRc }) {
     componentTagName: Case.kebab(componentName)
   }
   const inDir = path.join(__dirname, 'templates/generate/screen')
-  const outDir = path.join(path.dirname(rootPathRc), 'screens/src/components')
+  const outDir = path.join(locator.srcScreenDir, 'components')
 
   copy(inDir, outDir, vars, (err, createdFiles) => {
     if (err) throw err
@@ -119,14 +143,14 @@ async function generateScreen({ emitter, rootPathRc }) {
   })
 }
 
-const filteredChoices = (intents, propertyFlag) =>
+const filteredChoices = (intents: Record<string, any>, propertyFlag) =>
   Object.keys(intents)
     .filter(intent => intents[intent][propertyFlag])
     .map(intent => ({
       name: intents[intent].display,
       value: intent
     }))
-    .sort((a, b) => a.name > b.name)
+    .sort((a, b) => (a.name > b.name ? 1 : -1))
 
 const choices = [
   ...filteredChoices(intents, 'isGlobalIntent'),
@@ -138,7 +162,13 @@ function getActionExample(intentType, authType) {
   return templates[authType][intentType]
 }
 
-async function generateIntent({ emitter, rootPathRc }) {
+async function generateIntent({
+  emitter,
+  locator
+}: {
+  emitter: any
+  locator: Locator
+}) {
   const { intentType } = await inquirer.prompt([
     {
       message: 'What type of intent do you want to generate',
@@ -148,15 +178,12 @@ async function generateIntent({ emitter, rootPathRc }) {
     }
   ])
   const name = await askForName()
-  const authConfig = require(path.join(
-    path.dirname(rootPathRc),
-    'auth.config.json'
-  ))
+  const authConfig = require(locator.scenarioRootFile('auth.config.json'))
   const actionExample = getActionExample(intentType, authConfig.authType)
   const vars = { intentName: name, intentType, actionExample }
   const inDir = path.join(__dirname, 'templates/generate/intent')
-  const outDir = path.join(path.dirname(rootPathRc), 'intents')
-  copy(inDir, outDir, vars, (err, createdFiles) => {
+
+  copy(inDir, locator.scenarioRootFile('intent'), vars, (err, createdFiles) => {
     if (err) throw err
     createdFiles.forEach(filePath =>
       emitter.emit('generateIntent:fileGenerated', filePath)
@@ -164,19 +191,17 @@ async function generateIntent({ emitter, rootPathRc }) {
   })
 }
 
-module.exports = {
-  useWith: (program, emitter, config) => {
-    program
-      .command('generate')
-      .alias('g')
-      .description(
-        `Generate intent or screen.
+export function useWith(program, emitter, config, locator): void {
+  program
+    .command('generate')
+    .alias('g')
+    .description(
+      `Generate intent or screen.
     $ bearer generate
-`
-      )
-      // .option('-t, --type <intentType>', 'Intent type.')
-      .option('--setup', 'generate setup file')
-      .option('--config', 'generate config file')
-      .action(generate(emitter, config))
-  }
+  `
+    )
+    // .option('-t, --type <intentType>', 'Intent type.')
+    .option('--setup', 'generate setup file')
+    .option('--config', 'generate config file')
+    .action(generate(emitter, config, locator))
 }

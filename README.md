@@ -4,11 +4,18 @@
 
 This repository contains
 
-- [Bearer core](./packages/core)
 - [Bearer CLI](./packages/cli)
+- [Bearer core](./packages/core)
+- [Bearer intents](./packages/intents)
+- [Bearer templates](./packages/templates)
+- [Bearer transpiler](./packages/transpiler)
 - [Bearer ui](./packages/ui)
 
 ## How to get Started
+
+---
+
+We use [Lerna](https://github.com/lerna/lerna) to manage dependencies.
 
 ```bash
 // install dependencies
@@ -23,7 +30,9 @@ lerna bootstrap
 
 _Now You should be able to go into each packages and run existing command (ex: yarn start)_
 
-We use [Lerna](https://github.com/lerna/lerna) to manage dependencies.
+## Development
+
+---
 
 ### ⚠️ Publish packages ️⚠️
 
@@ -33,11 +42,55 @@ yarn lerna-publish
 
 For further information on Lerna please read Lerna's documentation: [Lerna](https://github.com/lerna/lerna)
 
-### Development
+### Conventional commits
+
+As we try to be as clear as possible on changes within bearer packages, we adopted [conventional commits](https://conventionalcommits.org/) as pattern for git commits.
+
+_Learn more https://conventionalcommits.org/_
+
+This repository is [commitizen](https://github.com/commitizen/cz-cli) friendly, which means you can use the below command to generate your commits. (in the root directory).
+
+_Learn more about Commitizen and available solutions https://github.com/commitizen/cz-cli_
+
+```bash
+yarn cm
+```
+
+Using conventional commits allow us (through lerna) to generate automatically the [CHANGELOG](./CHANGELOG.md) and pick the correct version
+
+### Local package use
+
+Sometimes you need to test locally your changes before publishing anything. Here's some tips you can use.
+
+**CLI**
+
+Because npm/yarn link behaviours can be really annoying, if you switch multiple time a day between local and distribution version for instance, we recommand this process.
+
+- Start local watcher (automatically rebuild) CLI (because rewritten with TS)
+
+```bash
+cd packages/cli
+yarn build -w # starts TS compiler with watch mode enabled
+```
+
+at this point you can use the CLI as follow
+
+```bash
+/path/bearer/repo/packages/cli/dist/bin/index.js start # or whatever bearer command you want
+```
+
+Additional tip
+
+```bash
+echo 'alias bl="/path/bearer/bearer/packages/cli/dist/bin/index.js"' >> ~/.zshrc # or .bashrc or everything else you use
+
+# within a scenario
+bl start
+```
+
+**Other packages**
 
 If you want to use these packages locally (in repositories not contained in this one)
-
-**Link packages**
 
 _assuming we have a package named "@bearer/core"_
 

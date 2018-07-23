@@ -6,7 +6,7 @@ import { Component, State, Prop, Listen, Method } from '@bearer/core'
   shadow: true
 })
 export class BearerButtonPopover {
-  @State() visible: boolean = process.env.NODE_ENV === 'development'
+  @State() visible: boolean = false
 
   @Prop() opened: boolean
   @Prop() direction: string = 'top'

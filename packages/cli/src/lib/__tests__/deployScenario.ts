@@ -21,6 +21,7 @@ describe('deployScreens', () => {
     'Is not hanging in the end',
     async () => {
       expect.assertions(1)
+      const locator = {} as any
       await expect(
         deployScenario.deployScreens(
           { scenarioUuid: 'abc' },
@@ -29,7 +30,8 @@ describe('deployScreens', () => {
             scenarioConfig: { scenarioTitle: 'test' },
             bearerConfig: { OrgId: '4l1c3' },
             rootPathRc: './tmp/.test'
-          }
+          },
+          locator
         )
       ).resolves.toEqual({})
     },

@@ -6,7 +6,10 @@ const generateCmd = require('../src/lib/commands/generateCommand')
 
 const program = require('commander')
 
-const cli = new CLI(program, null, { HandlerBase: 'index.js' })
+const cli = new CLI(program, null, {
+  HandlerBase: 'index.js',
+  scenarioConfig: { config: '/tmp/scenariorc' }
+})
 
 cli.use(deployCmd)
 cli.use(generateCmd)

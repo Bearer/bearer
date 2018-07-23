@@ -7,42 +7,16 @@ const startLocalDevelopmentServer = require('./startLocalDevelopmentServer')
 
 const { spawn, execSync } = require('child_process')
 
-function createEvenIfItExists(target, sourcePath) {
-  try {
-    fs.symlinkSync(target, sourcePath)
-  } catch (e) {
-    if (!e.code === 'EEXIST') {
-      throw e
-    }
-  }
-}
+import Locator from '../locationProvider'
 
-function childProcessStdout(emitter, name) {
-  return data => {
-    emitter.emit('start:watchers:stdout', { name, data })
-  }
-}
-
-function childProcessStderr(emitter, name) {
-  return data => {
-    emitter.emit('start:watchers:stderr', { name, data })
-  }
-}
-
-function childProcessClose(emitter, name) {
-  return code => {
-    emitter.emit('start:watchers:close', { name, code })
-  }
-}
-
-function watchNonTSFiles(watchedPath, destPath) {
-  return new Promise((resolve, reject) => {
+function watchNonTSFiles(watchedPath, destPath): Promise<any> {
+  return new Promise((resolve, _reject) => {
     function callback(error) {
       if (error) {
         console.log('error', error)
       }
     }
-    watcher = chokidar.watch(watchedPath + '/**', {
+    const watcher = chokidar.watch(watchedPath + '/**', {
       ignored: /\.tsx?$/,
       persistent: true,
       followSymlinks: false
@@ -72,7 +46,7 @@ function watchNonTSFiles(watchedPath, destPath) {
   })
 }
 
-function prepare(emitter, config) {
+export function prepare(emitter, config, locator: Locator) {
   return async (
     { install = true, watchMode = true } = {
       install: true,
@@ -81,36 +55,31 @@ function prepare(emitter, config) {
   ) => {
     try {
       const {
-        rootPathRc,
         scenarioConfig: { scenarioTitle }
       } = config
-
-      const rootLevel = path.dirname(rootPathRc)
-      const screensDirectory = path.join(rootLevel, 'screens')
-      const buildDirectory = path.join(rootLevel, '.build')
-      const buildSrcDirectory = path.join(buildDirectory, 'src')
+      const { buildDir, srcScreenDir, buildScreenDir, scenarioRoot } = locator
 
       // Create hidden folder
       emitter.emit('start:prepare:buildFolder')
-      if (!fs.existsSync(buildDirectory)) {
-        fs.mkdirSync(buildDirectory)
-        fs.mkdirSync(buildSrcDirectory)
+      if (!fs.existsSync(buildDir)) {
+        fs.mkdirSync(buildDir)
+        fs.mkdirSync(buildScreenDir)
       }
-      fs.emptyDirSync(buildSrcDirectory)
+      fs.emptyDirSync(buildScreenDir)
 
       // Symlink node_modules
       emitter.emit('start:symlinkNodeModules')
       createEvenIfItExists(
-        path.join(rootLevel, 'node_modules'),
-        path.join(buildDirectory, 'node_modules')
+        path.join(scenarioRoot, 'node_modules'),
+        path.join(buildDir, 'node_modules')
       )
 
       // symlink package.json
       emitter.emit('start:symlinkPackage')
 
       createEvenIfItExists(
-        path.join(rootLevel, 'package.json'),
-        path.join(buildDirectory, 'package.json')
+        path.join(scenarioRoot, 'package.json'),
+        path.join(buildDir, 'package.json')
       )
 
       // Copy stencil.config.json
@@ -120,10 +89,8 @@ function prepare(emitter, config) {
         componentTagName: Case.kebab(scenarioTitle)
       }
       const inDir = path.join(__dirname, 'templates', 'start', '.build')
-      const outDir = buildDirectory
-
       await new Promise((resolve, reject) => {
-        copy(inDir, outDir, vars, (err, createdFiles) => {
+        copy(inDir, buildDir, vars, (err, createdFiles) => {
           if (err) reject(err)
           createdFiles &&
             createdFiles.forEach(filePath =>
@@ -134,14 +101,11 @@ function prepare(emitter, config) {
       })
 
       createEvenIfItExists(
-        path.join(buildDirectory, 'global'),
-        path.join(buildSrcDirectory, 'global')
+        path.join(buildDir, 'global'),
+        path.join(buildScreenDir, 'global')
       )
       // Link non TS files
-      const watcher = await watchNonTSFiles(
-        path.join(screensDirectory),
-        path.join(buildDirectory, 'src')
-      )
+      const watcher = await watchNonTSFiles(srcScreenDir, buildScreenDir)
 
       if (!watchMode) {
         watcher.close()
@@ -149,13 +113,13 @@ function prepare(emitter, config) {
 
       if (install) {
         emitter.emit('start:prepare:installingDependencies')
-        execSync('yarn install', { cwd: rootLevel })
+        execSync('yarn install', { cwd: scenarioRoot })
       }
 
       return {
-        rootLevel,
-        buildDirectory,
-        screensDirectory
+        rootLevel: scenarioRoot,
+        buildDirectory: buildDir,
+        screensDirectory: srcScreenDir
       }
     } catch (error) {
       emitter.emit('start:prepare:failed', { error })
@@ -173,7 +137,11 @@ const ensureSetupAndConfigComponents = rootLevel => {
   })
 }
 
-const start = (emitter, config) => async ({ open, install, watcher }) => {
+export const start = (emitter, config, locator: Locator) => async ({
+  open,
+  install,
+  watcher
+}) => {
   const {
     bearerConfig: { OrgId },
     scenarioConfig: { scenarioTitle }
@@ -182,30 +150,28 @@ const start = (emitter, config) => async ({ open, install, watcher }) => {
   const scenarioUuid = `${OrgId}-${scenarioTitle}`
 
   try {
-    const { buildDirectory, rootLevel, screensDirectory } = await prepare(
-      emitter,
-      config
-    )({
+    await prepare(emitter, config, locator)({
       install,
       watchMode: watcher
     })
 
+    const { scenarioRoot, buildDir } = locator
     /* start local development server */
     const integrationHost = await startLocalDevelopmentServer(
-      rootLevel,
+      scenarioRoot,
       scenarioUuid,
       emitter,
       config
     )
 
-    ensureSetupAndConfigComponents(rootLevel)
+    ensureSetupAndConfigComponents(buildDir)
 
     emitter.emit('start:watchers')
     if (watcher) {
       fs.watchFile(
-        path.join(rootLevel, 'auth.config.json'),
+        path.join(scenarioRoot, 'auth.config.json'),
         { persistent: true, interval: 250 },
-        () => ensureSetupAndConfigComponents(rootLevel)
+        () => ensureSetupAndConfigComponents(buildDir)
       )
     }
 
@@ -218,7 +184,7 @@ const start = (emitter, config) => async ({ open, install, watcher }) => {
         watcher ? null : '--no-watcher'
       ].filter(el => el),
       {
-        cwd: rootLevel,
+        cwd: scenarioRoot,
         env: {
           ...process.env,
           BEARER_SCENARIO_ID: scenarioUuid,
@@ -240,7 +206,7 @@ const start = (emitter, config) => async ({ open, install, watcher }) => {
             args.push('--no-open')
           }
           const stencil = spawn('yarn', args, {
-            cwd: buildDirectory,
+            cwd: buildDir,
             env: {
               ...process.env,
               BEARER_SCENARIO_ID: scenarioUuid,
@@ -261,20 +227,48 @@ const start = (emitter, config) => async ({ open, install, watcher }) => {
   }
 }
 
-module.exports = {
-  prepare,
-  start,
-  useWith: (program, emitter, config) => {
-    program
-      .command('start')
-      .description(
-        `Start local development server.
-    $ bearer start
+export function useWith(program, emitter, config, locator: Locator) {
+  program
+    .command('start')
+    .description(
+      `Start local development server.
+  $ bearer start
 `
-      )
-      .option('--no-open', 'Do not open web browser')
-      .option('--no-install', 'Do not run yarn|npm install')
-      .option('--no-watcher', 'Run transpiler only once')
-      .action(start(emitter, config))
+    )
+    .option('--no-open', 'Do not open web browser')
+    .option('--no-install', 'Do not run yarn|npm install')
+    .option('--no-watcher', 'Run transpiler only once')
+    .action(start(emitter, config, locator))
+}
+
+/**
+ * Logger helpers
+ */
+
+function childProcessStdout(emitter, name) {
+  return data => {
+    emitter.emit('start:watchers:stdout', { name, data })
+  }
+}
+
+function childProcessStderr(emitter, name) {
+  return data => {
+    emitter.emit('start:watchers:stderr', { name, data })
+  }
+}
+
+function childProcessClose(emitter, name) {
+  return code => {
+    emitter.emit('start:watchers:close', { name, code })
+  }
+}
+
+function createEvenIfItExists(target, sourcePath): void {
+  try {
+    fs.symlinkSync(target, sourcePath)
+  } catch (e) {
+    if (e.code !== 'EEXIST') {
+      throw e
+    }
   }
 }

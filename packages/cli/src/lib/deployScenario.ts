@@ -82,7 +82,7 @@ export function deployIntents({ scenarioUuid }, emitter, config) {
   })
 }
 
-export function deployScreens({ scenarioUuid }, emitter, config) {
+export function deployScreens({ scenarioUuid }, emitter, config, locator) {
   return new Promise(async (resolve, reject) => {
     const {
       scenarioConfig: { scenarioTitle },
@@ -91,7 +91,7 @@ export function deployScreens({ scenarioUuid }, emitter, config) {
     } = config
 
     try {
-      const { buildDirectory } = await prepare(emitter, config)({
+      const { buildDirectory } = await prepare(emitter, config, locator)({
         install: true,
         watchMode: null
       })
@@ -180,7 +180,7 @@ function transpileStep(
   })
 }
 
-export function deployScenario({ scenarioUuid }, emitter, config) {
+export function deployScenario({ scenarioUuid }, emitter, config, locator) {
   return new Promise(async (resolve, reject) => {
     let calculatedConfig = config
 
@@ -192,7 +192,7 @@ export function deployScenario({ scenarioUuid }, emitter, config) {
       }
       await developerPortal(emitter, 'predeploy', calculatedConfig)
       await deployIntents({ scenarioUuid }, emitter, calculatedConfig)
-      await deployScreens({ scenarioUuid }, emitter, calculatedConfig)
+      await deployScreens({ scenarioUuid }, emitter, calculatedConfig, locator)
       await developerPortal(emitter, 'deployed', calculatedConfig)
       resolve()
     } catch (e) {

@@ -1,15 +1,20 @@
-const { deployScenario } = require('../deployScenario')
-const inquirer = require('inquirer')
-const fs = require('fs')
-const ini = require('ini')
-const pathJs = require('path')
-const Case = require('case')
+import { deployScenario } from '../deployScenario'
+import * as inquirer from 'inquirer'
+import * as fs from 'fs'
+import * as ini from 'ini'
+import * as Case from 'case'
 
-const deploy = (emitter, config) => async ({ path = '.' }) => {
+import Locator from '../locationProvider'
+import { ScenarioConfig } from '../types'
+
+const deploy = (emitter, config: ScenarioConfig, locator: Locator) => async ({
+  path = '.'
+}) => {
   emitter.emit('deploy:started')
-  const { rootPathRc, BearerEnv } = config
+  const { BearerEnv } = config
 
-  if (!rootPathRc) {
+  // Always true?
+  if (!locator.scenarioRoot) {
     emitter.emit('rootPath:doesntExist')
     process.exit(1)
   }
@@ -40,7 +45,7 @@ const deploy = (emitter, config) => async ({ path = '.' }) => {
 
   scenarioTitle = Case.kebab(Case.camel(scenarioTitle))
   const scenarioUuid = `${OrgId}-${scenarioTitle}`
-  let scenarioConfigUpdate = { scenarioTitle }
+  let scenarioConfigUpdate: any = { scenarioTitle }
   if (config.scenarioConfig.OrgId && config.scenarioConfig.OrgId !== OrgId) {
     scenarioConfigUpdate = {
       ...scenarioConfigUpdate,
@@ -48,10 +53,10 @@ const deploy = (emitter, config) => async ({ path = '.' }) => {
     }
   }
 
-  fs.writeFileSync(pathJs.join(rootPathRc), ini.stringify(scenarioConfigUpdate))
+  fs.writeFileSync(locator.scenarioRc, ini.stringify(scenarioConfigUpdate))
 
   try {
-    await deployScenario({ path, scenarioUuid }, emitter, config)
+    await deployScenario({ scenarioUuid }, emitter, config, locator)
     const setupUrl = `https://demo.bearer.tech/?scenarioUuid=${scenarioUuid}&scenarioTagName=${scenarioTitle}&name=${scenarioTitle}&orgId=${OrgId}&stage=${BearerEnv}`
 
     emitter.emit('deploy:finished', {
@@ -66,7 +71,7 @@ const deploy = (emitter, config) => async ({ path = '.' }) => {
   }
 }
 module.exports = {
-  useWith: (program, emitter, config) => {
+  useWith: (program, emitter, config, locator) => {
     program
       .command('deploy')
       .description(
@@ -74,6 +79,6 @@ module.exports = {
     $ bearer deploy
 `
       )
-      .action(deploy(emitter, config))
+      .action(deploy(emitter, config, locator))
   }
 }

@@ -1,4 +1,4 @@
-import axios from 'axios'
+import axios, { AxiosInstance } from 'axios'
 
 import { sendSuccessMessage, sendErrorMessage } from './lambda'
 
@@ -28,7 +28,7 @@ export class Intent {
   }
 }
 
-export const STATE_CLIENT = axios.create({
+export const STATE_CLIENT: AxiosInstance = axios.create({
   baseURL: 'https://int.staging.bearer.sh',
   timeout: 5000,
   headers: {
@@ -55,7 +55,7 @@ class BaseIntent {
 
 class GenericIntentBase extends BaseIntent {
   static get isStateIntent(): boolean {
-    return false 
+    return false
   }
 
   static get isGlobalIntent(): boolean {
@@ -65,11 +65,11 @@ class GenericIntentBase extends BaseIntent {
 
 class StateIntentBase extends BaseIntent {
   static get isStateIntent(): boolean {
-    return true 
+    return true
   }
 
   static get isGlobalIntent(): boolean {
-    return false 
+    return false
   }
 }
 

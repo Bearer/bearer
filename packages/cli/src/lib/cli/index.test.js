@@ -7,7 +7,9 @@ let command = {
 }
 
 test('using a command', () => {
-  const cli = new CLI(program)
+  const cli = new CLI(program, null, {
+    scenarioConfig: { config: '/tmp/scenariorc' }
+  })
   cli.use(command)
   expect(cli.program.commands[0]._name).toBe('goats')
 })

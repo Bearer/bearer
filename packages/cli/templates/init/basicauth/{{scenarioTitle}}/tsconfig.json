@@ -18,8 +18,9 @@
     "jsxFactory": "h"
   },
   "include": [
-    "src",
-    "types/jsx.d.ts"
+    "screens",
+    "types/jsx.d.ts",
+    ".build/src/components.d.ts"
   ],
   "exclude": [
     "node_modules"
