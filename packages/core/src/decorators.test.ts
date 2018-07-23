@@ -34,7 +34,7 @@ describe('Intent decorator', () => {
 
     beforeEach(() => {
       fetch.resetMocks()
-      fetch.mockResponseOnce(JSON.stringify(collection))
+      fetch.mockResponseOnce(JSON.stringify({ data: collection }))
     })
 
     it('adds a method', () => {
@@ -47,7 +47,7 @@ describe('Intent decorator', () => {
       )
     })
 
-    it('uses GetResourceIntent', async () => {
+    it('uses GetCollectionIntent', async () => {
       const success = jest.fn()
 
       await decoratedInstance
@@ -69,7 +69,7 @@ describe('Intent decorator', () => {
 
     beforeEach(() => {
       fetch.resetMocks()
-      fetch.mockResponseOnce(JSON.stringify(item))
+      fetch.mockResponseOnce(JSON.stringify({ data: item }))
     })
 
     it('adds a method', () => {
@@ -96,7 +96,7 @@ describe('Intent decorator', () => {
         commonParams
       )
 
-      expect(success).toBeCalledWith({ object: item })
+      expect(success).toBeCalledWith({ object: item, referenceId: undefined })
     })
   })
 })
