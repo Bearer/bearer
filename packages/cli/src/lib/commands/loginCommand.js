@@ -32,6 +32,7 @@ const login = (emitter, config) => async ({ email }) => {
           res.body.authorization.AuthenticationResult.ExpiresIn + Date.now()
         config.storeBearerConfig({
           ...res.body.user,
+          infrastructurePassword: AccessToken,
           ExpiresAt,
           authorization: res.body.authorization
         })

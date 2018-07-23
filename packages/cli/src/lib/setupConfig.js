@@ -43,11 +43,27 @@ module.exports = () => {
     get rootPathRc() {
       return findUp.sync('.scenariorc')
     },
+    get credentials() {
+      const { Username, infrastructurePassword } = this.bearerConfig
+      return { Username, infrastructurePassword }
+    },
     storeBearerConfig(config) {
-      const { OrgId, Username, ExpiresAt, authorization } = config
+      const {
+        OrgId,
+        Username,
+        ExpiresAt,
+        authorization,
+        infrastructurePassword = ''
+      } = config
       fs.writeFileSync(
         this.bearerConfig.config || path.join(os.homedir(), '.bearerrc'),
-        ini.stringify({ OrgId, Username, ExpiresAt, authorization })
+        ini.stringify({
+          OrgId,
+          Username,
+          ExpiresAt,
+          authorization,
+          infrastructurePassword
+        })
       )
     },
     setScenarioConfig(config) {
