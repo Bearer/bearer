@@ -1,26 +1,21 @@
-const path = require('path')
-const server = require('./server')
-const getPort = require('get-port')
-const Router = require('koa-router')
-const unzip = require('unzip')
-const fs = require('fs-extra')
-const cosmiconfig = require('cosmiconfig')
-const storage = require('./storage')
+import * as path from 'path'
+import server = require('./server')
+import * as getPort from 'get-port'
+import * as Router from 'koa-router'
+import * as unzip from 'unzip'
+import * as fs from 'fs-extra'
+import * as cosmiconfig from 'cosmiconfig'
+import storage from './storage'
 
 const LOCAL_DEV_CONFIGURATION = 'dev'
 const explorer = cosmiconfig(LOCAL_DEV_CONFIGURATION)
 
 const router = new Router({ prefix: '/api/v1/' })
 
-async function startLocalDevelopmentServer(
-  rootLevel,
-  scenarioUuid,
-  emitter,
-  config
-) {
+function startLocalDevelopmentServer(rootLevel, scenarioUuid, emitter, config) {
   return new Promise(async (resolve, reject) => {
     try {
-      const { config: devIntentsContext } =
+      const { config: devIntentsContext = {} } =
         (await explorer.search(rootLevel)) || {}
       const { buildIntents } = require(path.join(
         __dirname,
@@ -60,7 +55,6 @@ async function startLocalDevelopmentServer(
           endpoint,
           (ctx, next) =>
             new Promise((resolve, reject) => {
-              console.log('Body is: ', ctx.request.body)
               lambdas[intentName](
                 {
                   context: {
@@ -83,15 +77,15 @@ async function startLocalDevelopmentServer(
         )
       }
 
-      server.use(router.routes())
-      server.use(router.allowedMethods())
       server.use(storage.routes())
       server.use(storage.allowedMethods())
+      server.use(router.routes())
+      server.use(router.allowedMethods())
 
       server.listen(port, () => {
         emitter.emit('start:localServer:start', { port })
         emitter.emit('start:localServer:endpoints', {
-          endpoints: router.stack
+          endpoints: [...storage.stack, ...router.stack]
         })
       })
 
