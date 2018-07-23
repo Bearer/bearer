@@ -11,6 +11,7 @@ import {
 })
 export class FullComponent {
   @Intent('ListRepositories') fetcher: BearerFetch
+  @RetrieveStateIntent() retrieve: BearerFetch
   @BearerState() attachedPullRequests: Array<any>
   @BearerState({ statePropName: 'goats' })
   ducks: Array<any>

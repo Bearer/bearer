@@ -305,7 +305,7 @@ export function ensureStateImported(
   return ensureHasImportFromCore(tsSourceFile, Decorators.State)
 }
 
-function propDecorator() {
+export function propDecorator() {
   return ts.createDecorator(
     ts.createCall(
       ts.createIdentifier(Decorators.Prop) as ts.Expression,
