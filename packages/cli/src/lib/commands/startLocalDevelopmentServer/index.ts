@@ -5,14 +5,15 @@ import * as Router from 'koa-router'
 import * as unzip from 'unzip'
 import * as fs from 'fs-extra'
 import * as cosmiconfig from 'cosmiconfig'
-import storage from './storage'
+import Storage from './storage'
 
-const LOCAL_DEV_CONFIGURATION = 'dev'
-const explorer = cosmiconfig(LOCAL_DEV_CONFIGURATION)
 
-const router = new Router({ prefix: '/api/v1/' })
 
 function startLocalDevelopmentServer(rootLevel, scenarioUuid, emitter, config) {
+  const LOCAL_DEV_CONFIGURATION = 'dev'
+  const explorer = cosmiconfig(LOCAL_DEV_CONFIGURATION)
+  const router = new Router({ prefix: '/api/v1/' })
+
   return new Promise(async (resolve, reject) => {
     try {
       const { config: devIntentsContext = {} } =
@@ -76,7 +77,7 @@ function startLocalDevelopmentServer(rootLevel, scenarioUuid, emitter, config) {
           ctx => ctx.ok(ctx.intentDatum)
         )
       }
-
+      const storage = Storage()
       server.use(storage.routes())
       server.use(storage.allowedMethods())
       server.use(router.routes())
