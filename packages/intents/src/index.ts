@@ -2,8 +2,27 @@ import axios, { AxiosInstance, AxiosResponse } from 'axios'
 
 import { sendSuccessMessage, sendErrorMessage } from './lambda'
 
-export type TContext = {
+export type Toauth2Context = {
   accessToken: string
+  bearerBaseURL: string
+  [key: string]: any
+}
+
+export type TnoAuthContext = {
+  bearerBaseURL: string
+  [key: string]: any
+}
+
+export type TbasicAuthContext = {
+  username: string
+  password: string
+  bearerBaseURL: string
+  [key: string]: any
+}
+
+export type TapiKeyContext = {
+  apiKey: string
+  bearerBaseURL: string
   [key: string]: any
 }
 

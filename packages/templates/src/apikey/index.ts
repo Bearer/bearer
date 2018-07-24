@@ -18,12 +18,12 @@ export default {
   }
   `,
   RetrieveState: `
-  static action(_context: TContext, _params: any, state, callback) {
+  static action(_context: TapiKeyContext, _params: any, state, callback) {
     callback({ items: state.items.map(({ name }) => name) })
   }
   `,
   GetCollection: `
-  static action(context: TContext, params: any, callback: (params: any) => void) {
+  static action(context: TapiKeyContext, params: any, callback: (params: any) => void) {
     //... your code goes here
     // use the client defined in client.ts to fetch real object like that:
     // Client(context.authAccess.apiKey).get('/people').then(({ data }) => {
@@ -33,7 +33,7 @@ export default {
   }
   `,
   GetObject: `
-  static action(context: TContext, params: any, callback: (params: any) => void) {
+  static action(context: TapiKeyContext, params: any, callback: (params: any) => void) {
     //... your code goes here
     // use the client defined in client.ts to fetch real object like that:
     // Client(context.authAccess.apiKey).get(\`/people/\${params.id}\`)

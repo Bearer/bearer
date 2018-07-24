@@ -46,9 +46,7 @@ async function generateTemplates({
 
     copy(inDir, outDir, vars, (err, createdFiles) => {
       if (err) throw err
-      createdFiles.forEach(filePath =>
-        emitter.emit('generateIntent:fileGenerated', filePath)
-      )
+      createdFiles.forEach(filePath => emitter.emit('generateIntent:fileGenerated', filePath))
     })
   }
 }
@@ -131,7 +129,7 @@ async function generateScreen({ emitter, locator }: { locator: Locator; emitter:
 
   copy(inDir, outDir, vars, (err, createdFiles) => {
     if (err) throw err
-    createdFiles.forEach(filePath => emitter.emit('generateIntent:fileGenerated', filePath))
+    createdFiles.forEach(filePath => emitter.emit('generateScreen:fileGenerated', filePath))
   })
 }
 
@@ -166,7 +164,7 @@ async function generateIntent({ emitter, locator }: { emitter: any; locator: Loc
   const name = await askForName()
   const authConfig = require(locator.scenarioRootFile('auth.config.json'))
   const actionExample = getActionExample(intentType, authConfig.authType)
-  const vars = { intentName: name, intentType, actionExample }
+  const vars = { intentName: name, authType: authConfig.authType, intentType, actionExample }
   const inDir = path.join(__dirname, 'templates/generate/intent')
   const outDir = locator.srcIntentDir
 
