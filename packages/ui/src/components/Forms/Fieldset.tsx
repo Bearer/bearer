@@ -10,16 +10,7 @@ export interface Option {
   checked?: boolean
 }
 
-export type FieldType =
-  | 'text'
-  | 'password'
-  | 'email'
-  | 'tel'
-  | 'submit'
-  | 'textarea'
-  | 'radio'
-  | 'checkbox'
-  | 'select'
+export type FieldType = 'text' | 'password' | 'email' | 'tel' | 'submit' | 'textarea' | 'radio' | 'checkbox' | 'select'
 
 export interface Field {
   type: FieldType
@@ -64,14 +55,7 @@ export class FieldSet {
     return this.set.map(func)
   }
 
-  reduce(
-    func: (
-      previousValue: Field,
-      currentValue: Field,
-      currentIndex: number,
-      array: Field[]
-    ) => Field
-  ) {
+  reduce(func: (previousValue: Field, currentValue: Field, currentIndex: number, array: Field[]) => Field) {
     return this.set.reduce(func)
   }
 

@@ -1,6 +1,6 @@
 {
   "name": "@bearer/bearer-cli",
-  "version": "0.22.0",
+  "version": "0.23.2",
   "main": "index.js",
   "repository": "git@github.com:Bearer/bearer.git",
   "author": "Radek Molenda <radek@bearer.com>",
@@ -25,9 +25,9 @@
     "requirements-check": "node ./check-version.js"
   },
   "dependencies": {
-    "@bearer/intents": "^0.19.0",
+    "@bearer/intents": "^0.23.0",
     "@bearer/templates": "^0.22.0",
-    "@bearer/transpiler": "^0.22.0",
+    "@bearer/transpiler": "^0.23.0",
     "@koa/cors": "^2.2.2",
     "amazon-cognito-identity-js": "^2.0.3",
     "archiver": "^2.1.1",
@@ -47,6 +47,7 @@
     "graceful-fs": "^4.1.11",
     "ini": "^1.3.5",
     "inquirer": "^5.2.0",
+    "knex": "^0.15.2",
     "koa": "^2.5.2",
     "koa-bodyparser": "^4.2.1",
     "koa-logger": "^3.2.0",
@@ -58,6 +59,7 @@
     "rc": "^1.2.7",
     "request": "^2.85.0",
     "semver": "^5.5.0",
+    "sqlite3": "^4.0.2",
     "stream-buffers": "^3.0.1",
     "terminal-kit": "^1.15.1",
     "ts-loader": "^4.4.1",
@@ -70,7 +72,11 @@
   },
   "devDependencies": {
     "@types/jest": "^23.3.0",
+    "@types/knex": "^0.14.17",
+    "@types/koa-bodyparser": "^5.0.1",
     "@types/node": "^10.5.2",
+    "@types/sqlite3": "^3.1.3",
+    "@types/uuid": "^3.4.3",
     "copyfiles": "^2.0.0",
     "jest": "^23.1.0",
     "mkdir-recursive": "^0.4.0",

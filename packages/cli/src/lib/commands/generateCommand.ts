@@ -119,13 +119,7 @@ async function askForName() {
   return name
 }
 
-async function generateScreen({
-  emitter,
-  locator
-}: {
-  locator: Locator
-  emitter: any
-}) {
+async function generateScreen({ emitter, locator }: { locator: Locator; emitter: any }) {
   const name = await askForName()
   const componentName = Case.pascal(name)
   const vars = {
@@ -137,9 +131,7 @@ async function generateScreen({
 
   copy(inDir, outDir, vars, (err, createdFiles) => {
     if (err) throw err
-    createdFiles.forEach(filePath =>
-      emitter.emit('generateIntent:fileGenerated', filePath)
-    )
+    createdFiles.forEach(filePath => emitter.emit('generateIntent:fileGenerated', filePath))
   })
 }
 
@@ -162,13 +154,7 @@ function getActionExample(intentType, authType) {
   return templates[authType][intentType]
 }
 
-async function generateIntent({
-  emitter,
-  locator
-}: {
-  emitter: any
-  locator: Locator
-}) {
+async function generateIntent({ emitter, locator }: { emitter: any; locator: Locator }) {
   const { intentType } = await inquirer.prompt([
     {
       message: 'What type of intent do you want to generate',
@@ -182,12 +168,11 @@ async function generateIntent({
   const actionExample = getActionExample(intentType, authConfig.authType)
   const vars = { intentName: name, intentType, actionExample }
   const inDir = path.join(__dirname, 'templates/generate/intent')
+  const outDir = locator.srcIntentDir
 
-  copy(inDir, locator.scenarioRootFile('intent'), vars, (err, createdFiles) => {
+  copy(inDir, outDir, vars, (err, createdFiles) => {
     if (err) throw err
-    createdFiles.forEach(filePath =>
-      emitter.emit('generateIntent:fileGenerated', filePath)
-    )
+    createdFiles.forEach(filePath => emitter.emit('generateIntent:fileGenerated', filePath))
   })
 }
 

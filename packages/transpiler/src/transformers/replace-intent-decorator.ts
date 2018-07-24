@@ -57,9 +57,9 @@ function classHasConstructor(node: ts.Node): boolean {
   return has
 }
 
-export default function ComponentTransformer({
-  verbose
-}: TransformerOptions = {}): ts.TransformerFactory<ts.SourceFile> {
+export default function ComponentTransformer({ verbose }: TransformerOptions = {}): ts.TransformerFactory<
+  ts.SourceFile
+> {
   return transformContext => {
     // create constructor if it does not exist
     // append Intent call within constructor
@@ -68,19 +68,11 @@ export default function ComponentTransformer({
     return tsSourceFile => {
       const registeredIntents: Array<ts.PropertyDeclaration> = []
 
-      const withDecoratorReplaced = visitRemoveIntentDecorators(
-        tsSourceFile as ts.Node,
-        registeredIntents
-      )
+      const withDecoratorReplaced = visitRemoveIntentDecorators(tsSourceFile as ts.Node, registeredIntents)
 
-      const withConstructor = visitEnsureConstructor(
-        withDecoratorReplaced as ts.Node
-      ) as ts.SourceFile
+      const withConstructor = visitEnsureConstructor(withDecoratorReplaced as ts.Node) as ts.SourceFile
 
-      return visitConstructor(
-        withConstructor as ts.Node,
-        registeredIntents
-      ) as ts.SourceFile
+      return visitConstructor(withConstructor as ts.Node, registeredIntents) as ts.SourceFile
     }
 
     // Remove decorators and replace them with a property access
@@ -91,21 +83,11 @@ export default function ComponentTransformer({
       if (ts.isPropertyDeclaration(node)) {
         return replaceIfIntentDecorated(node, registeredIntents)
       }
-      return ts.visitEachChild(
-        node,
-        node => visitRemoveIntentDecorators(node, registeredIntents),
-        transformContext
-      )
+      return ts.visitEachChild(node, node => visitRemoveIntentDecorators(node, registeredIntents), transformContext)
     }
 
-    function replaceIfIntentDecorated(
-      node: ts.PropertyDeclaration,
-      registeredIntents: Array<ts.PropertyDeclaration>
-    ) {
-      if (
-        node.decorators &&
-        decorator.name(node.decorators[0] as ts.Decorator) === Decorators.Intent
-      ) {
+    function replaceIfIntentDecorated(node: ts.PropertyDeclaration, registeredIntents: Array<ts.PropertyDeclaration>) {
+      if (node.decorators && decorator.name(node.decorators[0] as ts.Decorator) === Decorators.Intent) {
         registeredIntents.push(node)
         return ts.createProperty(
           /* decorators */ undefined,
@@ -138,40 +120,25 @@ export default function ComponentTransformer({
       registeredIntents: Array<ts.PropertyDeclaration>
     ): ts.VisitResult<ts.Node> {
       if (ts.isConstructorDeclaration(node)) {
-        return addIntentCallToConstructor(
-          node as ts.ConstructorDeclaration,
-          registeredIntents
-        )
+        return addIntentCallToConstructor(node as ts.ConstructorDeclaration, registeredIntents)
       }
-      return ts.visitEachChild(
-        node,
-        node => visitConstructor(node, registeredIntents),
-        transformContext
-      )
+      return ts.visitEachChild(node, node => visitConstructor(node, registeredIntents), transformContext)
     }
 
     function addIntentCallToConstructor(
       node: ts.ConstructorDeclaration,
       registeredIntents: Array<ts.PropertyDeclaration>
     ): ts.Node {
-      const intentCalls: Array<ts.Statement> = registeredIntents.map(
-        (intent: ts.PropertyDeclaration) => {
-          const call: ts.CallExpression = intent.decorators[0].getChildAt(
-            1
-          ) as ts.CallExpression
-          return ts.createStatement(
-            ts.createCall(
-              ts.createCall(
-                ts.createIdentifier(Decorators.Intent) as ts.Expression,
-                undefined,
-                call.arguments
-              ),
-              undefined,
-              [ts.createThis(), ts.createLiteral(intent.name.getText())]
-            )
+      const intentCalls: Array<ts.Statement> = registeredIntents.map((intent: ts.PropertyDeclaration) => {
+        const call: ts.CallExpression = intent.decorators[0].getChildAt(1) as ts.CallExpression
+        return ts.createStatement(
+          ts.createCall(
+            ts.createCall(ts.createIdentifier(Decorators.Intent) as ts.Expression, undefined, call.arguments),
+            undefined,
+            [ts.createThis(), ts.createLiteral(intent.name.getText())]
           )
-        }
-      )
+        )
+      })
       return ts.updateConstructor(
         node,
         node.decorators,

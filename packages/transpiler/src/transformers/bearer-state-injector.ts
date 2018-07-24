@@ -2,16 +2,8 @@
  *
  */
 import * as ts from 'typescript'
-import {
-  propDecoratedWithName,
-  hasPropDecoratedWithName,
-  hasDecoratorNamed
-} from './decorator-helpers'
-import {
-  ensureWatchImported,
-  ensureBearerContextInjected,
-  ensureStateImported
-} from './bearer'
+import { propDecoratedWithName, hasPropDecoratedWithName, hasDecoratorNamed } from './decorator-helpers'
+import { ensureWatchImported, ensureBearerContextInjected, ensureStateImported } from './bearer'
 import { Decorators, Component } from './constants'
 
 /**
@@ -27,9 +19,9 @@ type TransformerOptions = {
 
 const state = ts.createIdentifier('state')
 
-export default function BearerStateInjector({
-  verbose
-}: TransformerOptions = {}): ts.TransformerFactory<ts.SourceFile> {
+export default function BearerStateInjector({ verbose }: TransformerOptions = {}): ts.TransformerFactory<
+  ts.SourceFile
+> {
   return transformContext => {
     return tsSourceFile => {
       if (!hasBearerStateDecorator(tsSourceFile)) {
@@ -38,9 +30,7 @@ export default function BearerStateInjector({
 
       const propsDecorator = extractDecoratedPropertyInformation(tsSourceFile)
       // Inject Imports if needed: Watch
-      const preparedSourceFile = ensureStateImported(
-        ensureWatchImported(tsSourceFile)
-      )
+      const preparedSourceFile = ensureStateImported(ensureWatchImported(tsSourceFile))
 
       function visit(node: ts.Node): ts.VisitResult<ts.Node> {
         if (ts.isClassDeclaration(node)) {
@@ -48,25 +38,15 @@ export default function BearerStateInjector({
           const withInjectedContext = ensureBearerContextInjected(node)
 
           // Append @Prop() decorator to before @BearerState
-          const withPropDecoratorToDeclaration = addPropDecoratorToPropDeclaration(
-            withInjectedContext
-          )
+          const withPropDecoratorToDeclaration = addPropDecoratorToPropDeclaration(withInjectedContext)
 
           // Inject prop watcher
-          const withInjectedWatcher = injectPropertyWatcher(
-            withPropDecoratorToDeclaration,
-            propsDecorator
-          )
+          const withInjectedWatcher = injectPropertyWatcher(withPropDecoratorToDeclaration, propsDecorator)
 
           // Append logic to componentWillLoad/componentDidUnload
-          const withComponentLifecyleHooked = updateComponentLifecycle(
-            withInjectedWatcher
-          )
+          const withComponentLifecyleHooked = updateComponentLifecycle(withInjectedWatcher)
           // Add update logic method
-          const bearerStateReadyComponent = injectStateUpdateLogic(
-            withComponentLifecyleHooked,
-            propsDecorator
-          )
+          const bearerStateReadyComponent = injectStateUpdateLogic(withComponentLifecyleHooked, propsDecorator)
 
           return bearerStateReadyComponent
         }
@@ -111,14 +91,8 @@ function injectStateUpdateLogic(
             propsDecoratedMeta.map(meta =>
               ts.createStatement(
                 ts.createAssignment(
-                  ts.createPropertyAccess(
-                    ts.createThis(),
-                    meta.componentPropName
-                  ),
-                  ts.createElementAccess(
-                    state,
-                    ts.createLiteral(meta.statePropName)
-                  )
+                  ts.createPropertyAccess(ts.createThis(), meta.componentPropName),
+                  ts.createElementAccess(state, ts.createLiteral(meta.statePropName))
                 )
               )
             )
@@ -132,23 +106,15 @@ function injectStateUpdateLogic(
 /**
  * Add subscription methods to component lifecycle
  */
-function updateComponentLifecycle(
-  classNode: ts.ClassDeclaration
-): ts.ClassDeclaration {
+function updateComponentLifecycle(classNode: ts.ClassDeclaration): ts.ClassDeclaration {
   const componentWillLoad = ts.createCall(
-    ts.createPropertyAccess(
-      ts.createThis(),
-      `${Component.bearerContext}.subscribe`
-    ),
+    ts.createPropertyAccess(ts.createThis(), `${Component.bearerContext}.subscribe`),
     undefined,
     [ts.createThis()]
   )
 
   const componentDidUnload = ts.createCall(
-    ts.createPropertyAccess(
-      ts.createThis(),
-      `${Component.bearerContext}.unsubscribe`
-    ),
+    ts.createPropertyAccess(ts.createThis(), `${Component.bearerContext}.unsubscribe`),
     undefined,
     [ts.createThis()]
   )
@@ -208,11 +174,9 @@ function injectPropertyWatcher(
         ts.createMethod(
           [
             ts.createDecorator(
-              ts.createCall(
-                ts.createIdentifier(Decorators.Watch) as ts.Expression,
-                undefined,
-                [ts.createLiteral(meta.componentPropName)]
-              )
+              ts.createCall(ts.createIdentifier(Decorators.Watch) as ts.Expression, undefined, [
+                ts.createLiteral(meta.componentPropName)
+              ])
             )
           ],
           undefined,
@@ -220,31 +184,14 @@ function injectPropertyWatcher(
           ts.createIdentifier('_notifyBearerStateHandler'),
           undefined,
           undefined,
-          [
-            ts.createParameter(
-              undefined,
-              undefined,
-              undefined,
-              'newValue',
-              undefined,
-              undefined,
-              undefined
-            )
-          ],
+          [ts.createParameter(undefined, undefined, undefined, 'newValue', undefined, undefined, undefined)],
           undefined,
           ts.createBlock([
             ts.createStatement(
-              ts.createCall(
-                ts.createPropertyAccess(
-                  ts.createThis(),
-                  `${Component.bearerContext}.update`
-                ),
-                undefined,
-                [
-                  ts.createLiteral(meta.statePropName),
-                  ts.createIdentifier('newValue')
-                ]
-              )
+              ts.createCall(ts.createPropertyAccess(ts.createThis(), `${Component.bearerContext}.update`), undefined, [
+                ts.createLiteral(meta.statePropName),
+                ts.createIdentifier('newValue')
+              ])
             )
           ])
         )
@@ -257,9 +204,7 @@ function injectPropertyWatcher(
  * withPropDecoratorToDeclaration
  */
 
-function addPropDecoratorToPropDeclaration(
-  classNode: ts.ClassDeclaration
-): ts.ClassDeclaration {
+function addPropDecoratorToPropDeclaration(classNode: ts.ClassDeclaration): ts.ClassDeclaration {
   return ts.updateClassDeclaration(
     classNode,
     classNode.decorators,
@@ -271,9 +216,7 @@ function addPropDecoratorToPropDeclaration(
   )
 }
 
-function appendStateDecoratorIfNeeded(
-  element: ts.ClassElement
-): ts.ClassElement {
+function appendStateDecoratorIfNeeded(element: ts.ClassElement): ts.ClassElement {
   if (
     ts.isPropertyDeclaration(element) &&
     hasDecoratorNamed(element as ts.PropertyDeclaration, Decorators.BearerState)
@@ -282,13 +225,7 @@ function appendStateDecoratorIfNeeded(
       element,
       [
         ...element.decorators,
-        ts.createDecorator(
-          ts.createCall(
-            ts.createIdentifier(Decorators.State),
-            undefined,
-            undefined
-          )
-        )
+        ts.createDecorator(ts.createCall(ts.createIdentifier(Decorators.State), undefined, undefined))
       ],
       element.modifiers,
       element.name,
@@ -310,9 +247,7 @@ function hasBearerStateDecorator(sourceFile: ts.SourceFile): boolean {
 
   return ts.forEachChild(
     sourceFile,
-    node =>
-      ts.isClassDeclaration(node) &&
-      hasPropDecoratedWithName(node, Decorators.BearerState)
+    node => ts.isClassDeclaration(node) && hasPropDecoratedWithName(node, Decorators.BearerState)
   )
 }
 
@@ -321,27 +256,20 @@ interface IDecoratedPropInformation {
   statePropName: string
 }
 
-function extractDecoratedPropertyInformation(
-  tsSourceFile: ts.SourceFile
-): Array<IDecoratedPropInformation> {
+function extractDecoratedPropertyInformation(tsSourceFile: ts.SourceFile): Array<IDecoratedPropInformation> {
   return (
     ts.forEachChild(
       tsSourceFile,
-      node =>
-        ts.isClassDeclaration(node) &&
-        propDecoratedWithName(node, Decorators.BearerState)
+      node => ts.isClassDeclaration(node) && propDecoratedWithName(node, Decorators.BearerState)
     ) || []
   ).map(prop => {
-    const decoratorOptions = (prop.decorators[0]
-      .expression as ts.CallExpression).arguments[0]
+    const decoratorOptions = (prop.decorators[0].expression as ts.CallExpression).arguments[0]
     const componentPropName: string = prop.name['escapedText']
 
     let statePropName = componentPropName
 
     if (decoratorOptions && ts.isObjectLiteralExpression(decoratorOptions)) {
-      const stateNameOption = decoratorOptions.properties.find(
-        prop => prop.name['escapedText'] == 'statePropName'
-      )
+      const stateNameOption = decoratorOptions.properties.find(prop => prop.name['escapedText'] == 'statePropName')
       if (stateNameOption) {
         statePropName = stateNameOption['initializer']
       }

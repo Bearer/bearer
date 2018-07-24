@@ -69,18 +69,12 @@ export function prepare(emitter, config, locator: Locator) {
 
       // Symlink node_modules
       emitter.emit('start:symlinkNodeModules')
-      createEvenIfItExists(
-        path.join(scenarioRoot, 'node_modules'),
-        path.join(buildDir, 'node_modules')
-      )
+      createEvenIfItExists(path.join(scenarioRoot, 'node_modules'), path.join(buildDir, 'node_modules'))
 
       // symlink package.json
       emitter.emit('start:symlinkPackage')
 
-      createEvenIfItExists(
-        path.join(scenarioRoot, 'package.json'),
-        path.join(buildDir, 'package.json')
-      )
+      createEvenIfItExists(path.join(scenarioRoot, 'package.json'), path.join(buildDir, 'package.json'))
 
       // Copy stencil.config.json
       emitter.emit('start:prepare:stencilConfig')
@@ -92,18 +86,12 @@ export function prepare(emitter, config, locator: Locator) {
       await new Promise((resolve, reject) => {
         copy(inDir, buildDir, vars, (err, createdFiles) => {
           if (err) reject(err)
-          createdFiles &&
-            createdFiles.forEach(filePath =>
-              emitter.emit('start:prepare:copyFile', filePath)
-            )
+          createdFiles && createdFiles.forEach(filePath => emitter.emit('start:prepare:copyFile', filePath))
           resolve()
         })
       })
 
-      createEvenIfItExists(
-        path.join(buildDir, 'global'),
-        path.join(buildScreenDir, 'global')
-      )
+      createEvenIfItExists(path.join(buildDir, 'global'), path.join(buildScreenDir, 'global'))
       // Link non TS files
       const watcher = await watchNonTSFiles(srcScreenDir, buildScreenDir)
 
@@ -137,11 +125,7 @@ const ensureSetupAndConfigComponents = rootLevel => {
   })
 }
 
-export const start = (emitter, config, locator: Locator) => async ({
-  open,
-  install,
-  watcher
-}) => {
+export const start = (emitter, config, locator: Locator) => async ({ open, install, watcher }) => {
   const {
     bearerConfig: { OrgId },
     scenarioConfig: { scenarioTitle }
@@ -157,21 +141,14 @@ export const start = (emitter, config, locator: Locator) => async ({
 
     const { scenarioRoot, buildDir } = locator
     /* start local development server */
-    const integrationHost = await startLocalDevelopmentServer(
-      scenarioRoot,
-      scenarioUuid,
-      emitter,
-      config
-    )
+    const integrationHost = await startLocalDevelopmentServer(scenarioRoot, scenarioUuid, emitter, config)
 
     ensureSetupAndConfigComponents(buildDir)
 
     emitter.emit('start:watchers')
     if (watcher) {
-      fs.watchFile(
-        path.join(scenarioRoot, 'auth.config.json'),
-        { persistent: true, interval: 250 },
-        () => ensureSetupAndConfigComponents(buildDir)
+      fs.watchFile(path.join(scenarioRoot, 'auth.config.json'), { persistent: true, interval: 250 }, () =>
+        ensureSetupAndConfigComponents(buildDir)
       )
     }
 
@@ -179,10 +156,7 @@ export const start = (emitter, config, locator: Locator) => async ({
     const BEARER = 'bearer-transpiler'
     const bearerTranspiler = spawn(
       'node',
-      [
-        path.join(__dirname, '..', 'startTranspiler.js'),
-        watcher ? null : '--no-watcher'
-      ].filter(el => el),
+      [path.join(__dirname, '..', 'startTranspiler.js'), watcher ? null : '--no-watcher'].filter(el => el),
       {
         cwd: scenarioRoot,
         env: {

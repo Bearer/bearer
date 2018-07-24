@@ -1,11 +1,4 @@
-import {
-  Component,
-  Event,
-  EventEmitter,
-  Prop,
-  State,
-  Watch
-} from '@bearer/core'
+import { Component, Event, EventEmitter, Prop, State, Watch } from '@bearer/core'
 import { TMember, TMemberRenderer } from './types'
 
 @Component({
@@ -40,8 +33,7 @@ export class BearerNavigatorCollection {
     this.dataWatcher(this.data)
   }
 
-  defaultRender: TMemberRenderer<TMember> = (member: TMember) =>
-    member[this.displayMemberProp]
+  defaultRender: TMemberRenderer<TMember> = (member: TMember) => member[this.displayMemberProp]
 
   render() {
     if (this.collection.length === 0) {
@@ -51,8 +43,7 @@ export class BearerNavigatorCollection {
         </slot>
       )
     }
-    const renderer: TMemberRenderer<TMember> =
-      this.renderFunc || this.defaultRender
+    const renderer: TMemberRenderer<TMember> = this.renderFunc || this.defaultRender
     return (
       <ul class="list-group">
         {this.collection.map((member: TMember) => (

@@ -20,10 +20,7 @@ export class BearerSelect {
   }
 
   componentDidLoad() {
-    this.options = [
-      { label: '--- choose an option ---', value: '' },
-      ...this.options
-    ]
+    this.options = [{ label: '--- choose an option ---', value: '' }, ...this.options]
   }
 
   render() {
@@ -33,10 +30,7 @@ export class BearerSelect {
         <select class="form-control" onChange={this.onSelectChange}>
           {this.options.map(value => {
             return (
-              <option
-                value={value.value}
-                selected={this.value === value.value ? true : false}
-              >
+              <option value={value.value} selected={this.value === value.value ? true : false}>
                 {value.label}
               </option>
             )

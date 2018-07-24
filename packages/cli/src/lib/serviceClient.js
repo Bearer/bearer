@@ -27,24 +27,10 @@ module.exports = url => {
       requestPromise(url, 'POST', 'screens-invalidate', body, {
         Authorization: token
       }),
-    assemblyScenario: (token, body) =>
-      requestPromise(url, 'POST', 'deploy', body, { Authorization: token }),
+    assemblyScenario: (token, body) => requestPromise(url, 'POST', 'deploy', body, { Authorization: token }),
     signedUrls: (token, Keys, type) =>
-      requestPromise(
-        url,
-        'POST',
-        'signed-urls',
-        { Keys, type },
-        { Authorization: token }
-      ),
-    signedUrl: (token, Key, type) =>
-      requestPromise(
-        url,
-        'POST',
-        'signed-url',
-        { Key, type },
-        { Authorization: token }
-      ),
+      requestPromise(url, 'POST', 'signed-urls', { Keys, type }, { Authorization: token }),
+    signedUrl: (token, Key, type) => requestPromise(url, 'POST', 'signed-url', { Key, type }, { Authorization: token }),
     deployScenario: (eventName, OrgId, scenarioTitle) =>
       requestPromise(
         url,

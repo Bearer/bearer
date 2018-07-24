@@ -24,11 +24,12 @@ export class BearerScrollable {
     if (this.hasMore) {
       this.fetching = true
       this.fetcher({ page: this.page })
-        .then(({ items }) => {
-          this.hasMore = items.length === this.perPage
-          this.collection = [...this.collection, ...items]
+        .then((data: { items: Array<any> }) => {
+          this.hasMore = data.items.length === this.perPage
+          this.collection = [...this.collection, ...data.items]
           this.fetching = false
           this.page = this.page + 1
+          return data
         })
         .catch(() => {
           this.fetching = false
@@ -40,17 +41,14 @@ export class BearerScrollable {
     if (this.fetching && !this.collection.length) {
       return null
     }
-    return (this.renderCollection || this.renderCollectionDefault)(
-      this.collection
-    )
+    return (this.renderCollection || this.renderCollectionDefault)(this.collection)
   }
 
   renderCollectionDefault: TCollectionRenderer = collection => (
     <bearer-navigator-collection {...this.rendererProps} data={collection} />
   )
 
-  _renderFetching = () =>
-    this.renderFetching ? this.renderFetching() : <bearer-loading />
+  _renderFetching = () => (this.renderFetching ? this.renderFetching() : <bearer-loading />)
 
   componentDidLoad() {
     if (this.element) {
@@ -62,10 +60,7 @@ export class BearerScrollable {
 
   onScroll = () => {
     if (!this.fetching) {
-      if (
-        this.content.scrollTop + this.content.clientHeight >=
-        this.content.scrollHeight
-      ) {
+      if (this.content.scrollTop + this.content.clientHeight >= this.content.scrollHeight) {
         this.fetchNext()
       }
     }

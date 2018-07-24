@@ -15,9 +15,5 @@ export const classnames = classNames
 export default Bearer
 
 if (process.env.BUILD !== 'distribution') {
-  console.warn(
-    `[BEARER] Running non production Bearer Core lib | version ${
-      Bearer.version
-    }`
-  )
+  console.warn(`[BEARER] Running non production Bearer Core lib | version ${Bearer.version}`)
 }

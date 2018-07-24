@@ -39,9 +39,7 @@ const init = emitter => async scenarioTitle => {
 
   copy(inDir, outDir, vars, (err, createdFiles) => {
     if (err) throw err
-    createdFiles.forEach(filePath =>
-      emitter.emit('generateIntent:fileGenerated', filePath)
-    )
+    createdFiles.forEach(filePath => emitter.emit('generateIntent:fileGenerated', filePath))
   })
 }
 

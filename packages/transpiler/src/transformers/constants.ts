@@ -4,7 +4,9 @@ export const Decorators = {
   State: 'State',
   Watch: 'Watch',
   BearerState: 'BearerState',
-  Intent: 'Intent'
+  Intent: 'Intent',
+  RetrieveStateIntent: 'RetrieveStateIntent',
+  SaveStateIntent: 'SaveStateIntent'
 }
 
 export const Component = {

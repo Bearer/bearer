@@ -21,8 +21,7 @@ module.exports = (
 
       if (res.statusCode === 204) emitter.emit('invalidateCloudFront:success')
 
-      if (res.statusCode !== 204)
-        emitter.emit('invalidateCloudFront:invalidationFailed', res.body)
+      if (res.statusCode !== 204) emitter.emit('invalidateCloudFront:invalidationFailed', res.body)
 
       resolve('done')
     } catch (e) {

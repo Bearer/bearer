@@ -3,6 +3,56 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.23.2"></a>
+## [0.23.2](https://github.com/Bearer/bearer/compare/v0.23.1...v0.23.2) (2018-07-24)
+
+
+### Bug Fixes
+
+* **cli:** remove useless option ([#147](https://github.com/Bearer/bearer/issues/147)) ([c9acd2e](https://github.com/Bearer/bearer/commit/c9acd2e))
+
+
+
+
+<a name="0.23.1"></a>
+## [0.23.1](https://github.com/Bearer/bearer/compare/v0.23.0...v0.23.1) (2018-07-24)
+
+
+### Bug Fixes
+
+* **cli:** Prevents cli to hang on any command ([4ae6233](https://github.com/Bearer/bearer/commit/4ae6233))
+* **cli:** remove localStorage for now ([#144](https://github.com/Bearer/bearer/issues/144)) ([d7a074c](https://github.com/Bearer/bearer/commit/d7a074c))
+
+
+
+
+<a name="0.22.4"></a>
+## [0.22.4](https://github.com/Bearer/bearer/compare/v0.22.2...v0.22.4) (2018-07-23)
+
+
+
+
+**Note:** Version bump only for package @bearer/bearer-cli
+
+<a name="0.22.3"></a>
+## [0.22.3](https://github.com/Bearer/bearer/compare/v0.22.3-0...v0.22.3) (2018-07-23)
+
+
+
+
+**Note:** Version bump only for package @bearer/bearer-cli
+
+<a name="0.22.2"></a>
+## [0.22.2](https://github.com/Bearer/bearer/compare/v0.22.1...v0.22.2) (2018-07-23)
+
+
+### Bug Fixes
+
+* **cli:** upgrade intents dependency ([#141](https://github.com/Bearer/bearer/issues/141)) ([0a575da](https://github.com/Bearer/bearer/commit/0a575da))
+
+
+
+
 <a name="0.21.1"></a>
 ## [0.21.1](https://github.com/Bearer/bearer/compare/v0.21.0...v0.21.1) (2018-07-23)
 

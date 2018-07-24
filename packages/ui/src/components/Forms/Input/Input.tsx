@@ -68,11 +68,7 @@ export class BearerInput {
           onClick={this.inputClicked.bind(this)}
           disabled={this.disabled}
         />
-        {this.hint ? (
-          <small class="form-text text-muted">{this.hint}</small>
-        ) : (
-          ''
-        )}
+        {this.hint ? <small class="form-text text-muted">{this.hint}</small> : ''}
       </div>
     )
   }
