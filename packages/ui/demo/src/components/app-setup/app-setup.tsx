@@ -40,11 +40,7 @@ export class AppSetup {
         <bearer-typography kind="h4">Setup Component</bearer-typography>
         <bearer-dropdown-button innerListener={innerListener}>
           <span slot="buttonText">Setup Scenario</span>
-          <bearer-setup
-            scenarioId={this.scenarioId}
-            fields={this.fields}
-            referenceId={this.referenceId}
-          />
+          <bearer-setup scenarioId={this.scenarioId} fields={this.fields} referenceId={this.referenceId} />
         </bearer-dropdown-button>
         <div class="down">
           <bearer-typography kind="h4">Setup Display</bearer-typography>

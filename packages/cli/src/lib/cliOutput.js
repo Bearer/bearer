@@ -64,9 +64,7 @@ module.exports = emitter => {
   })
 
   emitter.on('pushScenario:uploadPackage:error', (err, packagePath) => {
-    term.red(
-      `There was an error when trying to push the package: ${packagePath}\n`
-    )
+    term.red(`There was an error when trying to push the package: ${packagePath}\n`)
     term.white(`Error: ${err}\n`)
   })
 
@@ -127,11 +125,7 @@ module.exports = emitter => {
 
   emitter.on('signin:authenticateUser:failed', err => {
     term.white('Bearer: ')
-    term.red(
-      `There was en error while trying to fetch authenticate user: ${JSON.stringify(
-        err
-      )}`
-    )
+    term.red(`There was en error while trying to fetch authenticate user: ${JSON.stringify(err)}`)
     term('\n')
   })
 

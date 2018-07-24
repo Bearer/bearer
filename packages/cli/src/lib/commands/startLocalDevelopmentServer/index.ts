@@ -7,8 +7,6 @@ import * as fs from 'fs-extra'
 import * as cosmiconfig from 'cosmiconfig'
 import Storage from './storage'
 
-
-
 function startLocalDevelopmentServer(rootLevel, scenarioUuid, emitter, config) {
   const LOCAL_DEV_CONFIGURATION = 'dev'
   const explorer = cosmiconfig(LOCAL_DEV_CONFIGURATION)
@@ -16,20 +14,9 @@ function startLocalDevelopmentServer(rootLevel, scenarioUuid, emitter, config) {
 
   return new Promise(async (resolve, reject) => {
     try {
-      const { config: devIntentsContext = {} } =
-        (await explorer.search(rootLevel)) || {}
-      const { buildIntents } = require(path.join(
-        __dirname,
-        '..',
-        '..',
-        'deployScenario'
-      ))
-      const intentsArtifact = await buildIntents(
-        rootLevel,
-        scenarioUuid,
-        emitter,
-        config
-      )
+      const { config: devIntentsContext = {} } = (await explorer.search(rootLevel)) || {}
+      const { buildIntents } = require(path.join(__dirname, '..', '..', 'deployScenario'))
+      const intentsArtifact = await buildIntents(rootLevel, scenarioUuid, emitter, config)
 
       const buildDir = path.join(rootLevel, 'intents', '.build')
       fs.ensureDirSync(buildDir)
@@ -42,10 +29,7 @@ function startLocalDevelopmentServer(rootLevel, scenarioUuid, emitter, config) {
       })
       const lambdas = require(buildDir)
 
-      const { integration_uuid, intents } = require(path.join(
-        buildDir,
-        'bearer.config.json'
-      ))
+      const { integration_uuid, intents } = require(path.join(buildDir, 'bearer.config.json'))
 
       const port = await getPort({ port: 3000 })
       const bearerBaseURL = `http://localhost:${port}/`

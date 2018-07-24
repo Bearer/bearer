@@ -28,8 +28,7 @@ const login = (emitter, config) => async ({ email }) => {
     let ExpiresAt
     switch (res.statusCode) {
       case 200:
-        ExpiresAt =
-          res.body.authorization.AuthenticationResult.ExpiresIn + Date.now()
+        ExpiresAt = res.body.authorization.AuthenticationResult.ExpiresIn + Date.now()
         config.storeBearerConfig({
           ...res.body.user,
           ExpiresAt,

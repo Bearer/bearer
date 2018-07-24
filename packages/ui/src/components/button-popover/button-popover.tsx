@@ -47,11 +47,7 @@ export class BearerButtonPopover {
         <bearer-button {...this.btnProps} onClick={this.toggleDisplay} />
 
         {this.visible && (
-          <div
-            class={`popover fade show bs-popover-${this.direction} direction-${
-              this.direction
-            }`}
-          >
+          <div class={`popover fade show bs-popover-${this.direction} direction-${this.direction}`}>
             <h3 class="popover-header">
               {this.backNav && <bearer-navigator-back class="header-arrow" />}
               <span class="header">{this.header}</span>

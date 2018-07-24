@@ -69,29 +69,21 @@ class Bearer {
     this._maybeInitialized = promise
   }
 
-  static onAuthorized = (
-    scenarioId: string,
-    callback: (authorize: boolean) => void
-  ) =>
+  static onAuthorized = (scenarioId: string, callback: (authorize: boolean) => void) =>
     Bearer.emitter.addListener(Events.AUTHORIZED, () => {
       // TODO : listen only for the scenarioId (+ setupId ?)
       callback(true)
     })
 
-  static onRevoked = (
-    scenarioId: string,
-    callback: (authorize: boolean) => void
-  ) =>
+  static onRevoked = (scenarioId: string, callback: (authorize: boolean) => void) =>
     Bearer.emitter.addListener(Events.REVOKED, () => {
       // TODO : listen only for the scenarioId (+ setupId ?)
       callback(false)
     })
 
-  authorized = (scenarioId: string) =>
-    Bearer.emitter.emit(Events.AUTHORIZED, { scenarioId })
+  authorized = (scenarioId: string) => Bearer.emitter.emit(Events.AUTHORIZED, { scenarioId })
 
-  revoked = (scenarioId: string) =>
-    Bearer.emitter.emit(Events.REVOKED, { scenarioId })
+  revoked = (scenarioId: string) => Bearer.emitter.emit(Events.REVOKED, { scenarioId })
 
   hasAuthorized = (scenarioId): Promise<boolean> =>
     new Promise((resolve, reject) => {
@@ -120,10 +112,7 @@ class Bearer {
   }
 
   initSession() {
-    if (
-      typeof window !== 'undefined' &&
-      !document.querySelector(`#${IFRAME_NAME}`)
-    ) {
+    if (typeof window !== 'undefined' && !document.querySelector(`#${IFRAME_NAME}`)) {
       postRobot.on(Events.SESSION_INITIALIZED, event => {
         this.sessionInitialized(event)
       })
@@ -131,9 +120,7 @@ class Bearer {
       postRobot.on(Events.REVOKED, this.revoked)
 
       this.iframe = document.createElement('iframe')
-      this.iframe.src = `${
-        this.bearerConfig.authorizationHost
-      }v1/user/initialize`
+      this.iframe.src = `${this.bearerConfig.authorizationHost}v1/user/initialize`
       this.iframe.id = IFRAME_NAME
       this.iframe.width = '0'
       this.iframe.height = '0'
@@ -150,14 +137,8 @@ class Bearer {
 
   askAuthorizations({ scenarioId, setupId }) {
     if (this.isSessionInitialized) {
-      const AUTHORIZED_URL = `${
-        Bearer.config.integrationHost
-      }v1/auth/${scenarioId}?setupId=${setupId}`
-      window.open(
-        AUTHORIZED_URL,
-        '',
-        'resizable,scrollbars,status,centerscreen=yes,width=500,height=600'
-      )
+      const AUTHORIZED_URL = `${Bearer.config.integrationHost}v1/auth/${scenarioId}?setupId=${setupId}`
+      window.open(AUTHORIZED_URL, '', 'resizable,scrollbars,status,centerscreen=yes,width=500,height=600')
       return true
     }
     return false

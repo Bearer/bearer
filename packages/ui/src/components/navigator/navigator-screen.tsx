@@ -1,12 +1,4 @@
-import {
-  Component,
-  Method,
-  State,
-  Prop,
-  Event,
-  EventEmitter,
-  Listen
-} from '@bearer/core'
+import { Component, Method, State, Prop, Event, EventEmitter, Listen } from '@bearer/core'
 
 @Component({
   tag: 'bearer-navigator-screen',

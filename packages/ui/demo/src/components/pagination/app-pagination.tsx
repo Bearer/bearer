@@ -15,10 +15,7 @@ const perPage = 5
 })
 export class AppPagination {
   renderCollection = collection => (
-    <bearer-navigator-collection
-      data={collection}
-      renderFunc={item => <navigator-collection-item item={item} />}
-    />
+    <bearer-navigator-collection data={collection} renderFunc={item => <navigator-collection-item item={item} />} />
   )
 
   fetcher = ({ page }: { page: number }): Promise<{ items: Array<any> }> => {
@@ -44,18 +41,10 @@ export class AppPagination {
     return (
       <div>
         <h4>Existing collection</h4>
-        <bearer-paginator
-          fetcher={this.fetcher}
-          renderCollection={this.renderCollection}
-          perPage={perPage}
-        />
+        <bearer-paginator fetcher={this.fetcher} renderCollection={this.renderCollection} perPage={perPage} />
         <hr />
         <h4>No item found</h4>
-        <bearer-paginator
-          fetcher={this.emptyFetcher}
-          renderCollection={this.renderCollection}
-          perPage={perPage}
-        />
+        <bearer-paginator fetcher={this.emptyFetcher} renderCollection={this.renderCollection} perPage={perPage} />
       </div>
     )
   }

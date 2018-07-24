@@ -30,9 +30,7 @@ module.exports = (codePath, scenarioUuid) => {
       }, Promise.resolve({ integration_uuid: scenarioUuid, intents: [] }))
       .then(async config => {
         try {
-          config.auth = JSON.parse(
-            await readFileAsync(path.join(fullPath, '..', AUTH_CONFIG_FILE))
-          )
+          config.auth = JSON.parse(await readFileAsync(path.join(fullPath, '..', AUTH_CONFIG_FILE)))
           return config
         } catch (e) {
           console.log(e)

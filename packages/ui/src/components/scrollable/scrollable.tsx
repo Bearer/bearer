@@ -41,17 +41,14 @@ export class BearerScrollable {
     if (this.fetching && !this.collection.length) {
       return null
     }
-    return (this.renderCollection || this.renderCollectionDefault)(
-      this.collection
-    )
+    return (this.renderCollection || this.renderCollectionDefault)(this.collection)
   }
 
   renderCollectionDefault: TCollectionRenderer = collection => (
     <bearer-navigator-collection {...this.rendererProps} data={collection} />
   )
 
-  _renderFetching = () =>
-    this.renderFetching ? this.renderFetching() : <bearer-loading />
+  _renderFetching = () => (this.renderFetching ? this.renderFetching() : <bearer-loading />)
 
   componentDidLoad() {
     if (this.element) {
@@ -63,10 +60,7 @@ export class BearerScrollable {
 
   onScroll = () => {
     if (!this.fetching) {
-      if (
-        this.content.scrollTop + this.content.clientHeight >=
-        this.content.scrollHeight
-      ) {
+      if (this.content.scrollTop + this.content.clientHeight >= this.content.scrollHeight) {
         this.fetchNext()
       }
     }

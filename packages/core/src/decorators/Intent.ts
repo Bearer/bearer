@@ -14,16 +14,12 @@ interface IDecorator {
   (target: any, key: string): void
 }
 
-const MISSING_SCENARIO_ID =
-  'Scenario ID is missing. Please add @Component decorator above your class definition'
+const MISSING_SCENARIO_ID = 'Scenario ID is missing. Please add @Component decorator above your class definition'
 // Usage
 // @Intent('intentName') propertyName: BearerFetch
 // or
 // @Intent('intentNameResource',IntentType.GetResource ) propertyName: BearerFetch
-export function Intent(
-  intentName: string,
-  type: IntentType = IntentType.GetCollection
-): IDecorator {
+export function Intent(intentName: string, type: IntentType = IntentType.GetCollection): IDecorator {
   return function(target: any, key: string): void {
     const getter = (): BearerFetch => {
       return function(params = {}, init = {}) {
@@ -70,15 +66,10 @@ export function Intent(
 // @SaveStateIntent() propertyName: BearerFetch
 // or
 // @SaveStateIntent(IntentType.GetResource ) propertyName: BearerFetch
-export function SaveStateIntent(
-  type: IntentType = IntentType.GetCollection
-): IDecorator {
+export function SaveStateIntent(type: IntentType = IntentType.GetCollection): IDecorator {
   return function(target: any, key: string): void {
     const getter = (): BearerFetch => {
-      return function(
-        params: { body?: any; [key: string]: any } = {},
-        init: Object = {}
-      ) {
+      return function(params: { body?: any; [key: string]: any } = {}, init: Object = {}) {
         const scenarioId = target['SCENARIO_ID']
 
         if (!scenarioId) {
@@ -94,10 +85,7 @@ export function SaveStateIntent(
           const baseQuery = referenceId ? { referenceId } : {}
 
           return IntentMapper[type](
-            intent.apply(null, [
-              { ...query, ...baseQuery },
-              { ...init, method: 'PUT', body: JSON.stringify(body) }
-            ])
+            intent.apply(null, [{ ...query, ...baseQuery }, { ...init, method: 'PUT', body: JSON.stringify(body) }])
           )
         }
       }
@@ -115,9 +103,7 @@ export function SaveStateIntent(
 }
 
 function retrieveSetupId(target: any) {
-  const setupId =
-    target.setupId ||
-    (target['bearerContext'] && target['bearerContext']['setupId'])
+  const setupId = target.setupId || (target['bearerContext'] && target['bearerContext']['setupId'])
   return setupId
 }
 
@@ -129,26 +115,16 @@ function retrieveReferenceId(target: any) {
 // @RetrieveStateIntent() propertyName: BearerFetch
 // or
 // @RetrieveStateIntent(IntentType.GetResource ) propertyName: BearerFetch
-export function RetrieveStateIntent(
-  type: IntentType = IntentType.GetCollection
-): IDecorator {
+export function RetrieveStateIntent(type: IntentType = IntentType.GetCollection): IDecorator {
   return Intent('RetrieveState', type)
 }
 
 export function GetCollectionIntent(promise): Promise<any> {
   return new Promise((resolve, reject) => {
     promise
-      .then(
-        ({
-          data,
-          collection
-        }: {
-          data: Array<any>
-          collection: Array<any>
-        }) => {
-          resolve({ items: data || collection })
-        }
-      )
+      .then(({ data, collection }: { data: Array<any>; collection: Array<any> }) => {
+        resolve({ items: data || collection })
+      })
       .catch(e => {
         reject({ items: [], err: e })
       })

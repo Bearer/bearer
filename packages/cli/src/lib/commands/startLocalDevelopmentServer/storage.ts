@@ -4,8 +4,6 @@ import * as knex from 'knex'
 import * as uuidv1 from 'uuid/v1'
 
 export default () => {
-
-
   const router = new Router({ prefix: '/api/v1/' })
 
   const filename = process.env.BEARER_LOCAL_DATABASE || ':memory:'
@@ -74,9 +72,7 @@ export default () => {
       .delete()
       .then(async () => {
         try {
-          await db
-            .table('records')
-            .insert({ data: JSON.stringify(ctx.request.body), referenceId })
+          await db.table('records').insert({ data: JSON.stringify(ctx.request.body), referenceId })
           ctx.ok({ Item: { ...ctx.request.body, referenceId } })
         } catch (e) {
           ctx.badRequest(e)
@@ -89,9 +85,7 @@ export default () => {
 
     console.log(ctx.request.body)
     try {
-      await db
-        .table('records')
-        .insert({ data: JSON.stringify(ctx.request.body), referenceId })
+      await db.table('records').insert({ data: JSON.stringify(ctx.request.body), referenceId })
       ctx.ok({ Item: { ...ctx.request.body, referenceId } })
     } catch (e) {
       ctx.badRequest(e)
@@ -99,4 +93,3 @@ export default () => {
   })
   return router
 }
-

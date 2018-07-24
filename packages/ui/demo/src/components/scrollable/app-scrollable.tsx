@@ -24,8 +24,7 @@ const rootReducer = (combineReducers as any)({
   demoReducer
 })
 
-const configureStore = (preloadedState: any) =>
-  createStore(rootReducer, preloadedState)
+const configureStore = (preloadedState: any) => createStore(rootReducer, preloadedState)
 
 /**
  * Component
@@ -38,10 +37,7 @@ export class AppScrollable {
   store: Store
 
   renderCollection = collection => (
-    <bearer-navigator-collection
-      data={collection}
-      renderFunc={item => <navigator-collection-item item={item} />}
-    />
+    <bearer-navigator-collection data={collection} renderFunc={item => <navigator-collection-item item={item} />} />
   )
 
   fetcher = ({ page }: { page: number }): Promise<{ items: Array<any> }> => {
@@ -66,8 +62,7 @@ export class AppScrollable {
       }
     })
     this.store.mapDispatchToProps(this, {
-      addPullRequest: () => (dispatch, _state) =>
-        dispatch({ type: 'CLICK', payload: { id: Math.random() * 1000 } })
+      addPullRequest: () => (dispatch, _state) => dispatch({ type: 'CLICK', payload: { id: Math.random() * 1000 } })
     })
     console.log(this.store)
   }

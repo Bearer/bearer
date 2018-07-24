@@ -8,9 +8,6 @@ xtest('config preparation', () => {
   `
 
   const config = prepareConfig(handlerContent)
-  expect(config.intents).toEqual([
-    { intentOne: 'index.intentOne' },
-    { intentTwo: 'index.intentTwo' }
-  ])
+  expect(config.intents).toEqual([{ intentOne: 'index.intentOne' }, { intentTwo: 'index.intentTwo' }])
   expect(config.integration_uuid).toBeDefined()
 })

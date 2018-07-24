@@ -38,10 +38,7 @@ const pushScreens = async (
     try {
       emitter.emit('screen:upload:start')
 
-      const files = await globby([
-        configuration.distPath,
-        configuration.wwwPath
-      ])
+      const files = await globby([configuration.distPath, configuration.wwwPath])
 
       const paths = files.reduce((acc, filePath) => {
         const relativePath = filePath.replace(screensDirectory + path.sep, '')
@@ -49,11 +46,7 @@ const pushScreens = async (
         return acc
       }, {})
 
-      const urls = (await integrationsClient.signedUrls(
-        token,
-        Object.keys(paths),
-        'screen'
-      )).body
+      const urls = (await integrationsClient.signedUrls(token, Object.keys(paths), 'screen')).body
 
       await asyncForEach(Object.keys(paths), async key => {
         try {

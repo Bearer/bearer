@@ -34,23 +34,16 @@ function injectContext(node: ts.ClassDeclaration): ts.Node {
   return bearer.addComponentDidLoad(withSetupProp)
 }
 
-export default function ComponentTransformer({
-  verbose
-}: TransformerOptions = {}): ts.TransformerFactory<ts.SourceFile> {
+export default function ComponentTransformer({ verbose }: TransformerOptions = {}): ts.TransformerFactory<
+  ts.SourceFile
+> {
   return transformContext => {
     function visit(node: ts.Node): ts.VisitResult<ts.Node> {
       if (
         ts.isClassDeclaration(node) &&
-        decorator.classDecoratedWithName(
-          node as ts.ClassDeclaration,
-          Decorators.Component
-        )
+        decorator.classDecoratedWithName(node as ts.ClassDeclaration, Decorators.Component)
       ) {
-        return ts.visitEachChild(
-          injectContext(node as ts.ClassDeclaration),
-          visit,
-          transformContext
-        )
+        return ts.visitEachChild(injectContext(node as ts.ClassDeclaration), visit, transformContext)
       }
       return ts.visitEachChild(node, visit, transformContext)
     }

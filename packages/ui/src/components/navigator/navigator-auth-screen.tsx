@@ -1,12 +1,4 @@
-import {
-  Component,
-  Method,
-  State,
-  Event,
-  EventEmitter,
-  Element,
-  Prop
-} from '@bearer/core'
+import { Component, Method, State, Event, EventEmitter, Element, Prop } from '@bearer/core'
 import Bearer from '@bearer/core'
 
 @Component({
@@ -101,11 +93,7 @@ export class BearerNavigatorAuthScreen {
 
   render() {
     return (
-      <bearer-navigator-screen
-        id="screen"
-        navigationTitle="Authentication"
-        class="in"
-      >
+      <bearer-navigator-screen id="screen" navigationTitle="Authentication" class="in">
         {this.sessionInitialized &&
           this.scenarioAuthorized !== null &&
           (this.scenarioAuthorized ? (

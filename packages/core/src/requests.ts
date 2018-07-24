@@ -1,10 +1,7 @@
 /* global fetch */
 import Bearer from './Bearer'
 
-export function bearerRequest(
-  uri: string,
-  baseParams = {}
-): (params: any, init?: any) => Promise<any> {
+export function bearerRequest(uri: string, baseParams = {}): (params: any, init?: any) => Promise<any> {
   const url = `${Bearer.config.integrationHost}api/v1/${uri}`
 
   return function(params = {}, init = {}) {
@@ -23,9 +20,7 @@ export function bearerRequest(
           integrationId: Bearer.config.integrationId
         }
 
-        const query = Object.keys(sentParams).map(key =>
-          [key, sentParams[key]].join('=')
-        )
+        const query = Object.keys(sentParams).map(key => [key, sentParams[key]].join('='))
         const uri = `${url}?${query.join('&')}`
         console.debug('[BEARER]', 'fetch', url, query)
         fetch

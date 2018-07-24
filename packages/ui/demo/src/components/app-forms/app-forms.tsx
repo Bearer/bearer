@@ -232,10 +232,7 @@ export class AppForms {
               buttons={this.checkboxValues}
               value={this.inputs.leisure}
             />
-            <bearer-input
-              type="submit"
-              onSubmit={e => this.handleSubmit(0, e)}
-            />
+            <bearer-input type="submit" onSubmit={e => this.handleSubmit(0, e)} />
           </form>
           {this.showResult ? (
             <p>
@@ -253,10 +250,7 @@ export class AppForms {
         </div>
         <div>
           <h3 id="form-component">Generated form</h3>
-          <bearer-form
-            fields={this.fields}
-            onSubmit={e => this.handleSubmit(1, e)}
-          />
+          <bearer-form fields={this.fields} onSubmit={e => this.handleSubmit(1, e)} />
           <ul>
             {this.fields.map(el => (
               <li>

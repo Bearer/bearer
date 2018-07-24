@@ -13,13 +13,7 @@ export class AuthConfig {
   render() {
     return (
       <form onSubmit={() => this.handleSubmit()}>
-        <bearer-input
-          type="text"
-          label="hello"
-          controlName="hello"
-          value="Hello"
-          hint="hello"
-        />
+        <bearer-input type="text" label="hello" controlName="hello" value="Hello" hint="hello" />
         <bearer-input type="submit" onSubmit={() => this.handleSubmit()} />
       </form>
     )

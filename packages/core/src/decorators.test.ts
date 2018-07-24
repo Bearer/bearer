@@ -42,9 +42,7 @@ describe('Intent decorator', () => {
     })
 
     it('calling methods return a promise', () => {
-      expect(decoratedInstance.getCollectionIntentProp().constructor).toBe(
-        Promise
-      )
+      expect(decoratedInstance.getCollectionIntentProp().constructor).toBe(Promise)
     })
 
     it('uses GetCollectionIntent', async () => {
@@ -77,9 +75,7 @@ describe('Intent decorator', () => {
     })
 
     it('calling methods return a promise', () => {
-      expect(decoratedInstance.getResourceIntentProp().constructor).toBe(
-        Promise
-      )
+      expect(decoratedInstance.getResourceIntentProp().constructor).toBe(Promise)
     })
 
     it('uses GetResourceIntent', async () => {

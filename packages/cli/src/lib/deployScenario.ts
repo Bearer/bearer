@@ -23,22 +23,14 @@ export function buildIntents(rootLevel, scenarioUuid, emitter, config) {
       fs.mkdirSync(artifactDirectory)
     }
     try {
-      const scenarioArtifact = pathJs.join(
-        artifactDirectory,
-        `${scenarioUuid}.zip`
-      )
+      const scenarioArtifact = pathJs.join(artifactDirectory, `${scenarioUuid}.zip`)
       const handler = pathJs.join(artifactDirectory, config.HandlerBase)
       const output = fs.createWriteStream(scenarioArtifact)
 
       emitter.emit('intents:installingDependencies')
       await execPromise('yarn install', { cwd: intentsDirectory })
 
-      await buildArtifact(
-        output,
-        handler,
-        { path: intentsDirectory, scenarioUuid },
-        emitter
-      )
+      await buildArtifact(output, handler, { path: intentsDirectory, scenarioUuid }, emitter)
       return resolve(scenarioArtifact)
     } catch (e) {
       return reject(e)
@@ -58,12 +50,7 @@ export function deployIntents({ scenarioUuid }, emitter, config) {
     const rootLevel = pathJs.dirname(rootPathRc)
 
     try {
-      const scenarioArtifact = await buildIntents(
-        rootLevel,
-        scenarioUuid,
-        emitter,
-        config
-      )
+      const scenarioArtifact = await buildIntents(rootLevel, scenarioUuid, emitter, config)
       await pushScenario(
         scenarioArtifact,
         {
@@ -100,12 +87,7 @@ export function deployScreens({ scenarioUuid }, emitter, config, locator) {
         return false
       }
 
-      await transpileStep(
-        emitter,
-        pathJs.join(buildDirectory, '..'),
-        scenarioUuid,
-        config.IntegrationServiceHost
-      )
+      await transpileStep(emitter, pathJs.join(buildDirectory, '..'), scenarioUuid, config.IntegrationServiceHost)
 
       emitter.emit('screens:generateSetupComponent')
 
@@ -138,27 +120,18 @@ export function deployScreens({ scenarioUuid }, emitter, config, locator) {
   })
 }
 
-function transpileStep(
-  emitter,
-  screensDirectory,
-  scenarioUuid,
-  integrationHost
-) {
+function transpileStep(emitter, screensDirectory, scenarioUuid, integrationHost) {
   return new Promise(async (resolve, reject) => {
     emitter.emit('start:prepare:transpileStep')
-    const bearerTranspiler = spawn(
-      'node',
-      [pathJs.join(__dirname, 'startTranspiler.js'), '--no-watcher'],
-      {
-        cwd: screensDirectory,
-        env: {
-          ...process.env,
-          BEARER_SCENARIO_ID: scenarioUuid,
-          BEARER_INTEGRATION_HOST: integrationHost
-        },
-        stdio: ['pipe', 'pipe', 'pipe', 'ipc']
-      }
-    )
+    const bearerTranspiler = spawn('node', [pathJs.join(__dirname, 'startTranspiler.js'), '--no-watcher'], {
+      cwd: screensDirectory,
+      env: {
+        ...process.env,
+        BEARER_SCENARIO_ID: scenarioUuid,
+        BEARER_INTEGRATION_HOST: integrationHost
+      },
+      stdio: ['pipe', 'pipe', 'pipe', 'ipc']
+    })
 
     bearerTranspiler.on('close', (...args) => {
       emitter.emit('start:prepare:transpileStep:close', args)

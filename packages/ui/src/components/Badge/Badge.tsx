@@ -7,20 +7,9 @@ import { Component, Prop } from '@bearer/core'
 })
 export class BearerBadge {
   @Prop() content: any
-  @Prop()
-  kind:
-    | 'primary'
-    | 'secondary'
-    | 'success'
-    | 'danger'
-    | 'warning'
-    | 'info'
-    | 'light'
-    | 'dark'
+  @Prop() kind: 'primary' | 'secondary' | 'success' | 'danger' | 'warning' | 'info' | 'light' | 'dark'
 
   render() {
-    return (
-      <span class={`badge badge-${this.kind}`}>{this.content || <slot />}</span>
-    )
+    return <span class={`badge badge-${this.kind}`}>{this.content || <slot />}</span>
   }
 }

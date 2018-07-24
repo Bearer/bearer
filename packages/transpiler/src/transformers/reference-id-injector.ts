@@ -7,9 +7,9 @@ type TransformerOptions = {
   verbose?: true
 }
 
-export default function BearerReferenceIdInjector({
-  verbose
-}: TransformerOptions = {}): ts.TransformerFactory<ts.SourceFile> {
+export default function BearerReferenceIdInjector({ verbose }: TransformerOptions = {}): ts.TransformerFactory<
+  ts.SourceFile
+> {
   return transformContext => {
     return tsSourceFile => {
       if (!hasRetrieveOrSaveStateIntent(tsSourceFile)) {
@@ -22,18 +22,12 @@ export default function BearerReferenceIdInjector({
         }
         return ts.visitEachChild(node, visit, transformContext)
       }
-      return ts.visitEachChild(
-        ensurePropImported(tsSourceFile),
-        visit,
-        transformContext
-      )
+      return ts.visitEachChild(ensurePropImported(tsSourceFile), visit, transformContext)
     }
   }
 }
 
-function injectBearerReferenceIdProp(
-  tsClass: ts.ClassDeclaration
-): ts.ClassDeclaration {
+function injectBearerReferenceIdProp(tsClass: ts.ClassDeclaration): ts.ClassDeclaration {
   return ts.updateClassDeclaration(
     tsClass,
     tsClass.decorators,

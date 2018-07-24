@@ -7,9 +7,7 @@ import * as Case from 'case'
 import Locator from '../locationProvider'
 import { ScenarioConfig } from '../types'
 
-const deploy = (emitter, config: ScenarioConfig, locator: Locator) => async ({
-  path = '.'
-}) => {
+const deploy = (emitter, config: ScenarioConfig, locator: Locator) => async ({ path = '.' }) => {
   emitter.emit('deploy:started')
   const { BearerEnv } = config
 

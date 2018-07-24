@@ -1,10 +1,4 @@
-import {
-  Component,
-  Intent,
-  BearerFetch,
-  IntentType,
-  BearerState
-} from '@bearer/core'
+import { Component, Intent, BearerFetch, IntentType, BearerState } from '@bearer/core'
 
 @Component({
   tag: 'full-component'

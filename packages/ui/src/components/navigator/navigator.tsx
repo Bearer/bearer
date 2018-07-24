@@ -89,10 +89,7 @@ export class BearerPopoverNavigator {
 
   hasNext = () => this.visibleScreen < this.screens.length - 1
   hasPrevious = () => this.visibleScreen > 0
-  hasAuthScreen = () =>
-    this.screenNodes.filter(
-      node => node['tagName'] === NAVIGATOR_AUTH_SCREEN_NAME
-    ).length
+  hasAuthScreen = () => this.screenNodes.filter(node => node['tagName'] === NAVIGATOR_AUTH_SCREEN_NAME).length
 
   componentDidLoad() {
     this.screens = this.screenNodes

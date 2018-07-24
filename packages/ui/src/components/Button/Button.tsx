@@ -7,17 +7,7 @@ import { Component, Prop } from '@bearer/core'
 })
 export class Button {
   @Prop() content: any
-  @Prop()
-  kind:
-    | 'primary'
-    | 'secondary'
-    | 'success'
-    | 'danger'
-    | 'warning'
-    | 'info'
-    | 'light'
-    | 'dark' =
-    'primary'
+  @Prop() kind: 'primary' | 'secondary' | 'success' | 'danger' | 'warning' | 'info' | 'light' | 'dark' = 'primary'
   @Prop() size: 'md' | 'sm' | 'lg' = 'md'
   @Prop() as: string = 'button'
 
