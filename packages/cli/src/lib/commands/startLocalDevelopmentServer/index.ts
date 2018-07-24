@@ -5,7 +5,6 @@ import * as Router from 'koa-router'
 import * as unzip from 'unzip'
 import * as fs from 'fs-extra'
 import * as cosmiconfig from 'cosmiconfig'
-import storage from './storage'
 
 const LOCAL_DEV_CONFIGURATION = 'dev'
 const explorer = cosmiconfig(LOCAL_DEV_CONFIGURATION)
@@ -77,15 +76,13 @@ function startLocalDevelopmentServer(rootLevel, scenarioUuid, emitter, config) {
         )
       }
 
-      server.use(storage.routes())
-      server.use(storage.allowedMethods())
       server.use(router.routes())
       server.use(router.allowedMethods())
 
       server.listen(port, () => {
         emitter.emit('start:localServer:start', { port })
         emitter.emit('start:localServer:endpoints', {
-          endpoints: [...storage.stack, ...router.stack]
+          endpoints: [...router.stack]
         })
       })
 
