@@ -37,7 +37,7 @@ async function generateTemplates({
     console.log('Deleted files and folders:\n', paths.join('\n'))
   })
 
-  if (authConfig[configKey] && authConfig[configKey].length > 0) {
+  if (authConfig[configKey] && authConfig[configKey].length) {
     const vars = {
       scenarioTitle: Case.camel(scenarioTitle),
       componentTagName: Case.kebab(scenarioTitle),
