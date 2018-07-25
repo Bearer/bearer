@@ -41,14 +41,7 @@ declare global {
   namespace StencilComponents {
     interface BearerAlert {
       'content': any;
-      'kind': 'primary'
-    | 'secondary'
-    | 'success'
-    | 'danger'
-    | 'warning'
-    | 'info'
-    | 'light'
-    | 'dark';
+      'kind': 'primary' | 'secondary' | 'success' | 'danger' | 'warning' | 'info' | 'light' | 'dark';
       'onDismiss': () => void;
     }
   }
@@ -73,14 +66,7 @@ declare global {
   namespace JSXElements {
     export interface BearerAlertAttributes extends HTMLAttributes {
       'content'?: any;
-      'kind'?: 'primary'
-    | 'secondary'
-    | 'success'
-    | 'danger'
-    | 'warning'
-    | 'info'
-    | 'light'
-    | 'dark';
+      'kind'?: 'primary' | 'secondary' | 'success' | 'danger' | 'warning' | 'info' | 'light' | 'dark';
       'onDismiss'?: () => void;
     }
   }
@@ -92,14 +78,7 @@ declare global {
   namespace StencilComponents {
     interface BearerBadge {
       'content': any;
-      'kind': 'primary'
-    | 'secondary'
-    | 'success'
-    | 'danger'
-    | 'warning'
-    | 'info'
-    | 'light'
-    | 'dark';
+      'kind': 'primary' | 'secondary' | 'success' | 'danger' | 'warning' | 'info' | 'light' | 'dark';
     }
   }
 
@@ -123,14 +102,7 @@ declare global {
   namespace JSXElements {
     export interface BearerBadgeAttributes extends HTMLAttributes {
       'content'?: any;
-      'kind'?: 'primary'
-    | 'secondary'
-    | 'success'
-    | 'danger'
-    | 'warning'
-    | 'info'
-    | 'light'
-    | 'dark';
+      'kind'?: 'primary' | 'secondary' | 'success' | 'danger' | 'warning' | 'info' | 'light' | 'dark';
     }
   }
 }
@@ -142,14 +114,7 @@ declare global {
     interface BearerButton {
       'as': string;
       'content': any;
-      'kind': 'primary'
-    | 'secondary'
-    | 'success'
-    | 'danger'
-    | 'warning'
-    | 'info'
-    | 'light'
-    | 'dark';
+      'kind': 'primary' | 'secondary' | 'success' | 'danger' | 'warning' | 'info' | 'light' | 'dark';
       'size': 'md' | 'sm' | 'lg';
     }
   }
@@ -175,14 +140,7 @@ declare global {
     export interface BearerButtonAttributes extends HTMLAttributes {
       'as'?: string;
       'content'?: any;
-      'kind'?: 'primary'
-    | 'secondary'
-    | 'success'
-    | 'danger'
-    | 'warning'
-    | 'info'
-    | 'light'
-    | 'dark';
+      'kind'?: 'primary' | 'secondary' | 'success' | 'danger' | 'warning' | 'info' | 'light' | 'dark';
       'size'?: 'md' | 'sm' | 'lg';
     }
   }

@@ -13,9 +13,8 @@ export class BearerPopoverNavigator {
   @State() _visibleScreen: number
   @State() navigationTitle: string
 
-  @Prop() direction: string = 'top'
+  @Prop() direction: string = 'right'
   @Prop() btnProps: JSXElements.BearerButtonAttributes = { content: 'Activate' }
-
   @Prop() display = 'popover'
 
   set visibleScreen(index) {
