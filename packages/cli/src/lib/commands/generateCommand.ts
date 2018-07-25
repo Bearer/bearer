@@ -11,7 +11,6 @@ import Locator from '../locationProvider'
 const INTENT = 'intent'
 const VIEW = 'view'
 enum TemplateTypes {
-  config = 'config',
   setup = 'setup'
 }
 async function generateTemplates({
@@ -39,7 +38,7 @@ async function generateTemplates({
 
   if (authConfig[configKey] && authConfig[configKey].length) {
     const vars = {
-      scenarioTitle: Case.camel(scenarioTitle),
+      componentName: Case.pascal(scenarioTitle),
       componentTagName: Case.kebab(scenarioTitle),
       fields: JSON.stringify(authConfig[configKey])
     }
@@ -56,14 +55,6 @@ const generate = (emitter, {}, locator: Locator) => async env => {
   if (!scenarioRoot) {
     emitter.emit('rootPath:doesntExist')
     process.exit(1)
-  }
-
-  if (env.config) {
-    return generateTemplates({
-      emitter,
-      templateType: TemplateTypes.config,
-      locator
-    })
   }
 
   if (env.setup) {
@@ -185,6 +176,5 @@ export function useWith(program, emitter, config, locator): void {
     )
     // .option('-t, --type <intentType>', 'Intent type.')
     .option('--setup', 'generate setup file')
-    .option('--config', 'generate config file')
     .action(generate(emitter, config, locator))
 }

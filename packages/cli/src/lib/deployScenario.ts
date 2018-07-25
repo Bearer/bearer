@@ -96,11 +96,7 @@ export function deployViews({ scenarioUuid }, emitter, config, locator: Location
       await transpileStep(emitter, locator, scenarioUuid, config.IntegrationServiceHost)
 
       emitter.emit('views:generateSetupComponent')
-
       await execPromise('bearer generate --setup', { cwd: buildDirectory })
-
-      emitter.emit('views:generateConfigComponent')
-      await execPromise('bearer generate --config', { cwd: buildDirectory })
 
       emitter.emit('views:buildingDist')
       await execPromise('yarn build', {

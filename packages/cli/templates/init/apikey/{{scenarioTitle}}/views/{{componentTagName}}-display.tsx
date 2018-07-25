@@ -8,10 +8,10 @@ import '@bearer/ui'
 
 @Component({
   tag: '{{componentTagName}}-display',
-  styleUrl: '{{scenarioTitle}}.css',
+  styleUrl: '{{componentName}}.css',
   shadow: true
 })
-export class {{scenarioTitle}}Display {
+export class {{componentName}}Display {
   render() {
     return (null)
   }

@@ -129,10 +129,7 @@ export function prepare(emitter, config, locator: Locator) {
   }
 }
 
-const ensureSetupAndConfigComponents = rootLevel => {
-  spawn('bearer', ['g', '--config'], {
-    cwd: rootLevel
-  })
+const ensureSetupComponents = rootLevel => {
   spawn('bearer', ['g', '--setup'], {
     cwd: rootLevel
   })
@@ -156,12 +153,12 @@ export const start = (emitter, config, locator: Locator) => async ({ open, insta
     /* start local development server */
     const integrationHost = await startLocalDevelopmentServer(scenarioUuid, emitter, config, locator)
 
-    ensureSetupAndConfigComponents(buildViewsDir)
+    ensureSetupComponents(buildViewsDir)
 
     emitter.emit('start:watchers')
     if (watcher) {
       fs.watchFile(locator.scenarioRootResourcePath('auth.config.json'), { persistent: true, interval: 250 }, () =>
-        ensureSetupAndConfigComponents(buildViewsDir)
+        ensureSetupComponents(buildViewsDir)
       )
     }
 

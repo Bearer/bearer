@@ -32,7 +32,8 @@ const init = emitter => async scenarioTitle => {
 
   const vars = {
     scenarioTitle,
-    componentTagName: Case.kebab(Case.camel(scenarioTitle))
+    componentName: Case.pascal(scenarioTitle),
+    componentTagName: Case.kebab(scenarioTitle)
   }
   const inDir = path.join(__dirname, 'templates', 'init', authenticationType)
   const outDir = process.cwd()
