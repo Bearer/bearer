@@ -1,12 +1,12 @@
-const archiver = require('archiver')
-const globby = require('globby')
-const pathJs = require('path')
-const webpack = require('webpack')
+import archiver from 'archiver'
+import globby from 'globby'
+import pathJs from 'path'
+import webpack from 'webpack'
 
-const prepareConfig = require('./prepareConfig')
-const attachConfig = require('./attachConfig')
-const addFilesToArchive = require('./addFilesToArchive')
-const generateHandler = require('./generateHandler')
+import prepareConfig from './prepareConfig'
+import attachConfig from './attachConfig'
+import addFilesToArchive from './addFilesToArchive'
+import generateHandler from './generateHandler'
 
 const CONFIG_FILE = 'bearer.config.json'
 const HANDLER_NAME = 'index.js'
@@ -14,7 +14,7 @@ const archive = archiver('zip', {
   zlib: { level: 9 }
 })
 
-module.exports = (output, { path, scenarioUuid }, emitter) => {
+export default (output, { path, scenarioUuid }, emitter) => {
   return new Promise(async (resolve, reject) => {
     try {
       output.on('close', () => {

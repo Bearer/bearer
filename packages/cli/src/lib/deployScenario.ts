@@ -4,7 +4,7 @@ import * as fs from 'fs'
 import { promisify } from 'util'
 
 import { prepare } from './commands/startCommand'
-import * as buildArtifact from './buildArtifact'
+import buildArtifact from './buildArtifact'
 import * as pushScenario from './pushScenario'
 import * as pushViews from './pushViews'
 import * as assembly from './assemblyScenario'

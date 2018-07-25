@@ -1,8 +1,8 @@
-const path = require('path')
-const globby = require('globby')
-const fs = require('graceful-fs')
+import path from 'path'
+import globby from 'globby'
+import fs from 'graceful-fs'
 
-module.exports = (archive, packagePath) => {
+export default (archive, packagePath) => {
   const fullPath = path.resolve(packagePath)
   return globby([`${fullPath}/dist/*.js`])
     .then(files => {
