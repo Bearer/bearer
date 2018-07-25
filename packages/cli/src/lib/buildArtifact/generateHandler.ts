@@ -1,4 +1,4 @@
-module.exports = ({ intents }) => {
+export default ({ intents }) => {
   return intents
     .map(Object.keys)
     .map(

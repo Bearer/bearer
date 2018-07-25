@@ -8,7 +8,6 @@ import Locator from '../locationProvider'
 import { ScenarioConfig } from '../types'
 
 const deploy = (emitter, config: ScenarioConfig, locator: Locator) => async ({
-  path = '.',
   viewsOnly = false,
   intentsOnly = false
 }) => {

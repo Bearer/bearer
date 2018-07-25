@@ -1,10 +1,10 @@
-const path = require('path')
-const globby = require('globby')
-const fs = require('graceful-fs')
+import * as path from 'path'
+import * as globby from 'globby'
+import * as fs from 'graceful-fs'
 
-module.exports = (archive, packagePath) => {
+export default (archive, packagePath) => {
   const fullPath = path.resolve(packagePath)
-  return globby([`${fullPath}/dist/*.js`])
+  return globby([`${fullPath}/*.js`])
     .then(files => {
       files.forEach(file => {
         archive.append(fs.createReadStream(file), {

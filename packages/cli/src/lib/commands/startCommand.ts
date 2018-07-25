@@ -157,7 +157,7 @@ export const start = (emitter, config, locator: Locator) => async ({ open, insta
 
     emitter.emit('start:watchers')
     if (watcher) {
-      fs.watchFile(locator.scenarioRootResourcePath('auth.config.json'), { persistent: true, interval: 250 }, () =>
+      fs.watchFile(locator.authConfigPath, { persistent: true, interval: 250 }, () =>
         ensureSetupComponents(buildViewsDir)
       )
     }

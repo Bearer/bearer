@@ -57,4 +57,8 @@ export default class LocationProvider {
   intentsArtifactResourcePath(resource: string): string {
     return path.join(this.intentsArtifactDir, resource)
   }
+
+  get authConfigPath(): string {
+    return this.scenarioRootResourcePath('auth.config.json')
+  }
 }

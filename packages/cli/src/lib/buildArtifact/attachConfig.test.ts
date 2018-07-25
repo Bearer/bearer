@@ -1,4 +1,4 @@
-const attach = require('./attachConfig')
+import attach from './attachConfig'
 
 test('attaching the config', () => {
   const archive = {

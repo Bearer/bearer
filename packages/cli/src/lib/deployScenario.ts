@@ -4,7 +4,7 @@ import * as fs from 'fs'
 import { promisify } from 'util'
 
 import { prepare } from './commands/startCommand'
-import * as buildArtifact from './buildArtifact'
+import buildArtifact from './buildArtifact'
 import * as pushScenario from './pushScenario'
 import * as pushViews from './pushViews'
 import * as assembly from './assemblyScenario'
@@ -24,14 +24,13 @@ export function buildIntents(scenarioUuid: string, emitter, config, locator: Loc
       fs.mkdirSync(artifactDirectory)
     }
     try {
-      const scenarioArtifact = locator.intentsArtifactResourcePath(`${scenarioUuid}.zip`)
-      const output = fs.createWriteStream(scenarioArtifact)
-
       emitter.emit('intents:installingDependencies')
       // TODOs: use root node modules
       await execPromise('yarn install', { cwd: intentsDirectory })
 
-      buildArtifact(output, { path: intentsDirectory, scenarioUuid }, emitter)
+      const scenarioArtifact = locator.intentsArtifactResourcePath(`${scenarioUuid}.zip`)
+      const output = fs.createWriteStream(scenarioArtifact)
+      buildArtifact(output, { scenarioUuid }, emitter, locator)
         .then(() => {
           emitter.emit('intents:buildIntents:succeeded')
           resolve(scenarioArtifact)

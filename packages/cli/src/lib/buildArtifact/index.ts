@@ -1,12 +1,13 @@
-const archiver = require('archiver')
-const globby = require('globby')
-const pathJs = require('path')
-const webpack = require('webpack')
+import * as archiver from 'archiver'
+import * as globby from 'globby'
+import * as pathJs from 'path'
+import * as webpack from 'webpack'
 
-const prepareConfig = require('./prepareConfig')
-const attachConfig = require('./attachConfig')
-const addFilesToArchive = require('./addFilesToArchive')
-const generateHandler = require('./generateHandler')
+import prepareConfig from './prepareConfig'
+import attachConfig from './attachConfig'
+import addFilesToArchive from './addFilesToArchive'
+import generateHandler from './generateHandler'
+import LocationProvider from '../locationProvider'
 
 const CONFIG_FILE = 'bearer.config.json'
 const HANDLER_NAME = 'index.js'
@@ -14,7 +15,7 @@ const archive = archiver('zip', {
   zlib: { level: 9 }
 })
 
-module.exports = (output, { path, scenarioUuid }, emitter) => {
+export default (output, { scenarioUuid }, emitter, locator: LocationProvider) => {
   return new Promise(async (resolve, reject) => {
     try {
       output.on('close', () => {
@@ -46,34 +47,41 @@ module.exports = (output, { path, scenarioUuid }, emitter) => {
       // copy package.json
       // create config
       // zip
+      const distPath = locator.buildIntentsResourcePath('dist')
+      await transpileIntents(locator.srcIntentsDir, distPath)
 
-      await transpileIntents(path)
-
-      await prepareConfig(path, scenarioUuid)
+      emitter.emit('buildArtifact:intentsTranspiled')
+      await prepareConfig(
+        locator.authConfigPath,
+        distPath,
+        scenarioUuid,
+        locator.scenarioRootResourcePath('node_modules')
+      )
         .then(async config => {
           emitter.emit('buildArtifact:configured', { intents: config.intents })
           await attachConfig(archive, JSON.stringify(config, null, 2), {
             name: CONFIG_FILE
           })
           archive.append(generateHandler(config), { name: HANDLER_NAME })
-          await addFilesToArchive(archive, path)
+          await addFilesToArchive(archive, distPath)
         })
         .then(() => {
           archive.finalize()
         })
         .catch(error => {
-          emitter.emit('buildArtifact:failed', { error })
+          emitter.emit('buildArtifact:failed', { error: error.toString() })
         })
     } catch (error) {
       emitter.emit('buildArtifact:error', error)
+      reject(error)
     }
   })
 }
 
-function transpileIntents(path) {
+function transpileIntents(entriesPath: string, distPath: string): Promise<boolean | Array<any>> {
   return new Promise((resolve, reject) => {
     // Note: it works because we have client.ts present
-    globby([`${path}/*.ts`])
+    globby([`${entriesPath}/*.ts`])
       .then(files => {
         if (files.length) {
           const entries = files.reduceRight(
@@ -117,9 +125,10 @@ function transpileIntents(path) {
               output: {
                 libraryTarget: 'commonjs2',
                 filename: '[name].js',
-                path: pathJs.join(pathJs.resolve(path), 'dist')
-              },
-              context: pathJs.resolve(path)
+                path: distPath
+              }
+              // TODO: check if it is necessary
+              // context: pathJs.resolve(path)
             },
             (err, stats) => {
               if (err || stats.hasErrors()) {
