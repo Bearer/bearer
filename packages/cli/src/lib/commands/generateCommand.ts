@@ -105,7 +105,7 @@ async function askForName() {
     }
   ])
 
-  return name
+  return name.trim()
 }
 
 async function generateView({ emitter, locator }: { locator: Locator; emitter: any }) {
