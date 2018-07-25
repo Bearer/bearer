@@ -36,9 +36,7 @@ export class BearerButtonPopover {
   }
 
   componentDidLoad() {
-    if (this.opened === false) {
-      this.visible = false
-    }
+    this.visible = this.opened
   }
 
   render() {
@@ -46,18 +44,19 @@ export class BearerButtonPopover {
       <div class="root">
         <bearer-button {...this.btnProps} onClick={this.toggleDisplay} />
 
-        {this.visible && (
-          <div class={`popover fade show bs-popover-${this.direction} direction-${this.direction}`}>
-            <h3 class="popover-header">
-              {this.backNav && <bearer-navigator-back class="header-arrow" />}
-              <span class="header">{this.header}</span>
-            </h3>
-            <div class="popover-body">
-              <slot />
-            </div>
-            {this.arrow && <div class="arrow" />}
+        <div
+          class={`popover fade show bs-popover-${this.direction} direction-${this.direction} ${!this.visible &&
+            'hidden'}`}
+        >
+          <h3 class="popover-header">
+            {this.backNav && <bearer-navigator-back class="header-arrow" />}
+            <span class="header">{this.header}</span>
+          </h3>
+          <div class="popover-body">
+            <slot />
           </div>
-        )}
+          {this.arrow && <div class="arrow" />}
+        </div>
       </div>
     )
   }

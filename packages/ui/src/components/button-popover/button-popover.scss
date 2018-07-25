@@ -15,6 +15,10 @@ $top-arrow: 50px;
   display: flex;
   flex-direction: column;
 
+  &.hidden {
+    display: none;
+  }
+
   &.direction-bottom {
     top: 100%;
     transform: translateX(-50%);
