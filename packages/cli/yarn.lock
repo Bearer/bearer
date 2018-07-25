@@ -16,27 +16,6 @@
     esutils "^2.0.2"
     js-tokens "^3.0.0"
 
-"@bearer/intents@^0.23.0":
-  version "0.23.0"
-  resolved "https://registry.npmjs.org/@bearer/intents/-/intents-0.23.0.tgz#271a77fa11abf065a2e255df2a89e461fe5e7c99"
-  dependencies:
-    axios "^0.18.0"
-    typescript "^2.9.2"
-
-"@bearer/templates@^0.22.0":
-  version "0.22.0"
-  resolved "https://registry.npmjs.org/@bearer/templates/-/templates-0.22.0.tgz#9f50a62dfa8193dda47e84db6020b634080c1183"
-  dependencies:
-    typescript "^2.9.2"
-
-"@bearer/transpiler@^0.23.0":
-  version "0.23.0"
-  resolved "https://registry.npmjs.org/@bearer/transpiler/-/transpiler-0.23.0.tgz#1bb9847927c549d52e3984560f4c97f3a8c1777c"
-  dependencies:
-    async-foreach "^0.1.3"
-    fs-extra "^6.0.1"
-    typescript "^2.9.2"
-
 "@cronvel/get-pixels@^3.3.1":
   version "3.3.1"
   resolved "https://registry.yarnpkg.com/@cronvel/get-pixels/-/get-pixels-3.3.1.tgz#cd8bfd7d9985fb282aa8ad765137454ecfacafbe"
@@ -592,10 +571,6 @@ astral-regex@^1.0.0:
 async-each@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/async-each/-/async-each-1.0.1.tgz#19d386a1d9edc6e7c1c85d388aedbcc56d33602d"
-
-async-foreach@^0.1.3:
-  version "0.1.3"
-  resolved "https://registry.npmjs.org/async-foreach/-/async-foreach-0.1.3.tgz#36121f845c0578172de419a97dbeb1d16ec34542"
 
 async-kit@^2.2.4:
   version "2.2.4"
