@@ -1,4 +1,4 @@
-import { Component, State, Prop, Listen, Method } from '@bearer/core'
+import { Component, State, Prop, Listen, Method, Event, EventEmitter, Watch } from '@bearer/core'
 
 @Component({
   tag: 'bearer-button-popover',
@@ -8,6 +8,7 @@ import { Component, State, Prop, Listen, Method } from '@bearer/core'
 export class BearerButtonPopover {
   @State() visible: boolean = false
 
+  @Event() visibilityChange: EventEmitter
   @Prop() opened: boolean
   @Prop() direction: string = 'top'
   @Prop() arrow: boolean = true
@@ -28,6 +29,13 @@ export class BearerButtonPopover {
   @Listen('click')
   clickInsideHandler(ev) {
     ev.stopImmediatePropagation()
+  }
+
+  @Watch('visible')
+  visibilityChangeHandler(newValue: boolean, oldValue: boolean) {
+    if (oldValue !== newValue) {
+      this.visibilityChange.emit({ visible: newValue })
+    }
   }
 
   @Method()

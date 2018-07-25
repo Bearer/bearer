@@ -559,6 +559,7 @@ declare global {
       'btnProps'?: JSXElements.BearerButtonAttributes;
       'direction'?: string;
       'header'?: string;
+      'onVisibilityChange'?: (event: CustomEvent) => void;
       'opened'?: boolean;
     }
   }
