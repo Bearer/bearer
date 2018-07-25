@@ -1,23 +1,23 @@
-import * as ts from 'typescript'
-import globby from 'globby'
-import vm from 'vm'
-import path from 'path'
-import fs from 'fs'
+import * as globby from 'globby'
+import * as vm from 'vm'
+import * as fs from 'fs'
 import { promisify } from 'util'
 const readFileAsync = promisify(fs.readFile)
 
-const AUTH_CONFIG_FILE = 'auth.config.json'
+export default (
+  authConfigFile: string,
+  distPath: string,
+  scenarioUuid: string,
+  nodeModulesPath: string
+): Promise<{ intents: Array<{ [key: string]: string }>; integration_uuid: string }> => {
+  module.paths.push(nodeModulesPath)
 
-export default (codePath, scenarioUuid) => {
-  const fullPath = path.resolve(codePath)
-
-  module.paths.push(path.join(fullPath, 'node_modules'))
-
-  return globby([`${fullPath}/dist/*.js`]).then(files =>
+  return globby([`${distPath}/*.js`]).then(files =>
     files
       .reduce(async (acc, f) => {
         const code = await readFileAsync(f)
         const context = vm.createContext({ module: {} })
+
         vm.runInNewContext(code.toString(), context)
         const intent = context['module'].exports.default
 
@@ -31,11 +31,11 @@ export default (codePath, scenarioUuid) => {
       }, Promise.resolve({ integration_uuid: scenarioUuid, intents: [] }))
       .then(async config => {
         try {
-          const content = await readFileAsync(path.join(fullPath, '..', AUTH_CONFIG_FILE), { encoding: 'utf8' })
+          const content = await readFileAsync(authConfigFile, { encoding: 'utf8' })
           config.auth = JSON.parse(content)
           return config
         } catch (e) {
-          console.log(e)
+          throw new Error(`Unable to read ${authConfigFile} : ${e.toString()}`)
         }
       })
   )

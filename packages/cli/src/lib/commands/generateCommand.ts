@@ -23,7 +23,7 @@ async function generateTemplates({
   templateType: TemplateTypes
   locator: Locator
 }) {
-  const authConfig = require(locator.scenarioRootResourcePath('auth.config.json'))
+  const authConfig = require(locator.authConfigPath)
 
   const scenarioConfig = rc('scenario')
   const { scenarioTitle } = scenarioConfig
@@ -162,7 +162,7 @@ async function generateIntent({ emitter, locator }: { emitter: any; locator: Loc
     }
   ])
   const name = await askForName()
-  const authConfig = require(locator.scenarioRootResourcePath('auth.config.json'))
+  const authConfig = require(locator.authConfigPath)
   const actionExample = getActionExample(intentType, authConfig.authType)
   const vars = { intentName: name, authType: authConfig.authType, intentType, actionExample }
   const inDir = path.join(__dirname, 'templates/generate/intent')
