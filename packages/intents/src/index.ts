@@ -95,7 +95,7 @@ export class SaveState extends StateIntentBase {
     return (event, _context, callback) => {
       const { referenceId } = event.queryStringParameters
       console.log('EVENT CONTEXT', event.context)
-      STATE_CLIENT.defaults.baseURL = `https://${event.context.bearerBaseURL}`
+      STATE_CLIENT.defaults.baseURL = event.context.bearerBaseURL
       try {
         STATE_CLIENT.request({
           method: 'get',
