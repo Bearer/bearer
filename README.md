@@ -42,6 +42,12 @@ yarn lerna-publish
 
 For further information on Lerna please read Lerna's documentation: [Lerna](https://github.com/lerna/lerna)
 
+### Upgrade stencil version dependency
+
+```bash
+yarn upgrade-stencil
+```
+
 ### Conventional commits
 
 As we try to be as clear as possible on changes within bearer packages, we adopted [conventional commits](https://conventionalcommits.org/) as pattern for git commits.
