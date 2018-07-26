@@ -99,9 +99,15 @@ module.exports = emitter => {
     term('\n')
   })
 
-  emitter.on('generateIntent:fileGenerated', path => {
+  emitter.on('generateTemplate:fileGenerated', path => {
     term.white('Bearer: ')
     term.yellow(`Bootstrapped a file: ${path}`)
+    term('\n')
+  })
+
+  emitter.on('generateTemplate:error', error => {
+    term.white('Bearer: ')
+    term.red(`Error while generating template: ${error}`)
     term('\n')
   })
 

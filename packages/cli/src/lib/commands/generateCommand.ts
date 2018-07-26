@@ -22,31 +22,37 @@ async function generateTemplates({
   templateType: TemplateTypes
   locator: Locator
 }) {
-  const authConfig = require(locator.authConfigPath)
+  try {
+    const authConfig = require(locator.authConfigPath)
 
-  const scenarioConfig = rc('scenario')
-  const { scenarioTitle } = scenarioConfig
+    const scenarioConfig = rc('scenario')
+    const { scenarioTitle } = scenarioConfig
 
-  const configKey = `${templateType}Views`
+    const configKey = `${templateType}Views`
 
-  const inDir = path.join(__dirname, `templates/generate/${templateType}`)
-  const outDir = locator.buildViewsComponentsDir
+    const inDir = path.join(__dirname, `templates/generate/${templateType}`)
+    const outDir = locator.buildViewsComponentsDir
 
-  await del(`${outDir}*${templateType}*.tsx`).then(paths => {
-    console.log('Deleted files and folders:\n', paths.join('\n'))
-  })
-
-  if (authConfig[configKey] && authConfig[configKey].length) {
-    const vars = {
-      componentName: Case.pascal(scenarioTitle),
-      componentTagName: Case.kebab(scenarioTitle),
-      fields: JSON.stringify(authConfig[configKey])
-    }
-
-    copy(inDir, outDir, vars, (err, createdFiles) => {
-      if (err) throw err
-      createdFiles.forEach(filePath => emitter.emit('generateIntent:fileGenerated', filePath))
+    await del(`${outDir}*${templateType}*.tsx`).then(paths => {
+      console.log('Deleted files and folders:\n', paths.join('\n'))
     })
+
+    if (authConfig[configKey] && authConfig[configKey].length) {
+      const vars = {
+        componentName: Case.pascal(scenarioTitle),
+        componentTagName: Case.kebab(scenarioTitle),
+        fields: JSON.stringify(authConfig[configKey])
+      }
+
+      copy(inDir, outDir, vars, (err, createdFiles) => {
+        if (err) throw err
+        createdFiles.forEach(filePath => emitter.emit('generateTemplate:fileGenerated', filePath))
+      })
+    } else {
+      throw new Error('Configuration file is incorrect or missing')
+    }
+  } catch (error) {
+    emitter.emit('generateTemplate:erro', error.toString())
   }
 }
 
@@ -211,7 +217,7 @@ async function generateIntent({ emitter, locator }: { emitter: any; locator: Loc
 
   copy(inDir, outDir, vars, (err, createdFiles) => {
     if (err) throw err
-    createdFiles.forEach(filePath => emitter.emit('generateIntent:fileGenerated', filePath))
+    createdFiles.forEach(filePath => emitter.emit('generateTemplate:fileGenerated', filePath))
   })
 }
 
