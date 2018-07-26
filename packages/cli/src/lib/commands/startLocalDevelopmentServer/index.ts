@@ -3,6 +3,7 @@ import * as Router from 'koa-router'
 import * as unzip from 'unzip-stream'
 import * as fs from 'fs-extra'
 import * as cosmiconfig from 'cosmiconfig'
+import * as Logger from 'koa-logger'
 
 import server = require('./server')
 import Storage from './storage'
@@ -10,7 +11,7 @@ import auth from './auth'
 import { buildIntents } from '../../deployScenario'
 import LocationProvider from '../../locationProvider'
 
-function startLocalDevelopmentServer(scenarioUuid, emitter, config, locator: LocationProvider) {
+function startLocalDevelopmentServer(scenarioUuid, emitter, config, locator: LocationProvider, logs: boolean = true) {
   const rootLevel = locator.scenarioRoot
   const buildDir = locator.buildIntentsDir
 
@@ -44,7 +45,7 @@ function startLocalDevelopmentServer(scenarioUuid, emitter, config, locator: Loc
         router.all(
           endpoint,
           (ctx, next) =>
-            new Promise((resolve, reject) => {
+            new Promise((resolve, _reject) => {
               lambdas[intentName](
                 {
                   context: {
@@ -56,7 +57,7 @@ function startLocalDevelopmentServer(scenarioUuid, emitter, config, locator: Loc
                   body: ctx.request.body
                 },
                 {},
-                (err, datum) => {
+                (_err, datum) => {
                   ctx.intentDatum = datum
                   next()
                   resolve()
@@ -67,6 +68,9 @@ function startLocalDevelopmentServer(scenarioUuid, emitter, config, locator: Loc
         )
       }
       const storage = Storage()
+      if (logs) {
+        server.use(Logger())
+      }
       server.use(storage.routes())
       server.use(storage.allowedMethods())
       server.use(auth.routes())

@@ -1,5 +1,4 @@
 const Router = require('koa-router')
-import * as bodyParser from 'koa-bodyparser'
 import * as knex from 'knex'
 import * as uuidv1 from 'uuid/v1'
 
@@ -14,6 +13,7 @@ export default () => {
     connection: {
       filename
     },
+    useNullAsDefault: true,
     debug
   })
 
