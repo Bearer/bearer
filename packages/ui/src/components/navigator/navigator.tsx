@@ -17,6 +17,7 @@ export class BearerPopoverNavigator {
   @Prop() direction: string = 'right'
   @Prop() btnProps: JSXElements.BearerButtonAttributes = { content: 'Activate' }
   @Prop() display = 'popover'
+  @Prop() complete?: <T>({ data, complete }: { data: T; complete: () => void }) => void
 
   @Listen('scenarioCompleted')
   scenarioCompletedHandler() {
@@ -43,6 +44,8 @@ export class BearerPopoverNavigator {
     }
     if (this.hasNext()) {
       this.visibleScreen = Math.min(this._visibleScreenIndex + 1, this.screens.length - 1)
+    } else if (this.complete) {
+      this.complete({ complete: this.scenarioCompletedHandler.bind(this), data: this.screenData })
     }
   }
 

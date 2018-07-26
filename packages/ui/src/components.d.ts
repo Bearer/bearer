@@ -845,6 +845,7 @@ declare global {
   namespace StencilComponents {
     interface BearerNavigator {
       'btnProps': JSXElements.BearerButtonAttributes;
+      'complete': <T>({ data, complete }: { data: T; complete: () => void }) => void;
       'direction': string;
       'display': string;
     }
@@ -870,6 +871,7 @@ declare global {
   namespace JSXElements {
     export interface BearerNavigatorAttributes extends HTMLAttributes {
       'btnProps'?: JSXElements.BearerButtonAttributes;
+      'complete'?: <T>({ data, complete }: { data: T; complete: () => void }) => void;
       'direction'?: string;
       'display'?: string;
     }
