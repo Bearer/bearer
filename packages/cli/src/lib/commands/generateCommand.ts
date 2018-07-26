@@ -52,7 +52,7 @@ async function generateTemplates({
       throw new Error('Configuration file is incorrect or missing')
     }
   } catch (error) {
-    emitter.emit('generateTemplate:erro', error.toString())
+    emitter.emit('generateTemplate:error', error.toString())
   }
 }
 
