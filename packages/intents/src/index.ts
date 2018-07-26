@@ -48,15 +48,6 @@ export class Intent {
   }
 }
 
-export const STATE_CLIENT: AxiosInstance = axios.create({
-  baseURL: 'https://int.staging.bearer.sh',
-  timeout: 5000,
-  headers: {
-    Accept: 'application/json',
-    'User-Agent': 'Bearer'
-  }
-})
-
 class BaseIntent {
   static get display(): string {
     throw new Error('Extending class needs to implement `static intent(action)` method')
@@ -87,48 +78,57 @@ class StateIntentBase extends BaseIntent {
   }
 }
 
+const STATE_CLIENT: AxiosInstance = axios.create({
+  timeout: 3000,
+  headers: {
+    Accept: 'application/json',
+    'User-Agent': 'Bearer'
+  }
+})
+
 export class SaveState extends StateIntentBase {
   static get display() {
     return 'SaveState'
   }
 
   static intent(action) {
-    return async (event, context, callback) => {
+    return (event, _context, callback) => {
       const { referenceId } = event.queryStringParameters
-      const baseURL = event.context.bearerBaseURL || STATE_CLIENT.defaults.baseURL
+      console.log('EVENT CONTEXT', event.context)
+      STATE_CLIENT.defaults.baseURL = `https://${event.context.bearerBaseURL}`
       try {
-        const response = await STATE_CLIENT.request({
+        STATE_CLIENT.request({
           method: 'get',
-          url: `api/v1/items/${referenceId}`,
-          baseURL
-        })
-        console.log('[BEARER]', 'received', response.data)
-        const state = response.data.Item
-        action(event.context, event.queryStringParameters, event.body, state, result => {
-          STATE_CLIENT.request({
-            method: 'put',
-            url: `api/v1/items/${referenceId}`,
-            baseURL,
-            data: {
-              ...result,
-              ReadAllowed: true
-            }
-          })
-            .then(data => {
-              console.log('[BEARER]', 'success', data)
-              callback(null, {
-                meta: {
-                  referenceId: referenceId
-                },
-                data: {
-                  ...result
-                }
+          url: `api/v1/items/${referenceId}`
+        }).then(response => {
+          console.log('[BEARER]', 'received', response.data)
+          const state = response.data.Item
+          console.log('STATE', state)
+          action(event.context, event.queryStringParameters, event.body, state, result => {
+            STATE_CLIENT.request({
+              method: 'put',
+              url: `api/v1/items/${referenceId}`,
+              data: {
+                ...result,
+                ReadAllowed: true
+              }
+            })
+              .then(data => {
+                console.log('[BEARER]', 'success', data)
+                callback(null, {
+                  meta: {
+                    referenceId: referenceId
+                  },
+                  data: {
+                    ...result
+                  }
+                })
               })
-            })
-            .catch(e => {
-              console.error('[BEARER]', 'error', e)
-              callback(`Error : ${e}`)
-            })
+              .catch(e => {
+                console.error('[BEARER]', 'error', e)
+                callback(`Error : ${e}`)
+              })
+          })
         })
       } catch (e) {
         console.log(e)
@@ -136,7 +136,6 @@ export class SaveState extends StateIntentBase {
           STATE_CLIENT.request({
             method: 'post',
             url: `api/v1/items`,
-            baseURL,
             data: {
               ...result,
               ReadAllowed: true
