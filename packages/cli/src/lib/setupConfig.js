@@ -10,14 +10,12 @@ const scenarioConfig = rc('scenario')
 const bearerConfig = rc('bearer')
 const rootPathRc = findUp.sync('.scenariorc')
 
-const IntegrationServiceHost = 'https://int.staging.bearer.sh/'
-
 let setup = {
   DeploymentUrl: 'https://developer.staging.bearer.sh/v1/',
-  IntegrationServiceHost,
-  IntegrationServiceUrl: `${IntegrationServiceHost}api/v1/`,
-  BearerEnv: 'staging',
-  DeveloperPortalAPIUrl: 'https://app.bearer.sh/graphql'
+  IntegrationServiceHost: 'https://int.staging.bearer.sh/',
+  IntegrationServiceUrl: 'https://int.staging.bearer.sh/api/v1/',
+  DeveloperPortalAPIUrl: 'https://app.staging.bearer.sh/graphql',
+  BearerEnv: 'staging'
 }
 
 module.exports = () => {
@@ -26,10 +24,20 @@ module.exports = () => {
   if (BEARER_ENV === 'dev') {
     setup = {
       DeploymentUrl: 'https://developer.dev.bearer.sh/v1/',
-      IntegrationServiceUrl: 'https://int.dev.bearer.sh/api/v1/',
       IntegrationServiceHost: 'https://int.dev.bearer.sh/',
-      DeveloperPortalAPIUrl: 'https://app.bearer.sh/graphql',
+      IntegrationServiceUrl: 'https://int.dev.bearer.sh/api/v1/',
+      DeveloperPortalAPIUrl: 'https://app.staging.bearer.sh/graphql',
       BearerEnv: 'dev'
+    }
+  }
+
+  if (BEARER_ENV === 'production') {
+    setup = {
+      DeploymentUrl: 'https://developer.bearer.sh/v1/',
+      IntegrationServiceHost: 'https://int.bearer.sh/',
+      IntegrationServiceUrl: 'https://int.bearer.sh/api/v1/',
+      DeveloperPortalAPIUrl: 'https://app.bearer.sh/graphql',
+      BearerEnv: 'production'
     }
   }
 
