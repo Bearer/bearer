@@ -25,6 +25,12 @@ export class FullComponent {
         <bearer-navigator-screen navigationTitle="First Screen">
           <bearer-scrollable fetcher={this.fetcher} />
         </bearer-navigator-screen>
+        <bearer-navigator-screen navigationTitle="First Screen">
+          <h1>Complex one</h1>
+          <bearer-scrollable fetcher={this.fetcher} />
+          <span>this text is fine</span>
+          this text is not fine
+        </bearer-navigator-screen>
         <bearer-navigator-screen navigationTitle={({ data }) => data.name}>
           <bearer-scrollable fetcher={this.fetcher} />
         </bearer-navigator-screen>

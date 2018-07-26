@@ -19,18 +19,15 @@ export class FullComponent {
     ducks: Array<any>;
     private fetchResource: BearerFetch;
     screenRenderer = () => {
-        return (<bearer-navigator-screen navigationTitle=\\"Last Screen\\">
-        <h1>Hello Partick</h1>
-      </bearer-navigator-screen>);
+        return (<bearer-navigator-screen navigationTitle=\\"Last Screen\\" renderFunc={() => [<h1>Hello Partick</h1>]}/>);
     };
     render() {
         return (<bearer-navigator>
-        <bearer-navigator-screen navigationTitle=\\"First Screen\\">
-          <bearer-scrollable fetcher={this.fetcher}/>
-        </bearer-navigator-screen>
-        <bearer-navigator-screen navigationTitle={({ data }) => data.name}>
-          <bearer-scrollable fetcher={this.fetcher}/>
-        </bearer-navigator-screen>
+        <bearer-navigator-screen navigationTitle=\\"First Screen\\" renderFunc={() => [<bearer-scrollable fetcher={this.fetcher}/>]}/>
+        <bearer-navigator-screen navigationTitle=\\"First Screen\\" renderFunc={() => [<h1>Complex one</h1>,
+            <bearer-scrollable fetcher={this.fetcher}/>,
+            <span>this text is fine</span>]}/>
+        <bearer-navigator-screen navigationTitle={({ data }) => data.name} renderFunc={() => [<bearer-scrollable fetcher={this.fetcher}/>]}/>
 
         <bearer-navigator-screen renderFunc={({ data, next, prev }) => (<last-screen next={next} complete={({ complete }) => {
             console.log('complete');
