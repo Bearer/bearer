@@ -1,34 +1,9 @@
-import axios, { AxiosInstance, AxiosResponse } from 'axios'
+import axios, { AxiosInstance } from 'axios'
+import * as d from './declaration'
+export * from './declaration'
 
 import { sendSuccessMessage, sendErrorMessage } from './lambda'
-
-export type Toauth2Context = {
-  accessToken: string
-  bearerBaseURL: string
-  [key: string]: any
-}
-
-export type TnoAuthContext = {
-  bearerBaseURL: string
-  [key: string]: any
-}
-
-export type TbasicAuthContext = {
-  username: string
-  password: string
-  bearerBaseURL: string
-  [key: string]: any
-}
-
-export type TapiKeyContext = {
-  apiKey: string
-  bearerBaseURL: string
-  [key: string]: any
-}
-
-export type TStateData = AxiosResponse<{
-  Item: any
-}>
+import UserDataClient from './UserDataClient'
 
 export class Intent {
   static getCollection(callback, { collection, error }: { collection?: any; error?: any }) {
@@ -78,14 +53,6 @@ class StateIntentBase extends BaseIntent {
   }
 }
 
-const STATE_CLIENT: AxiosInstance = axios.create({
-  timeout: 3000,
-  headers: {
-    Accept: 'application/json',
-    'User-Agent': 'Bearer'
-  }
-})
-
 export class SaveState extends StateIntentBase {
   static get display() {
     return 'SaveState'
@@ -95,23 +62,17 @@ export class SaveState extends StateIntentBase {
     return (event, _context, callback) => {
       const { referenceId } = event.queryStringParameters
       console.log('EVENT CONTEXT', event.context)
-      STATE_CLIENT.defaults.baseURL = event.context.bearerBaseURL
+      const STATE_CLIENT = UserDataClient(event.context.bearerBaseURL)
+
       try {
-        STATE_CLIENT.request({
-          method: 'get',
-          url: `api/v1/items/${referenceId}`
-        }).then(response => {
+        STATE_CLIENT.get(`api/v1/items/${referenceId}`).then(response => {
           console.log('[BEARER]', 'received', response.data)
           const state = response.data.Item
           console.log('STATE', state)
           action(event.context, event.queryStringParameters, event.body, state, result => {
-            STATE_CLIENT.request({
-              method: 'put',
-              url: `api/v1/items/${referenceId}`,
-              data: {
-                ...result,
-                ReadAllowed: true
-              }
+            STATE_CLIENT.put(`api/v1/items/${referenceId}`, {
+              ...result,
+              ReadAllowed: true
             })
               .then(data => {
                 console.log('[BEARER]', 'success', data)
@@ -133,15 +94,11 @@ export class SaveState extends StateIntentBase {
       } catch (e) {
         console.log(e)
         action(event.context, event.queryStringParameters, event.body, {}, result => {
-          STATE_CLIENT.request({
-            method: 'post',
-            url: `api/v1/items`,
-            data: {
-              ...result,
-              ReadAllowed: true
-            }
+          STATE_CLIENT.post(`api/v1/items`, {
+            ...result,
+            ReadAllowed: true
           })
-            .then((response: TStateData) => {
+            .then((response: d.TStateData) => {
               console.log('[BEARER]', 'success', response.data)
               callback(null, {
                 meta: {
@@ -170,13 +127,9 @@ export class RetrieveState extends StateIntentBase {
   static intent(action) {
     return (event, context, callback) => {
       const { referenceId } = event.queryStringParameters
-      const baseURL = event.context.bearerBaseURL || STATE_CLIENT.defaults.baseURL
+      const STATE_CLIENT = UserDataClient(event.context.bearerBaseURL)
 
-      STATE_CLIENT.request({
-        method: 'get',
-        url: `/api/v1/items/${referenceId}`,
-        baseURL
-      })
+      STATE_CLIENT.get(`/api/v1/items/${referenceId}`)
         .then(response => {
           if (response.data.error) {
             callback('No data found')
