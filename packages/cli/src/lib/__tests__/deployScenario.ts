@@ -24,7 +24,6 @@ describe('deployViews', () => {
       const locator = {} as any
       await expect(
         deployScenario.deployViews(
-          { scenarioUuid: 'abc' },
           { emit },
           {
             scenarioConfig: { scenarioTitle: 'test' },

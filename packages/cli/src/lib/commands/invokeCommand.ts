@@ -21,7 +21,7 @@ type IConfig = {
 export const invoke = (_emitter, config, locator: Locator) => async (intent, cmd) => {
   const { file } = cmd
   const {
-    bearerConfig: { OrgId },
+    scenarioUuid,
     scenarioConfig: { scenarioTitle }
   } = config
 
@@ -35,7 +35,6 @@ export const invoke = (_emitter, config, locator: Locator) => async (intent, cmd
   }
   const { httpMethod = 'GET', params = {}, body = {} } = fileData
 
-  const scenarioUuid = `${OrgId}-${scenarioTitle}`
   const noEmitter = new NoEmitter()
   const integrationHostURL = await startLocalDevelopmentServer(scenarioUuid, noEmitter, config, locator, false)
 

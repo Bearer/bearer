@@ -154,9 +154,9 @@ module.exports = emitter => {
     term('\n')
   })
 
-  emitter.on('scenarioTitle:missing', devId => {
+  emitter.on('scenarioUuid:missing', devId => {
     term.white('Bearer: ')
-    term.red('Missing scenarioTitle')
+    term.red('Missing scenarioUuid. Please run `bearer link <org-id> <scenario-id>` first.')
     term('\n')
   })
 

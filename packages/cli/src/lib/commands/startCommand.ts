@@ -136,12 +136,7 @@ const ensureSetupComponents = rootLevel => {
 }
 
 export const start = (emitter, config, locator: Locator) => async ({ open, install, watcher }) => {
-  const {
-    bearerConfig: { OrgId },
-    scenarioConfig: { scenarioTitle }
-  } = config
-
-  const scenarioUuid = `${OrgId}-${scenarioTitle}`
+  const { scenarioUuid } = config
 
   try {
     await prepare(emitter, config, locator)({

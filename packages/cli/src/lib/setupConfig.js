@@ -40,8 +40,8 @@ module.exports = () => {
   return {
     ...setup,
     HandlerBase: 'index.js',
-    get OrgId() {
-      return this.bearerConfig.OrgId
+    get orgId() {
+      return this.scenarioConfig.orgId
     },
     get bearerConfig() {
       return rc('bearer')
@@ -52,6 +52,12 @@ module.exports = () => {
     get scenarioTitle() {
       return this.scenarioConfig.scenarioTitle
     },
+    get scenarioId() {
+      return this.scenarioConfig.scenarioId
+    },
+    get scenarioUuid() {
+      return `${this.orgId}-${this.scenarioId}`
+    },
     get rootPathRc() {
       return findUp.sync('.scenariorc')
     },
@@ -60,11 +66,10 @@ module.exports = () => {
       return { Username, infrastructurePassword }
     },
     storeBearerConfig(config) {
-      const { OrgId, Username, ExpiresAt, authorization, infrastructurePassword = '' } = config
+      const { Username, ExpiresAt, authorization, infrastructurePassword = '' } = config
       fs.writeFileSync(
         this.bearerConfig.config || path.join(os.homedir(), '.bearerrc'),
         ini.stringify({
-          OrgId,
           Username,
           ExpiresAt,
           authorization,
@@ -73,9 +78,8 @@ module.exports = () => {
       )
     },
     setScenarioConfig(config) {
-      const { scenarioTitle, scenarioId } = config
-      console.log(this.rootPathRc)
-      fs.writeFileSync(this.rootPathRc, ini.stringify({ scenarioTitle, scenarioId }))
+      const { scenarioTitle, orgId, scenarioId } = config
+      fs.writeFileSync(this.rootPathRc, ini.stringify({ scenarioTitle, orgId, scenarioId }))
     }
   }
 }

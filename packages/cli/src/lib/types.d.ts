@@ -17,7 +17,9 @@ export type ScenarioConfig = {
     config: string
   }
   scenarioConfig: {
-    OrgId: string
+    scenarioId: string
+    scenarioUuid: string
+    orgId: string
     scenarioTitle: string
     open: boolean
     configs: Array<string>

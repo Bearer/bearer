@@ -8,7 +8,7 @@ const DIST_DIRECTORY = 'dist'
 const WWW_DIRECTORY = 'www'
 
 async function asyncForEach(array, callback) {
-  for (let index = 0; index < array.length; index += 1) {
+  for (let index = 0; index < array.length; index++) {
     await callback(array[index], index, array)
   }
 }
@@ -18,8 +18,8 @@ const pushViews = async (
   emitter,
   {
     DeploymentUrl,
-    scenarioTitle,
-    OrgId,
+    scenarioId,
+    orgId,
     DeveloperPortalAPIUrl,
     bearerConfig: {
       authorization: {
@@ -43,7 +43,7 @@ const pushViews = async (
           findUser: { token: devPortalToken }
         }
       }
-    } = await devPortalClient.getDevPoratlToken(credentials)
+    } = await devPortalClient.getDevPortalToken(credentials)
     try {
       emitter.emit('view:upload:start')
 
@@ -51,7 +51,7 @@ const pushViews = async (
 
       const paths = files.reduce((acc, filePath) => {
         const relativePath = filePath.replace(viewsDirectory + path.sep, '')
-        acc[`${OrgId}/${scenarioTitle}/${relativePath}`] = filePath
+        acc[`${orgId}/${scenarioId}/${relativePath}`] = filePath
         return acc
       }, {})
 
@@ -65,6 +65,7 @@ const pushViews = async (
           await s3Client.upload(fileContent.toString(), {
             'Content-Type': mime.lookup(filePath)
           })
+          console.log('View', key)
         } catch (e) {
           emitter.emit('view:fileUpload:error', e)
           reject(e)

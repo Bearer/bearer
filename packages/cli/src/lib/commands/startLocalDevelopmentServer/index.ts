@@ -24,7 +24,7 @@ function startLocalDevelopmentServer(scenarioUuid, emitter, config, locator: Loc
   return new Promise(async (resolve, reject) => {
     try {
       const { config: devIntentsContext = {} } = (await explorer.search(rootLevel)) || {}
-      const intentsArtifact = await buildIntents(scenarioUuid, emitter, config, locator)
+      const intentsArtifact = await buildIntents(emitter, config, locator)
 
       fs.ensureDirSync(buildDir)
       await new Promise((resolve, reject) => {

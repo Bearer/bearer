@@ -31,7 +31,7 @@ module.exports = url => {
     signedUrls: (token, Keys, type) =>
       requestPromise(url, 'POST', 'signed-urls', { Keys, type }, { Authorization: token }),
     signedUrl: (token, Key, type) => requestPromise(url, 'POST', 'signed-url', { Key, type }, { Authorization: token }),
-    getDevPoratlToken: ({ Username, infrastructurePassword }) =>
+    getDevPortalToken: ({ Username, infrastructurePassword }) =>
       requestPromise(url, 'POST', '', {
         query: `query FindUser {
         findUser(email: "${Username}", infrastructurePassword: "${infrastructurePassword}") {

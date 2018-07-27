@@ -15,8 +15,9 @@ import LocationProvider from './locationProvider'
 
 const execPromise = promisify(exec)
 
-export function buildIntents(scenarioUuid: string, emitter, config, locator: LocationProvider) {
+export function buildIntents(emitter, config, locator: LocationProvider) {
   return new Promise(async (resolve, reject) => {
+    const { scenarioUuid } = config
     const artifactDirectory = locator.intentsArtifactDir
     const intentsDirectory = locator.srcIntentsDir
 
@@ -45,7 +46,7 @@ export function buildIntents(scenarioUuid: string, emitter, config, locator: Loc
   })
 }
 
-export function deployIntents({ scenarioUuid }, emitter, config, locator: LocationProvider) {
+export function deployIntents(emitter, config, locator: LocationProvider) {
   new Promise(async (resolve, reject) => {
     const { rootPathRc } = config
 
@@ -55,17 +56,10 @@ export function deployIntents({ scenarioUuid }, emitter, config, locator: Locati
     }
 
     try {
-      const scenarioArtifact = await buildIntents(scenarioUuid, emitter, config, locator)
-      await pushScenario(
-        scenarioArtifact,
-        {
-          Key: scenarioUuid
-        },
-        emitter,
-        config
-      )
+      const scenarioArtifact = await buildIntents(emitter, config, locator)
+      await pushScenario(scenarioArtifact, emitter, config)
 
-      await assembly(scenarioUuid, emitter, config)
+      await assembly(emitter, config)
       resolve()
     } catch (e) {
       emitter.emit('deployIntents:error', e)
@@ -74,13 +68,9 @@ export function deployIntents({ scenarioUuid }, emitter, config, locator: Locati
   })
 }
 
-export function deployViews({ scenarioUuid }, emitter, config, locator: LocationProvider) {
+export function deployViews(emitter, config, locator: LocationProvider) {
   return new Promise(async (resolve, reject) => {
-    const {
-      scenarioConfig: { scenarioTitle },
-      bearerConfig: { OrgId },
-      BearerEnv
-    } = config
+    const { orgId, scenarioUuid, scenarioId, BearerEnv } = config
 
     try {
       const { buildDirectory } = await prepare(emitter, config, locator)({
@@ -92,7 +82,7 @@ export function deployViews({ scenarioUuid }, emitter, config, locator: Location
         return false
       }
 
-      await transpileStep(emitter, locator, scenarioUuid, config.IntegrationServiceHost)
+      await transpileStep(emitter, locator, config)
 
       emitter.emit('views:generateSetupComponent')
       await execPromise('bearer generate --setup', { cwd: buildDirectory })
@@ -103,12 +93,12 @@ export function deployViews({ scenarioUuid }, emitter, config, locator: Location
         env: {
           BEARER_SCENARIO_ID: scenarioUuid,
           ...process.env,
-          CDN_HOST: `https://static.${BearerEnv}.bearer.sh/${OrgId}/${scenarioTitle}/dist/${scenarioTitle}/`
+          CDN_HOST: `https://static.${BearerEnv}.bearer.sh/${orgId}/${scenarioId}/dist/${scenarioId}/`
         }
       })
 
       emitter.emit('views:pushingDist')
-      await pushViews(buildDirectory, scenarioTitle, OrgId, emitter, config)
+      await pushViews(buildDirectory, emitter, config)
 
       emitter.emit('view:upload:success')
       await invalidateCloudFront(emitter, config)
@@ -121,15 +111,16 @@ export function deployViews({ scenarioUuid }, emitter, config, locator: Location
   })
 }
 
-function transpileStep(emitter, locator: LocationProvider, scenarioUuid, integrationHost) {
+function transpileStep(emitter, locator: LocationProvider, config) {
   return new Promise(async (resolve, reject) => {
+    const { scenarioUuid, integrationServiceHost } = config
     emitter.emit('start:prepare:transpileStep')
     const bearerTranspiler = spawn('node', [pathJs.join(__dirname, 'startTranspiler.js'), '--no-watcher'], {
       cwd: locator.scenarioRoot,
       env: {
         ...process.env,
         BEARER_SCENARIO_ID: scenarioUuid,
-        BEARER_INTEGRATION_HOST: integrationHost
+        BEARER_INTEGRATION_HOST: integrationServiceHost
       },
       stdio: ['pipe', 'pipe', 'pipe', 'ipc']
     })
@@ -155,17 +146,11 @@ function transpileStep(emitter, locator: LocationProvider, scenarioUuid, integra
 }
 
 export interface IDeployOptions {
-  scenarioUuid: string
   noViews?: boolean
   noIntents?: boolean
 }
 
-export function deployScenario(
-  { scenarioUuid, noViews = false, noIntents = false }: IDeployOptions,
-  emitter,
-  config,
-  locator
-) {
+export function deployScenario({ noViews = false, noIntents = false }: IDeployOptions, emitter, config, locator) {
   return new Promise(async (resolve, reject) => {
     let calculatedConfig = config
 
@@ -177,10 +162,10 @@ export function deployScenario(
       }
       await developerPortal(emitter, 'predeploy', calculatedConfig)
       if (!noIntents) {
-        await deployIntents({ scenarioUuid }, emitter, calculatedConfig, locator)
+        await deployIntents(emitter, calculatedConfig, locator)
       }
       if (!noViews) {
-        await deployViews({ scenarioUuid }, emitter, calculatedConfig, locator)
+        await deployViews(emitter, calculatedConfig, locator)
       }
       await developerPortal(emitter, 'deployed', calculatedConfig)
       resolve()
