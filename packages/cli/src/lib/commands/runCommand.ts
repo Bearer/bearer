@@ -12,17 +12,27 @@ class NoEmitter {
   on(_args) {}
 }
 
+type IConfig = {
+  httpMethod?: string
+  params?: {}
+  body?: {}
+}
+
 export const invoke = (_emitter, config, locator: Locator) => async (intent, cmd) => {
   const { file } = cmd
-  const explorer = cosmiconfig(file, {
-    searchPlaces: [file]
-  })
   const {
     bearerConfig: { OrgId },
     scenarioConfig: { scenarioTitle }
   } = config
 
-  const { config: fileData = {} } = (await explorer.search(locator.scenarioRootResourcePath.toString())) || {}
+  let fileData: IConfig = {}
+  if (file) {
+    const explorer = cosmiconfig(file, {
+      searchPlaces: [file]
+    })
+    const { config = {} } = (await explorer.search(locator.scenarioRootResourcePath.toString())) || {}
+    fileData = config
+  }
   const { httpMethod = 'GET', params = {}, body = {} } = fileData
 
   const scenarioUuid = `${OrgId}-${scenarioTitle}`
@@ -54,11 +64,12 @@ export const invoke = (_emitter, config, locator: Locator) => async (intent, cmd
 
 export function useWith(program, emitter, config, locator: Locator) {
   program
-    .command('invoke <intent>')
+    .command('run <intent>')
     .option('-f, --file <path>')
     .description(
-      `invoke Intent locally.
-  $ bearer invoke <IntentName>
+      `run Intent locally.
+  $ bearer run <IntentName>
+  $ bearer run <IntentName> -f tests/intent.json
 `
     )
     .action(invoke(emitter, config, locator))
