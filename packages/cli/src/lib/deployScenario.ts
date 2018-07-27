@@ -4,50 +4,49 @@ import * as fs from 'fs'
 import { promisify } from 'util'
 
 import { prepare } from './commands/startCommand'
-import * as buildArtifact from './buildArtifact'
+import buildArtifact from './buildArtifact'
 import * as pushScenario from './pushScenario'
-import * as pushScreens from './pushScreens'
+import * as pushViews from './pushViews'
 import * as assembly from './assemblyScenario'
 import * as refreshToken from './refreshToken'
 import * as invalidateCloudFront from './invalidateCloudFront'
 import * as developerPortal from './developerPortal'
+import LocationProvider from './locationProvider'
 
 const execPromise = promisify(exec)
 
-export function buildIntents(rootLevel, scenarioUuid, emitter, config) {
+export function buildIntents(scenarioUuid: string, emitter, config, locator: LocationProvider) {
   return new Promise(async (resolve, reject) => {
-    const artifactDirectory = pathJs.join(rootLevel, '.bearer')
-    const intentsDirectory = pathJs.join(rootLevel, 'intents')
+    const artifactDirectory = locator.intentsArtifactDir
+    const intentsDirectory = locator.srcIntentsDir
 
     if (!fs.existsSync(artifactDirectory)) {
       fs.mkdirSync(artifactDirectory)
     }
     try {
-      const scenarioArtifact = pathJs.join(
-        artifactDirectory,
-        `${scenarioUuid}.zip`
-      )
-      const handler = pathJs.join(artifactDirectory, config.HandlerBase)
-      const output = fs.createWriteStream(scenarioArtifact)
-
       emitter.emit('intents:installingDependencies')
+      // TODOs: use root node modules
       await execPromise('yarn install', { cwd: intentsDirectory })
 
-      await buildArtifact(
-        output,
-        handler,
-        { path: intentsDirectory, scenarioUuid },
-        emitter
-      )
-      return resolve(scenarioArtifact)
+      const scenarioArtifact = locator.intentsArtifactResourcePath(`${scenarioUuid}.zip`)
+      const output = fs.createWriteStream(scenarioArtifact)
+      buildArtifact(output, { scenarioUuid }, emitter, locator)
+        .then(() => {
+          emitter.emit('intents:buildIntents:succeeded')
+          resolve(scenarioArtifact)
+        })
+        .catch(error => {
+          emitter.emit('intents:buildIntents:failed', { error })
+          reject(error)
+        })
     } catch (e) {
-      return reject(e)
+      reject(e)
     }
   })
 }
 
-export function deployIntents({ scenarioUuid }, emitter, config) {
-  return new Promise(async (resolve, reject) => {
+export function deployIntents({ scenarioUuid }, emitter, config, locator: LocationProvider) {
+  new Promise(async (resolve, reject) => {
     const { rootPathRc } = config
 
     if (!rootPathRc) {
@@ -55,15 +54,8 @@ export function deployIntents({ scenarioUuid }, emitter, config) {
       process.exit(1)
     }
 
-    const rootLevel = pathJs.dirname(rootPathRc)
-
     try {
-      const scenarioArtifact = await buildIntents(
-        rootLevel,
-        scenarioUuid,
-        emitter,
-        config
-      )
+      const scenarioArtifact = await buildIntents(scenarioUuid, emitter, config, locator)
       await pushScenario(
         scenarioArtifact,
         {
@@ -82,7 +74,7 @@ export function deployIntents({ scenarioUuid }, emitter, config) {
   })
 }
 
-export function deployScreens({ scenarioUuid }, emitter, config, locator) {
+export function deployViews({ scenarioUuid }, emitter, config, locator: LocationProvider) {
   return new Promise(async (resolve, reject) => {
     const {
       scenarioConfig: { scenarioTitle },
@@ -100,21 +92,12 @@ export function deployScreens({ scenarioUuid }, emitter, config, locator) {
         return false
       }
 
-      await transpileStep(
-        emitter,
-        pathJs.join(buildDirectory, '..'),
-        scenarioUuid,
-        config.IntegrationServiceHost
-      )
+      await transpileStep(emitter, locator, scenarioUuid, config.IntegrationServiceHost)
 
-      emitter.emit('screens:generateSetupComponent')
+      emitter.emit('views:generateSetupComponent')
+      await execPromise('bearer generate --setup', { cwd: buildDirectory })
 
-      //await execPromise('bearer generate --setup', { cwd: buildDirectory })
-
-      emitter.emit('screens:generateConfigComponent')
-      //await execPromise('bearer generate --config', { cwd: buildDirectory })
-
-      emitter.emit('screens:buildingDist')
+      emitter.emit('views:buildingDist')
       await execPromise('yarn build', {
         cwd: buildDirectory,
         env: {
@@ -124,41 +107,32 @@ export function deployScreens({ scenarioUuid }, emitter, config, locator) {
         }
       })
 
-      emitter.emit('screens:pushingDist')
-      await pushScreens(buildDirectory, emitter, config)
+      emitter.emit('views:pushingDist')
+      await pushViews(buildDirectory, scenarioTitle, OrgId, emitter, config)
 
-      emitter.emit('screen:upload:success')
+      emitter.emit('view:upload:success')
       await invalidateCloudFront(emitter, config)
       resolve()
     } catch (e) {
-      emitter.emit('deployScenario:deployScreens:error', e)
+      emitter.emit('deployScenario:deployViews:error', e)
       console.error(e)
       reject(e)
     }
   })
 }
 
-function transpileStep(
-  emitter,
-  screensDirectory,
-  scenarioUuid,
-  integrationHost
-) {
+function transpileStep(emitter, locator: LocationProvider, scenarioUuid, integrationHost) {
   return new Promise(async (resolve, reject) => {
     emitter.emit('start:prepare:transpileStep')
-    const bearerTranspiler = spawn(
-      'node',
-      [pathJs.join(__dirname, 'startTranspiler.js'), '--no-watcher'],
-      {
-        cwd: screensDirectory,
-        env: {
-          ...process.env,
-          BEARER_SCENARIO_ID: scenarioUuid,
-          BEARER_INTEGRATION_HOST: integrationHost
-        },
-        stdio: ['pipe', 'pipe', 'pipe', 'ipc']
-      }
-    )
+    const bearerTranspiler = spawn('node', [pathJs.join(__dirname, 'startTranspiler.js'), '--no-watcher'], {
+      cwd: locator.scenarioRoot,
+      env: {
+        ...process.env,
+        BEARER_SCENARIO_ID: scenarioUuid,
+        BEARER_INTEGRATION_HOST: integrationHost
+      },
+      stdio: ['pipe', 'pipe', 'pipe', 'ipc']
+    })
 
     bearerTranspiler.on('close', (...args) => {
       emitter.emit('start:prepare:transpileStep:close', args)
@@ -180,7 +154,18 @@ function transpileStep(
   })
 }
 
-export function deployScenario({ scenarioUuid }, emitter, config, locator) {
+export interface IDeployOptions {
+  scenarioUuid: string
+  noViews?: boolean
+  noIntents?: boolean
+}
+
+export function deployScenario(
+  { scenarioUuid, noViews = false, noIntents = false }: IDeployOptions,
+  emitter,
+  config,
+  locator
+) {
   return new Promise(async (resolve, reject) => {
     let calculatedConfig = config
 
@@ -191,8 +176,12 @@ export function deployScenario({ scenarioUuid }, emitter, config, locator) {
         calculatedConfig = await refreshToken(config, emitter)
       }
       await developerPortal(emitter, 'predeploy', calculatedConfig)
-      await deployIntents({ scenarioUuid }, emitter, calculatedConfig)
-      await deployScreens({ scenarioUuid }, emitter, calculatedConfig, locator)
+      if (!noIntents) {
+        await deployIntents({ scenarioUuid }, emitter, calculatedConfig, locator)
+      }
+      if (!noViews) {
+        await deployViews({ scenarioUuid }, emitter, calculatedConfig, locator)
+      }
       await developerPortal(emitter, 'deployed', calculatedConfig)
       resolve()
     } catch (e) {

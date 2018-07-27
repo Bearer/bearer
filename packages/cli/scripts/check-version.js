@@ -14,11 +14,7 @@ notifier.notify()
 
 if (!semver.satisfies(process.version, version)) {
   term.white('Bearer: ')
-  term.red(
-    `Required node version ${version} not satisfied with current version ${
-      process.version
-    }.`
-  )
+  term.red(`Required node version ${version} not satisfied with current version ${process.version}.`)
   term('\n')
   process.exit(1)
 }

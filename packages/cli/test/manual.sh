@@ -40,7 +40,7 @@ rm -rf TestingGoats
 # bearer g #
 ############
 echo
-echo -e "${BLUE}${BOLD}TESTING:${NC} \`bearer g\` Screens"
+echo -e "${BLUE}${BOLD}TESTING:${NC} \`bearer g\` Views"
 echo -ne '\n' | bearer new TestingGoats
 cd TestingGoats
 echo -ne "${DOWN}\rTest" | bearer g

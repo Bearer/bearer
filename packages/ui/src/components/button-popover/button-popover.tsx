@@ -1,4 +1,4 @@
-import { Component, State, Prop, Listen, Method } from '@bearer/core'
+import { Component, State, Prop, Listen, Method, Event, EventEmitter, Watch } from '@bearer/core'
 
 @Component({
   tag: 'bearer-button-popover',
@@ -8,6 +8,7 @@ import { Component, State, Prop, Listen, Method } from '@bearer/core'
 export class BearerButtonPopover {
   @State() visible: boolean = false
 
+  @Event() visibilityChange: EventEmitter
   @Prop() opened: boolean
   @Prop() direction: string = 'top'
   @Prop() arrow: boolean = true
@@ -30,15 +31,20 @@ export class BearerButtonPopover {
     ev.stopImmediatePropagation()
   }
 
+  @Watch('visible')
+  visibilityChangeHandler(newValue: boolean, oldValue: boolean) {
+    if (oldValue !== newValue) {
+      this.visibilityChange.emit({ visible: newValue })
+    }
+  }
+
   @Method()
   toggle(opened: boolean) {
     this.visible = opened
   }
 
   componentDidLoad() {
-    if (this.opened === false) {
-      this.visible = false
-    }
+    this.visible = this.opened
   }
 
   render() {
@@ -46,22 +52,19 @@ export class BearerButtonPopover {
       <div class="root">
         <bearer-button {...this.btnProps} onClick={this.toggleDisplay} />
 
-        {this.visible && (
-          <div
-            class={`popover fade show bs-popover-${this.direction} direction-${
-              this.direction
-            }`}
-          >
-            <h3 class="popover-header">
-              {this.backNav && <bearer-navigator-back class="header-arrow" />}
-              <span class="header">{this.header}</span>
-            </h3>
-            <div class="popover-body">
-              <slot />
-            </div>
-            {this.arrow && <div class="arrow" />}
+        <div
+          class={`popover fade show bs-popover-${this.direction} direction-${this.direction} ${!this.visible &&
+            'hidden'}`}
+        >
+          <h3 class="popover-header">
+            {this.backNav && <bearer-navigator-back class="header-arrow" />}
+            <span class="header">{this.header}</span>
+          </h3>
+          <div class="popover-body">
+            <slot />
           </div>
-        )}
+          {this.arrow && <div class="arrow" />}
+        </div>
       </div>
     )
   }

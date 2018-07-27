@@ -8,7 +8,7 @@ test('deployIntents is defined', () => {
 let emit = jest.fn((...args) => console.log(...args))
 
 beforeEach(() => {
-  fs.ensureDirSync('./tmp/screens')
+  fs.ensureDirSync('./tmp/views')
   fs.ensureDirSync('./tmp/intents')
 })
 
@@ -16,14 +16,14 @@ afterEach(() => {
   fs.removeSync('./tmp')
 })
 
-describe('deployScreens', () => {
+describe('deployViews', () => {
   test.skip(
     'Is not hanging in the end',
     async () => {
       expect.assertions(1)
       const locator = {} as any
       await expect(
-        deployScenario.deployScreens(
+        deployScenario.deployViews(
           { scenarioUuid: 'abc' },
           { emit },
           {

@@ -1,7 +1,7 @@
 {
   "name": "{{componentTagName}}",
   "version": "0.0.1",
-  "description": "{{scenarioTitle}} scenario",
+  "description": "{{componentName}}",
   "main": "dist/index.js",
   "types": "dist/types/components.d.ts",
   "module": "dist/esm/index.js",

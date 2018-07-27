@@ -9,6 +9,8 @@ import PropInjector from './transformers/prop-injector'
 import PropBearerContextInjector from './transformers/prop-bearer-context-injector'
 import PropImporter from './transformers/prop-importer'
 import BearerStateInjector from './transformers/bearer-state-injector'
+import BearerReferenceIdInjector from './transformers/reference-id-injector'
+import NavigatorScreenTransformer from './transformers/navigator-screen-transformer'
 
 export type TranpilerOptions = {
   ROOT_DIRECTORY?: string
@@ -25,26 +27,19 @@ export default class Transpiler {
 
   private readonly ROOT_DIRECTORY
   private watchFiles = true
-  private buildFolder = '.build'
-  private srcFolder = 'screens'
+  private buildFolder = '.bearer/views'
+  private srcFolder = 'views'
 
   constructor(options?: Partial<TranpilerOptions>) {
     Object.assign(this, options)
     this.ROOT_DIRECTORY = this.ROOT_DIRECTORY || process.cwd()
-    const config = ts.readConfigFile(
-      path.join(this.BUILD_DIRECTORY, 'tsconfig.json'),
-      ts.sys.readFile
-    )
+    const config = ts.readConfigFile(path.join(this.BUILD_DIRECTORY, 'tsconfig.json'), ts.sys.readFile)
 
     if (config.error) {
       throw new Error(config.error.messageText as string)
     }
 
-    const parsed = ts.parseJsonConfigFileContent(
-      config,
-      ts.sys,
-      this.SCREENS_DIRECTORY
-    )
+    const parsed = ts.parseJsonConfigFileContent(config, ts.sys, this.VIEWS_DIRECTORY)
     this.rootFileNames = parsed.fileNames
     if (!this.rootFileNames.length) {
       console.warn('[BEARER]', 'No file to transpile')
@@ -59,16 +54,13 @@ export default class Transpiler {
     const files: ts.MapLike<{ version: number }> = {}
     const servicesHost: ts.LanguageServiceHost = {
       getScriptFileNames: () => this.rootFileNames,
-      getScriptVersion: fileName =>
-        files[fileName] && files[fileName].version.toString(),
+      getScriptVersion: fileName => files[fileName] && files[fileName].version.toString(),
       getScriptSnapshot: fileName => {
         if (!fs.existsSync(fileName)) {
           return undefined
         }
 
-        return ts.ScriptSnapshot.fromString(
-          fs.readFileSync(fileName).toString()
-        )
+        return ts.ScriptSnapshot.fromString(fs.readFileSync(fileName).toString())
       },
       getCurrentDirectory: () => process.cwd(),
       getCompilationSettings: () => options,
@@ -79,10 +71,7 @@ export default class Transpiler {
       readDirectory: ts.sys.readDirectory
     }
     // Create the language service files
-    this.service = ts.createLanguageService(
-      servicesHost,
-      ts.createDocumentRegistry()
-    )
+    this.service = ts.createLanguageService(servicesHost, ts.createDocumentRegistry())
 
     // Now let's watch the files
     this.rootFileNames.forEach(fileName => {
@@ -92,20 +81,16 @@ export default class Transpiler {
       this.emitFile(fileName)
       if (this.watchFiles) {
         // Add a watch on the file to handle next change
-        fs.watchFile(
-          fileName,
-          { persistent: true, interval: 250 },
-          (curr, prev) => {
-            // Check timestamp
-            if (+curr.mtime <= +prev.mtime) {
-              return
-            }
-            // Update the version to signal a change in the file
-            files[fileName].version++
-            // write the changes to disk
-            this.emitFile(fileName)
+        fs.watchFile(fileName, { persistent: true, interval: 250 }, (curr, prev) => {
+          // Check timestamp
+          if (+curr.mtime <= +prev.mtime) {
+            return
           }
-        )
+          // Update the version to signal a change in the file
+          files[fileName].version++
+          // write the changes to disk
+          this.emitFile(fileName)
+        })
       }
     })
 
@@ -145,7 +130,9 @@ export default class Transpiler {
         PropInjector({ verbose }),
         PropBearerContextInjector({ verbose }),
         BearerStateInjector({ verbose }),
-        dumpSourceCode(this.SCREENS_DIRECTORY, this.BUILD_SCR_DIRECTORY)({
+        BearerReferenceIdInjector({ verbose }),
+        NavigatorScreenTransformer({ verbose }),
+        dumpSourceCode(this.VIEWS_DIRECTORY, this.BUILD_SCR_DIRECTORY)({
           verbose: true
         })
       ],
@@ -171,18 +158,10 @@ export default class Transpiler {
       .concat(this.service.getSemanticDiagnostics(fileName))
 
     allDiagnostics.forEach(diagnostic => {
-      let message = ts.flattenDiagnosticMessageText(
-        diagnostic.messageText,
-        '\n'
-      )
+      let message = ts.flattenDiagnosticMessageText(diagnostic.messageText, '\n')
       if (diagnostic.file) {
-        let { line, character } = diagnostic.file.getLineAndCharacterOfPosition(
-          diagnostic.start!
-        )
-        console.log(
-          `  Error ${diagnostic.file.fileName} (${line + 1},${character +
-            1}): ${message}`
-        )
+        let { line, character } = diagnostic.file.getLineAndCharacterOfPosition(diagnostic.start!)
+        console.log(`  Error ${diagnostic.file.fileName} (${line + 1},${character + 1}): ${message}`)
       } else {
         console.log(`  Error: ${message}`)
       }
@@ -197,7 +176,7 @@ export default class Transpiler {
     return path.join(this.BUILD_DIRECTORY, 'src')
   }
 
-  private get SCREENS_DIRECTORY(): string {
+  private get VIEWS_DIRECTORY(): string {
     return path.join(this.ROOT_DIRECTORY, this.srcFolder)
   }
 }
@@ -207,9 +186,7 @@ type TransformerOptions = {
 }
 
 function dumpSourceCode(srcDirectory, buildDirectory) {
-  return function storeOutput({
-    verbose
-  }: TransformerOptions = {}): ts.TransformerFactory<ts.SourceFile> {
+  return function storeOutput({ verbose }: TransformerOptions = {}): ts.TransformerFactory<ts.SourceFile> {
     return transformContext => {
       return tsSourceFile => {
         let outPath = tsSourceFile.fileName

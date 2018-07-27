@@ -18,12 +18,9 @@ if (isProduction) {
 
   const requiredKeys = new Set(Object.keys(parsedSample || {}))
 
-  const setEquality = (set1, set2) =>
-    set1.size === set2.size && Array.from(set1).every(item => set2.has(item))
+  const setEquality = (set1, set2) => set1.size === set2.size && Array.from(set1).every(item => set2.has(item))
 
-  const configuredKeys = new Set(
-    Object.keys(parsedConfig || {}).filter(key => parsedConfig[key])
-  )
+  const configuredKeys = new Set(Object.keys(parsedConfig || {}).filter(key => parsedConfig[key]))
   if (!setEquality(requiredKeys, configuredKeys)) {
     console.warn('Missing configuration, please check .env.* files')
   }

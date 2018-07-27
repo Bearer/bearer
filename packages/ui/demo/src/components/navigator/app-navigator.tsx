@@ -15,14 +15,7 @@ const singers = dataSingers.map(
   tag: 'app-navigator'
 })
 export class AppNavigator {
-  renderFunc = ({
-    prev,
-    data
-  }: {
-    data: any
-    next: () => void
-    prev: () => void
-  }) => (
+  renderFunc = ({ prev, data }: { data: any; next: () => void; prev: () => void }) => (
     <div>
       Rendered through a render prop
       <div>
@@ -44,10 +37,7 @@ export class AppNavigator {
         </bearer-navigator>
         <hr />
         <bearer-navigator>
-          <bearer-navigator-screen
-            navigationTitle="Collection Screen"
-            name="singer"
-          >
+          <bearer-navigator-screen navigationTitle="Collection Screen" name="singer">
             Click an item to go next screen
             <bearer-navigator-collection
               data={singers}
@@ -55,21 +45,11 @@ export class AppNavigator {
             />
           </bearer-navigator-screen>
 
-          <bearer-navigator-screen
-            navigationTitle="Render Prop"
-            renderFunc={this.renderFunc}
-          />
+          <bearer-navigator-screen navigationTitle="Render Prop" renderFunc={this.renderFunc} />
 
           <bearer-navigator-screen
             navigationTitle="Render Prop 2"
-            renderFunc={({
-              prev,
-              data
-            }: {
-              data: any
-              next: () => void
-              prev: () => void
-            }) => (
+            renderFunc={({ prev, data }: { data: any; next: () => void; prev: () => void }) => (
               <div>
                 Rendered through a render prop
                 <pre>{JSON.stringify(data)}</pre>

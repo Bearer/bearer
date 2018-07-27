@@ -1,6 +1,6 @@
 {
   "authType": "basicAuth",
-  "setupScreens": [
+  "setupViews": [
     {
       "type": "text",
       "label": "Username",

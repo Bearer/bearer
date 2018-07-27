@@ -1,12 +1,4 @@
-import {
-  Component,
-  Prop,
-  State,
-  Event,
-  Listen,
-  Method,
-  EventEmitter
-} from '@bearer/core'
+import { Component, Prop, State, Event, Listen, Method, EventEmitter } from '@bearer/core'
 import { FieldSet } from './Fieldset'
 
 @Component({
@@ -92,9 +84,7 @@ export class BearerForm {
               value={this.values[index]}
               hint={input.hint}
               placeholder={input.placeholder}
-              onValueChange={value =>
-                this.handleValue(input.controlName, value)
-              }
+              onValueChange={value => this.handleValue(input.controlName, value)}
               onInputClick={_ => this.handleInputClicked()}
             />
           )
@@ -106,9 +96,7 @@ export class BearerForm {
               value={this.values[index]}
               hint={input.hint}
               placeholder={input.placeholder}
-              onValueChange={value =>
-                this.handleValue(input.controlName, value)
-              }
+              onValueChange={value => this.handleValue(input.controlName, value)}
             />
           )
         case 'radio':
@@ -119,9 +107,7 @@ export class BearerForm {
               value={this.values[index]}
               buttons={input.buttons}
               inline={input.inline}
-              onValueChange={value =>
-                this.handleValue(input.controlName, value)
-              }
+              onValueChange={value => this.handleValue(input.controlName, value)}
             />
           )
         case 'checkbox':
@@ -132,9 +118,7 @@ export class BearerForm {
               value={input.valueList}
               buttons={input.buttons}
               inline={input.inline}
-              onValueChange={value =>
-                this.handleValue(input.controlName, value)
-              }
+              onValueChange={value => this.handleValue(input.controlName, value)}
             />
           )
         case 'select':
@@ -144,9 +128,7 @@ export class BearerForm {
               controlName={input.controlName}
               value={this.values[index]}
               options={input.options}
-              onValueChange={value =>
-                this.handleValue(input.controlName, value)
-              }
+              onValueChange={value => this.handleValue(input.controlName, value)}
             />
           )
       }
@@ -157,11 +139,7 @@ export class BearerForm {
     return (
       <form onSubmit={() => this.handleSubmit()}>
         {this.renderInputs()}
-        <bearer-input
-          type="submit"
-          disabled={!this.isValid()}
-          onSubmit={() => this.handleSubmit()}
-        />
+        <bearer-input type="submit" disabled={!this.isValid()} onSubmit={() => this.handleSubmit()} />
       </form>
     )
   }

@@ -10,8 +10,7 @@ export class BearerPaginator {
   @Prop() renderFetching: () => any
   @Prop() perPage: number = 5
   @Prop() pageCount: number
-  @Prop()
-  fetcher: (refineParams: { page: number }) => Promise<{ items: Array<any> }>
+  @Prop() fetcher: (refineParams: { page: number }) => Promise<{ items: Array<any> }>
 
   @State() fetching: boolean = false
   @State() currentPage: number = 0
@@ -48,13 +47,10 @@ export class BearerPaginator {
 
   _renderCollection = () => {
     const start = (this.currentPage - 1) * this.perPage
-    return this.renderCollection(
-      this.collection.slice(start, start + this.perPage)
-    )
+    return this.renderCollection(this.collection.slice(start, start + this.perPage))
   }
 
-  _renderFetching = () =>
-    this.renderFetching ? this.renderFetching() : <bearer-loading />
+  _renderFetching = () => (this.renderFetching ? this.renderFetching() : <bearer-loading />)
 
   componentDidLoad() {
     this.nextHandler()
@@ -73,11 +69,7 @@ export class BearerPaginator {
         {this.fetching ? this._renderFetching() : this._renderCollection()}
         {!!this.collection.length && [
           <br />,
-          <bearer-pagination
-            currentPage={this.currentPage}
-            hasNext={true}
-            displayPages={false}
-          />
+          <bearer-pagination currentPage={this.currentPage} hasNext={true} displayPages={false} />
         ]}
       </div>
     )

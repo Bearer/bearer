@@ -29,9 +29,7 @@ describe('new command', () => {
 
 describe('generate command', () => {
   test('program have `generate` command regirstered', () => {
-    const command = program.commands.find(
-      command => command._name === 'generate'
-    )
+    const command = program.commands.find(command => command._name === 'generate')
 
     expect(command.options).toEqual(expect.arrayContaining([]))
     expect(program.commands.map(cmd => cmd._name)).toContain('generate')

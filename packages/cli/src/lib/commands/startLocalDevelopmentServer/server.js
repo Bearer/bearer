@@ -1,12 +1,10 @@
 const Koa = require('koa')
-const Logger = require('koa-logger')
 const cors = require('@koa/cors')
 const BodyParser = require('koa-bodyparser')
 const respond = require('koa-respond')
 
 const app = new Koa()
 app.use(respond())
-app.use(Logger())
 app.use(
   cors({
     credentials: true
@@ -22,4 +20,5 @@ app.use(
     }
   })
 )
+
 module.exports = app

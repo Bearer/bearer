@@ -2,9 +2,7 @@ const serviceClient = require('./serviceClient')
 
 module.exports = async (config, emitter) => {
   const client = serviceClient(config.IntegrationServiceUrl)
-  const {
-    RefreshToken
-  } = config.bearerConfig.authorization.AuthenticationResult
+  const { RefreshToken } = config.bearerConfig.authorization.AuthenticationResult
   let { bearerConfig } = config
   try {
     const res = await client.refresh({ RefreshToken })
@@ -16,8 +14,7 @@ module.exports = async (config, emitter) => {
 
     switch (res.statusCode) {
       case 200:
-        ExpiresAt =
-          res.body.authorization.AuthenticationResult.ExpiresIn + Date.now()
+        ExpiresAt = res.body.authorization.AuthenticationResult.ExpiresIn + Date.now()
 
         AccessToken = res.body.authorization.AuthenticationResult.AccessToken
         IdToken = res.body.authorization.AuthenticationResult.IdToken

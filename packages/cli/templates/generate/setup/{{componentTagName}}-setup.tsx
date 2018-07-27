@@ -10,7 +10,7 @@ import '@bearer/ui'
   tag: '{{componentTagName}}-setup',
   shadow: true
 })
-export class {{scenarioTitle}}Setup {
+export class {{componentName}}Setup {
   @Prop() onSetupSuccess: (detail: any) => void = (_any: any) => {}
   @State() fields = {{fields}}
   @State() innerListener = `setup_success:BEARER_SCENARIO_ID`

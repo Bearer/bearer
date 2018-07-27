@@ -39,11 +39,7 @@ export class BearerCheckbox {
                 type="checkbox"
                 name={this.controlName}
                 value={value.value}
-                checked={
-                  this.value && this.value.indexOf(value.value) >= 0
-                    ? true
-                    : false
-                }
+                checked={this.value && this.value.indexOf(value.value) >= 0 ? true : false}
                 onClick={this.inputClicked.bind(this)}
               />
               <label class="form-check-label">{value.label}</label>

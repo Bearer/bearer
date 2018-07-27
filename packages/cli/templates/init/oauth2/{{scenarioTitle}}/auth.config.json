@@ -7,7 +7,7 @@
   "config": {
     "scope": []
   },
-  "setupScreens": [
+  "setupViews": [
     {
       "type": "text",
       "label": "Client ID",
@@ -19,6 +19,6 @@
       "controlName": "clientSecret"
     }
   ],
-  "configScreens": [
+  "configViews": [
   ]
 }

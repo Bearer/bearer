@@ -9,7 +9,7 @@ import "@bearer/ui";
   tag: "{{componentTagName}}-setup-display",
   shadow: true
 })
-export class {{scenarioTitle}}SetupDisplay {
+export class {{componentName}}SetupDisplay {
   render() {
     return (
       <bearer-setup-display scenarioId="BEARER_SCENARIO_ID" />

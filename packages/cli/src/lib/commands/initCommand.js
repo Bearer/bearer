@@ -32,16 +32,15 @@ const init = emitter => async scenarioTitle => {
 
   const vars = {
     scenarioTitle,
-    componentTagName: Case.kebab(Case.camel(scenarioTitle))
+    componentName: Case.pascal(scenarioTitle),
+    componentTagName: Case.kebab(scenarioTitle)
   }
   const inDir = path.join(__dirname, 'templates', 'init', authenticationType)
   const outDir = process.cwd()
 
   copy(inDir, outDir, vars, (err, createdFiles) => {
     if (err) throw err
-    createdFiles.forEach(filePath =>
-      emitter.emit('generateIntent:fileGenerated', filePath)
-    )
+    createdFiles.forEach(filePath => emitter.emit('generateTemplate:fileGenerated', filePath))
   })
 }
 

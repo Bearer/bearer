@@ -1,12 +1,4 @@
-import Bearer, {
-  Component,
-  State,
-  Element,
-  Event,
-  EventEmitter,
-  Prop,
-  StateManager
-} from '@bearer/core'
+import Bearer, { Component, State, Element, Event, EventEmitter, Prop, StateManager } from '@bearer/core'
 import { FieldSet } from '../Forms/Fieldset'
 
 type TSetupPayload = {
@@ -37,9 +29,7 @@ export class BearerConfig {
       key: el.controlName,
       value: el.value
     }))
-    StateManager.storeSetup(
-      formSet.reduce((acc, obj) => ({ ...acc, [obj['key']]: obj['value'] }), {})
-    )
+    StateManager.storeSetup(formSet.reduce((acc, obj) => ({ ...acc, [obj['key']]: obj['value'] }), {}))
       .then((item: TSetupPayload) => {
         this.loading = false
         console.log(`${this.scenarioId}`)
@@ -60,19 +50,11 @@ export class BearerConfig {
 
   render() {
     return [
-      this.error && (
-        <bearer-alert kind="danger">
-          [Error] Unable to store the credentials
-        </bearer-alert>
-      ),
+      this.error && <bearer-alert kind="danger">[Error] Unable to store the credentials</bearer-alert>,
       this.loading ? (
         <bearer-loading />
       ) : (
-        <bearer-form
-          fields={this.fieldSet}
-          clearOnInput={true}
-          onSubmit={this.handleSubmit}
-        />
+        <bearer-form fields={this.fieldSet} clearOnInput={true} onSubmit={this.handleSubmit} />
       )
     ]
   }

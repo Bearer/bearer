@@ -25,9 +25,7 @@ describe.skip('pushCommand', () => {
     tmpDir = makeTmpDir()
     fs.writeFileSync(
       `${tmpDir}/index.js`,
-      fs
-        .readFileSync(`${__dirname}/../fixtures/scenarios/getRepositories.js`)
-        .toString()
+      fs.readFileSync(`${__dirname}/../fixtures/scenarios/getRepositories.js`).toString()
     )
     scenarioPath = `${tmpDir}/${SCENARIO_NAME}.zip`
   })
@@ -48,12 +46,7 @@ describe.skip('pushCommand', () => {
     })
 
     buildPackage.on('close', () => {
-      const pushPackage = spawn(bin, [
-        COMMAND,
-        '--name',
-        SCENARIO_NAME,
-        scenarioPath
-      ])
+      const pushPackage = spawn(bin, [COMMAND, '--name', SCENARIO_NAME, scenarioPath])
 
       pushPackage.on('close', () => {
         s3.headObject(params, (err, data) => {

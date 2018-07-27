@@ -50,11 +50,7 @@ export class BearerTextarea {
         >
           {this.value}
         </textarea>
-        {this.hint ? (
-          <small class="form-text text-muted">{this.hint}</small>
-        ) : (
-          ''
-        )}
+        {this.hint ? <small class="form-text text-muted">{this.hint}</small> : ''}
       </div>
     )
   }

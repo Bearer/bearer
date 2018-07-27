@@ -3,11 +3,7 @@ const serviceClient = require('./serviceClient')
 module.exports = (
   emitter,
   event,
-  {
-    DeveloperPortalAPIUrl,
-    bearerConfig: { OrgId },
-    scenarioConfig: { scenarioTitle }
-  }
+  { DeveloperPortalAPIUrl, bearerConfig: { OrgId }, scenarioConfig: { scenarioTitle } }
 ) =>
   new Promise(async (resolve, reject) => {
     const client = serviceClient(DeveloperPortalAPIUrl)

@@ -9,9 +9,8 @@ import * as rc from 'rc'
 import Locator from '../locationProvider'
 
 const INTENT = 'intent'
-const SCREEN = 'screen'
+const COMPONENT = 'component'
 enum TemplateTypes {
-  config = 'config',
   setup = 'setup'
 }
 async function generateTemplates({
@@ -23,31 +22,38 @@ async function generateTemplates({
   templateType: TemplateTypes
   locator: Locator
 }) {
-  const authConfig = require(locator.scenarioRootFile('auth.config.json'))
+  try {
+    const authConfig = require(locator.authConfigPath)
 
-  const scenarioConfig = rc('scenario')
-  const { scenarioTitle } = scenarioConfig
+    const scenarioConfig = rc('scenario')
+    const { scenarioTitle } = scenarioConfig
 
-  const configKey = `${templateType}Screens`
+    const configKey = `${templateType}Views`
 
-  const vars = {
-    scenarioTitle: Case.camel(scenarioTitle),
-    componentTagName: Case.kebab(scenarioTitle),
-    fields: authConfig[configKey] ? JSON.stringify(authConfig[configKey]) : '[]'
+    const inDir = path.join(__dirname, `templates/generate/${templateType}`)
+    const outDir = locator.buildViewsComponentsDir
+
+    await del(`${outDir}*${templateType}*.tsx`).then(paths => {
+      console.log('Deleted files and folders:\n', paths.join('\n'))
+    })
+
+    if (authConfig[configKey] && authConfig[configKey].length) {
+      const vars = {
+        componentName: Case.pascal(scenarioTitle),
+        componentTagName: Case.kebab(scenarioTitle),
+        fields: JSON.stringify(authConfig[configKey])
+      }
+
+      copy(inDir, outDir, vars, (err, createdFiles) => {
+        if (err) throw err
+        createdFiles.forEach(filePath => emitter.emit('generateTemplate:fileGenerated', filePath))
+      })
+    } else {
+      throw new Error('Configuration file is incorrect or missing')
+    }
+  } catch (error) {
+    emitter.emit('generateTemplate:error', error.toString())
   }
-  const inDir = path.join(__dirname, `templates/generate/${templateType}`)
-  const outDir = locator.buildScreenDir
-
-  await del(`${outDir}*${templateType}*.tsx`).then(paths => {
-    console.log('Deleted files and folders:\n', paths.join('\n'))
-  })
-
-  copy(inDir, outDir, vars, (err, createdFiles) => {
-    if (err) throw err
-    createdFiles.forEach(filePath =>
-      emitter.emit('generateIntent:fileGenerated', filePath)
-    )
-  })
 }
 
 const generate = (emitter, {}, locator: Locator) => async env => {
@@ -57,20 +63,28 @@ const generate = (emitter, {}, locator: Locator) => async env => {
     process.exit(1)
   }
 
-  if (env.config) {
-    return generateTemplates({
-      emitter,
-      templateType: TemplateTypes.config,
-      locator
-    })
-  }
-
   if (env.setup) {
     return generateTemplates({
       emitter,
       templateType: TemplateTypes.setup,
       locator
     })
+  }
+
+  if (env.blankComponent && typeof env.blankComponent === 'string') {
+    return generateComponent({ emitter, locator, name: env.blankComponent, type: 'blank' })
+  }
+
+  if (env.blankComponent) {
+    return generateComponent({ emitter, locator, type: 'blank' })
+  }
+
+  if (env.collectionComponent && typeof env.collectionComponent === 'string') {
+    return generateComponent({ emitter, locator, name: env.collectionComponent, type: 'collection' })
+  }
+
+  if (env.collectionComponent) {
+    return generateComponent({ emitter, locator, type: 'collection' })
   }
 
   const { template } = await inquirer.prompt([
@@ -84,8 +98,8 @@ const generate = (emitter, {}, locator: Locator) => async env => {
           value: INTENT
         },
         {
-          name: 'Screen',
-          value: SCREEN
+          name: 'Component',
+          value: COMPONENT
         }
       ]
     }
@@ -97,8 +111,8 @@ const generate = (emitter, {}, locator: Locator) => async env => {
     case INTENT:
       generateIntent(params)
       break
-    case SCREEN:
-      await generateScreen(params)
+    case COMPONENT:
+      await generateComponent(params)
       break
     default:
   }
@@ -113,30 +127,60 @@ async function askForName() {
     }
   ])
 
-  return name
+  return name.trim()
 }
 
-async function generateScreen({
+async function generateComponent({
   emitter,
-  locator
+  locator,
+  name,
+  type
 }: {
   locator: Locator
   emitter: any
+  name?: string
+  type?: string
 }) {
-  const name = await askForName()
+  // Ask for type if not present
+  if (!type) {
+    const typePrompt = await inquirer.prompt([
+      {
+        message: 'What type of component do you want to generate',
+        type: 'list',
+        name: 'type',
+        choices: [
+          {
+            name: 'Blank',
+            value: 'blank'
+          },
+          {
+            name: 'Collection',
+            value: 'collection'
+          }
+        ]
+      }
+    ])
+    type = typePrompt.type
+  }
+
+  // Ask for name if not present
+  if (!name) {
+    name = await askForName()
+  }
+
   const componentName = Case.pascal(name)
   const vars = {
-    screenName: componentName,
+    fileName: componentName.charAt(0).toLocaleLowerCase() + componentName.slice(1),
+    componentName: componentName,
     componentTagName: Case.kebab(componentName)
   }
-  const inDir = path.join(__dirname, 'templates/generate/screen')
-  const outDir = path.join(locator.srcScreenDir, 'components')
+
+  const inDir = path.join(__dirname, 'templates/generate', type + 'View')
+  const outDir = path.join(locator.srcViewsDir, 'components')
 
   copy(inDir, outDir, vars, (err, createdFiles) => {
     if (err) throw err
-    createdFiles.forEach(filePath =>
-      emitter.emit('generateIntent:fileGenerated', filePath)
-    )
+    createdFiles.forEach(filePath => emitter.emit('generateView:fileGenerated', filePath))
   })
 }
 
@@ -159,13 +203,7 @@ function getActionExample(intentType, authType) {
   return templates[authType][intentType]
 }
 
-async function generateIntent({
-  emitter,
-  locator
-}: {
-  emitter: any
-  locator: Locator
-}) {
+async function generateIntent({ emitter, locator }: { emitter: any; locator: Locator }) {
   const { intentType } = await inquirer.prompt([
     {
       message: 'What type of intent do you want to generate',
@@ -175,17 +213,15 @@ async function generateIntent({
     }
   ])
   const name = await askForName()
-  const authConfig = require(locator.scenarioRootFile('auth.config.json'))
+  const authConfig = require(locator.authConfigPath)
   const actionExample = getActionExample(intentType, authConfig.authType)
-  const vars = { intentName: name, intentType, actionExample }
+  const vars = { intentName: name, authType: authConfig.authType, intentType, actionExample }
   const inDir = path.join(__dirname, 'templates/generate/intent')
-  const outDir = locator.srcIntentDir
+  const outDir = locator.srcIntentsDir
 
   copy(inDir, outDir, vars, (err, createdFiles) => {
     if (err) throw err
-    createdFiles.forEach(filePath =>
-      emitter.emit('generateIntent:fileGenerated', filePath)
-    )
+    createdFiles.forEach(filePath => emitter.emit('generateTemplate:fileGenerated', filePath))
   })
 }
 
@@ -194,12 +230,13 @@ export function useWith(program, emitter, config, locator): void {
     .command('generate')
     .alias('g')
     .description(
-      `Generate intent or screen.
+      `Generate intent or component.
     $ bearer generate
   `
     )
     // .option('-t, --type <intentType>', 'Intent type.')
+    .option('--blank-component [name]', 'generate blank component')
+    .option('--collection-component [name]', 'generate collection component')
     .option('--setup', 'generate setup file')
-    .option('--config', 'generate config file')
     .action(generate(emitter, config, locator))
 }

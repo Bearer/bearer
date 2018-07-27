@@ -9,6 +9,8 @@ Object {
 })
 export class FullComponent {
     private fetcher: BearerFetch;
+    @RetrieveStateIntent()
+    retrieve: BearerFetch;
     @BearerState()
     @State()
     attachedPullRequests: Array<any>;
@@ -16,8 +18,23 @@ export class FullComponent {
     @State()
     ducks: Array<any>;
     private fetchResource: BearerFetch;
+    screenRenderer = () => {
+        return (<bearer-navigator-screen navigationTitle=\\"Last Screen\\" renderFunc={() => [<h1>Hello Partick</h1>]}/>);
+    };
     render() {
-        return <bearer-scrollable fetcher={this.fetcher}/>;
+        return (<bearer-navigator>
+        <bearer-navigator-screen navigationTitle=\\"First Screen\\" renderFunc={() => [<bearer-scrollable fetcher={this.fetcher}/>]}/>
+        <bearer-navigator-screen navigationTitle=\\"First Screen\\" renderFunc={() => [<h1>Complex one</h1>,
+            <bearer-scrollable fetcher={this.fetcher}/>,
+            <span>this text is fine</span>]}/>
+        <bearer-navigator-screen navigationTitle={({ data }) => data.name} renderFunc={() => [<bearer-scrollable fetcher={this.fetcher}/>]}/>
+
+        <bearer-navigator-screen renderFunc={({ data, next, prev }) => (<last-screen next={next} complete={({ complete }) => {
+            console.log('complete');
+            complete();
+        }}/>)}/>
+        {this.screenRenderer()}
+      </bearer-navigator>);
     }
     constructor() { Intent('ListRepositories')(this, \\"fetcher\\"); Intent('getPullRequest', IntentType.GetResource)(this, \\"fetchResource\\"); }
     get SCENARIO_ID() { return \\"SPONGE_BOB\\"; }
@@ -37,6 +54,8 @@ export class FullComponent {
     componentWillLoad() { this.bearerContext.subscribe(this); }
     componentDidUnload() { this.bearerContext.unsubscribe(this); }
     bearerUpdateFromState = state => { this.attachedPullRequests = state[\\"attachedPullRequests\\"]; this.ducks = state['goats']; };
+    @Prop()
+    referenceId: string;
 }
 ",
 }

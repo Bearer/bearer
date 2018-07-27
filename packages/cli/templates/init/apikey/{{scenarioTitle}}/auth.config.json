@@ -1,6 +1,6 @@
 {
   "authType": "apiKey",
-  "setupScreens": [
+  "setupViews": [
     {
       "type": "password",
       "label": "Api Key",

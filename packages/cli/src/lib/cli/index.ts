@@ -1,11 +1,7 @@
 import Locator from '../locationProvider'
 
 export class CLI {
-  constructor(
-    private readonly program,
-    private readonly emitter,
-    private readonly config
-  ) {}
+  constructor(private readonly program, private readonly emitter, private readonly config) {}
 
   parse(argv) {
     this.program.parse(argv)
@@ -18,11 +14,6 @@ export class CLI {
   }
 
   use(cliCommand) {
-    cliCommand.useWith(
-      this.program,
-      this.emitter,
-      this.config,
-      new Locator(this.config)
-    )
+    cliCommand.useWith(this.program, this.emitter, this.config, new Locator(this.config))
   }
 }

@@ -1,5 +1,6 @@
 const path = require('path')
 const fs = require('fs-extra')
+
 const copy = require('copy-template-dir')
 const Case = require('case')
 const chokidar = require('chokidar')
@@ -57,29 +58,32 @@ export function prepare(emitter, config, locator: Locator) {
       const {
         scenarioConfig: { scenarioTitle }
       } = config
-      const { buildDir, srcScreenDir, buildScreenDir, scenarioRoot } = locator
+      const { buildViewsDir, buildViewsComponentsDir, srcViewsDir, scenarioRoot } = locator
 
       // Create hidden folder
       emitter.emit('start:prepare:buildFolder')
-      if (!fs.existsSync(buildDir)) {
-        fs.mkdirSync(buildDir)
-        fs.mkdirSync(buildScreenDir)
+      if (!fs.existsSync(buildViewsDir)) {
+        fs.mkdirpSync(buildViewsDir)
       }
-      fs.emptyDirSync(buildScreenDir)
+      fs.emptyDirSync(buildViewsDir)
+
+      if (!fs.existsSync(buildViewsComponentsDir)) {
+        fs.mkdirpSync(buildViewsComponentsDir)
+      }
 
       // Symlink node_modules
       emitter.emit('start:symlinkNodeModules')
       createEvenIfItExists(
-        path.join(scenarioRoot, 'node_modules'),
-        path.join(buildDir, 'node_modules')
+        locator.scenarioRootResourcePath('node_modules'),
+        locator.buildViewsResourcePath('node_modules')
       )
 
       // symlink package.json
       emitter.emit('start:symlinkPackage')
 
       createEvenIfItExists(
-        path.join(scenarioRoot, 'package.json'),
-        path.join(buildDir, 'package.json')
+        locator.scenarioRootResourcePath('package.json'),
+        locator.buildViewsResourcePath('package.json')
       )
 
       // Copy stencil.config.json
@@ -90,22 +94,19 @@ export function prepare(emitter, config, locator: Locator) {
       }
       const inDir = path.join(__dirname, 'templates', 'start', '.build')
       await new Promise((resolve, reject) => {
-        copy(inDir, buildDir, vars, (err, createdFiles) => {
+        copy(inDir, buildViewsDir, vars, (err, createdFiles) => {
           if (err) reject(err)
-          createdFiles &&
-            createdFiles.forEach(filePath =>
-              emitter.emit('start:prepare:copyFile', filePath)
-            )
+          createdFiles && createdFiles.forEach(filePath => emitter.emit('start:prepare:copyFile', filePath))
           resolve()
         })
       })
 
       createEvenIfItExists(
-        path.join(buildDir, 'global'),
-        path.join(buildScreenDir, 'global')
+        locator.buildViewsResourcePath('global'),
+        path.join(locator.buildViewsComponentsDir, 'global')
       )
       // Link non TS files
-      const watcher = await watchNonTSFiles(srcScreenDir, buildScreenDir)
+      const watcher = await watchNonTSFiles(srcViewsDir, buildViewsComponentsDir)
 
       if (!watchMode) {
         watcher.close()
@@ -118,8 +119,8 @@ export function prepare(emitter, config, locator: Locator) {
 
       return {
         rootLevel: scenarioRoot,
-        buildDirectory: buildDir,
-        screensDirectory: srcScreenDir
+        buildDirectory: buildViewsDir,
+        viewsDirectory: srcViewsDir
       }
     } catch (error) {
       emitter.emit('start:prepare:failed', { error })
@@ -128,20 +129,13 @@ export function prepare(emitter, config, locator: Locator) {
   }
 }
 
-const ensureSetupAndConfigComponents = rootLevel => {
-  spawn('bearer', ['g', '--config'], {
-    cwd: rootLevel
-  })
+const ensureSetupComponents = rootLevel => {
   spawn('bearer', ['g', '--setup'], {
     cwd: rootLevel
   })
 }
 
-export const start = (emitter, config, locator: Locator) => async ({
-  open,
-  install,
-  watcher
-}) => {
+export const start = (emitter, config, locator: Locator) => async ({ open, install, watcher }) => {
   const {
     bearerConfig: { OrgId },
     scenarioConfig: { scenarioTitle }
@@ -155,23 +149,16 @@ export const start = (emitter, config, locator: Locator) => async ({
       watchMode: watcher
     })
 
-    const { scenarioRoot, buildDir } = locator
+    const { scenarioRoot, buildViewsDir } = locator
     /* start local development server */
-    const integrationHost = await startLocalDevelopmentServer(
-      scenarioRoot,
-      scenarioUuid,
-      emitter,
-      config
-    )
+    const integrationHost = await startLocalDevelopmentServer(scenarioUuid, emitter, config, locator)
 
-    ensureSetupAndConfigComponents(buildDir)
+    ensureSetupComponents(buildViewsDir)
 
     emitter.emit('start:watchers')
     if (watcher) {
-      fs.watchFile(
-        path.join(scenarioRoot, 'auth.config.json'),
-        { persistent: true, interval: 250 },
-        () => ensureSetupAndConfigComponents(buildDir)
+      fs.watchFile(locator.authConfigPath, { persistent: true, interval: 250 }, () =>
+        ensureSetupComponents(buildViewsDir)
       )
     }
 
@@ -179,10 +166,7 @@ export const start = (emitter, config, locator: Locator) => async ({
     const BEARER = 'bearer-transpiler'
     const bearerTranspiler = spawn(
       'node',
-      [
-        path.join(__dirname, '..', 'startTranspiler.js'),
-        watcher ? null : '--no-watcher'
-      ].filter(el => el),
+      [path.join(__dirname, '..', 'startTranspiler.js'), watcher ? null : '--no-watcher'].filter(el => el),
       {
         cwd: scenarioRoot,
         env: {
@@ -206,7 +190,7 @@ export const start = (emitter, config, locator: Locator) => async ({
             args.push('--no-open')
           }
           const stencil = spawn('yarn', args, {
-            cwd: buildDir,
+            cwd: buildViewsDir,
             env: {
               ...process.env,
               BEARER_SCENARIO_ID: scenarioUuid,

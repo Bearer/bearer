@@ -6,14 +6,12 @@ const fs = require('fs')
 const ini = require('ini')
 const path = require('path')
 
-const IntegrationServiceHost = 'https://int.staging.bearer.sh/'
-
 let setup = {
   DeploymentUrl: 'https://developer.staging.bearer.sh/v1/',
-  IntegrationServiceHost,
-  IntegrationServiceUrl: `${IntegrationServiceHost}api/v1/`,
-  BearerEnv: 'staging',
-  DeveloperPortalAPIUrl: 'https://app.bearer.sh/graphql'
+  IntegrationServiceHost: 'https://int.staging.bearer.sh/',
+  IntegrationServiceUrl: 'https://int.staging.bearer.sh/api/v1/',
+  DeveloperPortalAPIUrl: 'https://app.staging.bearer.sh/graphql',
+  BearerEnv: 'staging'
 }
 
 module.exports = () => {
@@ -22,13 +20,24 @@ module.exports = () => {
   if (BEARER_ENV === 'dev') {
     setup = {
       DeploymentUrl: 'https://developer.dev.bearer.sh/v1/',
-      IntegrationServiceUrl: 'https://int.dev.bearer.sh/api/v1/',
       IntegrationServiceHost: 'https://int.dev.bearer.sh/',
-      DeveloperPortalAPIUrl: 'https://app.bearer.sh/graphql',
+      IntegrationServiceUrl: 'https://int.dev.bearer.sh/api/v1/',
+      DeveloperPortalAPIUrl: 'https://app.staging.bearer.sh/graphql',
       BearerEnv: 'dev'
     }
   }
-  const configuration = {
+
+  if (BEARER_ENV === 'production') {
+    setup = {
+      DeploymentUrl: 'https://developer.bearer.sh/v1/',
+      IntegrationServiceHost: 'https://int.bearer.sh/',
+      IntegrationServiceUrl: 'https://int.bearer.sh/api/v1/',
+      DeveloperPortalAPIUrl: 'https://app.bearer.sh/graphql',
+      BearerEnv: 'production'
+    }
+  }
+
+  return {
     ...setup,
     HandlerBase: 'index.js',
     get OrgId() {
@@ -51,13 +60,7 @@ module.exports = () => {
       return { Username, infrastructurePassword }
     },
     storeBearerConfig(config) {
-      const {
-        OrgId,
-        Username,
-        ExpiresAt,
-        authorization,
-        infrastructurePassword = ''
-      } = config
+      const { OrgId, Username, ExpiresAt, authorization, infrastructurePassword = '' } = config
       fs.writeFileSync(
         this.bearerConfig.config || path.join(os.homedir(), '.bearerrc'),
         ini.stringify({
@@ -72,11 +75,7 @@ module.exports = () => {
     setScenarioConfig(config) {
       const { scenarioTitle, scenarioId } = config
       console.log(this.rootPathRc)
-      fs.writeFileSync(
-        this.rootPathRc,
-        ini.stringify({ scenarioTitle, scenarioId })
-      )
+      fs.writeFileSync(this.rootPathRc, ini.stringify({ scenarioTitle, scenarioId }))
     }
   }
-  return configuration
 }
