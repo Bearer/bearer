@@ -63,7 +63,7 @@ export class SaveState extends StateIntentBase {
   }
 
   static intent(action: ISaveStateIntentAction) {
-    return (event, _context, callback) => {
+    return (event, _context, lambdaCallback) => {
       const { referenceId } = event.queryStringParameters
       console.log('EVENT CONTEXT', event.context)
       const STATE_CLIENT = UserDataClient(event.context.bearerBaseURL)
@@ -74,33 +74,37 @@ export class SaveState extends StateIntentBase {
             console.log('[BEARER]', 'received', response.data)
             const state = response.data.Item
             console.log('STATE', state)
-            action(event.context, event.queryStringParameters, event.body, state, result => {
-              STATE_CLIENT.put(`api/v1/items/${referenceId}`, {
-                ...result,
-                ReadAllowed: true
-              })
-                .then(data => {
-                  console.log('[BEARER]', 'success', data)
-                  callback(null, {
-                    meta: {
-                      referenceId: referenceId
-                    },
-                    data: {
-                      ...result
-                    }
+            try {
+              action(event.context, event.queryStringParameters, event.body, state, result => {
+                STATE_CLIENT.put(`api/v1/items/${referenceId}`, {
+                  ...result,
+                  ReadAllowed: true
+                })
+                  .then(data => {
+                    console.log('[BEARER]', 'success', data)
+                    lambdaCallback(null, {
+                      meta: {
+                        referenceId: referenceId
+                      },
+                      data: {
+                        ...result
+                      }
+                    })
                   })
-                })
-                .catch(e => {
-                  console.error('[BEARER]', 'error', e)
-                  callback(`Error : ${e}`)
-                })
-            })
+                  .catch(e => {
+                    console.error('[BEARER]', 'error', e)
+                    lambdaCallback(`Error : ${e}`, { error: 'Cannot update data' })
+                  })
+              })
+            } catch (error) {
+              lambdaCallback(`Error : ${error}`, { error: 'Intent action is failing' })
+            }
           })
           .catch(e => {
             console.log('[BEARER]', 'Error while retrieving data', e)
+            lambdaCallback(`Error : ${e}`, { error: 'Cannot retrieve data' })
           })
       } catch (e) {
-        console.log(e)
         action(event.context, event.queryStringParameters, event.body, {}, result => {
           STATE_CLIENT.post(`api/v1/items`, {
             ...result,
@@ -108,7 +112,7 @@ export class SaveState extends StateIntentBase {
           })
             .then((response: d.TStateData) => {
               console.log('[BEARER]', 'success', response.data)
-              callback(null, {
+              lambdaCallback(null, {
                 meta: {
                   referenceId: response.data.Item.referenceId
                 },
@@ -119,7 +123,7 @@ export class SaveState extends StateIntentBase {
             })
             .catch(e => {
               console.error('[BEARER]', 'error', e)
-              callback(`Error : ${e}`)
+              lambdaCallback(`Error : ${e}`)
             })
         })
       }
