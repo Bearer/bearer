@@ -53,44 +53,52 @@ class StateIntentBase extends BaseIntent {
   }
 }
 
+type ISaveStateIntentAction = {
+  (context: any, _params: any, body: any, state: any, callback: (state: any) => void): void
+}
+
 export class SaveState extends StateIntentBase {
   static get display() {
     return 'SaveState'
   }
 
-  static intent(action) {
+  static intent(action: ISaveStateIntentAction) {
     return (event, _context, callback) => {
       const { referenceId } = event.queryStringParameters
       console.log('EVENT CONTEXT', event.context)
       const STATE_CLIENT = UserDataClient(event.context.bearerBaseURL)
 
       try {
-        STATE_CLIENT.get(`api/v1/items/${referenceId}`).then(response => {
-          console.log('[BEARER]', 'received', response.data)
-          const state = response.data.Item
-          console.log('STATE', state)
-          action(event.context, event.queryStringParameters, event.body, state, result => {
-            STATE_CLIENT.put(`api/v1/items/${referenceId}`, {
-              ...result,
-              ReadAllowed: true
-            })
-              .then(data => {
-                console.log('[BEARER]', 'success', data)
-                callback(null, {
-                  meta: {
-                    referenceId: referenceId
-                  },
-                  data: {
-                    ...result
-                  }
+        STATE_CLIENT.get(`api/v1/items/${referenceId}`)
+          .then(response => {
+            console.log('[BEARER]', 'received', response.data)
+            const state = response.data.Item
+            console.log('STATE', state)
+            action(event.context, event.queryStringParameters, event.body, state, result => {
+              STATE_CLIENT.put(`api/v1/items/${referenceId}`, {
+                ...result,
+                ReadAllowed: true
+              })
+                .then(data => {
+                  console.log('[BEARER]', 'success', data)
+                  callback(null, {
+                    meta: {
+                      referenceId: referenceId
+                    },
+                    data: {
+                      ...result
+                    }
+                  })
                 })
-              })
-              .catch(e => {
-                console.error('[BEARER]', 'error', e)
-                callback(`Error : ${e}`)
-              })
+                .catch(e => {
+                  console.error('[BEARER]', 'error', e)
+                  callback(`Error : ${e}`)
+                })
+            })
           })
-        })
+          .catch(e => {
+            console.log('[BEARER]', 'Error while retrieving data', e)
+          })
       } catch (e) {
         console.log(e)
         action(event.context, event.queryStringParameters, event.body, {}, result => {
