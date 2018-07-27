@@ -14,7 +14,7 @@ const generateCmd = require('../src/lib/commands/generateCommand')
 const initCmd = require('../src/lib/commands/initCommand')
 const loginCmd = require('../src/lib/commands/loginCommand')
 const startCmd = require('../src/lib/commands/startCommand')
-const runCmd = require('../src/lib/commands/runCommand')
+const invokeCmd = require('../src/lib/commands/invokeCommand')
 
 const cliOutput = require('../src/lib/cliOutput.js')
 
@@ -28,6 +28,6 @@ cli.use(generateCmd)
 cli.use(deployCmd)
 cli.use(loginCmd)
 cli.use(startCmd)
-cli.use(runCmd)
+cli.use(invokeCmd)
 
 cli.parse(process.argv)

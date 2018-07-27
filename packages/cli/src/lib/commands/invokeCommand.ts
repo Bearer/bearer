@@ -64,12 +64,12 @@ export const invoke = (_emitter, config, locator: Locator) => async (intent, cmd
 
 export function useWith(program, emitter, config, locator: Locator) {
   program
-    .command('run <intent>')
+    .command('invoke <intent>')
     .option('-f, --file <path>')
     .description(
-      `run Intent locally.
-  $ bearer run <IntentName>
-  $ bearer run <IntentName> -f tests/intent.json
+      `invoke Intent locally.
+  $ bearer invoke <IntentName>
+  $ bearer invoke <IntentName> -f tests/intent.json
 `
     )
     .action(invoke(emitter, config, locator))
