@@ -65,67 +65,34 @@ export class SaveState extends StateIntentBase {
   static intent(action: ISaveStateIntentAction) {
     return (event, _context, lambdaCallback) => {
       const { referenceId } = event.queryStringParameters
-      console.log('EVENT CONTEXT', event.context)
       const STATE_CLIENT = UserDataClient(event.context.bearerBaseURL)
-
       try {
-        STATE_CLIENT.get(`api/v1/items/${referenceId}`)
-          .then(response => {
-            console.log('[BEARER]', 'received', response.data)
-            const state = response.data.Item
-            console.log('STATE', state)
+        STATE_CLIENT.retrieveState(referenceId)
+          .then(savedState => {
+            const state = savedState ? savedState.Item : {}
             try {
               action(event.context, event.queryStringParameters, event.body, state, result => {
-                STATE_CLIENT.put(`api/v1/items/${referenceId}`, {
-                  ...result,
-                  ReadAllowed: true
-                })
-                  .then(data => {
-                    console.log('[BEARER]', 'success', data)
-                    lambdaCallback(null, {
-                      meta: {
-                        referenceId: referenceId
-                      },
-                      data: {
-                        ...result
-                      }
+                if (savedState) {
+                  STATE_CLIENT.updateState(referenceId, result)
+                    .then(() => {
+                      lambdaCallback(null, { meta: { referenceId }, data: { ...result } })
                     })
-                  })
-                  .catch(e => {
-                    console.error('[BEARER]', 'error', e)
-                    lambdaCallback(`Error : ${e}`, { error: 'Cannot update data' })
-                  })
-              })
-            } catch (error) {
-              lambdaCallback(`Error : ${error}`, { error: 'Intent action is failing' })
-            }
-          })
-          .catch(e => {
-            console.log('[BEARER]', 'Error while retrieving data', e)
-            lambdaCallback(`Error : ${e}`, { error: 'Cannot retrieve data' })
-          })
-      } catch (e) {
-        action(event.context, event.queryStringParameters, event.body, {}, result => {
-          STATE_CLIENT.post(`api/v1/items`, {
-            ...result,
-            ReadAllowed: true
-          })
-            .then((response: d.TStateData) => {
-              console.log('[BEARER]', 'success', response.data)
-              lambdaCallback(null, {
-                meta: {
-                  referenceId: response.data.Item.referenceId
-                },
-                data: {
-                  ...result
+                    .catch(error => lambdaCallback(error.toString(), { error: error.toString() }))
+                } else {
+                  STATE_CLIENT.saveState(result)
+                    .then(data => {
+                      lambdaCallback(null, { meta: { referenceId: data.Item.referenceId }, data: { ...result } })
+                    })
+                    .catch(error => lambdaCallback(error.toString(), { error: error.toString() }))
                 }
               })
-            })
-            .catch(e => {
-              console.error('[BEARER]', 'error', e)
-              lambdaCallback(`Error : ${e}`)
-            })
-        })
+            } catch (error) {
+              return lambdaCallback(error.toString(), { error: error.toString() })
+            }
+          })
+          .catch(error => lambdaCallback(error.toString(), { error: error.toString() }))
+      } catch (error) {
+        return lambdaCallback(error.toString(), { error: error.toString() })
       }
     }
   }
@@ -137,30 +104,27 @@ export class RetrieveState extends StateIntentBase {
   }
 
   static intent(action) {
-    return (event, context, callback) => {
+    return (event, context, lambdaCallback) => {
       const { referenceId } = event.queryStringParameters
       const STATE_CLIENT = UserDataClient(event.context.bearerBaseURL)
-
-      STATE_CLIENT.get(`/api/v1/items/${referenceId}`)
-        .then(response => {
-          if (response.data.error) {
-            callback('No data found')
-          } else {
-            console.log('[BEARER]', 'data', response.data)
-            action(event.context, event.queryStringParameters, response.data.Item, state =>
-              callback(null, {
+      try {
+        STATE_CLIENT.retrieveState(referenceId).then(state => {
+          if (state) {
+            action(event.context, event.queryStringParameters, state.Item, state =>
+              lambdaCallback(null, {
                 meta: {
-                  referenceId: response.data.Item.referenceId
+                  referenceId: state.Item.referenceId
                 },
                 data: state
               })
             )
+          } else {
+            lambdaCallback(null, { statusCode: 404, body: JSON.stringify({ error: 'No data found', referenceId }) })
           }
         })
-        .catch(e => {
-          callback('No data found')
-          console.log('[BEARER]', 'error', e)
-        })
+      } catch (error) {
+        lambdaCallback(error.toString(), { error: error.toString() })
+      }
     }
   }
 }
@@ -171,9 +135,9 @@ export class GetCollection extends GenericIntentBase {
   }
 
   static intent(action) {
-    return (event, _context, callback) =>
+    return (event, _context, lambdaCallback) =>
       action(event.context, event.queryStringParameters, result => {
-        Intent.getCollection(callback, result)
+        Intent.getCollection(lambdaCallback, result)
       })
   }
 }
@@ -184,9 +148,9 @@ export class GetObject extends GenericIntentBase {
   }
 
   static intent(action) {
-    return (event, _context, callback) =>
+    return (event, _context, lambdaCallback) =>
       action(event.context, event.queryStringParameters, result => {
-        Intent.getObject(callback, result)
+        Intent.getObject(lambdaCallback, result)
       })
   }
 }
