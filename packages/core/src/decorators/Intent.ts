@@ -1,5 +1,12 @@
 import { intentRequest } from '../requests'
 
+/**
+ * Declarations
+ */
+enum IntentNames {
+  RetrieveState = 'RetrieveState',
+  SaveState = 'SaveState'
+}
 export enum IntentType {
   GetCollection = 'GetCollection',
   GetResource = 'GetResource'
@@ -14,7 +21,19 @@ interface IDecorator {
   (target: any, key: string): void
 }
 
-const MISSING_SCENARIO_ID = 'Scenario ID is missing. Please add @Component decorator above your class definition'
+export interface BearerFetch {
+  (...args: any[]): Promise<any>
+}
+
+export declare const BearerFetch: BearerFetch
+
+export const BearerContext = 'bearerContext'
+export const setupId = 'setupId'
+
+/**
+ * Intents
+ */
+
 // Usage
 // @Intent('intentName') propertyName: BearerFetch
 // or
@@ -23,42 +42,31 @@ export function Intent(intentName: string, type: IntentType = IntentType.GetColl
   return function(target: any, key: string): void {
     const getter = (): BearerFetch => {
       return function(params = {}, init = {}) {
-        if (!target['SCENARIO_ID']) {
-          console.warn(MISSING_SCENARIO_ID)
-        }
         const scenarioId = target['SCENARIO_ID']
         if (!scenarioId) {
-          return Promise.reject(new Error(MISSING_SCENARIO_ID))
-        } else {
-          const intent = intentRequest({
-            intentName,
-            scenarioId,
-            setupId: retrieveSetupId(target)
-          })
-          const referenceId = retrieveReferenceId(this)
-          const baseQuery = referenceId ? { referenceId } : {}
-
-          return IntentMapper[type](
-            intent.apply(null, [
-              {
-                ...params,
-                ...baseQuery
-              },
-              init
-            ])
-          )
+          return missingScenarioId()
         }
+        const intent = intentRequest({
+          intentName,
+          scenarioId,
+          [setupId]: retrieveSetupId(target)
+        })
+        const referenceId = retrieveReferenceId(this)
+        const baseQuery = referenceId ? { referenceId } : {}
+
+        return IntentMapper[type](
+          intent.apply(null, [
+            {
+              ...params,
+              ...baseQuery
+            },
+            init
+          ])
+        )
       }
     }
 
-    const setter = () => {}
-
-    if (delete target[key]) {
-      Object.defineProperty(target, key, {
-        get: getter,
-        set: setter
-      })
-    }
+    defineIntentProp(target, key, getter)
   }
 }
 
@@ -71,44 +79,27 @@ export function SaveStateIntent(type: IntentType = IntentType.GetCollection): ID
     const getter = (): BearerFetch => {
       return function(params: { body?: any; [key: string]: any } = {}, init: Object = {}) {
         const scenarioId = target['SCENARIO_ID']
-
         if (!scenarioId) {
-          return Promise.reject(new Error(MISSING_SCENARIO_ID))
-        } else {
-          const { body, ...query } = params
-          const intent = intentRequest({
-            intentName: 'SaveState',
-            scenarioId,
-            setupId: retrieveSetupId(this)
-          })
-          const referenceId = retrieveReferenceId(this)
-          const baseQuery = referenceId ? { referenceId } : {}
-
-          return IntentMapper[type](
-            intent.apply(null, [{ ...query, ...baseQuery }, { ...init, method: 'PUT', body: JSON.stringify(body) }])
-          )
+          return missingScenarioId()
         }
+
+        const { body, ...query } = params
+        const intent = intentRequest({
+          intentName: IntentNames.SaveState,
+          scenarioId,
+          [setupId]: retrieveSetupId(this)
+        })
+        const referenceId = retrieveReferenceId(this)
+        const baseQuery = referenceId ? { referenceId } : {}
+
+        return IntentMapper[type](
+          intent.apply(null, [{ ...query, ...baseQuery }, { ...init, method: 'PUT', body: JSON.stringify(body) }])
+        )
       }
     }
 
-    const setter = () => {}
-
-    if (delete target[key]) {
-      Object.defineProperty(target, key, {
-        get: getter,
-        set: setter
-      })
-    }
+    defineIntentProp(target, key, getter)
   }
-}
-
-function retrieveSetupId(target: any) {
-  const setupId = target.setupId || (target['bearerContext'] && target['bearerContext']['setupId'])
-  return setupId
-}
-
-function retrieveReferenceId(target: any) {
-  return target.referenceId
 }
 
 // Usage
@@ -116,8 +107,51 @@ function retrieveReferenceId(target: any) {
 // or
 // @RetrieveStateIntent(IntentType.GetResource ) propertyName: BearerFetch
 export function RetrieveStateIntent(type: IntentType = IntentType.GetCollection): IDecorator {
-  return Intent('RetrieveState', type)
+  return function(target: any, key: string): void {
+    const getter = (): BearerFetch => {
+      return function(params: { body?: any; [key: string]: any } = {}, init: Object = {}) {
+        const scenarioId = target['SCENARIO_ID']
+        if (!scenarioId) {
+          return missingScenarioId()
+        }
+
+        const referenceId = retrieveReferenceId(this)
+        if (!referenceId) {
+          return missingReferenceId()
+        }
+
+        const { body, ...query } = params
+        const intent = intentRequest({
+          intentName: IntentNames.RetrieveState,
+          scenarioId,
+          [setupId]: retrieveSetupId(this)
+        })
+
+        return IntentMapper[type](
+          intent.apply(null, [{ ...query, referenceId }, { ...init, method: 'PUT', body: JSON.stringify(body) }])
+        )
+      }
+    }
+
+    defineIntentProp(target, key, getter)
+  }
 }
+
+// Common
+// => reject if setupId/scenarioId/integrationId/query params is missing
+//
+
+// Intent
+// => pass setupId/scenarioId/integrationId/query params
+// => pass query params
+
+// SaveStateIntent
+// => pass setupId/scenarioId/integrationId/query params
+// => trigger Save
+
+// RetrieveStateIntent
+// => do not perform if no referenceId
+// => pass setupId/scenarioId/integrationId/query params
 
 export function GetCollectionIntent(promise): Promise<any> {
   return new Promise((resolve, reject) => {
@@ -143,8 +177,50 @@ export function GetResourceIntent(promise): Promise<any> {
   })
 }
 
-export interface BearerFetch {
-  (...args: any[]): Promise<any>
+/**
+ * Helpers
+ */
+
+function missingScenarioId(): Promise<any> {
+  console.warn('[BEARER]', 'Missing scenarioId, skipping api call')
+  return Promise.reject(new BearerMissingScenarioId())
 }
 
-export declare const BearerFetch: BearerFetch
+function missingReferenceId(): Promise<any> {
+  console.warn('[BEARER]', 'Missing referenceId, skipping RetrieveState api call')
+  return Promise.reject(new BearerMissingReferenceId())
+}
+
+function retrieveSetupId(target: any) {
+  return target.setupId || (target[BearerContext] && target[BearerContext][setupId])
+}
+
+function retrieveReferenceId(target: any) {
+  return target.referenceId
+}
+
+function defineIntentProp(target: any, key: string, getter: any) {
+  const setter = () => {}
+
+  if (delete target[key]) {
+    Object.defineProperty(target, key, {
+      get: getter,
+      set: setter
+    })
+  }
+}
+
+/**
+ * Custom Errors
+ */
+
+class BearerMissingReferenceId extends Error {
+  constructor(private readonly group: string = 'feature') {
+    super()
+  }
+  message = `Attribute ${this.group}ReferenceId is missing. Cannot fetch data without any reference`
+}
+
+class BearerMissingScenarioId extends Error {
+  message = 'Scenario ID is missing. Please add @RootComponent decorator above your class definition'
+}
