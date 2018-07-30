@@ -39,27 +39,31 @@ describe('SaveState', () => {
       function mockRetrieveSucces() {
         expect(mockAxios.get).toHaveBeenCalledWith('api/v1/items/SPONGE_BOB')
         const responseObj = { data: { Item: savedData } }
-        mockAxios.mockResponse(responseObj)
+        mockAxios.mockResponse(responseObj, mockAxios.lastReqGet())
       }
 
-      it('retrieves reference, update it and return payload', () => {
-        const lambdaCallback = jest.fn()
+      it('retrieves reference, update it and return payload', async done => {
+        const lambdaCallback = jest.fn((a, b) => {
+          console.log('ok', a, b)
+          done()
+        })
+        // expect.assertions(4)
 
         SaveState.intent(action)(event, {}, lambdaCallback)
-
         mockRetrieveSucces()
-
+        // expect(mockAxios.put).toHaveBeenCalled()
         expect(mockAxios.put).toHaveBeenCalledWith('api/v1/items/SPONGE_BOB', {
-          ReadAllowed: true,
-          ...savedData,
-          pullRequests: []
+          //   ReadAllowed: true,
+          //   ...savedData,
+          //   pullRequests: []
         })
-        mockAxios.mockResponse({}) // data is not used
+        mockAxios.mockResponse({}) // data is unused
 
         expect(lambdaCallback).toHaveBeenCalledWith(null, {
           meta: { referenceId },
           data: { ...savedData, pullRequests: [] }
         })
+        // expect(lambdaCallback).toHaveBeenCalled()
       })
 
       it('retrieves reference, fails update and return error', () => {
@@ -106,11 +110,13 @@ describe('SaveState', () => {
 
         SaveState.intent(action)(event, {}, lambdaCallback)
 
-        mockRetrieveFailure()
-
+        // mockRetrieveFailure()
+        expect(mockAxios.get).toHaveBeenCalledWith('api/v1/items/SPONGE_BOB', mockAxios.lastReqGet())
         expect(mockAxios.post).toHaveBeenCalledWith('api/v1/items', { ReadAllowed: true, pullRequests: [] })
-        const responseObj = { data: { Item: { referenceId: 'PATRICK' } } }
-        mockAxios.mockResponse(responseObj)
+
+        const responseObj = { data: { Item: null }, status: 404 }
+        mockAxios.mockError(responseObj)
+        mockAxios.mockResponse({ data: { Item: { referenceId: 'PATRICK' } } })
 
         expect(mockAxios.post).toHaveBeenCalledWith()
         expect(lambdaCallback).toHaveBeenCalledWith(null, { meta: { referenceId: 'PATRICK', data: { ...event.body } } })
@@ -155,6 +161,37 @@ describe('SaveState', () => {
         expect(mockAxios.put).not.toHaveBeenCalledWith()
         expect(lambdaCallback).toHaveBeenCalledWith(null, { error: 'Error whild trying to fetch current state' })
       })
+    })
+  })
+})
+
+describe('RetrieveState', () => {
+  describe('existing data', () => {
+    const referenceId = 'SPONGE_BOB'
+
+    const event = {
+      queryStringParameters: { referenceId },
+      context: { bearerBaseURL: 'http://void.bearer.sh' }
+    }
+
+    const action = (_context: any, _params: any, state: any, callback: (state: any) => void) => {
+      callback(state)
+    }
+
+    it.only('returns meta + data', async done => {
+      const lambdaCallback = jest.fn((a, b) => {
+        console.log('[BEARER]', 'a', a, b)
+        expect(a).toBe(null)
+        expect(b).toMatchObject({
+          meta: { referenceId: 'SPONGE_BOB' },
+          data: { title: 'Sponge bob' }
+        })
+        done()
+      })
+
+      RetrieveState.intent(action)(event, {}, lambdaCallback)
+      expect(mockAxios.get).toHaveBeenCalledWith('api/v1/items/SPONGE_BOB')
+      mockAxios.mockResponse({ data: { Item: { title: 'Sponge bob', referenceId } } })
     })
   })
 })

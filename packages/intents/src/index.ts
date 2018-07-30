@@ -104,20 +104,20 @@ export class RetrieveState extends StateIntentBase {
   }
 
   static intent(action) {
-    return (event, context, lambdaCallback) => {
+    return (event, _context, lambdaCallback) => {
       const { referenceId } = event.queryStringParameters
       const STATE_CLIENT = UserDataClient(event.context.bearerBaseURL)
       try {
         STATE_CLIENT.retrieveState(referenceId).then(state => {
           if (state) {
-            action(event.context, event.queryStringParameters, state.Item, state =>
+            action(event.context, event.queryStringParameters, state.Item, preparedState => {
               lambdaCallback(null, {
                 meta: {
                   referenceId: state.Item.referenceId
                 },
-                data: state
+                data: preparedState
               })
-            )
+            })
           } else {
             lambdaCallback(null, { statusCode: 404, body: JSON.stringify({ error: 'No data found', referenceId }) })
           }
