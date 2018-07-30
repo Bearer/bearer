@@ -1,16 +1,11 @@
 import axios from 'axios'
 import * as querystring from 'querystring'
 import * as cosmiconfig from 'cosmiconfig'
+import * as jq from 'node-jq'
 
 const startLocalDevelopmentServer = require('./startLocalDevelopmentServer')
 
 import Locator from '../locationProvider'
-
-class NoEmitter {
-  emit(_name, _args) {}
-
-  on(_args) {}
-}
 
 type IConfig = {
   httpMethod?: string
@@ -18,25 +13,27 @@ type IConfig = {
   body?: {}
 }
 
-export const invoke = (_emitter, config, locator: Locator) => async (intent, cmd) => {
-  const { file } = cmd
+export const invoke = (emitter, config, locator: Locator) => async (intent, cmd) => {
+  const { path, format } = cmd
   const {
     scenarioUuid,
     scenarioConfig: { scenarioTitle }
   } = config
+  const DEFAULT_JQ_FORMAT = '.'
+  const jqFilter = format ? format : DEFAULT_JQ_FORMAT
+  const jqOptions = { input: 'string' }
 
   let fileData: IConfig = {}
-  if (file) {
-    const explorer = cosmiconfig(file, {
-      searchPlaces: [file]
+  if (path) {
+    const explorer = cosmiconfig(path, {
+      searchPlaces: [path]
     })
     const { config = {} } = (await explorer.search(locator.scenarioRootResourcePath.toString())) || {}
     fileData = config
   }
   const { httpMethod = 'GET', params = {}, body = {} } = fileData
 
-  const noEmitter = new NoEmitter()
-  const integrationHostURL = await startLocalDevelopmentServer(scenarioUuid, noEmitter, config, locator, false)
+  const integrationHostURL = await startLocalDevelopmentServer(scenarioUuid, emitter, config, locator)
 
   const client = axios.create({
     baseURL: `${integrationHostURL}api/v1`,
@@ -53,22 +50,32 @@ export const invoke = (_emitter, config, locator: Locator) => async (intent, cmd
       const { data } = await client.post(`${scenarioUuid}/${intent}`, querystring.stringify(body))
       intentData = data
     }
-    console.log(JSON.stringify(intentData))
-    process.exit(0)
+    jq.run(jqFilter, JSON.stringify(intentData), jqOptions)
+      .then(output => {
+        console.log(output)
+        process.exit(0)
+      })
+      .catch(err => {
+        console.log(intentData)
+        console.log(err)
+        process.exit(1)
+      })
   } catch (e) {
     console.log(e)
-    process.exit(0)
+    process.exit(1)
   }
 }
 
 export function useWith(program, emitter, config, locator: Locator) {
   program
     .command('invoke <intent>')
-    .option('-f, --file <path>')
+    .option('-p, --path <path>')
+    .option('-f, --format <format>')
     .description(
       `invoke Intent locally.
   $ bearer invoke <IntentName>
-  $ bearer invoke <IntentName> -f tests/intent.json
+  $ bearer invoke <IntentName> -p tests/intent.json
+  $ bearer invoke <IntentName> -f '.data[].name' ## JQ compatible format
 `
     )
     .action(invoke(emitter, config, locator))
