@@ -7,6 +7,15 @@ const serviceClient = require('./serviceClient')
 const DIST_DIRECTORY = 'dist'
 const WWW_DIRECTORY = 'www'
 
+async function uploadToS3(urls, paths, key) {
+  const filePath = paths[key]
+  const fileContent = fs.readFileSync(filePath)
+  const s3Client = serviceClient(urls[key])
+  await s3Client.upload(fileContent.toString(), {
+    'Content-Type': mime.lookup(filePath)
+  })
+}
+
 const pushViews = (
   viewsDirectory,
   emitter,
@@ -54,15 +63,15 @@ const pushViews = (
         Object.keys(paths).map(key =>
           (async () => {
             try {
-              const filePath = paths[key]
-              const fileContent = fs.readFileSync(filePath)
-              const s3Client = serviceClient(urls[key])
-              await s3Client.upload(fileContent.toString(), {
-                'Content-Type': mime.lookup(filePath)
-              })
+              await uploadToS3(urls, paths, key)
             } catch (e) {
-              emitter.emit('view:fileUpload:error', { e, key })
-              reject(e)
+              try {
+                // Sometimes, S3 fails but can be retried.
+                await uploadToS3(urls, paths, key)
+              } catch (e) {
+                emitter.emit('view:fileUpload:error', { e, key })
+                reject(e)
+              }
             }
           })()
         )

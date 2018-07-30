@@ -66,14 +66,14 @@ module.exports = () => {
       return { Username, infrastructurePassword }
     },
     storeBearerConfig(config) {
-      const { Username, ExpiresAt, authorization, infrastructurePassword = '' } = config
+      const { Username, ExpiresAt, authorization } = config //, infrastructurePassword = '' } = config
       fs.writeFileSync(
         this.bearerConfig.config || path.join(os.homedir(), '.bearerrc'),
         ini.stringify({
           Username,
           ExpiresAt,
-          authorization,
-          infrastructurePassword
+          authorization
+          // infrastructurePassword
         })
       )
     },
