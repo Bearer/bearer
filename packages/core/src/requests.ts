@@ -9,10 +9,14 @@ const defaultInit = {
   credentials: 'include'
 }
 
-export function bearerRequest(uri: string, baseParams = {}): (params: any, init?: any) => Promise<any> {
+export type TBearerRequest<T> = {
+  (params: any, init?: any): Promise<T>
+}
+
+export function bearerRequest<TPromiseReturn>(uri: string, baseParams = {}): TBearerRequest<TPromiseReturn> {
   const url = `${Bearer.config.integrationHost}api/v1/${uri}`
 
-  return function(params = {}, init = {}): Promise<any> {
+  return function(params = {}, init = {}): Promise<TPromiseReturn> {
     return new Promise((resolve, reject) => {
       Bearer.instance.maybeInitialized
         .then(() => {
@@ -43,19 +47,21 @@ export function bearerRequest(uri: string, baseParams = {}): (params: any, init?
   }
 }
 
-export function itemRequest() {
+export function itemRequest(): TBearerRequest<any> {
   return bearerRequest('items')
 }
 
-export function intentRequest({
-  intentName,
-  scenarioId,
-  setupId
-}: {
+type TIntentBaseQuery = {
   intentName: string
   scenarioId: string
   setupId: string
-}) {
+}
+
+export function intentRequest<TReturnFormat>({
+  intentName,
+  scenarioId,
+  setupId
+}: TIntentBaseQuery): TBearerRequest<TReturnFormat> {
   return bearerRequest(`${scenarioId}/${intentName}`, { setupId })
 }
 
