@@ -6,14 +6,14 @@ module.exports = (
   emitter,
   {
     scenarioUuid,
+    // DeveloperPortalAPIUrl,
+    // credentials,
     bearerConfig: {
       authorization: {
         AuthenticationResult: { IdToken: token }
       }
     },
-    DeploymentUrl,
-    DeveloperPortalAPIUrl,
-    credentials
+    DeploymentUrl
   }
 ) =>
   new Promise(async (resolve, reject) => {
@@ -22,14 +22,14 @@ module.exports = (
     try {
       const deploymentServiceClient = serviceClient(DeploymentUrl)
 
-      const devPortalClient = serviceClient(DeveloperPortalAPIUrl)
-      const {
-        body: {
-          data: {
-            findUser: { token: devPortalToken }
-          }
-        }
-      } = await devPortalClient.getDevPortalToken(credentials)
+      // const devPortalClient = serviceClient(DeveloperPortalAPIUrl)
+      // const {
+      //   body: {
+      //     data: {
+      //       findUser: { token: devPortalToken }
+      //     }
+      //   }
+      // } = await devPortalClient.getDevPortalToken(credentials)
 
       const res = await deploymentServiceClient.signedUrl(token, scenarioUuid, 'intent')
 

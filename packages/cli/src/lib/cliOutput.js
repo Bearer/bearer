@@ -232,11 +232,11 @@ module.exports = emitter => {
     term('\n')
   })
 
-  emitter.on('view:fileUpload:error', e => {
+  emitter.on('view:fileUpload:error', ({ e, key }) => {
     term.white('Bearer: ')
     term.red('ERROR: View file upload failed.')
     term('\n')
-    term(e.toString())
+    term(`${key}: ${e.toString()}`)
     term('\n')
   })
   emitter.on('view:fileUpload:success', distPath => {
@@ -363,6 +363,24 @@ module.exports = emitter => {
   emitter.on('invalidateCloudFront:error', ({ message }) => {
     term.white('Bearer: ')
     term.red('There was an error while trying to invalidate views cache.')
+    term('\n')
+    term.white('Error: ')
+    term.red(message)
+    term('\n')
+  })
+
+  emitter.on('developerPortalUpdate:failed', ({ message }) => {
+    term.white('Bearer: ')
+    term.red('There was an error while pushing to developer portal.')
+    term('\n')
+    term.white('Errors: ')
+    term.red(message)
+    term('\n')
+  })
+
+  emitter.on('developerPortalUpdate:error', ({ message }) => {
+    term.white('Bearer: ')
+    term.red('There was an error while pushing to developer portal.')
     term('\n')
     term.white('Error: ')
     term.red(message)

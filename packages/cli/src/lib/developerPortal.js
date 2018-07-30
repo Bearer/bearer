@@ -6,10 +6,10 @@ module.exports = (emitter, event, { DeveloperPortalAPIUrl, orgId, scenarioId }) 
     try {
       const res = await client.deployScenario(event, orgId, scenarioId)
 
-      if (!res.errors) {
+      if (!res.body.errors) {
         emitter.emit('developerPortalUpdate:success')
       } else {
-        emitter.emit('developerPortalUpdate:failed', res.errors)
+        emitter.emit('developerPortalUpdate:failed', res.body.errors)
       }
 
       resolve('done')

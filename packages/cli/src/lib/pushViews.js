@@ -14,13 +14,13 @@ const pushViews = (
     DeploymentUrl,
     scenarioId,
     orgId,
-    DeveloperPortalAPIUrl,
+    // DeveloperPortalAPIUrl,
+    // credentials,
     bearerConfig: {
       authorization: {
         AuthenticationResult: { IdToken: token }
       }
-    },
-    credentials
+    }
   }
 ) => {
   return new Promise(async (resolve, reject) => {
@@ -30,14 +30,14 @@ const pushViews = (
     }
 
     const integrationsClient = serviceClient(DeploymentUrl)
-    const devPortalClient = serviceClient(DeveloperPortalAPIUrl)
-    const {
-      body: {
-        data: {
-          findUser: { token: devPortalToken }
-        }
-      }
-    } = await devPortalClient.getDevPortalToken(credentials)
+    // const devPortalClient = serviceClient(DeveloperPortalAPIUrl)
+    // const {
+    //   body: {
+    //     data: {
+    //       findUser: { token: devPortalToken }
+    //     }
+    //   }
+    // } = await devPortalClient.getDevPortalToken(credentials)
     try {
       emitter.emit('view:upload:start')
 
@@ -61,7 +61,7 @@ const pushViews = (
                 'Content-Type': mime.lookup(filePath)
               })
             } catch (e) {
-              emitter.emit('view:fileUpload:error', e)
+              emitter.emit('view:fileUpload:error', { e, key })
               reject(e)
             }
           })()

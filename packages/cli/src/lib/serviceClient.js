@@ -52,10 +52,8 @@ module.exports = url => {
                 field
                 messages
               }
-              scenario {
-                identifier
+              scenarioActivity {
                 state
-                name
               }
             }
           }`
