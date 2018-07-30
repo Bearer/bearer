@@ -6,11 +6,11 @@ afterEach(() => {
 })
 
 describe('index', () => {
-  it('export SaveState', () => {
+  it.skip('export SaveState', () => {
     expect(SaveState).toBeTruthy()
   })
 
-  it('export RetrieveState', () => {
+  it.skip('export RetrieveState', () => {
     expect(RetrieveState).toBeTruthy()
   })
 })
@@ -42,7 +42,7 @@ describe('SaveState', () => {
         mockAxios.mockResponse(responseObj, mockAxios.lastReqGet())
       }
 
-      it('retrieves reference, update it and return payload', async done => {
+      it.skip('retrieves reference, update it and return payload', async done => {
         const lambdaCallback = jest.fn((a, b) => {
           console.log('ok', a, b)
           done()
@@ -66,7 +66,7 @@ describe('SaveState', () => {
         // expect(lambdaCallback).toHaveBeenCalled()
       })
 
-      it('retrieves reference, fails update and return error', () => {
+      it.skip('retrieves reference, fails update and return error', () => {
         const lambdaCallback = jest.fn()
 
         SaveState.intent(action)(event, {}, lambdaCallback)
@@ -83,7 +83,7 @@ describe('SaveState', () => {
         expect(lambdaCallback).toHaveBeenCalledWith(expect.any(String), { error: 'Cannot update data' })
       })
 
-      it('retrieves data, action throw error, returns error', () => {
+      it.skip('retrieves data, action throw error, returns error', () => {
         const lambdaCallback = jest.fn()
         const failingAction = () => {
           throw new Error('Error')
@@ -105,7 +105,7 @@ describe('SaveState', () => {
         mockAxios.mockError(responseObj)
       }
 
-      it('create reference and return payload', () => {
+      it.skip('create reference and return payload', () => {
         const lambdaCallback = jest.fn()
 
         SaveState.intent(action)(event, {}, lambdaCallback)
@@ -122,7 +122,7 @@ describe('SaveState', () => {
         expect(lambdaCallback).toHaveBeenCalledWith(null, { meta: { referenceId: 'PATRICK', data: { ...event.body } } })
       })
 
-      it('fails create reference and return error', () => {
+      it.skip('fails create reference and return error', () => {
         const lambdaCallback = jest.fn()
 
         SaveState.intent(action)(event, {}, lambdaCallback)
@@ -134,7 +134,7 @@ describe('SaveState', () => {
         mockAxios.mockError(responseObj)
         expect(lambdaCallback).toHaveBeenCalledWith(expect.any(String), { error: 'Cannot save data' })
       })
-      it('action throw error, returns error', () => {
+      it.skip('action throw error, returns error', () => {
         const lambdaCallback = jest.fn()
         const failingAction = () => {
           throw new Error('Error')
@@ -149,7 +149,7 @@ describe('SaveState', () => {
     })
 
     describe('fails userData service call', () => {
-      it('returns error', () => {
+      it.skip('returns error', () => {
         const lambdaCallback = jest.fn()
 
         SaveState.intent(action)(event, {}, lambdaCallback)
@@ -178,9 +178,8 @@ describe('RetrieveState', () => {
       callback(state)
     }
 
-    it.only('returns meta + data', async done => {
+    it('returns meta + data', async done => {
       const lambdaCallback = jest.fn((a, b) => {
-        console.log('[BEARER]', 'a', a, b)
         expect(a).toBe(null)
         expect(b).toMatchObject({
           meta: { referenceId: 'SPONGE_BOB' },
@@ -192,6 +191,20 @@ describe('RetrieveState', () => {
       RetrieveState.intent(action)(event, {}, lambdaCallback)
       expect(mockAxios.get).toHaveBeenCalledWith('api/v1/items/SPONGE_BOB')
       mockAxios.mockResponse({ data: { Item: { title: 'Sponge bob', referenceId } } })
+    })
+
+    it('not found retuns error', async done => {
+      const lambdaCallback = jest.fn((a, b) => {
+        expect(a).toBe(null)
+        expect(b).toMatchObject({
+          statusCode: 404
+        })
+        done()
+      })
+
+      RetrieveState.intent(action)(event, {}, lambdaCallback)
+      expect(mockAxios.get).toHaveBeenCalledWith('api/v1/items/SPONGE_BOB')
+      mockAxios.mockError({ data: { Item: null }, status: 404 })
     })
   })
 })
