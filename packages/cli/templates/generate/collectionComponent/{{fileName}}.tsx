@@ -2,7 +2,7 @@ import { Component, Intent, BearerFetch } from '@bearer/core'
 
 @Component({
   tag: '{{componentTagName}}',
-  styleUrl: '{{componentFileName}}.css',
+  styleUrl: '{{fileName}}.css',
   shadow: true
 })
 export class {{componentName}} {

@@ -188,7 +188,7 @@ async function generateComponent({
 
   const componentName = Case.pascal(name)
   const vars = {
-    fileName: componentName.charAt(0).toLocaleLowerCase() + componentName.slice(1),
+    fileName: componentName,
     componentName: componentName,
     componentTagName: Case.kebab(componentName),
     groupName: componentName
