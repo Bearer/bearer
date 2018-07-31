@@ -58,7 +58,7 @@ describe('Intent decorator', () => {
         commonParams
       )
 
-      expect(success).toBeCalledWith({ items: collection })
+      expect(success).toBeCalledWith({ items: collection, referenceId: null })
     })
   })
 
@@ -92,7 +92,7 @@ describe('Intent decorator', () => {
         commonParams
       )
 
-      expect(success).toBeCalledWith({ object: item, referenceId: undefined })
+      expect(success).toBeCalledWith({ object: item, referenceId: null })
     })
   })
 })
