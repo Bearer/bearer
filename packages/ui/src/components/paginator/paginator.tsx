@@ -1,4 +1,4 @@
-import { Component, Listen, Prop, State, Method } from '@bearer/core'
+import { Component, Listen, Prop, State, Method, TCollectionData } from '@bearer/core'
 
 @Component({
   tag: 'bearer-paginator',
@@ -10,7 +10,7 @@ export class BearerPaginator {
   @Prop() renderFetching: () => any
   @Prop() perPage: number = 5
   @Prop() pageCount: number
-  @Prop() fetcher: (refineParams: { page: number }) => Promise<{ items: Array<any> }>
+  @Prop() fetcher: (refineParams: { page: number }) => Promise<TCollectionData>
 
   @State() fetching: boolean = false
   @State() currentPage: number = 0
@@ -24,7 +24,7 @@ export class BearerPaginator {
     if (!this.collection[itemMaybeIndex]) {
       this.fetching = true
       this.fetcher({ page: this.currentPage })
-        .then(({ items }) => {
+        .then(({ items }: TCollectionData) => {
           this.collection = [...this.collection, ...items]
           this.fetching = false
         })
