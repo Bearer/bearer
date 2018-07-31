@@ -33,6 +33,9 @@ import {
   TMemberRenderer,
 } from './components/navigator/types';
 import {
+  TCollectionData,
+} from '@bearer/core';
+import {
   TCollectionRenderer,
 } from './components/scrollable/types';
 
@@ -929,7 +932,7 @@ declare global {
 
   namespace StencilComponents {
     interface BearerPaginator {
-      'fetcher': (refineParams: { page: number }) => Promise<{ items: Array<any> }>;
+      'fetcher': (refineParams: { page: number }) => Promise<TCollectionData>;
       'pageCount': number;
       'perPage': number;
       'renderCollection': (collection: Array<any>) => any;
@@ -957,7 +960,7 @@ declare global {
   }
   namespace JSXElements {
     export interface BearerPaginatorAttributes extends HTMLAttributes {
-      'fetcher'?: (refineParams: { page: number }) => Promise<{ items: Array<any> }>;
+      'fetcher'?: (refineParams: { page: number }) => Promise<TCollectionData>;
       'pageCount'?: number;
       'perPage'?: number;
       'renderCollection'?: (collection: Array<any>) => any;
@@ -971,7 +974,7 @@ declare global {
 
   namespace StencilComponents {
     interface BearerScrollable {
-      'fetcher': ({ page: number }) => Promise<{ items: Array<any> }>;
+      'fetcher': ({ page: number }) => Promise<TCollectionData>;
       'perPage': number;
       'renderCollection': TCollectionRenderer;
       'renderFetching': () => any;
@@ -999,7 +1002,7 @@ declare global {
   }
   namespace JSXElements {
     export interface BearerScrollableAttributes extends HTMLAttributes {
-      'fetcher'?: ({ page: number }) => Promise<{ items: Array<any> }>;
+      'fetcher'?: ({ page: number }) => Promise<TCollectionData>;
       'perPage'?: number;
       'renderCollection'?: TCollectionRenderer;
       'renderFetching'?: () => any;

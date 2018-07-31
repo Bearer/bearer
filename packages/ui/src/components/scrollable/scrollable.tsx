@@ -1,4 +1,4 @@
-import { Component, Listen, Prop, State, Method, Element } from '@bearer/core'
+import { Component, Listen, Prop, State, Method, Element, TCollectionData } from '@bearer/core'
 import { TCollectionRenderer } from './types'
 
 @Component({
@@ -10,7 +10,7 @@ export class BearerScrollable {
   @Prop() rendererProps?: JSXElements.BearerNavigatorCollectionAttributes
   @Prop() renderFetching?: () => any
   @Prop() perPage?: number = 5
-  @Prop() fetcher: ({ page: number }) => Promise<{ items: Array<any> }>
+  @Prop() fetcher: ({ page: number }) => Promise<TCollectionData>
 
   @State() hasMore: boolean = true
   @State() page: number = 1
@@ -24,14 +24,16 @@ export class BearerScrollable {
     if (this.hasMore) {
       this.fetching = true
       this.fetcher({ page: this.page })
-        .then((data: { items: Array<any> }) => {
+        .then((data: TCollectionData) => {
+          console.log('[BEARER]', 'data receiced from fetcher', data)
           this.hasMore = data.items.length === this.perPage
           this.collection = [...this.collection, ...data.items]
           this.fetching = false
           this.page = this.page + 1
           return data
         })
-        .catch(() => {
+        .catch(error => {
+          console.error('[BEARER]', 'Error while fetching', error)
           this.fetching = false
         })
     }
