@@ -17,9 +17,19 @@ const IntentMapper = {
   [IntentType.GetResource]: GetResourceIntent
 }
 
-type TFetchResourceResult = { meta: { referenceId?: string }; data: Array<any> }
-type TFetchCollectionResult = { meta: { referenceId: string }; data: { [key: string]: any } }
-type TFetchBearerResult = TFetchResourceResult | TFetchCollectionResult
+export declare const BearerFetch: BearerFetch
+
+type TPayloadResource = { meta: { referenceId?: string }; data: any }
+type TPayloadCollection = { meta: { referenceId: string }; data: Array<any> }
+type TFetchBearerResult = TPayloadResource | TPayloadCollection
+
+export type TCollectionData = { items: Array<any>; referenceId?: string }
+export type TResourceData = { object: any; referenceId?: string }
+export type TFetchBearerData = TCollectionData | TResourceData
+
+export interface BearerFetch {
+  (...args: any[]): Promise<any>
+}
 
 interface IDecorator {
   (target: any, key: string): void
@@ -32,15 +42,9 @@ type BearerComponent = {
   referenceId: string
 }
 
-export interface BearerFetch {
-  (...args: any[]): Promise<any>
-}
-
-export declare const BearerFetch: BearerFetch
-
 export const BearerContext = 'bearerContext'
 export const setupId = 'setupId'
-export const IntentSaved = 'IntentSaved'
+export const IntentSaved = 'BearerStateSaved'
 
 /**
  * Intents
@@ -66,16 +70,8 @@ export function Intent(intentName: string, type: IntentType = IntentType.GetColl
         })
         const referenceId = retrieveReferenceId(this)
         const baseQuery = referenceId ? { referenceId } : {}
-
-        return IntentMapper[type](
-          intent.apply(null, [
-            {
-              ...params,
-              ...baseQuery
-            },
-            init
-          ])
-        )
+        const promise: Promise<TFetchBearerResult> = intent.apply(null, [{ ...params, ...baseQuery }, init])
+        return IntentMapper[type](promise)
       }
     }
 
@@ -87,7 +83,7 @@ export function Intent(intentName: string, type: IntentType = IntentType.GetColl
 // @SaveStateIntent() propertyName: BearerFetch
 // or
 // @SaveStateIntent(IntentType.GetResource ) propertyName: BearerFetch
-export function SaveStateIntent(type: IntentType = IntentType.GetCollection): IDecorator {
+export function SaveStateIntent(): IDecorator {
   return function(target: BearerComponent, key: string): void {
     const getter = (): BearerFetch => {
       return function(this: BearerComponent, params: { body?: any; [key: string]: any } = {}, init: Object = {}) {
@@ -104,20 +100,25 @@ export function SaveStateIntent(type: IntentType = IntentType.GetCollection): ID
         })
         const referenceId = retrieveReferenceId(this)
         const baseQuery = referenceId ? { referenceId } : {}
+        const promise: Promise<TFetchBearerResult> = intent.apply(null, [
+          { ...query, ...baseQuery },
+          { ...init, method: 'PUT', body: JSON.stringify(body) }
+        ])
 
         return new Promise((resolve, reject) => {
-          IntentMapper[type](
-            intent.apply(null, [{ ...query, ...baseQuery }, { ...init, method: 'PUT', body: JSON.stringify(body) }])
-          )
-            .then(() => {
-              resolve(arguments)
+          // It does not make sense to use collection here.
+          GetResourceIntent(promise)
+            .then((payload: any) => {
+              const event = new CustomEvent('BearerStateSaved', {})
+              document.querySelector('body').dispatchEvent(event)
               console.log('BEARER', this, target)
+              resolve(payload)
+              return payload
             })
             .catch(reject)
         })
       }
     }
-
     defineIntentProp(target, key, getter)
   }
 }
@@ -146,10 +147,11 @@ export function RetrieveStateIntent(type: IntentType = IntentType.GetCollection)
           scenarioId,
           [setupId]: retrieveSetupId(this)
         })
-
-        return IntentMapper[type](
-          intent.apply(null, [{ ...query, referenceId }, { ...init, method: 'PUT', body: JSON.stringify(body) }])
-        )
+        const promise: Promise<TFetchBearerResult> = intent.apply(null, [
+          { ...query, referenceId },
+          { ...init, method: 'PUT', body: JSON.stringify(body) }
+        ])
+        return IntentMapper[type](promise)
       }
     }
 
@@ -173,11 +175,12 @@ export function RetrieveStateIntent(type: IntentType = IntentType.GetCollection)
 // => do not perform if no referenceId
 // => pass setupId/scenarioId/integrationId/query params
 
-export function GetCollectionIntent(promise): Promise<any> {
+export function GetCollectionIntent(promise: Promise<TFetchBearerResult>): Promise<TCollectionData> {
   return new Promise((resolve, reject) => {
     promise
-      .then(({ data, collection }: { data: Array<any>; collection: Array<any> }) => {
-        resolve({ items: data || collection })
+      .then((payload: TPayloadCollection) => {
+        const { data, meta: { referenceId } = { referenceId: null } } = payload
+        resolve({ items: data, referenceId })
       })
       .catch(e => {
         reject({ items: [], err: e })
@@ -185,10 +188,11 @@ export function GetCollectionIntent(promise): Promise<any> {
   })
 }
 
-export function GetResourceIntent(promise): Promise<any> {
+export function GetResourceIntent(promise: Promise<TFetchBearerResult>): Promise<TResourceData> {
   return new Promise((resolve, reject) => {
     promise
-      .then(({ data, referenceId }: { data: any; referenceId?: string }) => {
+      .then((payload: TPayloadResource) => {
+        const { data, meta: { referenceId } = { referenceId: null } } = payload
         resolve({ object: data, referenceId })
       })
       .catch(e => {
