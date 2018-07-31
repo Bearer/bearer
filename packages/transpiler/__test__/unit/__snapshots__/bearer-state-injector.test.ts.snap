@@ -1,0 +1,61 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Bearer State Injector do not process match snapshot 1`] = `
+Object {
+  "file": "do-not-process.ts",
+  "postContent": "class DoNotProcess {
+    constructor() { }
+}
+",
+}
+`;
+
+exports[`Bearer State Injector do not rewatch propertyx match snapshot 1`] = `
+Object {
+  "file": "do-not-rewatch-property.tsx",
+  "postContent": "",
+}
+`;
+
+exports[`Bearer State Injector does not re add component lifecycle methodsx match snapshot 1`] = `
+Object {
+  "file": "does-not-re-add-component-lifecycle-methods.tsx",
+  "postContent": "",
+}
+`;
+
+exports[`Bearer State Injector ensure decorator injected match snapshot 1`] = `
+Object {
+  "file": "ensure-decorator-injected.ts",
+  "postContent": "import { BearerState, Watch, State } from '@bearer/core';
+class AddDecoratorOnTranspile {
+    @BearerState()
+    @State()
+    pullRequests: Array<any> = [];
+    constructor() { }
+    @Prop({ \\"context\\": \\"bearer\\" })
+    bearerContext: any;
+    @Watch(\\"pullRequests\\")
+    _notifyBearerStateHandler_pullRequests(newValue) { this.bearerContext.update(\\"pullRequests\\", newValue); }
+    componentWillLoad() { this.bearerContext.subscribe(this); }
+    componentDidUnload() { this.bearerContext.unsubscribe(this); }
+    bearerUpdateFromState = state => { this.pullRequests = state[\\"pullRequests\\"]; };
+}
+",
+}
+`;
+
+exports[`Bearer State Injector has bearer context presentx match snapshot 1`] = `
+Object {
+  "file": "has-bearer-context-present.tsx",
+  "postContent": "import { BearerState, Prop } from '@bearer/core';
+class HasBearerContextInjected {
+    @BearerState
+    attachPullRequests: any[] = [];
+    @Prop({ context: 'bearer' })
+    bearerContext: any;
+    constructor() { }
+}
+",
+}
+`;
