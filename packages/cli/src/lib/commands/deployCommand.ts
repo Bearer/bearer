@@ -25,7 +25,7 @@ const deploy = (emitter, config, locator: Locator) => async ({ viewsOnly = false
 
   try {
     await deployScenario(deployOptions, emitter, config, locator)
-    const setupUrl = `https://demo.bearer.tech/?scenarioUuid=${scenarioUuid}&scenarioTagName=${scenarioId}&name=${scenarioId}&orgId=${orgId}&stage=${BearerEnv}`
+    const setupUrl = `${config.DeveloperPortalUrl}scenarios/${config.scenarioUuid}/preview`
 
     emitter.emit('deploy:finished', {
       scenarioId,

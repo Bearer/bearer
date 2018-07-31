@@ -11,6 +11,7 @@ let setup = {
   IntegrationServiceHost: 'https://int.staging.bearer.sh/',
   IntegrationServiceUrl: 'https://int.staging.bearer.sh/api/v1/',
   DeveloperPortalAPIUrl: 'https://app.staging.bearer.sh/graphql',
+  DeveloperPortalUrl: 'https://app.staging.bearer.sh/',
   BearerEnv: 'staging'
 }
 
@@ -23,6 +24,7 @@ module.exports = () => {
       IntegrationServiceHost: 'https://int.dev.bearer.sh/',
       IntegrationServiceUrl: 'https://int.dev.bearer.sh/api/v1/',
       DeveloperPortalAPIUrl: 'https://app.staging.bearer.sh/graphql',
+      DeveloperPortalUrl: 'https://app.staging.bearer.sh/',
       BearerEnv: 'dev'
     }
   }
@@ -33,6 +35,7 @@ module.exports = () => {
       IntegrationServiceHost: 'https://int.bearer.sh/',
       IntegrationServiceUrl: 'https://int.bearer.sh/api/v1/',
       DeveloperPortalAPIUrl: 'https://app.bearer.sh/graphql',
+      DeveloperPortalUrl: 'https://app.bearer.sh/',
       BearerEnv: 'production'
     }
   }
