@@ -4,27 +4,49 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0">
+  <link href="https://cdn.rawgit.com/tabler/tabler/dev/dist/assets/css/tabler.css" rel="stylesheet" />
   <title>{{componentName}}</title>
   <script src="/build/{{componentTagName}}.js"></script>
-  <style>
-    body {
-      padding: 50px;
-    }
-
-    hr {
-      margin: 20px 0;
-    }
-  </style>
 </head>
 
 <body>
-  <h1>Action component</h1>
-  <{{componentTagName}} setup-id="CHANGE_ME">
-  </{{componentTagName}}>
-  <hr />
-  <h1>Display component</h1>
-  <{{componentTagName}}-display setup-id="CHANGE_ME">
-  </{{componentTagName}}-display>
+  <div class="page">
+    <div class="page-main">
+      <div class="header py-4">
+        <div class="container">
+          <div class="d-flex">
+            <a class="header-brand" href="#">
+              <img src="https://app.bearer.sh/static/media/logo.5b35e2ab.svg" class="header-brand-img" alt="Bearer Logo">
+            </a>
+            <div class="d-flex order-lg-2 ml-auto">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="my-3 my-md-5">
+        <div class="container">
+          <div class="page-header">
+            <h1 class="page-title">Action component</h1>
+          </div>
+          <div class="card">
+            <div class="card-body">
+              <{{componentTagName}} setup-id="CHANGE_ME">
+              </{{componentTagName}}>
+            </div>
+          </div>
+
+          <div class="page-header">
+            <h1 class="page-title">Display component</h1>
+          </div>
+          <div class="card">
+            <div class="card-body">
+              <{{componentTagName}}-display setup-id="CHANGE_ME">
+              </{{componentTagName}}-display>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 </body>
 
 </html>
