@@ -66,7 +66,7 @@ export class FullComponent {
 exports[`Transpiler integration test RootComponent.tsx match expectation 1`] = `
 Object {
   "file": "RootComponent.tsx",
-  "postContent": "import { Component, Intent, BearerFetch, IntentType, BearerState, Prop, Watch, State, Element } from '@bearer/core';
+  "postContent": "import { Intent, BearerFetch, IntentType, BearerState, Watch, State, Prop, Element, Component } from '@bearer/core';
 @Component({
     tag: \\"attach-pull-request-action\\",
     styleUrl: \\"AttachPullRequest.css\\",
@@ -136,7 +136,7 @@ export default {
 exports[`Transpiler integration test invalidRootComponent.tsx match expectation 1`] = `
 Object {
   "file": "invalidRootComponent.tsx",
-  "postContent": "import { Component, Intent, BearerFetch, IntentType, BearerState, Prop, Watch, State, Element } from '@bearer/core';
+  "postContent": "import { Intent, BearerFetch, IntentType, BearerState, Watch, State, Prop, Element, Component } from '@bearer/core';
 @Component({
     tag: \\"attach-pull-request-action\\",
     styleUrl: \\"AttachPullRequest.css\\",

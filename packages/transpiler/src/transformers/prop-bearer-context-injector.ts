@@ -28,12 +28,6 @@ type TransformerOptions = {
   verbose?: true
 }
 
-function injectContext(node: ts.ClassDeclaration): ts.Node {
-  const withContextProp = bearer.ensureBearerContextInjected(node)
-  const withSetupProp = bearer.addSetupIdProp(withContextProp)
-  return bearer.addComponentDidLoad(withSetupProp)
-}
-
 export default function ComponentTransformer({  }: TransformerOptions = {}): ts.TransformerFactory<ts.SourceFile> {
   return transformContext => {
     function visit(node: ts.Node): ts.VisitResult<ts.Node> {
@@ -44,7 +38,27 @@ export default function ComponentTransformer({  }: TransformerOptions = {}): ts.
     }
 
     return tsSourceFile => {
-      return visit(tsSourceFile) as ts.SourceFile
+      if (hasComponentDecorator(tsSourceFile)) {
+        return visit(bearer.ensurePropImported(tsSourceFile)) as ts.SourceFile
+      }
+      return tsSourceFile
     }
   }
+}
+
+function injectContext(node: ts.ClassDeclaration): ts.Node {
+  const withContextProp = bearer.ensureBearerContextInjected(node)
+  const withSetupProp = bearer.addSetupIdProp(withContextProp)
+  return bearer.addComponentDidLoad(withSetupProp)
+}
+
+function hasComponentDecorator(sourceFile: ts.SourceFile): boolean {
+  if (sourceFile.isDeclarationFile) {
+    return false
+  }
+
+  return ts.forEachChild(
+    sourceFile,
+    node => ts.isClassDeclaration(node) && hasDecoratorNamed(node, Decorators.Component)
+  )
 }

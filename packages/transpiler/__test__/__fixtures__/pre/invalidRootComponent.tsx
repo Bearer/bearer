@@ -1,4 +1,4 @@
-import { Component, Intent, BearerFetch, IntentType, BearerState } from '@bearer/core'
+import { RootComponent, Intent, BearerFetch, IntentType, BearerState } from '@bearer/core'
 
 @RootComponent({
   group: 'attach-pull-request',
