@@ -7,6 +7,7 @@ enum IntentNames {
   RetrieveState = 'RetrieveState',
   SaveState = 'SaveState'
 }
+
 export enum IntentType {
   GetCollection = 'GetCollection',
   GetResource = 'GetResource'
@@ -16,8 +17,6 @@ const IntentMapper = {
   [IntentType.GetCollection]: GetCollectionIntent,
   [IntentType.GetResource]: GetResourceIntent
 }
-
-export declare const BearerFetch: BearerFetch
 
 type TPayloadResource = { meta: { referenceId?: string }; data: any }
 type TPayloadCollection = { meta: { referenceId: string }; data: Array<any> }
@@ -40,11 +39,17 @@ type BearerComponent = {
   setupId: string
   SCENARIO_ID: string
   referenceId: string
+  el?: HTMLElement
 }
+
+/**
+ * Constants
+ */
 
 export const BearerContext = 'bearerContext'
 export const setupId = 'setupId'
 export const IntentSaved = 'BearerStateSaved'
+export const BearerStateSavedEvent = 'bearer:StateSaved'
 
 /**
  * Intents
@@ -79,6 +84,10 @@ export function Intent(intentName: string, type: IntentType = IntentType.GetColl
   }
 }
 
+type TEventPayload = {
+  referenceId: string
+  object: { referenceId: string; ReadAllowed: boolean; [key: string]: any }
+}
 // Usage
 // @SaveStateIntent() propertyName: BearerFetch
 // or
@@ -108,10 +117,10 @@ export function SaveStateIntent(): IDecorator {
         return new Promise((resolve, reject) => {
           // It does not make sense to use collection here.
           GetResourceIntent(promise)
-            .then((payload: any) => {
-              const event = new CustomEvent('BearerStateSaved', {})
-              document.querySelector('body').dispatchEvent(event)
-              console.log('BEARER', this, target)
+            .then((payload: TEventPayload) => {
+              if (this.el) {
+                this.el.dispatchEvent(new CustomEvent(BearerStateSavedEvent, { detail: payload }))
+              }
               resolve(payload)
               return payload
             })
