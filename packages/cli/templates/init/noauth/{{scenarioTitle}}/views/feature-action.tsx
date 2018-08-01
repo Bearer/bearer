@@ -7,7 +7,7 @@ import { Component } from '@bearer/core'
 import '@bearer/ui'
 
 @Component({
-  name: 'display',
+  name: 'action',
   group: 'feature'
 })
 export class FeatureAction {
