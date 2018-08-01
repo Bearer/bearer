@@ -13,9 +13,7 @@ type TransformerOptions = {
   verbose?: true
 }
 
-export default function ComponentTransformer({ verbose }: TransformerOptions = {}): ts.TransformerFactory<
-  ts.SourceFile
-> {
+export default function ComponentTransformer({  }: TransformerOptions = {}): ts.TransformerFactory<ts.SourceFile> {
   return transformContext => {
     function visit(node: ts.Node): ts.VisitResult<ts.Node> {
       // TODO: filter components which really need it

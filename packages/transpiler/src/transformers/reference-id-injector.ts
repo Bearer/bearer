@@ -7,9 +7,7 @@ type TransformerOptions = {
   verbose?: true
 }
 
-export default function BearerReferenceIdInjector({ verbose }: TransformerOptions = {}): ts.TransformerFactory<
-  ts.SourceFile
-> {
+export default function BearerReferenceIdInjector({  }: TransformerOptions = {}): ts.TransformerFactory<ts.SourceFile> {
   return transformContext => {
     return tsSourceFile => {
       if (!hasRetrieveOrSaveStateIntent(tsSourceFile)) {

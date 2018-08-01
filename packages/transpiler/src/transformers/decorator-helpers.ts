@@ -28,9 +28,3 @@ export function decoratorNamed(tsDecorator: ts.Decorator, name: string): boolean
     return ts.isCallExpression(node) && node.expression['escapedText'] === name
   })
 }
-
-export default {
-  name
-  // classDecoratedWithName,
-  // hasName,
-}

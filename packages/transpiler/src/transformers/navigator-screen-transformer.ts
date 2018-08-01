@@ -7,7 +7,7 @@ const NAVIGATOR_SCREEN_TAG_NAME = 'bearer-navigator-screen'
 type TransformerOptions = {
   verbose?: true
 }
-export default function PropImporter({ verbose }: TransformerOptions = {}): ts.TransformerFactory<ts.SourceFile> {
+export default function PropImporter({  }: TransformerOptions = {}): ts.TransformerFactory<ts.SourceFile> {
   function moveSlotToRenderFuncProp(jsxNode: ts.JsxElement): ts.JsxSelfClosingElement {
     return ts.createJsxSelfClosingElement(
       jsxNode.openingElement.tagName,

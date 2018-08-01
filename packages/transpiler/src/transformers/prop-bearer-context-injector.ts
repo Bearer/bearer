@@ -34,9 +34,7 @@ function injectContext(node: ts.ClassDeclaration): ts.Node {
   return bearer.addComponentDidLoad(withSetupProp)
 }
 
-export default function ComponentTransformer({ verbose }: TransformerOptions = {}): ts.TransformerFactory<
-  ts.SourceFile
-> {
+export default function ComponentTransformer({  }: TransformerOptions = {}): ts.TransformerFactory<ts.SourceFile> {
   return transformContext => {
     function visit(node: ts.Node): ts.VisitResult<ts.Node> {
       if (ts.isClassDeclaration(node) && hasDecoratorNamed(node, Decorators.Component)) {

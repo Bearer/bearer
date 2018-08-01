@@ -19,9 +19,7 @@ type TransformerOptions = {
 
 const state = ts.createIdentifier('state')
 
-export default function BearerStateInjector({ verbose }: TransformerOptions = {}): ts.TransformerFactory<
-  ts.SourceFile
-> {
+export default function BearerStateInjector({  }: TransformerOptions = {}): ts.TransformerFactory<ts.SourceFile> {
   return transformContext => {
     return tsSourceFile => {
       if (!hasBearerStateDecorator(tsSourceFile)) {

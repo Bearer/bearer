@@ -1,7 +1,6 @@
 import * as ts from 'typescript'
 import * as fs from 'fs-extra'
 import * as path from 'path'
-import * as chokidar from 'chokidar'
 import { getSourceCode } from './utils'
 import ReplaceIntentDecorators from './transformers/replace-intent-decorator'
 import BearerScenarioIdInjector from './transformers/scenario-id-accessor-injector'
@@ -188,8 +187,8 @@ type TransformerOptions = {
 }
 
 function dumpSourceCode(srcDirectory, buildDirectory) {
-  return function storeOutput({ verbose }: TransformerOptions = {}): ts.TransformerFactory<ts.SourceFile> {
-    return transformContext => {
+  return function storeOutput({  }: TransformerOptions = {}): ts.TransformerFactory<ts.SourceFile> {
+    return _transformContext => {
       return tsSourceFile => {
         let outPath = tsSourceFile.fileName
           .replace(srcDirectory, buildDirectory)

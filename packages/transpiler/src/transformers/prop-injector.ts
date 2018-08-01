@@ -13,15 +13,7 @@ type TransformerOptions = {
   verbose?: true
 }
 
-export default function ComponentTransformer({ verbose }: TransformerOptions = {}): ts.TransformerFactory<
-  ts.SourceFile
-> {
-  function log(...args) {
-    if (verbose) {
-      console.log.apply(this, args)
-    }
-  }
-
+export default function ComponentTransformer({  }: TransformerOptions = {}): ts.TransformerFactory<ts.SourceFile> {
   return transformContext => {
     function visit(node: ts.Node): ts.VisitResult<ts.Node> {
       if (ts.isClassDeclaration(node) && hasDecoratorNamed(node, Decorators.Component)) {

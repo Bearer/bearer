@@ -12,7 +12,7 @@ import { Decorators } from './constants'
 type TransformerOptions = {
   verbose?: true
 }
-export default function PropImporter({ verbose }: TransformerOptions = {}): ts.TransformerFactory<ts.SourceFile> {
+export default function PropImporter({  }: TransformerOptions = {}): ts.TransformerFactory<ts.SourceFile> {
   return _transformContext => {
     return tsSourceFile => {
       if (hasImport(tsSourceFile, Decorators.Component) && !hasImport(tsSourceFile, Decorators.Prop)) {

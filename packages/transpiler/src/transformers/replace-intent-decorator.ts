@@ -57,9 +57,7 @@ function classHasConstructor(node: ts.Node): boolean {
   return has
 }
 
-export default function ComponentTransformer({ verbose }: TransformerOptions = {}): ts.TransformerFactory<
-  ts.SourceFile
-> {
+export default function ComponentTransformer({  }: TransformerOptions = {}): ts.TransformerFactory<ts.SourceFile> {
   return transformContext => {
     // create constructor if it does not exist
     // append Intent call within constructor
