@@ -22,6 +22,7 @@ export class BearerPopoverNavigator {
   @Listen('scenarioCompleted')
   scenarioCompletedHandler() {
     this.screenData = {}
+    this.isVisible = false
     this.visibleScreen = this.hasAuthScreen() ? 1 : 0
     this.el.shadowRoot.querySelector('#button')['toggle'](false)
   }
