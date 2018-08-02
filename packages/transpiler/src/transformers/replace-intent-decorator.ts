@@ -13,6 +13,9 @@
  *    Intent('aName', IntentType.GetResource)(this, fetcher)
  *  }
  * }
+ *
+ * why:
+ *  By doing this we allow our Decorator to have access to the component instance instead of the prototype
  */
 import * as ts from 'typescript'
 import { hasDecoratorNamed } from './decorator-helpers'
