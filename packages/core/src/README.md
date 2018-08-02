@@ -17,11 +17,7 @@ class MyComponent {
   @Intent('getPullRequest') getPullRequests: BearerFetch
 
   render() {
-    return (
-      <component-which-need-collection-fetcher
-        fetcher={this.collectionFetcher}
-      />
-    )
+    return <component-which-need-collection-fetcher fetcher={this.collectionFetcher} />
   }
 }
 ```
@@ -40,21 +36,20 @@ class MyComponent {
   @Intent('getPullRequests') getCollection: BearerFetch
 
   // You can specify the returned type with IntentType.GetResource
-  @Intent('getRepository', IntentType.GetResource)
-  getAResource: BearerFetch
+  @Intent('getRepository') getAResource: BearerFetch
 
   collection: any
   data: any
 
   componentDidLoad() {
     // Intent accept parameters added to the fetch query
-    this.getAResource({ id: '42' }).then(({ object }) => {
+    this.getAResource({ id: '42' }).then(({ data }) => {
       // Promise is resolve with { object }: { object: Object}
       this.data = object
     })
-    this.getCollection({ page: 2 }).then(({ items }) => {
+    this.getCollection({ page: 2 }).then(({ data }) => {
       // Promise is resolve with { items } : { items: Array<any>}
-      this.collection = items
+      this.collection = data
     })
   }
 

@@ -22,8 +22,8 @@ type TPayloadResource = { meta: { referenceId?: string }; data: any }
 type TPayloadCollection = { meta: { referenceId: string }; data: Array<any> }
 type TFetchBearerResult = TPayloadResource | TPayloadCollection
 
-export type TCollectionData = { items: Array<any>; referenceId?: string }
-export type TResourceData = { object: any; referenceId?: string }
+export type TCollectionData = { data: Array<any>; referenceId?: string }
+export type TResourceData = { data: any; referenceId?: string }
 export type TFetchBearerData = TCollectionData | TResourceData
 
 export interface BearerFetch {
@@ -86,7 +86,7 @@ export function Intent(intentName: string, type: IntentType = IntentType.GetColl
 
 type TEventPayload = {
   referenceId: string
-  object: { referenceId: string; ReadAllowed: boolean; [key: string]: any }
+  data: { referenceId: string; ReadAllowed: boolean; [key: string]: any }
 }
 // Usage
 // @SaveStateIntent() propertyName: BearerFetch
@@ -189,10 +189,10 @@ export function GetCollectionIntent(promise: Promise<TFetchBearerResult>): Promi
     promise
       .then((payload: TPayloadCollection) => {
         const { data, meta: { referenceId } = { referenceId: null } } = payload
-        resolve({ items: data, referenceId })
+        resolve({ data, referenceId })
       })
       .catch(e => {
-        reject({ items: [], err: e })
+        reject({ data: [], err: e })
       })
   })
 }
@@ -202,10 +202,10 @@ export function GetResourceIntent(promise: Promise<TFetchBearerResult>): Promise
     promise
       .then((payload: TPayloadResource) => {
         const { data, meta: { referenceId } = { referenceId: null } } = payload
-        resolve({ object: data, referenceId })
+        resolve({ data, referenceId })
       })
       .catch(e => {
-        reject({ object: null, err: e })
+        reject({ data: null, err: e })
       })
   })
 }
