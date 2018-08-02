@@ -9,13 +9,10 @@ enum IntentNames {
 }
 
 export enum IntentType {
+  RetrieveState = 'RetrieveState',
+  SaveState = 'SaveState',
   GetCollection = 'GetCollection',
   GetResource = 'GetResource'
-}
-
-const IntentMapper = {
-  [IntentType.GetCollection]: GetCollectionIntent,
-  [IntentType.GetResource]: GetResourceIntent
 }
 
 type TPayloadResource = { meta: { referenceId?: string }; data: any }
@@ -76,7 +73,7 @@ export function Intent(intentName: string, type: IntentType = IntentType.GetColl
         const referenceId = retrieveReferenceId(this)
         const baseQuery = referenceId ? { referenceId } : {}
         const promise: Promise<TFetchBearerResult> = intent.apply(null, [{ ...params, ...baseQuery }, init])
-        return IntentMapper[type](promise)
+        return IntentPromise(promise)
       }
     }
 
@@ -116,7 +113,7 @@ export function SaveStateIntent(): IDecorator {
 
         return new Promise((resolve, reject) => {
           // It does not make sense to use collection here.
-          GetResourceIntent(promise)
+          IntentPromise(promise)
             .then((payload: TEventPayload) => {
               if (this.el) {
                 this.el.dispatchEvent(new CustomEvent(BearerStateSavedEvent, { detail: payload }))
@@ -160,7 +157,7 @@ export function RetrieveStateIntent(type: IntentType = IntentType.GetCollection)
           { ...query, referenceId },
           { ...init, method: 'PUT', body: JSON.stringify(body) }
         ])
-        return IntentMapper[type](promise)
+        return IntentPromise(promise)
       }
     }
 
@@ -184,7 +181,7 @@ export function RetrieveStateIntent(type: IntentType = IntentType.GetCollection)
 // => do not perform if no referenceId
 // => pass setupId/scenarioId/integrationId/query params
 
-export function GetCollectionIntent(promise: Promise<TFetchBearerResult>): Promise<TCollectionData> {
+export function IntentPromise(promise: Promise<TFetchBearerResult>): Promise<TFetchBearerData> {
   return new Promise((resolve, reject) => {
     promise
       .then((payload: TPayloadCollection) => {
@@ -193,19 +190,6 @@ export function GetCollectionIntent(promise: Promise<TFetchBearerResult>): Promi
       })
       .catch(e => {
         reject({ data: [], err: e })
-      })
-  })
-}
-
-export function GetResourceIntent(promise: Promise<TFetchBearerResult>): Promise<TResourceData> {
-  return new Promise((resolve, reject) => {
-    promise
-      .then((payload: TPayloadResource) => {
-        const { data, meta: { referenceId } = { referenceId: null } } = payload
-        resolve({ data, referenceId })
-      })
-      .catch(e => {
-        reject({ data: null, err: e })
       })
   })
 }
