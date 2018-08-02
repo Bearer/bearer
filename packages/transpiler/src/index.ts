@@ -128,13 +128,13 @@ export default class Transpiler {
     return {
       before: [
         RootComponentTransformer({ verbose }),
+        BearerReferenceIdInjector({ verbose }),
         ReplaceIntentDecorators({ verbose }),
         BearerScenarioIdInjector({ verbose }),
         PropImporter({ verbose }),
         PropInjector({ verbose }),
         PropBearerContextInjector({ verbose }),
         BearerStateInjector({ verbose }),
-        BearerReferenceIdInjector({ verbose }),
         NavigatorScreenTransformer({ verbose }),
         ImportsImporter({ verbose }),
         dumpSourceCode(this.VIEWS_DIRECTORY, this.BUILD_SCR_DIRECTORY)({

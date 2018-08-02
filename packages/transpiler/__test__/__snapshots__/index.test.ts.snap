@@ -3,7 +3,7 @@
 exports[`Transpiler integration test FullComponent.tsx match expectation 1`] = `
 Object {
   "file": "FullComponent.tsx",
-  "postContent": "import { Component, Intent, BearerFetch, IntentType, BearerState, Prop, Watch, State, Element } from '@bearer/core';
+  "postContent": "import { Component, Intent, BearerFetch, IntentType, BearerState, Prop, Element, Watch, State } from '@bearer/core';
 @Component({
     tag: 'full-component'
 })
@@ -36,6 +36,10 @@ export class FullComponent {
         {this.screenRenderer()}
       </bearer-navigator>);
     }
+    @Prop()
+    referenceId: string;
+    @Element()
+    el: HTMLElement;
     constructor() { Intent('ListRepositories')(this, \\"fetcher\\"); Intent('getPullRequest', IntentType.GetResource)(this, \\"fetchResource\\"); }
     get SCENARIO_ID() { return \\"SPONGE_BOB\\"; }
     @Prop()
@@ -54,10 +58,6 @@ export class FullComponent {
     componentWillLoad() { this.bearerContext.subscribe(this); }
     componentDidUnload() { this.bearerContext.unsubscribe(this); }
     bearerUpdateFromState = state => { this.attachedPullRequests = state[\\"attachedPullRequests\\"]; this.ducks = state['goats']; };
-    @Prop()
-    referenceId: string;
-    @Element()
-    el: HTMLElement;
 }
 ",
 }
@@ -66,7 +66,7 @@ export class FullComponent {
 exports[`Transpiler integration test RootComponent.tsx match expectation 1`] = `
 Object {
   "file": "RootComponent.tsx",
-  "postContent": "import { Intent, BearerFetch, IntentType, BearerState, Prop, Watch, State, Element, Component } from '@bearer/core';
+  "postContent": "import { Intent, BearerFetch, IntentType, BearerState, Prop, Element, Watch, State, Component } from '@bearer/core';
 @Component({
     tag: \\"attach-pull-request-action\\",
     styleUrl: \\"AttachPullRequest.css\\",
@@ -86,6 +86,10 @@ export class AttachPullRequestAction {
     render() {
         return <bearer-scrollable fetcher={this.fetcher}/>;
     }
+    @Prop()
+    referenceId: string;
+    @Element()
+    el: HTMLElement;
     constructor() { Intent('ListRepositories')(this, \\"fetcher\\"); Intent('getPullRequest', IntentType.GetResource)(this, \\"fetchResource\\"); }
     get SCENARIO_ID() { return \\"SPONGE_BOB\\"; }
     @Prop()
@@ -104,10 +108,6 @@ export class AttachPullRequestAction {
     componentWillLoad() { this.bearerContext.subscribe(this); }
     componentDidUnload() { this.bearerContext.unsubscribe(this); }
     bearerUpdateFromState = state => { this.attachedPullRequests = state[\\"attachedPullRequests\\"]; this.ducks = state['goats']; };
-    @Prop()
-    referenceId: string;
-    @Element()
-    el: HTMLElement;
 }
 ",
 }
@@ -136,7 +136,7 @@ export default {
 exports[`Transpiler integration test invalidRootComponent.tsx match expectation 1`] = `
 Object {
   "file": "invalidRootComponent.tsx",
-  "postContent": "import { Intent, BearerFetch, IntentType, BearerState, Prop, Watch, State, Element, Component } from '@bearer/core';
+  "postContent": "import { Intent, BearerFetch, IntentType, BearerState, Prop, Element, Watch, State, Component } from '@bearer/core';
 @Component({
     tag: \\"attach-pull-request-action\\",
     styleUrl: \\"AttachPullRequest.css\\",
@@ -156,6 +156,10 @@ export class AttachPullRequestAction {
     render() {
         return <bearer-scrollable fetcher={this.fetcher}/>;
     }
+    @Prop()
+    referenceId: string;
+    @Element()
+    el: HTMLElement;
     constructor() { Intent('ListRepositories')(this, \\"fetcher\\"); Intent('getPullRequest', IntentType.GetResource)(this, \\"fetchResource\\"); }
     get SCENARIO_ID() { return \\"SPONGE_BOB\\"; }
     @Prop()
@@ -174,10 +178,6 @@ export class AttachPullRequestAction {
     componentWillLoad() { this.bearerContext.subscribe(this); }
     componentDidUnload() { this.bearerContext.unsubscribe(this); }
     bearerUpdateFromState = state => { this.attachedPullRequests = state[\\"attachedPullRequests\\"]; this.ducks = state['goats']; };
-    @Prop()
-    referenceId: string;
-    @Element()
-    el: HTMLElement;
 }
 ",
 }

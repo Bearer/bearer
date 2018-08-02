@@ -7,11 +7,11 @@ Object {
 class AddHTMLElementReference {
     @SaveStateIntent()
     fetcher: BearerFetch;
-    constructor() { }
     @Prop()
     referenceId: string;
     @Element()
     el: HTMLElement;
+    constructor() { }
 }
 ",
 }
@@ -26,10 +26,10 @@ class AddHTMLElementReference {
     element: HTMLElement;
     @SaveStateIntent()
     fetcher: BearerFetch;
-    constructor() { }
     @Prop()
     referenceId: string;
     get el(): HTMLElement { return this.element; }
+    constructor() { }
 }
 ",
 }
@@ -54,9 +54,9 @@ class AddHTMLElementReference {
     el: HTMLElement;
     @SaveStateIntent()
     fetcher: BearerFetch;
-    constructor() { }
     @Prop()
     referenceId: string;
+    constructor() { }
 }
 ",
 }
