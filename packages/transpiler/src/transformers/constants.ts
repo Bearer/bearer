@@ -24,7 +24,10 @@ export const Module = {
 }
 
 export const Types = {
-  HTMLElement: 'HTMLElement'
+  HTMLElement: 'HTMLElement',
+  IntentType: 'IntentType',
+  SaveState: 'SaveState',
+  RetrieveState: 'RetrieveState'
 }
 
 export const Properties = {

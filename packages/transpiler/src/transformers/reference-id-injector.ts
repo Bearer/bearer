@@ -1,5 +1,5 @@
 import * as ts from 'typescript'
-import { hasPropDecoratedWithName, propDecoratedWithName } from './decorator-helpers'
+import { hasPropDecoratedWithName, propDecoratedWithName, decoratorNamed } from './decorator-helpers'
 import { ensurePropImported, propDecorator, elementDecorator, ensureElementImported } from './bearer'
 import { Decorators, Types, Properties } from './constants'
 
@@ -106,12 +106,33 @@ function hasRetrieveOrSaveStateIntent(tsSourceFile: ts.SourceFile): boolean {
     tsSourceFile,
     (node): boolean => {
       if (ts.isClassDeclaration(node)) {
-        return (
-          hasPropDecoratedWithName(node, Decorators.RetrieveStateIntent) ||
-          hasPropDecoratedWithName(node, Decorators.SaveStateIntent)
-        )
+        return hasDeprecatedStateDecorator(node) || hasIntentWithStateTypeDecorator(node)
       }
       return false
     }
+  )
+}
+
+function hasIntentWithStateTypeDecorator(classNode: ts.ClassDeclaration): boolean {
+  const properties = propDecoratedWithName(classNode, Decorators.Intent)
+
+  return properties.reduce((has, prop) => {
+    const decorator = prop.decorators.find(deco => decoratorNamed(deco, Decorators.Intent))
+    if (!decorator || !ts.isCallExpression(decorator.expression)) {
+      return has
+    }
+    const intentType = (decorator.expression as ts.CallExpression).arguments[1] as ts.PropertyAccessExpression
+    const hasWisthState =
+      intentType &&
+      intentType.expression.getText() === Types.IntentType &&
+      (intentType.name.getText() === Types.RetrieveState || intentType.name.getText() === Types.SaveState)
+    return has || hasWisthState
+  }, false)
+}
+
+function hasDeprecatedStateDecorator(classNode: ts.ClassDeclaration): boolean {
+  return (
+    hasPropDecoratedWithName(classNode, Decorators.RetrieveStateIntent) ||
+    hasPropDecoratedWithName(classNode, Decorators.SaveStateIntent)
   )
 }
