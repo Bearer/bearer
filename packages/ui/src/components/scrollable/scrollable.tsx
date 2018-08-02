@@ -24,10 +24,10 @@ export class BearerScrollable {
     if (this.hasMore) {
       this.fetching = true
       this.fetcher({ page: this.page })
-        .then((data: TCollectionData) => {
+        .then(({ data }: TCollectionData) => {
           console.log('[BEARER]', 'data receiced from fetcher', data)
-          this.hasMore = data.items.length === this.perPage
-          this.collection = [...this.collection, ...data.items]
+          this.hasMore = data.length === this.perPage
+          this.collection = [...this.collection, ...data]
           this.fetching = false
           this.page = this.page + 1
           return data

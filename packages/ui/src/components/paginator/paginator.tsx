@@ -24,8 +24,8 @@ export class BearerPaginator {
     if (!this.collection[itemMaybeIndex]) {
       this.fetching = true
       this.fetcher({ page: this.currentPage })
-        .then(({ items }: TCollectionData) => {
-          this.collection = [...this.collection, ...items]
+        .then(({ data }: TCollectionData) => {
+          this.collection = [...this.collection, ...data]
           this.fetching = false
         })
         .catch(e => {
