@@ -14,7 +14,7 @@ export class Intent {
     }
   }
 
-  static getObject(callback, { object, error }: { object?: any; error?: any }) {
+  static getResource(callback, { object, error }: { object?: any; error?: any }) {
     if (object) {
       sendSuccessMessage(callback, { data: object })
     } else {
@@ -28,7 +28,7 @@ class BaseIntent {
     throw new Error('Extending class needs to implement `static intent(action)` method')
   }
 
-  static intent(action): (event: any, context: any, callback: (...args: any[]) => any) => any {
+  static intent(_action): (event: any, context: any, callback: (...args: any[]) => any) => any {
     throw new Error('Extending class needs to implement `static intent(action)` method')
   }
 }
@@ -142,15 +142,15 @@ export class GetCollection extends GenericIntentBase {
   }
 }
 
-export class GetObject extends GenericIntentBase {
+export class GetResource extends GenericIntentBase {
   static get display() {
-    return 'GetObject'
+    return 'GetResource'
   }
 
   static intent(action) {
     return (event, _context, lambdaCallback) =>
       action(event.context, event.queryStringParameters, result => {
-        Intent.getObject(lambdaCallback, result)
+        Intent.getResource(lambdaCallback, result)
       })
   }
 }
