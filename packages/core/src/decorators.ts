@@ -55,6 +55,7 @@ export enum BearerRootComponentRoleEnum {
 export interface BearerRootComponentOptions extends Omit<d.ComponentOptions, 'tag'> {
   group: string
   name: 'display' | 'action'
+  shadow?: boolean
 }
 
 export interface IBearerRootComponentDecorator<T> {
