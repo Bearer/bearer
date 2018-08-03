@@ -1,7 +1,7 @@
 import * as ts from 'typescript'
 import * as Case from 'case'
 import { Decorators } from './constants'
-import { hasDecoratorNamed, decoratorNamed } from './decorator-helpers'
+import { hasDecoratorNamed, decoratorNamed, getExpressionFromDecorator } from './decorator-helpers'
 import { TransformerOptions } from '../types'
 
 export default function RootComponentTransformer({ metadata }: TransformerOptions = {}): ts.TransformerFactory<
@@ -14,6 +14,7 @@ export default function RootComponentTransformer({ metadata }: TransformerOption
           if (decoratorNamed(decorator, Decorators.RootComponent)) {
             const metadatum = metadata.components.find(component => component.classname === node.name.text)
             const cssFileName = Case.pascal(metadatum.group)
+            const shadowExp = getExpressionFromDecorator<ts.BooleanLiteral>(decorator, 'shadow')
             return ts.updateDecorator(
               decorator,
               ts.createCall(ts.createIdentifier(Decorators.Component), undefined, [
@@ -21,7 +22,7 @@ export default function RootComponentTransformer({ metadata }: TransformerOption
                   [
                     ts.createPropertyAssignment('tag', ts.createStringLiteral(metadatum.initialTagName)),
                     ts.createPropertyAssignment('styleUrl', ts.createStringLiteral(cssFileName + '.css')),
-                    ts.createPropertyAssignment('shadow', ts.createTrue())
+                    ts.createPropertyAssignment('shadow', shadowExp || ts.createTrue())
                   ],
                   true
                 )

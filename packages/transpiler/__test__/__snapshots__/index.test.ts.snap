@@ -140,7 +140,7 @@ Object {
 @Component({
     tag: \\"attach-pull-request-display\\",
     styleUrl: \\"AttachPullRequest.css\\",
-    shadow: true
+    shadow: false
 })
 export class AttachPullRequestDisplay {
     private fetcher: BearerFetch;
