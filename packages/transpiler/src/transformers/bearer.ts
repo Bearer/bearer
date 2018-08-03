@@ -1,5 +1,5 @@
 import * as ts from 'typescript'
-import { Decorators, Component, Module } from './constants'
+import { Decorators, Component, Module } from '../constants'
 // @Prop() BEARER_ID: string;
 export function addBearerIdProp(classNode: ts.ClassDeclaration): ts.ClassDeclaration {
   return ts.updateClassDeclaration(

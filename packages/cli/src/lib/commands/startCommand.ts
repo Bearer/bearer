@@ -1,6 +1,5 @@
 const path = require('path')
 const fs = require('fs-extra')
-
 const copy = require('copy-template-dir')
 const Case = require('case')
 const chokidar = require('chokidar')
@@ -114,7 +113,7 @@ export function prepare(emitter, config, locator: Locator) {
 
       if (install) {
         emitter.emit('start:prepare:installingDependencies')
-        execSync('yarn install', { cwd: scenarioRoot })
+        execSync(`${config.command} install`, { cwd: scenarioRoot })
       }
 
       return {
@@ -180,11 +179,11 @@ export const start = (emitter, config, locator: Locator) => async ({ open, insta
       bearerTranspiler.on('message', ({ event }) => {
         if (event === 'transpiler:initialized') {
           /* Start stencil */
-          const args = ['start']
+          const args = config.isYarnInstalled ? ['start'] : ['run', 'start']
           if (!open) {
             args.push('--no-open')
           }
-          const stencil = spawn('yarn', args, {
+          const stencil = spawn(config.command, args, {
             cwd: buildViewsDir,
             env: {
               ...process.env,

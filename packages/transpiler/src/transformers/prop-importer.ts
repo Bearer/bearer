@@ -8,7 +8,7 @@
 import * as ts from 'typescript'
 
 import { ensurePropImported, hasImport } from './bearer'
-import { Decorators } from './constants'
+import { Decorators } from '../constants'
 import { TransformerOptions } from '../types'
 
 export default function PropImporter({  }: TransformerOptions = {}): ts.TransformerFactory<ts.SourceFile> {

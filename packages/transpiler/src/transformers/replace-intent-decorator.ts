@@ -18,8 +18,8 @@
  *  By doing this we allow our Decorator to have access to the component instance instead of the prototype
  */
 import * as ts from 'typescript'
-import { hasDecoratorNamed } from './decorator-helpers'
-import { Decorators } from './constants'
+import { hasDecoratorNamed } from '../helpers/decorator-helpers'
+import { Decorators } from '../constants'
 import { TransformerOptions } from '../types'
 
 function appendConstructor(node: ts.ClassDeclaration): ts.Node {
@@ -45,16 +45,10 @@ function appendConstructor(node: ts.ClassDeclaration): ts.Node {
   )
 }
 
-function classHasConstructor(node: ts.Node): boolean {
-  let has = false
-  function visit(node: ts.Node) {
-    if (ts.isConstructorDeclaration(node)) {
-      has = true
-    }
-    ts.forEachChild(node, visit)
-  }
-  visit(node)
-  return has
+function classHasConstructor(classNode: ts.ClassDeclaration): boolean {
+  return ts.forEachChild(classNode, aNode => {
+    return ts.isConstructorDeclaration(aNode)
+  })
 }
 
 export default function ComponentTransformer({  }: TransformerOptions = {}): ts.TransformerFactory<ts.SourceFile> {

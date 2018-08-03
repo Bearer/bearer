@@ -5,6 +5,7 @@ const os = require('os')
 const fs = require('fs')
 const ini = require('ini')
 const path = require('path')
+const { spawnSync } = require('child_process')
 
 let setup = {
   DeploymentUrl: 'https://developer.staging.bearer.sh/v1/',
@@ -39,6 +40,9 @@ module.exports = () => {
       BearerEnv: 'production'
     }
   }
+
+  setup.isYarnInstalled = !!spawnSync('yarn', ['bin']).output
+  setup.command = setup.isYarnInstalled ? 'yarn' : 'npm'
 
   return {
     ...setup,

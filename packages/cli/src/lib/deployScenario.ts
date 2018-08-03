@@ -27,7 +27,7 @@ export function buildIntents(emitter, config, locator: LocationProvider) {
     try {
       emitter.emit('intents:installingDependencies')
       // TODOs: use root node modules
-      await execPromise('yarn install', { cwd: intentsDirectory })
+      await execPromise(`${config.command} install`, { cwd: intentsDirectory })
 
       const scenarioArtifact = locator.intentsArtifactResourcePath(`${scenarioUuid}.zip`)
       const output = fs.createWriteStream(scenarioArtifact)
@@ -88,7 +88,7 @@ export function deployViews(emitter, config, locator: LocationProvider) {
       await execPromise('bearer generate --setup', { cwd: buildDirectory })
 
       emitter.emit('views:buildingDist')
-      await execPromise('yarn build', {
+      await execPromise(`${config.command} build`, {
         cwd: buildDirectory,
         env: {
           BEARER_SCENARIO_ID: scenarioUuid,

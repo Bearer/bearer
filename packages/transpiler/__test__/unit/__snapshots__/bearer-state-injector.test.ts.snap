@@ -18,19 +18,19 @@ class UpdateExistingPropertyWatcher {
     @BearerState()
     @State()
     pullRequests: Array<any> = [];
-    // TODO: handle this use case
-    @Watch('pullRequests')
-    pullRequestsChangeHandler(newValue, oldValue) {
-        console.log('Prepend stuff');
-    }
+    @BearerState({ statePropName: 'repo' })
+    @State()
+    repository: {} = {};
     constructor() { }
     @Prop({ \\"context\\": \\"bearer\\" })
     bearerContext: any;
-    @Watch(\\"pullRequests\\")
-    _notifyBearerStateHandler_pullRequests(newValue) { this.bearerContext.update(\\"pullRequests\\", newValue); }
+    @Watch('pullRequests')
+    pullRequestsChangeHandler(newPullRequest: Array<any>, oldValue: any[]) { this.bearerContext.update(\\"pullRequests\\", newPullRequest); console.log('Prepend stuff'); }
+    @Watch(\\"repository\\")
+    _notifyBearerStateHandler_repository(newValue: any) { this.bearerContext.update('repo', newValue); }
     componentWillLoad() { this.bearerContext.subscribe(this); }
     componentDidUnload() { this.bearerContext.unsubscribe(this); }
-    bearerUpdateFromState = state => { this.pullRequests = state[\\"pullRequests\\"]; };
+    bearerUpdateFromState = state => { this.pullRequests = state[\\"pullRequests\\"]; this.repository = state['repo']; };
 }
 ",
 }
@@ -45,19 +45,13 @@ class UpdateExistingComponentLifecycleMethods {
     @State()
     pullRequests: Array<any> = [];
     // TODO: handle these use cases
-    componentWillLoad() {
-        console.log('componentWillLoad');
-    }
-    componentDidUnload() {
-        console.log('componentDidUnload');
-    }
+    componentWillLoad() { this.bearerContext.subscribe(this); console.log('componentWillLoad'); }
+    componentDidUnload() { this.bearerContext.unsubscribe(this); console.log('componentDidUnload'); }
     constructor() { }
     @Prop({ \\"context\\": \\"bearer\\" })
     bearerContext: any;
     @Watch(\\"pullRequests\\")
-    _notifyBearerStateHandler_pullRequests(newValue) { this.bearerContext.update(\\"pullRequests\\", newValue); }
-    componentWillLoad() { this.bearerContext.subscribe(this); }
-    componentDidUnload() { this.bearerContext.unsubscribe(this); }
+    _notifyBearerStateHandler_pullRequests(newValue: any) { this.bearerContext.update(\\"pullRequests\\", newValue); }
     bearerUpdateFromState = state => { this.pullRequests = state[\\"pullRequests\\"]; };
 }
 ",
@@ -76,7 +70,7 @@ class AddDecoratorOnTranspile {
     @Prop({ \\"context\\": \\"bearer\\" })
     bearerContext: any;
     @Watch(\\"pullRequests\\")
-    _notifyBearerStateHandler_pullRequests(newValue) { this.bearerContext.update(\\"pullRequests\\", newValue); }
+    _notifyBearerStateHandler_pullRequests(newValue: any) { this.bearerContext.update(\\"pullRequests\\", newValue); }
     componentWillLoad() { this.bearerContext.subscribe(this); }
     componentDidUnload() { this.bearerContext.unsubscribe(this); }
     bearerUpdateFromState = state => { this.pullRequests = state[\\"pullRequests\\"]; };

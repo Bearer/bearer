@@ -5,9 +5,9 @@
  */
 import * as ts from 'typescript'
 
-import { hasDecoratorNamed } from './decorator-helpers'
+import { hasDecoratorNamed } from '../helpers/decorator-helpers'
 import bearer from './bearer'
-import { Decorators } from './constants'
+import { Decorators } from '../constants'
 import { TransformerOptions } from '../types'
 
 export default function ComponentTransformer({  }: TransformerOptions = {}): ts.TransformerFactory<ts.SourceFile> {

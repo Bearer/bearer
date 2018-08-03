@@ -1,11 +1,14 @@
 import { BearerState, Watch } from '@bearer/core'
 
 class UpdateExistingPropertyWatcher {
-  @BearerState() pullRequests: Array<any> = []
+  @BearerState()
+  pullRequests: Array<any> = []
 
-  // TODO: handle this use case
+  @BearerState({ statePropName: 'repo' })
+  repository: {} = {}
+
   @Watch('pullRequests')
-  pullRequestsChangeHandler(newValue, oldValue) {
+  pullRequestsChangeHandler(newPullRequest: Array<any>, oldValue: any[]) {
     console.log('Prepend stuff')
   }
 }
