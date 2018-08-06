@@ -18,7 +18,5 @@
       "label": "Client Secret",
       "controlName": "clientSecret"
     }
-  ],
-  "configViews": [
   ]
 }
