@@ -37,7 +37,7 @@ const configs: Record<BearerEnv, BaseConfig> = {
 }
 
 export default (): Config => {
-  const { BEARER_ENV = 'staging' } = process.env
+  const { BEARER_ENV = 'production' } = process.env
   const setup: BaseConfig = configs[BEARER_ENV]
 
   const isYarnInstalled = !!spawnSync('yarn', ['bin']).output
