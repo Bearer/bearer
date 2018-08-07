@@ -1,4 +1,4 @@
-import { ScenarioConfig } from './types'
+import { Config } from './types'
 import * as path from 'path'
 
 export default class LocationProvider {
@@ -6,7 +6,7 @@ export default class LocationProvider {
   scenarioRoot: string
   scenarioRc: string
 
-  constructor(private readonly config: ScenarioConfig) {
+  constructor(private readonly config: Config) {
     this.scenarioRc = this.config.scenarioConfig.config
     if (this.scenarioRc) {
       this.scenarioRoot = path.dirname(this.scenarioRc)

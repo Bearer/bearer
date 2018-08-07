@@ -1,7 +1,8 @@
 import Locator from '../locationProvider'
+import { Config } from '../types'
 
 export class CLI {
-  constructor(private readonly program, private readonly emitter, private readonly config) {}
+  constructor(private readonly program, private readonly emitter, private readonly config: Config) {}
 
   parse(argv) {
     this.program.parse(argv)

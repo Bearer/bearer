@@ -1,30 +1,49 @@
-export type ScenarioConfig = {
+export type BearerEnv = 'dev' | 'staging' | 'production'
+
+export type BaseConfig = {
   DeploymentUrl: string
   IntegrationServiceHost: string
   IntegrationServiceUrl: string
   BearerEnv: string
   DeveloperPortalAPIUrl: string
-  HandlerBase: string
-  bearerConfig: {
-    OrgId: string
-    Username: string
-    ExpiresAt: string
-    authorization: {
-      AuthenticationResult: any
-    }
-    open: false
-    configs: Array<string>
-    config: string
+  DeveloperPortalUrl: string
+}
+
+export type BearerConfig = {
+  OrgId: string
+  Username: string
+  ExpiresAt: string
+  authorization: {
+    AuthenticationResult: any
   }
-  scenarioConfig: {
-    scenarioId: string
-    scenarioUuid: string
-    orgId: string
-    scenarioTitle: string
-    open: boolean
-    configs: Array<string>
-    rootPathRc: string
-    storeBearerConfig: any
-    config: string
-  }
+  open: false
+  configs: Array<string>
+  config: string
+}
+
+export type ScenarioConfig = {
+  scenarioId: string
+  scenarioUuid: string
+  orgId: string
+  scenarioTitle: string
+  open: boolean
+  configs: Array<string>
+  rootPathRc: string
+  storeBearerConfig: any
+  config: string
+}
+
+export type Config = BaseConfig & {
+  isYarnInstalled: boolean
+  command: 'yarn' | 'npm'
+  bearerConfig: BearerConfig
+  scenarioConfig: ScenarioConfig
+  orgId: string | undefined
+  scenarioTitle: string | undefined
+  scenarioId: string | undefined
+  scenarioUuid: string | undefined
+  rootPathRc: string
+  setScenarioConfig: (config: any) => void
+  storeBearerConfig: (config: any) => void
+  credentials: any
 }

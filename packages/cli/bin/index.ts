@@ -1,14 +1,16 @@
 #!/usr/bin/env node
+const program = require('commander')
 
 require('../scripts/check-version')
 const { version } = require('../../package.json')
 const { CLI } = require('../src/lib/cli')
-const setupConfig = require('../src/lib/setupConfig')
 const Emitter = require('../src/lib/emitter')
 
+import setupConfig from '../src/lib/setupConfig'
+import { Config } from '../src/lib/types'
+
 const emitter = new Emitter()
-const config = setupConfig()
-const program = require('commander')
+const config: Config = setupConfig()
 const deployCmd = require('../src/lib/commands/deployCommand')
 const generateCmd = require('../src/lib/commands/generateCommand')
 const initCmd = require('../src/lib/commands/initCommand')
