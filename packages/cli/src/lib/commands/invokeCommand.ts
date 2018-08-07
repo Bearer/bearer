@@ -1,8 +1,7 @@
 import axios from 'axios'
 import * as querystring from 'querystring'
 import * as cosmiconfig from 'cosmiconfig'
-
-const startLocalDevelopmentServer = require('./startLocalDevelopmentServer')
+import startLocalDevelopmentServer from './startLocalDevelopmentServer'
 
 import Locator from '../locationProvider'
 
@@ -26,7 +25,7 @@ export const invoke = (emitter, config, locator: Locator) => async (intent, cmd)
   }
   const { httpMethod = 'GET', params = {}, body = {} } = fileData
 
-  const integrationHostURL = await startLocalDevelopmentServer(scenarioUuid, emitter, config, locator)
+  const integrationHostURL = await startLocalDevelopmentServer(emitter, config, locator)
 
   const client = axios.create({
     baseURL: `${integrationHostURL}api/v1`,

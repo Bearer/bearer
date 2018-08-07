@@ -3,10 +3,9 @@ const fs = require('fs-extra')
 const copy = require('copy-template-dir')
 const Case = require('case')
 const chokidar = require('chokidar')
-const startLocalDevelopmentServer = require('./startLocalDevelopmentServer')
-
 const { spawn, execSync } = require('child_process')
 
+import startLocalDevelopmentServer from './startLocalDevelopmentServer'
 import Locator from '../locationProvider'
 import { generateSetup } from './generate'
 
@@ -144,7 +143,7 @@ export const start = (emitter, config, locator: Locator) => async ({ open, insta
 
     const { scenarioRoot, buildViewsDir } = locator
     /* start local development server */
-    const integrationHost = await startLocalDevelopmentServer(scenarioUuid, emitter, config, locator)
+    const integrationHost = await startLocalDevelopmentServer(emitter, config, locator)
 
     ensureSetupComponents(emitter, locator)
 

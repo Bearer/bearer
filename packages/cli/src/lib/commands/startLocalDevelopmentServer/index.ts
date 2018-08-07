@@ -11,7 +11,7 @@ import auth from './auth'
 import { buildIntents } from '../../deployScenario'
 import LocationProvider from '../../locationProvider'
 
-function startLocalDevelopmentServer(_scenarioUuid, emitter, config, locator: LocationProvider, logs: boolean = true) {
+export default function startLocalDevelopmentServer(emitter, config, locator: LocationProvider, logs: boolean = true) {
   const rootLevel = locator.scenarioRoot
   const buildDir = locator.buildIntentsDir
 
@@ -88,5 +88,3 @@ function startLocalDevelopmentServer(_scenarioUuid, emitter, config, locator: Lo
     }
   })
 }
-
-module.exports = startLocalDevelopmentServer
