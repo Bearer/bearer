@@ -78,7 +78,7 @@ export default (output, { scenarioUuid }, emitter, locator: LocationProvider) =>
   })
 }
 
-function transpileIntents(entriesPath: string, distPath: string): Promise<boolean | Array<any>> {
+export function transpileIntents(entriesPath: string, distPath: string): Promise<boolean | Array<any>> {
   return new Promise((resolve, reject) => {
     // Note: it works because we have client.ts present
     globby([`${entriesPath}/*.ts`])

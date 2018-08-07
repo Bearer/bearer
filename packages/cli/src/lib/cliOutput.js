@@ -484,6 +484,27 @@ module.exports = emitter => {
     term('\n')
   })
 
+  emitter.on('start:localServer:generatingIntents:start', () => {
+    term.white('Bearer: ')
+    term.yellow('[local:intentServer] ')
+    term.yellow('Reloading intents')
+    term('\n')
+  })
+
+  emitter.on('start:localServer:generatingIntents:stop', () => {
+    term.white('Bearer: ')
+    term.yellow('[local:intentServer] ')
+    term.yellow('Intents reloaded')
+    term('\n')
+  })
+
+  emitter.on('start:localServer:generatingIntents:failed', ({ error }) => {
+    term.white('Bearer: ')
+    term.yellow('[local:intentServer] ')
+    term.red('Intents error', error.toString())
+    term('\n')
+  })
+
   emitter.on('deployScenario:deployViews:error', ({ message }) => {
     term.white('Bearer: ')
     term.red('An error occured')

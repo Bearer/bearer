@@ -1,17 +1,27 @@
 import * as getPort from 'get-port'
 import * as Router from 'koa-router'
-import * as unzip from 'unzip-stream'
-import * as fs from 'fs-extra'
 import * as cosmiconfig from 'cosmiconfig'
 import * as Logger from 'koa-logger'
+import * as chokidar from 'chokidar'
 
+import { transpileIntents } from '../../buildArtifact'
 import server = require('./server')
 import Storage from './storage'
 import auth from './auth'
-import { buildIntents } from '../../deployScenario'
 import LocationProvider from '../../locationProvider'
+import { Config } from '../../types'
 
-export default function startLocalDevelopmentServer(emitter, config, locator: LocationProvider, logs: boolean = true) {
+function requireUncached(module) {
+  delete require.cache[require.resolve(module)]
+  return require(module)
+}
+
+export default function startLocalDevelopmentServer(
+  emitter,
+  config: Config,
+  locator: LocationProvider,
+  logs: boolean = true
+) {
   const rootLevel = locator.scenarioRoot
   const buildDir = locator.buildIntentsDir
 
@@ -24,42 +34,58 @@ export default function startLocalDevelopmentServer(emitter, config, locator: Lo
   return new Promise(async (resolve, reject) => {
     try {
       const { config: devIntentsContext = {} } = (await explorer.search(rootLevel)) || {}
-      const intentsArtifact = await buildIntents(emitter, config, locator)
+      const distPath = locator.buildIntentsResourcePath('dist')
+      await transpileIntents(locator.srcIntentsDir, distPath)
 
-      fs.ensureDirSync(buildDir)
-      await new Promise((resolve, reject) => {
-        fs.createReadStream(intentsArtifact)
-          .pipe(unzip.Extract({ path: buildDir }))
-          .on('close', resolve)
-          .on('error', reject)
-      })
+      async function refreshIntents() {
+        try {
+          emitter.emit('start:localServer:generatingIntents:start')
+          await transpileIntents(locator.srcIntentsDir, distPath)
+          emitter.emit('start:localServer:generatingIntents:stop')
+        } catch (error) {
+          emitter.emit('start:localServer:generatingIntents:failed', { error })
+        }
+      }
 
-      const { integration_uuid } = require(locator.buildIntentsResourcePath('bearer.config.json'))
+      chokidar
+        .watch('.', {
+          ignored: /(^|[\/\\])\../,
+          cwd: locator.srcIntentsDir,
+          ignoreInitial: true,
+          persistent: true,
+          followSymlinks: false
+        })
+        .on('add', refreshIntents)
+        .on('change', refreshIntents)
 
       const port = await getPort({ port: 3000 })
       const bearerBaseURL = `http://localhost:${port}/`
       router.all(
-        `${integration_uuid}/:intentName`,
+        `${config.scenarioUuid}/:intentName`,
         (ctx, next) =>
-          new Promise((resolve, _reject) => {
-            const intent = require(`${buildDir}/${ctx.params.intentName}`).default
-            intent.intentType.intent(intent.action)(
-              {
-                context: {
-                  ...devIntentsContext.global,
-                  ...devIntentsContext[ctx.params.intentName],
-                  bearerBaseURL
+          new Promise((resolve, reject) => {
+            try {
+              intent.intentType.intent(intent.action)(
+                {
+                  context: {
+                    ...devIntentsContext.global,
+                    ...devIntentsContext[ctx.params.intentName],
+                    bearerBaseURL
+                  },
+                  queryStringParameters: ctx.query,
+                  body: ctx.request.body
                 },
-                queryStringParameters: ctx.query,
-                body: ctx.request.body
-              },
-              {},
-              (_err, datum) => {
-                ctx.intentDatum = datum
-                next()
-                resolve()
-              }
-            )
+                {},
+                (_err, datum) => {
+                  ctx.intentDatum = datum
+                  next()
+                  resolve()
+                }
+              )
+            } catch (e) {
+              reject({ error: e.toString() })
+            }
+            const intent = requireUncached(`${distPath}/${ctx.params.intentName}`).default
           }),
         ctx => ctx.ok(ctx.intentDatum)
       )
