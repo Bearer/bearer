@@ -22,31 +22,14 @@ export default {
     callback({ items: state.items.map(({ name }) => name) })
   }
   `,
-  GetCollection: `
-  static action(context: TbasicAuthContext, params: any, callback: (params: any) => void) {
+  FetchData: `
+  static action(context: TbasicAuthContext, params: any, callback: (payload: { data: any }) => void) {
     //... your code goes here
     // use the client defined in client.ts to fetch real object like that:
-    // Client(
-    //  context.authAccess.username, 
-    //  context.authAccess.password
-    // ).get('/people').then(({ data }) => {
-    //   callback({ collection: data.results });
-    // });
-    callback({ collection: []})
-  }
-  `,
-  GetResource: `
-  static action(context: TbasicAuthContext, params: any, callback: (params: any) => void) {
-    //... your code goes here
-    // use the client defined in client.ts to fetch real object like that:
-    // Client(
-    //  context.authAccess.username, 
-    //  context.authAccess.password
-    // ).get(\`/people/\${params.id}\`)
-    //   .then(({ data }) => {
-    //     callback({ object: data });
-    //   });
-    callback({ object: {}})
+    // Client(context.authAccess.apiKey).get('/people').then(({ data }) => {
+    //   callback({ data })
+    // })
+    callback({ data: []})
   }
   `
 }

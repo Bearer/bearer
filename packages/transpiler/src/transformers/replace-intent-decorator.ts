@@ -1,7 +1,7 @@
 /*
  * From this:
  * class AComponent {
- *  @Intent('aName', IntentType.GetResource) fetcher: BearerFetch
+ *  @Intent('aName') fetcher: BearerFetch
  * }
  * 
  * to this:
@@ -10,7 +10,7 @@
  *  private fetcher: BearerFetch
  * 
  *  constructor() {
- *    Intent('aName', IntentType.GetResource)(this, fetcher)
+ *    Intent('aName')(this, fetcher)
  *  }
  * }
  *

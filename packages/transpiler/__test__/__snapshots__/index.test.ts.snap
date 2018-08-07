@@ -40,7 +40,7 @@ export class FullComponent {
     referenceId: string;
     @Element()
     el: HTMLElement;
-    constructor() { Intent('ListRepositories')(this, \\"fetcher\\"); Intent('getPullRequest', IntentType.GetResource)(this, \\"fetchResource\\"); }
+    constructor() { Intent('ListRepositories')(this, \\"fetcher\\"); Intent('getPullRequest', IntentType.FetchData)(this, \\"fetchResource\\"); }
     get SCENARIO_ID() { return \\"SPONGE_BOB\\"; }
     @Prop()
     BEARER_ID: string;
@@ -90,7 +90,7 @@ export class AttachPullRequestAction {
     referenceId: string;
     @Element()
     el: HTMLElement;
-    constructor() { Intent('ListRepositories')(this, \\"fetcher\\"); Intent('getPullRequest', IntentType.GetResource)(this, \\"fetchResource\\"); }
+    constructor() { Intent('ListRepositories')(this, \\"fetcher\\"); Intent('getPullRequest', IntentType.FetchData)(this, \\"fetchResource\\"); }
     get SCENARIO_ID() { return \\"SPONGE_BOB\\"; }
     @Prop()
     BEARER_ID: string;
@@ -160,7 +160,7 @@ export class AttachPullRequestDisplay {
     referenceId: string;
     @Element()
     el: HTMLElement;
-    constructor() { Intent('ListRepositories')(this, \\"fetcher\\"); Intent('getPullRequest', IntentType.GetResource)(this, \\"fetchResource\\"); }
+    constructor() { Intent('ListRepositories')(this, \\"fetcher\\"); Intent('getPullRequest', IntentType.FetchData)(this, \\"fetchResource\\"); }
     get SCENARIO_ID() { return \\"SPONGE_BOB\\"; }
     @Prop()
     BEARER_ID: string;
@@ -193,7 +193,7 @@ Object {
 class OverridesDecorarotFull {
     private fetcher: BearerFetch;
     private memberFetcher: BearerFetch;
-    constructor() { Intent('collectionIntent')(this, \\"fetcher\\"); Intent('collectionIntent', IntentType.GetResource)(this, \\"memberFetcher\\"); }
+    constructor() { Intent('collectionIntent')(this, \\"fetcher\\"); Intent('collectionIntent', IntentType.FetchData)(this, \\"memberFetcher\\"); }
     componentWillLoad() {
         console.log('componentWillLoad');
     }

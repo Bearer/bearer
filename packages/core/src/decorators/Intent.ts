@@ -11,17 +11,12 @@ enum IntentNames {
 export enum IntentType {
   RetrieveState = 'RetrieveState',
   SaveState = 'SaveState',
-  GetCollection = 'GetCollection',
-  GetResource = 'GetResource'
+  FetchData = 'FetchData'
 }
 
-type TPayloadResource = { meta: { referenceId?: string }; data: any }
-type TPayloadCollection = { meta: { referenceId: string }; data: Array<any> }
-type TFetchBearerResult = TPayloadResource | TPayloadCollection
+type TFetchBearerResult = { meta: { referenceId: string }; data: Array<any> | any }
 
-export type TCollectionData = { data: Array<any>; referenceId?: string }
-export type TResourceData = { data: any; referenceId?: string }
-export type TFetchBearerData = TCollectionData | TResourceData
+export type TFetchBearerData = { data: Array<any> | any; referenceId?: string }
 
 export interface BearerFetch {
   (...args: any[]): Promise<any>
@@ -55,8 +50,8 @@ export const BearerStateSavedEvent = 'bearer:StateSaved'
 // Usage
 // @Intent('intentName') propertyName: BearerFetch
 // or
-// @Intent('intentNameResource',IntentType.GetResource ) propertyName: BearerFetch
-export function Intent(intentName: string, type: IntentType = IntentType.GetCollection): IDecorator {
+// @Intent('intentNameResource', IntentType.FetchData) propertyName: BearerFetch
+export function Intent(intentName: string, type: IntentType = IntentType.FetchData): IDecorator {
   return function(target: BearerComponent, key: string): void {
     const getter = (): BearerFetch => {
       return function(this: BearerComponent, params = {}) {
@@ -117,32 +112,11 @@ type TEventPayload = {
   referenceId: string
   data: { referenceId: string; ReadAllowed: boolean; [key: string]: any }
 }
-// Usage
-// @SaveStateIntent() propertyName: BearerFetch
-// or
-// @SaveStateIntent(IntentType.GetResource ) propertyName: BearerFetch
-export function SaveStateIntent(): IDecorator {
-  console.warn(
-    'SaveStateIntent decorator is deprecated, please use @Intent("INTENT_NAME", IntentType.SaveState) instead'
-  )
-  return Intent(IntentNames.SaveState, IntentType.SaveState)
-}
-
-// Usage
-// @RetrieveStateIntent() propertyName: BearerFetch
-// or
-// @RetrieveStateIntent(IntentType.GetResource ) propertyName: BearerFetch
-export function RetrieveStateIntent(_type: IntentType = IntentType.GetCollection): IDecorator {
-  console.warn(
-    'RetrieveStateIntent decorator is deprecated, please use @Intent("INTENT_NAME", IntentType.RetrieveState) instead'
-  )
-  return Intent(IntentNames.RetrieveState, IntentType.RetrieveState)
-}
 
 export function IntentPromise(promise: Promise<TFetchBearerResult>): Promise<TFetchBearerData> {
   return new Promise((resolve, reject) => {
     promise
-      .then((payload: TPayloadCollection) => {
+      .then((payload: TFetchBearerResult) => {
         const { data, meta: { referenceId } = { referenceId: null } } = payload
         resolve({ data, referenceId })
       })

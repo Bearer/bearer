@@ -23,7 +23,6 @@ export default function startLocalDevelopmentServer(
   logs: boolean = true
 ) {
   const rootLevel = locator.scenarioRoot
-  const buildDir = locator.buildIntentsDir
 
   const LOCAL_DEV_CONFIGURATION = 'dev'
   const explorer = cosmiconfig(LOCAL_DEV_CONFIGURATION, {
@@ -65,6 +64,7 @@ export default function startLocalDevelopmentServer(
         (ctx, next) =>
           new Promise((resolve, reject) => {
             try {
+              const intent = requireUncached(`${distPath}/${ctx.params.intentName}`).default
               intent.intentType.intent(intent.action)(
                 {
                   context: {
@@ -85,7 +85,6 @@ export default function startLocalDevelopmentServer(
             } catch (e) {
               reject({ error: e.toString() })
             }
-            const intent = requireUncached(`${distPath}/${ctx.params.intentName}`).default
           }),
         ctx => ctx.ok(ctx.intentDatum)
       )

@@ -18,9 +18,8 @@ describe('Intent decorator', () => {
   })
 
   class IntentDecorated {
-    @Intent('getCollectionIntent') getCollectionIntentProp: BearerFetch
-    @Intent('getResourceIntent', IntentType.GetResource)
-    getResourceIntentProp: BearerFetch
+    @Intent('getCollectionIntent')
+    getCollectionIntentProp: BearerFetch
 
     get SCENARIO_ID(): string {
       return SCENARIO_ID
@@ -29,7 +28,7 @@ describe('Intent decorator', () => {
 
   const decoratedInstance = new IntentDecorated()
 
-  describe('GetCollectionIntent', () => {
+  describe('FetchData', () => {
     const collection = [{ id: 42 }]
 
     beforeEach(() => {
@@ -45,7 +44,7 @@ describe('Intent decorator', () => {
       expect(decoratedInstance.getCollectionIntentProp().constructor).toBe(Promise)
     })
 
-    it('uses GetCollectionIntent', async () => {
+    it('uses FetchData', async () => {
       const success = jest.fn()
 
       await decoratedInstance
@@ -59,40 +58,6 @@ describe('Intent decorator', () => {
       )
 
       expect(success).toBeCalledWith({ data: collection, referenceId: null })
-    })
-  })
-
-  describe('GetResourceIntent', () => {
-    const item = { id: 42 }
-
-    beforeEach(() => {
-      fetch.resetMocks()
-      fetch.mockResponseOnce(JSON.stringify({ data: item }))
-    })
-
-    it('adds a method', () => {
-      expect(typeof decoratedInstance.getResourceIntentProp).toBe('function')
-    })
-
-    it('calling methods return a promise', () => {
-      expect(decoratedInstance.getResourceIntentProp().constructor).toBe(Promise)
-    })
-
-    it('uses GetResourceIntent', async () => {
-      const success = jest.fn()
-
-      await decoratedInstance
-        .getResourceIntentProp()
-        .then(success)
-        .catch(a => console.log(a))
-
-      expect(fetch).toBeCalledWith(
-        'http://localhost:5555/api/v1/1234/getResourceIntent?setupId=&integrationId=42',
-
-        commonParams
-      )
-
-      expect(success).toBeCalledWith({ data: item, referenceId: null })
     })
   })
 })

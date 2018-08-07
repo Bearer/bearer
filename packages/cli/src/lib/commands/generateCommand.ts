@@ -1,19 +1,15 @@
 import * as copy from 'copy-template-dir'
-import * as del from 'del'
 import * as path from 'path'
 import * as inquirer from 'inquirer'
 import * as Case from 'case'
 import * as intents from '@bearer/intents'
 import * as templates from '@bearer/templates'
-import * as rc from 'rc'
 import Locator from '../locationProvider'
 import { generateSetup } from './generate'
 
 const INTENT = 'intent'
 const COMPONENT = 'component'
-enum TemplateTypes {
-  setup = 'setup'
-}
+
 enum Components {
   BLANK = 'blank',
   COLLECTION = 'collection',

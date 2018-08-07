@@ -6,17 +6,9 @@ import { sendSuccessMessage, sendErrorMessage } from './lambda'
 import UserDataClient from './UserDataClient'
 
 export class Intent {
-  static getCollection(callback, { collection, error }: { collection?: any; error?: any }) {
-    if (collection) {
-      sendSuccessMessage(callback, { data: collection })
-    } else {
-      sendErrorMessage(callback, { error: error || 'Unkown error' })
-    }
-  }
-
-  static getResource(callback, { object, error }: { object?: any; error?: any }) {
-    if (object) {
-      sendSuccessMessage(callback, { data: object })
+  static fetchData(callback, { data, error }: { data?: any; error?: any }) {
+    if (data) {
+      sendSuccessMessage(callback, { data })
     } else {
       sendErrorMessage(callback, { error: error || 'Unkown error' })
     }
@@ -129,28 +121,15 @@ export class RetrieveState extends StateIntentBase {
   }
 }
 
-export class GetCollection extends GenericIntentBase {
+export class FetchData extends GenericIntentBase {
   static get display() {
-    return 'GetCollection'
+    return 'FetchData'
   }
 
   static intent(action) {
     return (event, _context, lambdaCallback) =>
       action(event.context, event.queryStringParameters, result => {
-        Intent.getCollection(lambdaCallback, result)
-      })
-  }
-}
-
-export class GetResource extends GenericIntentBase {
-  static get display() {
-    return 'GetResource'
-  }
-
-  static intent(action) {
-    return (event, _context, lambdaCallback) =>
-      action(event.context, event.queryStringParameters, result => {
-        Intent.getResource(lambdaCallback, result)
+        Intent.fetchData(lambdaCallback, result)
       })
   }
 }

@@ -4,8 +4,9 @@ import { Component, Intent, BearerFetch, IntentType } from '@bearer/core'
   tag: 'overrides-decorator-full'
 })
 class OverridesDecorarotFull {
-  @Intent('collectionIntent') fetcher: BearerFetch
-  @Intent('collectionIntent', IntentType.GetResource)
+  @Intent('collectionIntent')
+  fetcher: BearerFetch
+  @Intent('collectionIntent', IntentType.FetchData)
   memberFetcher: BearerFetch
 
   constructor() {}

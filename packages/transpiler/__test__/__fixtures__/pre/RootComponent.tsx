@@ -5,12 +5,15 @@ import { RootComponent, Intent, BearerFetch, IntentType, BearerState } from '@be
   name: 'action'
 })
 export class AttachPullRequestAction {
-  @Intent('ListRepositories') fetcher: BearerFetch
-  @RetrieveStateIntent() retrieve: BearerFetch
-  @BearerState() attachedPullRequests: Array<any>
+  @Intent('ListRepositories')
+  fetcher: BearerFetch
+  @RetrieveStateIntent()
+  retrieve: BearerFetch
+  @BearerState()
+  attachedPullRequests: Array<any>
   @BearerState({ statePropName: 'goats' })
   ducks: Array<any>
-  @Intent('getPullRequest', IntentType.GetResource)
+  @Intent('getPullRequest', IntentType.FetchData)
   fetchResource: BearerFetch
 
   render() {
