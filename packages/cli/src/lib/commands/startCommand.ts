@@ -175,6 +175,17 @@ export const start = (emitter, config, locator: Locator) => async ({ open, insta
     bearerTranspiler.on('close', childProcessClose(emitter, BEARER))
 
     if (watcher) {
+      const tsxWatcher = chokidar.watch('**/*.tsx', {
+        ignored: /(^|[\/\\])\../,
+        cwd: locator.srcViewsDir,
+        ignoreInitial: true,
+        persistent: true,
+        followSymlinks: false
+      })
+      tsxWatcher.on('add', () => bearerTranspiler.send('refresh'))
+      tsxWatcher.on('unlink', () => bearerTranspiler.send('refresh'))
+      tsxWatcher.on('error', error => emitter.emit('start:watchers:componentError', { error }))
+
       bearerTranspiler.on('message', ({ event }) => {
         if (event === 'transpiler:initialized') {
           /* Start stencil */

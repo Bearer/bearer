@@ -6,6 +6,12 @@ export default args => {
     watchFiles: args.indexOf('--no-watcher') === -1
   })
 
+  process.on('message', message => {
+    if (message === 'refresh') {
+      transpiler.refresh()
+    }
+  })
+
   transpiler.on('STOP', () => {
     process.exit(0)
   })

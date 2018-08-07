@@ -25,7 +25,6 @@ export type TranpilerOptions = {
 }
 
 export default class Transpiler {
-  private watcher: any
   private service: ts.LanguageService
   private rootFileNames: string[] = []
   private subscribers: ts.MapLike<Array<() => void>> = {}
@@ -35,14 +34,53 @@ export default class Transpiler {
   private buildFolder = '.bearer/views'
   private srcFolder = 'views'
   private verbose = true
-
+  private files: ts.MapLike<{ version: number }> = {}
   private metadata: Metadata = {
     components: []
+  }
+
+  private compilerOptionsts: ts.CompilerOptions = {
+    module: ts.ModuleKind.CommonJS
   }
 
   constructor(options?: Partial<TranpilerOptions>) {
     Object.assign(this, options)
     this.ROOT_DIRECTORY = this.ROOT_DIRECTORY || process.cwd()
+  }
+
+  run() {
+    this.refresh()
+
+    if (!this.watchFiles) {
+      this.stop()
+    }
+  }
+
+  emitFiles = () => {
+    // Now let's watch the files
+    this.rootFileNames.forEach(fileName => {
+      this.files[fileName] = { version: 0 }
+      // First time around, emit all files
+      this.emitFile(fileName)
+      if (this.watchFiles) {
+        // Add a watch on the file to handle next change
+        fs.watchFile(fileName, { persistent: true, interval: 250 }, (curr, prev) => {
+          // Check timestamp
+          if (+curr.mtime <= +prev.mtime) {
+            return
+          }
+          // Update the version to signal a change in the file
+          this.files[fileName].version++
+          // write the changes to disk
+          this.emitFile(fileName)
+        })
+      }
+    })
+  }
+
+  refresh() {
+    this.clearWatchers()
+
     const config = ts.readConfigFile(path.join(this.BUILD_DIRECTORY, 'tsconfig.json'), ts.sys.readFile)
 
     if (config.error) {
@@ -54,17 +92,10 @@ export default class Transpiler {
     if (!this.rootFileNames.length) {
       console.warn('[BEARER]', 'No file to transpile')
     }
-  }
 
-  run(
-    options: ts.CompilerOptions = {
-      module: ts.ModuleKind.CommonJS
-    }
-  ) {
-    const files: ts.MapLike<{ version: number }> = {}
     const servicesHost: ts.LanguageServiceHost = {
       getScriptFileNames: () => this.rootFileNames,
-      getScriptVersion: fileName => files[fileName] && files[fileName].version.toString(),
+      getScriptVersion: fileName => this.files[fileName] && this.files[fileName].version.toString(),
       getScriptSnapshot: fileName => {
         if (!fs.existsSync(fileName)) {
           return undefined
@@ -73,7 +104,7 @@ export default class Transpiler {
         return ts.ScriptSnapshot.fromString(fs.readFileSync(fileName).toString())
       },
       getCurrentDirectory: () => process.cwd(),
-      getCompilationSettings: () => options,
+      getCompilationSettings: () => this.compilerOptionsts,
       getDefaultLibFileName: options => ts.getDefaultLibFilePath(options),
       getCustomTransformers: () => this.transformers,
       fileExists: ts.sys.fileExists,
@@ -83,40 +114,18 @@ export default class Transpiler {
     // Create the language service files
     this.service = ts.createLanguageService(servicesHost, ts.createDocumentRegistry())
 
-    // Now let's watch the files
-    this.rootFileNames.forEach(fileName => {
-      files[fileName] = { version: 0 }
-      // First time around, emit all files
-
-      this.emitFile(fileName)
-      if (this.watchFiles) {
-        // Add a watch on the file to handle next change
-        fs.watchFile(fileName, { persistent: true, interval: 250 }, (curr, prev) => {
-          // Check timestamp
-          if (+curr.mtime <= +prev.mtime) {
-            return
-          }
-          // Update the version to signal a change in the file
-          files[fileName].version++
-          // write the changes to disk
-          this.emitFile(fileName)
-        })
-      }
-    })
-
-    if (!this.watchFiles) {
-      this.stop()
-    }
+    this.emitFiles()
   }
 
   stop() {
+    this.clearWatchers()
+    this.trigger('STOP')
+  }
+
+  clearWatchers(): void {
     this.rootFileNames.forEach(fileName => {
       fs.unwatchFile(fileName)
     })
-    if (this.watcher) {
-      this.watcher.close()
-    }
-    this.trigger('STOP')
   }
 
   on(event: string, callback: () => void) {
@@ -156,7 +165,7 @@ export default class Transpiler {
     }
   }
 
-  emitFile(fileName: string) {
+  emitFile = (fileName: string) => {
     const output = this.service.getEmitOutput(fileName)
 
     if (!output.emitSkipped) {
