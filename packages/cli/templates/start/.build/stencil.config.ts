@@ -1,6 +1,7 @@
 const { plugins } = require('@bearer/core/dist/plugins')
+import { Config } from '@stencil/core'
 
-exports.config = {
+export const config: Config = {
   namespace: '{{componentTagName}}',
   outputTargets: [
     {
@@ -8,7 +9,7 @@ exports.config = {
     },
     {
       type: 'www',
-      serviceWorker: false,
+      serviceWorker: null,
       resourcesUrl: process.env.CDN_HOST,
     }
   ],
