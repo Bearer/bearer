@@ -92,7 +92,7 @@ export function prepare(emitter, config, locator: Locator) {
       const vars = {
         componentTagName: Case.kebab(scenarioTitle)
       }
-      const inDir = path.join(__dirname, 'templates', 'start', '.build')
+      const inDir = path.join(__dirname, 'templates', 'start')
       await new Promise((resolve, reject) => {
         copy(inDir, buildViewsDir, vars, (err, createdFiles) => {
           if (err) reject(err)
