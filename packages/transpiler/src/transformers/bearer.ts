@@ -24,7 +24,7 @@ export function addBearerIdProp(classNode: ts.ClassDeclaration): ts.ClassDeclara
 }
 
 // this.BEARER_SCENARIO_ID => replaced during transpilation
-export function addBearerScenarioIdAccessor(classNode: ts.ClassDeclaration): ts.ClassDeclaration {
+export function addBearerScenarioIdAccessor(classNode: ts.ClassDeclaration, scenarioId: string): ts.ClassDeclaration {
   return ts.updateClassDeclaration(
     classNode,
     classNode.decorators,
@@ -40,7 +40,7 @@ export function addBearerScenarioIdAccessor(classNode: ts.ClassDeclaration): ts.
         'SCENARIO_ID',
         undefined,
         undefined,
-        ts.createBlock([ts.createReturn(ts.createLiteral(process.env.BEARER_SCENARIO_ID))])
+        ts.createBlock([ts.createReturn(ts.createLiteral(scenarioId))])
       )
     ]
   )
