@@ -11,7 +11,7 @@ import auth from './auth'
 import { buildIntents } from '../../deployScenario'
 import LocationProvider from '../../locationProvider'
 
-function startLocalDevelopmentServer(scenarioUuid, emitter, config, locator: LocationProvider, logs: boolean = true) {
+function startLocalDevelopmentServer(_scenarioUuid, emitter, config, locator: LocationProvider, logs: boolean = true) {
   const rootLevel = locator.scenarioRoot
   const buildDir = locator.buildIntentsDir
 
@@ -33,40 +33,37 @@ function startLocalDevelopmentServer(scenarioUuid, emitter, config, locator: Loc
           .on('close', resolve)
           .on('error', reject)
       })
-      const lambdas = require(buildDir)
 
-      const { integration_uuid, intents } = require(locator.buildIntentsResourcePath('bearer.config.json'))
+      const { integration_uuid } = require(locator.buildIntentsResourcePath('bearer.config.json'))
 
       const port = await getPort({ port: 3000 })
       const bearerBaseURL = `http://localhost:${port}/`
-      for (let intent of intents) {
-        const intentName = Object.keys(intent)[0]
-        const endpoint = `${integration_uuid}/${intentName}`
-        router.all(
-          endpoint,
-          (ctx, next) =>
-            new Promise((resolve, _reject) => {
-              lambdas[intentName](
-                {
-                  context: {
-                    ...devIntentsContext.global,
-                    ...devIntentsContext[intentName],
-                    bearerBaseURL
-                  },
-                  queryStringParameters: ctx.query,
-                  body: ctx.request.body
+      router.all(
+        `${integration_uuid}/:intentName`,
+        (ctx, next) =>
+          new Promise((resolve, _reject) => {
+            const intent = require(`${buildDir}/${ctx.params.intentName}`).default
+            intent.intentType.intent(intent.action)(
+              {
+                context: {
+                  ...devIntentsContext.global,
+                  ...devIntentsContext[ctx.params.intentName],
+                  bearerBaseURL
                 },
-                {},
-                (_err, datum) => {
-                  ctx.intentDatum = datum
-                  next()
-                  resolve()
-                }
-              )
-            }),
-          ctx => ctx.ok(ctx.intentDatum)
-        )
-      }
+                queryStringParameters: ctx.query,
+                body: ctx.request.body
+              },
+              {},
+              (_err, datum) => {
+                ctx.intentDatum = datum
+                next()
+                resolve()
+              }
+            )
+          }),
+        ctx => ctx.ok(ctx.intentDatum)
+      )
+
       const storage = Storage()
       if (logs) {
         server.use(Logger())
