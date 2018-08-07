@@ -8,12 +8,12 @@ const path = require('path')
 const { spawnSync } = require('child_process')
 
 let setup = {
-  DeploymentUrl: 'https://developer.staging.bearer.sh/v1/',
-  IntegrationServiceHost: 'https://int.staging.bearer.sh/',
-  IntegrationServiceUrl: 'https://int.staging.bearer.sh/api/v1/',
-  DeveloperPortalAPIUrl: 'https://app.staging.bearer.sh/graphql',
-  DeveloperPortalUrl: 'https://app.staging.bearer.sh/',
-  BearerEnv: 'staging'
+  DeploymentUrl: 'https://developer.bearer.sh/v1/',
+  IntegrationServiceHost: 'https://int.bearer.sh/',
+  IntegrationServiceUrl: 'https://int.bearer.sh/api/v1/',
+  DeveloperPortalAPIUrl: 'https://app.bearer.sh/graphql',
+  DeveloperPortalUrl: 'https://app.bearer.sh/',
+  BearerEnv: 'production'
 }
 
 module.exports = () => {
@@ -30,14 +30,14 @@ module.exports = () => {
     }
   }
 
-  if (BEARER_ENV === 'production') {
+  if (BEARER_ENV === 'staging') {
     setup = {
-      DeploymentUrl: 'https://developer.bearer.sh/v1/',
-      IntegrationServiceHost: 'https://int.bearer.sh/',
-      IntegrationServiceUrl: 'https://int.bearer.sh/api/v1/',
-      DeveloperPortalAPIUrl: 'https://app.bearer.sh/graphql',
-      DeveloperPortalUrl: 'https://app.bearer.sh/',
-      BearerEnv: 'production'
+      DeploymentUrl: 'https://developer.staging.bearer.sh/v1/',
+      IntegrationServiceHost: 'https://int.staging.bearer.sh/',
+      IntegrationServiceUrl: 'https://int.staging.bearer.sh/api/v1/',
+      DeveloperPortalAPIUrl: 'https://app.staging.bearer.sh/graphql',
+      DeveloperPortalUrl: 'https://app.staging.bearer.sh/',
+      BearerEnv: 'staging'
     }
   }
 
