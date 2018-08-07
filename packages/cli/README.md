@@ -12,7 +12,7 @@ $ npm install @bearer/bearer-cli
 $ echo OrgId=4l1c3 > ~/.bearerrc
 $ bearer new attachPullRequest && cd attachPullRequest
 $ bearer generate searchRepositories --type GetCollection
-$ bearer generate getPullRequest --type GetObject
+$ bearer generate getPullRequest --type GetResource
 $ bearer deploy
 ```
 

@@ -32,7 +32,7 @@ export default {
     callback({ collection: []})
   }
   `,
-  GetObject: `
+  GetResource: `
   static action(context: Toauth2Context, params: any, callback: (params: any) => void) {
     //... your code goes here
     // use the client defined in client.ts to fetch real object like that:
