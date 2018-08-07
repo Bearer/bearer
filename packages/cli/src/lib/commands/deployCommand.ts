@@ -1,8 +1,3 @@
-import * as inquirer from 'inquirer'
-import * as fs from 'fs'
-import * as ini from 'ini'
-import * as Case from 'case'
-
 import { deployScenario, IDeployOptions } from '../deployScenario'
 import Locator from '../locationProvider'
 
@@ -14,8 +9,7 @@ const deploy = (emitter, config, locator: Locator) => async ({ viewsOnly = false
     process.exit(1)
   }
 
-  const { BearerEnv, scenarioUuid, scenarioId, orgId } = config
-
+  const { scenarioUuid, scenarioId } = config
   if (!scenarioUuid) {
     emitter.emit('scenarioUuid:missing')
     process.exit(1)
