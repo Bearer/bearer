@@ -14,7 +14,7 @@ export enum IntentType {
   FetchData = 'FetchData'
 }
 
-type TFetchBearerResult = { meta: { referenceId: string }; data: Array<any> | any }
+type TFetchBearerResult = { meta: { referenceId: string }; data: Array<any> | any; error?: any }
 
 export type TFetchBearerData = { data: Array<any> | any; referenceId?: string }
 
@@ -117,11 +117,15 @@ export function IntentPromise(promise: Promise<TFetchBearerResult>): Promise<TFe
   return new Promise((resolve, reject) => {
     promise
       .then((payload: TFetchBearerResult) => {
-        const { data, meta: { referenceId } = { referenceId: null } } = payload
-        resolve({ data, referenceId })
+        if (payload.error) {
+          reject({ error: payload.error })
+        } else {
+          const { data, meta: { referenceId } = { referenceId: null } } = payload
+          resolve({ data, referenceId })
+        }
       })
-      .catch(e => {
-        reject({ data: [], err: e })
+      .catch(error => {
+        reject({ error })
       })
   })
 }
