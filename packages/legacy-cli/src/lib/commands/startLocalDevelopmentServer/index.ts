@@ -73,7 +73,7 @@ export default function startLocalDevelopmentServer(
                     bearerBaseURL
                   },
                   queryStringParameters: ctx.query,
-                  body: JSON.stringify(ctx.request.body)
+                  body: ctx.request.body
                 },
                 {},
                 (_err, datum) => {
