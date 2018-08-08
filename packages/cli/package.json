@@ -6,8 +6,9 @@
   "bin": {
     "bearer": "./bin/run"
   },
-  "bugs": "https://github.com/Bearer/bearer/packages/cli/issues",
+  "bugs": "https://github.com/Bearer/bearer/issues",
   "dependencies": {
+    "@bearer/bearer-cli": "^0.36.3",
     "@oclif/command": "^1",
     "@oclif/config": "^1",
     "@oclif/plugin-help": "^2",
