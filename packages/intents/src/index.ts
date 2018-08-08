@@ -61,7 +61,7 @@ export class SaveState extends StateIntentBase {
               action(
                 event.context,
                 event.queryStringParameters,
-                event.body,
+                bodyFromEvent(event),
                 state,
                 (result: { state: any; data: any }) => {
                   if (savedState) {
@@ -130,10 +130,14 @@ export class FetchData extends GenericIntentBase {
 
   static intent(action: d.TFetchDataAction) {
     return (event: d.TLambdaEvent, _context, lambdaCallback: d.TLambdaCallback) => {
-      const { body = empty } = event
-      action(event.context, event.queryStringParameters, JSON.parse(body || empty), result => {
+      action(event.context, event.queryStringParameters, bodyFromEvent(event), result => {
         Intent.fetchData(lambdaCallback, result)
       })
     }
   }
+}
+
+function bodyFromEvent(event: d.TLambdaEvent): any {
+  const { body = empty } = event
+  return JSON.parse(body || empty)
 }
