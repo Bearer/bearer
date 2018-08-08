@@ -1,6 +1,6 @@
 {
   "name": "@bearer/transpiler",
-  "version": "0.37.1",
+  "version": "0.37.2",
   "description": "Bearer transpiler",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

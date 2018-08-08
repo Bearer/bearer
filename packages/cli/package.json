@@ -1,14 +1,14 @@
 {
   "name": "@bearer/cli",
   "description": "Bearer CLI",
-  "version": "0.37.1",
+  "version": "0.37.2",
   "author": "Bearer Team",
   "bin": {
     "bearer": "./bin/run"
   },
   "bugs": "https://github.com/Bearer/bearer/issues",
   "dependencies": {
-    "@bearer/bearer-cli": "^0.37.1",
+    "@bearer/bearer-cli": "^0.37.2",
     "@oclif/command": "^1",
     "@oclif/config": "^1",
     "@oclif/plugin-help": "^2",
