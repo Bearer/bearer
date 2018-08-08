@@ -122,6 +122,7 @@ export class RetrieveState extends StateIntentBase {
   }
 }
 
+const empty = '{}'
 export class FetchData extends GenericIntentBase {
   static get display(): string {
     return 'FetchData'
@@ -129,8 +130,8 @@ export class FetchData extends GenericIntentBase {
 
   static intent(action: d.TFetchDataAction) {
     return (event: d.TLambdaEvent, _context, lambdaCallback: d.TLambdaCallback) => {
-      const { body = '{}' } = event
-      action(event.context, event.queryStringParameters, JSON.parse(body), result => {
+      const { body = empty } = event
+      action(event.context, event.queryStringParameters, JSON.parse(body || empty), result => {
         Intent.fetchData(lambdaCallback, result)
       })
     }
