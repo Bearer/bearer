@@ -1,12 +1,10 @@
 import axios from 'axios'
-import * as querystring from 'querystring'
 import * as cosmiconfig from 'cosmiconfig'
 import startLocalDevelopmentServer from './startLocalDevelopmentServer'
 
 import Locator from '../locationProvider'
 
 type IConfig = {
-  httpMethod?: string
   params?: {}
   body?: {}
 }
@@ -23,7 +21,7 @@ export const invoke = (emitter, config, locator: Locator) => async (intent, cmd)
     const { config = {} } = (await explorer.search(locator.scenarioRootResourcePath.toString())) || {}
     fileData = config
   }
-  const { httpMethod = 'GET', params = {}, body = {} } = fileData
+  const { params = {}, body = {} } = fileData
 
   const integrationHostURL = await startLocalDevelopmentServer(emitter, config, locator)
 
@@ -33,16 +31,8 @@ export const invoke = (emitter, config, locator: Locator) => async (intent, cmd)
   })
 
   try {
-    let intentData
-    if (httpMethod == 'GET') {
-      const { data } = await client.get(`${scenarioUuid}/${intent}?${querystring.stringify(params)}`)
-      intentData = data
-    }
-    if (httpMethod == 'POST') {
-      const { data } = await client.post(`${scenarioUuid}/${intent}`, querystring.stringify(body))
-      intentData = data
-    }
-    console.log(JSON.stringify(intentData, null, 2))
+    const { data } = await client.post(`${scenarioUuid}/${intent}`, body, { params })
+    console.log(JSON.stringify(data, null, 2))
     process.exit(0)
   } catch (e) {
     console.log(e)

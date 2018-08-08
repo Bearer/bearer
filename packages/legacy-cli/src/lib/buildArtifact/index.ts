@@ -94,6 +94,9 @@ export function transpileIntents(entriesPath: string, distPath: string): Promise
           webpack(
             {
               mode: 'production',
+              // optimization: {
+              //   minimize: false
+              // },
               entry: entries,
               module: {
                 rules: [
