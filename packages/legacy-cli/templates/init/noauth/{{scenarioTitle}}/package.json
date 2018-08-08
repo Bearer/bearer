@@ -21,7 +21,7 @@
     "axios": "^0.18.0"
   },
   "devDependencies": {
-    "@bearer/bearer-cli": "latest",
+    "@bearer/cli": "latest",
     "@types/jest": "latest",
     "@types/node": "latest",
     "jest": "latest"
