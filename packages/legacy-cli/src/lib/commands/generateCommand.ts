@@ -193,6 +193,7 @@ async function generateIntent({ emitter, locator }: { emitter: any; locator: Loc
     actionExample,
     callbackType: `T${intentType}Callback`
   }
+
   const inDir = path.join(__dirname, 'templates/generate/intent')
   const outDir = locator.srcIntentsDir
 
