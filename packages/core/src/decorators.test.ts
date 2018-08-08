@@ -4,6 +4,8 @@ import fetch from 'jest-fetch-mock'
 
 const SCENARIO_ID = '1234'
 const commonParams = {
+  body: '{}',
+  method: 'POST',
   credentials: 'include',
   headers: {
     'content-type': 'application/json',
