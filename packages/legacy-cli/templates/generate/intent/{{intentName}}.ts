@@ -1,4 +1,4 @@
-import { {{intentType}}, T{{authType}}Context } from '@bearer/intents'
+import { {{intentType}}, T{{authType}}Context, {{callbackType}} } from '@bearer/intents'
 import Client from './client'
 
 export default class {{intentName}}Intent {

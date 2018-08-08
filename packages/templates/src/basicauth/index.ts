@@ -5,33 +5,54 @@ export default {
     _params,
     body: any,
     state: any,
-    callback: (any) => void
+    callback: TSaveStateCallback
   ): void {
     const { item: { name } } = body
     const { items = [] }: any = state
     const newItem: any = { name }
 
     callback({
-      ...state,
-      items: [...items, newItem]
+      state: {
+        ...state,
+        items: [...items, newItem]
+      }
     })
   }
   `,
   RetrieveState: `
-  static action(_context: TbasicAuthContext, _params: any, state, callback) {
-    callback({ items: state.items.map(({ name }) => name) })
+  static action(_context: TbasicAuthContext, _params: any, state, callback: TRetrieveStateCallback) {
+    callback({ state })
   }
   `,
   FetchData: `
-  static action(context: TbasicAuthContext, params: any, callback: (payload: { data: any }) => void) {
+  static action(context: TbasicAuthContext, params: any, callback: TFetchDataCallback) {
     //... your code goes here
     // use the client defined in client.ts to fetch real object like that:
     // Client(
     //   context.authAccess.username,
     //   context.authAccess.password
     // ).get('/people').then(({ data }) => {
-    //   callback({ data })
-    // })
+    //     callback({ data })
+    //   })
+    //   .catch((error) => {
+    //     callback({ error: error.toString() })
+    //   })
+    callback({ data: []})
+  }
+  `,
+  PostData: `
+  static action(context: TbasicAuthContext, params: any, body: any, callback: TPostDataCallback) {
+    //... your code goes here
+    // use the client defined in client.ts to fetch real object like that:
+    // Client(
+    //   context.authAccess.username,
+    //   context.authAccess.password
+    // ).get('/people').then(({ data }) => {
+    //     callback({ data })
+    //   })
+    //   .catch((error) => {
+    //     callback({ error: error.toString() })
+    //   })
     callback({ data: []})
   }
   `

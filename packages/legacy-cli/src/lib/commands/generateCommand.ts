@@ -186,7 +186,13 @@ async function generateIntent({ emitter, locator }: { emitter: any; locator: Loc
   const name = await askForName()
   const authConfig = require(locator.authConfigPath)
   const actionExample = getActionExample(intentType, authConfig.authType)
-  const vars = { intentName: name, authType: authConfig.authType, intentType, actionExample }
+  const vars = {
+    intentName: name,
+    authType: authConfig.authType,
+    intentType,
+    actionExample,
+    callbackType: `T${intentType}Callback`
+  }
   const inDir = path.join(__dirname, 'templates/generate/intent')
   const outDir = locator.srcIntentsDir
 
