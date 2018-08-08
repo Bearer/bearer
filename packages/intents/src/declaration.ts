@@ -16,7 +16,7 @@ export type TRetrieveStateCallback = {
  * whereras data sent to the frontend could be different
  */
 export type TSaveStateCallback = {
-  (payload: { data: any; state: any } | { error: any }): void
+  (payload: { state: any; data?: any } | { error: any }): void
 }
 
 /**
