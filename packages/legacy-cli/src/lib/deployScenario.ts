@@ -88,7 +88,8 @@ export function deployViews(emitter, config, locator: LocationProvider) {
       await transpileStep(emitter, locator, config)
 
       emitter.emit('views:generateSetupComponent')
-      await execPromise('bearer generate --setup', { cwd: buildDirectory })
+      const bearer = path.join(__dirname, '../../bin', 'index.js')
+      await execPromise(`node ${bearer} generate --setup`, { cwd: buildDirectory })
 
       emitter.emit('views:buildingDist')
       await execPromise(`${config.command} build`, {
