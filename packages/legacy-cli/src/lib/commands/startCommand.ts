@@ -104,6 +104,9 @@ export function prepare(emitter, config, locator: Locator) {
         locator.buildViewsResourcePath('global'),
         path.join(locator.buildViewsComponentsDir, 'global')
       )
+
+      await generateSetup({ emitter, locator })
+
       // Link non TS files
       const watcher = await watchNonTSFiles(srcViewsDir, buildViewsComponentsDir)
 
