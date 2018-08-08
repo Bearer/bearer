@@ -11,9 +11,6 @@
   "files": [
     "dist/"
   ],
-  "bin": {
-    "bearer": "./dist/bin/index.js"
-  },
   "scripts": {
     "start": "yarn build",
     "templates": "yarn cleanup && copyfiles -a \"./templates/**/*\" dist/src/lib/commands/",
