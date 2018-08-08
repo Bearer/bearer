@@ -135,7 +135,7 @@ export function transpileIntents(entriesPath: string, distPath: string): Promise
             },
             (err, stats) => {
               if (err || stats.hasErrors()) {
-                reject(stats.toJson('verbose').errors)
+                reject(stats)
               } else {
                 resolve(true)
               }

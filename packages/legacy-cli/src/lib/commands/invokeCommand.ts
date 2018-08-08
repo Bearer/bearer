@@ -22,15 +22,11 @@ export const invoke = (emitter, config, locator: Locator) => async (intent, cmd)
     fileData = config
   }
   const { params = {}, body = {} } = fileData
-
-  const integrationHostURL = await startLocalDevelopmentServer(emitter, config, locator)
-
-  const client = axios.create({
-    baseURL: `${integrationHostURL}api/v1`,
-    timeout: 5000
-  })
-
   try {
+    const integrationHostURL = await startLocalDevelopmentServer(emitter, config, locator)
+
+    const client = axios.create({ baseURL: `${integrationHostURL}api/v1`, timeout: 5000 })
+
     const { data } = await client.post(`${scenarioUuid}/${intent}`, body, { params })
     console.log(JSON.stringify(data, null, 2))
     process.exit(0)

@@ -34,7 +34,6 @@ export default function startLocalDevelopmentServer(
     try {
       const { config: devIntentsContext = {} } = (await explorer.search(rootLevel)) || {}
       const distPath = locator.buildIntentsResourcePath('dist')
-      await transpileIntents(locator.srcIntentsDir, distPath)
 
       async function refreshIntents() {
         try {
@@ -45,6 +44,7 @@ export default function startLocalDevelopmentServer(
           emitter.emit('start:localServer:generatingIntents:failed', { error })
         }
       }
+      await refreshIntents()
 
       chokidar
         .watch('.', {

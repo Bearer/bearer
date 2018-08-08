@@ -512,7 +512,20 @@ module.exports = emitter => {
   emitter.on('start:localServer:generatingIntents:failed', ({ error }) => {
     term.white('Bearer: ')
     term.yellow('[local:intentServer] ')
-    term.red('Intents error', error.toString())
+    term.red('Intents building error\n')
+    console.log(
+      error.toString({
+        builtAt: false,
+        entrypoints: false,
+        assets: false,
+        version: false,
+        timings: false,
+        hash: false,
+        modules: false,
+        chunks: false, // Makes the build much quieter
+        colors: true // Shows colors in the console
+      })
+    )
     term('\n')
   })
 
