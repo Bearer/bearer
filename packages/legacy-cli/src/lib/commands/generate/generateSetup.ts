@@ -3,6 +3,7 @@ import * as path from 'path'
 import * as del from 'del'
 import * as Case from 'case'
 import * as copy from 'copy-template-dir'
+import * as detect from 'detect-file'
 import Locator from '../../locationProvider'
 
 export function generateSetup({
@@ -29,7 +30,9 @@ export function generateSetup({
         })
       }
 
-      if (authConfig[configKey] && authConfig[configKey].length) {
+      if (isSetupExist(locator)) {
+        resolve()
+      } else if (authConfig[configKey] && authConfig[configKey].length) {
         const vars = {
           componentName: Case.pascal(scenarioTitle),
           componentTagName: Case.kebab(scenarioTitle),
@@ -49,4 +52,11 @@ export function generateSetup({
       reject(error)
     }
   })
+}
+
+function isSetupExist(locator): boolean {
+  return (
+    detect(path.join(locator.srcViewsDir, 'setup-action.tsx')) &&
+    detect(path.join(locator.srcViewsDir, 'setup-display.tsx'))
+  )
 }
