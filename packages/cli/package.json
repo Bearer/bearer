@@ -51,7 +51,7 @@
       "@oclif/plugin-help"
     ]
   },
-  "repository": "Bearer/bearer/packages/cli",
+  "repository": "Bearer/bearer",
   "scripts": {
     "postpack": "rm -f oclif.manifest.json npm-shrinkwrap.json",
     "posttest": "tsc -p test --noEmit && tslint -p test -t stylish",
