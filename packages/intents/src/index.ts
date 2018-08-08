@@ -107,8 +107,8 @@ export class RetrieveState extends StateIntentBase {
               event.context,
               event.queryStringParameters,
               state.Item,
-              (preparedState: { state: any; data?: any }): void => {
-                lambdaCallback(null, { meta: { referenceId: state.Item.referenceId }, data: preparedState.state })
+              (preparedState: { data: any }): void => {
+                lambdaCallback(null, { meta: { referenceId: state.Item.referenceId }, data: preparedState.data })
               }
             )
           } else {
