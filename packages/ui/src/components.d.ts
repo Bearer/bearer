@@ -18,7 +18,7 @@ import {
   TMemberRenderer,
 } from './components/navigator/types';
 import {
-  TCollectionData,
+  TFetchBearerData,
 } from '@bearer/core';
 import {
   TCollectionRenderer,
@@ -213,7 +213,7 @@ declare global {
     }
 
     interface BearerPaginator {
-      'fetcher': (refineParams: { page: number }) => Promise<TCollectionData>;
+      'fetcher': (refineParams: { page: number }) => Promise<TFetchBearerData>;
       'pageCount': number;
       'perPage': number;
       'renderCollection': (collection: Array<any>) => any;
@@ -222,7 +222,7 @@ declare global {
     }
 
     interface BearerScrollable {
-      'fetcher': ({ page: number }) => Promise<TCollectionData>;
+      'fetcher': ({ page: number }) => Promise<TFetchBearerData>;
       'perPage': number;
       'renderCollection': TCollectionRenderer;
       'renderFetching': () => any;
@@ -675,7 +675,7 @@ declare global {
     }
 
     export interface BearerPaginatorAttributes extends HTMLAttributes {
-      'fetcher'?: (refineParams: { page: number }) => Promise<TCollectionData>;
+      'fetcher'?: (refineParams: { page: number }) => Promise<TFetchBearerData>;
       'pageCount'?: number;
       'perPage'?: number;
       'renderCollection'?: (collection: Array<any>) => any;
@@ -683,7 +683,7 @@ declare global {
     }
 
     export interface BearerScrollableAttributes extends HTMLAttributes {
-      'fetcher'?: ({ page: number }) => Promise<TCollectionData>;
+      'fetcher'?: ({ page: number }) => Promise<TFetchBearerData>;
       'perPage'?: number;
       'renderCollection'?: TCollectionRenderer;
       'renderFetching'?: () => any;

@@ -1,4 +1,4 @@
-import { Component, Listen, Prop, State, Method, Element, TCollectionData } from '@bearer/core'
+import { Component, Listen, Prop, State, Method, Element, TFetchBearerData } from '@bearer/core'
 import { TCollectionRenderer } from './types'
 
 @Component({
@@ -6,25 +6,36 @@ import { TCollectionRenderer } from './types'
   styleUrl: 'scrollable.scss'
 })
 export class BearerScrollable {
-  @Prop() renderCollection?: TCollectionRenderer
-  @Prop() rendererProps?: JSXElements.BearerNavigatorCollectionAttributes
-  @Prop() renderFetching?: () => any
-  @Prop() perPage?: number = 5
-  @Prop() fetcher: ({ page: number }) => Promise<TCollectionData>
+  @Prop()
+  renderCollection?: TCollectionRenderer
+  @Prop()
+  rendererProps?: JSXElements.BearerNavigatorCollectionAttributes
+  @Prop()
+  renderFetching?: () => any
+  @Prop()
+  perPage?: number = 5
+  @Prop()
+  fetcher: ({ page: number }) => Promise<TFetchBearerData>
 
-  @State() hasMore: boolean = true
-  @State() page: number = 1
-  @State() fetching: boolean = false
-  @State() collection: Array<any> = []
-  @State() content: HTMLElement
-  @Element() element: HTMLElement
+  @State()
+  hasMore: boolean = true
+  @State()
+  page: number = 1
+  @State()
+  fetching: boolean = false
+  @State()
+  collection: Array<any> = []
+  @State()
+  content: HTMLElement
+  @Element()
+  element: HTMLElement
 
   @Listen('BearerScrollableNext')
   fetchNext() {
     if (this.hasMore) {
       this.fetching = true
       this.fetcher({ page: this.page })
-        .then(({ data }: TCollectionData) => {
+        .then(({ data }: TFetchBearerData) => {
           console.log('[BEARER]', 'data receiced from fetcher', data)
           this.hasMore = data.length === this.perPage
           this.collection = [...this.collection, ...data]
