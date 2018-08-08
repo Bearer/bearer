@@ -128,19 +128,6 @@ export class FetchData extends GenericIntentBase {
   }
 
   static intent(action: d.TFetchDataAction) {
-    return (event: d.TLambdaEvent, _context, lambdaCallback: d.TLambdaCallback) =>
-      action(event.context, event.queryStringParameters, result => {
-        Intent.fetchData(lambdaCallback, result)
-      })
-  }
-}
-
-export class PostData extends GenericIntentBase {
-  static get display() {
-    return 'PostData'
-  }
-
-  static intent(action: d.TPostDataAction) {
     return (event: d.TLambdaEvent, _context, lambdaCallback: d.TLambdaCallback) => {
       const { body = '{}' } = event
       action(event.context, event.queryStringParameters, JSON.parse(body), result => {

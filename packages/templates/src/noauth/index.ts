@@ -26,12 +26,7 @@ export default {
   }
   `,
   FetchData: `
-  static action(context: TnoAuthContext, params: any, callback: TFetchDataCallback) {
-    //... your code goes here
-    callback({ data: []})
-  }`,
-  PostData: `
-  static action(context: TnoAuthContext, params: any, body: any, callback: TPostDataCallback) {
+  static action(context: TnoAuthContext, params: any, body: any, callback: TFetchDataCallback) {
     //... your code goes here
     callback({ data: []})
   }`

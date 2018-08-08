@@ -3,10 +3,6 @@ import { intentRequest } from '../requests'
 /**
  * Declarations
  */
-enum IntentNames {
-  RetrieveState = 'RetrieveState',
-  SaveState = 'SaveState'
-}
 
 export enum IntentType {
   RetrieveState = 'RetrieveState',
@@ -77,10 +73,7 @@ export function Intent(intentName: string, type: IntentType = IntentType.FetchDa
         const { body, ...queryParams } = params
         const baseQuery = referenceId ? { referenceId } : {}
         const query = { ...baseQuery, ...queryParams }
-        const InitMapper = {
-          [IntentType.SaveState]: { method: 'PUT', body: JSON.stringify(body) }
-        }
-        const init = InitMapper[type] || {}
+        const init = { method: 'POST', body: JSON.stringify(body || {}) }
 
         // Build promise
         const promise: Promise<TFetchBearerData> = IntentPromise(intent(query, init))

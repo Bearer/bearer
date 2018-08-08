@@ -18,7 +18,6 @@ export type TSaveStateSuccessCallback = {
 
 export type TIntentCallback = TIntentSuccessCallback | TErrorCallback
 export type TFetchDataCallback = TIntentCallback
-export type TPostDataCallback = TIntentCallback
 
 export type TRetrieveStateCallback = TRetrieveStateSuccessCallback | TErrorCallback
 
@@ -41,10 +40,6 @@ export type IRetrieveStateIntentAction = {
 }
 
 export type TFetchDataAction = {
-  (context: TBearerLambdaContext, params: Record<string, any>, callback: TIntentCallback): void
-}
-
-export type TPostDataAction = {
   (
     context: TBearerLambdaContext,
     params: Record<string, any>,

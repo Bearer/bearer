@@ -26,19 +26,7 @@ export default {
   }
   `,
   FetchData: `
-  static action(context: Toauth2Context, params: any, callback: TFetchDataCallback) {
-    //... your code goes here
-    // use the client defined in client.ts to fetch real object like that:
-    // Client(context.authAccess.accessToken).get('/people').then(({ data }) => {
-    //     callback({ data })
-    //   })
-    //   .catch((error) => {
-    //     callback({ error: error.toString() })
-    //   })
-    callback({ data: []})
-  }`,
-  PostData: `
-  static action(context: Toauth2Context, params: any, body: any, callback: TPostDataCallback) {
+  static action(context: Toauth2Context, params: any, body: any, callback: TFetchDataCallback) {
     //... your code goes here
     // use the client defined in client.ts to fetch real object like that:
     // Client(context.authAccess.accessToken).get('/people').then(({ data }) => {
