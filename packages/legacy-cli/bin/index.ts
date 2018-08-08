@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 const program = require('commander')
 
-require('../scripts/check-version')
+// Done at OCLIF level
+// require('../scripts/check-version')
 const { version } = require('../../package.json')
 const { CLI } = require('../src/lib/cli')
 const Emitter = require('../src/lib/emitter')

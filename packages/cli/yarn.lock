@@ -110,7 +110,7 @@
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/@nodelib/fs.stat/-/fs.stat-1.1.0.tgz#50c1e2260ac0ed9439a181de3725a0168d59c48a"
 
-"@oclif/command@^1", "@oclif/command@^1.4.30", "@oclif/command@^1.4.33":
+"@oclif/command@^1", "@oclif/command@^1.4.21", "@oclif/command@^1.4.30", "@oclif/command@^1.4.33":
   version "1.4.36"
   resolved "https://registry.yarnpkg.com/@oclif/command/-/command-1.4.36.tgz#cca1e02d8264f34be9c2d692a3c81efc0de15fdf"
   dependencies:
@@ -119,7 +119,7 @@
     debug "^3.1.0"
     semver "^5.5.0"
 
-"@oclif/config@^1", "@oclif/config@^1.6.33":
+"@oclif/config@^1", "@oclif/config@^1.6.17", "@oclif/config@^1.6.33":
   version "1.6.33"
   resolved "https://registry.yarnpkg.com/@oclif/config/-/config-1.6.33.tgz#61906143b30751d96dd29991c20c214bf4d9e4ff"
   dependencies:
@@ -142,7 +142,7 @@
     qqjs "^0.3.10"
     tslib "^1.9.2"
 
-"@oclif/errors@^1.1.2":
+"@oclif/errors@^1.0.11", "@oclif/errors@^1.1.2":
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/@oclif/errors/-/errors-1.1.2.tgz#2a54aae07a7655cc4523cae270d0a50cbc5dbef3"
   dependencies:
@@ -175,6 +175,19 @@
     string-width "^2.1.1"
     widest-line "^2.0.0"
     wrap-ansi "^3.0.1"
+
+"@oclif/plugin-warn-if-update-available@^1.3.9":
+  version "1.3.9"
+  resolved "https://registry.yarnpkg.com/@oclif/plugin-warn-if-update-available/-/plugin-warn-if-update-available-1.3.9.tgz#ed1f55eea994b0e2bd918b4353daa0d937e84ad6"
+  dependencies:
+    "@oclif/command" "^1.4.21"
+    "@oclif/config" "^1.6.17"
+    "@oclif/errors" "^1.0.11"
+    chalk "^2.4.1"
+    debug "^3.1.0"
+    fs-extra "^6.0.1"
+    http-call "^5.1.2"
+    semver "^5.5.0"
 
 "@oclif/screen@^1.0.2":
   version "1.0.2"
