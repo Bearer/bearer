@@ -20,7 +20,7 @@ describe('SaveState', () => {
     const referenceId = 'SPONGE_BOB'
 
     const action = (_context: any, _params: any, body: any, state: any, callback: (state: any) => void) => {
-      callback({ ...state, ...body })
+      callback({ state, data: { ...state, ...body } })
     }
 
     const event = {
@@ -175,7 +175,7 @@ describe('RetrieveState', () => {
     }
 
     const action = (_context: any, _params: any, state: any, callback: (state: any) => void) => {
-      callback(state)
+      callback({ state, data: state })
     }
 
     it('returns meta + data', async done => {
