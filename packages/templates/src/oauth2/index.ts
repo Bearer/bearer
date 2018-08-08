@@ -1,8 +1,8 @@
 export default {
   SaveState: `
   static action(
-    _context,
-    _params,
+    _context: Toauth2Context,
+    _params: any,
     body: any,
     state: any,
     callback: TSaveStateCallback
@@ -15,7 +15,8 @@ export default {
       state: {
         ...state,
         items: [...items, newItem]
-      }
+      },
+      data: [...items, newItem]
     })
   }
   `,
