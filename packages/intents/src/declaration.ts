@@ -1,27 +1,23 @@
 import { AxiosResponse } from 'axios'
 
-export type TIntentSuccessCallback = {
-  ({ data }: { data: any }): void
+/**
+ * Intent callbacks
+ */
+export type TFetchDataCallback = {
+  (payload: { data: any } | { error: any }): void
 }
 
-export type TRetrieveStateSuccessCallback = {
-  ({ state }: { state: any }): void
+export type TRetrieveStateCallback = {
+  (payload: { data: any } | { error: any }): void
 }
 
-export type TErrorCallback = {
-  ({ error }: { error: any }): void
+/**
+ * when success, state represent the data you want to store within Bearer database
+ * whereras data sent to the frontend could be different
+ */
+export type TSaveStateCallback = {
+  (payload: { data: any; state: any } | { error: any }): void
 }
-
-export type TSaveStateSuccessCallback = {
-  ({ state, data }: { state: any; data: any }): void
-}
-
-export type TIntentCallback = TIntentSuccessCallback | TErrorCallback
-export type TFetchDataCallback = TIntentCallback
-
-export type TRetrieveStateCallback = TRetrieveStateSuccessCallback | TErrorCallback
-
-export type TSaveStateCallback = TSaveStateSuccessCallback | TErrorCallback
 
 /**
  * Intents
@@ -44,7 +40,7 @@ export type TFetchDataAction = {
     context: TBearerLambdaContext,
     params: Record<string, any>,
     body: Record<string, any>,
-    callback: TIntentCallback
+    callback: TFetchDataCallback
   ): void
 }
 
