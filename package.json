@@ -21,6 +21,7 @@
   "devDependencies": {
     "@commitlint/cli": "^7.0.0",
     "@commitlint/config-conventional": "^7.0.1",
+    "@oclif/tslint": "^1.1.2",
     "babel-core": "^6.26.3",
     "babel-jest": "^23.4.0",
     "babel-loader": "^7.1.5",
@@ -34,7 +35,9 @@
     "lerna": "^3.0.0-rc.0",
     "lint-staged": "^7.2.0",
     "per-env": "^1.0.2",
-    "prettier": "^1.14.0"
+    "prettier": "^1.14.0",
+    "tslint": "^5.11.0",
+    "tslint-config-prettier": "^1.14.0"
   },
   "transform": {
     "^.+\\.jsx?$": "babel-jest"

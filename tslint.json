@@ -1,0 +1,7 @@
+{
+  "extends": ["@oclif/tslint", "tslint-config-prettier"],
+  "rules": {
+    "object-curly-spacing": [true, "always"],
+    "no-console": false
+  }
+}
