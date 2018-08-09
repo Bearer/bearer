@@ -90,6 +90,7 @@ export function deployViews(emitter, config, locator: LocationProvider) {
         cwd: buildDirectory,
         env: {
           BEARER_SCENARIO_ID: scenarioUuid,
+          BEARER_SCENARIO_TAG_NAME: scenarioId,
           BEARER_INTEGRATION_HOST: config.IntegrationServiceHost,
           BEARER_AUTHORIZATION_HOST: config.IntegrationServiceHost,
           ...process.env,
