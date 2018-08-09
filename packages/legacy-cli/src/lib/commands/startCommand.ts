@@ -160,17 +160,22 @@ export const start = (emitter, config, locator: Locator) => async ({ open, insta
     /* Start bearer transpiler phase */
     const BEARER = 'bearer-transpiler'
     const options = [watcher ? null : '--no-watcher']
+
+    // Build env for sub commands
+    const envVariables = {
+      ...process.env,
+      BEARER_SCENARIO_TAG_NAME: 'localhost',
+      BEARER_SCENARIO_ID: scenarioUuid,
+      BEARER_INTEGRATION_HOST: integrationHost,
+      BEARER_AUTHORIZATION_HOST: integrationHost
+    }
+
     const bearerTranspiler = spawn(
       'node',
       [path.join(__dirname, '..', 'startTranspiler.js'), options].filter(el => el),
       {
         cwd: scenarioRoot,
-        env: {
-          ...process.env,
-          BEARER_SCENARIO_TAG_NAME: 'localhost',
-          BEARER_SCENARIO_ID: scenarioUuid,
-          BEARER_INTEGRATION_HOST: integrationHost
-        },
+        env: envVariables,
         stdio: ['pipe', 'pipe', 'pipe', 'ipc']
       }
     )
@@ -199,12 +204,7 @@ export const start = (emitter, config, locator: Locator) => async ({ open, insta
           }
           const stencil = spawn(config.command, args, {
             cwd: buildViewsDir,
-            env: {
-              ...process.env,
-              BEARER_SCENARIO_TAG_NAME: scenarioId,
-              BEARER_SCENARIO_ID: scenarioUuid,
-              BEARER_INTEGRATION_HOST: integrationHost
-            }
+            env: envVariables
           })
 
           const STENCIL = 'stencil'
