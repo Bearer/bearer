@@ -10,11 +10,15 @@ export type FWithAuthenticate = {
   tag: 'bearer-authorized'
 })
 export class BearerAuthorized extends WithAuthenticationMethods implements IAuthenticated {
-  @State() authorized: boolean = null
-  @State() sessionInitialized: boolean = false
+  @State()
+  authorized: boolean = null
+  @State()
+  sessionInitialized: boolean = false
 
-  @Prop() renderUnauthorized: FWithAuthenticate
-  @Prop() renderAuthorized: () => any
+  @Prop()
+  renderUnauthorized: FWithAuthenticate
+  @Prop()
+  renderAuthorized: () => any
   @Prop({ context: 'bearer' })
   bearerContext: any
 
@@ -22,6 +26,7 @@ export class BearerAuthorized extends WithAuthenticationMethods implements IAuth
   private pendingAuthorizationReject: (authorize: boolean) => void
 
   onAuthorized = () => {
+    console.log('[BEARER]', 'onAuthorized', !!this.pendingAuthorizationResolve)
     this.authorized = true
     if (this.pendingAuthorizationResolve) {
       this.pendingAuthorizationResolve(true)
@@ -30,6 +35,7 @@ export class BearerAuthorized extends WithAuthenticationMethods implements IAuth
 
   onRevoked = () => {
     this.authorized = false
+    console.log('[BEARER]', 'onRevoked', !!this.pendingAuthorizationReject)
     if (this.pendingAuthorizationReject) {
       this.pendingAuthorizationReject(false)
     }

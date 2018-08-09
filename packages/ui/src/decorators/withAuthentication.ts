@@ -4,9 +4,12 @@ export default function AuthenticationListener() {
   return function(target) {
     const oldDidLoad = target.prototype.componentDidLoad
     target.prototype.componentDidLoad = function(this: IAuthenticatedLike) {
-      console.log('[BEARER]', 'this', target, this)
+      console.log('[BEARER]', 'componentDidLoad authentication', this)
       Bearer.instance.maybeInitialized
         .then(() => {
+          this.authorizedListener = Bearer.onAuthorized(this.SCENARIO_ID, this.onAuthorized)
+          this.revokedListener = Bearer.onRevoked(this.SCENARIO_ID, this.onRevoked)
+
           if (this.onSessionInitialized) {
             this.onSessionInitialized()
           }
@@ -21,8 +24,6 @@ export default function AuthenticationListener() {
               console.log('[BEARER]', 'unauthorized', { error })
               this.onRevoked()
             })
-          this.authorizedListener = Bearer.onAuthorized(this.SCENARIO_ID, this.onAuthorized)
-          this.revokedListener = Bearer.onRevoked(this.SCENARIO_ID, this.onRevoked)
         })
         .catch(error => {
           console.error('[BEARER]', 'Could not initialize session', { error })

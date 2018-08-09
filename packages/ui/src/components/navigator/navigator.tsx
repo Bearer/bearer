@@ -1,4 +1,4 @@
-import { Component, Element, Listen, Prop, State, Watch } from '@bearer/core'
+import { Component, Element, Listen, Prop, State } from '@bearer/core'
 
 const NAVIGATOR_AUTH_SCREEN_NAME = 'BEARER-NAVIGATOR-AUTH-SCREEN'
 
@@ -7,17 +7,27 @@ const NAVIGATOR_AUTH_SCREEN_NAME = 'BEARER-NAVIGATOR-AUTH-SCREEN'
   shadow: true
 })
 export class BearerPopoverNavigator {
-  @Element() el: HTMLElement
-  @State() screens: Array<any> = []
-  @State() screenData: Object = {}
-  @State() isVisible: boolean = false
-  @State() _visibleScreenIndex: number
-  @State() navigationTitle: string
+  @Element()
+  el: HTMLElement
+  @State()
+  screens: Array<any> = []
+  @State()
+  screenData: Object = {}
+  @State()
+  _isVisible: boolean = false
+  @State()
+  _visibleScreenIndex: number
+  @State()
+  navigationTitle: string
 
-  @Prop() direction: string = 'right'
-  @Prop() btnProps: JSXElements.BearerButtonAttributes = { content: 'Activate' }
-  @Prop() display = 'popover'
-  @Prop() complete?: <T>({ data, complete }: { data: T; complete: () => void }) => void
+  @Prop()
+  direction: string = 'right'
+  @Prop()
+  btnProps: JSXElements.BearerButtonAttributes = { content: 'Activate' }
+  @Prop()
+  display = 'popover'
+  @Prop()
+  complete?: <T>({ data, complete }: { data: T; complete: () => void }) => void
 
   @Listen('scenarioCompleted')
   scenarioCompletedHandler() {
@@ -43,6 +53,7 @@ export class BearerPopoverNavigator {
       e.preventDefault()
       e.stopPropagation()
     }
+    console.log('[BEARER]', 'Navigator: next', this.hasNext())
     if (this.hasNext()) {
       this.visibleScreen = Math.min(this._visibleScreenIndex + 1, this.screens.length - 1)
     } else if (this.complete) {
@@ -61,14 +72,20 @@ export class BearerPopoverNavigator {
     }
   }
 
-  @Watch('isVisible')
-  visibilityChangeHandler(newValue: boolean) {
-    // becomes visible
-    if (newValue) {
-      this.showScreen(this.visibleScreen)
-    } else {
-      // this.hideScreen(this.visibleScreen)
+  set isVisible(newValue: boolean) {
+    if (this._isVisible !== newValue) {
+      console.log('[BEARER]', 'Navigator:isVisibleChanged', newValue)
+      this._isVisible = newValue
+      if (newValue) {
+        this.showScreen(this.visibleScreen)
+      } else {
+        // this.hideScreen(this.visibleScreen)
+      }
     }
+  }
+
+  get isVisible(): boolean {
+    return this._isVisible
   }
 
   set visibleScreen(index) {
@@ -93,10 +110,12 @@ export class BearerPopoverNavigator {
   }
 
   onVisibilityChange = ({ detail: { visible } }: { detail: { visible: boolean } }) => {
+    console.log('[BEARER]', 'Navigator:onVisibilityChange', visible)
     this.isVisible = visible
   }
 
   showScreen = screen => {
+    console.log('[BEARER]', 'showScreen', screen, this.isVisible)
     if (screen && this.isVisible) {
       screen.willAppear(this.screenData)
       this.navigationTitle = screen.getTitle()
@@ -116,6 +135,7 @@ export class BearerPopoverNavigator {
   hasAuthScreen = () => this.screenNodes.filter(node => node['tagName'] === NAVIGATOR_AUTH_SCREEN_NAME).length
 
   componentDidLoad() {
+    console.log('[BEARER]', 'Navigator: componentDidLoad ')
     this.screens = this.screenNodes
     this._visibleScreenIndex = 0
   }

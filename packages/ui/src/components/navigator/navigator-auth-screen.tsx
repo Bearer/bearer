@@ -8,20 +8,26 @@ import WithAuthentication, { IAuthenticated, WithAuthenticationMethods } from '.
   shadow: true
 })
 export class BearerNavigatorAuthScreen extends WithAuthenticationMethods implements IAuthenticated {
-  @Element() el: HTMLStencilElement
+  @Element()
+  el: HTMLStencilElement
 
-  @State() scenarioAuthorized: boolean = null
+  @State()
+  scenarioAuthorized: boolean = null
 
-  @Event() scenarioAuthenticate: EventEmitter
-  @Event() stepCompleted: EventEmitter
+  @Event()
+  scenarioAuthenticate: EventEmitter
+  @Event()
+  stepCompleted: EventEmitter
 
   @Method()
   willAppear() {
+    console.log('[BEARER]', 'Auth screen willAppear')
     this.el.shadowRoot.querySelector('#screen')['willAppear']()
   }
 
   @Method()
   willDisappear() {
+    console.log('[BEARER]', 'Auth screen willAppear')
     this.el.shadowRoot.querySelector('#screen')['willDisappear']()
   }
 
@@ -31,6 +37,7 @@ export class BearerNavigatorAuthScreen extends WithAuthenticationMethods impleme
   }
 
   onAuthorized = () => {
+    console.log('[BEARER]', 'onAuthorized')
     this.goNext()
   }
 
@@ -39,6 +46,7 @@ export class BearerNavigatorAuthScreen extends WithAuthenticationMethods impleme
   }
 
   goNext() {
+    console.log('[BEARER]', 'go to next screen')
     this.scenarioAuthenticate.emit()
     this.stepCompleted.emit()
     this.scenarioAuthorized = true
