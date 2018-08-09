@@ -15,6 +15,18 @@ const deploy = (emitter, config, locator: Locator) => async ({ viewsOnly = false
     process.exit(1)
   }
 
+  if (
+    !(
+      config.bearerConfig &&
+      config.bearerConfig.authorization &&
+      config.bearerConfig.authorization.AuthenticationResult &&
+      config.bearerConfig.authorization.AuthenticationResult.IdToken
+    )
+  ) {
+    emitter.emit('user:notAuthenticated')
+    process.exit(1)
+  }
+
   const deployOptions: IDeployOptions = { noViews: intentsOnly, noIntents: viewsOnly }
 
   try {

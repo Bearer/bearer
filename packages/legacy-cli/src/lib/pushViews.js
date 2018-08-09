@@ -59,6 +59,7 @@ const pushViews = (
       }, {})
 
       const urls = (await integrationsClient.signedUrls(token, Object.keys(paths), 'screen')).body
+
       await Promise.all(
         Object.keys(paths).map(key =>
           (async () => {

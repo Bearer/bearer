@@ -36,15 +36,17 @@ module.exports = async (config, emitter) => {
         break
       case 401:
         emitter.emit('refreshToken:failure', res.body)
-        break
+        throw new Error(res.body)
       default:
         emitter.emit('refreshToken:error', {
           code: res.statusCode,
           body: res.body
         })
+        throw new Error(res.body)
     }
   } catch (e) {
     emitter.emit('refreshToken:error', e)
+    throw new Error(e)
   }
 
   return Object.assign(config, { bearerConfig })

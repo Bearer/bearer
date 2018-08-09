@@ -308,6 +308,14 @@ module.exports = emitter => {
     term('\n')
   })
 
+  emitter.on('user:notAuthenticated', () => {
+    term.white('Bearer: ')
+    term.red('There was an error while trying to retrieve your access token')
+    term('\n')
+    term.white('Please use `bearer login` first')
+    term('\n')
+  })
+
   emitter.on('login:success', body => {
     term.white('Bearer: ')
     term.yellow('successfully logged in to bearer.')
@@ -526,6 +534,18 @@ module.exports = emitter => {
         colors: true // Shows colors in the console
       })
     )
+    term('\n')
+  })
+
+  emitter.on('deployIntents:error', () => {
+    term.white('Bearer: ')
+    term.red('No intents found: Skipped')
+    term('\n')
+  })
+
+  emitter.on('refreshToken:failure', () => {
+    term.white('Bearer: ')
+    term.red('Error while trying to authenticate: Please run `bearer login`')
     term('\n')
   })
 
