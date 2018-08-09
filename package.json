@@ -3,6 +3,10 @@
     "*.{js,json,css,md,tsx,ts}": [
       "prettier --write",
       "git add"
+    ],
+    "*.{tsx,ts}": [
+      "tslint --fix",
+      "git add"
     ]
   },
   "scripts": {
