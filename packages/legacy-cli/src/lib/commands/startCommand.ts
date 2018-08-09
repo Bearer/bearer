@@ -136,7 +136,7 @@ const ensureSetupComponents = (emitter, locator) => {
 }
 
 export const start = (emitter, config, locator: Locator) => async ({ open, install, watcher }) => {
-  const { scenarioUuid, scenarioId } = config
+  const { scenarioUuid } = config
 
   try {
     await prepare(emitter, config, locator)({
@@ -167,7 +167,7 @@ export const start = (emitter, config, locator: Locator) => async ({ open, insta
         cwd: scenarioRoot,
         env: {
           ...process.env,
-          BEARER_SCENARIO_TAG_NAME: scenarioId,
+          BEARER_SCENARIO_TAG_NAME: 'localhost',
           BEARER_SCENARIO_ID: scenarioUuid,
           BEARER_INTEGRATION_HOST: integrationHost
         },
