@@ -1,22 +1,22 @@
-const serviceClient = require('./serviceClient')
+import * as serviceClient from './serviceClient'
+import { Config } from './types'
 
-module.exports = (
+export default (
   emitter,
   {
     DeploymentUrl,
-    bearerConfig: { OrgId },
-    scenarioConfig: { scenarioTitle },
+    scenarioConfig: { orgId, scenarioId },
     bearerConfig: {
       authorization: {
         AuthenticationResult: { IdToken: token }
       }
     }
-  }
+  }: Config
 ) =>
   new Promise(async (resolve, reject) => {
     const client = serviceClient(DeploymentUrl)
     try {
-      const invalidationPath = `${OrgId}/${scenarioTitle}`
+      const invalidationPath = `${orgId}/${scenarioId}`
       const res = await client.viewsInvalidate(token, { invalidationPath })
 
       if (res.statusCode === 204) emitter.emit('invalidateCloudFront:success')

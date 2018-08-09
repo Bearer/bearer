@@ -9,10 +9,9 @@ import * as pushScenario from './pushScenario'
 import * as pushViews from './pushViews'
 import * as assembly from './assemblyScenario'
 import * as refreshToken from './refreshToken'
-import * as invalidateCloudFront from './invalidateCloudFront'
+import invalidateCloudFront from './invalidateCloudFront'
 import * as developerPortal from './developerPortal'
 import LocationProvider from './locationProvider'
-import { generateSetup } from './commands/generate'
 
 const execPromise = promisify(exec)
 
