@@ -1,4 +1,4 @@
-import cli from '@bearer/bearer-cli/dist/bin/index.js'
+import cli from '@bearer/bearer-cli/dist/bin/index'
 import Command from '@oclif/command'
 
 export default abstract class extends Command {
