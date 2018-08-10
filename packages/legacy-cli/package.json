@@ -1,6 +1,6 @@
 {
   "name": "@bearer/bearer-cli",
-  "version": "0.47.6",
+  "version": "0.47.8",
   "main": "index.js",
   "repository": "git@github.com:Bearer/bearer.git",
   "author": "Radek Molenda <radek@bearer.com>",
