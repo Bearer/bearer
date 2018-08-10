@@ -15,6 +15,7 @@
     "@oclif/plugin-help": "^2",
     "@oclif/plugin-not-found": "^1.1.4",
     "@oclif/plugin-warn-if-update-available": "^1.3.9",
+    "commander": "^2.17.1",
     "tslib": "^1"
   },
   "devDependencies": {

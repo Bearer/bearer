@@ -35,4 +35,6 @@ cli.use(startCmd)
 cli.use(linkCmd)
 cli.use(invokeCmd)
 
-cli.parse(process.argv)
+export default args => {
+  cli.parse(args)
+}
