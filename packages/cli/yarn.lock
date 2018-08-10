@@ -93,7 +93,15 @@
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/@nodelib/fs.stat/-/fs.stat-1.1.0.tgz#50c1e2260ac0ed9439a181de3725a0168d59c48a"
 
-"@oclif/command@^1", "@oclif/command@^1.4.21", "@oclif/command@^1.4.30", "@oclif/command@^1.4.31", "@oclif/command@^1.4.33":
+"@oclif/color@^0.0.0":
+  version "0.0.0"
+  resolved "https://registry.yarnpkg.com/@oclif/color/-/color-0.0.0.tgz#54939bbd16d1387511bf1a48ccda1a417248e6a9"
+  dependencies:
+    ansi-styles "^3.2.1"
+    supports-color "^5.4.0"
+    tslib "^1"
+
+"@oclif/command@^1", "@oclif/command@^1.4.21", "@oclif/command@^1.4.30", "@oclif/command@^1.4.31", "@oclif/command@^1.4.33", "@oclif/command@^1.4.34":
   version "1.4.36"
   resolved "https://registry.yarnpkg.com/@oclif/command/-/command-1.4.36.tgz#cca1e02d8264f34be9c2d692a3c81efc0de15fdf"
   dependencies:
@@ -171,6 +179,16 @@
     string-width "^2.1.1"
     widest-line "^2.0.0"
     wrap-ansi "^3.0.1"
+
+"@oclif/plugin-not-found@^1.1.4":
+  version "1.1.4"
+  resolved "https://registry.yarnpkg.com/@oclif/plugin-not-found/-/plugin-not-found-1.1.4.tgz#e9bf1bb196f28148ae132ed3d224c37bea703ace"
+  dependencies:
+    "@oclif/color" "^0.0.0"
+    "@oclif/command" "^1.4.34"
+    cli-ux "^4.7.3"
+    fast-levenshtein "^2.0.6"
+    lodash "^4.17.10"
 
 "@oclif/plugin-warn-if-update-available@^1.3.9":
   version "1.3.9"
@@ -477,7 +495,7 @@ clean-stack@^1.3.0:
   version "1.3.0"
   resolved "https://registry.yarnpkg.com/clean-stack/-/clean-stack-1.3.0.tgz#9e821501ae979986c46b1d66d2d432db2fd4ae31"
 
-cli-ux@^4.4.0, cli-ux@^4.7.2:
+cli-ux@^4.4.0, cli-ux@^4.7.2, cli-ux@^4.7.3:
   version "4.7.3"
   resolved "https://registry.yarnpkg.com/cli-ux/-/cli-ux-4.7.3.tgz#5b7f5e70105fde53883c5307a88e2f29f64236c4"
   dependencies:
@@ -777,6 +795,10 @@ fast-glob@^2.0.2:
     is-glob "^4.0.0"
     merge2 "^1.2.1"
     micromatch "^3.1.10"
+
+fast-levenshtein@^2.0.6:
+  version "2.0.6"
+  resolved "https://registry.yarnpkg.com/fast-levenshtein/-/fast-levenshtein-2.0.6.tgz#3d8a5c66883a16a30ca8643e851f19baa7797917"
 
 fill-range@^4.0.0:
   version "4.0.0"
