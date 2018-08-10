@@ -11,6 +11,7 @@
     "@bearer/bearer-cli": "^0.47.5",
     "@oclif/command": "^1",
     "@oclif/config": "^1",
+    "@oclif/plugin-autocomplete": "^0.1.0",
     "@oclif/plugin-help": "^2",
     "commander": "^2.17.1",
     "tslib": "^1"
@@ -47,7 +48,8 @@
     "commands": "./lib/commands",
     "bin": "bearer",
     "plugins": [
-      "@oclif/plugin-help"
+      "@oclif/plugin-help",
+      "@oclif/plugin-autocomplete"
     ]
   },
   "repository": "Bearer/bearer",
