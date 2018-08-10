@@ -26,7 +26,7 @@ $ npm install -g @bearer/cli
 $ bearer COMMAND
 running command...
 $ bearer (-v|--version|version)
-@bearer/cli/0.47.5 darwin-x64 node-v10.8.0
+@bearer/cli/0.47.6 darwin-x64 node-v10.8.0
 $ bearer --help [COMMAND]
 USAGE
   $ bearer COMMAND
@@ -37,6 +37,7 @@ USAGE
 # Commands
 
 <!-- commands -->
+* [`bearer autocomplete [SHELL]`](#bearer-autocomplete-shell)
 * [`bearer deploy`](#bearer-deploy)
 * [`bearer generate [NAME]`](#bearer-generate-name)
 * [`bearer help [COMMAND]`](#bearer-help-command)
@@ -45,6 +46,29 @@ USAGE
 * [`bearer login`](#bearer-login)
 * [`bearer new SCENARIONAME`](#bearer-new-scenarioname)
 * [`bearer start`](#bearer-start)
+
+## `bearer autocomplete [SHELL]`
+
+display autocomplete installation instructions
+
+```
+USAGE
+  $ bearer autocomplete [SHELL]
+
+ARGUMENTS
+  SHELL  shell type
+
+OPTIONS
+  -r, --refresh-cache  Refresh cache (ignores displaying instructions)
+
+EXAMPLES
+  $ bearer autocomplete
+  $ bearer autocomplete bash
+  $ bearer autocomplete zsh
+  $ bearer autocomplete --refresh-cache
+```
+
+_See code: [@oclif/plugin-autocomplete](https://github.com/oclif/plugin-autocomplete/blob/v0.1.0/src/commands/autocomplete/index.ts)_
 
 ## `bearer deploy`
 
@@ -60,7 +84,7 @@ OPTIONS
   -s, --views-only    Deploy views only
 ```
 
-_See code: [src/commands/deploy.ts](https://github.com/Bearer/bearer/blob/v0.47.5/src/commands/deploy.ts)_
+_See code: [src/commands/deploy.ts](https://github.com/Bearer/bearer/blob/v0.47.6/src/commands/deploy.ts)_
 
 ## `bearer generate [NAME]`
 
@@ -78,7 +102,7 @@ OPTIONS
   --setup
 ```
 
-_See code: [src/commands/generate.ts](https://github.com/Bearer/bearer/blob/v0.47.5/src/commands/generate.ts)_
+_See code: [src/commands/generate.ts](https://github.com/Bearer/bearer/blob/v0.47.6/src/commands/generate.ts)_
 
 ## `bearer help [COMMAND]`
 
@@ -110,7 +134,7 @@ OPTIONS
   -p, --path=path
 ```
 
-_See code: [src/commands/invoke.ts](https://github.com/Bearer/bearer/blob/v0.47.5/src/commands/invoke.ts)_
+_See code: [src/commands/invoke.ts](https://github.com/Bearer/bearer/blob/v0.47.6/src/commands/invoke.ts)_
 
 ## `bearer link SCENARIO_IDENTIFIER`
 
@@ -124,7 +148,7 @@ OPTIONS
   -h, --help  show CLI help
 ```
 
-_See code: [src/commands/link.ts](https://github.com/Bearer/bearer/blob/v0.47.5/src/commands/link.ts)_
+_See code: [src/commands/link.ts](https://github.com/Bearer/bearer/blob/v0.47.6/src/commands/link.ts)_
 
 ## `bearer login`
 
@@ -139,7 +163,7 @@ OPTIONS
   -h, --help         show CLI help
 ```
 
-_See code: [src/commands/login.ts](https://github.com/Bearer/bearer/blob/v0.47.5/src/commands/login.ts)_
+_See code: [src/commands/login.ts](https://github.com/Bearer/bearer/blob/v0.47.6/src/commands/login.ts)_
 
 ## `bearer new SCENARIONAME`
 
@@ -153,7 +177,7 @@ OPTIONS
   -h, --help  show CLI help
 ```
 
-_See code: [src/commands/new.ts](https://github.com/Bearer/bearer/blob/v0.47.5/src/commands/new.ts)_
+_See code: [src/commands/new.ts](https://github.com/Bearer/bearer/blob/v0.47.6/src/commands/new.ts)_
 
 ## `bearer start`
 
@@ -169,5 +193,5 @@ OPTIONS
   --no-open
 ```
 
-_See code: [src/commands/start.ts](https://github.com/Bearer/bearer/blob/v0.47.5/src/commands/start.ts)_
+_See code: [src/commands/start.ts](https://github.com/Bearer/bearer/blob/v0.47.6/src/commands/start.ts)_
 <!-- commandsstop -->
