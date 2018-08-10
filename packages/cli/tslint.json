@@ -1,6 +1,0 @@
-{
-  "extends": "@oclif/tslint",
-  "rules": {
-    "object-curly-spacing": [true, "always"]
-  }
-}

@@ -3,180 +3,155 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.45.2"></a>
+
+## [0.45.2](https://github.com/Bearer/bearer/compare/v0.45.1...v0.45.2) (2018-08-10)
+
+### Bug Fixes
+
+- **cli:** do not rely on node_modules or bin anymore ([#256](https://github.com/Bearer/bearer/issues/256)) ([d839c42](https://github.com/Bearer/bearer/commit/d839c42))
+
+<a name="0.45.1"></a>
+
+## [0.45.1](https://github.com/Bearer/bearer/compare/v0.45.0...v0.45.1) (2018-08-10)
+
+### Bug Fixes
+
+- **cli:** rely on binary ([20b2c99](https://github.com/Bearer/bearer/commit/20b2c99))
+
+<a name="0.43.1"></a>
+
+## [0.43.1](https://github.com/Bearer/bearer/compare/v0.43.0...v0.43.1) (2018-08-10)
+
+**Note:** Version bump only for package @bearer/bearer-cli
+
+<a name="0.42.0"></a>
+
+# [0.42.0](https://github.com/Bearer/bearer/compare/v0.41.9...v0.42.0) (2018-08-10)
+
+**Note:** Version bump only for package @bearer/bearer-cli
+
 <a name="0.41.9"></a>
+
 ## [0.41.9](https://github.com/Bearer/bearer/compare/v0.41.8...v0.41.9) (2018-08-09)
 
-
 ### Bug Fixes
 
-* **cli:** empty build dir instead of src one ([32f1016](https://github.com/Bearer/bearer/commit/32f1016))
-
-
-
-
+- **cli:** empty build dir instead of src one ([32f1016](https://github.com/Bearer/bearer/commit/32f1016))
 
 <a name="0.41.8"></a>
+
 ## [0.41.8](https://github.com/Bearer/bearer/compare/v0.41.7...v0.41.8) (2018-08-09)
 
-
 ### Bug Fixes
 
-* **cli:** prevent cli to proceed if authentication failed ([b7f4f69](https://github.com/Bearer/bearer/commit/b7f4f69))
-* **cli:** remove duplicate identifier ([b2b92ae](https://github.com/Bearer/bearer/commit/b2b92ae))
-* **legacy-cli:** add setupId in template setup ([a0d52a5](https://github.com/Bearer/bearer/commit/a0d52a5))
-
-
-
-
+- **cli:** prevent cli to proceed if authentication failed ([b7f4f69](https://github.com/Bearer/bearer/commit/b7f4f69))
+- **cli:** remove duplicate identifier ([b2b92ae](https://github.com/Bearer/bearer/commit/b2b92ae))
+- **legacy-cli:** add setupId in template setup ([a0d52a5](https://github.com/Bearer/bearer/commit/a0d52a5))
 
 <a name="0.41.7"></a>
+
 ## [0.41.7](https://github.com/Bearer/bearer/compare/v0.41.6...v0.41.7) (2018-08-09)
 
-
 ### Bug Fixes
 
-* **cli:** deploy with the correct namespace name ([a46b520](https://github.com/Bearer/bearer/commit/a46b520))
-* **cli:** fix path invalidation ([2ec99d0](https://github.com/Bearer/bearer/commit/2ec99d0))
-
-
-
-
+- **cli:** deploy with the correct namespace name ([a46b520](https://github.com/Bearer/bearer/commit/a46b520))
+- **cli:** fix path invalidation ([2ec99d0](https://github.com/Bearer/bearer/commit/2ec99d0))
 
 <a name="0.41.6"></a>
+
 ## [0.41.6](https://github.com/Bearer/bearer/compare/v0.41.5...v0.41.6) (2018-08-09)
 
-
 ### Bug Fixes
 
-* **cli:** start was missing authorization host ([#248](https://github.com/Bearer/bearer/issues/248)) ([7b9edbf](https://github.com/Bearer/bearer/commit/7b9edbf))
-* **cli:** use localhost as a tag name on start ([c0e2d95](https://github.com/Bearer/bearer/commit/c0e2d95))
-
-
-
-
+- **cli:** start was missing authorization host ([#248](https://github.com/Bearer/bearer/issues/248)) ([7b9edbf](https://github.com/Bearer/bearer/commit/7b9edbf))
+- **cli:** use localhost as a tag name on start ([c0e2d95](https://github.com/Bearer/bearer/commit/c0e2d95))
 
 <a name="0.41.5"></a>
-## [0.41.5](https://github.com/Bearer/bearer/compare/v0.41.4...v0.41.5) (2018-08-09)
 
+## [0.41.5](https://github.com/Bearer/bearer/compare/v0.41.4...v0.41.5) (2018-08-09)
 
 ### Bug Fixes
 
-* **cli:** ensure .bearer dir exists ([793e19e](https://github.com/Bearer/bearer/commit/793e19e))
-* **cli:** pass tag name to stencil ([4e3d46f](https://github.com/Bearer/bearer/commit/4e3d46f))
-
-
-
-
+- **cli:** ensure .bearer dir exists ([793e19e](https://github.com/Bearer/bearer/commit/793e19e))
+- **cli:** pass tag name to stencil ([4e3d46f](https://github.com/Bearer/bearer/commit/4e3d46f))
 
 <a name="0.41.4"></a>
+
 ## [0.41.4](https://github.com/Bearer/bearer/compare/v0.41.3...v0.41.4) (2018-08-08)
 
 **Note:** Version bump only for package @bearer/bearer-cli
 
-
-
-
-
 <a name="0.41.3"></a>
+
 ## [0.41.3](https://github.com/Bearer/bearer/compare/v0.41.2...v0.41.3) (2018-08-08)
 
 **Note:** Version bump only for package @bearer/bearer-cli
 
-
-
-
-
 <a name="0.41.2"></a>
-## [0.41.2](https://github.com/Bearer/bearer/compare/v0.41.1...v0.41.2) (2018-08-08)
 
+## [0.41.2](https://github.com/Bearer/bearer/compare/v0.41.1...v0.41.2) (2018-08-08)
 
 ### Bug Fixes
 
-* **intents:** fallback body ([077dc7c](https://github.com/Bearer/bearer/commit/077dc7c))
-
-
-
-
+- **intents:** fallback body ([077dc7c](https://github.com/Bearer/bearer/commit/077dc7c))
 
 <a name="0.41.1"></a>
+
 ## [0.41.1](https://github.com/Bearer/bearer/compare/v0.41.0...v0.41.1) (2018-08-08)
 
 **Note:** Version bump only for package @bearer/bearer-cli
 
-
-
-
-
 <a name="0.41.0"></a>
+
 # [0.41.0](https://github.com/Bearer/bearer/compare/v0.40.0...v0.41.0) (2018-08-08)
 
-
 ### Bug Fixes
 
-* **cli:** better logging when webpack is failing ([#239](https://github.com/Bearer/bearer/issues/239)) ([189296e](https://github.com/Bearer/bearer/commit/189296e))
-* **webserver:** unstringify ([5c7cb5f](https://github.com/Bearer/bearer/commit/5c7cb5f))
-
+- **cli:** better logging when webpack is failing ([#239](https://github.com/Bearer/bearer/issues/239)) ([189296e](https://github.com/Bearer/bearer/commit/189296e))
+- **webserver:** unstringify ([5c7cb5f](https://github.com/Bearer/bearer/commit/5c7cb5f))
 
 ### Features
 
-* **cli:** import client only when required ([#238](https://github.com/Bearer/bearer/issues/238)) ([2d95257](https://github.com/Bearer/bearer/commit/2d95257))
-
-
-
-
+- **cli:** import client only when required ([#238](https://github.com/Bearer/bearer/issues/238)) ([2d95257](https://github.com/Bearer/bearer/commit/2d95257))
 
 <a name="0.39.0"></a>
-# [0.39.0](https://github.com/Bearer/bearer/compare/v0.38.1...v0.39.0) (2018-08-08)
 
+# [0.39.0](https://github.com/Bearer/bearer/compare/v0.38.1...v0.39.0) (2018-08-08)
 
 ### Bug Fixes
 
-* **cli:** emit when setup is not required ([53269d1](https://github.com/Bearer/bearer/commit/53269d1))
-* **cli:** let oclif deal with new versions ([#231](https://github.com/Bearer/bearer/issues/231)) ([4dd50f8](https://github.com/Bearer/bearer/commit/4dd50f8))
-* **cli:** update the cdn host for production ([76348d2](https://github.com/Bearer/bearer/commit/76348d2))
-* **core:** post robots now use correct url ([#235](https://github.com/Bearer/bearer/issues/235)) ([49abd5b](https://github.com/Bearer/bearer/commit/49abd5b))
-
+- **cli:** emit when setup is not required ([53269d1](https://github.com/Bearer/bearer/commit/53269d1))
+- **cli:** let oclif deal with new versions ([#231](https://github.com/Bearer/bearer/issues/231)) ([4dd50f8](https://github.com/Bearer/bearer/commit/4dd50f8))
+- **cli:** update the cdn host for production ([76348d2](https://github.com/Bearer/bearer/commit/76348d2))
+- **core:** post robots now use correct url ([#235](https://github.com/Bearer/bearer/issues/235)) ([49abd5b](https://github.com/Bearer/bearer/commit/49abd5b))
 
 ### Features
 
-* **cli:** remove auth navigator screen when not needed ([d259d0b](https://github.com/Bearer/bearer/commit/d259d0b))
-* **core:** everything as post ([#234](https://github.com/Bearer/bearer/issues/234)) ([ae67130](https://github.com/Bearer/bearer/commit/ae67130))
-
-
-
-
+- **cli:** remove auth navigator screen when not needed ([d259d0b](https://github.com/Bearer/bearer/commit/d259d0b))
+- **core:** everything as post ([#234](https://github.com/Bearer/bearer/issues/234)) ([ae67130](https://github.com/Bearer/bearer/commit/ae67130))
 
 <a name="0.37.2"></a>
+
 ## [0.37.2](https://github.com/Bearer/bearer/compare/v0.37.0...v0.37.2) (2018-08-08)
 
 **Note:** Version bump only for package @bearer/bearer-cli
 
-
-
-
-
 <a name="0.37.1"></a>
+
 ## [0.37.1](https://github.com/Bearer/bearer/compare/v0.37.0...v0.37.1) (2018-08-08)
 
 **Note:** Version bump only for package @bearer/bearer-cli
 
-
-
-
-
 <a name="0.37.0"></a>
-# [0.37.0](https://github.com/Bearer/bearer/compare/v0.36.3...v0.37.0) (2018-08-08)
 
+# [0.37.0](https://github.com/Bearer/bearer/compare/v0.36.3...v0.37.0) (2018-08-08)
 
 ### Bug Fixes
 
-* **cli:** remove bearer command reference ([d2e8f4b](https://github.com/Bearer/bearer/commit/d2e8f4b))
-* **cli:** remove old bearer binary ([#223](https://github.com/Bearer/bearer/issues/223)) ([746553b](https://github.com/Bearer/bearer/commit/746553b))
-* **transpiler:** fix tag starting with number ([682b651](https://github.com/Bearer/bearer/commit/682b651))
-
-
-
-
+- **cli:** remove bearer command reference ([d2e8f4b](https://github.com/Bearer/bearer/commit/d2e8f4b))
+- **cli:** remove old bearer binary ([#223](https://github.com/Bearer/bearer/issues/223)) ([746553b](https://github.com/Bearer/bearer/commit/746553b))
+- **transpiler:** fix tag starting with number ([682b651](https://github.com/Bearer/bearer/commit/682b651))
 
 <a name="0.36.3"></a>
 

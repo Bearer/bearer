@@ -1,10 +1,11 @@
 {
   "name": "@bearer/bearer-cli",
-  "version": "0.41.9",
+  "version": "0.47.3",
   "main": "index.js",
   "repository": "git@github.com:Bearer/bearer.git",
   "author": "Radek Molenda <radek@bearer.com>",
   "license": "MIT",
+  "typings": "dist/bin/index",
   "engines": {
     "node": ">=8.11.0"
   },
@@ -16,15 +17,15 @@
     "templates": "yarn cleanup && copyfiles -a \"./templates/**/*\" dist/src/lib/commands/",
     "cleanup": "rm -rf dist",
     "build": "yarn templates && tsc -p tsconfig.json",
-    "prepublish": "yarn build",
+    "prepare": "yarn build",
     "prepublishOnly": "yarn build",
     "test": "jest",
     "requirements-check": "node ./check-version.js"
   },
   "dependencies": {
-    "@bearer/intents": "^0.41.4",
-    "@bearer/templates": "^0.41.1",
-    "@bearer/transpiler": "^0.41.1",
+    "@bearer/intents": "^0.47.3",
+    "@bearer/templates": "^0.47.3",
+    "@bearer/transpiler": "^0.47.2",
     "@koa/cors": "^2.2.2",
     "amazon-cognito-identity-js": "^2.0.3",
     "archiver": "^2.1.1",
@@ -32,6 +33,7 @@
     "aws-sdk": "^2.224.1",
     "axios": "^0.18.0",
     "case": "^1.5.5",
+    "commander": "^2.17.1",
     "copy-template-dir": "^1.4.0",
     "cosmiconfig": "^5.0.5",
     "del": "^3.0.0",
@@ -79,5 +81,6 @@
     "jest": "^23.1.0",
     "mkdir-recursive": "^0.4.0",
     "ts-jest": "^23.0.1"
-  }
+  },
+  "gitHead": "cb2654b19000e2ad6f31a0e4ed715a6298c8df2d"
 }

@@ -3,185 +3,143 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.43.1"></a>
+
+## [0.43.1](https://github.com/ionic-team/stencil-component-starter/compare/v0.43.0...v0.43.1) (2018-08-10)
+
+**Note:** Version bump only for package @bearer/ui
+
+<a name="0.42.0"></a>
+
+# [0.42.0](https://github.com/ionic-team/stencil-component-starter/compare/v0.41.9...v0.42.0) (2018-08-10)
+
+**Note:** Version bump only for package @bearer/ui
+
 <a name="0.41.8"></a>
+
 ## [0.41.8](https://github.com/ionic-team/stencil-component-starter/compare/v0.41.7...v0.41.8) (2018-08-09)
 
-
 ### Bug Fixes
 
-* **ui:** test setupId in render ([7d96e14](https://github.com/ionic-team/stencil-component-starter/commit/7d96e14))
-
-
-
-
+- **ui:** test setupId in render ([7d96e14](https://github.com/ionic-team/stencil-component-starter/commit/7d96e14))
 
 <a name="0.41.6"></a>
+
 ## [0.41.6](https://github.com/ionic-team/stencil-component-starter/compare/v0.41.5...v0.41.6) (2018-08-09)
 
-
 ### Bug Fixes
 
-* **ui:** add bearer style to sumbit button ([30d7c1b](https://github.com/ionic-team/stencil-component-starter/commit/30d7c1b))
-
-
-
-
+- **ui:** add bearer style to sumbit button ([30d7c1b](https://github.com/ionic-team/stencil-component-starter/commit/30d7c1b))
 
 <a name="0.41.5"></a>
-## [0.41.5](https://github.com/ionic-team/stencil-component-starter/compare/v0.41.4...v0.41.5) (2018-08-09)
 
+## [0.41.5](https://github.com/ionic-team/stencil-component-starter/compare/v0.41.4...v0.41.5) (2018-08-09)
 
 ### Bug Fixes
 
-* **ui:** stencil watch decorator does not work on state anymore ([113905b](https://github.com/ionic-team/stencil-component-starter/commit/113905b))
-
-
-
-
+- **ui:** stencil watch decorator does not work on state anymore ([113905b](https://github.com/ionic-team/stencil-component-starter/commit/113905b))
 
 <a name="0.41.1"></a>
+
 ## [0.41.1](https://github.com/ionic-team/stencil-component-starter/compare/v0.41.0...v0.41.1) (2018-08-08)
 
 **Note:** Version bump only for package @bearer/ui
 
-
-
-
-
 <a name="0.41.0"></a>
+
 # [0.41.0](https://github.com/ionic-team/stencil-component-starter/compare/v0.40.0...v0.41.0) (2018-08-08)
 
 **Note:** Version bump only for package @bearer/ui
 
-
-
-
-
 <a name="0.39.0"></a>
+
 # [0.39.0](https://github.com/ionic-team/stencil-component-starter/compare/v0.38.1...v0.39.0) (2018-08-08)
 
 **Note:** Version bump only for package @bearer/ui
 
-
-
-
-
 <a name="0.37.2"></a>
+
 ## [0.37.2](https://github.com/ionic-team/stencil-component-starter/compare/v0.37.0...v0.37.2) (2018-08-08)
 
 **Note:** Version bump only for package @bearer/ui
 
-
-
-
-
 <a name="0.37.1"></a>
+
 ## [0.37.1](https://github.com/ionic-team/stencil-component-starter/compare/v0.37.0...v0.37.1) (2018-08-08)
 
 **Note:** Version bump only for package @bearer/ui
 
-
-
-
-
 <a name="0.37.0"></a>
+
 # [0.37.0](https://github.com/ionic-team/stencil-component-starter/compare/v0.36.3...v0.37.0) (2018-08-08)
 
 **Note:** Version bump only for package @bearer/ui
 
-
-
-
-
 <a name="0.35.0"></a>
-# [0.35.0](https://github.com/ionic-team/stencil-component-starter/compare/v0.34.2...v0.35.0) (2018-08-07)
 
+# [0.35.0](https://github.com/ionic-team/stencil-component-starter/compare/v0.34.2...v0.35.0) (2018-08-07)
 
 ### Bug Fixes
 
-* **ui:** regenerate component definition ([3392a93](https://github.com/ionic-team/stencil-component-starter/commit/3392a93))
-* **ui:** reset component style  correctly ([56e3749](https://github.com/ionic-team/stencil-component-starter/commit/56e3749))
-
+- **ui:** regenerate component definition ([3392a93](https://github.com/ionic-team/stencil-component-starter/commit/3392a93))
+- **ui:** reset component style correctly ([56e3749](https://github.com/ionic-team/stencil-component-starter/commit/56e3749))
 
 ### Features
 
-* upgrade stencil required version ([d797a67](https://github.com/ionic-team/stencil-component-starter/commit/d797a67))
-
-
-
-
+- upgrade stencil required version ([d797a67](https://github.com/ionic-team/stencil-component-starter/commit/d797a67))
 
 <a name="0.34.0"></a>
+
 # [0.34.0](https://github.com/ionic-team/stencil-component-starter/compare/v0.33.0...v0.34.0) (2018-08-03)
 
 **Note:** Version bump only for package @bearer/ui
 
-
-
-
-
 <a name="0.33.0"></a>
-# [0.33.0](https://github.com/ionic-team/stencil-component-starter/compare/v0.32.0...v0.33.0) (2018-08-03)
 
+# [0.33.0](https://github.com/ionic-team/stencil-component-starter/compare/v0.32.0...v0.33.0) (2018-08-03)
 
 ### Bug Fixes
 
-* **ui:** prevent extra call when scenario is completed ([#196](https://github.com/ionic-team/stencil-component-starter/issues/196)) ([e1d5b8c](https://github.com/ionic-team/stencil-component-starter/commit/e1d5b8c))
-* **ui:** update index ([ce7f0bc](https://github.com/ionic-team/stencil-component-starter/commit/ce7f0bc))
-
+- **ui:** prevent extra call when scenario is completed ([#196](https://github.com/ionic-team/stencil-component-starter/issues/196)) ([e1d5b8c](https://github.com/ionic-team/stencil-component-starter/commit/e1d5b8c))
+- **ui:** update index ([ce7f0bc](https://github.com/ionic-team/stencil-component-starter/commit/ce7f0bc))
 
 ### Features
 
-* **ui:** add disabled button prop ([#198](https://github.com/ionic-team/stencil-component-starter/issues/198)) ([765ef1d](https://github.com/ionic-team/stencil-component-starter/commit/765ef1d))
-* **ui:** introduce bearer-authorized component ([69d5aac](https://github.com/ionic-team/stencil-component-starter/commit/69d5aac))
-* **ui:** provide a way to authenticate people through a method ([5996faf](https://github.com/ionic-team/stencil-component-starter/commit/5996faf))
-
-
-
+- **ui:** add disabled button prop ([#198](https://github.com/ionic-team/stencil-component-starter/issues/198)) ([765ef1d](https://github.com/ionic-team/stencil-component-starter/commit/765ef1d))
+- **ui:** introduce bearer-authorized component ([69d5aac](https://github.com/ionic-team/stencil-component-starter/commit/69d5aac))
+- **ui:** provide a way to authenticate people through a method ([5996faf](https://github.com/ionic-team/stencil-component-starter/commit/5996faf))
 
 <a name="0.32.0"></a>
-# [0.32.0](https://github.com/ionic-team/stencil-component-starter/compare/v0.31.0...v0.32.0) (2018-08-02)
 
+# [0.32.0](https://github.com/ionic-team/stencil-component-starter/compare/v0.31.0...v0.32.0) (2018-08-02)
 
 ### Features
 
-* **core:** simplify decorator use ([#193](https://github.com/ionic-team/stencil-component-starter/issues/193)) ([fa3facc](https://github.com/ionic-team/stencil-component-starter/commit/fa3facc))
-
-
-
+- **core:** simplify decorator use ([#193](https://github.com/ionic-team/stencil-component-starter/issues/193)) ([fa3facc](https://github.com/ionic-team/stencil-component-starter/commit/fa3facc))
 
 <a name="0.30.0"></a>
+
 # [0.30.0](https://github.com/ionic-team/stencil-component-starter/compare/v0.29.0...v0.30.0) (2018-08-01)
-
-
-
 
 **Note:** Version bump only for package @bearer/ui
 
 <a name="0.29.0"></a>
+
 # [0.29.0](https://github.com/ionic-team/stencil-component-starter/compare/v0.28.0...v0.29.0) (2018-08-01)
-
-
-
 
 **Note:** Version bump only for package @bearer/ui
 
 <a name="0.28.0"></a>
-# [0.28.0](https://github.com/ionic-team/stencil-component-starter/compare/v0.27.4...v0.28.0) (2018-07-31)
 
+# [0.28.0](https://github.com/ionic-team/stencil-component-starter/compare/v0.27.4...v0.28.0) (2018-07-31)
 
 ### Bug Fixes
 
-* **ui:** update typing form core update ([841318e](https://github.com/ionic-team/stencil-component-starter/commit/841318e))
-
-
-
+- **ui:** update typing form core update ([841318e](https://github.com/ionic-team/stencil-component-starter/commit/841318e))
 
 <a name="0.27.1"></a>
+
 ## [0.27.1](https://github.com/ionic-team/stencil-component-starter/compare/v0.27.0...v0.27.1) (2018-07-27)
-
-
-
 
 **Note:** Version bump only for package @bearer/ui
 

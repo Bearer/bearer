@@ -1,6 +1,6 @@
 {
   "name": "@bearer/intents",
-  "version": "0.41.4",
+  "version": "0.47.3",
   "description": "Bearer Intents",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -51,5 +51,6 @@
     "jest": "^23.4.0",
     "jest-mock-axios": "^2.1.11",
     "ts-jest": "^23.0.0"
-  }
+  },
+  "gitHead": "cb2654b19000e2ad6f31a0e4ed715a6298c8df2d"
 }

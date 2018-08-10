@@ -1,6 +1,6 @@
 {
   "name": "@bearer/templates",
-  "version": "0.41.1",
+  "version": "0.47.3",
   "description": "Bearer templates",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -44,5 +44,6 @@
     "@types/node": "^10.5.2",
     "jest": "^23.4.0",
     "ts-jest": "^23.0.0"
-  }
+  },
+  "gitHead": "cb2654b19000e2ad6f31a0e4ed715a6298c8df2d"
 }

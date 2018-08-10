@@ -1,6 +1,6 @@
 {
   "name": "@bearer/transpiler",
-  "version": "0.41.1",
+  "version": "0.47.2",
   "description": "Bearer transpiler",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -33,5 +33,6 @@
     "command-line-args": "^5.0.2",
     "fs-extra": "^6.0.1",
     "typescript": "^2.9.2"
-  }
+  },
+  "gitHead": "cb2654b19000e2ad6f31a0e4ed715a6298c8df2d"
 }
