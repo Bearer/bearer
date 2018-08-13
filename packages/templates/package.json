@@ -16,22 +16,6 @@
     "prepublishOnly": "yarn build",
     "test": "jest"
   },
-  "jest": {
-    "moduleFileExtensions": [
-      "ts",
-      "tsx",
-      "js"
-    ],
-    "transform": {
-      "^.+\\.(ts|tsx)$": "<rootDir>/preprocessor.js"
-    },
-    "testMatch": [
-      "**/__tests__/*.+(ts|tsx|js)"
-    ],
-    "setupFiles": [
-      "./jest.setup.js"
-    ]
-  },
   "repository": {
     "type": "git",
     "url": "github:Bearer/bearer"
