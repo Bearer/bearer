@@ -1,16 +1,18 @@
-import * as copy from 'copy-template-dir'
-import * as path from 'path'
-import * as inquirer from 'inquirer'
-import * as Case from 'case'
 import * as intents from '@bearer/intents'
 import * as templates from '@bearer/templates'
+import * as Case from 'case'
+import * as copy from 'copy-template-dir'
+import * as inquirer from 'inquirer'
+import * as path from 'path'
+
 import Locator from '../locationProvider'
+
 import { generateSetup } from './generate'
 
 const INTENT = 'intent'
 const COMPONENT = 'component'
 
-enum Components {
+const enum Components {
   BLANK = 'blank',
   COLLECTION = 'collection',
   ROOT = 'root'
@@ -140,8 +142,8 @@ async function generateComponent({
   const componentName = Case.pascal(name)
   const fileName = name.charAt(0) + Case.camel(name).substr(1)
   const vars = {
-    fileName: fileName,
-    componentName: componentName,
+    fileName,
+    componentName,
     componentTagName: Case.kebab(componentName),
     groupName: componentName
   }
