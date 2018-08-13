@@ -5,10 +5,11 @@
  */
 import * as ts from 'typescript'
 
-import { hasDecoratorNamed } from '../helpers/decorator-helpers'
-import bearer from './bearer'
 import { Decorators } from '../constants'
+import { hasDecoratorNamed } from '../helpers/decorator-helpers'
 import { TransformerOptions } from '../types'
+
+import bearer from './bearer'
 
 export default function ComponentTransformer({  }: TransformerOptions = {}): ts.TransformerFactory<ts.SourceFile> {
   return transformContext => {
@@ -26,9 +27,12 @@ export default function ComponentTransformer({  }: TransformerOptions = {}): ts.
       return ts.visitEachChild(node, visit, transformContext)
     }
 
+    if (!scenarioId) {
+      console.warn('[BEARER]', 'No scenario ID provided. Skipping scenario ID injection')
+    }
+
     return tsSourceFile => {
       if (!scenarioId) {
-        console.warn('[BEARER]', 'No scenario ID provided. Skipping scenario ID injection')
         return tsSourceFile
       }
       return visit(tsSourceFile) as ts.SourceFile
