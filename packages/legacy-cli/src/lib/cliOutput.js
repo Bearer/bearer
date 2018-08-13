@@ -1,10 +1,17 @@
 const term = require('terminal-kit').terminal
 
+function outputError(error) {
+  if (typeof error !== 'undefined' && error.message) {
+    term.white('Error: ')
+    term.red(error.message)
+    term('\n')
+  }
+}
 module.exports = emitter => {
-  emitter.on('buildArtifact:output:close', output_path => {
+  emitter.on('buildArtifact:output:close', outputPath => {
     term.white('Bearer: ')
     term.yellow('Artifact stored in ')
-    term(output_path)
+    term(outputPath)
     term('\n')
   })
 
@@ -32,10 +39,8 @@ module.exports = emitter => {
     term.yellow(`Artefact configured : ${intentNames.join(' | ')}`)
     term('\n')
   })
-  emitter.on('pushScenario:unauthorized', ({ message }) => {
-    term.white('Bearer: ')
-    term.red(`ERROR: ${message}`)
-    term('\n')
+  emitter.on('pushScenario:unauthorized', error => {
+    outputError(error)
     term.white('Bearer: ')
     term.red(`Please try to `)
     term('bearer login ')
@@ -80,7 +85,7 @@ module.exports = emitter => {
     term('\n')
   })
 
-  emitter.on('assemblyScenario:success', body => {
+  emitter.on('assemblyScenario:success', () => {
     term.white('Bearer: ')
     term.yellow('Intents created.')
     term('\n')
@@ -316,7 +321,7 @@ module.exports = emitter => {
     term('\n')
   })
 
-  emitter.on('login:success', body => {
+  emitter.on('login:success', () => {
     term.white('Bearer: ')
     term.yellow('successfully logged in to bearer.')
     term('\n')
@@ -333,22 +338,18 @@ module.exports = emitter => {
     term.yellow('!')
     term('\n')
   })
-  emitter.on('login:failure', ({ message }) => {
+  emitter.on('login:failure', error => {
     term.white('Bearer: ')
     term.red('There was an error while trying to login to bearer')
     term('\n')
-    term.white('IntegrationService: ')
-    term.red(message)
-    term('\n')
+    outputError(error)
   })
 
-  emitter.on('login:error', ({ body: { message } }) => {
+  emitter.on('login:error', ({ body: error }) => {
     term.white('Bearer: ')
     term.red('There was an error while trying to login to bearer')
     term('\n')
-    term.white('Error: ')
-    term.red(message)
-    term('\n')
+    outputError(error)
   })
 
   emitter.on('deploy:started', () => {
@@ -370,40 +371,32 @@ module.exports = emitter => {
     term('\n')
   })
 
-  emitter.on('invalidateCloudFront:invalidationFailed', ({ message }) => {
+  emitter.on('invalidateCloudFront:invalidationFailed', error => {
     term.white('Bearer: ')
     term.red("Couldn't invalidate views cache.")
     term('\n')
-    term.white('Error: ')
-    term.red(message)
-    term('\n')
+    outputError(error)
   })
 
-  emitter.on('invalidateCloudFront:error', ({ message }) => {
+  emitter.on('invalidateCloudFront:error', error => {
     term.white('Bearer: ')
     term.red('There was an error while trying to invalidate views cache.')
     term('\n')
-    term.white('Error: ')
-    term.red(message)
-    term('\n')
+    outputError(error)
   })
 
-  emitter.on('developerPortalUpdate:failed', ({ message }) => {
+  emitter.on('developerPortalUpdate:failed', error => {
     term.white('Bearer: ')
     term.red('There was an error while pushing to developer portal.')
     term('\n')
-    term.white('Errors: ')
-    term.red(message)
-    term('\n')
+    outputError(error)
   })
 
-  emitter.on('developerPortalUpdate:error', ({ message }) => {
+  emitter.on('developerPortalUpdate:error', error => {
     term.white('Bearer: ')
     term.red('There was an error while pushing to developer portal.')
     term('\n')
-    term.white('Error: ')
-    term.red(message)
-    term('\n')
+    outputError(error)
   })
 
   /* ********* Start output ********* */
@@ -549,13 +542,11 @@ module.exports = emitter => {
     term('\n')
   })
 
-  emitter.on('deployScenario:deployViews:error', ({ message }) => {
+  emitter.on('deployScenario:deployViews:error', error => {
     term.white('Bearer: ')
     term.red('An error occured')
     term('\n')
-    term.white('Error: ')
-    term.red(message)
-    term('\n')
+    outputError(error)
   })
   emitter.on('deployScenario:deployViews:error', e => {
     term.white('Bearer: ')
