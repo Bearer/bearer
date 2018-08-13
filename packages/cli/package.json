@@ -1,7 +1,7 @@
 {
   "name": "@bearer/testing-match-issue-cli",
   "description": "Bearer CLI",
-  "version": "0.49.5",
+  "version": "0.49.6",
   "author": "Bearer Team",
   "bin": {
     "bearer-testing-match-issue": "./bin/run"
@@ -60,5 +60,5 @@
     "version": "oclif-dev readme && git add README.md"
   },
   "types": "lib/index.d.ts",
-  "gitHead": "cb2654b19000e2ad6f31a0e4ed715a6298c8df2d"
+  "gitHead": "50529e63a41d7afbc0b0834083b9c48e4d3c8a35"
 }
