@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.49.1"></a>
+## [0.49.1](https://github.com/Bearer/bearer/compare/v0.49.0...v0.49.1) (2018-08-13)
+
+
+
+
+**Note:** Version bump only for package @bearer/testing-match-issue-cli
+
 <a name="0.49.0"></a>
 # [0.49.0](https://github.com/Bearer/bearer/compare/v0.48.5...v0.49.0) (2018-08-12)
 
