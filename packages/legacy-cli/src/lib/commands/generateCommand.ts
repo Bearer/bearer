@@ -66,7 +66,7 @@ const generate = (emitter, {}, locator: Locator) => async env => {
 
   switch (template) {
     case INTENT:
-      generateIntent(params)
+      await generateIntent(params)
       break
     case COMPONENT:
       await generateComponent(params)
@@ -90,15 +90,15 @@ async function generateComponent({ emitter, locator, name, type }: TgenerateComp
   const inDir = path.join(__dirname, 'templates/generate', `${type}Component`)
   const outDir = type === Components.ROOT ? locator.srcViewsDir : locator.srcViewsDirResource('components')
 
-  copy(inDir, outDir, getComponentVars(name), (err, createdFiles) => {
+  copy(inDir, outDir, getComponentVars(name, require(locator.authConfigPath)), (err, createdFiles) => {
     if (err) throw err
     createdFiles.forEach(filePath => emitter.emit('generateView:fileGenerated', filePath))
   })
 }
 
 async function generateIntent({ emitter, locator }: { emitter: any; locator: Locator }) {
-  const name = await askForName()
   const intentType = await askIntentType()
+  const name = await askForName()
   const authConfig = require(locator.authConfigPath)
   const inDir = path.join(__dirname, 'templates/generate/intent')
   const outDir = locator.srcIntentsDir
@@ -163,14 +163,15 @@ async function askComponentType(): Promise<Components> {
   return typePrompt.type
 }
 
-export function getComponentVars(name: string) {
+export function getComponentVars(name: string, authConfig: { authType: string }) {
   const componentName = Case.pascal(name)
   return {
     fileName: name,
     componentName,
     componentClassName: componentName, // it gives more meaning within templates
     componentTagName: Case.kebab(componentName),
-    groupName: Case.kebab(componentName)
+    groupName: Case.kebab(componentName),
+    withAuthScreen: authConfig.authType !== 'noAuth' ? '<bearer-navigator-auth-screen />' : null
   }
 }
 
