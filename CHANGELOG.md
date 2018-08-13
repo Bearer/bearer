@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.49.8"></a>
+## [0.49.8](https://github.com/Bearer/bearer/compare/v0.49.7...v0.49.8) (2018-08-13)
+
+
+
+
+**Note:** Version bump only for package bearer-master
+
 <a name="0.49.7"></a>
 ## [0.49.7](https://github.com/Bearer/bearer/compare/v0.49.6...v0.49.7) (2018-08-13)
 
