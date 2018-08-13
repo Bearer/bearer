@@ -1,15 +1,16 @@
-import * as getPort from 'get-port'
-import * as Router from 'koa-router'
-import * as cosmiconfig from 'cosmiconfig'
-import * as Logger from 'koa-logger'
 import * as chokidar from 'chokidar'
+import * as cosmiconfig from 'cosmiconfig'
+import * as getPort from 'get-port'
+import * as Logger from 'koa-logger'
+import * as Router from 'koa-router'
 
 import { transpileIntents } from '../../buildArtifact'
-import server = require('./server')
-import Storage from './storage'
-import auth from './auth'
 import LocationProvider from '../../locationProvider'
 import { Config } from '../../types'
+
+import auth from './auth'
+import server = require('./server')
+import Storage from './storage'
 
 function requireUncached(module) {
   delete require.cache[require.resolve(module)]
@@ -35,6 +36,7 @@ export default function startLocalDevelopmentServer(
       const { config: devIntentsContext = {} } = (await explorer.search(rootLevel)) || {}
       const distPath = locator.buildIntentsResourcePath('dist')
 
+      // tslint:disable-next-line:no-inner-declarations
       async function refreshIntents() {
         try {
           emitter.emit('start:localServer:generatingIntents:start')
@@ -58,7 +60,9 @@ export default function startLocalDevelopmentServer(
         .on('change', refreshIntents)
 
       const port = await getPort({ port: 3000 })
+      // tslint:disable-next-line:no-http-string
       const bearerBaseURL = `http://localhost:${port}/`
+      process.env.bearerBaseURL = bearerBaseURL
       router.all(
         `${config.scenarioUuid}/:intentName`,
         (ctx, next) =>

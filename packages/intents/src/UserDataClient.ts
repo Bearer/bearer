@@ -6,8 +6,14 @@ class CreateDataError extends Error {}
 type TPersistedData = {
   Item: { referenceId: string; [key: string]: any }
 }
-class UserDataClient {
+
+export class UserDataClient {
+  static DBClientInstance() {
+    return new UserDataClient(process.env.bearerBaseURL)
+  }
+
   private client: AxiosInstance
+
   constructor(private readonly baseURL: string) {
     console.log('[BEARER]', 'baseURL', baseURL)
     this.client = axios.create({
@@ -20,7 +26,7 @@ class UserDataClient {
     })
   }
 
-  async retrieveState(referenceId: string): Promise<TPersistedData> {
+  async getData(referenceId: string): Promise<TPersistedData> {
     if (!referenceId) {
       return Promise.resolve(null)
     }
@@ -35,18 +41,18 @@ class UserDataClient {
     return Promise.resolve(null)
   }
 
-  async updateState(referenceId, state): Promise<TPersistedData> {
+  async updateData(referenceId, data): Promise<TPersistedData> {
     try {
-      const response = await this.client.put(`api/v1/items/${referenceId}`, { ...state, ReadAllowed: true })
+      const response = await this.client.put(`api/v1/items/${referenceId}`, { ...data, ReadAllowed: true })
       return response.data
     } catch (error) {
-      throw new UpdateDataError('Error while updating data')
+      throw new UpdateDataError(`Error while updating data: ${error.toString()}`)
     }
   }
 
-  async saveState(state): Promise<TPersistedData> {
+  async saveData(data): Promise<TPersistedData> {
     try {
-      const response = await this.client.post(`api/v1/items`, { ...state, ReadAllowed: true })
+      const response = await this.client.post(`api/v1/items`, { ...data, ReadAllowed: true })
       return response.data
     } catch (error) {
       throw new CreateDataError(`Error while creating data: ${error.toString()}`)

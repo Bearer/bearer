@@ -33,6 +33,7 @@
     "aws-sdk": "^2.224.1",
     "axios": "^0.18.0",
     "case": "^1.5.5",
+    "chokidar": "^2.0.4",
     "commander": "^2.17.1",
     "copy-template-dir": "^1.4.0",
     "cosmiconfig": "^5.0.5",

@@ -1,9 +1,10 @@
 import * as d from './declaration'
 export * from './declaration'
 
-import { sendSuccessMessage, sendErrorMessage } from './lambda'
-import UserDataClient from './UserDataClient'
+import { sendErrorMessage, sendSuccessMessage } from './lambda'
+import { UserDataClient } from './UserDataClient'
 
+// tslint:disable-next-line:no-unnecessary-class
 export class Intent {
   static fetchData(callback: d.TLambdaCallback, { data, error }: { data?: any; error?: any }) {
     if (data) {
@@ -14,6 +15,7 @@ export class Intent {
   }
 }
 
+// tslint:disable-next-line:no-unnecessary-class
 class BaseIntent {
   static get display(): string {
     throw new Error('Extending class needs to implement `static intent(action)` method')
@@ -52,9 +54,10 @@ export class SaveState extends StateIntentBase {
   static intent(action: d.ISaveStateIntentAction) {
     return (event: d.TLambdaEvent, _context: any, lambdaCallback: d.TLambdaCallback): void => {
       const { referenceId } = event.queryStringParameters
-      const STATE_CLIENT = UserDataClient(event.context.bearerBaseURL)
+      const dbClient = UserDataClient.DBClientInstance()
       try {
-        STATE_CLIENT.retrieveState(referenceId)
+        dbClient
+          .getData(referenceId)
           .then(savedState => {
             const state = savedState ? savedState.Item : {}
             try {
@@ -65,13 +68,15 @@ export class SaveState extends StateIntentBase {
                 state,
                 (result: { state: any; data: any }) => {
                   if (savedState) {
-                    STATE_CLIENT.updateState(referenceId, result.state)
+                    dbClient
+                      .updateData(referenceId, result.state)
                       .then(() => {
                         lambdaCallback(null, { meta: { referenceId }, data: result.data })
                       })
                       .catch(error => lambdaCallback(error.toString(), { error: error.toString() }))
                   } else {
-                    STATE_CLIENT.saveState(result.state)
+                    dbClient
+                      .saveData(result.state)
                       .then(data => {
                         lambdaCallback(null, { meta: { referenceId: data.Item.referenceId }, data: result.data })
                       })
@@ -99,22 +104,23 @@ export class RetrieveState extends StateIntentBase {
   static intent(action: d.IRetrieveStateIntentAction) {
     return (event: d.TLambdaEvent, _context: any, lambdaCallback: d.TLambdaCallback): void => {
       const { referenceId } = event.queryStringParameters
-      const STATE_CLIENT = UserDataClient(event.context.bearerBaseURL)
       try {
-        STATE_CLIENT.retrieveState(referenceId).then(state => {
-          if (state) {
-            action(
-              event.context,
-              event.queryStringParameters,
-              state.Item,
-              (recoveredState: { data: any }): void => {
-                lambdaCallback(null, { meta: { referenceId: state.Item.referenceId }, data: recoveredState.data })
-              }
-            )
-          } else {
-            lambdaCallback(null, { statusCode: 404, body: JSON.stringify({ error: 'No data found', referenceId }) })
-          }
-        })
+        UserDataClient.DBClientInstance()
+          .getData(referenceId)
+          .then(state => {
+            if (state) {
+              action(
+                event.context,
+                event.queryStringParameters,
+                state.Item,
+                (recoveredState: { data: any }): void => {
+                  lambdaCallback(null, { meta: { referenceId: state.Item.referenceId }, data: recoveredState.data })
+                }
+              )
+            } else {
+              lambdaCallback(null, { statusCode: 404, body: JSON.stringify({ error: 'No data found', referenceId }) })
+            }
+          })
       } catch (error) {
         lambdaCallback(error.toString(), { error: error.toString() })
       }
