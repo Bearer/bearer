@@ -171,7 +171,7 @@ export function getComponentVars(name: string, authConfig: { authType: string })
     componentClassName: componentName, // it gives more meaning within templates
     componentTagName: Case.kebab(componentName),
     groupName: Case.kebab(componentName),
-    withAuthScreen: authConfig.authType !== 'noAuth' ? '<bearer-navigator-auth-screen />' : null
+    withAuthScreen: authConfig.authType === 'oauth2' ? '<bearer-navigator-auth-screen />' : null
   }
 }
 

@@ -7,7 +7,7 @@ Object {
   "componentTagName": "sponge-bob",
   "fileName": "SpongeBob",
   "groupName": "sponge-bob",
-  "withAuthScreen": "<bearer-navigator-auth-screen />",
+  "withAuthScreen": null,
 }
 `;
 
@@ -18,7 +18,7 @@ Object {
   "componentTagName": "sponge-bob",
   "fileName": "sponge_bob",
   "groupName": "sponge-bob",
-  "withAuthScreen": "<bearer-navigator-auth-screen />",
+  "withAuthScreen": null,
 }
 `;
 
@@ -29,7 +29,7 @@ Object {
   "componentTagName": "sponge-bob",
   "fileName": "sponge-bob",
   "groupName": "sponge-bob",
-  "withAuthScreen": "<bearer-navigator-auth-screen />",
+  "withAuthScreen": null,
 }
 `;
 
@@ -40,7 +40,7 @@ Object {
   "componentTagName": "sponge-bob",
   "fileName": "spongeBob",
   "groupName": "sponge-bob",
-  "withAuthScreen": "<bearer-navigator-auth-screen />",
+  "withAuthScreen": null,
 }
 `;
 
@@ -51,7 +51,7 @@ Object {
   "componentTagName": "spongebob",
   "fileName": "spongebob",
   "groupName": "spongebob",
-  "withAuthScreen": "<bearer-navigator-auth-screen />",
+  "withAuthScreen": null,
 }
 `;
 
@@ -62,7 +62,7 @@ Object {
   "componentTagName": "sponge-bob",
   "fileName": "SpongeBob",
   "groupName": "sponge-bob",
-  "withAuthScreen": "<bearer-navigator-auth-screen />",
+  "withAuthScreen": null,
 }
 `;
 
@@ -73,7 +73,7 @@ Object {
   "componentTagName": "sponge-bob",
   "fileName": "sponge_bob",
   "groupName": "sponge-bob",
-  "withAuthScreen": "<bearer-navigator-auth-screen />",
+  "withAuthScreen": null,
 }
 `;
 
@@ -84,7 +84,7 @@ Object {
   "componentTagName": "sponge-bob",
   "fileName": "sponge-bob",
   "groupName": "sponge-bob",
-  "withAuthScreen": "<bearer-navigator-auth-screen />",
+  "withAuthScreen": null,
 }
 `;
 
@@ -95,7 +95,7 @@ Object {
   "componentTagName": "sponge-bob",
   "fileName": "spongeBob",
   "groupName": "sponge-bob",
-  "withAuthScreen": "<bearer-navigator-auth-screen />",
+  "withAuthScreen": null,
 }
 `;
 
@@ -106,7 +106,7 @@ Object {
   "componentTagName": "spongebob",
   "fileName": "spongebob",
   "groupName": "spongebob",
-  "withAuthScreen": "<bearer-navigator-auth-screen />",
+  "withAuthScreen": null,
 }
 `;
 
