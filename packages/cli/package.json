@@ -1,7 +1,7 @@
 {
   "name": "@bearer/testing-match-issue-cli",
   "description": "Bearer CLI",
-  "version": "0.49.9",
+  "version": "0.49.10",
   "author": "Bearer Team",
   "bin": {
     "bearer-testing-match-issue": "./bin/run"
@@ -54,7 +54,7 @@
   "scripts": {
     "postpack": "rm -f oclif.manifest.json npm-shrinkwrap.json",
     "posttest": "tsc -p test --noEmit",
-    "prepack": "rm -rf lib && tsc && oclif-dev manifest && oclif-dev readme",
+    "prepack": "rm -rf lib && tsc && oclif-dev manifest && oclif-dev readme && npm shrinkwrap",
     "prepare": "rm -rf lib && tsc",
     "test": "nyc mocha --forbid-only \"test/**/*.test.ts\"",
     "version": "oclif-dev readme && git add README.md"
