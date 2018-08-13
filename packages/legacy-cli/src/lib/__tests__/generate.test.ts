@@ -7,9 +7,13 @@ const AuthTypes = ['oauth2', 'apiKey', 'noAuth', 'basicAuth']
 describe('Generate command', () => {
   describe('get components variables', () => {
     TestingValues.forEach(value => {
-      describe(value, () => {
-        it('formats variables correctly', () => {
-          expect(getComponentVars(value)).toMatchSnapshot()
+      AuthTypes.forEach(authType => {
+        describe(authType, () => {
+          describe(value, () => {
+            it('formats variables correctly', () => {
+              expect(getComponentVars(value, { authType })).toMatchSnapshot()
+            })
+          })
         })
       })
     })

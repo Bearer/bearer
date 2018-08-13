@@ -14,7 +14,10 @@ export class {{componentClassName}}Action {
   render() {
     return (
       <bearer-navigator btnProps={ { content:"{{componentName}} Action", kind:"primary" } } direction="right">
-        <bearer-navigator-auth-screen />
+        {{withAuthScreen}}
+        <bearer-navigator-screen navigationTitle="My first screen">
+          <div style={ { textAlign: 'center' } }>My first screen</div>
+        </bearer-navigator-screen>
       </bearer-navigator>
     )
   }

@@ -1,52 +1,222 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Generate command get components variables SpongeBob formats variables correctly 1`] = `
+exports[`Generate command get components variables apiKey SpongeBob formats variables correctly 1`] = `
 Object {
   "componentClassName": "SpongeBob",
   "componentName": "SpongeBob",
   "componentTagName": "sponge-bob",
   "fileName": "SpongeBob",
   "groupName": "sponge-bob",
+  "withAuthScreen": "<bearer-navigator-auth-screen />",
 }
 `;
 
-exports[`Generate command get components variables sponge_bob formats variables correctly 1`] = `
+exports[`Generate command get components variables apiKey sponge_bob formats variables correctly 1`] = `
 Object {
   "componentClassName": "SpongeBob",
   "componentName": "SpongeBob",
   "componentTagName": "sponge-bob",
   "fileName": "sponge_bob",
   "groupName": "sponge-bob",
+  "withAuthScreen": "<bearer-navigator-auth-screen />",
 }
 `;
 
-exports[`Generate command get components variables sponge-bob formats variables correctly 1`] = `
+exports[`Generate command get components variables apiKey sponge-bob formats variables correctly 1`] = `
 Object {
   "componentClassName": "SpongeBob",
   "componentName": "SpongeBob",
   "componentTagName": "sponge-bob",
   "fileName": "sponge-bob",
   "groupName": "sponge-bob",
+  "withAuthScreen": "<bearer-navigator-auth-screen />",
 }
 `;
 
-exports[`Generate command get components variables spongeBob formats variables correctly 1`] = `
+exports[`Generate command get components variables apiKey spongeBob formats variables correctly 1`] = `
 Object {
   "componentClassName": "SpongeBob",
   "componentName": "SpongeBob",
   "componentTagName": "sponge-bob",
   "fileName": "spongeBob",
   "groupName": "sponge-bob",
+  "withAuthScreen": "<bearer-navigator-auth-screen />",
 }
 `;
 
-exports[`Generate command get components variables spongebob formats variables correctly 1`] = `
+exports[`Generate command get components variables apiKey spongebob formats variables correctly 1`] = `
 Object {
   "componentClassName": "Spongebob",
   "componentName": "Spongebob",
   "componentTagName": "spongebob",
   "fileName": "spongebob",
   "groupName": "spongebob",
+  "withAuthScreen": "<bearer-navigator-auth-screen />",
+}
+`;
+
+exports[`Generate command get components variables basicAuth SpongeBob formats variables correctly 1`] = `
+Object {
+  "componentClassName": "SpongeBob",
+  "componentName": "SpongeBob",
+  "componentTagName": "sponge-bob",
+  "fileName": "SpongeBob",
+  "groupName": "sponge-bob",
+  "withAuthScreen": "<bearer-navigator-auth-screen />",
+}
+`;
+
+exports[`Generate command get components variables basicAuth sponge_bob formats variables correctly 1`] = `
+Object {
+  "componentClassName": "SpongeBob",
+  "componentName": "SpongeBob",
+  "componentTagName": "sponge-bob",
+  "fileName": "sponge_bob",
+  "groupName": "sponge-bob",
+  "withAuthScreen": "<bearer-navigator-auth-screen />",
+}
+`;
+
+exports[`Generate command get components variables basicAuth sponge-bob formats variables correctly 1`] = `
+Object {
+  "componentClassName": "SpongeBob",
+  "componentName": "SpongeBob",
+  "componentTagName": "sponge-bob",
+  "fileName": "sponge-bob",
+  "groupName": "sponge-bob",
+  "withAuthScreen": "<bearer-navigator-auth-screen />",
+}
+`;
+
+exports[`Generate command get components variables basicAuth spongeBob formats variables correctly 1`] = `
+Object {
+  "componentClassName": "SpongeBob",
+  "componentName": "SpongeBob",
+  "componentTagName": "sponge-bob",
+  "fileName": "spongeBob",
+  "groupName": "sponge-bob",
+  "withAuthScreen": "<bearer-navigator-auth-screen />",
+}
+`;
+
+exports[`Generate command get components variables basicAuth spongebob formats variables correctly 1`] = `
+Object {
+  "componentClassName": "Spongebob",
+  "componentName": "Spongebob",
+  "componentTagName": "spongebob",
+  "fileName": "spongebob",
+  "groupName": "spongebob",
+  "withAuthScreen": "<bearer-navigator-auth-screen />",
+}
+`;
+
+exports[`Generate command get components variables noAuth SpongeBob formats variables correctly 1`] = `
+Object {
+  "componentClassName": "SpongeBob",
+  "componentName": "SpongeBob",
+  "componentTagName": "sponge-bob",
+  "fileName": "SpongeBob",
+  "groupName": "sponge-bob",
+  "withAuthScreen": null,
+}
+`;
+
+exports[`Generate command get components variables noAuth sponge_bob formats variables correctly 1`] = `
+Object {
+  "componentClassName": "SpongeBob",
+  "componentName": "SpongeBob",
+  "componentTagName": "sponge-bob",
+  "fileName": "sponge_bob",
+  "groupName": "sponge-bob",
+  "withAuthScreen": null,
+}
+`;
+
+exports[`Generate command get components variables noAuth sponge-bob formats variables correctly 1`] = `
+Object {
+  "componentClassName": "SpongeBob",
+  "componentName": "SpongeBob",
+  "componentTagName": "sponge-bob",
+  "fileName": "sponge-bob",
+  "groupName": "sponge-bob",
+  "withAuthScreen": null,
+}
+`;
+
+exports[`Generate command get components variables noAuth spongeBob formats variables correctly 1`] = `
+Object {
+  "componentClassName": "SpongeBob",
+  "componentName": "SpongeBob",
+  "componentTagName": "sponge-bob",
+  "fileName": "spongeBob",
+  "groupName": "sponge-bob",
+  "withAuthScreen": null,
+}
+`;
+
+exports[`Generate command get components variables noAuth spongebob formats variables correctly 1`] = `
+Object {
+  "componentClassName": "Spongebob",
+  "componentName": "Spongebob",
+  "componentTagName": "spongebob",
+  "fileName": "spongebob",
+  "groupName": "spongebob",
+  "withAuthScreen": null,
+}
+`;
+
+exports[`Generate command get components variables oauth2 SpongeBob formats variables correctly 1`] = `
+Object {
+  "componentClassName": "SpongeBob",
+  "componentName": "SpongeBob",
+  "componentTagName": "sponge-bob",
+  "fileName": "SpongeBob",
+  "groupName": "sponge-bob",
+  "withAuthScreen": "<bearer-navigator-auth-screen />",
+}
+`;
+
+exports[`Generate command get components variables oauth2 sponge_bob formats variables correctly 1`] = `
+Object {
+  "componentClassName": "SpongeBob",
+  "componentName": "SpongeBob",
+  "componentTagName": "sponge-bob",
+  "fileName": "sponge_bob",
+  "groupName": "sponge-bob",
+  "withAuthScreen": "<bearer-navigator-auth-screen />",
+}
+`;
+
+exports[`Generate command get components variables oauth2 sponge-bob formats variables correctly 1`] = `
+Object {
+  "componentClassName": "SpongeBob",
+  "componentName": "SpongeBob",
+  "componentTagName": "sponge-bob",
+  "fileName": "sponge-bob",
+  "groupName": "sponge-bob",
+  "withAuthScreen": "<bearer-navigator-auth-screen />",
+}
+`;
+
+exports[`Generate command get components variables oauth2 spongeBob formats variables correctly 1`] = `
+Object {
+  "componentClassName": "SpongeBob",
+  "componentName": "SpongeBob",
+  "componentTagName": "sponge-bob",
+  "fileName": "spongeBob",
+  "groupName": "sponge-bob",
+  "withAuthScreen": "<bearer-navigator-auth-screen />",
+}
+`;
+
+exports[`Generate command get components variables oauth2 spongebob formats variables correctly 1`] = `
+Object {
+  "componentClassName": "Spongebob",
+  "componentName": "Spongebob",
+  "componentTagName": "spongebob",
+  "fileName": "spongebob",
+  "groupName": "spongebob",
+  "withAuthScreen": "<bearer-navigator-auth-screen />",
 }
 `;
 

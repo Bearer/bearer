@@ -13,7 +13,10 @@ import '@bearer/ui'
 export class FeatureAction {
   render() {
     return (
-      <bearer-navigator btnProps={ {content:"{{scenarioTitle}}", kind:"primary"} } direction="right">
+      <bearer-navigator btnProps={ { content:"{{scenarioTitle}}", kind:"primary" } } direction="right">
+        <bearer-navigator-screen navigationTitle="My first screen">
+          <div style={ { textAlign: 'center' } }>My first screen</div>
+        </bearer-navigator-screen>
       </bearer-navigator>
     )
   }
