@@ -1,0 +1,345 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Generate command get components variables SpongeBob formats variables correctly 1`] = `
+Object {
+  "componentName": "SpongeBob",
+  "componentTagName": "sponge-bob",
+  "fileName": "SpongeBob",
+  "groupName": "sponge-bob",
+}
+`;
+
+exports[`Generate command get components variables sponge_bob formats variables correctly 1`] = `
+Object {
+  "componentName": "SpongeBob",
+  "componentTagName": "sponge-bob",
+  "fileName": "sponge_bob",
+  "groupName": "sponge-bob",
+}
+`;
+
+exports[`Generate command get components variables sponge-bob formats variables correctly 1`] = `
+Object {
+  "componentName": "SpongeBob",
+  "componentTagName": "sponge-bob",
+  "fileName": "sponge-bob",
+  "groupName": "sponge-bob",
+}
+`;
+
+exports[`Generate command get components variables spongeBob formats variables correctly 1`] = `
+Object {
+  "componentName": "SpongeBob",
+  "componentTagName": "sponge-bob",
+  "fileName": "spongeBob",
+  "groupName": "sponge-bob",
+}
+`;
+
+exports[`Generate command get components variables spongebob formats variables correctly 1`] = `
+Object {
+  "componentName": "Spongebob",
+  "componentTagName": "spongebob",
+  "fileName": "spongebob",
+  "groupName": "spongebob",
+}
+`;
+
+exports[`Generate command get intents variables apiKey FetchData formats variables correctly 1`] = `
+Object {
+  "actionExample": "
+  static action(context: TapiKeyContext, params: any, body: any, callback: TFetchDataCallback) {
+    //... your code goes here
+    // use the client defined in client.ts to fetch real object like that:
+    // Client(context.authAccess.apiKey).get('/people')
+    //   .then(({ data }) => {
+    //     callback({ data })
+    //   })
+    //   .catch((error) => {
+    //     callback({ error: error.toString() })
+    //   })
+    callback({ data: []})
+  }
+  ",
+  "authType": "apiKey",
+  "callbackType": "TFetchDataCallback",
+  "intentName": "test",
+  "intentType": "FetchData",
+}
+`;
+
+exports[`Generate command get intents variables apiKey Intent formats variables correctly 1`] = `
+Object {
+  "actionExample": undefined,
+  "authType": "apiKey",
+  "callbackType": "TIntentCallback",
+  "intentName": "test",
+  "intentType": "Intent",
+}
+`;
+
+exports[`Generate command get intents variables apiKey RetrieveState formats variables correctly 1`] = `
+Object {
+  "actionExample": "
+  static action(_context: TapiKeyContext, _params: any, state, callback: TRetrieveStateCallback) {
+    callback({ data: state })
+  }
+  ",
+  "authType": "apiKey",
+  "callbackType": "TRetrieveStateCallback",
+  "intentName": "test",
+  "intentType": "RetrieveState",
+}
+`;
+
+exports[`Generate command get intents variables apiKey SaveState formats variables correctly 1`] = `
+Object {
+  "actionExample": "
+  static action(
+    _context: TapiKeyContext,
+    _params: any,
+    body: any,
+    state: any,
+    callback: TSaveStateCallback
+  ): void {
+    const { item: { name } } = body
+    const { items = [] }: any = state
+    const newItem: any = { name }
+
+    callback({
+      state: {
+        ...state,
+        items: [...items, newItem]
+      },
+      data: [...items, newItem]
+    })
+  }
+  ",
+  "authType": "apiKey",
+  "callbackType": "TSaveStateCallback",
+  "intentName": "test",
+  "intentType": "SaveState",
+}
+`;
+
+exports[`Generate command get intents variables basicAuth FetchData formats variables correctly 1`] = `
+Object {
+  "actionExample": "
+  static action(context: TbasicAuthContext, params: any, body: any, callback: TFetchDataCallback) {
+    //... your code goes here
+    // use the client defined in client.ts to fetch real object like that:
+    // Client(
+    //   context.authAccess.username,
+    //   context.authAccess.password
+    // ).get('/people').then(({ data }) => {
+    //     callback({ data })
+    //   })
+    //   .catch((error) => {
+    //     callback({ error: error.toString() })
+    //   })
+    callback({ data: []})
+  }
+  ",
+  "authType": "basicAuth",
+  "callbackType": "TFetchDataCallback",
+  "intentName": "test",
+  "intentType": "FetchData",
+}
+`;
+
+exports[`Generate command get intents variables basicAuth Intent formats variables correctly 1`] = `
+Object {
+  "actionExample": undefined,
+  "authType": "basicAuth",
+  "callbackType": "TIntentCallback",
+  "intentName": "test",
+  "intentType": "Intent",
+}
+`;
+
+exports[`Generate command get intents variables basicAuth RetrieveState formats variables correctly 1`] = `
+Object {
+  "actionExample": "
+  static action(_context: TbasicAuthContext, _params: any, state, callback: TRetrieveStateCallback) {
+    callback({ data: state })
+  }
+  ",
+  "authType": "basicAuth",
+  "callbackType": "TRetrieveStateCallback",
+  "intentName": "test",
+  "intentType": "RetrieveState",
+}
+`;
+
+exports[`Generate command get intents variables basicAuth SaveState formats variables correctly 1`] = `
+Object {
+  "actionExample": "
+  static action(
+    _context: TbasicAuthContext,
+    _params: any,
+    body: any,
+    state: any,
+    callback: TSaveStateCallback
+  ): void {
+    const { item: { name } } = body
+    const { items = [] }: any = state
+    const newItem: any = { name }
+
+    callback({
+      state: {
+        ...state,
+        items: [...items, newItem]
+      },
+      data: [...items, newItem]
+    })
+  }
+  ",
+  "authType": "basicAuth",
+  "callbackType": "TSaveStateCallback",
+  "intentName": "test",
+  "intentType": "SaveState",
+}
+`;
+
+exports[`Generate command get intents variables noAuth FetchData formats variables correctly 1`] = `
+Object {
+  "actionExample": "
+  static action(context: TnoAuthContext, params: any, body: any, callback: TFetchDataCallback) {
+    //... your code goes here
+    callback({ data: []})
+  }",
+  "authType": "noAuth",
+  "callbackType": "TFetchDataCallback",
+  "intentName": "test",
+  "intentType": "FetchData",
+}
+`;
+
+exports[`Generate command get intents variables noAuth Intent formats variables correctly 1`] = `
+Object {
+  "actionExample": undefined,
+  "authType": "noAuth",
+  "callbackType": "TIntentCallback",
+  "intentName": "test",
+  "intentType": "Intent",
+}
+`;
+
+exports[`Generate command get intents variables noAuth RetrieveState formats variables correctly 1`] = `
+Object {
+  "actionExample": "
+  static action(_context: TnoAuthContext, _params: any, state, callback: TRetrieveStateCallback) {
+    callback({ data: state })
+  }
+  ",
+  "authType": "noAuth",
+  "callbackType": "TRetrieveStateCallback",
+  "intentName": "test",
+  "intentType": "RetrieveState",
+}
+`;
+
+exports[`Generate command get intents variables noAuth SaveState formats variables correctly 1`] = `
+Object {
+  "actionExample": "
+  static action(
+    _context: TnoAuthContext,
+    _params: any,
+    body: any,
+    state: any,
+    callback: TSaveStateCallback
+  ): void {
+    const { item: { name } } = body
+    const { items = [] }: any = state
+    const newItem: any = { name }
+
+    callback({
+      state: {
+        ...state,
+        items: [...items, newItem]
+      },
+      data: [...items, newItem]
+    })
+  }
+  ",
+  "authType": "noAuth",
+  "callbackType": "TSaveStateCallback",
+  "intentName": "test",
+  "intentType": "SaveState",
+}
+`;
+
+exports[`Generate command get intents variables oauth2 FetchData formats variables correctly 1`] = `
+Object {
+  "actionExample": "
+  static action(context: Toauth2Context, params: any, body: any, callback: TFetchDataCallback) {
+    //... your code goes here
+    // use the client defined in client.ts to fetch real object like that:
+    // Client(context.authAccess.accessToken).get('/people').then(({ data }) => {
+    //     callback({ data })
+    //   })
+    //   .catch((error) => {
+    //     callback({ error: error.toString() })
+    //   })
+    callback({ data: []})
+  }",
+  "authType": "oauth2",
+  "callbackType": "TFetchDataCallback",
+  "intentName": "test",
+  "intentType": "FetchData",
+}
+`;
+
+exports[`Generate command get intents variables oauth2 Intent formats variables correctly 1`] = `
+Object {
+  "actionExample": undefined,
+  "authType": "oauth2",
+  "callbackType": "TIntentCallback",
+  "intentName": "test",
+  "intentType": "Intent",
+}
+`;
+
+exports[`Generate command get intents variables oauth2 RetrieveState formats variables correctly 1`] = `
+Object {
+  "actionExample": "
+  static action(_context: Toauth2Context, _params: any, state, callback: TRetrieveStateCallback) {
+    callback({ data: state })
+  }
+  ",
+  "authType": "oauth2",
+  "callbackType": "TRetrieveStateCallback",
+  "intentName": "test",
+  "intentType": "RetrieveState",
+}
+`;
+
+exports[`Generate command get intents variables oauth2 SaveState formats variables correctly 1`] = `
+Object {
+  "actionExample": "
+  static action(
+    _context: Toauth2Context,
+    _params: any,
+    body: any,
+    state: any,
+    callback: TSaveStateCallback
+  ): void {
+    const { item: { name } } = body
+    const { items = [] }: any = state
+    const newItem: any = { name }
+
+    callback({
+      state: {
+        ...state,
+        items: [...items, newItem]
+      },
+      data: [...items, newItem]
+    })
+  }
+  ",
+  "authType": "oauth2",
+  "callbackType": "TSaveStateCallback",
+  "intentName": "test",
+  "intentType": "SaveState",
+}
+`;

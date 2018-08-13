@@ -1,15 +1,31 @@
+import * as intents from '@bearer/intents'
+
 import { getComponentVars, getIntentVars } from '../commands/generateCommand'
+const TestingValues = ['spongebob', 'SpongeBob', 'spongeBob', 'sponge_bob', 'sponge-bob']
+const AuthTypes = ['oauth2', 'apiKey', 'noAuth', 'basicAuth']
 
 describe('Generate command', () => {
   describe('get components variables', () => {
-    it('formats variables correctly', () => {
-      expect(getComponentVars('test')).toEqual({})
+    TestingValues.forEach(value => {
+      describe(value, () => {
+        it('formats variables correctly', () => {
+          expect(getComponentVars(value)).toMatchSnapshot()
+        })
+      })
     })
   })
 
   describe('get intents variables', () => {
-    it('formats variables correctly', () => {
-      expect(getIntentVars('test')).toEqual({})
+    Object.keys(intents).forEach(intentType => {
+      AuthTypes.forEach(authType => {
+        describe(authType, () => {
+          describe(intentType, () => {
+            it('formats variables correctly', () => {
+              expect(getIntentVars('test', intentType, { authType })).toMatchSnapshot()
+            })
+          })
+        })
+      })
     })
   })
 })

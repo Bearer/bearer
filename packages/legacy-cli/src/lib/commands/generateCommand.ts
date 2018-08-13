@@ -79,7 +79,7 @@ type TgenerateComponent = { locator: Locator; emitter: any; name?: string; type?
 async function generateComponent({ emitter, locator, name, type }: TgenerateComponent) {
   // Ask for type if not present
   if (!type) {
-    type = await getComponentType()
+    type = await askComponentType()
   }
 
   // Ask for name if not present
@@ -97,15 +97,8 @@ async function generateComponent({ emitter, locator, name, type }: TgenerateComp
 }
 
 async function generateIntent({ emitter, locator }: { emitter: any; locator: Locator }) {
-  const { intentType } = await inquirer.prompt([
-    {
-      message: 'What type of intent do you want to generate',
-      type: 'list',
-      name: 'intentType',
-      choices: getIntentChoices()
-    }
-  ])
   const name = await askForName()
+  const intentType = await askIntentType()
   const authConfig = require(locator.authConfigPath)
   const inDir = path.join(__dirname, 'templates/generate/intent')
   const outDir = locator.srcIntentsDir
@@ -141,7 +134,19 @@ function getActionExample(intentType, authType) {
   return templates[authType][intentType]
 }
 
-async function getComponentType(): Promise<Components> {
+async function askIntentType(): Promise<string> {
+  const { intentType } = await inquirer.prompt([
+    {
+      message: 'What type of intent do you want to generate',
+      type: 'list',
+      name: 'intentType',
+      choices: getIntentChoices()
+    }
+  ])
+  return intentType
+}
+
+async function askComponentType(): Promise<Components> {
   const typePrompt = await inquirer.prompt([
     {
       message: 'What type of component do you want to generate',
@@ -160,16 +165,15 @@ async function getComponentType(): Promise<Components> {
 
 export function getComponentVars(name: string) {
   const componentName = Case.pascal(name)
-  const fileName = name.charAt(0) + Case.camel(name).substr(1)
   return {
-    fileName,
+    fileName: name,
     componentName,
     componentTagName: Case.kebab(componentName),
-    groupName: componentName
+    groupName: Case.kebab(componentName)
   }
 }
 
-export function getIntentVars(name: string, intentType, authConfig) {
+export function getIntentVars(name: string, intentType: string, authConfig: { authType: string }) {
   const actionExample = getActionExample(intentType, authConfig.authType)
   return {
     intentName: name,
@@ -181,14 +185,7 @@ export function getIntentVars(name: string, intentType, authConfig) {
 }
 
 async function askForName() {
-  const { name } = await inquirer.prompt([
-    {
-      message: 'Give it a name',
-      type: 'input',
-      name: 'name'
-    }
-  ])
-
+  const { name } = await inquirer.prompt([{ message: 'Give it a name', type: 'input', name: 'name' }])
   return name.trim()
 }
 
