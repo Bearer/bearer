@@ -1,6 +1,6 @@
 {
   "name": "@bearer/bearer-cli-testing-match-issue",
-  "version": "0.49.1",
+  "version": "0.49.2",
   "main": "index.js",
   "repository": "git@github.com:Bearer/bearer.git",
   "author": "Radek Molenda <radek@bearer.com>",
