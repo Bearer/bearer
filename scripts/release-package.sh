@@ -3,7 +3,7 @@ set -e
 
 echo "Fetching Bearer source code"
 # git pull origin master
-git pull
+git pull --autostash
 
 echo "Starting publishing"
 yarn lerna-publish
