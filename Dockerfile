@@ -8,7 +8,9 @@ RUN ssh-keyscan github.com >> /root/.ssh/known_hosts
 
 RUN mkdir /app
 WORKDIR /app
+
 COPY . .
-RUN yarn install
+
+RUN yarn install --frozen-lockfile
 RUN chmod +x /app/scripts/release-package.sh
 CMD ["/app/scripts/release-package.sh"]

@@ -2,7 +2,8 @@
 set -e
 
 echo "Fetching Bearer source code"
-git pull origin master
+# git pull origin master
+git pull
 
 echo "Starting publishing"
 yarn lerna-publish
