@@ -1,14 +1,14 @@
 {
   "name": "@bearer/testing-match-issue-cli",
   "description": "Bearer CLI",
-  "version": "0.49.3",
+  "version": "0.49.4",
   "author": "Bearer Team",
   "bin": {
     "bearer-testing-match-issue": "./bin/run"
   },
   "bugs": "https://github.com/Bearer/bearer/issues",
   "dependencies": {
-    "@bearer/bearer-cli-testing-match-issue": "^0.49.3",
+    "@bearer/bearer-cli-testing-match-issue": "^0.49.4",
     "@oclif/command": "^1",
     "@oclif/config": "^1",
     "@oclif/plugin-help": "^2",

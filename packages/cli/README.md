@@ -13,42 +13,38 @@ Bearer CLI
 [![License](https://img.shields.io/npm/l/@bearer/cli.svg)](https://github.com/Bearer/bearer/packages/cli/blob/master/package.json)
 
 <!-- toc -->
-
-- [@bearer/cli](#bearer-cli)
-- [Usage](#usage)
-- [Commands](#commands)
-  <!-- tocstop -->
+* [@bearer/cli](#bearer-cli)
+* [Usage](#usage)
+* [Commands](#commands)
+<!-- tocstop -->
 
 # Usage
 
 <!-- usage -->
-
 ```sh-session
 $ npm install -g @bearer/testing-match-issue-cli
 $ bearer COMMAND
 running command...
 $ bearer (-v|--version|version)
-@bearer/testing-match-issue-cli/0.49.3 linux-x64 node-v10.5.0
+@bearer/testing-match-issue-cli/0.49.4 linux-x64 node-v10.5.0
 $ bearer --help [COMMAND]
 USAGE
   $ bearer COMMAND
 ...
 ```
-
 <!-- usagestop -->
 
 # Commands
 
 <!-- commands -->
-
-- [`bearer deploy`](#bearer-deploy)
-- [`bearer generate [NAME]`](#bearer-generate-name)
-- [`bearer help [COMMAND]`](#bearer-help-command)
-- [`bearer invoke INTENT_NAME`](#bearer-invoke-intent-name)
-- [`bearer link SCENARIO_IDENTIFIER`](#bearer-link-scenario-identifier)
-- [`bearer login`](#bearer-login)
-- [`bearer new SCENARIONAME`](#bearer-new-scenarioname)
-- [`bearer start`](#bearer-start)
+* [`bearer deploy`](#bearer-deploy)
+* [`bearer generate [NAME]`](#bearer-generate-name)
+* [`bearer help [COMMAND]`](#bearer-help-command)
+* [`bearer invoke INTENT_NAME`](#bearer-invoke-intent-name)
+* [`bearer link SCENARIO_IDENTIFIER`](#bearer-link-scenario-identifier)
+* [`bearer login`](#bearer-login)
+* [`bearer new SCENARIONAME`](#bearer-new-scenarioname)
+* [`bearer start`](#bearer-start)
 
 ## `bearer deploy`
 
@@ -64,7 +60,7 @@ OPTIONS
   -s, --views-only    Deploy views only
 ```
 
-_See code: [src/commands/deploy.ts](https://github.com/Bearer/bearer/blob/v0.49.3/src/commands/deploy.ts)_
+_See code: [src/commands/deploy.ts](https://github.com/Bearer/bearer/blob/v0.49.4/src/commands/deploy.ts)_
 
 ## `bearer generate [NAME]`
 
@@ -82,7 +78,7 @@ OPTIONS
   --setup
 ```
 
-_See code: [src/commands/generate.ts](https://github.com/Bearer/bearer/blob/v0.49.3/src/commands/generate.ts)_
+_See code: [src/commands/generate.ts](https://github.com/Bearer/bearer/blob/v0.49.4/src/commands/generate.ts)_
 
 ## `bearer help [COMMAND]`
 
@@ -114,7 +110,7 @@ OPTIONS
   -p, --path=path
 ```
 
-_See code: [src/commands/invoke.ts](https://github.com/Bearer/bearer/blob/v0.49.3/src/commands/invoke.ts)_
+_See code: [src/commands/invoke.ts](https://github.com/Bearer/bearer/blob/v0.49.4/src/commands/invoke.ts)_
 
 ## `bearer link SCENARIO_IDENTIFIER`
 
@@ -128,7 +124,7 @@ OPTIONS
   -h, --help  show CLI help
 ```
 
-_See code: [src/commands/link.ts](https://github.com/Bearer/bearer/blob/v0.49.3/src/commands/link.ts)_
+_See code: [src/commands/link.ts](https://github.com/Bearer/bearer/blob/v0.49.4/src/commands/link.ts)_
 
 ## `bearer login`
 
@@ -143,7 +139,7 @@ OPTIONS
   -h, --help         show CLI help
 ```
 
-_See code: [src/commands/login.ts](https://github.com/Bearer/bearer/blob/v0.49.3/src/commands/login.ts)_
+_See code: [src/commands/login.ts](https://github.com/Bearer/bearer/blob/v0.49.4/src/commands/login.ts)_
 
 ## `bearer new SCENARIONAME`
 
@@ -157,7 +153,7 @@ OPTIONS
   -h, --help  show CLI help
 ```
 
-_See code: [src/commands/new.ts](https://github.com/Bearer/bearer/blob/v0.49.3/src/commands/new.ts)_
+_See code: [src/commands/new.ts](https://github.com/Bearer/bearer/blob/v0.49.4/src/commands/new.ts)_
 
 ## `bearer start`
 
@@ -173,6 +169,5 @@ OPTIONS
   --no-open
 ```
 
-_See code: [src/commands/start.ts](https://github.com/Bearer/bearer/blob/v0.49.3/src/commands/start.ts)_
-
+_See code: [src/commands/start.ts](https://github.com/Bearer/bearer/blob/v0.49.4/src/commands/start.ts)_
 <!-- commandsstop -->

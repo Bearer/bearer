@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.49.4"></a>
+## [0.49.4](https://github.com/Bearer/bearer/compare/v0.49.2...v0.49.4) (2018-08-13)
+
+
+### Bug Fixes
+
+* **cli:** investigate failing install issue ([f509f36](https://github.com/Bearer/bearer/commit/f509f36))
+
+
+
+
 <a name="0.49.3"></a>
 
 ## [0.49.3](https://github.com/Bearer/bearer/compare/v0.49.2...v0.49.3) (2018-08-13)
