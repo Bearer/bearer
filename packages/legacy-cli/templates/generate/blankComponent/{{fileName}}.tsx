@@ -5,7 +5,7 @@ import { Component } from '@bearer/core'
   styleUrl: '{{fileName}}.css',
   shadow: true
 })
-export class {{componentName}} {
+export class {{componentClassName}} {
   render() {
     return (
       <div class="root">

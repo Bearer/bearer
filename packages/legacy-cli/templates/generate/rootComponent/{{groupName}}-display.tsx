@@ -10,7 +10,7 @@ import '@bearer/ui'
   name: 'display',
   group: '{{groupName}}'
 })
-export class {{groupName}}Display {
+export class {{componentClassName}}Display {
   render() {
     return (null)
   }

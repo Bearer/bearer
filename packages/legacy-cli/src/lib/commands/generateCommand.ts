@@ -168,6 +168,7 @@ export function getComponentVars(name: string) {
   return {
     fileName: name,
     componentName,
+    componentClassName: componentName, // it gives more meaning within templates
     componentTagName: Case.kebab(componentName),
     groupName: Case.kebab(componentName)
   }

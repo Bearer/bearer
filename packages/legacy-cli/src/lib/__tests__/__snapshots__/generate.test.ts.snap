@@ -2,6 +2,7 @@
 
 exports[`Generate command get components variables SpongeBob formats variables correctly 1`] = `
 Object {
+  "componentClassName": "SpongeBob",
   "componentName": "SpongeBob",
   "componentTagName": "sponge-bob",
   "fileName": "SpongeBob",
@@ -11,6 +12,7 @@ Object {
 
 exports[`Generate command get components variables sponge_bob formats variables correctly 1`] = `
 Object {
+  "componentClassName": "SpongeBob",
   "componentName": "SpongeBob",
   "componentTagName": "sponge-bob",
   "fileName": "sponge_bob",
@@ -20,6 +22,7 @@ Object {
 
 exports[`Generate command get components variables sponge-bob formats variables correctly 1`] = `
 Object {
+  "componentClassName": "SpongeBob",
   "componentName": "SpongeBob",
   "componentTagName": "sponge-bob",
   "fileName": "sponge-bob",
@@ -29,6 +32,7 @@ Object {
 
 exports[`Generate command get components variables spongeBob formats variables correctly 1`] = `
 Object {
+  "componentClassName": "SpongeBob",
   "componentName": "SpongeBob",
   "componentTagName": "sponge-bob",
   "fileName": "spongeBob",
@@ -38,6 +42,7 @@ Object {
 
 exports[`Generate command get components variables spongebob formats variables correctly 1`] = `
 Object {
+  "componentClassName": "Spongebob",
   "componentName": "Spongebob",
   "componentTagName": "spongebob",
   "fileName": "spongebob",
