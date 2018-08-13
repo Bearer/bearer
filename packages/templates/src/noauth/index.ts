@@ -22,7 +22,7 @@ export default {
   `,
   RetrieveState: `
   static action(_context: TnoAuthContext, _params: any, state, callback: TRetrieveStateCallback) {
-    callback({ state })
+    callback({ data: state })
   }
   `,
   FetchData: `
