@@ -37,7 +37,10 @@ _Now You should be able to go into each packages and run existing command (ex: y
 ### ⚠️ Publish packages ️⚠️
 
 ```bash
-yarn lerna-publish
+./scripts/release.sh
+
+// or pass lerna arguments
+./scripts/release.sh --force-publish
 ```
 
 For further information on Lerna please read Lerna's documentation: [Lerna](https://github.com/lerna/lerna)
