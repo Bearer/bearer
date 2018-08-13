@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+
+if [ ! -f ~/.npmrc ]; then
+  echo "Missing ~/.npmrc file"
+  exit 1
+fi
+
+if [ ! -f ~/.gitconfig ]; then
+  echo "Missing ~/.gitconfig file"
+  exit 1
+fi
+
+docker build -t bearer-publish-docker .
+
+docker run -ti \
+  -v $(dirname $SSH_AUTH_SOCK):$(dirname $SSH_AUTH_SOCK) \
+  -e SSH_AUTH_SOCK=$SSH_AUTH_SOCK \
+  -v ~/.ssh/id_rsa:/root/.ssh/id_rsa \
+  -v ~/.npmrc:/root/.npmrc \
+  -v ~/.gitconfig:/root/.gitconfig \
+  --rm bearer-publish-docker
