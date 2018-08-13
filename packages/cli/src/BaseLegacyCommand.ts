@@ -1,4 +1,4 @@
-import cli from '@bearer/bearer-cli/dist/bin/index'
+import cli from '@bearer/bearer-cli-testing-match-issue/dist/bin/index'
 import Command from '@oclif/command'
 
 export default abstract class extends Command {

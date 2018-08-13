@@ -3,87 +3,70 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.49.3"></a>
+
+## [0.49.3](https://github.com/Bearer/bearer/compare/v0.49.2...v0.49.3) (2018-08-13)
+
+**Note:** Version bump only for package bearer-master
+
 <a name="0.49.2"></a>
+
 ## [0.49.2](https://github.com/Bearer/bearer/compare/v0.49.1...v0.49.2) (2018-08-13)
-
-
-
 
 **Note:** Version bump only for package bearer-master
 
 <a name="0.49.1"></a>
+
 ## [0.49.1](https://github.com/Bearer/bearer/compare/v0.49.0...v0.49.1) (2018-08-13)
-
-
-
 
 **Note:** Version bump only for package bearer-master
 
 <a name="0.49.0"></a>
-# [0.49.0](https://github.com/Bearer/bearer/compare/v0.48.5...v0.49.0) (2018-08-12)
 
+# [0.49.0](https://github.com/Bearer/bearer/compare/v0.48.5...v0.49.0) (2018-08-12)
 
 ### Bug Fixes
 
-* **bearer:** include typescript to fix missing typescript issue ([342b0b5](https://github.com/Bearer/bearer/commit/342b0b5))
-* **cli:** fix serviceClient issue ([42b3c40](https://github.com/Bearer/bearer/commit/42b3c40))
-
+- **bearer:** include typescript to fix missing typescript issue ([342b0b5](https://github.com/Bearer/bearer/commit/342b0b5))
+- **cli:** fix serviceClient issue ([42b3c40](https://github.com/Bearer/bearer/commit/42b3c40))
 
 ### Features
 
-* **cli:** proxy the notifications through package manager ([514e8aa](https://github.com/Bearer/bearer/commit/514e8aa))
-
-
-
+- **cli:** proxy the notifications through package manager ([514e8aa](https://github.com/Bearer/bearer/commit/514e8aa))
 
 <a name="0.48.5"></a>
+
 ## [0.48.5](https://github.com/Bearer/bearer/compare/v0.48.4...v0.48.5) (2018-08-12)
-
-
-
 
 **Note:** Version bump only for package bearer-master
 
 <a name="0.48.4"></a>
+
 ## [0.48.4](https://github.com/Bearer/bearer/compare/v0.48.3...v0.48.4) (2018-08-10)
 
 **Note:** Version bump only for package bearer-master
 
-
-
-
-
 <a name="0.48.3"></a>
+
 ## [0.48.3](https://github.com/Bearer/bearer/compare/v0.48.2...v0.48.3) (2018-08-10)
 
 **Note:** Version bump only for package bearer-master
 
-
-
-
-
 <a name="0.48.2"></a>
+
 ## [0.48.2](https://github.com/Bearer/bearer/compare/v0.48.1...v0.48.2) (2018-08-10)
 
 **Note:** Version bump only for package bearer-master
 
-
-
-
-
 <a name="0.48.1"></a>
+
 ## [0.48.1](https://github.com/Bearer/bearer/compare/v0.48.0...v0.48.1) (2018-08-10)
-
-
-
 
 **Note:** Version bump only for package bearer-master
 
 <a name="0.47.5"></a>
+
 ## [0.47.5](https://github.com/Bearer/bearer/compare/v0.47.4...v0.47.5) (2018-08-10)
-
-
-
 
 **Note:** Version bump only for package bearer-master
 

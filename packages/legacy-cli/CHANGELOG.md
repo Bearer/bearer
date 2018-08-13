@@ -3,110 +3,87 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.49.3"></a>
+
+## [0.49.3](https://github.com/Bearer/bearer/compare/v0.49.2...v0.49.3) (2018-08-13)
+
+**Note:** Version bump only for package @bearer/bearer-cli-testing-match-issue
+
 <a name="0.49.2"></a>
+
 ## [0.49.2](https://github.com/Bearer/bearer/compare/v0.49.1...v0.49.2) (2018-08-13)
-
-
-
 
 **Note:** Version bump only for package @bearer/bearer-cli-testing-match-issue
 
 <a name="0.49.1"></a>
+
 ## [0.49.1](https://github.com/Bearer/bearer/compare/v0.49.0...v0.49.1) (2018-08-13)
-
-
-
 
 **Note:** Version bump only for package @bearer/bearer-cli-testing-match-issue
 
 <a name="0.49.0"></a>
-# [0.49.0](https://github.com/Bearer/bearer/compare/v0.48.5...v0.49.0) (2018-08-12)
 
+# [0.49.0](https://github.com/Bearer/bearer/compare/v0.48.5...v0.49.0) (2018-08-12)
 
 ### Bug Fixes
 
-* **cli:** fix serviceClient issue ([42b3c40](https://github.com/Bearer/bearer/commit/42b3c40))
-
+- **cli:** fix serviceClient issue ([42b3c40](https://github.com/Bearer/bearer/commit/42b3c40))
 
 ### Features
 
-* **cli:** proxy the notifications through package manager ([514e8aa](https://github.com/Bearer/bearer/commit/514e8aa))
-
-
-
+- **cli:** proxy the notifications through package manager ([514e8aa](https://github.com/Bearer/bearer/commit/514e8aa))
 
 <a name="0.48.5"></a>
+
 ## [0.48.5](https://github.com/Bearer/bearer/compare/v0.48.4...v0.48.5) (2018-08-12)
-
-
-
 
 **Note:** Version bump only for package @bearer/bearer-cli
 
 <a name="0.48.4"></a>
+
 ## [0.48.4](https://github.com/Bearer/bearer/compare/v0.48.3...v0.48.4) (2018-08-10)
 
 **Note:** Version bump only for package @bearer/bearer-cli
 
-
-
-
-
 <a name="0.48.3"></a>
+
 ## [0.48.3](https://github.com/Bearer/bearer/compare/v0.48.2...v0.48.3) (2018-08-10)
 
 **Note:** Version bump only for package @bearer/bearer-cli
 
-
-
-
-
 <a name="0.48.2"></a>
+
 ## [0.48.2](https://github.com/Bearer/bearer/compare/v0.48.1...v0.48.2) (2018-08-10)
 
 **Note:** Version bump only for package @bearer/bearer-cli
 
-
-
-
-
 <a name="0.48.1"></a>
+
 ## [0.48.1](https://github.com/Bearer/bearer/compare/v0.48.0...v0.48.1) (2018-08-10)
-
-
-
 
 **Note:** Version bump only for package @bearer/bearer-cli
 
 <a name="0.47.5"></a>
+
 ## [0.47.5](https://github.com/Bearer/bearer/compare/v0.47.4...v0.47.5) (2018-08-10)
-
-
-
 
 **Note:** Version bump only for package @bearer/bearer-cli
 
 <a name="0.45.2"></a>
+
 ## [0.45.2](https://github.com/Bearer/bearer/compare/v0.45.1...v0.45.2) (2018-08-10)
 
-
 ### Bug Fixes
 
-* **cli:** do not rely on node_modules or bin anymore ([#256](https://github.com/Bearer/bearer/issues/256)) ([d839c42](https://github.com/Bearer/bearer/commit/d839c42))
-
-
-
+- **cli:** do not rely on node_modules or bin anymore ([#256](https://github.com/Bearer/bearer/issues/256)) ([d839c42](https://github.com/Bearer/bearer/commit/d839c42))
 
 <a name="0.45.1"></a>
-## [0.45.1](https://github.com/Bearer/bearer/compare/v0.45.0...v0.45.1) (2018-08-10)
 
+## [0.45.1](https://github.com/Bearer/bearer/compare/v0.45.0...v0.45.1) (2018-08-10)
 
 ### Bug Fixes
 
-* **cli:** rely on binary ([20b2c99](https://github.com/Bearer/bearer/commit/20b2c99))
-
-
-
+- **cli:** rely on binary ([20b2c99](https://github.com/Bearer/bearer/commit/20b2c99))
 
 <a name="0.43.1"></a>
 
