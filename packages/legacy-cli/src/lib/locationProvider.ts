@@ -1,5 +1,6 @@
-import { Config } from './types'
 import * as path from 'path'
+
+import { Config } from './types'
 
 export default class LocationProvider {
   bearerDir: string
@@ -22,6 +23,11 @@ export default class LocationProvider {
   get srcViewsDir(): string {
     return path.join(this.scenarioRoot, 'views')
   }
+
+  srcViewsDirResource(name: string): string {
+    return path.join(this.srcViewsDir, name)
+  }
+
   // ~/intents
   get srcIntentsDir(): string {
     return path.join(this.scenarioRoot, 'intents')

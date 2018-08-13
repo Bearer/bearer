@@ -58,16 +58,7 @@ const generate = (emitter, {}, locator: Locator) => async env => {
       message: 'What do you want to generate',
       type: 'list',
       name: 'template',
-      choices: [
-        {
-          name: 'Intent',
-          value: INTENT
-        },
-        {
-          name: 'Component',
-          value: COMPONENT
-        }
-      ]
+      choices: [{ name: 'Intent', value: INTENT }, { name: 'Component', value: COMPONENT }]
     }
   ])
 
@@ -84,6 +75,111 @@ const generate = (emitter, {}, locator: Locator) => async env => {
   }
 }
 
+type TgenerateComponent = { locator: Locator; emitter: any; name?: string; type?: string }
+async function generateComponent({ emitter, locator, name, type }: TgenerateComponent) {
+  // Ask for type if not present
+  if (!type) {
+    type = await getComponentType()
+  }
+
+  // Ask for name if not present
+  if (!name) {
+    name = await askForName()
+  }
+
+  const inDir = path.join(__dirname, 'templates/generate', `${type}Component`)
+  const outDir = type === Components.ROOT ? locator.srcViewsDir : locator.srcViewsDirResource('components')
+
+  copy(inDir, outDir, getComponentVars(name), (err, createdFiles) => {
+    if (err) throw err
+    createdFiles.forEach(filePath => emitter.emit('generateView:fileGenerated', filePath))
+  })
+}
+
+async function generateIntent({ emitter, locator }: { emitter: any; locator: Locator }) {
+  const { intentType } = await inquirer.prompt([
+    {
+      message: 'What type of intent do you want to generate',
+      type: 'list',
+      name: 'intentType',
+      choices: getIntentChoices()
+    }
+  ])
+  const name = await askForName()
+  const authConfig = require(locator.authConfigPath)
+  const inDir = path.join(__dirname, 'templates/generate/intent')
+  const outDir = locator.srcIntentsDir
+
+  copy(inDir, outDir, getIntentVars(name, intentType, authConfig), (err, createdFiles) => {
+    if (err) throw err
+    createdFiles.forEach(filePath => emitter.emit('generateTemplate:fileGenerated', filePath))
+  })
+}
+
+/**
+ * Helpers
+ */
+
+export function getIntentChoices(): Array<{ name: string; value: any }> {
+  const filteredChoices = (intents: Record<string, any>, propertyFlag) =>
+    Object.keys(intents)
+      .filter(intent => intents[intent][propertyFlag])
+      .map(intent => ({
+        name: intents[intent].display,
+        value: intent
+      }))
+      .sort((a, b) => (a.name > b.name ? 1 : -1))
+
+  return [
+    ...filteredChoices(intents, 'isGlobalIntent'),
+    new inquirer.Separator(),
+    ...filteredChoices(intents, 'isStateIntent')
+  ]
+}
+
+function getActionExample(intentType, authType) {
+  return templates[authType][intentType]
+}
+
+async function getComponentType(): Promise<Components> {
+  const typePrompt = await inquirer.prompt([
+    {
+      message: 'What type of component do you want to generate',
+      type: 'list',
+      name: 'type',
+      choices: [
+        { name: 'Blank', value: Components.BLANK },
+        { name: 'Collection', value: Components.COLLECTION },
+        new inquirer.Separator(),
+        { name: 'Root Group', value: Components.ROOT }
+      ]
+    }
+  ])
+  return typePrompt.type
+}
+
+export function getComponentVars(name: string) {
+  const componentName = Case.pascal(name)
+  const fileName = name.charAt(0) + Case.camel(name).substr(1)
+  return {
+    fileName,
+    componentName,
+    componentTagName: Case.kebab(componentName),
+    groupName: componentName
+  }
+}
+
+export function getIntentVars(name: string, intentType, authConfig) {
+  const actionExample = getActionExample(intentType, authConfig.authType)
+  return {
+    intentName: name,
+    authType: authConfig.authType,
+    intentType,
+    actionExample,
+    callbackType: `T${intentType}Callback`
+  }
+}
+
 async function askForName() {
   const { name } = await inquirer.prompt([
     {
@@ -96,115 +192,9 @@ async function askForName() {
   return name.trim()
 }
 
-async function generateComponent({
-  emitter,
-  locator,
-  name,
-  type
-}: {
-  locator: Locator
-  emitter: any
-  name?: string
-  type?: string
-}) {
-  // Ask for type if not present
-  if (!type) {
-    const typePrompt = await inquirer.prompt([
-      {
-        message: 'What type of component do you want to generate',
-        type: 'list',
-        name: 'type',
-        choices: [
-          {
-            name: 'Blank',
-            value: Components.BLANK
-          },
-          {
-            name: 'Collection',
-            value: Components.COLLECTION
-          },
-          new inquirer.Separator(),
-          {
-            name: 'Root Group',
-            value: Components.ROOT
-          }
-        ]
-      }
-    ])
-    type = typePrompt.type
-  }
-
-  // Ask for name if not present
-  if (!name) {
-    name = await askForName()
-  }
-
-  const componentName = Case.pascal(name)
-  const fileName = name.charAt(0) + Case.camel(name).substr(1)
-  const vars = {
-    fileName,
-    componentName,
-    componentTagName: Case.kebab(componentName),
-    groupName: componentName
-  }
-
-  const inDir = path.join(__dirname, 'templates/generate', `${type}Component`)
-  const outDir = type === Components.ROOT ? locator.srcViewsDir : path.join(locator.srcViewsDir, 'components')
-
-  copy(inDir, outDir, vars, (err, createdFiles) => {
-    if (err) throw err
-    createdFiles.forEach(filePath => emitter.emit('generateView:fileGenerated', filePath))
-  })
-}
-
-const filteredChoices = (intents: Record<string, any>, propertyFlag) =>
-  Object.keys(intents)
-    .filter(intent => intents[intent][propertyFlag])
-    .map(intent => ({
-      name: intents[intent].display,
-      value: intent
-    }))
-    .sort((a, b) => (a.name > b.name ? 1 : -1))
-
-const choices = [
-  ...filteredChoices(intents, 'isGlobalIntent'),
-  new inquirer.Separator(),
-  ...filteredChoices(intents, 'isStateIntent')
-]
-
-function getActionExample(intentType, authType) {
-  return templates[authType][intentType]
-}
-
-async function generateIntent({ emitter, locator }: { emitter: any; locator: Locator }) {
-  const { intentType } = await inquirer.prompt([
-    {
-      message: 'What type of intent do you want to generate',
-      type: 'list',
-      name: 'intentType',
-      choices
-    }
-  ])
-  const name = await askForName()
-  const authConfig = require(locator.authConfigPath)
-  const actionExample = getActionExample(intentType, authConfig.authType)
-  const vars = {
-    intentName: name,
-    authType: authConfig.authType,
-    intentType,
-    actionExample,
-    callbackType: `T${intentType}Callback`
-  }
-
-  const inDir = path.join(__dirname, 'templates/generate/intent')
-  const outDir = locator.srcIntentsDir
-
-  copy(inDir, outDir, vars, (err, createdFiles) => {
-    if (err) throw err
-    createdFiles.forEach(filePath => emitter.emit('generateTemplate:fileGenerated', filePath))
-  })
-}
-
+/**
+ * Command
+ */
 export function useWith(program, emitter, config, locator): void {
   program
     .command('generate')
