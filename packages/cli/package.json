@@ -1,7 +1,7 @@
 {
   "name": "@bearer/testing-match-issue-cli",
   "description": "Bearer CLI",
-  "version": "0.49.4",
+  "version": "0.49.5",
   "author": "Bearer Team",
   "bin": {
     "bearer-testing-match-issue": "./bin/run"
