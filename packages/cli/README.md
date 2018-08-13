@@ -22,11 +22,11 @@ Bearer CLI
 
 <!-- usage -->
 ```sh-session
-$ npm install -g @bearer/cli
+$ npm install -g @bearer/bearer-cli-testing-match-issue
 $ bearer COMMAND
 running command...
 $ bearer (-v|--version|version)
-@bearer/cli/0.50.0 linux-x64 node-v10.6.0
+@bearer/bearer-cli-testing-match-issue/0.51.0 linux-x64 node-v10.8.0
 $ bearer --help [COMMAND]
 USAGE
   $ bearer COMMAND
@@ -60,7 +60,7 @@ OPTIONS
   -s, --views-only    Deploy views only
 ```
 
-_See code: [src/commands/deploy.ts](https://github.com/Bearer/bearer/blob/v0.50.0/src/commands/deploy.ts)_
+_See code: [src/commands/deploy.ts](https://github.com/Bearer/bearer/blob/v0.51.0/src/commands/deploy.ts)_
 
 ## `bearer generate [NAME]`
 
@@ -78,7 +78,7 @@ OPTIONS
   --setup
 ```
 
-_See code: [src/commands/generate.ts](https://github.com/Bearer/bearer/blob/v0.50.0/src/commands/generate.ts)_
+_See code: [src/commands/generate.ts](https://github.com/Bearer/bearer/blob/v0.51.0/src/commands/generate.ts)_
 
 ## `bearer help [COMMAND]`
 
@@ -110,7 +110,7 @@ OPTIONS
   -p, --path=path
 ```
 
-_See code: [src/commands/invoke.ts](https://github.com/Bearer/bearer/blob/v0.50.0/src/commands/invoke.ts)_
+_See code: [src/commands/invoke.ts](https://github.com/Bearer/bearer/blob/v0.51.0/src/commands/invoke.ts)_
 
 ## `bearer link SCENARIO_IDENTIFIER`
 
@@ -124,7 +124,7 @@ OPTIONS
   -h, --help  show CLI help
 ```
 
-_See code: [src/commands/link.ts](https://github.com/Bearer/bearer/blob/v0.50.0/src/commands/link.ts)_
+_See code: [src/commands/link.ts](https://github.com/Bearer/bearer/blob/v0.51.0/src/commands/link.ts)_
 
 ## `bearer login`
 
@@ -139,7 +139,7 @@ OPTIONS
   -h, --help         show CLI help
 ```
 
-_See code: [src/commands/login.ts](https://github.com/Bearer/bearer/blob/v0.50.0/src/commands/login.ts)_
+_See code: [src/commands/login.ts](https://github.com/Bearer/bearer/blob/v0.51.0/src/commands/login.ts)_
 
 ## `bearer new SCENARIONAME`
 
@@ -153,7 +153,7 @@ OPTIONS
   -h, --help  show CLI help
 ```
 
-_See code: [src/commands/new.ts](https://github.com/Bearer/bearer/blob/v0.50.0/src/commands/new.ts)_
+_See code: [src/commands/new.ts](https://github.com/Bearer/bearer/blob/v0.51.0/src/commands/new.ts)_
 
 ## `bearer start`
 
@@ -169,5 +169,5 @@ OPTIONS
   --no-open
 ```
 
-_See code: [src/commands/start.ts](https://github.com/Bearer/bearer/blob/v0.50.0/src/commands/start.ts)_
+_See code: [src/commands/start.ts](https://github.com/Bearer/bearer/blob/v0.51.0/src/commands/start.ts)_
 <!-- commandsstop -->

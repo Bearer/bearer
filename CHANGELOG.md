@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.51.0"></a>
+# [0.51.0](https://github.com/Bearer/bearer/compare/v0.50.0...v0.51.0) (2018-08-13)
+
+
+### Bug Fixes
+
+* **cli:** ask intenttype before name ([df52ae4](https://github.com/Bearer/bearer/commit/df52ae4))
+* **cli:** ensure error message is returned only when exists ([f0dae67](https://github.com/Bearer/bearer/commit/f0dae67))
+* **cli:** generate first screen ([b215a3f](https://github.com/Bearer/bearer/commit/b215a3f))
+* **ui:** make setup more robust ([3c160fc](https://github.com/Bearer/bearer/commit/3c160fc))
+
+
+### Features
+
+* **cli:** move config.dev.js to example ([0d1d889](https://github.com/Bearer/bearer/commit/0d1d889))
+
+
+
+
 <a name="0.50.0"></a>
 # [0.50.0](https://github.com/Bearer/bearer/compare/v0.48.5...v0.50.0) (2018-08-13)
 

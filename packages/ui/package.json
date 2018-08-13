@@ -1,6 +1,6 @@
 {
   "name": "@bearer/ui",
-  "version": "0.48.4",
+  "version": "0.51.0",
   "description": "Bearer UI helper",
   "main": "dist/index.js",
   "module": "dist/esm/index.js",

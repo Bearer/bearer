@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.51.0"></a>
+# [0.51.0](https://github.com/ionic-team/stencil-component-starter/compare/v0.50.0...v0.51.0) (2018-08-13)
+
+
+### Bug Fixes
+
+* **ui:** make setup more robust ([3c160fc](https://github.com/ionic-team/stencil-component-starter/commit/3c160fc))
+
+
+
+
 <a name="0.48.4"></a>
 ## [0.48.4](https://github.com/ionic-team/stencil-component-starter/compare/v0.48.3...v0.48.4) (2018-08-10)
 
