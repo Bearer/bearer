@@ -130,7 +130,7 @@ export function getIntentChoices(): Array<{ name: string; value: any }> {
   ]
 }
 
-function getActionExample(intentType, authType) {
+function getActionExample(intentType, authType): string {
   return templates[authType][intentType]
 }
 
@@ -176,7 +176,9 @@ export function getComponentVars(name: string) {
 export function getIntentVars(name: string, intentType: string, authConfig: { authType: string }) {
   const actionExample = getActionExample(intentType, authConfig.authType)
   return {
+    fileName: name,
     intentName: name,
+    intentClassName: Case.pascal(name),
     authType: authConfig.authType,
     intentType,
     actionExample,

@@ -20,8 +20,12 @@ describe('Generate command', () => {
       AuthTypes.forEach(authType => {
         describe(authType, () => {
           describe(intentType, () => {
-            it('formats variables correctly', () => {
-              expect(getIntentVars('test', intentType, { authType })).toMatchSnapshot()
+            TestingValues.forEach(value => {
+              describe(value, () => {
+                it('formats variables correctly', () => {
+                  expect(getIntentVars(value, intentType, { authType })).toMatchSnapshot()
+                })
+              })
             })
           })
         })
