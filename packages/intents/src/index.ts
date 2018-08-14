@@ -1,8 +1,10 @@
 import * as d from './declaration'
 export * from './declaration'
 
+import { DBClient as CLIENT } from './DBClient'
 import { sendErrorMessage, sendSuccessMessage } from './lambda'
-import { UserDataClient } from './UserDataClient'
+
+export const DBClient = CLIENT.instance
 
 // tslint:disable-next-line:no-unnecessary-class
 export class Intent {
@@ -54,7 +56,7 @@ export class SaveState extends StateIntentBase {
   static intent(action: d.ISaveStateIntentAction) {
     return (event: d.TLambdaEvent, _context: any, lambdaCallback: d.TLambdaCallback): void => {
       const { referenceId } = event.queryStringParameters
-      const dbClient = UserDataClient.DBClientInstance()
+      const dbClient = DBClient()
       try {
         dbClient
           .getData(referenceId)
@@ -105,7 +107,7 @@ export class RetrieveState extends StateIntentBase {
     return (event: d.TLambdaEvent, _context: any, lambdaCallback: d.TLambdaCallback): void => {
       const { referenceId } = event.queryStringParameters
       try {
-        UserDataClient.DBClientInstance()
+        DBClient()
           .getData(referenceId)
           .then(state => {
             if (state) {

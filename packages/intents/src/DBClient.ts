@@ -7,9 +7,9 @@ type TPersistedData = {
   Item: { referenceId: string; [key: string]: any }
 }
 
-export class UserDataClient {
-  static DBClientInstance() {
-    return new UserDataClient(process.env.bearerBaseURL)
+export class DBClient {
+  static instance() {
+    return new DBClient(process.env.bearerBaseURL)
   }
 
   private client: AxiosInstance
@@ -60,4 +60,4 @@ export class UserDataClient {
   }
 }
 
-export default (baseURL: string): UserDataClient => new UserDataClient(baseURL)
+export default (baseURL: string): DBClient => new DBClient(baseURL)

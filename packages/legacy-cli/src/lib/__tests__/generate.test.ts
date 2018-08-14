@@ -20,20 +20,22 @@ describe('Generate command', () => {
   })
 
   describe('get intents variables', () => {
-    Object.keys(intents).forEach(intentType => {
-      AuthTypes.forEach(authType => {
-        describe(authType, () => {
-          describe(intentType, () => {
-            TestingValues.forEach(value => {
-              describe(value, () => {
-                it('formats variables correctly', () => {
-                  expect(getIntentVars(value, intentType, { authType })).toMatchSnapshot()
+    Object.keys(intents)
+      .filter(i => i !== 'DBClient')
+      .forEach(intentType => {
+        AuthTypes.forEach(authType => {
+          describe(authType, () => {
+            describe(intentType, () => {
+              TestingValues.forEach(value => {
+                describe(value, () => {
+                  it('formats variables correctly', () => {
+                    expect(getIntentVars(value, intentType, { authType })).toMatchSnapshot()
+                  })
                 })
               })
             })
           })
         })
       })
-    })
   })
 })
