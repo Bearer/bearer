@@ -1,0 +1,22 @@
+{
+  "authorizationURL": "https://example.com/authorizationUrl",
+  "tokenURL": "https://example.com/tokenUrl",
+  "authType": "oauth2",
+  "tokenParams": {},
+  "authorizationParams": {},
+  "config": {
+    "scope": []
+  },
+  "setupViews": [
+    {
+      "type": "text",
+      "label": "Client ID",
+      "controlName": "clientID"
+    },
+    {
+      "type": "password",
+      "label": "Client Secret",
+      "controlName": "clientSecret"
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "authType": "apiKey",
+  "setupViews": [
+    {
+      "type": "password",
+      "label": "Api Key",
+      "controlName": "apiKey"
+    }
+  ]
+}
