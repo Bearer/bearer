@@ -77,7 +77,7 @@
     "posttest": "tsc -p test --noEmit",
     "prepack": "rm -rf lib && tsc && oclif-dev manifest && oclif-dev readme",
     "prepare": "rm -rf lib && tsc",
-    "test": "nyc mocha --forbid-only \"test/**/*.test.ts\"",
+    "test": "rm -rf .bearer && nyc mocha --forbid-only \"test/**/*.test.ts\"",
     "version": "oclif-dev readme && git add README.md"
   },
   "types": "lib/index.d.ts",
