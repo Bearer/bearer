@@ -7,6 +7,21 @@ function outputError(error) {
     term('\n')
   }
 }
+
+function inviteCommand(command) {
+  const padding = 5
+  const separator = command.length + 2 * padding
+  term.white('Bearer: ').yellow('Please run the below command\n')
+  term.white('='.repeat(separator))
+  term('\n')
+  term(' '.repeat(padding))
+  term.white(command)
+  term(' '.repeat(padding))
+  term('\n')
+  term.white('='.repeat(separator))
+  term('\n')
+}
+
 module.exports = emitter => {
   emitter.on('buildArtifact:output:close', outputPath => {
     term.white('Bearer: ')
@@ -17,6 +32,16 @@ module.exports = emitter => {
 
   emitter.on('buildArtifact:output:end', () => {
     console.log('Data has been drained')
+  })
+
+  emitter.on('buildArtifact:failed', ({ error }) => {
+    term
+      .white('Bearer: ')
+      .red('Error whild building scenario artifact\n')
+      .white('Bearer: ')
+      .yellow('Error message: ')
+      .white(error)
+    term('\n')
   })
 
   emitter.on('buildArtifact:archive:warning:ENOENT', err => {
@@ -41,10 +66,7 @@ module.exports = emitter => {
   })
   emitter.on('pushScenario:unauthorized', error => {
     outputError(error)
-    term.white('Bearer: ')
-    term.red(`Please try to `)
-    term('bearer login ')
-    term.red('again.')
+    inviteCommand('bearer login')
     term('\n')
   })
 
@@ -173,7 +195,8 @@ module.exports = emitter => {
 
   emitter.on('scenarioUuid:missing', devId => {
     term.white('Bearer: ')
-    term.red('Missing scenarioUuid. Please run `bearer link <org-id>-<scenario-id>` first.')
+    term.red('Missing scenarioUuid.\n')
+    inviteCommand('bearer link')
     term('\n')
   })
 
@@ -181,10 +204,7 @@ module.exports = emitter => {
     term.white('Bearer: ')
     term.red('Missing username.')
     term('\n')
-    term.white('Bearer: ')
-    term.yellow('Run ')
-    term('bearer signup --email <email>')
-    term.yellow(' first.')
+    inviteCommand('bearer signup')
     term('\n')
   })
   emitter.on('scenarioTitle:creationFailed', e => {
@@ -194,14 +214,13 @@ module.exports = emitter => {
     term(e)
     term('\n')
   })
+
   emitter.on('rootPath:doesntExist', () => {
     term.white('Bearer: ')
     term.red('Looks like you are not in scenario project directory.')
     term('\n')
-    term.white('Bearer: ')
-    term.red('Run ')
-    term('bearer new <scenarioTitle>')
-    term.red(' to bootstrap a new scenario.')
+    inviteCommand('bearer new')
+    term.yellow('to bootstrap a new scenario.')
     term('\n')
   })
 
@@ -317,7 +336,7 @@ module.exports = emitter => {
     term.white('Bearer: ')
     term.red('There was an error while trying to retrieve your access token')
     term('\n')
-    term.white('Please use `bearer login` first')
+    inviteCommand('bearer login')
     term('\n')
   })
 
@@ -387,7 +406,9 @@ module.exports = emitter => {
 
   emitter.on('developerPortalUpdate:failed', error => {
     term.white('Bearer: ')
-    term.red('There was an error while pushing to developer portal.')
+    term.red('Failed pushing to developer portal.\n')
+    term.white('Bearer: ')
+    term.yellow('error message: ').red(error)
     term('\n')
     outputError(error)
   })
@@ -403,7 +424,7 @@ module.exports = emitter => {
 
   emitter.on('start:prepare:buildFolder', () => {
     term.white('Bearer: ')
-    term.yellow('Generating build folder ')
+    term.red('Generating build folder ')
     term('\n')
   })
 
@@ -538,7 +559,8 @@ module.exports = emitter => {
 
   emitter.on('refreshToken:failure', () => {
     term.white('Bearer: ')
-    term.red('Error while trying to authenticate: Please run `bearer login`')
+    term.red('Error while trying to authenticate\n')
+    inviteCommand('bearer login')
     term('\n')
   })
 
