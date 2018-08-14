@@ -17,12 +17,16 @@
     "@oclif/plugin-update": "^1.2.14",
     "@oclif/plugin-warn-if-update-available": "^1.3.9",
     "commander": "^2.17.1",
+    "copy-template-dir": "^1.4.0",
+    "inquirer": "^6.1.0",
+    "path": "^0.12.7",
     "tslib": "^1"
   },
   "devDependencies": {
     "@oclif/dev-cli": "^1",
     "@oclif/test": "^1",
     "@types/chai": "^4",
+    "@types/inquirer": "^0.0.42",
     "@types/mocha": "^5",
     "@types/node": "^10",
     "chai": "^4",
