@@ -66,7 +66,7 @@ export default function startLocalDevelopmentServer(
       router.all(
         `${config.scenarioUuid}/:intentName`,
         (ctx, next) =>
-          new Promise((resolve, reject) => {
+          new Promise((resolve, _reject) => {
             try {
               const intent = requireUncached(`${distPath}/${ctx.params.intentName}`).default
               intent.intentType.intent(intent.action)(
@@ -87,10 +87,22 @@ export default function startLocalDevelopmentServer(
                 }
               )
             } catch (e) {
-              reject({ error: e.toString() })
+              if (e.code === 'MODULE_NOT_FOUND') {
+                ctx.intentDatum = { error: `Intent '${ctx.params.intentName}' Not Found` }
+              } else {
+                ctx.intentDatum = { error: e.toString() }
+              }
+              next()
+              resolve()
             }
           }),
-        ctx => ctx.ok(ctx.intentDatum)
+        (ctx, _next) => {
+          if (ctx.intentDatum.error) {
+            ctx.badRequest({ error: ctx.intentDatum.error.toString() })
+          } else {
+            ctx.ok(ctx.intentDatum)
+          }
+        }
       )
 
       const storage = Storage()

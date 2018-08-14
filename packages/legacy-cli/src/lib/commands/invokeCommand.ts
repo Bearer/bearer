@@ -1,8 +1,9 @@
 import axios from 'axios'
 import * as cosmiconfig from 'cosmiconfig'
-import startLocalDevelopmentServer from './startLocalDevelopmentServer'
 
 import Locator from '../locationProvider'
+
+import startLocalDevelopmentServer from './startLocalDevelopmentServer'
 
 type IConfig = {
   params?: {}
@@ -31,8 +32,13 @@ export const invoke = (emitter, config, locator: Locator) => async (intent, cmd)
     console.log(JSON.stringify(data, null, 2))
     process.exit(0)
   } catch (e) {
-    console.log(e)
-    process.exit(1)
+    if (e.response) {
+      console.log(JSON.stringify(e.response.data, null, 2))
+      process.exit(0)
+    } else {
+      console.log(e.toString())
+      process.exit(1)
+    }
   }
 }
 
