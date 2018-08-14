@@ -27,11 +27,11 @@ export default class New extends BaseCommand {
   static args = [{ name: 'ScenarioName' }]
 
   async run() {
-    this.ux.action.start('Generating scenario files')
     const { args, flags } = this.parse(New)
     try {
       const name: string = args.ScenarioName || (await this.askForName())
       const authType: AuthType = (flags.authType as AuthType) || (await this.askForAuthType())
+      this.ux.action.start('Generating scenario files')
       await this.copyFiles(name, authType)
       await this.ux.wait()
       this.ux.action.stop()
