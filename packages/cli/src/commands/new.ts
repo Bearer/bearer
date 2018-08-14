@@ -31,11 +31,9 @@ export default class New extends BaseCommand {
     try {
       const name: string = args.ScenarioName || (await this.askForName())
       const authType: AuthType = (flags.authType as AuthType) || (await this.askForAuthType())
-      this.ux.action.start('Generating scenario files')
+      this.log('Generate files:')
       await this.copyFiles(name, authType)
-      await this.ux.wait()
-      this.ux.action.stop()
-      this.log(`Scenario initialized, name: ${name}, authentication type: ${authTypes[authType].name}`)
+      this.success(`Scenario initialized, name: ${name}, authentication type: ${authTypes[authType].name}`)
     } catch (e) {
       this.error('Could not generate new scenario' + e.toString())
     }
@@ -47,16 +45,20 @@ export default class New extends BaseCommand {
     componentTagName: this.case.kebab(name)
   })
 
+  get copyDestFolder(): string {
+    return process.cwd()
+  }
+
   async copyFiles(name: string, authType: AuthType) {
     await new Promise<boolean>((resolve, reject) => {
       const inDir = path.join(__dirname, '..', '..', 'templates', 'init', authType)
       this.debug(`Input directory: ${inDir}`)
-      this.copy(inDir, process.cwd(), this.getVars(name), (error, files) => {
+      this.copy(inDir, this.copyDestFolder, this.getVars(name), (error, files) => {
         if (error) {
           this.error(error)
           reject(false)
         } else {
-          this.debug(`Successfully copied files:\n\t* ${files.join('\n\t* ')}`)
+          this.printFiles(files)
           resolve(true)
         }
       })
@@ -80,5 +82,12 @@ export default class New extends BaseCommand {
       }
     ])
     return authenticationType
+  }
+
+  printFiles(files: Array<string>) {
+    const dest = this.copyDestFolder
+    files.forEach(file => {
+      this.log(this.colors.gray(`    create: `) + this.colors.white(file.replace(dest + '/', '')))
+    })
   }
 }
