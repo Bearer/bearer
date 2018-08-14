@@ -1,5 +1,8 @@
 import { flags } from '@oclif/command'
+import * as Listr from 'listr'
 import * as path from 'path'
+import * as util from 'util'
+const exec = util.promisify(require('child_process').exec)
 
 import BaseCommand from '../BaseCommand'
 import { AuthType } from '../types'
@@ -31,9 +34,44 @@ export default class New extends BaseCommand {
     try {
       const name: string = args.ScenarioName || (await this.askForName())
       const authType: AuthType = (flags.authType as AuthType) || (await this.askForAuthType())
-      this.log('Generate files:')
-      await this.copyFiles(name, authType)
+
+      const tasks = new Listr([
+        {
+          title: 'Generating scenario files',
+          task: (_ctx: any, _task: any) => {
+            this.log('Generate files:')
+            return this.copyFiles(name, authType)
+          }
+        },
+        {
+          title: 'npm/yarn lookup',
+          task: async (ctx: any, task: any) =>
+            exec('yarn -v')
+              .then(() => {
+                ctx.yarn = true
+              })
+              .catch(() => {
+                ctx.yarn = false
+                task.skip('Yarn not available, install it via `npm install -g yarn`')
+              })
+        },
+        {
+          title: 'Installing scenario dependencies with yarn',
+          enabled: (ctx: any) => ctx.yarn === true,
+          task: async (_ctx: any, _task: any) => exec('yarn install', { cwd: path.join(this.copyDestFolder, name) })
+        },
+        {
+          title: 'Installing scenario dependencies with npm',
+          enabled: (ctx: any) => ctx.yarn === false,
+          task: () => exec('yarn install', { cwd: path.join(this.copyDestFolder, name) })
+        }
+      ])
+      await tasks.run()
       this.success(`Scenario initialized, name: ${name}, authentication type: ${authTypes[authType].name}`)
+      this.log("\nWhat's next?\n")
+      this.log('* read the bearer documentation at https://docs.bearer.sh\n')
+      this.log(`* start your local development environement by running:\n`)
+      this.log(this.colors.bold(`   cd ${name} && bearer start`))
     } catch (e) {
       this.error('Could not generate new scenario' + e.toString())
     }
@@ -89,5 +127,6 @@ export default class New extends BaseCommand {
     files.forEach(file => {
       this.log(this.colors.gray(`    create: `) + this.colors.white(file.replace(dest + '/', '')))
     })
+    this.log('\n')
   }
 }
