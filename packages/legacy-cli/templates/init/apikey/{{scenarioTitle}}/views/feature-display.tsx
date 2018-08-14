@@ -12,6 +12,6 @@ import '@bearer/ui'
 })
 export class FeatureDisplay {
   render() {
-    return (null)
+    return <bearer-alert kind="success">🚀 My {{scenarioTitle}} Display component 🚀</bearer-alert>
   }
 }
