@@ -48,7 +48,6 @@ export default class New extends BaseCommand {
   })
 
   async copyFiles(name: string, authType: AuthType) {
-    this.log(`Copying initial files for ${authType}`)
     await new Promise<boolean>((resolve, reject) => {
       const inDir = path.join(__dirname, '..', '..', 'templates', 'init', authType)
       this.debug(`Input directory: ${inDir}`)

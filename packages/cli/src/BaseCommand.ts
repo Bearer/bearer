@@ -1,4 +1,4 @@
-import Command, { flags } from '@oclif/command'
+import Command from '@oclif/command'
 import * as Case from 'case'
 import cliUx from 'cli-ux'
 import * as copy from 'copy-template-dir'
@@ -31,13 +31,13 @@ export default abstract class extends Command {
   }
 
   static flags = {
-    logLevel: flags.string({ options: ['error', 'warn', 'info', 'debug'], default: 'info' })
+    // logLevel: flags.string({ options: ['error', 'warn', 'info', 'debug'], default: 'info' })
   }
 
-  protected logLevel: any
+  // protected logLevel: any
 
-  async init() {
-    const { flags } = this.parse(this.constructor as any)
-    this.logLevel = flags.logLevel
-  }
+  // async init() {
+  //   const { flags } = this.parse(this.constructor as any)
+  //   this.logLevel = flags.logLevel
+  // }
 }
