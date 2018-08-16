@@ -2,8 +2,8 @@ import Locator from '../locationProvider'
 
 export const link = (emitter, config, _locator: Locator) => async scenarioUuid => {
   emitter.emit('link:start')
-  const { scenarioTitle } = config
   const [orgId, scenarioId] = scenarioUuid.replace(/\-/, '|').split('|')
+  const { scenarioTitle = scenarioId } = config
   const scenarioRc = { orgId, scenarioId, scenarioTitle }
   config.setScenarioConfig(scenarioRc)
   emitter.emit('link:success', scenarioRc)
