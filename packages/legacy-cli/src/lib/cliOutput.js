@@ -11,7 +11,7 @@ function outputError(error) {
 function inviteCommand(command) {
   const padding = 5
   const separator = command.length + 2 * padding
-  term.white('Bearer: ').yellow('Please run the below command\n')
+  term.white('Bearer: ').yellow('Please run the command below\n')
   term.white('='.repeat(separator))
   term('\n')
   term(' '.repeat(padding))
@@ -37,7 +37,7 @@ module.exports = emitter => {
   emitter.on('buildArtifact:failed', ({ error }) => {
     term
       .white('Bearer: ')
-      .red('Error whild building scenario artifact\n')
+      .red('Error while building scenario artifact\n')
       .white('Bearer: ')
       .yellow('Error message: ')
       .white(error)
