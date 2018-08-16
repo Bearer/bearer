@@ -1,20 +1,21 @@
-import * as ts from 'typescript'
 import * as fs from 'fs-extra'
 import * as path from 'path'
-import { getSourceCode } from './utils'
-import ReplaceIntentDecorators from './transformers/replace-intent-decorator'
-import BearerScenarioIdInjector from './transformers/scenario-id-accessor-injector'
-import PropInjector from './transformers/prop-injector'
+import * as ts from 'typescript'
+
+import BearerStateInjector from './transformers/bearer-state-injector'
+import GatherMetadata from './transformers/gather-metadata'
+import generateMetadataFile from './transformers/generate-metadata-file'
+import ImportsImporter from './transformers/imports-transformer'
+import NavigatorScreenTransformer from './transformers/navigator-screen-transformer'
 import PropBearerContextInjector from './transformers/prop-bearer-context-injector'
 import PropImporter from './transformers/prop-importer'
-import BearerStateInjector from './transformers/bearer-state-injector'
+import PropInjector from './transformers/prop-injector'
 import BearerReferenceIdInjector from './transformers/reference-id-injector'
+import ReplaceIntentDecorators from './transformers/replace-intent-decorator'
 import RootComponentTransformer from './transformers/root-component-transformer'
-import NavigatorScreenTransformer from './transformers/navigator-screen-transformer'
-import ImportsImporter from './transformers/imports-transformer'
+import BearerScenarioIdInjector from './transformers/scenario-id-accessor-injector'
 import { Metadata, SourceCodeTransformerOptions } from './types'
-import generateMetadataFile from './transformers/generate-metadata-file'
-import GatherMetadata from './transformers/gather-metadata'
+import { getSourceCode } from './utils'
 
 export type TranpilerOptions = {
   ROOT_DIRECTORY?: string
@@ -23,9 +24,47 @@ export type TranpilerOptions = {
   srcFolder?: string
   verbose?: boolean
   tagNamePrefix?: string
+  tagNameSuffix?: string
 }
 
 export default class Transpiler {
+  get transformers(): ts.CustomTransformers {
+    const verbose = true
+    return {
+      before: [
+        GatherMetadata({ verbose, metadata: this.metadata }),
+        RootComponentTransformer({ verbose, metadata: this.metadata }),
+        BearerReferenceIdInjector({ verbose, metadata: this.metadata }),
+        ReplaceIntentDecorators({ verbose, metadata: this.metadata }),
+        BearerScenarioIdInjector({ verbose, metadata: this.metadata }),
+        PropImporter({ verbose, metadata: this.metadata }),
+        PropInjector({ verbose, metadata: this.metadata }),
+        PropBearerContextInjector({ verbose, metadata: this.metadata }),
+        BearerStateInjector({ verbose, metadata: this.metadata }),
+        NavigatorScreenTransformer({ verbose, metadata: this.metadata }),
+        ImportsImporter({ verbose, metadata: this.metadata }),
+        dumpSourceCode({
+          verbose: true,
+          srcDirectory: this.VIEWS_DIRECTORY,
+          buildDirectory: this.BUILD_SCR_DIRECTORY
+        }),
+        generateMetadataFile({ verbose, metadata: this.metadata, outDir: this.BUILD_SCR_DIRECTORY })
+      ],
+      after: []
+    }
+  }
+
+  private get BUILD_DIRECTORY(): string {
+    return path.join(this.ROOT_DIRECTORY, this.buildFolder)
+  }
+
+  private get BUILD_SCR_DIRECTORY(): string {
+    return path.join(this.BUILD_DIRECTORY, 'src')
+  }
+
+  private get VIEWS_DIRECTORY(): string {
+    return path.join(this.ROOT_DIRECTORY, this.srcFolder)
+  }
   private service: ts.LanguageService
   private rootFileNames: string[] = []
   private subscribers: ts.MapLike<Array<() => void>> = {}
@@ -46,12 +85,15 @@ export default class Transpiler {
 
   constructor(options?: Partial<TranpilerOptions>) {
     Object.assign(this, options)
+
     this.ROOT_DIRECTORY = this.ROOT_DIRECTORY || process.cwd()
 
     if (options.tagNamePrefix) {
-      const [orgId, scenarioId] = options.tagNamePrefix.replace(/\-/, '|').split('|')
-      this.metadata.prefix = scenarioId
-      this.metadata.suffix = orgId
+      this.metadata.prefix = options.tagNamePrefix
+    }
+
+    if (options.tagNameSuffix) {
+      this.metadata.suffix = options.tagNameSuffix
     }
   }
 
@@ -105,7 +147,7 @@ export default class Transpiler {
       getScriptVersion: fileName => this.files[fileName] && this.files[fileName].version.toString(),
       getScriptSnapshot: fileName => {
         if (!fs.existsSync(fileName)) {
-          return undefined
+          return null
         }
 
         return ts.ScriptSnapshot.fromString(fs.readFileSync(fileName).toString())
@@ -140,38 +182,6 @@ export default class Transpiler {
     this.subscribers[event].push(callback)
   }
 
-  private trigger = (eventName: string) => {
-    ;(this.subscribers[eventName] || []).forEach(callback => {
-      callback()
-    })
-  }
-
-  get transformers(): ts.CustomTransformers {
-    const verbose = true
-    return {
-      before: [
-        GatherMetadata({ verbose, metadata: this.metadata }),
-        RootComponentTransformer({ verbose, metadata: this.metadata }),
-        BearerReferenceIdInjector({ verbose, metadata: this.metadata }),
-        ReplaceIntentDecorators({ verbose, metadata: this.metadata }),
-        BearerScenarioIdInjector({ verbose, metadata: this.metadata }),
-        PropImporter({ verbose, metadata: this.metadata }),
-        PropInjector({ verbose, metadata: this.metadata }),
-        PropBearerContextInjector({ verbose, metadata: this.metadata }),
-        BearerStateInjector({ verbose, metadata: this.metadata }),
-        NavigatorScreenTransformer({ verbose, metadata: this.metadata }),
-        ImportsImporter({ verbose, metadata: this.metadata }),
-        dumpSourceCode({
-          verbose: true,
-          srcDirectory: this.VIEWS_DIRECTORY,
-          buildDirectory: this.BUILD_SCR_DIRECTORY
-        }),
-        generateMetadataFile({ verbose: verbose, metadata: this.metadata, outDir: this.BUILD_SCR_DIRECTORY })
-      ],
-      after: []
-    }
-  }
-
   emitFile = (fileName: string) => {
     const output = this.service.getEmitOutput(fileName)
 
@@ -202,16 +212,11 @@ export default class Transpiler {
     })
   }
 
-  private get BUILD_DIRECTORY(): string {
-    return path.join(this.ROOT_DIRECTORY, this.buildFolder)
-  }
-
-  private get BUILD_SCR_DIRECTORY(): string {
-    return path.join(this.BUILD_DIRECTORY, 'src')
-  }
-
-  private get VIEWS_DIRECTORY(): string {
-    return path.join(this.ROOT_DIRECTORY, this.srcFolder)
+  private trigger = (eventName: string) => {
+    const subscribers = this.subscribers[eventName] || []
+    subscribers.forEach(callback => {
+      callback()
+    })
   }
 }
 

@@ -1,7 +1,8 @@
 import { deployScenario, IDeployOptions } from '../deployScenario'
 import Locator from '../locationProvider'
+import { Config } from '../types'
 
-const deploy = (emitter, config, locator: Locator) => async ({ viewsOnly = false, intentsOnly = false }) => {
+const deploy = (emitter, config: Config, locator: Locator) => async ({ viewsOnly = false, intentsOnly = false }) => {
   emitter.emit('deploy:started')
   // Always true?
   if (!locator.scenarioRoot) {
@@ -44,7 +45,7 @@ const deploy = (emitter, config, locator: Locator) => async ({ viewsOnly = false
   }
 }
 
-export function useWith(program, emitter, config, locator): void {
+export function useWith(program, emitter, config: Config, locator): void {
   program
     .command('deploy')
     .description(

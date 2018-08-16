@@ -1,21 +1,23 @@
-import { spawn, exec } from 'child_process'
-import * as path from 'path'
+import { exec, spawn } from 'child_process'
 import * as fs from 'fs-extra'
+import * as path from 'path'
 import { promisify } from 'util'
 
-import { prepare } from './commands/startCommand'
+import * as assembly from './assemblyScenario'
 import buildArtifact from './buildArtifact'
+import { prepare } from './commands/startCommand'
+import * as developerPortal from './developerPortal'
+import invalidateCloudFront from './invalidateCloudFront'
+import LocationProvider from './locationProvider'
 import * as pushScenario from './pushScenario'
 import * as pushViews from './pushViews'
-import * as assembly from './assemblyScenario'
 import * as refreshToken from './refreshToken'
-import invalidateCloudFront from './invalidateCloudFront'
-import * as developerPortal from './developerPortal'
-import LocationProvider from './locationProvider'
+
+import { Config } from './types'
 
 const execPromise = promisify(exec)
 
-export function buildIntents(emitter, config, locator: LocationProvider) {
+export function buildIntents(emitter, config: Config, locator: LocationProvider) {
   return new Promise(async (resolve, reject) => {
     const { scenarioUuid } = config
     const artifactDirectory = locator.intentsArtifactDir
@@ -48,7 +50,7 @@ export function buildIntents(emitter, config, locator: LocationProvider) {
   })
 }
 
-export function deployIntents(emitter, config, locator: LocationProvider) {
+export function deployIntents(emitter, config: Config, locator: LocationProvider) {
   return new Promise(async (resolve, _reject) => {
     const { rootPathRc } = config
 
@@ -70,7 +72,7 @@ export function deployIntents(emitter, config, locator: LocationProvider) {
   })
 }
 
-export function deployViews(emitter, config, locator: LocationProvider) {
+export function deployViews(emitter, config: Config, locator: LocationProvider) {
   return new Promise(async (resolve, reject) => {
     const { orgId, scenarioUuid, scenarioId, CdnHost } = config
 
@@ -115,19 +117,28 @@ export function deployViews(emitter, config, locator: LocationProvider) {
   })
 }
 
-function transpileStep(emitter, locator: LocationProvider, config) {
+function transpileStep(emitter, locator: LocationProvider, config: Config) {
   return new Promise(async (resolve, reject) => {
-    const { scenarioUuid, integrationServiceHost, scenarioId } = config
+    const { scenarioUuid, IntegrationServiceHost, scenarioId, orgId } = config
     emitter.emit('start:prepare:transpileStep')
-    const options = [path.join(__dirname, 'startTranspiler.js'), '--no-watcher', '--prefix-tag', scenarioUuid]
+    const prefix = ['bearer', scenarioId].join('-')
+    const suffix = orgId
+    const options = [
+      path.join(__dirname, 'startTranspiler.js'),
+      '--no-watcher',
+      '--prefix-tag',
+      prefix,
+      '--suffix-tag',
+      suffix
+    ]
     const bearerTranspiler = spawn('node', options, {
       cwd: locator.scenarioRoot,
       env: {
         ...process.env,
         BEARER_SCENARIO_TAG_NAME: scenarioId,
         BEARER_SCENARIO_ID: scenarioUuid,
-        BEARER_INTEGRATION_HOST: integrationServiceHost,
-        BEARER_AUTHORIZATION_HOST: integrationServiceHost
+        BEARER_INTEGRATION_HOST: IntegrationServiceHost,
+        BEARER_AUTHORIZATION_HOST: IntegrationServiceHost
       },
       stdio: ['pipe', 'pipe', 'pipe', 'ipc']
     })
@@ -157,7 +168,12 @@ export interface IDeployOptions {
   noIntents?: boolean
 }
 
-export function deployScenario({ noViews = false, noIntents = false }: IDeployOptions, emitter, config, locator) {
+export function deployScenario(
+  { noViews = false, noIntents = false }: IDeployOptions,
+  emitter,
+  config: Config,
+  locator
+) {
   return new Promise(async (resolve, reject) => {
     let calculatedConfig = config
 
