@@ -2,7 +2,7 @@ import { runUnitOn } from '../utils/helpers'
 
 const TEST_NAME = 'bearer-component-tag-scoping'
 
-describe('Scope element tag names', () => {
+describe('NO scope provided', () => {
   runUnitOn(TEST_NAME)
 })
 

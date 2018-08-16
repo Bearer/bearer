@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Scope element tag names add bearer scope match snapshot 1`] = `
+exports[`NO scope provided add bearer scope match snapshot 1`] = `
 Object {
   "file": "add-bearer-scope.tsx",
   "postContent": "import { Prop } from \\"@bearer/core\\";
