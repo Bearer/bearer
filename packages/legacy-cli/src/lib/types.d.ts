@@ -38,12 +38,14 @@ export type Config = BaseConfig & {
   isYarnInstalled: boolean
   command: 'yarn' | 'npm'
   bearerConfig: BearerConfig
+  bearerConfigFileName: string
+  rootPathFileName: string
   scenarioConfig: ScenarioConfig
   orgId: string | undefined
   scenarioTitle: string | undefined
   scenarioId: string | undefined
   scenarioUuid: string | undefined
   rootPathRc: string
-  setScenarioConfig: (config: any) => void
-  storeBearerConfig: (config: any) => void
+  setScenarioConfig(config: any): void
+  storeBearerConfig(config: any): void
 }

@@ -1,13 +1,12 @@
-const findUp = require('find-up')
 const rc = require('rc')
 const os = require('os')
-
+const findUp = require('find-up')
 const fs = require('fs')
 const ini = require('ini')
 const path = require('path')
 const { spawnSync } = require('child_process')
 
-import { Config, ScenarioConfig, BaseConfig, BearerEnv, BearerConfig } from './types'
+import { BaseConfig, BearerConfig, BearerEnv, Config, ScenarioConfig } from './types'
 
 const configs: Record<BearerEnv, BaseConfig> = {
   dev: {
@@ -49,11 +48,18 @@ export default (): Config => {
     ...setup,
     isYarnInstalled,
     command: isYarnInstalled ? 'yarn' : 'npm',
+    get bearerConfigFileName(): string {
+      if (setup.BearerEnv === 'production') {
+        return 'bearer'
+      } else {
+        return `${setup.BearerEnv}.bearer`
+      }
+    },
     get bearerConfig(): BearerConfig {
-      return rc('bearer')
+      return rc(this.bearerConfigFileName)
     },
     get scenarioConfig(): ScenarioConfig {
-      return rc('scenario')
+      return rc(this.rootPathFileName)
     },
     get orgId(): string | undefined {
       return this.scenarioConfig.orgId
@@ -70,8 +76,15 @@ export default (): Config => {
       }
       return `${this.orgId}-${this.scenarioId}`
     },
+    get rootPathFileName(): string {
+      if (setup.BearerEnv === 'production') {
+        return 'scenario'
+      } else {
+        return `${setup.BearerEnv}.scenario`
+      }
+    },
     get rootPathRc(): string {
-      return findUp.sync('.scenariorc')
+      return findUp.sync(`.${this.rootPathFileName}rc`)
     },
     setScenarioConfig(config: { scenarioTitle: string; orgId: string; scenarioId: string }) {
       const { scenarioTitle, orgId, scenarioId } = config
@@ -80,7 +93,7 @@ export default (): Config => {
     storeBearerConfig(config) {
       const { Username, ExpiresAt, authorization } = config
       fs.writeFileSync(
-        this.bearerConfig.config || path.join(os.homedir(), '.bearerrc'),
+        this.bearerConfig.config || path.join(os.homedir(), `${this.bearerConfigFileName}.rc`),
         ini.stringify({
           Username,
           ExpiresAt,
