@@ -68,7 +68,7 @@ Object {
   "file": "RootComponent.tsx",
   "postContent": "import { Intent, BearerFetch, IntentType, BearerState, Prop, Element, Watch, State, Component } from '@bearer/core';
 @Component({
-    tag: \\"bearer-attach-pull-request-action-xyz\\",
+    tag: \\"attach-pull-request-action\\",
     styleUrl: \\"AttachPullRequest.css\\",
     shadow: true
 })
@@ -138,7 +138,7 @@ Object {
   "file": "invalidRootComponent.tsx",
   "postContent": "import { Intent, BearerFetch, IntentType, BearerState, Prop, Element, Watch, State, Component } from '@bearer/core';
 @Component({
-    tag: \\"bearer-attach-pull-request-display-xyz\\",
+    tag: \\"attach-pull-request-display\\",
     styleUrl: \\"attachPullRequest.css\\",
     shadow: false
 })

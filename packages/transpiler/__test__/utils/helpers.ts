@@ -32,7 +32,7 @@ export function runUnitOn(name: string, transpilerOptions: Partial<TranpilerOpti
   })
 }
 
-function runTranspiler(transpilerOptions: Partial<TranpilerOptions>) {
+export function runTranspiler(transpilerOptions: Partial<TranpilerOptions>) {
   const transpiler = TranspilerFactory({
     ...transpilerOptions,
     ROOT_DIRECTORY: fixtures,

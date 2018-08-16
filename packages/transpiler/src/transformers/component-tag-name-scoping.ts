@@ -1,5 +1,5 @@
 /*
- * Transformer boilerplate
+ * Replace JSX element tag name with known ones
  */
 import * as ts from 'typescript'
 
