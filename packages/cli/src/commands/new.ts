@@ -20,6 +20,7 @@ export default class New extends BaseCommand {
   static flags = {
     ...BaseCommand.flags,
     help: flags.help({ char: 'h' }),
+    skipInstall: flags.boolean({ hidden: true }),
     authType: flags.string({
       char: 'a',
       description: 'Authorization type', // help description for flag
@@ -34,7 +35,7 @@ export default class New extends BaseCommand {
     try {
       const name: string = args.ScenarioName || (await this.askForName())
       const authType: AuthType = (flags.authType as AuthType) || (await this.askForAuthType())
-
+      const skipInstall = flags.skipInstall
       const tasks = new Listr([
         {
           title: 'Generating scenario files',
@@ -45,6 +46,7 @@ export default class New extends BaseCommand {
         },
         {
           title: 'npm/yarn lookup',
+          enabled: (_ctx: any) => !skipInstall,
           task: async (ctx: any, task: any) =>
             exec('yarn -v')
               .then(() => {
@@ -57,12 +59,12 @@ export default class New extends BaseCommand {
         },
         {
           title: 'Installing scenario dependencies with yarn',
-          enabled: (ctx: any) => ctx.yarn === true,
+          enabled: (ctx: any) => ctx.yarn === true && !skipInstall,
           task: async (_ctx: any, _task: any) => exec('yarn install', { cwd: path.join(this.copyDestFolder, name) })
         },
         {
           title: 'Installing scenario dependencies with npm',
-          enabled: (ctx: any) => ctx.yarn === false,
+          enabled: (ctx: any) => ctx.yarn === false && !skipInstall,
           task: () => exec('yarn install', { cwd: path.join(this.copyDestFolder, name) })
         }
       ])
