@@ -183,6 +183,7 @@ export function deployScenario(
       if (ExpiresAt < Date.now()) {
         calculatedConfig = await refreshToken(config, emitter)
       }
+
       await developerPortal(emitter, 'predeploy', calculatedConfig)
       if (!noIntents) {
         await deployIntents(emitter, calculatedConfig, locator)

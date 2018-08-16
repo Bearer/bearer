@@ -13,7 +13,7 @@ export type BaseConfig = {
 export type BearerConfig = {
   OrgId: string
   Username: string
-  ExpiresAt: string
+  ExpiresAt: number
   authorization: {
     AuthenticationResult: any
   }
@@ -44,6 +44,6 @@ export type Config = BaseConfig & {
   scenarioId: string | undefined
   scenarioUuid: string | undefined
   rootPathRc: string
-  setScenarioConfig: (config: any) => void
-  storeBearerConfig: (config: any) => void
+  setScenarioConfig(config: any): void
+  storeBearerConfig(config: any): void
 }

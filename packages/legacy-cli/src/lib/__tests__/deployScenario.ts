@@ -1,6 +1,7 @@
-import * as deployScenario from '../deployScenario'
 import * as fs from 'fs-extra'
 
+import * as deployScenario from '../deployScenario'
+import { Config } from '../types'
 test('deployIntents is defined', () => {
   expect(deployScenario.deployIntents).toBeDefined()
 })
@@ -22,17 +23,12 @@ describe('deployViews', () => {
     async () => {
       expect.assertions(1)
       const locator = {} as any
-      await expect(
-        deployScenario.deployViews(
-          { emit },
-          {
-            scenarioConfig: { scenarioTitle: 'test' },
-            bearerConfig: { OrgId: '4l1c3' },
-            rootPathRc: './tmp/.test'
-          },
-          locator
-        )
-      ).resolves.toEqual({})
+      const config = {
+        scenarioConfig: { scenarioTitle: 'test' },
+        bearerConfig: { OrgId: '4l1c3' },
+        rootPathRc: './tmp/.test'
+      } as Config
+      await expect(deployScenario.deployViews({ emit }, config, locator)).resolves.toEqual({})
     },
     1000
   )
