@@ -4,13 +4,15 @@
 })
 class RootComponent {
   renderFromANotherProp() {
-    return <sponge-bob />
+    return <sponge-bob title="Sponge element" />
   }
   render() {
     return (
       <div>
-        <sponge-bob />
-        <patrick />
+        <sponge-bob>
+          <span>Something</span>
+        </sponge-bob>
+        <patrick title="Patrick element" />
       </div>
     )
   }
@@ -21,7 +23,7 @@ class RootComponent {
 })
 class SubComponent {
   render() {
-    return <div />
+    return <div title="spongeBNob" />
   }
 }
 
@@ -30,6 +32,6 @@ class SubComponent {
 })
 class Patrick {
   render() {
-    return <div />
+    return <div title="Patrick" />
   }
 }

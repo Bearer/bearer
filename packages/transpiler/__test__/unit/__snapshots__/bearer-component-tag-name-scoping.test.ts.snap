@@ -11,12 +11,14 @@ Object {
 })
 class RootComponent {
     renderFromANotherProp() {
-        return <sponge-bob />;
+        return <sponge-bob title=\\"Sponge element\\"/>;
     }
     render() {
         return (<div>
-        <sponge-bob />
-        <patrick />
+        <sponge-bob>
+          <span>Something</span>
+        </sponge-bob>
+        <patrick title=\\"Patrick element\\"/>
       </div>);
     }
     constructor() { }
@@ -36,7 +38,7 @@ class RootComponent {
 })
 class SubComponent {
     render() {
-        return <div />;
+        return <div title=\\"spongeBNob\\"/>;
     }
     constructor() { }
     get SCENARIO_ID() { return \\"SPONGE_BOB\\"; }
@@ -55,7 +57,7 @@ class SubComponent {
 })
 class Patrick {
     render() {
-        return <div />;
+        return <div title=\\"Patrick\\"/>;
     }
     constructor() { }
     get SCENARIO_ID() { return \\"SPONGE_BOB\\"; }
@@ -84,12 +86,14 @@ Object {
 })
 class RootComponent {
     renderFromANotherProp() {
-        return <sponge-bob />;
+        return <bearer-sponge-bob-xyz title=\\"Sponge element\\"/>;
     }
     render() {
         return (<div>
-        <sponge-bob />
-        <patrick />
+        <bearer-sponge-bob-xyz>
+          <span>Something</span>
+        </bearer-sponge-bob-xyz>
+        <bearer-patrick-xyz title=\\"Patrick element\\"/>
       </div>);
     }
     constructor() { }
@@ -109,7 +113,7 @@ class RootComponent {
 })
 class SubComponent {
     render() {
-        return <div />;
+        return <div title=\\"spongeBNob\\"/>;
     }
     constructor() { }
     get SCENARIO_ID() { return \\"SPONGE_BOB\\"; }
@@ -128,7 +132,7 @@ class SubComponent {
 })
 class Patrick {
     render() {
-        return <div />;
+        return <div title=\\"Patrick\\"/>;
     }
     constructor() { }
     get SCENARIO_ID() { return \\"SPONGE_BOB\\"; }

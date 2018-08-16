@@ -3,6 +3,7 @@ import * as path from 'path'
 import * as ts from 'typescript'
 
 import BearerStateInjector from './transformers/bearer-state-injector'
+import ComponenttagNameScoping from './transformers/component-tag-name-scoping'
 import GatherMetadata from './transformers/gather-metadata'
 import generateMetadataFile from './transformers/generate-metadata-file'
 import ImportsImporter from './transformers/imports-transformer'
@@ -43,6 +44,7 @@ export default class Transpiler {
         BearerStateInjector({ verbose, metadata: this.metadata }),
         NavigatorScreenTransformer({ verbose, metadata: this.metadata }),
         ImportsImporter({ verbose, metadata: this.metadata }),
+        ComponenttagNameScoping({ verbose, metadata: this.metadata }),
         dumpSourceCode({
           verbose: true,
           srcDirectory: this.VIEWS_DIRECTORY,
