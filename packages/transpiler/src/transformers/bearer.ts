@@ -1,5 +1,6 @@
 import * as ts from 'typescript'
-import { Decorators, Component, Module } from '../constants'
+
+import { Component, Decorators, Module } from '../constants'
 // @Prop() BEARER_ID: string;
 export function addBearerIdProp(classNode: ts.ClassDeclaration): ts.ClassDeclaration {
   return ts.updateClassDeclaration(
@@ -189,7 +190,7 @@ export function hasImport(node: ts.SourceFile, libName: string): boolean {
 }
 
 function coreImport(node: ts.ImportDeclaration): boolean {
-  return Boolean(node.moduleSpecifier['text'].toString().match(Module.BEARER_CORE_MODULE))
+  return Boolean(node.moduleSpecifier.text.toString().match(Module.BEARER_CORE_MODULE))
 }
 
 function ensureHasImportFromCore(tsSourceFile: ts.SourceFile, importName: string): ts.SourceFile {
@@ -284,7 +285,7 @@ function ensureHasNotImportFromCore(tsSourceFile: ts.SourceFile, importName: str
 export function ensureBearerContextInjected(classNode: ts.ClassDeclaration): ts.ClassDeclaration {
   const has: boolean = ts.forEachChild(
     classNode,
-    node => ts.isPropertyDeclaration(node) && node.name['escapedText'] == Component.bearerContext
+    node => ts.isPropertyDeclaration(node) && node.name.escapedText === Component.bearerContext
   )
 
   return has ? classNode : addBearerContextProp(classNode)

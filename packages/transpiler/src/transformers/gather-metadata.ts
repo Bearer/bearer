@@ -1,8 +1,9 @@
-import * as ts from 'typescript'
 import * as Case from 'case'
-import { TransformerOptions } from '../types'
+import * as ts from 'typescript'
+
 import { Decorators } from '../constants'
-import { hasDecoratorNamed, getExpressionFromDecorator, getDecoratorNamed } from '../helpers/decorator-helpers'
+import { getDecoratorNamed, getExpressionFromDecorator, hasDecoratorNamed } from '../helpers/decorator-helpers'
+import { TransformerOptions } from '../types'
 
 export default function GatherMetadata({ metadata }: TransformerOptions = {}): ts.TransformerFactory<ts.SourceFile> {
   return _transformContext => {
@@ -37,7 +38,7 @@ export default function GatherMetadata({ metadata }: TransformerOptions = {}): t
           isRoot: true,
           initialTagName: tag,
           finalTagName: finalTag,
-          group: group
+          group
         })
         return node
       }
