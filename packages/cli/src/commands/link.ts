@@ -1,8 +1,8 @@
 import { flags } from '@oclif/command'
 
-import BaseLegacyCommand from '../BaseLegacyCommand'
+import BaseCommand from '../BaseCommand'
 
-export default class Link extends BaseLegacyCommand {
+export default class Link extends BaseCommand {
   static description = 'Link your local scenario to a remote one'
 
   static flags = {
@@ -13,6 +13,11 @@ export default class Link extends BaseLegacyCommand {
 
   async run() {
     const { args } = this.parse(Link)
-    this.runLegacy(['link', args.Scenario_Identifier])
+    const identifier = args.Scenario_Identifier
+    const { scenarioTitle } = this.bearerConfig
+    const [orgId, scenarioId] = identifier.replace(/\-/, '|').split('|')
+    const scenarioRc = { orgId, scenarioId, scenarioTitle }
+    this.bearerConfig.setScenarioConfig(scenarioRc)
+    this.log('Scenario successfully linked! 🎉')
   }
 }

@@ -15,7 +15,6 @@ const config: Config = setupConfig()
 const deployCmd = require('../src/lib/commands/deployCommand')
 const generateCmd = require('../src/lib/commands/generateCommand')
 const startCmd = require('../src/lib/commands/startCommand')
-const linkCmd = require('../src/lib/commands/linkCommand')
 const invokeCmd = require('../src/lib/commands/invokeCommand')
 
 const cliOutput = require('../src/lib/cliOutput.js')
@@ -28,7 +27,6 @@ program.version(version, '-v, --version')
 cli.use(generateCmd)
 cli.use(deployCmd)
 cli.use(startCmd)
-cli.use(linkCmd)
 cli.use(invokeCmd)
 
 export default args => {

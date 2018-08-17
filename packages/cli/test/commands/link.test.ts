@@ -1,10 +1,13 @@
-// import { expect, test } from '@oclif/test'
+import { test } from '@oclif/test'
+import { expect } from 'fancy-test'
 
-describe('link', () => {
-  // test
-  //   .stdout()
-  //   .command(['link'])
-  //   .it('runs hello', ctx => {
-  //     expect(ctx.stdout).to.contain('hello world')
-  //   })
+describe('login', () => {
+  describe('Prompt for token', () => {
+    test
+      .stdout()
+      .command(['link', '123-scenario-id'])
+      .it('Display success message', ctx => {
+        expect(ctx.stdout).to.contain('Scenario successfully linked')
+      })
+  })
 })
