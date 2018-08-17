@@ -1,3 +1,4 @@
+// TODO: remove this file once we migrated everything from @bearer/beare-cli
 declare module 'bearer__bearer-cli'
 declare module '@bearer/bearer-cli/dist/bin/index' {
   const _default: (args: any) => void
