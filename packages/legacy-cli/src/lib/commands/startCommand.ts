@@ -166,7 +166,7 @@ export const start = (emitter, config, locator: Locator) => async ({ open, insta
     const envVariables = {
       ...process.env,
       BEARER_SCENARIO_TAG_NAME: 'localhost',
-      BEARER_SCENARIO_ID: scenarioUuid,
+      BEARER_SCENARIO_ID: scenarioUuid || 'local-component',
       BEARER_INTEGRATION_HOST: integrationHost,
       BEARER_AUTHORIZATION_HOST: integrationHost
     }

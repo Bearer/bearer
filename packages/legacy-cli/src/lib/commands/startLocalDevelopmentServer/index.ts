@@ -63,8 +63,9 @@ export default function startLocalDevelopmentServer(
       // tslint:disable-next-line:no-http-string
       const bearerBaseURL = `http://localhost:${port}/`
       process.env.bearerBaseURL = bearerBaseURL
+      const prefixPath = process.env.BEARER_SCENARIO_ID || config.scenarioUuid
       router.all(
-        `${config.scenarioUuid}/:intentName`,
+        `${prefixPath}/:intentName`,
         (ctx, next) =>
           new Promise((resolve, _reject) => {
             try {
