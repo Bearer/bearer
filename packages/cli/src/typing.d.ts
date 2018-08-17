@@ -4,6 +4,12 @@ declare module '@bearer/bearer-cli/dist/bin/index' {
   export default _default
 }
 
+declare module '@bearer/bearer-cli/dist/src/lib/serviceClient' {
+  const serviceClient: (url: string) => any
+
+  export = serviceClient
+}
+
 type CopycallBack = (err: any, createdFiles: Array<string>) => void
 
 declare module 'copy-template-dir' {
