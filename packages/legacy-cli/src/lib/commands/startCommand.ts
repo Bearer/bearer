@@ -5,9 +5,10 @@ const Case = require('case')
 const chokidar = require('chokidar')
 const { spawn, execSync } = require('child_process')
 
-import startLocalDevelopmentServer from './startLocalDevelopmentServer'
 import Locator from '../locationProvider'
+
 import { generateSetup } from './generate'
+import startLocalDevelopmentServer from './startLocalDevelopmentServer'
 
 function watchNonTSFiles(watchedPath, destPath): Promise<any> {
   return new Promise((resolve, _reject) => {
@@ -30,12 +31,12 @@ function watchNonTSFiles(watchedPath, destPath): Promise<any> {
       const relativePath = filePath.replace(watchedPath, '')
       const targetPath = path.join(destPath, relativePath)
       // Creating symlink
-      if (event == 'add') {
+      if (event === 'add') {
         console.log('creating symlink', filePath, targetPath)
         fs.ensureSymlink(filePath, targetPath, callback)
       }
       // // Deleting symlink
-      if (event == 'unlink') {
+      if (event === 'unlink') {
         console.log('deleting symlink')
         fs.unlink(targetPath, err => {
           if (err) throw err
@@ -145,7 +146,7 @@ export const start = (emitter, config, locator: Locator) => async ({ open, insta
     })
 
     const { scenarioRoot, buildViewsDir } = locator
-    /* start local development server */
+    // start local development server
     const integrationHost = await startLocalDevelopmentServer(emitter, config, locator)
 
     ensureSetupComponents(emitter, locator)
@@ -157,7 +158,7 @@ export const start = (emitter, config, locator: Locator) => async ({ open, insta
       )
     }
 
-    /* Start bearer transpiler phase */
+    // Start bearer transpiler phase
     const BEARER = 'bearer-transpiler'
     const options = [watcher ? null : '--no-watcher']
 
@@ -197,7 +198,7 @@ export const start = (emitter, config, locator: Locator) => async ({ open, insta
 
       bearerTranspiler.on('message', ({ event }) => {
         if (event === 'transpiler:initialized') {
-          /* Start stencil */
+          // Start stencil
           const args = config.isYarnInstalled ? ['start'] : ['run', 'start']
           if (!open) {
             args.push('--no-open')
