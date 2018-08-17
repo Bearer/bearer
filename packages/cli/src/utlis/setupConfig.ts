@@ -67,7 +67,7 @@ export default (): Config => {
       if (this.hasScenarioLinked) {
         return `${this.orgId}-${this.scenarioId}`
       }
-      return 'unset-scenari0-uuid'
+      return 'unset-scenario-uuid'
     },
     get hasScenarioLinked(): boolean {
       return Boolean(this.orgId) && Boolean(this.scenarioId)
