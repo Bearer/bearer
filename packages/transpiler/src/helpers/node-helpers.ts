@@ -5,5 +5,5 @@ export function hasMethodNamed(classNode: ts.ClassDeclaration, methodName: strin
 }
 
 export function isMethodNamed(tsNode: ts.Node, name: string): boolean {
-  return ts.isMethodDeclaration(tsNode) && tsNode.name['escapedText'] === name
+  return ts.isMethodDeclaration(tsNode) && (tsNode.name as ts.Identifier).escapedText === name
 }

@@ -1,5 +1,6 @@
-import { SaveState, RetrieveState } from '../src/index'
 import mockAxios from 'jest-mock-axios'
+
+import { RetrieveState, SaveState } from '../src/index'
 
 afterEach(() => {
   mockAxios.reset()
@@ -25,7 +26,7 @@ describe('SaveState', () => {
 
     const event = {
       queryStringParameters: { referenceId },
-      context: { bearerBaseURL: 'http://void.bearer.sh' },
+      context: { bearerBaseURL: 'https://void.bearer.sh' },
       body: {
         pullRequests: []
       }
@@ -171,7 +172,7 @@ describe('RetrieveState', () => {
 
     const event = {
       queryStringParameters: { referenceId },
-      context: { bearerBaseURL: 'http://void.bearer.sh' }
+      context: { bearerBaseURL: 'https://void.bearer.sh' }
     }
 
     const action = (_context: any, _params: any, state: any, callback: (state: any) => void) => {

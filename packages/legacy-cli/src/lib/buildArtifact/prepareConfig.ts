@@ -1,7 +1,7 @@
-import * as globby from 'globby'
-import * as vm from 'vm'
 import * as fs from 'fs'
+import * as globby from 'globby'
 import { promisify } from 'util'
+import * as vm from 'vm'
 const readFileAsync = promisify(fs.readFile)
 
 export default (
@@ -16,10 +16,10 @@ export default (
     files
       .reduce(async (acc, f) => {
         const code = await readFileAsync(f)
-        const context = vm.createContext({ module: {} })
+        const context = vm.createContext({ module: {} }) as any
 
         vm.runInNewContext(code.toString(), context)
-        const intent = context['module'].exports.default
+        const intent = context.module.exports.default
 
         if (intent && intent.intentName)
           acc.then(config =>

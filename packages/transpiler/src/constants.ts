@@ -16,7 +16,8 @@ export const Decorators = {
   BearerState: 'BearerState',
   Intent: 'Intent',
   RetrieveStateIntent: 'RetrieveStateIntent',
-  SaveStateIntent: 'SaveStateIntent'
+  SaveStateIntent: 'SaveStateIntent',
+  statePropName: 'statePropName'
 }
 
 export const Module = {

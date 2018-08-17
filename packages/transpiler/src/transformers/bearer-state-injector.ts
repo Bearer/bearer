@@ -2,13 +2,15 @@
  *
  */
 import * as ts from 'typescript'
-import { propDecoratedWithName, hasDecoratorNamed, hasPropDecoratedWithName } from '../helpers/decorator-helpers'
-import { ensureWatchImported, ensureBearerContextInjected, ensureStateImported } from './bearer'
-import { Decorators, Component } from '../constants'
-import { TransformerOptions } from '../types'
+
+import { Component, Decorators } from '../constants'
+import { hasDecoratorNamed, hasPropDecoratedWithName, propDecoratedWithName } from '../helpers/decorator-helpers'
 import { ensureMethodExists } from '../helpers/guards-helpers'
-import { updateMethodOfClass, prependToStatements } from '../helpers/method-updaters'
+import { prependToStatements, updateMethodOfClass } from '../helpers/method-updaters'
 import { isWatcherOn } from '../helpers/stencil-helpers'
+import { TransformerOptions } from '../types'
+
+import { ensureBearerContextInjected, ensureStateImported, ensureWatchImported } from './bearer'
 
 const state = ts.createIdentifier('state')
 
@@ -173,7 +175,7 @@ function injectPropertyWatcher(
     const predicate = node => ts.isMethodDeclaration(node) && isWatcherOn(node, meta.componentPropName)
     const watcherHandler = members.find(predicate) as ts.MethodDeclaration
     if (watcherHandler) {
-      const newValueParameterName = watcherHandler.parameters[0].name['escapedText']
+      const newValueParameterName = (watcherHandler.parameters[0].name as ts.Identifier).escapedText as string
       return [
         ...members.filter(node => !predicate(node)),
         prependToStatements(watcherHandler, [createUpdateStatement(meta.componentPropName, newValueParameterName)])
@@ -256,14 +258,16 @@ function extractDecoratedPropertyInformation(tsSourceFile: ts.SourceFile): Array
     ) || []
   ).map(prop => {
     const decoratorOptions = (prop.decorators[0].expression as ts.CallExpression).arguments[0]
-    const componentPropName: string = prop.name['escapedText']
+    const componentPropName: string = (prop.name as ts.Identifier).escapedText as string
 
     let statePropName = componentPropName
 
     if (decoratorOptions && ts.isObjectLiteralExpression(decoratorOptions)) {
-      const stateNameOption = decoratorOptions.properties.find(prop => prop.name['escapedText'] == 'statePropName')
+      const stateNameOption = decoratorOptions.properties.find(
+        prop => (prop.name as ts.Identifier).escapedText === Decorators.statePropName
+      ) as ts.PropertyAssignment
       if (stateNameOption) {
-        statePropName = stateNameOption['initializer']
+        statePropName = (stateNameOption.initializer as ts.StringLiteral).text
       }
     }
     return {

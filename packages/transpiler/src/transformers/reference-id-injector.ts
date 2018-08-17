@@ -1,8 +1,10 @@
 import * as ts from 'typescript'
-import { hasPropDecoratedWithName, propDecoratedWithName, decoratorNamed } from '../helpers/decorator-helpers'
-import { ensurePropImported, propDecorator, elementDecorator, ensureElementImported } from './bearer'
-import { Decorators, Types, Properties } from '../constants'
+
+import { Decorators, Properties, Types } from '../constants'
+import { decoratorNamed, hasPropDecoratedWithName, propDecoratedWithName } from '../helpers/decorator-helpers'
 import { TransformerOptions } from '../types'
+
+import { elementDecorator, ensureElementImported, ensurePropImported, propDecorator } from './bearer'
 
 export default function BearerReferenceIdInjector({  }: TransformerOptions = {}): ts.TransformerFactory<ts.SourceFile> {
   return transformContext => {
@@ -25,7 +27,7 @@ export default function BearerReferenceIdInjector({  }: TransformerOptions = {})
 function injectHTMLElementPropery(tsClass: ts.ClassDeclaration): ts.ClassDeclaration {
   if (hasPropDecoratedWithName(tsClass, Decorators.Element)) {
     const existingProp = propDecoratedWithName(tsClass, Decorators.Element)[0]
-    const propertyName = existingProp.name['escapedText']
+    const propertyName = (existingProp.name as ts.Identifier).escapedText as string
 
     if (propertyName !== Properties.Element) {
       return ts.updateClassDeclaration(

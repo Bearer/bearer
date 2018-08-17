@@ -54,10 +54,10 @@ export class FullComponent {
     @Watch(\\"attachedPullRequests\\")
     _notifyBearerStateHandler_attachedPullRequests(newValue: any) { this.bearerContext.update(\\"attachedPullRequests\\", newValue); }
     @Watch(\\"ducks\\")
-    _notifyBearerStateHandler_ducks(newValue: any) { this.bearerContext.update('goats', newValue); }
+    _notifyBearerStateHandler_ducks(newValue: any) { this.bearerContext.update(\\"goats\\", newValue); }
     componentWillLoad() { this.bearerContext.subscribe(this); }
     componentDidUnload() { this.bearerContext.unsubscribe(this); }
-    bearerUpdateFromState = state => { this.attachedPullRequests = state[\\"attachedPullRequests\\"]; this.ducks = state['goats']; };
+    bearerUpdateFromState = state => { this.attachedPullRequests = state[\\"attachedPullRequests\\"]; this.ducks = state[\\"goats\\"]; };
 }
 ",
 }
@@ -104,10 +104,10 @@ export class AttachPullRequestAction {
     @Watch(\\"attachedPullRequests\\")
     _notifyBearerStateHandler_attachedPullRequests(newValue: any) { this.bearerContext.update(\\"attachedPullRequests\\", newValue); }
     @Watch(\\"ducks\\")
-    _notifyBearerStateHandler_ducks(newValue: any) { this.bearerContext.update('goats', newValue); }
+    _notifyBearerStateHandler_ducks(newValue: any) { this.bearerContext.update(\\"goats\\", newValue); }
     componentWillLoad() { this.bearerContext.subscribe(this); }
     componentDidUnload() { this.bearerContext.unsubscribe(this); }
-    bearerUpdateFromState = state => { this.attachedPullRequests = state[\\"attachedPullRequests\\"]; this.ducks = state['goats']; };
+    bearerUpdateFromState = state => { this.attachedPullRequests = state[\\"attachedPullRequests\\"]; this.ducks = state[\\"goats\\"]; };
 }
 ",
 }
@@ -174,10 +174,10 @@ export class AttachPullRequestDisplay {
     @Watch(\\"attachedPullRequests\\")
     _notifyBearerStateHandler_attachedPullRequests(newValue: any) { this.bearerContext.update(\\"attachedPullRequests\\", newValue); }
     @Watch(\\"ducks\\")
-    _notifyBearerStateHandler_ducks(newValue: any) { this.bearerContext.update('goats', newValue); }
+    _notifyBearerStateHandler_ducks(newValue: any) { this.bearerContext.update(\\"goats\\", newValue); }
     componentWillLoad() { this.bearerContext.subscribe(this); }
     componentDidUnload() { this.bearerContext.unsubscribe(this); }
-    bearerUpdateFromState = state => { this.attachedPullRequests = state[\\"attachedPullRequests\\"]; this.ducks = state['goats']; };
+    bearerUpdateFromState = state => { this.attachedPullRequests = state[\\"attachedPullRequests\\"]; this.ducks = state[\\"goats\\"]; };
 }
 ",
 }

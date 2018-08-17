@@ -3,11 +3,12 @@ import * as globby from 'globby'
 import * as pathJs from 'path'
 import * as webpack from 'webpack'
 
-import prepareConfig from './prepareConfig'
-import attachConfig from './attachConfig'
-import addFilesToArchive from './addFilesToArchive'
-import generateHandler from './generateHandler'
 import LocationProvider from '../locationProvider'
+
+import addFilesToArchive from './addFilesToArchive'
+import attachConfig from './attachConfig'
+import generateHandler from './generateHandler'
+import prepareConfig from './prepareConfig'
 
 const CONFIG_FILE = 'bearer.config.json'
 const HANDLER_NAME = 'index.js'

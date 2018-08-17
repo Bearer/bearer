@@ -1,6 +1,7 @@
-import { intentRequest } from './requests'
-import Bearer from './Bearer'
 import fetch from 'jest-fetch-mock'
+
+import Bearer from './Bearer'
+import { intentRequest } from './requests'
 
 const intentName = 'anIntent'
 const scenarioId = 'aScenarioId'
@@ -10,7 +11,7 @@ describe('requests', () => {
   beforeEach(() => {
     fetch.resetMocks()
     Bearer.init({ integrationHost: process.env.API_HOST, integrationId: '42' })
-    Bearer.instance['allowIntegrationRequests']()
+    Bearer.instance.allowIntegrationRequests()
   })
 
   describe('intentRequest', () => {
@@ -27,7 +28,7 @@ describe('requests', () => {
       await aRequest({ page: 1 }, {})
 
       expect(window.fetch).toBeCalledWith(
-        'http://localhost:5555/api/v1/aScenarioId/anIntent?page=1&setupId=1234&integrationId=42',
+        'https://localhost:5555/api/v1/aScenarioId/anIntent?page=1&setupId=1234&integrationId=42',
         {
           credentials: 'include',
           headers: {

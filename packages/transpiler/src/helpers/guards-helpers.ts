@@ -1,4 +1,5 @@
 import * as ts from 'typescript'
+
 import { hasMethodNamed } from './node-helpers'
 
 export function ensureMethodExists(classNode: ts.ClassDeclaration, methodName: string) {

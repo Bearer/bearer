@@ -1,7 +1,8 @@
-import BearerConfig from './BearerConfig'
 import fbemitter from 'fbemitter'
-import Events from './EventNames'
 import postRobot from 'post-robot'
+
+import BearerConfig from './BearerConfig'
+import Events from './EventNames'
 
 const BEARER_WINDOW_INSTANCE_KEY = 'BEARER_INSTANCE'
 const BEARER_EMITTER = 'BEARER_EMITTER'
@@ -10,14 +11,6 @@ const BEARER_CONFIG_KEY = 'BEARER_CONFIG'
 const IFRAME_NAME = 'BEARER-IFRAME'
 
 class Bearer {
-  public static init(config: any = {}): Bearer {
-    if (this._instance) {
-      console.warn('One instance is already configured, reaplacing it')
-    }
-    this._instance = new Bearer({ ...config, ...(window[BEARER_CONFIG_KEY] || {}) })
-    return this._instance
-  }
-
   private static set _instance(bearerInstance: Bearer) {
     if (window[BEARER_WINDOW_INSTANCE_KEY]) {
       console.warn('[BEARER]', 'Replacing bearer instance')
@@ -48,20 +41,6 @@ class Bearer {
     return 'LIB_VERSION'
   }
 
-  private iframe: HTMLIFrameElement
-  private isSessionInitialized: boolean = false
-  private allowIntegrationRequests: (initialize: true) => void
-  private _maybeInitialized: Promise<boolean>
-
-  constructor(args) {
-    this.bearerConfig = new BearerConfig(args || {})
-    console.info('[BEARER]', 'config initialized with', args)
-    this.maybeInitialized = new Promise((resolve, reject) => {
-      this.allowIntegrationRequests = resolve
-    })
-    this.initSession()
-  }
-
   get bearerConfig(): BearerConfig {
     return window[BEARER_WINDOW_KEY]
   }
@@ -79,6 +58,13 @@ class Bearer {
 
   set maybeInitialized(promise) {
     this._maybeInitialized = promise
+  }
+  public static init(config: any = {}): Bearer {
+    if (this._instance) {
+      console.warn('One instance is already configured, reaplacing it')
+    }
+    this._instance = new Bearer({ ...config, ...(window[BEARER_CONFIG_KEY] || {}) })
+    return this._instance
   }
 
   static onAuthorized = (scenarioId: string, callback: (authorize: boolean) => void): void => {
@@ -99,6 +85,20 @@ class Bearer {
     })
   }
 
+  private iframe: HTMLIFrameElement
+  private isSessionInitialized: boolean = false
+  private allowIntegrationRequests: (initialize: true) => void
+  private _maybeInitialized: Promise<boolean>
+
+  constructor(args) {
+    this.bearerConfig = new BearerConfig(args || {})
+    console.info('[BEARER]', 'config initialized with', args)
+    this.maybeInitialized = new Promise((resolve, _reject) => {
+      this.allowIntegrationRequests = resolve
+    })
+    this.initSession()
+  }
+
   authorized = (scenarioId: string) => {
     console.log('[BEARER]', 'Bearer:emitting ', { event: Events.AUTHORIZED, scenarioId })
     Bearer.emitter.emit(Events.AUTHORIZED, { scenarioId })
@@ -113,7 +113,7 @@ class Bearer {
     new Promise((resolve, reject) => {
       postRobot
         .send(this.iframe, Events.HAS_AUTHORIZED, {
-          scenarioId: scenarioId,
+          scenarioId,
           integrationId: Bearer.config.integrationId
         })
         .then(({ data, data: { authorized } }) => {
@@ -126,7 +126,7 @@ class Bearer {
   revokeAuthorization = (scenarioId: string): void => {
     postRobot
       .send(this.iframe, Events.REVOKE, {
-        scenarioId: scenarioId,
+        scenarioId,
         integrationId: Bearer.config.integrationId
       })
       .then(() => {
@@ -136,7 +136,7 @@ class Bearer {
   }
 
   initSession() {
-    if (typeof window !== 'undefined' && !document.querySelector(`#${IFRAME_NAME}`)) {
+    if (window === undefined && !document.querySelector(`#${IFRAME_NAME}`)) {
       postRobot.on(Events.SESSION_INITIALIZED, event => {
         this.sessionInitialized(event)
       })
@@ -153,12 +153,6 @@ class Bearer {
     }
   }
 
-  private sessionInitialized(_event) {
-    console.log('[BEARER]', 'session initialized')
-    this.isSessionInitialized = true
-    this.allowIntegrationRequests(true)
-  }
-
   askAuthorizations = ({ scenarioId, setupId }): boolean => {
     if (this.isSessionInitialized) {
       const AUTHORIZED_URL = `${Bearer.config.integrationHost}v1/auth/${scenarioId}?setupId=${setupId}`
@@ -166,6 +160,12 @@ class Bearer {
       return true
     }
     return false
+  }
+
+  private sessionInitialized(_event) {
+    console.log('[BEARER]', 'session initialized')
+    this.isSessionInitialized = true
+    this.allowIntegrationRequests(true)
   }
 }
 

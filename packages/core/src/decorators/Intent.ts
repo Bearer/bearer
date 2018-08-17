@@ -14,13 +14,9 @@ type TFetchBearerResult = { meta: { referenceId: string }; data: Array<any> | an
 
 export type TFetchBearerData = { data: Array<any> | any; referenceId?: string }
 
-export interface BearerFetch {
-  (...args: any[]): Promise<any>
-}
+export type BearerFetch = (...args: any[]) => Promise<any>
 
-interface IDecorator {
-  (target: any, key: string): void
-}
+type IDecorator = (target: any, key: string) => void
 
 type BearerComponent = {
   BEARER_ID: string
@@ -161,10 +157,10 @@ function defineIntentProp(target: BearerComponent, key: string, getter: any): vo
  */
 
 class BearerMissingReferenceId extends Error {
+  message = `Attribute ${this.group}ReferenceId is missing. Cannot fetch data without any reference`
   constructor(private readonly group: string = 'feature') {
     super()
   }
-  message = `Attribute ${this.group}ReferenceId is missing. Cannot fetch data without any reference`
 }
 
 class BearerMissingScenarioId extends Error {

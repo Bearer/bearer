@@ -38,6 +38,7 @@
     "copy-template-dir": "^1.4.0",
     "cosmiconfig": "^5.0.5",
     "del": "^3.0.0",
+    "detect-file": "^1.0.0",
     "express": "^4.16.3",
     "find-up": "^2.1.0",
     "fs-extra": "^6.0.1",

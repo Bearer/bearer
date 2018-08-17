@@ -1,6 +1,7 @@
-import * as ts from 'typescript'
 import * as fs from 'fs'
 import * as path from 'path'
+import * as ts from 'typescript'
+
 import { FileTransformerOptions } from '../types'
 
 export default function generateMetadataFile(

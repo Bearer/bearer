@@ -1,4 +1,4 @@
-/* global fetch */
+// global fetch
 import Bearer from './Bearer'
 
 const defaultInit = {
@@ -9,9 +9,7 @@ const defaultInit = {
   credentials: 'include'
 }
 
-export type TBearerRequest<T> = {
-  (params: any, init?: any): Promise<T>
-}
+export type TBearerRequest<T> = (params: any, init?: any) => Promise<T>
 
 export function bearerRequest<TPromiseReturn>(uri: string, baseParams = {}): TBearerRequest<TPromiseReturn> {
   const url = `${Bearer.config.integrationHost}api/v1/${uri}`

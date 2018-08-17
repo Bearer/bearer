@@ -3,5 +3,8 @@
   "rules": {
     "object-curly-spacing": [true, "always"],
     "no-console": false
+  },
+  "linterOptions": {
+    "exclude": ["node_modules", "templates"]
   }
 }

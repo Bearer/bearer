@@ -1,5 +1,7 @@
 import * as ts from 'typescript'
+
 import { Decorators } from '../constants'
+
 import { decoratorNamed } from './decorator-helpers'
 
 export function isWatcherOn(tsMethod: ts.MethodDeclaration, watchedProp: string): boolean {

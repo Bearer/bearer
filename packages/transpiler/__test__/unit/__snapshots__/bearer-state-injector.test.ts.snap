@@ -27,10 +27,10 @@ class UpdateExistingPropertyWatcher {
     @Watch('pullRequests')
     pullRequestsChangeHandler(newPullRequest: Array<any>, oldValue: any[]) { this.bearerContext.update(\\"pullRequests\\", newPullRequest); console.log('Prepend stuff'); }
     @Watch(\\"repository\\")
-    _notifyBearerStateHandler_repository(newValue: any) { this.bearerContext.update('repo', newValue); }
+    _notifyBearerStateHandler_repository(newValue: any) { this.bearerContext.update(\\"repo\\", newValue); }
     componentWillLoad() { this.bearerContext.subscribe(this); }
     componentDidUnload() { this.bearerContext.unsubscribe(this); }
-    bearerUpdateFromState = state => { this.pullRequests = state[\\"pullRequests\\"]; this.repository = state['repo']; };
+    bearerUpdateFromState = state => { this.pullRequests = state[\\"pullRequests\\"]; this.repository = state[\\"repo\\"]; };
 }
 ",
 }

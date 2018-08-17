@@ -24,22 +24,18 @@ export interface IBearerStateDecoratorOptions {
   statePropName?: string
 }
 
-export interface IBearerStateDecorator<T> {
-  (options?: IBearerStateDecoratorOptions): T
-}
+export type IBearerStateDecorator<T> = (options?: IBearerStateDecoratorOptions) => T
 
-export const BearerState: IBearerStateDecorator<any> = (options?: IBearerStateDecoratorOptions) => (
-  target: any,
-  key: string
+export const BearerState: IBearerStateDecorator<any> = (_options?: IBearerStateDecoratorOptions) => (
+  _target: any,
+  _key: string
 ): void => {}
 
 /**
  *  Component Decorator
  */
 
-export interface IBearerComponentDecorator<T> {
-  (options?: d.ComponentOptions): T
-}
+export type IBearerComponentDecorator<T> = (options?: d.ComponentOptions) => T
 
 export declare const Component: IBearerComponentDecorator<any>
 
@@ -58,9 +54,7 @@ export interface BearerRootComponentOptions extends Omit<d.ComponentOptions, 'ta
   shadow?: boolean
 }
 
-export interface IBearerRootComponentDecorator<T> {
-  (options?: BearerRootComponentOptions): T
-}
+export type IBearerRootComponentDecorator<T> = (options?: BearerRootComponentOptions) => T
 
 export declare const RootComponent: IBearerRootComponentDecorator<any>
 

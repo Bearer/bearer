@@ -1,3 +1,1 @@
-export declare type TCollectionRenderer = {
-  (collection: Array<any>): any
-}
+export declare type TCollectionRenderer = (collection: Array<any>) => any

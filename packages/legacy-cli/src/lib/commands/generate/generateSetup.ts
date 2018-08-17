@@ -1,9 +1,10 @@
-import * as rc from 'rc'
-import * as path from 'path'
-import * as del from 'del'
 import * as Case from 'case'
 import * as copy from 'copy-template-dir'
+import * as del from 'del'
 import * as detect from 'detect-file'
+import * as path from 'path'
+import * as rc from 'rc'
+
 import Locator from '../../locationProvider'
 
 export function generateSetup({

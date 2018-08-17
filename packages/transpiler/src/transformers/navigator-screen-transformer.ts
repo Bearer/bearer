@@ -2,6 +2,7 @@
  * Rewrite navigator-screen if they do not use renderFunc
  */
 import * as ts from 'typescript'
+
 import { TransformerOptions } from '../types'
 
 const NAVIGATOR_SCREEN_TAG_NAME = 'bearer-navigator-screen'
@@ -39,7 +40,7 @@ export default function PropImporter({  }: TransformerOptions = {}): ts.Transfor
   return _transformContext => {
     function visit(tsNode: ts.Node): ts.VisitResult<ts.Node> {
       if (ts.isJsxElement(tsNode)) {
-        if (tsNode.openingElement.tagName['escapedText'] === NAVIGATOR_SCREEN_TAG_NAME) {
+        if ((tsNode.openingElement.tagName as ts.Identifier).escapedText === NAVIGATOR_SCREEN_TAG_NAME) {
           return ts.visitEachChild(moveSlotToRenderFuncProp(tsNode), visit, _transformContext)
         }
       }

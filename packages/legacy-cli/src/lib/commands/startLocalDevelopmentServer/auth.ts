@@ -1,6 +1,5 @@
 const Router = require('koa-router')
 import * as fs from 'fs'
-import * as uuidv1 from 'uuid/v1'
 
 const router = new Router({ prefix: '/' })
 
@@ -22,7 +21,7 @@ router.get('v1/auth/:integration_uuid', async ctx => {
   <head>
     <script src="https://cdn.jsdelivr.net/npm/post-robot@8.0.28/dist/post-robot.min.js"></script>
     <script type="application/javascript">
-      localStorage.setItem('${ctx.request.query['setupId']}|${ctx.params.integration_uuid}', true)
+      localStorage.setItem('${ctx.request.query.setupId}|${ctx.params.integration_uuid}', true)
       postRobot.send(window.opener, 'BEARER_AUTHORIZED', {
         scenarioId: '${ctx.params.integration_uuid}'
       })

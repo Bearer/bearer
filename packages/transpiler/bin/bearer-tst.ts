@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 import * as commandLineArgs from 'command-line-args'
+
 import Transpiler from '../src'
 
 export default args => {

@@ -1,4 +1,5 @@
 import { render } from '@stencil/core/testing'
+
 import { Alert } from './Alert'
 
 describe('alert', () => {

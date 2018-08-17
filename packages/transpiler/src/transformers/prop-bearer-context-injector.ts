@@ -20,10 +20,11 @@
  */
 import * as ts from 'typescript'
 
-import { hasDecoratorNamed } from '../helpers/decorator-helpers'
-import bearer from './bearer'
 import { Decorators } from '../constants'
+import { hasDecoratorNamed } from '../helpers/decorator-helpers'
 import { TransformerOptions } from '../types'
+
+import bearer from './bearer'
 
 export default function ComponentTransformer({  }: TransformerOptions = {}): ts.TransformerFactory<ts.SourceFile> {
   return transformContext => {

@@ -1,6 +1,6 @@
-import * as path from 'path'
 import * as globby from 'globby'
 import * as fs from 'graceful-fs'
+import * as path from 'path'
 
 export default (archive, packagePath) => {
   const fullPath = path.resolve(packagePath)

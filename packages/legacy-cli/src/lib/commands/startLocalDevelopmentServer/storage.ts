@@ -53,15 +53,15 @@ export default () => {
       ctx.notFound(e)
     }
   })
-  router.delete('items/:referenceId', async (ctx, next) => {
+  router.delete('items/:referenceId', async (ctx, _next) => {
     const referenceId = ctx.params.referenceId
-    return await db
+    return db
       .table('records')
       .where({ referenceId })
       .delete()
   })
 
-  router.put('items/:referenceId', async (ctx, next) => {
+  router.put('items/:referenceId', async (ctx, _next) => {
     const referenceId = ctx.params.referenceId
 
     console.log(ctx.request)
@@ -80,7 +80,7 @@ export default () => {
       })
   })
 
-  router.post('items', async (ctx, next) => {
+  router.post('items', async (ctx, _next) => {
     const referenceId = uuidv1()
 
     console.log(ctx.request.body)

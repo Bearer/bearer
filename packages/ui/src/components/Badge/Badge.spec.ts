@@ -1,4 +1,5 @@
 import { render } from '@stencil/core/testing'
+
 import { BearerBadge } from './Badge'
 
 describe('badge', () => {

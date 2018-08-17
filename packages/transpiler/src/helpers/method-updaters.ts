@@ -46,7 +46,7 @@ export function updateMethodOfClass(
     classNode.typeParameters,
     classNode.heritageClauses,
     classNode.members.map(member => {
-      if (ts.isMethodDeclaration(member) && member.name['escapedText'] === methodeName) {
+      if (ts.isMethodDeclaration(member) && (member.name as ts.Identifier).escapedText === methodeName) {
         return updater(member)
       }
       return member

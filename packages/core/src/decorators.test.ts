@@ -1,6 +1,7 @@
-import Bearer from './Bearer'
-import { Intent, BearerFetch, IntentType } from './decorators/Intent'
 import fetch from 'jest-fetch-mock'
+
+import Bearer from './Bearer'
+import { BearerFetch, Intent } from './decorators/Intent'
 
 const SCENARIO_ID = '1234'
 const commonParams = {
@@ -16,7 +17,7 @@ const commonParams = {
 describe('Intent decorator', () => {
   beforeAll(() => {
     Bearer.init({ integrationHost: process.env.API_HOST, integrationId: '42' })
-    Bearer.instance['allowIntegrationRequests']()
+    Bearer.instance.allowIntegrationRequests()
   })
 
   class IntentDecorated {
@@ -55,7 +56,7 @@ describe('Intent decorator', () => {
         .catch(a => console.log(a))
 
       expect(fetch).toBeCalledWith(
-        'http://localhost:5555/api/v1/1234/getCollectionIntent?page=1&setupId=&integrationId=42',
+        'https://localhost:5555/api/v1/1234/getCollectionIntent?page=1&setupId=&integrationId=42',
         commonParams
       )
 

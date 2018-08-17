@@ -1,8 +1,8 @@
-import * as Requests from './requests'
-import * as Debug from './debug'
 import Bearer from './Bearer'
 import classNames from './classnames'
+import * as Debug from './debug'
 import EventNames from './EventNames'
+import * as Requests from './requests'
 
 import * as bearerState from './BearerState'
 export * from './decorators'

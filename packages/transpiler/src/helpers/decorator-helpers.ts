@@ -25,7 +25,7 @@ export function hasDecoratorNamed(decoratedNode: ts.PropertyDeclaration | ts.Cla
 
 export function decoratorNamed(tsDecorator: ts.Decorator, name: string): boolean {
   return ts.forEachChild(tsDecorator, node => {
-    return ts.isCallExpression(node) && node.expression['escapedText'] === name
+    return ts.isCallExpression(node) && (node.expression as ts.Identifier).escapedText === name
   })
 }
 
