@@ -49,8 +49,9 @@ export type Config = BaseConfig & {
   orgId: string | undefined
   scenarioTitle: string | undefined
   scenarioId: string | undefined
-  scenarioUuid: string | null
+  scenarioUuid: string
   rootPathRc: string | null
+  hasScenarioLinked: boolean
   setScenarioConfig(config: any): void
   storeBearerConfig(config: any): void
 }
