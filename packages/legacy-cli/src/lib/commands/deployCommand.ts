@@ -10,8 +10,8 @@ const deploy = (emitter, config: Config, locator: Locator) => async ({ viewsOnly
     process.exit(1)
   }
 
-  const { scenarioUuid, scenarioId } = config
-  if (!scenarioUuid) {
+  const { hasScenarioLinked, scenarioId } = config
+  if (!hasScenarioLinked) {
     emitter.emit('scenarioUuid:missing')
     process.exit(1)
   }

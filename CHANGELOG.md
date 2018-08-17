@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.54.0"></a>
+# [0.54.0](https://github.com/Bearer/bearer/compare/v0.53.1...v0.54.0) (2018-08-16)
+
+
+### Bug Fixes
+
+* **cli:** Better deploy error message ([#275](https://github.com/Bearer/bearer/issues/275)) ([70b61af](https://github.com/Bearer/bearer/commit/70b61af))
+* **webserver:** handle not existing intent gracefully ([#277](https://github.com/Bearer/bearer/issues/277)) ([6af021a](https://github.com/Bearer/bearer/commit/6af021a))
+
+
+### Features
+
+* **cli:** new commnad rewrite base ([#276](https://github.com/Bearer/bearer/issues/276)) ([f58d778](https://github.com/Bearer/bearer/commit/f58d778))
+
+
+
+
 <a name="0.53.0"></a>
 # [0.53.0](https://github.com/Bearer/bearer/compare/v0.52.0...v0.53.0) (2018-08-14)
 

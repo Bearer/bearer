@@ -63,11 +63,14 @@ export default (): Config => {
     get scenarioId(): string | undefined {
       return this.scenarioConfig.scenarioId
     },
-    get scenarioUuid(): string | null {
-      if (!this.orgId || !this.scenarioId) {
-        return null
+    get scenarioUuid(): string {
+      if (this.hasScenarioLinked) {
+        return `${this.orgId}-${this.scenarioId}`
       }
-      return `${this.orgId}-${this.scenarioId}`
+      return 'unset-scenario-uuid'
+    },
+    get hasScenarioLinked(): boolean {
+      return Boolean(this.orgId) && Boolean(this.scenarioId)
     },
     get rootPathRc(): string | null {
       return findUp.sync('.scenariorc')

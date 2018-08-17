@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.54.0"></a>
+# [0.54.0](https://github.com/Bearer/bearer/compare/v0.53.1...v0.54.0) (2018-08-16)
+
+
+### Features
+
+* **cli:** new commnad rewrite base ([#276](https://github.com/Bearer/bearer/issues/276)) ([f58d778](https://github.com/Bearer/bearer/commit/f58d778))
+
+
+
+
 <a name="0.53.0"></a>
 # [0.53.0](https://github.com/Bearer/bearer/compare/v0.52.0...v0.53.0) (2018-08-14)
 

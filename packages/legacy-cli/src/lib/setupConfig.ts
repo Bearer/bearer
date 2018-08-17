@@ -7,7 +7,7 @@ const ini = require('ini')
 const path = require('path')
 const { spawnSync } = require('child_process')
 
-import { Config, ScenarioConfig, BaseConfig, BearerEnv, BearerConfig } from './types'
+import { BaseConfig, BearerConfig, BearerEnv, Config, ScenarioConfig } from './types'
 
 const configs: Record<BearerEnv, BaseConfig> = {
   dev: {
@@ -64,11 +64,14 @@ export default (): Config => {
     get scenarioId(): string | undefined {
       return this.scenarioConfig.scenarioId
     },
-    get scenarioUuid(): string | undefined {
-      if (!this.orgId || !this.scenarioId) {
-        return undefined
+    get scenarioUuid(): string {
+      if (this.hasScenarioLinked) {
+        return `${this.orgId}-${this.scenarioId}`
       }
-      return `${this.orgId}-${this.scenarioId}`
+      return 'unset-scenari0-uuid'
+    },
+    get hasScenarioLinked(): boolean {
+      return Boolean(this.orgId) && Boolean(this.scenarioId)
     },
     get rootPathRc(): string {
       return findUp.sync('.scenariorc')
