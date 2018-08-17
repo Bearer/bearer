@@ -19,7 +19,8 @@ export default class Login extends BaseCommand {
     const token = await this.askToken()
     this.ux.action.start('Logging you in')
     const status = await this.logUser(email, token)
-    this.ux.action.stop(status)
+    this.ux.action.stop()
+    this.log(status)
   }
 
   async logUser(Username: string, AccessToken: string): Promise<string> {
@@ -36,7 +37,7 @@ export default class Login extends BaseCommand {
         }
 
         case 401: {
-          this.error('Unauthorized')
+          this.error('Unauthorized: Invalid credentials')
           return 'There was an error while trying to login to bearer'
         }
 
@@ -63,15 +64,15 @@ export default class Login extends BaseCommand {
   }
 
   async askToken(): Promise<string> {
+    this.log('')
     this.log(this.colors.italic(`Find your token at this location: ${this.colors.bold(tokenUrl)}`))
-    this.log('\n')
-    const { password } = await this.inquirer.prompt<{ password: string }>([
+    const { token } = await this.inquirer.prompt<{ token: string }>([
       {
         message: 'Enter your token:',
         type: 'password',
-        name: 'password'
+        name: 'token'
       }
     ])
-    return password
+    return token
   }
 }
