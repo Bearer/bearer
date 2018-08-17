@@ -1,3 +1,4 @@
+import * as serviceClient from '@bearer/bearer-cli/dist/src/lib/serviceClient'
 import Command from '@oclif/command'
 import * as Case from 'case'
 import cliUx from 'cli-ux'
@@ -11,8 +12,7 @@ import setupConfig from './utlis/setupConfig'
 
 export default abstract class extends Command {
   get locator() {
-    const config: Config = setupConfig()
-    return new Locator(config)
+    return new Locator(this.bearerConfig)
   }
 
   get inquirer() {
@@ -35,9 +35,15 @@ export default abstract class extends Command {
     return colors
   }
 
+  get serviceClient() {
+    return serviceClient(this.bearerConfig.IntegrationServiceUrl)
+  }
+
   static flags = {
     // logLevel: flags.string({ options: ['error', 'warn', 'info', 'debug'], default: 'info' })
   }
+
+  protected bearerConfig!: Config
 
   success(message: string) {
     this.log(this.colors.green(message))
@@ -45,8 +51,9 @@ export default abstract class extends Command {
 
   // protected logLevel: any
 
-  // async init() {
-  //   const { flags } = this.parse(this.constructor as any)
-  //   this.logLevel = flags.logLevel
-  // }
+  async init() {
+    this.bearerConfig = setupConfig()
+    // const { flags } = this.parse(this.constructor as any)
+    // this.logLevel = flags.logLevel
+  }
 }
