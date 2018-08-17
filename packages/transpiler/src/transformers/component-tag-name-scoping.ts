@@ -1,6 +1,3 @@
-/*
- * Replace JSX element tag name with known ones
- */
 import * as ts from 'typescript'
 
 import { Metadata } from '../types'
