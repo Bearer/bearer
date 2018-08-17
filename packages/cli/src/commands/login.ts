@@ -32,7 +32,7 @@ export default class Login extends BaseCommand {
             ExpiresAt: body.authorization.AuthenticationResult.ExpiresIn + Date.now(),
             authorization: body.authorization
           })
-          return 'Successfully logged in! 🤘'
+          return `Successfully logged in as ${Username}! 🤘`
         }
 
         case 401: {
