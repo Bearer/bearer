@@ -37,8 +37,7 @@ describe('login', () => {
   describe('email not provided', () => {
     beforeEach(() => {
       const stub = sinon.stub(inquirer, 'prompt')
-      stub.onFirstCall().returns(Promise.resolve({ email }))
-      stub.onSecondCall().returns(Promise.resolve({ token: 'ok' }))
+      stub.resolves(Promise.resolve({ email, token: 'ok' }))
     })
     describe('Prompt for email and token', () => {
       test
