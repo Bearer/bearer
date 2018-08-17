@@ -13,7 +13,7 @@
   "scripts": {
     "upgrade-stencil": "(lerna clean --scope=@bearer/ui --scope=@bearer/core --yes) && (lerna exec --scope=@bearer/ui --scope=@bearer/core yarn install) && (lerna exec --scope=@bearer/ui --scope=@bearer/core yarn remove @stencil/core)  && (lerna add --exact @stencil/core --scope=@bearer/ui --scope=@bearer/core ) && lerna bootstrap",
     "lerna-publish": "lerna clean --yes && lerna bootstrap && lerna publish",
-    "test": "lerna run --parallel test",
+    "test": "lerna run test",
     "cm": "git-cz"
   },
   "license": "MIT",
