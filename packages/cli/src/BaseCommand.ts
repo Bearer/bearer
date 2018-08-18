@@ -7,8 +7,8 @@ import * as copy from 'copy-template-dir'
 import * as inquirer from 'inquirer'
 
 import { Config } from './types'
-import Locator from './utlis/locator'
-import setupConfig from './utlis/setupConfig'
+import Locator from './utils/locator'
+import setupConfig from './utils/setupConfig'
 
 export default abstract class extends Command {
   get locator() {

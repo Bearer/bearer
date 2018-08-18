@@ -2,7 +2,7 @@ import { test } from '@oclif/test'
 import { expect } from 'fancy-test'
 import * as sinon from 'sinon'
 
-import * as setup from '../../src/utlis/setupConfig'
+import * as setup from '../../src/utils/setupConfig'
 
 describe('Link', () => {
   describe('Update', () => {
