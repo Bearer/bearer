@@ -43,7 +43,7 @@ export default abstract class extends Command {
     // logLevel: flags.string({ options: ['error', 'warn', 'info', 'debug'], default: 'info' })
   }
 
-  protected bearerConfig!: Config
+  bearerConfig!: Config
 
   success(message: string) {
     this.log(this.colors.green(message))

@@ -43,7 +43,7 @@ export type ScenarioConfig = {
 
 export type Config = BaseConfig & {
   isYarnInstalled: boolean
-  isScenarioLocated: boolean
+  isScenarioLocation: boolean
   command: 'yarn' | 'npm'
   bearerConfig: BearerConfig
   scenarioConfig: ScenarioConfig

@@ -85,6 +85,7 @@
     "prepack": "rm -rf lib && tsc && oclif-dev manifest && oclif-dev readme",
     "prepare": "rm -rf lib && tsc",
     "test": "rm -rf .bearer && nyc mocha --forbid-only \"test/**/*.test.ts\"",
+    "test:unit": "rm -rf .bearer && nyc mocha --forbid-only",
     "version": "oclif-dev readme && git add README.md"
   },
   "types": "lib/index.d.ts",
