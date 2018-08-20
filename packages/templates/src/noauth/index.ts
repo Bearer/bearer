@@ -1,7 +1,7 @@
 export default {
   SaveState: `
   static action(
-    _context: TnoAuthContext,
+    _context: TNONEAuthContext,
     _params: any,
     body: any,
     state: any,
@@ -21,12 +21,12 @@ export default {
   }
   `,
   RetrieveState: `
-  static action(_context: TnoAuthContext, _params: any, state, callback: TRetrieveStateCallback) {
+  static action(_context: TNONEAuthContext, _params: any, state, callback: TRetrieveStateCallback) {
     callback({ data: state })
   }
   `,
   FetchData: `
-  static action(context: TnoAuthContext, params: any, body: any, callback: TFetchDataCallback) {
+  static action(context: TNONEAuthContext, params: any, body: any, callback: TFetchDataCallback) {
     //... your code goes here
     callback({ data: []})
   }`

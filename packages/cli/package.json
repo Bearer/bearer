@@ -10,6 +10,7 @@
   "dependencies": {
     "@bearer/bearer-cli": "^0.55.0",
     "@bearer/intents": "^0.55.0",
+    "@bearer/templates": "^0.53.1",
     "@bearer/types": "^0.0.1",
     "@oclif/command": "^1",
     "@oclif/config": "^1",

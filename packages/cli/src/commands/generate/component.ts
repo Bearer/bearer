@@ -29,12 +29,7 @@ export default class GenerateComponent extends BaseCommand {
     const outDir = type === TComponent.ROOT ? this.locator.srcViewsDir : this.locator.srcViewsDirResource('components')
 
     try {
-      await copyFiles(
-        this,
-        `templates/generate/${type}Component`,
-        outDir,
-        this.getVars(name, this.scenarioAuthConfig.authType)
-      )
+      await copyFiles(this, `generate/${type}Component`, outDir, this.getVars(name, this.scenarioAuthConfig.authType))
       this.success(`Generated component: name: ${name} | type: ${type}`)
     } catch (e) {
       this.error(e)

@@ -1,7 +1,7 @@
 export default {
   SaveState: `
   static action(
-    _context: TapiKeyContext,
+    _context: TAPIKEYAuthContext,
     _params: any,
     body: any,
     state: any,
@@ -21,12 +21,12 @@ export default {
   }
   `,
   RetrieveState: `
-  static action(_context: TapiKeyContext, _params: any, state, callback: TRetrieveStateCallback) {
+  static action(_context: TAPIKEYAuthContext, _params: any, state, callback: TRetrieveStateCallback) {
     callback({ data: state })
   }
   `,
   FetchData: `
-  static action(context: TapiKeyContext, params: any, body: any, callback: TFetchDataCallback) {
+  static action(context: TAPIKEYAuthContext, params: any, body: any, callback: TFetchDataCallback) {
     //... your code goes here
     // use the client defined in client.ts to fetch real object like that:
     // Client(context.authAccess.apiKey).get('/people')

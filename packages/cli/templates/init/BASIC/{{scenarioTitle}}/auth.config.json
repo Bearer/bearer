@@ -1,5 +1,5 @@
 {
-  "authType": "basicAuth",
+  "authType": "BASIC",
   "setupViews": [
     {
       "type": "text",

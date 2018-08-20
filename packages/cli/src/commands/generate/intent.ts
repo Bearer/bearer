@@ -1,8 +1,11 @@
+import { templates } from '@bearer/templates'
+import { Authentications } from '@bearer/types/lib/Authentications'
 import IntentType from '@bearer/types/lib/IntentTypes'
 import { flags } from '@oclif/command'
 
 import BaseCommand from '../../BaseCommand'
 import { RequireScenarioFolder } from '../../utils/decorators'
+import { copyFiles } from '../../utils/helpers'
 
 const types = [
   { name: 'fetch', value: IntentType.FetchData },
@@ -26,8 +29,39 @@ export default class GenerateIntent extends BaseCommand {
     this.log('Generating intent:')
     const type: IntentType = !flags.type ? await this.askForType() : types.find(t => t.name === flags.type)!.value
     const name = args.name || (await this.askForName())
+    const authType = this.scenarioAuthConfig.authType
+    if (!templates[authType]) {
+      // TODO: better error output
+      this.error(
+        `Incorrect AuthType please update "authType" field of auth.config.json within your scenario, with one of these values : ${Object.values(
+          Authentications
+        ).join('  |  ')}`
+      )
+    }
+    try {
+      const vars = this.getVars(name, type, authType)
+      await copyFiles(this, `generate/intent`, this.locator.srcIntentsDir, vars)
+      this.success(`Generated intent: name: ${name} type: ${type} `)
+    } catch (e) {
+      this.error(e)
+    }
+  }
 
-    this.success(`Generated intent: name: ${name} type: ${type} `)
+  getVars(name: string, intentType: IntentType, authType: Authentications) {
+    const actionExample = this.getActionExample(intentType, authType)
+    return {
+      fileName: name,
+      intentName: name,
+      intentClassName: this.case.pascal(name),
+      authType,
+      intentType,
+      actionExample,
+      callbackType: `T${intentType}Callback`
+    }
+  }
+
+  getActionExample(intentType: IntentType, authType: Authentications): string {
+    return templates[authType][intentType] as string
   }
 
   async askForName(): Promise<string> {

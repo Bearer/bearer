@@ -1,7 +1,7 @@
 export default {
   SaveState: `
   static action(
-    _context: TbasicAuthContext,
+    _context: TBASICAuthContext,
     _params: any,
     body: any,
     state: any,
@@ -21,12 +21,12 @@ export default {
   }
   `,
   RetrieveState: `
-  static action(_context: TbasicAuthContext, _params: any, state, callback: TRetrieveStateCallback) {
+  static action(_context: TBASICAuthContext, _params: any, state, callback: TRetrieveStateCallback) {
     callback({ data: state })
   }
   `,
   FetchData: `
-  static action(context: TbasicAuthContext, params: any, body: any, callback: TFetchDataCallback) {
+  static action(context: TBASICAuthContext, params: any, body: any, callback: TFetchDataCallback) {
     //... your code goes here
     // use the client defined in client.ts to fetch real object like that:
     // Client(

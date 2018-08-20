@@ -1,7 +1,7 @@
 {
   "authorizationURL": "https://example.com/authorizationUrl",
   "tokenURL": "https://example.com/tokenUrl",
-  "authType": "oauth2",
+  "authType": "OAUTH2",
   "tokenParams": {},
   "authorizationParams": {},
   "config": {

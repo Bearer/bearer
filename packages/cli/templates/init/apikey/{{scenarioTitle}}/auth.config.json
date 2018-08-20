@@ -1,5 +1,5 @@
 {
-  "authType": "apiKey",
+  "authType": "APIKEY",
   "setupViews": [
     {
       "type": "password",

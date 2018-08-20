@@ -46,31 +46,44 @@ export type TFetchDataAction = (
 /**
  * Auth definitions
  */
-export type Toauth2Context = {
+export type TOAUTH2AuthContext = {
   accessToken: string
   bearerBaseURL: string
   [key: string]: any
 }
 
-export type TnoAuthContext = {
+export type TNONEAuthContext = {
   bearerBaseURL: string
   [key: string]: any
 }
 
-export type TbasicAuthContext = {
+export type TBASICAuthContext = {
   username: string
   password: string
   bearerBaseURL: string
   [key: string]: any
 }
 
-export type TapiKeyContext = {
+export type TAPIKEYAuthContext = {
   apiKey: string
   bearerBaseURL: string
   [key: string]: any
 }
 
-export type TAuthContext = TnoAuthContext | Toauth2Context | TbasicAuthContext | TapiKeyContext
+// Deprecated
+export type TapiKeyContext = TAPIKEYAuthContext
+export type Toauth2Context = TOAUTH2AuthContext
+export type TbasicAuthContext = TBASICAuthContext
+export type TnoAuthContext = TNONEAuthContext
+export type DEPRECATEDCONTEXT = TapiKeyContext
+// end Deprecated
+
+export type TAuthContext =
+  | TNONEAuthContext
+  | TOAUTH2AuthContext
+  | TBASICAuthContext
+  | TAPIKEYAuthContext
+  | DEPRECATEDCONTEXT
 
 export type TStateData = AxiosResponse<{
   Item: any
