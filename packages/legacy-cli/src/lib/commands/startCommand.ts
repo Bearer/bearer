@@ -7,7 +7,6 @@ const { spawn, execSync } = require('child_process')
 
 import Locator from '../locationProvider'
 
-import { generateSetup } from './generate'
 import startLocalDevelopmentServer from './startLocalDevelopmentServer'
 
 function watchNonTSFiles(watchedPath, destPath): Promise<any> {
@@ -106,7 +105,7 @@ export function prepare(emitter, config, locator: Locator) {
         path.join(locator.buildViewsComponentsDir, 'global')
       )
 
-      await generateSetup({ emitter, locator })
+      // TODO: generate setup on start
 
       // Link non TS files
       const watcher = await watchNonTSFiles(srcViewsDir, buildViewsComponentsDir)
@@ -132,10 +131,6 @@ export function prepare(emitter, config, locator: Locator) {
   }
 }
 
-const ensureSetupComponents = (emitter, locator) => {
-  generateSetup({ emitter, locator })
-}
-
 export const start = (emitter, config, locator: Locator) => async ({ open, install, watcher }) => {
   const { scenarioUuid } = config
 
@@ -149,13 +144,11 @@ export const start = (emitter, config, locator: Locator) => async ({ open, insta
     // start local development server
     const integrationHost = await startLocalDevelopmentServer(emitter, config, locator)
 
-    ensureSetupComponents(emitter, locator)
-
     emitter.emit('start:watchers')
     if (watcher) {
-      fs.watchFile(locator.authConfigPath, { persistent: true, interval: 250 }, () =>
-        ensureSetupComponents(emitter, locator)
-      )
+      fs.watchFile(locator.authConfigPath, { persistent: true, interval: 250 }, () => {
+        // TODO: ensure setup components are up to date
+      })
     }
 
     // Start bearer transpiler phase
