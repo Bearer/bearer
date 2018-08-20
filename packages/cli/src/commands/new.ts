@@ -1,18 +1,19 @@
+import Authentications from '@bearer/types/lib/Authentications'
 import { flags } from '@oclif/command'
 import * as Listr from 'listr'
 import * as path from 'path'
 import * as util from 'util'
-const exec = util.promisify(require('child_process').exec)
 
 import BaseCommand from '../BaseCommand'
-import { AuthType } from '../types'
 
 const authTypes = {
-  [AuthType.OAuth2]: { name: 'OAuth2', value: AuthType.OAuth2 },
-  [AuthType.Basic]: { name: 'Basic Auth', value: AuthType.Basic },
-  [AuthType.ApiKey]: { name: 'API Key', value: AuthType.ApiKey },
-  [AuthType.NoAuth]: { name: 'NoAuth', value: AuthType.NoAuth }
+  [Authentications.OAuth2]: { name: 'OAuth2', value: Authentications.OAuth2 },
+  [Authentications.Basic]: { name: 'Basic Auth', value: Authentications.Basic },
+  [Authentications.ApiKey]: { name: 'API Key', value: Authentications.ApiKey },
+  [Authentications.NoAuth]: { name: 'NoAuth', value: Authentications.NoAuth }
 }
+
+const exec = util.promisify(require('child_process').exec)
 
 export default class New extends BaseCommand {
   static description = 'Generate a new scenario'
@@ -24,7 +25,7 @@ export default class New extends BaseCommand {
     authType: flags.string({
       char: 'a',
       description: 'Authorization type', // help description for flag
-      options: Object.keys(authTypes).map(auth => authTypes[auth as AuthType].value) // only allow the value to be from a discrete set
+      options: Object.keys(authTypes).map(auth => authTypes[auth as Authentications].value) // only allow the value to be from a discrete set
     })
   }
 
@@ -34,7 +35,7 @@ export default class New extends BaseCommand {
     const { args, flags } = this.parse(New)
     try {
       const name: string = args.ScenarioName || (await this.askForName())
-      const authType: AuthType = (flags.authType as AuthType) || (await this.askForAuthType())
+      const authType: Authentications = (flags.authType as Authentications) || (await this.askForAuthType())
       const skipInstall = flags.skipInstall
       const tasks = new Listr([
         {
@@ -90,7 +91,7 @@ export default class New extends BaseCommand {
     return process.cwd()
   }
 
-  async copyFiles(name: string, authType: AuthType) {
+  async copyFiles(name: string, authType: Authentications) {
     await new Promise<boolean>((resolve, reject) => {
       const inDir = path.join(__dirname, '..', '..', 'templates', 'init', authType)
       this.debug(`Input directory: ${inDir}`)
@@ -113,8 +114,8 @@ export default class New extends BaseCommand {
     return name.trim()
   }
 
-  async askForAuthType(): Promise<AuthType> {
-    const { authenticationType } = await this.inquirer.prompt<{ authenticationType: AuthType }>([
+  async askForAuthType(): Promise<Authentications> {
+    const { authenticationType } = await this.inquirer.prompt<{ authenticationType: Authentications }>([
       {
         message: 'What kind of authentication do you want to use?',
         type: 'list',

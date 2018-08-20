@@ -26,6 +26,7 @@
     "@bearer/intents": "^0.55.0",
     "@bearer/templates": "^0.53.1",
     "@bearer/transpiler": "^0.55.0",
+    "@bearer/types": "^0.0.1",
     "@koa/cors": "^2.2.2",
     "amazon-cognito-identity-js": "^2.0.3",
     "archiver": "^2.1.1",

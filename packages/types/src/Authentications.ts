@@ -1,4 +1,4 @@
-const enum Authentications {
+enum Authentications {
   OAuth2 = 'oauth2',
   Basic = 'basicauth',
   ApiKey = 'apikey',
