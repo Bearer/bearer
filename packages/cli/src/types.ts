@@ -1,3 +1,5 @@
+import Authentication from '@bearer/types/lib/Authentications'
+
 export type BearerEnv = 'dev' | 'staging' | 'production'
 
 export type BaseConfig = {
@@ -48,4 +50,8 @@ export type Config = BaseConfig & {
   hasScenarioLinked: boolean
   setScenarioConfig(config: any): void
   storeBearerConfig(config: any): void
+}
+
+export type AuthConfig = {
+  authType: Authentication
 }

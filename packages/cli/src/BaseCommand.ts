@@ -6,7 +6,7 @@ import * as colors from 'colors/safe'
 import * as copy from 'copy-template-dir'
 import * as inquirer from 'inquirer'
 
-import { Config } from './types'
+import { AuthConfig, Config } from './types'
 import Locator from './utils/locator'
 import setupConfig from './utils/setupConfig'
 
@@ -55,6 +55,10 @@ export default abstract class extends Command {
     this.bearerConfig = setupConfig()
     // const { flags } = this.parse(this.constructor as any)
     // this.logLevel = flags.logLevel
+  }
+
+  get scenarioAuthConfig(): AuthConfig {
+    return require(this.locator.authConfigPath)
   }
 
   /**

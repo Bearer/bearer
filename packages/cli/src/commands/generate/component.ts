@@ -1,7 +1,9 @@
+import Authentications from '@bearer/types/lib/Authentications'
 import { flags } from '@oclif/command'
 
 import BaseCommand from '../../BaseCommand'
 import { RequireScenarioFolder } from '../../utils/decorators'
+import { copyFiles } from '../../utils/helpers'
 
 enum TComponent {
   BLANK = 'blank',
@@ -24,9 +26,31 @@ export default class GenerateComponent extends BaseCommand {
     const { args, flags } = this.parse(GenerateComponent)
     const type: TComponent = (flags.type as TComponent) || (await this.askForComponentType())
     const name: string = args.name || (await this.askForName())
-    // copy files
-    // display create (same as init)
-    this.success(`Generated component: name: ${name} | type: ${type}`)
+    const outDir = type === TComponent.ROOT ? this.locator.srcViewsDir : this.locator.srcViewsDirResource('components')
+
+    try {
+      await copyFiles(
+        this,
+        `templates/generate/${type}Component`,
+        outDir,
+        this.getVars(name, this.scenarioAuthConfig.authType)
+      )
+      this.success(`Generated component: name: ${name} | type: ${type}`)
+    } catch (e) {
+      this.error(e)
+    }
+  }
+
+  getVars(name: string, authType: Authentications) {
+    const componentName = this.case.pascal(name)
+    return {
+      fileName: name,
+      componentName,
+      componentClassName: componentName, // it gives more meaning within templates
+      componentTagName: this.case.kebab(componentName),
+      groupName: this.case.kebab(componentName),
+      withAuthScreen: authType === Authentications.OAuth2 ? '<bearer-navigator-auth-screen />' : null
+    }
   }
 
   async askForComponentType(): Promise<TComponent> {
