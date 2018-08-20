@@ -56,4 +56,18 @@ export default abstract class extends Command {
     // const { flags } = this.parse(this.constructor as any)
     // this.logLevel = flags.logLevel
   }
+
+  /**
+   * Interactivity helpers
+   */
+
+  protected async askForString(message: string): Promise<string> {
+    const { string } = await this.inquirer.prompt<{ string: string }>([
+      {
+        message: `${message}:`,
+        name: 'name'
+      }
+    ])
+    return string
+  }
 }
