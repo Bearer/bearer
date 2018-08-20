@@ -54,4 +54,5 @@ export type Config = BaseConfig & {
 
 export type AuthConfig = {
   authType: Authentication
+  setupViews?: Array<any>
 }

@@ -6,8 +6,6 @@ import BaseCommand from '../../BaseCommand'
 import { RequireScenarioFolder } from '../../utils/decorators'
 import { copyFiles } from '../../utils/helpers'
 
-const setupKey = 'setupViews'
-
 export default class GenerateSetup extends BaseCommand {
   static description = 'Generate a Bearer Setup'
   static hidden = true
@@ -22,7 +20,7 @@ export default class GenerateSetup extends BaseCommand {
   async run() {
     const { flags } = this.parse(GenerateSetup)
     if (flags.force || !setupExists(this.locator.srcViewsDir)) {
-      const fields = this.scenarioAuthConfig[setupKey]
+      const fields = this.scenarioAuthConfig.setupViews
       if (fields && fields.length) {
         try {
           await copyFiles(
@@ -36,7 +34,7 @@ export default class GenerateSetup extends BaseCommand {
           this.error(e)
         }
       } else {
-        this.warn(`No ${setupKey} key found within auth.config.json file. skipping`)
+        this.warn(`No setupViews key found within auth.config.json file. skipping`)
       }
     } else {
       this.warn('Setup files already exists, use --force flag to overwrite existing ones.')
