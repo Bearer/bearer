@@ -9,6 +9,7 @@
   "bugs": "https://github.com/Bearer/bearer/issues",
   "dependencies": {
     "@bearer/bearer-cli": "^0.55.0",
+    "@bearer/types": "^0.0.1",
     "@oclif/command": "^1",
     "@oclif/config": "^1",
     "@oclif/plugin-autocomplete": "^0.1.0",
