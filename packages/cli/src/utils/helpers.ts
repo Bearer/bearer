@@ -9,9 +9,10 @@ export function copyFiles(
   outPutDirectory: string,
   vars: any
 ): Promise<boolean> {
+  const base = process.cwd()
   function printFiles(files: Array<string>) {
     files.forEach(file => {
-      command.log(command.colors.gray(`    create: `) + command.colors.white(file.replace(outPutDirectory + '/', '')))
+      command.log(command.colors.gray(`    create: `) + command.colors.white(file.replace(base + '/', '')))
     })
     command.log('\n')
   }
