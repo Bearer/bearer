@@ -40,7 +40,8 @@ export default abstract class extends Command {
   }
 
   static flags = {
-    help: flags.help({ char: 'h' })
+    help: flags.help({ char: 'h' }),
+    path: flags.string({})
     // logLevel: flags.string({ options: ['error', 'warn', 'info', 'debug'], default: 'info' })
   }
 
@@ -53,9 +54,9 @@ export default abstract class extends Command {
   // protected logLevel: any
 
   async init() {
-    this.bearerConfig = setupConfig()
-    // const { flags } = this.parse(this.constructor as any)
-    // this.logLevel = flags.logLevel
+    const { flags } = this.parse(this.constructor as any)
+    const path = flags.path || undefined
+    this.bearerConfig = setupConfig(path)
   }
 
   get scenarioAuthConfig(): AuthConfig {

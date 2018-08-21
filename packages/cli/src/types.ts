@@ -37,6 +37,7 @@ export type ScenarioConfig = {
 }
 
 export type Config = BaseConfig & {
+  runningPath: string
   isYarnInstalled: boolean
   isScenarioLocation: boolean
   command: 'yarn' | 'npm'

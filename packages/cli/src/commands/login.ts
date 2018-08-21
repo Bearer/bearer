@@ -7,7 +7,7 @@ export default class Login extends BaseCommand {
   static description = 'Login to Bearer platform'
 
   static flags = {
-    help: flags.help({ char: 'h' }),
+    ...BaseCommand.flags,
     email: flags.string({ char: 'e' })
   }
 

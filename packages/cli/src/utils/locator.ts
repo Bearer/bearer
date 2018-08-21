@@ -5,7 +5,7 @@ import { Config } from '../types'
 export default class LocationProvider {
   bearerDir: string = ''
   scenarioRoot: string = ''
-  scenarioRc: string
+  scenarioRc!: string
 
   constructor(private readonly config: Config) {
     this.scenarioRc = this.config.scenarioConfig.config
