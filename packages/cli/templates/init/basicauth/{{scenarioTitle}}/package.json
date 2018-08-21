@@ -15,13 +15,13 @@
     "test.watch": "jest --watch --no-cache"
   },
   "dependencies": {
-    "@bearer/core": "latest",
-    "@bearer/intents": "latest",
-    "@bearer/ui": "latest",
+    "@bearer/core": "{{bearerTagVersion}}",
+    "@bearer/intents": "{{bearerTagVersion}}",
+    "@bearer/ui": "{{bearerTagVersion}}",
     "axios": "^0.18.0"
   },
   "devDependencies": {
-    "@bearer/cli": "latest",
+    "@bearer/cli": "{{bearerTagVersion}}",
     "@types/jest": "latest",
     "@types/node": "latest",
     "jest": "latest"

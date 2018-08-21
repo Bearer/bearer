@@ -82,7 +82,8 @@ export default class New extends BaseCommand {
   getVars = (name: string) => ({
     scenarioTitle: name,
     componentName: this.case.pascal(name),
-    componentTagName: this.case.kebab(name)
+    componentTagName: this.case.kebab(name),
+    bearerTagVersion: 'beta1'
   })
 
   get copyDestFolder(): string {
