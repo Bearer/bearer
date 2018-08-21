@@ -1,44 +1,32 @@
 import { test } from '@oclif/test'
 import { expect } from 'fancy-test'
-import * as sinon from 'sinon'
 
-import * as setup from '../../../src/utils/setupConfig'
+import { ensureBearerStructure } from '../../helpers/setup'
 
 describe('Generate', () => {
-  let stub: any
-  let update: any
-
-  afterEach(() => {
-    ;(setup.default as any).restore()
-    stub.restore()
+  let bearerPath = ensureBearerStructure()
+  beforeEach(done => {
+    ensureBearerStructure()
+    done()
   })
-
   describe('generate:intent', () => {
-    beforeEach(() => {
-      update = sinon.spy()
-      stub = sinon.stub(setup, 'default')
-      stub.returns({
-        setScenarioConfig: update,
-        isScenarioLocation: true
-      })
-    })
-
     test
       .stdout()
-      .command(['generate:intent', 'FetchDataIntent', '-t', 'fetch'])
+      .command(['generate:intent', 'FetchDataIntent', '-t', 'fetch', '--path', bearerPath])
       .it('Fetch intent', ctx => {
         expect(ctx.stdout).to.contain('Generated intent: name: FetchDataIntent type: FetchData')
       })
 
     test
       .stdout()
-      .command(['generate:intent', 'SaveDataIntent', '-t', 'save'])
+      .command(['generate:intent', 'SaveDataIntent', '-t', 'save', '--path', bearerPath])
       .it('Save Intent', ctx => {
         expect(ctx.stdout).to.contain('Generated intent: name: SaveDataIntent type: SaveState')
       })
+
     test
       .stdout()
-      .command(['generate:intent', 'RetrieveDataIntent', '-t', 'retrieve'])
+      .command(['generate:intent', 'RetrieveDataIntent', '-t', 'retrieve', '--path', bearerPath])
       .it('Retrieve Intent', ctx => {
         expect(ctx.stdout).to.contain('Generated intent: name: RetrieveDataIntent type: RetrieveState')
       })

@@ -1,31 +1,20 @@
 import { test } from '@oclif/test'
 import { expect } from 'fancy-test'
-import * as sinon from 'sinon'
 
-import * as setup from '../../../src/utils/setupConfig'
+import { ensureBearerStructure } from '../../helpers/setup'
 
 describe('Generate', () => {
-  let stub: any
-  let update: any
+  let bearerPath = ensureBearerStructure()
 
-  afterEach(() => {
-    ;(setup.default as any).restore()
-    stub.restore()
+  beforeEach(done => {
+    ensureBearerStructure()
+    done()
   })
 
   describe('generate:setup', () => {
-    beforeEach(() => {
-      update = sinon.spy()
-      stub = sinon.stub(setup, 'default')
-      stub.returns({
-        setScenarioConfig: update,
-        isScenarioLocation: true
-      })
-    })
-
     test
       .stdout()
-      .command(['generate:setup', '--force'])
+      .command(['generate:setup', '--force', '--path', bearerPath])
       .it('Generate setup files intent', ctx => {
         expect(ctx.stdout).to.contain('Setup components successfully generated!')
       })
