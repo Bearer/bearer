@@ -1,12 +1,9 @@
-import { apiKey, basicAuth, noAuth, oauth2 } from '../src/index'
-
-const intents = {
-  apiKey, basicAuth, noAuth, oauth2
-}
+import templates from '../src/index'
+import Authentications from "@bearer/types/lib/Authentications";
 
 describe('Templates', () => {
-  Object.keys(intents).forEach((key) => {
-    const intent = intents[key]
+  Object.values(Authentications).forEach((key) => {
+    const intent = templates[key]
 
     describe(key, () => {
       it('has SaveState', () => {
