@@ -2,6 +2,7 @@ import { flags } from '@oclif/command'
 
 import BaseLegacyCommand from '../BaseLegacyCommand'
 
+import GenerateSetup from './generate/setup'
 const noOpen = 'no-open'
 const noInstall = 'no-install'
 const noWatcher = 'no-watcher'
@@ -30,6 +31,9 @@ export default class Start extends BaseLegacyCommand {
     if (flags[noWatcher]) {
       cmdArgs.push(`--${noWatcher}`)
     }
+
+    await GenerateSetup.run([])
+
     this.runLegacy(['start', ...cmdArgs])
   }
 }
