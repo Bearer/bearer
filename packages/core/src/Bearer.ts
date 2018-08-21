@@ -136,7 +136,7 @@ class Bearer {
   }
 
   initSession() {
-    if (window === undefined && !document.querySelector(`#${IFRAME_NAME}`)) {
+    if (window !== undefined && !document.querySelector(`#${IFRAME_NAME}`)) {
       postRobot.on(Events.SESSION_INITIALIZED, event => {
         this.sessionInitialized(event)
       })
