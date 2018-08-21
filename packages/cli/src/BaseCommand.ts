@@ -71,7 +71,7 @@ export default abstract class extends Command {
     const { string } = await this.inquirer.prompt<{ string: string }>([
       {
         message: `${message}:`,
-        name: 'name'
+        name: 'string'
       }
     ])
     return string
