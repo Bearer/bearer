@@ -17,7 +17,7 @@ export default class GenerateIntent extends BaseCommand {
   static description = 'Generate a Bearer Intent'
 
   static flags = {
-    help: flags.help({ char: 'h' }),
+    ...BaseCommand.flags,
     type: flags.string({ char: 't', options: types.map(t => t.name) })
   }
 
@@ -41,6 +41,7 @@ export default class GenerateIntent extends BaseCommand {
     try {
       const vars = this.getVars(name, type, authType)
       await copyFiles(this, `generate/intent`, this.locator.srcIntentsDir, vars)
+      // TODO: add a nicer display
       this.success(`Generated intent: name: ${name} type: ${type} `)
     } catch (e) {
       this.error(e)

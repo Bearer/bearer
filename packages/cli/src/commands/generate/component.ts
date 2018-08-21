@@ -15,7 +15,7 @@ export default class GenerateComponent extends BaseCommand {
   static description = 'Generate a Bearer component'
 
   static flags = {
-    help: flags.help({ char: 'h' }),
+    ...BaseCommand.flags,
     type: flags.string({ char: 't', options: Object.values(TComponent) })
   }
 
@@ -30,6 +30,7 @@ export default class GenerateComponent extends BaseCommand {
 
     try {
       await copyFiles(this, `generate/${type}Component`, outDir, this.getVars(name, this.scenarioAuthConfig.authType))
+      // TODO: add a nicer display
       this.success(`Generated component: name: ${name} | type: ${type}`)
     } catch (e) {
       this.error(e)

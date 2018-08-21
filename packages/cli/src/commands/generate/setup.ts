@@ -10,6 +10,7 @@ export default class GenerateSetup extends BaseCommand {
   static description = 'Generate a Bearer Setup'
   static hidden = true
   static flags = {
+    ...BaseCommand.flags,
     help: flags.help({ char: 'h' }),
     force: flags.boolean({})
   }

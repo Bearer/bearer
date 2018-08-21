@@ -1,5 +1,5 @@
 import * as serviceClient from '@bearer/bearer-cli/dist/src/lib/serviceClient'
-import Command from '@oclif/command'
+import Command, { flags } from '@oclif/command'
 import * as Case from 'case'
 import cliUx from 'cli-ux'
 import * as colors from 'colors/safe'
@@ -40,6 +40,7 @@ export default abstract class extends Command {
   }
 
   static flags = {
+    help: flags.help({ char: 'h' })
     // logLevel: flags.string({ options: ['error', 'warn', 'info', 'debug'], default: 'info' })
   }
 

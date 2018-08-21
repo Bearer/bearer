@@ -1,5 +1,3 @@
-import { flags } from '@oclif/command'
-
 import BaseCommand from '../BaseCommand'
 import { RequireScenarioFolder } from '../utils/decorators'
 
@@ -7,7 +5,7 @@ export default class Link extends BaseCommand {
   static description = 'Link your local scenario to a remote one'
 
   static flags = {
-    help: flags.help({ char: 'h' })
+    ...BaseCommand.flags
   }
 
   static args = [{ name: 'Scenario_Identifier', required: true }]

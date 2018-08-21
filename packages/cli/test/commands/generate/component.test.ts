@@ -4,7 +4,7 @@ import * as sinon from 'sinon'
 
 import * as setup from '../../../src/utils/setupConfig'
 
-describe('Generare', () => {
+describe('Generate', () => {
   let stub: any
   let update: any
 
