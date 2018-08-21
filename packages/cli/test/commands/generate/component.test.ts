@@ -14,20 +14,20 @@ describe('Generate', () => {
       .stdout()
       .command(['generate:component', 'blankComponent', '-t', 'blank', '--path', bearerPath])
       .it('Blank component', ctx => {
-        expect(ctx.stdout).to.contain('Generated component: name: blankComponent | type: blank')
+        expect(ctx.stdout).to.contain('Component generated')
       })
 
     test
       .stdout()
       .command(['generate:component', 'collectionComponent', '-t', 'collection', '--path', bearerPath])
       .it('Collection Intent', ctx => {
-        expect(ctx.stdout).to.contain('Generated component: name: collectionComponent | type: collection')
+        expect(ctx.stdout).to.contain('Component generated')
       })
     test
       .stdout()
       .command(['generate:component', 'rootComponent', '-t', 'root', '--path', bearerPath])
       .it('Root Intent', ctx => {
-        expect(ctx.stdout).to.contain('Generated component: name: rootComponent | type: root')
+        expect(ctx.stdout).to.contain('Component generated')
       })
   })
 })

@@ -14,21 +14,21 @@ describe('Generate', () => {
       .stdout()
       .command(['generate:intent', 'FetchDataIntent', '-t', 'fetch', '--path', bearerPath])
       .it('Fetch intent', ctx => {
-        expect(ctx.stdout).to.contain('Generated intent: name: FetchDataIntent type: FetchData')
+        expect(ctx.stdout).to.contain('Intent generated')
       })
 
     test
       .stdout()
       .command(['generate:intent', 'SaveDataIntent', '-t', 'save', '--path', bearerPath])
       .it('Save Intent', ctx => {
-        expect(ctx.stdout).to.contain('Generated intent: name: SaveDataIntent type: SaveState')
+        expect(ctx.stdout).to.contain('Intent generated')
       })
 
     test
       .stdout()
       .command(['generate:intent', 'RetrieveDataIntent', '-t', 'retrieve', '--path', bearerPath])
       .it('Retrieve Intent', ctx => {
-        expect(ctx.stdout).to.contain('Generated intent: name: RetrieveDataIntent type: RetrieveState')
+        expect(ctx.stdout).to.contain('Intent generated')
       })
   })
 })

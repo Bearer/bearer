@@ -19,19 +19,19 @@ export default class GenerateComponent extends BaseCommand {
     type: flags.string({ char: 't', options: Object.values(TComponent) })
   }
 
-  static args = [{ name: 'name', required: true }]
+  static args = [{ name: 'name' }]
 
   @RequireScenarioFolder()
   async run() {
     const { args, flags } = this.parse(GenerateComponent)
     const type: TComponent = (flags.type as TComponent) || (await this.askForComponentType())
-    const name: string = args.name || (await this.askForName())
+    const name: string = args.name || (await this.askForString(type === TComponent.ROOT ? 'Group name' : 'Name'))
     const outDir = type === TComponent.ROOT ? this.locator.srcViewsDir : this.locator.srcViewsDirResource('components')
 
     try {
       await copyFiles(this, `generate/${type}Component`, outDir, this.getVars(name, this.scenarioAuthConfig.authType))
       // TODO: add a nicer display
-      this.success(`Generated component: name: ${name} | type: ${type}`)
+      this.success(`\nComponent generated`)
     } catch (e) {
       this.error(e)
     }
@@ -59,10 +59,6 @@ export default class GenerateComponent extends BaseCommand {
       }
     ])
     return type
-  }
-
-  async askForName(): Promise<string> {
-    return this.askForString('Name')
   }
 }
 

@@ -26,7 +26,6 @@ export default class GenerateIntent extends BaseCommand {
   @RequireScenarioFolder()
   async run() {
     const { args, flags } = this.parse(GenerateIntent)
-    this.log('Generating intent:')
     const type: IntentType = !flags.type ? await this.askForType() : types.find(t => t.name === flags.type)!.value
     const name = args.name || (await this.askForName())
     const authType = this.scenarioAuthConfig.authType
@@ -41,8 +40,8 @@ export default class GenerateIntent extends BaseCommand {
     try {
       const vars = this.getVars(name, type, authType)
       await copyFiles(this, `generate/intent`, this.locator.srcIntentsDir, vars)
+      this.success(`Intent generated`)
       // TODO: add a nicer display
-      this.success(`Generated intent: name: ${name} type: ${type} `)
     } catch (e) {
       this.error(e)
     }
