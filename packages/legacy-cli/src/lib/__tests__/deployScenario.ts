@@ -24,7 +24,7 @@ describe('deployViews', () => {
       expect.assertions(1)
       const locator = {} as any
       const config = {
-        scenarioConfig: { scenarioTitle: 'test', orgId: '4l1c3' },
+        scenarioConfig: { scenarioId: 'test', orgId: '4l1c3' },
         rootPathRc: './tmp/.test'
       } as Config
       await expect(deployScenario.deployViews({ emit }, config, locator)).resolves.toEqual({})

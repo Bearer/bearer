@@ -31,8 +31,8 @@ module.exports = url => {
     signedUrls: (token, Keys, type) =>
       requestPromise(url, 'POST', 'signed-urls', { Keys, type }, { Authorization: token }),
     signedUrl: (token, Key, type) => requestPromise(url, 'POST', 'signed-url', { Key, type }, { Authorization: token }),
-    deployScenario: (token, eventName, OrgId, scenarioTitle) =>
-      requestPromise(url, 'POST', 'user-notifications', { eventName, OrgId, scenarioTitle }, { Authorization: token }),
+    deployScenario: (token, eventName, OrgId, scenarioId) =>
+      requestPromise(url, 'POST', 'user-notifications', { eventName, OrgId, scenarioId }, { Authorization: token }),
     upload: (content, headers = {}) =>
       new Promise((resolve, reject) => {
         request(

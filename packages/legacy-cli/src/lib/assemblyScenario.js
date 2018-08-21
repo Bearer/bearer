@@ -3,6 +3,8 @@ const serviceClient = require('./serviceClient')
 module.exports = (
   emitter,
   {
+    scenarioId,
+    scenarioTitle,
     scenarioUuid,
     orgId,
     DeploymentUrl,
@@ -17,7 +19,12 @@ module.exports = (
   emitter.emit('assemblyScenario:start')
 
   return deploymentClient
-    .assemblyScenario(token, { bucketKey: scenarioUuid, OrgId: orgId, scenarioTitle: scenarioUuid })
+    .assemblyScenario(token, {
+      bucketKey: scenarioUuid,
+      OrgId: orgId,
+      scenarioId: scenarioId,
+      scenarioTitle: scenarioTitle
+    })
     .then(response => {
       if (response.statusCode === 201) {
         emitter.emit('assemblyScenario:success', response.body)
