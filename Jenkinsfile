@@ -44,12 +44,9 @@ pipeline {
         }
         stage("Deploy") {
             steps {
-                withCredentials([usernamePassword(credentialsId: 'a4aee620-271b-4877-8089-6bcf70c37c2a', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
-                    container("node") {
-                        sh(".jenkins/deploy.sh")
-                    }
+                container("node") {
+                    sh(".jenkins/deploy.sh")
                 }
-
             }
         }
     }
