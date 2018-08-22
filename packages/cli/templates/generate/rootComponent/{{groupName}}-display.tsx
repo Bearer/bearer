@@ -12,6 +12,6 @@ import '@bearer/ui'
 })
 export class {{componentClassName}}Display {
   render() {
-    return <bearer-alert kind="success">🚀 My {{ componentName }} Display component 🚀</bearer-alert>
+    return <bearer-alert kind="success">🚀 My {{componentName}} Display component 🚀</bearer-alert>
   }
 }
