@@ -10,6 +10,7 @@ pipeline {
     environment { 
         AWS_ACCESS = credentials('aws-identity') 
         NPM_TOKEN =  credentials("npm-token")
+        JENKINS_PRIVATE_KEY = credentials("jenkins-github-ssh-private")
     }
 
     options {
@@ -43,7 +44,12 @@ pipeline {
         }
         stage("Deploy") {
             steps {
-                echo "Deploy the package"
+                withCredentials([usernamePassword(credentialsId: 'a4aee620-271b-4877-8089-6bcf70c37c2a', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
+                    container("node") {
+                        sh(".jenkins/deploy.sh")
+                    }
+                }
+
             }
         }
     }
