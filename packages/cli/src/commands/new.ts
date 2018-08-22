@@ -1,10 +1,16 @@
 import Authentications from '@bearer/types/lib/Authentications'
 import { flags } from '@oclif/command'
+import * as fs from 'fs-extra'
 import * as Listr from 'listr'
 import * as path from 'path'
 import * as util from 'util'
 
 import BaseCommand from '../BaseCommand'
+import { copyFiles, printFiles } from '../utils/helpers'
+
+import GenerateComponent from './generate/component'
+import GenerateSetup from './generate/setup'
+import GenerateSpec from './generate/spec'
 
 const authTypes = {
   [Authentications.OAuth2]: { name: 'OAuth2', value: Authentications.OAuth2 },
@@ -30,20 +36,47 @@ export default class New extends BaseCommand {
   }
 
   static args = [{ name: 'ScenarioName' }]
+  private destinationFolder!: string
 
   async run() {
     const { args, flags } = this.parse(New)
     try {
-      const name: string = args.ScenarioName || (await this.askForName())
+      const name: string = args.ScenarioName || (await this.askForString('Scenario name:'))
       const authType: Authentications = (flags.authType as Authentications) || (await this.askForAuthType())
       const skipInstall = flags.skipInstall
+
       const tasks = new Listr([
         {
-          title: 'Generating scenario files',
-          task: (_ctx: any, _task: any) => {
-            this.log('Generate files:')
-            return this.copyFiles(name, authType)
+          title: 'Generating scenario structure',
+          task: async (ctx: any) => {
+            try {
+              const files = await this.createStructure(name)
+              ctx.files = files
+              return true
+            } catch (e) {
+              this.error(e)
+            }
           }
+        },
+        {
+          title: 'Create auth files',
+          task: async (ctx: any, _task: any) => {
+            const files = await this.createAuthFiles(name, authType)
+            ctx.files = [...ctx.files, ...files]
+          }
+        },
+        {
+          title: 'Create setup files',
+          task: (_ctx: any, _task: any) => GenerateSetup.run(['--path', this.copyDestFolder, '--silent'])
+        },
+        {
+          title: 'Create scenario specification file',
+          task: (_ctx: any, _task: any) => GenerateSpec.run(['--path', this.copyDestFolder, '--silent'])
+        },
+        {
+          title: 'Create intial components',
+          task: (_ctx: any, _task: any) =>
+            GenerateComponent.run(['feature', '--type', 'root', '--path', this.copyDestFolder, '--silent'])
         },
         {
           title: 'npm/yarn lookup',
@@ -61,22 +94,25 @@ export default class New extends BaseCommand {
         {
           title: 'Installing scenario dependencies with yarn',
           enabled: (ctx: any) => ctx.yarn === true && !skipInstall,
-          task: async (_ctx: any, _task: any) => exec('yarn install', { cwd: path.join(this.copyDestFolder, name) })
+          task: async (_ctx: any, _task: any) => exec('yarn install', { cwd: this.copyDestFolder })
         },
         {
           title: 'Installing scenario dependencies with npm',
           enabled: (ctx: any) => ctx.yarn === false && !skipInstall,
-          task: () => exec('yarn install', { cwd: path.join(this.copyDestFolder, name) })
+          task: async () => exec('yarn install', { cwd: this.copyDestFolder })
         }
       ])
-      await tasks.run()
+
+      const { files } = await tasks.run()
+      printFiles(this, files)
+
       this.success(`Scenario initialized, name: ${name}, authentication type: ${authTypes[authType].name}`)
       this.log("\nWhat's next?\n")
       this.log('* read the bearer documentation at https://docs.bearer.sh\n')
       this.log(`* start your local development environement by running:\n`)
       this.log(this.colors.bold(`   cd ${name} && bearer start`))
     } catch (e) {
-      this.error('Could not generate new scenario' + e.toString())
+      this.error(e)
     }
   }
 
@@ -88,30 +124,19 @@ export default class New extends BaseCommand {
   })
 
   get copyDestFolder(): string {
-    return process.cwd()
+    return path.join(process.cwd(), this.destinationFolder)
   }
 
-  async copyFiles(name: string, authType: Authentications) {
-    await new Promise<boolean>((resolve, reject) => {
-      const inDir = path.join(__dirname, '..', '..', 'templates', 'init', authType)
-      this.debug(`Input directory: ${inDir}`)
-      this.copy(inDir, this.copyDestFolder, this.getVars(name), (error, files) => {
-        if (error) {
-          this.error(error)
-          reject(false)
-        } else {
-          this.printFiles(files)
-          resolve(true)
-        }
-      })
-    })
+  createStructure(name: string): Promise<Array<string>> {
+    this.destinationFolder = name
+    if (fs.existsSync(this.copyDestFolder)) {
+      return Promise.reject(this.colors.bold('Destination already exists: ') + this.copyDestFolder)
+    }
+    return copyFiles(this, path.join('init', 'structure'), this.copyDestFolder, this.getVars(name), true)
   }
 
-  async askForName(): Promise<string> {
-    const { name } = await this.inquirer.prompt<{ name: string }>([
-      { message: 'Scenario name:', type: 'input', name: 'name' }
-    ])
-    return name.trim()
+  createAuthFiles(name: string, authType: Authentications): Promise<Array<string>> {
+    return copyFiles(this, path.join('init', authType), this.copyDestFolder, this.getVars(name), true)
   }
 
   async askForAuthType(): Promise<Authentications> {
@@ -124,13 +149,5 @@ export default class New extends BaseCommand {
       }
     ])
     return authenticationType
-  }
-
-  printFiles(files: Array<string>) {
-    const dest = this.copyDestFolder
-    files.forEach(file => {
-      this.log(this.colors.gray(`    create: `) + this.colors.white(file.replace(dest + '/', '')))
-    })
-    this.log('\n')
   }
 }
