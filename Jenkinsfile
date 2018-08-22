@@ -9,6 +9,7 @@ pipeline {
 
     environment { 
         AWS_ACCESS = credentials('aws-identity') 
+        NPM_TOKEN =  credentials("npm-token")
     }
 
     options {
@@ -38,7 +39,7 @@ pipeline {
         }
         stage("deploy") {
             steps {
-                sh "Deploy the package"
+                echo "Deploy the package"
             }
         }
     }
