@@ -28,6 +28,7 @@ pipeline {
             steps {
                 container("node") {
                     ansiColor('xterm') {
+                        sh "ls -la"
                         sh ".jenkins/build.sh"
                      }
                 }
@@ -37,6 +38,7 @@ pipeline {
             steps {
                 container("node") {
                     ansiColor('xterm') {
+                        sh "ls -la"
                         sh ".jenkins/test.sh"
                     }
                 }
@@ -45,7 +47,10 @@ pipeline {
         stage("Deploy") {
             steps {
                 container("node") {
-                    sh(".jenkins/deploy.sh")
+                    ansiColor('xterm') {
+                        sh "ls -la"
+                        sh(".jenkins/deploy.sh")
+                    }
                 }
             }
         }
