@@ -23,26 +23,25 @@ pipeline {
                 checkout scm
             }
         }
-        stage("build") {
+        stage("Build") {
             steps {
                 container("node") {
                     ansiColor('xterm') {
-                        sh "ls -l"
                         sh ".jenkins/build.sh"
                      }
                 }
             }
         }
-        stage('test') {
+        stage('Test') {
             steps {
                 container("node") {
                     ansiColor('xterm') {
-                        sh "ls -l"
+                        sh ".jenkins/test.sh"
                     }
                 }
             }
         }
-        stage("deploy") {
+        stage("Deploy") {
             steps {
                 echo "Deploy the package"
             }
