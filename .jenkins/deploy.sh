@@ -2,6 +2,7 @@
 
 ARG="${@:---conventional-commits --yes}"
 
+ls -l ~/
 
 git config --global user.email jenkins@bearer.sh
 git config --global user.name jenkins-br
