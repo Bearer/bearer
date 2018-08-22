@@ -6,8 +6,8 @@ ARG="${@:---conventional-commits --yes}"
 git config --global user.email jenkins@bearer.sh
 git config --global user.name jenkins-br
 
-if [ ! -f ~/.npmrc ]; then
-  echo "Missing ~/.npmrc file"
+if [ ! -f .npmrc ]; then
+  echo "Missing .npmrc file"
   exit 1
 fi
 
