@@ -25,7 +25,12 @@ pipeline {
         }
         stage("build") {
             steps {
-                sh ".jenkins/build.sh"
+                container("node") {
+                    ansiColor('xterm') {
+                        sh "ls -l"
+                        sh ".jenkins/build.sh"
+                     }
+                }
             }
         }
         stage('test') {
