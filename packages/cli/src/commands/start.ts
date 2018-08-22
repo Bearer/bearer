@@ -3,6 +3,7 @@ import { flags } from '@oclif/command'
 import BaseLegacyCommand from '../BaseLegacyCommand'
 
 import GenerateSetup from './generate/setup'
+import GenerateSpec from './generate/spec'
 const noOpen = 'no-open'
 const noInstall = 'no-install'
 const noWatcher = 'no-watcher'
@@ -33,6 +34,7 @@ export default class Start extends BaseLegacyCommand {
     }
 
     await GenerateSetup.run(['--silent'])
+    await GenerateSpec.run(['--silent'])
 
     this.runLegacy(['start', ...cmdArgs])
   }

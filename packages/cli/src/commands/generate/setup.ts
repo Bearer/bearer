@@ -11,7 +11,6 @@ export default class GenerateSetup extends BaseCommand {
   static hidden = true
   static flags = {
     ...BaseCommand.flags,
-    help: flags.help({ char: 'h' }),
     force: flags.boolean({})
   }
 
@@ -38,7 +37,7 @@ export default class GenerateSetup extends BaseCommand {
         this.warn(`No setupViews key found within auth.config.json file. skipping`)
       }
     } else {
-      this.warn('Setup files already exists, use --force flag to overwrite existing ones.')
+      this.warn('Setup files already exist, use --force flag to overwrite existing ones.')
     }
   }
 
