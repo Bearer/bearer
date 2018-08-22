@@ -20,14 +20,16 @@ export default class GenerateIndex extends BaseCommand {
 
   @RequireScenarioFolder()
   async run() {
+    const { flags } = this.parse(GenerateIndex)
+    const pathParams = flags.path ? ['--path', flags.path] : []
     const type = await this.askForType()
 
     switch (type) {
       case TType.Intent: {
-        return GenerateIntent.run([])
+        return GenerateIntent.run([...pathParams])
       }
       case TType.Component: {
-        return GenerateComponent.run([])
+        return GenerateComponent.run([...pathParams])
       }
     }
   }
