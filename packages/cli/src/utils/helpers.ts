@@ -21,7 +21,9 @@ export function copyFiles(
       if (err) {
         reject(err)
       } else {
-        printFiles(createdFiles)
+        if (!command.silent) {
+          printFiles(createdFiles)
+        }
         resolve(true)
       }
     })

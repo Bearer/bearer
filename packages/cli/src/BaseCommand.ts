@@ -39,16 +39,34 @@ export default abstract class extends Command {
     return serviceClient(this.bearerConfig.IntegrationServiceUrl)
   }
 
+  get scenarioAuthConfig(): AuthConfig {
+    return require(this.locator.authConfigPath)
+  }
+
   static flags = {
     help: flags.help({ char: 'h' }),
-    path: flags.string({})
+    path: flags.string({}),
+    silent: flags.boolean({})
     // logLevel: flags.string({ options: ['error', 'warn', 'info', 'debug'], default: 'info' })
   }
 
   bearerConfig!: Config
+  silent: boolean = false
 
   success(message: string) {
     this.log(this.colors.green(message))
+  }
+
+  log(_message?: string, ..._args: any[]) {
+    if (!this.silent) {
+      super.log.apply(this, arguments)
+    }
+  }
+
+  warn(_input: string | Error) {
+    if (!this.silent) {
+      super.warn.apply(this, arguments)
+    }
   }
 
   // protected logLevel: any
@@ -56,11 +74,8 @@ export default abstract class extends Command {
   async init() {
     const { flags } = this.parse(this.constructor as any)
     const path = flags.path || undefined
+    this.silent = flags.silent
     this.bearerConfig = setupConfig(path)
-  }
-
-  get scenarioAuthConfig(): AuthConfig {
-    return require(this.locator.authConfigPath)
   }
 
   /**

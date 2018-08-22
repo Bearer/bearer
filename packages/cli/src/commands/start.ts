@@ -32,7 +32,7 @@ export default class Start extends BaseLegacyCommand {
       cmdArgs.push(`--${noWatcher}`)
     }
 
-    await GenerateSetup.run([])
+    await GenerateSetup.run(['--silent'])
 
     this.runLegacy(['start', ...cmdArgs])
   }
