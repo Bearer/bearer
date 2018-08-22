@@ -15,7 +15,7 @@ export default class Login extends BaseCommand {
 
   async run() {
     const { flags } = this.parse(Login)
-    const email = flags.email || (await this.askEmail())
+    const email = flags.email || (await this.askForString('Enter your email'))
     const token = await this.askToken()
     this.ux.action.start('Logging you in')
     const status = await this.logUser(email, token)
@@ -51,16 +51,6 @@ export default class Login extends BaseCommand {
       this.error(e)
       return 'An error occured'
     }
-  }
-
-  async askEmail(): Promise<string> {
-    const { email } = await this.inquirer.prompt<{ email: string }>([
-      {
-        message: 'Enter your email:',
-        name: 'email'
-      }
-    ])
-    return email
   }
 
   async askToken(): Promise<string> {
