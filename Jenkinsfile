@@ -28,8 +28,8 @@ pipeline {
             steps {
                 container("node") {
                     ansiColor('xterm') {
-                        sh "ls -la"
                         sh ".jenkins/build.sh"
+                        sh "ls -la"
                      }
                 }
             }
