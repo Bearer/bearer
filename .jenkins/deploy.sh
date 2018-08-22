@@ -16,6 +16,9 @@ if [ ! -f ~/.gitconfig ]; then
   exit 1
 fi
 
+mkdir -p ~/.ssh
 echo $JENKINS_PRIVATE_KEY >> ~/.ssh/id_rsa
 
 cat  ~/.ssh/id_rsa
+
+git status
