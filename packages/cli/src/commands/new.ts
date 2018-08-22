@@ -37,9 +37,12 @@ export default class New extends BaseCommand {
 
   static args = [{ name: 'ScenarioName' }]
   private destinationFolder!: string
+  private path?: string
 
   async run() {
     const { args, flags } = this.parse(New)
+    this.path = flags.path
+
     try {
       const name: string = args.ScenarioName || (await this.askForString('Scenario name:'))
       const authType: Authentications = (flags.authType as Authentications) || (await this.askForAuthType())
@@ -124,6 +127,9 @@ export default class New extends BaseCommand {
   })
 
   get copyDestFolder(): string {
+    if (this.path) {
+      return path.resolve(this.path)
+    }
     return path.join(process.cwd(), this.destinationFolder)
   }
 

@@ -7,7 +7,7 @@ type TSetupConfig = {
 }
 
 export function ensureBearerStructure({ clean = true, authConfig }: TSetupConfig = {}): string {
-  const bearerFolder = path.join(__dirname, '..', '.bearer')
+  const bearerFolder = path.join(__dirname, '..', '.bearer', 'fakescenario')
   if (!fs.existsSync(bearerFolder)) {
     fs.mkdirpSync(bearerFolder)
   }
