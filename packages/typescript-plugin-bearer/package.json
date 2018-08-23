@@ -1,0 +1,16 @@
+{
+  "name": "@bearer/typescript-plugin-bearer",
+  "version": "0.0.1",
+  "description": "Typescript Plugin for bearer scenarios",
+  "main": "lib/index.js",
+  "repository": "https://github.com/Bearer/bearer",
+  "author": "Bearer Team",
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "^3.0.1"
+  },
+  "scripts": {
+    "prepare": "tsc",
+    "build": "tsc"
+  }
+}
