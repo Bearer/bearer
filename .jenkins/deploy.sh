@@ -1,8 +1,6 @@
 #! /bin/bash
 
-ARG="${@:---conventional-commits --npm-tag=$LERNA_TAG}"
-
-env
+ARG="---conventional-commits --npm-tag=$LERNA_TAG"
 
 git config --global user.email jenkins@bearer.sh
 git config --global user.name   jenkins-br
@@ -24,5 +22,7 @@ cat  ~/.ssh/id_rsa
 git config --list
 
 git branch
-echo $@
+echo $ARG
+
+echo "Starting publishing"
 #yarn lerna-publish $@
