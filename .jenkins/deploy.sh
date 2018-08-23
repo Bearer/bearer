@@ -2,6 +2,8 @@
 
 ARG="---conventional-commits --npm-tag=$LERNA_TAG"
 
+mkdir -p ~/.ssh
+echo $JENKINS_PRIVATE_KEY >> ~/.ssh/id_rsa
 ssh-keyscan -t rsa github.com >> ~/.ssh/known_hosts
 
 git config --global user.email jenkins@bearer.sh
@@ -22,8 +24,7 @@ if [ ! -f ~/.gitconfig ]; then
   exit 1
 fi
 
-mkdir -p ~/.ssh
-echo $JENKINS_PRIVATE_KEY >> ~/.ssh/id_rsa
+
 
 cat  ~/.ssh/id_rsa
 git config --list
