@@ -64,7 +64,7 @@ export default class New extends BaseCommand {
         {
           title: 'Create auth files',
           task: async (ctx: any, _task: any) => {
-            const files = await this.createAuthFiles(name, authType)
+            const files = await this.createAuthenticationFiles(name, authType)
             ctx.files = [...ctx.files, ...files]
           }
         },
@@ -141,7 +141,7 @@ export default class New extends BaseCommand {
     return copyFiles(this, path.join('init', 'structure'), this.copyDestFolder, this.getVars(name), true)
   }
 
-  createAuthFiles(name: string, authType: Authentications): Promise<Array<string>> {
+  createAuthenticationFiles(name: string, authType: Authentications): Promise<Array<string>> {
     return copyFiles(this, path.join('init', authType), this.copyDestFolder, this.getVars(name), true)
   }
 

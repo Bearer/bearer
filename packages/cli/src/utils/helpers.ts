@@ -5,8 +5,9 @@ import BaseCommand from '../BaseCommand'
 
 export function printFiles(command: BaseCommand, files: Array<string>) {
   const base = process.cwd()
+  const { gray, white } = command.colors
   files.forEach(file => {
-    command.log(command.colors.gray(`    create: `) + command.colors.white(file.replace(base + '/', '')))
+    command.log(gray(`    create: `) + white(file.replace(base + '/', '')))
   })
 }
 
