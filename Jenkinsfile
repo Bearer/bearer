@@ -49,6 +49,20 @@ pipeline {
             }
 
             steps {
+                script {
+                    def returnValue = input(
+                        message: "Wich Lerna tag do you want to use ?",
+                        ok: "Validate",
+                        parameters: [
+                            string(
+                                defaultValue: 'test',
+                                description: 'The tag to use for Lerna',
+                                name: 'LERNA_TAG'
+                            )
+                        ]
+                    )
+                 }
+
                 container("node") {
                     ansiColor('xterm') {
                         sh(".jenkins/deploy.sh")

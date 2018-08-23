@@ -1,11 +1,12 @@
 #! /bin/bash
 
-ARG="${@:---conventional-commits --yes}"
+echo $LERNA_TAG
+ARG="${@:---conventional-commits --npm-tag=next}"
 
 ls -la ~/
 
 git config --global user.email jenkins@bearer.sh
-git config --global user.name   -br
+git config --global user.name   jenkins-br
 
 if [ ! -f ~/.npmrc ]; then
   echo "Missing .npmrc file"
@@ -24,6 +25,5 @@ cat  ~/.ssh/id_rsa
 git config --list
 
 git branch
-echo $GIT_BRANCH
-git status
+env
 #yarn lerna-publish $@
