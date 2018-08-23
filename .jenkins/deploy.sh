@@ -4,6 +4,7 @@ ARG="---conventional-commits --npm-tag=$LERNA_TAG"
 
 mkdir -p ~/.ssh
 echo $JENKINS_PRIVATE_KEY >> ~/.ssh/id_rsa
+chmod 600 ~/.ssh/id_rsa
 ssh-keyscan -t rsa github.com >> ~/.ssh/known_hosts
 
 git config --global user.email jenkins@bearer.sh
