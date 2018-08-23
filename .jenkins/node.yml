@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    name: node
+spec:
+  containers:
+  - name: node
+    image: node:10.6
+    command:
+    - cat
+    tty: true
