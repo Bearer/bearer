@@ -44,10 +44,10 @@ pipeline {
         }
         stage("Deploy") {
              when {
-                branch 'master'
+                branch 'feature/jenkins'
                 beforeAgent true
             }
-            
+
             steps {
                 container("node") {
                     ansiColor('xterm') {
