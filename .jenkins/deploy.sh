@@ -14,7 +14,6 @@ git_url=$(git config --get remote.origin.url | sed "s/https:\/\/github\.com\//gi
 git remote set-url origin $git_url
 
 echo $git_url
-sleep 10m
 
 if [ ! -f ~/.npmrc ]; then
   echo "Missing .npmrc file"
