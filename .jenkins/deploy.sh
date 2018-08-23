@@ -24,4 +24,5 @@ cat  ~/.ssh/id_rsa
 git config --list
 
 git branch
+echo $GIT_BRANCH
 #yarn lerna-publish $@
