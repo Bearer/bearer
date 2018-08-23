@@ -2,6 +2,8 @@
 
 ARG="---conventional-commits --npm-tag=$LERNA_TAG"
 
+ssh-keyscan -t rsa github.com >> ~/.ssh/known_hosts
+
 git config --global user.email jenkins@bearer.sh
 git config --global user.name   jenkins-br
 
@@ -29,5 +31,7 @@ git config --list
 git branch
 echo $ARG
 
+echo "Fetch all remote tags"
+git tag --list | grep 0.5
 echo "Starting publishing"
-yarn lerna-publish-cicd $ARG
+#yarn lerna-publish-cicd $ARG
