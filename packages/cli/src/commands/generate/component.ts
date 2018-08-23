@@ -69,11 +69,11 @@ const choices = [
     value: TComponent.BLANK
   },
   {
-    name: 'Root component',
-    value: TComponent.ROOT
-  },
-  {
     name: 'Collection',
     value: TComponent.COLLECTION
+  },
+  {
+    name: 'Root component',
+    value: TComponent.ROOT
   }
 ]
