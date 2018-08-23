@@ -5,6 +5,10 @@ ARG="---conventional-commits --npm-tag=$LERNA_TAG"
 git config --global user.email jenkins@bearer.sh
 git config --global user.name   jenkins-br
 
+git_url=$(git config --get remote.origin.url | sed "s/http:\/\//git@\/\//")
+
+echo git_url
+
 if [ ! -f ~/.npmrc ]; then
   echo "Missing .npmrc file"
   exit 1
