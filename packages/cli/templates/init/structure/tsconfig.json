@@ -19,6 +19,7 @@
   },
   "include": [
     "views",
+    "intents",
     ".bearer/tmp",
     "types/jsx.d.ts",
     ".bearer/views/src/components.d.ts"
