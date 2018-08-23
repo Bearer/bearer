@@ -32,7 +32,7 @@ pipeline {
             steps {
                 container("node") {
                     ansiColor('xterm') {
-                        sh ".jenkins/build.sh"
+                        //sh ".jenkins/build.sh"
                      }
                 }
             }
@@ -41,7 +41,7 @@ pipeline {
             steps {
                 container("node") {
                     ansiColor('xterm') {
-                        sh ".jenkins/test.sh"
+                        // sh ".jenkins/test.sh"
                     }
                 }
             }
@@ -55,7 +55,7 @@ pipeline {
             steps {
                 container("node") {
                     ansiColor('xterm') {
-                        echo "Learna tag $LERNA_TAG"
+                        echo "Learna tag ${params.LERNA_TAG}"
                         sh(".jenkins/deploy.sh")
                     }
                 }
