@@ -1,34 +1,34 @@
-import { test } from '@oclif/test'
-import { expect } from 'fancy-test'
-
+import GenerateIntent from '../../../src/commands/generate/intent'
 import { ensureBearerStructure } from '../../helpers/setup'
+import { readFile } from '../../helpers/utils'
 
 describe('Generate', () => {
-  let bearerPath = ensureBearerStructure()
-  beforeEach(done => {
-    ensureBearerStructure()
-    done()
+  let bearerPath: string
+  let result: Array<string>
+
+  beforeEach(() => {
+    result = []
+    jest.spyOn(process.stdout, 'write').mockImplementation(val => result.push(val))
+    bearerPath = ensureBearerStructure()
   })
+
   describe('generate:intent', () => {
-    test
-      .stdout()
-      .command(['generate:intent', 'FetchDataIntent', '-t', 'fetch', '--path', bearerPath])
-      .it('Fetch intent', ctx => {
-        expect(ctx.stdout).to.contain('Intent generated')
-      })
+    it('Fetch intent', async () => {
+      await GenerateIntent.run(['FetchDataIntent', '-t', 'fetch', '--path', bearerPath])
+      expect(result.join()).toContain('Intent generated')
+      expect(readFile(bearerPath, 'intents', 'FetchDataIntent.ts')).toMatchSnapshot()
+    })
 
-    test
-      .stdout()
-      .command(['generate:intent', 'SaveDataIntent', '-t', 'save', '--path', bearerPath])
-      .it('Save Intent', ctx => {
-        expect(ctx.stdout).to.contain('Intent generated')
-      })
+    it('Save intent', async () => {
+      await GenerateIntent.run(['SaveIntent', '-t', 'save', '--path', bearerPath])
+      expect(result.join()).toContain('Intent generated')
+      expect(readFile(bearerPath, 'intents', 'SaveIntent.ts')).toMatchSnapshot()
+    })
 
-    test
-      .stdout()
-      .command(['generate:intent', 'RetrieveDataIntent', '-t', 'retrieve', '--path', bearerPath])
-      .it('Retrieve Intent', ctx => {
-        expect(ctx.stdout).to.contain('Intent generated')
-      })
+    it('Retrieve intent', async () => {
+      await GenerateIntent.run(['RetrieveIntent', '-t', 'retrieve', '--path', bearerPath])
+      expect(result.join()).toContain('Intent generated')
+      expect(readFile(bearerPath, 'intents', 'RetrieveIntent.ts')).toMatchSnapshot()
+    })
   })
 })
