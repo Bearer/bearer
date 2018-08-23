@@ -25,4 +25,5 @@ git config --list
 
 git branch
 echo $GIT_BRANCH
+git status
 #yarn lerna-publish $@
