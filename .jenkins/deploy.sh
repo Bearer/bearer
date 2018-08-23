@@ -33,6 +33,7 @@ git branch
 echo $ARG
 
 echo "Fetch all remote tags"
+git fetch --tags
 git tag --list | grep 0.5
 echo "Starting publishing"
 #yarn lerna-publish-cicd $ARG
