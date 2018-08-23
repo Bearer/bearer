@@ -49,7 +49,7 @@ pipeline {
         stage("Deploy") {
             when {
                 branch 'feature/jenkins'
-                expression { params.LERNA_TAG  != null }
+                expression { params.LERNA_TAG  != '' }
             }
 
             steps {
