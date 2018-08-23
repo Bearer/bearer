@@ -3,6 +3,59 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.57.0"></a>
+# 0.57.0 (2018-08-23)
+
+
+### Bug Fixes
+
+* **cli:** generate full manifest file ([6ac163e](https://github.com/Bearer/bearer/commit/6ac163e))
+* **cli:** make prettier work in all editors ([07816c2](https://github.com/Bearer/bearer/commit/07816c2))
+* **cli:** make the scenarioUuid passed to tags ([2b70e9b](https://github.com/Bearer/bearer/commit/2b70e9b))
+* **transpiler:** apply changes ([c024cd3](https://github.com/Bearer/bearer/commit/c024cd3))
+* **transpiler:** fix merge glitch ([e65ddaa](https://github.com/Bearer/bearer/commit/e65ddaa))
+* **transpiler:** fix missing suffix issue ([e40cfe6](https://github.com/Bearer/bearer/commit/e40cfe6))
+* **transpiler:** Fix root component ([#191](https://github.com/Bearer/bearer/issues/191)) ([ac68a8d](https://github.com/Bearer/bearer/commit/ac68a8d))
+* **transpiler:** fix tag starting with number ([682b651](https://github.com/Bearer/bearer/commit/682b651))
+* **transpiler:** handle undefined BEARER_SCENARIO_ID ([2e239b6](https://github.com/Bearer/bearer/commit/2e239b6))
+* **transpiler:** log less ([#267](https://github.com/Bearer/bearer/issues/267)) ([1faea1e](https://github.com/Bearer/bearer/commit/1faea1e))
+* **transpiler:** no unused method ([c6dc79a](https://github.com/Bearer/bearer/commit/c6dc79a))
+* **transpiler:** prevent double watcher transpilation ([a6f164c](https://github.com/Bearer/bearer/commit/a6f164c))
+* **transpiler:** remove peculiar test ([d539f7c](https://github.com/Bearer/bearer/commit/d539f7c))
+* **transpiler:** remove stupid doublon ([dcbde6d](https://github.com/Bearer/bearer/commit/dcbde6d))
+* **transpiler:** sned refresh message on file addition/removal ([99c69d5](https://github.com/Bearer/bearer/commit/99c69d5))
+* **transpiler:** state injector update properly lifecycle methods ([d12a2c1](https://github.com/Bearer/bearer/commit/d12a2c1))
+* **transpiler:** typo ([ea1ed75](https://github.com/Bearer/bearer/commit/ea1ed75))
+* **transpiler:** update test suite ([7da4def](https://github.com/Bearer/bearer/commit/7da4def))
+* add .keep to pass tests ([e298811](https://github.com/Bearer/bearer/commit/e298811))
+* add snapshot ([bb0f1e2](https://github.com/Bearer/bearer/commit/bb0f1e2))
+* installation is failing with pacakge-lock files ([#257](https://github.com/Bearer/bearer/issues/257)) ([176a757](https://github.com/Bearer/bearer/commit/176a757))
+* remove old comments ([21834eb](https://github.com/Bearer/bearer/commit/21834eb))
+* **transpiler:** updated test suite ([5187fa5](https://github.com/Bearer/bearer/commit/5187fa5))
+* **transpiler:** wrong filename ([1551a33](https://github.com/Bearer/bearer/commit/1551a33))
+* **ui:** change LICENSE to MIT ([d90917d](https://github.com/Bearer/bearer/commit/d90917d))
+
+
+### Features
+
+* add root component transformer ([a710da2](https://github.com/Bearer/bearer/commit/a710da2))
+* add skel root component transformer ([a9fd496](https://github.com/Bearer/bearer/commit/a9fd496))
+* **transpiler:** inject el into component ([7f00a76](https://github.com/Bearer/bearer/commit/7f00a76))
+* rename screen to view ([57da6e5](https://github.com/Bearer/bearer/commit/57da6e5))
+* **cli:** make local deve working ([40c4705](https://github.com/Bearer/bearer/commit/40c4705))
+* **core:** add support for shadow in RootComponent ([#205](https://github.com/Bearer/bearer/issues/205)) ([4529771](https://github.com/Bearer/bearer/commit/4529771))
+* **core:** simplify decorator use ([#193](https://github.com/Bearer/bearer/issues/193)) ([fa3facc](https://github.com/Bearer/bearer/commit/fa3facc))
+* **transpiler:** add metata parser ([6a066b2](https://github.com/Bearer/bearer/commit/6a066b2))
+* **transpiler:** add metata parser ([423ff50](https://github.com/Bearer/bearer/commit/423ff50))
+* **transpiler:** add scenarioId into rootcomponent tag ([9173e41](https://github.com/Bearer/bearer/commit/9173e41))
+* **transpiler:** generate manfiest.js file ([ed761d9](https://github.com/Bearer/bearer/commit/ed761d9))
+* **transpiler:** navigator screen rewrite transformer introduction ([e6e1d14](https://github.com/Bearer/bearer/commit/e6e1d14))
+* **transpiler:** scope bearer components ([#279](https://github.com/Bearer/bearer/issues/279)) ([7b9453d](https://github.com/Bearer/bearer/commit/7b9453d))
+* **transpiler:** transformer slot to renderFunc ([7a1b017](https://github.com/Bearer/bearer/commit/7a1b017))
+
+
+
+
 <a name="0.56.0"></a>
 # [0.56.0](https://github.com/Bearer/bearer/compare/v0.55.0...v0.56.0) (2018-08-22)
 

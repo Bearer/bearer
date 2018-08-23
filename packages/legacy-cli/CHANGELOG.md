@@ -3,6 +3,70 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.57.0"></a>
+# 0.57.0 (2018-08-23)
+
+
+### Bug Fixes
+
+* **cli:** ask intenttype before name ([df52ae4](https://github.com/Bearer/bearer/commit/df52ae4))
+* **cli:** Better deploy error message ([#275](https://github.com/Bearer/bearer/issues/275)) ([70b61af](https://github.com/Bearer/bearer/commit/70b61af))
+* **cli:** better logging when webpack is failing ([#239](https://github.com/Bearer/bearer/issues/239)) ([189296e](https://github.com/Bearer/bearer/commit/189296e))
+* **cli:** deploy with the correct namespace name ([a46b520](https://github.com/Bearer/bearer/commit/a46b520))
+* **cli:** do not rely on node_modules or bin anymore ([#256](https://github.com/Bearer/bearer/issues/256)) ([d839c42](https://github.com/Bearer/bearer/commit/d839c42))
+* **cli:** emit when setup is not required ([53269d1](https://github.com/Bearer/bearer/commit/53269d1))
+* **cli:** empty build dir instead of src one ([32f1016](https://github.com/Bearer/bearer/commit/32f1016))
+* **cli:** ensure .bearer dir exists ([793e19e](https://github.com/Bearer/bearer/commit/793e19e))
+* **cli:** ensure error message is returned only when exists ([f0dae67](https://github.com/Bearer/bearer/commit/f0dae67))
+* **cli:** fix path invalidation ([2ec99d0](https://github.com/Bearer/bearer/commit/2ec99d0))
+* **cli:** fix serviceClient issue ([42b3c40](https://github.com/Bearer/bearer/commit/42b3c40))
+* **cli:** generate component fixes ([ce8a6d4](https://github.com/Bearer/bearer/commit/ce8a6d4))
+* **cli:** generate first screen ([b215a3f](https://github.com/Bearer/bearer/commit/b215a3f))
+* **cli:** give button text a meaning ([1e5c78e](https://github.com/Bearer/bearer/commit/1e5c78e))
+* **cli:** give more meaning to template variable names ([d25d0b6](https://github.com/Bearer/bearer/commit/d25d0b6))
+* **cli:** intents variables generation ([1535f77](https://github.com/Bearer/bearer/commit/1535f77))
+* **cli:** let oclif deal with new versions ([#231](https://github.com/Bearer/bearer/issues/231)) ([4dd50f8](https://github.com/Bearer/bearer/commit/4dd50f8))
+* **cli:** pass tag name to stencil ([4e3d46f](https://github.com/Bearer/bearer/commit/4e3d46f))
+* **cli:** prevent cli to proceed if authentication failed ([b7f4f69](https://github.com/Bearer/bearer/commit/b7f4f69))
+* **cli:** prevent default scenarioUuid ([#281](https://github.com/Bearer/bearer/issues/281)) ([8e8fe5a](https://github.com/Bearer/bearer/commit/8e8fe5a))
+* **cli:** rely on binary ([20b2c99](https://github.com/Bearer/bearer/commit/20b2c99))
+* **cli:** remove bearer command reference ([d2e8f4b](https://github.com/Bearer/bearer/commit/d2e8f4b))
+* **cli:** remove duplicate identifier ([b2b92ae](https://github.com/Bearer/bearer/commit/b2b92ae))
+* **cli:** remove old bearer binary ([#223](https://github.com/Bearer/bearer/issues/223)) ([746553b](https://github.com/Bearer/bearer/commit/746553b))
+* **cli:** start was missing authorization host ([#248](https://github.com/Bearer/bearer/issues/248)) ([7b9edbf](https://github.com/Bearer/bearer/commit/7b9edbf))
+* **cli:** update the cdn host for production ([76348d2](https://github.com/Bearer/bearer/commit/76348d2))
+* **cli:** use localhost as a tag name on start ([c0e2d95](https://github.com/Bearer/bearer/commit/c0e2d95))
+* **core:** change LICENSE field to MIT ([c133805](https://github.com/Bearer/bearer/commit/c133805))
+* **core:** post robots now use correct url ([#235](https://github.com/Bearer/bearer/issues/235)) ([49abd5b](https://github.com/Bearer/bearer/commit/49abd5b))
+* **intents:** fallback body ([077dc7c](https://github.com/Bearer/bearer/commit/077dc7c))
+* **legacy-cli:** add setupId in template setup ([a0d52a5](https://github.com/Bearer/bearer/commit/a0d52a5))
+* **legacy-cli:** send scenario id to the deploy command ([#290](https://github.com/Bearer/bearer/issues/290)) ([7d04ee3](https://github.com/Bearer/bearer/commit/7d04ee3))
+* installation is failing with pacakge-lock files ([#257](https://github.com/Bearer/bearer/issues/257)) ([176a757](https://github.com/Bearer/bearer/commit/176a757))
+* update lock files ([a24198d](https://github.com/Bearer/bearer/commit/a24198d))
+* **templates:** add navigator-auth-screen only when oauth2 ([#269](https://github.com/Bearer/bearer/issues/269)) ([785276c](https://github.com/Bearer/bearer/commit/785276c))
+* **templates:** update default display component render ([#274](https://github.com/Bearer/bearer/issues/274)) ([1c1cf4a](https://github.com/Bearer/bearer/commit/1c1cf4a))
+* **transpiler:** fix tag starting with number ([682b651](https://github.com/Bearer/bearer/commit/682b651))
+* **webserver:** handle not existing intent gracefully ([#277](https://github.com/Bearer/bearer/issues/277)) ([6af021a](https://github.com/Bearer/bearer/commit/6af021a))
+* **webserver:** unstringify ([5c7cb5f](https://github.com/Bearer/bearer/commit/5c7cb5f))
+
+
+### Features
+
+* **cli:** generate command rewrite ([#287](https://github.com/Bearer/bearer/issues/287)) ([2e91da7](https://github.com/Bearer/bearer/commit/2e91da7))
+* **cli:** import client only when required ([#238](https://github.com/Bearer/bearer/issues/238)) ([2d95257](https://github.com/Bearer/bearer/commit/2d95257))
+* **cli:** link command rewrite ([#284](https://github.com/Bearer/bearer/issues/284)) ([40458ca](https://github.com/Bearer/bearer/commit/40458ca))
+* **cli:** move config.dev.js to example ([0d1d889](https://github.com/Bearer/bearer/commit/0d1d889))
+* **cli:** new commnad rewrite base ([#276](https://github.com/Bearer/bearer/issues/276)) ([f58d778](https://github.com/Bearer/bearer/commit/f58d778))
+* **cli:** proxy the notifications through package manager ([514e8aa](https://github.com/Bearer/bearer/commit/514e8aa))
+* **cli:** remove auth navigator screen when not needed ([d259d0b](https://github.com/Bearer/bearer/commit/d259d0b))
+* **cli:** rewrite login command ([#283](https://github.com/Bearer/bearer/issues/283)) ([0ae055f](https://github.com/Bearer/bearer/commit/0ae055f))
+* **core:** everything as post ([#234](https://github.com/Bearer/bearer/issues/234)) ([ae67130](https://github.com/Bearer/bearer/commit/ae67130))
+* **intents:** give access to dbclient ([#270](https://github.com/Bearer/bearer/issues/270)) ([fbf284e](https://github.com/Bearer/bearer/commit/fbf284e))
+* **transpiler:** scope bearer components ([#279](https://github.com/Bearer/bearer/issues/279)) ([7b9453d](https://github.com/Bearer/bearer/commit/7b9453d))
+
+
+
+
 <a name="0.56.0"></a>
 # [0.56.0](https://github.com/Bearer/bearer/compare/v0.55.0...v0.56.0) (2018-08-22)
 

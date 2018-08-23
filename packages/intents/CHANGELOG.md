@@ -3,6 +3,36 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.57.0"></a>
+# 0.57.0 (2018-08-23)
+
+
+### Bug Fixes
+
+* **intents:** fallback body ([077dc7c](https://github.com/BearerSH/bearer/commit/077dc7c))
+* **intents:** Fix incorrect TS import ([2267cb4](https://github.com/BearerSH/bearer/commit/2267cb4))
+* **intents:** it looks like lambda body is already an object ([72487e9](https://github.com/BearerSH/bearer/commit/72487e9))
+* **intents:** mark data as optional for retrievestate intents ([154248a](https://github.com/BearerSH/bearer/commit/154248a))
+* **intents:** provide correct function signatures ([7125157](https://github.com/BearerSH/bearer/commit/7125157))
+* **intents:** remove async ([#169](https://github.com/BearerSH/bearer/issues/169)) ([e1e10b3](https://github.com/BearerSH/bearer/commit/e1e10b3))
+* **intents:** typo ([4ee09c9](https://github.com/BearerSH/bearer/commit/4ee09c9))
+* installation is failing with pacakge-lock files ([#257](https://github.com/BearerSH/bearer/issues/257)) ([176a757](https://github.com/BearerSH/bearer/commit/176a757))
+* update lock files ([a24198d](https://github.com/BearerSH/bearer/commit/a24198d))
+* **ui:** change LICENSE to MIT ([d90917d](https://github.com/BearerSH/bearer/commit/d90917d))
+
+
+### Features
+
+* **cli:** generate command rewrite ([#287](https://github.com/BearerSH/bearer/issues/287)) ([2e91da7](https://github.com/BearerSH/bearer/commit/2e91da7))
+* **core:** everything as post ([#234](https://github.com/BearerSH/bearer/issues/234)) ([ae67130](https://github.com/BearerSH/bearer/commit/ae67130))
+* **core:** simplify decorator use ([#193](https://github.com/BearerSH/bearer/issues/193)) ([fa3facc](https://github.com/BearerSH/bearer/commit/fa3facc))
+* **generator:** Improve Intent generator  ([#113](https://github.com/BearerSH/bearer/issues/113)) ([8f86f46](https://github.com/BearerSH/bearer/commit/8f86f46))
+* **generator:** Separate TContext per AuthType ([#152](https://github.com/BearerSH/bearer/issues/152)) ([b194c23](https://github.com/BearerSH/bearer/commit/b194c23))
+* **intents:** give access to dbclient ([#270](https://github.com/BearerSH/bearer/issues/270)) ([fbf284e](https://github.com/BearerSH/bearer/commit/fbf284e))
+
+
+
+
 <a name="0.56.0"></a>
 # [0.56.0](https://github.com/BearerSH/bearer/compare/v0.55.0...v0.56.0) (2018-08-22)
 

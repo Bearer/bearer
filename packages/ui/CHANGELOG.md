@@ -3,6 +3,43 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.57.0"></a>
+# 0.57.0 (2018-08-23)
+
+
+### Bug Fixes
+
+* **ui:** add bearer style to sumbit button ([30d7c1b](https://github.com/ionic-team/stencil-component-starter/commit/30d7c1b))
+* **ui:** backport correct behaviour form previous implementation ([#137](https://github.com/ionic-team/stencil-component-starter/issues/137)) ([9f48b8b](https://github.com/ionic-team/stencil-component-starter/commit/9f48b8b))
+* **ui:** change LICENSE to MIT ([d90917d](https://github.com/ionic-team/stencil-component-starter/commit/d90917d))
+* **ui:** get rid of conditional rendering within button popover ([b624c8b](https://github.com/ionic-team/stencil-component-starter/commit/b624c8b))
+* **ui:** make setup more robust ([3c160fc](https://github.com/ionic-team/stencil-component-starter/commit/3c160fc))
+* **ui:** prevent extra call when scenario is completed ([#196](https://github.com/ionic-team/stencil-component-starter/issues/196)) ([e1d5b8c](https://github.com/ionic-team/stencil-component-starter/commit/e1d5b8c))
+* **ui:** prevent infinite loop ([#110](https://github.com/ionic-team/stencil-component-starter/issues/110)) ([9e636a7](https://github.com/ionic-team/stencil-component-starter/commit/9e636a7))
+* **ui:** prevent unnecessary screen rendering ([cb25e0b](https://github.com/ionic-team/stencil-component-starter/commit/cb25e0b))
+* update lock files ([a24198d](https://github.com/ionic-team/stencil-component-starter/commit/a24198d))
+* **ui:** regenerate component definition ([3392a93](https://github.com/ionic-team/stencil-component-starter/commit/3392a93))
+* **ui:** Remove conditional default ([a4504da](https://github.com/ionic-team/stencil-component-starter/commit/a4504da))
+* **ui:** reset component style  correctly ([56e3749](https://github.com/ionic-team/stencil-component-starter/commit/56e3749))
+* **ui:** stencil watch decorator does not work on state anymore ([113905b](https://github.com/ionic-team/stencil-component-starter/commit/113905b))
+* **ui:** test setupId in render ([7d96e14](https://github.com/ionic-team/stencil-component-starter/commit/7d96e14))
+* **ui:** update index ([ce7f0bc](https://github.com/ionic-team/stencil-component-starter/commit/ce7f0bc))
+* **ui:** update typing form core update ([841318e](https://github.com/ionic-team/stencil-component-starter/commit/841318e))
+
+
+### Features
+
+* **core:** simplify decorator use ([#193](https://github.com/ionic-team/stencil-component-starter/issues/193)) ([fa3facc](https://github.com/ionic-team/stencil-component-starter/commit/fa3facc))
+* **ui:** add disabled button prop ([#198](https://github.com/ionic-team/stencil-component-starter/issues/198)) ([765ef1d](https://github.com/ionic-team/stencil-component-starter/commit/765ef1d))
+* **ui:** change default location ([9ea6cc2](https://github.com/ionic-team/stencil-component-starter/commit/9ea6cc2))
+* **ui:** complete prop on navigator ([8c39006](https://github.com/ionic-team/stencil-component-starter/commit/8c39006))
+* **ui:** introduce bearer-authorized component ([69d5aac](https://github.com/ionic-team/stencil-component-starter/commit/69d5aac))
+* **ui:** provide a way to authenticate people through a method ([5996faf](https://github.com/ionic-team/stencil-component-starter/commit/5996faf))
+* upgrade stencil required version ([d797a67](https://github.com/ionic-team/stencil-component-starter/commit/d797a67))
+
+
+
+
 <a name="0.56.0"></a>
 # [0.56.0](https://github.com/ionic-team/stencil-component-starter/compare/v0.55.0...v0.56.0) (2018-08-22)
 

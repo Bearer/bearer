@@ -3,6 +3,29 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.57.0"></a>
+# 0.57.0 (2018-08-23)
+
+
+### Bug Fixes
+
+* **cli:** use correct intent type name ([2d5ffa4](https://github.com/Bearer/bearer/commit/2d5ffa4))
+* update lock files ([a24198d](https://github.com/Bearer/bearer/commit/a24198d))
+* **templates:** wrong callback call ([aa99089](https://github.com/Bearer/bearer/commit/aa99089))
+* **ui:** change LICENSE to MIT ([d90917d](https://github.com/Bearer/bearer/commit/d90917d))
+
+
+### Features
+
+* **cli:** generate command rewrite ([#287](https://github.com/Bearer/bearer/issues/287)) ([2e91da7](https://github.com/Bearer/bearer/commit/2e91da7))
+* **core:** everything as post ([#234](https://github.com/Bearer/bearer/issues/234)) ([ae67130](https://github.com/Bearer/bearer/commit/ae67130))
+* **generator:** improves client.ts ([#107](https://github.com/Bearer/bearer/issues/107)) ([5c5ffcc](https://github.com/Bearer/bearer/commit/5c5ffcc))
+* **generator:** Separate TContext per AuthType ([#152](https://github.com/Bearer/bearer/issues/152)) ([b194c23](https://github.com/Bearer/bearer/commit/b194c23))
+* **templates:** Add BasicAuth and update Client ([#120](https://github.com/Bearer/bearer/issues/120)) ([afc0192](https://github.com/Bearer/bearer/commit/afc0192))
+
+
+
+
 <a name="0.56.0"></a>
 # [0.56.0](https://github.com/Bearer/bearer/compare/v0.55.0...v0.56.0) (2018-08-22)
 

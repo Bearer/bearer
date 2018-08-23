@@ -3,6 +3,34 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.57.0"></a>
+# 0.57.0 (2018-08-23)
+
+
+### Bug Fixes
+
+* remove old comments ([21834eb](https://github.com/Bearer/bearer/commit/21834eb))
+* **cli:** fix tslint formatting which was preventing iframe to load ([808ea32](https://github.com/Bearer/bearer/commit/808ea32))
+* **core:** add better typing ([bf2f477](https://github.com/Bearer/bearer/commit/bf2f477))
+* **core:** change LICENSE field to MIT ([c133805](https://github.com/Bearer/bearer/commit/c133805))
+* **core:** fix typing ([29d1deb](https://github.com/Bearer/bearer/commit/29d1deb))
+* **core:** pass boolean to maybeInitializedSession promise ([76b1f67](https://github.com/Bearer/bearer/commit/76b1f67))
+* **core:** reject intent promise if error returned ([#233](https://github.com/Bearer/bearer/issues/233)) ([d1c36b9](https://github.com/Bearer/bearer/commit/d1c36b9))
+* **local-dev-server:** allow override ([#112](https://github.com/Bearer/bearer/issues/112)) ([f1dd000](https://github.com/Bearer/bearer/commit/f1dd000))
+
+
+### Features
+
+* add root decorator ([0754737](https://github.com/Bearer/bearer/commit/0754737))
+* **core:** add support for shadow in RootComponent ([#205](https://github.com/Bearer/bearer/issues/205)) ([4529771](https://github.com/Bearer/bearer/commit/4529771))
+* upgrade stencil required version ([d797a67](https://github.com/Bearer/bearer/commit/d797a67))
+* **core:** everything as post ([#234](https://github.com/Bearer/bearer/issues/234)) ([ae67130](https://github.com/Bearer/bearer/commit/ae67130))
+* **core:** simplify decorator use ([#193](https://github.com/Bearer/bearer/issues/193)) ([fa3facc](https://github.com/Bearer/bearer/commit/fa3facc))
+* **core:** trigger bearer:StateSaved event ([3d672c1](https://github.com/Bearer/bearer/commit/3d672c1))
+
+
+
+
 <a name="0.56.0"></a>
 # [0.56.0](https://github.com/Bearer/bearer/compare/v0.55.0...v0.56.0) (2018-08-22)
 
