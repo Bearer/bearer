@@ -45,7 +45,7 @@ export default class GenerateIntent extends BaseCommand {
     try {
       const vars = this.getVars(name, type, authType)
       await copyFiles(this, `generate/intent`, this.locator.srcIntentsDir, vars)
-      this.success(`Intent generated`)
+      this.success(`\nIntent generated`)
       // TODO: add a nicer display
     } catch (e) {
       this.error(e)
