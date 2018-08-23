@@ -25,4 +25,4 @@ git branch
 echo $ARG
 
 echo "Starting publishing"
-#yarn lerna-publish $@
+yarn lerna-publish-cicd $ARG
