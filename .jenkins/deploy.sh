@@ -1,6 +1,6 @@
 #! /bin/bash
 
-ARG="${@:---conventional-commits --npm-tag=next}"
+ARG="${@:---conventional-commits --npm-tag=$LERNA_TAG}"
 
 env
 
@@ -24,4 +24,5 @@ cat  ~/.ssh/id_rsa
 git config --list
 
 git branch
+echo $@
 #yarn lerna-publish $@

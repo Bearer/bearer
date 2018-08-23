@@ -48,14 +48,13 @@ pipeline {
         }
         stage("Deploy") {
             when {
+                expression { params.LERNA_TAG  != '' }
                 branch 'feature/jenkins'
-                expression { params.LERNA_TAG  =! '' }
             }
 
             steps {
                 container("node") {
                     ansiColor('xterm') {
-                        echo "Learna tag ${params.LERNA_TAG}"
                         sh(".jenkins/deploy.sh")
                     }
                 }
