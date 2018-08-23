@@ -23,5 +23,5 @@ echo $JENKINS_PRIVATE_KEY >> ~/.ssh/id_rsa
 cat  ~/.ssh/id_rsa
 git config --list
 
-git brancc
+git branch
 #yarn lerna-publish $@
