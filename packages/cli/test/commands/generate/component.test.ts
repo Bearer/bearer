@@ -1,33 +1,35 @@
-import { test } from '@oclif/test'
-import { expect } from 'fancy-test'
-
+import GenerateComponent from '../../../src/commands/generate/component'
 import { ensureBearerStructure } from '../../helpers/setup'
+import { readFile } from '../../helpers/utils'
 
 describe('Generate', () => {
-  let bearerPath = ensureBearerStructure()
-  beforeEach(done => {
-    ensureBearerStructure()
-    done()
-  })
-  describe('generate:component', () => {
-    test
-      .stdout()
-      .command(['generate:component', 'blankComponent', '-t', 'blank', '--path', bearerPath])
-      .it('Blank component', ctx => {
-        expect(ctx.stdout).to.contain('Component generated')
-      })
+  let bearerPath: string
+  let result: Array<string>
 
-    test
-      .stdout()
-      .command(['generate:component', 'collectionComponent', '-t', 'collection', '--path', bearerPath])
-      .it('Collection Intent', ctx => {
-        expect(ctx.stdout).to.contain('Component generated')
-      })
-    test
-      .stdout()
-      .command(['generate:component', 'rootComponent', '-t', 'root', '--path', bearerPath])
-      .it('Root Intent', ctx => {
-        expect(ctx.stdout).to.contain('Component generated')
-      })
+  beforeEach(() => {
+    result = []
+    jest.spyOn(process.stdout, 'write').mockImplementation(val => result.push(val))
+    bearerPath = ensureBearerStructure()
+  })
+
+  describe('generate:component', () => {
+    it('blank component', async () => {
+      await GenerateComponent.run(['blankComponent', '-t', 'blank', '--path', bearerPath])
+      expect(result.join()).toContain('Component generated')
+      expect(readFile(bearerPath, 'views', 'components', 'blankComponent.tsx')).toMatchSnapshot()
+    })
+
+    it('collection component', async () => {
+      await GenerateComponent.run(['collectionComponent', '-t', 'collection', '--path', bearerPath])
+      expect(result.join()).toContain('Component generated')
+      expect(readFile(bearerPath, 'views', 'components', 'collectionComponent.tsx')).toMatchSnapshot()
+    })
+
+    it('root component', async () => {
+      await GenerateComponent.run(['rootComponent', '-t', 'root', '--path', bearerPath])
+      expect(result.join()).toContain('Component generated')
+      expect(readFile(bearerPath, 'views', 'root-component-action.tsx')).toMatchSnapshot()
+      expect(readFile(bearerPath, 'views', 'root-component-display.tsx')).toMatchSnapshot()
+    })
   })
 })

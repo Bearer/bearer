@@ -1,0 +1,87 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Generate generate:component blank component 1`] = `
+"import { Component } from '@bearer/core'
+
+@Component({
+  tag: 'blank-component',
+  styleUrl: 'blankComponent.css',
+  shadow: true
+})
+export class BlankComponent {
+  render() {
+    return (
+      <div class=\\"root\\">
+        <bearer-typography as=\\"h2\\">
+          BlankComponent Component
+        </bearer-typography>
+      </div>
+    )
+  }
+}
+"
+`;
+
+exports[`Generate generate:component collection component 1`] = `
+"import { BearerFetch, Component, Intent } from '@bearer/core'
+
+@Component({
+  tag: 'collection-component',
+  shadow: true
+})
+export class CollectionComponent {
+  @Intent('collectionComponent') fetcher: BearerFetch
+  render() {
+    return <bearer-scrollable fetcher={this.fetcher} />
+  }
+}"
+`;
+
+exports[`Generate generate:component root component 1`] = `
+"/*
+  The purpose of this component is to deal with scenario navigation between each views.
+
+*/
+
+import { RootComponent } from '@bearer/core'
+import '@bearer/ui'
+
+@RootComponent({
+  name: 'action',
+  group: 'root-component'
+})
+export class RootComponentAction {
+  render() {
+    return (
+      <bearer-navigator btnProps={ { content:\\"RootComponent Action\\", kind:\\"primary\\" } } direction=\\"right\\">
+        
+        <bearer-navigator-screen navigationTitle=\\"My first screen\\">
+          <div style={ { textAlign: 'center' } }>My first screen</div>
+        </bearer-navigator-screen>
+      </bearer-navigator>
+    )
+  }
+}
+"
+`;
+
+exports[`Generate generate:component root component 2`] = `
+"/*
+  The purpose of this component is to be the result of your scenario.
+  Its responsibility is to retrieve the scenario state from a previous action
+  of a user.
+*/
+import { RootComponent } from '@bearer/core'
+import '@bearer/ui'
+
+@RootComponent({
+  name: 'display',
+  group: 'root-component'
+})
+export class RootComponentDisplay {
+  render() {
+    return <bearer-alert kind=\\"success\\">🚀 My RootComponent Display component 🚀</bearer-alert>
+  }
+}
+"
+`;
