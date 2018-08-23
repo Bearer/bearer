@@ -10,10 +10,11 @@ import { copyFiles } from '../../utils/helpers'
 
 const types = [
   { name: 'Fetch', value: IntentType.FetchData, cli: 'fetch' },
-  new inquirer.Separator(),
   { name: 'Save State', value: IntentType.SaveState, cli: 'save' },
   { name: 'Retrieve Sate', value: IntentType.RetrieveState, cli: 'retrieve' }
 ]
+
+const typeChoices = [types.slice(0, 1)[0], new inquirer.Separator(), ...types.slice(1)]
 
 export default class GenerateIntent extends BaseCommand {
   static description = 'Generate a Bearer Intent'
@@ -28,7 +29,9 @@ export default class GenerateIntent extends BaseCommand {
   @RequireScenarioFolder()
   async run() {
     const { args, flags } = this.parse(GenerateIntent)
-    const type: IntentType = !flags.type ? await this.askForType() : types.find(t => t.cli === flags.type)!.value
+    const type: IntentType = !flags.type
+      ? await this.askForType()
+      : types.find(t => (t as { cli: string }).cli === flags.type)!.value
     const name = args.name || (await this.askForName())
     const authType = this.scenarioAuthConfig.authType
     if (!templates[authType]) {
@@ -76,7 +79,7 @@ export default class GenerateIntent extends BaseCommand {
         message: 'Type:',
         type: 'list',
         name: 'type',
-        choices: types.map(type => ({ ...type, name: this.case.pascal(type.name) }))
+        choices: typeChoices
       }
     ])
     return type
