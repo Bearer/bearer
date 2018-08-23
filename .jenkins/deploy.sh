@@ -5,7 +5,7 @@ ARG="---conventional-commits --npm-tag=$LERNA_TAG"
 git config --global user.email jenkins@bearer.sh
 git config --global user.name   jenkins-br
 
-git_url=$(git config --get remote.origin.url | sed "s/https:\/\//git@/")
+git_url=$(git config --get remote.origin.url | sed "s/https:\/\/github\.com\//git@github\.com:/")
 git remote set-url origin $git_url
 
 echo $git_url
