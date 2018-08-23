@@ -18,6 +18,10 @@ pipeline {
         buildDiscarder(logRotator(numToKeepStr: '5'))
     }
 
+    parameters {
+        string(defaultValue: '', description: 'TAG which will be used by lerna', name: 'LERNA_TAG')
+    }
+
     stages {
         stage('checkout') {
             steps {
@@ -49,22 +53,9 @@ pipeline {
             }
 
             steps {
-                script {
-                    def returnValue = input(
-                        message: "Wich Lerna tag do you want to use ?",
-                        ok: "Validate",
-                        parameters: [
-                            string(
-                                defaultValue: 'test',
-                                description: 'The tag to use for Lerna',
-                                name: 'LERNA_TAG'
-                            )
-                        ]
-                    )
-                 }
-
                 container("node") {
                     ansiColor('xterm') {
+                        echo "Learna tag $LERNA_TAG"
                         sh(".jenkins/deploy.sh")
                     }
                 }
