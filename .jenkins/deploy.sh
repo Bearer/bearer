@@ -25,15 +25,5 @@ if [ ! -f ~/.gitconfig ]; then
   exit 1
 fi
 
-
-
-cat  ~/.ssh/id_rsa
-git config --list
-
-git branch
-echo $ARG
-
-echo "Fetch all remote tags"
-git fetch --tags
 echo "Starting publishing"
 yarn lerna-publish-cicd $ARG
