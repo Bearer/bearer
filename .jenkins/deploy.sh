@@ -5,7 +5,7 @@ ARG="${@:---conventional-commits --yes}"
 ls -la ~/
 
 git config --global user.email jenkins@bearer.sh
-git config --global user.name jenkins-br
+git config --global user.name   -br
 
 if [ ! -f ~/.npmrc ]; then
   echo "Missing .npmrc file"
@@ -23,4 +23,5 @@ echo $JENKINS_PRIVATE_KEY >> ~/.ssh/id_rsa
 cat  ~/.ssh/id_rsa
 git config --list
 
-yarn lerna-publish $@
+git branch
+#yarn lerna-publish $@
