@@ -75,7 +75,7 @@ export type TapiKeyContext = TAPIKEYAuthContext
 export type Toauth2Context = TOAUTH2AuthContext
 export type TbasicAuthContext = TBASICAuthContext
 export type TnoAuthContext = TNONEAuthContext
-export type DEPRECATEDCONTEXT = TapiKeyContext
+export type DEPRECATEDCONTEXT = TapiKeyContext | TnoAuthContext | Toauth2Context | TbasicAuthContext
 // end Deprecated
 
 export type TAuthContext =
