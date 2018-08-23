@@ -47,9 +47,9 @@ pipeline {
             }
         }
         stage("Deploy") {
-             when {
+            when {
                 branch 'feature/jenkins'
-                beforeAgent true
+                expression { params.LERNA_TAG  != null }
             }
 
             steps {
