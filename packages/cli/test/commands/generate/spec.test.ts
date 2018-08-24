@@ -13,7 +13,7 @@ describe('Generate', () => {
   })
 
   describe('generate:spec', () => {
-    it('blank component', async () => {
+    it('creates a spce file', async () => {
       await GenerateSpec.run(['--force', '--path', bearerPath])
       expect(result.join()).toContain('Spec file successfully generated!')
       expect(readFile(bearerPath, 'spec.ts')).toMatchSnapshot()
