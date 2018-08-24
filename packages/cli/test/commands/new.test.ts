@@ -31,7 +31,7 @@ describe('new command', () => {
   auths.map(auth => {
     it(`generates a scenario without any prompt and ${auth}`, async () => {
       await NewCommand.run([`${auth}Scenario`, '-a', auth, '--skipInstall', '--path', path.join(destination, auth)])
-      const outPut = result.join()
+      const outPut = result.sort().join()
       expect(outPut).toMatchSnapshot()
       expect(readFile(auth, AUTHCONFIG)).toMatchSnapshot()
     })
