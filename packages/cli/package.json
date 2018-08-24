@@ -42,6 +42,7 @@
     "@types/inquirer": "^0.0.42",
     "@types/jest": "^23.3.1",
     "@types/listr": "^0.13.0",
+    "@types/nock": "^9.3.0",
     "@types/node": "^10",
     "@types/sinon": "^5.0.1",
     "globby": "^8",
