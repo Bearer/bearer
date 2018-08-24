@@ -4,21 +4,6 @@ exports[`new command generates a scenario without any prompt and APIKEY 1`] = `
 "
 What's next?
 
-,[1000D[K[1A[1000D[K[1A[1000D[K[1A[1000D[K[1A[1000D[K[1A[1000D[K [32m✔[39m Generating scenario structure
- [32m✔[39m Create auth files
- [32m✔[39m Create setup files
- [32m✔[39m Create scenario specification file
- [32m✔[39m Create intial components
-,[1000D[K[1A[1000D[K[1A[1000D[K[1A[1000D[K[1A[1000D[K[1A[1000D[K [32m✔[39m Generating scenario structure
- [32m✔[39m Create auth files
- [32m✔[39m Create setup files
- [32m✔[39m Create scenario specification file
- [33m⠙[39m Create intial components
-,[1000D[K[1A[1000D[K[1A[1000D[K[1A[1000D[K[1A[1000D[K[1A[1000D[K [32m✔[39m Generating scenario structure
- [32m✔[39m Create auth files
- [32m✔[39m Create setup files
- [32m✔[39m Create scenario specification file
- [33m⠹[39m Create intial components
 ,[1m   cd APIKEYScenario && bearer start[22m
 ,[32mScenario initialized, name: APIKEYScenario, authentication type: API Key[39m
 ,[90m    create: [39m[37mtest/.bearer/init/APIKEY/.gitignore[39m
@@ -33,12 +18,7 @@ What's next?
 ,[90m    create: [39m[37mtest/.bearer/init/APIKEY/tsconfig.json[39m
 ,[90m    create: [39m[37mtest/.bearer/init/APIKEY/views/index.html[39m
 ,[90m    create: [39m[37mtest/.bearer/init/APIKEY/views/index.ts[39m
-,[?25h,[?25l,[?25l,[?25l,[?25l, [32m✔[39m Generating scenario structure
- [32m✔[39m Create auth files
- [33m⠙[39m Create setup files
-   Create scenario specification file
-   Create intial components
-,* read the bearer documentation at https://docs.bearer.sh
+,[?25h,[?25l,* read the bearer documentation at https://docs.bearer.sh
 
 ,* start your local development environement by running:
 
@@ -63,21 +43,6 @@ exports[`new command generates a scenario without any prompt and BASIC 1`] = `
 "
 What's next?
 
-,[1000D[K[1A[1000D[K[1A[1000D[K[1A[1000D[K[1A[1000D[K[1A[1000D[K [32m✔[39m Generating scenario structure
- [32m✔[39m Create auth files
- [32m✔[39m Create setup files
- [32m✔[39m Create scenario specification file
- [32m✔[39m Create intial components
-,[1000D[K[1A[1000D[K[1A[1000D[K[1A[1000D[K[1A[1000D[K[1A[1000D[K [32m✔[39m Generating scenario structure
- [32m✔[39m Create auth files
- [32m✔[39m Create setup files
- [32m✔[39m Create scenario specification file
- [33m⠙[39m Create intial components
-,[1000D[K[1A[1000D[K[1A[1000D[K[1A[1000D[K[1A[1000D[K[1A[1000D[K [32m✔[39m Generating scenario structure
- [32m✔[39m Create auth files
- [32m✔[39m Create setup files
- [32m✔[39m Create scenario specification file
- [33m⠹[39m Create intial components
 ,[1m   cd BASICScenario && bearer start[22m
 ,[32mScenario initialized, name: BASICScenario, authentication type: Basic Auth[39m
 ,[90m    create: [39m[37mtest/.bearer/init/BASIC/.gitignore[39m
@@ -92,12 +57,7 @@ What's next?
 ,[90m    create: [39m[37mtest/.bearer/init/BASIC/tsconfig.json[39m
 ,[90m    create: [39m[37mtest/.bearer/init/BASIC/views/index.html[39m
 ,[90m    create: [39m[37mtest/.bearer/init/BASIC/views/index.ts[39m
-,[?25h,[?25l,[?25l,[?25l,[?25l, [32m✔[39m Generating scenario structure
- [32m✔[39m Create auth files
- [33m⠙[39m Create setup files
-   Create scenario specification file
-   Create intial components
-,* read the bearer documentation at https://docs.bearer.sh
+,[?25h,[?25l,* read the bearer documentation at https://docs.bearer.sh
 
 ,* start your local development environement by running:
 
@@ -127,21 +87,6 @@ exports[`new command generates a scenario without any prompt and NONE 1`] = `
 "
 What's next?
 
-,[1000D[K[1A[1000D[K[1A[1000D[K[1A[1000D[K[1A[1000D[K[1A[1000D[K [32m✔[39m Generating scenario structure
- [32m✔[39m Create auth files
- [32m✔[39m Create setup files
- [32m✔[39m Create scenario specification file
- [32m✔[39m Create intial components
-,[1000D[K[1A[1000D[K[1A[1000D[K[1A[1000D[K[1A[1000D[K[1A[1000D[K [32m✔[39m Generating scenario structure
- [32m✔[39m Create auth files
- [32m✔[39m Create setup files
- [32m✔[39m Create scenario specification file
- [33m⠙[39m Create intial components
-,[1000D[K[1A[1000D[K[1A[1000D[K[1A[1000D[K[1A[1000D[K[1A[1000D[K [32m✔[39m Generating scenario structure
- [32m✔[39m Create auth files
- [32m✔[39m Create setup files
- [32m✔[39m Create scenario specification file
- [33m⠹[39m Create intial components
 ,[1m   cd NONEScenario && bearer start[22m
 ,[32mScenario initialized, name: NONEScenario, authentication type: NoAuth[39m
 ,[90m    create: [39m[37mtest/.bearer/init/NONE/.gitignore[39m
@@ -156,12 +101,7 @@ What's next?
 ,[90m    create: [39m[37mtest/.bearer/init/NONE/tsconfig.json[39m
 ,[90m    create: [39m[37mtest/.bearer/init/NONE/views/index.html[39m
 ,[90m    create: [39m[37mtest/.bearer/init/NONE/views/index.ts[39m
-,[?25h,[?25l,[?25l,[?25l,[?25l, [32m✔[39m Generating scenario structure
- [32m✔[39m Create auth files
- [32m✔[39m Create setup files
- [33m⠙[39m Create scenario specification file
-   Create intial components
-,* read the bearer documentation at https://docs.bearer.sh
+,[?25h,[?25l,* read the bearer documentation at https://docs.bearer.sh
 
 ,* start your local development environement by running:
 
@@ -179,21 +119,6 @@ exports[`new command generates a scenario without any prompt and OAUTH2 1`] = `
 "
 What's next?
 
-,[1000D[K[1A[1000D[K[1A[1000D[K[1A[1000D[K[1A[1000D[K[1A[1000D[K [32m✔[39m Generating scenario structure
- [32m✔[39m Create auth files
- [32m✔[39m Create setup files
- [32m✔[39m Create scenario specification file
- [32m✔[39m Create intial components
-,[1000D[K[1A[1000D[K[1A[1000D[K[1A[1000D[K[1A[1000D[K[1A[1000D[K [32m✔[39m Generating scenario structure
- [32m✔[39m Create auth files
- [32m✔[39m Create setup files
- [32m✔[39m Create scenario specification file
- [33m⠙[39m Create intial components
-,[1000D[K[1A[1000D[K[1A[1000D[K[1A[1000D[K[1A[1000D[K[1A[1000D[K [32m✔[39m Generating scenario structure
- [32m✔[39m Create auth files
- [32m✔[39m Create setup files
- [32m✔[39m Create scenario specification file
- [33m⠹[39m Create intial components
 ,[1m   cd OAUTH2Scenario && bearer start[22m
 ,[32mScenario initialized, name: OAUTH2Scenario, authentication type: OAuth2[39m
 ,[90m    create: [39m[37mtest/.bearer/init/OAUTH2/.gitignore[39m
@@ -208,12 +133,7 @@ What's next?
 ,[90m    create: [39m[37mtest/.bearer/init/OAUTH2/tsconfig.json[39m
 ,[90m    create: [39m[37mtest/.bearer/init/OAUTH2/views/index.html[39m
 ,[90m    create: [39m[37mtest/.bearer/init/OAUTH2/views/index.ts[39m
-,[?25h,[?25l,[?25l,[?25l,[?25l, [32m✔[39m Generating scenario structure
- [32m✔[39m Create auth files
- [33m⠙[39m Create setup files
-   Create scenario specification file
-   Create intial components
-,* read the bearer documentation at https://docs.bearer.sh
+,[?25h,[?25l,* read the bearer documentation at https://docs.bearer.sh
 
 ,* start your local development environement by running:
 
