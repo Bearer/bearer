@@ -21,12 +21,12 @@ exports[`new command generates a scenario without any prompt and APIKEY 1`] = `
  [32m✔[39m Create setup files
  [32m✔[39m Create scenario specification file
  [32m✔[39m Create intial components
-,[?25h,[90m    create: [39m[37mtest/.bearer/init/APIKEY/LICENSE[39m
-,[90m    create: [39m[37mtest/.bearer/init/APIKEY/.gitignore[39m
+,[?25h,[90m    create: [39m[37mtest/.bearer/init/APIKEY/.gitignore[39m
+,[90m    create: [39m[37mtest/.bearer/init/APIKEY/LICENSE[39m
 ,[90m    create: [39m[37mtest/.bearer/init/APIKEY/.scenariorc[39m
+,[90m    create: [39m[37mtest/.bearer/init/APIKEY/tsconfig.json[39m
 ,[90m    create: [39m[37mtest/.bearer/init/APIKEY/package.json[39m
 ,[90m    create: [39m[37mtest/.bearer/init/APIKEY/spec.ts[39m
-,[90m    create: [39m[37mtest/.bearer/init/APIKEY/tsconfig.json[39m
 ,[90m    create: [39m[37mtest/.bearer/init/APIKEY/views/index.html[39m
 ,[90m    create: [39m[37mtest/.bearer/init/APIKEY/views/index.ts[39m
 ,[90m    create: [39m[37mtest/.bearer/init/APIKEY/intents/tsconfig.json[39m
@@ -86,9 +86,9 @@ exports[`new command generates a scenario without any prompt and BASIC 1`] = `
 ,[90m    create: [39m[37mtest/.bearer/init/BASIC/package.json[39m
 ,[90m    create: [39m[37mtest/.bearer/init/BASIC/spec.ts[39m
 ,[90m    create: [39m[37mtest/.bearer/init/BASIC/tsconfig.json[39m
+,[90m    create: [39m[37mtest/.bearer/init/BASIC/intents/tsconfig.json[39m
 ,[90m    create: [39m[37mtest/.bearer/init/BASIC/views/index.html[39m
 ,[90m    create: [39m[37mtest/.bearer/init/BASIC/views/index.ts[39m
-,[90m    create: [39m[37mtest/.bearer/init/BASIC/intents/tsconfig.json[39m
 ,[90m    create: [39m[37mtest/.bearer/init/BASIC/auth.config.json[39m
 ,[90m    create: [39m[37mtest/.bearer/init/BASIC/config.dev.js.example[39m
 ,[90m    create: [39m[37mtest/.bearer/init/BASIC/intents/client.ts[39m
@@ -150,9 +150,9 @@ exports[`new command generates a scenario without any prompt and NONE 1`] = `
 ,[90m    create: [39m[37mtest/.bearer/init/NONE/package.json[39m
 ,[90m    create: [39m[37mtest/.bearer/init/NONE/spec.ts[39m
 ,[90m    create: [39m[37mtest/.bearer/init/NONE/tsconfig.json[39m
+,[90m    create: [39m[37mtest/.bearer/init/NONE/intents/tsconfig.json[39m
 ,[90m    create: [39m[37mtest/.bearer/init/NONE/views/index.html[39m
 ,[90m    create: [39m[37mtest/.bearer/init/NONE/views/index.ts[39m
-,[90m    create: [39m[37mtest/.bearer/init/NONE/intents/tsconfig.json[39m
 ,[90m    create: [39m[37mtest/.bearer/init/NONE/auth.config.json[39m
 ,[90m    create: [39m[37mtest/.bearer/init/NONE/config.dev.js.example[39m
 ,[90m    create: [39m[37mtest/.bearer/init/NONE/intents/client.ts[39m
@@ -200,8 +200,8 @@ exports[`new command generates a scenario without any prompt and OAUTH2 1`] = `
 ,[90m    create: [39m[37mtest/.bearer/init/OAUTH2/.gitignore[39m
 ,[90m    create: [39m[37mtest/.bearer/init/OAUTH2/.scenariorc[39m
 ,[90m    create: [39m[37mtest/.bearer/init/OAUTH2/package.json[39m
-,[90m    create: [39m[37mtest/.bearer/init/OAUTH2/tsconfig.json[39m
 ,[90m    create: [39m[37mtest/.bearer/init/OAUTH2/spec.ts[39m
+,[90m    create: [39m[37mtest/.bearer/init/OAUTH2/tsconfig.json[39m
 ,[90m    create: [39m[37mtest/.bearer/init/OAUTH2/intents/tsconfig.json[39m
 ,[90m    create: [39m[37mtest/.bearer/init/OAUTH2/views/index.html[39m
 ,[90m    create: [39m[37mtest/.bearer/init/OAUTH2/views/index.ts[39m
