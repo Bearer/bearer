@@ -20,7 +20,8 @@
     "lerna-publish-cicd": "lerna clean --yes && lerna bootstrap && lerna publish --yes",
     "test": "lerna run test --stream",
     "cm": "git-cz",
-    "bootstrap": "lerna bootstrap"
+    "bootstrap": "lerna bootstrap",
+    "prepare": "lerna run prepublish"
   },
   "license": "MIT",
   "husky": {

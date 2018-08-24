@@ -6,9 +6,6 @@
   "command": {
     "publish": {
       "ignoreChanges": ["*.md", "**/__tests__/**", "**/test/**"]
-    },
-    "bootstrap": {
-      "npmClientArgs": ["--frozen-lockfile"]
     }
   }
 }
