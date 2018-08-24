@@ -74,15 +74,11 @@ describe('Generate', () => {
     })
 
     describe('No auth', () => {
-      beforeEach(() => {
-        result = []
-      })
       it('create setup files ', async () => {
         bearerPath = ensureBearerStructure({ authConfig: { authType: 'NONE' }, folderName: 'none' })
         await GenerateSetup.run(['--path', bearerPath])
         expect(fs.existsSync(path.join(bearerPath, 'views', 'setup-action.tsx'))).toBeFalsy()
         expect(fs.existsSync(path.join(bearerPath, 'views', 'setup-display.tsx'))).toBeFalsy()
-        expect(result.join()).toContain('No setupViews key found within auth.config.json file. skipping')
       })
     })
   })
