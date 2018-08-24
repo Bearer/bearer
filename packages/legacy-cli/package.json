@@ -18,6 +18,7 @@
     "cleanup": "rm -rf dist",
     "build": "yarn templates && tsc -p tsconfig.json",
     "prepare": "yarn build",
+    "prepublish": "yarn build",
     "prepublishOnly": "yarn build",
     "test": "jest",
     "requirements-check": "node ./check-version.js"
