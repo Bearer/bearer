@@ -1,55 +1,21 @@
-import { test } from '@oclif/test'
-import { expect } from 'fancy-test'
-import * as sinon from 'sinon'
-
-import * as setup from '../../src/utils/setupConfig'
+import LinkCommand from '../../src/commands/link'
+import { ensureBearerStructure } from '../helpers/setup'
+import { readFile } from '../helpers/utils'
 
 describe('Link', () => {
-  let stub: any
-  let update: any
+  let bearerPath: string
 
-  afterEach(() => {
-    ;(setup.default as any).restore()
-    stub.restore()
+  let result: Array<string>
+
+  beforeEach(() => {
+    result = []
+    jest.spyOn(process.stdout, 'write').mockImplementation(val => result.push(val))
+    bearerPath = ensureBearerStructure()
   })
 
-  describe('Update', () => {
-    beforeEach(() => {
-      update = sinon.spy()
-      stub = sinon.stub(setup, 'default')
-      stub.returns({
-        setScenarioConfig: update,
-        isScenarioLocation: true
-      })
-    })
-
-    test
-      .stdout()
-      .command(['link', '123-scenario-id'])
-      .it('Display success message', ctx => {
-        expect(update.args[0][0]).to.include({
-          orgId: '123',
-          scenarioId: 'scenario-id'
-        })
-        expect(ctx.stdout).to.contain('Scenario successfully linked')
-      })
-  })
-
-  describe('Does not update', () => {
-    beforeEach(() => {
-      update = sinon.spy()
-      stub = sinon.stub(setup, 'default')
-      stub.returns({
-        setScenarioConfig: update,
-        isScenarioLocation: false
-      })
-    })
-
-    test
-      .stdout()
-      .stderr()
-      .command(['link', '123-scenario-id'])
-      .exit(2)
-      .it('exits with error')
+  it('does not fail :-P ', async () => {
+    await LinkCommand.run(['123-scenario-id', '--path', bearerPath])
+    expect(result.join()).toContain('Scenario successfully linked')
+    expect(readFile(bearerPath, '.scenariorc')).toMatchSnapshot()
   })
 })
