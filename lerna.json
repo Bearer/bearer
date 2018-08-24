@@ -1,11 +1,14 @@
 {
   "npmClient": "yarn",
-  "npmClientArgs": [
-    "--fronzen-lockfile"
-  ],
-  "packages": [
-    "packages/*"
-  ],
+  "useWorkspaces": true,
+  "packages": ["packages/*"],
   "version": "0.56.3",
-  "lerna": "2.11.0"
+  "command": {
+    "publish": {
+      "ignoreChanges": ["*.md", "**/__tests__/**", "**/test/**"]
+    },
+    "bootstrap": {
+      "npmClientArgs": ["--frozen-lockfile"]
+    }
+  }
 }
