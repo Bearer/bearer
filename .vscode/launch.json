@@ -11,7 +11,7 @@
       "program": "${workspaceFolder}/packages/cli/node_modules/jest/bin/jest",
       "args": ["--runInBand"],
       "cwd": "${workspaceFolder}/packages/cli",
-      "console": "internalConsole"
+      "console": "integratedTerminal"
     },
     {
       "type": "node",
@@ -20,7 +20,7 @@
       "program": "${workspaceFolder}/packages/cli/node_modules/jest/bin/jest",
       "args": ["${fileDirname}/${fileBasename}"],
       "cwd": "${workspaceFolder}/packages/cli",
-      "console": "internalConsole"
+      "console": "integratedTerminal"
     }
   ]
 }
