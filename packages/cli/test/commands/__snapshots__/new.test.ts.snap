@@ -1,0 +1,247 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`new command generates a scenario without any prompt and APIKEY 1`] = `
+"[?25l, [32m✔[39m Generating scenario structure
+ [32m✔[39m Create auth files
+ [33m⠙[39m Create setup files
+   Create scenario specification file
+   Create intial components
+,[?25l,[1000D[K[1A[1000D[K[1A[1000D[K[1A[1000D[K[1A[1000D[K[1A[1000D[K [32m✔[39m Generating scenario structure
+ [32m✔[39m Create auth files
+ [32m✔[39m Create setup files
+ [32m✔[39m Create scenario specification file
+ [33m⠙[39m Create intial components
+,[?25l,[1000D[K[1A[1000D[K[1A[1000D[K[1A[1000D[K[1A[1000D[K[1A[1000D[K [32m✔[39m Generating scenario structure
+ [32m✔[39m Create auth files
+ [32m✔[39m Create setup files
+ [32m✔[39m Create scenario specification file
+ [33m⠹[39m Create intial components
+,[?25l,[1000D[K[1A[1000D[K[1A[1000D[K[1A[1000D[K[1A[1000D[K[1A[1000D[K [32m✔[39m Generating scenario structure
+ [32m✔[39m Create auth files
+ [32m✔[39m Create setup files
+ [32m✔[39m Create scenario specification file
+ [32m✔[39m Create intial components
+,[?25h,[90m    create: [39m[37mtest/.bearer/init/APIKEY/LICENSE[39m
+,[90m    create: [39m[37mtest/.bearer/init/APIKEY/.gitignore[39m
+,[90m    create: [39m[37mtest/.bearer/init/APIKEY/.scenariorc[39m
+,[90m    create: [39m[37mtest/.bearer/init/APIKEY/package.json[39m
+,[90m    create: [39m[37mtest/.bearer/init/APIKEY/spec.ts[39m
+,[90m    create: [39m[37mtest/.bearer/init/APIKEY/tsconfig.json[39m
+,[90m    create: [39m[37mtest/.bearer/init/APIKEY/views/index.html[39m
+,[90m    create: [39m[37mtest/.bearer/init/APIKEY/views/index.ts[39m
+,[90m    create: [39m[37mtest/.bearer/init/APIKEY/intents/tsconfig.json[39m
+,[90m    create: [39m[37mtest/.bearer/init/APIKEY/auth.config.json[39m
+,[90m    create: [39m[37mtest/.bearer/init/APIKEY/config.dev.js.example[39m
+,[90m    create: [39m[37mtest/.bearer/init/APIKEY/intents/client.ts[39m
+,[32mScenario initialized, name: APIKEYScenario, authentication type: API Key[39m
+,
+What's next?
+
+,* read the bearer documentation at https://docs.bearer.sh
+
+,* start your local development environement by running:
+
+,[1m   cd APIKEYScenario && bearer start[22m
+"
+`;
+
+exports[`new command generates a scenario without any prompt and APIKEY 2`] = `
+"{
+  \\"authType\\": \\"APIKEY\\",
+  \\"setupViews\\": [
+    {
+      \\"type\\": \\"password\\",
+      \\"label\\": \\"Api Key\\",
+      \\"controlName\\": \\"apiKey\\"
+    }
+  ]
+}
+"
+`;
+
+exports[`new command generates a scenario without any prompt and BASIC 1`] = `
+"[?25l, [32m✔[39m Generating scenario structure
+ [32m✔[39m Create auth files
+ [33m⠙[39m Create setup files
+   Create scenario specification file
+   Create intial components
+,[?25l,[1000D[K[1A[1000D[K[1A[1000D[K[1A[1000D[K[1A[1000D[K[1A[1000D[K [32m✔[39m Generating scenario structure
+ [32m✔[39m Create auth files
+ [32m✔[39m Create setup files
+ [32m✔[39m Create scenario specification file
+ [33m⠙[39m Create intial components
+,[?25l,[1000D[K[1A[1000D[K[1A[1000D[K[1A[1000D[K[1A[1000D[K[1A[1000D[K [32m✔[39m Generating scenario structure
+ [32m✔[39m Create auth files
+ [32m✔[39m Create setup files
+ [32m✔[39m Create scenario specification file
+ [33m⠹[39m Create intial components
+,[?25l,[1000D[K[1A[1000D[K[1A[1000D[K[1A[1000D[K[1A[1000D[K[1A[1000D[K [32m✔[39m Generating scenario structure
+ [32m✔[39m Create auth files
+ [32m✔[39m Create setup files
+ [32m✔[39m Create scenario specification file
+ [32m✔[39m Create intial components
+,[?25h,[90m    create: [39m[37mtest/.bearer/init/BASIC/LICENSE[39m
+,[90m    create: [39m[37mtest/.bearer/init/BASIC/.gitignore[39m
+,[90m    create: [39m[37mtest/.bearer/init/BASIC/.scenariorc[39m
+,[90m    create: [39m[37mtest/.bearer/init/BASIC/package.json[39m
+,[90m    create: [39m[37mtest/.bearer/init/BASIC/spec.ts[39m
+,[90m    create: [39m[37mtest/.bearer/init/BASIC/tsconfig.json[39m
+,[90m    create: [39m[37mtest/.bearer/init/BASIC/views/index.html[39m
+,[90m    create: [39m[37mtest/.bearer/init/BASIC/views/index.ts[39m
+,[90m    create: [39m[37mtest/.bearer/init/BASIC/intents/tsconfig.json[39m
+,[90m    create: [39m[37mtest/.bearer/init/BASIC/auth.config.json[39m
+,[90m    create: [39m[37mtest/.bearer/init/BASIC/config.dev.js.example[39m
+,[90m    create: [39m[37mtest/.bearer/init/BASIC/intents/client.ts[39m
+,[32mScenario initialized, name: BASICScenario, authentication type: Basic Auth[39m
+,
+What's next?
+
+,* read the bearer documentation at https://docs.bearer.sh
+
+,* start your local development environement by running:
+
+,[1m   cd BASICScenario && bearer start[22m
+"
+`;
+
+exports[`new command generates a scenario without any prompt and BASIC 2`] = `
+"{
+  \\"authType\\": \\"BASIC\\",
+  \\"setupViews\\": [
+    {
+      \\"type\\": \\"text\\",
+      \\"label\\": \\"Username\\",
+      \\"controlName\\": \\"username\\"
+    },
+    {
+      \\"type\\": \\"password\\",
+      \\"label\\": \\"Password\\",
+      \\"controlName\\": \\"password\\"
+    }
+  ]
+}
+"
+`;
+
+exports[`new command generates a scenario without any prompt and NONE 1`] = `
+"[?25l, [32m✔[39m Generating scenario structure
+ [32m✔[39m Create auth files
+ [32m✔[39m Create setup files
+ [33m⠙[39m Create scenario specification file
+   Create intial components
+,[?25l,[1000D[K[1A[1000D[K[1A[1000D[K[1A[1000D[K[1A[1000D[K[1A[1000D[K [32m✔[39m Generating scenario structure
+ [32m✔[39m Create auth files
+ [32m✔[39m Create setup files
+ [32m✔[39m Create scenario specification file
+ [33m⠙[39m Create intial components
+,[?25l,[1000D[K[1A[1000D[K[1A[1000D[K[1A[1000D[K[1A[1000D[K[1A[1000D[K [32m✔[39m Generating scenario structure
+ [32m✔[39m Create auth files
+ [32m✔[39m Create setup files
+ [32m✔[39m Create scenario specification file
+ [33m⠹[39m Create intial components
+,[?25l,[1000D[K[1A[1000D[K[1A[1000D[K[1A[1000D[K[1A[1000D[K[1A[1000D[K [32m✔[39m Generating scenario structure
+ [32m✔[39m Create auth files
+ [32m✔[39m Create setup files
+ [32m✔[39m Create scenario specification file
+ [32m✔[39m Create intial components
+,[?25h,[90m    create: [39m[37mtest/.bearer/init/NONE/LICENSE[39m
+,[90m    create: [39m[37mtest/.bearer/init/NONE/.gitignore[39m
+,[90m    create: [39m[37mtest/.bearer/init/NONE/.scenariorc[39m
+,[90m    create: [39m[37mtest/.bearer/init/NONE/package.json[39m
+,[90m    create: [39m[37mtest/.bearer/init/NONE/spec.ts[39m
+,[90m    create: [39m[37mtest/.bearer/init/NONE/tsconfig.json[39m
+,[90m    create: [39m[37mtest/.bearer/init/NONE/views/index.html[39m
+,[90m    create: [39m[37mtest/.bearer/init/NONE/views/index.ts[39m
+,[90m    create: [39m[37mtest/.bearer/init/NONE/intents/tsconfig.json[39m
+,[90m    create: [39m[37mtest/.bearer/init/NONE/auth.config.json[39m
+,[90m    create: [39m[37mtest/.bearer/init/NONE/config.dev.js.example[39m
+,[90m    create: [39m[37mtest/.bearer/init/NONE/intents/client.ts[39m
+,[32mScenario initialized, name: NONEScenario, authentication type: NoAuth[39m
+,
+What's next?
+
+,* read the bearer documentation at https://docs.bearer.sh
+
+,* start your local development environement by running:
+
+,[1m   cd NONEScenario && bearer start[22m
+"
+`;
+
+exports[`new command generates a scenario without any prompt and NONE 2`] = `
+"{
+  \\"authType\\": \\"NONE\\"
+}
+"
+`;
+
+exports[`new command generates a scenario without any prompt and OAUTH2 1`] = `
+"[?25l, [32m✔[39m Generating scenario structure
+ [32m✔[39m Create auth files
+ [33m⠙[39m Create setup files
+   Create scenario specification file
+   Create intial components
+,[?25l,[1000D[K[1A[1000D[K[1A[1000D[K[1A[1000D[K[1A[1000D[K[1A[1000D[K [32m✔[39m Generating scenario structure
+ [32m✔[39m Create auth files
+ [32m✔[39m Create setup files
+ [32m✔[39m Create scenario specification file
+ [33m⠙[39m Create intial components
+,[?25l,[1000D[K[1A[1000D[K[1A[1000D[K[1A[1000D[K[1A[1000D[K[1A[1000D[K [32m✔[39m Generating scenario structure
+ [32m✔[39m Create auth files
+ [32m✔[39m Create setup files
+ [32m✔[39m Create scenario specification file
+ [33m⠹[39m Create intial components
+,[?25l,[1000D[K[1A[1000D[K[1A[1000D[K[1A[1000D[K[1A[1000D[K[1A[1000D[K [32m✔[39m Generating scenario structure
+ [32m✔[39m Create auth files
+ [32m✔[39m Create setup files
+ [32m✔[39m Create scenario specification file
+ [32m✔[39m Create intial components
+,[?25h,[90m    create: [39m[37mtest/.bearer/init/OAUTH2/LICENSE[39m
+,[90m    create: [39m[37mtest/.bearer/init/OAUTH2/.gitignore[39m
+,[90m    create: [39m[37mtest/.bearer/init/OAUTH2/.scenariorc[39m
+,[90m    create: [39m[37mtest/.bearer/init/OAUTH2/package.json[39m
+,[90m    create: [39m[37mtest/.bearer/init/OAUTH2/tsconfig.json[39m
+,[90m    create: [39m[37mtest/.bearer/init/OAUTH2/spec.ts[39m
+,[90m    create: [39m[37mtest/.bearer/init/OAUTH2/intents/tsconfig.json[39m
+,[90m    create: [39m[37mtest/.bearer/init/OAUTH2/views/index.html[39m
+,[90m    create: [39m[37mtest/.bearer/init/OAUTH2/views/index.ts[39m
+,[90m    create: [39m[37mtest/.bearer/init/OAUTH2/auth.config.json[39m
+,[90m    create: [39m[37mtest/.bearer/init/OAUTH2/config.dev.js.example[39m
+,[90m    create: [39m[37mtest/.bearer/init/OAUTH2/intents/client.ts[39m
+,[32mScenario initialized, name: OAUTH2Scenario, authentication type: OAuth2[39m
+,
+What's next?
+
+,* read the bearer documentation at https://docs.bearer.sh
+
+,* start your local development environement by running:
+
+,[1m   cd OAUTH2Scenario && bearer start[22m
+"
+`;
+
+exports[`new command generates a scenario without any prompt and OAUTH2 2`] = `
+"{
+  \\"authorizationURL\\": \\"https://example.com/authorizationUrl\\",
+  \\"tokenURL\\": \\"https://example.com/tokenUrl\\",
+  \\"authType\\": \\"OAUTH2\\",
+  \\"tokenParams\\": {},
+  \\"authorizationParams\\": {},
+  \\"config\\": {
+    \\"scope\\": []
+  },
+  \\"setupViews\\": [
+    {
+      \\"type\\": \\"text\\",
+      \\"label\\": \\"Client ID\\",
+      \\"controlName\\": \\"clientID\\"
+    },
+    {
+      \\"type\\": \\"password\\",
+      \\"label\\": \\"Client Secret\\",
+      \\"controlName\\": \\"clientSecret\\"
+    }
+  ]
+}
+"
+`;
