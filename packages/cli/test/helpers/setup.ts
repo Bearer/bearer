@@ -4,10 +4,15 @@ import * as path from 'path'
 type TSetupConfig = {
   clean?: boolean
   authConfig?: any
+  folderName?: string
 }
 
-export function ensureBearerStructure({ clean = true, authConfig }: TSetupConfig = {}): string {
-  const bearerFolder = path.join(__dirname, '..', '.bearer', 'fakescenario')
+export function ensureBearerStructure({
+  clean = true,
+  authConfig,
+  folderName = 'fakescenario'
+}: TSetupConfig = {}): string {
+  const bearerFolder = path.join(__dirname, '..', '.bearer', folderName)
   if (!fs.existsSync(bearerFolder)) {
     fs.mkdirpSync(bearerFolder)
   }
