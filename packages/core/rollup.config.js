@@ -29,7 +29,9 @@ if (isProduction) {
 function plugins() {
   const base = [
     commonjs(),
-    typescript({}),
+    typescript({
+      exclude: ['*.d.ts', '**/*.d.ts', '**/plugins.ts', '**/node_modules/**']
+    }),
     resolve({
       jsnext: true,
       main: true,

@@ -16,6 +16,7 @@
     "build:development": "yarn build:bundle -w",
     "build:production": "NODE_ENV=production yarn build:bundle ",
     "build:bundle": "rollup -c",
+    "prepare": "yarn build:production",
     "prepublish": "yarn build:production",
     "prepublishOnly": "BUILD=distribution NODE_ENV=production yarn build:production",
     "test": "jest"
