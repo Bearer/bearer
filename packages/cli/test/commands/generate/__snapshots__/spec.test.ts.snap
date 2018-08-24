@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Generate generate:spec blank component 1`] = `
+exports[`Generate generate:spec creates a spce file 1`] = `
 "export default {
   components: [
     {
