@@ -1,22 +1,22 @@
-import { test } from '@oclif/test'
-import { expect } from 'fancy-test'
-
+import GenerateSpec from '../../../src/commands/generate/spec'
 import { ensureBearerStructure } from '../../helpers/setup'
+import { readFile } from '../../helpers/utils'
 
 describe('Generate', () => {
-  let bearerPath = ensureBearerStructure()
+  let bearerPath: string
+  let result: Array<string>
 
-  beforeEach(done => {
-    ensureBearerStructure()
-    done()
+  beforeEach(() => {
+    result = []
+    jest.spyOn(process.stdout, 'write').mockImplementation(val => result.push(val))
+    bearerPath = ensureBearerStructure()
   })
 
   describe('generate:spec', () => {
-    test
-      .stdout()
-      .command(['generate:spec', '--force', '--path', bearerPath])
-      .it('Generate setup files intent', ctx => {
-        expect(ctx.stdout).to.contain('Spec file successfully generated!')
-      })
+    it('blank component', async () => {
+      await GenerateSpec.run(['--force', '--path', bearerPath])
+      expect(result.join()).toContain('Spec file successfully generated!')
+      expect(readFile(bearerPath, 'spec.ts')).toMatchSnapshot()
+    })
   })
 })
