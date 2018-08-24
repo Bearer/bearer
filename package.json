@@ -6,7 +6,7 @@
       "git add"
     ],
     "*.{tsx,ts}": [
-      "tslint -e '**/templates/**' -e node_modules --fix",
+      "tslint -e '**/templates/**' -e '**/__fixtures__/**' -e node_modules --fix",
       "git add"
     ]
   },

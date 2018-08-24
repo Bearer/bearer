@@ -47,7 +47,7 @@ import { RootComponent } from '@bearer/core'
 import '@bearer/ui'
 
 @RootComponent({
-  name: 'action',
+  role: 'action',
   group: 'root-component'
 })
 export class RootComponentAction {
@@ -75,7 +75,7 @@ import { RootComponent } from '@bearer/core'
 import '@bearer/ui'
 
 @RootComponent({
-  name: 'display',
+  role: 'display',
   group: 'root-component'
 })
 export class RootComponentDisplay {

@@ -1,6 +1,6 @@
 @RootComponent({
   group: 'feature',
-  name: 'action'
+  role: 'action'
 })
 class RootComponent {
   renderFromANotherProp() {

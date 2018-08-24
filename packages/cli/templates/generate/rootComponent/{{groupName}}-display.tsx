@@ -7,7 +7,7 @@ import { RootComponent } from '@bearer/core'
 import '@bearer/ui'
 
 @RootComponent({
-  name: 'display',
+  role: 'display',
   group: '{{groupName}}'
 })
 export class {{componentClassName}}Display {

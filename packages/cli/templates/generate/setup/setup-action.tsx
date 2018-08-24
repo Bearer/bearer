@@ -8,7 +8,7 @@ import '@bearer/ui'
 
 @RootComponent({
   group: 'setup',
-  name: 'action'
+  role: 'action'
 })
 export class SetupAction {
   @Prop() onSetupSuccess: (detail: any) => void = (_any: any) => {}

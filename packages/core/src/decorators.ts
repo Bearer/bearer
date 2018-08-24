@@ -43,14 +43,11 @@ export declare const Component: IBearerComponentDecorator<any>
  * RootComponent Decorator
  */
 
-export enum BearerRootComponentRoleEnum {
-  Display = 'display',
-  Action = 'action'
-}
+export type BearerRootComponentRole = 'display' | 'action'
 
 export interface BearerRootComponentOptions extends Omit<d.ComponentOptions, 'tag'> {
   group: string
-  name: 'display' | 'action'
+  role: BearerRootComponentRole
   shadow?: boolean
 }
 

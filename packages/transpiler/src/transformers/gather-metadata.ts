@@ -59,7 +59,7 @@ export default function GatherMetadata(
         const component = getDecoratorNamed(node, Decorators.RootComponent)
         const nameExpression = getExpressionFromDecorator<ts.StringLiteral>(
           component,
-          'name'
+          'role'
         )
         const name = nameExpression ? nameExpression.text : ''
         const groupExpression = getExpressionFromDecorator<ts.StringLiteral>(
