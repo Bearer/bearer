@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Generate generate:setup APIKEY create setup files  1`] = `
+exports[`generate:setup APIKEY create setup files  1`] = `
 "/*
   The purpose of this component is to save scenario credentials.
   This file has been generated automatically and should not be edited.
@@ -28,7 +28,7 @@ export class SetupAction {
 "
 `;
 
-exports[`Generate generate:setup APIKEY create setup files  2`] = `
+exports[`generate:setup APIKEY create setup files  2`] = `
 "/*
   The purpose of this component is to save scenario credentials.
 */
@@ -50,7 +50,7 @@ export class SetupDisplay {
 "
 `;
 
-exports[`Generate generate:setup BASIC create setup files  1`] = `
+exports[`generate:setup BASIC create setup files  1`] = `
 "/*
   The purpose of this component is to save scenario credentials.
   This file has been generated automatically and should not be edited.
@@ -78,7 +78,7 @@ export class SetupAction {
 "
 `;
 
-exports[`Generate generate:setup BASIC create setup files  2`] = `
+exports[`generate:setup BASIC create setup files  2`] = `
 "/*
   The purpose of this component is to save scenario credentials.
 */
@@ -100,7 +100,7 @@ export class SetupDisplay {
 "
 `;
 
-exports[`Generate generate:setup OAUTH2 create setup files  1`] = `
+exports[`generate:setup OAUTH2 create setup files  1`] = `
 "/*
   The purpose of this component is to save scenario credentials.
   This file has been generated automatically and should not be edited.
@@ -128,7 +128,7 @@ export class SetupAction {
 "
 `;
 
-exports[`Generate generate:setup OAUTH2 create setup files  2`] = `
+exports[`generate:setup OAUTH2 create setup files  2`] = `
 "/*
   The purpose of this component is to save scenario credentials.
 */

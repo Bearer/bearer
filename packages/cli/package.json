@@ -85,7 +85,8 @@
     "posttest": "tsc -p test --noEmit",
     "prepack": "rm -rf lib && tsc && oclif-dev manifest && oclif-dev readme",
     "prepare": "rm -rf lib && tsc",
-    "test": "rm -rf .bearer && jest --coverage ",
+    "test": "rm -rf .bearer && jest --runInBand",
+    "test:ci": "rm -rf .bearer && jest --coverage --runInBand",
     "version": "oclif-dev readme && git add README.md"
   },
   "types": "lib/index.d.ts",
