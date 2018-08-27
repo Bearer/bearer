@@ -1,6 +1,6 @@
 // TODO: remove reboot at some point => smaller footprint, manage maring/padding by ourself
-@import 'node_modules/bootstrap/scss/reboot';
-@import 'node_modules/bootstrap/scss/popover';
+@import '../../node_modules/bootstrap/scss/reboot';
+@import '../../node_modules/bootstrap/scss/popover';
 $top-arrow: 50px;
 
 .root {

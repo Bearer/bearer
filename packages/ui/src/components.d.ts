@@ -53,11 +53,6 @@ declare global {
       'revoke': () => void;
     }
 
-    interface BearerBadge {
-      'content': any;
-      'kind': 'primary' | 'secondary' | 'success' | 'danger' | 'warning' | 'info' | 'light' | 'dark';
-    }
-
     interface BearerButton {
       'as': string;
       'content': any;
@@ -259,14 +254,6 @@ declare global {
     };
     
 
-    interface HTMLBearerBadgeElement extends StencilComponents.BearerBadge, HTMLStencilElement {}
-
-    var HTMLBearerBadgeElement: {
-      prototype: HTMLBearerBadgeElement;
-      new (): HTMLBearerBadgeElement;
-    };
-    
-
     interface HTMLBearerButtonElement extends StencilComponents.BearerButton, HTMLStencilElement {}
 
     var HTMLBearerButtonElement: {
@@ -464,7 +451,6 @@ declare global {
     export interface IntrinsicElements {
     'bearer-alert': JSXElements.BearerAlertAttributes;
     'bearer-authorized': JSXElements.BearerAuthorizedAttributes;
-    'bearer-badge': JSXElements.BearerBadgeAttributes;
     'bearer-button': JSXElements.BearerButtonAttributes;
     'bearer-checkbox': JSXElements.BearerCheckboxAttributes;
     'bearer-form': JSXElements.BearerFormAttributes;
@@ -503,11 +489,6 @@ declare global {
     export interface BearerAuthorizedAttributes extends HTMLAttributes {
       'renderAuthorized'?: () => any;
       'renderUnauthorized'?: FWithAuthenticate;
-    }
-
-    export interface BearerBadgeAttributes extends HTMLAttributes {
-      'content'?: any;
-      'kind'?: 'primary' | 'secondary' | 'success' | 'danger' | 'warning' | 'info' | 'light' | 'dark';
     }
 
     export interface BearerButtonAttributes extends HTMLAttributes {
@@ -707,7 +688,6 @@ declare global {
   interface HTMLElementTagNameMap {
     'bearer-alert': HTMLBearerAlertElement
     'bearer-authorized': HTMLBearerAuthorizedElement
-    'bearer-badge': HTMLBearerBadgeElement
     'bearer-button': HTMLBearerButtonElement
     'bearer-checkbox': HTMLBearerCheckboxElement
     'bearer-form': HTMLBearerFormElement
@@ -737,7 +717,6 @@ declare global {
   interface ElementTagNameMap {
     'bearer-alert': HTMLBearerAlertElement;
     'bearer-authorized': HTMLBearerAuthorizedElement;
-    'bearer-badge': HTMLBearerBadgeElement;
     'bearer-button': HTMLBearerButtonElement;
     'bearer-checkbox': HTMLBearerCheckboxElement;
     'bearer-form': HTMLBearerFormElement;
