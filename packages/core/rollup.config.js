@@ -50,16 +50,16 @@ const bundles = [
     input: 'src/index.ts',
     output: [
       {
-        file: 'dist/main.es.js',
+        file: 'lib/main.es.js',
         format: 'es'
       },
       {
-        file: 'dist/main.js',
+        file: 'lib/main.js',
         format: 'cjs',
         exports: 'named'
       },
       {
-        file: 'dist/main.browser.js',
+        file: 'lib/main.browser.js',
         name: 'Bearer',
         format: 'iife'
       }
@@ -69,7 +69,7 @@ const bundles = [
   {
     input: 'src/plugins.ts',
     output: {
-      file: 'dist/plugins.js',
+      file: 'lib/plugins.js',
       format: 'cjs'
     }
   }

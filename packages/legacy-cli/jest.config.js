@@ -8,5 +8,5 @@ module.exports = {
   verbose: true,
   testEnvironment: 'node',
   testURL: 'http://localhost/',
-  testPathIgnorePatterns: ['<rootDir>/dist/', '<rootDir>/node_modules']
+  testPathIgnorePatterns: ['<rootDir>/lib/', '<rootDir>/node_modules']
 }

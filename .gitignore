@@ -4,3 +4,4 @@ node_modules/
 .envrc
 .npmrc
 dist/
+lib/

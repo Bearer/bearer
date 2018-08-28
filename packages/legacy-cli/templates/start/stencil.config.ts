@@ -1,5 +1,5 @@
 import { Config } from '@stencil/core'
-const { plugins } = require('@bearer/core/dist/plugins')
+const { plugins } = require('@bearer/core/lib/plugins')
 
 export const config: Config = {
   namespace: process.env.BEARER_SCENARIO_TAG_NAME,

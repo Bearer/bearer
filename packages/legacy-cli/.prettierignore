@@ -1,4 +1,4 @@
-dist/
+lib/
 components.d.ts
 www/
 node_modules

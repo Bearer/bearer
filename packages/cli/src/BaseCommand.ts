@@ -1,4 +1,4 @@
-import * as serviceClient from '@bearer/bearer-cli/dist/src/lib/serviceClient'
+import * as serviceClient from '@bearer/bearer-cli/lib/src/lib/serviceClient'
 import Command, { flags } from '@oclif/command'
 import * as Case from 'case'
 import cliUx from 'cli-ux'

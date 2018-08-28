@@ -6,7 +6,7 @@
     "module": "commonjs",
     "target": "es6",
     "moduleResolution": "node",
-    "outDir": "dist/",
+    "outDir": "lib/",
     "declaration": true
   },
   "include": ["src/"],

@@ -5,18 +5,18 @@
   "repository": "git@github.com:Bearer/bearer.git",
   "author": "Radek Molenda <radek@bearer.com>",
   "license": "MIT",
-  "typings": "dist/bin/index",
+  "typings": "lib/bin/index",
   "engines": {
     "node": ">=8.11.0"
   },
   "files": [
-    "dist/"
+    "lib/"
   ],
   "scripts": {
-    "clean": "rm -rf dist/",
+    "clean": "rm -rf lib/",
     "start": "yarn build",
-    "templates": "yarn cleanup && copyfiles -a \"./templates/**/*\" dist/src/lib/commands/",
-    "cleanup": "rm -rf dist",
+    "templates": "yarn cleanup && copyfiles -a \"./templates/**/*\" lib/src/lib/commands/",
+    "cleanup": "rm -rf lib",
     "build": "yarn templates && tsc -p tsconfig.json",
     "prepare": "yarn build",
     "prepublishOnly": "NODE_ENV=production yarn build",

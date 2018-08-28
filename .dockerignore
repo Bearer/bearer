@@ -1,4 +1,4 @@
 **/node_modules/
 test/
-dist/
+lib/
 www/

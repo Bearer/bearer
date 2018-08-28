@@ -85,13 +85,13 @@ yarn build -w # starts TS compiler with watch mode enabled
 at this point you can use the CLI as follow
 
 ```bash
-/path/bearer/repo/packages/cli/dist/bin/index.js start # or whatever bearer command you want
+/path/bearer/repo/packages/cli/lib/bin/index.js start # or whatever bearer command you want
 ```
 
 Additional tip
 
 ```bash
-echo 'alias bl="/path/bearer/bearer/packages/cli/dist/bin/index.js"' >> ~/.zshrc # or .bashrc or everything else you use
+echo 'alias bl="/path/bearer/bearer/packages/cli/lib/bin/index.js"' >> ~/.zshrc # or .bashrc or everything else you use
 
 # within a scenario
 bl start

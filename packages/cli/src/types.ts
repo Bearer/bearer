@@ -1,4 +1,4 @@
-import Authentication from '@bearer/types/dist/Authentications'
+import Authentication from '@bearer/types/lib/Authentications'
 
 export type BearerEnv = 'dev' | 'staging' | 'production'
 

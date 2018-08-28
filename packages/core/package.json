@@ -2,16 +2,16 @@
   "name": "@bearer/core",
   "version": "0.58.5",
   "description": "Bearer Core",
-  "main": "dist/main.js",
-  "types": "dist/index.d.ts",
-  "module": "dist/main.es.js",
+  "main": "lib/main.js",
+  "types": "lib/index.d.ts",
+  "module": "lib/main.es.js",
   "author": "Bearer",
   "license": "MIT",
   "files": [
-    "dist/"
+    "lib/"
   ],
   "scripts": {
-    "clean": "rm -rf dist/",
+    "clean": "rm -rf lib/",
     "start": "yarn build",
     "build": "per-env",
     "build:development": "yarn build:bundle -w",

@@ -3,11 +3,11 @@
   "private": true,
   "version": "0.0.1",
   "description": "Bearer UI Lib demo",
-  "main": "dist/bearer-demo.js",
-  "types": "dist/types/components.d.ts",
-  "collection": "dist/collection/collection-manifest.json",
+  "main": "lib/bearer-demo.js",
+  "types": "lib/types/components.d.ts",
+  "collection": "lib/collection/collection-manifest.json",
   "files": [
-    "dist/"
+    "lib/"
   ],
   "scripts": {
     "build": "stencil build --prerender",

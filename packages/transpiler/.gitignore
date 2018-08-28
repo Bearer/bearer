@@ -1,6 +1,6 @@
 .env
 node_modules
 .rpt2_cache
-dist/
+lib/
 .build/
 **/__fixtures__/post/**
