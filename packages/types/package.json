@@ -2,14 +2,14 @@
   "name": "@bearer/types",
   "version": "0.58.5",
   "description": "Provide typing for Bearer packages",
-  "main": "lib/index.js",
-  "types": "lib/index.d.ts",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "files": [
-    "/lib"
+    "dist/"
   ],
   "scripts": {
     "test": "jest",
-    "prepare": "rm -rf lib/ && tsc"
+    "prepare": "rm -rf dist/ && NODE_ENV=production tsc"
   },
   "repository": {
     "type": "git",

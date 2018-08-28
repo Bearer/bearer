@@ -13,7 +13,7 @@
     "start": "yarn build",
     "build": "tsc -p tsconfig.json",
     "prepare": "yarn build",
-    "prepublishOnly": "yarn build",
+    "prepublishOnly": "NODE_ENV=production yarn build",
     "test": "jest"
   },
   "jest": {

@@ -5,7 +5,7 @@
     "forceConsistentCasingInFileNames": true,
     "importHelpers": true,
     "module": "commonjs",
-    "outDir": "./lib",
+    "outDir": "./dist",
     "rootDirs": ["./src"],
     "strict": true,
     "target": "es2017",

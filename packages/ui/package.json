@@ -7,7 +7,6 @@
   "types": "dist/types/components.d.ts",
   "collection": "dist/collection/collection-manifest.json",
   "files": [
-    "src/",
     "dist/"
   ],
   "scripts": {
