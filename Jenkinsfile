@@ -34,7 +34,6 @@ pipeline {
                     ansiColor('xterm') {
                         sh ".jenkins/prepare.sh"
                         sh "yarn install --frozen-lockfile"
-                        sh "yarn run lerna bootstrap --ci"
                      }
                 }
             }
