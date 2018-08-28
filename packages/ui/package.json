@@ -11,6 +11,7 @@
   ],
   "scripts": {
     "build:storybook": "stencil build && build-storybook -s www",
+    "clean": "rm -rf dist/",
     "storybook": "start-storybook -p 9006 -s www",
     "build": "stencil build",
     "dev": "stencil build --dev --watch --serve",

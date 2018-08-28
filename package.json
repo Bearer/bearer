@@ -15,6 +15,7 @@
     ]
   },
   "scripts": {
+    "clean": "lerna run clean",
     "upgrade-stencil": "(lerna clean --scope=@bearer/ui --scope=@bearer/core --yes) && (lerna exec --scope=@bearer/ui --scope=@bearer/core yarn install) && (lerna exec --scope=@bearer/ui --scope=@bearer/core yarn remove @stencil/core)  && (lerna add --exact @stencil/core --scope=@bearer/ui --scope=@bearer/core ) && lerna bootstrap",
     "lerna-publish": "lerna publish --conventional-commits  --registry=https://registry.npmjs.org/",
     "test": "lerna run test --stream",

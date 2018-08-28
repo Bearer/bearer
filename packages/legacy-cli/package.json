@@ -13,6 +13,7 @@
     "dist/"
   ],
   "scripts": {
+    "clean": "rm -rf dist/",
     "start": "yarn build",
     "templates": "yarn cleanup && copyfiles -a \"./templates/**/*\" dist/src/lib/commands/",
     "cleanup": "rm -rf dist",

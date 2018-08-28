@@ -8,6 +8,7 @@
     "dist/"
   ],
   "scripts": {
+    "clean": "rm -rf dist/",
     "test": "jest",
     "prepare": "rm -rf dist/ && NODE_ENV=production tsc"
   },

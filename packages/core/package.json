@@ -11,6 +11,7 @@
     "dist/"
   ],
   "scripts": {
+    "clean": "rm -rf dist/",
     "start": "yarn build",
     "build": "per-env",
     "build:development": "yarn build:bundle -w",

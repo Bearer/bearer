@@ -10,6 +10,7 @@
     "dist/"
   ],
   "scripts": {
+    "clean": "rm -rf dist/",
     "start": "yarn build",
     "build": "tsc -p tsconfig.json",
     "prepare": "yarn build",
