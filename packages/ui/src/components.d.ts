@@ -132,6 +132,11 @@ declare global {
 
     }
 
+    interface BearerBadge {
+      'content': any;
+      'kind': 'primary' | 'secondary' | 'success' | 'danger' | 'warning' | 'info' | 'light' | 'dark';
+    }
+
     interface BearerButtonPopover {
       'arrow': boolean;
       'backNav': boolean;
@@ -334,6 +339,14 @@ declare global {
     };
     
 
+    interface HTMLBearerBadgeElement extends StencilComponents.BearerBadge, HTMLStencilElement {}
+
+    var HTMLBearerBadgeElement: {
+      prototype: HTMLBearerBadgeElement;
+      new (): HTMLBearerBadgeElement;
+    };
+    
+
     interface HTMLBearerButtonPopoverElement extends StencilComponents.BearerButtonPopover, HTMLStencilElement {}
 
     var HTMLBearerButtonPopoverElement: {
@@ -461,6 +474,7 @@ declare global {
     'bearer-loading': JSXElements.BearerLoadingAttributes;
     'bearer-typography': JSXElements.BearerTypographyAttributes;
     'auth-config': JSXElements.AuthConfigAttributes;
+    'bearer-badge': JSXElements.BearerBadgeAttributes;
     'bearer-button-popover': JSXElements.BearerButtonPopoverAttributes;
     'bearer-config-display': JSXElements.BearerConfigDisplayAttributes;
     'bearer-config': JSXElements.BearerConfigAttributes;
@@ -575,6 +589,11 @@ declare global {
 
     export interface AuthConfigAttributes extends HTMLAttributes {
       'onSubmit'?: (event: CustomEvent) => void;
+    }
+
+    export interface BearerBadgeAttributes extends HTMLAttributes {
+      'content'?: any;
+      'kind'?: 'primary' | 'secondary' | 'success' | 'danger' | 'warning' | 'info' | 'light' | 'dark';
     }
 
     export interface BearerButtonPopoverAttributes extends HTMLAttributes {
@@ -698,6 +717,7 @@ declare global {
     'bearer-loading': HTMLBearerLoadingElement
     'bearer-typography': HTMLBearerTypographyElement
     'auth-config': HTMLAuthConfigElement
+    'bearer-badge': HTMLBearerBadgeElement
     'bearer-button-popover': HTMLBearerButtonPopoverElement
     'bearer-config-display': HTMLBearerConfigDisplayElement
     'bearer-config': HTMLBearerConfigElement
@@ -727,6 +747,7 @@ declare global {
     'bearer-loading': HTMLBearerLoadingElement;
     'bearer-typography': HTMLBearerTypographyElement;
     'auth-config': HTMLAuthConfigElement;
+    'bearer-badge': HTMLBearerBadgeElement;
     'bearer-button-popover': HTMLBearerButtonPopoverElement;
     'bearer-config-display': HTMLBearerConfigDisplayElement;
     'bearer-config': HTMLBearerConfigElement;
