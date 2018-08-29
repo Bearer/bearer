@@ -61,7 +61,36 @@ const baseCore = `${TMP_DIR}/ionic-${VERSION.replace('v', '')}/core`
 
 exec(`cp -r ${baseCore}/src/global/ src/global/`, true)
 
-const components = ['popover', 'animation-controller', 'route', 'router', 'route-redirect']
+const components = [
+  'popover',
+  'animation-controller',
+  'route',
+  'router',
+  'route-redirect',
+  'badge',
+  'grid',
+  'button',
+  'checkbox',
+  'item',
+  'item-sliding',
+  'item-options',
+  'item-option',
+  'searchbar',
+  'input',
+  'list',
+  'slides',
+  'slide',
+  'spinner',
+  'toast',
+  'card',
+  'card-content',
+  'card-header',
+  'card-subtitle',
+  'card-title',
+  'modal',
+  'loading',
+  'loading-controller'
+]
 components.map(component => {
   exec(`rsync -avz ${baseCore}/src/components/${component}/ src/components/${component}`, true)
 })
@@ -92,20 +121,14 @@ const patterns = [
   'action-sheet',
   'menu-interface',
   'alert-interface',
-  'loaing-interface',
-  'modal-interface',
   'picker-interface',
-  'loading-interface',
-  'popover-interface',
   'nav-interface',
   'range-interface',
   'content-interface',
   'select-interface',
   'select-popover-interface',
   'tabbar-interface',
-  'toast-interface',
   'virtual-scroll-interface',
-  // 'router\\/utils',
   'view-controller'
 ]
 
