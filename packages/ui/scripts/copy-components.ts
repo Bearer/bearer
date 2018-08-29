@@ -142,7 +142,7 @@ const patterns = [
 ]
 
 patterns.map(p => {
-  exec(`sed -ie '/^export.*${p}/s/^/\\/\\//g' src/interface.d.ts`)
+  exec(`sed -i '' -e '/^export.*${p}/s/^/\\/\\//g' src/interface.d.ts`)
 })
 
 // Copy theme files
@@ -162,12 +162,12 @@ const filesWithIonPrefix = [
 ]
 
 filesWithIonPrefix.map(f => {
-  exec(`sed -ie 's/ion-/bearer-/g' ${f}`)
+  exec(`sed -i '' -e 's/ion-/bearer-/g' ${f}`)
 })
 
 // replace HTMLIon by HTMLBearer
 const files = ['src/components/router/utils/parser.ts', 'src/utils/overlays-interface.ts', 'src/utils/overlays.ts']
 
 files.map(f => {
-  exec(`sed -ie 's/HTMLIon/HTMLBearer/g' ${f}`)
+  exec(`sed -i '' -e 's/HTMLIon/HTMLBearer/g' ${f}`)
 })
