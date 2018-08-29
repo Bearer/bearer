@@ -6,15 +6,16 @@ import { Component, Event, EventEmitter } from '@bearer/core'
   shadow: true
 })
 export class AuthConfig {
-  @Event() submit: EventEmitter
+  @Event()
+  submit: EventEmitter
 
-  handleSubmit() {}
+  handleSubmit = () => {}
 
   render() {
     return (
-      <form onSubmit={() => this.handleSubmit()}>
-        <bearer-input type="text" label="hello" controlName="hello" value="Hello" hint="hello" />
-        <bearer-input type="submit" onSubmit={() => this.handleSubmit()} />
+      <form onSubmit={this.handleSubmit}>
+        <bearer-input type="text" value="Hello" />
+        <bearer-button type="submit" onSubmit={this.handleSubmit} />
       </form>
     )
   }
