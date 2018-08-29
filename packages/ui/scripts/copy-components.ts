@@ -95,7 +95,9 @@ const components = [
   'card-title',
   'modal',
   'loading',
-  'loading-controller'
+  'loading-controller',
+  'col',
+  'row'
 ]
 components.map(component => {
   exec(`rsync -avz ${baseCore}/src/components/${component}/ src/components/${component}`)
@@ -115,7 +117,8 @@ const includes = [
   'recognizers',
   'config',
   'platform',
-  'helpers'
+  'helpers',
+  'media'
 ]
   .map(u => `--include="${u}.ts"`)
   .join(' ')
