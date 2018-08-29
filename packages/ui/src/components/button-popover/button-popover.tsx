@@ -1,4 +1,4 @@
-import { Component, State, Prop, Listen, Method, Event, EventEmitter } from '@bearer/core'
+import { Component, Event, EventEmitter, Listen, Method, Prop, State } from '@bearer/core'
 
 @Component({
   tag: 'bearer-button-popover',
@@ -22,7 +22,7 @@ export class BearerButtonPopover {
   @Prop()
   backNav: boolean
   @Prop()
-  btnProps: JSXElements.BearerButtonAttributes = {}
+  btnProps: JSXElements.BearerButtonAttributes & { content?: string } = {}
 
   toggleDisplay = e => {
     e.preventDefault()
@@ -64,7 +64,9 @@ export class BearerButtonPopover {
   render() {
     return (
       <div class="root">
-        <bearer-button {...this.btnProps} onClick={this.toggleDisplay} />
+        <bearer-button {...this.btnProps} onClick={this.toggleDisplay}>
+          {this.btnProps.content}
+        </bearer-button>
 
         <div
           class={`popover fade show bs-popover-${this.direction} direction-${this.direction} ${!this.visible &&
