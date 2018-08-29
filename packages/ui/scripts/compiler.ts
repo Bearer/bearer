@@ -32,6 +32,48 @@ export default (files: Array<string>) => {
 
 function transformer(context: ts.TransformationContext) {
   return (tsSourceFile: ts.SourceFile) => {
+    function addStyleUrl(objectLiteral: ts.ObjectLiteralExpression): ts.ObjectLiteralExpression {
+      // styleUrl attribute already provided: skipping
+      if (objectLiteral.properties.find(p => (p.name as ts.Identifier).escapedText === 'styleUrl')) {
+        return objectLiteral
+      }
+
+      const styleUrlsProp = objectLiteral.properties.find(
+        p => (p.name as ts.Identifier).escapedText === 'styleUrls'
+      ) as ts.PropertyAssignment
+
+      if (!styleUrlsProp) {
+        return objectLiteral
+      }
+      const findMDStyleUrl = (styleUrlsProp.initializer as ts.ObjectLiteralExpression).properties.find(
+        p => (p.name as ts.Identifier).escapedText === 'md'
+      ) as ts.PropertyAssignment
+
+      if (!findMDStyleUrl) {
+        return objectLiteral
+      }
+      return ts.createObjectLiteral([
+        ...objectLiteral.properties,
+        ts.createPropertyAssignment('styleUrl', ts.createLiteral((findMDStyleUrl.initializer as ts.StringLiteral).text))
+      ])
+    }
+
+    function prefixTagWithBearer(objectLiteral: ts.ObjectLiteralExpression): ts.ObjectLiteralExpression {
+      return ts.updateObjectLiteral(
+        objectLiteral,
+        objectLiteral.properties.map(prop => {
+          if (ts.isPropertyAssignment(prop) && (prop.name as ts.Identifier).escapedText === 'tag') {
+            return ts.updatePropertyAssignment(
+              prop,
+              prop.name,
+              ts.createLiteral((prop.initializer as ts.StringLiteral).text.replace(/ion-/, 'bearer-'))
+            )
+          }
+          return prop
+        })
+      )
+    }
+
     function updateDecorator(decorators: ts.NodeArray<ts.Decorator>): ts.NodeArray<ts.Decorator> {
       return ts.createNodeArray(
         [...decorators].map(deco => {
@@ -42,33 +84,7 @@ function transformer(context: ts.TransformationContext) {
             // @Component found
             const [first, ...otherArgs] = deco.expression.arguments
             const objectLiteral: ts.ObjectLiteralExpression = first as ts.ObjectLiteralExpression
-
-            // styleUrl attribute already provided: skipping
-            if (objectLiteral.properties.find(p => (p.name as ts.Identifier).escapedText === 'styleUrl')) {
-              return deco
-            }
-
-            const styleUrlsProp = objectLiteral.properties.find(
-              p => (p.name as ts.Identifier).escapedText === 'styleUrls'
-            ) as ts.PropertyAssignment
-
-            if (!styleUrlsProp) {
-              return deco
-            }
-            const findMDStyleUrl = (styleUrlsProp.initializer as ts.ObjectLiteralExpression).properties.find(
-              p => (p.name as ts.Identifier).escapedText === 'md'
-            ) as ts.PropertyAssignment
-
-            if (!findMDStyleUrl) {
-              return deco
-            }
-            const newFirstArgument = ts.createObjectLiteral([
-              ...objectLiteral.properties,
-              ts.createPropertyAssignment(
-                'styleUrl',
-                ts.createLiteral((findMDStyleUrl.initializer as ts.StringLiteral).text)
-              )
-            ])
+            const newFirstArgument = prefixTagWithBearer(addStyleUrl(objectLiteral))
 
             return ts.updateDecorator(
               deco,
