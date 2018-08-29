@@ -99,8 +99,12 @@ const components = [
   'col',
   'row'
 ]
+const noCss = new Set(['animation-controller', 'route', 'router', 'route-redirect', 'loading-controller'])
 components.map(component => {
   exec(`rsync -avz ${baseCore}/src/components/${component}/ src/components/${component}`)
+  if (!noCss.has(component)) {
+    exec(`sed -i '' -e 's/\\.ion-/\\.bearer-/g' src/components/${component}/*.scss`)
+  }
 })
 
 // Copy required utils files

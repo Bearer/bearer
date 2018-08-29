@@ -2,35 +2,27 @@ import * as fs from 'fs-extra'
 import * as ts from 'typescript'
 
 export default (files: Array<string>) => {
-  files.map(
-    file => {
-      const sourceFile = ts.createSourceFile(
-        file,
-        fs.readFileSync(file, 'utf8'),
-        ts.ScriptTarget.Latest,
-        false,
-        ts.ScriptKind.TSX
-      )
+  files.map(file => {
+    const sourceFile = ts.createSourceFile(
+      file,
+      fs.readFileSync(file, 'utf8'),
+      ts.ScriptTarget.Latest,
+      false,
+      ts.ScriptKind.TSX
+    )
 
-      const printer = ts.createPrinter({
-        newLine: ts.NewLineKind.LineFeed
-      })
-      const result: ts.TransformationResult<ts.SourceFile> = ts.transform(sourceFile, [transformer])
+    const printer = ts.createPrinter({
+      newLine: ts.NewLineKind.LineFeed
+    })
+    const result: ts.TransformationResult<ts.SourceFile> = ts.transform(sourceFile, [transformer])
 
-      const transformedSourceFile: ts.SourceFile = result.transformed[0]
-      const statements = transformedSourceFile.statements
-      fs.writeFileSync(
-        file,
-        printer.printList(ts.ListFormat.MultiLine, statements, sourceFile).replace(/HTMLIon/g, 'HTMLBearer')
-      )
-    }
-    //   let outPath = tsSourceFile.fileName
-    //   .replace(srcDirectory, buildDirectory)
-    //   .replace(/js$/, 'ts')
-    //   .replace(/jsx$/, 'tsx')
-    // fs.ensureFileSync(outPath)
-    // fs.writeFileSync(outPath, getSourceCode(tsSourceFile))
-  )
+    const transformedSourceFile: ts.SourceFile = result.transformed[0]
+    const statements = transformedSourceFile.statements
+    fs.writeFileSync(
+      file,
+      printer.printList(ts.ListFormat.MultiLine, statements, sourceFile).replace(/HTMLIon/g, 'HTMLBearer')
+    )
+  })
 }
 
 function transformer(context: ts.TransformationContext) {
