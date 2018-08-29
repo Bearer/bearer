@@ -20,11 +20,14 @@ const ARCHIVE = `https://github.com/ionic-team/ionic/archive/${VERSION}.zip`
 const TMP_ZIP = '/tmp/ionic.zip'
 const TMP_DIR = '/tmp/ionic-extract'
 
-function exec(command: string) {
+function exec(command: string, verbose: boolean = false) {
   console.log('[BEARER]', 'Executing command', command)
-  if (!execSync(command)) {
+  const result = execSync(command)
+  if (!result) {
     console.log('[BEARER]', 'Error')
     process.exit(1)
+  } else if (verbose) {
+    console.log(result.toString('utf8'))
   }
 }
 
@@ -55,4 +58,59 @@ console.log('[BEARER]', 'Extracting archive')
 exec(`unzip -d ${TMP_DIR} -q ${TMP_ZIP} `)
 
 const baseCore = `${TMP_DIR}/ionic-${VERSION.replace('v', '')}/core`
-exec(`cp -R ${baseCore}/src/utils src/utils`)
+
+exec(`cp -r ${baseCore}/src/global/ src/global/`, true)
+
+const components = ['popover', 'animation-controller', 'route', 'router', 'route-redirect']
+components.map(component => {
+  exec(`rsync -avz ${baseCore}/src/components/${component}/ src/components/${component}`, true)
+})
+
+const includes = [
+  'theme',
+  'framework-delegate',
+  'overlays',
+  'overlays-interface',
+  'input-interface',
+  'gesture',
+  'gesture-controller',
+  'listener',
+  'pointer-events',
+  'recognizers',
+  'config',
+  'platform',
+  'helpers'
+]
+  .map(u => `--include="${u}.ts"`)
+  .join(' ')
+
+exec(`rsync -avz  --include="*/" ${includes} --exclude="*" ${baseCore}/src/utils/ src/utils`, true)
+
+exec(`cp ${baseCore}/src/interface.d.ts src/`, true)
+
+const patterns = [
+  'action-sheet',
+  'menu-interface',
+  'alert-interface',
+  'loaing-interface',
+  'modal-interface',
+  'picker-interface',
+  'loading-interface',
+  'popover-interface',
+  'nav-interface',
+  'range-interface',
+  'content-interface',
+  'select-interface',
+  'select-popover-interface',
+  'tabbar-interface',
+  'toast-interface',
+  'virtual-scroll-interface',
+  // 'router\\/utils',
+  'view-controller'
+]
+
+patterns.map(p => {
+  exec(`sed -i -e '/^export.*${p}/s/^/\\/\\//g' src/interface.d.ts`, true)
+})
+
+exec(`rsync -avz  ${baseCore}/src/themes/ src/themes`, true)
