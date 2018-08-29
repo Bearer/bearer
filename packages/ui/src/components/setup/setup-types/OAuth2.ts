@@ -1,14 +1,14 @@
-import { FieldType } from '../../Forms/Fieldset'
+// import { FieldType } from '../../Forms/Fieldset'
 
 export const OAuth2SetupType = [
   {
-    type: 'text' as FieldType,
+    type: 'text',
     label: 'Client ID',
     controlName: 'clientId',
     required: true
   },
   {
-    type: 'password' as FieldType,
+    type: 'password',
     label: 'Client Secret',
     controlName: 'clientSecret',
     required: true

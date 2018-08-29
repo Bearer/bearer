@@ -1,6 +1,7 @@
-import Bearer, { Component, State, Element, Event, EventEmitter, Prop, StateManager } from '@bearer/core'
-import { FieldSet } from '../Forms/Fieldset'
-import { OAuth2SetupType, EmailSetupType, KeySetupType } from './setup-types'
+import Bearer, { Component, Element, Event, EventEmitter, Prop, State, StateManager } from '@bearer/core'
+
+// import { FieldSet } from '../Forms/Fieldset'
+// import { EmailSetupType, KeySetupType, OAuth2SetupType } from './setup-types'
 
 type TSetupPayload = {
   Item: { referenceId: string }
@@ -25,7 +26,7 @@ export class BearerSetup {
   setupSuccess: EventEmitter
 
   @State()
-  fieldSet: FieldSet
+  fieldSet: Array<any> = []
   @State()
   error: boolean = false
   @State()
@@ -37,7 +38,7 @@ export class BearerSetup {
     const formSet = this.fieldSet.map(el => {
       return { key: el.controlName, value: el.value }
     })
-    StateManager.storeSetup(formSet.reduce((acc, obj) => ({ ...acc, [obj['key']]: obj['value'] }), {}))
+    StateManager.storeSetup(formSet.reduce((acc, obj) => ({ ...acc, [obj.key]: obj.value }), {}))
       .then((item: TSetupPayload) => {
         this.loading = false
         const referenceId = item.Item.referenceId
@@ -55,21 +56,21 @@ export class BearerSetup {
   }
 
   componentWillLoad() {
-    if (typeof this.fields !== 'string') {
-      this.fieldSet = new FieldSet(this.fields as Array<any>)
-      return
-    }
-    switch (this.fields) {
-      case 'email':
-        this.fieldSet = new FieldSet(EmailSetupType)
-        break
-      case 'type':
-        this.fieldSet = new FieldSet(KeySetupType)
-        break
-      case 'oauth2':
-      default:
-        this.fieldSet = new FieldSet(OAuth2SetupType)
-    }
+    // if (typeof this.fields !== 'string') {
+    //   this.fieldSet = new FieldSet(this.fields as Array<any>)
+    //   return
+    // }
+    // switch (this.fields) {
+    //   case 'email':
+    //     this.fieldSet = new FieldSet(EmailSetupType)
+    //     break
+    //   case 'type':
+    //     this.fieldSet = new FieldSet(KeySetupType)
+    //     break
+    //   case 'oauth2':
+    //   default:
+    //     this.fieldSet = new FieldSet(OAuth2SetupType)
+    // }
   }
 
   render() {

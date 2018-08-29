@@ -1,14 +1,14 @@
-import { FieldType } from '../../Forms/Fieldset'
+// import { FieldType } from '../../Forms/Fieldset'
 
 export const EmailSetupType = [
   {
-    type: 'email' as FieldType,
+    type: 'email',
     label: 'Email',
     controlName: 'email',
     required: true
   },
   {
-    type: 'password' as FieldType,
+    type: 'password',
     label: 'Password',
     controlName: 'password',
     required: true
