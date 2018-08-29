@@ -1,4 +1,4 @@
-import { Component, Method, State, Prop, Event, EventEmitter, Listen } from '@bearer/core'
+import { Component, Event, EventEmitter, Listen, Method, Prop, State } from '@bearer/core'
 
 @Component({
   tag: 'bearer-navigator-screen',
@@ -6,24 +6,31 @@ import { Component, Method, State, Prop, Event, EventEmitter, Listen } from '@be
   shadow: true
 })
 export class BearerNavigatorScreen {
-  @State() visible: boolean = false
-  @State() data: any
+  @State()
+  visible: boolean = false
+  @State()
+  data: any
 
-  @Prop() navigationTitle: ((data: any) => string) | string
+  @Prop()
+  navigationTitle: ((data: any) => string) | string
   @Prop()
   renderFunc: <T>(
     params: {
-      next: (data: any) => void
-      prev: () => void
-      complete: () => void
       data: T
+      next(data: any): void
+      prev(): void
+      complete(): void
     }
   ) => void
-  @Prop() name: string
+  @Prop()
+  name: string
 
-  @Event() stepCompleted: EventEmitter
-  @Event() scenarioCompleted: EventEmitter
-  @Event() navigatorGoBack: EventEmitter
+  @Event()
+  stepCompleted: EventEmitter
+  @Event()
+  scenarioCompleted: EventEmitter
+  @Event()
+  navigatorGoBack: EventEmitter
 
   @Method()
   willAppear(data) {

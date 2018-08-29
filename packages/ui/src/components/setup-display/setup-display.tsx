@@ -24,7 +24,7 @@ export class BearerSetupDisplay {
       return (
         <p>
           Scenario is currently setup with Setup ID:&nbsp;
-          <bearer-badge kind="info">{this.setupId}</bearer-badge>
+          <bearer-badge color="info">{this.setupId}</bearer-badge>
         </p>
       )
     } else {

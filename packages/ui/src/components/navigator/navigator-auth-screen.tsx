@@ -1,4 +1,5 @@
-import { Component, Method, State, Event, EventEmitter, Element } from '@bearer/core'
+import { Component, Element, Event, EventEmitter, Method, State } from '@bearer/core'
+
 import WithAuthentication, { IAuthenticated, WithAuthenticationMethods } from '../../decorators/withAuthentication'
 
 @WithAuthentication()
@@ -22,13 +23,13 @@ export class BearerNavigatorAuthScreen extends WithAuthenticationMethods impleme
   @Method()
   willAppear() {
     console.log('[BEARER]', 'Auth screen willAppear')
-    this.el.shadowRoot.querySelector('#screen')['willAppear']()
+    ;(this.el.shadowRoot.querySelector('#screen') as any).willAppear()
   }
 
   @Method()
   willDisappear() {
     console.log('[BEARER]', 'Auth screen willAppear')
-    this.el.shadowRoot.querySelector('#screen')['willDisappear']()
+    ;(this.el.shadowRoot.querySelector('#screen') as any).willDisappear()
   }
 
   @Method()
@@ -53,11 +54,11 @@ export class BearerNavigatorAuthScreen extends WithAuthenticationMethods impleme
   }
 
   authenticate = () => {
-    this.el.shadowRoot.querySelector('#authorizer')['authenticate']()
+    ;(this.el.shadowRoot.querySelector('#authorizer') as any).authenticate()
   }
 
   revoke = () => {
-    this.el.shadowRoot.querySelector('#authorizer')['revoke']()
+    ;(this.el.shadowRoot.querySelector('#authorizer') as any).revoke()
   }
 
   render() {
@@ -66,13 +67,13 @@ export class BearerNavigatorAuthScreen extends WithAuthenticationMethods impleme
         <bearer-authorized
           id="authorizer"
           renderUnauthorized={() => (
-            <bearer-button kind="primary" onClick={this.authenticate}>
+            <bearer-button color="primary" onClick={this.authenticate}>
               {' '}
               Login{' '}
             </bearer-button>
           )}
           renderAuthorized={() => (
-            <bearer-button kind="warning" onClick={this.revoke}>
+            <bearer-button color="warning" onClick={this.revoke}>
               {' '}
               Logout{' '}
             </bearer-button>

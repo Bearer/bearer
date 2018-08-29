@@ -23,18 +23,18 @@ export class BearerPopoverNavigator {
   @Prop()
   direction: string = 'right'
   @Prop()
-  btnProps: JSXElements.BearerButtonAttributes = { content: 'Activate' }
+  btnProps: JSXElements.BearerButtonAttributes & { content: any } = { content: 'Activate' }
   @Prop()
   display = 'popover'
   @Prop()
-  complete?: <T>({ data, complete }: { data: T; complete: () => void }) => void
+  complete?: <T>({ data, complete }: { data: T; complete(): void }) => void
 
   @Listen('scenarioCompleted')
   scenarioCompletedHandler() {
     this.screenData = {}
     this.isVisible = false
     this.visibleScreen = this.hasAuthScreen() ? 1 : 0
-    this.el.shadowRoot.querySelector('#button')['toggle'](false)
+    ;(this.el.shadowRoot.querySelector('#button') as any).toggle(false)
   }
 
   @Listen('stepCompleted')
@@ -102,10 +102,9 @@ export class BearerPopoverNavigator {
 
   get screenNodes() {
     return this.el.shadowRoot
-      ? this.el.shadowRoot
-          .querySelector('slot:not([name])')
-          ['assignedNodes']()
-          .filter(node => node.willAppear)
+      ? (this.el.shadowRoot.querySelector('slot:not([name])') as HTMLSlotElement)
+          .assignedNodes()
+          .filter(node => (node as { willAppear?: any }).willAppear)
       : []
   }
 
@@ -132,7 +131,7 @@ export class BearerPopoverNavigator {
 
   hasNext = () => this._visibleScreenIndex < this.screens.length - 1
   hasPrevious = () => this._visibleScreenIndex > 0
-  hasAuthScreen = () => this.screenNodes.filter(node => node['tagName'] === NAVIGATOR_AUTH_SCREEN_NAME).length
+  hasAuthScreen = () => this.screenNodes.filter(node => (node as any).tagName === NAVIGATOR_AUTH_SCREEN_NAME).length
 
   componentDidLoad() {
     console.log('[BEARER]', 'Navigator: componentDidLoad ')
