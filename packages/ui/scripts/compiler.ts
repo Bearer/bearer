@@ -19,7 +19,10 @@ export default (files: Array<string>) => {
 
       const transformedSourceFile: ts.SourceFile = result.transformed[0]
       const statements = transformedSourceFile.statements
-      fs.writeFileSync(file, printer.printList(ts.ListFormat.MultiLine, statements, sourceFile))
+      fs.writeFileSync(
+        file,
+        printer.printList(ts.ListFormat.MultiLine, statements, sourceFile).replace(/HTMLIon/g, 'HTMLBearer')
+      )
     }
     //   let outPath = tsSourceFile.fileName
     //   .replace(srcDirectory, buildDirectory)

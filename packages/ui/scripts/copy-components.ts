@@ -63,8 +63,10 @@ exec(`unzip -d ${TMP_DIR} -q ${TMP_ZIP} `)
 
 const baseCore = `${TMP_DIR}/ionic-${VERSION.replace('v', '')}/core`
 
+// Copy global folder
 exec(`cp -r ${baseCore}/src/global/ src/global/`, true)
 
+// Copy required components
 const components = [
   'popover',
   'animation-controller',
@@ -99,6 +101,7 @@ components.map(component => {
   exec(`rsync -avz ${baseCore}/src/components/${component}/ src/components/${component}`)
 })
 
+// Copy required utils files
 const includes = [
   'theme',
   'framework-delegate',
@@ -119,8 +122,10 @@ const includes = [
 
 exec(`rsync -avz  --include="*/" ${includes} --exclude="*" ${baseCore}/src/utils/ src/utils`)
 
+// Copy interface
 exec(`cp ${baseCore}/src/interface.d.ts src/`)
 
+// Comment non imported files
 const patterns = [
   'action-sheet',
   'menu-interface',
@@ -137,11 +142,32 @@ const patterns = [
 ]
 
 patterns.map(p => {
-  exec(`sed -i -e '/^export.*${p}/s/^/\\/\\//g' src/interface.d.ts`)
+  exec(`sed -ie '/^export.*${p}/s/^/\\/\\//g' src/interface.d.ts`)
 })
 
+// Copy theme files
 exec(`rsync -avz  ${baseCore}/src/themes/ src/themes`)
 
+// Rename component => ion-* to bearer-* , add styleUrl to fallback to md style by default
 components.map(comp => {
   compile([path.join(`src/components/${comp}/${comp}.tsx`)])
+})
+
+// edge cases: replace manually created element
+const filesWithIonPrefix = [
+  'src/components/item/item.tsx',
+  'src/components/loading-controller/loading-controller.tsx',
+  'src/components/item-sliding/item-sliding.tsx',
+  'src/utils/theme.ts'
+]
+
+filesWithIonPrefix.map(f => {
+  exec(`sed -ie 's/ion-/bearer-/g' ${f}`)
+})
+
+// replace HTMLIon by HTMLBearer
+const files = ['src/components/router/utils/parser.ts', 'src/utils/overlays-interface.ts', 'src/utils/overlays.ts']
+
+files.map(f => {
+  exec(`sed -ie 's/HTMLIon/HTMLBearer/g' ${f}`)
 })
