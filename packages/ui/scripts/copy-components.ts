@@ -8,6 +8,8 @@
 
 import { execSync } from 'child_process'
 import * as fs from 'fs-extra'
+import * as path from 'path'
+
 /**
  * * get ionic archive
  * * extract archive
@@ -19,6 +21,8 @@ const VERSION = 'v4.0.0-beta.3'
 const ARCHIVE = `https://github.com/ionic-team/ionic/archive/${VERSION}.zip`
 const TMP_ZIP = '/tmp/ionic.zip'
 const TMP_DIR = '/tmp/ionic-extract'
+
+import compile from './compiler'
 
 function exec(command: string, verbose: boolean = false) {
   console.log('[BEARER]', 'Executing command', command)
@@ -92,7 +96,7 @@ const components = [
   'loading-controller'
 ]
 components.map(component => {
-  exec(`rsync -avz ${baseCore}/src/components/${component}/ src/components/${component}`, true)
+  exec(`rsync -avz ${baseCore}/src/components/${component}/ src/components/${component}`)
 })
 
 const includes = [
@@ -113,9 +117,9 @@ const includes = [
   .map(u => `--include="${u}.ts"`)
   .join(' ')
 
-exec(`rsync -avz  --include="*/" ${includes} --exclude="*" ${baseCore}/src/utils/ src/utils`, true)
+exec(`rsync -avz  --include="*/" ${includes} --exclude="*" ${baseCore}/src/utils/ src/utils`)
 
-exec(`cp ${baseCore}/src/interface.d.ts src/`, true)
+exec(`cp ${baseCore}/src/interface.d.ts src/`)
 
 const patterns = [
   'action-sheet',
@@ -133,7 +137,11 @@ const patterns = [
 ]
 
 patterns.map(p => {
-  exec(`sed -i -e '/^export.*${p}/s/^/\\/\\//g' src/interface.d.ts`, true)
+  exec(`sed -i -e '/^export.*${p}/s/^/\\/\\//g' src/interface.d.ts`)
 })
 
-exec(`rsync -avz  ${baseCore}/src/themes/ src/themes`, true)
+exec(`rsync -avz  ${baseCore}/src/themes/ src/themes`)
+
+components.map(comp => {
+  compile([path.join(`src/components/${comp}/${comp}.tsx`)])
+})
