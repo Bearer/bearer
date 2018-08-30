@@ -156,6 +156,7 @@ exec(`rsync -avz  ${baseCore}/src/themes/ src/themes`)
 components.map(comp => {
   compile([path.join(`src/components/${comp}/${comp}.tsx`)])
 })
+exec("find src/components/**/*.tsx | xargs sed -i '' -e 's/\\([^a-z]\\)ion-/\\1bearer-/g'")
 
 // edge cases: replace manually created element
 const filesWithIonPrefix = [
@@ -175,10 +176,6 @@ const files = ['src/components/router/utils/parser.ts', 'src/utils/overlays-inte
 files.map(f => {
   exec(`sed -i '' -e 's/HTMLIon/HTMLBearer/g' ${f}`)
 })
-
-// add default to mode to list
-exec(`sed -i '' -e "s/mode\\!/mode/g" src/components/list/list.tsx`)
-exec(`sed -i '' -e "s/Mode\\;/Mode = 'md';/g" src/components/list/list.tsx`)
 
 //Styles
 // replace css variables, tag-name, .class-name

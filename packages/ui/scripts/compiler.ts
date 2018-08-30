@@ -69,6 +69,18 @@ function transformer(context: ts.TransformationContext) {
       )
     }
 
+    function defaultModeToMd(property: ts.PropertyDeclaration): ts.PropertyDeclaration {
+      return ts.updateProperty(
+        property,
+        property.decorators,
+        property.modifiers,
+        property.name,
+        undefined,
+        property.type,
+        ts.createLiteral('md')
+      )
+    }
+
     function updateDecorator(decorators: ts.NodeArray<ts.Decorator>): ts.NodeArray<ts.Decorator> {
       return ts.createNodeArray(
         [...decorators].map(deco => {
@@ -93,15 +105,22 @@ function transformer(context: ts.TransformationContext) {
 
     function visit(tsNode: ts.Node) {
       if (ts.isClassDeclaration(tsNode)) {
-        return ts.updateClassDeclaration(
-          tsNode,
-          updateDecorator(tsNode.decorators),
-          tsNode.modifiers,
-          tsNode.name,
-          tsNode.typeParameters,
-          tsNode.heritageClauses,
-          tsNode.members
+        return ts.visitEachChild(
+          ts.updateClassDeclaration(
+            tsNode,
+            updateDecorator(tsNode.decorators),
+            tsNode.modifiers,
+            tsNode.name,
+            tsNode.typeParameters,
+            tsNode.heritageClauses,
+            tsNode.members
+          ),
+          visit,
+          context
         )
+      }
+      if (ts.isPropertyDeclaration(tsNode) && (tsNode.name as ts.Identifier).escapedText === 'mode') {
+        return ts.visitEachChild(defaultModeToMd(tsNode), visit, context)
       }
       return tsNode
     }
