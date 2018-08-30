@@ -3,9 +3,9 @@ import { flags } from '@oclif/command'
 import * as fs from 'fs-extra'
 import * as Listr from 'listr'
 import * as path from 'path'
-import * as util from 'util'
 
 import BaseCommand from '../BaseCommand'
+import installDependencies from '../tasks/installDependencies'
 import { copyFiles, printFiles } from '../utils/helpers'
 
 import GenerateComponent from './generate/component'
@@ -18,8 +18,6 @@ const authTypes = {
   [Authentications.ApiKey]: { name: 'API Key', value: Authentications.ApiKey },
   [Authentications.NoAuth]: { name: 'NoAuth', value: Authentications.NoAuth }
 }
-
-const exec = util.promisify(require('child_process').exec)
 
 export default class New extends BaseCommand {
   static description = 'Generate a new scenario'
@@ -82,27 +80,9 @@ export default class New extends BaseCommand {
             GenerateComponent.run(['feature', '--type', 'root', '--path', this.copyDestFolder, '--silent'])
         },
         {
-          title: 'npm/yarn lookup',
+          title: 'Installing dependencies',
           enabled: (_ctx: any) => !skipInstall,
-          task: async (ctx: any, task: any) =>
-            exec('yarn -v')
-              .then(() => {
-                ctx.yarn = true
-              })
-              .catch(() => {
-                ctx.yarn = false
-                task.skip('Yarn not available, install it via `npm install -g yarn`')
-              })
-        },
-        {
-          title: 'Installing scenario dependencies with yarn',
-          enabled: (ctx: any) => ctx.yarn === true && !skipInstall,
-          task: async (_ctx: any, _task: any) => exec('yarn install', { cwd: this.copyDestFolder })
-        },
-        {
-          title: 'Installing scenario dependencies with npm',
-          enabled: (ctx: any) => ctx.yarn === false && !skipInstall,
-          task: async () => exec('yarn install', { cwd: this.copyDestFolder })
+          task: async (_ctx: any, _task: any) => installDependencies({ cwd: this.copyDestFolder })
         }
       ])
 
