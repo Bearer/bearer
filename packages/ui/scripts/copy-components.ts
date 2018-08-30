@@ -69,6 +69,7 @@ exec(`cp -r ${baseCore}/src/global/ src/global/`, true)
 // Copy required components
 const components = [
   'animation-controller',
+  'backdrop',
   'badge',
   'button',
   'card',
@@ -89,7 +90,9 @@ const components = [
   'loading',
   'loading-controller',
   'modal',
+  'modal-controller',
   'popover',
+  'popover-controller',
   'route',
   'route-redirect',
   'router',
