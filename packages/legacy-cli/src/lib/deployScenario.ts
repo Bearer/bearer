@@ -20,14 +20,8 @@ const execPromise = promisify(exec)
 export function buildIntents(emitter, config: Config, locator: LocationProvider) {
   return new Promise(async (resolve, reject) => {
     const { scenarioUuid } = config
-    const artifactDirectory = locator.intentsArtifactDir
     const intentsDirectory = locator.srcIntentsDir
 
-    await fs.emptyDir(locator.buildIntentsDir)
-
-    if (!fs.existsSync(artifactDirectory)) {
-      fs.ensureDirSync(artifactDirectory)
-    }
     try {
       emitter.emit('intents:installingDependencies')
       // TODOs: use root node modules
@@ -75,8 +69,6 @@ export function deployIntents(emitter, config: Config, locator: LocationProvider
 export function deployViews(emitter, config: Config, locator: LocationProvider) {
   return new Promise(async (resolve, reject) => {
     const { orgId, scenarioUuid, scenarioId, CdnHost } = config
-
-    await fs.emptyDir(locator.buildViewsDir)
 
     try {
       const { buildDirectory } = await prepare(emitter, config, locator)({
