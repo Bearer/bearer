@@ -97,7 +97,8 @@ const components = [
   'loading',
   'loading-controller',
   'col',
-  'row'
+  'row',
+  'label'
 ]
 const noCss = new Set(['animation-controller', 'route', 'router', 'route-redirect', 'loading-controller'])
 components.map(component => {
@@ -178,3 +179,9 @@ const files = ['src/components/router/utils/parser.ts', 'src/utils/overlays-inte
 files.map(f => {
   exec(`sed -i '' -e 's/HTMLIon/HTMLBearer/g' ${f}`)
 })
+
+// add default to mode to list
+exec(`sed -i '' -e "s/mode\\!/mode/g" src/components/list/list.tsx`)
+exec(`sed -i '' -e "s/Mode\\;/Mode = 'md';/g" src/components/list/list.tsx`)
+
+// adjust list styles
