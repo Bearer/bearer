@@ -19,7 +19,7 @@ $top-arrow: 50px;
     display: none;
   }
 
-  &.directbearer-bottom {
+  &.direction-bottom {
     top: 100%;
     transform: translateX(-50%);
     margin-left: 50%;
@@ -34,7 +34,7 @@ $top-arrow: 50px;
     }
   }
 
-  &.directbearer-top {
+  &.direction-top {
     bottom: 100%;
     left: 0;
     top: initial;
@@ -48,7 +48,7 @@ $top-arrow: 50px;
     }
   }
 
-  &.directbearer-left {
+  &.direction-left {
     top: calc((#{-$top-arrow} / 2) - (#{$popover-arrow-height} / 2));
     left: initial;
     right: 100%;
@@ -60,7 +60,7 @@ $top-arrow: 50px;
     }
   }
 
-  &.directbearer-right {
+  &.direction-right {
     left: 100%;
     top: calc((#{-$top-arrow} / 2) - (#{$popover-arrow-height} / 2));
 
