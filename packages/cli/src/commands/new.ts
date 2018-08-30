@@ -44,7 +44,7 @@ export default class New extends BaseCommand {
     this.path = flags.path
 
     try {
-      const name: string = args.ScenarioName || (await this.askForString('Scenario name:'))
+      const name: string = args.ScenarioName || (await this.askForString('Scenario name'))
       const authType: Authentications = (flags.authType as Authentications) || (await this.askForAuthType())
       const skipInstall = flags.skipInstall
 

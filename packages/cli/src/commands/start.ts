@@ -4,6 +4,7 @@ import BaseLegacyCommand from '../BaseLegacyCommand'
 
 import GenerateSetup from './generate/setup'
 import GenerateSpec from './generate/spec'
+import PrepareViews from './prepare/views'
 const noOpen = 'no-open'
 const noInstall = 'no-install'
 const noWatcher = 'no-watcher'
@@ -35,6 +36,7 @@ export default class Start extends BaseLegacyCommand {
 
     await GenerateSetup.run(['--silent'])
     await GenerateSpec.run(['--silent'])
+    await PrepareViews.run(['--silent'])
 
     this.runLegacy(['start', ...cmdArgs])
   }

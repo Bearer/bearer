@@ -1,7 +1,5 @@
 const path = require('path')
 const fs = require('fs-extra')
-const copy = require('copy-template-dir')
-const Case = require('case')
 const chokidar = require('chokidar')
 const { spawn, execSync } = require('child_process')
 
@@ -54,56 +52,7 @@ export function prepare(emitter, config, locator: Locator) {
     }
   ) => {
     try {
-      const {
-        scenarioConfig: { scenarioTitle }
-      } = config
       const { buildViewsDir, buildViewsComponentsDir, srcViewsDir, scenarioRoot } = locator
-
-      // Create hidden folder
-      emitter.emit('start:prepare:buildFolder')
-      if (!fs.existsSync(buildViewsDir)) {
-        fs.mkdirpSync(buildViewsDir)
-      }
-      fs.emptyDirSync(buildViewsDir)
-
-      if (!fs.existsSync(buildViewsComponentsDir)) {
-        fs.mkdirpSync(buildViewsComponentsDir)
-      }
-
-      // Symlink node_modules
-      emitter.emit('start:symlinkNodeModules')
-      createEvenIfItExists(
-        locator.scenarioRootResourcePath('node_modules'),
-        locator.buildViewsResourcePath('node_modules')
-      )
-
-      // symlink package.json
-      emitter.emit('start:symlinkPackage')
-
-      createEvenIfItExists(
-        locator.scenarioRootResourcePath('package.json'),
-        locator.buildViewsResourcePath('package.json')
-      )
-
-      // Copy stencil.config.json
-      emitter.emit('start:prepare:stencilConfig')
-
-      const vars = {
-        componentTagName: Case.kebab(scenarioTitle)
-      }
-      const inDir = path.join(__dirname, 'templates', 'start')
-      await new Promise((resolve, reject) => {
-        copy(inDir, buildViewsDir, vars, (err, createdFiles) => {
-          if (err) reject(err)
-          createdFiles && createdFiles.forEach(filePath => emitter.emit('start:prepare:copyFile', filePath))
-          resolve()
-        })
-      })
-
-      createEvenIfItExists(
-        locator.buildViewsResourcePath('global'),
-        path.join(locator.buildViewsComponentsDir, 'global')
-      )
 
       // Link non TS files
       const watcher = await watchNonTSFiles(srcViewsDir, buildViewsComponentsDir)
@@ -245,15 +194,5 @@ function childProcessStderr(emitter, name) {
 function childProcessClose(emitter, name) {
   return code => {
     emitter.emit('start:watchers:close', { name, code })
-  }
-}
-
-function createEvenIfItExists(target, sourcePath): void {
-  try {
-    fs.symlinkSync(target, sourcePath)
-  } catch (e) {
-    if (e.code !== 'EEXIST') {
-      throw e
-    }
   }
 }

@@ -1,4 +1,5 @@
 import * as copy from 'copy-template-dir'
+import * as fs from 'fs-extra'
 import * as path from 'path'
 
 import BaseCommand from '../BaseCommand'
@@ -30,4 +31,23 @@ export function copyFiles(
       }
     })
   })
+}
+
+export function ensureFolderExists(path: string, empty: boolean = false) {
+  if (!fs.existsSync(path)) {
+    fs.mkdirpSync(path)
+  }
+  if (empty) {
+    fs.emptyDirSync(path)
+  }
+}
+
+export function ensureSymlinked(target: string, sourcePath: string): void {
+  try {
+    fs.symlinkSync(target, sourcePath)
+  } catch (e) {
+    if (e.code !== 'EEXIST') {
+      throw e
+    }
+  }
 }

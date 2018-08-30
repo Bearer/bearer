@@ -3,6 +3,7 @@ import { flags } from '@oclif/command'
 import BaseLegacyCommand from '../BaseLegacyCommand'
 
 import GenerateSpec from './generate/spec'
+import PrepareViews from './prepare/views'
 
 const viewsOnly = 'views-only'
 const intentsOnly = 'intents-only'
@@ -27,6 +28,8 @@ export default class Deploy extends BaseLegacyCommand {
       cmdArgs.push(`--${intentsOnly}`)
     }
     await GenerateSpec.run(['--silent'])
+    await PrepareViews.run(['--silent'])
+
     this.runLegacy(['deploy', ...cmdArgs])
   }
 }
