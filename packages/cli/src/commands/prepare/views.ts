@@ -1,3 +1,4 @@
+import { flags } from '@oclif/command'
 import * as path from 'path'
 
 import BaseCommand from '../../BaseCommand'
@@ -8,16 +9,18 @@ export default class PrepareViews extends BaseCommand {
   static description = 'Prepare scenario views'
 
   static flags = {
-    ...BaseCommand.flags
+    ...BaseCommand.flags,
+    empty: flags.boolean()
   }
 
   static args = []
 
   @RequireScenarioFolder()
   async run() {
+    const { flags } = this.parse(PrepareViews)
     // Prepare folder structure
     this.debug('Preparing views strucutre')
-    ensureFolderExists(this.locator.buildViewsDir)
+    ensureFolderExists(this.locator.buildViewsDir, flags.empty)
     ensureFolderExists(this.locator.buildViewsComponentsDir)
 
     this.debug('Symlinking node_modules')

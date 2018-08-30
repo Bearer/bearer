@@ -28,7 +28,8 @@ export default class Deploy extends BaseLegacyCommand {
       cmdArgs.push(`--${intentsOnly}`)
     }
     await GenerateSpec.run(['--silent'])
-    await PrepareViews.run(['--silent'])
+
+    await PrepareViews.run(['--silent', '--empty'])
 
     this.runLegacy(['deploy', ...cmdArgs])
   }
