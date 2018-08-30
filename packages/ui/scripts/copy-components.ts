@@ -100,12 +100,8 @@ const components = [
   'row',
   'label'
 ]
-const noCss = new Set(['animation-controller', 'route', 'router', 'route-redirect', 'loading-controller'])
 components.map(component => {
   exec(`rsync -avz ${baseCore}/src/components/${component}/ src/components/${component}`)
-  if (!noCss.has(component)) {
-    exec(`sed -i '' -e 's/\\.ion-/\\.bearer-/g' src/components/${component}/*.scss`)
-  }
 })
 
 // Copy required utils files
@@ -183,5 +179,19 @@ files.map(f => {
 // add default to mode to list
 exec(`sed -i '' -e "s/mode\\!/mode/g" src/components/list/list.tsx`)
 exec(`sed -i '' -e "s/Mode\\;/Mode = 'md';/g" src/components/list/list.tsx`)
+
+//Styles
+// replace css variables, tag-name, .class-name
+// exec(`find src/components/**/*.scss | xargs sed -i '' -e 's/ion-/bearer-/g'`)
+
+//classnames
+exec("find src/components/**/*.scss | xargs sed -i '' -e 's/\\.ion-/\\.bearer-/g'")
+exec("find src/themes/*.scss | xargs sed -i '' -e 's/\\.ion-/\\.bearer-/g'")
+// variables + functions
+exec("find src/components/**/*.scss | xargs sed -i '' -e 's/\\([^a-z]\\)ion-/\\1bearer-/g'")
+exec("find src/themes/*.scss | xargs sed -i '' -e 's/\\([^a-z]\\)ion-/\\1bearer-/g'")
+exec("find src/themes/*.scss | xargs sed -i '' -e 's/--ion-/--bearer-/g'")
+// tag names
+exec("find src/components/**/*.scss | xargs sed -i '' -e 's/^ion-/bearer-/g'")
 
 // adjust list styles
