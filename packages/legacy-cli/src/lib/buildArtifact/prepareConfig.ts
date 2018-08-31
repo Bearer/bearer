@@ -4,12 +4,17 @@ import { promisify } from 'util'
 import * as vm from 'vm'
 const readFileAsync = promisify(fs.readFile)
 
+type TConfig = {
+  intents: Array<{ [key: string]: string }>
+  integration_uuid: string
+  auth?: any
+}
 export default (
   authConfigFile: string,
   distPath: string,
   scenarioUuid: string,
   nodeModulesPath: string
-): Promise<{ intents: Array<{ [key: string]: string }>; integration_uuid: string }> => {
+): Promise<TConfig> => {
   module.paths.push(nodeModulesPath)
 
   return globby([`${distPath}/*.js`]).then(files =>
@@ -28,7 +33,7 @@ export default (
             })
           )
         return acc
-      }, Promise.resolve({ integration_uuid: scenarioUuid, intents: [] }))
+      }, Promise.resolve({ integration_uuid: scenarioUuid, intents: [] } as TConfig))
       .then(async config => {
         try {
           const content = await readFileAsync(authConfigFile, { encoding: 'utf8' })
