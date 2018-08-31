@@ -57,3 +57,11 @@ export type AuthConfig = {
   authType: Authentication
   setupViews?: Array<any>
 }
+
+export type ScenarioBuildEnv = {
+  BEARER_SCENARIO_ID: string
+  BEARER_SCENARIO_TAG_NAME: string
+  BEARER_INTEGRATION_HOST: string
+  BEARER_AUTHORIZATION_HOST: string
+  CDN_HOST: string
+}
