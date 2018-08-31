@@ -4,7 +4,7 @@ import { ensureFolderExists } from '../../utils/helpers'
 
 export default class PrepareIntents extends BaseCommand {
   static description = 'describe the command here'
-
+  static hidden = true
   static flags = {
     ...BaseCommand.flags
   }

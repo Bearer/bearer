@@ -7,7 +7,7 @@ import { copyFiles, ensureFolderExists, ensureSymlinked } from '../../utils/help
 
 export default class PrepareViews extends BaseCommand {
   static description = 'Prepare scenario views'
-
+  static hidden = true
   static flags = {
     ...BaseCommand.flags,
     empty: flags.boolean()
