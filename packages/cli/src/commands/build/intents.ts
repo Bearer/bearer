@@ -1,4 +1,7 @@
+import * as Listr from 'listr'
+
 import BaseCommand from '../../BaseCommand'
+import installDependencies from '../../tasks/installDependencies'
 import { RequireScenarioFolder } from '../../utils/decorators'
 
 export default class BuildIntents extends BaseCommand {
@@ -12,6 +15,12 @@ export default class BuildIntents extends BaseCommand {
 
   @RequireScenarioFolder()
   async run() {
-    this.success('Built intents')
+    const tasks = new Listr([installDependencies({ cwd: this.locator.scenarioRoot })])
+    try {
+      await tasks.run()
+      this.success('Built intents')
+    } catch (e) {
+      this.error(e)
+    }
   }
 }

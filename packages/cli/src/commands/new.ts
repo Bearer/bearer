@@ -45,8 +45,9 @@ export default class New extends BaseCommand {
       const name: string = args.ScenarioName || (await this.askForString('Scenario name'))
       const authType: Authentications = (flags.authType as Authentications) || (await this.askForAuthType())
       const skipInstall = flags.skipInstall
+      this.destinationFolder = name
 
-      const tasks = new Listr([
+      const tasks: Array<Listr.ListrTask> = [
         {
           title: 'Generating scenario structure',
           task: async (ctx: any) => {
@@ -78,15 +79,14 @@ export default class New extends BaseCommand {
           title: 'Create intial components',
           task: (_ctx: any, _task: any) =>
             GenerateComponent.run(['feature', '--type', 'root', '--path', this.copyDestFolder, '--silent'])
-        },
-        {
-          title: 'Installing dependencies',
-          enabled: (_ctx: any) => !skipInstall,
-          task: async (_ctx: any, _task: any) => installDependencies({ cwd: this.copyDestFolder })
         }
-      ])
+      ]
 
-      const { files } = await tasks.run()
+      if (!skipInstall) {
+        tasks.push(installDependencies({ cwd: this.copyDestFolder }))
+      }
+
+      const { files } = await new Listr(tasks).run()
       printFiles(this, files)
 
       this.success(`Scenario initialized, name: ${name}, authentication type: ${authTypes[authType].name}`)
@@ -114,7 +114,6 @@ export default class New extends BaseCommand {
   }
 
   createStructure(name: string): Promise<Array<string>> {
-    this.destinationFolder = name
     if (fs.existsSync(this.copyDestFolder)) {
       return Promise.reject(this.colors.bold('Destination already exists: ') + this.copyDestFolder)
     }
