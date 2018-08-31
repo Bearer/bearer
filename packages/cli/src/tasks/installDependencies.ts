@@ -27,7 +27,7 @@ export default ({ cwd }: { cwd: string }): Listr.ListrTask => ({
       {
         title: 'Installing scenario dependencies with npm',
         enabled: (ctx: any) => ctx.yarn === false,
-        task: async () => exec('yarn install', { cwd })
+        task: async () => exec('npm install', { cwd })
       }
     ])
 })
