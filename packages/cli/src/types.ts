@@ -17,7 +17,13 @@ export type BearerConfig = {
   Username: string
   ExpiresAt: string
   authorization: {
-    AuthenticationResult: any
+    AuthenticationResult?: {
+      IdToken: string
+      RefreshToken: string
+      TokenType: string
+      ExpiresIn: number
+      AccessToken: string
+    }
   }
   open: false
   configs: Array<string>

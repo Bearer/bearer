@@ -1,6 +1,6 @@
 import * as request from 'request'
 
-const requestPromise = (url, method, path, body, headers = {}) =>
+const requestPromise = (url: string, method: string, path: string, body: any, headers = {}) =>
   new Promise((resolve, reject) => {
     request(
       {
