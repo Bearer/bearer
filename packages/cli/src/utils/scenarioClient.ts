@@ -18,7 +18,7 @@ export class ScenarioClient {
 
   async getScenarioArchiveUploadUrl(orgId: string, scenarioId: string): Promise<string> {
     try {
-      const response = await this.client.post('scenario-archive-url', { orgId, scenarioId })
+      const response = await this.client.post('scenario-archive-url', { orgId, scenarioId, type: 'src' })
       return response.data.url
     } catch (e) {
       throw e
@@ -28,7 +28,7 @@ export class ScenarioClient {
 
 export default (command: BaseCommand): ScenarioClient => {
   return new ScenarioClient(
-    command.bearerConfig.IntegrationServiceUrl,
+    command.bearerConfig.DeploymentUrl,
     command.bearerConfig.bearerConfig.authorization.AuthenticationResult!.IdToken,
     command.config.version
   )
