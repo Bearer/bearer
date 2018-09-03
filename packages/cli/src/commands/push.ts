@@ -53,7 +53,8 @@ export default class Push extends BaseCommand {
         'yarn.lock',
         'package-json.lock',
         'spec.ts',
-        'package.json'
+        'package.json',
+        'auth.config.json'
       ])
       this.debug('Files to upload', files.join('\n'))
 
@@ -96,8 +97,12 @@ export default class Push extends BaseCommand {
       await axios.put(url, file, { headers: { 'Content-Type': 'application/zip' } })
       return true
     } catch (e) {
-      this.debug(e.response)
-      throw e
+      if (e.response && e.response.status === 401) {
+        this.error('Unauthorized')
+        return false
+      } else {
+        throw e
+      }
     }
   }
 }
