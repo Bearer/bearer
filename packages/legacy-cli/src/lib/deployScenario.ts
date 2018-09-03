@@ -27,7 +27,7 @@ export function buildIntents(emitter, config: Config, locator: LocationProvider)
       // TODOs: use root node modules
       await execPromise(`${config.command} install`, { cwd: intentsDirectory })
 
-      const scenarioArtifact = locator.intentsArtifactResourcePath(`${scenarioUuid}.zip`)
+      const scenarioArtifact = locator.buildArtifactResourcePath(`${scenarioUuid}.zip`)
       const output = fs.createWriteStream(scenarioArtifact)
       buildArtifact(output, { scenarioUuid }, emitter, locator)
         .then(() => {

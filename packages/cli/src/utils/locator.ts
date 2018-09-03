@@ -61,12 +61,12 @@ export default class LocationProvider {
     return path.join(this.buildIntentsDir, resource)
   }
 
-  get intentsArtifactDir(): string {
+  get buildArtifactDir(): string {
     return path.join(this.bearerDir, 'artifacts')
   }
 
-  intentsArtifactResourcePath(resource: string): string {
-    return path.join(this.intentsArtifactDir, resource)
+  buildArtifactResourcePath(resource: string): string {
+    return path.join(this.buildArtifactDir, resource)
   }
 
   get authConfigPath(): string {

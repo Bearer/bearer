@@ -14,6 +14,6 @@ export default class PrepareIntents extends BaseCommand {
   @RequireScenarioFolder()
   async run() {
     ensureFolderExists(this.locator.buildIntentsDir, true)
-    ensureFolderExists(this.locator.intentsArtifactDir, true)
+    ensureFolderExists(this.locator.buildArtifactDir, true)
   }
 }
