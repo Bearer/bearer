@@ -8,6 +8,7 @@ import * as inquirer from 'inquirer'
 
 import { AuthConfig, Config } from './types'
 import Locator from './utils/locator'
+import scenarioClientFactory, { ScenarioClient } from './utils/scenarioClient'
 import setupConfig from './utils/setupConfig'
 
 export default abstract class extends Command {
@@ -37,6 +38,10 @@ export default abstract class extends Command {
 
   get serviceClient() {
     return serviceClient(this.bearerConfig.IntegrationServiceUrl)
+  }
+
+  get scenarioClient(): ScenarioClient {
+    return scenarioClientFactory(this)
   }
 
   get scenarioAuthConfig(): AuthConfig {
