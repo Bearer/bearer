@@ -10,7 +10,8 @@ export const config: Config = {
   ],
   outputTargets: [
     {
-      type: 'dist'
+      type: 'dist',
+      dir: process.env.DIST_BUILD_FOLDER || 'dist'
     },
     {
       type: 'www',

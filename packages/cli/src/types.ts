@@ -65,6 +65,7 @@ export type AuthConfig = {
 }
 
 export type ScenarioBuildEnv = {
+  DIST_BUILD_FOLDER: string | undefined
   BEARER_SCENARIO_ID: string
   BEARER_SCENARIO_TAG_NAME: string
   BEARER_INTEGRATION_HOST: string

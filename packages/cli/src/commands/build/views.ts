@@ -7,8 +7,7 @@ import * as path from 'path'
 
 import BaseCommand from '../../BaseCommand'
 import installDependencies from '../../tasks/installDependencies'
-import runNpmCommand from '../../tasks/runNpmClientCommand'
-import { ScenarioBuildEnv } from '../../types'
+
 import { RequireScenarioFolder } from '../../utils/decorators'
 
 const skipInstall = 'skip-install'
@@ -26,19 +25,6 @@ export default class BuildViews extends BaseCommand {
   @RequireScenarioFolder()
   async run() {
     const { flags } = this.parse(BuildViews)
-
-    const config = this.bearerConfig
-    const cdnHost = `${config.CdnHost}/${config.orgId}/${config.scenarioId}/dist/${config.scenarioId}/`
-    // TODO: throw error if missing information
-    const env: ScenarioBuildEnv = {
-      BEARER_SCENARIO_ID: config.scenarioUuid,
-      BEARER_SCENARIO_TAG_NAME: config.scenarioId!,
-      BEARER_INTEGRATION_HOST: config.IntegrationServiceHost,
-      BEARER_AUTHORIZATION_HOST: config.IntegrationServiceHost,
-      CDN_HOST: cdnHost,
-      ...process.env
-    }
-
     const tasks: Array<Listr.ListrTask> = [
       {
         title: 'Transpile views',
@@ -53,8 +39,7 @@ export default class BuildViews extends BaseCommand {
           watcher.close()
           //}
         }
-      },
-      runNpmCommand({ name: 'Build scenario views', cwd: this.locator.buildViewsDir, command: 'stencil build', env })
+      }
     ]
     if (!flags[skipInstall]) {
       tasks.unshift(installDependencies({ cwd: this.locator.scenarioRoot }))
