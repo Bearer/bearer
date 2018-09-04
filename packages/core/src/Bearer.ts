@@ -114,7 +114,7 @@ class Bearer {
       postRobot
         .send(this.iframe, Events.HAS_AUTHORIZED, {
           scenarioId,
-          integrationId: Bearer.config.integrationId
+          clientId: Bearer.config.clientId
         })
         .then(({ data, data: { authorized } }) => {
           console.log('[BEARER]', 'HAS_AUTHORIZED response', data)
@@ -127,7 +127,7 @@ class Bearer {
     postRobot
       .send(this.iframe, Events.REVOKE, {
         scenarioId,
-        integrationId: Bearer.config.integrationId
+        clientId: Bearer.config.clientId
       })
       .then(() => {
         console.log('[BEARER]', 'Signing out')

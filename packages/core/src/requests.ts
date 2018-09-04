@@ -21,7 +21,7 @@ export function bearerRequest<TPromiseReturn>(uri: string, baseParams = {}): TBe
           const sentParams = {
             ...params,
             ...baseParams,
-            integrationId: Bearer.config.integrationId
+            clientId: Bearer.config.clientId
           }
 
           const query = Object.keys(sentParams).map(key => [key, sentParams[key]].join('='))

@@ -1,13 +1,13 @@
 export interface IBearerConfig {
   integrationHost?: string
-  integrationId?: string
+  clientId?: string
   loadingComponent?: string
 }
 
 export default class BearerConfig {
   integrationHost: string = 'BEARER_INTEGRATION_HOST'
   authorizationHost: string = 'BEARER_AUTHORIZATION_HOST'
-  integrationId: string = ''
+  clientId: string = ''
   loadingComponent: string
 
   constructor(options: IBearerConfig = {}) {

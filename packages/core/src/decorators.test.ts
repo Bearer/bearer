@@ -16,7 +16,7 @@ const commonParams = {
 
 describe('Intent decorator', () => {
   beforeAll(() => {
-    Bearer.init({ integrationHost: process.env.API_HOST, integrationId: '42' })
+    Bearer.init({ integrationHost: process.env.API_HOST, clientId: '42' })
     Bearer.instance.allowIntegrationRequests()
   })
 
@@ -56,7 +56,7 @@ describe('Intent decorator', () => {
         .catch(a => console.log(a))
 
       expect(fetch).toBeCalledWith(
-        'https://localhost:5555/api/v1/1234/getCollectionIntent?page=1&setupId=&integrationId=42',
+        'https://localhost:5555/api/v1/1234/getCollectionIntent?page=1&setupId=&clientId=42',
         commonParams
       )
 

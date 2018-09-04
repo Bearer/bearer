@@ -10,7 +10,7 @@ const setupId = '1234'
 describe('requests', () => {
   beforeEach(() => {
     fetch.resetMocks()
-    Bearer.init({ integrationHost: process.env.API_HOST, integrationId: '42' })
+    Bearer.init({ integrationHost: process.env.API_HOST, clientId: '42' })
     Bearer.instance.allowIntegrationRequests()
   })
 
@@ -28,7 +28,7 @@ describe('requests', () => {
       await aRequest({ page: 1 }, {})
 
       expect(window.fetch).toBeCalledWith(
-        'https://localhost:5555/api/v1/aScenarioId/anIntent?page=1&setupId=1234&integrationId=42',
+        'https://localhost:5555/api/v1/aScenarioId/anIntent?page=1&setupId=1234&clientId=42',
         {
           credentials: 'include',
           headers: {
