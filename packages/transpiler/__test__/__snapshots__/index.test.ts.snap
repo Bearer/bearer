@@ -42,8 +42,6 @@ export class FullComponent {
     el: HTMLElement;
     constructor() { Intent('ListRepositories')(this, \\"fetcher\\"); Intent('getPullRequest', IntentType.FetchData)(this, \\"fetchResource\\"); }
     get SCENARIO_ID() { return \\"SPONGE_BOB\\"; }
-    @Prop()
-    BEARER_ID: string;
     @Prop({ \\"context\\": \\"bearer\\" })
     bearerContext: any;
     @Prop()
@@ -92,8 +90,6 @@ export class AttachPullRequestAction {
     el: HTMLElement;
     constructor() { Intent('ListRepositories')(this, \\"fetcher\\"); Intent('getPullRequest', IntentType.FetchData)(this, \\"fetchResource\\"); }
     get SCENARIO_ID() { return \\"SPONGE_BOB\\"; }
-    @Prop()
-    BEARER_ID: string;
     @Prop({ \\"context\\": \\"bearer\\" })
     bearerContext: any;
     @Prop()
@@ -162,8 +158,6 @@ export class AttachPullRequestDisplay {
     el: HTMLElement;
     constructor() { Intent('ListRepositories')(this, \\"fetcher\\"); Intent('getPullRequest', IntentType.FetchData)(this, \\"fetchResource\\"); }
     get SCENARIO_ID() { return \\"SPONGE_BOB\\"; }
-    @Prop()
-    BEARER_ID: string;
     @Prop({ \\"context\\": \\"bearer\\" })
     bearerContext: any;
     @Prop()
@@ -201,8 +195,6 @@ class OverridesDecorarotFull {
         console.log('componentDidUnload');
     }
     get SCENARIO_ID() { return \\"SPONGE_BOB\\"; }
-    @Prop()
-    BEARER_ID: string;
     @Prop({ \\"context\\": \\"bearer\\" })
     bearerContext: any;
     @Prop()
@@ -231,8 +223,6 @@ class OverridesDecorarotLess {
         console.log('componentDidUnload');
     }
     get SCENARIO_ID() { return \\"SPONGE_BOB\\"; }
-    @Prop()
-    BEARER_ID: string;
     @Prop({ \\"context\\": \\"bearer\\" })
     bearerContext: any;
     @Prop()

@@ -1,6 +1,6 @@
 /*
  * Checks if class is decorated with @Component decorator
- * and injects the `@Prop() BEARER_ID: string;` into class definition
+ * and injects the `@Prop() SCENARIO_ID: string;` into class definition
  * 
  */
 import * as ts from 'typescript'
@@ -11,15 +11,23 @@ import { TransformerOptions } from '../types'
 
 import bearer from './bearer'
 
-export default function ComponentTransformer({  }: TransformerOptions = {}): ts.TransformerFactory<ts.SourceFile> {
+export default function ComponentTransformer({
+
+}: TransformerOptions = {}): ts.TransformerFactory<ts.SourceFile> {
   return transformContext => {
     const scenarioId = process.env.BEARER_SCENARIO_ID
 
     function visit(node: ts.Node): ts.VisitResult<ts.Node> {
       // TODO: filter components which really need it
-      if (ts.isClassDeclaration(node) && hasDecoratorNamed(node, Decorators.Component)) {
+      if (
+        ts.isClassDeclaration(node) &&
+        hasDecoratorNamed(node, Decorators.Component)
+      ) {
         return ts.visitEachChild(
-          bearer.addBearerScenarioIdAccessor(node as ts.ClassDeclaration, scenarioId),
+          bearer.addBearerScenarioIdAccessor(
+            node as ts.ClassDeclaration,
+            scenarioId
+          ),
           visit,
           transformContext
         )
@@ -28,7 +36,10 @@ export default function ComponentTransformer({  }: TransformerOptions = {}): ts.
     }
 
     if (!scenarioId) {
-      console.warn('[BEARER]', 'No scenario ID provided. Skipping scenario ID injection')
+      console.warn(
+        '[BEARER]',
+        'No scenario ID provided. Skipping scenario ID injection'
+      )
     }
 
     return tsSourceFile => {

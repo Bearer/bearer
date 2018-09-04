@@ -9,7 +9,6 @@ import ImportsImporter from './transformers/imports-transformer'
 import NavigatorScreenTransformer from './transformers/navigator-screen-transformer'
 import PropBearerContextInjector from './transformers/prop-bearer-context-injector'
 import PropImporter from './transformers/prop-importer'
-import PropInjector from './transformers/prop-injector'
 import BearerReferenceIdInjector from './transformers/reference-id-injector'
 import ReplaceIntentDecorators from './transformers/replace-intent-decorator'
 import RootComponentTransformer from './transformers/root-component-transformer'
@@ -45,7 +44,6 @@ export default class Transpiler {
         ReplaceIntentDecorators({ verbose, metadata: this.metadata }),
         BearerScenarioIdInjector({ verbose, metadata: this.metadata }),
         PropImporter({ verbose, metadata: this.metadata }),
-        PropInjector({ verbose, metadata: this.metadata }),
         PropBearerContextInjector({ verbose, metadata: this.metadata }),
         BearerStateInjector({ verbose, metadata: this.metadata }),
         NavigatorScreenTransformer({ verbose, metadata: this.metadata }),

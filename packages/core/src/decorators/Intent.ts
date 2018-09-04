@@ -19,7 +19,6 @@ export type BearerFetch = (...args: any[]) => Promise<any>
 type IDecorator = (target: any, key: string) => void
 
 type BearerComponent = {
-  BEARER_ID: string
   setupId: string
   SCENARIO_ID: string
   referenceId: string
