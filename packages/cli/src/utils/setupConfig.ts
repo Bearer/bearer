@@ -43,10 +43,12 @@ export default (runPath: string = process.cwd()): Config => {
   const setup: BaseConfig = configs[BEARER_ENV as BearerEnv]
 
   const isYarnInstalled = !!spawnSync('yarn', ['bin']).output
-
+  const scenarioLocation = runPath.startsWith('~')
+    ? path.resolve(runPath.replace(/^~/, os.homedir()))
+    : path.resolve(runPath)
   return {
     ...setup,
-    runPath,
+    runPath: scenarioLocation,
     isYarnInstalled,
     command: isYarnInstalled ? 'yarn' : 'npm',
     get isScenarioLocation(): boolean {
@@ -56,7 +58,7 @@ export default (runPath: string = process.cwd()): Config => {
       return rc('bearer')
     },
     get scenarioConfig(): ScenarioConfig {
-      return rc('scenario', { config: path.resolve(path.join(runPath, '.scenariorc')) })
+      return rc('scenario', { config: path.join(scenarioLocation, '.scenariorc') })
     },
     get orgId(): string | undefined {
       return this.scenarioConfig.orgId
@@ -77,7 +79,7 @@ export default (runPath: string = process.cwd()): Config => {
       return Boolean(this.orgId) && Boolean(this.scenarioId)
     },
     get rootPathRc(): string | null {
-      return findUp.sync('.scenariorc', { cwd: runPath })
+      return findUp.sync('.scenariorc', { cwd: scenarioLocation })
     },
     setScenarioConfig(config: { scenarioTitle: string; orgId: string; scenarioId: string }) {
       const { scenarioTitle, orgId, scenarioId } = config
