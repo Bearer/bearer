@@ -11,7 +11,6 @@ import invalidateCloudFront from './invalidateCloudFront'
 import LocationProvider from './locationProvider'
 import * as pushScenario from './pushScenario'
 import * as pushViews from './pushViews'
-import * as refreshToken from './refreshToken'
 
 import { Config } from './types'
 
@@ -167,27 +166,19 @@ export function deployScenario(
   locator
 ) {
   return new Promise(async (resolve, reject) => {
-    let calculatedConfig = config
-
     try {
-      const { ExpiresAt } = config.bearerConfig
-
-      if (ExpiresAt < Date.now()) {
-        calculatedConfig = await refreshToken(config, emitter)
-      }
-
-      await developerPortal(emitter, 'predeploy', calculatedConfig)
+      await developerPortal(emitter, 'predeploy', config)
       if (!noIntents) {
-        await deployIntents(emitter, calculatedConfig, locator)
+        await deployIntents(emitter, config, locator)
       }
       if (!noViews) {
-        await deployViews(emitter, calculatedConfig, locator)
+        await deployViews(emitter, config, locator)
       }
-      await developerPortal(emitter, 'deployed', calculatedConfig)
+      await developerPortal(emitter, 'deployed', config)
       resolve()
     } catch (e) {
       emitter.emit('deployScenario:error', e)
-      await developerPortal(emitter, 'cancelled', calculatedConfig)
+      await developerPortal(emitter, 'cancelled', config)
       reject(e)
     }
   })
