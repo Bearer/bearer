@@ -5,7 +5,7 @@ import * as globby from 'globby'
 import * as Listr from 'listr'
 
 import BaseCommand from '../BaseCommand'
-import { RequireLinkedScenario, RequireScenarioFolder } from '../utils/decorators'
+import { ensureFreshToken, RequireLinkedScenario, RequireScenarioFolder } from '../utils/decorators'
 import { ensureFolderExists } from '../utils/helpers'
 export default class Push extends BaseCommand {
   static description = 'Zip scenario and upload it to S3'
@@ -18,6 +18,7 @@ export default class Push extends BaseCommand {
 
   @RequireScenarioFolder()
   @RequireLinkedScenario()
+  @ensureFreshToken()
   async run() {
     ensureFolderExists(this.locator.buildArtifactDir, true)
     const archivePath = this.locator.buildArtifactResourcePath('scenario.zip')

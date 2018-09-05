@@ -1,6 +1,7 @@
 import { flags } from '@oclif/command'
 
 import BaseLegacyCommand from '../BaseLegacyCommand'
+import { ensureFreshToken } from '../utils/decorators'
 
 import GenerateSpec from './generate/spec'
 import PrepareViews from './prepare/views'
@@ -19,6 +20,7 @@ export default class Deploy extends BaseLegacyCommand {
 
   static args = []
 
+  @ensureFreshToken()
   async run() {
     const { flags } = this.parse(Deploy)
     const cmdArgs = []

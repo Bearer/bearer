@@ -30,7 +30,7 @@ export default class Login extends BaseCommand {
         case 200: {
           this.bearerConfig.storeBearerConfig({
             ...body.user,
-            ExpiresAt: body.authorization.AuthenticationResult.ExpiresIn + Date.now(),
+            ExpiresAt: Date.now() + body.authorization.AuthenticationResult.ExpiresIn * 1000,
             authorization: body.authorization
           })
           return `Successfully logged in as ${Username}! 🤘`
