@@ -1,36 +1,35 @@
-import { flags } from '@oclif/command'
+import BaseCommand from '../BaseCommand'
+import { RequireScenarioFolder } from '../utils/decorators'
 
-import BaseLegacyCommand from '../BaseLegacyCommand'
+import PushCommand from './push'
 
-import GenerateSpec from './generate/spec'
-import PrepareViews from './prepare/views'
-
-const viewsOnly = 'views-only'
-const intentsOnly = 'intents-only'
-
-export default class Deploy extends BaseLegacyCommand {
-  static description = 'Deploy a scenario'
+export default class Deploy extends BaseCommand {
+  static description = '[DEPRECATED] Deploys scenario'
+  static hidden = true
 
   static flags = {
-    help: flags.help({ char: 'h' }),
-    [viewsOnly]: flags.boolean({ char: 's', exclusive: [intentsOnly], description: 'Deploy views only' }),
-    [intentsOnly]: flags.boolean({ char: 'i', exclusive: [viewsOnly], description: 'Deploy intents only' })
+    ...BaseCommand.flags
   }
 
   static args = []
 
+  @RequireScenarioFolder()
   async run() {
-    const { flags } = this.parse(Deploy)
-    const cmdArgs = []
-    if (flags[viewsOnly]) {
-      cmdArgs.push(`--${viewsOnly}`)
-    } else if (flags[intentsOnly]) {
-      cmdArgs.push(`--${intentsOnly}`)
+    this.warn('This command is deprecated and will be removed soon.')
+    this.warn(
+      this.colors.bold('Please use this command instead: ') + this.colors.bold(this.colors.yellow('bearer push'))
+    )
+    this.ux.action.start('Running bearer push')
+    try {
+      await PushCommand.run(['--path', this.locator.scenarioRoot])
+      this.ux.action.stop()
+      this.success(`🐻 Scenario successfully pushed.\n`)
+      this.log(
+        `Your scenario will be available soon at this location: ` +
+          this.colors.bold(`${this.bearerConfig.DeveloperPortalUrl}scenarios/${this.bearerConfig.scenarioUuid}/preview`)
+      )
+    } catch (e) {
+      this.error(e)
     }
-    await GenerateSpec.run(['--silent'])
-
-    await PrepareViews.run(['--silent', '--empty'])
-
-    this.runLegacy(['deploy', ...cmdArgs])
   }
 }
