@@ -54,7 +54,6 @@
     "@types/node": "^10",
     "@types/webpack": "^4.4.11",
     "archiver": "^3.0.0",
-    "globby": "^8",
     "jest": "^23.5.0",
     "nock": "^9.6.1",
     "nyc": "^12",

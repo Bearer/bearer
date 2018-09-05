@@ -1,10 +1,12 @@
 import Command from '../BaseCommand'
-interface ICommand extends Command {}
+
+type Constructor<T> = new (...args: any[]) => T;
+type TCommand = InstanceType<Constructor<Command>>
 
 export function RequireScenarioFolder() {
-  return function(_target: any, _propertyKey: string | symbol, descriptor: PropertyDescriptor) {
+  return function (_target: any, _propertyKey: string | symbol, descriptor: PropertyDescriptor) {
     let originalMethod = descriptor.value
-    descriptor.value = async function(this: ICommand) {
+    descriptor.value = async function (this: TCommand) {
       if (this.bearerConfig.isScenarioLocation) {
         await originalMethod.apply(this, arguments)
       } else {
@@ -16,9 +18,9 @@ export function RequireScenarioFolder() {
 }
 
 export function RequireLinkedScenario() {
-  return function(_target: any, _propertyKey: string | symbol, descriptor: PropertyDescriptor) {
+  return function (_target: any, _propertyKey: string | symbol, descriptor: PropertyDescriptor) {
     let originalMethod = descriptor.value
-    descriptor.value = async function(this: ICommand) {
+    descriptor.value = async function (this: TCommand) {
       if (this.bearerConfig.hasScenarioLinked) {
         await originalMethod.apply(this, arguments)
       } else {
@@ -33,9 +35,9 @@ export function RequireLinkedScenario() {
 }
 
 export function ensureFreshToken() {
-  return function(_target: any, _propertyKey: string | symbol, descriptor: PropertyDescriptor) {
+  return function (_target: any, _propertyKey: string | symbol, descriptor: PropertyDescriptor) {
     let originalMethod = descriptor.value
-    descriptor.value = async function(this: ICommand) {
+    descriptor.value = async function (this: TCommand) {
       const { authorization, ExpiresAt } = this.bearerConfig.bearerConfig
 
       if (authorization && authorization.AuthenticationResult) {
@@ -47,7 +49,8 @@ export function ensureFreshToken() {
           console.log('[BEARER]', 'e', e)
           return this.error(e)
         }
-        this.debug('Running original method')
+        // TS is complaining with TS2445, commenting out this for now
+        // this.debug('Running original method')
         await originalMethod.apply(this, arguments)
       } else {
         const error =
@@ -60,7 +63,7 @@ export function ensureFreshToken() {
   }
 }
 
-async function refreshMyToken(command: ICommand) {
+async function refreshMyToken(command: TCommand) {
   const { RefreshToken } = command.bearerConfig.bearerConfig.authorization.AuthenticationResult!
 
   try {
