@@ -12,7 +12,6 @@ import { Config } from '../src/lib/types'
 
 const emitter = new Emitter()
 const config: Config = setupConfig()
-const deployCmd = require('../src/lib/commands/deployCommand')
 const startCmd = require('../src/lib/commands/startCommand')
 const invokeCmd = require('../src/lib/commands/invokeCommand')
 
@@ -23,7 +22,6 @@ cliOutput(emitter, config)
 
 program.version(version, '-v, --version')
 
-cli.use(deployCmd)
 cli.use(startCmd)
 cli.use(invokeCmd)
 
