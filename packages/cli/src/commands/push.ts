@@ -9,6 +9,7 @@ import { ensureFreshToken, RequireLinkedScenario, RequireScenarioFolder } from '
 import { ensureFolderExists } from '../utils/helpers'
 export default class Push extends BaseCommand {
   static description = 'Zip scenario and upload it to S3'
+  static aliases = ['deploy']
 
   static flags = {
     ...BaseCommand.flags
