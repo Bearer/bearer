@@ -38,8 +38,10 @@ export default class PackViews extends BaseCommand {
 
     const config = this.bearerConfig
     const distFolder = path.join(path.resolve(args.PATH), 'dist')
+    const wwwFolder = path.join(path.resolve(args.PATH), 'www')
     const env: ScenarioBuildEnv = {
       ...process.env,
+      WWW_BUILD_FOLDER: wwwFolder,
       DIST_BUILD_FOLDER: distFolder,
       BEARER_SCENARIO_ID: flags[scenarioUuid],
       BEARER_SCENARIO_TAG_NAME: flags[scenarioId],
