@@ -5,6 +5,7 @@ import * as ini from 'ini'
 import * as os from 'os'
 import * as path from 'path'
 import * as rc from 'rc'
+import { promisify } from 'util'
 
 import { BaseConfig, BearerConfig, BearerEnv, Config, ScenarioConfig } from '../types'
 
@@ -87,16 +88,19 @@ export default (runPath: string = process.cwd()): Config => {
         fs.writeFileSync(this.rootPathRc, ini.stringify({ scenarioTitle, orgId, scenarioId }))
       }
     },
-    storeBearerConfig(config) {
+    async storeBearerConfig(config) {
       const { Username, ExpiresAt, authorization } = config
-      fs.writeFileSync(
-        this.bearerConfig.config || path.join(os.homedir(), '.bearerrc'),
+      const writeFile = promisify(fs.writeFile)
+      try {
+        await writeFile(this.bearerConfig.config || path.join(os.homedir(), '.bearerrc'),
         ini.stringify({
           Username,
           ExpiresAt,
           authorization
-        })
-      )
+        }))
+      } catch(e) {
+        console.error('Error while writing the token', e)
+      }
     }
   }
 }

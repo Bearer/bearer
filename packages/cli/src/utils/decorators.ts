@@ -76,7 +76,7 @@ async function refreshMyToken(command: TCommand) {
           authorization: { AuthenticationResult }
         } = body
 
-        command.bearerConfig.storeBearerConfig({
+        await command.bearerConfig.storeBearerConfig({
           ExpiresAt: Date.now() + AuthenticationResult.ExpiresIn * 1000,
           authorization: {
             AuthenticationResult: {
