@@ -103,7 +103,7 @@ export default class New extends BaseCommand {
     scenarioTitle: name,
     componentName: this.case.pascal(name),
     componentTagName: this.case.kebab(name),
-    bearerTagVersion: process.env.BEARER_PACKAGE_VERSION || 'beta1'
+    bearerTagVersion: process.env.BEARER_PACKAGE_VERSION || 'beta2'
   })
 
   get copyDestFolder(): string {
