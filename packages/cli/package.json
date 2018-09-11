@@ -83,7 +83,6 @@
       "@oclif/plugin-help",
       "@oclif/plugin-warn-if-update-available",
       "@oclif/plugin-autocomplete",
-      "@oclif/plugin-update",
       "@oclif/plugin-not-found"
     ]
   },
