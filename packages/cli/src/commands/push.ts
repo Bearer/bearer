@@ -35,6 +35,11 @@ export default class Push extends BaseCommand {
 
     try {
       await new Listr(tasks).run()
+      this.success(`🐻 Scenario successfully pushed.\n`)
+      this.log(
+        `Your scenario will be available soon at this location: ` +
+        this.colors.bold(`${this.bearerConfig.DeveloperPortalUrl}scenarios/${this.bearerConfig.scenarioUuid}/preview`)
+      )
     } catch (e) {
       this.error(e)
     }

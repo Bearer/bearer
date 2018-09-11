@@ -19,15 +19,9 @@ export default class Deploy extends BaseCommand {
     this.warn(
       this.colors.bold('Please use this command instead: ') + this.colors.bold(this.colors.yellow('bearer push'))
     )
-    this.ux.action.start('Running bearer push')
     try {
       await PushCommand.run(['--path', this.locator.scenarioRoot])
       this.ux.action.stop()
-      this.success(`🐻 Scenario successfully pushed.\n`)
-      this.log(
-        `Your scenario will be available soon at this location: ` +
-          this.colors.bold(`${this.bearerConfig.DeveloperPortalUrl}scenarios/${this.bearerConfig.scenarioUuid}/preview`)
-      )
     } catch (e) {
       this.error(e)
     }
