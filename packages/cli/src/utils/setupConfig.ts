@@ -101,6 +101,7 @@ export default (runPath: string = process.cwd()): Config => {
       } catch(e) {
         console.error('Error while writing the token', e)
       }
+      this.bearerConfig.authorization = authorization
     }
   }
 }
