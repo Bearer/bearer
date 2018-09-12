@@ -52,7 +52,7 @@ export default class New extends BaseCommand {
           title: 'Generating scenario structure',
           task: async (ctx: any) => {
             try {
-              const files = await this.createStructure(name)
+              const files = await this.createStructure(name, authType)
               ctx.files = files
               return true
             } catch (e) {
@@ -113,11 +113,27 @@ export default class New extends BaseCommand {
     return path.join(process.cwd(), this.destinationFolder)
   }
 
-  createStructure(name: string): Promise<Array<string>> {
+  createStructure(name: string, authType: string): Promise<Array<string>> {
     if (fs.existsSync(this.copyDestFolder)) {
       return Promise.reject(this.colors.bold('Destination already exists: ') + this.copyDestFolder)
     }
-    return copyFiles(this, path.join('init', 'structure'), this.copyDestFolder, this.getVars(name), true)
+    const setup = `
+    {
+      classname: 'SetupAction',
+      isRoot: true,
+      initialTagName: 'setup-action',
+      group: 'setup',
+      label: 'Setup Action Component'
+    },
+    {
+      classname: 'SetupDisplay',
+      isRoot: true,
+      initialTagName: 'setup-display',
+      group: 'setup',
+      label: 'Setup Display Component'
+    },`
+    const vars = (authType === 'noAuth' || authType === 'NONE') ? {} : { setup }
+    return copyFiles(this, path.join('init', 'structure'), this.copyDestFolder, { ...vars, ...this.getVars(name) }, true)
   }
 
   createAuthenticationFiles(name: string, authType: Authentications): Promise<Array<string>> {

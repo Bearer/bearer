@@ -22,7 +22,24 @@ export default class GenerateSpec extends BaseCommand {
     const targetFolder = this.locator.scenarioRoot
     if (flags.force || !specExists(targetFolder)) {
       try {
-        await copyFiles(this, 'generate/scenario_specs', targetFolder, {})
+        const setup = `
+    {
+      classname: 'SetupAction',
+      isRoot: true,
+      initialTagName: 'setup-action',
+      group: 'setup',
+      label: 'Setup Action Component'
+    },
+    {
+      classname: 'SetupDisplay',
+      isRoot: true,
+      initialTagName: 'setup-display',
+      group: 'setup',
+      label: 'Setup Display Component'
+    },`
+        const { authType } = this.scenarioAuthConfig
+        const vars = (authType === 'noAuth' || authType === 'NONE') ? {} : { setup }
+        await copyFiles(this, 'generate/scenario_specs', targetFolder, vars)
         this.success('Spec file successfully generated! 🎉')
       } catch (e) {
         this.error(e)

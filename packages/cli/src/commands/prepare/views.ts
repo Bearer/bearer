@@ -19,7 +19,7 @@ export default class PrepareViews extends BaseCommand {
   async run() {
     const { flags } = this.parse(PrepareViews)
     // Prepare folder structure
-    this.debug('Preparing views strucutre')
+    this.debug('Preparing views structure')
     ensureFolderExists(this.locator.buildViewsDir, flags.empty)
     ensureFolderExists(this.locator.buildViewsComponentsDir)
 
