@@ -32,6 +32,9 @@ export default class GenerateComponent extends BaseCommand {
       await copyFiles(this, `generate/${type}Component`, outDir, this.getVars(name, this.scenarioAuthConfig.authType))
       // TODO: add a nicer display
       this.success(`\nComponent generated`)
+      this.warn(
+        this.colors.italic('Please make sure to update the spec.ts file to reflect your new Root Component on the Developer Portal preview page.')
+      )
     } catch (e) {
       this.error(e)
     }
