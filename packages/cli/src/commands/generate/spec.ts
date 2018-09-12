@@ -37,7 +37,7 @@ export default class GenerateSpec extends BaseCommand {
       group: 'setup',
       label: 'Setup Display Component'
     },`
-        const { authType }: string = this.scenarioAuthConfig
+        const authType : string = this.scenarioAuthConfig.authType
         const vars = (authType === 'noAuth' || authType === 'NONE') ? {} : { setup }
         await copyFiles(this, 'generate/scenario_specs', targetFolder, vars)
         this.success('Spec file successfully generated! 🎉')
