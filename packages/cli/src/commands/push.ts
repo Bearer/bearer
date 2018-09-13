@@ -42,7 +42,7 @@ export default class Push extends BaseCommand {
       )
       this.log(
         `\nIn the mean time you can follow the deployment here: ` +
-        this.colors.bold(`${this.bearerConfig.DeveloperPortalUrl}/scenarios/${this.bearerConfig.scenarioUuid}/logs`)
+        this.colors.bold(`${this.bearerConfig.DeveloperPortalUrl}scenarios/${this.bearerConfig.scenarioUuid}/logs`)
       )
     } catch (e) {
       this.error(e)
