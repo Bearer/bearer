@@ -7,8 +7,8 @@
   "module": "dist/esm/index.js",
   "collection": "dist/collection/collection-manifest.json",
   "scripts": {
-    "build": "stencil build",
-    "dev": "stencil build --dev --watch --serve",
+    "build": "stencil build --es5",
+    "dev": "stencil build --dev --watch --serve --es5",
     "serve": "stencil-dev-server",
     "start": "npm run dev",
     "test": "jest --no-cache",
