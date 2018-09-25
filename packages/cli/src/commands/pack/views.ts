@@ -54,7 +54,7 @@ export default class PackViews extends BaseCommand {
 
   async buildStencil(env: ScenarioBuildEnv) {
     return new Promise((resolve, reject) => {
-      const build = spawn('yarn', ['stencil', 'build', '--prod'], { env, cwd: this.locator.buildViewsDir })
+      const build = spawn('yarn', ['stencil', 'build'], { env, cwd: this.locator.buildViewsDir })
 
       build.stdout.on('data', data => {
         this.debug(`build scenario => stdout: ${data}`)
