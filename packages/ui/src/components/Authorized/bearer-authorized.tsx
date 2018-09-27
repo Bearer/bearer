@@ -1,9 +1,10 @@
-import { State, Component, Prop, Method } from '@bearer/core'
+import { Component, Method, Prop, State } from '@bearer/core'
+
 import WithAuthentication, { IAuthenticated, WithAuthenticationMethods } from '../../decorators/withAuthentication'
 
-export type FWithAuthenticate = {
-  ({ authenticate }: { authenticate: () => Promise<boolean> }): any
-}
+export type FWithAuthenticate = (params: { authenticate(): Promise<boolean> }) => any
+export type FWithRevoke = (params: { revoke(): void }) => any
+
 // TODO: scope  authenticatePromise per scenario/setup
 @WithAuthentication()
 @Component({
@@ -18,7 +19,7 @@ export class BearerAuthorized extends WithAuthenticationMethods implements IAuth
   @Prop()
   renderUnauthorized: FWithAuthenticate
   @Prop()
-  renderAuthorized: () => any
+  renderAuthorized: FWithRevoke
   @Prop({ context: 'bearer' })
   bearerContext: any
 
@@ -58,9 +59,9 @@ export class BearerAuthorized extends WithAuthenticationMethods implements IAuth
   }
 
   @Method()
-  revoke() {
+  revoke(this: any) {
     console.log('[BEARER]', 'bearer-authorized', 'revoke')
-    this['revokeProto'].bind(this)()
+    this.revokeProto.bind(this)()
   }
 
   authenticatePromise = (): Promise<boolean> => {
@@ -68,7 +69,8 @@ export class BearerAuthorized extends WithAuthenticationMethods implements IAuth
       this.pendingAuthorizationResolve = resolve
       this.pendingAuthorizationReject = reject
     })
-    this['authorizeProto'].bind(this)()
+    // @ts-ignore: Unreachable code error
+    this.authorizeProto.bind(this)()
     return promise
   }
 
@@ -81,6 +83,6 @@ export class BearerAuthorized extends WithAuthenticationMethods implements IAuth
         ? this.renderUnauthorized({ authenticate: this.authenticatePromise })
         : 'Unauthorized'
     }
-    return this.renderAuthorized ? this.renderAuthorized() : <slot />
+    return this.renderAuthorized ? this.renderAuthorized({ revoke: this.revoke }) : <slot />
   }
 }

@@ -1,4 +1,5 @@
-import { Component, Method, State, Event, EventEmitter, Element } from '@bearer/core'
+import { Component, Element, Event, EventEmitter, Method, State } from '@bearer/core'
+
 import WithAuthentication, { IAuthenticated, WithAuthenticationMethods } from '../../decorators/withAuthentication'
 
 @WithAuthentication()
@@ -22,13 +23,15 @@ export class BearerNavigatorAuthScreen extends WithAuthenticationMethods impleme
   @Method()
   willAppear() {
     console.log('[BEARER]', 'Auth screen willAppear')
-    this.el.shadowRoot.querySelector('#screen')['willAppear']()
+    const screen: HTMLBearerNavigatorScreenElement = this.el.shadowRoot.querySelector('#screen')
+    screen.willAppear({})
   }
 
   @Method()
   willDisappear() {
     console.log('[BEARER]', 'Auth screen willAppear')
-    this.el.shadowRoot.querySelector('#screen')['willDisappear']()
+    const screen: HTMLBearerNavigatorScreenElement = this.el.shadowRoot.querySelector('#screen')
+    screen.willAppear({})
   }
 
   @Method()
@@ -52,31 +55,27 @@ export class BearerNavigatorAuthScreen extends WithAuthenticationMethods impleme
     this.scenarioAuthorized = true
   }
 
-  authenticate = () => {
-    this.el.shadowRoot.querySelector('#authorizer')['authenticate']()
-  }
+  renderUnauthoried = ({ authenticate }) => (
+    <bearer-button kind="primary" onClick={authenticate}>
+      {' '}
+      Login{' '}
+    </bearer-button>
+  )
 
-  revoke = () => {
-    this.el.shadowRoot.querySelector('#authorizer')['revoke']()
-  }
+  renderAuthorized = ({ revoke }) => (
+    <bearer-button kind="warning" onClick={revoke}>
+      {' '}
+      Logout{' '}
+    </bearer-button>
+  )
 
   render() {
     return (
       <bearer-navigator-screen id="screen" navigationTitle="Authentication" class="in">
         <bearer-authorized
           id="authorizer"
-          renderUnauthorized={() => (
-            <bearer-button kind="primary" onClick={this.authenticate}>
-              {' '}
-              Login{' '}
-            </bearer-button>
-          )}
-          renderAuthorized={() => (
-            <bearer-button kind="warning" onClick={this.revoke}>
-              {' '}
-              Logout{' '}
-            </bearer-button>
-          )}
+          renderUnauthorized={this.renderUnauthoried}
+          renderAuthorized={this.renderAuthorized}
         />
       </bearer-navigator-screen>
     )
