@@ -22,6 +22,12 @@ export class BearerAuthorized extends WithAuthenticationMethods implements IAuth
   renderAuthorized: FWithRevoke
   @Prop({ context: 'bearer' })
   bearerContext: any
+  @Prop()
+  scenarioId: string
+
+  get SCENARIO_ID(): string {
+    return this.scenarioId
+  }
 
   private pendingAuthorizationResolve: (authorize: boolean) => void
   private pendingAuthorizationReject: (authorize: boolean) => void
@@ -59,9 +65,10 @@ export class BearerAuthorized extends WithAuthenticationMethods implements IAuth
   }
 
   @Method()
-  revoke(this: any) {
+  revoke() {
     console.log('[BEARER]', 'bearer-authorized', 'revoke')
-    this.revokeProto.bind(this)()
+    // @ts-ignore: Unreachable code error
+    this.revokePromise()
   }
 
   authenticatePromise = (): Promise<boolean> => {
@@ -74,6 +81,12 @@ export class BearerAuthorized extends WithAuthenticationMethods implements IAuth
     return promise
   }
 
+  revokePromise = (): Promise<boolean> => {
+    // @ts-ignore: Unreachable code error
+    this.revokeProto.bind(this)()
+    return Promise.resolve(true)
+  }
+
   render() {
     if (!this.sessionInitialized || this.authorized === null) {
       return null
@@ -83,6 +96,6 @@ export class BearerAuthorized extends WithAuthenticationMethods implements IAuth
         ? this.renderUnauthorized({ authenticate: this.authenticatePromise })
         : 'Unauthorized'
     }
-    return this.renderAuthorized ? this.renderAuthorized({ revoke: this.revoke }) : <slot />
+    return this.renderAuthorized ? this.renderAuthorized({ revoke: this.revokePromise }) : <slot />
   }
 }

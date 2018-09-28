@@ -1,4 +1,4 @@
-import { Component, Element, Event, EventEmitter, Method, State } from '@bearer/core'
+import { Component, Element, Event, EventEmitter, Method, Prop, State } from '@bearer/core'
 
 import WithAuthentication, { IAuthenticated, WithAuthenticationMethods } from '../../decorators/withAuthentication'
 
@@ -19,6 +19,8 @@ export class BearerNavigatorAuthScreen extends WithAuthenticationMethods impleme
   scenarioAuthenticate: EventEmitter
   @Event()
   stepCompleted: EventEmitter
+  @Prop()
+  scenarioId?: string = 'BEARER_SCENARIO_ID'
 
   @Method()
   willAppear() {
@@ -73,6 +75,7 @@ export class BearerNavigatorAuthScreen extends WithAuthenticationMethods impleme
     return (
       <bearer-navigator-screen id="screen" navigationTitle="Authentication" class="in">
         <bearer-authorized
+          scenarioId={this.scenarioId}
           id="authorizer"
           renderUnauthorized={this.renderUnauthoried}
           renderAuthorized={this.renderAuthorized}

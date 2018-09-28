@@ -5,6 +5,9 @@ export default function AuthenticationListener() {
     const oldDidLoad = target.prototype.componentDidLoad
     target.prototype.componentDidLoad = function(this: IAuthenticatedLike) {
       console.log('[BEARER]', 'componentDidLoad authentication')
+      if (!this.SCENARIO_ID) {
+        console.warn("scenarioId prop is missing. Authorizations won't work properly")
+      }
       Bearer.instance.maybeInitialized
         .then(() => {
           if (this.onSessionInitialized) {
@@ -57,8 +60,6 @@ export default function AuthenticationListener() {
       componentDidUnload()
     }
 
-    target.prototype.SCENARIO_ID = 'BEARER_SCENARIO_ID'
-
     target.prototype.revokeProto = function() {
       Bearer.instance.revokeAuthorization(this.SCENARIO_ID)
     }
@@ -84,6 +85,7 @@ export interface IAuthenticatedLike extends IAuthenticated {
   [key: string]: any
 }
 
+// tslint:disable-next-line: no-unnecessary-class
 export class WithAuthenticationMethods {
   // revoke = () => {}
   // authenticate = () => {}
