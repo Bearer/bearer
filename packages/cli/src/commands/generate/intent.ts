@@ -18,10 +18,13 @@ const typeChoices = [types.slice(0, 1)[0], new inquirer.Separator(), ...types.sl
 
 export default class GenerateIntent extends BaseCommand {
   static description = 'Generate a Bearer Intent'
-
+  static aliases = ['g:i']
   static flags = {
     ...BaseCommand.flags,
-    type: flags.string({ char: 't', options: types.map(t => t.cli) })
+    type: flags.string({
+      char: 't',
+      options: types.map(t => t.cli)
+    })
   }
 
   static args = [{ name: 'name' }]

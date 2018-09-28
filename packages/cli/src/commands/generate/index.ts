@@ -11,10 +11,9 @@ const enum TType {
 
 export default class GenerateIndex extends BaseCommand {
   static description = 'Generate Intent or Component'
+  static aliases = ['g']
 
-  static flags = {
-    ...BaseCommand.flags
-  }
+  static flags = { ...BaseCommand.flags }
 
   static args = []
 

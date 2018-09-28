@@ -9,10 +9,7 @@ import { copyFiles } from '../../utils/helpers'
 export default class GenerateSetup extends BaseCommand {
   static description = 'Generate a Bearer Setup'
   static hidden = true
-  static flags = {
-    ...BaseCommand.flags,
-    force: flags.boolean({})
-  }
+  static flags = { ...BaseCommand.flags, force: flags.boolean({}) }
 
   static args = []
 
