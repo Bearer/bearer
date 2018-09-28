@@ -3,7 +3,8 @@ export const Component = {
   componentWillLoad: 'componentWillLoad',
   componentDidUnload: 'componentDidUnload',
   componentDidLoad: 'componentDidLoad',
-  setupId: 'setupId'
+  setupId: 'setupId',
+  scenarioId: 'scenarioId'
 }
 
 export const Decorators = {
@@ -34,4 +35,8 @@ export const Types = {
 export const Properties = {
   ReferenceId: 'referenceId',
   Element: 'el'
+}
+
+export const Env = {
+  BEARER_SCENARIO_ID: 'BEARER_SCENARIO_ID'
 }

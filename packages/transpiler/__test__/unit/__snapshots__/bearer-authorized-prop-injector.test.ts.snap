@@ -59,7 +59,7 @@ Object {
 class RootComponent {
     render() {
         return (<bearer-navigator>
-        <bearer-navigator-auth-screen />
+        <bearer-navigator-auth-screen scenarioId=\\"SPONGE_BOB\\"/>
       </bearer-navigator>);
     }
     constructor() { }
@@ -78,7 +78,7 @@ class RootComponent {
 class SimpleComponent {
     render() {
         return (<bearer-navigator>
-        <bearer-navigator-auth-screen />
+        <bearer-navigator-auth-screen scenarioId=\\"SPONGE_BOB\\"/>
       </bearer-navigator>);
     }
     constructor() { }
@@ -96,7 +96,7 @@ class SimpleComponent {
 })
 class WithBearerAuthorizedComponent {
     render() {
-        return (<bearer-authorized renderAuthorized={() => <div />} renderUnauthorized={() => <span />}/>);
+        return (<bearer-authorized renderAuthorized={() => <div />} renderUnauthorized={() => <span />} scenarioId=\\"SPONGE_BOB\\"/>);
     }
     constructor() { }
     get SCENARIO_ID() { return \\"SPONGE_BOB\\"; }
@@ -113,7 +113,7 @@ class WithBearerAuthorizedComponent {
 })
 class OverrideValueGiven {
     render() {
-        return (<bearer-authorized renderAuthorized={() => <div />} renderUnauthorized={() => <span />} scenarioId=\\"spongebob\\"/>);
+        return (<bearer-authorized renderAuthorized={() => <div />} renderUnauthorized={() => <span />} scenarioId=\\"SPONGE_BOB\\"/>);
     }
     constructor() { }
     get SCENARIO_ID() { return \\"SPONGE_BOB\\"; }

@@ -2,6 +2,7 @@ import * as fs from 'fs-extra'
 import * as path from 'path'
 import * as ts from 'typescript'
 
+import BearerAuthorizedRequiredProp from './transformers/bearer-authorized-scenario-id-prop-injector'
 import BearerStateInjector from './transformers/bearer-state-injector'
 import ComponenttagNameScoping from './transformers/component-tag-name-scoping'
 import GatherMetadata from './transformers/gather-metadata'
@@ -48,6 +49,7 @@ export default class Transpiler {
         BearerStateInjector({ verbose, metadata: this.metadata }),
         NavigatorScreenTransformer({ verbose, metadata: this.metadata }),
         ImportsImporter({ verbose, metadata: this.metadata }),
+        BearerAuthorizedRequiredProp({ verbose }),
         ComponenttagNameScoping({ verbose, metadata: this.metadata }),
         dumpSourceCode({
           verbose,

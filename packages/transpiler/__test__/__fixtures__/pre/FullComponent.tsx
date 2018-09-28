@@ -1,4 +1,10 @@
-import { Component, Intent, BearerFetch, IntentType, BearerState } from '@bearer/core'
+import {
+  BearerFetch,
+  BearerState,
+  Component,
+  Intent,
+  IntentType
+} from '@bearer/core'
 
 @Component({
   tag: 'full-component'
@@ -25,6 +31,7 @@ export class FullComponent {
   render() {
     return (
       <bearer-navigator>
+        <bearer-navigator-auth-screen />
         <bearer-navigator-screen navigationTitle="First Screen">
           <bearer-scrollable fetcher={this.fetcher} />
         </bearer-navigator-screen>

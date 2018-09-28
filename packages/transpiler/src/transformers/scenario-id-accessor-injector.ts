@@ -5,7 +5,7 @@
  */
 import * as ts from 'typescript'
 
-import { Decorators } from '../constants'
+import { Decorators, Env } from '../constants'
 import { hasDecoratorNamed } from '../helpers/decorator-helpers'
 import { TransformerOptions } from '../types'
 
@@ -15,7 +15,7 @@ export default function ComponentTransformer({
 
 }: TransformerOptions = {}): ts.TransformerFactory<ts.SourceFile> {
   return transformContext => {
-    const scenarioId = process.env.BEARER_SCENARIO_ID
+    const scenarioId = process.env[Env.BEARER_SCENARIO_ID]
 
     function visit(node: ts.Node): ts.VisitResult<ts.Node> {
       // TODO: filter components which really need it

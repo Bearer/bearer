@@ -3,7 +3,7 @@
 exports[`Transpiler integration test FullComponent.tsx match expectation 1`] = `
 Object {
   "file": "FullComponent.tsx",
-  "postContent": "import { Component, Intent, BearerFetch, IntentType, BearerState, Prop, Element, Watch, State } from '@bearer/core';
+  "postContent": "import { BearerFetch, BearerState, Component, Intent, IntentType, Prop, Element, Watch, State } from '@bearer/core';
 @Component({
     tag: 'full-component'
 })
@@ -23,6 +23,7 @@ export class FullComponent {
     };
     render() {
         return (<bearer-navigator>
+        <bearer-navigator-auth-screen scenarioId=\\"SPONGE_BOB\\"/>
         <bearer-navigator-screen navigationTitle=\\"First Screen\\" renderFunc={() => [<bearer-scrollable fetcher={this.fetcher}/>]}/>
         <bearer-navigator-screen navigationTitle=\\"First Screen\\" renderFunc={() => [<h1>Complex one</h1>,
             <bearer-scrollable fetcher={this.fetcher}/>,
@@ -82,7 +83,9 @@ export class AttachPullRequestAction {
     ducks: Array<any>;
     private fetchResource: BearerFetch;
     render() {
-        return <bearer-scrollable fetcher={this.fetcher}/>;
+        return (<bearer-authorized scenarioId=\\"SPONGE_BOB\\">
+        <bearer-scrollable fetcher={this.fetcher}/>
+      </bearer-authorized>);
     }
     @Prop()
     referenceId: string;

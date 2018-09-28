@@ -23,6 +23,10 @@ export class AttachPullRequestAction {
   fetchResource: BearerFetch
 
   render() {
-    return <bearer-scrollable fetcher={this.fetcher} />
+    return (
+      <bearer-authorized>
+        <bearer-scrollable fetcher={this.fetcher} />
+      </bearer-authorized>
+    )
   }
 }
