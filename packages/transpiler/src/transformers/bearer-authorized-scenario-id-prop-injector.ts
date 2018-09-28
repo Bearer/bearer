@@ -24,6 +24,7 @@ export default function injectScenarioIdProp(
         ts.createIdentifier(Component.scenarioId),
         ts.createLiteral(
           process.env[Env.BEARER_SCENARIO_ID] || Env.BEARER_SCENARIO_ID
+        )
       )
     ])
   }
