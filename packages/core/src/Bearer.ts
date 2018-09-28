@@ -10,6 +10,11 @@ const BEARER_WINDOW_KEY = 'BEARER'
 const BEARER_CONFIG_KEY = 'BEARER_CONFIG'
 const IFRAME_NAME = 'BEARER-IFRAME'
 
+type TAuthorizationPayload = {
+  scenarioId: string,
+  authIdentifier?: string
+}
+
 class Bearer {
   private static set _instance(bearerInstance: Bearer) {
     if (window[BEARER_WINDOW_INSTANCE_KEY]) {
@@ -99,14 +104,14 @@ class Bearer {
     this.initSession()
   }
 
-  authorized = (scenarioId: string) => {
-    console.log('[BEARER]', 'Bearer:emitting ', { event: Events.AUTHORIZED, scenarioId })
-    Bearer.emitter.emit(Events.AUTHORIZED, { scenarioId })
+  authorized = (data: TAuthorizationPayload) => {
+    console.log('[BEARER]', 'Bearer:emitting ', { event: Events.AUTHORIZED, ...data })
+    Bearer.emitter.emit(Events.AUTHORIZED, data)
   }
 
-  revoked = (scenarioId: string) => {
-    console.log('[BEARER]', 'Bearer:emitting ', { event: Events.REVOKED, scenarioId })
-    Bearer.emitter.emit(Events.REVOKED, { scenarioId })
+  revoked = (data: TAuthorizationPayload) => {
+    console.log('[BEARER]', 'Bearer:emitting ', { event: Events.REVOKED, ...data })
+    Bearer.emitter.emit(Events.REVOKED, data)
   }
 
   hasAuthorized = (scenarioId): Promise<boolean> =>
