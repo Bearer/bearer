@@ -12,7 +12,7 @@ export class BearerPopoverNavigator {
   @State()
   screens: Array<any> = []
   @State()
-  screenData: Object = {}
+  screenData: object = {}
   @State()
   _isVisible: boolean = false
   @State()
@@ -27,14 +27,14 @@ export class BearerPopoverNavigator {
   @Prop()
   display = 'popover'
   @Prop()
-  complete?: <T>({ data, complete }: { data: T; complete: () => void }) => void
+  complete?: <T>(payload: { data: T; complete(): void }) => void
 
   @Listen('scenarioCompleted')
   scenarioCompletedHandler() {
     this.screenData = {}
     this.isVisible = false
-    this.visibleScreen = this.hasAuthScreen() ? 1 : 0
-    this.el.shadowRoot.querySelector('#button')['toggle'](false)
+    this.visibleScreen = this.hasAuthScreen() ? 1 : 0;
+    (this.el.shadowRoot.querySelector('#button') as HTMLBearerButtonPopoverElement).toggle(false)
   }
 
   @Listen('stepCompleted')
@@ -90,9 +90,11 @@ export class BearerPopoverNavigator {
 
   set visibleScreen(index) {
     if (this._visibleScreenIndex >= 0) {
+      // tslint:disable-next-line no-accessor-recursion
       this.hideScreen(this.visibleScreen)
     }
     this._visibleScreenIndex = index
+    // tslint:disable-next-line no-accessor-recursion
     this.showScreen(this.visibleScreen)
   }
 
@@ -100,18 +102,20 @@ export class BearerPopoverNavigator {
     return this.screens[this._visibleScreenIndex]
   }
 
-  get screenNodes() {
+  get screenNodes(): Array<HTMLBearerNavigatorScreenElement> {
     return this.el.shadowRoot
-      ? this.el.shadowRoot
-          .querySelector('slot:not([name])')
-          ['assignedNodes']()
-          .filter(node => node.willAppear)
+      ? (this.el.shadowRoot
+        .querySelector('slot:not([name])') as HTMLSlotElement).assignedNodes()
+        .filter((node: HTMLBearerNavigatorScreenElement) => node.willAppear) as Array<HTMLBearerNavigatorScreenElement>
       : []
   }
 
   onVisibilityChange = ({ detail: { visible } }: { detail: { visible: boolean } }) => {
     console.log('[BEARER]', 'Navigator:onVisibilityChange', visible)
     this.isVisible = visible
+    if (!this.isVisible) {
+      this.visibleScreen = this.hasAuthScreen() ? 1 : 0
+    }
   }
 
   showScreen = screen => {
@@ -132,7 +136,7 @@ export class BearerPopoverNavigator {
 
   hasNext = () => this._visibleScreenIndex < this.screens.length - 1
   hasPrevious = () => this._visibleScreenIndex > 0
-  hasAuthScreen = () => this.screenNodes.filter(node => node['tagName'] === NAVIGATOR_AUTH_SCREEN_NAME).length
+  hasAuthScreen = () => this.screenNodes.filter(node => node.tagName === NAVIGATOR_AUTH_SCREEN_NAME).length
 
   componentDidLoad() {
     console.log('[BEARER]', 'Navigator: componentDidLoad ')
