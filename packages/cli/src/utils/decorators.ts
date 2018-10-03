@@ -43,18 +43,20 @@ export function ensureFreshToken() {
       if (authorization && authorization.AuthenticationResult) {
         try {
           if (ExpiresAt < Date.now()) {
+            this.ux.action.start('Refreshing token')
             await refreshMyToken(this)
+            this.ux.action.stop()
           }
-        } catch (e) {
-          console.log('[BEARER]', 'e', e)
-          return this.error(e)
+        } catch (error) {
+          this.ux.action.stop(`Failed`)
+          this.error(error.message)
         }
         // TS is complaining with TS2445, commenting out this for now
         // this.debug('Running original method')
         await originalMethod.apply(this, arguments)
       } else {
         const error =
-          this.colors.bold('⚠️ It looks like you are not connected\n') +
+          this.colors.bold('⚠️ It looks like you are not logged in\n') +
           this.colors.yellow(this.colors.italic('Please run: bearer login'))
         this.error(error)
       }
@@ -63,40 +65,44 @@ export function ensureFreshToken() {
   }
 }
 
-async function refreshMyToken(command: TCommand) {
+async function refreshMyToken(command: TCommand): Promise<boolean | Error> {
   const { RefreshToken } = command.bearerConfig.bearerConfig.authorization.AuthenticationResult!
 
-  try {
-    command.ux.action.start('Refreshing token')
-    const { statusCode, body } = await command.serviceClient.refresh({ RefreshToken })
+  // try {
+  const { statusCode, body } = await command.serviceClient.refresh({ RefreshToken })
 
-    switch (statusCode) {
-      case 200: {
-        const {
-          authorization: { AuthenticationResult }
-        } = body
+  switch (statusCode) {
+    case 200: {
+      const { authorization: { AuthenticationResult } } = body
 
-        await command.bearerConfig.storeBearerConfig({
-          ExpiresAt: Date.now() + AuthenticationResult.ExpiresIn * 1000,
-          authorization: {
-            AuthenticationResult: {
-              ...AuthenticationResult,
-              RefreshToken
-            }
+      await command.bearerConfig.storeBearerConfig({
+        ExpiresAt: Date.now() + AuthenticationResult.ExpiresIn * 1000,
+        authorization: {
+          AuthenticationResult: {
+            ...AuthenticationResult,
+            RefreshToken
           }
-        })
-        break
-      }
-      case 401: {
-        throw new Error('Unauthorized, please run bearer login')
-      }
-      default: {
-        command.log('Error: ', body)
-        throw new Error('Unexpected error')
-      }
+        }
+      })
+      return true
     }
-  } catch (error) {
-    throw error
+    case 401: {
+      throw new UnauthorizedRefreshTokenError()
+    }
+    default: {
+      throw new UnexpectedRefreshTokenError(body)
+    }
   }
-  command.ux.action.stop()
+}
+
+class UnauthorizedRefreshTokenError extends Error {
+  constructor() {
+    super('Something wrong happened, please run bearer login to retrieve your identity')
+  }
+}
+
+class UnexpectedRefreshTokenError extends Error {
+  constructor(body: any) {
+    super(`body : ${body}`)
+  }
 }
