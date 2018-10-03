@@ -6,6 +6,7 @@ import Transpiler from '../src'
 export default args => {
   const optionsDefinitions = [
     { name: 'no-watcher', type: Boolean, defaultOption: false },
+    { name: 'no-process', type: Boolean, defaultOption: false },
     { name: 'prefix-tag', type: String },
     { name: 'suffix-tag', type: String }
   ]
@@ -17,10 +18,10 @@ export default args => {
   const transpiler = new Transpiler({
     watchFiles: !options.noWatcher,
     tagNamePrefix: options.prefixTag,
-    tagNameSuffix: options.suffixTag
+    tagNameSuffix: options.suffixTag,
   })
 
-  if (options.noProcess) {
+  if (!options.noProcess) {
     process.on('message', message => {
       if (message === 'refresh') {
         transpiler.refresh()
