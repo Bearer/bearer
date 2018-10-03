@@ -3,6 +3,7 @@ const { plugins } = require('@bearer/core/lib/plugins')
 
 export const config: Config = {
   namespace: process.env.BEARER_SCENARIO_TAG_NAME,
+  enableCache: false,
   copy: [
     {
       src: 'bearer-manifest.json'
