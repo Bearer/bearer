@@ -143,7 +143,7 @@ export default class New extends BaseCommand {
   async askForAuthType(): Promise<Authentications> {
     const { authenticationType } = await this.inquirer.prompt<{ authenticationType: Authentications }>([
       {
-        message: 'Which authentication method does the API you query rely on?',
+        message: 'Select an authentication method for the API you want to consume:',
         type: 'list',
         name: 'authenticationType',
         choices: Object.values(authTypes)
