@@ -8,7 +8,7 @@ export default function(token: string) {
   }
 
   return axios.create({
-    baseURL: 'https://api.example.com/v1',
+    baseURL: 'https://api.example.com/v1/',
     timeout: 5000,
     headers
   })

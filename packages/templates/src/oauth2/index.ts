@@ -29,7 +29,7 @@ export default {
   static action(context: TOAUTH2AuthContext, params: any, body: any, callback: TFetchDataCallback) {
     //... your code goes here
     // use the client defined in client.ts to fetch real object like that:
-    // Client(context.authAccess.accessToken).get('/people').then(({ data }) => {
+    // Client(context.authAccess.accessToken).get('people').then(({ data }) => {
     //     callback({ data })
     //   })
     //   .catch((error) => {
