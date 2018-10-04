@@ -27,7 +27,6 @@ const compileSpec: (srcDir: string) => CompileSpec = srcDir => {
 const previewRootComponentTags = (components: Array<SpecComponent>, rootComponents: Array<RootComponent>) =>
   components.map(component => {
     const { initialTagName, label } = component
-    console.log('[BEARER]', 'component', component)
     const input = component.input
     const output = component.output
 
