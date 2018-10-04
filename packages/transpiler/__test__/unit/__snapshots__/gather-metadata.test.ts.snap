@@ -24,7 +24,18 @@ Object {
       "finalTagName": "complex-feature-display",
       "group": "complex-feature",
       "initialTagName": "complex-feature-display",
-      "inputs": Array [],
+      "inputs": Array [
+        Object {
+          "default": "'ok'",
+          "name": "aStringProp",
+          "type": "string",
+        },
+        Object {
+          "default": "5",
+          "name": "aNumberProp",
+          "type": "number",
+        },
+      ],
       "isRoot": true,
       "outputs": Array [],
     },

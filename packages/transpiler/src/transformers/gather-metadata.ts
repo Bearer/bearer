@@ -1,7 +1,7 @@
 import * as Case from 'case'
 import * as ts from 'typescript'
 
-import { Decorators } from '../constants'
+import { Component, Decorators } from '../constants'
 import { getDecoratorNamed, getExpressionFromDecorator, hasDecoratorNamed } from '../helpers/decorator-helpers'
 import { TransformerOptions } from '../types'
 
@@ -17,17 +17,29 @@ export default function GatherMetadata({ metadata }: TransformerOptions): ts.Tra
     }
   }
 
-  function collectInputs(_tsClass: ts.ClassDeclaration): Array<any> {
-    return []
+  function propAsInput(tsProp: ts.PropertyDeclaration) {
+    return {
+      name: (tsProp.name as ts.Identifier).escapedText,
+      type: tsProp.type.kind === ts.SyntaxKind.NumberKeyword ? 'number' : 'string',
+      default: (tsProp.initializer as ts.Expression).getText()
+    }
   }
+
+  function collectInputs(tsClass: ts.ClassDeclaration): Array<any> {
+    return tsClass.members
+      .filter(member => ts.isPropertyDeclaration(member) && hasDecoratorNamed(member, Decorators.Prop))
+      .map(propAsInput)
+      .filter(prop => prop.name !== Component.bearerContext)
+  }
+
   function collectOutputs(_tsClass: ts.ClassDeclaration): Array<any> {
     return []
   }
 
-  return _transformContext => {
-    function visit(node: ts.Node): ts.Node {
-      // Found Component
-      if (ts.isClassDeclaration(node) && hasDecoratorNamed(node, Decorators.Component)) {
+  function visit(node: ts.Node): ts.Node {
+    // Found Component
+    if (ts.isClassDeclaration(node)) {
+      if (hasDecoratorNamed(node, Decorators.Component)) {
         const component = getDecoratorNamed(node, Decorators.Component)
         const tag = getExpressionFromDecorator<ts.StringLiteral>(component, 'tag')
         metadata.components.push({
@@ -35,29 +47,34 @@ export default function GatherMetadata({ metadata }: TransformerOptions): ts.Tra
           isRoot: false,
           ...getTagNames(tag.text)
         })
-        return node
       }
-
       // Found RootComponent
-      if (ts.isClassDeclaration(node) && hasDecoratorNamed(node, Decorators.RootComponent)) {
+      else if (hasDecoratorNamed(node, Decorators.RootComponent)) {
         const component = getDecoratorNamed(node, Decorators.RootComponent)
         const nameExpression = getExpressionFromDecorator<ts.StringLiteral>(component, 'role')
         const name = nameExpression ? nameExpression.text : ''
         const groupExpression = getExpressionFromDecorator<ts.StringLiteral>(component, 'group')
         const group = groupExpression ? groupExpression.text : ''
         const tag = [Case.kebab(group), name].join('-')
-        metadata.components.push({
-          classname: node.name.text,
-          isRoot: true,
-          ...getTagNames(tag),
-          group,
-          inputs: collectInputs(node),
-          outputs: collectOutputs(node)
-        })
-        return node
+        const { initialTagName, finalTagName } = getTagNames(tag)
+        metadata.components = [
+          ...metadata.components.filter(c => c.finalTagName !== finalTagName),
+          {
+            classname: node.name.text,
+            isRoot: true,
+            initialTagName,
+            finalTagName,
+            group,
+            inputs: collectInputs(node),
+            outputs: collectOutputs(node)
+          }
+        ]
       }
-      return node
     }
+    return node
+  }
+
+  return _transformContext => {
     return tsSourceFile => {
       return ts.visitEachChild(tsSourceFile, visit, _transformContext)
     }

@@ -38,14 +38,7 @@ export default class Transpiler {
       before: [
         GatherMetadata({
           verbose,
-          metadata: this.metadata,
-          outDir: this.BUILD_SRC_DIRECTORY,
-          srcDir: this.ROOT_DIRECTORY
-        }),
-        generateManifestFile({
-          metadata: this.metadata,
-          outDir: this.BUILD_SRC_DIRECTORY,
-          srcDir: this.ROOT_DIRECTORY
+          metadata: this.metadata
         }),
         RootComponentTransformer({ verbose, metadata: this.metadata }),
         BearerReferenceIdInjector({ verbose, metadata: this.metadata }),
@@ -64,7 +57,13 @@ export default class Transpiler {
           buildDirectory: this.BUILD_SRC_DIRECTORY
         })
       ],
-      after: []
+      after: [
+        generateManifestFile({
+          metadata: this.metadata,
+          outDir: this.BUILD_SRC_DIRECTORY,
+          srcDir: this.ROOT_DIRECTORY
+        })
+      ]
     }
   }
 
