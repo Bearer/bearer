@@ -3,11 +3,9 @@ import * as ts from 'typescript'
 
 import { Decorators } from '../constants'
 import { getDecoratorNamed, getExpressionFromDecorator, hasDecoratorNamed } from '../helpers/decorator-helpers'
-import { FileTransformerOptions } from '../types'
+import { TransformerOptions } from '../types'
 
-export default function GatherMetadata(
-  { metadata }: FileTransformerOptions = { outDir: null }
-): ts.TransformerFactory<ts.SourceFile> {
+export default function GatherMetadata({ metadata }: TransformerOptions): ts.TransformerFactory<ts.SourceFile> {
   function getTagNames(tagName: string): { initialTagName: string; finalTagName: string } {
     const finalTag =
       metadata.prefix && metadata.suffix
