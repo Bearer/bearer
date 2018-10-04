@@ -42,7 +42,7 @@ export default function GatherMetadata({ metadata }: TransformerOptions): ts.Tra
       if (hasDecoratorNamed(node, Decorators.Component)) {
         const component = getDecoratorNamed(node, Decorators.Component)
         const tag = getExpressionFromDecorator<ts.StringLiteral>(component, 'tag')
-        metadata.components.push({
+        metadata.registerComponent({
           classname: node.name.text,
           isRoot: false,
           ...getTagNames(tag.text)
@@ -56,19 +56,14 @@ export default function GatherMetadata({ metadata }: TransformerOptions): ts.Tra
         const groupExpression = getExpressionFromDecorator<ts.StringLiteral>(component, 'group')
         const group = groupExpression ? groupExpression.text : ''
         const tag = [Case.kebab(group), name].join('-')
-        const { initialTagName, finalTagName } = getTagNames(tag)
-        metadata.components = [
-          ...metadata.components.filter(c => c.finalTagName !== finalTagName),
-          {
-            classname: node.name.text,
-            isRoot: true,
-            initialTagName,
-            finalTagName,
-            group,
-            inputs: collectInputs(node),
-            outputs: collectOutputs(node)
-          }
-        ]
+        metadata.registerComponent({
+          classname: node.name.text,
+          isRoot: true,
+          ...getTagNames(tag),
+          group,
+          inputs: collectInputs(node),
+          outputs: collectOutputs(node)
+        })
       }
     }
     return node

@@ -1,3 +1,5 @@
+import Metadata from './metadata'
+
 export type ComponentMetadata = {
   classname: string
   isRoot: boolean
@@ -13,12 +15,6 @@ type TComponentInputDefinition = {
   name: string
   type: 'string' | 'number'
   default: string | number
-}
-
-export type Metadata = {
-  components: Array<ComponentMetadata>
-  prefix?: string
-  suffix?: string
 }
 
 export type TransformerOptions = {

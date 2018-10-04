@@ -17,7 +17,8 @@ import BearerScenarioIdInjector from './transformers/scenario-id-accessor-inject
 
 import { transformer as generateManifestFile } from './transformers/generate-manifest-file'
 
-import { Metadata, SourceCodeTransformerOptions } from './types'
+import Metadata from './metadata'
+import { SourceCodeTransformerOptions } from './types'
 import { getSourceCode } from './utils'
 
 export type TranpilerOptions = {
@@ -88,9 +89,7 @@ export default class Transpiler {
   private srcFolder = 'views'
   private verbose = true
   private files: ts.MapLike<{ version: number }> = {}
-  private metadata: Metadata = {
-    components: []
-  }
+  private metadata: Metadata
 
   private compilerOptions: ts.CompilerOptions = {
     module: ts.ModuleKind.CommonJS
@@ -100,14 +99,7 @@ export default class Transpiler {
     Object.assign(this, options)
 
     this.ROOT_DIRECTORY = this.ROOT_DIRECTORY || process.cwd()
-
-    if (options.tagNamePrefix) {
-      this.metadata.prefix = options.tagNamePrefix
-    }
-
-    if (options.tagNameSuffix) {
-      this.metadata.suffix = options.tagNameSuffix
-    }
+    this.metadata = new Metadata(options.tagNamePrefix, options.tagNameSuffix)
   }
 
   run() {
