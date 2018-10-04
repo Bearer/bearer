@@ -97,7 +97,7 @@ async function refreshMyToken(command: TCommand): Promise<boolean | Error> {
 
 class UnauthorizedRefreshTokenError extends Error {
   constructor() {
-    super('Something wrong happened, please run bearer login to retrieve your identity')
+    super('Something went wrong, please run bearer login and try again')
   }
 }
 
