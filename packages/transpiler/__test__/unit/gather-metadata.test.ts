@@ -1,14 +1,14 @@
 import * as path from 'path'
 import * as ts from 'typescript'
 
+import Metadata from '../../src/metadata'
 import GatherMetadata from '../../src/transformers/gather-metadata'
-import { Metadata } from '../../src/types'
 const fixtures = path.join(__dirname, '..', '__fixtures__')
 
 describe('GaterMetadata transformer', () => {
   describe('a simple root component', () => {
     it('has empty input and output', () => {
-      const metadata = { components: [] }
+      const metadata = new Metadata()
       transpileFile('root-component.tsx', metadata)
       expect(metadata).toMatchSnapshot()
     })
@@ -16,7 +16,7 @@ describe('GaterMetadata transformer', () => {
 
   describe('a simple root component', () => {
     it('has input and output matching props', () => {
-      const metadata = { components: [] }
+      const metadata = new Metadata()
       transpileFile('root-component-with-api.tsx', metadata)
       expect(metadata).toMatchSnapshot()
     })

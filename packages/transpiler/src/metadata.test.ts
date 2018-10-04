@@ -18,7 +18,7 @@ describe('Metadata', () => {
   describe('registerComponent', () => {
     // it does not play well with updated component
 
-    it('add component if does not exits and sort', () => {
+    it('add component if does not exits and sort components', () => {
       const meta = new Metadata()
       meta.registerComponent({
         classname: 'BClass',
@@ -42,7 +42,7 @@ describe('Metadata', () => {
           finalTagName: 'bearer-a-class'
         },
         {
-          classname: 'UpdatedClass',
+          classname: 'BClass',
           isRoot: true,
           initialTagName: 'b-class',
           finalTagName: 'bearer-b-class'
