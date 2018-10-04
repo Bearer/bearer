@@ -109,7 +109,7 @@ export default class Push extends BaseCommand {
       return true
     } catch (e) {
       if (e.response && e.response.status === 401) {
-        this.error(`[Unauthorized push] Please make sure you have access to ${this.bearerConfig.scenarioUuid} on ${this.bearerConfig.DeveloperPortalUrl}scnearios/${this.bearerConfig.scenarioUuid}`)
+        this.error(`Unauthorized to push, please visit ${this.bearerConfig.DeveloperPortalUrl}scenarios/${this.bearerConfig.scenarioUuid} to confirm you have access to ${this.colors.bold(this.bearerConfig.scenarioUuid)} scenario.`)
         return false
       } else {
         throw e
