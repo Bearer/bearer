@@ -5,6 +5,14 @@ export type ComponentMetadata = {
   finalTagName: string
   group?: string
   imports?: Array<string>
+  inputs?: Array<TComponentInputDefinition>
+  outputs?: Array<TComponentInputDefinition>
+}
+
+type TComponentInputDefinition = {
+  name: string
+  type: 'string' | 'number'
+  default: string | number
 }
 
 export type Metadata = {
@@ -33,8 +41,8 @@ export type SpecComponent = {
   isRoot: boolean
   initialTagName: string
   group: string
-  label: string,
-  input: any,
+  label: string
+  input: any
   output: any
 }
 

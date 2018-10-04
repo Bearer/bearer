@@ -3,12 +3,7 @@ import * as path from 'path'
 import * as ts from 'typescript'
 import * as vm from 'vm'
 
-import {
-  CompileSpec,
-  FileTransformerOptions,
-  RootComponent,
-  SpecComponent
-} from '../types'
+import { CompileSpec, FileTransformerOptions, RootComponent, SpecComponent } from '../types'
 
 export const MANIFEST_FILE = 'bearer-manifest.json'
 export const SPEC_FILE = 'spec.ts'
@@ -16,10 +11,7 @@ export const SPEC_FILE = 'spec.ts'
 const compilerOptions = { module: ts.ModuleKind.CommonJS }
 
 const compileSpec: (srcDir: string) => CompileSpec = srcDir => {
-  const spec = ts.transpileModule(
-    fs.readFileSync(path.join(srcDir, SPEC_FILE), 'utf8'),
-    { compilerOptions }
-  ).outputText
+  const spec = ts.transpileModule(fs.readFileSync(path.join(srcDir, SPEC_FILE), 'utf8'), { compilerOptions }).outputText
 
   const sandbox: { exports: { default: any } } = {
     exports: { default: null }
@@ -32,48 +24,39 @@ const compileSpec: (srcDir: string) => CompileSpec = srcDir => {
   return sandbox.exports.default
 }
 
-const previewRootComponentTags = (
-  components: Array<SpecComponent>,
-  rootComponents: Array<RootComponent>
-) =>
-  components.map((component) => {
+const previewRootComponentTags = (components: Array<SpecComponent>, rootComponents: Array<RootComponent>) =>
+  components.map(component => {
     const { initialTagName, label } = component
+    console.log('[BEARER]', 'component', component)
     const input = component.input
     const output = component.output
 
-    const { finalTagName, group } = rootComponents.find(
-      ({ initialTagName: tag }) => tag === initialTagName
-    ) || { finalTagName: null, group: null }
+    const { finalTagName, group } = rootComponents.find(({ initialTagName: tag }) => tag === initialTagName) || {
+      finalTagName: null,
+      group: null
+    }
     return { finalTagName, group, label, input, output }
   })
 
-const stringifyManifest: (manifest: any, srcDir: string) => string = (
-  manifest,
-  srcDir
-) => {
+const stringifyManifest: (manifest: any, srcDir: string) => string = (manifest, srcDir) => {
   const { components } = compileSpec(srcDir)
   const rootComponents = manifest.components.filter(({ isRoot }) => isRoot)
-  const previewRootComponents = previewRootComponentTags(
-    components,
-    rootComponents
-  )
 
   const toBeExported = {
     manifest,
-    previewRootComponents
+    previewRootComponents: previewRootComponentTags(components, rootComponents)
   }
 
   return JSON.stringify(toBeExported, null, 2)
 }
 
-export default function generateManifestFile(
-  { metadata, outDir, srcDir }: FileTransformerOptions = { outDir, srcDir }
-): void {
+export function transformer(options: FileTransformerOptions): ts.TransformerFactory<ts.SourceFile> {
+  generateManifestFile(options)
+  return _transformContext => tsSourceFile => tsSourceFile
+}
+
+export default function generateManifestFile({ metadata, outDir, srcDir }: FileTransformerOptions): void {
   if (metadata) {
-    fs.writeFileSync(
-      path.join(outDir, MANIFEST_FILE),
-      stringifyManifest(metadata, srcDir),
-      'utf8'
-    )
+    fs.writeFileSync(path.join(outDir, MANIFEST_FILE), stringifyManifest(metadata, srcDir), 'utf8')
   }
 }
