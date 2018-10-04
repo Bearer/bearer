@@ -1,6 +1,6 @@
 import * as ts from 'typescript'
 
-import Metadata from '../Metadata'
+import Metadata from '../metadata'
 
 type TransformerOptions = {
   verbose?: true
