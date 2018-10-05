@@ -14,6 +14,7 @@ export const Decorators = {
   Prop: 'Prop',
   State: 'State',
   Watch: 'Watch',
+  Event: 'Event',
   BearerState: 'BearerState',
   Intent: 'Intent',
   RetrieveStateIntent: 'RetrieveStateIntent',

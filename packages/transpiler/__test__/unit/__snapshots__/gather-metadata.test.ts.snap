@@ -40,7 +40,20 @@ Metadata {
         },
       ],
       "isRoot": true,
-      "outputs": Array [],
+      "outputs": Array [
+        Object {
+          "name": "nonTypedEvent",
+          "payloadFormat": Object {},
+        },
+        Object {
+          "name": "typedEvent",
+          "payloadFormat": Object {},
+        },
+        Object {
+          "name": "typedEventWithType",
+          "payloadFormat": Object {},
+        },
+      ],
     },
   ],
   "prefix": null,

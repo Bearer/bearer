@@ -5,23 +5,45 @@ import { Component, Decorators } from '../constants'
 import { getDecoratorNamed, getExpressionFromDecorator, hasDecoratorNamed } from '../helpers/decorator-helpers'
 import { TransformerOptions } from '../types'
 
-function propAsInput(tsProp: ts.PropertyDeclaration) {
+type TInput = {
+  name: string
+  type: 'number' | 'string'
+  default: string
+}
+
+type TOutput = {
+  name: string
+  payloadFormat: {
+    [key: string]: string
+  }
+}
+
+function propAsInput(tsProp: ts.PropertyDeclaration): TInput {
   return {
-    name: (tsProp.name as ts.Identifier).escapedText,
+    name: (tsProp.name as ts.Identifier).escapedText.toString(),
     type: tsProp.type.kind === ts.SyntaxKind.NumberKeyword ? 'number' : 'string',
     default: (tsProp.initializer as ts.Expression).getText()
   }
 }
 
-function collectInputs(tsClass: ts.ClassDeclaration): Array<any> {
+function eventAsOutput(tsProp: ts.PropertyDeclaration): TOutput {
+  return {
+    name: (tsProp.name as ts.Identifier).escapedText.toString(),
+    payloadFormat: {}
+  }
+}
+
+function collectInputs(tsClass: ts.ClassDeclaration): Array<TInput> {
   return tsClass.members
     .filter(member => ts.isPropertyDeclaration(member) && hasDecoratorNamed(member, Decorators.Prop))
     .map(propAsInput)
     .filter(prop => prop.name !== Component.bearerContext)
 }
 
-function collectOutputs(_tsClass: ts.ClassDeclaration): Array<any> {
-  return []
+function collectOutputs(tsClass: ts.ClassDeclaration): Array<TOutput> {
+  return tsClass.members
+    .filter(member => ts.isPropertyDeclaration(member) && hasDecoratorNamed(member, Decorators.Event))
+    .map(eventAsOutput)
 }
 
 export default function GatherMetadata({ metadata }: TransformerOptions): ts.TransformerFactory<ts.SourceFile> {
