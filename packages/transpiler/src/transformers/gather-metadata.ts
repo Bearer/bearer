@@ -5,6 +5,25 @@ import { Component, Decorators } from '../constants'
 import { getDecoratorNamed, getExpressionFromDecorator, hasDecoratorNamed } from '../helpers/decorator-helpers'
 import { TransformerOptions } from '../types'
 
+function propAsInput(tsProp: ts.PropertyDeclaration) {
+  return {
+    name: (tsProp.name as ts.Identifier).escapedText,
+    type: tsProp.type.kind === ts.SyntaxKind.NumberKeyword ? 'number' : 'string',
+    default: (tsProp.initializer as ts.Expression).getText()
+  }
+}
+
+function collectInputs(tsClass: ts.ClassDeclaration): Array<any> {
+  return tsClass.members
+    .filter(member => ts.isPropertyDeclaration(member) && hasDecoratorNamed(member, Decorators.Prop))
+    .map(propAsInput)
+    .filter(prop => prop.name !== Component.bearerContext)
+}
+
+function collectOutputs(_tsClass: ts.ClassDeclaration): Array<any> {
+  return []
+}
+
 export default function GatherMetadata({ metadata }: TransformerOptions): ts.TransformerFactory<ts.SourceFile> {
   function getTagNames(tagName: string): { initialTagName: string; finalTagName: string } {
     const finalTag =
@@ -15,25 +34,6 @@ export default function GatherMetadata({ metadata }: TransformerOptions): ts.Tra
       initialTagName: tagName,
       finalTagName: finalTag
     }
-  }
-
-  function propAsInput(tsProp: ts.PropertyDeclaration) {
-    return {
-      name: (tsProp.name as ts.Identifier).escapedText,
-      type: tsProp.type.kind === ts.SyntaxKind.NumberKeyword ? 'number' : 'string',
-      default: (tsProp.initializer as ts.Expression).getText()
-    }
-  }
-
-  function collectInputs(tsClass: ts.ClassDeclaration): Array<any> {
-    return tsClass.members
-      .filter(member => ts.isPropertyDeclaration(member) && hasDecoratorNamed(member, Decorators.Prop))
-      .map(propAsInput)
-      .filter(prop => prop.name !== Component.bearerContext)
-  }
-
-  function collectOutputs(_tsClass: ts.ClassDeclaration): Array<any> {
-    return []
   }
 
   function visit(node: ts.Node): ts.Node {
