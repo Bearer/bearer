@@ -21,6 +21,15 @@
       "args": ["${fileDirname}/${fileBasename}"],
       "cwd": "${workspaceFolder}/packages/cli",
       "console": "integratedTerminal"
+    },
+    {
+      "type": "node",
+      "name": "Transpiler - Jest unit ",
+      "request": "launch",
+      "program": "${workspaceFolder}/node_modules/jest/bin/jest",
+      "args": ["${fileDirname}/${fileBasename}"],
+      "cwd": "${workspaceFolder}/packages/cli",
+      "console": "integratedTerminal"
     }
   ]
 }
