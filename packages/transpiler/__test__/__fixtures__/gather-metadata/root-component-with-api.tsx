@@ -2,6 +2,7 @@ import { Event, EventEmitter, Prop, RootComponent } from '@bearer/core'
 
 type TPullRequest = {
   name: string
+  status: 'open' | 'closed'
 }
 
 type TPayloadEvent = {
@@ -27,4 +28,12 @@ export class FeatDisplayRootComponent {
 
   @Event()
   typedEventWithType: EventEmitter<TPayloadEvent>
+  @Event()
+  typedEventWithTypeArray: EventEmitter<string[]>
+  @Event()
+  typedEventWithTypeString: EventEmitter<string>
+  @Event()
+  typedEventWithTypeNumber: EventEmitter<number>
+  @Event()
+  typedEventWithTypeBoolean: EventEmitter<boolean>
 }

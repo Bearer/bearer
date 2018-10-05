@@ -43,15 +43,78 @@ Metadata {
       "outputs": Array [
         Object {
           "name": "nonTypedEvent",
-          "payloadFormat": Object {},
+          "payloadFormat": "unspecified",
         },
         Object {
           "name": "typedEvent",
-          "payloadFormat": Object {},
+          "payloadFormat": Object {
+            "type": "object",
+          },
         },
         Object {
           "name": "typedEventWithType",
+          "payloadFormat": Object {
+            "$schema": "http://json-schema.org/draft-07/schema#",
+            "properties": Object {
+              "anEnum": Object {
+                "enum": Array [
+                  "ko",
+                  "ok",
+                ],
+                "type": "string",
+              },
+              "something": Object {
+                "properties": Object {
+                  "name": Object {
+                    "type": "string",
+                  },
+                  "status": Object {
+                    "enum": Array [
+                      "closed",
+                      "open",
+                    ],
+                    "type": "string",
+                  },
+                },
+                "required": Array [
+                  "name",
+                  "status",
+                ],
+                "type": "object",
+              },
+              "somethingElse": Object {
+                "type": "string",
+              },
+            },
+            "required": Array [
+              "anEnum",
+              "something",
+              "somethingElse",
+            ],
+            "type": "object",
+          },
+        },
+        Object {
+          "name": "typedEventWithTypeArray",
           "payloadFormat": Object {},
+        },
+        Object {
+          "name": "typedEventWithTypeString",
+          "payloadFormat": Object {
+            "type": "string",
+          },
+        },
+        Object {
+          "name": "typedEventWithTypeNumber",
+          "payloadFormat": Object {
+            "type": "number",
+          },
+        },
+        Object {
+          "name": "typedEventWithTypeBoolean",
+          "payloadFormat": Object {
+            "type": "boolean",
+          },
         },
       ],
     },

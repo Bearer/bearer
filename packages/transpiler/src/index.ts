@@ -2,6 +2,14 @@ import * as fs from 'fs-extra'
 import * as path from 'path'
 import * as ts from 'typescript'
 
+import * as TJS from 'typescript-json-schema'
+
+// optionally pass argument to schema generator
+const settings: TJS.PartialArgs = {
+  required: true,
+  ignoreErrors: true
+}
+
 import BearerAuthorizedRequiredProp from './transformers/bearer-authorized-scenario-id-prop-injector'
 import BearerStateInjector from './transformers/bearer-state-injector'
 import ComponenttagNameScoping from './transformers/component-tag-name-scoping'
@@ -39,7 +47,8 @@ export default class Transpiler {
       before: [
         GatherMetadata({
           verbose,
-          metadata: this.metadata
+          metadata: this.metadata,
+          generator: this.generator
         }),
         RootComponentTransformer({ verbose, metadata: this.metadata }),
         BearerReferenceIdInjector({ verbose, metadata: this.metadata }),
@@ -79,6 +88,8 @@ export default class Transpiler {
   private get VIEWS_DIRECTORY(): string {
     return path.join(this.ROOT_DIRECTORY, this.srcFolder)
   }
+
+  generator!: any
   private service: ts.LanguageService
   private rootFileNames: string[] = []
   private subscribers: ts.MapLike<Array<() => void>> = {}
@@ -143,10 +154,17 @@ export default class Transpiler {
 
     const parsed = ts.parseJsonConfigFileContent(config, ts.sys, this.VIEWS_DIRECTORY)
     this.rootFileNames = parsed.fileNames
+
     if (!this.rootFileNames.length) {
       console.warn('[BEARER]', 'No file to transpile')
     }
+    const program = TJS.getProgramFromFiles(
+      this.rootFileNames,
+      { ...config.config.compilerOptions },
+      this.ROOT_DIRECTORY
+    )
 
+    this.generator = TJS.buildGenerator(program, settings)
     const servicesHost: ts.LanguageServiceHost = {
       getScriptFileNames: () => this.rootFileNames,
       getScriptVersion: fileName => this.files[fileName] && this.files[fileName].version.toString(),

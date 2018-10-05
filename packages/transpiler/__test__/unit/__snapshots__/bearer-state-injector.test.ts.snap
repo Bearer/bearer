@@ -82,13 +82,19 @@ class AddDecoratorOnTranspile {
 exports[`Bearer State Injector has bearer context present match snapshot 1`] = `
 Object {
   "file": "has-bearer-context-present.tsx",
-  "postContent": "import { BearerState, Prop } from '@bearer/core';
+  "postContent": "import { BearerState, Prop, Watch, State } from '@bearer/core';
 class HasBearerContextInjected {
-    @BearerState
+    @BearerState()
+    @State()
     attachPullRequests: any[] = [];
     @Prop({ context: 'bearer' })
     bearerContext: any;
     constructor() { }
+    @Watch(\\"attachPullRequests\\")
+    _notifyBearerStateHandler_attachPullRequests(newValue: any) { this.bearerContext.update(\\"attachPullRequests\\", newValue); }
+    componentWillLoad() { this.bearerContext.subscribe(this); }
+    componentDidUnload() { this.bearerContext.unsubscribe(this); }
+    bearerUpdateFromState = state => { this.attachPullRequests = state[\\"attachPullRequests\\"]; };
 }
 ",
 }

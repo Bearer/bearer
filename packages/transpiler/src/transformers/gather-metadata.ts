@@ -1,52 +1,65 @@
 import * as Case from 'case'
 import * as ts from 'typescript'
+import { JsonSchemaGenerator } from 'typescript-json-schema'
 
 import { Component, Decorators } from '../constants'
 import { getDecoratorNamed, getExpressionFromDecorator, hasDecoratorNamed } from '../helpers/decorator-helpers'
-import { TransformerOptions } from '../types'
+import { TComponentInputDefinition, TComponentOutputDefinition, TOuputFormat, TransformerOptions } from '../types'
 
-type TInput = {
-  name: string
-  type: 'number' | 'string'
-  default: string
-}
-
-type TOutput = {
-  name: string
-  payloadFormat: {
-    [key: string]: string
+export default function GatherMetadata({
+  metadata,
+  generator
+}: TransformerOptions & { generator: JsonSchemaGenerator }): ts.TransformerFactory<ts.SourceFile> {
+  function propAsInput(tsProp: ts.PropertyDeclaration): TComponentInputDefinition {
+    return {
+      name: (tsProp.name as ts.Identifier).escapedText.toString(),
+      type: tsProp.type.kind === ts.SyntaxKind.NumberKeyword ? 'number' : 'string',
+      default: (tsProp.initializer as ts.Expression).getText()
+    }
   }
-}
 
-function propAsInput(tsProp: ts.PropertyDeclaration): TInput {
-  return {
-    name: (tsProp.name as ts.Identifier).escapedText.toString(),
-    type: tsProp.type.kind === ts.SyntaxKind.NumberKeyword ? 'number' : 'string',
-    default: (tsProp.initializer as ts.Expression).getText()
+  function propInitializerAsJson(tsType: ts.TypeReferenceNode): TOuputFormat {
+    if (!tsType.typeArguments || !Boolean(tsType.typeArguments.length) || !generator) {
+      return 'unspecified'
+    }
+    const typeArgument = tsType.typeArguments[0]
+
+    switch (typeArgument.kind) {
+      case ts.SyntaxKind.TypeReference:
+        // if (typeArgument) console.log('[BEARER]', 'typeArgument', typeArgument.getText())
+        return generator.getSchemaForSymbol(typeArgument.getText()) as any
+      case ts.SyntaxKind.TypeLiteral:
+        return { type: 'object' } as any
+      case ts.SyntaxKind.NumberKeyword:
+        return { type: 'number' }
+      case ts.SyntaxKind.BooleanKeyword:
+        return { type: 'boolean' }
+      case ts.SyntaxKind.StringKeyword:
+        return { type: 'string' }
+    }
+    return {}
   }
-}
 
-function eventAsOutput(tsProp: ts.PropertyDeclaration): TOutput {
-  return {
-    name: (tsProp.name as ts.Identifier).escapedText.toString(),
-    payloadFormat: {}
+  function eventAsOutput(tsProp: ts.PropertyDeclaration): TComponentOutputDefinition {
+    return {
+      name: (tsProp.name as ts.Identifier).escapedText.toString(),
+      payloadFormat: propInitializerAsJson(tsProp.type as ts.TypeReferenceNode)
+    }
   }
-}
 
-function collectInputs(tsClass: ts.ClassDeclaration): Array<TInput> {
-  return tsClass.members
-    .filter(member => ts.isPropertyDeclaration(member) && hasDecoratorNamed(member, Decorators.Prop))
-    .map(propAsInput)
-    .filter(prop => prop.name !== Component.bearerContext)
-}
+  function collectInputs(tsClass: ts.ClassDeclaration): Array<TComponentInputDefinition> {
+    return tsClass.members
+      .filter(member => ts.isPropertyDeclaration(member) && hasDecoratorNamed(member, Decorators.Prop))
+      .map(propAsInput)
+      .filter(prop => prop.name !== Component.bearerContext)
+  }
 
-function collectOutputs(tsClass: ts.ClassDeclaration): Array<TOutput> {
-  return tsClass.members
-    .filter(member => ts.isPropertyDeclaration(member) && hasDecoratorNamed(member, Decorators.Event))
-    .map(eventAsOutput)
-}
+  function collectOutputs(tsClass: ts.ClassDeclaration): Array<TComponentOutputDefinition> {
+    return tsClass.members
+      .filter(member => ts.isPropertyDeclaration(member) && hasDecoratorNamed(member, Decorators.Event))
+      .map(eventAsOutput)
+  }
 
-export default function GatherMetadata({ metadata }: TransformerOptions): ts.TransformerFactory<ts.SourceFile> {
   function getTagNames(tagName: string): { initialTagName: string; finalTagName: string } {
     const finalTag =
       metadata.prefix && metadata.suffix

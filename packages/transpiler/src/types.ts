@@ -8,13 +8,22 @@ export type ComponentMetadata = {
   group?: string
   imports?: Array<string>
   inputs?: Array<TComponentInputDefinition>
-  outputs?: Array<TComponentInputDefinition>
+  outputs?: Array<TComponentOutputDefinition>
 }
 
-type TComponentInputDefinition = {
+export type TComponentInputDefinition = {
   name: string
   type: 'string' | 'number'
   default: string | number
+}
+
+type TBasicFormat = 'string' | 'number' | 'boolean'
+type TUnknown = 'unspecified'
+export type TOuputFormat = TUnknown | { type: TBasicFormat } | { [key: string]: TBasicFormat | Array<TBasicFormat> }
+
+export type TComponentOutputDefinition = {
+  name: string
+  payloadFormat: TOuputFormat
 }
 
 export type TransformerOptions = {

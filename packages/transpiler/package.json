@@ -34,7 +34,8 @@
     "case": "^1.5.5",
     "command-line-args": "^5.0.2",
     "fs-extra": "^6.0.1",
-    "typescript": "^2.9.2"
+    "typescript": "^2.9.2",
+    "typescript-json-schema": "^0.32.0"
   },
   "gitHead": "cb2654b19000e2ad6f31a0e4ed715a6298c8df2d"
 }
