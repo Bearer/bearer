@@ -7,7 +7,7 @@ import { BEARER, Decorators, Env, Properties } from '../constants'
 import { decoratorNamed, hasDecoratorNamed } from '../helpers/decorator-helpers'
 import { TransformerOptions } from '../types'
 
-const SEPARATOR = ':'
+const SEPARATOR = '|'
 
 function prefixEvent(eventName: string): string {
   return [BEARER, process.env[Env.BEARER_SCENARIO_ID], eventName].join(SEPARATOR)
@@ -43,10 +43,21 @@ function updatedListenDecoratorOrDecorator(tsDecorator: ts.Decorator): ts.Decora
   }
   const listenedEvent: ts.StringLiteral = (tsDecorator.expression as ts.CallExpression).arguments[0] as ts.StringLiteral
 
-  const [group, name] = listenedEvent.text.toString().split(':')
-  listenedEvent.forEachChild(node => console.log(node))
+  // possible values
+  //    group:eventName
+  //    body:group:eventName
+  let [body, group, name] = listenedEvent.text.toString().split(':')
+  if (body !== 'body') {
+    name = group
+    group = body
+    body = null
+  }
+  let scopedName = eventName(name, group)
+  if (body) {
+    scopedName = ['body', scopedName].join(':')
+  }
   const decorator = ts.createDecorator(
-    ts.createCall(ts.createIdentifier(Decorators.Listen), undefined, [ts.createLiteral(eventName(name, group))])
+    ts.createCall(ts.createIdentifier(Decorators.Listen), undefined, [ts.createLiteral(scopedName)])
   )
 
   return decorator

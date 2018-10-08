@@ -14,6 +14,9 @@ export class FeatDisplayRootComponent {
   @Listen('config:saved')
   eventHandler() {}
 
+  @Listen('body:eventFromAnotherRootComponent:saved')
+  eventFromAnotherRootComponentHandler() {}
+
   @Listen('body:click')
   clickHandler() {}
 }
