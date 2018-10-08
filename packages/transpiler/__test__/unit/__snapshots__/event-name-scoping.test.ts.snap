@@ -10,9 +10,9 @@ Object {
     shadow: true
 })
 export class FeatDisplayRootComponent {
-    @Event()
+    @Event({ eventName: \\"bearer:SPONGE_BOB:group:mustBeScopedEvent\\" })
     mustBeScopedEvent: EventEmitter;
-    @Event()
+    @Event({ eventName: \\"bearer:SPONGE_BOB:group:mustBeScopedEvent\\" })
     mustBeScopedEvent: EventEmitter;
     @Listen('config:saved')
     eventHandler() { }
