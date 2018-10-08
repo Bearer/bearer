@@ -1,5 +1,10 @@
+import * as ts from 'typescript'
+
 import { ComponentMetadata } from './types'
 
+function relativePath(path: string): string {
+  return path.replace(process.cwd(), '')
+}
 export default class Metadata {
   components: Array<ComponentMetadata> = []
 
@@ -8,7 +13,14 @@ export default class Metadata {
   registerComponent = (component: ComponentMetadata): void => {
     this.components = [
       ...this.components.filter(otherComponent => component.finalTagName !== otherComponent.finalTagName),
-      component
+      {
+        ...component,
+        fileName: relativePath(component.fileName)
+      }
     ].sort((a, b) => (a.finalTagName > b.finalTagName ? 1 : -1))
+  }
+
+  findComponentFrom(tsSourceFile: ts.SourceFile): ComponentMetadata {
+    return this.components.find(component => component.fileName === relativePath(tsSourceFile.fileName))
   }
 }

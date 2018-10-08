@@ -55,7 +55,7 @@ function updatedListenDecoratorOrDecorator(tsDecorator: ts.Decorator): ts.Decora
 export default function EventNameScoping({ metadata }: TransformerOptions = {}): ts.TransformerFactory<ts.SourceFile> {
   return _transformContext => {
     return tsSourceFile => {
-      const meta = metadata.components.find(component => component.fileName === tsSourceFile.fileName)
+      const meta = metadata.findComponentFrom(tsSourceFile)
       const groupName = (meta && meta.group) || 'no-group'
 
       function visit(tsNode: ts.Node): ts.VisitResult<ts.Node> {

@@ -39,12 +39,14 @@ describe('Metadata', () => {
       expect(meta.components).toEqual([
         {
           classname: 'AClass',
+          fileName: 'unknown',
           isRoot: true,
           initialTagName: 'a-class',
           finalTagName: 'bearer-a-class'
         },
         {
           classname: 'BClass',
+          fileName: 'unknown',
           isRoot: true,
           initialTagName: 'b-class',
           finalTagName: 'bearer-b-class'
@@ -73,6 +75,7 @@ describe('Metadata', () => {
       expect(meta.components).toEqual([
         {
           classname: 'UpdatedClass',
+          fileName: 'unknown',
           isRoot: true,
           initialTagName: 'b-class',
           finalTagName: 'bearer-b-class'
