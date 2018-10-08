@@ -24,6 +24,7 @@ export type TOuputFormat = TUnknown | { type: TBasicFormat } | { [key: string]: 
 
 export type TComponentOutputDefinition = {
   name: string
+  eventName: string
   payloadFormat: TOuputFormat
 }
 

@@ -47,7 +47,8 @@ export default function GatherMetadata({
   function eventAsOutput(group: string) {
     return (tsProp: ts.PropertyDeclaration): TComponentOutputDefinition => {
       return {
-        name: eventName((tsProp.name as ts.Identifier).escapedText.toString(), group),
+        name: (tsProp.name as ts.Identifier).escapedText.toString(),
+        eventName: eventName((tsProp.name as ts.Identifier).escapedText.toString(), group),
         payloadFormat: propInitializerAsJson(tsProp.type as ts.TypeReferenceNode)
       }
     }
