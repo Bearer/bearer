@@ -6,6 +6,8 @@ import { Component, Decorators } from '../constants'
 import { getDecoratorNamed, getExpressionFromDecorator, hasDecoratorNamed } from '../helpers/decorator-helpers'
 import { TComponentInputDefinition, TComponentOutputDefinition, TOuputFormat, TransformerOptions } from '../types'
 
+const UNSPECIFIED = 'unspecified'
+
 export default function GatherMetadata({
   metadata,
   generator
@@ -20,7 +22,7 @@ export default function GatherMetadata({
 
   function propInitializerAsJson(tsType: ts.TypeReferenceNode): TOuputFormat {
     if (!tsType.typeArguments || !Boolean(tsType.typeArguments.length) || !generator) {
-      return 'unspecified'
+      return UNSPECIFIED
     }
     const typeArgument = tsType.typeArguments[0]
 
