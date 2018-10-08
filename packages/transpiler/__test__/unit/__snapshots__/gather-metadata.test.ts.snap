@@ -5,6 +5,7 @@ Metadata {
   "components": Array [
     Object {
       "classname": "FeatDisplayRootComponent",
+      "fileName": "/Users/tanguyantoine/devel/bearer/bearer/packages/transpiler/__test__/__fixtures__/gather-metadata/root-component.tsx",
       "finalTagName": "feat-display",
       "group": "feat",
       "initialTagName": "feat-display",
@@ -24,6 +25,7 @@ Metadata {
   "components": Array [
     Object {
       "classname": "FeatDisplayRootComponent",
+      "fileName": "/Users/tanguyantoine/devel/bearer/bearer/packages/transpiler/__test__/__fixtures__/gather-metadata/root-component-with-api.tsx",
       "finalTagName": "complex-feature-display",
       "group": "complex-feature",
       "initialTagName": "complex-feature-display",
@@ -41,6 +43,10 @@ Metadata {
       ],
       "isRoot": true,
       "outputs": Array [
+        Object {
+          "name": "bearer:1234-scenario-name:complex-feature:namedEvent",
+          "payloadFormat": "unspecified",
+        },
         Object {
           "name": "nonTypedEvent",
           "payloadFormat": "unspecified",
