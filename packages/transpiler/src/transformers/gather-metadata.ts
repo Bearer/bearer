@@ -59,10 +59,7 @@ export default function GatherMetadata({
         const prop = objectLiteral.properties.find(
           prop => prop.name.getText() === Properties.eventName
         ) as ts.PropertyAssignment
-        name = (prop.initializer as ts.StringLiteral)
-          .getText()
-          .replace(/^[^a-zA-Z0-9]{1}/, '')
-          .replace(/[^a-zA-Z0-9]{1}$/, '') // removes single and double quotes
+        name = (prop.initializer as ts.StringLiteral).text.toString()
       }
     }
     return {

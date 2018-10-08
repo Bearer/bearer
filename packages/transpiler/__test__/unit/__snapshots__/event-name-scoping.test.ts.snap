@@ -14,9 +14,9 @@ export class FeatDisplayRootComponent {
     mustBeScopedEvent: EventEmitter;
     @Event({ eventName: \\"bearer:SPONGE_BOB:complex-feature:mustBeScopedEvent\\" })
     mustBeScopedEvent: EventEmitter;
-    @Listen('config:saved')
+    @Listen(\\"bearer:SPONGE_BOB:config:saved\\")
     eventHandler() { }
-    @Listen('body:click')
+    @Listen(\\"bearer:SPONGE_BOB:body:click\\")
     clickHandler() { }
     constructor() { }
     get SCENARIO_ID() { return \\"SPONGE_BOB\\"; }
@@ -42,9 +42,11 @@ Object {
 export class SimpleComponent {
     @Event({ eventName: \\"bearer:SPONGE_BOB:no-group:mustBeScopedEvent\\" })
     mustBeScopedEvent: EventEmitter;
-    @Listen('config:saved')
+    @Listen(\\"bearer:SPONGE_BOB:config:saved\\")
     eventHandler() { }
-    @Listen('body:click')
+    @Listen(\\"bearer:SPONGE_BOB:eventFromChildren\\")
+    eventFromChildrenHandler() { }
+    @Listen(\\"bearer:SPONGE_BOB:body:click\\")
     clickHandler() { }
     constructor() { }
     get SCENARIO_ID() { return \\"SPONGE_BOB\\"; }

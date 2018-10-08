@@ -15,6 +15,7 @@ export const Decorators = {
   State: 'State',
   Watch: 'Watch',
   Event: 'Event',
+  Listen: 'Listen',
   BearerState: 'BearerState',
   Intent: 'Intent',
   RetrieveStateIntent: 'RetrieveStateIntent',

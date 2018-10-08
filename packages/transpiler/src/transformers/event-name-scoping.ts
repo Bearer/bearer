@@ -7,14 +7,21 @@ import { BEARER, Decorators, Env, Properties } from '../constants'
 import { decoratorNamed, hasDecoratorNamed } from '../helpers/decorator-helpers'
 import { TransformerOptions } from '../types'
 
+const SEPARATOR = ':'
+
+function prefixEvent(eventName: string): string {
+  return [BEARER, process.env[Env.BEARER_SCENARIO_ID], eventName].join(SEPARATOR)
+}
+
+function eventName(name: string, scope: string = 'no-group') {
+  return prefixEvent([scope, name].filter(el => el && el.trim()).join(SEPARATOR))
+}
+
 function updateEventDecorator(tsProperty: ts.PropertyDeclaration, scope: string): ts.PropertyDeclaration {
   const decorator = ts.createDecorator(
     ts.createCall(ts.createIdentifier(Decorators.Event), undefined, [
       ts.createObjectLiteral([
-        ts.createPropertyAssignment(
-          Properties.eventName,
-          ts.createLiteral([BEARER, process.env[Env.BEARER_SCENARIO_ID], scope, tsProperty.name.getText()].join(':'))
-        )
+        ts.createPropertyAssignment(Properties.eventName, ts.createLiteral(eventName(tsProperty.name.getText(), scope)))
       ])
     ])
   )
@@ -30,6 +37,21 @@ function updateEventDecorator(tsProperty: ts.PropertyDeclaration, scope: string)
   )
 }
 
+function updatedListenDecoratorOrDecorator(tsDecorator: ts.Decorator): ts.Decorator {
+  if (!decoratorNamed(tsDecorator, Decorators.Listen)) {
+    return tsDecorator
+  }
+  const listenedEvent: ts.StringLiteral = (tsDecorator.expression as ts.CallExpression).arguments[0] as ts.StringLiteral
+
+  const [group, name] = listenedEvent.text.toString().split(':')
+  listenedEvent.forEachChild(node => console.log(node))
+  const decorator = ts.createDecorator(
+    ts.createCall(ts.createIdentifier(Decorators.Listen), undefined, [ts.createLiteral(eventName(name, group))])
+  )
+
+  return decorator
+}
+
 export default function EventNameScoping({ metadata }: TransformerOptions = {}): ts.TransformerFactory<ts.SourceFile> {
   return _transformContext => {
     return tsSourceFile => {
@@ -39,6 +61,19 @@ export default function EventNameScoping({ metadata }: TransformerOptions = {}):
       function visit(tsNode: ts.Node): ts.VisitResult<ts.Node> {
         if (ts.isPropertyDeclaration(tsNode) && hasDecoratorNamed(tsNode, Decorators.Event)) {
           return updateEventDecorator(tsNode, groupName)
+        } else if (ts.isMethodDeclaration(tsNode) && hasDecoratorNamed(tsNode, Decorators.Listen)) {
+          return ts.updateMethod(
+            tsNode,
+            [...tsNode.decorators.map(updatedListenDecoratorOrDecorator)],
+            tsNode.modifiers,
+            tsNode.asteriskToken,
+            tsNode.name,
+            tsNode.questionToken,
+            tsNode.typeParameters,
+            tsNode.parameters,
+            tsNode.type,
+            tsNode.body
+          )
         }
         return ts.visitEachChild(tsNode, visit, _transformContext)
       }

@@ -10,6 +10,9 @@ export class SimpleComponent {
   @Listen('config:saved')
   eventHandler() {}
 
+  @Listen('eventFromChildren')
+  eventFromChildrenHandler() {}
+
   @Listen('body:click')
   clickHandler() {}
 }

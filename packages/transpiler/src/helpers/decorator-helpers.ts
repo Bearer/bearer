@@ -17,7 +17,10 @@ export function propDecoratedWithName(
   return props
 }
 
-export function hasDecoratorNamed(decoratedNode: ts.PropertyDeclaration | ts.ClassDeclaration, name: string): boolean {
+export function hasDecoratorNamed(
+  decoratedNode: ts.PropertyDeclaration | ts.ClassDeclaration | ts.MethodDeclaration,
+  name: string
+): boolean {
   return ts.forEachChild(decoratedNode, anode => {
     return ts.isDecorator(anode) && decoratorNamed(anode, name)
   })
