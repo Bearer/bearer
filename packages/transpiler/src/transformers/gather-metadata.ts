@@ -2,14 +2,11 @@ import * as Case from 'case'
 import * as ts from 'typescript'
 import { JsonSchemaGenerator } from 'typescript-json-schema'
 
-import { Component, Decorators, Properties } from '../constants'
-import {
-  decoratorNamed,
-  getDecoratorNamed,
-  getExpressionFromDecorator,
-  hasDecoratorNamed
-} from '../helpers/decorator-helpers'
+import { Component, Decorators } from '../constants'
+import { getDecoratorNamed, getExpressionFromDecorator, hasDecoratorNamed } from '../helpers/decorator-helpers'
 import { TComponentInputDefinition, TComponentOutputDefinition, TOuputFormat, TransformerOptions } from '../types'
+
+import { eventName } from './event-name-scoping'
 
 const UNSPECIFIED = 'unspecified'
 
@@ -33,7 +30,6 @@ export default function GatherMetadata({
 
     switch (typeArgument.kind) {
       case ts.SyntaxKind.TypeReference:
-        // if (typeArgument) console.log('[BEARER]', 'typeArgument', typeArgument.getText())
         return generator.getSchemaForSymbol(typeArgument.getText()) as any
       case ts.SyntaxKind.TypeLiteral:
         return { type: 'object' } as any
@@ -48,23 +44,12 @@ export default function GatherMetadata({
   }
 
   // retrieven event name from call arguments or take prop name
-  function eventAsOutput(tsProp: ts.PropertyDeclaration): TComponentOutputDefinition {
-    const decorator = tsProp.decorators.find(deco => decoratorNamed(deco, Decorators.Event))
-      .expression as ts.CallExpression
-    let name: string = (tsProp.name as ts.Identifier).escapedText.toString()
-
-    if (decorator.arguments.length) {
-      const objectLiteral: ts.ObjectLiteralExpression = decorator.arguments[0] as ts.ObjectLiteralExpression
-      if (objectLiteral) {
-        const prop = objectLiteral.properties.find(
-          prop => prop.name.getText() === Properties.eventName
-        ) as ts.PropertyAssignment
-        name = (prop.initializer as ts.StringLiteral).text.toString()
+  function eventAsOutput(group: string) {
+    return (tsProp: ts.PropertyDeclaration): TComponentOutputDefinition => {
+      return {
+        name: eventName((tsProp.name as ts.Identifier).escapedText.toString(), group),
+        payloadFormat: propInitializerAsJson(tsProp.type as ts.TypeReferenceNode)
       }
-    }
-    return {
-      name,
-      payloadFormat: propInitializerAsJson(tsProp.type as ts.TypeReferenceNode)
     }
   }
 
@@ -75,10 +60,10 @@ export default function GatherMetadata({
       .filter(prop => prop.name !== Component.bearerContext)
   }
 
-  function collectOutputs(tsClass: ts.ClassDeclaration): Array<TComponentOutputDefinition> {
+  function collectOutputs(tsClass: ts.ClassDeclaration, group: string): Array<TComponentOutputDefinition> {
     return tsClass.members
       .filter(member => ts.isPropertyDeclaration(member) && hasDecoratorNamed(member, Decorators.Event))
-      .map(eventAsOutput)
+      .map(eventAsOutput(group))
   }
 
   function getTagNames(tagName: string): { initialTagName: string; finalTagName: string } {
@@ -122,7 +107,7 @@ export default function GatherMetadata({
               ...getTagNames(tag),
               group,
               inputs: collectInputs(node),
-              outputs: collectOutputs(node)
+              outputs: collectOutputs(node, group)
             })
           }
         }

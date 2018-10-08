@@ -9,11 +9,11 @@ import { TransformerOptions } from '../types'
 
 const SEPARATOR = '|'
 
-function prefixEvent(eventName: string): string {
+export function prefixEvent(eventName: string): string {
   return [BEARER, process.env[Env.BEARER_SCENARIO_ID], eventName].join(SEPARATOR)
 }
 
-function eventName(name: string, scope: string = 'no-group') {
+export function eventName(name: string, scope: string = 'no-group') {
   return prefixEvent([scope, name].filter(el => el && el.trim()).join(SEPARATOR))
 }
 
@@ -41,6 +41,7 @@ function updatedListenDecoratorOrDecorator(tsDecorator: ts.Decorator): ts.Decora
   if (!decoratorNamed(tsDecorator, Decorators.Listen)) {
     return tsDecorator
   }
+
   const listenedEvent: ts.StringLiteral = (tsDecorator.expression as ts.CallExpression).arguments[0] as ts.StringLiteral
 
   // possible values
@@ -56,11 +57,9 @@ function updatedListenDecoratorOrDecorator(tsDecorator: ts.Decorator): ts.Decora
   if (body) {
     scopedName = ['body', scopedName].join(':')
   }
-  const decorator = ts.createDecorator(
+  return ts.createDecorator(
     ts.createCall(ts.createIdentifier(Decorators.Listen), undefined, [ts.createLiteral(scopedName)])
   )
-
-  return decorator
 }
 
 export default function EventNameScoping({ metadata }: TransformerOptions = {}): ts.TransformerFactory<ts.SourceFile> {

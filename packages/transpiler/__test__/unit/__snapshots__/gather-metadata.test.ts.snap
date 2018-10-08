@@ -44,21 +44,21 @@ Metadata {
       "isRoot": true,
       "outputs": Array [
         Object {
-          "name": "bearer:1234-scenario-name:complex-feature:namedEvent",
+          "name": "bearer|SPONGE_BOB|complex-feature|namedEvent",
           "payloadFormat": "unspecified",
         },
         Object {
-          "name": "nonTypedEvent",
+          "name": "bearer|SPONGE_BOB|complex-feature|nonTypedEvent",
           "payloadFormat": "unspecified",
         },
         Object {
-          "name": "typedEvent",
+          "name": "bearer|SPONGE_BOB|complex-feature|typedEvent",
           "payloadFormat": Object {
             "type": "object",
           },
         },
         Object {
-          "name": "typedEventWithType",
+          "name": "bearer|SPONGE_BOB|complex-feature|typedEventWithType",
           "payloadFormat": Object {
             "$schema": "http://json-schema.org/draft-07/schema#",
             "properties": Object {
@@ -101,23 +101,23 @@ Metadata {
           },
         },
         Object {
-          "name": "typedEventWithTypeArray",
+          "name": "bearer|SPONGE_BOB|complex-feature|typedEventWithTypeArray",
           "payloadFormat": Object {},
         },
         Object {
-          "name": "typedEventWithTypeString",
+          "name": "bearer|SPONGE_BOB|complex-feature|typedEventWithTypeString",
           "payloadFormat": Object {
             "type": "string",
           },
         },
         Object {
-          "name": "typedEventWithTypeNumber",
+          "name": "bearer|SPONGE_BOB|complex-feature|typedEventWithTypeNumber",
           "payloadFormat": Object {
             "type": "number",
           },
         },
         Object {
-          "name": "typedEventWithTypeBoolean",
+          "name": "bearer|SPONGE_BOB|complex-feature|typedEventWithTypeBoolean",
           "payloadFormat": Object {
             "type": "boolean",
           },
