@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Scope Event Names event name scoping component match snapshot 1`] = `
+Object {
+  "file": "event-name-scoping-component.ts",
+  "postContent": "import { Event, EventEmitter, Listen, Prop, Component } from '@bearer/core';
+@Component({
+    tag: \\"complex-feature-display\\",
+    styleUrl: \\"complexFeature.css\\",
+    shadow: true
+})
+export class FeatDisplayRootComponent {
+    @Event()
+    mustBeScopedEvent: EventEmitter;
+    @Event()
+    mustBeScopedEvent: EventEmitter;
+    @Listen('config:saved')
+    eventHandler() { }
+    @Listen('body:click')
+    clickHandler() { }
+    constructor() { }
+    get SCENARIO_ID() { return \\"SPONGE_BOB\\"; }
+    @Prop({ \\"context\\": \\"bearer\\" })
+    bearerContext: any;
+    @Prop()
+    setupId: string;
+    componentDidLoad() { if (this.setupId) {
+        this.bearerContext.setupId = this.setupId;
+    } }
+}
+",
+}
+`;
