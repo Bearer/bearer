@@ -42,8 +42,6 @@ Object {
 export class SimpleComponent {
     @Event({ eventName: \\"bearer:SPONGE_BOB:no-group:mustBeScopedEvent\\" })
     mustBeScopedEvent: EventEmitter;
-    @Event({ eventName: \\"bearer:SPONGE_BOB:no-group:mustBeScopedEvent\\" })
-    mustBeScopedEvent: EventEmitter;
     @Listen('config:saved')
     eventHandler() { }
     @Listen('body:click')
