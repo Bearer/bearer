@@ -5,12 +5,9 @@ import * as ts from 'typescript'
 
 import { Decorators, Env } from '../constants'
 import { decoratorNamed, hasDecoratorNamed } from '../helpers/decorator-helpers'
-type TransformerOptions = {
-  verbose?: true
-}
+import { TransformerOptions } from '../types'
 
 function updateEventDecorator(tsProperty: ts.PropertyDeclaration, scope: string): ts.PropertyDeclaration {
-  // const expression: ts.CallExpression = tsDecorator.expression as ts.CallExpression
   const decorator = ts.createDecorator(
     ts.createCall(ts.createIdentifier(Decorators.Event), undefined, [
       ts.createObjectLiteral([
@@ -33,10 +30,11 @@ function updateEventDecorator(tsProperty: ts.PropertyDeclaration, scope: string)
   )
 }
 
-export default function EventNameScoping(_params: TransformerOptions = {}): ts.TransformerFactory<ts.SourceFile> {
+export default function EventNameScoping({ metadata }: TransformerOptions = {}): ts.TransformerFactory<ts.SourceFile> {
   return _transformContext => {
     return tsSourceFile => {
-      const groupName: string = 'group'
+      const meta = metadata.components.find(component => component.fileName === tsSourceFile.fileName)
+      const groupName = (meta && meta.group) || 'no-group'
 
       function visit(tsNode: ts.Node): ts.VisitResult<ts.Node> {
         if (ts.isPropertyDeclaration(tsNode) && hasDecoratorNamed(tsNode, Decorators.Event)) {

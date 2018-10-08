@@ -61,8 +61,8 @@ export default class Transpiler {
         NavigatorScreenTransformer({ verbose, metadata: this.metadata }),
         ImportsImporter({ verbose, metadata: this.metadata }),
         BearerAuthorizedRequiredProp({ verbose }),
+        EventNameScoping({ metadata: this.metadata }),
         ComponenttagNameScoping({ verbose, metadata: this.metadata }),
-        EventNameScoping({}),
         dumpSourceCode({
           verbose,
           srcDirectory: this.VIEWS_DIRECTORY,

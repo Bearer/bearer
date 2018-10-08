@@ -4,6 +4,7 @@ export type ComponentMetadata = {
   classname: string
   isRoot: boolean
   initialTagName: string
+  fileName: string
   finalTagName: string
   group?: string
   imports?: Array<string>

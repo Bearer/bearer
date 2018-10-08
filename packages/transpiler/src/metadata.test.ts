@@ -21,6 +21,7 @@ describe('Metadata', () => {
     it('add component if does not exits and sort components', () => {
       const meta = new Metadata()
       meta.registerComponent({
+        fileName: 'unknown',
         classname: 'BClass',
         isRoot: true,
         initialTagName: 'b-class',
@@ -28,6 +29,7 @@ describe('Metadata', () => {
       })
 
       meta.registerComponent({
+        fileName: 'unknown',
         classname: 'AClass',
         isRoot: true,
         initialTagName: 'a-class',
@@ -53,6 +55,7 @@ describe('Metadata', () => {
     it('replaces existing component', () => {
       const meta = new Metadata()
       meta.registerComponent({
+        fileName: 'unknown',
         classname: 'BClass',
         isRoot: true,
         initialTagName: 'b-class',
@@ -60,6 +63,7 @@ describe('Metadata', () => {
       })
 
       meta.registerComponent({
+        fileName: 'unknown',
         classname: 'UpdatedClass',
         isRoot: true,
         initialTagName: 'b-class',

@@ -73,41 +73,42 @@ export default function GatherMetadata({
     }
   }
 
-  function visit(node: ts.Node): ts.Node {
-    // Found Component
-    if (ts.isClassDeclaration(node)) {
-      if (hasDecoratorNamed(node, Decorators.Component)) {
-        const component = getDecoratorNamed(node, Decorators.Component)
-        const tag = getExpressionFromDecorator<ts.StringLiteral>(component, 'tag')
-        metadata.registerComponent({
-          classname: node.name.text,
-          isRoot: false,
-          ...getTagNames(tag.text)
-        })
-      }
-      // Found RootComponent
-      else if (hasDecoratorNamed(node, Decorators.RootComponent)) {
-        const component = getDecoratorNamed(node, Decorators.RootComponent)
-        const nameExpression = getExpressionFromDecorator<ts.StringLiteral>(component, 'role')
-        const name = nameExpression ? nameExpression.text : ''
-        const groupExpression = getExpressionFromDecorator<ts.StringLiteral>(component, 'group')
-        const group = groupExpression ? groupExpression.text : ''
-        const tag = [Case.kebab(group), name].join('-')
-        metadata.registerComponent({
-          classname: node.name.text,
-          isRoot: true,
-          ...getTagNames(tag),
-          group,
-          inputs: collectInputs(node),
-          outputs: collectOutputs(node)
-        })
-      }
-    }
-    return node
-  }
-
   return _transformContext => {
     return tsSourceFile => {
+      function visit(node: ts.Node): ts.Node {
+        // Found Component
+        if (ts.isClassDeclaration(node)) {
+          if (hasDecoratorNamed(node, Decorators.Component)) {
+            const component = getDecoratorNamed(node, Decorators.Component)
+            const tag = getExpressionFromDecorator<ts.StringLiteral>(component, 'tag')
+            metadata.registerComponent({
+              fileName: tsSourceFile.fileName,
+              classname: node.name.text,
+              isRoot: false,
+              ...getTagNames(tag.text)
+            })
+          }
+          // Found RootComponent
+          else if (hasDecoratorNamed(node, Decorators.RootComponent)) {
+            const component = getDecoratorNamed(node, Decorators.RootComponent)
+            const nameExpression = getExpressionFromDecorator<ts.StringLiteral>(component, 'role')
+            const name = nameExpression ? nameExpression.text : ''
+            const groupExpression = getExpressionFromDecorator<ts.StringLiteral>(component, 'group')
+            const group = groupExpression ? groupExpression.text : ''
+            const tag = [Case.kebab(group), name].join('-')
+            metadata.registerComponent({
+              fileName: tsSourceFile.fileName,
+              classname: node.name.text,
+              isRoot: true,
+              ...getTagNames(tag),
+              group,
+              inputs: collectInputs(node),
+              outputs: collectOutputs(node)
+            })
+          }
+        }
+        return node
+      }
       return ts.visitEachChild(tsSourceFile, visit, _transformContext)
     }
   }
