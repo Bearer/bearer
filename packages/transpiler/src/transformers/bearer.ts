@@ -1,12 +1,9 @@
 import * as ts from 'typescript'
 
-import { Component, Decorators, Module } from '../constants'
+import { BEARER, Component, Decorators, Module } from '../constants'
 
 // this.BEARER_SCENARIO_ID => replaced during transpilation
-export function addBearerScenarioIdAccessor(
-  classNode: ts.ClassDeclaration,
-  scenarioId: string
-): ts.ClassDeclaration {
+export function addBearerScenarioIdAccessor(classNode: ts.ClassDeclaration, scenarioId: string): ts.ClassDeclaration {
   return ts.updateClassDeclaration(
     classNode,
     classNode.decorators,
@@ -29,9 +26,7 @@ export function addBearerScenarioIdAccessor(
 }
 
 // @Prop({ context: 'bearer' }) bearerContext: any
-function addBearerContextProp(
-  classNode: ts.ClassDeclaration
-): ts.ClassDeclaration {
+function addBearerContextProp(classNode: ts.ClassDeclaration): ts.ClassDeclaration {
   return ts.updateClassDeclaration(
     classNode,
     classNode.decorators,
@@ -44,18 +39,11 @@ function addBearerContextProp(
       ts.createProperty(
         [
           ts.createDecorator(
-            ts.createCall(
-              ts.createIdentifier(Decorators.Prop) as ts.Expression,
-              undefined,
-              [
-                ts.createObjectLiteral([
-                  ts.createPropertyAssignment(
-                    ts.createLiteral('context'),
-                    ts.createLiteral('bearer')
-                  )
-                ])
-              ]
-            )
+            ts.createCall(ts.createIdentifier(Decorators.Prop) as ts.Expression, undefined, [
+              ts.createObjectLiteral([
+                ts.createPropertyAssignment(ts.createLiteral('context'), ts.createLiteral(BEARER))
+              ])
+            ])
           )
         ],
         undefined,
@@ -69,9 +57,7 @@ function addBearerContextProp(
 }
 
 // @Prop() setupId: string
-export function addSetupIdProp(
-  classNode: ts.ClassDeclaration
-): ts.ClassDeclaration {
+export function addSetupIdProp(classNode: ts.ClassDeclaration): ts.ClassDeclaration {
   return ts.updateClassDeclaration(
     classNode,
     classNode.decorators,
@@ -83,13 +69,7 @@ export function addSetupIdProp(
       ...classNode.members,
       ts.createProperty(
         [
-          ts.createDecorator(
-            ts.createCall(
-              ts.createIdentifier(Decorators.Prop) as ts.Expression,
-              undefined,
-              undefined
-            )
-          )
+          ts.createDecorator(ts.createCall(ts.createIdentifier(Decorators.Prop) as ts.Expression, undefined, undefined))
         ],
         undefined,
         Component.setupId,
@@ -103,20 +83,14 @@ export function addSetupIdProp(
 
 function methodeNamed(name: string): (node: ts.Node) => boolean {
   return (node: ts.Node): boolean =>
-    ts.isMethodDeclaration(node) &&
-    (node as ts.MethodDeclaration).name.getText() === name
+    ts.isMethodDeclaration(node) && (node as ts.MethodDeclaration).name.getText() === name
 }
 
 // componentDidLoad(){ this.bearer.setupId = this.setupId }
-export function addComponentDidLoad(
-  classNode: ts.ClassDeclaration
-): ts.ClassDeclaration {
+export function addComponentDidLoad(classNode: ts.ClassDeclaration): ts.ClassDeclaration {
   const assignSetupId = ts.createStatement(
     ts.createAssignment(
-      ts.createPropertyAccess(
-        ts.createThis(),
-        [Component.bearerContext, Component.setupId].join('.')
-      ),
+      ts.createPropertyAccess(ts.createThis(), [Component.bearerContext, Component.setupId].join('.')),
       ts.createPropertyAccess(ts.createThis(), Component.setupId)
     )
   )
@@ -194,23 +168,15 @@ export function hasImport(node: ts.SourceFile, libName: string): boolean {
 }
 
 function coreImport(node: ts.ImportDeclaration): boolean {
-  return Boolean(
-    (node.moduleSpecifier as ts.StringLiteral).text
-      .toString()
-      .match(Module.BEARER_CORE_MODULE)
-  )
+  return Boolean((node.moduleSpecifier as ts.StringLiteral).text.toString().match(Module.BEARER_CORE_MODULE))
 }
 
-function ensureHasImportFromCore(
-  tsSourceFile: ts.SourceFile,
-  importName: string
-): ts.SourceFile {
+function ensureHasImportFromCore(tsSourceFile: ts.SourceFile, importName: string): ts.SourceFile {
   if (hasImport(tsSourceFile, importName)) {
     return tsSourceFile
   }
 
-  const predicate = (statement: ts.Statement): boolean =>
-    ts.isImportDeclaration(statement) && coreImport(statement)
+  const predicate = (statement: ts.Statement): boolean => ts.isImportDeclaration(statement) && coreImport(statement)
 
   const importDeclaration =
     (tsSourceFile.statements.find(predicate) as ts.ImportDeclaration) ||
@@ -221,8 +187,7 @@ function ensureHasImportFromCore(
       ts.createLiteral(Module.BEARER_CORE_MODULE)
     )
 
-  const elements = (importDeclaration.importClause
-    .namedBindings as ts.NamedImports).elements
+  const elements = (importDeclaration.importClause.namedBindings as ts.NamedImports).elements
 
   const clauseWithNamedImport = ts.updateImportDeclaration(
     importDeclaration,
@@ -231,18 +196,12 @@ function ensureHasImportFromCore(
     ts.updateImportClause(
       importDeclaration.importClause,
       importDeclaration.importClause.name,
-      ts.createNamedImports([
-        ...elements,
-        ts.createImportSpecifier(undefined, ts.createIdentifier(importName))
-      ])
+      ts.createNamedImports([...elements, ts.createImportSpecifier(undefined, ts.createIdentifier(importName))])
     ),
     importDeclaration.moduleSpecifier
   )
 
-  const statements = [
-    clauseWithNamedImport,
-    ...tsSourceFile.statements.filter(el => !predicate(el))
-  ]
+  const statements = [clauseWithNamedImport, ...tsSourceFile.statements.filter(el => !predicate(el))]
 
   return ts.updateSourceFileNode(
     tsSourceFile,
@@ -254,16 +213,12 @@ function ensureHasImportFromCore(
   )
 }
 
-function ensureHasNotImportFromCore(
-  tsSourceFile: ts.SourceFile,
-  importName: string
-): ts.SourceFile {
+function ensureHasNotImportFromCore(tsSourceFile: ts.SourceFile, importName: string): ts.SourceFile {
   if (!hasImport(tsSourceFile, importName)) {
     return tsSourceFile
   }
 
-  const predicate = (statement: ts.Statement): boolean =>
-    ts.isImportDeclaration(statement) && coreImport(statement)
+  const predicate = (statement: ts.Statement): boolean => ts.isImportDeclaration(statement) && coreImport(statement)
 
   const importDeclaration =
     (tsSourceFile.statements.find(predicate) as ts.ImportDeclaration) ||
@@ -274,8 +229,7 @@ function ensureHasNotImportFromCore(
       ts.createLiteral(Module.BEARER_CORE_MODULE)
     )
 
-  const elements = (importDeclaration.importClause
-    .namedBindings as ts.NamedImports).elements.filter(element => {
+  const elements = (importDeclaration.importClause.namedBindings as ts.NamedImports).elements.filter(element => {
     if (element.name.text === importName) {
       return
     }
@@ -294,10 +248,7 @@ function ensureHasNotImportFromCore(
     importDeclaration.moduleSpecifier
   )
 
-  const statements = [
-    clauseWithNamedImport,
-    ...tsSourceFile.statements.filter(el => !predicate(el))
-  ]
+  const statements = [clauseWithNamedImport, ...tsSourceFile.statements.filter(el => !predicate(el))]
 
   return ts.updateSourceFileNode(
     tsSourceFile,
@@ -309,22 +260,16 @@ function ensureHasNotImportFromCore(
   )
 }
 
-export function ensureBearerContextInjected(
-  classNode: ts.ClassDeclaration
-): ts.ClassDeclaration {
+export function ensureBearerContextInjected(classNode: ts.ClassDeclaration): ts.ClassDeclaration {
   const has: boolean = ts.forEachChild(
     classNode,
-    node =>
-      ts.isPropertyDeclaration(node) &&
-      (node.name as ts.Identifier).escapedText === Component.bearerContext
+    node => ts.isPropertyDeclaration(node) && (node.name as ts.Identifier).escapedText === Component.bearerContext
   )
 
   return has ? classNode : addBearerContextProp(classNode)
 }
 
-export function ensureWatchImported(
-  tsSourceFile: ts.SourceFile
-): ts.SourceFile {
+export function ensureWatchImported(tsSourceFile: ts.SourceFile): ts.SourceFile {
   return ensureHasImportFromCore(tsSourceFile, Decorators.Watch)
 }
 
@@ -332,47 +277,29 @@ export function ensurePropImported(tsSourceFile: ts.SourceFile): ts.SourceFile {
   return ensureHasImportFromCore(tsSourceFile, Decorators.Prop)
 }
 
-export function ensureComponentImported(
-  tsSourceFile: ts.SourceFile
-): ts.SourceFile {
+export function ensureComponentImported(tsSourceFile: ts.SourceFile): ts.SourceFile {
   return ensureHasImportFromCore(tsSourceFile, Decorators.Component)
 }
 
-export function ensureRootComponentNotImported(
-  tsSourceFile: ts.SourceFile
-): ts.SourceFile {
+export function ensureRootComponentNotImported(tsSourceFile: ts.SourceFile): ts.SourceFile {
   return ensureHasNotImportFromCore(tsSourceFile, Decorators.RootComponent)
 }
 
-export function ensureStateImported(
-  tsSourceFile: ts.SourceFile
-): ts.SourceFile {
+export function ensureStateImported(tsSourceFile: ts.SourceFile): ts.SourceFile {
   return ensureHasImportFromCore(tsSourceFile, Decorators.State)
 }
 
-export function ensureElementImported(
-  tsSourceFile: ts.SourceFile
-): ts.SourceFile {
+export function ensureElementImported(tsSourceFile: ts.SourceFile): ts.SourceFile {
   return ensureHasImportFromCore(tsSourceFile, Decorators.Element)
 }
 
 export function propDecorator() {
-  return ts.createDecorator(
-    ts.createCall(
-      ts.createIdentifier(Decorators.Prop) as ts.Expression,
-      undefined,
-      undefined
-    )
-  )
+  return ts.createDecorator(ts.createCall(ts.createIdentifier(Decorators.Prop) as ts.Expression, undefined, undefined))
 }
 
 export function elementDecorator() {
   return ts.createDecorator(
-    ts.createCall(
-      ts.createIdentifier(Decorators.Element) as ts.Expression,
-      undefined,
-      undefined
-    )
+    ts.createCall(ts.createIdentifier(Decorators.Element) as ts.Expression, undefined, undefined)
   )
 }
 

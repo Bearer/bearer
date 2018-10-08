@@ -35,9 +35,12 @@ export const Types = {
 
 export const Properties = {
   ReferenceId: 'referenceId',
-  Element: 'el'
+  Element: 'el',
+  eventName: 'eventName'
 }
 
 export const Env = {
   BEARER_SCENARIO_ID: 'BEARER_SCENARIO_ID'
 }
+
+export const BEARER = 'bearer'

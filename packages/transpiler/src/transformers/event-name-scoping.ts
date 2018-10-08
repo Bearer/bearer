@@ -3,7 +3,7 @@
  */
 import * as ts from 'typescript'
 
-import { Decorators, Env } from '../constants'
+import { BEARER, Decorators, Env, Properties } from '../constants'
 import { decoratorNamed, hasDecoratorNamed } from '../helpers/decorator-helpers'
 import { TransformerOptions } from '../types'
 
@@ -12,8 +12,8 @@ function updateEventDecorator(tsProperty: ts.PropertyDeclaration, scope: string)
     ts.createCall(ts.createIdentifier(Decorators.Event), undefined, [
       ts.createObjectLiteral([
         ts.createPropertyAssignment(
-          'eventName',
-          ts.createLiteral(['bearer', process.env[Env.BEARER_SCENARIO_ID], scope, tsProperty.name.getText()].join(':'))
+          Properties.eventName,
+          ts.createLiteral([BEARER, process.env[Env.BEARER_SCENARIO_ID], scope, tsProperty.name.getText()].join(':'))
         )
       ])
     ])
