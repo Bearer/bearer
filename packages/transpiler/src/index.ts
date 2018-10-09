@@ -14,6 +14,7 @@ import BearerAuthorizedRequiredProp from './transformers/bearer-authorized-scena
 import BearerStateInjector from './transformers/bearer-state-injector'
 import ComponenttagNameScoping from './transformers/component-tag-name-scoping'
 import EventNameScoping from './transformers/event-name-scoping'
+import GatherIO from './transformers/gather-input-output'
 import GatherMetadata from './transformers/gather-metadata'
 import ImportsImporter from './transformers/imports-transformer'
 import NavigatorScreenTransformer from './transformers/navigator-screen-transformer'
@@ -46,11 +47,7 @@ export default class Transpiler {
 
     return {
       before: [
-        GatherMetadata({
-          verbose,
-          metadata: this.metadata,
-          generator: this.generator
-        }),
+        GatherMetadata({ verbose, metadata: this.metadata }),
         RootComponentTransformer({ verbose, metadata: this.metadata }),
         BearerReferenceIdInjector({ verbose, metadata: this.metadata }),
         ReplaceIntentDecorators({ verbose, metadata: this.metadata }),
@@ -63,6 +60,7 @@ export default class Transpiler {
         BearerAuthorizedRequiredProp({ verbose }),
         EventNameScoping({ metadata: this.metadata }),
         ComponenttagNameScoping({ verbose, metadata: this.metadata }),
+        GatherIO({ verbose, metadata: this.metadata, generator: this.generator }),
         dumpSourceCode({
           verbose,
           srcDirectory: this.VIEWS_DIRECTORY,

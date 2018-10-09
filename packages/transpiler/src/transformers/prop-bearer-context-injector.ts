@@ -26,7 +26,7 @@ import { TransformerOptions } from '../types'
 
 import bearer from './bearer'
 
-export default function ComponentTransformer({  }: TransformerOptions = {}): ts.TransformerFactory<ts.SourceFile> {
+export default function ComponentTransformer(_options: TransformerOptions = {}): ts.TransformerFactory<ts.SourceFile> {
   return transformContext => {
     function visit(node: ts.Node): ts.VisitResult<ts.Node> {
       if (ts.isClassDeclaration(node) && hasDecoratorNamed(node, Decorators.Component)) {
