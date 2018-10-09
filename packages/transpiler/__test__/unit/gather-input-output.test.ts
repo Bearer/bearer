@@ -8,7 +8,7 @@ const fixtures = path.join(__dirname, '..', '__fixtures__')
 
 describe('GatherIO transformer', () => {
   describe('a simple root component', () => {
-    it('has empty input and output', () => {
+    it('has inputs and outputs added', () => {
       const metadata = new Metadata()
       metadata.registerComponent({
         classname: 'FeatDisplayComponent',

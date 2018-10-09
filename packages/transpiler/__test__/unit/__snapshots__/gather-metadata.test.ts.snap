@@ -9,9 +9,7 @@ Metadata {
       "finalTagName": "feat-display",
       "group": "feat",
       "initialTagName": "feat-display",
-      "inputs": Array [],
       "isRoot": true,
-      "outputs": Array [],
     },
   ],
   "prefix": null,
@@ -29,113 +27,7 @@ Metadata {
       "finalTagName": "complex-feature-display",
       "group": "complex-feature",
       "initialTagName": "complex-feature-display",
-      "inputs": Array [
-        Object {
-          "default": undefined,
-          "name": "noInitializer",
-          "type": "string",
-        },
-        Object {
-          "default": "'ok'",
-          "name": "aStringProp",
-          "type": "string",
-        },
-        Object {
-          "default": "5",
-          "name": "aNumberProp",
-          "type": "number",
-        },
-      ],
       "isRoot": true,
-      "outputs": Array [
-        Object {
-          "eventName": "bearer|SPONGE_BOB|complex-feature|namedEvent",
-          "name": "namedEvent",
-          "payloadFormat": "unspecified",
-        },
-        Object {
-          "eventName": "bearer|SPONGE_BOB|complex-feature|nonTypedEvent",
-          "name": "nonTypedEvent",
-          "payloadFormat": "unspecified",
-        },
-        Object {
-          "eventName": "bearer|SPONGE_BOB|complex-feature|typedEvent",
-          "name": "typedEvent",
-          "payloadFormat": Object {
-            "type": "object",
-          },
-        },
-        Object {
-          "eventName": "bearer|SPONGE_BOB|complex-feature|typedEventWithType",
-          "name": "typedEventWithType",
-          "payloadFormat": Object {
-            "$schema": "http://json-schema.org/draft-07/schema#",
-            "properties": Object {
-              "anEnum": Object {
-                "enum": Array [
-                  "ko",
-                  "ok",
-                ],
-                "type": "string",
-              },
-              "something": Object {
-                "properties": Object {
-                  "name": Object {
-                    "type": "string",
-                  },
-                  "status": Object {
-                    "enum": Array [
-                      "closed",
-                      "open",
-                    ],
-                    "type": "string",
-                  },
-                },
-                "required": Array [
-                  "name",
-                  "status",
-                ],
-                "type": "object",
-              },
-              "somethingElse": Object {
-                "type": "string",
-              },
-            },
-            "required": Array [
-              "anEnum",
-              "something",
-              "somethingElse",
-            ],
-            "type": "object",
-          },
-        },
-        Object {
-          "eventName": "bearer|SPONGE_BOB|complex-feature|typedEventWithTypeArray",
-          "name": "typedEventWithTypeArray",
-          "payloadFormat": Object {},
-        },
-        Object {
-          "eventName": "bearer|SPONGE_BOB|complex-feature|typedEventWithTypeString",
-          "name": "typedEventWithTypeString",
-          "payloadFormat": Object {
-            "type": "string",
-          },
-        },
-        Object {
-          "eventName": "bearer|SPONGE_BOB|complex-feature|typedEventWithTypeNumber",
-          "name": "typedEventWithTypeNumber",
-          "payloadFormat": Object {
-            "type": "number",
-          },
-        },
-        Object {
-          "eventName": "bearer|SPONGE_BOB|complex-feature|typedEventWithTypeBoolean",
-          "name": "typedEventWithTypeBoolean",
-          "payloadFormat": Object {
-            "type": "boolean",
-          },
-        },
-      ],
     },
   ],
   "prefix": null,

@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`GatherIO transformer a simple root component has empty input and output 1`] = `
+exports[`GatherIO transformer a simple root component has inputs and outputs added 1`] = `
 Metadata {
   "components": Array [
     Object {
