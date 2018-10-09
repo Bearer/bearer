@@ -16,6 +16,8 @@ type TPayloadEvent = {
 })
 export class FeatDisplayRootComponent {
   @Prop()
+  noInitializer: string
+  @Prop()
   aStringProp: string = 'ok'
   @Prop()
   aNumberProp: number = 5

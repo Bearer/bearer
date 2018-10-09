@@ -18,7 +18,7 @@ export default function GatherMetadata({
     return {
       name: (tsProp.name as ts.Identifier).escapedText.toString(),
       type: tsProp.type.kind === ts.SyntaxKind.NumberKeyword ? 'number' : 'string',
-      default: (tsProp.initializer as ts.Expression).getText()
+      default: tsProp.initializer ? (tsProp.initializer as ts.Expression).getText() : undefined
     }
   }
 
