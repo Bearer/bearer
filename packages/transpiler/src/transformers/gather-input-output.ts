@@ -72,7 +72,7 @@ export default function GatherMetadata({
         // Found Component
         if (ts.isClassDeclaration(node) && hasDecoratorNamed(node, Decorators.Component)) {
           const component = metadata.findComponentFrom(tsSourceFile)
-          if (component.isRoot) {
+          if (component && component.isRoot) {
             metadata.registerComponent({
               ...component,
               inputs: collectInputs(node),

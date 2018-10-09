@@ -1,0 +1,125 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`GatherIO transformer a simple root component has empty input and output 1`] = `
+Metadata {
+  "components": Array [
+    Object {
+      "classname": "FeatDisplayComponent",
+      "fileName": "/__test__/__fixtures__/gather-input-output/root-component-transformed.tsx",
+      "finalTagName": "complex-feature-display",
+      "group": "complex",
+      "initialTagName": "feat-display",
+      "inputs": Array [
+        Object {
+          "default": undefined,
+          "name": "noInitializer",
+          "type": "string",
+        },
+        Object {
+          "default": "'ok'",
+          "name": "aStringProp",
+          "type": "string",
+        },
+        Object {
+          "default": "5",
+          "name": "aNumberProp",
+          "type": "number",
+        },
+      ],
+      "isRoot": true,
+      "outputs": Array [
+        Object {
+          "eventName": "bearer|SPONGE_BOB|complex|namedEvent",
+          "name": "namedEvent",
+          "payloadFormat": "unspecified",
+        },
+        Object {
+          "eventName": "bearer|SPONGE_BOB|complex|nonTypedEvent",
+          "name": "nonTypedEvent",
+          "payloadFormat": "unspecified",
+        },
+        Object {
+          "eventName": "bearer|SPONGE_BOB|complex|typedEvent",
+          "name": "typedEvent",
+          "payloadFormat": Object {
+            "type": "object",
+          },
+        },
+        Object {
+          "eventName": "bearer|SPONGE_BOB|complex|typedEventWithType",
+          "name": "typedEventWithType",
+          "payloadFormat": Object {
+            "$schema": "http://json-schema.org/draft-07/schema#",
+            "properties": Object {
+              "anEnum": Object {
+                "enum": Array [
+                  "ko",
+                  "ok",
+                ],
+                "type": "string",
+              },
+              "something": Object {
+                "properties": Object {
+                  "name": Object {
+                    "type": "string",
+                  },
+                  "status": Object {
+                    "enum": Array [
+                      "closed",
+                      "open",
+                    ],
+                    "type": "string",
+                  },
+                },
+                "required": Array [
+                  "name",
+                  "status",
+                ],
+                "type": "object",
+              },
+              "somethingElse": Object {
+                "type": "string",
+              },
+            },
+            "required": Array [
+              "anEnum",
+              "something",
+              "somethingElse",
+            ],
+            "type": "object",
+          },
+        },
+        Object {
+          "eventName": "bearer|SPONGE_BOB|complex|typedEventWithTypeArray",
+          "name": "typedEventWithTypeArray",
+          "payloadFormat": Object {},
+        },
+        Object {
+          "eventName": "bearer|SPONGE_BOB|complex|typedEventWithTypeString",
+          "name": "typedEventWithTypeString",
+          "payloadFormat": Object {
+            "type": "string",
+          },
+        },
+        Object {
+          "eventName": "bearer|SPONGE_BOB|complex|typedEventWithTypeNumber",
+          "name": "typedEventWithTypeNumber",
+          "payloadFormat": Object {
+            "type": "number",
+          },
+        },
+        Object {
+          "eventName": "bearer|SPONGE_BOB|complex|typedEventWithTypeBoolean",
+          "name": "typedEventWithTypeBoolean",
+          "payloadFormat": Object {
+            "type": "boolean",
+          },
+        },
+      ],
+    },
+  ],
+  "prefix": null,
+  "registerComponent": [Function],
+  "suffix": null,
+}
+`;
