@@ -1,8 +1,7 @@
 import Command from '../BaseCommand'
 
-type Constructor<T> = new (...args: any[]) => T;
+type Constructor<T> = new (...args: any[]) => T
 type TCommand = InstanceType<Constructor<Command>>
-
 
 export function RequireScenarioFolder() {
   return function(_target: any, _propertyKey: string | symbol, descriptor: PropertyDescriptor) {
@@ -45,9 +44,8 @@ export function ensureFreshToken() {
         try {
           if (ExpiresAt < Date.now()) {
             this.ux.action.start('Refreshing token')
-            const tokenRefresh = await refreshMyToken(this)
+            await refreshMyToken(this)
             this.ux.action.stop()
-            return tokenRefresh
           }
         } catch (error) {
           this.ux.action.stop(`Failed`)
@@ -77,7 +75,9 @@ async function refreshMyToken(command: TCommand): Promise<boolean | Error> {
 
   switch (statusCode) {
     case 200: {
-      const { authorization: { AuthenticationResult } } = body
+      const {
+        authorization: { AuthenticationResult }
+      } = body
 
       await command.bearerConfig.storeBearerConfig({
         ExpiresAt: Date.now() + AuthenticationResult.ExpiresIn * 1000,
