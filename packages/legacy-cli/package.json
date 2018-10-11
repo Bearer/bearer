@@ -24,6 +24,7 @@
     "requirements-check": "node ./check-version.js"
   },
   "dependencies": {
+    "@bearer/cli": "^0.67.3",
     "@bearer/intents": "^0.67.3",
     "@bearer/templates": "^0.67.3",
     "@bearer/transpiler": "^0.67.3",

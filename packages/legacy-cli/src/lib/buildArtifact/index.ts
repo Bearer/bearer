@@ -56,7 +56,8 @@ export default (output, { scenarioUuid }, emitter, locator: LocationProvider) =>
         locator.authConfigPath,
         distPath,
         scenarioUuid,
-        locator.scenarioRootResourcePath('node_modules')
+        locator.scenarioRootResourcePath('node_modules'),
+        locator.srcIntentsDir
       )
         .then(async config => {
           emitter.emit('buildArtifact:configured', { intents: config.intents })

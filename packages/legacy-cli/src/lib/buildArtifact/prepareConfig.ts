@@ -1,47 +1,47 @@
-import * as fs from 'fs'
-import * as globby from 'globby'
-import { promisify } from 'util'
-import * as vm from 'vm'
-const readFileAsync = promisify(fs.readFile)
+import { getPropertyValue, IntentCodeProcessor, isIntentClass } from '@bearer/cli/src/utils/generators'
+
+import * as fs from 'fs-extra'
+import * as ts from 'typescript'
 
 type TConfig = {
   intents: Array<{ [key: string]: string }>
   integration_uuid: string
   auth?: any
 }
+
+const INTENT_NAME_IDENTIFIER = 'intentName'
+
 export default (
   authConfigFile: string,
-  distPath: string,
+  _distPath: string,
   scenarioUuid: string,
-  nodeModulesPath: string
+  _nodeModulesPath: string,
+  intentsDir: string
 ): Promise<TConfig> => {
-  module.paths.push(nodeModulesPath)
 
-  return globby([`${distPath}/*.js`]).then(files =>
-    files
-      .reduce(async (acc, f) => {
-        const code = await readFileAsync(f)
-        const context = vm.createContext({ module: {} }) as any
+  const intents: Array<any> = []
 
-        vm.runInNewContext(code.toString(), context)
-        const intent = context.module.exports.default
+  const transformer = (context: ts.TransformationContext) => {
+    function visit(tsNode: ts.Node) {
+      if (isIntentClass(tsNode)) {
+        const intentName = getPropertyValue(tsNode as ts.ClassDeclaration, INTENT_NAME_IDENTIFIER)
+        intents.push(
+          {
+            [intentName]: `index.${intentName}`
+          }
+        )
+      }
+      return tsNode
+    }
+    return (tsSourceFile: ts.SourceFile) => {
+      return ts.visitEachChild(tsSourceFile, visit, context)
+    }
+  }
 
-        if (intent && intent.intentName)
-          acc.then(config =>
-            config.intents.push({
-              [intent.intentName]: `index.${intent.intentName}`
-            })
-          )
-        return acc
-      }, Promise.resolve({ integration_uuid: scenarioUuid, intents: [] } as TConfig))
-      .then(async config => {
-        try {
-          const content = await readFileAsync(authConfigFile, { encoding: 'utf8' })
-          config.auth = JSON.parse(content)
-          return config
-        } catch (e) {
-          throw new Error(`Unable to read ${authConfigFile} : ${e.toString()}`)
-        }
-      })
-  )
+  return new Promise((resolve, _reject) => {
+    new IntentCodeProcessor(intentsDir, transformer).run()
+    const content = fs.readFileSync(authConfigFile, { encoding: 'utf8' })
+    let config: TConfig = { intents, integration_uuid: scenarioUuid, auth: JSON.parse(content) }
+    resolve(config)
+  })
 }

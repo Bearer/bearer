@@ -1,8 +1,7 @@
+import prepareConfig from '@bearer/bearer-cli/src/lib/buildArtifact/prepareConfig'
 import * as archiver from 'archiver'
 import * as fs from 'fs-extra'
-import * as globby from 'globby'
 import * as path from 'path'
-import * as vm from 'vm'
 
 import BaseCommand from '../../BaseCommand'
 import { RequireScenarioFolder } from '../../utils/decorators'
@@ -101,20 +100,8 @@ module.exports[${intent}.intentName] = ${intent}.intentType.intent(${intent}.act
   // TODO: rewrite this using TS AST
   async retrieveIntents(): Promise<Array<TIntentConfig>> {
     try {
-      const files = await globby([`${this.locator.buildIntentsResourcePath('dist')}/*.js`])
-      return files.reduce<Array<TIntentConfig>>((acc: Array<TIntentConfig>, f: string) => {
-        const code = fs.readFileSync(f)
-        const context = vm.createContext({ module: {} }) as any
-        vm.runInNewContext(code.toString(), context)
-        const intent = context.module.exports.default
-
-        if (intent && intent.intentName) {
-          acc.push({
-            [intent.intentName]: `index.${intent.intentName}`
-          })
-        }
-        return acc
-      }, [])
+      const config = await prepareConfig(this.locator.authConfigPath, "", this.bearerConfig.scenarioUuid, "", this.locator.srcIntentsDir)
+      return config.intents
     } catch (e) {
       throw e
     }

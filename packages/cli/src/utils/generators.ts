@@ -47,7 +47,7 @@ interface IIntentEntry {
 }
 
 class IntentNodeAdapter implements IIntentEntry {
-  constructor(private readonly node: ts.ClassDeclaration, private readonly generator: any) {}
+  constructor(private readonly node: ts.ClassDeclaration, private readonly generator: any) { }
   get intentClassName(): string {
     const identifier = getIdentifier(this.node)
     return identifier.escapedText.toString()
@@ -131,18 +131,18 @@ class IntentNodeAdapter implements IIntentEntry {
   }
 }
 
-function isIntentClass(tsNode: ts.Node): boolean {
+export function isIntentClass(tsNode: ts.Node): boolean {
   const isClass = ts.isClassDeclaration(tsNode) && tsNode.name
 
   const intentTypeValue = getPropertyValue(tsNode as ts.ClassDeclaration, INTENT_TYPE_IDENTIFIER)
-  return (isClass as boolean) && INTENT_NAMES.includes(intentTypeValue)
+  return (!!isClass) && INTENT_NAMES.includes(intentTypeValue)
 }
 
-function getIdentifier(tsNode: ts.ClassDeclaration | ts.PropertyDeclaration): ts.Identifier {
+export function getIdentifier(tsNode: ts.ClassDeclaration | ts.PropertyDeclaration): ts.Identifier {
   return tsNode.name as ts.Identifier
 }
 
-function getPropertyValue(tsNode: ts.ClassDeclaration, propertyName: string): any {
+export function getPropertyValue(tsNode: ts.ClassDeclaration, propertyName: string): any {
   if (tsNode.members) {
     const declaration = tsNode.members.find(node => {
       return ts.isPropertyDeclaration(node) && (node.name as ts.Identifier).escapedText.toString() === propertyName
@@ -192,11 +192,33 @@ export function transformer(generator: any) {
   }
 }
 
+export class IntentCodeProcessor {
+  constructor(
+    private readonly srcIntentsDir: string,
+    private readonly transformer: any,
+  ) { }
+
+  async run() {
+    const files = await globby(`${this.srcIntentsDir}/*.ts`)
+
+    files.forEach(file => {
+      const sourceFile = ts.createSourceFile(
+        file,
+        fs.readFileSync(file, 'utf8'),
+        ts.ScriptTarget.Latest,
+        false,
+        ts.ScriptKind.TSX
+      )
+      ts.transform(sourceFile, [this.transformer])
+    })
+  }
+}
+
 export class OpenApiSpecGenerator {
   constructor(
     private readonly srcIntentsDir: string,
     private readonly bearerConfig: { scenarioTitle: string | undefined; scenarioUuid: string }
-  ) {}
+  ) { }
 
   async build() {
     const files = await globby(`${this.srcIntentsDir}/*.ts`)
