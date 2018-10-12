@@ -58,7 +58,6 @@
     "archiver": "^3.0.0",
     "jest": "^23.6.0",
     "nock": "^9.6.1",
-    "nyc": "^12",
     "ts-jest": "^23.10.4",
     "ts-node": "^7.0.1",
     "typescript": "^3.1.3"
@@ -96,7 +95,7 @@
     "prepack": "rm -rf lib && tsc && oclif-dev manifest && oclif-dev readme",
     "prepare": "rm -rf lib && tsc",
     "test": "rm -rf .bearer && jest --runInBand",
-    "test:ci": "rm -rf .bearer && jest --coverage --runInBand",
+    "test:ci": "rm -rf .bearer && jest --runInBand",
     "version": "oclif-dev readme && git add README.md"
   },
   "types": "lib/index.d.ts",

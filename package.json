@@ -34,10 +34,6 @@
     "@commitlint/cli": "^7.0.0",
     "@commitlint/config-conventional": "^7.0.1",
     "@oclif/tslint": "^1.1.2",
-    "babel-core": "^6.26.3",
-    "babel-jest": "^23.4.0",
-    "babel-loader": "^7.1.5",
-    "babel-preset-env": "^1.7.0",
     "cz-conventional-changelog": "^2.1.0",
     "eslint": "^5.2.0",
     "eslint-config-airbnb-base": "^13.0.0",
@@ -51,9 +47,6 @@
     "tslint": "^5.11.0",
     "tslint-config-prettier": "^1.14.0",
     "typescript": "^3.0.1"
-  },
-  "transform": {
-    "^.+\\.jsx?$": "babel-jest"
   },
   "config": {
     "commitizen": {
