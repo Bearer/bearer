@@ -14,13 +14,13 @@
   ],
   "scripts": {
     "clean": "rm -rf lib/",
-    "start": "yarn build",
-    "templates": "yarn cleanup && copyfiles -a \"./templates/**/*\" lib/src/lib/commands/",
-    "cleanup": "rm -rf lib",
     "build": "yarn templates && tsc -p tsconfig.json",
+    "start": "yarn build -w",
+    "templates": "yarn clean && copyfiles -a \"./templates/**/*\" lib/src/lib/commands/",
     "prepare": "yarn build",
-    "prepublishOnly": "NODE_ENV=production yarn build",
+    "prepack": "yarn clean && NODE_ENV=production yarn build",
     "test": "jest",
+    "test:ci": "jest --coverage --runInBand",
     "requirements-check": "node ./check-version.js"
   },
   "dependencies": {

@@ -17,8 +17,8 @@
     "start": "npm run dev",
     "test": "jest --no-cache",
     "test.watch": "jest --watch --no-cache",
-    "prepare": "BUILD=distribution yarn build",
-    "prepublishOnly": "BUILD=distribution yarn build"
+    "prepare": "yarn build",
+    "prepack": "BUILD=distribution yarn build"
   },
   "dependencies": {
     "@bearer/core": "^0.67.5",

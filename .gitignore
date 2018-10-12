@@ -5,3 +5,4 @@ node_modules/
 .npmrc
 dist/
 packages/*/lib/
+packages/*/coverage/

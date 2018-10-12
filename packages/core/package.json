@@ -12,14 +12,12 @@
   ],
   "scripts": {
     "clean": "rm -rf lib/",
-    "start": "yarn build",
-    "build": "per-env",
-    "build:development": "yarn build:bundle -w",
-    "build:production": "NODE_ENV=production yarn build:bundle ",
-    "build:bundle": "rollup -c",
-    "prepare": "yarn build:production",
-    "prepublishOnly": "BUILD=distribution NODE_ENV=production yarn build:production",
-    "test": "jest"
+    "start": "yarn start -w",
+    "build": "rollup -c",
+    "prepare": "yarn clean && rollup -c",
+    "prepack": "yarn clean && BUILD=distribution NODE_ENV=production yarn build",
+    "test": "jest",
+    "test:ci": "jest --coverage --runInBand"
   },
   "jest": {
     "moduleFileExtensions": [

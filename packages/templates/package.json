@@ -11,11 +11,12 @@
   ],
   "scripts": {
     "clean": "rm -rf lib/",
-    "start": "yarn build",
+    "start": "yarn build -w",
     "build": "tsc -p tsconfig.json",
     "prepare": "yarn build",
-    "prepublishOnly": "NODE_ENV=production yarn build",
-    "test": "jest"
+    "prepack": "yarn clean && NODE_ENV=production yarn build",
+    "test": "jest",
+    "test:ci": "jest --coverage --runInBand"
   },
   "repository": {
     "type": "git",
