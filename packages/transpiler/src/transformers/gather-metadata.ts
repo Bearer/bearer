@@ -9,7 +9,7 @@ export default function GatherMetadata({ metadata }: TransformerOptions): ts.Tra
   function getTagNames(tagName: string): { initialTagName: string; finalTagName: string } {
     const finalTag =
       metadata.prefix && metadata.suffix
-        ? [Case.kebab(metadata.prefix), tagName, Case.kebab(metadata.suffix)].join('-')
+        ? [Case.kebab(metadata.prefix), Case.kebab(metadata.suffix), tagName].join('-')
         : tagName
     return {
       initialTagName: tagName,
