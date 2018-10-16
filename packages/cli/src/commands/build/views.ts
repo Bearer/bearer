@@ -54,8 +54,8 @@ export default class BuildViews extends BaseCommand {
   }
 
   transpile = () => {
-    const prefix = ['bearer', this.bearerConfig.scenarioId].join('-')
-    const suffix = this.bearerConfig.orgId
+    const prefix = ['bearer', this.bearerConfig.orgId].join('-')
+    const suffix = this.bearerConfig.scenarioId
     try {
       transpiler(['--no-watcher', '--prefix-tag', prefix, '--suffix-tag', suffix, '--no-process'])
     } catch (e) {
