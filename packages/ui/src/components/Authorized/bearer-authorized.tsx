@@ -1,27 +1,31 @@
 import { Component, Method, Prop, State } from '@bearer/core'
 
-import WithAuthentication, { IAuthenticated, WithAuthenticationMethods } from '../../decorators/withAuthentication'
+import { AuthenticationListener } from '../../utils/withAuthentication'
 
 export type FWithAuthenticate = (params: { authenticate(): Promise<boolean> }) => any
 export type FWithRevoke = (params: { revoke(): void }) => any
 
 // TODO: scope  authenticatePromise per scenario/setup
-@WithAuthentication()
+// @WithAuthentication()
 @Component({
   tag: 'bearer-authorized'
 })
-export class BearerAuthorized extends WithAuthenticationMethods implements IAuthenticated {
+export class BearerAuthorized extends AuthenticationListener {
   @State()
-  authorized: boolean = null
+  isAuthorized: boolean | null = null
+
   @State()
   sessionInitialized: boolean = false
 
   @Prop()
   renderUnauthorized: FWithAuthenticate
+
   @Prop()
   renderAuthorized: FWithRevoke
+
   @Prop({ context: 'bearer' })
   bearerContext: any
+
   @Prop()
   scenarioId: string
 
@@ -34,14 +38,14 @@ export class BearerAuthorized extends WithAuthenticationMethods implements IAuth
 
   onAuthorized = () => {
     console.log('[BEARER]', 'onAuthorized', !!this.pendingAuthorizationResolve)
-    this.authorized = true
+    this.isAuthorized = true
     if (this.pendingAuthorizationResolve) {
       this.pendingAuthorizationResolve(true)
     }
   }
 
   onRevoked = () => {
-    this.authorized = false
+    this.isAuthorized = false
     console.log('[BEARER]', 'onRevoked', !!this.pendingAuthorizationReject)
     if (this.pendingAuthorizationReject) {
       this.pendingAuthorizationReject(false)
@@ -67,7 +71,6 @@ export class BearerAuthorized extends WithAuthenticationMethods implements IAuth
   @Method()
   revoke() {
     console.log('[BEARER]', 'bearer-authorized', 'revoke')
-    // @ts-ignore: Unreachable code error
     this.revokePromise()
   }
 
@@ -76,22 +79,20 @@ export class BearerAuthorized extends WithAuthenticationMethods implements IAuth
       this.pendingAuthorizationResolve = resolve
       this.pendingAuthorizationReject = reject
     })
-    // @ts-ignore: Unreachable code error
-    this.authorizeProto.bind(this)()
+    this.askAuthorization()
     return promise
   }
 
   revokePromise = (): Promise<boolean> => {
-    // @ts-ignore: Unreachable code error
-    this.revokeProto.bind(this)()
+    this.revokeAuthorization()
     return Promise.resolve(true)
   }
 
   render() {
-    if (!this.sessionInitialized || this.authorized === null) {
+    if (!this.sessionInitialized || this.isAuthorized === null) {
       return null
     }
-    if (!this.authorized) {
+    if (!this.isAuthorized) {
       return this.renderUnauthorized
         ? this.renderUnauthorized({ authenticate: this.authenticatePromise })
         : 'Unauthorized'

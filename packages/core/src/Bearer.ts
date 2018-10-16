@@ -1,4 +1,4 @@
-import fbemitter from 'fbemitter'
+import fbemitter, { EventSubscription } from 'fbemitter'
 import postRobot from 'post-robot'
 
 import BearerConfig from './BearerConfig'
@@ -11,7 +11,7 @@ const BEARER_CONFIG_KEY = 'BEARER_CONFIG'
 const IFRAME_NAME = 'BEARER-IFRAME'
 
 type TAuthorizationPayload = {
-  scenarioId: string,
+  scenarioId: string
   authIdentifier?: string
 }
 
@@ -72,18 +72,18 @@ class Bearer {
     return this._instance
   }
 
-  static onAuthorized = (scenarioId: string, callback: (authorize: boolean) => void): void => {
+  static onAuthorized = (scenarioId: string, callback: (authorize: boolean) => void): EventSubscription => {
     console.log('[BEARER]', 'register onAuthorized', scenarioId)
-    Bearer.emitter.addListener(Events.AUTHORIZED, () => {
+    return Bearer.emitter.addListener(Events.AUTHORIZED, () => {
       // TODO : listen only for the scenarioId (+ setupId ?)
       console.log('[BEARER]', 'calling authorized listener', scenarioId)
       callback(true)
     })
   }
 
-  static onRevoked = (scenarioId: string, callback: (authorize: boolean) => void): void => {
+  static onRevoked = (scenarioId: string, callback: (authorize: boolean) => void): EventSubscription => {
     console.log('[BEARER]', 'register onRevoked', scenarioId)
-    Bearer.emitter.addListener(Events.REVOKED, () => {
+    return Bearer.emitter.addListener(Events.REVOKED, () => {
       // TODO : listen only for the scenarioId (+ setupId ?)
       console.log('[BEARER]', 'calling revoke listener', scenarioId)
       callback(false)

@@ -1,14 +1,13 @@
 import { Component, Element, Event, EventEmitter, Method, Prop, State } from '@bearer/core'
 
-import WithAuthentication, { IAuthenticated, WithAuthenticationMethods } from '../../decorators/withAuthentication'
+import { AuthenticationListener } from '../../utils/withAuthentication'
 
-@WithAuthentication()
 @Component({
   tag: 'bearer-navigator-auth-screen',
   styleUrl: 'NavigatorScreen.scss',
   shadow: true
 })
-export class BearerNavigatorAuthScreen extends WithAuthenticationMethods implements IAuthenticated {
+export class BearerNavigatorAuthScreen extends AuthenticationListener {
   @Element()
   el: HTMLStencilElement
 
