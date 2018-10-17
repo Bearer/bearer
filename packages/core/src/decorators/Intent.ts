@@ -71,34 +71,12 @@ export function Intent(intentName: string, type: IntentType = IntentType.FetchDa
         const init = { method: 'POST', body: JSON.stringify(body || {}) }
 
         // Build promise
-        const promise: Promise<TFetchBearerData> = IntentPromise(intent(query, init))
-
-        if (type === IntentType.SaveState) {
-          // we want to trigger special event if it is a SaveState intent
-          return new Promise((resolve, reject) => {
-            // It does not make sense to use collection here.
-            promise
-              .then((payload: TEventPayload) => {
-                if (this.el) {
-                  this.el.dispatchEvent(new CustomEvent(BearerStateSavedEvent, { detail: payload }))
-                }
-                resolve(payload)
-                return payload
-              })
-              .catch(reject)
-          })
-        }
-        return promise
+        return IntentPromise(intent(query, init))
       }
     }
 
     defineIntentProp(target, key, getter)
   }
-}
-
-type TEventPayload = {
-  referenceId: string
-  data: { referenceId: string; ReadAllowed: boolean; [key: string]: any }
 }
 
 export function IntentPromise(promise: Promise<TFetchBearerResult>): Promise<TFetchBearerData> {
