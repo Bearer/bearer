@@ -1,0 +1,23 @@
+{
+  "name": "create-bearer",
+  "version": "0.0.4",
+  "description": "Quickly create a new Bearer scenario",
+  "main": "lib/index.js",
+  "repository": "http://github.com/bearer/bearer/packages/create-bearer",
+  "author": "Bearer Team",
+  "license": "MIT",
+  "private": false,
+  "bin": {
+    "create-bearer": "lib/index.js"
+  },
+  "devDependencies": {
+    "typescript": "^3.1.3"
+  },
+  "scripts": {
+    "prepack": "tsc",
+    "start": "tsc -w"
+  },
+  "files": [
+    "lib/"
+  ]
+}
