@@ -101,12 +101,12 @@ export function IntentPromise(promise: Promise<TFetchBearerResult>): Promise<TFe
  */
 
 function missingScenarioId(): Promise<any> {
-  console.warn('[BEARER]', 'Missing scenarioId, skipping api call')
+  console.info('[BEARER]', 'Missing scenarioId, skipping api call')
   return Promise.reject(new BearerMissingScenarioId())
 }
 
 function missingReferenceId(): Promise<any> {
-  console.warn('[BEARER]', 'Missing referenceId, skipping RetrieveState api call')
+  console.info('[BEARER]', 'Missing referenceId, skipping RetrieveState api call')
   return Promise.reject(new BearerMissingReferenceId())
 }
 
