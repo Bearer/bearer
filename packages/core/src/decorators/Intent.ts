@@ -10,11 +10,11 @@ export enum IntentType {
   FetchData = 'FetchData'
 }
 
-type TFetchBearerResult = { meta: { referenceId: string }; data: Array<any> | any; error?: any }
+type TFetchBearerResult<T = any> = { meta: { referenceId: string }; data: T; error?: any }
 
-export type TFetchBearerData = { data: Array<any> | any; referenceId?: string }
+export type TFetchBearerData<T = any> = { data: T; referenceId?: string }
 
-export type BearerFetch = (...args: any[]) => Promise<any>
+export type BearerFetch<T = any> = (...args: any[]) => Promise<TFetchBearerResult<T>>
 
 type IDecorator = (target: any, key: string) => void
 
