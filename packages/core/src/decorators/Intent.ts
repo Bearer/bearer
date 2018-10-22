@@ -14,7 +14,7 @@ type TFetchBearerResult<T = any> = { meta: { referenceId: string }; data: T; err
 
 export type TFetchBearerData<T = any> = { data: T; referenceId?: string }
 
-export type BearerFetch<T = any> = (...args: any[]) => Promise<TFetchBearerResult<T>>
+export type BearerFetch<T = any> = (...args: any[]) => Promise<TFetchBearerData<T>>
 
 type IDecorator = (target: any, key: string) => void
 
@@ -45,7 +45,7 @@ export const BearerStateSavedEvent = 'bearer:StateSaved'
 export function Intent(intentName: string, type: IntentType = IntentType.FetchData): IDecorator {
   return function(target: BearerComponent, key: string): void {
     const getter = (): BearerFetch => {
-      return function(this: BearerComponent, params = {}) {
+      return function(this: BearerComponent, params = {}): Promise<TFetchBearerData> {
         // NOTE: here we have to use target. Not sure why
         const scenarioId = target.SCENARIO_ID
         if (!scenarioId) {
