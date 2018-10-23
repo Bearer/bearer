@@ -15,6 +15,7 @@ router.get('v1/auth/:integration_uuid', async ctx => {
   <head>
     <script src="https://cdn.jsdelivr.net/npm/post-robot@8.0.28/dist/post-robot.min.js"></script>
     <script type="application/javascript">
+      window.LOG_LEVEL = 'error'
       localStorage.setItem('${ctx.request.query.setupId}|${ctx.params.integration_uuid}', true)
       postRobot.send(window.opener, 'BEARER_AUTHORIZED', {
         scenarioId: '${ctx.params.integration_uuid}',

@@ -1,4 +1,4 @@
-import { Component, State, Prop, Listen, Method, Event, EventEmitter } from '@bearer/core'
+import { Component, Event, EventEmitter, Listen, Method, Prop, State } from '@bearer/core'
 
 @Component({
   tag: 'bearer-button-popover',
@@ -26,13 +26,13 @@ export class BearerButtonPopover {
 
   toggleDisplay = e => {
     e.preventDefault()
-    console.log('[BEARER]', 'Button popover: toggleDisplay', !this.visible)
+    console.debug('[BEARER]', 'Button popover: toggleDisplay', !this.visible)
     this.visible = !this.visible
   }
 
   set visible(newValue: boolean) {
     if (this._visible !== newValue) {
-      console.log('[BEARER]', 'Button popover: visibilityChangeHandler', newValue)
+      console.debug('[BEARER]', 'Button popover: visibilityChangeHandler', newValue)
       this._visible = newValue
       this.visibilityChange.emit({ visible: this._visible })
     }

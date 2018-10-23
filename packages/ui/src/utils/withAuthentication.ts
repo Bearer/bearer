@@ -10,7 +10,7 @@ export class AuthenticationListener {
   protected revokedListener: any
 
   askAuthorization = () => {
-    console.log('[BEARER]', 'authenticate', this.SCENARIO_ID, this.bearerContext.setupId)
+    console.debug('[BEARER]', 'authenticate', this.SCENARIO_ID, this.bearerContext.setupId)
     Bearer.instance.askAuthorizations({
       scenarioId: this.SCENARIO_ID,
       setupId: this.bearerContext.setupId
@@ -28,25 +28,17 @@ export class AuthenticationListener {
           this.onSessionInitialized()
         }
 
-        console.log(
-          '[BEARER]',
-          'componentDidLoad:maybeInitialized',
-          this.SCENARIO_ID,
-          this.onAuthorized,
-          this.onRevoked
-        )
-
         this.authorizedListener = Bearer.onAuthorized(this.SCENARIO_ID, this.onAuthorized)
         this.revokedListener = Bearer.onRevoked(this.SCENARIO_ID, this.onRevoked)
 
         Bearer.instance
           .hasAuthorized(this.SCENARIO_ID)
           .then(() => {
-            console.log('[BEARER]', 'authorized')
+            console.debug('[BEARER]', 'authorized')
             this.onAuthorized()
           })
           .catch(error => {
-            console.log('[BEARER]', 'unauthorized', { error })
+            console.debug('[BEARER]', 'unauthorized', { error })
             this.onRevoked()
           })
       })

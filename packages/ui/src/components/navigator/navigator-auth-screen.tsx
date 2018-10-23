@@ -23,14 +23,14 @@ export class BearerNavigatorAuthScreen extends AuthenticationListener {
 
   @Method()
   willAppear() {
-    console.log('[BEARER]', 'Auth screen willAppear')
+    console.debug('[BEARER]', 'Auth screen willAppear')
     const screen: HTMLBearerNavigatorScreenElement = this.el.shadowRoot.querySelector('#screen')
     screen.willAppear({})
   }
 
   @Method()
   willDisappear() {
-    console.log('[BEARER]', 'Auth screen willAppear')
+    console.debug('[BEARER]', 'Auth screen willAppear')
     const screen: HTMLBearerNavigatorScreenElement = this.el.shadowRoot.querySelector('#screen')
     screen.willAppear({})
   }
@@ -41,7 +41,7 @@ export class BearerNavigatorAuthScreen extends AuthenticationListener {
   }
 
   onAuthorized = () => {
-    console.log('[BEARER]', 'onAuthorized')
+    console.debug('[BEARER]', 'onAuthorized')
     this.goNext()
   }
 
@@ -50,7 +50,7 @@ export class BearerNavigatorAuthScreen extends AuthenticationListener {
   }
 
   goNext() {
-    console.log('[BEARER]', 'go to next screen')
+    console.debug('[BEARER]', 'go to next screen')
     this.scenarioAuthenticate.emit()
     this.stepCompleted.emit()
     this.scenarioAuthorized = true

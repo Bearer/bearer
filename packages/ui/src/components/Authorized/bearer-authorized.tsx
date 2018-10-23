@@ -37,7 +37,7 @@ export class BearerAuthorized extends AuthenticationListener {
   private pendingAuthorizationReject: (authorize: boolean) => void
 
   onAuthorized = () => {
-    console.log('[BEARER]', 'onAuthorized', !!this.pendingAuthorizationResolve)
+    console.debug('[BEARER]', 'onAuthorized', !!this.pendingAuthorizationResolve)
     this.isAuthorized = true
     if (this.pendingAuthorizationResolve) {
       this.pendingAuthorizationResolve(true)
@@ -46,7 +46,7 @@ export class BearerAuthorized extends AuthenticationListener {
 
   onRevoked = () => {
     this.isAuthorized = false
-    console.log('[BEARER]', 'onRevoked', !!this.pendingAuthorizationReject)
+    console.debug('[BEARER]', 'onRevoked', !!this.pendingAuthorizationReject)
     if (this.pendingAuthorizationReject) {
       this.pendingAuthorizationReject(false)
     }
@@ -58,19 +58,17 @@ export class BearerAuthorized extends AuthenticationListener {
 
   @Method()
   authenticate() {
-    console.log('[BEARER]', 'bearer-authorized', 'authenticate')
     this.authenticatePromise()
       .then(data => {
-        console.log('[BEARER]', 'bearer-authorized', 'authenticated', data)
+        console.debug('[BEARER]', 'bearer-authorized', 'authenticated', data)
       })
       .catch(error => {
-        console.log('[BEARER]', 'bearer-authenticated', 'error', error)
+        console.debug('[BEARER]', 'bearer-authenticated', 'error', error)
       })
   }
 
   @Method()
   revoke() {
-    console.log('[BEARER]', 'bearer-authorized', 'revoke')
     this.revokePromise()
   }
 

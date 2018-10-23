@@ -38,7 +38,7 @@ export function bearerRequest<TPromiseReturn>(uri: string, baseParams = {}): TBe
                 resolve(data)
               }
             })
-            .catch(e => console.log('Unexpected error 😞', e))
+            .catch(e => console.error('Unexpected error 😞', e))
         })
         .catch(() => console.error('[BEARER', 'Erro while waiting for authentication'))
     })

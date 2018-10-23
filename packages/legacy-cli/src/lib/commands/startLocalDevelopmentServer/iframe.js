@@ -54,8 +54,8 @@
     var o = n(1),
       t = n(3),
       i = n(4)
-    console.log('[BEARER]', 'Session uuid', i.Storage.cookieUserId),
-      console.log('[BEARER]', 'Storage uuid', i.Storage.storageUserId),
+    console.debug('[BEARER]', 'Session uuid', i.Storage.cookieUserId),
+      console.debug('[BEARER]', 'Storage uuid', i.Storage.storageUserId),
       i.Storage.ensureCurrentUser(),
       o.send(window.parent, t.Events.COOKIE_SETUP, {
         cookie: '' + document.cookie,
@@ -66,7 +66,7 @@
       o.send(window.parent, t.Events.SESSION_INITIALIZED),
       o.on(t.Events.HAS_AUTHORIZED, function(e) {
         return (
-          console.log('[BEARER]', 'hasAuthorized?', e.data),
+          console.debug('[BEARER]', 'hasAuthorized?', e.data),
           {
             authorized: i.Storage.hasAuthorized(e.data.scenarioId, e.data.integrationId)
           }
@@ -2935,7 +2935,7 @@
           configurable: !0
         }),
         (e.clearStorage = function() {
-          console.log('[BEARER]', 'clearing Storage'),
+          console.debug('[BEARER]', 'clearing Storage'),
             localStorage.clear(),
             localStorage.setItem('uuid', this.cookieUserId)
         }),

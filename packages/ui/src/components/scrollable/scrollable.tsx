@@ -1,4 +1,5 @@
-import { Component, Listen, Prop, State, Method, Element, TFetchBearerData } from '@bearer/core'
+import { Component, Element, Listen, Method, Prop, State, TFetchBearerData } from '@bearer/core'
+
 import { TCollectionRenderer } from './types'
 
 @Component({
@@ -15,7 +16,7 @@ export class BearerScrollable {
   @Prop()
   perPage?: number = 5
   @Prop()
-  fetcher: ({ page: number }) => Promise<TFetchBearerData>
+  fetcher: (params: { page: number} ) => Promise<TFetchBearerData>
 
   @State()
   hasMore: boolean = true
@@ -36,7 +37,7 @@ export class BearerScrollable {
       this.fetching = true
       this.fetcher({ page: this.page })
         .then(({ data }: TFetchBearerData) => {
-          console.log('[BEARER]', 'data receiced from fetcher', data)
+          console.debug('[BEARER]', 'data receiced from fetcher', data)
           this.hasMore = data.length === this.perPage
           this.collection = [...this.collection, ...data]
           this.fetching = false
