@@ -152,6 +152,7 @@ class Bearer {
       this.iframe.width = '0'
       this.iframe.height = '0'
       this.iframe.frameBorder = '0'
+      this.iframe.style.display = 'none'
       document.body.appendChild(this.iframe)
     }
   }
