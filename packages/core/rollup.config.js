@@ -3,7 +3,7 @@ import resolve from 'rollup-plugin-node-resolve'
 import commonjs from 'rollup-plugin-commonjs'
 import replace from 'rollup-plugin-replace'
 import { terser } from 'rollup-plugin-terser'
-import copy from 'rollup-plugin-copy'
+import strip from 'rollup-plugin-strip'
 
 import { version } from './package.json'
 
@@ -42,6 +42,10 @@ function plugins() {
       'process.env.BUILD': JSON.stringify(process.env.BUILD)
     })
   ]
+  if (process.env.BUILD === 'distribution') {
+    base.push(strip({}))
+  }
+
   return isProduction ? [...base, terser()] : base
 }
 
