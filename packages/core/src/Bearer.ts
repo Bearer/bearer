@@ -9,6 +9,7 @@ const BEARER_EMITTER = 'BEARER_EMITTER'
 const BEARER_WINDOW_KEY = 'BEARER'
 const BEARER_CONFIG_KEY = 'BEARER_CONFIG'
 const IFRAME_NAME = 'BEARER-IFRAME'
+const LOG_LEVEL_KEY = 'LOG_LEVEL'
 
 type TAuthorizationPayload = {
   scenarioId: string
@@ -69,23 +70,22 @@ class Bearer {
       console.warn('One instance is already configured, reaplacing it')
     }
     this._instance = new Bearer({ ...config, ...(window[BEARER_CONFIG_KEY] || {}) })
+
     return this._instance
   }
 
   static onAuthorized = (scenarioId: string, callback: (authorize: boolean) => void): EventSubscription => {
-    console.log('[BEARER]', 'register onAuthorized', scenarioId)
+    console.debug('[BEARER]', 'register onAuthorized', scenarioId)
     return Bearer.emitter.addListener(Events.AUTHORIZED, () => {
       // TODO : listen only for the scenarioId (+ setupId ?)
-      console.log('[BEARER]', 'calling authorized listener', scenarioId)
       callback(true)
     })
   }
 
   static onRevoked = (scenarioId: string, callback: (authorize: boolean) => void): EventSubscription => {
-    console.log('[BEARER]', 'register onRevoked', scenarioId)
+    console.debug('[BEARER]', 'register onRevoked', scenarioId)
     return Bearer.emitter.addListener(Events.REVOKED, () => {
       // TODO : listen only for the scenarioId (+ setupId ?)
-      console.log('[BEARER]', 'calling revoke listener', scenarioId)
       callback(false)
     })
   }
@@ -97,20 +97,18 @@ class Bearer {
 
   constructor(args) {
     this.bearerConfig = new BearerConfig(args || {})
-    console.info('[BEARER]', 'config initialized with', args)
     this.maybeInitialized = new Promise((resolve, _reject) => {
       this.allowIntegrationRequests = resolve
     })
+    window[LOG_LEVEL_KEY] = this.bearerConfig.postRobotLogLevel
     this.initSession()
   }
 
   authorized = (data: TAuthorizationPayload) => {
-    console.log('[BEARER]', 'Bearer:emitting ', { event: Events.AUTHORIZED, ...data })
     Bearer.emitter.emit(Events.AUTHORIZED, data)
   }
 
   revoked = (data: TAuthorizationPayload) => {
-    console.log('[BEARER]', 'Bearer:emitting ', { event: Events.REVOKED, ...data })
     Bearer.emitter.emit(Events.REVOKED, data)
   }
 
@@ -122,7 +120,7 @@ class Bearer {
           clientId: Bearer.config.clientId
         })
         .then(({ data, data: { authorized } }) => {
-          console.log('[BEARER]', 'HAS_AUTHORIZED response', data)
+          console.debug('[BEARER]', 'HAS_AUTHORIZED response', data)
           authorized ? resolve(true) : reject(false)
         })
         .catch(iframeError)
@@ -135,7 +133,7 @@ class Bearer {
         clientId: Bearer.config.clientId
       })
       .then(() => {
-        console.log('[BEARER]', 'Signing out')
+        console.debug('[BEARER]', 'Signing out')
       })
       .catch(iframeError)
   }
@@ -168,7 +166,7 @@ class Bearer {
   }
 
   private sessionInitialized(_event) {
-    console.log('[BEARER]', 'session initialized')
+    console.debug('[BEARER]', 'session initialized')
     this.isSessionInitialized = true
     this.allowIntegrationRequests(true)
   }

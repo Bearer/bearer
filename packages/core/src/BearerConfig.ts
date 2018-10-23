@@ -9,6 +9,7 @@ export default class BearerConfig {
   authorizationHost: string = 'BEARER_AUTHORIZATION_HOST'
   clientId: string = ''
   loadingComponent: string
+  postRobotLogLevel: 'debug'| 'info'| 'warn'| 'error'  = 'error' 
 
   constructor(options: IBearerConfig = {}) {
     this.update(options)
