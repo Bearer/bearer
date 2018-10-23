@@ -32,6 +32,7 @@ function plugins() {
     typescript({
       exclude: ['*.d.ts', '**/*.d.ts', '**/plugins.ts', '**/node_modules/**']
     }),
+    strip(),
     resolve({
       jsnext: true,
       main: true,
@@ -43,9 +44,12 @@ function plugins() {
     })
   ]
   if (process.env.BUILD === 'distribution') {
-    base.push(strip({}))
+    base.push(
+      strip({
+        include: ['**/*.js', '**/*.ts']
+      })
+    )
   }
-
   return isProduction ? [...base, terser()] : base
 }
 

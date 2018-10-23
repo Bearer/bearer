@@ -2,10 +2,6 @@ class BearerContext {
   private state: { [key: string]: any } = {}
   private subscribers: Array<any> = []
 
-  constructor() {
-    console.log('[BEARER]', 'BearerContext init')
-  }
-
   private _setupId: string
 
   get setupId(): string {
@@ -13,7 +9,6 @@ class BearerContext {
   }
 
   set setupId(setupId) {
-    console.log('[BEARER]', 'setSetupId', setupId)
     this._setupId = setupId
   }
 

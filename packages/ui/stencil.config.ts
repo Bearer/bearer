@@ -18,8 +18,8 @@ const plugins: any = [
   })
 ]
 
-if (process.env.build === 'distribution') {
-  plugins.push(strip())
+if (process.env.BUILD === 'distribution') {
+  plugins.push(strip({ include: ['**/*.js', '**/*.ts'] }))
 }
 
 export const config: Config = {
