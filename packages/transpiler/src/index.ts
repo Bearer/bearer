@@ -19,8 +19,8 @@ import GatherMetadata from './transformers/gather-metadata'
 import ImportsImporter from './transformers/imports-transformer'
 import NavigatorScreenTransformer from './transformers/navigator-screen-transformer'
 import PropBearerContextInjector from './transformers/prop-bearer-context-injector'
-import PropImporter from './transformers/prop-importer'
 import BearerReferenceIdInjector from './transformers/reference-id-injector'
+import removeBearerDecorators from './transformers/removeBearerDecorators'
 import ReplaceIntentDecorators from './transformers/replace-intent-decorator'
 import RootComponentTransformer from './transformers/root-component-transformer'
 import BearerScenarioIdInjector from './transformers/scenario-id-accessor-injector'
@@ -52,7 +52,6 @@ export default class Transpiler {
         BearerReferenceIdInjector({ verbose, metadata: this.metadata }),
         ReplaceIntentDecorators({ verbose, metadata: this.metadata }),
         BearerScenarioIdInjector({ verbose, metadata: this.metadata }),
-        PropImporter({ verbose, metadata: this.metadata }),
         PropBearerContextInjector({ verbose, metadata: this.metadata }),
         BearerStateInjector({ verbose, metadata: this.metadata }),
         NavigatorScreenTransformer({ verbose, metadata: this.metadata }),
@@ -61,6 +60,7 @@ export default class Transpiler {
         EventNameScoping({ metadata: this.metadata }),
         ComponenttagNameScoping({ verbose, metadata: this.metadata }),
         GatherIO({ verbose, metadata: this.metadata, generator: this.generator }),
+        removeBearerDecorators(),
         dumpSourceCode({
           verbose,
           srcDirectory: this.VIEWS_DIRECTORY,
