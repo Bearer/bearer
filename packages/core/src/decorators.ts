@@ -66,7 +66,7 @@ type TInputDecoratorOptions = {
   autoUpdate: boolean
 }
 
-type TInputDecorator = (options: TInputDecoratorOptions) => (target: any, key: string) => void
+type TInputDecorator = (options?: TInputDecoratorOptions) => (target: any, key: string) => void
 
 export declare const Input: TInputDecorator
 
