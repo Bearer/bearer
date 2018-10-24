@@ -24,6 +24,11 @@ import ReplaceIntentDecorators from './transformers/replace-intent-decorator'
 import RootComponentTransformer from './transformers/root-component-transformer'
 import BearerScenarioIdInjector from './transformers/scenario-id-accessor-injector'
 
+/*
+* Transformer modifying AST
+*/
+import InputDecoratorModifier from './transformers/input-decorator'
+
 import { transformer as generateManifestFile } from './transformers/generate-manifest-file'
 
 import Metadata from './metadata'
@@ -48,6 +53,7 @@ export default class Transpiler {
       before: [
         GatherMetadata({ verbose, metadata: this.metadata }),
         RootComponentTransformer({ verbose, metadata: this.metadata }),
+        InputDecoratorModifier({ verbose, metadata: this.metadata }),
         BearerReferenceIdInjector({ verbose, metadata: this.metadata }),
         ReplaceIntentDecorators({ verbose, metadata: this.metadata }),
         BearerScenarioIdInjector({ verbose, metadata: this.metadata }),

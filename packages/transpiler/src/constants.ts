@@ -20,7 +20,8 @@ export const Decorators = {
   Intent: 'Intent',
   RetrieveStateIntent: 'RetrieveStateIntent',
   SaveStateIntent: 'SaveStateIntent',
-  statePropName: 'statePropName'
+  statePropName: 'statePropName',
+  Input: 'Input'
 }
 
 export const Module = {

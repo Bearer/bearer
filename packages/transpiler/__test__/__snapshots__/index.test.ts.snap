@@ -3,7 +3,7 @@
 exports[`Transpiler integration test FullComponent.tsx match expectation 1`] = `
 Object {
   "file": "FullComponent.tsx",
-  "postContent": "import { BearerFetch, BearerState, Component, Intent, IntentType, Prop, Element, Watch, State } from '@bearer/core';
+  "postContent": "import { BearerFetch, BearerRef, BearerState, Component, Intent, IntentType, Prop, Element, Watch, State } from '@bearer/core';
 @Component({
     tag: 'full-component'
 })

@@ -6,7 +6,7 @@ import * as ts from 'typescript'
 import { Decorators } from '../constants'
 import { TransformerOptions } from '../types'
 
-import { ensureHasNotImportFromCore, hasImport } from './bearer'
+import { ensureHasNotImportFromCore } from './bearer'
 
 export default function bearerCleaning(_options: TransformerOptions = {}): ts.TransformerFactory<ts.SourceFile> {
   return _transformContext => {
@@ -15,19 +15,14 @@ export default function bearerCleaning(_options: TransformerOptions = {}): ts.Tr
     }
 
     return tsSourceFile => {
-      const cleanedSourceFile = removeRootComponentDecorator(tsSourceFile)
+      const cleanedSourceFile = removeBearerDecorators(tsSourceFile)
       return ts.visitEachChild(cleanedSourceFile, visit, _transformContext)
     }
   }
 }
 
-function removeRootComponentDecorator(tsSourceFile: ts.SourceFile) {
-  if (hasImport(tsSourceFile, Decorators.RootComponent)) {
-    return ensureRootComponentNotImported(tsSourceFile)
-  }
-  return tsSourceFile
-}
-
-export function ensureRootComponentNotImported(tsSourceFile: ts.SourceFile): ts.SourceFile {
-  return ensureHasNotImportFromCore(tsSourceFile, Decorators.RootComponent)
+function removeBearerDecorators(tsSourceFile: ts.SourceFile) {
+  return [Decorators.RootComponent, Decorators.Input].reduce((sourceFile, importerdDecorator) => {
+    return ensureHasNotImportFromCore(sourceFile, importerdDecorator)
+  }, tsSourceFile)
 }

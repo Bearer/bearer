@@ -1,15 +1,19 @@
-import {
-  BearerFetch,
-  BearerState,
-  Component,
-  Intent,
-  IntentType
-} from '@bearer/core'
+import { BearerFetch, BearerRef, BearerState, Component, Input, Intent, IntentType } from '@bearer/core'
 
 @Component({
   tag: 'full-component'
 })
 export class FullComponent {
+  @Input()
+  farmer: BearerRef<any>
+  @Input({
+    scope: 'SCOPE',
+    propName: 'goatId',
+    eventName: 'goatMilked',
+    intentName: 'retrieveGoat',
+    autoUpdate: false
+  })
+  goat: BearerRef<any>
   @Intent('ListRepositories')
   fetcher: BearerFetch
   @RetrieveStateIntent()
