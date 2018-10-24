@@ -7,3 +7,7 @@ export function hasMethodNamed(classNode: ts.ClassDeclaration, methodName: strin
 export function isMethodNamed(tsNode: ts.Node, name: string): boolean {
   return ts.isMethodDeclaration(tsNode) && (tsNode.name as ts.Identifier).escapedText === name
 }
+
+export function getNodeName(tsNode: ts.PropertyDeclaration | ts.MethodDeclaration): string {
+  return (tsNode.name as ts.Identifier).escapedText.toString()
+}

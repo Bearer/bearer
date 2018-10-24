@@ -37,6 +37,10 @@ export class FullComponent {
         {this.screenRenderer()}
       </bearer-navigator>);
     }
+    @State()
+    farmer: BearerRef<any>;
+    @State()
+    goat: BearerRef<any>;
     @Prop()
     referenceId: string;
     @Element()
