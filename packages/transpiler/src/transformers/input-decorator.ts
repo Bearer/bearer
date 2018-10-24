@@ -53,17 +53,8 @@ export default function InputDecorator(_options: TransformerOptions = {}): ts.Tr
     function injectInputStatements(tsClass: ts.ClassDeclaration, inputsMeta: Array<InputMeta>): ts.ClassDeclaration {
       const newMembers = inputsMeta.reduce(
         (members, meta) => {
-          const inputMembers = [
-            // create @State()
-            ts.createProperty(
-              [ts.createDecorator(ts.createCall(ts.createIdentifier(Decorators.State), undefined, undefined))],
-              undefined,
-              ts.createIdentifier(meta.propDeclarationName),
-              undefined,
-              meta.typeIdentifier,
-              undefined
-            )
-          ]
+          // create @State()
+          const inputMembers = [createLocalStateProperty(meta), createRefIdProp(meta)]
           return members.concat(inputMembers)
         },
         [...tsClass.members]
@@ -98,6 +89,27 @@ export default function InputDecorator(_options: TransformerOptions = {}): ts.Tr
       }
     }
   }
+}
+function createLocalStateProperty(meta: InputMeta) {
+  return ts.createProperty(
+    [ts.createDecorator(ts.createCall(ts.createIdentifier(Decorators.State), undefined, undefined))],
+    undefined,
+    ts.createIdentifier(meta.propDeclarationName),
+    undefined,
+    meta.typeIdentifier,
+    undefined
+  )
+}
+
+function createRefIdProp(meta: InputMeta) {
+  return ts.createProperty(
+    [ts.createDecorator(ts.createCall(ts.createIdentifier(Decorators.Prop), undefined, undefined))],
+    undefined,
+    ts.createIdentifier(meta.propName),
+    undefined,
+    ts.createKeywordTypeNode(ts.SyntaxKind.StringKeyword),
+    undefined
+  )
 }
 
 type InputMeta = {

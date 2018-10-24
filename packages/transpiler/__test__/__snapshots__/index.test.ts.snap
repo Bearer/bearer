@@ -39,8 +39,12 @@ export class FullComponent {
     }
     @State()
     farmer: BearerRef<any>;
+    @Prop()
+    farmerRefId: string;
     @State()
     goat: BearerRef<any>;
+    @Prop()
+    goatRefId: string;
     @Prop()
     referenceId: string;
     @Element()

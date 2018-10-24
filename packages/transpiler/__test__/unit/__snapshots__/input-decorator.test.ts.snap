@@ -20,14 +20,22 @@ type Sponge = {
 class NoOptionsComponent {
     @State()
     farmer: BearerRef<Farmer>;
+    @Prop()
+    farmerRefId: string;
     @State()
     aString: BearerRef<string>;
+    @Prop()
+    aStringRefId: string;
     @State()
     object: BearerRef<{
         title: string;
     }>;
+    @Prop()
+    objectRefId: string;
     @State()
     spongeBob: BearerRef<Sponge>;
+    @Prop()
+    spongeBobRefId: string;
     constructor() { }
     get SCENARIO_ID() { return \\"SPONGE_BOB\\"; }
     @Prop({ \\"context\\": \\"bearer\\" })
