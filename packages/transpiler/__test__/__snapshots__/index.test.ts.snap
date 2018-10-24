@@ -39,12 +39,16 @@ export class FullComponent {
     }
     @State()
     farmer: BearerRef<any>;
-    @Prop()
+    @Prop({ \\"mutable\\": true })
     farmerRefId: string;
+    @Listen(\\"bearer|SPONGE_BOB|farmer|saved\\")
+    farmerRefIdChanged(event) { this.farmerRefId = event.detail.referenceId; }
     @State()
     goat: BearerRef<any>;
-    @Prop()
+    @Prop({ \\"mutable\\": true })
     goatRefId: string;
+    @Listen(\\"bearer|SPONGE_BOB|goat|saved\\")
+    goatRefIdChanged(event) { this.goatRefId = event.detail.referenceId; }
     @Prop()
     referenceId: string;
     @Element()

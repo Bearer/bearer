@@ -1,6 +1,7 @@
 import * as ts from 'typescript'
 
 import { BEARER, Component, Decorators, Module } from '../constants'
+import { getNodeName } from '../helpers/node-helpers'
 
 // this.BEARER_SCENARIO_ID => replaced during transpilation
 export function addBearerScenarioIdAccessor(classNode: ts.ClassDeclaration, scenarioId: string): ts.ClassDeclaration {
@@ -82,8 +83,7 @@ export function addSetupIdProp(classNode: ts.ClassDeclaration): ts.ClassDeclarat
 }
 
 function methodeNamed(name: string): (node: ts.Node) => boolean {
-  return (node: ts.Node): boolean =>
-    ts.isMethodDeclaration(node) && (node as ts.MethodDeclaration).name.getText() === name
+  return (node: ts.Node): boolean => ts.isMethodDeclaration(node) && getNodeName(node) === name
 }
 
 // componentDidLoad(){ this.bearer.setupId = this.setupId }

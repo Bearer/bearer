@@ -54,7 +54,7 @@ export default function InputDecorator(_options: TransformerOptions = {}): ts.Tr
       const newMembers = inputsMeta.reduce(
         (members, meta) => {
           // create @State()
-          const inputMembers = [createLocalStateProperty(meta), createRefIdProp(meta)]
+          const inputMembers = [createLocalStateProperty(meta), createRefIdProp(meta), createEventListener(meta)]
           return members.concat(inputMembers)
         },
         [...tsClass.members]
@@ -90,6 +90,7 @@ export default function InputDecorator(_options: TransformerOptions = {}): ts.Tr
     }
   }
 }
+
 function createLocalStateProperty(meta: InputMeta) {
   return ts.createProperty(
     [ts.createDecorator(ts.createCall(ts.createIdentifier(Decorators.State), undefined, undefined))],
@@ -103,12 +104,45 @@ function createLocalStateProperty(meta: InputMeta) {
 
 function createRefIdProp(meta: InputMeta) {
   return ts.createProperty(
-    [ts.createDecorator(ts.createCall(ts.createIdentifier(Decorators.Prop), undefined, undefined))],
+    [
+      ts.createDecorator(
+        ts.createCall(ts.createIdentifier(Decorators.Prop), undefined, [
+          ts.createObjectLiteral([ts.createPropertyAssignment(ts.createLiteral('mutable'), ts.createTrue())])
+        ])
+      )
+    ],
     undefined,
     ts.createIdentifier(meta.propName),
     undefined,
     ts.createKeywordTypeNode(ts.SyntaxKind.StringKeyword),
     undefined
+  )
+}
+
+// This will make the prop change when an event is triggered
+function createEventListener(meta: InputMeta) {
+  return ts.createMethod(
+    [
+      ts.createDecorator(
+        ts.createCall(ts.createIdentifier(Decorators.Listen), undefined, [ts.createLiteral(meta.eventName)])
+      )
+    ],
+    undefined,
+    undefined,
+    `${meta.propName}Changed`,
+    undefined,
+    undefined,
+    [ts.createParameter(undefined, undefined, undefined, ts.createIdentifier('event'), undefined, undefined)],
+    undefined,
+    ts.createBlock([
+      ts.createStatement(
+        ts.createBinary(
+          ts.createPropertyAccess(ts.createThis(), meta.propName),
+          ts.SyntaxKind.EqualsToken,
+          ts.createIdentifier('event.detail.referenceId')
+        )
+      )
+    ])
   )
 }
 

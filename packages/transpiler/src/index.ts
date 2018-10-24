@@ -210,15 +210,19 @@ export default class Transpiler {
   }
 
   emitFile = (fileName: string) => {
-    const output = this.service.getEmitOutput(fileName)
+    try {
+      const output = this.service.getEmitOutput(fileName)
 
-    if (!output.emitSkipped) {
-      if (this.verbose) {
-        console.log(`Emitting ${fileName}`)
+      if (!output.emitSkipped) {
+        if (this.verbose) {
+          console.log(`Emitting ${fileName}`)
+        }
+      } else {
+        console.log(`Emitting ${fileName} failed`)
+        this.logErrors(fileName)
       }
-    } else {
-      console.log(`Emitting ${fileName} failed`)
-      this.logErrors(fileName)
+    } catch (e) {
+      console.error('Something wrong happened\n', e)
     }
   }
 

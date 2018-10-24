@@ -20,22 +20,30 @@ type Sponge = {
 class NoOptionsComponent {
     @State()
     farmer: BearerRef<Farmer>;
-    @Prop()
+    @Prop({ \\"mutable\\": true })
     farmerRefId: string;
+    @Listen(\\"bearer|SPONGE_BOB|farmer|saved\\")
+    farmerRefIdChanged(event) { this.farmerRefId = event.detail.referenceId; }
     @State()
     aString: BearerRef<string>;
-    @Prop()
+    @Prop({ \\"mutable\\": true })
     aStringRefId: string;
+    @Listen(\\"bearer|SPONGE_BOB|aString|saved\\")
+    aStringRefIdChanged(event) { this.aStringRefId = event.detail.referenceId; }
     @State()
     object: BearerRef<{
         title: string;
     }>;
-    @Prop()
+    @Prop({ \\"mutable\\": true })
     objectRefId: string;
+    @Listen(\\"bearer|SPONGE_BOB|object|saved\\")
+    objectRefIdChanged(event) { this.objectRefId = event.detail.referenceId; }
     @State()
     spongeBob: BearerRef<Sponge>;
-    @Prop()
+    @Prop({ \\"mutable\\": true })
     spongeBobRefId: string;
+    @Listen(\\"bearer|SPONGE_BOB|spongeBob|saved\\")
+    spongeBobRefIdChanged(event) { this.spongeBobRefId = event.detail.referenceId; }
     constructor() { }
     get SCENARIO_ID() { return \\"SPONGE_BOB\\"; }
     @Prop({ \\"context\\": \\"bearer\\" })
