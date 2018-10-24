@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Input decorator units complete options match snapshot 1`] = `
+Object {
+  "file": "complete-options.tsx",
+  "postContent": "import { BearerRef, Component, Prop } from '@bearer/core';
+type Farmer = {
+    id: string;
+    name: string;
+};
+type Sponge = {
+    id: unknown;
+    name: unknown;
+};
+@Component({
+    tag: \\"no-options-action\\",
+    styleUrl: \\"noOptions.css\\",
+    shadow: true
+})
+class NoOptionsComponent {
+    constructor() { }
+    get SCENARIO_ID() { return \\"SPONGE_BOB\\"; }
+    @Prop({ \\"context\\": \\"bearer\\" })
+    bearerContext: any;
+    @Prop()
+    setupId: string;
+    componentDidLoad() { if (this.setupId) {
+        this.bearerContext.setupId = this.setupId;
+    } }
+}
+",
+}
+`;
