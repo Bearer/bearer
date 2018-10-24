@@ -20,7 +20,8 @@ export class FeatDisplayRootComponent {
     eventFromAnotherRootComponentHandler() { }
     @Listen(\\"body:bearer|SPONGE_BOB|click\\")
     clickHandler() { }
-    constructor() { }
+    constructor() {
+    }
     get SCENARIO_ID() { return \\"SPONGE_BOB\\"; }
     @Prop({ \\"context\\": \\"bearer\\" })
     bearerContext: any;
@@ -51,7 +52,8 @@ export class SimpleComponent {
     // prevent Alice to listen on anything else than her scenario's events
     @Listen(\\"body:bearer|SPONGE_BOB|click\\")
     clickHandler() { }
-    constructor() { }
+    constructor() {
+    }
     get SCENARIO_ID() { return \\"SPONGE_BOB\\"; }
     @Prop({ \\"context\\": \\"bearer\\" })
     bearerContext: any;

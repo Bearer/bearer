@@ -24,12 +24,28 @@ class NoOptionsComponent {
     farmerRefId: string;
     @Listen(\\"bearer|SPONGE_BOB|farmer|saved\\")
     farmerRefIdChanged(event) { this.farmerRefId = event.detail.referenceId; }
+    _loadFarmer = () => {
+        this.fetcherGetFarmer().then(data => { this.farmer = data; });
+    };
+    private fetcherGetFarmer;
+    @Watch(\\"farmerRefId\\")
+    _watchFarmer(newValueName: string) { if (newValueName) {
+        this._loadFarmer();
+    } }
     @State()
     aString: BearerRef<string>;
     @Prop({ \\"mutable\\": true })
     aStringRefId: string;
     @Listen(\\"bearer|SPONGE_BOB|aString|saved\\")
     aStringRefIdChanged(event) { this.aStringRefId = event.detail.referenceId; }
+    _loadAString = () => {
+        this.fetcherGetAString().then(data => { this.aString = data; });
+    };
+    private fetcherGetAString;
+    @Watch(\\"aStringRefId\\")
+    _watchAString(newValueName: string) { if (newValueName) {
+        this._loadAString();
+    } }
     @State()
     object: BearerRef<{
         title: string;
@@ -38,13 +54,34 @@ class NoOptionsComponent {
     objectRefId: string;
     @Listen(\\"bearer|SPONGE_BOB|object|saved\\")
     objectRefIdChanged(event) { this.objectRefId = event.detail.referenceId; }
+    _loadObject = () => {
+        this.fetcherGetObject().then(data => { this.object = data; });
+    };
+    private fetcherGetObject;
+    @Watch(\\"objectRefId\\")
+    _watchObject(newValueName: string) { if (newValueName) {
+        this._loadObject();
+    } }
     @State()
     spongeBob: BearerRef<Sponge>;
     @Prop({ \\"mutable\\": true })
     spongeBobRefId: string;
     @Listen(\\"bearer|SPONGE_BOB|spongeBob|saved\\")
     spongeBobRefIdChanged(event) { this.spongeBobRefId = event.detail.referenceId; }
-    constructor() { }
+    _loadSpongeBob = () => {
+        this.fetcherGetSpongeBob().then(data => { this.spongeBob = data; });
+    };
+    private fetcherGetSpongeBob;
+    @Watch(\\"spongeBobRefId\\")
+    _watchSpongeBob(newValueName: string) { if (newValueName) {
+        this._loadSpongeBob();
+    } }
+    constructor() {
+        Intent(\\"getFarmer\\")(this, \\"fetcherGetFarmer\\");
+        Intent(\\"getAString\\")(this, \\"fetcherGetAString\\");
+        Intent(\\"getObject\\")(this, \\"fetcherGetObject\\");
+        Intent(\\"getSpongeBob\\")(this, \\"fetcherGetSpongeBob\\");
+    }
     get SCENARIO_ID() { return \\"SPONGE_BOB\\"; }
     @Prop({ \\"context\\": \\"bearer\\" })
     bearerContext: any;

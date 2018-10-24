@@ -4,7 +4,8 @@ exports[`Bearer State Injector do not process match snapshot 1`] = `
 Object {
   "file": "do-not-process.ts",
   "postContent": "class DoNotProcess {
-    constructor() { }
+    constructor() {
+    }
 }
 ",
 }
@@ -21,7 +22,8 @@ class UpdateExistingPropertyWatcher {
     @BearerState({ statePropName: 'repo' })
     @State()
     repository: {} = {};
-    constructor() { }
+    constructor() {
+    }
     @Prop({ \\"context\\": \\"bearer\\" })
     bearerContext: any;
     @Watch('pullRequests')
@@ -47,7 +49,8 @@ class UpdateExistingComponentLifecycleMethods {
     // TODO: handle these use cases
     componentWillLoad() { this.bearerContext.subscribe(this); console.log('componentWillLoad'); }
     componentDidUnload() { this.bearerContext.unsubscribe(this); console.log('componentDidUnload'); }
-    constructor() { }
+    constructor() {
+    }
     @Prop({ \\"context\\": \\"bearer\\" })
     bearerContext: any;
     @Watch(\\"pullRequests\\")
@@ -66,7 +69,8 @@ class AddDecoratorOnTranspile {
     @BearerState()
     @State()
     pullRequests: Array<any> = [];
-    constructor() { }
+    constructor() {
+    }
     @Prop({ \\"context\\": \\"bearer\\" })
     bearerContext: any;
     @Watch(\\"pullRequests\\")
@@ -89,7 +93,8 @@ class HasBearerContextInjected {
     attachPullRequests: any[] = [];
     @Prop({ context: 'bearer' })
     bearerContext: any;
-    constructor() { }
+    constructor() {
+    }
     @Watch(\\"attachPullRequests\\")
     _notifyBearerStateHandler_attachPullRequests(newValue: any) { this.bearerContext.update(\\"attachPullRequests\\", newValue); }
     componentWillLoad() { this.bearerContext.subscribe(this); }

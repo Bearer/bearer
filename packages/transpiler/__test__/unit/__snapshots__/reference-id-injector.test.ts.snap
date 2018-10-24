@@ -11,7 +11,8 @@ export class WithDeprecatedRetrieveStateIntent {
     referenceId: string;
     @Element()
     el: HTMLElement;
-    constructor() { }
+    constructor() {
+    }
 }
 ",
 }
@@ -28,7 +29,8 @@ export class WithDeprecatedSaveStateIntent {
     referenceId: string;
     @Element()
     el: HTMLElement;
-    constructor() { }
+    constructor() {
+    }
 }
 ",
 }
@@ -42,7 +44,9 @@ class DoNothing {
     @OtherDecorator
     other: any;
     private fetcher: BearerFetch;
-    constructor() { Intent('MyIntent')(this, \\"fetcher\\"); }
+    constructor() {
+        Intent('MyIntent')(this, \\"fetcher\\");
+    }
 }
 ",
 }
@@ -58,7 +62,9 @@ export class IntentDecorated {
     referenceId: string;
     @Element()
     el: HTMLElement;
-    constructor() { Intent('saveState', IntentType.RetrieveState)(this, \\"fetcher\\"); }
+    constructor() {
+        Intent('saveState', IntentType.RetrieveState)(this, \\"fetcher\\");
+    }
 }
 ",
 }
@@ -74,7 +80,9 @@ export class IntentDecorated {
     referenceId: string;
     @Element()
     el: HTMLElement;
-    constructor() { Intent('saveState', IntentType.SaveState)(this, \\"fetcher\\"); }
+    constructor() {
+        Intent('saveState', IntentType.SaveState)(this, \\"fetcher\\");
+    }
 }
 ",
 }

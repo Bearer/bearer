@@ -32,14 +32,18 @@ export default function InputDecorator(_options: TransformerOptions = {}): ts.Tr
       const visitor = (tsNode: ts.Node) => {
         if (ts.isPropertyDeclaration(tsNode) && hasDecoratorNamed(tsNode, Decorators.Input)) {
           const name = getNodeName(tsNode)
+          const capitalizedName = name.charAt(0).toUpperCase() + name.slice(1)
           inputs.push({
             propDeclarationName: name,
             scope: 'string',
             propName: `${name}RefId`,
             eventName: `${name}:saved`,
-            intentName: `get${name}`,
+            intentName: `get${capitalizedName}`,
+            intentMethodName: `fetcherGet${capitalizedName}`,
             autoUpdate: true,
-            typeIdentifier: tsNode.type
+            loadMethodName: `_load${capitalizedName}`,
+            typeIdentifier: tsNode.type,
+            watcherName: `_watch${capitalizedName}`
           })
         }
         return ts.visitEachChild(tsNode, visitor, _transformContext)
@@ -54,7 +58,14 @@ export default function InputDecorator(_options: TransformerOptions = {}): ts.Tr
       const newMembers = inputsMeta.reduce(
         (members, meta) => {
           // create @State()
-          const inputMembers = [createLocalStateProperty(meta), createRefIdProp(meta), createEventListener(meta)]
+          const inputMembers = [
+            createLocalStateProperty(meta),
+            createRefIdProp(meta),
+            createEventListener(meta),
+            createLoadResourceMethod(meta),
+            createFetcher(meta),
+            createRefIdWatcher(meta)
+          ]
           return members.concat(inputMembers)
         },
         [...tsClass.members]
@@ -146,6 +157,102 @@ function createEventListener(meta: InputMeta) {
   )
 }
 
+function createLoadResourceMethod(meta: InputMeta) {
+  const intentCall = ts.createCall(
+    ts.createPropertyAccess(ts.createThis(), meta.intentMethodName),
+    undefined,
+    undefined
+  )
+  const udapteState = ts.createArrowFunction(
+    undefined,
+    undefined,
+    [ts.createParameter(undefined, undefined, undefined, 'data', undefined, undefined, undefined)],
+    undefined,
+    undefined,
+    ts.createBlock([
+      ts.createStatement(
+        ts.createBinary(
+          ts.createPropertyAccess(ts.createThis(), meta.propDeclarationName),
+          ts.SyntaxKind.EqualsToken,
+          ts.createIdentifier('data')
+        )
+      )
+    ])
+  )
+  const promiseHandler = ts.createCall(ts.createPropertyAccess(intentCall, 'then'), undefined, [udapteState])
+  return ts.createProperty(
+    undefined,
+    undefined,
+    meta.loadMethodName,
+    undefined,
+    undefined,
+    ts.createArrowFunction(
+      undefined,
+      undefined,
+      undefined,
+      undefined,
+      undefined,
+      ts.createBlock([ts.createStatement(promiseHandler)], true)
+    )
+  )
+}
+function createFetcher(meta: InputMeta) {
+  return ts.createProperty(
+    [
+      ts.createDecorator(
+        ts.createCall(ts.createIdentifier(Decorators.Intent), undefined, [ts.createLiteral(meta.intentName)])
+      )
+    ],
+    undefined,
+    meta.intentMethodName,
+    undefined,
+    undefined,
+    undefined
+  )
+}
+function createRefIdWatcher(meta: InputMeta) {
+  const newValueName = 'newValueName'
+  return ts.createMethod(
+    [
+      ts.createDecorator(
+        ts.createCall(ts.createIdentifier(Decorators.Watch), undefined, [ts.createLiteral(meta.propName)])
+      )
+    ],
+    undefined,
+    undefined,
+    meta.watcherName,
+    undefined,
+    undefined,
+    [
+      ts.createParameter(
+        undefined,
+        undefined,
+        undefined,
+        newValueName,
+        undefined,
+        ts.createKeywordTypeNode(ts.SyntaxKind.StringKeyword),
+        undefined
+      )
+    ],
+    undefined,
+    ts.createBlock([
+      ts.createIf(
+        ts.createIdentifier(newValueName),
+        ts.createBlock([
+          ts.createStatement(
+            ts.createCall(ts.createPropertyAccess(ts.createThis(), meta.loadMethodName), undefined, undefined)
+          )
+        ])
+      )
+    ])
+  )
+}
+
+// // Nive to have
+// function createLoadingProp(meta: InputMeta){
+
+// }
+
 type InputMeta = {
   propDeclarationName: string
   scope: string
@@ -154,4 +261,7 @@ type InputMeta = {
   intentName: string
   autoUpdate: boolean
   typeIdentifier?: ts.TypeNode
+  loadMethodName: string
+  intentMethodName: string
+  watcherName: string
 }

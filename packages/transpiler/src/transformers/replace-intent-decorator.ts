@@ -21,6 +21,7 @@ import * as ts from 'typescript'
 
 import { Decorators } from '../constants'
 import { hasDecoratorNamed } from '../helpers/decorator-helpers'
+import { getNodeName } from '../helpers/node-helpers'
 import { TransformerOptions } from '../types'
 
 function appendConstructor(node: ts.ClassDeclaration): ts.Node {
@@ -123,12 +124,12 @@ export default function ComponentTransformer({  }: TransformerOptions = {}): ts.
       registeredIntents: Array<ts.PropertyDeclaration>
     ): ts.Node {
       const intentCalls: Array<ts.Statement> = registeredIntents.map((intent: ts.PropertyDeclaration) => {
-        const call: ts.CallExpression = intent.decorators[0].getChildAt(1) as ts.CallExpression
+        const call: ts.CallExpression = intent.decorators[0].expression as ts.CallExpression
         return ts.createStatement(
           ts.createCall(
             ts.createCall(ts.createIdentifier(Decorators.Intent) as ts.Expression, undefined, call.arguments),
             undefined,
-            [ts.createThis(), ts.createLiteral(intent.name.getText())]
+            [ts.createThis(), ts.createLiteral(getNodeName(intent))]
           )
         )
       })
@@ -137,7 +138,7 @@ export default function ComponentTransformer({  }: TransformerOptions = {}): ts.
         node.decorators,
         node.modifiers,
         node.parameters,
-        ts.updateBlock(node.body, [...node.body.statements, ...intentCalls])
+        ts.createBlock([...node.body.statements, ...intentCalls], true)
       )
     }
   }

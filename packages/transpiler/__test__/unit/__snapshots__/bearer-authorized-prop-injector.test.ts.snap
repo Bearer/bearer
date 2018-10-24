@@ -16,7 +16,8 @@ class RootComponent {
     render() {
         return <div />;
     }
-    constructor() { }
+    constructor() {
+    }
     get SCENARIO_ID() { return \\"SPONGE_BOB\\"; }
     @Prop({ \\"context\\": \\"bearer\\" })
     bearerContext: any;
@@ -33,7 +34,8 @@ class SubComponent {
     render() {
         return <div title=\\"spongeBNob\\"/>;
     }
-    constructor() { }
+    constructor() {
+    }
     get SCENARIO_ID() { return \\"SPONGE_BOB\\"; }
     @Prop({ \\"context\\": \\"bearer\\" })
     bearerContext: any;
@@ -62,7 +64,8 @@ class RootComponent {
         <bearer-navigator-auth-screen scenarioId=\\"SPONGE_BOB\\"/>
       </bearer-navigator>);
     }
-    constructor() { }
+    constructor() {
+    }
     get SCENARIO_ID() { return \\"SPONGE_BOB\\"; }
     @Prop({ \\"context\\": \\"bearer\\" })
     bearerContext: any;
@@ -81,7 +84,8 @@ class SimpleComponent {
         <bearer-navigator-auth-screen scenarioId=\\"SPONGE_BOB\\"/>
       </bearer-navigator>);
     }
-    constructor() { }
+    constructor() {
+    }
     get SCENARIO_ID() { return \\"SPONGE_BOB\\"; }
     @Prop({ \\"context\\": \\"bearer\\" })
     bearerContext: any;
@@ -98,7 +102,8 @@ class WithBearerAuthorizedComponent {
     render() {
         return <bearer-authorized renderAuthorized={() => <div />} renderUnauthorized={() => <span />} scenarioId=\\"SPONGE_BOB\\"/>;
     }
-    constructor() { }
+    constructor() {
+    }
     get SCENARIO_ID() { return \\"SPONGE_BOB\\"; }
     @Prop({ \\"context\\": \\"bearer\\" })
     bearerContext: any;
@@ -115,7 +120,8 @@ class OverrideValueGiven {
     render() {
         return (<bearer-authorized renderAuthorized={() => <div />} renderUnauthorized={() => <span />} scenarioId=\\"SPONGE_BOB\\"/>);
     }
-    constructor() { }
+    constructor() {
+    }
     get SCENARIO_ID() { return \\"SPONGE_BOB\\"; }
     @Prop({ \\"context\\": \\"bearer\\" })
     bearerContext: any;

@@ -11,7 +11,8 @@ class AddHTMLElementReference {
     referenceId: string;
     @Element()
     el: HTMLElement;
-    constructor() { }
+    constructor() {
+    }
 }
 ",
 }
@@ -29,7 +30,8 @@ class AddHTMLElementReference {
     @Prop()
     referenceId: string;
     get el(): HTMLElement { return this.element; }
-    constructor() { }
+    constructor() {
+    }
 }
 ",
 }
@@ -39,7 +41,8 @@ exports[`Bearer State Event Injector do nothing match snapshot 1`] = `
 Object {
   "file": "do-nothing.tsx",
   "postContent": "class DoNotProcess {
-    constructor() { }
+    constructor() {
+    }
 }
 ",
 }
@@ -56,7 +59,8 @@ class AddHTMLElementReference {
     fetcher: BearerFetch;
     @Prop()
     referenceId: string;
-    constructor() { }
+    constructor() {
+    }
 }
 ",
 }
