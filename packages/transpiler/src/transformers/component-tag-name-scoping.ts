@@ -53,6 +53,9 @@ export default function ComponentTagNameScoping({
     }
 
     return tsSourceFile => {
+      if (tsSourceFile.isDeclarationFile) {
+        return tsSourceFile
+      }
       return ts.visitEachChild(tsSourceFile, visit, _transformContext)
     }
   }
