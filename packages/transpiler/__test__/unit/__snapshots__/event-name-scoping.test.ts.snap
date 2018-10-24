@@ -42,7 +42,7 @@ Object {
     tag: 'event'
 })
 export class SimpleComponent {
-    @Event({ eventName: \\"bearer|SPONGE_BOB|no-group|mustBeScopedEvent\\" })
+    @Event({ eventName: \\"bearer|SPONGE_BOB|global|mustBeScopedEvent\\" })
     mustBeScopedEvent: EventEmitter;
     @Listen(\\"bearer|SPONGE_BOB|config|saved\\")
     eventHandler() { }

@@ -66,7 +66,7 @@ export default function EventNameScoping({ metadata }: TransformerOptions = {}):
   return _transformContext => {
     return tsSourceFile => {
       const meta = metadata.findComponentFrom(tsSourceFile)
-      const groupName = (meta && meta.group) || 'no-group'
+      const groupName = (meta && meta.group) || 'global'
 
       function visit(tsNode: ts.Node): ts.VisitResult<ts.Node> {
         if (ts.isPropertyDeclaration(tsNode) && hasDecoratorNamed(tsNode, Decorators.Event)) {
