@@ -11,16 +11,15 @@ const settings: TJS.PartialArgs = {
 }
 
 import BearerAuthorizedRequiredProp from './transformers/bearer-authorized-scenario-id-prop-injector'
+import bearerCleaning from './transformers/bearer-cleaning'
 import BearerStateInjector from './transformers/bearer-state-injector'
 import ComponenttagNameScoping from './transformers/component-tag-name-scoping'
 import EventNameScoping from './transformers/event-name-scoping'
 import GatherIO from './transformers/gather-input-output'
 import GatherMetadata from './transformers/gather-metadata'
-import ImportsImporter from './transformers/imports-transformer'
 import NavigatorScreenTransformer from './transformers/navigator-screen-transformer'
 import PropBearerContextInjector from './transformers/prop-bearer-context-injector'
 import BearerReferenceIdInjector from './transformers/reference-id-injector'
-import removeBearerDecorators from './transformers/removeBearerDecorators'
 import ReplaceIntentDecorators from './transformers/replace-intent-decorator'
 import RootComponentTransformer from './transformers/root-component-transformer'
 import BearerScenarioIdInjector from './transformers/scenario-id-accessor-injector'
@@ -55,12 +54,11 @@ export default class Transpiler {
         PropBearerContextInjector({ verbose, metadata: this.metadata }),
         BearerStateInjector({ verbose, metadata: this.metadata }),
         NavigatorScreenTransformer({ verbose, metadata: this.metadata }),
-        ImportsImporter({ verbose, metadata: this.metadata }),
         BearerAuthorizedRequiredProp({ verbose }),
         EventNameScoping({ metadata: this.metadata }),
         ComponenttagNameScoping({ verbose, metadata: this.metadata }),
         GatherIO({ verbose, metadata: this.metadata, generator: this.generator }),
-        removeBearerDecorators(),
+        bearerCleaning({ verbose, metadata: this.metadata }),
         dumpSourceCode({
           verbose,
           srcDirectory: this.VIEWS_DIRECTORY,

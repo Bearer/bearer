@@ -1,3 +1,4 @@
+import { Component, RootComponent } from '@bearer/core'
 @RootComponent({
   group: 'feature',
   role: 'action'
@@ -30,12 +31,7 @@ class SimpleComponent {
 })
 class WithBearerAuthorizedComponent {
   render() {
-    return (
-      <bearer-authorized
-        renderAuthorized={() => <div />}
-        renderUnauthorized={() => <span />}
-      />
-    )
+    return <bearer-authorized renderAuthorized={() => <div />} renderUnauthorized={() => <span />} />
   }
 }
 
@@ -45,11 +41,7 @@ class WithBearerAuthorizedComponent {
 class OverrideValueGiven {
   render() {
     return (
-      <bearer-authorized
-        renderAuthorized={() => <div />}
-        renderUnauthorized={() => <span />}
-        scenarioId="spongebob"
-      />
+      <bearer-authorized renderAuthorized={() => <div />} renderUnauthorized={() => <span />} scenarioId="spongebob" />
     )
   }
 }

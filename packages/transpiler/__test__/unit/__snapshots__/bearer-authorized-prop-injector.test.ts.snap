@@ -3,7 +3,7 @@
 exports[`bearer-authorized required property do nothing match snapshot 1`] = `
 Object {
   "file": "do-nothing.tsx",
-  "postContent": "import { Prop } from \\"@bearer/core\\";
+  "postContent": "import { Component, Prop } from '@bearer/core';
 @Component({
     tag: \\"feature-action\\",
     styleUrl: \\"feature.css\\",
@@ -50,7 +50,7 @@ class SubComponent {
 exports[`bearer-authorized required property inject prop to tsx element match snapshot 1`] = `
 Object {
   "file": "inject-prop-to-tsx-element.tsx",
-  "postContent": "import { Prop } from \\"@bearer/core\\";
+  "postContent": "import { Component, Prop } from '@bearer/core';
 @Component({
     tag: \\"feature-action\\",
     styleUrl: \\"feature.css\\",
@@ -96,7 +96,7 @@ class SimpleComponent {
 })
 class WithBearerAuthorizedComponent {
     render() {
-        return (<bearer-authorized renderAuthorized={() => <div />} renderUnauthorized={() => <span />} scenarioId=\\"SPONGE_BOB\\"/>);
+        return <bearer-authorized renderAuthorized={() => <div />} renderUnauthorized={() => <span />} scenarioId=\\"SPONGE_BOB\\"/>;
     }
     constructor() { }
     get SCENARIO_ID() { return \\"SPONGE_BOB\\"; }

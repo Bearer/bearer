@@ -213,7 +213,7 @@ function ensureHasImportFromCore(tsSourceFile: ts.SourceFile, importName: string
   )
 }
 
-function ensureHasNotImportFromCore(tsSourceFile: ts.SourceFile, importName: string): ts.SourceFile {
+export function ensureHasNotImportFromCore(tsSourceFile: ts.SourceFile, importName: string): ts.SourceFile {
   if (!hasImport(tsSourceFile, importName)) {
     return tsSourceFile
   }
@@ -279,10 +279,6 @@ export function ensurePropImported(tsSourceFile: ts.SourceFile): ts.SourceFile {
 
 export function ensureComponentImported(tsSourceFile: ts.SourceFile): ts.SourceFile {
   return ensureHasImportFromCore(tsSourceFile, Decorators.Component)
-}
-
-export function ensureRootComponentNotImported(tsSourceFile: ts.SourceFile): ts.SourceFile {
-  return ensureHasNotImportFromCore(tsSourceFile, Decorators.RootComponent)
 }
 
 export function ensureStateImported(tsSourceFile: ts.SourceFile): ts.SourceFile {

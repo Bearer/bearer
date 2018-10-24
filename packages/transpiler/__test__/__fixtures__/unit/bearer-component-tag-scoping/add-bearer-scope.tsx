@@ -1,3 +1,5 @@
+import { Component, RootComponent } from '@bearer/core'
+
 @RootComponent({
   group: 'feature',
   role: 'action'
