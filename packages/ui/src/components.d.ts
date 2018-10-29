@@ -65,6 +65,7 @@ declare global {
       'content': any;
       'disabled': boolean;
       'kind': 'primary' | 'secondary' | 'success' | 'danger' | 'warning' | 'info' | 'light' | 'dark';
+      'outline': boolean;
       'size': 'md' | 'sm' | 'lg';
     }
 
@@ -519,6 +520,7 @@ declare global {
       'content'?: any;
       'disabled'?: boolean;
       'kind'?: 'primary' | 'secondary' | 'success' | 'danger' | 'warning' | 'info' | 'light' | 'dark';
+      'outline'?: boolean;
       'size'?: 'md' | 'sm' | 'lg';
     }
 

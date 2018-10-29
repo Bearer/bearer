@@ -3,9 +3,33 @@
 .btn-light {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.14);
   border-radius: 2px;
-  border: 1px solid #ebebeb;
+  border: 1px solid #f8ecec;
   background-color: #ffffff;
   font-family: inherit;
   font-weight: 500;
   color: #030d36;
+
+  &:hover {
+    background-color: #f6f7f9;
+    border-color: #e7ebee;
+    box-shadow: 0 3px 7px rgba(0, 0, 0, 0.14);
+  }
+
+  &:active {
+    background-color: #e7ebee;
+    border-color: #dae0e5;
+  }
+}
+
+.btn-outline-danger {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.14);
+  border-radius: 2px;
+  font-family: inherit;
+  font-weight: inherit;
+  color: rgb(224, 26, 89);
+
+  &:hover {
+    background-color: rgb(224, 26, 89);
+    border-color: rgb(224, 26, 89);
+  }
 }
