@@ -1,6 +1,8 @@
 @import '../../node_modules/bootstrap/scss/buttons';
 
-.btn-light {
+.btn-light,
+.btn-success,
+.btn-danger {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.14);
   border-radius: 2px;
   border: 1px solid #ebebeb;
@@ -10,14 +12,35 @@
   color: #030d36;
 
   &:hover {
-    background-color: #f6f7f9;
+    background-color: hsl(220, 20%, 97%);
     border-color: #e7ebee;
     box-shadow: 0 3px 7px rgba(0, 0, 0, 0.14);
   }
 
+  &:not(:disabled):not(.disabled):active,
   &:active {
     background-color: #e7ebee;
     border-color: #dae0e5;
+  }
+}
+
+.btn-success {
+  color: #28a745;
+
+  &:hover,
+  &:not(:disabled):not(.disabled):active,
+  &:active {
+    color: #28a745;
+  }
+}
+
+.btn-danger {
+  color: rgb(224, 26, 89);
+
+  &:hover,
+  &:not(:disabled):not(.disabled):active,
+  &:active {
+    color: rgb(224, 26, 89);
   }
 }
 
