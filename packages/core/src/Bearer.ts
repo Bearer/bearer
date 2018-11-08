@@ -16,7 +16,7 @@ type TAuthorizationPayload = {
   authIdentifier?: string
 }
 
-class Bearer {
+export default class Bearer {
   private static set _instance(bearerInstance: Bearer) {
     if (window[BEARER_WINDOW_INSTANCE_KEY]) {
       console.warn('[BEARER]', 'Replacing bearer instance')
@@ -176,5 +176,3 @@ class Bearer {
 function iframeError(e) {
   console.error('[BEARER]', 'Error contacting iframe', e)
 }
-
-export default Bearer

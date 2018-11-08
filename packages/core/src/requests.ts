@@ -11,6 +11,14 @@ const defaultInit = {
 
 export type TBearerRequest<T> = (params: any, init?: any) => Promise<T>
 
+function getClientId(): string {
+  const clientId = Bearer.config.clientId
+  if (process.env.NODE_ENV !== 'production') {
+    console.debug('[BEARER]', 'No clientId provided, intent')
+  }
+  return clientId
+}
+
 export function bearerRequest<TPromiseReturn>(uri: string, baseParams = {}): TBearerRequest<TPromiseReturn> {
   const url = `${Bearer.config.integrationHost}api/v1/${uri}`
 
@@ -21,7 +29,7 @@ export function bearerRequest<TPromiseReturn>(uri: string, baseParams = {}): TBe
           const sentParams = {
             ...params,
             ...baseParams,
-            clientId: Bearer.config.clientId
+            clientId: getClientId()
           }
 
           const query = Object.keys(sentParams).map(key => [key, sentParams[key]].join('='))

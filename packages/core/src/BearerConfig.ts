@@ -1,15 +1,20 @@
+import { BearerWindow } from '@bearer/types'
+declare const window: BearerWindow
+
 export interface IBearerConfig {
   integrationHost?: string
-  clientId?: string
   loadingComponent?: string
 }
 
 export default class BearerConfig {
   integrationHost: string = 'BEARER_INTEGRATION_HOST'
   authorizationHost: string = 'BEARER_AUTHORIZATION_HOST'
-  clientId: string = ''
   loadingComponent: string
-  postRobotLogLevel: 'debug'| 'info'| 'warn'| 'error'  = 'error' 
+  postRobotLogLevel: 'debug' | 'info' | 'warn' | 'error' = 'error'
+
+  get clientId(): string {
+    return window.bearer && window.bearer.clientId
+  }
 
   constructor(options: IBearerConfig = {}) {
     this.update(options)

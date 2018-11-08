@@ -16,7 +16,7 @@ const commonParams = {
 
 describe('Intent decorator', () => {
   beforeAll(() => {
-    Bearer.init({ integrationHost: process.env.API_HOST, clientId: '42' })
+    Bearer.init({ integrationHost: process.env.API_HOST })
     Bearer.instance.allowIntegrationRequests()
   })
 
@@ -49,6 +49,7 @@ describe('Intent decorator', () => {
 
     it('uses FetchData', async () => {
       const success = jest.fn()
+      window.bearer = { clientId: 42 }
 
       await decoratedInstance
         .getCollectionIntentProp({ page: 1 })

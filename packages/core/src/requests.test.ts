@@ -10,7 +10,7 @@ const setupId = '1234'
 describe('requests', () => {
   beforeEach(() => {
     fetch.resetMocks()
-    Bearer.init({ integrationHost: process.env.API_HOST, clientId: '42' })
+    Bearer.init({ integrationHost: process.env.API_HOST })
     Bearer.instance.allowIntegrationRequests()
   })
 
@@ -24,6 +24,7 @@ describe('requests', () => {
     it('calls host + intentName + params', async () => {
       const aRequest = intentRequest({ intentName, scenarioId, setupId })
       fetch.mockResponseOnce(JSON.stringify({}))
+      window.bearer = { clientId: 42 }
 
       await aRequest({ page: 1 }, {})
 

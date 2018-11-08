@@ -61,6 +61,7 @@
     "ts-jest": "^22.4.6"
   },
   "dependencies": {
+    "@bearer/types": "^0.71.0",
     "@stencil/core": "0.11.2",
     "fbemitter": "^2.1.1",
     "post-robot": "^8.0.26",
