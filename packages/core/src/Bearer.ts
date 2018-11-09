@@ -12,8 +12,10 @@ const IFRAME_NAME = 'BEARER-IFRAME'
 const LOG_LEVEL_KEY = 'LOG_LEVEL'
 
 type TAuthorizationPayload = {
-  scenarioId: string
-  authIdentifier?: string
+  data: {
+    scenarioId: string
+    authIdentifier?: string
+  }
 }
 
 export default class Bearer {
@@ -75,18 +77,26 @@ export default class Bearer {
   }
 
   static onAuthorized = (scenarioId: string, callback: (authorize: boolean) => void): EventSubscription => {
-    console.debug('[BEARER]', 'register onAuthorized', scenarioId)
-    return Bearer.emitter.addListener(Events.AUTHORIZED, () => {
-      // TODO : listen only for the scenarioId (+ setupId ?)
-      callback(true)
+    console.debug('[BEARER]', 'onAuthorized', 'register', scenarioId)
+    return Bearer.emitter.addListener(Events.AUTHORIZED, (data: TAuthorizationPayload) => {
+      if (data.data.scenarioId === scenarioId) {
+        console.debug('[BEARER]', 'onAuthorized', 'authorized', scenarioId)
+        callback(true)
+      } else {
+        console.debug('[BEARER]', 'onAuthorized', 'different scenarioId', scenarioId)
+      }
     })
   }
 
   static onRevoked = (scenarioId: string, callback: (authorize: boolean) => void): EventSubscription => {
     console.debug('[BEARER]', 'register onRevoked', scenarioId)
-    return Bearer.emitter.addListener(Events.REVOKED, () => {
-      // TODO : listen only for the scenarioId (+ setupId ?)
-      callback(false)
+    return Bearer.emitter.addListener(Events.REVOKED, (data: TAuthorizationPayload) => {
+      if (data.data.scenarioId === scenarioId) {
+        console.debug('[BEARER]', 'onRevoked', 'revoked', scenarioId)
+        callback(false)
+      } else {
+        console.debug('[BEARER]', 'onRevoked', 'different scenarioId', scenarioId)
+      }
     })
   }
 
