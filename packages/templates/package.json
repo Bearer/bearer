@@ -27,9 +27,9 @@
     "typescript": "^2.9.2"
   },
   "devDependencies": {
-    "@types/jest": "^23.1.5",
-    "@types/node": "^10.5.2",
-    "jest": "^23.4.0",
+    "@types/jest": "^23.3.9",
+    "@types/node": "^10.12.5",
+    "jest": "^23.6.0",
     "ts-jest": "^23.0.0"
   },
   "gitHead": "cb2654b19000e2ad6f31a0e4ed715a6298c8df2d"
