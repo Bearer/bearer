@@ -289,6 +289,14 @@ export function ensureElementImported(tsSourceFile: ts.SourceFile): ts.SourceFil
   return ensureHasImportFromCore(tsSourceFile, Decorators.Element)
 }
 
+export function ensureListenImported(tsSourceFile: ts.SourceFile): ts.SourceFile {
+  return ensureHasImportFromCore(tsSourceFile, Decorators.Listen)
+}
+
+export function ensureIntentImported(tsSourceFile: ts.SourceFile): ts.SourceFile {
+  return ensureHasImportFromCore(tsSourceFile, Decorators.Intent)
+}
+
 export function propDecorator() {
   return ts.createDecorator(ts.createCall(ts.createIdentifier(Decorators.Prop) as ts.Expression, undefined, undefined))
 }

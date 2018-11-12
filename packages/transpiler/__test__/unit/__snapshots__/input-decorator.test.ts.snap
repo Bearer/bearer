@@ -3,7 +3,7 @@
 exports[`Input decorator units complete options match snapshot 1`] = `
 Object {
   "file": "complete-options.tsx",
-  "postContent": "import { BearerRef, Component, Prop } from '@bearer/core';
+  "postContent": "import { BearerRef, Component, Listen, State, Intent, Watch, Prop } from '@bearer/core';
 type Farmer = {
     id: string;
     name: string;
@@ -25,7 +25,9 @@ class NoOptionsComponent {
     @Listen(\\"bearer|SPONGE_BOB|farmer|saved\\")
     farmerRefIdChanged(event) { this.farmerRefId = event.detail.referenceId; }
     _loadFarmer = () => {
-        this.fetcherGetFarmer().then(data => { this.farmer = data; });
+        this.fetcherGetFarmer().then(({ data }: {
+            data: BearerRef<Farmer>;
+        }) => { this.farmer = data; });
     };
     private fetcherGetFarmer;
     @Watch(\\"farmerRefId\\")
@@ -39,7 +41,9 @@ class NoOptionsComponent {
     @Listen(\\"bearer|SPONGE_BOB|aString|saved\\")
     aStringRefIdChanged(event) { this.aStringRefId = event.detail.referenceId; }
     _loadAString = () => {
-        this.fetcherGetAString().then(data => { this.aString = data; });
+        this.fetcherGetAString().then(({ data }: {
+            data: BearerRef<string>;
+        }) => { this.aString = data; });
     };
     private fetcherGetAString;
     @Watch(\\"aStringRefId\\")
@@ -55,7 +59,11 @@ class NoOptionsComponent {
     @Listen(\\"bearer|SPONGE_BOB|object|saved\\")
     objectRefIdChanged(event) { this.objectRefId = event.detail.referenceId; }
     _loadObject = () => {
-        this.fetcherGetObject().then(data => { this.object = data; });
+        this.fetcherGetObject().then(({ data }: {
+            data: BearerRef<{
+                title: string;
+            }>;
+        }) => { this.object = data; });
     };
     private fetcherGetObject;
     @Watch(\\"objectRefId\\")
@@ -69,7 +77,9 @@ class NoOptionsComponent {
     @Listen(\\"bearer|SPONGE_BOB|spongeBob|saved\\")
     spongeBobRefIdChanged(event) { this.spongeBobRefId = event.detail.referenceId; }
     _loadSpongeBob = () => {
-        this.fetcherGetSpongeBob().then(data => { this.spongeBob = data; });
+        this.fetcherGetSpongeBob().then(({ data }: {
+            data: BearerRef<Sponge>;
+        }) => { this.spongeBob = data; });
     };
     private fetcherGetSpongeBob;
     @Watch(\\"spongeBobRefId\\")

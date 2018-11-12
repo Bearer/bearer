@@ -8,7 +8,13 @@ import { hasDecoratorNamed } from '../helpers/decorator-helpers'
 import { getNodeName } from '../helpers/node-helpers'
 import { TransformerOptions } from '../types'
 
-import { ensurePropImported } from './bearer'
+import {
+  ensureIntentImported,
+  ensureListenImported,
+  ensurePropImported,
+  ensureStateImported,
+  ensureWatchImported
+} from './bearer'
 
 export default function InputDecorator(_options: TransformerOptions = {}): ts.TransformerFactory<ts.SourceFile> {
   return _transformContext => {
@@ -22,7 +28,14 @@ export default function InputDecorator(_options: TransformerOptions = {}): ts.Tr
       if (!inputsMeta.length) {
         return tsSourceFile
       }
-      const withImports = ensurePropImported(tsSourceFile)
+      const withImports = [
+        ensureListenImported,
+        ensureStateImported,
+        ensureIntentImported,
+        ensureWatchImported,
+        ensurePropImported
+      ].reduce((sourceFile, importer) => importer(sourceFile), tsSourceFile)
+
       return ts.visitEachChild(withImports, replaceInputVisitor(inputsMeta), _transformContext)
     }
 
@@ -166,7 +179,19 @@ function createLoadResourceMethod(meta: InputMeta) {
   const udapteState = ts.createArrowFunction(
     undefined,
     undefined,
-    [ts.createParameter(undefined, undefined, undefined, 'data', undefined, undefined, undefined)],
+    [
+      ts.createParameter(
+        undefined,
+        undefined,
+        undefined,
+        ts.createObjectBindingPattern([ts.createBindingElement(undefined, undefined, 'data')]),
+        undefined,
+        ts.createTypeLiteralNode([
+          ts.createPropertySignature(undefined, 'data', undefined, meta.typeIdentifier, undefined)
+        ]),
+        undefined
+      )
+    ],
     undefined,
     undefined,
     ts.createBlock([
@@ -196,6 +221,7 @@ function createLoadResourceMethod(meta: InputMeta) {
     )
   )
 }
+
 function createFetcher(meta: InputMeta) {
   return ts.createProperty(
     [
@@ -210,6 +236,7 @@ function createFetcher(meta: InputMeta) {
     undefined
   )
 }
+
 function createRefIdWatcher(meta: InputMeta) {
   const newValueName = 'newValueName'
   return ts.createMethod(

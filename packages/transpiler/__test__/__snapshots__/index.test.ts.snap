@@ -3,7 +3,7 @@
 exports[`Transpiler integration test FullComponent.tsx match expectation 1`] = `
 Object {
   "file": "FullComponent.tsx",
-  "postContent": "import { BearerFetch, BearerRef, BearerState, Component, Intent, IntentType, Prop, Element, Watch, State } from '@bearer/core';
+  "postContent": "import { BearerFetch, BearerRef, BearerState, Component, Intent, IntentType, Listen, State, Watch, Prop, Element } from '@bearer/core';
 @Component({
     tag: 'full-component'
 })
@@ -44,7 +44,9 @@ export class FullComponent {
     @Listen(\\"bearer|SPONGE_BOB|farmer|saved\\")
     farmerRefIdChanged(event) { this.farmerRefId = event.detail.referenceId; }
     _loadFarmer = () => {
-        this.fetcherGetFarmer().then(data => { this.farmer = data; });
+        this.fetcherGetFarmer().then(({ data }: {
+            data: BearerRef<any>;
+        }) => { this.farmer = data; });
     };
     private fetcherGetFarmer;
     @Watch(\\"farmerRefId\\")
@@ -58,7 +60,9 @@ export class FullComponent {
     @Listen(\\"bearer|SPONGE_BOB|goat|saved\\")
     goatRefIdChanged(event) { this.goatRefId = event.detail.referenceId; }
     _loadGoat = () => {
-        this.fetcherGetGoat().then(data => { this.goat = data; });
+        this.fetcherGetGoat().then(({ data }: {
+            data: BearerRef<any>;
+        }) => { this.goat = data; });
     };
     private fetcherGetGoat;
     @Watch(\\"goatRefId\\")
