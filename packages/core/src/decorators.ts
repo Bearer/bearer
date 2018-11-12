@@ -59,11 +59,11 @@ export declare const RootComponent: IBearerRootComponentDecorator<any>
  * Input Decorator
  */
 type TInputDecoratorOptions = {
-  scope: string
-  propName: string
-  eventName: string
-  intentName: string
-  autoUpdate: boolean
+  scope?: string
+  propName?: string
+  eventName?: string
+  intentName?: string
+  autoUpdate?: boolean
 }
 
 type TInputDecorator = (options?: TInputDecoratorOptions) => (target: any, key: string) => void
