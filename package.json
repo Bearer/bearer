@@ -45,7 +45,7 @@
     "per-env": "^1.0.2",
     "prettier": "^1.15.2",
     "tslint": "^5.11.0",
-    "tslint-config-prettier": "^1.14.0",
+    "tslint-config-prettier": "^1.15.0",
     "typescript": "^3.1.6"
   },
   "config": {
