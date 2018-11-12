@@ -18,10 +18,16 @@ class NoOptionsComponent {
   farmer: BearerRef<Farmer>
 
   @Input()
-  aString: BearerRef<string>
+  aString: BearerRef<string> = "ok"
 
   @Input()
-  object: BearerRef<{ title: string }>
+  aStringWithoutInitializer: BearerRef<string>
+
+  @Input()
+  object: BearerRef<{ title: string }> = { title: 'Guest' }
+
+  @Input()
+  objectWithoutInitializer: BearerRef<{ title: string }>
 
 
   @Input({

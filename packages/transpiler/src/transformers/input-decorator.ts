@@ -48,14 +48,15 @@ export default function InputDecorator(_options: TransformerOptions = {}): ts.Tr
           const capitalizedName = name.charAt(0).toUpperCase() + name.slice(1)
           inputs.push({
             propDeclarationName: name,
-            scope: 'string',
-            propName: `${name}RefId`,
-            eventName: `${name}:saved`,
-            intentName: `get${capitalizedName}`,
-            intentMethodName: `fetcherGet${capitalizedName}`,
-            autoUpdate: true,
+            scope: 'string', // TODO: retrieve from options
+            propName: `${name}RefId`, // TODO: retrieve from options
+            eventName: `${name}:saved`, // TODO: retrieve from options
+            intentName: `get${capitalizedName}`, // TODO: retrieve from options
+            intentMethodName: `fetcherGet${capitalizedName}`, // TODO: retrieve from options
+            autoUpdate: true, // TODO: retrieve from options
             loadMethodName: `_load${capitalizedName}`,
             typeIdentifier: tsNode.type,
+            intializer: tsNode.initializer,
             watcherName: `_watch${capitalizedName}`
           })
         }
@@ -122,7 +123,7 @@ function createLocalStateProperty(meta: InputMeta) {
     ts.createIdentifier(meta.propDeclarationName),
     undefined,
     meta.typeIdentifier,
-    undefined
+    meta.intializer
   )
 }
 
@@ -288,6 +289,7 @@ type InputMeta = {
   intentName: string
   autoUpdate: boolean
   typeIdentifier?: ts.TypeNode
+  intializer?: ts.Expression
   loadMethodName: string
   intentMethodName: string
   watcherName: string

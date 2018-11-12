@@ -35,7 +35,7 @@ class NoOptionsComponent {
         this._loadFarmer();
     } }
     @State()
-    aString: BearerRef<string>;
+    aString: BearerRef<string> = \\"ok\\";
     @Prop({ \\"mutable\\": true })
     aStringRefId: string;
     @Listen(\\"bearer|SPONGE_BOB|aString|saved\\")
@@ -51,9 +51,25 @@ class NoOptionsComponent {
         this._loadAString();
     } }
     @State()
+    aStringWithoutInitializer: BearerRef<string>;
+    @Prop({ \\"mutable\\": true })
+    aStringWithoutInitializerRefId: string;
+    @Listen(\\"bearer|SPONGE_BOB|aStringWithoutInitializer|saved\\")
+    aStringWithoutInitializerRefIdChanged(event) { this.aStringWithoutInitializerRefId = event.detail.referenceId; }
+    _loadAStringWithoutInitializer = () => {
+        this.fetcherGetAStringWithoutInitializer().then(({ data }: {
+            data: BearerRef<string>;
+        }) => { this.aStringWithoutInitializer = data; });
+    };
+    private fetcherGetAStringWithoutInitializer;
+    @Watch(\\"aStringWithoutInitializerRefId\\")
+    _watchAStringWithoutInitializer(newValueName: string) { if (newValueName) {
+        this._loadAStringWithoutInitializer();
+    } }
+    @State()
     object: BearerRef<{
         title: string;
-    }>;
+    }> = { title: 'Guest' };
     @Prop({ \\"mutable\\": true })
     objectRefId: string;
     @Listen(\\"bearer|SPONGE_BOB|object|saved\\")
@@ -69,6 +85,26 @@ class NoOptionsComponent {
     @Watch(\\"objectRefId\\")
     _watchObject(newValueName: string) { if (newValueName) {
         this._loadObject();
+    } }
+    @State()
+    objectWithoutInitializer: BearerRef<{
+        title: string;
+    }>;
+    @Prop({ \\"mutable\\": true })
+    objectWithoutInitializerRefId: string;
+    @Listen(\\"bearer|SPONGE_BOB|objectWithoutInitializer|saved\\")
+    objectWithoutInitializerRefIdChanged(event) { this.objectWithoutInitializerRefId = event.detail.referenceId; }
+    _loadObjectWithoutInitializer = () => {
+        this.fetcherGetObjectWithoutInitializer().then(({ data }: {
+            data: BearerRef<{
+                title: string;
+            }>;
+        }) => { this.objectWithoutInitializer = data; });
+    };
+    private fetcherGetObjectWithoutInitializer;
+    @Watch(\\"objectWithoutInitializerRefId\\")
+    _watchObjectWithoutInitializer(newValueName: string) { if (newValueName) {
+        this._loadObjectWithoutInitializer();
     } }
     @State()
     spongeBob: BearerRef<Sponge>;
@@ -89,7 +125,9 @@ class NoOptionsComponent {
     constructor() {
         Intent(\\"getFarmer\\")(this, \\"fetcherGetFarmer\\");
         Intent(\\"getAString\\")(this, \\"fetcherGetAString\\");
+        Intent(\\"getAStringWithoutInitializer\\")(this, \\"fetcherGetAStringWithoutInitializer\\");
         Intent(\\"getObject\\")(this, \\"fetcherGetObject\\");
+        Intent(\\"getObjectWithoutInitializer\\")(this, \\"fetcherGetObjectWithoutInitializer\\");
         Intent(\\"getSpongeBob\\")(this, \\"fetcherGetSpongeBob\\");
     }
     get SCENARIO_ID() { return \\"SPONGE_BOB\\"; }
