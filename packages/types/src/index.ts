@@ -1,4 +1,4 @@
-export * from './Authentications'
+export * from './authentications'
 export * from './IntentTypes'
 
 export interface BearerWindow {

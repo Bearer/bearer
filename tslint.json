@@ -5,6 +5,6 @@
     "no-console": false
   },
   "linterOptions": {
-    "exclude": ["**/node_modules/**", "**/templates/**"]
+    "exclude": ["**/node_modules/**", "**/templates/**", "**/__fixtures__/**", "**/lib/**", "**/www/**"]
   }
 }
