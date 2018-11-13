@@ -1,4 +1,4 @@
-import Authentications from '@bearer/types/lib/Authentications'
+import Authentications from '@bearer/types/lib/authentications'
 import { flags } from '@oclif/command'
 
 import BaseCommand from '../../BaseCommand'

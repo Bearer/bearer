@@ -1,4 +1,4 @@
-import Authentication from "@bearer/types/lib/Authentications";
+import Authentication from "@bearer/types/lib/authentications";
 
 import apikey from './apikey'
 import basicauth from './basicauth'

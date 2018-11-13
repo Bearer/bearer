@@ -1,5 +1,5 @@
 import templates from '../src/index'
-import Authentications from "@bearer/types/lib/Authentications";
+import Authentications from "@bearer/types/lib/authentications";
 
 describe('Templates', () => {
   Object.keys(Authentications).forEach((key) => {

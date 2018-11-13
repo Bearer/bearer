@@ -1,4 +1,4 @@
-import Authentications from '@bearer/types/lib/Authentications'
+import Authentications from '@bearer/types/lib/authentications'
 import { flags } from '@oclif/command'
 import * as fs from 'fs-extra'
 import * as Listr from 'listr'
@@ -134,8 +134,14 @@ export default class New extends BaseCommand {
       group: 'setup',
       label: 'Setup Display Component'
     },`
-    const vars = (authType === 'noAuth' || authType === 'NONE') ? {} : { setup }
-    return copyFiles(this, path.join('init', 'structure'), this.copyDestFolder, { ...vars, ...this.getVars(name) }, true)
+    const vars = authType === 'noAuth' || authType === 'NONE' ? {} : { setup }
+    return copyFiles(
+      this,
+      path.join('init', 'structure'),
+      this.copyDestFolder,
+      { ...vars, ...this.getVars(name) },
+      true
+    )
   }
 
   createAuthenticationFiles(name: string, authType: Authentications): Promise<Array<string>> {
