@@ -22,7 +22,7 @@ export default function GatherMetadata({
   }
 
   function propInitializerAsJson(tsType: ts.TypeReferenceNode): TOuputFormat {
-    if (!tsType.typeArguments || !Boolean(tsType.typeArguments.length) || !generator) {
+    if (!tsType || !tsType.typeArguments || !Boolean(tsType.typeArguments.length) || !generator) {
       return UNSPECIFIED
     }
     const typeArgument = tsType.typeArguments[0]

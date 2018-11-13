@@ -261,16 +261,19 @@ function createRefIdWatcher(meta: InputMeta) {
       )
     ],
     undefined,
-    ts.createBlock([
-      ts.createIf(
-        ts.createIdentifier(newValueName),
-        ts.createBlock([
-          ts.createStatement(
-            ts.createCall(ts.createPropertyAccess(ts.createThis(), meta.loadMethodName), undefined, undefined)
-          )
-        ])
-      )
-    ])
+    ts.createBlock(
+      [
+        ts.createIf(
+          ts.createIdentifier(newValueName),
+          ts.createBlock([
+            ts.createStatement(
+              ts.createCall(ts.createPropertyAccess(ts.createThis(), meta.loadMethodName), undefined, undefined)
+            )
+          ])
+        )
+      ],
+      true
+    )
   )
 }
 

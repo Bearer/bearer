@@ -31,6 +31,7 @@ export enum Module {
 
 export enum Types {
   HTMLElement = 'HTMLElement',
+  EventEmitter = 'EventEmitter',
   IntentType = 'IntentType',
   SaveState = 'SaveState',
   RetrieveState = 'RetrieveState'

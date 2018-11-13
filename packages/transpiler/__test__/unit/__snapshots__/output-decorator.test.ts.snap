@@ -3,7 +3,7 @@
 exports[`Output decorator units complete options match snapshot 1`] = `
 Object {
   "file": "complete-options.tsx",
-  "postContent": "import { BearerRef, Component, Prop } from '@bearer/core';
+  "postContent": "import { BearerRef, BearerFetch, Intent, Component, Prop } from '@bearer/core';
 type Farmer = {
     id: string;
     name: string;
@@ -14,6 +14,7 @@ type Farmer = {
     shadow: true
 })
 class NoOptionsComponent {
+    private fetcher: BearerFetch<Farmer>;
     @Output()
     farmer: BearerRef<Farmer>;
     @Output({
@@ -21,8 +22,34 @@ class NoOptionsComponent {
         propertyWatchedName: 'aPanda',
         referenceKeyName: 'aPandaKey'
     })
+    farmerAndPanda: BearerRef<Farmer>;
+    componentWillLoad() {
+        this.fetcher().then(({ data }) => {
+            this.farmerAndPanda = data;
+        });
+    }
+    @State()
     farmer: BearerRef<Farmer>;
+    @Event({ eventName: \\"bearer|SPONGE_BOB|no-options|farmerSaved\\" })
+    farmerSaved: EventEmitter<any>;
+    @Watch(\\"farmer\\")
+    farmerSavedWatcher(newValue) {
+        if (newValue) {
+            this.farmerSaved.emit({ farmer: newValue });
+        }
+    }
+    @State()
+    farmerAndPanda: BearerRef<Farmer>;
+    @Event({ eventName: \\"bearer|SPONGE_BOB|no-options|farmerAndPandaSaved\\" })
+    farmerAndPandaSaved: EventEmitter<any>;
+    @Watch(\\"farmerAndPanda\\")
+    farmerAndPandaSavedWatcher(newValue) {
+        if (newValue) {
+            this.farmerAndPandaSaved.emit({ farmerAndPanda: newValue });
+        }
+    }
     constructor() {
+        Intent('doSomething')(this, \\"fetcher\\");
     }
     get SCENARIO_ID() { return \\"SPONGE_BOB\\"; }
     @Prop({ \\"context\\": \\"bearer\\" })

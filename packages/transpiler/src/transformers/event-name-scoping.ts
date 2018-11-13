@@ -5,6 +5,7 @@ import * as ts from 'typescript'
 
 import { BEARER, Decorators, Env, Properties } from '../constants'
 import { decoratorNamed, hasDecoratorNamed } from '../helpers/decorator-helpers'
+import { getNodeName } from '../helpers/node-helpers'
 import { TransformerOptions } from '../types'
 
 const SEPARATOR = '|'
@@ -13,7 +14,7 @@ export function prefixEvent(eventName: string): string {
   return [BEARER, process.env[Env.BEARER_SCENARIO_ID], eventName].join(SEPARATOR)
 }
 
-export function eventName(name: string, scope: string = 'no-group') {
+export function eventName(name: string, scope = 'no-group') {
   return prefixEvent([scope, name].filter(el => el && el.trim()).join(SEPARATOR))
 }
 
@@ -21,7 +22,7 @@ function updateEventDecorator(tsProperty: ts.PropertyDeclaration, scope: string)
   const decorator = ts.createDecorator(
     ts.createCall(ts.createIdentifier(Decorators.Event), undefined, [
       ts.createObjectLiteral([
-        ts.createPropertyAssignment(Properties.eventName, ts.createLiteral(eventName(tsProperty.name.getText(), scope)))
+        ts.createPropertyAssignment(Properties.eventName, ts.createLiteral(eventName(getNodeName(tsProperty), scope)))
       ])
     ])
   )
@@ -30,7 +31,7 @@ function updateEventDecorator(tsProperty: ts.PropertyDeclaration, scope: string)
     tsProperty,
     [...tsProperty.decorators.map(deco => (decoratorNamed(deco, Decorators.Event) ? decorator : deco))],
     tsProperty.modifiers,
-    tsProperty.name.getText(),
+    getNodeName(tsProperty),
     tsProperty.questionToken || tsProperty.exclamationToken,
     tsProperty.type,
     tsProperty.initializer

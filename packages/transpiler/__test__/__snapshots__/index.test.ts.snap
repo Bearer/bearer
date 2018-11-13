@@ -58,9 +58,11 @@ export class FullComponent {
     };
     private fetcherGetFarmer;
     @Watch(\\"farmerRefId\\")
-    _watchFarmer(newValueName: string) { if (newValueName) {
-        this._loadFarmer();
-    } }
+    _watchFarmer(newValueName: string) {
+        if (newValueName) {
+            this._loadFarmer();
+        }
+    }
     @State()
     goat: BearerRef<any>;
     @Prop({ \\"mutable\\": true })
@@ -74,9 +76,27 @@ export class FullComponent {
     };
     private fetcherGetGoat;
     @Watch(\\"goatRefId\\")
-    _watchGoat(newValueName: string) { if (newValueName) {
-        this._loadGoat();
-    } }
+    _watchGoat(newValueName: string) {
+        if (newValueName) {
+            this._loadGoat();
+        }
+    }
+    @Event({ eventName: \\"bearer|SPONGE_BOB|global|feedPandaSaved\\" })
+    feedPandaSaved: EventEmitter<any>;
+    @Watch(\\"feedPanda\\")
+    feedPandaSavedWatcher(newValue) {
+        if (newValue) {
+            this.feedPandaSaved.emit({ feedPanda: newValue });
+        }
+    }
+    @Event({ eventName: \\"bearer|SPONGE_BOB|global|feedPandaSaved\\" })
+    feedPandaSaved: EventEmitter<any>;
+    @Watch(\\"feedPanda\\")
+    feedPandaSavedWatcher(newValue) {
+        if (newValue) {
+            this.feedPandaSaved.emit({ feedPanda: newValue });
+        }
+    }
     @Prop()
     referenceId: string;
     @Element()

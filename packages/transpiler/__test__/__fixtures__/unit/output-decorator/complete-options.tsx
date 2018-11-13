@@ -1,4 +1,4 @@
-import { BearerRef, Output, RootComponent } from '@bearer/core'
+import { BearerRef, Output, RootComponent, BearerFetch, Intent } from '@bearer/core'
 
 type Farmer = {
   id: string
@@ -10,6 +10,8 @@ type Farmer = {
   role: 'action'
 })
 class NoOptionsComponent {
+  @Intent('doSomething') fetcher: BearerFetch<Farmer>
+
   @Output()
   farmer: BearerRef<Farmer>
 
@@ -18,5 +20,11 @@ class NoOptionsComponent {
     propertyWatchedName: 'aPanda',
     referenceKeyName: 'aPandaKey'
   })
-  farmer: BearerRef<Farmer>
+  farmerAndPanda: BearerRef<Farmer>
+
+  componentWillLoad() {
+    this.fetcher().then(({ data }) => {
+      this.farmerAndPanda = data
+    })
+  }
 }
