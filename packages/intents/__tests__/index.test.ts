@@ -1,5 +1,6 @@
 import mockAxios from 'jest-mock-axios'
 
+import { TLambdaEvent } from '../src/declaration'
 import { RetrieveState, SaveState } from '../src/index'
 
 afterEach(() => {
@@ -24,9 +25,15 @@ describe('SaveState', () => {
       callback({ state, data: { ...state, ...body } })
     }
 
-    const event = {
+    const event: TLambdaEvent = {
       queryStringParameters: { referenceId },
-      context: { bearerBaseURL: 'https://void.bearer.sh', signature: "encrypted" },
+      context: {
+        signature: 'encrypted',
+        authAccess: {
+          bearerBaseURL: 'https://void.bearer.sh',
+          apiKey: 'none'
+        }
+      },
       body: {
         pullRequests: []
       }
@@ -38,7 +45,7 @@ describe('SaveState', () => {
       }
 
       function mockRetrieveSucces() {
-        expect(mockAxios.get).toHaveBeenCalledWith('api/v2/items/SPONGE_BOB', { params: { signature: "encrypted" } })
+        expect(mockAxios.get).toHaveBeenCalledWith('api/v2/items/SPONGE_BOB', { params: { signature: 'encrypted' } })
         const responseObj = { data: { Item: savedData } }
         mockAxios.mockResponse(responseObj, mockAxios.lastReqGet())
       }
@@ -53,11 +60,15 @@ describe('SaveState', () => {
         SaveState.intent(action)(event, {}, lambdaCallback)
         mockRetrieveSucces()
         // expect(mockAxios.put).toHaveBeenCalled()
-        expect(mockAxios.put).toHaveBeenCalledWith('api/v2/items/SPONGE_BOB', {
-          //   ReadAllowed: true,
-          //   ...savedData,
-          //   pullRequests: []
-        }, { params: { signature: "encrypted" } })
+        expect(mockAxios.put).toHaveBeenCalledWith(
+          'api/v2/items/SPONGE_BOB',
+          {
+            //   ReadAllowed: true,
+            //   ...savedData,
+            //   pullRequests: []
+          },
+          { params: { signature: 'encrypted' } }
+        )
         mockAxios.mockResponse({}) // data is unused
 
         expect(lambdaCallback).toHaveBeenCalledWith(null, {
@@ -74,11 +85,15 @@ describe('SaveState', () => {
 
         mockRetrieveSucces()
 
-        expect(mockAxios.put).toHaveBeenCalledWith('api/v2/items/SPONGE_BOB', {
-          ReadAllowed: true,
-          ...savedData,
-          pullRequests: []
-        }, { params: { signature: "encrypted" } })
+        expect(mockAxios.put).toHaveBeenCalledWith(
+          'api/v2/items/SPONGE_BOB',
+          {
+            ReadAllowed: true,
+            ...savedData,
+            pullRequests: []
+          },
+          { params: { signature: 'encrypted' } }
+        )
         mockAxios.mockError({ status: 500 })
 
         expect(lambdaCallback).toHaveBeenCalledWith(expect.any(String), { error: 'Cannot update data' })
@@ -101,7 +116,7 @@ describe('SaveState', () => {
 
     describe('reference does not exist', () => {
       function mockRetrieveFailure() {
-        expect(mockAxios.get).toHaveBeenCalledWith('api/v2/items/SPONGE_BOB', { params: { signature: "encrypted" } })
+        expect(mockAxios.get).toHaveBeenCalledWith('api/v2/items/SPONGE_BOB', { params: { signature: 'encrypted' } })
         const responseObj = { data: { Item: null }, status: 404 }
         mockAxios.mockError(responseObj)
       }
@@ -113,7 +128,11 @@ describe('SaveState', () => {
 
         // mockRetrieveFailure()
         expect(mockAxios.get).toHaveBeenCalledWith('api/v2/items/SPONGE_BOB', mockAxios.lastReqGet())
-        expect(mockAxios.post).toHaveBeenCalledWith('api/v2/items', { ReadAllowed: true, pullRequests: [] }, { params: { signature: "encrypted" } })
+        expect(mockAxios.post).toHaveBeenCalledWith(
+          'api/v2/items',
+          { ReadAllowed: true, pullRequests: [] },
+          { params: { signature: 'encrypted' } }
+        )
 
         const responseObj = { data: { Item: null }, status: 404 }
         mockAxios.mockError(responseObj)
@@ -130,7 +149,11 @@ describe('SaveState', () => {
 
         mockRetrieveFailure()
 
-        expect(mockAxios.post).toHaveBeenCalledWith('api/v2/items', { ReadAllowed: true, pullRequests: [] }, { params: { signature: "encrypted" } })
+        expect(mockAxios.post).toHaveBeenCalledWith(
+          'api/v2/items',
+          { ReadAllowed: true, pullRequests: [] },
+          { params: { signature: 'encrypted' } }
+        )
         const responseObj = {}
         mockAxios.mockError(responseObj)
         expect(lambdaCallback).toHaveBeenCalledWith(expect.any(String), { error: 'Cannot save data' })
@@ -154,7 +177,7 @@ describe('SaveState', () => {
         const lambdaCallback = jest.fn()
 
         SaveState.intent(action)(event, {}, lambdaCallback)
-        expect(mockAxios.get).toHaveBeenCalledWith('api/v2/items/SPONGE_BOB', { params: { signature: "encrypted" } })
+        expect(mockAxios.get).toHaveBeenCalledWith('api/v2/items/SPONGE_BOB', { params: { signature: 'encrypted' } })
         const responseObj = { data: { Item: null }, status: 500 }
         mockAxios.mockError(responseObj)
 
@@ -170,9 +193,15 @@ describe('RetrieveState', () => {
   describe('existing data', () => {
     const referenceId = 'SPONGE_BOB'
 
-    const event = {
+    const event: TLambdaEvent = {
       queryStringParameters: { referenceId },
-      context: { bearerBaseURL: 'https://void.bearer.sh', signature: "encrypted" }
+      context: {
+        bearerBaseURL: 'https://void.bearer.sh',
+        signature: 'encrypted',
+        authAccess: {
+          bearerBaseURL: 'wedontcare'
+        }
+      }
     }
 
     const action = (_context: any, _params: any, state: any, callback: (state: any) => void) => {
@@ -190,7 +219,7 @@ describe('RetrieveState', () => {
       })
 
       RetrieveState.intent(action)(event, {}, lambdaCallback)
-      expect(mockAxios.get).toHaveBeenCalledWith('api/v2/items/SPONGE_BOB', { params: { signature: "encrypted" } })
+      expect(mockAxios.get).toHaveBeenCalledWith('api/v2/items/SPONGE_BOB', { params: { signature: 'encrypted' } })
       mockAxios.mockResponse({ data: { Item: { title: 'Sponge bob', referenceId } } })
     })
 
@@ -204,7 +233,7 @@ describe('RetrieveState', () => {
       })
 
       RetrieveState.intent(action)(event, {}, lambdaCallback)
-      expect(mockAxios.get).toHaveBeenCalledWith('api/v2/items/SPONGE_BOB', { params: { signature: "encrypted" } })
+      expect(mockAxios.get).toHaveBeenCalledWith('api/v2/items/SPONGE_BOB', { params: { signature: 'encrypted' } })
       mockAxios.mockError({ data: { Item: null }, status: 404 })
     })
   })
