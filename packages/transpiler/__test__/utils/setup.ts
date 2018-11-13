@@ -1,6 +1,6 @@
-import fs from 'fs'
-import globby from 'globby'
-import path from 'path'
+import * as fs from 'fs'
+import * as globby from 'globby'
+import * as path from 'path'
 
 const buildFolder = path.join(__dirname, '../..', '.build/src')
 
