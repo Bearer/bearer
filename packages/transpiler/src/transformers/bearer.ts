@@ -213,6 +213,10 @@ function ensureHasImportFromCore(tsSourceFile: ts.SourceFile, importName: string
   )
 }
 
+export function ensureNotImportedFromCore(tsSourceFile: ts.SourceFile, imports: Array<string>) {
+  return imports.reduce(ensureHasNotImportFromCore, tsSourceFile)
+}
+
 export function ensureHasNotImportFromCore(tsSourceFile: ts.SourceFile, importName: string): ts.SourceFile {
   if (!hasImport(tsSourceFile, importName)) {
     return tsSourceFile

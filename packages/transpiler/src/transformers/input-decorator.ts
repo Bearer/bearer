@@ -28,7 +28,7 @@ export default function InputDecorator(_options: TransformerOptions = {}): ts.Tr
       if (!inputsMeta.length) {
         return tsSourceFile
       }
-      const withImports = [
+      const sourceFileWithImports = [
         ensureListenImported,
         ensureStateImported,
         ensureIntentImported,
@@ -36,7 +36,7 @@ export default function InputDecorator(_options: TransformerOptions = {}): ts.Tr
         ensurePropImported
       ].reduce((sourceFile, importer) => importer(sourceFile), tsSourceFile)
 
-      return ts.visitEachChild(withImports, replaceInputVisitor(inputsMeta), _transformContext)
+      return ts.visitEachChild(sourceFileWithImports, replaceInputVisitor(inputsMeta), _transformContext)
     }
 
     function retrieveInputsMetas(sourcefile: ts.SourceFile): Array<InputMeta> {
