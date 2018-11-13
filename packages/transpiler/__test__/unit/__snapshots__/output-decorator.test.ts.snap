@@ -1,0 +1,38 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Output decorator units complete options match snapshot 1`] = `
+Object {
+  "file": "complete-options.tsx",
+  "postContent": "import { BearerRef, Output, Component, Prop } from '@bearer/core';
+type Farmer = {
+    id: string;
+    name: string;
+};
+@Component({
+    tag: \\"no-options-action\\",
+    styleUrl: \\"noOptions.css\\",
+    shadow: true
+})
+class NoOptionsComponent {
+    @Output()
+    farmer: BearerRef<Farmer>;
+    @Output({
+        eventName: 'milked',
+        propertyWatchedName: 'aPanda',
+        referenceKeyName: 'aPandaKey'
+    })
+    farmer: BearerRef<Farmer>;
+    constructor() {
+    }
+    get SCENARIO_ID() { return \\"SPONGE_BOB\\"; }
+    @Prop({ \\"context\\": \\"bearer\\" })
+    bearerContext: any;
+    @Prop()
+    setupId: string;
+    componentDidLoad() { if (this.setupId) {
+        this.bearerContext.setupId = this.setupId;
+    } }
+}
+",
+}
+`;

@@ -70,6 +70,19 @@ type TInputDecorator = (options?: TInputDecoratorOptions) => (target: any, key: 
 
 export declare const Input: TInputDecorator
 
+/**
+ * Output Decorator
+ */
+type TOutputDecoratorOptions = {
+  eventName?: string
+  propertyWatchedName?: string
+  referenceKeyName?: string
+}
+
+type TOutputDecorator = (options?: TOutputDecoratorOptions) => (target: any, key: string) => void
+
+export declare const Output: TOutputDecorator
+
 export type BearerRef<T> = T
 
 /**

@@ -1,4 +1,4 @@
-import { BearerFetch, BearerRef, BearerState, Component, Input, Intent, IntentType } from '@bearer/core'
+import { BearerFetch, BearerRef, BearerState, Component, Input, Intent, IntentType, Output } from '@bearer/core'
 
 @Component({
   tag: 'full-component'
@@ -14,6 +14,17 @@ export class FullComponent {
     autoUpdate: false
   })
   goat: BearerRef<any>
+
+  @Output()
+  feedPanda: BearerRef<any>
+
+  @Output({
+    eventName: 'milked',
+    propertyWatchedName: 'aPanda',
+    referenceKeyName: 'aPandaKey'
+  })
+  feedPanda: BearerRef<any>
+
   @Intent('ListRepositories')
   fetcher: BearerFetch
   @RetrieveStateIntent()
