@@ -8,13 +8,7 @@ import { hasDecoratorNamed } from '../helpers/decorator-helpers'
 import { getNodeName } from '../helpers/node-helpers'
 import { TransformerOptions } from '../types'
 
-import {
-  ensureIntentImported,
-  ensureListenImported,
-  ensurePropImported,
-  ensureStateImported,
-  ensureWatchImported
-} from './bearer'
+import { ensureImportsFromCore } from './bearer'
 
 export default function InputDecorator(_options: TransformerOptions = {}): ts.TransformerFactory<ts.SourceFile> {
   return _transformContext => {
@@ -28,13 +22,14 @@ export default function InputDecorator(_options: TransformerOptions = {}): ts.Tr
       if (!inputsMeta.length) {
         return tsSourceFile
       }
-      const sourceFileWithImports = [
-        ensureListenImported,
-        ensureStateImported,
-        ensureIntentImported,
-        ensureWatchImported,
-        ensurePropImported
-      ].reduce((sourceFile, importer) => importer(sourceFile), tsSourceFile)
+
+      const sourceFileWithImports = ensureImportsFromCore(tsSourceFile, [
+        Decorators.Listen,
+        Decorators.State,
+        Decorators.Intent,
+        Decorators.Watch,
+        Decorators.Prop
+      ])
 
       return ts.visitEachChild(sourceFileWithImports, replaceInputVisitor(inputsMeta), _transformContext)
     }

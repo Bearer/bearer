@@ -4,7 +4,7 @@ import { Decorators, Properties, Types } from '../constants'
 import { decoratorNamed, hasPropDecoratedWithName, propDecoratedWithName } from '../helpers/decorator-helpers'
 import { TransformerOptions } from '../types'
 
-import { elementDecorator, ensureElementImported, ensurePropImported, propDecorator } from './bearer'
+import { elementDecorator, ensureImportsFromCore, propDecorator } from './bearer'
 
 export default function BearerReferenceIdInjector({  }: TransformerOptions = {}): ts.TransformerFactory<ts.SourceFile> {
   return transformContext => {
@@ -19,7 +19,11 @@ export default function BearerReferenceIdInjector({  }: TransformerOptions = {})
         }
         return ts.visitEachChild(node, visit, transformContext)
       }
-      return ts.visitEachChild(ensureElementImported(ensurePropImported(tsSourceFile)), visit, transformContext)
+      return ts.visitEachChild(
+        ensureImportsFromCore(tsSourceFile, [Decorators.Prop, Decorators.Element]),
+        visit,
+        transformContext
+      )
     }
   }
 }

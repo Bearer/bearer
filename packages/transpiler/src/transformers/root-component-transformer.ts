@@ -5,7 +5,7 @@ import { Decorators } from '../constants'
 import { decoratorNamed, getExpressionFromDecorator, hasDecoratorNamed } from '../helpers/decorator-helpers'
 import { TransformerOptions } from '../types'
 
-import { ensureComponentImported, hasImport } from './bearer'
+import { ensureImportsFromCore, hasImport } from './bearer'
 
 export default function RootComponentTransformer({ metadata }: TransformerOptions = {}): ts.TransformerFactory<
   ts.SourceFile
@@ -51,7 +51,7 @@ export default function RootComponentTransformer({ metadata }: TransformerOption
       if (tsSourceFile.isDeclarationFile || !hasImport(tsSourceFile, Decorators.RootComponent)) {
         return tsSourceFile
       }
-      return ts.visitEachChild(ensureComponentImported(tsSourceFile), visit, _transformContext)
+      return ts.visitEachChild(ensureImportsFromCore(tsSourceFile, [Decorators.Component]), visit, _transformContext)
     }
   }
 }

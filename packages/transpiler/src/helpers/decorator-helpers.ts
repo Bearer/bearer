@@ -32,7 +32,7 @@ export function decoratorNamed(tsDecorator: ts.Decorator, name: string): boolean
   })
 }
 
-export function getDecoratorProperties(tsDecorator: ts.Decorator, index: number = 0): ts.ObjectLiteralExpression {
+export function getDecoratorProperties(tsDecorator: ts.Decorator, index = 0): ts.ObjectLiteralExpression {
   if (!ts.isCallExpression(tsDecorator.expression)) {
     return ts.createObjectLiteral([])
   }
@@ -61,7 +61,7 @@ export function getExpressionFromLiteralObject<T extends ts.Expression>(
 export function getExpressionFromDecorator<T extends ts.Expression>(
   tsDecorator: ts.Decorator,
   key: string,
-  index: number = 0
+  index = 0
 ): T {
   return getExpressionFromLiteralObject(getDecoratorProperties(tsDecorator, index), key)
 }

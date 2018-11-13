@@ -10,7 +10,7 @@ import { prependToStatements, updateMethodOfClass } from '../helpers/method-upda
 import { isWatcherOn } from '../helpers/stencil-helpers'
 import { TransformerOptions } from '../types'
 
-import { ensureBearerContextInjected, ensureStateImported, ensureWatchImported } from './bearer'
+import { ensureBearerContextInjected, ensureImportsFromCore } from './bearer'
 
 const state = ts.createIdentifier('state')
 
@@ -22,8 +22,6 @@ export default function BearerStateInjector({  }: TransformerOptions = {}): ts.T
       }
 
       const propsDecorator = extractDecoratedPropertyInformation(tsSourceFile)
-      // Inject Imports if needed: Watch
-      const preparedSourceFile = ensureStateImported(ensureWatchImported(tsSourceFile))
 
       function visit(node: ts.Node): ts.VisitResult<ts.Node> {
         if (ts.isClassDeclaration(node)) {
@@ -46,7 +44,8 @@ export default function BearerStateInjector({  }: TransformerOptions = {}): ts.T
         return ts.visitEachChild(node, visit, transformContext)
       }
 
-      return visit(preparedSourceFile) as ts.SourceFile
+      // Inject Imports if needed: Watch
+      return visit(ensureImportsFromCore(tsSourceFile, [Decorators.Watch, Decorators.State])) as ts.SourceFile
     }
   }
 }

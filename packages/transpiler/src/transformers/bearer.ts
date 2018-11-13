@@ -273,32 +273,8 @@ export function ensureBearerContextInjected(classNode: ts.ClassDeclaration): ts.
   return has ? classNode : addBearerContextProp(classNode)
 }
 
-export function ensureWatchImported(tsSourceFile: ts.SourceFile): ts.SourceFile {
-  return ensureHasImportFromCore(tsSourceFile, Decorators.Watch)
-}
-
-export function ensurePropImported(tsSourceFile: ts.SourceFile): ts.SourceFile {
-  return ensureHasImportFromCore(tsSourceFile, Decorators.Prop)
-}
-
-export function ensureComponentImported(tsSourceFile: ts.SourceFile): ts.SourceFile {
-  return ensureHasImportFromCore(tsSourceFile, Decorators.Component)
-}
-
-export function ensureStateImported(tsSourceFile: ts.SourceFile): ts.SourceFile {
-  return ensureHasImportFromCore(tsSourceFile, Decorators.State)
-}
-
-export function ensureElementImported(tsSourceFile: ts.SourceFile): ts.SourceFile {
-  return ensureHasImportFromCore(tsSourceFile, Decorators.Element)
-}
-
-export function ensureListenImported(tsSourceFile: ts.SourceFile): ts.SourceFile {
-  return ensureHasImportFromCore(tsSourceFile, Decorators.Listen)
-}
-
-export function ensureIntentImported(tsSourceFile: ts.SourceFile): ts.SourceFile {
-  return ensureHasImportFromCore(tsSourceFile, Decorators.Intent)
+export function ensureImportsFromCore(tsSourceFile: ts.SourceFile, decorators: Array<Decorators>): ts.SourceFile {
+  return decorators.reduce((sourceFile, decorator) => ensureHasImportFromCore(sourceFile, decorator), tsSourceFile)
 }
 
 export function propDecorator() {
@@ -318,6 +294,5 @@ export default {
   addComponentDidLoad,
   hasImport,
   coreImport,
-  ensureBearerContextInjected,
-  ensurePropImported
+  ensureBearerContextInjected
 }

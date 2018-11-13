@@ -1,22 +1,22 @@
 /*
- * @Component() 
+ * @Component()
  * class StarWarsMovies {}
- * 
+ *
  * becomes
- * 
+ *
  * @Component()
  * class StarWarsMovies {
- * 
+ *
  *  @Prop({ context: 'bearer' }) bearerContext: string;
  *  @Prop() setupId: string;
- * 
+ *
  *  componentDidLoad() {
  *    if(this.setupId) {
  *      this.bearerContext.setupId = this.setupId
  *    }
  *  }
  * }
- * 
+ *
  */
 import * as ts from 'typescript'
 
@@ -24,7 +24,7 @@ import { Decorators } from '../constants'
 import { hasDecoratorNamed } from '../helpers/decorator-helpers'
 import { TransformerOptions } from '../types'
 
-import bearer from './bearer'
+import bearer, { ensureImportsFromCore } from './bearer'
 
 export default function ComponentTransformer(_options: TransformerOptions = {}): ts.TransformerFactory<ts.SourceFile> {
   return transformContext => {
@@ -37,7 +37,7 @@ export default function ComponentTransformer(_options: TransformerOptions = {}):
 
     return tsSourceFile => {
       if (hasComponentDecorator(tsSourceFile)) {
-        return visit(bearer.ensurePropImported(tsSourceFile)) as ts.SourceFile
+        return visit(ensureImportsFromCore(tsSourceFile, [Decorators.Prop])) as ts.SourceFile
       }
       return tsSourceFile
     }
