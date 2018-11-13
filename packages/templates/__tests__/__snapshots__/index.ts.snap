@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Templates APIKEY has FetchData 1`] = `
+exports[`Templates ApiKey has FetchData 1`] = `
 "
   static action(context: TAPIKEYAuthContext, params: any, body: any, callback: TFetchDataCallback) {
     //... your code goes here
@@ -17,7 +17,7 @@ exports[`Templates APIKEY has FetchData 1`] = `
   "
 `;
 
-exports[`Templates APIKEY has RetrieveState 1`] = `
+exports[`Templates ApiKey has RetrieveState 1`] = `
 "
   static action(_context: TAPIKEYAuthContext, _params: any, state, callback: TRetrieveStateCallback) {
     callback({ data: state })
@@ -25,7 +25,7 @@ exports[`Templates APIKEY has RetrieveState 1`] = `
   "
 `;
 
-exports[`Templates APIKEY has SaveState 1`] = `
+exports[`Templates ApiKey has SaveState 1`] = `
 "
   static action(
     _context: TAPIKEYAuthContext,
@@ -49,7 +49,7 @@ exports[`Templates APIKEY has SaveState 1`] = `
   "
 `;
 
-exports[`Templates BASIC has FetchData 1`] = `
+exports[`Templates Basic has FetchData 1`] = `
 "
   static action(context: TBASICAuthContext, params: any, body: any, callback: TFetchDataCallback) {
     //... your code goes here
@@ -68,7 +68,7 @@ exports[`Templates BASIC has FetchData 1`] = `
   "
 `;
 
-exports[`Templates BASIC has RetrieveState 1`] = `
+exports[`Templates Basic has RetrieveState 1`] = `
 "
   static action(_context: TBASICAuthContext, _params: any, state, callback: TRetrieveStateCallback) {
     callback({ data: state })
@@ -76,7 +76,7 @@ exports[`Templates BASIC has RetrieveState 1`] = `
   "
 `;
 
-exports[`Templates BASIC has SaveState 1`] = `
+exports[`Templates Basic has SaveState 1`] = `
 "
   static action(
     _context: TBASICAuthContext,
@@ -100,7 +100,7 @@ exports[`Templates BASIC has SaveState 1`] = `
   "
 `;
 
-exports[`Templates NONE has FetchData 1`] = `
+exports[`Templates NoAuth has FetchData 1`] = `
 "
   static action(context: TNONEAuthContext, params: any, body: any, callback: TFetchDataCallback) {
     //... your code goes here
@@ -108,7 +108,7 @@ exports[`Templates NONE has FetchData 1`] = `
   }"
 `;
 
-exports[`Templates NONE has RetrieveState 1`] = `
+exports[`Templates NoAuth has RetrieveState 1`] = `
 "
   static action(_context: TNONEAuthContext, _params: any, state, callback: TRetrieveStateCallback) {
     callback({ data: state })
@@ -116,7 +116,7 @@ exports[`Templates NONE has RetrieveState 1`] = `
   "
 `;
 
-exports[`Templates NONE has SaveState 1`] = `
+exports[`Templates NoAuth has SaveState 1`] = `
 "
   static action(
     _context: TNONEAuthContext,
@@ -140,7 +140,7 @@ exports[`Templates NONE has SaveState 1`] = `
   "
 `;
 
-exports[`Templates OAUTH2 has FetchData 1`] = `
+exports[`Templates OAuth2 has FetchData 1`] = `
 "
   static action(context: TOAUTH2AuthContext, params: any, body: any, callback: TFetchDataCallback) {
     //... your code goes here
@@ -155,7 +155,7 @@ exports[`Templates OAUTH2 has FetchData 1`] = `
   }"
 `;
 
-exports[`Templates OAUTH2 has RetrieveState 1`] = `
+exports[`Templates OAuth2 has RetrieveState 1`] = `
 "
   static action(_context: TOAUTH2AuthContext, _params: any, state, callback: TRetrieveStateCallback) {
     callback({ data: state })
@@ -163,7 +163,7 @@ exports[`Templates OAUTH2 has RetrieveState 1`] = `
   "
 `;
 
-exports[`Templates OAUTH2 has SaveState 1`] = `
+exports[`Templates OAuth2 has SaveState 1`] = `
 "
   static action(
     _context: TOAUTH2AuthContext,

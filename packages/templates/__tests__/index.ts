@@ -2,8 +2,8 @@ import templates from '../src/index'
 import Authentications from "@bearer/types/lib/Authentications";
 
 describe('Templates', () => {
-  Object.values(Authentications).forEach((key) => {
-    const intent = templates[key]
+  Object.keys(Authentications).forEach((key) => {
+    const intent = templates[Authentications[key]]
 
     describe(key, () => {
       it('has SaveState', () => {
