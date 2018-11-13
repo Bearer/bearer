@@ -96,7 +96,7 @@ export function addComponentDidLoad(classNode: ts.ClassDeclaration): ts.ClassDec
   )
   const ifSetupIdPresent = ts.createIf(
     ts.createPropertyAccess(ts.createThis(), Component.setupId),
-    ts.createBlock([assignSetupId])
+    ts.createBlock([assignSetupId], true)
   )
   const predicate = methodeNamed(Component.componentDidLoad)
   const members = classNode.members.filter(n => !predicate(n))
@@ -133,7 +133,7 @@ export function addComponentDidLoad(classNode: ts.ClassDeclaration): ts.ClassDec
         componentDidLoad.typeParameters,
         componentDidLoad.parameters,
         componentDidLoad.type,
-        ts.createBlock([ifSetupIdPresent, ...componentDidLoad.body.statements])
+        ts.createBlock([ifSetupIdPresent, ...componentDidLoad.body.statements], true)
       )
     ]
   )

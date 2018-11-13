@@ -28,9 +28,11 @@ class RootComponent {
     bearerContext: any;
     @Prop()
     setupId: string;
-    componentDidLoad() { if (this.setupId) {
-        this.bearerContext.setupId = this.setupId;
-    } }
+    componentDidLoad() {
+        if (this.setupId) {
+            this.bearerContext.setupId = this.setupId;
+        }
+    }
 }
 @Component({
     tag: 'sponge-bob'
@@ -46,9 +48,11 @@ class SubComponent {
     bearerContext: any;
     @Prop()
     setupId: string;
-    componentDidLoad() { if (this.setupId) {
-        this.bearerContext.setupId = this.setupId;
-    } }
+    componentDidLoad() {
+        if (this.setupId) {
+            this.bearerContext.setupId = this.setupId;
+        }
+    }
 }
 @Component({
     tag: 'patrick'
@@ -64,9 +68,11 @@ class Patrick {
     bearerContext: any;
     @Prop()
     setupId: string;
-    componentDidLoad() { if (this.setupId) {
-        this.bearerContext.setupId = this.setupId;
-    } }
+    componentDidLoad() {
+        if (this.setupId) {
+            this.bearerContext.setupId = this.setupId;
+        }
+    }
 }
 ",
 }
@@ -100,9 +106,11 @@ class RootComponent {
     bearerContext: any;
     @Prop()
     setupId: string;
-    componentDidLoad() { if (this.setupId) {
-        this.bearerContext.setupId = this.setupId;
-    } }
+    componentDidLoad() {
+        if (this.setupId) {
+            this.bearerContext.setupId = this.setupId;
+        }
+    }
 }
 @Component({
     tag: 'sponge-bob'
@@ -118,9 +126,11 @@ class SubComponent {
     bearerContext: any;
     @Prop()
     setupId: string;
-    componentDidLoad() { if (this.setupId) {
-        this.bearerContext.setupId = this.setupId;
-    } }
+    componentDidLoad() {
+        if (this.setupId) {
+            this.bearerContext.setupId = this.setupId;
+        }
+    }
 }
 @Component({
     tag: 'patrick'
@@ -136,9 +146,11 @@ class Patrick {
     bearerContext: any;
     @Prop()
     setupId: string;
-    componentDidLoad() { if (this.setupId) {
-        this.bearerContext.setupId = this.setupId;
-    } }
+    componentDidLoad() {
+        if (this.setupId) {
+            this.bearerContext.setupId = this.setupId;
+        }
+    }
 }
 ",
 }

@@ -157,15 +157,18 @@ function createEventListener(meta: InputMeta) {
     undefined,
     [ts.createParameter(undefined, undefined, undefined, ts.createIdentifier('event'), undefined, undefined)],
     undefined,
-    ts.createBlock([
-      ts.createStatement(
-        ts.createBinary(
-          ts.createPropertyAccess(ts.createThis(), meta.propName),
-          ts.SyntaxKind.EqualsToken,
-          ts.createIdentifier('event.detail.referenceId')
+    ts.createBlock(
+      [
+        ts.createStatement(
+          ts.createBinary(
+            ts.createPropertyAccess(ts.createThis(), meta.propName),
+            ts.SyntaxKind.EqualsToken,
+            ts.createIdentifier('event.detail.referenceId')
+          )
         )
-      )
-    ])
+      ],
+      true
+    )
   )
 }
 
@@ -193,15 +196,18 @@ function createLoadResourceMethod(meta: InputMeta) {
     ],
     undefined,
     undefined,
-    ts.createBlock([
-      ts.createStatement(
-        ts.createBinary(
-          ts.createPropertyAccess(ts.createThis(), meta.propDeclarationName),
-          ts.SyntaxKind.EqualsToken,
-          ts.createIdentifier('data')
+    ts.createBlock(
+      [
+        ts.createStatement(
+          ts.createBinary(
+            ts.createPropertyAccess(ts.createThis(), meta.propDeclarationName),
+            ts.SyntaxKind.EqualsToken,
+            ts.createIdentifier('data')
+          )
         )
-      )
-    ])
+      ],
+      true
+    )
   )
   const promiseHandler = ts.createCall(ts.createPropertyAccess(intentCall, 'then'), undefined, [udapteState])
   return ts.createProperty(
@@ -265,11 +271,14 @@ function createRefIdWatcher(meta: InputMeta) {
       [
         ts.createIf(
           ts.createIdentifier(newValueName),
-          ts.createBlock([
-            ts.createStatement(
-              ts.createCall(ts.createPropertyAccess(ts.createThis(), meta.loadMethodName), undefined, undefined)
-            )
-          ])
+          ts.createBlock(
+            [
+              ts.createStatement(
+                ts.createCall(ts.createPropertyAccess(ts.createThis(), meta.loadMethodName), undefined, undefined)
+              )
+            ],
+            true
+          )
         )
       ],
       true

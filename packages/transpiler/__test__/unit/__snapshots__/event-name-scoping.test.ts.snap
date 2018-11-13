@@ -27,9 +27,11 @@ export class FeatDisplayRootComponent {
     bearerContext: any;
     @Prop()
     setupId: string;
-    componentDidLoad() { if (this.setupId) {
-        this.bearerContext.setupId = this.setupId;
-    } }
+    componentDidLoad() {
+        if (this.setupId) {
+            this.bearerContext.setupId = this.setupId;
+        }
+    }
 }
 ",
 }
@@ -59,9 +61,11 @@ export class SimpleComponent {
     bearerContext: any;
     @Prop()
     setupId: string;
-    componentDidLoad() { if (this.setupId) {
-        this.bearerContext.setupId = this.setupId;
-    } }
+    componentDidLoad() {
+        if (this.setupId) {
+            this.bearerContext.setupId = this.setupId;
+        }
+    }
 }
 ",
 }

@@ -124,19 +124,22 @@ export default function OutputDecorator(_options: TransformerOptions = {}): ts.T
           [
             ts.createIf(
               ts.createIdentifier(newValue),
-              ts.createBlock([
-                ts.createStatement(
-                  ts.createCall(
-                    ts.createPropertyAccess(ts.createPropertyAccess(ts.createThis(), meta.emitMethodName), 'emit'),
-                    undefined,
-                    [
-                      ts.createObjectLiteral([
-                        ts.createPropertyAssignment(meta.propDeclarationName, ts.createIdentifier(newValue))
-                      ])
-                    ]
+              ts.createBlock(
+                [
+                  ts.createStatement(
+                    ts.createCall(
+                      ts.createPropertyAccess(ts.createPropertyAccess(ts.createThis(), meta.emitMethodName), 'emit'),
+                      undefined,
+                      [
+                        ts.createObjectLiteral([
+                          ts.createPropertyAssignment(meta.propDeclarationName, ts.createIdentifier(newValue))
+                        ])
+                      ]
+                    )
                   )
-                )
-              ])
+                ],
+                true
+              )
             )
           ],
           true

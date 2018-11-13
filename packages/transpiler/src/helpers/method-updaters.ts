@@ -29,7 +29,7 @@ function updateMethodStatements(
     tsMethod.typeParameters,
     tsMethod.parameters,
     tsMethod.type,
-    ts.createBlock([...prependStatements, ...tsMethod.body.statements, ...appendStatements])
+    ts.createBlock([...prependStatements, ...tsMethod.body.statements, ...appendStatements], true)
   )
 }
 

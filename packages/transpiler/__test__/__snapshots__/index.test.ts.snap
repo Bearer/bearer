@@ -50,11 +50,15 @@ export class FullComponent {
     @Prop({ \\"mutable\\": true })
     farmerRefId: string;
     @Listen(\\"bearer|SPONGE_BOB|string|farmerSaved\\")
-    farmerRefIdChanged(event) { this.farmerRefId = event.detail.referenceId; }
+    farmerRefIdChanged(event) {
+        this.farmerRefId = event.detail.referenceId;
+    }
     _loadFarmer = () => {
         this.fetcherGetFarmer().then(({ data }: {
             data: BearerRef<any>;
-        }) => { this.farmer = data; });
+        }) => {
+            this.farmer = data;
+        });
     };
     private fetcherGetFarmer;
     @Watch(\\"farmerRefId\\")
@@ -68,11 +72,15 @@ export class FullComponent {
     @Prop({ \\"mutable\\": true })
     goatRefId: string;
     @Listen(\\"bearer|SPONGE_BOB|string|goatSaved\\")
-    goatRefIdChanged(event) { this.goatRefId = event.detail.referenceId; }
+    goatRefIdChanged(event) {
+        this.goatRefId = event.detail.referenceId;
+    }
     _loadGoat = () => {
         this.fetcherGetGoat().then(({ data }: {
             data: BearerRef<any>;
-        }) => { this.goat = data; });
+        }) => {
+            this.goat = data;
+        });
     };
     private fetcherGetGoat;
     @Watch(\\"goatRefId\\")
@@ -81,6 +89,8 @@ export class FullComponent {
             this._loadGoat();
         }
     }
+    @State()
+    feedPanda: BearerRef<any>;
     @Event({ eventName: \\"bearer|SPONGE_BOB|global|feedPandaSaved\\" })
     feedPandaSaved: EventEmitter<any>;
     @Watch(\\"feedPanda\\")
@@ -89,6 +99,8 @@ export class FullComponent {
             this.feedPandaSaved.emit({ feedPanda: newValue });
         }
     }
+    @State()
+    feedPanda: BearerRef<any>;
     @Event({ eventName: \\"bearer|SPONGE_BOB|global|feedPandaSaved\\" })
     feedPandaSaved: EventEmitter<any>;
     @Watch(\\"feedPanda\\")
@@ -112,16 +124,29 @@ export class FullComponent {
     bearerContext: any;
     @Prop()
     setupId: string;
-    componentDidLoad() { if (this.setupId) {
-        this.bearerContext.setupId = this.setupId;
-    } }
+    componentDidLoad() {
+        if (this.setupId) {
+            this.bearerContext.setupId = this.setupId;
+        }
+    }
     @Watch(\\"attachedPullRequests\\")
-    _notifyBearerStateHandler_attachedPullRequests(newValue: any) { this.bearerContext.update(\\"attachedPullRequests\\", newValue); }
+    _notifyBearerStateHandler_attachedPullRequests(newValue: any) {
+        this.bearerContext.update(\\"attachedPullRequests\\", newValue);
+    }
     @Watch(\\"ducks\\")
-    _notifyBearerStateHandler_ducks(newValue: any) { this.bearerContext.update(\\"goats\\", newValue); }
-    componentWillLoad() { this.bearerContext.subscribe(this); }
-    componentDidUnload() { this.bearerContext.unsubscribe(this); }
-    bearerUpdateFromState = state => { this.attachedPullRequests = state[\\"attachedPullRequests\\"]; this.ducks = state[\\"goats\\"]; };
+    _notifyBearerStateHandler_ducks(newValue: any) {
+        this.bearerContext.update(\\"goats\\", newValue);
+    }
+    componentWillLoad() {
+        this.bearerContext.subscribe(this);
+    }
+    componentDidUnload() {
+        this.bearerContext.unsubscribe(this);
+    }
+    bearerUpdateFromState = state => {
+        this.attachedPullRequests = state[\\"attachedPullRequests\\"];
+        this.ducks = state[\\"goats\\"];
+    };
 }
 ",
 }
@@ -165,16 +190,29 @@ export class AttachPullRequestAction {
     bearerContext: any;
     @Prop()
     setupId: string;
-    componentDidLoad() { if (this.setupId) {
-        this.bearerContext.setupId = this.setupId;
-    } }
+    componentDidLoad() {
+        if (this.setupId) {
+            this.bearerContext.setupId = this.setupId;
+        }
+    }
     @Watch(\\"attachedPullRequests\\")
-    _notifyBearerStateHandler_attachedPullRequests(newValue: any) { this.bearerContext.update(\\"attachedPullRequests\\", newValue); }
+    _notifyBearerStateHandler_attachedPullRequests(newValue: any) {
+        this.bearerContext.update(\\"attachedPullRequests\\", newValue);
+    }
     @Watch(\\"ducks\\")
-    _notifyBearerStateHandler_ducks(newValue: any) { this.bearerContext.update(\\"goats\\", newValue); }
-    componentWillLoad() { this.bearerContext.subscribe(this); }
-    componentDidUnload() { this.bearerContext.unsubscribe(this); }
-    bearerUpdateFromState = state => { this.attachedPullRequests = state[\\"attachedPullRequests\\"]; this.ducks = state[\\"goats\\"]; };
+    _notifyBearerStateHandler_ducks(newValue: any) {
+        this.bearerContext.update(\\"goats\\", newValue);
+    }
+    componentWillLoad() {
+        this.bearerContext.subscribe(this);
+    }
+    componentDidUnload() {
+        this.bearerContext.unsubscribe(this);
+    }
+    bearerUpdateFromState = state => {
+        this.attachedPullRequests = state[\\"attachedPullRequests\\"];
+        this.ducks = state[\\"goats\\"];
+    };
 }
 ",
 }
@@ -237,16 +275,29 @@ export class AttachPullRequestDisplay {
     bearerContext: any;
     @Prop()
     setupId: string;
-    componentDidLoad() { if (this.setupId) {
-        this.bearerContext.setupId = this.setupId;
-    } }
+    componentDidLoad() {
+        if (this.setupId) {
+            this.bearerContext.setupId = this.setupId;
+        }
+    }
     @Watch(\\"attachedPullRequests\\")
-    _notifyBearerStateHandler_attachedPullRequests(newValue: any) { this.bearerContext.update(\\"attachedPullRequests\\", newValue); }
+    _notifyBearerStateHandler_attachedPullRequests(newValue: any) {
+        this.bearerContext.update(\\"attachedPullRequests\\", newValue);
+    }
     @Watch(\\"ducks\\")
-    _notifyBearerStateHandler_ducks(newValue: any) { this.bearerContext.update(\\"goats\\", newValue); }
-    componentWillLoad() { this.bearerContext.subscribe(this); }
-    componentDidUnload() { this.bearerContext.unsubscribe(this); }
-    bearerUpdateFromState = state => { this.attachedPullRequests = state[\\"attachedPullRequests\\"]; this.ducks = state[\\"goats\\"]; };
+    _notifyBearerStateHandler_ducks(newValue: any) {
+        this.bearerContext.update(\\"goats\\", newValue);
+    }
+    componentWillLoad() {
+        this.bearerContext.subscribe(this);
+    }
+    componentDidUnload() {
+        this.bearerContext.unsubscribe(this);
+    }
+    bearerUpdateFromState = state => {
+        this.attachedPullRequests = state[\\"attachedPullRequests\\"];
+        this.ducks = state[\\"goats\\"];
+    };
 }
 ",
 }
@@ -277,9 +328,12 @@ class OverridesDecorarotFull {
     bearerContext: any;
     @Prop()
     setupId: string;
-    componentDidLoad() { if (this.setupId) {
-        this.bearerContext.setupId = this.setupId;
-    } console.log('componentDidLoad'); }
+    componentDidLoad() {
+        if (this.setupId) {
+            this.bearerContext.setupId = this.setupId;
+        }
+        console.log('componentDidLoad');
+    }
 }
 ",
 }
@@ -306,9 +360,12 @@ class OverridesDecorarotLess {
     bearerContext: any;
     @Prop()
     setupId: string;
-    componentDidLoad() { if (this.setupId) {
-        this.bearerContext.setupId = this.setupId;
-    } console.log('componentDidLoad'); }
+    componentDidLoad() {
+        if (this.setupId) {
+            this.bearerContext.setupId = this.setupId;
+        }
+        console.log('componentDidLoad');
+    }
 }
 ",
 }

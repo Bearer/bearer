@@ -87,7 +87,8 @@ function injectStateUpdateLogic(
                   ts.createElementAccess(state, ts.createLiteral(meta.statePropName))
                 )
               )
-            )
+            ),
+            true
           )
         )
       )
@@ -151,7 +152,7 @@ function createWatcher(meta: IDecoratedPropInformation): ts.MethodDeclaration {
       )
     ],
     undefined,
-    ts.createBlock([createUpdateStatement(meta.statePropName, 'newValue')])
+    ts.createBlock([createUpdateStatement(meta.statePropName, 'newValue')], true)
   )
 }
 
