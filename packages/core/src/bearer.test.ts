@@ -1,4 +1,4 @@
-import Bearer from './Bearer'
+import Bearer from './bearer'
 
 describe('Bearer', () => {
   describe('Init', () => {

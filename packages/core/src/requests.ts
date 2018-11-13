@@ -1,5 +1,5 @@
 // global fetch
-import Bearer from './Bearer'
+import Bearer from './bearer'
 
 const defaultInit = {
   headers: {

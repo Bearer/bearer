@@ -1,7 +1,10 @@
-import fetch from 'jest-fetch-mock'
+import { BearerWindow } from '@bearer/types'
 
-import Bearer from './Bearer'
+import Bearer from './bearer'
 import { BearerFetch, Intent } from './decorators/Intent'
+
+declare const window: BearerWindow
+declare const global: { fetch: any }
 
 const SCENARIO_ID = '1234'
 const commonParams = {
@@ -17,7 +20,7 @@ const commonParams = {
 describe('Intent decorator', () => {
   beforeAll(() => {
     Bearer.init({ integrationHost: process.env.API_HOST })
-    Bearer.instance.allowIntegrationRequests()
+    Bearer.instance.allowIntegrationRequests(true)
   })
 
   class IntentDecorated {
@@ -35,8 +38,8 @@ describe('Intent decorator', () => {
     const collection = [{ id: 42 }]
 
     beforeEach(() => {
-      fetch.resetMocks()
-      fetch.mockResponseOnce(JSON.stringify({ data: collection }))
+      global.fetch.resetMocks()
+      global.fetch.mockResponseOnce(JSON.stringify({ data: collection }))
     })
 
     it('adds a method', () => {
@@ -49,14 +52,14 @@ describe('Intent decorator', () => {
 
     it('uses FetchData', async () => {
       const success = jest.fn()
-      window.bearer = { clientId: 42 }
+      window.bearer = { clientId: '42', load: jest.fn() }
 
       await decoratedInstance
         .getCollectionIntentProp({ page: 1 })
         .then(success)
         .catch(a => console.log(a))
 
-      expect(fetch).toBeCalledWith(
+      expect(global.fetch).toBeCalledWith(
         'https://localhost:5555/api/v1/1234/getCollectionIntent?page=1&setupId=&clientId=42',
         commonParams
       )

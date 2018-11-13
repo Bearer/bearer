@@ -1,4 +1,4 @@
-import Bearer from './Bearer'
+import Bearer from './bearer'
 import classNames from './classnames'
 import * as Debug from './debug'
 import EventNames from './EventNames'

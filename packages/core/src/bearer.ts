@@ -1,4 +1,4 @@
-import fbemitter, { EventSubscription } from 'fbemitter'
+import * as fbemitter from 'fbemitter'
 import postRobot from 'post-robot'
 
 import BearerConfig from './BearerConfig'
@@ -76,7 +76,7 @@ export default class Bearer {
     return this._instance
   }
 
-  static onAuthorized = (scenarioId: string, callback: (authorize: boolean) => void): EventSubscription => {
+  static onAuthorized = (scenarioId: string, callback: (authorize: boolean) => void): fbemitter.EventSubscription => {
     console.debug('[BEARER]', 'onAuthorized', 'register', scenarioId)
     return Bearer.emitter.addListener(Events.AUTHORIZED, (data: TAuthorizationPayload) => {
       if (data.data.scenarioId === scenarioId) {
@@ -88,7 +88,7 @@ export default class Bearer {
     })
   }
 
-  static onRevoked = (scenarioId: string, callback: (authorize: boolean) => void): EventSubscription => {
+  static onRevoked = (scenarioId: string, callback: (authorize: boolean) => void): fbemitter.EventSubscription => {
     console.debug('[BEARER]', 'register onRevoked', scenarioId)
     return Bearer.emitter.addListener(Events.REVOKED, (data: TAuthorizationPayload) => {
       if (data.data.scenarioId === scenarioId) {
@@ -99,10 +99,10 @@ export default class Bearer {
       }
     })
   }
+  public allowIntegrationRequests: (initialize: true) => void
 
   private iframe: HTMLIFrameElement
-  private isSessionInitialized: boolean = false
-  private allowIntegrationRequests: (initialize: true) => void
+  private isSessionInitialized = false
   private _maybeInitialized: Promise<boolean>
 
   constructor(args) {

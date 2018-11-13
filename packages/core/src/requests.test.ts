@@ -1,17 +1,20 @@
-import fetch from 'jest-fetch-mock'
+import { BearerWindow } from '@bearer/types'
+// import fetch from 'jest-fetch-mock'
 
-import Bearer from './Bearer'
+import Bearer from './bearer'
 import { intentRequest } from './requests'
 
 const intentName = 'anIntent'
 const scenarioId = 'aScenarioId'
 const setupId = '1234'
+declare const window: BearerWindow & { fetch: any }
+declare const global: { fetch: any }
 
 describe('requests', () => {
   beforeEach(() => {
-    fetch.resetMocks()
+    global.fetch.resetMocks()
     Bearer.init({ integrationHost: process.env.API_HOST })
-    Bearer.instance.allowIntegrationRequests()
+    Bearer.instance.allowIntegrationRequests(true)
   })
 
   describe('intentRequest', () => {
@@ -23,12 +26,12 @@ describe('requests', () => {
 
     it('calls host + intentName + params', async () => {
       const aRequest = intentRequest({ intentName, scenarioId, setupId })
-      fetch.mockResponseOnce(JSON.stringify({}))
-      window.bearer = { clientId: 42 }
+      global.fetch.mockResponseOnce(JSON.stringify({}))
+      window.bearer = { clientId: '42', load: jest.fn() }
 
       await aRequest({ page: 1 }, {})
 
-      expect(window.fetch).toBeCalledWith(
+      expect(global.fetch).toBeCalledWith(
         'https://localhost:5555/api/v1/aScenarioId/anIntent?page=1&setupId=1234&clientId=42',
         {
           credentials: 'include',
