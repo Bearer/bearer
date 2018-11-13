@@ -53,7 +53,7 @@
     "@types/jest": "^23.3.9",
     "@types/listr": "^0.13.0",
     "@types/nock": "^9.3.0",
-    "@types/node": "^10.12.5",
+    "@types/node": "^10.12.6",
     "@types/webpack": "^4.4.18",
     "archiver": "^3.0.0",
     "jest": "^23.6.0",
