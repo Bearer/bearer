@@ -35,10 +35,10 @@ export default function OutputDecorator(_options: TransformerOptions = {}): ts.T
         if (ts.isPropertyDeclaration(tsNode) && hasDecoratorNamed(tsNode, Decorators.Input)) {
           const name = getNodeName(tsNode)
           outputs.push({
-            emitMethodName: `${name}:saved`, // TODO: retrieve from options
+            emitMethodName: outputEventName(name), // TODO: retrieve from options
             propDeclarationName: name,
             typeIdentifier: tsNode.type,
-            watchedPropName: name
+            watchedPropName: name // TODO: retrieve from options
           })
         }
         return ts.visitEachChild(tsNode, visitor, _transformContext)
@@ -49,6 +49,11 @@ export default function OutputDecorator(_options: TransformerOptions = {}): ts.T
       return outputs
     }
   }
+}
+
+export function outputEventName(prefix: string, suffix?: string): string {
+  const _suffix = suffix || 'Saved'
+  return `${prefix}${_suffix.charAt(0).toUpperCase() + _suffix.slice(1)}`
 }
 
 type OutputMeta = {

@@ -9,6 +9,7 @@ import { getNodeName } from '../helpers/node-helpers'
 import { TransformerOptions } from '../types'
 
 import { ensureImportsFromCore } from './bearer'
+import { outputEventName } from './output-decorator'
 
 export default function InputDecorator(_options: TransformerOptions = {}): ts.TransformerFactory<ts.SourceFile> {
   return _transformContext => {
@@ -45,7 +46,7 @@ export default function InputDecorator(_options: TransformerOptions = {}): ts.Tr
             propDeclarationName: name,
             scope: 'string', // TODO: retrieve from options
             propName: `${name}RefId`, // TODO: retrieve from options
-            eventName: `${name}:saved`, // TODO: retrieve from options
+            eventName: outputEventName(name), // TODO: retrieve from options
             intentName: `get${capitalizedName}`, // TODO: retrieve from options
             intentMethodName: `fetcherGet${capitalizedName}`, // TODO: retrieve from options
             autoUpdate: true, // TODO: retrieve from options
@@ -144,7 +145,9 @@ function createEventListener(meta: InputMeta) {
   return ts.createMethod(
     [
       ts.createDecorator(
-        ts.createCall(ts.createIdentifier(Decorators.Listen), undefined, [ts.createLiteral(meta.eventName)])
+        ts.createCall(ts.createIdentifier(Decorators.Listen), undefined, [
+          ts.createLiteral(`${meta.scope}|${meta.eventName}`)
+        ])
       )
     ],
     undefined,

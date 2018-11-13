@@ -15,7 +15,11 @@ export default function bearerCleaning(_options: TransformerOptions = {}): ts.Tr
     }
 
     return tsSourceFile => {
-      const cleanedSourceFile = ensureNotImportedFromCore(tsSourceFile, [Decorators.RootComponent, Decorators.Input])
+      const cleanedSourceFile = ensureNotImportedFromCore(tsSourceFile, [
+        Decorators.RootComponent,
+        Decorators.Input,
+        Decorators.Output
+      ])
       return ts.visitEachChild(cleanedSourceFile, visit, _transformContext)
     }
   }

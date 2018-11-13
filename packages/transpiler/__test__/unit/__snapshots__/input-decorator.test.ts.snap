@@ -22,7 +22,7 @@ class NoOptionsComponent {
     farmer: BearerRef<Farmer>;
     @Prop({ \\"mutable\\": true })
     farmerRefId: string;
-    @Listen(\\"bearer|SPONGE_BOB|farmer|saved\\")
+    @Listen(\\"bearer|SPONGE_BOB|string|farmerSaved\\")
     farmerRefIdChanged(event) { this.farmerRefId = event.detail.referenceId; }
     _loadFarmer = () => {
         this.fetcherGetFarmer().then(({ data }: {
@@ -38,7 +38,7 @@ class NoOptionsComponent {
     aString: BearerRef<string> = \\"ok\\";
     @Prop({ \\"mutable\\": true })
     aStringRefId: string;
-    @Listen(\\"bearer|SPONGE_BOB|aString|saved\\")
+    @Listen(\\"bearer|SPONGE_BOB|string|aStringSaved\\")
     aStringRefIdChanged(event) { this.aStringRefId = event.detail.referenceId; }
     _loadAString = () => {
         this.fetcherGetAString().then(({ data }: {
@@ -54,7 +54,7 @@ class NoOptionsComponent {
     aStringWithoutInitializer: BearerRef<string>;
     @Prop({ \\"mutable\\": true })
     aStringWithoutInitializerRefId: string;
-    @Listen(\\"bearer|SPONGE_BOB|aStringWithoutInitializer|saved\\")
+    @Listen(\\"bearer|SPONGE_BOB|string|aStringWithoutInitializerSaved\\")
     aStringWithoutInitializerRefIdChanged(event) { this.aStringWithoutInitializerRefId = event.detail.referenceId; }
     _loadAStringWithoutInitializer = () => {
         this.fetcherGetAStringWithoutInitializer().then(({ data }: {
@@ -72,7 +72,7 @@ class NoOptionsComponent {
     }> = { title: 'Guest' };
     @Prop({ \\"mutable\\": true })
     objectRefId: string;
-    @Listen(\\"bearer|SPONGE_BOB|object|saved\\")
+    @Listen(\\"bearer|SPONGE_BOB|string|objectSaved\\")
     objectRefIdChanged(event) { this.objectRefId = event.detail.referenceId; }
     _loadObject = () => {
         this.fetcherGetObject().then(({ data }: {
@@ -92,7 +92,7 @@ class NoOptionsComponent {
     }>;
     @Prop({ \\"mutable\\": true })
     objectWithoutInitializerRefId: string;
-    @Listen(\\"bearer|SPONGE_BOB|objectWithoutInitializer|saved\\")
+    @Listen(\\"bearer|SPONGE_BOB|string|objectWithoutInitializerSaved\\")
     objectWithoutInitializerRefIdChanged(event) { this.objectWithoutInitializerRefId = event.detail.referenceId; }
     _loadObjectWithoutInitializer = () => {
         this.fetcherGetObjectWithoutInitializer().then(({ data }: {
@@ -110,7 +110,7 @@ class NoOptionsComponent {
     spongeBob: BearerRef<Sponge>;
     @Prop({ \\"mutable\\": true })
     spongeBobRefId: string;
-    @Listen(\\"bearer|SPONGE_BOB|spongeBob|saved\\")
+    @Listen(\\"bearer|SPONGE_BOB|string|spongeBobSaved\\")
     spongeBobRefIdChanged(event) { this.spongeBobRefId = event.detail.referenceId; }
     _loadSpongeBob = () => {
         this.fetcherGetSpongeBob().then(({ data }: {

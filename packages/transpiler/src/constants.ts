@@ -21,7 +21,8 @@ export enum Decorators {
   RetrieveStateIntent = 'RetrieveStateIntent',
   SaveStateIntent = 'SaveStateIntent',
   statePropName = 'statePropName',
-  Input = 'Input'
+  Input = 'Input',
+  Output = 'Output'
 }
 
 export enum Module {
