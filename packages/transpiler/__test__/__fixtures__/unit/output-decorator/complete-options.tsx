@@ -1,4 +1,5 @@
-import { BearerRef, Output, RootComponent, BearerFetch, Intent } from '@bearer/core'
+import { BearerRef, Output, RootComponent, BearerFetch, Intent, State, Watch } from '@bearer/core'
+import { EventEmitter } from 'events'
 
 type Farmer = {
   id: string
@@ -10,21 +11,27 @@ type Farmer = {
   role: 'action'
 })
 class NoOptionsComponent {
-  @Intent('doSomething') fetcher: BearerFetch<Farmer>
-
+  // write this
   @Output()
   farmer: BearerRef<Farmer>
-
+  // // generate this
+  // @Event() farmerSaved: EventEmitter<Farmer>
+  // @State() farmer: BearerRef<Farmer>
+  // @Intent('setFarmer') setFarmer: BearerFetch<Farmer>
+  // @Watch('farmer')
+  // farmerchangeHandler(newValue: BearerRef<Farmer>) {
+  //   if (newValue) {
+  //     this.setFarmer().then(({ data, referenceId }) => {
+  //       this.farmerSaved.emit({ referenceId, farmer: data }) // farmer
+  //     })
+  //   } else {
+  //     this.farmerSaved.emit({ farmer: newValue })
+  //   }
+  // }
   @Output({
     eventName: 'milked',
     propertyWatchedName: 'aPanda',
     referenceKeyName: 'aPandaKey'
   })
   farmerAndPanda: BearerRef<Farmer>
-
-  componentWillLoad() {
-    this.fetcher().then(({ data }) => {
-      this.farmerAndPanda = data
-    })
-  }
 }

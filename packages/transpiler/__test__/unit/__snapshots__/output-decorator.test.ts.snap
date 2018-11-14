@@ -3,7 +3,8 @@
 exports[`Output decorator units complete options match snapshot 1`] = `
 Object {
   "file": "complete-options.tsx",
-  "postContent": "import { BearerRef, BearerFetch, Intent, Component, Prop } from '@bearer/core';
+  "postContent": "import { BearerRef, BearerFetch, Intent, State, Watch, Component, Prop } from '@bearer/core';
+import { EventEmitter } from 'events';
 type Farmer = {
     id: string;
     name: string;
@@ -14,42 +15,79 @@ type Farmer = {
     shadow: true
 })
 class NoOptionsComponent {
-    private fetcher: BearerFetch<Farmer>;
+    // write this
     @Output()
     farmer: BearerRef<Farmer>;
+    // // generate this
+    // @Event() farmerSaved: EventEmitter<Farmer>
+    // @State() farmer: BearerRef<Farmer>
+    // @Intent('setFarmer') setFarmer: BearerFetch<Farmer>
+    // @Watch('farmer')
+    // farmerchangeHandler(newValue: BearerRef<Farmer>) {
+    //   if (newValue) {
+    //     this.setFarmer().then(({ data, referenceId }) => {
+    //       this.farmerSaved.emit({ referenceId, farmer: data }) // farmer
+    //     })
+    //   } else {
+    //     this.farmerSaved.emit({ farmer: newValue })
+    //   }
+    // }
     @Output({
         eventName: 'milked',
         propertyWatchedName: 'aPanda',
         referenceKeyName: 'aPandaKey'
     })
     farmerAndPanda: BearerRef<Farmer>;
-    componentWillLoad() {
-        this.fetcher().then(({ data }) => {
-            this.farmerAndPanda = data;
-        });
-    }
-    @State()
-    farmer: BearerRef<Farmer>;
+    private setFarmer: BearerFetch<BearerRef<Farmer>
+    // // generate this
+    // @Event() farmerSaved: EventEmitter<Farmer>
+    // @State() farmer: BearerRef<Farmer>
+    // @Intent('setFarmer') setFarmer: BearerFetch<Farmer>
+    // @Watch('farmer')
+    // farmerchangeHandler(newValue: BearerRef<Farmer>) {
+    //   if (newValue) {
+    //     this.setFarmer().then(({ data, referenceId }) => {
+    //       this.farmerSaved.emit({ referenceId, farmer: data }) // farmer
+    //     })
+    //   } else {
+    //     this.farmerSaved.emit({ farmer: newValue })
+    //   }
+    // }
+    >;
     @Event({ eventName: \\"bearer|SPONGE_BOB|no-options|farmerSaved\\" })
     farmerSaved: EventEmitter<any>;
+    @State()
+    farmer: BearerRef<Farmer>;
     @Watch(\\"farmer\\")
     farmerSavedWatcher(newValue) {
         if (newValue) {
+            this.setFarmer.then(({ referenceId, data }) => {
+                this.farmerSaved.emit({ referenceId, farmer: data || this.farmer });
+            });
+        }
+        else {
             this.farmerSaved.emit({ farmer: newValue });
         }
     }
-    @State()
-    farmerAndPanda: BearerRef<Farmer>;
+    private setFarmerAndPanda: BearerFetch<BearerRef<Farmer>>;
     @Event({ eventName: \\"bearer|SPONGE_BOB|no-options|farmerAndPandaSaved\\" })
     farmerAndPandaSaved: EventEmitter<any>;
+    @State()
+    farmerAndPanda: BearerRef<Farmer>;
     @Watch(\\"farmerAndPanda\\")
     farmerAndPandaSavedWatcher(newValue) {
         if (newValue) {
+            this.setFarmerAndPanda.then(({ referenceId, data }) => {
+                this.farmerAndPandaSaved.emit({ referenceId, farmerAndPanda: data || this.farmerAndPanda });
+            });
+        }
+        else {
             this.farmerAndPandaSaved.emit({ farmerAndPanda: newValue });
         }
     }
     constructor() {
-        Intent('doSomething')(this, \\"fetcher\\");
+        Intent(\\"setFarmer\\")(this, \\"setFarmer\\");
+        Intent(\\"setFarmerAndPanda\\")(this, \\"setFarmerAndPanda\\");
     }
     get SCENARIO_ID() { return \\"SPONGE_BOB\\"; }
     @Prop({ \\"context\\": \\"bearer\\" })

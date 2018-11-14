@@ -1,12 +1,5 @@
 import * as ts from 'typescript'
 
-// function appendToStatements(
-//   tsMethod: ts.MethodDeclaration,
-//   statements: ReadonlyArray<ts.Statement>
-// ): ts.MethodDeclaration {
-//   return updateMethodStatements(tsMethod, [], statements)
-// }
-
 export function prependToStatements(
   tsMethod: ts.MethodDeclaration,
   statements: ReadonlyArray<ts.Statement>

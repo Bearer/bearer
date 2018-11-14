@@ -89,23 +89,35 @@ export class FullComponent {
             this._loadGoat();
         }
     }
-    @State()
-    feedPanda: BearerRef<any>;
+    private setFeedPanda: BearerFetch<BearerRef<any>>;
     @Event({ eventName: \\"bearer|SPONGE_BOB|global|feedPandaSaved\\" })
     feedPandaSaved: EventEmitter<any>;
+    @State()
+    feedPanda: BearerRef<any>;
     @Watch(\\"feedPanda\\")
     feedPandaSavedWatcher(newValue) {
         if (newValue) {
+            this.setFeedPanda.then(({ referenceId, data }) => {
+                this.feedPandaSaved.emit({ referenceId, feedPanda: data || this.feedPanda });
+            });
+        }
+        else {
             this.feedPandaSaved.emit({ feedPanda: newValue });
         }
     }
-    @State()
-    feedPanda: BearerRef<any>;
+    private setFeedPanda: BearerFetch<BearerRef<any>>;
     @Event({ eventName: \\"bearer|SPONGE_BOB|global|feedPandaSaved\\" })
     feedPandaSaved: EventEmitter<any>;
+    @State()
+    feedPanda: BearerRef<any>;
     @Watch(\\"feedPanda\\")
     feedPandaSavedWatcher(newValue) {
         if (newValue) {
+            this.setFeedPanda.then(({ referenceId, data }) => {
+                this.feedPandaSaved.emit({ referenceId, feedPanda: data || this.feedPanda });
+            });
+        }
+        else {
             this.feedPandaSaved.emit({ feedPanda: newValue });
         }
     }
@@ -118,6 +130,8 @@ export class FullComponent {
         Intent('getPullRequest', IntentType.FetchData)(this, \\"fetchResource\\");
         Intent(\\"getFarmer\\")(this, \\"fetcherGetFarmer\\");
         Intent(\\"getGoat\\")(this, \\"fetcherGetGoat\\");
+        Intent(\\"setFeedPanda\\")(this, \\"setFeedPanda\\");
+        Intent(\\"setFeedPanda\\")(this, \\"setFeedPanda\\");
     }
     get SCENARIO_ID() { return \\"SPONGE_BOB\\"; }
     @Prop({ \\"context\\": \\"bearer\\" })

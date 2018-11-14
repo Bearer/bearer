@@ -8,6 +8,10 @@ import { hasDecoratorNamed } from '../helpers/decorator-helpers'
 import { getNodeName } from '../helpers/node-helpers'
 import { TransformerOptions } from '../types'
 
+const newValue = 'newValue'
+const data = 'data'
+const referenceId = 'referenceId'
+
 export default function OutputDecorator(_options: TransformerOptions = {}): ts.TransformerFactory<ts.SourceFile> {
   return _transformContext => {
     return tsSourceFile => {
@@ -32,6 +36,7 @@ export default function OutputDecorator(_options: TransformerOptions = {}): ts.T
           const name = getNodeName(tsNode)
           outputs.push({
             emitMethodName: outputEventName(name), // TODO: retrieve from options
+            intentName: `set${capitalize(name)}`,
             propDeclarationName: name,
             typeIdentifier: tsNode.type,
             watchedPropName: name // TODO: retrieve from options
@@ -57,7 +62,7 @@ export default function OutputDecorator(_options: TransformerOptions = {}): ts.T
     function injectOuputStatements(tsClass: ts.ClassDeclaration, outputsMeta: Array<OutputMeta>): ts.ClassDeclaration {
       const newMembers = outputsMeta.reduce(
         (members, meta) => {
-          const inputMembers = [createState(meta), createEvent(meta), createWatcher(meta)]
+          const inputMembers = [createIntent(meta), createEvent(meta), createState(meta), createWatcher(meta)]
           return members.concat(inputMembers)
         },
         [...tsClass.members]
@@ -103,8 +108,8 @@ export default function OutputDecorator(_options: TransformerOptions = {}): ts.T
         undefined
       )
     }
+
     function createWatcher(meta: OutputMeta): ts.MethodDeclaration {
-      const newValue = 'newValue'
       return ts.createMethod(
         [
           ts.createDecorator(
@@ -124,22 +129,14 @@ export default function OutputDecorator(_options: TransformerOptions = {}): ts.T
           [
             ts.createIf(
               ts.createIdentifier(newValue),
-              ts.createBlock(
-                [
-                  ts.createStatement(
-                    ts.createCall(
-                      ts.createPropertyAccess(ts.createPropertyAccess(ts.createThis(), meta.emitMethodName), 'emit'),
-                      undefined,
-                      [
-                        ts.createObjectLiteral([
-                          ts.createPropertyAssignment(meta.propDeclarationName, ts.createIdentifier(newValue))
-                        ])
-                      ]
-                    )
-                  )
-                ],
-                true
-              )
+              ts.createBlock([ts.createStatement(createIntentCall(meta))], true),
+              ts.createBlock([
+                ts.createStatement(
+                  createEmitCall(meta, [
+                    ts.createPropertyAssignment(meta.propDeclarationName, ts.createIdentifier(newValue))
+                  ])
+                )
+              ])
             )
           ],
           true
@@ -149,13 +146,84 @@ export default function OutputDecorator(_options: TransformerOptions = {}): ts.T
   }
 }
 
+function createIntent(meta: OutputMeta): ts.PropertyDeclaration {
+  return ts.createProperty(
+    [
+      ts.createDecorator(
+        ts.createCall(ts.createIdentifier(Decorators.Intent), undefined, [ts.createStringLiteral(meta.intentName)])
+      )
+    ],
+    undefined,
+    meta.intentName,
+    undefined,
+    ts.createTypeReferenceNode(ts.createIdentifier(Types.BearerFetch), [
+      meta.typeIdentifier || ts.createKeywordTypeNode(ts.SyntaxKind.AnyKeyword)
+    ]),
+    undefined
+  )
+}
+
+function createIntentCall(meta: OutputMeta) {
+  const newValueInitializer = ts.createBinary(
+    ts.createIdentifier(data),
+    ts.createToken(ts.SyntaxKind.BarBarToken),
+    ts.createPropertyAccess(ts.createThis(), meta.propDeclarationName)
+  )
+
+  const emit = createEmitCall(meta, [
+    ts.createShorthandPropertyAssignment(referenceId),
+    ts.createPropertyAssignment(meta.propDeclarationName, newValueInitializer)
+  ])
+  return ts.createCall(
+    ts.createPropertyAccess(ts.createPropertyAccess(ts.createThis(), meta.intentName), 'then'),
+    undefined,
+    [
+      ts.createArrowFunction(
+        undefined,
+        undefined,
+        // [],
+        [
+          ts.createParameter(
+            undefined,
+            undefined,
+            undefined,
+            ts.createObjectBindingPattern([
+              ts.createBindingElement(undefined, undefined, referenceId, undefined),
+              ts.createBindingElement(undefined, undefined, data, undefined)
+            ]),
+            undefined,
+            undefined,
+            undefined
+          )
+        ],
+        undefined,
+        ts.createToken(ts.SyntaxKind.EqualsGreaterThanToken),
+        ts.createBlock([ts.createStatement(emit)], true)
+      )
+    ]
+  )
+}
+
+function createEmitCall(meta: OutputMeta, properties: Array<ts.ObjectLiteralElementLike>): ts.CallExpression {
+  return ts.createCall(
+    ts.createPropertyAccess(ts.createPropertyAccess(ts.createThis(), meta.emitMethodName), 'emit'),
+    undefined,
+    [ts.createObjectLiteral(properties)]
+  )
+}
+
 export function outputEventName(prefix: string, suffix?: string): string {
   const _suffix = suffix || 'Saved'
-  return `${prefix}${_suffix.charAt(0).toUpperCase() + _suffix.slice(1)}`
+  return `${prefix}${capitalize(_suffix)}`
+}
+
+function capitalize(string: string): string {
+  return string.charAt(0).toUpperCase() + string.slice(1)
 }
 
 type OutputMeta = {
   emitMethodName: string
+  intentName: string
   propDeclarationName: string
   typeIdentifier?: ts.TypeNode
   watchedPropName: string

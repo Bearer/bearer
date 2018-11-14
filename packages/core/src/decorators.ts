@@ -74,6 +74,7 @@ export declare const Input: TInputDecorator
  * Output Decorator
  */
 type TOutputDecoratorOptions = {
+  intentName?: string
   eventName?: string
   propertyWatchedName?: string
   referenceKeyName?: string
