@@ -3,7 +3,7 @@
 exports[`Output decorator units complete options match snapshot 1`] = `
 Object {
   "file": "complete-options.tsx",
-  "postContent": "import { BearerRef, Component, EventEmitter, BearerFetch, State, Intent, Watch, Prop } from '@bearer/core';
+  "postContent": "import { BearerRef, Component, BearerFetch, EventEmitter, Event, Intent, State, Watch, Prop } from '@bearer/core';
 type Farmer = {
     id: string;
     name: string;
@@ -14,7 +14,7 @@ type Farmer = {
     shadow: true
 })
 class NoOptionsComponent {
-    private setFarmer: BearerFetch<BearerRef<Farmer>
+    private saveFarmer: BearerFetch<BearerRef<Farmer>
     // // generate this
     // @Event() farmerSaved: EventEmitter<Farmer>
     // @State() farmer: BearerRef<Farmer>
@@ -37,7 +37,7 @@ class NoOptionsComponent {
     @Watch(\\"farmer\\")
     farmerSavedWatcher(newValue) {
         if (newValue) {
-            this.setFarmer().then(({ referenceId, data }) => {
+            this.saveFarmer().then(({ referenceId, data }) => {
                 this.farmerSaved.emit({ referenceId, farmer: data || this.farmer });
             });
         }
@@ -45,15 +45,15 @@ class NoOptionsComponent {
             this.farmerSaved.emit({ farmer: newValue });
         }
     }
-    private setFarmerAndPanda: BearerFetch<BearerRef<Farmer>>;
+    private saveFarmerAndPanda: BearerFetch<BearerRef<Farmer>>;
     @Event({ eventName: \\"bearer|SPONGE_BOB|no-options|farmerAndPandaSaved\\" })
     farmerAndPandaSaved: EventEmitter<any>;
     @State()
-    farmerAndPanda: BearerRef<Farmer>;
+    farmerAndPanda: BearerRef<Farmer> = {};
     @Watch(\\"farmerAndPanda\\")
     farmerAndPandaSavedWatcher(newValue) {
         if (newValue) {
-            this.setFarmerAndPanda().then(({ referenceId, data }) => {
+            this.saveFarmerAndPanda().then(({ referenceId, data }) => {
                 this.farmerAndPandaSaved.emit({ referenceId, farmerAndPanda: data || this.farmerAndPanda });
             });
         }
@@ -62,8 +62,8 @@ class NoOptionsComponent {
         }
     }
     constructor() {
-        Intent(\\"setFarmer\\")(this, \\"setFarmer\\");
-        Intent(\\"setFarmerAndPanda\\")(this, \\"setFarmerAndPanda\\");
+        Intent(\\"saveFarmer\\")(this, \\"saveFarmer\\");
+        Intent(\\"saveFarmerAndPanda\\")(this, \\"saveFarmerAndPanda\\");
     }
     get SCENARIO_ID() { return \\"SPONGE_BOB\\"; }
     @Prop({ \\"context\\": \\"bearer\\" })

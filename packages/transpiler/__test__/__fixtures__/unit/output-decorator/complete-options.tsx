@@ -32,5 +32,5 @@ class NoOptionsComponent {
     propertyWatchedName: 'aPanda',
     referenceKeyName: 'aPandaKey'
   })
-  farmerAndPanda: BearerRef<Farmer>
+  farmerAndPanda: BearerRef<Farmer> = {}
 }

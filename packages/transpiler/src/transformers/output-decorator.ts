@@ -28,10 +28,11 @@ export default function OutputDecorator(_options: TransformerOptions = {}): ts.T
       }
 
       const sourceFileWithImports = ensureImportsFromCore(tsSourceFile, [
-        Types.EventEmitter,
         Types.BearerFetch,
-        Decorators.State,
+        Types.EventEmitter,
+        Decorators.Event,
         Decorators.Intent,
+        Decorators.State,
         Decorators.Watch
       ])
 
@@ -46,9 +47,10 @@ export default function OutputDecorator(_options: TransformerOptions = {}): ts.T
           const name = getNodeName(tsNode)
           outputs.push({
             emitMethodName: outputEventName(name), // TODO: retrieve from options
-            intentName: `set${capitalize(name)}`,
+            intentName: `save${capitalize(name)}`,
             propDeclarationName: name,
             typeIdentifier: tsNode.type,
+            initializer: tsNode.initializer,
             watchedPropName: name // TODO: retrieve from options
           })
         }
@@ -114,7 +116,7 @@ function createState(meta: OutputMeta): ts.PropertyDeclaration {
     meta.propDeclarationName,
     undefined,
     meta.typeIdentifier,
-    undefined
+    meta.initializer
   )
 }
 
@@ -234,6 +236,7 @@ type OutputMeta = {
   emitMethodName: string
   intentName: string
   propDeclarationName: string
+  initializer: ts.Expression
   typeIdentifier?: ts.TypeNode
   watchedPropName: string
 }

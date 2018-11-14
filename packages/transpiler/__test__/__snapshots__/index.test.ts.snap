@@ -3,7 +3,7 @@
 exports[`Transpiler integration test FullComponent.tsx match expectation 1`] = `
 Object {
   "file": "FullComponent.tsx",
-  "postContent": "import { BearerFetch, BearerRef, BearerState, Component, Intent, IntentType, Listen, State, Watch, Prop, EventEmitter, Element } from '@bearer/core';
+  "postContent": "import { BearerFetch, BearerRef, BearerState, Component, Intent, IntentType, Listen, State, Watch, Prop, EventEmitter, Event, Element } from '@bearer/core';
 @Component({
     tag: 'full-component'
 })
@@ -81,7 +81,7 @@ export class FullComponent {
             this._loadGoat();
         }
     }
-    private setFeedPanda: BearerFetch<BearerRef<any>>;
+    private saveFeedPanda: BearerFetch<BearerRef<any>>;
     @Event({ eventName: \\"bearer|SPONGE_BOB|global|feedPandaSaved\\" })
     feedPandaSaved: EventEmitter<any>;
     @State()
@@ -89,7 +89,7 @@ export class FullComponent {
     @Watch(\\"feedPanda\\")
     feedPandaSavedWatcher(newValue) {
         if (newValue) {
-            this.setFeedPanda().then(({ referenceId, data }) => {
+            this.saveFeedPanda().then(({ referenceId, data }) => {
                 this.feedPandaSaved.emit({ referenceId, feedPanda: data || this.feedPanda });
             });
         }
@@ -97,7 +97,7 @@ export class FullComponent {
             this.feedPandaSaved.emit({ feedPanda: newValue });
         }
     }
-    private setFeedPanda: BearerFetch<BearerRef<any>>;
+    private saveFeedPanda: BearerFetch<BearerRef<any>>;
     @Event({ eventName: \\"bearer|SPONGE_BOB|global|feedPandaSaved\\" })
     feedPandaSaved: EventEmitter<any>;
     @State()
@@ -105,7 +105,7 @@ export class FullComponent {
     @Watch(\\"feedPanda\\")
     feedPandaSavedWatcher(newValue) {
         if (newValue) {
-            this.setFeedPanda().then(({ referenceId, data }) => {
+            this.saveFeedPanda().then(({ referenceId, data }) => {
                 this.feedPandaSaved.emit({ referenceId, feedPanda: data || this.feedPanda });
             });
         }
@@ -122,8 +122,8 @@ export class FullComponent {
         Intent('getPullRequest', IntentType.FetchData)(this, \\"fetchResource\\");
         Intent(\\"getFarmer\\")(this, \\"fetcherGetFarmer\\");
         Intent(\\"getGoat\\")(this, \\"fetcherGetGoat\\");
-        Intent(\\"setFeedPanda\\")(this, \\"setFeedPanda\\");
-        Intent(\\"setFeedPanda\\")(this, \\"setFeedPanda\\");
+        Intent(\\"saveFeedPanda\\")(this, \\"saveFeedPanda\\");
+        Intent(\\"saveFeedPanda\\")(this, \\"saveFeedPanda\\");
     }
     get SCENARIO_ID() { return \\"SPONGE_BOB\\"; }
     @Prop({ \\"context\\": \\"bearer\\" })
