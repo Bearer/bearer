@@ -1,5 +1,4 @@
-import { BearerRef, Output, RootComponent, BearerFetch, Intent, State, Watch } from '@bearer/core'
-import { EventEmitter } from 'events'
+import { BearerRef, Output, RootComponent } from '@bearer/core'
 
 type Farmer = {
   id: string

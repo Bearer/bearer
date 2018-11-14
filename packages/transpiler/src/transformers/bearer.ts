@@ -1,6 +1,6 @@
 import * as ts from 'typescript'
 
-import { BEARER, Component, Decorators, Module } from '../constants'
+import { BEARER, Component, Decorators, Module, Types } from '../constants'
 import { getNodeName } from '../helpers/node-helpers'
 
 // this.BEARER_SCENARIO_ID => replaced during transpilation
@@ -273,7 +273,10 @@ export function ensureBearerContextInjected(classNode: ts.ClassDeclaration): ts.
   return has ? classNode : addBearerContextProp(classNode)
 }
 
-export function ensureImportsFromCore(tsSourceFile: ts.SourceFile, decorators: Array<Decorators>): ts.SourceFile {
+export function ensureImportsFromCore(
+  tsSourceFile: ts.SourceFile,
+  decorators: Array<Decorators | Types>
+): ts.SourceFile {
   return decorators.reduce((sourceFile, decorator) => ensureHasImportFromCore(sourceFile, decorator), tsSourceFile)
 }
 

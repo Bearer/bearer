@@ -3,8 +3,7 @@
 exports[`Output decorator units complete options match snapshot 1`] = `
 Object {
   "file": "complete-options.tsx",
-  "postContent": "import { BearerRef, BearerFetch, Intent, State, Watch, Component, Prop } from '@bearer/core';
-import { EventEmitter } from 'events';
+  "postContent": "import { BearerRef, Component, EventEmitter, BearerFetch, State, Intent, Watch, Prop } from '@bearer/core';
 type Farmer = {
     id: string;
     name: string;

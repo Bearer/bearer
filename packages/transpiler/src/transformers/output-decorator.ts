@@ -8,6 +8,8 @@ import { hasDecoratorNamed } from '../helpers/decorator-helpers'
 import { getNodeName } from '../helpers/node-helpers'
 import { TransformerOptions } from '../types'
 
+import { ensureImportsFromCore } from './bearer'
+
 const newValue = 'newValue'
 const data = 'data'
 const referenceId = 'referenceId'
@@ -25,7 +27,15 @@ export default function OutputDecorator(_options: TransformerOptions = {}): ts.T
         return tsSourceFile
       }
 
-      return ts.visitEachChild(tsSourceFile, visit(outputsMeta), _transformContext)
+      const sourceFileWithImports = ensureImportsFromCore(tsSourceFile, [
+        Types.EventEmitter,
+        Types.BearerFetch,
+        Decorators.State,
+        Decorators.Intent,
+        Decorators.Watch
+      ])
+
+      return ts.visitEachChild(sourceFileWithImports, visit(outputsMeta), _transformContext)
     }
 
     function retrieveOutputsMetas(tsSourceFile: ts.SourceFile): Array<OutputMeta> {
