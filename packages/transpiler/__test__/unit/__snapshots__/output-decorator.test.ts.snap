@@ -37,7 +37,7 @@ class NoOptionsComponent {
     @Watch(\\"farmer\\")
     farmerSavedWatcher(newValue) {
         if (newValue) {
-            this.setFarmer.then(({ referenceId, data }) => {
+            this.setFarmer().then(({ referenceId, data }) => {
                 this.farmerSaved.emit({ referenceId, farmer: data || this.farmer });
             });
         }
@@ -53,7 +53,7 @@ class NoOptionsComponent {
     @Watch(\\"farmerAndPanda\\")
     farmerAndPandaSavedWatcher(newValue) {
         if (newValue) {
-            this.setFarmerAndPanda.then(({ referenceId, data }) => {
+            this.setFarmerAndPanda().then(({ referenceId, data }) => {
                 this.farmerAndPandaSaved.emit({ referenceId, farmerAndPanda: data || this.farmerAndPanda });
             });
         }

@@ -89,7 +89,7 @@ export class FullComponent {
     @Watch(\\"feedPanda\\")
     feedPandaSavedWatcher(newValue) {
         if (newValue) {
-            this.setFeedPanda.then(({ referenceId, data }) => {
+            this.setFeedPanda().then(({ referenceId, data }) => {
                 this.feedPandaSaved.emit({ referenceId, feedPanda: data || this.feedPanda });
             });
         }
@@ -105,7 +105,7 @@ export class FullComponent {
     @Watch(\\"feedPanda\\")
     feedPandaSavedWatcher(newValue) {
         if (newValue) {
-            this.setFeedPanda.then(({ referenceId, data }) => {
+            this.setFeedPanda().then(({ referenceId, data }) => {
                 this.feedPandaSaved.emit({ referenceId, feedPanda: data || this.feedPanda });
             });
         }

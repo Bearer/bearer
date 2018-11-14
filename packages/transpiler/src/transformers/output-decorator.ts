@@ -68,92 +68,87 @@ export default function OutputDecorator(_options: TransformerOptions = {}): ts.T
         return ts.visitEachChild(tsNode, visit(outputsMeta), _transformContext)
       }
     }
+  }
+}
+function injectOuputStatements(tsClass: ts.ClassDeclaration, outputsMeta: Array<OutputMeta>): ts.ClassDeclaration {
+  const newMembers = outputsMeta.reduce(
+    (members, meta) => {
+      const inputMembers = [createIntent(meta), createEvent(meta), createState(meta), createWatcher(meta)]
+      return members.concat(inputMembers)
+    },
+    [...tsClass.members]
+  )
 
-    function injectOuputStatements(tsClass: ts.ClassDeclaration, outputsMeta: Array<OutputMeta>): ts.ClassDeclaration {
-      const newMembers = outputsMeta.reduce(
-        (members, meta) => {
-          const inputMembers = [createIntent(meta), createEvent(meta), createState(meta), createWatcher(meta)]
-          return members.concat(inputMembers)
-        },
-        [...tsClass.members]
+  return ts.updateClassDeclaration(
+    tsClass,
+    tsClass.decorators,
+    tsClass.modifiers,
+    tsClass.name,
+    tsClass.typeParameters,
+    tsClass.heritageClauses,
+    newMembers
+  )
+}
+
+function createEvent(meta: OutputMeta): ts.PropertyDeclaration {
+  return ts.createProperty(
+    [
+      ts.createDecorator(
+        ts.createCall(ts.createIdentifier(Decorators.Event), undefined, [ts.createStringLiteral(meta.watchedPropName)])
       )
+    ],
+    undefined,
+    meta.emitMethodName,
+    undefined,
+    ts.createTypeReferenceNode(ts.createIdentifier(Types.EventEmitter), [
+      ts.createKeywordTypeNode(ts.SyntaxKind.AnyKeyword)
+    ]),
+    undefined
+  )
+}
 
-      return ts.updateClassDeclaration(
-        tsClass,
-        tsClass.decorators,
-        tsClass.modifiers,
-        tsClass.name,
-        tsClass.typeParameters,
-        tsClass.heritageClauses,
-        newMembers
+function createState(meta: OutputMeta): ts.PropertyDeclaration {
+  return ts.createProperty(
+    [ts.createDecorator(ts.createCall(ts.createIdentifier(Decorators.State), undefined, []))],
+    undefined,
+    meta.propDeclarationName,
+    undefined,
+    meta.typeIdentifier,
+    undefined
+  )
+}
+
+function createWatcher(meta: OutputMeta): ts.MethodDeclaration {
+  return ts.createMethod(
+    [
+      ts.createDecorator(
+        ts.createCall(ts.createIdentifier(Decorators.Watch), undefined, [ts.createStringLiteral(meta.watchedPropName)])
       )
-    }
-
-    function createEvent(meta: OutputMeta): ts.PropertyDeclaration {
-      return ts.createProperty(
-        [
-          ts.createDecorator(
-            ts.createCall(ts.createIdentifier(Decorators.Event), undefined, [
-              ts.createStringLiteral(meta.watchedPropName)
-            ])
-          )
-        ],
-        undefined,
-        meta.emitMethodName,
-        undefined,
-        ts.createTypeReferenceNode(ts.createIdentifier(Types.EventEmitter), [
-          ts.createKeywordTypeNode(ts.SyntaxKind.AnyKeyword)
-        ]),
-        undefined
-      )
-    }
-
-    function createState(meta: OutputMeta): ts.PropertyDeclaration {
-      return ts.createProperty(
-        [ts.createDecorator(ts.createCall(ts.createIdentifier(Decorators.State), undefined, []))],
-        undefined,
-        meta.propDeclarationName,
-        undefined,
-        meta.typeIdentifier,
-        undefined
-      )
-    }
-
-    function createWatcher(meta: OutputMeta): ts.MethodDeclaration {
-      return ts.createMethod(
-        [
-          ts.createDecorator(
-            ts.createCall(ts.createIdentifier(Decorators.Watch), undefined, [
-              ts.createStringLiteral(meta.watchedPropName)
-            ])
-          )
-        ],
-        undefined,
-        undefined,
-        `${meta.emitMethodName}Watcher`,
-        undefined,
-        undefined,
-        [ts.createParameter(undefined, undefined, undefined, newValue, undefined, undefined, undefined)], // parameters
-        undefined,
-        ts.createBlock(
-          [
-            ts.createIf(
-              ts.createIdentifier(newValue),
-              ts.createBlock([ts.createStatement(createIntentCall(meta))], true),
-              ts.createBlock([
-                ts.createStatement(
-                  createEmitCall(meta, [
-                    ts.createPropertyAssignment(meta.propDeclarationName, ts.createIdentifier(newValue))
-                  ])
-                )
+    ],
+    undefined,
+    undefined,
+    `${meta.emitMethodName}Watcher`,
+    undefined,
+    undefined,
+    [ts.createParameter(undefined, undefined, undefined, newValue, undefined, undefined, undefined)], // parameters
+    undefined,
+    ts.createBlock(
+      [
+        ts.createIf(
+          ts.createIdentifier(newValue),
+          ts.createBlock([ts.createStatement(createIntentCall(meta))], true),
+          ts.createBlock([
+            ts.createStatement(
+              createEmitCall(meta, [
+                ts.createPropertyAssignment(meta.propDeclarationName, ts.createIdentifier(newValue))
               ])
             )
-          ],
-          true
+          ])
         )
-      )
-    }
-  }
+      ],
+      true
+    )
+  )
 }
 
 function createIntent(meta: OutputMeta): ts.PropertyDeclaration {
@@ -184,8 +179,12 @@ function createIntentCall(meta: OutputMeta) {
     ts.createShorthandPropertyAssignment(referenceId),
     ts.createPropertyAssignment(meta.propDeclarationName, newValueInitializer)
   ])
+
   return ts.createCall(
-    ts.createPropertyAccess(ts.createPropertyAccess(ts.createThis(), meta.intentName), 'then'),
+    ts.createPropertyAccess(
+      ts.createCall(ts.createPropertyAccess(ts.createThis(), meta.intentName), undefined, undefined),
+      'then'
+    ),
     undefined,
     [
       ts.createArrowFunction(
