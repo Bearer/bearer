@@ -8,6 +8,6 @@ export function isMethodNamed(tsNode: ts.Node, name: string): boolean {
   return ts.isMethodDeclaration(tsNode) && (tsNode.name as ts.Identifier).escapedText === name
 }
 
-export function getNodeName(tsNode: ts.PropertyDeclaration | ts.MethodDeclaration): string {
+export function getNodeName(tsNode: { name: ts.PropertyName }): string {
   return (tsNode.name as ts.Identifier).escapedText.toString()
 }

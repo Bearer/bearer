@@ -8,14 +8,6 @@ Object {
     tag: 'full-component'
 })
 export class FullComponent {
-    @Output()
-    feedPanda: BearerRef<any>;
-    @Output({
-        eventName: 'milked',
-        propertyWatchedName: 'aPanda',
-        referenceKeyName: 'aPandaKey'
-    })
-    feedPanda: BearerRef<any>;
     private fetcher: BearerFetch;
     @RetrieveStateIntent()
     retrieve: BearerFetch;

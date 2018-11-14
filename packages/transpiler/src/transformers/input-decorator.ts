@@ -94,11 +94,6 @@ export default function InputDecorator(_options: TransformerOptions = {}): ts.Tr
 
     function replaceInputVisitor(inputsMeta: Array<InputMeta>): (tsNode: ts.Node) => ts.VisitResult<ts.Node> {
       return (tsNode: ts.Node) => {
-        // remove input usage
-        if (ts.isPropertyDeclaration(tsNode) && hasDecoratorNamed(tsNode, Decorators.Input)) {
-          return null
-        }
-
         if (ts.isClassDeclaration(tsNode)) {
           return ts.visitEachChild(
             injectInputStatements(tsNode, inputsMeta),
