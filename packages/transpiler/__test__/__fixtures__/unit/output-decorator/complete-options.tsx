@@ -30,7 +30,8 @@ class NoOptionsComponent {
   @Output({
     eventName: 'milked',
     propertyWatchedName: 'aPanda',
-    referenceKeyName: 'aPandaKey'
+    referenceKeyName: 'aPandaKey',
+    intentName: 'milkWithAbottle'
   })
   farmerAndPanda: BearerRef<Farmer> = {}
 }

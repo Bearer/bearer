@@ -74,3 +74,14 @@ export function getDecoratorNamed(
     return tsDecoratedNode.decorators.find(decorator => decoratorNamed(decorator, name))
   }
 }
+
+export function extractStringOptions<T>(objectLitteral: ts.ObjectLiteralExpression, keys: Array<keyof T>): Partial<T> {
+  const values: Partial<T> = {}
+  keys.map(value => {
+    const optionValue = getExpressionFromLiteralObject<ts.StringLiteral>(objectLitteral, value as string)
+    if (optionValue) {
+      values[value as string] = optionValue && optionValue.text
+    }
+  })
+  return values
+}

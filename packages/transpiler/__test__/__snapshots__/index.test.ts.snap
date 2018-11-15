@@ -98,19 +98,19 @@ export class FullComponent {
         }
     }
     private saveFeedPanda: BearerFetch<BearerRef<any>>;
-    @Event({ eventName: \\"bearer|SPONGE_BOB|global|feedPandaSaved\\" })
-    feedPandaSaved: EventEmitter<any>;
+    @Event({ eventName: \\"bearer|SPONGE_BOB|global|milked\\" })
+    milked: EventEmitter<any>;
     @State()
     feedPanda: BearerRef<any>;
-    @Watch(\\"feedPanda\\")
-    feedPandaSavedWatcher(newValue) {
+    @Watch(\\"aPanda\\")
+    milkedWatcher(newValue) {
         if (newValue) {
             this.saveFeedPanda({ body: { feedPanda: newValue } }).then(({ referenceId, data }) => {
-                this.feedPandaSaved.emit({ referenceId, feedPanda: data || this.feedPanda });
+                this.milked.emit({ referenceId, feedPanda: data || this.feedPanda });
             });
         }
         else {
-            this.feedPandaSaved.emit({ feedPanda: newValue });
+            this.milked.emit({ feedPanda: newValue });
         }
     }
     @Prop()

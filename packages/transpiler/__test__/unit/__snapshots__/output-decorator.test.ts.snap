@@ -45,25 +45,25 @@ class NoOptionsComponent {
             this.farmerSaved.emit({ farmer: newValue });
         }
     }
-    private saveFarmerAndPanda: BearerFetch<BearerRef<Farmer>>;
-    @Event({ eventName: \\"bearer|SPONGE_BOB|no-options|farmerAndPandaSaved\\" })
-    farmerAndPandaSaved: EventEmitter<any>;
+    private milkWithAbottle: BearerFetch<BearerRef<Farmer>>;
+    @Event({ eventName: \\"bearer|SPONGE_BOB|no-options|milked\\" })
+    milked: EventEmitter<any>;
     @State()
     farmerAndPanda: BearerRef<Farmer> = {};
-    @Watch(\\"farmerAndPanda\\")
-    farmerAndPandaSavedWatcher(newValue) {
+    @Watch(\\"aPanda\\")
+    milkedWatcher(newValue) {
         if (newValue) {
-            this.saveFarmerAndPanda({ body: { farmerAndPanda: newValue } }).then(({ referenceId, data }) => {
-                this.farmerAndPandaSaved.emit({ referenceId, farmerAndPanda: data || this.farmerAndPanda });
+            this.milkWithAbottle({ body: { farmerAndPanda: newValue } }).then(({ referenceId, data }) => {
+                this.milked.emit({ referenceId, farmerAndPanda: data || this.farmerAndPanda });
             });
         }
         else {
-            this.farmerAndPandaSaved.emit({ farmerAndPanda: newValue });
+            this.milked.emit({ farmerAndPanda: newValue });
         }
     }
     constructor() {
         Intent(\\"saveFarmer\\")(this, \\"saveFarmer\\");
-        Intent(\\"saveFarmerAndPanda\\")(this, \\"saveFarmerAndPanda\\");
+        Intent(\\"milkWithAbottle\\")(this, \\"milkWithAbottle\\");
     }
     get SCENARIO_ID() { return \\"SPONGE_BOB\\"; }
     @Prop({ \\"context\\": \\"bearer\\" })

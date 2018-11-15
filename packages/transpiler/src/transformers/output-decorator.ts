@@ -5,7 +5,7 @@ import { TOutputDecoratorOptions } from '@bearer/types/lib/input-output-decorato
 import * as ts from 'typescript'
 
 import { Decorators, Types } from '../constants'
-import { hasDecoratorNamed } from '../helpers/decorator-helpers'
+import { extractStringOptions, getDecoratorNamed } from '../helpers/decorator-helpers'
 import { getNodeName } from '../helpers/node-helpers'
 import { TransformerOptions } from '../types'
 
@@ -44,18 +44,32 @@ export default function OutputDecorator(_options: TransformerOptions = {}): ts.T
       const outputs: Array<OutputMeta> = []
 
       const visitor = (tsNode: ts.Node) => {
-        if (ts.isPropertyDeclaration(tsNode) && hasDecoratorNamed(tsNode, Decorators.Output)) {
-          const name = getNodeName(tsNode)
-          outputs.push({
-            eventName: outputEventName(name), // TODO: retrieve from options
-            intentName: `save${capitalize(name)}`, // TODO: retrieve from options
-            intentPropertyName: name, // TODO: retrieve from options
-            propDeclarationName: name,
-            typeIdentifier: tsNode.type,
-            initializer: tsNode.initializer,
-            referenceKeyName: referenceId,
-            propertyWatchedName: name // TODO: retrieve from options
-          })
+        if (ts.isPropertyDeclaration(tsNode)) {
+          const decorator = getDecoratorNamed(tsNode, Decorators.Output)
+          if (decorator) {
+            const name = getNodeName(tsNode)
+            const callArgs = (decorator.expression as ts.CallExpression).arguments[0] as ts.ObjectLiteralExpression
+            const options = !callArgs
+              ? {}
+              : extractStringOptions<TOutputDecoratorOptions>(callArgs, [
+                  'eventName',
+                  'intentName',
+                  'intentPropertyName',
+                  'propertyWatchedName',
+                  'referenceKeyName'
+                ])
+            outputs.push({
+              eventName: outputEventName(name),
+              intentName: `save${capitalize(name)}`,
+              intentPropertyName: name,
+              propDeclarationName: name,
+              typeIdentifier: tsNode.type,
+              initializer: tsNode.initializer,
+              referenceKeyName: referenceId,
+              propertyWatchedName: name,
+              ...options
+            })
+          }
         }
         return ts.visitEachChild(tsNode, visitor, _transformContext)
       }
@@ -183,7 +197,7 @@ function createIntentCall(meta: OutputMeta) {
     ts.createToken(ts.SyntaxKind.BarBarToken),
     ts.createPropertyAccess(ts.createThis(), meta.propDeclarationName)
   )
-
+  // TODO use referenceKeyName
   const emit = createEmitCall(meta, [
     ts.createShorthandPropertyAssignment(referenceId),
     ts.createPropertyAssignment(meta.propDeclarationName, newValueInitializer)
@@ -249,7 +263,6 @@ function capitalize(string: string): string {
 }
 
 type OutputMeta = TOutputDecoratorOptions & {
-  eventName: string
   propDeclarationName: string
   initializer: ts.Expression
   typeIdentifier?: ts.TypeNode
