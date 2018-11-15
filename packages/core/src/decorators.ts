@@ -1,3 +1,4 @@
+import { TInputDecorator, TOutputDecorator } from '@bearer/types/lib/input-output-decorators'
 import * as d from '@stencil/core/dist/declarations/index'
 
 export * from './decorators/Intent'
@@ -58,30 +59,12 @@ export declare const RootComponent: IBearerRootComponentDecorator<any>
 /**
  * Input Decorator
  */
-type TInputDecoratorOptions = {
-  group?: string // target a different group of component to listen to eventName
-  propName?: string // specifiy a different attribut name to your component
-  eventName?: string // listen to a different event name from group
-  intentName?: string // specify an intent to use to retrieve data
-  autoLoad?: boolean // auto load data when componentDidLoad
-}
-
-type TInputDecorator = (options?: TInputDecoratorOptions) => (target: any, key: string) => void
 
 export declare const Input: TInputDecorator
 
 /**
  * Output Decorator
  */
-type TOutputDecoratorOptions = {
-  intentName?: string // Intent you want to use to save data: must be a SaveState
-  intentPropertyName?: string // name used to send data in the body to the intent
-  eventName?: string // event triggered when the data is saved
-  propertyWatchedName?: string
-  referenceKeyName?: string // name of the reference sent within the event: default referenceId
-}
-
-type TOutputDecorator = (options?: TOutputDecoratorOptions) => (target: any, key: string) => void
 
 export declare const Output: TOutputDecorator
 

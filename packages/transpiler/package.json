@@ -23,6 +23,7 @@
     "url": "github:Bearer/bearer"
   },
   "devDependencies": {
+    "@bearer/types": "^0.72.1",
     "@types/fs-extra": "^5.0.3",
     "@types/jest": "^23.3.9",
     "@types/node": "^10.12.6",

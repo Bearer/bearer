@@ -1,6 +1,7 @@
 /*
  * Transformer boilerplate
  */
+import { TOutputDecoratorOptions } from '@bearer/types/lib/input-output-decorators'
 import * as ts from 'typescript'
 
 import { Decorators, Types } from '../constants'
@@ -46,13 +47,14 @@ export default function OutputDecorator(_options: TransformerOptions = {}): ts.T
         if (ts.isPropertyDeclaration(tsNode) && hasDecoratorNamed(tsNode, Decorators.Output)) {
           const name = getNodeName(tsNode)
           outputs.push({
-            emitMethodName: outputEventName(name), // TODO: retrieve from options
+            eventName: outputEventName(name), // TODO: retrieve from options
             intentName: `save${capitalize(name)}`, // TODO: retrieve from options
             intentPropertyName: name, // TODO: retrieve from options
             propDeclarationName: name,
             typeIdentifier: tsNode.type,
             initializer: tsNode.initializer,
-            watchedPropName: name // TODO: retrieve from options
+            referenceKeyName: referenceId,
+            propertyWatchedName: name // TODO: retrieve from options
           })
         }
         return ts.visitEachChild(tsNode, visitor, _transformContext)
@@ -97,11 +99,13 @@ function createEvent(meta: OutputMeta): ts.PropertyDeclaration {
   return ts.createProperty(
     [
       ts.createDecorator(
-        ts.createCall(ts.createIdentifier(Decorators.Event), undefined, [ts.createStringLiteral(meta.watchedPropName)])
+        ts.createCall(ts.createIdentifier(Decorators.Event), undefined, [
+          ts.createStringLiteral(meta.propertyWatchedName)
+        ])
       )
     ],
     undefined,
-    meta.emitMethodName,
+    meta.eventName,
     undefined,
     ts.createTypeReferenceNode(ts.createIdentifier(Types.EventEmitter), [
       ts.createKeywordTypeNode(ts.SyntaxKind.AnyKeyword)
@@ -125,12 +129,14 @@ function createWatcher(meta: OutputMeta): ts.MethodDeclaration {
   return ts.createMethod(
     [
       ts.createDecorator(
-        ts.createCall(ts.createIdentifier(Decorators.Watch), undefined, [ts.createStringLiteral(meta.watchedPropName)])
+        ts.createCall(ts.createIdentifier(Decorators.Watch), undefined, [
+          ts.createStringLiteral(meta.propertyWatchedName)
+        ])
       )
     ],
     undefined,
     undefined,
-    `${meta.emitMethodName}Watcher`,
+    `${meta.eventName}Watcher`,
     undefined,
     undefined,
     [ts.createParameter(undefined, undefined, undefined, newValue, undefined, undefined, undefined)], // parameters
@@ -227,7 +233,7 @@ function createIntentCall(meta: OutputMeta) {
 
 function createEmitCall(meta: OutputMeta, properties: Array<ts.ObjectLiteralElementLike>): ts.CallExpression {
   return ts.createCall(
-    ts.createPropertyAccess(ts.createPropertyAccess(ts.createThis(), meta.emitMethodName), 'emit'),
+    ts.createPropertyAccess(ts.createPropertyAccess(ts.createThis(), meta.eventName), 'emit'),
     undefined,
     [ts.createObjectLiteral(properties)]
   )
@@ -242,12 +248,9 @@ function capitalize(string: string): string {
   return string.charAt(0).toUpperCase() + string.slice(1)
 }
 
-type OutputMeta = {
-  emitMethodName: string
-  intentName: string
+type OutputMeta = TOutputDecoratorOptions & {
+  eventName: string
   propDeclarationName: string
   initializer: ts.Expression
   typeIdentifier?: ts.TypeNode
-  watchedPropName: string
-  intentPropertyName: string
 }

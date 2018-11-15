@@ -1,6 +1,7 @@
 /*
  * Input Transformer
  */
+import { TInputDecoratorOptions } from '@bearer/types/lib/input-output-decorators'
 import * as ts from 'typescript'
 
 import { Decorators } from '../constants'
@@ -11,7 +12,7 @@ import { TransformerOptions } from '../types'
 import { ensureImportsFromCore } from './bearer'
 import { outputEventName } from './output-decorator'
 
-export default function InputDecorator(_options: TransformerOptions = {}): ts.TransformerFactory<ts.SourceFile> {
+export default function InputDecorator({ metadata }: TransformerOptions = {}): ts.TransformerFactory<ts.SourceFile> {
   return _transformContext => {
     return tsSourceFile => {
       if (tsSourceFile.isDeclarationFile) {
@@ -42,14 +43,16 @@ export default function InputDecorator(_options: TransformerOptions = {}): ts.Tr
         if (ts.isPropertyDeclaration(tsNode) && hasDecoratorNamed(tsNode, Decorators.Input)) {
           const name = getNodeName(tsNode)
           const capitalizedName = name.charAt(0).toUpperCase() + name.slice(1)
+          const component = metadata.findComponentFrom(sourcefile)
+
           inputs.push({
             propDeclarationName: name,
-            scope: 'string', // TODO: retrieve from options
+            group: component.group, // TODO: retrieve from options
             propName: `${name}RefId`, // TODO: retrieve from options
             eventName: outputEventName(name), // TODO: retrieve from options
             intentName: `get${capitalizedName}`, // TODO: retrieve from options
             intentMethodName: `fetcherGet${capitalizedName}`, // TODO: retrieve from options
-            autoUpdate: true, // TODO: retrieve from options
+            autoLoad: true, // TODO: retrieve from options
             loadMethodName: `_load${capitalizedName}`,
             typeIdentifier: tsNode.type,
             intializer: tsNode.initializer,
@@ -141,7 +144,7 @@ function createEventListener(meta: InputMeta) {
     [
       ts.createDecorator(
         ts.createCall(ts.createIdentifier(Decorators.Listen), undefined, [
-          ts.createLiteral(`${meta.scope}|${meta.eventName}`)
+          ts.createLiteral(`${meta.group}|${meta.eventName}`)
         ])
       )
     ],
@@ -286,13 +289,8 @@ function createRefIdWatcher(meta: InputMeta) {
 
 // }
 
-type InputMeta = {
+type InputMeta = TInputDecoratorOptions & {
   propDeclarationName: string
-  scope: string
-  propName: string
-  eventName: string
-  intentName: string
-  autoUpdate: boolean
   typeIdentifier?: ts.TypeNode
   intializer?: ts.Expression
   loadMethodName: string
