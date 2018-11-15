@@ -1,4 +1,4 @@
-import * as fbemitter from 'fbemitter'
+import { EventEmitter, EventSubscription } from 'fbemitter'
 import postRobot from 'post-robot'
 
 import BearerConfig from './BearerConfig'
@@ -30,9 +30,9 @@ export default class Bearer {
     return window[BEARER_WINDOW_INSTANCE_KEY]
   }
 
-  public static get emitter(): fbemitter.EventEmitter {
+  public static get emitter(): EventEmitter {
     if (!window[BEARER_EMITTER]) {
-      window[BEARER_EMITTER] = new fbemitter.EventEmitter()
+      window[BEARER_EMITTER] = new EventEmitter()
     }
     return window[BEARER_EMITTER]
   }
@@ -76,7 +76,7 @@ export default class Bearer {
     return this._instance
   }
 
-  static onAuthorized = (scenarioId: string, callback: (authorize: boolean) => void): fbemitter.EventSubscription => {
+  static onAuthorized = (scenarioId: string, callback: (authorize: boolean) => void): EventSubscription => {
     console.debug('[BEARER]', 'onAuthorized', 'register', scenarioId)
     return Bearer.emitter.addListener(Events.AUTHORIZED, (data: TAuthorizationPayload) => {
       if (data.data.scenarioId === scenarioId) {
@@ -88,7 +88,7 @@ export default class Bearer {
     })
   }
 
-  static onRevoked = (scenarioId: string, callback: (authorize: boolean) => void): fbemitter.EventSubscription => {
+  static onRevoked = (scenarioId: string, callback: (authorize: boolean) => void): EventSubscription => {
     console.debug('[BEARER]', 'register onRevoked', scenarioId)
     return Bearer.emitter.addListener(Events.REVOKED, (data: TAuthorizationPayload) => {
       if (data.data.scenarioId === scenarioId) {

@@ -22,22 +22,31 @@ if (isProduction) {
 
   const configuredKeys = new Set(Object.keys(parsedConfig || {}).filter(key => parsedConfig[key]))
   if (!setEquality(requiredKeys, configuredKeys)) {
+    // tslint:disable-next-line
     console.warn('Missing configuration, please check .env.* files')
   }
 }
 
 function plugins() {
   const base = [
-    commonjs(),
+    resolve({
+      jsnext: true,
+      main: true,
+      preferBuiltins: false
+    }),
+    commonjs({
+      namedExports: {
+        // left-hand side can be an absolute path, a path
+        // relative to the current directory, or the name
+        // of a module in node_modules
+        '../../node_modules/fbemitter/index.js': ['EventEmitter'],
+        '../../node_modules/path/path.js': ['extname', 'resolve', 'sep']
+      }
+    }),
     typescript({
       exclude: ['*.d.ts', '**/*.d.ts', '**/plugins.ts', '**/node_modules/**']
     }),
     strip(),
-    resolve({
-      jsnext: true,
-      main: true,
-      browser: true
-    }),
     replace({
       LIB_VERSION: version,
       'process.env.BUILD': JSON.stringify(process.env.BUILD)
@@ -62,14 +71,14 @@ const bundles = [
         format: 'es'
       },
       {
+        exports: 'named',
         file: 'lib/main.js',
-        format: 'cjs',
-        exports: 'named'
+        format: 'cjs'
       },
       {
         file: 'lib/main.browser.js',
-        name: 'Bearer',
-        format: 'iife'
+        format: 'iife',
+        name: 'Bearer'
       }
     ],
     plugins: plugins()
@@ -79,7 +88,8 @@ const bundles = [
     output: {
       file: 'lib/plugins.js',
       format: 'cjs'
-    }
+    },
+    plugins: plugins()
   }
 ]
 
