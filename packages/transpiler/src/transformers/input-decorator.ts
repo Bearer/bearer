@@ -5,7 +5,7 @@ import { TInputDecoratorOptions } from '@bearer/types/lib/input-output-decorator
 import * as ts from 'typescript'
 
 import { Decorators } from '../constants'
-import { hasDecoratorNamed } from '../helpers/decorator-helpers'
+import { getDecoratorNamed, getExpressionFromLiteralObject } from '../helpers/decorator-helpers'
 import { getNodeName } from '../helpers/node-helpers'
 import { TransformerOptions } from '../types'
 
@@ -40,24 +40,28 @@ export default function InputDecorator({ metadata }: TransformerOptions = {}): t
       const inputs: Array<InputMeta> = []
 
       const visitor = (tsNode: ts.Node) => {
-        if (ts.isPropertyDeclaration(tsNode) && hasDecoratorNamed(tsNode, Decorators.Input)) {
-          const name = getNodeName(tsNode)
-          const capitalizedName = name.charAt(0).toUpperCase() + name.slice(1)
-          const component = metadata.findComponentFrom(sourcefile)
-
-          inputs.push({
-            propDeclarationName: name,
-            group: component.group, // TODO: retrieve from options
-            propName: `${name}RefId`, // TODO: retrieve from options
-            eventName: outputEventName(name), // TODO: retrieve from options
-            intentName: `get${capitalizedName}`, // TODO: retrieve from options
-            intentMethodName: `fetcherGet${capitalizedName}`, // TODO: retrieve from options
-            autoLoad: true, // TODO: retrieve from options
-            loadMethodName: `_load${capitalizedName}`,
-            typeIdentifier: tsNode.type,
-            intializer: tsNode.initializer,
-            watcherName: `_watch${capitalizedName}`
-          })
+        if (ts.isPropertyDeclaration(tsNode)) {
+          const decorator = getDecoratorNamed(tsNode, Decorators.Input)
+          if (decorator) {
+            const options = extractInputOptions(decorator)
+            const name = getNodeName(tsNode)
+            const capitalizedName = name.charAt(0).toUpperCase() + name.slice(1)
+            const component = metadata.findComponentFrom(sourcefile)
+            inputs.push({
+              propDeclarationName: name,
+              group: component.group,
+              propName: `${name}RefId`,
+              eventName: outputEventName(name),
+              intentName: `get${capitalizedName}`,
+              intentMethodName: `fetcherGet${capitalizedName}`, // TODO: retrieve from options
+              autoLoad: true, // TODO: retrieve from options
+              loadMethodName: `_load${capitalizedName}`,
+              typeIdentifier: tsNode.type,
+              intializer: tsNode.initializer,
+              watcherName: `_watch${capitalizedName}`,
+              ...options
+            })
+          }
         }
         return ts.visitEachChild(tsNode, visitor, _transformContext)
       }
@@ -65,6 +69,23 @@ export default function InputDecorator({ metadata }: TransformerOptions = {}): t
       ts.visitEachChild(sourcefile, visitor, _transformContext)
 
       return inputs
+    }
+
+    function extractInputOptions(decorator: ts.Decorator): Partial<TInputDecoratorOptions> {
+      const call = decorator.expression as ts.CallExpression
+      const options = call.arguments[0] as ts.ObjectLiteralExpression
+      if (options && options.properties) {
+        const values: Partial<TInputDecoratorOptions> = {}
+        const OPTIONS_KEYS = ['group', 'eventName', 'intentName', 'propName']
+        OPTIONS_KEYS.map(value => {
+          const optionValue = getExpressionFromLiteralObject<ts.StringLiteral>(options, value)
+          if (optionValue) {
+            values[value] = optionValue && optionValue.text
+          }
+        })
+        return values
+      }
+      return {}
     }
 
     function injectInputStatements(tsClass: ts.ClassDeclaration, inputsMeta: Array<InputMeta>): ts.ClassDeclaration {

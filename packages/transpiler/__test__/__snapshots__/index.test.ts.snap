@@ -41,7 +41,7 @@ export class FullComponent {
     farmer: BearerRef<any>;
     @Prop({ \\"mutable\\": true })
     farmerRefId: string;
-    @Listen(\\"bearer|SPONGE_BOB|string|farmerSaved\\")
+    @Listen(\\"bearer|SPONGE_BOB|undefined|farmerSaved\\")
     farmerRefIdChanged(event) {
         this.farmerRefId = event.detail.referenceId;
     }
@@ -62,10 +62,10 @@ export class FullComponent {
     @State()
     goat: BearerRef<any>;
     @Prop({ \\"mutable\\": true })
-    goatRefId: string;
-    @Listen(\\"bearer|SPONGE_BOB|string|goatSaved\\")
-    goatRefIdChanged(event) {
-        this.goatRefId = event.detail.referenceId;
+    goatId: string;
+    @Listen(\\"bearer|SPONGE_BOB|undefined|goatMilked\\")
+    goatIdChanged(event) {
+        this.goatId = event.detail.referenceId;
     }
     _loadGoat = () => {
         this.fetcherGetGoat().then(({ data }: {
@@ -75,7 +75,7 @@ export class FullComponent {
         });
     };
     private fetcherGetGoat;
-    @Watch(\\"goatRefId\\")
+    @Watch(\\"goatId\\")
     _watchGoat(newValueName: string) {
         if (newValueName) {
             this._loadGoat();
@@ -121,7 +121,7 @@ export class FullComponent {
         Intent('ListRepositories')(this, \\"fetcher\\");
         Intent('getPullRequest', IntentType.FetchData)(this, \\"fetchResource\\");
         Intent(\\"getFarmer\\")(this, \\"fetcherGetFarmer\\");
-        Intent(\\"getGoat\\")(this, \\"fetcherGetGoat\\");
+        Intent(\\"retrieveGoat\\")(this, \\"fetcherGetGoat\\");
         Intent(\\"saveFeedPanda\\")(this, \\"saveFeedPanda\\");
         Intent(\\"saveFeedPanda\\")(this, \\"saveFeedPanda\\");
     }

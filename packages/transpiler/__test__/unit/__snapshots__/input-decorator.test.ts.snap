@@ -22,7 +22,7 @@ class NoOptionsComponent {
     farmer: BearerRef<Farmer>;
     @Prop({ \\"mutable\\": true })
     farmerRefId: string;
-    @Listen(\\"bearer|SPONGE_BOB|string|farmerSaved\\")
+    @Listen(\\"bearer|SPONGE_BOB|no-options|farmerSaved\\")
     farmerRefIdChanged(event) {
         this.farmerRefId = event.detail.referenceId;
     }
@@ -41,10 +41,10 @@ class NoOptionsComponent {
         }
     }
     @State()
-    aString: BearerRef<string> = \\"ok\\";
+    aString: BearerRef<string> = 'ok';
     @Prop({ \\"mutable\\": true })
     aStringRefId: string;
-    @Listen(\\"bearer|SPONGE_BOB|string|aStringSaved\\")
+    @Listen(\\"bearer|SPONGE_BOB|no-options|aStringSaved\\")
     aStringRefIdChanged(event) {
         this.aStringRefId = event.detail.referenceId;
     }
@@ -66,7 +66,7 @@ class NoOptionsComponent {
     aStringWithoutInitializer: BearerRef<string>;
     @Prop({ \\"mutable\\": true })
     aStringWithoutInitializerRefId: string;
-    @Listen(\\"bearer|SPONGE_BOB|string|aStringWithoutInitializerSaved\\")
+    @Listen(\\"bearer|SPONGE_BOB|no-options|aStringWithoutInitializerSaved\\")
     aStringWithoutInitializerRefIdChanged(event) {
         this.aStringWithoutInitializerRefId = event.detail.referenceId;
     }
@@ -90,7 +90,7 @@ class NoOptionsComponent {
     }> = { title: 'Guest' };
     @Prop({ \\"mutable\\": true })
     objectRefId: string;
-    @Listen(\\"bearer|SPONGE_BOB|string|objectSaved\\")
+    @Listen(\\"bearer|SPONGE_BOB|no-options|objectSaved\\")
     objectRefIdChanged(event) {
         this.objectRefId = event.detail.referenceId;
     }
@@ -116,7 +116,7 @@ class NoOptionsComponent {
     }>;
     @Prop({ \\"mutable\\": true })
     objectWithoutInitializerRefId: string;
-    @Listen(\\"bearer|SPONGE_BOB|string|objectWithoutInitializerSaved\\")
+    @Listen(\\"bearer|SPONGE_BOB|no-options|objectWithoutInitializerSaved\\")
     objectWithoutInitializerRefIdChanged(event) {
         this.objectWithoutInitializerRefId = event.detail.referenceId;
     }
@@ -139,10 +139,10 @@ class NoOptionsComponent {
     @State()
     spongeBob: BearerRef<Sponge>;
     @Prop({ \\"mutable\\": true })
-    spongeBobRefId: string;
-    @Listen(\\"bearer|SPONGE_BOB|string|spongeBobSaved\\")
-    spongeBobRefIdChanged(event) {
-        this.spongeBobRefId = event.detail.referenceId;
+    patrick: string;
+    @Listen(\\"bearer|SPONGE_BOB|other-group|patrickWasKilled\\")
+    patrickChanged(event) {
+        this.patrick = event.detail.referenceId;
     }
     _loadSpongeBob = () => {
         this.fetcherGetSpongeBob().then(({ data }: {
@@ -152,7 +152,7 @@ class NoOptionsComponent {
         });
     };
     private fetcherGetSpongeBob;
-    @Watch(\\"spongeBobRefId\\")
+    @Watch(\\"patrick\\")
     _watchSpongeBob(newValueName: string) {
         if (newValueName) {
             this._loadSpongeBob();
@@ -164,7 +164,7 @@ class NoOptionsComponent {
         Intent(\\"getAStringWithoutInitializer\\")(this, \\"fetcherGetAStringWithoutInitializer\\");
         Intent(\\"getObject\\")(this, \\"fetcherGetObject\\");
         Intent(\\"getObjectWithoutInitializer\\")(this, \\"fetcherGetObjectWithoutInitializer\\");
-        Intent(\\"getSpongeBob\\")(this, \\"fetcherGetSpongeBob\\");
+        Intent(\\"killPatrick\\")(this, \\"fetcherGetSpongeBob\\");
     }
     get SCENARIO_ID() { return \\"SPONGE_BOB\\"; }
     @Prop({ \\"context\\": \\"bearer\\" })

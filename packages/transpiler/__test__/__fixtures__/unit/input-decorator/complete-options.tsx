@@ -31,7 +31,7 @@ class NoOptionsComponent {
   objectWithoutInitializer: BearerRef<{ title: string }>
 
   @Input({
-    scope: 'other-scope',
+    group: 'other-group',
     propName: 'patrick',
     eventName: 'patrickWasKilled',
     intentName: 'killPatrick',
