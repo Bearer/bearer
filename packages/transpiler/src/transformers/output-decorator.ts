@@ -47,7 +47,8 @@ export default function OutputDecorator(_options: TransformerOptions = {}): ts.T
           const name = getNodeName(tsNode)
           outputs.push({
             emitMethodName: outputEventName(name), // TODO: retrieve from options
-            intentName: `save${capitalize(name)}`,
+            intentName: `save${capitalize(name)}`, // TODO: retrieve from options
+            intentPropertyName: name, // TODO: retrieve from options
             propDeclarationName: name,
             typeIdentifier: tsNode.type,
             initializer: tsNode.initializer,
@@ -184,7 +185,16 @@ function createIntentCall(meta: OutputMeta) {
 
   return ts.createCall(
     ts.createPropertyAccess(
-      ts.createCall(ts.createPropertyAccess(ts.createThis(), meta.intentName), undefined, undefined),
+      ts.createCall(ts.createPropertyAccess(ts.createThis(), meta.intentName), undefined, [
+        ts.createObjectLiteral([
+          ts.createPropertyAssignment(
+            'body',
+            ts.createObjectLiteral([
+              ts.createPropertyAssignment(meta.intentPropertyName, ts.createIdentifier(newValue))
+            ])
+          )
+        ])
+      ]),
       'then'
     ),
     undefined,
@@ -239,4 +249,5 @@ type OutputMeta = {
   initializer: ts.Expression
   typeIdentifier?: ts.TypeNode
   watchedPropName: string
+  intentPropertyName: string
 }
