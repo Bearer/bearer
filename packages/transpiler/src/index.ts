@@ -14,6 +14,7 @@ import BearerAuthorizedRequiredProp from './transformers/bearer-authorized-scena
 import bearerCleaning from './transformers/bearer-cleaning'
 import BearerStateInjector from './transformers/bearer-state-injector'
 import ComponenttagNameScoping from './transformers/component-tag-name-scoping'
+import DumpSourceCode from './transformers/dump-source-code'
 import EventNameScoping from './transformers/event-name-scoping'
 import GatherIO from './transformers/gather-input-output'
 import GatherMetadata from './transformers/gather-metadata'
@@ -33,8 +34,6 @@ import OutputDecoratorModifier from './transformers/output-decorator'
 import { transformer as generateManifestFile } from './transformers/generate-manifest-file'
 
 import Metadata from './metadata'
-import { SourceCodeTransformerOptions } from './types'
-import { getSourceCode } from './utils'
 
 export type TranpilerOptions = {
   ROOT_DIRECTORY?: string
@@ -67,7 +66,7 @@ export default class Transpiler {
         ComponenttagNameScoping({ verbose, metadata: this.metadata }),
         GatherIO({ verbose, metadata: this.metadata, generator: this.generator }),
         bearerCleaning({ verbose, metadata: this.metadata }),
-        dumpSourceCode({
+        DumpSourceCode({
           verbose,
           srcDirectory: this.VIEWS_DIRECTORY,
           buildDirectory: this.BUILD_SRC_DIRECTORY
@@ -250,25 +249,5 @@ export default class Transpiler {
     subscribers.forEach(callback => {
       callback()
     })
-  }
-}
-
-function dumpSourceCode(
-  { srcDirectory, buildDirectory }: SourceCodeTransformerOptions = {
-    srcDirectory,
-    buildDirectory
-  }
-): ts.TransformerFactory<ts.SourceFile> {
-  return _transformContext => {
-    return tsSourceFile => {
-      let outPath = tsSourceFile.fileName
-        .replace(srcDirectory, buildDirectory)
-        .replace(/js$/, 'ts')
-        .replace(/jsx$/, 'tsx')
-      fs.ensureFileSync(outPath)
-      fs.writeFileSync(outPath, getSourceCode(tsSourceFile))
-
-      return tsSourceFile
-    }
   }
 }
