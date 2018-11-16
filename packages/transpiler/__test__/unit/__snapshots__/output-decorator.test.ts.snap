@@ -34,11 +34,14 @@ class NoOptionsComponent {
     farmerSaved: EventEmitter<any>;
     @State()
     farmer: BearerRef<Farmer>;
+    @State()
+    farmerRefId: string;
     @Watch(\\"farmer\\")
     farmerSavedWatcher(newValue) {
         if (newValue) {
-            this.saveFarmer({ body: { farmer: newValue } }).then(({ referenceId, data }) => {
+            this.saveFarmer({ body: { farmer: newValue }, referenceId: this.farmerRefId }).then(({ referenceId, data }) => {
                 this.farmerSaved.emit({ referenceId, farmer: data || this.farmer });
+                this.farmerRefId = referenceId;
             });
         }
         else {
@@ -50,11 +53,14 @@ class NoOptionsComponent {
     milked: EventEmitter<any>;
     @State()
     farmerAndPanda: BearerRef<Farmer> = {};
+    @State()
+    farmerAndPandaRefId: string;
     @Watch(\\"aPanda\\")
     milkedWatcher(newValue) {
         if (newValue) {
-            this.milkWithAbottle({ body: { farmerAndPanda: newValue } }).then(({ referenceId, data }) => {
+            this.milkWithAbottle({ body: { farmerAndPanda: newValue }, referenceId: this.farmerAndPandaRefId }).then(({ referenceId, data }) => {
                 this.milked.emit({ referenceId, farmerAndPanda: data || this.farmerAndPanda });
+                this.farmerAndPandaRefId = referenceId;
             });
         }
         else {

@@ -7,7 +7,7 @@ export class FullComponent {
   @Input()
   farmer: BearerRef<any>
   @Input({
-    scope: 'SCOPE',
+    group: 'SCOPE',
     propName: 'goatId',
     eventName: 'goatMilked',
     intentName: 'retrieveGoat',

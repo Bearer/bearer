@@ -86,7 +86,50 @@ function methodeNamed(name: string): (node: ts.Node) => boolean {
   return (node: ts.Node): boolean => ts.isMethodDeclaration(node) && getNodeName(node) === name
 }
 
-// componentDidLoad(){ this.bearer.setupId = this.setupId }
+const componentDidLoadMethod = methodeNamed(Component.componentDidLoad)
+
+export function createOrUpdateComponentDidLoad(
+  classNode: ts.ClassDeclaration,
+  updater: (block: ts.Block) => ts.Block
+): ts.ClassDeclaration {
+  const otherMemebers = classNode.members.filter(n => !componentDidLoadMethod(n))
+
+  const componentDidLoad: ts.MethodDeclaration =
+    (classNode.members.find(componentDidLoadMethod) as ts.MethodDeclaration) ||
+    (ts.createMethod(
+      /* decorators */ undefined,
+      /* modifiers */ undefined,
+      /* asteriskToken */ undefined,
+      Component.componentDidLoad,
+      /* questionToken */ undefined,
+      /* typeParameters */ undefined,
+      /* parameters */ undefined,
+      /* type */ undefined,
+      ts.createBlock([], true)
+    ) as ts.MethodDeclaration)
+  const newComponentDidload = ts.updateMethod(
+    componentDidLoad,
+    componentDidLoad.decorators,
+    componentDidLoad.modifiers,
+    componentDidLoad.asteriskToken,
+    componentDidLoad.name,
+    componentDidLoad.questionToken,
+    componentDidLoad.typeParameters,
+    componentDidLoad.parameters,
+    componentDidLoad.type,
+    updater(componentDidLoad.body || ts.createBlock([], true))
+  )
+  return ts.updateClassDeclaration(
+    classNode,
+    classNode.decorators,
+    classNode.modifiers,
+    classNode.name,
+    classNode.typeParameters,
+    classNode.heritageClauses,
+    [...otherMemebers, newComponentDidload]
+  )
+}
+
 export function addComponentDidLoad(classNode: ts.ClassDeclaration): ts.ClassDeclaration {
   const assignSetupId = ts.createStatement(
     ts.createAssignment(
@@ -98,44 +141,8 @@ export function addComponentDidLoad(classNode: ts.ClassDeclaration): ts.ClassDec
     ts.createPropertyAccess(ts.createThis(), Component.setupId),
     ts.createBlock([assignSetupId], true)
   )
-  const predicate = methodeNamed(Component.componentDidLoad)
-  const members = classNode.members.filter(n => !predicate(n))
-
-  const componentDidLoad: ts.MethodDeclaration =
-    (classNode.members.find(predicate) as ts.MethodDeclaration) ||
-    (ts.createMethod(
-      /* decorators */ undefined,
-      /* modifiers */ undefined,
-      /* asteriskToken */ undefined,
-      Component.componentDidLoad,
-      /* questionToken */ undefined,
-      /* typeParameters */ undefined,
-      /* parameters */ undefined,
-      /* type */ undefined,
-      ts.createBlock([])
-    ) as ts.MethodDeclaration)
-
-  return ts.updateClassDeclaration(
-    classNode,
-    classNode.decorators,
-    classNode.modifiers,
-    classNode.name,
-    classNode.typeParameters,
-    classNode.heritageClauses,
-    [
-      ...members,
-      ts.createMethod(
-        componentDidLoad.decorators,
-        componentDidLoad.modifiers,
-        componentDidLoad.asteriskToken,
-        componentDidLoad.name,
-        componentDidLoad.questionToken,
-        componentDidLoad.typeParameters,
-        componentDidLoad.parameters,
-        componentDidLoad.type,
-        ts.createBlock([ifSetupIdPresent, ...componentDidLoad.body.statements], true)
-      )
-    ]
+  return createOrUpdateComponentDidLoad(classNode, block =>
+    ts.updateBlock(block, [ifSetupIdPresent, ...block.statements])
   )
 }
 

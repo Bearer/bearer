@@ -4,12 +4,12 @@
 import { TInputDecoratorOptions } from '@bearer/types/lib/input-output-decorators'
 import * as ts from 'typescript'
 
-import { Decorators } from '../constants'
+import { Decorators, Properties } from '../constants'
 import { getDecoratorNamed, getExpressionFromLiteralObject } from '../helpers/decorator-helpers'
 import { getNodeName } from '../helpers/node-helpers'
 import { TransformerOptions } from '../types'
 
-import { ensureImportsFromCore } from './bearer'
+import { createOrUpdateComponentDidLoad, ensureImportsFromCore } from './bearer'
 import { outputEventName } from './output-decorator'
 
 export default function InputDecorator({ metadata }: TransformerOptions = {}): ts.TransformerFactory<ts.SourceFile> {
@@ -59,6 +59,7 @@ export default function InputDecorator({ metadata }: TransformerOptions = {}): t
               typeIdentifier: tsNode.type,
               intializer: tsNode.initializer,
               watcherName: `_watch${capitalizedName}`,
+              intentReferenceIdKeyName: Properties.ReferenceId,
               ...options
             })
           }
@@ -89,6 +90,7 @@ export default function InputDecorator({ metadata }: TransformerOptions = {}): t
     }
 
     function injectInputStatements(tsClass: ts.ClassDeclaration, inputsMeta: Array<InputMeta>): ts.ClassDeclaration {
+      const classNode = inputsMeta.reduce((classDeclaration, meta) => addAutoLoad(classDeclaration, meta), tsClass)
       const newMembers = inputsMeta.reduce(
         (members, meta) => {
           // create @State()
@@ -102,18 +104,33 @@ export default function InputDecorator({ metadata }: TransformerOptions = {}): t
           ]
           return members.concat(inputMembers)
         },
-        [...tsClass.members]
+        [...classNode.members]
       )
 
       return ts.updateClassDeclaration(
-        tsClass,
-        tsClass.decorators,
-        tsClass.modifiers,
-        tsClass.name,
-        tsClass.typeParameters,
-        tsClass.heritageClauses,
+        classNode,
+        classNode.decorators,
+        classNode.modifiers,
+        classNode.name,
+        classNode.typeParameters,
+        classNode.heritageClauses,
         newMembers
       )
+    }
+
+    function addAutoLoad(tsClass: ts.ClassDeclaration, meta: InputMeta): ts.ClassDeclaration {
+      if (meta.autoLoad) {
+        return createOrUpdateComponentDidLoad(tsClass, block =>
+          ts.updateBlock(block, [
+            ...block.statements,
+            ts.createIf(
+              ts.createPropertyAccess(ts.createThis(), meta.propName),
+              ts.createBlock([createLoadDataCall(meta)])
+            )
+          ])
+        )
+      }
+      return tsClass
     }
 
     function replaceInputVisitor(inputsMeta: Array<InputMeta>): (tsNode: ts.Node) => ts.VisitResult<ts.Node> {
@@ -161,11 +178,13 @@ function createRefIdProp(meta: InputMeta) {
 
 // This will make the prop change when an event is triggered
 function createEventListener(meta: InputMeta) {
+  const referenceIdIdentifier = ts.createIdentifier('event.detail.referenceId')
+  const propAccessIdentifier = ts.createPropertyAccess(ts.createThis(), meta.propName)
   return ts.createMethod(
     [
       ts.createDecorator(
         ts.createCall(ts.createIdentifier(Decorators.Listen), undefined, [
-          ts.createLiteral(`${meta.group}|${meta.eventName}`)
+          ts.createLiteral(`body:${meta.group}|${meta.eventName}`)
         ])
       )
     ],
@@ -178,12 +197,13 @@ function createEventListener(meta: InputMeta) {
     undefined,
     ts.createBlock(
       [
-        ts.createStatement(
-          ts.createBinary(
-            ts.createPropertyAccess(ts.createThis(), meta.propName),
-            ts.SyntaxKind.EqualsToken,
-            ts.createIdentifier('event.detail.referenceId')
-          )
+        // if(event.detail.referenceId !== referenceIdIdentifier) {
+        // this.referenceIdIdentifier = event.detail.referenceId
+        //} else { this.loadData()}
+        ts.createIf(
+          ts.createBinary(propAccessIdentifier, ts.SyntaxKind.ExclamationEqualsEqualsToken, referenceIdIdentifier),
+          ts.createStatement(ts.createBinary(propAccessIdentifier, ts.SyntaxKind.EqualsToken, referenceIdIdentifier)),
+          ts.createBlock([createLoadDataCall(meta)])
         )
       ],
       true
@@ -192,11 +212,14 @@ function createEventListener(meta: InputMeta) {
 }
 
 function createLoadResourceMethod(meta: InputMeta) {
-  const intentCall = ts.createCall(
-    ts.createPropertyAccess(ts.createThis(), meta.intentMethodName),
-    undefined,
-    undefined
-  )
+  const intentCall = ts.createCall(ts.createPropertyAccess(ts.createThis(), meta.intentMethodName), undefined, [
+    ts.createObjectLiteral([
+      ts.createPropertyAssignment(
+        meta.intentReferenceIdKeyName,
+        ts.createPropertyAccess(ts.createThis(), meta.propName)
+      )
+    ])
+  ])
   const udapteState = ts.createArrowFunction(
     undefined,
     undefined,
@@ -260,7 +283,11 @@ function createFetcher(meta: InputMeta) {
     undefined
   )
 }
-
+function createLoadDataCall(meta: InputMeta) {
+  return ts.createStatement(
+    ts.createCall(ts.createPropertyAccess(ts.createThis(), meta.loadMethodName), undefined, undefined)
+  )
+}
 function createRefIdWatcher(meta: InputMeta) {
   const newValueName = 'newValueName'
   return ts.createMethod(
@@ -287,19 +314,7 @@ function createRefIdWatcher(meta: InputMeta) {
     ],
     undefined,
     ts.createBlock(
-      [
-        ts.createIf(
-          ts.createIdentifier(newValueName),
-          ts.createBlock(
-            [
-              ts.createStatement(
-                ts.createCall(ts.createPropertyAccess(ts.createThis(), meta.loadMethodName), undefined, undefined)
-              )
-            ],
-            true
-          )
-        )
-      ],
+      [ts.createIf(ts.createIdentifier(newValueName), ts.createBlock([createLoadDataCall(meta)], true))],
       true
     )
   )

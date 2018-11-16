@@ -41,12 +41,16 @@ export class FullComponent {
     farmer: BearerRef<any>;
     @Prop({ \\"mutable\\": true })
     farmerRefId: string;
-    @Listen(\\"bearer|SPONGE_BOB|undefined|farmerSaved\\")
+    @Listen(\\"body:bearer|SPONGE_BOB|undefined|farmerSaved\\")
     farmerRefIdChanged(event) {
-        this.farmerRefId = event.detail.referenceId;
+        if (this.farmerRefId !== event.detail.referenceId)
+            this.farmerRefId = event.detail.referenceId;
+        else {
+            this._loadFarmer();
+        }
     }
     _loadFarmer = () => {
-        this.fetcherGetFarmer().then(({ data }: {
+        this.fetcherGetFarmer({ referenceId: this.farmerRefId }).then(({ data }: {
             data: BearerRef<any>;
         }) => {
             this.farmer = data;
@@ -63,12 +67,16 @@ export class FullComponent {
     goat: BearerRef<any>;
     @Prop({ \\"mutable\\": true })
     goatId: string;
-    @Listen(\\"bearer|SPONGE_BOB|undefined|goatMilked\\")
+    @Listen(\\"body:bearer|SPONGE_BOB|SCOPE|goatMilked\\")
     goatIdChanged(event) {
-        this.goatId = event.detail.referenceId;
+        if (this.goatId !== event.detail.referenceId)
+            this.goatId = event.detail.referenceId;
+        else {
+            this._loadGoat();
+        }
     }
     _loadGoat = () => {
-        this.fetcherGetGoat().then(({ data }: {
+        this.fetcherGetGoat({ referenceId: this.goatId }).then(({ data }: {
             data: BearerRef<any>;
         }) => {
             this.goat = data;
@@ -86,11 +94,14 @@ export class FullComponent {
     feedPandaSaved: EventEmitter<any>;
     @State()
     feedPanda: BearerRef<any>;
+    @State()
+    feedPandaRefId: string;
     @Watch(\\"feedPanda\\")
     feedPandaSavedWatcher(newValue) {
         if (newValue) {
-            this.saveFeedPanda({ body: { feedPanda: newValue } }).then(({ referenceId, data }) => {
+            this.saveFeedPanda({ body: { feedPanda: newValue }, referenceId: this.feedPandaRefId }).then(({ referenceId, data }) => {
                 this.feedPandaSaved.emit({ referenceId, feedPanda: data || this.feedPanda });
+                this.feedPandaRefId = referenceId;
             });
         }
         else {
@@ -102,11 +113,14 @@ export class FullComponent {
     milked: EventEmitter<any>;
     @State()
     feedPanda: BearerRef<any>;
+    @State()
+    feedPandaRefId: string;
     @Watch(\\"aPanda\\")
     milkedWatcher(newValue) {
         if (newValue) {
-            this.saveFeedPanda({ body: { feedPanda: newValue } }).then(({ referenceId, data }) => {
+            this.saveFeedPanda({ body: { feedPanda: newValue }, referenceId: this.feedPandaRefId }).then(({ referenceId, data }) => {
                 this.milked.emit({ referenceId, feedPanda: data || this.feedPanda });
+                this.feedPandaRefId = referenceId;
             });
         }
         else {
@@ -133,6 +147,12 @@ export class FullComponent {
     componentDidLoad() {
         if (this.setupId) {
             this.bearerContext.setupId = this.setupId;
+        }
+        if (this.farmerRefId) {
+            this._loadFarmer();
+        }
+        if (this.goatId) {
+            this._loadGoat();
         }
     }
     @Watch(\\"attachedPullRequests\\")

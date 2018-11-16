@@ -22,12 +22,16 @@ class NoOptionsComponent {
     farmer: BearerRef<Farmer>;
     @Prop({ \\"mutable\\": true })
     farmerRefId: string;
-    @Listen(\\"bearer|SPONGE_BOB|no-options|farmerSaved\\")
+    @Listen(\\"body:bearer|SPONGE_BOB|no-options|farmerSaved\\")
     farmerRefIdChanged(event) {
-        this.farmerRefId = event.detail.referenceId;
+        if (this.farmerRefId !== event.detail.referenceId)
+            this.farmerRefId = event.detail.referenceId;
+        else {
+            this._loadFarmer();
+        }
     }
     _loadFarmer = () => {
-        this.fetcherGetFarmer().then(({ data }: {
+        this.fetcherGetFarmer({ referenceId: this.farmerRefId }).then(({ data }: {
             data: BearerRef<Farmer>;
         }) => {
             this.farmer = data;
@@ -44,12 +48,16 @@ class NoOptionsComponent {
     aString: BearerRef<string> = 'ok';
     @Prop({ \\"mutable\\": true })
     aStringRefId: string;
-    @Listen(\\"bearer|SPONGE_BOB|no-options|aStringSaved\\")
+    @Listen(\\"body:bearer|SPONGE_BOB|no-options|aStringSaved\\")
     aStringRefIdChanged(event) {
-        this.aStringRefId = event.detail.referenceId;
+        if (this.aStringRefId !== event.detail.referenceId)
+            this.aStringRefId = event.detail.referenceId;
+        else {
+            this._loadAString();
+        }
     }
     _loadAString = () => {
-        this.fetcherGetAString().then(({ data }: {
+        this.fetcherGetAString({ referenceId: this.aStringRefId }).then(({ data }: {
             data: BearerRef<string>;
         }) => {
             this.aString = data;
@@ -66,12 +74,16 @@ class NoOptionsComponent {
     aStringWithoutInitializer: BearerRef<string>;
     @Prop({ \\"mutable\\": true })
     aStringWithoutInitializerRefId: string;
-    @Listen(\\"bearer|SPONGE_BOB|no-options|aStringWithoutInitializerSaved\\")
+    @Listen(\\"body:bearer|SPONGE_BOB|no-options|aStringWithoutInitializerSaved\\")
     aStringWithoutInitializerRefIdChanged(event) {
-        this.aStringWithoutInitializerRefId = event.detail.referenceId;
+        if (this.aStringWithoutInitializerRefId !== event.detail.referenceId)
+            this.aStringWithoutInitializerRefId = event.detail.referenceId;
+        else {
+            this._loadAStringWithoutInitializer();
+        }
     }
     _loadAStringWithoutInitializer = () => {
-        this.fetcherGetAStringWithoutInitializer().then(({ data }: {
+        this.fetcherGetAStringWithoutInitializer({ referenceId: this.aStringWithoutInitializerRefId }).then(({ data }: {
             data: BearerRef<string>;
         }) => {
             this.aStringWithoutInitializer = data;
@@ -90,12 +102,16 @@ class NoOptionsComponent {
     }> = { title: 'Guest' };
     @Prop({ \\"mutable\\": true })
     objectRefId: string;
-    @Listen(\\"bearer|SPONGE_BOB|no-options|objectSaved\\")
+    @Listen(\\"body:bearer|SPONGE_BOB|no-options|objectSaved\\")
     objectRefIdChanged(event) {
-        this.objectRefId = event.detail.referenceId;
+        if (this.objectRefId !== event.detail.referenceId)
+            this.objectRefId = event.detail.referenceId;
+        else {
+            this._loadObject();
+        }
     }
     _loadObject = () => {
-        this.fetcherGetObject().then(({ data }: {
+        this.fetcherGetObject({ referenceId: this.objectRefId }).then(({ data }: {
             data: BearerRef<{
                 title: string;
             }>;
@@ -116,12 +132,16 @@ class NoOptionsComponent {
     }>;
     @Prop({ \\"mutable\\": true })
     objectWithoutInitializerRefId: string;
-    @Listen(\\"bearer|SPONGE_BOB|no-options|objectWithoutInitializerSaved\\")
+    @Listen(\\"body:bearer|SPONGE_BOB|no-options|objectWithoutInitializerSaved\\")
     objectWithoutInitializerRefIdChanged(event) {
-        this.objectWithoutInitializerRefId = event.detail.referenceId;
+        if (this.objectWithoutInitializerRefId !== event.detail.referenceId)
+            this.objectWithoutInitializerRefId = event.detail.referenceId;
+        else {
+            this._loadObjectWithoutInitializer();
+        }
     }
     _loadObjectWithoutInitializer = () => {
-        this.fetcherGetObjectWithoutInitializer().then(({ data }: {
+        this.fetcherGetObjectWithoutInitializer({ referenceId: this.objectWithoutInitializerRefId }).then(({ data }: {
             data: BearerRef<{
                 title: string;
             }>;
@@ -140,12 +160,16 @@ class NoOptionsComponent {
     spongeBob: BearerRef<Sponge>;
     @Prop({ \\"mutable\\": true })
     patrick: string;
-    @Listen(\\"bearer|SPONGE_BOB|other-group|patrickWasKilled\\")
+    @Listen(\\"body:bearer|SPONGE_BOB|other-group|patrickWasKilled\\")
     patrickChanged(event) {
-        this.patrick = event.detail.referenceId;
+        if (this.patrick !== event.detail.referenceId)
+            this.patrick = event.detail.referenceId;
+        else {
+            this._loadSpongeBob();
+        }
     }
     _loadSpongeBob = () => {
-        this.fetcherGetSpongeBob().then(({ data }: {
+        this.fetcherGetSpongeBob({ referenceId: this.patrick }).then(({ data }: {
             data: BearerRef<Sponge>;
         }) => {
             this.spongeBob = data;
@@ -174,6 +198,24 @@ class NoOptionsComponent {
     componentDidLoad() {
         if (this.setupId) {
             this.bearerContext.setupId = this.setupId;
+        }
+        if (this.farmerRefId) {
+            this._loadFarmer();
+        }
+        if (this.aStringRefId) {
+            this._loadAString();
+        }
+        if (this.aStringWithoutInitializerRefId) {
+            this._loadAStringWithoutInitializer();
+        }
+        if (this.objectRefId) {
+            this._loadObject();
+        }
+        if (this.objectWithoutInitializerRefId) {
+            this._loadObjectWithoutInitializer();
+        }
+        if (this.patrick) {
+            this._loadSpongeBob();
         }
     }
 }
