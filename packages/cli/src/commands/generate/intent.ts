@@ -1,6 +1,6 @@
 import { templates } from '@bearer/templates'
+import IntentType from '@bearer/types/li./intent-types'
 import { Authentications } from '@bearer/types/lib/authentications'
-import IntentType from '@bearer/types/lib/IntentTypes'
 import { flags } from '@oclif/command'
 import * as inquirer from 'inquirer'
 

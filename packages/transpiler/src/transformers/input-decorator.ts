@@ -54,7 +54,7 @@ export default function InputDecorator({ metadata }: TransformerOptions = {}): t
               eventName: outputEventName(name),
               intentName: `get${capitalizedName}`,
               intentMethodName: `fetcherGet${capitalizedName}`, // TODO: retrieve from options
-              autoLoad: true, // TODO: retrieve from options
+              autoLoad: true,
               loadMethodName: `_load${capitalizedName}`,
               typeIdentifier: tsNode.type,
               intializer: tsNode.initializer,
@@ -312,11 +312,6 @@ function createRefIdWatcher(meta: InputMeta) {
     )
   )
 }
-
-// // Nive to have
-// function createLoadingProp(meta: InputMeta){
-
-// }
 
 type InputMeta = TInputDecoratorOptions & {
   propDeclarationName: string
