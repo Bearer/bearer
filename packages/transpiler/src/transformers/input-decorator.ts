@@ -5,7 +5,7 @@ import { TInputDecoratorOptions } from '@bearer/types/lib/input-output-decorator
 import * as ts from 'typescript'
 
 import { Decorators, Properties } from '../constants'
-import { getDecoratorNamed, getExpressionFromLiteralObject } from '../helpers/decorator-helpers'
+import { extractBooleanOptions, extractStringOptions, getDecoratorNamed } from '../helpers/decorator-helpers'
 import { getNodeName } from '../helpers/node-helpers'
 import { TransformerOptions } from '../types'
 
@@ -73,20 +73,13 @@ export default function InputDecorator({ metadata }: TransformerOptions = {}): t
     }
 
     function extractInputOptions(decorator: ts.Decorator): Partial<TInputDecoratorOptions> {
-      const call = decorator.expression as ts.CallExpression
-      const options = call.arguments[0] as ts.ObjectLiteralExpression
-      if (options && options.properties) {
-        const values: Partial<TInputDecoratorOptions> = {}
-        const OPTIONS_KEYS = ['group', 'eventName', 'intentName', 'propName']
-        OPTIONS_KEYS.map(value => {
-          const optionValue = getExpressionFromLiteralObject<ts.StringLiteral>(options, value)
-          if (optionValue) {
-            values[value] = optionValue && optionValue.text
+      const callArgs = (decorator.expression as ts.CallExpression).arguments[0] as ts.ObjectLiteralExpression
+      return !callArgs
+        ? {}
+        : {
+            ...extractStringOptions<TInputDecoratorOptions>(callArgs, ['group', 'eventName', 'intentName', 'propName']),
+            ...extractBooleanOptions<TInputDecoratorOptions>(callArgs, ['autoLoad'])
           }
-        })
-        return values
-      }
-      return {}
     }
 
     function injectInputStatements(tsClass: ts.ClassDeclaration, inputsMeta: Array<InputMeta>): ts.ClassDeclaration {

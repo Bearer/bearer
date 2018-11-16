@@ -214,9 +214,6 @@ class NoOptionsComponent {
         if (this.objectWithoutInitializerRefId) {
             this._loadObjectWithoutInitializer();
         }
-        if (this.patrick) {
-            this._loadSpongeBob();
-        }
     }
 }
 ",

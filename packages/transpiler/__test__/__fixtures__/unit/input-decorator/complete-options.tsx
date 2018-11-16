@@ -35,7 +35,7 @@ class NoOptionsComponent {
     propName: 'patrick',
     eventName: 'patrickWasKilled',
     intentName: 'killPatrick',
-    autoUpdate: false
+    autoLoad: false
   })
   spongeBob: BearerRef<Sponge>
 }
