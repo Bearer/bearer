@@ -1,22 +1,15 @@
-## Bearer UI
+# @bearer/ui
 
-Bearer UI is a set of component which let you create you own Bearer Integration easily.
+## What
 
-Demo URL : http://bearer-lib.s3-website.eu-west-3.amazonaws.com/ui/
+UI package is set of UI component re-usable across scenarios.
 
-### UI Components
+## Why
 
-* Navigator
-* Navigator Screen
-* Navigator Collection
+Using UI package let you focus on writing scenario logic rather than spending time on styling component.
 
+By using Bearer UI components, you take advantage of pre-built components and allow your scenario(s) to be customized when integrated within other platforms
 
-## Development
+## Links
 
-At the moment, we are using the demo folder to develop/update/create UI components.
-We are doing this because we did not spent time on node_modules reloading. 
-By creating a symlink in demo from ui components folder we take advantage of hot reloading. It also give us a Stencil context 
-
-Follow the instructions (here)[./demo] to setup the development environment. 
-
-You can then start creating updating components.
+- Built with Stencil - [doc](https://stenciljs.com)

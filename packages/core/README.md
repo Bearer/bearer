@@ -1,24 +1,15 @@
-# Bearer Core
+# @bearer/core
 
-Bearer Core contains helpers and business logic that you must use if you want create new components and interact with Bearer servers.
+## What
 
-* Authentication
-* networks helpers
-* Decorators [README](./src/README/md)
+Frontend Bearer core functionalities.
 
-## Development
+- decorators
+- intent calls logic
+- authorization/authentication logic & helpers
+- Bearer config object
 
-Build a local bundle
+## Why
 
-```bash
-cp .env{.example,}
-
-yarn build
-yarn link
-```
-
-somewhere else in a different repository
-
-```bash
-yarn link "@bearer/core"
-```
+This package is the logical part of Bearer when @bearer/ui is the presentational one. Core contains logic relating to Bearer server interactions.
+This packages is mostly used by Bearer scenarios's views.

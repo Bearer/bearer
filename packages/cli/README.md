@@ -4,23 +4,20 @@ Bearer CLI
 
 [![oclif](https://img.shields.io/badge/cli-oclif-brightgreen.svg)](https://oclif.io)
 [![Version](https://img.shields.io/npm/v/@bearer/cli.svg)](https://npmjs.org/package/@bearer/cli)
-
-[![CircleCI](https://circleci.com/gh/Bearer/bearer/packages/cli/tree/master.svg?style=shield)](https://circleci.com/gh/Bearer/bearer/packages/cli/tree/master)
-
-[![Appveyor CI](https://ci.appveyor.com/api/projects/status/github/Bearer/bearer/packages/cli?branch=master&svg=true)](https://ci.appveyor.com/project/Bearer/bearer/packages/cli/branch/master)
-[![Codecov](https://codecov.io/gh/Bearer/bearer/packages/cli/branch/master/graph/badge.svg)](https://codecov.io/gh/Bearer/bearer/packages/cli)
 [![Downloads/week](https://img.shields.io/npm/dw/@bearer/cli.svg)](https://npmjs.org/package/@bearer/cli)
 [![License](https://img.shields.io/npm/l/@bearer/cli.svg)](https://github.com/Bearer/bearer/packages/cli/blob/master/package.json)
 
-<!-- toc -->
-* [@bearer/cli](#bearer-cli)
-* [Usage](#usage)
-* [Commands](#commands)
-<!-- tocstop -->
+-- toc as ! -->
+
+- [@bearer/cli](#bearer-cli)
+- [Usage](#usage)
+- [Commands](#commands)
+  <!-- tocstop -->
 
 # Usage
 
 <!-- usage -->
+
 ```sh-session
 $ npm install -g @bearer/cli
 $ bearer COMMAND
@@ -32,22 +29,24 @@ USAGE
   $ bearer COMMAND
 ...
 ```
+
 <!-- usagestop -->
 
 # Commands
 
 <!-- commands -->
-* [`bearer autocomplete [SHELL]`](#bearer-autocomplete-shell)
-* [`bearer generate`](#bearer-generate)
-* [`bearer generate:component [NAME]`](#bearer-generatecomponent-name)
-* [`bearer generate:intent [NAME]`](#bearer-generateintent-name)
-* [`bearer help [COMMAND]`](#bearer-help-command)
-* [`bearer invoke INTENT_NAME`](#bearer-invoke-intent-name)
-* [`bearer link SCENARIO_IDENTIFIER`](#bearer-link-scenario-identifier)
-* [`bearer login`](#bearer-login)
-* [`bearer new [SCENARIONAME]`](#bearer-new-scenarioname)
-* [`bearer push`](#bearer-push)
-* [`bearer start`](#bearer-start)
+
+- [`bearer autocomplete [SHELL]`](#bearer-autocomplete-shell)
+- [`bearer generate`](#bearer-generate)
+- [`bearer generate:component [NAME]`](#bearer-generatecomponent-name)
+- [`bearer generate:intent [NAME]`](#bearer-generateintent-name)
+- [`bearer help [COMMAND]`](#bearer-help-command)
+- [`bearer invoke INTENT_NAME`](#bearer-invoke-intent-name)
+- [`bearer link SCENARIO_IDENTIFIER`](#bearer-link-scenario-identifier)
+- [`bearer login`](#bearer-login)
+- [`bearer new [SCENARIONAME]`](#bearer-new-scenarioname)
+- [`bearer push`](#bearer-push)
+- [`bearer start`](#bearer-start)
 
 ## `bearer autocomplete [SHELL]`
 
@@ -244,4 +243,5 @@ OPTIONS
 ```
 
 _See code: [src/commands/start.ts](https://github.com/Bearer/bearer/blob/v0.73.0/src/commands/start.ts)_
-<!-- commandsstop -->
+
+-- commandsstop as ! -->

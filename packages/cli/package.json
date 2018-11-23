@@ -1,6 +1,6 @@
 {
   "name": "@bearer/cli",
-  "description": "Bearer CLI",
+  "description": "Bearer CLI. Set of commands helping scenario development",
   "version": "0.73.0",
   "author": "Bearer Team",
   "bin": {

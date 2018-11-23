@@ -5,7 +5,11 @@
     "packages/*"
   ],
   "lint-staged": {
-    "*.{js,css,md,tsx,ts,json}": [
+    "*.{js,css,md,json}": [
+      "prettier --write",
+      "git add"
+    ],
+    "*.{tsx,ts}": [
       "prettier --write",
       "tslint -c tslint.json --fix",
       "git add"
