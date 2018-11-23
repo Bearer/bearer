@@ -1,5 +1,4 @@
 @import '../../node_modules/bootstrap/scss/buttons';
-
 .btn-light,
 .btn-success,
 .btn-danger {
@@ -10,13 +9,11 @@
   font-family: inherit;
   font-weight: 500;
   color: #030d36;
-
   &:hover {
     background-color: hsl(220, 20%, 97%);
     border-color: #e7ebee;
     box-shadow: 0 3px 7px rgba(0, 0, 0, 0.14);
   }
-
   &:not(:disabled):not(.disabled):active,
   &:active {
     background-color: #e7ebee;
@@ -24,9 +21,18 @@
   }
 }
 
+.btn-custom {
+  all: inherit;
+  &:hover,
+  &:disabled,
+  &:active,
+  &:focus {
+    all: inherit;
+  }
+}
+
 .btn-success {
   color: #28a745;
-
   &:hover,
   &:not(:disabled):not(.disabled):active,
   &:active {
@@ -36,7 +42,6 @@
 
 .btn-danger {
   color: rgb(224, 26, 89);
-
   &:hover,
   &:not(:disabled):not(.disabled):active,
   &:active {
@@ -50,7 +55,6 @@
   font-family: inherit;
   font-weight: inherit;
   color: rgb(224, 26, 89);
-
   &:hover {
     background-color: rgb(224, 26, 89);
     border-color: rgb(224, 26, 89);

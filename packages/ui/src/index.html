@@ -1,150 +1,139 @@
 <!DOCTYPE html>
 <html dir="ltr" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0" />
+    <title>Stencil Component Starter</title>
+    <script>
+      window.BEARER_CONFIG = {
+        integrationHost: 'https://int.staging.bearer.sh/',
+        authorizationHost: 'https://int.staging.bearer.sh/'
+      }
+    </script>
+    <script src="/build/bearer-ui.js"></script>
+    <style>
+      body {
+        display: flex;
+        min-height: 100vh;
+        margin: 0;
+        padding: 0;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        font-family: 'Helvetica', sans-serif;
+      }
 
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0">
-  <title>Stencil Component Starter</title>
-  <script>
-    window.BEARER_CONFIG = {
-      integrationHost: 'https://int.staging.bearer.sh/',
-      authorizationHost: 'https://int.staging.bearer.sh/',
-    }
-  </script>
-  <script src="/build/bearer-ui.js"></script>
-  <style>
-    body {
-      display: flex;
-      min-height: 100vh;
-      margin: 0;
-      padding: 0;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
-    }
+      section {
+        margin-top: 40px;
+        margin-bottom: 20px;
+      }
 
-    body>div {
-      flex: 1;
-      min-height: 200px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
-  </style>
-</head>
+      h4 {
+        margin-bottom: 0;
+      }
 
-<body>
-  <div>
-    <bearer-authorized></bearer-authorized>
-  </div>
-  <div>
-    <h1>Buttons</h1>
-    <bearer-button kind="light">
-      <span>Connect your Slack</span>
-    </bearer-button>
+      p {
+        margin-top: 5px;
+        opacity: 0.6;
+      }
 
-    <bearer-button kind="success">
-      <span>Connect your Slack</span>
-    </bearer-button>
+      .client-override {
+        background: #eaeaea;
+        padding: 15px;
+      }
 
-    <bearer-button kind="danger">
-      <span>Connect your Slack</span>
-    </bearer-button>
+      .client-button,
+      .client-override scenario-component {
+        font-family: courier;
+        background-color: #333;
+        color: white;
+        border: 1px solid #333;
+        border-radius: 3px;
+        padding: 10px 15px;
+        display: inline-block;
+        cursor: pointer;
+      }
 
-    <br />
-    <br />
+      .client-button:hover,
+      .client-override scenario-component:hover {
+        background-color: white;
+        color: #333;
+      }
+    </style>
+  </head>
 
-    <bearer-button kind="danger" outline>
-      <span>Revoke access to your Slack</span>
-    </bearer-button>
-
-    <h1>Pagination</h1>
-    <bearer-pagination>
-      <span slot="prevText">&laquo;</span>
-      <span slot="nextText">&raquo;</span>
-    </bearer-pagination>
-    <bearer-pagination display-next-prev="false"></bearer-pagination>
-    <bearer-pagination display-pages="false" current-page="2" has-next="false"></bearer-pagination>
-    <bearer-pagination current-page="20" page-count="50"></bearer-pagination>
-    <bearer-pagination current-page="20" window="1" page-count="50"></bearer-pagination>
-    <bearer-pagination current-page="2" page-count="5"></bearer-pagination>
-  </div>
-  <div style="padding: 100px 0">
+  <body>
     <div>
+      <section>
+        <h4>Buttons of the client website</h4>
+        <p>Default rendered styles are coming from Bearer UI or Bearer Scenario</p>
+        <a class="client-button">Get quote</a>
+      </section>
 
-      <bearer-button-popover direction="left" header="My scenario name">
-        <span slot="buttonText">Attached at left</span>
-        <bearer-navigator>
-          <bearer-navigator-screen navigation-title="First Screen">
-            <div>Long story Short
-              <br />Long story Short
-              <br />Long story Short
-              <br />Long story Short
-              <br />Long story Short
-              <br />Long story Short
-              <br />Long story Short
-              <br />Long story Short
-              <br />Long story Short
-              <br />
-            </div>
+      <section>
+        <h4>Scenario button called simply</h4>
+        <p>Default rendered styles are coming from Bearer UI or Bearer Scenario</p>
+        <scenario-component></scenario-component>
+      </section>
 
-          </bearer-navigator-screen>
-          <bearer-navigator-screen>
-            2
-          </bearer-navigator-screen>
-          <bearer-navigator-screen>
-            3
-          </bearer-navigator-screen>
-        </bearer-navigator>
-      </bearer-button-popover>
+      <section>
+        <h4>Scenario button called WITH a <code>custom</code> attribute</h4>
+        <p>Emptied rendered styles are coming from Bearer UI or Bearer Scenario</p>
+        <scenario-component custom></scenario-component>
+      </section>
 
-      <bearer-button-popover direction="top" header="My scenario name" button-text="Attach PR">
-        <span slot="buttonText">Attach on top</span>
-        <div>Long story Short
-          <br />Long story Short
-          <br />Long story Short
-          <br />Long story Short
-          <br />Long story Short
-          <br />Long story Short
-          <br />Long story Short
-          <br />Long story Short
-          <br />Long story Short
-          <br />
-        </div>
-      </bearer-button-popover>
-      <bearer-button-popover direction="top" header="My scenario name" button-text="Attach PR" opened="false">
-        <span slot="buttonText">Attach PR</span>
-        <div>Long story Short
-          <br />Long story Short
-          <br />Long story Short
-          <br />Long story Short
-          <br />Long story Short
-          <br />Long story Short
-          <br />Long story Short
-          <br />Long story Short
-          <br />Long story Short
-          <br />
-        </div>
-      </bearer-button-popover>
-      <bearer-button-popover direction="bottom" header="My scenario name" button-text="Attach PR">
-        <span slot="buttonText">Attach PR</span>
-        <div>Long story Short
-          <br />Long story Short
-          <br />Long story Short
-          <br />Long story Short
-          <br />Long story Short
-          <br />Long story Short
-          <br />Long story Short
-          <br />Long story Short
-          <br />Long story Short
-          <br />
-        </div>
-      </bearer-button-popover>
-      <bearer-button-popover direction="right" header="My scenario name" button-text="Attach PR">
-        <span slot="buttonText">Attach PR</span>
-      </bearer-button-popover>
+      <section>
+        <h4>Scenario button called WITH client overriding wrapper</h4>
+        <p>
+          New styles are added on a client wrapper, but button rendered styles are coming from Bearer UI or Bearer
+          Scenario
+        </p>
+        <div class="client-override"><scenario-component></scenario-component></div>
+      </section>
+
+      <section>
+        <h4>Scenario button called simply WITH default navigator styles</h4>
+        <p>Scenario button called WITH client overriding wrapper + WITH a "custom" attribute</p>
+        <scenario-component default></scenario-component>
+      </section>
+
+      <section>
+        <h4>Scenario button called WITH client overriding wrapper + WITH default navigator styles</h4>
+        <p>Scenario button called WITH client overriding wrapper + WITH a "custom" attribute</p>
+        <div class="client-override"><scenario-component default></scenario-component></div>
+      </section>
+
+      <section>
+        <h4>Scenario button called WITH client overriding wrapper + WITH a <code>custom</code> attribute</h4>
+        <p>
+          Rendered styles are comming from the client side: Bearer UI or Bearer Scenario component allow CSS inheritance
+        </p>
+        <div class="client-override"><scenario-component custom></scenario-component></div>
+      </section>
     </div>
-  </div>
-</body>
 
+    <script>
+      class ScenarioComponent extends HTMLElement {
+        connectedCallback() {
+          var shadow = this.attachShadow({ mode: 'closed' })
+          var wrapper = document.createElement('bearer-button')
+          wrapper.innerHTML = `<span>Share message</span>`
+
+          var customAttr = this.getAttribute('custom')
+          if (customAttr !== null) {
+            wrapper.setAttribute('custom', true)
+          }
+
+          var defaultAttr = this.getAttribute('default')
+          if (defaultAttr !== null) {
+            wrapper.setAttribute('default', true)
+          }
+
+          shadow.appendChild(wrapper)
+        }
+      }
+
+      customElements.define('scenario-component', ScenarioComponent)
+    </script>
+  </body>
 </html>

@@ -6,16 +6,31 @@ import { Component, Prop } from '@bearer/core'
   shadow: true
 })
 export class Button {
-  @Prop() content: any
-  @Prop() kind: 'primary' | 'secondary' | 'success' | 'danger' | 'warning' | 'info' | 'light' | 'dark' = 'primary'
-  @Prop() size: 'md' | 'sm' | 'lg' = 'md'
-  @Prop() as: string = 'button'
-  @Prop() outline: boolean = false
-  @Prop() disabled: boolean = false
+  @Prop()
+  content: any
+  @Prop()
+  kind: 'primary' | 'secondary' | 'success' | 'danger' | 'warning' | 'info' | 'light' | 'dark' = 'primary'
+  @Prop()
+  size: 'md' | 'sm' | 'lg' = 'md'
+  @Prop()
+  as: string = 'button'
+  @Prop()
+  outline: boolean = false
+  @Prop()
+  disabled: boolean = false
+  @Prop()
+  custom: boolean = false
+  @Prop()
+  default: boolean = false
 
   render() {
     const Tag = this.as
-    const classes = ['btn', `btn${this.outline ? '-outline' : ''}-${this.kind}`, `btn-${this.size}`]
+    let classes = ['btn', `btn${this.outline ? '-outline' : ''}-${this.kind}`, `btn-${this.size}`]
+    {
+      this.custom ? (classes = ['btn-custom']) : ''
+      this.default ? (classes = ['']) : ''
+    }
+
     return (
       <Tag class={classes.join(' ')} disabled={this.disabled}>
         {this.content || <slot />}

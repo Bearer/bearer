@@ -63,6 +63,8 @@ declare global {
     interface BearerButton {
       'as': string;
       'content': any;
+      'custom': boolean;
+      'default': boolean;
       'disabled': boolean;
       'kind': 'primary' | 'secondary' | 'success' | 'danger' | 'warning' | 'info' | 'light' | 'dark';
       'outline': boolean;
@@ -518,6 +520,8 @@ declare global {
     export interface BearerButtonAttributes extends HTMLAttributes {
       'as'?: string;
       'content'?: any;
+      'custom'?: boolean;
+      'default'?: boolean;
       'disabled'?: boolean;
       'kind'?: 'primary' | 'secondary' | 'success' | 'danger' | 'warning' | 'info' | 'light' | 'dark';
       'outline'?: boolean;
