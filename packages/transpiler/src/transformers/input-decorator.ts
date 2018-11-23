@@ -7,10 +7,11 @@ import * as ts from 'typescript'
 import { Decorators, Properties } from '../constants'
 import { extractBooleanOptions, extractStringOptions, getDecoratorNamed } from '../helpers/decorator-helpers'
 import { getNodeName } from '../helpers/node-helpers'
+import { capitalize } from '../helpers/string'
 import { TransformerOptions } from '../types'
 
 import { createOrUpdateComponentDidLoad, ensureImportsFromCore } from './bearer'
-import { outputEventName } from './output-decorator'
+import { outputEventName, refIdName } from './output-decorator'
 
 export default function InputDecorator({ metadata }: TransformerOptions = {}): ts.TransformerFactory<ts.SourceFile> {
   return _transformContext => {
@@ -45,20 +46,19 @@ export default function InputDecorator({ metadata }: TransformerOptions = {}): t
           if (decorator) {
             const options = extractInputOptions(decorator)
             const name = getNodeName(tsNode)
-            const capitalizedName = name.charAt(0).toUpperCase() + name.slice(1)
             const component = metadata.findComponentFrom(sourcefile)
             inputs.push({
               propDeclarationName: name,
               group: component.group,
-              propName: `${name}RefId`,
+              propName: refIdName(name),
               eventName: outputEventName(name),
-              intentName: `get${capitalizedName}`,
-              intentMethodName: `fetcherGet${capitalizedName}`, // TODO: retrieve from options
-              autoLoad: true, // TODO: retrieve from options
-              loadMethodName: `_load${capitalizedName}`,
+              intentName: retrieveIntentName(name),
+              intentMethodName: retrieveFetcherName(name), // TODO: retrieve from options
+              autoLoad: true,
+              loadMethodName: _loadName(name),
               typeIdentifier: tsNode.type,
               intializer: tsNode.initializer,
-              watcherName: `_watch${capitalizedName}`,
+              watcherName: _watchName(name),
               intentReferenceIdKeyName: Properties.ReferenceId,
               ...options
             })
@@ -313,11 +313,21 @@ function createRefIdWatcher(meta: InputMeta) {
   )
 }
 
-// // Nive to have
-// function createLoadingProp(meta: InputMeta){
+export function retrieveIntentName(name: string): string {
+  return `retrieve${capitalize(name)}`
+}
 
-// }
+function retrieveFetcherName(name: string): string {
+  return `fetcherRetrieve${capitalize(name)}`
+}
 
+function _loadName(name: string): string {
+  return `_load${capitalize(name)}`
+}
+
+function _watchName(name: string): string {
+  return `_watch${capitalize(name)}`
+}
 type InputMeta = TInputDecoratorOptions & {
   propDeclarationName: string
   typeIdentifier?: ts.TypeNode

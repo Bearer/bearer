@@ -31,13 +31,13 @@ class NoOptionsComponent {
         }
     }
     _loadFarmer = () => {
-        this.fetcherGetFarmer({ referenceId: this.farmerRefId }).then(({ data }: {
+        this.fetcherRetrieveFarmer({ referenceId: this.farmerRefId }).then(({ data }: {
             data: BearerRef<Farmer>;
         }) => {
             this.farmer = data;
         });
     };
-    private fetcherGetFarmer;
+    private fetcherRetrieveFarmer;
     @Watch(\\"farmerRefId\\")
     _watchFarmer(newValueName: string) {
         if (newValueName) {
@@ -57,13 +57,13 @@ class NoOptionsComponent {
         }
     }
     _loadAString = () => {
-        this.fetcherGetAString({ referenceId: this.aStringRefId }).then(({ data }: {
+        this.fetcherRetrieveAString({ referenceId: this.aStringRefId }).then(({ data }: {
             data: BearerRef<string>;
         }) => {
             this.aString = data;
         });
     };
-    private fetcherGetAString;
+    private fetcherRetrieveAString;
     @Watch(\\"aStringRefId\\")
     _watchAString(newValueName: string) {
         if (newValueName) {
@@ -83,13 +83,13 @@ class NoOptionsComponent {
         }
     }
     _loadAStringWithoutInitializer = () => {
-        this.fetcherGetAStringWithoutInitializer({ referenceId: this.aStringWithoutInitializerRefId }).then(({ data }: {
+        this.fetcherRetrieveAStringWithoutInitializer({ referenceId: this.aStringWithoutInitializerRefId }).then(({ data }: {
             data: BearerRef<string>;
         }) => {
             this.aStringWithoutInitializer = data;
         });
     };
-    private fetcherGetAStringWithoutInitializer;
+    private fetcherRetrieveAStringWithoutInitializer;
     @Watch(\\"aStringWithoutInitializerRefId\\")
     _watchAStringWithoutInitializer(newValueName: string) {
         if (newValueName) {
@@ -111,7 +111,7 @@ class NoOptionsComponent {
         }
     }
     _loadObject = () => {
-        this.fetcherGetObject({ referenceId: this.objectRefId }).then(({ data }: {
+        this.fetcherRetrieveObject({ referenceId: this.objectRefId }).then(({ data }: {
             data: BearerRef<{
                 title: string;
             }>;
@@ -119,7 +119,7 @@ class NoOptionsComponent {
             this.object = data;
         });
     };
-    private fetcherGetObject;
+    private fetcherRetrieveObject;
     @Watch(\\"objectRefId\\")
     _watchObject(newValueName: string) {
         if (newValueName) {
@@ -141,7 +141,7 @@ class NoOptionsComponent {
         }
     }
     _loadObjectWithoutInitializer = () => {
-        this.fetcherGetObjectWithoutInitializer({ referenceId: this.objectWithoutInitializerRefId }).then(({ data }: {
+        this.fetcherRetrieveObjectWithoutInitializer({ referenceId: this.objectWithoutInitializerRefId }).then(({ data }: {
             data: BearerRef<{
                 title: string;
             }>;
@@ -149,7 +149,7 @@ class NoOptionsComponent {
             this.objectWithoutInitializer = data;
         });
     };
-    private fetcherGetObjectWithoutInitializer;
+    private fetcherRetrieveObjectWithoutInitializer;
     @Watch(\\"objectWithoutInitializerRefId\\")
     _watchObjectWithoutInitializer(newValueName: string) {
         if (newValueName) {
@@ -169,13 +169,13 @@ class NoOptionsComponent {
         }
     }
     _loadSpongeBob = () => {
-        this.fetcherGetSpongeBob({ referenceId: this.patrick }).then(({ data }: {
+        this.fetcherRetrieveSpongeBob({ referenceId: this.patrick }).then(({ data }: {
             data: BearerRef<Sponge>;
         }) => {
             this.spongeBob = data;
         });
     };
-    private fetcherGetSpongeBob;
+    private fetcherRetrieveSpongeBob;
     @Watch(\\"patrick\\")
     _watchSpongeBob(newValueName: string) {
         if (newValueName) {
@@ -183,12 +183,12 @@ class NoOptionsComponent {
         }
     }
     constructor() {
-        Intent(\\"getFarmer\\")(this, \\"fetcherGetFarmer\\");
-        Intent(\\"getAString\\")(this, \\"fetcherGetAString\\");
-        Intent(\\"getAStringWithoutInitializer\\")(this, \\"fetcherGetAStringWithoutInitializer\\");
-        Intent(\\"getObject\\")(this, \\"fetcherGetObject\\");
-        Intent(\\"getObjectWithoutInitializer\\")(this, \\"fetcherGetObjectWithoutInitializer\\");
-        Intent(\\"killPatrick\\")(this, \\"fetcherGetSpongeBob\\");
+        Intent(\\"retrieveFarmer\\")(this, \\"fetcherRetrieveFarmer\\");
+        Intent(\\"retrieveAString\\")(this, \\"fetcherRetrieveAString\\");
+        Intent(\\"retrieveAStringWithoutInitializer\\")(this, \\"fetcherRetrieveAStringWithoutInitializer\\");
+        Intent(\\"retrieveObject\\")(this, \\"fetcherRetrieveObject\\");
+        Intent(\\"retrieveObjectWithoutInitializer\\")(this, \\"fetcherRetrieveObjectWithoutInitializer\\");
+        Intent(\\"killPatrick\\")(this, \\"fetcherRetrieveSpongeBob\\");
     }
     get SCENARIO_ID() { return \\"SPONGE_BOB\\"; }
     @Prop({ \\"context\\": \\"bearer\\" })

@@ -50,13 +50,13 @@ export class FullComponent {
         }
     }
     _loadFarmer = () => {
-        this.fetcherGetFarmer({ referenceId: this.farmerRefId }).then(({ data }: {
+        this.fetcherRetrieveFarmer({ referenceId: this.farmerRefId }).then(({ data }: {
             data: BearerRef<any>;
         }) => {
             this.farmer = data;
         });
     };
-    private fetcherGetFarmer;
+    private fetcherRetrieveFarmer;
     @Watch(\\"farmerRefId\\")
     _watchFarmer(newValueName: string) {
         if (newValueName) {
@@ -76,13 +76,13 @@ export class FullComponent {
         }
     }
     _loadGoat = () => {
-        this.fetcherGetGoat({ referenceId: this.goatId }).then(({ data }: {
+        this.fetcherRetrieveGoat({ referenceId: this.goatId }).then(({ data }: {
             data: BearerRef<any>;
         }) => {
             this.goat = data;
         });
     };
-    private fetcherGetGoat;
+    private fetcherRetrieveGoat;
     @Watch(\\"goatId\\")
     _watchGoat(newValueName: string) {
         if (newValueName) {
@@ -134,8 +134,8 @@ export class FullComponent {
     constructor() {
         Intent('ListRepositories')(this, \\"fetcher\\");
         Intent('getPullRequest', IntentType.FetchData)(this, \\"fetchResource\\");
-        Intent(\\"getFarmer\\")(this, \\"fetcherGetFarmer\\");
-        Intent(\\"retrieveGoat\\")(this, \\"fetcherGetGoat\\");
+        Intent(\\"retrieveFarmer\\")(this, \\"fetcherRetrieveFarmer\\");
+        Intent(\\"retrieveGoat\\")(this, \\"fetcherRetrieveGoat\\");
         Intent(\\"saveFeedPanda\\")(this, \\"saveFeedPanda\\");
         Intent(\\"saveFeedPanda\\")(this, \\"saveFeedPanda\\");
     }

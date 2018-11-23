@@ -7,6 +7,7 @@ import * as ts from 'typescript'
 import { Decorators, Properties, Types } from '../constants'
 import { extractStringOptions, getDecoratorNamed } from '../helpers/decorator-helpers'
 import { getNodeName } from '../helpers/node-helpers'
+import { capitalize } from '../helpers/string'
 import { TransformerOptions } from '../types'
 
 import { ensureImportsFromCore } from './bearer'
@@ -59,10 +60,10 @@ export default function OutputDecorator(_options: TransformerOptions = {}): ts.T
                 ])
             outputs.push({
               eventName: outputEventName(name),
-              intentName: `save${capitalize(name)}`,
+              intentName: saveIntentName(name),
               intentPropertyName: name,
               propDeclarationName: name,
-              propDeclarationNameRefId: `${name}RefId`,
+              propDeclarationNameRefId: refIdName(name),
               intentReferenceIdKeyName: Properties.ReferenceId,
               typeIdentifier: tsNode.type,
               initializer: tsNode.initializer,
@@ -287,13 +288,17 @@ function createEmitCall(meta: OutputMeta, properties: Array<ts.ObjectLiteralElem
   )
 }
 
+export function refIdName(name: string): string {
+  return `${name}RefId`
+}
+
+export function saveIntentName(name: string): string {
+  return `save${capitalize(name)}`
+}
+
 export function outputEventName(prefix: string, suffix?: string): string {
   const _suffix = suffix || 'Saved'
   return `${prefix}${capitalize(_suffix)}`
-}
-
-function capitalize(string: string): string {
-  return string.charAt(0).toUpperCase() + string.slice(1)
 }
 
 type OutputMeta = TOutputDecoratorOptions & {
