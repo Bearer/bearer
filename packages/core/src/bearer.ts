@@ -8,6 +8,7 @@ const BEARER_WINDOW_INSTANCE_KEY = 'BEARER_INSTANCE'
 const BEARER_EMITTER = 'BEARER_EMITTER'
 const BEARER_WINDOW_KEY = 'BEARER'
 const BEARER_CONFIG_KEY = 'BEARER_CONFIG'
+const BEARER_AUTH_ID_KEY = 'BEARER_AUTH_ID_KEY'
 const IFRAME_NAME = 'BEARER-IFRAME'
 const LOG_LEVEL_KEY = 'LOG_LEVEL'
 
@@ -129,8 +130,9 @@ export default class Bearer {
           scenarioId,
           clientId: Bearer.config.clientId
         })
-        .then(({ data, data: { authorized } }) => {
+        .then(({ data, data: { authorized, authId } }) => {
           console.debug('[BEARER]', 'HAS_AUTHORIZED response', data)
+          window[BEARER_AUTH_ID_KEY] = authId
           authorized ? resolve(true) : reject(false)
         })
         .catch(iframeError)
