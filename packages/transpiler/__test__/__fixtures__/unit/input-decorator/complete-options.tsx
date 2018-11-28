@@ -1,4 +1,4 @@
-import { BearerRef, Input, RootComponent } from '@bearer/core'
+import { BearerRef, Input, RootComponent, State } from '@bearer/core'
 
 type Farmer = {
   id: string
@@ -32,10 +32,17 @@ class NoOptionsComponent {
 
   @Input({
     group: 'other-group',
-    propName: 'patrick',
+    propertyReferenceIdName: 'patrick',
     eventName: 'patrickWasKilled',
     intentName: 'killPatrick',
     autoLoad: false
   })
   spongeBob: BearerRef<Sponge>
+
+  @Input({
+    propertyReferenceIdName: 'refNotOverrided'
+  })
+  spongeBobOverrided: BearerRef<Sponge>
+  // won't be injected by the transfomer
+  @State() refNotOverrided: string
 }

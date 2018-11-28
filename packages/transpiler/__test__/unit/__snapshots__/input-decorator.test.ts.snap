@@ -3,7 +3,7 @@
 exports[`Input decorator units complete options match snapshot 1`] = `
 Object {
   "file": "complete-options.tsx",
-  "postContent": "import { BearerRef, Component, Listen, State, Intent, Watch, Prop } from '@bearer/core';
+  "postContent": "import { BearerRef, State, Component, Listen, Intent, Watch, Prop } from '@bearer/core';
 type Farmer = {
     id: string;
     name: string;
@@ -18,14 +18,16 @@ type Sponge = {
     shadow: true
 })
 class NoOptionsComponent {
+    // won't be injected by the transfomer
+    @State()
+    refNotOverrided: string;
     @State()
     farmer: BearerRef<Farmer>;
-    @Prop({ \\"mutable\\": true })
-    farmerRefId: string;
     @Listen(\\"body:bearer|SPONGE_BOB|no-options|farmerSaved\\")
     farmerRefIdChanged(event) {
-        if (this.farmerRefId !== event.detail.referenceId)
+        if (this.farmerRefId !== event.detail.referenceId) {
             this.farmerRefId = event.detail.referenceId;
+        }
         else {
             this._loadFarmer();
         }
@@ -44,14 +46,15 @@ class NoOptionsComponent {
             this._loadFarmer();
         }
     }
+    @Prop({ \\"mutable\\": true })
+    farmerRefId: string;
     @State()
     aString: BearerRef<string> = 'ok';
-    @Prop({ \\"mutable\\": true })
-    aStringRefId: string;
     @Listen(\\"body:bearer|SPONGE_BOB|no-options|aStringSaved\\")
     aStringRefIdChanged(event) {
-        if (this.aStringRefId !== event.detail.referenceId)
+        if (this.aStringRefId !== event.detail.referenceId) {
             this.aStringRefId = event.detail.referenceId;
+        }
         else {
             this._loadAString();
         }
@@ -70,14 +73,15 @@ class NoOptionsComponent {
             this._loadAString();
         }
     }
+    @Prop({ \\"mutable\\": true })
+    aStringRefId: string;
     @State()
     aStringWithoutInitializer: BearerRef<string>;
-    @Prop({ \\"mutable\\": true })
-    aStringWithoutInitializerRefId: string;
     @Listen(\\"body:bearer|SPONGE_BOB|no-options|aStringWithoutInitializerSaved\\")
     aStringWithoutInitializerRefIdChanged(event) {
-        if (this.aStringWithoutInitializerRefId !== event.detail.referenceId)
+        if (this.aStringWithoutInitializerRefId !== event.detail.referenceId) {
             this.aStringWithoutInitializerRefId = event.detail.referenceId;
+        }
         else {
             this._loadAStringWithoutInitializer();
         }
@@ -96,16 +100,17 @@ class NoOptionsComponent {
             this._loadAStringWithoutInitializer();
         }
     }
+    @Prop({ \\"mutable\\": true })
+    aStringWithoutInitializerRefId: string;
     @State()
     object: BearerRef<{
         title: string;
     }> = { title: 'Guest' };
-    @Prop({ \\"mutable\\": true })
-    objectRefId: string;
     @Listen(\\"body:bearer|SPONGE_BOB|no-options|objectSaved\\")
     objectRefIdChanged(event) {
-        if (this.objectRefId !== event.detail.referenceId)
+        if (this.objectRefId !== event.detail.referenceId) {
             this.objectRefId = event.detail.referenceId;
+        }
         else {
             this._loadObject();
         }
@@ -126,16 +131,17 @@ class NoOptionsComponent {
             this._loadObject();
         }
     }
+    @Prop({ \\"mutable\\": true })
+    objectRefId: string;
     @State()
     objectWithoutInitializer: BearerRef<{
         title: string;
     }>;
-    @Prop({ \\"mutable\\": true })
-    objectWithoutInitializerRefId: string;
     @Listen(\\"body:bearer|SPONGE_BOB|no-options|objectWithoutInitializerSaved\\")
     objectWithoutInitializerRefIdChanged(event) {
-        if (this.objectWithoutInitializerRefId !== event.detail.referenceId)
+        if (this.objectWithoutInitializerRefId !== event.detail.referenceId) {
             this.objectWithoutInitializerRefId = event.detail.referenceId;
+        }
         else {
             this._loadObjectWithoutInitializer();
         }
@@ -156,14 +162,15 @@ class NoOptionsComponent {
             this._loadObjectWithoutInitializer();
         }
     }
+    @Prop({ \\"mutable\\": true })
+    objectWithoutInitializerRefId: string;
     @State()
     spongeBob: BearerRef<Sponge>;
-    @Prop({ \\"mutable\\": true })
-    patrick: string;
     @Listen(\\"body:bearer|SPONGE_BOB|other-group|patrickWasKilled\\")
     patrickChanged(event) {
-        if (this.patrick !== event.detail.referenceId)
+        if (this.patrick !== event.detail.referenceId) {
             this.patrick = event.detail.referenceId;
+        }
         else {
             this._loadSpongeBob();
         }
@@ -182,6 +189,33 @@ class NoOptionsComponent {
             this._loadSpongeBob();
         }
     }
+    @Prop({ \\"mutable\\": true })
+    patrick: string;
+    @State()
+    spongeBobOverrided: BearerRef<Sponge>;
+    @Listen(\\"body:bearer|SPONGE_BOB|no-options|spongeBobOverridedSaved\\")
+    refNotOverridedChanged(event) {
+        if (this.refNotOverrided !== event.detail.referenceId) {
+            this.refNotOverrided = event.detail.referenceId;
+        }
+        else {
+            this._loadSpongeBobOverrided();
+        }
+    }
+    _loadSpongeBobOverrided = () => {
+        this.fetcherRetrieveSpongeBobOverrided({ referenceId: this.refNotOverrided }).then(({ data }: {
+            data: BearerRef<Sponge>;
+        }) => {
+            this.spongeBobOverrided = data;
+        });
+    };
+    private fetcherRetrieveSpongeBobOverrided;
+    @Watch(\\"refNotOverrided\\")
+    _watchSpongeBobOverrided(newValueName: string) {
+        if (newValueName) {
+            this._loadSpongeBobOverrided();
+        }
+    }
     constructor() {
         Intent(\\"retrieveFarmer\\")(this, \\"fetcherRetrieveFarmer\\");
         Intent(\\"retrieveAString\\")(this, \\"fetcherRetrieveAString\\");
@@ -189,6 +223,7 @@ class NoOptionsComponent {
         Intent(\\"retrieveObject\\")(this, \\"fetcherRetrieveObject\\");
         Intent(\\"retrieveObjectWithoutInitializer\\")(this, \\"fetcherRetrieveObjectWithoutInitializer\\");
         Intent(\\"killPatrick\\")(this, \\"fetcherRetrieveSpongeBob\\");
+        Intent(\\"retrieveSpongeBobOverrided\\")(this, \\"fetcherRetrieveSpongeBobOverrided\\");
     }
     get SCENARIO_ID() { return \\"SPONGE_BOB\\"; }
     @Prop({ \\"context\\": \\"bearer\\" })
@@ -213,6 +248,9 @@ class NoOptionsComponent {
         }
         if (this.objectWithoutInitializerRefId) {
             this._loadObjectWithoutInitializer();
+        }
+        if (this.refNotOverrided) {
+            this._loadSpongeBobOverrided();
         }
     }
 }

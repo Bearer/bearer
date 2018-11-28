@@ -3,7 +3,7 @@
  */
 export type TInputDecoratorOptions = {
   group: string // target a different group of component to listen to eventName
-  propName: string // specifiy a different attribut name to your component
+  propertyReferenceIdName: string // specifiy a different attribut name to your component
   eventName: string // listen to a different event name from group
   intentReferenceIdKeyName: string // key name used to send referenceId to the intent
   intentName: string // specify an intent to use to retrieve data

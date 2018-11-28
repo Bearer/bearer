@@ -39,12 +39,11 @@ export class FullComponent {
     }
     @State()
     farmer: BearerRef<any>;
-    @Prop({ \\"mutable\\": true })
-    farmerRefId: string;
     @Listen(\\"body:bearer|SPONGE_BOB|undefined|farmerSaved\\")
     farmerRefIdChanged(event) {
-        if (this.farmerRefId !== event.detail.referenceId)
+        if (this.farmerRefId !== event.detail.referenceId) {
             this.farmerRefId = event.detail.referenceId;
+        }
         else {
             this._loadFarmer();
         }
@@ -63,32 +62,35 @@ export class FullComponent {
             this._loadFarmer();
         }
     }
+    @Prop({ \\"mutable\\": true })
+    farmerRefId: string;
     @State()
     goat: BearerRef<any>;
-    @Prop({ \\"mutable\\": true })
-    goatId: string;
     @Listen(\\"body:bearer|SPONGE_BOB|SCOPE|goatMilked\\")
-    goatIdChanged(event) {
-        if (this.goatId !== event.detail.referenceId)
-            this.goatId = event.detail.referenceId;
+    goatRefIdChanged(event) {
+        if (this.goatRefId !== event.detail.referenceId) {
+            this.goatRefId = event.detail.referenceId;
+        }
         else {
             this._loadGoat();
         }
     }
     _loadGoat = () => {
-        this.fetcherRetrieveGoat({ referenceId: this.goatId }).then(({ data }: {
+        this.fetcherRetrieveGoat({ referenceId: this.goatRefId }).then(({ data }: {
             data: BearerRef<any>;
         }) => {
             this.goat = data;
         });
     };
     private fetcherRetrieveGoat;
-    @Watch(\\"goatId\\")
+    @Watch(\\"goatRefId\\")
     _watchGoat(newValueName: string) {
         if (newValueName) {
             this._loadGoat();
         }
     }
+    @Prop({ \\"mutable\\": true })
+    goatRefId: string;
     private saveFeedPanda: BearerFetch<BearerRef<any>>;
     @Event({ eventName: \\"bearer|SPONGE_BOB|global|feedPandaSaved\\" })
     feedPandaSaved: EventEmitter<any>;
@@ -151,7 +153,7 @@ export class FullComponent {
         if (this.farmerRefId) {
             this._loadFarmer();
         }
-        if (this.goatId) {
+        if (this.goatRefId) {
             this._loadGoat();
         }
     }
