@@ -41,15 +41,10 @@ class NoOptionsComponent {
     farmerRefId: string;
     @Watch(\\"farmer\\")
     farmerSavedWatcher(newValue) {
-        if (newValue) {
-            this.saveFarmer({ body: { farmer: newValue }, referenceId: this.farmerRefId }).then(({ referenceId, data }) => {
-                this.farmerSaved.emit({ referenceId, farmer: data || this.farmer });
-                this.farmerRefId = referenceId;
-            });
-        }
-        else {
-            this.farmerSaved.emit({ farmer: newValue });
-        }
+        this.saveFarmer({ body: { farmer: newValue }, referenceId: this.farmerRefId }).then(({ referenceId, data }) => {
+            this.farmerSaved.emit({ referenceId, farmer: data || this.farmer });
+            this.farmerRefId = referenceId;
+        });
     }
     private milkWithAbottle: BearerFetch<BearerRef<Farmer>>;
     @Event({ eventName: \\"bearer|SPONGE_BOB|no-options|milked\\" })
@@ -63,15 +58,10 @@ class NoOptionsComponent {
     farmerAndPandaRefId: string;
     @Watch(\\"aPanda\\")
     milkedWatcher(newValue) {
-        if (newValue) {
-            this.milkWithAbottle({ body: { farmerAndPanda: newValue }, referenceId: this.farmerAndPandaRefId }).then(({ referenceId: aPandaKey, data }) => {
-                this.milked.emit({ aPandaKey, farmerAndPanda: data || this.farmerAndPanda });
-                this.farmerAndPandaRefId = aPandaKey;
-            });
-        }
-        else {
-            this.milked.emit({ farmerAndPanda: newValue });
-        }
+        this.milkWithAbottle({ body: { farmerAndPanda: newValue }, referenceId: this.farmerAndPandaRefId }).then(({ referenceId: aPandaKey, data }) => {
+            this.milked.emit({ aPandaKey, farmerAndPanda: data || this.farmerAndPanda });
+            this.farmerAndPandaRefId = aPandaKey;
+        });
     }
     constructor() {
         Intent(\\"saveFarmer\\")(this, \\"saveFarmer\\");

@@ -180,22 +180,7 @@ function createWatchers(meta: OutputMeta): ts.MethodDeclaration[] {
       undefined,
       [ts.createParameter(undefined, undefined, undefined, newValue, undefined, undefined, undefined)], // parameters
       undefined,
-      ts.createBlock(
-        [
-          ts.createIf(
-            ts.createIdentifier(newValue),
-            ts.createBlock([ts.createStatement(createIntentCall(meta))], true),
-            ts.createBlock([
-              ts.createStatement(
-                createEmitCall(meta, [
-                  ts.createPropertyAssignment(meta.propDeclarationName, ts.createIdentifier(newValue))
-                ])
-              )
-            ])
-          )
-        ],
-        true
-      )
+      ts.createBlock([ts.createStatement(createIntentCall(meta))], true)
     )
   ]
 }

@@ -103,15 +103,10 @@ export class FullComponent {
     feedPandaRefId: string;
     @Watch(\\"feedPanda\\")
     feedPandaSavedWatcher(newValue) {
-        if (newValue) {
-            this.saveFeedPanda({ body: { feedPanda: newValue }, referenceId: this.feedPandaRefId }).then(({ referenceId, data }) => {
-                this.feedPandaSaved.emit({ referenceId, feedPanda: data || this.feedPanda });
-                this.feedPandaRefId = referenceId;
-            });
-        }
-        else {
-            this.feedPandaSaved.emit({ feedPanda: newValue });
-        }
+        this.saveFeedPanda({ body: { feedPanda: newValue }, referenceId: this.feedPandaRefId }).then(({ referenceId, data }) => {
+            this.feedPandaSaved.emit({ referenceId, feedPanda: data || this.feedPanda });
+            this.feedPandaRefId = referenceId;
+        });
     }
     private saveFeedPanda: BearerFetch<BearerRef<any>>;
     @Event({ eventName: \\"bearer|SPONGE_BOB|global|milked\\" })
@@ -125,15 +120,10 @@ export class FullComponent {
     feedPandaRefId: string;
     @Watch(\\"aPanda\\")
     milkedWatcher(newValue) {
-        if (newValue) {
-            this.saveFeedPanda({ body: { feedPanda: newValue }, referenceId: this.feedPandaRefId }).then(({ referenceId: aPandaKey, data }) => {
-                this.milked.emit({ aPandaKey, feedPanda: data || this.feedPanda });
-                this.feedPandaRefId = aPandaKey;
-            });
-        }
-        else {
-            this.milked.emit({ feedPanda: newValue });
-        }
+        this.saveFeedPanda({ body: { feedPanda: newValue }, referenceId: this.feedPandaRefId }).then(({ referenceId: aPandaKey, data }) => {
+            this.milked.emit({ aPandaKey, feedPanda: data || this.feedPanda });
+            this.feedPandaRefId = aPandaKey;
+        });
     }
     @Prop()
     referenceId: string;
