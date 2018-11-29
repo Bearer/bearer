@@ -15,12 +15,27 @@ const FUNCTION_NAME_IDENTIFIER = 'action'
 
 let intentEntries: Array<IIntentEntry> = []
 
-function initializerAsJson(tsType: ts.TypeReferenceNode | ts.TypeLiteralNode | ts.KeywordTypeNode, generator: any) {
+function initializerAsJson(
+  tsType: ts.TypeReferenceNode | ts.TypeLiteralNode | ts.KeywordTypeNode,
+  generator: TJS.JsonSchemaGenerator
+): TJS.Definition {
   if (tsType) {
     switch (tsType.kind) {
       case ts.SyntaxKind.TypeReference:
-        return generator.getSchemaForSymbol((tsType.typeName as ts.Identifier).escapedText.toString()) as any
-      case ts.SyntaxKind.TypeLiteral:
+        return generator.getSchemaForSymbol((tsType.typeName as ts.Identifier).escapedText.toString())
+      case ts.SyntaxKind.TypeLiteral: {
+        return {
+          properties: {
+            inlineParam: {
+              description: 'inlineParam',
+              in: 'query',
+              name: 'inlineParam',
+              required: true,
+              schema: { type: 'string' }
+            }
+          }
+        }
+      }
       case ts.SyntaxKind.AnyKeyword:
         return { type: 'object' } as any
       case ts.SyntaxKind.NumberKeyword:
@@ -47,7 +62,7 @@ interface IIntentEntry {
 }
 
 class IntentNodeAdapter implements IIntentEntry {
-  constructor(private readonly node: ts.ClassDeclaration, private readonly generator: any) { }
+  constructor(private readonly node: ts.ClassDeclaration, private readonly generator: any) {}
   get intentClassName(): string {
     const identifier = getIdentifier(this.node)
     return identifier.escapedText.toString()
@@ -65,6 +80,7 @@ class IntentNodeAdapter implements IIntentEntry {
     const typeNode = getFunctionParameterType(this.node, FUNCTION_NAME_IDENTIFIER, 'params') as ts.TypeReferenceNode
 
     const paramsSchema = initializerAsJson(typeNode, this.generator)
+    console.log('[BEARER]', 'typeNode', typeNode)
     return [...this.adaptParamsSchema(paramsSchema), ...this.defaultParams]
   }
 
@@ -135,7 +151,7 @@ export function isIntentClass(tsNode: ts.Node): boolean {
   const isClass = ts.isClassDeclaration(tsNode) && tsNode.name
 
   const intentTypeValue = getPropertyValue(tsNode as ts.ClassDeclaration, INTENT_TYPE_IDENTIFIER)
-  return (!!isClass) && INTENT_NAMES.includes(intentTypeValue)
+  return !!isClass && INTENT_NAMES.includes(intentTypeValue)
 }
 
 export function getIdentifier(tsNode: ts.ClassDeclaration | ts.PropertyDeclaration): ts.Identifier {
@@ -193,10 +209,7 @@ export function transformer(generator: any) {
 }
 
 export class IntentCodeProcessor {
-  constructor(
-    private readonly srcIntentsDir: string,
-    private readonly transformer: any,
-  ) { }
+  constructor(private readonly srcIntentsDir: string, private readonly transformer: any) {}
 
   async run() {
     const files = await globby(`${this.srcIntentsDir}/*.ts`)
@@ -218,11 +231,10 @@ export class OpenApiSpecGenerator {
   constructor(
     private readonly srcIntentsDir: string,
     private readonly bearerConfig: { scenarioTitle: string | undefined; scenarioUuid: string }
-  ) { }
+  ) {}
 
   async build() {
     const files = await globby(`${this.srcIntentsDir}/*.ts`)
-
     const programGenerator = TJS.getProgramFromFiles(
       files,
       {
@@ -253,11 +265,13 @@ export class OpenApiSpecGenerator {
       )
       ts.transform(sourceFile, [transformer(generator)])
     })
-
     return this.generate(intentEntries, this.bearerConfig)
   }
 
-  generate(entries: Array<IIntentEntry>, { scenarioTitle, scenarioUuid }: any): any {
+  generate(
+    entries: Array<IIntentEntry>,
+    { scenarioTitle, scenarioUuid }: { scenarioTitle?: string; scenarioUuid: string }
+  ): IOpenApiSpec {
     return {
       openapi: '3.0.0',
       info: {
@@ -344,6 +358,23 @@ export class OpenApiSpecGenerator {
           }
         }
       }, {})
+    }
+  }
+}
+
+export interface IOpenApiSpec {
+  openapi: string
+  info: any
+  servers: any[]
+  tags: any[]
+  paths: {
+    [key: string]: {
+      post: {
+        parameters: any[]
+        summary: any[]
+        requestBody: any[]
+        responses: any[]
+      }
     }
   }
 }
