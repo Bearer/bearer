@@ -1,12 +1,11 @@
-import { Component } from '@bearer/core'
-import Bearer from '@bearer/core'
+import Bearer, { Component } from '@bearer/core'
 
 @Component({
   tag: 'bearer-loading',
   styleUrl: 'Loader.scss',
   shadow: true
 })
-export class Button {
+export class BearerLoader {
   render() {
     const { loadingComponent } = Bearer.config
     if (loadingComponent) {
