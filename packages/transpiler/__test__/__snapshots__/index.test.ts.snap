@@ -93,7 +93,10 @@ export class FullComponent {
     goatRefId: string;
     private saveFeedPanda: BearerFetch<BearerRef<any>>;
     @Event({ eventName: \\"bearer|SPONGE_BOB|global|feedPandaSaved\\" })
-    feedPandaSaved: EventEmitter<any>;
+    feedPandaSaved: EventEmitter<{
+        referenceId: string;
+        feedPanda: BearerRef<any>;
+    }>;
     @State()
     feedPanda: BearerRef<any>;
     @State()
@@ -112,7 +115,10 @@ export class FullComponent {
     }
     private saveFeedPanda: BearerFetch<BearerRef<any>>;
     @Event({ eventName: \\"bearer|SPONGE_BOB|global|milked\\" })
-    milked: EventEmitter<any>;
+    milked: EventEmitter<{
+        aPandaKey: string;
+        feedPanda: BearerRef<any>;
+    }>;
     @State()
     feedPanda: BearerRef<any>;
     @State()
@@ -120,9 +126,9 @@ export class FullComponent {
     @Watch(\\"aPanda\\")
     milkedWatcher(newValue) {
         if (newValue) {
-            this.saveFeedPanda({ body: { feedPanda: newValue }, referenceId: this.feedPandaRefId }).then(({ referenceId, data }) => {
-                this.milked.emit({ referenceId, feedPanda: data || this.feedPanda });
-                this.feedPandaRefId = referenceId;
+            this.saveFeedPanda({ body: { feedPanda: newValue }, referenceId: this.feedPandaRefId }).then(({ referenceId: aPandaKey, data }) => {
+                this.milked.emit({ aPandaKey, feedPanda: data || this.feedPanda });
+                this.feedPandaRefId = aPandaKey;
             });
         }
         else {

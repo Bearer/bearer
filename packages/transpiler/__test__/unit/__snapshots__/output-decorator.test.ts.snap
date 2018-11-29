@@ -31,7 +31,10 @@ class NoOptionsComponent {
     // }
     >;
     @Event({ eventName: \\"bearer|SPONGE_BOB|no-options|farmerSaved\\" })
-    farmerSaved: EventEmitter<any>;
+    farmerSaved: EventEmitter<{
+        referenceId: string;
+        farmer: BearerRef<Farmer>;
+    }>;
     @State()
     farmer: BearerRef<Farmer>;
     @State()
@@ -50,7 +53,10 @@ class NoOptionsComponent {
     }
     private milkWithAbottle: BearerFetch<BearerRef<Farmer>>;
     @Event({ eventName: \\"bearer|SPONGE_BOB|no-options|milked\\" })
-    milked: EventEmitter<any>;
+    milked: EventEmitter<{
+        aPandaKey: string;
+        farmerAndPanda: BearerRef<Farmer>;
+    }>;
     @State()
     farmerAndPanda: BearerRef<Farmer> = {};
     @State()
@@ -58,9 +64,9 @@ class NoOptionsComponent {
     @Watch(\\"aPanda\\")
     milkedWatcher(newValue) {
         if (newValue) {
-            this.milkWithAbottle({ body: { farmerAndPanda: newValue }, referenceId: this.farmerAndPandaRefId }).then(({ referenceId, data }) => {
-                this.milked.emit({ referenceId, farmerAndPanda: data || this.farmerAndPanda });
-                this.farmerAndPandaRefId = referenceId;
+            this.milkWithAbottle({ body: { farmerAndPanda: newValue }, referenceId: this.farmerAndPandaRefId }).then(({ referenceId: aPandaKey, data }) => {
+                this.milked.emit({ aPandaKey, farmerAndPanda: data || this.farmerAndPanda });
+                this.farmerAndPandaRefId = aPandaKey;
             });
         }
         else {

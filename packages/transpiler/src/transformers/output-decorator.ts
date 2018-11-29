@@ -125,7 +125,16 @@ function createEvent(meta: OutputMeta): ts.PropertyDeclaration {
     meta.eventName,
     undefined,
     ts.createTypeReferenceNode(ts.createIdentifier(Types.EventEmitter), [
-      ts.createKeywordTypeNode(ts.SyntaxKind.AnyKeyword)
+      ts.createTypeLiteralNode([
+        ts.createPropertySignature(
+          undefined,
+          meta.referenceKeyName,
+          undefined,
+          ts.createKeywordTypeNode(ts.SyntaxKind.StringKeyword),
+          undefined
+        ),
+        ts.createPropertySignature(undefined, meta.propDeclarationName, undefined, meta.typeIdentifier, undefined)
+      ])
     ]),
     undefined
   )
@@ -209,8 +218,6 @@ function createIntent(meta: OutputMeta): ts.PropertyDeclaration {
 }
 
 function createIntentCall(meta: OutputMeta) {
-  const referenceIdIdentifier = Properties.ReferenceId
-
   const newValueInitializer = ts.createBinary(
     ts.createIdentifier(data),
     ts.createToken(ts.SyntaxKind.BarBarToken),
@@ -218,7 +225,7 @@ function createIntentCall(meta: OutputMeta) {
   )
   // TODO use referenceKeyName
   const emit = createEmitCall(meta, [
-    ts.createShorthandPropertyAssignment(referenceIdIdentifier),
+    ts.createShorthandPropertyAssignment(meta.referenceKeyName),
     ts.createPropertyAssignment(meta.propDeclarationName, newValueInitializer)
   ])
 
@@ -252,7 +259,12 @@ function createIntentCall(meta: OutputMeta) {
             undefined,
             undefined,
             ts.createObjectBindingPattern([
-              ts.createBindingElement(undefined, undefined, Properties.ReferenceId, undefined),
+              ts.createBindingElement(
+                undefined,
+                meta.referenceKeyName !== Properties.ReferenceId ? Properties.ReferenceId : undefined,
+                meta.referenceKeyName,
+                undefined
+              ),
               ts.createBindingElement(undefined, undefined, data, undefined)
             ]),
             undefined,
@@ -269,7 +281,7 @@ function createIntentCall(meta: OutputMeta) {
               ts.createBinary(
                 ts.createPropertyAccess(ts.createThis(), meta.propDeclarationNameRefId),
                 ts.SyntaxKind.EqualsToken,
-                ts.createIdentifier(referenceIdIdentifier)
+                ts.createIdentifier(meta.referenceKeyName)
               )
             )
           ],
