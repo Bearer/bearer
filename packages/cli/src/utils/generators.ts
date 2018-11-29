@@ -15,15 +15,15 @@ const FUNCTION_NAME_IDENTIFIER = 'action'
 
 let intentEntries: Array<IIntentEntry> = []
 
-function initializerAsJson(
-  tsType: ts.TypeReferenceNode | ts.TypeLiteralNode | ts.KeywordTypeNode,
-  generator: TJS.JsonSchemaGenerator
-): TJS.Definition {
+function initializerAsJson(tsType: ts.TypeNode, generator: TJS.JsonSchemaGenerator): TJS.Definition {
   if (tsType) {
     switch (tsType.kind) {
       case ts.SyntaxKind.TypeReference:
-        return generator.getSchemaForSymbol((tsType.typeName as ts.Identifier).escapedText.toString())
+        return generator.getSchemaForSymbol(
+          ((tsType as ts.TypeReferenceNode).typeName as ts.Identifier).escapedText.toString()
+        )
       case ts.SyntaxKind.TypeLiteral: {
+        console.log('[BEARER]', 'tsType')
         return {
           properties: {
             inlineParam: {
@@ -52,86 +52,64 @@ function initializerAsJson(
   }
 }
 
-interface IIntentEntry {
-  intentClassName: string
-  intentType: string
-  intentName: string
-  paramsSchema: any
-  bodySchema: any
-  outputSchema: any
-}
-
 class IntentNodeAdapter implements IIntentEntry {
-  constructor(private readonly node: ts.ClassDeclaration, private readonly generator: any) {}
-  get intentClassName(): string {
-    const identifier = getIdentifier(this.node)
-    return identifier.escapedText.toString()
+  constructor(
+    private readonly node: ts.ClassDeclaration,
+    private readonly generator: TJS.JsonSchemaGenerator,
+    private readonly program: TJS.Program
+  ) {}
+
+  get intentClassName() {
+    return getIdentifier(this.node).escapedText.toString()
   }
 
-  get intentType(): string {
+  get intentType() {
     return getPropertyValue(this.node, INTENT_TYPE_IDENTIFIER)
   }
 
-  get intentName(): string {
+  get intentName() {
     return getPropertyValue(this.node, INTENT_NAME_IDENTIFIER)
   }
 
-  get paramsSchema(): any {
-    const typeNode = getFunctionParameterType(this.node, FUNCTION_NAME_IDENTIFIER, 'params') as ts.TypeReferenceNode
-
+  get paramsSchema() {
+    const defaultParams = [...DEFAULT_PARAMS]
+    const typeNode = getFunctionParameterType(this.node, FUNCTION_NAME_IDENTIFIER, 'params')
+    if (!typeNode) {
+      return defaultParams
+    }
+    console.log('[BEARER]', '', this.program.toString().slice(1, 1))
     const paramsSchema = initializerAsJson(typeNode, this.generator)
     console.log('[BEARER]', 'typeNode', typeNode)
-    return [...this.adaptParamsSchema(paramsSchema), ...this.defaultParams]
+    return [...this.adaptParamsSchema(paramsSchema), ...defaultParams]
   }
 
-  adaptParamsSchema(paramsSchema: any) {
+  adaptParamsSchema(paramsSchema: any): ISchemaParam[] {
     if (paramsSchema.properties) {
-      return Object.keys(paramsSchema.properties).map(name => {
-        return {
-          in: 'query',
-          schema: {
-            type: 'string'
-          },
-          description: name,
-          required: true,
-          name
-        }
-      })
+      return Object.keys(paramsSchema.properties).map(
+        name =>
+          ({
+            in: 'query',
+            schema: {
+              type: 'string'
+            },
+            description: name,
+            required: true,
+            name
+          } as ISchemaParam)
+      )
     }
     return []
   }
 
-  get defaultParams(): any {
-    return [
-      {
-        name: 'authorization',
-        schema: {
-          type: 'string'
-        },
-        in: 'header',
-        description: 'API Key',
-        required: true
-      },
-      {
-        name: 'authId',
-        schema: {
-          type: 'string',
-          format: 'uuid'
-        },
-        in: 'query',
-        description: 'User Identifier',
-        required: true
-      }
-    ]
-  }
-
-  get bodySchema(): any {
-    const typeNode = getFunctionParameterType(this.node, FUNCTION_NAME_IDENTIFIER, 'body') as ts.TypeReferenceNode
-
+  get bodySchema() {
+    const typeNode = getFunctionParameterType(this.node, FUNCTION_NAME_IDENTIFIER, 'body')
+    if (!typeNode) {
+      return {}
+    }
     return initializerAsJson(typeNode, this.generator)
   }
 
-  get outputSchema(): any {
+  get outputSchema() {
     return {}
   }
 
@@ -173,7 +151,7 @@ function getFunctionParameterType(
   tsNode: ts.ClassDeclaration,
   functionNameIdentifier: string,
   parameterIdentifier: string
-) {
+): ts.TypeNode | undefined {
   if (tsNode.members) {
     const methodDeclaration = tsNode.members.find(node => {
       return (
@@ -184,20 +162,23 @@ function getFunctionParameterType(
     if (methodDeclaration.parameters) {
       const parameter = methodDeclaration.parameters.find(node => {
         return ts.isParameter(node) && (node.name as ts.Identifier).escapedText.toString() === parameterIdentifier
-      }) as ts.ParameterDeclaration
+      })
       if (parameter) {
         return parameter.type
       }
     }
   }
-  return null
+  return
 }
 
-export function transformer(generator: any) {
+export function transformer(
+  generator: TJS.JsonSchemaGenerator,
+  programGenerator: TJS.Program
+): ts.TransformerFactory<ts.SourceFile> {
   return (context: ts.TransformationContext) => {
     function visit(tsNode: ts.Node) {
       if (isIntentClass(tsNode)) {
-        const adapter = new IntentNodeAdapter(tsNode as ts.ClassDeclaration, generator)
+        const adapter = new IntentNodeAdapter(tsNode as ts.ClassDeclaration, generator, programGenerator)
         intentEntries.push(adapter.adapt)
       }
       return tsNode
@@ -263,7 +244,7 @@ export class OpenApiSpecGenerator {
         false,
         ts.ScriptKind.TSX
       )
-      ts.transform(sourceFile, [transformer(generator)])
+      ts.transform(sourceFile, [transformer(generator, programGenerator)])
     })
     return this.generate(intentEntries, this.bearerConfig)
   }
@@ -362,6 +343,39 @@ export class OpenApiSpecGenerator {
   }
 }
 
+const DEFAULT_PARAMS: ISchemaParam[] = [
+  {
+    in: 'header',
+    name: 'authorization',
+    schema: {
+      type: 'string'
+    },
+    description: 'API Key',
+    required: true
+  },
+  {
+    name: 'authId',
+    schema: {
+      type: 'string',
+      format: 'uuid'
+    },
+    in: 'query',
+    description: 'User Identifier',
+    required: true
+  }
+]
+
+export interface ISchemaParam {
+  in: 'query' | 'header'
+  schema: {
+    type: 'string'
+    format?: 'uuid'
+  }
+  description: string
+  required: boolean
+  name: string
+}
+
 export interface IOpenApiSpec {
   openapi: string
   info: any
@@ -377,4 +391,13 @@ export interface IOpenApiSpec {
       }
     }
   }
+}
+
+interface IIntentEntry {
+  intentClassName: string
+  intentType: string
+  intentName: string
+  paramsSchema: ISchemaParam[]
+  bodySchema: any
+  outputSchema: any
 }
