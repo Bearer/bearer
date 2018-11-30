@@ -1,17 +1,11 @@
-import {
-  BearerFetch,
-  BearerState,
-  Intent,
-  IntentType,
-  RootComponent
-} from '@bearer/core'
+import { BearerFetch, BearerState, Intent, IntentType, RootComponent } from '@bearer/core'
 
 @RootComponent({
   group: 'attach-pull-request',
   role: 'display',
   shadow: false
 })
-export class AttachPullRequestDisplay {
+export class InvalidRootComponent {
   @Intent('ListRepositories')
   fetcher: BearerFetch
   @RetrieveStateIntent()

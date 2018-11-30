@@ -3,7 +3,7 @@ import { Component } from '@bearer/core'
 @Component({
   tag: 'overrides-decorator-less'
 })
-class OverridesDecorarotLess {
+class OverridesDecorarorLess {
   constructor() {}
 
   componentDidLoad() {

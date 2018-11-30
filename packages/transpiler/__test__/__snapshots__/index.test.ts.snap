@@ -1,16 +1,273 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Transpiler integration test FullComponent.tsx has correct manifest generated 1`] = `
+Object {
+  "file": "FullComponent.tsx",
+  "manifest": Array [
+    Object {
+      "classname": "AttachPullRequestAction",
+      "inputs": Array [
+        Object {
+          "name": "farmerRefId",
+          "type": "string",
+        },
+        Object {
+          "name": "goatId",
+          "type": "string",
+        },
+        Object {
+          "name": "setupId",
+          "type": "string",
+        },
+      ],
+      "outputs": Array [
+        Object {
+          "eventName": "bearer|SPONGE_BOB|AttachPullRequest|inlineDefinition",
+          "name": "inlineDefinition",
+          "payloadFormat": Object {
+            "properties": Object {
+              "inlineName": Object {
+                "description": "inlineName",
+                "name": "inlineName",
+                "required": true,
+                "schema": Object {
+                  "type": "string",
+                },
+              },
+              "inlineNumber": Object {
+                "description": "inlineNumber",
+                "name": "inlineNumber",
+                "required": true,
+                "schema": Object {
+                  "type": "number",
+                },
+              },
+              "other": Object {
+                "description": "other",
+                "name": "other",
+                "required": true,
+                "schema": Object {
+                  "type": "any",
+                },
+              },
+            },
+            "type": "object",
+          },
+        },
+        Object {
+          "eventName": "bearer|SPONGE_BOB|AttachPullRequest|feedPandaSaved",
+          "name": "feedPandaSaved",
+          "payloadFormat": Object {
+            "properties": Object {
+              "feedPanda": Object {
+                "description": "feedPanda",
+                "name": "feedPanda",
+                "required": true,
+                "schema": Object {
+                  "type": "any",
+                },
+              },
+              "referenceId": Object {
+                "description": "referenceId",
+                "name": "referenceId",
+                "required": true,
+                "schema": Object {
+                  "type": "string",
+                },
+              },
+            },
+            "type": "object",
+          },
+        },
+        Object {
+          "eventName": "bearer|SPONGE_BOB|AttachPullRequest|spongeBobdSaved",
+          "name": "spongeBobdSaved",
+          "payloadFormat": Object {
+            "properties": Object {
+              "manualreferenceKeyName": Object {
+                "description": "manualreferenceKeyName",
+                "name": "manualreferenceKeyName",
+                "required": true,
+                "schema": Object {
+                  "type": "string",
+                },
+              },
+              "shortPanda": Object {
+                "description": "shortPanda",
+                "name": "shortPanda",
+                "required": true,
+                "schema": Object {
+                  "type": "any",
+                },
+              },
+            },
+            "type": "object",
+          },
+        },
+      ],
+    },
+    Object {
+      "classname": "InvalidRootComponent",
+      "inputs": Array [
+        Object {
+          "name": "referenceId",
+          "type": "string",
+        },
+        Object {
+          "name": "setupId",
+          "type": "string",
+        },
+      ],
+      "outputs": Array [],
+    },
+    Object {
+      "classname": "FeatDisplayRootComponent",
+      "inputs": Array [
+        Object {
+          "name": "setupId",
+          "type": "string",
+        },
+      ],
+      "outputs": Array [
+        Object {
+          "eventName": "bearer|SPONGE_BOB|complex-feature|mustBeScopedEvent",
+          "name": "mustBeScopedEvent",
+          "payloadFormat": "unspecified",
+        },
+        Object {
+          "eventName": "bearer|SPONGE_BOB|complex-feature|mustBeScopedEvent",
+          "name": "mustBeScopedEvent",
+          "payloadFormat": "unspecified",
+        },
+      ],
+    },
+    Object {
+      "classname": "SimpleComponent",
+      "inputs": undefined,
+      "outputs": undefined,
+    },
+    Object {
+      "classname": "FeatDisplayRootComponent",
+      "inputs": Array [
+        Object {
+          "name": "setupId",
+          "type": "string",
+        },
+      ],
+      "outputs": Array [],
+    },
+    Object {
+      "classname": "RootComponent",
+      "inputs": Array [
+        Object {
+          "name": "setupId",
+          "type": "string",
+        },
+      ],
+      "outputs": Array [],
+    },
+    Object {
+      "classname": "FullComponent",
+      "inputs": undefined,
+      "outputs": undefined,
+    },
+    Object {
+      "classname": "NoOptionsComponent",
+      "inputs": Array [
+        Object {
+          "name": "setupId",
+          "type": "string",
+        },
+      ],
+      "outputs": Array [
+        Object {
+          "eventName": "bearer|SPONGE_BOB|no-options|farmerSaved",
+          "name": "farmerSaved",
+          "payloadFormat": Object {
+            "properties": Object {
+              "farmer": Object {
+                "description": "farmer",
+                "name": "farmer",
+                "required": true,
+                "schema": Object {
+                  "type": "any",
+                },
+              },
+              "referenceId": Object {
+                "description": "referenceId",
+                "name": "referenceId",
+                "required": true,
+                "schema": Object {
+                  "type": "string",
+                },
+              },
+            },
+            "type": "object",
+          },
+        },
+        Object {
+          "eventName": "bearer|SPONGE_BOB|no-options|milked",
+          "name": "milked",
+          "payloadFormat": Object {
+            "properties": Object {
+              "aPandaKey": Object {
+                "description": "aPandaKey",
+                "name": "aPandaKey",
+                "required": true,
+                "schema": Object {
+                  "type": "string",
+                },
+              },
+              "farmerAndPanda": Object {
+                "description": "farmerAndPanda",
+                "name": "farmerAndPanda",
+                "required": true,
+                "schema": Object {
+                  "type": "any",
+                },
+              },
+            },
+            "type": "object",
+          },
+        },
+      ],
+    },
+    Object {
+      "classname": "OverridesDecorarotFull",
+      "inputs": undefined,
+      "outputs": undefined,
+    },
+    Object {
+      "classname": "OverridesDecorarorLess",
+      "inputs": undefined,
+      "outputs": undefined,
+    },
+    Object {
+      "classname": "Patrick",
+      "inputs": undefined,
+      "outputs": undefined,
+    },
+    Object {
+      "classname": "SubComponent",
+      "inputs": undefined,
+      "outputs": undefined,
+    },
+  ],
+}
+`;
+
 exports[`Transpiler integration test FullComponent.tsx match expectation 1`] = `
 Object {
   "file": "FullComponent.tsx",
-  "postContent": "import { BearerFetch, BearerRef, BearerState, Component, Intent, IntentType, Listen, State, Watch, Prop, EventEmitter, Event, Element } from '@bearer/core';
+  "postContent": "import { BearerFetch, BearerRef, BearerState, Component, Intent, IntentType, Event, EventEmitter, Prop, Watch, State } from '@bearer/core';
+type Panda = {
+    fullPandaName: string;
+};
 @Component({
     tag: 'full-component'
 })
 export class FullComponent {
     private fetcher: BearerFetch;
-    @RetrieveStateIntent()
-    retrieve: BearerFetch;
     @BearerState()
     @State()
     attachedPullRequests: Array<any>;
@@ -18,6 +275,8 @@ export class FullComponent {
     @State()
     ducks: Array<any>;
     private fetchResource: BearerFetch;
+    @Event({ eventName: \\"bearer|SPONGE_BOB|global|anEvent\\" })
+    anEvent: EventEmitter<Panda>;
     screenRenderer = () => {
         return (<bearer-navigator-screen navigationTitle=\\"Last Screen\\" renderFunc={() => [<h1>Hello Partick</h1>]}/>);
     };
@@ -37,105 +296,9 @@ export class FullComponent {
         {this.screenRenderer()}
       </bearer-navigator>);
     }
-    @State()
-    farmer: BearerRef<any>;
-    @Listen(\\"body:bearer|SPONGE_BOB|undefined|farmerSaved\\")
-    farmerRefIdChanged(event) {
-        if (this.farmerRefId !== event.detail.referenceId) {
-            this.farmerRefId = event.detail.referenceId;
-        }
-        else {
-            this._loadFarmer();
-        }
-    }
-    _loadFarmer = () => {
-        this.fetcherRetrieveFarmer({ referenceId: this.farmerRefId }).then(({ data }: {
-            data: BearerRef<any>;
-        }) => {
-            this.farmer = data;
-        });
-    };
-    private fetcherRetrieveFarmer;
-    @Watch(\\"farmerRefId\\")
-    _watchFarmer(newValueName: string) {
-        if (newValueName) {
-            this._loadFarmer();
-        }
-    }
-    @Prop({ \\"mutable\\": true })
-    farmerRefId: string;
-    @State()
-    goat: BearerRef<any>;
-    @Listen(\\"body:bearer|SPONGE_BOB|SCOPE|goatMilked\\")
-    goatRefIdChanged(event) {
-        if (this.goatRefId !== event.detail.referenceId) {
-            this.goatRefId = event.detail.referenceId;
-        }
-        else {
-            this._loadGoat();
-        }
-    }
-    _loadGoat = () => {
-        this.fetcherRetrieveGoat({ referenceId: this.goatRefId }).then(({ data }: {
-            data: BearerRef<any>;
-        }) => {
-            this.goat = data;
-        });
-    };
-    private fetcherRetrieveGoat;
-    @Watch(\\"goatRefId\\")
-    _watchGoat(newValueName: string) {
-        if (newValueName) {
-            this._loadGoat();
-        }
-    }
-    @Prop({ \\"mutable\\": true })
-    goatRefId: string;
-    private saveFeedPanda: BearerFetch<BearerRef<any>>;
-    @Event({ eventName: \\"bearer|SPONGE_BOB|global|feedPandaSaved\\" })
-    feedPandaSaved: EventEmitter<{
-        referenceId: string;
-        feedPanda: BearerRef<any>;
-    }>;
-    @State()
-    feedPanda: BearerRef<any>;
-    @State()
-    feedPandaRefId: string;
-    @Watch(\\"feedPanda\\")
-    feedPandaSavedWatcher(newValue) {
-        this.saveFeedPanda({ body: { feedPanda: newValue }, referenceId: this.feedPandaRefId }).then(({ referenceId, data }) => {
-            this.feedPandaSaved.emit({ referenceId, feedPanda: data || this.feedPanda });
-            this.feedPandaRefId = referenceId;
-        });
-    }
-    private saveFeedPanda: BearerFetch<BearerRef<any>>;
-    @Event({ eventName: \\"bearer|SPONGE_BOB|global|milked\\" })
-    milked: EventEmitter<{
-        aPandaKey: string;
-        feedPanda: BearerRef<any>;
-    }>;
-    @State()
-    feedPanda: BearerRef<any>;
-    @State()
-    feedPandaRefId: string;
-    @Watch(\\"aPanda\\")
-    milkedWatcher(newValue) {
-        this.saveFeedPanda({ body: { feedPanda: newValue }, referenceId: this.feedPandaRefId }).then(({ referenceId: aPandaKey, data }) => {
-            this.milked.emit({ aPandaKey, feedPanda: data || this.feedPanda });
-            this.feedPandaRefId = aPandaKey;
-        });
-    }
-    @Prop()
-    referenceId: string;
-    @Element()
-    el: HTMLElement;
     constructor() {
         Intent('ListRepositories')(this, \\"fetcher\\");
         Intent('getPullRequest', IntentType.FetchData)(this, \\"fetchResource\\");
-        Intent(\\"retrieveFarmer\\")(this, \\"fetcherRetrieveFarmer\\");
-        Intent(\\"retrieveGoat\\")(this, \\"fetcherRetrieveGoat\\");
-        Intent(\\"saveFeedPanda\\")(this, \\"saveFeedPanda\\");
-        Intent(\\"saveFeedPanda\\")(this, \\"saveFeedPanda\\");
     }
     get SCENARIO_ID() { return \\"SPONGE_BOB\\"; }
     @Prop({ \\"context\\": \\"bearer\\" })
@@ -145,12 +308,6 @@ export class FullComponent {
     componentDidLoad() {
         if (this.setupId) {
             this.bearerContext.setupId = this.setupId;
-        }
-        if (this.farmerRefId) {
-            this._loadFarmer();
-        }
-        if (this.goatRefId) {
-            this._loadGoat();
         }
     }
     @Watch(\\"attachedPullRequests\\")
@@ -176,10 +333,272 @@ export class FullComponent {
 }
 `;
 
+exports[`Transpiler integration test RootComponent.tsx has correct manifest generated 1`] = `
+Object {
+  "file": "RootComponent.tsx",
+  "manifest": Array [
+    Object {
+      "classname": "AttachPullRequestAction",
+      "inputs": Array [
+        Object {
+          "name": "farmerRefId",
+          "type": "string",
+        },
+        Object {
+          "name": "goatId",
+          "type": "string",
+        },
+        Object {
+          "name": "setupId",
+          "type": "string",
+        },
+      ],
+      "outputs": Array [
+        Object {
+          "eventName": "bearer|SPONGE_BOB|AttachPullRequest|inlineDefinition",
+          "name": "inlineDefinition",
+          "payloadFormat": Object {
+            "properties": Object {
+              "inlineName": Object {
+                "description": "inlineName",
+                "name": "inlineName",
+                "required": true,
+                "schema": Object {
+                  "type": "string",
+                },
+              },
+              "inlineNumber": Object {
+                "description": "inlineNumber",
+                "name": "inlineNumber",
+                "required": true,
+                "schema": Object {
+                  "type": "number",
+                },
+              },
+              "other": Object {
+                "description": "other",
+                "name": "other",
+                "required": true,
+                "schema": Object {
+                  "type": "any",
+                },
+              },
+            },
+            "type": "object",
+          },
+        },
+        Object {
+          "eventName": "bearer|SPONGE_BOB|AttachPullRequest|feedPandaSaved",
+          "name": "feedPandaSaved",
+          "payloadFormat": Object {
+            "properties": Object {
+              "feedPanda": Object {
+                "description": "feedPanda",
+                "name": "feedPanda",
+                "required": true,
+                "schema": Object {
+                  "type": "any",
+                },
+              },
+              "referenceId": Object {
+                "description": "referenceId",
+                "name": "referenceId",
+                "required": true,
+                "schema": Object {
+                  "type": "string",
+                },
+              },
+            },
+            "type": "object",
+          },
+        },
+        Object {
+          "eventName": "bearer|SPONGE_BOB|AttachPullRequest|spongeBobdSaved",
+          "name": "spongeBobdSaved",
+          "payloadFormat": Object {
+            "properties": Object {
+              "manualreferenceKeyName": Object {
+                "description": "manualreferenceKeyName",
+                "name": "manualreferenceKeyName",
+                "required": true,
+                "schema": Object {
+                  "type": "string",
+                },
+              },
+              "shortPanda": Object {
+                "description": "shortPanda",
+                "name": "shortPanda",
+                "required": true,
+                "schema": Object {
+                  "type": "any",
+                },
+              },
+            },
+            "type": "object",
+          },
+        },
+      ],
+    },
+    Object {
+      "classname": "InvalidRootComponent",
+      "inputs": Array [
+        Object {
+          "name": "referenceId",
+          "type": "string",
+        },
+        Object {
+          "name": "setupId",
+          "type": "string",
+        },
+      ],
+      "outputs": Array [],
+    },
+    Object {
+      "classname": "FeatDisplayRootComponent",
+      "inputs": Array [
+        Object {
+          "name": "setupId",
+          "type": "string",
+        },
+      ],
+      "outputs": Array [
+        Object {
+          "eventName": "bearer|SPONGE_BOB|complex-feature|mustBeScopedEvent",
+          "name": "mustBeScopedEvent",
+          "payloadFormat": "unspecified",
+        },
+        Object {
+          "eventName": "bearer|SPONGE_BOB|complex-feature|mustBeScopedEvent",
+          "name": "mustBeScopedEvent",
+          "payloadFormat": "unspecified",
+        },
+      ],
+    },
+    Object {
+      "classname": "SimpleComponent",
+      "inputs": undefined,
+      "outputs": undefined,
+    },
+    Object {
+      "classname": "FeatDisplayRootComponent",
+      "inputs": Array [
+        Object {
+          "name": "setupId",
+          "type": "string",
+        },
+      ],
+      "outputs": Array [],
+    },
+    Object {
+      "classname": "RootComponent",
+      "inputs": Array [
+        Object {
+          "name": "setupId",
+          "type": "string",
+        },
+      ],
+      "outputs": Array [],
+    },
+    Object {
+      "classname": "FullComponent",
+      "inputs": undefined,
+      "outputs": undefined,
+    },
+    Object {
+      "classname": "NoOptionsComponent",
+      "inputs": Array [
+        Object {
+          "name": "setupId",
+          "type": "string",
+        },
+      ],
+      "outputs": Array [
+        Object {
+          "eventName": "bearer|SPONGE_BOB|no-options|farmerSaved",
+          "name": "farmerSaved",
+          "payloadFormat": Object {
+            "properties": Object {
+              "farmer": Object {
+                "description": "farmer",
+                "name": "farmer",
+                "required": true,
+                "schema": Object {
+                  "type": "any",
+                },
+              },
+              "referenceId": Object {
+                "description": "referenceId",
+                "name": "referenceId",
+                "required": true,
+                "schema": Object {
+                  "type": "string",
+                },
+              },
+            },
+            "type": "object",
+          },
+        },
+        Object {
+          "eventName": "bearer|SPONGE_BOB|no-options|milked",
+          "name": "milked",
+          "payloadFormat": Object {
+            "properties": Object {
+              "aPandaKey": Object {
+                "description": "aPandaKey",
+                "name": "aPandaKey",
+                "required": true,
+                "schema": Object {
+                  "type": "string",
+                },
+              },
+              "farmerAndPanda": Object {
+                "description": "farmerAndPanda",
+                "name": "farmerAndPanda",
+                "required": true,
+                "schema": Object {
+                  "type": "any",
+                },
+              },
+            },
+            "type": "object",
+          },
+        },
+      ],
+    },
+    Object {
+      "classname": "OverridesDecorarotFull",
+      "inputs": undefined,
+      "outputs": undefined,
+    },
+    Object {
+      "classname": "OverridesDecorarorLess",
+      "inputs": undefined,
+      "outputs": undefined,
+    },
+    Object {
+      "classname": "Patrick",
+      "inputs": undefined,
+      "outputs": undefined,
+    },
+    Object {
+      "classname": "SubComponent",
+      "inputs": undefined,
+      "outputs": undefined,
+    },
+  ],
+}
+`;
+
 exports[`Transpiler integration test RootComponent.tsx match expectation 1`] = `
 Object {
   "file": "RootComponent.tsx",
-  "postContent": "import { BearerFetch, BearerState, Intent, IntentType, Component, Prop, Element, Watch, State } from '@bearer/core';
+  "postContent": "import { BearerFetch, BearerState, Intent, IntentType, BearerRef, Event, EventEmitter, Component, Listen, State, Watch, Prop } from '@bearer/core';
+type Farmer = {
+    fullName: string;
+};
+type Panda = {
+    fullPandaName: string;
+};
 @Component({
     tag: \\"attach-pull-request-action\\",
     styleUrl: \\"AttachPullRequest.css\\",
@@ -187,8 +606,6 @@ Object {
 })
 export class AttachPullRequestAction {
     private fetcher: BearerFetch;
-    @RetrieveStateIntent()
-    retrieve: BearerFetch;
     @BearerState()
     @State()
     attachedPullRequests: Array<any>;
@@ -196,18 +613,126 @@ export class AttachPullRequestAction {
     @State()
     ducks: Array<any>;
     private fetchResource: BearerFetch;
+    @Event({ eventName: \\"bearer|SPONGE_BOB|AttachPullRequest|inlineDefinition\\" })
+    inlineDefinition: EventEmitter<{
+        inlineName: string;
+        inlineNumber: number;
+        other: Panda;
+    }>;
     render() {
         return (<bearer-authorized scenarioId=\\"SPONGE_BOB\\">
         <bearer-scrollable fetcher={this.fetcher}/>
       </bearer-authorized>);
     }
-    @Prop()
-    referenceId: string;
-    @Element()
-    el: HTMLElement;
+    @State()
+    farmer: BearerRef<Farmer>;
+    @Listen(\\"body:bearer|SPONGE_BOB|AttachPullRequest|farmerSaved\\")
+    farmerRefIdChanged(event) {
+        if (this.farmerRefId !== event.detail.referenceId) {
+            this.farmerRefId = event.detail.referenceId;
+        }
+        else {
+            this._loadFarmer();
+        }
+    }
+    _loadFarmer = () => {
+        this.fetcherRetrieveFarmer({ referenceId: this.farmerRefId }).then(({ data }: {
+            data: BearerRef<Farmer>;
+        }) => {
+            this.farmer = data;
+        });
+    };
+    private fetcherRetrieveFarmer;
+    @Watch(\\"farmerRefId\\")
+    _watchFarmer(newValueName: string) {
+        if (newValueName) {
+            this._loadFarmer();
+        }
+    }
+    @Prop({ \\"mutable\\": true })
+    farmerRefId: string;
+    @State()
+    goat: BearerRef<{
+        aString: string;
+        aNumber: number;
+        panda: Panda;
+    }>;
+    @Listen(\\"body:bearer|SPONGE_BOB|SCOPE|goatMilked\\")
+    goatIdChanged(event) {
+        if (this.goatId !== event.detail.referenceId) {
+            this.goatId = event.detail.referenceId;
+        }
+        else {
+            this._loadGoat();
+        }
+    }
+    _loadGoat = () => {
+        this.fetcherRetrieveGoat({ referenceId: this.goatId }).then(({ data }: {
+            data: BearerRef<{
+                aString: string;
+                aNumber: number;
+                panda: Panda;
+            }>;
+        }) => {
+            this.goat = data;
+        });
+    };
+    private fetcherRetrieveGoat;
+    @Watch(\\"goatId\\")
+    _watchGoat(newValueName: string) {
+        if (newValueName) {
+            this._loadGoat();
+        }
+    }
+    @Prop({ \\"mutable\\": true })
+    goatId: string;
+    private saveFeedPanda: BearerFetch<BearerRef<Panda>>;
+    @Event({ eventName: \\"bearer|SPONGE_BOB|AttachPullRequest|feedPandaSaved\\" })
+    feedPandaSaved: EventEmitter<{
+        referenceId: string;
+        feedPanda: BearerRef<Panda>;
+    }>;
+    @State()
+    feedPanda: BearerRef<Panda>;
+    @State()
+    feedPandaRefId: string;
+    @Watch(\\"feedPanda\\")
+    feedPandaSavedWatcher(newValue) {
+        this.saveFeedPanda({ body: { feedPanda: newValue }, referenceId: this.feedPandaRefId }).then(({ referenceId, data }) => {
+            this.feedPandaSaved.emit({ referenceId, feedPanda: data || this.feedPanda });
+            this.feedPandaRefId = referenceId;
+        });
+    }
+    private manualIntentName: BearerFetch<BearerRef<{
+        inlineName: string;
+    }>>;
+    @Event({ eventName: \\"bearer|SPONGE_BOB|AttachPullRequest|spongeBobdSaved\\" })
+    spongeBobdSaved: EventEmitter<{
+        manualreferenceKeyName: string;
+        shortPanda: BearerRef<{
+            inlineName: string;
+        }>;
+    }>;
+    @State()
+    shortPanda: BearerRef<{
+        inlineName: string;
+    }>;
+    @State()
+    shortPandaRefId: string;
+    @Watch(\\"manualpropertyWatchedName\\")
+    spongeBobdSavedWatcher(newValue) {
+        this.manualIntentName({ body: { manuaLIntentPropertyName: newValue }, referenceId: this.shortPandaRefId }).then(({ referenceId: manualreferenceKeyName, data }) => {
+            this.spongeBobdSaved.emit({ manualreferenceKeyName, shortPanda: data || this.shortPanda });
+            this.shortPandaRefId = manualreferenceKeyName;
+        });
+    }
     constructor() {
         Intent('ListRepositories')(this, \\"fetcher\\");
         Intent('getPullRequest', IntentType.FetchData)(this, \\"fetchResource\\");
+        Intent(\\"retrieveFarmer\\")(this, \\"fetcherRetrieveFarmer\\");
+        Intent(\\"retrieveGoat\\")(this, \\"fetcherRetrieveGoat\\");
+        Intent(\\"saveFeedPanda\\")(this, \\"saveFeedPanda\\");
+        Intent(\\"manualIntentName\\")(this, \\"manualIntentName\\");
     }
     get SCENARIO_ID() { return \\"SPONGE_BOB\\"; }
     @Prop({ \\"context\\": \\"bearer\\" })
@@ -217,6 +742,9 @@ export class AttachPullRequestAction {
     componentDidLoad() {
         if (this.setupId) {
             this.bearerContext.setupId = this.setupId;
+        }
+        if (this.farmerRefId) {
+            this._loadFarmer();
         }
     }
     @Watch(\\"attachedPullRequests\\")
@@ -239,6 +767,262 @@ export class AttachPullRequestAction {
     };
 }
 ",
+}
+`;
+
+exports[`Transpiler integration test exportObject.ts has correct manifest generated 1`] = `
+Object {
+  "file": "exportObject.ts",
+  "manifest": Array [
+    Object {
+      "classname": "AttachPullRequestAction",
+      "inputs": Array [
+        Object {
+          "name": "farmerRefId",
+          "type": "string",
+        },
+        Object {
+          "name": "goatId",
+          "type": "string",
+        },
+        Object {
+          "name": "setupId",
+          "type": "string",
+        },
+      ],
+      "outputs": Array [
+        Object {
+          "eventName": "bearer|SPONGE_BOB|AttachPullRequest|inlineDefinition",
+          "name": "inlineDefinition",
+          "payloadFormat": Object {
+            "properties": Object {
+              "inlineName": Object {
+                "description": "inlineName",
+                "name": "inlineName",
+                "required": true,
+                "schema": Object {
+                  "type": "string",
+                },
+              },
+              "inlineNumber": Object {
+                "description": "inlineNumber",
+                "name": "inlineNumber",
+                "required": true,
+                "schema": Object {
+                  "type": "number",
+                },
+              },
+              "other": Object {
+                "description": "other",
+                "name": "other",
+                "required": true,
+                "schema": Object {
+                  "type": "any",
+                },
+              },
+            },
+            "type": "object",
+          },
+        },
+        Object {
+          "eventName": "bearer|SPONGE_BOB|AttachPullRequest|feedPandaSaved",
+          "name": "feedPandaSaved",
+          "payloadFormat": Object {
+            "properties": Object {
+              "feedPanda": Object {
+                "description": "feedPanda",
+                "name": "feedPanda",
+                "required": true,
+                "schema": Object {
+                  "type": "any",
+                },
+              },
+              "referenceId": Object {
+                "description": "referenceId",
+                "name": "referenceId",
+                "required": true,
+                "schema": Object {
+                  "type": "string",
+                },
+              },
+            },
+            "type": "object",
+          },
+        },
+        Object {
+          "eventName": "bearer|SPONGE_BOB|AttachPullRequest|spongeBobdSaved",
+          "name": "spongeBobdSaved",
+          "payloadFormat": Object {
+            "properties": Object {
+              "manualreferenceKeyName": Object {
+                "description": "manualreferenceKeyName",
+                "name": "manualreferenceKeyName",
+                "required": true,
+                "schema": Object {
+                  "type": "string",
+                },
+              },
+              "shortPanda": Object {
+                "description": "shortPanda",
+                "name": "shortPanda",
+                "required": true,
+                "schema": Object {
+                  "type": "any",
+                },
+              },
+            },
+            "type": "object",
+          },
+        },
+      ],
+    },
+    Object {
+      "classname": "InvalidRootComponent",
+      "inputs": Array [
+        Object {
+          "name": "referenceId",
+          "type": "string",
+        },
+        Object {
+          "name": "setupId",
+          "type": "string",
+        },
+      ],
+      "outputs": Array [],
+    },
+    Object {
+      "classname": "FeatDisplayRootComponent",
+      "inputs": Array [
+        Object {
+          "name": "setupId",
+          "type": "string",
+        },
+      ],
+      "outputs": Array [
+        Object {
+          "eventName": "bearer|SPONGE_BOB|complex-feature|mustBeScopedEvent",
+          "name": "mustBeScopedEvent",
+          "payloadFormat": "unspecified",
+        },
+        Object {
+          "eventName": "bearer|SPONGE_BOB|complex-feature|mustBeScopedEvent",
+          "name": "mustBeScopedEvent",
+          "payloadFormat": "unspecified",
+        },
+      ],
+    },
+    Object {
+      "classname": "SimpleComponent",
+      "inputs": undefined,
+      "outputs": undefined,
+    },
+    Object {
+      "classname": "FeatDisplayRootComponent",
+      "inputs": Array [
+        Object {
+          "name": "setupId",
+          "type": "string",
+        },
+      ],
+      "outputs": Array [],
+    },
+    Object {
+      "classname": "RootComponent",
+      "inputs": Array [
+        Object {
+          "name": "setupId",
+          "type": "string",
+        },
+      ],
+      "outputs": Array [],
+    },
+    Object {
+      "classname": "FullComponent",
+      "inputs": undefined,
+      "outputs": undefined,
+    },
+    Object {
+      "classname": "NoOptionsComponent",
+      "inputs": Array [
+        Object {
+          "name": "setupId",
+          "type": "string",
+        },
+      ],
+      "outputs": Array [
+        Object {
+          "eventName": "bearer|SPONGE_BOB|no-options|farmerSaved",
+          "name": "farmerSaved",
+          "payloadFormat": Object {
+            "properties": Object {
+              "farmer": Object {
+                "description": "farmer",
+                "name": "farmer",
+                "required": true,
+                "schema": Object {
+                  "type": "any",
+                },
+              },
+              "referenceId": Object {
+                "description": "referenceId",
+                "name": "referenceId",
+                "required": true,
+                "schema": Object {
+                  "type": "string",
+                },
+              },
+            },
+            "type": "object",
+          },
+        },
+        Object {
+          "eventName": "bearer|SPONGE_BOB|no-options|milked",
+          "name": "milked",
+          "payloadFormat": Object {
+            "properties": Object {
+              "aPandaKey": Object {
+                "description": "aPandaKey",
+                "name": "aPandaKey",
+                "required": true,
+                "schema": Object {
+                  "type": "string",
+                },
+              },
+              "farmerAndPanda": Object {
+                "description": "farmerAndPanda",
+                "name": "farmerAndPanda",
+                "required": true,
+                "schema": Object {
+                  "type": "any",
+                },
+              },
+            },
+            "type": "object",
+          },
+        },
+      ],
+    },
+    Object {
+      "classname": "OverridesDecorarotFull",
+      "inputs": undefined,
+      "outputs": undefined,
+    },
+    Object {
+      "classname": "OverridesDecorarorLess",
+      "inputs": undefined,
+      "outputs": undefined,
+    },
+    Object {
+      "classname": "Patrick",
+      "inputs": undefined,
+      "outputs": undefined,
+    },
+    Object {
+      "classname": "SubComponent",
+      "inputs": undefined,
+      "outputs": undefined,
+    },
+  ],
 }
 `;
 
@@ -263,6 +1047,262 @@ export default {
 }
 `;
 
+exports[`Transpiler integration test invalidRootComponent.tsx has correct manifest generated 1`] = `
+Object {
+  "file": "invalidRootComponent.tsx",
+  "manifest": Array [
+    Object {
+      "classname": "AttachPullRequestAction",
+      "inputs": Array [
+        Object {
+          "name": "farmerRefId",
+          "type": "string",
+        },
+        Object {
+          "name": "goatId",
+          "type": "string",
+        },
+        Object {
+          "name": "setupId",
+          "type": "string",
+        },
+      ],
+      "outputs": Array [
+        Object {
+          "eventName": "bearer|SPONGE_BOB|AttachPullRequest|inlineDefinition",
+          "name": "inlineDefinition",
+          "payloadFormat": Object {
+            "properties": Object {
+              "inlineName": Object {
+                "description": "inlineName",
+                "name": "inlineName",
+                "required": true,
+                "schema": Object {
+                  "type": "string",
+                },
+              },
+              "inlineNumber": Object {
+                "description": "inlineNumber",
+                "name": "inlineNumber",
+                "required": true,
+                "schema": Object {
+                  "type": "number",
+                },
+              },
+              "other": Object {
+                "description": "other",
+                "name": "other",
+                "required": true,
+                "schema": Object {
+                  "type": "any",
+                },
+              },
+            },
+            "type": "object",
+          },
+        },
+        Object {
+          "eventName": "bearer|SPONGE_BOB|AttachPullRequest|feedPandaSaved",
+          "name": "feedPandaSaved",
+          "payloadFormat": Object {
+            "properties": Object {
+              "feedPanda": Object {
+                "description": "feedPanda",
+                "name": "feedPanda",
+                "required": true,
+                "schema": Object {
+                  "type": "any",
+                },
+              },
+              "referenceId": Object {
+                "description": "referenceId",
+                "name": "referenceId",
+                "required": true,
+                "schema": Object {
+                  "type": "string",
+                },
+              },
+            },
+            "type": "object",
+          },
+        },
+        Object {
+          "eventName": "bearer|SPONGE_BOB|AttachPullRequest|spongeBobdSaved",
+          "name": "spongeBobdSaved",
+          "payloadFormat": Object {
+            "properties": Object {
+              "manualreferenceKeyName": Object {
+                "description": "manualreferenceKeyName",
+                "name": "manualreferenceKeyName",
+                "required": true,
+                "schema": Object {
+                  "type": "string",
+                },
+              },
+              "shortPanda": Object {
+                "description": "shortPanda",
+                "name": "shortPanda",
+                "required": true,
+                "schema": Object {
+                  "type": "any",
+                },
+              },
+            },
+            "type": "object",
+          },
+        },
+      ],
+    },
+    Object {
+      "classname": "InvalidRootComponent",
+      "inputs": Array [
+        Object {
+          "name": "referenceId",
+          "type": "string",
+        },
+        Object {
+          "name": "setupId",
+          "type": "string",
+        },
+      ],
+      "outputs": Array [],
+    },
+    Object {
+      "classname": "FeatDisplayRootComponent",
+      "inputs": Array [
+        Object {
+          "name": "setupId",
+          "type": "string",
+        },
+      ],
+      "outputs": Array [
+        Object {
+          "eventName": "bearer|SPONGE_BOB|complex-feature|mustBeScopedEvent",
+          "name": "mustBeScopedEvent",
+          "payloadFormat": "unspecified",
+        },
+        Object {
+          "eventName": "bearer|SPONGE_BOB|complex-feature|mustBeScopedEvent",
+          "name": "mustBeScopedEvent",
+          "payloadFormat": "unspecified",
+        },
+      ],
+    },
+    Object {
+      "classname": "SimpleComponent",
+      "inputs": undefined,
+      "outputs": undefined,
+    },
+    Object {
+      "classname": "FeatDisplayRootComponent",
+      "inputs": Array [
+        Object {
+          "name": "setupId",
+          "type": "string",
+        },
+      ],
+      "outputs": Array [],
+    },
+    Object {
+      "classname": "RootComponent",
+      "inputs": Array [
+        Object {
+          "name": "setupId",
+          "type": "string",
+        },
+      ],
+      "outputs": Array [],
+    },
+    Object {
+      "classname": "FullComponent",
+      "inputs": undefined,
+      "outputs": undefined,
+    },
+    Object {
+      "classname": "NoOptionsComponent",
+      "inputs": Array [
+        Object {
+          "name": "setupId",
+          "type": "string",
+        },
+      ],
+      "outputs": Array [
+        Object {
+          "eventName": "bearer|SPONGE_BOB|no-options|farmerSaved",
+          "name": "farmerSaved",
+          "payloadFormat": Object {
+            "properties": Object {
+              "farmer": Object {
+                "description": "farmer",
+                "name": "farmer",
+                "required": true,
+                "schema": Object {
+                  "type": "any",
+                },
+              },
+              "referenceId": Object {
+                "description": "referenceId",
+                "name": "referenceId",
+                "required": true,
+                "schema": Object {
+                  "type": "string",
+                },
+              },
+            },
+            "type": "object",
+          },
+        },
+        Object {
+          "eventName": "bearer|SPONGE_BOB|no-options|milked",
+          "name": "milked",
+          "payloadFormat": Object {
+            "properties": Object {
+              "aPandaKey": Object {
+                "description": "aPandaKey",
+                "name": "aPandaKey",
+                "required": true,
+                "schema": Object {
+                  "type": "string",
+                },
+              },
+              "farmerAndPanda": Object {
+                "description": "farmerAndPanda",
+                "name": "farmerAndPanda",
+                "required": true,
+                "schema": Object {
+                  "type": "any",
+                },
+              },
+            },
+            "type": "object",
+          },
+        },
+      ],
+    },
+    Object {
+      "classname": "OverridesDecorarotFull",
+      "inputs": undefined,
+      "outputs": undefined,
+    },
+    Object {
+      "classname": "OverridesDecorarorLess",
+      "inputs": undefined,
+      "outputs": undefined,
+    },
+    Object {
+      "classname": "Patrick",
+      "inputs": undefined,
+      "outputs": undefined,
+    },
+    Object {
+      "classname": "SubComponent",
+      "inputs": undefined,
+      "outputs": undefined,
+    },
+  ],
+}
+`;
+
 exports[`Transpiler integration test invalidRootComponent.tsx match expectation 1`] = `
 Object {
   "file": "invalidRootComponent.tsx",
@@ -272,7 +1312,7 @@ Object {
     styleUrl: \\"attachPullRequest.css\\",
     shadow: false
 })
-export class AttachPullRequestDisplay {
+export class InvalidRootComponent {
     private fetcher: BearerFetch;
     @RetrieveStateIntent()
     retrieve: BearerFetch;
@@ -327,6 +1367,262 @@ export class AttachPullRequestDisplay {
 }
 `;
 
+exports[`Transpiler integration test overrides-decorator.tsx has correct manifest generated 1`] = `
+Object {
+  "file": "overrides-decorator.tsx",
+  "manifest": Array [
+    Object {
+      "classname": "AttachPullRequestAction",
+      "inputs": Array [
+        Object {
+          "name": "farmerRefId",
+          "type": "string",
+        },
+        Object {
+          "name": "goatId",
+          "type": "string",
+        },
+        Object {
+          "name": "setupId",
+          "type": "string",
+        },
+      ],
+      "outputs": Array [
+        Object {
+          "eventName": "bearer|SPONGE_BOB|AttachPullRequest|inlineDefinition",
+          "name": "inlineDefinition",
+          "payloadFormat": Object {
+            "properties": Object {
+              "inlineName": Object {
+                "description": "inlineName",
+                "name": "inlineName",
+                "required": true,
+                "schema": Object {
+                  "type": "string",
+                },
+              },
+              "inlineNumber": Object {
+                "description": "inlineNumber",
+                "name": "inlineNumber",
+                "required": true,
+                "schema": Object {
+                  "type": "number",
+                },
+              },
+              "other": Object {
+                "description": "other",
+                "name": "other",
+                "required": true,
+                "schema": Object {
+                  "type": "any",
+                },
+              },
+            },
+            "type": "object",
+          },
+        },
+        Object {
+          "eventName": "bearer|SPONGE_BOB|AttachPullRequest|feedPandaSaved",
+          "name": "feedPandaSaved",
+          "payloadFormat": Object {
+            "properties": Object {
+              "feedPanda": Object {
+                "description": "feedPanda",
+                "name": "feedPanda",
+                "required": true,
+                "schema": Object {
+                  "type": "any",
+                },
+              },
+              "referenceId": Object {
+                "description": "referenceId",
+                "name": "referenceId",
+                "required": true,
+                "schema": Object {
+                  "type": "string",
+                },
+              },
+            },
+            "type": "object",
+          },
+        },
+        Object {
+          "eventName": "bearer|SPONGE_BOB|AttachPullRequest|spongeBobdSaved",
+          "name": "spongeBobdSaved",
+          "payloadFormat": Object {
+            "properties": Object {
+              "manualreferenceKeyName": Object {
+                "description": "manualreferenceKeyName",
+                "name": "manualreferenceKeyName",
+                "required": true,
+                "schema": Object {
+                  "type": "string",
+                },
+              },
+              "shortPanda": Object {
+                "description": "shortPanda",
+                "name": "shortPanda",
+                "required": true,
+                "schema": Object {
+                  "type": "any",
+                },
+              },
+            },
+            "type": "object",
+          },
+        },
+      ],
+    },
+    Object {
+      "classname": "InvalidRootComponent",
+      "inputs": Array [
+        Object {
+          "name": "referenceId",
+          "type": "string",
+        },
+        Object {
+          "name": "setupId",
+          "type": "string",
+        },
+      ],
+      "outputs": Array [],
+    },
+    Object {
+      "classname": "FeatDisplayRootComponent",
+      "inputs": Array [
+        Object {
+          "name": "setupId",
+          "type": "string",
+        },
+      ],
+      "outputs": Array [
+        Object {
+          "eventName": "bearer|SPONGE_BOB|complex-feature|mustBeScopedEvent",
+          "name": "mustBeScopedEvent",
+          "payloadFormat": "unspecified",
+        },
+        Object {
+          "eventName": "bearer|SPONGE_BOB|complex-feature|mustBeScopedEvent",
+          "name": "mustBeScopedEvent",
+          "payloadFormat": "unspecified",
+        },
+      ],
+    },
+    Object {
+      "classname": "SimpleComponent",
+      "inputs": undefined,
+      "outputs": undefined,
+    },
+    Object {
+      "classname": "FeatDisplayRootComponent",
+      "inputs": Array [
+        Object {
+          "name": "setupId",
+          "type": "string",
+        },
+      ],
+      "outputs": Array [],
+    },
+    Object {
+      "classname": "RootComponent",
+      "inputs": Array [
+        Object {
+          "name": "setupId",
+          "type": "string",
+        },
+      ],
+      "outputs": Array [],
+    },
+    Object {
+      "classname": "FullComponent",
+      "inputs": undefined,
+      "outputs": undefined,
+    },
+    Object {
+      "classname": "NoOptionsComponent",
+      "inputs": Array [
+        Object {
+          "name": "setupId",
+          "type": "string",
+        },
+      ],
+      "outputs": Array [
+        Object {
+          "eventName": "bearer|SPONGE_BOB|no-options|farmerSaved",
+          "name": "farmerSaved",
+          "payloadFormat": Object {
+            "properties": Object {
+              "farmer": Object {
+                "description": "farmer",
+                "name": "farmer",
+                "required": true,
+                "schema": Object {
+                  "type": "any",
+                },
+              },
+              "referenceId": Object {
+                "description": "referenceId",
+                "name": "referenceId",
+                "required": true,
+                "schema": Object {
+                  "type": "string",
+                },
+              },
+            },
+            "type": "object",
+          },
+        },
+        Object {
+          "eventName": "bearer|SPONGE_BOB|no-options|milked",
+          "name": "milked",
+          "payloadFormat": Object {
+            "properties": Object {
+              "aPandaKey": Object {
+                "description": "aPandaKey",
+                "name": "aPandaKey",
+                "required": true,
+                "schema": Object {
+                  "type": "string",
+                },
+              },
+              "farmerAndPanda": Object {
+                "description": "farmerAndPanda",
+                "name": "farmerAndPanda",
+                "required": true,
+                "schema": Object {
+                  "type": "any",
+                },
+              },
+            },
+            "type": "object",
+          },
+        },
+      ],
+    },
+    Object {
+      "classname": "OverridesDecorarotFull",
+      "inputs": undefined,
+      "outputs": undefined,
+    },
+    Object {
+      "classname": "OverridesDecorarorLess",
+      "inputs": undefined,
+      "outputs": undefined,
+    },
+    Object {
+      "classname": "Patrick",
+      "inputs": undefined,
+      "outputs": undefined,
+    },
+    Object {
+      "classname": "SubComponent",
+      "inputs": undefined,
+      "outputs": undefined,
+    },
+  ],
+}
+`;
+
 exports[`Transpiler integration test overrides-decorator.tsx match expectation 1`] = `
 Object {
   "file": "overrides-decorator.tsx",
@@ -363,6 +1659,262 @@ class OverridesDecorarotFull {
 }
 `;
 
+exports[`Transpiler integration test overrides-decorator-less.1.tsx has correct manifest generated 1`] = `
+Object {
+  "file": "overrides-decorator-less.1.tsx",
+  "manifest": Array [
+    Object {
+      "classname": "AttachPullRequestAction",
+      "inputs": Array [
+        Object {
+          "name": "farmerRefId",
+          "type": "string",
+        },
+        Object {
+          "name": "goatId",
+          "type": "string",
+        },
+        Object {
+          "name": "setupId",
+          "type": "string",
+        },
+      ],
+      "outputs": Array [
+        Object {
+          "eventName": "bearer|SPONGE_BOB|AttachPullRequest|inlineDefinition",
+          "name": "inlineDefinition",
+          "payloadFormat": Object {
+            "properties": Object {
+              "inlineName": Object {
+                "description": "inlineName",
+                "name": "inlineName",
+                "required": true,
+                "schema": Object {
+                  "type": "string",
+                },
+              },
+              "inlineNumber": Object {
+                "description": "inlineNumber",
+                "name": "inlineNumber",
+                "required": true,
+                "schema": Object {
+                  "type": "number",
+                },
+              },
+              "other": Object {
+                "description": "other",
+                "name": "other",
+                "required": true,
+                "schema": Object {
+                  "type": "any",
+                },
+              },
+            },
+            "type": "object",
+          },
+        },
+        Object {
+          "eventName": "bearer|SPONGE_BOB|AttachPullRequest|feedPandaSaved",
+          "name": "feedPandaSaved",
+          "payloadFormat": Object {
+            "properties": Object {
+              "feedPanda": Object {
+                "description": "feedPanda",
+                "name": "feedPanda",
+                "required": true,
+                "schema": Object {
+                  "type": "any",
+                },
+              },
+              "referenceId": Object {
+                "description": "referenceId",
+                "name": "referenceId",
+                "required": true,
+                "schema": Object {
+                  "type": "string",
+                },
+              },
+            },
+            "type": "object",
+          },
+        },
+        Object {
+          "eventName": "bearer|SPONGE_BOB|AttachPullRequest|spongeBobdSaved",
+          "name": "spongeBobdSaved",
+          "payloadFormat": Object {
+            "properties": Object {
+              "manualreferenceKeyName": Object {
+                "description": "manualreferenceKeyName",
+                "name": "manualreferenceKeyName",
+                "required": true,
+                "schema": Object {
+                  "type": "string",
+                },
+              },
+              "shortPanda": Object {
+                "description": "shortPanda",
+                "name": "shortPanda",
+                "required": true,
+                "schema": Object {
+                  "type": "any",
+                },
+              },
+            },
+            "type": "object",
+          },
+        },
+      ],
+    },
+    Object {
+      "classname": "InvalidRootComponent",
+      "inputs": Array [
+        Object {
+          "name": "referenceId",
+          "type": "string",
+        },
+        Object {
+          "name": "setupId",
+          "type": "string",
+        },
+      ],
+      "outputs": Array [],
+    },
+    Object {
+      "classname": "FeatDisplayRootComponent",
+      "inputs": Array [
+        Object {
+          "name": "setupId",
+          "type": "string",
+        },
+      ],
+      "outputs": Array [
+        Object {
+          "eventName": "bearer|SPONGE_BOB|complex-feature|mustBeScopedEvent",
+          "name": "mustBeScopedEvent",
+          "payloadFormat": "unspecified",
+        },
+        Object {
+          "eventName": "bearer|SPONGE_BOB|complex-feature|mustBeScopedEvent",
+          "name": "mustBeScopedEvent",
+          "payloadFormat": "unspecified",
+        },
+      ],
+    },
+    Object {
+      "classname": "SimpleComponent",
+      "inputs": undefined,
+      "outputs": undefined,
+    },
+    Object {
+      "classname": "FeatDisplayRootComponent",
+      "inputs": Array [
+        Object {
+          "name": "setupId",
+          "type": "string",
+        },
+      ],
+      "outputs": Array [],
+    },
+    Object {
+      "classname": "RootComponent",
+      "inputs": Array [
+        Object {
+          "name": "setupId",
+          "type": "string",
+        },
+      ],
+      "outputs": Array [],
+    },
+    Object {
+      "classname": "FullComponent",
+      "inputs": undefined,
+      "outputs": undefined,
+    },
+    Object {
+      "classname": "NoOptionsComponent",
+      "inputs": Array [
+        Object {
+          "name": "setupId",
+          "type": "string",
+        },
+      ],
+      "outputs": Array [
+        Object {
+          "eventName": "bearer|SPONGE_BOB|no-options|farmerSaved",
+          "name": "farmerSaved",
+          "payloadFormat": Object {
+            "properties": Object {
+              "farmer": Object {
+                "description": "farmer",
+                "name": "farmer",
+                "required": true,
+                "schema": Object {
+                  "type": "any",
+                },
+              },
+              "referenceId": Object {
+                "description": "referenceId",
+                "name": "referenceId",
+                "required": true,
+                "schema": Object {
+                  "type": "string",
+                },
+              },
+            },
+            "type": "object",
+          },
+        },
+        Object {
+          "eventName": "bearer|SPONGE_BOB|no-options|milked",
+          "name": "milked",
+          "payloadFormat": Object {
+            "properties": Object {
+              "aPandaKey": Object {
+                "description": "aPandaKey",
+                "name": "aPandaKey",
+                "required": true,
+                "schema": Object {
+                  "type": "string",
+                },
+              },
+              "farmerAndPanda": Object {
+                "description": "farmerAndPanda",
+                "name": "farmerAndPanda",
+                "required": true,
+                "schema": Object {
+                  "type": "any",
+                },
+              },
+            },
+            "type": "object",
+          },
+        },
+      ],
+    },
+    Object {
+      "classname": "OverridesDecorarotFull",
+      "inputs": undefined,
+      "outputs": undefined,
+    },
+    Object {
+      "classname": "OverridesDecorarorLess",
+      "inputs": undefined,
+      "outputs": undefined,
+    },
+    Object {
+      "classname": "Patrick",
+      "inputs": undefined,
+      "outputs": undefined,
+    },
+    Object {
+      "classname": "SubComponent",
+      "inputs": undefined,
+      "outputs": undefined,
+    },
+  ],
+}
+`;
+
 exports[`Transpiler integration test overrides-decorator-less.1.tsx match expectation 1`] = `
 Object {
   "file": "overrides-decorator-less.1.tsx",
@@ -370,7 +1922,7 @@ Object {
 @Component({
     tag: 'overrides-decorator-less'
 })
-class OverridesDecorarotLess {
+class OverridesDecorarorLess {
     constructor() {
     }
     componentWillLoad() {

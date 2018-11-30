@@ -32,6 +32,21 @@ describe('Transpiler integration test', () => {
           done()
         })
       })
+
+      it('has correct manifest generated', done => {
+        fs.readFile(path.join(postFolder, '../bearer-manifest.json'), 'utf8', (_e, postContent) => {
+          const manifest = JSON.parse(postContent).manifest.components.map(({ outputs, inputs, classname }) => ({
+            classname,
+            inputs,
+            outputs
+          }))
+          expect({
+            manifest,
+            file
+          }).toMatchSnapshot()
+          done()
+        })
+      })
     })
   })
 })

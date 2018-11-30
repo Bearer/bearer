@@ -1,40 +1,33 @@
-import { BearerFetch, BearerRef, BearerState, Component, Input, Intent, IntentType, Output } from '@bearer/core'
+import {
+  BearerFetch,
+  BearerRef,
+  BearerState,
+  Component,
+  Input,
+  Intent,
+  IntentType,
+  Output,
+  Event,
+  EventEmitter
+} from '@bearer/core'
+
+type Panda = {
+  fullPandaName: string
+}
 
 @Component({
   tag: 'full-component'
 })
 export class FullComponent {
-  @Input()
-  farmer: BearerRef<any>
-  @Input({
-    group: 'SCOPE',
-    propName: 'goatId',
-    eventName: 'goatMilked',
-    intentName: 'retrieveGoat',
-    autoUpdate: false
-  })
-  goat: BearerRef<any>
-
-  @Output()
-  feedPanda: BearerRef<any>
-
-  @Output({
-    eventName: 'milked',
-    propertyWatchedName: 'aPanda',
-    referenceKeyName: 'aPandaKey'
-  })
-  feedPanda: BearerRef<any>
-
   @Intent('ListRepositories')
   fetcher: BearerFetch
-  @RetrieveStateIntent()
-  retrieve: BearerFetch
   @BearerState()
   attachedPullRequests: Array<any>
   @BearerState({ statePropName: 'goats' })
   ducks: Array<any>
   @Intent('getPullRequest', IntentType.FetchData)
   fetchResource: BearerFetch
+  @Event() anEvent: EventEmitter<Panda>
 
   screenRenderer = () => {
     return (
@@ -43,6 +36,7 @@ export class FullComponent {
       </bearer-navigator-screen>
     )
   }
+
   render() {
     return (
       <bearer-navigator>

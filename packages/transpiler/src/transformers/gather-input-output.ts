@@ -21,6 +21,23 @@ export default function GatherMetadata({
     }
   }
 
+  function getDef(prop: ts.PropertySignature) {
+    if (!prop.type) {
+      return 'undefined'
+    }
+    switch (prop.type.kind) {
+      case ts.SyntaxKind.StringKeyword:
+        return 'string'
+      case ts.SyntaxKind.NumberKeyword:
+        return 'number'
+      // TODO: re-use type reference if that's possible
+      // case ts.SyntaxKind.TypeReference:
+      //   return generator.getSchemaForSymbol(prop.type.getText()) as any
+      default:
+        return 'any'
+    }
+  }
+
   function propInitializerAsJson(tsType: ts.TypeReferenceNode): TOuputFormat {
     if (!tsType || !tsType.typeArguments || !Boolean(tsType.typeArguments.length) || !generator) {
       return UNSPECIFIED
@@ -30,16 +47,37 @@ export default function GatherMetadata({
     switch (typeArgument.kind) {
       case ts.SyntaxKind.TypeReference:
         return generator.getSchemaForSymbol(typeArgument.getText()) as any
-      case ts.SyntaxKind.TypeLiteral:
-        return { type: 'object' } as any
+      case ts.SyntaxKind.TypeLiteral: {
+        const typeNode = typeArgument as ts.TypeLiteralNode
+        return {
+          type: 'object',
+          properties: {
+            ...typeNode.members.reduce((acc, m) => {
+              const member = m as ts.PropertySignature
+              const name = (member.name as ts.Identifier).escapedText.toString()
+              return {
+                ...acc,
+                [name]: {
+                  description: name,
+                  name,
+                  required: !member.questionToken,
+                  schema: { type: getDef(member) }
+                }
+              }
+            }, {})
+          }
+        }
+      }
       case ts.SyntaxKind.NumberKeyword:
         return { type: 'number' }
       case ts.SyntaxKind.BooleanKeyword:
         return { type: 'boolean' }
       case ts.SyntaxKind.StringKeyword:
         return { type: 'string' }
+      default: {
+        return { type: 'object' } as any
+      }
     }
-    return {}
   }
 
   // retrieven event name from call arguments or take prop name
