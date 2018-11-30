@@ -23,19 +23,28 @@ function initializerAsJson(tsType: ts.TypeNode, generator: TJS.JsonSchemaGenerat
           ((tsType as ts.TypeReferenceNode).typeName as ts.Identifier).escapedText.toString()
         )
       case ts.SyntaxKind.TypeLiteral: {
-        console.log('[BEARER]', 'tsType')
+        const typeNode = tsType as ts.TypeLiteralNode
         return {
+          type: 'object',
           properties: {
-            inlineParam: {
-              description: 'inlineParam',
-              in: 'query',
-              name: 'inlineParam',
-              required: true,
-              schema: { type: 'string' }
-            }
+            ...typeNode.members.reduce((acc, m) => {
+              const member = m as ts.PropertySignature
+              const name = (member.name as ts.Identifier).escapedText.toString()
+              const type = member.type && member.type.kind === ts.SyntaxKind.StringKeyword ? 'string' : 'number'
+              return {
+                ...acc,
+                [name]: {
+                  description: name,
+                  name,
+                  required: !member.questionToken,
+                  schema: { type }
+                }
+              }
+            }, {})
           }
         }
       }
+
       case ts.SyntaxKind.AnyKeyword:
         return { type: 'object' } as any
       case ts.SyntaxKind.NumberKeyword:
@@ -53,11 +62,7 @@ function initializerAsJson(tsType: ts.TypeNode, generator: TJS.JsonSchemaGenerat
 }
 
 class IntentNodeAdapter implements IIntentEntry {
-  constructor(
-    private readonly node: ts.ClassDeclaration,
-    private readonly generator: TJS.JsonSchemaGenerator,
-    private readonly program: TJS.Program
-  ) {}
+  constructor(private readonly node: ts.ClassDeclaration, private readonly generator: TJS.JsonSchemaGenerator) {}
 
   get intentClassName() {
     return getIdentifier(this.node).escapedText.toString()
@@ -77,26 +82,22 @@ class IntentNodeAdapter implements IIntentEntry {
     if (!typeNode) {
       return defaultParams
     }
-    console.log('[BEARER]', '', this.program.toString().slice(1, 1))
     const paramsSchema = initializerAsJson(typeNode, this.generator)
-    console.log('[BEARER]', 'typeNode', typeNode)
     return [...this.adaptParamsSchema(paramsSchema), ...defaultParams]
   }
 
-  adaptParamsSchema(paramsSchema: any): ISchemaParam[] {
-    if (paramsSchema.properties) {
-      return Object.keys(paramsSchema.properties).map(
-        name =>
-          ({
-            in: 'query',
-            schema: {
-              type: 'string'
-            },
-            description: name,
-            required: true,
-            name
-          } as ISchemaParam)
-      )
+  adaptParamsSchema({ properties = {} }: { properties?: { [key: string]: any } }): ISchemaParam[] {
+    if (properties) {
+      return Object.keys(properties).map(propName => {
+        const { schema, required, name, description } = properties[propName]
+        return {
+          schema: schema || { type: 'string' },
+          in: 'query',
+          description: description || propName,
+          required: required !== undefined ? required : true,
+          name: name || propName
+        } as ISchemaParam
+      })
     }
     return []
   }
@@ -171,14 +172,11 @@ function getFunctionParameterType(
   return
 }
 
-export function transformer(
-  generator: TJS.JsonSchemaGenerator,
-  programGenerator: TJS.Program
-): ts.TransformerFactory<ts.SourceFile> {
+export function transformer(generator: TJS.JsonSchemaGenerator): ts.TransformerFactory<ts.SourceFile> {
   return (context: ts.TransformationContext) => {
     function visit(tsNode: ts.Node) {
       if (isIntentClass(tsNode)) {
-        const adapter = new IntentNodeAdapter(tsNode as ts.ClassDeclaration, generator, programGenerator)
+        const adapter = new IntentNodeAdapter(tsNode as ts.ClassDeclaration, generator)
         intentEntries.push(adapter.adapt)
       }
       return tsNode
@@ -244,7 +242,7 @@ export class OpenApiSpecGenerator {
         false,
         ts.ScriptKind.TSX
       )
-      ts.transform(sourceFile, [transformer(generator, programGenerator)])
+      ts.transform(sourceFile, [transformer(generator)])
     })
     return this.generate(intentEntries, this.bearerConfig)
   }

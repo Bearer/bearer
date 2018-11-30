@@ -17,7 +17,7 @@ describe('generators', () => {
       result = await generator.build()
     })
 
-    it.only('has object literal params', () => {
+    it('has object literal params required', () => {
       const paramsSchema = result.paths[`/123-test/ObjectLiteralParams`].post.parameters.find(
         p => p.name === 'inlineParam'
       )
@@ -28,6 +28,19 @@ describe('generators', () => {
         name: 'inlineParam',
         required: true,
         schema: { type: 'string' }
+      })
+    })
+
+    it('has object literal params optional', () => {
+      const optionalParam = result.paths[`/123-test/ObjectLiteralParams`].post.parameters.find(
+        p => p.name === 'optional'
+      )
+      expect(optionalParam).toMatchObject({
+        description: 'optional',
+        in: 'query',
+        name: 'optional',
+        required: false,
+        schema: { type: 'number' }
       })
     })
 

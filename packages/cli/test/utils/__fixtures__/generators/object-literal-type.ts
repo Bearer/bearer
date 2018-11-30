@@ -10,7 +10,12 @@ export class ObjectLiteralParamsClass {
   static intentType = RetrieveState
   static intentName = 'ObjectLiteralParams'
 
-  static action(context: TOAUTH2AuthContext, params: { inlineParam: string }, body: any, callback: TFetchDataCallback) {
+  static action(
+    context: TOAUTH2AuthContext,
+    params: { inlineParam: string; optional?: number },
+    body: any,
+    callback: TFetchDataCallback
+  ) {
     callback({ data: [] })
   }
 }
