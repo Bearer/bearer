@@ -42,6 +42,49 @@ Metadata {
           "eventName": "bearer|SPONGE_BOB|complex|typedEvent",
           "name": "typedEvent",
           "payloadFormat": Object {
+            "properties": Object {
+              "aNumber": Object {
+                "description": "aNumber",
+                "name": "aNumber",
+                "required": true,
+                "schema": Object {
+                  "type": "number",
+                },
+              },
+              "anEnum": Object {
+                "description": "anEnum",
+                "name": "anEnum",
+                "required": true,
+                "schema": Object {
+                  "type": "object",
+                },
+              },
+              "pullRequest": Object {
+                "description": "pullRequest",
+                "name": "pullRequest",
+                "required": true,
+                "schema": Object {
+                  "$schema": "http://json-schema.org/draft-07/schema#",
+                  "properties": Object {
+                    "name": Object {
+                      "type": "string",
+                    },
+                    "status": Object {
+                      "enum": Array [
+                        "closed",
+                        "open",
+                      ],
+                      "type": "string",
+                    },
+                  },
+                  "required": Array [
+                    "name",
+                    "status",
+                  ],
+                  "type": "object",
+                },
+              },
+            },
             "type": "object",
           },
         },
@@ -92,7 +135,9 @@ Metadata {
         Object {
           "eventName": "bearer|SPONGE_BOB|complex|typedEventWithTypeArray",
           "name": "typedEventWithTypeArray",
-          "payloadFormat": Object {},
+          "payloadFormat": Object {
+            "type": "object",
+          },
         },
         Object {
           "eventName": "bearer|SPONGE_BOB|complex|typedEventWithTypeString",

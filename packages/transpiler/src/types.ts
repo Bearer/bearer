@@ -18,7 +18,7 @@ export type TComponentInputDefinition = {
   default: string | number
 }
 
-type TBasicFormat = 'string' | 'number' | 'boolean' | 'object'
+type TBasicFormat = 'string' | 'number' | 'boolean' | 'object' | 'any'
 type TUnknown = 'unspecified'
 export type TOuputFormat = TUnknown | { type: TBasicFormat } | { [key: string]: TBasicFormat | Array<TBasicFormat> }
 

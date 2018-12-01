@@ -21,34 +21,18 @@ export default function GatherMetadata({
     }
   }
 
-  function getDef(prop: ts.PropertySignature) {
-    if (!prop.type) {
-      return 'undefined'
-    }
-    switch (prop.type.kind) {
-      case ts.SyntaxKind.StringKeyword:
-        return 'string'
-      case ts.SyntaxKind.NumberKeyword:
-        return 'number'
-      // TODO: re-use type reference if that's possible
-      // case ts.SyntaxKind.TypeReference:
-      //   return generator.getSchemaForSymbol(prop.type.getText()) as any
-      default:
-        return 'any'
-    }
-  }
-
-  function propInitializerAsJson(tsType: ts.TypeReferenceNode): TOuputFormat {
-    if (!tsType || !tsType.typeArguments || !Boolean(tsType.typeArguments.length) || !generator) {
-      return UNSPECIFIED
-    }
-    const typeArgument = tsType.typeArguments[0]
-
-    switch (typeArgument.kind) {
+  function getDefinition(type: ts.TypeNode): TOuputFormat {
+    switch (type.kind) {
       case ts.SyntaxKind.TypeReference:
-        return generator.getSchemaForSymbol(typeArgument.getText()) as any
+        try {
+          return generator.getSchemaForSymbol(type.getText()) as any
+        } catch (e) {
+          // TODO: re-use type reference
+          console.debug(e.toString())
+          return { type: 'any' }
+        }
       case ts.SyntaxKind.TypeLiteral: {
-        const typeNode = typeArgument as ts.TypeLiteralNode
+        const typeNode = type as ts.TypeLiteralNode
         return {
           type: 'object',
           properties: {
@@ -61,7 +45,7 @@ export default function GatherMetadata({
                   description: name,
                   name,
                   required: !member.questionToken,
-                  schema: { type: getDef(member) }
+                  schema: getDefinition(member.type)
                 }
               }
             }, {})
@@ -78,6 +62,15 @@ export default function GatherMetadata({
         return { type: 'object' } as any
       }
     }
+  }
+
+  function propInitializerAsJson(tsType: ts.TypeReferenceNode): TOuputFormat {
+    if (!tsType || !tsType.typeArguments || !Boolean(tsType.typeArguments.length) || !generator) {
+      return UNSPECIFIED
+    }
+    const typeArgument = tsType.typeArguments[0]
+
+    return getDefinition(typeArgument)
   }
 
   // retrieven event name from call arguments or take prop name
