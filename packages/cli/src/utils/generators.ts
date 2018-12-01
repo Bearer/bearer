@@ -15,49 +15,47 @@ const FUNCTION_NAME_IDENTIFIER = 'action'
 
 let intentEntries: Array<IIntentEntry> = []
 
-function initializerAsJson(tsType: ts.TypeNode, generator: TJS.JsonSchemaGenerator): TJS.Definition {
-  if (tsType) {
-    switch (tsType.kind) {
-      case ts.SyntaxKind.TypeReference:
-        return generator.getSchemaForSymbol(
-          ((tsType as ts.TypeReferenceNode).typeName as ts.Identifier).escapedText.toString()
-        )
-      case ts.SyntaxKind.TypeLiteral: {
-        const typeNode = tsType as ts.TypeLiteralNode
-        return {
-          type: 'object',
-          properties: {
-            ...typeNode.members.reduce((acc, m) => {
-              const member = m as ts.PropertySignature
-              const name = (member.name as ts.Identifier).escapedText.toString()
-              const type = member.type && member.type.kind === ts.SyntaxKind.StringKeyword ? 'string' : 'number'
-              return {
-                ...acc,
-                [name]: {
-                  description: name,
-                  name,
-                  required: !member.questionToken,
-                  schema: { type }
-                }
+function getDefinition(tsType: ts.TypeNode, generator: TJS.JsonSchemaGenerator): TJS.Definition {
+  switch (tsType.kind) {
+    case ts.SyntaxKind.TypeReference:
+      try {
+        const name = ((tsType as ts.TypeReferenceNode).typeName as ts.Identifier).escapedText.toString()
+        return generator.getSchemaForSymbol(name) as any
+      } catch (e) {
+        // TODO: re-use type reference
+        console.debug(e)
+        return { type: 'any' }
+      }
+    case ts.SyntaxKind.TypeLiteral: {
+      const typeNode = tsType as ts.TypeLiteralNode
+      return {
+        type: 'object',
+        properties: {
+          ...typeNode.members.reduce((acc, m) => {
+            const member = m as ts.PropertySignature
+            const name = (member.name as ts.Identifier).escapedText.toString()
+            return {
+              ...acc,
+              [name]: {
+                description: name,
+                name,
+                required: !member.questionToken,
+                schema: getDefinition(member.type!, generator)
               }
-            }, {})
-          }
+            }
+          }, {})
         }
       }
-
-      case ts.SyntaxKind.AnyKeyword:
-        return { type: 'object' } as any
-      case ts.SyntaxKind.NumberKeyword:
-        return { type: 'number' }
-      case ts.SyntaxKind.BooleanKeyword:
-        return { type: 'boolean' }
-      case ts.SyntaxKind.StringKeyword:
-        return { type: 'string' }
-      default:
-        return {}
     }
-  } else {
-    return {}
+    case ts.SyntaxKind.NumberKeyword:
+      return { type: 'number' }
+    case ts.SyntaxKind.BooleanKeyword:
+      return { type: 'boolean' }
+    case ts.SyntaxKind.StringKeyword:
+      return { type: 'string' }
+    default: {
+      return { type: 'object' } as any
+    }
   }
 }
 
@@ -82,7 +80,7 @@ class IntentNodeAdapter implements IIntentEntry {
     if (!typeNode) {
       return defaultParams
     }
-    const paramsSchema = initializerAsJson(typeNode, this.generator)
+    const paramsSchema = getDefinition(typeNode, this.generator)
     return [...this.adaptParamsSchema(paramsSchema), ...defaultParams]
   }
 
@@ -107,7 +105,7 @@ class IntentNodeAdapter implements IIntentEntry {
     if (!typeNode) {
       return {}
     }
-    return initializerAsJson(typeNode, this.generator)
+    return getDefinition(typeNode, this.generator)
   }
 
   get outputSchema() {
