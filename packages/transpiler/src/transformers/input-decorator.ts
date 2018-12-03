@@ -94,7 +94,6 @@ export default function InputDecorator({ metadata }: TransformerOptions = {}): t
           // create @State()
           const inputMembers = [
             createLocalStateProperty(meta),
-
             createEventListener(meta),
             createLoadResourceMethod(meta),
             createFetcher(meta),

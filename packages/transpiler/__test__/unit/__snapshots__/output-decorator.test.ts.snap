@@ -37,7 +37,7 @@ class NoOptionsComponent {
     }>;
     @State()
     farmer: BearerRef<Farmer>;
-    @State()
+    @Prop({ \\"mutable\\": true })
     farmerRefId: string;
     @Watch(\\"farmer\\")
     farmerSavedWatcher(newValue) {
@@ -54,7 +54,7 @@ class NoOptionsComponent {
     }>;
     @State()
     farmerAndPanda: BearerRef<Farmer> = {};
-    @State()
+    @Prop({ \\"mutable\\": true })
     farmerAndPandaRefId: string;
     @Watch(\\"aPanda\\")
     milkedWatcher(newValue) {

@@ -94,7 +94,13 @@ export default function OutputDecorator(_options: TransformerOptions = {}): ts.T
 function injectOuputStatements(tsClass: ts.ClassDeclaration, outputsMeta: Array<OutputMeta>): ts.ClassDeclaration {
   const newMembers = outputsMeta.reduce(
     (members, meta) => {
-      const inputMembers = [createIntent(meta), createEvent(meta), ...createStates(meta), ...createWatchers(meta)]
+      const inputMembers = [
+        createIntent(meta),
+        createEvent(meta),
+        createState(meta),
+        createProp(meta),
+        ...createWatchers(meta)
+      ]
       return members.concat(inputMembers)
     },
     [...tsClass.members]
@@ -140,27 +146,35 @@ function createEvent(meta: OutputMeta): ts.PropertyDeclaration {
   )
 }
 
-function createStates(meta: OutputMeta): ts.PropertyDeclaration[] {
-  return [
-    // @State() propDeclarationName: Type = initiailizer
-    ts.createProperty(
-      [ts.createDecorator(ts.createCall(ts.createIdentifier(Decorators.State), undefined, []))],
-      undefined,
-      meta.propDeclarationName,
-      undefined,
-      meta.typeIdentifier,
-      meta.initializer
-    ),
-    // @State() propDeclarationNameRefId: Type = initiailizer
-    ts.createProperty(
-      [ts.createDecorator(ts.createCall(ts.createIdentifier(Decorators.State), undefined, []))],
-      undefined,
-      meta.propDeclarationNameRefId,
-      undefined,
-      ts.createKeywordTypeNode(ts.SyntaxKind.StringKeyword),
-      undefined
-    )
-  ]
+// This would let developer use passed reference
+// @Prop({ mutable: true }) propDeclarationNameRefId: string
+function createProp(meta: OutputMeta): ts.PropertyDeclaration {
+  return ts.createProperty(
+    [
+      ts.createDecorator(
+        ts.createCall(ts.createIdentifier(Decorators.Prop), undefined, [
+          ts.createObjectLiteral([ts.createPropertyAssignment(ts.createLiteral('mutable'), ts.createTrue())])
+        ])
+      )
+    ],
+    undefined,
+    meta.propDeclarationNameRefId,
+    undefined,
+    ts.createKeywordTypeNode(ts.SyntaxKind.StringKeyword),
+    undefined
+  )
+}
+
+function createState(meta: OutputMeta): ts.PropertyDeclaration {
+  // @State() propDeclarationName: Type = initiailizer
+  return ts.createProperty(
+    [ts.createDecorator(ts.createCall(ts.createIdentifier(Decorators.State), undefined, []))],
+    undefined,
+    meta.propDeclarationName,
+    undefined,
+    meta.typeIdentifier,
+    meta.initializer
+  )
 }
 
 function createWatchers(meta: OutputMeta): ts.MethodDeclaration[] {

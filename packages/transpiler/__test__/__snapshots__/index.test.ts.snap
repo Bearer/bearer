@@ -16,6 +16,14 @@ Object {
           "type": "string",
         },
         Object {
+          "name": "feedPandaRefId",
+          "type": "string",
+        },
+        Object {
+          "name": "shortPandaRefId",
+          "type": "string",
+        },
+        Object {
           "name": "setupId",
           "type": "string",
         },
@@ -183,6 +191,14 @@ Object {
     Object {
       "classname": "NoOptionsComponent",
       "inputs": Array [
+        Object {
+          "name": "farmerRefId",
+          "type": "string",
+        },
+        Object {
+          "name": "farmerAndPandaRefId",
+          "type": "string",
+        },
         Object {
           "name": "setupId",
           "type": "string",
@@ -358,6 +374,14 @@ Object {
           "type": "string",
         },
         Object {
+          "name": "feedPandaRefId",
+          "type": "string",
+        },
+        Object {
+          "name": "shortPandaRefId",
+          "type": "string",
+        },
+        Object {
           "name": "setupId",
           "type": "string",
         },
@@ -525,6 +549,14 @@ Object {
     Object {
       "classname": "NoOptionsComponent",
       "inputs": Array [
+        Object {
+          "name": "farmerRefId",
+          "type": "string",
+        },
+        Object {
+          "name": "farmerAndPandaRefId",
+          "type": "string",
+        },
         Object {
           "name": "setupId",
           "type": "string",
@@ -712,7 +744,7 @@ export class AttachPullRequestAction {
     }>;
     @State()
     feedPanda: BearerRef<Panda>;
-    @State()
+    @Prop({ \\"mutable\\": true })
     feedPandaRefId: string;
     @Watch(\\"feedPanda\\")
     feedPandaSavedWatcher(newValue) {
@@ -735,7 +767,7 @@ export class AttachPullRequestAction {
     shortPanda: BearerRef<{
         inlineName: string;
     }>;
-    @State()
+    @Prop({ \\"mutable\\": true })
     shortPandaRefId: string;
     @Watch(\\"manualpropertyWatchedName\\")
     spongeBobdSavedWatcher(newValue) {
@@ -801,6 +833,14 @@ Object {
         },
         Object {
           "name": "goatId",
+          "type": "string",
+        },
+        Object {
+          "name": "feedPandaRefId",
+          "type": "string",
+        },
+        Object {
+          "name": "shortPandaRefId",
           "type": "string",
         },
         Object {
@@ -971,6 +1011,14 @@ Object {
     Object {
       "classname": "NoOptionsComponent",
       "inputs": Array [
+        Object {
+          "name": "farmerRefId",
+          "type": "string",
+        },
+        Object {
+          "name": "farmerAndPandaRefId",
+          "type": "string",
+        },
         Object {
           "name": "setupId",
           "type": "string",
@@ -1090,6 +1138,14 @@ Object {
           "type": "string",
         },
         Object {
+          "name": "feedPandaRefId",
+          "type": "string",
+        },
+        Object {
+          "name": "shortPandaRefId",
+          "type": "string",
+        },
+        Object {
           "name": "setupId",
           "type": "string",
         },
@@ -1257,6 +1313,14 @@ Object {
     Object {
       "classname": "NoOptionsComponent",
       "inputs": Array [
+        Object {
+          "name": "farmerRefId",
+          "type": "string",
+        },
+        Object {
+          "name": "farmerAndPandaRefId",
+          "type": "string",
+        },
         Object {
           "name": "setupId",
           "type": "string",
@@ -1419,6 +1483,14 @@ Object {
           "type": "string",
         },
         Object {
+          "name": "feedPandaRefId",
+          "type": "string",
+        },
+        Object {
+          "name": "shortPandaRefId",
+          "type": "string",
+        },
+        Object {
           "name": "setupId",
           "type": "string",
         },
@@ -1586,6 +1658,14 @@ Object {
     Object {
       "classname": "NoOptionsComponent",
       "inputs": Array [
+        Object {
+          "name": "farmerRefId",
+          "type": "string",
+        },
+        Object {
+          "name": "farmerAndPandaRefId",
+          "type": "string",
+        },
         Object {
           "name": "setupId",
           "type": "string",
@@ -1720,6 +1800,14 @@ Object {
           "type": "string",
         },
         Object {
+          "name": "feedPandaRefId",
+          "type": "string",
+        },
+        Object {
+          "name": "shortPandaRefId",
+          "type": "string",
+        },
+        Object {
           "name": "setupId",
           "type": "string",
         },
@@ -1887,6 +1975,14 @@ Object {
     Object {
       "classname": "NoOptionsComponent",
       "inputs": Array [
+        Object {
+          "name": "farmerRefId",
+          "type": "string",
+        },
+        Object {
+          "name": "farmerAndPandaRefId",
+          "type": "string",
+        },
         Object {
           "name": "setupId",
           "type": "string",
