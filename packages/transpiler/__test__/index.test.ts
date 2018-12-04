@@ -9,7 +9,7 @@ const postFolder = path.join(fixtures, '../../.build/src/pre')
 
 describe('Transpiler integration test', () => {
   beforeAll(done => {
-    runTranspiler()
+    runTranspiler('../../__fixtures__')
     done()
   })
   fs.readdirSync(preFolder).forEach(file => {

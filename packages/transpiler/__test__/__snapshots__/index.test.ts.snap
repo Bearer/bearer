@@ -184,6 +184,68 @@ Object {
       "outputs": Array [],
     },
     Object {
+      "classname": "Component",
+      "inputs": Array [
+        Object {
+          "name": "goat",
+          "type": "string",
+        },
+        Object {
+          "name": "setupId",
+          "type": "string",
+        },
+      ],
+      "outputs": Array [
+        Object {
+          "eventName": "bearer|SPONGE_BOB|feature|feed",
+          "name": "feed",
+          "payloadFormat": "unspecified",
+        },
+        Object {
+          "eventName": "bearer|SPONGE_BOB|feature|keptAsIs",
+          "name": "keptAsIs",
+          "payloadFormat": Object {
+            "properties": Object {
+              "goat": Object {
+                "description": "goat",
+                "name": "goat",
+                "required": true,
+                "schema": Object {
+                  "$schema": "http://json-schema.org/draft-07/schema#",
+                  "properties": Object {
+                    "color": Object {
+                      "type": "string",
+                    },
+                  },
+                  "required": Array [
+                    "color",
+                  ],
+                  "type": "object",
+                },
+              },
+            },
+            "type": "object",
+          },
+        },
+        Object {
+          "eventName": "bearer|SPONGE_BOB|feature|pandaIsAnyfied",
+          "name": "pandaIsAnyfied",
+          "payloadFormat": Object {
+            "$schema": "http://json-schema.org/draft-07/schema#",
+            "properties": Object {
+              "fullPandaName": Object {
+                "type": "string",
+              },
+            },
+            "required": Array [
+              "fullPandaName",
+            ],
+            "type": "object",
+          },
+        },
+      ],
+    },
+    Object {
       "classname": "FullComponent",
       "inputs": undefined,
       "outputs": undefined,
@@ -301,7 +363,7 @@ export class FullComponent {
     ducks: Array<any>;
     private fetchResource: BearerFetch;
     @Event({ eventName: \\"bearer|SPONGE_BOB|global|anEvent\\" })
-    anEvent: EventEmitter<Panda>;
+    anEvent: EventEmitter;
     screenRenderer = () => {
         return (<bearer-navigator-screen navigationTitle=\\"Last Screen\\" renderFunc={() => [<h1>Hello Partick</h1>]}/>);
     };
@@ -542,6 +604,68 @@ Object {
       "outputs": Array [],
     },
     Object {
+      "classname": "Component",
+      "inputs": Array [
+        Object {
+          "name": "goat",
+          "type": "string",
+        },
+        Object {
+          "name": "setupId",
+          "type": "string",
+        },
+      ],
+      "outputs": Array [
+        Object {
+          "eventName": "bearer|SPONGE_BOB|feature|feed",
+          "name": "feed",
+          "payloadFormat": "unspecified",
+        },
+        Object {
+          "eventName": "bearer|SPONGE_BOB|feature|keptAsIs",
+          "name": "keptAsIs",
+          "payloadFormat": Object {
+            "properties": Object {
+              "goat": Object {
+                "description": "goat",
+                "name": "goat",
+                "required": true,
+                "schema": Object {
+                  "$schema": "http://json-schema.org/draft-07/schema#",
+                  "properties": Object {
+                    "color": Object {
+                      "type": "string",
+                    },
+                  },
+                  "required": Array [
+                    "color",
+                  ],
+                  "type": "object",
+                },
+              },
+            },
+            "type": "object",
+          },
+        },
+        Object {
+          "eventName": "bearer|SPONGE_BOB|feature|pandaIsAnyfied",
+          "name": "pandaIsAnyfied",
+          "payloadFormat": Object {
+            "$schema": "http://json-schema.org/draft-07/schema#",
+            "properties": Object {
+              "fullPandaName": Object {
+                "type": "string",
+              },
+            },
+            "required": Array [
+              "fullPandaName",
+            ],
+            "type": "object",
+          },
+        },
+      ],
+    },
+    Object {
       "classname": "FullComponent",
       "inputs": undefined,
       "outputs": undefined,
@@ -664,11 +788,7 @@ export class AttachPullRequestAction {
     ducks: Array<any>;
     private fetchResource: BearerFetch;
     @Event({ eventName: \\"bearer|SPONGE_BOB|AttachPullRequest|inlineDefinition\\" })
-    inlineDefinition: EventEmitter<{
-        inlineName: string;
-        inlineNumber: number;
-        other: Panda;
-    }>;
+    inlineDefinition: EventEmitter;
     render() {
         return (<bearer-authorized scenarioId=\\"SPONGE_BOB\\">
         <bearer-scrollable fetcher={this.fetcher}/>
@@ -738,10 +858,7 @@ export class AttachPullRequestAction {
     goatId: string;
     private saveFeedPanda: BearerFetch<BearerRef<Panda>>;
     @Event({ eventName: \\"bearer|SPONGE_BOB|AttachPullRequest|feedPandaSaved\\" })
-    feedPandaSaved: EventEmitter<{
-        referenceId: string;
-        feedPanda: BearerRef<Panda>;
-    }>;
+    feedPandaSaved: EventEmitter;
     @State()
     feedPanda: BearerRef<Panda>;
     @Prop({ \\"mutable\\": true })
@@ -757,12 +874,7 @@ export class AttachPullRequestAction {
         inlineName: string;
     }>>;
     @Event({ eventName: \\"bearer|SPONGE_BOB|AttachPullRequest|spongeBobdSaved\\" })
-    spongeBobdSaved: EventEmitter<{
-        manualreferenceKeyName: string;
-        shortPanda: BearerRef<{
-            inlineName: string;
-        }>;
-    }>;
+    spongeBobdSaved: EventEmitter;
     @State()
     shortPanda: BearerRef<{
         inlineName: string;
@@ -1002,6 +1114,68 @@ Object {
         },
       ],
       "outputs": Array [],
+    },
+    Object {
+      "classname": "Component",
+      "inputs": Array [
+        Object {
+          "name": "goat",
+          "type": "string",
+        },
+        Object {
+          "name": "setupId",
+          "type": "string",
+        },
+      ],
+      "outputs": Array [
+        Object {
+          "eventName": "bearer|SPONGE_BOB|feature|feed",
+          "name": "feed",
+          "payloadFormat": "unspecified",
+        },
+        Object {
+          "eventName": "bearer|SPONGE_BOB|feature|keptAsIs",
+          "name": "keptAsIs",
+          "payloadFormat": Object {
+            "properties": Object {
+              "goat": Object {
+                "description": "goat",
+                "name": "goat",
+                "required": true,
+                "schema": Object {
+                  "$schema": "http://json-schema.org/draft-07/schema#",
+                  "properties": Object {
+                    "color": Object {
+                      "type": "string",
+                    },
+                  },
+                  "required": Array [
+                    "color",
+                  ],
+                  "type": "object",
+                },
+              },
+            },
+            "type": "object",
+          },
+        },
+        Object {
+          "eventName": "bearer|SPONGE_BOB|feature|pandaIsAnyfied",
+          "name": "pandaIsAnyfied",
+          "payloadFormat": Object {
+            "$schema": "http://json-schema.org/draft-07/schema#",
+            "properties": Object {
+              "fullPandaName": Object {
+                "type": "string",
+              },
+            },
+            "required": Array [
+              "fullPandaName",
+            ],
+            "type": "object",
+          },
+        },
+      ],
     },
     Object {
       "classname": "FullComponent",
@@ -1304,6 +1478,68 @@ Object {
         },
       ],
       "outputs": Array [],
+    },
+    Object {
+      "classname": "Component",
+      "inputs": Array [
+        Object {
+          "name": "goat",
+          "type": "string",
+        },
+        Object {
+          "name": "setupId",
+          "type": "string",
+        },
+      ],
+      "outputs": Array [
+        Object {
+          "eventName": "bearer|SPONGE_BOB|feature|feed",
+          "name": "feed",
+          "payloadFormat": "unspecified",
+        },
+        Object {
+          "eventName": "bearer|SPONGE_BOB|feature|keptAsIs",
+          "name": "keptAsIs",
+          "payloadFormat": Object {
+            "properties": Object {
+              "goat": Object {
+                "description": "goat",
+                "name": "goat",
+                "required": true,
+                "schema": Object {
+                  "$schema": "http://json-schema.org/draft-07/schema#",
+                  "properties": Object {
+                    "color": Object {
+                      "type": "string",
+                    },
+                  },
+                  "required": Array [
+                    "color",
+                  ],
+                  "type": "object",
+                },
+              },
+            },
+            "type": "object",
+          },
+        },
+        Object {
+          "eventName": "bearer|SPONGE_BOB|feature|pandaIsAnyfied",
+          "name": "pandaIsAnyfied",
+          "payloadFormat": Object {
+            "$schema": "http://json-schema.org/draft-07/schema#",
+            "properties": Object {
+              "fullPandaName": Object {
+                "type": "string",
+              },
+            },
+            "required": Array [
+              "fullPandaName",
+            ],
+            "type": "object",
+          },
+        },
+      ],
     },
     Object {
       "classname": "FullComponent",
@@ -1651,6 +1887,68 @@ Object {
       "outputs": Array [],
     },
     Object {
+      "classname": "Component",
+      "inputs": Array [
+        Object {
+          "name": "goat",
+          "type": "string",
+        },
+        Object {
+          "name": "setupId",
+          "type": "string",
+        },
+      ],
+      "outputs": Array [
+        Object {
+          "eventName": "bearer|SPONGE_BOB|feature|feed",
+          "name": "feed",
+          "payloadFormat": "unspecified",
+        },
+        Object {
+          "eventName": "bearer|SPONGE_BOB|feature|keptAsIs",
+          "name": "keptAsIs",
+          "payloadFormat": Object {
+            "properties": Object {
+              "goat": Object {
+                "description": "goat",
+                "name": "goat",
+                "required": true,
+                "schema": Object {
+                  "$schema": "http://json-schema.org/draft-07/schema#",
+                  "properties": Object {
+                    "color": Object {
+                      "type": "string",
+                    },
+                  },
+                  "required": Array [
+                    "color",
+                  ],
+                  "type": "object",
+                },
+              },
+            },
+            "type": "object",
+          },
+        },
+        Object {
+          "eventName": "bearer|SPONGE_BOB|feature|pandaIsAnyfied",
+          "name": "pandaIsAnyfied",
+          "payloadFormat": Object {
+            "$schema": "http://json-schema.org/draft-07/schema#",
+            "properties": Object {
+              "fullPandaName": Object {
+                "type": "string",
+              },
+            },
+            "required": Array [
+              "fullPandaName",
+            ],
+            "type": "object",
+          },
+        },
+      ],
+    },
+    Object {
       "classname": "FullComponent",
       "inputs": undefined,
       "outputs": undefined,
@@ -1966,6 +2264,68 @@ Object {
         },
       ],
       "outputs": Array [],
+    },
+    Object {
+      "classname": "Component",
+      "inputs": Array [
+        Object {
+          "name": "goat",
+          "type": "string",
+        },
+        Object {
+          "name": "setupId",
+          "type": "string",
+        },
+      ],
+      "outputs": Array [
+        Object {
+          "eventName": "bearer|SPONGE_BOB|feature|feed",
+          "name": "feed",
+          "payloadFormat": "unspecified",
+        },
+        Object {
+          "eventName": "bearer|SPONGE_BOB|feature|keptAsIs",
+          "name": "keptAsIs",
+          "payloadFormat": Object {
+            "properties": Object {
+              "goat": Object {
+                "description": "goat",
+                "name": "goat",
+                "required": true,
+                "schema": Object {
+                  "$schema": "http://json-schema.org/draft-07/schema#",
+                  "properties": Object {
+                    "color": Object {
+                      "type": "string",
+                    },
+                  },
+                  "required": Array [
+                    "color",
+                  ],
+                  "type": "object",
+                },
+              },
+            },
+            "type": "object",
+          },
+        },
+        Object {
+          "eventName": "bearer|SPONGE_BOB|feature|pandaIsAnyfied",
+          "name": "pandaIsAnyfied",
+          "payloadFormat": Object {
+            "$schema": "http://json-schema.org/draft-07/schema#",
+            "properties": Object {
+              "fullPandaName": Object {
+                "type": "string",
+              },
+            },
+            "required": Array [
+              "fullPandaName",
+            ],
+            "type": "object",
+          },
+        },
+      ],
     },
     Object {
       "classname": "FullComponent",

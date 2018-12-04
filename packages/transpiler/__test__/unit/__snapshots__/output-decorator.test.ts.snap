@@ -31,10 +31,7 @@ class NoOptionsComponent {
     // }
     >;
     @Event({ eventName: \\"bearer|SPONGE_BOB|no-options|farmerSaved\\" })
-    farmerSaved: EventEmitter<{
-        referenceId: string;
-        farmer: BearerRef<Farmer>;
-    }>;
+    farmerSaved: EventEmitter;
     @State()
     farmer: BearerRef<Farmer>;
     @Prop({ \\"mutable\\": true })
@@ -48,10 +45,7 @@ class NoOptionsComponent {
     }
     private milkWithAbottle: BearerFetch<BearerRef<Farmer>>;
     @Event({ eventName: \\"bearer|SPONGE_BOB|no-options|milked\\" })
-    milked: EventEmitter<{
-        aPandaKey: string;
-        farmerAndPanda: BearerRef<Farmer>;
-    }>;
+    milked: EventEmitter;
     @State()
     farmerAndPanda: BearerRef<Farmer> = {};
     @Prop({ \\"mutable\\": true })

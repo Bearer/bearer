@@ -13,7 +13,7 @@ export function runUnitOn(name: string, transpilerOptions: Partial<TranpilerOpti
   const buildDirectory = BuildUnitFixtureDirectory(name)
 
   beforeAll(() => {
-    runTranspiler(transpilerOptions)
+    runTranspiler('../../__fixtures__', transpilerOptions)
   })
 
   fs.readdirSync(srcDirectory).forEach(file => {
@@ -32,11 +32,11 @@ export function runUnitOn(name: string, transpilerOptions: Partial<TranpilerOpti
   })
 }
 
-export function runTranspiler(transpilerOptions: Partial<TranpilerOptions> = {}) {
+export function runTranspiler(srcFolder: string, transpilerOptions: Partial<TranpilerOptions> = {}) {
   const transpiler = TranspilerFactory({
     ...transpilerOptions,
     ROOT_DIRECTORY: fixtures,
-    srcFolder: '../../__fixtures__'
+    srcFolder
   })
 
   transpiler.run()
