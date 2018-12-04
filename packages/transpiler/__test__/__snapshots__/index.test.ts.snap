@@ -30,7 +30,7 @@ Object {
       ],
       "outputs": Array [
         Object {
-          "eventName": "bearer|SPONGE_BOB|AttachPullRequest|inlineDefinition",
+          "eventName": "bearer-SPONGE_BOB-AttachPullRequest-inlineDefinition",
           "name": "inlineDefinition",
           "payloadFormat": Object {
             "properties": Object {
@@ -72,7 +72,7 @@ Object {
           },
         },
         Object {
-          "eventName": "bearer|SPONGE_BOB|AttachPullRequest|feedPandaSaved",
+          "eventName": "bearer-SPONGE_BOB-AttachPullRequest-feedPandaSaved",
           "name": "feedPandaSaved",
           "payloadFormat": Object {
             "properties": Object {
@@ -97,7 +97,7 @@ Object {
           },
         },
         Object {
-          "eventName": "bearer|SPONGE_BOB|AttachPullRequest|spongeBobdSaved",
+          "eventName": "bearer-SPONGE_BOB-AttachPullRequest-spongeBobdSaved",
           "name": "spongeBobdSaved",
           "payloadFormat": Object {
             "properties": Object {
@@ -147,12 +147,12 @@ Object {
       ],
       "outputs": Array [
         Object {
-          "eventName": "bearer|SPONGE_BOB|complex-feature|mustBeScopedEvent",
+          "eventName": "bearer-SPONGE_BOB-complex-feature-mustBeScopedEvent",
           "name": "mustBeScopedEvent",
           "payloadFormat": "unspecified",
         },
         Object {
-          "eventName": "bearer|SPONGE_BOB|complex-feature|mustBeScopedEvent",
+          "eventName": "bearer-SPONGE_BOB-complex-feature-mustBeScopedEvent",
           "name": "mustBeScopedEvent",
           "payloadFormat": "unspecified",
         },
@@ -197,12 +197,12 @@ Object {
       ],
       "outputs": Array [
         Object {
-          "eventName": "bearer|SPONGE_BOB|feature|feed",
+          "eventName": "bearer-SPONGE_BOB-feature-feed",
           "name": "feed",
           "payloadFormat": "unspecified",
         },
         Object {
-          "eventName": "bearer|SPONGE_BOB|feature|keptAsIs",
+          "eventName": "bearer-SPONGE_BOB-feature-keptAsIs",
           "name": "keptAsIs",
           "payloadFormat": Object {
             "properties": Object {
@@ -228,7 +228,7 @@ Object {
           },
         },
         Object {
-          "eventName": "bearer|SPONGE_BOB|feature|pandaIsAnyfied",
+          "eventName": "bearer-SPONGE_BOB-feature-pandaIsAnyfied",
           "name": "pandaIsAnyfied",
           "payloadFormat": Object {
             "$schema": "http://json-schema.org/draft-07/schema#",
@@ -268,7 +268,7 @@ Object {
       ],
       "outputs": Array [
         Object {
-          "eventName": "bearer|SPONGE_BOB|no-options|farmerSaved",
+          "eventName": "bearer-SPONGE_BOB-no-options-farmerSaved",
           "name": "farmerSaved",
           "payloadFormat": Object {
             "properties": Object {
@@ -293,7 +293,7 @@ Object {
           },
         },
         Object {
-          "eventName": "bearer|SPONGE_BOB|no-options|milked",
+          "eventName": "bearer-SPONGE_BOB-no-options-milked",
           "name": "milked",
           "payloadFormat": Object {
             "properties": Object {
@@ -362,7 +362,7 @@ export class FullComponent {
     @State()
     ducks: Array<any>;
     private fetchResource: BearerFetch;
-    @Event({ eventName: \\"bearer|SPONGE_BOB|global|anEvent\\" })
+    @Event({ eventName: \\"bearer-SPONGE_BOB-global-anEvent\\" })
     anEvent: EventEmitter;
     screenRenderer = () => {
         return (<bearer-navigator-screen navigationTitle=\\"Last Screen\\" renderFunc={() => [<h1>Hello Partick</h1>]}/>);
@@ -450,7 +450,7 @@ Object {
       ],
       "outputs": Array [
         Object {
-          "eventName": "bearer|SPONGE_BOB|AttachPullRequest|inlineDefinition",
+          "eventName": "bearer-SPONGE_BOB-AttachPullRequest-inlineDefinition",
           "name": "inlineDefinition",
           "payloadFormat": Object {
             "properties": Object {
@@ -492,7 +492,7 @@ Object {
           },
         },
         Object {
-          "eventName": "bearer|SPONGE_BOB|AttachPullRequest|feedPandaSaved",
+          "eventName": "bearer-SPONGE_BOB-AttachPullRequest-feedPandaSaved",
           "name": "feedPandaSaved",
           "payloadFormat": Object {
             "properties": Object {
@@ -517,7 +517,7 @@ Object {
           },
         },
         Object {
-          "eventName": "bearer|SPONGE_BOB|AttachPullRequest|spongeBobdSaved",
+          "eventName": "bearer-SPONGE_BOB-AttachPullRequest-spongeBobdSaved",
           "name": "spongeBobdSaved",
           "payloadFormat": Object {
             "properties": Object {
@@ -567,12 +567,12 @@ Object {
       ],
       "outputs": Array [
         Object {
-          "eventName": "bearer|SPONGE_BOB|complex-feature|mustBeScopedEvent",
+          "eventName": "bearer-SPONGE_BOB-complex-feature-mustBeScopedEvent",
           "name": "mustBeScopedEvent",
           "payloadFormat": "unspecified",
         },
         Object {
-          "eventName": "bearer|SPONGE_BOB|complex-feature|mustBeScopedEvent",
+          "eventName": "bearer-SPONGE_BOB-complex-feature-mustBeScopedEvent",
           "name": "mustBeScopedEvent",
           "payloadFormat": "unspecified",
         },
@@ -617,12 +617,12 @@ Object {
       ],
       "outputs": Array [
         Object {
-          "eventName": "bearer|SPONGE_BOB|feature|feed",
+          "eventName": "bearer-SPONGE_BOB-feature-feed",
           "name": "feed",
           "payloadFormat": "unspecified",
         },
         Object {
-          "eventName": "bearer|SPONGE_BOB|feature|keptAsIs",
+          "eventName": "bearer-SPONGE_BOB-feature-keptAsIs",
           "name": "keptAsIs",
           "payloadFormat": Object {
             "properties": Object {
@@ -648,7 +648,7 @@ Object {
           },
         },
         Object {
-          "eventName": "bearer|SPONGE_BOB|feature|pandaIsAnyfied",
+          "eventName": "bearer-SPONGE_BOB-feature-pandaIsAnyfied",
           "name": "pandaIsAnyfied",
           "payloadFormat": Object {
             "$schema": "http://json-schema.org/draft-07/schema#",
@@ -688,7 +688,7 @@ Object {
       ],
       "outputs": Array [
         Object {
-          "eventName": "bearer|SPONGE_BOB|no-options|farmerSaved",
+          "eventName": "bearer-SPONGE_BOB-no-options-farmerSaved",
           "name": "farmerSaved",
           "payloadFormat": Object {
             "properties": Object {
@@ -713,7 +713,7 @@ Object {
           },
         },
         Object {
-          "eventName": "bearer|SPONGE_BOB|no-options|milked",
+          "eventName": "bearer-SPONGE_BOB-no-options-milked",
           "name": "milked",
           "payloadFormat": Object {
             "properties": Object {
@@ -787,7 +787,7 @@ export class AttachPullRequestAction {
     @State()
     ducks: Array<any>;
     private fetchResource: BearerFetch;
-    @Event({ eventName: \\"bearer|SPONGE_BOB|AttachPullRequest|inlineDefinition\\" })
+    @Event({ eventName: \\"bearer-SPONGE_BOB-AttachPullRequest-inlineDefinition\\" })
     inlineDefinition: EventEmitter;
     render() {
         return (<bearer-authorized scenarioId=\\"SPONGE_BOB\\">
@@ -796,7 +796,7 @@ export class AttachPullRequestAction {
     }
     @State()
     farmer: BearerRef<Farmer>;
-    @Listen(\\"body:bearer|SPONGE_BOB|AttachPullRequest|farmerSaved\\")
+    @Listen(\\"body:bearer-SPONGE_BOB-AttachPullRequest|farmerSaved\\")
     farmerRefIdChanged(event) {
         if (this.farmerRefId !== event.detail.referenceId) {
             this.farmerRefId = event.detail.referenceId;
@@ -827,7 +827,7 @@ export class AttachPullRequestAction {
         aNumber: number;
         panda: Panda;
     }>;
-    @Listen(\\"body:bearer|SPONGE_BOB|SCOPE|goatMilked\\")
+    @Listen(\\"body:bearer-SPONGE_BOB-SCOPE|goatMilked\\")
     goatIdChanged(event) {
         if (this.goatId !== event.detail.referenceId) {
             this.goatId = event.detail.referenceId;
@@ -857,7 +857,7 @@ export class AttachPullRequestAction {
     @Prop({ \\"mutable\\": true })
     goatId: string;
     private saveFeedPanda: BearerFetch<BearerRef<Panda>>;
-    @Event({ eventName: \\"bearer|SPONGE_BOB|AttachPullRequest|feedPandaSaved\\" })
+    @Event({ eventName: \\"bearer-SPONGE_BOB-AttachPullRequest-feedPandaSaved\\" })
     feedPandaSaved: EventEmitter;
     @State()
     feedPanda: BearerRef<Panda>;
@@ -873,7 +873,7 @@ export class AttachPullRequestAction {
     private manualIntentName: BearerFetch<BearerRef<{
         inlineName: string;
     }>>;
-    @Event({ eventName: \\"bearer|SPONGE_BOB|AttachPullRequest|spongeBobdSaved\\" })
+    @Event({ eventName: \\"bearer-SPONGE_BOB-AttachPullRequest-spongeBobdSaved\\" })
     spongeBobdSaved: EventEmitter;
     @State()
     shortPanda: BearerRef<{
@@ -962,7 +962,7 @@ Object {
       ],
       "outputs": Array [
         Object {
-          "eventName": "bearer|SPONGE_BOB|AttachPullRequest|inlineDefinition",
+          "eventName": "bearer-SPONGE_BOB-AttachPullRequest-inlineDefinition",
           "name": "inlineDefinition",
           "payloadFormat": Object {
             "properties": Object {
@@ -1004,7 +1004,7 @@ Object {
           },
         },
         Object {
-          "eventName": "bearer|SPONGE_BOB|AttachPullRequest|feedPandaSaved",
+          "eventName": "bearer-SPONGE_BOB-AttachPullRequest-feedPandaSaved",
           "name": "feedPandaSaved",
           "payloadFormat": Object {
             "properties": Object {
@@ -1029,7 +1029,7 @@ Object {
           },
         },
         Object {
-          "eventName": "bearer|SPONGE_BOB|AttachPullRequest|spongeBobdSaved",
+          "eventName": "bearer-SPONGE_BOB-AttachPullRequest-spongeBobdSaved",
           "name": "spongeBobdSaved",
           "payloadFormat": Object {
             "properties": Object {
@@ -1079,12 +1079,12 @@ Object {
       ],
       "outputs": Array [
         Object {
-          "eventName": "bearer|SPONGE_BOB|complex-feature|mustBeScopedEvent",
+          "eventName": "bearer-SPONGE_BOB-complex-feature-mustBeScopedEvent",
           "name": "mustBeScopedEvent",
           "payloadFormat": "unspecified",
         },
         Object {
-          "eventName": "bearer|SPONGE_BOB|complex-feature|mustBeScopedEvent",
+          "eventName": "bearer-SPONGE_BOB-complex-feature-mustBeScopedEvent",
           "name": "mustBeScopedEvent",
           "payloadFormat": "unspecified",
         },
@@ -1129,12 +1129,12 @@ Object {
       ],
       "outputs": Array [
         Object {
-          "eventName": "bearer|SPONGE_BOB|feature|feed",
+          "eventName": "bearer-SPONGE_BOB-feature-feed",
           "name": "feed",
           "payloadFormat": "unspecified",
         },
         Object {
-          "eventName": "bearer|SPONGE_BOB|feature|keptAsIs",
+          "eventName": "bearer-SPONGE_BOB-feature-keptAsIs",
           "name": "keptAsIs",
           "payloadFormat": Object {
             "properties": Object {
@@ -1160,7 +1160,7 @@ Object {
           },
         },
         Object {
-          "eventName": "bearer|SPONGE_BOB|feature|pandaIsAnyfied",
+          "eventName": "bearer-SPONGE_BOB-feature-pandaIsAnyfied",
           "name": "pandaIsAnyfied",
           "payloadFormat": Object {
             "$schema": "http://json-schema.org/draft-07/schema#",
@@ -1200,7 +1200,7 @@ Object {
       ],
       "outputs": Array [
         Object {
-          "eventName": "bearer|SPONGE_BOB|no-options|farmerSaved",
+          "eventName": "bearer-SPONGE_BOB-no-options-farmerSaved",
           "name": "farmerSaved",
           "payloadFormat": Object {
             "properties": Object {
@@ -1225,7 +1225,7 @@ Object {
           },
         },
         Object {
-          "eventName": "bearer|SPONGE_BOB|no-options|milked",
+          "eventName": "bearer-SPONGE_BOB-no-options-milked",
           "name": "milked",
           "payloadFormat": Object {
             "properties": Object {
@@ -1326,7 +1326,7 @@ Object {
       ],
       "outputs": Array [
         Object {
-          "eventName": "bearer|SPONGE_BOB|AttachPullRequest|inlineDefinition",
+          "eventName": "bearer-SPONGE_BOB-AttachPullRequest-inlineDefinition",
           "name": "inlineDefinition",
           "payloadFormat": Object {
             "properties": Object {
@@ -1368,7 +1368,7 @@ Object {
           },
         },
         Object {
-          "eventName": "bearer|SPONGE_BOB|AttachPullRequest|feedPandaSaved",
+          "eventName": "bearer-SPONGE_BOB-AttachPullRequest-feedPandaSaved",
           "name": "feedPandaSaved",
           "payloadFormat": Object {
             "properties": Object {
@@ -1393,7 +1393,7 @@ Object {
           },
         },
         Object {
-          "eventName": "bearer|SPONGE_BOB|AttachPullRequest|spongeBobdSaved",
+          "eventName": "bearer-SPONGE_BOB-AttachPullRequest-spongeBobdSaved",
           "name": "spongeBobdSaved",
           "payloadFormat": Object {
             "properties": Object {
@@ -1443,12 +1443,12 @@ Object {
       ],
       "outputs": Array [
         Object {
-          "eventName": "bearer|SPONGE_BOB|complex-feature|mustBeScopedEvent",
+          "eventName": "bearer-SPONGE_BOB-complex-feature-mustBeScopedEvent",
           "name": "mustBeScopedEvent",
           "payloadFormat": "unspecified",
         },
         Object {
-          "eventName": "bearer|SPONGE_BOB|complex-feature|mustBeScopedEvent",
+          "eventName": "bearer-SPONGE_BOB-complex-feature-mustBeScopedEvent",
           "name": "mustBeScopedEvent",
           "payloadFormat": "unspecified",
         },
@@ -1493,12 +1493,12 @@ Object {
       ],
       "outputs": Array [
         Object {
-          "eventName": "bearer|SPONGE_BOB|feature|feed",
+          "eventName": "bearer-SPONGE_BOB-feature-feed",
           "name": "feed",
           "payloadFormat": "unspecified",
         },
         Object {
-          "eventName": "bearer|SPONGE_BOB|feature|keptAsIs",
+          "eventName": "bearer-SPONGE_BOB-feature-keptAsIs",
           "name": "keptAsIs",
           "payloadFormat": Object {
             "properties": Object {
@@ -1524,7 +1524,7 @@ Object {
           },
         },
         Object {
-          "eventName": "bearer|SPONGE_BOB|feature|pandaIsAnyfied",
+          "eventName": "bearer-SPONGE_BOB-feature-pandaIsAnyfied",
           "name": "pandaIsAnyfied",
           "payloadFormat": Object {
             "$schema": "http://json-schema.org/draft-07/schema#",
@@ -1564,7 +1564,7 @@ Object {
       ],
       "outputs": Array [
         Object {
-          "eventName": "bearer|SPONGE_BOB|no-options|farmerSaved",
+          "eventName": "bearer-SPONGE_BOB-no-options-farmerSaved",
           "name": "farmerSaved",
           "payloadFormat": Object {
             "properties": Object {
@@ -1589,7 +1589,7 @@ Object {
           },
         },
         Object {
-          "eventName": "bearer|SPONGE_BOB|no-options|milked",
+          "eventName": "bearer-SPONGE_BOB-no-options-milked",
           "name": "milked",
           "payloadFormat": Object {
             "properties": Object {
@@ -1733,7 +1733,7 @@ Object {
       ],
       "outputs": Array [
         Object {
-          "eventName": "bearer|SPONGE_BOB|AttachPullRequest|inlineDefinition",
+          "eventName": "bearer-SPONGE_BOB-AttachPullRequest-inlineDefinition",
           "name": "inlineDefinition",
           "payloadFormat": Object {
             "properties": Object {
@@ -1775,7 +1775,7 @@ Object {
           },
         },
         Object {
-          "eventName": "bearer|SPONGE_BOB|AttachPullRequest|feedPandaSaved",
+          "eventName": "bearer-SPONGE_BOB-AttachPullRequest-feedPandaSaved",
           "name": "feedPandaSaved",
           "payloadFormat": Object {
             "properties": Object {
@@ -1800,7 +1800,7 @@ Object {
           },
         },
         Object {
-          "eventName": "bearer|SPONGE_BOB|AttachPullRequest|spongeBobdSaved",
+          "eventName": "bearer-SPONGE_BOB-AttachPullRequest-spongeBobdSaved",
           "name": "spongeBobdSaved",
           "payloadFormat": Object {
             "properties": Object {
@@ -1850,12 +1850,12 @@ Object {
       ],
       "outputs": Array [
         Object {
-          "eventName": "bearer|SPONGE_BOB|complex-feature|mustBeScopedEvent",
+          "eventName": "bearer-SPONGE_BOB-complex-feature-mustBeScopedEvent",
           "name": "mustBeScopedEvent",
           "payloadFormat": "unspecified",
         },
         Object {
-          "eventName": "bearer|SPONGE_BOB|complex-feature|mustBeScopedEvent",
+          "eventName": "bearer-SPONGE_BOB-complex-feature-mustBeScopedEvent",
           "name": "mustBeScopedEvent",
           "payloadFormat": "unspecified",
         },
@@ -1900,12 +1900,12 @@ Object {
       ],
       "outputs": Array [
         Object {
-          "eventName": "bearer|SPONGE_BOB|feature|feed",
+          "eventName": "bearer-SPONGE_BOB-feature-feed",
           "name": "feed",
           "payloadFormat": "unspecified",
         },
         Object {
-          "eventName": "bearer|SPONGE_BOB|feature|keptAsIs",
+          "eventName": "bearer-SPONGE_BOB-feature-keptAsIs",
           "name": "keptAsIs",
           "payloadFormat": Object {
             "properties": Object {
@@ -1931,7 +1931,7 @@ Object {
           },
         },
         Object {
-          "eventName": "bearer|SPONGE_BOB|feature|pandaIsAnyfied",
+          "eventName": "bearer-SPONGE_BOB-feature-pandaIsAnyfied",
           "name": "pandaIsAnyfied",
           "payloadFormat": Object {
             "$schema": "http://json-schema.org/draft-07/schema#",
@@ -1971,7 +1971,7 @@ Object {
       ],
       "outputs": Array [
         Object {
-          "eventName": "bearer|SPONGE_BOB|no-options|farmerSaved",
+          "eventName": "bearer-SPONGE_BOB-no-options-farmerSaved",
           "name": "farmerSaved",
           "payloadFormat": Object {
             "properties": Object {
@@ -1996,7 +1996,7 @@ Object {
           },
         },
         Object {
-          "eventName": "bearer|SPONGE_BOB|no-options|milked",
+          "eventName": "bearer-SPONGE_BOB-no-options-milked",
           "name": "milked",
           "payloadFormat": Object {
             "properties": Object {
@@ -2112,7 +2112,7 @@ Object {
       ],
       "outputs": Array [
         Object {
-          "eventName": "bearer|SPONGE_BOB|AttachPullRequest|inlineDefinition",
+          "eventName": "bearer-SPONGE_BOB-AttachPullRequest-inlineDefinition",
           "name": "inlineDefinition",
           "payloadFormat": Object {
             "properties": Object {
@@ -2154,7 +2154,7 @@ Object {
           },
         },
         Object {
-          "eventName": "bearer|SPONGE_BOB|AttachPullRequest|feedPandaSaved",
+          "eventName": "bearer-SPONGE_BOB-AttachPullRequest-feedPandaSaved",
           "name": "feedPandaSaved",
           "payloadFormat": Object {
             "properties": Object {
@@ -2179,7 +2179,7 @@ Object {
           },
         },
         Object {
-          "eventName": "bearer|SPONGE_BOB|AttachPullRequest|spongeBobdSaved",
+          "eventName": "bearer-SPONGE_BOB-AttachPullRequest-spongeBobdSaved",
           "name": "spongeBobdSaved",
           "payloadFormat": Object {
             "properties": Object {
@@ -2229,12 +2229,12 @@ Object {
       ],
       "outputs": Array [
         Object {
-          "eventName": "bearer|SPONGE_BOB|complex-feature|mustBeScopedEvent",
+          "eventName": "bearer-SPONGE_BOB-complex-feature-mustBeScopedEvent",
           "name": "mustBeScopedEvent",
           "payloadFormat": "unspecified",
         },
         Object {
-          "eventName": "bearer|SPONGE_BOB|complex-feature|mustBeScopedEvent",
+          "eventName": "bearer-SPONGE_BOB-complex-feature-mustBeScopedEvent",
           "name": "mustBeScopedEvent",
           "payloadFormat": "unspecified",
         },
@@ -2279,12 +2279,12 @@ Object {
       ],
       "outputs": Array [
         Object {
-          "eventName": "bearer|SPONGE_BOB|feature|feed",
+          "eventName": "bearer-SPONGE_BOB-feature-feed",
           "name": "feed",
           "payloadFormat": "unspecified",
         },
         Object {
-          "eventName": "bearer|SPONGE_BOB|feature|keptAsIs",
+          "eventName": "bearer-SPONGE_BOB-feature-keptAsIs",
           "name": "keptAsIs",
           "payloadFormat": Object {
             "properties": Object {
@@ -2310,7 +2310,7 @@ Object {
           },
         },
         Object {
-          "eventName": "bearer|SPONGE_BOB|feature|pandaIsAnyfied",
+          "eventName": "bearer-SPONGE_BOB-feature-pandaIsAnyfied",
           "name": "pandaIsAnyfied",
           "payloadFormat": Object {
             "$schema": "http://json-schema.org/draft-07/schema#",
@@ -2350,7 +2350,7 @@ Object {
       ],
       "outputs": Array [
         Object {
-          "eventName": "bearer|SPONGE_BOB|no-options|farmerSaved",
+          "eventName": "bearer-SPONGE_BOB-no-options-farmerSaved",
           "name": "farmerSaved",
           "payloadFormat": Object {
             "properties": Object {
@@ -2375,7 +2375,7 @@ Object {
           },
         },
         Object {
-          "eventName": "bearer|SPONGE_BOB|no-options|milked",
+          "eventName": "bearer-SPONGE_BOB-no-options-milked",
           "name": "milked",
           "payloadFormat": Object {
             "properties": Object {

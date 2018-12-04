@@ -16,16 +16,16 @@ type Panda = {
     shadow: true
 })
 export class Component {
-    @Event({ eventName: \\"bearer|SPONGE_BOB|feature|feed\\" })
+    @Event({ eventName: \\"bearer-SPONGE_BOB-feature-feed\\" })
     feed: EventEmitter;
     // TODO: Keep the type if it is used with prop or method: ex goat
     // note: keeping it aside until we really need it
-    @Event({ eventName: \\"bearer|SPONGE_BOB|feature|keptAsIs\\" })
+    @Event({ eventName: \\"bearer-SPONGE_BOB-feature-keptAsIs\\" })
     keptAsIs: EventEmitter;
     @Prop()
     goat: Goat;
     // transformed to any because isn't imported by Stencil later
-    @Event({ eventName: \\"bearer|SPONGE_BOB|feature|pandaIsAnyfied\\" })
+    @Event({ eventName: \\"bearer-SPONGE_BOB-feature-pandaIsAnyfied\\" })
     pandaIsAnyfied: EventEmitter;
     constructor() {
     }

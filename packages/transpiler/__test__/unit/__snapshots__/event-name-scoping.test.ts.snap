@@ -10,15 +10,15 @@ Object {
     shadow: true
 })
 export class FeatDisplayRootComponent {
-    @Event({ eventName: \\"bearer|SPONGE_BOB|complex-feature|mustBeScopedEvent\\" })
+    @Event({ eventName: \\"bearer-SPONGE_BOB-complex-feature-mustBeScopedEvent\\" })
     mustBeScopedEvent: EventEmitter;
-    @Event({ eventName: \\"bearer|SPONGE_BOB|complex-feature|mustBeScopedEvent\\" })
+    @Event({ eventName: \\"bearer-SPONGE_BOB-complex-feature-mustBeScopedEvent\\" })
     mustBeScopedEvent: EventEmitter;
-    @Listen(\\"bearer|SPONGE_BOB|config|saved\\")
+    @Listen(\\"bearer-SPONGE_BOB-config-saved\\")
     eventHandler() { }
-    @Listen(\\"body:bearer|SPONGE_BOB|eventFromAnotherRootComponent|saved\\")
+    @Listen(\\"body:bearer-SPONGE_BOB-eventFromAnotherRootComponent-saved\\")
     eventFromAnotherRootComponentHandler() { }
-    @Listen(\\"body:bearer|SPONGE_BOB|click\\")
+    @Listen(\\"body:bearer-SPONGE_BOB-click\\")
     clickHandler() { }
     constructor() {
     }
@@ -45,14 +45,14 @@ Object {
     tag: 'event'
 })
 export class SimpleComponent {
-    @Event({ eventName: \\"bearer|SPONGE_BOB|global|mustBeScopedEvent\\" })
+    @Event({ eventName: \\"bearer-SPONGE_BOB-global-mustBeScopedEvent\\" })
     mustBeScopedEvent: EventEmitter;
-    @Listen(\\"bearer|SPONGE_BOB|config|saved\\")
+    @Listen(\\"bearer-SPONGE_BOB-config-saved\\")
     eventHandler() { }
-    @Listen(\\"bearer|SPONGE_BOB|eventFromChildren\\")
+    @Listen(\\"bearer-SPONGE_BOB-eventFromChildren\\")
     eventFromChildrenHandler() { }
     // prevent Alice to listen on anything else than her scenario's events
-    @Listen(\\"body:bearer|SPONGE_BOB|click\\")
+    @Listen(\\"body:bearer-SPONGE_BOB-click\\")
     clickHandler() { }
     constructor() {
     }
