@@ -5,11 +5,11 @@ import { runTranspiler } from './utils/helpers'
 
 const fixtures = path.join(__dirname, '__fixtures__')
 const preFolder = path.join(fixtures, 'pre')
-const postFolder = path.join(fixtures, '../../.build/src/pre')
+const postFolder = path.join(fixtures, '../.build/src')
 
 describe('Transpiler integration test', () => {
   beforeAll(done => {
-    runTranspiler('../../__fixtures__')
+    runTranspiler('__fixtures__/pre')
     done()
   })
   fs.readdirSync(preFolder).forEach(file => {
@@ -34,7 +34,7 @@ describe('Transpiler integration test', () => {
       })
 
       it('has correct manifest generated', done => {
-        fs.readFile(path.join(postFolder, '../bearer-manifest.json'), 'utf8', (_e, postContent) => {
+        fs.readFile(path.join(postFolder, 'bearer-manifest.json'), 'utf8', (_e, postContent) => {
           const manifest = JSON.parse(postContent).manifest.components.map(({ outputs, inputs, classname }) => ({
             classname,
             inputs,

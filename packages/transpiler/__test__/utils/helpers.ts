@@ -1,26 +1,40 @@
 import * as fs from 'fs'
+import * as globby from 'globby'
 import * as path from 'path'
 
 import { TranpilerOptions } from '../../src/index'
-import { BuildUnitFixtureDirectory, UnitFixtureDirectory } from '../utils/location'
+import { UnitFixtureDirectory } from '../utils/location'
 
 import { TranspilerFactory } from './transpiler'
 
-const fixtures = path.join(__dirname, '__fixtures__')
+const ROOT_DIRECTORY = path.join(__dirname, '..')
+const buildSrcFolder = path.join(ROOT_DIRECTORY, '.build/src')
+
+export function cleanBuildFolder() {
+  const buildFolder = path.join(__dirname, '..', '.build/src')
+
+  globby.sync(['**/*.tsx', '**/*.ts', '**/*.json'], { cwd: buildFolder }).forEach(file => {
+    const filePath = path.join(buildFolder, file)
+    if (fs.existsSync(filePath)) {
+      fs.unlinkSync(filePath)
+    }
+  })
+}
 
 export function runUnitOn(name: string, transpilerOptions: Partial<TranpilerOptions> = {}) {
   const srcDirectory = UnitFixtureDirectory(name)
-  const buildDirectory = BuildUnitFixtureDirectory(name)
 
   beforeAll(() => {
-    runTranspiler('../../__fixtures__', transpilerOptions)
+    cleanBuildFolder()
+    runTranspiler(`__fixtures__/unit/${name}`, transpilerOptions)
   })
 
   fs.readdirSync(srcDirectory).forEach(file => {
     describe(file.replace(/\.tsx?/, '').replace(/\-/g, ' '), () => {
       it('match snapshot', async done => {
         expect.assertions(1)
-        fs.readFile(path.join(buildDirectory, file), 'utf8', (_e, postContent) => {
+        const filePath = path.join(buildSrcFolder, file)
+        fs.readFile(filePath, 'utf8', (_e, postContent) => {
           expect({
             postContent,
             file
@@ -34,9 +48,10 @@ export function runUnitOn(name: string, transpilerOptions: Partial<TranpilerOpti
 
 export function runTranspiler(srcFolder: string, transpilerOptions: Partial<TranpilerOptions> = {}) {
   const transpiler = TranspilerFactory({
-    ...transpilerOptions,
-    ROOT_DIRECTORY: fixtures,
-    srcFolder
+    buildFolder: '.build',
+    srcFolder,
+    ROOT_DIRECTORY,
+    ...transpilerOptions
   })
 
   transpiler.run()

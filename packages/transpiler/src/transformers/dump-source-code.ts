@@ -12,7 +12,7 @@ export default function dumpSourceCode(
 ): ts.TransformerFactory<ts.SourceFile> {
   return _transformContext => {
     return tsSourceFile => {
-      let outPath = tsSourceFile.fileName
+      const outPath = tsSourceFile.fileName
         .replace(srcDirectory, buildDirectory)
         .replace(/js$/, 'ts')
         .replace(/jsx$/, 'tsx')
