@@ -10,7 +10,6 @@ const config = ts.readConfigFile(path.join(__dirname, '../../templates/start', '
 const NON_INTENT_NAMES = ['DBClient']
 const INTENT_NAMES = Object.keys(intents).filter(intentName => !NON_INTENT_NAMES.includes(intentName))
 const INTENT_TYPE_IDENTIFIER = 'intentType'
-const INTENT_NAME_IDENTIFIER = 'intentName'
 const FUNCTION_NAME_IDENTIFIER = 'action'
 
 let intentEntries: Array<IIntentEntry> = []
@@ -60,7 +59,11 @@ function getDefinition(tsType: ts.TypeNode, generator: TJS.JsonSchemaGenerator):
 }
 
 class IntentNodeAdapter implements IIntentEntry {
-  constructor(private readonly node: ts.ClassDeclaration, private readonly generator: TJS.JsonSchemaGenerator) {}
+  constructor(
+    readonly intentName: string,
+    private readonly node: ts.ClassDeclaration,
+    private readonly generator: TJS.JsonSchemaGenerator
+  ) {}
 
   get intentClassName() {
     return getIdentifier(this.node).escapedText.toString()
@@ -68,10 +71,6 @@ class IntentNodeAdapter implements IIntentEntry {
 
   get intentType() {
     return getPropertyValue(this.node, INTENT_TYPE_IDENTIFIER)
-  }
-
-  get intentName() {
-    return getPropertyValue(this.node, INTENT_NAME_IDENTIFIER)
   }
 
   get paramsSchema() {
@@ -126,13 +125,19 @@ class IntentNodeAdapter implements IIntentEntry {
 
 export function isIntentClass(tsNode: ts.Node): boolean {
   const isClass = ts.isClassDeclaration(tsNode) && tsNode.name
-
+  if (!isClass) {
+    return false
+  }
   const intentTypeValue = getPropertyValue(tsNode as ts.ClassDeclaration, INTENT_TYPE_IDENTIFIER)
-  return !!isClass && INTENT_NAMES.includes(intentTypeValue)
+  return INTENT_NAMES.includes(intentTypeValue)
 }
 
 export function getIdentifier(tsNode: ts.ClassDeclaration | ts.PropertyDeclaration): ts.Identifier {
   return tsNode.name as ts.Identifier
+}
+
+export function getIntentName(tsSourceFile: ts.SourceFile): string {
+  return path.basename(tsSourceFile.fileName).split('.')[0]
 }
 
 export function getPropertyValue(tsNode: ts.ClassDeclaration, propertyName: string): any {
@@ -172,14 +177,14 @@ function getFunctionParameterType(
 
 export function transformer(generator: TJS.JsonSchemaGenerator): ts.TransformerFactory<ts.SourceFile> {
   return (context: ts.TransformationContext) => {
-    function visit(tsNode: ts.Node) {
-      if (isIntentClass(tsNode)) {
-        const adapter = new IntentNodeAdapter(tsNode as ts.ClassDeclaration, generator)
-        intentEntries.push(adapter.adapt)
-      }
-      return tsNode
-    }
     return (tsSourceFile: ts.SourceFile) => {
+      function visit(tsNode: ts.Node) {
+        if (isIntentClass(tsNode)) {
+          const adapter = new IntentNodeAdapter(getIntentName(tsSourceFile), tsNode as ts.ClassDeclaration, generator)
+          intentEntries.push(adapter.adapt)
+        }
+        return tsNode
+      }
       return ts.visitEachChild(tsSourceFile, visit, context)
     }
   }

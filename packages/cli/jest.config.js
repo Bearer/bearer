@@ -1,12 +1,18 @@
 module.exports = {
-  testEnvironment: 'node',
-  transform: {
-    '^.+\\.tsx?$': 'ts-jest'
-  },
-  testRegex: '(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$',
-  moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
   automock: false,
   coveragePathIgnorePatterns: ['<rootDir>/node_modules', '<rootDir>/test'],
-  testPathIgnorePatterns: ['/node_modules/', '<rootDir>/templates', '/.bearer/', '<rootDir>/src', '<rootDir>/lib'],
-  setupFiles: ['<rootDir>/test/setup.js']
+  moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
+  setupFiles: ['<rootDir>/test/setup.js'],
+  testEnvironment: 'node',
+  testPathIgnorePatterns: [
+    '/node_modules/',
+    '<rootDir>/templates',
+    '/.bearer/',
+    '<rootDir>/src/commands/generate/spec.ts',
+    '<rootDir>/lib'
+  ],
+  testRegex: '(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$',
+  transform: {
+    '^.+\\.tsx?$': 'ts-jest'
+  }
 }

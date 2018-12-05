@@ -8,7 +8,6 @@ type TFetchDataCallback = (p: any) => void
 export class ObjectLiteralParamsClass {
   // @ts-ignore
   static intentType = RetrieveState
-  static intentName = 'ObjectLiteralParams'
 
   static action(
     context: TOAUTH2AuthContext,

@@ -18,7 +18,7 @@ describe('generators', () => {
     })
 
     it('has object literal params required', () => {
-      const paramsSchema = result.paths[`/123-test/ObjectLiteralParams`].post.parameters.find(
+      const paramsSchema = result.paths[`/123-test/object-literal-type`].post.parameters.find(
         p => p.name === 'inlineParam'
       )
       expect(paramsSchema).toBeTruthy()
@@ -32,7 +32,7 @@ describe('generators', () => {
     })
 
     it('has object literal params optional', () => {
-      const optionalParam = result.paths[`/123-test/ObjectLiteralParams`].post.parameters.find(
+      const optionalParam = result.paths[`/123-test/object-literal-type`].post.parameters.find(
         p => p.name === 'optional'
       )
       expect(optionalParam).toMatchObject({
@@ -45,9 +45,7 @@ describe('generators', () => {
     })
 
     it('has aliased type params', () => {
-      const paramsSchema = result.paths[`/123-test/TypeAliasParams`].post.parameters.find(
-        p => p.name === 'aliasedParams'
-      )
+      const paramsSchema = result.paths[`/123-test/type-alias`].post.parameters.find(p => p.name === 'aliasedParams')
       expect(paramsSchema).toBeTruthy()
       expect(paramsSchema).toMatchObject({
         description: 'aliasedParams',
