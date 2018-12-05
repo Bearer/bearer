@@ -73,29 +73,30 @@ Sometimes you need to test locally your changes before publishing anything. Here
 
 **CLI**
 
-Because npm/yarn link behaviours can be really annoying, if you switch multiple time a day between local and distribution version for instance, we recommand this process.
+- Let's link and build the CLI
 
-- Start local watcher (automatically rebuild) CLI (because rewritten with TS)
-
-```bash
+```
 cd packages/cli
+yarn link
 yarn build -w # starts TS compiler with watch mode enabled
 ```
 
-at this point you can use the CLI as follow
+- then within your scenario
 
-```bash
-/path/bearer/repo/packages/cli/lib/bin/index.js start # or whatever bearer command you want
+```
+yarn link @bearer/cli
+yarn bearer start # will use the local version you previously linked
 ```
 
-Additional tip
+At this point you are using your local cli build.
+
+if you want to generate a new scenario from you local build then you can run
 
 ```bash
-echo 'alias bl="/path/bearer/bearer/packages/cli/lib/bin/index.js"' >> ~/.zshrc # or .bashrc or everything else you use
-
-# within a scenario
-bl start
+/path/bearer/repo/packages/cli/lib/bin/index.js new ScenarioName
 ```
+
+
 
 **Other packages**
 
