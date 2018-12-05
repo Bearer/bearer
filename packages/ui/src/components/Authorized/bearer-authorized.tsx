@@ -3,7 +3,7 @@ import { Component, Method, Prop, State } from '@bearer/core'
 import { AuthenticationListener } from '../../utils/withAuthentication'
 
 export type FWithAuthenticate = (params: { authenticate(): Promise<boolean> }) => any
-export type FWithRevoke = (params: { revoke(): void }) => any
+export type FWithRevoke = (params: { revoke(): Promise<boolean> }) => any
 
 // TODO: scope  authenticatePromise per scenario/setup
 // @WithAuthentication()
@@ -11,11 +11,14 @@ export type FWithRevoke = (params: { revoke(): void }) => any
   tag: 'bearer-authorized'
 })
 export class BearerAuthorized extends AuthenticationListener {
+  get SCENARIO_ID(): string {
+    return this.scenarioId
+  }
   @State()
   isAuthorized: boolean | null = null
 
   @State()
-  sessionInitialized: boolean = false
+  sessionInitialized = false
 
   @Prop()
   renderUnauthorized: FWithAuthenticate
@@ -29,10 +32,6 @@ export class BearerAuthorized extends AuthenticationListener {
   @Prop()
   scenarioId: string
 
-  get SCENARIO_ID(): string {
-    return this.scenarioId
-  }
-
   private pendingAuthorizationResolve: (authorize: boolean) => void
   private pendingAuthorizationReject: (authorize: boolean) => void
 
@@ -42,6 +41,7 @@ export class BearerAuthorized extends AuthenticationListener {
     if (this.pendingAuthorizationResolve) {
       this.pendingAuthorizationResolve(true)
     }
+    this.resetPendingPromises()
   }
 
   onRevoked = () => {
@@ -50,6 +50,7 @@ export class BearerAuthorized extends AuthenticationListener {
     if (this.pendingAuthorizationReject) {
       this.pendingAuthorizationReject(false)
     }
+    this.resetPendingPromises()
   }
 
   onSessionInitialized = () => {
@@ -96,5 +97,10 @@ export class BearerAuthorized extends AuthenticationListener {
         : 'Unauthorized'
     }
     return this.renderAuthorized ? this.renderAuthorized({ revoke: this.revokePromise }) : <slot />
+  }
+
+  private resetPendingPromises = () => {
+    this.pendingAuthorizationResolve = null
+    this.pendingAuthorizationReject = null
   }
 }
