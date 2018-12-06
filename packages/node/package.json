@@ -1,0 +1,45 @@
+{
+  "name": "@bearer/node",
+  "version": "0.74.3",
+  "description": "Bearer platform bindings",
+  "keywords": [
+    "node",
+    "express",
+    "bearer"
+  ],
+  "author": "Bearer Team<engineering@bearer.sh>",
+  "homepage": "https://github.com/Bearer/bearer#readme",
+  "license": "MIT",
+  "main": "lib/index.js",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "lib/"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Bearer/bearer.git"
+  },
+  "scripts": {
+    "build": "tsc",
+    "clean": "rm -rf lib",
+    "prepack": "yarn clean && yarn build",
+    "test": "jest",
+    "test:ci": "jest --coverage"
+  },
+  "bugs": {
+    "url": "https://github.com/Bearer/bearer/issues"
+  },
+  "devDependencies": {
+    "@types/jest": "^23.3.10",
+    "nock": "^10.0.3",
+    "ts-jest": "^23.10.5",
+    "typescript": "^3.2.1"
+  },
+  "dependencies": {
+    "axios": "^0.18.0",
+    "express": "^4.16.4"
+  }
+}
