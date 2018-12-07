@@ -80,7 +80,7 @@ export type TOutputDecoratorOptions = {
  * Ouput decorator
  * @example
  * ```typescript
- * @Ouput() goat: BearerRef<Goat>
+ * @Ouput() goat: Goat
  * ```
  */
 
