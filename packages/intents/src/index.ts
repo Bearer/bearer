@@ -69,7 +69,7 @@ export class SaveState extends StateIntentBase {
                 bodyFromEvent(event),
                 state,
                 (result: { state: any; data: any }) => {
-                  if (savedState) {
+                  if (savedState || referenceId) {
                     dbClient
                       .updateData(referenceId, result.state)
                       .then(() => {
