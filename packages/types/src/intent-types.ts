@@ -5,11 +5,11 @@ export enum IntentType {
    */
   FetchData = 'FetchData',
   /**
-   * Let you store data easily data to the Bearer database
+   * Lets you store data easily data to the Bearer database
    */
   SaveState = 'SaveState',
   /**
-   * Let you store retrieve easily data from the Bearer database
+   * Lets you retrieve data from the Bearer database
    */
   RetrieveState = 'RetrieveState'
 }

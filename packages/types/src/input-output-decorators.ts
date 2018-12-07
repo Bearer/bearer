@@ -3,11 +3,11 @@
  */
 export type TInputDecoratorOptions = {
   /**
-   * Allow to listen from a different group
+   * Listen to a different RootComponent group
    */
   group: string
   /**
-   * Name of the property to create for the component
+   * Name of the property for the component
    * default: [propName]RefId
    */
   propertyReferenceIdName: string
@@ -21,11 +21,11 @@ export type TInputDecoratorOptions = {
    */
   intentReferenceIdKeyName: string
   /**
-   * Intent to use to retrieve data from
+   * Intent to retrieve data from
    */
   intentName: string
   /**
-   * Autoload data when component mount.
+   * Autoload data when component mounted
    * default: true
    */
   autoLoad: boolean
