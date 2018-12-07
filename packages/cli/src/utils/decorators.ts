@@ -94,7 +94,7 @@ async function refreshMyToken(command: TCommand): Promise<boolean | Error> {
       throw new UnauthorizedRefreshTokenError()
     }
     default: {
-      throw new UnexpectedRefreshTokenError(body)
+      throw new UnexpectedRefreshTokenError(JSON.stringify(body, undefined, 2))
     }
   }
 }
