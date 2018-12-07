@@ -10,6 +10,7 @@
   Uncomment the ones concerned
 - @bearer/cli
 - @bearer/core
+- create-bearer
 - @bearer/intents
 - @bearer/legacy-cli
 - @bearer/templates
@@ -32,14 +33,13 @@
 
 **After**
 
-## 🐺 Related trello card
+## 🐺 Links
 
-- [ ] Yes <!--  If yes, then please attach trello card in trello by using power ups -->
-- [ ] No
+<!--  Add any useful links, JIRA links, docs etc... -->
 
 ## 🛠 How to test it
 
-<!-- Provide any helpful for reviewers to test your changes -->
+<!-- Provide any helpful information to help reviewer test you changes -->
 
 ## ✅ Checklist
 

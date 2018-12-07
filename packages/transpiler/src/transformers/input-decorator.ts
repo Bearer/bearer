@@ -7,10 +7,11 @@ import * as ts from 'typescript'
 import { Decorators, Properties } from '../constants'
 import { extractBooleanOptions, extractStringOptions, getDecoratorNamed } from '../helpers/decorator-helpers'
 import { getNodeName } from '../helpers/node-helpers'
+import { capitalize } from '../helpers/string'
 import { TransformerOptions } from '../types'
 
 import { createOrUpdateComponentDidLoad, ensureImportsFromCore } from './bearer'
-import { outputEventName } from './output-decorator'
+import { outputEventName, refIdName } from './output-decorator'
 
 export default function InputDecorator({ metadata }: TransformerOptions = {}): ts.TransformerFactory<ts.SourceFile> {
   return _transformContext => {
@@ -45,20 +46,19 @@ export default function InputDecorator({ metadata }: TransformerOptions = {}): t
           if (decorator) {
             const options = extractInputOptions(decorator)
             const name = getNodeName(tsNode)
-            const capitalizedName = name.charAt(0).toUpperCase() + name.slice(1)
             const component = metadata.findComponentFrom(sourcefile)
             inputs.push({
               propDeclarationName: name,
               group: component.group,
-              propName: `${name}RefId`,
+              propertyReferenceIdName: refIdName(name),
               eventName: outputEventName(name),
-              intentName: `get${capitalizedName}`,
-              intentMethodName: `fetcherGet${capitalizedName}`, // TODO: retrieve from options
+              intentName: retrieveIntentName(name),
+              intentMethodName: retrieveFetcherName(name), // TODO: retrieve from options
               autoLoad: true,
-              loadMethodName: `_load${capitalizedName}`,
+              loadMethodName: _loadName(name),
               typeIdentifier: tsNode.type,
               intializer: tsNode.initializer,
-              watcherName: `_watch${capitalizedName}`,
+              watcherName: _watchName(name),
               intentReferenceIdKeyName: Properties.ReferenceId,
               ...options
             })
@@ -77,7 +77,12 @@ export default function InputDecorator({ metadata }: TransformerOptions = {}): t
       return !callArgs
         ? {}
         : {
-            ...extractStringOptions<TInputDecoratorOptions>(callArgs, ['group', 'eventName', 'intentName', 'propName']),
+            ...extractStringOptions<TInputDecoratorOptions>(callArgs, [
+              'group',
+              'eventName',
+              'intentName',
+              'propertyReferenceIdName'
+            ]),
             ...extractBooleanOptions<TInputDecoratorOptions>(callArgs, ['autoLoad'])
           }
     }
@@ -89,12 +94,16 @@ export default function InputDecorator({ metadata }: TransformerOptions = {}): t
           // create @State()
           const inputMembers = [
             createLocalStateProperty(meta),
-            createRefIdProp(meta),
             createEventListener(meta),
             createLoadResourceMethod(meta),
             createFetcher(meta),
             createRefIdWatcher(meta)
           ]
+          if (
+            !classNode.members.find(m => ts.isPropertyDeclaration(m) && getNodeName(m) === meta.propertyReferenceIdName)
+          ) {
+            inputMembers.push(createRefIdProp(meta))
+          }
           return members.concat(inputMembers)
         },
         [...classNode.members]
@@ -117,7 +126,7 @@ export default function InputDecorator({ metadata }: TransformerOptions = {}): t
           ts.updateBlock(block, [
             ...block.statements,
             ts.createIf(
-              ts.createPropertyAccess(ts.createThis(), meta.propName),
+              ts.createPropertyAccess(ts.createThis(), meta.propertyReferenceIdName),
               ts.createBlock([createLoadDataCall(meta)])
             )
           ])
@@ -162,7 +171,7 @@ function createRefIdProp(meta: InputMeta) {
       )
     ],
     undefined,
-    ts.createIdentifier(meta.propName),
+    ts.createIdentifier(meta.propertyReferenceIdName),
     undefined,
     ts.createKeywordTypeNode(ts.SyntaxKind.StringKeyword),
     undefined
@@ -172,7 +181,7 @@ function createRefIdProp(meta: InputMeta) {
 // This will make the prop change when an event is triggered
 function createEventListener(meta: InputMeta) {
   const referenceIdIdentifier = ts.createIdentifier('event.detail.referenceId')
-  const propAccessIdentifier = ts.createPropertyAccess(ts.createThis(), meta.propName)
+  const propAccessIdentifier = ts.createPropertyAccess(ts.createThis(), meta.propertyReferenceIdName)
   return ts.createMethod(
     [
       ts.createDecorator(
@@ -183,7 +192,7 @@ function createEventListener(meta: InputMeta) {
     ],
     undefined,
     undefined,
-    `${meta.propName}Changed`,
+    `${meta.propertyReferenceIdName}Changed`,
     undefined,
     undefined,
     [ts.createParameter(undefined, undefined, undefined, ts.createIdentifier('event'), undefined, undefined)],
@@ -195,7 +204,9 @@ function createEventListener(meta: InputMeta) {
         //} else { this.loadData()}
         ts.createIf(
           ts.createBinary(propAccessIdentifier, ts.SyntaxKind.ExclamationEqualsEqualsToken, referenceIdIdentifier),
-          ts.createStatement(ts.createBinary(propAccessIdentifier, ts.SyntaxKind.EqualsToken, referenceIdIdentifier)),
+          ts.createBlock([
+            ts.createStatement(ts.createBinary(propAccessIdentifier, ts.SyntaxKind.EqualsToken, referenceIdIdentifier))
+          ]),
           ts.createBlock([createLoadDataCall(meta)])
         )
       ],
@@ -209,7 +220,7 @@ function createLoadResourceMethod(meta: InputMeta) {
     ts.createObjectLiteral([
       ts.createPropertyAssignment(
         meta.intentReferenceIdKeyName,
-        ts.createPropertyAccess(ts.createThis(), meta.propName)
+        ts.createPropertyAccess(ts.createThis(), meta.propertyReferenceIdName)
       )
     ])
   ])
@@ -276,17 +287,21 @@ function createFetcher(meta: InputMeta) {
     undefined
   )
 }
+
 function createLoadDataCall(meta: InputMeta) {
   return ts.createStatement(
     ts.createCall(ts.createPropertyAccess(ts.createThis(), meta.loadMethodName), undefined, undefined)
   )
 }
+
 function createRefIdWatcher(meta: InputMeta) {
   const newValueName = 'newValueName'
   return ts.createMethod(
     [
       ts.createDecorator(
-        ts.createCall(ts.createIdentifier(Decorators.Watch), undefined, [ts.createLiteral(meta.propName)])
+        ts.createCall(ts.createIdentifier(Decorators.Watch), undefined, [
+          ts.createLiteral(meta.propertyReferenceIdName)
+        ])
       )
     ],
     undefined,
@@ -311,6 +326,22 @@ function createRefIdWatcher(meta: InputMeta) {
       true
     )
   )
+}
+
+export function retrieveIntentName(name: string): string {
+  return `retrieve${capitalize(name)}`
+}
+
+function retrieveFetcherName(name: string): string {
+  return `fetcherRetrieve${capitalize(name)}`
+}
+
+function _loadName(name: string): string {
+  return `_load${capitalize(name)}`
+}
+
+function _watchName(name: string): string {
+  return `_watch${capitalize(name)}`
 }
 
 type InputMeta = TInputDecoratorOptions & {

@@ -7,6 +7,7 @@ import * as ts from 'typescript'
 import { Decorators, Properties, Types } from '../constants'
 import { extractStringOptions, getDecoratorNamed } from '../helpers/decorator-helpers'
 import { getNodeName } from '../helpers/node-helpers'
+import { capitalize } from '../helpers/string'
 import { TransformerOptions } from '../types'
 
 import { ensureImportsFromCore } from './bearer'
@@ -59,10 +60,10 @@ export default function OutputDecorator(_options: TransformerOptions = {}): ts.T
                 ])
             outputs.push({
               eventName: outputEventName(name),
-              intentName: `save${capitalize(name)}`,
+              intentName: saveIntentName(name),
               intentPropertyName: name,
               propDeclarationName: name,
-              propDeclarationNameRefId: `${name}RefId`,
+              propDeclarationNameRefId: refIdName(name),
               intentReferenceIdKeyName: Properties.ReferenceId,
               typeIdentifier: tsNode.type,
               initializer: tsNode.initializer,
@@ -93,7 +94,13 @@ export default function OutputDecorator(_options: TransformerOptions = {}): ts.T
 function injectOuputStatements(tsClass: ts.ClassDeclaration, outputsMeta: Array<OutputMeta>): ts.ClassDeclaration {
   const newMembers = outputsMeta.reduce(
     (members, meta) => {
-      const inputMembers = [createIntent(meta), createEvent(meta), ...createStates(meta), ...createWatchers(meta)]
+      const inputMembers = [
+        createIntent(meta),
+        createEvent(meta),
+        createState(meta),
+        createProp(meta),
+        ...createWatchers(meta)
+      ]
       return members.concat(inputMembers)
     },
     [...tsClass.members]
@@ -124,33 +131,50 @@ function createEvent(meta: OutputMeta): ts.PropertyDeclaration {
     meta.eventName,
     undefined,
     ts.createTypeReferenceNode(ts.createIdentifier(Types.EventEmitter), [
-      ts.createKeywordTypeNode(ts.SyntaxKind.AnyKeyword)
+      ts.createTypeLiteralNode([
+        ts.createPropertySignature(
+          undefined,
+          meta.referenceKeyName,
+          undefined,
+          ts.createKeywordTypeNode(ts.SyntaxKind.StringKeyword),
+          undefined
+        ),
+        ts.createPropertySignature(undefined, meta.propDeclarationName, undefined, meta.typeIdentifier, undefined)
+      ])
     ]),
     undefined
   )
 }
 
-function createStates(meta: OutputMeta): ts.PropertyDeclaration[] {
-  return [
-    // @State() propDeclarationName: Type = initiailizer
-    ts.createProperty(
-      [ts.createDecorator(ts.createCall(ts.createIdentifier(Decorators.State), undefined, []))],
-      undefined,
-      meta.propDeclarationName,
-      undefined,
-      meta.typeIdentifier,
-      meta.initializer
-    ),
-    // @State() propDeclarationNameRefId: Type = initiailizer
-    ts.createProperty(
-      [ts.createDecorator(ts.createCall(ts.createIdentifier(Decorators.State), undefined, []))],
-      undefined,
-      meta.propDeclarationNameRefId,
-      undefined,
-      ts.createKeywordTypeNode(ts.SyntaxKind.StringKeyword),
-      undefined
-    )
-  ]
+// This would let developer use passed reference
+// @Prop({ mutable: true }) propDeclarationNameRefId: string
+function createProp(meta: OutputMeta): ts.PropertyDeclaration {
+  return ts.createProperty(
+    [
+      ts.createDecorator(
+        ts.createCall(ts.createIdentifier(Decorators.Prop), undefined, [
+          ts.createObjectLiteral([ts.createPropertyAssignment(ts.createLiteral('mutable'), ts.createTrue())])
+        ])
+      )
+    ],
+    undefined,
+    meta.propDeclarationNameRefId,
+    undefined,
+    ts.createKeywordTypeNode(ts.SyntaxKind.StringKeyword),
+    undefined
+  )
+}
+
+function createState(meta: OutputMeta): ts.PropertyDeclaration {
+  // @State() propDeclarationName: Type = initiailizer
+  return ts.createProperty(
+    [ts.createDecorator(ts.createCall(ts.createIdentifier(Decorators.State), undefined, []))],
+    undefined,
+    meta.propDeclarationName,
+    undefined,
+    meta.typeIdentifier,
+    meta.initializer
+  )
 }
 
 function createWatchers(meta: OutputMeta): ts.MethodDeclaration[] {
@@ -170,22 +194,7 @@ function createWatchers(meta: OutputMeta): ts.MethodDeclaration[] {
       undefined,
       [ts.createParameter(undefined, undefined, undefined, newValue, undefined, undefined, undefined)], // parameters
       undefined,
-      ts.createBlock(
-        [
-          ts.createIf(
-            ts.createIdentifier(newValue),
-            ts.createBlock([ts.createStatement(createIntentCall(meta))], true),
-            ts.createBlock([
-              ts.createStatement(
-                createEmitCall(meta, [
-                  ts.createPropertyAssignment(meta.propDeclarationName, ts.createIdentifier(newValue))
-                ])
-              )
-            ])
-          )
-        ],
-        true
-      )
+      ts.createBlock([ts.createStatement(createIntentCall(meta))], true)
     )
   ]
 }
@@ -208,8 +217,6 @@ function createIntent(meta: OutputMeta): ts.PropertyDeclaration {
 }
 
 function createIntentCall(meta: OutputMeta) {
-  const referenceIdIdentifier = Properties.ReferenceId
-
   const newValueInitializer = ts.createBinary(
     ts.createIdentifier(data),
     ts.createToken(ts.SyntaxKind.BarBarToken),
@@ -217,7 +224,7 @@ function createIntentCall(meta: OutputMeta) {
   )
   // TODO use referenceKeyName
   const emit = createEmitCall(meta, [
-    ts.createShorthandPropertyAssignment(referenceIdIdentifier),
+    ts.createShorthandPropertyAssignment(meta.referenceKeyName),
     ts.createPropertyAssignment(meta.propDeclarationName, newValueInitializer)
   ])
 
@@ -251,7 +258,12 @@ function createIntentCall(meta: OutputMeta) {
             undefined,
             undefined,
             ts.createObjectBindingPattern([
-              ts.createBindingElement(undefined, undefined, Properties.ReferenceId, undefined),
+              ts.createBindingElement(
+                undefined,
+                meta.referenceKeyName !== Properties.ReferenceId ? Properties.ReferenceId : undefined,
+                meta.referenceKeyName,
+                undefined
+              ),
               ts.createBindingElement(undefined, undefined, data, undefined)
             ]),
             undefined,
@@ -268,7 +280,7 @@ function createIntentCall(meta: OutputMeta) {
               ts.createBinary(
                 ts.createPropertyAccess(ts.createThis(), meta.propDeclarationNameRefId),
                 ts.SyntaxKind.EqualsToken,
-                ts.createIdentifier(referenceIdIdentifier)
+                ts.createIdentifier(meta.referenceKeyName)
               )
             )
           ],
@@ -287,13 +299,17 @@ function createEmitCall(meta: OutputMeta, properties: Array<ts.ObjectLiteralElem
   )
 }
 
+export function refIdName(name: string): string {
+  return `${name}RefId`
+}
+
+export function saveIntentName(name: string): string {
+  return `save${capitalize(name)}`
+}
+
 export function outputEventName(prefix: string, suffix?: string): string {
   const _suffix = suffix || 'Saved'
   return `${prefix}${capitalize(_suffix)}`
-}
-
-function capitalize(string: string): string {
-  return string.charAt(0).toUpperCase() + string.slice(1)
 }
 
 type OutputMeta = TOutputDecoratorOptions & {

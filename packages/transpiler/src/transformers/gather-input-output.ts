@@ -21,25 +21,56 @@ export default function GatherMetadata({
     }
   }
 
-  function propInitializerAsJson(tsType: ts.TypeReferenceNode): TOuputFormat {
-    if (!tsType || !tsType.typeArguments || !Boolean(tsType.typeArguments.length) || !generator) {
-      return UNSPECIFIED
-    }
-    const typeArgument = tsType.typeArguments[0]
-
-    switch (typeArgument.kind) {
+  function getDefinition(type: ts.TypeNode): TOuputFormat {
+    switch (type.kind) {
       case ts.SyntaxKind.TypeReference:
-        return generator.getSchemaForSymbol(typeArgument.getText()) as any
-      case ts.SyntaxKind.TypeLiteral:
-        return { type: 'object' } as any
+        try {
+          return generator.getSchemaForSymbol(type.getText()) as any
+        } catch (e) {
+          // TODO: re-use type reference
+          console.debug(e.toString())
+          return { type: 'any' }
+        }
+      case ts.SyntaxKind.TypeLiteral: {
+        const typeNode = type as ts.TypeLiteralNode
+        return {
+          type: 'object',
+          properties: {
+            ...typeNode.members.reduce((acc, m) => {
+              const member = m as ts.PropertySignature
+              const name = (member.name as ts.Identifier).escapedText.toString()
+              return {
+                ...acc,
+                [name]: {
+                  description: name,
+                  name,
+                  required: !member.questionToken,
+                  schema: getDefinition(member.type)
+                }
+              }
+            }, {})
+          }
+        }
+      }
       case ts.SyntaxKind.NumberKeyword:
         return { type: 'number' }
       case ts.SyntaxKind.BooleanKeyword:
         return { type: 'boolean' }
       case ts.SyntaxKind.StringKeyword:
         return { type: 'string' }
+      default: {
+        return { type: 'object' } as any
+      }
     }
-    return {}
+  }
+
+  function propInitializerAsJson(tsType: ts.TypeReferenceNode): TOuputFormat {
+    if (!tsType || !tsType.typeArguments || !Boolean(tsType.typeArguments.length) || !generator) {
+      return UNSPECIFIED
+    }
+    const typeArgument = tsType.typeArguments[0]
+
+    return getDefinition(typeArgument)
   }
 
   // retrieven event name from call arguments or take prop name

@@ -3,6 +3,94 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.74.4"></a>
+## [0.74.4](https://github.com/Bearer/bearer/compare/v0.74.3...v0.74.4) (2018-12-07)
+
+
+### Bug Fixes
+
+* **cli:** use correct intent variable name reference ([#411](https://github.com/Bearer/bearer/issues/411)) ([fe579d8](https://github.com/Bearer/bearer/commit/fe579d8))
+
+
+
+
+
+<a name="0.74.3"></a>
+## [0.74.3](https://github.com/Bearer/bearer/compare/v0.74.2...v0.74.3) (2018-12-05)
+
+
+### Bug Fixes
+
+* **cli:** use intent filenames as intent names ([#408](https://github.com/Bearer/bearer/issues/408)) ([bafec2e](https://github.com/Bearer/bearer/commit/bafec2e))
+* make local development work  ([#409](https://github.com/Bearer/bearer/issues/409)) ([1f930f1](https://github.com/Bearer/bearer/commit/1f930f1))
+
+
+
+
+
+<a name="0.74.2"></a>
+## [0.74.2](https://github.com/Bearer/bearer/compare/v0.74.1...v0.74.2) (2018-12-04)
+
+
+### Bug Fixes
+
+* **transpiler:** Core 150 event emitter issue ([#404](https://github.com/Bearer/bearer/issues/404)) ([5265573](https://github.com/Bearer/bearer/commit/5265573))
+
+
+
+
+
+<a name="0.74.1"></a>
+## [0.74.1](https://github.com/Bearer/bearer/compare/v0.74.0...v0.74.1) (2018-12-03)
+
+
+### Bug Fixes
+
+* **transpiler:** change state refId as to a prop ([#403](https://github.com/Bearer/bearer/issues/403)) ([249a176](https://github.com/Bearer/bearer/commit/249a176))
+
+
+
+
+
+<a name="0.74.0"></a>
+# [0.74.0](https://github.com/Bearer/bearer/compare/v0.73.2...v0.74.0) (2018-12-01)
+
+
+### Bug Fixes
+
+* export correct name for loader ([#401](https://github.com/Bearer/bearer/issues/401)) ([f129730](https://github.com/Bearer/bearer/commit/f129730))
+* **transpiler:** [CORE-135] - output event typing ([#402](https://github.com/Bearer/bearer/issues/402)) ([01e3134](https://github.com/Bearer/bearer/commit/01e3134))
+
+
+### Features
+
+* **transpiler:** allow using existing property ([#400](https://github.com/Bearer/bearer/issues/400)) ([64f635d](https://github.com/Bearer/bearer/commit/64f635d))
+
+
+
+
+
+<a name="0.73.2"></a>
+## [0.73.2](https://github.com/Bearer/bearer/compare/v0.73.1...v0.73.2) (2018-11-23)
+
+
+### Bug Fixes
+
+* **legacy-cli:** prevent cli to fail when non existing ref is passed ([4aaaa08](https://github.com/Bearer/bearer/commit/4aaaa08))
+
+
+
+
+
+<a name="0.73.1"></a>
+## [0.73.1](https://github.com/Bearer/bearer/compare/v0.73.0...v0.73.1) (2018-11-23)
+
+**Note:** Version bump only for package bearer-master
+
+
+
+
+
 <a name="0.73.0"></a>
 # [0.73.0](https://github.com/Bearer/bearer/compare/v0.72.1...v0.73.0) (2018-11-16)
 

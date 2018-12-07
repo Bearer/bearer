@@ -59,7 +59,6 @@ export default class GenerateIntent extends BaseCommand {
     const actionExample = this.getActionExample(intentType, authType)
     return {
       fileName: name,
-      intentName: name,
       intentClassName: this.case.pascal(name),
       authType,
       intentType,

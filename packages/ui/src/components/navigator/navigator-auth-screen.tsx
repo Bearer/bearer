@@ -1,6 +1,7 @@
 import { Component, Element, Event, EventEmitter, Method, Prop, State } from '@bearer/core'
 
 import { AuthenticationListener } from '../../utils/withAuthentication'
+import { FWithAuthenticate, FWithRevoke } from '../Authorized/bearer-authorized'
 
 @Component({
   tag: 'bearer-navigator-auth-screen',
@@ -19,7 +20,7 @@ export class BearerNavigatorAuthScreen extends AuthenticationListener {
   @Event()
   stepCompleted: EventEmitter
   @Prop()
-  scenarioId?: string = 'BEARER_SCENARIO_ID'
+  scenarioId = 'BEARER_SCENARIO_ID'
 
   @Method()
   willAppear() {
@@ -40,31 +41,41 @@ export class BearerNavigatorAuthScreen extends AuthenticationListener {
     return 'Authentication'
   }
 
-  onAuthorized = () => {
-    console.debug('[BEARER]', 'onAuthorized')
-    this.goNext()
-  }
-
   onRevoked = () => {
     this.scenarioAuthorized = false
   }
 
-  goNext() {
+  goNext = () => {
     console.debug('[BEARER]', 'go to next screen')
     this.scenarioAuthenticate.emit()
     this.stepCompleted.emit()
     this.scenarioAuthorized = true
   }
 
-  renderUnauthoried = ({ authenticate }) => (
-    <bearer-button kind="primary" onClick={authenticate}>
+  onAuthorizeClick = (authenticate: () => Promise<boolean>) => {
+    console.debug('[BEARER]', 'onAuthorized')
+    authenticate()
+      .then(this.goNext)
+      .catch(console.error)
+  }
+
+  onRevokeClick = (revoke: () => Promise<boolean>) => {
+    revoke()
+      .then(this.onRevoked)
+      .catch(console.error)
+  }
+
+  renderUnauthoried: FWithAuthenticate = ({ authenticate }) => (
+    // tslint:disable-next-line:react-this-binding-issue
+    <bearer-button kind="primary" onClick={() => this.onAuthorizeClick(authenticate)}>
       {' '}
       Login{' '}
     </bearer-button>
   )
 
-  renderAuthorized = ({ revoke }) => (
-    <bearer-button kind="warning" onClick={revoke}>
+  renderAuthorized: FWithRevoke = ({ revoke }) => (
+    // tslint:disable-next-line:react-this-binding-issue
+    <bearer-button kind="warning" onClick={() => this.onRevokeClick(revoke)}>
       {' '}
       Logout{' '}
     </bearer-button>

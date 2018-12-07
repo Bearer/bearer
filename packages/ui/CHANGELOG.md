@@ -3,6 +3,30 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.74.3"></a>
+## [0.74.3](https://github.com/ionic-team/stencil-component-starter/compare/v0.74.2...v0.74.3) (2018-12-05)
+
+
+### Bug Fixes
+
+* make local development work  ([#409](https://github.com/ionic-team/stencil-component-starter/issues/409)) ([1f930f1](https://github.com/ionic-team/stencil-component-starter/commit/1f930f1))
+
+
+
+
+
+<a name="0.74.0"></a>
+# [0.74.0](https://github.com/ionic-team/stencil-component-starter/compare/v0.73.2...v0.74.0) (2018-12-01)
+
+
+### Bug Fixes
+
+* export correct name for loader ([#401](https://github.com/ionic-team/stencil-component-starter/issues/401)) ([f129730](https://github.com/ionic-team/stencil-component-starter/commit/f129730))
+
+
+
+
+
 <a name="0.73.0"></a>
 # [0.73.0](https://github.com/ionic-team/stencil-component-starter/compare/v0.72.1...v0.73.0) (2018-11-16)
 

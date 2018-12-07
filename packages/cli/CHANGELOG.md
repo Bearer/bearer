@@ -3,6 +3,78 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.74.4"></a>
+## [0.74.4](https://github.com/Bearer/bearer/compare/v0.74.3...v0.74.4) (2018-12-07)
+
+
+### Bug Fixes
+
+* **cli:** use correct intent variable name reference ([#411](https://github.com/Bearer/bearer/issues/411)) ([fe579d8](https://github.com/Bearer/bearer/commit/fe579d8))
+
+
+
+
+
+<a name="0.74.3"></a>
+## [0.74.3](https://github.com/Bearer/bearer/compare/v0.74.2...v0.74.3) (2018-12-05)
+
+
+### Bug Fixes
+
+* **cli:** use intent filenames as intent names ([#408](https://github.com/Bearer/bearer/issues/408)) ([bafec2e](https://github.com/Bearer/bearer/commit/bafec2e))
+
+
+
+
+
+<a name="0.74.2"></a>
+## [0.74.2](https://github.com/Bearer/bearer/compare/v0.74.1...v0.74.2) (2018-12-04)
+
+**Note:** Version bump only for package @bearer/cli
+
+
+
+
+
+<a name="0.74.1"></a>
+## [0.74.1](https://github.com/Bearer/bearer/compare/v0.74.0...v0.74.1) (2018-12-03)
+
+**Note:** Version bump only for package @bearer/cli
+
+
+
+
+
+<a name="0.74.0"></a>
+# [0.74.0](https://github.com/Bearer/bearer/compare/v0.73.2...v0.74.0) (2018-12-01)
+
+
+### Bug Fixes
+
+* **transpiler:** [CORE-135] - output event typing ([#402](https://github.com/Bearer/bearer/issues/402)) ([01e3134](https://github.com/Bearer/bearer/commit/01e3134))
+
+
+
+
+
+<a name="0.73.2"></a>
+## [0.73.2](https://github.com/Bearer/bearer/compare/v0.73.1...v0.73.2) (2018-11-23)
+
+**Note:** Version bump only for package @bearer/cli
+
+
+
+
+
+<a name="0.73.1"></a>
+## [0.73.1](https://github.com/Bearer/bearer/compare/v0.73.0...v0.73.1) (2018-11-23)
+
+**Note:** Version bump only for package @bearer/cli
+
+
+
+
+
 <a name="0.73.0"></a>
 # [0.73.0](https://github.com/Bearer/bearer/compare/v0.72.1...v0.73.0) (2018-11-16)
 

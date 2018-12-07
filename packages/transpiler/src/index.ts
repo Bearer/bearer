@@ -163,6 +163,7 @@ export default class Transpiler {
     if (!this.rootFileNames.length) {
       console.warn('[BEARER]', 'No file to transpile')
     }
+
     const program = TJS.getProgramFromFiles(
       this.rootFileNames,
       { ...config.config.compilerOptions },

@@ -1,16 +1,168 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Transpiler integration test FullComponent.tsx has correct manifest generated 1`] = `
+Object {
+  "file": "FullComponent.tsx",
+  "manifest": Array [
+    Object {
+      "classname": "AttachPullRequestAction",
+      "inputs": Array [
+        Object {
+          "name": "farmerRefId",
+          "type": "string",
+        },
+        Object {
+          "name": "goatId",
+          "type": "string",
+        },
+        Object {
+          "name": "feedPandaRefId",
+          "type": "string",
+        },
+        Object {
+          "name": "shortPandaRefId",
+          "type": "string",
+        },
+        Object {
+          "name": "setupId",
+          "type": "string",
+        },
+      ],
+      "outputs": Array [
+        Object {
+          "eventName": "bearer|SPONGE_BOB|AttachPullRequest|inlineDefinition",
+          "name": "inlineDefinition",
+          "payloadFormat": Object {
+            "properties": Object {
+              "inlineName": Object {
+                "description": "inlineName",
+                "name": "inlineName",
+                "required": true,
+                "schema": Object {
+                  "type": "string",
+                },
+              },
+              "inlineNumber": Object {
+                "description": "inlineNumber",
+                "name": "inlineNumber",
+                "required": true,
+                "schema": Object {
+                  "type": "number",
+                },
+              },
+              "other": Object {
+                "description": "other",
+                "name": "other",
+                "required": true,
+                "schema": Object {
+                  "$schema": "http://json-schema.org/draft-07/schema#",
+                  "properties": Object {
+                    "fullPandaName": Object {
+                      "type": "string",
+                    },
+                  },
+                  "required": Array [
+                    "fullPandaName",
+                  ],
+                  "type": "object",
+                },
+              },
+            },
+            "type": "object",
+          },
+        },
+        Object {
+          "eventName": "bearer|SPONGE_BOB|AttachPullRequest|feedPandaSaved",
+          "name": "feedPandaSaved",
+          "payloadFormat": Object {
+            "properties": Object {
+              "feedPanda": Object {
+                "description": "feedPanda",
+                "name": "feedPanda",
+                "required": true,
+                "schema": Object {
+                  "type": "any",
+                },
+              },
+              "referenceId": Object {
+                "description": "referenceId",
+                "name": "referenceId",
+                "required": true,
+                "schema": Object {
+                  "type": "string",
+                },
+              },
+            },
+            "type": "object",
+          },
+        },
+        Object {
+          "eventName": "bearer|SPONGE_BOB|AttachPullRequest|spongeBobdSaved",
+          "name": "spongeBobdSaved",
+          "payloadFormat": Object {
+            "properties": Object {
+              "manualreferenceKeyName": Object {
+                "description": "manualreferenceKeyName",
+                "name": "manualreferenceKeyName",
+                "required": true,
+                "schema": Object {
+                  "type": "string",
+                },
+              },
+              "shortPanda": Object {
+                "description": "shortPanda",
+                "name": "shortPanda",
+                "required": true,
+                "schema": Object {
+                  "type": "any",
+                },
+              },
+            },
+            "type": "object",
+          },
+        },
+      ],
+    },
+    Object {
+      "classname": "InvalidRootComponent",
+      "inputs": Array [
+        Object {
+          "name": "referenceId",
+          "type": "string",
+        },
+        Object {
+          "name": "setupId",
+          "type": "string",
+        },
+      ],
+      "outputs": Array [],
+    },
+    Object {
+      "classname": "FullComponent",
+      "inputs": undefined,
+      "outputs": undefined,
+    },
+    Object {
+      "classname": "OverridesDecorarorLess",
+      "inputs": undefined,
+      "outputs": undefined,
+    },
+  ],
+}
+`;
+
 exports[`Transpiler integration test FullComponent.tsx match expectation 1`] = `
 Object {
   "file": "FullComponent.tsx",
-  "postContent": "import { BearerFetch, BearerRef, BearerState, Component, Intent, IntentType, Listen, State, Watch, Prop, EventEmitter, Event, Element } from '@bearer/core';
+  "postContent": "import { BearerFetch, BearerRef, BearerState, Component, Intent, IntentType, Event, EventEmitter, Prop, Watch, State } from '@bearer/core';
+type Panda = {
+    fullPandaName: string;
+};
 @Component({
     tag: 'full-component'
 })
 export class FullComponent {
     private fetcher: BearerFetch;
-    @RetrieveStateIntent()
-    retrieve: BearerFetch;
     @BearerState()
     @State()
     attachedPullRequests: Array<any>;
@@ -18,6 +170,8 @@ export class FullComponent {
     @State()
     ducks: Array<any>;
     private fetchResource: BearerFetch;
+    @Event({ eventName: \\"bearer|SPONGE_BOB|global|anEvent\\" })
+    anEvent: EventEmitter;
     screenRenderer = () => {
         return (<bearer-navigator-screen navigationTitle=\\"Last Screen\\" renderFunc={() => [<h1>Hello Partick</h1>]}/>);
     };
@@ -37,107 +191,9 @@ export class FullComponent {
         {this.screenRenderer()}
       </bearer-navigator>);
     }
-    @State()
-    farmer: BearerRef<any>;
-    @Prop({ \\"mutable\\": true })
-    farmerRefId: string;
-    @Listen(\\"body:bearer|SPONGE_BOB|undefined|farmerSaved\\")
-    farmerRefIdChanged(event) {
-        if (this.farmerRefId !== event.detail.referenceId)
-            this.farmerRefId = event.detail.referenceId;
-        else {
-            this._loadFarmer();
-        }
-    }
-    _loadFarmer = () => {
-        this.fetcherGetFarmer({ referenceId: this.farmerRefId }).then(({ data }: {
-            data: BearerRef<any>;
-        }) => {
-            this.farmer = data;
-        });
-    };
-    private fetcherGetFarmer;
-    @Watch(\\"farmerRefId\\")
-    _watchFarmer(newValueName: string) {
-        if (newValueName) {
-            this._loadFarmer();
-        }
-    }
-    @State()
-    goat: BearerRef<any>;
-    @Prop({ \\"mutable\\": true })
-    goatId: string;
-    @Listen(\\"body:bearer|SPONGE_BOB|SCOPE|goatMilked\\")
-    goatIdChanged(event) {
-        if (this.goatId !== event.detail.referenceId)
-            this.goatId = event.detail.referenceId;
-        else {
-            this._loadGoat();
-        }
-    }
-    _loadGoat = () => {
-        this.fetcherGetGoat({ referenceId: this.goatId }).then(({ data }: {
-            data: BearerRef<any>;
-        }) => {
-            this.goat = data;
-        });
-    };
-    private fetcherGetGoat;
-    @Watch(\\"goatId\\")
-    _watchGoat(newValueName: string) {
-        if (newValueName) {
-            this._loadGoat();
-        }
-    }
-    private saveFeedPanda: BearerFetch<BearerRef<any>>;
-    @Event({ eventName: \\"bearer|SPONGE_BOB|global|feedPandaSaved\\" })
-    feedPandaSaved: EventEmitter<any>;
-    @State()
-    feedPanda: BearerRef<any>;
-    @State()
-    feedPandaRefId: string;
-    @Watch(\\"feedPanda\\")
-    feedPandaSavedWatcher(newValue) {
-        if (newValue) {
-            this.saveFeedPanda({ body: { feedPanda: newValue }, referenceId: this.feedPandaRefId }).then(({ referenceId, data }) => {
-                this.feedPandaSaved.emit({ referenceId, feedPanda: data || this.feedPanda });
-                this.feedPandaRefId = referenceId;
-            });
-        }
-        else {
-            this.feedPandaSaved.emit({ feedPanda: newValue });
-        }
-    }
-    private saveFeedPanda: BearerFetch<BearerRef<any>>;
-    @Event({ eventName: \\"bearer|SPONGE_BOB|global|milked\\" })
-    milked: EventEmitter<any>;
-    @State()
-    feedPanda: BearerRef<any>;
-    @State()
-    feedPandaRefId: string;
-    @Watch(\\"aPanda\\")
-    milkedWatcher(newValue) {
-        if (newValue) {
-            this.saveFeedPanda({ body: { feedPanda: newValue }, referenceId: this.feedPandaRefId }).then(({ referenceId, data }) => {
-                this.milked.emit({ referenceId, feedPanda: data || this.feedPanda });
-                this.feedPandaRefId = referenceId;
-            });
-        }
-        else {
-            this.milked.emit({ feedPanda: newValue });
-        }
-    }
-    @Prop()
-    referenceId: string;
-    @Element()
-    el: HTMLElement;
     constructor() {
         Intent('ListRepositories')(this, \\"fetcher\\");
         Intent('getPullRequest', IntentType.FetchData)(this, \\"fetchResource\\");
-        Intent(\\"getFarmer\\")(this, \\"fetcherGetFarmer\\");
-        Intent(\\"retrieveGoat\\")(this, \\"fetcherGetGoat\\");
-        Intent(\\"saveFeedPanda\\")(this, \\"saveFeedPanda\\");
-        Intent(\\"saveFeedPanda\\")(this, \\"saveFeedPanda\\");
     }
     get SCENARIO_ID() { return \\"SPONGE_BOB\\"; }
     @Prop({ \\"context\\": \\"bearer\\" })
@@ -147,12 +203,6 @@ export class FullComponent {
     componentDidLoad() {
         if (this.setupId) {
             this.bearerContext.setupId = this.setupId;
-        }
-        if (this.farmerRefId) {
-            this._loadFarmer();
-        }
-        if (this.goatId) {
-            this._loadGoat();
         }
     }
     @Watch(\\"attachedPullRequests\\")
@@ -178,10 +228,167 @@ export class FullComponent {
 }
 `;
 
+exports[`Transpiler integration test RootComponent.tsx has correct manifest generated 1`] = `
+Object {
+  "file": "RootComponent.tsx",
+  "manifest": Array [
+    Object {
+      "classname": "AttachPullRequestAction",
+      "inputs": Array [
+        Object {
+          "name": "farmerRefId",
+          "type": "string",
+        },
+        Object {
+          "name": "goatId",
+          "type": "string",
+        },
+        Object {
+          "name": "feedPandaRefId",
+          "type": "string",
+        },
+        Object {
+          "name": "shortPandaRefId",
+          "type": "string",
+        },
+        Object {
+          "name": "setupId",
+          "type": "string",
+        },
+      ],
+      "outputs": Array [
+        Object {
+          "eventName": "bearer|SPONGE_BOB|AttachPullRequest|inlineDefinition",
+          "name": "inlineDefinition",
+          "payloadFormat": Object {
+            "properties": Object {
+              "inlineName": Object {
+                "description": "inlineName",
+                "name": "inlineName",
+                "required": true,
+                "schema": Object {
+                  "type": "string",
+                },
+              },
+              "inlineNumber": Object {
+                "description": "inlineNumber",
+                "name": "inlineNumber",
+                "required": true,
+                "schema": Object {
+                  "type": "number",
+                },
+              },
+              "other": Object {
+                "description": "other",
+                "name": "other",
+                "required": true,
+                "schema": Object {
+                  "$schema": "http://json-schema.org/draft-07/schema#",
+                  "properties": Object {
+                    "fullPandaName": Object {
+                      "type": "string",
+                    },
+                  },
+                  "required": Array [
+                    "fullPandaName",
+                  ],
+                  "type": "object",
+                },
+              },
+            },
+            "type": "object",
+          },
+        },
+        Object {
+          "eventName": "bearer|SPONGE_BOB|AttachPullRequest|feedPandaSaved",
+          "name": "feedPandaSaved",
+          "payloadFormat": Object {
+            "properties": Object {
+              "feedPanda": Object {
+                "description": "feedPanda",
+                "name": "feedPanda",
+                "required": true,
+                "schema": Object {
+                  "type": "any",
+                },
+              },
+              "referenceId": Object {
+                "description": "referenceId",
+                "name": "referenceId",
+                "required": true,
+                "schema": Object {
+                  "type": "string",
+                },
+              },
+            },
+            "type": "object",
+          },
+        },
+        Object {
+          "eventName": "bearer|SPONGE_BOB|AttachPullRequest|spongeBobdSaved",
+          "name": "spongeBobdSaved",
+          "payloadFormat": Object {
+            "properties": Object {
+              "manualreferenceKeyName": Object {
+                "description": "manualreferenceKeyName",
+                "name": "manualreferenceKeyName",
+                "required": true,
+                "schema": Object {
+                  "type": "string",
+                },
+              },
+              "shortPanda": Object {
+                "description": "shortPanda",
+                "name": "shortPanda",
+                "required": true,
+                "schema": Object {
+                  "type": "any",
+                },
+              },
+            },
+            "type": "object",
+          },
+        },
+      ],
+    },
+    Object {
+      "classname": "InvalidRootComponent",
+      "inputs": Array [
+        Object {
+          "name": "referenceId",
+          "type": "string",
+        },
+        Object {
+          "name": "setupId",
+          "type": "string",
+        },
+      ],
+      "outputs": Array [],
+    },
+    Object {
+      "classname": "FullComponent",
+      "inputs": undefined,
+      "outputs": undefined,
+    },
+    Object {
+      "classname": "OverridesDecorarorLess",
+      "inputs": undefined,
+      "outputs": undefined,
+    },
+  ],
+}
+`;
+
 exports[`Transpiler integration test RootComponent.tsx match expectation 1`] = `
 Object {
   "file": "RootComponent.tsx",
-  "postContent": "import { BearerFetch, BearerState, Intent, IntentType, Component, Prop, Element, Watch, State } from '@bearer/core';
+  "postContent": "import { BearerFetch, BearerState, Intent, IntentType, BearerRef, Event, EventEmitter, Component, Listen, State, Watch, Prop } from '@bearer/core';
+type Farmer = {
+    fullName: string;
+};
+type Panda = {
+    fullPandaName: string;
+};
 @Component({
     tag: \\"attach-pull-request-action\\",
     styleUrl: \\"AttachPullRequest.css\\",
@@ -189,8 +396,6 @@ Object {
 })
 export class AttachPullRequestAction {
     private fetcher: BearerFetch;
-    @RetrieveStateIntent()
-    retrieve: BearerFetch;
     @BearerState()
     @State()
     attachedPullRequests: Array<any>;
@@ -198,18 +403,114 @@ export class AttachPullRequestAction {
     @State()
     ducks: Array<any>;
     private fetchResource: BearerFetch;
+    @Event({ eventName: \\"bearer|SPONGE_BOB|AttachPullRequest|inlineDefinition\\" })
+    inlineDefinition: EventEmitter;
     render() {
         return (<bearer-authorized scenarioId=\\"SPONGE_BOB\\">
         <bearer-scrollable fetcher={this.fetcher}/>
       </bearer-authorized>);
     }
-    @Prop()
-    referenceId: string;
-    @Element()
-    el: HTMLElement;
+    @State()
+    farmer: BearerRef<Farmer>;
+    @Listen(\\"body:bearer|SPONGE_BOB|AttachPullRequest|farmerSaved\\")
+    farmerRefIdChanged(event) {
+        if (this.farmerRefId !== event.detail.referenceId) {
+            this.farmerRefId = event.detail.referenceId;
+        }
+        else {
+            this._loadFarmer();
+        }
+    }
+    _loadFarmer = () => {
+        this.fetcherRetrieveFarmer({ referenceId: this.farmerRefId }).then(({ data }: {
+            data: BearerRef<Farmer>;
+        }) => {
+            this.farmer = data;
+        });
+    };
+    private fetcherRetrieveFarmer;
+    @Watch(\\"farmerRefId\\")
+    _watchFarmer(newValueName: string) {
+        if (newValueName) {
+            this._loadFarmer();
+        }
+    }
+    @Prop({ \\"mutable\\": true })
+    farmerRefId: string;
+    @State()
+    goat: BearerRef<{
+        aString: string;
+        aNumber: number;
+        panda: Panda;
+    }>;
+    @Listen(\\"body:bearer|SPONGE_BOB|SCOPE|goatMilked\\")
+    goatIdChanged(event) {
+        if (this.goatId !== event.detail.referenceId) {
+            this.goatId = event.detail.referenceId;
+        }
+        else {
+            this._loadGoat();
+        }
+    }
+    _loadGoat = () => {
+        this.fetcherRetrieveGoat({ referenceId: this.goatId }).then(({ data }: {
+            data: BearerRef<{
+                aString: string;
+                aNumber: number;
+                panda: Panda;
+            }>;
+        }) => {
+            this.goat = data;
+        });
+    };
+    private fetcherRetrieveGoat;
+    @Watch(\\"goatId\\")
+    _watchGoat(newValueName: string) {
+        if (newValueName) {
+            this._loadGoat();
+        }
+    }
+    @Prop({ \\"mutable\\": true })
+    goatId: string;
+    private saveFeedPanda: BearerFetch<BearerRef<Panda>>;
+    @Event({ eventName: \\"bearer|SPONGE_BOB|AttachPullRequest|feedPandaSaved\\" })
+    feedPandaSaved: EventEmitter;
+    @State()
+    feedPanda: BearerRef<Panda>;
+    @Prop({ \\"mutable\\": true })
+    feedPandaRefId: string;
+    @Watch(\\"feedPanda\\")
+    feedPandaSavedWatcher(newValue) {
+        this.saveFeedPanda({ body: { feedPanda: newValue }, referenceId: this.feedPandaRefId }).then(({ referenceId, data }) => {
+            this.feedPandaSaved.emit({ referenceId, feedPanda: data || this.feedPanda });
+            this.feedPandaRefId = referenceId;
+        });
+    }
+    private manualIntentName: BearerFetch<BearerRef<{
+        inlineName: string;
+    }>>;
+    @Event({ eventName: \\"bearer|SPONGE_BOB|AttachPullRequest|spongeBobdSaved\\" })
+    spongeBobdSaved: EventEmitter;
+    @State()
+    shortPanda: BearerRef<{
+        inlineName: string;
+    }>;
+    @Prop({ \\"mutable\\": true })
+    shortPandaRefId: string;
+    @Watch(\\"manualpropertyWatchedName\\")
+    spongeBobdSavedWatcher(newValue) {
+        this.manualIntentName({ body: { manuaLIntentPropertyName: newValue }, referenceId: this.shortPandaRefId }).then(({ referenceId: manualreferenceKeyName, data }) => {
+            this.spongeBobdSaved.emit({ manualreferenceKeyName, shortPanda: data || this.shortPanda });
+            this.shortPandaRefId = manualreferenceKeyName;
+        });
+    }
     constructor() {
         Intent('ListRepositories')(this, \\"fetcher\\");
         Intent('getPullRequest', IntentType.FetchData)(this, \\"fetchResource\\");
+        Intent(\\"retrieveFarmer\\")(this, \\"fetcherRetrieveFarmer\\");
+        Intent(\\"retrieveGoat\\")(this, \\"fetcherRetrieveGoat\\");
+        Intent(\\"saveFeedPanda\\")(this, \\"saveFeedPanda\\");
+        Intent(\\"manualIntentName\\")(this, \\"manualIntentName\\");
     }
     get SCENARIO_ID() { return \\"SPONGE_BOB\\"; }
     @Prop({ \\"context\\": \\"bearer\\" })
@@ -219,6 +520,9 @@ export class AttachPullRequestAction {
     componentDidLoad() {
         if (this.setupId) {
             this.bearerContext.setupId = this.setupId;
+        }
+        if (this.farmerRefId) {
+            this._loadFarmer();
         }
     }
     @Watch(\\"attachedPullRequests\\")
@@ -241,6 +545,157 @@ export class AttachPullRequestAction {
     };
 }
 ",
+}
+`;
+
+exports[`Transpiler integration test exportObject.ts has correct manifest generated 1`] = `
+Object {
+  "file": "exportObject.ts",
+  "manifest": Array [
+    Object {
+      "classname": "AttachPullRequestAction",
+      "inputs": Array [
+        Object {
+          "name": "farmerRefId",
+          "type": "string",
+        },
+        Object {
+          "name": "goatId",
+          "type": "string",
+        },
+        Object {
+          "name": "feedPandaRefId",
+          "type": "string",
+        },
+        Object {
+          "name": "shortPandaRefId",
+          "type": "string",
+        },
+        Object {
+          "name": "setupId",
+          "type": "string",
+        },
+      ],
+      "outputs": Array [
+        Object {
+          "eventName": "bearer|SPONGE_BOB|AttachPullRequest|inlineDefinition",
+          "name": "inlineDefinition",
+          "payloadFormat": Object {
+            "properties": Object {
+              "inlineName": Object {
+                "description": "inlineName",
+                "name": "inlineName",
+                "required": true,
+                "schema": Object {
+                  "type": "string",
+                },
+              },
+              "inlineNumber": Object {
+                "description": "inlineNumber",
+                "name": "inlineNumber",
+                "required": true,
+                "schema": Object {
+                  "type": "number",
+                },
+              },
+              "other": Object {
+                "description": "other",
+                "name": "other",
+                "required": true,
+                "schema": Object {
+                  "$schema": "http://json-schema.org/draft-07/schema#",
+                  "properties": Object {
+                    "fullPandaName": Object {
+                      "type": "string",
+                    },
+                  },
+                  "required": Array [
+                    "fullPandaName",
+                  ],
+                  "type": "object",
+                },
+              },
+            },
+            "type": "object",
+          },
+        },
+        Object {
+          "eventName": "bearer|SPONGE_BOB|AttachPullRequest|feedPandaSaved",
+          "name": "feedPandaSaved",
+          "payloadFormat": Object {
+            "properties": Object {
+              "feedPanda": Object {
+                "description": "feedPanda",
+                "name": "feedPanda",
+                "required": true,
+                "schema": Object {
+                  "type": "any",
+                },
+              },
+              "referenceId": Object {
+                "description": "referenceId",
+                "name": "referenceId",
+                "required": true,
+                "schema": Object {
+                  "type": "string",
+                },
+              },
+            },
+            "type": "object",
+          },
+        },
+        Object {
+          "eventName": "bearer|SPONGE_BOB|AttachPullRequest|spongeBobdSaved",
+          "name": "spongeBobdSaved",
+          "payloadFormat": Object {
+            "properties": Object {
+              "manualreferenceKeyName": Object {
+                "description": "manualreferenceKeyName",
+                "name": "manualreferenceKeyName",
+                "required": true,
+                "schema": Object {
+                  "type": "string",
+                },
+              },
+              "shortPanda": Object {
+                "description": "shortPanda",
+                "name": "shortPanda",
+                "required": true,
+                "schema": Object {
+                  "type": "any",
+                },
+              },
+            },
+            "type": "object",
+          },
+        },
+      ],
+    },
+    Object {
+      "classname": "InvalidRootComponent",
+      "inputs": Array [
+        Object {
+          "name": "referenceId",
+          "type": "string",
+        },
+        Object {
+          "name": "setupId",
+          "type": "string",
+        },
+      ],
+      "outputs": Array [],
+    },
+    Object {
+      "classname": "FullComponent",
+      "inputs": undefined,
+      "outputs": undefined,
+    },
+    Object {
+      "classname": "OverridesDecorarorLess",
+      "inputs": undefined,
+      "outputs": undefined,
+    },
+  ],
 }
 `;
 
@@ -265,6 +720,157 @@ export default {
 }
 `;
 
+exports[`Transpiler integration test invalidRootComponent.tsx has correct manifest generated 1`] = `
+Object {
+  "file": "invalidRootComponent.tsx",
+  "manifest": Array [
+    Object {
+      "classname": "AttachPullRequestAction",
+      "inputs": Array [
+        Object {
+          "name": "farmerRefId",
+          "type": "string",
+        },
+        Object {
+          "name": "goatId",
+          "type": "string",
+        },
+        Object {
+          "name": "feedPandaRefId",
+          "type": "string",
+        },
+        Object {
+          "name": "shortPandaRefId",
+          "type": "string",
+        },
+        Object {
+          "name": "setupId",
+          "type": "string",
+        },
+      ],
+      "outputs": Array [
+        Object {
+          "eventName": "bearer|SPONGE_BOB|AttachPullRequest|inlineDefinition",
+          "name": "inlineDefinition",
+          "payloadFormat": Object {
+            "properties": Object {
+              "inlineName": Object {
+                "description": "inlineName",
+                "name": "inlineName",
+                "required": true,
+                "schema": Object {
+                  "type": "string",
+                },
+              },
+              "inlineNumber": Object {
+                "description": "inlineNumber",
+                "name": "inlineNumber",
+                "required": true,
+                "schema": Object {
+                  "type": "number",
+                },
+              },
+              "other": Object {
+                "description": "other",
+                "name": "other",
+                "required": true,
+                "schema": Object {
+                  "$schema": "http://json-schema.org/draft-07/schema#",
+                  "properties": Object {
+                    "fullPandaName": Object {
+                      "type": "string",
+                    },
+                  },
+                  "required": Array [
+                    "fullPandaName",
+                  ],
+                  "type": "object",
+                },
+              },
+            },
+            "type": "object",
+          },
+        },
+        Object {
+          "eventName": "bearer|SPONGE_BOB|AttachPullRequest|feedPandaSaved",
+          "name": "feedPandaSaved",
+          "payloadFormat": Object {
+            "properties": Object {
+              "feedPanda": Object {
+                "description": "feedPanda",
+                "name": "feedPanda",
+                "required": true,
+                "schema": Object {
+                  "type": "any",
+                },
+              },
+              "referenceId": Object {
+                "description": "referenceId",
+                "name": "referenceId",
+                "required": true,
+                "schema": Object {
+                  "type": "string",
+                },
+              },
+            },
+            "type": "object",
+          },
+        },
+        Object {
+          "eventName": "bearer|SPONGE_BOB|AttachPullRequest|spongeBobdSaved",
+          "name": "spongeBobdSaved",
+          "payloadFormat": Object {
+            "properties": Object {
+              "manualreferenceKeyName": Object {
+                "description": "manualreferenceKeyName",
+                "name": "manualreferenceKeyName",
+                "required": true,
+                "schema": Object {
+                  "type": "string",
+                },
+              },
+              "shortPanda": Object {
+                "description": "shortPanda",
+                "name": "shortPanda",
+                "required": true,
+                "schema": Object {
+                  "type": "any",
+                },
+              },
+            },
+            "type": "object",
+          },
+        },
+      ],
+    },
+    Object {
+      "classname": "InvalidRootComponent",
+      "inputs": Array [
+        Object {
+          "name": "referenceId",
+          "type": "string",
+        },
+        Object {
+          "name": "setupId",
+          "type": "string",
+        },
+      ],
+      "outputs": Array [],
+    },
+    Object {
+      "classname": "FullComponent",
+      "inputs": undefined,
+      "outputs": undefined,
+    },
+    Object {
+      "classname": "OverridesDecorarorLess",
+      "inputs": undefined,
+      "outputs": undefined,
+    },
+  ],
+}
+`;
+
 exports[`Transpiler integration test invalidRootComponent.tsx match expectation 1`] = `
 Object {
   "file": "invalidRootComponent.tsx",
@@ -274,7 +880,7 @@ Object {
     styleUrl: \\"attachPullRequest.css\\",
     shadow: false
 })
-export class AttachPullRequestDisplay {
+export class InvalidRootComponent {
     private fetcher: BearerFetch;
     @RetrieveStateIntent()
     retrieve: BearerFetch;
@@ -329,6 +935,157 @@ export class AttachPullRequestDisplay {
 }
 `;
 
+exports[`Transpiler integration test overrides-decorator.tsx has correct manifest generated 1`] = `
+Object {
+  "file": "overrides-decorator.tsx",
+  "manifest": Array [
+    Object {
+      "classname": "AttachPullRequestAction",
+      "inputs": Array [
+        Object {
+          "name": "farmerRefId",
+          "type": "string",
+        },
+        Object {
+          "name": "goatId",
+          "type": "string",
+        },
+        Object {
+          "name": "feedPandaRefId",
+          "type": "string",
+        },
+        Object {
+          "name": "shortPandaRefId",
+          "type": "string",
+        },
+        Object {
+          "name": "setupId",
+          "type": "string",
+        },
+      ],
+      "outputs": Array [
+        Object {
+          "eventName": "bearer|SPONGE_BOB|AttachPullRequest|inlineDefinition",
+          "name": "inlineDefinition",
+          "payloadFormat": Object {
+            "properties": Object {
+              "inlineName": Object {
+                "description": "inlineName",
+                "name": "inlineName",
+                "required": true,
+                "schema": Object {
+                  "type": "string",
+                },
+              },
+              "inlineNumber": Object {
+                "description": "inlineNumber",
+                "name": "inlineNumber",
+                "required": true,
+                "schema": Object {
+                  "type": "number",
+                },
+              },
+              "other": Object {
+                "description": "other",
+                "name": "other",
+                "required": true,
+                "schema": Object {
+                  "$schema": "http://json-schema.org/draft-07/schema#",
+                  "properties": Object {
+                    "fullPandaName": Object {
+                      "type": "string",
+                    },
+                  },
+                  "required": Array [
+                    "fullPandaName",
+                  ],
+                  "type": "object",
+                },
+              },
+            },
+            "type": "object",
+          },
+        },
+        Object {
+          "eventName": "bearer|SPONGE_BOB|AttachPullRequest|feedPandaSaved",
+          "name": "feedPandaSaved",
+          "payloadFormat": Object {
+            "properties": Object {
+              "feedPanda": Object {
+                "description": "feedPanda",
+                "name": "feedPanda",
+                "required": true,
+                "schema": Object {
+                  "type": "any",
+                },
+              },
+              "referenceId": Object {
+                "description": "referenceId",
+                "name": "referenceId",
+                "required": true,
+                "schema": Object {
+                  "type": "string",
+                },
+              },
+            },
+            "type": "object",
+          },
+        },
+        Object {
+          "eventName": "bearer|SPONGE_BOB|AttachPullRequest|spongeBobdSaved",
+          "name": "spongeBobdSaved",
+          "payloadFormat": Object {
+            "properties": Object {
+              "manualreferenceKeyName": Object {
+                "description": "manualreferenceKeyName",
+                "name": "manualreferenceKeyName",
+                "required": true,
+                "schema": Object {
+                  "type": "string",
+                },
+              },
+              "shortPanda": Object {
+                "description": "shortPanda",
+                "name": "shortPanda",
+                "required": true,
+                "schema": Object {
+                  "type": "any",
+                },
+              },
+            },
+            "type": "object",
+          },
+        },
+      ],
+    },
+    Object {
+      "classname": "InvalidRootComponent",
+      "inputs": Array [
+        Object {
+          "name": "referenceId",
+          "type": "string",
+        },
+        Object {
+          "name": "setupId",
+          "type": "string",
+        },
+      ],
+      "outputs": Array [],
+    },
+    Object {
+      "classname": "FullComponent",
+      "inputs": undefined,
+      "outputs": undefined,
+    },
+    Object {
+      "classname": "OverridesDecorarorLess",
+      "inputs": undefined,
+      "outputs": undefined,
+    },
+  ],
+}
+`;
+
 exports[`Transpiler integration test overrides-decorator.tsx match expectation 1`] = `
 Object {
   "file": "overrides-decorator.tsx",
@@ -365,6 +1122,157 @@ class OverridesDecorarotFull {
 }
 `;
 
+exports[`Transpiler integration test overrides-decorator-less.1.tsx has correct manifest generated 1`] = `
+Object {
+  "file": "overrides-decorator-less.1.tsx",
+  "manifest": Array [
+    Object {
+      "classname": "AttachPullRequestAction",
+      "inputs": Array [
+        Object {
+          "name": "farmerRefId",
+          "type": "string",
+        },
+        Object {
+          "name": "goatId",
+          "type": "string",
+        },
+        Object {
+          "name": "feedPandaRefId",
+          "type": "string",
+        },
+        Object {
+          "name": "shortPandaRefId",
+          "type": "string",
+        },
+        Object {
+          "name": "setupId",
+          "type": "string",
+        },
+      ],
+      "outputs": Array [
+        Object {
+          "eventName": "bearer|SPONGE_BOB|AttachPullRequest|inlineDefinition",
+          "name": "inlineDefinition",
+          "payloadFormat": Object {
+            "properties": Object {
+              "inlineName": Object {
+                "description": "inlineName",
+                "name": "inlineName",
+                "required": true,
+                "schema": Object {
+                  "type": "string",
+                },
+              },
+              "inlineNumber": Object {
+                "description": "inlineNumber",
+                "name": "inlineNumber",
+                "required": true,
+                "schema": Object {
+                  "type": "number",
+                },
+              },
+              "other": Object {
+                "description": "other",
+                "name": "other",
+                "required": true,
+                "schema": Object {
+                  "$schema": "http://json-schema.org/draft-07/schema#",
+                  "properties": Object {
+                    "fullPandaName": Object {
+                      "type": "string",
+                    },
+                  },
+                  "required": Array [
+                    "fullPandaName",
+                  ],
+                  "type": "object",
+                },
+              },
+            },
+            "type": "object",
+          },
+        },
+        Object {
+          "eventName": "bearer|SPONGE_BOB|AttachPullRequest|feedPandaSaved",
+          "name": "feedPandaSaved",
+          "payloadFormat": Object {
+            "properties": Object {
+              "feedPanda": Object {
+                "description": "feedPanda",
+                "name": "feedPanda",
+                "required": true,
+                "schema": Object {
+                  "type": "any",
+                },
+              },
+              "referenceId": Object {
+                "description": "referenceId",
+                "name": "referenceId",
+                "required": true,
+                "schema": Object {
+                  "type": "string",
+                },
+              },
+            },
+            "type": "object",
+          },
+        },
+        Object {
+          "eventName": "bearer|SPONGE_BOB|AttachPullRequest|spongeBobdSaved",
+          "name": "spongeBobdSaved",
+          "payloadFormat": Object {
+            "properties": Object {
+              "manualreferenceKeyName": Object {
+                "description": "manualreferenceKeyName",
+                "name": "manualreferenceKeyName",
+                "required": true,
+                "schema": Object {
+                  "type": "string",
+                },
+              },
+              "shortPanda": Object {
+                "description": "shortPanda",
+                "name": "shortPanda",
+                "required": true,
+                "schema": Object {
+                  "type": "any",
+                },
+              },
+            },
+            "type": "object",
+          },
+        },
+      ],
+    },
+    Object {
+      "classname": "InvalidRootComponent",
+      "inputs": Array [
+        Object {
+          "name": "referenceId",
+          "type": "string",
+        },
+        Object {
+          "name": "setupId",
+          "type": "string",
+        },
+      ],
+      "outputs": Array [],
+    },
+    Object {
+      "classname": "FullComponent",
+      "inputs": undefined,
+      "outputs": undefined,
+    },
+    Object {
+      "classname": "OverridesDecorarorLess",
+      "inputs": undefined,
+      "outputs": undefined,
+    },
+  ],
+}
+`;
+
 exports[`Transpiler integration test overrides-decorator-less.1.tsx match expectation 1`] = `
 Object {
   "file": "overrides-decorator-less.1.tsx",
@@ -372,7 +1280,7 @@ Object {
 @Component({
     tag: 'overrides-decorator-less'
 })
-class OverridesDecorarotLess {
+class OverridesDecorarorLess {
     constructor() {
     }
     componentWillLoad() {

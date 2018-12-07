@@ -10,7 +10,7 @@ export type TInputDecoratorOptions = {
    * Name of the property to create for the component
    * default: [propName]RefId
    */
-  propName: string
+  propertyReferenceIdName: string
   /**
    * Change the event you want to listen from
    * default: [propName]Saved

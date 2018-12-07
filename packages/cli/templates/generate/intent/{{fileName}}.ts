@@ -3,7 +3,6 @@ import { {{intentType}}, T{{authType}}AuthContext, {{callbackType}} } from '@bea
 // import Client from './client'
 
 export default class {{intentClassName}}Intent {
-  static intentName: string = '{{intentName}}'
   static intentType: any = {{intentType}}
 
   {{actionExample}}

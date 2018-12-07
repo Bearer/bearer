@@ -6,7 +6,6 @@ exports[`Generate generate:intent Fetch intent 1`] = `
 // import Client from './client'
 
 export default class FetchDataIntentIntent {
-  static intentName: string = 'FetchDataIntent'
   static intentType: any = FetchData
 
   
@@ -33,7 +32,6 @@ exports[`Generate generate:intent Retrieve intent 1`] = `
 // import Client from './client'
 
 export default class RetrieveIntentIntent {
-  static intentName: string = 'RetrieveIntent'
   static intentType: any = RetrieveState
 
   
@@ -51,7 +49,6 @@ exports[`Generate generate:intent Save intent 1`] = `
 // import Client from './client'
 
 export default class SaveIntentIntent {
-  static intentName: string = 'SaveIntent'
   static intentType: any = SaveState
 
   

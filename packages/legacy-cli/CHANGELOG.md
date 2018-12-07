@@ -3,6 +3,66 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.74.3"></a>
+## [0.74.3](https://github.com/Bearer/bearer/compare/v0.74.2...v0.74.3) (2018-12-05)
+
+
+### Bug Fixes
+
+* make local development work  ([#409](https://github.com/Bearer/bearer/issues/409)) ([1f930f1](https://github.com/Bearer/bearer/commit/1f930f1))
+
+
+
+
+
+<a name="0.74.2"></a>
+## [0.74.2](https://github.com/Bearer/bearer/compare/v0.74.1...v0.74.2) (2018-12-04)
+
+**Note:** Version bump only for package @bearer/bearer-cli
+
+
+
+
+
+<a name="0.74.1"></a>
+## [0.74.1](https://github.com/Bearer/bearer/compare/v0.74.0...v0.74.1) (2018-12-03)
+
+**Note:** Version bump only for package @bearer/bearer-cli
+
+
+
+
+
+<a name="0.74.0"></a>
+# [0.74.0](https://github.com/Bearer/bearer/compare/v0.73.2...v0.74.0) (2018-12-01)
+
+**Note:** Version bump only for package @bearer/bearer-cli
+
+
+
+
+
+<a name="0.73.2"></a>
+## [0.73.2](https://github.com/Bearer/bearer/compare/v0.73.1...v0.73.2) (2018-11-23)
+
+
+### Bug Fixes
+
+* **legacy-cli:** prevent cli to fail when non existing ref is passed ([4aaaa08](https://github.com/Bearer/bearer/commit/4aaaa08))
+
+
+
+
+
+<a name="0.73.1"></a>
+## [0.73.1](https://github.com/Bearer/bearer/compare/v0.73.0...v0.73.1) (2018-11-23)
+
+**Note:** Version bump only for package @bearer/bearer-cli
+
+
+
+
+
 <a name="0.73.0"></a>
 # [0.73.0](https://github.com/Bearer/bearer/compare/v0.72.1...v0.73.0) (2018-11-16)
 
