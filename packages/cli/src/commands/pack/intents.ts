@@ -7,7 +7,8 @@ import { RequireScenarioFolder } from '../../utils/decorators'
 import prepareConfig from '../../utils/prepare-config'
 
 const CONFIG_FILE = 'bearer.config.json'
-const HANDLER_NAME = 'index.js'
+const HANDLER_NAME = 'index'
+const HANDLER_NAME_WITH_EXT = [HANDLER_NAME, 'js'].join('.')
 
 export default class PackIntents extends BaseCommand {
   static description = 'Pack scenario intents'
@@ -56,14 +57,18 @@ export default class PackIntents extends BaseCommand {
       // add intents
       archive.directory(this.locator.buildIntentsDir, false)
       // add CONFIG
-      const config = await this.appendConfig()
-      archive.append(JSON.stringify(config, null, 2), { name: CONFIG_FILE })
+      const intents = await this.retrieveIntents()
 
-      // add handler
+      const { config, handlers } = buildLambdaDefinitions(intents)
+      const finalConfig = await this.retrieveAuthConfig(config)
+
+      archive.append(JSON.stringify(finalConfig, null, 2), { name: CONFIG_FILE })
+
+      // add handlers
       this.debug(`Generated config: ${JSON.stringify(config, null, 2)}`)
-      archive.append(buildIntentDeclaration(config), { name: HANDLER_NAME })
-      // ZIP
+      archive.append(handlers, { name: HANDLER_NAME_WITH_EXT })
 
+      // ZIP
       archive.finalize()
 
       const entries = await archived
@@ -76,17 +81,17 @@ export default class PackIntents extends BaseCommand {
     }
   }
 
-  async appendConfig(): Promise<TConfig> {
+  async retrieveAuthConfig(config: { intents: Record<string, string>[] }): Promise<TBearerConfig> {
     // generate config
-    const config: TConfig = { intents: await this.retrieveIntents() }
-
     const content = await fs.readFile(this.locator.authConfigPath, { encoding: 'utf8' })
-    config.auth = JSON.parse(content)
-    return config
+    return {
+      ...config,
+      auth: JSON.parse(content)
+    }
   }
 
   // TODO: rewrite this using TS AST
-  async retrieveIntents(): Promise<Array<string>> {
+  async retrieveIntents(): Promise<TIntentNames> {
     try {
       const config = await prepareConfig(
         this.locator.authConfigPath,
@@ -100,12 +105,36 @@ export default class PackIntents extends BaseCommand {
   }
 }
 
-type TConfig = {
-  intents: Array<string>
+type TIntentNames = string[]
+
+type TBearerConfig = {
+  intents: Record<string, string>[]
   auth?: any
 }
 
-export function buildIntentDeclaration({ intents }: TConfig): string {
+type TLambdaDefinition = {
+  config: {
+    intents: Record<string, string>[]
+  }
+  handlers: string
+}
+
+export function buildLambdaDefinitions(intents: TIntentNames): TLambdaDefinition {
+  return {
+    config: {
+      intents: intents.reduce(
+        (acc, intentName) => {
+          acc.push({ [intentName]: [HANDLER_NAME, intentName].join('.') })
+          return acc
+        },
+        [] as Record<string, string>[]
+      )
+    },
+    handlers: buildLambdaIndex(intents)
+  }
+}
+
+function buildLambdaIndex(intents: TIntentNames): string {
   return intents
     .map((intent, index) => {
       const intentConstName = `intent${index}`
