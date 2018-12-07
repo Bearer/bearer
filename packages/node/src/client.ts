@@ -9,13 +9,13 @@ export class BearerClient {
   private options: TClientOptions
   private client: AxiosInstance
 
-  constructor(private readonly clientId: string, clientOptions: Partial<TClientOptions> = {}) {
+  constructor(private readonly token: string, clientOptions: Partial<TClientOptions> = {}) {
     this.options = { ...BearerClient.defaultOptions, ...clientOptions }
 
     this.client = axios.create({
       baseURL: this.options.hostUrl,
       headers: {
-        Authorization: clientId
+        Authorization: token
       }
     })
   }
@@ -31,6 +31,6 @@ export class BearerClient {
   }
 }
 
-export default (clientId: string): BearerClient => {
-  return new BearerClient(clientId)
+export default (token: string): BearerClient => {
+  return new BearerClient(token)
 }
