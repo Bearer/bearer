@@ -61,7 +61,7 @@ export default class PackIntents extends BaseCommand {
 
       // add handler
       this.debug(`Generated config: ${JSON.stringify(config, null, 2)}`)
-      archive.append(this.handlerContent(config), { name: HANDLER_NAME })
+      archive.append(buildIntentDeclaration(config), { name: HANDLER_NAME })
       // ZIP
 
       archive.finalize()
@@ -85,18 +85,6 @@ export default class PackIntents extends BaseCommand {
     return config
   }
 
-  handlerContent({ intents }: TConfig): string {
-    return intents
-      .map((intent, index) => {
-        const intentConstName = `intent${index}`
-        return `
-const ${intentConstName} = require("./dist/${intent}").default;
-module.exports['${intent}'] = ${intentConstName}.intentType.intent(intent.action);
-`
-      })
-      .join('\n')
-  }
-
   // TODO: rewrite this using TS AST
   async retrieveIntents(): Promise<Array<string>> {
     try {
@@ -115,4 +103,15 @@ module.exports['${intent}'] = ${intentConstName}.intentType.intent(intent.action
 type TConfig = {
   intents: Array<string>
   auth?: any
+}
+
+export function buildIntentDeclaration({ intents }: TConfig): string {
+  return intents
+    .map((intent, index) => {
+      const intentConstName = `intent${index}`
+      return `const ${intentConstName} = require("./dist/${intent}").default;
+module.exports['${intent}'] = ${intentConstName}.intentType.intent(${intentConstName}.action);
+`
+    })
+    .join('\n')
 }
