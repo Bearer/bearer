@@ -31,16 +31,12 @@ export default (handler: TWebhookHandler, options: TWebhookOptions = {}) => {
 
 function verifyPayload(token: string) {
   return (req: Request, res: Response, next: NextFunction) => {
-    if (!token) {
+    const sha = req.headers['bearer-sha']
+    if (sha === token) {
       next()
     } else {
-      const sha = req.headers['bearer-sha']
-      if (sha === token) {
-        next()
-      } else {
-        res.statusCode = 401
-        res.json({ error: 'Incorrect signature' })
-      }
+      res.statusCode = 401
+      res.json({ error: 'Incorrect signature' })
     }
   }
 }

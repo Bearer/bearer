@@ -7,12 +7,18 @@ describe('Bearer middleware', () => {
   describe('middleware logic', () => {
     const app = express()
     const handler = jest.fn().mockImplementation(() => Promise.resolve(true))
+    const failingHandler = jest.fn().mockImplementation(() => {
+      return new Promise(() => {
+        throw new Error('ok')
+      })
+    })
 
     beforeEach(() => {
       handler.mockReset()
     })
 
     app.use('/whatever/webhooks', middleware(handler))
+    app.use('/failing_handler', middleware(failingHandler))
     app.post('/*', (_req, res) => {
       res.status(200).json({ name: 'john' })
     })
@@ -43,6 +49,15 @@ describe('Bearer middleware', () => {
 
       expect(postResponse.body).toMatchObject({ name: 'john' })
       expect(getResponse.body).toMatchObject({ name: 'john' })
+    })
+
+    it('fails gracefully', async () => {
+      await request(app)
+        .post('/failing_handler')
+        .expect('Content-Type', /json/)
+        .expect(500)
+      expect(handler).not.toHaveBeenCalled()
+      expect(failingHandler).toHaveBeenCalled()
     })
   })
 
