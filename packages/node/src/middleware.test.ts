@@ -57,16 +57,17 @@ describe('Bearer middleware', () => {
           .expect(422)
 
         expect(webHookHandlers[REJECTED_HANDLER]).toHaveBeenCalled()
-        expect(response.body).toMatchObject({ message: 'Rejecting incoming webhook' })
+        expect(response.body).toMatchObject({ error: { name: 'Bearer:WebhookHandlerRejection' } })
       })
 
       it('fails gracefully if the handler raises an error', async () => {
-        await request(app)
+        const response = await request(app)
           .post('/whatever/webhooks')
           .set('BEARER-SCENARIO-HANDLER', FAILING_HANDLER)
           .expect('Content-Type', /json/)
           .expect(500)
 
+        expect(response.body).toMatchObject({ error: { name: 'Bearer:WebhookProcessingError' } })
         expect(webHookHandlers[FAILING_HANDLER]).toHaveBeenCalled()
         expect(webHookHandlers[SUCCESS_HANDLER]).not.toHaveBeenCalled()
       })
@@ -74,12 +75,13 @@ describe('Bearer middleware', () => {
 
     describe('non existing handler', () => {
       it('returns unprocessable entity status', async () => {
-        await request(app)
+        const response = await request(app)
           .post('/whatever/webhooks')
           .set('BEARER-SCENARIO-HANDLER', 'unknow')
           .expect('Content-Type', /json/)
           .expect(422)
 
+        expect(response.body).toMatchObject({ error: { name: 'Bearer:WebhookMissingHandler' } })
         expect(webHookHandlers[FAILING_HANDLER]).not.toHaveBeenCalled()
         expect(webHookHandlers[SUCCESS_HANDLER]).not.toHaveBeenCalled()
       })
@@ -110,10 +112,12 @@ describe('Bearer middleware', () => {
       app.use('/whatever/protected', middleware(webHookHandlers, { token: '1234' }))
 
       it('stops unsigned requests', async () => {
-        await request(app)
+        const response = await request(app)
           .post('/whatever/protected')
           .expect('Content-Type', /json/)
           .expect(401)
+
+        expect(response.body).toMatchObject({ error: { name: 'Bearer:WebhookIncorrectSignature' } })
       })
 
       it('process requests correctly signed', async () => {

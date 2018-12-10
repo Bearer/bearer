@@ -1,5 +1,7 @@
 import { NextFunction, Request, RequestHandler, Response, Router } from 'express'
 
+import { CustomError } from './errors'
+
 export default (handlers: TWebhookHandlers, options: TWebhookOptions = {}) => {
   const router = Router()
 
@@ -19,29 +21,29 @@ export default (handlers: TWebhookHandlers, options: TWebhookOptions = {}) => {
         res.json({ ack: 'ok' })
         // tslint:disable-next-line:no-unused
       } catch (_error) {
-        res.status(422).json({
-          message: 'Rejecting incoming webhook'
-        })
+        const error = new WebhookHandlerRejection(req.bearerHandlerName)
+        res.status(422).json({ error })
       }
       // tslint:disable-next-line:no-unused
     } catch (_e) {
-      res.status(500).json({ ack: 'error' })
+      const error = new WebhookProcessingError(req.bearerHandlerName)
+      res.status(500).json({ error })
     }
   }) as RequestHandler)
 
   return router
 }
 
-class MissingWebhookHandler extends Error {
-  constructor(private readonly scenarioHandlerName: string) {
-    super()
-  }
-}
+class WebhookMissingHandler extends CustomError {}
+class WebhookProcessingError extends CustomError {}
+class WebhookHandlerRejection extends CustomError {}
+class WebhookIncorrectSignature extends CustomError {}
 
 /**
  * Types
  */
 type TWithHandlerReq = {
+  bearerHandlerName: string
   bearerHandler(): Promise<any>
 }
 
@@ -60,12 +62,11 @@ function ensureHandlerExists(handlers: TWebhookHandlers) {
   return (req: Request & Partial<TWithHandlerReq>, res: Response, next: NextFunction) => {
     const scenarioHandler = req.headers[SCENARIO_HANDLER] as string
     if (!handlers[scenarioHandler]) {
-      const error = new MissingWebhookHandler(scenarioHandler)
-      res.status(422).json({
-        message: error.toString()
-      })
+      const error = new WebhookMissingHandler(`Scenario handler not found: ${scenarioHandler}`)
+      res.status(422).json({ error })
     } else {
       req.bearerHandler = handlers[scenarioHandler]
+      req.bearerHandlerName = scenarioHandler
       next()
     }
   }
@@ -77,8 +78,8 @@ function verifyPayload(token: string) {
     if (sha === token) {
       next()
     } else {
-      res.statusCode = 401
-      res.json({ error: 'Incorrect signature' })
+      const error = new WebhookIncorrectSignature('')
+      res.status(401).json({ error })
     }
   }
 }
