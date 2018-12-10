@@ -34,7 +34,8 @@ describe('Bearer client', () => {
 describe('ScenarioClient', () => {
   const token = 'a-different-token'
   const anotherScenarioName = 'scenario-name'
-  const client = new ScenarioClient(token, {}, anotherScenarioName)
+  type TScenarioIntentNames = 'intent-name' | 'other-intent'
+  const client = new ScenarioClient<TScenarioIntentNames>(token, {}, anotherScenarioName)
 
   it('creates a scenario client', () => {
     expect(client).toBeInstanceOf(ScenarioClient)
@@ -47,11 +48,11 @@ describe('ScenarioClient', () => {
         authorization: token
       }
     })
-      .post(`/backend/api/v1/${anotherScenarioName}/intentName`)
+      .post(`/backend/api/v1/${anotherScenarioName}/intent-name`)
       .query({ sponge: 'bob' })
       .reply(200, distantApi)
 
-    const { data } = await client.call('intentName', { query: { sponge: 'bob' } })
+    const { data } = await client.call('intent-name', { query: { sponge: 'bob' } })
 
     expect(distantApi).toHaveBeenCalled()
     expect(data).toEqual({ ok: 'ok' })
