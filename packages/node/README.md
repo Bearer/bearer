@@ -4,10 +4,68 @@
 
 ## Usage
 
+### Call a Bearer intent
+
+```tsx
+// somewhere in your application, we'll use an express route here
+import clientFactory from '@bearer/node/lib/client'
+
+const bearerClient = clientFactory(process.env.BEARER_SECRET_TOKEN)
+// You can pass query or body parameter depending on Intent requirement
+const options = { query: { status: 'open' }, body: { title: 'title' } }
+
+bearerClient
+  .call('1234-scenario-to-call', 'intentName', options)
+  .then(() => {
+    console.log('Successfully called intent')
+  })
+  .catch(() => {
+    console.log('Something wrong happened')
+  })
+
+//async await wait
+try {
+  const reponse = await bearerClient.call('1234-scenario-to-call', 'intentName', options)
+} catch (e) {
+  // handler error
+}
+// play with response here
 ```
-import { client } from '@bearer/node'
 
-const MyClient = client('MY_CLIENT_ID')
+_Note_: we are using axios a http client. Each .call() returns an Axios Promise. https://github.com/axios/axios
 
-// TODO: DEMONSTRATE API
+### Use Bearer webhook middleware
+
+```tsx
+// your server.ts
+import express from 'express'
+import bearerWebhooks from '@bearer/node/lib/middleware'
+
+const app = express()
+
+// each valueS must be a fonction returning a promise
+const webhookHandlers = {
+  ['scenario-name-to_handle']: () =>
+    new Promise(() => {
+      // you logic goes here
+      if (something) resolve()
+      else {
+        reject()
+      }
+    }),
+  ['with-async-await']: async () => {
+    // you logic goes here
+    const reponse = await somethingYouWantToWaitFor
+    if (response.success) {
+      return whatever
+    } else {
+      throw new Error('An error occured')
+    }
+  }
+}
+// Without options
+app.use('/whaterver_path_you_want/webhhoks', bearerWebhooks(webhookHandlers))
+
+// With options
+app.use('/whaterver_path_you_want/webhhoks', bearerWebhooks(webhookHandlers), { token: 'YOU_SECRET_TOKEN' })
 ```
