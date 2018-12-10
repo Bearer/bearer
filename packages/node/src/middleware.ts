@@ -1,4 +1,5 @@
 import { NextFunction, Request, RequestHandler, Response, Router } from 'express'
+import onHeaders from 'on-headers'
 
 import { CustomError } from './errors'
 
@@ -10,10 +11,17 @@ export default (handlers: TWebhookHandlers, options: TWebhookOptions = {}) => {
   }
 
   router.post('/', ensureHandlerExists(handlers), (async (
-    req: Request & TWithHandlerReq,
+    req: Request & TWithHandlerReq & TTimedRequest,
     res: Response,
     _next: NextFunction
   ) => {
+    const startAt = Date.now()
+
+    // please do not transform to arrow function
+    onHeaders(res, function() {
+      this.setHeader(INTENT_DURATION_HEADER, Date.now() - startAt)
+    })
+
     try {
       const handler = req.bearerHandler()
       try {
@@ -47,6 +55,10 @@ type TWithHandlerReq = {
   bearerHandler(): Promise<any>
 }
 
+type TTimedRequest = {
+  startAt: number
+}
+
 export type TWebhookHandlers = Record<string, () => Promise<any>>
 export type TWebhookOptions = {
   token?: string
@@ -57,7 +69,7 @@ export type TWebhookOptions = {
  */
 const SCENARIO_HANDLER = 'bearer-scenario-handler'
 const BEARER_SHA = 'bearer-sha'
-
+const INTENT_DURATION_HEADER = 'X-BEARER-WEBHOOK-HANDLER-DURATION'
 function ensureHandlerExists(handlers: TWebhookHandlers) {
   return (req: Request & Partial<TWithHandlerReq>, res: Response, next: NextFunction) => {
     const scenarioHandler = req.headers[SCENARIO_HANDLER] as string

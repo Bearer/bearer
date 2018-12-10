@@ -120,12 +120,15 @@ describe('Bearer middleware', () => {
         expect(response.body).toMatchObject({ error: { name: 'Bearer:WebhookIncorrectSignature' } })
       })
 
-      it('process requests correctly signed', async () => {
+      it('process correctly signed requests', async () => {
         await request(app)
           .post('/whatever/protected')
           .set('BEARER-SCENARIO-HANDLER', SUCCESS_HANDLER)
           .set('BEARER-SHA', '1234')
           .expect('Content-Type', /json/)
+          .expect(res => {
+            return res.header['X-BEARER-WEBHOOK-HANDLER-DURATION'] > 0.0
+          })
           .expect(200)
       })
     })
