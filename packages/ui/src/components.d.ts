@@ -48,7 +48,7 @@ declare global {
     }
 
     interface BearerAuthorized {
-      'authenticate': () => void;
+      'authenticate': (authRefId?: string) => void;
       'renderAuthorized': FWithRevoke;
       'renderUnauthorized': FWithAuthenticate;
       'revoke': () => void;

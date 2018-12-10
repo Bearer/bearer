@@ -1,6 +1,6 @@
 import { Component, Element, Event, EventEmitter, Method, Prop, State } from '@bearer/core'
 
-import { AuthenticationListener } from '../../utils/withAuthentication'
+import { AuthenticationListener } from '../../utils/with-authentication'
 import { FWithAuthenticate, FWithRevoke } from '../Authorized/bearer-authorized'
 
 @Component({

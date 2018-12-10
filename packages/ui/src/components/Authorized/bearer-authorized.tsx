@@ -1,6 +1,6 @@
 import { Component, Method, Prop, State } from '@bearer/core'
 
-import { AuthenticationListener } from '../../utils/withAuthentication'
+import { AuthenticationListener } from '../../utils/with-authentication'
 
 export type FWithAuthenticate = (params: { authenticate(): Promise<boolean> }) => any
 export type FWithRevoke = (params: { revoke(): Promise<boolean> }) => any
@@ -58,8 +58,8 @@ export class BearerAuthorized extends AuthenticationListener {
   }
 
   @Method()
-  authenticate() {
-    this.authenticatePromise()
+  authenticate(authRefId?: string) {
+    this.authenticatePromise(authRefId)
       .then(data => {
         console.debug('[BEARER]', 'bearer-authorized', 'authenticated', data)
       })
@@ -73,12 +73,12 @@ export class BearerAuthorized extends AuthenticationListener {
     this.revokePromise()
   }
 
-  authenticatePromise = (): Promise<boolean> => {
+  authenticatePromise = (authRefId?: string): Promise<boolean> => {
     const promise = new Promise<boolean>((resolve, reject) => {
       this.pendingAuthorizationResolve = resolve
       this.pendingAuthorizationReject = reject
     })
-    this.askAuthorization()
+    this.askAuthorization(authRefId)
     return promise
   }
 
