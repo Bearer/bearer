@@ -4,12 +4,15 @@ type TClientOptions = {
   hostUrl: string
 }
 
-export class BearerClient {
-  private static defaultOptions = { hostUrl: 'https://int.bearer.sh/backend/api/v1/' }
-  private options: TClientOptions
-  private client: AxiosInstance
+type TIntentParams = { query?: any; body?: any }
+const defaultIntentParams = { query: {}, body: {} }
 
-  constructor(private readonly token: string, clientOptions: Partial<TClientOptions> = {}) {
+export class BearerClient {
+  protected static defaultOptions = { hostUrl: 'https://int.bearer.sh/backend/api/v1/' }
+  protected options: TClientOptions
+  protected client: AxiosInstance
+
+  constructor(protected readonly token: string, clientOptions: Partial<TClientOptions> = {}) {
     this.options = { ...BearerClient.defaultOptions, ...clientOptions }
 
     this.client = axios.create({
@@ -20,14 +23,22 @@ export class BearerClient {
     })
   }
 
-  public call(
-    scenarioName: string,
-    intentName: string,
-    { query, body }: { query: any; body: any } = { query: {}, body: {} }
-  ) {
+  public call(scenarioName: string, intentName: string, { query, body }: TIntentParams = defaultIntentParams) {
     return this.client.post(`${scenarioName}/${intentName}`, body, {
       params: query
     })
+  }
+}
+
+export class ScenarioClient {
+  private bearerClient: BearerClient
+
+  constructor(token: string, clientOptions: Partial<TClientOptions> = {}, private readonly scenarioName: string) {
+    this.bearerClient = new BearerClient(token, clientOptions)
+  }
+
+  public call(intentName: string, intentParams: TIntentParams = defaultIntentParams) {
+    return this.bearerClient.call(this.scenarioName, intentName, intentParams)
   }
 }
 

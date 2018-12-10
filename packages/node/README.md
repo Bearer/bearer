@@ -34,6 +34,18 @@ try {
 
 _Note_: we are using axios a http client. Each .call() returns an Axios Promise. https://github.com/axios/axios
 
+### Scenario client
+
+Scenario client facilitate intent calls and prevent you to pass scenario name on every call
+
+```tsx
+import { ScenarioClient } from '@bearer/node/lib/client'
+
+const scenarioClient = new ScenarioClient(process.env.BEARER_SECRET_TOKEN, 'a-scenario-uuid')
+
+const reponse = await scenarioClient.call('intentName', options)
+```
+
 ### Use Bearer webhook middleware
 
 ```tsx
