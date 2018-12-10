@@ -167,7 +167,7 @@ export default class Bearer {
     }
   }
 
-  askAuthorizations = ({ scenarioId, setupId, authRefId }): boolean => {
+  askAuthorizations = ({ scenarioId, setupId, authRefId = '' }): boolean => {
     if (this.isSessionInitialized) {
       const AUTHORIZED_URL = `${
         Bearer.config.integrationHost

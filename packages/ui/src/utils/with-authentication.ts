@@ -9,7 +9,7 @@ export class AuthenticationListener {
   protected authorizedListener: any
   protected revokedListener: any
 
-  askAuthorization = (authRefId: string) => {
+  askAuthorization = (authRefId?: string) => {
     console.debug('[BEARER]', 'authenticate', this.SCENARIO_ID, this.bearerContext.setupId)
     Bearer.instance.askAuthorizations({
       scenarioId: this.SCENARIO_ID,
