@@ -1,38 +1,88 @@
 import express from 'express'
 import request from 'supertest'
 
-import middleware from './middleware'
+import middleware, { TWebhookHandlers } from './middleware'
+
+const SUCCESS_HANDLER = 'sponge-bob-scenario-handler'
+const REJECTED_HANDLER = 'patrick-is-rejecting'
+const FAILING_HANDLER = 'patrick-is-failing'
+
+const webHookHandlers: TWebhookHandlers = {
+  [SUCCESS_HANDLER]: jest.fn(() => Promise.resolve(true)),
+  [REJECTED_HANDLER]: jest.fn(() => Promise.reject()),
+  [FAILING_HANDLER]: jest.fn(() => {
+    throw new Error('ok')
+    return new Promise(() => {
+      throw new Error('ok')
+    })
+  })
+}
 
 describe('Bearer middleware', () => {
+  beforeEach(() => {
+    Object.keys(webHookHandlers).map(key => {
+      ;(webHookHandlers[key] as any).mockClear()
+    })
+  })
+
   describe('middleware logic', () => {
     const app = express()
-    const handler = jest.fn().mockImplementation(() => Promise.resolve(true))
-    const failingHandler = jest.fn().mockImplementation(() => {
-      return new Promise(() => {
-        throw new Error('ok')
-      })
-    })
+    app.use('/whatever/webhooks', middleware(webHookHandlers))
 
-    beforeEach(() => {
-      handler.mockReset()
-    })
-
-    app.use('/whatever/webhooks', middleware(handler))
-    app.use('/failing_handler', middleware(failingHandler))
     app.post('/*', (_req, res) => {
       res.status(200).json({ name: 'john' })
     })
+
     app.get('/*', (_req, res) => {
       res.status(200).json({ name: 'john' })
     })
 
-    it('calls handler', async () => {
-      const response = await request(app)
-        .post('/whatever/webhooks')
-        .expect('Content-Type', /json/)
-        .expect(200)
-      expect(handler).toHaveBeenCalled()
-      expect(response.body).toMatchObject({ ack: 'ok' })
+    describe('existing handlers', () => {
+      it('calls handler', async () => {
+        const response = await request(app)
+          .post('/whatever/webhooks')
+          .set('BEARER-SCENARIO-HANDLER', SUCCESS_HANDLER)
+          .expect('Content-Type', /json/)
+          .expect(200)
+
+        expect(webHookHandlers[SUCCESS_HANDLER]).toHaveBeenCalled()
+        expect(response.body).toMatchObject({ ack: 'ok' })
+      })
+
+      it('perform promise even if rejecting', async () => {
+        const response = await request(app)
+          .post('/whatever/webhooks')
+          .set('BEARER-SCENARIO-HANDLER', REJECTED_HANDLER)
+          .expect('Content-Type', /json/)
+          .expect(422)
+
+        expect(webHookHandlers[REJECTED_HANDLER]).toHaveBeenCalled()
+        expect(response.body).toMatchObject({ message: 'Rejecting incoming webhook' })
+      })
+
+      it('fails gracefully if the handler raises an error', async () => {
+        await request(app)
+          .post('/whatever/webhooks')
+          .set('BEARER-SCENARIO-HANDLER', FAILING_HANDLER)
+          .expect('Content-Type', /json/)
+          .expect(500)
+
+        expect(webHookHandlers[FAILING_HANDLER]).toHaveBeenCalled()
+        expect(webHookHandlers[SUCCESS_HANDLER]).not.toHaveBeenCalled()
+      })
+    })
+
+    describe('non existing handler', () => {
+      it('returns unprocessable entity status', async () => {
+        await request(app)
+          .post('/whatever/webhooks')
+          .set('BEARER-SCENARIO-HANDLER', 'unknow')
+          .expect('Content-Type', /json/)
+          .expect(422)
+
+        expect(webHookHandlers[FAILING_HANDLER]).not.toHaveBeenCalled()
+        expect(webHookHandlers[SUCCESS_HANDLER]).not.toHaveBeenCalled()
+      })
     })
 
     it('handles only the route it needs', async () => {
@@ -45,27 +95,19 @@ describe('Bearer middleware', () => {
         .expect('Content-Type', /json/)
         .expect(200)
 
-      expect(handler).not.toHaveBeenCalled()
+      expect(webHookHandlers[SUCCESS_HANDLER]).not.toHaveBeenCalled()
+      expect(webHookHandlers[FAILING_HANDLER]).not.toHaveBeenCalled()
 
       expect(postResponse.body).toMatchObject({ name: 'john' })
       expect(getResponse.body).toMatchObject({ name: 'john' })
-    })
-
-    it('fails gracefully', async () => {
-      await request(app)
-        .post('/failing_handler')
-        .expect('Content-Type', /json/)
-        .expect(500)
-      expect(handler).not.toHaveBeenCalled()
-      expect(failingHandler).toHaveBeenCalled()
     })
   })
 
   describe('body validation', () => {
     const app = express()
+
     describe('secret given', () => {
-      const protectedHandler = jest.fn().mockImplementation(() => Promise.resolve(true))
-      app.use('/whatever/protected', middleware(protectedHandler, { token: '1234' }))
+      app.use('/whatever/protected', middleware(webHookHandlers, { token: '1234' }))
 
       it('stops unsigned requests', async () => {
         await request(app)
@@ -77,25 +119,23 @@ describe('Bearer middleware', () => {
       it('process requests correctly signed', async () => {
         await request(app)
           .post('/whatever/protected')
+          .set('BEARER-SCENARIO-HANDLER', SUCCESS_HANDLER)
           .set('BEARER-SHA', '1234')
           .expect('Content-Type', /json/)
           .expect(200)
-        expect(protectedHandler).toHaveBeenCalled()
       })
     })
 
     describe('no secret given', () => {
-      const unprotectedHnadler = jest.fn().mockImplementation(() => Promise.resolve(true))
-      app.use('/whatever/unprotected', middleware(unprotectedHnadler))
+      app.use('/whatever/unprotected', middleware(webHookHandlers))
 
       it('process all requests', async () => {
         await request(app)
           .post('/whatever/unprotected')
+          .set('BEARER-SCENARIO-HANDLER', SUCCESS_HANDLER)
           .set('BEARER-SHA', 'it does not matter')
           .expect('Content-Type', /json/)
           .expect(200)
-
-        expect(unprotectedHnadler).toHaveBeenCalled()
       })
     })
   })
