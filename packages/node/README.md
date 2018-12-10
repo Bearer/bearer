@@ -59,12 +59,12 @@ scenarioClient.call('other-intent', options) // OK
 scenarioClient.call('unknow-intent', options) // Argument of type '"unknow-intent"' is not assignable to parameter of type 'TScenarioIntentNames'.
 ```
 
-### Use Bearer webhook middleware
+### Use Bearer express webhook middleware
 
 ```tsx
 // your server.ts
 import express from 'express'
-import bearerWebhooks from '@bearer/node/lib/middleware'
+import bearerWebhooks from '@bearer/node/lib/express'
 
 const app = express()
 

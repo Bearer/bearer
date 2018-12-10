@@ -1,7 +1,7 @@
 import express from 'express'
 import request from 'supertest'
 
-import middleware, { TWebhookHandlers } from './middleware'
+import middleware, { TWebhookHandlers } from './express'
 
 const SUCCESS_HANDLER = 'sponge-bob-scenario-handler'
 const REJECTED_HANDLER = 'patrick-is-rejecting'
