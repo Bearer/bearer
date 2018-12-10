@@ -167,9 +167,11 @@ export default class Bearer {
     }
   }
 
-  askAuthorizations = ({ scenarioId, setupId }): boolean => {
+  askAuthorizations = ({ scenarioId, setupId, authRefId }): boolean => {
     if (this.isSessionInitialized) {
-      const AUTHORIZED_URL = `${Bearer.config.integrationHost}v1/auth/${scenarioId}?setupId=${setupId}`
+      const AUTHORIZED_URL = `${
+        Bearer.config.integrationHost
+      }v1/auth/${scenarioId}?setupId=${setupId}&authId=${authRefId}`
       window.open(AUTHORIZED_URL, '', 'resizable,scrollbars,status,centerscreen=yes,width=500,height=600')
       return true
     }
