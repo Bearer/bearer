@@ -19,7 +19,7 @@ router.get('v1/auth/:integration_uuid', async ctx => {
       localStorage.setItem('${ctx.request.query.setupId}|${ctx.params.integration_uuid}', true)
       postRobot.send(window.opener, 'BEARER_AUTHORIZED', {
         scenarioId: '${ctx.params.integration_uuid}',
-        authId: '${auth}'
+        authId: '${ctx.request.query.authId || auth}'
       })
       setTimeout(function() {
         window.close()
