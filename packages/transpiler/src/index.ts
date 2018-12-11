@@ -30,6 +30,7 @@ import BearerScenarioIdInjector from './transformers/scenario-id-accessor-inject
  */
 import InputDecoratorModifier from './transformers/input-decorator'
 import OutputDecoratorModifier from './transformers/output-decorator'
+import PropSetDecorator from './transformers/prop-set-decorator'
 
 import { transformer as generateManifestFile } from './transformers/generate-manifest-file'
 
@@ -65,6 +66,7 @@ export default class Transpiler {
         EventNameScoping({ metadata: this.metadata }),
         ComponenttagNameScoping({ verbose, metadata: this.metadata }),
         GatherIO({ verbose, metadata: this.metadata, generator: this.generator }),
+        PropSetDecorator({ verbose, metadata: this.metadata }),
         bearerCleaning({ verbose, metadata: this.metadata }),
         DumpSourceCode({
           verbose,
@@ -224,7 +226,7 @@ export default class Transpiler {
         this.logErrors(fileName)
       }
     } catch (e) {
-      console.error('Something wrong happened\n', e)
+      console.error('getEmitOutput failed for for:\n', fileName, '\n', e)
     }
   }
 

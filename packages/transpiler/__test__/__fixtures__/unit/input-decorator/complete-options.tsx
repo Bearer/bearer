@@ -1,4 +1,4 @@
-import { BearerRef, Input, RootComponent, State } from '@bearer/core'
+import { BearerRef, Input, RootComponent, State, Prop } from '@bearer/core'
 
 type Farmer = {
   id: string
@@ -29,6 +29,9 @@ class NoOptionsComponent {
 
   @Input()
   objectWithoutInitializer: BearerRef<{ title: string }>
+
+  @Prop({ mutable: true })
+  aValue: String
 
   @Input({
     group: 'other-group',

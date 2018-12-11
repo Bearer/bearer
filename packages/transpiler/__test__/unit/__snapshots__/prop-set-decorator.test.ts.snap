@@ -1,0 +1,145 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Prop set decorator units complete options match snapshot 1`] = `
+Object {
+  "file": "complete-options.tsx",
+  "postContent": "import { BearerRef, State, Prop, Component, Listen, Intent, Watch } from '@bearer/core';
+@Component({
+    tag: \\"no-options-action\\",
+    styleUrl: \\"noOptions.css\\",
+    shadow: true
+})
+class NoOptionsComponent {
+    @Prop({ mutable: true })
+    aValueThatChanges: String;
+    @Prop()
+    aStaticValue: String;
+    @State()
+    aString: BearerRef<string> = 'ok';
+    @Listen(\\"body:bearer-SPONGE_BOB-no-options-aStringSaved\\")
+    aStringRefIdChanged(event) {
+        if (this.aStringRefId !== event.detail.referenceId) {
+            this.aStringRefId = event.detail.referenceId;
+        }
+        else {
+            this._loadAString();
+        }
+    }
+    _loadAString = () => {
+        this.fetcherRetrieveAString({ referenceId: this.aStringRefId }).then(({ data }: {
+            data: BearerRef<string>;
+        }) => {
+            this.aString = data;
+        });
+    };
+    private fetcherRetrieveAString;
+    @Watch(\\"aStringRefId\\")
+    _watchAString(newValueName: string) {
+        if (newValueName) {
+            this._loadAString();
+        }
+    }
+    @Prop({ \\"mutable\\": true })
+    aStringRefId: string;
+    @State()
+    aStringWithoutInitializer: BearerRef<string>;
+    @Listen(\\"body:bearer-SPONGE_BOB-no-options-aStringWithoutInitializerSaved\\")
+    aStringWithoutInitializerRefIdChanged(event) {
+        if (this.aStringWithoutInitializerRefId !== event.detail.referenceId) {
+            this.aStringWithoutInitializerRefId = event.detail.referenceId;
+        }
+        else {
+            this._loadAStringWithoutInitializer();
+        }
+    }
+    _loadAStringWithoutInitializer = () => {
+        this.fetcherRetrieveAStringWithoutInitializer({ referenceId: this.aStringWithoutInitializerRefId }).then(({ data }: {
+            data: BearerRef<string>;
+        }) => {
+            this.aStringWithoutInitializer = data;
+        });
+    };
+    private fetcherRetrieveAStringWithoutInitializer;
+    @Watch(\\"aStringWithoutInitializerRefId\\")
+    _watchAStringWithoutInitializer(newValueName: string) {
+        if (newValueName) {
+            this._loadAStringWithoutInitializer();
+        }
+    }
+    @Prop({ \\"mutable\\": true })
+    aStringWithoutInitializerRefId: string;
+    @State()
+    object: BearerRef<{
+        title: string;
+    }> = { title: 'Guest' };
+    @Listen(\\"body:bearer-SPONGE_BOB-no-options-objectSaved\\")
+    objectRefIdChanged(event) {
+        if (this.objectRefId !== event.detail.referenceId) {
+            this.objectRefId = event.detail.referenceId;
+        }
+        else {
+            this._loadObject();
+        }
+    }
+    _loadObject = () => {
+        this.fetcherRetrieveObject({ referenceId: this.objectRefId }).then(({ data }: {
+            data: BearerRef<{
+                title: string;
+            }>;
+        }) => {
+            this.object = data;
+        });
+    };
+    private fetcherRetrieveObject;
+    @Watch(\\"objectRefId\\")
+    _watchObject(newValueName: string) {
+        if (newValueName) {
+            this._loadObject();
+        }
+    }
+    @Prop({ \\"mutable\\": true })
+    objectRefId: string;
+    constructor() {
+        Intent(\\"retrieveAString\\")(this, \\"fetcherRetrieveAString\\");
+        Intent(\\"retrieveAStringWithoutInitializer\\")(this, \\"fetcherRetrieveAStringWithoutInitializer\\");
+        Intent(\\"retrieveObject\\")(this, \\"fetcherRetrieveObject\\");
+    }
+    get SCENARIO_ID() { return \\"SPONGE_BOB\\"; }
+    @Prop({ \\"context\\": \\"bearer\\" })
+    bearerContext: any;
+    @Prop()
+    setupId: string;
+    componentDidLoad() {
+        if (this.setupId) {
+            this.bearerContext.setupId = this.setupId;
+        }
+        if (this.aStringRefId) {
+            this._loadAString();
+        }
+        if (this.aStringWithoutInitializerRefId) {
+            this._loadAStringWithoutInitializer();
+        }
+        if (this.objectRefId) {
+            this._loadObject();
+        }
+    }
+    @Watch(\\"aValueThatChanges\\")
+    aValueThatChangesPropSetWatcher(newValue) {
+        document.dispatchEvent(new CustomEvent(\\"no-options-action-prop-set\\", { detail: { aValueThatChanges: newValue } }));
+    }
+    @Watch(\\"aStringRefId\\")
+    aStringRefIdPropSetWatcher(newValue) {
+        document.dispatchEvent(new CustomEvent(\\"no-options-action-prop-set\\", { detail: { aStringRefId: newValue } }));
+    }
+    @Watch(\\"aStringWithoutInitializerRefId\\")
+    aStringWithoutInitializerRefIdPropSetWatcher(newValue) {
+        document.dispatchEvent(new CustomEvent(\\"no-options-action-prop-set\\", { detail: { aStringWithoutInitializerRefId: newValue } }));
+    }
+    @Watch(\\"objectRefId\\")
+    objectRefIdPropSetWatcher(newValue) {
+        document.dispatchEvent(new CustomEvent(\\"no-options-action-prop-set\\", { detail: { objectRefId: newValue } }));
+    }
+}
+",
+}
+`;
