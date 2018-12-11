@@ -30,7 +30,7 @@ class NoOptionsComponent {
     //   }
     // }
     >;
-    @Event({ eventName: \\"bearer|SPONGE_BOB|no-options|farmerSaved\\" })
+    @Event({ eventName: \\"bearer-SPONGE_BOB-no-options-farmerSaved\\" })
     farmerSaved: EventEmitter;
     @State()
     farmer: BearerRef<Farmer>;
@@ -44,7 +44,7 @@ class NoOptionsComponent {
         });
     }
     private milkWithAbottle: BearerFetch<BearerRef<Farmer>>;
-    @Event({ eventName: \\"bearer|SPONGE_BOB|no-options|milked\\" })
+    @Event({ eventName: \\"bearer-SPONGE_BOB-no-options-milked\\" })
     milked: EventEmitter;
     @State()
     farmerAndPanda: BearerRef<Farmer> = {};

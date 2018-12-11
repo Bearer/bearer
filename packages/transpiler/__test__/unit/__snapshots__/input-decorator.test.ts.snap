@@ -23,7 +23,7 @@ class NoOptionsComponent {
     refNotOverrided: string;
     @State()
     farmer: BearerRef<Farmer>;
-    @Listen(\\"body:bearer|SPONGE_BOB|no-options|farmerSaved\\")
+    @Listen(\\"body:bearer-SPONGE_BOB-no-options-farmerSaved\\")
     farmerRefIdChanged(event) {
         if (this.farmerRefId !== event.detail.referenceId) {
             this.farmerRefId = event.detail.referenceId;
@@ -50,7 +50,7 @@ class NoOptionsComponent {
     farmerRefId: string;
     @State()
     aString: BearerRef<string> = 'ok';
-    @Listen(\\"body:bearer|SPONGE_BOB|no-options|aStringSaved\\")
+    @Listen(\\"body:bearer-SPONGE_BOB-no-options-aStringSaved\\")
     aStringRefIdChanged(event) {
         if (this.aStringRefId !== event.detail.referenceId) {
             this.aStringRefId = event.detail.referenceId;
@@ -77,7 +77,7 @@ class NoOptionsComponent {
     aStringRefId: string;
     @State()
     aStringWithoutInitializer: BearerRef<string>;
-    @Listen(\\"body:bearer|SPONGE_BOB|no-options|aStringWithoutInitializerSaved\\")
+    @Listen(\\"body:bearer-SPONGE_BOB-no-options-aStringWithoutInitializerSaved\\")
     aStringWithoutInitializerRefIdChanged(event) {
         if (this.aStringWithoutInitializerRefId !== event.detail.referenceId) {
             this.aStringWithoutInitializerRefId = event.detail.referenceId;
@@ -106,7 +106,7 @@ class NoOptionsComponent {
     object: BearerRef<{
         title: string;
     }> = { title: 'Guest' };
-    @Listen(\\"body:bearer|SPONGE_BOB|no-options|objectSaved\\")
+    @Listen(\\"body:bearer-SPONGE_BOB-no-options-objectSaved\\")
     objectRefIdChanged(event) {
         if (this.objectRefId !== event.detail.referenceId) {
             this.objectRefId = event.detail.referenceId;
@@ -137,7 +137,7 @@ class NoOptionsComponent {
     objectWithoutInitializer: BearerRef<{
         title: string;
     }>;
-    @Listen(\\"body:bearer|SPONGE_BOB|no-options|objectWithoutInitializerSaved\\")
+    @Listen(\\"body:bearer-SPONGE_BOB-no-options-objectWithoutInitializerSaved\\")
     objectWithoutInitializerRefIdChanged(event) {
         if (this.objectWithoutInitializerRefId !== event.detail.referenceId) {
             this.objectWithoutInitializerRefId = event.detail.referenceId;
@@ -166,7 +166,7 @@ class NoOptionsComponent {
     objectWithoutInitializerRefId: string;
     @State()
     spongeBob: BearerRef<Sponge>;
-    @Listen(\\"body:bearer|SPONGE_BOB|other-group|patrickWasKilled\\")
+    @Listen(\\"body:bearer-SPONGE_BOB-other-group-patrickWasKilled\\")
     patrickChanged(event) {
         if (this.patrick !== event.detail.referenceId) {
             this.patrick = event.detail.referenceId;
@@ -193,7 +193,7 @@ class NoOptionsComponent {
     patrick: string;
     @State()
     spongeBobOverrided: BearerRef<Sponge>;
-    @Listen(\\"body:bearer|SPONGE_BOB|no-options|spongeBobOverridedSaved\\")
+    @Listen(\\"body:bearer-SPONGE_BOB-no-options-spongeBobOverridedSaved\\")
     refNotOverridedChanged(event) {
         if (this.refNotOverrided !== event.detail.referenceId) {
             this.refNotOverrided = event.detail.referenceId;

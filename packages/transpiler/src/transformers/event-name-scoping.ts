@@ -8,7 +8,7 @@ import { decoratorNamed, hasDecoratorNamed } from '../helpers/decorator-helpers'
 import { getNodeName } from '../helpers/node-helpers'
 import { TransformerOptions } from '../types'
 
-const SEPARATOR = '|'
+const SEPARATOR = '-'
 
 export function prefixEvent(eventName: string): string {
   return [BEARER, process.env[Env.BEARER_SCENARIO_ID], eventName].join(SEPARATOR)

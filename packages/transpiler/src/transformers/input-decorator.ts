@@ -186,7 +186,7 @@ function createEventListener(meta: InputMeta) {
     [
       ts.createDecorator(
         ts.createCall(ts.createIdentifier(Decorators.Listen), undefined, [
-          ts.createLiteral(`body:${meta.group}|${meta.eventName}`)
+          ts.createLiteral(`body:${meta.group}:${meta.eventName}`)
         ])
       )
     ],
