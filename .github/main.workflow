@@ -7,13 +7,15 @@ action "GitHub Action for npm" {
   uses = "actions/npm@6309cd9"
   secrets = ["NPM_TOKEN"]
   args = "install"
+  runs = "yarn"
 }
 
 action "Lerna bootstrap" {
   uses = "actions/npm@6309cd9"
   needs = ["GitHub Action for npm"]
   secrets = ["NPM_TOKEN"]
-  args = "run lerna bootstrap"
+  args = "lerna bootstrap"
+  runs = "yarn"
 }
 
 action "Run test" {
