@@ -1,39 +1,39 @@
 workflow "Build, test and publish" {
   on = "push"
-  resolves = ["Publish"]
-}
-
-action "GitHub Action for npm" {
-  uses = "docker://node:10"
-  secrets = ["NPM_TOKEN"]
-  args = "install"
-  runs = "yarn"
-}
-
-action "Lerna bootstrap" {
-  uses = "docker://node:10"
-  needs = ["GitHub Action for npm"]
-  secrets = ["NPM_TOKEN"]
-  args = "lerna bootstrap"
-  runs = "yarn"
+  resolves = [
+    "docker://node:10-2",
+  ]
 }
 
 action "Run test" {
   uses = "docker://node:10"
-  needs = ["Lerna bootstrap"]
   args = "test"
   runs = "yarn"
 }
 
-action "Release only" {
-  uses = "actions/bin/filter@95c1a3b"
-  args = "branch release"
-  needs = ["Run test"]
+action "docker://node:10" {
+  uses = "docker://node:10"
+  runs = "yarn"
+  args = "install"
+  secrets = ["NPM_TOKEN"]
 }
 
-action "Publish" {
-  uses = "actions/npm@6309cd9"
-  needs = ["Release only"]
-  runs = "sdqsdqsd"
-  args = "--yes "
+action "docker://node:10-1" {
+  uses = "docker://node:10"
+  needs = ["docker://node:10"]
+  runs = "yarn"
+  args = "test"
+}
+
+action "Filters for GitHub Actions" {
+  uses = "actions/bin/filter@95c1a3b"
+  needs = ["docker://node:10-1"]
+  args = "branch release"
+}
+
+action "docker://node:10-2" {
+  uses = "docker://node:10"
+  needs = ["Filters for GitHub Actions"]
+  runs = "yarn"
+  args = "fail"
 }
