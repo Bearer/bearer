@@ -70,7 +70,7 @@ const app = express()
 
 // each valueS must be a fonction returning a promise
 const webhookHandlers = {
-  ['scenario-name-to_handle']: () =>
+  ['scenario-name-to_handle']: req =>
     new Promise(() => {
       // you logic goes here
       if (something) resolve()
@@ -78,8 +78,9 @@ const webhookHandlers = {
         reject()
       }
     }),
-  ['with-async-await']: async () => {
+  ['with-async-await']: async req => {
     // you logic goes here
+    // ex: console.log(req.body)
     const reponse = await somethingYouWantToWaitFor
     if (response.success) {
       return whatever

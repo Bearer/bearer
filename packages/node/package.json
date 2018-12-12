@@ -23,6 +23,7 @@
     "url": "git+https://github.com/Bearer/bearer.git"
   },
   "scripts": {
+    "start": "tsc --watch",
     "build": "tsc",
     "clean": "rm -rf lib",
     "prepack": "yarn clean && yarn build",
@@ -36,6 +37,7 @@
     "@types/jest": "^23.3.10",
     "@types/on-headers": "^1.0.0",
     "@types/supertest": "^2.0.7",
+    "jest": "^23.6.0",
     "nock": "^10.0.3",
     "supertest": "^3.3.0",
     "ts-jest": "^23.10.5",

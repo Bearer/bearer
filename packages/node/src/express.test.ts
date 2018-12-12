@@ -1,14 +1,15 @@
-import express from 'express'
+import express, { Request } from 'express'
+import { IncomingMessage } from 'http'
 import request from 'supertest'
 
-import middleware, { TWebhookHandlers } from './express'
+import middleware from './express'
 
 const SUCCESS_HANDLER = 'sponge-bob-scenario-handler'
 const REJECTED_HANDLER = 'patrick-is-rejecting'
 const FAILING_HANDLER = 'patrick-is-failing'
 
-const webHookHandlers: TWebhookHandlers = {
-  [SUCCESS_HANDLER]: jest.fn(() => Promise.resolve(true)),
+const webHookHandlers = {
+  [SUCCESS_HANDLER]: jest.fn((req: Request & { title: string }) => Promise.resolve(req.title)),
   [REJECTED_HANDLER]: jest.fn(() => Promise.reject()),
   [FAILING_HANDLER]: jest.fn(() => {
     throw new Error('ok')
@@ -21,12 +22,17 @@ const webHookHandlers: TWebhookHandlers = {
 describe('Bearer middleware', () => {
   beforeEach(() => {
     Object.keys(webHookHandlers).map(key => {
-      ;(webHookHandlers[key] as any).mockClear()
+      //@ts-ignore
+      webHookHandlers[key].mockClear()
     })
   })
 
   describe('middleware logic', () => {
     const app = express()
+    app.use((req: Request & { title?: string }, _res, next) => {
+      req.title = 'Sponge bob is the king'
+      next()
+    })
     app.use('/whatever/webhooks', middleware(webHookHandlers))
 
     app.post('/*', (_req, res) => {
@@ -38,7 +44,18 @@ describe('Bearer middleware', () => {
     })
 
     describe('existing handlers', () => {
-      it('calls handler', async () => {
+      it('calls handler with req object', async () => {
+        await request(app)
+          .post('/whatever/webhooks')
+          .set('BEARER-SCENARIO-HANDLER', SUCCESS_HANDLER)
+
+        const mock = webHookHandlers[SUCCESS_HANDLER]
+        // request is passed down
+        expect(mock.mock.calls[0][0]).toBeInstanceOf(IncomingMessage)
+        expect(mock.mock.calls[0][0].title).toBe('Sponge bob is the king')
+      })
+
+      it('returns correct success payload', async () => {
         const response = await request(app)
           .post('/whatever/webhooks')
           .set('BEARER-SCENARIO-HANDLER', SUCCESS_HANDLER)

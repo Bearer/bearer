@@ -23,7 +23,7 @@ export default (handlers: TWebhookHandlers, options: TWebhookOptions = {}) => {
     })
 
     try {
-      const handler = req.bearerHandler()
+      const handler = req.bearerHandler(req)
       try {
         await handler
         res.json({ ack: 'ok' })
@@ -50,16 +50,17 @@ class WebhookIncorrectSignature extends CustomError {}
 /**
  * Types
  */
+
 type TWithHandlerReq = {
   bearerHandlerName: string
-  bearerHandler(): Promise<any>
+  bearerHandler<T extends Request>(req: T): Promise<any>
 }
 
 type TTimedRequest = {
   startAt: number
 }
 
-export type TWebhookHandlers = Record<string, () => Promise<any>>
+export type TWebhookHandlers = Record<string, <T extends Request>(request: T) => Promise<any>>
 export type TWebhookOptions = {
   token?: string
 }
@@ -70,6 +71,7 @@ export type TWebhookOptions = {
 const SCENARIO_HANDLER = 'bearer-scenario-handler'
 const BEARER_SHA = 'bearer-sha'
 const INTENT_DURATION_HEADER = 'X-BEARER-WEBHOOK-HANDLER-DURATION'
+
 function ensureHandlerExists(handlers: TWebhookHandlers) {
   return (req: Request & Partial<TWithHandlerReq>, res: Response, next: NextFunction) => {
     const scenarioHandler = req.headers[SCENARIO_HANDLER] as string
