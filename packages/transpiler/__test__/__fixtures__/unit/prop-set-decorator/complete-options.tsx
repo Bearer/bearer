@@ -6,13 +6,7 @@ import { BearerRef, Input, RootComponent, State, Prop } from '@bearer/core'
 })
 class NoOptionsComponent {
   @Input()
-  aString: BearerRef<string> = 'ok'
-
-  @Input()
-  aStringWithoutInitializer: BearerRef<string>
-
-  @Input()
-  object: BearerRef<{ title: string }> = { title: 'Guest' }
+  aStringInput: BearerRef<string> = 'ok'
 
   @Prop({ mutable: true })
   aValueThatChanges: String

@@ -3,7 +3,7 @@
 exports[`Input decorator units complete options match snapshot 1`] = `
 Object {
   "file": "complete-options.tsx",
-  "postContent": "import { BearerRef, State, Component, Listen, Intent, Watch, Prop } from '@bearer/core';
+  "postContent": "import { BearerRef, State, Prop, Component, Listen, Intent, Watch, Event, EventEmitter } from '@bearer/core';
 type Farmer = {
     id: string;
     name: string;
@@ -252,6 +252,32 @@ class NoOptionsComponent {
         if (this.refNotOverrided) {
             this._loadSpongeBobOverrided();
         }
+    }
+    @Event({ eventName: \\"no-options-action-prop-set\\", bubbles: true, cancelable: true })
+    propSetEmitter: EventEmitter;
+    @Watch(\\"farmerRefId\\")
+    farmerRefIdPropSetWatcher(newValue) {
+        this.propSetEmitter.emit({ farmerRefId: newValue });
+    }
+    @Watch(\\"aStringRefId\\")
+    aStringRefIdPropSetWatcher(newValue) {
+        this.propSetEmitter.emit({ aStringRefId: newValue });
+    }
+    @Watch(\\"aStringWithoutInitializerRefId\\")
+    aStringWithoutInitializerRefIdPropSetWatcher(newValue) {
+        this.propSetEmitter.emit({ aStringWithoutInitializerRefId: newValue });
+    }
+    @Watch(\\"objectRefId\\")
+    objectRefIdPropSetWatcher(newValue) {
+        this.propSetEmitter.emit({ objectRefId: newValue });
+    }
+    @Watch(\\"objectWithoutInitializerRefId\\")
+    objectWithoutInitializerRefIdPropSetWatcher(newValue) {
+        this.propSetEmitter.emit({ objectWithoutInitializerRefId: newValue });
+    }
+    @Watch(\\"patrick\\")
+    patrickPropSetWatcher(newValue) {
+        this.propSetEmitter.emit({ patrick: newValue });
     }
 }
 ",

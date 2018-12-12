@@ -543,6 +543,24 @@ export class AttachPullRequestAction {
         this.attachedPullRequests = state[\\"attachedPullRequests\\"];
         this.ducks = state[\\"goats\\"];
     };
+    @Event({ eventName: \\"attach-pull-request-action-prop-set\\", bubbles: true, cancelable: true })
+    propSetEmitter: EventEmitter;
+    @Watch(\\"farmerRefId\\")
+    farmerRefIdPropSetWatcher(newValue) {
+        this.propSetEmitter.emit({ farmerRefId: newValue });
+    }
+    @Watch(\\"goatId\\")
+    goatIdPropSetWatcher(newValue) {
+        this.propSetEmitter.emit({ goatId: newValue });
+    }
+    @Watch(\\"feedPandaRefId\\")
+    feedPandaRefIdPropSetWatcher(newValue) {
+        this.propSetEmitter.emit({ feedPandaRefId: newValue });
+    }
+    @Watch(\\"shortPandaRefId\\")
+    shortPandaRefIdPropSetWatcher(newValue) {
+        this.propSetEmitter.emit({ shortPandaRefId: newValue });
+    }
 }
 ",
 }

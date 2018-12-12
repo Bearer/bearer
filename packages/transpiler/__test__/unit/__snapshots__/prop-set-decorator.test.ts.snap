@@ -15,94 +15,34 @@ class NoOptionsComponent {
     @Prop()
     aStaticValue: String;
     @State()
-    aString: BearerRef<string> = 'ok';
-    @Listen(\\"body:bearer-SPONGE_BOB-no-options-aStringSaved\\")
-    aStringRefIdChanged(event) {
-        if (this.aStringRefId !== event.detail.referenceId) {
-            this.aStringRefId = event.detail.referenceId;
+    aStringInput: BearerRef<string> = 'ok';
+    @Listen(\\"body:bearer-SPONGE_BOB-no-options-aStringInputSaved\\")
+    aStringInputRefIdChanged(event) {
+        if (this.aStringInputRefId !== event.detail.referenceId) {
+            this.aStringInputRefId = event.detail.referenceId;
         }
         else {
-            this._loadAString();
+            this._loadAStringInput();
         }
     }
-    _loadAString = () => {
-        this.fetcherRetrieveAString({ referenceId: this.aStringRefId }).then(({ data }: {
+    _loadAStringInput = () => {
+        this.fetcherRetrieveAStringInput({ referenceId: this.aStringInputRefId }).then(({ data }: {
             data: BearerRef<string>;
         }) => {
-            this.aString = data;
+            this.aStringInput = data;
         });
     };
-    private fetcherRetrieveAString;
-    @Watch(\\"aStringRefId\\")
-    _watchAString(newValueName: string) {
+    private fetcherRetrieveAStringInput;
+    @Watch(\\"aStringInputRefId\\")
+    _watchAStringInput(newValueName: string) {
         if (newValueName) {
-            this._loadAString();
+            this._loadAStringInput();
         }
     }
     @Prop({ \\"mutable\\": true })
-    aStringRefId: string;
-    @State()
-    aStringWithoutInitializer: BearerRef<string>;
-    @Listen(\\"body:bearer-SPONGE_BOB-no-options-aStringWithoutInitializerSaved\\")
-    aStringWithoutInitializerRefIdChanged(event) {
-        if (this.aStringWithoutInitializerRefId !== event.detail.referenceId) {
-            this.aStringWithoutInitializerRefId = event.detail.referenceId;
-        }
-        else {
-            this._loadAStringWithoutInitializer();
-        }
-    }
-    _loadAStringWithoutInitializer = () => {
-        this.fetcherRetrieveAStringWithoutInitializer({ referenceId: this.aStringWithoutInitializerRefId }).then(({ data }: {
-            data: BearerRef<string>;
-        }) => {
-            this.aStringWithoutInitializer = data;
-        });
-    };
-    private fetcherRetrieveAStringWithoutInitializer;
-    @Watch(\\"aStringWithoutInitializerRefId\\")
-    _watchAStringWithoutInitializer(newValueName: string) {
-        if (newValueName) {
-            this._loadAStringWithoutInitializer();
-        }
-    }
-    @Prop({ \\"mutable\\": true })
-    aStringWithoutInitializerRefId: string;
-    @State()
-    object: BearerRef<{
-        title: string;
-    }> = { title: 'Guest' };
-    @Listen(\\"body:bearer-SPONGE_BOB-no-options-objectSaved\\")
-    objectRefIdChanged(event) {
-        if (this.objectRefId !== event.detail.referenceId) {
-            this.objectRefId = event.detail.referenceId;
-        }
-        else {
-            this._loadObject();
-        }
-    }
-    _loadObject = () => {
-        this.fetcherRetrieveObject({ referenceId: this.objectRefId }).then(({ data }: {
-            data: BearerRef<{
-                title: string;
-            }>;
-        }) => {
-            this.object = data;
-        });
-    };
-    private fetcherRetrieveObject;
-    @Watch(\\"objectRefId\\")
-    _watchObject(newValueName: string) {
-        if (newValueName) {
-            this._loadObject();
-        }
-    }
-    @Prop({ \\"mutable\\": true })
-    objectRefId: string;
+    aStringInputRefId: string;
     constructor() {
-        Intent(\\"retrieveAString\\")(this, \\"fetcherRetrieveAString\\");
-        Intent(\\"retrieveAStringWithoutInitializer\\")(this, \\"fetcherRetrieveAStringWithoutInitializer\\");
-        Intent(\\"retrieveObject\\")(this, \\"fetcherRetrieveObject\\");
+        Intent(\\"retrieveAStringInput\\")(this, \\"fetcherRetrieveAStringInput\\");
     }
     get SCENARIO_ID() { return \\"SPONGE_BOB\\"; }
     @Prop({ \\"context\\": \\"bearer\\" })
@@ -113,14 +53,8 @@ class NoOptionsComponent {
         if (this.setupId) {
             this.bearerContext.setupId = this.setupId;
         }
-        if (this.aStringRefId) {
-            this._loadAString();
-        }
-        if (this.aStringWithoutInitializerRefId) {
-            this._loadAStringWithoutInitializer();
-        }
-        if (this.objectRefId) {
-            this._loadObject();
+        if (this.aStringInputRefId) {
+            this._loadAStringInput();
         }
     }
     @Event({ eventName: \\"no-options-action-prop-set\\", bubbles: true, cancelable: true })
@@ -129,17 +63,9 @@ class NoOptionsComponent {
     aValueThatChangesPropSetWatcher(newValue) {
         this.propSetEmitter.emit({ aValueThatChanges: newValue });
     }
-    @Watch(\\"aStringRefId\\")
-    aStringRefIdPropSetWatcher(newValue) {
-        this.propSetEmitter.emit({ aStringRefId: newValue });
-    }
-    @Watch(\\"aStringWithoutInitializerRefId\\")
-    aStringWithoutInitializerRefIdPropSetWatcher(newValue) {
-        this.propSetEmitter.emit({ aStringWithoutInitializerRefId: newValue });
-    }
-    @Watch(\\"objectRefId\\")
-    objectRefIdPropSetWatcher(newValue) {
-        this.propSetEmitter.emit({ objectRefId: newValue });
+    @Watch(\\"aStringInputRefId\\")
+    aStringInputRefIdPropSetWatcher(newValue) {
+        this.propSetEmitter.emit({ aStringInputRefId: newValue });
     }
 }
 ",

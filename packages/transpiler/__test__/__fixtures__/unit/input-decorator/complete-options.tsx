@@ -30,9 +30,6 @@ class NoOptionsComponent {
   @Input()
   objectWithoutInitializer: BearerRef<{ title: string }>
 
-  @Prop({ mutable: true })
-  aValue: String
-
   @Input({
     group: 'other-group',
     propertyReferenceIdName: 'patrick',

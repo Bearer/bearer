@@ -71,6 +71,16 @@ class NoOptionsComponent {
             this.bearerContext.setupId = this.setupId;
         }
     }
+    @Event({ eventName: \\"no-options-action-prop-set\\", bubbles: true, cancelable: true })
+    propSetEmitter: EventEmitter;
+    @Watch(\\"farmerRefId\\")
+    farmerRefIdPropSetWatcher(newValue) {
+        this.propSetEmitter.emit({ farmerRefId: newValue });
+    }
+    @Watch(\\"farmerAndPandaRefId\\")
+    farmerAndPandaRefIdPropSetWatcher(newValue) {
+        this.propSetEmitter.emit({ farmerAndPandaRefId: newValue });
+    }
 }
 ",
 }
