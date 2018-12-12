@@ -4,14 +4,14 @@ workflow "Build, test and publish" {
 }
 
 action "GitHub Action for npm" {
-  uses = "actions/npm@6309cd9"
+  uses = "docker://node:10"
   secrets = ["NPM_TOKEN"]
   args = "install"
   runs = "yarn"
 }
 
 action "Lerna bootstrap" {
-  uses = "actions/npm@6309cd9"
+  uses = "docker://node:10"
   needs = ["GitHub Action for npm"]
   secrets = ["NPM_TOKEN"]
   args = "lerna bootstrap"
@@ -19,9 +19,10 @@ action "Lerna bootstrap" {
 }
 
 action "Run test" {
-  uses = "actions/npm@6309cd9"
+  uses = "docker://node:10"
   needs = ["Lerna bootstrap"]
   args = "test"
+  runs = "yarn"
 }
 
 action "Release only" {
