@@ -3,7 +3,7 @@
 exports[`Prop set decorator units complete options match snapshot 1`] = `
 Object {
   "file": "complete-options.tsx",
-  "postContent": "import { BearerRef, State, Prop, Component, Listen, Intent, Watch } from '@bearer/core';
+  "postContent": "import { BearerRef, State, Prop, Component, Listen, Intent, Watch, Event, EventEmitter } from '@bearer/core';
 @Component({
     tag: \\"no-options-action\\",
     styleUrl: \\"noOptions.css\\",
@@ -123,21 +123,23 @@ class NoOptionsComponent {
             this._loadObject();
         }
     }
+    @Event({ eventName: \\"no-options-action-prop-set\\", bubbles: true, cancelable: true })
+    propSetEmitter: EventEmitter;
     @Watch(\\"aValueThatChanges\\")
     aValueThatChangesPropSetWatcher(newValue) {
-        document.dispatchEvent(new CustomEvent(\\"no-options-action-prop-set\\", { detail: { aValueThatChanges: newValue } }));
+        this.propSetEmitter.emit({ aValueThatChanges: newValue });
     }
     @Watch(\\"aStringRefId\\")
     aStringRefIdPropSetWatcher(newValue) {
-        document.dispatchEvent(new CustomEvent(\\"no-options-action-prop-set\\", { detail: { aStringRefId: newValue } }));
+        this.propSetEmitter.emit({ aStringRefId: newValue });
     }
     @Watch(\\"aStringWithoutInitializerRefId\\")
     aStringWithoutInitializerRefIdPropSetWatcher(newValue) {
-        document.dispatchEvent(new CustomEvent(\\"no-options-action-prop-set\\", { detail: { aStringWithoutInitializerRefId: newValue } }));
+        this.propSetEmitter.emit({ aStringWithoutInitializerRefId: newValue });
     }
     @Watch(\\"objectRefId\\")
     objectRefIdPropSetWatcher(newValue) {
-        document.dispatchEvent(new CustomEvent(\\"no-options-action-prop-set\\", { detail: { objectRefId: newValue } }));
+        this.propSetEmitter.emit({ objectRefId: newValue });
     }
 }
 ",

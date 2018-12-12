@@ -1,9 +1,15 @@
 /*
- * Transformer boilerplate
+ * Prop Set Decorator
+ * Applications like React do not expect props to dynamically update
+ * This adds an event emmiter that emits '<finalTagName>-prop-set' events
+ * with the data the attrubute was changed to. Allowing react etc to update
+ * state
+ *
+ * NB: This must be included after event scoping and input/output so that it can work correctly
  */
 import * as ts from 'typescript'
 
-import { Decorators } from '../constants'
+import { Decorators, Types } from '../constants'
 import { getDecoratorNamed } from '../helpers/decorator-helpers'
 import { getNodeName } from '../helpers/node-helpers'
 import { TransformerOptions } from '../types'
@@ -11,6 +17,8 @@ import { TransformerOptions } from '../types'
 import { ensureImportsFromCore } from './bearer'
 
 const NEW_VALUE = 'newValue'
+const PROP_SET_EMITTER_NAME = 'propSetEmitter'
+
 type TMutablePropMeta = {
   name: string
   tagName: string
@@ -41,7 +49,7 @@ export default function PropSetDecorator(options: TransformerOptions = {}): ts.T
           prop.name,
           prop.typeParameters,
           prop.heritageClauses,
-          [...prop.members, ...createWatchers(mutablePropMeta)]
+          [...prop.members, createPropSetEmitter(mutablePropMeta[0].tagName), ...createWatchers(mutablePropMeta)]
         )
       }
 
@@ -56,7 +64,11 @@ export default function PropSetDecorator(options: TransformerOptions = {}): ts.T
       }
 
       if (mutablePropMeta.length) {
-        const sourceFileWithImports = ensureImportsFromCore(sourceFile, [Decorators.Watch])
+        const sourceFileWithImports = ensureImportsFromCore(sourceFile, [
+          Decorators.Watch,
+          Decorators.Event,
+          Types.EventEmitter
+        ])
         return ts.visitNode(sourceFileWithImports, updateClass)
       }
       return sourceFile
@@ -116,19 +128,45 @@ function createWatchers(props: TMutablePropMeta[]): ts.MethodDeclaration[] {
     )
   })
 }
-
-function createEventListener(meta: TMutablePropMeta) {
-  const preparedEvent = ts.createNew(ts.createIdentifier('CustomEvent'), undefined, [
-    ts.createStringLiteral(`${meta.tagName}-prop-set`),
-    payload(meta)
-  ])
-
-  return ts.createCall(ts.createPropertyAccess(ts.createIdentifier('document'), 'dispatchEvent'), undefined, [
-    preparedEvent
-  ])
+function createPropSetEmitter(tagName: string): ts.PropertyDeclaration {
+  return ts.createProperty(
+    [
+      ts.createDecorator(
+        ts.createCall(ts.createIdentifier(Decorators.Event), undefined, [
+          ts.createObjectLiteral([
+            ts.createPropertyAssignment('eventName', ts.createStringLiteral(`${tagName}-prop-set`)),
+            ts.createPropertyAssignment('bubbles', ts.createTrue()),
+            ts.createPropertyAssignment('cancelable', ts.createTrue())
+          ])
+        ])
+      )
+    ],
+    undefined,
+    PROP_SET_EMITTER_NAME,
+    undefined,
+    ts.createTypeReferenceNode(ts.createIdentifier(Types.EventEmitter), [
+      ts.createTypeLiteralNode([
+        ts.createPropertySignature(
+          undefined,
+          PROP_SET_EMITTER_NAME,
+          undefined,
+          ts.createKeywordTypeNode(ts.SyntaxKind.StringKeyword),
+          undefined
+        ),
+        undefined
+      ])
+    ]),
+    undefined
+  )
 }
 
+function createEventListener(meta: TMutablePropMeta) {
+  return ts.createCall(
+    ts.createPropertyAccess(ts.createPropertyAccess(ts.createThis(), PROP_SET_EMITTER_NAME), 'emit'),
+    undefined,
+    [payload(meta)]
+  )
+}
 function payload(meta: TMutablePropMeta) {
-  const detail = ts.createObjectLiteral([ts.createPropertyAssignment(meta.name, ts.createIdentifier(NEW_VALUE))])
-  return ts.createObjectLiteral([ts.createPropertyAssignment('detail', detail)])
+  return ts.createObjectLiteral([ts.createPropertyAssignment(meta.name, ts.createIdentifier(NEW_VALUE))])
 }
