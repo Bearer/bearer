@@ -16,21 +16,21 @@ action "Lerna bootstrap" {
   runs = "lerna bootstrap"
 }
 
-action "Test" {
+action "Run test" {
   uses = "actions/npm@6309cd9"
   needs = ["Lerna bootstrap"]
-  runs = "test"
+  args = "test"
 }
 
 action "Release only" {
   uses = "actions/bin/filter@95c1a3b"
-  needs = ["Test"]
   args = "branch release"
+  needs = ["Run test"]
 }
 
 action "Publish" {
   uses = "actions/npm@6309cd9"
   needs = ["Release only"]
-  runs = "lerna-publish"
+  runs = "sdqsdqsd"
   args = "--yes "
 }
