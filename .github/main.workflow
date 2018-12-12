@@ -5,8 +5,8 @@ workflow "Build, test and publish" {
 
 action "GitHub Action for npm" {
   uses = "actions/npm@6309cd9"
-  runs = "install"
   secrets = ["NPM_TOKEN"]
+  args = "install"
 }
 
 action "Lerna bootstrap" {
