@@ -10,6 +10,8 @@
 
 ```bash
 yarn init
+git init
+echo 'node_modules\nlib/\ncoverage' > .gitignore
 // answer questions
 yarn add -D @bearer/package-init
 yarn run aligator

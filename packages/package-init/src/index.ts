@@ -24,15 +24,18 @@ class BearerPackageInit extends Command {
   static description = 'describe the command here'
 
   static flags = {
-    path: flags.string({ char: 'p', default: process.cwd() })
+    path: flags.string({ char: 'p', default: process.cwd() }),
+    force: flags.boolean({ char: 'f', default: false })
   }
 
   static args = [{ name: 'file' }]
   private cwd!: string
+  private force!: boolean
 
   async run() {
     const { flags } = this.parse(BearerPackageInit)
     this.cwd = path.resolve(flags.path!)
+    this.force = flags.force
     // add typescript
     // add husky
     // add commitizen
@@ -119,6 +122,12 @@ class BearerPackageInit extends Command {
       } else {
         this.log('lint-staged already setup, skipping')
       }
+
+      if (!get(projectPackage, COMMIT_LINT_CONFIG_KEY)) {
+        set(projectPackage, COMMIT_LINT_CONFIG_KEY, COMMIT_LINT_CONFIG)
+      } else {
+        this.log('lint-staged already setup, skipping')
+      }
       if (!get(projectPackage, LINT_STAGED_HOOK)) {
         set(projectPackage, LINT_STAGED_HOOK, LINT_STAGED_HOOK_VALUE)
       } else {
@@ -136,6 +145,11 @@ class BearerPackageInit extends Command {
       set(projectPackage, 'scripts.test', 'jest')
       set(projectPackage, 'scripts.test:ci', 'jest --coverage')
       fs.writeFileSync(packageFile, JSON.stringify(projectPackage, null, 2))
+      fs.writeFileSync(
+        path.join(this.cwd, 'commitlint.config.js'),
+        "module.exports = { extends: ['@commitlint/config-conventional'] }"
+      )
+
       cli.action.stop()
     } catch (e) {
       throw e
@@ -170,13 +184,17 @@ class BearerPackageInit extends Command {
       set(config, 'extends', ['@oclif/tslint', 'tslint-config-prettier'])
       set(config, 'rules', { 'object-curly-spacing': [true, 'always'], 'no-console': false })
       fs.writeFileSync(configFile, json.stringify(config, null, 2))
+      fs.writeFileSync(path.join(this.cwd, '.prettierrc'), json.stringify(prettierConfig, null, 2))
     })
   }
 
   async setupJest() {
-    return this.withLoader('Init Jest stuff', async () => {
-      await this.runCommand('yarn ts-jest config:init')
-    })
+    // check if a jest config is already present in package.json
+    if (!fs.existsSync(path.join(this.cwd, 'jest.config.js'))) {
+      return this.withLoader('Init Jest stuff', async () => {
+        await this.runCommand('yarn ts-jest config:init')
+      })
+    }
   }
 
   async withLoader(title: string, block: () => Promise<any>) {
@@ -185,7 +203,11 @@ class BearerPackageInit extends Command {
       await block()
       cli.action.stop()
     } catch (e) {
-      throw e
+      if (this.force) {
+        console.error('Error on ', title, '\n', e.toString())
+      } else {
+        throw e
+      }
     }
   }
 
@@ -209,12 +231,20 @@ type TPackage = {
 
 const COMMIT_LINT_HOOK = 'husky.hooks.commit-msg'
 const COMMIT_LINT_HOOK_VALUE = 'commitlint -E HUSKY_GIT_PARAMS'
-
+const COMMIT_LINT_CONFIG = './node_modules/cz-conventional-changelog'
+const COMMIT_LINT_CONFIG_KEY = 'config.commitizen.path'
 const LINT_STAGED_HOOK = 'husky.hooks.pre-commit'
 const LINT_STAGED_HOOK_VALUE = 'lint-staged'
 const LINT_STAGED_KEY = 'lint-staged'
 const LINT_STAGED = {
-  '*.{css,md,tsx,ts,json}': ['prettier --write', 'tslint -c tslint.json --fix', 'git add']
+  '*.{css,md,tsx,ts}': ['prettier --write', 'tslint -c tslint.json --fix', 'git add']
+}
+
+const prettierConfig = {
+  semi: false,
+  singleQuote: true,
+  printWidth: 120,
+  tabWidth: 2
 }
 
 export = BearerPackageInit
