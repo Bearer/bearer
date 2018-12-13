@@ -82,6 +82,7 @@ class BearerPackageInit extends Command {
       '@commitlint/cli',
       'cz-conventional-changelog',
       'tslint',
+      '@oclif/tslint',
       'tslint-config-prettier',
       'prettier'
     ]
@@ -137,7 +138,7 @@ class BearerPackageInit extends Command {
     }
   }
 
-  async addTsLintConfig() {
+  async initTypescriptProject() {
     return this.withLoader('Init Typescript stuff', async () => {
       await this.runCommand('yarn tsc --init')
       const configFile = path.join(this.cwd, 'tsconfig.json')
@@ -154,7 +155,17 @@ class BearerPackageInit extends Command {
     })
   }
 
-  async initTypescriptProject() {}
+  async addTsLintConfig() {
+    return this.withLoader('Init TSlint stuff', async () => {
+      await this.runCommand('yarn tslint --init')
+      const configFile = path.join(this.cwd, 'tslint.json')
+      const config = json.parse(fs.readFileSync(configFile, { encoding: 'utf8' }), undefined, true)
+      // as soon a we have created a bearer tslint we use it herer
+      set(config, 'extends', ['@oclif/tslint', 'tslint-config-prettier'])
+      set(config, 'rules', { 'object-curly-spacing': [true, 'always'], 'no-console': false })
+      fs.writeFileSync(configFile, json.stringify(config, null, 2))
+    })
+  }
 
   async withLoader(title: string, block: () => Promise<any>) {
     try {
