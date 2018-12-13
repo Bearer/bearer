@@ -11,13 +11,15 @@ import * as ts from 'typescript'
 
 import { Decorators, Types } from '../constants'
 import { getDecoratorNamed } from '../helpers/decorator-helpers'
-import { getNodeName } from '../helpers/node-helpers'
+import { getNodeName, hasBooleanProperty } from '../helpers/node-helpers'
 import { TransformerOptions } from '../types'
 
 import { ensureImportsFromCore } from './bearer'
 
 const NEW_VALUE = 'newValue'
 const PROP_SET_EMITTER_NAME = 'propSetEmitter'
+const PROP_SET_EVENT_SUFFIX = '-prop-set'
+const PROP_SET_WATCHER_SUFFIX = 'PropSetWatcher'
 
 type TMutablePropMeta = {
   name: string
@@ -41,15 +43,14 @@ export default function PropSetDecorator(options: TransformerOptions = {}): ts.T
 
     const updateClass: ts.Visitor = (node: ts.Node) => {
       if (ts.isClassDeclaration(node)) {
-        const prop = node as ts.ClassDeclaration
         return ts.updateClassDeclaration(
-          prop,
-          prop.decorators,
-          prop.modifiers,
-          prop.name,
-          prop.typeParameters,
-          prop.heritageClauses,
-          [...prop.members, createPropSetEmitter(mutablePropMeta[0].tagName), ...createWatchers(mutablePropMeta)]
+          node,
+          node.decorators,
+          node.modifiers,
+          node.name,
+          node.typeParameters,
+          node.heritageClauses,
+          [...node.members, createPropSetEmitter(mutablePropMeta[0].tagName), ...createWatchers(mutablePropMeta)]
         )
       }
 
@@ -58,37 +59,24 @@ export default function PropSetDecorator(options: TransformerOptions = {}): ts.T
 
     return (sourceFile: ts.SourceFile): ts.SourceFile => {
       const meta = options.metadata.findComponentFrom(sourceFile)
-      //only run this on root components
+      // only run this on root components
       if (meta && meta.isRoot) {
         ts.visitNode(sourceFile, visit(meta.finalTagName))
       }
 
-      if (mutablePropMeta.length) {
-        const sourceFileWithImports = ensureImportsFromCore(sourceFile, [
-          Decorators.Watch,
-          Decorators.Event,
-          Types.EventEmitter
-        ])
-        return ts.visitNode(sourceFileWithImports, updateClass)
+      if (mutablePropMeta.length === 0) {
+        // nothing to do
+        return sourceFile
       }
-      return sourceFile
+
+      const sourceFileWithImports = ensureImportsFromCore(sourceFile, [
+        Decorators.Watch,
+        Decorators.Event,
+        Types.EventEmitter
+      ])
+      return ts.visitNode(sourceFileWithImports, updateClass)
     }
   }
-}
-
-function hasBooleanProperty(
-  node: ts.ObjectLiteralExpression,
-  prop: string,
-  kind: ts.SyntaxKind.TrueKeyword | ts.SyntaxKind.FalseKeyword
-) {
-  const argument = node.properties[0]
-  let identifier: any = { escapedText: 'undefined' }
-  let initializer: any = { kind: ts.SyntaxKind.UndefinedKeyword }
-  if (argument.kind === ts.SyntaxKind.PropertyAssignment) {
-    identifier = argument.name as ts.Identifier
-    initializer = argument.initializer
-  }
-  return (identifier.escapedText || identifier.text) === prop && initializer.kind === kind
 }
 
 function isMutableDecorator(decorator: ts.Decorator) {
@@ -119,7 +107,7 @@ function createWatchers(props: TMutablePropMeta[]): ts.MethodDeclaration[] {
       ],
       undefined,
       undefined,
-      `${meta.name}PropSetWatcher`,
+      propSetWatcherName(meta),
       undefined,
       undefined,
       [ts.createParameter(undefined, undefined, undefined, NEW_VALUE, undefined, undefined, undefined)], // parameters
@@ -134,7 +122,7 @@ function createPropSetEmitter(tagName: string): ts.PropertyDeclaration {
       ts.createDecorator(
         ts.createCall(ts.createIdentifier(Decorators.Event), undefined, [
           ts.createObjectLiteral([
-            ts.createPropertyAssignment('eventName', ts.createStringLiteral(`${tagName}-prop-set`)),
+            ts.createPropertyAssignment('eventName', ts.createStringLiteral(propSetEventName(tagName))),
             ts.createPropertyAssignment('bubbles', ts.createTrue()),
             ts.createPropertyAssignment('cancelable', ts.createTrue())
           ])
@@ -167,6 +155,11 @@ function createEventListener(meta: TMutablePropMeta) {
     [payload(meta)]
   )
 }
+
 function payload(meta: TMutablePropMeta) {
   return ts.createObjectLiteral([ts.createPropertyAssignment(meta.name, ts.createIdentifier(NEW_VALUE))])
 }
+
+const propSetWatcherName = (meta: TMutablePropMeta) => meta.name + PROP_SET_WATCHER_SUFFIX
+
+const propSetEventName = (tagName: string) => tagName + PROP_SET_EVENT_SUFFIX
