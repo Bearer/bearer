@@ -1,19 +1,24 @@
 import { exec } from 'child_process'
 import { cli } from 'cli-ux'
+import * as json from 'comment-json'
+import * as fs from 'fs'
+import { get, set } from 'lodash'
+
 import * as path from 'path'
 import * as util from 'util'
+
 const spawnPromise = util.promisify(exec)
 
 import { Command, flags } from '@oclif/command'
-import * as inquirer from 'inquirer'
+// import * as inquirer from 'inquirer'
 
-const enum TOptions {
-  typescript = 'typescript',
-  commitizen = 'commitizen',
-  tslint = 'tslint',
-  prettier = 'prettier',
-  jest = 'jest'
-}
+// const enum TOptions {
+//   typescript = 'typescript',
+//   commitizen = 'commitizen',
+//   tslint = 'tslint',
+//   prettier = 'prettier',
+//   jest = 'jest'
+// }
 
 class BearerPackageInit extends Command {
   static description = 'describe the command here'
@@ -23,52 +28,53 @@ class BearerPackageInit extends Command {
   }
 
   static args = [{ name: 'file' }]
+  private cwd!: string
 
   async run() {
     const { flags } = this.parse(BearerPackageInit)
-    const cwd = path.resolve(flags.path!)
+    this.cwd = path.resolve(flags.path!)
     // add typescript
     // add husky
     // add commitizen
     // add lint-staged => prettier
-    const { choices } = await inquirer.prompt<{ choices: TOptions[] }>([
-      {
-        type: 'checkbox',
-        choices: [
-          {
-            name: 'Typescript',
-            value: TOptions.typescript,
-            checked: true
-          },
-          {
-            name: 'Commitizen (convential commits)',
-            value: TOptions.commitizen,
-            checked: true
-          },
-          {
-            name: 'tslint (Typescript linter)',
-            value: TOptions.tslint,
-            checked: true
-          },
-          {
-            name: 'prettier (format your code)',
-            value: TOptions.prettier,
-            checked: true
-          },
-          {
-            name: 'jest (test your code)',
-            value: TOptions.jest,
-            checked: true
-          }
-        ],
-        message: `Select things to add`,
-        name: 'choices'
-      }
-    ])
-    const options = new Set(choices)
+    // const { choices } = await inquirer.prompt<{ choices: TOptions[] }>([
+    //   {
+    //     type: 'checkbox',
+    //     choices: [
+    //       {
+    //         name: 'Typescript',
+    //         value: TOptions.typescript,
+    //         checked: true
+    //       },
+    //       {
+    //         name: 'Commitizen (convential commits)',
+    //         value: TOptions.commitizen,
+    //         checked: true
+    //       },
+    //       {
+    //         name: 'tslint (Typescript linter)',
+    //         value: TOptions.tslint,
+    //         checked: true
+    //       },
+    //       {
+    //         name: 'prettier (format your code)',
+    //         value: TOptions.prettier,
+    //         checked: true
+    //       },
+    //       {
+    //         name: 'jest (test your code)',
+    //         value: TOptions.jest,
+    //         checked: true
+    //       }
+    //     ],
+    //     message: `Select things to add`,
+    //     name: 'choices'
+    //   }
+    // ])
+    // const options = new Set(choices)
     // add dependencies
     const dependencies = [
-      'tsc',
+      'typescript',
       'husky',
       'lint-staged',
       'commitlint',
@@ -78,22 +84,114 @@ class BearerPackageInit extends Command {
       'tslint',
       'tslint-config-prettier',
       'prettier'
-    ].join(' ')
+    ]
     try {
-      cli.action.start(`Installing depenencies : ${[...options].join(', ')}`)
-      await spawnPromise(`yarn add -D ${dependencies}`, {
-        cwd
-      })
-      cli.action.stop()
+      await this.installDependencies(dependencies)
+      await this.initTypescriptProject()
+      await this.addHooksAndScripts()
+      await this.addTsLintConfig()
     } catch (e) {
+      cli.action.stop()
       return this.error(e)
     }
-    // cli.action.start('Updating files')
-
-    // cli.action.stop()
     // update package json
     // update ts config
   }
+
+  async installDependencies(dependencies: string[]) {
+    return this.withLoader(`Installing depenencies:\n  * ${dependencies.join('\n  * ')}`, () =>
+      this.runCommand(`yarn add -D ${dependencies.join(' ')}`)
+    )
+  }
+
+  async addHooksAndScripts() {
+    const packageFile = path.join(this.cwd, 'package.json')
+    try {
+      cli.action.start('Adding hooks')
+      let projectPackage: TPackage = JSON.parse(fs.readFileSync(packageFile, { encoding: 'utf8' }))
+      if (!get(projectPackage, LINT_STAGED_KEY)) {
+        set(projectPackage, LINT_STAGED_KEY, LINT_STAGED)
+      } else {
+        this.log('lint-staged already setup, skipping')
+      }
+      if (!get(projectPackage, LINT_STAGED_HOOK)) {
+        set(projectPackage, LINT_STAGED_HOOK, LINT_STAGED_HOOK_VALUE)
+      } else {
+        this.log('lint-staged hook already setup, skipping')
+      }
+      if (!get(projectPackage, COMMIT_LINT_HOOK)) {
+        set(projectPackage, COMMIT_LINT_HOOK, COMMIT_LINT_HOOK_VALUE)
+      } else {
+        this.log('commitlint hook already setup, skipping')
+      }
+      set(projectPackage, 'scripts.start', 'tsc --watch')
+      set(projectPackage, 'scripts.build', 'tsc -p tsconfig.json')
+      set(projectPackage, 'scripts.clean', 'rm -rf lib')
+      set(projectPackage, 'scripts.prepack', 'yarn clean && yarn build')
+      set(projectPackage, 'scripts.test', 'jest')
+      set(projectPackage, 'scripts.test:ci', 'jest --coverage')
+      fs.writeFileSync(packageFile, JSON.stringify(projectPackage, null, 2))
+      cli.action.stop()
+    } catch (e) {
+      throw e
+    }
+  }
+
+  async addTsLintConfig() {
+    return this.withLoader('Init Typescript stuff', async () => {
+      await this.runCommand('yarn tsc --init')
+      const configFile = path.join(this.cwd, 'tsconfig.json')
+      const src = path.join(this.cwd, 'src')
+      const config = json.parse(fs.readFileSync(configFile, { encoding: 'utf8' }), undefined, true)
+
+      set(config, 'include', ['src'])
+      set(config, 'compilerOptions.outDir', 'lib/')
+      fs.writeFileSync(configFile, json.stringify(config, null, 2))
+      if (!fs.existsSync(src)) {
+        fs.mkdirSync(src)
+        fs.writeFileSync(path.join(src, 'index.ts'), '')
+      }
+    })
+  }
+
+  async initTypescriptProject() {}
+
+  async withLoader(title: string, block: () => Promise<any>) {
+    try {
+      cli.action.start(title)
+      await block()
+      cli.action.stop()
+    } catch (e) {
+      throw e
+    }
+  }
+
+  async runCommand(command: string) {
+    await spawnPromise(command, {
+      cwd: this.cwd
+    })
+  }
+}
+
+type TPackage = {
+  config?: {
+    commitizen?: {
+      path: string
+    }
+  }
+  ['lint-staged']?: {
+    [key: string]: string[]
+  }
+}
+
+const COMMIT_LINT_HOOK = 'husky.hooks.commit-msg'
+const COMMIT_LINT_HOOK_VALUE = 'commitlint -E HUSKY_GIT_PARAMS'
+
+const LINT_STAGED_HOOK = 'husky.hooks.pre-commit'
+const LINT_STAGED_HOOK_VALUE = 'lint-staged'
+const LINT_STAGED_KEY = 'lint-staged'
+const LINT_STAGED = {
+  '*.{css,md,tsx,ts,json}': ['prettier --write', 'tslint -c tslint.json --fix', 'git add']
 }
 
 export = BearerPackageInit
