@@ -1,0 +1,46 @@
+{
+  "name": "@bearer/package-init",
+  "version": "0.0.0",
+  "author": "antoine@bearer.sh",
+  "bin": {
+    "aligator": "./bin/run"
+  },
+  "bugs": "https://github.com/bearer/bearer/issues",
+  "dependencies": {
+    "@oclif/command": "^1",
+    "@oclif/config": "^1",
+    "@oclif/plugin-help": "^2",
+    "cli-ux": "^4.9.3",
+    "inquirer": "^6.2.1",
+    "tslib": "^1"
+  },
+  "devDependencies": {
+    "@types/node": "^10",
+    "ts-node": "^6",
+    "typescript": "^2.9"
+  },
+  "engines": {
+    "node": ">=8.0.0"
+  },
+  "files": [
+    "/bin",
+    "/lib"
+  ],
+  "homepage": "https://github.com/bearer/bearer",
+  "keywords": [
+    "oclif"
+  ],
+  "license": "MIT",
+  "main": "lib/index.js",
+  "oclif": {
+    "bin": "aligator"
+  },
+  "repository": "bearer/bearer",
+  "scripts": {
+    "posttest": "tsc -p . --noEmit",
+    "prepack": "rm -rf lib && tsc",
+    "prepare": "rm -rf lib && tsc",
+    "test": "echo NO TESTS"
+  },
+  "types": "lib/index.d.ts"
+}
