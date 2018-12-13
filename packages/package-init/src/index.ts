@@ -84,13 +84,17 @@ class BearerPackageInit extends Command {
       'tslint',
       '@oclif/tslint',
       'tslint-config-prettier',
-      'prettier'
+      'prettier',
+      'jest',
+      'ts-jest',
+      '@types/jest'
     ]
     try {
       await this.installDependencies(dependencies)
       await this.initTypescriptProject()
       await this.addHooksAndScripts()
       await this.addTsLintConfig()
+      await this.setupJest()
     } catch (e) {
       cli.action.stop()
       return this.error(e)
@@ -157,13 +161,21 @@ class BearerPackageInit extends Command {
 
   async addTsLintConfig() {
     return this.withLoader('Init TSlint stuff', async () => {
-      await this.runCommand('yarn tslint --init')
       const configFile = path.join(this.cwd, 'tslint.json')
+      if (!fs.existsSync(configFile)) {
+        await this.runCommand('yarn tslint --init')
+      }
       const config = json.parse(fs.readFileSync(configFile, { encoding: 'utf8' }), undefined, true)
       // as soon a we have created a bearer tslint we use it herer
       set(config, 'extends', ['@oclif/tslint', 'tslint-config-prettier'])
       set(config, 'rules', { 'object-curly-spacing': [true, 'always'], 'no-console': false })
       fs.writeFileSync(configFile, json.stringify(config, null, 2))
+    })
+  }
+
+  async setupJest() {
+    return this.withLoader('Init Jest stuff', async () => {
+      await this.runCommand('yarn ts-jest config:init')
     })
   }
 
