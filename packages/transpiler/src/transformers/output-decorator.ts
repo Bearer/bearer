@@ -97,7 +97,7 @@ function injectOuputStatements(tsClass: ts.ClassDeclaration, outputsMeta: Array<
       const inputMembers = [
         createIntent(meta),
         createEvent(meta),
-        createState(meta),
+        ...createStates(meta),
         createProp(meta),
         ...createWatchers(meta)
       ]
@@ -165,12 +165,21 @@ function createProp(meta: OutputMeta): ts.PropertyDeclaration {
   )
 }
 
-function createState(meta: OutputMeta): ts.PropertyDeclaration {
-  // @State() propDeclarationName: Type = initiailizer
+function createStates(meta: OutputMeta): ts.PropertyDeclaration[] {
+  return [
+    // @State() propDeclarationNameInitial: Type = initiailizer
+    createGenericState(meta, 'Initial'),
+    // @State() propDeclarationName: Type = initiailizer
+    createGenericState(meta)
+  ]
+}
+
+function createGenericState(meta: OutputMeta, suffix = ''): ts.PropertyDeclaration {
+  // @State() propDeclarationName[suffix]: Type = initiailizer
   return ts.createProperty(
     [ts.createDecorator(ts.createCall(ts.createIdentifier(Decorators.State), undefined, []))],
     undefined,
-    meta.propDeclarationName,
+    [meta.propDeclarationName, suffix].join(''),
     undefined,
     meta.typeIdentifier,
     meta.initializer
