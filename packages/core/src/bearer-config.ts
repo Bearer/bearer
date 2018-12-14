@@ -7,8 +7,8 @@ export interface IBearerConfig {
 }
 
 export default class BearerConfig {
-  integrationHost: string = 'BEARER_INTEGRATION_HOST'
-  authorizationHost: string = 'BEARER_AUTHORIZATION_HOST'
+  integrationHost = 'BEARER_INTEGRATION_HOST'
+  authorizationHost = 'BEARER_AUTHORIZATION_HOST'
   loadingComponent: string
   postRobotLogLevel: 'debug' | 'info' | 'warn' | 'error' = 'error'
 

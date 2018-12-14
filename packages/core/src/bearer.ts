@@ -1,7 +1,7 @@
 import { EventEmitter, EventSubscription } from 'fbemitter'
 import postRobot from 'post-robot'
 
-import BearerConfig from './BearerConfig'
+import BearerConfig from './bearer-config'
 import Events from './EventNames'
 
 const BEARER_WINDOW_INSTANCE_KEY = 'BEARER_INSTANCE'

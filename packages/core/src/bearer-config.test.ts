@@ -1,4 +1,4 @@
-import BearerConfig from './BearerConfig'
+import BearerConfig from './bearer-config'
 
 describe('Init', () => {
   it('sets defaults', () => {
