@@ -92,13 +92,15 @@ export default (runPath: string = process.cwd()): Config => {
       const { Username, ExpiresAt, authorization } = config
       const writeFile = promisify(fs.writeFile)
       try {
-        await writeFile(this.bearerConfig.config || path.join(os.homedir(), '.bearerrc'),
-        ini.stringify({
-          Username,
-          ExpiresAt,
-          authorization
-        }))
-      } catch(e) {
+        await writeFile(
+          this.bearerConfig.config || path.join(os.homedir(), '.bearerrc'),
+          ini.stringify({
+            Username,
+            ExpiresAt,
+            authorization
+          })
+        )
+      } catch (e) {
         console.error('Error while writing the token', e)
       }
       this.bearerConfig.authorization = authorization
