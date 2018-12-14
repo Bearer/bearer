@@ -7,7 +7,7 @@ import * as webpack from 'webpack'
 import BaseCommand from '../../base-command'
 import installDependencies from '../../tasks/installDependencies'
 import { RequireScenarioFolder } from '../../utils/decorators'
-import GenerateApiDocumenation from '../generate/apiDocumentation'
+import GenerateApiDocumenation from '../generate/api-documentation'
 
 const skipInstall = 'skip-install'
 
