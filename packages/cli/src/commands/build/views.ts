@@ -6,7 +6,7 @@ import * as Listr from 'listr'
 import * as path from 'path'
 
 import BaseCommand from '../../base-command'
-import installDependencies from '../../tasks/installDependencies'
+import installDependencies from '../../tasks/install-dependencies'
 
 import { RequireScenarioFolder } from '../../utils/decorators'
 

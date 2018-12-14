@@ -5,7 +5,7 @@ import * as path from 'path'
 import * as webpack from 'webpack'
 
 import BaseCommand from '../../base-command'
-import installDependencies from '../../tasks/installDependencies'
+import installDependencies from '../../tasks/install-dependencies'
 import { RequireScenarioFolder } from '../../utils/decorators'
 import GenerateApiDocumenation from '../generate/api-documentation'
 
