@@ -1,10 +1,10 @@
 import axios, { AxiosInstance } from 'axios'
-class FetchDataError extends Error { }
-class UpdateDataError extends Error { }
-class CreateDataError extends Error { }
+class FetchDataError extends Error {}
+class UpdateDataError extends Error {}
+class CreateDataError extends Error {}
 
 type TPersistedData = {
-  Item: { referenceId: string;[key: string]: any }
+  Item: { referenceId: string; [key: string]: any }
 }
 
 export class DBClient {
@@ -43,7 +43,11 @@ export class DBClient {
 
   async updateData(referenceId, data): Promise<TPersistedData> {
     try {
-      const response = await this.client.put(`api/v2/items/${referenceId}`, { ...data, ReadAllowed: true }, { params: { signature: this.signature } })
+      const response = await this.client.put(
+        `api/v2/items/${referenceId}`,
+        { ...data, ReadAllowed: true },
+        { params: { signature: this.signature } }
+      )
       return response.data
     } catch (error) {
       throw new UpdateDataError(`Error while updating data: ${error.toString()}`)
@@ -52,7 +56,11 @@ export class DBClient {
 
   async saveData(data): Promise<TPersistedData> {
     try {
-      const response = await this.client.post(`api/v2/items`, { ...data, ReadAllowed: true }, { params: { signature: this.signature } })
+      const response = await this.client.post(
+        `api/v2/items`,
+        { ...data, ReadAllowed: true },
+        { params: { signature: this.signature } }
+      )
       return response.data
     } catch (error) {
       throw new CreateDataError(`Error while creating data: ${error.toString()}`)

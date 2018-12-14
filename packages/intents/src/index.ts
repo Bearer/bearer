@@ -1,7 +1,7 @@
 import * as d from './declaration'
 export * from './declaration'
 
-import { DBClient as CLIENT } from './DBClient'
+import { DBClient as CLIENT } from './db-client'
 import { sendErrorMessage, sendSuccessMessage } from './lambda'
 
 export const DBClient = CLIENT.instance
