@@ -1,0 +1,27 @@
+{
+  "name": "@bearer/tslint-config",
+  "version": "0.79.0",
+  "description": "TSLint config for bearer team",
+  "author": "Tanguy Antoine <antoine@bearer.sh>",
+  "homepage": "https://github.com/Bearer/bearer#readme",
+  "license": "MIT",
+  "main": "tslint.json",
+  "scripts": {
+    "test": "echo 'NO tests'",
+    "test:ci": "echo 'NO tests'"
+  },
+  "files": [
+    "tslint.json"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Bearer/bearer.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Bearer/bearer/issues"
+  },
+  "dependencies": {
+    "tslint-config-airbnb": "^5.11.1",
+    "tslint-config-prettier": "^1.17.0"
+  }
+}

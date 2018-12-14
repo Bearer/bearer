@@ -1,0 +1,20 @@
+{
+  "extends": ["tslint-config-airbnb", "tslint-config-prettier"],
+  "rule": {
+    "no-unused-variable": [true, { "ignore-pattern": "^_" }],
+    "no-unused-imports": true,
+    "semicolon": [true, "never"],
+    "max-line-length": [true, 120], // 19.12
+    "trailing-comma": [
+      true,
+      {
+        "multiline": "never",
+        "singleline": "never",
+        "esSpecCompliant": true
+      }
+    ],
+    "import-name": [false],
+    "ter-arrow-parens": [true, "as-needed"],
+    "variable-name": [true, "ban-keywords", "check-format", "allow-leading-underscore"]
+  }
+}
