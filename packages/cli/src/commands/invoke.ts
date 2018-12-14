@@ -1,6 +1,6 @@
 import { flags } from '@oclif/command'
 
-import BaseLegacyCommand from '../BaseLegacyCommand'
+import BaseLegacyCommand from '../base-legacy-command'
 
 export default class Invoke extends BaseLegacyCommand {
   static description = 'Invoke Intent locally'

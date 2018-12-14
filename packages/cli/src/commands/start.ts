@@ -1,6 +1,6 @@
 import { flags } from '@oclif/command'
 
-import BaseLegacyCommand from '../BaseLegacyCommand'
+import BaseLegacyCommand from '../base-legacy-command'
 
 import GenerateApiDocumenation from './generate/apiDocumentation'
 import GenerateSetup from './generate/setup'
