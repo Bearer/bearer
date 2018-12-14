@@ -49,9 +49,13 @@ export function getExpressionFromLiteralObject<T extends ts.Expression>(
   tsLiteral: ts.ObjectLiteralExpression,
   key: string
 ): T {
-  const found: ts.PropertyAssignment = tsLiteral.properties.find(
-    property => property.name.getText().trim() === key
-  ) as ts.PropertyAssignment
+  const found: ts.PropertyAssignment = tsLiteral.properties.find(property => {
+    if (ts.isStringLiteral(property.name)) {
+      return property.name.text === key
+    } else {
+      return (property.name as ts.Identifier).escapedText.toString() === key
+    }
+  }) as ts.PropertyAssignment
   if (found) {
     return found.initializer as T
   }
