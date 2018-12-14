@@ -4,7 +4,7 @@ import * as Debug from './debug'
 import EventNames from './EventNames'
 import * as Requests from './requests'
 
-import * as bearerState from './BearerState'
+import * as bearerState from './bearer-state'
 export * from './decorators'
 export const StateManager = bearerState
 export const Events = EventNames
