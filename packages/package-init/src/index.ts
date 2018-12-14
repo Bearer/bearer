@@ -85,7 +85,7 @@ class BearerPackageInit extends Command {
       '@commitlint/cli',
       'cz-conventional-changelog',
       'tslint',
-      '@oclif/tslint',
+      BEARER_TSLINT,
       'tslint-config-prettier',
       'prettier',
       'jest',
@@ -181,8 +181,7 @@ class BearerPackageInit extends Command {
       }
       const config = json.parse(fs.readFileSync(configFile, { encoding: 'utf8' }), undefined, true)
       // as soon a we have created a bearer tslint we use it herer
-      set(config, 'extends', ['@oclif/tslint', 'tslint-config-prettier'])
-      set(config, 'rules', { 'object-curly-spacing': [true, 'always'], 'no-console': false })
+      set(config, 'extends', BEARER_TSLINT)
       fs.writeFileSync(configFile, json.stringify(config, null, 2))
       fs.writeFileSync(path.join(this.cwd, '.prettierrc'), json.stringify(prettierConfig, null, 2))
     })
@@ -239,7 +238,7 @@ const LINT_STAGED_KEY = 'lint-staged'
 const LINT_STAGED = {
   '*.{css,md,tsx,ts}': ['prettier --write', 'tslint -c tslint.json --fix', 'git add']
 }
-
+const BEARER_TSLINT = '@bearer/tslint-config'
 const prettierConfig = {
   semi: false,
   singleQuote: true,
