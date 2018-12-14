@@ -2,7 +2,7 @@ import { flags } from '@oclif/command'
 import * as fs from 'fs'
 import * as path from 'path'
 
-import BaseCommand from '../../BaseCommand'
+import BaseCommand from '../../base-command'
 import { RequireScenarioFolder } from '../../utils/decorators'
 import { copyFiles } from '../../utils/helpers'
 

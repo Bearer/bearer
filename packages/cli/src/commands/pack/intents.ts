@@ -2,7 +2,7 @@ import * as archiver from 'archiver'
 import * as fs from 'fs-extra'
 import * as path from 'path'
 
-import BaseCommand from '../../BaseCommand'
+import BaseCommand from '../../base-command'
 import { RequireScenarioFolder } from '../../utils/decorators'
 import prepareConfig from '../../utils/prepare-config'
 

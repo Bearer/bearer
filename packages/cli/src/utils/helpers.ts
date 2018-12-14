@@ -2,7 +2,7 @@ import * as copy from 'copy-template-dir'
 import * as fs from 'fs-extra'
 import * as path from 'path'
 
-import BaseCommand from '../BaseCommand'
+import BaseCommand from '../base-command'
 
 export function printFiles(command: BaseCommand, files: Array<string>) {
   const base = process.cwd()
@@ -17,7 +17,7 @@ export function copyFiles(
   sourceDirectory: string,
   outPutDirectory: string,
   vars: any,
-  silent: boolean = false
+  silent = false
 ): Promise<Array<string>> {
   return new Promise((resolve, reject) => {
     copy(path.join(__dirname, '..', '..', 'templates', sourceDirectory), outPutDirectory, vars, (err, createdFiles) => {
@@ -33,7 +33,7 @@ export function copyFiles(
   })
 }
 
-export function ensureFolderExists(path: string, empty: boolean = false) {
+export function ensureFolderExists(path: string, empty = false) {
   if (!fs.existsSync(path)) {
     fs.mkdirpSync(path)
   }

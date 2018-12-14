@@ -1,6 +1,6 @@
 import axios, { AxiosInstance } from 'axios'
 
-import BaseCommand from '../BaseCommand'
+import BaseCommand from '../base-command'
 
 export class ScenarioClient {
   private client: AxiosInstance

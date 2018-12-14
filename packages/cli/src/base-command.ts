@@ -56,7 +56,7 @@ export default abstract class extends Command {
   }
 
   bearerConfig!: Config
-  silent: boolean = false
+  silent = false
 
   success(message: string) {
     this.log(this.colors.green(message))

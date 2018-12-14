@@ -1,7 +1,7 @@
 import Authentications from '@bearer/types/lib/authentications'
 import { flags } from '@oclif/command'
 
-import BaseCommand from '../../BaseCommand'
+import BaseCommand from '../../base-command'
 import { RequireScenarioFolder } from '../../utils/decorators'
 import { copyFiles } from '../../utils/helpers'
 

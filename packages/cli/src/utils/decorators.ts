@@ -1,4 +1,4 @@
-import Command from '../BaseCommand'
+import Command from '../base-command'
 
 type Constructor<T> = new (...args: any[]) => T
 type TCommand = InstanceType<Constructor<Command>>

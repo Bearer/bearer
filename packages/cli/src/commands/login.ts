@@ -1,6 +1,6 @@
 import { flags } from '@oclif/command'
 
-import BaseCommand from '../BaseCommand'
+import BaseCommand from '../base-command'
 const tokenUrl = 'https://app.bearer.sh/settings'
 
 export default class Login extends BaseCommand {

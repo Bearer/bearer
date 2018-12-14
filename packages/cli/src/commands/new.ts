@@ -4,7 +4,7 @@ import * as fs from 'fs-extra'
 import * as Listr from 'listr'
 import * as path from 'path'
 
-import BaseCommand from '../BaseCommand'
+import BaseCommand from '../base-command'
 import installDependencies from '../tasks/installDependencies'
 import { copyFiles, printFiles } from '../utils/helpers'
 

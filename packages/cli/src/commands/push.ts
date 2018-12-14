@@ -4,7 +4,7 @@ import * as fs from 'fs-extra'
 import * as globby from 'globby'
 import * as Listr from 'listr'
 
-import BaseCommand from '../BaseCommand'
+import BaseCommand from '../base-command'
 import { ensureFreshToken, RequireLinkedScenario, RequireScenarioFolder } from '../utils/decorators'
 import { ensureFolderExists } from '../utils/helpers'
 export default class Push extends BaseCommand {
@@ -38,11 +38,11 @@ export default class Push extends BaseCommand {
       this.success(`🐻 Scenario successfully pushed.\n`)
       this.log(
         `Your Scenario will be available shortly here: ` +
-        this.colors.bold(`${this.bearerConfig.DeveloperPortalUrl}scenarios/${this.bearerConfig.scenarioUuid}/preview`)
+          this.colors.bold(`${this.bearerConfig.DeveloperPortalUrl}scenarios/${this.bearerConfig.scenarioUuid}/preview`)
       )
       this.log(
         `\nIn the meantime you can follow the deployment here: ` +
-        this.colors.bold(`${this.bearerConfig.DeveloperPortalUrl}scenarios/${this.bearerConfig.scenarioUuid}/logs`)
+          this.colors.bold(`${this.bearerConfig.DeveloperPortalUrl}scenarios/${this.bearerConfig.scenarioUuid}/logs`)
       )
     } catch (e) {
       this.error(e)
@@ -109,7 +109,11 @@ export default class Push extends BaseCommand {
       return true
     } catch (e) {
       if (e.response && e.response.status === 401) {
-        this.error(`Unauthorized to push, please visit ${this.bearerConfig.DeveloperPortalUrl}scenarios/${this.bearerConfig.scenarioUuid} to confirm you have access to ${this.colors.bold(this.bearerConfig.scenarioUuid)} scenario.`)
+        this.error(
+          `Unauthorized to push, please visit ${this.bearerConfig.DeveloperPortalUrl}scenarios/${
+            this.bearerConfig.scenarioUuid
+          } to confirm you have access to ${this.colors.bold(this.bearerConfig.scenarioUuid)} scenario.`
+        )
         return false
       } else {
         throw e

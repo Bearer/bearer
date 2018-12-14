@@ -2,7 +2,7 @@ import { flags } from '@oclif/command'
 import * as fs from 'fs'
 import * as path from 'path'
 
-import BaseCommand from '../../BaseCommand'
+import BaseCommand from '../../base-command'
 import { RequireScenarioFolder } from '../../utils/decorators'
 import { copyFiles } from '../../utils/helpers'
 
@@ -38,7 +38,7 @@ export default class GenerateSpec extends BaseCommand {
       label: 'Setup Display Component'
     },`
         const authType: string = this.scenarioAuthConfig.authType
-        const vars = (authType === 'noAuth' || authType === 'NONE') ? {} : { setup }
+        const vars = authType === 'noAuth' || authType === 'NONE' ? {} : { setup }
         await copyFiles(this, 'generate/scenario_specs', targetFolder, vars)
         this.success('Spec file successfully generated! 🎉')
       } catch (e) {

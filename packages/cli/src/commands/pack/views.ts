@@ -1,7 +1,7 @@
 import { flags } from '@oclif/command'
 import { spawn } from 'child_process'
 
-import BaseCommand from '../../BaseCommand'
+import BaseCommand from '../../base-command'
 import { ScenarioBuildEnv } from '../../types'
 import { RequireScenarioFolder } from '../../utils/decorators'
 

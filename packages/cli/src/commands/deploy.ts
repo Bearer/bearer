@@ -1,4 +1,4 @@
-import BaseCommand from '../BaseCommand'
+import BaseCommand from '../base-command'
 import { RequireScenarioFolder } from '../utils/decorators'
 
 import PushCommand from './push'
