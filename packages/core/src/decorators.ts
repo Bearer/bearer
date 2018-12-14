@@ -1,7 +1,7 @@
 import { TInputDecorator, TOutputDecorator } from '@bearer/types/lib/input-output-decorators'
 import * as d from '@stencil/core/dist/declarations/index'
 
-export * from './decorators/Intent'
+export * from './decorators/intents'
 
 export {
   ComponentDidLoad,

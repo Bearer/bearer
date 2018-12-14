@@ -1,7 +1,7 @@
 import { BearerWindow } from '@bearer/types'
 
 import Bearer from './bearer'
-import { BearerFetch, Intent } from './decorators/Intent'
+import { BearerFetch, Intent } from './decorators/intents'
 
 declare const window: BearerWindow
 declare const global: { fetch: any }
