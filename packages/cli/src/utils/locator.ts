@@ -3,8 +3,8 @@ import * as path from 'path'
 import { Config } from '../types'
 
 export default class LocationProvider {
-  bearerDir: string = ''
-  scenarioRoot: string = ''
+  bearerDir = ''
+  scenarioRoot = ''
   scenarioRc!: string
 
   constructor(private readonly config: Config) {
