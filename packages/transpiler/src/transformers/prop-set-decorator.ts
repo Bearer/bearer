@@ -10,8 +10,8 @@
 import * as ts from 'typescript'
 
 import { Decorators, Types } from '../constants'
-import { getDecoratorNamed } from '../helpers/decorator-helpers'
-import { getNodeName, hasBooleanProperty } from '../helpers/node-helpers'
+import { extractBooleanOptions, getDecoratorNamed } from '../helpers/decorator-helpers'
+import { getNodeName } from '../helpers/node-helpers'
 import { TransformerOptions } from '../types'
 
 import { ensureImportsFromCore } from './bearer'
@@ -57,6 +57,21 @@ export default function PropSetDecorator(options: TransformerOptions = {}): ts.T
       return ts.visitEachChild(node, updateClass, _transformContext)
     }
 
+    function isMutableProp(node: ts.Node) {
+      return ts.isDecorator(node) && isMutableDecorator(node as ts.Decorator)
+    }
+
+    function isMutableDecorator(decorator: ts.Decorator) {
+      const visitor = (node: ts.Node) => {
+        if (ts.isObjectLiteralExpression(node)) {
+          if (node && node.properties.length) {
+            const { mutable } = extractBooleanOptions<{ mutable: boolean }>(node, ['mutable'])
+            return mutable
+          }
+        }
+      }
+      return ts.forEachChild(decorator.expression, visitor)
+    }
     return (sourceFile: ts.SourceFile): ts.SourceFile => {
       const meta = options.metadata.findComponentFrom(sourceFile)
       // only run this on root components
@@ -77,24 +92,6 @@ export default function PropSetDecorator(options: TransformerOptions = {}): ts.T
       return ts.visitNode(sourceFileWithImports, updateClass)
     }
   }
-}
-
-function isMutableDecorator(decorator: ts.Decorator) {
-  let isMutable = false
-  const visitor = (node: ts.Node): ts.VisitResult<ts.Node> => {
-    if (ts.isObjectLiteralExpression(node)) {
-      isMutable = hasBooleanProperty(node, 'mutable', ts.SyntaxKind.TrueKeyword)
-    }
-
-    return node
-  }
-  ts.visitNodes((decorator.expression as ts.CallExpression).arguments, visitor)
-
-  return isMutable
-}
-
-function isMutableProp(node: ts.Node) {
-  return ts.isDecorator(node) && isMutableDecorator(node as ts.Decorator)
 }
 
 function createWatchers(props: TMutablePropMeta[]): ts.MethodDeclaration[] {
