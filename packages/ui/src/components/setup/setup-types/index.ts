@@ -1,3 +1,3 @@
-export * from './OAuth2'
-export * from './Email'
-export * from './Key'
+export * from './oauth2'
+export * from './email'
+export * from './key'
