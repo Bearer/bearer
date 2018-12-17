@@ -1,8 +1,6 @@
 workflow "Build, test and publish" {
   on = "push"
-  resolves = [
-    "docker://node:10-2",
-  ]
+  resolves = ["Filters for GitHub Actions"]
 }
 
 action "Run test" {
@@ -29,11 +27,4 @@ action "Filters for GitHub Actions" {
   uses = "actions/bin/filter@95c1a3b"
   needs = ["docker://node:10-1"]
   args = "branch release"
-}
-
-action "docker://node:10-2" {
-  uses = "docker://node:10"
-  needs = ["Filters for GitHub Actions"]
-  runs = "yarn"
-  args = "fail"
 }
