@@ -1,42 +1,97 @@
 import * as ts from 'typescript'
 
-import { createFetcher } from '../../src/helpers/generator-helpers'
+import { addAutoLoad, createFetcher, createLoadResourceMethod, loadName } from '../../src/helpers/generator-helpers'
 import { CreateFetcherMeta } from '../../src/types'
 import { runTransformer } from '../utils/helpers'
 
-function transform(context: ts.TransformationContext) {
-  const updateClass: ts.Visitor = (node: ts.Node) => {
-    if (ts.isClassDeclaration(node)) {
-      const prop = node as ts.ClassDeclaration
+function dummyTransformer(fun: (meta: any) => ts.Node, meta: any) {
+  return (context: ts.TransformationContext) => {
+    const updateClass: ts.Visitor = (node: ts.Node) => {
+      if (ts.isClassDeclaration(node)) {
+        const prop = node as ts.ClassDeclaration
 
-      return ts.updateClassDeclaration(
-        prop,
-        prop.decorators,
-        prop.modifiers,
-        prop.name,
-        prop.typeParameters,
-        prop.heritageClauses,
-        [...prop.members, createFetcher(meta)]
-      )
+        return ts.updateClassDeclaration(
+          prop,
+          prop.decorators,
+          prop.modifiers,
+          prop.name,
+          prop.typeParameters,
+          prop.heritageClauses,
+          [...prop.members, fun(meta) as ts.ClassElement]
+        )
+      }
+
+      return ts.visitEachChild(node, updateClass, context)
     }
 
-    return ts.visitEachChild(node, updateClass, context)
-  }
-
-  return (sourceFile: ts.SourceFile): ts.SourceFile => {
-    return ts.visitNode(sourceFile, updateClass)
+    return (sourceFile: ts.SourceFile): ts.SourceFile => {
+      return ts.visitNode(sourceFile, updateClass)
+    }
   }
 }
 
-const code = `
-class C {}
-`
+describe('createFetcher', () => {
+  it('generates stuff properly', () => {
+    const code = `
+     class C {}
+    `
 
-const meta: CreateFetcherMeta = {
-  intentName: 'intentName',
-  intentMethodName: 'intentMethodName'
-}
+    const meta: CreateFetcherMeta = {
+      intentName: 'intentName',
+      intentMethodName: 'intentMethodName'
+    }
 
-it('generates stuff properly', () => {
-  expect(runTransformer(code, transform)).toMatchSnapshot()
+    expect(runTransformer(code, dummyTransformer(createFetcher, meta))).toMatchSnapshot()
+  })
+})
+
+describe('loadName', () => {
+  it('generates correct name', () => {
+    expect(loadName('hello')).toBe('_loadHello')
+  })
+})
+
+describe('createLoadResourceMethod', () => {
+  it('generates load resource method properly', () => {
+    const code = `
+     class C {}
+    `
+
+    const meta = {
+      propertyReferenceIdName: 'propertyReferenceIdName',
+      typeIdentifier: ts.createIdentifier('SomeType'),
+      propDeclarationName: 'propDeclarationName',
+      intentMethodName: 'intentMethodName',
+      intentReferenceIdKeyName: 'intentReferenceIdKeyName',
+      loadMethodName: 'loadMethodName'
+    }
+    expect(runTransformer(code, dummyTransformer(createLoadResourceMethod, meta))).toMatchSnapshot()
+  })
+})
+
+describe('addAutoLoad', () => {
+  it('generates class with autoloaded feature', () => {
+    function dummyTransformer(fun: (node: ts.ClassDeclaration, meta: any) => ts.Node, meta: any) {
+      return (context: ts.TransformationContext) => {
+        const updateClass: ts.Visitor = (node: ts.Node) => {
+          if (ts.isClassDeclaration(node)) {
+            const prop = node as ts.ClassDeclaration
+            return fun(prop, meta)
+          }
+
+          return ts.visitEachChild(node, updateClass, context)
+        }
+
+        return (sourceFile: ts.SourceFile): ts.SourceFile => {
+          return ts.visitNode(sourceFile, updateClass)
+        }
+      }
+    }
+    const meta = {
+      propertyReferenceIdName: 'propertyReferenceIdName',
+      autoLoad: true,
+      loadMethodName: 'loadMethodName'
+    }
+    expect(runTransformer('class C {}', dummyTransformer(addAutoLoad, meta))).toMatchSnapshot()
+  })
 })
