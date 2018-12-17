@@ -1,6 +1,7 @@
 import * as fs from 'fs'
 import * as globby from 'globby'
 import * as path from 'path'
+import * as ts from 'typescript'
 
 import { TranpilerOptions } from '../../src/index'
 import { UnitFixtureDirectory } from '../utils/location'
@@ -19,6 +20,25 @@ export function cleanBuildFolder() {
       fs.unlinkSync(filePath)
     }
   })
+}
+
+export function runTransformer(code: string, transformer: ts.TransformerFactory<ts.SourceFile>) {
+  const sourceFile = ts.createSourceFile('tmp.ts', code, ts.ScriptTarget.Latest)
+  const transformed = ts.transform(sourceFile, [transformer])
+
+  const printer = ts.createPrinter(
+    {
+      newLine: ts.NewLineKind.LineFeed
+    },
+    {
+      onEmitNode: transformed.emitNodeWithNotification,
+      substituteNode: transformed.substituteNode
+    }
+  )
+  const result = printer.printBundle(ts.createBundle(transformed.transformed))
+  transformed.dispose()
+
+  return result
 }
 
 export function runUnitOn(name: string, transpilerOptions: Partial<TranpilerOptions> = {}) {

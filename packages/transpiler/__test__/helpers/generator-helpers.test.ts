@@ -2,6 +2,7 @@ import * as ts from 'typescript'
 
 import { createFetcher } from '../../src/helpers/generator-helpers'
 import { CreateFetcherMeta } from '../../src/types'
+import { runTransformer } from '../utils/helpers'
 
 function transform(context: ts.TransformationContext) {
   const updateClass: ts.Visitor = (node: ts.Node) => {
@@ -37,20 +38,5 @@ const meta: CreateFetcherMeta = {
 }
 
 it('generates stuff properly', () => {
-  const sourceFile = ts.createSourceFile('tmp.ts', code, ts.ScriptTarget.Latest)
-  const transformed = ts.transform(sourceFile, [transform])
-
-  const printer = ts.createPrinter(
-    {
-      newLine: ts.NewLineKind.LineFeed
-    },
-    {
-      onEmitNode: transformed.emitNodeWithNotification,
-      substituteNode: transformed.substituteNode
-    }
-  )
-  const result = printer.printBundle(ts.createBundle(transformed.transformed))
-  transformed.dispose()
-
-  expect(result).toMatchSnapshot()
+  expect(runTransformer(code, transform)).toMatchSnapshot()
 })
