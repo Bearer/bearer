@@ -76,4 +76,35 @@ describe('fromBearer', () => {
     )
     expect(render.toJSON()).toMatchSnapshot()
   })
+
+  it('adds callbacks for component events', () => {
+    const addEventListener = jest.fn(_name => null)
+    const removeEventListener = jest.fn(_name => null)
+    const onShared = jest.fn(_name => null)
+    const createNodeMock = (_element: any) => {
+      return {
+        addEventListener,
+        removeEventListener
+      }
+    }
+    const outputEventName = 'bearer-6d29c4-share-slack-beta-4-feature-shared'
+    const props = {
+      [outputEventName]: onShared
+    }
+    const initialContext = { bar: 'boo' }
+    const render = Renderer.create(
+      <DummyContext initialContext={initialContext}>
+        <TestComponent {...props} />
+      </DummyContext>,
+      { createNodeMock }
+    )
+    expect(render.toJSON()).toMatchSnapshot()
+    render.unmount()
+    expect(addEventListener.mock.calls.length).toBe(2)
+    expect(addEventListener.mock.calls[1][0]).toBe(outputEventName)
+    expect(addEventListener.mock.calls[1][1]).toBe(onShared)
+    expect(removeEventListener.mock.calls.length).toBe(2)
+    expect(removeEventListener.mock.calls[1][0]).toBe(outputEventName)
+    expect(removeEventListener.mock.calls[1][1]).toBe(onShared)
+  })
 })
