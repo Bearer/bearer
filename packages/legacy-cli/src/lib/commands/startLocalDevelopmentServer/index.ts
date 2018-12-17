@@ -94,11 +94,11 @@ export default function startLocalDevelopmentServer(
                 }
               )
             } catch (e) {
-              console.log("ERROR: ", e)
+              console.log('ERROR: ', e)
               if (e.code === 'MODULE_NOT_FOUND') {
                 ctx.intentDatum = { error: `Intent '${ctx.params.intentName}' Not Found` }
               } else {
-                ctx.intentDatum = { error: e.toString() }
+                ctx.intentDatum = { error: e }
               }
               await next()
               resolve()
@@ -106,7 +106,7 @@ export default function startLocalDevelopmentServer(
           }),
         (ctx, _next) => {
           if (ctx.intentDatum.error) {
-            ctx.badRequest({ error: ctx.intentDatum.error.toString() })
+            ctx.badRequest({ error: ctx.intentDatum.error })
           } else {
             ctx.ok(ctx.intentDatum)
           }
