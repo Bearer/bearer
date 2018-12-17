@@ -1,10 +1,10 @@
 {
-  "extends": ["@oclif/tslint", "tslint-config-prettier"],
+  "extends": "@bearer/tslint-config",
   "rules": {
     "object-curly-spacing": [true, "always"],
     "no-console": false
   },
   "linterOptions": {
-    "exclude": ["**/node_modules/**", "**/templates/**", "**/__fixtures__/**", "**/lib/**", "**/www/**"]
+    "exclude": ["**/node_modules/**", "**/templates/**", "**/__fixtures__/**", "**/lib/**", "**/www/**", "package.json"]
   }
 }

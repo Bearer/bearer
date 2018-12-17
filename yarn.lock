@@ -18,6 +18,14 @@
     esutils "^2.0.2"
     js-tokens "^4.0.0"
 
+"@bearer/tslint-config@>=0.80.1":
+  version "0.80.1"
+  resolved "https://registry.yarnpkg.com/@bearer/tslint-config/-/tslint-config-0.80.1.tgz#bc3c386f87dfd178a7de04e421478a80d1391970"
+  integrity sha512-iWPSlew1duC3WpcC4FPm5fNDJIVsJZeq1ai+mDHinNtN3HP3Eswd1yGOlgIcp2ktLz/ee4PUTcZKJLYLb2M8lQ==
+  dependencies:
+    tslint-config-airbnb "^5.11.1"
+    tslint-config-prettier "^1.17.0"
+
 "@commitlint/cli@^7.2.1":
   version "7.2.1"
   resolved "https://registry.yarnpkg.com/@commitlint/cli/-/cli-7.2.1.tgz#dbb9eeb1f5015a129bb0801fbc1115eb1dcd513b"
@@ -169,16 +177,6 @@
     omggif "^1.0.5"
     pngjs "^2.0.0"
 
-"@fimbul/bifrost@^0.11.0":
-  version "0.11.0"
-  resolved "https://registry.yarnpkg.com/@fimbul/bifrost/-/bifrost-0.11.0.tgz#83cacc21464198b12e3cc1c2204ae6c6d7afd158"
-  integrity sha512-GspMaQafpaUoXWWOUgNLQ4vsV52tIHUt0zpKPeJUYEyMvOSp7FIcZ1eQa7SK3GTusrEiksjMrDX/fwanigC3nQ==
-  dependencies:
-    "@fimbul/ymir" "^0.11.0"
-    get-caller-file "^1.0.2"
-    tslib "^1.8.1"
-    tsutils "^2.24.0"
-
 "@fimbul/bifrost@^0.15.0":
   version "0.15.0"
   resolved "https://registry.yarnpkg.com/@fimbul/bifrost/-/bifrost-0.15.0.tgz#f3a48dee3046681e926c1f970f0b1a67e29e088e"
@@ -188,15 +186,6 @@
     get-caller-file "^2.0.0"
     tslib "^1.8.1"
     tsutils "^3.1.0"
-
-"@fimbul/ymir@^0.11.0":
-  version "0.11.0"
-  resolved "https://registry.yarnpkg.com/@fimbul/ymir/-/ymir-0.11.0.tgz#892a01997f1f80c7e4e437cf5ca51c95994c136f"
-  integrity sha512-aIYQMCWbBXe7DIofgu+4DLCPDCfqbKhPjBg4ajskJdq6CAJgySz6KyhGLNnKiDYZMF93ZsaEB/y3SafyMi98Mg==
-  dependencies:
-    inversify "^4.10.0"
-    reflect-metadata "^0.1.12"
-    tslib "^1.8.1"
 
 "@fimbul/ymir@^0.15.0":
   version "0.15.0"
@@ -1061,14 +1050,6 @@
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/@oclif/screen/-/screen-1.0.4.tgz#b740f68609dfae8aa71c3a6cab15d816407ba493"
   integrity sha512-60CHpq+eqnTxLZQ4PGHYNwUX572hgpMHGPtTWMjdTMsAvlm69lZV/4ly6O3sAYkomo4NggGcomrDpBe34rxUqw==
-
-"@oclif/tslint@^3.1.1":
-  version "3.1.1"
-  resolved "https://registry.yarnpkg.com/@oclif/tslint/-/tslint-3.1.1.tgz#e055cdf158630862fd44546f6b8fb1266c9778e7"
-  integrity sha512-B1ZWbgzwxDhNZLzVnn+JjyFf9u+J9wNwsz/ZX9YvA9edRYcdiJz9JikCttGPi35V0NU0TUV4UqTqo/q/wQ06jQ==
-  dependencies:
-    tslint-eslint-rules "^5.4.0"
-    tslint-xo "^0.9.0"
 
 "@samverschueren/stream-to-observable@^0.3.0":
   version "0.3.0"
@@ -5441,7 +5422,7 @@ genfun@^4.0.1:
   resolved "https://registry.yarnpkg.com/genfun/-/genfun-4.0.1.tgz#ed10041f2e4a7f1b0a38466d17a5c3e27df1dfc1"
   integrity sha1-7RAEHy5KfxsKOEZtF6XD4n3x38E=
 
-get-caller-file@^1.0.1, get-caller-file@^1.0.2:
+get-caller-file@^1.0.1:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/get-caller-file/-/get-caller-file-1.0.3.tgz#f978fa4c90d1dfe7ff2d6beda2a515e713bdcf4a"
   integrity sha512-3t6rVToeoZfYSGd8YoLFR2DJkiQrIiUrGcjvFX2mDw3bn6k2OtwHN0TNCLbBO+w8qTvimhDkv+LSscbJY1vE6w==
@@ -6301,11 +6282,6 @@ invariant@^2.2.2, invariant@^2.2.4:
   integrity sha512-phJfQVBuaJM5raOpJjSfkiD6BpbCE4Ns//LaXl6wGYtUBY83nWS6Rf9tXm2e8VaK60JEjYldbPif/A2B1C2gNA==
   dependencies:
     loose-envify "^1.0.0"
-
-inversify@^4.10.0:
-  version "4.13.0"
-  resolved "https://registry.yarnpkg.com/inversify/-/inversify-4.13.0.tgz#0ab40570bfa4474b04d5b919bbab3a4f682a72f5"
-  integrity sha512-O5d8y7gKtyRwrvTLZzYET3kdFjqUy58sGpBYMARF13mzqDobpfBXVOPLH7HmnD2VR6Q+1HzZtslGvsdQfeb0SA==
 
 inversify@^5.0.0:
   version "5.0.1"
@@ -11856,19 +11832,10 @@ tslint-config-airbnb@^5.11.1:
     tslint-eslint-rules "^5.4.0"
     tslint-microsoft-contrib "~5.2.1"
 
-tslint-config-prettier@^1.15.0:
-  version "1.15.0"
-  resolved "https://registry.yarnpkg.com/tslint-config-prettier/-/tslint-config-prettier-1.15.0.tgz#76b9714399004ab6831fdcf76d89b73691c812cf"
-  integrity sha512-06CgrHJxJmNYVgsmeMoa1KXzQRoOdvfkqnJth6XUkNeOz707qxN0WfxfhYwhL5kXHHbYJRby2bqAPKwThlZPhw==
-
-tslint-consistent-codestyle@^1.11.0:
-  version "1.13.3"
-  resolved "https://registry.yarnpkg.com/tslint-consistent-codestyle/-/tslint-consistent-codestyle-1.13.3.tgz#763e8575accc19f17b7d0369ead382bdbf78fd5b"
-  integrity sha512-+ocXSNGHqUCUyTJsPhS7xqcC3qf6FyP4vd1jEaXaWaJ5NNN36gKZhqNt3nAWH/YgSV0tYaapjSWMbJQJmn/5MQ==
-  dependencies:
-    "@fimbul/bifrost" "^0.11.0"
-    tslib "^1.7.1"
-    tsutils "^2.27.0"
+tslint-config-prettier@^1.17.0:
+  version "1.17.0"
+  resolved "https://registry.yarnpkg.com/tslint-config-prettier/-/tslint-config-prettier-1.17.0.tgz#946ed6117f98f3659a65848279156d87628c33dc"
+  integrity sha512-NKWNkThwqE4Snn4Cm6SZB7lV5RMDDFsBwz6fWUkTxOKGjMx8ycOHnjIbhn7dZd5XmssW3CwqUjlANR6EhP9YQw==
 
 tslint-consistent-codestyle@^1.14.1:
   version "1.14.1"
@@ -11879,15 +11846,6 @@ tslint-consistent-codestyle@^1.14.1:
     tslib "^1.7.1"
     tsutils "^2.29.0"
 
-tslint-eslint-rules@^5.3.1:
-  version "5.3.1"
-  resolved "https://registry.yarnpkg.com/tslint-eslint-rules/-/tslint-eslint-rules-5.3.1.tgz#10dec4361df0b3e4385d91ff8e0226bda4ec2ad4"
-  integrity sha512-qq2H/AU/FlFbQJKXuxhtIk+ni/nQu9jHHhsFKa6hnA0/n3zl1/RWRc3TVFlL8HfWFMzkST350VeTrFpy1u4OUg==
-  dependencies:
-    doctrine "0.7.2"
-    tslib "1.9.0"
-    tsutils "2.8.0"
-
 tslint-eslint-rules@^5.4.0:
   version "5.4.0"
   resolved "https://registry.yarnpkg.com/tslint-eslint-rules/-/tslint-eslint-rules-5.4.0.tgz#e488cc9181bf193fe5cd7bfca213a7695f1737b5"
@@ -11897,28 +11855,12 @@ tslint-eslint-rules@^5.4.0:
     tslib "1.9.0"
     tsutils "^3.0.0"
 
-tslint-microsoft-contrib@^5.0.2:
-  version "5.2.0"
-  resolved "https://registry.yarnpkg.com/tslint-microsoft-contrib/-/tslint-microsoft-contrib-5.2.0.tgz#a0ef808691b8f8c6e7902a62cd06e9502a91dde2"
-  integrity sha512-gHVEIkTcMB9lS6UPEgEznV5ZmyhDs/aHyBS9E89S8aJiK1qLv22DmfCcda53S024T+WQkGAhLHUQF4Qn4nzCAA==
-  dependencies:
-    tsutils "^2.12.1 <2.29.0"
-
 tslint-microsoft-contrib@~5.2.1:
   version "5.2.1"
   resolved "https://registry.yarnpkg.com/tslint-microsoft-contrib/-/tslint-microsoft-contrib-5.2.1.tgz#a6286839f800e2591d041ea2800c77487844ad81"
   integrity sha512-PDYjvpo0gN9IfMULwKk0KpVOPMhU6cNoT9VwCOLeDl/QS8v8W2yspRpFFuUS7/c5EIH/n8ApMi8TxJAz1tfFUA==
   dependencies:
     tsutils "^2.27.2 <2.29.0"
-
-tslint-xo@^0.9.0:
-  version "0.9.0"
-  resolved "https://registry.yarnpkg.com/tslint-xo/-/tslint-xo-0.9.0.tgz#e1faa505fecd5ac705460fc9f5ca417c3036c14f"
-  integrity sha512-Zk5jBdQVUaHEmR9TUoh1TJOjjCr7/nRplA+jDZBvucyBMx65pt0unTr6H/0HvrtSlucFvOMYsyBZE1W8b4AOig==
-  dependencies:
-    tslint-consistent-codestyle "^1.11.0"
-    tslint-eslint-rules "^5.3.1"
-    tslint-microsoft-contrib "^5.0.2"
 
 tslint@^5.11.0:
   version "5.11.0"
@@ -11938,24 +11880,17 @@ tslint@^5.11.0:
     tslib "^1.8.0"
     tsutils "^2.27.2"
 
-tsutils@2.8.0:
-  version "2.8.0"
-  resolved "https://registry.yarnpkg.com/tsutils/-/tsutils-2.8.0.tgz#0160173729b3bf138628dd14a1537e00851d814a"
-  integrity sha1-AWAXNymzvxOGKN0UoVN+AIUdgUo=
-  dependencies:
-    tslib "^1.7.1"
-
-"tsutils@^2.12.1 <2.29.0", "tsutils@^2.27.2 <2.29.0":
-  version "2.28.0"
-  resolved "https://registry.yarnpkg.com/tsutils/-/tsutils-2.28.0.tgz#6bd71e160828f9d019b6f4e844742228f85169a1"
-  integrity sha512-bh5nAtW0tuhvOJnx1GLRn5ScraRLICGyJV5wJhtRWOLsxW70Kk5tZtpK3O/hW6LDnqKS9mlUMPZj9fEMJ0gxqA==
-  dependencies:
-    tslib "^1.8.1"
-
-tsutils@^2.24.0, tsutils@^2.27.0, tsutils@^2.27.2, tsutils@^2.29.0:
+tsutils@^2.27.2, tsutils@^2.29.0:
   version "2.29.0"
   resolved "https://registry.yarnpkg.com/tsutils/-/tsutils-2.29.0.tgz#32b488501467acbedd4b85498673a0812aca0b99"
   integrity sha512-g5JVHCIJwzfISaXpXE1qvNalca5Jwob6FjI4AoPlqMusJ6ftFE7IkkFoMhVLRgK+4Kx3gkzb8UZK5t5yTTvEmA==
+  dependencies:
+    tslib "^1.8.1"
+
+"tsutils@^2.27.2 <2.29.0":
+  version "2.28.0"
+  resolved "https://registry.yarnpkg.com/tsutils/-/tsutils-2.28.0.tgz#6bd71e160828f9d019b6f4e844742228f85169a1"
+  integrity sha512-bh5nAtW0tuhvOJnx1GLRn5ScraRLICGyJV5wJhtRWOLsxW70Kk5tZtpK3O/hW6LDnqKS9mlUMPZj9fEMJ0gxqA==
   dependencies:
     tslib "^1.8.1"
 
