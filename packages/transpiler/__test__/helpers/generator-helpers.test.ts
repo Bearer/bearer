@@ -1,7 +1,7 @@
 import * as ts from 'typescript'
 
 import { createFetcher } from '../../src/helpers/generator-helpers'
-import { InputMeta } from '../../src/types'
+import { CreateFetcherMeta } from '../../src/types'
 
 function transform(context: ts.TransformationContext) {
   const updateClass: ts.Visitor = (node: ts.Node) => {
@@ -31,17 +31,9 @@ const code = `
 class C {}
 `
 
-const meta: InputMeta = {
-  propDeclarationName: 'propDeclarationName',
-  group: 'group',
-  propertyReferenceIdName: 'propertyReferenceIdName',
-  eventName: 'eventName',
-  intentReferenceIdKeyName: 'intentRefernceIdKeyName',
+const meta: CreateFetcherMeta = {
   intentName: 'intentName',
-  autoLoad: false,
-  loadMethodName: 'loadMethodName',
-  intentMethodName: 'intentMethodName',
-  watcherName: 'watcherName'
+  intentMethodName: 'intentMethodName'
 }
 
 it('generates stuff properly', () => {

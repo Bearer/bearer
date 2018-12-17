@@ -6,7 +6,12 @@ import * as ts from 'typescript'
 
 import { Decorators, Properties } from '../constants'
 import { extractBooleanOptions, extractStringOptions, getDecoratorNamed } from '../helpers/decorator-helpers'
-import { createFetcher, createLoadResourceMethod, loadName as _loadName } from '../helpers/generator-helpers'
+import {
+  createFetcher,
+  createLoadDataCall,
+  createLoadResourceMethod,
+  loadName as _loadName
+} from '../helpers/generator-helpers'
 import { retrieveFetcherName, retrieveIntentName } from '../helpers/name-helpers'
 import { getNodeName } from '../helpers/node-helpers'
 import { capitalize } from '../helpers/string'
@@ -214,12 +219,6 @@ function createEventListener(meta: InputMeta) {
       ],
       true
     )
-  )
-}
-
-function createLoadDataCall(meta: InputMeta) {
-  return ts.createStatement(
-    ts.createCall(ts.createPropertyAccess(ts.createThis(), meta.loadMethodName), undefined, undefined)
   )
 }
 

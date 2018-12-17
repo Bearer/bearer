@@ -92,6 +92,9 @@ class NoOptionsComponent {
         if (this.setupId) {
             this.bearerContext.setupId = this.setupId;
         }
+        if (this.farmerRefId) {
+            this._loadFarmer();
+        }
     }
     @Event({ eventName: \\"no-options-action-prop-set\\", bubbles: true, cancelable: true })
     propSetEmitter: EventEmitter;

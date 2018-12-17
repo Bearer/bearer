@@ -489,6 +489,13 @@ export class AttachPullRequestAction {
         });
     }
     private fetcherRetrieveFeedPanda;
+    _loadFeedPanda = () => {
+        this.fetcherRetrieveFeedPanda({ referenceId: this.feedPandaRefId }).then(({ data }: {
+            data: BearerRef<Panda>;
+        }) => {
+            this.feedPandaInitial = data;
+        });
+    };
     private manualIntentName: BearerFetch<BearerRef<{
         inlineName: string;
     }>>;
@@ -512,6 +519,15 @@ export class AttachPullRequestAction {
         });
     }
     private fetcherRetrieveShortPanda;
+    _loadShortPanda = () => {
+        this.fetcherRetrieveShortPanda({ referenceId: this.shortPandaRefId }).then(({ data }: {
+            data: BearerRef<{
+                inlineName: string;
+            }>;
+        }) => {
+            this.shortPandaInitial = data;
+        });
+    };
     constructor() {
         Intent('ListRepositories')(this, \\"fetcher\\");
         Intent('getPullRequest', IntentType.FetchData)(this, \\"fetchResource\\");
@@ -533,6 +549,12 @@ export class AttachPullRequestAction {
         }
         if (this.farmerRefId) {
             this._loadFarmer();
+        }
+        if (this.feedPandaRefId) {
+            this._loadFeedPanda();
+        }
+        if (this.shortPandaRefId) {
+            this._loadShortPanda();
         }
     }
     @Watch(\\"attachedPullRequests\\")

@@ -31,7 +31,8 @@ class NoOptionsComponent {
     eventName: 'milked',
     propertyWatchedName: 'aPanda',
     referenceKeyName: 'aPandaKey',
-    intentName: 'milkWithAbottle'
+    intentName: 'milkWithAbottle',
+    autoLoad: false
   })
   farmerAndPanda: BearerRef<Farmer> = {}
 }

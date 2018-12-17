@@ -74,6 +74,12 @@ export type TOutputDecoratorOptions = {
    * default: referenceId
    */
   referenceKeyName: string
+
+  /**
+   * Autoload data when component mounted
+   * default: true
+   */
+  autoLoad: boolean
 }
 
 /**

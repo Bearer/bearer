@@ -1,7 +1,7 @@
 import * as ts from 'typescript'
 
 import { Decorators } from './../constants'
-import { CreateFetcherMeta, TCreateLoadResourceMethod } from './../types'
+import { CreateFetcherMeta, TCreateLoadDataCall, TCreateLoadResourceMethod } from './../types'
 import { capitalize } from './string'
 
 export function createFetcher(meta: CreateFetcherMeta) {
@@ -78,5 +78,11 @@ export function createLoadResourceMethod(meta: TCreateLoadResourceMethod) {
       undefined,
       ts.createBlock([ts.createStatement(promiseHandler)], true)
     )
+  )
+}
+
+export function createLoadDataCall(meta: TCreateLoadDataCall) {
+  return ts.createStatement(
+    ts.createCall(ts.createPropertyAccess(ts.createThis(), meta.loadMethodName), undefined, undefined)
   )
 }

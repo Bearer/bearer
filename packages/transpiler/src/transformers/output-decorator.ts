@@ -5,14 +5,14 @@ import { TOutputDecoratorOptions } from '@bearer/types/lib/input-output-decorato
 import * as ts from 'typescript'
 
 import { Decorators, Properties, Types } from '../constants'
-import { extractStringOptions, getDecoratorNamed } from '../helpers/decorator-helpers'
-import { createFetcher, createLoadResourceMethod, loadName } from '../helpers/generator-helpers'
+import { extractBooleanOptions, extractStringOptions, getDecoratorNamed } from '../helpers/decorator-helpers'
+import { createFetcher, createLoadDataCall, createLoadResourceMethod, loadName } from '../helpers/generator-helpers'
 import { retrieveFetcherName } from '../helpers/name-helpers'
 import { getNodeName } from '../helpers/node-helpers'
 import { capitalize } from '../helpers/string'
 import { TCreateLoadResourceMethod, TransformerOptions } from '../types'
 
-import { ensureImportsFromCore } from './bearer'
+import { createOrUpdateComponentDidLoad, ensureImportsFromCore } from './bearer'
 
 const newValue = 'newValue'
 const data = 'data'
@@ -53,13 +53,17 @@ export default function OutputDecorator(_options: TransformerOptions = {}): ts.T
             const callArgs = (decorator.expression as ts.CallExpression).arguments[0] as ts.ObjectLiteralExpression
             const options = !callArgs
               ? {}
-              : extractStringOptions<TOutputDecoratorOptions>(callArgs, [
-                  'eventName',
-                  'intentName',
-                  'intentPropertyName',
-                  'propertyWatchedName',
-                  'referenceKeyName'
-                ])
+              : {
+                  ...extractStringOptions<TOutputDecoratorOptions>(callArgs, [
+                    'eventName',
+                    'intentName',
+                    'intentPropertyName',
+                    'propertyWatchedName',
+                    'referenceKeyName'
+                  ]),
+
+                  ...extractBooleanOptions<TOutputDecoratorOptions>(callArgs, ['autoLoad'])
+                }
             outputs.push({
               eventName: outputEventName(name),
               intentName: saveIntentName(name),
@@ -74,6 +78,7 @@ export default function OutputDecorator(_options: TransformerOptions = {}): ts.T
               referenceKeyName: Properties.ReferenceId,
               propertyWatchedName: name,
               propertyReferenceIdName: refIdName(name),
+              autoLoad: true,
               ...options
             })
           }
@@ -98,6 +103,7 @@ export default function OutputDecorator(_options: TransformerOptions = {}): ts.T
 }
 
 function injectOuputStatements(tsClass: ts.ClassDeclaration, outputsMeta: Array<OutputMeta>): ts.ClassDeclaration {
+  const classNode = outputsMeta.reduce((classDeclaration, meta) => addAutoLoad(classDeclaration, meta), tsClass)
   const newMembers = outputsMeta.reduce(
     (members, meta) => {
       const outputMembers = [
@@ -114,7 +120,7 @@ function injectOuputStatements(tsClass: ts.ClassDeclaration, outputsMeta: Array<
       ]
       return members.concat(outputMembers)
     },
-    [...tsClass.members]
+    [...classNode.members]
   )
 
   return ts.updateClassDeclaration(
@@ -128,6 +134,20 @@ function injectOuputStatements(tsClass: ts.ClassDeclaration, outputsMeta: Array<
   )
 }
 
+function addAutoLoad(tsClass: ts.ClassDeclaration, meta: OutputMeta): ts.ClassDeclaration {
+  if (meta.autoLoad) {
+    return createOrUpdateComponentDidLoad(tsClass, block =>
+      ts.updateBlock(block, [
+        ...block.statements,
+        ts.createIf(
+          ts.createPropertyAccess(ts.createThis(), meta.propertyReferenceIdName),
+          ts.createBlock([createLoadDataCall(meta)])
+        )
+      ])
+    )
+  }
+  return tsClass
+}
 function createEvent(meta: OutputMeta): ts.PropertyDeclaration {
   // @Event() propertyWatchedName: EventEmitter<any>;
   return ts.createProperty(
@@ -348,4 +368,5 @@ type OutputMeta = TOutputDecoratorOptions & {
   initializer: ts.Expression
   typeIdentifier?: ts.TypeNode
   propertyReferenceIdName: string
+  autoLoad?: true | false
 }
