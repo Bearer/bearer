@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`fromBearer props from context flow to component 1`] = `
+<div>
+  <bearer-component
+    bar="boo"
+  />
+</div>
+`;
+
+exports[`fromBearer renders bearer component tag 1`] = `
+<div>
+  <bearer-component
+    foo="bar"
+  />
+</div>
+`;

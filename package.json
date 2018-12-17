@@ -15,6 +15,7 @@
     "@types/lodash.kebabcase": "^4.1.4",
     "@types/react": "^16.7.17",
     "@types/react-helmet": "^5.0.7",
+    "@types/react-test-renderer": "^16.0.3",
     "commitlint": "^7.2.1",
     "cz-conventional-changelog": "^2.1.0",
     "husky": "^1.2.1",
@@ -22,6 +23,7 @@
     "lint-staged": "^8.1.0",
     "prettier": "^1.15.3",
     "react": "^16.6.0-0",
+    "react-test-renderer": "^16.6.3",
     "ts-jest": "^23.10.5",
     "tslint": "^5.11.0",
     "tslint-config-prettier": "^1.17.0",
@@ -58,6 +60,7 @@
     "clean": "rm -rf lib",
     "prepack": "yarn clean && yarn build",
     "test": "jest",
-    "test:ci": "jest --coverage"
+    "test:ci": "jest --coverage",
+    "lint": "tslint -c tslint.json --fix --project tsconfig.json"
   }
 }

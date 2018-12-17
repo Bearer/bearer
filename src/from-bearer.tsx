@@ -9,7 +9,7 @@ function fromBearer<T>(TagName: string) {
     static displayName = `Bearer(${TagName})`
     static contextType = BearerContext
     context!: React.ContextType<typeof BearerContext>
-    private eventRef: React.RefObject<HTMLInputElement>
+    private readonly eventRef: React.RefObject<HTMLInputElement>
 
     constructor(props: T) {
       super(props)
@@ -36,7 +36,7 @@ function fromBearer<T>(TagName: string) {
       )
     }
 
-    private prophandler = (e: any) => {
+    private readonly prophandler = (e: any) => {
       if (this.context.handlePropUpdates) {
         this.context.handlePropUpdates(e)
       }
