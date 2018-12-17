@@ -6,11 +6,11 @@ import * as ts from 'typescript'
 
 import { Decorators, Properties, Types } from '../constants'
 import { extractStringOptions, getDecoratorNamed } from '../helpers/decorator-helpers'
-import { createFetcher } from '../helpers/generator-helpers'
+import { createFetcher, createLoadResourceMethod, loadName } from '../helpers/generator-helpers'
 import { retrieveFetcherName } from '../helpers/name-helpers'
 import { getNodeName } from '../helpers/node-helpers'
 import { capitalize } from '../helpers/string'
-import { TransformerOptions } from '../types'
+import { TCreateLoadResourceMethod, TransformerOptions } from '../types'
 
 import { ensureImportsFromCore } from './bearer'
 
@@ -67,11 +67,13 @@ export default function OutputDecorator(_options: TransformerOptions = {}): ts.T
               intentPropertyName: name,
               propDeclarationName: name,
               propDeclarationNameRefId: refIdName(name),
+              loadMethodName: loadName(name),
               intentReferenceIdKeyName: Properties.ReferenceId,
               typeIdentifier: tsNode.type,
               initializer: tsNode.initializer,
               referenceKeyName: Properties.ReferenceId,
               propertyWatchedName: name,
+              propertyReferenceIdName: refIdName(name),
               ...options
             })
           }
@@ -94,6 +96,7 @@ export default function OutputDecorator(_options: TransformerOptions = {}): ts.T
     }
   }
 }
+
 function injectOuputStatements(tsClass: ts.ClassDeclaration, outputsMeta: Array<OutputMeta>): ts.ClassDeclaration {
   const newMembers = outputsMeta.reduce(
     (members, meta) => {
@@ -103,7 +106,11 @@ function injectOuputStatements(tsClass: ts.ClassDeclaration, outputsMeta: Array<
         ...createStates(meta),
         createProp(meta),
         ...createWatchers(meta),
-        createInitialFetcher(meta)
+        createInitialFetcher(meta),
+        createLoadResourceMethod({
+          ...(meta as TCreateLoadResourceMethod),
+          propDeclarationName: `${meta.propDeclarationName}Initial`
+        })
       ]
       return members.concat(outputMembers)
     },
@@ -337,6 +344,8 @@ type OutputMeta = TOutputDecoratorOptions & {
   propDeclarationNameRefId: string
   intentMethodName: string
   intentName: string
+  loadMethodName: string
   initializer: ts.Expression
   typeIdentifier?: ts.TypeNode
+  propertyReferenceIdName: string
 }

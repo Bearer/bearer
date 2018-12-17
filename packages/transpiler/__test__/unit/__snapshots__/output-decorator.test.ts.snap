@@ -46,6 +46,13 @@ class NoOptionsComponent {
         });
     }
     private fetcherRetrieveFarmer;
+    _loadFarmer = () => {
+        this.fetcherRetrieveFarmer({ referenceId: this.farmerRefId }).then(({ data }: {
+            data: BearerRef<Farmer>;
+        }) => {
+            this.farmerInitial = data;
+        });
+    };
     private milkWithAbottle: BearerFetch<BearerRef<Farmer>>;
     @Event({ eventName: \\"bearer-SPONGE_BOB-no-options-milked\\" })
     milked: EventEmitter;
@@ -63,6 +70,13 @@ class NoOptionsComponent {
         });
     }
     private fetcherRetrieveFarmerAndPanda;
+    _loadFarmerAndPanda = () => {
+        this.fetcherRetrieveFarmerAndPanda({ referenceId: this.farmerAndPandaRefId }).then(({ data }: {
+            data: BearerRef<Farmer>;
+        }) => {
+            this.farmerAndPandaInitial = data;
+        });
+    };
     constructor() {
         Intent(\\"saveFarmer\\")(this, \\"saveFarmer\\");
         Intent(\\"retrieveFarmer\\")(this, \\"fetcherRetrieveFarmer\\");

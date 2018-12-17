@@ -75,3 +75,12 @@ export type CreateFetcherMeta = {
   intentName: string
   intentMethodName: string
 }
+
+export type TCreateLoadResourceMethod = {
+  propertyReferenceIdName: string
+  typeIdentifier?: ts.TypeNode
+  propDeclarationName: string
+  intentMethodName: string
+  intentReferenceIdKeyName: string
+  loadMethodName: string
+}

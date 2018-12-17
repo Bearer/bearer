@@ -6,7 +6,7 @@ import * as ts from 'typescript'
 
 import { Decorators, Properties } from '../constants'
 import { extractBooleanOptions, extractStringOptions, getDecoratorNamed } from '../helpers/decorator-helpers'
-import { createFetcher } from '../helpers/generator-helpers'
+import { createFetcher, createLoadResourceMethod, loadName as _loadName } from '../helpers/generator-helpers'
 import { retrieveFetcherName, retrieveIntentName } from '../helpers/name-helpers'
 import { getNodeName } from '../helpers/node-helpers'
 import { capitalize } from '../helpers/string'
@@ -217,64 +217,6 @@ function createEventListener(meta: InputMeta) {
   )
 }
 
-function createLoadResourceMethod(meta: InputMeta) {
-  const intentCall = ts.createCall(ts.createPropertyAccess(ts.createThis(), meta.intentMethodName), undefined, [
-    ts.createObjectLiteral([
-      ts.createPropertyAssignment(
-        meta.intentReferenceIdKeyName,
-        ts.createPropertyAccess(ts.createThis(), meta.propertyReferenceIdName)
-      )
-    ])
-  ])
-  const udapteState = ts.createArrowFunction(
-    undefined,
-    undefined,
-    [
-      ts.createParameter(
-        undefined,
-        undefined,
-        undefined,
-        ts.createObjectBindingPattern([ts.createBindingElement(undefined, undefined, 'data')]),
-        undefined,
-        ts.createTypeLiteralNode([
-          ts.createPropertySignature(undefined, 'data', undefined, meta.typeIdentifier, undefined)
-        ]),
-        undefined
-      )
-    ],
-    undefined,
-    undefined,
-    ts.createBlock(
-      [
-        ts.createStatement(
-          ts.createBinary(
-            ts.createPropertyAccess(ts.createThis(), meta.propDeclarationName),
-            ts.SyntaxKind.EqualsToken,
-            ts.createIdentifier('data')
-          )
-        )
-      ],
-      true
-    )
-  )
-  const promiseHandler = ts.createCall(ts.createPropertyAccess(intentCall, 'then'), undefined, [udapteState])
-  return ts.createProperty(
-    undefined,
-    undefined,
-    meta.loadMethodName,
-    undefined,
-    undefined,
-    ts.createArrowFunction(
-      undefined,
-      undefined,
-      undefined,
-      undefined,
-      undefined,
-      ts.createBlock([ts.createStatement(promiseHandler)], true)
-    )
-  )
-}
-
 function createLoadDataCall(meta: InputMeta) {
   return ts.createStatement(
     ts.createCall(ts.createPropertyAccess(ts.createThis(), meta.loadMethodName), undefined, undefined)
@@ -313,10 +255,6 @@ function createRefIdWatcher(meta: InputMeta) {
       true
     )
   )
-}
-
-function _loadName(name: string): string {
-  return `_load${capitalize(name)}`
 }
 
 function _watchName(name: string): string {
