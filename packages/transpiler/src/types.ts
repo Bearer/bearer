@@ -88,3 +88,9 @@ export type TCreateLoadResourceMethod = {
 export type TCreateLoadDataCall = {
   loadMethodName: string
 }
+
+export type TAddAutoLoad = {
+  propertyReferenceIdName: string
+  autoLoad: boolean
+  loadMethodName: string
+}

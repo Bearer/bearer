@@ -1,7 +1,9 @@
 import * as ts from 'typescript'
 
+import { createOrUpdateComponentDidLoad } from '../../src/transformers/bearer'
+
 import { Decorators } from './../constants'
-import { CreateFetcherMeta, TCreateLoadDataCall, TCreateLoadResourceMethod } from './../types'
+import { CreateFetcherMeta, TAddAutoLoad, TCreateLoadDataCall, TCreateLoadResourceMethod } from './../types'
 import { capitalize } from './string'
 
 export function createFetcher(meta: CreateFetcherMeta) {
@@ -85,4 +87,19 @@ export function createLoadDataCall(meta: TCreateLoadDataCall) {
   return ts.createStatement(
     ts.createCall(ts.createPropertyAccess(ts.createThis(), meta.loadMethodName), undefined, undefined)
   )
+}
+
+export function addAutoLoad(tsClass: ts.ClassDeclaration, meta: TAddAutoLoad): ts.ClassDeclaration {
+  if (meta.autoLoad) {
+    return createOrUpdateComponentDidLoad(tsClass, block =>
+      ts.updateBlock(block, [
+        ...block.statements,
+        ts.createIf(
+          ts.createPropertyAccess(ts.createThis(), meta.propertyReferenceIdName),
+          ts.createBlock([createLoadDataCall(meta)])
+        )
+      ])
+    )
+  }
+  return tsClass
 }

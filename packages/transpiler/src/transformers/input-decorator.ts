@@ -7,6 +7,7 @@ import * as ts from 'typescript'
 import { Decorators, Properties } from '../constants'
 import { extractBooleanOptions, extractStringOptions, getDecoratorNamed } from '../helpers/decorator-helpers'
 import {
+  addAutoLoad,
   createFetcher,
   createLoadDataCall,
   createLoadResourceMethod,
@@ -17,7 +18,7 @@ import { getNodeName } from '../helpers/node-helpers'
 import { capitalize } from '../helpers/string'
 import { InputMeta, TransformerOptions } from '../types'
 
-import { createOrUpdateComponentDidLoad, ensureImportsFromCore } from './bearer'
+import { ensureImportsFromCore } from './bearer'
 import { outputEventName, refIdName } from './output-decorator'
 
 export default function InputDecorator({ metadata }: TransformerOptions = {}): ts.TransformerFactory<ts.SourceFile> {
@@ -125,21 +126,6 @@ export default function InputDecorator({ metadata }: TransformerOptions = {}): t
         classNode.heritageClauses,
         newMembers
       )
-    }
-
-    function addAutoLoad(tsClass: ts.ClassDeclaration, meta: InputMeta): ts.ClassDeclaration {
-      if (meta.autoLoad) {
-        return createOrUpdateComponentDidLoad(tsClass, block =>
-          ts.updateBlock(block, [
-            ...block.statements,
-            ts.createIf(
-              ts.createPropertyAccess(ts.createThis(), meta.propertyReferenceIdName),
-              ts.createBlock([createLoadDataCall(meta)])
-            )
-          ])
-        )
-      }
-      return tsClass
     }
 
     function replaceInputVisitor(inputsMeta: Array<InputMeta>): (tsNode: ts.Node) => ts.VisitResult<ts.Node> {

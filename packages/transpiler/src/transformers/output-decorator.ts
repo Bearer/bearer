@@ -6,13 +6,13 @@ import * as ts from 'typescript'
 
 import { Decorators, Properties, Types } from '../constants'
 import { extractBooleanOptions, extractStringOptions, getDecoratorNamed } from '../helpers/decorator-helpers'
-import { createFetcher, createLoadDataCall, createLoadResourceMethod, loadName } from '../helpers/generator-helpers'
+import { addAutoLoad, createFetcher, createLoadResourceMethod, loadName } from '../helpers/generator-helpers'
 import { retrieveFetcherName } from '../helpers/name-helpers'
 import { getNodeName } from '../helpers/node-helpers'
 import { capitalize } from '../helpers/string'
 import { TCreateLoadResourceMethod, TransformerOptions } from '../types'
 
-import { createOrUpdateComponentDidLoad, ensureImportsFromCore } from './bearer'
+import { ensureImportsFromCore } from './bearer'
 
 const newValue = 'newValue'
 const data = 'data'
@@ -134,20 +134,6 @@ function injectOuputStatements(tsClass: ts.ClassDeclaration, outputsMeta: Array<
   )
 }
 
-function addAutoLoad(tsClass: ts.ClassDeclaration, meta: OutputMeta): ts.ClassDeclaration {
-  if (meta.autoLoad) {
-    return createOrUpdateComponentDidLoad(tsClass, block =>
-      ts.updateBlock(block, [
-        ...block.statements,
-        ts.createIf(
-          ts.createPropertyAccess(ts.createThis(), meta.propertyReferenceIdName),
-          ts.createBlock([createLoadDataCall(meta)])
-        )
-      ])
-    )
-  }
-  return tsClass
-}
 function createEvent(meta: OutputMeta): ts.PropertyDeclaration {
   // @Event() propertyWatchedName: EventEmitter<any>;
   return ts.createProperty(
