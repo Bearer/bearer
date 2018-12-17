@@ -2,7 +2,7 @@ import * as ts from 'typescript'
 
 import { addAutoLoad, createFetcher, createLoadResourceMethod, loadName } from '../../src/helpers/generator-helpers'
 import { CreateFetcherMeta } from '../../src/types'
-import { runTransformer } from '../utils/helpers'
+import { runTransformers } from '../utils/helpers'
 
 function dummyTransformer(fun: (meta: any) => ts.Node, meta: any) {
   return (context: ts.TransformationContext) => {
@@ -41,7 +41,7 @@ describe('createFetcher', () => {
       intentMethodName: 'intentMethodName'
     }
 
-    expect(runTransformer(code, dummyTransformer(createFetcher, meta))).toMatchSnapshot()
+    expect(runTransformers(code, [dummyTransformer(createFetcher, meta)])).toMatchSnapshot()
   })
 })
 
@@ -65,7 +65,7 @@ describe('createLoadResourceMethod', () => {
       intentReferenceIdKeyName: 'intentReferenceIdKeyName',
       loadMethodName: 'loadMethodName'
     }
-    expect(runTransformer(code, dummyTransformer(createLoadResourceMethod, meta))).toMatchSnapshot()
+    expect(runTransformers(code, [dummyTransformer(createLoadResourceMethod, meta)])).toMatchSnapshot()
   })
 })
 
@@ -92,6 +92,6 @@ describe('addAutoLoad', () => {
       autoLoad: true,
       loadMethodName: 'loadMethodName'
     }
-    expect(runTransformer('class C {}', dummyTransformer(addAutoLoad, meta))).toMatchSnapshot()
+    expect(runTransformers('class C {}', [dummyTransformer(addAutoLoad, meta)])).toMatchSnapshot()
   })
 })
