@@ -45,6 +45,7 @@ class NoOptionsComponent {
             this.farmerRefId = referenceId;
         });
     }
+    private fetcherRetrieveFarmer;
     private milkWithAbottle: BearerFetch<BearerRef<Farmer>>;
     @Event({ eventName: \\"bearer-SPONGE_BOB-no-options-milked\\" })
     milked: EventEmitter;
@@ -61,9 +62,12 @@ class NoOptionsComponent {
             this.farmerAndPandaRefId = aPandaKey;
         });
     }
+    private fetcherRetrieveFarmerAndPanda;
     constructor() {
         Intent(\\"saveFarmer\\")(this, \\"saveFarmer\\");
+        Intent(\\"retrieveFarmer\\")(this, \\"fetcherRetrieveFarmer\\");
         Intent(\\"milkWithAbottle\\")(this, \\"milkWithAbottle\\");
+        Intent(\\"retrieveFarmerAndPanda\\")(this, \\"fetcherRetrieveFarmerAndPanda\\");
     }
     get SCENARIO_ID() { return \\"SPONGE_BOB\\"; }
     @Prop({ \\"context\\": \\"bearer\\" })

@@ -476,6 +476,8 @@ export class AttachPullRequestAction {
     @Event({ eventName: \\"bearer-SPONGE_BOB-AttachPullRequest-feedPandaSaved\\" })
     feedPandaSaved: EventEmitter;
     @State()
+    feedPandaInitial: BearerRef<Panda>;
+    @State()
     feedPanda: BearerRef<Panda>;
     @Prop({ \\"mutable\\": true })
     feedPandaRefId: string;
@@ -486,11 +488,16 @@ export class AttachPullRequestAction {
             this.feedPandaRefId = referenceId;
         });
     }
+    private fetcherRetrieveFeedPanda;
     private manualIntentName: BearerFetch<BearerRef<{
         inlineName: string;
     }>>;
     @Event({ eventName: \\"bearer-SPONGE_BOB-AttachPullRequest-spongeBobdSaved\\" })
     spongeBobdSaved: EventEmitter;
+    @State()
+    shortPandaInitial: BearerRef<{
+        inlineName: string;
+    }>;
     @State()
     shortPanda: BearerRef<{
         inlineName: string;
@@ -504,13 +511,16 @@ export class AttachPullRequestAction {
             this.shortPandaRefId = manualreferenceKeyName;
         });
     }
+    private fetcherRetrieveShortPanda;
     constructor() {
         Intent('ListRepositories')(this, \\"fetcher\\");
         Intent('getPullRequest', IntentType.FetchData)(this, \\"fetchResource\\");
         Intent(\\"retrieveFarmer\\")(this, \\"fetcherRetrieveFarmer\\");
         Intent(\\"retrieveGoat\\")(this, \\"fetcherRetrieveGoat\\");
         Intent(\\"saveFeedPanda\\")(this, \\"saveFeedPanda\\");
+        Intent(\\"retrieveFeedPanda\\")(this, \\"fetcherRetrieveFeedPanda\\");
         Intent(\\"manualIntentName\\")(this, \\"manualIntentName\\");
+        Intent(\\"retrieveShortPanda\\")(this, \\"fetcherRetrieveShortPanda\\");
     }
     get SCENARIO_ID() { return \\"SPONGE_BOB\\"; }
     @Prop({ \\"context\\": \\"bearer\\" })

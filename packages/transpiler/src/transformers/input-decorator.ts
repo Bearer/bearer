@@ -6,9 +6,11 @@ import * as ts from 'typescript'
 
 import { Decorators, Properties } from '../constants'
 import { extractBooleanOptions, extractStringOptions, getDecoratorNamed } from '../helpers/decorator-helpers'
+import { createFetcher } from '../helpers/generator-helpers'
+import { retrieveFetcherName, retrieveIntentName } from '../helpers/name-helpers'
 import { getNodeName } from '../helpers/node-helpers'
 import { capitalize } from '../helpers/string'
-import { TransformerOptions } from '../types'
+import { InputMeta, TransformerOptions } from '../types'
 
 import { createOrUpdateComponentDidLoad, ensureImportsFromCore } from './bearer'
 import { outputEventName, refIdName } from './output-decorator'
@@ -273,21 +275,6 @@ function createLoadResourceMethod(meta: InputMeta) {
   )
 }
 
-function createFetcher(meta: InputMeta) {
-  return ts.createProperty(
-    [
-      ts.createDecorator(
-        ts.createCall(ts.createIdentifier(Decorators.Intent), undefined, [ts.createLiteral(meta.intentName)])
-      )
-    ],
-    undefined,
-    meta.intentMethodName,
-    undefined,
-    undefined,
-    undefined
-  )
-}
-
 function createLoadDataCall(meta: InputMeta) {
   return ts.createStatement(
     ts.createCall(ts.createPropertyAccess(ts.createThis(), meta.loadMethodName), undefined, undefined)
@@ -328,27 +315,10 @@ function createRefIdWatcher(meta: InputMeta) {
   )
 }
 
-export function retrieveIntentName(name: string): string {
-  return `retrieve${capitalize(name)}`
-}
-
-function retrieveFetcherName(name: string): string {
-  return `fetcherRetrieve${capitalize(name)}`
-}
-
 function _loadName(name: string): string {
   return `_load${capitalize(name)}`
 }
 
 function _watchName(name: string): string {
   return `_watch${capitalize(name)}`
-}
-
-type InputMeta = TInputDecoratorOptions & {
-  propDeclarationName: string
-  typeIdentifier?: ts.TypeNode
-  intializer?: ts.Expression
-  loadMethodName: string
-  intentMethodName: string
-  watcherName: string
 }

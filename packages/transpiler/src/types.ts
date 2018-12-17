@@ -1,3 +1,6 @@
+import { TInputDecoratorOptions } from '@bearer/types/lib/input-output-decorators'
+import * as ts from 'typescript'
+
 import Metadata from './metadata'
 
 export type ComponentMetadata = {
@@ -58,3 +61,17 @@ export type RootComponent = SpecComponent & {
 }
 
 export type CompileSpec = { components: Array<SpecComponent> }
+
+export type InputMeta = TInputDecoratorOptions & {
+  propDeclarationName: string
+  typeIdentifier?: ts.TypeNode
+  intializer?: ts.Expression
+  loadMethodName: string
+  intentMethodName: string
+  watcherName: string
+}
+
+export type CreateFetcherMeta = {
+  intentName: string
+  intentMethodName: string
+}

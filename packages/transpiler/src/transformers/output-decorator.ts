@@ -6,6 +6,8 @@ import * as ts from 'typescript'
 
 import { Decorators, Properties, Types } from '../constants'
 import { extractStringOptions, getDecoratorNamed } from '../helpers/decorator-helpers'
+import { createFetcher } from '../helpers/generator-helpers'
+import { retrieveFetcherName } from '../helpers/name-helpers'
 import { getNodeName } from '../helpers/node-helpers'
 import { capitalize } from '../helpers/string'
 import { TransformerOptions } from '../types'
@@ -61,6 +63,7 @@ export default function OutputDecorator(_options: TransformerOptions = {}): ts.T
             outputs.push({
               eventName: outputEventName(name),
               intentName: saveIntentName(name),
+              intentMethodName: retrieveFetcherName(name),
               intentPropertyName: name,
               propDeclarationName: name,
               propDeclarationNameRefId: refIdName(name),
@@ -94,14 +97,15 @@ export default function OutputDecorator(_options: TransformerOptions = {}): ts.T
 function injectOuputStatements(tsClass: ts.ClassDeclaration, outputsMeta: Array<OutputMeta>): ts.ClassDeclaration {
   const newMembers = outputsMeta.reduce(
     (members, meta) => {
-      const inputMembers = [
+      const outputMembers = [
         createIntent(meta),
         createEvent(meta),
         ...createStates(meta),
         createProp(meta),
-        ...createWatchers(meta)
+        ...createWatchers(meta),
+        createInitialFetcher(meta)
       ]
-      return members.concat(inputMembers)
+      return members.concat(outputMembers)
     },
     [...tsClass.members]
   )
@@ -321,9 +325,18 @@ export function outputEventName(prefix: string, suffix?: string): string {
   return `${prefix}${capitalize(_suffix)}`
 }
 
+function createInitialFetcher(meta) {
+  const metaForInitial = {
+    intentName: `retrieve${capitalize(meta.propDeclarationName)}`
+  }
+  return createFetcher({ ...meta, ...metaForInitial })
+}
+
 type OutputMeta = TOutputDecoratorOptions & {
   propDeclarationName: string
   propDeclarationNameRefId: string
+  intentMethodName: string
+  intentName: string
   initializer: ts.Expression
   typeIdentifier?: ts.TypeNode
 }
