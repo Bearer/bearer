@@ -6,7 +6,9 @@
     "strict": true,
     "esModuleInterop": true,
     "outDir": "lib/",
+    "rootDir": "src/",
     "jsx": "react"
   },
-  "include": ["src"]
+  "include": ["src/"],
+  "exclude": ["src/**/*.test.*"]
 }

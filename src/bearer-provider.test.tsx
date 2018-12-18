@@ -2,9 +2,9 @@ import * as React from 'react'
 import * as Renderer from 'react-test-renderer'
 import * as ShallowRenderer from 'react-test-renderer/shallow'
 
-import BearerProvider from '../src/bearer-provider'
+import DummyContextConsumer from '../__test__/utils/dummy-context-consumer'
 
-import DummyContextConsumer from './utils/dummy-context-consumer'
+import BearerProvider from './bearer-provider'
 
 describe('BearerProvider', () => {
   const clientId = 'abc123'

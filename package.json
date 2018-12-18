@@ -2,7 +2,7 @@
   "name": "bearer-react",
   "version": "0.0.1",
   "description": "React tooling for bearer.sh components",
-  "main": "index.js",
+  "main": "lib/index.js",
   "repository": "https://github.com/Bearer/bearer-react",
   "license": "MIT",
   "private": true,
