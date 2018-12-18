@@ -1,10 +1,29 @@
 {
-  "name": "bearer-react",
+  "name": "@bearer/react",
   "version": "0.81.3",
   "description": "React tooling for bearer.sh components",
-  "main": "lib/index.js",
-  "repository": "https://github.com/Bearer/bearer-react",
+  "keywords": [
+    "react",
+    "bearer"
+  ],
+  "author": "Bearer Team<engineering@bearer.sh>",
+  "homepage": "https://github.com/Bearer/bearer#readme",
   "license": "MIT",
+  "main": "lib/index.js",
+  "directories": {
+    "lib": "lib",
+    "test": "__test__"
+  },
+  "files": [
+    "lib/"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Bearer/bearer.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Bearer/bearer/issues"
+  },
   "private": true,
   "devDependencies": {
     "@bearer/package-init": "^0.78.0",
@@ -54,16 +73,13 @@
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
     }
   },
-  "files": [
-    "lib/"
-  ],
   "scripts": {
-    "start": "tsc --watch",
-    "build": "yarn clean && tsc -p tsconfig.json",
-    "clean": "rm -rf lib",
-    "prepack": "yarn clean && yarn build",
+    "clean": "rm -rf lib/",
+    "start": "yarn build -w",
+    "build": "tsc -p tsconfig.json",
+    "prepare": "yarn build",
+    "prepack": "yarn clean && NODE_ENV=production yarn build",
     "test": "jest",
-    "test:ci": "jest --coverage",
-    "lint": "tslint -c tslint.json --fix --project tsconfig.json"
+    "test:ci": "jest --coverage --runInBand"
   }
 }
