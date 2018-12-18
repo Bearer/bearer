@@ -13,7 +13,7 @@ declare const global: { fetch: any }
 describe('requests', () => {
   beforeEach(() => {
     global.fetch.resetMocks()
-    Bearer.init({ integrationHost: process.env.API_HOST })
+    Bearer.init({ integrationHost: process.env.API_HOST, secured: true })
     Bearer.instance.allowIntegrationRequests(true)
   })
 
@@ -32,7 +32,7 @@ describe('requests', () => {
       await aRequest({ page: 1 }, {})
 
       expect(global.fetch).toBeCalledWith(
-        'https://localhost:5555/api/v1/aScenarioId/anIntent?page=1&setupId=1234&clientId=42',
+        'https://localhost:5555/api/v1/aScenarioId/anIntent?page=1&setupId=1234&clientId=42&secured=true',
         {
           credentials: 'include',
           headers: {
