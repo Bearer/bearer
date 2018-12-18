@@ -6,8 +6,17 @@ import * as ts from 'typescript'
 
 import { Decorators, Properties, Types } from '../constants'
 import { extractBooleanOptions, extractStringOptions, getDecoratorNamed } from '../helpers/decorator-helpers'
-import { addAutoLoad, createFetcher, createLoadResourceMethod, loadName } from '../helpers/generator-helpers'
-import { retrieveFetcherName } from '../helpers/name-helpers'
+import {
+  addAutoLoad,
+  createFetcher,
+  createLoadResourceMethod,
+} from '../helpers/generator-helpers'
+import {
+  initialName,
+  retrieveFetcherName,
+  retrieveIntentName,
+  loadName
+} from '../helpers/name-helpers'
 import { getNodeName } from '../helpers/node-helpers'
 import { capitalize } from '../helpers/string'
 import { TCreateLoadResourceMethod, TransformerOptions } from '../types'
@@ -54,16 +63,16 @@ export default function OutputDecorator(_options: TransformerOptions = {}): ts.T
             const options = !callArgs
               ? {}
               : {
-                  ...extractStringOptions<TOutputDecoratorOptions>(callArgs, [
-                    'eventName',
-                    'intentName',
-                    'intentPropertyName',
-                    'propertyWatchedName',
-                    'referenceKeyName'
-                  ]),
+                ...extractStringOptions<TOutputDecoratorOptions>(callArgs, [
+                  'eventName',
+                  'intentName',
+                  'intentPropertyName',
+                  'propertyWatchedName',
+                  'referenceKeyName'
+                ]),
 
-                  ...extractBooleanOptions<TOutputDecoratorOptions>(callArgs, ['autoLoad'])
-                }
+                ...extractBooleanOptions<TOutputDecoratorOptions>(callArgs, ['autoLoad'])
+              }
             outputs.push({
               eventName: outputEventName(name),
               intentName: saveIntentName(name),
@@ -115,7 +124,7 @@ function injectOuputStatements(tsClass: ts.ClassDeclaration, outputsMeta: Array<
         createInitialFetcher(meta),
         createLoadResourceMethod({
           ...(meta as TCreateLoadResourceMethod),
-          propDeclarationName: `${meta.propDeclarationName}Initial`
+          propDeclarationName: initialName(meta.propDeclarationName)
         })
       ]
       return members.concat(outputMembers)
@@ -185,18 +194,18 @@ function createProp(meta: OutputMeta): ts.PropertyDeclaration {
 function createStates(meta: OutputMeta): ts.PropertyDeclaration[] {
   return [
     // @State() propDeclarationNameInitial: Type = initiailizer
-    createGenericState(meta, 'Initial'),
+    createGenericState(meta, initialName),
     // @State() propDeclarationName: Type = initiailizer
     createGenericState(meta)
   ]
 }
 
-function createGenericState(meta: OutputMeta, suffix = ''): ts.PropertyDeclaration {
+function createGenericState(meta: OutputMeta, nameTransformation = (x: string) => x): ts.PropertyDeclaration {
   // @State() propDeclarationName[suffix]: Type = initiailizer
   return ts.createProperty(
     [ts.createDecorator(ts.createCall(ts.createIdentifier(Decorators.State), undefined, []))],
     undefined,
-    [meta.propDeclarationName, suffix].join(''),
+    nameTransformation(meta.propDeclarationName),
     undefined,
     meta.typeIdentifier,
     meta.initializer
@@ -340,7 +349,7 @@ export function outputEventName(prefix: string, suffix?: string): string {
 
 function createInitialFetcher(meta) {
   const metaForInitial = {
-    intentName: `retrieve${capitalize(meta.propDeclarationName)}`
+    intentName: retrieveIntentName(meta.propDeclarationName)
   }
   return createFetcher({ ...meta, ...metaForInitial })
 }

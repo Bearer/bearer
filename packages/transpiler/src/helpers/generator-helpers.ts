@@ -4,7 +4,6 @@ import { createOrUpdateComponentDidLoad } from '../../src/transformers/bearer'
 
 import { Decorators } from './../constants'
 import { CreateFetcherMeta, TAddAutoLoad, TCreateLoadDataCall, TCreateLoadResourceMethod } from './../types'
-import { capitalize } from './string'
 
 export function createFetcher(meta: CreateFetcherMeta) {
   return ts.createProperty(
@@ -19,10 +18,6 @@ export function createFetcher(meta: CreateFetcherMeta) {
     undefined,
     undefined
   )
-}
-
-export function loadName(name: string): string {
-  return `_load${capitalize(name)}`
 }
 
 export function createLoadResourceMethod(meta: TCreateLoadResourceMethod) {

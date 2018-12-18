@@ -11,9 +11,12 @@ import {
   createFetcher,
   createLoadDataCall,
   createLoadResourceMethod,
-  loadName as _loadName
 } from '../helpers/generator-helpers'
-import { retrieveFetcherName, retrieveIntentName } from '../helpers/name-helpers'
+import {
+  loadName as _loadName,
+  retrieveFetcherName,
+  retrieveIntentName
+} from '../helpers/name-helpers'
 import { getNodeName } from '../helpers/node-helpers'
 import { capitalize } from '../helpers/string'
 import { InputMeta, TransformerOptions } from '../types'
@@ -85,14 +88,14 @@ export default function InputDecorator({ metadata }: TransformerOptions = {}): t
       return !callArgs
         ? {}
         : {
-            ...extractStringOptions<TInputDecoratorOptions>(callArgs, [
-              'group',
-              'eventName',
-              'intentName',
-              'propertyReferenceIdName'
-            ]),
-            ...extractBooleanOptions<TInputDecoratorOptions>(callArgs, ['autoLoad'])
-          }
+          ...extractStringOptions<TInputDecoratorOptions>(callArgs, [
+            'group',
+            'eventName',
+            'intentName',
+            'propertyReferenceIdName'
+          ]),
+          ...extractBooleanOptions<TInputDecoratorOptions>(callArgs, ['autoLoad'])
+        }
     }
 
     function injectInputStatements(tsClass: ts.ClassDeclaration, inputsMeta: Array<InputMeta>): ts.ClassDeclaration {
