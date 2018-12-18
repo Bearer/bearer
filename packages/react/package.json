@@ -1,0 +1,69 @@
+{
+  "name": "bearer-react",
+  "version": "0.0.1",
+  "description": "React tooling for bearer.sh components",
+  "main": "lib/index.js",
+  "repository": "https://github.com/Bearer/bearer-react",
+  "license": "MIT",
+  "private": true,
+  "devDependencies": {
+    "@bearer/package-init": "^0.78.0",
+    "@commitlint/cli": "^7.2.1",
+    "@commitlint/config-conventional": "^7.1.2",
+    "@oclif/tslint": "^3.1.1",
+    "@types/jest": "^23.3.10",
+    "@types/lodash.kebabcase": "^4.1.4",
+    "@types/react": "^16.7.17",
+    "@types/react-helmet": "^5.0.7",
+    "@types/react-test-renderer": "^16.0.3",
+    "commitlint": "^7.2.1",
+    "cz-conventional-changelog": "^2.1.0",
+    "husky": "^1.2.1",
+    "jest": "^23.6.0",
+    "lint-staged": "^8.1.0",
+    "prettier": "^1.15.3",
+    "react": "^16.6.0-0",
+    "react-test-renderer": "^16.6.3",
+    "ts-jest": "^23.10.5",
+    "tslint": "^5.11.0",
+    "tslint-config-prettier": "^1.17.0",
+    "typescript": "^3.2.2"
+  },
+  "peerDependencies": {
+    "react": "^16.6.0-0"
+  },
+  "dependencies": {
+    "lodash.kebabcase": "^4.1.1",
+    "react-helmet": "^5.2.0"
+  },
+  "lint-staged": {
+    "*.{css,md,tsx,ts}": [
+      "prettier --write",
+      "tslint -c tslint.json --fix",
+      "git add"
+    ]
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  },
+  "files": [
+    "lib/"
+  ],
+  "scripts": {
+    "start": "tsc --watch",
+    "build": "yarn clean && tsc -p tsconfig.json",
+    "clean": "rm -rf lib",
+    "prepack": "yarn clean && yarn build",
+    "test": "jest",
+    "test:ci": "jest --coverage",
+    "lint": "tslint -c tslint.json --fix --project tsconfig.json"
+  }
+}
