@@ -1,5 +1,7 @@
+import debug from '../src/logger'
+
 describe('logger', () => {
   it('needs tests', () => {
-    expect(true).toBeTruthy()
+    expect(debug).toBeInstanceOf(Function)
   })
 })

@@ -10,6 +10,9 @@
   "homepage": "https://github.com/Bearer/bearer#readme",
   "license": "MIT",
   "main": "lib/logger.js",
+  "module": "lib/logger.es.js",
+  "browser": "lib/logger.browser.js",
+  "types": "lib/logger.d.ts",
   "files": [
     "/lib",
     "/oclif.manifest.json"
@@ -20,8 +23,8 @@
   },
   "scripts": {
     "test": "jest",
-    "start": "tsc --watch",
-    "build": "tsc -p tsconfig.json",
+    "start": "yarn clean && rollup -cw",
+    "build": "yarn clean && rollup -c",
     "clean": "rm -rf lib",
     "prepare": "yarn build",
     "prepack": "yarn clean && yarn build",
@@ -38,6 +41,12 @@
     "jest": "^23.6.0",
     "lint-staged": "^8.1.0",
     "prettier": "^1.15.3",
+    "rollup": "^0.68.0",
+    "rollup-plugin-commonjs": "^9.2.0",
+    "rollup-plugin-node-builtins": "^2.1.2",
+    "rollup-plugin-node-resolve": "^4.0.0",
+    "rollup-plugin-terser": "^3.0.0",
+    "rollup-plugin-typescript2": "^0.18.1",
     "ts-jest": "^23.10.5",
     "tslint": "^5.11.0",
     "tslint-config-prettier": "^1.17.0",
@@ -45,6 +54,5 @@
   },
   "dependencies": {
     "debug": "^4.1.0"
-  },
-  "types": "lib/logger.d.ts"
+  }
 }

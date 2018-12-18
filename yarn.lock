@@ -3036,6 +3036,11 @@ builtin-modules@^2.0.0:
   resolved "https://registry.yarnpkg.com/builtin-modules/-/builtin-modules-2.0.0.tgz#60b7ef5ae6546bd7deefa74b08b62a43a232648e"
   integrity sha512-3U5kUA5VPsRUA3nofm/BXX7GVHKfxz0hOBAPxXrIvHzlDRkQVqEn6yi8QJegxl4LzOHLdvb7XF5dVawa/VVYBg==
 
+builtin-modules@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/builtin-modules/-/builtin-modules-3.0.0.tgz#1e587d44b006620d90286cc7a9238bbc6129cab1"
+  integrity sha512-hMIeU4K2ilbXV6Uv93ZZ0Avg/M91RaKXucQ+4me2Do1txxBDyDZWCBa5bJSLqoNTRpXTLwEzIk1KmloenDDjhg==
+
 builtin-status-codes@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/builtin-status-codes/-/builtin-status-codes-3.0.0.tgz#85982878e21b98e1c66425e03d0174788f569ee8"
@@ -10703,7 +10708,7 @@ rollup-plugin-html-entry@^0.2.0:
     matched "^0.4.4"
     parse5 "^3.0.2"
 
-rollup-plugin-node-builtins@2.1.2:
+rollup-plugin-node-builtins@2.1.2, rollup-plugin-node-builtins@^2.1.2:
   version "2.1.2"
   resolved "https://registry.yarnpkg.com/rollup-plugin-node-builtins/-/rollup-plugin-node-builtins-2.1.2.tgz#24a1fed4a43257b6b64371d8abc6ce1ab14597e9"
   integrity sha1-JKH+1KQyV7a2Q3HYq8bOGrFFl+k=
@@ -10743,6 +10748,15 @@ rollup-plugin-node-resolve@^3.4.0:
     is-module "^1.0.0"
     resolve "^1.1.6"
 
+rollup-plugin-node-resolve@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/rollup-plugin-node-resolve/-/rollup-plugin-node-resolve-4.0.0.tgz#9bc6b8205e9936cc0e26bba2415f1ecf1e64d9b2"
+  integrity sha512-7Ni+/M5RPSUBfUaP9alwYQiIKnKeXCOHiqBpKUl9kwp3jX5ZJtgXAait1cne6pGEVUUztPD6skIKH9Kq9sNtfw==
+  dependencies:
+    builtin-modules "^3.0.0"
+    is-module "^1.0.0"
+    resolve "^1.8.1"
+
 rollup-plugin-replace@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/rollup-plugin-replace/-/rollup-plugin-replace-2.1.0.tgz#f9c07a4a89a2f8be912ee54b3f0f68d91e9ed0ae"
@@ -10775,6 +10789,16 @@ rollup-plugin-typescript2@^0.17.2:
   version "0.17.2"
   resolved "https://registry.yarnpkg.com/rollup-plugin-typescript2/-/rollup-plugin-typescript2-0.17.2.tgz#7d18a94b74993307ec69b7c2f571c12b51561a14"
   integrity sha512-QmrZElI+p4sytmv1S7uvtUbL4XADWWmM/dIuc3agGZTE+fO2X1KoRo8EbeR1x0ZO4I9KwPubGfmw/1rHeUR+Dg==
+  dependencies:
+    fs-extra "7.0.0"
+    resolve "1.8.1"
+    rollup-pluginutils "2.3.3"
+    tslib "1.9.3"
+
+rollup-plugin-typescript2@^0.18.1:
+  version "0.18.1"
+  resolved "https://registry.yarnpkg.com/rollup-plugin-typescript2/-/rollup-plugin-typescript2-0.18.1.tgz#921865828080a254c088c6bc181ca654e5ef73c6"
+  integrity sha512-aR2m5NCCAUV/KpcKgCWX6Giy8rTko9z92b5t0NX9eZyjOftCvcdDFa1C9Ze/9yp590hnRymr5hG0O9SAXi1oUg==
   dependencies:
     fs-extra "7.0.0"
     resolve "1.8.1"
@@ -10818,6 +10842,14 @@ rollup@^0.67.1:
   version "0.67.1"
   resolved "https://registry.yarnpkg.com/rollup/-/rollup-0.67.1.tgz#4094110c944d3c9e25b5bf196771b51132ec3adb"
   integrity sha512-BfwL9pw5VyxrAWx/G1tP8epgG+NH4KcR78aoWacV7+dFp1Mj6ynH8QTIC/lDQ3KlwzDakqZmJQ4LQ7TmLg+pBA==
+  dependencies:
+    "@types/estree" "0.0.39"
+    "@types/node" "*"
+
+rollup@^0.68.0:
+  version "0.68.0"
+  resolved "https://registry.yarnpkg.com/rollup/-/rollup-0.68.0.tgz#e4fbde2e6278354962be530b498fc485298c0fc3"
+  integrity sha512-UbmntCf8QBlOqJnwsNWQCI0oonHOgs9y1OLoO8BHf2r8gCyRLp3JzLHXARJpsNDAS08Qm3LDjzyWma5sqnCxDQ==
   dependencies:
     "@types/estree" "0.0.39"
     "@types/node" "*"

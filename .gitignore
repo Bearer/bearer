@@ -6,3 +6,4 @@ node_modules/
 dist/
 packages/*/lib/
 packages/*/coverage/
+.rpt2_cache/

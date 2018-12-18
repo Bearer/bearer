@@ -1,11 +1,12 @@
 {
   "compilerOptions": {
     "declaration": true,
+    "moduleResolution": "node",
+    "module": "es6",
     "target": "es6",
-    "module": "commonjs",
-    "strict": true,
+    "outDir": "lib/",
     "esModuleInterop": true,
-    "outDir": "lib/"
+    "allowSyntheticDefaultImports": true
   },
   "include": ["src"]
 }
