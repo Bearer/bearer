@@ -34,7 +34,9 @@
     "url": "https://github.com/Bearer/bearer/issues"
   },
   "devDependencies": {
+    "@types/express": "^4.16.0",
     "@types/jest": "^23.3.10",
+    "@types/nock": "^9.3.0",
     "@types/on-headers": "^1.0.0",
     "@types/supertest": "^2.0.7",
     "jest": "^23.6.0",
