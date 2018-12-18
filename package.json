@@ -1,9 +1,15 @@
 {
   "name": "bearer-master",
   "private": true,
-  "workspaces": [
-    "packages/*"
-  ],
+  "workspaces": {
+    "packages": [
+      "packages/*"
+    ],
+    "nohoist": [
+      "**/@types",
+      "**/@types/**"
+    ]
+  },
   "lint-staged": {
     "*.{js,css,md,tsx,ts,json}": [
       "prettier --write",
