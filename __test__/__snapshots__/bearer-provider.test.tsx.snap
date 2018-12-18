@@ -1,18 +1,18 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`BearerProvider default state is sent to context components 1`] = `
-<div>
-  {
-  "setup-id": "123"
-}
+Array [
+  "{
+  \\"setup-id\\": \\"123\\"
+}",
   <button
     onClick={[Function]}
-  />
-</div>
+  />,
+]
 `;
 
 exports[`BearerProvider renders basic provider tag 1`] = `
-<div>
+<React.Fragment>
   <Unknown
     clientId="abc123"
   />
@@ -24,5 +24,5 @@ exports[`BearerProvider renders basic provider tag 1`] = `
       }
     }
   />
-</div>
+</React.Fragment>
 `;

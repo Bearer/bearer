@@ -1,6 +1,6 @@
 import * as React from 'react'
 
-import { BearerContext, IBearerContextValue } from '../bearer-provider'
+import { BearerContext, IBearerContextValue } from '../../src/bearer-provider'
 
 interface IDummyContextProps {
   initialContext?: any

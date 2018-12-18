@@ -30,10 +30,10 @@ export default class BearerProvider extends React.Component<IBearerProviderProps
 
   public render() {
     return (
-      <div>
+      <React.Fragment>
         <BearerLoader clientId={this.props.clientId} />
         <BearerContext.Provider value={this.contextValue}>{this.props.children}</BearerContext.Provider>
-      </div>
+      </React.Fragment>
     )
   }
 
@@ -43,7 +43,7 @@ export default class BearerProvider extends React.Component<IBearerProviderProps
     }
   }
 
-  private readonly handlePropUpdates = (e: any) => {
+  private readonly handlePropUpdates = (e: CustomEvent) => {
     e.stopPropagation()
     const payload = e.detail
     const kebabPayload = Object.keys(payload).reduce((acc: any, key: string) => {
