@@ -15,7 +15,7 @@ export default class DummyContext extends React.Component<IDummyContextProps, an
     this.state = props.initialContext || {}
     this.contextValue = {
       handlePropUpdates: props.onHandlePropUpdates || (() => {}),
-      getState: () => this.state
+      state: this.state
     }
   }
 

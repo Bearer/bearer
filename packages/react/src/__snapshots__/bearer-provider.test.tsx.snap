@@ -19,8 +19,8 @@ exports[`BearerProvider renders basic provider tag 1`] = `
   <Context.Provider
     value={
       Object {
-        "getState": [Function],
         "handlePropUpdates": [Function],
+        "state": Object {},
       }
     }
   />

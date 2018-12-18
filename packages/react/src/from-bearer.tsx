@@ -45,7 +45,7 @@ export default function fromBearer<T>(TagName: string) {
 
     public render() {
       const combinedProps = {
-        ...(this.context.getState ? this.context.getState() : {}),
+        ...(this.context.state),
         ...(this.props as any)
       }
       return <TagName {...combinedProps} ref={this.eventRef} />

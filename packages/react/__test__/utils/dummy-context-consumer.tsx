@@ -11,10 +11,9 @@ export default class DummyContextConsumer extends React.Component<any> {
   }
 
   public render() {
-    const data = this.context.getState ? this.context.getState() : {}
     return (
       <React.Fragment>
-        {JSON.stringify(data, null, 2)}
+        {JSON.stringify(this.context.state, null, 2)}
         <button onClick={this.prophandler} />
       </React.Fragment>
     )

@@ -10,11 +10,14 @@ interface IBearerProviderProps {
 }
 
 export interface IBearerContextValue {
-  getState?(): any
+  state: any
   handlePropUpdates?(e: any): void
 }
 
-export const BearerContext = React.createContext<IBearerContextValue>({})
+export const BearerContext = React.createContext<IBearerContextValue>({
+  state: {},
+  handlePropUpdates: () => {}
+})
 
 export default class BearerProvider extends React.Component<IBearerProviderProps, any> {
   private readonly contextValue: IBearerContextValue
@@ -24,15 +27,19 @@ export default class BearerProvider extends React.Component<IBearerProviderProps
     this.state = props.initialContext || {}
     this.contextValue = {
       handlePropUpdates: this.handlePropUpdates,
-      getState: this.getContextState
+      state: this.state
     }
   }
 
   public render() {
+    const contextValue = {
+      handlePropUpdates: this.handlePropUpdates,
+      state: this.state
+    }
     return (
       <React.Fragment>
         <BearerLoader clientId={this.props.clientId} />
-        <BearerContext.Provider value={this.contextValue}>{this.props.children}</BearerContext.Provider>
+        <BearerContext.Provider value={contextValue}>{this.props.children}</BearerContext.Provider>
       </React.Fragment>
     )
   }
@@ -51,9 +58,5 @@ export default class BearerProvider extends React.Component<IBearerProviderProps
       return acc
     }, {})
     this.setState({ ...kebabPayload })
-  }
-
-  private readonly getContextState = () => {
-    return { ...this.state }
   }
 }

@@ -1,3 +1,10 @@
-import BearerProvider from './bearer-provider'
+import BearerProvider, {BearerContext} from './bearer-provider'
 import fromBearer from './from-bearer'
-export { BearerProvider, fromBearer }
+import BearerLoader from './bearer-loader'
+
+export { 
+  BearerLoader,
+  BearerProvider,
+  BearerContext,
+  fromBearer
+}
