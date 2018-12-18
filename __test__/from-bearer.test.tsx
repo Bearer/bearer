@@ -2,8 +2,9 @@ import * as React from 'react'
 import * as Renderer from 'react-test-renderer'
 import * as ShallowRenderer from 'react-test-renderer/shallow'
 
-import fromBearer from '../from-bearer'
-import DummyContext from '../utils/dummy-context'
+import fromBearer from '../src/from-bearer'
+
+import DummyContext from './utils/dummy-context'
 
 describe('fromBearer', () => {
   const tagName = 'bearer-component'

@@ -1,6 +1,6 @@
 import * as React from 'react'
 
-import { BearerContext } from '../bearer-provider'
+import { BearerContext } from '../../src/bearer-provider'
 
 export default class DummyContextConsumer extends React.Component<any> {
   static contextType = BearerContext
