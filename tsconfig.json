@@ -1,13 +1,14 @@
 {
   "compilerOptions": {
-    "target": "es5",
+    "declaration": true,
+    "target": "es6",
     "module": "commonjs",
     "strict": true,
     "esModuleInterop": true,
     "outDir": "lib/",
-    "jsx": "react",
+    "rootDir": "src/",
+    "jsx": "react"
   },
-  "include": [
-    "src"
-  ]
+  "include": ["src/"],
+  "exclude": ["src/**/*.test.*"]
 }

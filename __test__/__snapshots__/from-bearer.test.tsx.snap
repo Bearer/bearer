@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`fromBearer adds callbacks for component events 1`] = `
+<bearer-component
+  bar="boo"
+  bearer-6d29c4-share-slack-beta-4-feature-shared={[MockFunction]}
+/>
+`;
+
+exports[`fromBearer props from context flow to component 1`] = `
+<bearer-component
+  bar="boo"
+/>
+`;
+
+exports[`fromBearer renders bearer component tag 1`] = `
+<bearer-component
+  foo="bar"
+/>
+`;

@@ -1,11 +1,12 @@
 import kebabCase from 'lodash.kebabcase'
 import * as React from 'react'
 
-import BearerLoader from './BearerLoader'
+import BearerLoader from './bearer-loader'
 
 interface IBearerProviderProps {
   clientId: string
-  intialContext: any
+  initialContext?: any
+  onUpdate?(currentState: any): void
 }
 
 export interface IBearerContextValue {
@@ -16,28 +17,33 @@ export interface IBearerContextValue {
 export const BearerContext = React.createContext<IBearerContextValue>({})
 
 export default class BearerProvider extends React.Component<IBearerProviderProps, any> {
-  private eventRef: React.RefObject<HTMLDivElement>
+  private readonly contextValue: IBearerContextValue
 
   constructor(props: IBearerProviderProps) {
     super(props)
-    this.state = props.intialContext || {}
-    this.eventRef = React.createRef()
-  }
-
-  render() {
-    const contextValue: IBearerContextValue = {
+    this.state = props.initialContext || {}
+    this.contextValue = {
       handlePropUpdates: this.handlePropUpdates,
       getState: this.getContextState
     }
+  }
+
+  public render() {
     return (
-      <div ref={this.eventRef}>
+      <React.Fragment>
         <BearerLoader clientId={this.props.clientId} />
-        <BearerContext.Provider value={contextValue}>{this.props.children}</BearerContext.Provider>
-      </div>
+        <BearerContext.Provider value={this.contextValue}>{this.props.children}</BearerContext.Provider>
+      </React.Fragment>
     )
   }
 
-  private handlePropUpdates = (e: any) => {
+  public componentDidUpdate(_prevProps: IBearerProviderProps, prevState: any) {
+    if (this.props.onUpdate && this.state !== prevState) {
+      this.props.onUpdate(this.state)
+    }
+  }
+
+  private readonly handlePropUpdates = (e: CustomEvent) => {
     e.stopPropagation()
     const payload = e.detail
     const kebabPayload = Object.keys(payload).reduce((acc: any, key: string) => {
@@ -47,7 +53,7 @@ export default class BearerProvider extends React.Component<IBearerProviderProps
     this.setState({ ...kebabPayload })
   }
 
-  private getContextState = () => {
-    return this.state
+  private readonly getContextState = () => {
+    return { ...this.state }
   }
 }
