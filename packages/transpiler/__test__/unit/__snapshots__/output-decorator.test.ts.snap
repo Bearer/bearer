@@ -44,6 +44,7 @@ class NoOptionsComponent {
             this.farmerSaved.emit({ referenceId, farmer: data || this.farmer });
             this.farmerRefId = referenceId;
         });
+        this.farmerInitial = null;
     }
     private fetcherRetrieveFarmer;
     _loadFarmer = () => {
@@ -68,6 +69,7 @@ class NoOptionsComponent {
             this.milked.emit({ aPandaKey, farmerAndPanda: data || this.farmerAndPanda });
             this.farmerAndPandaRefId = aPandaKey;
         });
+        this.farmerAndPandaInitial = null;
     }
     private fetcherRetrieveFarmerAndPanda;
     _loadFarmerAndPanda = () => {

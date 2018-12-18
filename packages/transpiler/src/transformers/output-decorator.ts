@@ -229,7 +229,16 @@ function createWatchers(meta: OutputMeta): ts.MethodDeclaration[] {
       undefined,
       [ts.createParameter(undefined, undefined, undefined, newValue, undefined, undefined, undefined)], // parameters
       undefined,
-      ts.createBlock([ts.createStatement(createIntentCall(meta))], true)
+      ts.createBlock([
+        ts.createStatement(createIntentCall(meta)),
+        ts.createStatement(
+          ts.createBinary(
+            ts.createPropertyAccess(ts.createThis(), initialName(meta.propDeclarationName)),
+            ts.SyntaxKind.EqualsToken,
+            ts.createNull()
+          )
+        )
+      ], true)
     )
   ]
 }

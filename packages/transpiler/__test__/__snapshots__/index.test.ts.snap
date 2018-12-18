@@ -487,6 +487,7 @@ export class AttachPullRequestAction {
             this.feedPandaSaved.emit({ referenceId, feedPanda: data || this.feedPanda });
             this.feedPandaRefId = referenceId;
         });
+        this.feedPandaInitial = null;
     }
     private fetcherRetrieveFeedPanda;
     _loadFeedPanda = () => {
@@ -517,6 +518,7 @@ export class AttachPullRequestAction {
             this.spongeBobdSaved.emit({ manualreferenceKeyName, shortPanda: data || this.shortPanda });
             this.shortPandaRefId = manualreferenceKeyName;
         });
+        this.shortPandaInitial = null;
     }
     private fetcherRetrieveShortPanda;
     _loadShortPanda = () => {

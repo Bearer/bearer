@@ -1,6 +1,6 @@
 import * as ts from 'typescript'
 
-import { addAutoLoad, createFetcher, createLoadResourceMethod, loadName } from '../../src/helpers/generator-helpers'
+import { addAutoLoad, createFetcher, createLoadResourceMethod } from '../../src/helpers/generator-helpers'
 import { CreateFetcherMeta } from '../../src/types'
 import { runTransformers } from '../utils/helpers'
 
@@ -42,12 +42,6 @@ describe('createFetcher', () => {
     }
 
     expect(runTransformers(code, [dummyTransformer(createFetcher, meta)])).toMatchSnapshot()
-  })
-})
-
-describe('loadName', () => {
-  it('generates correct name', () => {
-    expect(loadName('hello')).toBe('_loadHello')
   })
 })
 
