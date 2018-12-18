@@ -4,6 +4,7 @@ declare const window: BearerWindow
 export interface IBearerConfig {
   integrationHost?: string
   loadingComponent?: string
+  secured?: boolean
 }
 
 export default class BearerConfig {
@@ -11,6 +12,7 @@ export default class BearerConfig {
   authorizationHost = 'BEARER_AUTHORIZATION_HOST'
   loadingComponent: string
   postRobotLogLevel: 'debug' | 'info' | 'warn' | 'error' = 'error'
+  secured: boolean = false
 
   get clientId(): string {
     return window.bearer && window.bearer.clientId
