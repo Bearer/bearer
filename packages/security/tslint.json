@@ -1,0 +1,10 @@
+{
+  "defaultSeverity": "error",
+  "extends": ["@oclif/tslint", "tslint-config-prettier"],
+  "jsRules": {},
+  "rules": {
+    "object-curly-spacing": [true, "always"],
+    "no-console": false
+  },
+  "rulesDirectory": []
+}
