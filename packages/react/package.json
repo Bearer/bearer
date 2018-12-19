@@ -24,7 +24,6 @@
   "bugs": {
     "url": "https://github.com/Bearer/bearer/issues"
   },
-  "private": true,
   "devDependencies": {
     "@bearer/package-init": "^0.78.0",
     "@commitlint/cli": "^7.2.1",
