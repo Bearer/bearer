@@ -6,7 +6,7 @@
     "logger",
     "bearer"
   ],
-  "author": "Bearer team <engineer@bearer.sh>",
+  "author": "Bearer Team<engineering@bearer.sh>",
   "homepage": "https://github.com/Bearer/bearer#readme",
   "license": "MIT",
   "main": "lib/logger.js",

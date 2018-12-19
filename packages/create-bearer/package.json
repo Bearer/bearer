@@ -4,7 +4,7 @@
   "description": "Quickly create a new Bearer scenario",
   "main": "lib/index.js",
   "repository": "http://github.com/bearer/bearer/packages/create-bearer",
-  "author": "Bearer Team",
+  "author": "Bearer Team<engineering@bearer.sh>",
   "license": "MIT",
   "private": false,
   "bin": {

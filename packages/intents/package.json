@@ -4,7 +4,7 @@
   "description": "Bearer Intents",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
-  "author": "Bearer",
+  "author": "Bearer Team<engineering@bearer.sh>",
   "license": "MIT",
   "files": [
     "lib/"

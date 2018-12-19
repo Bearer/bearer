@@ -2,7 +2,7 @@
   "name": "@bearer/tslint-config",
   "version": "0.81.0",
   "description": "TSLint config for bearer team",
-  "author": "Tanguy Antoine <antoine@bearer.sh>",
+  "author": "Bearer Team<engineering@bearer.sh>",
   "homepage": "https://github.com/Bearer/bearer#readme",
   "license": "MIT",
   "main": "tslint.json",

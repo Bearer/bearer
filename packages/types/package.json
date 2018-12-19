@@ -25,7 +25,7 @@
     "typescript",
     "bearer"
   ],
-  "author": "Bearer Team",
+  "author": "Bearer Team<engineering@bearer.sh>",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/Bearer/bearer/issues"
