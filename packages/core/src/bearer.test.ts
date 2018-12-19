@@ -1,4 +1,4 @@
-import Bearer from './bearer'
+import Bearer, { formatQuery } from './bearer'
 
 describe('Bearer', () => {
   describe('Init', () => {
@@ -46,5 +46,43 @@ describe('Bearer', () => {
       expect(callback).not.toHaveBeenCalledWith(true)
       expect(otherScenarioCallback).toHaveBeenCalledWith(true)
     })
+
+    describe('#askAuthorizations', () => {
+      it('opens popup with  the correct url', () => {
+        const win = { open: jest.fn() }
+        const instance = new Bearer({ integrationHost: 'https://trash.bearer.sh/', secured: true }, win as any)
+        // @ts-ignore
+        instance.sessionInitialized()
+        expect(instance.askAuthorizations({ scenarioId: 'ok', setupId: 'ok', authRefId: 'IAM' })).toBeTruthy()
+        expect(win.open).toHaveBeenCalledWith(
+          'https://trash.bearer.sh/v2/auth/ok?setupId=ok&authId=IAM&secured=true',
+          '',
+          'resizable,scrollbars,status,centerscreen=yes,width=500,height=600'
+        )
+      })
+
+      it('does not open ', () => {
+        const instance = Bearer.init()
+        expect(instance.askAuthorizations({ scenarioId: 'ok', setupId: 'ok' })).toBeFalsy()
+      })
+    })
+  })
+})
+
+describe('formatQuery', () => {
+  it('filters empty params and retunrs a string', () => {
+    const params = {
+      aNullParams: null,
+      undefinedParams: undefined,
+      falseParams: false,
+      aString: 'ok',
+      aNumber: 1
+    }
+    expect(formatQuery(params)).toEqual('aString=ok&aNumber=1')
+  })
+
+  it('returns and empty string', () => {
+    const params = {}
+    expect(formatQuery(params)).toEqual('')
   })
 })

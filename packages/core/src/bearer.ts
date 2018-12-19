@@ -67,11 +67,12 @@ export default class Bearer {
   set maybeInitialized(promise) {
     this._maybeInitialized = promise
   }
+
   public static init(config: any = {}): Bearer {
     if (this._instance) {
       console.warn('One instance is already configured, reaplacing it')
     }
-    this._instance = new Bearer({ ...config, ...(window[BEARER_CONFIG_KEY] || {}) })
+    this._instance = new Bearer({ ...config, ...(window[BEARER_CONFIG_KEY] || {}) }, window)
 
     return this._instance
   }
@@ -105,12 +106,12 @@ export default class Bearer {
   private isSessionInitialized = false
   private _maybeInitialized: Promise<boolean>
 
-  constructor(args) {
+  constructor(args, private readonly window: Window) {
     this.bearerConfig = new BearerConfig(args || {})
     this.maybeInitialized = new Promise((resolve, _reject) => {
       this.allowIntegrationRequests = resolve
     })
-    window[LOG_LEVEL_KEY] = this.bearerConfig.postRobotLogLevel
+    this.window[LOG_LEVEL_KEY] = this.bearerConfig.postRobotLogLevel
     this.initSession()
   }
 
@@ -149,7 +150,7 @@ export default class Bearer {
   }
 
   initSession() {
-    if (window !== undefined && !document.querySelector(`#${IFRAME_NAME}`)) {
+    if (this.window !== undefined && !document.querySelector(`#${IFRAME_NAME}`)) {
       postRobot.on(Events.SESSION_INITIALIZED, event => {
         this.sessionInitialized(event)
       })
@@ -167,12 +168,11 @@ export default class Bearer {
     }
   }
 
-  askAuthorizations = ({ scenarioId, setupId, authRefId = '' }): boolean => {
+  askAuthorizations = ({ scenarioId, setupId, authRefId: authId = '' }): boolean => {
     if (this.isSessionInitialized) {
-      const AUTHORIZED_URL = `${
-        Bearer.config.integrationHost
-        }v2/auth/${scenarioId}?setupId=${setupId}&authId=${authRefId}&secured=${Bearer.config.secured}`
-      window.open(AUTHORIZED_URL, '', 'resizable,scrollbars,status,centerscreen=yes,width=500,height=600')
+      const query = formatQuery({ setupId, authId, secured: Bearer.config.secured })
+      const AUTHORIZED_URL = `${Bearer.config.integrationHost}v2/auth/${scenarioId}?${query}`
+      this.window.open(AUTHORIZED_URL, '', 'resizable,scrollbars,status,centerscreen=yes,width=500,height=600')
       return true
     }
     return false
@@ -187,4 +187,15 @@ export default class Bearer {
 
 function iframeError(e) {
   console.error('[BEARER]', 'Error contacting iframe', e)
+}
+
+export function formatQuery(params: Record<string, any>) {
+  return Object.keys(params)
+    .reduce((acc, key) => {
+      if (params[key]) {
+        return [...acc, [key, params[key]].join('=')]
+      }
+      return acc
+    }, [])
+    .join('&')
 }
