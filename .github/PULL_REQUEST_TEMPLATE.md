@@ -17,6 +17,7 @@
 - @bearer/transpiler
 - @bearer/types
 - @bearer/ui
+- @bearer/react
 - none
 - all
  -->
