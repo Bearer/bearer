@@ -5,27 +5,9 @@ import replace from 'rollup-plugin-replace'
 import { terser } from 'rollup-plugin-terser'
 import strip from 'rollup-plugin-strip'
 
-import { version } from './package.json'
-
-const { parsed: parsedConfig } = require('dotenv').config()
+import pkg from './package.json'
 
 const isProduction = process.env.NODE_ENV === 'production'
-
-if (isProduction) {
-  const { parsed: parsedSample } = require('dotenv').config({
-    path: '.env.example'
-  })
-
-  const requiredKeys = new Set(Object.keys(parsedSample || {}))
-
-  const setEquality = (set1, set2) => set1.size === set2.size && Array.from(set1).every(item => set2.has(item))
-
-  const configuredKeys = new Set(Object.keys(parsedConfig || {}).filter(key => parsedConfig[key]))
-  if (!setEquality(requiredKeys, configuredKeys)) {
-    // tslint:disable-next-line
-    console.warn('Missing configuration, please check .env.* files')
-  }
-}
 
 function plugins() {
   const base = [
@@ -48,14 +30,14 @@ function plugins() {
     }),
     strip(),
     replace({
-      LIB_VERSION: version,
+      LIB_VERSION: pkg.version,
       'process.env.BUILD': JSON.stringify(process.env.BUILD)
     })
   ]
   if (process.env.BUILD === 'distribution') {
     base.push(
       strip({
-        include: ['**/*.js', '**/*.ts']
+        include: ['**/*.js']
       })
     )
   }
@@ -63,34 +45,10 @@ function plugins() {
 }
 
 const bundles = [
-  {
-    input: 'src/index.ts',
-    output: [
-      {
-        file: 'lib/main.es.js',
-        format: 'es'
-      },
-      {
-        exports: 'named',
-        file: 'lib/main.js',
-        format: 'cjs'
-      },
-      {
-        file: 'lib/main.browser.js',
-        format: 'iife',
-        name: 'Bearer'
-      }
-    ],
-    plugins: plugins()
-  },
-  {
-    input: 'src/plugins.ts',
-    output: {
-      file: 'lib/plugins.js',
-      format: 'cjs'
-    },
-    plugins: plugins()
-  }
+  { input: 'src/index.ts', output: { file: pkg.module, format: 'es' }, plugins: [...plugins()] },
+  { input: 'src/index.ts', output: { file: pkg.main, format: 'cjs' }, plugins: [...plugins()] },
+  { input: 'src/index.ts', output: { file: pkg.browser, name: 'core', format: 'iife' }, plugins: [...plugins()] },
+  { input: 'src/plugins.ts', output: { file: 'lib/plugins.js', format: 'cjs' }, plugins: plugins() }
 ]
 
 export default bundles
