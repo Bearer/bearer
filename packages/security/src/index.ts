@@ -1,18 +1,12 @@
 import crypto from 'crypto'
 
-type TConfig = {
-  key: string
-}
-
 export default class Cipher {
-  constructor(private readonly config: TConfig) {}
+  constructor(private readonly config: { key: string }) {}
 
   public encrypt(message: string) {
     const cipher = crypto.createCipher('aes192', this.config.key)
 
-    let encrypted = cipher.update(message, 'utf8', 'hex')
-    encrypted += cipher.final('hex')
-    return encrypted
+    return [cipher.update(message, 'utf8', 'hex'), cipher.final('hex')].join('')
   }
 
   public decrypt(encryptedMessage: string) {
