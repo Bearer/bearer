@@ -68,42 +68,7 @@ export default function startLocalDevelopmentServer(
 
       router.all(
         `${config.scenarioUuid}/:intentName`,
-        async (ctx, next) =>
-          new Promise(async (resolve, _reject) => {
-            try {
-              const intent = requireUncached(`${distPath}/${ctx.params.intentName}`).default
-
-              const userDefinedData = await loadUserDefinedData({ query: ctx.query })
-
-              intent.intentType.intent(intent.action)(
-                {
-                  context: {
-                    ...devIntentsContext.global,
-                    ...devIntentsContext[ctx.params.intentName],
-                    bearerBaseURL,
-                    ...userDefinedData
-                  },
-                  queryStringParameters: ctx.query,
-                  body: JSON.stringify(ctx.request.body)
-                },
-                {},
-                (_err, datum) => {
-                  ctx.intentDatum = datum
-                  next()
-                  resolve()
-                }
-              )
-            } catch (e) {
-              console.log('ERROR: ', e)
-              if (e.code === 'MODULE_NOT_FOUND') {
-                ctx.intentDatum = { error: `Intent '${ctx.params.intentName}' Not Found` }
-              } else {
-                ctx.intentDatum = { error: e }
-              }
-              await next()
-              resolve()
-            }
-          }),
+        intentHandler(distPath, devIntentsContext, bearerBaseURL),
         (ctx, _next) => {
           if (ctx.intentDatum.error) {
             ctx.badRequest({ error: ctx.intentDatum.error })
@@ -136,3 +101,40 @@ export default function startLocalDevelopmentServer(
     }
   })
 }
+
+const intentHandler = (distPath: string, devIntentsContext, bearerBaseURL: string) => async (ctx, next) =>
+  new Promise(async (resolve, _reject) => {
+    try {
+      const intent = requireUncached(`${distPath}/${ctx.params.intentName}`).default
+
+      const userDefinedData = await loadUserDefinedData({ query: ctx.query })
+
+      intent.intentType.intent(intent.action)(
+        {
+          context: {
+            ...devIntentsContext.global,
+            ...devIntentsContext[ctx.params.intentName],
+            bearerBaseURL,
+            ...userDefinedData
+          },
+          queryStringParameters: ctx.query,
+          body: JSON.stringify(ctx.request.body)
+        },
+        {},
+        (_err, datum) => {
+          ctx.intentDatum = datum
+          next()
+          resolve()
+        }
+      )
+    } catch (e) {
+      console.log('ERROR: ', e)
+      if (e.code === 'MODULE_NOT_FOUND') {
+        ctx.intentDatum = { error: `Intent '${ctx.params.intentName}' Not Found` }
+      } else {
+        ctx.intentDatum = { error: e }
+      }
+      await next()
+      resolve()
+    }
+  })
