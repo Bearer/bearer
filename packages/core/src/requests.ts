@@ -20,7 +20,7 @@ function getClientId(): string {
 }
 
 export function bearerRequest<TPromiseReturn>(uri: string, baseParams = {}): TBearerRequest<TPromiseReturn> {
-  const url = `${Bearer.config.integrationHost}api/v1/${uri}`
+  const url = `${Bearer.config.integrationHost}api/v2/${uri}`
 
   return function(params = {}, init = {}): Promise<TPromiseReturn> {
     return new Promise((resolve, reject) => {
@@ -49,7 +49,7 @@ export function bearerRequest<TPromiseReturn>(uri: string, baseParams = {}): TBe
             })
             .catch(e => console.error('Unexpected error 😞', e))
         })
-        .catch(() => console.error('[BEARER', 'Erro while waiting for authentication'))
+        .catch(() => console.error('[BEARER', 'Error while waiting for authentication'))
     })
   }
 }
