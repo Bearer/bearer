@@ -30,7 +30,7 @@ export default function startLocalDevelopmentServer(
   const explorer = cosmiconfig(LOCAL_DEV_CONFIGURATION, {
     searchPlaces: [`config.${LOCAL_DEV_CONFIGURATION}.js`]
   })
-  const router = new Router({ prefix: '/api/v1/' })
+  const router = new Router({ prefix: '/api/' })
 
   return new Promise(async (resolve, reject) => {
     try {
@@ -66,8 +66,20 @@ export default function startLocalDevelopmentServer(
       const bearerBaseURL = `http://localhost:${port}/`
       process.env.bearerBaseURL = bearerBaseURL
 
+      router.post(
+        `v2/intents/${config.scenarioUuid}/:intentName`,
+        intentHandler(distPath, devIntentsContext, bearerBaseURL),
+        (ctx, _next) => {
+          if (ctx.intentDatum.error) {
+            ctx.badRequest({ error: ctx.intentDatum.error })
+          } else {
+            ctx.ok(ctx.intentDatum)
+          }
+        }
+      )
+
       router.all(
-        `${config.scenarioUuid}/:intentName`,
+        `v1/${config.scenarioUuid}/:intentName`,
         intentHandler(distPath, devIntentsContext, bearerBaseURL),
         (ctx, _next) => {
           if (ctx.intentDatum.error) {
