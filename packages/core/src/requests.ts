@@ -20,7 +20,7 @@ function getClientId(): string {
 }
 
 export function bearerRequest<TPromiseReturn>(uri: string, baseParams = {}): TBearerRequest<TPromiseReturn> {
-  const url = `${Bearer.config.integrationHost}api/v2/${uri}`
+  const url = `${Bearer.config.integrationHost}api/v2/intents/${uri}`
 
   return function(params = {}, init = {}): Promise<TPromiseReturn> {
     return new Promise((resolve, reject) => {
