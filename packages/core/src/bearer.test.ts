@@ -49,13 +49,15 @@ describe('Bearer', () => {
 
     describe('#askAuthorizations', () => {
       it('opens popup with  the correct url', () => {
+        // @ts-ignore
+        global.bearer = { clientId: 'askAuthorizations-clientId' }
         const win = { open: jest.fn() }
         const instance = new Bearer({ integrationHost: 'https://trash.bearer.sh/', secured: true }, win as any)
         // @ts-ignore
         instance.sessionInitialized()
         expect(instance.askAuthorizations({ scenarioId: 'ok', setupId: 'ok', authRefId: 'IAM' })).toBeTruthy()
         expect(win.open).toHaveBeenCalledWith(
-          'https://trash.bearer.sh/v2/auth/ok?setupId=ok&authId=IAM&secured=true',
+          'https://trash.bearer.sh/v2/auth/ok?setupId=ok&authId=IAM&secured=true&clientId=askAuthorizations-clientId',
           '',
           'resizable,scrollbars,status,centerscreen=yes,width=500,height=600'
         )

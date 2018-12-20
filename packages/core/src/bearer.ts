@@ -123,14 +123,14 @@ export default class Bearer {
     Bearer.emitter.emit(Events.REVOKED, data)
   }
 
-  hasAuthorized = (scenarioId): Promise<boolean> =>
+  hasAuthorized = (scenarioId: string): Promise<boolean> =>
     new Promise((resolve, reject) => {
       postRobot
         .send(this.iframe, Events.HAS_AUTHORIZED, {
           scenarioId,
           clientId: Bearer.config.clientId
         })
-        .then(({ data, data: { authorized } }) => {
+        .then(({ data, data: { authorized } }: { data: { authorized: boolean } }) => {
           console.debug('[BEARER]', 'HAS_AUTHORIZED response', data)
           authorized ? resolve(true) : reject(false)
         })
@@ -168,9 +168,22 @@ export default class Bearer {
     }
   }
 
-  askAuthorizations = ({ scenarioId, setupId, authRefId: authId = '' }): boolean => {
+  askAuthorizations = ({
+    scenarioId,
+    setupId,
+    authRefId: authId = ''
+  }: {
+    scenarioId: string
+    setupId: string
+    authRefId?: string
+  }): boolean => {
     if (this.isSessionInitialized) {
-      const query = formatQuery({ setupId, authId, secured: Bearer.config.secured })
+      const query = formatQuery({
+        setupId,
+        authId,
+        secured: Bearer.config.secured,
+        clientId: this.bearerConfig.clientId
+      })
       const AUTHORIZED_URL = `${Bearer.config.integrationHost}v2/auth/${scenarioId}?${query}`
       this.window.open(AUTHORIZED_URL, '', 'resizable,scrollbars,status,centerscreen=yes,width=500,height=600')
       return true
