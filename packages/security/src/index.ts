@@ -36,4 +36,11 @@ export default class Cipher {
       decipher.end()
     })
   }
+
+  public digest(message: string) {
+    return crypto
+      .createHmac('sha256', this.config.key)
+      .update(new Buffer(message, 'utf-8'))
+      .digest('hex')
+  }
 }
