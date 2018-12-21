@@ -86,6 +86,7 @@ class BearerPackageInit extends Command {
       'cz-conventional-changelog',
       'tslint',
       BEARER_TSLINT,
+      BEARER_TSCONFIG,
       'tslint-config-prettier',
       'prettier',
       'jest',
@@ -116,7 +117,7 @@ class BearerPackageInit extends Command {
     const packageFile = path.join(this.cwd, 'package.json')
     try {
       cli.action.start('Adding hooks')
-      let projectPackage: TPackage = JSON.parse(fs.readFileSync(packageFile, { encoding: 'utf8' }))
+      const projectPackage: TPackage = JSON.parse(fs.readFileSync(packageFile, { encoding: 'utf8' }))
       if (!get(projectPackage, LINT_STAGED_KEY)) {
         set(projectPackage, LINT_STAGED_KEY, LINT_STAGED)
       } else {
@@ -163,8 +164,7 @@ class BearerPackageInit extends Command {
       const src = path.join(this.cwd, 'src')
       const config = json.parse(fs.readFileSync(configFile, { encoding: 'utf8' }), undefined, true)
 
-      set(config, 'include', ['src'])
-      set(config, 'compilerOptions.outDir', 'lib/')
+      set(config, 'extends', BEARER_TSCONFIG)
       fs.writeFileSync(configFile, json.stringify(config, null, 2))
       if (!fs.existsSync(src)) {
         fs.mkdirSync(src)
@@ -239,6 +239,7 @@ const LINT_STAGED = {
   '*.{css,md,tsx,ts}': ['prettier --write', 'tslint -c tslint.json --fix', 'git add']
 }
 const BEARER_TSLINT = '@bearer/tslint-config'
+const BEARER_TSCONFIG = '@bearer/tsconfig'
 const prettierConfig = {
   semi: false,
   singleQuote: true,

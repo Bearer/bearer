@@ -1,0 +1,27 @@
+{
+  "name": "@bearer/tsconfig",
+  "version": "0.83.5",
+  "description": "Bearer TSconfig base",
+  "keywords": [
+    "tsconfig",
+    "typescript"
+  ],
+  "author": "Bearer Team<engineering@bearer.sh>",
+  "homepage": "https://github.com/Bearer/bearer/tree/master/packages/tsconfig",
+  "license": "MIT",
+  "main": "tsconfig.json",
+  "files": [
+    "tsconfig.json"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Bearer/bearer.git"
+  },
+  "scripts": {
+    "test": "echo 'NO tests'",
+    "test:ci": "echo 'NO tests'"
+  },
+  "bugs": {
+    "url": "https://github.com/Bearer/bearer/issues"
+  }
+}

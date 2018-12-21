@@ -3,7 +3,7 @@
   "version": "0.83.5",
   "description": "TSLint config for bearer team",
   "author": "Bearer Team<engineering@bearer.sh>",
-  "homepage": "https://github.com/Bearer/bearer#readme",
+  "homepage": "https://github.com/Bearer/bearer/packages/tslint-config#readme",
   "license": "MIT",
   "main": "tslint.json",
   "private": false,
