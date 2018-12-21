@@ -3,7 +3,7 @@
   "version": "0.83.0",
   "description": "Bearer tooling for encrypting and decrypting messages",
   "keywords": [
-    "react",
+    "security",
     "bearer"
   ],
   "author": "Bearer Team<engineering@bearer.sh>",
@@ -60,9 +60,10 @@
     }
   },
   "scripts": {
+    "clean": "rm -rf lib",
     "start": "tsc --watch",
     "build": "tsc -p tsconfig.json",
-    "clean": "rm -rf lib",
+    "prepare": "yarn build",
     "prepack": "yarn clean && yarn build",
     "test": "jest",
     "test:ci": "jest --coverage"
