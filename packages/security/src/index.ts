@@ -3,13 +3,13 @@ import crypto from 'crypto'
 export default class Cipher {
   constructor(private readonly config: { key: string }) {}
 
-  public encrypt(message: string) {
+  encrypt = (message: string) => {
     const cipher = crypto.createCipher('aes192', this.config.key)
 
     return [cipher.update(message, 'utf8', 'hex'), cipher.final('hex')].join('')
   }
 
-  public decrypt(encryptedMessage: string) {
+  decrypt = (encryptedMessage: string) => {
     return new Promise((resolve, reject) => {
       let decrypted = ''
       const decipher = crypto.createDecipher('aes192', this.config.key)
@@ -37,7 +37,7 @@ export default class Cipher {
     })
   }
 
-  public digest(message: string) {
+  digest = (message: string) => {
     return crypto
       .createHmac('sha256', this.config.key)
       .update(new Buffer(message, 'utf-8'))

@@ -22,6 +22,6 @@ describe('Cipher', () => {
       key2: 'value2'
     }
     const digest = await cipher.digest(JSON.stringify(body))
-    expect(digest).toBe('27764562547d0665075c1fcf972ee5990db168ee87e6888b4aed2ba2c0f3085d')
+    expect(digest).toBe(expectedDigest)
   })
 })
