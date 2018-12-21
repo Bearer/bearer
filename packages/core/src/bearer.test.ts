@@ -1,4 +1,4 @@
-import Bearer, { formatQuery } from './bearer'
+import Bearer from './bearer'
 
 describe('Bearer', () => {
   describe('Init', () => {
@@ -68,23 +68,5 @@ describe('Bearer', () => {
         expect(instance.askAuthorizations({ scenarioId: 'ok', setupId: 'ok' })).toBeFalsy()
       })
     })
-  })
-})
-
-describe('formatQuery', () => {
-  it('filters empty params and retunrs a string', () => {
-    const params = {
-      aNullParams: null,
-      undefinedParams: undefined,
-      falseParams: false,
-      aString: 'ok',
-      aNumber: 1
-    }
-    expect(formatQuery(params)).toEqual('aString=ok&aNumber=1')
-  })
-
-  it('returns and empty string', () => {
-    const params = {}
-    expect(formatQuery(params)).toEqual('')
   })
 })

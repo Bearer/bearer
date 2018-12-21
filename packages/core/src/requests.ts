@@ -1,5 +1,6 @@
 // global fetch
 import Bearer from './bearer'
+import { cleanQuery } from './utils'
 
 const defaultInit = {
   headers: {
@@ -26,12 +27,12 @@ export function bearerRequest<TPromiseReturn>(uri: string, baseParams = {}): TBe
     return new Promise((resolve, reject) => {
       Bearer.instance.maybeInitialized
         .then(() => {
-          const sentParams = {
+          const sentParams = cleanQuery({
             ...params,
             ...baseParams,
             clientId: getClientId(),
             secured: Bearer.config.secured
-          }
+          })
 
           const query = Object.keys(sentParams).map(key => [key, sentParams[key]].join('='))
           const uri = `${url}?${query.join('&')}`

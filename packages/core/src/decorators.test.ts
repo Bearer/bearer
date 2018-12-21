@@ -60,7 +60,7 @@ describe('Intent decorator', () => {
         .catch(a => console.log(a))
 
       expect(global.fetch).toBeCalledWith(
-        'https://localhost:5555/api/v2/intents/1234/getCollectionIntent?page=1&setupId=&clientId=42&secured=false',
+        'https://localhost:5555/api/v2/intents/1234/getCollectionIntent?page=1&clientId=42',
         commonParams
       )
 

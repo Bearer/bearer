@@ -3,6 +3,7 @@ import postRobot from 'post-robot'
 
 import BearerConfig from './bearer-config'
 import Events from './event-names'
+import { formatQuery } from './utils'
 
 const BEARER_WINDOW_INSTANCE_KEY = 'BEARER_INSTANCE'
 const BEARER_EMITTER = 'BEARER_EMITTER'
@@ -200,15 +201,4 @@ export default class Bearer {
 
 function iframeError(e) {
   console.error('[BEARER]', 'Error contacting iframe', e)
-}
-
-export function formatQuery(params: Record<string, any>) {
-  return Object.keys(params)
-    .reduce((acc, key) => {
-      if (params[key]) {
-        return [...acc, [key, params[key]].join('=')]
-      }
-      return acc
-    }, [])
-    .join('&')
 }
