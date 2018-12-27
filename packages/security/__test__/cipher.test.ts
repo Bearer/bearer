@@ -1,6 +1,6 @@
 import Cipher from '../src/index'
 
-const cipher = new Cipher({ key: 'test' })
+const cipher = new Cipher('test')
 describe('Cipher', () => {
   it('encrypts the data correctly', async () => {
     expect.assertions(1)

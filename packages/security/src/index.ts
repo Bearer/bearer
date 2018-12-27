@@ -1,46 +1,27 @@
 import crypto from 'crypto'
 
+type TConfig = { cipherAlgo: string; digestAlgo: string; encoding: 'utf8' }
+
 export default class Cipher {
-  constructor(private readonly config: { key: string }) {}
+  constructor(
+    private readonly key: string,
+    private readonly config: TConfig = { cipherAlgo: 'aes192', digestAlgo: 'sha256', encoding: 'utf8' }
+  ) {}
 
   encrypt = (message: string) => {
-    const cipher = crypto.createCipher('aes192', this.config.key)
-
-    return [cipher.update(message, 'utf8', 'hex'), cipher.final('hex')].join('')
+    const cipher = crypto.createCipher(this.config.cipherAlgo, this.key)
+    return [cipher.update(message, this.config.encoding, 'hex'), cipher.final('hex')].join('')
   }
 
   decrypt = (encryptedMessage: string) => {
-    return new Promise<string>((resolve, reject) => {
-      let decrypted = ''
-      const decipher = crypto.createDecipher('aes192', this.config.key)
-      decipher.on('readable', () => {
-        const data = decipher.read()
-        if (data) {
-          decrypted += data.toString()
-        }
-      })
-      decipher.on('end', () => {
-        resolve(decrypted)
-      })
-
-      decipher.on('error', e => {
-        reject(e)
-      })
-
-      try {
-        decipher.write(encryptedMessage, 'hex')
-      } catch (e) {
-        console.log(`Malformed signature: ${e.message}`)
-        reject(e)
-      }
-      decipher.end()
-    })
+    const decipher = crypto.createDecipher(this.config.cipherAlgo, this.key)
+    return decipher.update(encryptedMessage, 'hex', this.config.encoding) + decipher.final(this.config.encoding)
   }
 
   digest = (message: string) => {
     return crypto
-      .createHmac('sha256', this.config.key)
-      .update(new Buffer(message, 'utf-8'))
+      .createHmac(this.config.digestAlgo, this.key)
+      .update(new Buffer(message, this.config.encoding))
       .digest('hex')
   }
 }
