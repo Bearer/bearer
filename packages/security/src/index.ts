@@ -15,7 +15,9 @@ export default class Cipher {
 
   decrypt = (encryptedMessage: string) => {
     const decipher = crypto.createDecipher(this.config.cipherAlgo, this.key)
-    return decipher.update(encryptedMessage, 'hex', this.config.encoding) + decipher.final(this.config.encoding)
+    return [decipher.update(encryptedMessage, 'hex', this.config.encoding), decipher.final(this.config.encoding)].join(
+      ''
+    )
   }
 
   digest = (message: string) => {

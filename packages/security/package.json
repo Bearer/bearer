@@ -1,6 +1,9 @@
 {
   "name": "@bearer/security",
   "version": "0.84.2",
+  "engines": {
+    "node": "<11"
+  },
   "description": "Bearer tooling for encrypting and decrypting messages",
   "keywords": [
     "security",
