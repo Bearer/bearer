@@ -1,6 +1,7 @@
 {
   "name": "@bearer/security",
   "version": "0.85.0",
+  "private": false,
   "engines": {
     "node": "<11"
   },

@@ -1,6 +1,7 @@
 {
   "name": "@bearer/tsconfig",
   "version": "0.85.0",
+  "private": false,
   "description": "Bearer TSconfig base",
   "keywords": [
     "tsconfig",
