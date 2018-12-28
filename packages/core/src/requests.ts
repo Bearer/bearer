@@ -56,7 +56,7 @@ export function bearerRequest<TPromiseReturn>(uri: string, baseParams = {}): TBe
 }
 
 export function itemRequest<T = any>(): TBearerRequest<T> {
-  return bearerRequest('api/v2/items')
+  return bearerRequest('api/v1/items')
 }
 
 type TIntentBaseQuery = {

@@ -31,7 +31,7 @@ describe('requests', () => {
 
       await aRequest({}, {})
 
-      expect(global.fetch).toBeCalledWith('https://localhost:5555/api/v2/items?clientId=42&secured=true', {
+      expect(global.fetch).toBeCalledWith('https://localhost:5555/api/v1/items?clientId=42&secured=true', {
         credentials: 'include',
         headers: {
           'content-type': 'application/json',
