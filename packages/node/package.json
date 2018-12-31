@@ -20,7 +20,7 @@
   },
   "scripts": {
     "start": "tsc --watch",
-    "build": "tsc",
+    "build": "tsc -p tsconfig.build.json",
     "clean": "rm -rf lib",
     "prepare": "yarn clean && yarn build",
     "prepack": "yarn clean && NODE_ENV=production yarn build",

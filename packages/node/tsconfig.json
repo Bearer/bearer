@@ -7,6 +7,5 @@
     "esModuleInterop": true,
     "declaration": true
   },
-  "include": ["src/"],
-  "exclude": ["**/*.test.ts"]
+  "include": ["src/"]
 }
