@@ -1,6 +1,7 @@
 import express, { Request } from 'express'
 import { IncomingMessage } from 'http'
 import request from 'supertest'
+import Cipher from '@bearer/security'
 
 import middleware from './express'
 
@@ -22,7 +23,7 @@ const webHookHandlers = {
 describe('Bearer middleware', () => {
   beforeEach(() => {
     Object.keys(webHookHandlers).map(key => {
-      //@ts-ignore
+      // @ts-ignore
       webHookHandlers[key].mockClear()
     })
   })
@@ -124,24 +125,41 @@ describe('Bearer middleware', () => {
 
   describe('body validation', () => {
     const app = express()
+    const body = { key1: 'value1' }
+    const masterKey = '1234'
+    const cipher = new Cipher(masterKey)
 
     describe('secret given', () => {
-      app.use('/whatever/protected', middleware(webHookHandlers, { token: '1234' }))
+      app.use('/whatever/protected', middleware(webHookHandlers, { token: masterKey }))
 
       it('stops unsigned requests', async () => {
         const response = await request(app)
           .post('/whatever/protected')
           .expect('Content-Type', /json/)
           .expect(401)
+        console.log(response.body)
+
+        expect(response.body).toMatchObject({ error: { name: 'Bearer:WebhookIncorrectSignature' } })
+      })
+
+      it('stops bad signed requests', async () => {
+        const response = await request(app)
+          .post('/whatever/protected')
+          .set('BEARER-SHA', 'bad-signature')
+          .expect('Content-Type', /json/)
+          .expect(401)
+        console.log(response.body)
 
         expect(response.body).toMatchObject({ error: { name: 'Bearer:WebhookIncorrectSignature' } })
       })
 
       it('process correctly signed requests', async () => {
+        const signature = cipher.digest(JSON.stringify(body))
         await request(app)
           .post('/whatever/protected')
           .set('BEARER-SCENARIO-HANDLER', SUCCESS_HANDLER)
-          .set('BEARER-SHA', '1234')
+          .set('BEARER-SHA', signature)
+          .send(body)
           .expect('Content-Type', /json/)
           .expect(res => {
             return res.header['X-BEARER-WEBHOOK-HANDLER-DURATION'] > 0.0

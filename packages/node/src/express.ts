@@ -1,10 +1,14 @@
 import { NextFunction, Request, RequestHandler, Response, Router } from 'express'
 import onHeaders from 'on-headers'
+import bodyParser from 'body-parser'
 
 import { CustomError } from './errors'
+import Cipher from '@bearer/security'
 
 export default (handlers: TWebhookHandlers, options: TWebhookOptions = {}) => {
   const router = Router()
+  router.use(bodyParser.urlencoded({ extended: false }))
+  router.use(bodyParser.json())
 
   if (options.token) {
     router.use(verifyPayload(options.token))
@@ -88,8 +92,11 @@ function ensureHandlerExists(handlers: TWebhookHandlers) {
 
 function verifyPayload(token: string) {
   return (req: Request, res: Response, next: NextFunction) => {
+    const message = JSON.stringify(req.body)
+    const calculatedSha = new Cipher(token).digest(message)
     const sha = req.headers[BEARER_SHA]
-    if (sha === token) {
+
+    if (sha === calculatedSha) {
       next()
     } else {
       const error = new WebhookIncorrectSignature('')

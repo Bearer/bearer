@@ -43,6 +43,7 @@
     "typescript": "^3.2.1"
   },
   "dependencies": {
+    "@bearer/security": "^0.85.0",
     "axios": "^0.18.0",
     "express": "^4.16.4",
     "on-headers": "^1.0.1"
