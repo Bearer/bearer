@@ -1,9 +1,11 @@
 import { NextFunction, Request, RequestHandler, Response, Router } from 'express'
 import onHeaders from 'on-headers'
 import bodyParser from 'body-parser'
-
-import { CustomError } from './errors'
 import Cipher from '@bearer/security'
+import debug from '@bearer/logger'
+
+const logger = debug('webhooks')
+import { CustomError } from './errors'
 
 export default (handlers: TWebhookHandlers, options: TWebhookOptions = {}) => {
   const router = Router()
@@ -17,7 +19,7 @@ export default (handlers: TWebhookHandlers, options: TWebhookOptions = {}) => {
   router.post('/', ensureHandlerExists(handlers), (async (
     req: Request & TWithHandlerReq & TTimedRequest,
     res: Response,
-    _next: NextFunction
+    next: NextFunction
   ) => {
     const startAt = Date.now()
 
@@ -31,17 +33,23 @@ export default (handlers: TWebhookHandlers, options: TWebhookOptions = {}) => {
       try {
         await handler
         res.json({ ack: 'ok' })
-        // tslint:disable-next-line:no-unused
-      } catch (_error) {
-        const error = new WebhookHandlerRejection(req.bearerHandlerName)
-        res.status(422).json({ error })
+      } catch (error) {
+        logger(error)
+        res.status(422)
+        next(new WebhookHandlerRejection(req.bearerHandlerName))
       }
-      // tslint:disable-next-line:no-unused
-    } catch (_e) {
-      const error = new WebhookProcessingError(req.bearerHandlerName)
-      res.status(500).json({ error })
+    } catch (error) {
+      logger(error)
+      res.status(500)
+      next(new WebhookProcessingError(req.bearerHandlerName))
     }
   }) as RequestHandler)
+
+  // Error handler
+  router.use((error: CustomError, req: Request, res: Response, next: NextFunction) => {
+    logger(error)
+    res.json({ error: { name: error.name, message: error.message } })
+  })
 
   return router
 }
@@ -80,8 +88,8 @@ function ensureHandlerExists(handlers: TWebhookHandlers) {
   return (req: Request & Partial<TWithHandlerReq>, res: Response, next: NextFunction) => {
     const scenarioHandler = req.headers[SCENARIO_HANDLER] as string
     if (!handlers[scenarioHandler]) {
-      const error = new WebhookMissingHandler(`Scenario handler not found: ${scenarioHandler}`)
-      res.status(422).json({ error })
+      res.status(422)
+      next(new WebhookMissingHandler(`Scenario handler not found: ${scenarioHandler}`))
     } else {
       req.bearerHandler = handlers[scenarioHandler]
       req.bearerHandlerName = scenarioHandler
@@ -99,8 +107,8 @@ function verifyPayload(token: string) {
     if (sha === calculatedSha) {
       next()
     } else {
-      const error = new WebhookIncorrectSignature('')
-      res.status(401).json({ error })
+      res.status(401)
+      next(new WebhookIncorrectSignature('Incorrect signature, please make ure you provided the correct token'))
     }
   }
 }

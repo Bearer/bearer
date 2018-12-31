@@ -72,10 +72,11 @@ describe('Bearer middleware', () => {
           .post('/whatever/webhooks')
           .set('BEARER-SCENARIO-HANDLER', REJECTED_HANDLER)
           .expect('Content-Type', /json/)
-          .expect(422)
+          .expect(422, {
+            error: { name: 'Bearer:WebhookHandlerRejection', message: 'patrick-is-rejecting' }
+          })
 
         expect(webHookHandlers[REJECTED_HANDLER]).toHaveBeenCalled()
-        expect(response.body).toMatchObject({ error: { name: 'Bearer:WebhookHandlerRejection' } })
       })
 
       it('fails gracefully if the handler raises an error', async () => {
@@ -83,9 +84,10 @@ describe('Bearer middleware', () => {
           .post('/whatever/webhooks')
           .set('BEARER-SCENARIO-HANDLER', FAILING_HANDLER)
           .expect('Content-Type', /json/)
-          .expect(500)
+          .expect(500, {
+            error: { name: 'Bearer:WebhookProcessingError', message: 'patrick-is-failing' }
+          })
 
-        expect(response.body).toMatchObject({ error: { name: 'Bearer:WebhookProcessingError' } })
         expect(webHookHandlers[FAILING_HANDLER]).toHaveBeenCalled()
         expect(webHookHandlers[SUCCESS_HANDLER]).not.toHaveBeenCalled()
       })
@@ -97,9 +99,10 @@ describe('Bearer middleware', () => {
           .post('/whatever/webhooks')
           .set('BEARER-SCENARIO-HANDLER', 'unknow')
           .expect('Content-Type', /json/)
-          .expect(422)
+          .expect(422, {
+            error: { name: 'Bearer:WebhookMissingHandler', message: 'Scenario handler not found: unknow' }
+          })
 
-        expect(response.body).toMatchObject({ error: { name: 'Bearer:WebhookMissingHandler' } })
         expect(webHookHandlers[FAILING_HANDLER]).not.toHaveBeenCalled()
         expect(webHookHandlers[SUCCESS_HANDLER]).not.toHaveBeenCalled()
       })
@@ -109,17 +112,14 @@ describe('Bearer middleware', () => {
       const getResponse = await request(app)
         .get('/spongebobdoesnotneedwebhooks')
         .expect('Content-Type', /json/)
-        .expect(200)
+        .expect(200, { name: 'john' })
       const postResponse = await request(app)
         .post('/spongebobdoesnotneedwebhooks')
         .expect('Content-Type', /json/)
-        .expect(200)
+        .expect(200, { name: 'john' })
 
       expect(webHookHandlers[SUCCESS_HANDLER]).not.toHaveBeenCalled()
       expect(webHookHandlers[FAILING_HANDLER]).not.toHaveBeenCalled()
-
-      expect(postResponse.body).toMatchObject({ name: 'john' })
-      expect(getResponse.body).toMatchObject({ name: 'john' })
     })
   })
 
@@ -133,24 +133,28 @@ describe('Bearer middleware', () => {
       app.use('/whatever/protected', middleware(webHookHandlers, { token: masterKey }))
 
       it('stops unsigned requests', async () => {
-        const response = await request(app)
+        await request(app)
           .post('/whatever/protected')
           .expect('Content-Type', /json/)
-          .expect(401)
-        console.log(response.body)
-
-        expect(response.body).toMatchObject({ error: { name: 'Bearer:WebhookIncorrectSignature' } })
+          .expect(401, {
+            error: {
+              name: 'Bearer:WebhookIncorrectSignature',
+              message: 'Incorrect signature, please make ure you provided the correct token'
+            }
+          })
       })
 
       it('stops bad signed requests', async () => {
-        const response = await request(app)
+        await request(app)
           .post('/whatever/protected')
           .set('BEARER-SHA', 'bad-signature')
           .expect('Content-Type', /json/)
-          .expect(401)
-        console.log(response.body)
-
-        expect(response.body).toMatchObject({ error: { name: 'Bearer:WebhookIncorrectSignature' } })
+          .expect(401, {
+            error: {
+              name: 'Bearer:WebhookIncorrectSignature',
+              message: 'Incorrect signature, please make ure you provided the correct token'
+            }
+          })
       })
 
       it('process correctly signed requests', async () => {

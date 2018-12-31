@@ -32,11 +32,6 @@
     lodash "^4.17.11"
     tslib "^1"
 
-"@bearer/security@^0.85.0":
-  version "0.85.0"
-  resolved "https://registry.npmjs.org/@bearer/security/-/security-0.85.0.tgz#bad17497510c703a02c9ead0402965ccc2a2b11b"
-  integrity sha512-yu5rBP4na2t6zsOIq152ixJB7CC3gmoh/5AFEsCsVInu9jk9FXBmxh7r7RPJiX+Fwn3ZuecMs6O6K8NBT3UUwQ==
-
 "@commitlint/cli@^7.2.1":
   version "7.2.1"
   resolved "https://registry.yarnpkg.com/@commitlint/cli/-/cli-7.2.1.tgz#dbb9eeb1f5015a129bb0801fbc1115eb1dcd513b"
