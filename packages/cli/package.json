@@ -10,6 +10,7 @@
   "dependencies": {
     "@bearer/bearer-cli": "^0.85.0",
     "@bearer/intents": "^0.85.0",
+    "@bearer/security": "^0.85.2",
     "@bearer/templates": "^0.85.0",
     "@bearer/transpiler": "^0.85.0",
     "@bearer/types": "^0.85.0",
