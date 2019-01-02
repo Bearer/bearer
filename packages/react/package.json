@@ -69,7 +69,7 @@
   "scripts": {
     "clean": "rm -rf lib/",
     "start": "yarn build -w",
-    "build": "tsc -p tsconfig.json",
+    "build": "tsc -p tsconfig.build.json",
     "prepare": "yarn build",
     "prepack": "yarn clean && NODE_ENV=production yarn build",
     "test": "jest",
