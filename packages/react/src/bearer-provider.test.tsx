@@ -18,6 +18,12 @@ describe('BearerProvider', () => {
     expect(tree).toMatchSnapshot()
   })
 
+  it('allow custom integration host', () => {
+    const renderer = ShallowRenderer.createRenderer()
+    const tree = renderer.render(<BearerProvider clientId={clientId} intHost="https://int.bearer.sh/v2/" />)
+    expect(tree).toMatchSnapshot()
+  })
+
   it('default state is sent to context components', () => {
     const testRender = Renderer.create(
       <BearerProvider clientId={clientId} initialContext={initialContext}>
@@ -36,8 +42,8 @@ describe('BearerProvider', () => {
     )
     const stopPropagation = jest.fn(_x => null)
     const mockEvent = {
-      detail: { someRefrenceId: 'abc' },
-      stopPropagation
+      stopPropagation,
+      detail: { someRefrenceId: 'abc' }
     }
     testRender.root.findByType('button').props.onClick(mockEvent)
     expect(stopPropagation.mock.calls.length).toBe(1)

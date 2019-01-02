@@ -5,6 +5,7 @@ import BearerLoader from './bearer-loader'
 
 interface IBearerProviderProps {
   clientId: string
+  intHost?: string
   initialContext?: any
   onUpdate?(currentState: any): void
 }
@@ -38,7 +39,7 @@ export default class BearerProvider extends React.Component<IBearerProviderProps
     }
     return (
       <React.Fragment>
-        <BearerLoader clientId={this.props.clientId} />
+        <BearerLoader clientId={this.props.clientId} intHost={this.props.intHost} />
         <BearerContext.Provider value={contextValue}>{this.props.children}</BearerContext.Provider>
       </React.Fragment>
     )
