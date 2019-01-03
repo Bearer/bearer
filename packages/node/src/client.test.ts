@@ -20,7 +20,7 @@ describe('Bearer client', () => {
           authorization: clientId
         }
       })
-        .post('/backend/api/v1/12345-scenario-name/intentName')
+        .post('/api/v2/intents/backend/12345-scenario-name/intentName')
         .reply(200, distantApi)
 
       const { data } = await client.call('12345-scenario-name', 'intentName')
@@ -48,7 +48,7 @@ describe('ScenarioClient', () => {
         authorization: token
       }
     })
-      .post(`/backend/api/v1/${anotherScenarioName}/intent-name`)
+      .post(`/api/v2/intents/backend/${anotherScenarioName}/intent-name`)
       .query({ sponge: 'bob' })
       .reply(200, distantApi)
 
