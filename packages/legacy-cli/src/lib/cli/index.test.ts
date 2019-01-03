@@ -1,6 +1,6 @@
 const { CLI } = require('./index')
 const program = require('commander')
-let command = {
+const command = {
   useWith: program => {
     program.command('goats', 'Show me a great animals')
   }
@@ -11,5 +11,6 @@ test('using a command', () => {
     scenarioConfig: { config: '/tmp/scenariorc' }
   })
   cli.use(command)
+
   expect(cli.program.commands[0]._name).toBe('goats')
 })

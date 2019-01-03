@@ -9,7 +9,7 @@ import LocationProvider from '../../locationProvider'
 import { Config } from '../../types'
 
 import auth from './auth'
-import server = require('./server')
+import server from './server'
 import Storage from './storage'
 import { loadUserDefinedData } from './utils'
 

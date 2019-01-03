@@ -1,7 +1,7 @@
-const Koa = require('koa')
-const cors = require('@koa/cors')
-const BodyParser = require('koa-bodyparser')
-const respond = require('koa-respond')
+import Koa from 'koa'
+import cors from '@koa/cors'
+import BodyParser from 'koa-bodyparser'
+import respond from 'koa-respond'
 
 const app = new Koa()
 app.use(respond())
@@ -21,4 +21,4 @@ app.use(
   })
 )
 
-module.exports = app
+export default app
