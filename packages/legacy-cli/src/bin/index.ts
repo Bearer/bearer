@@ -4,11 +4,12 @@ const program = require('commander')
 // Done at OCLIF level
 // require('../scripts/check-version')
 const { version } = require('../../package.json')
-const { CLI } = require('../src/lib/cli')
-const Emitter = require('../src/lib/emitter')
+const { CLI } = require('../lib/cli')
+// tslint:disable-next-line
+const Emitter = require('../lib/emitter')
 
-import setupConfig from '../src/lib/setupConfig'
-import { Config } from '../src/lib/types'
+import setupConfig from '../lib/setupConfig'
+import { Config } from '../lib/types'
 
 const emitter = new Emitter()
 const config: Config = setupConfig()
