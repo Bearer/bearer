@@ -1,7 +1,7 @@
 import * as request from 'request'
 
 const requestPromise = (url: string, method: string, path: string, body: any, headers = {}) =>
-  new Promise((resolve, reject) => {
+  new Promise<request.Response>((resolve, reject) => {
     request(
       {
         method,
@@ -17,7 +17,7 @@ const requestPromise = (url: string, method: string, path: string, body: any, he
     )
   })
 
-module.exports = url => {
+export default url => {
   return {
     signup: body => requestPromise(url, 'POST', 'signup', body),
     login: body => requestPromise(url, 'POST', 'login', body),

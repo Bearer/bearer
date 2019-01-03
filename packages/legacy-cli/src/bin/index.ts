@@ -1,31 +1,24 @@
 #!/usr/bin/env node
-const program = require('commander')
+import * as program from 'commander'
 
 // Done at OCLIF level
 // require('../scripts/check-version')
-const { version } = require('../../package.json')
-const { CLI } = require('../lib/cli')
-// tslint:disable-next-line
-const Emitter = require('../lib/emitter')
-
+import cliOutput from '../lib/cliOutput'
+import { CLI } from '../lib/cli'
+import Emitter from '../lib/emitter'
 import setupConfig from '../lib/setupConfig'
 import { Config } from '../lib/types'
-
-const emitter = new Emitter()
-const config: Config = setupConfig()
-const startCmd = require('../src/lib/commands/startCommand')
-const invokeCmd = require('../src/lib/commands/invokeCommand')
-
-const cliOutput = require('../src/lib/cliOutput.js')
-
-const cli = new CLI(program, emitter, config)
-cliOutput(emitter, config)
-
-program.version(version, '-v, --version')
-
-cli.use(startCmd)
-cli.use(invokeCmd)
+import * as startCmd from '../lib/commands/startCommand'
+import * as invokeCmd from '../lib/commands/invokeCommand'
 
 export default args => {
+  const emitter = new Emitter()
+  const config: Config = setupConfig()
+
+  const cli = new CLI(program, emitter, config)
+  cliOutput(emitter)
+  cli.use(startCmd)
+  cli.use(invokeCmd)
+
   cli.parse(args)
 }

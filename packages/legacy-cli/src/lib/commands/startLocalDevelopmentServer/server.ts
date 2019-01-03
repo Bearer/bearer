@@ -1,7 +1,7 @@
-import Koa from 'koa'
-import cors from '@koa/cors'
-import BodyParser from 'koa-bodyparser'
-import respond from 'koa-respond'
+import * as Koa from 'koa'
+import * as cors from '@koa/cors'
+import * as BodyParser from 'koa-bodyparser'
+import * as respond from 'koa-respond'
 
 const app = new Koa()
 app.use(respond())

@@ -8,7 +8,8 @@
     "moduleResolution": "node",
     "outDir": "lib/",
     "rootDir": "src/",
-    "allowJs": true,
+    "declaration": true,
+    "allowJs": false,
     "lib": ["es2017", "dom"]
   },
   "include": ["src/"],

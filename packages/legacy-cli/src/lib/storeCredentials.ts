@@ -2,14 +2,14 @@ const fs = require('fs')
 const serviceClient = require('./serviceClient')
 
 const readConfig = configFile =>
-  new Promise((resolve, reject) =>
+  new Promise<{ clientID: string; clientSecret: string }>((resolve, reject) =>
     fs.readFile(configFile, (err, data) => {
       if (err) reject(err)
       else resolve(JSON.parse(data))
     })
   )
 
-module.exports = async (configFile, { IntegrationServiceUrl }, emitter) => {
+export default async (configFile, { IntegrationServiceUrl }, emitter) => {
   try {
     const { clientID, clientSecret } = await readConfig(configFile)
     const client = serviceClient(IntegrationServiceUrl)

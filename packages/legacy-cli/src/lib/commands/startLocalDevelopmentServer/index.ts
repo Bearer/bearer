@@ -32,7 +32,7 @@ export default function startLocalDevelopmentServer(
   })
   const router = new Router({ prefix: '/api/' })
 
-  return new Promise(async (resolve, reject) => {
+  return new Promise<string>(async (resolve, reject) => {
     try {
       const { config: devIntentsContext = {} } = (await explorer.search(rootLevel)) || {}
       const distPath = locator.buildIntentsResourcePath('dist')

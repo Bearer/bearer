@@ -22,7 +22,7 @@ function inviteCommand(command) {
   term('\n')
 }
 
-module.exports = emitter => {
+export default emitter => {
   emitter.on('credentialsUpdated', configPath => {
     term.white('Bearer: ')
     term.yellow('Credentials and configuration stored in: ')

@@ -1,7 +1,6 @@
 import * as fs from 'fs'
 import * as path from 'path'
-
-const Router = require('koa-router')
+import * as Router from 'koa-router'
 
 const router = new Router({ prefix: '/' })
 const auth = '123'

@@ -1,6 +1,6 @@
-const serviceClient = require('./serviceClient')
+import serviceClient from './serviceClient'
 
-module.exports = (
+export default (
   emitter,
   event,
   {

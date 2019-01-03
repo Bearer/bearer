@@ -1,7 +1,9 @@
-const EventEmitter = require('events')
+import { EventEmitter } from 'events'
+
 const term = require('terminal-kit').terminal
 
 class Emitter {
+  private emitter: EventEmitter
   constructor() {
     this.emitter = new EventEmitter()
   }
@@ -17,9 +19,9 @@ class Emitter {
     this.emitter.emit(name, args)
   }
 
-  on(...args) {
-    this.emitter.on(...args)
+  on(event: string | symbol, listener: (...args: any[]) => void) {
+    this.emitter.on(event, listener)
   }
 }
 
-module.exports = Emitter
+export default Emitter

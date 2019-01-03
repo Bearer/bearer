@@ -1,7 +1,7 @@
-const path = require('path')
-const fs = require('fs-extra')
-const chokidar = require('chokidar')
-const { spawn, execSync } = require('child_process')
+import * as path from 'path'
+import * as fs from 'fs-extra'
+import * as chokidar from 'chokidar'
+import { spawn, execSync } from 'child_process'
 
 import Locator from '../locationProvider'
 
@@ -106,7 +106,7 @@ export const start = (emitter, config, locator: Locator) => async ({ open, insta
     const options = [watcher ? null : '--no-watcher']
 
     // Build env for sub commands
-    const envVariables = {
+    const envVariables: NodeJS.ProcessEnv = {
       ...process.env,
       BEARER_SCENARIO_TAG_NAME: 'localhost',
       BEARER_SCENARIO_ID: scenarioUuid,
@@ -114,15 +114,12 @@ export const start = (emitter, config, locator: Locator) => async ({ open, insta
       BEARER_AUTHORIZATION_HOST: integrationHost
     }
 
-    const bearerTranspiler = spawn(
-      'node',
-      [path.join(__dirname, '..', 'startTranspiler.js'), options].filter(el => el),
-      {
-        cwd: scenarioRoot,
-        env: envVariables,
-        stdio: ['pipe', 'pipe', 'pipe', 'ipc']
-      }
-    )
+    const args = [path.join(__dirname, '..', 'startTranspiler.js'), ...options].filter(el => el)
+    const bearerTranspiler = spawn('node', args, {
+      cwd: scenarioRoot,
+      env: envVariables,
+      stdio: ['pipe', 'pipe', 'pipe', 'ipc']
+    })
     bearerTranspiler.stdout.on('data', childProcessStdout(emitter, BEARER))
     bearerTranspiler.stderr.on('data', childProcessStderr(emitter, BEARER))
     bearerTranspiler.on('close', childProcessClose(emitter, BEARER))
