@@ -11,33 +11,12 @@
   ],
   "scripts": {
     "clean": "rm -rf lib/",
-    "build": "tsc -p tsconfig.json",
+    "build": "tsc -p tsconfig.build.json",
     "start": "yarn clean && yarn build -w",
     "prepare": "yarn clean && yarn build",
     "prepack": "NODE_ENV=production yarn build",
     "test": "jest",
     "test:ci": "jest --coverage --runInBand"
-  },
-  "jest": {
-    "moduleFileExtensions": [
-      "ts",
-      "tsx",
-      "js"
-    ],
-    "transform": {
-      "^.+\\.(ts|tsx)$": "<rootDir>/preprocessor.js"
-    },
-    "testMatch": [
-      "**/__tests__/*.+(ts|tsx|js)"
-    ],
-    "setupFiles": [
-      "./jest.setup.js"
-    ],
-    "collectCoverageFrom": [
-      "**/*.{js,jsx,ts,tsx}",
-      "!**/node_modules/**",
-      "!**/vendor/**"
-    ]
   },
   "repository": {
     "type": "git",

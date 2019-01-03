@@ -71,7 +71,7 @@ export function Intent(intentName: string, type: IntentType = IntentType.FetchDa
         const init = { method: 'POST', body: JSON.stringify(body || {}) }
 
         // Build promise
-        return IntentPromise(intent(query, init))
+        return intentPromise(intent(query, init))
       }
     }
 
@@ -79,7 +79,7 @@ export function Intent(intentName: string, type: IntentType = IntentType.FetchDa
   }
 }
 
-export function IntentPromise(promise: Promise<TFetchBearerResult>): Promise<TFetchBearerData> {
+export function intentPromise(promise: Promise<TFetchBearerResult>): Promise<TFetchBearerData> {
   return new Promise((resolve, reject) => {
     promise
       .then((payload: TFetchBearerResult) => {
