@@ -63,20 +63,7 @@ export type TBASICAuthContext = TBaseAuthContext<{
 
 export type TAPIKEYAuthContext = TBaseAuthContext<{ apiKey: string }>
 
-// Deprecated
-export type TapiKeyContext = TAPIKEYAuthContext
-export type Toauth2Context = TOAUTH2AuthContext
-export type TbasicAuthContext = TBASICAuthContext
-export type TnoAuthContext = TNONEAuthContext
-export type DEPRECATEDCONTEXT = TapiKeyContext | TnoAuthContext | Toauth2Context | TbasicAuthContext
-// end Deprecated
-
-export type TAuthContext =
-  | TNONEAuthContext
-  | TOAUTH2AuthContext
-  | TBASICAuthContext
-  | TAPIKEYAuthContext
-  | DEPRECATEDCONTEXT
+export type TAuthContext = TNONEAuthContext | TOAUTH2AuthContext | TBASICAuthContext | TAPIKEYAuthContext
 
 export type TStateData = AxiosResponse<{
   Item: any
