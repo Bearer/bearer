@@ -1,18 +1,21 @@
-const Router = require('koa-router')
 import * as fs from 'fs'
+import * as path from 'path'
+
+const Router = require('koa-router')
 
 const router = new Router({ prefix: '/' })
 const auth = '123'
+const iframePath = path.join(__dirname, '../../../../static/iframe.js')
 
 router.get('v1/user/initialize', ctx => {
   ctx.body = '<html><head></head><body><script>'
-  ctx.body += fs.readFileSync(__dirname + '/iframe.js')
+  ctx.body += fs.readFileSync(iframePath)
   ctx.body += '</script></body></html>'
 })
 
 router.get('v2/user/initialize', ctx => {
   ctx.body = '<html><head></head><body><script>'
-  ctx.body += fs.readFileSync(__dirname + '/iframe.js')
+  ctx.body += fs.readFileSync(iframePath)
   ctx.body += '</script></body></html>'
 })
 

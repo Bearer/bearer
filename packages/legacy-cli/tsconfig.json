@@ -7,9 +7,10 @@
     "target": "es6",
     "moduleResolution": "node",
     "outDir": "lib/",
+    "rootDir": "src/",
     "allowJs": true,
     "lib": ["es2017", "dom"]
   },
-  "include": ["src/", "scripts/", "bin/"],
+  "include": ["src/"],
   "exclude": ["node_modules/", "**/__tests__/**"]
 }
