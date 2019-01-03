@@ -45,24 +45,6 @@
     "tslint-config-prettier": "^1.17.0",
     "typescript": "^3.2.2"
   },
-  "lint-staged": {
-    "*.{css,md,tsx,ts}": [
-      "prettier --write",
-      "tslint -c tslint.json --fix",
-      "git add"
-    ]
-  },
-  "config": {
-    "commitizen": {
-      "path": "./node_modules/cz-conventional-changelog"
-    }
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged",
-      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
-    }
-  },
   "scripts": {
     "clean": "rm -rf lib",
     "start": "tsc --watch",
