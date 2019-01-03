@@ -6,6 +6,5 @@
     "esModuleInterop": true,
     "outDir": "lib/",
     "declaration": true
-  },
-  "include": ["src"]
+  }
 }

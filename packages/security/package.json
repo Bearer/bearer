@@ -48,7 +48,7 @@
   "scripts": {
     "clean": "rm -rf lib",
     "start": "tsc --watch",
-    "build": "tsc -p tsconfig.json",
+    "build": "tsc -p tsconfig.build.json",
     "prepare": "yarn build",
     "prepack": "yarn clean && yarn build",
     "test": "jest",
