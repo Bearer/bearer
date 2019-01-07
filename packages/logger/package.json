@@ -1,5 +1,6 @@
 {
   "name": "@bearer/logger",
+  "private": false,
   "version": "0.86.0",
   "description": "Bearer logger",
   "keywords": [
