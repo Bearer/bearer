@@ -1,11 +1,10 @@
 import axios from 'axios'
 
 export default function(token: string) {
-  const encodedAuth = Buffer.from(`anything:${token}`).toString('base64')
   const headers = {
     'Accept': 'application/json',
     'User-Agent': 'Bearer',
-    'Authorization': `Basic ${encodedAuth}`
+    'Authorization': token
   }
 
   return axios.create({

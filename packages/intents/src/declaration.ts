@@ -17,8 +17,8 @@ export type TSaveStateCallback = (payload: { state: any; data?: any } | { error:
  * Intents
  */
 
-export type TBearerLambdaContext = {
-  authAccess: TAuthContext
+export type TBearerLambdaContext<T = TAuthContext> = T & {
+  bearerBaseURL: string
 }
 
 export type ISaveStateIntentAction = (
@@ -46,52 +46,32 @@ export type TFetchDataAction = (
 /**
  * Auth definitions
  */
-export type TOAUTH2AuthContext = {
-  accessToken: string
-  bearerBaseURL: string
+
+type TBaseAuthContext<TAuthAccessContent> = {
+  authAccess: TAuthAccessContent
   [key: string]: any
 }
 
-export type TNONEAuthContext = {
-  bearerBaseURL: string
-  [key: string]: any
-}
+export type TOAUTH2AuthContext = TBaseAuthContext<{ accessToken: string }>
 
-export type TBASICAuthContext = {
+export type TNONEAuthContext = TBaseAuthContext<undefined>
+
+export type TBASICAuthContext = TBaseAuthContext<{
   username: string
   password: string
-  bearerBaseURL: string
-  [key: string]: any
-}
+}>
 
-export type TAPIKEYAuthContext = {
-  apiKey: string
-  bearerBaseURL: string
-  [key: string]: any
-}
+export type TAPIKEYAuthContext = TBaseAuthContext<{ apiKey: string }>
 
-// Deprecated
-export type TapiKeyContext = TAPIKEYAuthContext
-export type Toauth2Context = TOAUTH2AuthContext
-export type TbasicAuthContext = TBASICAuthContext
-export type TnoAuthContext = TNONEAuthContext
-export type DEPRECATEDCONTEXT = TapiKeyContext | TnoAuthContext | Toauth2Context | TbasicAuthContext
-// end Deprecated
-
-export type TAuthContext =
-  | TNONEAuthContext
-  | TOAUTH2AuthContext
-  | TBASICAuthContext
-  | TAPIKEYAuthContext
-  | DEPRECATEDCONTEXT
+export type TAuthContext = TNONEAuthContext | TOAUTH2AuthContext | TBASICAuthContext | TAPIKEYAuthContext
 
 export type TStateData = AxiosResponse<{
   Item: any
 }>
 
-export type TLambdaEvent = {
+export type TLambdaEvent<T = TAuthContext> = {
   queryStringParameters: Record<string, any>
-  context: Record<string, any> & TBearerLambdaContext
+  context: Record<string, any> & TBearerLambdaContext<T>
   body?: any
 }
 

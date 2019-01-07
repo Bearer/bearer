@@ -1,6 +1,6 @@
 import mockAxios from 'jest-mock-axios'
 
-import { TLambdaEvent } from '../src/declaration'
+import { TLambdaEvent, TAPIKEYAuthContext, TNONEAuthContext } from '../src/declaration'
 import { RetrieveState, SaveState } from '../src/index'
 
 afterEach(() => {
@@ -25,12 +25,12 @@ describe('SaveState', () => {
       callback({ state, data: { ...state, ...body } })
     }
 
-    const event: TLambdaEvent = {
+    const event: TLambdaEvent<TAPIKEYAuthContext> = {
       queryStringParameters: { referenceId },
       context: {
+        bearerBaseURL: 'https://void.bearer.sh',
         signature: 'encrypted',
         authAccess: {
-          bearerBaseURL: 'https://void.bearer.sh',
           apiKey: 'none'
         }
       },
@@ -193,14 +193,12 @@ describe('RetrieveState', () => {
   describe('existing data', () => {
     const referenceId = 'SPONGE_BOB'
 
-    const event: TLambdaEvent = {
+    const event: TLambdaEvent<TNONEAuthContext> = {
       queryStringParameters: { referenceId },
       context: {
         bearerBaseURL: 'https://void.bearer.sh',
         signature: 'encrypted',
-        authAccess: {
-          bearerBaseURL: 'wedontcare'
-        }
+        authAccess: undefined
       }
     }
 
@@ -220,7 +218,7 @@ describe('RetrieveState', () => {
 
       RetrieveState.intent(action)(event, {}, lambdaCallback)
       expect(mockAxios.get).toHaveBeenCalledWith('api/v2/items/SPONGE_BOB', { params: { signature: 'encrypted' } })
-      mockAxios.mockResponse({ data: { Item: { title: 'Sponge bob', referenceId } } })
+      mockAxios.mockResponse({ data: { Item: { referenceId, title: 'Sponge bob' } } })
     })
 
     it('not found retuns error', async done => {

@@ -1,6 +1,6 @@
 {
   "name": "@bearer/bearer-cli",
-  "version": "0.86.0",
+  "version": "0.86.1",
   "main": "lib/bin/index.js",
   "repository": "git@github.com:Bearer/bearer.git",
   "author": "Bearer Team<engineering@bearer.sh>",
@@ -24,7 +24,7 @@
     "requirements-check": "node ./check-version.js"
   },
   "dependencies": {
-    "@bearer/intents": "^0.86.0",
+    "@bearer/intents": "^0.86.1",
     "@bearer/templates": "^0.86.0",
     "@bearer/transpiler": "^0.86.0",
     "@bearer/types": "^0.86.0",

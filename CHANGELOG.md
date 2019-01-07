@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.86.1"></a>
+## [0.86.1](https://github.com/Bearer/bearer/compare/v0.86.0...v0.86.1) (2019-01-03)
+
+
+### Bug Fixes
+
+* **intents:** rewrite auth context types ([f276847](https://github.com/Bearer/bearer/commit/f276847))
+
+
+
+
+
 <a name="0.86.0"></a>
 # [0.86.0](https://github.com/Bearer/bearer/compare/v0.85.4...v0.86.0) (2019-01-03)
 
