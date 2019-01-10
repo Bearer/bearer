@@ -425,7 +425,9 @@ export class AttachPullRequestAction {
         this.fetcherRetrieveFarmer({ referenceId: this.farmerRefId }).then(({ data }: {
             data: BearerRef<Farmer>;
         }) => {
-            this.farmer = data;
+            if (data) {
+                this.farmer = data;
+            }
         });
     };
     private fetcherRetrieveFarmer;
@@ -460,7 +462,9 @@ export class AttachPullRequestAction {
                 panda: Panda;
             }>;
         }) => {
-            this.goat = data;
+            if (data) {
+                this.goat = data;
+            }
         });
     };
     private fetcherRetrieveGoat;
@@ -494,7 +498,9 @@ export class AttachPullRequestAction {
         this.fetcherRetrieveFeedPanda({ referenceId: this.feedPandaRefId }).then(({ data }: {
             data: BearerRef<Panda>;
         }) => {
-            this.feedPandaInitial = data;
+            if (data) {
+                this.feedPandaInitial = data;
+            }
         });
     };
     private manualIntentName: BearerFetch<BearerRef<{
@@ -527,7 +533,9 @@ export class AttachPullRequestAction {
                 inlineName: string;
             }>;
         }) => {
-            this.shortPandaInitial = data;
+            if (data) {
+                this.shortPandaInitial = data;
+            }
         });
     };
     constructor() {

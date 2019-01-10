@@ -49,12 +49,17 @@ export function createLoadResourceMethod(meta: TCreateLoadResourceMethod) {
     undefined,
     ts.createBlock(
       [
-        ts.createStatement(
-          ts.createBinary(
-            ts.createPropertyAccess(ts.createThis(), meta.propDeclarationName),
-            ts.SyntaxKind.EqualsToken,
-            ts.createIdentifier('data')
-          )
+        ts.createIf(
+          ts.createIdentifier('data'),
+          ts.createBlock([
+            ts.createStatement(
+              ts.createBinary(
+                ts.createPropertyAccess(ts.createThis(), meta.propDeclarationName),
+                ts.SyntaxKind.EqualsToken,
+                ts.createIdentifier('data')
+              )
+            )
+          ])
         )
       ],
       true

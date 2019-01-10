@@ -79,7 +79,9 @@ class NoOptionsComponent {
         this.fetcherRetrieveFarmer({ referenceId: this.farmerRefId }).then(({ data }: {
             data: BearerRef<Farmer>;
         }) => {
-            this.farmer = data;
+            if (data) {
+                this.farmer = data;
+            }
         });
     };
     @Intent(\\"retrieveFarmer\\")
@@ -107,7 +109,9 @@ class NoOptionsComponent {
         this.fetcherRetrieveAString({ referenceId: this.aStringRefId }).then(({ data }: {
             data: BearerRef<string>;
         }) => {
-            this.aString = data;
+            if (data) {
+                this.aString = data;
+            }
         });
     };
     @Intent(\\"retrieveAString\\")
@@ -135,7 +139,9 @@ class NoOptionsComponent {
         this.fetcherRetrieveAStringWithoutInitializer({ referenceId: this.aStringWithoutInitializerRefId }).then(({ data }: {
             data: BearerRef<string>;
         }) => {
-            this.aStringWithoutInitializer = data;
+            if (data) {
+                this.aStringWithoutInitializer = data;
+            }
         });
     };
     @Intent(\\"retrieveAStringWithoutInitializer\\")
@@ -167,7 +173,9 @@ class NoOptionsComponent {
                 title: string;
             }>;
         }) => {
-            this.object = data;
+            if (data) {
+                this.object = data;
+            }
         });
     };
     @Intent(\\"retrieveObject\\")
@@ -199,7 +207,9 @@ class NoOptionsComponent {
                 title: string;
             }>;
         }) => {
-            this.objectWithoutInitializer = data;
+            if (data) {
+                this.objectWithoutInitializer = data;
+            }
         });
     };
     @Intent(\\"retrieveObjectWithoutInitializer\\")
@@ -227,7 +237,9 @@ class NoOptionsComponent {
         this.fetcherRetrieveSpongeBob({ referenceId: this.patrick }).then(({ data }: {
             data: BearerRef<Sponge>;
         }) => {
-            this.spongeBob = data;
+            if (data) {
+                this.spongeBob = data;
+            }
         });
     };
     @Intent(\\"killPatrick\\")
@@ -255,7 +267,9 @@ class NoOptionsComponent {
         this.fetcherRetrieveSpongeBobOverrided({ referenceId: this.refNotOverrided }).then(({ data }: {
             data: BearerRef<Sponge>;
         }) => {
-            this.spongeBobOverrided = data;
+            if (data) {
+                this.spongeBobOverrided = data;
+            }
         });
     };
     @Intent(\\"retrieveSpongeBobOverrided\\")

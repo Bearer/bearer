@@ -29,7 +29,9 @@ class NoOptionsComponent {
         this.fetcherRetrieveAStringInput({ referenceId: this.aStringInputRefId }).then(({ data }: {
             data: BearerRef<string>;
         }) => {
-            this.aStringInput = data;
+            if (data) {
+                this.aStringInput = data;
+            }
         });
     };
     private fetcherRetrieveAStringInput;

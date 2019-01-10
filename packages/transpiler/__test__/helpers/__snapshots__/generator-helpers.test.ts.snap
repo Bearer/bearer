@@ -25,7 +25,9 @@ exports[`createLoadResourceMethod generates load resource method properly 1`] = 
         this.intentMethodName({ intentReferenceIdKeyName: this.propertyReferenceIdName }).then(({ data }: {
             data: SomeType;
         }) => {
-            this.propDeclarationName = data;
+            if (data) {
+                this.propDeclarationName = data;
+            }
         });
     };
 }

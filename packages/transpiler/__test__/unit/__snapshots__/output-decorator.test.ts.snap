@@ -51,7 +51,9 @@ class NoOptionsComponent {
         this.fetcherRetrieveFarmer({ referenceId: this.farmerRefId }).then(({ data }: {
             data: BearerRef<Farmer>;
         }) => {
-            this.farmerInitial = data;
+            if (data) {
+                this.farmerInitial = data;
+            }
         });
     };
     private milkWithAbottle: BearerFetch<BearerRef<Farmer>>;
@@ -76,7 +78,9 @@ class NoOptionsComponent {
         this.fetcherRetrieveFarmerAndPanda({ referenceId: this.farmerAndPandaRefId }).then(({ data }: {
             data: BearerRef<Farmer>;
         }) => {
-            this.farmerAndPandaInitial = data;
+            if (data) {
+                this.farmerAndPandaInitial = data;
+            }
         });
     };
     constructor() {
