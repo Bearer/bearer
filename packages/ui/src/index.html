@@ -2,16 +2,86 @@
 <html dir="ltr" lang="en">
 
 <head>
+  <link href="https://fonts.googleapis.com/css?family=Coiny" rel="stylesheet">
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0">
   <title>Stencil Component Starter</title>
+  <style>
+    body {
+      font-family: Coiny
+    }
+
+
+    :root {
+      /* --bearer-base-size: 16px; */
+      /* primary */
+
+
+    }
+
+    .overrided {
+      font-family: Monaco;
+      --bearer-base-size: 20px;
+      --bearer-primary: #815503;
+      --bearer-primary-hover: #c5b914;
+      --bearer-primary-active: #a53c1d;
+      --bearer-primary-disabled: #D6DAE7;
+
+      --bearer-primary-color: #FFF;
+      --bearer-primary-color-disabled: #707589;
+
+      /* secondary */
+
+      --bearer-secondary: #e40fa4;
+      --bearer-secondary-hover: #ac0d57;
+      --bearer-secondary-active: #ff43d0;
+      --bearer-secondary-disabled: #D6DAE7;
+
+      --bearer-secondary-color: #FFF;
+      --bearer-secondary-color-disabled: #707589;
+
+
+      --bearer-btn-vertical-padding: 22px;
+      --bearer-btn-horizontal-padding: 35px;
+    }
+
+  </style>
   <script>
     window.BEARER_CONFIG = {
       integrationHost: 'https://int.staging.bearer.sh/',
       authorizationHost: 'https://int.staging.bearer.sh/',
     }
+
   </script>
   <script src="/build/bearer-ui.js"></script>
+  <script>
+    class ScenarioPlaceholder extends HTMLElement {
+      constructor() {
+        super(); // always call super() first in the constructor.
+
+        this._shadowRoot = this.attachShadow({
+          mode: 'open'
+        });
+      }
+      connectedCallback() {
+        this._shadowRoot.innerHTML =
+          `
+          <h1> test</h1>
+          <bearer-button>I'm a button</bearer-button>
+          <br>
+          <bearer-button kind="secondary" size="large">I'm a  large button</bearer-button>
+          <br>
+          <bearer-button size="small">I'm a small button</bearer-button>
+          <br>
+          <bearer-button disabled size="small">I'm a small button</bearer-button>
+          <br>
+        `
+      }
+    }
+
+    customElements.define('scenario-placeholder', ScenarioPlaceholder);
+
+  </script>
   <style>
     body {
       display: flex;
@@ -30,12 +100,16 @@
       flex-direction: column;
       justify-content: center;
     }
+
   </style>
 </head>
 
 <body>
   <div>
-    <bearer-authorized></bearer-authorized>
+    <scenario-placeholder></scenario-placeholder>
+    <div class="overrided">
+      <scenario-placeholder></scenario-placeholder>
+    </div>
   </div>
   <div>
     <h1>Buttons</h1>

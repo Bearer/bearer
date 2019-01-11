@@ -1,58 +1,62 @@
-@import '../../node_modules/bootstrap/scss/buttons';
-
-.btn-light,
-.btn-success,
-.btn-danger {
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.14);
-  border-radius: 2px;
-  border: 1px solid #ebebeb;
-  background-color: #ffffff;
-  font-family: inherit;
-  font-weight: 500;
-  color: #030d36;
-
-  &:hover {
-    background-color: hsl(220, 20%, 97%);
-    border-color: #e7ebee;
-    box-shadow: 0 3px 7px rgba(0, 0, 0, 0.14);
-  }
-
-  &:not(:disabled):not(.disabled):active,
-  &:active {
-    background-color: #e7ebee;
-    border-color: #dae0e5;
-  }
+:host {
+  --base-size: var(--bearer-base-size, 16px);
+  --font-size: var(--base-size);
+  --font-color: var(--bearer-primary-color, #FFF);
+  --bg-color: var(--bearer-primary, #030D36);
+  --bg-hover: var(--bearer-primary-hover, #021561);
+  --bg-active: var(--bearer-primary-active, #505B8A);
+  --vertical-padding: var(--bearer-btn-vertical-padding, 12px);
+  --horizontal-padding: var(--bearer-btn-horizontal-padding, 18px);
 }
 
-.btn-success {
-  color: #28a745;
+/*
+* Sizes
+*/
 
-  &:hover,
-  &:not(:disabled):not(.disabled):active,
-  &:active {
-    color: #28a745;
-  }
+:host([kind="secondary"]) {
+  --font-size: calc(var(--base-size) * 1.125);
+  --font-color: var(--bearer-secondary-color, #FFF);
+  --bg-color: var(--bearer-secondary, #0FE49B);
+  --bg-hover: var(--bearer-secondary-hover, #0EBD81);
+  --bg-active: var(--bearer-secondary-active, #5EB597);
 }
 
-.btn-danger {
-  color: rgb(224, 26, 89);
-
-  &:hover,
-  &:not(:disabled):not(.disabled):active,
-  &:active {
-    color: rgb(224, 26, 89);
-  }
+:host([size="small"]) {
+  --font-size: calc(var(--base-size) * 0.875);
+  --vertical-padding: var(--bearer-btn-small-vertical-padding, 8px);
+  --horizontal-padding: var(--bearer-btn-small-horizontal-padding, 14px)
 }
 
-.btn-outline-danger {
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.14);
-  border-radius: 2px;
-  font-family: inherit;
-  font-weight: inherit;
-  color: rgb(224, 26, 89);
+:host([size="large"]) {
+  --font-size: calc(var(--base-size) * 1.125);
+  --vertical-padding: var(--bearer-btn-large-vertical-padding, 14px);
+  --horizontal-padding: var(--bearer-btn-large-horizontal-padding, 24px)
+}
 
-  &:hover {
-    background-color: rgb(224, 26, 89);
-    border-color: rgb(224, 26, 89);
-  }
+/*
+* States
+*/
+
+:host([disabled]) {
+  --font-color: var(--bearer-primary-color-disabled, #707589);
+  --bg-color: var(--bearer-primary-disabled, #D6DAE7)
+}
+
+:host(:not([disabled]):hover) {
+  --bg-color: var(--bg-hover)
+}
+
+:host(:not([disabled]):active) {
+  --bg-color: var(--bg-active)
+}
+
+.btn {
+  font: var(--bearer-font-family, inherit);
+  font-size: var(--font-size);
+  color: var(--font-color);
+  background: var(--bg-color);
+  border-radius: var(--bearer-btn-radius, 4px);
+  border: none 0px;
+  // default medium
+  padding: var(--vertical-padding) var(--horizontal-padding);
 }
