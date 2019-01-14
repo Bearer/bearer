@@ -5,7 +5,12 @@ import { TInputDecoratorOptions } from '@bearer/types/lib/input-output-decorator
 import * as ts from 'typescript'
 
 import { Decorators, Properties } from '../constants'
-import { extractBooleanOptions, extractStringOptions, getDecoratorNamed } from '../helpers/decorator-helpers'
+import {
+  extractBooleanOptions,
+  extractStringOptions,
+  getDecoratorNamed,
+  extractArrayOptions
+} from '../helpers/decorator-helpers'
 import { addAutoLoad, createFetcher, createLoadDataCall, createLoadResourceMethod } from '../helpers/generator-helpers'
 import { loadName as _loadName, retrieveFetcherName, retrieveIntentName } from '../helpers/name-helpers'
 import { getNodeName } from '../helpers/node-helpers'
@@ -84,9 +89,9 @@ export default function InputDecorator({ metadata }: TransformerOptions = {}): t
               'group',
               'eventName',
               'intentName',
-              'propertyReferenceIdName',
-              'intentArguments'
+              'propertyReferenceIdName'
             ]),
+            ...extractArrayOptions<TInputDecoratorOptions>(callArgs, ['intentArguments']),
             ...extractBooleanOptions<TInputDecoratorOptions>(callArgs, ['autoLoad'])
           }
     }

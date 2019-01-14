@@ -90,6 +90,22 @@ export function extractStringOptions<T>(objectLitteral: ts.ObjectLiteralExpressi
   return values
 }
 
+export function extractArrayOptions<T>(objectLitteral: ts.ObjectLiteralExpression, keys: Array<keyof T>): Partial<T> {
+  const values: Partial<T> = {}
+  keys.map(value => {
+    const optionValue = getExpressionFromLiteralObject<ts.StringLiteral>(objectLitteral, value as string)
+    if (optionValue && ts.isArrayLiteralExpression(optionValue)) {
+      values[value as string] = optionValue.elements.map(e => {
+        if (ts.isStringLiteral(e)) {
+          return e.text
+        }
+        return null
+      })
+    }
+  })
+  return values
+}
+
 export function extractBooleanOptions<T>(objectLitteral: ts.ObjectLiteralExpression, keys: Array<keyof T>): Partial<T> {
   const values: Partial<T> = {}
   keys.map(value => {
