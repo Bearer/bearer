@@ -8,18 +8,11 @@
   <title>Stencil Component Starter</title>
   <style>
     body {
+      /* Use a custom font and make sure it applies to shadowed components */
       font-family: Coiny
     }
 
-
-    :root {
-      /* --bearer-base-size: 16px; */
-      /* primary */
-
-
-    }
-
-    .overrided {
+    .overridden {
       font-family: Monaco;
       --bearer-base-size: 20px;
       --bearer-primary: #815503;
@@ -27,7 +20,7 @@
       --bearer-primary-active: #a53c1d;
       --bearer-primary-disabled: #D6DAE7;
 
-      --bearer-primary-color: #FFF;
+      --bearer-primary-font-color: #FFF;
       --bearer-primary-color-disabled: #707589;
 
       /* secondary */
@@ -44,6 +37,8 @@
       --bearer-btn-vertical-padding: 22px;
       --bearer-btn-horizontal-padding: 35px;
     }
+
+    .custom {}
 
   </style>
   <script>
@@ -66,13 +61,10 @@
       connectedCallback() {
         this._shadowRoot.innerHTML =
           `
-          <h1> test</h1>
+          <bearer-button kind="action">I'm an action</bearer-button>
           <bearer-button>I'm a button</bearer-button>
-          <br>
           <bearer-button kind="secondary" size="large">I'm a  large button</bearer-button>
-          <br>
           <bearer-button size="small">I'm a small button</bearer-button>
-          <br>
           <bearer-button disabled size="small">I'm a small button</bearer-button>
           <br>
         `
@@ -106,8 +98,10 @@
 
 <body>
   <div>
+    <h2>Default</h2>
     <scenario-placeholder></scenario-placeholder>
-    <div class="overrided">
+    <div class="overridden">
+      <h2>Overridden</h2>
       <scenario-placeholder></scenario-placeholder>
     </div>
   </div>

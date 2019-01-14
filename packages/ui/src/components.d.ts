@@ -12,6 +12,9 @@ import {
   FWithRevoke,
 } from './components/Authorized/bearer-authorized';
 import {
+  BKind,
+} from './components/Button/Button';
+import {
   FieldSet,
 } from './components/Forms/Fieldset';
 import {
@@ -64,7 +67,7 @@ declare global {
       'as': string;
       'content': any;
       'disabled': boolean;
-      'kind': 'primary' | 'secondary' | 'success' | 'danger' | 'warning' | 'info' | 'light' | 'dark';
+      'kind': BKind;
       'outline': boolean;
       'size': 'md' | 'sm' | 'lg';
     }
@@ -519,7 +522,7 @@ declare global {
       'as'?: string;
       'content'?: any;
       'disabled'?: boolean;
-      'kind'?: 'primary' | 'secondary' | 'success' | 'danger' | 'warning' | 'info' | 'light' | 'dark';
+      'kind'?: BKind;
       'outline'?: boolean;
       'size'?: 'md' | 'sm' | 'lg';
     }

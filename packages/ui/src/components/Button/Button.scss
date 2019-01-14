@@ -1,25 +1,47 @@
 :host {
+  --primary-color: var(--bearer-primary, #030D36);
+  --secondary-color: var(--bearer-secondary, #0FE49B);
+
+  --ternary-color: var(--bearer-primary, #030D36);
   --base-size: var(--bearer-base-size, 16px);
   --font-size: var(--base-size);
-  --font-color: var(--bearer-primary-color, #FFF);
-  --bg-color: var(--bearer-primary, #030D36);
+  --font-color: var(--bearer-primary-font-color, #FFF);
+  --bg-color: var(--primary-color);
   --bg-hover: var(--bearer-primary-hover, #021561);
   --bg-active: var(--bearer-primary-active, #505B8A);
   --vertical-padding: var(--bearer-btn-vertical-padding, 12px);
   --horizontal-padding: var(--bearer-btn-horizontal-padding, 18px);
+  --border-radius: var(--bearer-button-border-radius, 4px);
+}
+
+/**
+* kind
+**/
+
+:host([kind="action"]) {
+  --border-radius: var(--bearer-button-action-border-radius, 2px);
+  --font-color: var(--bearer-button-action-font-color, var(--primary-color));
+  --bg-color: var(--bearer-button-action, #FFF);
+  --shadow: var(--bearer-button-action-shadow, 0 2px 4px 0 rgba(3, 13, 54, 0.12));
+  --bg-hover: var(--bg-color);
+  --bg-active: var(--bg-color);
+}
+
+:host([kind="action"]:hover) .btn {
+  box-shadow: 0 2px 4px 0 rgba(3, 13, 54, 0.5);
+}
+
+
+:host([kind="secondary"]) {
+  --font-color: var(--bearer-secondary-font-color, #FFF);
+  --bg-color: var(--secondary-color, #0FE49B);
+  --bg-hover: var(--bearer-secondary-hover, #0EBD81);
+  --bg-active: var(--bearer-secondary-active, #5EB597);
 }
 
 /*
 * Sizes
 */
-
-:host([kind="secondary"]) {
-  --font-size: calc(var(--base-size) * 1.125);
-  --font-color: var(--bearer-secondary-color, #FFF);
-  --bg-color: var(--bearer-secondary, #0FE49B);
-  --bg-hover: var(--bearer-secondary-hover, #0EBD81);
-  --bg-active: var(--bearer-secondary-active, #5EB597);
-}
 
 :host([size="small"]) {
   --font-size: calc(var(--base-size) * 0.875);
@@ -55,8 +77,8 @@
   font-size: var(--font-size);
   color: var(--font-color);
   background: var(--bg-color);
-  border-radius: var(--bearer-btn-radius, 4px);
+  border-radius: var(--border-radius, 4px);
   border: none 0px;
-  // default medium
   padding: var(--vertical-padding) var(--horizontal-padding);
+  box-shadow: var(--shadow, 'none')
 }
