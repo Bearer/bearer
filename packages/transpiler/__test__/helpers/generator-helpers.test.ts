@@ -4,7 +4,7 @@ import { addAutoLoad, createFetcher, createLoadResourceMethod } from '../../src/
 import { CreateFetcherMeta } from '../../src/types'
 import { runTransformers } from '../utils/helpers'
 
-function dummyTransformer(fun: (meta: any) => ts.Node, meta: any) {
+function dummyTransformer(fun: (meta: any, metaCollection?: any) => ts.Node, meta: any, metaCollection?: any) {
   return (context: ts.TransformationContext) => {
     const updateClass: ts.Visitor = (node: ts.Node) => {
       if (ts.isClassDeclaration(node)) {
@@ -17,7 +17,7 @@ function dummyTransformer(fun: (meta: any) => ts.Node, meta: any) {
           prop.name,
           prop.typeParameters,
           prop.heritageClauses,
-          [...prop.members, fun(meta) as ts.ClassElement]
+          [...prop.members, fun(meta, metaCollection) as ts.ClassElement]
         )
       }
 
@@ -51,15 +51,46 @@ describe('createLoadResourceMethod', () => {
      class C {}
     `
 
+    const metaCollection = [
+      {
+        propertyReferenceIdName: 'aPropertyReferenceIdName',
+        typeIdentifier: ts.createIdentifier('SomeType'),
+        propDeclarationName: 'a',
+        intentMethodName: 'intentMethodName',
+        intentReferenceIdKeyName: 'aId',
+        intentArguments: [],
+        loadMethodName: 'loadMethodName'
+      },
+      {
+        propertyReferenceIdName: 'bPropertyReferenceIdName',
+        typeIdentifier: ts.createIdentifier('SomeType'),
+        propDeclarationName: 'b',
+        intentMethodName: 'intentMethodName',
+        intentReferenceIdKeyName: 'bId',
+        intentArguments: [],
+        loadMethodName: 'loadMethodName'
+      },
+      {
+        propertyReferenceIdName: 'propertyReferenceIdName',
+        typeIdentifier: ts.createIdentifier('SomeType'),
+        propDeclarationName: 'propDeclarationName',
+        intentMethodName: 'intentMethodName',
+        intentReferenceIdKeyName: 'intentReferenceIdKeyName',
+        intentArguments: ['a', 'b'],
+        loadMethodName: 'loadMethodName'
+      }
+    ]
+
     const meta = {
       propertyReferenceIdName: 'propertyReferenceIdName',
       typeIdentifier: ts.createIdentifier('SomeType'),
       propDeclarationName: 'propDeclarationName',
       intentMethodName: 'intentMethodName',
       intentReferenceIdKeyName: 'intentReferenceIdKeyName',
+      intentArguments: ['a', 'b'],
       loadMethodName: 'loadMethodName'
     }
-    expect(runTransformers(code, [dummyTransformer(createLoadResourceMethod, meta)])).toMatchSnapshot()
+    expect(runTransformers(code, [dummyTransformer(createLoadResourceMethod, meta, metaCollection)])).toMatchSnapshot()
   })
 })
 

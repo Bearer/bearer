@@ -15,3 +15,7 @@ export function loadName(name: string): string {
 export function initialName(name: string): string {
   return `${name}Initial`
 }
+
+export function idName(name: string): string {
+  return `${name}Id`
+}

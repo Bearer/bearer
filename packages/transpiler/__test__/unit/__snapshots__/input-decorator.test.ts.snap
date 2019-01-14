@@ -235,7 +235,7 @@ class NoOptionsComponent {
         }
     }
     _loadSpongeBob = () => {
-        this.fetcherRetrieveSpongeBob({ referenceId: this.patrick }).then(({ data }: {
+        this.fetcherRetrieveSpongeBob({ referenceId: this.patrick, farmerId: this.farmerRefId, spongeBobOverridedId: this.refNotOverrided }).then(({ data }: {
             data: BearerRef<Sponge>;
         }) => {
             if (data) {

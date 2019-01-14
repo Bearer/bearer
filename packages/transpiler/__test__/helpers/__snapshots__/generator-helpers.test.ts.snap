@@ -22,7 +22,7 @@ exports[`createFetcher generates stuff properly 1`] = `
 exports[`createLoadResourceMethod generates load resource method properly 1`] = `
 "class C {
     loadMethodName = () => {
-        this.intentMethodName({ intentReferenceIdKeyName: this.propertyReferenceIdName }).then(({ data }: {
+        this.intentMethodName({ intentReferenceIdKeyName: this.propertyReferenceIdName, aId: this.aPropertyReferenceIdName, bId: this.bPropertyReferenceIdName }).then(({ data }: {
             data: SomeType;
         }) => {
             if (data) {

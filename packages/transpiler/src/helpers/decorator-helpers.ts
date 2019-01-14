@@ -79,6 +79,7 @@ export function getDecoratorNamed(
   }
 }
 
+// tslint:disable-next-line:prefer-array-literal
 export function extractStringOptions<T>(objectLitteral: ts.ObjectLiteralExpression, keys: Array<keyof T>): Partial<T> {
   const values: Partial<T> = {}
   keys.map(value => {
@@ -90,8 +91,11 @@ export function extractStringOptions<T>(objectLitteral: ts.ObjectLiteralExpressi
   return values
 }
 
-export function extractArrayOptions<T>(objectLitteral: ts.ObjectLiteralExpression, keys: Array<keyof T>): Partial<T> {
-  const values: Partial<T> = {}
+export function extractArrayOptions<T>(
+  objectLitteral: ts.ObjectLiteralExpression,
+  keys: (keyof T)[]
+): { [P in keyof T]?: string[] } {
+  const values = {}
   keys.map(value => {
     const optionValue = getExpressionFromLiteralObject<ts.StringLiteral>(objectLitteral, value as string)
     if (optionValue && ts.isArrayLiteralExpression(optionValue)) {
@@ -99,14 +103,14 @@ export function extractArrayOptions<T>(objectLitteral: ts.ObjectLiteralExpressio
         if (ts.isStringLiteral(e)) {
           return e.text
         }
-        return null
+        return []
       })
     }
   })
   return values
 }
 
-export function extractBooleanOptions<T>(objectLitteral: ts.ObjectLiteralExpression, keys: Array<keyof T>): Partial<T> {
+export function extractBooleanOptions<T>(objectLitteral: ts.ObjectLiteralExpression, keys: (keyof T)[]): Partial<T> {
   const values: Partial<T> = {}
   keys.map(value => {
     const optionValue = getExpressionFromLiteralObject<ts.BooleanLiteral>(objectLitteral, value as string)

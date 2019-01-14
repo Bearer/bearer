@@ -83,6 +83,7 @@ export type TCreateLoadResourceMethod = {
   intentMethodName: string
   intentReferenceIdKeyName: string
   loadMethodName: string
+  intentArguments?: string[]
 }
 
 export type TCreateLoadDataCall = {

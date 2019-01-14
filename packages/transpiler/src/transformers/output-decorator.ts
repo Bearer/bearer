@@ -66,7 +66,7 @@ export default function OutputDecorator(_options: TransformerOptions = {}): ts.T
                     'propertyWatchedName',
                     'referenceKeyName'
                   ]),
-                  ...extractArrayOptions<TOutputDecoratorOptions>(callArgs, ['intentArguments']),
+                  ...extractArrayOptions<{ intentArguments: string[] }>(callArgs, ['intentArguments']),
                   ...extractBooleanOptions<TOutputDecoratorOptions>(callArgs, ['autoLoad'])
                 }
             outputs.push({
@@ -119,10 +119,13 @@ function injectOuputStatements(tsClass: ts.ClassDeclaration, outputsMeta: Output
         createProp(meta),
         ...createWatchers(meta),
         createInitialFetcher(meta),
-        createLoadResourceMethod({
-          ...(meta as TCreateLoadResourceMethod),
-          propDeclarationName: initialName(meta.propDeclarationName)
-        })
+        createLoadResourceMethod(
+          {
+            ...(meta as TCreateLoadResourceMethod),
+            propDeclarationName: initialName(meta.propDeclarationName)
+          },
+          outputsMeta
+        )
       ]
       return members.concat(outputMembers)
     },

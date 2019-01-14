@@ -91,7 +91,7 @@ export default function InputDecorator({ metadata }: TransformerOptions = {}): t
               'intentName',
               'propertyReferenceIdName'
             ]),
-            ...extractArrayOptions<TInputDecoratorOptions>(callArgs, ['intentArguments']),
+            ...extractArrayOptions<{ intentArguments: string[] }>(callArgs, ['intentArguments']),
             ...extractBooleanOptions<TInputDecoratorOptions>(callArgs, ['autoLoad'])
           }
     }
@@ -104,7 +104,7 @@ export default function InputDecorator({ metadata }: TransformerOptions = {}): t
           const inputMembers = [
             createLocalStateProperty(meta),
             createEventListener(meta),
-            createLoadResourceMethod(meta),
+            createLoadResourceMethod(meta, inputsMeta),
             createFetcher(meta),
             createRefIdWatcher(meta)
           ]
