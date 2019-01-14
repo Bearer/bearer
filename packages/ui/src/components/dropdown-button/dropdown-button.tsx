@@ -46,8 +46,8 @@ export class BearerDropdownButton {
   render() {
     const { content, ...rest } = this.btnProps
     const btnProps: JSXElements.BearerButtonAttributes = {
-      ...rest,
       kind: 'primary'
+      ...rest
     }
     return (
       <div class="root">
