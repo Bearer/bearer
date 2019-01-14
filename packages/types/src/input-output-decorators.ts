@@ -25,6 +25,10 @@ export type TInputDecoratorOptions = {
    */
   intentName: string
   /**
+   * Intent arguments
+   */
+  intentArguments: string[]
+  /**
    * Autoload data when component mounted
    * default: true
    */
@@ -46,6 +50,10 @@ export type TOutputDecoratorOptions = {
    * default : referenceId
    */
   intentReferenceIdKeyName: string
+  /**
+   * Intent arguments
+   */
+  intentArguments: string[]
   /**
    * Name of the key name used to send the data to the intent (in the body)
    * default: [propertyName]

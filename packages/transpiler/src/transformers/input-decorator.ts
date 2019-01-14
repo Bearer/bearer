@@ -6,17 +6,8 @@ import * as ts from 'typescript'
 
 import { Decorators, Properties } from '../constants'
 import { extractBooleanOptions, extractStringOptions, getDecoratorNamed } from '../helpers/decorator-helpers'
-import {
-  addAutoLoad,
-  createFetcher,
-  createLoadDataCall,
-  createLoadResourceMethod,
-} from '../helpers/generator-helpers'
-import {
-  loadName as _loadName,
-  retrieveFetcherName,
-  retrieveIntentName
-} from '../helpers/name-helpers'
+import { addAutoLoad, createFetcher, createLoadDataCall, createLoadResourceMethod } from '../helpers/generator-helpers'
+import { loadName as _loadName, retrieveFetcherName, retrieveIntentName } from '../helpers/name-helpers'
 import { getNodeName } from '../helpers/node-helpers'
 import { capitalize } from '../helpers/string'
 import { InputMeta, TransformerOptions } from '../types'
@@ -48,8 +39,8 @@ export default function InputDecorator({ metadata }: TransformerOptions = {}): t
       return ts.visitEachChild(sourceFileWithImports, replaceInputVisitor(inputsMeta), _transformContext)
     }
 
-    function retrieveInputsMetas(sourcefile: ts.SourceFile): Array<InputMeta> {
-      const inputs: Array<InputMeta> = []
+    function retrieveInputsMetas(sourcefile: ts.SourceFile): InputMeta[] {
+      const inputs: InputMeta[] = []
 
       const visitor = (tsNode: ts.Node) => {
         if (ts.isPropertyDeclaration(tsNode)) {
@@ -71,6 +62,7 @@ export default function InputDecorator({ metadata }: TransformerOptions = {}): t
               intializer: tsNode.initializer,
               watcherName: _watchName(name),
               intentReferenceIdKeyName: Properties.ReferenceId,
+              intentArguments: [],
               ...options
             })
           }
@@ -88,17 +80,18 @@ export default function InputDecorator({ metadata }: TransformerOptions = {}): t
       return !callArgs
         ? {}
         : {
-          ...extractStringOptions<TInputDecoratorOptions>(callArgs, [
-            'group',
-            'eventName',
-            'intentName',
-            'propertyReferenceIdName'
-          ]),
-          ...extractBooleanOptions<TInputDecoratorOptions>(callArgs, ['autoLoad'])
-        }
+            ...extractStringOptions<TInputDecoratorOptions>(callArgs, [
+              'group',
+              'eventName',
+              'intentName',
+              'propertyReferenceIdName',
+              'intentArguments'
+            ]),
+            ...extractBooleanOptions<TInputDecoratorOptions>(callArgs, ['autoLoad'])
+          }
     }
 
-    function injectInputStatements(tsClass: ts.ClassDeclaration, inputsMeta: Array<InputMeta>): ts.ClassDeclaration {
+    function injectInputStatements(tsClass: ts.ClassDeclaration, inputsMeta: InputMeta[]): ts.ClassDeclaration {
       const classNode = inputsMeta.reduce((classDeclaration, meta) => addAutoLoad(classDeclaration, meta), tsClass)
       const newMembers = inputsMeta.reduce(
         (members, meta) => {
@@ -131,7 +124,7 @@ export default function InputDecorator({ metadata }: TransformerOptions = {}): t
       )
     }
 
-    function replaceInputVisitor(inputsMeta: Array<InputMeta>): (tsNode: ts.Node) => ts.VisitResult<ts.Node> {
+    function replaceInputVisitor(inputsMeta: InputMeta[]): (tsNode: ts.Node) => ts.VisitResult<ts.Node> {
       return (tsNode: ts.Node) => {
         if (ts.isClassDeclaration(tsNode)) {
           return ts.visitEachChild(

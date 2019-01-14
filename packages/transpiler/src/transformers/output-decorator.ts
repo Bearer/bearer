@@ -6,17 +6,8 @@ import * as ts from 'typescript'
 
 import { Decorators, Properties, Types } from '../constants'
 import { extractBooleanOptions, extractStringOptions, getDecoratorNamed } from '../helpers/decorator-helpers'
-import {
-  addAutoLoad,
-  createFetcher,
-  createLoadResourceMethod,
-} from '../helpers/generator-helpers'
-import {
-  initialName,
-  retrieveFetcherName,
-  retrieveIntentName,
-  loadName
-} from '../helpers/name-helpers'
+import { addAutoLoad, createFetcher, createLoadResourceMethod } from '../helpers/generator-helpers'
+import { initialName, retrieveFetcherName, retrieveIntentName, loadName } from '../helpers/name-helpers'
 import { getNodeName } from '../helpers/node-helpers'
 import { capitalize } from '../helpers/string'
 import { TCreateLoadResourceMethod, TransformerOptions } from '../types'
@@ -51,8 +42,8 @@ export default function OutputDecorator(_options: TransformerOptions = {}): ts.T
       return ts.visitEachChild(sourceFileWithImports, visit(outputsMeta), _transformContext)
     }
 
-    function retrieveOutputsMetas(tsSourceFile: ts.SourceFile): Array<OutputMeta> {
-      const outputs: Array<OutputMeta> = []
+    function retrieveOutputsMetas(tsSourceFile: ts.SourceFile): OutputMeta[] {
+      const outputs: OutputMeta[] = []
 
       const visitor = (tsNode: ts.Node) => {
         if (ts.isPropertyDeclaration(tsNode)) {
@@ -63,16 +54,17 @@ export default function OutputDecorator(_options: TransformerOptions = {}): ts.T
             const options = !callArgs
               ? {}
               : {
-                ...extractStringOptions<TOutputDecoratorOptions>(callArgs, [
-                  'eventName',
-                  'intentName',
-                  'intentPropertyName',
-                  'propertyWatchedName',
-                  'referenceKeyName'
-                ]),
+                  ...extractStringOptions<TOutputDecoratorOptions>(callArgs, [
+                    'eventName',
+                    'intentName',
+                    'intentPropertyName',
+                    'propertyWatchedName',
+                    'referenceKeyName',
+                    'intentArguments'
+                  ]),
 
-                ...extractBooleanOptions<TOutputDecoratorOptions>(callArgs, ['autoLoad'])
-              }
+                  ...extractBooleanOptions<TOutputDecoratorOptions>(callArgs, ['autoLoad'])
+                }
             outputs.push({
               eventName: outputEventName(name),
               intentName: saveIntentName(name),
@@ -88,6 +80,7 @@ export default function OutputDecorator(_options: TransformerOptions = {}): ts.T
               propertyWatchedName: name,
               propertyReferenceIdName: refIdName(name),
               autoLoad: true,
+              intentArguments: [],
               ...options
             })
           }
@@ -100,7 +93,7 @@ export default function OutputDecorator(_options: TransformerOptions = {}): ts.T
       return outputs
     }
 
-    function visit(outputsMeta: Array<OutputMeta>) {
+    function visit(outputsMeta: OutputMeta[]) {
       return (tsNode: ts.Node): ts.VisitResult<ts.Node> => {
         if (ts.isClassDeclaration(tsNode)) {
           return injectOuputStatements(tsNode, outputsMeta)
@@ -111,7 +104,7 @@ export default function OutputDecorator(_options: TransformerOptions = {}): ts.T
   }
 }
 
-function injectOuputStatements(tsClass: ts.ClassDeclaration, outputsMeta: Array<OutputMeta>): ts.ClassDeclaration {
+function injectOuputStatements(tsClass: ts.ClassDeclaration, outputsMeta: OutputMeta[]): ts.ClassDeclaration {
   const classNode = outputsMeta.reduce((classDeclaration, meta) => addAutoLoad(classDeclaration, meta), tsClass)
   const newMembers = outputsMeta.reduce(
     (members, meta) => {
@@ -229,16 +222,19 @@ function createWatchers(meta: OutputMeta): ts.MethodDeclaration[] {
       undefined,
       [ts.createParameter(undefined, undefined, undefined, newValue, undefined, undefined, undefined)], // parameters
       undefined,
-      ts.createBlock([
-        ts.createStatement(createIntentCall(meta)),
-        ts.createStatement(
-          ts.createBinary(
-            ts.createPropertyAccess(ts.createThis(), initialName(meta.propDeclarationName)),
-            ts.SyntaxKind.EqualsToken,
-            ts.createNull()
+      ts.createBlock(
+        [
+          ts.createStatement(createIntentCall(meta)),
+          ts.createStatement(
+            ts.createBinary(
+              ts.createPropertyAccess(ts.createThis(), initialName(meta.propDeclarationName)),
+              ts.SyntaxKind.EqualsToken,
+              ts.createNull()
+            )
           )
-        )
-      ], true)
+        ],
+        true
+      )
     )
   ]
 }
@@ -335,7 +331,7 @@ function createIntentCall(meta: OutputMeta) {
   )
 }
 
-function createEmitCall(meta: OutputMeta, properties: Array<ts.ObjectLiteralElementLike>): ts.CallExpression {
+function createEmitCall(meta: OutputMeta, properties: ts.ObjectLiteralElementLike[]): ts.CallExpression {
   return ts.createCall(
     ts.createPropertyAccess(ts.createPropertyAccess(ts.createThis(), meta.eventName), 'emit'),
     undefined,
