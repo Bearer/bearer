@@ -144,7 +144,6 @@ declare global {
     }
 
     interface BearerButtonPopover {
-      'arrow': boolean;
       'backNav': boolean;
       'btnProps': JSXElements.BearerButtonAttributes;
       'direction': string;
@@ -606,7 +605,6 @@ declare global {
     }
 
     export interface BearerButtonPopoverAttributes extends HTMLAttributes {
-      'arrow'?: boolean;
       'backNav'?: boolean;
       'btnProps'?: JSXElements.BearerButtonAttributes;
       'direction'?: string;

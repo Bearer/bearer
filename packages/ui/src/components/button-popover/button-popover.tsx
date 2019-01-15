@@ -14,13 +14,10 @@ export class BearerButtonPopover {
   @Prop()
   opened: boolean
   @Prop()
-  direction: string = 'top'
+  direction: string = 'right'
   @Prop()
-  arrow: boolean = true
   @Prop()
-  header: string
-  @Prop()
-  backNav: boolean
+  backNav: boolean = true
   @Prop()
   btnProps: JSXElements.BearerButtonAttributes = {}
 
@@ -62,24 +59,20 @@ export class BearerButtonPopover {
   }
 
   render() {
-    return (
-      <div class="root">
-        <bearer-button {...this.btnProps} onClick={this.toggleDisplay} />
+    return [
+      <bearer-button {...this.btnProps} kind="secondary" onClick={this.toggleDisplay}>
+        <slot name="btn-content" />
+      </bearer-button>,
 
-        <div
-          class={`popover fade show bs-popover-${this.direction} direction-${this.direction} ${!this.visible &&
-            'hidden'}`}
-        >
-          <h3 class="popover-header">
-            {this.backNav && <bearer-navigator-back class="header-arrow" />}
-            <span class="header">{this.header}</span>
-          </h3>
-          <div class="popover-body">
-            <slot />
-          </div>
-          {this.arrow && <div class="arrow" />}
+      <div class={`popover direction-${this.direction} ${!this.visible && 'hidden'}`}>
+        <h3 class="popover-header">
+          {this.backNav && <bearer-navigator-back class="header-arrow" />}
+          <span class="header">{this.header}</span>
+        </h3>
+        <div class="popover-body">
+          <slot />
         </div>
       </div>
-    )
+    ]
   }
 }

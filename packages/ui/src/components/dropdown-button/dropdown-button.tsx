@@ -1,5 +1,4 @@
-import { Component, Listen, Method, Prop, State } from '@bearer/core'
-import Bearer from '@bearer/core'
+import Bearer, { Component, Listen, Method, Prop, State } from '@bearer/core'
 
 @Component({
   tag: 'bearer-dropdown-button',
@@ -8,7 +7,7 @@ import Bearer from '@bearer/core'
 })
 export class BearerDropdownButton {
   @State() visible: boolean = false
-  @Prop() opened: boolean
+  @Prop() opened: boolean = false
   @Prop() innerListener: string
   @Prop() btnProps: JSXElements.BearerButtonAttributes = {}
 
@@ -33,9 +32,7 @@ export class BearerDropdownButton {
   }
 
   componentDidLoad() {
-    if (this.opened === false) {
-      this.visible = false
-    }
+    this.visible = this.opened
     if (this.innerListener) {
       Bearer.emitter.addListener(this.innerListener, () => {
         this.visible = false
@@ -51,8 +48,8 @@ export class BearerDropdownButton {
     }
     return (
       <div class="root">
-        <bearer-button {...btnProps} onClick={this.toggleDisplay}>
-          {content}
+        <bearer-button {...btnProps} kind="action" onClick={this.toggleDisplay}>
+          {content || <slot name="btn-content" />}
           <span class="symbol">▾</span>
         </bearer-button>
         {this.visible && (

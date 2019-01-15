@@ -61,12 +61,36 @@
       connectedCallback() {
         this._shadowRoot.innerHTML =
           `
+          <bearer-button-popover>
+            <span slot="btn-content">Closed dropdown</span>
+            <bearer-setup></bearer-setup>
+          </bearer-button-popover>
+          <br />
+          <br />
+          <bearer-button-popover opened="true">
+            <span slot="btn-content">Opened dropdown</span>
+            <bearer-setup></bearer-setup>
+          </bearer-button-popover>
+          <br />
+          <br />
+          <bearer-dropdown-button>
+            <span slot="btn-content">Setup component</span>
+            <bearer-setup ></bearer-setup>
+          </bearer-dropdown-button>
+          <br />
+          <br />
+          <bearer-dropdown-button opened="true">
+            <span slot="btn-content">Setup component</span>
+            <bearer-setup ></bearer-setup>
+          </bearer-dropdown-button>
+          <br />
+          <br />
           <bearer-button kind="action">I'm an action</bearer-button>
           <bearer-button>I'm a button</bearer-button>
           <bearer-button kind="secondary" size="large">I'm a  large button</bearer-button>
           <bearer-button size="small">I'm a small button</bearer-button>
           <bearer-button disabled size="small">I'm a small button</bearer-button>
-          <br>
+         
         `
       }
     }
@@ -79,7 +103,7 @@
       display: flex;
       min-height: 100vh;
       margin: 0;
-      padding: 0;
+      padding: 2vw;
       align-items: center;
       justify-content: center;
       flex-direction: column;
