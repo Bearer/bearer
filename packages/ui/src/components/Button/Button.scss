@@ -79,6 +79,7 @@
   transition: box-shadow var(--bearer-transition-duration, #{$bearer-transition-duration});
   font: var(--bearer-font-family, inherit);
   font-size: var(--font-size);
+  line-height: 1.1;
   color: var(--font-color);
   background: var(--bg-color);
   border-radius: var(--border-radius, 4px);
