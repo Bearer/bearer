@@ -12,7 +12,7 @@ export class BearerForm {
   @Prop() clearOnInput: boolean
   @State() hasBeenCleared: boolean
   @Event() submit: EventEmitter
-  @State() values: Array<string> = []
+  @State() values: string[] = []
 
   handleSubmit() {
     this.submit.emit(this.fields)
@@ -75,7 +75,6 @@ export class BearerForm {
         case 'password':
         case 'email':
         case 'tel':
-        case 'submit':
           return (
             <bearer-input
               type={input.type}
@@ -85,7 +84,7 @@ export class BearerForm {
               hint={input.hint}
               placeholder={input.placeholder}
               onValueChange={value => this.handleValue(input.controlName, value)}
-              onInputClick={_ => this.handleInputClicked()}
+              onInputClick={this.handleInputClicked}
             />
           )
         case 'textarea':
@@ -139,7 +138,7 @@ export class BearerForm {
     return (
       <form onSubmit={() => this.handleSubmit()}>
         {this.renderInputs()}
-        <bearer-input type="submit" disabled={!this.isValid()} onSubmit={() => this.handleSubmit()} />
+        <bearer-button type="submit" as="input" disabled={!this.isValid()} onSubmit={this.handleSubmit} />
       </form>
     )
   }

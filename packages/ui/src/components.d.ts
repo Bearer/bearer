@@ -80,6 +80,7 @@ declare global {
       'kind': BKind;
       'outline': boolean;
       'size': 'medium' | 'small' | 'large';
+      'type': string;
     }
 
     interface BearerCheckbox {
@@ -537,6 +538,7 @@ declare global {
       'kind'?: BKind;
       'outline'?: boolean;
       'size'?: 'medium' | 'small' | 'large';
+      'type'?: string;
     }
 
     export interface BearerCheckboxAttributes extends HTMLAttributes {
