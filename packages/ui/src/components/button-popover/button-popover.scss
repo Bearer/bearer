@@ -12,9 +12,13 @@
 
 .popover {
   position: absolute;
-  background-color: var(--bg-color);
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  min-height: 250px;
   min-width: 320px;
   max-width: 100vw;
+  background-color: var(--bg-color);
   box-shadow: var(--shadow);
   padding: var(--vertical-padding) var(--horizontal-padding);
   z-index: 10;
@@ -69,6 +73,8 @@
   display: flex;
   overflow: auto;
   max-height: calc(80vh - 50px);
+  padding: 0;
+  flex: 1;
 }
 
 .popover-header {
