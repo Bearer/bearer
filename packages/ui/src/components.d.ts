@@ -247,7 +247,7 @@ declare global {
     }
 
     interface BearerSetup {
-      'fields': Array<any> | string;
+      'fields': any[] | string;
       'referenceId': string;
       'scenarioId': string;
     }
@@ -712,7 +712,7 @@ declare global {
     }
 
     export interface BearerSetupAttributes extends HTMLAttributes {
-      'fields'?: Array<any> | string;
+      'fields'?: any[] | string;
       'onSetupSuccess'?: (event: CustomEvent) => void;
       'referenceId'?: string;
       'scenarioId'?: string;

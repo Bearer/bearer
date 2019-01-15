@@ -1,24 +1,17 @@
-import Bearer, { Component, Listen, Method, Prop, State } from '@bearer/core'
+import { Component, Listen, Method, Prop, Element } from '@bearer/core'
 
 @Component({
-  tag: 'bearer-dropdown-button',
-  styleUrl: 'dropdown-button.scss',
-  shadow: true
+  tag: 'bearer-dropdown-button'
 })
 export class BearerDropdownButton {
-  @State() visible: boolean = false
+  @Element() el: HTMLElement
   @Prop() opened: boolean = false
   @Prop() innerListener: string
   @Prop() btnProps: JSXElements.BearerButtonAttributes = {}
 
-  toggleDisplay = e => {
-    e.preventDefault()
-    this.visible = !this.visible
-  }
-
   @Listen('body:click')
   clickOutsideHandler() {
-    this.visible = false
+    this.toggle(false)
   }
 
   @Listen('click')
@@ -28,16 +21,27 @@ export class BearerDropdownButton {
 
   @Method()
   toggle(opened: boolean) {
-    this.visible = opened
+    this.popover.toggle(opened)
+  }
+
+  close = () => {
+    this.toggle(false)
   }
 
   componentDidLoad() {
-    this.visible = this.opened
     if (this.innerListener) {
-      Bearer.emitter.addListener(this.innerListener, () => {
-        this.visible = false
-      })
+      this.el.addEventListener(this.innerListener, this.close)
     }
+  }
+
+  componentDidUnload() {
+    if (this.innerListener) {
+      this.el.removeEventListener(this.innerListener, this.close)
+    }
+  }
+
+  private get popover(): HTMLBearerDropdownButtonElement {
+    return this.el.querySelector<HTMLBearerDropdownButtonElement>('bearer-button-popover')
   }
 
   render() {
@@ -47,11 +51,13 @@ export class BearerDropdownButton {
       ...rest
     }
     return (
-      <bearer-button-popover btnProps={btnProps} direction="bottom" aligned="left">
+      <bearer-button-popover btnProps={btnProps} direction="bottom" aligned="left" opened={this.opened}>
         <slot />
         <span slot="btn-content">
           <slot name="btn-content" />
-          <span class="symbol">▾</span>
+          <span class="symbol" style={{ paddingLeft: '10px' }}>
+            ▾
+          </span>
         </span>
       </bearer-button-popover>
     )

@@ -13,7 +13,7 @@ type TSetupPayload = {
 })
 export class BearerSetup {
   @Prop()
-  fields: Array<any> | string = []
+  fields: any[] | string = []
   @Prop()
   referenceId: string
   @Prop()
@@ -45,7 +45,7 @@ export class BearerSetup {
         Bearer.emitter.emit(`setup_success:${this.scenarioId}`, {
           referenceId
         })
-        this.setupSuccess.emit({ referenceId })
+        this.setupSuccess.emit({ referenceId, scenarioId: this.scenarioId })
       })
       .catch(() => {
         this.error = true
@@ -56,7 +56,7 @@ export class BearerSetup {
 
   componentWillLoad() {
     if (typeof this.fields !== 'string') {
-      this.fieldSet = new FieldSet(this.fields as Array<any>)
+      this.fieldSet = new FieldSet(this.fields as any[])
       return
     }
     switch (this.fields) {
