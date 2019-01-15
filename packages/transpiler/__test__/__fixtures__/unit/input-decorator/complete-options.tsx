@@ -36,7 +36,7 @@ class NoOptionsComponent {
     eventName: 'patrickWasKilled',
     intentName: 'killPatrick',
     autoLoad: false,
-    intentArguments: ['farmer', 'spongeBobOverrided']
+    intentArguments: ['farmer', 'spongeBobOverrided', 'authId']
   })
   spongeBob: BearerRef<Sponge>
 

@@ -21,24 +21,27 @@ export function createFetcher(meta: CreateFetcherMeta) {
   )
 }
 
-function findPropertyReferenceIdName(propName: string, metaCollection: TCreateLoadResourceMethod[]) {
-  return metaCollection.find(meta => meta.propDeclarationName === propName).propertyReferenceIdName
+function propertyReferenceIdNames(meta: TCreateLoadResourceMethod, metaCollection: TCreateLoadResourceMethod[]) {
+  return meta.intentArguments.map(name => {
+    const metaInfo = metaCollection.find(meta => meta.propDeclarationName === name)
+    if (metaInfo) {
+      return ts.createPropertyAssignment(
+        idName(name),
+        ts.createPropertyAccess(ts.createThis(), metaInfo.propertyReferenceIdName)
+      )
+    }
+    return ts.createPropertyAssignment(name, ts.createPropertyAccess(ts.createThis(), name))
+  })
 }
 
 export function createLoadResourceMethod(meta: TCreateLoadResourceMethod, metaCollection: TCreateLoadResourceMethod[]) {
-  const intentArguments = meta.intentArguments.map(name => {
-    return ts.createPropertyAssignment(
-      idName(name),
-      ts.createPropertyAccess(ts.createThis(), findPropertyReferenceIdName(name, metaCollection))
-    )
-  })
   const intentCall = ts.createCall(ts.createPropertyAccess(ts.createThis(), meta.intentMethodName), undefined, [
     ts.createObjectLiteral([
       ts.createPropertyAssignment(
         meta.intentReferenceIdKeyName,
         ts.createPropertyAccess(ts.createThis(), meta.propertyReferenceIdName)
       ),
-      ...intentArguments
+      ...propertyReferenceIdNames(meta, metaCollection)
     ])
   ])
   const udapteState = ts.createArrowFunction(
