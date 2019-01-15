@@ -47,17 +47,13 @@ export class BearerDropdownButton {
       ...rest
     }
     return (
-      <div class="root">
-        <bearer-button {...btnProps} kind="action" onClick={this.toggleDisplay}>
-          {content || <slot name="btn-content" />}
+      <bearer-button-popover btnProps={btnProps} direction="bottom" aligned="left">
+        <slot />
+        <span slot="btn-content">
+          <slot name="btn-content" />
           <span class="symbol">▾</span>
-        </bearer-button>
-        {this.visible && (
-          <div class="dropdown-down">
-            <slot />
-          </div>
-        )}
-      </div>
+        </span>
+      </bearer-button-popover>
     )
   }
 }

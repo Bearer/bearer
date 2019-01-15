@@ -49,6 +49,18 @@
   }
 }
 
+:host([aligned='left']) .direction-bottom {
+  left: 0;
+  transform: initial;
+  margin-left: initial;
+}
+
+:host([aligned='right']) .direction-bottom {
+  right: 0;
+  transform: initial;
+  margin-left: initial;
+}
+
 .popover-body {
   display: flex;
   overflow: auto;

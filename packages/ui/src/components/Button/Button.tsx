@@ -9,8 +9,8 @@ export type BKind = 'action' | 'primary' | 'secondary' | 'success' | 'danger' | 
 })
 export class Button {
   @Prop() content: any
-  @Prop() kind: BKind = 'primary'
-  @Prop() size: 'md' | 'sm' | 'lg' = 'md'
+  @Prop({ reflectToAttr: true }) kind: BKind = 'primary'
+  @Prop() size: 'medium' | 'small' | 'large' = 'medium'
   @Prop() as: string = 'button'
   @Prop() outline: boolean = false
   @Prop() disabled: boolean = false

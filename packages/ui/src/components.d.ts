@@ -18,6 +18,9 @@ import {
   FieldSet,
 } from './components/Forms/Fieldset';
 import {
+  BKind as BKind2,
+} from './components/Button/Button';
+import {
   TMember,
   TMemberRenderer,
 } from './components/navigator/types';
@@ -69,7 +72,7 @@ declare global {
       'disabled': boolean;
       'kind': BKind;
       'outline': boolean;
-      'size': 'md' | 'sm' | 'lg';
+      'size': 'medium' | 'small' | 'large';
     }
 
     interface BearerCheckbox {
@@ -144,10 +147,12 @@ declare global {
     }
 
     interface BearerButtonPopover {
+      'aligned': string;
       'backNav': boolean;
       'btnProps': JSXElements.BearerButtonAttributes;
       'direction': string;
       'header': string;
+      'kind': BKind;
       'opened': boolean;
       'toggle': (opened: boolean) => void;
     }
@@ -523,7 +528,7 @@ declare global {
       'disabled'?: boolean;
       'kind'?: BKind;
       'outline'?: boolean;
-      'size'?: 'md' | 'sm' | 'lg';
+      'size'?: 'medium' | 'small' | 'large';
     }
 
     export interface BearerCheckboxAttributes extends HTMLAttributes {
@@ -605,10 +610,12 @@ declare global {
     }
 
     export interface BearerButtonPopoverAttributes extends HTMLAttributes {
+      'aligned'?: string;
       'backNav'?: boolean;
       'btnProps'?: JSXElements.BearerButtonAttributes;
       'direction'?: string;
       'header'?: string;
+      'kind'?: BKind;
       'onVisibilityChange'?: (event: CustomEvent) => void;
       'opened'?: boolean;
     }

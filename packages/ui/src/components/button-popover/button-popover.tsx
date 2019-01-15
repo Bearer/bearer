@@ -1,4 +1,7 @@
 import { Component, Event, EventEmitter, Listen, Method, Prop, State } from '@bearer/core'
+import { BKind } from '../Button/Button'
+
+export type TAlignement = 'left' | 'right'
 
 @Component({
   tag: 'bearer-button-popover',
@@ -8,13 +11,14 @@ import { Component, Event, EventEmitter, Listen, Method, Prop, State } from '@be
 export class BearerButtonPopover {
   @State()
   _visible: boolean = false
-
+  @Prop({ reflectToAttr: true }) kind: BKind = 'action'
   @Event()
   visibilityChange: EventEmitter
-  @Prop()
+  @Prop({ reflectToAttr: true })
   opened: boolean
-  @Prop()
+  @Prop({ reflectToAttr: true })
   direction: string = 'right'
+  @Prop({ reflectToAttr: true }) aligned = 'left'
   @Prop()
   @Prop()
   backNav: boolean = true
@@ -60,7 +64,8 @@ export class BearerButtonPopover {
 
   render() {
     return [
-      <bearer-button {...this.btnProps} kind="secondary" onClick={this.toggleDisplay}>
+      <bearer-button {...this.btnProps} kind={this.kind} onClick={this.toggleDisplay}>
+        {this.kind}
         <slot name="btn-content" />
       </bearer-button>,
 
