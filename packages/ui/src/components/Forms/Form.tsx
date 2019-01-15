@@ -2,9 +2,7 @@ import { Component, Prop, State, Event, Listen, Method, EventEmitter } from '@be
 import { FieldSet } from './Fieldset'
 
 @Component({
-  tag: 'bearer-form',
-  styleUrl: './Form.scss',
-  shadow: true
+  tag: 'bearer-form'
 })
 export class BearerForm {
   @Prop({ mutable: true })
