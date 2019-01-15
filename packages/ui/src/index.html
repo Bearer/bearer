@@ -67,20 +67,20 @@
           </bearer-button-popover>
           <br />
           <br />
-          <bearer-button-popover opened="true">
+          <bearer-button-popover opened="true" header="Come on">
             <span slot="btn-content">Opened dropdown</span>
             <bearer-setup></bearer-setup>
           </bearer-button-popover>
           <br />
           <br />
-          <bearer-dropdown-button>
-            <span slot="btn-content">Setup component</span>
+          <bearer-dropdown-button inner-listener="setupSuccess">
+            <span slot="dropdown-btn-content">Dropdown setup closed</span>
             <bearer-setup ></bearer-setup>
           </bearer-dropdown-button>
           <br />
           <br />
           <bearer-dropdown-button opened="true" inner-listener="setupSuccess">
-            <span slot="btn-content">Setup component</span>
+            <span slot="dropdown-btn-content">Dropdown setup opened</span>
             <bearer-setup ></bearer-setup>
           </bearer-dropdown-button>
           <br />

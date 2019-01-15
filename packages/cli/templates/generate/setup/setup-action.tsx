@@ -16,7 +16,8 @@ export class SetupAction {
   @State() innerListener = `setup_success:BEARER_SCENARIO_ID`
   render() {
     return (
-      <bearer-dropdown-button innerListener={this.innerListener} btnProps={ { content: "Setup component" } }>
+      <bearer-dropdown-button innerListener={this.innerListener}>
+        <span slot="dropdown-btn-content">Setup component</span>
         <bearer-setup onSetupSuccess={this.onSetupSuccess} scenarioId="BEARER_SCENARIO_ID" fields={this.fields} />
       </bearer-dropdown-button>
     )

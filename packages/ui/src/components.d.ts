@@ -21,9 +21,16 @@ import {
   BKind as BKind2,
 } from './components/Button/Button';
 import {
+  TAlignement,
+  TDirection,
+} from './components/button-popover/button-popover';
+import {
   TMember,
   TMemberRenderer,
 } from './components/navigator/types';
+import {
+  TDirection as TDirection2,
+} from './components/button-popover/button-popover';
 import {
   TFetchBearerData,
 } from '@bearer/core';
@@ -147,10 +154,10 @@ declare global {
     }
 
     interface BearerButtonPopover {
-      'aligned': string;
+      'aligned': TAlignement;
       'backNav': boolean;
       'btnProps': JSXElements.BearerButtonAttributes;
-      'direction': string;
+      'direction': TDirection;
       'header': string;
       'kind': BKind;
       'opened': boolean;
@@ -168,6 +175,7 @@ declare global {
     }
 
     interface BearerDropdownButton {
+      'backNav': boolean;
       'btnProps': JSXElements.BearerButtonAttributes;
       'innerListener': string;
       'opened': boolean;
@@ -210,7 +218,7 @@ declare global {
     interface BearerNavigator {
       'btnProps': JSXElements.BearerButtonAttributes;
       'complete': <T>(payload: { data: T; complete(): void }) => void;
-      'direction': string;
+      'direction': TDirection;
       'display': string;
     }
 
@@ -610,10 +618,10 @@ declare global {
     }
 
     export interface BearerButtonPopoverAttributes extends HTMLAttributes {
-      'aligned'?: string;
+      'aligned'?: TAlignement;
       'backNav'?: boolean;
       'btnProps'?: JSXElements.BearerButtonAttributes;
-      'direction'?: string;
+      'direction'?: TDirection;
       'header'?: string;
       'kind'?: BKind;
       'onVisibilityChange'?: (event: CustomEvent) => void;
@@ -632,6 +640,7 @@ declare global {
     }
 
     export interface BearerDropdownButtonAttributes extends HTMLAttributes {
+      'backNav'?: boolean;
       'btnProps'?: JSXElements.BearerButtonAttributes;
       'innerListener'?: string;
       'opened'?: boolean;
@@ -674,7 +683,7 @@ declare global {
     export interface BearerNavigatorAttributes extends HTMLAttributes {
       'btnProps'?: JSXElements.BearerButtonAttributes;
       'complete'?: <T>(payload: { data: T; complete(): void }) => void;
-      'direction'?: string;
+      'direction'?: TDirection;
       'display'?: string;
     }
 

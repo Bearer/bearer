@@ -1,5 +1,4 @@
 import { Component, Prop, Event, EventEmitter } from '@bearer/core'
-import BackArrow from './back-arrow'
 
 @Component({
   tag: 'bearer-navigator-back',
@@ -16,7 +15,7 @@ export class BearerNavigatorBack {
   render() {
     return (
       <button onClick={this.back} disabled={this.disabled}>
-        <BackArrow />
+        <i />
       </button>
     )
   }

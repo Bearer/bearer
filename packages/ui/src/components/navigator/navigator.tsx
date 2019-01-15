@@ -1,5 +1,6 @@
 import { Component, Element, Listen, Prop, State } from '@bearer/core'
 
+import { TDirection } from '../button-popover/button-popover'
 const NAVIGATOR_AUTH_SCREEN_NAME = 'BEARER-NAVIGATOR-AUTH-SCREEN'
 
 @Component({
@@ -10,7 +11,7 @@ export class BearerPopoverNavigator {
   @Element()
   el: HTMLElement
   @State()
-  screens: Array<any> = []
+  screens: any[] = []
   @State()
   screenData: object = {}
   @State()
@@ -21,7 +22,7 @@ export class BearerPopoverNavigator {
   navigationTitle: string
 
   @Prop()
-  direction: string = 'right'
+  direction: TDirection = 'right'
   @Prop()
   btnProps: JSXElements.BearerButtonAttributes = { content: 'Activate' }
   @Prop()
@@ -102,13 +103,11 @@ export class BearerPopoverNavigator {
     return this.screens[this._visibleScreenIndex]
   }
 
-  get screenNodes(): Array<HTMLBearerNavigatorScreenElement> {
+  get screenNodes(): HTMLBearerNavigatorScreenElement[] {
     return this.el.shadowRoot
       ? ((this.el.shadowRoot.querySelector('slot:not([name])') as HTMLSlotElement)
           .assignedNodes()
-          .filter((node: HTMLBearerNavigatorScreenElement) => node.willAppear) as Array<
-          HTMLBearerNavigatorScreenElement
-        >)
+          .filter((node: HTMLBearerNavigatorScreenElement) => node.willAppear) as HTMLBearerNavigatorScreenElement[])
       : []
   }
 

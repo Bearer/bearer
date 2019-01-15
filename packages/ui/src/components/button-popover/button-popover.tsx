@@ -2,6 +2,7 @@ import { Component, Event, EventEmitter, Listen, Method, Prop, State } from '@be
 import { BKind } from '../Button/Button'
 
 export type TAlignement = 'left' | 'right'
+export type TDirection = 'left' | 'right' | 'top' | 'bottom'
 
 @Component({
   tag: 'bearer-button-popover',
@@ -9,21 +10,20 @@ export type TAlignement = 'left' | 'right'
   shadow: true
 })
 export class BearerButtonPopover {
-  @State()
-  _visible: boolean = false
-  @Prop({ reflectToAttr: true }) kind: BKind = 'action'
   @Event()
   visibilityChange: EventEmitter
-  @Prop({ reflectToAttr: true })
-  opened: boolean
-  @Prop({ reflectToAttr: true })
-  direction: string = 'right'
-  @Prop({ reflectToAttr: true }) aligned = 'left'
-  @Prop()
-  @Prop()
-  backNav: boolean = true
-  @Prop()
-  btnProps: JSXElements.BearerButtonAttributes = {}
+
+  @Prop({ reflectToAttr: true }) kind: BKind = 'action'
+  @Prop({ reflectToAttr: true }) opened: boolean
+  @Prop({ reflectToAttr: true }) direction: TDirection = 'right'
+  @Prop({ reflectToAttr: true }) aligned: TAlignement = 'left'
+
+  @Prop() header: string
+  @Prop() backNav: boolean = true
+  @Prop() btnProps: JSXElements.BearerButtonAttributes = {}
+
+  @State()
+  _visible: boolean = false
 
   toggleDisplay = e => {
     e.preventDefault()
@@ -65,15 +65,16 @@ export class BearerButtonPopover {
   render() {
     return [
       <bearer-button {...this.btnProps} kind={this.kind} onClick={this.toggleDisplay}>
-        {this.kind}
         <slot name="btn-content" />
       </bearer-button>,
 
-      <div class={`popover direction-${this.direction} ${!this.visible && 'hidden'}`}>
-        <h3 class="popover-header">
-          {this.backNav && <bearer-navigator-back class="header-arrow" />}
-          <span class="header">{this.header}</span>
-        </h3>
+      <div class={`popover direction-${this.direction} ${!this.visible && 'hidden'} aligned-${this.aligned}`}>
+        {(this.backNav || this.header) && (
+          <h3 class="popover-header">
+            {this.backNav && <bearer-navigator-back class="header-arrow" />}
+            <span class="header">{this.header}</span>
+          </h3>
+        )}
         <div class="popover-body">
           <slot />
         </div>

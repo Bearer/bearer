@@ -8,7 +8,7 @@ export class BearerDropdownButton {
   @Prop() opened: boolean = false
   @Prop() innerListener: string
   @Prop() btnProps: JSXElements.BearerButtonAttributes = {}
-
+  @Prop() backNav: boolean = false
   @Listen('body:click')
   clickOutsideHandler() {
     this.toggle(false)
@@ -51,14 +51,20 @@ export class BearerDropdownButton {
       ...rest
     }
     return (
-      <bearer-button-popover btnProps={btnProps} direction="bottom" aligned="left" opened={this.opened}>
-        <slot />
+      <bearer-button-popover
+        btnProps={btnProps}
+        direction="bottom"
+        aligned="left"
+        opened={this.opened}
+        backNav={this.backNav}
+      >
         <span slot="btn-content">
-          <slot name="btn-content" />
+          <slot name="dropdown-btn-content" />
           <span class="symbol" style={{ paddingLeft: '10px' }}>
             ▾
           </span>
         </span>
+        <slot />
       </bearer-button-popover>
     )
   }
