@@ -216,7 +216,7 @@ declare global {
     }
 
     interface BearerNavigator {
-      'btnProps': JSXElements.BearerButtonAttributes;
+      'btnKind': BKind;
       'complete': <T>(payload: { data: T; complete(): void }) => void;
       'direction': TDirection;
       'display': string;
@@ -681,7 +681,7 @@ declare global {
     }
 
     export interface BearerNavigatorAttributes extends HTMLAttributes {
-      'btnProps'?: JSXElements.BearerButtonAttributes;
+      'btnKind'?: BKind;
       'complete'?: <T>(payload: { data: T; complete(): void }) => void;
       'direction'?: TDirection;
       'display'?: string;

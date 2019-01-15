@@ -64,7 +64,7 @@ export class BearerButtonPopover {
 
   render() {
     return [
-      <bearer-button {...this.btnProps} kind={this.kind} onClick={this.toggleDisplay}>
+      <bearer-button kind={this.kind} {...this.btnProps} onClick={this.toggleDisplay}>
         <slot name="btn-content" />
       </bearer-button>,
 

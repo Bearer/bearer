@@ -22,6 +22,7 @@
   box-shadow: var(--shadow);
   padding: var(--vertical-padding) var(--horizontal-padding);
   z-index: 10;
+  overflow: auto;
 }
 
 .popover {
@@ -70,8 +71,6 @@
 }
 
 .popover-body {
-  display: flex;
-  overflow: auto;
   max-height: calc(80vh - 50px);
   padding: 0;
   flex: 1;

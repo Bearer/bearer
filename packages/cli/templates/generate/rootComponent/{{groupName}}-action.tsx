@@ -13,7 +13,8 @@ import '@bearer/ui'
 export class {{componentClassName}}Action {
   render() {
     return (
-      <bearer-navigator btnProps={ { content:"{{componentName}} Action", kind:"primary" } } direction="right">
+      <bearer-navigator direction="right">
+        <span slot="navigator-btn-content">{{componentName}} Action</span>
         {{withAuthScreen}}
         <bearer-navigator-screen navigationTitle="My first screen">
           <div style={ { textAlign: 'center' } }>My first screen</div>

@@ -1,6 +1,8 @@
 import { Component, Element, Listen, Prop, State } from '@bearer/core'
 
 import { TDirection } from '../button-popover/button-popover'
+import { BKind } from '../Button/Button'
+
 const NAVIGATOR_AUTH_SCREEN_NAME = 'BEARER-NAVIGATOR-AUTH-SCREEN'
 
 @Component({
@@ -24,7 +26,8 @@ export class BearerPopoverNavigator {
   @Prop()
   direction: TDirection = 'right'
   @Prop()
-  btnProps: JSXElements.BearerButtonAttributes = { content: 'Activate' }
+  btnKind: BKind = 'primary'
+
   @Prop()
   display = 'popover'
   @Prop()
@@ -148,13 +151,16 @@ export class BearerPopoverNavigator {
   render() {
     return (
       <bearer-button-popover
-        btnProps={this.btnProps}
         id="button"
+        kind={this.btnKind}
         direction={this.direction}
         header={this.navigationTitle}
         backNav={this.hasPrevious()}
         onVisibilityChange={this.onVisibilityChange}
       >
+        <span slot="btn-content">
+          <slot name="navigator-btn-content" />
+        </span>
         <slot />
       </bearer-button-popover>
     )
