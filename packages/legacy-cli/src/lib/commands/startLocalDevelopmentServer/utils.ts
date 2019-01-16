@@ -1,7 +1,7 @@
 import { getRows } from './storage'
 
 export async function loadUserDefinedData({ query }): Promise<any> {
-  const userDataIds = Object.keys(query).filter(key => key.endsWith('Id') && key !== 'setupId' && query[key])
+  const userDataIds = Object.keys(query).filter(key => key.endsWith('Id') && query[key])
 
   if (userDataIds.length > 0) {
     return (await Promise.all(
