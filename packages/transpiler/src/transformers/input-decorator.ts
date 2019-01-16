@@ -15,67 +15,11 @@ import { addAutoLoad, createFetcher, createLoadDataCall, createLoadResourceMetho
 import { loadName as _loadName, retrieveFetcherName, retrieveIntentName } from '../helpers/name-helpers'
 import { getNodeName } from '../helpers/node-helpers'
 import { capitalize } from '../helpers/string'
-import { InputMeta, TransformerOptions } from '../types'
+import { InputMeta, TransformerOptions, OutputMeta } from '../types'
 
 import { ensureImportsFromCore } from './bearer'
-import { outputEventName, refIdName } from './output-decorator'
+import { outputEventName, refIdName, retrieveOutputsMetas } from './output-decorator'
 import Metadata from '../metadata'
-
-function extractInputOptions(decorator: ts.Decorator): Partial<TInputDecoratorOptions> {
-  const callArgs = (decorator.expression as ts.CallExpression).arguments[0] as ts.ObjectLiteralExpression
-  return !callArgs
-    ? {}
-    : {
-        ...extractStringOptions<TInputDecoratorOptions>(callArgs, [
-          'group',
-          'eventName',
-          'intentName',
-          'propertyReferenceIdName'
-        ]),
-        ...extractArrayOptions<{ intentArguments: string[] }>(callArgs, ['intentArguments']),
-        ...extractBooleanOptions<TInputDecoratorOptions>(callArgs, ['autoLoad'])
-      }
-}
-
-export function retrieveInputsMetas(
-  sourcefile: ts.SourceFile,
-  metadata: Metadata,
-  _transformContext: ts.TransformationContext
-): InputMeta[] {
-  const inputs: InputMeta[] = []
-
-  const visitor = (tsNode: ts.Node) => {
-    if (ts.isPropertyDeclaration(tsNode)) {
-      const decorator = getDecoratorNamed(tsNode, Decorators.Input)
-      if (decorator) {
-        const options = extractInputOptions(decorator)
-        const name = getNodeName(tsNode)
-        const component = metadata.findComponentFrom(sourcefile)
-        inputs.push({
-          propDeclarationName: name,
-          group: component.group,
-          propertyReferenceIdName: refIdName(name),
-          eventName: outputEventName(name),
-          intentName: retrieveIntentName(name),
-          intentMethodName: retrieveFetcherName(name), // TODO: retrieve from options
-          autoLoad: true,
-          loadMethodName: _loadName(name),
-          typeIdentifier: tsNode.type,
-          intializer: tsNode.initializer,
-          watcherName: _watchName(name),
-          intentReferenceIdKeyName: Properties.ReferenceId,
-          intentArguments: [],
-          ...options
-        })
-      }
-    }
-    return ts.visitEachChild(tsNode, visitor, _transformContext)
-  }
-
-  ts.visitEachChild(sourcefile, visitor, _transformContext)
-
-  return inputs
-}
 
 export default function InputDecorator({ metadata }: TransformerOptions = {}): ts.TransformerFactory<ts.SourceFile> {
   return _transformContext => {
@@ -98,10 +42,14 @@ export default function InputDecorator({ metadata }: TransformerOptions = {}): t
         Decorators.Prop
       ])
 
-      return ts.visitEachChild(sourceFileWithImports, replaceInputVisitor(inputsMeta), _transformContext)
+      return ts.visitEachChild(sourceFileWithImports, replaceInputVisitor(inputsMeta, tsSourceFile), _transformContext)
     }
 
-    function injectInputStatements(tsClass: ts.ClassDeclaration, inputsMeta: InputMeta[]): ts.ClassDeclaration {
+    function injectInputStatements(
+      tsClass: ts.ClassDeclaration,
+      inputsMeta: InputMeta[],
+      outputsMeta: OutputMeta[]
+    ): ts.ClassDeclaration {
       const classNode = inputsMeta.reduce((classDeclaration, meta) => addAutoLoad(classDeclaration, meta), tsClass)
       const newMembers = inputsMeta.reduce(
         (members, meta) => {
@@ -109,7 +57,7 @@ export default function InputDecorator({ metadata }: TransformerOptions = {}): t
           const inputMembers = [
             createLocalStateProperty(meta),
             createEventListener(meta),
-            createLoadResourceMethod(meta, inputsMeta),
+            createLoadResourceMethod(meta, inputsMeta, outputsMeta),
             createFetcher(meta),
             createRefIdWatcher(meta)
           ]
@@ -134,16 +82,19 @@ export default function InputDecorator({ metadata }: TransformerOptions = {}): t
       )
     }
 
-    function replaceInputVisitor(inputsMeta: InputMeta[]): (tsNode: ts.Node) => ts.VisitResult<ts.Node> {
+    function replaceInputVisitor(
+      inputsMeta: InputMeta[],
+      tsSourceFile: ts.SourceFile
+    ): (tsNode: ts.Node) => ts.VisitResult<ts.Node> {
       return (tsNode: ts.Node) => {
         if (ts.isClassDeclaration(tsNode)) {
           return ts.visitEachChild(
-            injectInputStatements(tsNode, inputsMeta),
-            replaceInputVisitor(inputsMeta),
+            injectInputStatements(tsNode, inputsMeta, retrieveOutputsMetas(tsSourceFile, _transformContext)),
+            replaceInputVisitor(inputsMeta, tsSourceFile),
             _transformContext
           )
         }
-        return ts.visitEachChild(tsNode, replaceInputVisitor(inputsMeta), _transformContext)
+        return ts.visitEachChild(tsNode, replaceInputVisitor(inputsMeta, tsSourceFile), _transformContext)
       }
     }
   }
@@ -250,4 +201,60 @@ function createRefIdWatcher(meta: InputMeta) {
 
 function _watchName(name: string): string {
   return `_watch${capitalize(name)}`
+}
+
+export function retrieveInputsMetas(
+  sourcefile: ts.SourceFile,
+  metadata: Metadata,
+  _transformContext: ts.TransformationContext
+): InputMeta[] {
+  const inputs: InputMeta[] = []
+
+  const visitor = (tsNode: ts.Node) => {
+    if (ts.isPropertyDeclaration(tsNode)) {
+      const decorator = getDecoratorNamed(tsNode, Decorators.Input)
+      if (decorator) {
+        const options = extractInputOptions(decorator)
+        const name = getNodeName(tsNode)
+        const component = metadata.findComponentFrom(sourcefile)
+        inputs.push({
+          propDeclarationName: name,
+          group: component.group,
+          propertyReferenceIdName: refIdName(name),
+          eventName: outputEventName(name),
+          intentName: retrieveIntentName(name),
+          intentMethodName: retrieveFetcherName(name), // TODO: retrieve from options
+          autoLoad: true,
+          loadMethodName: _loadName(name),
+          typeIdentifier: tsNode.type,
+          intializer: tsNode.initializer,
+          watcherName: _watchName(name),
+          intentReferenceIdKeyName: Properties.ReferenceId,
+          intentArguments: [],
+          ...options
+        })
+      }
+    }
+    return ts.visitEachChild(tsNode, visitor, _transformContext)
+  }
+
+  ts.visitEachChild(sourcefile, visitor, _transformContext)
+
+  return inputs
+}
+
+function extractInputOptions(decorator: ts.Decorator): Partial<TInputDecoratorOptions> {
+  const callArgs = (decorator.expression as ts.CallExpression).arguments[0] as ts.ObjectLiteralExpression
+  return !callArgs
+    ? {}
+    : {
+        ...extractStringOptions<TInputDecoratorOptions>(callArgs, [
+          'group',
+          'eventName',
+          'intentName',
+          'propertyReferenceIdName'
+        ]),
+        ...extractArrayOptions<{ intentArguments: string[] }>(callArgs, ['intentArguments']),
+        ...extractBooleanOptions<TInputDecoratorOptions>(callArgs, ['autoLoad'])
+      }
 }

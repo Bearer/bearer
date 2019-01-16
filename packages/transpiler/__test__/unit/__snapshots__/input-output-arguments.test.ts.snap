@@ -1,0 +1,112 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Input output intent arguments input output arguments match snapshot 1`] = `
+Object {
+  "file": "input-output-arguments.tsx",
+  "postContent": "import { BearerRef, Component, Listen, State, Intent, Watch, Prop, BearerFetch, EventEmitter, Event } from '@bearer/core';
+type Farmer = {
+    id: string;
+    name: string;
+};
+type Goat = {
+    id: string;
+    name: string;
+    milk: number;
+};
+@Component({
+    tag: \\"input-output-arguments-action\\",
+    styleUrl: \\"inputOutputArguments.css\\",
+    shadow: true
+})
+class InputOutputArgumentsComponent {
+    @State()
+    farmer: BearerRef<Farmer>;
+    @Listen(\\"body:bearer-SPONGE_BOB-input-output-arguments-farmerSaved\\")
+    farmerRefIdChanged(event) {
+        if (this.farmerRefId !== event.detail.referenceId) {
+            this.farmerRefId = event.detail.referenceId;
+        }
+        else {
+            this._loadFarmer();
+        }
+    }
+    _loadFarmer = () => {
+        this.fetcherRetrieveFarmer({ referenceId: this.farmerRefId }).then(({ data }: {
+            data: BearerRef<Farmer>;
+        }) => {
+            if (data) {
+                this.farmer = data;
+            }
+        });
+    };
+    private fetcherRetrieveFarmer;
+    @Watch(\\"farmerRefId\\")
+    _watchFarmer(newValueName: string) {
+        if (newValueName) {
+            this._loadFarmer();
+        }
+    }
+    @Prop({ \\"mutable\\": true })
+    farmerRefId: string;
+    private saveGoat: BearerFetch<BearerRef<Goat>>;
+    @Event({ eventName: \\"bearer-SPONGE_BOB-input-output-arguments-goatSaved\\" })
+    goatSaved: EventEmitter;
+    @State()
+    goatInitial: BearerRef<Goat>;
+    @State()
+    goat: BearerRef<Goat>;
+    @Prop({ \\"mutable\\": true })
+    goatRefId: string;
+    @Watch(\\"goat\\")
+    goatSavedWatcher(newValue) {
+        this.saveGoat({ body: { goat: newValue }, referenceId: this.goatRefId }).then(({ referenceId, data }) => {
+            this.goatSaved.emit({ referenceId, goat: data || this.goat });
+            this.goatRefId = referenceId;
+        });
+        this.goatInitial = null;
+    }
+    private fetcherRetrieveGoat;
+    _loadGoat = () => {
+        this.fetcherRetrieveGoat({ referenceId: this.goatRefId, farmerId: this.farmerRefId }).then(({ data }: {
+            data: BearerRef<Goat>;
+        }) => {
+            if (data) {
+                this.goatInitial = data;
+            }
+        });
+    };
+    constructor() {
+        Intent(\\"retrieveFarmer\\")(this, \\"fetcherRetrieveFarmer\\");
+        Intent(\\"saveGoat\\")(this, \\"saveGoat\\");
+        Intent(\\"retrieveGoat\\")(this, \\"fetcherRetrieveGoat\\");
+    }
+    get SCENARIO_ID() { return \\"SPONGE_BOB\\"; }
+    @Prop({ \\"context\\": \\"bearer\\" })
+    bearerContext: any;
+    @Prop()
+    setupId: string;
+    componentDidLoad() {
+        if (this.setupId) {
+            this.bearerContext.setupId = this.setupId;
+        }
+        if (this.farmerRefId) {
+            this._loadFarmer();
+        }
+        if (this.goatRefId) {
+            this._loadGoat();
+        }
+    }
+    @Event({ eventName: \\"input-output-arguments-action-prop-set\\", bubbles: true, cancelable: true })
+    propSetEmitter: EventEmitter;
+    @Watch(\\"farmerRefId\\")
+    farmerRefIdPropSetWatcher(newValue) {
+        this.propSetEmitter.emit({ farmerRefId: newValue });
+    }
+    @Watch(\\"goatRefId\\")
+    goatRefIdPropSetWatcher(newValue) {
+        this.propSetEmitter.emit({ goatRefId: newValue });
+    }
+}
+",
+}
+`;
