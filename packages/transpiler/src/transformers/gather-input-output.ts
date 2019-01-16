@@ -42,8 +42,8 @@ export default function GatherMetadata({
               return {
                 ...acc,
                 [name]: {
-                  description: name,
                   name,
+                  description: name,
                   required: !member.questionToken,
                   schema: getDefinition(member.type)
                 }
@@ -84,14 +84,14 @@ export default function GatherMetadata({
     }
   }
 
-  function collectInputs(tsClass: ts.ClassDeclaration): Array<TComponentInputDefinition> {
+  function collectInputs(tsClass: ts.ClassDeclaration): TComponentInputDefinition[] {
     return tsClass.members
       .filter(member => ts.isPropertyDeclaration(member) && hasDecoratorNamed(member, Decorators.Prop))
       .map(propAsInput)
       .filter(prop => prop.name !== Component.bearerContext)
   }
 
-  function collectOutputs(tsClass: ts.ClassDeclaration, group: string): Array<TComponentOutputDefinition> {
+  function collectOutputs(tsClass: ts.ClassDeclaration, group: string): TComponentOutputDefinition[] {
     return tsClass.members
       .filter(member => ts.isPropertyDeclaration(member) && hasDecoratorNamed(member, Decorators.Event))
       .map(eventAsOutput(group))
