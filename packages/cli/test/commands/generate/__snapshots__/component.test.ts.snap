@@ -53,7 +53,8 @@ import '@bearer/ui'
 export class RootComponentAction {
   render() {
     return (
-      <bearer-navigator btnProps={ { content:\\"RootComponent Action\\", kind:\\"primary\\" } } direction=\\"right\\">
+      <bearer-navigator direction=\\"right\\">
+        <span slot=\\"navigator-btn-content\\">RootComponent Action</span>
         
         <bearer-navigator-screen navigationTitle=\\"My first screen\\">
           <div style={ { textAlign: 'center' } }>My first screen</div>
