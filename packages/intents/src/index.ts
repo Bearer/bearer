@@ -4,55 +4,18 @@ export * from './declaration'
 import { DBClient as CLIENT } from './db-client'
 import { sendErrorMessage, sendSuccessMessage } from './lambda'
 
+// tslint:disable-next-line:variable-name
 export const DBClient = CLIENT.instance
 
-// tslint:disable-next-line:no-unnecessary-class
-export class Intent {
-  static fetchData(callback: d.TLambdaCallback, { data, error }: { data?: any; error?: any }) {
-    if (data) {
-      sendSuccessMessage(callback, { data })
-    } else {
-      sendErrorMessage(callback, { error: error || 'Unkown error' })
-    }
+function fetchData(callback: d.TLambdaCallback, { data, error }: { data?: any; error?: any }) {
+  if (data) {
+    sendSuccessMessage(callback, { data })
+  } else {
+    sendErrorMessage(callback, { error: error || 'Unkown error' })
   }
 }
 
-// tslint:disable-next-line:no-unnecessary-class
-class BaseIntent {
-  static get display(): string {
-    throw new Error('Extending class needs to implement `static intent(action)` method')
-  }
-
-  static intent(_action): (event: any, context: any, callback: (...args: any[]) => any) => any {
-    throw new Error('Extending class needs to implement `static intent(action)` method')
-  }
-}
-
-class GenericIntentBase extends BaseIntent {
-  static get isStateIntent(): boolean {
-    return false
-  }
-
-  static get isGlobalIntent(): boolean {
-    return true
-  }
-}
-
-class StateIntentBase extends BaseIntent {
-  static get isStateIntent(): boolean {
-    return true
-  }
-
-  static get isGlobalIntent(): boolean {
-    return false
-  }
-}
-
-export class SaveState extends StateIntentBase {
-  static get display(): string {
-    return 'SaveState'
-  }
-
+export class SaveState {
   static intent(action: d.ISaveStateIntentAction) {
     return (event: d.TLambdaEvent, _context: any, lambdaCallback: d.TLambdaCallback): void => {
       const referenceId = event.queryStringParameters.referenceId
@@ -98,11 +61,7 @@ export class SaveState extends StateIntentBase {
   }
 }
 
-export class RetrieveState extends StateIntentBase {
-  static get display(): string {
-    return 'RetrieveState'
-  }
-
+export class RetrieveState {
   static intent(action: d.IRetrieveStateIntentAction) {
     return (event: d.TLambdaEvent, _context: any, lambdaCallback: d.TLambdaCallback): void => {
       const { referenceId } = event.queryStringParameters
@@ -130,15 +89,11 @@ export class RetrieveState extends StateIntentBase {
   }
 }
 
-export class FetchData extends GenericIntentBase {
-  static get display(): string {
-    return 'FetchData'
-  }
-
+export class FetchData {
   static intent(action: d.TFetchDataAction) {
     return (event: d.TLambdaEvent, _context, lambdaCallback: d.TLambdaCallback) => {
       action(event.context, event.queryStringParameters, bodyFromEvent(event), result => {
-        Intent.fetchData(lambdaCallback, result)
+        fetchData(lambdaCallback, result)
       })
     }
   }

@@ -9,15 +9,14 @@ type TPersistedData = {
 
 export class DBClient {
   static instance(signature) {
-    return new DBClient(process.env.bearerBaseURL, signature)
+    return new DBClient(process.env.bearerBaseURL!, signature)
   }
 
   private client: AxiosInstance
 
   constructor(private readonly baseURL: string, private readonly signature: string) {
-    console.log('[BEARER]', 'baseURL', baseURL)
     this.client = axios.create({
-      baseURL,
+      baseURL: this.baseURL,
       timeout: 3000,
       headers: {
         Accept: 'application/json',
@@ -26,7 +25,7 @@ export class DBClient {
     })
   }
 
-  async getData(referenceId: string): Promise<TPersistedData> {
+  async getData(referenceId: string): Promise<TPersistedData | null> {
     if (!referenceId) {
       return Promise.resolve(null)
     }
