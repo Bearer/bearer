@@ -55,7 +55,7 @@ export function Intent(intentName: string, type: IntentType = IntentType.FetchDa
         const intent = intentRequest<TFetchBearerResult>({
           intentName,
           scenarioId,
-          [setupId]: retrieveSetupId(target)
+          [setupId]: params[setupId] || retrieveSetupId(target)
         })
 
         // prepare params and body

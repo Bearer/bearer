@@ -30,10 +30,13 @@ describe('Intent decorator', () => {
     get SCENARIO_ID(): string {
       return SCENARIO_ID
     }
+
+    get setupId() {
+      return 'setup-id-from-props'
+    }
   }
 
-  const decoratedInstance = new IntentDecorated()
-
+  const decoratedInstance: any = new IntentDecorated()
   describe('FetchData', () => {
     const collection = [{ id: 42 }]
 
@@ -60,7 +63,24 @@ describe('Intent decorator', () => {
         .catch(a => console.log(a))
 
       expect(global.fetch).toBeCalledWith(
-        'https://localhost:5555/api/v2/intents/1234/getCollectionIntent?page=1&clientId=42',
+        'https://localhost:5555/api/v2/intents/1234/getCollectionIntent?page=1&setupId=setup-id-from-props&clientId=42',
+        commonParams
+      )
+
+      expect(success).toBeCalledWith({ data: collection, referenceId: null })
+    })
+
+    it('allows custom setupId', async () => {
+      const success = jest.fn()
+      window.bearer = { clientId: '42', load: jest.fn() }
+
+      await decoratedInstance
+        .getCollectionIntentProp({ page: 1, setupId: 'custom-setupId' })
+        .then(success)
+        .catch(a => console.log(a))
+
+      expect(global.fetch).toBeCalledWith(
+        'https://localhost:5555/api/v2/intents/1234/getCollectionIntent?page=1&setupId=custom-setupId&clientId=42',
         commonParams
       )
 
