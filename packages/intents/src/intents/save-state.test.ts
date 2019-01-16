@@ -1,181 +1,120 @@
-import mockAxios from 'jest-mock-axios'
+jest.mock('../db-client')
 
-import { TLambdaEvent, TAPIKEYAuthContext } from '../declaration'
-import { SaveState } from './save-state'
+import { DBClient } from '../db-client'
+import * as d from '../declaration'
+import { SaveState, SaveStateActionExecutionError, SaveStateSavingStateError } from './save-state'
 
-describe('Intents', () => {
-  describe('SaveState', () => {
-    it('export a class', () => {
-      expect(SaveState).toBeTruthy()
-    })
-  })
+describe('Intents => SaveIntent', () => {
+  describe('.intentPromise', () => {
+    const defaultAction = () =>
+      jest.fn(() => {
+        return { data: 'returned-data' }
+      })
 
-  describe('.intent', () => {
-    const referenceId = 'SPONGE_BOB'
+    function setup(action = defaultAction(), returnedData: any = null) {
+      const getData = jest.spyOn(DBClient.prototype, 'getData')
 
-    const action = (_context: any, _params: any, body: any, state: any, callback: (state: any) => void) => {
-      callback({ state, data: { ...state, ...body } })
+      getData.mockImplementation(() => {
+        return returnedData ? { Item: returnedData } : null
+      })
+
+      const event: d.TLambdaEvent = {
+        context: 'something',
+        queryStringParameters: {
+          firstParams: 'firstValue',
+          overriden: 'weDontCare'
+        },
+        body: {
+          overriden: 'thisOneWeCare'
+        }
+      } as any
+
+      const intent = SaveState.intentPromise(action as any)
+
+      return {
+        action,
+        event,
+        intent
+      }
     }
 
-    const event: TLambdaEvent<TAPIKEYAuthContext> = {
-      queryStringParameters: { referenceId },
-      context: {
-        bearerBaseURL: 'https://void.bearer.sh',
-        signature: 'encrypted',
-        authAccess: {
-          apiKey: 'none'
+    it('use provided referenceId', async () => {
+      const { intent, event, action } = setup()
+
+      const result = await intent({
+        ...event,
+        queryStringParameters: {
+          ...event.queryStringParameters,
+          referenceId: 'a-reference-provided'
         }
-      },
-      body: {
-        pullRequests: []
-      }
-    }
-
-    describe('reference exists', () => {
-      const savedData = {
-        data: 'server says hello!'
-      }
-
-      function mockRetrieveSucces() {
-        expect(mockAxios.get).toHaveBeenCalledWith('api/v2/items/SPONGE_BOB', { params: { signature: 'encrypted' } })
-        const responseObj = { data: { Item: savedData } }
-        mockAxios.mockResponse(responseObj, mockAxios.lastReqGet())
-      }
-
-      it.skip('retrieves reference, update it and return payload', async done => {
-        const lambdaCallback = jest.fn((a, b) => {
-          console.log('ok', a, b)
-          done()
-        })
-        // expect.assertions(4)
-
-        SaveState.intent(action)(event, {}, lambdaCallback)
-        mockRetrieveSucces()
-        // expect(mockAxios.put).toHaveBeenCalled()
-        expect(mockAxios.put).toHaveBeenCalledWith(
-          'api/v2/items/SPONGE_BOB',
-          {
-            //   ReadAllowed: true,
-            //   ...savedData,
-            //   pullRequests: []
-          },
-          { params: { signature: 'encrypted' } }
-        )
-        mockAxios.mockResponse({}) // data is unused
-
-        expect(lambdaCallback).toHaveBeenCalledWith(null, {
-          meta: { referenceId },
-          data: { ...savedData, pullRequests: [] }
-        })
-        // expect(lambdaCallback).toHaveBeenCalled()
       })
 
-      it.skip('retrieves reference, fails update and return error', () => {
-        const lambdaCallback = jest.fn()
-
-        SaveState.intent(action)(event, {}, lambdaCallback)
-
-        mockRetrieveSucces()
-
-        expect(mockAxios.put).toHaveBeenCalledWith(
-          'api/v2/items/SPONGE_BOB',
-          {
-            ReadAllowed: true,
-            ...savedData,
-            pullRequests: []
-          },
-          { params: { signature: 'encrypted' } }
-        )
-        mockAxios.mockError({ status: 500 })
-
-        expect(lambdaCallback).toHaveBeenCalledWith(expect.any(String), { error: 'Cannot update data' })
+      expect(action).toHaveBeenCalledWith({
+        context: 'something',
+        params: {
+          referenceId: 'a-reference-provided',
+          firstParams: 'firstValue',
+          overriden: 'thisOneWeCare'
+        },
+        state: {}
       })
 
-      it.skip('retrieves data, action throw error, returns error', () => {
-        const lambdaCallback = jest.fn()
-        const failingAction = () => {
-          throw new Error('Error')
-        }
+      expect(result).toMatchObject({ data: 'returned-data', meta: { referenceId: 'a-reference-provided' } })
+    })
 
-        SaveState.intent(failingAction)(event, {}, lambdaCallback)
+    it('generate a UUID as referenceId', async () => {
+      const { intent, event } = setup()
+      const result = await intent(event)
 
-        mockRetrieveSucces()
-
-        expect(mockAxios.put).not.toHaveBeenCalled()
-        expect(lambdaCallback).toHaveBeenCalledWith(expect.any(String), { error: 'Intent action is failing' })
+      expect(result).toMatchObject({
+        meta: expect.objectContaining({
+          referenceId: expect.stringMatching(/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{11}/) // uuid
+        })
       })
     })
 
-    describe('reference does not exist', () => {
-      function mockRetrieveFailure() {
-        expect(mockAxios.get).toHaveBeenCalledWith('api/v2/items/SPONGE_BOB', { params: { signature: 'encrypted' } })
-        const responseObj = { data: { Item: null }, status: 404 }
-        mockAxios.mockError(responseObj)
-      }
+    it('pass existing data to the action', async () => {
+      const { intent, event, action } = setup(defaultAction(), { existingData: 'ok' })
 
-      it.skip('create reference and return payload', () => {
-        const lambdaCallback = jest.fn()
+      await intent(event)
 
-        SaveState.intent(action)(event, {}, lambdaCallback)
-
-        // mockRetrieveFailure()
-        expect(mockAxios.get).toHaveBeenCalledWith('api/v2/items/SPONGE_BOB', mockAxios.lastReqGet())
-        expect(mockAxios.post).toHaveBeenCalledWith(
-          'api/v2/items',
-          { ReadAllowed: true, pullRequests: [] },
-          { params: { signature: 'encrypted' } }
-        )
-
-        const responseObj = { data: { Item: null }, status: 404 }
-        mockAxios.mockError(responseObj)
-        mockAxios.mockResponse({ data: { Item: { referenceId: 'PATRICK' } } })
-
-        expect(mockAxios.post).toHaveBeenCalledWith()
-        expect(lambdaCallback).toHaveBeenCalledWith(null, { meta: { referenceId: 'PATRICK', data: { ...event.body } } })
-      })
-
-      it.skip('fails create reference and return error', () => {
-        const lambdaCallback = jest.fn()
-
-        SaveState.intent(action)(event, {}, lambdaCallback)
-
-        mockRetrieveFailure()
-
-        expect(mockAxios.post).toHaveBeenCalledWith(
-          'api/v2/items',
-          { ReadAllowed: true, pullRequests: [] },
-          { params: { signature: 'encrypted' } }
-        )
-        const responseObj = {}
-        mockAxios.mockError(responseObj)
-        expect(lambdaCallback).toHaveBeenCalledWith(expect.any(String), { error: 'Cannot save data' })
-      })
-      it.skip('action throw error, returns error', () => {
-        const lambdaCallback = jest.fn()
-        const failingAction = () => {
-          throw new Error('Error')
-        }
-
-        SaveState.intent(failingAction)(event, {}, lambdaCallback)
-        mockRetrieveFailure()
-
-        expect(mockAxios.post).not.toHaveBeenCalled()
-        expect(lambdaCallback).toHaveBeenCalledWith(expect.any(String), { error: 'Intent action is failing' })
+      expect(action).toHaveBeenCalledWith({
+        context: 'something',
+        params: {
+          firstParams: 'firstValue',
+          overriden: 'thisOneWeCare'
+        },
+        state: { existingData: 'ok' }
       })
     })
 
-    describe('fails userData service call', () => {
-      it.skip('returns error', () => {
-        const lambdaCallback = jest.fn()
+    it('resolve an error if action does', async () => {
+      const errorFromPayloadAction = jest.fn(() => {
+        return { error: 'sponge Bob Died' } as any
+      })
 
-        SaveState.intent(action)(event, {}, lambdaCallback)
-        expect(mockAxios.get).toHaveBeenCalledWith('api/v2/items/SPONGE_BOB', { params: { signature: 'encrypted' } })
-        const responseObj = { data: { Item: null }, status: 500 }
-        mockAxios.mockError(responseObj)
+      const { intent, event } = setup(errorFromPayloadAction)
+      const result = await intent(event)
 
-        expect(mockAxios.post).not.toHaveBeenCalledWith()
-        expect(mockAxios.put).not.toHaveBeenCalledWith()
-        expect(lambdaCallback).toHaveBeenCalledWith(null, { error: 'Error whild trying to fetch current state' })
+      expect(result).toMatchObject({ error: 'sponge Bob Died' })
+    })
+
+    describe('errors', () => {
+      it('fails gracefully when update fails', () => {
+        const { intent, event } = setup()
+        const update = jest.spyOn(DBClient.prototype, 'updateData')
+
+        update.mockImplementation(() => Promise.reject({ error: 'from-user-storage' }))
+
+        return expect(intent(event)).rejects.toEqual(new SaveStateSavingStateError())
+      })
+
+      it('fails gracefully when action raises an error', async () => {
+        const hardFailingAction = jest.fn(() => {
+          throw 'sponge Bob Died error'
+        })
+        const { intent, event } = setup(hardFailingAction)
+        return expect(intent(event)).rejects.toEqual(new SaveStateActionExecutionError())
       })
     })
   })
