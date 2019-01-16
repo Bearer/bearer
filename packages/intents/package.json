@@ -23,6 +23,7 @@
     "url": "github:BearerSH/bearer"
   },
   "dependencies": {
+    "@bearer/logger": "^0.87.0",
     "axios": "^0.18.0",
     "typescript": "^2.9.2"
   },

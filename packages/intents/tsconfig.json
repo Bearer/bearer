@@ -8,6 +8,7 @@
     "moduleResolution": "node",
     "outDir": "lib/",
     "declaration": true,
-    "strictNullChecks": true
+    "strictNullChecks": true,
+    "esModuleInterop": true
   }
 }

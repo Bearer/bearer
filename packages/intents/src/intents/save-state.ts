@@ -21,7 +21,7 @@ export class SaveState {
                 event.queryStringParameters,
                 bodyFromEvent(event),
                 state,
-                (result: { state: any; data: any }) => {
+                (result: { state: any; data?: any }) => {
                   if (savedState || referenceId) {
                     dbClient
                       .updateData(referenceId, result.state)
