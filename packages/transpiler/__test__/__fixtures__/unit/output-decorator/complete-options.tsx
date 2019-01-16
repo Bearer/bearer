@@ -1,4 +1,4 @@
-import { BearerRef, Output, RootComponent } from '@bearer/core'
+import { BearerRef, Output, RootComponent, Input } from '@bearer/core'
 
 type Farmer = {
   id: string

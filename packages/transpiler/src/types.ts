@@ -1,4 +1,4 @@
-import { TInputDecoratorOptions } from '@bearer/types/lib/input-output-decorators'
+import { TInputDecoratorOptions, TOutputDecoratorOptions } from '@bearer/types/lib/input-output-decorators'
 import * as ts from 'typescript'
 
 import Metadata from './metadata'
@@ -10,9 +10,11 @@ export type ComponentMetadata = {
   fileName: string
   finalTagName: string
   group?: string
-  imports?: Array<string>
-  inputs?: Array<TComponentInputDefinition>
-  outputs?: Array<TComponentOutputDefinition>
+  imports?: string[]
+  inputs?: TComponentInputDefinition[]
+  outputs?: TComponentOutputDefinition[]
+  inputsMeta?: InputMeta[]
+  outputsMeta?: OutputMeta[]
 }
 
 export type TComponentInputDefinition = {
@@ -23,7 +25,7 @@ export type TComponentInputDefinition = {
 
 type TBasicFormat = 'string' | 'number' | 'boolean' | 'object' | 'any'
 type TUnknown = 'unspecified'
-export type TOuputFormat = TUnknown | { type: TBasicFormat } | { [key: string]: TBasicFormat | Array<TBasicFormat> }
+export type TOuputFormat = TUnknown | { type: TBasicFormat } | { [key: string]: TBasicFormat | TBasicFormat[] }
 
 export type TComponentOutputDefinition = {
   name: string
@@ -60,7 +62,7 @@ export type RootComponent = SpecComponent & {
   finalTagName: string
 }
 
-export type CompileSpec = { components: Array<SpecComponent> }
+export type CompileSpec = { components: SpecComponent[] }
 
 export type InputMeta = TInputDecoratorOptions & {
   propDeclarationName: string
@@ -94,4 +96,16 @@ export type TAddAutoLoad = {
   propertyReferenceIdName: string
   autoLoad: boolean
   loadMethodName: string
+}
+
+export type OutputMeta = TOutputDecoratorOptions & {
+  propDeclarationName: string
+  propDeclarationNameRefId: string
+  intentMethodName: string
+  intentName: string
+  loadMethodName: string
+  initializer: ts.Expression
+  typeIdentifier?: ts.TypeNode
+  propertyReferenceIdName: string
+  autoLoad?: true | false
 }

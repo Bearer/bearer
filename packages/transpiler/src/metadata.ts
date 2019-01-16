@@ -6,7 +6,7 @@ function relativePath(path: string): string {
   return path.replace(process.cwd(), '')
 }
 export default class Metadata {
-  components: Array<ComponentMetadata> = []
+  components: ComponentMetadata[] = []
 
   constructor(readonly prefix: string = null, readonly suffix: string = null) {}
 

@@ -15,13 +15,65 @@ import { addAutoLoad, createFetcher, createLoadResourceMethod } from '../helpers
 import { initialName, retrieveFetcherName, retrieveIntentName, loadName } from '../helpers/name-helpers'
 import { getNodeName } from '../helpers/node-helpers'
 import { capitalize } from '../helpers/string'
-import { TCreateLoadResourceMethod, TransformerOptions } from '../types'
+import { TCreateLoadResourceMethod, TransformerOptions, OutputMeta } from '../types'
 
 import { ensureImportsFromCore } from './bearer'
 
 const newValue = 'newValue'
 const data = 'data'
 
+export function retrieveOutputsMetas(
+  tsSourceFile: ts.SourceFile,
+  _transformContext: ts.TransformationContext
+): OutputMeta[] {
+  const outputs: OutputMeta[] = []
+
+  const visitor = (tsNode: ts.Node) => {
+    if (ts.isPropertyDeclaration(tsNode)) {
+      const decorator = getDecoratorNamed(tsNode, Decorators.Output)
+      if (decorator) {
+        const name = getNodeName(tsNode)
+        const callArgs = (decorator.expression as ts.CallExpression).arguments[0] as ts.ObjectLiteralExpression
+        const options = !callArgs
+          ? {}
+          : {
+              ...extractStringOptions<TOutputDecoratorOptions>(callArgs, [
+                'eventName',
+                'intentName',
+                'intentPropertyName',
+                'propertyWatchedName',
+                'referenceKeyName'
+              ]),
+              ...extractArrayOptions<{ intentArguments: string[] }>(callArgs, ['intentArguments']),
+              ...extractBooleanOptions<TOutputDecoratorOptions>(callArgs, ['autoLoad'])
+            }
+        outputs.push({
+          eventName: outputEventName(name),
+          intentName: saveIntentName(name),
+          intentMethodName: retrieveFetcherName(name),
+          intentPropertyName: name,
+          propDeclarationName: name,
+          propDeclarationNameRefId: refIdName(name),
+          loadMethodName: loadName(name),
+          intentReferenceIdKeyName: Properties.ReferenceId,
+          typeIdentifier: tsNode.type,
+          initializer: tsNode.initializer,
+          referenceKeyName: Properties.ReferenceId,
+          propertyWatchedName: name,
+          propertyReferenceIdName: refIdName(name),
+          autoLoad: true,
+          intentArguments: [],
+          ...options
+        })
+      }
+    }
+    return ts.visitEachChild(tsNode, visitor, _transformContext)
+  }
+
+  ts.visitEachChild(tsSourceFile, visitor, _transformContext)
+
+  return outputs
+}
 export default function OutputDecorator(_options: TransformerOptions = {}): ts.TransformerFactory<ts.SourceFile> {
   return _transformContext => {
     return tsSourceFile => {
@@ -29,7 +81,7 @@ export default function OutputDecorator(_options: TransformerOptions = {}): ts.T
         return tsSourceFile
       }
 
-      const outputsMeta = retrieveOutputsMetas(tsSourceFile)
+      const outputsMeta = retrieveOutputsMetas(tsSourceFile, _transformContext)
 
       if (!outputsMeta.length) {
         return tsSourceFile
@@ -45,56 +97,6 @@ export default function OutputDecorator(_options: TransformerOptions = {}): ts.T
       ])
 
       return ts.visitEachChild(sourceFileWithImports, visit(outputsMeta), _transformContext)
-    }
-
-    function retrieveOutputsMetas(tsSourceFile: ts.SourceFile): OutputMeta[] {
-      const outputs: OutputMeta[] = []
-
-      const visitor = (tsNode: ts.Node) => {
-        if (ts.isPropertyDeclaration(tsNode)) {
-          const decorator = getDecoratorNamed(tsNode, Decorators.Output)
-          if (decorator) {
-            const name = getNodeName(tsNode)
-            const callArgs = (decorator.expression as ts.CallExpression).arguments[0] as ts.ObjectLiteralExpression
-            const options = !callArgs
-              ? {}
-              : {
-                  ...extractStringOptions<TOutputDecoratorOptions>(callArgs, [
-                    'eventName',
-                    'intentName',
-                    'intentPropertyName',
-                    'propertyWatchedName',
-                    'referenceKeyName'
-                  ]),
-                  ...extractArrayOptions<{ intentArguments: string[] }>(callArgs, ['intentArguments']),
-                  ...extractBooleanOptions<TOutputDecoratorOptions>(callArgs, ['autoLoad'])
-                }
-            outputs.push({
-              eventName: outputEventName(name),
-              intentName: saveIntentName(name),
-              intentMethodName: retrieveFetcherName(name),
-              intentPropertyName: name,
-              propDeclarationName: name,
-              propDeclarationNameRefId: refIdName(name),
-              loadMethodName: loadName(name),
-              intentReferenceIdKeyName: Properties.ReferenceId,
-              typeIdentifier: tsNode.type,
-              initializer: tsNode.initializer,
-              referenceKeyName: Properties.ReferenceId,
-              propertyWatchedName: name,
-              propertyReferenceIdName: refIdName(name),
-              autoLoad: true,
-              intentArguments: [],
-              ...options
-            })
-          }
-        }
-        return ts.visitEachChild(tsNode, visitor, _transformContext)
-      }
-
-      ts.visitEachChild(tsSourceFile, visitor, _transformContext)
-
-      return outputs
     }
 
     function visit(outputsMeta: OutputMeta[]) {
@@ -364,16 +366,4 @@ function createInitialFetcher(meta) {
     intentName: retrieveIntentName(meta.propDeclarationName)
   }
   return createFetcher({ ...meta, ...metaForInitial })
-}
-
-type OutputMeta = TOutputDecoratorOptions & {
-  propDeclarationName: string
-  propDeclarationNameRefId: string
-  intentMethodName: string
-  intentName: string
-  loadMethodName: string
-  initializer: ts.Expression
-  typeIdentifier?: ts.TypeNode
-  propertyReferenceIdName: string
-  autoLoad?: true | false
 }
