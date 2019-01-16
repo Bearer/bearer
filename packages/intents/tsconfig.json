@@ -9,6 +9,8 @@
     "outDir": "lib/",
     "declaration": true,
     "strictNullChecks": true,
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true
   }
 }

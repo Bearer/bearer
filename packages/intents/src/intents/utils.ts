@@ -25,7 +25,14 @@ export function fetchData(callback: d.TLambdaCallback, { data, error }: { data?:
   }
 }
 
-export function paramsFromEvent(event: d.TLambdaEvent) {
+export function eventAsActionParams(event: d.TLambdaEvent) {
+  return {
+    context: event.context,
+    params: paramsFromEvent(event)
+  }
+}
+
+function paramsFromEvent(event: d.TLambdaEvent) {
   return {
     ...event.queryStringParameters,
     ...bodyFromEvent(event)

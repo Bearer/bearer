@@ -1,7 +1,7 @@
 import debug from '@bearer/logger'
 
 import * as d from '../declaration'
-import { bodyFromEvent, fetchData, paramsFromEvent } from './utils'
+import { bodyFromEvent, fetchData, eventAsActionParams } from './utils'
 
 const logger = debug('intents:fetch-state')
 
@@ -17,22 +17,18 @@ export class FetchData {
   static intentPromise(action: d.TFetchAction) {
     return async (event: d.TLambdaEvent) => {
       try {
-        const { error, data }: d.TFetchPayload<any, any> = await action({
-          context: event.context,
-          params: paramsFromEvent(event)
-        })
-
+        const { error, data }: d.TFetchPayload<any, any> = await action(eventAsActionParams(event))
         if (error) {
           logger(error)
           return { error }
         }
         return { data }
       } catch (error) {
-        logger.extend('ActionExecutionError')(error)
-        throw new ActionExecutionError(error)
+        logger.extend('FetchActionExecutionError')(error)
+        throw new FetchActionExecutionError(error)
       }
     }
   }
 }
 
-export class ActionExecutionError extends Error {}
+export class FetchActionExecutionError extends Error {}

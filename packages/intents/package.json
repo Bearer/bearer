@@ -25,7 +25,8 @@
   "dependencies": {
     "@bearer/logger": "^0.87.0",
     "axios": "^0.18.0",
-    "typescript": "^2.9.2"
+    "typescript": "^2.9.2",
+    "uuid": "^3.3.2"
   },
   "devDependencies": {
     "@types/jest": "^23.3.9",

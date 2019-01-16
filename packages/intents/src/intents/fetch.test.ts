@@ -1,4 +1,4 @@
-import { FetchData, ActionExecutionError } from './fetch'
+import { FetchData, FetchActionExecutionError } from './fetch'
 import * as d from '../declaration'
 
 describe('Intents', () => {
@@ -82,7 +82,7 @@ describe('Intents', () => {
           throw 'sponge Bob Died'
         })
         const { intent, event } = setup(hardFailingAction)
-        return expect(intent(event)).rejects.toEqual(new ActionExecutionError('sponge Bob Died'))
+        return expect(intent(event)).rejects.toEqual(new FetchActionExecutionError('sponge Bob Died'))
       })
 
       it('fails gracefully when action return error payload', async () => {

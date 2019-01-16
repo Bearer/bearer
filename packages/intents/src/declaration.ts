@@ -14,10 +14,10 @@ export type TFetchPayload<ReturnedData = any, ReturnedError = any> = Partial<TDa
 
 export type TRetrieveStatePayload<ReturnedData = any, ReturnedError = any> = TFetchPayload<ReturnedData, ReturnedError>
 
-export type TSaveStatePayload<State = any, ReturnedData = any> = {
+export type TSaveStatePayload<State = any, ReturnedData = any, ReturnedError = any> = {
   state: State
   data?: ReturnedData
-}
+} & Partial<TErrorPayload<ReturnedError>>
 
 /**
  * Contexts
