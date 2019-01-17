@@ -25,7 +25,7 @@ export default class BuildIntents extends BaseCommand {
   async run() {
     const { flags } = this.parse(BuildIntents)
 
-    const tasks: Array<Listr.ListrTask> = [
+    const tasks: Listr.ListrTask[] = [
       {
         title: 'Generate intents',
         task: async (ctx: any, _task: any) => {
@@ -52,8 +52,8 @@ export default class BuildIntents extends BaseCommand {
     }
   }
 
-  transpile = (entriesPath: string, distPath: string): Promise<Array<string>> => {
-    return new Promise<Array<string>>(async (resolve, reject) => {
+  transpile = (entriesPath: string, distPath: string): Promise<string[]> => {
+    return new Promise<string[]>(async (resolve, reject) => {
       try {
         const files = await globby([`${entriesPath}/*.ts`])
         if (!files.length) {
@@ -99,7 +99,7 @@ export default class BuildIntents extends BaseCommand {
   }
 }
 
-function getEntries(files: Array<string>): webpack.Entry {
+function getEntries(files: string[]): webpack.Entry {
   return files.reduceRight(
     (entriesAcc, file) => ({
       ...entriesAcc,

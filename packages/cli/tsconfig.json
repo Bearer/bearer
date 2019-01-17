@@ -10,7 +10,8 @@
     "outDir": "./lib",
     "rootDirs": ["./src"],
     "strict": true,
-    "target": "es2017"
+    "target": "es2017",
+    "strictNullChecks": true
   },
   "include": ["./src/**/*"],
   "exclude": ["./templates/generate/**"]

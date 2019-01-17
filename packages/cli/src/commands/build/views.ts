@@ -25,7 +25,7 @@ export default class BuildViews extends BaseCommand {
   @RequireScenarioFolder()
   async run() {
     const { flags } = this.parse(BuildViews)
-    const tasks: Array<Listr.ListrTask> = [
+    const tasks: Listr.ListrTask[] = [
       {
         title: 'Transpile views',
         task: async (_ctx: any, _task: any) => this.transpile()
@@ -37,7 +37,7 @@ export default class BuildViews extends BaseCommand {
           // TODO: update here when watch mode required
           // if(flags.noWatch) { // or similar
           watcher.close()
-          //}
+          // }
         }
       }
     ]
@@ -71,7 +71,7 @@ export default class BuildViews extends BaseCommand {
         }
       }
 
-      const watcher = chokidar.watch(watchedPath + '/**', {
+      const watcher = chokidar.watch(`${watchedPath}/**`, {
         ignored: /\.tsx?$/,
         persistent: true,
         followSymlinks: false
@@ -94,7 +94,7 @@ export default class BuildViews extends BaseCommand {
           this.debug('deleting symlink')
           fs.unlink(targetPath, err => {
             if (err) throw err
-            this.debug(targetPath + ' was deleted')
+            this.debug(`${targetPath} was deleted`)
           })
         }
       })

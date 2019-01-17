@@ -1,17 +1,25 @@
-import { SaveState } from '@bearer/intents'
+import { TOAUTH2AuthContext, TFetchPayload, FetchData, TFetchActionEvent } from '@bearer/intents'
+// Uncomment this line if you need to use Client
+// import Client from './client'
 
-type AType = { aliasedParams: string }
+export default class Intent {
+  static intentType = FetchData
 
-// @ts-ignore
-type TOAUTH2AuthContext = {}
-// @ts-ignore
-type TFetchDataCallback = (p: any) => void
-
-export class TypeAliasClass {
-  // @ts-ignore
-  static intentType = SaveState
-
-  static action(context: TOAUTH2AuthContext, params: AType, body: any, callback: TFetchDataCallback) {
-    callback({ data: [] })
+  static async action(event: TFetchActionEvent<TOAUTH2AuthContext, Params>): Promise<ReturnedData> {
+    // const token = event.context.authAccess.accessToken
+    // Put your logic here
+    return { data: [] }
   }
 }
+
+/**
+ * Typing
+ */
+export type Params = {
+  name: string
+  somethingElse: number
+}
+
+export type ReturnedData = TFetchPayload<{
+  // foo: string[]
+}>
