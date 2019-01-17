@@ -1,105 +1,240 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Generate APIKEY - generate:intent Fetch intent 1`] = `
-"import { FetchData, TAPIKEYAuthContext,  } from '@bearer/intents'
+"import { TAPIKEYAuthContext, TFetchPayload, FetchData, TFetchActionEvent } from '@bearer/intents'
 // Uncomment this line if you need to use Client
 // import Client from './client'
 
 export default class FetchDataIntentIntent {
-  static intentType: any = FetchData
+  static intentType = FetchData
 
-  
+  static async action(event: TFetchActionEvent<TAPIKEYAuthContext, Params>): Promise<ReturnedData> {
+    // const token = event.context.authAccess.apiKey
+    // Put your logic here
+    return { data: [] }
+  }
 }
+
+/**
+ * Typing
+ */
+export type Params = {
+  // name: string
+}
+
+export type ReturnedData = TFetchPayload<{
+  // foo: string[]
+}>
 "
 `;
 
 exports[`Generate APIKEY - generate:intent Save intent 1`] = `
-"import { SaveState, TAPIKEYAuthContext,  } from '@bearer/intents'
+"import { TAPIKEYAuthContext, TSaveStatePayload, SaveState, TSaveActionEvent } from '@bearer/intents'
 // Uncomment this line if you need to use Client
 // import Client from './client'
 
 export default class SaveIntentIntent {
-  static intentType: any = SaveState
+  static intentType = SaveState
 
-  
+  static async action(event: TSaveActionEvent<TAPIKEYAuthContext, State, Params>): Promise<ReturnedData> {
+    // const token = event.context.authAccess.apiKey
+    // Put your logic here
+    return { state: [], data: [] }
+  }
 }
+
+/**
+ * Typing
+ */
+export type Params = {
+  // name: string
+}
+
+export type State = {
+  // foo: string[]
+}
+
+export type ReturnedData = TSaveStatePayload<State, {
+  // foo: string[]
+}>
 "
 `;
 
 exports[`Generate BASIC - generate:intent Fetch intent 1`] = `
-"import { FetchData, TBASICAuthContext,  } from '@bearer/intents'
+"import { TBASICAuthContext, TFetchPayload, FetchData, TFetchActionEvent } from '@bearer/intents'
 // Uncomment this line if you need to use Client
 // import Client from './client'
 
 export default class FetchDataIntentIntent {
-  static intentType: any = FetchData
+  static intentType = FetchData
 
-  
+  static async action(event: TFetchActionEvent<TBASICAuthContext, Params>): Promise<ReturnedData> {
+    // const { username, password } = event.context.authAccess
+    // Put your logic here
+    return { data: [] }
+  }
 }
+
+/**
+ * Typing
+ */
+export type Params = {
+  // name: string
+}
+
+export type ReturnedData = TFetchPayload<{
+  // foo: string[]
+}>
 "
 `;
 
 exports[`Generate BASIC - generate:intent Save intent 1`] = `
-"import { SaveState, TBASICAuthContext,  } from '@bearer/intents'
+"import { TBASICAuthContext, TSaveStatePayload, SaveState, TSaveActionEvent } from '@bearer/intents'
 // Uncomment this line if you need to use Client
 // import Client from './client'
 
 export default class SaveIntentIntent {
-  static intentType: any = SaveState
+  static intentType = SaveState
 
-  
+  static async action(event: TSaveActionEvent<TBASICAuthContext, State, Params>): Promise<ReturnedData> {
+    // const { username, password } = event.context.authAccess
+    // Put your logic here
+    return { state: [], data: [] }
+  }
 }
+
+/**
+ * Typing
+ */
+export type Params = {
+  // name: string
+}
+
+export type State = {
+  // foo: string[]
+}
+
+export type ReturnedData = TSaveStatePayload<State, {
+  // foo: string[]
+}>
 "
 `;
 
 exports[`Generate NONE - generate:intent Fetch intent 1`] = `
-"import { FetchData, TNONEAuthContext,  } from '@bearer/intents'
+"import { TNONEAuthContext, TFetchPayload, FetchData, TFetchActionEvent } from '@bearer/intents'
 // Uncomment this line if you need to use Client
 // import Client from './client'
 
 export default class FetchDataIntentIntent {
-  static intentType: any = FetchData
+  static intentType = FetchData
 
-  
+  static async action(event: TFetchActionEvent<TNONEAuthContext, Params>): Promise<ReturnedData> {
+    // Put your logic here
+    return { data: [] }
+  }
 }
+
+/**
+ * Typing
+ */
+export type Params = {
+  // name: string
+}
+
+export type ReturnedData = TFetchPayload<{
+  // foo: string[]
+}>
 "
 `;
 
 exports[`Generate NONE - generate:intent Save intent 1`] = `
-"import { SaveState, TNONEAuthContext,  } from '@bearer/intents'
+"import { TNONEAuthContext, TSaveStatePayload, SaveState, TSaveActionEvent } from '@bearer/intents'
 // Uncomment this line if you need to use Client
 // import Client from './client'
 
 export default class SaveIntentIntent {
-  static intentType: any = SaveState
+  static intentType = SaveState
 
-  
+  static async action(event: TSaveActionEvent<TNONEAuthContext, State, Params>): Promise<ReturnedData> {
+    // Put your logic here
+    return { state: [], data: [] }
+  }
 }
+
+/**
+ * Typing
+ */
+export type Params = {
+  // name: string
+}
+
+export type State = {
+  // foo: string[]
+}
+
+export type ReturnedData = TSaveStatePayload<State, {
+  // foo: string[]
+}>
+
 "
 `;
 
 exports[`Generate OAUTH2 - generate:intent Fetch intent 1`] = `
-"import { FetchData, TOAUTH2AuthContext,  } from '@bearer/intents'
+"import { TOAUTH2AuthContext, TFetchPayload, FetchData, TFetchActionEvent } from '@bearer/intents'
 // Uncomment this line if you need to use Client
 // import Client from './client'
 
 export default class FetchDataIntentIntent {
-  static intentType: any = FetchData
+  static intentType = FetchData
 
-  
+  static async action(event: TFetchActionEvent<TOAUTH2AuthContext, Params>): Promise<ReturnedData> {
+    // const token = event.context.authAccess.accessToken
+    // Put your logic here
+    return { data: [] }
+  }
 }
+
+/**
+ * Typing
+ */
+export type Params = {
+  // name: string
+}
+
+export type ReturnedData = TFetchPayload<{
+  // foo: string[]
+}>
 "
 `;
 
 exports[`Generate OAUTH2 - generate:intent Save intent 1`] = `
-"import { SaveState, TOAUTH2AuthContext,  } from '@bearer/intents'
+"import { TOAUTH2AuthContext, TSaveStatePayload, SaveState, TSaveActionEvent } from '@bearer/intents'
 // Uncomment this line if you need to use Client
 // import Client from './client'
 
 export default class SaveIntentIntent {
-  static intentType: any = SaveState
+  static intentType = SaveState
 
-  
+  static async action(event: TSaveActionEvent<TOAUTH2AuthContext, State, Params>): Promise<ReturnedData> {
+    // const token = event.context.authAccess.accessToken
+    // Put your logic here
+    return { state: [], data: [] }
+  }
 }
+
+/**
+ * Typing
+ */
+export type Params = {
+  // name: string
+}
+
+export type State = {
+  // foo: string[]
+}
+
+export type ReturnedData = TSaveStatePayload<State, {
+  // foo: string[]
+}>
 "
 `;
