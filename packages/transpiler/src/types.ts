@@ -13,8 +13,6 @@ export type ComponentMetadata = {
   imports?: string[]
   inputs?: TComponentInputDefinition[]
   outputs?: TComponentOutputDefinition[]
-  inputsMeta?: InputMeta[]
-  outputsMeta?: OutputMeta[]
 }
 
 export type TComponentInputDefinition = {
