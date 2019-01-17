@@ -41,6 +41,26 @@ export function runTransformers(code: string, transformers: ts.TransformerFactor
   return result
 }
 
+export function runTransformersOn(
+  itDescription: string,
+  unitTestDirectory: string,
+  transformers: ts.TransformerFactory<ts.SourceFile>[]
+) {
+  it(itDescription, done => {
+    const srcDirectory = UnitFixtureDirectory(unitTestDirectory)
+
+    fs.readdirSync(srcDirectory).forEach(file => {
+      const filePath = path.join(srcDirectory, file)
+
+      fs.readFile(filePath, 'utf8', (_e, postContent) => {
+        const result = runTransformers(postContent, transformers)
+        expect(result).toMatchSnapshot()
+        done()
+      })
+    })
+  })
+}
+
 export function runUnitOn(name: string, transpilerOptions: Partial<TranpilerOptions> = {}) {
   const srcDirectory = UnitFixtureDirectory(name)
 
