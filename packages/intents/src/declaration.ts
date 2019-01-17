@@ -44,20 +44,22 @@ export type TBearerLambdaContext<AuthContext = TAuthContext> = AuthContext & {
  * Later, data could be automatically loaded by passing a reference ID parameter
  * terraformerId => will inject terrafomer object into context if found within Bearer database
  */
-export type ISaveStateAction<AuthContext = TAuthContext, State = any, ReturnedData = any, Params = any> = (
-  event: {
-    context: TBearerLambdaContext<AuthContext>
-    params: Params
-    state: State
-  }
+export type TSaveStateAction<AuthContext = TAuthContext, State = any, ReturnedData = any, Params = any> = (
+  event: TSaveActionEvent<AuthContext, State, Params>
 ) => Promise<TSaveStatePayload<State, ReturnedData>>
+
+export type TSaveActionEvent<AuthContext = TAuthContext, State = any, Params = any> = {
+  context: TBearerLambdaContext<AuthContext>
+  params: Params
+  state: Partial<State>
+}
 
 /**
  * Retrieve state action, lets you get the data from Bearer database
  * Alternatively, you can use query string parameter reference ID
  * to load the data directly into action context
  */
-export type IRetrieveStateAction<AuthContext = TAuthContext, State = any, ReturnedData = any, Params = any> = (
+export type TRetrieveStateAction<AuthContext = TAuthContext, State = any, ReturnedData = any, Params = any> = (
   event: {
     context: TBearerLambdaContext<AuthContext>
     params: Params
@@ -68,12 +70,14 @@ export type IRetrieveStateAction<AuthContext = TAuthContext, State = any, Return
 /**
  * Fetch any data
  */
-export type TFetchAction<AuthContext = TAuthContext, ReturnedData = any> = (
-  event: {
-    context: TBearerLambdaContext<AuthContext>
-    params: Record<string, any>
-  }
+export type TFetchAction<AuthContext = TAuthContext, Params = Record<string, any>, ReturnedData = any> = (
+  event: TFetchActionEvent<AuthContext, Params>
 ) => Promise<TFetchPayload<ReturnedData>>
+
+export type TFetchActionEvent<AuthContext = TAuthContext, Params = Record<string, any>> = {
+  context: TBearerLambdaContext<AuthContext>
+  params: Params
+}
 
 export type TStateData = AxiosResponse<{
   Item: any

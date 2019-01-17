@@ -8,7 +8,7 @@ import { bodyFromEvent, eventAsActionParams } from './utils'
 const logger = debug('intents:fetch-state')
 
 export class SaveState {
-  static intent(action: d.ISaveStateAction) {
+  static intent(action: d.TSaveStateAction) {
     // tslint:disable-next-line:variable-name
     const DBClient = CLIENT.instance
 
