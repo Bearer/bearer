@@ -6,19 +6,19 @@ What's next?
 
 ,[1m   cd APIKEYScenario && bearer start[22m
 ,[32mScenario initialized, name: APIKEYScenario, authentication type: API Key[39m
-,[90m    create: [39m[37m.bearer/init/APIKEY/.gitignore[39m
-,[90m    create: [39m[37m.bearer/init/APIKEY/.scenariorc[39m
-,[90m    create: [39m[37m.bearer/init/APIKEY/LICENSE[39m
-,[90m    create: [39m[37m.bearer/init/APIKEY/auth.config.json[39m
-,[90m    create: [39m[37m.bearer/init/APIKEY/config.dev.js.example[39m
-,[90m    create: [39m[37m.bearer/init/APIKEY/intents/client.ts[39m
-,[90m    create: [39m[37m.bearer/init/APIKEY/intents/tsconfig.json[39m
-,[90m    create: [39m[37m.bearer/init/APIKEY/package.json[39m
-,[90m    create: [39m[37m.bearer/init/APIKEY/spec.ts[39m
-,[90m    create: [39m[37m.bearer/init/APIKEY/tsconfig.json[39m
-,[90m    create: [39m[37m.bearer/init/APIKEY/views/index.html[39m
-,[90m    create: [39m[37m.bearer/init/APIKEY/views/index.ts[39m
-,[90m    create: [39m[37m.bearer/init/APIKEY/views/openapi.json[39m
+,[90m    create: [39m[37m.bearer/init/new/APIKEY/.gitignore[39m
+,[90m    create: [39m[37m.bearer/init/new/APIKEY/.scenariorc[39m
+,[90m    create: [39m[37m.bearer/init/new/APIKEY/LICENSE[39m
+,[90m    create: [39m[37m.bearer/init/new/APIKEY/auth.config.json[39m
+,[90m    create: [39m[37m.bearer/init/new/APIKEY/config.dev.js.example[39m
+,[90m    create: [39m[37m.bearer/init/new/APIKEY/intents/client.ts[39m
+,[90m    create: [39m[37m.bearer/init/new/APIKEY/intents/tsconfig.json[39m
+,[90m    create: [39m[37m.bearer/init/new/APIKEY/package.json[39m
+,[90m    create: [39m[37m.bearer/init/new/APIKEY/spec.ts[39m
+,[90m    create: [39m[37m.bearer/init/new/APIKEY/tsconfig.json[39m
+,[90m    create: [39m[37m.bearer/init/new/APIKEY/views/index.html[39m
+,[90m    create: [39m[37m.bearer/init/new/APIKEY/views/index.ts[39m
+,[90m    create: [39m[37m.bearer/init/new/APIKEY/views/openapi.json[39m
 ,[?25h,[?25l,* read the bearer documentation at https://docs.bearer.sh
 
 ,* start your local development environement by running:
@@ -40,33 +40,83 @@ exports[`APIKEY generates a scenario without any prompt and APIKEY 2`] = `
 "
 `;
 
-exports[`BASIC generates a scenario without any prompt and BASIC 1`] = `
+exports[`BASIC generates a scenario without any prompt and BASIC 1`] = `"[?25l"`;
+
+exports[`BASIC generates a scenario without any prompt and BASIC 2`] = `
+"{
+  \\"authorizationURL\\": \\"https://example.com/authorizationUrl\\",
+  \\"tokenURL\\": \\"https://example.com/tokenUrl\\",
+  \\"authType\\": \\"OAUTH2\\",
+  \\"tokenParams\\": {},
+  \\"authorizationParams\\": {},
+  \\"config\\": {
+    \\"scope\\": []
+  },
+  \\"setupViews\\": [
+    {
+      \\"type\\": \\"text\\",
+      \\"label\\": \\"Client ID\\",
+      \\"controlName\\": \\"clientID\\"
+    },
+    {
+      \\"type\\": \\"password\\",
+      \\"label\\": \\"Client Secret\\",
+      \\"controlName\\": \\"clientSecret\\"
+    }
+  ]
+}
+"
+`;
+
+exports[`BASIC generates a scenario without any prompt and BASIC 3`] = `
 "
 What's next?
 
+,
+What's next?
+
 ,[1m   cd BASICScenario && bearer start[22m
+,[1m   cd OAUTH2Scenario && bearer start[22m
 ,[32mScenario initialized, name: BASICScenario, authentication type: Basic Auth[39m
-,[90m    create: [39m[37m.bearer/init/BASIC/.gitignore[39m
-,[90m    create: [39m[37m.bearer/init/BASIC/.scenariorc[39m
-,[90m    create: [39m[37m.bearer/init/BASIC/LICENSE[39m
-,[90m    create: [39m[37m.bearer/init/BASIC/auth.config.json[39m
-,[90m    create: [39m[37m.bearer/init/BASIC/config.dev.js.example[39m
-,[90m    create: [39m[37m.bearer/init/BASIC/intents/client.ts[39m
-,[90m    create: [39m[37m.bearer/init/BASIC/intents/tsconfig.json[39m
-,[90m    create: [39m[37m.bearer/init/BASIC/package.json[39m
-,[90m    create: [39m[37m.bearer/init/BASIC/spec.ts[39m
-,[90m    create: [39m[37m.bearer/init/BASIC/tsconfig.json[39m
-,[90m    create: [39m[37m.bearer/init/BASIC/views/index.html[39m
-,[90m    create: [39m[37m.bearer/init/BASIC/views/index.ts[39m
-,[90m    create: [39m[37m.bearer/init/BASIC/views/openapi.json[39m
-,[?25h,[?25l,* read the bearer documentation at https://docs.bearer.sh
+,[32mScenario initialized, name: OAUTH2Scenario, authentication type: OAuth2[39m
+,[90m    create: [39m[37m.bearer/init/new/BASIC/.gitignore[39m
+,[90m    create: [39m[37m.bearer/init/new/BASIC/.scenariorc[39m
+,[90m    create: [39m[37m.bearer/init/new/BASIC/LICENSE[39m
+,[90m    create: [39m[37m.bearer/init/new/BASIC/auth.config.json[39m
+,[90m    create: [39m[37m.bearer/init/new/BASIC/config.dev.js.example[39m
+,[90m    create: [39m[37m.bearer/init/new/BASIC/intents/client.ts[39m
+,[90m    create: [39m[37m.bearer/init/new/BASIC/intents/tsconfig.json[39m
+,[90m    create: [39m[37m.bearer/init/new/BASIC/package.json[39m
+,[90m    create: [39m[37m.bearer/init/new/BASIC/spec.ts[39m
+,[90m    create: [39m[37m.bearer/init/new/BASIC/tsconfig.json[39m
+,[90m    create: [39m[37m.bearer/init/new/BASIC/views/index.html[39m
+,[90m    create: [39m[37m.bearer/init/new/BASIC/views/index.ts[39m
+,[90m    create: [39m[37m.bearer/init/new/BASIC/views/openapi.json[39m
+,[90m    create: [39m[37m.bearer/init/new/OAUTH2/.gitignore[39m
+,[90m    create: [39m[37m.bearer/init/new/OAUTH2/.scenariorc[39m
+,[90m    create: [39m[37m.bearer/init/new/OAUTH2/LICENSE[39m
+,[90m    create: [39m[37m.bearer/init/new/OAUTH2/auth.config.json[39m
+,[90m    create: [39m[37m.bearer/init/new/OAUTH2/config.dev.js.example[39m
+,[90m    create: [39m[37m.bearer/init/new/OAUTH2/intents/client.ts[39m
+,[90m    create: [39m[37m.bearer/init/new/OAUTH2/intents/tsconfig.json[39m
+,[90m    create: [39m[37m.bearer/init/new/OAUTH2/package.json[39m
+,[90m    create: [39m[37m.bearer/init/new/OAUTH2/spec.ts[39m
+,[90m    create: [39m[37m.bearer/init/new/OAUTH2/tsconfig.json[39m
+,[90m    create: [39m[37m.bearer/init/new/OAUTH2/views/index.html[39m
+,[90m    create: [39m[37m.bearer/init/new/OAUTH2/views/index.ts[39m
+,[90m    create: [39m[37m.bearer/init/new/OAUTH2/views/openapi.json[39m
+,[?25h,[?25h,[?25l,* read the bearer documentation at https://docs.bearer.sh
+
+,* read the bearer documentation at https://docs.bearer.sh
+
+,* start your local development environement by running:
 
 ,* start your local development environement by running:
 
 "
 `;
 
-exports[`BASIC generates a scenario without any prompt and BASIC 2`] = `
+exports[`BASIC generates a scenario without any prompt and BASIC 4`] = `
 "{
   \\"authType\\": \\"BASIC\\",
   \\"setupViews\\": [
@@ -91,19 +141,19 @@ What's next?
 
 ,[1m   cd NONEScenario && bearer start[22m
 ,[32mScenario initialized, name: NONEScenario, authentication type: NoAuth[39m
-,[90m    create: [39m[37m.bearer/init/NONE/.gitignore[39m
-,[90m    create: [39m[37m.bearer/init/NONE/.scenariorc[39m
-,[90m    create: [39m[37m.bearer/init/NONE/LICENSE[39m
-,[90m    create: [39m[37m.bearer/init/NONE/auth.config.json[39m
-,[90m    create: [39m[37m.bearer/init/NONE/config.dev.js.example[39m
-,[90m    create: [39m[37m.bearer/init/NONE/intents/client.ts[39m
-,[90m    create: [39m[37m.bearer/init/NONE/intents/tsconfig.json[39m
-,[90m    create: [39m[37m.bearer/init/NONE/package.json[39m
-,[90m    create: [39m[37m.bearer/init/NONE/spec.ts[39m
-,[90m    create: [39m[37m.bearer/init/NONE/tsconfig.json[39m
-,[90m    create: [39m[37m.bearer/init/NONE/views/index.html[39m
-,[90m    create: [39m[37m.bearer/init/NONE/views/index.ts[39m
-,[90m    create: [39m[37m.bearer/init/NONE/views/openapi.json[39m
+,[90m    create: [39m[37m.bearer/init/new/NONE/.gitignore[39m
+,[90m    create: [39m[37m.bearer/init/new/NONE/.scenariorc[39m
+,[90m    create: [39m[37m.bearer/init/new/NONE/LICENSE[39m
+,[90m    create: [39m[37m.bearer/init/new/NONE/auth.config.json[39m
+,[90m    create: [39m[37m.bearer/init/new/NONE/config.dev.js.example[39m
+,[90m    create: [39m[37m.bearer/init/new/NONE/intents/client.ts[39m
+,[90m    create: [39m[37m.bearer/init/new/NONE/intents/tsconfig.json[39m
+,[90m    create: [39m[37m.bearer/init/new/NONE/package.json[39m
+,[90m    create: [39m[37m.bearer/init/new/NONE/spec.ts[39m
+,[90m    create: [39m[37m.bearer/init/new/NONE/tsconfig.json[39m
+,[90m    create: [39m[37m.bearer/init/new/NONE/views/index.html[39m
+,[90m    create: [39m[37m.bearer/init/new/NONE/views/index.ts[39m
+,[90m    create: [39m[37m.bearer/init/new/NONE/views/openapi.json[39m
 ,[?25h,[?25l,* read the bearer documentation at https://docs.bearer.sh
 
 ,* start your local development environement by running:

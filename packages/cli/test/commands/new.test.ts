@@ -12,16 +12,23 @@ function readFile(folder: string, filename: string): string {
 
 const auths = ['OAUTH2', 'BASIC', 'APIKEY', 'NONE']
 
-auths.map(auth => {
-  describe(auth, () => {
-    it(`generates a scenario without any prompt and ${auth}`, async () => {
-      const result: Array<string> = []
-      jest.spyOn(process.stdout, 'write').mockImplementation(val => result.push(val))
-      await NewCommand.run([`${auth}Scenario`, '-a', auth, '--skipInstall', '--path', path.join(destination, auth)])
-      const outPut = result.sort().join()
-      expect(outPut).toMatchSnapshot()
-      expect(readFile(auth, AUTHCONFIG)).toMatchSnapshot()
-      await setTimeout(() => {}, 10)
-    })
+describe.each(Object.values(auths))('%s', auth => {
+  it(`generates a scenario without any prompt and ${auth}`, async () => {
+    const result: string[] = []
+    jest.spyOn(process.stdout, 'write').mockImplementation(val => result.push(val))
+
+    await NewCommand.run([
+      `${auth}Scenario`,
+      '-a',
+      auth,
+      '--skipInstall',
+      '--path',
+      path.join(destination, 'new', auth)
+    ])
+
+    const outPut = result.sort().join()
+    expect(outPut).toMatchSnapshot()
+    expect(readFile(path.join('new', auth), AUTHCONFIG)).toMatchSnapshot()
+    await setTimeout(() => {}, 10)
   })
 })

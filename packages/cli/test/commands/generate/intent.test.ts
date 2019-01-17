@@ -1,19 +1,21 @@
 import GenerateIntent from '../../../src/commands/generate/intent'
 import { ensureBearerStructure } from '../../helpers/setup'
 import { readFile } from '../../helpers/utils'
+import { Authentications } from '@bearer/types/lib/authentications'
 
 describe('Generate', () => {
   let bearerPath: string
-  let result: Array<string>
+  let result: string[]
 
-  beforeEach(() => {
-    result = []
-    jest.spyOn(process.stdout, 'write').mockImplementation(val => result.push(val))
-    bearerPath = ensureBearerStructure()
-  })
+  describe.each(Object.values(Authentications))(`%s - generate:intent`, authType => {
+    beforeAll(() => {
+      result = []
+      jest.spyOn(process.stdout, 'write').mockImplementation(val => result.push(val))
+      bearerPath = ensureBearerStructure({ clean: true, authConfig: { authType }, folderName: authType })
+    })
 
-  describe('generate:intent', () => {
     it('Fetch intent', async () => {
+      console.log('[BEARER]', 'bearerPath', bearerPath)
       await GenerateIntent.run(['FetchDataIntent', '-t', 'fetch', '--path', bearerPath])
       expect(result.join()).toContain('Intent generated')
       expect(readFile(bearerPath, 'intents', 'FetchDataIntent.ts')).toMatchSnapshot()

@@ -1,4 +1,4 @@
-import { templates } from '@bearer/templates'
+import * as path from 'path'
 import { Authentications } from '@bearer/types/lib/authentications'
 import IntentType from '@bearer/types/lib/intent-types'
 import { flags } from '@oclif/command'
@@ -36,7 +36,7 @@ export default class GenerateIntent extends BaseCommand {
       : types.find(t => (t as { cli: string }).cli === flags.type)!.value
     const name = args.name || (await this.askForName())
     const authType = this.scenarioAuthConfig.authType
-    if (!templates[authType]) {
+    if (!Object.values(Authentications).includes(authType)) {
       // TODO: better error output
       this.error(
         `Incorrect AuthType please update "authType" field of auth.config.json within your scenario, 
@@ -45,7 +45,7 @@ export default class GenerateIntent extends BaseCommand {
     }
     try {
       const vars = this.getVars(name, type, authType)
-      await copyFiles(this, `generate/intent`, this.locator.srcIntentsDir, vars)
+      await copyFiles(this, path.join(`generate/intent`, authType, type), this.locator.srcIntentsDir, vars)
       this.success(`\nIntent generated`)
       // TODO: add a nicer display
     } catch (e) {
@@ -54,19 +54,12 @@ export default class GenerateIntent extends BaseCommand {
   }
 
   getVars(name: string, intentType: IntentType, authType: Authentications) {
-    const actionExample = this.getActionExample(intentType, authType)
     return {
       authType,
       intentType,
-      actionExample,
       fileName: name,
-      intentClassName: this.case.pascal(name),
-      callbackType: `T${intentType}Callback`
+      intentClassName: this.case.pascal(name)
     }
-  }
-
-  getActionExample(intentType: IntentType, authType: Authentications): string {
-    return templates[authType][intentType] as string
   }
 
   async askForName(): Promise<string> {

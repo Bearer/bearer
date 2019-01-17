@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Generate generate:intent Fetch intent 1`] = `
-"import { FetchData, TAPIKEYAuthContext, TFetchDataCallback } from '@bearer/intents'
+exports[`Generate APIKEY - generate:intent Fetch intent 1`] = `
+"import { FetchData, TAPIKEYAuthContext,  } from '@bearer/intents'
 // Uncomment this line if you need to use Client
 // import Client from './client'
 
@@ -9,25 +9,12 @@ export default class FetchDataIntentIntent {
   static intentType: any = FetchData
 
   
-  static action(context: TAPIKEYAuthContext, params: any, body: any, callback: TFetchDataCallback) {
-    //... your code goes here
-    // use the client defined in client.ts to fetch real object like that:
-    // Client(context.authAccess.apiKey).get('/people')
-    //   .then(({ data }) => {
-    //     callback({ data })
-    //   })
-    //   .catch((error) => {
-    //     callback({ error: error.toString() })
-    //   })
-    callback({ data: []})
-  }
-  
 }
 "
 `;
 
-exports[`Generate generate:intent Save intent 1`] = `
-"import { SaveState, TAPIKEYAuthContext, TSaveStateCallback } from '@bearer/intents'
+exports[`Generate APIKEY - generate:intent Save intent 1`] = `
+"import { SaveState, TAPIKEYAuthContext,  } from '@bearer/intents'
 // Uncomment this line if you need to use Client
 // import Client from './client'
 
@@ -35,25 +22,83 @@ export default class SaveIntentIntent {
   static intentType: any = SaveState
 
   
-  static action(
-    _context: TAPIKEYAuthContext,
-    _params: any,
-    body: any,
-    state: any,
-    callback: TSaveStateCallback
-  ): void {
-    const { item: { name } } = body
-    const { items = [] }: any = state
-    const newItem: any = { name }
+}
+"
+`;
 
-    callback({
-      state: {
-        ...state,
-        items: [...items, newItem]
-      },
-      data: [...items, newItem]
-    })
-  }
+exports[`Generate BASIC - generate:intent Fetch intent 1`] = `
+"import { FetchData, TBASICAuthContext,  } from '@bearer/intents'
+// Uncomment this line if you need to use Client
+// import Client from './client'
+
+export default class FetchDataIntentIntent {
+  static intentType: any = FetchData
+
+  
+}
+"
+`;
+
+exports[`Generate BASIC - generate:intent Save intent 1`] = `
+"import { SaveState, TBASICAuthContext,  } from '@bearer/intents'
+// Uncomment this line if you need to use Client
+// import Client from './client'
+
+export default class SaveIntentIntent {
+  static intentType: any = SaveState
+
+  
+}
+"
+`;
+
+exports[`Generate NONE - generate:intent Fetch intent 1`] = `
+"import { FetchData, TNONEAuthContext,  } from '@bearer/intents'
+// Uncomment this line if you need to use Client
+// import Client from './client'
+
+export default class FetchDataIntentIntent {
+  static intentType: any = FetchData
+
+  
+}
+"
+`;
+
+exports[`Generate NONE - generate:intent Save intent 1`] = `
+"import { SaveState, TNONEAuthContext,  } from '@bearer/intents'
+// Uncomment this line if you need to use Client
+// import Client from './client'
+
+export default class SaveIntentIntent {
+  static intentType: any = SaveState
+
+  
+}
+"
+`;
+
+exports[`Generate OAUTH2 - generate:intent Fetch intent 1`] = `
+"import { FetchData, TOAUTH2AuthContext,  } from '@bearer/intents'
+// Uncomment this line if you need to use Client
+// import Client from './client'
+
+export default class FetchDataIntentIntent {
+  static intentType: any = FetchData
+
+  
+}
+"
+`;
+
+exports[`Generate OAUTH2 - generate:intent Save intent 1`] = `
+"import { SaveState, TOAUTH2AuthContext,  } from '@bearer/intents'
+// Uncomment this line if you need to use Client
+// import Client from './client'
+
+export default class SaveIntentIntent {
+  static intentType: any = SaveState
+
   
 }
 "
