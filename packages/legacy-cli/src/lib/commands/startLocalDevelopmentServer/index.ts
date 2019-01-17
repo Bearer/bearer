@@ -121,7 +121,7 @@ const intentHandler = (distPath: string, devIntentsContext, bearerBaseURL: strin
 
       const userDefinedData = await loadUserDefinedData({ query: ctx.query })
 
-      intent.intentType.intent(intent.action)(
+      const datum = await intent.intentType.intent(intent.action)(
         {
           context: {
             ...devIntentsContext.global,
@@ -132,13 +132,11 @@ const intentHandler = (distPath: string, devIntentsContext, bearerBaseURL: strin
           queryStringParameters: ctx.query,
           body: JSON.stringify(ctx.request.body)
         },
-        {},
-        (_err, datum) => {
-          ctx.intentDatum = datum
-          next()
-          resolve()
-        }
+        {}
       )
+      ctx.intentDatum = datum
+      next()
+      resolve()
     } catch (e) {
       console.log('ERROR: ', e)
       if (e.code === 'MODULE_NOT_FOUND') {
