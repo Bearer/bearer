@@ -6,6 +6,7 @@ import { bodyFromEvent, fetchData, eventAsActionParams } from './utils'
 const logger = debug('intents:fetch-state')
 
 export class FetchData {
+  // TODO: remove as soon as async intents are released
   static intent(action: d.TFetchDataAction) {
     return (event: d.TLambdaEvent, _context, lambdaCallback: d.TLambdaCallback) => {
       action(event.context, event.queryStringParameters, bodyFromEvent(event), result => {

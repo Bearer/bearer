@@ -38,6 +38,7 @@ export class SaveState {
     }
   }
 
+  // TODO: remove as soon as async intents are released
   static intent(action: d.ISaveStateIntentAction) {
     // tslint:disable-next-line:variable-name
     const DBClient = CLIENT.instance
