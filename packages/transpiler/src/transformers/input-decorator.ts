@@ -57,7 +57,7 @@ export default function InputDecorator({ metadata }: TransformerOptions = {}): t
           const inputMembers = [
             createLocalStateProperty(meta),
             createEventListener(meta),
-            createLoadResourceMethod(meta, inputsMeta, outputsMeta),
+            createLoadResourceMethod(meta, [...inputsMeta, ...outputsMeta]),
             createFetcher(meta),
             createRefIdWatcher(meta)
           ]

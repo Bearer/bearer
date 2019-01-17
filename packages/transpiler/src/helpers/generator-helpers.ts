@@ -36,8 +36,7 @@ function propertyReferenceIdNames(meta: TCreateLoadResourceMethod, metaCollectio
 
 export function createLoadResourceMethod(
   meta: TCreateLoadResourceMethod,
-  metaCollection: TCreateLoadResourceMethod[] = [],
-  altMetaCollection: TCreateLoadResourceMethod[] = []
+  metaCollection: TCreateLoadResourceMethod[] = []
 ) {
   const intentCall = ts.createCall(ts.createPropertyAccess(ts.createThis(), meta.intentMethodName), undefined, [
     ts.createObjectLiteral([
@@ -45,7 +44,7 @@ export function createLoadResourceMethod(
         meta.intentReferenceIdKeyName,
         ts.createPropertyAccess(ts.createThis(), meta.propertyReferenceIdName)
       ),
-      ...propertyReferenceIdNames(meta, [...metaCollection, ...altMetaCollection])
+      ...propertyReferenceIdNames(meta, metaCollection)
     ])
   ])
   const udapteState = ts.createArrowFunction(

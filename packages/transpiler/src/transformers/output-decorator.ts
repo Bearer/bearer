@@ -83,8 +83,7 @@ function injectOuputStatements(
             ...(meta as TCreateLoadResourceMethod),
             propDeclarationName: initialName(meta.propDeclarationName)
           },
-          outputsMeta,
-          inputsMeta
+          [...outputsMeta, ...inputsMeta]
         )
       ]
       return members.concat(outputMembers)
