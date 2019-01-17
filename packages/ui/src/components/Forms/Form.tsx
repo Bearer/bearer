@@ -12,7 +12,7 @@ export class BearerForm {
   @Event() submit: EventEmitter
   @State() values: string[] = []
 
-  handleSubmit() {
+  handleSubmit = () => {
     this.submit.emit(this.fields)
   }
 
@@ -134,9 +134,9 @@ export class BearerForm {
 
   render() {
     return (
-      <form onSubmit={() => this.handleSubmit()}>
+      <form onSubmit={this.handleSubmit}>
         {this.renderInputs()}
-        <bearer-button type="submit" as="input" disabled={!this.isValid()} onSubmit={this.handleSubmit} />
+        <bearer-button type="submit" as="input" disabled={!this.isValid()} onClick={this.handleSubmit} />
       </form>
     )
   }
