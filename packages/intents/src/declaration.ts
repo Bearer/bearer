@@ -53,8 +53,9 @@ export type ISaveStateAction<AuthContext = TAuthContext, State = any, ReturnedDa
 ) => Promise<TSaveStatePayload<State, ReturnedData>>
 
 /**
- * Retrieve state action, let you retrieve data stored into Bearer database
- * Alternatively, you can retrieve data from a fetch Intent by
+ * Retrieve state action, lets you get the data from Bearer database
+ * Alternatively, you can use query string parameter reference ID
+ * to load the data directly into action context
  */
 export type IRetrieveStateAction<AuthContext = TAuthContext, State = any, ReturnedData = any, Params = any> = (
   event: {
@@ -93,9 +94,9 @@ export type TLambdaCallback = (error: any | null, data: any) => void
 /**
  * @deprecated since version beta5 please use ISaveStateAction
  *
- * Save state action, let you store data into Bearer database without having to deal with database communication
- * Later, data could be automatically loaded by passing a reference ID parameter
- * terraformerId => will inject terrafomer object into context if found within Bearer database
+ * Save state action, stores data into Bearer database without having to deal with database communication
+ * In subsequent requests set the reference ID query string parameter preload the data into action context
+ * e.g. terraformerId => will inject terrafomer object into context if found within Bearer database
  */
 export type ISaveStateIntentAction = (
   context: TBearerLambdaContext,
@@ -128,7 +129,7 @@ export type TFetchDataAction = (
 ) => void
 
 /**
- * when success, state represent the data you want to store within Bearer database
- * whereras data sent to the frontend could be different
+ * when success, state represents the data you want to store within Bearer database
+ * whereras data sent in intent response could be different
  */
 export type TSaveStateCallback = (payload: TSaveStatePayload & TErrorPayload<any>) => void
