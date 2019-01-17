@@ -5,7 +5,6 @@ import { intentRequest } from '../requests'
  */
 
 export enum IntentType {
-  RetrieveState = 'RetrieveState',
   SaveState = 'SaveState',
   FetchData = 'FetchData'
 }
@@ -61,10 +60,6 @@ export function Intent(intentName: string, type: IntentType = IntentType.FetchDa
         // prepare params and body
 
         const referenceId = retrieveReferenceId(this)
-        if (type === IntentType.RetrieveState && !referenceId) {
-          return missingReferenceId()
-        }
-
         const { body, ...queryParams } = params
         const baseQuery = referenceId ? { referenceId } : {}
         const query = { ...baseQuery, ...queryParams }
@@ -103,11 +98,6 @@ export function intentPromise(promise: Promise<TFetchBearerResult>): Promise<TFe
 function missingScenarioId(): Promise<any> {
   console.info('[BEARER]', 'Missing scenarioId, skipping api call')
   return Promise.reject(new BearerMissingScenarioId())
-}
-
-function missingReferenceId(): Promise<any> {
-  console.info('[BEARER]', 'Missing referenceId, skipping RetrieveState api call')
-  return Promise.reject(new BearerMissingReferenceId())
 }
 
 function retrieveSetupId(target: BearerComponent): string {

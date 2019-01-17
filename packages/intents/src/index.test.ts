@@ -1,13 +1,9 @@
 import { DBClient } from './db-client'
-import { RetrieveState, SaveState, FetchData, DBClient as CLIENT } from './index'
+import { SaveState, FetchData, DBClient as CLIENT } from './index'
 
 describe('index', () => {
   it('export SaveState', () => {
     expect(SaveState).toBeTruthy()
-  })
-
-  it('export RetrieveState', () => {
-    expect(RetrieveState).toBeTruthy()
   })
 
   it('export FetchData', () => {

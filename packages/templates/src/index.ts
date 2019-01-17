@@ -7,7 +7,6 @@ import oauth2 from './oauth2'
 
 type  TTemplate = {
   SaveState: string,
-  RetrieveState: string,
   FetchData: string
 }
 

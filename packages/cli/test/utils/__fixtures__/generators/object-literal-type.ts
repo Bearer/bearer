@@ -1,4 +1,4 @@
-import { RetrieveState } from '@bearer/intents'
+import { SaveState } from '@bearer/intents'
 
 //@ts-ignore
 type TOAUTH2AuthContext = {}
@@ -7,7 +7,7 @@ type TFetchDataCallback = (p: any) => void
 
 export class ObjectLiteralParamsClass {
   // @ts-ignore
-  static intentType = RetrieveState
+  static intentType = SaveState
 
   static action(
     context: TOAUTH2AuthContext,
@@ -15,6 +15,6 @@ export class ObjectLiteralParamsClass {
     body: any,
     callback: TFetchDataCallback
   ) {
-    callback({ data: [] })
+    callback({ state: [], data: [] })
   }
 }

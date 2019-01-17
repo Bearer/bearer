@@ -1,6 +1,6 @@
-import { RetrieveState } from '@bearer/intents'
+import { SaveState } from '@bearer/intents'
 
 export default class MyIntent {
-  static intentType = RetrieveState
+  static intentType = SaveState
   static action = () => {}
 }

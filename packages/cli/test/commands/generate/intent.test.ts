@@ -24,11 +24,5 @@ describe('Generate', () => {
       expect(result.join()).toContain('Intent generated')
       expect(readFile(bearerPath, 'intents', 'SaveIntent.ts')).toMatchSnapshot()
     })
-
-    it('Retrieve intent', async () => {
-      await GenerateIntent.run(['RetrieveIntent', '-t', 'retrieve', '--path', bearerPath])
-      expect(result.join()).toContain('Intent generated')
-      expect(readFile(bearerPath, 'intents', 'RetrieveIntent.ts')).toMatchSnapshot()
-    })
   })
 })

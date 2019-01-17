@@ -7,11 +7,7 @@ export enum IntentType {
   /**
    * Lets you store data easily data to the Bearer database
    */
-  SaveState = 'SaveState',
-  /**
-   * Lets you retrieve data from the Bearer database
-   */
-  RetrieveState = 'RetrieveState'
+  SaveState = 'SaveState'
 }
 
 export default IntentType

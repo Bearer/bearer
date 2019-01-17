@@ -6,13 +6,8 @@ import { AxiosResponse } from 'axios'
 export type TErrorPayload<ReturnedError> = { error: ReturnedError }
 export type TDataPayload<ReturnedData> = { data: ReturnedData }
 
-/**
- * Intent callbacks
- */
 export type TFetchPayload<ReturnedData = any, ReturnedError = any> = Partial<TDataPayload<ReturnedData>> &
   Partial<TErrorPayload<ReturnedError>>
-
-export type TRetrieveStatePayload<ReturnedData = any, ReturnedError = any> = TFetchPayload<ReturnedData, ReturnedError>
 
 export type TSaveStatePayload<State = any, ReturnedData = any, ReturnedError = any> = {
   state: State
@@ -53,19 +48,6 @@ export type TSaveActionEvent<AuthContext = TAuthContext, State = any, Params = a
   params: Params
   state: Partial<State>
 }
-
-/**
- * Retrieve state action, lets you get the data from Bearer database
- * Alternatively, you can use query string parameter reference ID
- * to load the data directly into action context
- */
-export type TRetrieveStateAction<AuthContext = TAuthContext, State = any, ReturnedData = any, Params = any> = (
-  event: {
-    context: TBearerLambdaContext<AuthContext>
-    params: Params
-    state: State
-  }
-) => Promise<TFetchPayload<ReturnedData>>
 
 /**
  * Fetch any data

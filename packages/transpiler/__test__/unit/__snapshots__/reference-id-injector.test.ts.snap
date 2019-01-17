@@ -1,41 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Refernce Id Injector deprecated retrieve state decorator match snapshot 1`] = `
-Object {
-  "file": "deprecated-retrieve-state-decorator.tsx",
-  "postContent": "import { RetrieveStateIntent, BearerFetch, Prop, Element } from '@bearer/core';
-export class WithDeprecatedRetrieveStateIntent {
-    @RetrieveStateIntent()
-    fetcher: BearerFetch;
-    @Prop()
-    referenceId: string;
-    @Element()
-    el: HTMLElement;
-    constructor() {
-    }
-}
-",
-}
-`;
-
-exports[`Refernce Id Injector deprecated save state decorator match snapshot 1`] = `
-Object {
-  "file": "deprecated-save-state-decorator.tsx",
-  "postContent": "import { SaveStateIntent, BearerFetch, Prop, Element } from '@bearer/core';
-export class WithDeprecatedSaveStateIntent {
-    @SaveStateIntent()
-    fetcher: BearerFetch;
-    @Prop()
-    referenceId: string;
-    @Element()
-    el: HTMLElement;
-    constructor() {
-    }
-}
-",
-}
-`;
-
 exports[`Refernce Id Injector do nothing match snapshot 1`] = `
 Object {
   "file": "do-nothing.tsx",
@@ -52,27 +16,9 @@ class DoNothing {
 }
 `;
 
-exports[`Refernce Id Injector intent type retrievestate decorator present match snapshot 1`] = `
-Object {
-  "file": "intent-type-retrievestate-decorator-present.ts",
-  "postContent": "import { Intent, IntentType, BearerFetch, Prop, Element } from '@bearer/core';
-export class IntentDecorated {
-    private fetcher: BearerFetch;
-    @Prop()
-    referenceId: string;
-    @Element()
-    el: HTMLElement;
-    constructor() {
-        Intent('saveState', IntentType.RetrieveState)(this, \\"fetcher\\");
-    }
-}
-",
-}
-`;
-
 exports[`Refernce Id Injector intent type savestate decorator present match snapshot 1`] = `
 Object {
-  "file": "intent-type-savestate-decorator-present.ts",
+  "file": "intent-type-savestate-decorator-present.tsx",
   "postContent": "import { Intent, IntentType, BearerFetch, Prop, Element } from '@bearer/core';
 export class IntentDecorated {
     private fetcher: BearerFetch;

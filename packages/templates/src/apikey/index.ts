@@ -20,11 +20,6 @@ export default {
     })
   }
   `,
-  RetrieveState: `
-  static action(_context: TAPIKEYAuthContext, _params: any, state, callback: TRetrieveStateCallback) {
-    callback({ data: state })
-  }
-  `,
   FetchData: `
   static action(context: TAPIKEYAuthContext, params: any, body: any, callback: TFetchDataCallback) {
     //... your code goes here

@@ -18,7 +18,6 @@ export enum Decorators {
   Listen = 'Listen',
   BearerState = 'BearerState',
   Intent = 'Intent',
-  RetrieveStateIntent = 'RetrieveStateIntent',
   SaveStateIntent = 'SaveStateIntent',
   statePropName = 'statePropName',
   Input = 'Input',
@@ -34,8 +33,7 @@ export enum Types {
   EventEmitter = 'EventEmitter',
   BearerFetch = 'BearerFetch',
   IntentType = 'IntentType',
-  SaveState = 'SaveState',
-  RetrieveState = 'RetrieveState'
+  SaveState = 'SaveState'
 }
 
 export enum Properties {

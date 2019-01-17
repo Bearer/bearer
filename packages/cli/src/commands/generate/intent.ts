@@ -10,8 +10,7 @@ import { copyFiles } from '../../utils/helpers'
 
 const types = [
   { name: 'Fetch', value: IntentType.FetchData, cli: 'fetch' },
-  { name: 'Save State', value: IntentType.SaveState, cli: 'save' },
-  { name: 'Retrieve Sate', value: IntentType.RetrieveState, cli: 'retrieve' }
+  { name: 'Save State', value: IntentType.SaveState, cli: 'save' }
 ]
 
 const typeChoices = [types.slice(0, 1)[0], new inquirer.Separator(), ...types.slice(1)]
@@ -40,9 +39,8 @@ export default class GenerateIntent extends BaseCommand {
     if (!templates[authType]) {
       // TODO: better error output
       this.error(
-        `Incorrect AuthType please update "authType" field of auth.config.json within your scenario, with one of these values : ${Object.values(
-          Authentications
-        ).join('  |  ')}`
+        `Incorrect AuthType please update "authType" field of auth.config.json within your scenario, 
+        with one of these values : ${Object.values(Authentications).join('  |  ')}`
       )
     }
     try {
@@ -58,11 +56,11 @@ export default class GenerateIntent extends BaseCommand {
   getVars(name: string, intentType: IntentType, authType: Authentications) {
     const actionExample = this.getActionExample(intentType, authType)
     return {
-      fileName: name,
-      intentClassName: this.case.pascal(name),
       authType,
       intentType,
       actionExample,
+      fileName: name,
+      intentClassName: this.case.pascal(name),
       callbackType: `T${intentType}Callback`
     }
   }

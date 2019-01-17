@@ -8,8 +8,6 @@ import { BearerFetch, BearerState, Intent, IntentType, RootComponent } from '@be
 export class InvalidRootComponent {
   @Intent('ListRepositories')
   fetcher: BearerFetch
-  @RetrieveStateIntent()
-  retrieve: BearerFetch
   @BearerState()
   attachedPullRequests: Array<any>
   @BearerState({ statePropName: 'goats' })

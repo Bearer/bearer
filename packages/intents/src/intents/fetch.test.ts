@@ -2,33 +2,6 @@ import { FetchData, FetchActionExecutionError } from './fetch'
 import * as d from '../declaration'
 
 describe('Intents', () => {
-  describe('Fetch', () => {
-    it('export a class', () => {
-      expect(FetchData).toBeTruthy()
-    })
-
-    it('execute promise', done => {
-      const event = {
-        queryStringParameters: {},
-        context: {
-          bearerBaseURL: 'none',
-          authAccess: {} as any
-        }
-      }
-      const context = {}
-      const callback = jest.fn((_error, payload) => {
-        expect(payload).toEqual({ data: { ko: 'ko' } })
-        done()
-      })
-
-      const action = (_context, _params, _body, callback) => {
-        callback({ data: { ko: 'ko' } })
-      }
-
-      FetchData.intent(action)(event, context, callback)
-    })
-  })
-
   describe('Async fetch', () => {
     const defaultAction = () =>
       jest.fn(() => {
@@ -47,7 +20,7 @@ describe('Intents', () => {
         }
       } as any
 
-      const intent = FetchData.intentPromise(action as any)
+      const intent = FetchData.intent(action as any)
       return {
         action,
         event,

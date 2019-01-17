@@ -6,7 +6,7 @@ import { TransformerOptions } from '../types'
 
 import { elementDecorator, ensureImportsFromCore, propDecorator } from './bearer'
 
-export default function BearerReferenceIdInjector({  }: TransformerOptions = {}): ts.TransformerFactory<ts.SourceFile> {
+export default function bearerReferenceIdInjector({  }: TransformerOptions = {}): ts.TransformerFactory<ts.SourceFile> {
   return transformContext => {
     return tsSourceFile => {
       if (!hasRetrieveOrSaveStateIntent(tsSourceFile)) {
@@ -109,7 +109,7 @@ function hasRetrieveOrSaveStateIntent(tsSourceFile: ts.SourceFile): boolean {
     tsSourceFile,
     (node): boolean => {
       if (ts.isClassDeclaration(node)) {
-        return hasDeprecatedStateDecorator(node) || hasIntentWithStateTypeDecorator(node)
+        return hasIntentWithStateTypeDecorator(node)
       }
       return false
     }
@@ -128,14 +128,7 @@ function hasIntentWithStateTypeDecorator(classNode: ts.ClassDeclaration): boolea
     const hasWisthState =
       intentType &&
       intentType.expression.getText() === Types.IntentType &&
-      (intentType.name.getText() === Types.RetrieveState || intentType.name.getText() === Types.SaveState)
+      intentType.name.getText() === Types.SaveState
     return has || hasWisthState
   }, false)
-}
-
-function hasDeprecatedStateDecorator(classNode: ts.ClassDeclaration): boolean {
-  return (
-    hasPropDecoratedWithName(classNode, Decorators.RetrieveStateIntent) ||
-    hasPropDecoratedWithName(classNode, Decorators.SaveStateIntent)
-  )
 }

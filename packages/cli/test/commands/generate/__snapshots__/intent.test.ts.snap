@@ -26,23 +26,6 @@ export default class FetchDataIntentIntent {
 "
 `;
 
-exports[`Generate generate:intent Retrieve intent 1`] = `
-"import { RetrieveState, TAPIKEYAuthContext, TRetrieveStateCallback } from '@bearer/intents'
-// Uncomment this line if you need to use Client
-// import Client from './client'
-
-export default class RetrieveIntentIntent {
-  static intentType: any = RetrieveState
-
-  
-  static action(_context: TAPIKEYAuthContext, _params: any, state, callback: TRetrieveStateCallback) {
-    callback({ data: state })
-  }
-  
-}
-"
-`;
-
 exports[`Generate generate:intent Save intent 1`] = `
 "import { SaveState, TAPIKEYAuthContext, TSaveStateCallback } from '@bearer/intents'
 // Uncomment this line if you need to use Client

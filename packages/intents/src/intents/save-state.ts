@@ -3,7 +3,7 @@ import uuid from 'uuid/v1'
 
 import * as d from '../declaration'
 import { DBClient as CLIENT } from '../db-client'
-import { bodyFromEvent, eventAsActionParams } from './utils'
+import { eventAsActionParams } from './utils'
 
 const logger = debug('intents:fetch-state')
 

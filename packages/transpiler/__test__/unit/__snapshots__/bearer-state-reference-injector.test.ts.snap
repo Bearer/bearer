@@ -1,35 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Bearer State Event Injector add html element reference match snapshot 1`] = `
-Object {
-  "file": "add-html-element-reference.tsx",
-  "postContent": "import { SaveStateIntent, BearerFetch, Prop, Element } from '@bearer/core';
-class AddHTMLElementReference {
-    @SaveStateIntent()
-    fetcher: BearerFetch;
-    @Prop()
-    referenceId: string;
-    @Element()
-    el: HTMLElement;
-    constructor() {
-    }
-}
-",
-}
-`;
-
 exports[`Bearer State Event Injector alias previous declaration match snapshot 1`] = `
 Object {
   "file": "alias-previous-declaration.tsx",
-  "postContent": "import { SaveStateIntent, BearerFetch, Element, Prop } from '@bearer/core';
+  "postContent": "import { BearerFetch, Element } from '@bearer/core';
 class AddHTMLElementReference {
     @Element()
     element: HTMLElement;
-    @SaveStateIntent()
-    fetcher: BearerFetch;
-    @Prop()
-    referenceId: string;
-    get el(): HTMLElement { return this.element; }
     constructor() {
     }
 }
@@ -41,24 +18,6 @@ exports[`Bearer State Event Injector do nothing match snapshot 1`] = `
 Object {
   "file": "do-nothing.tsx",
   "postContent": "class DoNotProcess {
-    constructor() {
-    }
-}
-",
-}
-`;
-
-exports[`Bearer State Event Injector reuse previous declaration match snapshot 1`] = `
-Object {
-  "file": "reuse-previous-declaration.tsx",
-  "postContent": "import { SaveStateIntent, BearerFetch, Element, Prop } from '@bearer/core';
-class AddHTMLElementReference {
-    @Element()
-    el: HTMLElement;
-    @SaveStateIntent()
-    fetcher: BearerFetch;
-    @Prop()
-    referenceId: string;
     constructor() {
     }
 }

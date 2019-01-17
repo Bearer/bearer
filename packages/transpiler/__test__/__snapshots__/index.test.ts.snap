@@ -127,10 +127,6 @@ Object {
       "classname": "InvalidRootComponent",
       "inputs": Array [
         Object {
-          "name": "referenceId",
-          "type": "string",
-        },
-        Object {
           "name": "setupId",
           "type": "string",
         },
@@ -354,10 +350,6 @@ Object {
     Object {
       "classname": "InvalidRootComponent",
       "inputs": Array [
-        Object {
-          "name": "referenceId",
-          "type": "string",
-        },
         Object {
           "name": "setupId",
           "type": "string",
@@ -735,10 +727,6 @@ Object {
       "classname": "InvalidRootComponent",
       "inputs": Array [
         Object {
-          "name": "referenceId",
-          "type": "string",
-        },
-        Object {
           "name": "setupId",
           "type": "string",
         },
@@ -907,10 +895,6 @@ Object {
       "classname": "InvalidRootComponent",
       "inputs": Array [
         Object {
-          "name": "referenceId",
-          "type": "string",
-        },
-        Object {
           "name": "setupId",
           "type": "string",
         },
@@ -934,7 +918,7 @@ Object {
 exports[`Transpiler integration test invalidRootComponent.tsx match expectation 1`] = `
 Object {
   "file": "invalidRootComponent.tsx",
-  "postContent": "import { BearerFetch, BearerState, Intent, IntentType, Component, Prop, Element, Watch, State } from '@bearer/core';
+  "postContent": "import { BearerFetch, BearerState, Intent, IntentType, Component, Prop, Watch, State } from '@bearer/core';
 @Component({
     tag: \\"attach-pull-request-display\\",
     styleUrl: \\"attachPullRequest.css\\",
@@ -942,8 +926,6 @@ Object {
 })
 export class InvalidRootComponent {
     private fetcher: BearerFetch;
-    @RetrieveStateIntent()
-    retrieve: BearerFetch;
     @BearerState()
     @State()
     attachedPullRequests: Array<any>;
@@ -954,10 +936,6 @@ export class InvalidRootComponent {
     render() {
         return <bearer-scrollable fetcher={this.fetcher}/>;
     }
-    @Prop()
-    referenceId: string;
-    @Element()
-    el: HTMLElement;
     constructor() {
         Intent('ListRepositories')(this, \\"fetcher\\");
         Intent('getPullRequest', IntentType.FetchData)(this, \\"fetchResource\\");
@@ -1121,10 +1099,6 @@ Object {
     Object {
       "classname": "InvalidRootComponent",
       "inputs": Array [
-        Object {
-          "name": "referenceId",
-          "type": "string",
-        },
         Object {
           "name": "setupId",
           "type": "string",
@@ -1308,10 +1282,6 @@ Object {
     Object {
       "classname": "InvalidRootComponent",
       "inputs": Array [
-        Object {
-          "name": "referenceId",
-          "type": "string",
-        },
         Object {
           "name": "setupId",
           "type": "string",

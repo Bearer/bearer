@@ -10,10 +10,6 @@ describe('Templates', () => {
         expect(intent.SaveState).toMatchSnapshot()
       })
 
-      it('has RetrieveState', () => {
-        expect(intent.RetrieveState).toMatchSnapshot()
-      })
-
       it('has FetchData', () => {
         expect(intent.FetchData).toMatchSnapshot()
       })

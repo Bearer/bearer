@@ -1,7 +1,7 @@
 import debug from '@bearer/logger'
 
 import * as d from '../declaration'
-import { bodyFromEvent, fetchData, eventAsActionParams } from './utils'
+import { eventAsActionParams } from './utils'
 
 const logger = debug('intents:fetch-state')
 

@@ -17,14 +17,6 @@ exports[`Templates ApiKey has FetchData 1`] = `
   "
 `;
 
-exports[`Templates ApiKey has RetrieveState 1`] = `
-"
-  static action(_context: TAPIKEYAuthContext, _params: any, state, callback: TRetrieveStateCallback) {
-    callback({ data: state })
-  }
-  "
-`;
-
 exports[`Templates ApiKey has SaveState 1`] = `
 "
   static action(
@@ -68,14 +60,6 @@ exports[`Templates Basic has FetchData 1`] = `
   "
 `;
 
-exports[`Templates Basic has RetrieveState 1`] = `
-"
-  static action(_context: TBASICAuthContext, _params: any, state, callback: TRetrieveStateCallback) {
-    callback({ data: state })
-  }
-  "
-`;
-
 exports[`Templates Basic has SaveState 1`] = `
 "
   static action(
@@ -106,14 +90,6 @@ exports[`Templates NoAuth has FetchData 1`] = `
     //... your code goes here
     callback({ data: []})
   }"
-`;
-
-exports[`Templates NoAuth has RetrieveState 1`] = `
-"
-  static action(_context: TNONEAuthContext, _params: any, state, callback: TRetrieveStateCallback) {
-    callback({ data: state })
-  }
-  "
 `;
 
 exports[`Templates NoAuth has SaveState 1`] = `
@@ -153,14 +129,6 @@ exports[`Templates OAuth2 has FetchData 1`] = `
     //   })
     callback({ data: []})
   }"
-`;
-
-exports[`Templates OAuth2 has RetrieveState 1`] = `
-"
-  static action(_context: TOAUTH2AuthContext, _params: any, state, callback: TRetrieveStateCallback) {
-    callback({ data: state })
-  }
-  "
 `;
 
 exports[`Templates OAuth2 has SaveState 1`] = `

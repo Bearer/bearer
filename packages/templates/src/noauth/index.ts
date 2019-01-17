@@ -20,11 +20,6 @@ export default {
     })
   }
   `,
-  RetrieveState: `
-  static action(_context: TNONEAuthContext, _params: any, state, callback: TRetrieveStateCallback) {
-    callback({ data: state })
-  }
-  `,
   FetchData: `
   static action(context: TNONEAuthContext, params: any, body: any, callback: TFetchDataCallback) {
     //... your code goes here

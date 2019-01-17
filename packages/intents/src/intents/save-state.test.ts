@@ -5,7 +5,7 @@ import * as d from '../declaration'
 import { SaveState, SaveStateActionExecutionError, SaveStateSavingStateError } from './save-state'
 
 describe('Intents => SaveIntent', () => {
-  describe('.intentPromise', () => {
+  describe('.intent', () => {
     const defaultAction = () =>
       jest.fn(() => {
         return { data: 'returned-data' }
@@ -29,7 +29,7 @@ describe('Intents => SaveIntent', () => {
         }
       } as any
 
-      const intent = SaveState.intentPromise(action as any)
+      const intent = SaveState.intent(action as any)
 
       return {
         action,

@@ -1,4 +1,4 @@
-import { RetrieveState } from '@bearer/intents'
+import { SaveState } from '@bearer/intents'
 
 type AType = { aliasedParams: string }
 
@@ -9,7 +9,7 @@ type TFetchDataCallback = (p: any) => void
 
 export class TypeAliasClass {
   // @ts-ignore
-  static intentType = RetrieveState
+  static intentType = SaveState
 
   static action(context: TOAUTH2AuthContext, params: AType, body: any, callback: TFetchDataCallback) {
     callback({ data: [] })

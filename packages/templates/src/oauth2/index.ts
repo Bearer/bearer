@@ -20,11 +20,6 @@ export default {
     })
   }
   `,
-  RetrieveState: `
-  static action(_context: TOAUTH2AuthContext, _params: any, state, callback: TRetrieveStateCallback) {
-    callback({ data: state })
-  }
-  `,
   FetchData: `
   static action(context: TOAUTH2AuthContext, params: any, body: any, callback: TFetchDataCallback) {
     //... your code goes here
