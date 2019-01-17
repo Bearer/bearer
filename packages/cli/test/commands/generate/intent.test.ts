@@ -15,7 +15,6 @@ describe('Generate', () => {
     })
 
     it('Fetch intent', async () => {
-      console.log('[BEARER]', 'bearerPath', bearerPath)
       await GenerateIntent.run(['FetchDataIntent', '-t', 'fetch', '--path', bearerPath])
       expect(result.join()).toContain('Intent generated')
       expect(readFile(bearerPath, 'intents', 'FetchDataIntent.ts')).toMatchSnapshot()

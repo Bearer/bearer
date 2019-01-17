@@ -6,7 +6,7 @@ import LoginCommand from '../../src/commands/login'
 const email = 'spongebob@bearer.sh'
 
 describe('login', () => {
-  let result: Array<string>
+  let result: string[]
 
   describe('email provided', () => {
     beforeEach(() => {
@@ -34,7 +34,7 @@ describe('login', () => {
 
     describe('Prompt for email and token', () => {
       it('logs successfully', async () => {
-        jest.spyOn(inquirer, 'prompt').mockImplementation(() => Promise.resolve({ string: email, token: 'ok' }))
+        jest.spyOn(inquirer, 'prompt').mockImplementation(() => Promise.resolve({ response: email, token: 'ok' }))
 
         await LoginCommand.run([])
         expect(result.join()).toContain('Successfully logged in as spongebob@bearer.sh')

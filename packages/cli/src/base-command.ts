@@ -28,7 +28,8 @@ export default abstract class extends Command {
     return Case
   }
 
-  get ux() {
+  // TODO: fix typing
+  get ux(): any {
     return cliUx
   }
 
@@ -36,7 +37,8 @@ export default abstract class extends Command {
     return colors
   }
 
-  get serviceClient() {
+  // TODO: fix typing
+  get serviceClient(): any {
     return serviceClient(this.bearerConfig.IntegrationServiceUrl)
   }
 
@@ -64,12 +66,14 @@ export default abstract class extends Command {
 
   log(_message?: string, ..._args: any[]) {
     if (!this.silent) {
+      // @ts-ignore
       super.log.apply(this, arguments)
     }
   }
 
   warn(_input: string | Error) {
     if (!this.silent) {
+      // @ts-ignore
       super.warn.apply(this, arguments)
     }
   }
@@ -87,13 +91,13 @@ export default abstract class extends Command {
    * Interactivity helpers
    */
 
-  protected async askForString(message: string): Promise<string> {
-    const { string } = await this.inquirer.prompt<{ string: string }>([
+  protected async askForString(phrase: string): Promise<string> {
+    const { response } = await this.inquirer.prompt<{ response: string }>([
       {
-        message: `${message}:`,
-        name: 'string'
+        message: `${phrase}:`,
+        name: 'response'
       }
     ])
-    return string
+    return response
   }
 }
