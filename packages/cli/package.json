@@ -11,7 +11,6 @@
     "@bearer/bearer-cli": "^0.89.0",
     "@bearer/intents": "^0.89.0",
     "@bearer/security": "^0.89.0",
-    "@bearer/templates": "^0.89.0",
     "@bearer/transpiler": "^0.89.0",
     "@bearer/types": "^0.89.0",
     "@oclif/command": "^1.5.2",

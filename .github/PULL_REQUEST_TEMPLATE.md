@@ -13,7 +13,6 @@
 - create-bearer
 - @bearer/intents
 - @bearer/legacy-cli
-- @bearer/templates
 - @bearer/transpiler
 - @bearer/types
 - @bearer/ui
