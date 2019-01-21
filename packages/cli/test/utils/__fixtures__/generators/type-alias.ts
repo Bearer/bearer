@@ -32,6 +32,6 @@ export type Params = {
 export type ReturnedData = TFetchPayload<{
   foo: string[]
   anObject: {
-    values: number[]
+    values?: number[]
   }
 }>
