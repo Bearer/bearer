@@ -155,7 +155,7 @@ type Panda = {
     fullPandaName: string;
 };
 @Component({
-    tag: 'full-component'
+    tag: \\"full-component\\"
 })
 export class FullComponent {
     private fetcher: BearerFetch;
@@ -1125,7 +1125,7 @@ Object {
   "file": "overrides-decorator.tsx",
   "postContent": "import { Component, Intent, BearerFetch, IntentType, Prop } from '@bearer/core';
 @Component({
-    tag: 'overrides-decorator-full'
+    tag: \\"overrides-decorator-full\\"
 })
 class OverridesDecorarotFull {
     private fetcher: BearerFetch;
@@ -1308,7 +1308,7 @@ Object {
   "file": "overrides-decorator-less.1.tsx",
   "postContent": "import { Component, Prop } from '@bearer/core';
 @Component({
-    tag: 'overrides-decorator-less'
+    tag: \\"overrides-decorator-less\\"
 })
 class OverridesDecorarorLess {
     constructor() {

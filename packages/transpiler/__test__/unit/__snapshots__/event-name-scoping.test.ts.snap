@@ -42,7 +42,7 @@ Object {
   "file": "simple-component.ts",
   "postContent": "import { Component, Event, EventEmitter, Listen, Prop } from '@bearer/core';
 @Component({
-    tag: 'event'
+    tag: \\"event\\"
 })
 export class SimpleComponent {
     @Event({ eventName: \\"bearer-SPONGE_BOB-global-mustBeScopedEvent\\" })

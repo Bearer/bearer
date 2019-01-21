@@ -35,7 +35,7 @@ class RootComponent {
     }
 }
 @Component({
-    tag: 'sponge-bob'
+    tag: \\"sponge-bob\\"
 })
 class SubComponent {
     render() {
@@ -55,7 +55,7 @@ class SubComponent {
     }
 }
 @Component({
-    tag: 'patrick'
+    tag: \\"patrick\\"
 })
 class Patrick {
     render() {
@@ -113,7 +113,7 @@ class RootComponent {
     }
 }
 @Component({
-    tag: 'sponge-bob'
+    tag: \\"bearer-xyz-sponge-bob\\"
 })
 class SubComponent {
     render() {
@@ -133,7 +133,7 @@ class SubComponent {
     }
 }
 @Component({
-    tag: 'patrick'
+    tag: \\"bearer-xyz-patrick\\"
 })
 class Patrick {
     render() {

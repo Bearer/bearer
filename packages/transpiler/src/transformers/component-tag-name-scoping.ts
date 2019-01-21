@@ -1,6 +1,10 @@
 import * as ts from 'typescript'
 
 import Metadata from '../metadata'
+import { Decorators } from '../constants'
+import { decoratorNamed, getExpressionFromDecorator, hasDecoratorNamed, getDecoratorProperties } from '../helpers/decorator-helpers'
+
+const TAG = 'tag'
 
 type TransformerOptions = {
   verbose?: true
@@ -36,6 +40,39 @@ export default function ComponentTagNameScoping({
     )
   }
 
+  function visitDecoratedClassElement(node: ts.ClassDeclaration){
+    const decorators = node.decorators.map(decorator => {
+      if (decoratorNamed(decorator, Decorators.Component)) {
+        const finalTagName = getNewTagName((getExpressionFromDecorator(decorator, TAG) as any).text)
+        const otherProperties = getDecoratorProperties(decorator, 0).properties.filter((ol: ts.ObjectLiteralElement)=>{
+          return (ol.name as any).escapedText != TAG
+        })
+        return ts.updateDecorator(
+          decorator,
+          ts.createCall(ts.createIdentifier(Decorators.Component), undefined, [
+            ts.createObjectLiteral(
+              [
+                ts.createPropertyAssignment(TAG, ts.createStringLiteral(finalTagName)),
+                ...otherProperties
+              ],
+              true
+            )
+          ])
+        )
+      }
+      return decorator
+    })
+    return ts.updateClassDeclaration(
+      node,
+      decorators,
+      node.modifiers,
+      node.name,
+      node.typeParameters,
+      node.heritageClauses,
+      node.members
+    )
+  }
+
   return _transformContext => {
     function visit(tsNode: ts.Node): ts.VisitResult<ts.Node> {
       switch (tsNode.kind) {
@@ -47,11 +84,19 @@ export default function ComponentTagNameScoping({
             visit,
             _transformContext
           )
+          case ts.SyntaxKind.ClassDeclaration:
+              if(hasDecoratorNamed(tsNode as ts.ClassDeclaration, Decorators.Component)){
+                  const updatedNode = visitDecoratedClassElement(tsNode as ts.ClassDeclaration)
+                  return ts.visitEachChild(
+                    updatedNode,
+                    visit,
+                    _transformContext
+                  )
+              }
         default:
       }
       return ts.visitEachChild(tsNode, visit, _transformContext)
     }
-
     return tsSourceFile => {
       if (tsSourceFile.isDeclarationFile) {
         return tsSourceFile

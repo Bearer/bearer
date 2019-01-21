@@ -30,7 +30,7 @@ class RootComponent {
     }
 }
 @Component({
-    tag: 'sponge-bob'
+    tag: \\"sponge-bob\\"
 })
 class SubComponent {
     render() {
@@ -82,7 +82,7 @@ class RootComponent {
     }
 }
 @Component({
-    tag: 'sponge-bob'
+    tag: \\"sponge-bob\\"
 })
 class SimpleComponent {
     render() {
@@ -104,7 +104,7 @@ class SimpleComponent {
     }
 }
 @Component({
-    tag: 'sponge-bob'
+    tag: \\"sponge-bob\\"
 })
 class WithBearerAuthorizedComponent {
     render() {
@@ -124,7 +124,7 @@ class WithBearerAuthorizedComponent {
     }
 }
 @Component({
-    tag: 'sponge-bob'
+    tag: \\"sponge-bob\\"
 })
 class OverrideValueGiven {
     render() {
