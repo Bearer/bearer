@@ -310,36 +310,8 @@ export class OpenApiSpecGenerator {
                 }
               },
               responses: {
-                '401': {
-                  description: 'Access forbidden',
-                  content: {
-                    'application/json': {
-                      schema: {
-                        type: 'object',
-                        properties: {
-                          error: {
-                            type: 'string'
-                          }
-                        }
-                      }
-                    }
-                  }
-                },
-                '403': {
-                  description: 'Unauthorized',
-                  content: {
-                    'application/json': {
-                      schema: {
-                        type: 'object',
-                        properties: {
-                          error: {
-                            type: 'string'
-                          }
-                        }
-                      }
-                    }
-                  }
-                },
+                ...unAuthorizedReponse,
+                ...forbiddenResponse,
                 '200': {
                   description: 'Share',
                   content: {
@@ -379,6 +351,42 @@ const DEFAULT_PARAMS: ISchemaParam[] = [
   }
 ]
 
+const unAuthorizedReponse = {
+  '401': {
+    description: 'Unauthorized',
+    content: {
+      'application/json': {
+        schema: {
+          type: 'object',
+          properties: {
+            error: {
+              type: 'string'
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+const forbiddenResponse = {
+  '403': {
+    description: 'Access forbidden',
+    content: {
+      'application/json': {
+        schema: {
+          type: 'object',
+          properties: {
+            error: {
+              type: 'string'
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
 export interface ISchemaParam {
   in: 'query' | 'header'
   schema: {
@@ -401,8 +409,18 @@ export interface IOpenApiSpec {
         parameters: any[]
         summary: any[]
         requestBody: any[]
-        responses: any[]
+        responses: Record<TStatus, TResponse>
       }
+    }
+  }
+}
+
+type TStatus = '200' | '401' | '403'
+type TResponse = {
+  description: string
+  content: {
+    'application/json': {
+      schema: any
     }
   }
 }

@@ -5,7 +5,7 @@ import * as ts from 'typescript'
 import { getIntentName, IntentCodeProcessor, isIntentClass } from './generators'
 
 type TConfig = {
-  intents: Array<string>
+  intents: string[]
   integration_uuid: string
   auth?: any
 }
