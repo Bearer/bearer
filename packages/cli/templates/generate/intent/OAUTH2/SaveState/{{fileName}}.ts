@@ -3,9 +3,9 @@ import { TOAUTH2AuthContext, TSaveStatePayload, SaveState, TSaveActionEvent } fr
 // import Client from './client'
 
 export default class {{intentClassName}}Intent {
-  static intentType = SaveState
+  intentType = SaveState
 
-  static async action(event: TSaveActionEvent<TOAUTH2AuthContext, State, Params>): Promise<ReturnedData> {
+  async action(event: TSaveActionEvent<TOAUTH2AuthContext, State, Params>): Promise<ReturnedData> {
     // const token = event.context.authAccess.accessToken
     // Put your logic here
     return { state: [], data: [] }

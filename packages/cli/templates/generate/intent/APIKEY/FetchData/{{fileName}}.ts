@@ -3,9 +3,9 @@ import { TAPIKEYAuthContext, TFetchPayload, FetchData, TFetchActionEvent } from 
 // import Client from './client'
 
 export default class {{intentClassName}}Intent {
-  static intentType = FetchData
+  intentType = FetchData
 
-  static async action(event: TFetchActionEvent<TAPIKEYAuthContext, Params>): Promise<ReturnedData> {
+  async action(event: TFetchActionEvent<TAPIKEYAuthContext, Params>): Promise<ReturnedData> {
     // const token = event.context.authAccess.apiKey
     // Put your logic here
     return { data: [] }

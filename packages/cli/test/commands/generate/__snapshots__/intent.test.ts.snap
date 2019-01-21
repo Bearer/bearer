@@ -6,9 +6,9 @@ exports[`Generate APIKEY - generate:intent Fetch intent 1`] = `
 // import Client from './client'
 
 export default class FetchDataIntentIntent {
-  static intentType = FetchData
+  intentType = FetchData
 
-  static async action(event: TFetchActionEvent<TAPIKEYAuthContext, Params>): Promise<ReturnedData> {
+  async action(event: TFetchActionEvent<TAPIKEYAuthContext, Params>): Promise<ReturnedData> {
     // const token = event.context.authAccess.apiKey
     // Put your logic here
     return { data: [] }
@@ -34,9 +34,9 @@ exports[`Generate APIKEY - generate:intent Save intent 1`] = `
 // import Client from './client'
 
 export default class SaveIntentIntent {
-  static intentType = SaveState
+  intentType = SaveState
 
-  static async action(event: TSaveActionEvent<TAPIKEYAuthContext, State, Params>): Promise<ReturnedData> {
+  async action(event: TSaveActionEvent<TAPIKEYAuthContext, State, Params>): Promise<ReturnedData> {
     // const token = event.context.authAccess.apiKey
     // Put your logic here
     return { state: [], data: [] }
@@ -66,9 +66,9 @@ exports[`Generate BASIC - generate:intent Fetch intent 1`] = `
 // import Client from './client'
 
 export default class FetchDataIntentIntent {
-  static intentType = FetchData
+  intentType = FetchData
 
-  static async action(event: TFetchActionEvent<TBASICAuthContext, Params>): Promise<ReturnedData> {
+  async action(event: TFetchActionEvent<TBASICAuthContext, Params>): Promise<ReturnedData> {
     // const { username, password } = event.context.authAccess
     // Put your logic here
     return { data: [] }
@@ -94,9 +94,9 @@ exports[`Generate BASIC - generate:intent Save intent 1`] = `
 // import Client from './client'
 
 export default class SaveIntentIntent {
-  static intentType = SaveState
+  intentType = SaveState
 
-  static async action(event: TSaveActionEvent<TBASICAuthContext, State, Params>): Promise<ReturnedData> {
+  async action(event: TSaveActionEvent<TBASICAuthContext, State, Params>): Promise<ReturnedData> {
     // const { username, password } = event.context.authAccess
     // Put your logic here
     return { state: [], data: [] }
@@ -126,9 +126,9 @@ exports[`Generate NONE - generate:intent Fetch intent 1`] = `
 // import Client from './client'
 
 export default class FetchDataIntentIntent {
-  static intentType = FetchData
+  intentType = FetchData
 
-  static async action(event: TFetchActionEvent<TNONEAuthContext, Params>): Promise<ReturnedData> {
+  async action(event: TFetchActionEvent<TNONEAuthContext, Params>): Promise<ReturnedData> {
     // Put your logic here
     return { data: [] }
   }
@@ -153,9 +153,9 @@ exports[`Generate NONE - generate:intent Save intent 1`] = `
 // import Client from './client'
 
 export default class SaveIntentIntent {
-  static intentType = SaveState
+  intentType = SaveState
 
-  static async action(event: TSaveActionEvent<TNONEAuthContext, State, Params>): Promise<ReturnedData> {
+  async action(event: TSaveActionEvent<TNONEAuthContext, State, Params>): Promise<ReturnedData> {
     // Put your logic here
     return { state: [], data: [] }
   }
@@ -185,9 +185,9 @@ exports[`Generate OAUTH2 - generate:intent Fetch intent 1`] = `
 // import Client from './client'
 
 export default class FetchDataIntentIntent {
-  static intentType = FetchData
+  intentType = FetchData
 
-  static async action(event: TFetchActionEvent<TOAUTH2AuthContext, Params>): Promise<ReturnedData> {
+  async action(event: TFetchActionEvent<TOAUTH2AuthContext, Params>): Promise<ReturnedData> {
     // const token = event.context.authAccess.accessToken
     // Put your logic here
     return { data: [] }
@@ -213,9 +213,9 @@ exports[`Generate OAUTH2 - generate:intent Save intent 1`] = `
 // import Client from './client'
 
 export default class SaveIntentIntent {
-  static intentType = SaveState
+  intentType = SaveState
 
-  static async action(event: TSaveActionEvent<TOAUTH2AuthContext, State, Params>): Promise<ReturnedData> {
+  async action(event: TSaveActionEvent<TOAUTH2AuthContext, State, Params>): Promise<ReturnedData> {
     // const token = event.context.authAccess.accessToken
     // Put your logic here
     return { state: [], data: [] }

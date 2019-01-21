@@ -3,9 +3,9 @@ import { TAPIKEYAuthContext, TSaveStatePayload, SaveState, TSaveActionEvent } fr
 // import Client from './client'
 
 export default class {{intentClassName}}Intent {
-  static intentType = SaveState
+  intentType = SaveState
 
-  static async action(event: TSaveActionEvent<TAPIKEYAuthContext, State, Params>): Promise<ReturnedData> {
+  async action(event: TSaveActionEvent<TAPIKEYAuthContext, State, Params>): Promise<ReturnedData> {
     // const token = event.context.authAccess.apiKey
     // Put your logic here
     return { state: [], data: [] }

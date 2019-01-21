@@ -3,9 +3,9 @@ import { TBASICAuthContext, TSaveStatePayload, SaveState, TSaveActionEvent } fro
 // import Client from './client'
 
 export default class {{intentClassName}}Intent {
-  static intentType = SaveState
+  intentType = SaveState
 
-  static async action(event: TSaveActionEvent<TBASICAuthContext, State, Params>): Promise<ReturnedData> {
+  async action(event: TSaveActionEvent<TBASICAuthContext, State, Params>): Promise<ReturnedData> {
     // const { username, password } = event.context.authAccess
     // Put your logic here
     return { state: [], data: [] }

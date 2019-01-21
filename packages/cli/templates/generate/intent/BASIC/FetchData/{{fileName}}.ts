@@ -3,9 +3,9 @@ import { TBASICAuthContext, TFetchPayload, FetchData, TFetchActionEvent } from '
 // import Client from './client'
 
 export default class {{intentClassName}}Intent {
-  static intentType = FetchData
+  intentType = FetchData
 
-  static async action(event: TFetchActionEvent<TBASICAuthContext, Params>): Promise<ReturnedData> {
+  async action(event: TFetchActionEvent<TBASICAuthContext, Params>): Promise<ReturnedData> {
     // const { username, password } = event.context.authAccess
     // Put your logic here
     return { data: [] }

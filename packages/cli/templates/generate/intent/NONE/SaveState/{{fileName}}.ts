@@ -3,9 +3,9 @@ import { TNONEAuthContext, TSaveStatePayload, SaveState, TSaveActionEvent } from
 // import Client from './client'
 
 export default class {{intentClassName}}Intent {
-  static intentType = SaveState
+  intentType = SaveState
 
-  static async action(event: TSaveActionEvent<TNONEAuthContext, State, Params>): Promise<ReturnedData> {
+  async action(event: TSaveActionEvent<TNONEAuthContext, State, Params>): Promise<ReturnedData> {
     // Put your logic here
     return { state: [], data: [] }
   }
