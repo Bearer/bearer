@@ -1,4 +1,3 @@
-import * as path from 'path'
 import { Authentications } from '@bearer/types/lib/authentications'
 import IntentType from '@bearer/types/lib/intent-types'
 import { flags } from '@oclif/command'
@@ -6,7 +5,7 @@ import * as inquirer from 'inquirer'
 
 import BaseCommand from '../../base-command'
 import { RequireScenarioFolder } from '../../utils/decorators'
-import { copyFiles } from '../../utils/helpers'
+import generateIntent from '../../utils/templates/intents'
 
 const types = [
   { name: 'Fetch', value: IntentType.FetchData, cli: 'fetch' },
@@ -36,6 +35,7 @@ export default class GenerateIntent extends BaseCommand {
       : types.find(t => (t as { cli: string }).cli === flags.type)!.value
     const name = args.name || (await this.askForName())
     const authType = this.scenarioAuthConfig.authType
+
     if (!Object.values(Authentications).includes(authType)) {
       // TODO: better error output
       this.error(
@@ -44,21 +44,10 @@ export default class GenerateIntent extends BaseCommand {
       )
     }
     try {
-      const vars = this.getVars(name, type, authType)
-      await copyFiles(this, path.join(`generate/intent`, authType, type), this.locator.srcIntentsDir, vars)
+      await generateIntent(this, authType, type, name)
       this.success(`\nIntent generated`)
-      // TODO: add a nicer display
     } catch (e) {
       this.error(e)
-    }
-  }
-
-  getVars(name: string, intentType: IntentType, authType: Authentications) {
-    return {
-      authType,
-      intentType,
-      fileName: name,
-      intentClassName: this.case.pascal(name)
     }
   }
 

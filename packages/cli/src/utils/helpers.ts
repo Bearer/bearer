@@ -4,11 +4,11 @@ import * as path from 'path'
 
 import BaseCommand from '../base-command'
 
-export function printFiles(command: BaseCommand, files: Array<string>) {
+export function printFiles(command: BaseCommand, files: string[]) {
   const base = process.cwd()
   const { gray, white } = command.colors
   files.forEach(file => {
-    command.log(gray(`    create: `) + white(file.replace(base + '/', '')))
+    command.log(gray(`    create: `) + white(file.replace(`${base}/`, '')))
   })
 }
 
@@ -18,7 +18,7 @@ export function copyFiles(
   outPutDirectory: string,
   vars: any,
   silent = false
-): Promise<Array<string>> {
+): Promise<string[]> {
   return new Promise((resolve, reject) => {
     copy(path.join(__dirname, '..', '..', 'templates', sourceDirectory), outPutDirectory, vars, (err, createdFiles) => {
       if (err) {

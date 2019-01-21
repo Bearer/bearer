@@ -8,6 +8,7 @@ import BaseCommand from '../../base-command'
 import installDependencies from '../../tasks/install-dependencies'
 import { RequireScenarioFolder } from '../../utils/decorators'
 import GenerateApiDocumenation from '../generate/api-documentation'
+import compilerOptions from '../../utils/intent-ts-compiler-options'
 
 const skipInstall = 'skip-install'
 
@@ -118,18 +119,7 @@ const baseConfig: Partial<webpack.Configuration> = {
         loader: 'ts-loader',
         exclude: /node_modules/,
         options: {
-          compilerOptions: {
-            allowUnreachableCode: false,
-            declaration: false,
-            lib: ['es2017'],
-            noUnusedLocals: false,
-            noUnusedParameters: false,
-            allowSyntheticDefaultImports: true,
-            experimentalDecorators: true,
-            moduleResolution: 'node',
-            module: 'es6',
-            target: 'es2017'
-          }
+          compilerOptions
         }
       }
     ]
