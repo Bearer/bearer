@@ -7,7 +7,9 @@ describe('generators', () => {
     expect(OpenApiSpecGenerator).toBeTruthy()
   })
   // TODO: CORE-197
-  describe.skip('params definitions', () => {
+  describe('params definitions', () => {
+    const expectedEndpointLength = 3
+
     let result: IOpenApiSpec
 
     beforeAll(async () => {
@@ -16,6 +18,19 @@ describe('generators', () => {
         scenarioUuid: '123-test'
       })
       result = await generator.build()
+    })
+
+    it('generate as many entries as intents', () => {
+      expect(Object.keys(result.paths)).toHaveLength(expectedEndpointLength)
+    })
+
+    it('had default 200, 401 and 403 statuses', () => {
+      expect.assertions(expectedEndpointLength * 3)
+      Object.keys(result.paths).map(p => {
+        expect(result.paths[p].post.responses['200']).toBeTruthy()
+        expect(result.paths[p].post.responses['403']).toBeTruthy()
+        expect(result.paths[p].post.responses['403']).toBeTruthy()
+      })
     })
 
     it('has object literal params required', () => {
