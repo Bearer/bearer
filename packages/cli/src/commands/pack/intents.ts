@@ -138,8 +138,10 @@ function buildLambdaIndex(intents: TIntentNames): string {
   return intents
     .map((intent, index) => {
       const intentConstName = `intent${index}`
+      const intentInstance = `${intentConstName}Instance`
       return `const ${intentConstName} = require("./dist/${intent}").default;
-module.exports['${intent}'] = ${intentConstName}.intentType.intent(${intentConstName}.action);
+const ${intentInstance} = new ${intentConstName}()
+module.exports['${intent}'] = ${intentInstance}.intentType.intent(${intentInstance}.action);
 `
     })
     .join('\n')
