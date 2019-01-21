@@ -20,70 +20,81 @@ describe('generators', () => {
       result = await generator.build()
     })
 
-    it('generate as many entries as intents', () => {
-      expect(Object.keys(result.paths)).toHaveLength(expectedEndpointLength)
-    })
+    describe('responses', () => {
+      it('generate as many entries as intents', () => {
+        expect(Object.keys(result.paths)).toHaveLength(expectedEndpointLength)
+      })
 
-    it('had default 200, 401 and 403 statuses', () => {
-      expect.assertions(expectedEndpointLength * 3)
-      Object.keys(result.paths).map(p => {
-        expect(result.paths[p].post.responses['200']).toBeTruthy()
-        expect(result.paths[p].post.responses['403']).toBeTruthy()
-        expect(result.paths[p].post.responses['403']).toBeTruthy()
+      it('had default 200, 401 and 403 statuses', () => {
+        expect.assertions(expectedEndpointLength * 3)
+
+        Object.keys(result.paths).map(p => {
+          expect(result.paths[p].post.responses['200']).toBeTruthy()
+          expect(result.paths[p].post.responses['403']).toBeTruthy()
+          expect(result.paths[p].post.responses['403']).toBeTruthy()
+        })
       })
     })
 
-    it('has object literal params required', () => {
-      const paramsSchema = result.paths[`/123-test/object-literal-type`].post.parameters.find(
-        p => p.name === 'inlineParam'
-      )
-      expect(paramsSchema).toBeTruthy()
-      expect(paramsSchema).toMatchObject({
-        description: 'inlineParam',
-        in: 'query',
-        name: 'inlineParam',
-        required: true,
-        schema: { type: 'string' }
-      })
-    })
+    describe('requests', () => {
+      function randomResponse() {
+        return result.paths['/123-test/object-literal-type'].post
+      }
 
-    // TODO: CORE-197
-    it('has object literal params optional', () => {
-      const optionalParam = result.paths[`/123-test/object-literal-type`].post.parameters.find(
-        p => p.name === 'optional'
-      )
-      expect(optionalParam).toMatchObject({
-        description: 'optional',
-        in: 'query',
-        name: 'optional',
-        required: false,
-        schema: { type: 'number' }
+      describe('parameters', () => {
+        it('expect an Authorization header', () => {
+          expect(randomResponse().parameters[0]).toMatchObject({
+            description: 'API Key',
+            in: 'header',
+            name: 'authorization',
+            required: true,
+            schema: { type: 'string' }
+          })
+        })
       })
-    })
 
-    // TODO: CORE-197
-    it('has aliased type params', () => {
-      const paramsSchema = result.paths[`/123-test/type-alias`].post.parameters.find(p => p.name === 'aliasedParams')
-      expect(paramsSchema).toBeTruthy()
-      expect(paramsSchema).toMatchObject({
-        description: 'aliasedParams',
-        in: 'query',
-        name: 'aliasedParams',
-        required: true,
-        schema: { type: 'string' }
-      })
-    })
+      describe('post requestBody from intents', () => {
+        function requestBodySchema(intent: string) {
+          return result.paths[intent].post.requestBody.content['application/json'].schema
+        }
 
-    // TODO: CORE-197
-    it('returns undefined params and return', () => {
-      const paramsSchema = result.paths[`/123-test/undefined-params-and-return`].post.parameters
-      expect(paramsSchema).toBeTruthy()
-      expect(paramsSchema).toMatchObject({
-        description: 'aliasedParams',
-        in: 'query',
-        name: 'aliasedParams',
-        required: true,
-        schema: { type: 'string' }
+        describe('typing not provided', () => {
+          it('return empty input', () => {
+            expect(requestBodySchema('/123-test/undefined-params-and-return')).toMatchObject({ properties: {} })
+          })
+        })
+
+        describe('typing inlined', () => {
+          it('extract from inline', () => {
+            expect(requestBodySchema('/123-test/object-literal-type')).toMatchObject({
+              properties: {
+                inlineParam: {
+                  type: 'string'
+                },
+                stringEnum: {
+                  type: 'string',
+                  enum: ['none', 'all', 'every']
+                }
+              }
+            })
+          })
+        })
+
+        describe('typing aliased', () => {
+          it('extract from alias', () => {
+            expect(requestBodySchema('/123-test/type-alias')).toMatchObject({
+              properties: {
+                aliasParam: {
+                  type: 'string'
+                },
+                stringEnum: {
+                  type: 'string',
+                  enum: ['none', 'all', 'every']
+                }
+              }
+            })
+          })
+        })
       })
     })
   })

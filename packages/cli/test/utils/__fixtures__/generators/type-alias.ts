@@ -8,7 +8,14 @@ export default class Intent {
   static async action(event: TFetchActionEvent<TOAUTH2AuthContext, Params>): Promise<ReturnedData> {
     // const token = event.context.authAccess.accessToken
     // Put your logic here
-    return { data: [] }
+    return {
+      data: {
+        foo: ['all', 'none'],
+        anObject: {
+          values: [1, 2]
+        }
+      }
+    }
   }
 }
 
@@ -16,10 +23,15 @@ export default class Intent {
  * Typing
  */
 export type Params = {
-  name: string
-  somethingElse: number
+  aliasParam: string
+  stringEnum: 'none' | 'all' | 'every'
+  inlineNumber: number
+  nestedObject: { name: string }
 }
 
 export type ReturnedData = TFetchPayload<{
-  // foo: string[]
+  foo: string[]
+  anObject: {
+    values: number[]
+  }
 }>

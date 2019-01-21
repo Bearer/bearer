@@ -338,17 +338,18 @@ const DEFAULT_PARAMS: ISchemaParam[] = [
     },
     description: 'API Key',
     required: true
-  },
-  {
-    name: 'authId',
-    schema: {
-      type: 'string',
-      format: 'uuid'
-    },
-    in: 'query',
-    description: 'User Identifier',
-    required: true
   }
+  // we probably don't neet this one anymore
+  // ,{
+  //   name: 'authId',
+  //   schema: {
+  //     type: 'string',
+  //     format: 'uuid'
+  //   },
+  //   in: 'query',
+  //   description: 'User Identifier',
+  //   required: true
+  // }
 ]
 
 const unAuthorizedReponse = {
@@ -408,7 +409,13 @@ export interface IOpenApiSpec {
       post: {
         parameters: any[]
         summary: any[]
-        requestBody: any[]
+        requestBody: {
+          content: {
+            'application/json': {
+              schema: any
+            }
+          }
+        }
         responses: Record<TStatus, TResponse>
       }
     }

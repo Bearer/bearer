@@ -5,7 +5,14 @@ import { FetchData } from '@bearer/intents'
 export default class Intent {
   static intentType = FetchData
 
-  static async action(event: { params: { inlineParam: string } }): Promise<{ data: { expectedData: string[] } }> {
+  static async action(event: {
+    params: {
+      inlineParam: string
+      stringEnum: 'none' | 'all' | 'every'
+      inlineNumber: number
+      nestedObject: { name: string }
+    }
+  }): Promise<{ data: { expectedData: string[] } }> {
     // const token = event.context.authAccess.accessToken
     // Put your logic here
     return { data: { expectedData: [] } }
