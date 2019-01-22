@@ -19,7 +19,7 @@ What's next?
 ,[90m    create: [39m[37m.bearer/init/new/APIKEY/views/index.html[39m
 ,[90m    create: [39m[37m.bearer/init/new/APIKEY/views/index.ts[39m
 ,[90m    create: [39m[37m.bearer/init/new/APIKEY/views/openapi.json[39m
-,[?25h,[?25l,* read the bearer documentation at https://docs.bearer.sh
+,* read the bearer documentation at https://docs.bearer.sh
 
 ,* start your local development environement by running:
 
@@ -59,7 +59,7 @@ What's next?
 ,[90m    create: [39m[37m.bearer/init/new/BASIC/views/index.html[39m
 ,[90m    create: [39m[37m.bearer/init/new/BASIC/views/index.ts[39m
 ,[90m    create: [39m[37m.bearer/init/new/BASIC/views/openapi.json[39m
-,[?25h,[?25l,* read the bearer documentation at https://docs.bearer.sh
+,* read the bearer documentation at https://docs.bearer.sh
 
 ,* start your local development environement by running:
 
@@ -104,7 +104,7 @@ What's next?
 ,[90m    create: [39m[37m.bearer/init/new/NONE/views/index.html[39m
 ,[90m    create: [39m[37m.bearer/init/new/NONE/views/index.ts[39m
 ,[90m    create: [39m[37m.bearer/init/new/NONE/views/openapi.json[39m
-,[?25h,[?25l,* read the bearer documentation at https://docs.bearer.sh
+,* read the bearer documentation at https://docs.bearer.sh
 
 ,* start your local development environement by running:
 
@@ -137,7 +137,7 @@ What's next?
 ,[90m    create: [39m[37m.bearer/init/new/OAUTH2/views/index.html[39m
 ,[90m    create: [39m[37m.bearer/init/new/OAUTH2/views/index.ts[39m
 ,[90m    create: [39m[37m.bearer/init/new/OAUTH2/views/openapi.json[39m
-,[?25h,[?25l,* read the bearer documentation at https://docs.bearer.sh
+,* read the bearer documentation at https://docs.bearer.sh
 
 ,* start your local development environement by running:
 
