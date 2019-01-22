@@ -57,8 +57,8 @@ class FetchIntent extends FetchData implements FetchData<string[], any, d.TAPIKE
   }
 }
 
-class FailingIntent extends FetchData implements FetchData<any, string> {
-  async action(_event: any) {
+class FailingIntent extends FetchData implements FetchData<any, string, d.TAPIKEYAuthContext> {
+  async action(_event: d.TFetchActionEvent) {
     return { error: '😨 No luck today' }
   }
 }

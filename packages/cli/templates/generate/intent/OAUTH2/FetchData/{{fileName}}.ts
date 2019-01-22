@@ -1,11 +1,9 @@
-import { TOAUTH2AuthContext, TFetchPayload, FetchData, TFetchActionEvent } from '@bearer/intents'
+import { TOAUTH2AuthContext, TFetchPayload, FetchData, TFetchActionEvent, TFetchPromise } from '@bearer/intents'
 // Uncomment this line if you need to use Client
 // import Client from './client'
 
-export default class {{intentClassName}}Intent {
-  intentType = FetchData
-
-  async action(event: TFetchActionEvent<TOAUTH2AuthContext, Params>): Promise<ReturnedData> {
+export default class {{intentClassName}}Intent extends FetchData implements FetchData<ReturnedData, any, TOAUTH2AuthContext> {
+  async action(event: TFetchActionEvent<Params, TOAUTH2AuthContext>): TFetchPromise<ReturnedData> {
     // const token = event.context.authAccess.accessToken
     // Put your logic here
     return { data: [] }
@@ -19,6 +17,6 @@ export type Params = {
   // name: string
 }
 
-export type ReturnedData = TFetchPayload<{
+export type ReturnedData = {
   // foo: string[]
-}>
+}

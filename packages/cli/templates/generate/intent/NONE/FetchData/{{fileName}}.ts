@@ -1,11 +1,9 @@
-import { TNONEAuthContext, TFetchPayload, FetchData, TFetchActionEvent } from '@bearer/intents'
+import { TNONEAuthContext, TFetchPayload, FetchData, TFetchActionEvent, TFetchPromise } from '@bearer/intents'
 // Uncomment this line if you need to use Client
 // import Client from './client'
 
-export default class {{intentClassName}}Intent {
-  intentType = FetchData
-
-  async action(event: TFetchActionEvent<TNONEAuthContext, Params>): Promise<ReturnedData> {
+export default class {{intentClassName}}Intent extends FetchData implements FetchData<ReturnedData, any> {
+  async action(event: TFetchActionEvent<Params>): TFetchPromise<ReturnedData> {
     // Put your logic here
     return { data: [] }
   }
@@ -18,6 +16,6 @@ export type Params = {
   // name: string
 }
 
-export type ReturnedData = TFetchPayload<{
+export type ReturnedData = {
   // foo: string[]
-}>
+}

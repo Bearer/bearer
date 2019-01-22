@@ -59,7 +59,8 @@ export type TSaveActionEvent<
 /**
  * Fetch any data
  */
-export type TFetchAction<ReturnedData = any> = (event: any) => Promise<TFetchPayload<ReturnedData>>
+export type TFetchAction<ReturnedData = any> = (event: any) => TFetchPromise<ReturnedData>
+export type TFetchPromise<ReturnedData> = Promise<TFetchPayload<ReturnedData>>
 
 export type TFetchActionEvent<Params = any, AuthContext = TAuthContext, DataContext = {}> = {
   context: TBearerLambdaContext<AuthContext, DataContext>
