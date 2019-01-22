@@ -17,8 +17,8 @@ describe('intents generator', () => {
     }
   })
 
-  describe.each(Object.values(Authentications))('%s', (auth: Authentications) => {
-    describe.each(Object.values(IntentType))('%s', (intentType: IntentType) => {
+  describe.each(Object.values(Authentications))('When %s', (auth: Authentications) => {
+    describe.each(Object.values(IntentType))('intent type: %s', (intentType: IntentType) => {
       let files: string[] = []
       let diagnostics: ts.Diagnostic[] = []
 
@@ -31,11 +31,11 @@ describe('intents generator', () => {
         diagnostics = ts.getPreEmitDiagnostics(program).concat(emitResult.diagnostics)
       })
 
-      it('generate valide TS file', async () => {
+      it('generates valide TS file', async () => {
         expect(diagnostics).toHaveLength(0)
       })
 
-      it('match snapshot', () => {
+      it('matches snapshot', () => {
         expect(fs.readFileSync(files[0], { encoding: 'utf8' })).toMatchSnapshot()
       })
     })

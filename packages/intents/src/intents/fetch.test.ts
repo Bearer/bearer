@@ -1,46 +1,52 @@
 import { FetchData, FetchActionExecutionError } from './fetch'
 import * as d from '../declaration'
 
-describe('Intents', () => {
-  it('forward context and params (query + body)', async () => {
-    const { intent, event } = setup(PassContextIntent)
-    const result = await intent(event)
+describe('FetchData intent', () => {
+  describe('.init', () => {
+    it('forwards context and params (query + body)', async () => {
+      const { intent, event } = setup(PassContextIntent)
+      const result = await intent(event)
 
-    expect(result.data).toMatchObject({
-      context: {
-        iDefinedData: 'iDefinedDataExisting',
-        authAccess: {
-          apiKey: 'aKey'
+      expect(result.data).toMatchObject({
+        context: {
+          iDefinedData: 'iDefinedDataExisting',
+          authAccess: {
+            apiKey: 'aKey'
+          }
+        },
+        params: {
+          firstParams: 'firstValue',
+          overriden: 'thisOneWeCare'
         }
-      },
-      params: {
-        firstParams: 'firstValue',
-        overriden: 'thisOneWeCare'
-      }
-    })
-  })
-
-  it('return a payload', async () => {
-    const { intent, event } = setup(FetchIntent)
-
-    const result = await intent(event)
-
-    expect(result).toMatchObject({ data: ['returned-data', 'somethingFromParams', 'iDefinedDataExisting'] })
-  })
-
-  describe('error handling', () => {
-    it('fails gracefully when action throw an error', async () => {
-      const { intent, event } = setup(HardFailingIntent)
-
-      expect(intent(event)).rejects.toEqual(new FetchActionExecutionError('sponge Bob Died'))
+      })
     })
 
-    it('fails gracefully when action return error payload', async () => {
-      const { intent, event } = setup(FailingIntent)
+    it('returns a payload', async () => {
+      const { intent, event } = setup(FetchIntent)
 
       const result = await intent(event)
 
-      expect(result).toMatchObject({ error: '😨 No luck today' })
+      expect(result).toMatchObject({ data: ['returned-data', 'somethingFromParams', 'iDefinedDataExisting'] })
+    })
+
+    describe('when errors occur', () => {
+      describe('when error is thrown within the action', () => {
+        it('fails gracefully', async () => {
+          const { intent, event } = setup(HardFailingIntent)
+
+          expect(intent(event)).rejects.toEqual(new FetchActionExecutionError('sponge Bob Died'))
+        })
+      })
+
+      describe('when action returns an error payload', () => {
+        it('fails gracefully', async () => {
+          const { intent, event } = setup(FailingIntent)
+
+          const result = await intent(event)
+
+          expect(result).toMatchObject({ error: '😨 No luck today' })
+        })
+      })
     })
   })
 })

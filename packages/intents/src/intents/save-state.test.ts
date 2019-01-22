@@ -4,69 +4,77 @@ import { DBClient } from '../db-client'
 import * as d from '../declaration'
 import { SaveState, SaveStateActionExecutionError, SaveStateSavingStateError } from './save-state'
 
-describe('Intents => SaveIntent', () => {
-  it('use provided referenceId', async () => {
-    const { intent, event } = setup(SuccessIntent)
+describe('SaveIntent intent', () => {
+  describe('.init', () => {
+    it('use provided referenceId', async () => {
+      const { intent, event } = setup(SuccessIntent)
 
-    const result = await intent({
-      ...event,
-      queryStringParameters: {
-        ...event.queryStringParameters,
-        referenceId: 'a-reference-provided'
-      }
+      const result = await intent({
+        ...event,
+        queryStringParameters: {
+          ...event.queryStringParameters,
+          referenceId: 'a-reference-provided'
+        }
+      })
+
+      expect(result.meta).toMatchObject({ referenceId: 'a-reference-provided' })
     })
 
-    expect(result.meta).toMatchObject({ referenceId: 'a-reference-provided' })
-  })
+    it('generate a UUID as referenceId', async () => {
+      const { intent, event } = setup(SuccessIntent)
+      const result = await intent(event)
 
-  it('generate a UUID as referenceId', async () => {
-    const { intent, event } = setup(SuccessIntent)
-    const result = await intent(event)
-
-    expect(result).toMatchObject({
-      meta: expect.objectContaining({
-        referenceId: expect.stringMatching(/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{11}/) // uuid
+      expect(result).toMatchObject({
+        meta: expect.objectContaining({
+          referenceId: expect.stringMatching(/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{11}/) // uuid
+        })
       })
     })
-  })
 
-  it('pass existing data to the action', async () => {
-    const { intent, event } = setup(SuccessIntent, { existingData: 'ok' })
+    it('pass existing data to the action', async () => {
+      const { intent, event } = setup(SuccessIntent, { existingData: 'ok' })
 
-    const result = await intent(event)
+      const result = await intent(event)
 
-    expect(result.data).toMatchObject({
-      context: 'something',
-      params: {
-        firstParams: 'firstValue',
-        overriden: 'thisOneWeCare'
-      },
-      state: { existingData: 'ok' }
-    })
-  })
-
-  it('resolve an error if action does', async () => {
-    const { intent, event } = setup(IntentWithErrorReturned)
-
-    const result = await intent(event)
-
-    expect(result).toMatchObject({ error: 'sponge Bob Died smoothly' })
-  })
-
-  describe('errors', () => {
-    it('fails gracefully when update fails', () => {
-      const { intent, event } = setup(SuccessIntent)
-      const update = jest.spyOn(DBClient.prototype, 'updateData')
-
-      update.mockImplementation(() => Promise.reject({ error: 'from-user-storage' }))
-
-      return expect(intent(event)).rejects.toEqual(new SaveStateSavingStateError())
+      expect(result.data).toMatchObject({
+        context: 'something',
+        params: {
+          firstParams: 'firstValue',
+          overriden: 'thisOneWeCare'
+        },
+        state: { existingData: 'ok' }
+      })
     })
 
-    it('fails gracefully when action raises an error', async () => {
-      const { intent, event } = setup(HardFailingIntent)
+    describe('when errors occur', () => {
+      describe('when update fails', () => {
+        it('fails gracefully', () => {
+          const { intent, event } = setup(SuccessIntent)
+          const update = jest.spyOn(DBClient.prototype, 'updateData')
 
-      return expect(intent(event)).rejects.toEqual(new SaveStateActionExecutionError())
+          update.mockImplementation(() => Promise.reject({ error: 'from-user-storage' }))
+
+          return expect(intent(event)).rejects.toEqual(new SaveStateSavingStateError())
+        })
+      })
+
+      describe('when error is thrown within the action', () => {
+        it('fails gracefully', async () => {
+          const { intent, event } = setup(HardFailingIntent)
+
+          return expect(intent(event)).rejects.toEqual(new SaveStateActionExecutionError())
+        })
+      })
+
+      describe('when error is returned by the action', () => {
+        it('fails gracefully', async () => {
+          const { intent, event } = setup(IntentWithErrorReturned)
+
+          const result = await intent(event)
+
+          expect(result).toMatchObject({ error: 'sponge Bob Died smoothly' })
+        })
+      })
     })
   })
 })
