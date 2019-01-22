@@ -25,15 +25,15 @@
   "dependencies": {
     "@bearer/logger": "^0.90.0",
     "axios": "^0.18.0",
-    "typescript": "^2.9.2",
+    "typescript": "^3.2.4",
     "uuid": "^3.3.2"
   },
   "devDependencies": {
-    "@types/jest": "^23.3.9",
-    "@types/node": "^10.12.6",
+    "@types/jest": "^23.3.13",
+    "@types/node": "^10.12.18",
     "jest": "^23.6.0",
     "jest-mock-axios": "^2.1.11",
-    "ts-jest": "^23.10.4"
+    "ts-jest": "^23.10.5"
   },
   "gitHead": "cb2654b19000e2ad6f31a0e4ed715a6298c8df2d"
 }

@@ -29,7 +29,8 @@ export default class New extends BaseCommand {
     authType: flags.string({
       char: 'a',
       description: 'Authorization type', // help description for flag
-      options: Object.keys(authTypes).map(auth => authTypes[auth as Authentications].value) // only allow the value to be from a discrete set
+      // only allow the value to be from a discrete set
+      options: Object.keys(authTypes).map(auth => authTypes[auth as Authentications].value)
     })
   }
 
@@ -47,7 +48,7 @@ export default class New extends BaseCommand {
       const skipInstall = flags.skipInstall
       this.destinationFolder = name
 
-      const tasks: Array<Listr.ListrTask> = [
+      const tasks: Listr.ListrTask[] = [
         {
           title: 'Generating scenario structure',
           task: async (ctx: any) => {
@@ -71,15 +72,15 @@ export default class New extends BaseCommand {
         },
         {
           title: 'Create setup files',
-          task: (_ctx: any, _task: any) => GenerateSetup.run(['--path', this.copyDestFolder, '--silent'])
+          task: async (_ctx: any, _task: any) => GenerateSetup.run(['--path', this.copyDestFolder, '--silent'])
         },
         {
           title: 'Create scenario specification file',
-          task: (_ctx: any, _task: any) => GenerateSpec.run(['--path', this.copyDestFolder, '--silent'])
+          task: async (_ctx: any, _task: any) => GenerateSpec.run(['--path', this.copyDestFolder, '--silent'])
         },
         {
           title: 'Create intial components',
-          task: (_ctx: any, _task: any) =>
+          task: async (_ctx: any, _task: any) =>
             GenerateComponent.run(['feature', '--type', 'root', '--path', this.copyDestFolder, '--silent'])
         }
       ]
@@ -115,7 +116,7 @@ export default class New extends BaseCommand {
     return path.join(process.cwd(), this.destinationFolder)
   }
 
-  createStructure(name: string, authType: string): Promise<Array<string>> {
+  createStructure(name: string, authType: string): Promise<string[]> {
     if (fs.existsSync(this.copyDestFolder)) {
       return Promise.reject(this.colors.bold('Destination already exists: ') + this.copyDestFolder)
     }
@@ -144,7 +145,7 @@ export default class New extends BaseCommand {
     )
   }
 
-  createAuthenticationFiles(name: string, authType: Authentications): Promise<Array<string>> {
+  createAuthenticationFiles(name: string, authType: Authentications): Promise<string[]> {
     return copyFiles(this, path.join('init', authType), this.copyDestFolder, this.getVars(name), true)
   }
 

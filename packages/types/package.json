@@ -32,10 +32,10 @@
   },
   "homepage": "https://github.com/Bearer/bearer#readme",
   "devDependencies": {
-    "@types/jest": "^23.3.10",
+    "@types/jest": "^23.3.13",
     "jest": "^23.6.0",
-    "ts-jest": "^23.10.4",
-    "typescript": "^3.1.6"
+    "ts-jest": "^23.10.5",
+    "typescript": "^3.2.4"
   },
   "jest": {
     "transform": {
