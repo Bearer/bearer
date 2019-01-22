@@ -41,9 +41,9 @@ export type TBearerLambdaContext<AuthContext = TAuthContext, DataContext = {}> =
  * Later, data could be automatically loaded by passing a reference ID parameter
  * terraformerId => will inject terrafomer object into context if found within Bearer database
  */
-export type TSaveStateAction<State = any, ReturnedData = any> = (
-  event: any
-) => Promise<TSaveStatePayload<State, ReturnedData>>
+export type TSaveStateAction<State = any, ReturnedData = any> = (event: any) => TSavePromise<State, ReturnedData>
+
+export type TSavePromise<State, ReturnedData> = Promise<TSaveStatePayload<State, ReturnedData>>
 
 export type TSaveActionEvent<
   State = any,

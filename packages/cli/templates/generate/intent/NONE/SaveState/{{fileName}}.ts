@@ -1,11 +1,9 @@
-import { TNONEAuthContext, TSaveStatePayload, SaveState, TSaveActionEvent } from '@bearer/intents'
+import { SaveState, TSaveActionEvent, TSavePromise } from '@bearer/intents'
 // Uncomment this line if you need to use Client
 // import Client from './client'
 
-export default class {{intentClassName}}Intent {
-  intentType = SaveState
-
-  async action(event: TSaveActionEvent<TNONEAuthContext, State, Params>): Promise<ReturnedData> {
+export default class {{intentClassName}}Intent extends SaveState implements SaveState<State, ReturnedData, any> {
+  async action(event: TSaveActionEvent<State, Params>): TSavePromise<State, ReturnedData> {
     // Put your logic here
     return { state: [], data: [] }
   }
@@ -22,7 +20,7 @@ export type State = {
   // foo: string[]
 }
 
-export type ReturnedData = TSaveStatePayload<State, {
+export type ReturnedData = {
   // foo: string[]
-}>
+}
 

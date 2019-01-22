@@ -1,4 +1,4 @@
-import { TAPIKEYAuthContext, TFetchPayload, FetchData, TFetchActionEvent, TFetchPromise } from '@bearer/intents'
+import { TAPIKEYAuthContext, FetchData, TFetchActionEvent, TFetchPromise } from '@bearer/intents'
 // Uncomment this line if you need to use Client
 // import Client from './client'
 

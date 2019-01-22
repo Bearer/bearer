@@ -1,4 +1,4 @@
-import { TOAUTH2AuthContext, TFetchPayload, FetchData, TFetchActionEvent, TFetchPromise } from '@bearer/intents'
+import { TOAUTH2AuthContext, FetchData, TFetchActionEvent, TFetchPromise } from '@bearer/intents'
 // Uncomment this line if you need to use Client
 // import Client from './client'
 
