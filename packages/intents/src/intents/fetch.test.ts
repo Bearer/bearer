@@ -2,71 +2,85 @@ import { FetchData, FetchActionExecutionError } from './fetch'
 import * as d from '../declaration'
 
 describe('Intents', () => {
-  describe('Async fetch', () => {
-    const defaultAction = () =>
-      jest.fn(() => {
-        return { data: 'returned-data' }
-      })
+  it('forward context and params (query + body)', async () => {
+    const { intent, event } = setup(PassContextIntent)
+    const result = await intent(event)
 
-    function setup(action = defaultAction()) {
-      const event: d.TLambdaEvent = {
-        context: 'something',
-        queryStringParameters: {
-          firstParams: 'firstValue',
-          overriden: 'weDontCare'
-        },
-        body: {
-          overriden: 'thisOneWeCare'
-        }
-      } as any
-
-      const intent = FetchData.intent(action as any)
-      return {
-        action,
-        event,
-        intent
+    expect(result.data).toMatchObject({
+      context: 'something',
+      params: {
+        firstParams: 'firstValue',
+        overriden: 'thisOneWeCare'
       }
-    }
+    })
+  })
 
-    it('forward context and params (query + body)', async () => {
-      const { intent, event, action } = setup()
-      await intent(event)
+  it('return a payload', async () => {
+    const { intent, event } = setup(FetchIntent)
 
-      expect(action).toHaveBeenCalledWith({
-        context: 'something',
-        params: {
-          firstParams: 'firstValue',
-          overriden: 'thisOneWeCare'
-        }
-      })
+    const result = await intent(event)
+
+    expect(result).toMatchObject({ data: ['returned-data', undefined] })
+  })
+
+  describe('error handling', () => {
+    it('fails gracefully when action throw an error', async () => {
+      const { intent, event } = setup(HardFailingIntent)
+
+      expect(intent(event)).rejects.toEqual(new FetchActionExecutionError('sponge Bob Died'))
     })
 
-    it('return a payload', async () => {
-      const { intent, event } = setup()
+    it('fails gracefully when action return error payload', async () => {
+      const { intent, event } = setup(FailingIntent)
 
       const result = await intent(event)
 
-      expect(result).toMatchObject({ data: 'returned-data' })
-    })
-
-    describe('error handling', () => {
-      it('fails gracefully when action throw an error', async () => {
-        const hardFailingAction = jest.fn(() => {
-          throw 'sponge Bob Died'
-        })
-        const { intent, event } = setup(hardFailingAction)
-        return expect(intent(event)).rejects.toEqual(new FetchActionExecutionError('sponge Bob Died'))
-      })
-
-      it('fails gracefully when action return error payload', async () => {
-        const errorFromPayloadAction = jest.fn(() => {
-          return { error: '😨 No luck today' } as any
-        })
-        const { intent, event } = setup(errorFromPayloadAction)
-
-        const result = await intent(event)
-        return expect(result).toMatchObject({ error: '😨 No luck today' })
-      })
+      expect(result).toMatchObject({ error: '😨 No luck today' })
     })
   })
 })
+
+class PassContextIntent extends FetchData implements FetchData {
+  async action(event: d.TFetchActionEvent) {
+    return { data: event }
+  }
+}
+
+class FetchIntent extends FetchData implements FetchData<string[]> {
+  async action(event: d.TFetchActionEvent<{ typedParam: string }>) {
+    return { data: ['returned-data', event.params.typedParam] }
+  }
+}
+
+class FailingIntent extends FetchData implements FetchData {
+  async action(_event: any) {
+    return { error: '😨 No luck today' }
+  }
+}
+
+class HardFailingIntent extends FetchData implements FetchData {
+  async action(_event: any) {
+    return await new Promise(() => {
+      throw 'sponge Bob Died'
+    })
+  }
+}
+
+function setup(intencClass: any) {
+  const event: d.TLambdaEvent = {
+    context: 'something',
+    queryStringParameters: {
+      firstParams: 'firstValue',
+      overriden: 'weDontCare'
+    },
+    body: {
+      overriden: 'thisOneWeCare'
+    }
+  } as any
+
+  const intent = intencClass.init()
+  return {
+    event,
+    intent
+  }
+}

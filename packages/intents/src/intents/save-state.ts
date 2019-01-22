@@ -7,7 +7,13 @@ import { eventAsActionParams } from './utils'
 
 const logger = debug('intents:fetch-state')
 
-export class SaveState {
+export abstract class SaveState<State = any, ReturnedData = any, Error = any, AuthContext = any> {
+  // expected implementation
+  abstract async action<Params = any>(
+    event: d.TSaveActionEvent<AuthContext, State, Params>
+  ): Promise<d.TSaveStatePayload<State, ReturnedData, Error>>
+
+  // Internal
   static intent(action: d.TSaveStateAction) {
     // tslint:disable-next-line:variable-name
     const DBClient = CLIENT.instance
@@ -36,6 +42,10 @@ export class SaveState {
         throw new SaveStateActionExecutionError()
       }
     }
+  }
+
+  static init() {
+    return SaveState.intent(new (this.prototype.constructor as any)().action)
   }
 }
 
