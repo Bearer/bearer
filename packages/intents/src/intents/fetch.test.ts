@@ -40,19 +40,19 @@ describe('Intents', () => {
   })
 })
 
-class PassContextIntent extends FetchData implements FetchData {
+class PassContextIntent extends FetchData implements FetchData<any, any, any> {
   async action(event: d.TFetchActionEvent) {
     return { data: event }
   }
 }
 
-class FetchIntent extends FetchData implements FetchData<string[]> {
+class FetchIntent extends FetchData implements FetchData<string[], any> {
   async action(event: d.TFetchActionEvent<{ typedParam: string }>) {
     return { data: ['returned-data', event.params.typedParam] }
   }
 }
 
-class FailingIntent extends FetchData implements FetchData {
+class FailingIntent extends FetchData implements FetchData<any, string> {
   async action(_event: any) {
     return { error: '😨 No luck today' }
   }
@@ -66,6 +66,10 @@ class HardFailingIntent extends FetchData implements FetchData {
   }
 }
 
+/**
+ * setup
+ * @param intencClass FetchIntent implementation
+ */
 function setup(intencClass: any) {
   const event: d.TLambdaEvent = {
     context: 'something',

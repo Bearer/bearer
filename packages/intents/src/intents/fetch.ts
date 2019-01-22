@@ -5,11 +5,11 @@ import { eventAsActionParams } from './utils'
 
 const logger = debug('intents:fetch-state')
 
-export abstract class FetchData<ReturnedData = any, Error = any, AuthContext = any> {
+export abstract class FetchData<ReturnedData = any, TError = any, AuthContext = any> {
   // expected implementation
   abstract async action<Params = any>(
     event: d.TFetchActionEvent<AuthContext, Params>
-  ): Promise<d.TFetchPayload<ReturnedData, Error>>
+  ): Promise<d.TFetchPayload<ReturnedData, TError>>
 
   // Internal
   static intent(action: d.TFetchAction) {

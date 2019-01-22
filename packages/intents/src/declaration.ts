@@ -53,10 +53,10 @@ export type TSaveActionEvent<AuthContext = TAuthContext, State = any, Params = a
  * Fetch any data
  */
 export type TFetchAction<AuthContext = TAuthContext, Params = Record<string, any>, ReturnedData = any> = (
-  event: TFetchActionEvent<AuthContext, Params>
+  event: TFetchActionEvent<Params, AuthContext>
 ) => Promise<TFetchPayload<ReturnedData>>
 
-export type TFetchActionEvent<AuthContext = TAuthContext, Params = Record<string, any>> = {
+export type TFetchActionEvent<Params = Record<string, any>, AuthContext = any> = {
   context: TBearerLambdaContext<AuthContext>
   params: Params
 }
