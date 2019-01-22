@@ -7,8 +7,8 @@ const logger = debug('intents:fetch-state')
 
 export abstract class FetchData<ReturnedData = any, TError = any, AuthContext = any> {
   // expected implementation
-  abstract async action<Params = any>(
-    event: d.TFetchActionEvent<AuthContext, Params>
+  abstract async action(
+    event: d.TFetchActionEvent<any, AuthContext, any>
   ): Promise<d.TFetchPayload<ReturnedData, TError>>
 
   // Internal

@@ -19,6 +19,7 @@ export type TSaveStatePayload<State = any, ReturnedData = any, ReturnedError = a
  */
 
 type TBaseAuthContext<TAuthAccessContent> = { authAccess: TAuthAccessContent; [key: string]: any }
+
 export type TOAUTH2AuthContext = TBaseAuthContext<{ accessToken: string }>
 export type TNONEAuthContext = TBaseAuthContext<undefined>
 export type TBASICAuthContext = TBaseAuthContext<{ username: string; password: string }>
@@ -26,9 +27,10 @@ export type TAPIKEYAuthContext = TBaseAuthContext<{ apiKey: string }>
 
 export type TAuthContext = TNONEAuthContext | TOAUTH2AuthContext | TBASICAuthContext | TAPIKEYAuthContext
 
-export type TBearerLambdaContext<AuthContext = TAuthContext> = AuthContext & {
-  bearerBaseURL: string
-}
+export type TBearerLambdaContext<AuthContext = TAuthContext, DataContext = {}> = DataContext &
+  AuthContext & {
+    bearerBaseURL: string
+  }
 
 /**
  * Intents
@@ -39,12 +41,17 @@ export type TBearerLambdaContext<AuthContext = TAuthContext> = AuthContext & {
  * Later, data could be automatically loaded by passing a reference ID parameter
  * terraformerId => will inject terrafomer object into context if found within Bearer database
  */
-export type TSaveStateAction<AuthContext = TAuthContext, State = any, Params = any, ReturnedData = any> = (
-  event: TSaveActionEvent<AuthContext, State, Params>
+export type TSaveStateAction<State = any, ReturnedData = any> = (
+  event: any
 ) => Promise<TSaveStatePayload<State, ReturnedData>>
 
-export type TSaveActionEvent<AuthContext = TAuthContext, State = any, Params = any> = {
-  context: TBearerLambdaContext<AuthContext>
+export type TSaveActionEvent<
+  State = any,
+  Params = Record<string, any>,
+  AuthContext = TAuthContext,
+  DataContext = {}
+> = {
+  context: TBearerLambdaContext<AuthContext, DataContext>
   params: Params
   state: Partial<State>
 }
@@ -52,12 +59,10 @@ export type TSaveActionEvent<AuthContext = TAuthContext, State = any, Params = a
 /**
  * Fetch any data
  */
-export type TFetchAction<AuthContext = TAuthContext, Params = Record<string, any>, ReturnedData = any> = (
-  event: TFetchActionEvent<Params, AuthContext>
-) => Promise<TFetchPayload<ReturnedData>>
+export type TFetchAction<ReturnedData = any> = (event: any) => Promise<TFetchPayload<ReturnedData>>
 
-export type TFetchActionEvent<Params = Record<string, any>, AuthContext = any> = {
-  context: TBearerLambdaContext<AuthContext>
+export type TFetchActionEvent<Params = any, AuthContext = TAuthContext, DataContext = {}> = {
+  context: TBearerLambdaContext<AuthContext, DataContext>
   params: Params
 }
 

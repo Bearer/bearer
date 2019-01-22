@@ -7,7 +7,12 @@ describe('Intents', () => {
     const result = await intent(event)
 
     expect(result.data).toMatchObject({
-      context: 'something',
+      context: {
+        iDefinedData: 'iDefinedDataExisting',
+        authAccess: {
+          apiKey: 'aKey'
+        }
+      },
       params: {
         firstParams: 'firstValue',
         overriden: 'thisOneWeCare'
@@ -20,7 +25,7 @@ describe('Intents', () => {
 
     const result = await intent(event)
 
-    expect(result).toMatchObject({ data: ['returned-data', undefined] })
+    expect(result).toMatchObject({ data: ['returned-data', 'somethingFromParams', 'iDefinedDataExisting'] })
   })
 
   describe('error handling', () => {
@@ -46,9 +51,9 @@ class PassContextIntent extends FetchData implements FetchData<any, any, any> {
   }
 }
 
-class FetchIntent extends FetchData implements FetchData<string[], any> {
-  async action(event: d.TFetchActionEvent<{ typedParam: string }>) {
-    return { data: ['returned-data', event.params.typedParam] }
+class FetchIntent extends FetchData implements FetchData<string[], any, d.TAPIKEYAuthContext> {
+  async action(event: d.TFetchActionEvent<{ typedParam: string }, d.TAPIKEYAuthContext, { iDefinedData: string }>) {
+    return { data: ['returned-data', event.params.typedParam, event.context.iDefinedData] }
   }
 }
 
@@ -72,10 +77,14 @@ class HardFailingIntent extends FetchData implements FetchData {
  */
 function setup(intencClass: any) {
   const event: d.TLambdaEvent = {
-    context: 'something',
+    context: {
+      authAccess: { apiKey: 'aKey' },
+      iDefinedData: 'iDefinedDataExisting'
+    },
     queryStringParameters: {
       firstParams: 'firstValue',
-      overriden: 'weDontCare'
+      overriden: 'weDontCare',
+      typedParam: 'somethingFromParams'
     },
     body: {
       overriden: 'thisOneWeCare'
