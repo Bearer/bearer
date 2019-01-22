@@ -2,11 +2,9 @@
 
 exports[`pack:intents lambdas declaration generates a correct handlers 1`] = `
 "const intent0 = require(\\"./dist/my-intent\\").default;
-const intent0Instance = new intent0()
-module.exports['my-intent'] = intent0Instance.intentType.intent(intent0Instance.action);
+module.exports['my-intent'] = intent0.init();
 
 const intent1 = require(\\"./dist/spongeBobIntent\\").default;
-const intent1Instance = new intent1()
-module.exports['spongeBobIntent'] = intent1Instance.intentType.intent(intent1Instance.action);
+module.exports['spongeBobIntent'] = intent1.init();
 "
 `;
