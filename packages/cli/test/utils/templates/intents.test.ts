@@ -19,14 +19,24 @@ describe('intents generator', () => {
 
   describe.each(Object.values(Authentications))('%s', (auth: Authentications) => {
     describe.each(Object.values(IntentType))('%s', (intentType: IntentType) => {
-      it('generate valide TS file', async () => {
+      let files: string[] = []
+      let diagnostics: ts.Diagnostic[] = []
+
+      beforeAll(async () => {
         const command = { silent: true, locator: { srcIntentsDir: destination } }
-        const files = await generateIntent(command as any, auth, intentType, `${auth}-${intentType}-Intent`)
+        files = await generateIntent(command as any, auth, intentType, `${auth}-${intentType}-Intent`)
         const options = ts.convertCompilerOptionsFromJson(compilerOptions, 'ok')
         const program = ts.createProgram(files, { ...options.options, noEmit: true });
         const emitResult = program.emit()
-        const allDiagnostics = ts.getPreEmitDiagnostics(program).concat(emitResult.diagnostics)
-        expect(allDiagnostics).toHaveLength(0)
+        diagnostics = ts.getPreEmitDiagnostics(program).concat(emitResult.diagnostics)
+      })
+
+      it('generate valide TS file', async () => {
+        expect(diagnostics).toHaveLength(0)
+      })
+
+      it('match snapshot', () => {
+        expect(fs.readFileSync(files[0], { encoding: 'utf8' })).toMatchSnapshot()
       })
     })
   })
