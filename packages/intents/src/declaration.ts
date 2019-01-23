@@ -45,12 +45,7 @@ export type TSaveStateAction<State = any, ReturnedData = any> = (event: any) => 
 
 export type TSavePromise<State, ReturnedData> = Promise<TSaveStatePayload<State, ReturnedData>>
 
-export type TSaveActionEvent<
-  State = any,
-  Params = Record<string, any>,
-  AuthContext = TAuthContext,
-  DataContext = {}
-> = {
+export type TSaveActionEvent<State = any, Params = any, AuthContext = TAuthContext, DataContext = {}> = {
   context: TBearerLambdaContext<AuthContext, DataContext>
   params: Params
   state: Partial<State>
