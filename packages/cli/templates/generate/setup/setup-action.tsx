@@ -5,20 +5,40 @@
 
 import { RootComponent, State, Prop } from '@bearer/core'
 import '@bearer/ui'
+import { FieldSet } from "@bearer/ui/lib/collection/components/Forms/Fieldset";
 
 @RootComponent({
   group: 'setup',
   role: 'action'
 })
 export class SetupAction {
-  @Prop() onSetupSuccess: (detail: any) => void = (_any: any) => {}
-  @State() fields = {{fields}}
+  @Prop() onSetupSuccess: (detail: any) => void = (_any: any) => { }
+  @State() fields = new FieldSet({{ fields }})
   @State() innerListener = `setup_success:BEARER_SCENARIO_ID`
+  @Output() setup: any;
+  @Element() el: HTMLElement;
+
+  @Listen("setup-setupSaved")
+  setupSavedHandler(e: CustomEvent) {
+    const event = new CustomEvent("setupSuccess", e);
+    document.dispatchEvent(event);
+    this.el.shadowRoot
+      .querySelector<HTMLBearerDropdownButtonElement>("bearer-dropdown-button")
+      .toggle(false);
+    Bearer.emitter.emit(this.innerListener, {
+      referenceId: e.detail.referenceId
+    });
+  }
+
+  handleSubmit = (e: CustomEvent) => {
+    this.setup = e.detail.set.reduce((acc, obj) => ({ ...acc, [obj.controlName]: obj.value }), {})
+  };
+
   render() {
     return (
-      <bearer-dropdown-button innerListener={this.innerListener}>
+      <bearer-dropdown-button>
         <span slot="dropdown-btn-content">Setup component</span>
-        <bearer-setup onSetupSuccess={this.onSetupSuccess} scenarioId="BEARER_SCENARIO_ID" fields={this.fields} />
+        <bearer-form fields={this.fields} onSubmit={this.handleSubmit} />
       </bearer-dropdown-button>
     )
   }
