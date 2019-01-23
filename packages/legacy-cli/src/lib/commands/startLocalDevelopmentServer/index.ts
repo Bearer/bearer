@@ -121,7 +121,7 @@ const intentHandler = (distPath: string, devIntentsContext, bearerBaseURL: strin
 
       const userDefinedData = await loadUserDefinedData({ query: ctx.query })
 
-      const datum = await intent.intentType.intent(intent.action)(
+      const datum = await intent.init()(
         {
           context: {
             ...devIntentsContext.global,
