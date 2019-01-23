@@ -16,16 +16,16 @@ export default class Login extends BaseCommand {
   async run() {
     const { flags } = this.parse(Login)
     const email = flags.email || (await this.askForString('Enter your email'))
-    const token = await this.askToken()
+    const token = process.env.BEARER_TOKEN || (await this.askToken())
     this.ux.action.start('Logging you in')
     const status = await this.logUser(email, token)
     this.ux.action.stop()
     this.log(status)
   }
 
-  async logUser(Username: string, AccessToken: string): Promise<string> {
+  async logUser(username: string, accessToken: string): Promise<string> {
     try {
-      const { statusCode, body } = await this.serviceClient.login({ Username, Password: AccessToken })
+      const { statusCode, body } = await this.serviceClient.login({ Username: username, Password: accessToken })
       switch (statusCode as number) {
         case 200: {
           this.bearerConfig.storeBearerConfig({
@@ -33,7 +33,7 @@ export default class Login extends BaseCommand {
             ExpiresAt: Date.now() + body.authorization.AuthenticationResult.ExpiresIn * 1000,
             authorization: body.authorization
           })
-          return `Successfully logged in as ${Username}! 🤘`
+          return `Successfully logged in as ${username}! 🤘`
         }
 
         case 401: {
