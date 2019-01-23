@@ -9,8 +9,8 @@ const logger = debug('intents:fetch-state')
 
 export abstract class SaveState<State = any, ReturnedData = any, Error = any, AuthContext = any> {
   // expected implementation
-  abstract async action<Params = any>(
-    event: d.TSaveActionEvent<State, Params, AuthContext>
+  abstract async action(
+    event: d.TSaveActionEvent<State, any, AuthContext>
   ): Promise<d.TSaveStatePayload<State, ReturnedData, Error>>
 
   // Internal
