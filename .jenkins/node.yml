@@ -5,8 +5,8 @@ metadata:
     name: bearercli
 spec:
   containers:
-  - name: bearercli
-    image: node:10.6
-    command:
-    - cat
-    tty: true
+    - name: bearercli
+      image: node:10.15
+      command:
+        - cat
+      tty: true
