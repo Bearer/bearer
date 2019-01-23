@@ -10,7 +10,7 @@ describe('prepareConfig', () => {
     expect(config).toMatchObject({
       auth: {},
       integration_uuid: '123-ok',
-      intents: ['a-wonderful-intent']
+      intents: ['a-wonderful-intent-as-method', 'a-wonderful-intent']
     })
   })
 })

@@ -76,12 +76,27 @@ class IntentNodeAdapter implements IIntentEntry {
 }
 
 export function isIntentClass(tsNode: ts.Node): boolean {
-  const isClass = ts.isClassDeclaration(tsNode) && tsNode.name
-  if (!isClass) {
+  if (!ts.isClassDeclaration(tsNode)) {
     return false
   }
-  const intentTypeValue = getPropertyValue(tsNode as ts.ClassDeclaration, INTENT_TYPE_IDENTIFIER)
-  return INTENT_NAMES.includes(intentTypeValue)
+  return extendsIntentType(tsNode) && implementsAction(tsNode)
+}
+
+function extendsIntentType(tsClass: ts.ClassDeclaration): boolean {
+  const extendedClasses = (tsClass.heritageClauses || []).filter(hc => hc.token === ts.SyntaxKind.ExtendsKeyword)
+  return Boolean(
+    extendedClasses.find(hc =>
+      Boolean(hc.types.find(t => INTENT_NAMES.includes((t.expression as ts.Identifier).escapedText.toString())))
+    )
+  )
+}
+
+function implementsAction(tsClass: ts.ClassDeclaration): boolean {
+  return Boolean(
+    tsClass.members.filter(m => {
+      return ts.isMethodDeclaration(m)
+    })
+  )
 }
 
 export function getIdentifier(tsNode: ts.ClassDeclaration | ts.PropertyDeclaration): ts.Identifier {

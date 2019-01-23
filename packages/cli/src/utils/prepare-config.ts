@@ -10,24 +10,23 @@ type TConfig = {
   auth?: any
 }
 
-export default (authConfigFile: string, scenarioUuid: string, intentsDir: string): Promise<TConfig> => {
-  const intents: string[] = []
-
-  const transformer = (context: ts.TransformationContext) => {
-    return (tsSourceFile: ts.SourceFile) => {
-      function visit(tsNode: ts.Node) {
-        if (isIntentClass(tsNode)) {
-          const intentName = getIntentName(tsSourceFile)
-          intents.push(intentName)
-        }
-        return tsNode
+export const transformer = (intents: string[]) => (context: ts.TransformationContext) => {
+  return (tsSourceFile: ts.SourceFile) => {
+    function visit(tsNode: ts.Node) {
+      if (isIntentClass(tsNode)) {
+        const intentName = getIntentName(tsSourceFile)
+        intents.push(intentName)
       }
-      return ts.visitEachChild(tsSourceFile, visit, context)
+      return tsNode
     }
+    return ts.visitEachChild(tsSourceFile, visit, context)
   }
+}
 
+export default (authConfigFile: string, scenarioUuid: string, intentsDir: string): Promise<TConfig> => {
   return new Promise((resolve, reject) => {
-    new IntentCodeProcessor(intentsDir, transformer)
+    const intents: string[] = []
+    new IntentCodeProcessor(intentsDir, transformer(intents))
       .run()
       .then(() => {
         const content = fs.readFileSync(authConfigFile, { encoding: 'utf8' })
