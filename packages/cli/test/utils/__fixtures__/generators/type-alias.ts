@@ -3,7 +3,7 @@ import { TOAUTH2AuthContext, FetchData, TFetchActionEvent, TFetchPromise } from 
 // import Client from './client'
 
 export default class Intent extends FetchData implements FetchData {
-  action = async (event: TFetchActionEvent<TOAUTH2AuthContext, Params>): TFetchPromise<ReturnedData> => {
+  action = async (event: TFetchActionEvent<Params, TOAUTH2AuthContext>): TFetchPromise<ReturnedData> => {
     // const token = event.context.authAccess.accessToken
     // Put your logic here
     return {
