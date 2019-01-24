@@ -22,7 +22,6 @@ export default class GenerateSetup extends BaseCommand {
       if (fields && fields.length) {
         try {
           const tasks: Listr.ListrTask[] = [
-
             {
               title: 'Generating setup components',
               task: async () => {
@@ -31,7 +30,7 @@ export default class GenerateSetup extends BaseCommand {
                     this,
                     'generate/setup',
                     this.locator.srcViewsDir,
-                    this.getVars(this.bearerConfig.scenarioConfig.scenarioTitle, fields)
+                    this.getVars(this.bearerConfig.scenarioConfig.scenarioTitle, fields, 'NONE')
                   )
                   return true
                 } catch (e) {
@@ -49,7 +48,11 @@ export default class GenerateSetup extends BaseCommand {
                     this,
                     `generate/setup-intents`,
                     this.locator.srcIntentsDir,
-                    this.getVars(this.bearerConfig.scenarioConfig.scenarioTitle, fields, this.scenarioAuthConfig.authType)
+                    this.getVars(
+                      this.bearerConfig.scenarioConfig.scenarioTitle,
+                      fields,
+                      this.scenarioAuthConfig.authType
+                    )
                   )
                   return true
                 } catch (e) {
@@ -78,8 +81,8 @@ export default class GenerateSetup extends BaseCommand {
       componentName: this.case.pascal(scenarioTitle),
       componentTagName: this.case.kebab(scenarioTitle),
       fields: JSON.stringify(fields),
-      contextAuthTypeImport: contextAuthType ? `${contextAuthType}, ` : "",
-      contextAuthTypeImplements: contextAuthType ? ` ,${contextAuthType}` : "",
+      contextAuthTypeImport: contextAuthType ? `${contextAuthType}, ` : '',
+      contextAuthTypeImplements: contextAuthType ? `, ${contextAuthType}` : '',
       dataType: getDataType(authType)
     }
   }
@@ -87,21 +90,31 @@ export default class GenerateSetup extends BaseCommand {
 
 function getDataType(authType: string): string {
   switch (authType) {
-    case "NONE": return "{}"
-    case "BASIC": return "{username: string, password: string}"
-    case "APIKEY": return "{apiKey: string}"
-    case "OAUTH2": return "{accessToken: string}"
-    default: return "any"
+    case 'NONE':
+      return '{}'
+    case 'BASIC':
+      return '{username: string, password: string}'
+    case 'APIKEY':
+      return '{apiKey: string}'
+    case 'OAUTH2':
+      return '{accessToken: string}'
+    default:
+      return 'any'
   }
 }
 
 function getContextAuthType(authType: string): string {
   switch (authType) {
-    case "NONE": return ""
-    case "BASIC": return "TBASICAuthContext"
-    case "APIKEY": return "TAPIKEYAuthContext"
-    case "OAUTH2": return "TOAUTH2AuthContext"
-    default: return "any"
+    case 'NONE':
+      return ''
+    case 'BASIC':
+      return 'TBASICAuthContext'
+    case 'APIKEY':
+      return 'TAPIKEYAuthContext'
+    case 'OAUTH2':
+      return 'TOAUTH2AuthContext'
+    default:
+      return 'any'
   }
 }
 // Note: using Or condition in case the developer delete one but customized the other component

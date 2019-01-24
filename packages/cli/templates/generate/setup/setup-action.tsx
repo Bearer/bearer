@@ -3,7 +3,7 @@
   This file has been generated automatically and should not be edited.
 */
 
-import { RootComponent, State, Prop } from '@bearer/core'
+import Bearer, { RootComponent, State, Prop, Output, Element, Listen } from '@bearer/core'
 import '@bearer/ui'
 import { FieldSet } from "@bearer/ui/lib/collection/components/Forms/Fieldset";
 
@@ -13,7 +13,7 @@ import { FieldSet } from "@bearer/ui/lib/collection/components/Forms/Fieldset";
 })
 export class SetupAction {
   @Prop() onSetupSuccess: (detail: any) => void = (_any: any) => { }
-  @State() fields = new FieldSet({{ fields }})
+  @State() fields = new FieldSet({{fields}})
   @State() innerListener = `setup_success:BEARER_SCENARIO_ID`
   @Output() setup: any;
   @Element() el: HTMLElement;

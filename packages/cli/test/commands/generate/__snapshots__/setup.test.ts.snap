@@ -1,27 +1,47 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`generate:setup APIKEY create setup files  1`] = `
+exports[`generate:setup APIKEY creates setup files 1`] = `
 "/*
   The purpose of this component is to save scenario credentials.
   This file has been generated automatically and should not be edited.
 */
 
-import { RootComponent, State, Prop } from '@bearer/core'
+import Bearer, { RootComponent, State, Prop, Output, Element, Listen } from '@bearer/core'
 import '@bearer/ui'
+import { FieldSet } from \\"@bearer/ui/lib/collection/components/Forms/Fieldset\\";
 
 @RootComponent({
   group: 'setup',
   role: 'action'
 })
 export class SetupAction {
-  @Prop() onSetupSuccess: (detail: any) => void = (_any: any) => {}
-  @State() fields = [{\\"type\\":\\"password\\",\\"label\\":\\"Api Key\\",\\"controlName\\":\\"apiKey\\"}]
+  @Prop() onSetupSuccess: (detail: any) => void = (_any: any) => { }
+  @State() fields = new FieldSet([{\\"type\\":\\"password\\",\\"label\\":\\"Api Key\\",\\"controlName\\":\\"apiKey\\"}])
   @State() innerListener = \`setup_success:BEARER_SCENARIO_ID\`
+  @Output() setup: any;
+  @Element() el: HTMLElement;
+
+  @Listen(\\"setup-setupSaved\\")
+  setupSavedHandler(e: CustomEvent) {
+    const event = new CustomEvent(\\"setupSuccess\\", e);
+    document.dispatchEvent(event);
+    this.el.shadowRoot
+      .querySelector<HTMLBearerDropdownButtonElement>(\\"bearer-dropdown-button\\")
+      .toggle(false);
+    Bearer.emitter.emit(this.innerListener, {
+      referenceId: e.detail.referenceId
+    });
+  }
+
+  handleSubmit = (e: CustomEvent) => {
+    this.setup = e.detail.set.reduce((acc, obj) => ({ ...acc, [obj.controlName]: obj.value }), {ReadAllowed: false})
+  };
+
   render() {
     return (
-      <bearer-dropdown-button innerListener={this.innerListener}>
+      <bearer-dropdown-button>
         <span slot=\\"dropdown-btn-content\\">Setup component</span>
-        <bearer-setup onSetupSuccess={this.onSetupSuccess} scenarioId=\\"BEARER_SCENARIO_ID\\" fields={this.fields} />
+        <bearer-form fields={this.fields} onSubmit={this.handleSubmit} />
       </bearer-dropdown-button>
     )
   }
@@ -29,7 +49,7 @@ export class SetupAction {
 "
 `;
 
-exports[`generate:setup APIKEY create setup files  2`] = `
+exports[`generate:setup APIKEY creates setup files 2`] = `
 "/*
   The purpose of this component is to save scenario credentials.
 */
@@ -51,28 +71,86 @@ export class SetupDisplay {
 "
 `;
 
-exports[`generate:setup BASIC create setup files  1`] = `
+exports[`generate:setup APIKEY creates setup files 3`] = `
+"import { TAPIKEYAuthContext, SaveState, TSaveActionEvent, TSavePromise } from '@bearer/intents'
+
+export default class SaveSetupIntent extends SaveState implements SaveState<State, ReturnedData, any, TAPIKEYAuthContext> {
+  async action(event: TSaveActionEvent<State, Params, TAPIKEYAuthContext>): TSavePromise<State, ReturnedData> {
+    return { state: event.params.setup, data: [] }
+  }
+}
+
+export type Params = {
+  setup: any
+}
+
+export type State = {apiKey: string}
+
+
+export type ReturnedData = {
+}
+"
+`;
+
+exports[`generate:setup APIKEY creates setup files 4`] = `
+"import { TAPIKEYAuthContext, FetchData, TFetchActionEvent, TFetchPromise } from '@bearer/intents'
+
+export default class RetrieveSetupIntent extends FetchData implements FetchData<ReturnedData, any, TAPIKEYAuthContext> {
+  async action(event: TFetchActionEvent<Params, TAPIKEYAuthContext>): TFetchPromise<ReturnedData> {
+    return { data: event.context.reference }
+  }
+}
+
+export type Params = {
+  setup: any
+}
+
+export type ReturnedData = {apiKey: string}
+"
+`;
+
+exports[`generate:setup BASIC creates setup files 1`] = `
 "/*
   The purpose of this component is to save scenario credentials.
   This file has been generated automatically and should not be edited.
 */
 
-import { RootComponent, State, Prop } from '@bearer/core'
+import Bearer, { RootComponent, State, Prop, Output, Element, Listen } from '@bearer/core'
 import '@bearer/ui'
+import { FieldSet } from \\"@bearer/ui/lib/collection/components/Forms/Fieldset\\";
 
 @RootComponent({
   group: 'setup',
   role: 'action'
 })
 export class SetupAction {
-  @Prop() onSetupSuccess: (detail: any) => void = (_any: any) => {}
-  @State() fields = [{\\"type\\":\\"text\\",\\"label\\":\\"Username\\",\\"controlName\\":\\"username\\"},{\\"type\\":\\"password\\",\\"label\\":\\"Password\\",\\"controlName\\":\\"password\\"}]
+  @Prop() onSetupSuccess: (detail: any) => void = (_any: any) => { }
+  @State() fields = new FieldSet([{\\"type\\":\\"text\\",\\"label\\":\\"Username\\",\\"controlName\\":\\"username\\"},{\\"type\\":\\"password\\",\\"label\\":\\"Password\\",\\"controlName\\":\\"password\\"}])
   @State() innerListener = \`setup_success:BEARER_SCENARIO_ID\`
+  @Output() setup: any;
+  @Element() el: HTMLElement;
+
+  @Listen(\\"setup-setupSaved\\")
+  setupSavedHandler(e: CustomEvent) {
+    const event = new CustomEvent(\\"setupSuccess\\", e);
+    document.dispatchEvent(event);
+    this.el.shadowRoot
+      .querySelector<HTMLBearerDropdownButtonElement>(\\"bearer-dropdown-button\\")
+      .toggle(false);
+    Bearer.emitter.emit(this.innerListener, {
+      referenceId: e.detail.referenceId
+    });
+  }
+
+  handleSubmit = (e: CustomEvent) => {
+    this.setup = e.detail.set.reduce((acc, obj) => ({ ...acc, [obj.controlName]: obj.value }), {ReadAllowed: false})
+  };
+
   render() {
     return (
-      <bearer-dropdown-button innerListener={this.innerListener}>
+      <bearer-dropdown-button>
         <span slot=\\"dropdown-btn-content\\">Setup component</span>
-        <bearer-setup onSetupSuccess={this.onSetupSuccess} scenarioId=\\"BEARER_SCENARIO_ID\\" fields={this.fields} />
+        <bearer-form fields={this.fields} onSubmit={this.handleSubmit} />
       </bearer-dropdown-button>
     )
   }
@@ -80,7 +158,7 @@ export class SetupAction {
 "
 `;
 
-exports[`generate:setup BASIC create setup files  2`] = `
+exports[`generate:setup BASIC creates setup files 2`] = `
 "/*
   The purpose of this component is to save scenario credentials.
 */
@@ -102,28 +180,86 @@ export class SetupDisplay {
 "
 `;
 
-exports[`generate:setup OAUTH2 create setup files  1`] = `
+exports[`generate:setup BASIC creates setup files 3`] = `
+"import { TBASICAuthContext, SaveState, TSaveActionEvent, TSavePromise } from '@bearer/intents'
+
+export default class SaveSetupIntent extends SaveState implements SaveState<State, ReturnedData, any, TBASICAuthContext> {
+  async action(event: TSaveActionEvent<State, Params, TBASICAuthContext>): TSavePromise<State, ReturnedData> {
+    return { state: event.params.setup, data: [] }
+  }
+}
+
+export type Params = {
+  setup: any
+}
+
+export type State = {username: string, password: string}
+
+
+export type ReturnedData = {
+}
+"
+`;
+
+exports[`generate:setup BASIC creates setup files 4`] = `
+"import { TBASICAuthContext, FetchData, TFetchActionEvent, TFetchPromise } from '@bearer/intents'
+
+export default class RetrieveSetupIntent extends FetchData implements FetchData<ReturnedData, any, TBASICAuthContext> {
+  async action(event: TFetchActionEvent<Params, TBASICAuthContext>): TFetchPromise<ReturnedData> {
+    return { data: event.context.reference }
+  }
+}
+
+export type Params = {
+  setup: any
+}
+
+export type ReturnedData = {username: string, password: string}
+"
+`;
+
+exports[`generate:setup OAUTH2 creates setup files 1`] = `
 "/*
   The purpose of this component is to save scenario credentials.
   This file has been generated automatically and should not be edited.
 */
 
-import { RootComponent, State, Prop } from '@bearer/core'
+import Bearer, { RootComponent, State, Prop, Output, Element, Listen } from '@bearer/core'
 import '@bearer/ui'
+import { FieldSet } from \\"@bearer/ui/lib/collection/components/Forms/Fieldset\\";
 
 @RootComponent({
   group: 'setup',
   role: 'action'
 })
 export class SetupAction {
-  @Prop() onSetupSuccess: (detail: any) => void = (_any: any) => {}
-  @State() fields = [{\\"type\\":\\"text\\",\\"label\\":\\"Client ID\\",\\"controlName\\":\\"clientID\\"},{\\"type\\":\\"password\\",\\"label\\":\\"Client Secret\\",\\"controlName\\":\\"clientSecret\\"}]
+  @Prop() onSetupSuccess: (detail: any) => void = (_any: any) => { }
+  @State() fields = new FieldSet([{\\"type\\":\\"text\\",\\"label\\":\\"Client ID\\",\\"controlName\\":\\"clientID\\"},{\\"type\\":\\"password\\",\\"label\\":\\"Client Secret\\",\\"controlName\\":\\"clientSecret\\"}])
   @State() innerListener = \`setup_success:BEARER_SCENARIO_ID\`
+  @Output() setup: any;
+  @Element() el: HTMLElement;
+
+  @Listen(\\"setup-setupSaved\\")
+  setupSavedHandler(e: CustomEvent) {
+    const event = new CustomEvent(\\"setupSuccess\\", e);
+    document.dispatchEvent(event);
+    this.el.shadowRoot
+      .querySelector<HTMLBearerDropdownButtonElement>(\\"bearer-dropdown-button\\")
+      .toggle(false);
+    Bearer.emitter.emit(this.innerListener, {
+      referenceId: e.detail.referenceId
+    });
+  }
+
+  handleSubmit = (e: CustomEvent) => {
+    this.setup = e.detail.set.reduce((acc, obj) => ({ ...acc, [obj.controlName]: obj.value }), {ReadAllowed: false})
+  };
+
   render() {
     return (
-      <bearer-dropdown-button innerListener={this.innerListener}>
+      <bearer-dropdown-button>
         <span slot=\\"dropdown-btn-content\\">Setup component</span>
-        <bearer-setup onSetupSuccess={this.onSetupSuccess} scenarioId=\\"BEARER_SCENARIO_ID\\" fields={this.fields} />
+        <bearer-form fields={this.fields} onSubmit={this.handleSubmit} />
       </bearer-dropdown-button>
     )
   }
@@ -131,7 +267,7 @@ export class SetupAction {
 "
 `;
 
-exports[`generate:setup OAUTH2 create setup files  2`] = `
+exports[`generate:setup OAUTH2 creates setup files 2`] = `
 "/*
   The purpose of this component is to save scenario credentials.
 */
@@ -150,5 +286,43 @@ export class SetupDisplay {
     )
   }
 }
+"
+`;
+
+exports[`generate:setup OAUTH2 creates setup files 3`] = `
+"import { TOAUTH2AuthContext, SaveState, TSaveActionEvent, TSavePromise } from '@bearer/intents'
+
+export default class SaveSetupIntent extends SaveState implements SaveState<State, ReturnedData, any, TOAUTH2AuthContext> {
+  async action(event: TSaveActionEvent<State, Params, TOAUTH2AuthContext>): TSavePromise<State, ReturnedData> {
+    return { state: event.params.setup, data: [] }
+  }
+}
+
+export type Params = {
+  setup: any
+}
+
+export type State = {accessToken: string}
+
+
+export type ReturnedData = {
+}
+"
+`;
+
+exports[`generate:setup OAUTH2 creates setup files 4`] = `
+"import { TOAUTH2AuthContext, FetchData, TFetchActionEvent, TFetchPromise } from '@bearer/intents'
+
+export default class RetrieveSetupIntent extends FetchData implements FetchData<ReturnedData, any, TOAUTH2AuthContext> {
+  async action(event: TFetchActionEvent<Params, TOAUTH2AuthContext>): TFetchPromise<ReturnedData> {
+    return { data: event.context.reference }
+  }
+}
+
+export type Params = {
+  setup: any
+}
+
+export type ReturnedData = {accessToken: string}
 "
 `;
