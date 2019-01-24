@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`normalize event names changes event name 1`] = `
+"import { Event } from \\"@bearer/core\\";
+class Class {
+    @Event()
+    event: any;
+    @Event({ eventName: \\"somethiniwant-to-noramlize123\\", somethingElseuntouched: \\"Something\\" })
+    normalized: any;
+}
+"
+`;
