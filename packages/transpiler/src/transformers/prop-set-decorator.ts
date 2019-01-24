@@ -25,16 +25,16 @@ type TMutablePropMeta = {
   name: string
   tagName: string
 }
-export default function PropSetDecorator(options: TransformerOptions = {}): ts.TransformerFactory<ts.SourceFile> {
+export default function propSetDecorator(options: TransformerOptions = {}): ts.TransformerFactory<ts.SourceFile> {
   return _transformContext => {
-    const mutablePropMeta: Array<TMutablePropMeta> = []
+    const mutablePropMeta: TMutablePropMeta[] = []
 
     function visit(tagName: string) {
       return (tsNode: ts.Node): ts.VisitResult<ts.Node> => {
         if (ts.isPropertyDeclaration(tsNode)) {
           const decorator = getDecoratorNamed(tsNode, Decorators.Prop)
           if (decorator && isMutableProp(decorator)) {
-            mutablePropMeta.push({ name: getNodeName(tsNode), tagName })
+            mutablePropMeta.push({ tagName, name: getNodeName(tsNode) })
           }
         }
         return ts.visitEachChild(tsNode, visit(tagName), _transformContext)
