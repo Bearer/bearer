@@ -84,7 +84,9 @@ export type Params = {
   setup: any
 }
 
-export type State = {apiKey: string}
+export type State = {
+  apiKey: string
+}
 
 
 export type ReturnedData = {
@@ -105,7 +107,9 @@ export type Params = {
   setup: any
 }
 
-export type ReturnedData = {apiKey: string}
+export type ReturnedData = {
+  apiKey: string
+}
 "
 `;
 
@@ -193,11 +197,12 @@ export type Params = {
   setup: any
 }
 
-export type State = {username: string, password: string}
-
-
-export type ReturnedData = {
+export type State = {
+  username: string
+  password: string
 }
+
+export type ReturnedData = {}
 "
 `;
 
@@ -214,7 +219,10 @@ export type Params = {
   setup: any
 }
 
-export type ReturnedData = {username: string, password: string}
+export type ReturnedData = {
+  username: string
+  password: string
+}
 "
 `;
 
@@ -302,7 +310,9 @@ export type Params = {
   setup: any
 }
 
-export type State = {accessToken: string}
+export type State = {
+  accessToken: string
+}
 
 
 export type ReturnedData = {
@@ -323,6 +333,8 @@ export type Params = {
   setup: any
 }
 
-export type ReturnedData = {accessToken: string}
+export type ReturnedData = {
+  accessToken: string
+}
 "
 `;

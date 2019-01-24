@@ -4,8 +4,8 @@ import * as path from 'path'
 
 import BaseCommand from '../../base-command'
 import { RequireScenarioFolder } from '../../utils/decorators'
-import { copyFiles } from '../../utils/helpers'
 import * as Listr from 'listr'
+import buildSetup from '../../tasks/build-setup'
 
 export default class GenerateSetup extends BaseCommand {
   static description = 'Generate a Bearer Setup'
@@ -21,47 +21,11 @@ export default class GenerateSetup extends BaseCommand {
       const fields = this.scenarioAuthConfig.setupViews
       if (fields && fields.length) {
         try {
-          const tasks: Listr.ListrTask[] = [
-            {
-              title: 'Generating setup components',
-              task: async () => {
-                try {
-                  await copyFiles(
-                    this,
-                    'generate/setup',
-                    this.locator.srcViewsDir,
-                    this.getVars(this.bearerConfig.scenarioConfig.scenarioTitle, fields, 'NONE')
-                  )
-                  return true
-                } catch (e) {
-                  this.error(e)
-                  return null
-                }
-              }
-            },
-            {
-              title: 'Generating setup intents',
-              task: async () => {
-                try {
-                  console.log(this.scenarioAuthConfig.authType)
-                  await copyFiles(
-                    this,
-                    `generate/setup-intents`,
-                    this.locator.srcIntentsDir,
-                    this.getVars(
-                      this.bearerConfig.scenarioConfig.scenarioTitle,
-                      fields,
-                      this.scenarioAuthConfig.authType
-                    )
-                  )
-                  return true
-                } catch (e) {
-                  this.error(e)
-                  return null
-                }
-              }
-            }
-          ]
+          const vars = this.getVars(this.bearerConfig.scenarioConfig.scenarioTitle, fields)
+          const tasks: Listr.ListrTask[] = buildSetup({
+            vars,
+            cmd: this
+          })
           await new Listr(tasks).run()
         } catch (e) {
           this.error(e)
@@ -74,49 +38,15 @@ export default class GenerateSetup extends BaseCommand {
     }
   }
 
-  getVars(scenarioTitle: string, fields: any, authType: string) {
-    const contextAuthType = getContextAuthType(authType)
+  getVars(scenarioTitle: string, fields: any) {
     return {
-      contextAuthType,
       componentName: this.case.pascal(scenarioTitle),
       componentTagName: this.case.kebab(scenarioTitle),
-      fields: JSON.stringify(fields),
-      contextAuthTypeImport: contextAuthType ? `${contextAuthType}, ` : '',
-      contextAuthTypeImplements: contextAuthType ? `, ${contextAuthType}` : '',
-      dataType: getDataType(authType)
+      fields: JSON.stringify(fields)
     }
   }
 }
 
-function getDataType(authType: string): string {
-  switch (authType) {
-    case 'NONE':
-      return '{}'
-    case 'BASIC':
-      return '{username: string, password: string}'
-    case 'APIKEY':
-      return '{apiKey: string}'
-    case 'OAUTH2':
-      return '{accessToken: string}'
-    default:
-      return 'any'
-  }
-}
-
-function getContextAuthType(authType: string): string {
-  switch (authType) {
-    case 'NONE':
-      return ''
-    case 'BASIC':
-      return 'TBASICAuthContext'
-    case 'APIKEY':
-      return 'TAPIKEYAuthContext'
-    case 'OAUTH2':
-      return 'TOAUTH2AuthContext'
-    default:
-      return 'any'
-  }
-}
 // Note: using Or condition in case the developer delete one but customized the other component
 function setupExists(location: string): boolean {
   return (
