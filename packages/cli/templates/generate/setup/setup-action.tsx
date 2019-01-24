@@ -31,7 +31,7 @@ export class SetupAction {
   }
 
   handleSubmit = (e: CustomEvent) => {
-    this.setup = e.detail.set.reduce((acc, obj) => ({ ...acc, [obj.controlName]: obj.value }), {})
+    this.setup = e.detail.set.reduce((acc, obj) => ({ ...acc, [obj.controlName]: obj.value }), {ReadAllowed: false})
   };
 
   render() {

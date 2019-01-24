@@ -60,7 +60,6 @@ export default class New extends BaseCommand {
               this.error(e)
               return null
             }
-            return true
           }
         },
         {
