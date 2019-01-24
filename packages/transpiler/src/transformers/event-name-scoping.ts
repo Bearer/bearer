@@ -63,7 +63,7 @@ function updatedListenDecoratorOrDecorator(tsDecorator: ts.Decorator): ts.Decora
   )
 }
 
-export default function EventNameScoping({ metadata }: TransformerOptions = {}): ts.TransformerFactory<ts.SourceFile> {
+export default function eventNameScoping({ metadata }: TransformerOptions = {}): ts.TransformerFactory<ts.SourceFile> {
   return _transformContext => {
     return tsSourceFile => {
       const meta = metadata.findComponentFrom(tsSourceFile)
@@ -72,7 +72,8 @@ export default function EventNameScoping({ metadata }: TransformerOptions = {}):
       function visit(tsNode: ts.Node): ts.VisitResult<ts.Node> {
         if (ts.isPropertyDeclaration(tsNode) && hasDecoratorNamed(tsNode, Decorators.Event)) {
           return updateEventDecorator(tsNode, groupName)
-        } else if (ts.isMethodDeclaration(tsNode) && hasDecoratorNamed(tsNode, Decorators.Listen)) {
+        }
+        if (ts.isMethodDeclaration(tsNode) && hasDecoratorNamed(tsNode, Decorators.Listen)) {
           return ts.updateMethod(
             tsNode,
             [...tsNode.decorators.map(updatedListenDecoratorOrDecorator)],
