@@ -139,7 +139,8 @@ export const start = (emitter, config, locator: Locator) => async ({ open, insta
       bearerTranspiler.on('message', ({ event }) => {
         if (event === 'transpiler:initialized') {
           // Start stencil
-          const args = config.isYarnInstalled ? ['start'] : ['run', 'start']
+          const stencilServer = ['stencil', 'build', '--dev', '--watch', '--serve']
+          const args = config.isYarnInstalled ? stencilServer : ['run', ...stencilServer]
           if (!open) {
             args.push('--no-open')
           }
