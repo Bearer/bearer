@@ -10,7 +10,5 @@
     "moduleResolution": "node",
     "outDir": "lib/",
     "declaration": true
-  },
-  "include": ["src/", "bin/"],
-  "exclude": ["node_modules/", "**/*.test.*"]
+  }
 }
