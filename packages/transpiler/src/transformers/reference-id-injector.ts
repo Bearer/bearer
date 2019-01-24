@@ -125,10 +125,12 @@ function hasIntentWithStateTypeDecorator(classNode: ts.ClassDeclaration): boolea
       return has
     }
     const intentType = (decorator.expression as ts.CallExpression).arguments[1] as ts.PropertyAccessExpression
+    if (!intentType) {
+      return false
+    }
     const hasWisthState =
-      intentType &&
-      intentType.expression.getText() === Types.IntentType &&
-      intentType.name.getText() === Types.SaveState
+      (intentType.expression as ts.Identifier).escapedText.toString() === Types.IntentType &&
+      (intentType.name as ts.Identifier).escapedText.toString() === Types.SaveState
     return has || hasWisthState
   }, false)
 }

@@ -46,10 +46,9 @@ export function runTransformersOn(
   unitTestDirectory: string,
   transformers: ts.TransformerFactory<ts.SourceFile>[]
 ) {
-  it(itDescription, done => {
-    const srcDirectory = unitFixtureDirectory(unitTestDirectory)
-
-    fs.readdirSync(srcDirectory).forEach(file => {
+  const srcDirectory = unitFixtureDirectory(unitTestDirectory)
+  describe.each(fs.readdirSync(srcDirectory))('file: %s', file => {
+    it(itDescription, done => {
       const filePath = path.join(srcDirectory, file)
 
       fs.readFile(filePath, 'utf8', (_e, postContent) => {

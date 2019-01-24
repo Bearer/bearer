@@ -1,35 +1,25 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Refernce Id Injector do nothing match snapshot 1`] = `
-Object {
-  "file": "do-nothing.tsx",
-  "postContent": "import { Intent, BearerFetch } from '@bearer/core';
+exports[`reference id injector file: do-nothing.tsx change files content 1`] = `
+"import { Intent, BearerFetch } from \\"@bearer/core\\";
 class DoNothing {
     @OtherDecorator
     other: any;
-    private fetcher: BearerFetch;
-    constructor() {
-        Intent('MyIntent')(this, \\"fetcher\\");
-    }
+    @Intent(\\"MyIntent\\")
+    fetcher: BearerFetch;
 }
-",
-}
+"
 `;
 
-exports[`Refernce Id Injector intent type savestate decorator present match snapshot 1`] = `
-Object {
-  "file": "intent-type-savestate-decorator-present.tsx",
-  "postContent": "import { Intent, IntentType, BearerFetch, Prop, Element } from '@bearer/core';
+exports[`reference id injector file: intent-type-savestate-decorator-present.tsx change files content 1`] = `
+"import { Intent, IntentType, BearerFetch, Prop, Element } from \\"@bearer/core\\";
 export class IntentDecorated {
-    private fetcher: BearerFetch;
+    @Intent(\\"saveState\\", IntentType.SaveState)
+    fetcher: BearerFetch;
     @Prop()
     referenceId: string;
     @Element()
     el: HTMLElement;
-    constructor() {
-        Intent('saveState', IntentType.SaveState)(this, \\"fetcher\\");
-    }
 }
-",
-}
+"
 `;

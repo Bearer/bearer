@@ -1,7 +1,8 @@
-import { runUnitOn } from '../utils/helpers'
+import { runTransformersOn } from '../utils/helpers'
+import transformer from '../../src/transformers/reference-id-injector'
 
 const TEST_NAME = 'reference-id-injector'
 
-describe('Refernce Id Injector', () => {
-  runUnitOn(TEST_NAME)
+describe('reference id injector', () => {
+  runTransformersOn('change files content', TEST_NAME, [transformer()])
 })
