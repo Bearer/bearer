@@ -4,7 +4,7 @@ import * as path from 'path'
 import * as ts from 'typescript'
 
 import { TranpilerOptions } from '../../src/index'
-import { UnitFixtureDirectory } from '../utils/location'
+import { unitFixtureDirectory } from '../utils/location'
 
 import { TranspilerFactory } from './transpiler'
 
@@ -47,7 +47,7 @@ export function runTransformersOn(
   transformers: ts.TransformerFactory<ts.SourceFile>[]
 ) {
   it(itDescription, done => {
-    const srcDirectory = UnitFixtureDirectory(unitTestDirectory)
+    const srcDirectory = unitFixtureDirectory(unitTestDirectory)
 
     fs.readdirSync(srcDirectory).forEach(file => {
       const filePath = path.join(srcDirectory, file)
@@ -62,7 +62,7 @@ export function runTransformersOn(
 }
 
 export function runUnitOn(name: string, transpilerOptions: Partial<TranpilerOptions> = {}) {
-  const srcDirectory = UnitFixtureDirectory(name)
+  const srcDirectory = unitFixtureDirectory(name)
 
   beforeAll(() => {
     cleanBuildFolder()
@@ -88,9 +88,9 @@ export function runUnitOn(name: string, transpilerOptions: Partial<TranpilerOpti
 
 export function runTranspiler(srcFolder: string, transpilerOptions: Partial<TranpilerOptions> = {}) {
   const transpiler = TranspilerFactory({
-    buildFolder: '.build',
     srcFolder,
     ROOT_DIRECTORY,
+    buildFolder: '.build',
     ...transpilerOptions
   })
 
