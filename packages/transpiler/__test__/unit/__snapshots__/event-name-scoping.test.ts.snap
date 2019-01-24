@@ -10,9 +10,9 @@ Object {
     shadow: true
 })
 export class FeatDisplayRootComponent {
-    @Event({ eventName: \\"bearer-SPONGE_BOB-complex-feature-mustBeScopedEvent\\" })
+    @Event({ eventName: \\"bearer-sponge-bob-complex-feature-mustbescopedevent\\" })
     mustBeScopedEvent: EventEmitter;
-    @Event({ eventName: \\"bearer-SPONGE_BOB-complex-feature-mustBeScopedEvent\\" })
+    @Event({ eventName: \\"bearer-sponge-bob-complex-feature-mustbescopedevent\\" })
     mustBeScopedEvent: EventEmitter;
     @Listen(\\"bearer-SPONGE_BOB-config-saved\\")
     eventHandler() { }
@@ -45,7 +45,7 @@ Object {
     tag: \\"event\\"
 })
 export class SimpleComponent {
-    @Event({ eventName: \\"bearer-SPONGE_BOB-global-mustBeScopedEvent\\" })
+    @Event({ eventName: \\"bearer-sponge-bob-global-mustbescopedevent\\" })
     mustBeScopedEvent: EventEmitter;
     @Listen(\\"bearer-SPONGE_BOB-config-saved\\")
     eventHandler() { }

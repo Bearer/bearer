@@ -166,7 +166,7 @@ export class FullComponent {
     @State()
     ducks: Array<any>;
     private fetchResource: BearerFetch;
-    @Event({ eventName: \\"bearer-SPONGE_BOB-global-anEvent\\" })
+    @Event({ eventName: \\"bearer-sponge-bob-global-anevent\\" })
     anEvent: EventEmitter;
     screenRenderer = () => {
         return (<bearer-navigator-screen navigationTitle=\\"Last Screen\\" renderFunc={() => [<h1>Hello Partick</h1>]}/>);
@@ -395,7 +395,7 @@ export class AttachPullRequestAction {
     @State()
     ducks: Array<any>;
     private fetchResource: BearerFetch;
-    @Event({ eventName: \\"bearer-SPONGE_BOB-AttachPullRequest-inlineDefinition\\" })
+    @Event({ eventName: \\"bearer-sponge-bob-attachpullrequest-inlinedefinition\\" })
     inlineDefinition: EventEmitter;
     render() {
         return (<bearer-authorized scenarioId=\\"SPONGE_BOB\\">
@@ -469,7 +469,7 @@ export class AttachPullRequestAction {
     @Prop({ \\"mutable\\": true })
     goatId: string;
     private saveFeedPanda: BearerFetch<BearerRef<Panda>>;
-    @Event({ eventName: \\"bearer-SPONGE_BOB-AttachPullRequest-feedPandaSaved\\" })
+    @Event({ eventName: \\"bearer-sponge-bob-attachpullrequest-feedpandasaved\\" })
     feedPandaSaved: EventEmitter;
     @State()
     feedPandaInitial: BearerRef<Panda>;
@@ -498,7 +498,7 @@ export class AttachPullRequestAction {
     private manualIntentName: BearerFetch<BearerRef<{
         inlineName: string;
     }>>;
-    @Event({ eventName: \\"bearer-SPONGE_BOB-AttachPullRequest-spongeBobdSaved\\" })
+    @Event({ eventName: \\"bearer-sponge-bob-attachpullrequest-spongebobdsaved\\" })
     spongeBobdSaved: EventEmitter;
     @State()
     shortPandaInitial: BearerRef<{

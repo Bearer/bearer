@@ -24,6 +24,7 @@ import BearerReferenceIdInjector from './transformers/reference-id-injector'
 import ReplaceIntentDecorators from './transformers/replace-intent-decorator'
 import RootComponentTransformer from './transformers/root-component-transformer'
 import BearerScenarioIdInjector from './transformers/scenario-id-accessor-injector'
+import EventNameNormalizer from './transformers/event-name-normalizer'
 
 /*
  * Transformer modifying AST
@@ -68,6 +69,7 @@ export default class Transpiler {
         GatherIO({ verbose, metadata: this.metadata, generator: this.generator }),
         PropSetDecorator({ verbose, metadata: this.metadata }),
         bearerCleaning({ verbose, metadata: this.metadata }),
+        EventNameNormalizer(),
         DumpSourceCode({
           verbose,
           srcDirectory: this.VIEWS_DIRECTORY,
@@ -99,7 +101,7 @@ export default class Transpiler {
   generator!: any
   private service: ts.LanguageService
   private rootFileNames: string[] = []
-  private subscribers: ts.MapLike<Array<() => void>> = {}
+  private subscribers: ts.MapLike<(() => void)[]> = {}
 
   private readonly ROOT_DIRECTORY
   private watchFiles = true
@@ -142,7 +144,7 @@ export default class Transpiler {
             return
           }
           // Update the version to signal a change in the file
-          this.files[fileName].version++
+          this.files[fileName].version = this.files[fileName].version + 1
           // write the changes to disk
           this.emitFile(fileName)
         })
@@ -231,15 +233,15 @@ export default class Transpiler {
   }
 
   logErrors(fileName: string) {
-    let allDiagnostics = this.service
+    const allDiagnostics = this.service
       .getCompilerOptionsDiagnostics()
       .concat(this.service.getSyntacticDiagnostics(fileName))
       .concat(this.service.getSemanticDiagnostics(fileName))
 
     allDiagnostics.forEach(diagnostic => {
-      let message = ts.flattenDiagnosticMessageText(diagnostic.messageText, '\n')
+      const message = ts.flattenDiagnosticMessageText(diagnostic.messageText, '\n')
       if (diagnostic.file) {
-        let { line, character } = diagnostic.file.getLineAndCharacterOfPosition(diagnostic.start!)
+        const { line, character } = diagnostic.file.getLineAndCharacterOfPosition(diagnostic.start!)
         console.log(`  Error ${diagnostic.file.fileName} (${line + 1},${character + 1}): ${message}`)
       } else {
         console.log(`  Error: ${message}`)
