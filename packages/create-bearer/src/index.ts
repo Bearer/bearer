@@ -1,2 +1,13 @@
 #!/usr/bin/env node
-console.log('Hello from the Bearer Team!\nLearn more at https://www.bearer.sh/ ')
+import * as fs from 'fs'
+import * as path from 'path'
+const { run } = require('@bearer/cli/lib/index')
+
+const bearer = fs.readFileSync(path.join(__dirname, '../static/message.txt'), { encoding: 'utf8' })
+console.log(bearer)
+
+run(process.argv.slice(2))
+  .then()
+  .catch(() => {
+    process.exit(0)
+  })

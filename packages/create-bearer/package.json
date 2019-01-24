@@ -11,6 +11,7 @@
     "create-bearer": "lib/index.js"
   },
   "devDependencies": {
+    "@types/node": "^10.12.18",
     "typescript": "^3.2.4"
   },
   "scripts": {
@@ -19,6 +20,10 @@
     "start": "tsc -w"
   },
   "files": [
-    "lib/"
-  ]
+    "lib/",
+    "static/"
+  ],
+  "dependencies": {
+    "@bearer/cli": "^0.90.6"
+  }
 }
