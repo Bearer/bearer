@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`input and output arguments generates the refIds properly 1`] = `
+exports[`input and output arguments file: input-output-arguments.tsx generates the refIds properly 1`] = `
 "import { BearerRef, Output, RootComponent, Input, BearerFetch, EventEmitter, Event, Intent, State, Watch } from \\"@bearer/core\\";
 type Farmer = {
     id: string;

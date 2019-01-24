@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`normalize event names changes event name 1`] = `
+exports[`normalize event names file: component.tsx changes event name 1`] = `
 "import { Event } from \\"@bearer/core\\";
 class Class {
     @Event()

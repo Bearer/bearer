@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Input decorator units generates stuff 1`] = `
+exports[`Input decorator units file: complete-options.tsx generates stuff 1`] = `
 "import { BearerRef, Input, RootComponent, State, Prop, Listen, Intent, Watch } from \\"@bearer/core\\";
 type Farmer = {
     id: string;
