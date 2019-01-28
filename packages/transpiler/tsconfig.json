@@ -9,6 +9,7 @@
     "target": "es6",
     "moduleResolution": "node",
     "outDir": "lib/",
-    "declaration": true
+    "declaration": true,
+    "esModuleInterop": true
   }
 }

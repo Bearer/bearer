@@ -1,115 +1,17 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`NO scope provided add bearer scope match snapshot 1`] = `
-Object {
-  "file": "add-bearer-scope.tsx",
-  "postContent": "import { Component, Prop } from '@bearer/core';
-@Component({
-    tag: \\"feature-action\\",
-    styleUrl: \\"feature.css\\",
-    shadow: true
-})
-class RootComponent {
-    renderFromANotherProp() {
-        return <sponge-bob title=\\"Sponge element\\"/>;
-    }
-    render() {
-        return (<div>
-        <sponge-bob>
-          <span>Something</span>
-        </sponge-bob>
-        <patrick title=\\"Patrick element\\"/>
-      </div>);
-    }
-    constructor() {
-    }
-    get SCENARIO_ID() { return \\"SPONGE_BOB\\"; }
-    @Prop({ \\"context\\": \\"bearer\\" })
-    bearerContext: any;
-    @Prop()
-    setupId: string;
-    componentDidLoad() {
-        if (this.setupId) {
-            this.bearerContext.setupId = this.setupId;
-        }
-    }
-}
-@Component({
-    tag: \\"sponge-bob\\"
-})
-class SubComponent {
-    render() {
-        return <div title=\\"spongeBNob\\"/>;
-    }
-    constructor() {
-    }
-    get SCENARIO_ID() { return \\"SPONGE_BOB\\"; }
-    @Prop({ \\"context\\": \\"bearer\\" })
-    bearerContext: any;
-    @Prop()
-    setupId: string;
-    componentDidLoad() {
-        if (this.setupId) {
-            this.bearerContext.setupId = this.setupId;
-        }
-    }
-}
-@Component({
-    tag: \\"patrick\\"
-})
-class Patrick {
-    render() {
-        return <div title=\\"Patrick\\"/>;
-    }
-    constructor() {
-    }
-    get SCENARIO_ID() { return \\"SPONGE_BOB\\"; }
-    @Prop({ \\"context\\": \\"bearer\\" })
-    bearerContext: any;
-    @Prop()
-    setupId: string;
-    componentDidLoad() {
-        if (this.setupId) {
-            this.bearerContext.setupId = this.setupId;
-        }
-    }
-}
-",
-}
-`;
-
-exports[`With provided scenario ID add bearer scope match snapshot 1`] = `
-Object {
-  "file": "add-bearer-scope.tsx",
-  "postContent": "import { Component, Prop } from '@bearer/core';
-@Component({
-    tag: \\"bearer-xyz-feature-action\\",
-    styleUrl: \\"feature.css\\",
-    shadow: true
+exports[`With scope file: add-bearer-scope.tsx scoped components 1`] = `
+"import { Component, RootComponent } from \\"@bearer/core\\";
+@RootComponent({
+    group: \\"feature\\",
+    role: \\"action\\"
 })
 class RootComponent {
     renderFromANotherProp() {
         return <bearer-xyz-sponge-bob title=\\"Sponge element\\"/>;
     }
     render() {
-        return (<div>
-        <bearer-xyz-sponge-bob>
-          <span>Something</span>
-        </bearer-xyz-sponge-bob>
-        <bearer-xyz-patrick title=\\"Patrick element\\"/>
-      </div>);
-    }
-    constructor() {
-    }
-    get SCENARIO_ID() { return \\"SPONGE_BOB\\"; }
-    @Prop({ \\"context\\": \\"bearer\\" })
-    bearerContext: any;
-    @Prop()
-    setupId: string;
-    componentDidLoad() {
-        if (this.setupId) {
-            this.bearerContext.setupId = this.setupId;
-        }
+        return (<div><bearer-xyz-sponge-bob><span></span></bearer-xyz-sponge-bob><bearer-xyz-patrick title=\\"Patrick element\\"/></div>);
     }
 }
 @Component({
@@ -119,18 +21,6 @@ class SubComponent {
     render() {
         return <div title=\\"spongeBNob\\"/>;
     }
-    constructor() {
-    }
-    get SCENARIO_ID() { return \\"SPONGE_BOB\\"; }
-    @Prop({ \\"context\\": \\"bearer\\" })
-    bearerContext: any;
-    @Prop()
-    setupId: string;
-    componentDidLoad() {
-        if (this.setupId) {
-            this.bearerContext.setupId = this.setupId;
-        }
-    }
 }
 @Component({
     tag: \\"bearer-xyz-patrick\\"
@@ -139,19 +29,39 @@ class Patrick {
     render() {
         return <div title=\\"Patrick\\"/>;
     }
-    constructor() {
+}
+"
+`;
+
+exports[`without scope file: add-bearer-scope.tsx scopeless 1`] = `
+"import { Component, RootComponent } from \\"@bearer/core\\";
+@RootComponent({
+    group: \\"feature\\",
+    role: \\"action\\"
+})
+class RootComponent {
+    renderFromANotherProp() {
+        return <sponge-bob title=\\"Sponge element\\"/>;
     }
-    get SCENARIO_ID() { return \\"SPONGE_BOB\\"; }
-    @Prop({ \\"context\\": \\"bearer\\" })
-    bearerContext: any;
-    @Prop()
-    setupId: string;
-    componentDidLoad() {
-        if (this.setupId) {
-            this.bearerContext.setupId = this.setupId;
-        }
+    render() {
+        return (<div><sponge-bob><span></span></sponge-bob><patrick title=\\"Patrick element\\"/></div>);
     }
 }
-",
+@Component({
+    tag: \\"sponge-bob\\"
+})
+class SubComponent {
+    render() {
+        return <div title=\\"spongeBNob\\"/>;
+    }
 }
+@Component({
+    tag: \\"patrick\\"
+})
+class Patrick {
+    render() {
+        return <div title=\\"Patrick\\"/>;
+    }
+}
+"
 `;

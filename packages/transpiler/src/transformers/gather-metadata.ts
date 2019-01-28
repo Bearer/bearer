@@ -4,8 +4,10 @@ import * as ts from 'typescript'
 import { Decorators } from '../constants'
 import { getDecoratorNamed, getExpressionFromDecorator, hasDecoratorNamed } from '../helpers/decorator-helpers'
 import { TransformerOptions } from '../types'
+import debug from '../logger'
+const logger = debug.extend('gather-metadata')
 
-export default function GatherMetadata({ metadata }: TransformerOptions): ts.TransformerFactory<ts.SourceFile> {
+export default function gatherMetadata({ metadata }: TransformerOptions): ts.TransformerFactory<ts.SourceFile> {
   function getTagNames(tagName: string): { initialTagName: string; finalTagName: string } {
     const finalTag =
       metadata.prefix && metadata.suffix
@@ -25,12 +27,14 @@ export default function GatherMetadata({ metadata }: TransformerOptions): ts.Tra
           if (hasDecoratorNamed(node, Decorators.Component)) {
             const component = getDecoratorNamed(node, Decorators.Component)
             const tag = getExpressionFromDecorator<ts.StringLiteral>(component, 'tag')
+            const names = getTagNames(tag.text)
             metadata.registerComponent({
               fileName: tsSourceFile.fileName,
               classname: node.name.text,
               isRoot: false,
-              ...getTagNames(tag.text)
+              ...names
             })
+            logger('Registered %s: new tag name => ', names.initialTagName, names.finalTagName)
           }
           // Found RootComponent
           else if (hasDecoratorNamed(node, Decorators.RootComponent)) {
@@ -40,13 +44,15 @@ export default function GatherMetadata({ metadata }: TransformerOptions): ts.Tra
             const groupExpression = getExpressionFromDecorator<ts.StringLiteral>(component, 'group')
             const group = groupExpression ? groupExpression.text : ''
             const tag = [Case.kebab(group), name].join('-')
+            const names = getTagNames(tag)
             metadata.registerComponent({
               fileName: tsSourceFile.fileName,
               classname: node.name.text,
               isRoot: true,
-              ...getTagNames(tag),
+              ...names,
               group
             })
+            logger('Registered RootComponent %s: new tag name => ', names.initialTagName, names.finalTagName)
           }
         }
         return node

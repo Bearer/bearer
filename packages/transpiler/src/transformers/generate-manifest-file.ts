@@ -3,6 +3,8 @@ import * as path from 'path'
 import * as ts from 'typescript'
 import * as vm from 'vm'
 
+import debug from '../logger'
+const logger = debug.extend('manifest-creation')
 import { CompileSpec, FileTransformerOptions, RootComponent, SpecComponent } from '../types'
 
 export const MANIFEST_FILE = 'bearer-manifest.json'
@@ -24,7 +26,7 @@ const compileSpec: (srcDir: string) => CompileSpec = srcDir => {
   return sandbox.exports.default
 }
 
-const previewRootComponentTags = (components: Array<SpecComponent>, rootComponents: Array<RootComponent>) =>
+const previewRootComponentTags = (components: SpecComponent[], rootComponents: RootComponent[]) =>
   components.map(component => {
     const { initialTagName, label } = component
     const input = component.input
@@ -57,5 +59,6 @@ export function transformer(options: FileTransformerOptions): ts.TransformerFact
 export default function generateManifestFile({ metadata, outDir, srcDir }: FileTransformerOptions): void {
   if (metadata) {
     fs.writeFileSync(path.join(outDir, MANIFEST_FILE), stringifyManifest(metadata, srcDir), 'utf8')
+    logger('manifest generated')
   }
 }

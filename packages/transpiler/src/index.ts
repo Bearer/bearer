@@ -1,9 +1,10 @@
 import * as fs from 'fs-extra'
 import * as path from 'path'
 import * as ts from 'typescript'
-
 import * as TJS from 'typescript-json-schema'
 
+import debug from './logger'
+const logger = debug.extend('compiler')
 // optionally pass argument to schema generator
 const settings: TJS.PartialArgs = {
   required: true,
@@ -165,7 +166,7 @@ export default class Transpiler {
     this.rootFileNames = parsed.fileNames
 
     if (!this.rootFileNames.length) {
-      console.warn('[BEARER]', 'No file to transpile')
+      logger('No file to transpile')
     }
 
     const program = TJS.getProgramFromFiles(
@@ -221,10 +222,10 @@ export default class Transpiler {
 
       if (!output.emitSkipped) {
         if (this.verbose) {
-          console.log(`Emitting ${fileName}`)
+          logger('Emit succeeded: %s', fileName)
         }
       } else {
-        console.log(`Emitting ${fileName} failed`)
+        logger('Emit failed: %s', fileName)
         this.logErrors(fileName)
       }
     } catch (e) {

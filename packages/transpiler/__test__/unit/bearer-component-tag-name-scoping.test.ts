@@ -1,11 +1,15 @@
-import { runUnitOn } from '../utils/helpers'
-
+import { runTransformersOn } from '../utils/helpers'
+import transfomer from '../../src/transformers/component-tag-name-scoping'
+import Metadata from '../../src/metadata'
+import gatherMetadata from '../../src/transformers/gather-metadata'
 const TEST_NAME = 'bearer-component-tag-scoping'
 
-describe('NO scope provided', () => {
-  runUnitOn(TEST_NAME)
+describe('without scope', () => {
+  const metadata = new Metadata()
+  runTransformersOn('scopeless', TEST_NAME, [gatherMetadata({ metadata }), transfomer({ metadata })])
 })
 
-describe('With provided scenario ID', () => {
-  runUnitOn(TEST_NAME, { tagNamePrefix: 'bearer', tagNameSuffix: 'xyz' })
+describe('With scope', () => {
+  const metadata = new Metadata('bearer', 'xyz')
+  runTransformersOn('scoped components', TEST_NAME, [gatherMetadata({ metadata }), transfomer({ metadata })])
 })

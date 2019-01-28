@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import * as commandLineArgs from 'command-line-args'
+import commandLineArgs from 'command-line-args'
 
 import Transpiler from '../src'
 
