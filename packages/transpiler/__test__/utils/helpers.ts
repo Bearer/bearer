@@ -23,7 +23,8 @@ export function cleanBuildFolder() {
 }
 
 export function runTransformers(code: string, transformers: ts.TransformerFactory<ts.SourceFile>[]) {
-  const sourceFile = ts.createSourceFile('tmp.ts', code, ts.ScriptTarget.Latest, false, ts.ScriptKind.TSX)
+  const sourceFile = ts.createSourceFile('tmp.ts', code, ts.ScriptTarget.Latest, true, ts.ScriptKind.TSX)
+
   const transformed = ts.transform(sourceFile, transformers)
 
   const printer = ts.createPrinter(

@@ -1,17 +1,22 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`With scope file: add-bearer-scope.tsx scoped components 1`] = `
-"import { Component, RootComponent } from \\"@bearer/core\\";
+"import { Component, RootComponent } from '@bearer/core';
 @RootComponent({
-    group: \\"feature\\",
-    role: \\"action\\"
+    group: 'feature',
+    role: 'action'
 })
 class RootComponent {
     renderFromANotherProp() {
         return <bearer-xyz-sponge-bob title=\\"Sponge element\\"/>;
     }
     render() {
-        return (<div><bearer-xyz-sponge-bob><span></span></bearer-xyz-sponge-bob><bearer-xyz-patrick title=\\"Patrick element\\"/></div>);
+        return (<div>
+        <bearer-xyz-sponge-bob>
+          <span>Something</span>
+        </bearer-xyz-sponge-bob>
+        <bearer-xyz-patrick title=\\"Patrick element\\"/>
+      </div>);
     }
 }
 @Component({
@@ -34,17 +39,22 @@ class Patrick {
 `;
 
 exports[`without scope file: add-bearer-scope.tsx scopeless 1`] = `
-"import { Component, RootComponent } from \\"@bearer/core\\";
+"import { Component, RootComponent } from '@bearer/core';
 @RootComponent({
-    group: \\"feature\\",
-    role: \\"action\\"
+    group: 'feature',
+    role: 'action'
 })
 class RootComponent {
     renderFromANotherProp() {
         return <sponge-bob title=\\"Sponge element\\"/>;
     }
     render() {
-        return (<div><sponge-bob><span></span></sponge-bob><patrick title=\\"Patrick element\\"/></div>);
+        return (<div>
+        <sponge-bob>
+          <span>Something</span>
+        </sponge-bob>
+        <patrick title=\\"Patrick element\\"/>
+      </div>);
     }
 }
 @Component({

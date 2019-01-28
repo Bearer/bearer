@@ -61,6 +61,7 @@ export class AttachPullRequestAction {
     return (
       <bearer-authorized>
         <bearer-scrollable fetcher={this.fetcher} />
+        <span>Something that must be kept</span>
       </bearer-authorized>
     )
   }

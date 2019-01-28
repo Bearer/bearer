@@ -400,6 +400,7 @@ export class AttachPullRequestAction {
     render() {
         return (<bearer-authorized scenarioId=\\"SPONGE_BOB\\">
         <bearer-scrollable fetcher={this.fetcher}/>
+        <span>Something that must be kept</span>
       </bearer-authorized>);
     }
     @State()

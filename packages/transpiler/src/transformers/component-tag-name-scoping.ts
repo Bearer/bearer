@@ -72,6 +72,7 @@ export default function componentTagNameScoping({
       }
       return decorator
     })
+
     return ts.updateClassDeclaration(
       node,
       decorators,
@@ -99,7 +100,6 @@ export default function componentTagNameScoping({
             const updatedNode = visitDecoratedClassElement(tsNode as ts.ClassDeclaration)
             return ts.visitEachChild(updatedNode, visit, _transformContext)
           }
-        default:
       }
       return ts.visitEachChild(tsNode, visit, _transformContext)
     }
@@ -113,6 +113,10 @@ export default function componentTagNameScoping({
   }
 }
 
-function stringFromTagName({ tagName }: { tagName: ts.JsxTagNameExpression }): string {
-  return (tagName as ts.Identifier).escapedText.toString()
+function stringFromTagName(element: { tagName: ts.JsxTagNameExpression }): string {
+  try {
+    return element.tagName.getText()
+  } catch (e) {
+    return (element.tagName as ts.Identifier).escapedText.toString()
+  }
 }
