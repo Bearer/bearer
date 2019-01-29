@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`input and output arguments file: input-output-arguments.tsx generates the refIds properly 1`] = `
-"import { BearerRef, Output, RootComponent, Input, BearerFetch, EventEmitter, Event, Intent, State, Watch } from \\"@bearer/core\\";
+"import { BearerRef, Output, RootComponent, Input, BearerFetch, EventEmitter, Event, Intent, State, Watch } from '@bearer/core';
 type Farmer = {
     id: string;
     name: string;
@@ -12,13 +12,13 @@ type Goat = {
     milk: number;
 };
 @RootComponent({
-    group: \\"input-output-arguments\\",
-    role: \\"action\\"
+    group: 'input-output-arguments',
+    role: 'action'
 })
 class InputOutputArgumentsComponent {
     @Input()
     farmer: BearerRef<Farmer>;
-    @Output({ intentArguments: [\\"farmer\\"] })
+    @Output({ intentArguments: ['farmer'] })
     goat: BearerRef<Goat>;
     componentDidLoad() {
         if (this.goatRefId) {

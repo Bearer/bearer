@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Input decorator units file: complete-options.tsx generates stuff 1`] = `
-"import { BearerRef, Input, RootComponent, State, Prop, Listen, Intent, Watch } from \\"@bearer/core\\";
+"import { BearerRef, Input, RootComponent, State, Prop, Listen, Intent, Watch } from '@bearer/core';
 type Farmer = {
     id: string;
     name: string;
@@ -11,35 +11,35 @@ type Sponge = {
     name: unknown;
 };
 @RootComponent({
-    group: \\"no-options\\",
-    role: \\"action\\"
+    group: 'no-options',
+    role: 'action'
 })
 class NoOptionsComponent {
     @Input()
     farmer: BearerRef<Farmer>;
     @Input()
-    aString: BearerRef<string> = \\"ok\\";
+    aString: BearerRef<string> = 'ok';
     @Input()
     aStringWithoutInitializer: BearerRef<string>;
     @Input()
     object: BearerRef<{
         title: string;
-    }> = { title: \\"Guest\\" };
+    }> = { title: 'Guest' };
     @Input()
     objectWithoutInitializer: BearerRef<{
         title: string;
     }>;
     @Input({
-        group: \\"other-group\\",
-        propertyReferenceIdName: \\"patrick\\",
-        eventName: \\"patrickWasKilled\\",
-        intentName: \\"killPatrick\\",
+        group: 'other-group',
+        propertyReferenceIdName: 'patrick',
+        eventName: 'patrickWasKilled',
+        intentName: 'killPatrick',
         autoLoad: false,
-        intentArguments: [\\"farmer\\", \\"spongeBobOverrided\\", \\"authId\\"]
+        intentArguments: ['farmer', 'spongeBobOverrided', 'authId']
     })
     spongeBob: BearerRef<Sponge>;
     @Input({
-        propertyReferenceIdName: \\"refNotOverrided\\"
+        propertyReferenceIdName: 'refNotOverrided'
     })
     spongeBobOverrided: BearerRef<Sponge>;
     // won't be injected by the transfomer
@@ -96,7 +96,7 @@ class NoOptionsComponent {
     @Prop({ \\"mutable\\": true })
     farmerRefId: string;
     @State()
-    aString: BearerRef<string> = \\"ok\\";
+    aString: BearerRef<string> = 'ok';
     @Listen(\\"body:no-options:aStringSaved\\")
     aStringRefIdChanged(event) {
         if (this.aStringRefId !== event.detail.referenceId) {
@@ -158,7 +158,7 @@ class NoOptionsComponent {
     @State()
     object: BearerRef<{
         title: string;
-    }> = { title: \\"Guest\\" };
+    }> = { title: 'Guest' };
     @Listen(\\"body:no-options:objectSaved\\")
     objectRefIdChanged(event) {
         if (this.objectRefId !== event.detail.referenceId) {

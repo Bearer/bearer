@@ -1,20 +1,20 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`reference id injector file: do-nothing.tsx change files content 1`] = `
-"import { Intent, BearerFetch } from \\"@bearer/core\\";
+"import { Intent, BearerFetch } from '@bearer/core';
 class DoNothing {
     @OtherDecorator
     other: any;
-    @Intent(\\"MyIntent\\")
+    @Intent('MyIntent')
     fetcher: BearerFetch;
 }
 "
 `;
 
 exports[`reference id injector file: intent-type-savestate-decorator-present.tsx change files content 1`] = `
-"import { Intent, IntentType, BearerFetch, Prop, Element } from \\"@bearer/core\\";
+"import { Intent, IntentType, BearerFetch, Prop, Element } from '@bearer/core';
 export class IntentDecorated {
-    @Intent(\\"saveState\\", IntentType.SaveState)
+    @Intent('saveState', IntentType.SaveState)
     fetcher: BearerFetch;
     @Prop()
     referenceId: string;
