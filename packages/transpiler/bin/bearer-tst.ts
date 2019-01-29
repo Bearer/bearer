@@ -5,6 +5,8 @@ import Transpiler from '../src'
 
 export default args => {
   const optionsDefinitions = [
+    // CORE-227: see later in the file
+    { name: 'build', type: Boolean, defaultValue: false },
     { name: 'no-watcher', type: Boolean, defaultValue: false },
     { name: 'no-process', type: Boolean, defaultValue: false },
     { name: 'prefix-tag', type: String },
@@ -32,6 +34,10 @@ export default args => {
       process.exit(0)
     })
   }
-
   transpiler.run()
+  // hack: tell the tranpiler to refresh and ensure metadata is up to date
+  // CORE-227
+  if (options.build) {
+    transpiler.refresh()
+  }
 }
