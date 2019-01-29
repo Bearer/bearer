@@ -1,14 +1,14 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`prop set: hack for react file: complete-options.tsx apply changes 1`] = `
-"import { BearerRef, Input, RootComponent, State, Prop, Watch, Event, EventEmitter } from \\"@bearer/core\\";
+"import { BearerRef, Input, RootComponent, State, Prop, Watch, Event, EventEmitter } from '@bearer/core';
 @RootComponent({
-    group: \\"no-options\\",
-    role: \\"action\\"
+    group: 'no-options',
+    role: 'action'
 })
 class NoOptionsComponent {
     @Input()
-    aStringInput: BearerRef<string> = \\"ok\\";
+    aStringInput: BearerRef<string> = 'ok';
     @Prop({ mutable: true })
     aValueThatChanges: String;
     @Prop()
@@ -26,10 +26,10 @@ class NoOptionsComponent {
 `;
 
 exports[`prop set: hack for react file: nothing-happen.tsx apply changes 1`] = `
-"import { RootComponent } from \\"@bearer/core\\";
+"import { RootComponent } from '@bearer/core';
 @RootComponent({
-    group: \\"no-options\\",
-    role: \\"action\\"
+    group: 'no-options',
+    role: 'action'
 })
 class Nothing {
 }
