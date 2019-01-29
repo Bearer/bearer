@@ -9,9 +9,10 @@ import { getNodeName } from '../helpers/node-helpers'
 import { TransformerOptions } from '../types'
 
 const SEPARATOR = '-'
+const GLOBAL_EVENT_PREXIX = 'body:'
 
 export function isBearerEvent(eventName: string): boolean {
-  return new RegExp(`^(body:)?${BEARER}${SEPARATOR}`).test(eventName)
+  return new RegExp(`^(${GLOBAL_EVENT_PREXIX})?${BEARER}${SEPARATOR}`).test(eventName)
 }
 
 export function prefixEvent(eventName: string): string {

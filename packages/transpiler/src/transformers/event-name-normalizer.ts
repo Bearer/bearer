@@ -2,7 +2,7 @@ import * as ts from 'typescript'
 
 import { Decorators, Properties } from '../constants'
 import { decoratorNamed } from '../helpers/decorator-helpers'
-import { isBearerEvent } from './event-name-scoping'
+import { isBearerEvent, GLOBAL_EVENT_PREXIX } from './event-name-scoping'
 import * as Case from 'case'
 
 export default function eventNameNormalizer(): ts.TransformerFactory<ts.SourceFile> {
@@ -47,13 +47,13 @@ export default function eventNameNormalizer(): ts.TransformerFactory<ts.SourceFi
     }
   }
 }
-const PREFIX = 'body:'
+
 function normalize(eventName: string): string {
   if (!isBearerEvent(eventName)) {
     return eventName
   }
-  if (eventName.startsWith(PREFIX)) {
-    return `${PREFIX}${normalize(eventName.split(PREFIX)[1])}`
+  if (eventName.startsWith(GLOBAL_EVENT_PREXIX)) {
+    return `${GLOBAL_EVENT_PREXIX}${normalize(eventName.split(GLOBAL_EVENT_PREXIX)[1])}`
   }
   return Case.kebab(eventName)
 }
