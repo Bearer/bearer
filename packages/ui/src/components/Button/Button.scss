@@ -13,8 +13,8 @@
   --vertical-padding: var(--bearer-btn-vertical-padding, #{$bearer-button-vertical-padding});
   --horizontal-padding: var(--bearer-btn-horizontal-padding, #{$bearer-button-horizontal-padding});
   --border-radius: var(--bearer-button-border-radius, #{$bearer-button-radius});
+  --shadow: var(--bearer-button-shadow);
   display: inline-block;
-
 }
 
 /**
@@ -77,7 +77,6 @@
 
 .btn {
   transition: box-shadow var(--bearer-transition-duration, #{$bearer-transition-duration});
-  font: var(--bearer-font-family, inherit);
   font-size: var(--font-size);
   line-height: 1.1;
   color: var(--font-color);
@@ -85,5 +84,5 @@
   border-radius: var(--border-radius, 4px);
   border: none 0px;
   padding: var(--vertical-padding) var(--horizontal-padding);
-  box-shadow: var(--shadow, 'none')
+  box-shadow: var(--shadow, 'none');
 }
