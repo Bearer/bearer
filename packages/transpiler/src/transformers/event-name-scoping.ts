@@ -10,6 +10,10 @@ import { TransformerOptions } from '../types'
 
 const SEPARATOR = '-'
 
+export function isBearerEvent(eventName: string): boolean {
+  return new RegExp(`^(body:)?${BEARER}${SEPARATOR}`).test(eventName)
+}
+
 export function prefixEvent(eventName: string): string {
   return [BEARER, process.env[Env.BEARER_SCENARIO_ID], eventName].join(SEPARATOR)
 }
