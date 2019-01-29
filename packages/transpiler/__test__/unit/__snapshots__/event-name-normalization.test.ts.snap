@@ -5,7 +5,13 @@ exports[`normalize event names file: component.tsx changes event name 1`] = `
 class Class {
     @Event()
     event: any;
-    @Event({ eventName: \\"SomeThinIwant_to_noramlize123-\\", somethingElseuntouched: 'Something' })
+    @Event({ eventName: \\"body:SomeThinIDontwant_to_beeeeeeenoramlized123-\\", somethingElseuntouched: 'Something' })
+    bodyscopeNotNormalized: any;
+    @Event({ eventName: \\"SomeThinIDontwant_to_beeeeeeenoramlized123-\\", somethingElseuntouched: 'Something' })
+    totNormalized: any;
+    @Event({ eventName: \\"body:bearer-somethiniwant-to-beeeeeeenoramlized123\\", somethingElseuntouched: 'Something' })
+    bodyscopedNormalized: any;
+    @Event({ eventName: \\"bearer-somethiniwant-to-beeeeeeenoramlized123\\", somethingElseuntouched: 'Something' })
     normalized: any;
     @Listen(\\"anUntouchedEvent\\")
     anEvent: any;
