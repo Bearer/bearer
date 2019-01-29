@@ -405,7 +405,7 @@ export class AttachPullRequestAction {
     }
     @State()
     farmer: BearerRef<Farmer>;
-    @Listen(\\"body:bearer-SPONGE_BOB-AttachPullRequest-farmerSaved\\")
+    @Listen(\\"body:bearer-sponge-bob-attachpullrequest-farmersaved\\")
     farmerRefIdChanged(event) {
         if (this.farmerRefId !== event.detail.referenceId) {
             this.farmerRefId = event.detail.referenceId;
@@ -438,7 +438,7 @@ export class AttachPullRequestAction {
         aNumber: number;
         panda: Panda;
     }>;
-    @Listen(\\"body:bearer-SPONGE_BOB-SCOPE-goatMilked\\")
+    @Listen(\\"body:bearer-sponge-bob-scope-goatmilked\\")
     goatIdChanged(event) {
         if (this.goatId !== event.detail.referenceId) {
             this.goatId = event.detail.referenceId;
