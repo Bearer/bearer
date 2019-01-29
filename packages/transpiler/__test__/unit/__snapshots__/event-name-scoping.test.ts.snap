@@ -1,18 +1,15 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Scope Event Names event name scoping component match snapshot 1`] = `
-Object {
-  "file": "event-name-scoping-component.ts",
-  "postContent": "import { Event, EventEmitter, Listen, Component, Prop } from '@bearer/core';
-@Component({
-    tag: \\"complex-feature-display\\",
-    styleUrl: \\"complexFeature.css\\",
-    shadow: true
+exports[`Scope Event Names file: event-name-scoping-component.ts transformer 1`] = `
+"import { Event, EventEmitter, Listen, RootComponent } from '@bearer/core';
+@RootComponent({
+    group: 'complex-feature',
+    role: 'display'
 })
 export class FeatDisplayRootComponent {
-    @Event({ eventName: \\"bearer-sponge-bob-complex-feature-mustbescopedevent\\" })
+    @Event({ eventName: \\"bearer-SPONGE_BOB-global-mustBeScopedEvent\\" })
     mustBeScopedEvent: EventEmitter;
-    @Event({ eventName: \\"bearer-sponge-bob-complex-feature-mustbescopedevent\\" })
+    @Event({ eventName: \\"bearer-SPONGE_BOB-global-mustBeScopedEvent\\" })
     mustBeScopedEvent: EventEmitter;
     @Listen(\\"bearer-SPONGE_BOB-config-saved\\")
     eventHandler() { }
@@ -20,32 +17,17 @@ export class FeatDisplayRootComponent {
     eventFromAnotherRootComponentHandler() { }
     @Listen(\\"body:bearer-SPONGE_BOB-click\\")
     clickHandler() { }
-    constructor() {
-    }
-    get SCENARIO_ID() { return \\"SPONGE_BOB\\"; }
-    @Prop({ \\"context\\": \\"bearer\\" })
-    bearerContext: any;
-    @Prop()
-    setupId: string;
-    componentDidLoad() {
-        if (this.setupId) {
-            this.bearerContext.setupId = this.setupId;
-        }
-    }
 }
-",
-}
+"
 `;
 
-exports[`Scope Event Names simple component match snapshot 1`] = `
-Object {
-  "file": "simple-component.ts",
-  "postContent": "import { Component, Event, EventEmitter, Listen, Prop } from '@bearer/core';
+exports[`Scope Event Names file: simple-component.ts transformer 1`] = `
+"import { Component, Event, EventEmitter, Listen } from '@bearer/core';
 @Component({
-    tag: \\"event\\"
+    tag: 'event'
 })
 export class SimpleComponent {
-    @Event({ eventName: \\"bearer-sponge-bob-global-mustbescopedevent\\" })
+    @Event({ eventName: \\"bearer-SPONGE_BOB-global-mustBeScopedEvent\\" })
     mustBeScopedEvent: EventEmitter;
     @Listen(\\"bearer-SPONGE_BOB-config-saved\\")
     eventHandler() { }
@@ -54,19 +36,6 @@ export class SimpleComponent {
     // prevent Alice to listen on anything else than her scenario's events
     @Listen(\\"body:bearer-SPONGE_BOB-click\\")
     clickHandler() { }
-    constructor() {
-    }
-    get SCENARIO_ID() { return \\"SPONGE_BOB\\"; }
-    @Prop({ \\"context\\": \\"bearer\\" })
-    bearerContext: any;
-    @Prop()
-    setupId: string;
-    componentDidLoad() {
-        if (this.setupId) {
-            this.bearerContext.setupId = this.setupId;
-        }
-    }
 }
-",
-}
+"
 `;

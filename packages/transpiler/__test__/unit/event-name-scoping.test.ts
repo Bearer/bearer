@@ -1,11 +1,13 @@
-import { isBearerEvent } from '../../src/transformers/event-name-scoping'
+import transfomer, { isBearerEvent } from '../../src/transformers/event-name-scoping'
+import { runTransformersOn } from '../utils/helpers'
+import Metadata from '../../src/metadata'
 
-// import { runUnitOn } from '../utils/helpers'
-// const TEST_NAME = 'event-name-scoping'
+const TEST_NAME = 'event-name-scoping'
 
-// describe('Scope Event Names', () => {
-//   runUnitOn(TEST_NAME)
-// })
+describe('Scope Event Names', () => {
+  const metadata = new Metadata()
+  runTransformersOn('transformer', TEST_NAME, [transfomer({ metadata })])
+})
 
 describe('isBearerEvent', () => {
   describe('when non matching event name', () => {
