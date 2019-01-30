@@ -69,25 +69,13 @@ export default function startLocalDevelopmentServer(
       router.post(
         `v2/intents/${config.scenarioUuid}/:intentName`,
         intentHandler(distPath, devIntentsContext, bearerBaseURL),
-        (ctx, _next) => {
-          if (ctx.intentDatum.error) {
-            ctx.badRequest({ error: ctx.intentDatum.error })
-          } else {
-            ctx.ok(ctx.intentDatum)
-          }
-        }
+        (ctx, _next) => ctx.ok(ctx.intentDatum)
       )
 
       router.all(
         `v1/${config.scenarioUuid}/:intentName`,
         intentHandler(distPath, devIntentsContext, bearerBaseURL),
-        (ctx, _next) => {
-          if (ctx.intentDatum.error) {
-            ctx.badRequest({ error: ctx.intentDatum.error })
-          } else {
-            ctx.ok(ctx.intentDatum)
-          }
-        }
+        (ctx, _next) => ctx.ok(ctx.intentDatum)
       )
 
       if (logs) {
