@@ -21,7 +21,7 @@ import { ensureImportsFromCore } from './bearer'
 import { outputEventName, refIdName, retrieveOutputsMetas } from './output-decorator'
 import Metadata from '../metadata'
 
-export default function InputDecorator({ metadata }: TransformerOptions = {}): ts.TransformerFactory<ts.SourceFile> {
+export default function inputDecorator({ metadata }: TransformerOptions = {}): ts.TransformerFactory<ts.SourceFile> {
   return _transformContext => {
     return tsSourceFile => {
       if (tsSourceFile.isDeclarationFile) {
@@ -151,7 +151,7 @@ function createEventListener(meta: InputMeta) {
       [
         // if(event.detail.referenceId !== referenceIdIdentifier) {
         // this.referenceIdIdentifier = event.detail.referenceId
-        //} else { this.loadData()}
+        // } else { this.loadData()}
         ts.createIf(
           ts.createBinary(propAccessIdentifier, ts.SyntaxKind.ExclamationEqualsEqualsToken, referenceIdIdentifier),
           ts.createBlock([
@@ -199,6 +199,7 @@ function createRefIdWatcher(meta: InputMeta) {
   )
 }
 
+// tslint:disable-next-line function-name
 function _watchName(name: string): string {
   return `_watch${capitalize(name)}`
 }
@@ -252,7 +253,8 @@ function extractInputOptions(decorator: ts.Decorator): Partial<TInputDecoratorOp
           'group',
           'eventName',
           'intentName',
-          'propertyReferenceIdName'
+          'propertyReferenceIdName',
+          'intentReferenceIdKeyName'
         ]),
         ...extractArrayOptions<{ intentArguments: string[] }>(callArgs, ['intentArguments']),
         ...extractBooleanOptions<TInputDecoratorOptions>(callArgs, ['autoLoad'])
