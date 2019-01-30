@@ -23,7 +23,7 @@ import { retrieveInputsMetas } from './input-decorator'
 const newValue = 'newValue'
 const data = 'data'
 
-export default function OutputDecorator({ metadata }: TransformerOptions = {}): ts.TransformerFactory<ts.SourceFile> {
+export default function outputDecorator({ metadata }: TransformerOptions = {}): ts.TransformerFactory<ts.SourceFile> {
   return _transformContext => {
     return tsSourceFile => {
       if (tsSourceFile.isDeclarationFile) {
@@ -246,7 +246,7 @@ function createIntentCall(meta: OutputMeta) {
           ),
           ts.createPropertyAssignment(
             meta.intentReferenceIdKeyName,
-            ts.createPropertyAccess(ts.createThis(), meta.propDeclarationNameRefId)
+            ts.createPropertyAccess(ts.createThis(), meta.intentReferenceIdValue || meta.propDeclarationNameRefId)
           )
         ])
       ]),
@@ -345,7 +345,9 @@ export function retrieveOutputsMetas(
                 'intentName',
                 'intentPropertyName',
                 'propertyWatchedName',
-                'referenceKeyName'
+                'referenceKeyName',
+                'intentReferenceIdValue',
+                'intentReferenceIdKeyName'
               ]),
               ...extractArrayOptions<{ intentArguments: string[] }>(callArgs, ['intentArguments']),
               ...extractBooleanOptions<TOutputDecoratorOptions>(callArgs, ['autoLoad'])

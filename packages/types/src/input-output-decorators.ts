@@ -51,6 +51,10 @@ export type TOutputDecoratorOptions = {
    */
   intentReferenceIdKeyName: string
   /**
+   * Name of property used to populate the intent intentReferenceIdKeyName param
+   */
+  intentReferenceIdValue?: string
+  /**
    * Intent arguments
    */
   intentArguments: string[]
