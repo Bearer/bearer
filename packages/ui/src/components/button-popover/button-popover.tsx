@@ -1,4 +1,4 @@
-import { Component, Event, EventEmitter, Method, Prop, State } from '@bearer/core'
+import { Component, Event, EventEmitter, Method, Prop, State, Watch } from '@bearer/core'
 import { BKind } from '../Button/Button'
 
 export type TAlignement = 'left' | 'right'
@@ -51,6 +51,11 @@ export class BearerButtonPopover {
   @Method()
   toggle(opened: boolean) {
     this.visible = opened
+  }
+
+  @Watch('opened')
+  watchHandler(newValue: boolean) {
+    this._visible = newValue
   }
 
   componentDidLoad() {
