@@ -25,6 +25,7 @@
   },
   "dependencies": {
     "@bearer/intents": "^0.91.5",
+    "@bearer/logger": "^0.91.5",
     "@bearer/transpiler": "^0.91.5",
     "@bearer/types": "^0.91.5",
     "@koa/cors": "^2.2.2",

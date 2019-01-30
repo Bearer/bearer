@@ -4,8 +4,9 @@ import * as chokidar from 'chokidar'
 import { spawn, execSync } from 'child_process'
 
 import Locator from '../locationProvider'
-
 import startLocalDevelopmentServer from './startLocalDevelopmentServer'
+import debug from '../logger'
+const logger = debug.extend('start')
 
 function watchNonTSFiles(watchedPath, destPath): Promise<any> {
   return new Promise((resolve, _reject) => {
@@ -29,15 +30,15 @@ function watchNonTSFiles(watchedPath, destPath): Promise<any> {
       const targetPath = path.join(destPath, relativePath)
       // Creating symlink
       if (event === 'add') {
-        console.log('creating symlink', filePath, targetPath)
+        logger('creating symlink %s %s', filePath, targetPath)
         fs.ensureSymlink(filePath, targetPath, callback)
       }
       // // Deleting symlink
       if (event === 'unlink') {
-        console.log('deleting symlink')
+        logger('deleting symlink')
         fs.unlink(targetPath, err => {
           if (err) throw err
-          console.log(targetPath + ' was deleted')
+          logger('%s was deleted', targetPath)
         })
       }
     })
