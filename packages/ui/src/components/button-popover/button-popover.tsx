@@ -1,4 +1,4 @@
-import { Component, Event, EventEmitter, Listen, Method, Prop, State } from '@bearer/core'
+import { Component, Event, EventEmitter, Method, Prop, State } from '@bearer/core'
 import { BKind } from '../Button/Button'
 
 export type TAlignement = 'left' | 'right'
@@ -19,7 +19,7 @@ export class BearerButtonPopover {
   @Prop({ reflectToAttr: true }) aligned: TAlignement = 'left'
 
   @Prop() header: string
-  @Prop() backNav: boolean = true
+  @Prop() backNav: boolean = false
   @Prop() btnProps: JSXElements.BearerButtonAttributes = {}
 
   @State()
@@ -27,6 +27,7 @@ export class BearerButtonPopover {
 
   toggleDisplay = e => {
     e.preventDefault()
+
     console.debug('[BEARER]', 'Button popover: toggleDisplay', !this.visible)
     this.visible = !this.visible
   }
@@ -43,13 +44,7 @@ export class BearerButtonPopover {
     return this._visible
   }
 
-  @Listen('body:click')
-  clickOutsideHandler() {
-    this.visible = false
-  }
-
-  @Listen('click')
-  clickInsideHandler(ev) {
+  clickInsidePopover(ev) {
     ev.stopImmediatePropagation()
   }
 
@@ -68,7 +63,10 @@ export class BearerButtonPopover {
         <slot name="btn-content" />
       </bearer-button>,
 
-      <div class={`popover direction-${this.direction} ${!this.visible && 'hidden'} aligned-${this.aligned}`}>
+      <div
+        onClick={this.clickInsidePopover}
+        class={`popover direction-${this.direction} ${!this.visible && 'hidden'} aligned-${this.aligned}`}
+      >
         {(this.backNav || this.header) && (
           <h3 class="popover-header">
             {this.backNav && <bearer-navigator-back class="header-arrow" />}
