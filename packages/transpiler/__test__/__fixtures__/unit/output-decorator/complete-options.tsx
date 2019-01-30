@@ -10,6 +10,8 @@ type Farmer = {
   role: 'action'
 })
 class NoOptionsComponent {
+  @Input()
+  farmer: BearerRef<Farmer>
   // write this
   @Output()
   farmer: BearerRef<Farmer>
@@ -32,6 +34,10 @@ class NoOptionsComponent {
     propertyWatchedName: 'aPanda',
     referenceKeyName: 'aPandaKey',
     intentName: 'milkWithAbottle',
+    intentReferenceIdKeyName: 'anotherProp',
+    intentReferenceIdValue: 'intentReferenceIdValueValue',
+    intentArguments: ['farmer', 'spongeBobOverrided', 'authId'],
+    intentPropertyName: 'intentPropertyNameOption',
     autoLoad: false
   })
   farmerAndPanda: BearerRef<Farmer> = {}

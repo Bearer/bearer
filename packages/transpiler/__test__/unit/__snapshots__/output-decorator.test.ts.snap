@@ -1,20 +1,54 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Output decorator units complete options match snapshot 1`] = `
-Object {
-  "file": "complete-options.tsx",
-  "postContent": "import { BearerRef, Component, BearerFetch, EventEmitter, Event, Intent, State, Watch, Prop } from '@bearer/core';
+exports[`Output decorator units file: complete-options.tsx generates stuff 1`] = `
+"import { BearerRef, Output, RootComponent, Input, BearerFetch, EventEmitter, Event, Intent, State, Watch } from '@bearer/core';
 type Farmer = {
     id: string;
     name: string;
 };
-@Component({
-    tag: \\"no-options-action\\",
-    styleUrl: \\"noOptions.css\\",
-    shadow: true
+@RootComponent({
+    group: 'no-options',
+    role: 'action'
 })
 class NoOptionsComponent {
-    private saveFarmer: BearerFetch<BearerRef<Farmer>
+    @Input()
+    farmer: BearerRef<Farmer>;
+    // write this
+    @Output()
+    farmer: BearerRef<Farmer>;
+    // // generate this
+    // @Event() farmerSaved: EventEmitter<Farmer>
+    // @State() farmer: BearerRef<Farmer>
+    // @Intent('setFarmer') setFarmer: BearerFetch<Farmer>
+    // @Watch('farmer')
+    // farmerchangeHandler(newValue: BearerRef<Farmer>) {
+    //   if (newValue) {
+    //     this.setFarmer().then(({ data, referenceId }) => {
+    //       this.farmerSaved.emit({ referenceId, farmer: data }) // farmer
+    //     })
+    //   } else {
+    //     this.farmerSaved.emit({ farmer: newValue })
+    //   }
+    // }
+    @Output({
+        eventName: 'milked',
+        propertyWatchedName: 'aPanda',
+        referenceKeyName: 'aPandaKey',
+        intentName: 'milkWithAbottle',
+        intentReferenceIdKeyName: 'anotherProp',
+        intentReferenceIdValue: 'intentReferenceIdValueValue',
+        intentArguments: ['farmer', 'spongeBobOverrided', 'authId'],
+        intentPropertyName: 'intentPropertyNameOption',
+        autoLoad: false
+    })
+    farmerAndPanda: BearerRef<Farmer> = {};
+    componentDidLoad() {
+        if (this.farmerRefId) {
+            this._loadFarmer();
+        }
+    }
+    @Intent(\\"saveFarmer\\")
+    saveFarmer: BearerFetch<BearerRef<Farmer>
     // // generate this
     // @Event() farmerSaved: EventEmitter<Farmer>
     // @State() farmer: BearerRef<Farmer>
@@ -30,8 +64,11 @@ class NoOptionsComponent {
     //   }
     // }
     >;
-    @Event({ eventName: \\"bearer-sponge-bob-no-options-farmersaved\\" })
-    farmerSaved: EventEmitter;
+    @Event(\\"farmer\\")
+    farmerSaved: EventEmitter<{
+        referenceId: string;
+        farmer: BearerRef<Farmer>;
+    }>;
     @State()
     farmerInitial: BearerRef<Farmer>;
     @State()
@@ -46,7 +83,8 @@ class NoOptionsComponent {
         });
         this.farmerInitial = null;
     }
-    private fetcherRetrieveFarmer;
+    @Intent(\\"retrieveFarmer\\")
+    fetcherRetrieveFarmer;
     _loadFarmer = () => {
         this.fetcherRetrieveFarmer({ referenceId: this.farmerRefId }).then(({ data }: {
             data: BearerRef<Farmer>;
@@ -56,9 +94,13 @@ class NoOptionsComponent {
             }
         });
     };
-    private milkWithAbottle: BearerFetch<BearerRef<Farmer>>;
-    @Event({ eventName: \\"bearer-sponge-bob-no-options-milked\\" })
-    milked: EventEmitter;
+    @Intent(\\"milkWithAbottle\\")
+    milkWithAbottle: BearerFetch<BearerRef<Farmer>>;
+    @Event(\\"aPanda\\")
+    milked: EventEmitter<{
+        aPandaKey: string;
+        farmerAndPanda: BearerRef<Farmer>;
+    }>;
     @State()
     farmerAndPandaInitial: BearerRef<Farmer> = {};
     @State()
@@ -67,15 +109,16 @@ class NoOptionsComponent {
     farmerAndPandaRefId: string;
     @Watch(\\"aPanda\\")
     milkedWatcher(newValue) {
-        this.milkWithAbottle({ body: { farmerAndPanda: newValue }, referenceId: this.farmerAndPandaRefId }).then(({ referenceId: aPandaKey, data }) => {
+        this.milkWithAbottle({ body: { intentPropertyNameOption: newValue }, anotherProp: this.intentReferenceIdValueValue }).then(({ referenceId: aPandaKey, data }) => {
             this.milked.emit({ aPandaKey, farmerAndPanda: data || this.farmerAndPanda });
             this.farmerAndPandaRefId = aPandaKey;
         });
         this.farmerAndPandaInitial = null;
     }
-    private fetcherRetrieveFarmerAndPanda;
+    @Intent(\\"retrieveFarmerAndPanda\\")
+    fetcherRetrieveFarmerAndPanda;
     _loadFarmerAndPanda = () => {
-        this.fetcherRetrieveFarmerAndPanda({ referenceId: this.farmerAndPandaRefId }).then(({ data }: {
+        this.fetcherRetrieveFarmerAndPanda({ anotherProp: this.farmerAndPandaRefId, farmerId: this.farmerRefId, spongeBobOverrided: this.spongeBobOverrided, authId: this.authId }).then(({ data }: {
             data: BearerRef<Farmer>;
         }) => {
             if (data) {
@@ -83,36 +126,6 @@ class NoOptionsComponent {
             }
         });
     };
-    constructor() {
-        Intent(\\"saveFarmer\\")(this, \\"saveFarmer\\");
-        Intent(\\"retrieveFarmer\\")(this, \\"fetcherRetrieveFarmer\\");
-        Intent(\\"milkWithAbottle\\")(this, \\"milkWithAbottle\\");
-        Intent(\\"retrieveFarmerAndPanda\\")(this, \\"fetcherRetrieveFarmerAndPanda\\");
-    }
-    get SCENARIO_ID() { return \\"SPONGE_BOB\\"; }
-    @Prop({ \\"context\\": \\"bearer\\" })
-    bearerContext: any;
-    @Prop()
-    setupId: string;
-    componentDidLoad() {
-        if (this.setupId) {
-            this.bearerContext.setupId = this.setupId;
-        }
-        if (this.farmerRefId) {
-            this._loadFarmer();
-        }
-    }
-    @Event({ eventName: \\"no-options-action-prop-set\\", bubbles: true, cancelable: true })
-    propSetEmitter: EventEmitter;
-    @Watch(\\"farmerRefId\\")
-    farmerRefIdPropSetWatcher(newValue) {
-        this.propSetEmitter.emit({ farmerRefId: newValue });
-    }
-    @Watch(\\"farmerAndPandaRefId\\")
-    farmerAndPandaRefIdPropSetWatcher(newValue) {
-        this.propSetEmitter.emit({ farmerAndPandaRefId: newValue });
-    }
 }
-",
-}
+"
 `;

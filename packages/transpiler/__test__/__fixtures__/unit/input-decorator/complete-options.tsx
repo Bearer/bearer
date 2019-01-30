@@ -33,6 +33,7 @@ class NoOptionsComponent {
   @Input({
     group: 'other-group',
     propertyReferenceIdName: 'patrick',
+    intentReferenceIdKeyName: 'intentReferenceIdKeyNameOption',
     eventName: 'patrickWasKilled',
     intentName: 'killPatrick',
     autoLoad: false,

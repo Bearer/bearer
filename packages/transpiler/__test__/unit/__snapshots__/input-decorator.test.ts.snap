@@ -32,6 +32,7 @@ class NoOptionsComponent {
     @Input({
         group: 'other-group',
         propertyReferenceIdName: 'patrick',
+        intentReferenceIdKeyName: 'intentReferenceIdKeyNameOption',
         eventName: 'patrickWasKilled',
         intentName: 'killPatrick',
         autoLoad: false,
@@ -235,7 +236,7 @@ class NoOptionsComponent {
         }
     }
     _loadSpongeBob = () => {
-        this.fetcherRetrieveSpongeBob({ referenceId: this.patrick, farmerId: this.farmerRefId, spongeBobOverridedId: this.refNotOverrided, authId: this.authId }).then(({ data }: {
+        this.fetcherRetrieveSpongeBob({ intentReferenceIdKeyNameOption: this.patrick, farmerId: this.farmerRefId, spongeBobOverridedId: this.refNotOverrided, authId: this.authId }).then(({ data }: {
             data: BearerRef<Sponge>;
         }) => {
             if (data) {

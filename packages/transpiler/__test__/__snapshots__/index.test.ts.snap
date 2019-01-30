@@ -513,7 +513,7 @@ export class AttachPullRequestAction {
     shortPandaRefId: string;
     @Watch(\\"manualpropertyWatchedName\\")
     spongeBobdSavedWatcher(newValue) {
-        this.manualIntentName({ body: { manuaLIntentPropertyName: newValue }, referenceId: this.shortPandaRefId }).then(({ referenceId: manualreferenceKeyName, data }) => {
+        this.manualIntentName({ body: { manuaLIntentPropertyName: newValue }, manualintentReferenceIdKeyName: this.shortPandaRefId }).then(({ referenceId: manualreferenceKeyName, data }) => {
             this.spongeBobdSaved.emit({ manualreferenceKeyName, shortPanda: data || this.shortPanda });
             this.shortPandaRefId = manualreferenceKeyName;
         });
@@ -521,7 +521,7 @@ export class AttachPullRequestAction {
     }
     private fetcherRetrieveShortPanda;
     _loadShortPanda = () => {
-        this.fetcherRetrieveShortPanda({ referenceId: this.shortPandaRefId }).then(({ data }: {
+        this.fetcherRetrieveShortPanda({ manualintentReferenceIdKeyName: this.shortPandaRefId }).then(({ data }: {
             data: BearerRef<{
                 inlineName: string;
             }>;
