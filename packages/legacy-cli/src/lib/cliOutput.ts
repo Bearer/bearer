@@ -23,63 +23,6 @@ function inviteCommand(command) {
 }
 
 export default emitter => {
-  emitter.on('credentialsUpdated', configPath => {
-    term.white('Bearer: ')
-    term.yellow('Credentials and configuration stored in: ')
-    term.white(configPath)
-    term('\n')
-  })
-
-  emitter.on('developerIdFound', devId => {
-    term.white('Bearer: ')
-    term.red(`Your developerId: ${devId}`)
-    term('\n')
-  })
-
-  emitter.on('scenarioUuid:missing', devId => {
-    term.white('Bearer: ')
-    term.red('Missing scenarioUuid.\n')
-    inviteCommand('bearer link')
-    term('\n')
-  })
-
-  emitter.on('scenarioTitle:creationFailed', e => {
-    term.white('Bearer: ')
-    term.red("Couldn't store the scenarioTitle")
-    term('\n')
-    term(e)
-    term('\n')
-  })
-
-  emitter.on('rootPath:doesntExist', () => {
-    term.white('Bearer: ')
-    term.red('Looks like you are not in scenario project directory.')
-    term('\n')
-    inviteCommand('bearer new')
-    term.yellow('to bootstrap a new scenario.')
-    term('\n')
-  })
-
-  emitter.on('intents:installingDependencies', () => {
-    term.white('Bearer: ')
-    term.yellow('Installing intents dependencies.')
-    term('\n')
-  })
-
-  emitter.on('views:generateSetupComponent', () => {
-    term.white('Bearer: ')
-    term.yellow('Generating setup component.')
-    term('\n')
-  })
-
-  emitter.on('user:notAuthenticated', () => {
-    term.white('Bearer: ')
-    term.red('There was an error while trying to retrieve your access token')
-    term('\n')
-    inviteCommand('bearer login')
-    term('\n')
-  })
-
   emitter.on('developerPortalUpdate:failed', error => {
     term.white('Bearer: ')
     term.red('Failed pushing to developer portal.\n')
@@ -97,36 +40,6 @@ export default emitter => {
   })
 
   /* ********* Start output ********* */
-
-  emitter.on('start:prepare:buildFolder', () => {
-    term.white('Bearer: ')
-    term.red('Generating build folder ')
-    term('\n')
-  })
-
-  emitter.on('start:prepare:stencilConfig', () => {
-    term.white('Bearer: ')
-    term.yellow('Generating stencil configuration')
-    term('\n')
-  })
-
-  emitter.on('start:prepare:copyFile', file => {
-    term.white('Bearer: ')
-    term.yellow(`Copied: ${file}`)
-    term('\n')
-  })
-
-  emitter.on('start:symlinkNodeModules', () => {
-    term.white('Bearer: ')
-    term.yellow('Symlinking node_modules')
-    term('\n')
-  })
-
-  emitter.on('start:symlinkPackage', () => {
-    term.white('Bearer: ')
-    term.yellow('Symlinking package.json')
-    term('\n')
-  })
 
   emitter.on('start:prepare:installingDependencies', () => {
     term.white('Bearer: ')
@@ -157,8 +70,6 @@ export default emitter => {
     term.yellow(`[watcher:${name}] closed exit code: ${code}\n`)
   })
 
-  // emitter.emit('start:watchers:stencil:stdout', )
-
   emitter.on('start:prepare:failed', ({ error }) => {
     term.white('Bearer: ')
     term.red('Prepare : An error occured')
@@ -188,8 +99,9 @@ export default emitter => {
   emitter.on('start:localServer:endpoints', ({ endpoints }) => {
     term.white('Bearer: ')
     term.yellow('[local:intentServer] ')
-    term.yellow('paths: ')
-    term(endpoints.map(i => i.path).join(', '))
+    term.yellow('paths:')
+    term('\n\t* ')
+    term(endpoints.map(i => i.path).join('\n\t* '))
     term('\n')
   })
 
