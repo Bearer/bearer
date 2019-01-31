@@ -54,13 +54,8 @@ $bearer-button-action-hover-shadow: 0 2px 4px 0 rgba(3, 13, 54, 0.5);
 
 $bearer-transition-duration: 250ms;
 
-
 /*
- * Buttons
- */ 
+ * Font
+ */
 
-$bearer-button-cursor: pointer;
-$bearer-button-radius: 4px;
-$bearer-button-radius: 0 2px 4px 0 rgba(3, 13, 54, 0.12);
-$bearer-button-vertical-padding: 12px;
-$bearer-button-horizontal-padding: 18px;
+$bearer-font-family: inherit;

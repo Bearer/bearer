@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+
+<head>
+  <link href="https://fonts.googleapis.com/css?family=Coiny" rel="stylesheet">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0">
+  <title>Test page for bearer-button component</title>
+  <script src="/build/bearer-ui.js"></script>
+  <style>
+  .overriden bearer-button {
+    --bearer-font-family: system-ui, sans-serif;
+    --bearer-button-cursor: pointer;
+    --bearer-button-border-radius: 8px;
+    --bearer-button-outline: ;
+  }
+
+  .overriden bearer-button:focus {
+    outline: none;
+  }
+
+  .overriden bearer-button[kind=primary] {
+    --bearer-button-background: #007bff;
+    --bearer-button-font-color: #fff;
+  }
+  .overriden bearer-button[kind=success] {
+    --bearer-button-background: #28a745;
+  }
+  .overriden bearer-button[kind=success]:hover {
+    --bearer-button-background: #218838;
+  }
+  .overriden bearer-button[kind="error"] {
+    --bearer-button-background: #dc3545;
+    --bearer-button-border: 10px solid #ae3545;
+  }
+  .overriden bearer-button[kind=warning] {
+    --bearer-button-background: #ffc107;
+  }
+  .overriden bearer-button[kind=warning]:hover {
+    --bearer-button-background: #d39e00;
+  }
+  
+  </style>
+</head>
+
+<body>
+  <!-- Feature Action Component-->
+  <h1>Test page for bearer-button component</h1>
+  <div>
+    <h2>Default buttons</h2>
+    <div class="card">
+      <bearer-button>I'm a component!</bearer-button>
+      <bearer-button kind="action">I'm an action</bearer-button>
+      <bearer-button kind="success">I'm a success</bearer-button>
+      <bearer-button kind="warning">I'm a warning</bearer-button>
+      <bearer-button kind="error">I'm an error :'(</bearer-button>
+    </div>
+  </div>
+
+  <!-- Edit Action Component-->
+  <div>
+    <h2>Overriden component</h2>
+    <div class="card overriden">
+      <bearer-button>I'm a component!</bearer-button>
+      <bearer-button kind="action">I'm an action</bearer-button>
+      <bearer-button kind="success">I'm a success</bearer-button>
+      <bearer-button kind="warning">I'm a warning</bearer-button>
+      <bearer-button kind="error">I'm an error :'(</bearer-button>
+     </div>
+     <p><i>Freely inspired from <a href="https://getbootstrap.com/docs/4.0/components/buttons/">Bootstrap design</a>.</i></p>
+  </div>
+
+</body>
+
+</html>

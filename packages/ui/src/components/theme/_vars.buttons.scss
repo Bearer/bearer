@@ -1,0 +1,58 @@
+/*
+ * Buttons
+ */ 
+
+// Base for buttons
+// ----------------------------------
+
+$bearer-button-cursor: auto;
+$bearer-button-font-color: #fff;
+$bearer-button-border: none;
+$bearer-button-border-radius: 4px;
+$bearer-button-box-shadow: 4px;
+
+$bearer-button-vertical-padding: 16px;
+$bearer-button-horizontal-padding: 16px;
+$bearer-button-small-vertical-padding: 8px;
+$bearer-button-small-horizontal-padding: 14px;
+$bearer-button-large-vertical-padding: 14px;
+$bearer-button-large-horizontal-padding: 24px;
+
+$bearer-button-padding: #{$bearer-button-vertical-padding} #{$bearer-button-horizontal-padding};
+$bearer-button-small-padding: #{$bearer-button-small-vertical-padding} #{$bearer-button-small-horizontal-padding};
+$bearer-button-large-padding: #{$bearer-button-large-vertical-padding} #{$bearer-button-large-horizontal-padding};
+
+// Kinds + States
+// ----------------------------------
+
+$bearer-button-component-font-color: black;
+$bearer-button-component-border: none;
+$bearer-button-component-border-radius: 2px;
+$bearer-button-component-box-shadow: 0 2px 4px 0 rgba(3, 13, 54, 0.12);
+$bearer-button-component-background: #fff;
+$bearer-button-component-background-hover: #E3E3E3;
+$bearer-button-component-background-active: #505B8A;
+$bearer-button-component-background-disabled: #FCFCFE;
+$bearer-button-component-vertical-padding: 10px;
+$bearer-button-component-horizontal-padding: 17px;
+$bearer-button-component-padding: #{$bearer-button-component-vertical-padding} #{$bearer-button-component-horizontal-padding};
+
+$bearer-button-action-background: #030D36;
+$bearer-button-action-background-hover: #021561;
+$bearer-button-action-background-active: #505B8A;
+$bearer-button-action-background-disabled: #D6DAE7;
+
+$bearer-button-warning-background: #FFC400;
+// $bearer-button-warning-background-hover: #021561;
+// $bearer-button-warning-background-active: #505B8A;
+// $bearer-button-warning-background-disabled: #D6DAE7;
+
+$bearer-button-success-background: #0FE49B;
+$bearer-button-success-background-hover: #0EBD81;
+$bearer-button-success-background-active: #5EB597;
+$bearer-button-success-background-disabled: #D5E7E1;
+
+$bearer-button-error-background: #E44C0F;
+// $bearer-button-error-background-hover: #021561;
+// $bearer-button-error-background-active: #505B8A;
+// $bearer-button-error-background-disabled: #D6DAE7;

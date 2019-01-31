@@ -1,92 +1,105 @@
 @import '../theme/vars';
+@import '../theme/vars.buttons';
 
 :host {
-  --primary-color: var(--bearer-primary, #{$bearer-primary});
-  --secondary-color: var(--bearer-secondary, #{$bearer-secondary});
-  --ternary-color: var(--bearer-primary, #{$bearer-ternary});
   --base-size: var(--bearer-base-size, #{$bearer-font-base});
   --font-size: var(--base-size);
-  --font-color: var(--bearer-primary-font-color, #{$bearer-primary-alternate});
-  --bg-color: var(--bearer-button-background-color, --primary-color);
-  --bg-hover: var(--bearer-primary-hover, #{$bearer-primary-hover});
-  --bg-active: var(--bearer-primary-active, #{$bearer-primary-active});
-  --vertical-padding: var(--bearer-btn-vertical-padding, #{$bearer-button-vertical-padding});
-  --horizontal-padding: var(--bearer-btn-horizontal-padding, #{$bearer-button-horizontal-padding});
-  --border-radius: var(--bearer-button-border-radius, #{$bearer-button-radius});
-  --border: var(--bearer-button-border, none 0px);
-  --shadow: var(--bearer-button-shadow, none);
+  --font-color: var(--bearer-font-color, #{$bearer-button-font-color});
+  --font-family: var(--bearer-font-family, #{$bearer-font-family});
+  --border: var(--bearer-button-border, #{$bearer-button-border});
+  --border-radius: var(--bearer-button-border-radius, #{$bearer-button-border-radius});
+  --box-shadow: var(--bearer-button-box-shadow, #{$bearer-button-box-shadow});
+  --padding: var(--bearer-button-padding, #{$bearer-button-padding});
+  --opacity: var(--bearer-button-opacity);
   --cursor: var(--bearer-button-cursor, #{$bearer-button-cursor});
-  display: inline-block;
 }
 
-/**
-* kind
-**/
-
-:host([kind="action"]) {
-  --border-radius: var(--bearer-button-action-border-radius, 2px);
-  --font-color: var(--bearer-button-action-font-color, var(--primary-color));
-  --bg-color: var(--bearer-button-action, #FFF);
-  --shadow: var(--bearer-button-action-shadow, #{$bearer-button-action-shadow});
-  --bg-hover: var(--bg-color);
-  --bg-active: var(--bg-color);
-}
-
-:host([kind="action"]:hover) .btn {
-  --shadow: var(--bearer-button-action-hover-shadow, #{$bearer-button-action-hover-shadow});
-}
-
-
-:host([kind="secondary"]) {
-  --font-color: var(--bearer-secondary-font-color, #{$bearer-secondary-alternate});
-  --bg-color: var(--secondary-color, #{$bearer-secondary});
-  --bg-hover: var(--bearer-secondary-hover, #{$bearer-secondary-hover});
-  --bg-active: var(--bearer-secondary-active, #{$bearer-secondary-active});
-}
-
-/*
-* Sizes
-*/
+// Sizes
+// ----------------------------------
 
 :host([size="small"]) {
   --font-size: calc(var(--base-size) * #{$bearer-decrease-ratio});
-  --vertical-padding: var(--bearer-btn-small-vertical-padding, 8px);
-  --horizontal-padding: var(--bearer-btn-small-horizontal-padding, 14px)
+  --padding: var(--bearer-button-padding, #{$bearer-button-small-padding});
 }
 
 :host([size="large"]) {
   --font-size: calc(var(--base-size) * #{$bearer-increase-ratio});
-  --vertical-padding: var(--bearer-btn-large-vertical-padding, 14px);
-  --horizontal-padding: var(--bearer-btn-large-horizontal-padding, 24px)
+  --padding: var(--bearer-button-padding, #{$bearer-button-large-padding});
 }
 
-/*
-* States
-*/
+// Kinds + States
+// ----------------------------------
 
-:host([disabled]) {
-  --font-color: var(--bearer-primary-color-disabled, #{$bearer-primary-disabled});
-  --bg-color: var(--bearer-primary-disabled, #{$bearer-primary-disabled-alternate});
+:host([kind="primary"]) {
+  --font-color: var(--bearer-button-font-color, #{$bearer-button-component-font-color});
+  --background: var(--bearer-button-background, #{$bearer-button-component-background});
+  --box-shadow: var(--bearer-button-background, #{$bearer-button-component-box-shadow});
+  --border: var(--bearer-button-border, #{$bearer-button-component-border});
+  --border-radius: var(--bearer-button-border-radius, #{$bearer-button-component-border-radius});
+  --padding: var(--bearer-button-padding, #{$bearer-button-component-padding});
 }
 
-:host(:not([disabled]):hover) {
-  --bg-color: var(--bg-hover)
+:host([kind="action"]) {
+  --background: var(--bearer-button-background, #{$bearer-button-action-background});
+  
+  & .btn:hover {
+    --background: var(--bearer-button-background, #{$bearer-button-action-background-hover});
+  }
+
+  & .btn:active {
+    --background: var(--bearer-button-background, #{$bearer-button-action-background-active});
+  }
+
+  &[disabled], & .btn:disabled {
+    --background: var(--bearer-button-background, #{$bearer-button-action-background-disabled});
+  }
 }
 
-:host(:not([disabled]):active) {
-  --bg-color: var(--bg-active)
+:host([kind="success"]) {
+  --background: var(--bearer-button-background, #{$bearer-button-success-background});
+  
+  & .btn:hover {
+    --background: var(--bearer-button-background, #{$bearer-button-success-background-hover});
+  }
+
+  & .btn:active {
+    --background: var(--bearer-button-background, #{$bearer-button-success-background-active});
+  }
+
+  &[disabled], & .btn:disabled {
+    --background: var(--bearer-button-background, #{$bearer-button-success-background-disabled});
+  }
 }
+
+:host([kind="warning"]) {
+  --background: var(--bearer-button-background, #{$bearer-button-warning-background});
+}
+
+:host([kind="error"]) {
+  --background: var(--bearer-button-background, #{$bearer-button-error-background});
+}
+
+// 
+// ----------------------------------
+
+// Apply styles to btn
+// ----------------------------------
 
 .btn {
-  transition: box-shadow var(--bearer-transition-duration, #{$bearer-transition-duration});
-  font-family: var(--bearer-font-family, inherit);
-  font-size: var(--font-size);
-  line-height: 1.1;
-  color: var(--font-color);
-  background: var(--bg-color);
-  border-radius: var(--border-radius, 4px);
+  display: inline-block;
+  background: var(--background);
   border: var(--border);
-  padding: var(--vertical-padding) var(--horizontal-padding);
-  box-shadow: var(--shadow);
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  color: var(--font-color);
+  padding: var(--padding);
+  font-size: var(--font-size);
+  font-family: var(--font-family);
+  opacity: var(--opacity, 1);
   cursor: var(--cursor);
+  // outline: initial; @TODO - setting outline to initial prevent default comportement
+}
+
+.btn-block {
+  display: block;
 }
