@@ -1270,10 +1270,24 @@
   dependencies:
     "@types/node" "*"
 
+"@types/lodash.get@^4.4.4":
+  version "4.4.4"
+  resolved "https://registry.yarnpkg.com/@types/lodash.get/-/lodash.get-4.4.4.tgz#34b67841594e4ddc8853341d65e971a38cb4e2f0"
+  integrity sha512-6igkhtKoWAEvTWCgd5uubiuxXLUY/kljQOQZV1G5Y7SrivpmCU+NWG5tGLgRBkccobrDljbJYzBM2vgCG4Oc8Q==
+  dependencies:
+    "@types/lodash" "*"
+
 "@types/lodash.kebabcase@^4.1.4":
   version "4.1.4"
   resolved "https://registry.yarnpkg.com/@types/lodash.kebabcase/-/lodash.kebabcase-4.1.4.tgz#9b9b1abb6d900df311ac82e5bf5d6441435e1ff4"
   integrity sha512-H/j/+ubS1SRbCCYXghPnkMRuGFk6gGT3KICjnTtyukveMoqsSBLVuJL4Aw+B+jy7ZDc0htVE4l1YEo03vYEykA==
+  dependencies:
+    "@types/lodash" "*"
+
+"@types/lodash.merge@^4.6.4":
+  version "4.6.4"
+  resolved "https://registry.yarnpkg.com/@types/lodash.merge/-/lodash.merge-4.6.4.tgz#0eaae4c82b82d0426612ba929f53edafe5402c58"
+  integrity sha512-usLWpRAicaNbx0VfNDREEgGWvp88inclJLXLJ3NpT83eUE4O05LJdYNRTofHq6pb/NiMZjzNVJHdgPvPzMfu6g==
   dependencies:
     "@types/lodash" "*"
 
@@ -7577,6 +7591,11 @@ lodash.flatten@^4.4.0:
   resolved "https://registry.yarnpkg.com/lodash.flatten/-/lodash.flatten-4.4.0.tgz#f31c22225a9632d2bbf8e4addbef240aa765a61f"
   integrity sha1-8xwiIlqWMtK7+OSt2+8kCqdlph8=
 
+lodash.get@^4.4.2:
+  version "4.4.2"
+  resolved "https://registry.yarnpkg.com/lodash.get/-/lodash.get-4.4.2.tgz#2d177f652fa31e939b4438d5341499dfa3825e99"
+  integrity sha1-LRd/ZS+jHpObRDjVNBSZ36OCXpk=
+
 lodash.isplainobject@^4.0.6:
   version "4.0.6"
   resolved "https://registry.yarnpkg.com/lodash.isplainobject/-/lodash.isplainobject-4.0.6.tgz#7c526a52d89b45c45cc690b88163be0497f550cb"
@@ -7591,6 +7610,11 @@ lodash.map@^4.5.1:
   version "4.6.0"
   resolved "https://registry.yarnpkg.com/lodash.map/-/lodash.map-4.6.0.tgz#771ec7839e3473d9c4cde28b19394c3562f4f6d3"
   integrity sha1-dx7Hg540c9nEzeKLGTlMNWL09tM=
+
+lodash.merge@^4.6.1:
+  version "4.6.1"
+  resolved "https://registry.yarnpkg.com/lodash.merge/-/lodash.merge-4.6.1.tgz#adc25d9cb99b9391c59624f379fbba60d7111d54"
+  integrity sha512-AOYza4+Hf5z1/0Hztxpm2/xiPZgi/cjMqdnKTUWTBSKchJlxXXuUSxCCl8rJlf4g6yww/j6mA8nC8Hw/EZWxKQ==
 
 lodash.mergewith@^4.6.0:
   version "4.6.1"

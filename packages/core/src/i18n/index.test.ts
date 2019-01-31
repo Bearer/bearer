@@ -14,7 +14,11 @@ describe('i18n', () => {
   })
 
   describe('custom store', () => {
-    const store: I18nStore = { get: (key: string) => (key === 'missing.key' ? null : 'existing value') }
+    const store: I18nStore = {
+      get: (key: string) => (key === 'missing.key' ? null : 'existing value'),
+      setLocale: jest.fn(),
+      loadLocale: jest.fn()
+    }
     const instance = i18n(store)
 
     it('returns existing key', () => {
