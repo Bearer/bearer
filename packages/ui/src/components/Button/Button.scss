@@ -7,13 +7,14 @@
   --base-size: var(--bearer-base-size, #{$bearer-font-base});
   --font-size: var(--base-size);
   --font-color: var(--bearer-primary-font-color, #{$bearer-primary-alternate});
-  --bg-color: var(--primary-color);
+  --bg-color: var(--bearer-button-background-color, --primary-color);
   --bg-hover: var(--bearer-primary-hover, #{$bearer-primary-hover});
   --bg-active: var(--bearer-primary-active, #{$bearer-primary-active});
   --vertical-padding: var(--bearer-btn-vertical-padding, #{$bearer-button-vertical-padding});
   --horizontal-padding: var(--bearer-btn-horizontal-padding, #{$bearer-button-horizontal-padding});
   --border-radius: var(--bearer-button-border-radius, #{$bearer-button-radius});
-  --shadow: var(--bearer-button-shadow);
+  --border: var(--bearer-button-border, none 0px);
+  --shadow: var(--bearer-button-shadow, none);
   --cursor: var(--bearer-button-cursor, #{$bearer-button-cursor});
   display: inline-block;
 }
@@ -84,8 +85,8 @@
   color: var(--font-color);
   background: var(--bg-color);
   border-radius: var(--border-radius, 4px);
-  border: none 0px;
+  border: var(--border);
   padding: var(--vertical-padding) var(--horizontal-padding);
-  box-shadow: var(--shadow, none);
+  box-shadow: var(--shadow);
   cursor: var(--cursor);
 }
