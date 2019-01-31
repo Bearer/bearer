@@ -1,8 +1,17 @@
 # @bearer/tslint-config
 
-## Usage
+## Install
 
 ```bash
 yarn add -D @bearer/tslint-config
-// extend it from your tslint.json config file
+```
+
+## Usage
+
+Extend it from your tslint.json config file
+
+```
+{
+  'extends': '@bearer/tslint-config'
+}
 ```
