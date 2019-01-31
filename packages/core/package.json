@@ -13,7 +13,7 @@
   ],
   "scripts": {
     "clean": "rm -rf lib/",
-    "start": "yarn start -w",
+    "start": "yarn build -w",
     "build": "rollup -c",
     "prepare": "yarn clean && rollup -c",
     "prepack": "yarn clean && BUILD=distribution NODE_ENV=production yarn build",

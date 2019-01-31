@@ -3,6 +3,7 @@ import classNames from './classnames'
 import * as Debug from './debug'
 import EventNames from './event-names'
 import * as Requests from './requests'
+import i18n from './i18n/index'
 
 import * as bearerState from './bearer-state'
 export * from './decorators'
@@ -11,6 +12,7 @@ export const Events = EventNames
 export const requests = Requests
 export const debug = Debug
 export const classnames = classNames
+export const t = i18n
 
 export default Bearer
 
