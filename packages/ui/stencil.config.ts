@@ -23,8 +23,14 @@ if (process.env.BUILD === 'distribution') {
 }
 
 export const config: Config = {
-  namespace: 'bearer-ui',
   plugins,
+  namespace: 'bearer-ui',
+  copy: [
+    {
+      src: 'components/i18n/index.html',
+      dest: 'i18n.html'
+    }
+  ],
   outputTargets: [
     { type: 'dist', dir: 'lib' },
     {

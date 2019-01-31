@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0">
+  <title>Stencil Component Starter</title>
+  <script>
+    window.BEARER_CONFIG = {
+      integrationHost: 'https://int.staging.bearer.sh/',
+      authorizationHost: 'https://int.staging.bearer.sh/',
+    }
+
+  </script>
+  <script src="/build/bearer-ui.js"></script>
+  <script>
+    class ScenarioPlaceholder extends HTMLElement {
+      constructor() {
+        super(); // always call super() first in the constructor.
+
+        this._shadowRoot = this.attachShadow({
+          mode: 'open'
+        });
+      }
+      connectedCallback() {
+        this._shadowRoot.innerHTML =
+          `
+          <bearer-i18n key='missing.key'></bearer-i18n>
+          <br />
+          <bearer-i18n key='existing.key'></bearer-i18n>
+          <br />
+          <bearer-i18n key='existing.key' default='A default text'></bearer-i18n>
+          <br />
+          <bearer-i18n key='missing.key' default='A default text'></bearer-i18n>  
+        `
+      }
+    }
+
+    customElements.define('scenario-placeholder', ScenarioPlaceholder);
+
+  </script>
+</head>
+
+<body>
+  <div>
+    <h2>Within an integration</h2>
+    <scenario-placeholder></scenario-placeholder>
+
+    <h2>Standalone usage</h2>
+    <bearer-i18n key='missing.key'></bearer-i18n>
+    <br />
+    <bearer-i18n key='existing.key'></bearer-i18n>
+    <br />
+    <bearer-i18n key='existing.key' default='A default text'></bearer-i18n>
+    <br />
+    <bearer-i18n key='missing.key' default='A default text'></bearer-i18n>
+</body>
+
+</html>

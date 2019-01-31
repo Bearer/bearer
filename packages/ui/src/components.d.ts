@@ -183,6 +183,11 @@ declare global {
       'toggle': (opened: boolean) => void;
     }
 
+    interface BearerI18n {
+      'default': string;
+      'key': string;
+    }
+
     interface BearerNavigatorAuthScreen {
       'getTitle': () => string;
       'scenarioId': string;
@@ -399,6 +404,14 @@ declare global {
     };
     
 
+    interface HTMLBearerI18nElement extends StencilComponents.BearerI18n, HTMLStencilElement {}
+
+    var HTMLBearerI18nElement: {
+      prototype: HTMLBearerI18nElement;
+      new (): HTMLBearerI18nElement;
+    };
+    
+
     interface HTMLBearerNavigatorAuthScreenElement extends StencilComponents.BearerNavigatorAuthScreen, HTMLStencilElement {}
 
     var HTMLBearerNavigatorAuthScreenElement: {
@@ -499,6 +512,7 @@ declare global {
     'bearer-config-display': JSXElements.BearerConfigDisplayAttributes;
     'bearer-config': JSXElements.BearerConfigAttributes;
     'bearer-dropdown-button': JSXElements.BearerDropdownButtonAttributes;
+    'bearer-i18n': JSXElements.BearerI18nAttributes;
     'bearer-navigator-auth-screen': JSXElements.BearerNavigatorAuthScreenAttributes;
     'bearer-navigator-back': JSXElements.BearerNavigatorBackAttributes;
     'bearer-navigator-collection': JSXElements.BearerNavigatorCollectionAttributes;
@@ -648,6 +662,11 @@ declare global {
       'opened'?: boolean;
     }
 
+    export interface BearerI18nAttributes extends HTMLAttributes {
+      'default'?: string;
+      'key'?: string;
+    }
+
     export interface BearerNavigatorAuthScreenAttributes extends HTMLAttributes {
       'onScenarioAuthenticate'?: (event: CustomEvent) => void;
       'onStepCompleted'?: (event: CustomEvent) => void;
@@ -748,6 +767,7 @@ declare global {
     'bearer-config-display': HTMLBearerConfigDisplayElement
     'bearer-config': HTMLBearerConfigElement
     'bearer-dropdown-button': HTMLBearerDropdownButtonElement
+    'bearer-i18n': HTMLBearerI18nElement
     'bearer-navigator-auth-screen': HTMLBearerNavigatorAuthScreenElement
     'bearer-navigator-back': HTMLBearerNavigatorBackElement
     'bearer-navigator-collection': HTMLBearerNavigatorCollectionElement
@@ -778,6 +798,7 @@ declare global {
     'bearer-config-display': HTMLBearerConfigDisplayElement;
     'bearer-config': HTMLBearerConfigElement;
     'bearer-dropdown-button': HTMLBearerDropdownButtonElement;
+    'bearer-i18n': HTMLBearerI18nElement;
     'bearer-navigator-auth-screen': HTMLBearerNavigatorAuthScreenElement;
     'bearer-navigator-back': HTMLBearerNavigatorBackElement;
     'bearer-navigator-collection': HTMLBearerNavigatorCollectionElement;
