@@ -12,7 +12,8 @@ export const Events = EventNames
 export const requests = Requests
 export const debug = Debug
 export const classnames = classNames
-export const t = i18n
+
+export const t = i18n(Bearer.i18nStore)
 
 export default Bearer
 

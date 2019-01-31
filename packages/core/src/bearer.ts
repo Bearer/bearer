@@ -3,6 +3,9 @@ import postRobot from 'post-robot'
 
 import BearerConfig from './bearer-config'
 import Events from './event-names'
+
+import i18nStore from './i18n/store'
+
 import { formatQuery } from './utils'
 
 const BEARER_WINDOW_INSTANCE_KEY = 'BEARER_INSTANCE'
@@ -36,6 +39,11 @@ export default class Bearer {
       window[BEARER_EMITTER] = new EventEmitter()
     }
     return window[BEARER_EMITTER]
+  }
+
+  // TODO consider using a proxy method for i18n
+  public static get i18nStore() {
+    return i18nStore
   }
 
   public static get instance(): Bearer {
