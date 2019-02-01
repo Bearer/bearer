@@ -10,12 +10,16 @@ describe('i18n', () => {
   it('returns a function', () => {
     const result = i18n(null)
     expect(result).toBeInstanceOf(Function)
-    expect(result).toHaveLength(2)
+    expect(result).toHaveLength(3)
   })
 
   describe('custom store', () => {
+    const dictionnary = {
+      interpolatesomething: '{{yeah}} !!!',
+      'my.key': 'existing value'
+    }
     const store: I18nStore = {
-      get: (key: string) => (key === 'missing.key' ? null : 'existing value'),
+      get: (key: string) => dictionnary[key],
       setLocale: jest.fn(),
       loadLocale: jest.fn()
     }
@@ -23,6 +27,10 @@ describe('i18n', () => {
 
     it('returns existing key', () => {
       expect(instance('my.key', 'Default Value')).toEqual('existing value')
+    })
+
+    it('returns existing key', () => {
+      expect(instance('interpolatesomething', 'Default Value', { yeah: 'wonderful' })).toEqual('wonderful !!!')
     })
 
     it('returns default value', () => {

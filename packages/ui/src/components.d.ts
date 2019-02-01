@@ -186,6 +186,7 @@ declare global {
     interface BearerI18n {
       'default': string;
       'key': string;
+      'var': any;
     }
 
     interface BearerNavigatorAuthScreen {
@@ -665,6 +666,7 @@ declare global {
     export interface BearerI18nAttributes extends HTMLAttributes {
       'default'?: string;
       'key'?: string;
+      'var'?: any;
     }
 
     export interface BearerNavigatorAuthScreenAttributes extends HTMLAttributes {

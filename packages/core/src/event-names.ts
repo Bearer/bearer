@@ -4,7 +4,8 @@ enum Events {
   HAS_AUTHORIZED = 'BEARER_HAS_AUTHORIZED',
   AUTHORIZED = 'BEARER_AUTHORIZED',
   REVOKE = 'BEARER_REVOKE',
-  REVOKED = 'BEARER_REVOKED'
+  REVOKED = 'BEARER_REVOKED',
+  LOCALE_CHANGED = 'bearer:locale-changed'
 }
 
 export default Events

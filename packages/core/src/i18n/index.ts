@@ -1,5 +1,10 @@
 import { I18nStore } from './store'
+import template from 'lodash.template'
 
-export default (store: I18nStore) => (key: string, defaultValue: string) => {
-  return store.get(key) || defaultValue
+const interpolate = /{{([\s\S]+?)}}/g
+
+export default (store: I18nStore) => (key: string, defaultValue: string, vars?: Record<string, any>) => {
+  return template(store.get(key) || defaultValue, {
+    interpolate
+  })(vars || {})
 }

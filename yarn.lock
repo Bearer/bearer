@@ -1291,6 +1291,13 @@
   dependencies:
     "@types/lodash" "*"
 
+"@types/lodash.template@^4.4.4":
+  version "4.4.4"
+  resolved "https://registry.yarnpkg.com/@types/lodash.template/-/lodash.template-4.4.4.tgz#75fddd12297fb12683f9be42e05c646c359a1ff7"
+  integrity sha512-Z858mvp8gSWCU76Mus6gmqFl5YFhdwhdd/012P07X+MsgJS+cLOAIO+od4At8OYE3BU4KVrAYOadLRzexw15eQ==
+  dependencies:
+    "@types/lodash" "*"
+
 "@types/lodash@*", "@types/lodash@^4.14.119":
   version "4.14.120"
   resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.120.tgz#cf265d06f6c7a710db087ed07523ab8c1a24047b"

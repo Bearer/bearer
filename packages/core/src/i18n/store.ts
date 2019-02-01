@@ -1,7 +1,9 @@
 import merge from 'lodash.merge'
 import get from 'lodash.get'
+import Events from '../event-names'
 
 const DEFAULT_LOCALE = 'en'
+
 export interface I18nStore {
   get: (key: string) => string | undefined
   setLocale: (locale: string) => void
@@ -19,14 +21,20 @@ export class Store implements I18nStore {
 
   setLocale(locale: string): void {
     this.locale = locale
+    this.localeChanged()
   }
 
   loadLocale(locale: string, dictionnary: TransLationObject): void {
     this.translationStore[locale] = merge(get(locale, this.translationStore), dictionnary)
+    this.localeChanged()
   }
 
   refreshLocale = () => {
     this.locale = this.detectLocale()
+  }
+
+  private localeChanged() {
+    document.dispatchEvent(new CustomEvent(Events.LOCALE_CHANGED, { detail: { locale: this.locale } }))
   }
 
   private locale: string
