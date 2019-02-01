@@ -33,7 +33,7 @@
 :host([kind="primary"]) {
   --font-color: var(--bearer-button-font-color, #{$bearer-button-component-font-color});
   --background: var(--bearer-button-background, #{$bearer-button-component-background});
-  --box-shadow: var(--bearer-button-background, #{$bearer-button-component-box-shadow});
+  --box-shadow: var(--bearer-button-box-shadow, #{$bearer-button-component-box-shadow});
   --border: var(--bearer-button-border, #{$bearer-button-component-border});
   --border-radius: var(--bearer-button-border-radius, #{$bearer-button-component-border-radius});
   --padding: var(--bearer-button-padding, #{$bearer-button-component-padding});
