@@ -19,6 +19,10 @@
     outline: none;
   }
 
+  .overriden bearer-button:hover {
+    --bearer-button-box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+  }
+
   .overriden bearer-button[kind=primary] {
     --bearer-button-background: #007bff;
     --bearer-button-font-color: #fff;
@@ -28,13 +32,19 @@
   }
   .overriden bearer-button[kind=success]:hover {
     --bearer-button-background: #218838;
+    --bearer-font-family: Times;
   }
   .overriden bearer-button[kind="error"] {
     --bearer-button-background: #dc3545;
     --bearer-button-border: 10px solid #ae3545;
+    --bearer-font-family: Garamond;
+  }
+  .overriden bearer-button[kind="error"]:hover {  
+    --bearer-button-box-shadow: 0 8px 16px 0 red;
   }
   .overriden bearer-button[kind=warning] {
     --bearer-button-background: #ffc107;
+    --bearer-font-family: Helvetica;
   }
   .overriden bearer-button[kind=warning]:hover {
     --bearer-button-background: #d39e00;
