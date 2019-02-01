@@ -1,4 +1,4 @@
-import { Component, t, Prop, Events, State, Watch } from '@bearer/core'
+import { Component, t, p, Prop, Events, State, Watch } from '@bearer/core'
 
 @Component({
   tag: 'bearer-i18n'
@@ -7,6 +7,8 @@ export class BearerI18n {
   @Prop() key: string
   @Prop() default?: string
   @Prop() var?: any
+  @Prop() count?: number
+
   @State() innerVar: any = {}
   @State() locale: string
 
@@ -39,6 +41,9 @@ export class BearerI18n {
   }
 
   render() {
-    return t(this.key, this.default, this.innerVar)
+    if (isNaN(this.count)) {
+      return t(this.key, this.default, this.innerVar)
+    }
+    return p(this.key, this.count, this.default, this.innerVar)
   }
 }
