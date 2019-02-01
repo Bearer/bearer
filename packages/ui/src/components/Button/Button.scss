@@ -2,6 +2,7 @@
 @import '../theme/vars.buttons';
 
 :host {
+  --display: var(--bearer-button-display, #{$bearer-button-display});
   --base-size: var(--bearer-base-size, #{$bearer-font-base});
   --font-size: var(--base-size);
   --font-color: var(--bearer-font-color, #{$bearer-button-font-color});
@@ -86,7 +87,7 @@
 // ----------------------------------
 
 .btn {
-  display: inline-block;
+  display: var(--display);
   background: var(--background);
   border: var(--border);
   border-radius: var(--border-radius);
@@ -98,8 +99,4 @@
   opacity: var(--opacity, 1);
   cursor: var(--cursor);
   // outline: initial; @TODO - setting outline to initial prevent default comportement
-}
-
-.btn-block {
-  display: block;
 }
