@@ -97,7 +97,7 @@
   font-family: var(--font-family);
   opacity: var(--opacity, 1);
   cursor: var(--cursor);
-  // outline: initial; @TODO - setting outline to initial prevent default comportement
+  // outline-style: initial; @TODO - setting outline to initial prevent default comportement
 }
 
 .btn-block {
