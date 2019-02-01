@@ -184,6 +184,7 @@ declare global {
     }
 
     interface BearerI18n {
+      'count': number;
       'default': string;
       'key': string;
       'var': any;
@@ -664,6 +665,7 @@ declare global {
     }
 
     export interface BearerI18nAttributes extends HTMLAttributes {
+      'count'?: number;
       'default'?: string;
       'key'?: string;
       'var'?: any;

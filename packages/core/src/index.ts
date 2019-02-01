@@ -3,7 +3,7 @@ import classNames from './classnames'
 import * as Debug from './debug'
 import EventNames from './event-names'
 import * as Requests from './requests'
-import i18n from './i18n/index'
+import { translate, pluralize } from './i18n/index'
 
 import * as bearerState from './bearer-state'
 export * from './decorators'
@@ -13,7 +13,8 @@ export const requests = Requests
 export const debug = Debug
 export const classnames = classNames
 
-export const t = i18n(Bearer.i18nStore)
+export const t = translate(Bearer.i18nStore)
+export const p = pluralize(Bearer.i18nStore)
 
 export default Bearer
 
