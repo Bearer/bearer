@@ -18,12 +18,12 @@
 // Sizes
 // ----------------------------------
 
-:host([size="small"]) {
+.btn-small {
   --font-size: calc(var(--base-size) * #{$bearer-decrease-ratio});
   --padding: var(--bearer-button-padding, #{$bearer-button-small-padding});
 }
 
-:host([size="large"]) {
+.btn-large {
   --font-size: calc(var(--base-size) * #{$bearer-increase-ratio});
   --padding: var(--bearer-button-padding, #{$bearer-button-large-padding});
 }
@@ -31,7 +31,7 @@
 // Kinds + States
 // ----------------------------------
 
-:host([kind="primary"]) {
+.btn-primary {
   --font-color: var(--bearer-button-font-color, #{$bearer-button-component-font-color});
   --background: var(--bearer-button-background, #{$bearer-button-component-background});
   --box-shadow: var(--bearer-button-box-shadow, #{$bearer-button-component-box-shadow});
@@ -40,43 +40,43 @@
   --padding: var(--bearer-button-padding, #{$bearer-button-component-padding});
 }
 
-:host([kind="action"]) {
+.btn-action {
   --background: var(--bearer-button-background, #{$bearer-button-action-background});
   
-  & .btn:hover {
+  &:hover {
     --background: var(--bearer-button-background, #{$bearer-button-action-background-hover});
   }
 
-  & .btn:active {
+  &:active {
     --background: var(--bearer-button-background, #{$bearer-button-action-background-active});
   }
 
-  &[disabled], & .btn:disabled {
+  &:disabled {
     --background: var(--bearer-button-background, #{$bearer-button-action-background-disabled});
   }
 }
 
-:host([kind="success"]) {
+.btn-success {
   --background: var(--bearer-button-background, #{$bearer-button-success-background});
   
-  & .btn:hover {
+  &:hover {
     --background: var(--bearer-button-background, #{$bearer-button-success-background-hover});
   }
 
-  & .btn:active {
+  &:active {
     --background: var(--bearer-button-background, #{$bearer-button-success-background-active});
   }
 
-  &[disabled], & .btn:disabled {
+  &:disabled {
     --background: var(--bearer-button-background, #{$bearer-button-success-background-disabled});
   }
 }
 
-:host([kind="warning"]) {
+.btn-warning {
   --background: var(--bearer-button-background, #{$bearer-button-warning-background});
 }
 
-:host([kind="error"]) {
+.btn-error {
   --background: var(--bearer-button-background, #{$bearer-button-error-background});
 }
 
