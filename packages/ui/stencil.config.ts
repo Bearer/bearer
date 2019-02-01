@@ -23,12 +23,13 @@ if (process.env.BUILD === 'distribution') {
 }
 
 export const config: Config = {
-  namespace: 'bearer-ui',
   plugins,
+  namespace: 'bearer-ui',
   outputTargets: [
     { type: 'dist', dir: 'lib' },
     {
       type: 'www'
     }
-  ]
+  ],
+  copy: [{ src: 'tests' }]
 }
