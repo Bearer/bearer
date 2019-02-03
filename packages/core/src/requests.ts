@@ -70,7 +70,7 @@ export function intentRequest<TReturnFormat>({
   scenarioId,
   setupId
 }: TIntentBaseQuery): TBearerRequest<TReturnFormat> {
-  return bearerRequest(`api/v2/intents/${scenarioId}/${intentName}`, { setupId })
+  return bearerRequest(`api/v3/intents/${scenarioId}/${intentName}`, { setupId })
 }
 
 export default {
