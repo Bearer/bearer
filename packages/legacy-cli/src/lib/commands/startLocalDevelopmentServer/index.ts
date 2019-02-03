@@ -67,7 +67,7 @@ export default function startLocalDevelopmentServer(
       process.env.bearerBaseURL = bearerBaseURL
 
       router.post(
-        `v2/intents/${config.scenarioUuid}/:intentName`,
+        `v3/intents/${config.scenarioUuid}/:intentName`,
         intentHandler(distPath, devIntentsContext, bearerBaseURL),
         (ctx, _next) => ctx.ok(ctx.intentDatum)
       )
