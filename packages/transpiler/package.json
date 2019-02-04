@@ -1,6 +1,6 @@
 {
   "name": "@bearer/transpiler",
-  "version": "0.92.1",
+  "version": "0.92.2",
   "description": "Bearer transpiler",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -23,7 +23,7 @@
     "url": "github:Bearer/bearer"
   },
   "devDependencies": {
-    "@bearer/types": "^0.92.1",
+    "@bearer/types": "^0.92.2",
     "@types/fs-extra": "^5.0.3",
     "@types/jest": "^23.3.13",
     "@types/node": "^10.12.18",
@@ -32,7 +32,7 @@
     "ts-jest": "^23.10.5"
   },
   "dependencies": {
-    "@bearer/logger": "^0.92.1",
+    "@bearer/logger": "^0.92.2",
     "async-foreach": "^0.1.3",
     "case": "^1.5.5",
     "command-line-args": "^5.0.2",

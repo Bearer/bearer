@@ -1,6 +1,6 @@
 {
   "name": "create-bearer",
-  "version": "0.92.1",
+  "version": "0.92.2",
   "description": "Quickly create a new Bearer scenario",
   "main": "lib/index.js",
   "repository": "http://github.com/bearer/bearer/packages/create-bearer",
@@ -24,6 +24,6 @@
     "static/"
   ],
   "dependencies": {
-    "@bearer/cli": "^0.92.1"
+    "@bearer/cli": "^0.92.2"
   }
 }
