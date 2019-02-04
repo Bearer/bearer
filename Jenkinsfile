@@ -67,5 +67,19 @@ pipeline {
                 }
             }
         }
+        stage("Deploy feat/hashed-intent-name") {
+            when {
+                expression { params.LERNA_TAG  != '' }
+                branch 'feat/hashed-intent-name'
+            }
+
+            steps {
+                container("bearercli") {
+                    ansiColor('xterm') {
+                        sh(".jenkins/deploy.sh")
+                    }
+                }
+            }
+        }
     }
 }
