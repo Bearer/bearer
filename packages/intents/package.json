@@ -1,6 +1,6 @@
 {
   "name": "@bearer/intents",
-  "version": "0.92.1",
+  "version": "0.92.2",
   "description": "Bearer Intents",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -23,7 +23,7 @@
     "url": "github:BearerSH/bearer"
   },
   "dependencies": {
-    "@bearer/logger": "^0.92.1",
+    "@bearer/logger": "^0.92.2",
     "axios": "^0.18.0",
     "typescript": "^3.2.4",
     "uuid": "^3.3.2"

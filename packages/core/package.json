@@ -1,6 +1,6 @@
 {
   "name": "@bearer/core",
-  "version": "0.92.1",
+  "version": "0.92.2",
   "description": "Bearer Core",
   "main": "lib/main.js",
   "types": "lib/index.d.ts",
@@ -63,7 +63,7 @@
     "tslint": "^5.12.1"
   },
   "dependencies": {
-    "@bearer/types": "^0.92.1",
+    "@bearer/types": "^0.92.2",
     "@stencil/core": "0.11.2",
     "fbemitter": "^2.1.1",
     "lodash.get": "^4.4.2",

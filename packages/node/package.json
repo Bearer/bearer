@@ -1,7 +1,7 @@
 {
   "name": "@bearer/node",
   "private": false,
-  "version": "0.92.1",
+  "version": "0.92.2",
   "description": "Bearer platform bindings",
   "keywords": [
     "node",
@@ -44,8 +44,8 @@
     "typescript": "^3.2.4"
   },
   "dependencies": {
-    "@bearer/logger": "^0.92.1",
-    "@bearer/security": "^0.92.1",
+    "@bearer/logger": "^0.92.2",
+    "@bearer/security": "^0.92.2",
     "axios": "^0.18.0",
     "express": "^4.16.4",
     "on-headers": "^1.0.1"
