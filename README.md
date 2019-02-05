@@ -32,25 +32,6 @@ _Now You should be able to go into each packages and run existing command (ex: y
 
 ## Development
 
----
-
-### ⚠️ Publish packages ️⚠️
-
-```bash
-./scripts/release.sh
-
-// or pass lerna arguments
-./scripts/release.sh --force-publish
-```
-
-For further information on Lerna please read Lerna's documentation: [Lerna](https://github.com/lerna/lerna)
-
-### Upgrade stencil version dependency
-
-```bash
-yarn upgrade-stencil
-```
-
 ### Conventional commits
 
 As we try to be as clear as possible on changes within bearer packages, we adopted [conventional commits](https://conventionalcommits.org/) as pattern for git commits.
@@ -95,8 +76,6 @@ if you want to generate a new scenario from you local build then you can run
 ```bash
 /path/bearer/repo/packages/cli/lib/bin/index.js new ScenarioName
 ```
-
-
 
 **Other packages**
 
