@@ -1,6 +1,6 @@
 {
   "name": "@bearer/tslint-config",
-  "version": "0.92.1",
+  "version": "0.92.3",
   "description": "TSLint config for bearer team",
   "author": "Bearer Team<engineering@bearer.sh>",
   "homepage": "https://github.com/Bearer/bearer/packages/tslint-config#readme",
