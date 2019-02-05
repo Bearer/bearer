@@ -56,7 +56,7 @@ describe('requests', () => {
       await aRequest({ page: 1 }, {})
 
       expect(global.fetch).toBeCalledWith(
-        'https://localhost:5555/api/v2/intents/aScenarioId/anIntent?page=1&setupId=1234&clientId=42&secured=true',
+        'https://localhost:5555/api/v3/intents/aScenarioId/anIntent?page=1&setupId=1234&clientId=42&secured=true',
         {
           credentials: 'include',
           headers: {

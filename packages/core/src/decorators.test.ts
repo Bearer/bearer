@@ -63,7 +63,7 @@ describe('Intent decorator', () => {
         .catch(a => console.log(a))
 
       expect(global.fetch).toBeCalledWith(
-        'https://localhost:5555/api/v2/intents/1234/getCollectionIntent?page=1&setupId=setup-id-from-props&clientId=42',
+        'https://localhost:5555/api/v3/intents/1234/getCollectionIntent?page=1&setupId=setup-id-from-props&clientId=42',
         commonParams
       )
 
@@ -80,7 +80,7 @@ describe('Intent decorator', () => {
         .catch(a => console.log(a))
 
       expect(global.fetch).toBeCalledWith(
-        'https://localhost:5555/api/v2/intents/1234/getCollectionIntent?page=1&setupId=custom-setupId&clientId=42',
+        'https://localhost:5555/api/v3/intents/1234/getCollectionIntent?page=1&setupId=custom-setupId&clientId=42',
         commonParams
       )
 
