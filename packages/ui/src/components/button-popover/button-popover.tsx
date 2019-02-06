@@ -22,8 +22,7 @@ export class BearerButtonPopover {
   @Prop() backNav: boolean = false
   @Prop() btnProps: JSXElements.BearerButtonAttributes = {}
 
-  @State()
-  _visible: boolean = false
+  @State() _visible: boolean = false
 
   toggleDisplay = e => {
     e.preventDefault()
@@ -33,11 +32,13 @@ export class BearerButtonPopover {
   }
 
   set visible(newValue: boolean) {
-    if (this._visible !== newValue) {
+    if (newValue !== null && this._visible !== newValue) {
       console.debug('[BEARER]', 'Button popover: visibilityChangeHandler', newValue)
       this._visible = newValue
       this.visibilityChange.emit({ visible: this._visible })
     }
+
+    this.opened = newValue
   }
 
   get visible(): boolean {
@@ -49,17 +50,25 @@ export class BearerButtonPopover {
   }
 
   @Method()
-  toggle(opened: boolean) {
-    this.visible = opened
+  toggle(newValue: boolean) {
+    // Set visibility to toggle param
+    // or inverse the current one.
+    this.visible = typeof newValue !== 'undefined' ? newValue : !this.visible
   }
 
   @Watch('opened')
-  watchHandler(newValue: boolean) {
-    this._visible = newValue
+  watchOpened(newValue: boolean) {
+    // Opened shall be set (true or false)
+    if (newValue === true || newValue === false) {
+      this.visible = newValue
+    }
   }
 
   componentDidLoad() {
-    this.visible = this.opened
+    if (this.opened !== null) {
+      this.visible = this._visible
+      this.visible = typeof this.opened !== 'undefined' ? this.opened : this._visible
+    }
   }
 
   render() {
