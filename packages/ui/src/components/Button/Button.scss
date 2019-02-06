@@ -87,3 +87,49 @@
   padding: var(--vertical-padding) var(--horizontal-padding);
   box-shadow: var(--shadow, 'none');
 }
+
+/*
+* Tooltip
+*
+* NOTE: We are putting tooltip inside buttons design for now,
+* but tooltip shall be accessible from all UI library elements.
+*/
+
+[data-tooltip]{
+  position:relative;
+  outline: none; /* TBC */
+}
+
+[data-tooltip]::before {
+  content: "";
+  position: absolute;
+  top:-10px;
+  left:50%;
+  transform: translateX(-50%);
+  border-width: 6px 15px 0 15px;
+  border-style: solid;
+  border-color: rgba(0,0,0,0.7) transparent transparent transparent;
+  z-index: 100;
+}
+[data-tooltip]::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  left:50%;
+  top:-10px;
+  transform: translateX(-50%)   translateY(-100%);
+  background: rgba(0,0,0,0.7);
+  text-align: center;
+  color: #fff;
+  padding:8px 15px;
+  font-size: 12px;
+  min-width: 200px;
+  border-radius: 4px;
+  pointer-events: none;
+  font-weight: 600;
+}
+
+[data-tooltip-type="success"]::before { border-top-color: #F0FAF6;}
+[data-tooltip-type="success"]::after {background-color: #F0FAF6; color: #63C995; }
+
+[data-tooltip-type="danger"]::before { border-top-color: #FDF1ED;}
+[data-tooltip-type="danger"]::after { background-color: #FDF1ED; color: #D4562A; }

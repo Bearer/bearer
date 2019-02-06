@@ -15,13 +15,21 @@ export class Button {
   @Prop() as: string = 'button'
   @Prop() outline: boolean = false
   @Prop() disabled: boolean = false
+  @Prop({ reflectToAttr: true }) dataTooltip: string
+  @Prop({ reflectToAttr: true }) dataTooltipType: string
 
   render() {
     // tslint:disable-next-line variable-name
     const Tag = this.as as any
     const classes = ['btn', `btn${this.outline ? '-outline' : ''}-${this.kind}`, `btn-${this.size}`]
     return (
-      <Tag class={classes.join(' ')} disabled={this.disabled} type={this.type}>
+      <Tag
+        class={classes.join(' ')}
+        disabled={this.disabled}
+        type={this.type}
+        data-tooltip={this.dataTooltip}
+        data-tooltip-type={this.dataTooltipType}
+      >
         {this.content || <slot />}
       </Tag>
     )
