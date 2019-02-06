@@ -35,6 +35,10 @@ import {
   TFetchBearerData,
 } from '@bearer/core';
 import {
+  TAlignement as TAlignement2,
+  TDirection as TDirection3,
+} from './components/popover/popover';
+import {
   TCollectionRenderer,
 } from './components/scrollable/types';
 
@@ -76,6 +80,8 @@ declare global {
     interface BearerButton {
       'as': string;
       'content': any;
+      'dataTooltip': string;
+      'dataTooltipType': string;
       'disabled': boolean;
       'kind': BKind;
       'outline': boolean;
@@ -162,7 +168,7 @@ declare global {
       'header': string;
       'kind': BKind;
       'opened': boolean;
-      'toggle': (opened: boolean) => void;
+      'toggle': (newValue: boolean) => void;
     }
 
     interface BearerConfigDisplay {
@@ -239,6 +245,16 @@ declare global {
       'renderCollection': (collection: Array<any>) => any;
       'renderFetching': () => any;
       'reset': () => void;
+    }
+
+    interface BearerPopover {
+      'aligned': TAlignement;
+      'backNav': boolean;
+      'btnProps': JSXElements.BearerButtonAttributes;
+      'direction': TDirection;
+      'header': string;
+      'opened': boolean;
+      'toggle': (newValue?: boolean) => void;
     }
 
     interface BearerScrollable {
@@ -455,6 +471,14 @@ declare global {
     };
     
 
+    interface HTMLBearerPopoverElement extends StencilComponents.BearerPopover, HTMLStencilElement {}
+
+    var HTMLBearerPopoverElement: {
+      prototype: HTMLBearerPopoverElement;
+      new (): HTMLBearerPopoverElement;
+    };
+    
+
     interface HTMLBearerScrollableElement extends StencilComponents.BearerScrollable, HTMLStencilElement {}
 
     var HTMLBearerScrollableElement: {
@@ -506,6 +530,7 @@ declare global {
     'bearer-navigator': JSXElements.BearerNavigatorAttributes;
     'bearer-pagination': JSXElements.BearerPaginationAttributes;
     'bearer-paginator': JSXElements.BearerPaginatorAttributes;
+    'bearer-popover': JSXElements.BearerPopoverAttributes;
     'bearer-scrollable': JSXElements.BearerScrollableAttributes;
     'bearer-setup-display': JSXElements.BearerSetupDisplayAttributes;
     'bearer-setup': JSXElements.BearerSetupAttributes;
@@ -534,6 +559,8 @@ declare global {
     export interface BearerButtonAttributes extends HTMLAttributes {
       'as'?: string;
       'content'?: any;
+      'dataTooltip'?: string;
+      'dataTooltipType'?: string;
       'disabled'?: boolean;
       'kind'?: BKind;
       'outline'?: boolean;
@@ -709,6 +736,16 @@ declare global {
       'renderFetching'?: () => any;
     }
 
+    export interface BearerPopoverAttributes extends HTMLAttributes {
+      'aligned'?: TAlignement;
+      'backNav'?: boolean;
+      'btnProps'?: JSXElements.BearerButtonAttributes;
+      'direction'?: TDirection;
+      'header'?: string;
+      'onVisibilityChange'?: (event: CustomEvent) => void;
+      'opened'?: boolean;
+    }
+
     export interface BearerScrollableAttributes extends HTMLAttributes {
       'fetcher'?: (params: { page: number} ) => Promise<TFetchBearerData>;
       'perPage'?: number;
@@ -755,6 +792,7 @@ declare global {
     'bearer-navigator': HTMLBearerNavigatorElement
     'bearer-pagination': HTMLBearerPaginationElement
     'bearer-paginator': HTMLBearerPaginatorElement
+    'bearer-popover': HTMLBearerPopoverElement
     'bearer-scrollable': HTMLBearerScrollableElement
     'bearer-setup-display': HTMLBearerSetupDisplayElement
     'bearer-setup': HTMLBearerSetupElement
@@ -785,6 +823,7 @@ declare global {
     'bearer-navigator': HTMLBearerNavigatorElement;
     'bearer-pagination': HTMLBearerPaginationElement;
     'bearer-paginator': HTMLBearerPaginatorElement;
+    'bearer-popover': HTMLBearerPopoverElement;
     'bearer-scrollable': HTMLBearerScrollableElement;
     'bearer-setup-display': HTMLBearerSetupDisplayElement;
     'bearer-setup': HTMLBearerSetupElement;
