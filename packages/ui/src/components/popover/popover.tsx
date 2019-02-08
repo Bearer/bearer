@@ -83,27 +83,31 @@ export class BearerPopover {
         class={`popover direction-${this.direction} ${!this.visible && 'hidden'} aligned-${this.aligned}`}
       >
         <slot name="popover-container">
-          <div class="popover-header">
-            <slot name="popover-header">
-              {this.backNav && <bearer-navigator-back class="header-arrow" />}
-              <div class="popover-title">
-                <slot name="popover-title">
-                  <h3>{this.title}</h3>
-                </slot>
+          <div class="popover-container">
+            <div class="popover-header">
+              <slot name="popover-header">
+                {this.backNav && <bearer-navigator-back class="header-arrow" />}
+                <div class="popover-title">
+                  <slot name="popover-title">
+                    <h3>{this.title}</h3>
+                  </slot>
+                </div>
+              </slot>
+            </div>
+            <div class="popover-content">
+              <slot name="popover-content">{this.content}</slot>
+              <div class="popover-actions">
+                <slot name="popover-actions" />
+              </div>
+            </div>
+            <slot name="popover-footer">
+              <div class="popover-copyright">
+                Powered by
+                <a href="https://bearer.sh" target="_blank">
+                  Bearer.sh
+                </a>
               </div>
             </slot>
-          </div>
-          <div class="popover-content">
-            <slot name="popover-content">{this.content}</slot>
-            <div class="popover-actions">
-              <slot name="popover-actions" />
-            </div>
-          </div>
-          <div class="popover-copyright">
-            Powered by{' '}
-            <a href="https://bearer.sh" target="_blank">
-              Bearer.sh
-            </a>
           </div>
         </slot>
       </div>
