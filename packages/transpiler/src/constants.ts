@@ -4,7 +4,8 @@ export enum Component {
   componentDidUnload = 'componentDidUnload',
   componentDidLoad = 'componentDidLoad',
   setupId = 'setupId',
-  scenarioId = 'scenarioId'
+  scenarioId = 'scenarioId',
+  scenarioIdAccessor = 'SCENARIO_ID'
 }
 
 export enum Decorators {

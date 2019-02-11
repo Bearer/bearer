@@ -11,13 +11,24 @@ import { TransformerOptions } from '../types'
 
 import bearer from './bearer'
 
+export function shouldProcessFile(tsSourceFile: ts.SourceFile): boolean {
+  if (tsSourceFile.isDeclarationFile) {
+    return false
+  }
+  return ts.forEachChild<boolean>(tsSourceFile, shouldInject)
+}
+
+export function shouldInject(node: ts.Node): boolean {
+  return ts.isClassDeclaration(node) && hasDecoratorNamed(node, Decorators.Component)
+}
+
 export default function componentTransformer({  }: TransformerOptions = {}): ts.TransformerFactory<ts.SourceFile> {
   return transformContext => {
     const scenarioId = process.env[Env.BEARER_SCENARIO_ID]
 
     function visit(node: ts.Node): ts.VisitResult<ts.Node> {
       // TODO: filter components which really need it
-      if (ts.isClassDeclaration(node) && hasDecoratorNamed(node, Decorators.Component)) {
+      if (shouldInject(node)) {
         return ts.visitEachChild(
           bearer.addBearerScenarioIdAccessor(node as ts.ClassDeclaration, scenarioId),
           visit,
@@ -32,7 +43,7 @@ export default function componentTransformer({  }: TransformerOptions = {}): ts.
     }
 
     return tsSourceFile => {
-      if (!scenarioId) {
+      if (!scenarioId || !shouldProcessFile(tsSourceFile)) {
         return tsSourceFile
       }
       return visit(tsSourceFile) as ts.SourceFile

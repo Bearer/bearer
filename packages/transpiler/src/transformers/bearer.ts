@@ -17,7 +17,7 @@ export function addBearerScenarioIdAccessor(classNode: ts.ClassDeclaration, scen
       ts.createGetAccessor(
         undefined,
         [],
-        'SCENARIO_ID',
+        Component.scenarioIdAccessor,
         undefined,
         undefined,
         ts.createBlock([ts.createReturn(ts.createLiteral(scenarioId))])
@@ -229,10 +229,7 @@ export function ensureBearerContextInjected(classNode: ts.ClassDeclaration): ts.
   return has ? classNode : addBearerContextProp(classNode)
 }
 
-export function ensureImportsFromCore(
-  tsSourceFile: ts.SourceFile,
-  decorators: Array<Decorators | Types>
-): ts.SourceFile {
+export function ensureImportsFromCore(tsSourceFile: ts.SourceFile, decorators: (Decorators | Types)[]): ts.SourceFile {
   return decorators.reduce((sourceFile, decorator) => ensureHasImportFromCore(sourceFile, decorator), tsSourceFile)
 }
 
