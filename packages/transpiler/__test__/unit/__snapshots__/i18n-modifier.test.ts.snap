@@ -1,0 +1,66 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Scope Event Names file: do-nothing.tsx transformer 1`] = `
+"import { Component } from '@bearer/core';
+@Component({
+    tag: 'do-nothing'
+})
+class DoNothingComponent {
+    render() {
+        return (<div>
+        <span>I'm not affected</span>
+      </div>);
+    }
+}
+"
+`;
+
+exports[`Scope Event Names file: scenario-id-injection.1.tsx transformer 1`] = `
+"import { Component, t, p } from '@bearer/core';
+@Component({
+    tag: 'do-nothing'
+})
+class ComponentRequiringAliasing {
+    fromProperty = () => {
+        return (<span>
+        <bearer-i18n key=\\"something.key\\" default=\\"MyDefault string\\" scope={this.SCENARIO_ID}/>
+      </span>);
+    };
+    get myTranslatedTitle(): string {
+        return t('my.key', 'and my default', { ok: 'ko' });
+    }
+    render() {
+        return (<div>
+        {t('render.t', 'translated')}
+        {p('render.p', 'pluralized')}
+        <bearer-i18n key=\\"other.key\\" default=\\"from the render\\" scope={this.SCENARIO_ID}/>
+      </div>);
+    }
+}
+"
+`;
+
+exports[`Scope Event Names file: scenario-id-injection-with-alias.tsx transformer 1`] = `
+"import { Component, t as tAliased, p as pAliased } from '@bearer/core';
+@Component({
+    tag: 'do-nothing'
+})
+class ComponentWithAliasedImports {
+    fromProperty = () => {
+        return (<span>
+        <bearer-i18n key=\\"something.key\\" default=\\"MyDefault string\\" scope={this.SCENARIO_ID}/>
+      </span>);
+    };
+    get myTranslatedTitle(): string {
+        return t('my.key', 'and my default', { ok: 'ko' });
+    }
+    render() {
+        return (<div>
+        {tAliased('render.t', 'translated')}
+        {pAliased('render.p', 'pluralized')}
+        <bearer-i18n key=\\"other.key\\" default=\\"from the render\\" scope={this.SCENARIO_ID}/>
+      </div>);
+    }
+}
+"
+`;
