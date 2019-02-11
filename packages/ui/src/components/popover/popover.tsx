@@ -82,7 +82,7 @@ export class BearerPopover {
         onClick={this.clickInsidePopover}
         class={`popover direction-${this.direction} ${!this.visible && 'hidden'} aligned-${this.aligned}`}
       >
-        <slot name="popover-container">
+        <slot>
           <div class="popover-container">
             <div class="popover-header">
               <slot name="popover-header">
