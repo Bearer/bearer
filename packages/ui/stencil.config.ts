@@ -29,6 +29,10 @@ export const config: Config = {
     {
       src: 'components/i18n/index.html',
       dest: 'i18n.html'
+    },
+    {
+      src: 'components/popover/index.html',
+      dest: 'popover.html'
     }
   ],
   outputTargets: [
