@@ -28,10 +28,7 @@ export const scopedPluralize = (scope?: string): TPluralizer => (store: I18nStor
   return scopedTranslate(scope)(store)(newKey, defaultValue, vars)
 }
 
-export declare const translate: TTranslatorFunc
-export declare const pluralize: TPluralizerFunc
-
-type TTranslatorFunc = {
+export type TTranslatorFunc = {
   (key: string, defaultValue: string, vars?: Record<string, any>): string
 }
 
@@ -39,14 +36,9 @@ type TTranslator = {
   (store: I18nStore): TTranslatorFunc
 }
 
-type TPluralizerFunc = {
+export type TPluralizerFunc = {
   (key: string, count: number, defaultValue: string, vars?: Record<string, any>): string
 }
 type TPluralizer = {
   (store: I18nStore): TPluralizerFunc
-}
-
-export default {
-  translate,
-  pluralize
 }

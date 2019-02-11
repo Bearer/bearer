@@ -3,7 +3,8 @@ import classNames from './classnames'
 import * as Debug from './debug'
 import EventNames from './event-names'
 import * as Requests from './requests'
-import { translate, pluralize, scopedPluralize, scopedTranslate } from './i18n/index'
+import { TTranslatorFunc, TPluralizerFunc, scopedPluralize, scopedTranslate } from './i18n/index'
+export { TTranslatorFunc, TPluralizerFunc } from './i18n/index'
 
 import * as bearerState from './bearer-state'
 export * from './decorators'
@@ -20,7 +21,8 @@ export const classnames = classNames
  * @param {string} defaultValue -  A default value to use until the key get tranlated
  * @param {object} vars - An object with all required keys to replace from the template.
  */
-export const t = translate
+export declare const t: TTranslatorFunc
+
 /**
  * p: i18n helper function that let you pluralize text easily
  * @param {string} key - Key to use for translation ex: titles.welcome.
@@ -28,7 +30,7 @@ export const t = translate
  * @param {string} defaultValue - A default value to use until the key get tranlated.
  * @param {object} vars - An object with all required keys to replace from the template.
  */
-export const p = pluralize
+export declare const p: TPluralizerFunc
 
 export const scopedT = (scope: string) => scopedTranslate(scope)(Bearer.i18nStore)
 export const scopedP = (scope: string) => scopedPluralize(scope)(Bearer.i18nStore)
