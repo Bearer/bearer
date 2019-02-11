@@ -102,7 +102,7 @@ export class BearerPopover {
             </div>
             <slot name="popover-footer">
               <div class="popover-copyright">
-                Powered by
+                Powered by{' '}
                 <a href="https://bearer.sh" target="_blank">
                   Bearer.sh
                 </a>
