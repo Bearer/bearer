@@ -45,6 +45,10 @@ describe('i18n store', () => {
       expect(instance.get('my.key')).toBe('exists')
     })
 
+    it('retrieves existing value with a scope', () => {
+      expect(instance.get('key', 'my')).toBe('exists')
+    })
+
     it('retrieves existing from the correct locale', () => {
       const instance = new Store(data)
       instance.setLocale('fr')

@@ -1,16 +1,19 @@
-import { translate, pluralize } from './index'
+import { scopedPluralize, scopedTranslate } from './index'
 import { I18nStore, Store } from './store'
 
 describe('i18n.translate', () => {
   it('export a function expecting a store', () => {
-    expect(translate).toBeInstanceOf(Function)
-    expect(translate).toHaveLength(1)
+    expect(scopedTranslate).toBeInstanceOf(Function)
+    expect(scopedTranslate).toHaveLength(1)
   })
 
   it('returns a function', () => {
-    const result = translate(null)
+    const result = scopedTranslate(null)
     expect(result).toBeInstanceOf(Function)
-    expect(result).toHaveLength(3)
+    expect(result).toHaveLength(1)
+    const translate = result(null)
+    expect(translate).toBeInstanceOf(Function)
+    expect(translate).toHaveLength(3)
   })
 
   describe('custom store', () => {
@@ -23,7 +26,7 @@ describe('i18n.translate', () => {
       setLocale: jest.fn(),
       loadLocale: jest.fn()
     }
-    const instance = translate(store)
+    const instance = scopedTranslate(null)(store)
 
     it('returns existing key', () => {
       expect(instance('my.key', 'Default Value')).toEqual('existing value')
@@ -41,14 +44,19 @@ describe('i18n.translate', () => {
 
 describe('i18n.pluralize', () => {
   it('export a function expecting a store', () => {
-    expect(pluralize).toBeInstanceOf(Function)
-    expect(pluralize).toHaveLength(1)
+    expect(scopedPluralize).toBeInstanceOf(Function)
+    expect(scopedPluralize).toHaveLength(1)
   })
 
   it('returns a function', () => {
-    const result = pluralize(null)
+    const result = scopedPluralize(null)
+
     expect(result).toBeInstanceOf(Function)
-    expect(result).toHaveLength(4)
+    expect(result).toHaveLength(1)
+
+    const pluralize = result(null)
+    expect(pluralize).toBeInstanceOf(Function)
+    expect(pluralize).toHaveLength(4)
   })
 
   describe('custom store', () => {
@@ -65,7 +73,7 @@ describe('i18n.pluralize', () => {
       }
     }
     const store = new Store(dictionnary)
-    const instance = pluralize(store)
+    const instance = scopedPluralize(null)(store)
 
     it('returns existing key', () => {
       expect(instance('my.key', 0, 'Default Value')).toEqual('none')

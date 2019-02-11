@@ -5,7 +5,7 @@ import Events from '../event-names'
 const DEFAULT_LOCALE = 'en'
 
 export interface I18nStore {
-  get: (key: string) => string | undefined
+  get: (key: string, scope?: string) => string | undefined
   setLocale: (locale: string) => void
   loadLocale: (locale: string, dictionnary: TransLationObject) => void
 }
@@ -15,8 +15,8 @@ export class Store implements I18nStore {
     this.refreshLocale()
   }
 
-  get(key: string): string {
-    return get(this.translationStore, [this.locale, key].join('.'))
+  get(key: string, scope?: string): string {
+    return get(this.translationStore, [this.locale, scope, key].filter(m => m).join('.'))
   }
 
   setLocale(locale: string): void {

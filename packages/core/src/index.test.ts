@@ -1,4 +1,4 @@
-import Bearer, { t, p } from './index'
+import Bearer, { scopedT, scopedP } from './index'
 
 describe('exports', () => {
   it('has a default', () => {
@@ -6,10 +6,10 @@ describe('exports', () => {
   })
 
   it(' exports t i18n helper', () => {
-    expect(t).toBeInstanceOf(Function)
+    expect(scopedT).toBeInstanceOf(Function)
   })
 
   it(' exports p i18n helper', () => {
-    expect(p).toBeInstanceOf(Function)
+    expect(scopedP).toBeInstanceOf(Function)
   })
 })
