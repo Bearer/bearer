@@ -16,7 +16,7 @@ class DoNothingComponent {
 `;
 
 exports[`Scope Event Names file: scenario-id-injection.1.tsx transformer 1`] = `
-"import { Component, scopedT as t, scopedP as p } from '@bearer/core';
+"import { Component, scopedT, scopedP } from '@bearer/core';
 @Component({
     tag: 'do-nothing'
 })
@@ -43,7 +43,7 @@ var p = scopedP(\\"SPONGE_BOB\\");
 `;
 
 exports[`Scope Event Names file: scenario-id-injection-with-alias.tsx transformer 1`] = `
-"import { Component, scopedT as tAliased, scopedP as pAliased } from '@bearer/core';
+"import { Component, scopedT, scopedP } from '@bearer/core';
 @Component({
     tag: 'do-nothing'
 })

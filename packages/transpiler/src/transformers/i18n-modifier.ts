@@ -41,7 +41,7 @@ export default function i18nModifier(_options: TransformerOptions = {}): ts.Tran
               helperName,
               name: tsImportSpecifier.name.escapedText.toString()
             })
-            return ts.createImportSpecifier(ts.createIdentifier(helperName), tsImportSpecifier.name)
+            return ts.createImportSpecifier(undefined, ts.createIdentifier(helperName))
           }
           case 'p': {
             const helperName = 'scopedP'
@@ -49,7 +49,7 @@ export default function i18nModifier(_options: TransformerOptions = {}): ts.Tran
               helperName,
               name: tsImportSpecifier.name.escapedText.toString()
             })
-            return ts.createImportSpecifier(ts.createIdentifier(helperName), tsImportSpecifier.name)
+            return ts.createImportSpecifier(undefined, ts.createIdentifier(helperName))
           }
         }
         return tsImportSpecifier
@@ -104,7 +104,6 @@ export default function i18nModifier(_options: TransformerOptions = {}): ts.Tran
       if (!aliasCollection.length) {
         return normalizedImports
       }
-
       return injectScopedInstances(normalizedImports, aliasCollection)
     }
   }
