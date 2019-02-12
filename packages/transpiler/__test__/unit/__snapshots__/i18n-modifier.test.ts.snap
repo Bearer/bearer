@@ -37,6 +37,8 @@ class ComponentRequiringAliasing {
       </div>);
     }
 }
+var t = scopedT(\\"SPONGE_BOB\\");
+var p = scopedP(\\"SPONGE_BOB\\");
 "
 `;
 
@@ -62,5 +64,7 @@ class ComponentWithAliasedImports {
       </div>);
     }
 }
+var tAliased = scopedT(\\"SPONGE_BOB\\");
+var pAliased = scopedP(\\"SPONGE_BOB\\");
 "
 `;

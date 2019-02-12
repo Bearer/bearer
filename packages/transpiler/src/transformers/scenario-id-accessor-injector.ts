@@ -22,9 +22,12 @@ export function shouldInject(node: ts.Node): boolean {
   return ts.isClassDeclaration(node) && hasDecoratorNamed(node, Decorators.Component)
 }
 
+export function retrieveScenarioId(): string {
+  return process.env[Env.BEARER_SCENARIO_ID]
+}
 export default function componentTransformer({  }: TransformerOptions = {}): ts.TransformerFactory<ts.SourceFile> {
   return transformContext => {
-    const scenarioId = process.env[Env.BEARER_SCENARIO_ID]
+    const scenarioId = retrieveScenarioId()
 
     function visit(node: ts.Node): ts.VisitResult<ts.Node> {
       // TODO: filter components which really need it
