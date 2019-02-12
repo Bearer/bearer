@@ -30,14 +30,13 @@ function visitJsxSelfClosingElement(node: ts.JsxSelfClosingElement): ts.JsxSelfC
 }
 
 function transformNamedBindings(tsImportSpecifier: ts.ImportSpecifier): ts.ImportSpecifier {
-  if (tsImportSpecifier.propertyName) {
-    switch ((tsImportSpecifier.propertyName as ts.Identifier).escapedText) {
-      case 't': {
-        return ts.createImportSpecifier(ts.createIdentifier('scopedT'), tsImportSpecifier.name)
-      }
-      case 'p': {
-        return ts.createImportSpecifier(ts.createIdentifier('scopedP'), tsImportSpecifier.name)
-      }
+  const importName = (tsImportSpecifier.propertyName || tsImportSpecifier.name) as ts.Identifier
+  switch (importName.escapedText) {
+    case 't': {
+      return ts.createImportSpecifier(ts.createIdentifier('scopedT'), tsImportSpecifier.name)
+    }
+    case 'p': {
+      return ts.createImportSpecifier(ts.createIdentifier('scopedP'), tsImportSpecifier.name)
     }
   }
   return tsImportSpecifier

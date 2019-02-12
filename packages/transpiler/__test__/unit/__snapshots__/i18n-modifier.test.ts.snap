@@ -16,7 +16,7 @@ class DoNothingComponent {
 `;
 
 exports[`Scope Event Names file: scenario-id-injection.1.tsx transformer 1`] = `
-"import { Component, t, p } from '@bearer/core';
+"import { Component, scopedT as t, scopedP as p } from '@bearer/core';
 @Component({
     tag: 'do-nothing'
 })
