@@ -4,14 +4,40 @@
 
 This repository contains
 
-- [Bearer CLI](./packages/cli)
-- [Bearer core](./packages/core)
-- [Bearer intents](./packages/intents)
-- [Bearer templates](./packages/templates)
-- [Bearer transpiler](./packages/transpiler)
-- [Bearer ui](./packages/ui)
+- [@bearer/cli](./packages/cli)
+- [@bearer/core](./packages/core)
+- [create-bearer](./packages/create-bearer)
+- [@bearer/intents](./packages/intents)
+- [@bearer/bearer-cli](./packages/legacy-cli)
+- [@bearer/logger](./packages/logger)
+- [@bearer/node](./packages/node)
+- [@bearer/package-init](./packages/package-init)
+- [@bearer/react](./packages/react)
+- [@bearer/security](./packages/security)
+- [@bearer/transpiler](./packages/transpiler)
+- [@bearer/tsconfig](./packages/tsconfig)
+- [@bearer/tslint-config](./packages/tslint-config)
+- [@bearer/types](./packages/types)
+- [@bearer/ui](./packages/ui)
 
 ## How to get Started
+
+**Install NVM**: [site link](https://github.com/creationix/nvm)
+
+Mac Users:
+
+```bash
+brew install nvm
+```
+*Follow carefully post install instructions*
+
+
+**Install correct node version**
+
+```bash
+nvm install
+nvm use
+```
 
 ---
 
@@ -21,11 +47,9 @@ We use [Lerna](https://github.com/lerna/lerna) to manage dependencies.
 // install dependencies
 yarn install
 
-// install lerna
-yarn global add lerna
 
 // Install dependencies and link packages together
-lerna bootstrap
+yarn lerna bootstrap
 ```
 
 _Now You should be able to go into each packages and run existing command (ex: yarn start)_
