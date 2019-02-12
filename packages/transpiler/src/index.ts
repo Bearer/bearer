@@ -26,6 +26,7 @@ import ReplaceIntentDecorators from './transformers/replace-intent-decorator'
 import RootComponentTransformer from './transformers/root-component-transformer'
 import BearerScenarioIdInjector from './transformers/scenario-id-accessor-injector'
 import EventNameNormalizer from './transformers/event-name-normalizer'
+import I18nModifier from './transformers/i18n-modifier'
 
 /*
  * Transformer modifying AST
@@ -71,6 +72,7 @@ export default class Transpiler {
         PropSetDecorator({ verbose, metadata: this.metadata }),
         bearerCleaning({ verbose, metadata: this.metadata }),
         EventNameNormalizer(),
+        I18nModifier(),
         DumpSourceCode({
           verbose,
           srcDirectory: this.VIEWS_DIRECTORY,

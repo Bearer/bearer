@@ -150,7 +150,7 @@ Object {
 exports[`Transpiler integration test FullComponent.tsx match expectation 1`] = `
 Object {
   "file": "FullComponent.tsx",
-  "postContent": "import { BearerFetch, BearerRef, BearerState, Component, Intent, IntentType, Event, EventEmitter, Prop, Watch, State } from '@bearer/core';
+  "postContent": "import { BearerFetch, BearerRef, BearerState, Component, Intent, IntentType, Event, EventEmitter, scopedT, scopedP, Prop, Watch, State } from '@bearer/core';
 type Panda = {
     fullPandaName: string;
 };
@@ -175,9 +175,12 @@ export class FullComponent {
         return (<bearer-navigator>
         <bearer-navigator-auth-screen scenarioId=\\"SPONGE_BOB\\"/>
         <bearer-navigator-screen navigationTitle=\\"First Screen\\" renderFunc={() => [<bearer-scrollable fetcher={this.fetcher}/>]}/>
-        <bearer-navigator-screen navigationTitle=\\"First Screen\\" renderFunc={() => [<h1>Complex one</h1>,
+        <bearer-navigator-screen navigationTitle=\\"First Screen\\" renderFunc={() => [<h1>
+            <bearer-i18n key=\\"titles.firstScreen\\" default=\\"Complex one\\" scope={this.SCENARIO_ID}/>
+          </h1>,
             <bearer-scrollable fetcher={this.fetcher}/>,
-            <span>this text is fine</span>]}/>
+            <span>{translate('text.paragraphs.firstSpan', 'this text is fine {{value}}', { value: 'Sponge bobd' })}</span>,
+            <span>{pluralize('text.paragraphs.firstSpan', 0, 'Missing translation {{count}}')}</span>]}/>
         <bearer-navigator-screen navigationTitle={({ data }) => data.name} renderFunc={() => [<bearer-scrollable fetcher={this.fetcher}/>]}/>
 
         <bearer-navigator-screen renderFunc={({ data, next, prev }) => (<last-screen next={next} complete={({ complete }) => {
@@ -220,6 +223,8 @@ export class FullComponent {
         this.ducks = state[\\"goats\\"];
     };
 }
+var translate = scopedT(\\"SPONGE_BOB\\");
+var pluralize = scopedP(\\"SPONGE_BOB\\");
 ",
 }
 `;

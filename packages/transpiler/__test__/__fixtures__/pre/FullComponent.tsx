@@ -8,7 +8,9 @@ import {
   IntentType,
   Output,
   Event,
-  EventEmitter
+  EventEmitter,
+  t as translate,
+  p as pluralize
 } from '@bearer/core'
 
 type Panda = {
@@ -45,9 +47,12 @@ export class FullComponent {
           <bearer-scrollable fetcher={this.fetcher} />
         </bearer-navigator-screen>
         <bearer-navigator-screen navigationTitle="First Screen">
-          <h1>Complex one</h1>
+          <h1>
+            <bearer-i18n key="titles.firstScreen" default="Complex one" />
+          </h1>
           <bearer-scrollable fetcher={this.fetcher} />
-          <span>this text is fine</span>
+          <span>{translate('text.paragraphs.firstSpan', 'this text is fine {{value}}', { value: 'Sponge bobd' })}</span>
+          <span>{pluralize('text.paragraphs.firstSpan', 0, 'Missing translation {{count}}')}</span>
           this text is not fine
         </bearer-navigator-screen>
         <bearer-navigator-screen navigationTitle={({ data }) => data.name}>
