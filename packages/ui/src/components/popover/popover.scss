@@ -69,6 +69,7 @@
   max-width: 100vw;
   display: flex;
   flex-direction: column;
+  text-align: left;
 }
 
 .popover-content {
@@ -83,7 +84,7 @@
   display: flex;
 }
 
-.popover-title {
+.popover-heading {
 
   & > h3 {
     margin: 0;
@@ -91,9 +92,8 @@
 }
 
 .popover-actions {
-  margin-top: 8px;
-  
   & > * {
+    margin-top: 8px;
     display: flex;
     justify-content: flex-end;
   }
@@ -102,8 +102,8 @@
 .popover-copyright {
   color: #9198B6;
   position: absolute;
-  left: 8px;
-  bottom: 4px;
+  left: 6px;
+  bottom: 6px;
   font-size: 11px;
   letter-spacing: -0.8px;
 
