@@ -20,7 +20,7 @@
   },
   "devDependencies": {
     "@bearer/cli": "{{bearerTagVersion}}",
-    "@types/node": "latest"
+    "@types/node": "^10.12.25"
   },
   "license": "MIT"
 }
