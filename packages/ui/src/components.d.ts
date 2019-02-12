@@ -257,9 +257,10 @@ declare global {
     interface BearerPopover {
       'aligned': TAlignement;
       'backNav': boolean;
-      'btnProps': JSXElements.BearerButtonAttributes;
+      'button': string;
+      'content': string;
       'direction': TDirection;
-      'header': string;
+      'heading': string;
       'opened': boolean;
       'toggle': (newValue?: boolean) => void;
     }
@@ -762,9 +763,10 @@ declare global {
     export interface BearerPopoverAttributes extends HTMLAttributes {
       'aligned'?: TAlignement;
       'backNav'?: boolean;
-      'btnProps'?: JSXElements.BearerButtonAttributes;
+      'button'?: string;
+      'content'?: string;
       'direction'?: TDirection;
-      'header'?: string;
+      'heading'?: string;
       'onVisibilityChange'?: (event: CustomEvent) => void;
       'opened'?: boolean;
     }
