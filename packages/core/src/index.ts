@@ -15,21 +15,9 @@ export const debug = Debug
 export const classnames = classNames
 
 // Next 2 helpers get rewritten with transpiler
-/**
- * t: i18n helper function that let you translate text easily
- * @param {string} key - Key to use for translation ex: titles.welcome.
- * @param {string} defaultValue -  A default value to use until the key get tranlated
- * @param {object} vars - An object with all required keys to replace from the template.
- */
+
 export declare const t: TTranslatorFunc
 
-/**
- * p: i18n helper function that let you pluralize text easily
- * @param {string} key - Key to use for translation ex: titles.welcome.
- * @param {number} count - Value used as discriminator for translation.
- * @param {string} defaultValue - A default value to use until the key get tranlated.
- * @param {object} vars - An object with all required keys to replace from the template.
- */
 export declare const p: TPluralizerFunc
 
 export const scopedT = (scope: string) => scopedTranslate(scope)(Bearer.i18nStore)

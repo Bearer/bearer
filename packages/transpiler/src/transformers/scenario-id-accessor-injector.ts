@@ -25,6 +25,7 @@ export function shouldInject(node: ts.Node): boolean {
 export function retrieveScenarioId(): string {
   return process.env[Env.BEARER_SCENARIO_ID]
 }
+
 export default function componentTransformer({  }: TransformerOptions = {}): ts.TransformerFactory<ts.SourceFile> {
   return transformContext => {
     const scenarioId = retrieveScenarioId()
