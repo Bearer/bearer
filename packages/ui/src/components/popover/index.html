@@ -6,33 +6,34 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0" />
   <link href="https://cdn.rawgit.com/tabler/tabler/dev/dist/assets/css/tabler.css" rel="stylesheet" />
   <title>Popover test page</title>
-  <style>body { margin: 200px 100px; } div {padding: 8px 0;} .my-popover { padding: 20px; width: 200px; text-align: left; }</style>
+  <style>body { margin: 200px 100px; } section {padding: 8px 0;} </style>
 </head>
 
 <body>
   <h1>Popover test page</h1>
-  <div>
-    <bearer-popover aligned="right" direction="right">
+  <section>
+    <bearer-popover direction="right">
         <bearer-button slot="popover-toggler">Pop me right</bearer-button>
         <div class="my-popover">I'm a down-side popover.</div>
     </bearer-popover>
-  </div>
-  <div style="text-align: center;">
-    <bearer-popover aligned="right" direction="top">
+  </section>
+  <section style="text-align: center;">
+    <bearer-popover direction="top">
         <bearer-button slot="popover-toggler">Pop me up</bearer-button>
         <div class="my-popover">I'm a up side popover.</div>
     </bearer-popover>
-  </div>
-  <div style="text-align: center;">
-    <bearer-popover aligned="right" direction="bottom">
-        <bearer-button slot="popover-toggler">Pop me down</bearer-button>
-        <div class="my-popover">I'm a down-side popover.</div>
-    </bearer-popover>
-  </div>
-  <div style="text-align: right;">
-    <bearer-popover aligned="right" direction="left">
+  </section>
+  <section style="text-align: center;">
+    <bearer-popover direction="bottom">
         <bearer-button slot="popover-toggler">Pop me left</bearer-button>
-        <div class="my-popover">I'm a down-side popover.</div>
+        <div slot="popover-container">I'm a down-side popover.</div>
+    </bearer-popover>
+  </section>
+  <section style="text-align: right;">
+    <bearer-popover direction="left">
+        <bearer-button slot="popover-toggler">Pop me left</bearer-button>
+        <div slot="popover-heading">I'm a heading!</div>
+        <div>I'm a default content.</div>
     </bearer-popover>
   </div>
 </body>

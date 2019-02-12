@@ -17,7 +17,7 @@ export class BearerPopover {
   @Prop({ reflectToAttr: true }) aligned: TAlignement = 'left'
 
   @Prop() button: string
-  @Prop() title: string
+  @Prop() heading: string
   @Prop() content: string
 
   @Prop() backNav: boolean = false
@@ -82,20 +82,20 @@ export class BearerPopover {
         onClick={this.clickInsidePopover}
         class={`popover direction-${this.direction} ${!this.visible && 'hidden'} aligned-${this.aligned}`}
       >
-        <slot>
+        <slot name="popover-container">
           <div class="popover-container">
             <div class="popover-header">
               <slot name="popover-header">
                 {this.backNav && <bearer-navigator-back class="header-arrow" />}
-                <div class="popover-title">
-                  <slot name="popover-title">
-                    <h3>{this.title}</h3>
+                <div class="popover-heading">
+                  <slot name="popover-heading">
+                    <h3>{this.heading}</h3>
                   </slot>
                 </div>
               </slot>
             </div>
             <div class="popover-content">
-              <slot name="popover-content">{this.content}</slot>
+              <slot>{this.content}</slot>
               <div class="popover-actions">
                 <slot name="popover-actions" />
               </div>
