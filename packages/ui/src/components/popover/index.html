@@ -35,12 +35,44 @@
         <div slot="popover-heading">I'm a heading!</div>
         <div>I'm a default content.</div>
     </bearer-popover>
-  </div>
+  </section>
+  <section>
+    <bearer-popover direction="right">
+        <bearer-button slot="popover-toggler">I'm closed</bearer-button>
+        <div slot="popover-heading">I'm a heading!</div>
+        <div>I'm a default content.</div>
+    </bearer-popover>
+    <bearer-popover direction="right" opened="true">
+        <bearer-button slot="popover-toggler">I'm opened</bearer-button>
+        <div slot="popover-heading">I'm a heading!</div>
+        <div>I'm a default content.</div>
+    </bearer-popover>
+  </section>
+  <section style="margin-top: 100px;">
+    <bearer-button kind="secondary" onClick="closeMyPopover()">Close the next popover</bearer-button>
+    <bearer-button kind="secondary" onClick="toggleMyPopover()">Toggle the next popover</bearer-button>
+    <bearer-popover id="my-popover" opened="true">
+      <bearer-button slot="popover-toggler">I'm a popover opened</bearer-button>
+      <div slot="popover-heading">I'm a heading!</div>
+      <div>I'm a default content.</div>
+    </bearer-popover>
+  </section>
 </body>
 <script>
     window.BEARER_CONFIG = {
       integrationHost: 'https://int.staging.bearer.sh/',
       authorizationHost: 'https://int.staging.bearer.sh/',
+    }
+
+    function getMyPopover () { 
+      return document.getElementById('my-popover');
+    }
+    function closeMyPopover() {
+      getMyPopover().removeAttribute('opened');
+    }
+
+    function toggleMyPopover () {
+      getMyPopover().toggle();
     }
 
   </script>
