@@ -30,19 +30,20 @@
     "rollup-plugin-strip": "^1.2.0"
   },
   "devDependencies": {
+    "@babel/core": "^7.2.2",
     "@stencil/dev-server": "latest",
     "@stencil/postcss": "^0.1.0",
     "@stencil/utils": "latest",
+    "@storybook/html": "^4.1.11",
     "@types/autoprefixer": "^9.1.1",
     "@types/jest": "^23.3.13",
     "@types/node": "^10.12.26",
     "autoprefixer": "^9.3.1",
-    "jest": "^23.6.0",
+    "awesome-typescript-loader": "^5.2.1",
+    "babel-loader": "^8.0.5",
     "http-proxy-middleware": "0.19.1",
-    "rollup-plugin-replace": "^2.1.0",
-    "@storybook/html": "^4.1.11",
-    "@babel/core": "^7.2.2",
-    "babel-loader": "^8.0.5"
+    "jest": "^23.6.0",
+    "rollup-plugin-replace": "^2.1.0"
   },
   "repository": {
     "type": "git",
