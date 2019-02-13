@@ -18,7 +18,9 @@
     "test": "jest --no-cache",
     "test.watch": "jest --watch --no-cache",
     "prepare": "yarn build",
-    "prepack": "BUILD=distribution yarn build"
+    "prepack": "BUILD=distribution yarn build",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
   },
   "dependencies": {
     "@bearer/core": "^0.94.1",
@@ -33,9 +35,14 @@
     "@stencil/utils": "latest",
     "@types/autoprefixer": "^9.1.1",
     "@types/jest": "^23.3.13",
+    "@types/node": "^10.12.26",
     "autoprefixer": "^9.3.1",
     "jest": "^23.6.0",
-    "rollup-plugin-replace": "^2.1.0"
+    "http-proxy-middleware": "0.19.1",
+    "rollup-plugin-replace": "^2.1.0",
+    "@storybook/html": "^4.1.11",
+    "@babel/core": "^7.2.2",
+    "babel-loader": "^8.0.5"
   },
   "repository": {
     "type": "git",
