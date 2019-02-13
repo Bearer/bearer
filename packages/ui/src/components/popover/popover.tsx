@@ -30,7 +30,6 @@ export class BearerPopover {
     if (newValue !== null && this._visible !== newValue) {
       console.debug('[BEARER]', 'Popover: visibilityChangeHandler', newValue)
       this._visible = newValue
-      // this.opened = newValue
       this.visibilityChange.emit({ visible: this._visible })
     }
   }
@@ -61,7 +60,8 @@ export class BearerPopover {
   watchOpened(newValue: boolean) {
     if (newValue === this.visible) {
       return
-    }  if (newValue === null || newValue === undefined) {
+    }
+    if (newValue === null || newValue === undefined) {
       this.opened = false
     }
 
