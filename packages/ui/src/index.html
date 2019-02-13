@@ -3,6 +3,8 @@
 
 <head>
   <link href="https://fonts.googleapis.com/css?family=Coiny" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0">
+  <link href="https://cdn.rawgit.com/tabler/tabler/dev/dist/assets/css/tabler.css" rel="stylesheet" />
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0">
   <title>Stencil Component Starter</title>
@@ -12,9 +14,15 @@
       font-family: Coiny
     }
 
+    iframe {
+      width: 100%;
+      height: 100%;
+    }
+
     .overridden {
       font-family: Monaco;
-      --bearer-base-size: 20px;
+      --bearer-base-size: 30px;
+
       --bearer-primary: #815503;
       --bearer-primary-hover: #c5b914;
       --bearer-primary-active: #a53c1d;
@@ -98,29 +106,39 @@
     customElements.define('scenario-placeholder', ScenarioPlaceholder);
 
   </script>
-  <style>
-    body {
-      display: flex;
-      min-height: 100vh;
-      margin: 0;
-      padding: 2vw;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
-    }
-
-    body>div {
-      flex: 1;
-      min-height: 200px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
-
-  </style>
 </head>
 
 <body>
+  <div class="page">
+    <div class="page-main d-flex flex-column">
+      <div class="header collapse d-lg-flex p-0">
+        <div class="container">
+          <div class="row align-items-center">
+            <div class=" col-lg order-lg-first">
+              <ul class="nav nav-tabs border-0 flex-column flex-lg-row">
+                <li class="nav-item">
+                  <a href="/" class="nav-link"><i class="fe fe-home"></i> Home</a>
+                </li>
+                <li class="nav-item">
+                  <a href="/popover.html" class="nav-link"><i class="fe fe-home"></i> Popover</a>
+                </li>
+                <li class="nav-item">
+                  <a href="/" class="nav-link"><i class="fe fe-home"></i> Home</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="my-3 my-md-5">
+        <div class="container">
+          <iframe src="./popover.html" frameborder="0"></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
   <div>
     <h2>Default</h2>
     <scenario-placeholder></scenario-placeholder>
