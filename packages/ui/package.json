@@ -34,6 +34,8 @@
     "@stencil/dev-server": "latest",
     "@stencil/postcss": "^0.1.0",
     "@stencil/utils": "latest",
+    "@storybook/addon-actions": "^4.1.11",
+    "@storybook/addon-console": "^1.1.0",
     "@storybook/html": "^4.1.11",
     "@types/autoprefixer": "^9.1.1",
     "@types/jest": "^23.3.13",
