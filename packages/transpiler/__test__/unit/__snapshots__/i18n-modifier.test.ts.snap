@@ -15,6 +15,22 @@ class DoNothingComponent {
 "
 `;
 
+exports[`Scope Event Names file: functions-component.tsx transformer 1`] = `
+"export default () => (<span>
+    <bearer-i18n key=\\"ok\\" default=\\"a default value\\"/>
+  </span>);
+"
+`;
+
+exports[`Scope Event Names file: functions-component-with-helpers.tsx transformer 1`] = `
+"import { t, p } from '@bearer/core';
+export default () => (<span>
+    {t('key.target', 'default value')}
+    {p('key.target', 0, 'default value')}
+  </span>);
+"
+`;
+
 exports[`Scope Event Names file: scenario-id-injection.1.tsx transformer 1`] = `
 "import { Component, scopedT, scopedP } from '@bearer/core';
 @Component({
