@@ -13,7 +13,7 @@ export class BearerButtonPopover {
   @Event()
   visibilityChange: EventEmitter
 
-  @Prop({ reflectToAttr: true }) kind: BKind = 'action'
+  @Prop({ reflectToAttr: true }) kind: BKind = 'embed'
   @Prop({ reflectToAttr: true, mutable: true }) opened: boolean
   @Prop({ reflectToAttr: true }) direction: TDirection = 'right'
   @Prop({ reflectToAttr: true }) aligned: TAlignement = 'left'

@@ -33,6 +33,10 @@ export const config: Config = {
     {
       src: 'components/popover/index.html',
       dest: 'popover.html'
+    },
+    {
+      src: 'components/Button/index.html',
+      dest: 'button.html'
     }
   ],
   outputTargets: [
