@@ -26,15 +26,14 @@
   &.direction-bottom {
     top: calc(100% + var(--margin));
     transform: translateX(-50%);
-    margin-left: 50%;
+    left: 50%;
   }
 
   &.direction-top {
     bottom: calc(100% + var(--margin));
-    left: 0;
+    left: 50%;
     top: initial;
     transform: translateX(-50%);
-    margin-left: 50%;
   }
 
   &.direction-left {
@@ -79,15 +78,12 @@
 }
 
 .popover-header {
-  margin-top: 0;
-  margin-bottom: var(--vertical-padding);
-  display: flex;
-}
+  margin: 0 0 var(--vertical-padding) 0;
+  padding: 0;
 
-.popover-heading {
-
-  & > h3 {
+  h3 {
     margin: 0;
+    padding: 0;
   }
 }
 

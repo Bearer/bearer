@@ -88,11 +88,7 @@ export class BearerPopover {
             <div class="popover-header">
               <slot name="popover-header">
                 {this.backNav && <bearer-navigator-back class="header-arrow" />}
-                <div class="popover-heading">
-                  <slot name="popover-heading">
-                    <h3>{this.heading}</h3>
-                  </slot>
-                </div>
+                {this.heading && <h3>{this.heading}</h3>}
               </slot>
             </div>
             <div class="popover-content">
