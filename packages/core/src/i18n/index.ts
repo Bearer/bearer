@@ -21,7 +21,8 @@ export const pluralize = (store: I18nStore) => (
   }
   const quantity = count > 1 ? 'many' : count
   const newKey = [key, quantity].join('.')
-  return translate(store)(newKey, defaultValue, vars)
+
+  return translate(store)(newKey, defaultValue, { count, ...vars })
 }
 
 export default {

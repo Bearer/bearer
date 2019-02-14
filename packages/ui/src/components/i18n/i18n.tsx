@@ -4,6 +4,7 @@ import { Component, t, p, Prop, Events, State, Watch } from '@bearer/core'
   tag: 'bearer-i18n'
 })
 export class BearerI18n {
+  @Prop() _key: string // react hack
   @Prop() key: string
   @Prop() default?: string
   @Prop() var?: any
@@ -41,9 +42,10 @@ export class BearerI18n {
   }
 
   render() {
+    const key = this.key || this._key
     if (isNaN(this.count)) {
-      return t(this.key, this.default, this.innerVar)
+      return t(key, this.default, this.innerVar)
     }
-    return p(this.key, this.count, this.default, this.innerVar)
+    return p(key, this.count, this.default, this.innerVar)
   }
 }
