@@ -29,17 +29,13 @@ $bearer-ternary-active-alternate: $bearer-ternary-alternate;
 $bearer-ternary-disabled: #D5E7E1;
 $bearer-ternary-disabled-alternate: #D6DAE7;
 
-
 /*
 * Sizes
 */
-$bearer-button-radius: 0 2px 4px 0 rgba(3, 13, 54, 0.12);
+
 $bearer-font-base: 16px;
 $bearer-decrease-ratio: 14/16;
 $bearer-increase-ratio: 18/16;
-$bearer-button-radius: 4px;
-$bearer-button-vertical-padding: 12px;
-$bearer-button-horizontal-padding: 18px;
 
 /*
  * Shadows
@@ -55,4 +51,10 @@ $bearer-button-action-hover-shadow: 0 2px 4px 0 rgba(3, 13, 54, 0.5);
  * Durations
  */
 
-$bearer-transition-duration: 250ms
+$bearer-transition-duration: 250ms;
+
+/*
+ * Font
+ */
+
+$bearer-font-family: inherit;

@@ -1,135 +1,141 @@
 @import '../theme/vars';
+@import '../theme/vars.buttons';
 
 :host {
-  --primary-color: var(--bearer-primary, #{$bearer-primary});
-  --secondary-color: var(--bearer-secondary, #{$bearer-secondary});
-  --ternary-color: var(--bearer-primary, #{$bearer-ternary});
+  --display: var(--bearer-button-display, #{$bearer-button-display});
   --base-size: var(--bearer-base-size, #{$bearer-font-base});
   --font-size: var(--base-size);
-  --font-color: var(--bearer-primary-font-color, #{$bearer-primary-alternate});
-  --bg-color: var(--primary-color);
-  --bg-hover: var(--bearer-primary-hover, #{$bearer-primary-hover});
-  --bg-active: var(--bearer-primary-active, #{$bearer-primary-active});
-  --vertical-padding: var(--bearer-btn-vertical-padding, #{$bearer-button-vertical-padding});
-  --horizontal-padding: var(--bearer-btn-horizontal-padding, #{$bearer-button-horizontal-padding});
-  --border-radius: var(--bearer-button-border-radius, #{$bearer-button-radius});
-  --shadow: var(--bearer-button-shadow);
-  display: inline-block;
+  --font-color: var(--bearer-font-color, #{$bearer-button-font-color});
+  --font-family: var(--bearer-font-family, #{$bearer-font-family});
+  --border: var(--bearer-button-border, #{$bearer-button-border});
+  --border-radius: var(--bearer-button-border-radius, #{$bearer-button-border-radius});
+  --box-shadow: var(--bearer-button-box-shadow, #{$bearer-button-box-shadow});
+  --padding: var(--bearer-button-padding, #{$bearer-button-padding});
+  --opacity: var(--bearer-button-opacity);
+  --cursor: var(--bearer-button-cursor, #{$bearer-button-cursor});
 }
 
-/**
-* kind
-**/
+// Sizes
+// ----------------------------------
 
-:host([kind="action"]) {
-  --border-radius: var(--bearer-button-action-border-radius, 2px);
-  --font-color: var(--bearer-button-action-font-color, var(--primary-color));
-  --bg-color: var(--bearer-button-action, #FFF);
-  --shadow: var(--bearer-button-action-shadow, #{$bearer-button-action-shadow});
-  --bg-hover: var(--bg-color);
-  --bg-active: var(--bg-color);
+// .btn-small {
+//   --font-size: calc(var(--base-size) * #{$bearer-decrease-ratio});
+//   --padding: var(--bearer-button-padding, #{$bearer-button-small-padding});
+// }
+
+// .btn-large {
+//   --font-size: calc(var(--base-size) * #{$bearer-increase-ratio});
+//   --padding: var(--bearer-button-padding, #{$bearer-button-large-padding});
+// }
+
+// Kinds + States
+// ----------------------------------
+
+.btn-embed {
+  --font-color: var(--bearer-button-embed-font-color, #{$bearer-button-embed-font-color});
+  --background: var(--bearer-button-embed-background, #{$bearer-button-embed-background});
+  --box-shadow: var(--bearer-button-embed-box-shadow, #{$bearer-button-embed-box-shadow});
+  --border: var(--bearer-button-embed-border, #{$bearer-button-embed-border});
+  --border-radius: var(--bearer-button-embed-border-radius, #{$bearer-button-embed-border-radius});
+  --padding: var(--bearer-button-embed-padding, #{$bearer-button-embed-padding});
+
+  &:hover {
+    --background: var(--bearer-button-embed-hover-background, #{$bearer-button-embed-hover-background});
+    --box-shadow: var(--bearer-button-embed-hover-box-shadow, #{$bearer-button-embed-hover-box-shadow});
+  }
+
+  &:active {
+    --background: var(--bearer-button-embed-active-background, #{$bearer-button-embed-active-background});
+    --box-shadow: var(--bearer-button-embed-active-box-shadow, #{$bearer-button-embed-active-box-shadow});
+  }
+
+  &:disabled {
+    --background: var(--bearer-button-embed-active-background, #{$bearer-button-embed-disabled-background});
+    --box-shadow: var(--bearer-button-embed-active-box-shadow, #{$bearer-button-embed-disabled-box-shadow});
+  }
 }
 
-:host([kind="action"]:hover) .btn {
-  --shadow: var(--bearer-button-action-hover-shadow, #{$bearer-button-action-hover-shadow});
+.btn-primary {
+  --background: var(--bearer-button-background, #{$bearer-button-primary-background});
+  
+  &:hover {
+    --background: var(--bearer-button-background, #{$bearer-button-primary-background-hover});
+  }
+
+  &:active {
+    --background: var(--bearer-button-background, #{$bearer-button-primary-background-active});
+  }
+
+  &:disabled {
+    --background: var(--bearer-button-background, #{$bearer-button-primary-background-disabled});
+  }
 }
 
+.btn-secondary {
+  --background: var(--bearer-button-background, #{$bearer-button-secondary-background});
+  --font-color: #{$bearer-button-secondary-font-color};
+  
+  &:hover {
+    --font-color: #{$bearer-button-secondary-hover-font-color};
+  }
+  &:active {
+    --font-color: #{$bearer-button-secondary-active-font-color};
+  }
 
-:host([kind="secondary"]) {
-  --font-color: var(--bearer-secondary-font-color, #{$bearer-secondary-alternate});
-  --bg-color: var(--secondary-color, #{$bearer-secondary});
-  --bg-hover: var(--bearer-secondary-hover, #{$bearer-secondary-hover});
-  --bg-active: var(--bearer-secondary-active, #{$bearer-secondary-active});
+  &:disabled {
+    --font-color: #{$bearer-button-secondary-disabled-font-color};
+  }
 }
 
-/*
-* Sizes
-*/
+.btn-danger {
+  --background: var(--bearer-button-background, #{$bearer-button-danger-background});
+  --font-color: #{$bearer-button-danger-font-color};
+  
+  &:hover {
+    --font-color: #{$bearer-button-danger-hover-font-color};
+  }
+  &:active {
+    --font-color: #{$bearer-button-danger-active-font-color};
+  }
 
-:host([size="small"]) {
-  --font-size: calc(var(--base-size) * #{$bearer-decrease-ratio});
-  --vertical-padding: var(--bearer-btn-small-vertical-padding, 8px);
-  --horizontal-padding: var(--bearer-btn-small-horizontal-padding, 14px)
+  &:disabled {
+    --font-color: #{$bearer-button-danger-disabled-font-color};
+  }
 }
 
-:host([size="large"]) {
-  --font-size: calc(var(--base-size) * #{$bearer-increase-ratio});
-  --vertical-padding: var(--bearer-btn-large-vertical-padding, 14px);
-  --horizontal-padding: var(--bearer-btn-large-horizontal-padding, 24px)
+.btn-error {
+  --background: var(--bearer-button-background, #{$bearer-button-error-background});
+  --font-color: #{$bearer-button-error-font-color};
+  
+  &:hover {
+    --font-color: #{$bearer-button-error-hover-font-color};
+  }
+  &:active {
+    --font-color: #{$bearer-button-error-active-font-color};
+  }
+
+  &:disabled {
+    --font-color: #{$bearer-button-error-disabled-font-color};
+  }
 }
 
-/*
-* States
-*/
+// 
+// ----------------------------------
 
-:host([disabled]) {
-  --font-color: var(--bearer-primary-color-disabled, #{$bearer-primary-disabled});
-  --bg-color: var(--bearer-primary-disabled, #{$bearer-primary-disabled-alternate});
-}
-
-:host(:not([disabled]):hover) {
-  --bg-color: var(--bg-hover)
-}
-
-:host(:not([disabled]):active) {
-  --bg-color: var(--bg-active)
-}
+// Apply styles to btn
+// ----------------------------------
 
 .btn {
-  transition: box-shadow var(--bearer-transition-duration, #{$bearer-transition-duration});
-  font-family: var(--bearer-font-family, inherit);
-  font-size: var(--font-size);
-  line-height: 1.1;
+  display: var(--display);
+  background: var(--background);
+  border: var(--border);
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
   color: var(--font-color);
-  background: var(--bg-color);
-  border-radius: var(--border-radius, 4px);
-  border: none 0px;
-  padding: var(--vertical-padding) var(--horizontal-padding);
-  box-shadow: var(--shadow, 'none');
+  padding: var(--padding);
+  font-size: var(--font-size);
+  font-family: var(--font-family);
+  opacity: var(--opacity, 1);
+  cursor: var(--cursor);
+  outline: initial; // @TODO - setting outline to initial prevent default comportement
 }
-
-/*
-* Tooltip
-*
-* NOTE: We are putting tooltip inside buttons design for now,
-* but tooltip shall be accessible from all UI library elements.
-*/
-
-[data-tooltip]{
-  position:relative;
-  outline: none; /* TBC */
-}
-
-[data-tooltip]::before {
-  content: "";
-  position: absolute;
-  top:-10px;
-  left:50%;
-  transform: translateX(-50%);
-  border-width: 6px 15px 0 15px;
-  border-style: solid;
-  border-color: rgba(0,0,0,0.7) transparent transparent transparent;
-  z-index: 100;
-}
-[data-tooltip]::after {
-  content: attr(data-tooltip);
-  position: absolute;
-  left:50%;
-  top:-10px;
-  transform: translateX(-50%)   translateY(-100%);
-  background: rgba(0,0,0,0.7);
-  text-align: center;
-  color: #fff;
-  padding:8px 15px;
-  font-size: 12px;
-  min-width: 200px;
-  border-radius: 4px;
-  pointer-events: none;
-  font-weight: 600;
-}
-
-[data-tooltip-type="success"]::before { border-top-color: #F0FAF6;}
-[data-tooltip-type="success"]::after {background-color: #F0FAF6; color: #63C995; }
-
-[data-tooltip-type="danger"]::before { border-top-color: #FDF1ED;}
-[data-tooltip-type="danger"]::after { background-color: #FDF1ED; color: #D4562A; }

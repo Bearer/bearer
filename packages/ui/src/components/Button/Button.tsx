@@ -1,6 +1,6 @@
 import { Component, Prop } from '@bearer/core'
 
-export type BKind = 'action' | 'primary' | 'secondary' | 'success' | 'danger' | 'warning' | 'info' | 'light' | 'dark'
+export type BKind = 'embed' | 'primary' | 'secondary' | 'danger' | 'error'
 
 @Component({
   tag: 'bearer-button',
@@ -11,17 +11,21 @@ export class Button {
   @Prop() content: any
   @Prop() type: string
   @Prop({ reflectToAttr: true }) kind: BKind = 'primary'
-  @Prop() size: 'medium' | 'small' | 'large' = 'medium'
   @Prop() as: string = 'button'
-  @Prop() outline: boolean = false
+
+  // @Prop() size: 'medium' | 'small' | 'large' = 'medium'
+  // @Prop() outline: boolean = false
   @Prop() disabled: boolean = false
+
   @Prop({ reflectToAttr: true }) dataTooltip: string
   @Prop({ reflectToAttr: true }) dataTooltipType: string
 
   render() {
     // tslint:disable-next-line variable-name
     const Tag = this.as as any
-    const classes = ['btn', `btn${this.outline ? '-outline' : ''}-${this.kind}`, `btn-${this.size}`]
+    // const classes = ['btn', `btn${this.outline ? '-outline' : ''}-${this.kind}`, `btn-${this.size}`]
+    const classes = ['btn', `btn-${this.kind}`]
+
     return (
       <Tag
         class={classes.join(' ')}
