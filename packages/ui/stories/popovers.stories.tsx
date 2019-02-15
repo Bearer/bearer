@@ -5,20 +5,21 @@ storiesOf('Popover', module)
   .addWithJSX('direction', () => {
     return [
       <bearer-popover direction="right">
-        <span slot="popover-toggler">Toggle me right</span>
-        <div slot="popover-container">I'm it's container.</div>
+        <span slot="popover-button">Toggle me right</span>
+        <div>I'm it's content.</div>
       </bearer-popover>,
       <bearer-popover direction="top">
-        <span slot="popover-toggler">Toggle me up</span>
-        <div slot="popover-container">I'm it's container.</div>
+        <span slot="popover-button">Toggle me up</span>
+        <div>I'm it's content.</div>
       </bearer-popover>,
       <bearer-popover direction="bottom">
-        <span slot="popover-toggler">Toggle me down</span>
-        <div slot="popover-container">I'm it's container.</div>
+        <span slot="popover-button">Toggle me down</span>
+        <div>I'm it's content.</div>
       </bearer-popover>,
       <bearer-popover direction="left">
-        <span slot="popover-toggler">Toggle me left</span>
-        <div slot="popover-container">I'm it's container.</div>
+        <span slot="popover-button">Toggle me left</span>
+        <div slot="popover-header">I'm it's header.</div>
+        <div>I'm it's content.</div>
       </bearer-popover>
     ]
   })
@@ -26,7 +27,9 @@ storiesOf('Popover', module)
     return [
       <bearer-popover opened="true">
         <span slot="popover-toggler">
-          I'm <code>slot-toggler</code>
+          <button>
+            I'm <code>slot-toggler</code>
+          </button>
         </span>
         <div slot="popover-header">
           I'm <code>slot-header</code>.
@@ -43,9 +46,9 @@ storiesOf('Popover', module)
       <br />,
       <br />,
       <br />,
-      <bearer-popover opened="true" direction="bottom" aligned="right">
-        <span slot="popover-toggler">
-          I'm <code>slot-toggler</code>
+      <bearer-popover direction="bottom" aligned="right">
+        <span slot="popover-button">
+          I'm <code>slot-button</code>
         </span>
         <div slot="popover-header">
           I'm <code>slot-header</code>.
@@ -62,7 +65,7 @@ storiesOf('Popover', module)
   .addWithJSX('opened by default', () => {
     return (
       <bearer-popover opened="true">
-        <span slot="popover-toggler">I'm a popover</span>
+        <span slot="popover-button">I'm a popover</span>
         <div slot="popover-container" style={{ padding: '20px' }}>
           I'm opened by default.
         </div>
