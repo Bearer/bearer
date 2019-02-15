@@ -72,3 +72,12 @@ storiesOf('Popover', module)
       </bearer-popover>
     )
   })
+  .addWithJSX('properties', () => {
+    return (
+      <bearer-popover opened="true" button="Toggle me">
+        <div slot="popover-container" style={{ padding: '20px' }}>
+          I'm opened by default.
+        </div>
+      </bearer-popover>
+    )
+  })
