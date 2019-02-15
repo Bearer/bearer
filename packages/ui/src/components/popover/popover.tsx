@@ -16,7 +16,7 @@ export class BearerPopover {
   @Prop({ reflectToAttr: true, mutable: true }) opened: boolean = false
   @Prop({ reflectToAttr: true }) direction: TDirection = 'right'
   @Prop({ reflectToAttr: true }) aligned: TAlignement = 'left'
-  @Prop({ reflectToAttr: true }) kind: BKind = 'secondary'
+  @Prop({ reflectToAttr: true }) kind: BKind = 'embed'
 
   @Prop() button: string
   @Prop() heading: string
