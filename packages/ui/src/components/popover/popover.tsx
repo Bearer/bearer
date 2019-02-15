@@ -76,7 +76,7 @@ export class BearerPopover {
     return [
       // @ts-ignore
       <slot name="popover-toggler" onClick={this.toggleDisplay}>
-        <bearer-button kind={this.kind}>{this.button}</bearer-button>
+        <bearer-button kind={this.kind}>{this.button ? this.button : <slot name="popover-button" />}</bearer-button>
       </slot>,
 
       <div
