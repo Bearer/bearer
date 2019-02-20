@@ -1,5 +1,4 @@
 import { Component, Event, EventEmitter, Method, Prop, State, Watch } from '@bearer/core'
-import { BKind } from '../Button/Button'
 
 export type TAlignement = 'left' | 'right'
 export type TDirection = 'left' | 'right' | 'top' | 'bottom'
@@ -16,9 +15,7 @@ export class BearerPopover {
   @Prop({ reflectToAttr: true, mutable: true }) opened: boolean = false
   @Prop({ reflectToAttr: true }) direction: TDirection = 'right'
   @Prop({ reflectToAttr: true }) aligned: TAlignement = 'left'
-  @Prop({ reflectToAttr: true }) kind: BKind = 'embed'
 
-  @Prop() button: string
   @Prop() heading: string
   @Prop() content: string
 
@@ -76,7 +73,9 @@ export class BearerPopover {
     return [
       // @ts-ignore
       <slot name="popover-toggler" onClick={this.toggleDisplay}>
-        <bearer-button kind={this.kind}>{this.button ? this.button : <slot name="popover-button" />}</bearer-button>
+        <bearer-button kind="embed">
+          <slot name="popover-button" />
+        </bearer-button>
       </slot>,
 
       <div
