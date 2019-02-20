@@ -21,11 +21,19 @@ export type TSaveStatePayload<State = any, ReturnedData = any, ReturnedError = a
 type TBaseAuthContext<TAuthAccessContent> = { authAccess: TAuthAccessContent; [key: string]: any }
 
 export type TOAUTH2AuthContext = TBaseAuthContext<{ accessToken: string }>
+export type TOAUTH1AuthContext = TBaseAuthContext<{ accessToken: string; tokenSecret: string }> & {
+  setup: { consumerKey: string; consumerSecret: string; [key: string]: any }
+}
 export type TNONEAuthContext = TBaseAuthContext<undefined>
 export type TBASICAuthContext = TBaseAuthContext<{ username: string; password: string }>
 export type TAPIKEYAuthContext = TBaseAuthContext<{ apiKey: string }>
 
-export type TAuthContext = TNONEAuthContext | TOAUTH2AuthContext | TBASICAuthContext | TAPIKEYAuthContext
+export type TAuthContext =
+  | TNONEAuthContext
+  | TOAUTH2AuthContext
+  | TOAUTH1AuthContext
+  | TBASICAuthContext
+  | TAPIKEYAuthContext
 
 export type TBearerLambdaContext<AuthContext = TAuthContext, DataContext = {}> = DataContext &
   AuthContext & {
