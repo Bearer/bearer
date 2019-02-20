@@ -257,11 +257,9 @@ declare global {
     interface BearerPopover {
       'aligned': TAlignement;
       'backNav': boolean;
-      'button': string;
       'content': string;
       'direction': TDirection;
       'heading': string;
-      'kind': BKind;
       'opened': boolean;
       'toggle': (newValue?: boolean) => void;
     }
@@ -764,11 +762,9 @@ declare global {
     export interface BearerPopoverAttributes extends HTMLAttributes {
       'aligned'?: TAlignement;
       'backNav'?: boolean;
-      'button'?: string;
       'content'?: string;
       'direction'?: TDirection;
       'heading'?: string;
-      'kind'?: BKind;
       'onVisibilityChange'?: (event: CustomEvent) => void;
       'opened'?: boolean;
     }
