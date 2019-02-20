@@ -12,14 +12,14 @@ export class AuthenticationListener {
   askAuthorization = (authRefId?: string) => {
     console.debug('[BEARER]', 'authenticate', this.SCENARIO_ID, this.bearerContext.setupId)
     Bearer.instance.askAuthorizations({
+      authRefId,
       scenarioId: this.SCENARIO_ID,
-      setupId: this.bearerContext.setupId,
-      authRefId
+      setupId: this.bearerContext.setupId
     })
   }
 
-  revokeAuthorization = () => {
-    Bearer.instance.revokeAuthorization(this.SCENARIO_ID)
+  revokeAuthorization = (authRefId?: string) => {
+    Bearer.instance.revokeAuthorization(this.SCENARIO_ID, authRefId)
   }
 
   componentDidLoad() {

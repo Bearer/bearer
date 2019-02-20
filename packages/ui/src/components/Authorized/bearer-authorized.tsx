@@ -3,7 +3,7 @@ import { Component, Method, Prop, State } from '@bearer/core'
 import { AuthenticationListener } from '../../utils/with-authentication'
 
 export type FWithAuthenticate = (params: { authenticate(): Promise<boolean> }) => any
-export type FWithRevoke = (params: { revoke(): Promise<boolean> }) => any
+export type FWithRevoke = (params: { revoke(authRefId: string): Promise<boolean> }) => any
 
 // TODO: scope  authenticatePromise per scenario/setup
 // @WithAuthentication()
@@ -69,8 +69,8 @@ export class BearerAuthorized extends AuthenticationListener {
   }
 
   @Method()
-  revoke() {
-    this.revokePromise()
+  revoke(authRefId: string) {
+    this.revokePromise(authRefId)
   }
 
   authenticatePromise = (authRefId?: string): Promise<boolean> => {
@@ -82,9 +82,13 @@ export class BearerAuthorized extends AuthenticationListener {
     return promise
   }
 
-  revokePromise = (): Promise<boolean> => {
-    this.revokeAuthorization()
-    return Promise.resolve(true)
+  revokePromise = (authRefId: string): Promise<boolean> => {
+    const promise = new Promise<boolean>((resolve, reject) => {
+      this.pendingAuthorizationResolve = resolve
+      this.pendingAuthorizationReject = reject
+    })
+    this.revokeAuthorization(authRefId)
+    return promise
   }
 
   render() {

@@ -68,7 +68,7 @@ declare global {
       'authenticate': (authRefId?: string) => void;
       'renderAuthorized': FWithRevoke;
       'renderUnauthorized': FWithAuthenticate;
-      'revoke': () => void;
+      'revoke': (authRefId: string) => void;
       'scenarioId': string;
     }
 
@@ -197,6 +197,7 @@ declare global {
     }
 
     interface BearerNavigatorAuthScreen {
+      'authId': string;
       'getTitle': () => string;
       'scenarioId': string;
       'willAppear': () => void;
@@ -699,6 +700,7 @@ declare global {
     }
 
     export interface BearerNavigatorAuthScreenAttributes extends HTMLAttributes {
+      'authId'?: string;
       'onScenarioAuthenticate'?: (event: CustomEvent) => void;
       'onStepCompleted'?: (event: CustomEvent) => void;
       'scenarioId'?: string;

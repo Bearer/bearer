@@ -22,6 +22,9 @@ export class BearerNavigatorAuthScreen extends AuthenticationListener {
   @Prop()
   scenarioId = 'BEARER_SCENARIO_ID'
 
+  @Prop()
+  authId: string
+
   @Method()
   willAppear() {
     console.debug('[BEARER]', 'Auth screen willAppear')
@@ -59,8 +62,8 @@ export class BearerNavigatorAuthScreen extends AuthenticationListener {
       .catch(console.error)
   }
 
-  onRevokeClick = (revoke: () => Promise<boolean>) => {
-    revoke()
+  onRevokeClick = (revoke: (authRefId: string) => Promise<boolean>) => {
+    revoke(this.authId)
       .then(this.onRevoked)
       .catch(console.error)
   }
