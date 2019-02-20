@@ -146,9 +146,10 @@ export default class Bearer {
         .catch(iframeError)
     })
 
-  revokeAuthorization = (scenarioId: string): void => {
+  revokeAuthorization = (scenarioId: string, authId: string): void => {
     postRobot
       .send(this.iframe, Events.REVOKE, {
+        authId,
         scenarioId,
         clientId: Bearer.config.clientId
       })
