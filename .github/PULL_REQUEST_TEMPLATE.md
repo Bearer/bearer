@@ -13,6 +13,7 @@
 - create-bearer
 - @bearer/intents
 - @bearer/legacy-cli
+- @bearer/js
 - @bearer/react
 - @bearer/transpiler
 - @bearer/tslint-config
