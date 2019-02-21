@@ -35,6 +35,7 @@ const createConfiguration = ({ input, output }) => ({
   plugins: [
     ...plugins,
     replace({
+      BEARER_VERSION: pkg.version,
       __DEV__: mode === 'development',
       'process.env.NODE_ENV': JSON.stringify('production')
     }),

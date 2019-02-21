@@ -1,6 +1,6 @@
 {
   "name": "@bearer/js",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A JavaScript library for working with Bearer integrations",
   "jsdelivr": "lib/bearer.production.min.js",
   "unpkg": "lib/bearer.production.min.js",
@@ -10,6 +10,9 @@
   "author": "Bearer Team<engineering@bearer.sh>",
   "license": "MIT",
   "private": false,
+  "files": [
+    "lib/"
+  ],
   "devDependencies": {
     "@bearer/tsconfig": "^0.95.1",
     "@types/jest": "^23.3.13",
