@@ -1,0 +1,33 @@
+{
+  "name": "@bearer/js",
+  "version": "0.0.1",
+  "description": "A JavaScript library for working with Bearer integrations",
+  "jsdelivr": "lib/bearer.production.min.js",
+  "unpkg": "lib/bearer.production.min.js",
+  "main": "lib/cjs/index.js",
+  "module": "lib/es/index.js",
+  "repository": "https://github.com/Bearer/bearer/packages/js",
+  "author": "Bearer Team<engineering@bearer.sh>",
+  "license": "MIT",
+  "private": false,
+  "devDependencies": {
+    "@bearer/tsconfig": "^0.95.1",
+    "@types/jest": "^23.3.13",
+    "jest": "^23.6.0",
+    "rollup-plugin-commonjs": "^9.2.0",
+    "rollup-plugin-filesize": "^6.0.1",
+    "rollup-plugin-node-resolve": "^4.0.0",
+    "rollup-plugin-typescript2": "^0.19.2",
+    "ts-jest": "^23.10.5",
+    "typescript": "^3.3.3"
+  },
+  "scripts": {
+    "start": "yarn build -w",
+    "build": "rollup -c",
+    "clean": "rm -rf lib",
+    "prepack": "yarn prepare",
+    "prepare": "yarn clean && BUILD=distribution NODE_ENV=production yarn build",
+    "test": "jest",
+    "test:ci": "jest --coverage"
+  }
+}

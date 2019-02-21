@@ -1,0 +1,9 @@
+{
+  "extends": "@bearer/tsconfig",
+  "compilerOptions": {
+    "target": "es6",
+    "strict": true,
+    "esModuleInterop": true
+  },
+  "include": ["src/"]
+}
