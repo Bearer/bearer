@@ -92,29 +92,31 @@ export default class Bearer {
   /**
    * retrieve corresponding integration asset url
    */
-  sendTags = (tags: string[]): Promise<boolean> => {
+  sendTags = async (tags: string[]): Promise<boolean> => {
     if (!tags.length) {
       return Promise.resolve(true)
     }
     logger('fetching tag assets: %j', tags)
-    return new Promise((resolve, reject) => {
-      const req = new XMLHttpRequest()
-      req.onload = _ => {
-        if (req.status > 299) {
-          return reject(new Error(`Error while fetching integration tag names: ${JSON.parse(req.responseText)}`))
-        }
-        const integrations: TIntegration[] = JSON.parse(req.responseText)
-        integrations.map(integration => {
-          if (!document.querySelector(`#${getScriptId(integration.uuid)}`)) {
-            document.body.appendChild(getScriptDOM(this.clientId, integration))
-          }
-        })
-        resolve(true)
+    try {
+      const response = await fetch('BEARER_PARSE_TAGS_URI', {
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ tags, clientId: this.clientId }),
+        method: 'POST'
+      })
+      if (response.status > 299) {
+        throw new Error(`Error while fetching integration tag names: ${tags}`)
       }
-      req.open('POST', 'BEARER_PARSE_TAGS_URI', true)
-      req.setRequestHeader('Content-Type', 'application/json')
-      req.send(JSON.stringify({ tags, clientId: this.clientId }))
-    })
+      const integrations: TIntegration[] = await response.json()
+
+      integrations.map(integration => {
+        if (!document.querySelector(`#${getScriptId(integration.uuid)}`)) {
+          document.body.appendChild(getScriptDOM(this.clientId, integration))
+        }
+      })
+      return true
+    } catch (e) {
+      return false
+    }
   }
 }
 
