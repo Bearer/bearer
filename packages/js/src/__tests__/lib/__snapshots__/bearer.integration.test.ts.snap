@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`e2e testing inject scripts 1`] = `
+<body>
+  
+    
+  <bearer-something />
+  
+    
+  <bearer-patrick />
+  
+    
+  <spongebob-something />
+  
+    
+  <notmatching-anything />
+  
+  
+  <script
+    id="bearer-patrick"
+    src="patrick-url?clientId=provided-client-id"
+    type="text/javascript"
+  />
+  <script
+    id="bearer-something"
+    src="something-url?clientId=provided-client-id"
+    type="text/javascript"
+  />
+</body>
+`;

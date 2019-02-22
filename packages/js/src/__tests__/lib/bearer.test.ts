@@ -1,6 +1,6 @@
 import Bearer, { findElements } from '../../lib/bearer'
 
-const clientId = ''
+const clientId = 'a-client-id'
 
 describe('main', () => {
   it('exports a Bearer class', () => {
@@ -60,9 +60,10 @@ describe('findElements', () => {
       <bearer-something></bearer-something>
       <bearer-patrick></bearer-patrick>
       <spongebob-something></spongebob-something>
-      <notmatching-something></notmatching-something>
+      <notmatching-anything></notmatching-anything>
     `
   })
+
   describe('matching elements from default', () => {
     it('returns lowercased matching tab names', () => {
       expect(findElements(document.querySelectorAll('*'))).toEqual(['bearer-something', 'bearer-patrick'])
@@ -73,19 +74,5 @@ describe('findElements', () => {
     it('returns lowercased matching tab names', () => {
       expect(findElements(document.querySelectorAll('*'), /^spongebob-/i)).toEqual(['spongebob-something'])
     })
-  })
-})
-
-describe('sd', () => {
-  it('sd', async () => {
-    document.body.innerHTML = `
-    <bearer-something></bearer-something>
-    <bearer-patrick></bearer-patrick>
-    <spongebob-something></spongebob-something>
-    <notmatching-something></notmatching-something>
-  `
-    new Bearer('ok', { refreshDebounceDelay: 1 })
-    await new Promise((resolve, _reject) => setTimeout(resolve, 300))
-    expect(document.body).toMatchSnapshot()
   })
 })

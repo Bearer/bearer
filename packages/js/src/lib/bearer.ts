@@ -1,5 +1,4 @@
 import debounce from 'debounce'
-import logger from './logger'
 import { TIntegration } from './types'
 
 const prefix = 'bearer'
@@ -17,8 +16,6 @@ export default class Bearer {
 
   constructor(readonly clientId: string, options?: Partial<TBearerOptions>) {
     this.config = { ...options, ...DEFAULT_OPTIONS }
-
-    logger('init with config: %j', this.config)
     this.debounceRefresh = debounce(this.loadMissingIntegrations, this.config.refreshDebounceDelay)
     this.initialIntegrationLoading()
     if (this.config.domObserver) {
@@ -31,16 +28,16 @@ export default class Bearer {
    */
   loadMissingIntegrations = () => {
     const elements = findElements(document.getElementsByTagName('*'))
-    this.sendTags(elements.filter(this.missingIntegration))
+    this.sendTags(elements.filter(this.registeredIntegration))
   }
 
   /**
-   * check wether if an integration is missing
+   * check wether if an integration is resgistered
    */
-  missingIntegration = (tagName: string): boolean => {
+  registeredIntegration = (tagName: string): boolean => {
     this.registeredIntegrations[tagName] =
       this.registeredIntegrations[tagName] || document.createElement(tagName).constructor !== HTMLElement
-    return !this.registeredIntegrations[tagName]
+    return this.registeredIntegrations[tagName]
   }
 
   /**
@@ -96,7 +93,6 @@ export default class Bearer {
     if (!tags.length) {
       return Promise.resolve(true)
     }
-    logger('fetching tag assets: %j', tags)
     try {
       const response = await fetch('BEARER_PARSE_TAGS_URI', {
         headers: { 'content-type': 'application/json' },
