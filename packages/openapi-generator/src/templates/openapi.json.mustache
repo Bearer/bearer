@@ -1,0 +1,61 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "description": "openapi definition file for {{integrationName}}",
+    "version": "0.0.1",
+    "title": "{{integrationName}}",
+    "contact": { "email": "bearer@bearer.sh" },
+    "license": { "name": "MIT" }
+  },
+  "servers": [{ "url": "https://int.bearer.sh/api/v2/intents/backend/" }],
+  "tags": [
+    {
+      "name": "integration",
+      "description": "List of endpoints providing backend to backend integration with {{integrationName}}",
+      "externalDocs": { "description": "Find out more", "url": "https://www.bearer.sh" }
+    }
+  ],
+  "paths": {
+    {{#schemas}}
+    "/{{integrationUuid}}/{{intentName}}": {
+      "post": {
+        "parameters": [
+          {
+            "in": "header",
+            "name": "authorization",
+            "schema": { "type": "string" },
+            "description": "API Key",
+            "required": true
+          },
+          {{#oauth2}}
+          {
+            "name": "authId",
+            "schema": { "type": "string", "format": "uuid" },
+            "in": "query",
+            "description": "User Identifier",
+            "required": true
+          }
+          {{/oauth2}}
+        ],
+        "summary": "{{intentName}}",
+        "requestBody": { "content": { "application/json": { "schema": { {{{typeSchema.requestBody}}} } } } },
+        "responses": {
+          "200": { "description": "Share", "content": { "application/json": { "schema": { {{{typeSchema.response}}} } } } },
+          "401": {
+            "description": "Access forbidden",
+            "content": {
+              "application/json": { "schema": { "type": "object", "properties": { "error": { "type": "string" } } } }
+            }
+          },
+          "403": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": { "schema": { "type": "object", "properties": { "error": { "type": "string" } } } }
+            }
+          }
+        }
+      }
+    },
+    {{/schemas}}
+  }
+}
