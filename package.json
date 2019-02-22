@@ -11,7 +11,10 @@
     ]
   },
   "lint-staged": {
-    "*.{js,css,md,tsx,ts,json}": [
+    "*.{md}": [
+      "prettier --write"
+    ],
+    "*.{js,css,tsx,ts,json}": [
       "prettier --write",
       "tslint -c tslint.json --fix",
       "git add"

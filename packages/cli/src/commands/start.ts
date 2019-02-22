@@ -38,7 +38,7 @@ export default class Start extends BaseLegacyCommand {
     await GenerateSetup.run(['--silent'])
     await GenerateSpec.run(['--silent'])
     await PrepareViews.run(['--silent'])
-    await GenerateApiDocumenation.run(['--silent', '--soft'])
+    await GenerateApiDocumenation.run(['--silent'])
 
     this.runLegacy(['start', ...cmdArgs])
   }

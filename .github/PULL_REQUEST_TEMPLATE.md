@@ -14,6 +14,7 @@
 - @bearer/intents
 - @bearer/legacy-cli
 - @bearer/js
+- @bearer/openapi-generator
 - @bearer/react
 - @bearer/transpiler
 - @bearer/tslint-config

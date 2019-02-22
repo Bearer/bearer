@@ -1,0 +1,308 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`generators build generates openapi documentation 1`] = `
+"{
+  \\"openapi\\": \\"3.0.0\\",
+  \\"info\\": {
+    \\"description\\": \\"openapi definition file for test\\",
+    \\"version\\": \\"0.0.1\\",
+    \\"title\\": \\"test\\",
+    \\"contact\\": {
+      \\"email\\": \\"bearer@bearer.sh\\"
+    },
+    \\"license\\": {
+      \\"name\\": \\"MIT\\"
+    }
+  },
+  \\"servers\\": [
+    {
+      \\"url\\": \\"https://int.bearer.sh/api/v2/intents/backend/\\"
+    }
+  ],
+  \\"tags\\": [
+    {
+      \\"name\\": \\"integration\\",
+      \\"description\\": \\"List of endpoints providing backend to backend integration with test\\",
+      \\"externalDocs\\": {
+        \\"description\\": \\"Find out more\\",
+        \\"url\\": \\"https://www.bearer.sh\\"
+      }
+    }
+  ],
+  \\"paths\\": {
+    \\"/123-test/object-literal-type\\": {
+      \\"post\\": {
+        \\"parameters\\": [
+          {
+            \\"in\\": \\"header\\",
+            \\"name\\": \\"authorization\\",
+            \\"schema\\": {
+              \\"type\\": \\"string\\"
+            },
+            \\"description\\": \\"API Key\\",
+            \\"required\\": true
+          },
+          {
+            \\"name\\": \\"authId\\",
+            \\"schema\\": {
+              \\"type\\": \\"string\\",
+              \\"format\\": \\"uuid\\"
+            },
+            \\"in\\": \\"query\\",
+            \\"description\\": \\"User Identifier\\",
+            \\"required\\": true
+          }
+        ],
+        \\"summary\\": \\"object-literal-type\\",
+        \\"requestBody\\": {
+          \\"content\\": {
+            \\"application/json\\": {
+              \\"schema\\": {
+                \\"type\\": \\"object\\",
+                \\"properties\\": {
+                  \\"params\\": {
+                    \\"type\\": \\"object\\",
+                    \\"properties\\": {
+                      \\"inlineParam\\": {
+                        \\"type\\": \\"string\\"
+                      },
+                      \\"stringEnum\\": {},
+                      \\"inlineNumber\\": {
+                        \\"type\\": \\"number\\"
+                      },
+                      \\"nestedObject\\": {
+                        \\"type\\": \\"object\\",
+                        \\"properties\\": {
+                          \\"name\\": {
+                            \\"type\\": \\"string\\"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        \\"responses\\": {
+          \\"200\\": {
+            \\"description\\": \\"object-literal-type\\",
+            \\"content\\": {
+              \\"application/json\\": {
+                \\"schema\\": {
+                  \\"type\\": \\"object\\",
+                  \\"properties\\": {
+                    \\"data\\": {
+                      \\"type\\": \\"object\\",
+                      \\"properties\\": {
+                        \\"expectedData\\": {
+                          \\"type\\": \\"array\\",
+                          \\"items\\": {
+                            \\"type\\": \\"string\\"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          \\"401\\": {
+            \\"description\\": \\"Access forbidden\\",
+            \\"content\\": {
+              \\"application/json\\": {
+                \\"schema\\": {
+                  \\"type\\": \\"object\\",
+                  \\"properties\\": {
+                    \\"error\\": {
+                      \\"type\\": \\"string\\"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          \\"403\\": {
+            \\"description\\": \\"Unauthorized\\",
+            \\"content\\": {
+              \\"application/json\\": {
+                \\"schema\\": {
+                  \\"type\\": \\"object\\",
+                  \\"properties\\": {
+                    \\"error\\": {
+                      \\"type\\": \\"string\\"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    \\"/123-test/type-alias\\": {
+      \\"post\\": {
+        \\"parameters\\": [
+          {
+            \\"in\\": \\"header\\",
+            \\"name\\": \\"authorization\\",
+            \\"schema\\": {
+              \\"type\\": \\"string\\"
+            },
+            \\"description\\": \\"API Key\\",
+            \\"required\\": true
+          },
+          {
+            \\"name\\": \\"authId\\",
+            \\"schema\\": {
+              \\"type\\": \\"string\\",
+              \\"format\\": \\"uuid\\"
+            },
+            \\"in\\": \\"query\\",
+            \\"description\\": \\"User Identifier\\",
+            \\"required\\": true
+          }
+        ],
+        \\"summary\\": \\"type-alias\\",
+        \\"requestBody\\": {
+          \\"content\\": {
+            \\"application/json\\": {
+              \\"schema\\": {
+                \\"type\\": \\"object\\",
+                \\"properties\\": {
+                  \\"aliasParam\\": {
+                    \\"type\\": \\"string\\"
+                  },
+                  \\"stringEnum\\": {},
+                  \\"inlineNumber\\": {
+                    \\"type\\": \\"number\\"
+                  },
+                  \\"nestedObject\\": {
+                    \\"type\\": \\"object\\",
+                    \\"properties\\": {
+                      \\"name\\": {
+                        \\"type\\": \\"string\\"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        \\"responses\\": {
+          \\"200\\": {
+            \\"description\\": \\"type-alias\\",
+            \\"content\\": {
+              \\"application/json\\": {
+                \\"schema\\": {
+                  \\"type\\": \\"object\\",
+                  \\"properties\\": {}
+                }
+              }
+            }
+          },
+          \\"401\\": {
+            \\"description\\": \\"Access forbidden\\",
+            \\"content\\": {
+              \\"application/json\\": {
+                \\"schema\\": {
+                  \\"type\\": \\"object\\",
+                  \\"properties\\": {
+                    \\"error\\": {
+                      \\"type\\": \\"string\\"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          \\"403\\": {
+            \\"description\\": \\"Unauthorized\\",
+            \\"content\\": {
+              \\"application/json\\": {
+                \\"schema\\": {
+                  \\"type\\": \\"object\\",
+                  \\"properties\\": {
+                    \\"error\\": {
+                      \\"type\\": \\"string\\"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    \\"/123-test/undefined-params-and-return\\": {
+      \\"post\\": {
+        \\"parameters\\": [
+          {
+            \\"in\\": \\"header\\",
+            \\"name\\": \\"authorization\\",
+            \\"schema\\": {
+              \\"type\\": \\"string\\"
+            },
+            \\"description\\": \\"API Key\\",
+            \\"required\\": true
+          }
+        ],
+        \\"summary\\": \\"undefined-params-and-return\\",
+        \\"requestBody\\": {
+          \\"content\\": {
+            \\"application/json\\": {}
+          }
+        },
+        \\"responses\\": {
+          \\"200\\": {
+            \\"description\\": \\"undefined-params-and-return\\",
+            \\"content\\": {
+              \\"application/json\\": {
+                \\"schema\\": {
+                  \\"type\\": \\"object\\",
+                  \\"properties\\": {
+                    \\"data\\": {}
+                  }
+                }
+              }
+            }
+          },
+          \\"401\\": {
+            \\"description\\": \\"Access forbidden\\",
+            \\"content\\": {
+              \\"application/json\\": {
+                \\"schema\\": {
+                  \\"type\\": \\"object\\",
+                  \\"properties\\": {
+                    \\"error\\": {
+                      \\"type\\": \\"string\\"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          \\"403\\": {
+            \\"description\\": \\"Unauthorized\\",
+            \\"content\\": {
+              \\"application/json\\": {
+                \\"schema\\": {
+                  \\"type\\": \\"object\\",
+                  \\"properties\\": {
+                    \\"error\\": {
+                      \\"type\\": \\"string\\"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}"
+`;
