@@ -14,7 +14,15 @@ export default [
       file: pkg.browser,
       format: 'iife'
     },
-    plugins: [typescript(), resolve(), commonjs(), terser()]
+    plugins: [
+      typescript(),
+      builtins(),
+      resolve({
+        browser: true
+      }),
+      commonjs({}),
+      terser()
+    ]
   },
 
   // CommonJS (for Node) and ES module (for bundlers) build.
@@ -25,12 +33,18 @@ export default [
   // `file` and `format` for each target)
   {
     input: 'src/logger.ts',
-    output: { file: pkg.module, format: 'es' },
+    output: {
+      file: pkg.module,
+      format: 'es'
+    },
     plugins: [typescript(), builtins(), resolve(), commonjs(), terser()]
   },
   {
     input: 'src/logger.ts',
-    output: { file: pkg.main, format: 'cjs' },
-    plugins: [typescript(), resolve(), commonjs(), terser()]
+    output: {
+      file: pkg.main,
+      format: 'cjs'
+    },
+    plugins: [typescript(), builtins(), resolve(), commonjs(), terser()]
   }
 ]
