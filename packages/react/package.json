@@ -26,6 +26,7 @@
     "url": "https://github.com/Bearer/bearer/issues"
   },
   "devDependencies": {
+    "@bearer/js": "^0.96.0",
     "@bearer/package-init": "^0.78.0",
     "@commitlint/cli": "^7.3.2",
     "@commitlint/config-conventional": "^7.3.1",
@@ -33,7 +34,6 @@
     "@types/jest": "^23.3.13",
     "@types/lodash.kebabcase": "^4.1.4",
     "@types/react": "^16.7.17",
-    "@types/react-helmet": "^5.0.7",
     "@types/react-test-renderer": "^16.0.3",
     "commitlint": "^7.3.2",
     "cz-conventional-changelog": "^2.1.0",
@@ -49,11 +49,11 @@
     "typescript": "^3.2.4"
   },
   "peerDependencies": {
+    "@bearer/js": "^0.96.0",
     "react": "^16.6.0-0"
   },
   "dependencies": {
-    "lodash.kebabcase": "^4.1.1",
-    "react-helmet": "^5.2.0"
+    "lodash.kebabcase": "^4.1.1"
   },
   "config": {
     "commitizen": {

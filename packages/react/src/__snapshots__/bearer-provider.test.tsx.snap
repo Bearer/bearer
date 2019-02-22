@@ -1,20 +1,14 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`BearerProvider allow custom integration host 1`] = `
-<React.Fragment>
-  <Unknown
-    clientId="abc123"
-    intHost="https://int.bearer.sh/v2/"
-  />
-  <Context.Provider
-    value={
-      Object {
-        "handlePropUpdates": [Function],
-        "state": Object {},
-      }
+<Context.Provider
+  value={
+    Object {
+      "handlePropUpdates": [Function],
+      "state": Object {},
     }
-  />
-</React.Fragment>
+  }
+/>
 `;
 
 exports[`BearerProvider default state is sent to context components 1`] = `
@@ -29,17 +23,12 @@ Array [
 `;
 
 exports[`BearerProvider renders basic provider tag 1`] = `
-<React.Fragment>
-  <Unknown
-    clientId="abc123"
-  />
-  <Context.Provider
-    value={
-      Object {
-        "handlePropUpdates": [Function],
-        "state": Object {},
-      }
+<Context.Provider
+  value={
+    Object {
+      "handlePropUpdates": [Function],
+      "state": Object {},
     }
-  />
-</React.Fragment>
+  }
+/>
 `;

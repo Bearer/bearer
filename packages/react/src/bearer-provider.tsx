@@ -1,11 +1,10 @@
 import kebabCase from 'lodash.kebabcase'
 import * as React from 'react'
-
-import BearerLoader from './bearer-loader'
+import bearer from '@bearer/js'
 
 interface IBearerProviderProps {
   clientId: string
-  intHost?: string
+  intHost?: string // unused for now
   initialContext?: any
   onUpdate?(currentState: any): void
 }
@@ -37,12 +36,11 @@ export default class BearerProvider extends React.Component<IBearerProviderProps
       handlePropUpdates: this.handlePropUpdates,
       state: this.state
     }
-    return (
-      <React.Fragment>
-        <BearerLoader clientId={this.props.clientId} intHost={this.props.intHost} />
-        <BearerContext.Provider value={contextValue}>{this.props.children}</BearerContext.Provider>
-      </React.Fragment>
-    )
+    return <BearerContext.Provider value={contextValue}>{this.props.children}</BearerContext.Provider>
+  }
+
+  componentDidMount() {
+    bearer(this.props.clientId)
   }
 
   public componentDidUpdate(_prevProps: IBearerProviderProps, prevState: any) {
