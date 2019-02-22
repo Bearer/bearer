@@ -1,7 +1,6 @@
-import fs from 'fs'
-import Mustache from 'mustache'
 import path from 'path'
 import ts from 'typescript'
+import { topOfSpec, specPath } from './openapi-template'
 
 import { convertType } from './convert-type'
 
@@ -20,23 +19,6 @@ function findActionMethod(node: ts.ClassDeclaration): ts.MethodDeclaration | und
   }) as ts.MethodDeclaration
 }
 
-/**
- *  Convert intent types to json schemas
- */
-
-function serializeParameters(sym: ts.Symbol | undefined, node: ts.Node, checker: ts.TypeChecker) {
-  if (sym) {
-    const typ = checker.getTypeOfSymbolAtLocation(sym, node)
-    if (typ.aliasTypeArguments) {
-      let index = 0
-      if (checker.typeToString(typ).startsWith('TSaveActionEvent')) {
-        index = 1
-      }
-      return convertType(typ.aliasTypeArguments[index], checker)
-    }
-  }
-}
-
 function serializeBody(method: ts.MethodDeclaration, checker: ts.TypeChecker) {
   const symbol = checker.getSymbolAtLocation(method.name)
   let data
@@ -44,12 +26,12 @@ function serializeBody(method: ts.MethodDeclaration, checker: ts.TypeChecker) {
   if (symbol) {
     const returnTypeNode = method.type!
 
-    let dataIndex = 0
-    let errorIndex = 1
+    let dataIndex = 0 // index of ReturnedData in TFetchPromise<ReturnedData, ReturnedError>
+    let errorIndex = 1 // index of ReturnedError in TFetchPromise<ReturnedData, ReturnedError>
     const typeName = checker.typeToString(checker.getTypeFromTypeNode(returnTypeNode))
     if (typeName.startsWith('Promise<TSaveStatePayload')) {
-      dataIndex = 1
-      errorIndex = 2
+      dataIndex = 1 // index of ReturnedData in TSavePromise<State, ReturnedData, ReturnedError>
+      errorIndex = 2 // index of ReturnedData in TSavePromise<State, ReturnedData, ReturnedError>
     }
     if (returnTypeNode && ts.isTypeReferenceNode(returnTypeNode)) {
       const typeData = checker.getTypeFromTypeNode(returnTypeNode.typeArguments![dataIndex])
@@ -64,31 +46,58 @@ function serializeBody(method: ts.MethodDeclaration, checker: ts.TypeChecker) {
   return { data, error }
 }
 
-function getIntentAuthType(sym: ts.Symbol | undefined, node: ts.Node, checker: ts.TypeChecker) {
+function resolveParameterTypeIndex(t: ts.Type, checker: ts.TypeChecker, i: number, j: number): number {
+  let index = i
+  if (checker.typeToString(t).startsWith('TSaveActionEvent')) {
+    index = j
+  }
+  return index
+}
+/**
+ *  Find the Parameter type in intent and convert it to json-schema
+ */
+function serializeParameters(sym: ts.Symbol | undefined, node: ts.Node, checker: ts.TypeChecker) {
   if (sym) {
     const typ = checker.getTypeOfSymbolAtLocation(sym, node)
     if (typ.aliasTypeArguments) {
-      let index = 1
-      if (checker.typeToString(typ).startsWith('TSaveActionEvent')) {
-        index = 2
-      }
-      const authType = checker.typeToString(typ.aliasTypeArguments[index])
-      switch (authType) {
-        case 'TBaseAuthContext<{ apiKey: string; }>':
-          return 'APIKEY'
-        case 'TBaseAuthContext<{ username: string; password: string; }>':
-          return 'BASIC'
-        case 'TBaseAuthContext<{ accessToken: string; }>':
-          return 'OAUTH2'
-        case 'TBaseAuthContext<undefined>':
-          return 'NONE'
-        default:
-          return authType
-      }
+      const index = resolveParameterTypeIndex(typ, checker, 0, 1)
+      return convertType(typ.aliasTypeArguments[index!], checker)
     }
   }
 }
-export function intentTypesToSchemaConverter(intentPath: string, options: ts.CompilerOptions): TOutput {
+
+/**
+ *  Find the auth context type and return it's name
+ *  @param sym action method symbol
+ *  @param node action method symbol value declaration
+ *  @param checker program type checker
+ */
+function getIntentAuthType(sym: ts.Symbol | undefined, node: ts.Node, checker: ts.TypeChecker): string | undefined {
+  if (sym) {
+    const typ = checker.getTypeOfSymbolAtLocation(sym, node)
+    if (typ.aliasTypeArguments) {
+      const index = resolveParameterTypeIndex(typ, checker, 1, 2)
+      const authType = checker.typeToString(typ.aliasTypeArguments[index])
+      if (/apiKey/.test(authType)) return 'APIKEY'
+      if (/username/.test(authType) && /password/.test(authType)) return 'BASIC'
+      if (/accessToken/.test(authType)) return 'OAUTH2'
+      if (/undefined/.test(authType)) return 'NONE'
+      return authType
+    }
+  }
+}
+
+/**
+ *  Convert single intent types to json schema
+ *  This function tries to find the relevant type definitions, Params and `action` method resposne type
+ *  and converts the types to json-schema
+ *  @param intentPath absolute path to intent
+ *  @param options compiler options
+ */
+export function intentTypesToSchemaConverter(
+  intentPath: string,
+  options: ts.CompilerOptions = { target: ts.ScriptTarget.ES5, module: ts.ModuleKind.CommonJS }
+): TOutput {
   const program = ts.createProgram([intentPath], options)
   const sourceFile = program.getSourceFile(intentPath)
   const checker = program.getTypeChecker()
@@ -132,6 +141,13 @@ export function intentTypesToSchemaConverter(intentPath: string, options: ts.Com
   }
 }
 
+/**
+ *  Generate full openapi spec from intents
+ *  @param intentsDir absolute path to intents directory
+ *  @param intents list of intent names
+ *  @param integrationUuid integration unique identifier
+ *  @param integrationName name of the integration
+ */
 export default function generator({
   intentsDir,
   intents,
@@ -143,26 +159,21 @@ export default function generator({
   integrationUuid: string
   integrationName: string
 }): string {
-  const template = fs.readFileSync('./src/templates/openapi.json.mustache', 'utf8')
-  const schemas = intents.map(intent => {
+  const doc = topOfSpec(integrationName)
+  const schemas = intents.reduce((acc, intent) => {
     const intentPath = path.join(intentsDir, `${intent}.ts`)
-    const typeSchema = intentTypesToSchemaConverter(intentPath, {
-      target: ts.ScriptTarget.ES5,
-      module: ts.ModuleKind.CommonJS
-    })
-    return {
-      intentName: intent,
-      typeSchema: {
-        response: JSON.stringify(typeSchema.response),
-        requestBody: JSON.stringify(typeSchema.requestBody)
-      },
-      oauth2: typeSchema.intentAuthType === 'OAUTH2'
-    }
-  })
-  return Mustache.render(template, {
-    intents,
-    integrationUuid,
-    integrationName,
-    schemas
-  })
+    const typeSchema = intentTypesToSchemaConverter(intentPath)
+    return Object.assign(
+      acc,
+      specPath({
+        integrationUuid,
+        intentName: intent,
+        response: typeSchema.response,
+        requestBody: typeSchema.requestBody,
+        oauth2: typeSchema.intentAuthType === 'OAUTH2'
+      })
+    )
+  }, {})
+
+  return JSON.stringify(Object.assign(doc, { paths: schemas }), null, 2)
 }

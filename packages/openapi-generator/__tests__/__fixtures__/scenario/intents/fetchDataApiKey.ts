@@ -17,4 +17,4 @@ type ParamsSearch = {
   query: string
 }
 export type ReturnedData = PullRequest[]
-export type Params = ParamsId & ParamsSearch
+export type Params = ParamsId | ParamsSearch

@@ -19,7 +19,6 @@
     "@commitlint/config-conventional": "^7.3.1",
     "@oclif/tslint": "^3.1.1",
     "@types/jest": "^23.3.13",
-    "@types/mustache": "^0.8.32",
     "@types/node": "^10.12.19",
     "commitlint": "^7.4.0",
     "cz-conventional-changelog": "^2.1.0",
@@ -40,7 +39,5 @@
     "test": "jest",
     "test:ci": "jest --coverage"
   },
-  "dependencies": {
-    "mustache": "^3.0.1"
-  }
+  "dependencies": {}
 }

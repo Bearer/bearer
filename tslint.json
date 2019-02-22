@@ -5,6 +5,14 @@
     "no-console": false
   },
   "linterOptions": {
-    "exclude": ["**/node_modules/**", "**/templates/**", "**/__fixtures__/**", "**/lib/**", "**/www/**", "package.json"]
+    "exclude": [
+      "**/node_modules/**",
+      "**/templates/**",
+      "**/__fixtures__/**",
+      "**/lib/**",
+      "**/www/**",
+      "package.json",
+      ".github/PULL_REQUEST_TEMPLATE.md"
+    ]
   }
 }

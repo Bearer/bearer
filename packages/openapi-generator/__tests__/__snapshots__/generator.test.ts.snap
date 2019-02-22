@@ -7,15 +7,26 @@ exports[`#generator generates the valid openapi 3.0 document 1`] = `
     \\"description\\": \\"openapi definition file for happy-goats\\",
     \\"version\\": \\"0.0.1\\",
     \\"title\\": \\"happy-goats\\",
-    \\"contact\\": { \\"email\\": \\"bearer@bearer.sh\\" },
-    \\"license\\": { \\"name\\": \\"MIT\\" }
+    \\"contact\\": {
+      \\"email\\": \\"bearer@bearer.sh\\"
+    },
+    \\"license\\": {
+      \\"name\\": \\"MIT\\"
+    }
   },
-  \\"servers\\": [{ \\"url\\": \\"https://int.bearer.sh/api/v2/intents/backend/\\" }],
+  \\"servers\\": [
+    {
+      \\"url\\": \\"https://int.bearer.sh/api/v2/intents/backend/\\"
+    }
+  ],
   \\"tags\\": [
     {
       \\"name\\": \\"integration\\",
       \\"description\\": \\"List of endpoints providing backend to backend integration with happy-goats\\",
-      \\"externalDocs\\": { \\"description\\": \\"Find out more\\", \\"url\\": \\"https://www.bearer.sh\\" }
+      \\"externalDocs\\": {
+        \\"description\\": \\"Find out more\\",
+        \\"url\\": \\"https://www.bearer.sh\\"
+      }
     }
   ],
   \\"paths\\": {
@@ -25,25 +36,94 @@ exports[`#generator generates the valid openapi 3.0 document 1`] = `
           {
             \\"in\\": \\"header\\",
             \\"name\\": \\"authorization\\",
-            \\"schema\\": { \\"type\\": \\"string\\" },
+            \\"schema\\": {
+              \\"type\\": \\"string\\"
+            },
             \\"description\\": \\"API Key\\",
             \\"required\\": true
-          },
+          }
         ],
         \\"summary\\": \\"fetchDataApiKey\\",
-        \\"requestBody\\": { \\"content\\": { \\"application/json\\": { \\"schema\\": { {\\"type\\":\\"object\\",\\"properties\\":{\\"name\\":{\\"type\\":\\"string\\"},\\"query\\":{\\"type\\":\\"string\\"}}} } } } },
+        \\"requestBody\\": {
+          \\"content\\": {
+            \\"application/json\\": {
+              \\"schema\\": {
+                \\"type\\": \\"object\\",
+                \\"properties\\": {
+                  \\"name\\": {
+                    \\"type\\": \\"string\\"
+                  },
+                  \\"query\\": {
+                    \\"type\\": \\"string\\"
+                  }
+                }
+              }
+            }
+          }
+        },
         \\"responses\\": {
-          \\"200\\": { \\"description\\": \\"Share\\", \\"content\\": { \\"application/json\\": { \\"schema\\": { {\\"data\\":{\\"type\\":\\"array\\",\\"items\\":{\\"type\\":\\"object\\",\\"properties\\":{\\"id\\":{\\"type\\":\\"string\\"},\\"title\\":{\\"type\\":\\"string\\"},\\"comments\\":{\\"type\\":\\"object\\",\\"properties\\":{\\"totalCount\\":{\\"type\\":\\"number\\"},\\"visible\\":{\\"type\\":\\"boolean\\"}}}}}}} } } } },
+          \\"200\\": {
+            \\"description\\": \\"fetchDataApiKey\\",
+            \\"content\\": {
+              \\"application/json\\": {
+                \\"schema\\": {
+                  \\"data\\": {
+                    \\"type\\": \\"array\\",
+                    \\"items\\": {
+                      \\"type\\": \\"object\\",
+                      \\"properties\\": {
+                        \\"id\\": {
+                          \\"type\\": \\"string\\"
+                        },
+                        \\"title\\": {
+                          \\"type\\": \\"string\\"
+                        },
+                        \\"comments\\": {
+                          \\"type\\": \\"object\\",
+                          \\"properties\\": {
+                            \\"totalCount\\": {
+                              \\"type\\": \\"number\\"
+                            },
+                            \\"visible\\": {
+                              \\"type\\": \\"boolean\\"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
           \\"401\\": {
             \\"description\\": \\"Access forbidden\\",
             \\"content\\": {
-              \\"application/json\\": { \\"schema\\": { \\"type\\": \\"object\\", \\"properties\\": { \\"error\\": { \\"type\\": \\"string\\" } } } }
+              \\"application/json\\": {
+                \\"schema\\": {
+                  \\"type\\": \\"object\\",
+                  \\"properties\\": {
+                    \\"error\\": {
+                      \\"type\\": \\"string\\"
+                    }
+                  }
+                }
+              }
             }
           },
           \\"403\\": {
             \\"description\\": \\"Unauthorized\\",
             \\"content\\": {
-              \\"application/json\\": { \\"schema\\": { \\"type\\": \\"object\\", \\"properties\\": { \\"error\\": { \\"type\\": \\"string\\" } } } }
+              \\"application/json\\": {
+                \\"schema\\": {
+                  \\"type\\": \\"object\\",
+                  \\"properties\\": {
+                    \\"error\\": {
+                      \\"type\\": \\"string\\"
+                    }
+                  }
+                }
+              }
             }
           }
         }
@@ -55,25 +135,94 @@ exports[`#generator generates the valid openapi 3.0 document 1`] = `
           {
             \\"in\\": \\"header\\",
             \\"name\\": \\"authorization\\",
-            \\"schema\\": { \\"type\\": \\"string\\" },
+            \\"schema\\": {
+              \\"type\\": \\"string\\"
+            },
             \\"description\\": \\"API Key\\",
             \\"required\\": true
-          },
+          }
         ],
         \\"summary\\": \\"fetchDataBasic\\",
-        \\"requestBody\\": { \\"content\\": { \\"application/json\\": { \\"schema\\": { {\\"type\\":\\"object\\",\\"properties\\":{\\"name\\":{\\"type\\":\\"string\\"},\\"query\\":{\\"type\\":\\"string\\"}}} } } } },
+        \\"requestBody\\": {
+          \\"content\\": {
+            \\"application/json\\": {
+              \\"schema\\": {
+                \\"type\\": \\"object\\",
+                \\"properties\\": {
+                  \\"name\\": {
+                    \\"type\\": \\"string\\"
+                  },
+                  \\"query\\": {
+                    \\"type\\": \\"string\\"
+                  }
+                }
+              }
+            }
+          }
+        },
         \\"responses\\": {
-          \\"200\\": { \\"description\\": \\"Share\\", \\"content\\": { \\"application/json\\": { \\"schema\\": { {\\"data\\":{\\"type\\":\\"array\\",\\"items\\":{\\"type\\":\\"object\\",\\"properties\\":{\\"id\\":{\\"type\\":\\"string\\"},\\"title\\":{\\"type\\":\\"string\\"},\\"comments\\":{\\"type\\":\\"object\\",\\"properties\\":{\\"totalCount\\":{\\"type\\":\\"number\\"},\\"visible\\":{\\"type\\":\\"boolean\\"}}}}}}} } } } },
+          \\"200\\": {
+            \\"description\\": \\"fetchDataBasic\\",
+            \\"content\\": {
+              \\"application/json\\": {
+                \\"schema\\": {
+                  \\"data\\": {
+                    \\"type\\": \\"array\\",
+                    \\"items\\": {
+                      \\"type\\": \\"object\\",
+                      \\"properties\\": {
+                        \\"id\\": {
+                          \\"type\\": \\"string\\"
+                        },
+                        \\"title\\": {
+                          \\"type\\": \\"string\\"
+                        },
+                        \\"comments\\": {
+                          \\"type\\": \\"object\\",
+                          \\"properties\\": {
+                            \\"totalCount\\": {
+                              \\"type\\": \\"number\\"
+                            },
+                            \\"visible\\": {
+                              \\"type\\": \\"boolean\\"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
           \\"401\\": {
             \\"description\\": \\"Access forbidden\\",
             \\"content\\": {
-              \\"application/json\\": { \\"schema\\": { \\"type\\": \\"object\\", \\"properties\\": { \\"error\\": { \\"type\\": \\"string\\" } } } }
+              \\"application/json\\": {
+                \\"schema\\": {
+                  \\"type\\": \\"object\\",
+                  \\"properties\\": {
+                    \\"error\\": {
+                      \\"type\\": \\"string\\"
+                    }
+                  }
+                }
+              }
             }
           },
           \\"403\\": {
             \\"description\\": \\"Unauthorized\\",
             \\"content\\": {
-              \\"application/json\\": { \\"schema\\": { \\"type\\": \\"object\\", \\"properties\\": { \\"error\\": { \\"type\\": \\"string\\" } } } }
+              \\"application/json\\": {
+                \\"schema\\": {
+                  \\"type\\": \\"object\\",
+                  \\"properties\\": {
+                    \\"error\\": {
+                      \\"type\\": \\"string\\"
+                    }
+                  }
+                }
+              }
             }
           }
         }
@@ -85,32 +234,104 @@ exports[`#generator generates the valid openapi 3.0 document 1`] = `
           {
             \\"in\\": \\"header\\",
             \\"name\\": \\"authorization\\",
-            \\"schema\\": { \\"type\\": \\"string\\" },
+            \\"schema\\": {
+              \\"type\\": \\"string\\"
+            },
             \\"description\\": \\"API Key\\",
             \\"required\\": true
           },
           {
             \\"name\\": \\"authId\\",
-            \\"schema\\": { \\"type\\": \\"string\\", \\"format\\": \\"uuid\\" },
+            \\"schema\\": {
+              \\"type\\": \\"string\\",
+              \\"format\\": \\"uuid\\"
+            },
             \\"in\\": \\"query\\",
             \\"description\\": \\"User Identifier\\",
             \\"required\\": true
           }
         ],
         \\"summary\\": \\"fetchDataInlineType\\",
-        \\"requestBody\\": { \\"content\\": { \\"application/json\\": { \\"schema\\": { {\\"type\\":\\"object\\",\\"properties\\":{\\"pullRequests\\":{\\"type\\":\\"array\\",\\"items\\":{\\"type\\":\\"string\\"}}}} } } } },
+        \\"requestBody\\": {
+          \\"content\\": {
+            \\"application/json\\": {
+              \\"schema\\": {
+                \\"type\\": \\"object\\",
+                \\"properties\\": {
+                  \\"pullRequests\\": {
+                    \\"type\\": \\"array\\",
+                    \\"items\\": {
+                      \\"type\\": \\"string\\"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
         \\"responses\\": {
-          \\"200\\": { \\"description\\": \\"Share\\", \\"content\\": { \\"application/json\\": { \\"schema\\": { {\\"data\\":{\\"type\\":\\"array\\",\\"items\\":{\\"type\\":\\"object\\",\\"properties\\":{\\"id\\":{\\"type\\":\\"string\\"},\\"title\\":{\\"type\\":\\"string\\"},\\"comments\\":{\\"type\\":\\"object\\",\\"properties\\":{\\"totalCount\\":{\\"type\\":\\"number\\"},\\"visible\\":{\\"type\\":\\"boolean\\"}}}}}}} } } } },
+          \\"200\\": {
+            \\"description\\": \\"fetchDataInlineType\\",
+            \\"content\\": {
+              \\"application/json\\": {
+                \\"schema\\": {
+                  \\"data\\": {
+                    \\"type\\": \\"array\\",
+                    \\"items\\": {
+                      \\"type\\": \\"object\\",
+                      \\"properties\\": {
+                        \\"id\\": {
+                          \\"type\\": \\"string\\"
+                        },
+                        \\"title\\": {
+                          \\"type\\": \\"string\\"
+                        },
+                        \\"comments\\": {
+                          \\"type\\": \\"object\\",
+                          \\"properties\\": {
+                            \\"totalCount\\": {
+                              \\"type\\": \\"number\\"
+                            },
+                            \\"visible\\": {
+                              \\"type\\": \\"boolean\\"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
           \\"401\\": {
             \\"description\\": \\"Access forbidden\\",
             \\"content\\": {
-              \\"application/json\\": { \\"schema\\": { \\"type\\": \\"object\\", \\"properties\\": { \\"error\\": { \\"type\\": \\"string\\" } } } }
+              \\"application/json\\": {
+                \\"schema\\": {
+                  \\"type\\": \\"object\\",
+                  \\"properties\\": {
+                    \\"error\\": {
+                      \\"type\\": \\"string\\"
+                    }
+                  }
+                }
+              }
             }
           },
           \\"403\\": {
             \\"description\\": \\"Unauthorized\\",
             \\"content\\": {
-              \\"application/json\\": { \\"schema\\": { \\"type\\": \\"object\\", \\"properties\\": { \\"error\\": { \\"type\\": \\"string\\" } } } }
+              \\"application/json\\": {
+                \\"schema\\": {
+                  \\"type\\": \\"object\\",
+                  \\"properties\\": {
+                    \\"error\\": {
+                      \\"type\\": \\"string\\"
+                    }
+                  }
+                }
+              }
             }
           }
         }
@@ -122,25 +343,94 @@ exports[`#generator generates the valid openapi 3.0 document 1`] = `
           {
             \\"in\\": \\"header\\",
             \\"name\\": \\"authorization\\",
-            \\"schema\\": { \\"type\\": \\"string\\" },
+            \\"schema\\": {
+              \\"type\\": \\"string\\"
+            },
             \\"description\\": \\"API Key\\",
             \\"required\\": true
-          },
+          }
         ],
         \\"summary\\": \\"fetchDataNone\\",
-        \\"requestBody\\": { \\"content\\": { \\"application/json\\": { \\"schema\\": { {\\"type\\":\\"object\\",\\"properties\\":{\\"name\\":{\\"type\\":\\"string\\"},\\"query\\":{\\"type\\":\\"string\\"}}} } } } },
+        \\"requestBody\\": {
+          \\"content\\": {
+            \\"application/json\\": {
+              \\"schema\\": {
+                \\"type\\": \\"object\\",
+                \\"properties\\": {
+                  \\"name\\": {
+                    \\"type\\": \\"string\\"
+                  },
+                  \\"query\\": {
+                    \\"type\\": \\"string\\"
+                  }
+                }
+              }
+            }
+          }
+        },
         \\"responses\\": {
-          \\"200\\": { \\"description\\": \\"Share\\", \\"content\\": { \\"application/json\\": { \\"schema\\": { {\\"data\\":{\\"type\\":\\"array\\",\\"items\\":{\\"type\\":\\"object\\",\\"properties\\":{\\"id\\":{\\"type\\":\\"string\\"},\\"title\\":{\\"type\\":\\"string\\"},\\"comments\\":{\\"type\\":\\"object\\",\\"properties\\":{\\"totalCount\\":{\\"type\\":\\"number\\"},\\"visible\\":{\\"type\\":\\"boolean\\"}}}}}}} } } } },
+          \\"200\\": {
+            \\"description\\": \\"fetchDataNone\\",
+            \\"content\\": {
+              \\"application/json\\": {
+                \\"schema\\": {
+                  \\"data\\": {
+                    \\"type\\": \\"array\\",
+                    \\"items\\": {
+                      \\"type\\": \\"object\\",
+                      \\"properties\\": {
+                        \\"id\\": {
+                          \\"type\\": \\"string\\"
+                        },
+                        \\"title\\": {
+                          \\"type\\": \\"string\\"
+                        },
+                        \\"comments\\": {
+                          \\"type\\": \\"object\\",
+                          \\"properties\\": {
+                            \\"totalCount\\": {
+                              \\"type\\": \\"number\\"
+                            },
+                            \\"visible\\": {
+                              \\"type\\": \\"boolean\\"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
           \\"401\\": {
             \\"description\\": \\"Access forbidden\\",
             \\"content\\": {
-              \\"application/json\\": { \\"schema\\": { \\"type\\": \\"object\\", \\"properties\\": { \\"error\\": { \\"type\\": \\"string\\" } } } }
+              \\"application/json\\": {
+                \\"schema\\": {
+                  \\"type\\": \\"object\\",
+                  \\"properties\\": {
+                    \\"error\\": {
+                      \\"type\\": \\"string\\"
+                    }
+                  }
+                }
+              }
             }
           },
           \\"403\\": {
             \\"description\\": \\"Unauthorized\\",
             \\"content\\": {
-              \\"application/json\\": { \\"schema\\": { \\"type\\": \\"object\\", \\"properties\\": { \\"error\\": { \\"type\\": \\"string\\" } } } }
+              \\"application/json\\": {
+                \\"schema\\": {
+                  \\"type\\": \\"object\\",
+                  \\"properties\\": {
+                    \\"error\\": {
+                      \\"type\\": \\"string\\"
+                    }
+                  }
+                }
+              }
             }
           }
         }
@@ -152,32 +442,104 @@ exports[`#generator generates the valid openapi 3.0 document 1`] = `
           {
             \\"in\\": \\"header\\",
             \\"name\\": \\"authorization\\",
-            \\"schema\\": { \\"type\\": \\"string\\" },
+            \\"schema\\": {
+              \\"type\\": \\"string\\"
+            },
             \\"description\\": \\"API Key\\",
             \\"required\\": true
           },
           {
             \\"name\\": \\"authId\\",
-            \\"schema\\": { \\"type\\": \\"string\\", \\"format\\": \\"uuid\\" },
+            \\"schema\\": {
+              \\"type\\": \\"string\\",
+              \\"format\\": \\"uuid\\"
+            },
             \\"in\\": \\"query\\",
             \\"description\\": \\"User Identifier\\",
             \\"required\\": true
           }
         ],
         \\"summary\\": \\"fetchDataOauth2\\",
-        \\"requestBody\\": { \\"content\\": { \\"application/json\\": { \\"schema\\": { {\\"type\\":\\"object\\",\\"properties\\":{\\"name\\":{\\"type\\":\\"string\\"},\\"query\\":{\\"type\\":\\"string\\"}}} } } } },
+        \\"requestBody\\": {
+          \\"content\\": {
+            \\"application/json\\": {
+              \\"schema\\": {
+                \\"type\\": \\"object\\",
+                \\"properties\\": {
+                  \\"name\\": {
+                    \\"type\\": \\"string\\"
+                  },
+                  \\"query\\": {
+                    \\"type\\": \\"string\\"
+                  }
+                }
+              }
+            }
+          }
+        },
         \\"responses\\": {
-          \\"200\\": { \\"description\\": \\"Share\\", \\"content\\": { \\"application/json\\": { \\"schema\\": { {\\"data\\":{\\"type\\":\\"array\\",\\"items\\":{\\"type\\":\\"object\\",\\"properties\\":{\\"id\\":{\\"type\\":\\"string\\"},\\"title\\":{\\"type\\":\\"string\\"},\\"comments\\":{\\"type\\":\\"object\\",\\"properties\\":{\\"totalCount\\":{\\"type\\":\\"number\\"},\\"visible\\":{\\"type\\":\\"boolean\\"}}}}}}} } } } },
+          \\"200\\": {
+            \\"description\\": \\"fetchDataOauth2\\",
+            \\"content\\": {
+              \\"application/json\\": {
+                \\"schema\\": {
+                  \\"data\\": {
+                    \\"type\\": \\"array\\",
+                    \\"items\\": {
+                      \\"type\\": \\"object\\",
+                      \\"properties\\": {
+                        \\"id\\": {
+                          \\"type\\": \\"string\\"
+                        },
+                        \\"title\\": {
+                          \\"type\\": \\"string\\"
+                        },
+                        \\"comments\\": {
+                          \\"type\\": \\"object\\",
+                          \\"properties\\": {
+                            \\"totalCount\\": {
+                              \\"type\\": \\"number\\"
+                            },
+                            \\"visible\\": {
+                              \\"type\\": \\"boolean\\"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
           \\"401\\": {
             \\"description\\": \\"Access forbidden\\",
             \\"content\\": {
-              \\"application/json\\": { \\"schema\\": { \\"type\\": \\"object\\", \\"properties\\": { \\"error\\": { \\"type\\": \\"string\\" } } } }
+              \\"application/json\\": {
+                \\"schema\\": {
+                  \\"type\\": \\"object\\",
+                  \\"properties\\": {
+                    \\"error\\": {
+                      \\"type\\": \\"string\\"
+                    }
+                  }
+                }
+              }
             }
           },
           \\"403\\": {
             \\"description\\": \\"Unauthorized\\",
             \\"content\\": {
-              \\"application/json\\": { \\"schema\\": { \\"type\\": \\"object\\", \\"properties\\": { \\"error\\": { \\"type\\": \\"string\\" } } } }
+              \\"application/json\\": {
+                \\"schema\\": {
+                  \\"type\\": \\"object\\",
+                  \\"properties\\": {
+                    \\"error\\": {
+                      \\"type\\": \\"string\\"
+                    }
+                  }
+                }
+              }
             }
           }
         }
@@ -189,32 +551,93 @@ exports[`#generator generates the valid openapi 3.0 document 1`] = `
           {
             \\"in\\": \\"header\\",
             \\"name\\": \\"authorization\\",
-            \\"schema\\": { \\"type\\": \\"string\\" },
+            \\"schema\\": {
+              \\"type\\": \\"string\\"
+            },
             \\"description\\": \\"API Key\\",
             \\"required\\": true
           },
           {
             \\"name\\": \\"authId\\",
-            \\"schema\\": { \\"type\\": \\"string\\", \\"format\\": \\"uuid\\" },
+            \\"schema\\": {
+              \\"type\\": \\"string\\",
+              \\"format\\": \\"uuid\\"
+            },
             \\"in\\": \\"query\\",
             \\"description\\": \\"User Identifier\\",
             \\"required\\": true
           }
         ],
         \\"summary\\": \\"fetchDataRefType\\",
-        \\"requestBody\\": { \\"content\\": { \\"application/json\\": { \\"schema\\": { {\\"type\\":\\"object\\",\\"properties\\":{\\"reference\\":{\\"type\\":\\"string\\"}}} } } } },
+        \\"requestBody\\": {
+          \\"content\\": {
+            \\"application/json\\": {
+              \\"schema\\": {
+                \\"type\\": \\"object\\",
+                \\"properties\\": {
+                  \\"reference\\": {
+                    \\"type\\": \\"string\\"
+                  }
+                }
+              }
+            }
+          }
+        },
         \\"responses\\": {
-          \\"200\\": { \\"description\\": \\"Share\\", \\"content\\": { \\"application/json\\": { \\"schema\\": { {\\"data\\":{\\"type\\":\\"array\\",\\"items\\":{\\"type\\":\\"object\\",\\"properties\\":{\\"id\\":{\\"type\\":\\"string\\"},\\"name\\":{\\"type\\":\\"string\\"},\\"totalCount\\":{\\"type\\":\\"number\\"}}}}} } } } },
+          \\"200\\": {
+            \\"description\\": \\"fetchDataRefType\\",
+            \\"content\\": {
+              \\"application/json\\": {
+                \\"schema\\": {
+                  \\"data\\": {
+                    \\"type\\": \\"array\\",
+                    \\"items\\": {
+                      \\"type\\": \\"object\\",
+                      \\"properties\\": {
+                        \\"id\\": {
+                          \\"type\\": \\"string\\"
+                        },
+                        \\"name\\": {
+                          \\"type\\": \\"string\\"
+                        },
+                        \\"totalCount\\": {
+                          \\"type\\": \\"number\\"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
           \\"401\\": {
             \\"description\\": \\"Access forbidden\\",
             \\"content\\": {
-              \\"application/json\\": { \\"schema\\": { \\"type\\": \\"object\\", \\"properties\\": { \\"error\\": { \\"type\\": \\"string\\" } } } }
+              \\"application/json\\": {
+                \\"schema\\": {
+                  \\"type\\": \\"object\\",
+                  \\"properties\\": {
+                    \\"error\\": {
+                      \\"type\\": \\"string\\"
+                    }
+                  }
+                }
+              }
             }
           },
           \\"403\\": {
             \\"description\\": \\"Unauthorized\\",
             \\"content\\": {
-              \\"application/json\\": { \\"schema\\": { \\"type\\": \\"object\\", \\"properties\\": { \\"error\\": { \\"type\\": \\"string\\" } } } }
+              \\"application/json\\": {
+                \\"schema\\": {
+                  \\"type\\": \\"object\\",
+                  \\"properties\\": {
+                    \\"error\\": {
+                      \\"type\\": \\"string\\"
+                    }
+                  }
+                }
+              }
             }
           }
         }
@@ -226,38 +649,128 @@ exports[`#generator generates the valid openapi 3.0 document 1`] = `
           {
             \\"in\\": \\"header\\",
             \\"name\\": \\"authorization\\",
-            \\"schema\\": { \\"type\\": \\"string\\" },
+            \\"schema\\": {
+              \\"type\\": \\"string\\"
+            },
             \\"description\\": \\"API Key\\",
             \\"required\\": true
           },
           {
             \\"name\\": \\"authId\\",
-            \\"schema\\": { \\"type\\": \\"string\\", \\"format\\": \\"uuid\\" },
+            \\"schema\\": {
+              \\"type\\": \\"string\\",
+              \\"format\\": \\"uuid\\"
+            },
             \\"in\\": \\"query\\",
             \\"description\\": \\"User Identifier\\",
             \\"required\\": true
           }
         ],
         \\"summary\\": \\"saveState\\",
-        \\"requestBody\\": { \\"content\\": { \\"application/json\\": { \\"schema\\": { {\\"type\\":\\"object\\",\\"properties\\":{\\"pullRequests\\":{\\"type\\":\\"array\\",\\"items\\":{\\"type\\":\\"object\\",\\"properties\\":{\\"id\\":{\\"type\\":\\"string\\"},\\"title\\":{\\"type\\":\\"string\\"},\\"comments\\":{\\"type\\":\\"object\\",\\"properties\\":{\\"totalCount\\":{\\"type\\":\\"number\\"},\\"visible\\":{\\"type\\":\\"boolean\\"}}}}}}}} } } } },
+        \\"requestBody\\": {
+          \\"content\\": {
+            \\"application/json\\": {
+              \\"schema\\": {
+                \\"type\\": \\"object\\",
+                \\"properties\\": {
+                  \\"pullRequests\\": {
+                    \\"type\\": \\"array\\",
+                    \\"items\\": {
+                      \\"type\\": \\"object\\",
+                      \\"properties\\": {
+                        \\"id\\": {
+                          \\"type\\": \\"string\\"
+                        },
+                        \\"title\\": {
+                          \\"type\\": \\"string\\"
+                        },
+                        \\"comments\\": {
+                          \\"type\\": \\"object\\",
+                          \\"properties\\": {
+                            \\"totalCount\\": {
+                              \\"type\\": \\"number\\"
+                            },
+                            \\"visible\\": {
+                              \\"type\\": \\"boolean\\"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
         \\"responses\\": {
-          \\"200\\": { \\"description\\": \\"Share\\", \\"content\\": { \\"application/json\\": { \\"schema\\": { {\\"data\\":{\\"type\\":\\"array\\",\\"items\\":{\\"type\\":\\"object\\",\\"properties\\":{\\"id\\":{\\"type\\":\\"string\\"},\\"title\\":{\\"type\\":\\"string\\"},\\"comments\\":{\\"type\\":\\"object\\",\\"properties\\":{\\"totalCount\\":{\\"type\\":\\"number\\"},\\"visible\\":{\\"type\\":\\"boolean\\"}}}}}}} } } } },
+          \\"200\\": {
+            \\"description\\": \\"saveState\\",
+            \\"content\\": {
+              \\"application/json\\": {
+                \\"schema\\": {
+                  \\"data\\": {
+                    \\"type\\": \\"array\\",
+                    \\"items\\": {
+                      \\"type\\": \\"object\\",
+                      \\"properties\\": {
+                        \\"id\\": {
+                          \\"type\\": \\"string\\"
+                        },
+                        \\"title\\": {
+                          \\"type\\": \\"string\\"
+                        },
+                        \\"comments\\": {
+                          \\"type\\": \\"object\\",
+                          \\"properties\\": {
+                            \\"totalCount\\": {
+                              \\"type\\": \\"number\\"
+                            },
+                            \\"visible\\": {
+                              \\"type\\": \\"boolean\\"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
           \\"401\\": {
             \\"description\\": \\"Access forbidden\\",
             \\"content\\": {
-              \\"application/json\\": { \\"schema\\": { \\"type\\": \\"object\\", \\"properties\\": { \\"error\\": { \\"type\\": \\"string\\" } } } }
+              \\"application/json\\": {
+                \\"schema\\": {
+                  \\"type\\": \\"object\\",
+                  \\"properties\\": {
+                    \\"error\\": {
+                      \\"type\\": \\"string\\"
+                    }
+                  }
+                }
+              }
             }
           },
           \\"403\\": {
             \\"description\\": \\"Unauthorized\\",
             \\"content\\": {
-              \\"application/json\\": { \\"schema\\": { \\"type\\": \\"object\\", \\"properties\\": { \\"error\\": { \\"type\\": \\"string\\" } } } }
+              \\"application/json\\": {
+                \\"schema\\": {
+                  \\"type\\": \\"object\\",
+                  \\"properties\\": {
+                    \\"error\\": {
+                      \\"type\\": \\"string\\"
+                    }
+                  }
+                }
+              }
             }
           }
         }
       }
-    },
+    }
   }
-}
-"
+}"
 `;
