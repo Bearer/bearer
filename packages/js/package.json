@@ -35,6 +35,7 @@
     "test:ci": "jest --coverage"
   },
   "dependencies": {
+    "@bearer/logger": "^0.96.0",
     "debounce": "^1.2.0"
   }
 }

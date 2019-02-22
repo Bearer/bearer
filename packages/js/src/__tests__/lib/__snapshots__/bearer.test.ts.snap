@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`sd sd 1`] = `
+<body>
+
+
+  <bearer-something />
+
+
+  <bearer-patrick />
+
+
+  <spongebob-something />
+
+
+  <notmatching-something />
+
+
+</body>
+`;

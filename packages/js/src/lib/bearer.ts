@@ -1,4 +1,5 @@
 import debounce from 'debounce'
+import logger from './logger'
 import { TIntegration } from './types'
 
 const prefix = 'bearer'
@@ -16,9 +17,10 @@ export default class Bearer {
 
   constructor(readonly clientId: string, options?: Partial<TBearerOptions>) {
     this.config = { ...options, ...DEFAULT_OPTIONS }
+
+    logger('init with config: %j', this.config)
     this.debounceRefresh = debounce(this.loadMissingIntegrations, this.config.refreshDebounceDelay)
     this.initialIntegrationLoading()
-
     if (this.config.domObserver) {
       this.registerDomObserver()
     }
@@ -28,8 +30,8 @@ export default class Bearer {
    * Retrieve all dom elements starting by bearer- and ask for assets urls if
    */
   loadMissingIntegrations = () => {
-    const elements = findElements(document.getElementsByTagName('*')).filter(this.missingIntegration)
-    this.sendTags(elements)
+    const elements = findElements(document.getElementsByTagName('*'))
+    this.sendTags(elements.filter(this.missingIntegration))
   }
 
   /**
@@ -42,7 +44,7 @@ export default class Bearer {
   }
 
   /**
-   * TODO
+   * load integration asset or wait until dom is loaded
    */
   private initialIntegrationLoading = () => {
     if (document.readyState === 'complete' || document.readyState === 'interactive') {
@@ -71,7 +73,6 @@ export default class Bearer {
     for (const mutation of mutations) {
       if (mutation.type == 'childList') {
         if (mutation.addedNodes.length) {
-          // TODO: add debug statement
           this.debounceRefresh()
         }
       }
@@ -95,6 +96,7 @@ export default class Bearer {
     if (!tags.length) {
       return Promise.resolve(true)
     }
+    logger('fetching tag assets: %j', tags)
     return new Promise((resolve, reject) => {
       const req = new XMLHttpRequest()
       req.onload = _ => {
