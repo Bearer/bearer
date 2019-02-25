@@ -24,7 +24,7 @@
     "test": "lerna run test:ci --stream",
     "cm": "git-cz",
     "bootstrap": "lerna bootstrap",
-    "postinstall": "lerna run prepare"
+    "disabled:postinstall": "lerna run prepare"
   },
   "license": "MIT",
   "husky": {
