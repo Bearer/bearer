@@ -1,0 +1,347 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`#intentTypeToSchemaConverter converts types to schemas for fetchDataApiKey.ts 1`] = `
+Object {
+  "intentAuthType": "APIKEY",
+  "requestBody": Object {
+    "properties": Object {
+      "id": Object {
+        "type": "string",
+      },
+      "name": Object {
+        "type": "string",
+      },
+      "query": Object {
+        "type": "string",
+      },
+    },
+    "type": "object",
+  },
+  "response": Object {
+    "data": Object {
+      "items": Object {
+        "properties": Object {
+          "comments": Object {
+            "properties": Object {
+              "totalCount": Object {
+                "type": "number",
+              },
+              "visible": Object {
+                "type": "boolean",
+              },
+            },
+            "type": "object",
+          },
+          "id": Object {
+            "type": "string",
+          },
+          "title": Object {
+            "type": "string",
+          },
+        },
+        "type": "object",
+      },
+      "type": "array",
+    },
+    "error": undefined,
+  },
+}
+`;
+
+exports[`#intentTypeToSchemaConverter converts types to schemas for fetchDataBasic.ts 1`] = `
+Object {
+  "intentAuthType": "BASIC",
+  "requestBody": Object {
+    "properties": Object {
+      "id": Object {
+        "type": "string",
+      },
+      "name": Object {
+        "type": "string",
+      },
+      "query": Object {
+        "type": "string",
+      },
+    },
+    "type": "object",
+  },
+  "response": Object {
+    "data": Object {
+      "items": Object {
+        "properties": Object {
+          "comments": Object {
+            "properties": Object {
+              "totalCount": Object {
+                "type": "number",
+              },
+              "visible": Object {
+                "type": "boolean",
+              },
+            },
+            "type": "object",
+          },
+          "id": Object {
+            "type": "string",
+          },
+          "title": Object {
+            "type": "string",
+          },
+        },
+        "type": "object",
+      },
+      "type": "array",
+    },
+    "error": undefined,
+  },
+}
+`;
+
+exports[`#intentTypeToSchemaConverter converts types to schemas for fetchDataInlineType.ts 1`] = `
+Object {
+  "intentAuthType": "OAUTH2",
+  "requestBody": Object {
+    "properties": Object {
+      "pullRequests": Object {
+        "items": Object {
+          "type": "string",
+        },
+        "type": "array",
+      },
+    },
+    "type": "object",
+  },
+  "response": Object {
+    "data": Object {
+      "items": Object {
+        "properties": Object {
+          "comments": Object {
+            "properties": Object {
+              "totalCount": Object {
+                "type": "number",
+              },
+              "visible": Object {
+                "type": "boolean",
+              },
+            },
+            "type": "object",
+          },
+          "id": Object {
+            "type": "string",
+          },
+          "title": Object {
+            "type": "string",
+          },
+        },
+        "type": "object",
+      },
+      "type": "array",
+    },
+    "error": undefined,
+  },
+}
+`;
+
+exports[`#intentTypeToSchemaConverter converts types to schemas for fetchDataNone.ts 1`] = `
+Object {
+  "intentAuthType": "NONE",
+  "requestBody": Object {
+    "properties": Object {
+      "id": Object {
+        "type": "string",
+      },
+      "name": Object {
+        "type": "string",
+      },
+      "query": Object {
+        "type": "string",
+      },
+    },
+    "type": "object",
+  },
+  "response": Object {
+    "data": Object {
+      "items": Object {
+        "properties": Object {
+          "comments": Object {
+            "properties": Object {
+              "totalCount": Object {
+                "type": "number",
+              },
+              "visible": Object {
+                "type": "boolean",
+              },
+            },
+            "type": "object",
+          },
+          "id": Object {
+            "type": "string",
+          },
+          "title": Object {
+            "type": "string",
+          },
+        },
+        "type": "object",
+      },
+      "type": "array",
+    },
+    "error": undefined,
+  },
+}
+`;
+
+exports[`#intentTypeToSchemaConverter converts types to schemas for fetchDataOauth2.ts 1`] = `
+Object {
+  "intentAuthType": "OAUTH2",
+  "requestBody": Object {
+    "properties": Object {
+      "id": Object {
+        "type": "string",
+      },
+      "name": Object {
+        "type": "string",
+      },
+      "query": Object {
+        "type": "string",
+      },
+    },
+    "type": "object",
+  },
+  "response": Object {
+    "data": Object {
+      "items": Object {
+        "properties": Object {
+          "comments": Object {
+            "properties": Object {
+              "totalCount": Object {
+                "type": "number",
+              },
+              "visible": Object {
+                "type": "boolean",
+              },
+            },
+            "type": "object",
+          },
+          "id": Object {
+            "type": "string",
+          },
+          "title": Object {
+            "type": "string",
+          },
+        },
+        "type": "object",
+      },
+      "type": "array",
+    },
+    "error": undefined,
+  },
+}
+`;
+
+exports[`#intentTypeToSchemaConverter converts types to schemas for fetchDataRefType.ts 1`] = `
+Object {
+  "intentAuthType": "OAUTH2",
+  "requestBody": Object {
+    "properties": Object {
+      "reference": Object {
+        "type": "string",
+      },
+    },
+    "type": "object",
+  },
+  "response": Object {
+    "data": Object {
+      "items": Object {
+        "properties": Object {
+          "id": Object {
+            "type": "string",
+          },
+          "name": Object {
+            "type": "string",
+          },
+          "totalCount": Object {
+            "type": "number",
+          },
+        },
+        "type": "object",
+      },
+      "type": "array",
+    },
+    "error": undefined,
+  },
+}
+`;
+
+exports[`#intentTypeToSchemaConverter converts types to schemas for fetchDataUndefined.ts 1`] = `
+Object {
+  "intentAuthType": undefined,
+  "requestBody": undefined,
+  "response": Object {
+    "data": undefined,
+    "error": undefined,
+  },
+}
+`;
+
+exports[`#intentTypeToSchemaConverter converts types to schemas for saveState.ts 1`] = `
+Object {
+  "intentAuthType": "OAUTH2",
+  "requestBody": Object {
+    "properties": Object {
+      "pullRequests": Object {
+        "items": Object {
+          "properties": Object {
+            "comments": Object {
+              "properties": Object {
+                "totalCount": Object {
+                  "type": "number",
+                },
+                "visible": Object {
+                  "type": "boolean",
+                },
+              },
+              "type": "object",
+            },
+            "id": Object {
+              "type": "string",
+            },
+            "title": Object {
+              "type": "string",
+            },
+          },
+          "type": "object",
+        },
+        "type": "array",
+      },
+    },
+    "type": "object",
+  },
+  "response": Object {
+    "data": Object {
+      "items": Object {
+        "properties": Object {
+          "comments": Object {
+            "properties": Object {
+              "totalCount": Object {
+                "type": "number",
+              },
+              "visible": Object {
+                "type": "boolean",
+              },
+            },
+            "type": "object",
+          },
+          "id": Object {
+            "type": "string",
+          },
+          "title": Object {
+            "type": "string",
+          },
+        },
+        "type": "object",
+      },
+      "type": "array",
+    },
+    "error": undefined,
+  },
+}
+`;
