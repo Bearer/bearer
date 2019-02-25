@@ -1,4 +1,5 @@
 import ts from 'typescript'
+import merge from 'lodash.merge'
 
 function isPrimitive(flags: number): boolean {
   return (
@@ -29,10 +30,12 @@ export function convertType(
   }
   if (flags & ts.TypeFlags.Boolean) {
     return { type: 'boolean' }
-  }  if (flags & ts.TypeFlags.Intersection || flags & ts.TypeFlags.Union) {
+  }
+  if (flags & ts.TypeFlags.Intersection || flags & ts.TypeFlags.Union) {
     return (typ as ts.IntersectionType).types.reduce((acc, t) => {
-      return convertType(t, checker, acc)
-    }, definition)
+      const converted = convertType(t, checker, acc)
+      return merge(acc, converted)
+    }, {})
   }
 
   if (flags & ts.TypeFlags.Object) {

@@ -50,6 +50,9 @@ exports[`#generator generates the valid openapi 3.0 document 1`] = `
               \\"schema\\": {
                 \\"type\\": \\"object\\",
                 \\"properties\\": {
+                  \\"id\\": {
+                    \\"type\\": \\"string\\"
+                  },
                   \\"name\\": {
                     \\"type\\": \\"string\\"
                   },
@@ -149,6 +152,9 @@ exports[`#generator generates the valid openapi 3.0 document 1`] = `
               \\"schema\\": {
                 \\"type\\": \\"object\\",
                 \\"properties\\": {
+                  \\"id\\": {
+                    \\"type\\": \\"string\\"
+                  },
                   \\"name\\": {
                     \\"type\\": \\"string\\"
                   },
@@ -357,6 +363,9 @@ exports[`#generator generates the valid openapi 3.0 document 1`] = `
               \\"schema\\": {
                 \\"type\\": \\"object\\",
                 \\"properties\\": {
+                  \\"id\\": {
+                    \\"type\\": \\"string\\"
+                  },
                   \\"name\\": {
                     \\"type\\": \\"string\\"
                   },
@@ -466,6 +475,9 @@ exports[`#generator generates the valid openapi 3.0 document 1`] = `
               \\"schema\\": {
                 \\"type\\": \\"object\\",
                 \\"properties\\": {
+                  \\"id\\": {
+                    \\"type\\": \\"string\\"
+                  },
                   \\"name\\": {
                     \\"type\\": \\"string\\"
                   },

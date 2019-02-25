@@ -5,6 +5,9 @@ Object {
   "intentAuthType": "APIKEY",
   "requestBody": Object {
     "properties": Object {
+      "id": Object {
+        "type": "string",
+      },
       "name": Object {
         "type": "string",
       },
@@ -50,6 +53,9 @@ Object {
   "intentAuthType": "BASIC",
   "requestBody": Object {
     "properties": Object {
+      "id": Object {
+        "type": "string",
+      },
       "name": Object {
         "type": "string",
       },
@@ -140,6 +146,9 @@ Object {
   "intentAuthType": "NONE",
   "requestBody": Object {
     "properties": Object {
+      "id": Object {
+        "type": "string",
+      },
       "name": Object {
         "type": "string",
       },
@@ -185,6 +194,9 @@ Object {
   "intentAuthType": "OAUTH2",
   "requestBody": Object {
     "properties": Object {
+      "id": Object {
+        "type": "string",
+      },
       "name": Object {
         "type": "string",
       },

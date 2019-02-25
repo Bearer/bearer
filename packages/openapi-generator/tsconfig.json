@@ -1,4 +1,5 @@
 {
+  "extends": "@bearer/tsconfig",
   "compilerOptions": {
     "target": "es6",
     "module": "commonjs",

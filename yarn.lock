@@ -2843,6 +2843,13 @@
   dependencies:
     "@types/lodash" "*"
 
+"@types/lodash.merge@^4.6.5":
+  version "4.6.5"
+  resolved "https://registry.yarnpkg.com/@types/lodash.merge/-/lodash.merge-4.6.5.tgz#5f782604cc754ff57661c541678a03cfe62cca19"
+  integrity sha512-aVuP20wtk34imEUC+gg/EqXJBdsS4R6yeX1LixjZQT04qQ3AceqgF8BJ84L43nVGTC3YZLpvcioza8yzZFWtIw==
+  dependencies:
+    "@types/lodash" "*"
+
 "@types/lodash.template@^4.4.4":
   version "4.4.4"
   resolved "https://registry.yarnpkg.com/@types/lodash.template/-/lodash.template-4.4.4.tgz#75fddd12297fb12683f9be42e05c646c359a1ff7"

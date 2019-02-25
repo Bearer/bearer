@@ -85,6 +85,7 @@ function getIntentAuthType(sym: ts.Symbol | undefined, node: ts.Node, checker: t
       return authType
     }
   }
+  return
 }
 
 /**

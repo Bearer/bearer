@@ -81,6 +81,7 @@ function oauthParam(oauth2: boolean): TParam | undefined {
       required: true
     }
   }
+  return
 }
 
 export function topOfSpec(integrationName: string): THeader {
