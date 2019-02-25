@@ -26,7 +26,7 @@
 
 ## 🖥 Screenshots or screen recording
 
-<!-- record terminal (macOS) https:// github.com/asciinema/asciinema -->
+<!-- record terminal (macOS) https://github.com/asciinema/asciinema -->
 
 <!-- Before your changes -->
 
@@ -46,6 +46,5 @@
 
 ## ✅ Checklist
 
-- [ ] Tests were added (if necessary) {
-- [ ]
-  } I used conventional commits
+- [ ] Tests were added (if necessary)
+- [ ] I used conventional commits
