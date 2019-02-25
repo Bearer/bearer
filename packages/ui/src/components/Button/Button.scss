@@ -5,7 +5,7 @@
   --display: var(--bearer-button-display, #{$bearer-button-display});
   --base-size: var(--bearer-base-size, #{$bearer-font-base});
   --font-size: var(--base-size);
-  --font-color: var(--bearer-font-color, #{$bearer-button-font-color});
+  --color: var(--bearer-button-color, --bearer-color, #{$bearer-button-color});
   --font-family: var(--bearer-font-family, #{$bearer-font-family});
   --border: var(--bearer-button-border, #{$bearer-button-border});
   --border-radius: var(--bearer-button-border-radius, #{$bearer-button-border-radius});
@@ -13,122 +13,133 @@
   --padding: var(--bearer-button-padding, #{$bearer-button-padding});
   --opacity: var(--bearer-button-opacity);
   --cursor: var(--bearer-button-cursor, #{$bearer-button-cursor});
+  --outline: var(--bearer-button-outline, #{$bearer-button-outline});
 }
-
-// Sizes
-// ----------------------------------
-
-// .btn-small {
-//   --font-size: calc(var(--base-size) * #{$bearer-decrease-ratio});
-//   --padding: var(--bearer-button-padding, #{$bearer-button-small-padding});
-// }
-
-// .btn-large {
-//   --font-size: calc(var(--base-size) * #{$bearer-increase-ratio});
-//   --padding: var(--bearer-button-padding, #{$bearer-button-large-padding});
-// }
 
 // Kinds + States
 // ----------------------------------
 
 .btn-embed {
-  --font-color: var(--bearer-button-embed-font-color, #{$bearer-button-embed-font-color});
-  --background: var(--bearer-button-embed-background, #{$bearer-button-embed-background});
-  --box-shadow: var(--bearer-button-embed-box-shadow, #{$bearer-button-embed-box-shadow});
-  --border: var(--bearer-button-embed-border, #{$bearer-button-embed-border});
-  --border-radius: var(--bearer-button-embed-border-radius, #{$bearer-button-embed-border-radius});
-  --padding: var(--bearer-button-embed-padding, #{$bearer-button-embed-padding});
+  --padding: var(--bearer-button-padding, #{$bearer-button-embed-padding});
+  --border-radius: var(--bearer-button-border-radius, #{$bearer-button-embed-border-radius});
+
+  --background: var(--bearer-button-embed-background, var(--bearer-button-background, #{$bearer-button-embed-background}));
+  --border: var(--bearer-button-embed-border, var(--bearer-button-border, #{$bearer-button-embed-border}));
+  --box-shadow: var(--bearer-button-embed-box-shadow, var(--bearer-button-box-shadow, #{$bearer-button-embed-box-shadow}));
+  --color: var(--bearer-button-embed-color, var(--bearer-button-color, #{$bearer-button-embed-color}));
 
   &:hover {
-    --background: var(--bearer-button-embed-hover-background, #{$bearer-button-embed-hover-background});
-    --box-shadow: var(--bearer-button-embed-hover-box-shadow, #{$bearer-button-embed-hover-box-shadow});
+    --background: var(--bearer-button-embed-hover-background, var(--bearer-button-embed-background, var(--bearer-button-background, #{$bearer-button-embed-hover-background})));
+    --border: var(--bearer-button-embed-hover-border, var(--bearer-button-embed-border, --bearer-button-border));
+    --box-shadow: var(--bearer-button-embed-hover-box-shadow, var(--bearer-button-embed-box-shadow, var(--bearer-button-box-shadow, #{$bearer-button-embed-hover-box-shadow})));
+    --color: var(--bearer-button-embed-hover-color, var(--bearer-button-embed-color, --bearer-button-color));
   }
 
   &:active {
-    --background: var(--bearer-button-embed-active-background, #{$bearer-button-embed-active-background});
-    --box-shadow: var(--bearer-button-embed-active-box-shadow, #{$bearer-button-embed-active-box-shadow});
+    --background: var(--bearer-button-embed-active-background, var(--bearer-button-embed-background, var(--bearer-button-background, #{$bearer-button-embed-active-background})));
+    --border: var(--bearer-button-embed-active-border, var(--bearer-button-embed-border, --bearer-button-border));
+    --box-shadow: var(--bearer-button-embed-active-box-shadow, var(--bearer-button-embed-box-shadow, var(--bearer-button-box-shadow, #{$bearer-button-embed-active-box-shadow})));
+    --color: var(--bearer-button-embed-active-color, var(--bearer-button-embed-color, --bearer-button-color));
   }
 
   &:disabled {
-    --background: var(--bearer-button-embed-active-background, #{$bearer-button-embed-disabled-background});
-    --box-shadow: var(--bearer-button-embed-active-box-shadow, #{$bearer-button-embed-disabled-box-shadow});
+    --background: var(--bearer-button-embed-disabled-background, var(--bearer-button-embed-background, var(--bearer-button-background, #{$bearer-button-embed-disabled-background})));
+    --border: var(--bearer-button-embed-disabled-border, var(--bearer-button-embed-border, --bearer-button-border));
+    --box-shadow: var(--bearer-button-embed-disabled-box-shadow, var(--bearer-button-embed-box-shadow, var(--bearer-button-box-shadow, #{$bearer-button-embed-disabled-box-shadow})));
+    --color: var(--bearer-button-embed-disabled-color, var(--bearer-button-embed-color, --bearer-button-color));
   }
 }
 
 .btn-primary {
-  --background: var(--bearer-button-background, #{$bearer-button-primary-background});
+  --background: var(--bearer-button-primary-background, var(--bearer-button-background, #{$bearer-button-primary-background}));
+  --border: var(--bearer-button-primary-border, --bearer-button-border);
+  --box-shadow: var(--bearer-button-primary-box-shadow, --bearer-button-box-shadow);
+  --color: var(--bearer-button-primary-color, var(--bearer-button-color, #{$bearer-button-primary-color}));
   
   &:hover {
-    --background: var(--bearer-button-background, #{$bearer-button-primary-background-hover});
+    --background: var(--bearer-button-primary-hover-background, var(--bearer-button-primary-background, var(--bearer-button-background, #{$bearer-button-primary-hover-background})));
+    --border: var(--bearer-button-primary-hover-border, var(--bearer-button-primary-border, --bearer-button-border));
+    --box-shadow: var(--bearer-button-primary-hover-box-shadow, var(--bearer-button-primary-box-shadow, --bearer-button-box-shadow));
+    --color: var(--bearer-button-primary-hover-color, var(--bearer-button-primary-color, var(--bearer-button-color, #{$bearer-button-primary-color})));
   }
 
   &:active {
-    --background: var(--bearer-button-background, #{$bearer-button-primary-background-active});
+    --background: var(--bearer-button-primary-active-background, var(--bearer-button-primary-background, var(--bearer-button-background, #{$bearer-button-primary-active-background})));
+    --border: var(--bearer-button-primary-active-border, var(--bearer-button-primary-border, --bearer-button-border));
+    --box-shadow: var(--bearer-button-primary-active-box-shadow, var(--bearer-button-primary-box-shadow, --bearer-button-box-shadow));
+    --color: var(--bearer-button-primary-active-color, var(--bearer-button-primary-color, var(--bearer-button-color, #{$bearer-button-primary-color})));
   }
 
   &:disabled {
-    --background: var(--bearer-button-background, #{$bearer-button-primary-background-disabled});
+    --background: var(--bearer-button-primary-disabled-background, var(--bearer-button-primary-background, var(--bearer-button-background, #{$bearer-button-primary-disabled-background})));
+    --border: var(--bearer-button-primary-disabled-border, var(--bearer-button-primary-border, --bearer-button-border));
+    --box-shadow: var(--bearer-button-primary-disabled-box-shadow, var(--bearer-button-primary-box-shadow, --bearer-button-box-shadow));
+    --color: var(--bearer-button-primary-disabled-color, var(--bearer-button-primary-color, var(--bearer-button-color, #{$bearer-button-primary-color})));
   }
 }
 
 .btn-secondary {
-  --background: var(--bearer-button-background, #{$bearer-button-secondary-background});
-  --font-color: #{$bearer-button-secondary-font-color};
+  --background: var(--bearer-button-secondary-background, --bearer-button-background);
+  --border: var(--bearer-button-secondary-border, --bearer-button-border);
+  --box-shadow: var(--bearer-button-secondary-box-shadow, --bearer-button-box-shadow);
+  --color: var(--bearer-button-secondary-color, var(--bearer-button-color, #{$bearer-button-secondary-color}));
   
   &:hover {
-    --font-color: #{$bearer-button-secondary-hover-font-color};
+    --background: var(--bearer-button-secondary-hover-background, var(--bearer-button-secondary-background, --bearer-button-background));
+    --border: var(--bearer-button-secondary-hover-border, var(--bearer-button-secondary-border, --bearer-button-border));
+    --box-shadow: var(--bearer-button-secondary-hover-box-shadow, var(--bearer-button-secondary-box-shadow, --bearer-button-box-shadow));
+    --color: var(--bearer-button-secondary-hover-color, var(--bearer-button-secondary-color, var(--bearer-button-color, #{$bearer-button-secondary-hover-color})));
   }
+
   &:active {
-    --font-color: #{$bearer-button-secondary-active-font-color};
+    --background: var(--bearer-button-secondary-active-background, var(--bearer-button-secondary-background, --bearer-button-background));
+    --border: var(--bearer-button-secondary-active-border, var(--bearer-button-secondary-border, --bearer-button-border));
+    --box-shadow: var(--bearer-button-secondary-active-box-shadow, var(--bearer-button-secondary-box-shadow, --bearer-button-box-shadow));
+    --color: var(--bearer-button-secondary-active-color, var(--bearer-button-secondary-color, var(--bearer-button-color, #{$bearer-button-secondary-active-color})));
   }
 
   &:disabled {
-    --font-color: #{$bearer-button-secondary-disabled-font-color};
-  }
-}
-
-.btn-danger {
-  --background: var(--bearer-button-background, #{$bearer-button-danger-background});
-  --font-color: #{$bearer-button-danger-font-color};
-  
-  &:hover {
-    --font-color: #{$bearer-button-danger-hover-font-color};
-  }
-  &:active {
-    --font-color: #{$bearer-button-danger-active-font-color};
-  }
-
-  &:disabled {
-    --font-color: #{$bearer-button-danger-disabled-font-color};
+    --background: var(--bearer-button-secondary-disabled-background, var(--bearer-button-secondary-background, --bearer-button-background));
+    --border: var(--bearer-button-secondary-disabled-border, var(--bearer-button-secondary-border, --bearer-button-border));
+    --box-shadow: var(--bearer-button-secondary-disabled-box-shadow, var(--bearer-button-secondary-box-shadow, --bearer-button-box-shadow));
+    --color: var(--bearer-button-secondary-disabled-color, var(--bearer-button-secondary-color, var(--bearer-button-color, #{$bearer-button-secondary-disabled-color})));
   }
 }
 
 .btn-error {
-  --background: var(--bearer-button-background, #{$bearer-button-error-background});
-  --font-color: #{$bearer-button-error-font-color};
+  --background: var(--bearer-button-error-background, --bearer-button-background);
+  --border: var(--bearer-button-error-border, --bearer-button-border);
+  --box-shadow: var(--bearer-button-error-box-shadow, --bearer-button-box-shadow);
+  --color: var(--bearer-button-error-color, var(--bearer-button-color, #{$bearer-button-error-color}));
   
   &:hover {
-    --font-color: #{$bearer-button-error-hover-font-color};
+    --background: var(--bearer-button-error-hover-background, var(--bearer-button-error-background, --bearer-button-background));
+    --border: var(--bearer-button-error-hover-border, var(--bearer-button-error-border, --bearer-button-border));
+    --box-shadow: var(--bearer-button-error-hover-box-shadow, var(--bearer-button-error-box-shadow, --bearer-button-box-shadow));
+    --color: var(--bearer-button-error-hover-color, var(--bearer-button-error-color, var(--bearer-button-color, #{$bearer-button-error-hover-color})));
   }
+
   &:active {
-    --font-color: #{$bearer-button-error-active-font-color};
+    --background: var(--bearer-button-error-active-background, var(--bearer-button-error-background, --bearer-button-background));
+    --border: var(--bearer-button-error-active-border, var(--bearer-button-error-border, --bearer-button-border));
+    --box-shadow: var(--bearer-button-error-active-box-shadow, var(--bearer-button-error-box-shadow, --bearer-button-box-shadow));
+    --color: var(--bearer-button-error-active-color, var(--bearer-button-error-color, var(--bearer-button-color, #{$bearer-button-error-active-color})));
   }
 
   &:disabled {
-    --font-color: #{$bearer-button-error-disabled-font-color};
+    --background: var(--bearer-button-error-disabled-background, var(--bearer-button-error-background, --bearer-button-background));
+    --border: var(--bearer-button-error-disabled-border, var(--bearer-button-error-border, --bearer-button-border));
+    --box-shadow: var(--bearer-button-error-disabled-box-shadow, var(--bearer-button-error-box-shadow, --bearer-button-box-shadow));
+    --color: var(--bearer-button-error-disabled-color, var(--bearer-button-error-color, var(--bearer-button-color, #{$bearer-button-error-disabled-color})));
   }
 }
 
-/*
-* Tooltip
-*
-* NOTE: We are putting tooltip inside buttons design for now,
-* but tooltip shall be accessible from all UI library elements.
-*/
+// Tooltip
+// ----------------------------------
 
 [data-tooltip]{
   position:relative;
-  outline: none; /* TBC */
+  outline: none;
 }
 
 [data-tooltip]::before {
@@ -162,7 +173,9 @@
 [data-tooltip-type="success"]::before { border-top-color: #F0FAF6;}
 [data-tooltip-type="success"]::after {background-color: #F0FAF6; color: #63C995; }
 
+[data-tooltip-type="error"]::before,
 [data-tooltip-type="danger"]::before { border-top-color: #FDF1ED;}
+[data-tooltip-type="error"]::after,
 [data-tooltip-type="danger"]::after { background-color: #FDF1ED; color: #D4562A; } 
 
 // Apply styles to btn
@@ -174,12 +187,12 @@
   border: var(--border);
   border-radius: var(--border-radius);
   box-shadow: var(--box-shadow);
-  color: var(--font-color);
+  color: var(--color);
   padding: var(--padding);
   font-size: var(--font-size);
   font-family: var(--font-family);
   opacity: var(--opacity, 1);
   cursor: var(--cursor);
-  // outline: initial; // @TODO - setting outline to initial prevent default comportement
+  outline: var(--outline, none);
 }
 

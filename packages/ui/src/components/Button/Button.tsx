@@ -1,6 +1,6 @@
 import { Component, Prop } from '@bearer/core'
 
-export type BKind = 'embed' | 'primary' | 'secondary' | 'danger' | 'error'
+export type BKind = 'embed' | 'primary' | 'secondary' | 'error'
 
 @Component({
   tag: 'bearer-button',

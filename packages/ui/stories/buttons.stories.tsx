@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { storiesOf } from '@storybook/react'
 
-const kinds = [false, 'embed', 'primary', 'secondary', 'danger', 'error']
+const kinds = [false, 'embed', 'primary', 'secondary', 'error']
 
 storiesOf('Buttons', module).addWithJSX(
   'colors',
