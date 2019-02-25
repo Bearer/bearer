@@ -1,4 +1,5 @@
-**/node_modules/
+packages/**/node_modules
+node_modules/
 test/
 lib/
 www/

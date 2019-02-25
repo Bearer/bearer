@@ -23,8 +23,7 @@
     "lerna-publish": "lerna publish --conventional-commits  --registry=https://registry.npmjs.org/",
     "test": "lerna run test:ci --stream",
     "cm": "git-cz",
-    "bootstrap": "lerna bootstrap",
-    "disabled:postinstall": "lerna run prepare"
+    "bootstrap": "lerna bootstrap && lerna run prepare"
   },
   "license": "MIT",
   "husky": {
@@ -39,7 +38,7 @@
     "@commitlint/config-conventional": "^7.3.1",
     "cz-conventional-changelog": "^2.1.0",
     "husky": "^1.3.1",
-    "lerna": "^3.10.6",
+    "lerna": "^3.13.0",
     "lint-staged": "^8.1.0",
     "per-env": "^1.0.2",
     "prettier": "^1.16.1",

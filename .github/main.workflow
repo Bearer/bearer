@@ -1,17 +1,24 @@
 workflow "build + test" {
   on = "push"
-  resolves = ["test"]
+  resolves = ["run test"]
 }
 
-action "setup" {
+action "install" {
   uses = "docker://node:10"
   runs = "yarn"
   args = "install --frozen-lockfile"
 }
 
-action "test" {
+action "bootstrap" {
   uses = "docker://node:10"
-  needs = "setup"
-  args = "yarn"
-  runs = "test"
+  needs = "install"
+  runs = "yarn"
+  args = "bootstrap"
+}
+
+action "run test" {
+  uses = "docker://node:10"
+  needs = "bootstrap"
+  runs = "yarn"
+  args = "test"
 }
