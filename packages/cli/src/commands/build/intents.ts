@@ -36,7 +36,7 @@ export default class BuildIntents extends BaseCommand {
       {
         title: 'Generate openapi.json',
         task: async (_ctx: any, _task: any) => {
-          await GenerateApiDocumenation.run(['--silent'])
+          await GenerateApiDocumenation.run([])
         }
       }
     ]

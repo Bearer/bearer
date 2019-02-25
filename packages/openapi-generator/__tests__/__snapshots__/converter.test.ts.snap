@@ -271,6 +271,17 @@ Object {
 }
 `;
 
+exports[`#intentTypeToSchemaConverter converts types to schemas for fetchDataUndefined.ts 1`] = `
+Object {
+  "intentAuthType": undefined,
+  "requestBody": undefined,
+  "response": Object {
+    "data": undefined,
+    "error": undefined,
+  },
+}
+`;
+
 exports[`#intentTypeToSchemaConverter converts types to schemas for saveState.ts 1`] = `
 Object {
   "intentAuthType": "OAUTH2",

@@ -31,9 +31,9 @@ export default class GenerateApiDocumentation extends BaseCommand {
 
       fs.ensureDirSync(buildViewsComponentsDir)
 
-      const OpenApiSpecPath = path.join(buildViewsComponentsDir, OPEN_API_SPEC)
-      const fileExists = fs.existsSync(OpenApiSpecPath)
-      await fs.writeJSON(OpenApiSpecPath, spec)
+      const openApiSpecPath = path.join(buildViewsComponentsDir, OPEN_API_SPEC)
+      const fileExists = fs.existsSync(openApiSpecPath)
+      await fs.writeFile(openApiSpecPath, spec)
       const action = fileExists ? 'updated' : 'generated'
       this.success(`File ${OPEN_API_SPEC} ${action}!`)
     } catch (e) {

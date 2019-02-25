@@ -4,6 +4,7 @@ import * as globby from 'globby'
 import * as path from 'path'
 import * as ts from 'typescript'
 import * as TJS from 'typescript-json-schema'
+import specGenerator from '@bearer/openapi-generator'
 
 const config = ts.readConfigFile(path.join(__dirname, '../../templates/start', 'tsconfig.json'), ts.sys.readFile)
 
@@ -190,72 +191,12 @@ export class OpenApiSpecGenerator {
       )
       ts.transform(sourceFile, [transformer(generator)])
     })
-    return this.generate(intentEntries, this.bearerConfig)
-  }
-
-  generate(
-    entries: IIntentEntry[],
-    { scenarioTitle, scenarioUuid }: { scenarioTitle?: string; scenarioUuid: string }
-  ): IOpenApiSpec {
-    return {
-      openapi: '3.0.0',
-      info: {
-        description: `openapi definition file for ${scenarioTitle}`,
-        version: '0.0.1',
-        title: scenarioTitle,
-        contact: {
-          email: 'bearer@bearer.sh'
-        },
-        license: {
-          name: 'MIT'
-        }
-      },
-      servers: [
-        {
-          url: 'https://int.bearer.sh/backend/api/v1'
-        }
-      ],
-      tags: [
-        {
-          name: 'integration',
-          description: `List of endpoints providing backend to backend integration with ${scenarioTitle}`,
-          externalDocs: {
-            description: 'Find out more',
-            url: 'https://www.bearer.sh'
-          }
-        }
-      ],
-      paths: entries.reduce((acc, entry) => {
-        return {
-          ...acc,
-          [`/${scenarioUuid}/${entry.intentName}`]: {
-            post: {
-              parameters: entry.paramsSchema,
-              summary: entry.intentName,
-              requestBody: {
-                content: {
-                  'application/json': {
-                    schema: entry.bodySchema
-                  }
-                }
-              },
-              responses: {
-                ...unAuthorizedReponse,
-                ...forbiddenResponse,
-                '200': {
-                  description: 'Share',
-                  content: {
-                    'application/json': {
-                      schema: entry.outputSchema
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      }, {})
-    }
+    return specGenerator({
+      intents: intentEntries.map(entry => entry.intentName),
+      intentsDir: this.srcIntentsDir,
+      integrationUuid: this.bearerConfig.scenarioUuid,
+      integrationName: this.bearerConfig.scenarioTitle || ''
+    })
   }
 }
 
@@ -281,42 +222,6 @@ const DEFAULT_PARAMS: ISchemaParam[] = [
   //   required: true
   // }
 ]
-
-const unAuthorizedReponse = {
-  '401': {
-    description: 'Unauthorized',
-    content: {
-      'application/json': {
-        schema: {
-          type: 'object',
-          properties: {
-            error: {
-              type: 'string'
-            }
-          }
-        }
-      }
-    }
-  }
-}
-
-const forbiddenResponse = {
-  '403': {
-    description: 'Access forbidden',
-    content: {
-      'application/json': {
-        schema: {
-          type: 'object',
-          properties: {
-            error: {
-              type: 'string'
-            }
-          }
-        }
-      }
-    }
-  }
-}
 
 export interface ISchemaParam {
   in: 'query' | 'header'

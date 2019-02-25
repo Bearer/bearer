@@ -10,16 +10,20 @@ type TOutput = { requestBody: any; response: any; intentAuthType?: string }
 /**
  * find action method in class and return relevant node
  */
-function findActionMethod(node: ts.ClassDeclaration): ts.MethodDeclaration | undefined {
-  return node.members.find((node: ts.ClassElement) => {
+function findActionMethod(node: ts.ClassDeclaration): ts.MethodDeclaration | ts.ArrowFunction | undefined {
+  const action = node.members.find((node: ts.ClassElement) => {
     if (node.name) {
       return node.name.getText() === INTENT_ACTION
     }
     return false
-  }) as ts.MethodDeclaration
+  })
+  if (ts.isPropertyDeclaration(action!)) {
+    return (action! as ts.PropertyDeclaration).initializer as ts.ArrowFunction
+  }
+  return action as ts.MethodDeclaration
 }
 
-function serializeBody(method: ts.MethodDeclaration, checker: ts.TypeChecker) {
+function serializeBody(method: ts.MethodDeclaration | ts.ArrowFunction, checker: ts.TypeChecker) {
   const symbol = checker.getSymbolAtLocation(method.name)
   let data
   let error
@@ -123,8 +127,6 @@ export function intentTypesToSchemaConverter(
     if (ts.isClassDeclaration(node) && node.name) {
       const actionMethodNode = findActionMethod(node)
       if (actionMethodNode) {
-        // This is a top level class, get its symbol
-
         const parameterNode = actionMethodNode.parameters[0]
         const sym = checker.getSymbolAtLocation(parameterNode.name)
         output.requestBody = serializeParameters(sym, parameterNode, checker)
@@ -169,7 +171,7 @@ export default function generator({
       specPath({
         integrationUuid,
         intentName: intent,
-        response: typeSchema.response,
+        response: { type: 'object', properties: typeSchema.response },
         requestBody: typeSchema.requestBody,
         oauth2: typeSchema.intentAuthType === 'OAUTH2'
       })

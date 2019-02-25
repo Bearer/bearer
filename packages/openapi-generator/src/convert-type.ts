@@ -57,6 +57,7 @@ export function convertType(
       return acc
     }, definition)
   }
+
   if (typ.aliasSymbol) {
     const aliasedType = checker.getTypeOfSymbolAtLocation(typ.aliasSymbol, typ.aliasSymbol.valueDeclaration!)
     return convertType(aliasedType, checker, definition)

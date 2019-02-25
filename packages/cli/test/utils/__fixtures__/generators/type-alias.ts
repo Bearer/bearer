@@ -2,7 +2,7 @@ import { TOAUTH2AuthContext, FetchData, TFetchActionEvent, TFetchPromise } from 
 // Uncomment this line if you need to use Client
 // import Client from './client'
 
-export default class Intent extends FetchData implements FetchData {
+export default class IntentTypeAlias extends FetchData implements FetchData<ReturnedData, any, TOAUTH2AuthContext> {
   action = async (event: TFetchActionEvent<Params, TOAUTH2AuthContext>): TFetchPromise<ReturnedData> => {
     // const token = event.context.authAccess.accessToken
     // Put your logic here
