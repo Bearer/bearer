@@ -1,3 +1,3 @@
-// import debug from '@bearer/logger'
+import debug from '@bearer/logger'
 
-export default (...args: any[]) => console.log('bearer:js', ...args)
+export default debug('js')

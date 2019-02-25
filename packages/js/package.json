@@ -13,10 +13,17 @@
   "files": [
     "lib/"
   ],
+  "dependencies": {
+    "@bearer/logger": "^0.96.1",
+    "lodash.get": "^4.4.2",
+    "lodash.merge": "^4.6.1"
+  },
   "devDependencies": {
     "@bearer/tsconfig": "^0.96.1",
     "@types/debounce": "^1.2.0",
     "@types/jest": "^23.3.13",
+    "@types/lodash.get": "^4.4.4",
+    "@types/lodash.merge": "^4.6.4",
     "jest": "^23.6.0",
     "rollup-plugin-commonjs": "^9.2.0",
     "rollup-plugin-filesize": "^6.0.1",
