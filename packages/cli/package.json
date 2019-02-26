@@ -10,6 +10,7 @@
   "dependencies": {
     "@bearer/bearer-cli": "^0.97.0",
     "@bearer/intents": "^0.97.0",
+    "@bearer/openapi-generator": "0.96.2-next.13",
     "@bearer/security": "^0.97.0",
     "@bearer/transpiler": "^0.97.0",
     "@bearer/types": "^0.97.0",
