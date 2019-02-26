@@ -1,3 +1,5 @@
+import bearer from '@bearer/js'
+
 import Bearer from './bearer'
 import classNames from './classnames'
 import * as Debug from './debug'
@@ -20,8 +22,8 @@ export declare const t: TTranslatorFunc
 
 export declare const p: TPluralizerFunc
 
-export const scopedT = (scope: string) => scopedTranslate(scope)(Bearer.i18nStore)
-export const scopedP = (scope: string) => scopedPluralize(scope)(Bearer.i18nStore)
+export const scopedT = (scope: string) => scopedTranslate(scope)(bearer.i18n)
+export const scopedP = (scope: string) => scopedPluralize(scope)(bearer.i18n)
 
 export default Bearer
 

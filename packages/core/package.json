@@ -41,6 +41,7 @@
     "url": "github:Bearer/bearer"
   },
   "devDependencies": {
+    "@bearer/js": "^0.96.1",
     "@types/fbemitter": "^2.0.32",
     "@types/jest": "^23.3.13",
     "@types/lodash.get": "^4.4.4",
@@ -75,6 +76,9 @@
     "rollup-plugin-replace": "^2.1.0",
     "rollup-plugin-strip": "^1.2.0",
     "typescript": "^3.2.4"
+  },
+  "peerDependencies": {
+    "@bearer/js": "^0.96.1"
   },
   "gitHead": "cb2654b19000e2ad6f31a0e4ed715a6298c8df2d"
 }

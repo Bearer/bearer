@@ -1,19 +1,20 @@
-import { I18nStore } from './store'
+import { I18n } from '@bearer/js/lib/cjs/lib/i18n'
+// import { I18nStore } from './store'
 import template from 'lodash.template'
 
 const interpolate = /{{([\s\S]+?)}}/g
 
-export const scopedTranslate = (scope?: string): TTranslator => (store: I18nStore) => (
+export const scopedTranslate = (scope?: string): TTranslator => (store: I18n) => (
   key: string,
   defaultValue: string,
   vars?: Record<string, any>
 ) => {
-  return template(store.get(key, scope) || defaultValue, {
+  return template((store.get(key, scope) as string) || defaultValue, {
     interpolate
   })(vars || {})
 }
 
-export const scopedPluralize = (scope?: string): TPluralizer => (store: I18nStore) => (
+export const scopedPluralize = (scope?: string): TPluralizer => (store: I18n) => (
   key: string,
   count: number,
   defaultValue: string,
@@ -40,7 +41,7 @@ export type TTranslatorFunc = {
 }
 
 type TTranslator = {
-  (store: I18nStore): TTranslatorFunc
+  (store: I18n): TTranslatorFunc
 }
 
 /**
@@ -53,5 +54,5 @@ export type TPluralizerFunc = {
   (key: string, count: number, defaultValue: string, vars?: Record<string, any>): string
 }
 type TPluralizer = {
-  (store: I18nStore): TPluralizerFunc
+  (store: I18n): TPluralizerFunc
 }
