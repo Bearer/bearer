@@ -1,5 +1,6 @@
 import debounce from 'debounce'
 import { TIntegration } from './types'
+import logger from './logger'
 
 const prefix = 'bearer'
 const DEFAULT_OPTIONS = {
@@ -28,13 +29,18 @@ export default class Bearer {
    */
   loadMissingIntegrations = () => {
     const elements = findElements(document.getElementsByTagName('*'))
-    this.sendTags(elements.filter(this.registeredIntegration))
+    const requestedElements = elements.filter(t => !this.registeredIntegration(t))
+    logger(this.registeredIntegrations, elements, requestedElements)
+    this.sendTags(requestedElements)
   }
 
   /**
    * check wether if an integration is resgistered
    */
   registeredIntegration = (tagName: string): boolean => {
+    // NOTE:
+    // .constructor !== HTMLElement looks weird but it does not work the other way   ¯\_(ツ)_/¯
+    // constructor is supposed to be class extends HTMLElement{}
     this.registeredIntegrations[tagName] =
       this.registeredIntegrations[tagName] || document.createElement(tagName).constructor !== HTMLElement
     return this.registeredIntegrations[tagName]

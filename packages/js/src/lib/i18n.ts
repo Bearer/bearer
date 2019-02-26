@@ -36,7 +36,7 @@ export class I18n {
   }
 
   // @ts-ignore
-  get = (integrationName?: string, key: string, options: Partial<{ locale: string }> = {}): TransLationValue => {
+  get = (integrationName: string | null, key: string, options: Partial<{ locale: string }> = {}): TransLationValue => {
     const path = [options.locale || this.locale, integrationName, key].filter(m => m).join('.')
     debug('lookup key', path)
     return get(this._dictionnary, path)

@@ -9,7 +9,11 @@ import Bearer from '../../lib/bearer'
 
 // must be run within its own file
 describe('e2e testing', () => {
-  it('inject scripts', async done => {
+  /**
+   * script tags are not injected, in jsdom constructor === HTMLUnknowElement but in browser it is the opposite.
+   * basically, if tags are included it wont work in prod (I know it is crazy)
+   */
+  it('inject scripts ', async done => {
     expect.assertions(1)
 
     // @ts-ignore
