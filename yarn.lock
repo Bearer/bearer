@@ -971,13 +971,6 @@
   dependencies:
     debug "^4.1.0"
 
-"@bearer/openapi-generator@0.96.2-next.13":
-  version "0.96.2-next.13"
-  resolved "https://registry.yarnpkg.com/@bearer/openapi-generator/-/openapi-generator-0.96.2-next.13.tgz#b4311d4b4effcf8b9b50c7b19c9f877c42a00d24"
-  integrity sha512-5Hrn/CsG3GkELm+m2REaCu3v8JoOq6QAjp4Iv5b1mH+IjWLMU2u1giCHGyw8TsfvSsoFl0zlOK6iUwVZqR8Drw==
-  dependencies:
-    lodash.merge "^4.6.1"
-
 "@bearer/package-init@^0.78.0":
   version "0.78.0"
   resolved "https://registry.yarnpkg.com/@bearer/package-init/-/package-init-0.78.0.tgz#1f899a7c56f25f58c32902e7b9a6e11e24656b01"
