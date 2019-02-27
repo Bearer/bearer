@@ -11,7 +11,7 @@ Bearer lib can be used instantly in your page or with a package system.
 ```html
 <script src="https://cdn.jsdelivr.net/npm/@bearer/js@beta5/lib/bearer.production.min.js"></script>
 <script>
-  // you have now access to a global variable
+  // you have now access to a global `bearer` function, initialize your code by passing the `clientId` as parameter
   bearer('clientId')
 </script>
 ```
@@ -40,11 +40,11 @@ class MyApp {
 
 ### i18n
 
-`@bearer/js` comes with a i18n module that let you deal with internationalization of Bearer's integrations
+`@bearer/js` comes with an i18n module that let you deal with internationalization of Bearer's integrations
 
 **bearer.i18n.locale**
 
-Let you change the current locale you are using
+Lets you change the locale
 
 ```js
 bearer.i18n.locale = 'es'
@@ -52,7 +52,7 @@ bearer.i18n.locale = 'es'
 
 **bearer.i18n.load**
 
-Let you load custom translation for a given (or a set of) integration
+Lets you load custom translation for integrations
 
 ```js
 // with a simple dictionnary
@@ -70,10 +70,10 @@ bearer.i18n.load('integration-uuid', promiseReturningADictionnary)
 const dictionnary = { titles: { welcome: 'Guten Morgen' } }
 bearer.i18n.load('integration-uuid', dictionnary, { locale: 'de' })
 
-// for a set of integrations
+// for multiple integrations on a single page
 const dictionnary = {
   ['integration-one-uuid']: { title: { welcome: 'Hello my friend' } },
-  ['integration-two-uuid']: { message: { goodby: 'Bye Bye' } }
+  ['integration-two-uuid']: { message: { goodbye: 'Bye Bye' } }
 }
 bearer.i18n.load(null, dictionnary)
 ```
