@@ -10,7 +10,7 @@ function readFile(folder: string, filename: string): string {
   return _readFile(destination, folder, filename)
 }
 
-const auths = ['OAUTH2', 'BASIC', 'APIKEY', 'NONE']
+const auths = ['OAUTH2', 'BASIC', 'APIKEY', 'NONE', 'OAUTH1']
 
 describe.each(Object.values(auths))('%s', auth => {
   it(`generates a scenario without any prompt and ${auth}`, async () => {

@@ -115,6 +115,61 @@ exports[`NONE generates a scenario without any prompt and NONE 2`] = `
 "
 `;
 
+exports[`OAUTH1 generates a scenario without any prompt and OAUTH1 1`] = `
+"
+What's next?
+
+,[1m   cd OAUTH1Scenario && bearer start[22m
+,[32mScenario initialized, name: OAUTH1Scenario, authentication type: OAuth1[39m
+,[90m    create: [39m[37m.bearer/init/new/OAUTH1/.gitignore[39m
+,[90m    create: [39m[37m.bearer/init/new/OAUTH1/.scenariorc[39m
+,[90m    create: [39m[37m.bearer/init/new/OAUTH1/LICENSE[39m
+,[90m    create: [39m[37m.bearer/init/new/OAUTH1/auth.config.json[39m
+,[90m    create: [39m[37m.bearer/init/new/OAUTH1/config.dev.js.example[39m
+,[90m    create: [39m[37m.bearer/init/new/OAUTH1/intents/client.ts[39m
+,[90m    create: [39m[37m.bearer/init/new/OAUTH1/intents/tsconfig.json[39m
+,[90m    create: [39m[37m.bearer/init/new/OAUTH1/package.json[39m
+,[90m    create: [39m[37m.bearer/init/new/OAUTH1/spec.ts[39m
+,[90m    create: [39m[37m.bearer/init/new/OAUTH1/tsconfig.json[39m
+,[90m    create: [39m[37m.bearer/init/new/OAUTH1/views/index.html[39m
+,[90m    create: [39m[37m.bearer/init/new/OAUTH1/views/index.ts[39m
+,[90m    create: [39m[37m.bearer/init/new/OAUTH1/views/openapi.json[39m
+,* read the bearer documentation at https://docs.bearer.sh
+
+,* start your local development environement by running:
+
+"
+`;
+
+exports[`OAUTH1 generates a scenario without any prompt and OAUTH1 2`] = `
+"{
+  \\"requestTokenURL\\": \\"https://example.com/oauth/RequestToken\\",
+  \\"accessTokenURL\\": \\"https://example.com/oauth/AccessToken\\",
+  \\"userAuthorizationURL\\": \\"https://example.com/oauth/Authorize\\",
+  \\"callbackURL\\": \\"https://int.bearer.sh/v2/auth/callback\\",
+  \\"authType\\": \\"OAUTH1\\",
+  \\"signatureMethod\\": \\"HMAC-SHA1\\",
+  \\"tokenParams\\": {},
+  \\"authorizationParams\\": {},
+  \\"config\\": {
+    \\"scope\\": []
+  },
+  \\"setupViews\\": [
+    {
+      \\"type\\": \\"text\\",
+      \\"label\\": \\"Customer Key\\",
+      \\"controlName\\": \\"customerKey\\"
+    },
+    {
+      \\"type\\": \\"password\\",
+      \\"label\\": \\"Customer Secret\\",
+      \\"controlName\\": \\"customerSecret\\"
+    }
+  ]
+}
+"
+`;
+
 exports[`OAUTH2 generates a scenario without any prompt and OAUTH2 1`] = `
 "
 What's next?
