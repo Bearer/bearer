@@ -163,7 +163,7 @@ export default function generator({
   integrationName: string
 }): string {
   const doc = topOfSpec(integrationName)
-  const schemas = intents.reduce((acc, intent) => {
+  const schemas = intents.sort().reduce((acc, intent) => {
     const intentPath = path.join(intentsDir, `${intent}.ts`)
     const typeSchema = intentTypesToSchemaConverter(intentPath)
     return Object.assign(
