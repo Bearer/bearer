@@ -4,6 +4,7 @@ import commonjs from 'rollup-plugin-commonjs'
 import resolve from 'rollup-plugin-node-resolve'
 import { terser } from 'rollup-plugin-terser'
 import builtins from 'rollup-plugin-node-builtins'
+import filesize from 'rollup-plugin-filesize'
 
 export default [
   // browser-friendly UMD build
@@ -12,7 +13,7 @@ export default [
     output: {
       name: 'logger',
       file: pkg.browser,
-      format: 'iife'
+      format: 'umd'
     },
     plugins: [
       typescript(),
@@ -21,7 +22,11 @@ export default [
         browser: true
       }),
       commonjs({}),
-      terser()
+      terser(),
+      filesize({
+        showMinifiedSize: false,
+        showGzippedSize: true
+      })
     ]
   },
 
@@ -37,7 +42,17 @@ export default [
       file: pkg.module,
       format: 'es'
     },
-    plugins: [typescript(), builtins(), resolve(), commonjs(), terser()]
+    plugins: [
+      typescript(),
+      builtins(),
+      resolve(),
+      commonjs(),
+      terser(),
+      filesize({
+        showMinifiedSize: false,
+        showGzippedSize: true
+      })
+    ]
   },
   {
     input: 'src/logger.ts',
@@ -45,6 +60,16 @@ export default [
       file: pkg.main,
       format: 'cjs'
     },
-    plugins: [typescript(), builtins(), resolve(), commonjs(), terser()]
+    plugins: [
+      typescript(),
+      builtins(),
+      resolve(),
+      commonjs(),
+      terser(),
+      filesize({
+        showMinifiedSize: false,
+        showGzippedSize: true
+      })
+    ]
   }
 ]

@@ -44,6 +44,7 @@
     "prettier": "^1.16.1",
     "rollup": "^0.68.0",
     "rollup-plugin-commonjs": "^9.2.0",
+    "rollup-plugin-filesize": "^6.0.1",
     "rollup-plugin-node-builtins": "^2.1.2",
     "rollup-plugin-node-globals": "^1.4.0",
     "rollup-plugin-node-resolve": "^4.0.0",
