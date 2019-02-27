@@ -36,7 +36,8 @@
     "start": "tsc --watch",
     "build": "tsc -p tsconfig.json",
     "clean": "rm -rf lib",
-    "prepack": "yarn clean && yarn build",
+    "prepack": "NODE_ENV=production yarn build",
+    "prepare": "yarn clean && yarn build",
     "test": "jest",
     "test:ci": "jest --coverage"
   },
