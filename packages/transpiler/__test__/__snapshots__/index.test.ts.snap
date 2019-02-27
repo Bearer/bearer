@@ -413,7 +413,9 @@ export class AttachPullRequestAction {
     @Listen(\\"body:bearer-sponge-bob-attachpullrequest-farmersaved\\")
     farmerRefIdChanged(event) {
         if (this.farmerRefId !== event.detail.referenceId) {
-            this.farmerRefId = event.detail.referenceId;
+            if (!this.farmerRefId) {
+                this.farmerRefId = event.detail.referenceId;
+            }
         }
         else {
             this._loadFarmer();
@@ -446,7 +448,9 @@ export class AttachPullRequestAction {
     @Listen(\\"body:bearer-sponge-bob-scope-goatmilked\\")
     goatIdChanged(event) {
         if (this.goatId !== event.detail.referenceId) {
-            this.goatId = event.detail.referenceId;
+            if (!this.goatId) {
+                this.goatId = event.detail.referenceId;
+            }
         }
         else {
             this._loadGoat();

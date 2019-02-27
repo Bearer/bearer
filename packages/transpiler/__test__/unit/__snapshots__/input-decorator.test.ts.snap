@@ -71,7 +71,9 @@ class NoOptionsComponent {
     @Listen(\\"body:no-options:farmerSaved\\")
     farmerRefIdChanged(event) {
         if (this.farmerRefId !== event.detail.referenceId) {
-            this.farmerRefId = event.detail.referenceId;
+            if (!this.farmerRefId) {
+                this.farmerRefId = event.detail.referenceId;
+            }
         }
         else {
             this._loadFarmer();
@@ -101,7 +103,9 @@ class NoOptionsComponent {
     @Listen(\\"body:no-options:aStringSaved\\")
     aStringRefIdChanged(event) {
         if (this.aStringRefId !== event.detail.referenceId) {
-            this.aStringRefId = event.detail.referenceId;
+            if (!this.aStringRefId) {
+                this.aStringRefId = event.detail.referenceId;
+            }
         }
         else {
             this._loadAString();
@@ -131,7 +135,9 @@ class NoOptionsComponent {
     @Listen(\\"body:no-options:aStringWithoutInitializerSaved\\")
     aStringWithoutInitializerRefIdChanged(event) {
         if (this.aStringWithoutInitializerRefId !== event.detail.referenceId) {
-            this.aStringWithoutInitializerRefId = event.detail.referenceId;
+            if (!this.aStringWithoutInitializerRefId) {
+                this.aStringWithoutInitializerRefId = event.detail.referenceId;
+            }
         }
         else {
             this._loadAStringWithoutInitializer();
@@ -163,7 +169,9 @@ class NoOptionsComponent {
     @Listen(\\"body:no-options:objectSaved\\")
     objectRefIdChanged(event) {
         if (this.objectRefId !== event.detail.referenceId) {
-            this.objectRefId = event.detail.referenceId;
+            if (!this.objectRefId) {
+                this.objectRefId = event.detail.referenceId;
+            }
         }
         else {
             this._loadObject();
@@ -197,7 +205,9 @@ class NoOptionsComponent {
     @Listen(\\"body:no-options:objectWithoutInitializerSaved\\")
     objectWithoutInitializerRefIdChanged(event) {
         if (this.objectWithoutInitializerRefId !== event.detail.referenceId) {
-            this.objectWithoutInitializerRefId = event.detail.referenceId;
+            if (!this.objectWithoutInitializerRefId) {
+                this.objectWithoutInitializerRefId = event.detail.referenceId;
+            }
         }
         else {
             this._loadObjectWithoutInitializer();
@@ -229,7 +239,9 @@ class NoOptionsComponent {
     @Listen(\\"body:other-group:patrickWasKilled\\")
     patrickChanged(event) {
         if (this.patrick !== event.detail.referenceId) {
-            this.patrick = event.detail.referenceId;
+            if (!this.patrick) {
+                this.patrick = event.detail.referenceId;
+            }
         }
         else {
             this._loadSpongeBob();
@@ -259,7 +271,9 @@ class NoOptionsComponent {
     @Listen(\\"body:no-options:spongeBobOverridedSaved\\")
     refNotOverridedChanged(event) {
         if (this.refNotOverrided !== event.detail.referenceId) {
-            this.refNotOverrided = event.detail.referenceId;
+            if (!this.refNotOverrided) {
+                this.refNotOverrided = event.detail.referenceId;
+            }
         }
         else {
             this._loadSpongeBobOverrided();

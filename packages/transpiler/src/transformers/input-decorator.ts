@@ -155,7 +155,16 @@ function createEventListener(meta: InputMeta) {
         ts.createIf(
           ts.createBinary(propAccessIdentifier, ts.SyntaxKind.ExclamationEqualsEqualsToken, referenceIdIdentifier),
           ts.createBlock([
-            ts.createStatement(ts.createBinary(propAccessIdentifier, ts.SyntaxKind.EqualsToken, referenceIdIdentifier))
+            // we don't have any scoping for now, this is a temporary workaround until we handle that in a better way
+            // nothing gets updated if a reference has been provided
+            ts.createIf(
+              ts.createPrefix(ts.SyntaxKind.ExclamationToken, propAccessIdentifier),
+              ts.createBlock([
+                ts.createStatement(
+                  ts.createBinary(propAccessIdentifier, ts.SyntaxKind.EqualsToken, referenceIdIdentifier)
+                )
+              ])
+            )
           ]),
           ts.createBlock([createLoadDataCall(meta)])
         )
