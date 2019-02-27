@@ -1,22 +1,24 @@
 import debounce from 'debounce'
 import { TIntegration } from './types'
-import logger from './logger'
+import debug from './logger'
 
+const logger = debug.extend('Bearer')
 const prefix = 'bearer'
 const DEFAULT_OPTIONS = {
+  integrationHost: 'INTEGRATION_HOST_URL',
   domObserver: true,
   refreshDebounceDelay: 200
 }
 
 export default class Bearer {
   // @ts-ignore for now
-  private registeredIntegrations: Record<string, bolean> = {}
-  private config: TBearerOptions = DEFAULT_OPTIONS
+  config: TBearerOptions = DEFAULT_OPTIONS
+  private registeredIntegrations: Record<string, boolean> = {}
   private observer?: MutationObserver
   private debounceRefresh: () => void
 
   constructor(readonly clientId: string, options?: Partial<TBearerOptions>) {
-    this.config = { ...options, ...DEFAULT_OPTIONS }
+    this.config = { ...DEFAULT_OPTIONS, ...options }
     this.debounceRefresh = debounce(this.loadMissingIntegrations, this.config.refreshDebounceDelay)
     this.initialIntegrationLoading()
     if (this.config.domObserver) {
@@ -100,7 +102,7 @@ export default class Bearer {
       return Promise.resolve(true)
     }
     try {
-      const response = await fetch('BEARER_PARSE_TAGS_URI', {
+      const response = await fetch(`${this.config.integrationHost}/v1/parse-tags`, {
         headers: { 'content-type': 'application/json' },
         body: JSON.stringify({ tags, clientId: this.clientId }),
         method: 'POST'
@@ -122,8 +124,9 @@ export default class Bearer {
   }
 }
 
-type TBearerOptions = {
+export type TBearerOptions = {
   domObserver: boolean
+  integrationHost: string
   refreshDebounceDelay: number
 }
 

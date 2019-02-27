@@ -36,7 +36,7 @@ const createConfiguration = ({ input, output }) => ({
     ...plugins,
     replace({
       BEARER_VERSION: pkg.version,
-      BEARER_PARSE_TAGS_URI: process.env.BEARER_PARSE_TAGS_URI || 'https://int.bearer.sh/v1/parse-tags',
+      INTEGRATION_HOST_URL: process.env.INTEGRATION_HOST_URL || 'https://int.bearer.sh',
       __DEV__: mode === 'development',
       'process.env.NODE_ENV': JSON.stringify('production')
     }),
