@@ -167,6 +167,60 @@ export type ReturnedData = {
 "
 `;
 
+exports[`Generate OAUTH1 - generate:intent Fetch intent 1`] = `
+"import { TOAUTH1AuthContext, FetchData, TFetchActionEvent, TFetchPromise } from '@bearer/intents'
+// Uncomment this line if you need to use Client
+// import Client from './client'
+
+export default class FetchDataIntentIntent extends FetchData implements FetchData<ReturnedData, any, TOAUTH1AuthContext> {
+  async action(event: TFetchActionEvent<Params, TOAUTH1AuthContext>): TFetchPromise<ReturnedData> {
+    // Put your logic here
+    return { data: [] }
+  }
+}
+
+/**
+ * Typing
+ */
+export type Params = {
+  // name: string
+}
+
+export type ReturnedData = {
+  // foo: string[]
+}
+"
+`;
+
+exports[`Generate OAUTH1 - generate:intent Save intent 1`] = `
+"import { TOAUTH1AuthContext, SaveState, TSaveActionEvent, TSavePromise } from '@bearer/intents'
+// Uncomment this line if you need to use Client
+// import Client from './client'
+
+export default class SaveIntentIntent extends SaveState implements SaveState<State, ReturnedData, any, TOAUTH1AuthContext> {
+  async action(event: TSaveActionEvent<State, Params, TOAUTH1AuthContext>): TSavePromise<State, ReturnedData> {
+    // Put your logic here
+    return { state: [], data: [] }
+  }
+}
+
+/**
+ * Typing
+ */
+export type Params = {
+  // name: string
+}
+
+export type State = {
+  // foo: string[]
+}
+
+export type ReturnedData = {
+  // foo: string[]
+}
+"
+`;
+
 exports[`Generate OAUTH2 - generate:intent Fetch intent 1`] = `
 "import { TOAUTH2AuthContext, FetchData, TFetchActionEvent, TFetchPromise } from '@bearer/intents'
 // Uncomment this line if you need to use Client

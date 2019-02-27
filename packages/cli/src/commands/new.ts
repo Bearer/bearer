@@ -13,6 +13,7 @@ import GenerateSetup from './generate/setup'
 import GenerateSpec from './generate/spec'
 
 const authTypes = {
+  [Authentications.OAuth1]: { name: 'OAuth1', value: Authentications.OAuth1 },
   [Authentications.OAuth2]: { name: 'OAuth2', value: Authentications.OAuth2 },
   [Authentications.Basic]: { name: 'Basic Auth', value: Authentications.Basic },
   [Authentications.ApiKey]: { name: 'API Key', value: Authentications.ApiKey },
@@ -101,13 +102,27 @@ export default class New extends BaseCommand {
     }
   }
 
-  getVars = (name: string) => ({
+  getVars = (name: string, authType: Authentications) => ({
     scenarioTitle: name,
     componentName: this.case.pascal(name),
     componentTagName: this.case.kebab(name),
-    bearerTagVersion: process.env.BEARER_PACKAGE_VERSION || 'beta5'
+    bearerTagVersion: process.env.BEARER_PACKAGE_VERSION || 'beta5',
+    bearerRestClient: this.bearerRestClient(authType)
   })
 
+  bearerRestClient(authType: Authentications): string {
+    switch (authType) {
+      case Authentications.OAuth1:
+        return '"oauth": "^0.9.15"'
+      case Authentications.ApiKey:
+      case Authentications.Basic:
+      case Authentications.NoAuth:
+      case Authentications.OAuth1:
+        return '"axios": "^0.18.0"'
+      default:
+        return '"axios": "^0.18.0"'
+    }
+  }
   get copyDestFolder(): string {
     if (this.path) {
       return path.resolve(this.path)
@@ -115,7 +130,7 @@ export default class New extends BaseCommand {
     return path.join(process.cwd(), this.destinationFolder)
   }
 
-  createStructure(name: string, authType: string): Promise<string[]> {
+  createStructure(name: string, authType: Authentications): Promise<string[]> {
     if (fs.existsSync(this.copyDestFolder)) {
       return Promise.reject(this.colors.bold('Destination already exists: ') + this.copyDestFolder)
     }
@@ -134,18 +149,18 @@ export default class New extends BaseCommand {
       group: 'setup',
       label: 'Setup Display Component'
     },`
-    const vars = authType === 'noAuth' || authType === 'NONE' ? {} : { setup }
+    const vars = authType === Authentications.NoAuth ? {} : { setup }
     return copyFiles(
       this,
       path.join('init', 'structure'),
       this.copyDestFolder,
-      { ...vars, ...this.getVars(name) },
+      { ...vars, ...this.getVars(name, authType) },
       true
     )
   }
 
   createAuthenticationFiles(name: string, authType: Authentications): Promise<string[]> {
-    return copyFiles(this, path.join('init', authType), this.copyDestFolder, this.getVars(name), true)
+    return copyFiles(this, path.join('init', authType), this.copyDestFolder, this.getVars(name, authType), true)
   }
 
   async askForAuthType(): Promise<Authentications> {

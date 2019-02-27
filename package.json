@@ -15,7 +15,7 @@
       "prettier --write"
     ],
     "*.{js,css,tsx,ts,json}": [
-      "prettier --write",
+      "prettier --write --config ./.prettierrc",
       "tslint -c tslint.json --fix",
       "git add"
     ]

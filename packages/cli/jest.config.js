@@ -4,6 +4,7 @@ module.exports = {
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
   setupFiles: ['<rootDir>/test/setup.js'],
   testEnvironment: 'node',
+  modulePathIgnorePatterns: ['<rootDir>/templates'],
   testPathIgnorePatterns: [
     '/node_modules/',
     '<rootDir>/templates',

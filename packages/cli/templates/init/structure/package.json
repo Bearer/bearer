@@ -16,7 +16,7 @@
     "@bearer/core": "{{bearerTagVersion}}",
     "@bearer/intents": "{{bearerTagVersion}}",
     "@bearer/ui": "{{bearerTagVersion}}",
-    "axios": "^0.18.0"
+    {{bearerRestClient}}
   },
   "devDependencies": {
     "@bearer/cli": "{{bearerTagVersion}}",
