@@ -8,9 +8,9 @@ export class BearerIntentLogger {
     this.context = context
   }
 
-  log = (message: any) => {
+  log = (data: any) => {
     debug('bearer:intents')('%j', {
-      data: message,
+      data,
       scenarioId: this.context.integrationUuid,
       intentName: this.context.intentName
     })
