@@ -157,13 +157,13 @@ exports[`OAUTH1 generates a scenario without any prompt and OAUTH1 2`] = `
   \\"setupViews\\": [
     {
       \\"type\\": \\"text\\",
-      \\"label\\": \\"Customer Key\\",
-      \\"controlName\\": \\"customerKey\\"
+      \\"label\\": \\"Consumer Key\\",
+      \\"controlName\\": \\"consumerKey\\"
     },
     {
       \\"type\\": \\"password\\",
-      \\"label\\": \\"Customer Secret\\",
-      \\"controlName\\": \\"customerSecret\\"
+      \\"label\\": \\"Consumer Secret\\",
+      \\"controlName\\": \\"consumerSecret\\"
     }
   ]
 }
