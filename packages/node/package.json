@@ -12,6 +12,7 @@
   "homepage": "https://github.com/Bearer/bearer#readme",
   "license": "MIT",
   "main": "lib/index.js",
+  "types": "lib/index.d.ts",
   "files": [
     "lib/"
   ],

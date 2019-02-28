@@ -5,6 +5,7 @@
   "jsdelivr": "lib/bearer.production.min.js",
   "unpkg": "lib/bearer.production.min.js",
   "main": "lib/cjs/index.js",
+  "types": "lib/cjs/index.d.ts",
   "module": "lib/es/index.js",
   "repository": "https://github.com/Bearer/bearer/packages/js",
   "author": "Bearer Team<engineering@bearer.sh>",
