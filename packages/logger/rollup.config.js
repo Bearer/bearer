@@ -9,7 +9,7 @@ import filesize from 'rollup-plugin-filesize'
 export default [
   // browser-friendly UMD build
   {
-    input: 'src/logger.ts',
+    input: 'src/logger.browser.ts',
     output: {
       name: 'logger',
       file: pkg.browser,
