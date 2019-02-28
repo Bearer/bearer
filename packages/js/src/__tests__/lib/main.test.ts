@@ -2,7 +2,7 @@ import bearer from '../../lib/main'
 import { I18n } from '../../lib/i18n'
 
 describe('main', () => {
-  it('exports a function expecting 2 argument', () => {
+  it('exports a function expecting 2 arguments', () => {
     expect(bearer).toBeInstanceOf(Function)
     expect(bearer).toHaveLength(2)
   })
