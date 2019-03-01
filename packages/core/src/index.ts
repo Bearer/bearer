@@ -27,6 +27,8 @@ declare const window: Window & { bearer: TBearer }
 export const scopedT = (scope: string) => scopedTranslate(scope)(window.bearer.i18n)
 export const scopedP = (scope: string) => scopedPluralize(scope)(window.bearer.i18n)
 
+export default Bearer
+
 if (process.env.BUILD !== 'distribution') {
   console.warn(`[BEARER] Running non production Bearer Core lib | version ${Bearer.version}`)
 }

@@ -11,7 +11,6 @@ const DEFAULT_OPTIONS = {
 }
 
 export default class Bearer {
-  // @ts-ignore for now
   config: TBearerOptions = DEFAULT_OPTIONS
   private registeredIntegrations: Record<string, boolean> = {}
   private observer?: MutationObserver

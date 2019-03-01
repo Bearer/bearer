@@ -1,3 +1,3 @@
-import bearer from './lib/main'
-export type Bearer = bearer
+import bearer, { TBearer } from './lib/main'
+export type Bearer = TBearer
 export default bearer
