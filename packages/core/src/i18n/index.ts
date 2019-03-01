@@ -9,7 +9,7 @@ export const scopedTranslate = (scope?: string): TTranslator => (store: I18n) =>
   defaultValue: string,
   vars?: Record<string, any>
 ) => {
-  return template((store.get(key, scope) as string) || defaultValue, {
+  return template((store.get(scope, key) as string) || defaultValue, {
     interpolate
   })(vars || {})
 }
@@ -21,7 +21,7 @@ export const scopedPluralize = (scope?: string): TPluralizer => (store: I18n) =>
   vars?: Record<string, any>
 ) => {
   const keyWithCount = [key, count].join('.')
-  if (store.get(keyWithCount, scope)) {
+  if (store.get(scope, keyWithCount)) {
     return scopedTranslate(scope)(store)(keyWithCount, defaultValue, vars)
   }
   const quantity = count > 1 ? 'many' : count

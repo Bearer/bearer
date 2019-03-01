@@ -24,7 +24,7 @@ describe('.translate', () => {
 
     it('does a lookup into the store', () => {
       instance('my.key', 'Default Value')
-      expect(store.get).toHaveBeenCalledWith('my.key', 'a-scope')
+      expect(store.get).toHaveBeenCalledWith('a-scope', 'my.key')
     })
   })
 })
@@ -55,8 +55,9 @@ describe('.pluralize', () => {
 
     it('does a lookup into the store', () => {
       instance('my.key', 42, 'Default Value', {})
-      expect(store.get).toHaveBeenNthCalledWith(1, 'my.key.42', 'a-scope')
-      expect(store.get).toHaveBeenLastCalledWith('my.key.many', 'a-scope')
+
+      expect(store.get).toHaveBeenNthCalledWith(1, 'a-scope', 'my.key.42')
+      expect(store.get).toHaveBeenLastCalledWith('a-scope', 'my.key.many')
     })
   })
 })
