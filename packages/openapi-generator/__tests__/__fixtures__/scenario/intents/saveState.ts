@@ -1,10 +1,10 @@
-import { SaveState, TOAUTH2AuthContext, TSaveActionEvent, TSavePromise } from '@bearer/intents'
+import { SaveState, TOAUTH1AuthContext, TSaveActionEvent, TSavePromise } from '@bearer/intents'
 
 import { PullRequest } from '../views/types'
 
 export default class SavePullRequestsIntent extends SaveState
-  implements SaveState<State, ReturnedData, any, TOAUTH2AuthContext> {
-  async action(event: TSaveActionEvent<State, Params, TOAUTH2AuthContext>): TSavePromise<State, ReturnedData> {
+  implements SaveState<State, ReturnedData, any, TOAUTH1AuthContext> {
+  async action(event: TSaveActionEvent<State, Params, TOAUTH1AuthContext>): TSavePromise<State, ReturnedData> {
     return {
       state: {
         pullRequests: []

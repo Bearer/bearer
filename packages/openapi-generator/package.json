@@ -11,7 +11,6 @@
     "lib/"
   ],
   "devDependencies": {
-    "@bearer/intents": "next",
     "@bearer/package-init": "^0.78.0",
     "@types/jest": "^23.3.13",
     "@types/lodash.merge": "^4.6.5",
@@ -30,6 +29,7 @@
     "test:ci": "jest --coverage"
   },
   "dependencies": {
+    "@bearer/intents": "^0.99.0",
     "lodash.merge": "^4.6.1"
   }
 }

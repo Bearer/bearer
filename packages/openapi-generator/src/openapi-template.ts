@@ -28,13 +28,13 @@ export function specPath({
   intentName,
   requestBody,
   response,
-  oauth2
+  oauth
 }: {
   integrationUuid: string
   intentName: string
   requestBody: any
   response: any
-  oauth2: boolean
+  oauth: boolean
 }) {
   return {
     [`/${integrationUuid}/${intentName}`]: {
@@ -47,7 +47,7 @@ export function specPath({
             description: 'API Key',
             required: true
           },
-          oauthParam(oauth2)
+          oauthParam(oauth)
         ].filter(e => e !== undefined),
         summary: intentName,
         requestBody: { content: { 'application/json': { schema: requestBody } } },
@@ -71,8 +71,8 @@ export function specPath({
   }
 }
 
-function oauthParam(oauth2: boolean): TParam | undefined {
-  if (oauth2) {
+function oauthParam(oauth: boolean): TParam | undefined {
+  if (oauth) {
     return {
       name: 'authId',
       schema: { type: 'string', format: 'uuid' },

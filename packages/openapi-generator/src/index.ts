@@ -82,8 +82,12 @@ function getIntentAuthType(sym: ts.Symbol | undefined, node: ts.Node, checker: t
     if (typ.aliasTypeArguments) {
       const index = resolveParameterTypeIndex(typ, checker, 1, 2)
       const authType = checker.typeToString(typ.aliasTypeArguments[index])
+      console.log(authType)
       if (/apiKey/.test(authType)) return 'APIKEY'
       if (/username/.test(authType) && /password/.test(authType)) return 'BASIC'
+      if ((/accessToken/.test(authType) && /tokenSecret/.test(authType)) || /TOAUTH1AuthContext/.test(authType)) {
+        return 'OAUTH1'
+      }
       if (/accessToken/.test(authType)) return 'OAUTH2'
       if (/undefined/.test(authType)) return 'NONE'
       return authType
@@ -173,7 +177,7 @@ export default function generator({
         intentName: intent,
         response: { type: 'object', properties: typeSchema.response },
         requestBody: typeSchema.requestBody,
-        oauth2: typeSchema.intentAuthType === 'OAUTH2'
+        oauth: typeSchema.intentAuthType === 'OAUTH2' || typeSchema.intentAuthType === 'OAUTH1'
       })
     )
   }, {})
