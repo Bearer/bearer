@@ -284,7 +284,7 @@ Object {
 
 exports[`#intentTypeToSchemaConverter converts types to schemas for saveState.ts 1`] = `
 Object {
-  "intentAuthType": "OAUTH2",
+  "intentAuthType": "OAUTH1",
   "requestBody": Object {
     "properties": Object {
       "pullRequests": Object {
