@@ -117,10 +117,10 @@ export default class New extends BaseCommand {
       case Authentications.ApiKey:
       case Authentications.Basic:
       case Authentications.NoAuth:
-      case Authentications.OAuth1:
+      case Authentications.OAuth2:
         return '"axios": "^0.18.0"'
       default:
-        return '"axios": "^0.18.0"'
+        throw new Error(`Authentication not found: ${authType}`)
     }
   }
   get copyDestFolder(): string {
