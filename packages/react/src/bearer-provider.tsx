@@ -5,7 +5,7 @@ import bearer, { BearerInstance } from '@bearer/js'
 // TODO: add JSDoc
 interface IBearerProviderProps {
   clientId: string
-  intHost?: string
+  integrationHost?: string
   initialContext?: any
   onUpdate?(currentState: any): void
 }
@@ -31,7 +31,7 @@ export default class BearerProvider extends React.Component<IBearerProviderProps
   constructor(props: IBearerProviderProps) {
     super(props)
     this.state = {
-      bearer: bearer(props.clientId),
+      bearer: this.initBearerFromProps(props),
       integrationState: props.initialContext || {}
     }
   }
@@ -47,7 +47,7 @@ export default class BearerProvider extends React.Component<IBearerProviderProps
 
   componentWillReceiveProps(newProps: IBearerProviderProps, oldProps: IBearerProviderProps) {
     if (newProps.clientId !== oldProps.clientId) {
-      this.setState(state => ({ ...state, bearer: bearer(newProps.clientId) }))
+      this.setState(state => ({ ...state, bearer: this.initBearerFromProps(newProps) }))
     }
   }
 
@@ -71,5 +71,10 @@ export default class BearerProvider extends React.Component<IBearerProviderProps
         ...kebabPayload
       }
     }))
+  }
+
+  private initBearerFromProps(props: IBearerProviderProps) {
+    const { integrationHost } = props
+    return bearer(props.clientId, { integrationHost })
   }
 }
