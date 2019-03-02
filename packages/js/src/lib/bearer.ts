@@ -1,4 +1,6 @@
 import debounce from 'debounce'
+// must be the same version as the one used within the integation service
+import postRobot from 'post-robot'
 import { TIntegration } from './types'
 import debug from './logger'
 import { formatQuery } from './utils'
@@ -17,6 +19,8 @@ export default class Bearer {
   private registeredIntegrations: Record<string, boolean> = {}
   private observer?: MutationObserver
   private debounceRefresh: () => void
+  private authorizedListener!: postRobot.Cancellable
+  private rejectedListener!: postRobot.Cancellable
 
   constructor(readonly clientId: string, options?: Partial<TBearerOptions>) {
     this.config = { ...DEFAULT_OPTIONS, ...options }
@@ -40,7 +44,26 @@ export default class Bearer {
       clientId: this.clientId
     })
     const AUTHORIZED_URL = `${this.config.integrationHost}/v2/auth/${integration}?${query}`
+    // TODO: get rid of post robot, too heqvy for our needs
+    const promise = new Promise((resolve, reject) => {
+      // TODO: use constants
+      if (this.authorizedListener) {
+        debug('canceling previous listener')
+        this.authorizedListener.cancel()
+        this.rejectedListener.cancel()
+      }
+      debug('add authorization listeners')
+      this.authorizedListener = postRobot.on('BEARER_AUTHORIZED', (...args) => {
+        debug('Authorized', args)
+        resolve(...args)
+      })
+      this.rejectedListener = postRobot.on('BEARER_REJECTED', (...args) => {
+        debug('Rejected', args)
+        reject(...args)
+      })
+    }).then()
     window.open(AUTHORIZED_URL, '', 'resizable,scrollbars,status,centerscreen=yes,width=500,height=600')
+    return promise
   }
 
   /**
