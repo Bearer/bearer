@@ -2,9 +2,10 @@ import kebabCase from 'lodash.kebabcase'
 import * as React from 'react'
 import bearer, { BearerInstance } from '@bearer/js'
 
+// TODO: add JSDoc
 interface IBearerProviderProps {
   clientId: string
-  intHost?: string // unused for now
+  intHost?: string
   initialContext?: any
   onUpdate?(currentState: any): void
 }
@@ -30,7 +31,7 @@ export default class BearerProvider extends React.Component<IBearerProviderProps
   constructor(props: IBearerProviderProps) {
     super(props)
     this.state = {
-      bearer: bearer.instance,
+      bearer: bearer(props.clientId),
       integrationState: props.initialContext || {}
     }
   }
@@ -44,9 +45,10 @@ export default class BearerProvider extends React.Component<IBearerProviderProps
     return <BearerContext.Provider value={value}>{this.props.children}</BearerContext.Provider>
   }
 
-  componentDidMount() {
-    // TODO: handle prop update to refresh the clientId
-    this.setState(state => ({ ...state, bearer: bearer(this.props.clientId) }))
+  componentWillReceiveProps(newProps: IBearerProviderProps, oldProps: IBearerProviderProps) {
+    if (newProps.clientId !== oldProps.clientId) {
+      this.setState(state => ({ ...state, bearer: bearer(newProps.clientId) }))
+    }
   }
 
   public componentDidUpdate(_prevProps: IBearerProviderProps, prevState: any) {
