@@ -21,24 +21,32 @@ export const BearerContext = React.createContext<IBearerContextValue>({
   handlePropUpdates: () => {}
 })
 
-export default class BearerProvider extends React.Component<IBearerProviderProps, any> {
+interface IBearerProviderState {
+  bearer: BearerInstance
+  integrationState: any
+}
+
+export default class BearerProvider extends React.Component<IBearerProviderProps, IBearerProviderState> {
   constructor(props: IBearerProviderProps) {
     super(props)
-    this.state = props.initialContext || {}
+    this.state = {
+      bearer: bearer.instance,
+      integrationState: props.initialContext || {}
+    }
   }
 
   public render() {
     const value = {
-      bearer: bearer.instance,
+      bearer: this.state.bearer,
       handlePropUpdates: this.handlePropUpdates,
-      state: this.state
+      state: this.state.integrationState
     }
     return <BearerContext.Provider value={value}>{this.props.children}</BearerContext.Provider>
   }
 
   componentDidMount() {
     // TODO: handle prop update to refresh the clientId
-    bearer(this.props.clientId)
+    this.setState(state => ({ ...state, bearer: bearer(this.props.clientId) }))
   }
 
   public componentDidUpdate(_prevProps: IBearerProviderProps, prevState: any) {
@@ -54,6 +62,12 @@ export default class BearerProvider extends React.Component<IBearerProviderProps
       acc[kebabCase(key)] = payload[key]
       return acc
     }, {})
-    this.setState({ ...kebabPayload })
+    this.setState(state => ({
+      ...state,
+      integrationState: {
+        ...state.integrationState,
+        ...kebabPayload
+      }
+    }))
   }
 }
