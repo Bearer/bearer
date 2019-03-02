@@ -45,7 +45,7 @@ export default class Bearer {
     })
     const AUTHORIZED_URL = `${this.config.integrationHost}/v2/auth/${integration}?${query}`
     // TODO: get rid of post robot, too heqvy for our needs
-    const promise = new Promise((resolve, reject) => {
+    const promise = new Promise<{ data: { integration: string; authId: string } }>((resolve, reject) => {
       // TODO: use constants
       if (this.authorizedListener) {
         debug('canceling previous listener')
@@ -53,13 +53,13 @@ export default class Bearer {
         this.rejectedListener.cancel()
       }
       debug('add authorization listeners')
-      this.authorizedListener = postRobot.on('BEARER_AUTHORIZED', (...args) => {
-        debug('Authorized', args)
-        resolve(...args)
+      this.authorizedListener = postRobot.on('BEARER_AUTHORIZED', ({ data }) => {
+        debug('Authorized: %s => %j', integration, data)
+        resolve({ ...data, integration })
       })
-      this.rejectedListener = postRobot.on('BEARER_REJECTED', (...args) => {
-        debug('Rejected', args)
-        reject(...args)
+      this.rejectedListener = postRobot.on('BEARER_REJECTED', ({ data }) => {
+        debug('Rejected: %s => %j', integration, data)
+        reject({ ...data, integration })
       })
     }).then()
     window.open(AUTHORIZED_URL, '', 'resizable,scrollbars,status,centerscreen=yes,width=500,height=600')
