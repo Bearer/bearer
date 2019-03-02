@@ -22,8 +22,8 @@ export default class Bearer {
   private authorizedListener!: postRobot.Cancellable
   private rejectedListener!: postRobot.Cancellable
 
-  constructor(readonly clientId: string, options?: Partial<TBearerOptions>) {
-    this.config = { ...DEFAULT_OPTIONS, ...options }
+  constructor(readonly clientId: string, options: Partial<TBearerOptions> = {}) {
+    this.config = { ...DEFAULT_OPTIONS, ...cleanOptions(options) }
     logger('init bearer instance clientId: %s with config: %j', clientId, this.config)
     this.debounceRefresh = debounce(this.loadMissingIntegrations, this.config.refreshDebounceDelay)
     this.initialIntegrationLoading()
@@ -204,4 +204,16 @@ function getScriptDOM(clientId: string, integration: TIntegration): HTMLScriptEl
   s.src = [integration.asset, [`clientId=${clientId}`].join('&')].join(separator)
   s.id = getScriptId(integration.uuid)
   return s
+}
+
+function cleanOptions(obj: Record<string, any>) {
+  return Object.keys(obj).reduce(
+    (acc, key: string) => {
+      if (obj[key] !== undefined) {
+        acc[key] = obj[key]
+      }
+      return acc
+    },
+    {} as Record<string, any>
+  )
 }

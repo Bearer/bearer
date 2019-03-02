@@ -18,7 +18,7 @@ describe('main', () => {
   })
 
   it('use defaults', () => {
-    const instance = bearer('token', {})
+    const instance = bearer('token', { integrationHost: undefined })
     expect(instance.config).toMatchObject(
       expect.objectContaining({
         domObserver: true,
