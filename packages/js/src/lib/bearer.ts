@@ -1,10 +1,12 @@
 import debounce from 'debounce'
 import { TIntegration } from './types'
 import debug from './logger'
+import { formatQuery } from './utils'
 
 const logger = debug.extend('Bearer')
 const prefix = 'bearer'
 const DEFAULT_OPTIONS = {
+  secured: false,
   integrationHost: 'INTEGRATION_HOST_URL',
   domObserver: true,
   refreshDebounceDelay: 200
@@ -23,6 +25,22 @@ export default class Bearer {
     if (this.config.domObserver) {
       this.registerDomObserver()
     }
+  }
+  // TODO: move to a dedicated file
+  /**
+   * @argument {string} integration Integration's identifier you wan to connect to ex: 12345-attach-github-pull-request
+   * @argument {string} setupId Setup's identifier you received earlier, a Bearer reference containing all required information about auth mechanism
+   * @argument {Object} options Optional parameters like authId if you already have one
+   */
+  connectTo = (integration: string, setupId: string, { authId }: { authId?: string } = {}) => {
+    const query = formatQuery({
+      setupId,
+      authId,
+      secured: this.config.secured,
+      clientId: this.clientId
+    })
+    const AUTHORIZED_URL = `${this.config.integrationHost}/v2/auth/${integration}?${query}`
+    window.open(AUTHORIZED_URL, '', 'resizable,scrollbars,status,centerscreen=yes,width=500,height=600')
   }
 
   /**
@@ -124,6 +142,7 @@ export default class Bearer {
 }
 
 export type TBearerOptions = {
+  secured: boolean
   domObserver: boolean
   integrationHost: string
   refreshDebounceDelay: number
