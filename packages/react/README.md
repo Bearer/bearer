@@ -10,6 +10,48 @@ Install dependencies
 yarn add @bearer/js @bearer/react
 ```
 
+## Factory
+
+```tsx
+import { factory } from '@bearer/react'
+const { Connect } = factory('my-integration-name')
+```
+
+### `Connect` component
+
+This component expect a `setupId` to authenticate the final user.
+
+```tsx
+import { factory } from '@bearer/react'
+const { Connect } = factory('my-integration-name')
+
+class MyComponent extends React.Component {
+  handleSuccess = ({ authId }) => {
+    // do whatever you want with the authId received
+  }
+  render() {
+    return (
+      <Connect
+        setupId="setupId"
+        render={({ loading, connect, error }) => {
+          if (loading) {
+            return <Loading />
+          }
+          if (error) {
+            return (
+              <div>
+                Error, please retry <button onClick={connect}>Retry</button>
+              </div>
+            )
+          }
+          return <button onClick={connect}>Connect ...</button>
+        }}
+      />
+    )
+  }
+}
+```
+
 ## fromBearer
 
 This component takes html tag name of a component as well as optional type information to produce a react component that can we re-used throughout an application.
@@ -31,13 +73,13 @@ Output events can be handled by simply adding the eventname as a prop on the com
 <Share bearer-uuid-feature-shared={this.onShared} />
 ```
 
-For these tags to work correctly they must have a parent `BearerProvider`
+For these tags to work correctly they must have a parent `Bearer`
 
-## BearerProvider
+## Bearer
 
 This component maintains a shared state for a group of components as well as adding the bearer script tags to the page. This tag can be added at any level of the application as is convenient for the implementation
 
-## Example Use
+### Example Use
 
 we will use [this scenario](https://app.bearer.sh/scenarios/6d29c4-share-slack-beta-4/preview) for our examples:
 
@@ -53,24 +95,24 @@ export const Share = fromBearer<{message?:string, text?:string}>('bearer-6d29c4-
 export const SlackConnect = fromBearer('bearer-6d29c4-share-slack-beta-4-connect-action')
 ```
 
-We can include the `BearerProvider` at any level but in this example lets use it all together in the same component
+We can include the `Bearer` at any level but in this example lets use it all together in the same component
 
 `slack-share-component.tsx`
 
 ```tsx
 import * as React from 'react'
-import { BearerProvider } from '@bearer/react'
+import { Bearer } from '@bearer/react'
 import { SlackConnect, ChannelSelect, Share } from '../../constants/bearer'
 
 export default class SlackShareSetup extends React.Component {
   public render() {
     const intialContext = { 'setup-id': 'SETUP_ID_SAMPLE' }
     return (
-      <BearerProvider clientId="YOUR_CLIENT_ID" initialContext={intialContext}>
+      <Bearer clientId="YOUR_CLIENT_ID" initialContext={intialContext}>
         <SlackConnect />
         <ChannelSelect />
         <Share message="hello world!" text="Test!" bearer-6d29c4-share-slack-beta-4-feature-shared={this.onShared} />
-      </BearerProvider>
+      </Bearer>
     )
   }
 }
@@ -80,20 +122,20 @@ This allows to share messages but what if we want to persist the users setup inf
 
 ### Using onUpdate
 
-`BearerProvider` has an `onUpdate`callback we can hook into which is called every time data changes within the provider
+`Bearer` has an `onUpdate`callback we can hook into which is called every time data changes within the provider
 
 `slack-share-component.tsx`
 
 ```tsx
 import * as React from 'react'
-import { BearerProvider } from '@bearer/react'
+import { Bearer } from '@bearer/react'
 import { SlackConnect, ChannelSelect, Share } from '../../constants/bearer'
 
 export default class SlackShareSetup extends React.Component {
   public render() {
     const intialContext = { 'setup-id': 'SETUP_ID_SAMPLE' }
     return (
-      <BearerProvider
+      <Bearer
         clientId="YOUR_CLIENT_ID"
         initialContext={intialContext}
         onUpdate={(data: any) => {
@@ -104,7 +146,7 @@ export default class SlackShareSetup extends React.Component {
         <ChannelSelect />
         <Share message="hello world!" text="Test!" bearer-6d29c4-share-slack-beta-4-feature-shared={this.onShared} />
         <button onClick={this.handleSave}>Save Setup</button>
-      </BearerProvider>
+      </Bearer>
     )
   }
   private handleSave = () => console.log('handleSave', this.state.data)
@@ -113,27 +155,27 @@ export default class SlackShareSetup extends React.Component {
 
 ### using a context consumer
 
-Internally `BearerProvider` uses the [react context API](https://reactjs.org/docs/context.html). For a more advaned but flexable method we can access the consumer directly via `BearerContext` and then use the currently set details as we wish.
+Internally `Bearer` uses the [react context API](https://reactjs.org/docs/context.html). For a more advaned but flexable method we can access the consumer directly via `BearerContext` and then use the currently set details as we wish.
 
 `slack-share-component.tsx`
 
 ```tsx
 import * as React from 'react'
-import { BearerProvider, BearerContext } from '@bearer/react'
+import { Bearer, BearerContext } from '@bearer/react'
 import { SlackConnect, ChannelSelect, Share } from '../../constants/bearer'
 
 export default class SlackShareSetup extends React.Component {
   public render() {
     const intialContext = { 'setup-id': 'SETUP_ID_SAMPLE' }
     return (
-      <BearerProvider clientId="YOUR_CLIENT_ID" initialContext={intialContext}>
+      <Bearer clientId="YOUR_CLIENT_ID" initialContext={intialContext}>
         <SlackConnect />
         <ChannelSelect />
         <Share message="hello world!" text="Test!" bearer-6d29c4-share-slack-beta-4-feature-shared={this.onShared} />
         <BearerContext.Consumer>
           {context => <button onClick={this.handleSave(context.state)}>Save Setup</button>}
         </BearerContext.Consumer>
-      </BearerProvider>
+      </Bearer>
     )
   }
   private handleSave = (data: any) => () => {
