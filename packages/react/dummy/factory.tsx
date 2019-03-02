@@ -2,7 +2,7 @@ import * as React from 'react'
 
 type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>
 
-import Connect, { IConnectProps } from './Connect'
+import Connect, { IConnectProps } from '../src/Connect'
 
 const Factory = (integrationId: string) => {
   return {
