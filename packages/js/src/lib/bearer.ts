@@ -24,6 +24,7 @@ export default class Bearer {
 
   constructor(readonly clientId: string, options?: Partial<TBearerOptions>) {
     this.config = { ...DEFAULT_OPTIONS, ...options }
+    logger('init bearer instance clientId: %s with config: %j', clientId, this.config)
     this.debounceRefresh = debounce(this.loadMissingIntegrations, this.config.refreshDebounceDelay)
     this.initialIntegrationLoading()
     if (this.config.domObserver) {
