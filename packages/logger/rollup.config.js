@@ -6,6 +6,8 @@ import { terser } from 'rollup-plugin-terser'
 import builtins from 'rollup-plugin-node-builtins'
 import filesize from 'rollup-plugin-filesize'
 
+const isProduction = process.env.NODE_ENV === 'production'
+
 export default [
   // browser-friendly UMD build
   {
@@ -24,8 +26,8 @@ export default [
       commonjs({}),
       terser(),
       filesize({
-        showMinifiedSize: false,
-        showGzippedSize: true
+        showMinifiedSize: isProduction,
+        showGzippedSize: isProduction
       })
     ]
   },
@@ -49,8 +51,8 @@ export default [
       commonjs(),
       terser(),
       filesize({
-        showMinifiedSize: false,
-        showGzippedSize: true
+        showMinifiedSize: isProduction,
+        showGzippedSize: isProduction
       })
     ]
   },
@@ -67,8 +69,8 @@ export default [
       commonjs(),
       terser(),
       filesize({
-        showMinifiedSize: false,
-        showGzippedSize: true
+        showMinifiedSize: isProduction,
+        showGzippedSize: isProduction
       })
     ]
   }

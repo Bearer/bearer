@@ -3,12 +3,13 @@ import resolve from 'rollup-plugin-node-resolve'
 import commonjs from 'rollup-plugin-commonjs'
 import replace from 'rollup-plugin-replace'
 import { terser } from 'rollup-plugin-terser'
-
 import filesize from 'rollup-plugin-filesize'
 
 import pkg from './package.json'
 
-const mode = process.env.NODE_ENV === 'production' ? 'production' : 'development'
+const isProduction = process.env.NODE_ENV === 'production'
+
+const mode = isProduction ? 'production' : 'development'
 
 const plugins = [
   resolve({
@@ -21,8 +22,8 @@ const plugins = [
     exclude: ['**/__tests__/**', '**/node_modules/**']
   }),
   filesize({
-    showMinifiedSize: false,
-    showGzippedSize: true
+    showMinifiedSize: isProduction,
+    showGzippedSize: isProduction
   })
 ]
 

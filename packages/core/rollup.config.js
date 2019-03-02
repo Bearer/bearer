@@ -4,6 +4,7 @@ import commonjs from 'rollup-plugin-commonjs'
 import replace from 'rollup-plugin-replace'
 import { terser } from 'rollup-plugin-terser'
 import strip from 'rollup-plugin-strip'
+import filesize from 'rollup-plugin-filesize'
 
 import pkg from './package.json'
 
@@ -32,6 +33,10 @@ function plugins() {
     replace({
       LIB_VERSION: pkg.version,
       'process.env.BUILD': JSON.stringify(process.env.BUILD)
+    }),
+    filesize({
+      showMinifiedSize: isProduction,
+      showGzippedSize: isProduction
     })
   ]
   if (process.env.BUILD === 'distribution') {
@@ -45,10 +50,39 @@ function plugins() {
 }
 
 const bundles = [
-  { input: 'src/index.ts', output: { file: pkg.module, format: 'es' }, plugins: [...plugins()] },
-  { input: 'src/index.ts', output: { file: pkg.main, format: 'cjs' }, plugins: [...plugins()] },
-  { input: 'src/index.ts', output: { file: pkg.browser, name: 'core', format: 'iife' }, plugins: [...plugins()] },
-  { input: 'src/plugins.ts', output: { file: 'lib/plugins.js', format: 'cjs' }, plugins: plugins() }
+  {
+    input: 'src/index.ts',
+    output: {
+      file: pkg.module,
+      format: 'es'
+    },
+    plugins: [...plugins()]
+  },
+  {
+    input: 'src/index.ts',
+    output: {
+      file: pkg.main,
+      format: 'cjs'
+    },
+    plugins: [...plugins()]
+  },
+  {
+    input: 'src/index.ts',
+    output: {
+      file: pkg.browser,
+      name: 'core',
+      format: 'iife'
+    },
+    plugins: [...plugins()]
+  },
+  {
+    input: 'src/plugins.ts',
+    output: {
+      file: 'lib/plugins.js',
+      format: 'cjs'
+    },
+    plugins: plugins()
+  }
 ]
 
 export default bundles
