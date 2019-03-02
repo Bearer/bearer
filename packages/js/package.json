@@ -37,8 +37,8 @@
     "start": "yarn build -w",
     "build": "rollup -c",
     "clean": "rm -rf lib",
-    "prepack": "yarn prepare",
-    "prepare": "yarn clean && BUILD=distribution NODE_ENV=production yarn build",
+    "prepack": "yarn clean && NODE_ENV=production yarn build",
+    "prepare": "yarn clean && yarn build",
     "test": "jest",
     "test:ci": "jest --coverage"
   }
