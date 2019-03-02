@@ -5,7 +5,6 @@
   "main": "lib/main.js",
   "types": "lib/index.d.ts",
   "module": "lib/main.es.js",
-  "browser": "lib/main.browser.js",
   "author": "Bearer Team<engineering@bearer.sh>",
   "license": "MIT",
   "files": [

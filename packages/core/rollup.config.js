@@ -67,15 +67,6 @@ const bundles = [
     plugins: [...plugins()]
   },
   {
-    input: 'src/index.ts',
-    output: {
-      file: pkg.browser,
-      name: 'core',
-      format: 'iife'
-    },
-    plugins: [...plugins()]
-  },
-  {
     input: 'src/plugins.ts',
     output: {
       file: 'lib/plugins.js',
