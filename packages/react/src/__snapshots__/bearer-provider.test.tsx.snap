@@ -49,7 +49,7 @@ exports[`BearerProvider renders basic provider tag 1`] = `
         "clientId": "abc123",
         "config": Object {
           "domObserver": true,
-          "integrationHost": undefined,
+          "integrationHost": "https://int.bearer.sh",
           "refreshDebounceDelay": 200,
           "secured": false,
         },
