@@ -13,12 +13,15 @@ import {
 } from './components/Authorized/bearer-authorized';
 import {
   BKind,
+} from './components/Btn/Button';
+import {
+  BKind as BKind2,
 } from './components/Button/Button';
 import {
   FieldSet,
 } from './components/Forms/Fieldset';
 import {
-  BKind as BKind2,
+  BKind as BKind3,
 } from './components/Button/Button';
 import {
   TAlignement,
@@ -75,6 +78,16 @@ declare global {
     interface BearerBadge {
       'content': any;
       'kind': 'primary' | 'secondary' | 'success' | 'danger' | 'warning' | 'info' | 'light' | 'dark';
+    }
+
+    interface BearerBtn {
+      'as': string;
+      'content': any;
+      'dataTooltip': string;
+      'dataTooltipType': string;
+      'disabled': boolean;
+      'kind': BKind;
+      'type': string;
     }
 
     interface BearerButton {
@@ -280,6 +293,7 @@ declare global {
     }
 
     interface BearerSetup {
+      'display': 'inline' | 'block';
       'fields': any[] | string;
       'referenceId': string;
       'scenarioId': string;
@@ -308,6 +322,14 @@ declare global {
     var HTMLBearerBadgeElement: {
       prototype: HTMLBearerBadgeElement;
       new (): HTMLBearerBadgeElement;
+    };
+    
+
+    interface HTMLBearerBtnElement extends StencilComponents.BearerBtn, HTMLStencilElement {}
+
+    var HTMLBearerBtnElement: {
+      prototype: HTMLBearerBtnElement;
+      new (): HTMLBearerBtnElement;
     };
     
 
@@ -525,6 +547,7 @@ declare global {
     'bearer-alert': JSXElements.BearerAlertAttributes;
     'bearer-authorized': JSXElements.BearerAuthorizedAttributes;
     'bearer-badge': JSXElements.BearerBadgeAttributes;
+    'bearer-btn': JSXElements.BearerBtnAttributes;
     'bearer-button': JSXElements.BearerButtonAttributes;
     'bearer-checkbox': JSXElements.BearerCheckboxAttributes;
     'bearer-form': JSXElements.BearerFormAttributes;
@@ -571,6 +594,16 @@ declare global {
     export interface BearerBadgeAttributes extends HTMLAttributes {
       'content'?: any;
       'kind'?: 'primary' | 'secondary' | 'success' | 'danger' | 'warning' | 'info' | 'light' | 'dark';
+    }
+
+    export interface BearerBtnAttributes extends HTMLAttributes {
+      'as'?: string;
+      'content'?: any;
+      'dataTooltip'?: string;
+      'dataTooltipType'?: string;
+      'disabled'?: boolean;
+      'kind'?: BKind;
+      'type'?: string;
     }
 
     export interface BearerButtonAttributes extends HTMLAttributes {
@@ -785,6 +818,7 @@ declare global {
     }
 
     export interface BearerSetupAttributes extends HTMLAttributes {
+      'display'?: 'inline' | 'block';
       'fields'?: any[] | string;
       'onSetupSuccess'?: (event: CustomEvent) => void;
       'referenceId'?: string;
@@ -796,6 +830,7 @@ declare global {
     'bearer-alert': HTMLBearerAlertElement
     'bearer-authorized': HTMLBearerAuthorizedElement
     'bearer-badge': HTMLBearerBadgeElement
+    'bearer-btn': HTMLBearerBtnElement
     'bearer-button': HTMLBearerButtonElement
     'bearer-checkbox': HTMLBearerCheckboxElement
     'bearer-form': HTMLBearerFormElement
@@ -828,6 +863,7 @@ declare global {
     'bearer-alert': HTMLBearerAlertElement;
     'bearer-authorized': HTMLBearerAuthorizedElement;
     'bearer-badge': HTMLBearerBadgeElement;
+    'bearer-btn': HTMLBearerBtnElement;
     'bearer-button': HTMLBearerButtonElement;
     'bearer-checkbox': HTMLBearerCheckboxElement;
     'bearer-form': HTMLBearerFormElement;
