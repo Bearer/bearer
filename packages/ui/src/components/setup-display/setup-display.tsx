@@ -20,19 +20,14 @@ export class BearerSetupDisplay {
   }
 
   render() {
+    const label = <strong>Setup-id</strong>
     if (this.isSetup || this.setupId) {
       return (
-        <p>
-          Scenario is currently setup with Setup ID:&nbsp;
-          <bearer-badge kind="info">{this.setupId}</bearer-badge>
-        </p>
-      )
-    } else {
-      return (
-        <p>
-          <p>Scenario hasn't been setup yet</p>
-        </p>
+        <div>
+          {label}:&nbsp; {this.setupId}
+        </div>
       )
     }
+    return <div>{label}:&nbsp; Not set</div>
   }
 }
