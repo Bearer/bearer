@@ -1,6 +1,10 @@
 import Bearer, { Component, State, Element, Event, EventEmitter, Prop, StateManager } from '@bearer/core'
 import { FieldSet } from '../Forms/Fieldset'
+import debug from '../../logger'
+
 import { OAuth2SetupType, EmailSetupType, KeySetupType } from './setup-types'
+
+const logger = debug().extend('setup-action')
 
 type TSetupPayload = {
   Item: { referenceId: string }
@@ -12,6 +16,8 @@ type TSetupPayload = {
   shadow: true
 })
 export class BearerSetup {
+  @Prop()
+  display: 'inline' | 'block'
   @Prop()
   fields: any[] | string = []
   @Prop()
@@ -41,17 +47,24 @@ export class BearerSetup {
       .then((item: TSetupPayload) => {
         this.loading = false
         const referenceId = item.Item.referenceId
-        console.log('[BEARER]', 'setup_success', `setup_success:${this.scenarioId}`)
+        logger('setup_success:%s', this.scenarioId)
         Bearer.emitter.emit(`setup_success:${this.scenarioId}`, {
           referenceId
         })
         this.setupSuccess.emit({ referenceId, scenarioId: this.scenarioId })
       })
-      .catch(() => {
+      .catch(err => {
         this.error = true
         this.loading = false
+        logger('setup_error:% %j', this.scenarioId, err)
         Bearer.emitter.emit(`setup_error:${this.scenarioId}`, {})
       })
+  }
+
+  onValueChange(field: string, event: any) {
+    if (event) {
+      this.fieldSet.setValue(field, event.target.value)
+    }
   }
 
   componentWillLoad() {
@@ -63,7 +76,8 @@ export class BearerSetup {
       case 'email':
         this.fieldSet = new FieldSet(EmailSetupType)
         break
-      case 'type':
+      case 'type': // legacy
+      case 'key':
         this.fieldSet = new FieldSet(KeySetupType)
         break
       case 'oauth2':
@@ -72,14 +86,44 @@ export class BearerSetup {
     }
   }
 
+  renderInputs = input => {
+    const inputLabel = input => {
+      return <label class="form-label">{input.label}</label>
+    }
+    const inputField = input => {
+      return (
+        <input
+          class="form-input"
+          value={input.value}
+          onChange={event => this.onValueChange(input.controlName, event)}
+          type={input.type}
+          name={input.controlName}
+          placeholder={input.placeholder}
+        />
+      )
+    }
+
+    return input.label ? (
+      <div class="form-group">
+        {inputLabel(input)}
+        {inputField(input)}
+      </div>
+    ) : (
+      inputField(input)
+    )
+  }
+
   render() {
     return [
-      this.error && <bearer-alert kind="danger">[Error] Unable to store the credentials</bearer-alert>,
-      this.loading ? (
-        <bearer-loading />
-      ) : (
-        <bearer-form fields={this.fieldSet} clearOnInput={true} onSubmit={this.handleSubmit} />
-      )
+      this.error && <bearer-alert kind="danger">[Error] Unable to save the credentials</bearer-alert>,
+      <form class={this.display && `form-${this.display}`} onSubmit={this.handleSubmit}>
+        {this.fieldSet.map(input => {
+          return this.renderInputs(input)
+        })}
+        <div class="form-submit">
+          <bearer-btn type="submit">Save</bearer-btn>
+        </div>
+      </form>
     ]
   }
 }
