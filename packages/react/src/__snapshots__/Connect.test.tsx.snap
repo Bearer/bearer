@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Connect when error during authentication uses render prop 1`] = `
+<div>
+  <button>
+    Click Fail
+  </button>
+</div>
+`;
+
+exports[`Connect when success authentication uses render prop 1`] = `
+<div>
+  <button>
+    Click
+  </button>
+</div>
+`;

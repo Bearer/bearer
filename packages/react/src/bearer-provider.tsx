@@ -11,13 +11,13 @@ interface IBearerProviderProps {
 }
 
 export interface IBearerContextValue {
-  bearer: BearerInstance | undefined
+  bearer: BearerInstance
   state: any
   handlePropUpdates?(e: any): void
 }
 
 export const BearerContext = React.createContext<IBearerContextValue>({
-  bearer: bearer.instance,
+  bearer: bearer.instance!,
   state: {},
   handlePropUpdates: () => {}
 })

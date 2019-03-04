@@ -1,11 +1,14 @@
 import * as React from 'react'
+import { BearerInstance } from '@bearer/js'
 import { BearerContext } from './bearer-provider'
+
+type TAuthPayload = { authId: string; integration: string }
 
 export interface IConnectProps {
   integration: string
   authId?: string
   setupId: string
-  onSuccess: (data: { authId: string; integration: string }) => void
+  onSuccess: (data: TAuthPayload) => void
   onError?: (data: { authId?: string; integration: string; error: Error }) => void
   render: (props: { loading: boolean; connect: () => void; error: any }) => JSX.Element
 }
@@ -26,25 +29,30 @@ class Connect extends React.Component<IConnectProps, { error?: any }> {
     this.setState(state => ({ ...state, error }))
   }
 
-  connect() {
-    this.setError(null)
-    this.context
-      .bearer!.connectTo(this.props.integration, this.props.setupId, { authId: this.props.authId })
-      .then(({ data }) => {
-        if (this.props.integration === data.integration) {
-          this.props.onSuccess(data)
-        }
-      })
-      .catch(error => {
-        if (this.props.onError) {
-          this.props.onError({ error, authId: this.props.authId, integration: this.props.integration })
-        }
-        this.setError(error)
-      })
+  connect(bearer: BearerInstance) {
+    return () => {
+      this.setError(null)
+      bearer
+        .connectTo(this.props.integration, this.props.setupId, { authId: this.props.authId })
+        .then(({ data }: { data: TAuthPayload }) => {
+          if (this.props.integration === data.integration) {
+            this.props.onSuccess(data)
+          }
+        })
+        .catch((error: any) => {
+          if (this.props.onError) {
+            this.props.onError({ error, authId: this.props.authId, integration: this.props.integration })
+          }
+          this.setError(error)
+        })
+    }
   }
   render() {
-    // TODO: check component is injected within a BearerProvider
-    return this.props.render({ loading: false, connect: this.connect, error: this.state.error })
+    return (
+      <BearerContext.Consumer>
+        {({ bearer }) => this.props.render({ loading: false, connect: this.connect(bearer), error: this.state.error })}
+      </BearerContext.Consumer>
+    )
   }
 }
 
