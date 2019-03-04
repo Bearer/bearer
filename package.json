@@ -46,7 +46,7 @@
     "lint-staged": "^8.1.0",
     "per-env": "^1.0.2",
     "prettier": "^1.16.1",
-    "tslint": "^5.12.1"
+    "tslint": "^5.13.1"
   },
   "config": {
     "commitizen": {

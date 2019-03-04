@@ -38,10 +38,10 @@
     "@types/nock": "^9.3.1",
     "@types/on-headers": "^1.0.0",
     "@types/supertest": "^2.0.7",
-    "jest": "^23.6.0",
+    "jest": "^24.1.0",
     "nock": "^10.0.6",
     "supertest": "^3.4.2",
-    "ts-jest": "^23.10.5",
+    "ts-jest": "^24.0.0",
     "typescript": "^3.3.3333"
   },
   "dependencies": {
