@@ -20,7 +20,7 @@
     "@types/node": "^10.12.19",
     "jest": "^24.0.0",
     "ts-jest": "^24.0.0",
-    "typescript": "^3.2.4"
+    "typescript": "^3.3.3333"
   },
   "scripts": {
     "start": "tsc --watch",

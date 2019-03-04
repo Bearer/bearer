@@ -32,7 +32,7 @@
     "rollup-plugin-node-resolve": "^4.0.0",
     "rollup-plugin-typescript2": "^0.19.2",
     "ts-jest": "^23.10.5",
-    "typescript": "^3.3.3"
+    "typescript": "^3.3.3333"
   },
   "scripts": {
     "start": "yarn build -w",

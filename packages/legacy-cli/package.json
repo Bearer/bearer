@@ -65,7 +65,7 @@
     "stream-buffers": "^3.0.1",
     "terminal-kit": "^1.15.1",
     "ts-loader": "^4.4.1",
-    "typescript": "^3.2.4",
+    "typescript": "^3.3.3333",
     "unzip": "^0.1.11",
     "unzip-stream": "^0.3.0",
     "update-notifier": "^2.5.0",

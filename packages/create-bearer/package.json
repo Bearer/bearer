@@ -12,7 +12,7 @@
   },
   "devDependencies": {
     "@types/node": "^10.12.18",
-    "typescript": "^3.2.4"
+    "typescript": "^3.3.3333"
   },
   "scripts": {
     "prepare": "echo 'nothing to do'",
