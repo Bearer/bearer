@@ -5,7 +5,8 @@
   "bin": {
     "aligator": "./bin/run"
   },
-  "bugs": "https://github.com/bearer/bearer/issues",
+  "repository": "Bearer/bearer",
+  "homepage": "https://github.com/Bearer/bearer/packages/package-init#readme",
   "dependencies": {
     "@oclif/command": "^1",
     "@oclif/config": "^1",
@@ -30,7 +31,6 @@
     "/bin",
     "/lib"
   ],
-  "homepage": "https://github.com/bearer/bearer",
   "keywords": [
     "oclif"
   ],
@@ -39,7 +39,6 @@
   "oclif": {
     "bin": "aligator"
   },
-  "repository": "bearer/bearer",
   "scripts": {
     "posttest": "tsc -p . --noEmit",
     "prepack": "rm -rf lib && tsc",

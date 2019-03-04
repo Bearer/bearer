@@ -8,16 +8,13 @@
     "typescript"
   ],
   "author": "Bearer Team<engineering@bearer.sh>",
-  "homepage": "https://github.com/Bearer/bearer/tree/master/packages/tsconfig",
+  "repository": "Bearer/bearer",
+  "homepage": "https://github.com/Bearer/bearer/packages/tsconfig#readme",
   "license": "MIT",
   "main": "tsconfig.json",
   "files": [
     "tsconfig.json"
   ],
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Bearer/bearer.git"
-  },
   "scripts": {
     "prepare": "echo 'nothing to do'",
     "prepack": "echo 'nothing to do'",

@@ -3,10 +3,8 @@
   "version": "0.100.0",
   "description": "Intent openapi spec generator",
   "main": "lib/index.js",
-  "repository": {
-    "type": "git",
-    "url": "github:Bearer/bearer"
-  },
+  "repository": "Bearer/bearer",
+  "homepage": "https://github.com/Bearer/bearer/packages/openapi-generator#readme",
   "author": "Bearer Team",
   "license": "MIT",
   "files": [

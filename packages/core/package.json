@@ -6,6 +6,8 @@
   "types": "lib/index.d.ts",
   "module": "lib/main.es.js",
   "author": "Bearer Team<engineering@bearer.sh>",
+  "repository": "Bearer/bearer",
+  "homepage": "https://github.com/Bearer/bearer/packages/core#readme",
   "license": "MIT",
   "files": [
     "lib/"
@@ -34,10 +36,6 @@
     "setupFiles": [
       "./jest.setup.js"
     ]
-  },
-  "repository": {
-    "type": "git",
-    "url": "github:Bearer/bearer"
   },
   "devDependencies": {
     "@bearer/js": "^0.100.0",

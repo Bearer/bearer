@@ -9,17 +9,14 @@
     "bearer"
   ],
   "author": "Bearer Team<engineering@bearer.sh>",
-  "homepage": "https://github.com/Bearer/bearer#readme",
+  "repository": "Bearer/bearer",
+  "homepage": "https://github.com/Bearer/bearer/packages/node#readme",
   "license": "MIT",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "files": [
     "lib/"
   ],
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Bearer/bearer.git"
-  },
   "scripts": {
     "start": "tsc --watch",
     "build": "tsc -p tsconfig.build.json",

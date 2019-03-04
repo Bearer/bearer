@@ -2,7 +2,8 @@
   "name": "@bearer/bearer-cli",
   "version": "0.100.0",
   "main": "lib/bin/index.js",
-  "repository": "git@github.com:Bearer/bearer.git",
+  "repository": "Bearer/bearer",
+  "homepage": "https://github.com/Bearer/bearer/packages/legacy-cli#readme",
   "author": "Bearer Team<engineering@bearer.sh>",
   "license": "MIT",
   "engines": {

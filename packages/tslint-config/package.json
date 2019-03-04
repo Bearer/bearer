@@ -3,6 +3,7 @@
   "version": "0.100.0",
   "description": "TSLint config for bearer team",
   "author": "Bearer Team<engineering@bearer.sh>",
+  "repository": "Bearer/bearer",
   "homepage": "https://github.com/Bearer/bearer/packages/tslint-config#readme",
   "license": "MIT",
   "main": "tslint.json",
@@ -16,10 +17,6 @@
   "files": [
     "tslint.json"
   ],
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Bearer/bearer.git"
-  },
   "bugs": {
     "url": "https://github.com/Bearer/bearer/issues"
   },

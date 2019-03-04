@@ -8,7 +8,8 @@
     "bearer"
   ],
   "author": "Bearer Team<engineering@bearer.sh>",
-  "homepage": "https://github.com/Bearer/bearer#readme",
+  "repository": "Bearer/bearer",
+  "homepage": "https://github.com/Bearer/bearer/packages/logger#readme",
   "license": "MIT",
   "main": "lib/logger.js",
   "module": "lib/logger.es.js",
@@ -18,10 +19,6 @@
     "/lib",
     "/oclif.manifest.json"
   ],
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Bearer/bearer.git"
-  },
   "scripts": {
     "test": "jest",
     "start": "rollup -cw",

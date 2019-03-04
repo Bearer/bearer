@@ -6,6 +6,10 @@
   "module": "lib/esm/index.js",
   "types": "lib/types/components.d.ts",
   "collection": "lib/collection/collection-manifest.json",
+  "repository": "Bearer/bearer",
+  "homepage": "https://github.com/Bearer/bearer/packages/ui#readme",
+  "author": "Bearer Team<engineering@bearer.sh>",
+  "license": "MIT",
   "files": [
     "lib/"
   ],
@@ -52,16 +56,6 @@
     "rollup-plugin-replace": "^2.1.0",
     "storybook-addon-jsx": "^6.0.0"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/ionic-team/stencil-component-starter.git"
-  },
-  "author": "Bearer Team<engineering@bearer.sh>",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/ionic-team/stencil"
-  },
-  "homepage": "https://github.com/ionic-team/stencil",
   "jest": {
     "transform": {
       "^.+\\.(ts|tsx)$": "<rootDir>/../../node_modules/@stencil/core/testing/jest.preprocessor.js"

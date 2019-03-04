@@ -4,6 +4,9 @@
   "description": "Provide typing for Bearer packages",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
+  "repository": "Bearer/bearer",
+  "homepage": "https://github.com/Bearer/bearer/packages/types#readme",
+  "author": "Bearer Team<engineering@bearer.sh>",
   "files": [
     "lib/"
   ],
@@ -16,21 +19,12 @@
     "prepare": "yarn clean && yarn build",
     "prepack": "yarn clean && NODE_ENV=production yarn build"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Bearer/bearer.git"
-  },
   "keywords": [
     "types",
     "typescript",
     "bearer"
   ],
-  "author": "Bearer Team<engineering@bearer.sh>",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/Bearer/bearer/issues"
-  },
-  "homepage": "https://github.com/Bearer/bearer#readme",
   "devDependencies": {
     "@types/jest": "^23.3.13",
     "jest": "^24.1.0",

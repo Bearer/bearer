@@ -5,6 +5,8 @@
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "author": "Bearer Team<engineering@bearer.sh>",
+  "repository": "Bearer/bearer",
+  "homepage": "https://github.com/Bearer/bearer/packages/transpiler#readme",
   "license": "MIT",
   "files": [
     "lib/"
@@ -17,10 +19,6 @@
     "prepack": "yarn clean && NODE_ENV=production yarn build",
     "test": "jest --runInBand",
     "test:ci": "jest --coverage --runInBand"
-  },
-  "repository": {
-    "type": "git",
-    "url": "github:Bearer/bearer"
   },
   "devDependencies": {
     "@bearer/types": "^0.100.0",

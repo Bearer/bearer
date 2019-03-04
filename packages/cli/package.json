@@ -3,6 +3,8 @@
   "description": "Bearer CLI",
   "version": "0.100.0",
   "author": "Bearer Team<engineering@bearer.sh>",
+  "repository": "Bearer/bearer",
+  "homepage": "https://github.com/Bearer/bearer/packages/cli#readme",
   "bin": {
     "bearer": "./bin/run"
   },
@@ -72,7 +74,6 @@
     "/lib",
     "/oclif.manifest.json"
   ],
-  "homepage": "https://github.com/Bearer/bearer/packages/cli",
   "keywords": [
     "oclif"
   ],
@@ -88,7 +89,6 @@
       "@oclif/plugin-not-found"
     ]
   },
-  "repository": "Bearer/bearer",
   "scripts": {
     "clean": "rm -rf lib",
     "postpack": "rm -f oclif.manifest.json npm-shrinkwrap.json",

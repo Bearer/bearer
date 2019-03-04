@@ -6,6 +6,8 @@
   "types": "lib/index.d.ts",
   "author": "Bearer Team<engineering@bearer.sh>",
   "license": "MIT",
+  "repository": "Bearer/bearer",
+  "homepage": "https://github.com/Bearer/bearer/packages/intents#readme",
   "files": [
     "lib/"
   ],
@@ -17,10 +19,6 @@
     "prepack": "NODE_ENV=production yarn build",
     "test": "jest",
     "test:ci": "jest --coverage --runInBand"
-  },
-  "repository": {
-    "type": "git",
-    "url": "github:BearerSH/bearer"
   },
   "dependencies": {
     "@bearer/logger": "^0.100.0",
