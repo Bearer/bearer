@@ -29,7 +29,7 @@
   "devDependencies": {
     "@bearer/js": "^0.100.0",
     "@types/jest": "^23.3.13",
-    "@types/lodash.kebabcase": "^4.1.4",
+    "@types/lodash.kebabcase": "^4.1.5",
     "@types/react": "^16.7.17",
     "@types/react-test-renderer": "^16.0.3",
     "jest": "^23.6.0",

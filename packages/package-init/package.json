@@ -18,7 +18,7 @@
   },
   "devDependencies": {
     "@types/comment-json": "^1.1.1",
-    "@types/lodash": "^4.14.119",
+    "@types/lodash": "^4.14.121",
     "@types/node": "^10.12.18",
     "ts-node": "^8.0.1",
     "typescript": "^3.2.4"
