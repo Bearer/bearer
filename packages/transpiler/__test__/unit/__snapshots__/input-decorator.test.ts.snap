@@ -47,19 +47,19 @@ class NoOptionsComponent {
     @State()
     refNotOverrided: string;
     componentDidLoad() {
-        if (this.farmerRefId) {
+        if (this.farmerId) {
             this._loadFarmer();
         }
-        if (this.aStringRefId) {
+        if (this.aStringId) {
             this._loadAString();
         }
-        if (this.aStringWithoutInitializerRefId) {
+        if (this.aStringWithoutInitializerId) {
             this._loadAStringWithoutInitializer();
         }
-        if (this.objectRefId) {
+        if (this.objectId) {
             this._loadObject();
         }
-        if (this.objectWithoutInitializerRefId) {
+        if (this.objectWithoutInitializerId) {
             this._loadObjectWithoutInitializer();
         }
         if (this.refNotOverrided) {
@@ -69,10 +69,10 @@ class NoOptionsComponent {
     @State()
     farmer: BearerRef<Farmer>;
     @Listen(\\"body:no-options:farmerSaved\\")
-    farmerRefIdChanged(event) {
-        if (this.farmerRefId !== event.detail.referenceId) {
-            if (!this.farmerRefId) {
-                this.farmerRefId = event.detail.referenceId;
+    farmerIdChanged(event) {
+        if (this.farmerId !== event.detail.referenceId) {
+            if (!this.farmerId) {
+                this.farmerId = event.detail.referenceId;
             }
         }
         else {
@@ -80,7 +80,7 @@ class NoOptionsComponent {
         }
     }
     _loadFarmer = () => {
-        this.fetcherRetrieveFarmer({ referenceId: this.farmerRefId }).then(({ data }: {
+        this.fetcherRetrieveFarmer({ referenceId: this.farmerId }).then(({ data }: {
             data: BearerRef<Farmer>;
         }) => {
             if (data) {
@@ -90,21 +90,21 @@ class NoOptionsComponent {
     };
     @Intent(\\"retrieveFarmer\\")
     fetcherRetrieveFarmer;
-    @Watch(\\"farmerRefId\\")
+    @Watch(\\"farmerId\\")
     _watchFarmer(newValueName: string) {
         if (newValueName) {
             this._loadFarmer();
         }
     }
     @Prop({ \\"mutable\\": true })
-    farmerRefId: string;
+    farmerId: string;
     @State()
     aString: BearerRef<string> = 'ok';
     @Listen(\\"body:no-options:aStringSaved\\")
-    aStringRefIdChanged(event) {
-        if (this.aStringRefId !== event.detail.referenceId) {
-            if (!this.aStringRefId) {
-                this.aStringRefId = event.detail.referenceId;
+    aStringIdChanged(event) {
+        if (this.aStringId !== event.detail.referenceId) {
+            if (!this.aStringId) {
+                this.aStringId = event.detail.referenceId;
             }
         }
         else {
@@ -112,7 +112,7 @@ class NoOptionsComponent {
         }
     }
     _loadAString = () => {
-        this.fetcherRetrieveAString({ referenceId: this.aStringRefId }).then(({ data }: {
+        this.fetcherRetrieveAString({ referenceId: this.aStringId }).then(({ data }: {
             data: BearerRef<string>;
         }) => {
             if (data) {
@@ -122,21 +122,21 @@ class NoOptionsComponent {
     };
     @Intent(\\"retrieveAString\\")
     fetcherRetrieveAString;
-    @Watch(\\"aStringRefId\\")
+    @Watch(\\"aStringId\\")
     _watchAString(newValueName: string) {
         if (newValueName) {
             this._loadAString();
         }
     }
     @Prop({ \\"mutable\\": true })
-    aStringRefId: string;
+    aStringId: string;
     @State()
     aStringWithoutInitializer: BearerRef<string>;
     @Listen(\\"body:no-options:aStringWithoutInitializerSaved\\")
-    aStringWithoutInitializerRefIdChanged(event) {
-        if (this.aStringWithoutInitializerRefId !== event.detail.referenceId) {
-            if (!this.aStringWithoutInitializerRefId) {
-                this.aStringWithoutInitializerRefId = event.detail.referenceId;
+    aStringWithoutInitializerIdChanged(event) {
+        if (this.aStringWithoutInitializerId !== event.detail.referenceId) {
+            if (!this.aStringWithoutInitializerId) {
+                this.aStringWithoutInitializerId = event.detail.referenceId;
             }
         }
         else {
@@ -144,7 +144,7 @@ class NoOptionsComponent {
         }
     }
     _loadAStringWithoutInitializer = () => {
-        this.fetcherRetrieveAStringWithoutInitializer({ referenceId: this.aStringWithoutInitializerRefId }).then(({ data }: {
+        this.fetcherRetrieveAStringWithoutInitializer({ referenceId: this.aStringWithoutInitializerId }).then(({ data }: {
             data: BearerRef<string>;
         }) => {
             if (data) {
@@ -154,23 +154,23 @@ class NoOptionsComponent {
     };
     @Intent(\\"retrieveAStringWithoutInitializer\\")
     fetcherRetrieveAStringWithoutInitializer;
-    @Watch(\\"aStringWithoutInitializerRefId\\")
+    @Watch(\\"aStringWithoutInitializerId\\")
     _watchAStringWithoutInitializer(newValueName: string) {
         if (newValueName) {
             this._loadAStringWithoutInitializer();
         }
     }
     @Prop({ \\"mutable\\": true })
-    aStringWithoutInitializerRefId: string;
+    aStringWithoutInitializerId: string;
     @State()
     object: BearerRef<{
         title: string;
     }> = { title: 'Guest' };
     @Listen(\\"body:no-options:objectSaved\\")
-    objectRefIdChanged(event) {
-        if (this.objectRefId !== event.detail.referenceId) {
-            if (!this.objectRefId) {
-                this.objectRefId = event.detail.referenceId;
+    objectIdChanged(event) {
+        if (this.objectId !== event.detail.referenceId) {
+            if (!this.objectId) {
+                this.objectId = event.detail.referenceId;
             }
         }
         else {
@@ -178,7 +178,7 @@ class NoOptionsComponent {
         }
     }
     _loadObject = () => {
-        this.fetcherRetrieveObject({ referenceId: this.objectRefId }).then(({ data }: {
+        this.fetcherRetrieveObject({ referenceId: this.objectId }).then(({ data }: {
             data: BearerRef<{
                 title: string;
             }>;
@@ -190,23 +190,23 @@ class NoOptionsComponent {
     };
     @Intent(\\"retrieveObject\\")
     fetcherRetrieveObject;
-    @Watch(\\"objectRefId\\")
+    @Watch(\\"objectId\\")
     _watchObject(newValueName: string) {
         if (newValueName) {
             this._loadObject();
         }
     }
     @Prop({ \\"mutable\\": true })
-    objectRefId: string;
+    objectId: string;
     @State()
     objectWithoutInitializer: BearerRef<{
         title: string;
     }>;
     @Listen(\\"body:no-options:objectWithoutInitializerSaved\\")
-    objectWithoutInitializerRefIdChanged(event) {
-        if (this.objectWithoutInitializerRefId !== event.detail.referenceId) {
-            if (!this.objectWithoutInitializerRefId) {
-                this.objectWithoutInitializerRefId = event.detail.referenceId;
+    objectWithoutInitializerIdChanged(event) {
+        if (this.objectWithoutInitializerId !== event.detail.referenceId) {
+            if (!this.objectWithoutInitializerId) {
+                this.objectWithoutInitializerId = event.detail.referenceId;
             }
         }
         else {
@@ -214,7 +214,7 @@ class NoOptionsComponent {
         }
     }
     _loadObjectWithoutInitializer = () => {
-        this.fetcherRetrieveObjectWithoutInitializer({ referenceId: this.objectWithoutInitializerRefId }).then(({ data }: {
+        this.fetcherRetrieveObjectWithoutInitializer({ referenceId: this.objectWithoutInitializerId }).then(({ data }: {
             data: BearerRef<{
                 title: string;
             }>;
@@ -226,14 +226,14 @@ class NoOptionsComponent {
     };
     @Intent(\\"retrieveObjectWithoutInitializer\\")
     fetcherRetrieveObjectWithoutInitializer;
-    @Watch(\\"objectWithoutInitializerRefId\\")
+    @Watch(\\"objectWithoutInitializerId\\")
     _watchObjectWithoutInitializer(newValueName: string) {
         if (newValueName) {
             this._loadObjectWithoutInitializer();
         }
     }
     @Prop({ \\"mutable\\": true })
-    objectWithoutInitializerRefId: string;
+    objectWithoutInitializerId: string;
     @State()
     spongeBob: BearerRef<Sponge>;
     @Listen(\\"body:other-group:patrickWasKilled\\")
@@ -248,7 +248,7 @@ class NoOptionsComponent {
         }
     }
     _loadSpongeBob = () => {
-        this.fetcherRetrieveSpongeBob({ intentReferenceIdKeyNameOption: this.patrick, farmerId: this.farmerRefId, spongeBobOverridedId: this.refNotOverrided, authId: this.authId }).then(({ data }: {
+        this.fetcherRetrieveSpongeBob({ intentReferenceIdKeyNameOption: this.patrick, farmerId: this.farmerId, spongeBobOverridedId: this.refNotOverrided, authId: this.authId }).then(({ data }: {
             data: BearerRef<Sponge>;
         }) => {
             if (data) {

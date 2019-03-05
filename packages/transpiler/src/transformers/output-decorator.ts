@@ -306,7 +306,7 @@ function createEmitCall(meta: OutputMeta, properties: ts.ObjectLiteralElementLik
 }
 
 export function refIdName(name: string): string {
-  return `${name}RefId`
+  return `${name}Id`
 }
 
 export function saveIntentName(name: string): string {

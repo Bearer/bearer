@@ -8,7 +8,7 @@ Object {
       "classname": "AttachPullRequestAction",
       "inputs": Array [
         Object {
-          "name": "farmerRefId",
+          "name": "farmerId",
           "type": "string",
         },
         Object {
@@ -16,11 +16,11 @@ Object {
           "type": "string",
         },
         Object {
-          "name": "feedPandaRefId",
+          "name": "feedPandaId",
           "type": "string",
         },
         Object {
-          "name": "shortPandaRefId",
+          "name": "shortPandaId",
           "type": "string",
         },
         Object {
@@ -237,7 +237,7 @@ Object {
       "classname": "AttachPullRequestAction",
       "inputs": Array [
         Object {
-          "name": "farmerRefId",
+          "name": "farmerId",
           "type": "string",
         },
         Object {
@@ -245,11 +245,11 @@ Object {
           "type": "string",
         },
         Object {
-          "name": "feedPandaRefId",
+          "name": "feedPandaId",
           "type": "string",
         },
         Object {
-          "name": "shortPandaRefId",
+          "name": "shortPandaId",
           "type": "string",
         },
         Object {
@@ -411,10 +411,10 @@ export class AttachPullRequestAction {
     @State()
     farmer: BearerRef<Farmer>;
     @Listen(\\"body:bearer-sponge-bob-attachpullrequest-farmersaved\\")
-    farmerRefIdChanged(event) {
-        if (this.farmerRefId !== event.detail.referenceId) {
-            if (!this.farmerRefId) {
-                this.farmerRefId = event.detail.referenceId;
+    farmerIdChanged(event) {
+        if (this.farmerId !== event.detail.referenceId) {
+            if (!this.farmerId) {
+                this.farmerId = event.detail.referenceId;
             }
         }
         else {
@@ -422,7 +422,7 @@ export class AttachPullRequestAction {
         }
     }
     _loadFarmer = () => {
-        this.fetcherRetrieveFarmer({ referenceId: this.farmerRefId }).then(({ data }: {
+        this.fetcherRetrieveFarmer({ referenceId: this.farmerId }).then(({ data }: {
             data: BearerRef<Farmer>;
         }) => {
             if (data) {
@@ -431,14 +431,14 @@ export class AttachPullRequestAction {
         });
     };
     private fetcherRetrieveFarmer;
-    @Watch(\\"farmerRefId\\")
+    @Watch(\\"farmerId\\")
     _watchFarmer(newValueName: string) {
         if (newValueName) {
             this._loadFarmer();
         }
     }
     @Prop({ \\"mutable\\": true })
-    farmerRefId: string;
+    farmerId: string;
     @State()
     goat: BearerRef<{
         aString: string;
@@ -486,18 +486,18 @@ export class AttachPullRequestAction {
     @State()
     feedPanda: BearerRef<Panda>;
     @Prop({ \\"mutable\\": true })
-    feedPandaRefId: string;
+    feedPandaId: string;
     @Watch(\\"feedPanda\\")
     feedPandaSavedWatcher(newValue) {
-        this.saveFeedPanda({ body: { feedPanda: newValue }, referenceId: this.feedPandaRefId }).then(({ referenceId, data }) => {
+        this.saveFeedPanda({ body: { feedPanda: newValue }, referenceId: this.feedPandaId }).then(({ referenceId, data }) => {
             this.feedPandaSaved.emit({ referenceId, feedPanda: data || this.feedPanda });
-            this.feedPandaRefId = referenceId;
+            this.feedPandaId = referenceId;
         });
         this.feedPandaInitial = null;
     }
     private fetcherRetrieveFeedPanda;
     _loadFeedPanda = () => {
-        this.fetcherRetrieveFeedPanda({ referenceId: this.feedPandaRefId }).then(({ data }: {
+        this.fetcherRetrieveFeedPanda({ referenceId: this.feedPandaId }).then(({ data }: {
             data: BearerRef<Panda>;
         }) => {
             if (data) {
@@ -519,18 +519,18 @@ export class AttachPullRequestAction {
         inlineName: string;
     }>;
     @Prop({ \\"mutable\\": true })
-    shortPandaRefId: string;
+    shortPandaId: string;
     @Watch(\\"manualpropertyWatchedName\\")
     spongeBobdSavedWatcher(newValue) {
-        this.manualIntentName({ body: { manuaLIntentPropertyName: newValue }, manualintentReferenceIdKeyName: this.shortPandaRefId }).then(({ referenceId: manualreferenceKeyName, data }) => {
+        this.manualIntentName({ body: { manuaLIntentPropertyName: newValue }, manualintentReferenceIdKeyName: this.shortPandaId }).then(({ referenceId: manualreferenceKeyName, data }) => {
             this.spongeBobdSaved.emit({ manualreferenceKeyName, shortPanda: data || this.shortPanda });
-            this.shortPandaRefId = manualreferenceKeyName;
+            this.shortPandaId = manualreferenceKeyName;
         });
         this.shortPandaInitial = null;
     }
     private fetcherRetrieveShortPanda;
     _loadShortPanda = () => {
-        this.fetcherRetrieveShortPanda({ manualintentReferenceIdKeyName: this.shortPandaRefId }).then(({ data }: {
+        this.fetcherRetrieveShortPanda({ manualintentReferenceIdKeyName: this.shortPandaId }).then(({ data }: {
             data: BearerRef<{
                 inlineName: string;
             }>;
@@ -559,13 +559,13 @@ export class AttachPullRequestAction {
         if (this.setupId) {
             this.bearerContext.setupId = this.setupId;
         }
-        if (this.farmerRefId) {
+        if (this.farmerId) {
             this._loadFarmer();
         }
-        if (this.feedPandaRefId) {
+        if (this.feedPandaId) {
             this._loadFeedPanda();
         }
-        if (this.shortPandaRefId) {
+        if (this.shortPandaId) {
             this._loadShortPanda();
         }
     }
@@ -589,21 +589,21 @@ export class AttachPullRequestAction {
     };
     @Event({ eventName: \\"attach-pull-request-action-prop-set\\", bubbles: true, cancelable: true })
     propSetEmitter: EventEmitter;
-    @Watch(\\"farmerRefId\\")
-    farmerRefIdPropSetWatcher(newValue) {
-        this.propSetEmitter.emit({ farmerRefId: newValue });
+    @Watch(\\"farmerId\\")
+    farmerIdPropSetWatcher(newValue) {
+        this.propSetEmitter.emit({ farmerId: newValue });
     }
     @Watch(\\"goatId\\")
     goatIdPropSetWatcher(newValue) {
         this.propSetEmitter.emit({ goatId: newValue });
     }
-    @Watch(\\"feedPandaRefId\\")
-    feedPandaRefIdPropSetWatcher(newValue) {
-        this.propSetEmitter.emit({ feedPandaRefId: newValue });
+    @Watch(\\"feedPandaId\\")
+    feedPandaIdPropSetWatcher(newValue) {
+        this.propSetEmitter.emit({ feedPandaId: newValue });
     }
-    @Watch(\\"shortPandaRefId\\")
-    shortPandaRefIdPropSetWatcher(newValue) {
-        this.propSetEmitter.emit({ shortPandaRefId: newValue });
+    @Watch(\\"shortPandaId\\")
+    shortPandaIdPropSetWatcher(newValue) {
+        this.propSetEmitter.emit({ shortPandaId: newValue });
     }
 }
 ",
@@ -618,7 +618,7 @@ Object {
       "classname": "AttachPullRequestAction",
       "inputs": Array [
         Object {
-          "name": "farmerRefId",
+          "name": "farmerId",
           "type": "string",
         },
         Object {
@@ -626,11 +626,11 @@ Object {
           "type": "string",
         },
         Object {
-          "name": "feedPandaRefId",
+          "name": "feedPandaId",
           "type": "string",
         },
         Object {
-          "name": "shortPandaRefId",
+          "name": "shortPandaId",
           "type": "string",
         },
         Object {
@@ -786,7 +786,7 @@ Object {
       "classname": "AttachPullRequestAction",
       "inputs": Array [
         Object {
-          "name": "farmerRefId",
+          "name": "farmerId",
           "type": "string",
         },
         Object {
@@ -794,11 +794,11 @@ Object {
           "type": "string",
         },
         Object {
-          "name": "feedPandaRefId",
+          "name": "feedPandaId",
           "type": "string",
         },
         Object {
-          "name": "shortPandaRefId",
+          "name": "shortPandaId",
           "type": "string",
         },
         Object {
@@ -991,7 +991,7 @@ Object {
       "classname": "AttachPullRequestAction",
       "inputs": Array [
         Object {
-          "name": "farmerRefId",
+          "name": "farmerId",
           "type": "string",
         },
         Object {
@@ -999,11 +999,11 @@ Object {
           "type": "string",
         },
         Object {
-          "name": "feedPandaRefId",
+          "name": "feedPandaId",
           "type": "string",
         },
         Object {
-          "name": "shortPandaRefId",
+          "name": "shortPandaId",
           "type": "string",
         },
         Object {
@@ -1174,7 +1174,7 @@ Object {
       "classname": "AttachPullRequestAction",
       "inputs": Array [
         Object {
-          "name": "farmerRefId",
+          "name": "farmerId",
           "type": "string",
         },
         Object {
@@ -1182,11 +1182,11 @@ Object {
           "type": "string",
         },
         Object {
-          "name": "feedPandaRefId",
+          "name": "feedPandaId",
           "type": "string",
         },
         Object {
-          "name": "shortPandaRefId",
+          "name": "shortPandaId",
           "type": "string",
         },
         Object {

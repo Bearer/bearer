@@ -43,7 +43,7 @@ class NoOptionsComponent {
     })
     farmerAndPanda: BearerRef<Farmer> = {};
     componentDidLoad() {
-        if (this.farmerRefId) {
+        if (this.farmerId) {
             this._loadFarmer();
         }
     }
@@ -74,19 +74,19 @@ class NoOptionsComponent {
     @State()
     farmer: BearerRef<Farmer>;
     @Prop({ \\"mutable\\": true })
-    farmerRefId: string;
+    farmerId: string;
     @Watch(\\"farmer\\")
     farmerSavedWatcher(newValue) {
-        this.saveFarmer({ body: { farmer: newValue }, referenceId: this.farmerRefId }).then(({ referenceId, data }) => {
+        this.saveFarmer({ body: { farmer: newValue }, referenceId: this.farmerId }).then(({ referenceId, data }) => {
             this.farmerSaved.emit({ referenceId, farmer: data || this.farmer });
-            this.farmerRefId = referenceId;
+            this.farmerId = referenceId;
         });
         this.farmerInitial = null;
     }
     @Intent(\\"retrieveFarmer\\")
     fetcherRetrieveFarmer;
     _loadFarmer = () => {
-        this.fetcherRetrieveFarmer({ referenceId: this.farmerRefId }).then(({ data }: {
+        this.fetcherRetrieveFarmer({ referenceId: this.farmerId }).then(({ data }: {
             data: BearerRef<Farmer>;
         }) => {
             if (data) {
@@ -106,19 +106,19 @@ class NoOptionsComponent {
     @State()
     farmerAndPanda: BearerRef<Farmer> = {};
     @Prop({ \\"mutable\\": true })
-    farmerAndPandaRefId: string;
+    farmerAndPandaId: string;
     @Watch(\\"aPanda\\")
     milkedWatcher(newValue) {
         this.milkWithAbottle({ body: { intentPropertyNameOption: newValue }, anotherProp: this.intentReferenceIdValueValue }).then(({ referenceId: aPandaKey, data }) => {
             this.milked.emit({ aPandaKey, farmerAndPanda: data || this.farmerAndPanda });
-            this.farmerAndPandaRefId = aPandaKey;
+            this.farmerAndPandaId = aPandaKey;
         });
         this.farmerAndPandaInitial = null;
     }
     @Intent(\\"retrieveFarmerAndPanda\\")
     fetcherRetrieveFarmerAndPanda;
     _loadFarmerAndPanda = () => {
-        this.fetcherRetrieveFarmerAndPanda({ anotherProp: this.farmerAndPandaRefId, farmerId: this.farmerRefId, spongeBobOverrided: this.spongeBobOverrided, authId: this.authId }).then(({ data }: {
+        this.fetcherRetrieveFarmerAndPanda({ anotherProp: this.farmerAndPandaId, farmerId: this.farmerId, spongeBobOverrided: this.spongeBobOverrided, authId: this.authId }).then(({ data }: {
             data: BearerRef<Farmer>;
         }) => {
             if (data) {
