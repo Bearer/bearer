@@ -44,10 +44,10 @@ export function bearerRequest<TPromiseReturn>(uri: string, baseParams = {}): TBe
             .then(response => {
               const data = response.json()
               if (response.status > 399) {
-                debug('failing request %j', response)
+                logger('failing request %j', data)
                 reject(data)
               } else {
-                debug('successful request %j', response)
+                logger('successful request %j', data)
                 resolve(data)
               }
             })
