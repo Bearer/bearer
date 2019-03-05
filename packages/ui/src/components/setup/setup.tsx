@@ -1,10 +1,10 @@
 import Bearer, { Component, State, Element, Event, EventEmitter, Prop, StateManager } from '@bearer/core'
 import { FieldSet } from '../Forms/Fieldset'
-import debug from '../../logger'
 
 import { OAuth2SetupType, EmailSetupType, KeySetupType } from './setup-types'
 
-const logger = debug().extend('setup-action')
+import debug from '../../logger'
+const logger = debug('bearer-setup')
 
 type TSetupPayload = {
   Item: { referenceId: string }
@@ -47,7 +47,7 @@ export class BearerSetup {
       .then((item: TSetupPayload) => {
         this.loading = false
         const referenceId = item.Item.referenceId
-        logger('setup_success:%s', this.scenarioId)
+        logger('setup_success %s', `setup_success:${this.scenarioId}`)
         Bearer.emitter.emit(`setup_success:${this.scenarioId}`, {
           referenceId
         })

@@ -1,12 +1,10 @@
 {
   "name": "@bearer/openapi-generator",
-  "version": "0.99.0",
+  "version": "0.100.0",
   "description": "Intent openapi spec generator",
   "main": "lib/index.js",
-  "repository": {
-    "type": "git",
-    "url": "github:Bearer/bearer"
-  },
+  "repository": "Bearer/bearer",
+  "homepage": "https://github.com/Bearer/bearer/packages/openapi-generator#readme",
   "author": "Bearer Team",
   "license": "MIT",
   "files": [
@@ -15,22 +13,12 @@
   "devDependencies": {
     "@bearer/intents": "next",
     "@bearer/package-init": "^0.78.0",
-    "@commitlint/cli": "^7.4.0",
-    "@commitlint/config-conventional": "^7.3.1",
-    "@oclif/tslint": "^3.1.1",
     "@types/jest": "^23.3.13",
     "@types/lodash.merge": "^4.6.5",
     "@types/node": "^10.12.19",
-    "commitlint": "^7.4.0",
-    "cz-conventional-changelog": "^2.1.0",
-    "husky": "^1.3.1",
     "jest": "^24.0.0",
-    "lint-staged": "^8.1.1",
-    "prettier": "^1.16.2",
     "ts-jest": "^24.0.0",
-    "tslint": "^5.12.1",
-    "tslint-config-prettier": "^1.17.0",
-    "typescript": "^3.2.4"
+    "typescript": "^3.3.3333"
   },
   "scripts": {
     "start": "tsc --watch",

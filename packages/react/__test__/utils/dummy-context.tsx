@@ -14,6 +14,7 @@ export default class DummyContext extends React.Component<IDummyContextProps, an
     super(props)
     this.state = props.initialContext || {}
     this.contextValue = {
+      bearer: null as any,
       handlePropUpdates: props.onHandlePropUpdates || (() => {}),
       state: this.state
     }

@@ -2,6 +2,9 @@ import { Component, Element, Listen, Method, Prop, State, TFetchBearerData } fro
 
 import { TCollectionRenderer } from './types'
 
+import debug from '../../logger'
+const logger = debug('bearer-scrollable')
+
 @Component({
   tag: 'bearer-scrollable',
   styleUrl: 'scrollable.scss'
@@ -16,7 +19,7 @@ export class BearerScrollable {
   @Prop()
   perPage?: number = 5
   @Prop()
-  fetcher: (params: { page: number} ) => Promise<TFetchBearerData>
+  fetcher: (params: { page: number }) => Promise<TFetchBearerData>
 
   @State()
   hasMore: boolean = true
@@ -25,7 +28,7 @@ export class BearerScrollable {
   @State()
   fetching: boolean = false
   @State()
-  collection: Array<any> = []
+  collection: any[] = []
   @State()
   content: HTMLElement
   @Element()
@@ -37,7 +40,7 @@ export class BearerScrollable {
       this.fetching = true
       this.fetcher({ page: this.page })
         .then(({ data }: TFetchBearerData) => {
-          console.debug('[BEARER]', 'data receiced from fetcher', data)
+          logger('data receiced from fetcher %j', data)
           this.hasMore = data.length === this.perPage
           this.collection = [...this.collection, ...data]
           this.fetching = false
@@ -45,7 +48,7 @@ export class BearerScrollable {
           return data
         })
         .catch(error => {
-          console.error('[BEARER]', 'Error while fetching', error)
+          logger('Error while fetching %j', error)
           this.fetching = false
         })
     }

@@ -2,7 +2,6 @@ import axios from 'axios'
 import * as cosmiconfig from 'cosmiconfig'
 
 import Locator from '../locationProvider'
-
 import startLocalDevelopmentServer from './startLocalDevelopmentServer'
 
 type IConfig = {
@@ -29,6 +28,7 @@ export const invoke = (emitter, config, locator: Locator) => async (intent, cmd)
     const client = axios.create({ baseURL: `${integrationHostURL}api/v1`, timeout: 5000 })
 
     const { data } = await client.post(`${scenarioUuid}/${intent}`, body, { params })
+    // used by cli: do not remove
     console.log(JSON.stringify(data, null, 2))
     process.exit(0)
   } catch (e) {

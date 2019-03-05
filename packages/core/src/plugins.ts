@@ -1,5 +1,7 @@
 import replace from 'rollup-plugin-replace'
 
+import debug from './logger'
+
 export const plugins = () => {
   const withVariables = {
     BEARER_SCENARIO_ID: process.env.BEARER_SCENARIO_ID,
@@ -8,7 +10,7 @@ export const plugins = () => {
   }
 
   if (process.env.BEARER_DEBUG) {
-    console.log('[BEARER]', 'withVariables', withVariables)
+    debug.extend('plugins')('withVariables %j', withVariables)
   }
 
   return [replace(withVariables)]

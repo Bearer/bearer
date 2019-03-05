@@ -3,12 +3,12 @@
  * class AComponent {
  *  @Intent('aName') fetcher: BearerFetch
  * }
- * 
+ *
  * to this:
- * 
+ *
  * class AComponent {
  *  private fetcher: BearerFetch
- * 
+ *
  *  constructor() {
  *    Intent('aName')(this, fetcher)
  *  }
@@ -53,14 +53,14 @@ function classHasConstructor(classNode: ts.ClassDeclaration): boolean {
   })
 }
 
-export default function ComponentTransformer({  }: TransformerOptions = {}): ts.TransformerFactory<ts.SourceFile> {
+export default function componentTransformer({  }: TransformerOptions = {}): ts.TransformerFactory<ts.SourceFile> {
   return transformContext => {
     // create constructor if it does not exist
     // append Intent call within constructor
     // remove @Intent decorator from the sourcefile
 
     return tsSourceFile => {
-      const registeredIntents: Array<ts.PropertyDeclaration> = []
+      const registeredIntents: ts.PropertyDeclaration[] = []
 
       const withDecoratorReplaced = visitRemoveIntentDecorators(tsSourceFile as ts.Node, registeredIntents)
 
@@ -72,7 +72,7 @@ export default function ComponentTransformer({  }: TransformerOptions = {}): ts.
     // Remove decorators and replace them with a property access
     function visitRemoveIntentDecorators(
       node: ts.Node,
-      registeredIntents: Array<ts.PropertyDeclaration>
+      registeredIntents: ts.PropertyDeclaration[]
     ): ts.VisitResult<ts.Node> {
       if (ts.isPropertyDeclaration(node)) {
         return replaceIfIntentDecorated(node, registeredIntents)
@@ -80,7 +80,7 @@ export default function ComponentTransformer({  }: TransformerOptions = {}): ts.
       return ts.visitEachChild(node, node => visitRemoveIntentDecorators(node, registeredIntents), transformContext)
     }
 
-    function replaceIfIntentDecorated(node: ts.PropertyDeclaration, registeredIntents: Array<ts.PropertyDeclaration>) {
+    function replaceIfIntentDecorated(node: ts.PropertyDeclaration, registeredIntents: ts.PropertyDeclaration[]) {
       if (hasDecoratorNamed(node, Decorators.Intent)) {
         registeredIntents.push(node)
         return ts.createProperty(
@@ -109,10 +109,7 @@ export default function ComponentTransformer({  }: TransformerOptions = {}): ts.
 
     // Call Intent function
 
-    function visitConstructor(
-      node: ts.Node,
-      registeredIntents: Array<ts.PropertyDeclaration>
-    ): ts.VisitResult<ts.Node> {
+    function visitConstructor(node: ts.Node, registeredIntents: ts.PropertyDeclaration[]): ts.VisitResult<ts.Node> {
       if (ts.isConstructorDeclaration(node)) {
         return addIntentCallToConstructor(node as ts.ConstructorDeclaration, registeredIntents)
       }
@@ -121,9 +118,9 @@ export default function ComponentTransformer({  }: TransformerOptions = {}): ts.
 
     function addIntentCallToConstructor(
       node: ts.ConstructorDeclaration,
-      registeredIntents: Array<ts.PropertyDeclaration>
+      registeredIntents: ts.PropertyDeclaration[]
     ): ts.Node {
-      const intentCalls: Array<ts.Statement> = registeredIntents.map((intent: ts.PropertyDeclaration) => {
+      const intentCalls: ts.Statement[] = registeredIntents.map((intent: ts.PropertyDeclaration) => {
         const call: ts.CallExpression = intent.decorators[0].expression as ts.CallExpression
         return ts.createStatement(
           ts.createCall(

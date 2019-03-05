@@ -2,6 +2,8 @@ import { Component, Element, Listen, Prop, State } from '@bearer/core'
 
 import { TDirection } from '../button-popover/button-popover'
 import { BKind } from '../Button/Button'
+import debug from '../../logger'
+const logger = debug('bearer-navigator')
 
 const NAVIGATOR_AUTH_SCREEN_NAME = 'BEARER-NAVIGATOR-AUTH-SCREEN'
 
@@ -57,7 +59,7 @@ export class BearerPopoverNavigator {
       e.preventDefault()
       e.stopPropagation()
     }
-    console.debug('[BEARER]', 'Navigator: next', this.hasNext())
+    logger('Navigator: next %s', this.hasNext())
     if (this.hasNext()) {
       this.visibleScreen = Math.min(this._visibleScreenIndex + 1, this.screens.length - 1)
     } else if (this.complete) {
@@ -78,7 +80,7 @@ export class BearerPopoverNavigator {
 
   set isVisible(newValue: boolean) {
     if (this._isVisible !== newValue) {
-      console.debug('[BEARER]', 'Navigator:isVisibleChanged', newValue)
+      logger('Navigator:isVisibleChanged %s', newValue)
       this._isVisible = newValue
       if (newValue) {
         this.showScreen(this.visibleScreen)
@@ -115,7 +117,7 @@ export class BearerPopoverNavigator {
   }
 
   onVisibilityChange = ({ detail: { visible } }: { detail: { visible: boolean } }) => {
-    console.debug('[BEARER]', 'Navigator:onVisibilityChange', visible)
+    logger('Navigator:onVisibilityChange %s', visible)
     this.isVisible = visible
     if (!this.isVisible) {
       this.visibleScreen = this.hasAuthScreen() ? 1 : 0
@@ -123,7 +125,7 @@ export class BearerPopoverNavigator {
   }
 
   showScreen = screen => {
-    console.debug('[BEARER]', 'showScreen', screen, this.isVisible)
+    logger('showScreen %s visible: %s', screen, this.isVisible)
     if (screen && this.isVisible) {
       screen.willAppear(this.screenData)
       this.navigationTitle = screen.getTitle()
@@ -143,7 +145,7 @@ export class BearerPopoverNavigator {
   hasAuthScreen = () => this.screenNodes.filter(node => node.tagName === NAVIGATOR_AUTH_SCREEN_NAME).length
 
   componentDidLoad() {
-    console.debug('[BEARER]', 'Navigator: componentDidLoad ')
+    logger('componentDidLoad ')
     this.screens = this.screenNodes
     this._visibleScreenIndex = 0
   }

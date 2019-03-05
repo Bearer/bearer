@@ -26,6 +26,8 @@ pipeline {
     parameters {
         string(defaultValue: '', description: 'TAG which will be used by lerna', name: 'LERNA_TAG')
         booleanParam(defaultValue: false, description: 'Lerna force publish', name: 'FORCE')
+        booleanParam(defaultValue: false, description: 'Canary release', name: 'CANARY')
+
     }
 
     stages {
@@ -45,6 +47,11 @@ pipeline {
             }
         }
         stage('Test') {
+             when {
+                expression { params.CANARY  == false }
+                branch 'master'
+            }
+
             steps {
                 container("bearercli") {
                     ansiColor('xterm') {
@@ -57,6 +64,20 @@ pipeline {
             when {
                 expression { params.LERNA_TAG  != '' }
                 branch 'master'
+            }
+
+            steps {
+                container("bearercli") {
+                    ansiColor('xterm') {
+                        sh(".jenkins/deploy.sh")
+                    }
+                }
+            }
+        }
+
+        stage("Deploy Canary") {
+            when {
+                expression { params.CANARY  == true }
             }
 
             steps {

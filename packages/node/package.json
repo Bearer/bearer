@@ -1,7 +1,7 @@
 {
   "name": "@bearer/node",
   "private": false,
-  "version": "0.99.2",
+  "version": "0.100.0",
   "description": "Bearer platform bindings",
   "keywords": [
     "node",
@@ -9,17 +9,14 @@
     "bearer"
   ],
   "author": "Bearer Team<engineering@bearer.sh>",
-  "homepage": "https://github.com/Bearer/bearer#readme",
+  "repository": "Bearer/bearer",
+  "homepage": "https://github.com/Bearer/bearer/packages/node#readme",
   "license": "MIT",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "files": [
     "lib/"
   ],
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Bearer/bearer.git"
-  },
   "scripts": {
     "start": "tsc --watch",
     "build": "tsc -p tsconfig.build.json",
@@ -35,18 +32,18 @@
   "devDependencies": {
     "@types/express": "^4.16.0",
     "@types/jest": "^23.3.13",
-    "@types/nock": "^9.3.0",
+    "@types/nock": "^9.3.1",
     "@types/on-headers": "^1.0.0",
     "@types/supertest": "^2.0.7",
-    "jest": "^23.6.0",
+    "jest": "^24.1.0",
     "nock": "^10.0.6",
     "supertest": "^3.4.2",
-    "ts-jest": "^23.10.5",
-    "typescript": "^3.2.4"
+    "ts-jest": "^24.0.0",
+    "typescript": "^3.3.3333"
   },
   "dependencies": {
-    "@bearer/logger": "^0.99.2",
-    "@bearer/security": "^0.99.1",
+    "@bearer/logger": "^0.100.0",
+    "@bearer/security": "^0.100.0",
     "axios": "^0.18.0",
     "express": "^4.16.4",
     "on-headers": "^1.0.1"

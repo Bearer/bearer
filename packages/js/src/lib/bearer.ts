@@ -1,10 +1,14 @@
 import debounce from 'debounce'
+// must be the same version as the one used within the integation service
+import postRobot from 'post-robot'
 import { TIntegration } from './types'
 import debug from './logger'
+import { formatQuery } from './utils'
 
 const logger = debug.extend('Bearer')
 const prefix = 'bearer'
 const DEFAULT_OPTIONS = {
+  secured: false,
   integrationHost: 'INTEGRATION_HOST_URL',
   domObserver: true,
   refreshDebounceDelay: 200
@@ -15,14 +19,52 @@ export default class Bearer {
   private registeredIntegrations: Record<string, boolean> = {}
   private observer?: MutationObserver
   private debounceRefresh: () => void
+  private authorizedListener!: postRobot.Cancellable
+  private rejectedListener!: postRobot.Cancellable
 
-  constructor(readonly clientId: string, options?: Partial<TBearerOptions>) {
-    this.config = { ...DEFAULT_OPTIONS, ...options }
+  constructor(readonly clientId: string, options: Partial<TBearerOptions> = {}) {
+    this.config = { ...DEFAULT_OPTIONS, ...cleanOptions(options) }
+    logger('init bearer instance clientId: %s with config: %j', clientId, this.config)
     this.debounceRefresh = debounce(this.loadMissingIntegrations, this.config.refreshDebounceDelay)
     this.initialIntegrationLoading()
     if (this.config.domObserver) {
       this.registerDomObserver()
     }
+  }
+  // TODO: move to a dedicated file
+  /**
+   * @argument {string} integration Integration's identifier you wan to connect to ex: 12345-attach-github-pull-request
+   * @argument {string} setupId Setup's identifier you received earlier, a Bearer reference containing all required information about auth mechanism
+   * @argument {Object} options Optional parameters like authId if you already have one
+   */
+  connectTo = (integration: string, setupId: string, { authId }: { authId?: string } = {}) => {
+    const query = formatQuery({
+      setupId,
+      authId,
+      secured: this.config.secured,
+      clientId: this.clientId
+    })
+    const AUTHORIZED_URL = `${this.config.integrationHost}/v2/auth/${integration}?${query}`
+    // TODO: get rid of post robot, too heqvy for our needs
+    const promise = new Promise<{ data: { integration: string; authId: string } }>((resolve, reject) => {
+      // TODO: use constants
+      if (this.authorizedListener) {
+        debug('canceling previous listener')
+        this.authorizedListener.cancel()
+        this.rejectedListener.cancel()
+      }
+      debug('add authorization listeners')
+      this.authorizedListener = postRobot.on('BEARER_AUTHORIZED', ({ data }) => {
+        debug('Authorized: %s => %j', integration, data)
+        resolve({ ...data, integration })
+      })
+      this.rejectedListener = postRobot.on('BEARER_REJECTED', ({ data }) => {
+        debug('Rejected: %s => %j', integration, data)
+        reject({ ...data, integration })
+      })
+    }).then()
+    window.open(AUTHORIZED_URL, '', 'resizable,scrollbars,status,centerscreen=yes,width=500,height=600')
+    return promise
   }
 
   /**
@@ -124,6 +166,7 @@ export default class Bearer {
 }
 
 export type TBearerOptions = {
+  secured: boolean
   domObserver: boolean
   integrationHost: string
   refreshDebounceDelay: number
@@ -161,4 +204,16 @@ function getScriptDOM(clientId: string, integration: TIntegration): HTMLScriptEl
   s.src = [integration.asset, [`clientId=${clientId}`].join('&')].join(separator)
   s.id = getScriptId(integration.uuid)
   return s
+}
+
+function cleanOptions(obj: Record<string, any>) {
+  return Object.keys(obj).reduce(
+    (acc, key: string) => {
+      if (obj[key] !== undefined) {
+        acc[key] = obj[key]
+      }
+      return acc
+    },
+    {} as Record<string, any>
+  )
 }

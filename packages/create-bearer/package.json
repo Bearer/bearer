@@ -1,9 +1,10 @@
 {
   "name": "create-bearer",
-  "version": "0.99.2",
+  "version": "0.100.0",
   "description": "Quickly create a new Bearer scenario",
   "main": "lib/index.js",
-  "repository": "http://github.com/bearer/bearer/packages/create-bearer",
+  "repository": "Bearer/bearer",
+  "homepage": "https://github.com/Bearer/bearer/packages/create-bearer#readme",
   "author": "Bearer Team<engineering@bearer.sh>",
   "license": "MIT",
   "private": false,
@@ -12,7 +13,7 @@
   },
   "devDependencies": {
     "@types/node": "^10.12.18",
-    "typescript": "^3.2.4"
+    "typescript": "^3.3.3333"
   },
   "scripts": {
     "prepare": "echo 'nothing to do'",
@@ -24,6 +25,6 @@
     "static/"
   ],
   "dependencies": {
-    "@bearer/cli": "^0.99.2"
+    "@bearer/cli": "^0.100.0"
   }
 }

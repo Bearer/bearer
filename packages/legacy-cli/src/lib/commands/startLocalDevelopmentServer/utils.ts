@@ -1,4 +1,7 @@
 import { getRows } from './storage'
+import debug from '../../logger'
+
+const logger = debug.extend('utils')
 
 export async function loadUserDefinedData({ query }): Promise<any> {
   const userDataIds = Object.keys(query).filter(key => key.endsWith('Id') && query[key])
@@ -9,7 +12,7 @@ export async function loadUserDefinedData({ query }): Promise<any> {
         try {
           return await getRows(query[id])
         } catch (e) {
-          console.log('[BEARER]', `Error while loading ${id} associated data (value: ${query[id] || 'No Value'})`)
+          logger('Error while loading %s associated data (value: %s)', id, query[id] || 'No Value')
           return null
         }
       })
@@ -17,7 +20,7 @@ export async function loadUserDefinedData({ query }): Promise<any> {
       if (datum) {
         const parsed = JSON.parse(datum)
         const key = userDataIds[index]
-        console.log('[BEARER]', `${itemName(key)} loaded :\n`, JSON.stringify(datum, null, 2))
+        logger('%s loaded: \n%j', itemName(key), datum)
         acc[itemName(key)] = parsed.ReadAllowed ? parsed : null
       } else {
       }

@@ -1,5 +1,8 @@
 import { Component, Event, EventEmitter, Method, Prop, State, Watch } from '@bearer/core'
 
+import debug from '../../logger'
+const logger = debug('bearer-popover')
+
 export type TAlignement = 'left' | 'right'
 export type TDirection = 'left' | 'right' | 'top' | 'bottom'
 
@@ -25,7 +28,7 @@ export class BearerPopover {
 
   set visible(newValue: boolean) {
     if (newValue !== null && this._visible !== newValue) {
-      console.debug('[BEARER]', 'Popover: visibilityChangeHandler', newValue)
+      logger('Popover: visibilityChangeHandler %s', newValue)
       this._visible = newValue
       this.visibilityChange.emit({ visible: this._visible })
     }

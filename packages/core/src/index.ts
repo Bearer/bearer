@@ -1,8 +1,6 @@
 import { Bearer as TBearer } from '@bearer/js'
 
 import Bearer from './bearer'
-import classNames from './classnames'
-import * as Debug from './debug'
 import EventNames from './event-names'
 import * as Requests from './requests'
 import { TTranslatorFunc, TPluralizerFunc, scopedPluralize, scopedTranslate } from './i18n/index'
@@ -13,8 +11,6 @@ export * from './decorators'
 export const StateManager = bearerState
 export const Events = EventNames
 export const requests = Requests
-export const debug = Debug
-export const classnames = classNames
 
 // Next 2 helpers get rewritten with transpiler
 

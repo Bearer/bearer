@@ -2,6 +2,12 @@ import { Component, Element, Event, EventEmitter, Method, Prop, State } from '@b
 
 import { AuthenticationListener } from '../../utils/with-authentication'
 import { FWithAuthenticate, FWithRevoke } from '../Authorized/bearer-authorized'
+import debug from '../../logger'
+const logger = debug('bearer-navigator-auth-screen')
+
+const logError = (error: any) => {
+  logger.extend('error')('%j', error)
+}
 
 @Component({
   tag: 'bearer-navigator-auth-screen',
@@ -27,14 +33,14 @@ export class BearerNavigatorAuthScreen extends AuthenticationListener {
 
   @Method()
   willAppear() {
-    console.debug('[BEARER]', 'Auth screen willAppear')
+    logger('Auth screen willAppear')
     const screen: HTMLBearerNavigatorScreenElement = this.el.shadowRoot.querySelector('#screen')
     screen.willAppear({})
   }
 
   @Method()
   willDisappear() {
-    console.debug('[BEARER]', 'Auth screen willAppear')
+    logger('Auth screen willAppear')
     const screen: HTMLBearerNavigatorScreenElement = this.el.shadowRoot.querySelector('#screen')
     screen.willAppear({})
   }
@@ -49,23 +55,23 @@ export class BearerNavigatorAuthScreen extends AuthenticationListener {
   }
 
   goNext = () => {
-    console.debug('[BEARER]', 'go to next screen')
+    logger('go to next screen')
     this.scenarioAuthenticate.emit()
     this.stepCompleted.emit()
     this.scenarioAuthorized = true
   }
 
   onAuthorizeClick = (authenticate: () => Promise<boolean>) => {
-    console.debug('[BEARER]', 'onAuthorized')
+    logger('onAuthorized')
     authenticate()
       .then(this.goNext)
-      .catch(console.error)
+      .catch(logError)
   }
 
   onRevokeClick = (revoke: (authRefId: string) => Promise<boolean>) => {
     revoke(this.authId)
       .then(this.onRevoked)
-      .catch(console.error)
+      .catch(logError)
   }
 
   renderUnauthoried: FWithAuthenticate = ({ authenticate }) => (

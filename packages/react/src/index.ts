@@ -1,4 +1,6 @@
-import BearerProvider, { BearerContext } from './bearer-provider'
+import Bearer, { BearerContext } from './bearer-provider'
+import Connect from './Connect'
+import factory from './factory'
 import fromBearer from './from-bearer'
 
-export { BearerProvider, BearerContext, fromBearer }
+export { factory, Bearer, BearerContext, fromBearer, Connect }

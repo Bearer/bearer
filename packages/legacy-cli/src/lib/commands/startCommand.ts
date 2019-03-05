@@ -12,7 +12,7 @@ function watchNonTSFiles(watchedPath, destPath): Promise<any> {
   return new Promise((resolve, _reject) => {
     function callback(error) {
       if (error) {
-        console.log('error', error)
+        logger('error %j', error)
       }
     }
     const watcher = chokidar.watch(watchedPath + '/**', {

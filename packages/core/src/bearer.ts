@@ -3,8 +3,14 @@ import postRobot from 'post-robot'
 
 import BearerConfig from './bearer-config'
 import Events from './event-names'
-
 import { formatQuery } from './utils'
+import debug from './logger'
+
+const logger = debug.extend('Bearer')
+
+const warn = (message: string) => {
+  logger(`%c ${message}`, 'background: #222; color: #bada55')
+}
 
 const BEARER_WINDOW_INSTANCE_KEY = 'BEARER_INSTANCE'
 const BEARER_EMITTER = 'BEARER_EMITTER'
@@ -23,7 +29,7 @@ type TAuthorizationPayload = {
 export default class Bearer {
   private static set _instance(bearerInstance: Bearer) {
     if (window[BEARER_WINDOW_INSTANCE_KEY]) {
-      console.warn('[BEARER]', 'Replacing bearer instance')
+      warn('Replacing bearer instance')
     }
     window[BEARER_WINDOW_INSTANCE_KEY] = bearerInstance
   }
@@ -61,7 +67,7 @@ export default class Bearer {
 
   get maybeInitialized(): Promise<boolean> {
     if (!this.isSessionInitialized) {
-      console.warn('[BEARER]', 'Waiting Bearer to be initialized')
+      warn('Waiting Bearer to be initialized')
     }
     return this._maybeInitialized
   }
@@ -72,7 +78,7 @@ export default class Bearer {
 
   public static init(config: any = {}): Bearer {
     if (this._instance) {
-      console.warn('One instance is already configured, reaplacing it')
+      warn('One instance is already configured, reaplacing it')
     }
     this._instance = new Bearer({ ...config, ...(window[BEARER_CONFIG_KEY] || {}) }, window)
 
@@ -80,25 +86,25 @@ export default class Bearer {
   }
 
   static onAuthorized = (scenarioId: string, callback: (authorize: boolean) => void): EventSubscription => {
-    console.debug('[BEARER]', 'onAuthorized', 'register', scenarioId)
+    logger('onAuthorized register %s', scenarioId)
     return Bearer.emitter.addListener(Events.AUTHORIZED, (data: TAuthorizationPayload) => {
       if (data.data.scenarioId === scenarioId) {
-        console.debug('[BEARER]', 'onAuthorized', 'authorized', scenarioId)
+        logger('onAuthorized authorized %s', scenarioId)
         callback(true)
       } else {
-        console.debug('[BEARER]', 'onAuthorized', 'different scenarioId', scenarioId)
+        logger('onAuthorized different scenarioId %s', scenarioId)
       }
     })
   }
 
   static onRevoked = (scenarioId: string, callback: (authorize: boolean) => void): EventSubscription => {
-    console.debug('[BEARER]', 'register onRevoked', scenarioId)
+    logger('onRevoked register %s', scenarioId)
     return Bearer.emitter.addListener(Events.REVOKED, (data: TAuthorizationPayload) => {
       if (data.data.scenarioId === scenarioId) {
-        console.debug('[BEARER]', 'onRevoked', 'revoked', scenarioId)
+        logger('onRevoked revoked %s', scenarioId)
         callback(false)
       } else {
-        console.debug('[BEARER]', 'onRevoked', 'different scenarioId', scenarioId)
+        logger('onRevoked different scenarioId %s', scenarioId)
       }
     })
   }
@@ -133,7 +139,7 @@ export default class Bearer {
           clientId: Bearer.config.clientId
         })
         .then(({ data, data: { authorized } }: { data: { authorized: boolean } }) => {
-          console.debug('[BEARER]', 'HAS_AUTHORIZED response', data)
+          logger('HAS_AUTHORIZED response %j', data)
           authorized ? resolve(true) : reject(false)
         })
         .catch(iframeError)
@@ -147,7 +153,7 @@ export default class Bearer {
         clientId: Bearer.config.clientId
       })
       .then(() => {
-        console.debug('[BEARER]', 'Signing out')
+        logger('Signing out')
       })
       .catch(iframeError)
   }
@@ -195,12 +201,12 @@ export default class Bearer {
   }
 
   private sessionInitialized(_event) {
-    console.debug('[BEARER]', 'session initialized')
+    logger('session initialized')
     this.isSessionInitialized = true
     this.allowIntegrationRequests(true)
   }
 }
 
 function iframeError(e) {
-  console.error('[BEARER]', 'Error contacting iframe', e)
+  logger('Error contacting iframe')
 }

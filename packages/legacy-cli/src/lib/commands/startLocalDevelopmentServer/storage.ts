@@ -3,7 +3,8 @@ import * as knex from 'knex'
 import * as uuidv1 from 'uuid/v1'
 
 const filename = process.env.BEARER_LOCAL_DATABASE || ':memory:'
-const debug = process.env.BEARER_DEBUG === '*'
+import debug from '../../logger'
+const logger = debug.extend('start')
 
 const db = knex({
   dialect: 'sqlite3',
@@ -11,7 +12,7 @@ const db = knex({
     filename
   },
   useNullAsDefault: true,
-  debug
+  debug: process.env.BEARER_DEBUG === '*'
 })
 
 export async function getRows(referenceId) {
@@ -59,7 +60,7 @@ export default () => {
         .limit(1)
 
       const { data } = rows[0]
-      console.log(data)
+      logger('%j', data)
       ctx.ok({ Item: { ...JSON.parse(data), referenceId } })
     } catch (e) {
       ctx.notFound(e)
@@ -77,8 +78,8 @@ export default () => {
   const putItem = async (ctx, _next) => {
     const referenceId = ctx.params.referenceId
 
-    console.log(ctx.request)
-    console.log('BODY is: ', ctx.request.body)
+    logger('%j', ctx.request)
+    logger('BODY is: %j', ctx.request.body)
     await db
       .table('records')
       .where({ referenceId })
@@ -96,7 +97,7 @@ export default () => {
   const postItem = async (ctx, _next) => {
     const referenceId = uuidv1()
 
-    console.log(ctx.request.body)
+    logger('%j', ctx.request.body)
     try {
       await db.table('records').insert({ data: JSON.stringify(ctx.request.body), referenceId })
       ctx.ok({ Item: { ...ctx.request.body, referenceId } })

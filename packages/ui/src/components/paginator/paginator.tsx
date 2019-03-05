@@ -1,5 +1,8 @@
 import { Component, Listen, Prop, State, Method, TFetchBearerData } from '@bearer/core'
 
+import debug from '../../logger'
+const logger = debug('bearer-paginator')
+
 @Component({
   tag: 'bearer-paginator',
   styleUrl: 'pagination.scss',
@@ -7,7 +10,7 @@ import { Component, Listen, Prop, State, Method, TFetchBearerData } from '@beare
 })
 export class BearerPaginator {
   @Prop()
-  renderCollection: (collection: Array<any>) => any
+  renderCollection: (collection: any[]) => any
   @Prop()
   renderFetching: () => any
   @Prop()
@@ -24,7 +27,7 @@ export class BearerPaginator {
   @State()
   maxPages: number = 0
   @State()
-  collection: Array<any> = []
+  collection: any[] = []
 
   @Listen('BearerPaginationNext')
   nextHandler() {
@@ -39,7 +42,7 @@ export class BearerPaginator {
         })
         .catch(e => {
           this.fetching = false
-          console.error(e)
+          logger.extend('error')('%j', e)
         })
     }
   }

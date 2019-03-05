@@ -1,5 +1,8 @@
 import Bearer from '@bearer/core'
 
+import debug from '../../../logger'
+const logger = debug('AuthenticationListener')
+
 export class AuthenticationListener {
   protected SCENARIO_ID!: string
   protected onAuthorized: () => void
@@ -10,7 +13,7 @@ export class AuthenticationListener {
   protected revokedListener: any
 
   askAuthorization = (authRefId?: string) => {
-    console.debug('[BEARER]', 'authenticate', this.SCENARIO_ID, this.bearerContext.setupId)
+    logger('authenticate %s %s', this.SCENARIO_ID, this.bearerContext.setupId)
     Bearer.instance.askAuthorizations({
       authRefId,
       scenarioId: this.SCENARIO_ID,
@@ -35,16 +38,16 @@ export class AuthenticationListener {
         Bearer.instance
           .hasAuthorized(this.SCENARIO_ID)
           .then(() => {
-            console.debug('[BEARER]', 'authorized')
+            logger('authorized')
             this.onAuthorized()
           })
           .catch(error => {
-            console.debug('[BEARER]', 'unauthorized', { error })
+            logger('unauthorized %j', { error })
             this.onRevoked()
           })
       })
       .catch(error => {
-        console.error('[BEARER]', 'Could not initialize session', { error })
+        logger.extend('error')('Could not initialize session %j', { error })
       })
   }
 

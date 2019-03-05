@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.100.0](https://github.com/bearer/bearer/compare/v0.99.2...v0.100.0) (2019-03-04)
+
+**Note:** Version bump only for package @bearer/package-init
+
+
+
+
+
 # [0.99.0](https://github.com/bearer/bearer/compare/v0.98.0...v0.99.0) (2019-02-28)
 
 **Note:** Version bump only for package @bearer/package-init

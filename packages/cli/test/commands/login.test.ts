@@ -14,7 +14,7 @@ describe('login', () => {
       jest.spyOn(process.stdout, 'write').mockImplementation(val => result.push(val))
 
       nock('https://int.bearer.sh')
-        .post('/api/v1/login', { Username: email, Password: 'ok' })
+        .post('/api/v1/login')
         .reply(200, {
           authorization: {
             AuthenticationResult: {
@@ -27,7 +27,9 @@ describe('login', () => {
     describe('Prompt for token', () => {
       it('logs successfully', async () => {
         jest.spyOn(inquirer, 'prompt').mockImplementation(() => Promise.resolve({ token: 'ok' }))
+
         await LoginCommand.run(['--email', email])
+
         expect(result.join()).toContain('Successfully logged in as spongebob@bearer.sh')
       })
     })
@@ -37,6 +39,7 @@ describe('login', () => {
         jest.spyOn(inquirer, 'prompt').mockImplementation(() => Promise.resolve({ response: email, token: 'ok' }))
 
         await LoginCommand.run([])
+
         expect(result.join()).toContain('Successfully logged in as spongebob@bearer.sh')
       })
     })

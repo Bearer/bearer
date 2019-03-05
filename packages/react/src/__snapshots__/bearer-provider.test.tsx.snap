@@ -4,6 +4,25 @@ exports[`BearerProvider allow custom integration host 1`] = `
 <Context.Provider
   value={
     Object {
+      "bearer": Bearer {
+        "clientId": "abc123",
+        "config": Object {
+          "domObserver": true,
+          "integrationHost": "https://integrations.bearer.sh/",
+          "refreshDebounceDelay": 200,
+          "secured": false,
+        },
+        "connectTo": [Function],
+        "debounceRefresh": [Function],
+        "disconnectObserver": [Function],
+        "initialIntegrationLoading": [Function],
+        "loadMissingIntegrations": [Function],
+        "observerCallback": [Function],
+        "registerDomObserver": [Function],
+        "registeredIntegration": [Function],
+        "registeredIntegrations": Object {},
+        "sendTags": [Function],
+      },
       "handlePropUpdates": [Function],
       "state": Object {},
     }
@@ -26,6 +45,25 @@ exports[`BearerProvider renders basic provider tag 1`] = `
 <Context.Provider
   value={
     Object {
+      "bearer": Bearer {
+        "clientId": "abc123",
+        "config": Object {
+          "domObserver": true,
+          "integrationHost": "https://int.bearer.sh",
+          "refreshDebounceDelay": 200,
+          "secured": false,
+        },
+        "connectTo": [Function],
+        "debounceRefresh": [Function],
+        "disconnectObserver": [Function],
+        "initialIntegrationLoading": [Function],
+        "loadMissingIntegrations": [Function],
+        "observerCallback": [Function],
+        "registerDomObserver": [Function],
+        "registeredIntegration": [Function],
+        "registeredIntegrations": Object {},
+        "sendTags": [Function],
+      },
       "handlePropUpdates": [Function],
       "state": Object {},
     }

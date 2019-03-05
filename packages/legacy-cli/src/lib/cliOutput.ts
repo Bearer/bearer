@@ -1,3 +1,6 @@
+import debug from './logger'
+const logger = debug.extend('out')
+
 const term = require('terminal-kit').terminal
 
 function outputError(error) {
@@ -6,20 +9,6 @@ function outputError(error) {
     term.red(error.message)
     term('\n')
   }
-}
-
-function inviteCommand(command) {
-  const padding = 5
-  const separator = command.length + 2 * padding
-  term.white('Bearer: ').yellow('Please run the command below\n')
-  term.white('='.repeat(separator))
-  term('\n')
-  term(' '.repeat(padding))
-  term.white(command)
-  term(' '.repeat(padding))
-  term('\n')
-  term.white('='.repeat(separator))
-  term('\n')
 }
 
 export default emitter => {
@@ -123,7 +112,8 @@ export default emitter => {
     term.white('Bearer: ')
     term.yellow('[local:intentServer] ')
     term.red('Intents building error\n')
-    console.log(
+    logger(
+      '%s',
       error.toString({
         builtAt: false,
         entrypoints: false,

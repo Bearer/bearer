@@ -8,8 +8,9 @@ import { TComponentInputDefinition, TComponentOutputDefinition, TOuputFormat, Tr
 import { eventName } from './event-name-scoping'
 
 const UNSPECIFIED = 'unspecified'
+import debug from '../logger'
 
-export default function GatherMetadata({
+export default function gatherMetadata({
   metadata,
   generator
 }: TransformerOptions & { generator: JsonSchemaGenerator }): ts.TransformerFactory<ts.SourceFile> {
@@ -28,7 +29,7 @@ export default function GatherMetadata({
           return generator.getSchemaForSymbol(type.getText()) as any
         } catch (e) {
           // TODO: re-use type reference
-          console.debug(e.toString())
+          debug.extend('transpiler:gather-input-output-metadata')(e.toString())
           return { type: 'any' }
         }
       case ts.SyntaxKind.TypeLiteral: {

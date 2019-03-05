@@ -1,6 +1,9 @@
 // global fetch
 import Bearer from './bearer'
 import { cleanQuery } from './utils'
+import debug from './logger'
+
+const logger = debug.extend('requests')
 
 const defaultInit = {
   headers: {
@@ -15,7 +18,7 @@ export type TBearerRequest<T> = (params: any, init?: any) => Promise<T>
 function getClientId(): string {
   const clientId = Bearer.config.clientId
   if (process.env.NODE_ENV !== 'production') {
-    console.debug('[BEARER]', 'No clientId provided, intent')
+    logger('No clientId provided, intent')
   }
   return clientId
 }
@@ -41,10 +44,10 @@ export function bearerRequest<TPromiseReturn>(uri: string, baseParams = {}): TBe
             .then(response => {
               const data = response.json()
               if (response.status > 399) {
-                console.debug('[BEARER]', 'failing request', response)
+                logger('failing request %j', data)
                 reject(data)
               } else {
-                console.debug('[BEARER]', 'successful request', response)
+                logger('successful request %j', data)
                 resolve(data)
               }
             })

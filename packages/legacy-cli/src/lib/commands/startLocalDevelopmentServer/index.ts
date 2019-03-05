@@ -13,6 +13,9 @@ import server from './server'
 import Storage from './storage'
 import { loadUserDefinedData } from './utils'
 
+import debug from '../../logger'
+const logger = debug.extend('start')
+
 function requireUncached(module) {
   delete require.cache[require.resolve(module)]
   return require(module)
@@ -132,7 +135,7 @@ const intentHandler = (distPath: string, devIntentsContext, bearerBaseURL: strin
       next()
       resolve()
     } catch (e) {
-      console.log('ERROR: ', e)
+      logger('ERROR: %j', e)
       if (e.code === 'MODULE_NOT_FOUND') {
         ctx.intentDatum = { error: `Intent '${ctx.params.intentName}' Not Found` }
       } else {

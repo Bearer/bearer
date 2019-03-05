@@ -20,7 +20,9 @@ describe('BearerProvider', () => {
 
   it('allow custom integration host', () => {
     const renderer = ShallowRenderer.createRenderer()
-    const tree = renderer.render(<BearerProvider clientId={clientId} intHost="https://int.bearer.sh/v2/" />)
+    const tree = renderer.render(
+      <BearerProvider clientId={clientId} integrationHost="https://integrations.bearer.sh/" />
+    )
     expect(tree).toMatchSnapshot()
   })
 
@@ -45,10 +47,12 @@ describe('BearerProvider', () => {
       stopPropagation,
       detail: { someRefrenceId: 'abc' }
     }
+
     testRender.root.findByType('button').props.onClick(mockEvent)
+
     expect(stopPropagation.mock.calls.length).toBe(1)
     expect(changeHandler.mock.calls.length).toBe(1)
-    expect(changeHandler.mock.calls[0][0]).toEqual({
+    expect(changeHandler.mock.calls[0][0].integrationState).toEqual({
       ...initialContext,
       'some-refrence-id': 'abc'
     })
