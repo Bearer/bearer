@@ -48,7 +48,7 @@ export default function eventNameNormalizer(): ts.TransformerFactory<ts.SourceFi
   }
 }
 
-function normalize(eventName: string): string {
+export function normalize(eventName: string): string {
   if (!isBearerEvent(eventName)) {
     return eventName
   }

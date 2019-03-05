@@ -30,7 +30,7 @@ Object {
       ],
       "outputs": Array [
         Object {
-          "eventName": "bearer-SPONGE_BOB-AttachPullRequest-inlineDefinition",
+          "eventName": "bearer-sponge-bob-attachpullrequest-inlinedefinition",
           "name": "inlineDefinition",
           "payloadFormat": Object {
             "properties": Object {
@@ -72,7 +72,7 @@ Object {
           },
         },
         Object {
-          "eventName": "bearer-SPONGE_BOB-AttachPullRequest-feedPandaSaved",
+          "eventName": "bearer-sponge-bob-attachpullrequest-feedpandasaved",
           "name": "feedPandaSaved",
           "payloadFormat": Object {
             "properties": Object {
@@ -97,7 +97,7 @@ Object {
           },
         },
         Object {
-          "eventName": "bearer-SPONGE_BOB-AttachPullRequest-spongeBobdSaved",
+          "eventName": "bearer-sponge-bob-attachpullrequest-spongebobdsaved",
           "name": "spongeBobdSaved",
           "payloadFormat": Object {
             "properties": Object {
@@ -259,7 +259,7 @@ Object {
       ],
       "outputs": Array [
         Object {
-          "eventName": "bearer-SPONGE_BOB-AttachPullRequest-inlineDefinition",
+          "eventName": "bearer-sponge-bob-attachpullrequest-inlinedefinition",
           "name": "inlineDefinition",
           "payloadFormat": Object {
             "properties": Object {
@@ -301,7 +301,7 @@ Object {
           },
         },
         Object {
-          "eventName": "bearer-SPONGE_BOB-AttachPullRequest-feedPandaSaved",
+          "eventName": "bearer-sponge-bob-attachpullrequest-feedpandasaved",
           "name": "feedPandaSaved",
           "payloadFormat": Object {
             "properties": Object {
@@ -326,7 +326,7 @@ Object {
           },
         },
         Object {
-          "eventName": "bearer-SPONGE_BOB-AttachPullRequest-spongeBobdSaved",
+          "eventName": "bearer-sponge-bob-attachpullrequest-spongebobdsaved",
           "name": "spongeBobdSaved",
           "payloadFormat": Object {
             "properties": Object {
@@ -640,7 +640,7 @@ Object {
       ],
       "outputs": Array [
         Object {
-          "eventName": "bearer-SPONGE_BOB-AttachPullRequest-inlineDefinition",
+          "eventName": "bearer-sponge-bob-attachpullrequest-inlinedefinition",
           "name": "inlineDefinition",
           "payloadFormat": Object {
             "properties": Object {
@@ -682,7 +682,7 @@ Object {
           },
         },
         Object {
-          "eventName": "bearer-SPONGE_BOB-AttachPullRequest-feedPandaSaved",
+          "eventName": "bearer-sponge-bob-attachpullrequest-feedpandasaved",
           "name": "feedPandaSaved",
           "payloadFormat": Object {
             "properties": Object {
@@ -707,7 +707,7 @@ Object {
           },
         },
         Object {
-          "eventName": "bearer-SPONGE_BOB-AttachPullRequest-spongeBobdSaved",
+          "eventName": "bearer-sponge-bob-attachpullrequest-spongebobdsaved",
           "name": "spongeBobdSaved",
           "payloadFormat": Object {
             "properties": Object {
@@ -808,7 +808,7 @@ Object {
       ],
       "outputs": Array [
         Object {
-          "eventName": "bearer-SPONGE_BOB-AttachPullRequest-inlineDefinition",
+          "eventName": "bearer-sponge-bob-attachpullrequest-inlinedefinition",
           "name": "inlineDefinition",
           "payloadFormat": Object {
             "properties": Object {
@@ -850,7 +850,7 @@ Object {
           },
         },
         Object {
-          "eventName": "bearer-SPONGE_BOB-AttachPullRequest-feedPandaSaved",
+          "eventName": "bearer-sponge-bob-attachpullrequest-feedpandasaved",
           "name": "feedPandaSaved",
           "payloadFormat": Object {
             "properties": Object {
@@ -875,7 +875,7 @@ Object {
           },
         },
         Object {
-          "eventName": "bearer-SPONGE_BOB-AttachPullRequest-spongeBobdSaved",
+          "eventName": "bearer-sponge-bob-attachpullrequest-spongebobdsaved",
           "name": "spongeBobdSaved",
           "payloadFormat": Object {
             "properties": Object {
@@ -1013,7 +1013,7 @@ Object {
       ],
       "outputs": Array [
         Object {
-          "eventName": "bearer-SPONGE_BOB-AttachPullRequest-inlineDefinition",
+          "eventName": "bearer-sponge-bob-attachpullrequest-inlinedefinition",
           "name": "inlineDefinition",
           "payloadFormat": Object {
             "properties": Object {
@@ -1055,7 +1055,7 @@ Object {
           },
         },
         Object {
-          "eventName": "bearer-SPONGE_BOB-AttachPullRequest-feedPandaSaved",
+          "eventName": "bearer-sponge-bob-attachpullrequest-feedpandasaved",
           "name": "feedPandaSaved",
           "payloadFormat": Object {
             "properties": Object {
@@ -1080,7 +1080,7 @@ Object {
           },
         },
         Object {
-          "eventName": "bearer-SPONGE_BOB-AttachPullRequest-spongeBobdSaved",
+          "eventName": "bearer-sponge-bob-attachpullrequest-spongebobdsaved",
           "name": "spongeBobdSaved",
           "payloadFormat": Object {
             "properties": Object {
@@ -1196,7 +1196,7 @@ Object {
       ],
       "outputs": Array [
         Object {
-          "eventName": "bearer-SPONGE_BOB-AttachPullRequest-inlineDefinition",
+          "eventName": "bearer-sponge-bob-attachpullrequest-inlinedefinition",
           "name": "inlineDefinition",
           "payloadFormat": Object {
             "properties": Object {
@@ -1238,7 +1238,7 @@ Object {
           },
         },
         Object {
-          "eventName": "bearer-SPONGE_BOB-AttachPullRequest-feedPandaSaved",
+          "eventName": "bearer-sponge-bob-attachpullrequest-feedpandasaved",
           "name": "feedPandaSaved",
           "payloadFormat": Object {
             "properties": Object {
@@ -1263,7 +1263,7 @@ Object {
           },
         },
         Object {
-          "eventName": "bearer-SPONGE_BOB-AttachPullRequest-spongeBobdSaved",
+          "eventName": "bearer-sponge-bob-attachpullrequest-spongebobdsaved",
           "name": "spongeBobdSaved",
           "payloadFormat": Object {
             "properties": Object {

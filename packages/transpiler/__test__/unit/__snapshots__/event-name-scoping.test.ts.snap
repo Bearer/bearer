@@ -7,15 +7,15 @@ exports[`Scope Event Names file: event-name-scoping-component.ts transformer 1`]
     role: 'display'
 })
 export class FeatDisplayRootComponent {
-    @Event({ eventName: \\"bearer-SPONGE_BOB-global-mustBeScopedEvent\\" })
+    @Event({ eventName: \\"bearer-sponge-bob-global-mustbescopedevent\\" })
     mustBeScopedEvent: EventEmitter;
-    @Event({ eventName: \\"bearer-SPONGE_BOB-global-mustBeScopedEvent\\" })
+    @Event({ eventName: \\"bearer-sponge-bob-global-mustbescopedevent\\" })
     mustBeScopedEvent: EventEmitter;
-    @Listen(\\"bearer-SPONGE_BOB-config-saved\\")
+    @Listen(\\"bearer-sponge-bob-config-saved\\")
     eventHandler() { }
-    @Listen(\\"body:bearer-SPONGE_BOB-eventFromAnotherRootComponent-saved\\")
+    @Listen(\\"body:bearer-sponge-bob-eventfromanotherrootcomponent-saved\\")
     eventFromAnotherRootComponentHandler() { }
-    @Listen(\\"body:bearer-SPONGE_BOB-click\\")
+    @Listen(\\"body:bearer-sponge-bob-click\\")
     clickHandler() { }
 }
 "
@@ -27,14 +27,14 @@ exports[`Scope Event Names file: simple-component.ts transformer 1`] = `
     tag: 'event'
 })
 export class SimpleComponent {
-    @Event({ eventName: \\"bearer-SPONGE_BOB-global-mustBeScopedEvent\\" })
+    @Event({ eventName: \\"bearer-sponge-bob-global-mustbescopedevent\\" })
     mustBeScopedEvent: EventEmitter;
-    @Listen(\\"bearer-SPONGE_BOB-config-saved\\")
+    @Listen(\\"bearer-sponge-bob-config-saved\\")
     eventHandler() { }
-    @Listen(\\"bearer-SPONGE_BOB-eventFromChildren\\")
+    @Listen(\\"bearer-sponge-bob-eventfromchildren\\")
     eventFromChildrenHandler() { }
     // prevent Alice to listen on anything else than her scenario's events
-    @Listen(\\"body:bearer-SPONGE_BOB-click\\")
+    @Listen(\\"body:bearer-sponge-bob-click\\")
     clickHandler() { }
 }
 "

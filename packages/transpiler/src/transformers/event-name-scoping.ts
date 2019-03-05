@@ -7,6 +7,7 @@ import { BEARER, Decorators, Env, Properties } from '../constants'
 import { decoratorNamed, hasDecoratorNamed } from '../helpers/decorator-helpers'
 import { getNodeName } from '../helpers/node-helpers'
 import { TransformerOptions } from '../types'
+import { normalize } from './event-name-normalizer'
 
 const SEPARATOR = '-'
 export const GLOBAL_EVENT_PREXIX = 'body:'
@@ -20,7 +21,7 @@ export function prefixEvent(eventName: string): string {
 }
 
 export function eventName(name: string, scope = 'no-group') {
-  return prefixEvent([scope, name].filter(el => el && el.trim()).join(SEPARATOR))
+  return normalize(prefixEvent([scope, name].filter(el => el && el.trim()).join(SEPARATOR)))
 }
 
 function updateEventDecorator(tsProperty: ts.PropertyDeclaration, scope: string): ts.PropertyDeclaration {
