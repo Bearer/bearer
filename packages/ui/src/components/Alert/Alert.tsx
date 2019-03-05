@@ -1,4 +1,4 @@
-import { Component, Prop, classnames } from '@bearer/core'
+import { Component, Prop } from '@bearer/core'
 
 @Component({
   tag: 'bearer-alert',
@@ -11,14 +11,8 @@ export class Alert {
   @Prop() kind: 'primary' | 'secondary' | 'success' | 'danger' | 'warning' | 'info' | 'light' | 'dark' = 'primary'
 
   render() {
-    const classes = classnames({
-      alert: true,
-      [`alert-${this.kind}`]: true,
-      'alert-dismissible': this.onDismiss
-    })
-
     return (
-      <div class={classes}>
+      <div class={`alert alert-${this.kind} ${this.onDismiss && 'alert-dismissible'}`}>
         {this.content || <slot />}
         {this.onDismiss && (
           <button type="button" class="close" data-dismiss="alert" aria-label="Close" onClick={this.onDismiss}>
