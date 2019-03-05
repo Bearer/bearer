@@ -174,7 +174,7 @@ declare global {
     }
 
     interface BearerConfig {
-      'fields': Array<any> | string;
+      'fields': any[] | string;
       'referenceId': string;
       'scenarioId': string;
     }
@@ -250,7 +250,7 @@ declare global {
       'fetcher': (refineParams: { page: number }) => Promise<TFetchBearerData>;
       'pageCount': number;
       'perPage': number;
-      'renderCollection': (collection: Array<any>) => any;
+      'renderCollection': (collection: any[]) => any;
       'renderFetching': () => any;
       'reset': () => void;
     }
@@ -266,7 +266,7 @@ declare global {
     }
 
     interface BearerScrollable {
-      'fetcher': (params: { page: number} ) => Promise<TFetchBearerData>;
+      'fetcher': (params: { page: number }) => Promise<TFetchBearerData>;
       'perPage': number;
       'renderCollection': TCollectionRenderer;
       'renderFetching': () => any;
@@ -677,7 +677,7 @@ declare global {
     }
 
     export interface BearerConfigAttributes extends HTMLAttributes {
-      'fields'?: Array<any> | string;
+      'fields'?: any[] | string;
       'onStepCompleted'?: (event: CustomEvent) => void;
       'referenceId'?: string;
       'scenarioId'?: string;
@@ -757,7 +757,7 @@ declare global {
       'fetcher'?: (refineParams: { page: number }) => Promise<TFetchBearerData>;
       'pageCount'?: number;
       'perPage'?: number;
-      'renderCollection'?: (collection: Array<any>) => any;
+      'renderCollection'?: (collection: any[]) => any;
       'renderFetching'?: () => any;
     }
 
@@ -772,7 +772,7 @@ declare global {
     }
 
     export interface BearerScrollableAttributes extends HTMLAttributes {
-      'fetcher'?: (params: { page: number} ) => Promise<TFetchBearerData>;
+      'fetcher'?: (params: { page: number }) => Promise<TFetchBearerData>;
       'perPage'?: number;
       'renderCollection'?: TCollectionRenderer;
       'renderFetching'?: () => any;

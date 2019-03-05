@@ -1,5 +1,8 @@
 import Bearer, { Component, State, Element, Event, EventEmitter, Prop, StateManager } from '@bearer/core'
+
 import { FieldSet } from '../Forms/Fieldset'
+import debug from '../../logger'
+const logger = debug('bearer-config')
 
 type TSetupPayload = {
   Item: { referenceId: string }
@@ -11,7 +14,7 @@ type TSetupPayload = {
   shadow: true
 })
 export class BearerConfig {
-  @Prop() fields: Array<any> | string = []
+  @Prop() fields: any[] | string = []
   @Prop() referenceId: string
   @Prop() scenarioId: string
 
@@ -32,7 +35,7 @@ export class BearerConfig {
     StateManager.storeSetup(formSet.reduce((acc, obj) => ({ ...acc, [obj['key']]: obj['value'] }), {}))
       .then((item: TSetupPayload) => {
         this.loading = false
-        console.log(`${this.scenarioId}`)
+        logger(this.scenarioId)
         Bearer.emitter.emit(`config_success:${this.scenarioId}`, {
           referenceID: item.Item.referenceId
         })
@@ -45,7 +48,7 @@ export class BearerConfig {
   }
 
   componentWillLoad() {
-    this.fieldSet = new FieldSet(this.fields as Array<any>)
+    this.fieldSet = new FieldSet(this.fields as any[])
   }
 
   render() {

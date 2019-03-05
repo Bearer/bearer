@@ -5,6 +5,8 @@ import { AuthenticationListener } from '../../utils/with-authentication'
 export type FWithAuthenticate = (params: { authenticate(): Promise<boolean> }) => any
 export type FWithRevoke = (params: { revoke(authRefId: string): Promise<boolean> }) => any
 
+import debug from '../../logger'
+const logger = debug('bearer-authorized')
 // TODO: scope  authenticatePromise per scenario/setup
 // @WithAuthentication()
 @Component({
@@ -36,7 +38,7 @@ export class BearerAuthorized extends AuthenticationListener {
   private pendingAuthorizationReject: (authorize: boolean) => void
 
   onAuthorized = () => {
-    console.debug('[BEARER]', 'onAuthorized', !!this.pendingAuthorizationResolve)
+    logger('onAuthorized %s', !!this.pendingAuthorizationResolve)
     this.isAuthorized = true
     if (this.pendingAuthorizationResolve) {
       this.pendingAuthorizationResolve(true)
@@ -46,7 +48,7 @@ export class BearerAuthorized extends AuthenticationListener {
 
   onRevoked = () => {
     this.isAuthorized = false
-    console.debug('[BEARER]', 'onRevoked', !!this.pendingAuthorizationReject)
+    logger('onRevoked %s', !!this.pendingAuthorizationReject)
     if (this.pendingAuthorizationReject) {
       this.pendingAuthorizationReject(false)
     }
@@ -61,10 +63,10 @@ export class BearerAuthorized extends AuthenticationListener {
   authenticate(authRefId?: string) {
     this.authenticatePromise(authRefId)
       .then(data => {
-        console.debug('[BEARER]', 'bearer-authorized', 'authenticated', data)
+        logger('authenticate success %j', data)
       })
       .catch(error => {
-        console.debug('[BEARER]', 'bearer-authenticated', 'error', error)
+        logger('authenticate error %j', error)
       })
   }
 

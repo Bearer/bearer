@@ -1,5 +1,8 @@
 import { Component, Event, EventEmitter, Method, Prop, State, Watch } from '@bearer/core'
+
 import { BKind } from '../Button/Button'
+import debug from '../../logger'
+const logger = debug('bearer-button-popover')
 
 export type TAlignement = 'left' | 'right'
 export type TDirection = 'left' | 'right' | 'top' | 'bottom'
@@ -27,13 +30,13 @@ export class BearerButtonPopover {
   toggleDisplay = e => {
     e.preventDefault()
 
-    console.debug('[BEARER]', 'Button popover: toggleDisplay', !this.visible)
+    logger('toggleDisplay %s', !this.visible)
     this.visible = !this.visible
   }
 
   set visible(newValue: boolean) {
     if (newValue !== null && this._visible !== newValue) {
-      console.debug('[BEARER]', 'Button popover: visibilityChangeHandler', newValue)
+      logger('visibilityChangeHandler %s', newValue)
       this._visible = newValue
       this.visibilityChange.emit({ visible: this._visible })
     }
@@ -59,6 +62,7 @@ export class BearerButtonPopover {
   @Watch('opened')
   watchOpened(newValue: boolean) {
     // Opened shall be set (true or false)
+    // tslint:disable-next-line no-boolean-literal-compare
     if (newValue === true || newValue === false) {
       this.visible = newValue
     }

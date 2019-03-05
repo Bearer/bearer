@@ -31,17 +31,8 @@ export class BearerInput {
   @Event() submit: EventEmitter
   @Event() inputClick: EventEmitter
 
-  // @Watch('value')
-  // valueChanged(newValue: boolean, oldValue: boolean) {
-  // console.log('a value has changed', newValue, oldValue)
-  // const inputEl = this.el.shadowRoot.querySelector('input')
-  // if (inputEl.value !== this.value) {
-  //   inputEl.value = this.value
-  // }
-  // }
-
   inputChanged(event: any) {
-    let val = event.target && event.target.value
+    const val = event.target && event.target.value
     this.value = val
     this.valueChange.emit(this.value)
   }

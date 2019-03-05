@@ -28,6 +28,7 @@
   },
   "dependencies": {
     "@bearer/core": "^0.100.0",
+    "@bearer/logger": "^0.100.0",
     "@stencil/core": "0.11.2",
     "@stencil/sass": "^0.1.0",
     "bootstrap": "^4.1.0",
