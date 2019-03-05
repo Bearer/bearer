@@ -150,7 +150,7 @@ Object {
 exports[`Transpiler integration test FullComponent.tsx match expectation 1`] = `
 Object {
   "file": "FullComponent.tsx",
-  "postContent": "import { BearerFetch, BearerRef, BearerState, Component, Intent, IntentType, Event, EventEmitter, scopedT, scopedP, Prop, Watch, State } from '@bearer/core';
+  "postContent": "import { BearerFetch, BearerRef, BearerState, Component, Intent, IntentType, Event, EventEmitter, scopedT, scopedP, State, Watch, Prop } from '@bearer/core';
 type Panda = {
     fullPandaName: string;
 };
@@ -190,18 +190,48 @@ export class FullComponent {
         {this.screenRenderer()}
       </bearer-navigator>);
     }
+    private saveSetup: BearerFetch<string>;
+    @Event({ eventName: \\"bearer-sponge-bob-global-setupsaved\\" })
+    setupSaved: EventEmitter;
+    @State()
+    setupInitial: string;
+    @State()
+    setup: string;
+    @Prop({ \\"mutable\\": true })
+    setupId: string;
+    @Watch(\\"setup\\")
+    setupSavedWatcher(newValue) {
+        this.saveSetup({ body: { setup: newValue }, referenceId: this.setupId }).then(({ referenceId, data }) => {
+            this.setupSaved.emit({ referenceId, setup: data || this.setup });
+            this.setupId = referenceId;
+        });
+        this.setupInitial = null;
+    }
+    private fetcherRetrieveSetup;
+    _loadSetup = () => {
+        this.fetcherRetrieveSetup({ referenceId: this.setupId }).then(({ data }: {
+            data: string;
+        }) => {
+            if (data) {
+                this.setupInitial = data;
+            }
+        });
+    };
     constructor() {
         Intent('ListRepositories')(this, \\"fetcher\\");
         Intent('getPullRequest', IntentType.FetchData)(this, \\"fetchResource\\");
+        Intent(\\"saveSetup\\")(this, \\"saveSetup\\");
+        Intent(\\"retrieveSetup\\")(this, \\"fetcherRetrieveSetup\\");
     }
     get SCENARIO_ID() { return \\"SPONGE_BOB\\"; }
     @Prop({ \\"context\\": \\"bearer\\" })
     bearerContext: any;
-    @Prop()
-    setupId: string;
     componentDidLoad() {
         if (this.setupId) {
             this.bearerContext.setupId = this.setupId;
+        }
+        if (this.setupId) {
+            this._loadSetup();
         }
     }
     @Watch(\\"attachedPullRequests\\")

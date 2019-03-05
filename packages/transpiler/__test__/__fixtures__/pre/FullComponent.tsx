@@ -30,6 +30,7 @@ export class FullComponent {
   @Intent('getPullRequest', IntentType.FetchData)
   fetchResource: BearerFetch
   @Event() anEvent: EventEmitter<Panda>
+  @Output() setup: string
 
   screenRenderer = () => {
     return (

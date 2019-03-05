@@ -1,7 +1,8 @@
 import * as ts from 'typescript'
 
-import { BEARER, Component, Decorators, Module, Types } from '../constants'
+import { BEARER, Component, Decorators, Module, Types, SETUP, SETUP_ID } from '../constants'
 import { getNodeName } from '../helpers/node-helpers'
+import { getDecoratorNamed } from '../helpers/decorator-helpers'
 
 // this.BEARER_SCENARIO_ID => replaced during transpilation
 export function addBearerScenarioIdAccessor(classNode: ts.ClassDeclaration, scenarioId: string): ts.ClassDeclaration {
@@ -57,8 +58,31 @@ function addBearerContextProp(classNode: ts.ClassDeclaration): ts.ClassDeclarati
   )
 }
 
+function usingSetupProperty(node: ts.ClassElement, source: ts.SourceFile) {
+  return (
+    (getDecoratorNamed(node, Decorators.Input) || getDecoratorNamed(node, Decorators.Output)) &&
+    (node.name && node.name.getText(source) === SETUP)
+  )
+}
+
+function usingSetupId(node: ts.ClassElement, source: ts.SourceFile) {
+  return getDecoratorNamed(node, Decorators.Prop) && (node.name && node.name.getText(source) === SETUP_ID)
+}
+
+function setupIdAlreadyIncluded(classNode: ts.ClassDeclaration, source: ts.SourceFile): boolean {
+  const scanned = classNode.members.map(member => {
+    return usingSetupProperty(member, source) || usingSetupId(member, source)
+  })
+  for (const i in scanned) {
+    if (scanned[i]) return true
+  }
+  return false
+}
 // @Prop() setupId: string
-export function addSetupIdProp(classNode: ts.ClassDeclaration): ts.ClassDeclaration {
+export function addSetupIdProp(classNode: ts.ClassDeclaration, source: ts.SourceFile): ts.ClassDeclaration {
+  if (setupIdAlreadyIncluded(classNode, source)) {
+    return classNode
+  }
   return ts.updateClassDeclaration(
     classNode,
     classNode.decorators,

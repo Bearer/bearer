@@ -48,3 +48,6 @@ export enum Env {
 }
 
 export const BEARER = 'bearer'
+
+export const SETUP_ID = 'setupId'
+export const SETUP = 'setup'

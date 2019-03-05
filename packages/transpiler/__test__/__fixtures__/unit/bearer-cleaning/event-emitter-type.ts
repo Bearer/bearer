@@ -15,6 +15,7 @@ export class Component {
   // note: keeping it aside until we really need it
   @Event() keptAsIs: EventEmitter<{ goat: Goat }>
   @Prop() goat: Goat
+  @Prop() setupId: string
 
   // transformed to any because isn't imported by Stencil later
   @Event()

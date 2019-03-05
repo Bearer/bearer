@@ -24,6 +24,8 @@ export class Component {
     keptAsIs: EventEmitter;
     @Prop()
     goat: Goat;
+    @Prop()
+    setupId: string;
     // transformed to any because isn't imported by Stencil later
     @Event({ eventName: \\"bearer-sponge-bob-feature-pandaisanyfied\\" })
     pandaIsAnyfied: EventEmitter;
@@ -32,8 +34,6 @@ export class Component {
     get SCENARIO_ID() { return \\"SPONGE_BOB\\"; }
     @Prop({ \\"context\\": \\"bearer\\" })
     bearerContext: any;
-    @Prop()
-    setupId: string;
     componentDidLoad() {
         if (this.setupId) {
             this.bearerContext.setupId = this.setupId;

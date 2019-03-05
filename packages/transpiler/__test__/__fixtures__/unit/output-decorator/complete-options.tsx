@@ -29,6 +29,7 @@ class NoOptionsComponent {
   //     this.farmerSaved.emit({ farmer: newValue })
   //   }
   // }
+
   @Output({
     eventName: 'milked',
     propertyWatchedName: 'aPanda',

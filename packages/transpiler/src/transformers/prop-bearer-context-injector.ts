@@ -26,17 +26,21 @@ import { TransformerOptions } from '../types'
 
 import bearer, { ensureImportsFromCore } from './bearer'
 
+// tslint:disable-next-line:function-name
 export default function ComponentTransformer(_options: TransformerOptions = {}): ts.TransformerFactory<ts.SourceFile> {
   return transformContext => {
-    function visit(node: ts.Node): ts.VisitResult<ts.Node> {
-      if (ts.isClassDeclaration(node) && hasDecoratorNamed(node, Decorators.Component)) {
-        return ts.visitEachChild(injectContext(node as ts.ClassDeclaration), visit, transformContext)
+    function visitWithSourceFile(source: ts.SourceFile) {
+      return function visit(node: ts.Node): ts.VisitResult<ts.Node> {
+        if (ts.isClassDeclaration(node) && hasDecoratorNamed(node, Decorators.Component)) {
+          return ts.visitEachChild(injectContext(node as ts.ClassDeclaration, source), visit, transformContext)
+        }
+        return ts.visitEachChild(node, visit, transformContext)
       }
-      return ts.visitEachChild(node, visit, transformContext)
     }
 
     return tsSourceFile => {
       if (hasComponentDecorator(tsSourceFile)) {
+        const visit = visitWithSourceFile(tsSourceFile)
         return visit(ensureImportsFromCore(tsSourceFile, [Decorators.Prop])) as ts.SourceFile
       }
       return tsSourceFile
@@ -44,9 +48,9 @@ export default function ComponentTransformer(_options: TransformerOptions = {}):
   }
 }
 
-function injectContext(node: ts.ClassDeclaration): ts.Node {
+function injectContext(node: ts.ClassDeclaration, source: ts.SourceFile): ts.Node {
   const withContextProp = bearer.ensureBearerContextInjected(node)
-  const withSetupProp = bearer.addSetupIdProp(withContextProp)
+  const withSetupProp = bearer.addSetupIdProp(withContextProp, source)
   return bearer.addComponentDidLoad(withSetupProp)
 }
 
