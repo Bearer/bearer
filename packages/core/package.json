@@ -61,6 +61,7 @@
     "tslint": "^5.13.1"
   },
   "dependencies": {
+    "@bearer/logger": "^0.100.0",
     "@bearer/types": "^0.100.0",
     "@stencil/core": "0.11.2",
     "fbemitter": "^2.1.1",
