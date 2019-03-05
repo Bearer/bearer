@@ -7,7 +7,7 @@ import { TransformerOptions } from '../types'
 
 import { ensureImportsFromCore, hasImport } from './bearer'
 
-export default function RootComponentTransformer({ metadata }: TransformerOptions = {}): ts.TransformerFactory<
+export default function rootComponentTransformer({ metadata }: TransformerOptions = {}): ts.TransformerFactory<
   ts.SourceFile
 > {
   return _transformContext => {
@@ -24,7 +24,7 @@ export default function RootComponentTransformer({ metadata }: TransformerOption
                 ts.createObjectLiteral(
                   [
                     ts.createPropertyAssignment('tag', ts.createStringLiteral(metadatum.finalTagName)),
-                    ts.createPropertyAssignment('styleUrl', ts.createStringLiteral(cssFileName + '.css')),
+                    ts.createPropertyAssignment('styleUrl', ts.createStringLiteral([cssFileName, 'css'].join('.'))),
                     ts.createPropertyAssignment('shadow', shadowExp || ts.createTrue())
                   ],
                   true

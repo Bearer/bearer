@@ -18,7 +18,7 @@ export default class Cipher {
     const cipher = crypto.createCipheriv(this.config.cipherAlgo, this.key, iv)
     const encrypted = Buffer.concat([cipher.update(message), cipher.final()])
 
-    return iv.toString('hex') + ':' + encrypted.toString('hex')
+    return [iv.toString('hex'), encrypted.toString('hex')].join(':')
   }
 
   decrypt = (encryptedMessage: string) => {
