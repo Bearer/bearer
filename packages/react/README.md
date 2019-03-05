@@ -13,7 +13,7 @@ yarn add @bearer/js @bearer/react
 ## Factory
 
 ```tsx
-import { factory } from '@bearer/react'
+import { factory, Bearer } from '@bearer/react'
 const { Connect } = factory('my-integration-name')
 ```
 
@@ -31,22 +31,24 @@ class MyComponent extends React.Component {
   }
   render() {
     return (
-      <Connect
-        setupId="setupId"
-        render={({ loading, connect, error }) => {
-          if (loading) {
-            return <Loading />
-          }
-          if (error) {
-            return (
-              <div>
-                Error, please retry <button onClick={connect}>Retry</button>
-              </div>
-            )
-          }
-          return <button onClick={connect}>Connect ...</button>
-        }}
-      />
+      <Bearer clientId="clientId">
+        <Connect
+          setupId="setupId"
+          render={({ loading, connect, error }) => {
+            if (loading) {
+              return <Loading />
+            }
+            if (error) {
+              return (
+                <div>
+                  Error, please retry <button onClick={connect}>Retry</button>
+                </div>
+              )
+            }
+            return <button onClick={connect}>Connect ...</button>
+          }}
+        />
+      </Bearer>
     )
   }
 }
@@ -58,11 +60,11 @@ This component takes html tag name of a component as well as optional type infor
 
 ```tsx
 import * as React from 'react'
-const MyText = fromBearer<{ text?: string }>('bearer-my-text')
+const MyText = fromBearer<{ text?: string; anotherPropery: string }>('bearer-my-text')
 
 class ReactComponent extends React.Component {
   render() {
-    return <MyText text="hello world" />
+    return <MyText text="hello" anotherPropery="world" />
   }
 }
 ```

@@ -9,11 +9,11 @@ import fromBearer from './from-bearer'
 describe('fromBearer', () => {
   const tagName = 'bearer-component'
   const eventName = 'bearer-component-prop-set'
-  const TestComponent = fromBearer<{ foo?: string }>(tagName)
+  const TestComponent = fromBearer<{ foo?: string; objectToTransform: string }>(tagName)
 
   it('renders bearer component tag', () => {
     const renderer = ShallowRenderer.createRenderer()
-    const tree = renderer.render(<TestComponent foo="bar" />)
+    const tree = renderer.render(<TestComponent foo="bar" objectToTransform="ok" />)
     expect(tree).toMatchSnapshot()
   })
 
@@ -27,7 +27,7 @@ describe('fromBearer', () => {
       }
     }
 
-    const render = Renderer.create(<TestComponent foo="bar" />, { createNodeMock })
+    const render = Renderer.create(<TestComponent foo="bar" objectToTransform="done" />, { createNodeMock })
     render.unmount()
 
     expect(addEventListener.mock.calls.length).toBe(1)
@@ -56,7 +56,7 @@ describe('fromBearer', () => {
 
     Renderer.create(
       <DummyContext onHandlePropUpdates={handlerMock}>
-        <TestComponent foo="bar" />
+        <TestComponent foo="bar" objectToTransform="done" />
       </DummyContext>,
       { createNodeMock }
     )
@@ -71,7 +71,7 @@ describe('fromBearer', () => {
     const initialContext = { bar: 'boo' }
     const render = Renderer.create(
       <DummyContext initialContext={initialContext}>
-        <TestComponent />
+        <TestComponent objectToTransform="done" />
       </DummyContext>,
       { createNodeMock }
     )
@@ -95,7 +95,7 @@ describe('fromBearer', () => {
     const initialContext = { bar: 'boo' }
     const render = Renderer.create(
       <DummyContext initialContext={initialContext}>
-        <TestComponent {...props} />
+        <TestComponent {...props} objectToTransform="done" />
       </DummyContext>,
       { createNodeMock }
     )

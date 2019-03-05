@@ -1,4 +1,5 @@
 import * as React from 'react'
+import Case from 'case'
 
 import { BearerContext } from './bearer-provider'
 const BEARER_EVENT_PROP_PREFIX = 'bearer-'
@@ -45,10 +46,18 @@ export default function fromBearer<T>(TagName: string) {
 
     public render() {
       const combinedProps = {
-        ...(this.context.state),
+        ...this.context.state,
         ...(this.props as any)
       }
-      return <TagName {...combinedProps} ref={this.eventRef} />
+      const tranformerdProps = Object.keys(combinedProps).reduce(
+        (acc, key) => {
+          acc[Case.kebab(key)] = combinedProps[key]
+          return acc
+        },
+        {} as Record<string, any>
+      )
+      // @ts-ignore
+      return <TagName {...tranformerdProps} ref={this.eventRef} />
     }
 
     readonly prophandler = (e: any) => {
