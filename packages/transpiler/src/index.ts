@@ -231,7 +231,7 @@ export default class Transpiler {
         this.logErrors(fileName)
       }
     } catch (e) {
-      console.error('getEmitOutput failed for for:\n', fileName, '\n', e)
+      logger('getEmitOutput failed for for:\n %s \n %j', fileName, e)
     }
   }
 
@@ -245,9 +245,9 @@ export default class Transpiler {
       const message = ts.flattenDiagnosticMessageText(diagnostic.messageText, '\n')
       if (diagnostic.file) {
         const { line, character } = diagnostic.file.getLineAndCharacterOfPosition(diagnostic.start!)
-        console.log(`  Error ${diagnostic.file.fileName} (${line + 1},${character + 1}): ${message}`)
+        logger('  Error %j (%s, %s): %s', diagnostic.file.fileName, line + 1, character + 1, message)
       } else {
-        console.log(`  Error: ${message}`)
+        logger('  Error: %s', message)
       }
     })
   }
