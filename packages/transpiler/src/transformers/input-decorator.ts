@@ -135,9 +135,7 @@ function createEventListener(meta: InputMeta) {
   return ts.createMethod(
     [
       ts.createDecorator(
-        ts.createCall(ts.createIdentifier(Decorators.Listen), undefined, [
-          ts.createLiteral(`body:${meta.group}:${meta.eventName}`)
-        ])
+        ts.createCall(ts.createIdentifier(Decorators.Listen), undefined, [ts.createLiteral(`body:${meta.eventName}`)])
       )
     ],
     undefined,
@@ -215,7 +213,7 @@ function _watchName(name: string): string {
 
 export function retrieveInputsMetas(
   sourcefile: ts.SourceFile,
-  metadata: Metadata,
+  _metadata: Metadata,
   _transformContext: ts.TransformationContext
 ): InputMeta[] {
   const inputs: InputMeta[] = []
@@ -226,10 +224,9 @@ export function retrieveInputsMetas(
       if (decorator) {
         const options = extractInputOptions(decorator)
         const name = getNodeName(tsNode)
-        const component = metadata.findComponentFrom(sourcefile)
+        // const component = metadata.findComponentFrom(sourcefile)
         inputs.push({
           propDeclarationName: name,
-          group: component.group,
           propertyReferenceIdName: refIdName(name),
           eventName: outputEventName(name),
           intentName: retrieveIntentName(name),
@@ -259,7 +256,6 @@ function extractInputOptions(decorator: ts.Decorator): Partial<TInputDecoratorOp
     ? {}
     : {
         ...extractStringOptions<TInputDecoratorOptions>(callArgs, [
-          'group',
           'eventName',
           'intentName',
           'propertyReferenceIdName',

@@ -1,8 +1,7 @@
 import { Event, EventEmitter, Listen, RootComponent } from '@bearer/core'
 
 @RootComponent({
-  group: 'complex-feature',
-  role: 'display'
+  name: 'complex-feature'
 })
 export class FeatDisplayRootComponent {
   @Event()

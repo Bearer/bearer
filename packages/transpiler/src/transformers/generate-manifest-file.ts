@@ -31,7 +31,6 @@ const previewRootComponentTags = (components: SpecComponent[], rootComponents: R
     const { initialTagName, label } = component
     const input = component.input
     const output = component.output
-
     const { finalTagName, group } = rootComponents.find(({ initialTagName: tag }) => tag === initialTagName) || {
       finalTagName: null,
       group: null

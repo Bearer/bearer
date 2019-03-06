@@ -11,8 +11,7 @@ type TPayloadEvent = {
   anEnum: 'ok' | 'ko'
 }
 @RootComponent({
-  group: 'complex-feature',
-  role: 'display'
+  name: 'complex-feature'
 })
 export class FeatDisplayRootComponent {
   @Prop()

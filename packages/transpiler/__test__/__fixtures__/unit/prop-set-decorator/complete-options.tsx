@@ -1,8 +1,7 @@
 import { BearerRef, Input, RootComponent, State, Prop } from '@bearer/core'
 
 @RootComponent({
-  group: 'no-options',
-  role: 'action'
+  name: 'complete-options'
 })
 class NoOptionsComponent {
   @Input()

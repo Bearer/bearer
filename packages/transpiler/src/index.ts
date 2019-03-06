@@ -52,7 +52,6 @@ export type TranpilerOptions = {
 export default class Transpiler {
   get transformers(): ts.CustomTransformers {
     const verbose = true
-
     return {
       before: [
         GatherMetadata({ verbose, metadata: this.metadata }),

@@ -1,13 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`bearer-authorized required property do nothing match snapshot 1`] = `
-Object {
-  "file": "do-nothing.tsx",
-  "postContent": "import { Component, Prop } from '@bearer/core';
-@Component({
-    tag: \\"feature-action\\",
-    styleUrl: \\"feature.css\\",
-    shadow: true
+exports[`bearer-authorized required property file: do-nothing.tsx transformer 1`] = `
+"import { Component, RootComponent } from '@bearer/core';
+@RootComponent({
+    name: 'feature'
 })
 class RootComponent {
     renderFromANotherProp() {
@@ -16,51 +12,22 @@ class RootComponent {
     render() {
         return <div />;
     }
-    constructor() {
-    }
-    get SCENARIO_ID() { return \\"SPONGE_BOB\\"; }
-    @Prop({ \\"context\\": \\"bearer\\" })
-    bearerContext: any;
-    @Prop()
-    setupId: string;
-    componentDidLoad() {
-        if (this.setupId) {
-            this.bearerContext.setupId = this.setupId;
-        }
-    }
 }
 @Component({
-    tag: \\"sponge-bob\\"
+    tag: 'sponge-bob'
 })
 class SubComponent {
     render() {
         return <div title=\\"spongeBNob\\"/>;
     }
-    constructor() {
-    }
-    get SCENARIO_ID() { return \\"SPONGE_BOB\\"; }
-    @Prop({ \\"context\\": \\"bearer\\" })
-    bearerContext: any;
-    @Prop()
-    setupId: string;
-    componentDidLoad() {
-        if (this.setupId) {
-            this.bearerContext.setupId = this.setupId;
-        }
-    }
 }
-",
-}
+"
 `;
 
-exports[`bearer-authorized required property inject prop to tsx element match snapshot 1`] = `
-Object {
-  "file": "inject-prop-to-tsx-element.tsx",
-  "postContent": "import { Component, Prop } from '@bearer/core';
-@Component({
-    tag: \\"feature-action\\",
-    styleUrl: \\"feature.css\\",
-    shadow: true
+exports[`bearer-authorized required property file: inject-prop-to-tsx-element.tsx transformer 1`] = `
+"import { Component, RootComponent } from '@bearer/core';
+@RootComponent({
+    name: 'feature-action'
 })
 class RootComponent {
     render() {
@@ -68,21 +35,9 @@ class RootComponent {
         <bearer-navigator-auth-screen scenarioId=\\"SPONGE_BOB\\"/>
       </bearer-navigator>);
     }
-    constructor() {
-    }
-    get SCENARIO_ID() { return \\"SPONGE_BOB\\"; }
-    @Prop({ \\"context\\": \\"bearer\\" })
-    bearerContext: any;
-    @Prop()
-    setupId: string;
-    componentDidLoad() {
-        if (this.setupId) {
-            this.bearerContext.setupId = this.setupId;
-        }
-    }
 }
 @Component({
-    tag: \\"sponge-bob\\"
+    tag: 'sponge-bob'
 })
 class SimpleComponent {
     render() {
@@ -90,59 +45,22 @@ class SimpleComponent {
         <bearer-navigator-auth-screen scenarioId=\\"SPONGE_BOB\\"/>
       </bearer-navigator>);
     }
-    constructor() {
-    }
-    get SCENARIO_ID() { return \\"SPONGE_BOB\\"; }
-    @Prop({ \\"context\\": \\"bearer\\" })
-    bearerContext: any;
-    @Prop()
-    setupId: string;
-    componentDidLoad() {
-        if (this.setupId) {
-            this.bearerContext.setupId = this.setupId;
-        }
-    }
 }
 @Component({
-    tag: \\"sponge-bob\\"
+    tag: 'sponge-bob'
 })
 class WithBearerAuthorizedComponent {
     render() {
         return <bearer-authorized renderAuthorized={() => <div />} renderUnauthorized={() => <span />} scenarioId=\\"SPONGE_BOB\\"/>;
     }
-    constructor() {
-    }
-    get SCENARIO_ID() { return \\"SPONGE_BOB\\"; }
-    @Prop({ \\"context\\": \\"bearer\\" })
-    bearerContext: any;
-    @Prop()
-    setupId: string;
-    componentDidLoad() {
-        if (this.setupId) {
-            this.bearerContext.setupId = this.setupId;
-        }
-    }
 }
 @Component({
-    tag: \\"sponge-bob\\"
+    tag: 'sponge-bob'
 })
 class OverrideValueGiven {
     render() {
         return (<bearer-authorized renderAuthorized={() => <div />} renderUnauthorized={() => <span />} scenarioId=\\"SPONGE_BOB\\"/>);
     }
-    constructor() {
-    }
-    get SCENARIO_ID() { return \\"SPONGE_BOB\\"; }
-    @Prop({ \\"context\\": \\"bearer\\" })
-    bearerContext: any;
-    @Prop()
-    setupId: string;
-    componentDidLoad() {
-        if (this.setupId) {
-            this.bearerContext.setupId = this.setupId;
-        }
-    }
 }
-",
-}
+"
 `;

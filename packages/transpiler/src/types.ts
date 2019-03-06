@@ -9,7 +9,7 @@ export type ComponentMetadata = {
   initialTagName: string
   fileName: string
   finalTagName: string
-  group?: string
+  name?: string
   imports?: string[]
   inputs?: TComponentInputDefinition[]
   outputs?: TComponentOutputDefinition[]

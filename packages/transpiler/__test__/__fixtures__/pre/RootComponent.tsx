@@ -20,8 +20,7 @@ type Panda = {
 }
 
 @RootComponent({
-  group: 'AttachPullRequest',
-  role: 'action'
+  name: 'AttachPullRequest'
 })
 export class AttachPullRequestAction {
   @Intent('ListRepositories')

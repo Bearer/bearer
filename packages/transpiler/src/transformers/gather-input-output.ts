@@ -75,13 +75,11 @@ export default function gatherMetadata({
   }
 
   // retrieven event name from call arguments or take prop name
-  function eventAsOutput(group: string) {
-    return (tsProp: ts.PropertyDeclaration): TComponentOutputDefinition => {
-      return {
-        name: (tsProp.name as ts.Identifier).escapedText.toString(),
-        eventName: eventName((tsProp.name as ts.Identifier).escapedText.toString(), group),
-        payloadFormat: propInitializerAsJson(tsProp.type as ts.TypeReferenceNode)
-      }
+  function eventAsOutput(tsProp: ts.PropertyDeclaration): TComponentOutputDefinition {
+    return {
+      name: (tsProp.name as ts.Identifier).escapedText.toString(),
+      eventName: eventName((tsProp.name as ts.Identifier).escapedText.toString()),
+      payloadFormat: propInitializerAsJson(tsProp.type as ts.TypeReferenceNode)
     }
   }
 
@@ -92,10 +90,10 @@ export default function gatherMetadata({
       .filter(prop => prop.name !== Component.bearerContext)
   }
 
-  function collectOutputs(tsClass: ts.ClassDeclaration, group: string): TComponentOutputDefinition[] {
+  function collectOutputs(tsClass: ts.ClassDeclaration): TComponentOutputDefinition[] {
     return tsClass.members
       .filter(member => ts.isPropertyDeclaration(member) && hasDecoratorNamed(member, Decorators.Event))
-      .map(eventAsOutput(group))
+      .map(eventAsOutput)
   }
 
   return _transformContext => {
@@ -108,7 +106,7 @@ export default function gatherMetadata({
             metadata.registerComponent({
               ...component,
               inputs: collectInputs(node),
-              outputs: collectOutputs(node, component.group)
+              outputs: collectOutputs(node)
             })
           }
           return node

@@ -3,8 +3,7 @@
 exports[`With scope file: add-bearer-scope.tsx scoped components 1`] = `
 "import { Component, RootComponent } from '@bearer/core';
 @RootComponent({
-    group: 'feature',
-    role: 'action'
+    name: 'feature'
 })
 class RootComponent {
     renderFromANotherProp() {
@@ -41,8 +40,7 @@ class Patrick {
 exports[`without scope file: add-bearer-scope.tsx scopeless 1`] = `
 "import { Component, RootComponent } from '@bearer/core';
 @RootComponent({
-    group: 'feature',
-    role: 'action'
+    name: 'feature'
 })
 class RootComponent {
     renderFromANotherProp() {

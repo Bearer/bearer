@@ -1,7 +1,6 @@
 import { Component, RootComponent } from '@bearer/core'
 @RootComponent({
-  group: 'feature',
-  role: 'action'
+  name: 'feature'
 })
 class RootComponent {
   renderFromANotherProp() {

@@ -1,7 +1,6 @@
 import { RootComponent } from '@bearer/core'
 
 @RootComponent({
-  group: 'no-options',
-  role: 'action'
+  name: 'no-options'
 })
 class Nothing {}

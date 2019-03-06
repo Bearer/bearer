@@ -7,7 +7,7 @@ import { TransformerOptions } from '../types'
 
 const NAVIGATOR_SCREEN_TAG_NAME = 'bearer-navigator-screen'
 
-export default function PropImporter({  }: TransformerOptions = {}): ts.TransformerFactory<ts.SourceFile> {
+export default function propImporter({  }: TransformerOptions = {}): ts.TransformerFactory<ts.SourceFile> {
   function moveSlotToRenderFuncProp(jsxNode: ts.JsxElement): ts.JsxSelfClosingElement {
     return ts.createJsxSelfClosingElement(
       jsxNode.openingElement.tagName,
@@ -29,7 +29,7 @@ export default function PropImporter({  }: TransformerOptions = {}): ts.Transfor
                   // string not scoped are not supported because they are transformed into => ()
                   return ts.isJsxElement(child) || ts.isJsxSelfClosingElement(child)
                 })
-              ] as Array<ts.Expression>)
+              ] as ts.Expression[])
             )
           )
         )

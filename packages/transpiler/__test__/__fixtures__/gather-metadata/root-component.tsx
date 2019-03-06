@@ -1,7 +1,6 @@
 import { RootComponent } from '@bearer/core'
 
 @RootComponent({
-  group: 'feat',
-  role: 'display'
+  name: 'feat'
 })
 export class FeatDisplayRootComponent {}

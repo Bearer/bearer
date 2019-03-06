@@ -1,8 +1,7 @@
 import { BearerFetch, BearerState, Intent, IntentType, RootComponent } from '@bearer/core'
 
 @RootComponent({
-  group: 'attach-pull-request',
-  role: 'display',
+  name: 'attach-pull-request',
   shadow: false
 })
 export class InvalidRootComponent {

@@ -44,11 +44,8 @@ export declare const Component: IBearerComponentDecorator<any>
  * RootComponent Decorator
  */
 
-export type BearerRootComponentRole = 'display' | 'action'
-
 export interface BearerRootComponentOptions extends Omit<d.ComponentOptions, 'tag'> {
-  group: string
-  role: BearerRootComponentRole
+  name: string
   shadow?: boolean
 }
 

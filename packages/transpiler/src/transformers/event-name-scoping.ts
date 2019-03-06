@@ -20,15 +20,15 @@ export function prefixEvent(eventName: string): string {
   return [BEARER, process.env[Env.BEARER_SCENARIO_ID], eventName].join(SEPARATOR)
 }
 
-export function eventName(name: string, scope = 'no-group') {
-  return normalize(prefixEvent([scope, name].filter(el => el && el.trim()).join(SEPARATOR)))
+export function eventName(name: string) {
+  return normalize(prefixEvent(name))
 }
 
-function updateEventDecorator(tsProperty: ts.PropertyDeclaration, scope: string): ts.PropertyDeclaration {
+function updateEventDecorator(tsProperty: ts.PropertyDeclaration): ts.PropertyDeclaration {
   const decorator = ts.createDecorator(
     ts.createCall(ts.createIdentifier(Decorators.Event), undefined, [
       ts.createObjectLiteral([
-        ts.createPropertyAssignment(Properties.eventName, ts.createLiteral(eventName(getNodeName(tsProperty), scope)))
+        ts.createPropertyAssignment(Properties.eventName, ts.createLiteral(eventName(getNodeName(tsProperty))))
       ])
     ])
   )
@@ -60,7 +60,7 @@ function updatedListenDecoratorOrDecorator(tsDecorator: ts.Decorator): ts.Decora
     group = body
     body = null
   }
-  let scopedName = eventName(name, group)
+  let scopedName = eventName(name)
   if (body) {
     scopedName = ['body', scopedName].join(':')
   }
@@ -69,15 +69,12 @@ function updatedListenDecoratorOrDecorator(tsDecorator: ts.Decorator): ts.Decora
   )
 }
 
-export default function eventNameScoping({ metadata }: TransformerOptions = {}): ts.TransformerFactory<ts.SourceFile> {
+export default function eventNameScoping({  }: TransformerOptions = {}): ts.TransformerFactory<ts.SourceFile> {
   return _transformContext => {
     return tsSourceFile => {
-      const meta = metadata.findComponentFrom(tsSourceFile)
-      const groupName = (meta && meta.group) || 'global'
-
       function visit(tsNode: ts.Node): ts.VisitResult<ts.Node> {
         if (ts.isPropertyDeclaration(tsNode) && hasDecoratorNamed(tsNode, Decorators.Event)) {
-          return updateEventDecorator(tsNode, groupName)
+          return updateEventDecorator(tsNode)
         }
         if (ts.isMethodDeclaration(tsNode) && hasDecoratorNamed(tsNode, Decorators.Listen)) {
           return ts.updateMethod(

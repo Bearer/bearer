@@ -7,7 +7,6 @@ Metadata {
       "classname": "FeatDisplayComponent",
       "fileName": "/__test__/__fixtures__/gather-input-output/root-component-transformed.tsx",
       "finalTagName": "complex-feature-display",
-      "group": "complex",
       "initialTagName": "feat-display",
       "inputs": Array [
         Object {
@@ -27,19 +26,20 @@ Metadata {
         },
       ],
       "isRoot": true,
+      "name": "complex",
       "outputs": Array [
         Object {
-          "eventName": "bearer-sponge-bob-complex-namedevent",
+          "eventName": "bearer-sponge-bob-namedevent",
           "name": "namedEvent",
           "payloadFormat": "unspecified",
         },
         Object {
-          "eventName": "bearer-sponge-bob-complex-nontypedevent",
+          "eventName": "bearer-sponge-bob-nontypedevent",
           "name": "nonTypedEvent",
           "payloadFormat": "unspecified",
         },
         Object {
-          "eventName": "bearer-sponge-bob-complex-typedevent",
+          "eventName": "bearer-sponge-bob-typedevent",
           "name": "typedEvent",
           "payloadFormat": Object {
             "properties": Object {
@@ -89,7 +89,7 @@ Metadata {
           },
         },
         Object {
-          "eventName": "bearer-sponge-bob-complex-typedeventwithtype",
+          "eventName": "bearer-sponge-bob-typedeventwithtype",
           "name": "typedEventWithType",
           "payloadFormat": Object {
             "$schema": "http://json-schema.org/draft-07/schema#",
@@ -133,28 +133,28 @@ Metadata {
           },
         },
         Object {
-          "eventName": "bearer-sponge-bob-complex-typedeventwithtypearray",
+          "eventName": "bearer-sponge-bob-typedeventwithtypearray",
           "name": "typedEventWithTypeArray",
           "payloadFormat": Object {
             "type": "object",
           },
         },
         Object {
-          "eventName": "bearer-sponge-bob-complex-typedeventwithtypestring",
+          "eventName": "bearer-sponge-bob-typedeventwithtypestring",
           "name": "typedEventWithTypeString",
           "payloadFormat": Object {
             "type": "string",
           },
         },
         Object {
-          "eventName": "bearer-sponge-bob-complex-typedeventwithtypenumber",
+          "eventName": "bearer-sponge-bob-typedeventwithtypenumber",
           "name": "typedEventWithTypeNumber",
           "payloadFormat": Object {
             "type": "number",
           },
         },
         Object {
-          "eventName": "bearer-sponge-bob-complex-typedeventwithtypeboolean",
+          "eventName": "bearer-sponge-bob-typedeventwithtypeboolean",
           "name": "typedEventWithTypeBoolean",
           "payloadFormat": Object {
             "type": "boolean",

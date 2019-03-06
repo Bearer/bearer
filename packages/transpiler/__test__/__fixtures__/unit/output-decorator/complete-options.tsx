@@ -6,8 +6,7 @@ type Farmer = {
 }
 
 @RootComponent({
-  group: 'no-options',
-  role: 'action'
+  name: 'output-optionscomplete'
 })
 class NoOptionsComponent {
   @Input()

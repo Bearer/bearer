@@ -3,10 +3,6 @@
  */
 export type TInputDecoratorOptions = {
   /**
-   * Listen to a different RootComponent group
-   */
-  group: string
-  /**
    * Name of the property for the component
    * default: [propName]RefId
    */

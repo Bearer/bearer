@@ -14,7 +14,7 @@ describe('GatherIO transformer', () => {
         classname: 'FeatDisplayComponent',
         fileName: '/__test__/__fixtures__/gather-input-output/root-component-transformed.tsx',
         finalTagName: 'complex-feature-display',
-        group: 'complex',
+        name: 'complex',
         initialTagName: 'feat-display',
         isRoot: true
       })

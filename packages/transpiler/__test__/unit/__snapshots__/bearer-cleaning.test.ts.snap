@@ -1,45 +1,30 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`bearer cleaning transformer event emitter type match snapshot 1`] = `
-Object {
-  "file": "event-emitter-type.ts",
-  "postContent": "import { EventEmitter, Event, Prop, Component } from '@bearer/core';
+exports[`bearer cleaning transformer file: event-emitter-type.ts transformer 1`] = `
+"import { EventEmitter, Event, Prop } from '@bearer/core';
 type Goat = {
     color: string;
 };
 type Panda = {
     panda: string;
 };
-@Component({
-    tag: \\"feature-display\\",
-    styleUrl: \\"feature.css\\",
-    shadow: true
+@RootComponent({
+    name: 'feature-display'
 })
 export class Component {
-    @Event({ eventName: \\"bearer-sponge-bob-feature-feed\\" })
+    @Event()
     feed: EventEmitter;
     // TODO: Keep the type if it is used with prop or method: ex goat
     // note: keeping it aside until we really need it
-    @Event({ eventName: \\"bearer-sponge-bob-feature-keptasis\\" })
+    @Event()
     keptAsIs: EventEmitter;
     @Prop()
     goat: Goat;
     @Prop()
     setupId: string;
     // transformed to any because isn't imported by Stencil later
-    @Event({ eventName: \\"bearer-sponge-bob-feature-pandaisanyfied\\" })
+    @Event()
     pandaIsAnyfied: EventEmitter;
-    constructor() {
-    }
-    get SCENARIO_ID() { return \\"SPONGE_BOB\\"; }
-    @Prop({ \\"context\\": \\"bearer\\" })
-    bearerContext: any;
-    componentDidLoad() {
-        if (this.setupId) {
-            this.bearerContext.setupId = this.setupId;
-        }
-    }
 }
-",
-}
+"
 `;

@@ -39,18 +39,15 @@ export default function gatherMetadata({ metadata }: TransformerOptions): ts.Tra
           // Found RootComponent
           else if (hasDecoratorNamed(node, Decorators.RootComponent)) {
             const component = getDecoratorNamed(node, Decorators.RootComponent)
-            const nameExpression = getExpressionFromDecorator<ts.StringLiteral>(component, 'role')
-            const name = nameExpression ? nameExpression.text : ''
-            const groupExpression = getExpressionFromDecorator<ts.StringLiteral>(component, 'group')
-            const group = groupExpression ? groupExpression.text : ''
-            const tag = [Case.kebab(group), name].join('-')
-            const names = getTagNames(tag)
+            const name = getExpressionFromDecorator<ts.StringLiteral>(component, 'name')
+
+            const names = getTagNames(name.text.toString())
             metadata.registerComponent({
               fileName: tsSourceFile.fileName,
               classname: node.name.text,
               isRoot: true,
-              ...names,
-              group
+              name: name.text,
+              ...names
             })
             logger('Registered RootComponent %s: new tag name => ', names.initialTagName, names.finalTagName)
           }

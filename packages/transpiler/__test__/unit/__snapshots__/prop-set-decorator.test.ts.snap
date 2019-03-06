@@ -3,8 +3,7 @@
 exports[`prop set: hack for react file: complete-options.tsx apply changes 1`] = `
 "import { BearerRef, Input, RootComponent, State, Prop, Watch, Event, EventEmitter } from '@bearer/core';
 @RootComponent({
-    group: 'no-options',
-    role: 'action'
+    name: 'complete-options'
 })
 class NoOptionsComponent {
     @Input()
@@ -13,7 +12,7 @@ class NoOptionsComponent {
     aValueThatChanges: String;
     @Prop()
     aStaticValue: String;
-    @Event({ eventName: \\"bearer-test-no-options-action-prop-set\\", bubbles: true, cancelable: true })
+    @Event({ eventName: \\"bearer-test-complete-options-prop-set\\", bubbles: true, cancelable: true })
     propSetEmitter: EventEmitter<{
         propSetEmitter: string;
     }>;
@@ -28,8 +27,7 @@ class NoOptionsComponent {
 exports[`prop set: hack for react file: nothing-happen.tsx apply changes 1`] = `
 "import { RootComponent } from '@bearer/core';
 @RootComponent({
-    group: 'no-options',
-    role: 'action'
+    name: 'no-options'
 })
 class Nothing {
 }
