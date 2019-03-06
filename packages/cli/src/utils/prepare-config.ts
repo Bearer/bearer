@@ -23,14 +23,14 @@ export const transformer = (intents: string[]) => (context: ts.TransformationCon
   }
 }
 
-export default (authConfigFile: string, scenarioUuid: string, intentsDir: string): Promise<TConfig> => {
+export default (authConfigFile: string, integrationUuid: string, intentsDir: string): Promise<TConfig> => {
   return new Promise((resolve, reject) => {
     const intents: string[] = []
     new IntentCodeProcessor(intentsDir, transformer(intents))
       .run()
       .then(() => {
         const content = fs.readFileSync(authConfigFile, { encoding: 'utf8' })
-        const config: TConfig = { intents, integration_uuid: scenarioUuid, auth: JSON.parse(content) }
+        const config: TConfig = { intents, integration_uuid: integrationUuid, auth: JSON.parse(content) }
         resolve(config)
       })
       .catch(error => {

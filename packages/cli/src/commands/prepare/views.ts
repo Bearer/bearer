@@ -2,11 +2,11 @@ import { flags } from '@oclif/command'
 import * as path from 'path'
 
 import BaseCommand from '../../base-command'
-import { RequireScenarioFolder } from '../../utils/decorators'
+import { RequireIntegrationFolder } from '../../utils/decorators'
 import { copyFiles, ensureFolderExists, ensureSymlinked } from '../../utils/helpers'
 
 export default class PrepareViews extends BaseCommand {
-  static description = 'Prepare scenario views'
+  static description = 'Prepare integration views'
   static hidden = true
   static flags = {
     ...BaseCommand.flags,
@@ -15,7 +15,7 @@ export default class PrepareViews extends BaseCommand {
 
   static args = []
 
-  @RequireScenarioFolder()
+  @RequireIntegrationFolder()
   async run() {
     const { flags } = this.parse(PrepareViews)
     // Prepare folder structure
@@ -25,18 +25,18 @@ export default class PrepareViews extends BaseCommand {
 
     this.debug('Symlinking node_modules')
     ensureSymlinked(
-      this.locator.scenarioRootResourcePath('node_modules'),
+      this.locator.integrationRootResourcePath('node_modules'),
       this.locator.buildViewsResourcePath('node_modules')
     )
 
     this.debug('Symlinking package.json')
     ensureSymlinked(
-      this.locator.scenarioRootResourcePath('package.json'),
+      this.locator.integrationRootResourcePath('package.json'),
       this.locator.buildViewsResourcePath('package.json')
     )
 
     this.debug('Copying stencil config')
-    const vars = { componentTagName: this.case.kebab(this.bearerConfig.scenarioConfig.scenarioTitle) }
+    const vars = { componentTagName: this.case.kebab(this.bearerConfig.integrationConfig.integrationTitle) }
     await copyFiles(this, 'start', this.locator.buildViewsDir, vars)
 
     ensureSymlinked(

@@ -11,8 +11,8 @@ describe('generators', () => {
   describe('build', () => {
     it('generates openapi documentation', async () => {
       const generator = new OpenApiSpecGenerator(path.join(__dirname, '__fixtures__/generators'), {
-        scenarioTitle: 'test',
-        scenarioUuid: '123-test'
+        integrationTitle: 'test',
+        integrationUuid: '123-test'
       })
       const build = await generator.build()
       expect(build).toMatchSnapshot()

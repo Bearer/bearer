@@ -26,17 +26,17 @@ export type BearerConfig = {
     }
   }
   open: false
-  configs: Array<string>
+  configs: string[]
   config: string
 }
 
-export type ScenarioConfig = {
-  scenarioId: string
-  scenarioUuid: string | null
+export type IntegrationConfig = {
+  integrationId: string
+  integrationUuid: string | null
   orgId: string
-  scenarioTitle: string
+  integrationTitle: string
   open: boolean
-  configs: Array<string>
+  configs: string[]
   rootPathRc: string | null
   storeBearerConfig: any
   config: string
@@ -45,28 +45,28 @@ export type ScenarioConfig = {
 export type Config = BaseConfig & {
   runPath: string
   isYarnInstalled: boolean
-  isScenarioLocation: boolean
+  isIntegrationLocation: boolean
   command: 'yarn' | 'npm'
   bearerConfig: BearerConfig
-  scenarioConfig: ScenarioConfig
+  integrationConfig: IntegrationConfig
   orgId: string | undefined
-  scenarioTitle: string | undefined
-  scenarioId: string | undefined
-  scenarioUuid: string
+  integrationTitle: string | undefined
+  integrationId: string | undefined
+  integrationUuid: string
   rootPathRc: string | null
-  hasScenarioLinked: boolean
-  setScenarioConfig(config: any): void
+  hasIntegrationLinked: boolean
+  setIntegrationConfig(config: any): void
   storeBearerConfig(config: any): void
 }
 
 export type AuthConfig = {
   authType: Authentication
-  setupViews?: Array<any>
+  setupViews?: any[]
 }
 
-export type ScenarioBuildEnv = {
-  BEARER_SCENARIO_ID: string
-  BEARER_SCENARIO_TAG_NAME: string
+export type IntegrationBuildEnv = {
+  BEARER_INTEGRATION_ID: string
+  BEARER_INTEGRATION_TAG_NAME: string
   BEARER_INTEGRATION_HOST: string
   BEARER_AUTHORIZATION_HOST: string
   CDN_HOST: string

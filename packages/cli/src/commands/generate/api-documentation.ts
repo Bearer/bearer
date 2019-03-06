@@ -3,7 +3,7 @@ import * as fs from 'fs-extra'
 import * as path from 'path'
 
 import BaseCommand from '../../base-command'
-import { RequireScenarioFolder } from '../../utils/decorators'
+import { RequireIntegrationFolder } from '../../utils/decorators'
 import { OpenApiSpecGenerator } from '../../utils/generators'
 
 const OPEN_API_SPEC = 'openapi.json'
@@ -18,16 +18,16 @@ export default class GenerateApiDocumentation extends BaseCommand {
 
   static args = []
 
-  @RequireScenarioFolder()
+  @RequireIntegrationFolder()
   async run() {
     try {
       const { flags } = this.parse(GenerateApiDocumentation)
       const { srcIntentsDir, buildViewsComponentsDir } = this.locator
 
-      const { scenarioTitle, scenarioUuid } = this.bearerConfig
+      const { integrationTitle, integrationUuid } = this.bearerConfig
       const spec = flags.soft
         ? {}
-        : await new OpenApiSpecGenerator(srcIntentsDir, { scenarioTitle, scenarioUuid }).build()
+        : await new OpenApiSpecGenerator(srcIntentsDir, { integrationTitle, integrationUuid }).build()
 
       fs.ensureDirSync(buildViewsComponentsDir)
 

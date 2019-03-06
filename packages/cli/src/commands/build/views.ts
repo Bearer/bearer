@@ -8,12 +8,12 @@ import * as path from 'path'
 import BaseCommand from '../../base-command'
 import installDependencies from '../../tasks/install-dependencies'
 
-import { RequireScenarioFolder } from '../../utils/decorators'
+import { RequireIntegrationFolder } from '../../utils/decorators'
 
 const skipInstall = 'skip-install'
 
 export default class BuildViews extends BaseCommand {
-  static description = 'Build scenario views'
+  static description = 'Build integration views'
   static hidden = true
   static flags = {
     ...BaseCommand.flags,
@@ -22,7 +22,7 @@ export default class BuildViews extends BaseCommand {
 
   static args = []
 
-  @RequireScenarioFolder()
+  @RequireIntegrationFolder()
   async run() {
     const { flags } = this.parse(BuildViews)
     const tasks: Listr.ListrTask[] = [
@@ -42,7 +42,7 @@ export default class BuildViews extends BaseCommand {
       }
     ]
     if (!flags[skipInstall]) {
-      tasks.unshift(installDependencies({ cwd: this.locator.scenarioRoot }))
+      tasks.unshift(installDependencies({ cwd: this.locator.integrationRoot }))
     }
 
     try {
@@ -55,7 +55,7 @@ export default class BuildViews extends BaseCommand {
 
   transpile = () => {
     const prefix = ['bearer', this.bearerConfig.orgId].join('-')
-    const suffix = this.bearerConfig.scenarioId
+    const suffix = this.bearerConfig.integrationId
     try {
       transpiler(['--no-watcher', '--prefix-tag', prefix, '--suffix-tag', suffix, '--no-process', '--build', true])
     } catch (e) {

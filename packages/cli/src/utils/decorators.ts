@@ -3,29 +3,31 @@ import Command from '../base-command'
 type Constructor<T> = new (...args: any[]) => T
 type TCommand = InstanceType<Constructor<Command>>
 
-export function RequireScenarioFolder() {
+// tslint:disable-next-line:function-name
+export function RequireIntegrationFolder() {
   return function(_target: any, _propertyKey: string | symbol, descriptor: PropertyDescriptor) {
     const originalMethod = descriptor.value
     descriptor.value = async function(this: TCommand) {
-      if (this.bearerConfig.isScenarioLocation) {
+      if (this.bearerConfig.isIntegrationLocation) {
         await originalMethod.apply(this, arguments)
       } else {
-        this.error('This command must be run within a scenario folder.')
+        this.error('This command must be run within a integration folder.')
       }
     }
     return descriptor
   }
 }
 
-export function RequireLinkedScenario() {
+// tslint:disable-next-line:function-name
+export function RequireLinkedIntegration() {
   return function(_target: any, _propertyKey: string | symbol, descriptor: PropertyDescriptor) {
     const originalMethod = descriptor.value
     descriptor.value = async function(this: TCommand) {
-      if (this.bearerConfig.hasScenarioLinked) {
+      if (this.bearerConfig.hasIntegrationLinked) {
         await originalMethod.apply(this, arguments)
       } else {
         const error =
-          this.colors.bold('You scenario must be linked before running this command\n') +
+          this.colors.bold('You integration must be linked before running this command\n') +
           this.colors.yellow(this.colors.italic('Please run: bearer link'))
         this.error(error)
       }

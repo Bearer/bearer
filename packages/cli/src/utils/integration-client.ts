@@ -2,7 +2,7 @@ import axios, { AxiosInstance } from 'axios'
 
 import BaseCommand from '../base-command'
 
-export class ScenarioClient {
+export class IntegrationClient {
   private client: AxiosInstance
 
   constructor(baseUrl: string, authorization?: string, version?: string) {
@@ -11,14 +11,14 @@ export class ScenarioClient {
       ['BEARER-CLI-VERSION']: version
     }
     this.client = axios.create({
-      baseURL: baseUrl,
-      headers
+      headers,
+      baseURL: baseUrl
     })
   }
 
-  async getScenarioArchiveUploadUrl(orgId: string, scenarioId: string): Promise<string> {
+  async getIntegrationArchiveUploadUrl(orgId: string, integrationId: string): Promise<string> {
     try {
-      const response = await this.client.post('scenario-archive-url', { orgId, scenarioId, type: 'src' })
+      const response = await this.client.post('integration-archive-url', { orgId, integrationId, type: 'src' })
       return response.data.url
     } catch (e) {
       throw e
@@ -26,8 +26,8 @@ export class ScenarioClient {
   }
 }
 
-export default (command: BaseCommand): ScenarioClient => {
-  return new ScenarioClient(
+export default (command: BaseCommand): IntegrationClient => {
+  return new IntegrationClient(
     command.bearerConfig.DeploymentUrl,
     command.bearerConfig.bearerConfig.authorization.AuthenticationResult!.IdToken,
     command.config.version

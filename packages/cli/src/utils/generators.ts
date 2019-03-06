@@ -156,7 +156,7 @@ export class IntentCodeProcessor {
 export class OpenApiSpecGenerator {
   constructor(
     private readonly srcIntentsDir: string,
-    private readonly bearerConfig: { scenarioTitle: string | undefined; scenarioUuid: string }
+    private readonly bearerConfig: { integrationTitle: string | undefined; integrationUuid: string }
   ) {}
 
   async build() {
@@ -194,8 +194,8 @@ export class OpenApiSpecGenerator {
     return specGenerator({
       intents: intentEntries.map(entry => entry.intentName),
       intentsDir: this.srcIntentsDir,
-      integrationUuid: this.bearerConfig.scenarioUuid,
-      integrationName: this.bearerConfig.scenarioTitle || ''
+      integrationUuid: this.bearerConfig.integrationUuid,
+      integrationName: this.bearerConfig.integrationTitle || ''
     })
   }
 }

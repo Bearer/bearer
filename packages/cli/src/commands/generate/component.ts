@@ -2,7 +2,7 @@ import Authentications from '@bearer/types/lib/authentications'
 import { flags } from '@oclif/command'
 
 import BaseCommand from '../../base-command'
-import { RequireScenarioFolder } from '../../utils/decorators'
+import { RequireIntegrationFolder } from '../../utils/decorators'
 import { copyFiles } from '../../utils/helpers'
 
 enum TComponent {
@@ -21,7 +21,7 @@ export default class GenerateComponent extends BaseCommand {
 
   static args = [{ name: 'name' }]
 
-  @RequireScenarioFolder()
+  @RequireIntegrationFolder()
   async run() {
     const { args, flags } = this.parse(GenerateComponent)
     const type: TComponent = (flags.type as TComponent) || (await this.askForComponentType())
@@ -29,12 +29,18 @@ export default class GenerateComponent extends BaseCommand {
     const outDir = type === TComponent.ROOT ? this.locator.srcViewsDir : this.locator.srcViewsDirResource('components')
 
     try {
-      await copyFiles(this, `generate/${type}Component`, outDir, this.getVars(name, this.scenarioAuthConfig.authType))
+      await copyFiles(
+        this,
+        `generate/${type}Component`,
+        outDir,
+        this.getVars(name, this.integrationAuthConfig.authType)
+      )
       // TODO: add a nicer display
       this.success(`\nComponent generated`)
       if (type === TComponent.ROOT) {
         this.warn(
           this.colors.italic(
+            // tslint:disable-next-line:max-line-length
             'Please make sure to update the spec.ts file to reflect your new Root Component on the Developer Portal preview page.'
           )
         )
@@ -47,8 +53,8 @@ export default class GenerateComponent extends BaseCommand {
   getVars(name: string, authType: Authentications) {
     const componentName = this.case.pascal(name)
     return {
-      fileName: name,
       componentName,
+      fileName: name,
       componentClassName: componentName, // it gives more meaning within templates
       componentTagName: this.case.kebab(componentName),
       groupName: this.case.kebab(componentName),
@@ -59,10 +65,10 @@ export default class GenerateComponent extends BaseCommand {
   async askForComponentType(): Promise<TComponent> {
     const { type } = await this.inquirer.prompt<{ type: TComponent }>([
       {
+        choices,
         message: 'What kind of component would you like to generate:',
         type: 'list',
-        name: 'type',
-        choices
+        name: 'type'
       }
     ])
     return type

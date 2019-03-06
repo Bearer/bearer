@@ -3,7 +3,7 @@ import * as fs from 'fs'
 import * as path from 'path'
 
 import BaseCommand from '../../base-command'
-import { RequireScenarioFolder } from '../../utils/decorators'
+import { RequireIntegrationFolder } from '../../utils/decorators'
 import * as Listr from 'listr'
 import buildSetup from '../../tasks/build-setup'
 
@@ -14,14 +14,14 @@ export default class GenerateSetup extends BaseCommand {
 
   static args = []
 
-  @RequireScenarioFolder()
+  @RequireIntegrationFolder()
   async run() {
     const { flags } = this.parse(GenerateSetup)
     if (flags.force || !setupExists(this.locator.srcViewsDir)) {
-      const fields = this.scenarioAuthConfig.setupViews
+      const fields = this.integrationAuthConfig.setupViews
       if (fields && fields.length) {
         try {
-          const vars = this.getVars(this.bearerConfig.scenarioConfig.scenarioTitle, fields)
+          const vars = this.getVars(this.bearerConfig.integrationConfig.integrationTitle, fields)
           const tasks: Listr.ListrTask[] = buildSetup({
             vars,
             cmd: this
@@ -38,10 +38,10 @@ export default class GenerateSetup extends BaseCommand {
     }
   }
 
-  getVars(scenarioTitle: string, fields: any) {
+  getVars(integrationTitle: string, fields: any) {
     return {
-      componentName: this.case.pascal(scenarioTitle),
-      componentTagName: this.case.kebab(scenarioTitle),
+      componentName: this.case.pascal(integrationTitle),
+      componentTagName: this.case.kebab(integrationTitle),
       fields: JSON.stringify(fields)
     }
   }

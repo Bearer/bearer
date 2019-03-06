@@ -20,7 +20,7 @@ const authTypes = {
 }
 
 export default class New extends BaseCommand {
-  static description = 'Generate a new scenario'
+  static description = 'Generate a new integration'
 
   static flags = {
     ...BaseCommand.flags,
@@ -34,7 +34,7 @@ export default class New extends BaseCommand {
     })
   }
 
-  static args = [{ name: 'ScenarioName' }]
+  static args = [{ name: 'IntegrationName' }]
   private destinationFolder!: string
   private path?: string
 
@@ -43,14 +43,14 @@ export default class New extends BaseCommand {
     this.path = flags.path
 
     try {
-      const name: string = args.ScenarioName || (await this.askForString('Scenario name'))
+      const name: string = args.IntegrationName || (await this.askForString('Integration name'))
       const authType: Authentications = (flags.authType as Authentications) || (await this.askForAuthType())
       const skipInstall = flags.skipInstall
       this.destinationFolder = name
 
       const tasks: Listr.ListrTask[] = [
         {
-          title: 'Generating scenario structure',
+          title: 'Generating integration structure',
           task: async (ctx: any) => {
             try {
               const files = await this.createStructure(name, authType)
@@ -74,7 +74,7 @@ export default class New extends BaseCommand {
           task: async (_ctx: any, _task: any) => GenerateSetup.run(['--path', this.copyDestFolder, '--silent'])
         },
         {
-          title: 'Create scenario specification file',
+          title: 'Create integration specification file',
           task: async (_ctx: any, _task: any) => GenerateSpec.run(['--path', this.copyDestFolder, '--silent'])
         },
         {
@@ -91,7 +91,7 @@ export default class New extends BaseCommand {
       const { files } = await new Listr(tasks).run()
       printFiles(this, files)
 
-      this.success(`Scenario initialized, name: ${name}, authentication type: ${authTypes[authType].name}`)
+      this.success(`Integration initialized, name: ${name}, authentication type: ${authTypes[authType].name}`)
       this.log("\nWhat's next?\n")
       this.log('* read the bearer documentation at https://docs.bearer.sh\n')
       this.log(`* start your local development environement by running:\n`)
@@ -102,7 +102,7 @@ export default class New extends BaseCommand {
   }
 
   getVars = (name: string) => ({
-    scenarioTitle: name,
+    integrationTitle: name,
     componentName: this.case.pascal(name),
     componentTagName: this.case.kebab(name),
     bearerTagVersion: process.env.BEARER_PACKAGE_VERSION || 'beta5'

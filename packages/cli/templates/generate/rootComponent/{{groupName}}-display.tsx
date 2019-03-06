@@ -1,6 +1,6 @@
 /*
-  The purpose of this component is to be the result of your scenario.
-  Its responsibility is to retrieve the scenario state from a previous action
+  The purpose of this component is to be the result of your integration.
+  Its responsibility is to retrieve the integration state from a previous action
   of a user.
 */
 import { RootComponent } from '@bearer/core'
