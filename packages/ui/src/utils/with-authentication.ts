@@ -4,7 +4,7 @@ import debug from '../logger'
 const logger = debug('AuthenticationListener')
 
 export class AuthenticationListener {
-  protected SCENARIO_ID!: string
+  protected INTEGRATION_ID!: string
   protected onAuthorized: () => void
   protected onRevoked: () => void
   protected onSessionInitialized!: () => void
@@ -13,16 +13,16 @@ export class AuthenticationListener {
   protected revokedListener: any
 
   askAuthorization = (authRefId?: string) => {
-    logger('authenticate %s %s', this.SCENARIO_ID, this.bearerContext.setupId)
+    logger('authenticate %s %s', this.INTEGRATION_ID, this.bearerContext.setupId)
     Bearer.instance.askAuthorizations({
       authRefId,
-      scenarioId: this.SCENARIO_ID,
+      integrationId: this.INTEGRATION_ID,
       setupId: this.bearerContext.setupId
     })
   }
 
   revokeAuthorization = (authRefId?: string) => {
-    Bearer.instance.revokeAuthorization(this.SCENARIO_ID, authRefId)
+    Bearer.instance.revokeAuthorization(this.INTEGRATION_ID, authRefId)
   }
 
   componentDidLoad() {
@@ -32,11 +32,11 @@ export class AuthenticationListener {
           this.onSessionInitialized()
         }
 
-        this.authorizedListener = Bearer.onAuthorized(this.SCENARIO_ID, this.onAuthorized)
-        this.revokedListener = Bearer.onRevoked(this.SCENARIO_ID, this.onRevoked)
+        this.authorizedListener = Bearer.onAuthorized(this.INTEGRATION_ID, this.onAuthorized)
+        this.revokedListener = Bearer.onRevoked(this.INTEGRATION_ID, this.onRevoked)
 
         Bearer.instance
-          .hasAuthorized(this.SCENARIO_ID)
+          .hasAuthorized(this.INTEGRATION_ID)
           .then(() => {
             logger('authorized')
             this.onAuthorized()

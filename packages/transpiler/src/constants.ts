@@ -4,8 +4,8 @@ export enum Component {
   componentDidUnload = 'componentDidUnload',
   componentDidLoad = 'componentDidLoad',
   setupId = 'setupId',
-  scenarioId = 'scenarioId',
-  scenarioIdAccessor = 'SCENARIO_ID'
+  integrationId = 'integrationId',
+  integrationIdAccessor = 'INTEGRATION_ID'
 }
 
 export enum Decorators {
@@ -44,7 +44,7 @@ export enum Properties {
 }
 
 export enum Env {
-  BEARER_SCENARIO_ID = 'BEARER_SCENARIO_ID'
+  BEARER_INTEGRATION_ID = 'BEARER_INTEGRATION_ID'
 }
 
 export const BEARER = 'bearer'

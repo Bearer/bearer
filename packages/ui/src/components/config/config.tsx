@@ -16,7 +16,7 @@ type TSetupPayload = {
 export class BearerConfig {
   @Prop() fields: any[] | string = []
   @Prop() referenceId: string
-  @Prop() scenarioId: string
+  @Prop() integrationId: string
 
   @Element() element: HTMLElement
   @Event() stepCompleted: EventEmitter
@@ -35,15 +35,15 @@ export class BearerConfig {
     StateManager.storeSetup(formSet.reduce((acc, obj) => ({ ...acc, [obj['key']]: obj['value'] }), {}))
       .then((item: TSetupPayload) => {
         this.loading = false
-        logger(this.scenarioId)
-        Bearer.emitter.emit(`config_success:${this.scenarioId}`, {
+        logger(this.integrationId)
+        Bearer.emitter.emit(`config_success:${this.integrationId}`, {
           referenceID: item.Item.referenceId
         })
       })
       .catch(() => {
         this.error = true
         this.loading = false
-        Bearer.emitter.emit(`config_error:${this.scenarioId}`, {})
+        Bearer.emitter.emit(`config_error:${this.integrationId}`, {})
       })
   }
 

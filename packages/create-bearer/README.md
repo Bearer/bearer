@@ -7,23 +7,23 @@ Start a new Bearer intefration in a minute
 ### NPM
 
 ```bash
-npm init bearer MyScenarioName
+npm init bearer MyIntegrationName
 ```
 
 or
 
 ```bash
-npx create-bearer MyScenarioName
+npx create-bearer MyIntegrationName
 ```
 
 ### YARN
 
 ```bash
-yarn create bearer MyScenarioName
+yarn create bearer MyIntegrationName
 ```
 
 Additionally, you can pass argument options
 
 ```bash
-yarn create bearer MyScenarioName --authType=OAUTH2|BASIC|APIKEY|NONE
+yarn create bearer MyIntegrationName --authType=OAUTH2|BASIC|APIKEY|NONE
 ```

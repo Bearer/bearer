@@ -31,7 +31,7 @@ export default () => (<span>
 "
 `;
 
-exports[`Scope Event Names file: scenario-id-injection.1.tsx transformer 1`] = `
+exports[`Scope Event Names file: integration-id-injection.1.tsx transformer 1`] = `
 "import { Component, scopedT, scopedP } from '@bearer/core';
 @Component({
     tag: 'do-nothing'
@@ -39,7 +39,7 @@ exports[`Scope Event Names file: scenario-id-injection.1.tsx transformer 1`] = `
 class ComponentRequiringAliasing {
     fromProperty = () => {
         return (<span>
-        <bearer-i18n key=\\"something.key\\" default=\\"MyDefault string\\" scope={this.SCENARIO_ID}/>
+        <bearer-i18n key=\\"something.key\\" default=\\"MyDefault string\\" scope={this.INTEGRATION_ID}/>
       </span>);
     };
     get myTranslatedTitle(): string {
@@ -49,7 +49,7 @@ class ComponentRequiringAliasing {
         return (<div>
         {t('render.t', 'translated')}
         {p('render.p', 'pluralized')}
-        <bearer-i18n key=\\"other.key\\" default=\\"from the render\\" scope={this.SCENARIO_ID}/>
+        <bearer-i18n key=\\"other.key\\" default=\\"from the render\\" scope={this.INTEGRATION_ID}/>
       </div>);
     }
 }
@@ -58,7 +58,7 @@ var p = scopedP(\\"SPONGE_BOB\\");
 "
 `;
 
-exports[`Scope Event Names file: scenario-id-injection-with-alias.tsx transformer 1`] = `
+exports[`Scope Event Names file: integration-id-injection-with-alias.tsx transformer 1`] = `
 "import { Component, scopedT, scopedP } from '@bearer/core';
 @Component({
     tag: 'do-nothing'
@@ -66,7 +66,7 @@ exports[`Scope Event Names file: scenario-id-injection-with-alias.tsx transforme
 class ComponentWithAliasedImports {
     fromProperty = () => {
         return (<span>
-        <bearer-i18n key=\\"something.key\\" default=\\"MyDefault string\\" scope={this.SCENARIO_ID}/>
+        <bearer-i18n key=\\"something.key\\" default=\\"MyDefault string\\" scope={this.INTEGRATION_ID}/>
       </span>);
     };
     get myTranslatedTitle(): string {
@@ -76,7 +76,7 @@ class ComponentWithAliasedImports {
         return (<div>
         {tAliased('render.t', 'translated')}
         {pAliased('render.p', 'pluralized')}
-        <bearer-i18n key=\\"other.key\\" default=\\"from the render\\" scope={this.SCENARIO_ID}/>
+        <bearer-i18n key=\\"other.key\\" default=\\"from the render\\" scope={this.INTEGRATION_ID}/>
       </div>);
     }
 }

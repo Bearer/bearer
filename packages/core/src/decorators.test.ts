@@ -6,7 +6,7 @@ import { BearerFetch, Intent } from './decorators/intents'
 declare const window: BearerWindow
 declare const global: { fetch: any }
 
-const SCENARIO_ID = '1234'
+const INTEGRATION_ID = '1234'
 const commonParams = {
   body: '{}',
   method: 'POST',
@@ -27,8 +27,8 @@ describe('Intent decorator', () => {
     @Intent('getCollectionIntent')
     getCollectionIntentProp: BearerFetch
 
-    get SCENARIO_ID(): string {
-      return SCENARIO_ID
+    get INTEGRATION_ID(): string {
+      return INTEGRATION_ID
     }
 
     get setupId() {

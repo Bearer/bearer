@@ -1,5 +1,5 @@
 /*
- * Append scenarioId prop to @Component containing bearer-authorized or navigator-auth-screen
+ * Append integrationId prop to @Component containing bearer-authorized or navigator-auth-screen
  */
 import * as ts from 'typescript'
 
@@ -10,7 +10,9 @@ type TransformerOptions = {
 
 const INJECTABLE = new Set(['bearer-authorized', 'bearer-navigator-auth-screen'])
 
-export default function injectScenarioIdProp(_options: TransformerOptions = {}): ts.TransformerFactory<ts.SourceFile> {
+export default function injectIntegrationIdProp(
+  _options: TransformerOptions = {}
+): ts.TransformerFactory<ts.SourceFile> {
   return _transformContext => {
     function visit(tsNode: ts.Node): ts.VisitResult<ts.Node> {
       if (ts.isJsxSelfClosingElement(tsNode) && isInjectableJSXElement(tsNode)) {
@@ -41,10 +43,10 @@ export default function injectScenarioIdProp(_options: TransformerOptions = {}):
 
 function updateProperties(attributes: ts.JsxAttributes): ts.JsxAttributes {
   return ts.createJsxAttributes([
-    ...attributes.properties.filter(p => (p.name as ts.Identifier).escapedText !== Component.scenarioId),
+    ...attributes.properties.filter(p => (p.name as ts.Identifier).escapedText !== Component.integrationId),
     ts.createJsxAttribute(
-      ts.createIdentifier(Component.scenarioId),
-      ts.createLiteral(process.env[Env.BEARER_SCENARIO_ID] || Env.BEARER_SCENARIO_ID)
+      ts.createIdentifier(Component.integrationId),
+      ts.createLiteral(process.env[Env.BEARER_INTEGRATION_ID] || Env.BEARER_INTEGRATION_ID)
     )
   ])
 }

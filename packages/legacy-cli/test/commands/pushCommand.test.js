@@ -8,14 +8,14 @@ const { makeTmpDir, rmTmpDir } = require('../support/utils')
 const { spawn, exec } = require('child_process')
 
 const COMMAND = 'push',
-  SCENARIO_NAME = 'goatsAreFunTEST'
+  INTEGRATION_NAME = 'goatsAreFunTEST'
 
 const params = {
   Bucket: 'vanilla-deployments',
-  Key: SCENARIO_NAME
+  Key: INTEGRATION_NAME
 }
 
-let bin, tmpDir, scenarioPath
+let bin, tmpDir, integrationPath
 
 describe.skip('pushCommand', () => {
   // body...
@@ -25,9 +25,9 @@ describe.skip('pushCommand', () => {
     tmpDir = makeTmpDir()
     fs.writeFileSync(
       `${tmpDir}/index.js`,
-      fs.readFileSync(`${__dirname}/../fixtures/scenarios/getRepositories.js`).toString()
+      fs.readFileSync(`${__dirname}/../fixtures/integrations/getRepositories.js`).toString()
     )
-    scenarioPath = `${tmpDir}/${SCENARIO_NAME}.zip`
+    integrationPath = `${tmpDir}/${INTEGRATION_NAME}.zip`
   })
 
   afterEach(() => {
@@ -41,12 +41,12 @@ describe.skip('pushCommand', () => {
   test('push command creates s3 object SLOW', done => {
     expect.assertions(2)
 
-    const buildPackage = spawn(bin, ['package', SCENARIO_NAME], {
+    const buildPackage = spawn(bin, ['package', INTEGRATION_NAME], {
       cwd: tmpDir
     })
 
     buildPackage.on('close', () => {
-      const pushPackage = spawn(bin, [COMMAND, '--name', SCENARIO_NAME, scenarioPath])
+      const pushPackage = spawn(bin, [COMMAND, '--name', INTEGRATION_NAME, integrationPath])
 
       pushPackage.on('close', () => {
         s3.headObject(params, (err, data) => {
@@ -62,18 +62,18 @@ describe.skip('pushCommand', () => {
   test.skip('push command generates informative output SLOW', done => {
     expect.assertions(2)
 
-    const buildPackage = spawn(bin, ['package', SCENARIO_NAME], {
+    const buildPackage = spawn(bin, ['package', INTEGRATION_NAME], {
       cwd: tmpDir
     })
 
     buildPackage.on('close', () => {
       exec(
-        [bin, COMMAND, '--name', SCENARIO_NAME, scenarioPath].join(' '),
+        [bin, COMMAND, '--name', INTEGRATION_NAME, integrationPath].join(' '),
         { cwd: tmpDir },
         (error, stdout, stderr) => {
-          const re = new RegExp(`Pushing scenario ${SCENARIO_NAME}...`)
+          const re = new RegExp(`Pushing integration ${INTEGRATION_NAME}...`)
           expect(stdout).toMatch(re)
-          expect(stdout).toMatch(/Scenario has been uploaded/)
+          expect(stdout).toMatch(/Integration has been uploaded/)
           done()
         }
       )

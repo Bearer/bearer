@@ -64,16 +64,16 @@ export function itemRequest<T = any>(): TBearerRequest<T> {
 
 type TIntentBaseQuery = {
   intentName: string
-  scenarioId: string
+  integrationId: string
   setupId: string
 }
 
 export function intentRequest<TReturnFormat>({
   intentName,
-  scenarioId,
+  integrationId,
   setupId
 }: TIntentBaseQuery): TBearerRequest<TReturnFormat> {
-  return bearerRequest(`api/v3/intents/${scenarioId}/${intentName}`, { setupId })
+  return bearerRequest(`api/v3/intents/${integrationId}/${intentName}`, { setupId })
 }
 
 export default {

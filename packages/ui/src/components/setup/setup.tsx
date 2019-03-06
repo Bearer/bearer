@@ -23,7 +23,7 @@ export class BearerSetup {
   @Prop()
   referenceId: string
   @Prop()
-  scenarioId: string
+  integrationId: string
 
   @Element()
   element: HTMLElement
@@ -47,17 +47,17 @@ export class BearerSetup {
       .then((item: TSetupPayload) => {
         this.loading = false
         const referenceId = item.Item.referenceId
-        logger('setup_success %s', `setup_success:${this.scenarioId}`)
-        Bearer.emitter.emit(`setup_success:${this.scenarioId}`, {
+        logger('setup_success %s', `setup_success:${this.integrationId}`)
+        Bearer.emitter.emit(`setup_success:${this.integrationId}`, {
           referenceId
         })
-        this.setupSuccess.emit({ referenceId, scenarioId: this.scenarioId })
+        this.setupSuccess.emit({ referenceId, integrationId: this.integrationId })
       })
       .catch(err => {
         this.error = true
         this.loading = false
-        logger('setup_error:% %j', this.scenarioId, err)
-        Bearer.emitter.emit(`setup_error:${this.scenarioId}`, {})
+        logger('setup_error:% %j', this.integrationId, err)
+        Bearer.emitter.emit(`setup_error:${this.integrationId}`, {})
       })
   }
 

@@ -83,7 +83,7 @@ This component maintains a shared state for a group of components as well as add
 
 ### Example Use
 
-we will use [this scenario](https://app.bearer.sh/scenarios/6d29c4-share-slack-beta-4/preview) for our examples:
+we will use [this integration](https://app.bearer.sh/integrations/6d29c4-share-slack-beta-4/preview) for our examples:
 
 First on the preview page obtain a setup-id from the setup components so we do not need to include these in our page. Next lets define our components in a constants file:
 

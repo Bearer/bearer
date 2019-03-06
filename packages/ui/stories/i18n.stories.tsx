@@ -11,9 +11,9 @@ storiesOf('I18n translate', module)
 
 storiesOf('I18n pluralize', module)
   .addWithJSX('Missing Key: default Value', () => [
-    <scenario-placeholder>
+    <integration-placeholder>
       <bearer-i18n _key="missing.key" count="0" default="A default text : {{count}}" />
-    </scenario-placeholder>
+    </integration-placeholder>
   ])
   .addWithJSX('Existing Key: 0', () => [
     <bearer-i18n _key="withCount" count="0" default="A default text : {{count}}" />

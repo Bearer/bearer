@@ -22,11 +22,11 @@ export type BearerConfig = {
   config: string
 }
 
-export type ScenarioConfig = {
-  scenarioId: string
-  scenarioUuid: string
+export type IntegrationConfig = {
+  integrationId: string
+  integrationUuid: string
   orgId: string
-  scenarioTitle: string
+  integrationTitle: string
   open: boolean
   configs: Array<string>
   rootPathRc: string
@@ -38,13 +38,13 @@ export type Config = BaseConfig & {
   isYarnInstalled: boolean
   command: 'yarn' | 'npm'
   bearerConfig: BearerConfig
-  scenarioConfig: ScenarioConfig
+  integrationConfig: IntegrationConfig
   orgId: string | undefined
-  scenarioTitle: string | undefined
-  scenarioId: string | undefined
-  scenarioUuid: string
+  integrationTitle: string | undefined
+  integrationId: string | undefined
+  integrationUuid: string
   rootPathRc: string
-  hasScenarioLinked: boolean
-  setScenarioConfig(config: any): void
+  hasIntegrationLinked: boolean
+  setIntegrationConfig(config: any): void
   storeBearerConfig(config: any): void
 }

@@ -11,18 +11,11 @@ export class BearerNavigatorScreen {
 
   @Prop() navigationTitle: ((data: any) => string) | string
   @Prop()
-  renderFunc: <T>(
-    params: {
-      next: (data: any) => void
-      prev: () => void
-      complete: () => void
-      data: T
-    }
-  ) => void
+  renderFunc: <T>(params: { next: (data: any) => void; prev: () => void; complete: () => void; data: T }) => void
   @Prop() name: string
 
   @Event() stepCompleted: EventEmitter
-  @Event() scenarioCompleted: EventEmitter
+  @Event() integrationCompleted: EventEmitter
   @Event() navigatorGoBack: EventEmitter
 
   @Method()
@@ -59,7 +52,7 @@ export class BearerNavigatorScreen {
   }
 
   complete = () => {
-    this.scenarioCompleted.emit()
+    this.integrationCompleted.emit()
   }
 
   render() {

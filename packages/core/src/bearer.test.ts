@@ -18,33 +18,33 @@ describe('Bearer', () => {
   })
 
   describe('Authorization', () => {
-    it('with same scenarioId it auhtorizes', done => {
+    it('with same integrationId it auhtorizes', done => {
       expect.assertions(1)
 
       const instance = Bearer.init()
       const callback = jest.fn(() => done())
-      Bearer.onAuthorized('scenarioTargeted', callback)
+      Bearer.onAuthorized('integrationTargeted', callback)
 
-      instance.authorized({ data: { scenarioId: 'scenarioTargeted' } })
+      instance.authorized({ data: { integrationId: 'integrationTargeted' } })
 
       expect(callback).toHaveBeenCalledWith(true)
     })
 
-    it('does not resolve if not a matching scenarioId', done => {
+    it('does not resolve if not a matching integrationId', done => {
       expect.assertions(2)
 
       const instance = Bearer.init()
 
       const callback = jest.fn()
-      const otherScenarioCallback = jest.fn(() => done())
+      const otherIntegrationCallback = jest.fn(() => done())
 
-      Bearer.onAuthorized('scenarioTargeted', callback)
-      Bearer.onAuthorized('otherScenario', otherScenarioCallback)
+      Bearer.onAuthorized('integrationTargeted', callback)
+      Bearer.onAuthorized('otherIntegration', otherIntegrationCallback)
 
-      instance.authorized({ data: { scenarioId: 'otherScenario' } })
+      instance.authorized({ data: { integrationId: 'otherIntegration' } })
 
       expect(callback).not.toHaveBeenCalledWith(true)
-      expect(otherScenarioCallback).toHaveBeenCalledWith(true)
+      expect(otherIntegrationCallback).toHaveBeenCalledWith(true)
     })
 
     describe('#askAuthorizations', () => {
@@ -55,7 +55,7 @@ describe('Bearer', () => {
         const instance = new Bearer({ integrationHost: 'https://trash.bearer.sh/', secured: true }, win as any)
         // @ts-ignore
         instance.sessionInitialized()
-        expect(instance.askAuthorizations({ scenarioId: 'ok', setupId: 'ok', authRefId: 'IAM' })).toBeTruthy()
+        expect(instance.askAuthorizations({ integrationId: 'ok', setupId: 'ok', authRefId: 'IAM' })).toBeTruthy()
         expect(win.open).toHaveBeenCalledWith(
           'https://trash.bearer.sh/v2/auth/ok?setupId=ok&authId=IAM&secured=true&clientId=askAuthorizations-clientId',
           '',
@@ -65,7 +65,7 @@ describe('Bearer', () => {
 
       it('does not open ', () => {
         const instance = Bearer.init()
-        expect(instance.askAuthorizations({ scenarioId: 'ok', setupId: 'ok' })).toBeFalsy()
+        expect(instance.askAuthorizations({ integrationId: 'ok', setupId: 'ok' })).toBeFalsy()
       })
     })
   })

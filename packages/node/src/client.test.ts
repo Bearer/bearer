@@ -1,6 +1,6 @@
 import nock from 'nock'
 
-import clientFactory, { BearerClient, ScenarioClient } from './client'
+import clientFactory, { BearerClient, IntegrationClient } from './client'
 const clientId = 'spongeBobClientId'
 
 const distantApi = jest.fn(() => ({ ok: 'ok' }))
@@ -20,10 +20,10 @@ describe('Bearer client', () => {
           authorization: clientId
         }
       })
-        .post('/api/v3/intents/backend/12345-scenario-name/intentName')
+        .post('/api/v3/intents/backend/12345-integration-name/intentName')
         .reply(200, distantApi)
 
-      const { data } = await client.call('12345-scenario-name', 'intentName')
+      const { data } = await client.call('12345-integration-name', 'intentName')
 
       expect(distantApi).toHaveBeenCalled()
       expect(data).toEqual({ ok: 'ok' })
@@ -31,24 +31,24 @@ describe('Bearer client', () => {
   })
 })
 
-describe('ScenarioClient', () => {
+describe('IntegrationClient', () => {
   const token = 'a-different-token'
-  const anotherScenarioName = 'scenario-name'
-  type TScenarioIntentNames = 'intent-name' | 'other-intent'
-  const client = new ScenarioClient<TScenarioIntentNames>(token, {}, anotherScenarioName)
+  const anotherIntegrationName = 'integration-name'
+  type TIntegrationIntentNames = 'intent-name' | 'other-intent'
+  const client = new IntegrationClient<TIntegrationIntentNames>(token, {}, anotherIntegrationName)
 
-  it('creates a scenario client', () => {
-    expect(client).toBeInstanceOf(ScenarioClient)
+  it('creates a integration client', () => {
+    expect(client).toBeInstanceOf(IntegrationClient)
   })
 
-  it('calls correct scenario intents', async () => {
+  it('calls correct integration intents', async () => {
     distantApi.mockClear()
     nock('https://int.bearer.sh', {
       reqheaders: {
         authorization: token
       }
     })
-      .post(`/api/v3/intents/backend/${anotherScenarioName}/intent-name`)
+      .post(`/api/v3/intents/backend/${anotherIntegrationName}/intent-name`)
       .query({ sponge: 'bob' })
       .reply(200, distantApi)
 

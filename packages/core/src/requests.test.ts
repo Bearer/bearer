@@ -5,7 +5,7 @@ import Bearer from './bearer'
 import { intentRequest, itemRequest } from './requests'
 
 const intentName = 'anIntent'
-const scenarioId = 'aScenarioId'
+const integrationId = 'aIntegrationId'
 const setupId = '1234'
 declare const window: BearerWindow & { fetch: any }
 declare const global: { fetch: any }
@@ -43,20 +43,20 @@ describe('requests', () => {
 
   describe('intentRequest', () => {
     it('returns a function', () => {
-      const aRequest = intentRequest({ intentName, scenarioId, setupId })
+      const aRequest = intentRequest({ intentName, integrationId, setupId })
 
       expect(typeof aRequest).toBe('function')
     })
 
     it('calls host + intentName + params', async () => {
-      const aRequest = intentRequest({ intentName, scenarioId, setupId })
+      const aRequest = intentRequest({ intentName, integrationId, setupId })
       global.fetch.mockResponseOnce(JSON.stringify({}))
       window.bearer = { clientId: '42', load: jest.fn() }
 
       await aRequest({ page: 1 }, {})
 
       expect(global.fetch).toBeCalledWith(
-        'https://localhost:5555/api/v3/intents/aScenarioId/anIntent?page=1&setupId=1234&clientId=42&secured=true',
+        'https://localhost:5555/api/v3/intents/aIntegrationId/anIntent?page=1&setupId=1234&clientId=42&secured=true',
         {
           credentials: 'include',
           headers: {

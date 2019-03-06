@@ -23,22 +23,22 @@ export class BearerClient<T = string> {
     })
   }
 
-  public call(scenarioName: string, intentName: T, { query, body }: TIntentParams = defaultIntentParams) {
-    return this.client.post(`${scenarioName}/${intentName}`, body, {
+  public call(integrationName: string, intentName: T, { query, body }: TIntentParams = defaultIntentParams) {
+    return this.client.post(`${integrationName}/${intentName}`, body, {
       params: query
     })
   }
 }
 
-export class ScenarioClient<T = string> {
+export class IntegrationClient<T = string> {
   private bearerClient: BearerClient<T>
 
-  constructor(token: string, clientOptions: Partial<TClientOptions> = {}, private readonly scenarioName: string) {
+  constructor(token: string, clientOptions: Partial<TClientOptions> = {}, private readonly integrationName: string) {
     this.bearerClient = new BearerClient<T>(token, clientOptions)
   }
 
   public call(intentName: T, intentParams: TIntentParams = defaultIntentParams) {
-    return this.bearerClient.call(this.scenarioName, intentName, intentParams)
+    return this.bearerClient.call(this.integrationName, intentName, intentParams)
   }
 }
 

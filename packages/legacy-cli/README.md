@@ -20,7 +20,7 @@ $ bearer deploy
 
 ### Generators
 
-**Generate a new scenario\***
+**Generate a new integration\***
 
 ```bash
 $ bearer new attachPullRequest
@@ -34,7 +34,7 @@ $ bearer generate getRepositories --type=GetCollection
 
 ### Deploy
 
-**Deploy implemented scenario**
+**Deploy implemented integration**
 
 ```bash
 $ bearer deploy

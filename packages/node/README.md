@@ -15,7 +15,7 @@ const bearerClient = clientFactory(process.env.BEARER_SECRET_TOKEN)
 const options = { query: { status: 'open' }, body: { title: 'title' } }
 
 bearerClient
-  .call('1234-scenario-to-call', 'intentName', options)
+  .call('1234-integration-to-call', 'intentName', options)
   .then(() => {
     console.log('Successfully called intent')
   })
@@ -25,7 +25,7 @@ bearerClient
 
 //async await wait
 try {
-  const reponse = await bearerClient.call('1234-scenario-to-call', 'intentName', options)
+  const reponse = await bearerClient.call('1234-integration-to-call', 'intentName', options)
 } catch (e) {
   // handler error
 }
@@ -34,29 +34,29 @@ try {
 
 _Note_: we are using axios a http client. Each .call() returns an Axios Promise. https://github.com/axios/axios
 
-### Scenario client
+### Integration client
 
-Scenario client facilitates intent calls and prevent you to pass scenario name on every call
+Integration client facilitates intent calls and prevent you to pass integration name on every call
 
 ```tsx
-import { ScenarioClient } from '@bearer/node/lib/client'
+import { IntegrationClient } from '@bearer/node/lib/client'
 
-const scenarioClient = new ScenarioClient(process.env.BEARER_SECRET_TOKEN, 'a-scenario-uuid')
+const integrationClient = new IntegrationClient(process.env.BEARER_SECRET_TOKEN, 'a-integration-uuid')
 
-const reponse = await scenarioClient.call('intentName', options)
+const reponse = await integrationClient.call('intentName', options)
 ```
 
-If you are a Typescript user, you can provide a list of intents to use for a scenario:
+If you are a Typescript user, you can provide a list of intents to use for a integration:
 
 ```tsx
-const scenarioClient = new ScenarioClient<'intentName' | 'other-intent'>(
+const integrationClient = new IntegrationClient<'intentName' | 'other-intent'>(
   process.env.BEARER_SECRET_TOKEN,
-  'a-scenario-uuid'
+  'a-integration-uuid'
 )
 
-scenarioClient.call('intentName', options) // OK
-scenarioClient.call('other-intent', options) // OK
-scenarioClient.call('unknow-intent', options) // Argument of type '"unknow-intent"' is not assignable to parameter of type 'TScenarioIntentNames'.
+integrationClient.call('intentName', options) // OK
+integrationClient.call('other-intent', options) // OK
+integrationClient.call('unknow-intent', options) // Argument of type '"unknow-intent"' is not assignable to parameter of type 'TIntegrationIntentNames'.
 ```
 
 ### Use Bearer express webhook middleware
@@ -70,7 +70,7 @@ const app = express()
 
 // each valueS must be a fonction returning a promise
 const webhookHandlers = {
-  ['scenario-name-to_handle']: req =>
+  ['integration-name-to_handle']: req =>
     new Promise(() => {
       // you logic goes here
       if (something) resolve()

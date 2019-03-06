@@ -23,12 +23,12 @@ export default url => {
     login: body => requestPromise(url, 'POST', 'login', body),
     refresh: body => requestPromise(url, 'POST', 'refresh_token', body),
     putItem: body => requestPromise(url, 'POST', 'items', body),
-    assemblyScenario: (token, body) => requestPromise(url, 'POST', 'deploy', body, { Authorization: token }),
+    assemblyIntegration: (token, body) => requestPromise(url, 'POST', 'deploy', body, { Authorization: token }),
     signedUrls: (token, Keys, type) =>
       requestPromise(url, 'POST', 'signed-urls', { Keys, type }, { Authorization: token }),
     signedUrl: (token, Key, type) => requestPromise(url, 'POST', 'signed-url', { Key, type }, { Authorization: token }),
-    deployScenario: (token, eventName, OrgId, scenarioId) =>
-      requestPromise(url, 'POST', 'user-notifications', { eventName, OrgId, scenarioId }, { Authorization: token }),
+    deployIntegration: (token, eventName, OrgId, integrationId) =>
+      requestPromise(url, 'POST', 'user-notifications', { eventName, OrgId, integrationId }, { Authorization: token }),
     upload: (content, headers = {}) =>
       new Promise((resolve, reject) => {
         request(

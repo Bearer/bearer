@@ -3,7 +3,7 @@ import path from 'path'
 
 import generator from '../src'
 
-const INTENTS_DIR = path.resolve(path.join(__dirname, '__fixtures__', 'scenario', 'intents'))
+const INTENTS_DIR = path.resolve(path.join(__dirname, '__fixtures__', 'integration', 'intents'))
 
 const intents = fs.readdirSync(INTENTS_DIR).map(intent => intent.replace(/\.ts$/, ''))
 

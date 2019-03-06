@@ -35,8 +35,8 @@ export class BearerPopoverNavigator {
   @Prop()
   complete?: <T>(payload: { data: T; complete(): void }) => void
 
-  @Listen('scenarioCompleted')
-  scenarioCompletedHandler() {
+  @Listen('integrationCompleted')
+  integrationCompletedHandler() {
     this.screenData = {}
     this.isVisible = false
     this.visibleScreen = this.hasAuthScreen() ? 1 : 0
@@ -63,7 +63,7 @@ export class BearerPopoverNavigator {
     if (this.hasNext()) {
       this.visibleScreen = Math.min(this._visibleScreenIndex + 1, this.screens.length - 1)
     } else if (this.complete) {
-      this.complete({ complete: this.scenarioCompletedHandler.bind(this), data: this.screenData })
+      this.complete({ complete: this.integrationCompletedHandler.bind(this), data: this.screenData })
     }
   }
 

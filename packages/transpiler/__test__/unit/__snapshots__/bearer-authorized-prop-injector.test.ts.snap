@@ -18,7 +18,7 @@ class RootComponent {
     }
     constructor() {
     }
-    get SCENARIO_ID() { return \\"SPONGE_BOB\\"; }
+    get INTEGRATION_ID() { return \\"SPONGE_BOB\\"; }
     @Prop({ \\"context\\": \\"bearer\\" })
     bearerContext: any;
     @Prop()
@@ -38,7 +38,7 @@ class SubComponent {
     }
     constructor() {
     }
-    get SCENARIO_ID() { return \\"SPONGE_BOB\\"; }
+    get INTEGRATION_ID() { return \\"SPONGE_BOB\\"; }
     @Prop({ \\"context\\": \\"bearer\\" })
     bearerContext: any;
     @Prop()
@@ -65,12 +65,12 @@ Object {
 class RootComponent {
     render() {
         return (<bearer-navigator>
-        <bearer-navigator-auth-screen scenarioId=\\"SPONGE_BOB\\"/>
+        <bearer-navigator-auth-screen integrationId=\\"SPONGE_BOB\\"/>
       </bearer-navigator>);
     }
     constructor() {
     }
-    get SCENARIO_ID() { return \\"SPONGE_BOB\\"; }
+    get INTEGRATION_ID() { return \\"SPONGE_BOB\\"; }
     @Prop({ \\"context\\": \\"bearer\\" })
     bearerContext: any;
     @Prop()
@@ -87,12 +87,12 @@ class RootComponent {
 class SimpleComponent {
     render() {
         return (<bearer-navigator>
-        <bearer-navigator-auth-screen scenarioId=\\"SPONGE_BOB\\"/>
+        <bearer-navigator-auth-screen integrationId=\\"SPONGE_BOB\\"/>
       </bearer-navigator>);
     }
     constructor() {
     }
-    get SCENARIO_ID() { return \\"SPONGE_BOB\\"; }
+    get INTEGRATION_ID() { return \\"SPONGE_BOB\\"; }
     @Prop({ \\"context\\": \\"bearer\\" })
     bearerContext: any;
     @Prop()
@@ -108,11 +108,11 @@ class SimpleComponent {
 })
 class WithBearerAuthorizedComponent {
     render() {
-        return <bearer-authorized renderAuthorized={() => <div />} renderUnauthorized={() => <span />} scenarioId=\\"SPONGE_BOB\\"/>;
+        return <bearer-authorized renderAuthorized={() => <div />} renderUnauthorized={() => <span />} integrationId=\\"SPONGE_BOB\\"/>;
     }
     constructor() {
     }
-    get SCENARIO_ID() { return \\"SPONGE_BOB\\"; }
+    get INTEGRATION_ID() { return \\"SPONGE_BOB\\"; }
     @Prop({ \\"context\\": \\"bearer\\" })
     bearerContext: any;
     @Prop()
@@ -128,11 +128,11 @@ class WithBearerAuthorizedComponent {
 })
 class OverrideValueGiven {
     render() {
-        return (<bearer-authorized renderAuthorized={() => <div />} renderUnauthorized={() => <span />} scenarioId=\\"SPONGE_BOB\\"/>);
+        return (<bearer-authorized renderAuthorized={() => <div />} renderUnauthorized={() => <span />} integrationId=\\"SPONGE_BOB\\"/>);
     }
     constructor() {
     }
-    get SCENARIO_ID() { return \\"SPONGE_BOB\\"; }
+    get INTEGRATION_ID() { return \\"SPONGE_BOB\\"; }
     @Prop({ \\"context\\": \\"bearer\\" })
     bearerContext: any;
     @Prop()

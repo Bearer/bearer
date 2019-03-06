@@ -1,9 +1,9 @@
 export declare function intentRequest({
   intentName,
-  scenarioId
+  integrationId
 }: {
   intentName: any
-  scenarioId: any
+  integrationId: any
 }): (params?: {}) => Promise<{}>
 declare const _default: {
   intentRequest: typeof intentRequest

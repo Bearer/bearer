@@ -11,14 +11,14 @@ type IConfig = {
 
 export const invoke = (emitter, config, locator: Locator) => async (intent, cmd) => {
   const { path } = cmd
-  const { scenarioUuid } = config
+  const { integrationUuid } = config
 
   let fileData: IConfig = {}
   if (path) {
     const explorer = cosmiconfig(path, {
       searchPlaces: [path]
     })
-    const { config = {} } = (await explorer.search(locator.scenarioRootResourcePath.toString())) || {}
+    const { config = {} } = (await explorer.search(locator.integrationRootResourcePath.toString())) || {}
     fileData = config
   }
   const { params = {}, body = {} } = fileData
@@ -27,7 +27,7 @@ export const invoke = (emitter, config, locator: Locator) => async (intent, cmd)
 
     const client = axios.create({ baseURL: `${integrationHostURL}api/v1`, timeout: 5000 })
 
-    const { data } = await client.post(`${scenarioUuid}/${intent}`, body, { params })
+    const { data } = await client.post(`${integrationUuid}/${intent}`, body, { params })
     // used by cli: do not remove
     console.log(JSON.stringify(data, null, 2))
     process.exit(0)

@@ -68,12 +68,12 @@
         return (
           console.debug('[BEARER]', 'hasAuthorized?', e.data),
           {
-            authorized: i.Storage.hasAuthorized(e.data.scenarioId, e.data.integrationId)
+            authorized: i.Storage.hasAuthorized(e.data.integrationId, e.data.integrationId)
           }
         )
       }),
       o.on(t.Events.REVOKE, function(e) {
-        i.Storage.revoke(e.data.scenarioId, e.data.integrationId), o.send(window.parent, t.Events.REVOKED, e.data)
+        i.Storage.revoke(e.data.integrationId, e.data.integrationId), o.send(window.parent, t.Events.REVOKED, e.data)
       })
   },
   function(e, r, n) {
@@ -483,8 +483,8 @@
               return Array.isArray(e)
                 ? '(' + e.join(' | ') + ')'
                 : (0, o.isRegex)(e)
-                  ? 'RegExp(' + e.toString()
-                  : e.toString()
+                ? 'RegExp(' + e.toString()
+                : e.toString()
             }),
             (r.getDomainFromUrl = function(e) {
               return e.match(/^(https?|mock|file):\/\//)
@@ -1081,19 +1081,19 @@
                           d instanceof e && (d.resolved || d.rejected)
                             ? (d.resolved ? l.resolve(d.value) : l.reject(d.error), (d.errorHandled = !0))
                             : (0, o.isPromise)(d)
-                              ? d instanceof e && (d.resolved || d.rejected)
-                                ? d.resolved
-                                  ? l.resolve(d.value)
-                                  : l.reject(d.error)
-                                : d.then(
-                                    function(e) {
-                                      l.resolve(e)
-                                    },
-                                    function(e) {
-                                      l.reject(e)
-                                    }
-                                  )
-                              : l.resolve(d)
+                            ? d instanceof e && (d.resolved || d.rejected)
+                              ? d.resolved
+                                ? l.resolve(d.value)
+                                : l.reject(d.error)
+                              : d.then(
+                                  function(e) {
+                                    l.resolve(e)
+                                  },
+                                  function(e) {
+                                    l.reject(e)
+                                  }
+                                )
+                            : l.resolve(d)
                         },
                         u = 0;
                       u < a.length;
@@ -1158,10 +1158,10 @@
                   return r instanceof e
                     ? r
                     : (0, o.isPromise)(r)
-                      ? new e(function(e, n) {
-                          return r.then(e, n)
-                        })
-                      : new e().resolve(r)
+                    ? new e(function(e, n) {
+                        return r.then(e, n)
+                      })
+                    : new e().resolve(r)
                 }),
                 (e.reject = function(r) {
                   return new e().reject(r)
@@ -1544,16 +1544,16 @@
                         ' window'
                     )
                   : l
-                    ? new Error(
-                        'Request listener already exists for ' +
-                          t +
-                          ' for ' +
-                          (l === i.global.WINDOW_WILDCARD ? 'wildcard' : 'specified') +
-                          ' window'
-                      )
-                    : d
-                      ? new Error('Request listener already exists for ' + t + ' on domain ' + d.toString())
-                      : new Error('Request listener already exists for ' + t)
+                  ? new Error(
+                      'Request listener already exists for ' +
+                        t +
+                        ' for ' +
+                        (l === i.global.WINDOW_WILDCARD ? 'wildcard' : 'specified') +
+                        ' window'
+                    )
+                  : d
+                  ? new Error('Request listener already exists for ' + t + ' on domain ' + d.toString())
+                  : new Error('Request listener already exists for ' + t)
               var T = i.global.requestListeners,
                 A = T[t]
               A || ((A = new o.WeakMap()), (T[t] = A))
@@ -1690,8 +1690,8 @@
                   -1 !== i.POST_MESSAGE_NAMES_LIST.indexOf(u.name) || u.type === i.CONSTANTS.POST_MESSAGE_TYPE.ACK
                     ? 'debug'
                     : 'error' === u.ack
-                      ? 'error'
-                      : 'info'),
+                    ? 'error'
+                    : 'info'),
                   s.log.logLevel(l, [
                     '\n\n\t',
                     '#receive',
@@ -1886,8 +1886,8 @@
                   -1 !== s.POST_MESSAGE_NAMES_LIST.indexOf(r.name) || r.type === s.CONSTANTS.POST_MESSAGE_TYPE.ACK
                     ? 'debug'
                     : 'error' === r.ack
-                      ? 'error'
-                      : 'info'),
+                    ? 'error'
+                    : 'info'),
                 a.log.logLevel(l, [
                   '\n\n\t',
                   '#send',
@@ -2248,47 +2248,47 @@
                 return 'function' == typeof n
                   ? f(e, r, n, o.toString())
                   : n instanceof Error
-                    ? ((t = n),
-                      {
-                        __type__: a.CONSTANTS.SERIALIZATION_TYPES.ERROR,
-                        __message__: (0, u.stringifyError)(t),
-                        __code__: t.code
-                      })
-                    : window.Promise && n instanceof window.Promise
-                      ? (function(e, r, n, o) {
-                          return {
-                            __type__: a.CONSTANTS.SERIALIZATION_TYPES.PROMISE,
-                            __then__: f(
-                              e,
-                              r,
-                              function(e, r) {
-                                return n.then(e, r)
-                              },
-                              o + '.then'
-                            )
-                          }
-                        })(e, r, n, o.toString())
-                      : s.ZalgoPromise.isPromise(n)
-                        ? (function(e, r, n, o) {
-                            return {
-                              __type__: a.CONSTANTS.SERIALIZATION_TYPES.ZALGO_PROMISE,
-                              __then__: f(
-                                e,
-                                r,
-                                function(e, r) {
-                                  return n.then(e, r)
-                                },
-                                o + '.then'
-                              )
-                            }
-                          })(e, r, n, o.toString())
-                        : (0, u.isRegex)(n)
-                          ? ((i = n),
-                            {
-                              __type__: a.CONSTANTS.SERIALIZATION_TYPES.REGEX,
-                              __source__: i.source
-                            })
-                          : void 0
+                  ? ((t = n),
+                    {
+                      __type__: a.CONSTANTS.SERIALIZATION_TYPES.ERROR,
+                      __message__: (0, u.stringifyError)(t),
+                      __code__: t.code
+                    })
+                  : window.Promise && n instanceof window.Promise
+                  ? (function(e, r, n, o) {
+                      return {
+                        __type__: a.CONSTANTS.SERIALIZATION_TYPES.PROMISE,
+                        __then__: f(
+                          e,
+                          r,
+                          function(e, r) {
+                            return n.then(e, r)
+                          },
+                          o + '.then'
+                        )
+                      }
+                    })(e, r, n, o.toString())
+                  : s.ZalgoPromise.isPromise(n)
+                  ? (function(e, r, n, o) {
+                      return {
+                        __type__: a.CONSTANTS.SERIALIZATION_TYPES.ZALGO_PROMISE,
+                        __then__: f(
+                          e,
+                          r,
+                          function(e, r) {
+                            return n.then(e, r)
+                          },
+                          o + '.then'
+                        )
+                      }
+                    })(e, r, n, o.toString())
+                  : (0, u.isRegex)(n)
+                  ? ((i = n),
+                    {
+                      __type__: a.CONSTANTS.SERIALIZATION_TYPES.REGEX,
+                      __source__: i.source
+                    })
+                  : void 0
                 var t, i
               }).obj
             }),
@@ -2303,14 +2303,14 @@
                   return d(n, a.CONSTANTS.SERIALIZATION_TYPES.METHOD)
                     ? m(e, r, n)
                     : d(n, a.CONSTANTS.SERIALIZATION_TYPES.ERROR)
-                      ? p(0, 0, n)
-                      : d(n, a.CONSTANTS.SERIALIZATION_TYPES.PROMISE)
-                        ? _(e, r, n)
-                        : d(n, a.CONSTANTS.SERIALIZATION_TYPES.ZALGO_PROMISE)
-                          ? g(e, r, n)
-                          : d(n, a.CONSTANTS.SERIALIZATION_TYPES.REGEX)
-                            ? h(0, 0, n)
-                            : void 0
+                    ? p(0, 0, n)
+                    : d(n, a.CONSTANTS.SERIALIZATION_TYPES.PROMISE)
+                    ? _(e, r, n)
+                    : d(n, a.CONSTANTS.SERIALIZATION_TYPES.ZALGO_PROMISE)
+                    ? g(e, r, n)
+                    : d(n, a.CONSTANTS.SERIALIZATION_TYPES.REGEX)
+                    ? h(0, 0, n)
+                    : void 0
               }).obj
             })
           var t = n('./node_modules/cross-domain-safe-weakmap/src/index.js'),
@@ -2468,8 +2468,8 @@
                   void 0 !== a
                     ? (i[s] = a)
                     : 'object' === (void 0 === r ? 'undefined' : o(r)) && null !== r
-                      ? (i[s] = e(r, n, t + 1))
-                      : (i[s] = r)
+                    ? (i[s] = e(r, n, t + 1))
+                    : (i[s] = r)
                 }),
                 i
               )
@@ -2494,8 +2494,8 @@
               return (0, i.isPopup)()
                 ? s.CONSTANTS.WINDOW_TYPES.POPUP
                 : (0, i.isIframe)()
-                  ? s.CONSTANTS.WINDOW_TYPES.IFRAME
-                  : s.CONSTANTS.WINDOW_TYPES.FULLPAGE
+                ? s.CONSTANTS.WINDOW_TYPES.IFRAME
+                : s.CONSTANTS.WINDOW_TYPES.FULLPAGE
             }),
             (r.jsonStringify = function(e, r, n) {
               var o = void 0,

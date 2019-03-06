@@ -9,7 +9,7 @@ const command = {
 
 test('using a command', () => {
   const cli = new CLI(program, null, {
-    scenarioConfig: { config: '/tmp/scenariorc' }
+    integrationConfig: { config: '/tmp/integrationrc' }
   } as any)
   cli.use(command)
 

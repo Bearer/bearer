@@ -15,7 +15,7 @@ export class BearerIntentLogger {
   log = (data: any) => {
     debug('bearer:intents')('%j', {
       data,
-      scenarioId: this.context.integrationUuid,
+      integrationId: this.context.integrationUuid,
       intentName: this.context.intentName
     })
   }

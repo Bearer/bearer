@@ -31,7 +31,7 @@ export class Component {
     pandaIsAnyfied: EventEmitter;
     constructor() {
     }
-    get SCENARIO_ID() { return \\"SPONGE_BOB\\"; }
+    get INTEGRATION_ID() { return \\"SPONGE_BOB\\"; }
     @Prop({ \\"context\\": \\"bearer\\" })
     bearerContext: any;
     componentDidLoad() {
