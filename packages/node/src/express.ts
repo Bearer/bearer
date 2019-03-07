@@ -25,7 +25,7 @@ export default (handlers: TWebhookHandlers, options: TWebhookOptions = {}) => {
 
     // please do not transform to arrow function
     onHeaders(res, function() {
-      this.setHeader(INTENT_DURATION_HEADER, Date.now() - startAt)
+      this.setHeader(FUNCTION_DURATION_HEADER, Date.now() - startAt)
     })
 
     try {
@@ -82,7 +82,7 @@ export type TWebhookOptions = {
  */
 const INTEGRATION_HANDLER = 'bearer-integration-handler'
 const BEARER_SHA = 'bearer-sha'
-const INTENT_DURATION_HEADER = 'X-BEARER-WEBHOOK-HANDLER-DURATION'
+const FUNCTION_DURATION_HEADER = 'X-BEARER-WEBHOOK-HANDLER-DURATION'
 
 function ensureHandlerExists(handlers: TWebhookHandlers) {
   return (req: Request & Partial<TWithHandlerReq>, res: Response, next: NextFunction) => {

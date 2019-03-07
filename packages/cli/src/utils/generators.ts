@@ -8,9 +8,9 @@ import specGenerator from '@bearer/openapi-generator'
 
 const config = ts.readConfigFile(path.join(__dirname, '../../templates/start', 'tsconfig.json'), ts.sys.readFile)
 
-const NON_INTENT_NAMES = ['DBClient']
-const INTENT_NAMES = Object.keys(functions).filter(functionName => !NON_INTENT_NAMES.includes(functionName))
-const INTENT_TYPE_IDENTIFIER = 'functionType'
+const NON_FUNCTION_NAMES = ['DBClient']
+const FUNCTION_NAMES = Object.keys(functions).filter(functionName => !NON_FUNCTION_NAMES.includes(functionName))
+const FUNCTION_TYPE_IDENTIFIER = 'functionType'
 
 const intentEntries: IFunctionEntry[] = []
 
@@ -31,7 +31,7 @@ class FunctionNodeAdapter implements IFunctionEntry {
   }
 
   get functionType() {
-    return getPropertyValue(this.node, INTENT_TYPE_IDENTIFIER)
+    return getPropertyValue(this.node, FUNCTION_TYPE_IDENTIFIER)
   }
 
   get paramsSchema() {
@@ -87,7 +87,7 @@ function extendsFunctionType(tsClass: ts.ClassDeclaration): boolean {
   const extendedClasses = (tsClass.heritageClauses || []).filter(hc => hc.token === ts.SyntaxKind.ExtendsKeyword)
   return Boolean(
     extendedClasses.find(hc =>
-      Boolean(hc.types.find(t => INTENT_NAMES.includes((t.expression as ts.Identifier).escapedText.toString())))
+      Boolean(hc.types.find(t => FUNCTION_NAMES.includes((t.expression as ts.Identifier).escapedText.toString())))
     )
   )
 }

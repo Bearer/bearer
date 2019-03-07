@@ -4,7 +4,7 @@ import { topOfSpec, specPath } from './openapi-template'
 
 import { convertType } from './convert-type'
 
-export const INTENT_ACTION = 'action'
+export const FUNCTION_ACTION = 'action'
 type TOutput = { requestBody: any; response: any; intentAuthType?: string }
 
 /**
@@ -13,7 +13,7 @@ type TOutput = { requestBody: any; response: any; intentAuthType?: string }
 function findActionMethod(node: ts.ClassDeclaration): ts.MethodDeclaration | ts.ArrowFunction | undefined {
   const action = node.members.find((node: ts.ClassElement) => {
     if (node.name) {
-      return node.name.getText() === INTENT_ACTION
+      return node.name.getText() === FUNCTION_ACTION
     }
     return false
   })

@@ -13,14 +13,16 @@ Bearer CLI
 [![License](https://img.shields.io/npm/l/@bearer/cli.svg)](https://github.com/Bearer/bearer/packages/cli/blob/master/package.json)
 
 <!-- toc -->
-* [@bearer/cli](#bearer-cli)
-* [Usage](#usage)
-* [Commands](#commands)
-<!-- tocstop -->
+
+- [@bearer/cli](#bearer-cli)
+- [Usage](#usage)
+- [Commands](#commands)
+  <!-- tocstop -->
 
 # Usage
 
 <!-- usage -->
+
 ```sh-session
 $ npm install -g @bearer/cli
 $ bearer COMMAND
@@ -32,22 +34,24 @@ USAGE
   $ bearer COMMAND
 ...
 ```
+
 <!-- usagestop -->
 
 # Commands
 
 <!-- commands -->
-* [`bearer autocomplete [SHELL]`](#bearer-autocomplete-shell)
-* [`bearer generate`](#bearer-generate)
-* [`bearer generate:component [NAME]`](#bearer-generatecomponent-name)
-* [`bearer generate:intent [NAME]`](#bearer-generateintent-name)
-* [`bearer help [COMMAND]`](#bearer-help-command)
-* [`bearer invoke INTENT_NAME`](#bearer-invoke-intent-name)
-* [`bearer link INTEGRATION_IDENTIFIER`](#bearer-link-integration-identifier)
-* [`bearer login`](#bearer-login)
-* [`bearer new [INTEGRATIONNAME]`](#bearer-new-integrationname)
-* [`bearer push`](#bearer-push)
-* [`bearer start`](#bearer-start)
+
+- [`bearer autocomplete [SHELL]`](#bearer-autocomplete-shell)
+- [`bearer generate`](#bearer-generate)
+- [`bearer generate:component [NAME]`](#bearer-generatecomponent-name)
+- [`bearer generate:intent [NAME]`](#bearer-generateintent-name)
+- [`bearer help [COMMAND]`](#bearer-help-command)
+- [`bearer invoke FUNCTION_NAME`](#bearer-invoke-intent-name)
+- [`bearer link INTEGRATION_IDENTIFIER`](#bearer-link-integration-identifier)
+- [`bearer login`](#bearer-login)
+- [`bearer new [INTEGRATIONNAME]`](#bearer-new-integrationname)
+- [`bearer push`](#bearer-push)
+- [`bearer start`](#bearer-start)
 
 ## `bearer autocomplete [SHELL]`
 
@@ -148,13 +152,13 @@ OPTIONS
 
 _See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v2.1.4/src/commands/help.ts)_
 
-## `bearer invoke INTENT_NAME`
+## `bearer invoke FUNCTION_NAME`
 
 Invoke Function locally
 
 ```
 USAGE
-  $ bearer invoke INTENT_NAME
+  $ bearer invoke FUNCTION_NAME
 
 OPTIONS
   -h, --help       show CLI help
@@ -244,4 +248,5 @@ OPTIONS
 ```
 
 _See code: [src/commands/start.ts](https://github.com/Bearer/bearer/blob/v0.100.0/src/commands/start.ts)_
+
 <!-- commandsstop -->
