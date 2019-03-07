@@ -1,14 +1,7 @@
-import Bearer, { Component, State, Element, Event, EventEmitter, Prop, StateManager } from '@bearer/core'
+import { Component, State, Element, Event, EventEmitter, Prop } from '@bearer/core'
 import { FieldSet } from '../Forms/Fieldset'
 
 import { OAuth2SetupType, EmailSetupType, KeySetupType } from './setup-types'
-
-import debug from '../../logger'
-const logger = debug('bearer-setup')
-
-type TSetupPayload = {
-  Item: { referenceId: string }
-}
 
 @Component({
   tag: 'bearer-setup',
@@ -23,12 +16,13 @@ export class BearerSetup {
   @Prop()
   referenceId: string
   @Prop()
-  scenarioId: string
+  integrationId: string
 
   @Element()
   element: HTMLElement
+
   @Event()
-  setupSuccess: EventEmitter
+  setupSubmit: EventEmitter
 
   @State()
   fieldSet: FieldSet
@@ -43,22 +37,8 @@ export class BearerSetup {
     const formSet = this.fieldSet.map(el => {
       return { key: el.controlName, value: el.value }
     })
-    StateManager.storeSetup(formSet.reduce((acc, obj) => ({ ...acc, [obj['key']]: obj['value'] }), {}))
-      .then((item: TSetupPayload) => {
-        this.loading = false
-        const referenceId = item.Item.referenceId
-        logger('setup_success %s', `setup_success:${this.scenarioId}`)
-        Bearer.emitter.emit(`setup_success:${this.scenarioId}`, {
-          referenceId
-        })
-        this.setupSuccess.emit({ referenceId, scenarioId: this.scenarioId })
-      })
-      .catch(err => {
-        this.error = true
-        this.loading = false
-        logger('setup_error:% %j', this.scenarioId, err)
-        Bearer.emitter.emit(`setup_error:${this.scenarioId}`, {})
-      })
+
+    this.setupSubmit.emit(formSet)
   }
 
   onValueChange(field: string, event: any) {

@@ -288,15 +288,15 @@ declare global {
     }
 
     interface BearerSetupDisplay {
-      'scenarioId': string;
+      'integrationId': string;
       'setupId': string;
     }
 
     interface BearerSetup {
       'display': 'inline' | 'block';
       'fields': any[] | string;
+      'integrationId': string;
       'referenceId': string;
-      'scenarioId': string;
     }
   }
 
@@ -813,16 +813,16 @@ declare global {
     }
 
     export interface BearerSetupDisplayAttributes extends HTMLAttributes {
-      'scenarioId'?: string;
+      'integrationId'?: string;
       'setupId'?: string;
     }
 
     export interface BearerSetupAttributes extends HTMLAttributes {
       'display'?: 'inline' | 'block';
       'fields'?: any[] | string;
-      'onSetupSuccess'?: (event: CustomEvent) => void;
+      'integrationId'?: string;
+      'onSetupSubmit'?: (event: CustomEvent) => void;
       'referenceId'?: string;
-      'scenarioId'?: string;
     }
   }
 
