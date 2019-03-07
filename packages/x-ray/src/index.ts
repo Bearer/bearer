@@ -7,7 +7,7 @@ export const captureHttps = (module: any, event: any) => {
   process.env.clientId = event.params.clientId
   process.env.scenarioUuid = event.params.scenarioUuid
 
-  if (module._request || module._get) {
+  if (module._request && module._get) {
     // This because the cold lambda start
     // Avoid overriding methods for next calls
     return
