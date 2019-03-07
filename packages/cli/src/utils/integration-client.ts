@@ -18,7 +18,7 @@ export class IntegrationClient {
 
   async getIntegrationArchiveUploadUrl(orgId: string, integrationId: string): Promise<string> {
     try {
-      const response = await this.client.post('integration-archive-url', { orgId, integrationId, type: 'src' })
+      const response = await this.client.post('scenario-archive-url', { orgId, scenarioId: integrationId, type: 'src' })
       return response.data.url
     } catch (e) {
       throw e
