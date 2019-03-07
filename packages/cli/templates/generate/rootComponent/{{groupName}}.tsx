@@ -7,10 +7,9 @@ import { RootComponent } from '@bearer/core'
 import '@bearer/ui'
 
 @RootComponent({
-  role: 'action',
-  group: '{{groupName}}'
+  name: '{{groupName}}',
 })
-export class {{componentClassName}}Action {
+export class {{componentClassName}} {
   render() {
     return (
       <bearer-navigator direction="right">
