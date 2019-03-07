@@ -15,6 +15,7 @@ const DEFAULT_OPTIONS = {
 }
 
 export default class Bearer {
+  secured: boolean = false
   config: TBearerOptions = DEFAULT_OPTIONS
   private registeredIntegrations: Record<string, boolean> = {}
   private observer?: MutationObserver
@@ -24,6 +25,7 @@ export default class Bearer {
 
   constructor(readonly clientId: string, options: Partial<TBearerOptions> = {}) {
     this.config = { ...DEFAULT_OPTIONS, ...cleanOptions(options) }
+    this.secured = this.config.secured
     logger('init bearer instance clientId: %s with config: %j', clientId, this.config)
     this.debounceRefresh = debounce(this.loadMissingIntegrations, this.config.refreshDebounceDelay)
     this.initialIntegrationLoading()

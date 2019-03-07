@@ -12,12 +12,23 @@ const bearer: TBearer = (clientId: string, options?: Partial<TBearerOptions>) =>
 
 bearer.version = 'BEARER_VERSION'
 bearer.i18n = i18n
+// fake the presence of secured
+bearer.secured = false
+Object.defineProperty(bearer, 'secured', {
+  get: function() {
+    return this.instance && this.instance.secured
+  },
+  set: function(secured: boolean) {
+    this.instance.secured = secured
+  }
+})
 
 export type TBearer = {
   (clientId: string, options?: Partial<TBearerOptions>): Bearer
   instance?: Bearer
   version: string
   i18n: I18n
+  secured: boolean
 }
 
 export default bearer

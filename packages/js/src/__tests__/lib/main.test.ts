@@ -14,11 +14,13 @@ describe('main', () => {
       refreshDebounceDelay: 0
     }
     const instance = bearer('token', options)
+
     expect(instance.config).toMatchObject(expect.objectContaining(options))
   })
 
   it('use defaults', () => {
     const instance = bearer('token', { integrationHost: undefined })
+
     expect(instance.config).toMatchObject(
       expect.objectContaining({
         domObserver: true,
@@ -30,5 +32,14 @@ describe('main', () => {
 
   it('has a i18n accessor', () => {
     expect(bearer.i18n).toBeInstanceOf(I18n)
+  })
+
+  it('has a secured accessor', () => {
+    expect(bearer.secured).toBeFalsy()
+  })
+
+  it('has a secured setter', () => {
+    bearer.secured = true
+    expect(bearer.secured).toBeTruthy()
   })
 })
