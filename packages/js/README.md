@@ -83,7 +83,9 @@ bearer.i18n.load(null, dictionnary)
 If you want to add a level of security, you can switch to the secure mode:
 
 ```js
-window.BEARER.secured = true
+window.bearer.secured = true
+// at the initialisation time
+window.bearer('clientId', { secured: true })
 ```
 
 Once this mode is turned on, all your values passed in the properties need to be encrypted using your `ENCRYPTION_KEY`.
