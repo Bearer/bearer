@@ -70,7 +70,7 @@ export function Function(functionName: string, type: FunctionType = FunctionType
         const init = { method: 'POST', body: JSON.stringify(body || {}) }
 
         // Build promise
-        return intentPromise(intent(query, init))
+        return intentPromise(func(query, init))
       }
     }
 

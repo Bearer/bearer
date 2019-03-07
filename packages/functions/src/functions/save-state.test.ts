@@ -7,9 +7,9 @@ import { SaveState, SaveStateActionExecutionError, SaveStateSavingStateError } f
 describe('SaveFunction intent', () => {
   describe('.init', () => {
     it('use provided referenceId', async () => {
-      const { intent, event } = setup(SuccessFunction)
+      const { func, event } = setup(SuccessFunction)
 
-      const result = await intent({
+      const result = await func({
         ...event,
         queryStringParameters: {
           ...event.queryStringParameters,
@@ -21,8 +21,8 @@ describe('SaveFunction intent', () => {
     })
 
     it('generate a UUID as referenceId', async () => {
-      const { intent, event } = setup(SuccessFunction)
-      const result = await intent(event)
+      const { func, event } = setup(SuccessFunction)
+      const result = await func(event)
 
       expect(result).toMatchObject({
         meta: expect.objectContaining({
@@ -32,9 +32,9 @@ describe('SaveFunction intent', () => {
     })
 
     it('pass existing data to the action', async () => {
-      const { intent, event } = setup(SuccessFunction, { existingData: 'ok' })
+      const { func, event } = setup(SuccessFunction, { existingData: 'ok' })
 
-      const result = await intent(event)
+      const result = await func(event)
 
       expect(result.data).toMatchObject({
         context: 'something',
@@ -49,28 +49,28 @@ describe('SaveFunction intent', () => {
     describe('when errors occur', () => {
       describe('when update fails', () => {
         it('fails gracefully', () => {
-          const { intent, event } = setup(SuccessFunction)
+          const { func, event } = setup(SuccessFunction)
           const update = jest.spyOn(DBClient.prototype, 'updateData')
 
           update.mockImplementation(() => Promise.reject({ error: 'from-user-storage' }))
 
-          return expect(intent(event)).rejects.toEqual(new SaveStateSavingStateError())
+          return expect(func(event)).rejects.toEqual(new SaveStateSavingStateError())
         })
       })
 
       describe('when error is thrown within the action', () => {
         it('fails gracefully', async () => {
-          const { intent, event } = setup(HardFailingFunction)
+          const { func, event } = setup(HardFailingFunction)
 
-          return expect(intent(event)).rejects.toEqual(new SaveStateActionExecutionError())
+          return expect(func(event)).rejects.toEqual(new SaveStateActionExecutionError())
         })
       })
 
       describe('when error is returned by the action', () => {
         it('fails gracefully', async () => {
-          const { intent, event } = setup(FunctionWithErrorReturned)
+          const { func, event } = setup(FunctionWithErrorReturned)
 
-          const result = await intent(event)
+          const result = await func(event)
 
           expect(result).toMatchObject({ error: 'sponge Bob Died smoothly' })
         })
@@ -103,10 +103,10 @@ class HardFailingFunction extends SaveState implements SaveState {
 
 /**
  * setup
- * @param intentClass
+ * @param functionClass
  * @param returnedData
  */
-function setup(intentClass: any, returnedData: any = null) {
+function setup(functionClass: any, returnedData: any = null) {
   const getData = jest.spyOn(DBClient.prototype, 'getData')
 
   getData.mockImplementation(() => {
@@ -124,10 +124,10 @@ function setup(intentClass: any, returnedData: any = null) {
     }
   } as any
 
-  const func = intentClass.init()
+  const func = functionClass.init()
 
   return {
     event,
-    intent
+    func
   }
 }

@@ -1,11 +1,11 @@
 import { FetchData, FetchActionExecutionError } from './fetch'
 import * as d from '../declaration'
 
-describe('FetchData intent', () => {
+describe('FetchData function', () => {
   describe('.init', () => {
     it('forwards context and params (query + body)', async () => {
-      const { intent, event } = setup(PassContextFunction)
-      const result = await intent(event)
+      const { func, event } = setup(PassContextFunction)
+      const result = await func(event)
 
       expect(result.data).toMatchObject({
         context: {
@@ -22,9 +22,9 @@ describe('FetchData intent', () => {
     })
 
     it('returns a payload', async () => {
-      const { intent, event } = setup(FetchFunction)
+      const { func, event } = setup(FetchFunction)
 
-      const result = await intent(event)
+      const result = await func(event)
 
       expect(result).toMatchObject({ data: ['returned-data', 'somethingFromParams', 'iDefinedDataExisting'] })
     })
@@ -32,17 +32,17 @@ describe('FetchData intent', () => {
     describe('when errors occur', () => {
       describe('when error is thrown within the action', () => {
         it('fails gracefully', async () => {
-          const { intent, event } = setup(HardFailingFunction)
+          const { func, event } = setup(HardFailingFunction)
 
-          expect(intent(event)).rejects.toEqual(new FetchActionExecutionError('sponge Bob Died'))
+          expect(func(event)).rejects.toEqual(new FetchActionExecutionError('sponge Bob Died'))
         })
       })
 
       describe('when action returns an error payload', () => {
         it('fails gracefully', async () => {
-          const { intent, event } = setup(FailingFunction)
+          const { func, event } = setup(FailingFunction)
 
-          const result = await intent(event)
+          const result = await func(event)
 
           expect(result).toMatchObject({ error: '😨 No luck today' })
         })
@@ -79,9 +79,9 @@ class HardFailingFunction extends FetchData implements FetchData {
 
 /**
  * setup
- * @param intencClass FetchFunction implementation
+ * @param functionClass FetchFunction implementation
  */
-function setup(intencClass: any) {
+function setup(functionClass: any) {
   const event: d.TLambdaEvent = {
     context: {
       authAccess: { apiKey: 'aKey' },
@@ -97,9 +97,9 @@ function setup(intencClass: any) {
     }
   } as any
 
-  const func = intencClass.init()
+  const func = functionClass.init()
   return {
     event,
-    intent
+    func
   }
 }
