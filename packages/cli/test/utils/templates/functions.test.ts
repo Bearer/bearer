@@ -18,13 +18,13 @@ describe('functions generator', () => {
   })
 
   describe.each(Object.values(Authentications))('When %s', (auth: Authentications) => {
-    describe.each(Object.values(FunctionType))('intent type: %s', (intentType: FunctionType) => {
+    describe.each(Object.values(FunctionType))('intent type: %s', (functionType: FunctionType) => {
       let files: string[] = []
       let diagnostics: ts.Diagnostic[] = []
 
       beforeAll(async () => {
         const command = { silent: true, locator: { srcFunctionsDir: destination } }
-        files = await generateFunction(command as any, auth, intentType, `${auth}-${intentType}-Function`)
+        files = await generateFunction(command as any, auth, functionType, `${auth}-${functionType}-Function`)
         const options = ts.convertCompilerOptionsFromJson(compilerOptions, 'ok')
         const program = ts.createProgram(files, { ...options.options, noEmit: true })
         const emitResult = program.emit()

@@ -136,10 +136,10 @@ export function buildLambdaDefinitions(functions: TFunctionNames): TLambdaDefini
 
 function buildLambdaIndex(functions: TFunctionNames): string {
   return functions
-    .map((intent, index) => {
-      const intentConstName = `intent${index}`
-      return `const ${intentConstName} = require("./dist/${intent}").default;
-module.exports['${intent}'] = ${intentConstName}.init();
+    .map((func, index) => {
+      const funcConstName = `func${index}`
+      return `const ${funcConstName} = require("./dist/${func}").default;
+module.exports['${func}'] = ${funcConstName}.init();
 `
     })
     .join('\n')

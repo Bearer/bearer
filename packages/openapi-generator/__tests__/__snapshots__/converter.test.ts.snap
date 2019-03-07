@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`#intentTypeToSchemaConverter converts types to schemas for fetchDataApiKey.ts 1`] = `
+exports[`#functionTypeToSchemaConverter converts types to schemas for fetchDataApiKey.ts 1`] = `
 Object {
   "intentAuthType": "APIKEY",
   "requestBody": Object {
@@ -48,7 +48,7 @@ Object {
 }
 `;
 
-exports[`#intentTypeToSchemaConverter converts types to schemas for fetchDataBasic.ts 1`] = `
+exports[`#functionTypeToSchemaConverter converts types to schemas for fetchDataBasic.ts 1`] = `
 Object {
   "intentAuthType": "BASIC",
   "requestBody": Object {
@@ -96,7 +96,7 @@ Object {
 }
 `;
 
-exports[`#intentTypeToSchemaConverter converts types to schemas for fetchDataInlineType.ts 1`] = `
+exports[`#functionTypeToSchemaConverter converts types to schemas for fetchDataInlineType.ts 1`] = `
 Object {
   "intentAuthType": "OAUTH2",
   "requestBody": Object {
@@ -141,7 +141,7 @@ Object {
 }
 `;
 
-exports[`#intentTypeToSchemaConverter converts types to schemas for fetchDataNone.ts 1`] = `
+exports[`#functionTypeToSchemaConverter converts types to schemas for fetchDataNone.ts 1`] = `
 Object {
   "intentAuthType": "NONE",
   "requestBody": Object {
@@ -189,7 +189,7 @@ Object {
 }
 `;
 
-exports[`#intentTypeToSchemaConverter converts types to schemas for fetchDataOauth2.ts 1`] = `
+exports[`#functionTypeToSchemaConverter converts types to schemas for fetchDataOauth2.ts 1`] = `
 Object {
   "intentAuthType": "OAUTH2",
   "requestBody": Object {
@@ -237,7 +237,7 @@ Object {
 }
 `;
 
-exports[`#intentTypeToSchemaConverter converts types to schemas for fetchDataRefType.ts 1`] = `
+exports[`#functionTypeToSchemaConverter converts types to schemas for fetchDataRefType.ts 1`] = `
 Object {
   "intentAuthType": "OAUTH2",
   "requestBody": Object {
@@ -271,7 +271,7 @@ Object {
 }
 `;
 
-exports[`#intentTypeToSchemaConverter converts types to schemas for fetchDataUndefined.ts 1`] = `
+exports[`#functionTypeToSchemaConverter converts types to schemas for fetchDataUndefined.ts 1`] = `
 Object {
   "intentAuthType": undefined,
   "requestBody": undefined,
@@ -282,7 +282,7 @@ Object {
 }
 `;
 
-exports[`#intentTypeToSchemaConverter converts types to schemas for saveState.ts 1`] = `
+exports[`#functionTypeToSchemaConverter converts types to schemas for saveState.ts 1`] = `
 Object {
   "intentAuthType": "OAUTH1",
   "requestBody": Object {

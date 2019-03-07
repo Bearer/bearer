@@ -2,7 +2,7 @@ import BaseCommand from '../../base-command'
 import { RequireIntegrationFolder } from '../../utils/decorators'
 
 import GenerateComponent from './component'
-import GenerateFunction from './intent'
+import GenerateFunction from './function'
 
 const enum TType {
   Component,

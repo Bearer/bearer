@@ -10,7 +10,7 @@ const config = ts.readConfigFile(path.join(__dirname, '../../templates/start', '
 
 const NON_INTENT_NAMES = ['DBClient']
 const INTENT_NAMES = Object.keys(functions).filter(functionName => !NON_INTENT_NAMES.includes(functionName))
-const INTENT_TYPE_IDENTIFIER = 'intentType'
+const INTENT_TYPE_IDENTIFIER = 'functionType'
 
 const intentEntries: IFunctionEntry[] = []
 
@@ -30,7 +30,7 @@ class FunctionNodeAdapter implements IFunctionEntry {
     return getIdentifier(this.node).escapedText.toString()
   }
 
-  get intentType() {
+  get functionType() {
     return getPropertyValue(this.node, INTENT_TYPE_IDENTIFIER)
   }
 
@@ -68,7 +68,7 @@ class FunctionNodeAdapter implements IFunctionEntry {
     return {
       intentClassName: this.intentClassName,
       functionName: this.functionName,
-      intentType: this.intentType,
+      functionType: this.functionType,
       paramsSchema: this.paramsSchema,
       bodySchema: this.bodySchema,
       outputSchema: this.outputSchema
@@ -273,7 +273,7 @@ type TResponse = {
 
 interface IFunctionEntry {
   intentClassName: string
-  intentType: string
+  functionType: string
   functionName: string
   paramsSchema: ISchemaParam[]
   bodySchema: any

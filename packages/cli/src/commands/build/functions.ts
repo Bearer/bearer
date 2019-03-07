@@ -8,7 +8,7 @@ import BaseCommand from '../../base-command'
 import installDependencies from '../../tasks/install-dependencies'
 import { RequireIntegrationFolder } from '../../utils/decorators'
 import GenerateApiDocumenation from '../generate/api-documentation'
-import compilerOptions from '../../utils/intent-ts-compiler-options'
+import compilerOptions from '../../utils/function-ts-compiler-options'
 
 const skipInstall = 'skip-install'
 

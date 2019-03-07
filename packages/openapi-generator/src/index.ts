@@ -103,7 +103,7 @@ function getFunctionAuthType(sym: ts.Symbol | undefined, node: ts.Node, checker:
  *  @param intentPath absolute path to intent
  *  @param options compiler options
  */
-export function intentTypesToSchemaConverter(
+export function functionTypesToSchemaConverter(
   intentPath: string,
   options: ts.CompilerOptions = { target: ts.ScriptTarget.ES5, module: ts.ModuleKind.CommonJS }
 ): TOutput {
@@ -169,7 +169,7 @@ export default function generator({
   const doc = topOfSpec(integrationName)
   const schemas = functions.sort().reduce((acc, intent) => {
     const intentPath = path.join(functionsDir, `${intent}.ts`)
-    const typeSchema = intentTypesToSchemaConverter(intentPath)
+    const typeSchema = functionTypesToSchemaConverter(intentPath)
     return Object.assign(
       acc,
       specPath({

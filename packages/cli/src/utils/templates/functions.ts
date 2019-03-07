@@ -8,13 +8,13 @@ import baseCommand from '../../base-command'
 
 export default async (command: baseCommand, auth: Authentications, type: FunctionType, name: string) => {
   const vars = getVars(name, auth, type)
-  return await copyFiles(command, path.join(`generate/intent`, auth, type), command.locator.srcFunctionsDir, vars)
+  return await copyFiles(command, path.join(`generate/function`, auth, type), command.locator.srcFunctionsDir, vars)
 }
 
-function getVars(name: string, authType: Authentications, intentType: FunctionType) {
+function getVars(name: string, authType: Authentications, functionType: FunctionType) {
   return {
     authType,
-    intentType,
+    functionType,
     fileName: name,
     intentClassName: Case.pascal(name)
   }

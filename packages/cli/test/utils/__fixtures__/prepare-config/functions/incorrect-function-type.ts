@@ -1,4 +1,4 @@
 export default class MyFunction {
-  static intentType = 'Something else'
+  static functionType = 'Something else'
   static action = () => {}
 }

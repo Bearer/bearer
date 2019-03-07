@@ -124,13 +124,13 @@ function hasFunctionWithStateTypeDecorator(classNode: ts.ClassDeclaration): bool
     if (!decorator || !ts.isCallExpression(decorator.expression)) {
       return has
     }
-    const intentType = (decorator.expression as ts.CallExpression).arguments[1] as ts.PropertyAccessExpression
-    if (!intentType) {
+    const functionType = (decorator.expression as ts.CallExpression).arguments[1] as ts.PropertyAccessExpression
+    if (!functionType) {
       return false
     }
     const hasWisthState =
-      (intentType.expression as ts.Identifier).escapedText.toString() === Types.FunctionType &&
-      (intentType.name as ts.Identifier).escapedText.toString() === Types.SaveState
+      (functionType.expression as ts.Identifier).escapedText.toString() === Types.FunctionType &&
+      (functionType.name as ts.Identifier).escapedText.toString() === Types.SaveState
     return has || hasWisthState
   }, false)
 }
