@@ -25,7 +25,7 @@ import { getNodeName } from '../helpers/node-helpers'
 import { TransformerOptions } from '../types'
 import debug from '../logger'
 
-const logger = debug.extend('replace-intent-decorators')
+const logger = debug.extend('replace-function-decorators')
 function appendConstructor(node: ts.ClassDeclaration): ts.Node {
   if (classHasConstructor(node)) {
     return node

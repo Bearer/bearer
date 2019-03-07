@@ -72,19 +72,19 @@ export default function startLocalDevelopmentServer(
       router.post(
         `v3/functions/${config.integrationUuid}/:functionName`,
         intentHandler(distPath, devFunctionsContext, bearerBaseURL),
-        (ctx, _next) => ctx.ok(ctx.intentDatum)
+        (ctx, _next) => ctx.ok(ctx.funcDatum)
       )
 
       router.post(
         `v2/functions/${config.integrationUuid}/:functionName`,
         intentHandler(distPath, devFunctionsContext, bearerBaseURL),
-        (ctx, _next) => ctx.ok(ctx.intentDatum)
+        (ctx, _next) => ctx.ok(ctx.funcDatum)
       )
 
       router.all(
         `v1/${config.integrationUuid}/:functionName`,
         intentHandler(distPath, devFunctionsContext, bearerBaseURL),
-        (ctx, _next) => ctx.ok(ctx.intentDatum)
+        (ctx, _next) => ctx.ok(ctx.funcDatum)
       )
 
       if (logs) {
@@ -118,7 +118,7 @@ const intentHandler = (distPath: string, devFunctionsContext, bearerBaseURL: str
 
       const userDefinedData = await loadUserDefinedData({ query: ctx.query })
 
-      const datum = await intent.init()(
+      const datum = await func.init()(
         {
           context: {
             ...devFunctionsContext.global,
@@ -131,15 +131,15 @@ const intentHandler = (distPath: string, devFunctionsContext, bearerBaseURL: str
         },
         {}
       )
-      ctx.intentDatum = datum
+      ctx.funcDatum = datum
       next()
       resolve()
     } catch (e) {
       logger('ERROR: %j', e)
       if (e.code === 'MODULE_NOT_FOUND') {
-        ctx.intentDatum = { error: `Function '${ctx.params.functionName}' Not Found` }
+        ctx.funcDatum = { error: `Function '${ctx.params.functionName}' Not Found` }
       } else {
-        ctx.intentDatum = { error: e }
+        ctx.funcDatum = { error: e }
       }
       await next()
       resolve()

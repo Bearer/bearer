@@ -233,7 +233,7 @@ export function retrieveInputsMetas(
           propertyReferenceIdName: refIdName(name),
           eventName: outputEventName(name),
           functionName: retrieveFunctionName(name),
-          intentMethodName: retrieveFetcherName(name), // TODO: retrieve from options
+          functionMethodName: retrieveFetcherName(name), // TODO: retrieve from options
           autoLoad: true,
           loadMethodName: _loadName(name),
           typeIdentifier: tsNode.type,

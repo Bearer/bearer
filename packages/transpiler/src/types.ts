@@ -67,20 +67,20 @@ export type InputMeta = TInputDecoratorOptions & {
   typeIdentifier?: ts.TypeNode
   intializer?: ts.Expression
   loadMethodName: string
-  intentMethodName: string
+  functionMethodName: string
   watcherName: string
 }
 
 export type CreateFetcherMeta = {
   functionName: string
-  intentMethodName: string
+  functionMethodName: string
 }
 
 export type TCreateLoadResourceMethod = {
   propertyReferenceIdName: string
   typeIdentifier?: ts.TypeNode
   propDeclarationName: string
-  intentMethodName: string
+  functionMethodName: string
   intentReferenceIdKeyName: string
   loadMethodName: string
   intentArguments?: string[]
@@ -99,7 +99,7 @@ export type TAddAutoLoad = {
 export type OutputMeta = TOutputDecoratorOptions & {
   propDeclarationName: string
   propDeclarationNameRefId: string
-  intentMethodName: string
+  functionMethodName: string
   functionName: string
   loadMethodName: string
   initializer: ts.Expression

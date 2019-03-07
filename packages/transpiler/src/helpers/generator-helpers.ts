@@ -14,7 +14,7 @@ export function createFetcher(meta: CreateFetcherMeta) {
       )
     ],
     undefined,
-    meta.intentMethodName,
+    meta.functionMethodName,
     undefined,
     undefined,
     undefined
@@ -38,7 +38,7 @@ export function createLoadResourceMethod(
   meta: TCreateLoadResourceMethod,
   metaCollection: TCreateLoadResourceMethod[] = []
 ) {
-  const intentCall = ts.createCall(ts.createPropertyAccess(ts.createThis(), meta.intentMethodName), undefined, [
+  const intentCall = ts.createCall(ts.createPropertyAccess(ts.createThis(), meta.functionMethodName), undefined, [
     ts.createObjectLiteral([
       ts.createPropertyAssignment(
         meta.intentReferenceIdKeyName,

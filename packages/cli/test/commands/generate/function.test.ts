@@ -1,4 +1,4 @@
-import GenerateFunction from '../../../src/commands/generate/intent'
+import GenerateFunction from '../../../src/commands/generate/function'
 import { ensureBearerStructure } from '../../helpers/setup'
 import { readFile } from '../../helpers/utils'
 import { Authentications } from '@bearer/types/lib/authentications'

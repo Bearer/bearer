@@ -358,7 +358,7 @@ export function retrieveOutputsMetas(
         outputs.push({
           eventName: outputEventName(name),
           functionName: saveFunctionName(name),
-          intentMethodName: retrieveFetcherName(name),
+          functionMethodName: retrieveFetcherName(name),
           intentPropertyName: name,
           propDeclarationName: name,
           propDeclarationNameRefId: refIdName(name),
