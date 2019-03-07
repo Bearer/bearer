@@ -11,7 +11,7 @@ type Sponge = {
     name: unknown;
 };
 @RootComponent({
-    name: 'no-options',
+    name: 'no-options'
 })
 class NoOptionsComponent {
     @Input()

@@ -38,7 +38,7 @@ describe('createFetcher', () => {
 
     const meta: CreateFetcherMeta = {
       functionName: 'functionName',
-      intentMethodName: 'intentMethodName'
+      functionMethodName: 'functionMethodName'
     }
 
     expect(runTransformers(code, [dummyTransformer(createFetcher, meta)])).toMatchSnapshot()
@@ -56,7 +56,7 @@ describe('createLoadResourceMethod', () => {
         propertyReferenceIdName: 'aPropertyReferenceIdName',
         typeIdentifier: ts.createIdentifier('SomeType'),
         propDeclarationName: 'a',
-        intentMethodName: 'intentMethodName',
+        functionMethodName: 'functionMethodName',
         intentReferenceIdKeyName: 'aId',
         intentArguments: [],
         loadMethodName: 'loadMethodName'
@@ -65,7 +65,7 @@ describe('createLoadResourceMethod', () => {
         propertyReferenceIdName: 'bPropertyReferenceIdName',
         typeIdentifier: ts.createIdentifier('SomeType'),
         propDeclarationName: 'b',
-        intentMethodName: 'intentMethodName',
+        functionMethodName: 'functionMethodName',
         intentReferenceIdKeyName: 'bId',
         intentArguments: [],
         loadMethodName: 'loadMethodName'
@@ -74,7 +74,7 @@ describe('createLoadResourceMethod', () => {
         propertyReferenceIdName: 'propertyReferenceIdName',
         typeIdentifier: ts.createIdentifier('SomeType'),
         propDeclarationName: 'propDeclarationName',
-        intentMethodName: 'intentMethodName',
+        functionMethodName: 'functionMethodName',
         intentReferenceIdKeyName: 'intentReferenceIdKeyName',
         intentArguments: ['a', 'b'],
         loadMethodName: 'loadMethodName'
@@ -85,7 +85,7 @@ describe('createLoadResourceMethod', () => {
       propertyReferenceIdName: 'propertyReferenceIdName',
       typeIdentifier: ts.createIdentifier('SomeType'),
       propDeclarationName: 'propDeclarationName',
-      intentMethodName: 'intentMethodName',
+      functionMethodName: 'functionMethodName',
       intentReferenceIdKeyName: 'intentReferenceIdKeyName',
       intentArguments: ['a', 'b'],
       loadMethodName: 'loadMethodName'
