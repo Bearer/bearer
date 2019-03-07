@@ -19,7 +19,7 @@ export type TInputDecoratorOptions = {
   /**
    * Function to retrieve data from
    */
-  intentName: string
+  functionName: string
   /**
    * Function arguments
    */
@@ -40,7 +40,7 @@ export type TOutputDecoratorOptions = {
   /**
    * Specify an func you would like to use instead of the default one
    */
-  intentName: string
+  functionName: string
   /**
    * Name of the key used to send the referenceId value to the intent
    * default : referenceId

@@ -232,7 +232,7 @@ export function retrieveInputsMetas(
           propDeclarationName: name,
           propertyReferenceIdName: refIdName(name),
           eventName: outputEventName(name),
-          intentName: retrieveFunctionName(name),
+          functionName: retrieveFunctionName(name),
           intentMethodName: retrieveFetcherName(name), // TODO: retrieve from options
           autoLoad: true,
           loadMethodName: _loadName(name),
@@ -260,7 +260,7 @@ function extractInputOptions(decorator: ts.Decorator): Partial<TInputDecoratorOp
     : {
         ...extractStringOptions<TInputDecoratorOptions>(callArgs, [
           'eventName',
-          'intentName',
+          'functionName',
           'propertyReferenceIdName',
           'intentReferenceIdKeyName'
         ]),

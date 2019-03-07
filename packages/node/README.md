@@ -15,7 +15,7 @@ const bearerClient = clientFactory(process.env.BEARER_SECRET_TOKEN)
 const options = { query: { status: 'open' }, body: { title: 'title' } }
 
 bearerClient
-  .call('1234-integration-to-call', 'intentName', options)
+  .call('1234-integration-to-call', 'functionName', options)
   .then(() => {
     console.log('Successfully called intent')
   })
@@ -25,7 +25,7 @@ bearerClient
 
 //async await wait
 try {
-  const reponse = await bearerClient.call('1234-integration-to-call', 'intentName', options)
+  const reponse = await bearerClient.call('1234-integration-to-call', 'functionName', options)
 } catch (e) {
   // handler error
 }
@@ -43,18 +43,18 @@ import { IntegrationClient } from '@bearer/node/lib/client'
 
 const integrationClient = new IntegrationClient(process.env.BEARER_SECRET_TOKEN, 'a-integration-uuid')
 
-const reponse = await integrationClient.call('intentName', options)
+const reponse = await integrationClient.call('functionName', options)
 ```
 
 If you are a Typescript user, you can provide a list of functions to use for a integration:
 
 ```tsx
-const integrationClient = new IntegrationClient<'intentName' | 'other-intent'>(
+const integrationClient = new IntegrationClient<'functionName' | 'other-intent'>(
   process.env.BEARER_SECRET_TOKEN,
   'a-integration-uuid'
 )
 
-integrationClient.call('intentName', options) // OK
+integrationClient.call('functionName', options) // OK
 integrationClient.call('other-intent', options) // OK
 integrationClient.call('unknow-intent', options) // Argument of type '"unknow-intent"' is not assignable to parameter of type 'TIntegrationFunctionNames'.
 ```

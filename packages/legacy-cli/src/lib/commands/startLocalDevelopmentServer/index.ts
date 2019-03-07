@@ -70,19 +70,19 @@ export default function startLocalDevelopmentServer(
       process.env.bearerBaseURL = bearerBaseURL
 
       router.post(
-        `v3/functions/${config.integrationUuid}/:intentName`,
+        `v3/functions/${config.integrationUuid}/:functionName`,
         intentHandler(distPath, devFunctionsContext, bearerBaseURL),
         (ctx, _next) => ctx.ok(ctx.intentDatum)
       )
 
       router.post(
-        `v2/functions/${config.integrationUuid}/:intentName`,
+        `v2/functions/${config.integrationUuid}/:functionName`,
         intentHandler(distPath, devFunctionsContext, bearerBaseURL),
         (ctx, _next) => ctx.ok(ctx.intentDatum)
       )
 
       router.all(
-        `v1/${config.integrationUuid}/:intentName`,
+        `v1/${config.integrationUuid}/:functionName`,
         intentHandler(distPath, devFunctionsContext, bearerBaseURL),
         (ctx, _next) => ctx.ok(ctx.intentDatum)
       )
@@ -114,7 +114,7 @@ export default function startLocalDevelopmentServer(
 const intentHandler = (distPath: string, devFunctionsContext, bearerBaseURL: string) => async (ctx, next) =>
   new Promise(async (resolve, _reject) => {
     try {
-      const func = requireUncached(`${distPath}/${ctx.params.intentName}`).default
+      const func = requireUncached(`${distPath}/${ctx.params.functionName}`).default
 
       const userDefinedData = await loadUserDefinedData({ query: ctx.query })
 
@@ -122,7 +122,7 @@ const intentHandler = (distPath: string, devFunctionsContext, bearerBaseURL: str
         {
           context: {
             ...devFunctionsContext.global,
-            ...devFunctionsContext[ctx.params.intentName],
+            ...devFunctionsContext[ctx.params.functionName],
             bearerBaseURL,
             ...userDefinedData
           },
@@ -137,7 +137,7 @@ const intentHandler = (distPath: string, devFunctionsContext, bearerBaseURL: str
     } catch (e) {
       logger('ERROR: %j', e)
       if (e.code === 'MODULE_NOT_FOUND') {
-        ctx.intentDatum = { error: `Function '${ctx.params.intentName}' Not Found` }
+        ctx.intentDatum = { error: `Function '${ctx.params.functionName}' Not Found` }
       } else {
         ctx.intentDatum = { error: e }
       }

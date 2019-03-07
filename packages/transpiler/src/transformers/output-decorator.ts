@@ -212,11 +212,11 @@ function createFunction(meta: OutputMeta): ts.PropertyDeclaration {
   return ts.createProperty(
     [
       ts.createDecorator(
-        ts.createCall(ts.createIdentifier(Decorators.Function), undefined, [ts.createStringLiteral(meta.intentName)])
+        ts.createCall(ts.createIdentifier(Decorators.Function), undefined, [ts.createStringLiteral(meta.functionName)])
       )
     ],
     undefined,
-    meta.intentName,
+    meta.functionName,
     undefined,
     ts.createTypeReferenceNode(ts.createIdentifier(Types.BearerFetch), [
       meta.typeIdentifier || ts.createKeywordTypeNode(ts.SyntaxKind.AnyKeyword)
@@ -239,7 +239,7 @@ function createFunctionCall(meta: OutputMeta) {
 
   return ts.createCall(
     ts.createPropertyAccess(
-      ts.createCall(ts.createPropertyAccess(ts.createThis(), meta.intentName), undefined, [
+      ts.createCall(ts.createPropertyAccess(ts.createThis(), meta.functionName), undefined, [
         ts.createObjectLiteral([
           ts.createPropertyAssignment(
             'body',
@@ -323,7 +323,7 @@ export function outputEventName(prefix: string, suffix?: string): string {
 
 function createInitialFetcher(meta) {
   const metaForInitial = {
-    intentName: retrieveFunctionName(meta.propDeclarationName)
+    functionName: retrieveFunctionName(meta.propDeclarationName)
   }
   return createFetcher({ ...meta, ...metaForInitial })
 }
@@ -345,7 +345,7 @@ export function retrieveOutputsMetas(
           : {
               ...extractStringOptions<TOutputDecoratorOptions>(callArgs, [
                 'eventName',
-                'intentName',
+                'functionName',
                 'intentPropertyName',
                 'propertyWatchedName',
                 'referenceKeyName',
@@ -357,7 +357,7 @@ export function retrieveOutputsMetas(
             }
         outputs.push({
           eventName: outputEventName(name),
-          intentName: saveFunctionName(name),
+          functionName: saveFunctionName(name),
           intentMethodName: retrieveFetcherName(name),
           intentPropertyName: name,
           propDeclarationName: name,

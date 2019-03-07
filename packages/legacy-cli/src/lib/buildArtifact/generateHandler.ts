@@ -4,7 +4,7 @@ export default ({ functions }) => {
     .map(
       func => `
 const ${func} = require("./${func}").default;
-module.exports[${func}.intentName] = ${func}.intentType.call(${func}.action);
+module.exports[${func}.functionName] = ${func}.intentType.call(${func}.action);
 `
     )
     .join('\n')

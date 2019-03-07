@@ -14,8 +14,8 @@ export const transformer = (functions: string[]) => (context: ts.TransformationC
   return (tsSourceFile: ts.SourceFile) => {
     function visit(tsNode: ts.Node) {
       if (isFunctionClass(tsNode)) {
-        const intentName = getFunctionName(tsSourceFile)
-        functions.push(intentName)
+        const functionName = getFunctionName(tsSourceFile)
+        functions.push(functionName)
       }
       return tsNode
     }

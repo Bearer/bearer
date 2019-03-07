@@ -41,11 +41,11 @@ export const BearerStateSavedEvent = 'bearer:StateSaved'
  */
 
 // Usage
-// @Function('intentName') propertyName: BearerFetch
+// @Function('functionName') propertyName: BearerFetch
 // or
-// @Function('intentNameResource', FunctionType.FetchData) propertyName: BearerFetch
+// @Function('functionNameResource', FunctionType.FetchData) propertyName: BearerFetch
 // tslint:disable-next-line:function-name
-export function Function(intentName: string, type: FunctionType = FunctionType.FetchData): IDecorator {
+export function Function(functionName: string, type: FunctionType = FunctionType.FetchData): IDecorator {
   return function(target: BearerComponent, key: string): void {
     const getter = (): BearerFetch => {
       return function(this: BearerComponent, params = {}): Promise<TFetchBearerData> {
@@ -56,7 +56,7 @@ export function Function(intentName: string, type: FunctionType = FunctionType.F
         }
 
         const func = intentRequest<TFetchBearerResult>({
-          intentName,
+          functionName,
           integrationId,
           [setupId]: params[setupId] || retrieveSetupId(target)
         })

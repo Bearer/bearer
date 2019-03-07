@@ -10,7 +10,7 @@ export function createFetcher(meta: CreateFetcherMeta) {
   return ts.createProperty(
     [
       ts.createDecorator(
-        ts.createCall(ts.createIdentifier(Decorators.Function), undefined, [ts.createLiteral(meta.intentName)])
+        ts.createCall(ts.createIdentifier(Decorators.Function), undefined, [ts.createLiteral(meta.functionName)])
       )
     ],
     undefined,

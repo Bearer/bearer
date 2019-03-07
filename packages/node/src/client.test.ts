@@ -20,10 +20,10 @@ describe('Bearer client', () => {
           authorization: clientId
         }
       })
-        .post('/api/v3/functions/backend/12345-integration-name/intentName')
+        .post('/api/v3/functions/backend/12345-integration-name/functionName')
         .reply(200, distantApi)
 
-      const { data } = await client.call('12345-integration-name', 'intentName')
+      const { data } = await client.call('12345-integration-name', 'functionName')
 
       expect(distantApi).toHaveBeenCalled()
       expect(data).toEqual({ ok: 'ok' })

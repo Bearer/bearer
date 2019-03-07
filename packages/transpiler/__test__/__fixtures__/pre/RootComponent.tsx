@@ -39,7 +39,7 @@ export class AttachPullRequestAction {
     group: 'SCOPE',
     propertyReferenceIdName: 'goatId',
     eventName: 'goatMilked',
-    intentName: 'retrieveGoat',
+    functionName: 'retrieveGoat',
     autoLoad: false
   })
   goat: BearerRef<{ aString: string; aNumber: number; panda: Panda }>
@@ -48,7 +48,7 @@ export class AttachPullRequestAction {
   feedPanda: BearerRef<Panda>
 
   @Output({
-    intentName: 'manualFunctionName',
+    functionName: 'manualFunctionName',
     intentReferenceIdKeyName: 'manualintentReferenceIdKeyName',
     intentPropertyName: 'manuaLFunctionPropertyName',
     eventName: 'spongeBobdSaved',

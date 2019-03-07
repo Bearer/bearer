@@ -14,7 +14,7 @@ export function storeData(referenceId: string, payload: any) {
 
 export function getData(referenceId: string) {
   const request = requests.intentRequest({
-    intentName: referenceId,
+    functionName: referenceId,
     integrationId: 'items',
     setupId: 'TODO'
   })
@@ -23,7 +23,7 @@ export function getData(referenceId: string) {
 
 export function removeData(referenceId: string) {
   const request = requests.intentRequest({
-    intentName: referenceId,
+    functionName: referenceId,
     integrationId: 'items',
     setupId: 'TODO'
   })
@@ -48,7 +48,7 @@ function postSetup(payload: any) {
 
 function putItem(referenceId: string, payload: any) {
   const request = requests.intentRequest({
-    intentName: referenceId,
+    functionName: referenceId,
     integrationId: 'items',
     setupId: 'TODO'
   })

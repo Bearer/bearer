@@ -4,7 +4,7 @@ import { BearerWindow } from '@bearer/types'
 import Bearer from './bearer'
 import { intentRequest, itemRequest } from './requests'
 
-const intentName = 'anFunction'
+const functionName = 'anFunction'
 const integrationId = 'aIntegrationId'
 const setupId = '1234'
 declare const window: BearerWindow & { fetch: any }
@@ -24,7 +24,7 @@ describe('requests', () => {
       expect(typeof aRequest).toBe('function')
     })
 
-    it('calls host + intentName + params', async () => {
+    it('calls host + functionName + params', async () => {
       const aRequest = itemRequest()
       global.fetch.mockResponseOnce(JSON.stringify({}))
       window.bearer = { clientId: '42', load: jest.fn() }
@@ -43,13 +43,13 @@ describe('requests', () => {
 
   describe('intentRequest', () => {
     it('returns a function', () => {
-      const aRequest = intentRequest({ intentName, integrationId, setupId })
+      const aRequest = intentRequest({ functionName, integrationId, setupId })
 
       expect(typeof aRequest).toBe('function')
     })
 
-    it('calls host + intentName + params', async () => {
-      const aRequest = intentRequest({ intentName, integrationId, setupId })
+    it('calls host + functionName + params', async () => {
+      const aRequest = intentRequest({ functionName, integrationId, setupId })
       global.fetch.mockResponseOnce(JSON.stringify({}))
       window.bearer = { clientId: '42', load: jest.fn() }
 

@@ -174,7 +174,7 @@ export default function generator({
       acc,
       specPath({
         integrationUuid,
-        intentName: intent,
+        functionName: intent,
         response: { type: 'object', properties: typeSchema.response },
         requestBody: typeSchema.requestBody,
         oauth: typeSchema.intentAuthType === 'OAUTH2' || typeSchema.intentAuthType === 'OAUTH1'

@@ -3,4 +3,4 @@ const { FetchData } = require('@bearer/functions')
 
 module.exports.action = getRepositories
 module.exports.intentType = FetchData
-module.exports.intentName = 'getRepositories'
+module.exports.functionName = 'getRepositories'

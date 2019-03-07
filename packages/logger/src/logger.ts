@@ -16,7 +16,7 @@ export class BearerFunctionLogger {
     debug('bearer:functions')('%j', {
       data,
       integrationId: this.context.integrationUuid,
-      intentName: this.context.intentName
+      functionName: this.context.functionName
     })
   }
 }

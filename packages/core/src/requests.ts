@@ -63,17 +63,17 @@ export function itemRequest<T = any>(): TBearerRequest<T> {
 }
 
 type TFunctionBaseQuery = {
-  intentName: string
+  functionName: string
   integrationId: string
   setupId: string
 }
 
 export function intentRequest<TReturnFormat>({
-  intentName,
+  functionName,
   integrationId,
   setupId
 }: TFunctionBaseQuery): TBearerRequest<TReturnFormat> {
-  return bearerRequest(`api/v3/functions/${integrationId}/${intentName}`, { setupId })
+  return bearerRequest(`api/v3/functions/${integrationId}/${functionName}`, { setupId })
 }
 
 export default {

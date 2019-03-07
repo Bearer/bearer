@@ -72,7 +72,7 @@ export type InputMeta = TInputDecoratorOptions & {
 }
 
 export type CreateFetcherMeta = {
-  intentName: string
+  functionName: string
   intentMethodName: string
 }
 
@@ -100,7 +100,7 @@ export type OutputMeta = TOutputDecoratorOptions & {
   propDeclarationName: string
   propDeclarationNameRefId: string
   intentMethodName: string
-  intentName: string
+  functionName: string
   loadMethodName: string
   initializer: ts.Expression
   typeIdentifier?: ts.TypeNode

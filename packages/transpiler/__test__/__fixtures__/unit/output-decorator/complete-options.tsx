@@ -33,7 +33,7 @@ class NoOptionsComponent {
     eventName: 'milked',
     propertyWatchedName: 'aPanda',
     referenceKeyName: 'aPandaKey',
-    intentName: 'milkWithAbottle',
+    functionName: 'milkWithAbottle',
     intentReferenceIdKeyName: 'anotherProp',
     intentReferenceIdValue: 'intentReferenceIdValueValue',
     intentArguments: ['farmer', 'spongeBobOverrided', 'authId'],

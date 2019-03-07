@@ -123,8 +123,8 @@ export function buildLambdaDefinitions(functions: TFunctionNames): TLambdaDefini
   return {
     config: {
       functions: functions.reduce(
-        (acc, intentName) => {
-          acc.push({ [intentName]: [HANDLER_NAME, intentName].join('.') })
+        (acc, functionName) => {
+          acc.push({ [functionName]: [HANDLER_NAME, functionName].join('.') })
           return acc
         },
         [] as Record<string, string>[]

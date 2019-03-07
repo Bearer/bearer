@@ -13,7 +13,7 @@ exports[`addAutoLoad generates class with autoloaded feature 1`] = `
 
 exports[`createFetcher generates stuff properly 1`] = `
 "class C {
-    @Function(\\"intentName\\")
+    @Function(\\"functionName\\")
     intentMethodName;
 }
 "

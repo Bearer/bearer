@@ -9,7 +9,7 @@ import { FetchData, TOAUTH2AuthContext } from '@bearer/functions'
 import Client from './client'
 
 export default class ListPullRequestsFunction {
-  static intentName: string = 'listPullRequests'
+  static functionName: string = 'listPullRequests'
   static intentType: any = FetchData
 
   static async action({ context, params }: { context: TOAUTH2AuthContext; params: any }) {
@@ -42,7 +42,7 @@ export type TParams = {
 }
 
 export default class ListPullRequestsFunction {
-  static intentName: string = 'listPullRequests'
+  static functionName: string = 'listPullRequests'
   static intentType: any = SaveState
 
   static async action({ context, params, state }: { context: TOAUTH2AuthContext; params: TParams, state: TState }) {

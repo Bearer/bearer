@@ -7,7 +7,7 @@ import Connect, { IConnectProps } from '../src/Connect'
 const Factory = (integrationId: string) => {
   return {
     Fetcher: () => <span>Fetcher {integrationId}</span>,
-    FetcherFactory: (intentName: string) => () => <span>FetcherFactory: {intentName}</span>,
+    FetcherFactory: (functionName: string) => () => <span>FetcherFactory: {functionName}</span>,
     Connect: (props: Omit<IConnectProps, 'integration'>) => <Connect {...props} integration={integrationId} />
   }
 }

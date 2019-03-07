@@ -34,7 +34,7 @@ class NoOptionsComponent {
     propertyReferenceIdName: 'patrick',
     intentReferenceIdKeyName: 'intentReferenceIdKeyNameOption',
     eventName: 'patrickWasKilled',
-    intentName: 'killPatrick',
+    functionName: 'killPatrick',
     autoLoad: false,
     intentArguments: ['farmer', 'spongeBobOverrided', 'authId']
   })

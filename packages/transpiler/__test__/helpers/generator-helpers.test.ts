@@ -37,7 +37,7 @@ describe('createFetcher', () => {
     `
 
     const meta: CreateFetcherMeta = {
-      intentName: 'intentName',
+      functionName: 'functionName',
       intentMethodName: 'intentMethodName'
     }
 

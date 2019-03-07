@@ -25,19 +25,19 @@ type TParam = {
 
 export function specPath({
   integrationUuid,
-  intentName,
+  functionName,
   requestBody,
   response,
   oauth
 }: {
   integrationUuid: string
-  intentName: string
+  functionName: string
   requestBody: any
   response: any
   oauth: boolean
 }) {
   return {
-    [`/${integrationUuid}/${intentName}`]: {
+    [`/${integrationUuid}/${functionName}`]: {
       post: {
         parameters: [
           {
@@ -49,10 +49,10 @@ export function specPath({
           },
           oauthParam(oauth)
         ].filter(e => e !== undefined),
-        summary: intentName,
+        summary: functionName,
         requestBody: { content: { 'application/json': { schema: requestBody } } },
         responses: {
-          '200': { description: intentName, content: { 'application/json': { schema: response } } },
+          '200': { description: functionName, content: { 'application/json': { schema: response } } },
           '401': {
             description: 'Access forbidden',
             content: {
