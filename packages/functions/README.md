@@ -2,7 +2,7 @@
 
 ## Usage
 
-**Creating a FetchData intent**
+**Creating a FetchData function**
 
 ```
 import { FetchData, TOAUTH2AuthContext } from '@bearer/functions'
@@ -10,7 +10,7 @@ import Client from './client'
 
 export default class ListPullRequestsFunction {
   static functionName: string = 'listPullRequests'
-  static intentType: any = FetchData
+  static functionType: any = FetchData
 
   static async action({ context, params }: { context: TOAUTH2AuthContext; params: any }) {
     try {
@@ -26,7 +26,7 @@ export default class ListPullRequestsFunction {
 
 ```
 
-**Creating a SaveData intent**
+**Creating a SaveData function**
 
 ```
 import { SaveState, TOAUTH2AuthContext } from '@bearer/functions'
@@ -43,7 +43,7 @@ export type TParams = {
 
 export default class ListPullRequestsFunction {
   static functionName: string = 'listPullRequests'
-  static intentType: any = SaveState
+  static functionType: any = SaveState
 
   static async action({ context, params, state }: { context: TOAUTH2AuthContext; params: TParams, state: TState }) {
     try {

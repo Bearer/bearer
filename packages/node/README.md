@@ -4,7 +4,7 @@
 
 ## Usage
 
-### Call a Bearer intent
+### Call a Bearer function
 
 ```tsx
 // somewhere in your application, we'll use an express route here
@@ -17,7 +17,7 @@ const options = { query: { status: 'open' }, body: { title: 'title' } }
 bearerClient
   .call('1234-integration-to-call', 'functionName', options)
   .then(() => {
-    console.log('Successfully called intent')
+    console.log('Successfully called function')
   })
   .catch(() => {
     console.log('Something wrong happened')
@@ -49,14 +49,14 @@ const reponse = await integrationClient.call('functionName', options)
 If you are a Typescript user, you can provide a list of functions to use for a integration:
 
 ```tsx
-const integrationClient = new IntegrationClient<'functionName' | 'other-intent'>(
+const integrationClient = new IntegrationClient<'functionName' | 'other-function'>(
   process.env.BEARER_SECRET_TOKEN,
   'a-integration-uuid'
 )
 
 integrationClient.call('functionName', options) // OK
-integrationClient.call('other-intent', options) // OK
-integrationClient.call('unknow-intent', options) // Argument of type '"unknow-intent"' is not assignable to parameter of type 'TIntegrationFunctionNames'.
+integrationClient.call('other-function', options) // OK
+integrationClient.call('unknow-function', options) // Argument of type '"unknow-function"' is not assignable to parameter of type 'TIntegrationFunctionNames'.
 ```
 
 ### Use Bearer express webhook middleware

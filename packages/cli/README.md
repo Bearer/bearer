@@ -40,6 +40,7 @@ USAGE
 # Commands
 
 <!-- commands -->
+<<<<<<< HEAD
 
 - [`bearer autocomplete [SHELL]`](#bearer-autocomplete-shell)
 - [`bearer generate`](#bearer-generate)
@@ -52,6 +53,19 @@ USAGE
 - [`bearer new [INTEGRATIONNAME]`](#bearer-new-integrationname)
 - [`bearer push`](#bearer-push)
 - [`bearer start`](#bearer-start)
+=======
+* [`bearer autocomplete [SHELL]`](#bearer-autocomplete-shell)
+* [`bearer generate`](#bearer-generate)
+* [`bearer generate:component [NAME]`](#bearer-generatecomponent-name)
+* [`bearer generate:function [NAME]`](#bearer-generatefunction-name)
+* [`bearer help [COMMAND]`](#bearer-help-command)
+* [`bearer invoke INTENT_NAME`](#bearer-invoke-function-name)
+* [`bearer link INTEGRATION_IDENTIFIER`](#bearer-link-integration-identifier)
+* [`bearer login`](#bearer-login)
+* [`bearer new [INTEGRATIONNAME]`](#bearer-new-integrationname)
+* [`bearer push`](#bearer-push)
+* [`bearer start`](#bearer-start)
+>>>>>>> docs: rename intent to functions
 
 ## `bearer autocomplete [SHELL]`
 
@@ -115,13 +129,13 @@ ALIASES
 
 _See code: [src/commands/generate/component.ts](https://github.com/Bearer/bearer/blob/v0.100.0/src/commands/generate/component.ts)_
 
-## `bearer generate:intent [NAME]`
+## `bearer generate:function [NAME]`
 
 Generate a Bearer Function
 
 ```
 USAGE
-  $ bearer generate:intent [NAME]
+  $ bearer generate:function [NAME]
 
 OPTIONS
   -h, --help             show CLI help
@@ -133,7 +147,7 @@ ALIASES
   $ bearer g:i
 ```
 
-_See code: [src/commands/generate/intent.ts](https://github.com/Bearer/bearer/blob/v0.100.0/src/commands/generate/intent.ts)_
+_See code: [src/commands/generate/function.ts](https://github.com/Bearer/bearer/blob/v0.100.0/src/commands/generate/function.ts)_
 
 ## `bearer help [COMMAND]`
 

@@ -11,7 +11,7 @@
 - @bearer/cli
 - @bearer/core
 - create-bearer
-- @bearer/intents
+- @bearer/functions
 - @bearer/legacy-cli
 - @bearer/js
 - @bearer/openapi-generator
