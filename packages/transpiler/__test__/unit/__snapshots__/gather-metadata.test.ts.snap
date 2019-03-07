@@ -6,7 +6,7 @@ Metadata {
     Object {
       "classname": "FeatDisplayRootComponent",
       "fileName": "/__test__/__fixtures__/gather-metadata/root-component.tsx",
-      "finalTagName": "feat",
+      "finalTagName": "bearer-feat",
       "initialTagName": "feat",
       "isRoot": true,
       "name": "feat",
@@ -24,7 +24,7 @@ Metadata {
     Object {
       "classname": "FeatDisplayRootComponent",
       "fileName": "/__test__/__fixtures__/gather-metadata/root-component-with-api.tsx",
-      "finalTagName": "complex-feature",
+      "finalTagName": "bearer-complex-feature",
       "initialTagName": "complex-feature",
       "isRoot": true,
       "name": "complex-feature",

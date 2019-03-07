@@ -155,7 +155,7 @@ type Panda = {
     fullPandaName: string;
 };
 @Component({
-    tag: \\"full-component\\"
+    tag: \\"bearer-full-component\\"
 })
 export class FullComponent {
     private fetcher: BearerFetch;
@@ -417,9 +417,9 @@ type Panda = {
     fullPandaName: string;
 };
 @Component({
-    tag: \\"AttachPullRequest\\",
-    styleUrl: \\"AttachPullRequest.css\\",
-    shadow: true
+    tag: \\"bearer-AttachPullRequest\\",
+    shadow: true,
+    styleUrl: \\"./ok.css\\"
 })
 export class AttachPullRequestAction {
     private fetcher: BearerFetch;
@@ -617,7 +617,7 @@ export class AttachPullRequestAction {
         this.attachedPullRequests = state[\\"attachedPullRequests\\"];
         this.ducks = state[\\"goats\\"];
     };
-    @Event({ eventName: \\"AttachPullRequest-prop-set\\", bubbles: true, cancelable: true })
+    @Event({ eventName: \\"bearer-attachpullrequest-prop-set\\", bubbles: true, cancelable: true })
     propSetEmitter: EventEmitter;
     @Watch(\\"farmerId\\")
     farmerIdPropSetWatcher(newValue) {
@@ -960,8 +960,7 @@ Object {
   "file": "invalidRootComponent.tsx",
   "postContent": "import { BearerFetch, BearerState, Intent, IntentType, Component, Prop, Watch, State } from '@bearer/core';
 @Component({
-    tag: \\"attach-pull-request\\",
-    styleUrl: \\"attachPullRequest.css\\",
+    tag: \\"bearer-attach-pull-request\\",
     shadow: false
 })
 export class InvalidRootComponent {
@@ -1165,7 +1164,7 @@ Object {
   "file": "overrides-decorator.tsx",
   "postContent": "import { Component, Intent, BearerFetch, IntentType, Prop } from '@bearer/core';
 @Component({
-    tag: \\"overrides-decorator-full\\"
+    tag: \\"bearer-overrides-decorator-full\\"
 })
 class OverridesDecorarotFull {
     private fetcher: BearerFetch;
@@ -1348,7 +1347,7 @@ Object {
   "file": "overrides-decorator-less.1.tsx",
   "postContent": "import { Component, Prop } from '@bearer/core';
 @Component({
-    tag: \\"overrides-decorator-less\\"
+    tag: \\"bearer-overrides-decorator-less\\"
 })
 class OverridesDecorarorLess {
     constructor() {

@@ -9,10 +9,12 @@ const logger = debug.extend('gather-metadata')
 
 export default function gatherMetadata({ metadata }: TransformerOptions): ts.TransformerFactory<ts.SourceFile> {
   function getTagNames(tagName: string): { initialTagName: string; finalTagName: string } {
-    const finalTag =
-      metadata.prefix && metadata.suffix
-        ? [Case.kebab(metadata.prefix), Case.kebab(metadata.suffix), tagName].join('-')
-        : tagName
+    const parts = [Case.kebab(metadata.prefix) || 'bearer']
+    if (metadata.suffix) {
+      parts.push(Case.kebab(metadata.suffix))
+    }
+    parts.push(tagName)
+    const finalTag = parts.join('-')
     return {
       initialTagName: tagName,
       finalTagName: finalTag

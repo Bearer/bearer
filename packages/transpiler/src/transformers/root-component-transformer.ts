@@ -1,4 +1,3 @@
-import * as Case from 'case'
 import * as ts from 'typescript'
 
 import { Decorators } from '../constants'
@@ -16,19 +15,20 @@ export default function rootComponentTransformer({ metadata }: TransformerOption
         const decorators = node.decorators.map(decorator => {
           if (decoratorNamed(decorator, Decorators.RootComponent)) {
             const metadatum = metadata.components.find(component => component.classname === node.name.text)
-            const cssFileName = metadatum.name.charAt(0) + Case.camel(metadatum.name).substr(1)
             const shadowExp = getExpressionFromDecorator<ts.BooleanLiteral>(decorator, 'shadow')
+            const styleUrl = getExpressionFromDecorator<ts.StringLiteral>(decorator, 'styleUrl')
+            const options = [
+              ts.createPropertyAssignment('tag', ts.createStringLiteral(metadatum.finalTagName)),
+              ts.createPropertyAssignment('shadow', shadowExp || ts.createTrue())
+            ]
+            if (styleUrl) {
+              options.push(ts.createPropertyAssignment('styleUrl', ts.createStringLiteral(styleUrl.text)))
+            }
+
             return ts.updateDecorator(
               decorator,
               ts.createCall(ts.createIdentifier(Decorators.Component), undefined, [
-                ts.createObjectLiteral(
-                  [
-                    ts.createPropertyAssignment('tag', ts.createStringLiteral(metadatum.finalTagName)),
-                    ts.createPropertyAssignment('styleUrl', ts.createStringLiteral([cssFileName, 'css'].join('.'))),
-                    ts.createPropertyAssignment('shadow', shadowExp || ts.createTrue())
-                  ],
-                  true
-                )
+                ts.createObjectLiteral(options, true)
               ])
             )
           }

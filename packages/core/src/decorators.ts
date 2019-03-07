@@ -46,6 +46,7 @@ export declare const Component: IBearerComponentDecorator<any>
 
 export interface BearerRootComponentOptions extends Omit<d.ComponentOptions, 'tag'> {
   name: string
+  styleUrl?: string
   shadow?: boolean
 }
 
