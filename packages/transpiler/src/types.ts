@@ -50,7 +50,7 @@ export type SpecComponent = {
   classname: string
   isRoot: boolean
   initialTagName: string
-  group: string
+  name: string
   label: string
   input: any
   output: any
