@@ -78,6 +78,33 @@ const dictionnary = {
 bearer.i18n.load(null, dictionnary)
 ```
 
+### Secure
+
+If you want to add a level of security, you can switch to the secure mode:
+
+```js
+window.BEARER.secured = true
+```
+
+Once this mode is turned on, all your values passed in the properties need to be encrypted using your `ENCRYPTION_KEY`.
+
+#### CLI
+
+Within the CLI, you can use `bearer encrypt` to get the
+
+```js
+bearer encrypt ENCRYPTION_KEY MESSAGE
+```
+
+#### NodeJS
+
+```typescript
+import Cipher from '@bearer/security'
+
+const cipher = new Cipher(ENCRYPTION_KEY)
+cipher.encrypt(MESSAGE)
+```
+
 ### init options
 
 _Soon_
