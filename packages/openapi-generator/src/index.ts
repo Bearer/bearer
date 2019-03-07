@@ -100,7 +100,7 @@ function getFunctionAuthType(sym: ts.Symbol | undefined, node: ts.Node, checker:
  *  Convert single func types to json schema
  *  This function tries to find the relevant type definitions, Params and `action` method resposne type
  *  and converts the types to json-schema
- *  @param functionPath absolute path to intent
+ *  @param functionPath absolute path to function
  *  @param options compiler options
  */
 export function functionTypesToSchemaConverter(
@@ -167,14 +167,14 @@ export default function generator({
   integrationName: string
 }): string {
   const doc = topOfSpec(integrationName)
-  const schemas = functions.sort().reduce((acc, intent) => {
-    const functionPath = path.join(functionsDir, `${intent}.ts`)
+  const schemas = functions.sort().reduce((acc, func) => {
+    const functionPath = path.join(functionsDir, `${func}.ts`)
     const typeSchema = functionTypesToSchemaConverter(functionPath)
     return Object.assign(
       acc,
       specPath({
         integrationUuid,
-        functionName: intent,
+        functionName: func,
         response: { type: 'object', properties: typeSchema.response },
         requestBody: typeSchema.requestBody,
         oauth: typeSchema.functionAuthType === 'OAUTH2' || typeSchema.functionAuthType === 'OAUTH1'

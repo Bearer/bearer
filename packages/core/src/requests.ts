@@ -18,7 +18,7 @@ export type TBearerRequest<T> = (params: any, init?: any) => Promise<T>
 function getClientId(): string {
   const clientId = Bearer.config.clientId
   if (process.env.NODE_ENV !== 'production') {
-    logger('No clientId provided, intent')
+    logger('No clientId provided, function')
   }
   return clientId
 }

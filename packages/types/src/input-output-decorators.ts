@@ -42,7 +42,7 @@ export type TOutputDecoratorOptions = {
    */
   functionName: string
   /**
-   * Name of the key used to send the referenceId value to the intent
+   * Name of the key used to send the referenceId value to the function
    * default : referenceId
    */
   functionReferenceIdKeyName: string
@@ -60,7 +60,7 @@ export type TOutputDecoratorOptions = {
    */
   functionPropertyName: string
   /**
-   * Event name triggered when the data has been processed by the intent
+   * Event name triggered when the data has been processed by the function
    * default: [propertyName]Saved
    */
   eventName: string

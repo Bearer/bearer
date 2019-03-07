@@ -7,7 +7,7 @@ describe('logger', () => {
   })
 })
 
-describe('intent logger', () => {
+describe('function logger', () => {
   it('returns an func logger', () => {
     const logger = new BearerFunctionLogger({})
     expect(logger).toBeInstanceOf(BearerFunctionLogger)

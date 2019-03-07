@@ -13,7 +13,7 @@ describe('Bearer client', () => {
   })
 
   describe('#call', () => {
-    it('send request to the intent', async () => {
+    it('send request to the function', async () => {
       distantApi.mockClear()
       nock('https://int.bearer.sh', {
         reqheaders: {
@@ -34,7 +34,7 @@ describe('Bearer client', () => {
 describe('IntegrationClient', () => {
   const token = 'a-different-token'
   const anotherIntegrationName = 'integration-name'
-  type TIntegrationFunctionNames = 'intent-name' | 'other-intent'
+  type TIntegrationFunctionNames = 'function-name' | 'other-function'
   const client = new IntegrationClient<TIntegrationFunctionNames>(token, {}, anotherIntegrationName)
 
   it('creates a integration client', () => {
@@ -48,11 +48,11 @@ describe('IntegrationClient', () => {
         authorization: token
       }
     })
-      .post(`/api/v3/functions/backend/${anotherIntegrationName}/intent-name`)
+      .post(`/api/v3/functions/backend/${anotherIntegrationName}/function-name`)
       .query({ sponge: 'bob' })
       .reply(200, distantApi)
 
-    const { data } = await client.call('intent-name', { query: { sponge: 'bob' } })
+    const { data } = await client.call('function-name', { query: { sponge: 'bob' } })
 
     expect(distantApi).toHaveBeenCalled()
     expect(data).toEqual({ ok: 'ok' })
