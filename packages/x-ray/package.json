@@ -1,6 +1,6 @@
 {
   "name": "x-ray",
-  "version": "1.0.0",
+  "version": "0.100.0",
   "description": "Trace outgoing traffic inside the intent",
   "main": "index.js",
   "license": "MIT",
