@@ -1,5 +1,4 @@
 import debug from '@bearer/logger'
-import { captureHttps } from '@bearer/x-ray'
 import http from 'http'
 
 import * as d from '../declaration'
