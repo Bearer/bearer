@@ -1,5 +1,5 @@
 {
-  "name": "x-ray",
+  "name": "@bearer/x-ray",
   "version": "0.100.0",
   "description": "Trace outgoing traffic inside the intent",
   "main": "index.js",
