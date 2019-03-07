@@ -133,7 +133,6 @@ What's next?
 ,[90m    create: [39m[37m.bearer/init/new/OAUTH1/tsconfig.json[39m
 ,[90m    create: [39m[37m.bearer/init/new/OAUTH1/views/index.html[39m
 ,[90m    create: [39m[37m.bearer/init/new/OAUTH1/views/index.ts[39m
-,[90m    create: [39m[37m.bearer/init/new/OAUTH1/views/openapi.json[39m
 ,* read the bearer documentation at https://docs.bearer.sh
 
 ,* start your local development environement by running:
