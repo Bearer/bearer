@@ -2,7 +2,7 @@
 
 exports[`#functionTypeToSchemaConverter converts types to schemas for fetchDataApiKey.ts 1`] = `
 Object {
-  "intentAuthType": "APIKEY",
+  "functionAuthType": "APIKEY",
   "requestBody": Object {
     "properties": Object {
       "id": Object {
@@ -50,7 +50,7 @@ Object {
 
 exports[`#functionTypeToSchemaConverter converts types to schemas for fetchDataBasic.ts 1`] = `
 Object {
-  "intentAuthType": "BASIC",
+  "functionAuthType": "BASIC",
   "requestBody": Object {
     "properties": Object {
       "id": Object {
@@ -98,7 +98,7 @@ Object {
 
 exports[`#functionTypeToSchemaConverter converts types to schemas for fetchDataInlineType.ts 1`] = `
 Object {
-  "intentAuthType": "OAUTH2",
+  "functionAuthType": "OAUTH2",
   "requestBody": Object {
     "properties": Object {
       "pullRequests": Object {
@@ -143,7 +143,7 @@ Object {
 
 exports[`#functionTypeToSchemaConverter converts types to schemas for fetchDataNone.ts 1`] = `
 Object {
-  "intentAuthType": "NONE",
+  "functionAuthType": "NONE",
   "requestBody": Object {
     "properties": Object {
       "id": Object {
@@ -191,7 +191,7 @@ Object {
 
 exports[`#functionTypeToSchemaConverter converts types to schemas for fetchDataOauth2.ts 1`] = `
 Object {
-  "intentAuthType": "OAUTH2",
+  "functionAuthType": "OAUTH2",
   "requestBody": Object {
     "properties": Object {
       "id": Object {
@@ -239,7 +239,7 @@ Object {
 
 exports[`#functionTypeToSchemaConverter converts types to schemas for fetchDataRefType.ts 1`] = `
 Object {
-  "intentAuthType": "OAUTH2",
+  "functionAuthType": "OAUTH2",
   "requestBody": Object {
     "properties": Object {
       "reference": Object {
@@ -273,7 +273,7 @@ Object {
 
 exports[`#functionTypeToSchemaConverter converts types to schemas for fetchDataUndefined.ts 1`] = `
 Object {
-  "intentAuthType": undefined,
+  "functionAuthType": undefined,
   "requestBody": undefined,
   "response": Object {
     "data": undefined,
@@ -284,7 +284,7 @@ Object {
 
 exports[`#functionTypeToSchemaConverter converts types to schemas for saveState.ts 1`] = `
 Object {
-  "intentAuthType": "OAUTH1",
+  "functionAuthType": "OAUTH1",
   "requestBody": Object {
     "properties": Object {
       "pullRequests": Object {

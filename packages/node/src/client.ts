@@ -37,8 +37,8 @@ export class IntegrationClient<T = string> {
     this.bearerClient = new BearerClient<T>(token, clientOptions)
   }
 
-  public call(functionName: T, intentParams: TFunctionParams = defaultFunctionParams) {
-    return this.bearerClient.call(this.integrationName, functionName, intentParams)
+  public call(functionName: T, functionParams: TFunctionParams = defaultFunctionParams) {
+    return this.bearerClient.call(this.integrationName, functionName, functionParams)
   }
 }
 

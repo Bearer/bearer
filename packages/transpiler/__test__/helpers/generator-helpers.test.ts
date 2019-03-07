@@ -57,8 +57,8 @@ describe('createLoadResourceMethod', () => {
         typeIdentifier: ts.createIdentifier('SomeType'),
         propDeclarationName: 'a',
         functionMethodName: 'functionMethodName',
-        intentReferenceIdKeyName: 'aId',
-        intentArguments: [],
+        functionReferenceIdKeyName: 'aId',
+        functionArguments: [],
         loadMethodName: 'loadMethodName'
       },
       {
@@ -66,8 +66,8 @@ describe('createLoadResourceMethod', () => {
         typeIdentifier: ts.createIdentifier('SomeType'),
         propDeclarationName: 'b',
         functionMethodName: 'functionMethodName',
-        intentReferenceIdKeyName: 'bId',
-        intentArguments: [],
+        functionReferenceIdKeyName: 'bId',
+        functionArguments: [],
         loadMethodName: 'loadMethodName'
       },
       {
@@ -75,8 +75,8 @@ describe('createLoadResourceMethod', () => {
         typeIdentifier: ts.createIdentifier('SomeType'),
         propDeclarationName: 'propDeclarationName',
         functionMethodName: 'functionMethodName',
-        intentReferenceIdKeyName: 'intentReferenceIdKeyName',
-        intentArguments: ['a', 'b'],
+        functionReferenceIdKeyName: 'intentReferenceIdKeyName',
+        functionArguments: ['a', 'b'],
         loadMethodName: 'loadMethodName'
       }
     ]
@@ -86,8 +86,8 @@ describe('createLoadResourceMethod', () => {
       typeIdentifier: ts.createIdentifier('SomeType'),
       propDeclarationName: 'propDeclarationName',
       functionMethodName: 'functionMethodName',
-      intentReferenceIdKeyName: 'intentReferenceIdKeyName',
-      intentArguments: ['a', 'b'],
+      functionReferenceIdKeyName: 'intentReferenceIdKeyName',
+      functionArguments: ['a', 'b'],
       loadMethodName: 'loadMethodName'
     }
     expect(runTransformers(code, [dummyTransformer(createLoadResourceMethod, meta, metaCollection)])).toMatchSnapshot()

@@ -1,4 +1,4 @@
-import { intentRequest } from '../requests'
+import { functionRequest } from '../requests'
 
 /**
  * Declarations
@@ -55,7 +55,7 @@ export function Function(functionName: string, type: FunctionType = FunctionType
           return missingIntegrationId()
         }
 
-        const func = intentRequest<TFetchBearerResult>({
+        const func = functionRequest<TFetchBearerResult>({
           functionName,
           integrationId,
           [setupId]: params[setupId] || retrieveSetupId(target)
@@ -70,7 +70,7 @@ export function Function(functionName: string, type: FunctionType = FunctionType
         const init = { method: 'POST', body: JSON.stringify(body || {}) }
 
         // Build promise
-        return intentPromise(func(query, init))
+        return functionPromise(func(query, init))
       }
     }
 
@@ -78,7 +78,7 @@ export function Function(functionName: string, type: FunctionType = FunctionType
   }
 }
 
-export function intentPromise(promise: Promise<TFetchBearerResult>): Promise<TFetchBearerData> {
+export function functionPromise(promise: Promise<TFetchBearerResult>): Promise<TFetchBearerData> {
   return new Promise((resolve, reject) => {
     promise
       .then((payload: TFetchBearerResult) => {

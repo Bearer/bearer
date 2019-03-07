@@ -32,11 +32,11 @@ class NoOptionsComponent {
   @Input({
     group: 'other-group',
     propertyReferenceIdName: 'patrick',
-    intentReferenceIdKeyName: 'intentReferenceIdKeyNameOption',
+    functionReferenceIdKeyName: 'intentReferenceIdKeyNameOption',
     eventName: 'patrickWasKilled',
     functionName: 'killPatrick',
     autoLoad: false,
-    intentArguments: ['farmer', 'spongeBobOverrided', 'authId']
+    functionArguments: ['farmer', 'spongeBobOverrided', 'authId']
   })
   spongeBob: BearerRef<Sponge>
 

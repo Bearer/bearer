@@ -22,7 +22,7 @@ export function createFetcher(meta: CreateFetcherMeta) {
 }
 
 function propertyReferenceIdNames(meta: TCreateLoadResourceMethod, metaCollection: TCreateLoadResourceMethod[]) {
-  return meta.intentArguments.map(name => {
+  return meta.functionArguments.map(name => {
     const metaInfo = metaCollection.find(meta => meta.propDeclarationName === name)
     if (metaInfo) {
       return ts.createPropertyAssignment(
@@ -38,10 +38,10 @@ export function createLoadResourceMethod(
   meta: TCreateLoadResourceMethod,
   metaCollection: TCreateLoadResourceMethod[] = []
 ) {
-  const intentCall = ts.createCall(ts.createPropertyAccess(ts.createThis(), meta.functionMethodName), undefined, [
+  const functionCall = ts.createCall(ts.createPropertyAccess(ts.createThis(), meta.functionMethodName), undefined, [
     ts.createObjectLiteral([
       ts.createPropertyAssignment(
-        meta.intentReferenceIdKeyName,
+        meta.functionReferenceIdKeyName,
         ts.createPropertyAccess(ts.createThis(), meta.propertyReferenceIdName)
       ),
       ...propertyReferenceIdNames(meta, metaCollection)
@@ -83,7 +83,7 @@ export function createLoadResourceMethod(
       true
     )
   )
-  const promiseHandler = ts.createCall(ts.createPropertyAccess(intentCall, 'then'), undefined, [udapteState])
+  const promiseHandler = ts.createCall(ts.createPropertyAccess(functionCall, 'then'), undefined, [udapteState])
   return ts.createProperty(
     undefined,
     undefined,

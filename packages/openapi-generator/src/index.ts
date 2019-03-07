@@ -5,7 +5,7 @@ import { topOfSpec, specPath } from './openapi-template'
 import { convertType } from './convert-type'
 
 export const FUNCTION_ACTION = 'action'
-type TOutput = { requestBody: any; response: any; intentAuthType?: string }
+type TOutput = { requestBody: any; response: any; functionAuthType?: string }
 
 /**
  * find action method in class and return relevant node
@@ -100,15 +100,15 @@ function getFunctionAuthType(sym: ts.Symbol | undefined, node: ts.Node, checker:
  *  Convert single func types to json schema
  *  This function tries to find the relevant type definitions, Params and `action` method resposne type
  *  and converts the types to json-schema
- *  @param intentPath absolute path to intent
+ *  @param functionPath absolute path to intent
  *  @param options compiler options
  */
 export function functionTypesToSchemaConverter(
-  intentPath: string,
+  functionPath: string,
   options: ts.CompilerOptions = { target: ts.ScriptTarget.ES5, module: ts.ModuleKind.CommonJS }
 ): TOutput {
-  const program = ts.createProgram([intentPath], options)
-  const sourceFile = program.getSourceFile(intentPath)
+  const program = ts.createProgram([functionPath], options)
+  const sourceFile = program.getSourceFile(functionPath)
   const checker = program.getTypeChecker()
 
   const output: TOutput = {
@@ -135,7 +135,7 @@ export function functionTypesToSchemaConverter(
         const sym = checker.getSymbolAtLocation(parameterNode.name)
         output.requestBody = serializeParameters(sym, parameterNode, checker)
         output.response = serializeBody(actionMethodNode, checker)
-        output.intentAuthType = getFunctionAuthType(sym, parameterNode, checker)
+        output.functionAuthType = getFunctionAuthType(sym, parameterNode, checker)
       }
     }
   }
@@ -168,8 +168,8 @@ export default function generator({
 }): string {
   const doc = topOfSpec(integrationName)
   const schemas = functions.sort().reduce((acc, intent) => {
-    const intentPath = path.join(functionsDir, `${intent}.ts`)
-    const typeSchema = functionTypesToSchemaConverter(intentPath)
+    const functionPath = path.join(functionsDir, `${intent}.ts`)
+    const typeSchema = functionTypesToSchemaConverter(functionPath)
     return Object.assign(
       acc,
       specPath({
@@ -177,7 +177,7 @@ export default function generator({
         functionName: intent,
         response: { type: 'object', properties: typeSchema.response },
         requestBody: typeSchema.requestBody,
-        oauth: typeSchema.intentAuthType === 'OAUTH2' || typeSchema.intentAuthType === 'OAUTH1'
+        oauth: typeSchema.functionAuthType === 'OAUTH2' || typeSchema.intentAuthType === 'OAUTH1'
       })
     )
   }, {})

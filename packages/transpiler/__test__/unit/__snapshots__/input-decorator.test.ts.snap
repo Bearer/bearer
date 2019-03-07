@@ -31,11 +31,11 @@ class NoOptionsComponent {
     @Input({
         group: 'other-group',
         propertyReferenceIdName: 'patrick',
-        intentReferenceIdKeyName: 'intentReferenceIdKeyNameOption',
+        functionReferenceIdKeyName: 'intentReferenceIdKeyNameOption',
         eventName: 'patrickWasKilled',
         functionName: 'killPatrick',
         autoLoad: false,
-        intentArguments: ['farmer', 'spongeBobOverrided', 'authId']
+        functionArguments: ['farmer', 'spongeBobOverrided', 'authId']
     })
     spongeBob: BearerRef<Sponge>;
     @Input({
@@ -247,7 +247,7 @@ class NoOptionsComponent {
         }
     }
     _loadSpongeBob = () => {
-        this.fetcherRetrieveSpongeBob({ intentReferenceIdKeyNameOption: this.patrick, farmerId: this.farmerId, spongeBobOverridedId: this.refNotOverrided, authId: this.authId }).then(({ data }: {
+        this.fetcherRetrieveSpongeBob({ functionReferenceIdKeyNameOption: this.patrick, farmerId: this.farmerId, spongeBobOverridedId: this.refNotOverrided, authId: this.authId }).then(({ data }: {
             data: BearerRef<Sponge>;
         }) => {
             if (data) {

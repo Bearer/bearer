@@ -12,7 +12,7 @@ const NON_FUNCTION_NAMES = ['DBClient']
 const FUNCTION_NAMES = Object.keys(functions).filter(functionName => !NON_FUNCTION_NAMES.includes(functionName))
 const FUNCTION_TYPE_IDENTIFIER = 'functionType'
 
-const intentEntries: IFunctionEntry[] = []
+const functionEntries: IFunctionEntry[] = []
 
 function bodySchema(tsType: ts.ClassDeclaration, generator: TJS.JsonSchemaGenerator): TJS.Definition {
   return {}
@@ -129,7 +129,7 @@ export function transformer(generator: TJS.JsonSchemaGenerator): ts.TransformerF
             tsNode as ts.ClassDeclaration,
             generator
           )
-          intentEntries.push(adapter.adapt)
+          functionEntries.push(adapter.adapt)
         }
         return tsNode
       }
@@ -196,7 +196,7 @@ export class OpenApiSpecGenerator {
       ts.transform(sourceFile, [transformer(generator)])
     })
     return specGenerator({
-      functions: intentEntries.map(entry => entry.functionName),
+      functions: functionEntries.map(entry => entry.functionName),
       functionsDir: this.srcFunctionsDir,
       integrationUuid: this.bearerConfig.integrationUuid,
       integrationName: this.bearerConfig.integrationTitle || ''

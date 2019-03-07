@@ -552,7 +552,7 @@ export class AttachPullRequestAction {
     shortPandaId: string;
     @Watch(\\"manualpropertyWatchedName\\")
     spongeBobdSavedWatcher(newValue) {
-        this.manualFunctionName({ body: { manuaLFunctionPropertyName: newValue }, manualintentReferenceIdKeyName: this.shortPandaId }).then(({ referenceId: manualreferenceKeyName, data }) => {
+        this.manualFunctionName({ body: { manuaLFunctionPropertyName: newValue }, manualfunctionReferenceIdKeyName: this.shortPandaId }).then(({ referenceId: manualreferenceKeyName, data }) => {
             this.spongeBobdSaved.emit({ manualreferenceKeyName, shortPanda: data || this.shortPanda });
             this.shortPandaId = manualreferenceKeyName;
         });
@@ -560,7 +560,7 @@ export class AttachPullRequestAction {
     }
     private fetcherRetrieveShortPanda;
     _loadShortPanda = () => {
-        this.fetcherRetrieveShortPanda({ manualintentReferenceIdKeyName: this.shortPandaId }).then(({ data }: {
+        this.fetcherRetrieveShortPanda({ manualfunctionReferenceIdKeyName: this.shortPandaId }).then(({ data }: {
             data: BearerRef<{
                 inlineName: string;
             }>;

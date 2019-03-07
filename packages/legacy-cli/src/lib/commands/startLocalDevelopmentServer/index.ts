@@ -71,19 +71,19 @@ export default function startLocalDevelopmentServer(
 
       router.post(
         `v3/functions/${config.integrationUuid}/:functionName`,
-        intentHandler(distPath, devFunctionsContext, bearerBaseURL),
+        functionHandler(distPath, devFunctionsContext, bearerBaseURL),
         (ctx, _next) => ctx.ok(ctx.funcDatum)
       )
 
       router.post(
         `v2/functions/${config.integrationUuid}/:functionName`,
-        intentHandler(distPath, devFunctionsContext, bearerBaseURL),
+        functionHandler(distPath, devFunctionsContext, bearerBaseURL),
         (ctx, _next) => ctx.ok(ctx.funcDatum)
       )
 
       router.all(
         `v1/${config.integrationUuid}/:functionName`,
-        intentHandler(distPath, devFunctionsContext, bearerBaseURL),
+        functionHandler(distPath, devFunctionsContext, bearerBaseURL),
         (ctx, _next) => ctx.ok(ctx.funcDatum)
       )
 
@@ -111,7 +111,7 @@ export default function startLocalDevelopmentServer(
   })
 }
 
-const intentHandler = (distPath: string, devFunctionsContext, bearerBaseURL: string) => async (ctx, next) =>
+const functionHandler = (distPath: string, devFunctionsContext, bearerBaseURL: string) => async (ctx, next) =>
   new Promise(async (resolve, _reject) => {
     try {
       const func = requireUncached(`${distPath}/${ctx.params.functionName}`).default

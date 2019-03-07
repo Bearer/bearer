@@ -244,12 +244,12 @@ function createFunctionCall(meta: OutputMeta) {
           ts.createPropertyAssignment(
             'body',
             ts.createObjectLiteral([
-              ts.createPropertyAssignment(meta.intentPropertyName, ts.createIdentifier(newValue))
+              ts.createPropertyAssignment(meta.functionPropertyName, ts.createIdentifier(newValue))
             ])
           ),
           ts.createPropertyAssignment(
-            meta.intentReferenceIdKeyName,
-            ts.createPropertyAccess(ts.createThis(), meta.intentReferenceIdValue || meta.propDeclarationNameRefId)
+            meta.functionReferenceIdKeyName,
+            ts.createPropertyAccess(ts.createThis(), meta.functionReferenceIdValue || meta.propDeclarationNameRefId)
           )
         ])
       ]),
@@ -346,31 +346,31 @@ export function retrieveOutputsMetas(
               ...extractStringOptions<TOutputDecoratorOptions>(callArgs, [
                 'eventName',
                 'functionName',
-                'intentPropertyName',
+                'functionPropertyName',
                 'propertyWatchedName',
                 'referenceKeyName',
-                'intentReferenceIdValue',
-                'intentReferenceIdKeyName'
+                'functionReferenceIdValue',
+                'functionReferenceIdKeyName'
               ]),
-              ...extractArrayOptions<{ intentArguments: string[] }>(callArgs, ['intentArguments']),
+              ...extractArrayOptions<{ functionArguments: string[] }>(callArgs, ['intentArguments']),
               ...extractBooleanOptions<TOutputDecoratorOptions>(callArgs, ['autoLoad'])
             }
         outputs.push({
           eventName: outputEventName(name),
           functionName: saveFunctionName(name),
           functionMethodName: retrieveFetcherName(name),
-          intentPropertyName: name,
+          functionPropertyName: name,
           propDeclarationName: name,
           propDeclarationNameRefId: refIdName(name),
           loadMethodName: loadName(name),
-          intentReferenceIdKeyName: Properties.ReferenceId,
+          functionReferenceIdKeyName: Properties.ReferenceId,
           typeIdentifier: tsNode.type,
           initializer: tsNode.initializer,
           referenceKeyName: Properties.ReferenceId,
           propertyWatchedName: name,
           propertyReferenceIdName: refIdName(name),
           autoLoad: true,
-          intentArguments: [],
+          functionArguments: [],
           ...options
         })
       }

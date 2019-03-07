@@ -81,9 +81,9 @@ export type TCreateLoadResourceMethod = {
   typeIdentifier?: ts.TypeNode
   propDeclarationName: string
   functionMethodName: string
-  intentReferenceIdKeyName: string
+  functionReferenceIdKeyName: string
   loadMethodName: string
-  intentArguments?: string[]
+  functionArguments?: string[]
 }
 
 export type TCreateLoadDataCall = {

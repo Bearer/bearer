@@ -68,7 +68,7 @@ type TFunctionBaseQuery = {
   setupId: string
 }
 
-export function intentRequest<TReturnFormat>({
+export function functionRequest<TReturnFormat>({
   functionName,
   integrationId,
   setupId
@@ -77,6 +77,6 @@ export function intentRequest<TReturnFormat>({
 }
 
 export default {
-  intentRequest,
+  functionRequest,
   itemRequest
 }

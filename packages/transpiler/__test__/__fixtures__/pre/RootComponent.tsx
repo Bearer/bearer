@@ -49,8 +49,8 @@ export class AttachPullRequestAction {
 
   @Output({
     functionName: 'manualFunctionName',
-    intentReferenceIdKeyName: 'manualintentReferenceIdKeyName',
-    intentPropertyName: 'manuaLFunctionPropertyName',
+    functionReferenceIdKeyName: 'manualintentReferenceIdKeyName',
+    functionPropertyName: 'manuaLFunctionPropertyName',
     eventName: 'spongeBobdSaved',
     propertyWatchedName: 'manualpropertyWatchedName',
     referenceKeyName: 'manualreferenceKeyName'

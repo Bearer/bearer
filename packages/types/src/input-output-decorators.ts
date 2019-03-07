@@ -15,7 +15,7 @@ export type TInputDecoratorOptions = {
   /**
    * Name of the key used to send referenceId to the func (as query parameter)
    */
-  intentReferenceIdKeyName: string
+  functionReferenceIdKeyName: string
   /**
    * Function to retrieve data from
    */
@@ -23,7 +23,7 @@ export type TInputDecoratorOptions = {
   /**
    * Function arguments
    */
-  intentArguments: string[]
+  functionArguments: string[]
   /**
    * Autoload data when component mounted
    * default: true
@@ -45,20 +45,20 @@ export type TOutputDecoratorOptions = {
    * Name of the key used to send the referenceId value to the intent
    * default : referenceId
    */
-  intentReferenceIdKeyName: string
+  functionReferenceIdKeyName: string
   /**
-   * Name of property used to populate the func intentReferenceIdKeyName param
+   * Name of property used to populate the func functionReferenceIdKeyName param
    */
-  intentReferenceIdValue?: string
+  functionReferenceIdValue?: string
   /**
    * Function arguments
    */
-  intentArguments: string[]
+  functionArguments: string[]
   /**
    * Name of the key name used to send the data to the func (in the body)
    * default: [propertyName]
    */
-  intentPropertyName: string
+  functionPropertyName: string
   /**
    * Event name triggered when the data has been processed by the intent
    * default: [propertyName]Saved

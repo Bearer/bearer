@@ -239,8 +239,8 @@ export function retrieveInputsMetas(
           typeIdentifier: tsNode.type,
           intializer: tsNode.initializer,
           watcherName: _watchName(name),
-          intentReferenceIdKeyName: Properties.ReferenceId,
-          intentArguments: [],
+          functionReferenceIdKeyName: Properties.ReferenceId,
+          functionArguments: [],
           ...options
         })
       }
@@ -262,9 +262,9 @@ function extractInputOptions(decorator: ts.Decorator): Partial<TInputDecoratorOp
           'eventName',
           'functionName',
           'propertyReferenceIdName',
-          'intentReferenceIdKeyName'
+          'functionReferenceIdKeyName'
         ]),
-        ...extractArrayOptions<{ intentArguments: string[] }>(callArgs, ['intentArguments']),
+        ...extractArrayOptions<{ functionArguments: string[] }>(callArgs, ['intentArguments']),
         ...extractBooleanOptions<TInputDecoratorOptions>(callArgs, ['autoLoad'])
       }
 }

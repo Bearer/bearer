@@ -34,10 +34,10 @@ class NoOptionsComponent {
     propertyWatchedName: 'aPanda',
     referenceKeyName: 'aPandaKey',
     functionName: 'milkWithAbottle',
-    intentReferenceIdKeyName: 'anotherProp',
-    intentReferenceIdValue: 'intentReferenceIdValueValue',
-    intentArguments: ['farmer', 'spongeBobOverrided', 'authId'],
-    intentPropertyName: 'intentPropertyNameOption',
+    functionReferenceIdKeyName: 'anotherProp',
+    functionReferenceIdValue: 'intentReferenceIdValueValue',
+    functionArguments: ['farmer', 'spongeBobOverrided', 'authId'],
+    functionPropertyName: 'intentPropertyNameOption',
     autoLoad: false
   })
   farmerAndPanda: BearerRef<Farmer> = {}

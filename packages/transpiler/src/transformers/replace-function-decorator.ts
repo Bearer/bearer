@@ -123,7 +123,7 @@ export default function componentTransformer({  }: TransformerOptions = {}): ts.
       node: ts.ConstructorDeclaration,
       registeredFunctions: ts.PropertyDeclaration[]
     ): ts.Node {
-      const intentCalls: ts.Statement[] = registeredFunctions.map((intent: ts.PropertyDeclaration) => {
+      const functionCalls: ts.Statement[] = registeredFunctions.map((intent: ts.PropertyDeclaration) => {
         const call: ts.CallExpression = intent.decorators[0].expression as ts.CallExpression
         return ts.createStatement(
           ts.createCall(
@@ -138,7 +138,7 @@ export default function componentTransformer({  }: TransformerOptions = {}): ts.
         node.decorators,
         node.modifiers,
         node.parameters,
-        ts.createBlock([...node.body.statements, ...intentCalls], true)
+        ts.createBlock([...node.body.statements, ...functionCalls], true)
       )
     }
   }
