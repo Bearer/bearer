@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "target": "es6",
+    "module": "es6",
+    "strict": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "outDir": "lib/",
+    "declaration": true
+  },
+  "extends": "@bearer/tsconfig",
+  "include": ["src"]
+}
