@@ -47,6 +47,9 @@
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
     }
   },
+  "files": [
+    "/lib"
+  ],
   "scripts": {
     "start": "tsc --watch",
     "build": "tsc -p tsconfig.json",
