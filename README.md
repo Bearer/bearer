@@ -7,7 +7,7 @@ This repository contains
 - [@bearer/cli](./packages/cli)
 - [@bearer/core](./packages/core)
 - [create-bearer](./packages/create-bearer)
-- [@bearer/intents](./packages/intents)
+- [@bearer/functions](./packages/functions)
 - [@bearer/bearer-cli](./packages/legacy-cli)
 - [@bearer/logger](./packages/logger)
 - [@bearer/node](./packages/node)
@@ -29,8 +29,8 @@ Mac Users:
 ```bash
 brew install nvm
 ```
-*Follow carefully post install instructions*
 
+_Follow carefully post install instructions_
 
 **Install correct node version**
 

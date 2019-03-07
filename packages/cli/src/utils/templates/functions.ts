@@ -16,6 +16,6 @@ function getVars(name: string, authType: Authentications, functionType: Function
     authType,
     functionType,
     fileName: name,
-    intentClassName: Case.pascal(name)
+    functionClassName: Case.pascal(name)
   }
 }

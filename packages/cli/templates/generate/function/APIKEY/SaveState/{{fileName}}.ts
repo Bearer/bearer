@@ -2,7 +2,7 @@ import { TAPIKEYAuthContext, SaveState, TSaveActionEvent, TSavePromise } from '@
 // Uncomment this line if you need to use Client
 // import Client from './client'
 
-export default class {{intentClassName}}Function extends SaveState implements SaveState<State, ReturnedData, any, TAPIKEYAuthContext> {
+export default class {{functionClassName}}Function extends SaveState implements SaveState<State, ReturnedData, any, TAPIKEYAuthContext> {
   async action(event: TSaveActionEvent<State, Params, TAPIKEYAuthContext>): TSavePromise<State, ReturnedData> {
     // const token = event.context.authAccess.apiKey
     // Put your logic here

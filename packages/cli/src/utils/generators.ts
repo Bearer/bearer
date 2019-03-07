@@ -26,7 +26,7 @@ class FunctionNodeAdapter implements IFunctionEntry {
     private readonly generator: TJS.JsonSchemaGenerator
   ) {}
 
-  get intentClassName() {
+  get functionClassName() {
     return getIdentifier(this.node).escapedText.toString()
   }
 
@@ -66,7 +66,7 @@ class FunctionNodeAdapter implements IFunctionEntry {
 
   get adapt(): IFunctionEntry {
     return {
-      intentClassName: this.intentClassName,
+      functionClassName: this.functionClassName,
       functionName: this.functionName,
       functionType: this.functionType,
       paramsSchema: this.paramsSchema,
@@ -272,7 +272,7 @@ type TResponse = {
 }
 
 interface IFunctionEntry {
-  intentClassName: string
+  functionClassName: string
   functionType: string
   functionName: string
   paramsSchema: ISchemaParam[]
