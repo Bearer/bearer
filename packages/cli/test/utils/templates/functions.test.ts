@@ -1,7 +1,7 @@
 import * as ts from 'typescript'
 import * as fs from 'fs-extra'
 
-import { Authentications } from '@bearer/types/lib/authentications';
+import { Authentications } from '@bearer/types/lib/authentications'
 import FunctionType from '@bearer/types/lib/intent-types'
 
 import * as path from 'path'
@@ -12,7 +12,7 @@ const destination = path.join(__dirname, '../../../.bearer/generated-intents')
 
 describe('intents generator', () => {
   beforeAll(() => {
-    if(fs.existsSync(destination)){
+    if (fs.existsSync(destination)) {
       fs.emptyDirSync(destination)
     }
   })
@@ -26,7 +26,7 @@ describe('intents generator', () => {
         const command = { silent: true, locator: { srcFunctionsDir: destination } }
         files = await generateFunction(command as any, auth, intentType, `${auth}-${intentType}-Function`)
         const options = ts.convertCompilerOptionsFromJson(compilerOptions, 'ok')
-        const program = ts.createProgram(files, { ...options.options, noEmit: true });
+        const program = ts.createProgram(files, { ...options.options, noEmit: true })
         const emitResult = program.emit()
         diagnostics = ts.getPreEmitDiagnostics(program).concat(emitResult.diagnostics)
       })

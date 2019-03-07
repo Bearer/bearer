@@ -30,7 +30,10 @@ export default class BuildFunctions extends BaseCommand {
       {
         title: 'Generate intents',
         task: async (ctx: any, _task: any) => {
-          ctx.files = await this.transpile(this.locator.srcFunctionsDir, this.locator.buildFunctionsResourcePath('dist'))
+          ctx.files = await this.transpile(
+            this.locator.srcFunctionsDir,
+            this.locator.buildFunctionsResourcePath('dist')
+          )
         }
       },
       {
