@@ -40,20 +40,21 @@ USAGE
 # Commands
 
 <!-- commands -->
+
 <<<<<<< HEAD
 
 - [`bearer autocomplete [SHELL]`](#bearer-autocomplete-shell)
 - [`bearer generate`](#bearer-generate)
 - [`bearer generate:component [NAME]`](#bearer-generatecomponent-name)
-- [`bearer generate:intent [NAME]`](#bearer-generateintent-name)
+- [`bearer generate:function [NAME]`](#bearer-generateintent-name)
 - [`bearer help [COMMAND]`](#bearer-help-command)
 - [`bearer invoke FUNCTION_NAME`](#bearer-invoke-intent-name)
 - [`bearer link INTEGRATION_IDENTIFIER`](#bearer-link-integration-identifier)
 - [`bearer login`](#bearer-login)
 - [`bearer new [INTEGRATIONNAME]`](#bearer-new-integrationname)
 - [`bearer push`](#bearer-push)
-- [`bearer start`](#bearer-start)
-=======
+- # [`bearer start`](#bearer-start)
+
 * [`bearer autocomplete [SHELL]`](#bearer-autocomplete-shell)
 * [`bearer generate`](#bearer-generate)
 * [`bearer generate:component [NAME]`](#bearer-generatecomponent-name)
@@ -65,7 +66,7 @@ USAGE
 * [`bearer new [INTEGRATIONNAME]`](#bearer-new-integrationname)
 * [`bearer push`](#bearer-push)
 * [`bearer start`](#bearer-start)
->>>>>>> docs: rename intent to functions
+  > > > > > > > docs: rename intent to functions
 
 ## `bearer autocomplete [SHELL]`
 

@@ -7,7 +7,7 @@ describe('Generate', () => {
   let bearerPath: string
   let result: string[]
 
-  describe.each(Object.values(Authentications))(`%s - generate:intent`, authType => {
+  describe.each(Object.values(Authentications))(`%s - generate:function`, authType => {
     beforeAll(() => {
       result = []
       jest.spyOn(process.stdout, 'write').mockImplementation(val => result.push(val))
