@@ -41,8 +41,8 @@ export function bearerRequest<TPromiseReturn>(uri: string, baseParams = {}): TBe
           const uri = `${url}?${query.join('&')}`
           fetch
             .apply(null, [uri, { ...defaultInit, ...init }])
-            .then(response => {
-              const data = response.json()
+            .then(async response => {
+              const data = await response.json()
               if (response.status > 399) {
                 logger('failing request %j', data)
                 reject(data)
