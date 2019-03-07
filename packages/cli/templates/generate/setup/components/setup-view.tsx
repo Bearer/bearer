@@ -6,9 +6,9 @@ import { RootComponent } from "@bearer/core";
 import "@bearer/ui";
 
 @RootComponent({
-  name: 'setup-display',
+  name: 'setup-view',
 })
-export class SetupDisplay {
+export class SetupView {
   render() {
     return (
       <bearer-setup-display scenarioId="BEARER_SCENARIO_ID" setupId={(this as any).setupId} />
