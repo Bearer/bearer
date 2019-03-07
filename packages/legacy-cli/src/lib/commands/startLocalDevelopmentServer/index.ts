@@ -70,13 +70,13 @@ export default function startLocalDevelopmentServer(
       process.env.bearerBaseURL = bearerBaseURL
 
       router.post(
-        `v3/intents/${config.integrationUuid}/:intentName`,
+        `v3/functions/${config.integrationUuid}/:intentName`,
         intentHandler(distPath, devFunctionsContext, bearerBaseURL),
         (ctx, _next) => ctx.ok(ctx.intentDatum)
       )
 
       router.post(
-        `v2/intents/${config.integrationUuid}/:intentName`,
+        `v2/functions/${config.integrationUuid}/:intentName`,
         intentHandler(distPath, devFunctionsContext, bearerBaseURL),
         (ctx, _next) => ctx.ok(ctx.intentDatum)
       )

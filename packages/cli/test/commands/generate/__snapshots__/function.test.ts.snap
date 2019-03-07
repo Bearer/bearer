@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Generate APIKEY - generate:intent Fetch func 1`] = `
-"import { TAPIKEYAuthContext, FetchData, TFetchActionEvent, TFetchPromise } from '@bearer/intents'
+"import { TAPIKEYAuthContext, FetchData, TFetchActionEvent, TFetchPromise } from '@bearer/functions'
 // Uncomment this line if you need to use Client
 // import Client from './client'
 
@@ -27,7 +27,7 @@ export type ReturnedData = {
 `;
 
 exports[`Generate APIKEY - generate:intent Save func 1`] = `
-"import { TAPIKEYAuthContext, SaveState, TSaveActionEvent, TSavePromise } from '@bearer/intents'
+"import { TAPIKEYAuthContext, SaveState, TSaveActionEvent, TSavePromise } from '@bearer/functions'
 // Uncomment this line if you need to use Client
 // import Client from './client'
 
@@ -57,7 +57,7 @@ export type ReturnedData = {
 `;
 
 exports[`Generate BASIC - generate:intent Fetch func 1`] = `
-"import { TBASICAuthContext, FetchData, TFetchActionEvent, TFetchPromise } from '@bearer/intents'
+"import { TBASICAuthContext, FetchData, TFetchActionEvent, TFetchPromise } from '@bearer/functions'
 // Uncomment this line if you need to use Client
 // import Client from './client'
 
@@ -83,7 +83,7 @@ export type ReturnedData = {
 `;
 
 exports[`Generate BASIC - generate:intent Save func 1`] = `
-"import { TBASICAuthContext, SaveState, TSaveActionEvent, TSavePromise } from '@bearer/intents'
+"import { TBASICAuthContext, SaveState, TSaveActionEvent, TSavePromise } from '@bearer/functions'
 // Uncomment this line if you need to use Client
 // import Client from './client'
 
@@ -113,7 +113,7 @@ export type ReturnedData = {
 `;
 
 exports[`Generate NONE - generate:intent Fetch func 1`] = `
-"import { FetchData, TFetchActionEvent, TFetchPromise } from '@bearer/intents'
+"import { FetchData, TFetchActionEvent, TFetchPromise } from '@bearer/functions'
 // Uncomment this line if you need to use Client
 // import Client from './client'
 
@@ -138,7 +138,7 @@ export type ReturnedData = {
 `;
 
 exports[`Generate NONE - generate:intent Save func 1`] = `
-"import { SaveState, TSaveActionEvent, TSavePromise } from '@bearer/intents'
+"import { SaveState, TSaveActionEvent, TSavePromise } from '@bearer/functions'
 // Uncomment this line if you need to use Client
 // import Client from './client'
 
@@ -168,7 +168,7 @@ export type ReturnedData = {
 `;
 
 exports[`Generate OAUTH1 - generate:intent Fetch func 1`] = `
-"import { TOAUTH1AuthContext, FetchData, TFetchActionEvent, TFetchPromise } from '@bearer/intents'
+"import { TOAUTH1AuthContext, FetchData, TFetchActionEvent, TFetchPromise } from '@bearer/functions'
 // Uncomment this line if you need to use Client
 // import Client from './client'
 
@@ -193,7 +193,7 @@ export type ReturnedData = {
 `;
 
 exports[`Generate OAUTH1 - generate:intent Save func 1`] = `
-"import { TOAUTH1AuthContext, SaveState, TSaveActionEvent, TSavePromise } from '@bearer/intents'
+"import { TOAUTH1AuthContext, SaveState, TSaveActionEvent, TSavePromise } from '@bearer/functions'
 // Uncomment this line if you need to use Client
 // import Client from './client'
 
@@ -222,7 +222,7 @@ export type ReturnedData = {
 `;
 
 exports[`Generate OAUTH2 - generate:intent Fetch func 1`] = `
-"import { TOAUTH2AuthContext, FetchData, TFetchActionEvent, TFetchPromise } from '@bearer/intents'
+"import { TOAUTH2AuthContext, FetchData, TFetchActionEvent, TFetchPromise } from '@bearer/functions'
 // Uncomment this line if you need to use Client
 // import Client from './client'
 
@@ -248,7 +248,7 @@ export type ReturnedData = {
 `;
 
 exports[`Generate OAUTH2 - generate:intent Save func 1`] = `
-"import { TOAUTH2AuthContext, SaveState, TSaveActionEvent, TSavePromise } from '@bearer/intents'
+"import { TOAUTH2AuthContext, SaveState, TSaveActionEvent, TSavePromise } from '@bearer/functions'
 // Uncomment this line if you need to use Client
 // import Client from './client'
 

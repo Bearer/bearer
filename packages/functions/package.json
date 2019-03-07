@@ -1,5 +1,5 @@
 {
-  "name": "@bearer/intents",
+  "name": "@bearer/functions",
   "version": "0.100.0",
   "description": "Bearer Functions",
   "main": "lib/index.js",
@@ -7,7 +7,7 @@
   "author": "Bearer Team<engineering@bearer.sh>",
   "license": "MIT",
   "repository": "Bearer/bearer",
-  "homepage": "https://github.com/Bearer/bearer/packages/intents#readme",
+  "homepage": "https://github.com/Bearer/bearer/packages/functions#readme",
   "files": [
     "lib/"
   ],

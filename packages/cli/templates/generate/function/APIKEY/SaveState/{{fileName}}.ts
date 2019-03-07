@@ -1,4 +1,4 @@
-import { TAPIKEYAuthContext, SaveState, TSaveActionEvent, TSavePromise } from '@bearer/intents'
+import { TAPIKEYAuthContext, SaveState, TSaveActionEvent, TSavePromise } from '@bearer/functions'
 // Uncomment this line if you need to use Client
 // import Client from './client'
 

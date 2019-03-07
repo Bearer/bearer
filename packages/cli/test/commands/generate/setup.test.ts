@@ -49,8 +49,8 @@ describe('generate:setup', () => {
       expect(readFile(bearerPath, 'views', 'setup-action.tsx')).toMatchSnapshot()
       expect(readFile(bearerPath, 'views', 'setup-view.tsx')).toMatchSnapshot()
 
-      expect(readFile(bearerPath, 'intents', 'saveSetup.ts')).toMatchSnapshot()
-      expect(readFile(bearerPath, 'intents', 'retrieveSetup.ts')).toMatchSnapshot()
+      expect(readFile(bearerPath, 'functions', 'saveSetup.ts')).toMatchSnapshot()
+      expect(readFile(bearerPath, 'functions', 'retrieveSetup.ts')).toMatchSnapshot()
 
       await setTimeout(() => {}, 100)
     })
@@ -63,8 +63,8 @@ describe('No auth', () => {
     await GenerateSetup.run(['--path', bearerPath])
     expect(fs.existsSync(path.join(bearerPath, 'views', 'setup-action.tsx'))).toBeFalsy()
     expect(fs.existsSync(path.join(bearerPath, 'views', 'setup-display.tsx'))).toBeFalsy()
-    expect(fs.existsSync(path.join(bearerPath, 'intents', 'saveSetup.ts'))).toBeFalsy()
-    expect(fs.existsSync(path.join(bearerPath, 'intents', 'retrieveSetup.ts'))).toBeFalsy()
+    expect(fs.existsSync(path.join(bearerPath, 'functions', 'saveSetup.ts'))).toBeFalsy()
+    expect(fs.existsSync(path.join(bearerPath, 'functions', 'retrieveSetup.ts'))).toBeFalsy()
     await setTimeout(() => {}, 100)
   })
 })

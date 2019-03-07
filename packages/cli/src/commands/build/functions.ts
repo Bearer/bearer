@@ -13,7 +13,7 @@ import compilerOptions from '../../utils/intent-ts-compiler-options'
 const skipInstall = 'skip-install'
 
 export default class BuildFunctions extends BaseCommand {
-  static description = 'Build integration intents'
+  static description = 'Build integration functions'
   static hidden = true
   static flags = {
     ...BaseCommand.flags,
@@ -28,7 +28,7 @@ export default class BuildFunctions extends BaseCommand {
 
     const tasks: Listr.ListrTask[] = [
       {
-        title: 'Generate intents',
+        title: 'Generate functions',
         task: async (ctx: any, _task: any) => {
           ctx.files = await this.transpile(
             this.locator.srcFunctionsDir,
@@ -50,7 +50,7 @@ export default class BuildFunctions extends BaseCommand {
     try {
       const ctx = await new Listr(tasks).run()
       this.debug('Transpiled :\n', ctx.files.join('\n  * '))
-      this.success('Built intents')
+      this.success('Built functions')
     } catch (e) {
       this.error(e)
     }

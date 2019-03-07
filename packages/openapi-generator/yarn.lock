@@ -138,9 +138,9 @@
     lodash "^4.17.10"
     to-fast-properties "^2.0.0"
 
-"@bearer/intents@next":
+"@bearer/functions@next":
   version "0.95.0"
-  resolved "https://registry.yarnpkg.com/@bearer/intents/-/intents-0.95.0.tgz#a4174a62d3afe9e9b8836db4029c5b23c6e8583a"
+  resolved "https://registry.yarnpkg.com/@bearer/functions/-/functions-0.95.0.tgz#a4174a62d3afe9e9b8836db4029c5b23c6e8583a"
   integrity sha512-oUTsMKe63ZkVVNMAQFclTBAV15Ckb1AnAsRM7US3jPDuN2WofPpD02h3voKPL2/v0ctPdPAoqqi+9EMcLyOsqg==
   dependencies:
     "@bearer/logger" "^0.95.0"

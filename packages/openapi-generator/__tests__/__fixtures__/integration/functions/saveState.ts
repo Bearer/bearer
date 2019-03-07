@@ -1,4 +1,4 @@
-import { SaveState, TOAUTH1AuthContext, TSaveActionEvent, TSavePromise } from '@bearer/intents'
+import { SaveState, TOAUTH1AuthContext, TSaveActionEvent, TSavePromise } from '@bearer/functions'
 
 import { PullRequest } from '../views/types'
 

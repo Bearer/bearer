@@ -14,7 +14,7 @@
   },
   "dependencies": {
     "@bearer/core": "{{bearerTagVersion}}",
-    "@bearer/intents": "{{bearerTagVersion}}",
+    "@bearer/functions": "{{bearerTagVersion}}",
     "@bearer/ui": "{{bearerTagVersion}}",
     {{bearerRestClient}}
   },

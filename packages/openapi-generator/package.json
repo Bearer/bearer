@@ -29,7 +29,7 @@
     "test:ci": "jest --coverage"
   },
   "dependencies": {
-    "@bearer/intents": "^0.99.0",
+    "@bearer/functions": "^0.99.0",
     "lodash.merge": "^4.6.1"
   }
 }

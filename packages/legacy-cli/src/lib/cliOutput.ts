@@ -97,7 +97,7 @@ export default emitter => {
   emitter.on('start:localServer:generatingFunctions:start', () => {
     term.white('Bearer: ')
     term.yellow('[local:intentServer] ')
-    term.yellow('Reloading intents')
+    term.yellow('Reloading functions')
     term('\n')
   })
 

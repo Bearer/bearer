@@ -11,8 +11,8 @@ What's next?
 ,[90m    create: [39m[37m.bearer/init/new/APIKEY/LICENSE[39m
 ,[90m    create: [39m[37m.bearer/init/new/APIKEY/auth.config.json[39m
 ,[90m    create: [39m[37m.bearer/init/new/APIKEY/config.dev.js.example[39m
-,[90m    create: [39m[37m.bearer/init/new/APIKEY/intents/client.ts[39m
-,[90m    create: [39m[37m.bearer/init/new/APIKEY/intents/tsconfig.json[39m
+,[90m    create: [39m[37m.bearer/init/new/APIKEY/functions/client.ts[39m
+,[90m    create: [39m[37m.bearer/init/new/APIKEY/functions/tsconfig.json[39m
 ,[90m    create: [39m[37m.bearer/init/new/APIKEY/package.json[39m
 ,[90m    create: [39m[37m.bearer/init/new/APIKEY/spec.ts[39m
 ,[90m    create: [39m[37m.bearer/init/new/APIKEY/tsconfig.json[39m
@@ -50,8 +50,8 @@ What's next?
 ,[90m    create: [39m[37m.bearer/init/new/BASIC/LICENSE[39m
 ,[90m    create: [39m[37m.bearer/init/new/BASIC/auth.config.json[39m
 ,[90m    create: [39m[37m.bearer/init/new/BASIC/config.dev.js.example[39m
-,[90m    create: [39m[37m.bearer/init/new/BASIC/intents/client.ts[39m
-,[90m    create: [39m[37m.bearer/init/new/BASIC/intents/tsconfig.json[39m
+,[90m    create: [39m[37m.bearer/init/new/BASIC/functions/client.ts[39m
+,[90m    create: [39m[37m.bearer/init/new/BASIC/functions/tsconfig.json[39m
 ,[90m    create: [39m[37m.bearer/init/new/BASIC/package.json[39m
 ,[90m    create: [39m[37m.bearer/init/new/BASIC/spec.ts[39m
 ,[90m    create: [39m[37m.bearer/init/new/BASIC/tsconfig.json[39m
@@ -94,8 +94,8 @@ What's next?
 ,[90m    create: [39m[37m.bearer/init/new/NONE/LICENSE[39m
 ,[90m    create: [39m[37m.bearer/init/new/NONE/auth.config.json[39m
 ,[90m    create: [39m[37m.bearer/init/new/NONE/config.dev.js.example[39m
-,[90m    create: [39m[37m.bearer/init/new/NONE/intents/client.ts[39m
-,[90m    create: [39m[37m.bearer/init/new/NONE/intents/tsconfig.json[39m
+,[90m    create: [39m[37m.bearer/init/new/NONE/functions/client.ts[39m
+,[90m    create: [39m[37m.bearer/init/new/NONE/functions/tsconfig.json[39m
 ,[90m    create: [39m[37m.bearer/init/new/NONE/package.json[39m
 ,[90m    create: [39m[37m.bearer/init/new/NONE/spec.ts[39m
 ,[90m    create: [39m[37m.bearer/init/new/NONE/tsconfig.json[39m
@@ -126,8 +126,8 @@ What's next?
 ,[90m    create: [39m[37m.bearer/init/new/OAUTH1/LICENSE[39m
 ,[90m    create: [39m[37m.bearer/init/new/OAUTH1/auth.config.json[39m
 ,[90m    create: [39m[37m.bearer/init/new/OAUTH1/config.dev.js.example[39m
-,[90m    create: [39m[37m.bearer/init/new/OAUTH1/intents/client.ts[39m
-,[90m    create: [39m[37m.bearer/init/new/OAUTH1/intents/tsconfig.json[39m
+,[90m    create: [39m[37m.bearer/init/new/OAUTH1/functions/client.ts[39m
+,[90m    create: [39m[37m.bearer/init/new/OAUTH1/functions/tsconfig.json[39m
 ,[90m    create: [39m[37m.bearer/init/new/OAUTH1/package.json[39m
 ,[90m    create: [39m[37m.bearer/init/new/OAUTH1/spec.ts[39m
 ,[90m    create: [39m[37m.bearer/init/new/OAUTH1/tsconfig.json[39m
@@ -180,8 +180,8 @@ What's next?
 ,[90m    create: [39m[37m.bearer/init/new/OAUTH2/LICENSE[39m
 ,[90m    create: [39m[37m.bearer/init/new/OAUTH2/auth.config.json[39m
 ,[90m    create: [39m[37m.bearer/init/new/OAUTH2/config.dev.js.example[39m
-,[90m    create: [39m[37m.bearer/init/new/OAUTH2/intents/client.ts[39m
-,[90m    create: [39m[37m.bearer/init/new/OAUTH2/intents/tsconfig.json[39m
+,[90m    create: [39m[37m.bearer/init/new/OAUTH2/functions/client.ts[39m
+,[90m    create: [39m[37m.bearer/init/new/OAUTH2/functions/tsconfig.json[39m
 ,[90m    create: [39m[37m.bearer/init/new/OAUTH2/package.json[39m
 ,[90m    create: [39m[37m.bearer/init/new/OAUTH2/spec.ts[39m
 ,[90m    create: [39m[37m.bearer/init/new/OAUTH2/tsconfig.json[39m

@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`pack:intents lambdas declaration generates a correct handlers 1`] = `
+exports[`pack:functions lambdas declaration generates a correct handlers 1`] = `
 "const intent0 = require(\\"./dist/my-intent\\").default;
 module.exports['my-intent'] = intent0.init();
 

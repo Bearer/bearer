@@ -13,7 +13,7 @@ export class BearerFunctionLogger {
    * @param  {any} data
    */
   log = (data: any) => {
-    debug('bearer:intents')('%j', {
+    debug('bearer:functions')('%j', {
       data,
       integrationId: this.context.integrationUuid,
       intentName: this.context.intentName

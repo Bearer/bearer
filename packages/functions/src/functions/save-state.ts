@@ -5,7 +5,7 @@ import * as d from '../declaration'
 import { DBClient as CLIENT } from '../db-client'
 import { eventAsActionParams } from './utils'
 
-const logger = debug('intents:fetch-state')
+const logger = debug('functions:fetch-state')
 
 export abstract class SaveState<State = any, ReturnedData = any, Error = any, AuthContext = any> {
   // expected implementation

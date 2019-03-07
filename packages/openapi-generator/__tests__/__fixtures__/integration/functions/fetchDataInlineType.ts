@@ -1,4 +1,4 @@
-import { FetchData, TFetchActionEvent, TFetchPromise, TOAUTH2AuthContext } from '@bearer/intents'
+import { FetchData, TFetchActionEvent, TFetchPromise, TOAUTH2AuthContext } from '@bearer/functions'
 
 import { PullRequest } from '../views/types'
 

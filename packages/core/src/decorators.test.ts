@@ -1,7 +1,7 @@
 import { BearerWindow } from '@bearer/types'
 
 import Bearer from './bearer'
-import { BearerFetch, Function } from './decorators/intents'
+import { BearerFetch, Function } from './decorators/functions'
 
 declare const window: BearerWindow
 declare const global: { fetch: any }
@@ -63,7 +63,7 @@ describe('Function decorator', () => {
         .catch(a => console.log(a))
 
       expect(global.fetch).toBeCalledWith(
-        'https://localhost:5555/api/v3/intents/1234/getCollectionFunction?page=1&setupId=setup-id-from-props&clientId=42',
+        'https://localhost:5555/api/v3/functions/1234/getCollectionFunction?page=1&setupId=setup-id-from-props&clientId=42',
         commonParams
       )
 
@@ -80,7 +80,7 @@ describe('Function decorator', () => {
         .catch(a => console.log(a))
 
       expect(global.fetch).toBeCalledWith(
-        'https://localhost:5555/api/v3/intents/1234/getCollectionFunction?page=1&setupId=custom-setupId&clientId=42',
+        'https://localhost:5555/api/v3/functions/1234/getCollectionFunction?page=1&setupId=custom-setupId&clientId=42',
         commonParams
       )
 

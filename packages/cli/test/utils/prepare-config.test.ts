@@ -6,11 +6,11 @@ const base = path.join(__dirname, './__fixtures__/prepare-config')
 
 describe('prepareConfig', () => {
   it('works', async () => {
-    const config = await prepareConfig(path.join(base, 'auth.json'), '123-ok', path.join(base, 'intents'))
+    const config = await prepareConfig(path.join(base, 'auth.json'), '123-ok', path.join(base, 'functions'))
     expect(config).toMatchObject({
       auth: {},
       integration_uuid: '123-ok',
-      intents: expect.arrayContaining(['a-wonderful-intent-as-method', 'a-wonderful-intent'])
+      functions: expect.arrayContaining(['a-wonderful-intent-as-method', 'a-wonderful-intent'])
     })
   })
 })

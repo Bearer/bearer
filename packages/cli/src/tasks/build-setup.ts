@@ -11,11 +11,11 @@ export default ({ cmd, vars }: { cmd: GenerateSetup; vars: any }): Listr.ListrTa
     }
   },
   {
-    title: 'Generating setup intents',
+    title: 'Generating setup functions',
     task: async () => {
       await copyFiles(
         cmd,
-        `generate/setup/intents/${cmd.integrationAuthConfig.authType}`,
+        `generate/setup/functions/${cmd.integrationAuthConfig.authType}`,
         cmd.locator.srcFunctionsDir,
         vars
       )

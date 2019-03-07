@@ -67,7 +67,7 @@ export function transpileFunctions(entriesPath: string, distPath: string): Promi
             }
           )
         } else {
-          reject([{ error: 'No intents to process' }])
+          reject([{ error: 'No functions to process' }])
         }
       })
       .catch(error => {

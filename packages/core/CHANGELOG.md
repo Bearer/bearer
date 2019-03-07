@@ -271,7 +271,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Bug Fixes
 
-* **intents:** rewrite auth context types ([f276847](https://github.com/Bearer/bearer/commit/f276847))
+* **functions:** rewrite auth context types ([f276847](https://github.com/Bearer/bearer/commit/f276847))
 
 
 

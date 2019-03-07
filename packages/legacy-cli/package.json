@@ -25,7 +25,7 @@
     "requirements-check": "node ./check-version.js"
   },
   "dependencies": {
-    "@bearer/intents": "^0.100.0",
+    "@bearer/functions": "^0.100.0",
     "@bearer/logger": "^0.100.0",
     "@bearer/transpiler": "^0.100.0",
     "@bearer/types": "^0.100.0",

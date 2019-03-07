@@ -1,4 +1,4 @@
-import { TOAUTH1AuthContext, SaveState, TSaveActionEvent, TSavePromise } from '@bearer/intents'
+import { TOAUTH1AuthContext, SaveState, TSaveActionEvent, TSavePromise } from '@bearer/functions'
 // Uncomment this line if you need to use Client
 // import Client from './client'
 

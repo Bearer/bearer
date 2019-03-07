@@ -5,17 +5,17 @@ import * as ts from 'typescript'
 import { getFunctionName, FunctionCodeProcessor, isFunctionClass } from './generators'
 
 type TConfig = {
-  intents: string[]
+  functions: string[]
   integration_uuid: string
   auth?: any
 }
 
-export const transformer = (intents: string[]) => (context: ts.TransformationContext) => {
+export const transformer = (functions: string[]) => (context: ts.TransformationContext) => {
   return (tsSourceFile: ts.SourceFile) => {
     function visit(tsNode: ts.Node) {
       if (isFunctionClass(tsNode)) {
         const intentName = getFunctionName(tsSourceFile)
-        intents.push(intentName)
+        functions.push(intentName)
       }
       return tsNode
     }
@@ -23,14 +23,14 @@ export const transformer = (intents: string[]) => (context: ts.TransformationCon
   }
 }
 
-export default (authConfigFile: string, integrationUuid: string, intentsDir: string): Promise<TConfig> => {
+export default (authConfigFile: string, integrationUuid: string, functionsDir: string): Promise<TConfig> => {
   return new Promise((resolve, reject) => {
-    const intents: string[] = []
-    new FunctionCodeProcessor(intentsDir, transformer(intents))
+    const functions: string[] = []
+    new FunctionCodeProcessor(functionsDir, transformer(functions))
       .run()
       .then(() => {
         const content = fs.readFileSync(authConfigFile, { encoding: 'utf8' })
-        const config: TConfig = { intents, integration_uuid: integrationUuid, auth: JSON.parse(content) }
+        const config: TConfig = { functions, integration_uuid: integrationUuid, auth: JSON.parse(content) }
         resolve(config)
       })
       .catch(error => {

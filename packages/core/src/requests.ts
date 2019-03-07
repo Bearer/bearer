@@ -73,7 +73,7 @@ export function intentRequest<TReturnFormat>({
   integrationId,
   setupId
 }: TFunctionBaseQuery): TBearerRequest<TReturnFormat> {
-  return bearerRequest(`api/v3/intents/${integrationId}/${intentName}`, { setupId })
+  return bearerRequest(`api/v3/functions/${integrationId}/${intentName}`, { setupId })
 }
 
 export default {

@@ -6,11 +6,11 @@ import FunctionType from '@bearer/types/lib/function-types'
 
 import * as path from 'path'
 
-import generateFunction from '../../../src/utils/templates/intents'
+import generateFunction from '../../../src/utils/templates/functions'
 import compilerOptions from '../../../src/utils/intent-ts-compiler-options'
-const destination = path.join(__dirname, '../../../.bearer/generated-intents')
+const destination = path.join(__dirname, '../../../.bearer/generated-functions')
 
-describe('intents generator', () => {
+describe('functions generator', () => {
   beforeAll(() => {
     if (fs.existsSync(destination)) {
       fs.emptyDirSync(destination)

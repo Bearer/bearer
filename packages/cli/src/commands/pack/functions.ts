@@ -11,7 +11,7 @@ const HANDLER_NAME = 'index'
 const HANDLER_NAME_WITH_EXT = [HANDLER_NAME, 'js'].join('.')
 
 export default class PackFunctions extends BaseCommand {
-  static description = 'Pack integration intents'
+  static description = 'Pack integration functions'
   static hidden = true
   static flags = {
     ...BaseCommand.flags
@@ -54,12 +54,12 @@ export default class PackFunctions extends BaseCommand {
     })
 
     try {
-      // add intents
+      // add functions
       archive.directory(this.locator.buildFunctionsDir, false)
       // add CONFIG
-      const intents = await this.retrieveFunctions()
+      const functions = await this.retrieveFunctions()
 
-      const { config, handlers } = buildLambdaDefinitions(intents)
+      const { config, handlers } = buildLambdaDefinitions(functions)
       const finalConfig = await this.retrieveAuthConfig(config)
 
       archive.append(JSON.stringify(finalConfig, null, 2), { name: CONFIG_FILE })
@@ -81,7 +81,7 @@ export default class PackFunctions extends BaseCommand {
     }
   }
 
-  async retrieveAuthConfig(config: { intents: Record<string, string>[] }): Promise<TBearerConfig> {
+  async retrieveAuthConfig(config: { functions: Record<string, string>[] }): Promise<TBearerConfig> {
     // generate config
     const content = await fs.readFile(this.locator.authConfigPath, { encoding: 'utf8' })
     return {
@@ -98,7 +98,7 @@ export default class PackFunctions extends BaseCommand {
         this.bearerConfig.integrationUuid,
         this.locator.srcFunctionsDir
       )
-      return config.intents
+      return config.functions
     } catch (e) {
       throw e
     }
@@ -108,21 +108,21 @@ export default class PackFunctions extends BaseCommand {
 type TFunctionNames = string[]
 
 type TBearerConfig = {
-  intents: Record<string, string>[]
+  functions: Record<string, string>[]
   auth?: any
 }
 
 type TLambdaDefinition = {
   config: {
-    intents: Record<string, string>[]
+    functions: Record<string, string>[]
   }
   handlers: string
 }
 
-export function buildLambdaDefinitions(intents: TFunctionNames): TLambdaDefinition {
+export function buildLambdaDefinitions(functions: TFunctionNames): TLambdaDefinition {
   return {
     config: {
-      intents: intents.reduce(
+      functions: functions.reduce(
         (acc, intentName) => {
           acc.push({ [intentName]: [HANDLER_NAME, intentName].join('.') })
           return acc
@@ -130,12 +130,12 @@ export function buildLambdaDefinitions(intents: TFunctionNames): TLambdaDefiniti
         [] as Record<string, string>[]
       )
     },
-    handlers: buildLambdaIndex(intents)
+    handlers: buildLambdaIndex(functions)
   }
 }
 
-function buildLambdaIndex(intents: TFunctionNames): string {
-  return intents
+function buildLambdaIndex(functions: TFunctionNames): string {
+  return functions
     .map((intent, index) => {
       const intentConstName = `intent${index}`
       return `const ${intentConstName} = require("./dist/${intent}").default;

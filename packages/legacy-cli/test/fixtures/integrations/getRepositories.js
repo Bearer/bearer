@@ -1,5 +1,5 @@
 const { getRepositories } = require('./github')
-const { FetchData } = require('@bearer/intents')
+const { FetchData } = require('@bearer/functions')
 
 module.exports.action = getRepositories
 module.exports.intentType = FetchData

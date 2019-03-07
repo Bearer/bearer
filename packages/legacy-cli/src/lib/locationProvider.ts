@@ -28,9 +28,9 @@ export default class LocationProvider {
     return path.join(this.srcViewsDir, name)
   }
 
-  // ~/intents
+  // ~/functions
   get srcFunctionsDir(): string {
-    return path.join(this.integrationRoot, 'intents')
+    return path.join(this.integrationRoot, 'functions')
   }
 
   buildViewsResourcePath(resource: string): string {
@@ -52,9 +52,9 @@ export default class LocationProvider {
     return path.join(this.bearerDir, 'tmp')
   }
 
-  // ~/.bearer/intents
+  // ~/.bearer/functions
   get buildFunctionsDir(): string {
-    return path.join(this.bearerDir, 'intents')
+    return path.join(this.bearerDir, 'functions')
   }
 
   buildFunctionsResourcePath(resource: string): string {

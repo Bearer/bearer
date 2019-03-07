@@ -3,7 +3,7 @@ import debug from '@bearer/logger'
 import * as d from '../declaration'
 import { eventAsActionParams } from './utils'
 
-const logger = debug('intents:fetch-state')
+const logger = debug('functions:fetch-state')
 
 export abstract class FetchData<ReturnedData = any, TError = any, AuthContext = any> {
   // expected implementation

@@ -326,8 +326,8 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Features
 
-* **cli:** Core 216/intents as instance ([#482](https://github.com/Bearer/bearer/issues/482)) ([6ed680f](https://github.com/Bearer/bearer/commit/6ed680f))
-* [CORE-216] - intents abstract classes ([#484](https://github.com/Bearer/bearer/issues/484)) ([035684c](https://github.com/Bearer/bearer/commit/035684c))
+* **cli:** Core 216/functions as instance ([#482](https://github.com/Bearer/bearer/issues/482)) ([6ed680f](https://github.com/Bearer/bearer/commit/6ed680f))
+* [CORE-216] - functions abstract classes ([#484](https://github.com/Bearer/bearer/issues/484)) ([035684c](https://github.com/Bearer/bearer/commit/035684c))
 
 
 
@@ -1179,14 +1179,14 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Bug Fixes
 
-* **cli:** Pack intents command ([#318](https://github.com/Bearer/bearer/issues/318)) ([ebd6b93](https://github.com/Bearer/bearer/commit/ebd6b93))
+* **cli:** Pack functions command ([#318](https://github.com/Bearer/bearer/issues/318)) ([ebd6b93](https://github.com/Bearer/bearer/commit/ebd6b93))
 * **cli:** remove useless setTimeour ^^ ([d832fec](https://github.com/Bearer/bearer/commit/d832fec))
 
 
 ### Features
 
 * **cli:** add placeholder commands ([ae5255a](https://github.com/Bearer/bearer/commit/ae5255a))
-* **cli:** Build intents command ([#315](https://github.com/Bearer/bearer/issues/315)) ([95995e1](https://github.com/Bearer/bearer/commit/95995e1))
+* **cli:** Build functions command ([#315](https://github.com/Bearer/bearer/issues/315)) ([95995e1](https://github.com/Bearer/bearer/commit/95995e1))
 * **cli:** Build views command ([#316](https://github.com/Bearer/bearer/issues/316)) ([a5803c7](https://github.com/Bearer/bearer/commit/a5803c7))
 * **cli:** pack views command ([#319](https://github.com/Bearer/bearer/issues/319)) ([fa8d791](https://github.com/Bearer/bearer/commit/fa8d791))
 * **cli:** Prepare command ([#312](https://github.com/Bearer/bearer/issues/312)) ([fde2dae](https://github.com/Bearer/bearer/commit/fde2dae))

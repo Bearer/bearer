@@ -163,7 +163,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Bug Fixes
 
-* **legacy-cli:** failed intents should return 200 ([#503](https://github.com/Bearer/bearer/issues/503)) ([4763fa7](https://github.com/Bearer/bearer/commit/4763fa7))
+* **legacy-cli:** failed functions should return 200 ([#503](https://github.com/Bearer/bearer/issues/503)) ([4763fa7](https://github.com/Bearer/bearer/commit/4763fa7))
 
 
 
@@ -977,7 +977,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Features
 
-* **cli:** Build intents command ([#315](https://github.com/Bearer/bearer/issues/315)) ([95995e1](https://github.com/Bearer/bearer/commit/95995e1))
+* **cli:** Build functions command ([#315](https://github.com/Bearer/bearer/issues/315)) ([95995e1](https://github.com/Bearer/bearer/commit/95995e1))
 * **cli:** Prepare command ([#312](https://github.com/Bearer/bearer/issues/312)) ([fde2dae](https://github.com/Bearer/bearer/commit/fde2dae))
 * **cli:** Push command ([#317](https://github.com/Bearer/bearer/issues/317)) ([84906e4](https://github.com/Bearer/bearer/commit/84906e4))
 
@@ -1105,7 +1105,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Features
 
-* **intents:** give access to dbclient ([#270](https://github.com/Bearer/bearer/issues/270)) ([fbf284e](https://github.com/Bearer/bearer/commit/fbf284e))
+* **functions:** give access to dbclient ([#270](https://github.com/Bearer/bearer/issues/270)) ([fbf284e](https://github.com/Bearer/bearer/commit/fbf284e))
 
 
 
@@ -1138,7 +1138,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 * **cli:** generate component fixes ([ce8a6d4](https://github.com/Bearer/bearer/commit/ce8a6d4))
 * **cli:** give button text a meaning ([1e5c78e](https://github.com/Bearer/bearer/commit/1e5c78e))
 * **cli:** give more meaning to template variable names ([d25d0b6](https://github.com/Bearer/bearer/commit/d25d0b6))
-* **cli:** intents variables generation ([1535f77](https://github.com/Bearer/bearer/commit/1535f77))
+* **cli:** functions variables generation ([1535f77](https://github.com/Bearer/bearer/commit/1535f77))
 
 
 ### Features
@@ -1312,7 +1312,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Bug Fixes
 
-- **intents:** fallback body ([077dc7c](https://github.com/Bearer/bearer/commit/077dc7c))
+- **functions:** fallback body ([077dc7c](https://github.com/Bearer/bearer/commit/077dc7c))
 
 <a name="0.41.1"></a>
 
@@ -1554,7 +1554,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 - **cli:** add bearer keep ([6eb8a2e](https://github.com/Bearer/bearer/commit/6eb8a2e))
 - **cli:** add options shortcut ([36344ec](https://github.com/Bearer/bearer/commit/36344ec))
-- **cli:** allow screens/intents deploy only ([98bdd6a](https://github.com/Bearer/bearer/commit/98bdd6a))
+- **cli:** allow screens/functions deploy only ([98bdd6a](https://github.com/Bearer/bearer/commit/98bdd6a))
 - **cli:** let deploy use views ([0404f10](https://github.com/Bearer/bearer/commit/0404f10))
 - **cli:** make local deve working ([40c4705](https://github.com/Bearer/bearer/commit/40c4705))
 - **cli:** rename component template name to feature ([63c0374](https://github.com/Bearer/bearer/commit/63c0374))
@@ -1601,7 +1601,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Bug Fixes
 
-- **cli:** upgrade intents dependency ([#141](https://github.com/Bearer/bearer/issues/141)) ([0a575da](https://github.com/Bearer/bearer/commit/0a575da))
+- **cli:** upgrade functions dependency ([#141](https://github.com/Bearer/bearer/issues/141)) ([0a575da](https://github.com/Bearer/bearer/commit/0a575da))
 
 <a name="0.21.1"></a>
 

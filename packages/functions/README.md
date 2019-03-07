@@ -1,11 +1,11 @@
-# @bearer/intents
+# @bearer/functions
 
 ## Usage
 
 **Creating a FetchData intent**
 
 ```
-import { FetchData, TOAUTH2AuthContext } from '@bearer/intents'
+import { FetchData, TOAUTH2AuthContext } from '@bearer/functions'
 import Client from './client'
 
 export default class ListPullRequestsFunction {
@@ -29,7 +29,7 @@ export default class ListPullRequestsFunction {
 **Creating a SaveData intent**
 
 ```
-import { SaveState, TOAUTH2AuthContext } from '@bearer/intents'
+import { SaveState, TOAUTH2AuthContext } from '@bearer/functions'
 import Client from './client'
 
 export type TState = {

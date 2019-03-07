@@ -46,7 +46,7 @@ const integrationClient = new IntegrationClient(process.env.BEARER_SECRET_TOKEN,
 const reponse = await integrationClient.call('intentName', options)
 ```
 
-If you are a Typescript user, you can provide a list of intents to use for a integration:
+If you are a Typescript user, you can provide a list of functions to use for a integration:
 
 ```tsx
 const integrationClient = new IntegrationClient<'intentName' | 'other-intent'>(

@@ -20,7 +20,7 @@ describe('Bearer client', () => {
           authorization: clientId
         }
       })
-        .post('/api/v3/intents/backend/12345-integration-name/intentName')
+        .post('/api/v3/functions/backend/12345-integration-name/intentName')
         .reply(200, distantApi)
 
       const { data } = await client.call('12345-integration-name', 'intentName')
@@ -41,14 +41,14 @@ describe('IntegrationClient', () => {
     expect(client).toBeInstanceOf(IntegrationClient)
   })
 
-  it('calls correct integration intents', async () => {
+  it('calls correct integration functions', async () => {
     distantApi.mockClear()
     nock('https://int.bearer.sh', {
       reqheaders: {
         authorization: token
       }
     })
-      .post(`/api/v3/intents/backend/${anotherIntegrationName}/intent-name`)
+      .post(`/api/v3/functions/backend/${anotherIntegrationName}/intent-name`)
       .query({ sponge: 'bob' })
       .reply(200, distantApi)
 

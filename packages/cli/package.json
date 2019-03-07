@@ -11,7 +11,7 @@
   "bugs": "https://github.com/Bearer/bearer/issues",
   "dependencies": {
     "@bearer/bearer-cli": "^0.100.0",
-    "@bearer/intents": "^0.100.0",
+    "@bearer/functions": "^0.100.0",
     "@bearer/openapi-generator": "^0.100.0",
     "@bearer/security": "^0.100.0",
     "@bearer/transpiler": "^0.100.0",

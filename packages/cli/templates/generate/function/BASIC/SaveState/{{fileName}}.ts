@@ -1,4 +1,4 @@
-import { TBASICAuthContext, SaveState, TSaveActionEvent, TSavePromise } from '@bearer/intents'
+import { TBASICAuthContext, SaveState, TSaveActionEvent, TSavePromise } from '@bearer/functions'
 // Uncomment this line if you need to use Client
 // import Client from './client'
 

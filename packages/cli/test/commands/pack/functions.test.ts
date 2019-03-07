@@ -1,6 +1,6 @@
-import { buildLambdaDefinitions } from '../../../src/commands/pack/intents'
+import { buildLambdaDefinitions } from '../../../src/commands/pack/functions'
 
-describe('pack:intents', () => {
+describe('pack:functions', () => {
   describe('lambdas declaration', () => {
     const { config, handlers } = buildLambdaDefinitions(['my-intent', 'spongeBobFunction'])
 
@@ -8,9 +8,9 @@ describe('pack:intents', () => {
       expect(handlers).toMatchSnapshot()
     })
 
-    it('build intents bearer config', () => {
+    it('build functions bearer config', () => {
       expect(config).toEqual({
-        intents: [
+        functions: [
           {
             'my-intent': 'index.my-intent'
           },

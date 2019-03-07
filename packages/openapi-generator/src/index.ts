@@ -149,26 +149,26 @@ export function intentTypesToSchemaConverter(
 }
 
 /**
- *  Generate full openapi spec from intents
- *  @param intentsDir absolute path to intents directory
- *  @param intents list of func names
+ *  Generate full openapi spec from functions
+ *  @param functionsDir absolute path to functions directory
+ *  @param functions list of func names
  *  @param integrationUuid integration unique identifier
  *  @param integrationName name of the integration
  */
 export default function generator({
-  intentsDir,
-  intents,
+  functionsDir,
+  functions,
   integrationUuid,
   integrationName
 }: {
-  intentsDir: string
-  intents: string[]
+  functionsDir: string
+  functions: string[]
   integrationUuid: string
   integrationName: string
 }): string {
   const doc = topOfSpec(integrationName)
-  const schemas = intents.sort().reduce((acc, intent) => {
-    const intentPath = path.join(intentsDir, `${intent}.ts`)
+  const schemas = functions.sort().reduce((acc, intent) => {
+    const intentPath = path.join(functionsDir, `${intent}.ts`)
     const typeSchema = intentTypesToSchemaConverter(intentPath)
     return Object.assign(
       acc,

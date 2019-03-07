@@ -65,8 +65,8 @@ export default class Push extends BaseCommand {
       archive.pipe(output)
       const files = await globby([
         'views/**/*',
-        'intents/**/*.ts',
-        'intents/tsconfig.json',
+        'functions/**/*.ts',
+        'functions/tsconfig.json',
         'yarn.lock',
         'package-json.lock',
         'spec.ts',

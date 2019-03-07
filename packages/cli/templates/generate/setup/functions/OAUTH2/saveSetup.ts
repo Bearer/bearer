@@ -1,4 +1,4 @@
-import { TOAUTH2AuthContext, SaveState, TSaveActionEvent, TSavePromise } from '@bearer/intents'
+import { TOAUTH2AuthContext, SaveState, TSaveActionEvent, TSavePromise } from '@bearer/functions'
 
 export default class SaveSetupFunction extends SaveState implements SaveState<State, ReturnedData, any, TOAUTH2AuthContext> {
   async action(event: TSaveActionEvent<State, Params, TOAUTH2AuthContext>): TSavePromise<State, ReturnedData> {

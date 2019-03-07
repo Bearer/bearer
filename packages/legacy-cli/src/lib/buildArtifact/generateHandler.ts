@@ -1,5 +1,5 @@
-export default ({ intents }) => {
-  return intents
+export default ({ functions }) => {
+  return functions
     .map(Object.keys)
     .map(
       func => `

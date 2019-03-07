@@ -1,4 +1,4 @@
-import * as intents from '@bearer/intents'
+import * as functions from '@bearer/functions'
 import * as fs from 'fs'
 import * as globby from 'globby'
 import * as path from 'path'
@@ -9,7 +9,7 @@ import specGenerator from '@bearer/openapi-generator'
 const config = ts.readConfigFile(path.join(__dirname, '../../templates/start', 'tsconfig.json'), ts.sys.readFile)
 
 const NON_INTENT_NAMES = ['DBClient']
-const INTENT_NAMES = Object.keys(intents).filter(intentName => !NON_INTENT_NAMES.includes(intentName))
+const INTENT_NAMES = Object.keys(functions).filter(intentName => !NON_INTENT_NAMES.includes(intentName))
 const INTENT_TYPE_IDENTIFIER = 'intentType'
 
 const intentEntries: IFunctionEntry[] = []
@@ -192,8 +192,8 @@ export class OpenApiSpecGenerator {
       ts.transform(sourceFile, [transformer(generator)])
     })
     return specGenerator({
-      intents: intentEntries.map(entry => entry.intentName),
-      intentsDir: this.srcFunctionsDir,
+      functions: intentEntries.map(entry => entry.intentName),
+      functionsDir: this.srcFunctionsDir,
       integrationUuid: this.bearerConfig.integrationUuid,
       integrationName: this.bearerConfig.integrationTitle || ''
     })

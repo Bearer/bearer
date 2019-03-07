@@ -5,7 +5,7 @@ import * as inquirer from 'inquirer'
 
 import BaseCommand from '../../base-command'
 import { RequireIntegrationFolder } from '../../utils/decorators'
-import generateFunction from '../../utils/templates/intents'
+import generateFunction from '../../utils/templates/functions'
 
 const types = [
   { name: 'Fetch', value: FunctionType.FetchData, cli: 'fetch' },
