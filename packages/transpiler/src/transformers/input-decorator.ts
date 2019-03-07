@@ -20,6 +20,9 @@ import { InputMeta, TransformerOptions, OutputMeta } from '../types'
 import { ensureImportsFromCore } from './bearer'
 import { outputEventName, refIdName, retrieveOutputsMetas } from './output-decorator'
 import Metadata from '../metadata'
+import debug from '../logger'
+
+const logger = debug.extend('input-decorator')
 
 export default function inputDecorator({ metadata }: TransformerOptions = {}): ts.TransformerFactory<ts.SourceFile> {
   return _transformContext => {
@@ -27,6 +30,7 @@ export default function inputDecorator({ metadata }: TransformerOptions = {}): t
       if (tsSourceFile.isDeclarationFile) {
         return tsSourceFile
       }
+      logger('processing %s', tsSourceFile.fileName)
       // gather inputs information
       const inputsMeta = retrieveInputsMetas(tsSourceFile, metadata, _transformContext)
 

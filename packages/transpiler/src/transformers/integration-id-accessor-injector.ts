@@ -10,6 +10,8 @@ import { hasDecoratorNamed } from '../helpers/decorator-helpers'
 import { TransformerOptions } from '../types'
 
 import bearer from './bearer'
+import debug from '../logger'
+const logger = debug.extend('integration-id-accessor')
 
 export function shouldProcessFile(tsSourceFile: ts.SourceFile): boolean {
   if (tsSourceFile.isDeclarationFile) {
@@ -50,6 +52,7 @@ export default function componentTransformer({  }: TransformerOptions = {}): ts.
       if (!integrationId || !shouldProcessFile(tsSourceFile)) {
         return tsSourceFile
       }
+      logger('processing %s', tsSourceFile.fileName)
       return visit(tsSourceFile) as ts.SourceFile
     }
   }

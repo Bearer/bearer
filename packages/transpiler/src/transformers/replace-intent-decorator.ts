@@ -23,7 +23,9 @@ import { Decorators } from '../constants'
 import { hasDecoratorNamed } from '../helpers/decorator-helpers'
 import { getNodeName } from '../helpers/node-helpers'
 import { TransformerOptions } from '../types'
+import debug from '../logger'
 
+const logger = debug.extend('replace-intent-decorators')
 function appendConstructor(node: ts.ClassDeclaration): ts.Node {
   if (classHasConstructor(node)) {
     return node
@@ -60,6 +62,7 @@ export default function componentTransformer({  }: TransformerOptions = {}): ts.
     // remove @Intent decorator from the sourcefile
 
     return tsSourceFile => {
+      logger('processing %s', tsSourceFile.fileName)
       const registeredIntents: ts.PropertyDeclaration[] = []
 
       const withDecoratorReplaced = visitRemoveIntentDecorators(tsSourceFile as ts.Node, registeredIntents)

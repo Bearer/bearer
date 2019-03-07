@@ -8,6 +8,9 @@ import { shouldProcessFile as hasAccessor, retrieveIntegrationId } from './integ
 
 import { TransformerOptions } from '../types'
 import { Component, Module } from '../constants'
+import debug from '../logger'
+
+const logger = debug.extend('i18n-mmodifier')
 
 const I18N_TAG = 'bearer-i18n'
 
@@ -96,6 +99,7 @@ export default function i18nModifier(_options: TransformerOptions = {}): ts.Tran
     }
 
     return tsSourceFile => {
+      logger('processing %s', tsSourceFile.fileName)
       if (!hasAccessor(tsSourceFile)) {
         return tsSourceFile
       }

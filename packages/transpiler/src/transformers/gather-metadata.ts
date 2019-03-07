@@ -23,6 +23,7 @@ export default function gatherMetadata({ metadata }: TransformerOptions): ts.Tra
 
   return _transformContext => {
     return tsSourceFile => {
+      logger('processing %s', tsSourceFile.fileName)
       function visit(node: ts.Node): ts.Node {
         // Found Component
         if (ts.isClassDeclaration(node)) {

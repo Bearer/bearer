@@ -108,6 +108,7 @@ export default function componentTagNameScoping({
       if (tsSourceFile.isDeclarationFile) {
         return tsSourceFile
       }
+      logger('processing %s', tsSourceFile.fileName)
       return ts.visitEachChild(tsSourceFile, visit, _transformContext)
     }
   }

@@ -11,15 +11,18 @@ import { isWatcherOn } from '../helpers/stencil-helpers'
 import { TransformerOptions } from '../types'
 
 import { ensureBearerContextInjected, ensureImportsFromCore } from './bearer'
+import debug from '../logger'
+const logger = debug.extend('bearer-state-injector')
 
 const state = ts.createIdentifier('state')
 
-export default function BearerStateInjector({  }: TransformerOptions = {}): ts.TransformerFactory<ts.SourceFile> {
+export default function bearerStateInjector({  }: TransformerOptions = {}): ts.TransformerFactory<ts.SourceFile> {
   return transformContext => {
     return tsSourceFile => {
       if (!hasBearerStateDecorator(tsSourceFile)) {
         return tsSourceFile
       }
+      logger('processing %s', tsSourceFile.fileName)
 
       const propsDecorator = extractDecoratedPropertyInformation(tsSourceFile)
 

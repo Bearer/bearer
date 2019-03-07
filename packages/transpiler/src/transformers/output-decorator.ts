@@ -19,6 +19,9 @@ import { TCreateLoadResourceMethod, TransformerOptions, OutputMeta, InputMeta } 
 
 import { ensureImportsFromCore } from './bearer'
 import { retrieveInputsMetas } from './input-decorator'
+import debug from '../logger'
+
+const logger = debug.extend('output-decorator')
 
 const newValue = 'newValue'
 const data = 'data'
@@ -29,7 +32,7 @@ export default function outputDecorator({ metadata }: TransformerOptions = {}): 
       if (tsSourceFile.isDeclarationFile) {
         return tsSourceFile
       }
-
+      logger('processing %s', tsSourceFile.fileName)
       const outputsMeta = retrieveOutputsMetas(tsSourceFile, _transformContext)
 
       if (!outputsMeta.length) {

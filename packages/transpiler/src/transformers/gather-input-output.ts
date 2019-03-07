@@ -9,6 +9,7 @@ import { eventName } from './event-name-scoping'
 
 const UNSPECIFIED = 'unspecified'
 import debug from '../logger'
+const logger = debug.extend('gatherMetadata')
 
 export default function gatherMetadata({
   metadata,
@@ -98,8 +99,10 @@ export default function gatherMetadata({
 
   return _transformContext => {
     return tsSourceFile => {
+      logger('processing %s', tsSourceFile.fileName)
       function visit(node: ts.Node): ts.Node {
         // Found Component
+        logger('processing %s', tsSourceFile.fileName)
         if (ts.isClassDeclaration(node) && hasDecoratorNamed(node, Decorators.Component)) {
           const component = metadata.findComponentFrom(tsSourceFile)
           if (component && component.isRoot) {

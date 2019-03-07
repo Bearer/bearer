@@ -25,9 +25,12 @@ import { hasDecoratorNamed } from '../helpers/decorator-helpers'
 import { TransformerOptions } from '../types'
 
 import bearer, { ensureImportsFromCore } from './bearer'
+import debug from '../logger'
+
+const logger = debug.extend('prop-bearer-context-injector')
 
 // tslint:disable-next-line:function-name
-export default function ComponentTransformer(_options: TransformerOptions = {}): ts.TransformerFactory<ts.SourceFile> {
+export default function componentTransformer(_options: TransformerOptions = {}): ts.TransformerFactory<ts.SourceFile> {
   return transformContext => {
     function visitWithSourceFile(source: ts.SourceFile) {
       return function visit(node: ts.Node): ts.VisitResult<ts.Node> {
@@ -39,6 +42,7 @@ export default function ComponentTransformer(_options: TransformerOptions = {}):
     }
 
     return tsSourceFile => {
+      logger('processing %s', tsSourceFile.fileName)
       if (hasComponentDecorator(tsSourceFile)) {
         const visit = visitWithSourceFile(tsSourceFile)
         return visit(ensureImportsFromCore(tsSourceFile, [Decorators.Prop])) as ts.SourceFile

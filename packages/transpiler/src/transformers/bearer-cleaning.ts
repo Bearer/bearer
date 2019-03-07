@@ -7,6 +7,9 @@ import { Decorators, Types } from '../constants'
 import { hasDecoratorNamed } from '../helpers/decorator-helpers'
 import { getNodeName } from '../helpers/node-helpers'
 import { TransformerOptions } from '../types'
+import debug from '../logger'
+
+const logger = debug.extend('cleaning')
 
 const filteredImports = new Set([Decorators.Input, Decorators.Output, Decorators.RootComponent].map(v => v.toString()))
 
@@ -39,6 +42,7 @@ export default function bearerCleaning(_options: TransformerOptions = {}): ts.Tr
     }
 
     return tsSourceFile => {
+      logger('processing %s', tsSourceFile.fileName)
       return ts.visitEachChild(tsSourceFile, visit, _transformContext)
     }
   }

@@ -5,6 +5,9 @@ import * as ts from 'typescript'
 
 import { TransformerOptions } from '../types'
 
+import debug from '../logger'
+
+const logger = debug.extend('navigator-screen')
 const NAVIGATOR_SCREEN_TAG_NAME = 'bearer-navigator-screen'
 
 export default function propImporter({  }: TransformerOptions = {}): ts.TransformerFactory<ts.SourceFile> {
@@ -48,6 +51,7 @@ export default function propImporter({  }: TransformerOptions = {}): ts.Transfor
     }
 
     return tsSourceFile => {
+      logger('processing %s', tsSourceFile.fileName)
       return ts.visitEachChild(tsSourceFile, visit, _transformContext)
     }
   }

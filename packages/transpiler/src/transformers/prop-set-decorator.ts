@@ -15,6 +15,9 @@ import { getNodeName } from '../helpers/node-helpers'
 import { TransformerOptions } from '../types'
 
 import { ensureImportsFromCore } from './bearer'
+import debug from '../logger'
+
+const logger = debug.extend('prop-set-decorator')
 
 const NEW_VALUE = 'newValue'
 const PROP_SET_EMITTER_NAME = 'propSetEmitter'
@@ -73,6 +76,7 @@ export default function propSetDecorator(options: TransformerOptions = {}): ts.T
       return ts.forEachChild(decorator.expression, visitor)
     }
     return (sourceFile: ts.SourceFile): ts.SourceFile => {
+      logger('processing %s', sourceFile.fileName)
       const meta = options.metadata.findComponentFrom(sourceFile)
       // only run this on root components
       if (meta && meta.isRoot) {

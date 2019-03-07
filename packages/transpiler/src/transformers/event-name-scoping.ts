@@ -8,6 +8,8 @@ import { decoratorNamed, hasDecoratorNamed } from '../helpers/decorator-helpers'
 import { getNodeName } from '../helpers/node-helpers'
 import { TransformerOptions } from '../types'
 import { normalize } from './event-name-normalizer'
+import debug from '../logger'
+const logger = debug.extend('event-name-scoping')
 
 const SEPARATOR = '-'
 export const GLOBAL_EVENT_PREXIX = 'body:'
@@ -71,6 +73,7 @@ function updatedListenDecoratorOrDecorator(tsDecorator: ts.Decorator): ts.Decora
 export default function eventNameScoping({  }: TransformerOptions = {}): ts.TransformerFactory<ts.SourceFile> {
   return _transformContext => {
     return tsSourceFile => {
+      logger('processing %s', tsSourceFile.fileName)
       function visit(tsNode: ts.Node): ts.VisitResult<ts.Node> {
         if (ts.isPropertyDeclaration(tsNode) && hasDecoratorNamed(tsNode, Decorators.Event)) {
           return updateEventDecorator(tsNode)

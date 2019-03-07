@@ -5,6 +5,9 @@ import { decoratorNamed } from '../helpers/decorator-helpers'
 import { isBearerEvent, GLOBAL_EVENT_PREXIX } from './event-name-scoping'
 import * as Case from 'case'
 
+import debug from '../logger'
+const logger = debug.extend('event-name-normalizer')
+
 export default function eventNameNormalizer(): ts.TransformerFactory<ts.SourceFile> {
   return _transformContext => {
     function normalizeEventName(tsNode: ts.Node): ts.VisitResult<ts.Node> {
@@ -43,6 +46,7 @@ export default function eventNameNormalizer(): ts.TransformerFactory<ts.SourceFi
     }
 
     return tsSourceFile => {
+      logger('processing %s', tsSourceFile.fileName)
       return ts.visitEachChild(tsSourceFile, visit, _transformContext)
     }
   }

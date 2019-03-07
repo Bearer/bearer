@@ -4,6 +4,10 @@
 import * as ts from 'typescript'
 
 import { Component, Env } from '../constants'
+import debug from '../logger'
+
+const logger = debug.extend('inject-integration-id-prop')
+
 type TransformerOptions = {
   verbose?: true
 }
@@ -36,6 +40,7 @@ export default function injectIntegrationIdProp(
     }
 
     return tsSourceFile => {
+      logger('processing %s', tsSourceFile.fileName)
       return ts.visitEachChild(tsSourceFile, visit, _transformContext)
     }
   }
