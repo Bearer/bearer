@@ -34,7 +34,8 @@ export class CollectionComponent {
   render() {
     return <bearer-scrollable fetcher={this.fetcher} />
   }
-}"
+}
+"
 `;
 
 exports[`Generate generate:component root component 1`] = `

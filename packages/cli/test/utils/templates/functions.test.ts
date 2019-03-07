@@ -7,7 +7,7 @@ import FunctionType from '@bearer/types/lib/function-types'
 import * as path from 'path'
 
 import generateFunction from '../../../src/utils/templates/functions'
-import compilerOptions from '../../../src/utils/intent-ts-compiler-options'
+import compilerOptions from '../../../src/utils/function-ts-compiler-options'
 const destination = path.join(__dirname, '../../../.bearer/generated-functions')
 
 describe('functions generator', () => {

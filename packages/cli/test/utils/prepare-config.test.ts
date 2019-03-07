@@ -10,7 +10,7 @@ describe('prepareConfig', () => {
     expect(config).toMatchObject({
       auth: {},
       integration_uuid: '123-ok',
-      functions: expect.arrayContaining(['a-wonderful-intent-as-method', 'a-wonderful-intent'])
+      functions: expect.arrayContaining(['a-wonderful-function-as-method', 'a-wonderful-function'])
     })
   })
 })
