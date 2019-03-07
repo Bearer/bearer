@@ -2,7 +2,7 @@ import * as ts from 'typescript'
 import * as fs from 'fs-extra'
 
 import { Authentications } from '@bearer/types/lib/authentications'
-import FunctionType from '@bearer/types/lib/intent-types'
+import FunctionType from '@bearer/types/lib/function-types'
 
 import * as path from 'path'
 

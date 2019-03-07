@@ -1,5 +1,5 @@
 import { Authentications } from '@bearer/types/lib/authentications'
-import FunctionType from '@bearer/types/lib/intent-types'
+import FunctionType from '@bearer/types/lib/function-types'
 import { flags } from '@oclif/command'
 import * as inquirer from 'inquirer'
 
