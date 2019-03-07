@@ -4,7 +4,7 @@ import { readFile } from '../../helpers/utils'
 
 describe('Generate', () => {
   let bearerPath: string
-  let result: Array<string>
+  let result: string[]
 
   beforeEach(() => {
     result = []
@@ -28,8 +28,7 @@ describe('Generate', () => {
     it('root component', async () => {
       await GenerateComponent.run(['rootComponent', '-t', 'root', '--path', bearerPath])
       expect(result.join()).toContain('Component generated')
-      expect(readFile(bearerPath, 'views', 'root-component-action.tsx')).toMatchSnapshot()
-      expect(readFile(bearerPath, 'views', 'root-component-display.tsx')).toMatchSnapshot()
+      expect(readFile(bearerPath, 'views', 'root-component.tsx')).toMatchSnapshot()
     })
   })
 })
