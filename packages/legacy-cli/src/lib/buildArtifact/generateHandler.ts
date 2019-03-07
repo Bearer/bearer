@@ -3,8 +3,8 @@ export default ({ functions }) => {
     .map(Object.keys)
     .map(
       func => `
-const ${intent} = require("./${intent}").default;
-module.exports[${intent}.intentName] = ${intent}.intentType.intent(${intent}.action);
+const ${func} = require("./${func}").default;
+module.exports[${func}.intentName] = ${func}.intentType.call(${func}.action);
 `
     )
     .join('\n')

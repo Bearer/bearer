@@ -12,7 +12,7 @@ export abstract class FetchData<ReturnedData = any, TError = any, AuthContext = 
   ): Promise<d.TFetchPayload<ReturnedData, TError>>
 
   // Internal
-  static intent(action: d.TFetchAction) {
+  static call(action: d.TFetchAction) {
     return async (event: d.TLambdaEvent) => {
       try {
         const { error, data }: d.TFetchPayload<any, any> = await action(eventAsActionParams(event))
@@ -29,7 +29,7 @@ export abstract class FetchData<ReturnedData = any, TError = any, AuthContext = 
   }
 
   static init() {
-    return FetchData.intent(new (this.prototype.constructor as any)().action)
+    return FetchData.call(new (this.prototype.constructor as any)().action)
   }
 }
 

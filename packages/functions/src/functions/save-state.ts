@@ -14,7 +14,7 @@ export abstract class SaveState<State = any, ReturnedData = any, Error = any, Au
   ): Promise<d.TSaveStatePayload<State, ReturnedData, Error>>
 
   // Internal
-  static intent(action: d.TSaveStateAction) {
+  static call(action: d.TSaveStateAction) {
     // tslint:disable-next-line:variable-name
     const DBClient = CLIENT.instance
 
@@ -45,7 +45,7 @@ export abstract class SaveState<State = any, ReturnedData = any, Error = any, Au
   }
 
   static init() {
-    return SaveState.intent(new (this.prototype.constructor as any)().action)
+    return SaveState.call(new (this.prototype.constructor as any)().action)
   }
 }
 
