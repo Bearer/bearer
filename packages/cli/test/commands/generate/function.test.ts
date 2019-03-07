@@ -14,13 +14,13 @@ describe('Generate', () => {
       bearerPath = ensureBearerStructure({ clean: true, authConfig: { authType }, folderName: authType })
     })
 
-    it('Fetch intent', async () => {
+    it('Fetch function', async () => {
       await GenerateFunction.run(['FetchDataFunction', '-t', 'fetch', '--path', bearerPath])
       expect(result.join()).toContain('Function generated')
       expect(readFile(bearerPath, 'functions', 'FetchDataFunction.ts')).toMatchSnapshot()
     })
 
-    it('Save intent', async () => {
+    it('Save function', async () => {
       await GenerateFunction.run(['SaveFunction', '-t', 'save', '--path', bearerPath])
       expect(result.join()).toContain('Function generated')
       expect(readFile(bearerPath, 'functions', 'SaveFunction.ts')).toMatchSnapshot()

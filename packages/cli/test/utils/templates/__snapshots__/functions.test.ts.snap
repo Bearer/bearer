@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`functions generator When APIKEY intent type: FetchData matches snapshot 1`] = `
+exports[`functions generator When APIKEY function type: FetchData matches snapshot 1`] = `
 "import { TAPIKEYAuthContext, FetchData, TFetchActionEvent, TFetchPromise } from '@bearer/functions'
 // Uncomment this line if you need to use Client
 // import Client from './client'
@@ -26,7 +26,7 @@ export type ReturnedData = {
 "
 `;
 
-exports[`functions generator When APIKEY intent type: SaveState matches snapshot 1`] = `
+exports[`functions generator When APIKEY function type: SaveState matches snapshot 1`] = `
 "import { TAPIKEYAuthContext, SaveState, TSaveActionEvent, TSavePromise } from '@bearer/functions'
 // Uncomment this line if you need to use Client
 // import Client from './client'
@@ -56,7 +56,7 @@ export type ReturnedData = {
 "
 `;
 
-exports[`functions generator When BASIC intent type: FetchData matches snapshot 1`] = `
+exports[`functions generator When BASIC function type: FetchData matches snapshot 1`] = `
 "import { TBASICAuthContext, FetchData, TFetchActionEvent, TFetchPromise } from '@bearer/functions'
 // Uncomment this line if you need to use Client
 // import Client from './client'
@@ -82,7 +82,7 @@ export type ReturnedData = {
 "
 `;
 
-exports[`functions generator When BASIC intent type: SaveState matches snapshot 1`] = `
+exports[`functions generator When BASIC function type: SaveState matches snapshot 1`] = `
 "import { TBASICAuthContext, SaveState, TSaveActionEvent, TSavePromise } from '@bearer/functions'
 // Uncomment this line if you need to use Client
 // import Client from './client'
@@ -112,7 +112,7 @@ export type ReturnedData = {
 "
 `;
 
-exports[`functions generator When NONE intent type: FetchData matches snapshot 1`] = `
+exports[`functions generator When NONE function type: FetchData matches snapshot 1`] = `
 "import { FetchData, TFetchActionEvent, TFetchPromise } from '@bearer/functions'
 // Uncomment this line if you need to use Client
 // import Client from './client'
@@ -137,7 +137,7 @@ export type ReturnedData = {
 "
 `;
 
-exports[`functions generator When NONE intent type: SaveState matches snapshot 1`] = `
+exports[`functions generator When NONE function type: SaveState matches snapshot 1`] = `
 "import { SaveState, TSaveActionEvent, TSavePromise } from '@bearer/functions'
 // Uncomment this line if you need to use Client
 // import Client from './client'
@@ -167,7 +167,7 @@ export type ReturnedData = {
 "
 `;
 
-exports[`functions generator When OAUTH1 intent type: FetchData matches snapshot 1`] = `
+exports[`functions generator When OAUTH1 function type: FetchData matches snapshot 1`] = `
 "import { TOAUTH1AuthContext, FetchData, TFetchActionEvent, TFetchPromise } from '@bearer/functions'
 // Uncomment this line if you need to use Client
 // import Client from './client'
@@ -192,7 +192,7 @@ export type ReturnedData = {
 "
 `;
 
-exports[`functions generator When OAUTH1 intent type: SaveState matches snapshot 1`] = `
+exports[`functions generator When OAUTH1 function type: SaveState matches snapshot 1`] = `
 "import { TOAUTH1AuthContext, SaveState, TSaveActionEvent, TSavePromise } from '@bearer/functions'
 // Uncomment this line if you need to use Client
 // import Client from './client'
@@ -221,7 +221,7 @@ export type ReturnedData = {
 "
 `;
 
-exports[`functions generator When OAUTH2 intent type: FetchData matches snapshot 1`] = `
+exports[`functions generator When OAUTH2 function type: FetchData matches snapshot 1`] = `
 "import { TOAUTH2AuthContext, FetchData, TFetchActionEvent, TFetchPromise } from '@bearer/functions'
 // Uncomment this line if you need to use Client
 // import Client from './client'
@@ -247,7 +247,7 @@ export type ReturnedData = {
 "
 `;
 
-exports[`functions generator When OAUTH2 intent type: SaveState matches snapshot 1`] = `
+exports[`functions generator When OAUTH2 function type: SaveState matches snapshot 1`] = `
 "import { TOAUTH2AuthContext, SaveState, TSaveActionEvent, TSavePromise } from '@bearer/functions'
 // Uncomment this line if you need to use Client
 // import Client from './client'

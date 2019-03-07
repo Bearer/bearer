@@ -18,7 +18,7 @@ describe('functions generator', () => {
   })
 
   describe.each(Object.values(Authentications))('When %s', (auth: Authentications) => {
-    describe.each(Object.values(FunctionType))('intent type: %s', (functionType: FunctionType) => {
+    describe.each(Object.values(FunctionType))('function type: %s', (functionType: FunctionType) => {
       let files: string[] = []
       let diagnostics: ts.Diagnostic[] = []
 

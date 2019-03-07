@@ -4,7 +4,7 @@ import { DBClient } from '../db-client'
 import * as d from '../declaration'
 import { SaveState, SaveStateActionExecutionError, SaveStateSavingStateError } from './save-state'
 
-describe('SaveFunction intent', () => {
+describe('SaveFunction function', () => {
   describe('.init', () => {
     it('use provided referenceId', async () => {
       const { func, event } = setup(SuccessFunction)
