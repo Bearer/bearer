@@ -124,7 +124,7 @@ function setup(intentClass: any, returnedData: any = null) {
     }
   } as any
 
-  const intent = intentClass.init()
+  const func = intentClass.init()
 
   return {
     event,

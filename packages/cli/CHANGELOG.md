@@ -274,7 +274,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Bug Fixes
 
-* **cli:** update intent filter to handle new intent format ([#489](https://github.com/Bearer/bearer/issues/489)) ([4dab3aa](https://github.com/Bearer/bearer/commit/4dab3aa))
+* **cli:** update func filter to handle new func format ([#489](https://github.com/Bearer/bearer/issues/489)) ([4dab3aa](https://github.com/Bearer/bearer/commit/4dab3aa))
 
 
 
@@ -652,7 +652,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Bug Fixes
 
-* **cli:** use correct intent variable name reference ([#411](https://github.com/Bearer/bearer/issues/411)) ([fe579d8](https://github.com/Bearer/bearer/commit/fe579d8))
+* **cli:** use correct func variable name reference ([#411](https://github.com/Bearer/bearer/issues/411)) ([fe579d8](https://github.com/Bearer/bearer/commit/fe579d8))
 
 
 
@@ -664,7 +664,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Bug Fixes
 
-* **cli:** use intent filenames as intent names ([#408](https://github.com/Bearer/bearer/issues/408)) ([bafec2e](https://github.com/Bearer/bearer/commit/bafec2e))
+* **cli:** use func filenames as func names ([#408](https://github.com/Bearer/bearer/issues/408)) ([bafec2e](https://github.com/Bearer/bearer/commit/bafec2e))
 
 
 

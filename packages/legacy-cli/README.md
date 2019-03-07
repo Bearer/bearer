@@ -26,7 +26,7 @@ $ bearer deploy
 $ bearer new attachPullRequest
 ```
 
-**Generate a new intent of type collection**
+**Generate a new func of type collection**
 
 ```bash
 $ bearer generate getRepositories --type=GetCollection

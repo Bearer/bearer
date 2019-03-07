@@ -58,7 +58,7 @@ function resolveParameterTypeIndex(t: ts.Type, checker: ts.TypeChecker, i: numbe
   return index
 }
 /**
- *  Find the Parameter type in intent and convert it to json-schema
+ *  Find the Parameter type in func and convert it to json-schema
  */
 function serializeParameters(sym: ts.Symbol | undefined, node: ts.Node, checker: ts.TypeChecker) {
   if (sym) {
@@ -97,7 +97,7 @@ function getFunctionAuthType(sym: ts.Symbol | undefined, node: ts.Node, checker:
 }
 
 /**
- *  Convert single intent types to json schema
+ *  Convert single func types to json schema
  *  This function tries to find the relevant type definitions, Params and `action` method resposne type
  *  and converts the types to json-schema
  *  @param intentPath absolute path to intent
@@ -151,7 +151,7 @@ export function intentTypesToSchemaConverter(
 /**
  *  Generate full openapi spec from intents
  *  @param intentsDir absolute path to intents directory
- *  @param intents list of intent names
+ *  @param intents list of func names
  *  @param integrationUuid integration unique identifier
  *  @param integrationName name of the integration
  */

@@ -114,7 +114,7 @@ export default function startLocalDevelopmentServer(
 const intentHandler = (distPath: string, devFunctionsContext, bearerBaseURL: string) => async (ctx, next) =>
   new Promise(async (resolve, _reject) => {
     try {
-      const intent = requireUncached(`${distPath}/${ctx.params.intentName}`).default
+      const func = requireUncached(`${distPath}/${ctx.params.intentName}`).default
 
       const userDefinedData = await loadUserDefinedData({ query: ctx.query })
 

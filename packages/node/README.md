@@ -36,7 +36,7 @@ _Note_: we are using axios a http client. Each .call() returns an Axios Promise.
 
 ### Integration client
 
-Integration client facilitates intent calls and prevent you to pass integration name on every call
+Integration client facilitates func calls and prevent you to pass integration name on every call
 
 ```tsx
 import { IntegrationClient } from '@bearer/node/lib/client'

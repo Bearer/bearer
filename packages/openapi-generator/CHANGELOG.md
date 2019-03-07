@@ -43,7 +43,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Bug Fixes
 
-* **openapi-generator:** fix the intent order ([#545](https://github.com/Bearer/bearer/issues/545)) ([14c1087](https://github.com/Bearer/bearer/commit/14c1087))
+* **openapi-generator:** fix the func order ([#545](https://github.com/Bearer/bearer/issues/545)) ([14c1087](https://github.com/Bearer/bearer/commit/14c1087))
 
 
 

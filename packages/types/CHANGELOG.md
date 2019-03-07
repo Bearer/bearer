@@ -431,7 +431,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Bug Fixes
 
-* **core:** send clientId with every intent calls ([07cc014](https://github.com/Bearer/bearer/commit/07cc014))
+* **core:** send clientId with every func calls ([07cc014](https://github.com/Bearer/bearer/commit/07cc014))
 
 
 

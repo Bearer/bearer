@@ -172,7 +172,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Bug Fixes
 
-* **intents:** make intent writing less restrictive ([#488](https://github.com/BearerSH/bearer/issues/488)) ([75d8145](https://github.com/BearerSH/bearer/commit/75d8145))
+* **intents:** make func writing less restrictive ([#488](https://github.com/BearerSH/bearer/issues/488)) ([75d8145](https://github.com/BearerSH/bearer/commit/75d8145))
 
 
 
@@ -237,8 +237,8 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 ### Features
 
 * **intents:** add first fetsh promise version ([cf98b8c](https://github.com/BearerSH/bearer/commit/cf98b8c))
-* **intents:** first version of promisified fetch intent ([d9fbbdc](https://github.com/BearerSH/bearer/commit/d9fbbdc))
-* **intents:** implement save state intent ([45284b9](https://github.com/BearerSH/bearer/commit/45284b9))
+* **intents:** first version of promisified fetch func ([d9fbbdc](https://github.com/BearerSH/bearer/commit/d9fbbdc))
+* **intents:** implement save state func ([45284b9](https://github.com/BearerSH/bearer/commit/45284b9))
 
 
 
@@ -250,7 +250,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Bug Fixes
 
-* **intents:** allow not passing ref-id to SaveState intent ([769ef42](https://github.com/BearerSH/bearer/commit/769ef42))
+* **intents:** allow not passing ref-id to SaveState func ([769ef42](https://github.com/BearerSH/bearer/commit/769ef42))
 
 
 

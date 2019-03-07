@@ -55,7 +55,7 @@ export function Function(intentName: string, type: FunctionType = FunctionType.F
           return missingIntegrationId()
         }
 
-        const intent = intentRequest<TFetchBearerResult>({
+        const func = intentRequest<TFetchBearerResult>({
           intentName,
           integrationId,
           [setupId]: params[setupId] || retrieveSetupId(target)

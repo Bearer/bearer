@@ -115,7 +115,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Features
 
-* update intent endpoint ([#513](https://github.com/Bearer/bearer/issues/513)) ([9363f8d](https://github.com/Bearer/bearer/commit/9363f8d))
+* update func endpoint ([#513](https://github.com/Bearer/bearer/issues/513)) ([9363f8d](https://github.com/Bearer/bearer/commit/9363f8d))
 
 
 

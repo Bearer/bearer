@@ -266,7 +266,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Bug Fixes
 
-* **transpiler:** input output transpiler intent arguments ([90cd61a](https://github.com/Bearer/bearer/commit/90cd61a))
+* **transpiler:** input output transpiler func arguments ([90cd61a](https://github.com/Bearer/bearer/commit/90cd61a))
 
 
 

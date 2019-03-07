@@ -13,7 +13,7 @@ export type TInputDecoratorOptions = {
    */
   eventName: string
   /**
-   * Name of the key used to send referenceId to the intent (as query parameter)
+   * Name of the key used to send referenceId to the func (as query parameter)
    */
   intentReferenceIdKeyName: string
   /**
@@ -38,7 +38,7 @@ export type TInputDecorator = (options?: Partial<TInputDecoratorOptions>) => (ta
  */
 export type TOutputDecoratorOptions = {
   /**
-   * Specify an intent you would like to use instead of the default one
+   * Specify an func you would like to use instead of the default one
    */
   intentName: string
   /**
@@ -47,7 +47,7 @@ export type TOutputDecoratorOptions = {
    */
   intentReferenceIdKeyName: string
   /**
-   * Name of property used to populate the intent intentReferenceIdKeyName param
+   * Name of property used to populate the func intentReferenceIdKeyName param
    */
   intentReferenceIdValue?: string
   /**
@@ -55,7 +55,7 @@ export type TOutputDecoratorOptions = {
    */
   intentArguments: string[]
   /**
-   * Name of the key name used to send the data to the intent (in the body)
+   * Name of the key name used to send the data to the func (in the body)
    * default: [propertyName]
    */
   intentPropertyName: string

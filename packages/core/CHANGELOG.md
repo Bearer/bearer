@@ -138,7 +138,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Features
 
-* update intent endpoint ([#513](https://github.com/Bearer/bearer/issues/513)) ([9363f8d](https://github.com/Bearer/bearer/commit/9363f8d))
+* update func endpoint ([#513](https://github.com/Bearer/bearer/issues/513)) ([9363f8d](https://github.com/Bearer/bearer/commit/9363f8d))
 
 
 
@@ -250,7 +250,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Bug Fixes
 
-* **core:** allow setupId to be passed as parameter of the intent call ([d2a18f0](https://github.com/Bearer/bearer/commit/d2a18f0))
+* **core:** allow setupId to be passed as parameter of the func call ([d2a18f0](https://github.com/Bearer/bearer/commit/d2a18f0))
 
 
 
@@ -364,7 +364,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Bug Fixes
 
-* **core:** use new intent endpoints ([b97fc28](https://github.com/Bearer/bearer/commit/b97fc28))
+* **core:** use new func endpoints ([b97fc28](https://github.com/Bearer/bearer/commit/b97fc28))
 
 
 
@@ -576,7 +576,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Bug Fixes
 
-* **core:** send clientId with every intent calls ([07cc014](https://github.com/Bearer/bearer/commit/07cc014))
+* **core:** send clientId with every func calls ([07cc014](https://github.com/Bearer/bearer/commit/07cc014))
 
 
 
@@ -993,7 +993,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Bug Fixes
 
-- **core:** reject intent promise if error returned ([#233](https://github.com/Bearer/bearer/issues/233)) ([d1c36b9](https://github.com/Bearer/bearer/commit/d1c36b9))
+- **core:** reject func promise if error returned ([#233](https://github.com/Bearer/bearer/issues/233)) ([d1c36b9](https://github.com/Bearer/bearer/commit/d1c36b9))
 
 ### Features
 

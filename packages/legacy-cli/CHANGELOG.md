@@ -419,7 +419,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Bug Fixes
 
-* **cli:** handle new intent routes ([068cb23](https://github.com/Bearer/bearer/commit/068cb23))
+* **cli:** handle new func routes ([068cb23](https://github.com/Bearer/bearer/commit/068cb23))
 
 
 
@@ -1083,7 +1083,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 ### Bug Fixes
 
 * **cli:** Better deploy error message ([#275](https://github.com/Bearer/bearer/issues/275)) ([70b61af](https://github.com/Bearer/bearer/commit/70b61af))
-* **webserver:** handle not existing intent gracefully ([#277](https://github.com/Bearer/bearer/issues/277)) ([6af021a](https://github.com/Bearer/bearer/commit/6af021a))
+* **webserver:** handle not existing func gracefully ([#277](https://github.com/Bearer/bearer/issues/277)) ([6af021a](https://github.com/Bearer/bearer/commit/6af021a))
 
 
 ### Features
@@ -1390,7 +1390,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 ### Bug Fixes
 
 - **cli:** remove useless div ([e0c248a](https://github.com/Bearer/bearer/commit/e0c248a))
-- **cli:** use correct intent type name ([2d5ffa4](https://github.com/Bearer/bearer/commit/2d5ffa4))
+- **cli:** use correct func type name ([2d5ffa4](https://github.com/Bearer/bearer/commit/2d5ffa4))
 
 ### Features
 
@@ -1503,7 +1503,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Features
 
-- **cli:** add invoke command to run intent locally ([#165](https://github.com/Bearer/bearer/issues/165)) ([94a909d](https://github.com/Bearer/bearer/commit/94a909d))
+- **cli:** add invoke command to run func locally ([#165](https://github.com/Bearer/bearer/issues/165)) ([94a909d](https://github.com/Bearer/bearer/commit/94a909d))
 - **cli:** prepare production ([#170](https://github.com/Bearer/bearer/issues/170)) ([2a6aa2e](https://github.com/Bearer/bearer/commit/2a6aa2e))
 
 <a name="0.25.1"></a>
@@ -1544,7 +1544,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 - **cli:** buildartifact dist moved to .bearer ([#156](https://github.com/Bearer/bearer/issues/156)) ([fe16f2a](https://github.com/Bearer/bearer/commit/fe16f2a))
 - **cli:** file renaming was missing ([d9faf0c](https://github.com/Bearer/bearer/commit/d9faf0c))
 - **cli:** handle promise failures ([6d98d71](https://github.com/Bearer/bearer/commit/6d98d71))
-- **cli:** No intent issue ([62e6f9a](https://github.com/Bearer/bearer/commit/62e6f9a))
+- **cli:** No func issue ([62e6f9a](https://github.com/Bearer/bearer/commit/62e6f9a))
 - **cli:** rename screen folder to view ([9211568](https://github.com/Bearer/bearer/commit/9211568))
 - add space between brackets ([9c3f671](https://github.com/Bearer/bearer/commit/9c3f671))
 - clean build ([b638e71](https://github.com/Bearer/bearer/commit/b638e71))

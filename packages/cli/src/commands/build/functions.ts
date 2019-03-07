@@ -61,7 +61,7 @@ export default class BuildFunctions extends BaseCommand {
       try {
         const files = await globby([`${entriesPath}/*.ts`])
         if (!files.length) {
-          return reject(new Error('No intent to transpile'))
+          return reject(new Error('No func to transpile'))
         }
 
         const config: webpack.Configuration = {

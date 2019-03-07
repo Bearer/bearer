@@ -1,7 +1,7 @@
 export enum FunctionType {
   /**
-   * Simple intent (function) to fetch data (get/post/put) from
-   * You can store data within the intent itself or query external APIs
+   * Simple func (function) to fetch data (get/post/put) from
+   * You can store data within the func itself or query external APIs
    */
   FetchData = 'FetchData',
   /**

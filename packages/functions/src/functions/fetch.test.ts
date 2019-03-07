@@ -97,7 +97,7 @@ function setup(intencClass: any) {
     }
   } as any
 
-  const intent = intencClass.init()
+  const func = intencClass.init()
   return {
     event,
     intent
