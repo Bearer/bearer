@@ -35,6 +35,7 @@ export default class GenerateComponent extends BaseCommand {
       if (type === TComponent.ROOT) {
         this.warn(
           this.colors.italic(
+            // tslint:disable-next-line:max-line-length
             'Please make sure to update the spec.ts file to reflect your new Root Component on the Developer Portal preview page.'
           )
         )
@@ -47,8 +48,8 @@ export default class GenerateComponent extends BaseCommand {
   getVars(name: string, authType: Authentications) {
     const componentName = this.case.pascal(name)
     return {
-      fileName: name,
       componentName,
+      fileName: name,
       componentClassName: componentName, // it gives more meaning within templates
       componentTagName: this.case.kebab(componentName),
       groupName: this.case.kebab(componentName),
@@ -59,10 +60,10 @@ export default class GenerateComponent extends BaseCommand {
   async askForComponentType(): Promise<TComponent> {
     const { type } = await this.inquirer.prompt<{ type: TComponent }>([
       {
+        choices,
         message: 'What kind of component would you like to generate:',
         type: 'list',
-        name: 'type',
-        choices
+        name: 'type'
       }
     ])
     return type
