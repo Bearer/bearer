@@ -5,6 +5,7 @@
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
+    "@bearer/logger": "^0.95.1",
     "@bearer/package-init": "^0.95.1",
     "@bearer/tsconfig": "^0.95.1",
     "@bearer/tslint-config": "^0.95.1",
@@ -14,6 +15,7 @@
   "devDependencies": {
     "@commitlint/cli": "^7.5.2",
     "@commitlint/config-conventional": "^7.5.0",
+    "@types/debug": "^4.1.2",
     "@types/jest": "^24.0.9",
     "aws-sdk": "^2.415.0",
     "commitlint": "^7.5.2",

@@ -9,6 +9,6 @@ export const captureHttps = (module: any, event: any) => {
     return
   }
 
-  overrideRequestMethod(module, event)
-  overrideGetMethod(module, event)
+  overrideRequestMethod(module)
+  overrideGetMethod(module)
 }

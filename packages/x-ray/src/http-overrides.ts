@@ -3,7 +3,7 @@ const logger = debug('intents')
 import { sendToCloudwatchGroup } from './cloud-watch-logs'
 import { STAGE, _HANDLER } from './constants'
 
-export const overrideRequestMethod = (module: any, event: any) => {
+export const overrideRequestMethod = (module: any) => {
   // override http.request method
   module._request = module.request
   module.request = (options: any, callaback: any) => {
@@ -46,7 +46,7 @@ export const overrideRequestMethod = (module: any, event: any) => {
   }
 }
 
-export const overrideGetMethod = (module: any, event: any) => {
+export const overrideGetMethod = (module: any) => {
   // overrride the http.get method
   module._get = module.get
   module.get = (options: any, callaback: any) => {
