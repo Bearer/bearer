@@ -8,8 +8,7 @@ import '@bearer/ui'
 import { FieldSet } from "@bearer/ui/lib/collection/components/Forms/Fieldset";
 
 @RootComponent({
-  group: 'setup',
-  role: 'action'
+  name: 'setup-action',
 })
 export class SetupAction {
   @Prop() onSetupSuccess: (detail: any) => void = (_any: any) => { }
