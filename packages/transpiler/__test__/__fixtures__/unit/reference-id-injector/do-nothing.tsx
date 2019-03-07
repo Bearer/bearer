@@ -1,5 +1,5 @@
-import { Intent, BearerFetch } from '@bearer/core'
+import { Function, BearerFetch } from '@bearer/core'
 class DoNothing {
   @OtherDecorator other: any
-  @Intent('MyIntent') fetcher: BearerFetch
+  @Function('MyFunction') fetcher: BearerFetch
 }

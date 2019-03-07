@@ -10,7 +10,7 @@ const CONFIG_FILE = 'bearer.config.json'
 const HANDLER_NAME = 'index'
 const HANDLER_NAME_WITH_EXT = [HANDLER_NAME, 'js'].join('.')
 
-export default class PackIntents extends BaseCommand {
+export default class PackFunctions extends BaseCommand {
   static description = 'Pack integration intents'
   static hidden = true
   static flags = {
@@ -22,7 +22,7 @@ export default class PackIntents extends BaseCommand {
   @RequireIntegrationFolder()
   async run() {
     // we are assuming prepare and build have been run previously
-    const { args } = this.parse(PackIntents)
+    const { args } = this.parse(PackFunctions)
     const { ARCHIVE_PATH } = args
     const target = path.resolve(ARCHIVE_PATH)
     this.debug(`Zipping to: ${target}`)
@@ -55,9 +55,9 @@ export default class PackIntents extends BaseCommand {
 
     try {
       // add intents
-      archive.directory(this.locator.buildIntentsDir, false)
+      archive.directory(this.locator.buildFunctionsDir, false)
       // add CONFIG
-      const intents = await this.retrieveIntents()
+      const intents = await this.retrieveFunctions()
 
       const { config, handlers } = buildLambdaDefinitions(intents)
       const finalConfig = await this.retrieveAuthConfig(config)
@@ -91,12 +91,12 @@ export default class PackIntents extends BaseCommand {
   }
 
   // TODO: rewrite this using TS AST
-  async retrieveIntents(): Promise<TIntentNames> {
+  async retrieveFunctions(): Promise<TFunctionNames> {
     try {
       const config = await prepareConfig(
         this.locator.authConfigPath,
         this.bearerConfig.integrationUuid,
-        this.locator.srcIntentsDir
+        this.locator.srcFunctionsDir
       )
       return config.intents
     } catch (e) {
@@ -105,7 +105,7 @@ export default class PackIntents extends BaseCommand {
   }
 }
 
-type TIntentNames = string[]
+type TFunctionNames = string[]
 
 type TBearerConfig = {
   intents: Record<string, string>[]
@@ -119,7 +119,7 @@ type TLambdaDefinition = {
   handlers: string
 }
 
-export function buildLambdaDefinitions(intents: TIntentNames): TLambdaDefinition {
+export function buildLambdaDefinitions(intents: TFunctionNames): TLambdaDefinition {
   return {
     config: {
       intents: intents.reduce(
@@ -134,7 +134,7 @@ export function buildLambdaDefinitions(intents: TIntentNames): TLambdaDefinition
   }
 }
 
-function buildLambdaIndex(intents: TIntentNames): string {
+function buildLambdaIndex(intents: TFunctionNames): string {
   return intents
     .map((intent, index) => {
       const intentConstName = `intent${index}`

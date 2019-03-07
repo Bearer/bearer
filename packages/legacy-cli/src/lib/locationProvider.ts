@@ -29,7 +29,7 @@ export default class LocationProvider {
   }
 
   // ~/intents
-  get srcIntentsDir(): string {
+  get srcFunctionsDir(): string {
     return path.join(this.integrationRoot, 'intents')
   }
 
@@ -53,12 +53,12 @@ export default class LocationProvider {
   }
 
   // ~/.bearer/intents
-  get buildIntentsDir(): string {
+  get buildFunctionsDir(): string {
     return path.join(this.bearerDir, 'intents')
   }
 
-  buildIntentsResourcePath(resource: string): string {
-    return path.join(this.buildIntentsDir, resource)
+  buildFunctionsResourcePath(resource: string): string {
+    return path.join(this.buildFunctionsDir, resource)
   }
 
   get buildArtifactDir(): string {

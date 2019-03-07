@@ -1,6 +1,6 @@
-import { Intent, IntentType, BearerFetch } from '@bearer/core'
+import { Function, FunctionType, BearerFetch } from '@bearer/core'
 
-export class IntentDecorated {
-  @Intent('saveState', IntentType.SaveState)
+export class FunctionDecorated {
+  @Function('saveState', FunctionType.SaveState)
   fetcher: BearerFetch
 }

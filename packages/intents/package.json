@@ -1,7 +1,7 @@
 {
   "name": "@bearer/intents",
   "version": "0.100.0",
-  "description": "Bearer Intents",
+  "description": "Bearer Functions",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "author": "Bearer Team<engineering@bearer.sh>",

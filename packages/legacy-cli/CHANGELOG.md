@@ -1650,7 +1650,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Features
 
-- **generator:** Improve Intent generator ([#113](https://github.com/Bearer/bearer/issues/113)) ([8f86f46](https://github.com/Bearer/bearer/commit/8f86f46))
+- **generator:** Improve Function generator ([#113](https://github.com/Bearer/bearer/issues/113)) ([8f86f46](https://github.com/Bearer/bearer/commit/8f86f46))
 
 <a name="0.18.0"></a>
 
@@ -1659,7 +1659,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 ### Features
 
 - **generator:** improves client.ts ([#107](https://github.com/Bearer/bearer/issues/107)) ([5c5ffcc](https://github.com/Bearer/bearer/commit/5c5ffcc))
-- **templates:** renames devIntents.config to dev.config ([#108](https://github.com/Bearer/bearer/issues/108)) ([f5d617f](https://github.com/Bearer/bearer/commit/f5d617f))
+- **templates:** renames devFunctions.config to dev.config ([#108](https://github.com/Bearer/bearer/issues/108)) ([f5d617f](https://github.com/Bearer/bearer/commit/f5d617f))
 
 <a name="0.17.5"></a>
 

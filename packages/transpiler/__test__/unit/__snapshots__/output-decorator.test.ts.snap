@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Output decorator units file: complete-options.tsx generates stuff 1`] = `
-"import { BearerRef, Output, RootComponent, Input, BearerFetch, EventEmitter, Event, Intent, State, Watch } from '@bearer/core';
+"import { BearerRef, Output, RootComponent, Input, BearerFetch, EventEmitter, Event, Function, State, Watch } from '@bearer/core';
 type Farmer = {
     id: string;
     name: string;
@@ -18,7 +18,7 @@ class NoOptionsComponent {
     // // generate this
     // @Event() farmerSaved: EventEmitter<Farmer>
     // @State() farmer: BearerRef<Farmer>
-    // @Intent('setFarmer') setFarmer: BearerFetch<Farmer>
+    // @Function('setFarmer') setFarmer: BearerFetch<Farmer>
     // @Watch('farmer')
     // farmerchangeHandler(newValue: BearerRef<Farmer>) {
     //   if (newValue) {
@@ -46,12 +46,12 @@ class NoOptionsComponent {
             this._loadFarmer();
         }
     }
-    @Intent(\\"saveFarmer\\")
+    @Function(\\"saveFarmer\\")
     saveFarmer: BearerFetch<BearerRef<Farmer>
     // // generate this
     // @Event() farmerSaved: EventEmitter<Farmer>
     // @State() farmer: BearerRef<Farmer>
-    // @Intent('setFarmer') setFarmer: BearerFetch<Farmer>
+    // @Function('setFarmer') setFarmer: BearerFetch<Farmer>
     // @Watch('farmer')
     // farmerchangeHandler(newValue: BearerRef<Farmer>) {
     //   if (newValue) {
@@ -82,7 +82,7 @@ class NoOptionsComponent {
         });
         this.farmerInitial = null;
     }
-    @Intent(\\"retrieveFarmer\\")
+    @Function(\\"retrieveFarmer\\")
     fetcherRetrieveFarmer;
     _loadFarmer = () => {
         this.fetcherRetrieveFarmer({ referenceId: this.farmerId }).then(({ data }: {
@@ -93,7 +93,7 @@ class NoOptionsComponent {
             }
         });
     };
-    @Intent(\\"milkWithAbottle\\")
+    @Function(\\"milkWithAbottle\\")
     milkWithAbottle: BearerFetch<BearerRef<Farmer>>;
     @Event(\\"aPanda\\")
     milked: EventEmitter<{
@@ -114,7 +114,7 @@ class NoOptionsComponent {
         });
         this.farmerAndPandaInitial = null;
     }
-    @Intent(\\"retrieveFarmerAndPanda\\")
+    @Function(\\"retrieveFarmerAndPanda\\")
     fetcherRetrieveFarmerAndPanda;
     _loadFarmerAndPanda = () => {
         this.fetcherRetrieveFarmerAndPanda({ anotherProp: this.farmerAndPandaId, farmerId: this.farmerId, spongeBobOverrided: this.spongeBobOverrided, authId: this.authId }).then(({ data }: {

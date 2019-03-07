@@ -1,6 +1,6 @@
 import { FetchData, TFetchPromise, TOAUTH2AuthContext, TFetchActionEvent } from '@bearer/intents'
 
-export default class IntentObjectLiteralType extends FetchData
+export default class FunctionObjectLiteralType extends FetchData
   implements FetchData<{ expectedData: string[] }, any, TOAUTH2AuthContext> {
   async action(
     event: TFetchActionEvent<

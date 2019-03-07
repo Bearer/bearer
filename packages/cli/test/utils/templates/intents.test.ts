@@ -2,11 +2,11 @@ import * as ts from 'typescript'
 import * as fs from 'fs-extra'
 
 import { Authentications } from '@bearer/types/lib/authentications';
-import IntentType from '@bearer/types/lib/intent-types'
+import FunctionType from '@bearer/types/lib/intent-types'
 
 import * as path from 'path'
 
-import generateIntent from '../../../src/utils/templates/intents'
+import generateFunction from '../../../src/utils/templates/intents'
 import compilerOptions from '../../../src/utils/intent-ts-compiler-options'
 const destination = path.join(__dirname, '../../../.bearer/generated-intents')
 
@@ -18,13 +18,13 @@ describe('intents generator', () => {
   })
 
   describe.each(Object.values(Authentications))('When %s', (auth: Authentications) => {
-    describe.each(Object.values(IntentType))('intent type: %s', (intentType: IntentType) => {
+    describe.each(Object.values(FunctionType))('intent type: %s', (intentType: FunctionType) => {
       let files: string[] = []
       let diagnostics: ts.Diagnostic[] = []
 
       beforeAll(async () => {
-        const command = { silent: true, locator: { srcIntentsDir: destination } }
-        files = await generateIntent(command as any, auth, intentType, `${auth}-${intentType}-Intent`)
+        const command = { silent: true, locator: { srcFunctionsDir: destination } }
+        files = await generateFunction(command as any, auth, intentType, `${auth}-${intentType}-Function`)
         const options = ts.convertCompilerOptionsFromJson(compilerOptions, 'ok')
         const program = ts.createProgram(files, { ...options.options, noEmit: true });
         const emitResult = program.emit()

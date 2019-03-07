@@ -12,7 +12,7 @@ import {
   extractArrayOptions
 } from '../helpers/decorator-helpers'
 import { addAutoLoad, createFetcher, createLoadResourceMethod } from '../helpers/generator-helpers'
-import { initialName, retrieveFetcherName, retrieveIntentName, loadName } from '../helpers/name-helpers'
+import { initialName, retrieveFetcherName, retrieveFunctionName, loadName } from '../helpers/name-helpers'
 import { getNodeName } from '../helpers/node-helpers'
 import { capitalize } from '../helpers/string'
 import { TCreateLoadResourceMethod, TransformerOptions, OutputMeta, InputMeta } from '../types'
@@ -43,7 +43,7 @@ export default function outputDecorator({ metadata }: TransformerOptions = {}): 
         Types.BearerFetch,
         Types.EventEmitter,
         Decorators.Event,
-        Decorators.Intent,
+        Decorators.Function,
         Decorators.State,
         Decorators.Watch
       ])
@@ -75,7 +75,7 @@ function injectOuputStatements(
   const newMembers = outputsMeta.reduce(
     (members, meta) => {
       const outputMembers = [
-        createIntent(meta),
+        createFunction(meta),
         createEvent(meta),
         ...createStates(meta),
         createProp(meta),
@@ -193,7 +193,7 @@ function createWatchers(meta: OutputMeta): ts.MethodDeclaration[] {
       undefined,
       ts.createBlock(
         [
-          ts.createStatement(createIntentCall(meta)),
+          ts.createStatement(createFunctionCall(meta)),
           ts.createStatement(
             ts.createBinary(
               ts.createPropertyAccess(ts.createThis(), initialName(meta.propDeclarationName)),
@@ -208,11 +208,11 @@ function createWatchers(meta: OutputMeta): ts.MethodDeclaration[] {
   ]
 }
 
-function createIntent(meta: OutputMeta): ts.PropertyDeclaration {
+function createFunction(meta: OutputMeta): ts.PropertyDeclaration {
   return ts.createProperty(
     [
       ts.createDecorator(
-        ts.createCall(ts.createIdentifier(Decorators.Intent), undefined, [ts.createStringLiteral(meta.intentName)])
+        ts.createCall(ts.createIdentifier(Decorators.Function), undefined, [ts.createStringLiteral(meta.intentName)])
       )
     ],
     undefined,
@@ -225,7 +225,7 @@ function createIntent(meta: OutputMeta): ts.PropertyDeclaration {
   )
 }
 
-function createIntentCall(meta: OutputMeta) {
+function createFunctionCall(meta: OutputMeta) {
   const newValueInitializer = ts.createBinary(
     ts.createIdentifier(data),
     ts.createToken(ts.SyntaxKind.BarBarToken),
@@ -312,7 +312,7 @@ export function refIdName(name: string): string {
   return `${name}Id`
 }
 
-export function saveIntentName(name: string): string {
+export function saveFunctionName(name: string): string {
   return `save${capitalize(name)}`
 }
 
@@ -323,7 +323,7 @@ export function outputEventName(prefix: string, suffix?: string): string {
 
 function createInitialFetcher(meta) {
   const metaForInitial = {
-    intentName: retrieveIntentName(meta.propDeclarationName)
+    intentName: retrieveFunctionName(meta.propDeclarationName)
   }
   return createFetcher({ ...meta, ...metaForInitial })
 }
@@ -357,7 +357,7 @@ export function retrieveOutputsMetas(
             }
         outputs.push({
           eventName: outputEventName(name),
-          intentName: saveIntentName(name),
+          intentName: saveFunctionName(name),
           intentMethodName: retrieveFetcherName(name),
           intentPropertyName: name,
           propDeclarationName: name,

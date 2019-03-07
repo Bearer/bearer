@@ -47,9 +47,9 @@ export function useWith(program, emitter, config, locator: Locator) {
     .command('invoke <intent>')
     .option('-p, --path <path>')
     .description(
-      `invoke Intent locally.
-  $ bearer invoke <IntentName>
-  $ bearer invoke <IntentName> -p tests/intent.json
+      `invoke Function locally.
+  $ bearer invoke <FunctionName>
+  $ bearer invoke <FunctionName> -p tests/intent.json
 `
     )
     .action(invoke(emitter, config, locator))

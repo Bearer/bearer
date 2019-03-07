@@ -4,7 +4,7 @@ import { BearerWindow } from '@bearer/types'
 import Bearer from './bearer'
 import { intentRequest, itemRequest } from './requests'
 
-const intentName = 'anIntent'
+const intentName = 'anFunction'
 const integrationId = 'aIntegrationId'
 const setupId = '1234'
 declare const window: BearerWindow & { fetch: any }
@@ -56,7 +56,7 @@ describe('requests', () => {
       await aRequest({ page: 1 }, {})
 
       expect(global.fetch).toBeCalledWith(
-        'https://localhost:5555/api/v3/intents/aIntegrationId/anIntent?page=1&setupId=1234&clientId=42&secured=true',
+        'https://localhost:5555/api/v3/intents/aIntegrationId/anFunction?page=1&setupId=1234&clientId=42&secured=true',
         {
           credentials: 'include',
           headers: {

@@ -4,8 +4,8 @@ type TClientOptions = {
   hostUrl: string
 }
 
-type TIntentParams = { query?: any; body?: any }
-const defaultIntentParams = { query: {}, body: {} }
+type TFunctionParams = { query?: any; body?: any }
+const defaultFunctionParams = { query: {}, body: {} }
 
 export class BearerClient<T = string> {
   protected static defaultOptions = { hostUrl: 'https://int.bearer.sh/api/v3/intents/backend' }
@@ -23,7 +23,7 @@ export class BearerClient<T = string> {
     })
   }
 
-  public call(integrationName: string, intentName: T, { query, body }: TIntentParams = defaultIntentParams) {
+  public call(integrationName: string, intentName: T, { query, body }: TFunctionParams = defaultFunctionParams) {
     return this.client.post(`${integrationName}/${intentName}`, body, {
       params: query
     })
@@ -37,7 +37,7 @@ export class IntegrationClient<T = string> {
     this.bearerClient = new BearerClient<T>(token, clientOptions)
   }
 
-  public call(intentName: T, intentParams: TIntentParams = defaultIntentParams) {
+  public call(intentName: T, intentParams: TFunctionParams = defaultFunctionParams) {
     return this.bearerClient.call(this.integrationName, intentName, intentParams)
   }
 }

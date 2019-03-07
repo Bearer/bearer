@@ -17,11 +17,11 @@ export type TInputDecoratorOptions = {
    */
   intentReferenceIdKeyName: string
   /**
-   * Intent to retrieve data from
+   * Function to retrieve data from
    */
   intentName: string
   /**
-   * Intent arguments
+   * Function arguments
    */
   intentArguments: string[]
   /**
@@ -51,7 +51,7 @@ export type TOutputDecoratorOptions = {
    */
   intentReferenceIdValue?: string
   /**
-   * Intent arguments
+   * Function arguments
    */
   intentArguments: string[]
   /**

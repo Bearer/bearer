@@ -41,7 +41,7 @@ export type TBearerLambdaContext<AuthContext = TAuthContext, DataContext = {}> =
   }
 
 /**
- * Intents
+ * Functions
  */
 
 /**

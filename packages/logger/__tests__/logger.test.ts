@@ -1,4 +1,4 @@
-import debug, { BearerIntentLogger } from '../src/logger'
+import debug, { BearerFunctionLogger } from '../src/logger'
 import { IDebug } from 'debug'
 
 describe('logger', () => {
@@ -9,8 +9,8 @@ describe('logger', () => {
 
 describe('intent logger', () => {
   it('returns an intent logger', () => {
-    const logger = new BearerIntentLogger({})
-    expect(logger).toBeInstanceOf(BearerIntentLogger)
+    const logger = new BearerFunctionLogger({})
+    expect(logger).toBeInstanceOf(BearerFunctionLogger)
     expect(logger.log).toBeInstanceOf(Function)
   })
 })

@@ -150,7 +150,7 @@ Object {
 exports[`Transpiler integration test FullComponent.tsx match expectation 1`] = `
 Object {
   "file": "FullComponent.tsx",
-  "postContent": "import { BearerFetch, BearerRef, BearerState, Component, Intent, IntentType, Event, EventEmitter, scopedT, scopedP, State, Watch, Prop } from '@bearer/core';
+  "postContent": "import { BearerFetch, BearerRef, BearerState, Component, Function, FunctionType, Event, EventEmitter, scopedT, scopedP, State, Watch, Prop } from '@bearer/core';
 type Panda = {
     fullPandaName: string;
 };
@@ -218,10 +218,10 @@ export class FullComponent {
         });
     };
     constructor() {
-        Intent('ListRepositories')(this, \\"fetcher\\");
-        Intent('getPullRequest', IntentType.FetchData)(this, \\"fetchResource\\");
-        Intent(\\"saveSetup\\")(this, \\"saveSetup\\");
-        Intent(\\"retrieveSetup\\")(this, \\"fetcherRetrieveSetup\\");
+        Function('ListRepositories')(this, \\"fetcher\\");
+        Function('getPullRequest', FunctionType.FetchData)(this, \\"fetchResource\\");
+        Function(\\"saveSetup\\")(this, \\"saveSetup\\");
+        Function(\\"retrieveSetup\\")(this, \\"fetcherRetrieveSetup\\");
     }
     get INTEGRATION_ID() { return \\"SPONGE_BOB\\"; }
     @Prop({ \\"context\\": \\"bearer\\" })
@@ -409,7 +409,7 @@ Object {
 exports[`Transpiler integration test RootComponent.tsx match expectation 1`] = `
 Object {
   "file": "RootComponent.tsx",
-  "postContent": "import { BearerFetch, BearerState, Intent, IntentType, BearerRef, Event, EventEmitter, Component, Listen, State, Watch, Prop } from '@bearer/core';
+  "postContent": "import { BearerFetch, BearerState, Function, FunctionType, BearerRef, Event, EventEmitter, Component, Listen, State, Watch, Prop } from '@bearer/core';
 type Farmer = {
     fullName: string;
 };
@@ -535,7 +535,7 @@ export class AttachPullRequestAction {
             }
         });
     };
-    private manualIntentName: BearerFetch<BearerRef<{
+    private manualFunctionName: BearerFetch<BearerRef<{
         inlineName: string;
     }>>;
     @Event({ eventName: \\"bearer-sponge-bob-spongebobdsaved\\" })
@@ -552,7 +552,7 @@ export class AttachPullRequestAction {
     shortPandaId: string;
     @Watch(\\"manualpropertyWatchedName\\")
     spongeBobdSavedWatcher(newValue) {
-        this.manualIntentName({ body: { manuaLIntentPropertyName: newValue }, manualintentReferenceIdKeyName: this.shortPandaId }).then(({ referenceId: manualreferenceKeyName, data }) => {
+        this.manualFunctionName({ body: { manuaLFunctionPropertyName: newValue }, manualintentReferenceIdKeyName: this.shortPandaId }).then(({ referenceId: manualreferenceKeyName, data }) => {
             this.spongeBobdSaved.emit({ manualreferenceKeyName, shortPanda: data || this.shortPanda });
             this.shortPandaId = manualreferenceKeyName;
         });
@@ -571,14 +571,14 @@ export class AttachPullRequestAction {
         });
     };
     constructor() {
-        Intent('ListRepositories')(this, \\"fetcher\\");
-        Intent('getPullRequest', IntentType.FetchData)(this, \\"fetchResource\\");
-        Intent(\\"retrieveFarmer\\")(this, \\"fetcherRetrieveFarmer\\");
-        Intent(\\"retrieveGoat\\")(this, \\"fetcherRetrieveGoat\\");
-        Intent(\\"saveFeedPanda\\")(this, \\"saveFeedPanda\\");
-        Intent(\\"retrieveFeedPanda\\")(this, \\"fetcherRetrieveFeedPanda\\");
-        Intent(\\"manualIntentName\\")(this, \\"manualIntentName\\");
-        Intent(\\"retrieveShortPanda\\")(this, \\"fetcherRetrieveShortPanda\\");
+        Function('ListRepositories')(this, \\"fetcher\\");
+        Function('getPullRequest', FunctionType.FetchData)(this, \\"fetchResource\\");
+        Function(\\"retrieveFarmer\\")(this, \\"fetcherRetrieveFarmer\\");
+        Function(\\"retrieveGoat\\")(this, \\"fetcherRetrieveGoat\\");
+        Function(\\"saveFeedPanda\\")(this, \\"saveFeedPanda\\");
+        Function(\\"retrieveFeedPanda\\")(this, \\"fetcherRetrieveFeedPanda\\");
+        Function(\\"manualFunctionName\\")(this, \\"manualFunctionName\\");
+        Function(\\"retrieveShortPanda\\")(this, \\"fetcherRetrieveShortPanda\\");
     }
     get INTEGRATION_ID() { return \\"SPONGE_BOB\\"; }
     @Prop({ \\"context\\": \\"bearer\\" })
@@ -958,7 +958,7 @@ Object {
 exports[`Transpiler integration test invalidRootComponent.tsx match expectation 1`] = `
 Object {
   "file": "invalidRootComponent.tsx",
-  "postContent": "import { BearerFetch, BearerState, Intent, IntentType, Component, Prop, Watch, State } from '@bearer/core';
+  "postContent": "import { BearerFetch, BearerState, Function, FunctionType, Component, Prop, Watch, State } from '@bearer/core';
 @Component({
     tag: \\"bearer-attach-pull-request\\",
     shadow: false
@@ -976,8 +976,8 @@ export class InvalidRootComponent {
         return <bearer-scrollable fetcher={this.fetcher}/>;
     }
     constructor() {
-        Intent('ListRepositories')(this, \\"fetcher\\");
-        Intent('getPullRequest', IntentType.FetchData)(this, \\"fetchResource\\");
+        Function('ListRepositories')(this, \\"fetcher\\");
+        Function('getPullRequest', FunctionType.FetchData)(this, \\"fetchResource\\");
     }
     get INTEGRATION_ID() { return \\"SPONGE_BOB\\"; }
     @Prop({ \\"context\\": \\"bearer\\" })
@@ -1162,7 +1162,7 @@ Object {
 exports[`Transpiler integration test overrides-decorator.tsx match expectation 1`] = `
 Object {
   "file": "overrides-decorator.tsx",
-  "postContent": "import { Component, Intent, BearerFetch, IntentType, Prop } from '@bearer/core';
+  "postContent": "import { Component, Function, BearerFetch, FunctionType, Prop } from '@bearer/core';
 @Component({
     tag: \\"bearer-overrides-decorator-full\\"
 })
@@ -1170,8 +1170,8 @@ class OverridesDecorarotFull {
     private fetcher: BearerFetch;
     private memberFetcher: BearerFetch;
     constructor() {
-        Intent('collectionIntent')(this, \\"fetcher\\");
-        Intent('collectionIntent', IntentType.FetchData)(this, \\"memberFetcher\\");
+        Function('collectionFunction')(this, \\"fetcher\\");
+        Function('collectionFunction', FunctionType.FetchData)(this, \\"memberFetcher\\");
     }
     componentWillLoad() {
         console.log('componentWillLoad');

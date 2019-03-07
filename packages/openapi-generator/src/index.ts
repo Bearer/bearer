@@ -76,7 +76,7 @@ function serializeParameters(sym: ts.Symbol | undefined, node: ts.Node, checker:
  *  @param node action method symbol value declaration
  *  @param checker program type checker
  */
-function getIntentAuthType(sym: ts.Symbol | undefined, node: ts.Node, checker: ts.TypeChecker): string | undefined {
+function getFunctionAuthType(sym: ts.Symbol | undefined, node: ts.Node, checker: ts.TypeChecker): string | undefined {
   if (sym) {
     const typ = checker.getTypeOfSymbolAtLocation(sym, node)
     if (typ.aliasTypeArguments) {
@@ -135,7 +135,7 @@ export function intentTypesToSchemaConverter(
         const sym = checker.getSymbolAtLocation(parameterNode.name)
         output.requestBody = serializeParameters(sym, parameterNode, checker)
         output.response = serializeBody(actionMethodNode, checker)
-        output.intentAuthType = getIntentAuthType(sym, parameterNode, checker)
+        output.intentAuthType = getFunctionAuthType(sym, parameterNode, checker)
       }
     }
   }

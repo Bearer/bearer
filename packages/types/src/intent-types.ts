@@ -1,4 +1,4 @@
-export enum IntentType {
+export enum FunctionType {
   /**
    * Simple intent (function) to fetch data (get/post/put) from
    * You can store data within the intent itself or query external APIs
@@ -10,4 +10,4 @@ export enum IntentType {
   SaveState = 'SaveState'
 }
 
-export default IntentType
+export default FunctionType

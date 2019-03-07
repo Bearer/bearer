@@ -4,10 +4,10 @@ import { DBClient } from '../db-client'
 import * as d from '../declaration'
 import { SaveState, SaveStateActionExecutionError, SaveStateSavingStateError } from './save-state'
 
-describe('SaveIntent intent', () => {
+describe('SaveFunction intent', () => {
   describe('.init', () => {
     it('use provided referenceId', async () => {
-      const { intent, event } = setup(SuccessIntent)
+      const { intent, event } = setup(SuccessFunction)
 
       const result = await intent({
         ...event,
@@ -21,7 +21,7 @@ describe('SaveIntent intent', () => {
     })
 
     it('generate a UUID as referenceId', async () => {
-      const { intent, event } = setup(SuccessIntent)
+      const { intent, event } = setup(SuccessFunction)
       const result = await intent(event)
 
       expect(result).toMatchObject({
@@ -32,7 +32,7 @@ describe('SaveIntent intent', () => {
     })
 
     it('pass existing data to the action', async () => {
-      const { intent, event } = setup(SuccessIntent, { existingData: 'ok' })
+      const { intent, event } = setup(SuccessFunction, { existingData: 'ok' })
 
       const result = await intent(event)
 
@@ -49,7 +49,7 @@ describe('SaveIntent intent', () => {
     describe('when errors occur', () => {
       describe('when update fails', () => {
         it('fails gracefully', () => {
-          const { intent, event } = setup(SuccessIntent)
+          const { intent, event } = setup(SuccessFunction)
           const update = jest.spyOn(DBClient.prototype, 'updateData')
 
           update.mockImplementation(() => Promise.reject({ error: 'from-user-storage' }))
@@ -60,7 +60,7 @@ describe('SaveIntent intent', () => {
 
       describe('when error is thrown within the action', () => {
         it('fails gracefully', async () => {
-          const { intent, event } = setup(HardFailingIntent)
+          const { intent, event } = setup(HardFailingFunction)
 
           return expect(intent(event)).rejects.toEqual(new SaveStateActionExecutionError())
         })
@@ -68,7 +68,7 @@ describe('SaveIntent intent', () => {
 
       describe('when error is returned by the action', () => {
         it('fails gracefully', async () => {
-          const { intent, event } = setup(IntentWithErrorReturned)
+          const { intent, event } = setup(FunctionWithErrorReturned)
 
           const result = await intent(event)
 
@@ -79,7 +79,7 @@ describe('SaveIntent intent', () => {
   })
 })
 
-class SuccessIntent extends SaveState implements SaveState<{ savedData: string[] }> {
+class SuccessFunction extends SaveState implements SaveState<{ savedData: string[] }> {
   async action(event: d.TSaveActionEvent<{ savedData: string[] }>) {
     // proces typing works
     const existingData = event.state.savedData || []
@@ -87,13 +87,13 @@ class SuccessIntent extends SaveState implements SaveState<{ savedData: string[]
   }
 }
 
-class IntentWithErrorReturned extends SaveState implements SaveState {
+class FunctionWithErrorReturned extends SaveState implements SaveState {
   async action(_event: any): Promise<any> {
     return { error: 'sponge Bob Died smoothly' }
   }
 }
 
-class HardFailingIntent extends SaveState implements SaveState {
+class HardFailingFunction extends SaveState implements SaveState {
   async action(_event: any): Promise<any> {
     return await new Promise(() => {
       throw 'sponge Bob Died'

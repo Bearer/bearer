@@ -1,6 +1,6 @@
 import { capitalize } from './string'
 
-export function retrieveIntentName(name: string): string {
+export function retrieveFunctionName(name: string): string {
   return `retrieve${capitalize(name)}`
 }
 

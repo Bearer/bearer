@@ -22,7 +22,7 @@ import GatherMetadata from './transformers/gather-metadata'
 import NavigatorScreenTransformer from './transformers/navigator-screen-transformer'
 import PropBearerContextInjector from './transformers/prop-bearer-context-injector'
 import BearerReferenceIdInjector from './transformers/reference-id-injector'
-import ReplaceIntentDecorators from './transformers/replace-intent-decorator'
+import ReplaceFunctionDecorators from './transformers/replace-intent-decorator'
 import RootComponentTransformer from './transformers/root-component-transformer'
 import BearerIntegrationIdInjector from './transformers/integration-id-accessor-injector'
 import EventNameNormalizer from './transformers/event-name-normalizer'
@@ -59,7 +59,7 @@ export default class Transpiler {
         InputDecoratorModifier({ verbose, metadata: this.metadata }),
         OutputDecoratorModifier({ verbose, metadata: this.metadata }),
         BearerReferenceIdInjector({ verbose, metadata: this.metadata }),
-        ReplaceIntentDecorators({ verbose, metadata: this.metadata }),
+        ReplaceFunctionDecorators({ verbose, metadata: this.metadata }),
         BearerIntegrationIdInjector({ verbose, metadata: this.metadata }),
         PropBearerContextInjector({ verbose, metadata: this.metadata }),
         BearerStateInjector({ verbose, metadata: this.metadata }),

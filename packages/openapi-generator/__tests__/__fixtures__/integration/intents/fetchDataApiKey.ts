@@ -2,7 +2,7 @@ import { FetchData, TFetchActionEvent, TFetchPromise, TAPIKEYAuthContext } from 
 
 import { PullRequest } from '../views/types'
 
-export default class SearchPullRequestsIntent extends FetchData
+export default class SearchPullRequestsFunction extends FetchData
   implements FetchData<ReturnedData, any, TAPIKEYAuthContext> {
   async action(event: TFetchActionEvent<Params, TAPIKEYAuthContext>): TFetchPromise<ReturnedData> {
     return { data: [] }

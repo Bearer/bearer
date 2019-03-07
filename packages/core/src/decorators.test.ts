@@ -1,7 +1,7 @@
 import { BearerWindow } from '@bearer/types'
 
 import Bearer from './bearer'
-import { BearerFetch, Intent } from './decorators/intents'
+import { BearerFetch, Function } from './decorators/intents'
 
 declare const window: BearerWindow
 declare const global: { fetch: any }
@@ -17,15 +17,15 @@ const commonParams = {
   }
 }
 
-describe('Intent decorator', () => {
+describe('Function decorator', () => {
   beforeAll(() => {
     Bearer.init({ integrationHost: process.env.API_HOST })
     Bearer.instance.allowIntegrationRequests(true)
   })
 
-  class IntentDecorated {
-    @Intent('getCollectionIntent')
-    getCollectionIntentProp: BearerFetch
+  class FunctionDecorated {
+    @Function('getCollectionFunction')
+    getCollectionFunctionProp: BearerFetch
 
     get INTEGRATION_ID(): string {
       return INTEGRATION_ID
@@ -36,7 +36,7 @@ describe('Intent decorator', () => {
     }
   }
 
-  const decoratedInstance: any = new IntentDecorated()
+  const decoratedInstance: any = new FunctionDecorated()
   describe('FetchData', () => {
     const collection = [{ id: 42 }]
 
@@ -46,11 +46,11 @@ describe('Intent decorator', () => {
     })
 
     it('adds a method', () => {
-      expect(typeof decoratedInstance.getCollectionIntentProp).toBe('function')
+      expect(typeof decoratedInstance.getCollectionFunctionProp).toBe('function')
     })
 
     it('calling methods return a promise', () => {
-      expect(decoratedInstance.getCollectionIntentProp().constructor).toBe(Promise)
+      expect(decoratedInstance.getCollectionFunctionProp().constructor).toBe(Promise)
     })
 
     it('uses FetchData', async () => {
@@ -58,12 +58,12 @@ describe('Intent decorator', () => {
       window.bearer = { clientId: '42', load: jest.fn() }
 
       await decoratedInstance
-        .getCollectionIntentProp({ page: 1 })
+        .getCollectionFunctionProp({ page: 1 })
         .then(success)
         .catch(a => console.log(a))
 
       expect(global.fetch).toBeCalledWith(
-        'https://localhost:5555/api/v3/intents/1234/getCollectionIntent?page=1&setupId=setup-id-from-props&clientId=42',
+        'https://localhost:5555/api/v3/intents/1234/getCollectionFunction?page=1&setupId=setup-id-from-props&clientId=42',
         commonParams
       )
 
@@ -75,12 +75,12 @@ describe('Intent decorator', () => {
       window.bearer = { clientId: '42', load: jest.fn() }
 
       await decoratedInstance
-        .getCollectionIntentProp({ page: 1, setupId: 'custom-setupId' })
+        .getCollectionFunctionProp({ page: 1, setupId: 'custom-setupId' })
         .then(success)
         .catch(a => console.log(a))
 
       expect(global.fetch).toBeCalledWith(
-        'https://localhost:5555/api/v3/intents/1234/getCollectionIntent?page=1&setupId=custom-setupId&clientId=42',
+        'https://localhost:5555/api/v3/intents/1234/getCollectionFunction?page=1&setupId=custom-setupId&clientId=42',
         commonParams
       )
 

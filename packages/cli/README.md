@@ -74,7 +74,7 @@ _See code: [@oclif/plugin-autocomplete](https://github.com/oclif/plugin-autocomp
 
 ## `bearer generate`
 
-Generate Intent or Component
+Generate Function or Component
 
 ```
 USAGE
@@ -113,7 +113,7 @@ _See code: [src/commands/generate/component.ts](https://github.com/Bearer/bearer
 
 ## `bearer generate:intent [NAME]`
 
-Generate a Bearer Intent
+Generate a Bearer Function
 
 ```
 USAGE
@@ -150,7 +150,7 @@ _See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v2.1.4
 
 ## `bearer invoke INTENT_NAME`
 
-Invoke Intent locally
+Invoke Function locally
 
 ```
 USAGE

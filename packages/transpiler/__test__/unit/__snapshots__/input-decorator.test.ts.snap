@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Input decorator units file: complete-options.tsx generates stuff 1`] = `
-"import { BearerRef, Input, RootComponent, State, Prop, Listen, Intent, Watch } from '@bearer/core';
+"import { BearerRef, Input, RootComponent, State, Prop, Listen, Function, Watch } from '@bearer/core';
 type Farmer = {
     id: string;
     name: string;
@@ -87,7 +87,7 @@ class NoOptionsComponent {
             }
         });
     };
-    @Intent(\\"retrieveFarmer\\")
+    @Function(\\"retrieveFarmer\\")
     fetcherRetrieveFarmer;
     @Watch(\\"farmerId\\")
     _watchFarmer(newValueName: string) {
@@ -119,7 +119,7 @@ class NoOptionsComponent {
             }
         });
     };
-    @Intent(\\"retrieveAString\\")
+    @Function(\\"retrieveAString\\")
     fetcherRetrieveAString;
     @Watch(\\"aStringId\\")
     _watchAString(newValueName: string) {
@@ -151,7 +151,7 @@ class NoOptionsComponent {
             }
         });
     };
-    @Intent(\\"retrieveAStringWithoutInitializer\\")
+    @Function(\\"retrieveAStringWithoutInitializer\\")
     fetcherRetrieveAStringWithoutInitializer;
     @Watch(\\"aStringWithoutInitializerId\\")
     _watchAStringWithoutInitializer(newValueName: string) {
@@ -187,7 +187,7 @@ class NoOptionsComponent {
             }
         });
     };
-    @Intent(\\"retrieveObject\\")
+    @Function(\\"retrieveObject\\")
     fetcherRetrieveObject;
     @Watch(\\"objectId\\")
     _watchObject(newValueName: string) {
@@ -223,7 +223,7 @@ class NoOptionsComponent {
             }
         });
     };
-    @Intent(\\"retrieveObjectWithoutInitializer\\")
+    @Function(\\"retrieveObjectWithoutInitializer\\")
     fetcherRetrieveObjectWithoutInitializer;
     @Watch(\\"objectWithoutInitializerId\\")
     _watchObjectWithoutInitializer(newValueName: string) {
@@ -255,7 +255,7 @@ class NoOptionsComponent {
             }
         });
     };
-    @Intent(\\"killPatrick\\")
+    @Function(\\"killPatrick\\")
     fetcherRetrieveSpongeBob;
     @Watch(\\"patrick\\")
     _watchSpongeBob(newValueName: string) {
@@ -287,7 +287,7 @@ class NoOptionsComponent {
             }
         });
     };
-    @Intent(\\"retrieveSpongeBobOverrided\\")
+    @Function(\\"retrieveSpongeBobOverrided\\")
     fetcherRetrieveSpongeBobOverrided;
     @Watch(\\"refNotOverrided\\")
     _watchSpongeBobOverrided(newValueName: string) {

@@ -2,7 +2,7 @@ import { FetchData, TFetchActionEvent, TFetchPromise, TOAUTH2AuthContext } from 
 
 import { PullRequest } from '../views/types'
 
-export default class SearchPullRequestsIntent extends FetchData
+export default class SearchPullRequestsFunction extends FetchData
   implements FetchData<ReturnedData, any, TOAUTH2AuthContext> {
   async action(event: TFetchActionEvent<Params, TOAUTH2AuthContext>): TFetchPromise<ReturnedData> {
     return { data: [] }

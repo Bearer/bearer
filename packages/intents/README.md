@@ -8,7 +8,7 @@
 import { FetchData, TOAUTH2AuthContext } from '@bearer/intents'
 import Client from './client'
 
-export default class ListPullRequestsIntent {
+export default class ListPullRequestsFunction {
   static intentName: string = 'listPullRequests'
   static intentType: any = FetchData
 
@@ -41,7 +41,7 @@ export type TParams = {
   page?: number
 }
 
-export default class ListPullRequestsIntent {
+export default class ListPullRequestsFunction {
   static intentName: string = 'listPullRequests'
   static intentType: any = SaveState
 

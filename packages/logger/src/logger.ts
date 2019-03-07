@@ -1,7 +1,7 @@
 import debug from 'debug'
 export default (scope: string) => debug(`bearer:${scope}`)
 
-export class BearerIntentLogger {
+export class BearerFunctionLogger {
   context: any
   /**
    * @param  {any} context

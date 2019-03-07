@@ -4,7 +4,7 @@ import * as getPort from 'get-port'
 import * as Logger from 'koa-logger'
 import * as Router from 'koa-router'
 
-import { transpileIntents } from '../../buildArtifact'
+import { transpileFunctions } from '../../buildArtifact'
 import LocationProvider from '../../locationProvider'
 import { Config } from '../../types'
 
@@ -37,31 +37,31 @@ export default function startLocalDevelopmentServer(
 
   return new Promise<string>(async (resolve, reject) => {
     try {
-      const { config: devIntentsContext = {} } = (await explorer.search(rootLevel)) || {}
-      const distPath = locator.buildIntentsResourcePath('dist')
+      const { config: devFunctionsContext = {} } = (await explorer.search(rootLevel)) || {}
+      const distPath = locator.buildFunctionsResourcePath('dist')
 
       // tslint:disable-next-line:no-inner-declarations
-      async function refreshIntents() {
+      async function refreshFunctions() {
         try {
-          emitter.emit('start:localServer:generatingIntents:start')
-          await transpileIntents(locator.srcIntentsDir, distPath)
-          emitter.emit('start:localServer:generatingIntents:stop')
+          emitter.emit('start:localServer:generatingFunctions:start')
+          await transpileFunctions(locator.srcFunctionsDir, distPath)
+          emitter.emit('start:localServer:generatingFunctions:stop')
         } catch (error) {
-          emitter.emit('start:localServer:generatingIntents:failed', { error })
+          emitter.emit('start:localServer:generatingFunctions:failed', { error })
         }
       }
-      await refreshIntents()
+      await refreshFunctions()
 
       chokidar
         .watch('.', {
           ignored: /(^|[\/\\])\../,
-          cwd: locator.srcIntentsDir,
+          cwd: locator.srcFunctionsDir,
           ignoreInitial: true,
           persistent: true,
           followSymlinks: false
         })
-        .on('add', refreshIntents)
-        .on('change', refreshIntents)
+        .on('add', refreshFunctions)
+        .on('change', refreshFunctions)
 
       const storage = Storage()
       const port = await getPort({ port: 3000 })
@@ -71,19 +71,19 @@ export default function startLocalDevelopmentServer(
 
       router.post(
         `v3/intents/${config.integrationUuid}/:intentName`,
-        intentHandler(distPath, devIntentsContext, bearerBaseURL),
+        intentHandler(distPath, devFunctionsContext, bearerBaseURL),
         (ctx, _next) => ctx.ok(ctx.intentDatum)
       )
 
       router.post(
         `v2/intents/${config.integrationUuid}/:intentName`,
-        intentHandler(distPath, devIntentsContext, bearerBaseURL),
+        intentHandler(distPath, devFunctionsContext, bearerBaseURL),
         (ctx, _next) => ctx.ok(ctx.intentDatum)
       )
 
       router.all(
         `v1/${config.integrationUuid}/:intentName`,
-        intentHandler(distPath, devIntentsContext, bearerBaseURL),
+        intentHandler(distPath, devFunctionsContext, bearerBaseURL),
         (ctx, _next) => ctx.ok(ctx.intentDatum)
       )
 
@@ -111,7 +111,7 @@ export default function startLocalDevelopmentServer(
   })
 }
 
-const intentHandler = (distPath: string, devIntentsContext, bearerBaseURL: string) => async (ctx, next) =>
+const intentHandler = (distPath: string, devFunctionsContext, bearerBaseURL: string) => async (ctx, next) =>
   new Promise(async (resolve, _reject) => {
     try {
       const intent = requireUncached(`${distPath}/${ctx.params.intentName}`).default
@@ -121,8 +121,8 @@ const intentHandler = (distPath: string, devIntentsContext, bearerBaseURL: strin
       const datum = await intent.init()(
         {
           context: {
-            ...devIntentsContext.global,
-            ...devIntentsContext[ctx.params.intentName],
+            ...devFunctionsContext.global,
+            ...devFunctionsContext[ctx.params.intentName],
             bearerBaseURL,
             ...userDefinedData
           },
@@ -137,7 +137,7 @@ const intentHandler = (distPath: string, devIntentsContext, bearerBaseURL: strin
     } catch (e) {
       logger('ERROR: %j', e)
       if (e.code === 'MODULE_NOT_FOUND') {
-        ctx.intentDatum = { error: `Intent '${ctx.params.intentName}' Not Found` }
+        ctx.intentDatum = { error: `Function '${ctx.params.intentName}' Not Found` }
       } else {
         ctx.intentDatum = { error: e }
       }

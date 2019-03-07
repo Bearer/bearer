@@ -11,7 +11,7 @@
 import clientFactory from '@bearer/node/lib/client'
 
 const bearerClient = clientFactory(process.env.BEARER_SECRET_TOKEN)
-// You can pass query or body parameter depending on Intent requirement
+// You can pass query or body parameter depending on Function requirement
 const options = { query: { status: 'open' }, body: { title: 'title' } }
 
 bearerClient
@@ -56,7 +56,7 @@ const integrationClient = new IntegrationClient<'intentName' | 'other-intent'>(
 
 integrationClient.call('intentName', options) // OK
 integrationClient.call('other-intent', options) // OK
-integrationClient.call('unknow-intent', options) // Argument of type '"unknow-intent"' is not assignable to parameter of type 'TIntegrationIntentNames'.
+integrationClient.call('unknow-intent', options) // Argument of type '"unknow-intent"' is not assignable to parameter of type 'TIntegrationFunctionNames'.
 ```
 
 ### Use Bearer express webhook middleware

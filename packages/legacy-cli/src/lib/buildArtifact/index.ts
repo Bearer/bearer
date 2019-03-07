@@ -2,7 +2,7 @@ import * as globby from 'globby'
 import * as pathJs from 'path'
 import * as webpack from 'webpack'
 
-export function transpileIntents(entriesPath: string, distPath: string): Promise<boolean | Array<any>> {
+export function transpileFunctions(entriesPath: string, distPath: string): Promise<boolean | Array<any>> {
   return new Promise((resolve, reject) => {
     // Note: it works because we have client.ts present
     globby([`${entriesPath}/*.ts`])

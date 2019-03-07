@@ -2,7 +2,7 @@ import { buildLambdaDefinitions } from '../../../src/commands/pack/intents'
 
 describe('pack:intents', () => {
   describe('lambdas declaration', () => {
-    const { config, handlers } = buildLambdaDefinitions(['my-intent', 'spongeBobIntent'])
+    const { config, handlers } = buildLambdaDefinitions(['my-intent', 'spongeBobFunction'])
 
     it('generates a correct handlers', () => {
       expect(handlers).toMatchSnapshot()
@@ -15,7 +15,7 @@ describe('pack:intents', () => {
             'my-intent': 'index.my-intent'
           },
           {
-            spongeBobIntent: 'index.spongeBobIntent'
+            spongeBobFunction: 'index.spongeBobFunction'
           }
         ]
       })

@@ -9,7 +9,7 @@ import { elementDecorator, ensureImportsFromCore, propDecorator } from './bearer
 export default function bearerReferenceIdInjector({  }: TransformerOptions = {}): ts.TransformerFactory<ts.SourceFile> {
   return transformContext => {
     return tsSourceFile => {
-      if (!hasRetrieveOrSaveStateIntent(tsSourceFile)) {
+      if (!hasRetrieveOrSaveStateFunction(tsSourceFile)) {
         return tsSourceFile
       }
 
@@ -104,23 +104,23 @@ function injectBearerReferenceIdProp(tsClass: ts.ClassDeclaration): ts.ClassDecl
   )
 }
 
-function hasRetrieveOrSaveStateIntent(tsSourceFile: ts.SourceFile): boolean {
+function hasRetrieveOrSaveStateFunction(tsSourceFile: ts.SourceFile): boolean {
   return ts.forEachChild(
     tsSourceFile,
     (node): boolean => {
       if (ts.isClassDeclaration(node)) {
-        return hasIntentWithStateTypeDecorator(node)
+        return hasFunctionWithStateTypeDecorator(node)
       }
       return false
     }
   )
 }
 
-function hasIntentWithStateTypeDecorator(classNode: ts.ClassDeclaration): boolean {
-  const properties = propDecoratedWithName(classNode, Decorators.Intent)
+function hasFunctionWithStateTypeDecorator(classNode: ts.ClassDeclaration): boolean {
+  const properties = propDecoratedWithName(classNode, Decorators.Function)
 
   return properties.reduce((has, prop) => {
-    const decorator = prop.decorators.find(deco => decoratorNamed(deco, Decorators.Intent))
+    const decorator = prop.decorators.find(deco => decoratorNamed(deco, Decorators.Function))
     if (!decorator || !ts.isCallExpression(decorator.expression)) {
       return has
     }
@@ -129,7 +129,7 @@ function hasIntentWithStateTypeDecorator(classNode: ts.ClassDeclaration): boolea
       return false
     }
     const hasWisthState =
-      (intentType.expression as ts.Identifier).escapedText.toString() === Types.IntentType &&
+      (intentType.expression as ts.Identifier).escapedText.toString() === Types.FunctionType &&
       (intentType.name as ts.Identifier).escapedText.toString() === Types.SaveState
     return has || hasWisthState
   }, false)

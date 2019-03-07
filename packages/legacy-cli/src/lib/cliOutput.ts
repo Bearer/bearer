@@ -94,24 +94,24 @@ export default emitter => {
     term('\n')
   })
 
-  emitter.on('start:localServer:generatingIntents:start', () => {
+  emitter.on('start:localServer:generatingFunctions:start', () => {
     term.white('Bearer: ')
     term.yellow('[local:intentServer] ')
     term.yellow('Reloading intents')
     term('\n')
   })
 
-  emitter.on('start:localServer:generatingIntents:stop', () => {
+  emitter.on('start:localServer:generatingFunctions:stop', () => {
     term.white('Bearer: ')
     term.yellow('[local:intentServer] ')
-    term.yellow('Intents reloaded')
+    term.yellow('Functions reloaded')
     term('\n')
   })
 
-  emitter.on('start:localServer:generatingIntents:failed', ({ error }) => {
+  emitter.on('start:localServer:generatingFunctions:failed', ({ error }) => {
     term.white('Bearer: ')
     term.yellow('[local:intentServer] ')
-    term.red('Intents building error\n')
+    term.red('Functions building error\n')
     logger(
       '%s',
       error.toString({

@@ -12,7 +12,7 @@ import {
   extractArrayOptions
 } from '../helpers/decorator-helpers'
 import { addAutoLoad, createFetcher, createLoadDataCall, createLoadResourceMethod } from '../helpers/generator-helpers'
-import { loadName as _loadName, retrieveFetcherName, retrieveIntentName } from '../helpers/name-helpers'
+import { loadName as _loadName, retrieveFetcherName, retrieveFunctionName } from '../helpers/name-helpers'
 import { getNodeName } from '../helpers/node-helpers'
 import { capitalize } from '../helpers/string'
 import { InputMeta, TransformerOptions, OutputMeta } from '../types'
@@ -41,7 +41,7 @@ export default function inputDecorator({ metadata }: TransformerOptions = {}): t
       const sourceFileWithImports = ensureImportsFromCore(tsSourceFile, [
         Decorators.Listen,
         Decorators.State,
-        Decorators.Intent,
+        Decorators.Function,
         Decorators.Watch,
         Decorators.Prop
       ])
@@ -232,7 +232,7 @@ export function retrieveInputsMetas(
           propDeclarationName: name,
           propertyReferenceIdName: refIdName(name),
           eventName: outputEventName(name),
-          intentName: retrieveIntentName(name),
+          intentName: retrieveFunctionName(name),
           intentMethodName: retrieveFetcherName(name), // TODO: retrieve from options
           autoLoad: true,
           loadMethodName: _loadName(name),

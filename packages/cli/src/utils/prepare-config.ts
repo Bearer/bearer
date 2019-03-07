@@ -2,7 +2,7 @@ import * as fs from 'fs-extra'
 
 import * as ts from 'typescript'
 
-import { getIntentName, IntentCodeProcessor, isIntentClass } from './generators'
+import { getFunctionName, FunctionCodeProcessor, isFunctionClass } from './generators'
 
 type TConfig = {
   intents: string[]
@@ -13,8 +13,8 @@ type TConfig = {
 export const transformer = (intents: string[]) => (context: ts.TransformationContext) => {
   return (tsSourceFile: ts.SourceFile) => {
     function visit(tsNode: ts.Node) {
-      if (isIntentClass(tsNode)) {
-        const intentName = getIntentName(tsSourceFile)
+      if (isFunctionClass(tsNode)) {
+        const intentName = getFunctionName(tsSourceFile)
         intents.push(intentName)
       }
       return tsNode
@@ -26,7 +26,7 @@ export const transformer = (intents: string[]) => (context: ts.TransformationCon
 export default (authConfigFile: string, integrationUuid: string, intentsDir: string): Promise<TConfig> => {
   return new Promise((resolve, reject) => {
     const intents: string[] = []
-    new IntentCodeProcessor(intentsDir, transformer(intents))
+    new FunctionCodeProcessor(intentsDir, transformer(intents))
       .run()
       .then(() => {
         const content = fs.readFileSync(authConfigFile, { encoding: 'utf8' })

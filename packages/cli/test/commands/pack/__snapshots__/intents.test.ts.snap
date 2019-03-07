@@ -4,7 +4,7 @@ exports[`pack:intents lambdas declaration generates a correct handlers 1`] = `
 "const intent0 = require(\\"./dist/my-intent\\").default;
 module.exports['my-intent'] = intent0.init();
 
-const intent1 = require(\\"./dist/spongeBobIntent\\").default;
-module.exports['spongeBobIntent'] = intent1.init();
+const intent1 = require(\\"./dist/spongeBobFunction\\").default;
+module.exports['spongeBobFunction'] = intent1.init();
 "
 `;

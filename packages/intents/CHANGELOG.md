@@ -962,4 +962,4 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Features
 
-- **generator:** Improve Intent generator ([#113](https://github.com/BearerSH/bearer/issues/113)) ([8f86f46](https://github.com/BearerSH/bearer/commit/8f86f46))
+- **generator:** Improve Function generator ([#113](https://github.com/BearerSH/bearer/issues/113)) ([8f86f46](https://github.com/BearerSH/bearer/commit/8f86f46))

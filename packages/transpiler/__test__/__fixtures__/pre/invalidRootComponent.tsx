@@ -1,17 +1,17 @@
-import { BearerFetch, BearerState, Intent, IntentType, RootComponent } from '@bearer/core'
+import { BearerFetch, BearerState, Function, FunctionType, RootComponent } from '@bearer/core'
 
 @RootComponent({
   name: 'attach-pull-request',
   shadow: false
 })
 export class InvalidRootComponent {
-  @Intent('ListRepositories')
+  @Function('ListRepositories')
   fetcher: BearerFetch
   @BearerState()
   attachedPullRequests: Array<any>
   @BearerState({ statePropName: 'goats' })
   ducks: Array<any>
-  @Intent('getPullRequest', IntentType.FetchData)
+  @Function('getPullRequest', FunctionType.FetchData)
   fetchResource: BearerFetch
 
   render() {

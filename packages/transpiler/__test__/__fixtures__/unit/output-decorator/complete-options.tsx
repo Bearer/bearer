@@ -17,7 +17,7 @@ class NoOptionsComponent {
   // // generate this
   // @Event() farmerSaved: EventEmitter<Farmer>
   // @State() farmer: BearerRef<Farmer>
-  // @Intent('setFarmer') setFarmer: BearerFetch<Farmer>
+  // @Function('setFarmer') setFarmer: BearerFetch<Farmer>
   // @Watch('farmer')
   // farmerchangeHandler(newValue: BearerRef<Farmer>) {
   //   if (newValue) {

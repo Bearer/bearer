@@ -2,7 +2,7 @@ import { FetchData, TFetchActionEvent, TFetchPromise, TBASICAuthContext } from '
 
 import { PullRequest } from '../views/types'
 
-export default class SearchPullRequestsIntent extends FetchData
+export default class SearchPullRequestsFunction extends FetchData
   implements FetchData<ReturnedData, any, TBASICAuthContext> {
   async action(event: TFetchActionEvent<Params, TBASICAuthContext>): TFetchPromise<ReturnedData> {
     return { data: [] }

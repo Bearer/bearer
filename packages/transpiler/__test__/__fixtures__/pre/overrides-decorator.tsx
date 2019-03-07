@@ -1,12 +1,12 @@
-import { Component, Intent, BearerFetch, IntentType } from '@bearer/core'
+import { Component, Function, BearerFetch, FunctionType } from '@bearer/core'
 
 @Component({
   tag: 'overrides-decorator-full'
 })
 class OverridesDecorarotFull {
-  @Intent('collectionIntent')
+  @Function('collectionFunction')
   fetcher: BearerFetch
-  @Intent('collectionIntent', IntentType.FetchData)
+  @Function('collectionFunction', FunctionType.FetchData)
   memberFetcher: BearerFetch
 
   constructor() {}

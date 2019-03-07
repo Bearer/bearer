@@ -4,8 +4,8 @@ import {
   BearerState,
   Component,
   Input,
-  Intent,
-  IntentType,
+  Function,
+  FunctionType,
   Output,
   Event,
   EventEmitter,
@@ -21,13 +21,13 @@ type Panda = {
   tag: 'full-component'
 })
 export class FullComponent {
-  @Intent('ListRepositories')
+  @Function('ListRepositories')
   fetcher: BearerFetch
   @BearerState()
   attachedPullRequests: Array<any>
   @BearerState({ statePropName: 'goats' })
   ducks: Array<any>
-  @Intent('getPullRequest', IntentType.FetchData)
+  @Function('getPullRequest', FunctionType.FetchData)
   fetchResource: BearerFetch
   @Event() anEvent: EventEmitter<Panda>
   @Output() setup: string

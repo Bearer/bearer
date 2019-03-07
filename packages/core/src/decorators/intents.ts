@@ -4,7 +4,7 @@ import { intentRequest } from '../requests'
  * Declarations
  */
 
-export enum IntentType {
+export enum FunctionType {
   SaveState = 'SaveState',
   FetchData = 'FetchData'
 }
@@ -32,20 +32,20 @@ type BearerComponent = {
 export const BearerContext = 'bearerContext'
 export const setupId = 'setupId'
 // tslint:disable-next-line:variable-name
-export const IntentSaved = 'BearerStateSaved'
+export const FunctionSaved = 'BearerStateSaved'
 // tslint:disable-next-line:variable-name
 export const BearerStateSavedEvent = 'bearer:StateSaved'
 
 /**
- * Intent
+ * Function
  */
 
 // Usage
-// @Intent('intentName') propertyName: BearerFetch
+// @Function('intentName') propertyName: BearerFetch
 // or
-// @Intent('intentNameResource', IntentType.FetchData) propertyName: BearerFetch
+// @Function('intentNameResource', FunctionType.FetchData) propertyName: BearerFetch
 // tslint:disable-next-line:function-name
-export function Intent(intentName: string, type: IntentType = IntentType.FetchData): IDecorator {
+export function Function(intentName: string, type: FunctionType = FunctionType.FetchData): IDecorator {
   return function(target: BearerComponent, key: string): void {
     const getter = (): BearerFetch => {
       return function(this: BearerComponent, params = {}): Promise<TFetchBearerData> {
@@ -74,7 +74,7 @@ export function Intent(intentName: string, type: IntentType = IntentType.FetchDa
       }
     }
 
-    defineIntentProp(target, key, getter)
+    defineFunctionProp(target, key, getter)
   }
 }
 
@@ -112,7 +112,7 @@ function retrieveReferenceId(target: BearerComponent): string {
   return target.referenceId
 }
 
-function defineIntentProp(target: BearerComponent, key: string, getter: any): void {
+function defineFunctionProp(target: BearerComponent, key: string, getter: any): void {
   const setter = () => {}
 
   if (delete target[key]) {

@@ -18,8 +18,8 @@ export enum Decorators {
   Event = 'Event',
   Listen = 'Listen',
   BearerState = 'BearerState',
-  Intent = 'Intent',
-  SaveStateIntent = 'SaveStateIntent',
+  Function = 'Function',
+  SaveStateFunction = 'SaveStateFunction',
   statePropName = 'statePropName',
   Input = 'Input',
   Output = 'Output'
@@ -33,7 +33,7 @@ export enum Types {
   HTMLElement = 'HTMLElement',
   EventEmitter = 'EventEmitter',
   BearerFetch = 'BearerFetch',
-  IntentType = 'IntentType',
+  FunctionType = 'FunctionType',
   SaveState = 'SaveState'
 }
 

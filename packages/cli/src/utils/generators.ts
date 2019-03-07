@@ -12,13 +12,13 @@ const NON_INTENT_NAMES = ['DBClient']
 const INTENT_NAMES = Object.keys(intents).filter(intentName => !NON_INTENT_NAMES.includes(intentName))
 const INTENT_TYPE_IDENTIFIER = 'intentType'
 
-const intentEntries: IIntentEntry[] = []
+const intentEntries: IFunctionEntry[] = []
 
 function bodySchema(tsType: ts.ClassDeclaration, generator: TJS.JsonSchemaGenerator): TJS.Definition {
   return {}
 }
 
-class IntentNodeAdapter implements IIntentEntry {
+class FunctionNodeAdapter implements IFunctionEntry {
   constructor(
     readonly intentName: string,
     private readonly node: ts.ClassDeclaration,
@@ -64,7 +64,7 @@ class IntentNodeAdapter implements IIntentEntry {
     return {}
   }
 
-  get adapt(): IIntentEntry {
+  get adapt(): IFunctionEntry {
     return {
       intentClassName: this.intentClassName,
       intentName: this.intentName,
@@ -76,14 +76,14 @@ class IntentNodeAdapter implements IIntentEntry {
   }
 }
 
-export function isIntentClass(tsNode: ts.Node): boolean {
+export function isFunctionClass(tsNode: ts.Node): boolean {
   if (!ts.isClassDeclaration(tsNode)) {
     return false
   }
-  return extendsIntentType(tsNode) && implementsAction(tsNode)
+  return extendsFunctionType(tsNode) && implementsAction(tsNode)
 }
 
-function extendsIntentType(tsClass: ts.ClassDeclaration): boolean {
+function extendsFunctionType(tsClass: ts.ClassDeclaration): boolean {
   const extendedClasses = (tsClass.heritageClauses || []).filter(hc => hc.token === ts.SyntaxKind.ExtendsKeyword)
   return Boolean(
     extendedClasses.find(hc =>
@@ -104,7 +104,7 @@ export function getIdentifier(tsNode: ts.ClassDeclaration | ts.PropertyDeclarati
   return tsNode.name as ts.Identifier
 }
 
-export function getIntentName(tsSourceFile: ts.SourceFile): string {
+export function getFunctionName(tsSourceFile: ts.SourceFile): string {
   return path.basename(tsSourceFile.fileName).split('.')[0]
 }
 
@@ -123,8 +123,8 @@ export function transformer(generator: TJS.JsonSchemaGenerator): ts.TransformerF
   return (context: ts.TransformationContext) => {
     return (tsSourceFile: ts.SourceFile) => {
       function visit(tsNode: ts.Node) {
-        if (isIntentClass(tsNode)) {
-          const adapter = new IntentNodeAdapter(getIntentName(tsSourceFile), tsNode as ts.ClassDeclaration, generator)
+        if (isFunctionClass(tsNode)) {
+          const adapter = new FunctionNodeAdapter(getFunctionName(tsSourceFile), tsNode as ts.ClassDeclaration, generator)
           intentEntries.push(adapter.adapt)
         }
         return tsNode
@@ -134,11 +134,11 @@ export function transformer(generator: TJS.JsonSchemaGenerator): ts.TransformerF
   }
 }
 
-export class IntentCodeProcessor {
-  constructor(private readonly srcIntentsDir: string, private readonly transformer: any) {}
+export class FunctionCodeProcessor {
+  constructor(private readonly srcFunctionsDir: string, private readonly transformer: any) {}
 
   async run() {
-    const files = await globby(`${this.srcIntentsDir}/*.ts`)
+    const files = await globby(`${this.srcFunctionsDir}/*.ts`)
 
     files.forEach(file => {
       const sourceFile = ts.createSourceFile(
@@ -155,12 +155,12 @@ export class IntentCodeProcessor {
 
 export class OpenApiSpecGenerator {
   constructor(
-    private readonly srcIntentsDir: string,
+    private readonly srcFunctionsDir: string,
     private readonly bearerConfig: { integrationTitle: string | undefined; integrationUuid: string }
   ) {}
 
   async build() {
-    const files = await globby(`${this.srcIntentsDir}/*.ts`)
+    const files = await globby(`${this.srcFunctionsDir}/*.ts`)
     const programGenerator = TJS.getProgramFromFiles(
       files,
       {
@@ -193,7 +193,7 @@ export class OpenApiSpecGenerator {
     })
     return specGenerator({
       intents: intentEntries.map(entry => entry.intentName),
-      intentsDir: this.srcIntentsDir,
+      intentsDir: this.srcFunctionsDir,
       integrationUuid: this.bearerConfig.integrationUuid,
       integrationName: this.bearerConfig.integrationTitle || ''
     })
@@ -267,7 +267,7 @@ type TResponse = {
   }
 }
 
-interface IIntentEntry {
+interface IFunctionEntry {
   intentClassName: string
   intentType: string
   intentName: string

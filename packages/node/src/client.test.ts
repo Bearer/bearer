@@ -34,8 +34,8 @@ describe('Bearer client', () => {
 describe('IntegrationClient', () => {
   const token = 'a-different-token'
   const anotherIntegrationName = 'integration-name'
-  type TIntegrationIntentNames = 'intent-name' | 'other-intent'
-  const client = new IntegrationClient<TIntegrationIntentNames>(token, {}, anotherIntegrationName)
+  type TIntegrationFunctionNames = 'intent-name' | 'other-intent'
+  const client = new IntegrationClient<TIntegrationFunctionNames>(token, {}, anotherIntegrationName)
 
   it('creates a integration client', () => {
     expect(client).toBeInstanceOf(IntegrationClient)

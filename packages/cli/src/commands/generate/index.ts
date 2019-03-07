@@ -2,15 +2,15 @@ import BaseCommand from '../../base-command'
 import { RequireIntegrationFolder } from '../../utils/decorators'
 
 import GenerateComponent from './component'
-import GenerateIntent from './intent'
+import GenerateFunction from './intent'
 
 const enum TType {
   Component,
-  Intent
+  Function
 }
 
 export default class GenerateIndex extends BaseCommand {
-  static description = 'Generate Intent or Component'
+  static description = 'Generate Function or Component'
   static aliases = ['g']
 
   static flags = { ...BaseCommand.flags }
@@ -24,8 +24,8 @@ export default class GenerateIndex extends BaseCommand {
     const type = await this.askForType()
 
     switch (type) {
-      case TType.Intent: {
-        return GenerateIntent.run([...pathParams])
+      case TType.Function: {
+        return GenerateFunction.run([...pathParams])
       }
       case TType.Component: {
         return GenerateComponent.run([...pathParams])
@@ -39,7 +39,7 @@ export default class GenerateIndex extends BaseCommand {
         message: 'What would you like to generate:',
         type: 'list',
         name: 'type',
-        choices: [{ value: TType.Intent, name: 'Intent' }, { value: TType.Component, name: 'Component' }]
+        choices: [{ value: TType.Function, name: 'Function' }, { value: TType.Component, name: 'Component' }]
       }
     ])
     return type

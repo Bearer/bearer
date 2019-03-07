@@ -1,11 +1,11 @@
-import { BearerFetch, Component, Intent } from '@bearer/core'
+import { BearerFetch, Component, Function } from '@bearer/core'
 
 @Component({
   tag: '{{componentTagName}}',
   shadow: true
 })
 export class {{componentClassName}} {
-  @Intent('{{fileName}}') fetcher: BearerFetch
+  @Function('{{fileName}}') fetcher: BearerFetch
   render() {
     return <bearer-scrollable fetcher={this.fetcher} />
   }
