@@ -49,7 +49,7 @@ export class AttachPullRequestAction {
 
   @Output({
     functionName: 'manualFunctionName',
-    functionReferenceIdKeyName: 'manualintentReferenceIdKeyName',
+    functionReferenceIdKeyName: 'manualfunctionReferenceIdKeyName',
     functionPropertyName: 'manuaLFunctionPropertyName',
     eventName: 'spongeBobdSaved',
     propertyWatchedName: 'manualpropertyWatchedName',

@@ -352,7 +352,7 @@ export function retrieveOutputsMetas(
                 'functionReferenceIdValue',
                 'functionReferenceIdKeyName'
               ]),
-              ...extractArrayOptions<{ functionArguments: string[] }>(callArgs, ['intentArguments']),
+              ...extractArrayOptions<{ functionArguments: string[] }>(callArgs, ['functionArguments']),
               ...extractBooleanOptions<TOutputDecoratorOptions>(callArgs, ['autoLoad'])
             }
         outputs.push({

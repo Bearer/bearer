@@ -6,6 +6,6 @@ export declare function functionRequest({
   integrationId: any
 }): (params?: {}) => Promise<{}>
 declare const _default: {
-  functionRequest: typeof intentRequest
+  functionRequest: typeof functionRequest
 }
 export default _default

@@ -264,7 +264,7 @@ function extractInputOptions(decorator: ts.Decorator): Partial<TInputDecoratorOp
           'propertyReferenceIdName',
           'functionReferenceIdKeyName'
         ]),
-        ...extractArrayOptions<{ functionArguments: string[] }>(callArgs, ['intentArguments']),
+        ...extractArrayOptions<{ functionArguments: string[] }>(callArgs, ['functionArguments']),
         ...extractBooleanOptions<TInputDecoratorOptions>(callArgs, ['autoLoad'])
       }
 }

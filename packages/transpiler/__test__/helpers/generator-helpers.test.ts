@@ -75,7 +75,7 @@ describe('createLoadResourceMethod', () => {
         typeIdentifier: ts.createIdentifier('SomeType'),
         propDeclarationName: 'propDeclarationName',
         functionMethodName: 'functionMethodName',
-        functionReferenceIdKeyName: 'intentReferenceIdKeyName',
+        functionReferenceIdKeyName: 'functionReferenceIdKeyName',
         functionArguments: ['a', 'b'],
         loadMethodName: 'loadMethodName'
       }
@@ -86,7 +86,7 @@ describe('createLoadResourceMethod', () => {
       typeIdentifier: ts.createIdentifier('SomeType'),
       propDeclarationName: 'propDeclarationName',
       functionMethodName: 'functionMethodName',
-      functionReferenceIdKeyName: 'intentReferenceIdKeyName',
+      functionReferenceIdKeyName: 'functionReferenceIdKeyName',
       functionArguments: ['a', 'b'],
       loadMethodName: 'loadMethodName'
     }

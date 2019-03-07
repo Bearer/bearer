@@ -177,7 +177,7 @@ export default function generator({
         functionName: intent,
         response: { type: 'object', properties: typeSchema.response },
         requestBody: typeSchema.requestBody,
-        oauth: typeSchema.functionAuthType === 'OAUTH2' || typeSchema.intentAuthType === 'OAUTH1'
+        oauth: typeSchema.functionAuthType === 'OAUTH2' || typeSchema.functionAuthType === 'OAUTH1'
       })
     )
   }, {})
