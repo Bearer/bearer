@@ -13,12 +13,12 @@ function readFile(folder: string, filename: string): string {
 const auths = ['OAUTH2', 'BASIC', 'APIKEY', 'NONE', 'OAUTH1']
 
 describe.each(Object.values(auths))('%s', auth => {
-  it(`generates a scenario without any prompt and ${auth}`, async () => {
+  it(`generates a integration without any prompt and ${auth}`, async () => {
     const result: string[] = []
     jest.spyOn(process.stdout, 'write').mockImplementation(val => result.push(val))
 
     await NewCommand.run([
-      `${auth}Scenario`,
+      `${auth}Integration`,
       '-a',
       auth,
       '--skipInstall',

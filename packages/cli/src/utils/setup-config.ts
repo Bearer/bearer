@@ -7,7 +7,7 @@ import * as path from 'path'
 import * as rc from 'rc'
 import { promisify } from 'util'
 
-import { BaseConfig, BearerConfig, BearerEnv, Config, ScenarioConfig } from '../types'
+import { BaseConfig, BearerConfig, BearerEnv, Config, IntegrationConfig } from '../types'
 
 const configs: Record<BearerEnv, BaseConfig> = {
   dev: {
@@ -44,48 +44,48 @@ export default (runPath: string = process.cwd()): Config => {
   const setup: BaseConfig = configs[BEARER_ENV as BearerEnv]
 
   const isYarnInstalled = !!spawnSync('yarn', ['bin']).output
-  const scenarioLocation = runPath.startsWith('~')
+  const integrationLocation = runPath.startsWith('~')
     ? path.resolve(runPath.replace(/^~/, os.homedir()))
     : path.resolve(runPath)
   return {
     ...setup,
-    runPath: scenarioLocation,
     isYarnInstalled,
+    runPath: integrationLocation,
     command: isYarnInstalled ? 'yarn' : 'npm',
-    get isScenarioLocation(): boolean {
+    get isIntegrationLocation(): boolean {
       return this.rootPathRc !== null
     },
     get bearerConfig(): BearerConfig {
       return rc('bearer')
     },
-    get scenarioConfig(): ScenarioConfig {
-      return rc('scenario', { config: path.join(scenarioLocation, '.scenariorc') })
+    get integrationConfig(): IntegrationConfig {
+      return rc('integration', { config: path.join(integrationLocation, '.integrationrc') })
     },
     get orgId(): string | undefined {
-      return this.scenarioConfig.orgId
+      return this.integrationConfig.orgId
     },
-    get scenarioTitle(): string | undefined {
-      return this.scenarioConfig.scenarioTitle
+    get integrationTitle(): string | undefined {
+      return this.integrationConfig.integrationTitle
     },
-    get scenarioId(): string | undefined {
-      return this.scenarioConfig.scenarioId
+    get integrationId(): string | undefined {
+      return this.integrationConfig.integrationId
     },
-    get scenarioUuid(): string {
-      if (this.hasScenarioLinked) {
-        return `${this.orgId}-${this.scenarioId}`
+    get integrationUuid(): string {
+      if (this.hasIntegrationLinked) {
+        return `${this.orgId}-${this.integrationId}`
       }
-      return 'unset-scenario-uuid'
+      return 'unset-integration-uuid'
     },
-    get hasScenarioLinked(): boolean {
-      return Boolean(this.orgId) && Boolean(this.scenarioId)
+    get hasIntegrationLinked(): boolean {
+      return Boolean(this.orgId) && Boolean(this.integrationId)
     },
     get rootPathRc(): string | null {
-      return findUp.sync('.scenariorc', { cwd: scenarioLocation })
+      return findUp.sync('.integrationrc', { cwd: integrationLocation })
     },
-    setScenarioConfig(config: { scenarioTitle: string; orgId: string; scenarioId: string }) {
-      const { scenarioTitle, orgId, scenarioId } = config
+    setIntegrationConfig(config: { integrationTitle: string; orgId: string; integrationId: string }) {
+      const { integrationTitle, orgId, integrationId } = config
       if (this.rootPathRc) {
-        fs.writeFileSync(this.rootPathRc, ini.stringify({ scenarioTitle, orgId, scenarioId }))
+        fs.writeFileSync(this.rootPathRc, ini.stringify({ integrationTitle, orgId, integrationId }))
       }
     },
     async storeBearerConfig(config) {

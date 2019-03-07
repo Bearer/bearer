@@ -40,7 +40,11 @@ class WithBearerAuthorizedComponent {
 class OverrideValueGiven {
   render() {
     return (
-      <bearer-authorized renderAuthorized={() => <div />} renderUnauthorized={() => <span />} scenarioId="spongebob" />
+      <bearer-authorized
+        renderAuthorized={() => <div />}
+        renderUnauthorized={() => <span />}
+        integrationId="spongebob"
+      />
     )
   }
 }

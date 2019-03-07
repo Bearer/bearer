@@ -1,5 +1,5 @@
 import BaseCommand from '../../base-command'
-import { RequireScenarioFolder } from '../../utils/decorators'
+import { RequireIntegrationFolder } from '../../utils/decorators'
 
 import GenerateComponent from './component'
 import GenerateIntent from './intent'
@@ -17,7 +17,7 @@ export default class GenerateIndex extends BaseCommand {
 
   static args = []
 
-  @RequireScenarioFolder()
+  @RequireIntegrationFolder()
   async run() {
     const { flags } = this.parse(GenerateIndex)
     const pathParams = flags.path ? ['--path', flags.path] : []

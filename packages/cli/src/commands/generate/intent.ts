@@ -4,7 +4,7 @@ import { flags } from '@oclif/command'
 import * as inquirer from 'inquirer'
 
 import BaseCommand from '../../base-command'
-import { RequireScenarioFolder } from '../../utils/decorators'
+import { RequireIntegrationFolder } from '../../utils/decorators'
 import generateIntent from '../../utils/templates/intents'
 
 const types = [
@@ -27,19 +27,19 @@ export default class GenerateIntent extends BaseCommand {
 
   static args = [{ name: 'name' }]
 
-  @RequireScenarioFolder()
+  @RequireIntegrationFolder()
   async run() {
     const { args, flags } = this.parse(GenerateIntent)
     const type: IntentType = !flags.type
       ? await this.askForType()
       : types.find(t => (t as { cli: string }).cli === flags.type)!.value
     const name = args.name || (await this.askForName())
-    const authType = this.scenarioAuthConfig.authType
+    const authType = this.integrationAuthConfig.authType
 
     if (!Object.values(Authentications).includes(authType)) {
       // TODO: better error output
       this.error(
-        `Incorrect AuthType please update "authType" field of auth.config.json within your scenario, 
+        `Incorrect AuthType please update "authType" field of auth.config.json within your integration, 
         with one of these values : ${Object.values(Authentications).join('  |  ')}`
       )
     }

@@ -1,8 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Link does not fail :-P  1`] = `
-"scenarioTitle=undefined
+"integrationTitle=undefined
 orgId=123
-scenarioId=scenario-id
+integrationId=integration-id
 "
 `;

@@ -3,11 +3,11 @@ import * as fs from 'fs'
 import * as path from 'path'
 
 import BaseCommand from '../../base-command'
-import { RequireScenarioFolder } from '../../utils/decorators'
+import { RequireIntegrationFolder } from '../../utils/decorators'
 import { copyFiles } from '../../utils/helpers'
 
 export default class GenerateSpec extends BaseCommand {
-  static description = 'Generate spec file for bearer scenario'
+  static description = 'Generate spec file for bearer integration'
   static hidden = true
   static flags = {
     ...BaseCommand.flags,
@@ -16,10 +16,10 @@ export default class GenerateSpec extends BaseCommand {
 
   static args = []
 
-  @RequireScenarioFolder()
+  @RequireIntegrationFolder()
   async run() {
     const { flags } = this.parse(GenerateSpec)
-    const targetFolder = this.locator.scenarioRoot
+    const targetFolder = this.locator.integrationRoot
     if (flags.force || !specExists(targetFolder)) {
       try {
         const setup = `
@@ -37,9 +37,9 @@ export default class GenerateSpec extends BaseCommand {
       group: 'setup',
       label: 'Setup Display Component'
     },`
-        const authType: string = this.scenarioAuthConfig.authType
+        const authType: string = this.integrationAuthConfig.authType
         const vars = authType === 'noAuth' || authType === 'NONE' ? {} : { setup }
-        await copyFiles(this, 'generate/scenario_specs', targetFolder, vars)
+        await copyFiles(this, 'generate/integration_specs', targetFolder, vars)
         this.success('Spec file successfully generated! 🎉')
       } catch (e) {
         this.error(e)

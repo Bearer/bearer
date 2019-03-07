@@ -1,5 +1,5 @@
 /*
-  The purpose of this component is to save scenario credentials.
+  The purpose of this component is to save integration credentials.
   This file has been generated automatically and should not be edited.
 */
 
@@ -13,7 +13,7 @@ import { FieldSet } from "@bearer/ui/lib/collection/components/Forms/Fieldset";
 export class SetupAction {
   @Prop() onSetupSuccess: (detail: any) => void = (_any: any) => { }
   @State() fields = new FieldSet({{fields}})
-  @State() innerListener = `setup_success:BEARER_SCENARIO_ID`
+  @State() innerListener = `setup_success:BEARER_INTEGRATION_ID`
   @Output() setup: any;
   @Element() el: HTMLElement;
 

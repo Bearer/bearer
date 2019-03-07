@@ -5,7 +5,7 @@ import Cipher from '@bearer/security'
 
 import middleware from './express'
 
-const SUCCESS_HANDLER = 'sponge-bob-scenario-handler'
+const SUCCESS_HANDLER = 'sponge-bob-integration-handler'
 const REJECTED_HANDLER = 'patrick-is-rejecting'
 const FAILING_HANDLER = 'patrick-is-failing'
 
@@ -48,7 +48,7 @@ describe('Bearer middleware', () => {
       it('calls handler with req object', async () => {
         await request(app)
           .post('/whatever/webhooks')
-          .set('BEARER-SCENARIO-HANDLER', SUCCESS_HANDLER)
+          .set('BEARER-INTEGRATION-HANDLER', SUCCESS_HANDLER)
 
         const mock = webHookHandlers[SUCCESS_HANDLER]
         // request is passed down
@@ -59,7 +59,7 @@ describe('Bearer middleware', () => {
       it('returns correct success payload', async () => {
         const response = await request(app)
           .post('/whatever/webhooks')
-          .set('BEARER-SCENARIO-HANDLER', SUCCESS_HANDLER)
+          .set('BEARER-INTEGRATION-HANDLER', SUCCESS_HANDLER)
           .expect('Content-Type', /json/)
           .expect(200)
 
@@ -70,7 +70,7 @@ describe('Bearer middleware', () => {
       it('perform promise even if rejecting', async () => {
         const response = await request(app)
           .post('/whatever/webhooks')
-          .set('BEARER-SCENARIO-HANDLER', REJECTED_HANDLER)
+          .set('BEARER-INTEGRATION-HANDLER', REJECTED_HANDLER)
           .expect('Content-Type', /json/)
           .expect(422, {
             error: { name: 'Bearer:WebhookHandlerRejection', message: 'patrick-is-rejecting' }
@@ -82,7 +82,7 @@ describe('Bearer middleware', () => {
       it('fails gracefully if the handler raises an error', async () => {
         const response = await request(app)
           .post('/whatever/webhooks')
-          .set('BEARER-SCENARIO-HANDLER', FAILING_HANDLER)
+          .set('BEARER-INTEGRATION-HANDLER', FAILING_HANDLER)
           .expect('Content-Type', /json/)
           .expect(500, {
             error: { name: 'Bearer:WebhookProcessingError', message: 'patrick-is-failing' }
@@ -97,10 +97,10 @@ describe('Bearer middleware', () => {
       it('returns unprocessable entity status', async () => {
         const response = await request(app)
           .post('/whatever/webhooks')
-          .set('BEARER-SCENARIO-HANDLER', 'unknow')
+          .set('BEARER-INTEGRATION-HANDLER', 'unknow')
           .expect('Content-Type', /json/)
           .expect(422, {
-            error: { name: 'Bearer:WebhookMissingHandler', message: 'Scenario handler not found: unknow' }
+            error: { name: 'Bearer:WebhookMissingHandler', message: 'Integration handler not found: unknow' }
           })
 
         expect(webHookHandlers[FAILING_HANDLER]).not.toHaveBeenCalled()
@@ -161,7 +161,7 @@ describe('Bearer middleware', () => {
         const signature = cipher.digest(JSON.stringify(body))
         await request(app)
           .post('/whatever/protected')
-          .set('BEARER-SCENARIO-HANDLER', SUCCESS_HANDLER)
+          .set('BEARER-INTEGRATION-HANDLER', SUCCESS_HANDLER)
           .set('BEARER-SHA', signature)
           .send(body)
           .expect('Content-Type', /json/)
@@ -178,7 +178,7 @@ describe('Bearer middleware', () => {
       it('process all requests', async () => {
         await request(app)
           .post('/whatever/unprotected')
-          .set('BEARER-SCENARIO-HANDLER', SUCCESS_HANDLER)
+          .set('BEARER-INTEGRATION-HANDLER', SUCCESS_HANDLER)
           .set('BEARER-SHA', 'it does not matter')
           .expect('Content-Type', /json/)
           .expect(200)

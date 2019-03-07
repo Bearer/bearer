@@ -2,7 +2,7 @@
 
 exports[`generate:setup APIKEY creates setup files 1`] = `
 "/*
-  The purpose of this component is to save scenario credentials.
+  The purpose of this component is to save integration credentials.
   This file has been generated automatically and should not be edited.
 */
 
@@ -16,7 +16,7 @@ import { FieldSet } from \\"@bearer/ui/lib/collection/components/Forms/Fieldset\
 export class SetupAction {
   @Prop() onSetupSuccess: (detail: any) => void = (_any: any) => { }
   @State() fields = new FieldSet([{\\"type\\":\\"password\\",\\"label\\":\\"Api Key\\",\\"controlName\\":\\"apiKey\\"}])
-  @State() innerListener = \`setup_success:BEARER_SCENARIO_ID\`
+  @State() innerListener = \`setup_success:BEARER_INTEGRATION_ID\`
   @Output() setup: any;
   @Element() el: HTMLElement;
 
@@ -50,7 +50,7 @@ export class SetupAction {
 
 exports[`generate:setup APIKEY creates setup files 2`] = `
 "/*
-  The purpose of this component is to save scenario credentials.
+  The purpose of this component is to save integration credentials.
 */
 
 import { RootComponent } from \\"@bearer/core\\";
@@ -62,7 +62,7 @@ import \\"@bearer/ui\\";
 export class SetupView {
   render() {
     return (
-      <bearer-setup-display scenarioId=\\"BEARER_SCENARIO_ID\\" setupId={(this as any).setupId} />
+      <bearer-setup-display integrationId=\\"BEARER_INTEGRATION_ID\\" setupId={(this as any).setupId} />
     )
   }
 }
@@ -113,7 +113,7 @@ export type ReturnedData = {
 
 exports[`generate:setup BASIC creates setup files 1`] = `
 "/*
-  The purpose of this component is to save scenario credentials.
+  The purpose of this component is to save integration credentials.
   This file has been generated automatically and should not be edited.
 */
 
@@ -127,7 +127,7 @@ import { FieldSet } from \\"@bearer/ui/lib/collection/components/Forms/Fieldset\
 export class SetupAction {
   @Prop() onSetupSuccess: (detail: any) => void = (_any: any) => { }
   @State() fields = new FieldSet([{\\"type\\":\\"text\\",\\"label\\":\\"Username\\",\\"controlName\\":\\"username\\"},{\\"type\\":\\"password\\",\\"label\\":\\"Password\\",\\"controlName\\":\\"password\\"}])
-  @State() innerListener = \`setup_success:BEARER_SCENARIO_ID\`
+  @State() innerListener = \`setup_success:BEARER_INTEGRATION_ID\`
   @Output() setup: any;
   @Element() el: HTMLElement;
 
@@ -161,7 +161,7 @@ export class SetupAction {
 
 exports[`generate:setup BASIC creates setup files 2`] = `
 "/*
-  The purpose of this component is to save scenario credentials.
+  The purpose of this component is to save integration credentials.
 */
 
 import { RootComponent } from \\"@bearer/core\\";
@@ -173,7 +173,7 @@ import \\"@bearer/ui\\";
 export class SetupView {
   render() {
     return (
-      <bearer-setup-display scenarioId=\\"BEARER_SCENARIO_ID\\" setupId={(this as any).setupId} />
+      <bearer-setup-display integrationId=\\"BEARER_INTEGRATION_ID\\" setupId={(this as any).setupId} />
     )
   }
 }
@@ -224,7 +224,7 @@ export type ReturnedData = {
 
 exports[`generate:setup OAUTH2 creates setup files 1`] = `
 "/*
-  The purpose of this component is to save scenario credentials.
+  The purpose of this component is to save integration credentials.
   This file has been generated automatically and should not be edited.
 */
 
@@ -238,7 +238,7 @@ import { FieldSet } from \\"@bearer/ui/lib/collection/components/Forms/Fieldset\
 export class SetupAction {
   @Prop() onSetupSuccess: (detail: any) => void = (_any: any) => { }
   @State() fields = new FieldSet([{\\"type\\":\\"text\\",\\"label\\":\\"Client ID\\",\\"controlName\\":\\"clientID\\"},{\\"type\\":\\"password\\",\\"label\\":\\"Client Secret\\",\\"controlName\\":\\"clientSecret\\"}])
-  @State() innerListener = \`setup_success:BEARER_SCENARIO_ID\`
+  @State() innerListener = \`setup_success:BEARER_INTEGRATION_ID\`
   @Output() setup: any;
   @Element() el: HTMLElement;
 
@@ -272,7 +272,7 @@ export class SetupAction {
 
 exports[`generate:setup OAUTH2 creates setup files 2`] = `
 "/*
-  The purpose of this component is to save scenario credentials.
+  The purpose of this component is to save integration credentials.
 */
 
 import { RootComponent } from \\"@bearer/core\\";
@@ -284,7 +284,7 @@ import \\"@bearer/ui\\";
 export class SetupView {
   render() {
     return (
-      <bearer-setup-display scenarioId=\\"BEARER_SCENARIO_ID\\" setupId={(this as any).setupId} />
+      <bearer-setup-display integrationId=\\"BEARER_INTEGRATION_ID\\" setupId={(this as any).setupId} />
     )
   }
 }

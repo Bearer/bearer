@@ -173,10 +173,10 @@ export class FullComponent {
     };
     render() {
         return (<bearer-navigator>
-        <bearer-navigator-auth-screen scenarioId=\\"SPONGE_BOB\\"/>
+        <bearer-navigator-auth-screen integrationId=\\"SPONGE_BOB\\"/>
         <bearer-navigator-screen navigationTitle=\\"First Screen\\" renderFunc={() => [<bearer-scrollable fetcher={this.fetcher}/>]}/>
         <bearer-navigator-screen navigationTitle=\\"First Screen\\" renderFunc={() => [<h1>
-            <bearer-i18n key=\\"titles.firstScreen\\" default=\\"Complex one\\" scope={this.SCENARIO_ID}/>
+            <bearer-i18n key=\\"titles.firstScreen\\" default=\\"Complex one\\" scope={this.INTEGRATION_ID}/>
           </h1>,
             <bearer-scrollable fetcher={this.fetcher}/>,
             <span>{translate('text.paragraphs.firstSpan', 'this text is fine {{value}}', { value: 'Sponge bobd' })}</span>,
@@ -223,7 +223,7 @@ export class FullComponent {
         Intent(\\"saveSetup\\")(this, \\"saveSetup\\");
         Intent(\\"retrieveSetup\\")(this, \\"fetcherRetrieveSetup\\");
     }
-    get SCENARIO_ID() { return \\"SPONGE_BOB\\"; }
+    get INTEGRATION_ID() { return \\"SPONGE_BOB\\"; }
     @Prop({ \\"context\\": \\"bearer\\" })
     bearerContext: any;
     componentDidLoad() {
@@ -433,7 +433,7 @@ export class AttachPullRequestAction {
     @Event({ eventName: \\"bearer-sponge-bob-inlinedefinition\\" })
     inlineDefinition: EventEmitter;
     render() {
-        return (<bearer-authorized scenarioId=\\"SPONGE_BOB\\">
+        return (<bearer-authorized integrationId=\\"SPONGE_BOB\\">
         <bearer-scrollable fetcher={this.fetcher}/>
         <span>Something that must be kept</span>
       </bearer-authorized>);
@@ -580,7 +580,7 @@ export class AttachPullRequestAction {
         Intent(\\"manualIntentName\\")(this, \\"manualIntentName\\");
         Intent(\\"retrieveShortPanda\\")(this, \\"fetcherRetrieveShortPanda\\");
     }
-    get SCENARIO_ID() { return \\"SPONGE_BOB\\"; }
+    get INTEGRATION_ID() { return \\"SPONGE_BOB\\"; }
     @Prop({ \\"context\\": \\"bearer\\" })
     bearerContext: any;
     @Prop()
@@ -979,7 +979,7 @@ export class InvalidRootComponent {
         Intent('ListRepositories')(this, \\"fetcher\\");
         Intent('getPullRequest', IntentType.FetchData)(this, \\"fetchResource\\");
     }
-    get SCENARIO_ID() { return \\"SPONGE_BOB\\"; }
+    get INTEGRATION_ID() { return \\"SPONGE_BOB\\"; }
     @Prop({ \\"context\\": \\"bearer\\" })
     bearerContext: any;
     @Prop()
@@ -1179,7 +1179,7 @@ class OverridesDecorarotFull {
     componentDidUnload() {
         console.log('componentDidUnload');
     }
-    get SCENARIO_ID() { return \\"SPONGE_BOB\\"; }
+    get INTEGRATION_ID() { return \\"SPONGE_BOB\\"; }
     @Prop({ \\"context\\": \\"bearer\\" })
     bearerContext: any;
     @Prop()
@@ -1358,7 +1358,7 @@ class OverridesDecorarorLess {
     componentDidUnload() {
         console.log('componentDidUnload');
     }
-    get SCENARIO_ID() { return \\"SPONGE_BOB\\"; }
+    get INTEGRATION_ID() { return \\"SPONGE_BOB\\"; }
     @Prop({ \\"context\\": \\"bearer\\" })
     bearerContext: any;
     @Prop()

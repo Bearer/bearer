@@ -3,7 +3,7 @@ import * as fs from 'fs-extra'
 import * as path from 'path'
 
 import BaseCommand from '../../base-command'
-import { RequireScenarioFolder } from '../../utils/decorators'
+import { RequireIntegrationFolder } from '../../utils/decorators'
 import prepareConfig from '../../utils/prepare-config'
 
 const CONFIG_FILE = 'bearer.config.json'
@@ -11,7 +11,7 @@ const HANDLER_NAME = 'index'
 const HANDLER_NAME_WITH_EXT = [HANDLER_NAME, 'js'].join('.')
 
 export default class PackIntents extends BaseCommand {
-  static description = 'Pack scenario intents'
+  static description = 'Pack integration intents'
   static hidden = true
   static flags = {
     ...BaseCommand.flags
@@ -19,7 +19,7 @@ export default class PackIntents extends BaseCommand {
 
   static args = [{ name: 'ARCHIVE_PATH', required: true }]
 
-  @RequireScenarioFolder()
+  @RequireIntegrationFolder()
   async run() {
     // we are assuming prepare and build have been run previously
     const { args } = this.parse(PackIntents)
@@ -31,10 +31,10 @@ export default class PackIntents extends BaseCommand {
     const archive = archiver('zip', {
       zlib: { level: 9 }
     })
-    const archiveEntries: Array<archiver.EntryData> = []
+    const archiveEntries: archiver.EntryData[] = []
     archive.pipe(output)
 
-    const archived = new Promise<Array<archiver.EntryData>>((resolve, reject) => {
+    const archived = new Promise<archiver.EntryData[]>((resolve, reject) => {
       output.on('close', () => {
         resolve(archiveEntries)
       })
@@ -95,7 +95,7 @@ export default class PackIntents extends BaseCommand {
     try {
       const config = await prepareConfig(
         this.locator.authConfigPath,
-        this.bearerConfig.scenarioUuid,
+        this.bearerConfig.integrationUuid,
         this.locator.srcIntentsDir
       )
       return config.intents

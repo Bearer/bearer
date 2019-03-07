@@ -2,25 +2,25 @@ import { flags } from '@oclif/command'
 import { spawn } from 'child_process'
 
 import BaseCommand from '../../base-command'
-import { ScenarioBuildEnv } from '../../types'
-import { RequireScenarioFolder } from '../../utils/decorators'
+import { IntegrationBuildEnv } from '../../types'
+import { RequireIntegrationFolder } from '../../utils/decorators'
 
-const scenarioId = 'scenario-id'
-const scenarioUuid = 'scenario-uuid'
+const integrationId = 'integration-id'
+const integrationUuid = 'integration-uuid'
 const cdnHost = 'cdn-host'
 
 export default class PackViews extends BaseCommand {
-  static description = 'Pack scenario views'
+  static description = 'Pack integration views'
   static hidden = true
   static flags = {
     ...BaseCommand.flags,
-    [scenarioUuid]: flags.string({
+    [integrationUuid]: flags.string({
       required: true,
-      description: 'Scenario unique identifier'
+      description: 'Integration unique identifier'
     }),
-    [scenarioId]: flags.string({
+    [integrationId]: flags.string({
       required: true,
-      description: 'stencil scenario namespace'
+      description: 'stencil integration namespace'
     }),
     [cdnHost]: flags.string({
       required: true,
@@ -28,15 +28,15 @@ export default class PackViews extends BaseCommand {
     })
   }
 
-  @RequireScenarioFolder()
+  @RequireIntegrationFolder()
   async run() {
     const { flags } = this.parse(PackViews)
 
     const config = this.bearerConfig
-    const env: ScenarioBuildEnv = {
+    const env: IntegrationBuildEnv = {
       ...process.env,
-      BEARER_SCENARIO_ID: flags[scenarioUuid],
-      BEARER_SCENARIO_TAG_NAME: flags[scenarioId],
+      BEARER_INTEGRATION_ID: flags[integrationUuid],
+      BEARER_INTEGRATION_TAG_NAME: flags[integrationId],
       BEARER_INTEGRATION_HOST: config.IntegrationServiceHost,
       BEARER_AUTHORIZATION_HOST: config.IntegrationServiceHost,
       CDN_HOST: flags[cdnHost]
@@ -50,23 +50,23 @@ export default class PackViews extends BaseCommand {
     }
   }
 
-  async buildStencil(env: ScenarioBuildEnv) {
+  async buildStencil(env: IntegrationBuildEnv) {
     return new Promise((resolve, reject) => {
       const build = spawn('yarn', ['stencil', 'build'], { env, cwd: this.locator.buildViewsDir })
 
       build.stdout.on('data', data => {
-        this.debug(`build scenario => stdout: ${data}`)
+        this.debug(`build integration => stdout: ${data}`)
       })
 
       build.stderr.on('data', data => {
-        this.debug(`build scenario => stderr: ${data}`)
+        this.debug(`build integration => stderr: ${data}`)
       })
 
       build.on('close', code => {
         if (code === 0) {
           resolve()
         } else {
-          reject(new Error("Can't build scenario views. please check logs"))
+          reject(new Error("Can't build integration views. please check logs"))
         }
       })
     })

@@ -7,14 +7,14 @@ export type FWithRevoke = (params: { revoke(authRefId: string): Promise<boolean>
 
 import debug from '../../logger'
 const logger = debug('bearer-authorized')
-// TODO: scope  authenticatePromise per scenario/setup
+// TODO: scope  authenticatePromise per integration/setup
 // @WithAuthentication()
 @Component({
   tag: 'bearer-authorized'
 })
 export class BearerAuthorized extends AuthenticationListener {
-  get SCENARIO_ID(): string {
-    return this.scenarioId
+  get INTEGRATION_ID(): string {
+    return this.integrationId
   }
   @State()
   isAuthorized: boolean | null = null
@@ -32,7 +32,7 @@ export class BearerAuthorized extends AuthenticationListener {
   bearerContext: any
 
   @Prop()
-  scenarioId: string
+  integrationId: string
 
   private pendingAuthorizationResolve: (authorize: boolean) => void
   private pendingAuthorizationReject: (authorize: boolean) => void

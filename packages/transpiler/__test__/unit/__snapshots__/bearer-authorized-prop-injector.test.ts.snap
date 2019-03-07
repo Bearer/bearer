@@ -32,7 +32,7 @@ exports[`bearer-authorized required property file: inject-prop-to-tsx-element.ts
 class RootComponent {
     render() {
         return (<bearer-navigator>
-        <bearer-navigator-auth-screen scenarioId=\\"SPONGE_BOB\\"/>
+        <bearer-navigator-auth-screen integrationId=\\"SPONGE_BOB\\"/>
       </bearer-navigator>);
     }
 }
@@ -42,7 +42,7 @@ class RootComponent {
 class SimpleComponent {
     render() {
         return (<bearer-navigator>
-        <bearer-navigator-auth-screen scenarioId=\\"SPONGE_BOB\\"/>
+        <bearer-navigator-auth-screen integrationId=\\"SPONGE_BOB\\"/>
       </bearer-navigator>);
     }
 }
@@ -51,7 +51,7 @@ class SimpleComponent {
 })
 class WithBearerAuthorizedComponent {
     render() {
-        return <bearer-authorized renderAuthorized={() => <div />} renderUnauthorized={() => <span />} scenarioId=\\"SPONGE_BOB\\"/>;
+        return <bearer-authorized renderAuthorized={() => <div />} renderUnauthorized={() => <span />} integrationId=\\"SPONGE_BOB\\"/>;
     }
 }
 @Component({
@@ -59,7 +59,7 @@ class WithBearerAuthorizedComponent {
 })
 class OverrideValueGiven {
     render() {
-        return (<bearer-authorized renderAuthorized={() => <div />} renderUnauthorized={() => <span />} scenarioId=\\"SPONGE_BOB\\"/>);
+        return (<bearer-authorized renderAuthorized={() => <div />} renderUnauthorized={() => <span />} integrationId=\\"SPONGE_BOB\\"/>);
     }
 }
 "

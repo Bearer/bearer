@@ -4,24 +4,24 @@ import { Config } from '../types'
 
 export default class LocationProvider {
   bearerDir = ''
-  scenarioRoot = ''
-  scenarioRc!: string
+  integrationRoot = ''
+  integrationRc!: string
 
   constructor(private readonly config: Config) {
-    this.scenarioRc = this.config.scenarioConfig.config
-    if (this.scenarioRc) {
-      this.scenarioRoot = path.dirname(this.scenarioRc)
-      this.bearerDir = path.join(this.scenarioRoot, '.bearer')
+    this.integrationRc = this.config.integrationConfig.config
+    if (this.integrationRc) {
+      this.integrationRoot = path.dirname(this.integrationRc)
+      this.bearerDir = path.join(this.integrationRoot, '.bearer')
     }
   }
 
-  scenarioRootResourcePath(filename: string): string {
-    return path.join(this.scenarioRoot, filename)
+  integrationRootResourcePath(filename: string): string {
+    return path.join(this.integrationRoot, filename)
   }
 
   // ~/views
   get srcViewsDir(): string {
-    return path.join(this.scenarioRoot, 'views')
+    return path.join(this.integrationRoot, 'views')
   }
 
   srcViewsDirResource(name: string): string {
@@ -30,7 +30,7 @@ export default class LocationProvider {
 
   // ~/intents
   get srcIntentsDir(): string {
-    return path.join(this.scenarioRoot, 'intents')
+    return path.join(this.integrationRoot, 'intents')
   }
 
   buildViewsResourcePath(resource: string): string {
@@ -70,6 +70,6 @@ export default class LocationProvider {
   }
 
   get authConfigPath(): string {
-    return this.scenarioRootResourcePath('auth.config.json')
+    return this.integrationRootResourcePath('auth.config.json')
   }
 }

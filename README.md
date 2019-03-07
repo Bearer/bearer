@@ -86,7 +86,7 @@ yarn link
 yarn build -w # starts TS compiler with watch mode enabled
 ```
 
-- then within your scenario
+- then within your integration
 
 ```
 yarn link @bearer/cli
@@ -95,10 +95,10 @@ yarn bearer start # will use the local version you previously linked
 
 At this point you are using your local cli build.
 
-if you want to generate a new scenario from you local build then you can run
+if you want to generate a new integration from you local build then you can run
 
 ```bash
-/path/bearer/repo/packages/cli/lib/bin/index.js new ScenarioName
+/path/bearer/repo/packages/cli/lib/bin/index.js new IntegrationName
 ```
 
 **Other packages**
@@ -110,7 +110,7 @@ _assuming we have a package named "@bearer/core"_
 ```bash
 lerna exec yarn link --scope='@bearer/core'
 
-// somewhere else on you computer inside a scenario, for example
+// somewhere else on you computer inside a integration, for example
 
 yarn link '@bearer/core'
 ```

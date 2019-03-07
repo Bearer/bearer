@@ -53,7 +53,7 @@ export function prepare(emitter, config, locator: Locator) {
     }
   ) => {
     try {
-      const { buildViewsDir, buildViewsComponentsDir, srcViewsDir, scenarioRoot } = locator
+      const { buildViewsDir, buildViewsComponentsDir, srcViewsDir, integrationRoot } = locator
 
       // Link non TS files
       const watcher = await watchNonTSFiles(srcViewsDir, buildViewsComponentsDir)
@@ -67,11 +67,11 @@ export function prepare(emitter, config, locator: Locator) {
 
       if (install) {
         emitter.emit('start:prepare:installingDependencies')
-        execSync(`${config.command} install`, { cwd: scenarioRoot })
+        execSync(`${config.command} install`, { cwd: integrationRoot })
       }
 
       return {
-        rootLevel: scenarioRoot,
+        rootLevel: integrationRoot,
         buildDirectory: buildViewsDir,
         viewsDirectory: srcViewsDir
       }
@@ -83,7 +83,7 @@ export function prepare(emitter, config, locator: Locator) {
 }
 
 export const start = (emitter, config, locator: Locator) => async ({ open, install, watcher }) => {
-  const { scenarioUuid } = config
+  const { integrationUuid } = config
 
   try {
     await prepare(emitter, config, locator)({
@@ -91,7 +91,7 @@ export const start = (emitter, config, locator: Locator) => async ({ open, insta
       watchMode: watcher
     })
 
-    const { scenarioRoot, buildViewsDir } = locator
+    const { integrationRoot, buildViewsDir } = locator
     // start local development server
     const integrationHost = await startLocalDevelopmentServer(emitter, config, locator)
 
@@ -109,15 +109,15 @@ export const start = (emitter, config, locator: Locator) => async ({ open, insta
     // Build env for sub commands
     const envVariables: NodeJS.ProcessEnv = {
       ...process.env,
-      BEARER_SCENARIO_TAG_NAME: 'localhost',
-      BEARER_SCENARIO_ID: scenarioUuid,
+      BEARER_INTEGRATION_TAG_NAME: 'localhost',
+      BEARER_INTEGRATION_ID: integrationUuid,
       BEARER_INTEGRATION_HOST: integrationHost,
       BEARER_AUTHORIZATION_HOST: integrationHost
     }
 
     const args = [path.join(__dirname, '..', 'startTranspiler.js'), ...options].filter(el => el)
     const bearerTranspiler = spawn('node', args, {
-      cwd: scenarioRoot,
+      cwd: integrationRoot,
       env: envVariables,
       stdio: ['pipe', 'pipe', 'pipe', 'ipc']
     })

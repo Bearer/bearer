@@ -9,7 +9,7 @@ storiesOf('Setup component', module)
   .addWithJSX('block', () => {
     return (
       <div>
-        <bearer-setup scenarioId="BEARER_SCENARIO_ID" fields="oauth2" />
+        <bearer-setup integrationId="BEARER_INTEGRATION_ID" fields="oauth2" />
         <bearer-setup-display />
       </div>
     )
@@ -17,7 +17,7 @@ storiesOf('Setup component', module)
   .addWithJSX('inline', () => {
     return (
       <div>
-        <bearer-setup display="inline" scenarioId="BEARER_SCENARIO_ID" fields={fields1} />
+        <bearer-setup display="inline" integrationId="BEARER_INTEGRATION_ID" fields={fields1} />
         <bearer-setup-display />
       </div>
     )

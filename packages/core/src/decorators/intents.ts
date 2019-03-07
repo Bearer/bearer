@@ -19,7 +19,7 @@ type IDecorator = (target: any, key: string) => void
 
 type BearerComponent = {
   setupId: string
-  SCENARIO_ID: string
+  INTEGRATION_ID: string
   referenceId: string
   el?: HTMLElement
 }
@@ -28,9 +28,12 @@ type BearerComponent = {
  * Constants
  */
 
+// tslint:disable-next-line:variable-name
 export const BearerContext = 'bearerContext'
 export const setupId = 'setupId'
+// tslint:disable-next-line:variable-name
 export const IntentSaved = 'BearerStateSaved'
+// tslint:disable-next-line:variable-name
 export const BearerStateSavedEvent = 'bearer:StateSaved'
 
 /**
@@ -41,19 +44,20 @@ export const BearerStateSavedEvent = 'bearer:StateSaved'
 // @Intent('intentName') propertyName: BearerFetch
 // or
 // @Intent('intentNameResource', IntentType.FetchData) propertyName: BearerFetch
+// tslint:disable-next-line:function-name
 export function Intent(intentName: string, type: IntentType = IntentType.FetchData): IDecorator {
   return function(target: BearerComponent, key: string): void {
     const getter = (): BearerFetch => {
       return function(this: BearerComponent, params = {}): Promise<TFetchBearerData> {
         // NOTE: here we have to use target. Not sure why
-        const scenarioId = target.SCENARIO_ID
-        if (!scenarioId) {
-          return missingScenarioId()
+        const integrationId = target.INTEGRATION_ID
+        if (!integrationId) {
+          return missingIntegrationId()
         }
 
         const intent = intentRequest<TFetchBearerResult>({
           intentName,
-          scenarioId,
+          integrationId,
           [setupId]: params[setupId] || retrieveSetupId(target)
         })
 
@@ -95,9 +99,9 @@ export function intentPromise(promise: Promise<TFetchBearerResult>): Promise<TFe
  * Helpers
  */
 
-function missingScenarioId(): Promise<any> {
-  console.info('[BEARER]', 'Missing scenarioId, skipping api call')
-  return Promise.reject(new BearerMissingScenarioId())
+function missingIntegrationId(): Promise<any> {
+  console.info('[BEARER]', 'Missing integrationId, skipping api call')
+  return Promise.reject(new BearerMissingIntegrationId())
 }
 
 function retrieveSetupId(target: BearerComponent): string {
@@ -130,6 +134,6 @@ class BearerMissingReferenceId extends Error {
   }
 }
 
-class BearerMissingScenarioId extends Error {
-  message = 'Scenario ID is missing. Please add @RootComponent decorator above your class definition'
+class BearerMissingIntegrationId extends Error {
+  message = 'Integration ID is missing. Please add @RootComponent decorator above your class definition'
 }

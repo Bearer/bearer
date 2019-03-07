@@ -22,7 +22,7 @@ export class FeatDisplayRootComponent {
   aNumberProp: number = 5
 
   // assuming event-name-scoping already passed
-  @Event({ eventName: 'bearer:1234-scenario-name:complex-feature:namedEvent' })
+  @Event({ eventName: 'bearer:1234-integration-name:complex-feature:namedEvent' })
   namedEvent: EventEmitter
   @Event()
   nonTypedEvent: EventEmitter

@@ -80,19 +80,19 @@ export type TWebhookOptions = {
 /**
  * Middlwares
  */
-const SCENARIO_HANDLER = 'bearer-scenario-handler'
+const INTEGRATION_HANDLER = 'bearer-integration-handler'
 const BEARER_SHA = 'bearer-sha'
 const INTENT_DURATION_HEADER = 'X-BEARER-WEBHOOK-HANDLER-DURATION'
 
 function ensureHandlerExists(handlers: TWebhookHandlers) {
   return (req: Request & Partial<TWithHandlerReq>, res: Response, next: NextFunction) => {
-    const scenarioHandler = req.headers[SCENARIO_HANDLER] as string
-    if (!handlers[scenarioHandler]) {
+    const integrationHandler = req.headers[INTEGRATION_HANDLER] as string
+    if (!handlers[integrationHandler]) {
       res.status(422)
-      next(new WebhookMissingHandler(`Scenario handler not found: ${scenarioHandler}`))
+      next(new WebhookMissingHandler(`Integration handler not found: ${integrationHandler}`))
     } else {
-      req.bearerHandler = handlers[scenarioHandler]
-      req.bearerHandlerName = scenarioHandler
+      req.bearerHandler = handlers[integrationHandler]
+      req.bearerHandlerName = integrationHandler
       next()
     }
   }

@@ -1,13 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`APIKEY generates a scenario without any prompt and APIKEY 1`] = `
+exports[`APIKEY generates a integration without any prompt and APIKEY 1`] = `
 "
 What's next?
 
-,[1m   cd APIKEYScenario && bearer start[22m
-,[32mScenario initialized, name: APIKEYScenario, authentication type: API Key[39m
+,[1m   cd APIKEYIntegration && bearer start[22m
+,[32mIntegration initialized, name: APIKEYIntegration, authentication type: API Key[39m
 ,[90m    create: [39m[37m.bearer/init/new/APIKEY/.gitignore[39m
-,[90m    create: [39m[37m.bearer/init/new/APIKEY/.scenariorc[39m
+,[90m    create: [39m[37m.bearer/init/new/APIKEY/.integrationrc[39m
 ,[90m    create: [39m[37m.bearer/init/new/APIKEY/LICENSE[39m
 ,[90m    create: [39m[37m.bearer/init/new/APIKEY/auth.config.json[39m
 ,[90m    create: [39m[37m.bearer/init/new/APIKEY/config.dev.js.example[39m
@@ -25,7 +25,7 @@ What's next?
 "
 `;
 
-exports[`APIKEY generates a scenario without any prompt and APIKEY 2`] = `
+exports[`APIKEY generates a integration without any prompt and APIKEY 2`] = `
 "{
   \\"authType\\": \\"APIKEY\\",
   \\"setupViews\\": [
@@ -39,14 +39,14 @@ exports[`APIKEY generates a scenario without any prompt and APIKEY 2`] = `
 "
 `;
 
-exports[`BASIC generates a scenario without any prompt and BASIC 1`] = `
+exports[`BASIC generates a integration without any prompt and BASIC 1`] = `
 "
 What's next?
 
-,[1m   cd BASICScenario && bearer start[22m
-,[32mScenario initialized, name: BASICScenario, authentication type: Basic Auth[39m
+,[1m   cd BASICIntegration && bearer start[22m
+,[32mIntegration initialized, name: BASICIntegration, authentication type: Basic Auth[39m
 ,[90m    create: [39m[37m.bearer/init/new/BASIC/.gitignore[39m
-,[90m    create: [39m[37m.bearer/init/new/BASIC/.scenariorc[39m
+,[90m    create: [39m[37m.bearer/init/new/BASIC/.integrationrc[39m
 ,[90m    create: [39m[37m.bearer/init/new/BASIC/LICENSE[39m
 ,[90m    create: [39m[37m.bearer/init/new/BASIC/auth.config.json[39m
 ,[90m    create: [39m[37m.bearer/init/new/BASIC/config.dev.js.example[39m
@@ -64,7 +64,7 @@ What's next?
 "
 `;
 
-exports[`BASIC generates a scenario without any prompt and BASIC 2`] = `
+exports[`BASIC generates a integration without any prompt and BASIC 2`] = `
 "{
   \\"authType\\": \\"BASIC\\",
   \\"setupViews\\": [
@@ -83,14 +83,14 @@ exports[`BASIC generates a scenario without any prompt and BASIC 2`] = `
 "
 `;
 
-exports[`NONE generates a scenario without any prompt and NONE 1`] = `
+exports[`NONE generates a integration without any prompt and NONE 1`] = `
 "
 What's next?
 
-,[1m   cd NONEScenario && bearer start[22m
-,[32mScenario initialized, name: NONEScenario, authentication type: NoAuth[39m
+,[1m   cd NONEIntegration && bearer start[22m
+,[32mIntegration initialized, name: NONEIntegration, authentication type: NoAuth[39m
 ,[90m    create: [39m[37m.bearer/init/new/NONE/.gitignore[39m
-,[90m    create: [39m[37m.bearer/init/new/NONE/.scenariorc[39m
+,[90m    create: [39m[37m.bearer/init/new/NONE/.integrationrc[39m
 ,[90m    create: [39m[37m.bearer/init/new/NONE/LICENSE[39m
 ,[90m    create: [39m[37m.bearer/init/new/NONE/auth.config.json[39m
 ,[90m    create: [39m[37m.bearer/init/new/NONE/config.dev.js.example[39m
@@ -108,21 +108,21 @@ What's next?
 "
 `;
 
-exports[`NONE generates a scenario without any prompt and NONE 2`] = `
+exports[`NONE generates a integration without any prompt and NONE 2`] = `
 "{
   \\"authType\\": \\"NONE\\"
 }
 "
 `;
 
-exports[`OAUTH1 generates a scenario without any prompt and OAUTH1 1`] = `
+exports[`OAUTH1 generates a integration without any prompt and OAUTH1 1`] = `
 "
 What's next?
 
-,[1m   cd OAUTH1Scenario && bearer start[22m
-,[32mScenario initialized, name: OAUTH1Scenario, authentication type: OAuth1[39m
+,[1m   cd OAUTH1Integration && bearer start[22m
+,[32mIntegration initialized, name: OAUTH1Integration, authentication type: OAuth1[39m
 ,[90m    create: [39m[37m.bearer/init/new/OAUTH1/.gitignore[39m
-,[90m    create: [39m[37m.bearer/init/new/OAUTH1/.scenariorc[39m
+,[90m    create: [39m[37m.bearer/init/new/OAUTH1/.integrationrc[39m
 ,[90m    create: [39m[37m.bearer/init/new/OAUTH1/LICENSE[39m
 ,[90m    create: [39m[37m.bearer/init/new/OAUTH1/auth.config.json[39m
 ,[90m    create: [39m[37m.bearer/init/new/OAUTH1/config.dev.js.example[39m
@@ -140,7 +140,7 @@ What's next?
 "
 `;
 
-exports[`OAUTH1 generates a scenario without any prompt and OAUTH1 2`] = `
+exports[`OAUTH1 generates a integration without any prompt and OAUTH1 2`] = `
 "{
   \\"requestTokenURL\\": \\"https://example.com/oauth/RequestToken\\",
   \\"accessTokenURL\\": \\"https://example.com/oauth/AccessToken\\",
@@ -169,14 +169,14 @@ exports[`OAUTH1 generates a scenario without any prompt and OAUTH1 2`] = `
 "
 `;
 
-exports[`OAUTH2 generates a scenario without any prompt and OAUTH2 1`] = `
+exports[`OAUTH2 generates a integration without any prompt and OAUTH2 1`] = `
 "
 What's next?
 
-,[1m   cd OAUTH2Scenario && bearer start[22m
-,[32mScenario initialized, name: OAUTH2Scenario, authentication type: OAuth2[39m
+,[1m   cd OAUTH2Integration && bearer start[22m
+,[32mIntegration initialized, name: OAUTH2Integration, authentication type: OAuth2[39m
 ,[90m    create: [39m[37m.bearer/init/new/OAUTH2/.gitignore[39m
-,[90m    create: [39m[37m.bearer/init/new/OAUTH2/.scenariorc[39m
+,[90m    create: [39m[37m.bearer/init/new/OAUTH2/.integrationrc[39m
 ,[90m    create: [39m[37m.bearer/init/new/OAUTH2/LICENSE[39m
 ,[90m    create: [39m[37m.bearer/init/new/OAUTH2/auth.config.json[39m
 ,[90m    create: [39m[37m.bearer/init/new/OAUTH2/config.dev.js.example[39m
@@ -194,7 +194,7 @@ What's next?
 "
 `;
 
-exports[`OAUTH2 generates a scenario without any prompt and OAUTH2 2`] = `
+exports[`OAUTH2 generates a integration without any prompt and OAUTH2 2`] = `
 "{
   \\"authorizationURL\\": \\"https://example.com/authorizationUrl\\",
   \\"tokenURL\\": \\"https://example.com/tokenUrl\\",

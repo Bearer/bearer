@@ -19,14 +19,14 @@ export class BearerNavigatorAuthScreen extends AuthenticationListener {
   el: HTMLStencilElement
 
   @State()
-  scenarioAuthorized: boolean = null
+  integrationAuthorized: boolean = null
 
   @Event()
-  scenarioAuthenticate: EventEmitter
+  integrationAuthenticate: EventEmitter
   @Event()
   stepCompleted: EventEmitter
   @Prop()
-  scenarioId = 'BEARER_SCENARIO_ID'
+  integrationId = 'BEARER_INTEGRATION_ID'
 
   @Prop()
   authId: string
@@ -51,14 +51,14 @@ export class BearerNavigatorAuthScreen extends AuthenticationListener {
   }
 
   onRevoked = () => {
-    this.scenarioAuthorized = false
+    this.integrationAuthorized = false
   }
 
   goNext = () => {
     logger('go to next screen')
-    this.scenarioAuthenticate.emit()
+    this.integrationAuthenticate.emit()
     this.stepCompleted.emit()
-    this.scenarioAuthorized = true
+    this.integrationAuthorized = true
   }
 
   onAuthorizeClick = (authenticate: () => Promise<boolean>) => {
@@ -94,7 +94,7 @@ export class BearerNavigatorAuthScreen extends AuthenticationListener {
     return (
       <bearer-navigator-screen id="screen" navigationTitle="Authentication" class="in">
         <bearer-authorized
-          scenarioId={this.scenarioId}
+          integrationId={this.integrationId}
           id="authorizer"
           renderUnauthorized={this.renderUnauthoried}
           renderAuthorized={this.renderAuthorized}

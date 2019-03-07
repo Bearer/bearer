@@ -4,7 +4,7 @@
 import * as ts from 'typescript'
 
 // At the same time it ensures we will have the accessor present ;-)
-import { shouldProcessFile as hasAccessor, retrieveScenarioId } from './scenario-id-accessor-injector'
+import { shouldProcessFile as hasAccessor, retrieveIntegrationId } from './integration-id-accessor-injector'
 
 import { TransformerOptions } from '../types'
 import { Component, Module } from '../constants'
@@ -23,7 +23,7 @@ function visitJsxSelfClosingElement(node: ts.JsxSelfClosingElement): ts.JsxSelfC
       ...node.attributes.properties,
       ts.createJsxAttribute(
         ts.createIdentifier('scope'),
-        ts.createJsxExpression(undefined, ts.createPropertyAccess(ts.createThis(), Component.scenarioIdAccessor))
+        ts.createJsxExpression(undefined, ts.createPropertyAccess(ts.createThis(), Component.integrationIdAccessor))
       )
     ])
   )
@@ -121,7 +121,9 @@ function injectScopedInstances(tsSourceFile: ts.SourceFile, collection: AliasesC
             ts.createVariableDeclaration(
               name,
               undefined,
-              ts.createCall(ts.createIdentifier(helperName), undefined, [ts.createStringLiteral(retrieveScenarioId())])
+              ts.createCall(ts.createIdentifier(helperName), undefined, [
+                ts.createStringLiteral(retrieveIntegrationId())
+              ])
             )
           ]
         )

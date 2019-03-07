@@ -5,10 +5,10 @@ import * as globby from 'globby'
 import * as Listr from 'listr'
 
 import BaseCommand from '../base-command'
-import { ensureFreshToken, RequireLinkedScenario, RequireScenarioFolder } from '../utils/decorators'
+import { ensureFreshToken, RequireLinkedIntegration, RequireIntegrationFolder } from '../utils/decorators'
 import { ensureFolderExists } from '../utils/helpers'
 export default class Push extends BaseCommand {
-  static description = 'Deploy Scenario to Bearer Platform'
+  static description = 'Deploy Integration to Bearer Platform'
 
   static flags = {
     ...BaseCommand.flags
@@ -16,12 +16,12 @@ export default class Push extends BaseCommand {
 
   static args = []
 
-  @RequireScenarioFolder()
-  @RequireLinkedScenario()
+  @RequireIntegrationFolder()
+  @RequireLinkedIntegration()
   @ensureFreshToken()
   async run() {
     ensureFolderExists(this.locator.buildArtifactDir, true)
-    const archivePath = this.locator.buildArtifactResourcePath('scenario.zip')
+    const archivePath = this.locator.buildArtifactResourcePath('integration.zip')
     const tasks = [
       {
         title: 'Generate bundle',
@@ -35,14 +35,20 @@ export default class Push extends BaseCommand {
 
     try {
       await new Listr(tasks).run()
-      this.success(`🐻 Scenario successfully pushed.\n`)
+      this.success(`🐻 Integration successfully pushed.\n`)
       this.log(
-        `Your Scenario will be available shortly here: ` +
-          this.colors.bold(`${this.bearerConfig.DeveloperPortalUrl}scenarios/${this.bearerConfig.scenarioUuid}/preview`)
+        // tslint:disable-next-line:prefer-template
+        `Your Integration will be available shortly here: ` +
+          this.colors.bold(
+            `${this.bearerConfig.DeveloperPortalUrl}integrations/${this.bearerConfig.integrationUuid}/preview`
+          )
       )
       this.log(
+        // tslint:disable-next-line:prefer-template
         `\nIn the meantime you can follow the deployment here: ` +
-          this.colors.bold(`${this.bearerConfig.DeveloperPortalUrl}scenarios/${this.bearerConfig.scenarioUuid}/logs`)
+          this.colors.bold(
+            `${this.bearerConfig.DeveloperPortalUrl}integrations/${this.bearerConfig.integrationUuid}/logs`
+          )
       )
     } catch (e) {
       this.error(e)
@@ -97,7 +103,10 @@ export default class Push extends BaseCommand {
   }
 
   async getSignedUrl(): Promise<string> {
-    return this.scenarioClient.getScenarioArchiveUploadUrl(this.bearerConfig.orgId!, this.bearerConfig.scenarioId!)
+    return this.integrationClient.getIntegrationArchiveUploadUrl(
+      this.bearerConfig.orgId!,
+      this.bearerConfig.integrationId!
+    )
   }
 
   async transfer(archivePath: string): Promise<boolean> {
@@ -110,14 +119,13 @@ export default class Push extends BaseCommand {
     } catch (e) {
       if (e.response && e.response.status === 401) {
         this.error(
-          `Unauthorized to push, please visit ${this.bearerConfig.DeveloperPortalUrl}scenarios/${
-            this.bearerConfig.scenarioUuid
-          } to confirm you have access to ${this.colors.bold(this.bearerConfig.scenarioUuid)} scenario.`
+          `Unauthorized to push, please visit ${this.bearerConfig.DeveloperPortalUrl}integrations/${
+            this.bearerConfig.integrationUuid
+          } to confirm you have access to ${this.colors.bold(this.bearerConfig.integrationUuid)} integration.`
         )
         return false
-      } else {
-        throw e
       }
+      throw e
     }
   }
 }

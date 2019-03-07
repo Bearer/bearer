@@ -7,7 +7,7 @@ const ini = require('ini')
 const path = require('path')
 const { spawnSync } = require('child_process')
 
-import { BaseConfig, BearerConfig, BearerEnv, Config, ScenarioConfig } from './types'
+import { BaseConfig, BearerConfig, BearerEnv, Config, IntegrationConfig } from './types'
 
 const configs: Record<BearerEnv, BaseConfig> = {
   dev: {
@@ -52,33 +52,33 @@ export default (): Config => {
     get bearerConfig(): BearerConfig {
       return rc('bearer')
     },
-    get scenarioConfig(): ScenarioConfig {
-      return rc('scenario')
+    get integrationConfig(): IntegrationConfig {
+      return rc('integration')
     },
     get orgId(): string | undefined {
-      return this.scenarioConfig.orgId
+      return this.integrationConfig.orgId
     },
-    get scenarioTitle(): string | undefined {
-      return this.scenarioConfig.scenarioTitle
+    get integrationTitle(): string | undefined {
+      return this.integrationConfig.integrationTitle
     },
-    get scenarioId(): string | undefined {
-      return this.scenarioConfig.scenarioId
+    get integrationId(): string | undefined {
+      return this.integrationConfig.integrationId
     },
-    get scenarioUuid(): string {
-      if (this.hasScenarioLinked) {
-        return `${this.orgId}-${this.scenarioId}`
+    get integrationUuid(): string {
+      if (this.hasIntegrationLinked) {
+        return `${this.orgId}-${this.integrationId}`
       }
       return 'unset-scenari0-uuid'
     },
-    get hasScenarioLinked(): boolean {
-      return Boolean(this.orgId) && Boolean(this.scenarioId)
+    get hasIntegrationLinked(): boolean {
+      return Boolean(this.orgId) && Boolean(this.integrationId)
     },
     get rootPathRc(): string {
-      return findUp.sync('.scenariorc')
+      return findUp.sync('.integrationrc')
     },
-    setScenarioConfig(config: { scenarioTitle: string; orgId: string; scenarioId: string }) {
-      const { scenarioTitle, orgId, scenarioId } = config
-      fs.writeFileSync(this.rootPathRc, ini.stringify({ scenarioTitle, orgId, scenarioId }))
+    setIntegrationConfig(config: { integrationTitle: string; orgId: string; integrationId: string }) {
+      const { integrationTitle, orgId, integrationId } = config
+      fs.writeFileSync(this.rootPathRc, ini.stringify({ integrationTitle, orgId, integrationId }))
     },
     storeBearerConfig(config) {
       const { Username, ExpiresAt, authorization } = config

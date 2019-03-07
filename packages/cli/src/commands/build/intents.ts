@@ -6,14 +6,14 @@ import * as webpack from 'webpack'
 
 import BaseCommand from '../../base-command'
 import installDependencies from '../../tasks/install-dependencies'
-import { RequireScenarioFolder } from '../../utils/decorators'
+import { RequireIntegrationFolder } from '../../utils/decorators'
 import GenerateApiDocumenation from '../generate/api-documentation'
 import compilerOptions from '../../utils/intent-ts-compiler-options'
 
 const skipInstall = 'skip-install'
 
 export default class BuildIntents extends BaseCommand {
-  static description = 'Build scenario intents'
+  static description = 'Build integration intents'
   static hidden = true
   static flags = {
     ...BaseCommand.flags,
@@ -22,7 +22,7 @@ export default class BuildIntents extends BaseCommand {
 
   static args = []
 
-  @RequireScenarioFolder()
+  @RequireIntegrationFolder()
   async run() {
     const { flags } = this.parse(BuildIntents)
 
@@ -41,7 +41,7 @@ export default class BuildIntents extends BaseCommand {
       }
     ]
     if (!flags[skipInstall]) {
-      tasks.unshift(installDependencies({ cwd: this.locator.scenarioRoot }))
+      tasks.unshift(installDependencies({ cwd: this.locator.integrationRoot }))
     }
 
     try {

@@ -17,7 +17,7 @@ export function isBearerEvent(eventName: string): boolean {
 }
 
 export function prefixEvent(eventName: string): string {
-  return [BEARER, process.env[Env.BEARER_SCENARIO_ID], eventName].join(SEPARATOR)
+  return [BEARER, process.env[Env.BEARER_INTEGRATION_ID], eventName].join(SEPARATOR)
 }
 
 export function eventName(name: string) {

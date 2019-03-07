@@ -3,7 +3,7 @@ import path from 'path'
 import ts from 'typescript'
 
 import { intentTypesToSchemaConverter as converter } from '../src/index'
-const INTENTS_DIR = path.join(__dirname, '__fixtures__', 'scenario', 'intents')
+const INTENTS_DIR = path.join(__dirname, '__fixtures__', 'integration', 'intents')
 
 const intents = fs.readdirSync(INTENTS_DIR).map(intent => [intent])
 

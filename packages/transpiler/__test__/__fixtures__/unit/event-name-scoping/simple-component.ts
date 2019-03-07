@@ -13,7 +13,7 @@ export class SimpleComponent {
   @Listen('eventFromChildren')
   eventFromChildrenHandler() {}
 
-  // prevent Alice to listen on anything else than her scenario's events
+  // prevent Alice to listen on anything else than her integration's events
   @Listen('body:click')
   clickHandler() {}
 }

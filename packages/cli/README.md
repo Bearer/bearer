@@ -43,9 +43,9 @@ USAGE
 * [`bearer generate:intent [NAME]`](#bearer-generateintent-name)
 * [`bearer help [COMMAND]`](#bearer-help-command)
 * [`bearer invoke INTENT_NAME`](#bearer-invoke-intent-name)
-* [`bearer link SCENARIO_IDENTIFIER`](#bearer-link-scenario-identifier)
+* [`bearer link INTEGRATION_IDENTIFIER`](#bearer-link-integration-identifier)
 * [`bearer login`](#bearer-login)
-* [`bearer new [SCENARIONAME]`](#bearer-new-scenarioname)
+* [`bearer new [INTEGRATIONNAME]`](#bearer-new-integrationname)
 * [`bearer push`](#bearer-push)
 * [`bearer start`](#bearer-start)
 
@@ -163,13 +163,13 @@ OPTIONS
 
 _See code: [src/commands/invoke.ts](https://github.com/Bearer/bearer/blob/v0.100.0/src/commands/invoke.ts)_
 
-## `bearer link SCENARIO_IDENTIFIER`
+## `bearer link INTEGRATION_IDENTIFIER`
 
-Link your local scenario to a remote one
+Link your local integration to a remote one
 
 ```
 USAGE
-  $ bearer link SCENARIO_IDENTIFIER
+  $ bearer link INTEGRATION_IDENTIFIER
 
 OPTIONS
   -h, --help   show CLI help
@@ -196,13 +196,13 @@ OPTIONS
 
 _See code: [src/commands/login.ts](https://github.com/Bearer/bearer/blob/v0.100.0/src/commands/login.ts)_
 
-## `bearer new [SCENARIONAME]`
+## `bearer new [INTEGRATIONNAME]`
 
-Generate a new scenario
+Generate a new integration
 
 ```
 USAGE
-  $ bearer new [SCENARIONAME]
+  $ bearer new [INTEGRATIONNAME]
 
 OPTIONS
   -a, --authType=OAUTH2|BASIC|APIKEY|NONE  Authorization type
@@ -215,7 +215,7 @@ _See code: [src/commands/new.ts](https://github.com/Bearer/bearer/blob/v0.100.0/
 
 ## `bearer push`
 
-Deploy Scenario to Bearer Platform
+Deploy Integration to Bearer Platform
 
 ```
 USAGE

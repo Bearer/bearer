@@ -1,5 +1,5 @@
 import BaseCommand from '../../base-command'
-import { RequireScenarioFolder } from '../../utils/decorators'
+import { RequireIntegrationFolder } from '../../utils/decorators'
 import { ensureFolderExists } from '../../utils/helpers'
 
 export default class PrepareIntents extends BaseCommand {
@@ -11,7 +11,7 @@ export default class PrepareIntents extends BaseCommand {
 
   static args = []
 
-  @RequireScenarioFolder()
+  @RequireIntegrationFolder()
   async run() {
     ensureFolderExists(this.locator.buildIntentsDir, true)
     ensureFolderExists(this.locator.buildArtifactDir, true)

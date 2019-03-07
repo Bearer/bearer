@@ -1,18 +1,16 @@
-import { Component, Prop, State } from '@bearer/core'
-
-import Bearer from '@bearer/core'
+import Bearer, { Component, Prop, State } from '@bearer/core'
 
 @Component({
   tag: 'bearer-config-display',
   shadow: true
 })
 export class BearerConfigDisplay {
-  @Prop() scenarioId = ''
+  @Prop() integrationId = ''
   @State() isConfig: boolean = false
   @State() configId = ''
 
   componentDidLoad() {
-    Bearer.emitter.addListener(`config_success:${this.scenarioId}`, data => {
+    Bearer.emitter.addListener(`config_success:${this.integrationId}`, data => {
       this.configId = data.referenceID
       this.isConfig = true
     })
@@ -22,16 +20,15 @@ export class BearerConfigDisplay {
     if (this.isConfig) {
       return (
         <p>
-          Scenario is currently configure with Config ID:&nbsp;
+          Integration is currently configure with Config ID:&nbsp;
           <bearer-badge kind="info">{this.configId}</bearer-badge>
         </p>
       )
-    } else {
-      return (
-        <p>
-          <p>Scenario hasn't been configured yet</p>
-        </p>
-      )
     }
+    return (
+      <p>
+        <p>Integration hasn't been configured yet</p>
+      </p>
+    )
   }
 }

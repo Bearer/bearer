@@ -1,5 +1,5 @@
 /*
-  The purpose of this component is to deal with scenario navigation between each views.
+  The purpose of this component is to deal with integration navigation between each views.
 
 */
 

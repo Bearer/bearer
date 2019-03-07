@@ -1,23 +1,23 @@
 import BaseCommand from '../base-command'
-import { RequireScenarioFolder } from '../utils/decorators'
+import { RequireIntegrationFolder } from '../utils/decorators'
 
 export default class Link extends BaseCommand {
-  static description = 'Link your local scenario to a remote one'
+  static description = 'Link your local integration to a remote one'
 
   static flags = {
     ...BaseCommand.flags
   }
 
-  static args = [{ name: 'Scenario_Identifier', required: true }]
+  static args = [{ name: 'Integration_Identifier', required: true }]
 
-  @RequireScenarioFolder()
+  @RequireIntegrationFolder()
   async run() {
     const { args } = this.parse(Link)
-    const identifier = args.Scenario_Identifier
-    const { scenarioTitle } = this.bearerConfig
-    const [orgId, scenarioId] = identifier.replace(/\-/, '|').split('|')
-    const scenarioRc = { orgId, scenarioId, scenarioTitle }
-    this.bearerConfig.setScenarioConfig(scenarioRc)
-    this.log('Scenario successfully linked! 🎉')
+    const identifier = args.Integration_Identifier
+    const { integrationTitle } = this.bearerConfig
+    const [orgId, integrationId] = identifier.replace(/\-/, '|').split('|')
+    const integrationRc = { orgId, integrationId, integrationTitle }
+    this.bearerConfig.setIntegrationConfig(integrationRc)
+    this.log('Integration successfully linked! 🎉')
   }
 }

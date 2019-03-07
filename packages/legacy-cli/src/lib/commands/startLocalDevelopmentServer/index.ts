@@ -27,7 +27,7 @@ export default function startLocalDevelopmentServer(
   locator: LocationProvider,
   logs: boolean = true
 ) {
-  const rootLevel = locator.scenarioRoot
+  const rootLevel = locator.integrationRoot
 
   const LOCAL_DEV_CONFIGURATION = 'dev'
   const explorer = cosmiconfig(LOCAL_DEV_CONFIGURATION, {
@@ -70,19 +70,19 @@ export default function startLocalDevelopmentServer(
       process.env.bearerBaseURL = bearerBaseURL
 
       router.post(
-        `v3/intents/${config.scenarioUuid}/:intentName`,
+        `v3/intents/${config.integrationUuid}/:intentName`,
         intentHandler(distPath, devIntentsContext, bearerBaseURL),
         (ctx, _next) => ctx.ok(ctx.intentDatum)
       )
 
       router.post(
-        `v2/intents/${config.scenarioUuid}/:intentName`,
+        `v2/intents/${config.integrationUuid}/:intentName`,
         intentHandler(distPath, devIntentsContext, bearerBaseURL),
         (ctx, _next) => ctx.ok(ctx.intentDatum)
       )
 
       router.all(
-        `v1/${config.scenarioUuid}/:intentName`,
+        `v1/${config.integrationUuid}/:intentName`,
         intentHandler(distPath, devIntentsContext, bearerBaseURL),
         (ctx, _next) => ctx.ok(ctx.intentDatum)
       )

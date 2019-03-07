@@ -58,7 +58,7 @@
   </script>
   <script src="/build/bearer-ui.js"></script>
   <script>
-    class ScenarioPlaceholder extends HTMLElement {
+    class IntegrationPlaceholder extends HTMLElement {
       constructor() {
         super(); // always call super() first in the constructor.
 
@@ -103,7 +103,7 @@
       }
     }
 
-    customElements.define('scenario-placeholder', ScenarioPlaceholder);
+    customElements.define('integration-placeholder', IntegrationPlaceholder);
 
   </script>
 </head>
@@ -141,10 +141,10 @@
 
   <div>
     <h2>Default</h2>
-    <scenario-placeholder></scenario-placeholder>
+    <integration-placeholder></integration-placeholder>
     <div class="overridden">
       <h2>Overridden</h2>
-      <scenario-placeholder></scenario-placeholder>
+      <integration-placeholder></integration-placeholder>
     </div>
   </div>
   <div>
@@ -182,7 +182,7 @@
   <div style="padding: 100px 0">
     <div>
 
-      <bearer-button-popover direction="left" header="My scenario name">
+      <bearer-button-popover direction="left" header="My integration name">
         <span slot="buttonText">Attached at left</span>
         <bearer-navigator>
           <bearer-navigator-screen navigation-title="First Screen">
@@ -208,7 +208,7 @@
         </bearer-navigator>
       </bearer-button-popover>
 
-      <bearer-button-popover direction="top" header="My scenario name" button-text="Attach PR">
+      <bearer-button-popover direction="top" header="My integration name" button-text="Attach PR">
         <span slot="buttonText">Attach on top</span>
         <div>Long story Short
           <br />Long story Short
@@ -222,7 +222,7 @@
           <br />
         </div>
       </bearer-button-popover>
-      <bearer-button-popover direction="top" header="My scenario name" button-text="Attach PR" opened="false">
+      <bearer-button-popover direction="top" header="My integration name" button-text="Attach PR" opened="false">
         <span slot="buttonText">Attach PR</span>
         <div>Long story Short
           <br />Long story Short
@@ -236,7 +236,7 @@
           <br />
         </div>
       </bearer-button-popover>
-      <bearer-button-popover direction="bottom" header="My scenario name" button-text="Attach PR">
+      <bearer-button-popover direction="bottom" header="My integration name" button-text="Attach PR">
         <span slot="buttonText">Attach PR</span>
         <div>Long story Short
           <br />Long story Short
@@ -250,7 +250,7 @@
           <br />
         </div>
       </bearer-button-popover>
-      <bearer-button-popover direction="right" header="My scenario name" button-text="Attach PR">
+      <bearer-button-popover direction="right" header="My integration name" button-text="Attach PR">
         <span slot="buttonText">Attach PR</span>
       </bearer-button-popover>
     </div>

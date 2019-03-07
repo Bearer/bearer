@@ -1,7 +1,7 @@
 {
   "name": "create-bearer",
   "version": "0.100.0",
-  "description": "Quickly create a new Bearer scenario",
+  "description": "Quickly create a new Bearer integration",
   "main": "lib/index.js",
   "repository": "Bearer/bearer",
   "homepage": "https://github.com/Bearer/bearer/packages/create-bearer#readme",

@@ -5,7 +5,7 @@ import { readFile } from '../helpers/utils'
 describe('Link', () => {
   let bearerPath: string
 
-  let result: Array<string>
+  let result: string[]
 
   beforeEach(() => {
     result = []
@@ -14,8 +14,8 @@ describe('Link', () => {
   })
 
   it('does not fail :-P ', async () => {
-    await LinkCommand.run(['123-scenario-id', '--path', bearerPath])
-    expect(result.join()).toContain('Scenario successfully linked')
-    expect(readFile(bearerPath, '.scenariorc')).toMatchSnapshot()
+    await LinkCommand.run(['123-integration-id', '--path', bearerPath])
+    expect(result.join()).toContain('Integration successfully linked')
+    expect(readFile(bearerPath, '.integrationrc')).toMatchSnapshot()
   })
 })

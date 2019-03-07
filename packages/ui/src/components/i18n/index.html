@@ -34,7 +34,7 @@
   </script>
   <script src="/build/bearer-ui.js"></script>
   <script>
-    class ScenarioPlaceholder extends HTMLElement {
+    class IntegrationPlaceholder extends HTMLElement {
       constructor() {
         super() // always call super() first in the constructor.
 
@@ -76,7 +76,7 @@
       }
     }
 
-    customElements.define('scenario-placeholder', ScenarioPlaceholder)
+    customElements.define('integration-placeholder', IntegrationPlaceholder)
 
   </script>
 </head>
@@ -87,7 +87,7 @@
       <div class="my-3 my-md-5">
         <div class="container">
           <h2>Within an integration</h2>
-          <scenario-placeholder></scenario-placeholder>
+          <integration-placeholder></integration-placeholder>
           <h2>Standalone usage</h2>
           <bearer-i18n key="missing.key"></bearer-i18n>
           <br />

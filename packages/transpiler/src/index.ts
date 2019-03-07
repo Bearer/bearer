@@ -11,7 +11,7 @@ const settings: TJS.PartialArgs = {
   ignoreErrors: true
 }
 
-import BearerAuthorizedRequiredProp from './transformers/bearer-authorized-scenario-id-prop-injector'
+import BearerAuthorizedRequiredProp from './transformers/bearer-authorized-integration-id-prop-injector'
 import bearerCleaning from './transformers/bearer-cleaning'
 import BearerStateInjector from './transformers/bearer-state-injector'
 import ComponenttagNameScoping from './transformers/component-tag-name-scoping'
@@ -24,7 +24,7 @@ import PropBearerContextInjector from './transformers/prop-bearer-context-inject
 import BearerReferenceIdInjector from './transformers/reference-id-injector'
 import ReplaceIntentDecorators from './transformers/replace-intent-decorator'
 import RootComponentTransformer from './transformers/root-component-transformer'
-import BearerScenarioIdInjector from './transformers/scenario-id-accessor-injector'
+import BearerIntegrationIdInjector from './transformers/integration-id-accessor-injector'
 import EventNameNormalizer from './transformers/event-name-normalizer'
 import I18nModifier from './transformers/i18n-modifier'
 
@@ -60,7 +60,7 @@ export default class Transpiler {
         OutputDecoratorModifier({ verbose, metadata: this.metadata }),
         BearerReferenceIdInjector({ verbose, metadata: this.metadata }),
         ReplaceIntentDecorators({ verbose, metadata: this.metadata }),
-        BearerScenarioIdInjector({ verbose, metadata: this.metadata }),
+        BearerIntegrationIdInjector({ verbose, metadata: this.metadata }),
         PropBearerContextInjector({ verbose, metadata: this.metadata }),
         BearerStateInjector({ verbose, metadata: this.metadata }),
         NavigatorScreenTransformer({ verbose, metadata: this.metadata }),

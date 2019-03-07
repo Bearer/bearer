@@ -4,7 +4,7 @@ import * as path from 'path'
 
 const buildFolder = path.join(__dirname, '..', '.build/src')
 
-process.env.BEARER_SCENARIO_ID = 'SPONGE_BOB'
+process.env.BEARER_INTEGRATION_ID = 'SPONGE_BOB'
 
 globby.sync(['**/*.tsx', '**/*.ts', '**/*.json'], { cwd: buildFolder }).forEach(file => {
   const filePath = path.join(buildFolder, file)

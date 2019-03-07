@@ -21,7 +21,7 @@ const LOG_LEVEL_KEY = 'LOG_LEVEL'
 
 type TAuthorizationPayload = {
   data: {
-    scenarioId: string
+    integrationId: string
     authIdentifier?: string
   }
 }
@@ -85,26 +85,26 @@ export default class Bearer {
     return this._instance
   }
 
-  static onAuthorized = (scenarioId: string, callback: (authorize: boolean) => void): EventSubscription => {
-    logger('onAuthorized register %s', scenarioId)
+  static onAuthorized = (integrationId: string, callback: (authorize: boolean) => void): EventSubscription => {
+    logger('onAuthorized register %s', integrationId)
     return Bearer.emitter.addListener(Events.AUTHORIZED, (data: TAuthorizationPayload) => {
-      if (data.data.scenarioId === scenarioId) {
-        logger('onAuthorized authorized %s', scenarioId)
+      if (data.data.integrationId === integrationId) {
+        logger('onAuthorized authorized %s', integrationId)
         callback(true)
       } else {
-        logger('onAuthorized different scenarioId %s', scenarioId)
+        logger('onAuthorized different integrationId %s', integrationId)
       }
     })
   }
 
-  static onRevoked = (scenarioId: string, callback: (authorize: boolean) => void): EventSubscription => {
-    logger('onRevoked register %s', scenarioId)
+  static onRevoked = (integrationId: string, callback: (authorize: boolean) => void): EventSubscription => {
+    logger('onRevoked register %s', integrationId)
     return Bearer.emitter.addListener(Events.REVOKED, (data: TAuthorizationPayload) => {
-      if (data.data.scenarioId === scenarioId) {
-        logger('onRevoked revoked %s', scenarioId)
+      if (data.data.integrationId === integrationId) {
+        logger('onRevoked revoked %s', integrationId)
         callback(false)
       } else {
-        logger('onRevoked different scenarioId %s', scenarioId)
+        logger('onRevoked different integrationId %s', integrationId)
       }
     })
   }
@@ -131,11 +131,11 @@ export default class Bearer {
     Bearer.emitter.emit(Events.REVOKED, data)
   }
 
-  hasAuthorized = (scenarioId: string): Promise<boolean> =>
+  hasAuthorized = (integrationId: string): Promise<boolean> =>
     new Promise((resolve, reject) => {
       postRobot
         .send(this.iframe, Events.HAS_AUTHORIZED, {
-          scenarioId,
+          integrationId,
           clientId: Bearer.config.clientId
         })
         .then(({ data, data: { authorized } }: { data: { authorized: boolean } }) => {
@@ -145,11 +145,11 @@ export default class Bearer {
         .catch(iframeError)
     })
 
-  revokeAuthorization = (scenarioId: string, authId: string): void => {
+  revokeAuthorization = (integrationId: string, authId: string): void => {
     postRobot
       .send(this.iframe, Events.REVOKE, {
         authId,
-        scenarioId,
+        integrationId,
         clientId: Bearer.config.clientId
       })
       .then(() => {
@@ -178,11 +178,11 @@ export default class Bearer {
   }
 
   askAuthorizations = ({
-    scenarioId,
+    integrationId,
     setupId,
     authRefId: authId = ''
   }: {
-    scenarioId: string
+    integrationId: string
     setupId: string
     authRefId?: string
   }): boolean => {
@@ -193,7 +193,7 @@ export default class Bearer {
         secured: Bearer.config.secured,
         clientId: this.bearerConfig.clientId
       })
-      const AUTHORIZED_URL = `${Bearer.config.integrationHost}v2/auth/${scenarioId}?${query}`
+      const AUTHORIZED_URL = `${Bearer.config.integrationHost}v2/auth/${integrationId}?${query}`
       this.window.open(AUTHORIZED_URL, '', 'resizable,scrollbars,status,centerscreen=yes,width=500,height=600')
       return true
     }

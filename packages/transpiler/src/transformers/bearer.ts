@@ -4,8 +4,11 @@ import { BEARER, Component, Decorators, Module, Types, SETUP, SETUP_ID } from '.
 import { getNodeName } from '../helpers/node-helpers'
 import { getDecoratorNamed } from '../helpers/decorator-helpers'
 
-// this.BEARER_SCENARIO_ID => replaced during transpilation
-export function addBearerScenarioIdAccessor(classNode: ts.ClassDeclaration, scenarioId: string): ts.ClassDeclaration {
+// this.BEARER_INTEGRATION_ID => replaced during transpilation
+export function addBearerIntegrationIdAccessor(
+  classNode: ts.ClassDeclaration,
+  integrationId: string
+): ts.ClassDeclaration {
   return ts.updateClassDeclaration(
     classNode,
     classNode.decorators,
@@ -18,10 +21,10 @@ export function addBearerScenarioIdAccessor(classNode: ts.ClassDeclaration, scen
       ts.createGetAccessor(
         undefined,
         [],
-        Component.scenarioIdAccessor,
+        Component.integrationIdAccessor,
         undefined,
         undefined,
-        ts.createBlock([ts.createReturn(ts.createLiteral(scenarioId))])
+        ts.createBlock([ts.createReturn(ts.createLiteral(integrationId))])
       )
     ]
   )
@@ -268,7 +271,7 @@ export function elementDecorator() {
 }
 
 export default {
-  addBearerScenarioIdAccessor,
+  addBearerIntegrationIdAccessor,
   addBearerContextProp,
   addSetupIdProp,
   addComponentDidLoad,

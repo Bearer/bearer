@@ -10,7 +10,7 @@ type TSetupConfig = {
 export function ensureBearerStructure({
   clean = true,
   authConfig,
-  folderName = 'fakescenario'
+  folderName = 'fakeintegration'
 }: TSetupConfig = {}): string {
   const bearerFolder = path.join(__dirname, '..', '..', '.bearer', folderName)
   if (!fs.existsSync(bearerFolder)) {
@@ -19,7 +19,7 @@ export function ensureBearerStructure({
   if (clean) {
     fs.emptyDirSync(bearerFolder)
   }
-  fs.writeFileSync(path.join(bearerFolder, '.scenariorc'), 'scenarioTile=test')
+  fs.writeFileSync(path.join(bearerFolder, '.integrationrc'), 'integrationTile=test')
   fs.writeFileSync(
     path.join(bearerFolder, 'auth.config.json'),
     JSON.stringify(
