@@ -807,7 +807,7 @@ declare global {
       'display'?: 'inline' | 'block';
       'fields'?: any[] | string;
       'integrationId'?: string;
-      'onSetupSuccess'?: (event: CustomEvent) => void;
+      'onSetupSubmit'?: (event: CustomEvent) => void;
       'referenceId'?: string;
     }
   }

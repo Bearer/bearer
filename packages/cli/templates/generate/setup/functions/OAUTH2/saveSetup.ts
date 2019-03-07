@@ -14,6 +14,4 @@ export type State = {
   accessToken: string
 }
 
-
-export type ReturnedData = {
-}
+export type ReturnedData = {}

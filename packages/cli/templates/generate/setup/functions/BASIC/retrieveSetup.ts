@@ -2,15 +2,17 @@ import { TBASICAuthContext, FetchData, TFetchActionEvent, TFetchPromise } from '
 
 export default class RetrieveSetupFunction extends FetchData implements FetchData<ReturnedData, any, TBASICAuthContext> {
   async action(event: TFetchActionEvent<Params, TBASICAuthContext>): TFetchPromise<ReturnedData> {
-    return { data: event.context.reference }
+    return { data: { referenceId: event.params.referenceId, ...event.context.reference } }
   }
 }
 
 export type Params = {
   setup: any
+  referenceId: string
 }
 
 export type ReturnedData = {
   username: string
   password: string
+  referenceId: string
 }

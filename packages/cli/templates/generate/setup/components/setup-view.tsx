@@ -1,5 +1,6 @@
 /*
-  The purpose of this component is to save integration credentials.
+  The purpose of this component is to show integration setup id.
+  This file has been generated automatically. Edit it at your own risk :-)
 */
 
 import { RootComponent } from "@bearer/core";

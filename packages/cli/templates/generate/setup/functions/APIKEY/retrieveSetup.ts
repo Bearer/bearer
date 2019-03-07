@@ -2,14 +2,16 @@ import { TAPIKEYAuthContext, FetchData, TFetchActionEvent, TFetchPromise } from 
 
 export default class RetrieveSetupFunction extends FetchData implements FetchData<ReturnedData, any, TAPIKEYAuthContext> {
   async action(event: TFetchActionEvent<Params, TAPIKEYAuthContext>): TFetchPromise<ReturnedData> {
-    return { data: event.context.reference }
+    return { data: { referenceId: event.params.referenceId, ...event.context.reference } }
   }
 }
 
 export type Params = {
   setup: any
+  referenceId: string
 }
 
 export type ReturnedData = {
   apiKey: string
+  referenceId: string
 }
