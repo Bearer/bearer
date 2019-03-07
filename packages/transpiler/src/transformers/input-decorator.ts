@@ -224,7 +224,6 @@ export function retrieveInputsMetas(
       if (decorator) {
         const options = extractInputOptions(decorator)
         const name = getNodeName(tsNode)
-        // const component = metadata.findComponentFrom(sourcefile)
         inputs.push({
           propDeclarationName: name,
           propertyReferenceIdName: refIdName(name),

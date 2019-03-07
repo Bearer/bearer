@@ -7,7 +7,7 @@ export class SimpleComponent {
   @Event()
   mustBeScopedEvent: EventEmitter
 
-  @Listen('config:saved')
+  @Listen('configSaved')
   eventHandler() {}
 
   @Listen('eventFromChildren')

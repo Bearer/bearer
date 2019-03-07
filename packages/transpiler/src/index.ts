@@ -230,7 +230,7 @@ export default class Transpiler {
         this.logErrors(fileName)
       }
     } catch (e) {
-      logger('getEmitOutput failed for for:\n %s \n %j', fileName, e)
+      logger('getEmitOutput failed for:\n %s \n %O \n %s', fileName, e.stack, e.message)
     }
   }
 

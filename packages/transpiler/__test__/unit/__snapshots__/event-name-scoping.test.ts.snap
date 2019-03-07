@@ -10,11 +10,11 @@ export class FeatDisplayRootComponent {
     mustBeScopedEvent: EventEmitter;
     @Event({ eventName: \\"bearer-sponge-bob-mustbescopedevent\\" })
     mustBeScopedEvent: EventEmitter;
-    @Listen(\\"bearer-sponge-bob-saved\\")
+    @Listen(\\"bearer-sponge-bob-confisaved\\")
     eventHandler() { }
-    @Listen(\\"body:bearer-sponge-bob-saved\\")
+    @Listen(\\"body:bearer-sponge-bob-eventfromanotherrootcomponentsaved\\")
     eventFromAnotherRootComponentHandler() { }
-    @Listen(\\"body:bearer-sponge-bob\\")
+    @Listen(\\"body:bearer-sponge-bob-click\\")
     clickHandler() { }
 }
 "
@@ -28,12 +28,12 @@ exports[`Scope Event Names file: simple-component.ts transformer 1`] = `
 export class SimpleComponent {
     @Event({ eventName: \\"bearer-sponge-bob-mustbescopedevent\\" })
     mustBeScopedEvent: EventEmitter;
-    @Listen(\\"bearer-sponge-bob-saved\\")
+    @Listen(\\"bearer-sponge-bob-configsaved\\")
     eventHandler() { }
-    @Listen(\\"bearer-sponge-bob\\")
+    @Listen(\\"bearer-sponge-bob-eventfromchildren\\")
     eventFromChildrenHandler() { }
     // prevent Alice to listen on anything else than her scenario's events
-    @Listen(\\"body:bearer-sponge-bob\\")
+    @Listen(\\"body:bearer-sponge-bob-click\\")
     clickHandler() { }
 }
 "

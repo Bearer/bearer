@@ -54,10 +54,9 @@ function updatedListenDecoratorOrDecorator(tsDecorator: ts.Decorator): ts.Decora
   // possible values
   //    group:eventName
   //    body:group:eventName
-  let [body, group, name] = listenedEvent.text.toString().split(':')
+  let [body, name] = listenedEvent.text.toString().split(':')
   if (body !== 'body') {
-    name = group
-    group = body
+    name = body
     body = null
   }
   let scopedName = eventName(name)
