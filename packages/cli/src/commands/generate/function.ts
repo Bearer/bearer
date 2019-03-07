@@ -16,7 +16,7 @@ const typeChoices = [types.slice(0, 1)[0], new inquirer.Separator(), ...types.sl
 
 export default class GenerateFunction extends BaseCommand {
   static description = 'Generate a Bearer Function'
-  static aliases = ['g:i']
+  static aliases = ['g:f']
   static flags = {
     ...BaseCommand.flags,
     type: flags.string({
