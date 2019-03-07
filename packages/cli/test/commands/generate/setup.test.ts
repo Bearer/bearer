@@ -47,7 +47,7 @@ describe('generate:setup', () => {
       await GenerateSetup.run(['--force', '--path', bearerPath])
 
       expect(readFile(bearerPath, 'views', 'setup-action.tsx')).toMatchSnapshot()
-      expect(readFile(bearerPath, 'views', 'setup-display.tsx')).toMatchSnapshot()
+      expect(readFile(bearerPath, 'views', 'setup-view.tsx')).toMatchSnapshot()
 
       expect(readFile(bearerPath, 'intents', 'saveSetup.ts')).toMatchSnapshot()
       expect(readFile(bearerPath, 'intents', 'retrieveSetup.ts')).toMatchSnapshot()
