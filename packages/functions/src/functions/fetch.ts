@@ -1,4 +1,6 @@
 import debug from '@bearer/logger'
+import http from 'http'
+import { captureHttps } from '@bearer/x-ray'
 
 import * as d from '../declaration'
 import { eventAsActionParams } from './utils'
@@ -14,6 +16,7 @@ export abstract class FetchData<ReturnedData = any, TError = any, AuthContext = 
   // Internal
   static call(action: d.TFetchAction) {
     return async (event: d.TLambdaEvent) => {
+      captureHttps(http, event)
       try {
         const { error, data }: d.TFetchPayload<any, any> = await action(eventAsActionParams(event))
         if (error) {

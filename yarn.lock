@@ -1029,10 +1029,10 @@
     tslint-config-airbnb "^5.11.1"
     tslint-config-prettier "^1.17.0"
 
-"@bearer/x-ray@0.92.1-canary.138":
-  version "0.92.1-canary.138"
-  resolved "https://registry.npmjs.org/@bearer/x-ray/-/x-ray-0.92.1-canary.138.tgz#3f20fa08513c5de34a5e375d2e33387f999b5490"
-  integrity sha512-PxpRGnUTpR2RTMng0OPLCYrX+1sGnYJPyHoAB4FdB5V7t0wsKhkRloL3MouozTKJCdPBA/l6auuqs4daksg3Tg==
+"@bearer/x-ray@0.92.1-canary.142":
+  version "0.92.1-canary.142"
+  resolved "https://registry.npmjs.org/@bearer/x-ray/-/x-ray-0.92.1-canary.142.tgz#a6d0f43b47e77314e3fc45d8783fa72e5c15bd48"
+  integrity sha512-vKGS/Rd8UES2QZ+kaF18MsOCx4gQjQGsaduC0BMGUCBgFGgngVzJqK+X7JQMeP+KjCwC8lyZvwRnQekvSyCeHg==
   dependencies:
     "@bearer/logger" "^0.95.1"
     "@bearer/package-init" "^0.95.1"
