@@ -9,7 +9,7 @@ import specGenerator from '@bearer/openapi-generator'
 const config = ts.readConfigFile(path.join(__dirname, '../../templates/start', 'tsconfig.json'), ts.sys.readFile)
 
 const NON_INTENT_NAMES = ['DBClient']
-const INTENT_NAMES = Object.keys(functions).filter(intentName => !NON_INTENT_NAMES.includes(intentName))
+const INTENT_NAMES = Object.keys(functions).filter(functionName => !NON_INTENT_NAMES.includes(functionName))
 const INTENT_TYPE_IDENTIFIER = 'intentType'
 
 const intentEntries: IFunctionEntry[] = []
@@ -20,7 +20,7 @@ function bodySchema(tsType: ts.ClassDeclaration, generator: TJS.JsonSchemaGenera
 
 class FunctionNodeAdapter implements IFunctionEntry {
   constructor(
-    readonly intentName: string,
+    readonly functionName: string,
     private readonly node: ts.ClassDeclaration,
     // @ts-ignore
     private readonly generator: TJS.JsonSchemaGenerator
@@ -67,7 +67,7 @@ class FunctionNodeAdapter implements IFunctionEntry {
   get adapt(): IFunctionEntry {
     return {
       intentClassName: this.intentClassName,
-      intentName: this.intentName,
+      functionName: this.functionName,
       intentType: this.intentType,
       paramsSchema: this.paramsSchema,
       bodySchema: this.bodySchema,
@@ -124,7 +124,11 @@ export function transformer(generator: TJS.JsonSchemaGenerator): ts.TransformerF
     return (tsSourceFile: ts.SourceFile) => {
       function visit(tsNode: ts.Node) {
         if (isFunctionClass(tsNode)) {
-          const adapter = new FunctionNodeAdapter(getFunctionName(tsSourceFile), tsNode as ts.ClassDeclaration, generator)
+          const adapter = new FunctionNodeAdapter(
+            getFunctionName(tsSourceFile),
+            tsNode as ts.ClassDeclaration,
+            generator
+          )
           intentEntries.push(adapter.adapt)
         }
         return tsNode
@@ -192,7 +196,7 @@ export class OpenApiSpecGenerator {
       ts.transform(sourceFile, [transformer(generator)])
     })
     return specGenerator({
-      functions: intentEntries.map(entry => entry.intentName),
+      functions: intentEntries.map(entry => entry.functionName),
       functionsDir: this.srcFunctionsDir,
       integrationUuid: this.bearerConfig.integrationUuid,
       integrationName: this.bearerConfig.integrationTitle || ''
@@ -270,7 +274,7 @@ type TResponse = {
 interface IFunctionEntry {
   intentClassName: string
   intentType: string
-  intentName: string
+  functionName: string
   paramsSchema: ISchemaParam[]
   bodySchema: any
   outputSchema: any
