@@ -2,7 +2,7 @@
   "name": "@bearer/x-ray",
   "version": "0.100.0",
   "description": "Trace outgoing traffic inside the intent",
-  "main": "index.js",
+  "main": "lib/index.js",
   "license": "MIT",
   "dependencies": {
     "@bearer/logger": "^0.95.1",
