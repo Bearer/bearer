@@ -12,6 +12,7 @@ export const overrideRequestMethod = (module: any) => {
       return module._request(options, callaback)
     }
 
+    console.log(process.env)
     const payload: any = {
       message: {
         path: options.hostname || options.host,
