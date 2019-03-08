@@ -4,27 +4,29 @@ import CloudwatchLogs from 'aws-sdk/clients/cloudwatchlogs'
 jest.mock('../src/constants')
 const cloudwatchLogs = new CloudwatchLogs()
 
-cloudwatchLogs.putLogEvents = jest.fn(() => {
-  return {
-    promise: () => {
-      return new Promise((resolve, _reject) => {
-        resolve({})
-      })
-    }
-  }
-}) as any
-
-cloudwatchLogs.createLogStream = jest.fn(() => {
-  return {
-    promise: () => {
-      return new Promise((resolve, _reject) => {
-        resolve({})
-      })
-    }
-  }
-}) as any
-
 describe('sendToCloudwatchGroup', () => {
+  beforeAll(() => {
+    cloudwatchLogs.putLogEvents = jest.fn(() => {
+      return {
+        promise: () => {
+          return new Promise((resolve, _reject) => {
+            resolve({})
+          })
+        }
+      }
+    }) as any
+
+    cloudwatchLogs.createLogStream = jest.fn(() => {
+      return {
+        promise: () => {
+          return new Promise((resolve, _reject) => {
+            resolve({})
+          })
+        }
+      }
+    }) as any
+  })
+
   it('sends logs to cloudwatch log log group', async () => {
     const event = {
       timestamp: new Date().getTime(),

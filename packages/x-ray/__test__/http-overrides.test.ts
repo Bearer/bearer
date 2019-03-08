@@ -1,7 +1,7 @@
 import { overrideGetMethod, overrideRequestMethod } from '../src/http-overrides'
 import http from 'http'
 import { sendToCloudwatchGroup } from '../src/cloud-watch-logs'
-import { httpClient } from './helpers/utils'
+import { httpClient, expectedResponse } from './helpers/utils'
 
 jest.mock('../src/constants')
 jest.mock('../src/cloud-watch-logs')
@@ -28,20 +28,7 @@ describe('override http', () => {
       })
     })
 
-    expect(sendToCloudwatchGroup).toHaveBeenCalledWith({
-      message: {
-        clientId: '132464737464748494404949984847474848',
-        integrationUuid: 'scenarioUuid',
-        intentName: 'MyHandler',
-        method: 'GET',
-        path: 'www.google.com',
-        pathname: '/',
-        responseStatus: 200,
-        responseStatusMesage: 'OK',
-        stage: 'test'
-      },
-      timestamp: expect.any(Number)
-    })
+    expect(sendToCloudwatchGroup).toHaveBeenCalledWith(expectedResponse)
   })
 
   it('overrides the get method', () => {
@@ -64,19 +51,6 @@ describe('override http', () => {
       })
     })
 
-    expect(sendToCloudwatchGroup).toHaveBeenCalledWith({
-      message: {
-        clientId: '132464737464748494404949984847474848',
-        integrationUuid: 'scenarioUuid',
-        intentName: 'MyHandler',
-        method: 'GET',
-        path: 'www.google.com',
-        pathname: '/',
-        responseStatus: 200,
-        responseStatusMesage: 'OK',
-        stage: 'test'
-      },
-      timestamp: expect.any(Number)
-    })
+    expect(sendToCloudwatchGroup).toHaveBeenCalledWith(expectedResponse)
   })
 })

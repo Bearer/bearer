@@ -48,3 +48,18 @@ export const httpClient = {
     return fakeRequest
   }
 }
+
+export const expectedResponse = {
+  message: {
+    clientId: '132464737464748494404949984847474848',
+    integrationUuid: 'scenarioUuid',
+    intentName: 'MyHandler',
+    method: 'GET',
+    path: 'www.google.com',
+    pathname: '/',
+    responseStatus: 200,
+    responseStatusMesage: 'OK',
+    stage: 'test'
+  },
+  timestamp: expect.any(Number)
+}
