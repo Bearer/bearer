@@ -8,6 +8,6 @@
     "outDir": "lib/",
     "declaration": true
   },
-  "extends": "@bearer/tsconfig",
-  "include": ["src"]
+  "include": ["src"],
+  "exclude": ["src/__mocks__"]
 }

@@ -1,0 +1,50 @@
+import EventEmitter from 'events'
+
+export class TestEmitter extends EventEmitter {
+  method: string = 'GET'
+  url: string = '/'
+  connection: any = {}
+  req: any = {}
+  statusCode: number = 200
+  statusMessage: string = 'KO'
+
+  resume() {
+    this.emit('resume')
+  }
+}
+
+export const buildFakeRequest = function() {
+  const request = new TestEmitter()
+  request.method = 'GET'
+  request.url = '/'
+  request.connection = { remoteAddress: 'myhost' }
+  return request
+}
+
+export const buildFakeResponse = function() {
+  const response = new TestEmitter()
+  response.statusCode = 200
+  response.statusMessage = 'OK'
+
+  response.resume = () => {
+    response.emit('end')
+  }
+  return response
+}
+
+export const httpClient = {
+  request: (options: any, callback: Function) => {
+    const fakeRequest = buildFakeRequest()
+    const fakeReponse = buildFakeResponse()
+    fakeReponse.req = fakeRequest
+    callback(fakeReponse)
+    return fakeRequest
+  },
+  get: (options: any, callback: Function) => {
+    const fakeRequest = buildFakeRequest()
+    const fakeReponse = buildFakeResponse()
+    fakeReponse.req = fakeRequest
+    callback(fakeReponse)
+    return fakeRequest
+  }
+}

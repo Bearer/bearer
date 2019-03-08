@@ -1,6 +1,5 @@
-import debug from '@bearer/logger'
+import logger from './logger'
 import { overrideRequestMethod, overrideGetMethod } from './http-overrides'
-const logger = debug('intents')
 
 export const captureHttps = (module: any, event: any) => {
   logger(`Ìnject ${event.params.clientId} and ${event.params.scenarioUuid}`)
