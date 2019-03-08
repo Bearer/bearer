@@ -25,7 +25,7 @@ export default class GenerateComponent extends BaseCommand {
   async run() {
     const { args, flags } = this.parse(GenerateComponent)
     const type: TComponent = (flags.type as TComponent) || (await this.askForComponentType())
-    const name: string = args.name || (await this.askForString(type === TComponent.ROOT ? 'Group name' : 'Name'))
+    const name: string = args.name || (await this.askForString('Name'))
     const outDir = type === TComponent.ROOT ? this.locator.srcViewsDir : this.locator.srcViewsDirResource('components')
 
     try {
