@@ -45,7 +45,7 @@ export default function componentTransformer({  }: TransformerOptions = {}): ts.
     }
 
     if (!integrationId) {
-      console.warn('[BEARER]', 'No integration ID provided. Skipping integration ID injection')
+      throw new Error('Missing Integration ID: No integration ID provided')
     }
 
     return tsSourceFile => {
