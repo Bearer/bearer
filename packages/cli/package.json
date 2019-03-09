@@ -41,6 +41,7 @@
     "path": "^0.12.7",
     "rc": "^1.2.8",
     "sqlite3": "^4.0.2",
+    "ts-node": "^8.0.3",
     "tslib": "^1",
     "typescript-json-schema": "^0.34.0",
     "webpack": "^4.20.2"
@@ -49,6 +50,7 @@
     "@oclif/dev-cli": "^1.21.0",
     "@types/archiver": "^2.1.2",
     "@types/chokidar": "^1.7.5",
+    "@types/cosmiconfig": "^5.0.3",
     "@types/find-up": "^2.1.1",
     "@types/fs-extra": "^5.0.4",
     "@types/globby": "^8.0.0",
@@ -62,7 +64,6 @@
     "jest": "^24.1.0",
     "nock": "^10.0.6",
     "ts-jest": "^24.0.0",
-    "ts-node": "^8.0.1",
     "typescript": "^3.3.3333"
   },
   "engines": {

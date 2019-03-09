@@ -1,23 +1,63 @@
 import { flags } from '@oclif/command'
 
-import BaseLegacyCommand from '../base-legacy-command'
+import * as path from 'path'
+import * as tsNode from 'ts-node'
+import * as cosmiconfig from 'cosmiconfig'
+import BaseCommand from '../base-command'
 
-export default class Invoke extends BaseLegacyCommand {
+const LOCAL_DEV_CONFIGURATION = 'dev'
+
+export default class Invoke extends BaseCommand {
   static description = 'Invoke Function locally'
 
   static flags = {
-    help: flags.help({ char: 'h' }),
-    path: flags.string({ char: 'p' })
+    ...BaseCommand.flags,
+    data: flags.string({ char: 'd' }),
+    file: flags.string({ char: 'f' })
+    // TODO: add arguments : allow file or daja
   }
 
   static args = [{ name: 'Function_Name', required: true }]
 
   async run() {
-    const { args, flags } = this.parse(Invoke)
-    const cmdArgs = [args.Function_Name]
-    if (flags.path) {
-      cmdArgs.push(`--path=${flags.path}`)
+    const { args } = this.parse(Invoke)
+    const funcName = args.Function_Name
+    this.debug(funcName)
+    tsNode.register({
+      project: path.join(this.locator.srcFunctionsDir, 'tsconfig.json')
+    })
+    let func
+    try {
+      func = require(path.join(this.locator.srcFunctionsDir, funcName)).default
+    } catch (e) {
+      const funcName = args.Function_Name
+      if (e.code === 'MODULE_NOT_FOUND') {
+        // TODO: add information, check file presence or generator
+        this.error(`"${funcName}" function does not exist. `)
+      }
+      this.error(e.message)
     }
-    this.runLegacy(['invoke', ...cmdArgs])
+
+    const explorer = cosmiconfig(LOCAL_DEV_CONFIGURATION, {
+      searchPlaces: [`config.${LOCAL_DEV_CONFIGURATION}.js`]
+    })
+    const { config: devFunctionsContext = {} } = (await explorer.search(this.locator.integrationRoot)) || {}
+    const bearerBaseURL = 'ok'
+    // TODO: access sqlite database and load defined data
+    const userDefinedData = {}
+    const datum = await func.init()(
+      {
+        context: {
+          ...devFunctionsContext.global,
+          ...devFunctionsContext[funcName],
+          bearerBaseURL,
+          ...userDefinedData
+        },
+        body: JSON.stringify({})
+      },
+      {}
+    )
+
+    console.log(JSON.stringify(datum, null, 2))
   }
 }
