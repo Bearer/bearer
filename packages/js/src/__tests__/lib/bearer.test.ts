@@ -52,6 +52,13 @@ describe('main', () => {
       })
     })
   })
+
+  describe('fetch request', () => {
+    it('returns payload if success')
+  })
+  describe('function request', () => {
+    it('returns payload if success')
+  })
 })
 
 describe('findElements', () => {

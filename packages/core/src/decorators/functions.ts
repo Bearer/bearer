@@ -1,4 +1,4 @@
-import { functionRequest } from '../requests'
+import bearer from '@bearer/js'
 
 /**
  * Declarations
@@ -66,23 +66,13 @@ export function _BackendFunction(functionName: string, type: FunctionType = Func
         if (!integrationId) {
           return missingIntegrationId()
         }
-
-        const func = functionRequest<TFetchBearerResult>({
-          functionName,
-          integrationId,
-          [setupId]: params[setupId] || retrieveSetupId(target)
+        return bearer.instance.functionFetch(integrationId, functionName, {
+          ...params,
+          query: {
+            setupId: retrieveSetupId,
+            referenceId: retrieveReferenceId(this)
+          }
         })
-
-        // prepare params and body
-
-        const referenceId = retrieveReferenceId(this)
-        const { body, ...queryParams } = params
-        const baseQuery = referenceId ? { referenceId } : {}
-        const query = { ...baseQuery, ...queryParams }
-        const init = { method: 'POST', body: JSON.stringify(body || {}) }
-
-        // Build promise
-        return functionPromise(func(query, init))
       }
     }
 

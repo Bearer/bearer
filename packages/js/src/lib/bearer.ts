@@ -8,14 +8,14 @@ import { formatQuery } from './utils'
 const logger = debug.extend('Bearer')
 const prefix = 'bearer'
 const DEFAULT_OPTIONS = {
-  secured: false,
+  secured: undefined,
   integrationHost: 'INTEGRATION_HOST_URL',
   domObserver: true,
   refreshDebounceDelay: 200
 }
 
 export default class Bearer {
-  secured: boolean = false
+  secured?: boolean
   config: TBearerOptions = DEFAULT_OPTIONS
   private registeredIntegrations: Record<string, boolean> = {}
   private observer?: MutationObserver
@@ -68,6 +68,48 @@ export default class Bearer {
     }).then()
     window.open(AUTHORIZED_URL, '', 'resizable,scrollbars,status,centerscreen=yes,width=500,height=600')
     return promise
+  }
+
+  private _jsonRequest = async (path: string, { query = {}, params = {} } = {}) => {
+    const url = [this.config.integrationHost, path].join('')
+    const queryParams = { ...query, clientId: this.clientId, secured: this.config.secured }
+    const queryString = buildQuery(cleanOptions(queryParams))
+    logger('json request: path %s', path)
+    return fetch(`${url}?${queryString}`, {
+      method: 'POST',
+      body: JSON.stringify(params || {}),
+      headers: {
+        'content-type': 'application/json'
+      },
+      credentials: 'include'
+    }).then(async response => {
+      if (response.status > 399) {
+        logger('failing request %j', await response.clone().json())
+      }
+      return response
+    })
+  }
+
+  functionFetch = async <DataPayload = any>(
+    integrationId: string,
+    functionName: string,
+    { query = {}, ...params }: { query?: Record<string, string>; [key: string]: any } = {}
+  ): Promise<TFetchBearerData<DataPayload>> => {
+    const path = `/api/v3/intents/${integrationId}/${functionName}`
+
+    try {
+      const response = await this._jsonRequest(path, { query, params })
+      const payload = await response.json()
+      if (!payload.error) {
+        const { data, meta: { referenceId } = { referenceId: null } } = payload
+        return { data, referenceId }
+      } else {
+        throw { error: payload.error }
+      }
+    } catch (error) {
+      logger('functionFetch failed %j', error, error.message)
+      throw { error }
+    }
   }
 
   /**
@@ -169,7 +211,7 @@ export default class Bearer {
 }
 
 export type TBearerOptions = {
-  secured: boolean
+  secured?: boolean
   domObserver: boolean
   integrationHost: string
   refreshDebounceDelay: number
@@ -209,6 +251,15 @@ function getScriptDOM(clientId: string, integration: TIntegration): HTMLScriptEl
   return s
 }
 
+function buildQuery(params: any) {
+  function encode(k: string) {
+    return encodeURIComponent(k) + '=' + encodeURIComponent(params[k])
+  }
+  return Object.keys(params)
+    .map(encode)
+    .join('&')
+}
+
 function cleanOptions(obj: Record<string, any>) {
   return Object.keys(obj).reduce(
     (acc, key: string) => {
@@ -220,3 +271,5 @@ function cleanOptions(obj: Record<string, any>) {
     {} as Record<string, any>
   )
 }
+
+export type TFetchBearerData<T = any> = { data: T; referenceId?: string }
