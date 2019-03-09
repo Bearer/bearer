@@ -9,7 +9,6 @@ import Emitter from '../lib/emitter'
 import setupConfig from '../lib/setupConfig'
 import { Config } from '../lib/types'
 import * as startCmd from '../lib/commands/startCommand'
-import * as invokeCmd from '../lib/commands/invokeCommand'
 
 export default args => {
   const emitter = new Emitter()
@@ -18,7 +17,6 @@ export default args => {
   const cli = new CLI(program, emitter, config)
   cliOutput(emitter)
   cli.use(startCmd)
-  cli.use(invokeCmd)
 
   cli.parse(args)
 }
