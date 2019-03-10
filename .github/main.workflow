@@ -4,7 +4,7 @@ workflow "build + test" {
 }
 
 action "setup" {
-  uses = "docker://bearerhub/node-10.9:0.8"
+  uses = "docker://bearerhub/node-10.9:0.9"
   runs = "yarn"
   args = "install --frozen-lockfile"
   
@@ -12,7 +12,7 @@ action "setup" {
 }
 
 action "bootstrap" {
-  uses = "docker://bearerhub/node-10.9:0.8"
+  uses = "docker://bearerhub/node-10.9:0.9"
   needs = "setup"
   # runs = "yarn"
   # args = "bootstrap"
@@ -21,7 +21,7 @@ action "bootstrap" {
 }
 
 action "test" {
-  uses = "docker://bearerhub/node-10.9:0.8"
+  uses = "docker://bearerhub/node-10.9:0.9"
   needs = "bootstrap"
   runs = "ls"
   args = "-la node_modules/@bearer"
