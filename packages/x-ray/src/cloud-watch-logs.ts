@@ -1,6 +1,7 @@
 import CloudWatchLogs from 'aws-sdk/clients/cloudwatchlogs'
 import uuid from 'uuid/v1'
 import { AWS_LAMBDA_LOG_STREAM_NAME, BEARER_XRAY_LOG_GROUP } from './constants'
+import logger from './logger'
 
 const cloudWatchLogsClientInstance = new CloudWatchLogs()
 
@@ -33,7 +34,7 @@ const createLogStream = async (client: CloudWatchLogs, streamName: string) => {
       })
       .promise()
   } catch (error) {
-    console.log(JSON.stringify(error))
+    logger('%j', error)
     return undefined
   }
 }

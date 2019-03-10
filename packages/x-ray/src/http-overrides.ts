@@ -45,7 +45,7 @@ export const overrideGetMethod = (module: any) => {
 
     if (settings.host === 'logs.eu-west-3.amazonaws.com') {
       console.log('ignore logs.eu-west-3.amazonaws.com requests')
-      return module._request(options, callaback)
+      return module._get(options, callaback)
     }
 
     const payload: any = buildTracePatload(settings)

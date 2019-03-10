@@ -24,7 +24,7 @@ describe('override http', () => {
     await new Promise((res, _rej) => {
       httpClient.request('http://www.google.com/', (data: http.IncomingMessage) => {
         res(data)
-        data.emit('end')
+        data.resume()
       })
     })
 
@@ -45,12 +45,23 @@ describe('override http', () => {
     // @ts-ignore
     expect(httpClient.get).toBeDefined()
     await new Promise((res, _rej) => {
-      http.get('http://www.google.com/', (data: http.IncomingMessage) => {
+      httpClient.get('http://www.google.com/', (data: http.IncomingMessage) => {
         res(data)
-        data.emit('end')
+        data.resume()
       })
     })
 
     expect(sendToCloudwatchGroup).toHaveBeenCalledWith(expectedResponse)
+  })
+
+  it('skips the avoid the shim', async () => {
+    jest.clearAllMocks()
+    await new Promise((res, _rej) => {
+      httpClient.get('https://logs.eu-west-3.amazonaws.com/mypath', (data: http.IncomingMessage) => {
+        res(data)
+        data.resume()
+      })
+    })
+    expect(sendToCloudwatchGroup).toBeCalledTimes(0)
   })
 })
