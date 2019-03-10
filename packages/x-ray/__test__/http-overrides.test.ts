@@ -62,6 +62,12 @@ describe('override http', () => {
         data.resume()
       })
     })
+    await new Promise((res, _rej) => {
+      httpClient.request('https://logs.eu-west-3.amazonaws.com/mypath', (data: http.IncomingMessage) => {
+        res(data)
+        data.resume()
+      })
+    })
     expect(sendToCloudwatchGroup).toBeCalledTimes(0)
   })
 })

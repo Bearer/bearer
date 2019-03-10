@@ -10,7 +10,7 @@ export const overrideRequestMethod = (module: any) => {
     const settings = parseOptions(options)
 
     if (settings.host === 'logs.eu-west-3.amazonaws.com') {
-      console.log('ignore logs.eu-west-3.amazonaws.com requests')
+      logger('ignore logs.eu-west-3.amazonaws.com requests')
       return module._request(options, callaback)
     }
 
@@ -44,7 +44,7 @@ export const overrideGetMethod = (module: any) => {
     const settings = parseOptions(options)
 
     if (settings.host === 'logs.eu-west-3.amazonaws.com') {
-      console.log('ignore logs.eu-west-3.amazonaws.com requests')
+      logger('ignore logs.eu-west-3.amazonaws.com requests')
       return module._get(options, callaback)
     }
 

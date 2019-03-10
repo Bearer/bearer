@@ -2,9 +2,11 @@ import logger from './logger'
 import { overrideRequestMethod, overrideGetMethod } from './http-overrides'
 
 export const captureHttps = (module: any, event: any) => {
-  logger(`Ìnject ${event.params.clientId} and ${event.params.scenarioUuid}`)
-  process.env.clientId = event.params.clientId
-  process.env.scenarioUuid = event.params.scenarioUuid
+  const clientId = (event.params || {}).clientId
+  const integrationUuid = (event.params || {}).scenarioUuid
+  logger(`Ìnject ${clientId} and ${integrationUuid}`)
+  process.env.clientId = clientId
+  process.env.scenarioUuid = integrationUuid
 
   if (module._request && module._get) {
     // This because the cold lambda start
