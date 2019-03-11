@@ -8,6 +8,5 @@
     "outDir": "lib/",
     "declaration": true
   },
-  "include": ["src"],
-  "exclude": ["src/__mocks__"]
+  "include": ["src", "__test__"]
 }
