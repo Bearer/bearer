@@ -82,7 +82,6 @@ function getFunctionAuthType(sym: ts.Symbol | undefined, node: ts.Node, checker:
     if (typ.aliasTypeArguments) {
       const index = resolveParameterTypeIndex(typ, checker, 1, 2)
       const authType = checker.typeToString(typ.aliasTypeArguments[index])
-      console.log(authType)
       if (/apiKey/.test(authType)) return 'APIKEY'
       if (/username/.test(authType) && /password/.test(authType)) return 'BASIC'
       if ((/accessToken/.test(authType) && /tokenSecret/.test(authType)) || /TOAUTH1AuthContext/.test(authType)) {
