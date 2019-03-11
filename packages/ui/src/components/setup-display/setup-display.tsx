@@ -8,14 +8,12 @@ import { Component, Prop, State } from '@bearer/core'
 export class BearerSetupDisplay {
   @Prop()
   integrationId = ''
-  @State()
-  isSetup: boolean = false
-  @Prop({ mutable: true })
+  @Prop()
   setupId = ''
 
   render() {
     const label = <strong>Setup-id</strong>
-    if (this.isSetup || this.setupId) {
+    if (this.setupId && this.integrationId) {
       return (
         <div>
           {label}:&nbsp; {this.setupId}
