@@ -1,7 +1,0 @@
-{
-  "defaultSeverity": "error",
-  "extends": "@bearer/tslint-config",
-  "jsRules": {},
-  "rules": {},
-  "rulesDirectory": []
-}
