@@ -961,18 +961,6 @@
     lodash "^4.17.11"
     to-fast-properties "^2.0.0"
 
-<<<<<<< HEAD
-=======
-"@bearer/intents@^0.99.0":
-  version "0.99.2"
-  resolved "https://registry.yarnpkg.com/@bearer/intents/-/intents-0.99.2.tgz#3cfdb0e5967db93f937762bce4ba7dafe10ee4da"
-  integrity sha512-wg5SFVlgHnKYAAHvKKPzjTs8M1wqGnGWvCXQRXyQgodGFOJLipugBZxoLid3XUnsA1fy607z+TqfXDZB8FT5cA==
-  dependencies:
-    "@bearer/logger" "^0.99.2"
-    axios "^0.18.0"
-    typescript "^3.2.4"
-    uuid "^3.3.2"
-
 "@bearer/logger@^0.95.1":
   version "0.95.1"
   resolved "https://registry.npmjs.org/@bearer/logger/-/logger-0.95.1.tgz#b74f21f1f0b57d479f1d60368c8c3a37f28ce224"
@@ -980,14 +968,6 @@
   dependencies:
     debug "^4.1.0"
 
-"@bearer/logger@^0.99.2":
-  version "0.99.2"
-  resolved "https://registry.yarnpkg.com/@bearer/logger/-/logger-0.99.2.tgz#751e417230315346141b1f74bae514423046f749"
-  integrity sha512-XbRd3vWTtzeQk1gbErRB/qjF2P0MneArNPiC07DB7RRy9Wy32A/q5LXvaJukui9QEctzntyxushUxo53JatKbQ==
-  dependencies:
-    debug "^4.1.0"
-
->>>>>>> update yarn.lock
 "@bearer/package-init@^0.78.0":
   version "0.78.0"
   resolved "https://registry.yarnpkg.com/@bearer/package-init/-/package-init-0.78.0.tgz#1f899a7c56f25f58c32902e7b9a6e11e24656b01"
