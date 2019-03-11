@@ -23,11 +23,8 @@
   "dependencies": {
     "@bearer/logger": "^0.100.0",
     "@bearer/x-ray": "0.92.1-canary.148",
-    "add": "^2.0.6",
     "axios": "^0.18.0",
-    "typescript": "^3.3.3333",
-    "uuid": "^3.3.2",
-    "yarn": "^1.13.0"
+    "typescript": "^3.3.3333"
   },
   "devDependencies": {
     "@types/jest": "^23.3.13",
