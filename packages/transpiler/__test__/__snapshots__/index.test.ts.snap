@@ -139,6 +139,11 @@ Object {
       "outputs": undefined,
     },
     Object {
+      "classname": "OverridesDecorarotFull",
+      "inputs": undefined,
+      "outputs": undefined,
+    },
+    Object {
       "classname": "OverridesDecorarorLess",
       "inputs": undefined,
       "outputs": undefined,
@@ -394,6 +399,11 @@ Object {
     },
     Object {
       "classname": "FullComponent",
+      "inputs": undefined,
+      "outputs": undefined,
+    },
+    Object {
+      "classname": "OverridesDecorarotFull",
       "inputs": undefined,
       "outputs": undefined,
     },
@@ -779,6 +789,11 @@ Object {
       "outputs": undefined,
     },
     Object {
+      "classname": "OverridesDecorarotFull",
+      "inputs": undefined,
+      "outputs": undefined,
+    },
+    Object {
       "classname": "OverridesDecorarorLess",
       "inputs": undefined,
       "outputs": undefined,
@@ -943,6 +958,11 @@ Object {
     },
     Object {
       "classname": "FullComponent",
+      "inputs": undefined,
+      "outputs": undefined,
+    },
+    Object {
+      "classname": "OverridesDecorarotFull",
       "inputs": undefined,
       "outputs": undefined,
     },
@@ -1151,6 +1171,11 @@ Object {
       "outputs": undefined,
     },
     Object {
+      "classname": "OverridesDecorarotFull",
+      "inputs": undefined,
+      "outputs": undefined,
+    },
+    Object {
       "classname": "OverridesDecorarorLess",
       "inputs": undefined,
       "outputs": undefined,
@@ -1330,6 +1355,11 @@ Object {
     },
     Object {
       "classname": "FullComponent",
+      "inputs": undefined,
+      "outputs": undefined,
+    },
+    Object {
+      "classname": "OverridesDecorarotFull",
       "inputs": undefined,
       "outputs": undefined,
     },
