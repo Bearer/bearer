@@ -139,14 +139,14 @@ export default class New extends BaseCommand {
       classname: 'SetupAction',
       isRoot: true,
       initialTagName: 'setup-action',
-      group: 'setup',
+      name: 'setup-action',
       label: 'Setup Action Component'
     },
     {
-      classname: 'SetupDisplay',
+      classname: 'SetupView',
       isRoot: true,
-      initialTagName: 'setup-display',
-      group: 'setup',
+      initialTagName: 'setup-view',
+      name: 'setup-view',
       label: 'Setup Display Component'
     },`
     const vars = authType === Authentications.NoAuth ? {} : { setup }
