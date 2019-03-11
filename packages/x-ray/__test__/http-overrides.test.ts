@@ -54,8 +54,9 @@ describe('override http', () => {
     expect(sendToCloudwatchGroup).toHaveBeenCalledWith(expectedResponse)
   })
 
-  it('skips the avoid the shim', async () => {
+  it('skips the shim when calling AWS infra', async () => {
     jest.clearAllMocks()
+
     await new Promise((res, _rej) => {
       httpClient.get('https://logs.eu-west-3.amazonaws.com/mypath', (data: http.IncomingMessage) => {
         res(data)
@@ -68,6 +69,7 @@ describe('override http', () => {
         data.resume()
       })
     })
+
     expect(sendToCloudwatchGroup).toBeCalledTimes(0)
   })
 })
