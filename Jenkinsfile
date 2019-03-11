@@ -49,7 +49,6 @@ pipeline {
         stage('Test') {
              when {
                 expression { params.CANARY  == false }
-                branch 'master'
             }
 
             steps {
