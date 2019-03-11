@@ -72,17 +72,15 @@ export default class Transpiler {
         bearerCleaning({ verbose, metadata: this.metadata }),
         EventNameNormalizer(),
         I18nModifier(),
-        DumpSourceCode({
-          verbose,
-          srcDirectory: this.VIEWS_DIRECTORY,
-          buildDirectory: this.BUILD_SRC_DIRECTORY
-        })
-      ],
-      after: [
         generateManifestFile({
           metadata: this.metadata,
           outDir: this.BUILD_SRC_DIRECTORY,
           srcDir: this.ROOT_DIRECTORY
+        }),
+        DumpSourceCode({
+          verbose,
+          srcDirectory: this.VIEWS_DIRECTORY,
+          buildDirectory: this.BUILD_SRC_DIRECTORY
         })
       ]
     }

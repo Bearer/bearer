@@ -51,9 +51,11 @@ const stringifyManifest: (manifest: any, srcDir: string) => string = (manifest, 
 }
 
 export function transformer(options: FileTransformerOptions): ts.TransformerFactory<ts.SourceFile> {
-  logger('generateManifestFile')
-  generateManifestFile(options)
-  return _transformContext => tsSourceFile => tsSourceFile
+  return _transformContext => tsSourceFile => {
+    logger('generateManifestFile')
+    generateManifestFile(options)
+    return tsSourceFile
+  }
 }
 
 export default function generateManifestFile({ metadata, outDir, srcDir }: FileTransformerOptions): void {
