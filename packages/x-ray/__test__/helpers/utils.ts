@@ -13,7 +13,7 @@ export class TestEmitter extends EventEmitter {
   }
 }
 
-export const buildFakeRequest = function() {
+function buildFakeRequest() {
   const request = new TestEmitter()
   request.method = 'GET'
   request.url = '/'
@@ -21,7 +21,7 @@ export const buildFakeRequest = function() {
   return request
 }
 
-export const buildFakeResponse = function() {
+function buildFakeResponse() {
   const response = new TestEmitter()
   response.statusCode = 200
   response.statusMessage = 'OK'
