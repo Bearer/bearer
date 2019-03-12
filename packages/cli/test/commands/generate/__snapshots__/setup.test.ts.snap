@@ -3,45 +3,35 @@
 exports[`generate:setup APIKEY creates setup files 1`] = `
 "/*
   The purpose of this component is to save integration credentials.
-  This file has been generated automatically and should not be edited.
+  This file has been generated automatically. Edit it at your own risk :-)
 */
 
-import Bearer, { RootComponent, State, Prop, Output, Element, Listen } from '@bearer/core'
+import { RootComponent, State, Prop, Output } from '@bearer/core'
 import '@bearer/ui'
-import { FieldSet } from \\"@bearer/ui/lib/collection/components/Forms/Fieldset\\";
+import { FieldSet } from '@bearer/ui/lib/collection/components/Forms/Fieldset'
 
 @RootComponent({
   name: 'setup-action',
 })
 export class SetupAction {
-  @Prop() onSetupSuccess: (detail: any) => void = (_any: any) => { }
+  @Prop() display: 'inline' | 'block' = 'inline'
+
   @State() fields = new FieldSet([{\\"type\\":\\"password\\",\\"label\\":\\"Api Key\\",\\"controlName\\":\\"apiKey\\"}])
-  @State() innerListener = \`setup_success:BEARER_INTEGRATION_ID\`
-  @Output() setup: any;
-  @Element() el: HTMLElement;
 
-  @Listen(\\"setup-setupSaved\\")
-  setupSavedHandler(e: CustomEvent) {
-    const event = new CustomEvent(\\"setupSuccess\\", e);
-    document.dispatchEvent(event);
-    this.el.shadowRoot
-      .querySelector<HTMLBearerDropdownButtonElement>(\\"bearer-dropdown-button\\")
-      .toggle(false);
-    Bearer.emitter.emit(this.innerListener, {
-      referenceId: e.detail.referenceId
-    });
+  @Output() setup: any
+
+  setupSubmitHandler = (e: CustomEvent) => {
+    this.setup = e.detail
   }
-
-  handleSubmit = (e: CustomEvent) => {
-    this.setup = e.detail.set.reduce((acc, obj) => ({ ...acc, [obj.controlName]: obj.value }), {ReadAllowed: false})
-  };
 
   render() {
     return (
-      <bearer-dropdown-button>
-        <span slot=\\"dropdown-btn-content\\">Setup component</span>
-        <bearer-form fields={this.fields} onSubmit={this.handleSubmit} />
-      </bearer-dropdown-button>
+      <bearer-setup
+        display={this.display}
+        onSetupSubmit={this.setupSubmitHandler}
+        integrationId='BEARER_INTEGRATION_ID'
+        fields={this.fields}
+      />
     )
   }
 }
@@ -50,16 +40,19 @@ export class SetupAction {
 
 exports[`generate:setup APIKEY creates setup files 2`] = `
 "/*
-  The purpose of this component is to save integration credentials.
+  The purpose of this component is to show integration setup id.
+  This file has been generated automatically. Edit it at your own risk :-)
 */
 
-import { RootComponent } from \\"@bearer/core\\";
+import { RootComponent, Input } from \\"@bearer/core\\";
 import \\"@bearer/ui\\";
 
 @RootComponent({
   name: 'setup-view',
 })
 export class SetupView {
+  @Input() setup: any
+
   render() {
     return (
       <bearer-setup-display integrationId=\\"BEARER_INTEGRATION_ID\\" setupId={(this as any).setupId} />
@@ -97,16 +90,18 @@ exports[`generate:setup APIKEY creates setup files 4`] = `
 
 export default class RetrieveSetupFunction extends FetchData implements FetchData<ReturnedData, any, TAPIKEYAuthContext> {
   async action(event: TFetchActionEvent<Params, TAPIKEYAuthContext>): TFetchPromise<ReturnedData> {
-    return { data: event.context.reference }
+    return { data: { referenceId: event.params.referenceId, ...event.context.reference } }
   }
 }
 
 export type Params = {
   setup: any
+  referenceId: string
 }
 
 export type ReturnedData = {
   apiKey: string
+  referenceId: string
 }
 "
 `;
@@ -114,45 +109,35 @@ export type ReturnedData = {
 exports[`generate:setup BASIC creates setup files 1`] = `
 "/*
   The purpose of this component is to save integration credentials.
-  This file has been generated automatically and should not be edited.
+  This file has been generated automatically. Edit it at your own risk :-)
 */
 
-import Bearer, { RootComponent, State, Prop, Output, Element, Listen } from '@bearer/core'
+import { RootComponent, State, Prop, Output } from '@bearer/core'
 import '@bearer/ui'
-import { FieldSet } from \\"@bearer/ui/lib/collection/components/Forms/Fieldset\\";
+import { FieldSet } from '@bearer/ui/lib/collection/components/Forms/Fieldset'
 
 @RootComponent({
   name: 'setup-action',
 })
 export class SetupAction {
-  @Prop() onSetupSuccess: (detail: any) => void = (_any: any) => { }
+  @Prop() display: 'inline' | 'block' = 'inline'
+
   @State() fields = new FieldSet([{\\"type\\":\\"text\\",\\"label\\":\\"Username\\",\\"controlName\\":\\"username\\"},{\\"type\\":\\"password\\",\\"label\\":\\"Password\\",\\"controlName\\":\\"password\\"}])
-  @State() innerListener = \`setup_success:BEARER_INTEGRATION_ID\`
-  @Output() setup: any;
-  @Element() el: HTMLElement;
 
-  @Listen(\\"setup-setupSaved\\")
-  setupSavedHandler(e: CustomEvent) {
-    const event = new CustomEvent(\\"setupSuccess\\", e);
-    document.dispatchEvent(event);
-    this.el.shadowRoot
-      .querySelector<HTMLBearerDropdownButtonElement>(\\"bearer-dropdown-button\\")
-      .toggle(false);
-    Bearer.emitter.emit(this.innerListener, {
-      referenceId: e.detail.referenceId
-    });
+  @Output() setup: any
+
+  setupSubmitHandler = (e: CustomEvent) => {
+    this.setup = e.detail
   }
-
-  handleSubmit = (e: CustomEvent) => {
-    this.setup = e.detail.set.reduce((acc, obj) => ({ ...acc, [obj.controlName]: obj.value }), {ReadAllowed: false})
-  };
 
   render() {
     return (
-      <bearer-dropdown-button>
-        <span slot=\\"dropdown-btn-content\\">Setup component</span>
-        <bearer-form fields={this.fields} onSubmit={this.handleSubmit} />
-      </bearer-dropdown-button>
+      <bearer-setup
+        display={this.display}
+        onSetupSubmit={this.setupSubmitHandler}
+        integrationId='BEARER_INTEGRATION_ID'
+        fields={this.fields}
+      />
     )
   }
 }
@@ -161,16 +146,19 @@ export class SetupAction {
 
 exports[`generate:setup BASIC creates setup files 2`] = `
 "/*
-  The purpose of this component is to save integration credentials.
+  The purpose of this component is to show integration setup id.
+  This file has been generated automatically. Edit it at your own risk :-)
 */
 
-import { RootComponent } from \\"@bearer/core\\";
+import { RootComponent, Input } from \\"@bearer/core\\";
 import \\"@bearer/ui\\";
 
 @RootComponent({
   name: 'setup-view',
 })
 export class SetupView {
+  @Input() setup: any
+
   render() {
     return (
       <bearer-setup-display integrationId=\\"BEARER_INTEGRATION_ID\\" setupId={(this as any).setupId} />
@@ -207,17 +195,19 @@ exports[`generate:setup BASIC creates setup files 4`] = `
 
 export default class RetrieveSetupFunction extends FetchData implements FetchData<ReturnedData, any, TBASICAuthContext> {
   async action(event: TFetchActionEvent<Params, TBASICAuthContext>): TFetchPromise<ReturnedData> {
-    return { data: event.context.reference }
+    return { data: { referenceId: event.params.referenceId, ...event.context.reference } }
   }
 }
 
 export type Params = {
   setup: any
+  referenceId: string
 }
 
 export type ReturnedData = {
   username: string
   password: string
+  referenceId: string
 }
 "
 `;
@@ -225,45 +215,35 @@ export type ReturnedData = {
 exports[`generate:setup OAUTH2 creates setup files 1`] = `
 "/*
   The purpose of this component is to save integration credentials.
-  This file has been generated automatically and should not be edited.
+  This file has been generated automatically. Edit it at your own risk :-)
 */
 
-import Bearer, { RootComponent, State, Prop, Output, Element, Listen } from '@bearer/core'
+import { RootComponent, State, Prop, Output } from '@bearer/core'
 import '@bearer/ui'
-import { FieldSet } from \\"@bearer/ui/lib/collection/components/Forms/Fieldset\\";
+import { FieldSet } from '@bearer/ui/lib/collection/components/Forms/Fieldset'
 
 @RootComponent({
   name: 'setup-action',
 })
 export class SetupAction {
-  @Prop() onSetupSuccess: (detail: any) => void = (_any: any) => { }
+  @Prop() display: 'inline' | 'block' = 'inline'
+
   @State() fields = new FieldSet([{\\"type\\":\\"text\\",\\"label\\":\\"Client ID\\",\\"controlName\\":\\"clientID\\"},{\\"type\\":\\"password\\",\\"label\\":\\"Client Secret\\",\\"controlName\\":\\"clientSecret\\"}])
-  @State() innerListener = \`setup_success:BEARER_INTEGRATION_ID\`
-  @Output() setup: any;
-  @Element() el: HTMLElement;
 
-  @Listen(\\"setup-setupSaved\\")
-  setupSavedHandler(e: CustomEvent) {
-    const event = new CustomEvent(\\"setupSuccess\\", e);
-    document.dispatchEvent(event);
-    this.el.shadowRoot
-      .querySelector<HTMLBearerDropdownButtonElement>(\\"bearer-dropdown-button\\")
-      .toggle(false);
-    Bearer.emitter.emit(this.innerListener, {
-      referenceId: e.detail.referenceId
-    });
+  @Output() setup: any
+
+  setupSubmitHandler = (e: CustomEvent) => {
+    this.setup = e.detail
   }
-
-  handleSubmit = (e: CustomEvent) => {
-    this.setup = e.detail.set.reduce((acc, obj) => ({ ...acc, [obj.controlName]: obj.value }), {ReadAllowed: false})
-  };
 
   render() {
     return (
-      <bearer-dropdown-button>
-        <span slot=\\"dropdown-btn-content\\">Setup component</span>
-        <bearer-form fields={this.fields} onSubmit={this.handleSubmit} />
-      </bearer-dropdown-button>
+      <bearer-setup
+        display={this.display}
+        onSetupSubmit={this.setupSubmitHandler}
+        integrationId='BEARER_INTEGRATION_ID'
+        fields={this.fields}
+      />
     )
   }
 }
@@ -272,16 +252,19 @@ export class SetupAction {
 
 exports[`generate:setup OAUTH2 creates setup files 2`] = `
 "/*
-  The purpose of this component is to save integration credentials.
+  The purpose of this component is to show integration setup id.
+  This file has been generated automatically. Edit it at your own risk :-)
 */
 
-import { RootComponent } from \\"@bearer/core\\";
+import { RootComponent, Input } from \\"@bearer/core\\";
 import \\"@bearer/ui\\";
 
 @RootComponent({
   name: 'setup-view',
 })
 export class SetupView {
+  @Input() setup: any
+
   render() {
     return (
       <bearer-setup-display integrationId=\\"BEARER_INTEGRATION_ID\\" setupId={(this as any).setupId} />
@@ -308,9 +291,7 @@ export type State = {
   accessToken: string
 }
 
-
-export type ReturnedData = {
-}
+export type ReturnedData = {}
 "
 `;
 
@@ -319,16 +300,18 @@ exports[`generate:setup OAUTH2 creates setup files 4`] = `
 
 export default class RetrieveSetupFunction extends FetchData implements FetchData<ReturnedData, any, TOAUTH2AuthContext> {
   async action(event: TFetchActionEvent<Params, TOAUTH2AuthContext>): TFetchPromise<ReturnedData> {
-    return { data: event.context.reference }
+    return { data: { referenceId: event.params.referenceId, ...event.context.reference } }
   }
 }
 
 export type Params = {
   setup: any
+  referenceId: string
 }
 
 export type ReturnedData = {
   accessToken: string
+  referenceId: string
 }
 "
 `;
