@@ -117,15 +117,23 @@ export default class Push extends BaseCommand {
       await axios.put(url, file, { headers: { 'Content-Type': 'application/zip' } })
       return true
     } catch (e) {
-      if (e.response && e.response.status === 401) {
-        this.error(
-          `Unauthorized to push, please visit ${this.bearerConfig.DeveloperPortalUrl}integrations/${
-            this.bearerConfig.integrationUuid
-          } to confirm you have access to ${this.colors.bold(this.bearerConfig.integrationUuid)} integration.`
-        )
-        return false
+      if (e.response) {
+        this.debug(e.response)
+        switch (e.response.status) {
+          case 401: {
+            this.error(
+              `Unauthorized to push, please visit ${this.bearerConfig.DeveloperPortalUrl}integrations/${
+                this.bearerConfig.integrationUuid
+              } to confirm you have access to ${this.colors.bold(this.bearerConfig.integrationUuid)} integration.`
+            )
+          }
+          default: {
+            this.log(e.response.data)
+          }
+        }
       }
-      throw e
+      this.error(e)
+      return false
     }
   }
 }
