@@ -12,7 +12,7 @@ Bearer lib can be used instantly in your page or with a package system.
 <script src="https://cdn.jsdelivr.net/npm/@bearer/js@beta5/lib/bearer.production.min.js"></script>
 <script>
   // you have now access to a global `bearer` function, initialize your code by passing the `clientId` as parameter
-  bearer('clientId')
+  const bearerClient = bearer('clientId')
 </script>
 ```
 
@@ -105,6 +105,28 @@ import Cipher from '@bearer/security'
 
 const cipher = new Cipher(ENCRYPTION_KEY)
 cipher.encrypt(MESSAGE)
+```
+
+### connectTo
+
+`connectTo` let you easily retrieve `auth-id` for an integration using OAuth authentication. Before using it, you'll need to generate a `setup-id` with the setup component of your integration
+
+```js
+bearerClient
+  .connectTo('integration-uuid', 'setup-id')
+  .then(payload => {
+    // user has connected himself to the OAuth provider adn you now have access to the authId
+    console.log(payload.data.authId)
+  })
+  .catch(() => {
+    // user canceled the authentication
+  })
+```
+
+you can pass your own `auth-id` within options parameters as follow
+
+```js
+bearerClient.connectTo('integration-uuid', 'setup-id', { authId: 'my-own-non-guessable-auth-id' })
 ```
 
 ### init options

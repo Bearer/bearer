@@ -14,6 +14,12 @@ export class I18n {
     [DEFAULT_LOCALE]: {}
   }
 
+  /**
+   * load a dictionnary (key/value) containing all the translations required by a dictionnary
+   * @argument {string} integrationName Integration's identifier you want to connect to ex: 12345-attach-github-pull-request
+   * @argument {(Object | Promise<Object>)} dictionnary dictionnary containing all key/value pairs of the integration
+   * @argument {{locale: string}} options { locale: 'en'}
+   */
   load = async (
     integrationName: string | null,
     dictionnary:
@@ -35,13 +41,15 @@ export class I18n {
     document.dispatchEvent(new CustomEvent(LOCALE_CHANGED, { detail: { locale: this.locale } }))
   }
 
-  // @ts-ignore
   get = (integrationName: string | null, key: string, options: Partial<{ locale: string }> = {}): TransLationValue => {
     const path = [options.locale || this.locale, integrationName, key].filter(m => m).join('.')
     debug('lookup key', path)
     return get(this._dictionnary, path)
   }
 
+  /**
+   * set the current locale you want your integrations to use
+   */
   set locale(locale: string) {
     this._locale = locale
     this.localeChanged()

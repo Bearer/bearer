@@ -35,7 +35,8 @@ export default class Bearer {
   }
   // TODO: move to a dedicated file
   /**
-   * @argument {string} integration Integration's identifier you wan to connect to ex: 12345-attach-github-pull-request
+   * `connectTo` let you easily retrieve `auth-id` for an integration using OAuth authentication. Before using it, you'll need to generate a `setup-id` with the setup component of your integration
+   * @argument {string} integration Integration's identifier you want to connect to ex: 12345-attach-github-pull-request
    * @argument {string} setupId Setup's identifier you received earlier, a Bearer reference containing all required information about auth mechanism
    * @argument {Object} options Optional parameters like authId if you already have one
    */
@@ -140,7 +141,7 @@ export default class Bearer {
   /**
    * retrieve corresponding integration asset url
    */
-  sendTags = async (tags: string[]): Promise<boolean> => {
+  private sendTags = async (tags: string[]): Promise<boolean> => {
     if (!tags.length) {
       return Promise.resolve(true)
     }
