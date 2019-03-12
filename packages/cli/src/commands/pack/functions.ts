@@ -12,7 +12,6 @@ const HANDLER_NAME_WITH_EXT = [HANDLER_NAME, 'js'].join('.')
 
 export default class PackFunctions extends BaseCommand {
   static description = 'Pack integration functions'
-  static aliases = ['pack:intents']
   static hidden = true
   static flags = {
     ...BaseCommand.flags

@@ -14,8 +14,7 @@ const skipInstall = 'skip-install'
 
 export default class BuildFunctions extends BaseCommand {
   static description = 'Build integration functions'
-  // TODO: remove build:intents when people have migrated to function
-  static aliases = ['build:intents', 'b:i']
+  static aliases = ['b:f']
   static hidden = true
   static flags = {
     ...BaseCommand.flags,

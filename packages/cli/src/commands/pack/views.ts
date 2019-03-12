@@ -5,8 +5,8 @@ import BaseCommand from '../../base-command'
 import { IntegrationBuildEnv } from '../../types'
 import { RequireIntegrationFolder } from '../../utils/decorators'
 
-const integrationId = 'scenario-id'
-const integrationUuid = 'scenario-uuid'
+const integrationId = 'integration-id'
+const integrationUuid = 'integration-uuid'
 const cdnHost = 'cdn-host'
 
 export default class PackViews extends BaseCommand {

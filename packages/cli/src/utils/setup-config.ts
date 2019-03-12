@@ -29,7 +29,7 @@ const configs: Record<BearerEnv, BaseConfig> = {
     BearerEnv: 'staging'
   },
   production: {
-    DeploymentUrl: 'https://developer.bearer.sh/v1/',
+    DeploymentUrl: 'https://developer.bearer.sh/v2/',
     IntegrationServiceHost: 'https://int.bearer.sh/',
     IntegrationServiceUrl: 'https://int.bearer.sh/api/v1/',
     DeveloperPortalAPIUrl: 'https://app.bearer.sh/graphql',

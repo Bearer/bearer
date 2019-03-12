@@ -5,21 +5,21 @@ import BaseCommand from '../base-command'
 export class IntegrationClient {
   private client: AxiosInstance
 
-  constructor(baseUrl: string, authorization?: string, version?: string) {
+  constructor(baseURL: string, authorization?: string, version?: string) {
     const headers = {
       Authorization: authorization,
       ['BEARER-CLI-VERSION']: version
     }
     this.client = axios.create({
       headers,
-      baseURL: baseUrl
+      baseURL
     })
   }
 
   async getIntegrationArchiveUploadUrl(orgId: string, integrationId: string): Promise<string> {
     try {
-      const response = await this.client.post('scenario-archive-url', { orgId, scenarioId: integrationId, type: 'src' })
-      return response.data.url
+      const { data } = await this.client.post('integration-urls', { orgId, integrationId })
+      return data.url
     } catch (e) {
       throw e
     }

@@ -5,7 +5,7 @@ import { ensureFolderExists } from '../../utils/helpers'
 export default class PrepareFunctions extends BaseCommand {
   static description = 'describe the command here'
   // TODO: remove prepare:intents when people have migrated to function
-  static aliases = ['prepare:intents', 'p:f']
+  static aliases = ['p:f']
   static hidden = true
   static flags = {
     ...BaseCommand.flags
