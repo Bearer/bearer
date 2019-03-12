@@ -1,4 +1,4 @@
-import { Component, Prop, State } from '@bearer/core'
+import { Component, Prop } from '@bearer/core'
 
 @Component({
   tag: 'bearer-setup-display',
