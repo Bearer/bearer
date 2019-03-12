@@ -109,13 +109,13 @@ cipher.encrypt(MESSAGE)
 
 ### connectTo
 
-`connectTo` let you easily retrieve `auth-id` for an integration using OAuth authentication. Before using it, you'll need to generate a `setup-id` with the setup component of your integration
+`connectTo` lets you easily retrieve the `auth-id` for an integration using OAuth authentication. Before using it, you'll need to generate a `setup-id` with the setup component of your integration
 
 ```js
 bearerClient
   .connectTo('integration-uuid', 'setup-id')
   .then(payload => {
-    // user has connected himself to the OAuth provider adn you now have access to the authId
+    // user has connected himself to the OAuth provider and you now have access to the authId
     console.log(payload.data.authId)
   })
   .catch(() => {
@@ -123,7 +123,7 @@ bearerClient
   })
 ```
 
-you can pass your own `auth-id` within options parameters as follow
+you can pass your own `auth-id` within options parameters as follows
 
 ```js
 bearerClient.connectTo('integration-uuid', 'setup-id', { authId: 'my-own-non-guessable-auth-id' })

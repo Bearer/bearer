@@ -35,8 +35,8 @@ export default class Bearer {
   }
   // TODO: move to a dedicated file
   /**
-   * `connectTo` let you easily retrieve `auth-id` for an integration using OAuth authentication. Before using it, you'll need to generate a `setup-id` with the setup component of your integration
-   * @argument {string} integration Integration's identifier you want to connect to ex: 12345-attach-github-pull-request
+   * `connectTo` lets you easily retrieve `auth-id` for an integration using OAuth authentication. Before using it, you'll need to generate a `setup-id` with the setup component of your integration
+   * @argument {string} integration the identifier of the Integration you want to connect to ex: 12345-attach-github-pull-request
    * @argument {string} setupId Setup's identifier you received earlier, a Bearer reference containing all required information about auth mechanism
    * @argument {Object} options Optional parameters like authId if you already have one
    */

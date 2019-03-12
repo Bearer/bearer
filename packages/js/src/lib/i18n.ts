@@ -15,9 +15,9 @@ export class I18n {
   }
 
   /**
-   * load a dictionnary (key/value) containing all the translations required by a dictionnary
-   * @argument {string} integrationName Integration's identifier you want to connect to ex: 12345-attach-github-pull-request
-   * @argument {(Object | Promise<Object>)} dictionnary dictionnary containing all key/value pairs of the integration
+   * load a dictionary (key/value) containing all the translations required by a dictionary
+   * @argument {string} integration the identifier of the Integration you want to connect to ex: 12345-attach-github-pull-request
+   * @argument {(Object | Promise<Object>)} dictionary dictionary containing all key/value pairs of the integration
    * @argument {{locale: string}} options { locale: 'en'}
    */
   load = async (
