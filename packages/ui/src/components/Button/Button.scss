@@ -14,6 +14,7 @@
   --opacity: var(--bearer-button-opacity);
   --cursor: var(--bearer-button-cursor, #{$bearer-button-cursor});
   --outline: var(--bearer-button-outline, #{$bearer-button-outline});
+  --background: transparent;
 }
 
 // Kinds + States
@@ -182,6 +183,7 @@
 // ----------------------------------
 
 .btn {
+  -webkit-appearance: none;
   display: var(--display);
   background: var(--background);
   border: var(--border);
@@ -190,6 +192,7 @@
   color: var(--color);
   padding: var(--padding);
   font-size: var(--font-size);
+  line-height: var(--font-size);
   font-family: var(--font-family);
   opacity: var(--opacity, 1);
   cursor: var(--cursor);

@@ -1,9 +1,10 @@
 @import '../theme/vars';
+@import '../theme/vars.popover';
 
 :host {
   display: inline-block;
-  --shadow: var(--bearer-popover-shadow, #{$bearer-intermediate-shadow});
-  --bg-color: var(--bearer-popover-bg-color, #FFF);
+  --shadow: var(--bearer-popover-shadow, #{$bearer-popover-shadow});
+  --bg-color: var(--bearer-popover-bg-color, #fff);
   --margin: var(--bearer-popover-margin, 12px);
   --vertical-padding: var(--bearer-popover-vertical-padding, 24px);
   --horizontal-padding: var(--bearer-popover-vertical-padding, 32px);
@@ -46,7 +47,7 @@
     left: calc(100% + var(--margin));
     top: 0;
   }
-  
+
   &[aligned='left'].direction-bottom,
   .aligned-left.direction-bottom {
     left: 0;
@@ -96,18 +97,19 @@
 }
 
 .popover-copyright {
-  color: #9198B6;
+  color: #9198b6;
   position: absolute;
   left: 6px;
   bottom: 6px;
   font-size: 11px;
+  line-height: 11px;
   letter-spacing: -0.8px;
 
   & a {
     color: inherit;
     font-weight: 600;
     text-decoration: none;
-    
+
     &:hover {
       text-decoration: underline;
     }
