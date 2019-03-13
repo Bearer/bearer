@@ -94,7 +94,7 @@ export function topOfSpec(integrationName: string): THeader {
       contact: { email: 'bearer@bearer.sh' },
       license: { name: 'MIT' }
     },
-    servers: [{ url: 'https://int.bearer.sh/api/v2/functions/backend/' }],
+    servers: [{ url: 'https://int.bearer.sh/api/v3/functions/backend/' }],
     tags: [
       {
         name: 'integration',
