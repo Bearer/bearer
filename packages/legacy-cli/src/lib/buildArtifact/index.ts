@@ -47,7 +47,7 @@ export function transpileFunctions(entriesPath: string, distPath: string): Promi
                 ]
               },
               resolve: {
-                extensions: ['.tsx', '.ts', '.js']
+                extensions: ['.tsx', '.ts', '.js', '.json']
               },
               target: 'node',
               output: {

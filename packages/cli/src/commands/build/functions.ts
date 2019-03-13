@@ -130,7 +130,7 @@ const baseConfig: Partial<webpack.Configuration> = {
     ]
   },
   resolve: {
-    extensions: ['.tsx', '.ts', '.js']
+    extensions: ['.tsx', '.ts', '.js', '.json']
   },
   target: 'node'
 }
