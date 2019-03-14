@@ -25,8 +25,8 @@
     "clean": "rm -rf lib",
     "prepack": "NODE_ENV=production yarn build",
     "prepare": "yarn clean && yarn build",
-    "test": "jest",
-    "test:ci": "jest --coverage"
+    "test": "jest --colors",
+    "test:ci": "jest --coverage --colors"
   },
   "dependencies": {
     "@bearer/functions": "^0.100.0",

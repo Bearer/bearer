@@ -47,7 +47,7 @@
     "build": "tsc -p tsconfig.build.json",
     "prepare": "yarn build",
     "prepack": "yarn clean && NODE_ENV=production yarn build",
-    "test": "jest",
-    "test:ci": "jest --coverage --runInBand"
+    "test": "jest --colors",
+    "test:ci": "jest --coverage --runInBand --colors"
   }
 }

@@ -18,8 +18,8 @@
     "build": "rollup -c",
     "prepack": "yarn clean && BUILD=distribution NODE_ENV=production yarn build",
     "prepare": "yarn clean && yarn build",
-    "test": "jest",
-    "test:ci": "jest --coverage --runInBand"
+    "test": "jest --colors",
+    "test:ci": "jest --coverage --runInBand --colors"
   },
   "jest": {
     "moduleFileExtensions": [

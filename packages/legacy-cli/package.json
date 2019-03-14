@@ -20,8 +20,8 @@
     "templates": "yarn clean && copyfiles -a \"./templates/**/*\" lib/src/lib/commands/",
     "prepare": "yarn build",
     "prepack": "yarn clean && NODE_ENV=production yarn build",
-    "test": "jest",
-    "test:ci": "jest --coverage --runInBand",
+    "test": "jest --colors",
+    "test:ci": "jest --coverage --runInBand --colors",
     "requirements-check": "node ./check-version.js"
   },
   "dependencies": {

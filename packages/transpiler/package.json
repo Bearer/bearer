@@ -17,8 +17,8 @@
     "build": "tsc -p tsconfig.build.json",
     "prepare": "yarn build",
     "prepack": "yarn clean && NODE_ENV=production yarn build",
-    "test": "jest --runInBand",
-    "test:ci": "jest --coverage --runInBand"
+    "test": "jest --runInBand --colors",
+    "test:ci": "jest --coverage --runInBand --colors"
   },
   "devDependencies": {
     "@bearer/types": "^0.100.0",

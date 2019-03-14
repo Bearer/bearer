@@ -14,8 +14,8 @@
     "clean": "rm -rf lib/",
     "build": "tsc",
     "start": "yarn build -w",
-    "test": "jest",
-    "test:ci": "jest --coverage --runInBand",
+    "test": "jest --colors",
+    "test:ci": "jest --coverage --runInBand --colors",
     "prepare": "yarn clean && yarn build",
     "prepack": "yarn clean && NODE_ENV=production yarn build"
   },

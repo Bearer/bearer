@@ -27,7 +27,7 @@
     "clean": "rm -rf lib",
     "prepack": "yarn clean && yarn build",
     "prepare": "yarn clean && yarn build",
-    "test": "jest",
-    "test:ci": "jest --coverage"
+    "test": "jest --colors",
+    "test:ci": "jest --coverage --colors"
   }
 }

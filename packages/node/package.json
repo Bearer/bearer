@@ -23,8 +23,8 @@
     "clean": "rm -rf lib",
     "prepare": "yarn clean && yarn build",
     "prepack": "yarn clean && NODE_ENV=production yarn build",
-    "test": "jest",
-    "test:ci": "jest --coverage"
+    "test": "jest --colors",
+    "test:ci": "jest --coverage --colors"
   },
   "bugs": {
     "url": "https://github.com/Bearer/bearer/issues"
