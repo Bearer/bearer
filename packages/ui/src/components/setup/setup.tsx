@@ -34,9 +34,11 @@ export class BearerSetup {
   handleSubmit = (e: any) => {
     e.preventDefault()
     this.loading = true
-    const formSet = this.fieldSet.map(el => {
-      return { key: el.controlName, value: el.value }
-    })
+    const formSet = this.fieldSet
+      .map(el => {
+        return { key: el.controlName, value: el.value }
+      })
+      .reduce((acc, obj) => ({ ...acc, [obj['key']]: obj['value'] }), {})
 
     this.setupSubmit.emit(formSet)
   }
