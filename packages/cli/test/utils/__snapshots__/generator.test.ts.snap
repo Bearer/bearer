@@ -16,7 +16,7 @@ exports[`generators build generates openapi documentation 1`] = `
   },
   \\"servers\\": [
     {
-      \\"url\\": \\"https://int.bearer.sh/api/v2/functions/backend/\\"
+      \\"url\\": \\"https://int.bearer.sh/api/v3/functions/backend/\\"
     }
   ],
   \\"tags\\": [
