@@ -35,12 +35,12 @@ export default class Bearer {
   }
   // TODO: move to a dedicated file
   /**
-   * `connectTo` lets you easily retrieve `auth-id` for an integration using OAuth authentication. Before using it, you'll need to generate a `setup-id` with the setup component of your integration
+   * `connect` lets you easily retrieve `auth-id` for an integration using OAuth authentication. Before using it, you'll need to generate a `setup-id` with the setup component of your integration
    * @argument {string} integration the identifier of the Integration you want to connect to ex: 12345-attach-github-pull-request
    * @argument {string} setupId Setup's identifier you received earlier, a Bearer reference containing all required information about auth mechanism
    * @argument {Object} options Optional parameters like authId if you already have one
    */
-  connectTo = (integration: string, setupId: string, { authId }: { authId?: string } = {}) => {
+  connect = (integration: string, setupId: string, { authId }: { authId?: string } = {}) => {
     const query = formatQuery({
       setupId,
       authId,
@@ -49,7 +49,7 @@ export default class Bearer {
     })
     const AUTHORIZED_URL = `${this.config.integrationHost}/v2/auth/${integration}?${query}`
     // TODO: get rid of post robot, too heqvy for our needs
-    const promise = new Promise<{ data: { integration: string; authId: string } }>((resolve, reject) => {
+    const promise = new Promise<{ integration: string; authId: string }>((resolve, reject) => {
       // TODO: use constants
       if (this.authorizedListener) {
         debug('canceling previous listener')

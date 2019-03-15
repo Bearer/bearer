@@ -2,12 +2,10 @@ import * as React from 'react'
 import { render, fireEvent, cleanup } from 'react-testing-library'
 
 const integration = 'my-dummy-integration'
-const connectTo = jest.fn((_one, _two, { authId }) =>
-  Promise.resolve({ data: { integration, authId: authId || 'random' } })
-)
+const connect = jest.fn((_one, _two, { authId }) => Promise.resolve({ integration, authId: authId || 'random' }))
 
 jest.mock('./bearer-provider', () => {
-  const BearerContext = React.createContext<any>({ bearer: { connectTo } })
+  const BearerContext = React.createContext<any>({ bearer: { connect } })
   return { BearerContext }
 })
 
@@ -32,8 +30,8 @@ describe('Connect', () => {
       expect(container).toMatchSnapshot()
     })
 
-    it('calls connectTo with props provided', () => {
-      expect(connectTo).toHaveBeenCalledWith(integration, 'my-dummy-setup', { authId: 'my-dummy-auth-id' })
+    it('calls connect with props provided', () => {
+      expect(connect).toHaveBeenCalledWith(integration, 'my-dummy-setup', { authId: 'my-dummy-auth-id' })
     })
 
     it('calls success', () => {
@@ -52,8 +50,8 @@ describe('Connect', () => {
     })
 
     beforeAll(() => {
-      connectTo.mockReset()
-      connectTo.mockImplementation(() => {
+      connect.mockReset()
+      connect.mockImplementation(() => {
         return Promise.reject(false)
       })
       fireEvent.click(getByText(/Click Fail/i))
@@ -67,8 +65,8 @@ describe('Connect', () => {
       expect(success).not.toHaveBeenCalled()
     })
 
-    it('calls connectTo with props provided', () => {
-      expect(connectTo).toHaveBeenCalledWith('dummy', 'my-setup', { authId: 'auth-id' })
+    it('calls connect with props provided', () => {
+      expect(connect).toHaveBeenCalledWith('dummy', 'my-setup', { authId: 'auth-id' })
     })
 
     it('calls onError', () => {

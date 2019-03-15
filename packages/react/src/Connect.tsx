@@ -33,8 +33,8 @@ class Connect extends React.Component<IConnectProps, { error?: any }> {
     return () => {
       this.setError(null)
       bearer
-        .connectTo(this.props.integration, this.props.setupId, { authId: this.props.authId })
-        .then(({ data }: { data: TAuthPayload }) => {
+        .connect(this.props.integration, this.props.setupId, { authId: this.props.authId })
+        .then((data: TAuthPayload) => {
           if (this.props.integration === data.integration) {
             this.props.onSuccess(data)
           }
