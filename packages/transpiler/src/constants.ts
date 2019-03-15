@@ -19,6 +19,7 @@ export enum Decorators {
   Listen = 'Listen',
   BearerState = 'BearerState',
   Function = 'Function',
+  BackendFunction = '_BackendFunction',
   SaveStateFunction = 'SaveStateFunction',
   statePropName = 'statePropName',
   Input = 'Input',

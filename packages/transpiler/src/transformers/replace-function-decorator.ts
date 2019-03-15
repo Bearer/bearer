@@ -127,7 +127,7 @@ export default function componentTransformer({  }: TransformerOptions = {}): ts.
         const call: ts.CallExpression = func.decorators[0].expression as ts.CallExpression
         return ts.createStatement(
           ts.createCall(
-            ts.createCall(ts.createIdentifier(Decorators.Function) as ts.Expression, undefined, call.arguments),
+            ts.createCall(ts.createIdentifier(Decorators.BackendFunction) as ts.Expression, undefined, call.arguments),
             undefined,
             [ts.createThis(), ts.createLiteral(getNodeName(func))]
           )

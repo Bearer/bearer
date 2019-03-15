@@ -155,7 +155,7 @@ Object {
 exports[`Transpiler integration test FullComponent.tsx match expectation 1`] = `
 Object {
   "file": "FullComponent.tsx",
-  "postContent": "import { BearerFetch, BearerRef, BearerState, Component, Function, FunctionType, Event, EventEmitter, scopedT, scopedP, State, Watch, Prop } from '@bearer/core';
+  "postContent": "import { BearerFetch, BearerRef, BearerState, Component, _BackendFunction, FunctionType, Event, EventEmitter, scopedT, scopedP, State, Watch, Prop } from '@bearer/core';
 type Panda = {
     fullPandaName: string;
 };
@@ -223,10 +223,10 @@ export class FullComponent {
         });
     };
     constructor() {
-        Function('ListRepositories')(this, \\"fetcher\\");
-        Function('getPullRequest', FunctionType.FetchData)(this, \\"fetchResource\\");
-        Function(\\"saveSetup\\")(this, \\"saveSetup\\");
-        Function(\\"retrieveSetup\\")(this, \\"fetcherRetrieveSetup\\");
+        _BackendFunction('ListRepositories')(this, \\"fetcher\\");
+        _BackendFunction('getPullRequest', FunctionType.FetchData)(this, \\"fetchResource\\");
+        _BackendFunction(\\"saveSetup\\")(this, \\"saveSetup\\");
+        _BackendFunction(\\"retrieveSetup\\")(this, \\"fetcherRetrieveSetup\\");
     }
     get INTEGRATION_ID() { return \\"SPONGE_BOB\\"; }
     @Prop({ \\"context\\": \\"bearer\\" })
@@ -419,7 +419,7 @@ Object {
 exports[`Transpiler integration test RootComponent.tsx match expectation 1`] = `
 Object {
   "file": "RootComponent.tsx",
-  "postContent": "import { BearerFetch, BearerState, Function, FunctionType, BearerRef, Event, EventEmitter, Component, Listen, State, Watch, Prop } from '@bearer/core';
+  "postContent": "import { BearerFetch, BearerState, _BackendFunction, FunctionType, BearerRef, Event, EventEmitter, Component, Listen, State, Watch, Prop } from '@bearer/core';
 type Farmer = {
     fullName: string;
 };
@@ -581,14 +581,14 @@ export class AttachPullRequestAction {
         });
     };
     constructor() {
-        Function('ListRepositories')(this, \\"fetcher\\");
-        Function('getPullRequest', FunctionType.FetchData)(this, \\"fetchResource\\");
-        Function(\\"retrieveFarmer\\")(this, \\"fetcherRetrieveFarmer\\");
-        Function(\\"retrieveGoat\\")(this, \\"fetcherRetrieveGoat\\");
-        Function(\\"saveFeedPanda\\")(this, \\"saveFeedPanda\\");
-        Function(\\"retrieveFeedPanda\\")(this, \\"fetcherRetrieveFeedPanda\\");
-        Function(\\"manualFunctionName\\")(this, \\"manualFunctionName\\");
-        Function(\\"retrieveShortPanda\\")(this, \\"fetcherRetrieveShortPanda\\");
+        _BackendFunction('ListRepositories')(this, \\"fetcher\\");
+        _BackendFunction('getPullRequest', FunctionType.FetchData)(this, \\"fetchResource\\");
+        _BackendFunction(\\"retrieveFarmer\\")(this, \\"fetcherRetrieveFarmer\\");
+        _BackendFunction(\\"retrieveGoat\\")(this, \\"fetcherRetrieveGoat\\");
+        _BackendFunction(\\"saveFeedPanda\\")(this, \\"saveFeedPanda\\");
+        _BackendFunction(\\"retrieveFeedPanda\\")(this, \\"fetcherRetrieveFeedPanda\\");
+        _BackendFunction(\\"manualFunctionName\\")(this, \\"manualFunctionName\\");
+        _BackendFunction(\\"retrieveShortPanda\\")(this, \\"fetcherRetrieveShortPanda\\");
     }
     get INTEGRATION_ID() { return \\"SPONGE_BOB\\"; }
     @Prop({ \\"context\\": \\"bearer\\" })
@@ -978,7 +978,7 @@ Object {
 exports[`Transpiler integration test invalidRootComponent.tsx match expectation 1`] = `
 Object {
   "file": "invalidRootComponent.tsx",
-  "postContent": "import { BearerFetch, BearerState, Function, FunctionType, Component, Prop, Watch, State } from '@bearer/core';
+  "postContent": "import { BearerFetch, BearerState, _BackendFunction, FunctionType, Component, Prop, Watch, State } from '@bearer/core';
 @Component({
     tag: \\"bearer-attach-pull-request\\",
     shadow: false
@@ -996,8 +996,8 @@ export class InvalidRootComponent {
         return <bearer-scrollable fetcher={this.fetcher}/>;
     }
     constructor() {
-        Function('ListRepositories')(this, \\"fetcher\\");
-        Function('getPullRequest', FunctionType.FetchData)(this, \\"fetchResource\\");
+        _BackendFunction('ListRepositories')(this, \\"fetcher\\");
+        _BackendFunction('getPullRequest', FunctionType.FetchData)(this, \\"fetchResource\\");
     }
     get INTEGRATION_ID() { return \\"SPONGE_BOB\\"; }
     @Prop({ \\"context\\": \\"bearer\\" })
@@ -1187,7 +1187,7 @@ Object {
 exports[`Transpiler integration test overrides-decorator.tsx match expectation 1`] = `
 Object {
   "file": "overrides-decorator.tsx",
-  "postContent": "import { Component, Function, BearerFetch, FunctionType, Prop } from '@bearer/core';
+  "postContent": "import { Component, _BackendFunction, BearerFetch, FunctionType, Prop } from '@bearer/core';
 @Component({
     tag: \\"bearer-overrides-decorator-full\\"
 })
@@ -1195,8 +1195,8 @@ class OverridesDecorarotFull {
     private fetcher: BearerFetch;
     private memberFetcher: BearerFetch;
     constructor() {
-        Function('collectionFunction')(this, \\"fetcher\\");
-        Function('collectionFunction', FunctionType.FetchData)(this, \\"memberFetcher\\");
+        _BackendFunction('collectionFunction')(this, \\"fetcher\\");
+        _BackendFunction('collectionFunction', FunctionType.FetchData)(this, \\"memberFetcher\\");
     }
     componentWillLoad() {
         console.log('componentWillLoad');

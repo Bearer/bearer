@@ -1,7 +1,7 @@
 import { BearerWindow } from '@bearer/types'
 
 import Bearer from './bearer'
-import { BearerFetch, Function } from './decorators/functions'
+import { BearerFetch, _BackendFunction } from './decorators/functions'
 
 declare const window: BearerWindow
 declare const global: { fetch: any }
@@ -24,7 +24,7 @@ describe('Function decorator', () => {
   })
 
   class FunctionDecorated {
-    @Function('getCollectionFunction')
+    @_BackendFunction('getCollectionFunction')
     getCollectionFunctionProp: BearerFetch
 
     get INTEGRATION_ID(): string {

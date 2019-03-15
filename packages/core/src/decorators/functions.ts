@@ -45,7 +45,7 @@ export const BearerStateSavedEvent = 'bearer:StateSaved'
 // or
 // @Function('functionNameResource', FunctionType.FetchData) propertyName: BearerFetch
 // tslint:disable-next-line:function-name
-export function Function(functionName: string, type: FunctionType = FunctionType.FetchData): IDecorator {
+export function _BackendFunction(functionName: string, type: FunctionType = FunctionType.FetchData): IDecorator {
   return function(target: BearerComponent, key: string): void {
     const getter = (): BearerFetch => {
       return function(this: BearerComponent, params = {}): Promise<TFetchBearerData> {
@@ -126,13 +126,6 @@ function defineFunctionProp(target: BearerComponent, key: string, getter: any): 
 /**
  * Custom Errors
  */
-
-class BearerMissingReferenceId extends Error {
-  message = `Attribute ${this.group}ReferenceId is missing. Cannot fetch data without any reference`
-  constructor(private readonly group: string = 'feature') {
-    super()
-  }
-}
 
 class BearerMissingIntegrationId extends Error {
   message = 'Integration ID is missing. Please add @RootComponent decorator above your class definition'
