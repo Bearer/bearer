@@ -74,7 +74,9 @@ export default class Bearer {
     const url = [this.config.integrationHost, path].join('')
     const queryParams = { ...query, clientId: this.clientId, secured: this.config.secured }
     const queryString = buildQuery(cleanOptions(queryParams))
+
     logger('json request: path %s', path)
+
     return fetch(`${url}?${queryString}`, {
       method: 'POST',
       body: JSON.stringify(params || {}),
