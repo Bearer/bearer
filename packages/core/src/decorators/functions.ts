@@ -55,44 +55,39 @@ export declare const Function: (functionName: string) => (target: any, key: stri
 // or
 // @Function('functionNameResource', FunctionType.FetchData) propertyName: BearerFetch
 // tslint:disable-next-line:function-name
-export function _BackendFunction(functionName: string, type: FunctionType = FunctionType.FetchData): IDecorator {
+export function _BackendFunction<T = any>(
+  functionName: string,
+  type: FunctionType = FunctionType.FetchData
+): IDecorator {
   return function(target: BearerComponent, key: string): void {
     const getter = (): BearerFetch => {
-      return function(this: BearerComponent, params = {}): Promise<TFetchBearerData> {
+      return function(this: BearerComponent, params = {}): Promise<TFetchBearerData<T>> {
         // NOTE: here we have to use target. Not sure why
         const integrationId = target.INTEGRATION_ID
         if (!integrationId) {
           return missingIntegrationId()
         }
-        return bearer.instance.functionFetch(integrationId, functionName, {
-          ...params,
-          query: {
-            setupId: retrieveSetupId,
-            referenceId: retrieveReferenceId(this)
-          }
-        })
+        return bearer.instance
+          .functionFetch<TFetchBearerResult<T>>(integrationId, functionName, {
+            ...params,
+            query: {
+              setupId: retrieveSetupId,
+              referenceId: retrieveReferenceId(this)
+            }
+          })
+          .then(response => {
+            const { data: payload } = response
+            if (payload.error) {
+              throw { error: payload.error }
+            }
+            const { data, meta: { referenceId } = { referenceId: null } } = payload
+            return { data, referenceId }
+          })
       }
     }
 
     defineFunctionProp(target, key, getter)
   }
-}
-
-export function functionPromise(promise: Promise<TFetchBearerResult>): Promise<TFetchBearerData> {
-  return new Promise((resolve, reject) => {
-    promise
-      .then((payload: TFetchBearerResult) => {
-        if (payload.error) {
-          reject({ error: payload.error })
-        } else {
-          const { data, meta: { referenceId } = { referenceId: null } } = payload
-          resolve({ data, referenceId })
-        }
-      })
-      .catch(error => {
-        reject({ error })
-      })
-  })
 }
 
 /**
