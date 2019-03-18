@@ -1,5 +1,3 @@
-import bearer from '@bearer/js'
-
 /**
  * Declarations
  */
