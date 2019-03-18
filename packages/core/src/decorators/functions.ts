@@ -67,21 +67,17 @@ export function _BackendFunction<T = any>(
         if (!integrationId) {
           return missingIntegrationId()
         }
+
         return bearer.instance
-          .functionFetch<TFetchBearerResult<T>>(integrationId, functionName, {
+          .functionFetch<T>(integrationId, functionName, {
             ...params,
             query: {
-              setupId: retrieveSetupId,
+              setupId: retrieveSetupId(this),
               referenceId: retrieveReferenceId(this)
             }
           })
-          .then(response => {
-            const { data: payload } = response
-            if (payload.error) {
-              throw { error: payload.error }
-            }
-            const { data, meta: { referenceId } = { referenceId: null } } = payload
-            return { data, referenceId }
+          .catch(error => {
+            throw error
           })
       }
     }

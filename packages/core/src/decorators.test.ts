@@ -1,26 +1,15 @@
-import { BearerWindow } from '@bearer/types'
-
-import Bearer from './bearer'
+import bearer from '@bearer/js'
 import { BearerFetch, _BackendFunction } from './decorators/functions'
 
-declare const window: BearerWindow
 declare const global: { fetch: any }
 
 const INTEGRATION_ID = '1234'
-const commonParams = {
-  body: '{}',
-  method: 'POST',
-  credentials: 'include',
-  headers: {
-    'content-type': 'application/json',
-    'user-agent': 'Bearer'
-  }
-}
 
 describe('Function decorator', () => {
   beforeAll(() => {
-    Bearer.init({ integrationHost: process.env.API_HOST })
-    Bearer.instance.allowIntegrationRequests(true)
+    bearer('client-id', { integrationHost: 'HOST' })
+    // @ts-ignore
+    window.bearer = bearer
   })
 
   class FunctionDecorated {
@@ -37,6 +26,7 @@ describe('Function decorator', () => {
   }
 
   const decoratedInstance: any = new FunctionDecorated()
+
   describe('FetchData', () => {
     const collection = [{ id: 42 }]
 
@@ -55,16 +45,17 @@ describe('Function decorator', () => {
 
     it('uses FetchData', async () => {
       const success = jest.fn()
-      window.bearer = { clientId: '42', load: jest.fn() }
 
-      await decoratedInstance
-        .getCollectionFunctionProp({ page: 1 })
-        .then(success)
-        .catch(a => console.log(a))
+      await decoratedInstance.getCollectionFunctionProp({ page: 1 }).then(success)
 
       expect(global.fetch).toBeCalledWith(
-        'https://localhost:5555/api/v3/functions/1234/getCollectionFunction?page=1&setupId=setup-id-from-props&clientId=42',
-        commonParams
+        'HOST/api/v3/functions/1234/getCollectionFunction?setupId=setup-id-from-props&clientId=client-id',
+        {
+          body: '{"page":1}',
+          credentials: 'include',
+          headers: { 'content-type': 'application/json' },
+          method: 'POST'
+        }
       )
 
       expect(success).toBeCalledWith({ data: collection, referenceId: null })
@@ -72,19 +63,41 @@ describe('Function decorator', () => {
 
     it('allows custom setupId', async () => {
       const success = jest.fn()
-      window.bearer = { clientId: '42', load: jest.fn() }
 
-      await decoratedInstance
-        .getCollectionFunctionProp({ page: 1, setupId: 'custom-setupId' })
-        .then(success)
-        .catch(a => console.log(a))
+      await decoratedInstance.getCollectionFunctionProp({ page: 1, setupId: 'custom-setupId' }).then(success)
 
       expect(global.fetch).toBeCalledWith(
-        'https://localhost:5555/api/v3/functions/1234/getCollectionFunction?page=1&setupId=custom-setupId&clientId=42',
-        commonParams
+        'HOST/api/v3/functions/1234/getCollectionFunction?setupId=setup-id-from-props&clientId=client-id',
+        {
+          body: '{"page":1,"setupId":"custom-setupId"}',
+          credentials: 'include',
+          headers: { 'content-type': 'application/json' },
+          method: 'POST'
+        }
       )
 
       expect(success).toBeCalledWith({ data: collection, referenceId: null })
+    })
+  })
+
+  describe('when error returned', () => {
+    it('pass through catch', async () => {
+      const error = jest.fn()
+      global.fetch.resetMocks()
+      global.fetch.mockResponseOnce(JSON.stringify({ error: 'error from api' }))
+      await decoratedInstance.getCollectionFunctionProp({ page: 1 }).catch(error)
+
+      expect(global.fetch).toBeCalledWith(
+        'HOST/api/v3/functions/1234/getCollectionFunction?setupId=setup-id-from-props&clientId=client-id',
+        {
+          body: '{"page":1}',
+          credentials: 'include',
+          headers: { 'content-type': 'application/json' },
+          method: 'POST'
+        }
+      )
+
+      expect(error).toBeCalledWith({ error: { error: 'error from api' } })
     })
   })
 })

@@ -17,8 +17,8 @@
     "start": "yarn clean && yarn build -w",
     "prepare": "yarn clean && yarn build",
     "prepack": "NODE_ENV=production yarn build",
-    "test": "jest",
-    "test:ci": "jest --coverage --runInBand"
+    "test": "jest --colors",
+    "test:ci": "jest --coverage --runInBand --colors"
   },
   "dependencies": {
     "@bearer/logger": "^0.101.0",
