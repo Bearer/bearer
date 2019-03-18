@@ -40,6 +40,18 @@ export const BearerStateSavedEvent = 'bearer:StateSaved'
  * Function
  */
 
+/**
+ * Links a functions to your component
+ * @param {string} functionName - The name of the function you want to use (located in functions folder).
+ *
+ * example:
+ * @Function('functionName') propertyName: BearerFetch
+ * componentDidLoad() {
+ *  this.propertyName().then(console.log).catch(console.erro)
+ * }
+ */
+export declare const Function: (functionName: string) => (target: any, key: string) => void
+
 // Usage
 // @Function('functionName') propertyName: BearerFetch
 // or
