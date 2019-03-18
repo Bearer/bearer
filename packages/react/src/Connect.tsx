@@ -13,7 +13,6 @@ export interface IConnectProps {
   render: (props: { loading: boolean; connect: () => void; error: any }) => JSX.Element
 }
 
-// TODO: add tests
 class Connect extends React.Component<IConnectProps, { error?: any }> {
   static contextType = BearerContext
   context!: React.ContextType<typeof BearerContext>

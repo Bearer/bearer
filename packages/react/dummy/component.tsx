@@ -7,8 +7,40 @@ const integrationId = process.env.REACT_INTEGRATION_ID
 const setupId = '939407c0-473d-11e9-a595-499c863fdcda'
 const clientId = process.env.REACT_CLIENT_ID
 
-const { Fetcher, FetcherFactory, Connect } = Factory(integrationId)
-const InvoiceList = FetcherFactory('InvoiceList')
+const { Connect, withFetch } = Factory(integrationId)
+
+const Fetcher = withFetch<string[]>('MyDataPlease')(props => {
+  if (props.loading) {
+    return <div>Loading</div>
+  }
+
+  if (props.error) {
+    return <div>{JSON.stringify(props.error.error)}</div>
+  }
+
+  if (props.data) {
+    return (
+      <div>
+        {props.data.map(d => (
+          <li key={d}>{d}</li>
+        ))}
+      </div>
+    )
+  }
+  return (
+    <div>
+      Coucou: {props.functionName}
+      <br />
+      <button
+        onClick={() => {
+          props.fetch({ page: 1 })
+        }}
+      >
+        Load
+      </button>
+    </div>
+  )
+})
 
 export default class ComponentClass extends React.Component<{}, { clientId: string }> {
   constructor(props) {
@@ -28,8 +60,13 @@ export default class ComponentClass extends React.Component<{}, { clientId: stri
   render() {
     const Setup = `bearer-${integrationId}-setup-action`
     const SetupDisplay = `bearer-${integrationId}-setup-display`
+
     return (
-      <BearerProvider clientId={this.state.clientId} integrationHost="https://int.staging.bearer.sh">
+      <BearerProvider
+        clientId={this.state.clientId}
+        domObserver={false}
+        // integrationHost="https://int.staging.bearer.sh"
+      >
         <div>
           <h2>Connect:</h2>
           <Setup />
@@ -51,9 +88,7 @@ export default class ComponentClass extends React.Component<{}, { clientId: stri
           <h2>Fetcher:</h2>
           <Fetcher />
         </div>
-        <div>
-          <h2>InvoiceList:</h2> <InvoiceList />
-        </div>
+        <div />
       </BearerProvider>
     )
   }

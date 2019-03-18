@@ -5,6 +5,7 @@ import bearer, { BearerInstance } from '@bearer/js'
 // TODO: add JSDoc
 interface IBearerProviderProps {
   clientId: string
+  domObserver?: boolean
   integrationHost?: string
   initialContext?: any
   onUpdate?(currentState: any): void
@@ -74,7 +75,7 @@ export default class BearerProvider extends React.Component<IBearerProviderProps
   }
 
   private initBearerFromProps(props: IBearerProviderProps) {
-    const { integrationHost } = props
-    return bearer(props.clientId, { integrationHost })
+    const { integrationHost, domObserver } = props
+    return bearer(props.clientId, { integrationHost, domObserver })
   }
 }
