@@ -81,10 +81,14 @@ describe('Function decorator', () => {
   })
 
   describe('when error returned', () => {
-    it('pass through catch', async () => {
-      const error = jest.fn()
+    beforeAll(() => {
       global.fetch.resetMocks()
       global.fetch.mockResponseOnce(JSON.stringify({ error: 'error from api' }))
+    })
+
+    it('pass through catch', async () => {
+      const error = jest.fn()
+
       await decoratedInstance.getCollectionFunctionProp({ page: 1 }).catch(error)
 
       expect(global.fetch).toBeCalledWith(
