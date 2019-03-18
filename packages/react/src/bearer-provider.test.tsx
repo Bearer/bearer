@@ -15,6 +15,7 @@ describe('BearerProvider', () => {
   it('renders basic provider tag', () => {
     const renderer = ShallowRenderer.createRenderer()
     const tree = renderer.render(<BearerProvider clientId={clientId} />)
+    // TODO: move to matchObject at some point
     expect(tree).toMatchSnapshot()
   })
 
@@ -23,6 +24,7 @@ describe('BearerProvider', () => {
     const tree = renderer.render(
       <BearerProvider clientId={clientId} integrationHost="https://integrations.bearer.sh/" />
     )
+    // TODO: move to matchObject at some point
     expect(tree).toMatchSnapshot()
   })
 
@@ -32,6 +34,7 @@ describe('BearerProvider', () => {
         <DummyContextConsumer />
       </BearerProvider>
     )
+    // TODO: move to matchObject at some point
     expect(testRender.toJSON()).toMatchSnapshot()
   })
 
