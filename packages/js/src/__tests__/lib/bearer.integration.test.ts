@@ -1,10 +1,3 @@
-import fetch from 'jest-fetch-mock'
-
-// @ts-ignore
-const customGlobal: any = global
-customGlobal.fetch = fetch
-customGlobal.fetchMock = customGlobal.fetch
-
 import Bearer from '../../lib/bearer'
 
 // must be run within its own file

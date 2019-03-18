@@ -54,10 +54,14 @@ describe('main', () => {
   })
 
   describe('fetch request', () => {
-    it('returns payload if success')
+    it.skip('returns payload if success', () => {
+      expect(false).toBeTruthy()
+    })
   })
   describe('function request', () => {
-    it('returns payload if success')
+    it.skip('returns payload if success', () => {
+      expect(false).toBeTruthy()
+    })
   })
 })
 

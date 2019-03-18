@@ -1,4 +1,6 @@
 module.exports = {
+  automock: false,
   preset: 'ts-jest',
-  testEnvironment: 'jsdom'
+  testEnvironment: 'jsdom',
+  setupFiles: ['./setupJest.ts']
 }
