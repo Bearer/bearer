@@ -182,16 +182,6 @@ declare global {
       'toggle': (newValue: boolean) => void;
     }
 
-    interface BearerConfigDisplay {
-      'integrationId': string;
-    }
-
-    interface BearerConfig {
-      'fields': any[] | string;
-      'integrationId': string;
-      'referenceId': string;
-    }
-
     interface BearerDropdownButton {
       'backNav': boolean;
       'btnProps': JSXElements.BearerButtonAttributes;
@@ -414,22 +404,6 @@ declare global {
     };
     
 
-    interface HTMLBearerConfigDisplayElement extends StencilComponents.BearerConfigDisplay, HTMLStencilElement {}
-
-    var HTMLBearerConfigDisplayElement: {
-      prototype: HTMLBearerConfigDisplayElement;
-      new (): HTMLBearerConfigDisplayElement;
-    };
-    
-
-    interface HTMLBearerConfigElement extends StencilComponents.BearerConfig, HTMLStencilElement {}
-
-    var HTMLBearerConfigElement: {
-      prototype: HTMLBearerConfigElement;
-      new (): HTMLBearerConfigElement;
-    };
-    
-
     interface HTMLBearerDropdownButtonElement extends StencilComponents.BearerDropdownButton, HTMLStencilElement {}
 
     var HTMLBearerDropdownButtonElement: {
@@ -552,8 +526,6 @@ declare global {
     'bearer-typography': JSXElements.BearerTypographyAttributes;
     'auth-config': JSXElements.AuthConfigAttributes;
     'bearer-button-popover': JSXElements.BearerButtonPopoverAttributes;
-    'bearer-config-display': JSXElements.BearerConfigDisplayAttributes;
-    'bearer-config': JSXElements.BearerConfigAttributes;
     'bearer-dropdown-button': JSXElements.BearerDropdownButtonAttributes;
     'bearer-i18n': JSXElements.BearerI18nAttributes;
     'bearer-navigator-auth-screen': JSXElements.BearerNavigatorAuthScreenAttributes;
@@ -698,17 +670,6 @@ declare global {
       'opened'?: boolean;
     }
 
-    export interface BearerConfigDisplayAttributes extends HTMLAttributes {
-      'integrationId'?: string;
-    }
-
-    export interface BearerConfigAttributes extends HTMLAttributes {
-      'fields'?: any[] | string;
-      'integrationId'?: string;
-      'onStepCompleted'?: (event: CustomEvent) => void;
-      'referenceId'?: string;
-    }
-
     export interface BearerDropdownButtonAttributes extends HTMLAttributes {
       'backNav'?: boolean;
       'btnProps'?: JSXElements.BearerButtonAttributes;
@@ -828,8 +789,6 @@ declare global {
     'bearer-typography': HTMLBearerTypographyElement
     'auth-config': HTMLAuthConfigElement
     'bearer-button-popover': HTMLBearerButtonPopoverElement
-    'bearer-config-display': HTMLBearerConfigDisplayElement
-    'bearer-config': HTMLBearerConfigElement
     'bearer-dropdown-button': HTMLBearerDropdownButtonElement
     'bearer-i18n': HTMLBearerI18nElement
     'bearer-navigator-auth-screen': HTMLBearerNavigatorAuthScreenElement
@@ -861,8 +820,6 @@ declare global {
     'bearer-typography': HTMLBearerTypographyElement;
     'auth-config': HTMLAuthConfigElement;
     'bearer-button-popover': HTMLBearerButtonPopoverElement;
-    'bearer-config-display': HTMLBearerConfigDisplayElement;
-    'bearer-config': HTMLBearerConfigElement;
     'bearer-dropdown-button': HTMLBearerDropdownButtonElement;
     'bearer-i18n': HTMLBearerI18nElement;
     'bearer-navigator-auth-screen': HTMLBearerNavigatorAuthScreenElement;
