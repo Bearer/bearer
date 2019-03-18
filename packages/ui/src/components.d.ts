@@ -167,10 +167,6 @@ declare global {
     | 'display-4';
     }
 
-    interface AuthConfig {
-
-    }
-
     interface BearerButtonPopover {
       'aligned': TAlignement;
       'backNav': boolean;
@@ -388,14 +384,6 @@ declare global {
     };
     
 
-    interface HTMLAuthConfigElement extends StencilComponents.AuthConfig, HTMLStencilElement {}
-
-    var HTMLAuthConfigElement: {
-      prototype: HTMLAuthConfigElement;
-      new (): HTMLAuthConfigElement;
-    };
-    
-
     interface HTMLBearerButtonPopoverElement extends StencilComponents.BearerButtonPopover, HTMLStencilElement {}
 
     var HTMLBearerButtonPopoverElement: {
@@ -524,7 +512,6 @@ declare global {
     'bearer-textarea': JSXElements.BearerTextareaAttributes;
     'bearer-loading': JSXElements.BearerLoadingAttributes;
     'bearer-typography': JSXElements.BearerTypographyAttributes;
-    'auth-config': JSXElements.AuthConfigAttributes;
     'bearer-button-popover': JSXElements.BearerButtonPopoverAttributes;
     'bearer-dropdown-button': JSXElements.BearerDropdownButtonAttributes;
     'bearer-i18n': JSXElements.BearerI18nAttributes;
@@ -655,10 +642,6 @@ declare global {
     | 'display-4';
     }
 
-    export interface AuthConfigAttributes extends HTMLAttributes {
-      'onSubmit'?: (event: CustomEvent) => void;
-    }
-
     export interface BearerButtonPopoverAttributes extends HTMLAttributes {
       'aligned'?: TAlignement;
       'backNav'?: boolean;
@@ -787,7 +770,6 @@ declare global {
     'bearer-textarea': HTMLBearerTextareaElement
     'bearer-loading': HTMLBearerLoadingElement
     'bearer-typography': HTMLBearerTypographyElement
-    'auth-config': HTMLAuthConfigElement
     'bearer-button-popover': HTMLBearerButtonPopoverElement
     'bearer-dropdown-button': HTMLBearerDropdownButtonElement
     'bearer-i18n': HTMLBearerI18nElement
@@ -818,7 +800,6 @@ declare global {
     'bearer-textarea': HTMLBearerTextareaElement;
     'bearer-loading': HTMLBearerLoadingElement;
     'bearer-typography': HTMLBearerTypographyElement;
-    'auth-config': HTMLAuthConfigElement;
     'bearer-button-popover': HTMLBearerButtonPopoverElement;
     'bearer-dropdown-button': HTMLBearerDropdownButtonElement;
     'bearer-i18n': HTMLBearerI18nElement;
