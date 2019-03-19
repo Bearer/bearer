@@ -15,13 +15,13 @@ export interface IState<TReturnedData> {
   error?: any
 }
 
-export const withFunctionFetch = function<TReturnedData, TP extends object = {}>(
+export const withFunctionCall = function<TReturnedData, TP extends object = {}>(
   integrationId: string,
   functionName: string
 ) {
   return (WrappedComponent: React.ComponentType<TP & WithFetchProps<TReturnedData>>) =>
     class FetcherComponent extends React.Component<TP, IState<TReturnedData>> {
-      static displayName = `WithFunctionFetch(${functionName})(${getDisplayName(WrappedComponent)})`
+      static displayName = `withFunctionCall(${functionName})(${getDisplayName(WrappedComponent)})`
       static contextType = BearerContext
       context!: React.ContextType<typeof BearerContext>
 

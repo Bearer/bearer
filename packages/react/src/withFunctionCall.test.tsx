@@ -2,7 +2,7 @@ import React, { createContext } from 'react'
 import * as Renderer from 'react-test-renderer'
 import * as ShallowRenderer from 'react-test-renderer/shallow'
 import { BearerContext } from './bearer-provider'
-import { withFunctionFetch } from './withFunctionFetch'
+import { withFunctionCall } from './withFunctionCall'
 
 interface TProps {
   loading: boolean
@@ -34,15 +34,15 @@ class DummyWithFetchDataComponent extends React.Component<TProps> {
   }
 }
 
-describe('withFunctionFetch', () => {
+describe('withFunctionCall', () => {
   it('exports a function', () => {
-    expect(withFunctionFetch).toBeInstanceOf(Function)
-    expect(withFunctionFetch).toHaveLength(2)
+    expect(withFunctionCall).toBeInstanceOf(Function)
+    expect(withFunctionCall).toHaveLength(2)
   })
 
   describe('Wrapped Component', () => {
     const renderer = ShallowRenderer.createRenderer()
-    const WithFetch = withFunctionFetch<{ title: string }, { sommething: string }>('integrationName', 'GimmeData')(
+    const WithFetch = withFunctionCall<{ title: string }, { sommething: string }>('integrationName', 'GimmeData')(
       DummyWithFetchDataComponent
     )
 
@@ -53,12 +53,12 @@ describe('withFunctionFetch', () => {
     })
 
     it('sets the display name', () => {
-      expect(WithFetch.displayName).toEqual('WithFunctionFetch(GimmeData)(DummyWithFetchDataComponent)')
+      expect(WithFetch.displayName).toEqual('withFunctionCall(GimmeData)(DummyWithFetchDataComponent)')
     })
   })
 
   describe('fetch behaviours', () => {
-    const WithFetch = withFunctionFetch<{ title: string }, any>('integrationName', 'GimmeData')(
+    const WithFetch = withFunctionCall<{ title: string }, any>('integrationName', 'GimmeData')(
       DummyWithFetchDataComponent
     )
 

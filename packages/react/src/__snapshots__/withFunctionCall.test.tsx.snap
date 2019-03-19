@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`withFunctionCall Wrapped Component renders the wrapped component adn forward props 1`] = `
+<DummyWithFetchDataComponent
+  fetch={[Function]}
+  loading={false}
+  sommething="ok"
+/>
+`;
+
+exports[`withFunctionCall fetch behaviours forwards data when failure 1`] = `
+<div>
+  Error: 
+  data error
+</div>
+`;
+
+exports[`withFunctionCall fetch behaviours forwards data when success 1`] = `
+<div>
+  Some data passed: 
+  Sponge bob is alive
+</div>
+`;
+
+exports[`withFunctionCall fetch behaviours forwards loading on fetch 1`] = `
+<div>
+  Loading
+</div>
+`;
