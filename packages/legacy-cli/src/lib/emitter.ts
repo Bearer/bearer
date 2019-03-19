@@ -9,7 +9,7 @@ class Emitter {
   }
 
   emit(name, args) {
-    if (process.env.BEARER_DEBUG === '*') {
+    if (/bearer:/.test(process.env.DEBUG || '')) {
       term.white('Bearer event: ')
       term.yellow(name)
       term(' ')

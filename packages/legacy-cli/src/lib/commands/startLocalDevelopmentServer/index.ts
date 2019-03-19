@@ -99,9 +99,11 @@ export default function startLocalDevelopmentServer(
 
       server.listen(port, () => {
         emitter.emit('start:localServer:start', { port })
-        emitter.emit('start:localServer:endpoints', {
-          endpoints: [...storage.stack, ...auth.stack, ...router.stack]
-        })
+        if (/bearer:/.test(process.env.DEBUG || '')) {
+          emitter.emit('start:localServer:endpoints', {
+            endpoints: [...storage.stack, ...auth.stack, ...router.stack]
+          })
+        }
       })
 
       resolve(bearerBaseURL)

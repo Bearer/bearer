@@ -12,7 +12,7 @@ const db = knex({
     filename
   },
   useNullAsDefault: true,
-  debug: process.env.BEARER_DEBUG === '*'
+  debug: /bearer:/.test(process.env.DEBUG || '')
 })
 
 export async function getRows(referenceId) {
