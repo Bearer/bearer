@@ -4,7 +4,7 @@
 
 **Creating a FetchData function**
 
-```
+```ts
 import { FetchData, TOAUTH2AuthContext } from '@bearer/functions'
 import Client from './client'
 
@@ -30,12 +30,13 @@ export type ReturnedData = {
 
 **Creating a SaveData function**
 
-```
+```ts
 import { TOAUTH2AuthContext, SaveState, TSaveActionEvent, TSavePromise } from '@bearer/functions'
 // Uncomment this line if you need to use Client
 // import Client from './client'
 
-export default class SaveStateFunctionName extends SaveState implements SaveState<State, ReturnedData, any, TOAUTH2AuthContext> {
+export default class SaveStateFunctionName extends SaveState
+  implements SaveState<State, ReturnedData, any, TOAUTH2AuthContext> {
   // Uncomment the line above if you don't want your function to be called from the frontend
   // static backendOnly = true
 
@@ -60,5 +61,4 @@ export type State = {
 export type ReturnedData = {
   // foo: string[]
 }
-
 ```
