@@ -61,6 +61,7 @@ export const withFunctionCall = function<TReturnedData, TP extends object = {}>(
     }
 }
 
+// TODO: add typing
 function getDisplayName(WrappedComponent: any) {
   return WrappedComponent.displayName || WrappedComponent.name || 'Component'
 }
