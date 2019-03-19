@@ -31,11 +31,11 @@ const previewRootComponentTags = (components: SpecComponent[], rootComponents: R
     const { initialTagName, label } = component
     const input = component.input
     const output = component.output
-    const { finalTagName, name: group } = rootComponents.find(({ initialTagName: tag }) => tag === initialTagName) || {
+    const { finalTagName, name } = rootComponents.find(({ initialTagName: tag }) => tag === initialTagName) || {
       finalTagName: null,
       name: null
     }
-    return { finalTagName, group, label, input, output }
+    return { finalTagName, name, label, input, output }
   })
 
 const stringifyManifest: (manifest: any, srcDir: string) => string = (manifest, srcDir) => {
