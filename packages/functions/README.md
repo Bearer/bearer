@@ -8,53 +8,57 @@
 import { FetchData, TOAUTH2AuthContext } from '@bearer/functions'
 import Client from './client'
 
-export default class ListPullRequestsFunction {
-  static functionName: string = 'listPullRequests'
-  static functionType: any = FetchData
+export default class FunctionName extends FetchData implements FetchData<ReturnedData, any, TOAUTH2AuthContext> {
+  // Uncomment the line above if you don't want your function to be called from the frontend
+  // static backendOnly = true
 
-  static async action({ context, params }: { context: TOAUTH2AuthContext; params: any }) {
-    try {
-      const { data } = await Client(context.authAccess.accessToken).get(`/repos/${params.fullName}/pulls`, {
-        params: { per_page: 10, ...params }
-      })
-      return { data }
-    } catch (error) {
-      return { error: error.toString() }
-    }
+  async action(event: TFetchActionEvent<Params, TOAUTH2AuthContext>): TFetchPromise<ReturnedData> {
+    // const token = event.context.authAccess.accessToken
+    // Put your logic here
+    return { data: [] }
   }
 }
 
+export type Params = {
+  // name: string
+}
+
+export type ReturnedData = {
+  // foo: string[]
+}
 ```
 
 **Creating a SaveData function**
 
 ```
-import { SaveState, TOAUTH2AuthContext } from '@bearer/functions'
-import Client from './client'
+import { TOAUTH2AuthContext, SaveState, TSaveActionEvent, TSavePromise } from '@bearer/functions'
+// Uncomment this line if you need to use Client
+// import Client from './client'
 
-export type TState = {
-  pullRequests: any
-}
+export default class SaveStateFunctionName extends SaveState implements SaveState<State, ReturnedData, any, TOAUTH2AuthContext> {
+  // Uncomment the line above if you don't want your function to be called from the frontend
+  // static backendOnly = true
 
-export type TParams = {
-  fullName: string,
-  page?: number
-}
-
-export default class ListPullRequestsFunction {
-  static functionName: string = 'listPullRequests'
-  static functionType: any = SaveState
-
-  static async action({ context, params, state }: { context: TOAUTH2AuthContext; params: TParams, state: TState }) {
-    try {
-      const { data } = await Client(context.authAccess.accessToken).get(`/repos/${params.fullName}/pulls`, {
-        params: { per_page: 10, ...params }
-      })
-      return { data, state: { pullRequests: data } }
-    } catch (error) {
-      return { error: error.toString() }
-    }
+  async action(event: TSaveActionEvent<State, Params, TOAUTH2AuthContext>): TSavePromise<State, ReturnedData> {
+    // const token = event.context.authAccess.accessToken
+    // Put your logic here
+    return { state: [], data: [] }
   }
+}
+
+/**
+ * Typing
+ */
+export type Params = {
+  // name: string
+}
+
+export type State = {
+  // foo: string[]
+}
+
+export type ReturnedData = {
+  // foo: string[]
 }
 
 ```
