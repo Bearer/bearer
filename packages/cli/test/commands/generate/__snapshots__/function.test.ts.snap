@@ -11,6 +11,10 @@ export default class FetchDataFunctionFunction extends FetchData implements Fetc
     // Put your logic here
     return { data: [] }
   }
+
+  // Uncomment the line above if you don't want your function to be called from the frontend
+  // static backendOnly = true
+  
 }
 
 /**
@@ -37,6 +41,10 @@ export default class SaveFunctionFunction extends SaveState implements SaveState
     // Put your logic here
     return { state: [], data: [] }
   }
+
+  // Uncomment the line above if you don't want your function to be called from the frontend
+  // static backendOnly = true
+  
 }
 
 /**
@@ -67,6 +75,10 @@ export default class FetchDataFunctionFunction extends FetchData implements Fetc
     // Put your logic here
     return { data: [] }
   }
+
+  // Uncomment the line above if you don't want your function to be called from the frontend
+  // static backendOnly = true
+  
 }
 
 /**
@@ -93,6 +105,10 @@ export default class SaveFunctionFunction extends SaveState implements SaveState
     // Put your logic here
     return { state: [], data: [] }
   }
+
+  // Uncomment the line above if you don't want your function to be called from the frontend
+  // static backendOnly = true
+  
 }
 
 /**
@@ -122,6 +138,10 @@ export default class FetchDataFunctionFunction extends FetchData implements Fetc
     // Put your logic here
     return { data: [] }
   }
+
+  // Uncomment the line above if you don't want your function to be called from the frontend
+  // static backendOnly = true
+  
 }
 
 /**
@@ -147,6 +167,10 @@ export default class SaveFunctionFunction extends SaveState implements SaveState
     // Put your logic here
     return { state: [], data: [] }
   }
+
+  // Uncomment the line above if you don't want your function to be called from the frontend
+  // static backendOnly = true
+  
 }
 
 /**
@@ -177,6 +201,10 @@ export default class FetchDataFunctionFunction extends FetchData implements Fetc
     // Put your logic here
     return { data: [] }
   }
+
+  // Uncomment the line above if you don't want your function to be called from the frontend
+  // static backendOnly = true
+  
 }
 
 /**
@@ -202,6 +230,10 @@ export default class SaveFunctionFunction extends SaveState implements SaveState
     // Put your logic here
     return { state: [], data: [] }
   }
+
+  // Uncomment the line above if you don't want your function to be called from the frontend
+  // static backendOnly = true
+  
 }
 
 /**
@@ -232,6 +264,10 @@ export default class FetchDataFunctionFunction extends FetchData implements Fetc
     // Put your logic here
     return { data: [] }
   }
+
+  // Uncomment the line above if you don't want your function to be called from the frontend
+  // static backendOnly = true
+  
 }
 
 /**
@@ -258,6 +294,10 @@ export default class SaveFunctionFunction extends SaveState implements SaveState
     // Put your logic here
     return { state: [], data: [] }
   }
+
+  // Uncomment the line above if you don't want your function to be called from the frontend
+  // static backendOnly = true
+  
 }
 
 /**

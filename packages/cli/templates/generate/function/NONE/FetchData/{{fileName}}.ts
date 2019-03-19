@@ -7,6 +7,10 @@ export default class {{functionClassName}}Function extends FetchData implements 
     // Put your logic here
     return { data: [] }
   }
+
+  // Uncomment the line above if you don't want your function to be called from the frontend
+  // static backendOnly = true
+  
 }
 
 /**

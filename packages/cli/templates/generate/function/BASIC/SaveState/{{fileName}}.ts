@@ -8,6 +8,10 @@ export default class {{functionClassName}}Function extends SaveState implements 
     // Put your logic here
     return { state: [], data: [] }
   }
+
+  // Uncomment the line above if you don't want your function to be called from the frontend
+  // static backendOnly = true
+  
 }
 
 /**
