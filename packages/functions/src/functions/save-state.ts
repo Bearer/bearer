@@ -5,7 +5,7 @@ import https from 'https'
 
 import * as d from '../declaration'
 import { DBClient as CLIENT } from '../db-client'
-import { eventAsActionParams } from './utils'
+import { eventAsActionParams, BACKEND_ONLY_ERROR } from './utils'
 import { captureHttps } from '@bearer/x-ray'
 
 const logger = debug('functions:fetch-state')
@@ -29,12 +29,7 @@ export abstract class SaveState<State = any, ReturnedData = any, Error = any, Au
 
     return async (event: d.TLambdaEvent) => {
       if (requiresBackend && !event.context.isBackend) {
-        return {
-          error: {
-            code: 'UNAUTHORIZED_FUNCTION_CALL',
-            message: "This function can't be called"
-          }
-        }
+        return { error: BACKEND_ONLY_ERROR }
       }
       captureHttps(http, event)
       captureHttps(https, event)

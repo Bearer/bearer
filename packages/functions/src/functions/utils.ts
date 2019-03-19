@@ -38,3 +38,8 @@ function paramsFromEvent(event: d.TLambdaEvent) {
     ...bodyFromEvent(event)
   }
 }
+
+export const BACKEND_ONLY_ERROR = {
+  code: 'UNAUTHORIZED_FUNCTION_CALL',
+  message: "This function can't be called"
+}
