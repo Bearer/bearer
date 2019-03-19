@@ -66,7 +66,7 @@ export type TFetchAction<ReturnedData = any> = (event: any) => TFetchPromise<Ret
 export type TFetchPromise<ReturnedData, ReturnedError = any> = Promise<TFetchPayload<ReturnedData, ReturnedError>>
 
 export type TFetchActionEvent<Params = any, AuthContext = TAuthContext, DataContext = {}> = {
-  context: TBearerLambdaContext<AuthContext, DataContext>
+  context: TBearerLambdaContext<AuthContext, DataContext> & { isBackend: boolean }
   params: Params
 }
 

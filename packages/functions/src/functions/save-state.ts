@@ -7,6 +7,10 @@ import { eventAsActionParams } from './utils'
 
 const logger = debug('functions:fetch-state')
 
+interface SaveStateImplementation<T extends SaveState> {
+  new (): T
+}
+
 export abstract class SaveState<State = any, ReturnedData = any, Error = any, AuthContext = any> {
   // expected implementation
   abstract async action(
@@ -14,11 +18,22 @@ export abstract class SaveState<State = any, ReturnedData = any, Error = any, Au
   ): Promise<d.TSaveStatePayload<State, ReturnedData, Error>>
 
   // Internal
-  static call(action: d.TSaveStateAction) {
+  static call(aPrototype: SaveStateImplementation<any>) {
+    const action = new aPrototype.prototype.constructor().action as d.TSaveStateAction
+    const requiresBackend = (aPrototype as any).backendOnly
     // tslint:disable-next-line:variable-name
     const DBClient = CLIENT.instance
 
     return async (event: d.TLambdaEvent) => {
+      if (requiresBackend && !event.context.isBackend) {
+        return {
+          error: {
+            code: 'UNAUTHORIZED_FUNCTION_CALL',
+            message: "This function can't be called"
+          }
+        }
+      }
+
       const providedReferenceId = event.queryStringParameters.referenceId
       const dbClient = DBClient(event.context.signature)
 
@@ -45,7 +60,7 @@ export abstract class SaveState<State = any, ReturnedData = any, Error = any, Au
   }
 
   static init() {
-    return SaveState.call(new (this.prototype.constructor as any)().action)
+    return SaveState.call(this as any)
   }
 }
 

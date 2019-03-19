@@ -3,8 +3,13 @@ jest.mock('../db-client')
 import { DBClient } from '../db-client'
 import * as d from '../declaration'
 import { SaveState, SaveStateActionExecutionError, SaveStateSavingStateError } from './save-state'
+const update = jest.spyOn(DBClient.prototype, 'updateData')
 
 describe('SaveFunction function', () => {
+  beforeEach(() => {
+    update.mockReset()
+  })
+
   describe('.init', () => {
     it('use provided referenceId', async () => {
       const { func, event } = setup(SuccessFunction)
@@ -50,8 +55,6 @@ describe('SaveFunction function', () => {
       describe('when update fails', () => {
         it('fails gracefully', () => {
           const { func, event } = setup(SuccessFunction)
-          const update = jest.spyOn(DBClient.prototype, 'updateData')
-
           update.mockImplementation(() => Promise.reject({ error: 'from-user-storage' }))
 
           return expect(func(event)).rejects.toEqual(new SaveStateSavingStateError())
@@ -77,7 +80,40 @@ describe('SaveFunction function', () => {
       })
     })
   })
+
+  describe('backend restrictions', () => {
+    describe('when restriction exists', () => {
+      it('succeeds when isBackend is truthy', async () => {
+        const { func, event } = setup(RestrictedFunction)
+        const result = await func({
+          ...event,
+          context: { ...event.context, isBackend: true }
+        })
+
+        expect(result.data).toBe('success')
+      })
+
+      it('fails and returns error if isBackend is falsy', async () => {
+        const { func, event } = setup(RestrictedFunction)
+        const result = await func(event)
+
+        expect(result.error).toMatchObject({
+          code: 'UNAUTHORIZED_FUNCTION_CALL',
+          message: "This function can't be called"
+        })
+      })
+    })
+  })
 })
+
+class RestrictedFunction extends SaveState implements SaveState<{ savedData: string[] }> {
+  static backendOnly = true
+  async action(event: d.TSaveActionEvent<{ savedData: string[] }>) {
+    // proces typing works
+    const existingData = event.state.savedData || []
+    return { data: 'success', state: { savedData: ['ok', ...existingData] } }
+  }
+}
 
 class SuccessFunction extends SaveState implements SaveState<{ savedData: string[] }> {
   async action(event: d.TSaveActionEvent<{ savedData: string[] }>) {

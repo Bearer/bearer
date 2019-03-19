@@ -7,15 +7,32 @@ import { eventAsActionParams } from './utils'
 
 const logger = debug('functions:fetch-state')
 
+interface FetchDataImplementation<T extends FetchData> {
+  new (): T
+}
+
 export abstract class FetchData<ReturnedData = any, TError = any, AuthContext = any> {
+  static backendOnly = false
+
   // expected implementation
   abstract async action(
     event: d.TFetchActionEvent<any, AuthContext, any>
   ): Promise<d.TFetchPayload<ReturnedData, TError>>
 
   // Internal
-  static call(action: d.TFetchAction) {
+  static call(aPrototype: FetchDataImplementation<any>) {
+    const action = new aPrototype.prototype.constructor().action as d.TFetchAction
+    const requiresBackend = (aPrototype as any).backendOnly
+
     return async (event: d.TLambdaEvent) => {
+      if (requiresBackend && !event.context.isBackend) {
+        return {
+          error: {
+            code: 'UNAUTHORIZED_FUNCTION_CALL',
+            message: "This function can't be called"
+          }
+        }
+      }
       captureHttps(http, event)
       try {
         const { error, data }: d.TFetchPayload<any, any> = await action(eventAsActionParams(event))
@@ -32,7 +49,7 @@ export abstract class FetchData<ReturnedData = any, TError = any, AuthContext = 
   }
 
   static init() {
-    return FetchData.call(new (this.prototype.constructor as any)().action)
+    return FetchData.call(this as any)
   }
 }
 

@@ -49,7 +49,36 @@ describe('FetchData function', () => {
       })
     })
   })
+
+  describe('backend restrictions', () => {
+    describe('when restriction exists', () => {
+      it('succeeds when isBackend is truthy', async () => {
+        const { func, event } = setup(RestrictedFunction)
+        const result = await func({ ...event, context: { ...event.context, isBackend: true } })
+
+        expect(result.data).toBe('success')
+      })
+
+      it('fails and returns error if isBackend is falsy', async () => {
+        const { func, event } = setup(RestrictedFunction)
+        const result = await func(event)
+
+        expect(result.error).toMatchObject({
+          code: 'UNAUTHORIZED_FUNCTION_CALL',
+          message: "This function can't be called"
+        })
+      })
+    })
+  })
 })
+
+class RestrictedFunction extends FetchData implements FetchData<any, any, any> {
+  static backendOnly = true
+
+  async action(_event: d.TFetchActionEvent) {
+    return { data: 'success' }
+  }
+}
 
 class PassContextFunction extends FetchData implements FetchData<any, any, any> {
   async action(event: d.TFetchActionEvent) {
