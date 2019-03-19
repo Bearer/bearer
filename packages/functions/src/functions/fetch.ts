@@ -1,5 +1,6 @@
 import debug from '@bearer/logger'
 import http from 'http'
+import https from 'https'
 import { captureHttps } from '@bearer/x-ray'
 
 import * as d from '../declaration'
@@ -34,6 +35,7 @@ export abstract class FetchData<ReturnedData = any, TError = any, AuthContext = 
         }
       }
       captureHttps(http, event)
+      captureHttps(https, event)
       try {
         const { error, data }: d.TFetchPayload<any, any> = await action(eventAsActionParams(event))
         if (error) {

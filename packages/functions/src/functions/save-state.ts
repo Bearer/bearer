@@ -1,9 +1,12 @@
 import debug from '@bearer/logger'
 import uuid from 'uuid/v1'
+import http from 'http'
+import https from 'https'
 
 import * as d from '../declaration'
 import { DBClient as CLIENT } from '../db-client'
 import { eventAsActionParams } from './utils'
+import { captureHttps } from '@bearer/x-ray'
 
 const logger = debug('functions:fetch-state')
 
@@ -33,6 +36,8 @@ export abstract class SaveState<State = any, ReturnedData = any, Error = any, Au
           }
         }
       }
+      captureHttps(http, event)
+      captureHttps(https, event)
 
       const providedReferenceId = event.queryStringParameters.referenceId
       const dbClient = DBClient(event.context.signature)
