@@ -30,7 +30,7 @@ const variables = {
     INTEGRATION_HOST_URL: 'https://int.bearer.sh'
   },
   development: {
-    INTEGRATION_HOST_URL: 'http://localhost:3000/'
+    INTEGRATION_HOST_URL: 'http://localhost:3000'
   }
 }
 
