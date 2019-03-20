@@ -9,7 +9,7 @@ export interface WithFetchProps<TReturnedData> {
   fetch: (params: any) => void
 }
 
-interface IWrapperProps<TReturnedData> {
+export interface IWrapperProps<TReturnedData> {
   onSuccess?: (data: TReturnedData) => void
   onFail?: (error: any) => void
 }
