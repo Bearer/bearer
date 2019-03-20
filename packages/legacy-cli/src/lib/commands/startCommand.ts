@@ -160,6 +160,7 @@ export const start = (emitter, config, locator: Locator) => async ({ open, insta
     }
   } catch (e) {
     emitter.emit('start:failed', { error: e })
+    process.exit(1)
   }
 }
 
