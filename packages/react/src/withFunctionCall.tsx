@@ -49,8 +49,8 @@ export const withFunctionCall = function<TReturnedData, TP extends object = {}>(
           })
           .catch(({ error }) => {
             this.setState({ ...this.state, error })
-            if (this.props.onSuccess) {
-              this.props.onSuccess(error)
+            if (this.props.onFail) {
+              this.props.onFail(error)
             }
           })
           .then(() => {
