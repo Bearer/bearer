@@ -28,9 +28,11 @@ export default class Bearer {
     this.secured = this.config.secured
     logger('init bearer instance clientId: %s with config: %j', clientId, this.config)
     this.debounceRefresh = debounce(this.loadMissingIntegrations, this.config.refreshDebounceDelay)
-    this.initialIntegrationLoading()
-    if (this.config.domObserver) {
-      this.registerDomObserver()
+    if (!__DEV__) {
+      this.initialIntegrationLoading()
+      if (this.config.domObserver) {
+        this.registerDomObserver()
+      }
     }
   }
   // TODO: move to a dedicated file
