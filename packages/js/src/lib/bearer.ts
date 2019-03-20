@@ -23,7 +23,7 @@ export default class Bearer {
   private authorizedListener!: postRobot.Cancellable
   private rejectedListener!: postRobot.Cancellable
 
-  constructor(readonly clientId: string, options: Partial<TBearerOptions> = {}) {
+  constructor(readonly clientId: string | undefined, options: Partial<TBearerOptions> = {}) {
     this.config = { ...DEFAULT_OPTIONS, ...cleanOptions(options) }
     this.secured = this.config.secured
     logger('init bearer instance clientId: %s with config: %j', clientId, this.config)
@@ -204,7 +204,7 @@ export default class Bearer {
 
       integrations.map(integration => {
         if (!document.querySelector(`#${getScriptId(integration.uuid)}`)) {
-          document.body.appendChild(getScriptDOM(this.clientId, integration))
+          document.body.appendChild(getScriptDOM(this.clientId || '', integration))
         }
       })
       return true

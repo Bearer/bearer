@@ -42,4 +42,20 @@ describe('main', () => {
     bearer.secured = true
     expect(bearer.secured).toBeTruthy()
   })
+
+  describe('instance', () => {
+    beforeEach(() => {
+      // @ts-ignore
+      bearer.instance = undefined
+    })
+
+    it('generates a new instance with a null client id', () => {
+      expect(bearer.instance.clientId).toBe(undefined)
+    })
+
+    it('use the one setup previously', () => {
+      bearer('existing-client-id')
+      expect(bearer.instance.clientId).toBe('existing-client-id')
+    })
+  })
 })
