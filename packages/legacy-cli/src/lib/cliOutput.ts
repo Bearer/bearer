@@ -85,6 +85,15 @@ export default emitter => {
     term('\n')
   })
 
+  emitter.on('start:localServer:customPort', ({ port, host }) => {
+    term('*************** Action required *****************\n')
+    term.white('Bearer: ')
+    term.red('[local:functionServer] You have specified a custom port.\n')
+    term.yellow('You must update the views/index.html to match this setting as follow:\n\n')
+    term(`<script> bearer("CLIENT_ID", { integrationHost: "${host}" }) </script>\n\n`)
+    term('*************************************************\n')
+  })
+
   emitter.on('start:localServer:endpoints', ({ endpoints }) => {
     term.white('Bearer: ')
     term.yellow('[local:functionServer] ')

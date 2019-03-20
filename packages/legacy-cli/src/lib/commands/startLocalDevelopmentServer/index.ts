@@ -21,6 +21,8 @@ function requireUncached(module) {
   return require(module)
 }
 
+const DEFAULT_PORT = 3000
+
 export default function startLocalDevelopmentServer(
   emitter,
   config: Config,
@@ -50,7 +52,7 @@ export default function startLocalDevelopmentServer(
           emitter.emit('start:localServer:generatingFunctions:failed', { error })
         }
       }
-      await refreshFunctions()
+      refreshFunctions()
 
       chokidar
         .watch('.', {
@@ -64,9 +66,21 @@ export default function startLocalDevelopmentServer(
         .on('change', refreshFunctions)
 
       const storage = Storage()
-      const port = await getPort({ port: 3000 })
+      const expectedPort = process.env.PORT || DEFAULT_PORT
+
+      const port = await getPort({ port: expectedPort })
+
       // tslint:disable-next-line:no-http-string
-      const bearerBaseURL = `http://localhost:${port}/`
+      const host = `http://localhost:${port}`
+
+      if (expectedPort !== DEFAULT_PORT) {
+        emitter.emit('start:localServer:customPort', { port, host })
+      }
+
+      if (port !== Number(expectedPort)) {
+        throw `Could not start local server port ${expectedPort} is already in use. You can specify your own port by running PORT=3322 yarn bearer start`
+      }
+      const bearerBaseURL = `${host}/`
       process.env.bearerBaseURL = bearerBaseURL
 
       router.post(
