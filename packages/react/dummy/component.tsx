@@ -86,7 +86,7 @@ export default class ComponentClass extends React.Component<{}, { clientId: stri
 
         <div>
           <h2>Fetcher:</h2>
-          <Fetcher />
+          <Fetcher onFail={console.log} onSuccess={console.log} />
         </div>
         <div />
       </BearerProvider>

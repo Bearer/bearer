@@ -110,5 +110,9 @@ describe('withFunctionCall', () => {
 
       expect(rendered.toJSON()).toMatchSnapshot()
     })
+
+    describe('callbacks', () => {
+      // TODO
+    })
   })
 })
