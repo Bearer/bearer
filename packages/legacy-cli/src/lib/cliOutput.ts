@@ -1,6 +1,3 @@
-import debug from './logger'
-const logger = debug.extend('out')
-
 const term = require('terminal-kit').terminal
 
 function outputError(error) {
@@ -104,8 +101,8 @@ export default emitter => {
 
   emitter.on('start:localServer:generatingFunctions:failed', ({ error }) => {
     term.yellow('[local:functionServer] ')
-    term.red('Functions building error\n')
-    logger(
+    term.red('Functions build error\n')
+    console.log(
       '%s',
       error.toString({
         builtAt: false,
