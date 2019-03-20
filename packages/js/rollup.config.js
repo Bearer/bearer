@@ -9,8 +9,6 @@ import pkg from './package.json'
 
 const isProduction = process.env.NODE_ENV === 'production'
 
-const mode = isProduction ? 'production' : 'development'
-
 const plugins = [
   resolve({
     browser: true,
@@ -27,7 +25,16 @@ const plugins = [
   })
 ]
 
-const createConfiguration = ({ input, output }) => ({
+const variables = {
+  production: {
+    INTEGRATION_HOST_URL: 'https://int.bearer.sh'
+  },
+  development: {
+    INTEGRATION_HOST_URL: 'http://localhost:3000/'
+  }
+}
+
+const createConfiguration = ({ mode = 'production', input, output }) => ({
   input,
   output: {
     ...output,
@@ -37,7 +44,7 @@ const createConfiguration = ({ input, output }) => ({
     ...plugins,
     replace({
       BEARER_VERSION: pkg.version,
-      INTEGRATION_HOST_URL: process.env.INTEGRATION_HOST_URL || 'https://int.bearer.sh',
+      INTEGRATION_HOST_URL: variables[mode].INTEGRATION_HOST_URL || 'https://int.bearer.sh',
       __DEV__: mode === 'development',
       'process.env.NODE_ENV': JSON.stringify('production')
     }),
@@ -52,7 +59,9 @@ const bundles = [
       file: pkg.main,
       format: 'cjs'
     }
-  }),
+  })
+]
+const distributionBundles = [
   createConfiguration({
     input: 'src/index.ts',
     output: {
@@ -67,6 +76,15 @@ const bundles = [
       name: 'bearer',
       format: 'umd'
     }
+  }),
+  createConfiguration({
+    mode: 'development',
+    input: 'src/index.ts',
+    output: {
+      file: pkg.unpkgDev,
+      name: 'bearer',
+      format: 'umd'
+    }
   })
-]
-export default bundles
+].concat(bundles)
+export default (isProduction ? distributionBundles : bundles)

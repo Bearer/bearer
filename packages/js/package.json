@@ -4,6 +4,7 @@
   "description": "A JavaScript library for working with Bearer integrations",
   "jsdelivr": "lib/bearer.production.min.js",
   "unpkg": "lib/bearer.production.min.js",
+  "unpkgDev": "lib/bearer.development.min.js",
   "main": "lib/cjs/index.js",
   "types": "lib/cjs/index.d.ts",
   "module": "lib/es/index.js",
