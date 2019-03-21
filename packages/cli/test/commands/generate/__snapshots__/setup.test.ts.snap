@@ -67,12 +67,14 @@ exports[`generate:setup APIKEY creates setup files 3`] = `
 
 export default class SaveSetupFunction extends FetchData implements FetchData<ReturnedData, any, TAPIKEYAuthContext> {
   async action(event: TFetchActionEvent<Params, TAPIKEYAuthContext>): TFetchPromise< ReturnedData> {
-    return { state: event.params.setup, data: [] }
+    const { data, referenceId } = await event.store.save<State>(event.params.referenceId, event.params.setup)
+    return { data,  referenceId }
   }
 }
 
 export type Params = {
   setup: any
+  referenceId?: string
 }
 
 export type State = {
@@ -80,8 +82,7 @@ export type State = {
 }
 
 
-export type ReturnedData = {
-}
+export type ReturnedData = State
 "
 `;
 
@@ -90,7 +91,8 @@ exports[`generate:setup APIKEY creates setup files 4`] = `
 
 export default class RetrieveSetupFunction extends FetchData implements FetchData<ReturnedData, any, TAPIKEYAuthContext> {
   async action(event: TFetchActionEvent<Params, TAPIKEYAuthContext>): TFetchPromise<ReturnedData> {
-    return { data: { referenceId: event.params.referenceId, ...event.context.reference } }
+    const { data, referenceId } = await event.store.find<ReturnedData>(event.params.referenceId)
+    return { data,  referenceId }
   }
 }
 
@@ -173,12 +175,14 @@ exports[`generate:setup BASIC creates setup files 3`] = `
 
 export default class SaveSetupFunction extends FetchData implements FetchData<ReturnedData, any, TBASICAuthContext> {
   async action(event: TFetchActionEvent<Params, TBASICAuthContext>): TFetchPromise< ReturnedData> {
-    return { state: event.params.setup, data: [] }
+    const { data, referenceId } = await event.store.save<State>(event.params.referenceId, event.params.setup)
+    return { data,  referenceId }
   }
 }
 
 export type Params = {
   setup: any
+  referenceId?: string
 }
 
 export type State = {
@@ -186,7 +190,7 @@ export type State = {
   password: string
 }
 
-export type ReturnedData = {}
+export type ReturnedData = State
 "
 `;
 
@@ -195,7 +199,8 @@ exports[`generate:setup BASIC creates setup files 4`] = `
 
 export default class RetrieveSetupFunction extends FetchData implements FetchData<ReturnedData, any, TBASICAuthContext> {
   async action(event: TFetchActionEvent<Params, TBASICAuthContext>): TFetchPromise<ReturnedData> {
-    return { data: { referenceId: event.params.referenceId, ...event.context.reference } }
+    const { data, referenceId } = await event.store.find<ReturnedData>(event.params.referenceId)
+    return { data,  referenceId }
   }
 }
 
@@ -279,19 +284,21 @@ exports[`generate:setup OAUTH2 creates setup files 3`] = `
 
 export default class SaveSetupFunction extends FetchData implements FetchData<ReturnedData, any, TOAUTH2AuthContext> {
   async action(event: TFetchActionEvent<Params, TOAUTH2AuthContext>): TFetchPromise< ReturnedData> {
-    return { state: event.params.setup, data: [] }
+    const { data, referenceId } = await event.store.save<State>(event.params.referenceId, event.params.setup)
+    return { data,  referenceId }
   }
 }
 
 export type Params = {
   setup: any
+  referenceId?: string
 }
 
 export type State = {
   accessToken: string
 }
 
-export type ReturnedData = {}
+export type ReturnedData = State
 "
 `;
 
@@ -300,7 +307,8 @@ exports[`generate:setup OAUTH2 creates setup files 4`] = `
 
 export default class RetrieveSetupFunction extends FetchData implements FetchData<ReturnedData, any, TOAUTH2AuthContext> {
   async action(event: TFetchActionEvent<Params, TOAUTH2AuthContext>): TFetchPromise<ReturnedData> {
-    return { data: { referenceId: event.params.referenceId, ...event.context.reference } }
+    const { data, referenceId } = await event.store.find<ReturnedData>(event.params.referenceId)
+    return { data,  referenceId }
   }
 }
 
