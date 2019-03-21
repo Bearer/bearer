@@ -3,13 +3,10 @@
  */
 
 export enum FunctionType {
-  SaveState = 'SaveState',
   FetchData = 'FetchData'
 }
 
-type TFetchBearerResult<T = any> = { meta: { referenceId: string }; data: T; error?: any }
-
-export type TFetchBearerData<T = any> = { data: T; referenceId?: string }
+export type TFetchBearerData<T = any> = { data: T; referenceId?: string; error?: any }
 
 export type BearerFetch<T = any> = (...args: any[]) => Promise<TFetchBearerData<T>>
 

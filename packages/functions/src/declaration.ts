@@ -9,11 +9,6 @@ export type TDataPayload<ReturnedData> = { data: ReturnedData; referenceId?: str
 export type TFetchPayload<ReturnedData = any, ReturnedError = any> = Partial<TDataPayload<ReturnedData>> &
   Partial<TErrorPayload<ReturnedError>>
 
-export type TSaveStatePayload<State = any, ReturnedData = any, ReturnedError = any> = {
-  state: State
-  data?: ReturnedData
-} & Partial<TErrorPayload<ReturnedError>>
-
 /**
  * Contexts
  */
@@ -43,21 +38,6 @@ export type TBearerLambdaContext<AuthContext = TAuthContext, DataContext = {}> =
 /**
  * Functions
  */
-
-/**
- * Save state action, let you store data into Bearer database without having to deal with database communication
- * Later, data could be automatically loaded by passing a reference ID parameter
- * terraformerId => will inject terrafomer object into context if found within Bearer database
- */
-export type TSaveStateAction<State = any, ReturnedData = any> = (event: any) => TSavePromise<State, ReturnedData>
-
-export type TSavePromise<State, ReturnedData> = Promise<TSaveStatePayload<State, ReturnedData>>
-
-export type TSaveActionEvent<State = any, Params = any, AuthContext = TAuthContext, DataContext = {}> = {
-  context: TBearerLambdaContext<AuthContext, DataContext>
-  params: Params
-  state: Partial<State>
-}
 
 /**
  * Fetch any data

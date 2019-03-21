@@ -20,7 +20,6 @@ export enum Decorators {
   BearerState = 'BearerState',
   Function = 'Function',
   BackendFunction = '_BackendFunction',
-  SaveStateFunction = 'SaveStateFunction',
   statePropName = 'statePropName',
   Input = 'Input',
   Output = 'Output'
@@ -34,8 +33,7 @@ export enum Types {
   HTMLElement = 'HTMLElement',
   EventEmitter = 'EventEmitter',
   BearerFetch = 'BearerFetch',
-  FunctionType = 'FunctionType',
-  SaveState = 'SaveState'
+  FunctionType = 'FunctionType'
 }
 
 export enum Properties {

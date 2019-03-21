@@ -7,9 +7,7 @@ export class DBClient {
 
   async getData(): Promise<any> {}
 
-  async updateData(): Promise<any> {}
-
-  async saveData(): Promise<any> {}
+  async upsertData(): Promise<any> {}
 }
 
 export default (): DBClient => new DBClient()

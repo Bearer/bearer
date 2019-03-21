@@ -15,15 +15,9 @@ describe('Generate', () => {
     })
 
     it('Fetch function', async () => {
-      await GenerateFunction.run(['FetchDataFunction', '-t', 'fetch', '--path', bearerPath])
+      await GenerateFunction.run(['FetchDataFunction', '--path', bearerPath])
       expect(result.join()).toContain('Function generated')
       expect(readFile(bearerPath, 'functions', 'FetchDataFunction.ts')).toMatchSnapshot()
-    })
-
-    it('Save function', async () => {
-      await GenerateFunction.run(['SaveFunction', '-t', 'save', '--path', bearerPath])
-      expect(result.join()).toContain('Function generated')
-      expect(readFile(bearerPath, 'functions', 'SaveFunction.ts')).toMatchSnapshot()
     })
   })
 })

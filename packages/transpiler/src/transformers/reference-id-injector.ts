@@ -128,9 +128,7 @@ function hasFunctionWithStateTypeDecorator(classNode: ts.ClassDeclaration): bool
     if (!functionType) {
       return false
     }
-    const hasWisthState =
-      (functionType.expression as ts.Identifier).escapedText.toString() === Types.FunctionType &&
-      (functionType.name as ts.Identifier).escapedText.toString() === Types.SaveState
+    const hasWisthState = (functionType.expression as ts.Identifier).escapedText.toString() === Types.FunctionType
     return has || hasWisthState
   }, false)
 }

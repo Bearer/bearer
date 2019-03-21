@@ -30,13 +30,8 @@ function serializeBody(method: ts.MethodDeclaration | ts.ArrowFunction, checker:
   if (symbol) {
     const returnTypeNode = method.type!
 
-    let dataIndex = 0 // index of ReturnedData in TFetchPromise<ReturnedData, ReturnedError>
-    let errorIndex = 1 // index of ReturnedError in TFetchPromise<ReturnedData, ReturnedError>
-    const typeName = checker.typeToString(checker.getTypeFromTypeNode(returnTypeNode))
-    if (typeName.startsWith('Promise<TSaveStatePayload')) {
-      dataIndex = 1 // index of ReturnedData in TSavePromise<State, ReturnedData, ReturnedError>
-      errorIndex = 2 // index of ReturnedData in TSavePromise<State, ReturnedData, ReturnedError>
-    }
+    const dataIndex = 0 // index of ReturnedData in TFetchPromise<ReturnedData, ReturnedError>
+    const errorIndex = 1 // index of ReturnedError in TFetchPromise<ReturnedData, ReturnedError>
     if (returnTypeNode && ts.isTypeReferenceNode(returnTypeNode)) {
       const typeData = checker.getTypeFromTypeNode(returnTypeNode.typeArguments![dataIndex])
       data = convertType(typeData, checker)
@@ -50,13 +45,6 @@ function serializeBody(method: ts.MethodDeclaration | ts.ArrowFunction, checker:
   return { data, error }
 }
 
-function resolveParameterTypeIndex(t: ts.Type, checker: ts.TypeChecker, i: number, j: number): number {
-  let index = i
-  if (checker.typeToString(t).startsWith('TSaveActionEvent')) {
-    index = j
-  }
-  return index
-}
 /**
  *  Find the Parameter type in func and convert it to json-schema
  */
@@ -64,8 +52,7 @@ function serializeParameters(sym: ts.Symbol | undefined, node: ts.Node, checker:
   if (sym) {
     const typ = checker.getTypeOfSymbolAtLocation(sym, node)
     if (typ.aliasTypeArguments) {
-      const index = resolveParameterTypeIndex(typ, checker, 0, 1)
-      return convertType(typ.aliasTypeArguments[index!], checker)
+      return convertType(typ.aliasTypeArguments[0], checker)
     }
   }
 }
@@ -80,8 +67,7 @@ function getFunctionAuthType(sym: ts.Symbol | undefined, node: ts.Node, checker:
   if (sym) {
     const typ = checker.getTypeOfSymbolAtLocation(sym, node)
     if (typ.aliasTypeArguments) {
-      const index = resolveParameterTypeIndex(typ, checker, 1, 2)
-      const authType = checker.typeToString(typ.aliasTypeArguments[index])
+      const authType = checker.typeToString(typ.aliasTypeArguments[1])
       if (/apiKey/.test(authType)) return 'APIKEY'
       if (/username/.test(authType) && /password/.test(authType)) return 'BASIC'
       if ((/accessToken/.test(authType) && /tokenSecret/.test(authType)) || /TOAUTH1AuthContext/.test(authType)) {
