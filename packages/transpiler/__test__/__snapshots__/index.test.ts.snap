@@ -127,10 +127,6 @@ Object {
       "classname": "InvalidRootComponent",
       "inputs": Array [
         Object {
-          "name": "referenceId",
-          "type": "string",
-        },
-        Object {
           "name": "setupId",
           "type": "string",
         },
@@ -394,10 +390,6 @@ Object {
     Object {
       "classname": "InvalidRootComponent",
       "inputs": Array [
-        Object {
-          "name": "referenceId",
-          "type": "string",
-        },
         Object {
           "name": "setupId",
           "type": "string",
@@ -785,10 +777,6 @@ Object {
       "classname": "InvalidRootComponent",
       "inputs": Array [
         Object {
-          "name": "referenceId",
-          "type": "string",
-        },
-        Object {
           "name": "setupId",
           "type": "string",
         },
@@ -962,10 +950,6 @@ Object {
       "classname": "InvalidRootComponent",
       "inputs": Array [
         Object {
-          "name": "referenceId",
-          "type": "string",
-        },
-        Object {
           "name": "setupId",
           "type": "string",
         },
@@ -994,7 +978,7 @@ Object {
 exports[`Transpiler integration test invalidRootComponent.tsx match expectation 1`] = `
 Object {
   "file": "invalidRootComponent.tsx",
-  "postContent": "import { BearerFetch, BearerState, _BackendFunction, FunctionType, Component, Prop, Element, Watch, State } from '@bearer/core';
+  "postContent": "import { BearerFetch, BearerState, _BackendFunction, FunctionType, Component, Prop, Watch, State } from '@bearer/core';
 @Component({
     tag: \\"bearer-attach-pull-request\\",
     shadow: false
@@ -1011,10 +995,6 @@ export class InvalidRootComponent {
     render() {
         return <bearer-scrollable fetcher={this.fetcher}/>;
     }
-    @Prop()
-    referenceId: string;
-    @Element()
-    el: HTMLElement;
     constructor() {
         _BackendFunction('ListRepositories')(this, \\"fetcher\\");
         _BackendFunction('getPullRequest', FunctionType.FetchData)(this, \\"fetchResource\\");
@@ -1179,10 +1159,6 @@ Object {
       "classname": "InvalidRootComponent",
       "inputs": Array [
         Object {
-          "name": "referenceId",
-          "type": "string",
-        },
-        Object {
           "name": "setupId",
           "type": "string",
         },
@@ -1211,7 +1187,7 @@ Object {
 exports[`Transpiler integration test overrides-decorator.tsx match expectation 1`] = `
 Object {
   "file": "overrides-decorator.tsx",
-  "postContent": "import { Component, _BackendFunction, BearerFetch, FunctionType, Prop, Element } from '@bearer/core';
+  "postContent": "import { Component, _BackendFunction, BearerFetch, FunctionType, Prop } from '@bearer/core';
 @Component({
     tag: \\"bearer-overrides-decorator-full\\"
 })
@@ -1228,10 +1204,6 @@ class OverridesDecorarotFull {
     componentDidUnload() {
         console.log('componentDidUnload');
     }
-    @Prop()
-    referenceId: string;
-    @Element()
-    el: HTMLElement;
     get INTEGRATION_ID() { return \\"SPONGE_BOB\\"; }
     @Prop({ \\"context\\": \\"bearer\\" })
     bearerContext: any;
@@ -1374,10 +1346,6 @@ Object {
     Object {
       "classname": "InvalidRootComponent",
       "inputs": Array [
-        Object {
-          "name": "referenceId",
-          "type": "string",
-        },
         Object {
           "name": "setupId",
           "type": "string",

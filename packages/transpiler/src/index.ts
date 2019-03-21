@@ -21,7 +21,6 @@ import GatherIO from './transformers/gather-input-output'
 import GatherMetadata from './transformers/gather-metadata'
 import NavigatorScreenTransformer from './transformers/navigator-screen-transformer'
 import PropBearerContextInjector from './transformers/prop-bearer-context-injector'
-import BearerReferenceIdInjector from './transformers/reference-id-injector'
 import ReplaceFunctionDecorators from './transformers/replace-function-decorator'
 import RootComponentTransformer from './transformers/root-component-transformer'
 import BearerIntegrationIdInjector from './transformers/integration-id-accessor-injector'
@@ -58,7 +57,6 @@ export default class Transpiler {
         RootComponentTransformer({ verbose, metadata: this.metadata }),
         InputDecoratorModifier({ verbose, metadata: this.metadata }),
         OutputDecoratorModifier({ verbose, metadata: this.metadata }),
-        BearerReferenceIdInjector({ verbose, metadata: this.metadata }),
         ReplaceFunctionDecorators({ verbose, metadata: this.metadata }),
         BearerIntegrationIdInjector({ verbose, metadata: this.metadata }),
         PropBearerContextInjector({ verbose, metadata: this.metadata }),
