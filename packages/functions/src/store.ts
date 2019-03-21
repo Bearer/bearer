@@ -19,8 +19,8 @@ export class Store {
     return Item
   }
 
-  save = async <T extends {} = {}>(referenceId = uuid(), state: T) => {
-    const { Item } = await this.dbClient.upsertData<T>(referenceId, state)
+  save = async <T extends {} = {}>(referenceId: string, state: T) => {
+    const { Item } = await this.dbClient.upsertData<T>(referenceId || uuid(), state)
     return Item
   }
 }

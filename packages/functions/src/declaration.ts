@@ -4,7 +4,7 @@ import { Store } from './store'
  * Simplest error payload, better add code and message so that debugging is made easier
  */
 export type TErrorPayload<ReturnedError> = { error: ReturnedError }
-export type TDataPayload<ReturnedData> = { data: ReturnedData }
+export type TDataPayload<ReturnedData> = { data: ReturnedData; referenceId?: string }
 
 export type TFetchPayload<ReturnedData = any, ReturnedError = any> = Partial<TDataPayload<ReturnedData>> &
   Partial<TErrorPayload<ReturnedError>>
