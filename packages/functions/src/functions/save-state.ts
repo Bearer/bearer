@@ -40,13 +40,13 @@ export abstract class SaveState<State = any, ReturnedData = any, Error = any, Au
       try {
         const savedData = await dbClient.getData(providedReferenceId)
         const currentState = savedData ? savedData.Item : {}
-        const { state, data, error } = await action({ ...eventAsActionParams(event), state: currentState })
+        const { data, error } = await action({ ...eventAsActionParams(event), state: currentState })
         if (error) {
           return { error }
         }
         const referenceId = providedReferenceId || uuid()
         try {
-          await dbClient.updateData(referenceId, state)
+          // await dbClient.updateData(referenceId, state)
         } catch (error) {
           logger.extend('SaveStateSavingStateError')(error)
           throw new SaveStateSavingStateError()
