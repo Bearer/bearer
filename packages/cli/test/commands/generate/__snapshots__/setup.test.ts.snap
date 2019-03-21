@@ -63,10 +63,10 @@ export class SetupView {
 `;
 
 exports[`generate:setup APIKEY creates setup files 3`] = `
-"import { TAPIKEYAuthContext, SaveState, TSaveActionEvent, TSavePromise } from '@bearer/functions'
+"import { TAPIKEYAuthContext, FetchData, TFetchActionEvent, TFetchPromise } from '@bearer/functions'
 
-export default class SaveSetupFunction extends SaveState implements SaveState<State, ReturnedData, any, TAPIKEYAuthContext> {
-  async action(event: TSaveActionEvent<State, Params, TAPIKEYAuthContext>): TSavePromise<State, ReturnedData> {
+export default class SaveSetupFunction extends FetchData implements FetchData<ReturnedData, any, TAPIKEYAuthContext> {
+  async action(event: TFetchActionEvent<Params, TAPIKEYAuthContext>): TFetchPromise< ReturnedData> {
     return { state: event.params.setup, data: [] }
   }
 }
@@ -169,10 +169,10 @@ export class SetupView {
 `;
 
 exports[`generate:setup BASIC creates setup files 3`] = `
-"import { TBASICAuthContext, SaveState, TSaveActionEvent, TSavePromise } from '@bearer/functions'
+"import { TBASICAuthContext, FetchData, TFetchActionEvent, TFetchPromise } from '@bearer/functions'
 
-export default class SaveSetupFunction extends SaveState implements SaveState<State, ReturnedData, any, TBASICAuthContext> {
-  async action(event: TSaveActionEvent<State, Params, TBASICAuthContext>): TSavePromise<State, ReturnedData> {
+export default class SaveSetupFunction extends FetchData implements FetchData<ReturnedData, any, TBASICAuthContext> {
+  async action(event: TFetchActionEvent<Params, TBASICAuthContext>): TFetchPromise< ReturnedData> {
     return { state: event.params.setup, data: [] }
   }
 }
@@ -275,10 +275,10 @@ export class SetupView {
 `;
 
 exports[`generate:setup OAUTH2 creates setup files 3`] = `
-"import { TOAUTH2AuthContext, SaveState, TSaveActionEvent, TSavePromise } from '@bearer/functions'
+"import { TOAUTH2AuthContext, FetchData, TFetchActionEvent, TFetchPromise } from '@bearer/functions'
 
-export default class SaveSetupFunction extends SaveState implements SaveState<State, ReturnedData, any, TOAUTH2AuthContext> {
-  async action(event: TSaveActionEvent<State, Params, TOAUTH2AuthContext>): TSavePromise<State, ReturnedData> {
+export default class SaveSetupFunction extends FetchData implements FetchData<ReturnedData, any, TOAUTH2AuthContext> {
+  async action(event: TFetchActionEvent<Params, TOAUTH2AuthContext>): TFetchPromise< ReturnedData> {
     return { state: event.params.setup, data: [] }
   }
 }

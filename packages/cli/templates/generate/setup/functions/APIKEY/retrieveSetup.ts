@@ -2,7 +2,8 @@ import { TAPIKEYAuthContext, FetchData, TFetchActionEvent, TFetchPromise } from 
 
 export default class RetrieveSetupFunction extends FetchData implements FetchData<ReturnedData, any, TAPIKEYAuthContext> {
   async action(event: TFetchActionEvent<Params, TAPIKEYAuthContext>): TFetchPromise<ReturnedData> {
-    return { data: { referenceId: event.params.referenceId, ...event.context.reference } }
+    const { data, referenceId } = await event.store.find<ReturnedData>(event.params.referenceId)
+    return { data,  referenceId }
   }
 }
 

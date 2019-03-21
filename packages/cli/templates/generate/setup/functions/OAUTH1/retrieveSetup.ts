@@ -2,12 +2,14 @@ import { TOAUTH1AuthContext, FetchData, TFetchActionEvent, TFetchPromise } from 
 
 export default class RetrieveSetupFunction extends FetchData implements FetchData<ReturnedData, any, TOAUTH1AuthContext> {
   async action(event: TFetchActionEvent<Params, TOAUTH1AuthContext>): TFetchPromise<ReturnedData> {
-    return { data: event.context.reference }
+    const { data, referenceId } = await event.store.find<ReturnedData>(event.params.referenceId)
+    return { data,  referenceId }
   }
 }
 
 export type Params = {
   setup: any
+  referenceId: string
 }
 
 export type ReturnedData = {
