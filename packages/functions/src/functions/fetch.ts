@@ -5,6 +5,7 @@ import { captureHttps } from '@bearer/x-ray'
 
 import * as d from '../declaration'
 import { eventAsActionParams, BACKEND_ONLY_ERROR } from './utils'
+import { Store } from '../store'
 
 const logger = debug('functions:fetch-state')
 
@@ -12,7 +13,7 @@ interface FetchDataImplementation<T extends FetchData> {
   new (): T
 }
 
-export abstract class FetchData<ReturnedData = any, TError = any, AuthContext = any> {
+export abstract class FetchData<ReturnedData = any, TError = any, AuthContext = d.TAuthContext> {
   static backendOnly = false
 
   // expected implementation
@@ -31,8 +32,14 @@ export abstract class FetchData<ReturnedData = any, TError = any, AuthContext = 
       }
       captureHttps(http, event)
       captureHttps(https, event)
+
+      const functionEvent: d.TFetchActionEvent = {
+        ...eventAsActionParams(event),
+        store: new Store(event.context.signature)
+      }
+
       try {
-        const { error, data }: d.TFetchPayload<any, any> = await action(eventAsActionParams(event))
+        const { error, data }: d.TFetchPayload<any, any> = await action(functionEvent)
         if (error) {
           logger(error)
           return { error }

@@ -1,5 +1,5 @@
 import { AxiosResponse } from 'axios'
-
+import { Store } from './store'
 /**
  * Simplest error payload, better add code and message so that debugging is made easier
  */
@@ -38,7 +38,7 @@ export type TAuthContext =
 export type TBearerLambdaContext<AuthContext = TAuthContext, DataContext = {}> = DataContext &
   AuthContext & {
     bearerBaseURL: string
-  }
+  } & { isBackend: boolean; signature: string }
 
 /**
  * Functions
@@ -62,12 +62,13 @@ export type TSaveActionEvent<State = any, Params = any, AuthContext = TAuthConte
 /**
  * Fetch any data
  */
-export type TFetchAction<ReturnedData = any> = (event: any) => TFetchPromise<ReturnedData>
+export type TFetchAction<ReturnedData = any> = (event: TFetchActionEvent) => TFetchPromise<ReturnedData>
 export type TFetchPromise<ReturnedData, ReturnedError = any> = Promise<TFetchPayload<ReturnedData, ReturnedError>>
 
 export type TFetchActionEvent<Params = any, AuthContext = TAuthContext, DataContext = {}> = {
-  context: TBearerLambdaContext<AuthContext, DataContext> & { isBackend: boolean }
+  context: TBearerLambdaContext<AuthContext, DataContext>
   params: Params
+  store: Store
 }
 
 export type TStateData = AxiosResponse<{
