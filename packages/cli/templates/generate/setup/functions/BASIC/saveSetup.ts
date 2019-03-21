@@ -1,13 +1,15 @@
-import { TBASICAuthContext, SaveState, TSaveActionEvent, TSavePromise } from '@bearer/functions'
+import { TBASICAuthContext, FetchData, TFetchActionEvent, TFetchPromise } from '@bearer/functions'
 
-export default class SaveSetupFunction extends SaveState implements SaveState<State, ReturnedData, any, TBASICAuthContext> {
-  async action(event: TSaveActionEvent<State, Params, TBASICAuthContext>): TSavePromise<State, ReturnedData> {
-    return { state: event.params.setup, data: [] }
+export default class SaveSetupFunction extends FetchData implements FetchData<ReturnedData, any, TBASICAuthContext> {
+  async action(event: TFetchActionEvent<Params, TBASICAuthContext>): TFetchPromise< ReturnedData> {
+    const { data, referenceId } = await event.store.save<State>(event.params.referenceId, event.params.setup)
+    return { data,  referenceId }
   }
 }
 
 export type Params = {
   setup: any
+  referenceId?: string
 }
 
 export type State = {
@@ -15,4 +17,4 @@ export type State = {
   password: string
 }
 
-export type ReturnedData = {}
+export type ReturnedData = State
