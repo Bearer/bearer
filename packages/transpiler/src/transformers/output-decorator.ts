@@ -241,12 +241,7 @@ function createFunctionCall(meta: OutputMeta) {
     ts.createPropertyAccess(
       ts.createCall(ts.createPropertyAccess(ts.createThis(), meta.functionName), undefined, [
         ts.createObjectLiteral([
-          ts.createPropertyAssignment(
-            'body',
-            ts.createObjectLiteral([
-              ts.createPropertyAssignment(meta.functionPropertyName, ts.createIdentifier(newValue))
-            ])
-          ),
+          ts.createPropertyAssignment(meta.functionPropertyName, ts.createIdentifier(newValue)),
           ts.createPropertyAssignment(
             meta.functionReferenceIdKeyName,
             ts.createPropertyAccess(ts.createThis(), meta.functionReferenceIdValue || meta.propDeclarationNameRefId)

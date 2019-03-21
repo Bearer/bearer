@@ -206,7 +206,7 @@ export class FullComponent {
     setupId: string;
     @Watch(\\"setup\\")
     setupSavedWatcher(newValue) {
-        this.saveSetup({ body: { setup: newValue }, referenceId: this.setupId }).then(({ referenceId, data }) => {
+        this.saveSetup({ setup: newValue, referenceId: this.setupId }).then(({ referenceId, data }) => {
             this.setupSaved.emit({ referenceId, setup: data || this.setup });
             this.setupId = referenceId;
         });
@@ -529,7 +529,7 @@ export class AttachPullRequestAction {
     feedPandaId: string;
     @Watch(\\"feedPanda\\")
     feedPandaSavedWatcher(newValue) {
-        this.saveFeedPanda({ body: { feedPanda: newValue }, referenceId: this.feedPandaId }).then(({ referenceId, data }) => {
+        this.saveFeedPanda({ feedPanda: newValue, referenceId: this.feedPandaId }).then(({ referenceId, data }) => {
             this.feedPandaSaved.emit({ referenceId, feedPanda: data || this.feedPanda });
             this.feedPandaId = referenceId;
         });
@@ -562,7 +562,7 @@ export class AttachPullRequestAction {
     shortPandaId: string;
     @Watch(\\"manualpropertyWatchedName\\")
     spongeBobdSavedWatcher(newValue) {
-        this.manualFunctionName({ body: { manuaLFunctionPropertyName: newValue }, manualfunctionReferenceIdKeyName: this.shortPandaId }).then(({ referenceId: manualreferenceKeyName, data }) => {
+        this.manualFunctionName({ manuaLFunctionPropertyName: newValue, manualfunctionReferenceIdKeyName: this.shortPandaId }).then(({ referenceId: manualreferenceKeyName, data }) => {
             this.spongeBobdSaved.emit({ manualreferenceKeyName, shortPanda: data || this.shortPanda });
             this.shortPandaId = manualreferenceKeyName;
         });

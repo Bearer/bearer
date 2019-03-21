@@ -76,7 +76,7 @@ class NoOptionsComponent {
     farmerId: string;
     @Watch(\\"farmer\\")
     farmerSavedWatcher(newValue) {
-        this.saveFarmer({ body: { farmer: newValue }, referenceId: this.farmerId }).then(({ referenceId, data }) => {
+        this.saveFarmer({ farmer: newValue, referenceId: this.farmerId }).then(({ referenceId, data }) => {
             this.farmerSaved.emit({ referenceId, farmer: data || this.farmer });
             this.farmerId = referenceId;
         });
@@ -108,7 +108,7 @@ class NoOptionsComponent {
     farmerAndPandaId: string;
     @Watch(\\"aPanda\\")
     milkedWatcher(newValue) {
-        this.milkWithAbottle({ body: { functionPropertyNameOption: newValue }, anotherProp: this.functionReferenceIdValueValue }).then(({ referenceId: aPandaKey, data }) => {
+        this.milkWithAbottle({ functionPropertyNameOption: newValue, anotherProp: this.functionReferenceIdValueValue }).then(({ referenceId: aPandaKey, data }) => {
             this.milked.emit({ aPandaKey, farmerAndPanda: data || this.farmerAndPanda });
             this.farmerAndPandaId = aPandaKey;
         });
