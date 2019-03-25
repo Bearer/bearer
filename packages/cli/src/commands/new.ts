@@ -6,6 +6,7 @@ import * as path from 'path'
 
 import BaseCommand from '../base-command'
 import installDependencies from '../tasks/install-dependencies'
+import initViews from '../tasks/init-views'
 import { copyFiles, printFiles } from '../utils/helpers'
 
 import GenerateComponent from './generate/component'
@@ -27,6 +28,7 @@ export default class New extends BaseCommand {
     ...BaseCommand.flags,
     help: flags.help({ char: 'h' }),
     skipInstall: flags.boolean({ hidden: true }),
+    withViews: flags.boolean(),
     authType: flags.string({
       char: 'a',
       description: 'Authorization type', // help description for flag
@@ -71,17 +73,29 @@ export default class New extends BaseCommand {
           }
         },
         {
-          title: 'Create setup files',
-          task: async (_ctx: any, _task: any) => GenerateSetup.run(['--path', this.copyDestFolder, '--silent'])
-        },
-        {
-          title: 'Create integration specification file',
-          task: async (_ctx: any, _task: any) => GenerateSpec.run(['--path', this.copyDestFolder, '--silent'])
-        },
-        {
-          title: 'Create intial components',
-          task: async (_ctx: any, _task: any) =>
-            GenerateComponent.run(['feature', '--type', 'root', '--path', this.copyDestFolder, '--silent'])
+          title: 'Create views related files',
+          enabled: () => flags.withViews,
+          task: async (_ctx: any, _task: any) => {
+            return new Listr([
+              initViews({
+                cmd: this,
+                vars: this.initViewsVars(name, authType)
+              }),
+              {
+                title: 'Create setup files',
+                task: async (_ctx: any, _task: any) => GenerateSetup.run(['--path', this.copyDestFolder, '--silent'])
+              },
+              {
+                title: 'Create integration specification file',
+                task: async (_ctx: any, _task: any) => GenerateSpec.run(['--path', this.copyDestFolder, '--silent'])
+              },
+              {
+                title: 'Create intial components',
+                task: async (_ctx: any, _task: any) =>
+                  GenerateComponent.run(['feature', '--type', 'root', '--path', this.copyDestFolder, '--silent'])
+              }
+            ])
+          }
         }
       ]
 
@@ -134,7 +148,15 @@ export default class New extends BaseCommand {
     if (fs.existsSync(this.copyDestFolder)) {
       return Promise.reject(this.colors.bold('Destination already exists: ') + this.copyDestFolder)
     }
-    const setup = `
+
+    return copyFiles(this, path.join('init', 'structure'), this.copyDestFolder, this.getVars(name, authType), true)
+  }
+
+  initViewsVars = (name: string, authType: Authentications) => {
+    const setup =
+      authType === Authentications.NoAuth
+        ? ''
+        : `
     {
       classname: 'SetupAction',
       isRoot: true,
@@ -149,14 +171,8 @@ export default class New extends BaseCommand {
       name: 'setup-view',
       label: 'Setup Display Component'
     },`
-    const vars = authType === Authentications.NoAuth ? {} : { setup }
-    return copyFiles(
-      this,
-      path.join('init', 'structure'),
-      this.copyDestFolder,
-      { ...vars, ...this.getVars(name, authType) },
-      true
-    )
+
+    return { ...this.getVars(name, authType), setup }
   }
 
   createAuthenticationFiles(name: string, authType: Authentications): Promise<string[]> {
