@@ -3,7 +3,7 @@ import { TAPIKEYAuthContext, FetchData, TFetchActionEvent, TFetchPromise } from 
 export default class SaveSetupFunction extends FetchData implements FetchData<ReturnedData, any, TAPIKEYAuthContext> {
   async action(event: TFetchActionEvent<Params, TAPIKEYAuthContext>): TFetchPromise< ReturnedData> {
     const { data, referenceId } = await event.store.save<State>(event.params.referenceId, event.params.setup)
-    return { data,  referenceId }
+    return { data, referenceId }
   }
 }
 

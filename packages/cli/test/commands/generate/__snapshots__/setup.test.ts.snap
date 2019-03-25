@@ -68,7 +68,7 @@ exports[`generate:setup APIKEY creates setup files 3`] = `
 export default class SaveSetupFunction extends FetchData implements FetchData<ReturnedData, any, TAPIKEYAuthContext> {
   async action(event: TFetchActionEvent<Params, TAPIKEYAuthContext>): TFetchPromise< ReturnedData> {
     const { data, referenceId } = await event.store.save<State>(event.params.referenceId, event.params.setup)
-    return { data,  referenceId }
+    return { data, referenceId }
   }
 }
 
@@ -176,7 +176,7 @@ exports[`generate:setup BASIC creates setup files 3`] = `
 export default class SaveSetupFunction extends FetchData implements FetchData<ReturnedData, any, TBASICAuthContext> {
   async action(event: TFetchActionEvent<Params, TBASICAuthContext>): TFetchPromise< ReturnedData> {
     const { data, referenceId } = await event.store.save<State>(event.params.referenceId, event.params.setup)
-    return { data,  referenceId }
+    return { data, referenceId }
   }
 }
 
@@ -200,7 +200,7 @@ exports[`generate:setup BASIC creates setup files 4`] = `
 export default class RetrieveSetupFunction extends FetchData implements FetchData<ReturnedData, any, TBASICAuthContext> {
   async action(event: TFetchActionEvent<Params, TBASICAuthContext>): TFetchPromise<ReturnedData> {
     const { data, referenceId } = await event.store.find<ReturnedData>(event.params.referenceId)
-    return { data,  referenceId }
+    return { data, referenceId }
   }
 }
 
@@ -285,7 +285,7 @@ exports[`generate:setup OAUTH2 creates setup files 3`] = `
 export default class SaveSetupFunction extends FetchData implements FetchData<ReturnedData, any, TOAUTH2AuthContext> {
   async action(event: TFetchActionEvent<Params, TOAUTH2AuthContext>): TFetchPromise< ReturnedData> {
     const { data, referenceId } = await event.store.save<State>(event.params.referenceId, event.params.setup)
-    return { data,  referenceId }
+    return { data, referenceId }
   }
 }
 
@@ -308,7 +308,7 @@ exports[`generate:setup OAUTH2 creates setup files 4`] = `
 export default class RetrieveSetupFunction extends FetchData implements FetchData<ReturnedData, any, TOAUTH2AuthContext> {
   async action(event: TFetchActionEvent<Params, TOAUTH2AuthContext>): TFetchPromise<ReturnedData> {
     const { data, referenceId } = await event.store.find<ReturnedData>(event.params.referenceId)
-    return { data,  referenceId }
+    return { data, referenceId }
   }
 }
 
