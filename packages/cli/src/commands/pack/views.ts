@@ -3,7 +3,7 @@ import { spawn } from 'child_process'
 
 import BaseCommand from '../../base-command'
 import { IntegrationBuildEnv } from '../../types'
-import { RequireIntegrationFolder } from '../../utils/decorators'
+import { RequireIntegrationFolder, skipIfNoViews } from '../../utils/decorators'
 
 const integrationId = 'integration-id'
 const integrationUuid = 'integration-uuid'
@@ -28,6 +28,7 @@ export default class PackViews extends BaseCommand {
     })
   }
 
+  @skipIfNoViews()
   @RequireIntegrationFolder()
   async run() {
     const { flags } = this.parse(PackViews)

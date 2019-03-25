@@ -3,7 +3,7 @@ import * as fs from 'fs'
 import * as path from 'path'
 
 import BaseCommand from '../../base-command'
-import { RequireIntegrationFolder } from '../../utils/decorators'
+import { RequireIntegrationFolder, skipIfNoViews } from '../../utils/decorators'
 import * as Listr from 'listr'
 import buildSetup from '../../tasks/build-setup'
 
@@ -14,6 +14,7 @@ export default class GenerateSetup extends BaseCommand {
 
   static args = []
 
+  @skipIfNoViews()
   @RequireIntegrationFolder()
   async run() {
     const { flags } = this.parse(GenerateSetup)

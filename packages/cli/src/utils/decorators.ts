@@ -3,6 +3,20 @@ import Command from '../base-command'
 type Constructor<T> = new (...args: any[]) => T
 type TCommand = InstanceType<Constructor<Command>>
 
+export function skipIfNoViews() {
+  return function(_target: any, _propertyKey: string | symbol, descriptor: PropertyDescriptor) {
+    const originalMethod = descriptor.value
+    descriptor.value = async function(this: TCommand) {
+      if (this.hasViews) {
+        await originalMethod.apply(this, arguments)
+      } else {
+        this.debug('No views present, skipping')
+      }
+    }
+    return descriptor
+  }
+}
+
 // tslint:disable-next-line:function-name
 export function RequireIntegrationFolder() {
   return function(_target: any, _propertyKey: string | symbol, descriptor: PropertyDescriptor) {

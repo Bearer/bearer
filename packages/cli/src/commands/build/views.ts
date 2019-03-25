@@ -8,7 +8,7 @@ import * as path from 'path'
 import BaseCommand from '../../base-command'
 import installDependencies from '../../tasks/install-dependencies'
 
-import { RequireIntegrationFolder } from '../../utils/decorators'
+import { RequireIntegrationFolder, skipIfNoViews } from '../../utils/decorators'
 
 const skipInstall = 'skip-install'
 
@@ -22,6 +22,7 @@ export default class BuildViews extends BaseCommand {
 
   static args = []
 
+  @skipIfNoViews()
   @RequireIntegrationFolder()
   async run() {
     const { flags } = this.parse(BuildViews)

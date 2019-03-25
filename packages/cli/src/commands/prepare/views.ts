@@ -2,7 +2,7 @@ import { flags } from '@oclif/command'
 import * as path from 'path'
 
 import BaseCommand from '../../base-command'
-import { RequireIntegrationFolder } from '../../utils/decorators'
+import { RequireIntegrationFolder, skipIfNoViews } from '../../utils/decorators'
 import { copyFiles, ensureFolderExists, ensureSymlinked } from '../../utils/helpers'
 
 export default class PrepareViews extends BaseCommand {
@@ -15,6 +15,7 @@ export default class PrepareViews extends BaseCommand {
 
   static args = []
 
+  @skipIfNoViews()
   @RequireIntegrationFolder()
   async run() {
     const { flags } = this.parse(PrepareViews)

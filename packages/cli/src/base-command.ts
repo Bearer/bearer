@@ -5,6 +5,7 @@ import cliUx from 'cli-ux'
 import * as colors from 'colors/safe'
 import * as copy from 'copy-template-dir'
 import * as inquirer from 'inquirer'
+import * as fs from 'fs'
 
 import { AuthConfig, Config } from './types'
 import Locator from './utils/locator'
@@ -48,6 +49,10 @@ export default abstract class extends Command {
 
   get integrationAuthConfig(): AuthConfig {
     return require(this.locator.authConfigPath)
+  }
+
+  get hasViews(): boolean {
+    return fs.existsSync(this.locator.srcViewsDir)
   }
 
   static flags = {
