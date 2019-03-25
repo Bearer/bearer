@@ -1,5 +1,4 @@
 import { flags } from '@oclif/command'
-import * as fs from 'fs'
 
 import BaseLegacyCommand from '../base-legacy-command'
 

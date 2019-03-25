@@ -1,23 +1,26 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`APIKEY generates a integration without any prompt and APIKEY 1`] = `
+exports[`with views APIKEY generates an integration without any prompt and APIKEY 1`] = `
 "
 What's next?
 
 ,[1m   cd APIKEYIntegration && bearer start[22m
 ,[32mIntegration initialized, name: APIKEYIntegration, authentication type: API Key[39m
-,[90m    create: [39m[37m.bearer/init/new/APIKEY/.gitignore[39m
-,[90m    create: [39m[37m.bearer/init/new/APIKEY/.integrationrc[39m
-,[90m    create: [39m[37m.bearer/init/new/APIKEY/LICENSE[39m
-,[90m    create: [39m[37m.bearer/init/new/APIKEY/auth.config.json[39m
-,[90m    create: [39m[37m.bearer/init/new/APIKEY/config.dev.js.example[39m
-,[90m    create: [39m[37m.bearer/init/new/APIKEY/functions/client.ts[39m
-,[90m    create: [39m[37m.bearer/init/new/APIKEY/functions/tsconfig.json[39m
-,[90m    create: [39m[37m.bearer/init/new/APIKEY/package.json[39m
-,[90m    create: [39m[37m.bearer/init/new/APIKEY/spec.ts[39m
-,[90m    create: [39m[37m.bearer/init/new/APIKEY/tsconfig.json[39m
-,[90m    create: [39m[37m.bearer/init/new/APIKEY/views/index.html[39m
-,[90m    create: [39m[37m.bearer/init/new/APIKEY/views/index.ts[39m
+,[90m    create: [39m[37m.bearer/initWithView/new/APIKEY/.gitignore[39m
+,[90m    create: [39m[37m.bearer/initWithView/new/APIKEY/.integrationrc[39m
+,[90m    create: [39m[37m.bearer/initWithView/new/APIKEY/LICENSE[39m
+,[90m    create: [39m[37m.bearer/initWithView/new/APIKEY/auth.config.json[39m
+,[90m    create: [39m[37m.bearer/initWithView/new/APIKEY/config.dev.js.example[39m
+,[90m    create: [39m[37m.bearer/initWithView/new/APIKEY/functions/client.ts[39m
+,[90m    create: [39m[37m.bearer/initWithView/new/APIKEY/functions/tsconfig.json[39m
+,[90m    create: [39m[37m.bearer/initWithView/new/APIKEY/package.json[39m
+,[90m    create: [39m[37m.bearer/initWithView/new/APIKEY/spec.ts[39m
+,[90m    create: [39m[37m.bearer/initWithView/new/APIKEY/spec.ts[39m
+,[90m    create: [39m[37m.bearer/initWithView/new/APIKEY/tsconfig.json[39m
+,[90m    create: [39m[37m.bearer/initWithView/new/APIKEY/views/index.html[39m
+,[90m    create: [39m[37m.bearer/initWithView/new/APIKEY/views/index.html[39m
+,[90m    create: [39m[37m.bearer/initWithView/new/APIKEY/views/index.ts[39m
+,[90m    create: [39m[37m.bearer/initWithView/new/APIKEY/views/index.ts[39m
 ,* read the bearer documentation at https://docs.bearer.sh
 
 ,* start your local development environement by running:
@@ -25,7 +28,7 @@ What's next?
 "
 `;
 
-exports[`APIKEY generates a integration without any prompt and APIKEY 2`] = `
+exports[`with views APIKEY generates an integration without any prompt and APIKEY 2`] = `
 "{
   \\"authType\\": \\"APIKEY\\",
   \\"setupViews\\": [
@@ -39,24 +42,27 @@ exports[`APIKEY generates a integration without any prompt and APIKEY 2`] = `
 "
 `;
 
-exports[`BASIC generates a integration without any prompt and BASIC 1`] = `
+exports[`with views BASIC generates an integration without any prompt and BASIC 1`] = `
 "
 What's next?
 
 ,[1m   cd BASICIntegration && bearer start[22m
 ,[32mIntegration initialized, name: BASICIntegration, authentication type: Basic Auth[39m
-,[90m    create: [39m[37m.bearer/init/new/BASIC/.gitignore[39m
-,[90m    create: [39m[37m.bearer/init/new/BASIC/.integrationrc[39m
-,[90m    create: [39m[37m.bearer/init/new/BASIC/LICENSE[39m
-,[90m    create: [39m[37m.bearer/init/new/BASIC/auth.config.json[39m
-,[90m    create: [39m[37m.bearer/init/new/BASIC/config.dev.js.example[39m
-,[90m    create: [39m[37m.bearer/init/new/BASIC/functions/client.ts[39m
-,[90m    create: [39m[37m.bearer/init/new/BASIC/functions/tsconfig.json[39m
-,[90m    create: [39m[37m.bearer/init/new/BASIC/package.json[39m
-,[90m    create: [39m[37m.bearer/init/new/BASIC/spec.ts[39m
-,[90m    create: [39m[37m.bearer/init/new/BASIC/tsconfig.json[39m
-,[90m    create: [39m[37m.bearer/init/new/BASIC/views/index.html[39m
-,[90m    create: [39m[37m.bearer/init/new/BASIC/views/index.ts[39m
+,[90m    create: [39m[37m.bearer/initWithView/new/BASIC/.gitignore[39m
+,[90m    create: [39m[37m.bearer/initWithView/new/BASIC/.integrationrc[39m
+,[90m    create: [39m[37m.bearer/initWithView/new/BASIC/LICENSE[39m
+,[90m    create: [39m[37m.bearer/initWithView/new/BASIC/auth.config.json[39m
+,[90m    create: [39m[37m.bearer/initWithView/new/BASIC/config.dev.js.example[39m
+,[90m    create: [39m[37m.bearer/initWithView/new/BASIC/functions/client.ts[39m
+,[90m    create: [39m[37m.bearer/initWithView/new/BASIC/functions/tsconfig.json[39m
+,[90m    create: [39m[37m.bearer/initWithView/new/BASIC/package.json[39m
+,[90m    create: [39m[37m.bearer/initWithView/new/BASIC/spec.ts[39m
+,[90m    create: [39m[37m.bearer/initWithView/new/BASIC/spec.ts[39m
+,[90m    create: [39m[37m.bearer/initWithView/new/BASIC/tsconfig.json[39m
+,[90m    create: [39m[37m.bearer/initWithView/new/BASIC/views/index.html[39m
+,[90m    create: [39m[37m.bearer/initWithView/new/BASIC/views/index.html[39m
+,[90m    create: [39m[37m.bearer/initWithView/new/BASIC/views/index.ts[39m
+,[90m    create: [39m[37m.bearer/initWithView/new/BASIC/views/index.ts[39m
 ,* read the bearer documentation at https://docs.bearer.sh
 
 ,* start your local development environement by running:
@@ -64,7 +70,7 @@ What's next?
 "
 `;
 
-exports[`BASIC generates a integration without any prompt and BASIC 2`] = `
+exports[`with views BASIC generates an integration without any prompt and BASIC 2`] = `
 "{
   \\"authType\\": \\"BASIC\\",
   \\"setupViews\\": [
@@ -83,24 +89,27 @@ exports[`BASIC generates a integration without any prompt and BASIC 2`] = `
 "
 `;
 
-exports[`NONE generates a integration without any prompt and NONE 1`] = `
+exports[`with views NONE generates an integration without any prompt and NONE 1`] = `
 "
 What's next?
 
 ,[1m   cd NONEIntegration && bearer start[22m
 ,[32mIntegration initialized, name: NONEIntegration, authentication type: NoAuth[39m
-,[90m    create: [39m[37m.bearer/init/new/NONE/.gitignore[39m
-,[90m    create: [39m[37m.bearer/init/new/NONE/.integrationrc[39m
-,[90m    create: [39m[37m.bearer/init/new/NONE/LICENSE[39m
-,[90m    create: [39m[37m.bearer/init/new/NONE/auth.config.json[39m
-,[90m    create: [39m[37m.bearer/init/new/NONE/config.dev.js.example[39m
-,[90m    create: [39m[37m.bearer/init/new/NONE/functions/client.ts[39m
-,[90m    create: [39m[37m.bearer/init/new/NONE/functions/tsconfig.json[39m
-,[90m    create: [39m[37m.bearer/init/new/NONE/package.json[39m
-,[90m    create: [39m[37m.bearer/init/new/NONE/spec.ts[39m
-,[90m    create: [39m[37m.bearer/init/new/NONE/tsconfig.json[39m
-,[90m    create: [39m[37m.bearer/init/new/NONE/views/index.html[39m
-,[90m    create: [39m[37m.bearer/init/new/NONE/views/index.ts[39m
+,[90m    create: [39m[37m.bearer/initWithView/new/NONE/.gitignore[39m
+,[90m    create: [39m[37m.bearer/initWithView/new/NONE/.integrationrc[39m
+,[90m    create: [39m[37m.bearer/initWithView/new/NONE/LICENSE[39m
+,[90m    create: [39m[37m.bearer/initWithView/new/NONE/auth.config.json[39m
+,[90m    create: [39m[37m.bearer/initWithView/new/NONE/config.dev.js.example[39m
+,[90m    create: [39m[37m.bearer/initWithView/new/NONE/functions/client.ts[39m
+,[90m    create: [39m[37m.bearer/initWithView/new/NONE/functions/tsconfig.json[39m
+,[90m    create: [39m[37m.bearer/initWithView/new/NONE/package.json[39m
+,[90m    create: [39m[37m.bearer/initWithView/new/NONE/spec.ts[39m
+,[90m    create: [39m[37m.bearer/initWithView/new/NONE/spec.ts[39m
+,[90m    create: [39m[37m.bearer/initWithView/new/NONE/tsconfig.json[39m
+,[90m    create: [39m[37m.bearer/initWithView/new/NONE/views/index.html[39m
+,[90m    create: [39m[37m.bearer/initWithView/new/NONE/views/index.html[39m
+,[90m    create: [39m[37m.bearer/initWithView/new/NONE/views/index.ts[39m
+,[90m    create: [39m[37m.bearer/initWithView/new/NONE/views/index.ts[39m
 ,* read the bearer documentation at https://docs.bearer.sh
 
 ,* start your local development environement by running:
@@ -108,31 +117,34 @@ What's next?
 "
 `;
 
-exports[`NONE generates a integration without any prompt and NONE 2`] = `
+exports[`with views NONE generates an integration without any prompt and NONE 2`] = `
 "{
   \\"authType\\": \\"NONE\\"
 }
 "
 `;
 
-exports[`OAUTH1 generates a integration without any prompt and OAUTH1 1`] = `
+exports[`with views OAUTH1 generates an integration without any prompt and OAUTH1 1`] = `
 "
 What's next?
 
 ,[1m   cd OAUTH1Integration && bearer start[22m
 ,[32mIntegration initialized, name: OAUTH1Integration, authentication type: OAuth1[39m
-,[90m    create: [39m[37m.bearer/init/new/OAUTH1/.gitignore[39m
-,[90m    create: [39m[37m.bearer/init/new/OAUTH1/.integrationrc[39m
-,[90m    create: [39m[37m.bearer/init/new/OAUTH1/LICENSE[39m
-,[90m    create: [39m[37m.bearer/init/new/OAUTH1/auth.config.json[39m
-,[90m    create: [39m[37m.bearer/init/new/OAUTH1/config.dev.js.example[39m
-,[90m    create: [39m[37m.bearer/init/new/OAUTH1/functions/client.ts[39m
-,[90m    create: [39m[37m.bearer/init/new/OAUTH1/functions/tsconfig.json[39m
-,[90m    create: [39m[37m.bearer/init/new/OAUTH1/package.json[39m
-,[90m    create: [39m[37m.bearer/init/new/OAUTH1/spec.ts[39m
-,[90m    create: [39m[37m.bearer/init/new/OAUTH1/tsconfig.json[39m
-,[90m    create: [39m[37m.bearer/init/new/OAUTH1/views/index.html[39m
-,[90m    create: [39m[37m.bearer/init/new/OAUTH1/views/index.ts[39m
+,[90m    create: [39m[37m.bearer/initWithView/new/OAUTH1/.gitignore[39m
+,[90m    create: [39m[37m.bearer/initWithView/new/OAUTH1/.integrationrc[39m
+,[90m    create: [39m[37m.bearer/initWithView/new/OAUTH1/LICENSE[39m
+,[90m    create: [39m[37m.bearer/initWithView/new/OAUTH1/auth.config.json[39m
+,[90m    create: [39m[37m.bearer/initWithView/new/OAUTH1/config.dev.js.example[39m
+,[90m    create: [39m[37m.bearer/initWithView/new/OAUTH1/functions/client.ts[39m
+,[90m    create: [39m[37m.bearer/initWithView/new/OAUTH1/functions/tsconfig.json[39m
+,[90m    create: [39m[37m.bearer/initWithView/new/OAUTH1/package.json[39m
+,[90m    create: [39m[37m.bearer/initWithView/new/OAUTH1/spec.ts[39m
+,[90m    create: [39m[37m.bearer/initWithView/new/OAUTH1/spec.ts[39m
+,[90m    create: [39m[37m.bearer/initWithView/new/OAUTH1/tsconfig.json[39m
+,[90m    create: [39m[37m.bearer/initWithView/new/OAUTH1/views/index.html[39m
+,[90m    create: [39m[37m.bearer/initWithView/new/OAUTH1/views/index.html[39m
+,[90m    create: [39m[37m.bearer/initWithView/new/OAUTH1/views/index.ts[39m
+,[90m    create: [39m[37m.bearer/initWithView/new/OAUTH1/views/index.ts[39m
 ,* read the bearer documentation at https://docs.bearer.sh
 
 ,* start your local development environement by running:
@@ -140,7 +152,7 @@ What's next?
 "
 `;
 
-exports[`OAUTH1 generates a integration without any prompt and OAUTH1 2`] = `
+exports[`with views OAUTH1 generates an integration without any prompt and OAUTH1 2`] = `
 "{
   \\"requestTokenURL\\": \\"https://example.com/oauth/RequestToken\\",
   \\"accessTokenURL\\": \\"https://example.com/oauth/AccessToken\\",
@@ -169,7 +181,218 @@ exports[`OAUTH1 generates a integration without any prompt and OAUTH1 2`] = `
 "
 `;
 
-exports[`OAUTH2 generates a integration without any prompt and OAUTH2 1`] = `
+exports[`with views OAUTH2 generates an integration without any prompt and OAUTH2 1`] = `
+"
+What's next?
+
+,[1m   cd OAUTH2Integration && bearer start[22m
+,[32mIntegration initialized, name: OAUTH2Integration, authentication type: OAuth2[39m
+,[90m    create: [39m[37m.bearer/initWithView/new/OAUTH2/.gitignore[39m
+,[90m    create: [39m[37m.bearer/initWithView/new/OAUTH2/.integrationrc[39m
+,[90m    create: [39m[37m.bearer/initWithView/new/OAUTH2/LICENSE[39m
+,[90m    create: [39m[37m.bearer/initWithView/new/OAUTH2/auth.config.json[39m
+,[90m    create: [39m[37m.bearer/initWithView/new/OAUTH2/config.dev.js.example[39m
+,[90m    create: [39m[37m.bearer/initWithView/new/OAUTH2/functions/client.ts[39m
+,[90m    create: [39m[37m.bearer/initWithView/new/OAUTH2/functions/tsconfig.json[39m
+,[90m    create: [39m[37m.bearer/initWithView/new/OAUTH2/package.json[39m
+,[90m    create: [39m[37m.bearer/initWithView/new/OAUTH2/spec.ts[39m
+,[90m    create: [39m[37m.bearer/initWithView/new/OAUTH2/spec.ts[39m
+,[90m    create: [39m[37m.bearer/initWithView/new/OAUTH2/tsconfig.json[39m
+,[90m    create: [39m[37m.bearer/initWithView/new/OAUTH2/views/index.html[39m
+,[90m    create: [39m[37m.bearer/initWithView/new/OAUTH2/views/index.html[39m
+,[90m    create: [39m[37m.bearer/initWithView/new/OAUTH2/views/index.ts[39m
+,[90m    create: [39m[37m.bearer/initWithView/new/OAUTH2/views/index.ts[39m
+,* read the bearer documentation at https://docs.bearer.sh
+
+,* start your local development environement by running:
+
+"
+`;
+
+exports[`with views OAUTH2 generates an integration without any prompt and OAUTH2 2`] = `
+"{
+  \\"authorizationURL\\": \\"https://example.com/authorizationUrl\\",
+  \\"tokenURL\\": \\"https://example.com/tokenUrl\\",
+  \\"authType\\": \\"OAUTH2\\",
+  \\"tokenParams\\": {},
+  \\"authorizationParams\\": {},
+  \\"config\\": {
+    \\"scope\\": []
+  },
+  \\"setupViews\\": [
+    {
+      \\"type\\": \\"text\\",
+      \\"label\\": \\"Client ID\\",
+      \\"controlName\\": \\"clientID\\"
+    },
+    {
+      \\"type\\": \\"password\\",
+      \\"label\\": \\"Client Secret\\",
+      \\"controlName\\": \\"clientSecret\\"
+    }
+  ]
+}
+"
+`;
+
+exports[`without views APIKEY generates an integration without any prompt and APIKEY 1`] = `
+"
+What's next?
+
+,[1m   cd APIKEYIntegration && bearer start[22m
+,[32mIntegration initialized, name: APIKEYIntegration, authentication type: API Key[39m
+,[90m    create: [39m[37m.bearer/init/new/APIKEY/.gitignore[39m
+,[90m    create: [39m[37m.bearer/init/new/APIKEY/.integrationrc[39m
+,[90m    create: [39m[37m.bearer/init/new/APIKEY/LICENSE[39m
+,[90m    create: [39m[37m.bearer/init/new/APIKEY/auth.config.json[39m
+,[90m    create: [39m[37m.bearer/init/new/APIKEY/config.dev.js.example[39m
+,[90m    create: [39m[37m.bearer/init/new/APIKEY/functions/client.ts[39m
+,[90m    create: [39m[37m.bearer/init/new/APIKEY/functions/tsconfig.json[39m
+,[90m    create: [39m[37m.bearer/init/new/APIKEY/package.json[39m
+,[90m    create: [39m[37m.bearer/init/new/APIKEY/tsconfig.json[39m
+,* read the bearer documentation at https://docs.bearer.sh
+
+,* start your local development environement by running:
+
+"
+`;
+
+exports[`without views APIKEY generates an integration without any prompt and APIKEY 2`] = `
+"{
+  \\"authType\\": \\"APIKEY\\",
+  \\"setupViews\\": [
+    {
+      \\"type\\": \\"password\\",
+      \\"label\\": \\"Api Key\\",
+      \\"controlName\\": \\"apiKey\\"
+    }
+  ]
+}
+"
+`;
+
+exports[`without views BASIC generates an integration without any prompt and BASIC 1`] = `
+"
+What's next?
+
+,[1m   cd BASICIntegration && bearer start[22m
+,[32mIntegration initialized, name: BASICIntegration, authentication type: Basic Auth[39m
+,[90m    create: [39m[37m.bearer/init/new/BASIC/.gitignore[39m
+,[90m    create: [39m[37m.bearer/init/new/BASIC/.integrationrc[39m
+,[90m    create: [39m[37m.bearer/init/new/BASIC/LICENSE[39m
+,[90m    create: [39m[37m.bearer/init/new/BASIC/auth.config.json[39m
+,[90m    create: [39m[37m.bearer/init/new/BASIC/config.dev.js.example[39m
+,[90m    create: [39m[37m.bearer/init/new/BASIC/functions/client.ts[39m
+,[90m    create: [39m[37m.bearer/init/new/BASIC/functions/tsconfig.json[39m
+,[90m    create: [39m[37m.bearer/init/new/BASIC/package.json[39m
+,[90m    create: [39m[37m.bearer/init/new/BASIC/tsconfig.json[39m
+,* read the bearer documentation at https://docs.bearer.sh
+
+,* start your local development environement by running:
+
+"
+`;
+
+exports[`without views BASIC generates an integration without any prompt and BASIC 2`] = `
+"{
+  \\"authType\\": \\"BASIC\\",
+  \\"setupViews\\": [
+    {
+      \\"type\\": \\"text\\",
+      \\"label\\": \\"Username\\",
+      \\"controlName\\": \\"username\\"
+    },
+    {
+      \\"type\\": \\"password\\",
+      \\"label\\": \\"Password\\",
+      \\"controlName\\": \\"password\\"
+    }
+  ]
+}
+"
+`;
+
+exports[`without views NONE generates an integration without any prompt and NONE 1`] = `
+"
+What's next?
+
+,[1m   cd NONEIntegration && bearer start[22m
+,[32mIntegration initialized, name: NONEIntegration, authentication type: NoAuth[39m
+,[90m    create: [39m[37m.bearer/init/new/NONE/.gitignore[39m
+,[90m    create: [39m[37m.bearer/init/new/NONE/.integrationrc[39m
+,[90m    create: [39m[37m.bearer/init/new/NONE/LICENSE[39m
+,[90m    create: [39m[37m.bearer/init/new/NONE/auth.config.json[39m
+,[90m    create: [39m[37m.bearer/init/new/NONE/config.dev.js.example[39m
+,[90m    create: [39m[37m.bearer/init/new/NONE/functions/client.ts[39m
+,[90m    create: [39m[37m.bearer/init/new/NONE/functions/tsconfig.json[39m
+,[90m    create: [39m[37m.bearer/init/new/NONE/package.json[39m
+,[90m    create: [39m[37m.bearer/init/new/NONE/tsconfig.json[39m
+,* read the bearer documentation at https://docs.bearer.sh
+
+,* start your local development environement by running:
+
+"
+`;
+
+exports[`without views NONE generates an integration without any prompt and NONE 2`] = `
+"{
+  \\"authType\\": \\"NONE\\"
+}
+"
+`;
+
+exports[`without views OAUTH1 generates an integration without any prompt and OAUTH1 1`] = `
+"
+What's next?
+
+,[1m   cd OAUTH1Integration && bearer start[22m
+,[32mIntegration initialized, name: OAUTH1Integration, authentication type: OAuth1[39m
+,[90m    create: [39m[37m.bearer/init/new/OAUTH1/.gitignore[39m
+,[90m    create: [39m[37m.bearer/init/new/OAUTH1/.integrationrc[39m
+,[90m    create: [39m[37m.bearer/init/new/OAUTH1/LICENSE[39m
+,[90m    create: [39m[37m.bearer/init/new/OAUTH1/auth.config.json[39m
+,[90m    create: [39m[37m.bearer/init/new/OAUTH1/config.dev.js.example[39m
+,[90m    create: [39m[37m.bearer/init/new/OAUTH1/functions/client.ts[39m
+,[90m    create: [39m[37m.bearer/init/new/OAUTH1/functions/tsconfig.json[39m
+,[90m    create: [39m[37m.bearer/init/new/OAUTH1/package.json[39m
+,[90m    create: [39m[37m.bearer/init/new/OAUTH1/tsconfig.json[39m
+,* read the bearer documentation at https://docs.bearer.sh
+
+,* start your local development environement by running:
+
+"
+`;
+
+exports[`without views OAUTH1 generates an integration without any prompt and OAUTH1 2`] = `
+"{
+  \\"requestTokenURL\\": \\"https://example.com/oauth/RequestToken\\",
+  \\"accessTokenURL\\": \\"https://example.com/oauth/AccessToken\\",
+  \\"userAuthorizationURL\\": \\"https://example.com/oauth/Authorize\\",
+  \\"callbackURL\\": \\"https://int.bearer.sh/v2/auth/callback\\",
+  \\"authType\\": \\"OAUTH1\\",
+  \\"signatureMethod\\": \\"HMAC-SHA1\\",
+  \\"tokenParams\\": {},
+  \\"authorizationParams\\": {},
+  \\"config\\": {
+    \\"scope\\": []
+  },
+  \\"setupViews\\": [
+    {
+      \\"type\\": \\"text\\",
+      \\"label\\": \\"Consumer Key\\",
+      \\"controlName\\": \\"consumerKey\\"
+    },
+    {
+      \\"type\\": \\"password\\",
+      \\"label\\": \\"Consumer Secret\\",
+      \\"controlName\\": \\"consumerSecret\\"
+    }
+  ]
+}
+"
+`;
+
+exports[`without views OAUTH2 generates an integration without any prompt and OAUTH2 1`] = `
 "
 What's next?
 
@@ -183,10 +406,7 @@ What's next?
 ,[90m    create: [39m[37m.bearer/init/new/OAUTH2/functions/client.ts[39m
 ,[90m    create: [39m[37m.bearer/init/new/OAUTH2/functions/tsconfig.json[39m
 ,[90m    create: [39m[37m.bearer/init/new/OAUTH2/package.json[39m
-,[90m    create: [39m[37m.bearer/init/new/OAUTH2/spec.ts[39m
 ,[90m    create: [39m[37m.bearer/init/new/OAUTH2/tsconfig.json[39m
-,[90m    create: [39m[37m.bearer/init/new/OAUTH2/views/index.html[39m
-,[90m    create: [39m[37m.bearer/init/new/OAUTH2/views/index.ts[39m
 ,* read the bearer documentation at https://docs.bearer.sh
 
 ,* start your local development environement by running:
@@ -194,7 +414,7 @@ What's next?
 "
 `;
 
-exports[`OAUTH2 generates a integration without any prompt and OAUTH2 2`] = `
+exports[`without views OAUTH2 generates an integration without any prompt and OAUTH2 2`] = `
 "{
   \\"authorizationURL\\": \\"https://example.com/authorizationUrl\\",
   \\"tokenURL\\": \\"https://example.com/tokenUrl\\",

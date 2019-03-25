@@ -5,19 +5,31 @@ type TSetupConfig = {
   clean?: boolean
   authConfig?: any
   folderName?: string
+  withViews?: boolean
 }
 
 export function ensureBearerStructure({
   clean = true,
   authConfig,
-  folderName = 'fakeintegration'
+  folderName = 'fakeintegration',
+  withViews = false
 }: TSetupConfig = {}): string {
   const bearerFolder = path.join(__dirname, '..', '..', '.bearer', folderName)
   if (!fs.existsSync(bearerFolder)) {
     fs.mkdirpSync(bearerFolder)
   }
+
+  if (!fs.existsSync(bearerFolder)) {
+    fs.mkdirpSync(bearerFolder)
+  }
   if (clean) {
     fs.emptyDirSync(bearerFolder)
+  }
+  if (withViews) {
+    const views = path.join(bearerFolder, 'views')
+    if (!fs.existsSync(views)) {
+      fs.mkdirpSync(views)
+    }
   }
   fs.writeFileSync(path.join(bearerFolder, '.integrationrc'), 'integrationTile=test')
   fs.writeFileSync(

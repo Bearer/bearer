@@ -40,10 +40,11 @@ describe('generate:setup', () => {
   describe.each(testCases)('%s', (authType, auth) => {
     test('creates setup files', async () => {
       const bearerPath: string = ensureBearerStructure({
+        clean: true,
         authConfig: auth,
-        folderName: authType
+        folderName: authType,
+        withViews: true
       })
-
       await GenerateSetup.run(['--force', '--path', bearerPath])
 
       expect(readFile(bearerPath, 'views', 'setup-action.tsx')).toMatchSnapshot()
