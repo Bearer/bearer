@@ -1,4 +1,5 @@
 import { flags } from '@oclif/command'
+import * as fs from 'fs'
 
 import BaseLegacyCommand from '../base-legacy-command'
 
@@ -6,6 +7,7 @@ import GenerateApiDocumenation from './generate/api-documentation'
 import GenerateSetup from './generate/setup'
 import GenerateSpec from './generate/spec'
 import PrepareViews from './prepare/views'
+
 const noOpen = 'no-open'
 const noInstall = 'no-install'
 const noWatcher = 'no-watcher'
@@ -35,10 +37,14 @@ export default class Start extends BaseLegacyCommand {
       cmdArgs.push(`--${noWatcher}`)
     }
 
-    await GenerateSetup.run(['--silent'])
-    await GenerateSpec.run(['--silent'])
-    await PrepareViews.run(['--silent'])
-    await GenerateApiDocumenation.run(['--silent'])
+    if (this.hasViews) {
+      await GenerateSetup.run(['--silent'])
+      await GenerateSpec.run(['--silent'])
+      await PrepareViews.run(['--silent'])
+      await GenerateApiDocumenation.run(['--silent'])
+    } else {
+      cmdArgs.push(`--no-views`)
+    }
 
     this.runLegacy(['start', ...cmdArgs])
   }

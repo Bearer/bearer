@@ -47,24 +47,25 @@ function watchNonTSFiles(watchedPath, destPath): Promise<any> {
 
 export function prepare(emitter, config, locator: Locator) {
   return async (
-    { install = true, watchMode = true } = {
+    { install = true, watchMode = true, withViews = true } = {
       install: true,
-      watchMode: true
+      watchMode: true,
+      withViews: true
     }
   ) => {
     try {
       const { buildViewsDir, buildViewsComponentsDir, srcViewsDir, integrationRoot } = locator
-
-      // Link non TS files
-      const watcher = await watchNonTSFiles(srcViewsDir, buildViewsComponentsDir)
-      const apiDef = locator.buildViewsResourcePath('src/openapi.json')
-      if (!fs.pathExistsSync(apiDef)) {
-        fs.writeJsonSync(apiDef, {})
+      if (withViews) {
+        // Link non TS files
+        const watcher = await watchNonTSFiles(srcViewsDir, buildViewsComponentsDir)
+        const apiDef = locator.buildViewsResourcePath('src/openapi.json')
+        if (!fs.pathExistsSync(apiDef)) {
+          fs.writeJsonSync(apiDef, {})
+        }
+        if (!watchMode) {
+          watcher.close()
+        }
       }
-      if (!watchMode) {
-        watcher.close()
-      }
-
       if (install) {
         emitter.emit('start:prepare:installingDependencies')
         execSync(`${config.command} install`, { cwd: integrationRoot })
@@ -82,19 +83,23 @@ export function prepare(emitter, config, locator: Locator) {
   }
 }
 
-export const start = (emitter, config, locator: Locator) => async ({ open, install, watcher }) => {
+export const start = (emitter, config, locator: Locator) => async ({ open, install, watcher, views }) => {
   const { integrationUuid } = config
-
   try {
     await prepare(emitter, config, locator)({
       install,
-      watchMode: watcher
+      watchMode: watcher,
+      withViews: views
     })
 
     const { integrationRoot, buildViewsDir } = locator
     // start local development server
     const integrationHost = await startLocalDevelopmentServer(emitter, config, locator)
 
+    // Integration does no have views, let's skip transpile phase
+    if (!views) {
+      return
+    }
     emitter.emit('start:watchers')
     if (watcher) {
       fs.watchFile(locator.authConfigPath, { persistent: true, interval: 250 }, () => {
@@ -175,6 +180,7 @@ export function useWith(program, emitter, config, locator: Locator) {
     .option('--no-open', 'Do not open web browser')
     .option('--no-install', 'Do not run yarn|npm install')
     .option('--no-watcher', 'Run transpiler only once')
+    .option('--no-views', 'Local server only')
     .action(start(emitter, config, locator))
 }
 
