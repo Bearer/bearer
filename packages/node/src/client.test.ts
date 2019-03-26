@@ -12,7 +12,7 @@ describe('Bearer client', () => {
     expect(client).toBeInstanceOf(BearerClient)
   })
 
-  describe('#call', () => {
+  describe('#invoke', () => {
     it('send request to the function', async () => {
       distantApi.mockClear()
       nock('https://int.bearer.sh', {
@@ -23,7 +23,7 @@ describe('Bearer client', () => {
         .post('/api/v3/functions/backend/12345-integration-name/functionName')
         .reply(200, distantApi)
 
-      const { data } = await client.call('12345-integration-name', 'functionName')
+      const { data } = await client.invoke('12345-integration-name', 'functionName')
 
       expect(distantApi).toHaveBeenCalled()
       expect(data).toEqual({ ok: 'ok' })
@@ -41,7 +41,7 @@ describe('IntegrationClient', () => {
     expect(client).toBeInstanceOf(IntegrationClient)
   })
 
-  it('calls correct integration functions', async () => {
+  it('invokes correct integration functions', async () => {
     distantApi.mockClear()
     nock('https://int.bearer.sh', {
       reqheaders: {
@@ -52,7 +52,7 @@ describe('IntegrationClient', () => {
       .query({ sponge: 'bob' })
       .reply(200, distantApi)
 
-    const { data } = await client.call('function-name', { query: { sponge: 'bob' } })
+    const { data } = await client.invoke('function-name', { query: { sponge: 'bob' } })
 
     expect(distantApi).toHaveBeenCalled()
     expect(data).toEqual({ ok: 'ok' })

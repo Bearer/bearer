@@ -23,7 +23,7 @@ export class BearerClient<T = string> {
     })
   }
 
-  public call(integrationName: string, functionName: T, { query, body }: TFunctionParams = defaultFunctionParams) {
+  public invoke(integrationName: string, functionName: T, { query, body }: TFunctionParams = defaultFunctionParams) {
     return this.client.post(`${integrationName}/${functionName}`, body, {
       params: query
     })
@@ -37,8 +37,8 @@ export class IntegrationClient<T = string> {
     this.bearerClient = new BearerClient<T>(token, clientOptions)
   }
 
-  public call(functionName: T, functionParams: TFunctionParams = defaultFunctionParams) {
-    return this.bearerClient.call(this.integrationName, functionName, functionParams)
+  public invoke(functionName: T, functionParams: TFunctionParams = defaultFunctionParams) {
+    return this.bearerClient.invoke(this.integrationName, functionName, functionParams)
   }
 }
 

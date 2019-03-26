@@ -15,9 +15,9 @@ const bearerClient = clientFactory(process.env.BEARER_SECRET_TOKEN)
 const options = { query: { status: 'open' }, body: { title: 'title' } }
 
 bearerClient
-  .call('1234-integration-to-call', 'functionName', options)
+  .invoke('1234-integration-to-invoke', 'functionName', options)
   .then(() => {
-    console.log('Successfully called function')
+    console.log('Successfully invokeed function')
   })
   .catch(() => {
     console.log('Something wrong happened')
@@ -25,27 +25,26 @@ bearerClient
 
 // or async/await
 try {
-  const response = await bearerClient.call('1234-integration-to-call', 'functionName', options)
-  
+  const response = await bearerClient.invoke('1234-integration-to-invoke', 'functionName', options)
+
   // play with response here
 } catch (e) {
   // handle error
 }
-
 ```
 
-_Note_: we are using axios a http client. Each .call() returns an Axios Promise. https://github.com/axios/axios
+_Note_: we are using axios a http client. Each .invoke() returns an Axios Promise. https://github.com/axios/axios
 
 ### Integration client
 
-Integration client facilitates func calls and prevent you to pass integration name on every call
+Integration client facilitates func invokes and prevent you to pass integration name on every invoke
 
 ```tsx
 import { IntegrationClient } from '@bearer/node/lib/client'
 
 const integrationClient = new IntegrationClient(process.env.BEARER_SECRET_TOKEN, 'a-integration-uuid')
 
-const reponse = await integrationClient.call('functionName', options)
+const reponse = await integrationClient.invoke('functionName', options)
 ```
 
 If you are a Typescript user, you can provide a list of functions to use for a integration:
@@ -56,9 +55,9 @@ const integrationClient = new IntegrationClient<'functionName' | 'other-function
   'a-integration-uuid'
 )
 
-integrationClient.call('functionName', options) // OK
-integrationClient.call('other-function', options) // OK
-integrationClient.call('unknow-function', options) // Argument of type '"unknow-function"' is not assignable to parameter of type 'TIntegrationFunctionNames'.
+integrationClient.invoke('functionName', options) // OK
+integrationClient.invoke('other-function', options) // OK
+integrationClient.invoke('unknow-function', options) // Argument of type '"unknow-function"' is not assignable to parameter of type 'TIntegrationFunctionNames'.
 ```
 
 ### Use Bearer express webhook middleware
