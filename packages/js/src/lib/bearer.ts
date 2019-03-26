@@ -94,7 +94,7 @@ export default class Bearer {
     })
   }
 
-  functionFetch = async <DataPayload = any>(
+  invoke = async <DataPayload = any>(
     integrationId: string,
     functionName: string,
     { query = {}, ...params }: { query?: Record<string, string>; [key: string]: any } = {}
@@ -113,7 +113,7 @@ export default class Bearer {
         throw { error: payload.error }
       }
     } catch (error) {
-      logger('functionFetch failed %j', error, error.message)
+      logger('invoke failed %j', error, error.message)
       throw { error }
     }
   }

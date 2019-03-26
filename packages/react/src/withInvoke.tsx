@@ -37,7 +37,7 @@ export const withInvoke = function<TReturnedData, TP extends object = {}>(integr
       invoke = (params: any = {}) => {
         this.setState({ ...this.state, error: null, loading: true })
         return this.context.bearer
-          .functionFetch(integrationId, functionName, params)
+          .invoke(integrationId, functionName, params)
           .then(({ data }) => {
             this.setState({ ...this.state, data })
             if (this.props.onSuccess) {

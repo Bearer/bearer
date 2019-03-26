@@ -66,7 +66,7 @@ export function _BackendFunction<T = any>(
         }
 
         return bearer.instance
-          .functionFetch<T>(integrationId, functionName, {
+          .invoke<T>(integrationId, functionName, {
             ...params,
             query: {
               setupId: retrieveSetupId(this),

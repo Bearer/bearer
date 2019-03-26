@@ -15,7 +15,7 @@ describe('function request', () => {
       //@ts-ignore
       fetch.once(JSON.stringify({ data: returnedData }))
 
-      const response = await instance.functionFetch('integration', 'function')
+      const response = await instance.invoke('integration', 'function')
 
       expect(response.data).toEqual(returnedData)
       expect(response.referenceId).toBe(null)
@@ -25,7 +25,7 @@ describe('function request', () => {
       // @ts-ignore
       fetch.once(JSON.stringify({ data: returnedData, meta: { referenceId: 'a-reference' } }))
 
-      const response = await instance.functionFetch('integration', 'function', {
+      const response = await instance.invoke('integration', 'function', {
         query: { something: 'query' },
         somethingElse: 'query'
       })
@@ -38,7 +38,7 @@ describe('function request', () => {
       // @ts-ignore
       fetch.once(JSON.stringify({}))
 
-      await instance.functionFetch('integration', 'function', {
+      await instance.invoke('integration', 'function', {
         query: { something: 'query' },
         somethingElse: 'query'
       })
@@ -59,7 +59,7 @@ describe('function request', () => {
         // @ts-ignore
         fetch.once(JSON.stringify({ error: 'something' }))
 
-        expect(instance.functionFetch('integration', 'function-with-error')).rejects.toEqual({
+        expect(instance.invoke('integration', 'function-with-error')).rejects.toEqual({
           // 2 levels of error because of jest
           error: { error: 'something' }
         })
@@ -71,7 +71,7 @@ describe('function request', () => {
       //@ts-ignore
       fetch.mockReject(new Error('fake error message'))
 
-      expect(instance.functionFetch('integration', 'server-error')).rejects.toEqual({
+      expect(instance.invoke('integration', 'server-error')).rejects.toEqual({
         error: new Error('fake error message')
       })
     })

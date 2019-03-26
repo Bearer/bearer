@@ -70,7 +70,7 @@ describe('withInvoke', () => {
 
     it('forwards loading on invoke', () => {
       const bearer = {
-        functionFetch: jest.fn(() => new Promise(() => {}))
+        invoke: jest.fn(() => new Promise(() => {}))
       } as any
 
       const rendered = render(bearer)
@@ -81,21 +81,21 @@ describe('withInvoke', () => {
 
     it('forwards data when success', async () => {
       const bearer = {
-        functionFetch: jest.fn(() => Promise.resolve({ data: 'Sponge bob is alive' }))
+        invoke: jest.fn(() => Promise.resolve({ data: 'Sponge bob is alive' }))
       } as any
 
       const rendered = render(bearer)
 
       rendered.root.findByType('button').props.onClick()
       // we delay expectations ;-)
-      await bearer.functionFetch()
+      await bearer.invoke()
 
       expect(rendered.toJSON()).toMatchSnapshot()
     })
 
     it('forwards data when failure', async () => {
       const bearer = {
-        functionFetch: jest.fn(() => Promise.reject({ error: 'data error' }))
+        invoke: jest.fn(() => Promise.reject({ error: 'data error' }))
       } as any
 
       const rendered = render(bearer)
@@ -103,7 +103,7 @@ describe('withInvoke', () => {
       rendered.root.findByType('button').props.onClick()
       // we delay expectations ;-)
       try {
-        await bearer.functionFetch()
+        await bearer.invoke()
       } catch (_e) {}
 
       expect(rendered.toJSON()).toMatchSnapshot()
