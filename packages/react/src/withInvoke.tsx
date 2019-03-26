@@ -6,7 +6,7 @@ export interface WithFetchProps<TReturnedData> {
   loading: boolean
   error?: any
   data?: TReturnedData
-  fetch: (params: any) => void
+  invoke: (params: any) => void
 }
 
 export interface IWrapperProps<TReturnedData> {
@@ -20,13 +20,10 @@ export interface IState<TReturnedData> {
   error?: any
 }
 
-export const withFunctionCall = function<TReturnedData, TP extends object = {}>(
-  integrationId: string,
-  functionName: string
-) {
+export const withInvoke = function<TReturnedData, TP extends object = {}>(integrationId: string, functionName: string) {
   return (WrappedComponent: React.ComponentType<TP & WithFetchProps<TReturnedData>>) =>
     class FetcherComponent extends React.Component<TP & IWrapperProps<TReturnedData>, IState<TReturnedData>> {
-      static displayName = `withFunctionCall(${functionName})(${getDisplayName(WrappedComponent)})`
+      static displayName = `withBearerInvoke(${functionName})(${getDisplayName(WrappedComponent)})`
       static contextType = BearerContext
       context!: React.ContextType<typeof BearerContext>
 
@@ -37,7 +34,7 @@ export const withFunctionCall = function<TReturnedData, TP extends object = {}>(
         }
       }
 
-      fetch = (params: any = {}) => {
+      invoke = (params: any = {}) => {
         this.setState({ ...this.state, error: null, loading: true })
         return this.context.bearer
           .functionFetch(integrationId, functionName, params)
@@ -64,7 +61,7 @@ export const withFunctionCall = function<TReturnedData, TP extends object = {}>(
             {...this.props}
             error={this.state.error}
             data={this.state.data}
-            fetch={this.fetch}
+            invoke={this.invoke}
             loading={this.state.loading}
           />
         )

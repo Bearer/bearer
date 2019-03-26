@@ -7,9 +7,9 @@ const integrationId = process.env.REACT_INTEGRATION_ID
 const setupId = '939407c0-473d-11e9-a595-499c863fdcda'
 const clientId = process.env.REACT_CLIENT_ID
 
-const { Connect, withFunctionCall } = Factory(integrationId)
+const { Connect, withInvoke } = Factory(integrationId)
 
-const Fetcher = withFunctionCall<string[]>('MyDataPlease')(props => {
+const Fetcher = withInvoke<string[]>('MyDataPlease')(props => {
   if (props.loading) {
     return <div>Loading</div>
   }

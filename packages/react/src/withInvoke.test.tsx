@@ -2,13 +2,13 @@ import React, { createContext } from 'react'
 import * as Renderer from 'react-test-renderer'
 import * as ShallowRenderer from 'react-test-renderer/shallow'
 import { BearerContext } from './bearer-provider'
-import { withFunctionCall } from './withFunctionCall'
+import { withInvoke } from './withInvoke'
 
 interface TProps {
   loading: boolean
   error?: any
   data?: { title: string }
-  fetch: (params: any) => void
+  invoke: (params: any) => void
   sommething: string
 }
 
@@ -28,21 +28,21 @@ class DummyWithFetchDataComponent extends React.Component<TProps> {
 
     return (
       <div>
-        <button onClick={this.props.fetch}>Click to fetch</button>
+        <button onClick={this.props.invoke}>Click to invoke</button>
       </div>
     )
   }
 }
 
-describe('withFunctionCall', () => {
+describe('withInvoke', () => {
   it('exports a function', () => {
-    expect(withFunctionCall).toBeInstanceOf(Function)
-    expect(withFunctionCall).toHaveLength(2)
+    expect(withInvoke).toBeInstanceOf(Function)
+    expect(withInvoke).toHaveLength(2)
   })
 
   describe('Wrapped Component', () => {
     const renderer = ShallowRenderer.createRenderer()
-    const WithFetch = withFunctionCall<{ title: string }, { sommething: string }>('integrationName', 'GimmeData')(
+    const WithFetch = withInvoke<{ title: string }, { sommething: string }>('integrationName', 'GimmeData')(
       DummyWithFetchDataComponent
     )
 
@@ -53,14 +53,12 @@ describe('withFunctionCall', () => {
     })
 
     it('sets the display name', () => {
-      expect(WithFetch.displayName).toEqual('withFunctionCall(GimmeData)(DummyWithFetchDataComponent)')
+      expect(WithFetch.displayName).toEqual('withBearerInvoke(GimmeData)(DummyWithFetchDataComponent)')
     })
   })
 
-  describe('fetch behaviours', () => {
-    const WithFetch = withFunctionCall<{ title: string }, any>('integrationName', 'GimmeData')(
-      DummyWithFetchDataComponent
-    )
+  describe('invoke behaviours', () => {
+    const WithFetch = withInvoke<{ title: string }, any>('integrationName', 'GimmeData')(DummyWithFetchDataComponent)
 
     function render(bearer: any) {
       return Renderer.create(
@@ -70,7 +68,7 @@ describe('withFunctionCall', () => {
       )
     }
 
-    it('forwards loading on fetch', () => {
+    it('forwards loading on invoke', () => {
       const bearer = {
         functionFetch: jest.fn(() => new Promise(() => {}))
       } as any

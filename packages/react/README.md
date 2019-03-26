@@ -17,7 +17,7 @@ We recommend creating a file per integration so that it is easier to maintain on
 
 ```tsx
 import { factory, Bearer } from '@bearer/react'
-const { Connect, withFunctionCall } = factory('my-integration-name')
+const { Connect, withInvoke } = factory('my-integration-name')
 ```
 
 ### `Connect` component
@@ -57,7 +57,7 @@ class MyComponent extends React.Component {
 }
 ```
 
-### `withFunctionCall` HOC
+### `withInvoke` HOC
 
 If for any reasons you want to display data coming bearer but without using built in Web Components, you can easily connect your React application with Bearer servers. More on React HOCs [here](https://reactjs.org/docs/higher-order-components.html)
 
@@ -66,13 +66,13 @@ Assuming we have a backend function named `GimmeData` returning an array of stri
 ```tsx
 // myConnectedToBearerComponent.tsx
 import { factory } from '@bearer/react'
-const { withFunctionCall } = factory('my-integration-name')
+const { withInvoke } = factory('my-integration-name')
 
 interface TProps {
   loading: boolean
   error?: any
   data?: { title: string }
-  fetch: (params: any) => void
+  invoke: (params: any) => void
   otherDataYouWantToPass: string
 }
 
@@ -89,14 +89,14 @@ function DisplayComponent(props: TProps) {
   return (
     <div>
       {this.props.otherDataYouWantToPass}
-      <button onClick={this.props.fetch}>Click to fetch</button>
+      <button onClick={this.props.invoke}>Click to invoke</button>
     </div>
   )
 }
 
-export default withFunctionCall('GimmeData')(DisplayComponent)
+export default withInvoke('GimmeData')(DisplayComponent)
 // if you want to add typing
-//export default withFunctionCall<string[], { otherDataYouWantToPass: string }>('GimmeData')(DisplayComponent)
+//export default withInvoke<string[], { otherDataYouWantToPass: string }>('GimmeData')(DisplayComponent)
 ```
 
 ## fromBearer
