@@ -52,7 +52,7 @@ export default function startLocalDevelopmentServer(
           emitter.emit('start:localServer:generatingFunctions:failed', { error })
         }
       }
-      refreshFunctions()
+      await refreshFunctions()
 
       chokidar
         .watch('.', {
