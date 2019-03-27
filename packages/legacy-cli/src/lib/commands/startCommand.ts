@@ -58,10 +58,6 @@ export function prepare(emitter, config, locator: Locator) {
       if (withViews) {
         // Link non TS files
         const watcher = await watchNonTSFiles(srcViewsDir, buildViewsComponentsDir)
-        const apiDef = locator.buildViewsResourcePath('src/openapi.json')
-        if (!fs.pathExistsSync(apiDef)) {
-          fs.writeJsonSync(apiDef, {})
-        }
         if (!watchMode) {
           watcher.close()
         }
