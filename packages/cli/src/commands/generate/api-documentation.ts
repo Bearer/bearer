@@ -22,16 +22,16 @@ export default class GenerateApiDocumentation extends BaseCommand {
   async run() {
     try {
       const { flags } = this.parse(GenerateApiDocumentation)
-      const { srcFunctionsDir, buildViewsComponentsDir } = this.locator
+      const { srcFunctionsDir, buildFunctionsDir } = this.locator
 
       const { integrationTitle, integrationUuid } = this.bearerConfig
       const spec = flags.soft
         ? {}
         : await new OpenApiSpecGenerator(srcFunctionsDir, { integrationTitle, integrationUuid }).build()
 
-      fs.ensureDirSync(buildViewsComponentsDir)
+      fs.ensureDirSync(buildFunctionsDir)
 
-      const openApiSpecPath = path.join(buildViewsComponentsDir, OPEN_API_SPEC)
+      const openApiSpecPath = path.join(buildFunctionsDir, OPEN_API_SPEC)
       const fileExists = fs.existsSync(openApiSpecPath)
       await fs.writeFile(openApiSpecPath, spec)
       const action = fileExists ? 'updated' : 'generated'
