@@ -2,8 +2,8 @@ import logger from './logger'
 import { overrideRequestMethod, overrideGetMethod } from './http-overrides'
 
 export const captureHttps = (module: any, event: any) => {
-  const clientId = (event.params || {}).clientId
-  const integrationUuid = (event.params || {}).scenarioUuid
+  const context = event.context || {}
+  const { clientId, integrationUuid } = context
   logger(`Ìnject ${clientId} and ${integrationUuid}`)
   process.env.clientId = clientId
   process.env.scenarioUuid = integrationUuid
