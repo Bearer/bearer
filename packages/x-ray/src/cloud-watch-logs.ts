@@ -3,6 +3,8 @@ import uuid from 'uuid/v1'
 import { AWS_LAMBDA_LOG_STREAM_NAME, BEARER_XRAY_LOG_GROUP } from './constants'
 import logger from './logger'
 
+const errorDebug = logger.extend('error')
+
 const cloudWatchLogsClientInstance = new CloudWatchLogs()
 
 export const sendToCloudwatchGroup = async (payload: any, cloudWatchLogsClient = cloudWatchLogsClientInstance) => {
@@ -18,25 +20,31 @@ export const sendToCloudwatchGroup = async (payload: any, cloudWatchLogsClient =
         }
       ]
     } as CloudWatchLogs.Types.PutLogEventsRequest
-    const createStream = await createLogStream(cloudWatchLogsClient, streamName)
-    logger('%j', createStream!.$response)
+    await createLogStream(cloudWatchLogsClient, streamName)
+    logger(`send event ${JSON.stringify(event)}`)
     const putLogEvent = await cloudWatchLogsClient.putLogEvents(event).promise()
-    logger('%j', putLogEvent.$response)
+    logger('%j', putLogEvent.$response.data)
+    logger('%j', putLogEvent.rejectedLogEventsInfo)
+    errorDebug('%j', putLogEvent.$response.error)
   } catch (error) {
-    console.log(`error ${error.message}`)
+    errorDebug(`error ${error.toString()}`)
   }
 }
 
 const createLogStream = async (client: CloudWatchLogs, streamName: string) => {
   try {
-    return await client
+    logger(`create stream ${streamName}`)
+    const stream = await client
       .createLogStream({
         logGroupName: BEARER_XRAY_LOG_GROUP!,
         logStreamName: streamName
       })
       .promise()
+    logger('%j', stream.$response.data)
+    errorDebug('%j', stream.$response.error)
+    return stream
   } catch (error) {
-    logger('%j', error)
-    return undefined
+    errorDebug(error.toString())
+    return { $response: { data: {} } }
   }
 }

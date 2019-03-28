@@ -8,6 +8,7 @@ export const overrideRequestMethod = (module: any) => {
   module._request = module.request
   module.request = (options: any, callaback: any) => {
     const settings = parseOptions(options)
+    logger.extend('request')('inside overriden request')
 
     if (settings.host === 'logs.eu-west-3.amazonaws.com') {
       logger('ignore logs.eu-west-3.amazonaws.com requests')
@@ -42,6 +43,7 @@ export const overrideGetMethod = (module: any) => {
   module._get = module.get
   module.get = (options: any, callaback: any) => {
     const settings = parseOptions(options)
+    logger.extend('get')('inside overriden get')
 
     if (settings.host === 'logs.eu-west-3.amazonaws.com') {
       logger('ignore logs.eu-west-3.amazonaws.com requests')
