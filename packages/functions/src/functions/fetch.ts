@@ -1,6 +1,5 @@
 import debug from '@bearer/logger'
 import http from 'http'
-import https from 'https'
 import { captureHttps } from '@bearer/x-ray'
 
 import * as d from '../declaration'
@@ -31,7 +30,6 @@ export abstract class FetchData<ReturnedData = any, TError = any, AuthContext = 
         return { error: BACKEND_ONLY_ERROR }
       }
       captureHttps(http, event)
-      captureHttps(https, event)
 
       const functionEvent: d.TFetchActionEvent = {
         ...eventAsActionParams(event),
