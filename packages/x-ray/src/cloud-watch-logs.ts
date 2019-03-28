@@ -18,8 +18,10 @@ export const sendToCloudwatchGroup = async (payload: any, cloudWatchLogsClient =
         }
       ]
     } as CloudWatchLogs.Types.PutLogEventsRequest
-    await createLogStream(cloudWatchLogsClient, streamName)
-    await cloudWatchLogsClient.putLogEvents(event).promise()
+    const createStream = await createLogStream(cloudWatchLogsClient, streamName)
+    logger('%j', createStream!.$response)
+    const putLogEvent = await cloudWatchLogsClient.putLogEvents(event).promise()
+    logger('%j', putLogEvent.$response)
   } catch (error) {
     console.log(`error ${error.message}`)
   }
