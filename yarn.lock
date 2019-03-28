@@ -982,45 +982,6 @@
     lodash "^4.17.11"
     tslib "^1"
 
-"@bearer/package-init@^0.95.1":
-  version "0.95.1"
-  resolved "https://registry.npmjs.org/@bearer/package-init/-/package-init-0.95.1.tgz#b5ea6ffb561b9297176cbd739cb944a6a9aead1f"
-  integrity sha512-xXgaaQ12a63C/UnaRbuEeHdF30f1B+UF6met5jfFnCc+8N9cV1ZyjBroK46CrfDsjgCI5lr8mKq4s/umZXF7cQ==
-  dependencies:
-    "@oclif/command" "^1"
-    "@oclif/config" "^1"
-    "@oclif/plugin-help" "^2"
-    cli-ux "^4.9.3"
-    comment-json "^1.1.3"
-    inquirer "^6.2.1"
-    lodash "^4.17.11"
-    tslib "^1"
-
-"@bearer/tsconfig@^0.95.1":
-  version "0.95.1"
-  resolved "https://registry.npmjs.org/@bearer/tsconfig/-/tsconfig-0.95.1.tgz#dce6aa8595eab4290f489b0ba9fbc3b99a35851a"
-  integrity sha512-aGd1HF05bTTKiN2YInFqt0PdUf125R9Q47QqClK3VDx0xCjYqQ4KbiTVIRL89ruUCb88hGT/vT6I959NjiXI4Q==
-
-"@bearer/tslint-config@^0.95.1":
-  version "0.95.1"
-  resolved "https://registry.npmjs.org/@bearer/tslint-config/-/tslint-config-0.95.1.tgz#aa9d3e366a3c6d4410f5f6a9b116a848a7d4bb80"
-  integrity sha512-E9PUK6WoEV/18pB2cb095pN66X1UVHHTdHSYpftLDPldZEE71c6MsgYO52POqtBJ1zoajPCOwUFvTQseKEvnyQ==
-  dependencies:
-    tslint-config-airbnb "^5.11.1"
-    tslint-config-prettier "^1.17.0"
-
-"@bearer/x-ray@0.92.1-canary.148":
-  version "0.92.1-canary.148"
-  resolved "https://registry.npmjs.org/@bearer/x-ray/-/x-ray-0.92.1-canary.148.tgz#9faadfc6ff88c766838707dc1282374762bdb64e"
-  integrity sha512-np8C3ELeLBxkKW9z0iHc/m9xaKBGqLTKYaJ4BxRiixXrqz01tD+Y1h+9pmoQb+FpBZGw2zZ34muLaCMf96nxig==
-  dependencies:
-    "@bearer/logger" "^0.95.1"
-    "@bearer/package-init" "^0.95.1"
-    "@bearer/tsconfig" "^0.95.1"
-    "@bearer/tslint-config" "^0.95.1"
-    "@types/uuid" "^3.4.4"
-    uuid "^3.3.2"
-
 "@cnakazawa/watch@^1.0.3":
   version "1.0.3"
   resolved "https://registry.npmjs.org/@cnakazawa/watch/-/watch-1.0.3.tgz#099139eaec7ebf07a27c1786a3ff64f39464d2ef"

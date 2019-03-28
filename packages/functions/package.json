@@ -22,7 +22,7 @@
   },
   "dependencies": {
     "@bearer/logger": "^0.106.0",
-    "@bearer/x-ray": "0.92.1-canary.148",
+    "@bearer/x-ray": "^0.106.0",
     "axios": "^0.18.0",
     "typescript": "^3.3.3333"
   },
