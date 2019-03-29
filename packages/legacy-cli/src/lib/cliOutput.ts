@@ -25,7 +25,7 @@ export default emitter => {
   /* ********* Start output ********* */
 
   emitter.on('start:prepare:installingDependencies', () => {
-    term.yellow('Installing views dependencies.')
+    term.yellow('Installing dependencies.')
     term('\n')
   })
 
