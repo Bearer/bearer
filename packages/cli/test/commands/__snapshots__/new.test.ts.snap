@@ -58,19 +58,19 @@ exports[`with views APIKEY generates an integration without any prompt and APIKE
     \\"generate\\": \\"bearer generate\\"
   },
   \\"dependencies\\": {
-    \\"@bearer/functions\\": \\"next\\",
+    \\"@bearer/functions\\": \\"beta6\\",
     \\"axios\\": \\"^0.18.0\\",
-    \\"@bearer/core\\": \\"next\\",
-    \\"@bearer/ui\\": \\"next\\"
+    \\"@bearer/core\\": \\"beta6\\",
+    \\"@bearer/ui\\": \\"beta6\\"
   },
   \\"devDependencies\\": {
-    \\"@bearer/cli\\": \\"next\\",
+    \\"@bearer/cli\\": \\"beta6\\",
     \\"@types/node\\": \\"^10.12.25\\",
-    \\"@bearer/js\\": \\"next\\"
+    \\"@bearer/js\\": \\"beta6\\"
   },
   \\"license\\": \\"MIT\\",
   \\"peerDependencies\\": {
-    \\"@bearer/js\\": \\"next\\"
+    \\"@bearer/js\\": \\"beta6\\"
   }
 }"
 `;
@@ -138,19 +138,19 @@ exports[`with views BASIC generates an integration without any prompt and BASIC 
     \\"generate\\": \\"bearer generate\\"
   },
   \\"dependencies\\": {
-    \\"@bearer/functions\\": \\"next\\",
+    \\"@bearer/functions\\": \\"beta6\\",
     \\"axios\\": \\"^0.18.0\\",
-    \\"@bearer/core\\": \\"next\\",
-    \\"@bearer/ui\\": \\"next\\"
+    \\"@bearer/core\\": \\"beta6\\",
+    \\"@bearer/ui\\": \\"beta6\\"
   },
   \\"devDependencies\\": {
-    \\"@bearer/cli\\": \\"next\\",
+    \\"@bearer/cli\\": \\"beta6\\",
     \\"@types/node\\": \\"^10.12.25\\",
-    \\"@bearer/js\\": \\"next\\"
+    \\"@bearer/js\\": \\"beta6\\"
   },
   \\"license\\": \\"MIT\\",
   \\"peerDependencies\\": {
-    \\"@bearer/js\\": \\"next\\"
+    \\"@bearer/js\\": \\"beta6\\"
   }
 }"
 `;
@@ -206,19 +206,19 @@ exports[`with views NONE generates an integration without any prompt and NONE 3`
     \\"generate\\": \\"bearer generate\\"
   },
   \\"dependencies\\": {
-    \\"@bearer/functions\\": \\"next\\",
+    \\"@bearer/functions\\": \\"beta6\\",
     \\"axios\\": \\"^0.18.0\\",
-    \\"@bearer/core\\": \\"next\\",
-    \\"@bearer/ui\\": \\"next\\"
+    \\"@bearer/core\\": \\"beta6\\",
+    \\"@bearer/ui\\": \\"beta6\\"
   },
   \\"devDependencies\\": {
-    \\"@bearer/cli\\": \\"next\\",
+    \\"@bearer/cli\\": \\"beta6\\",
     \\"@types/node\\": \\"^10.12.25\\",
-    \\"@bearer/js\\": \\"next\\"
+    \\"@bearer/js\\": \\"beta6\\"
   },
   \\"license\\": \\"MIT\\",
   \\"peerDependencies\\": {
-    \\"@bearer/js\\": \\"next\\"
+    \\"@bearer/js\\": \\"beta6\\"
   }
 }"
 `;
@@ -296,19 +296,19 @@ exports[`with views OAUTH1 generates an integration without any prompt and OAUTH
     \\"generate\\": \\"bearer generate\\"
   },
   \\"dependencies\\": {
-    \\"@bearer/functions\\": \\"next\\",
+    \\"@bearer/functions\\": \\"beta6\\",
     \\"oauth\\": \\"^0.9.15\\",
-    \\"@bearer/core\\": \\"next\\",
-    \\"@bearer/ui\\": \\"next\\"
+    \\"@bearer/core\\": \\"beta6\\",
+    \\"@bearer/ui\\": \\"beta6\\"
   },
   \\"devDependencies\\": {
-    \\"@bearer/cli\\": \\"next\\",
+    \\"@bearer/cli\\": \\"beta6\\",
     \\"@types/node\\": \\"^10.12.25\\",
-    \\"@bearer/js\\": \\"next\\"
+    \\"@bearer/js\\": \\"beta6\\"
   },
   \\"license\\": \\"MIT\\",
   \\"peerDependencies\\": {
-    \\"@bearer/js\\": \\"next\\"
+    \\"@bearer/js\\": \\"beta6\\"
   }
 }"
 `;
@@ -383,19 +383,19 @@ exports[`with views OAUTH2 generates an integration without any prompt and OAUTH
     \\"generate\\": \\"bearer generate\\"
   },
   \\"dependencies\\": {
-    \\"@bearer/functions\\": \\"next\\",
+    \\"@bearer/functions\\": \\"beta6\\",
     \\"axios\\": \\"^0.18.0\\",
-    \\"@bearer/core\\": \\"next\\",
-    \\"@bearer/ui\\": \\"next\\"
+    \\"@bearer/core\\": \\"beta6\\",
+    \\"@bearer/ui\\": \\"beta6\\"
   },
   \\"devDependencies\\": {
-    \\"@bearer/cli\\": \\"next\\",
+    \\"@bearer/cli\\": \\"beta6\\",
     \\"@types/node\\": \\"^10.12.25\\",
-    \\"@bearer/js\\": \\"next\\"
+    \\"@bearer/js\\": \\"beta6\\"
   },
   \\"license\\": \\"MIT\\",
   \\"peerDependencies\\": {
-    \\"@bearer/js\\": \\"next\\"
+    \\"@bearer/js\\": \\"beta6\\"
   }
 }"
 `;
@@ -452,11 +452,11 @@ exports[`without views APIKEY generates an integration without any prompt and AP
     \\"generate\\": \\"bearer generate\\"
   },
   \\"dependencies\\": {
-    \\"@bearer/functions\\": \\"next\\",
+    \\"@bearer/functions\\": \\"beta6\\",
     \\"axios\\": \\"^0.18.0\\"
   },
   \\"devDependencies\\": {
-    \\"@bearer/cli\\": \\"next\\",
+    \\"@bearer/cli\\": \\"beta6\\",
     \\"@types/node\\": \\"^10.12.25\\"
   },
   \\"license\\": \\"MIT\\"
@@ -521,11 +521,11 @@ exports[`without views BASIC generates an integration without any prompt and BAS
     \\"generate\\": \\"bearer generate\\"
   },
   \\"dependencies\\": {
-    \\"@bearer/functions\\": \\"next\\",
+    \\"@bearer/functions\\": \\"beta6\\",
     \\"axios\\": \\"^0.18.0\\"
   },
   \\"devDependencies\\": {
-    \\"@bearer/cli\\": \\"next\\",
+    \\"@bearer/cli\\": \\"beta6\\",
     \\"@types/node\\": \\"^10.12.25\\"
   },
   \\"license\\": \\"MIT\\"
@@ -578,11 +578,11 @@ exports[`without views NONE generates an integration without any prompt and NONE
     \\"generate\\": \\"bearer generate\\"
   },
   \\"dependencies\\": {
-    \\"@bearer/functions\\": \\"next\\",
+    \\"@bearer/functions\\": \\"beta6\\",
     \\"axios\\": \\"^0.18.0\\"
   },
   \\"devDependencies\\": {
-    \\"@bearer/cli\\": \\"next\\",
+    \\"@bearer/cli\\": \\"beta6\\",
     \\"@types/node\\": \\"^10.12.25\\"
   },
   \\"license\\": \\"MIT\\"
@@ -657,11 +657,11 @@ exports[`without views OAUTH1 generates an integration without any prompt and OA
     \\"generate\\": \\"bearer generate\\"
   },
   \\"dependencies\\": {
-    \\"@bearer/functions\\": \\"next\\",
+    \\"@bearer/functions\\": \\"beta6\\",
     \\"oauth\\": \\"^0.9.15\\"
   },
   \\"devDependencies\\": {
-    \\"@bearer/cli\\": \\"next\\",
+    \\"@bearer/cli\\": \\"beta6\\",
     \\"@types/node\\": \\"^10.12.25\\"
   },
   \\"license\\": \\"MIT\\"
@@ -733,11 +733,11 @@ exports[`without views OAUTH2 generates an integration without any prompt and OA
     \\"generate\\": \\"bearer generate\\"
   },
   \\"dependencies\\": {
-    \\"@bearer/functions\\": \\"next\\",
+    \\"@bearer/functions\\": \\"beta6\\",
     \\"axios\\": \\"^0.18.0\\"
   },
   \\"devDependencies\\": {
-    \\"@bearer/cli\\": \\"next\\",
+    \\"@bearer/cli\\": \\"beta6\\",
     \\"@types/node\\": \\"^10.12.25\\"
   },
   \\"license\\": \\"MIT\\"
