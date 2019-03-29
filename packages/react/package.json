@@ -34,7 +34,7 @@
     "typescript": "^3.3.3333"
   },
   "peerDependencies": {
-    "@bearer/js": "^0.96.0",
+    "@bearer/js": ">=0.107.0",
     "react": "^16.6.0-0"
   },
   "dependencies": {
