@@ -13,18 +13,12 @@
     "generate": "bearer generate"
   },
   "dependencies": {
-    "@bearer/core": "{{bearerTagVersion}}",
     "@bearer/functions": "{{bearerTagVersion}}",
-    "@bearer/ui": "{{bearerTagVersion}}",
     {{bearerRestClient}}
   },
   "devDependencies": {
     "@bearer/cli": "{{bearerTagVersion}}",
-    "@bearer/js": "{{bearerTagVersion}}",
     "@types/node": "^10.12.25"
-  },
-  "peerDependencies": {
-    "@bearer/js": "{{bearerTagVersion}}"
   },
   "license": "MIT"
 }

@@ -42,6 +42,39 @@ exports[`with views APIKEY generates an integration without any prompt and APIKE
 "
 `;
 
+exports[`with views APIKEY generates an integration without any prompt and APIKEY 3`] = `
+"{
+  \\"name\\": \\"apikeyintegration\\",
+  \\"version\\": \\"0.0.1\\",
+  \\"description\\": \\"APIKEYIntegration\\",
+  \\"main\\": \\"dist/index.js\\",
+  \\"types\\": \\"dist/types/components.d.ts\\",
+  \\"module\\": \\"dist/esm/index.js\\",
+  \\"collection\\": \\"dist/collection/collection-manifest.json\\",
+  \\"scripts\\": {
+    \\"push\\": \\"bearer push\\",
+    \\"start\\": \\"bearer start\\",
+    \\"invoke\\": \\"bearer invoke\\",
+    \\"generate\\": \\"bearer generate\\"
+  },
+  \\"dependencies\\": {
+    \\"@bearer/functions\\": \\"next\\",
+    \\"axios\\": \\"^0.18.0\\",
+    \\"@bearer/core\\": \\"next\\",
+    \\"@bearer/ui\\": \\"next\\"
+  },
+  \\"devDependencies\\": {
+    \\"@bearer/cli\\": \\"next\\",
+    \\"@types/node\\": \\"^10.12.25\\",
+    \\"@bearer/js\\": \\"next\\"
+  },
+  \\"license\\": \\"MIT\\",
+  \\"peerDependencies\\": {
+    \\"@bearer/js\\": \\"next\\"
+  }
+}"
+`;
+
 exports[`with views BASIC generates an integration without any prompt and BASIC 1`] = `
 "
 What's next?
@@ -89,6 +122,39 @@ exports[`with views BASIC generates an integration without any prompt and BASIC 
 "
 `;
 
+exports[`with views BASIC generates an integration without any prompt and BASIC 3`] = `
+"{
+  \\"name\\": \\"basicintegration\\",
+  \\"version\\": \\"0.0.1\\",
+  \\"description\\": \\"BASICIntegration\\",
+  \\"main\\": \\"dist/index.js\\",
+  \\"types\\": \\"dist/types/components.d.ts\\",
+  \\"module\\": \\"dist/esm/index.js\\",
+  \\"collection\\": \\"dist/collection/collection-manifest.json\\",
+  \\"scripts\\": {
+    \\"push\\": \\"bearer push\\",
+    \\"start\\": \\"bearer start\\",
+    \\"invoke\\": \\"bearer invoke\\",
+    \\"generate\\": \\"bearer generate\\"
+  },
+  \\"dependencies\\": {
+    \\"@bearer/functions\\": \\"next\\",
+    \\"axios\\": \\"^0.18.0\\",
+    \\"@bearer/core\\": \\"next\\",
+    \\"@bearer/ui\\": \\"next\\"
+  },
+  \\"devDependencies\\": {
+    \\"@bearer/cli\\": \\"next\\",
+    \\"@types/node\\": \\"^10.12.25\\",
+    \\"@bearer/js\\": \\"next\\"
+  },
+  \\"license\\": \\"MIT\\",
+  \\"peerDependencies\\": {
+    \\"@bearer/js\\": \\"next\\"
+  }
+}"
+`;
+
 exports[`with views NONE generates an integration without any prompt and NONE 1`] = `
 "
 What's next?
@@ -122,6 +188,39 @@ exports[`with views NONE generates an integration without any prompt and NONE 2`
   \\"authType\\": \\"NONE\\"
 }
 "
+`;
+
+exports[`with views NONE generates an integration without any prompt and NONE 3`] = `
+"{
+  \\"name\\": \\"noneintegration\\",
+  \\"version\\": \\"0.0.1\\",
+  \\"description\\": \\"NONEIntegration\\",
+  \\"main\\": \\"dist/index.js\\",
+  \\"types\\": \\"dist/types/components.d.ts\\",
+  \\"module\\": \\"dist/esm/index.js\\",
+  \\"collection\\": \\"dist/collection/collection-manifest.json\\",
+  \\"scripts\\": {
+    \\"push\\": \\"bearer push\\",
+    \\"start\\": \\"bearer start\\",
+    \\"invoke\\": \\"bearer invoke\\",
+    \\"generate\\": \\"bearer generate\\"
+  },
+  \\"dependencies\\": {
+    \\"@bearer/functions\\": \\"next\\",
+    \\"axios\\": \\"^0.18.0\\",
+    \\"@bearer/core\\": \\"next\\",
+    \\"@bearer/ui\\": \\"next\\"
+  },
+  \\"devDependencies\\": {
+    \\"@bearer/cli\\": \\"next\\",
+    \\"@types/node\\": \\"^10.12.25\\",
+    \\"@bearer/js\\": \\"next\\"
+  },
+  \\"license\\": \\"MIT\\",
+  \\"peerDependencies\\": {
+    \\"@bearer/js\\": \\"next\\"
+  }
+}"
 `;
 
 exports[`with views OAUTH1 generates an integration without any prompt and OAUTH1 1`] = `
@@ -181,6 +280,39 @@ exports[`with views OAUTH1 generates an integration without any prompt and OAUTH
 "
 `;
 
+exports[`with views OAUTH1 generates an integration without any prompt and OAUTH1 3`] = `
+"{
+  \\"name\\": \\"oauth1-integration\\",
+  \\"version\\": \\"0.0.1\\",
+  \\"description\\": \\"OAUTH1Integration\\",
+  \\"main\\": \\"dist/index.js\\",
+  \\"types\\": \\"dist/types/components.d.ts\\",
+  \\"module\\": \\"dist/esm/index.js\\",
+  \\"collection\\": \\"dist/collection/collection-manifest.json\\",
+  \\"scripts\\": {
+    \\"push\\": \\"bearer push\\",
+    \\"start\\": \\"bearer start\\",
+    \\"invoke\\": \\"bearer invoke\\",
+    \\"generate\\": \\"bearer generate\\"
+  },
+  \\"dependencies\\": {
+    \\"@bearer/functions\\": \\"next\\",
+    \\"oauth\\": \\"^0.9.15\\",
+    \\"@bearer/core\\": \\"next\\",
+    \\"@bearer/ui\\": \\"next\\"
+  },
+  \\"devDependencies\\": {
+    \\"@bearer/cli\\": \\"next\\",
+    \\"@types/node\\": \\"^10.12.25\\",
+    \\"@bearer/js\\": \\"next\\"
+  },
+  \\"license\\": \\"MIT\\",
+  \\"peerDependencies\\": {
+    \\"@bearer/js\\": \\"next\\"
+  }
+}"
+`;
+
 exports[`with views OAUTH2 generates an integration without any prompt and OAUTH2 1`] = `
 "
 What's next?
@@ -235,6 +367,39 @@ exports[`with views OAUTH2 generates an integration without any prompt and OAUTH
 "
 `;
 
+exports[`with views OAUTH2 generates an integration without any prompt and OAUTH2 3`] = `
+"{
+  \\"name\\": \\"oauth2-integration\\",
+  \\"version\\": \\"0.0.1\\",
+  \\"description\\": \\"OAUTH2Integration\\",
+  \\"main\\": \\"dist/index.js\\",
+  \\"types\\": \\"dist/types/components.d.ts\\",
+  \\"module\\": \\"dist/esm/index.js\\",
+  \\"collection\\": \\"dist/collection/collection-manifest.json\\",
+  \\"scripts\\": {
+    \\"push\\": \\"bearer push\\",
+    \\"start\\": \\"bearer start\\",
+    \\"invoke\\": \\"bearer invoke\\",
+    \\"generate\\": \\"bearer generate\\"
+  },
+  \\"dependencies\\": {
+    \\"@bearer/functions\\": \\"next\\",
+    \\"axios\\": \\"^0.18.0\\",
+    \\"@bearer/core\\": \\"next\\",
+    \\"@bearer/ui\\": \\"next\\"
+  },
+  \\"devDependencies\\": {
+    \\"@bearer/cli\\": \\"next\\",
+    \\"@types/node\\": \\"^10.12.25\\",
+    \\"@bearer/js\\": \\"next\\"
+  },
+  \\"license\\": \\"MIT\\",
+  \\"peerDependencies\\": {
+    \\"@bearer/js\\": \\"next\\"
+  }
+}"
+`;
+
 exports[`without views APIKEY generates an integration without any prompt and APIKEY 1`] = `
 "
 What's next?
@@ -267,6 +432,34 @@ exports[`without views APIKEY generates an integration without any prompt and AP
       \\"controlName\\": \\"apiKey\\"
     }
   ]
+}
+"
+`;
+
+exports[`without views APIKEY generates an integration without any prompt and APIKEY 3`] = `
+"{
+  \\"name\\": \\"apikeyintegration\\",
+  \\"version\\": \\"0.0.1\\",
+  \\"description\\": \\"APIKEYIntegration\\",
+  \\"main\\": \\"dist/index.js\\",
+  \\"types\\": \\"dist/types/components.d.ts\\",
+  \\"module\\": \\"dist/esm/index.js\\",
+  \\"collection\\": \\"dist/collection/collection-manifest.json\\",
+  \\"scripts\\": {
+    \\"push\\": \\"bearer push\\",
+    \\"start\\": \\"bearer start\\",
+    \\"invoke\\": \\"bearer invoke\\",
+    \\"generate\\": \\"bearer generate\\"
+  },
+  \\"dependencies\\": {
+    \\"@bearer/functions\\": \\"next\\",
+    \\"axios\\": \\"^0.18.0\\"
+  },
+  \\"devDependencies\\": {
+    \\"@bearer/cli\\": \\"next\\",
+    \\"@types/node\\": \\"^10.12.25\\"
+  },
+  \\"license\\": \\"MIT\\"
 }
 "
 `;
@@ -312,6 +505,34 @@ exports[`without views BASIC generates an integration without any prompt and BAS
 "
 `;
 
+exports[`without views BASIC generates an integration without any prompt and BASIC 3`] = `
+"{
+  \\"name\\": \\"basicintegration\\",
+  \\"version\\": \\"0.0.1\\",
+  \\"description\\": \\"BASICIntegration\\",
+  \\"main\\": \\"dist/index.js\\",
+  \\"types\\": \\"dist/types/components.d.ts\\",
+  \\"module\\": \\"dist/esm/index.js\\",
+  \\"collection\\": \\"dist/collection/collection-manifest.json\\",
+  \\"scripts\\": {
+    \\"push\\": \\"bearer push\\",
+    \\"start\\": \\"bearer start\\",
+    \\"invoke\\": \\"bearer invoke\\",
+    \\"generate\\": \\"bearer generate\\"
+  },
+  \\"dependencies\\": {
+    \\"@bearer/functions\\": \\"next\\",
+    \\"axios\\": \\"^0.18.0\\"
+  },
+  \\"devDependencies\\": {
+    \\"@bearer/cli\\": \\"next\\",
+    \\"@types/node\\": \\"^10.12.25\\"
+  },
+  \\"license\\": \\"MIT\\"
+}
+"
+`;
+
 exports[`without views NONE generates an integration without any prompt and NONE 1`] = `
 "
 What's next?
@@ -337,6 +558,34 @@ What's next?
 exports[`without views NONE generates an integration without any prompt and NONE 2`] = `
 "{
   \\"authType\\": \\"NONE\\"
+}
+"
+`;
+
+exports[`without views NONE generates an integration without any prompt and NONE 3`] = `
+"{
+  \\"name\\": \\"noneintegration\\",
+  \\"version\\": \\"0.0.1\\",
+  \\"description\\": \\"NONEIntegration\\",
+  \\"main\\": \\"dist/index.js\\",
+  \\"types\\": \\"dist/types/components.d.ts\\",
+  \\"module\\": \\"dist/esm/index.js\\",
+  \\"collection\\": \\"dist/collection/collection-manifest.json\\",
+  \\"scripts\\": {
+    \\"push\\": \\"bearer push\\",
+    \\"start\\": \\"bearer start\\",
+    \\"invoke\\": \\"bearer invoke\\",
+    \\"generate\\": \\"bearer generate\\"
+  },
+  \\"dependencies\\": {
+    \\"@bearer/functions\\": \\"next\\",
+    \\"axios\\": \\"^0.18.0\\"
+  },
+  \\"devDependencies\\": {
+    \\"@bearer/cli\\": \\"next\\",
+    \\"@types/node\\": \\"^10.12.25\\"
+  },
+  \\"license\\": \\"MIT\\"
 }
 "
 `;
@@ -392,6 +641,34 @@ exports[`without views OAUTH1 generates an integration without any prompt and OA
 "
 `;
 
+exports[`without views OAUTH1 generates an integration without any prompt and OAUTH1 3`] = `
+"{
+  \\"name\\": \\"oauth1-integration\\",
+  \\"version\\": \\"0.0.1\\",
+  \\"description\\": \\"OAUTH1Integration\\",
+  \\"main\\": \\"dist/index.js\\",
+  \\"types\\": \\"dist/types/components.d.ts\\",
+  \\"module\\": \\"dist/esm/index.js\\",
+  \\"collection\\": \\"dist/collection/collection-manifest.json\\",
+  \\"scripts\\": {
+    \\"push\\": \\"bearer push\\",
+    \\"start\\": \\"bearer start\\",
+    \\"invoke\\": \\"bearer invoke\\",
+    \\"generate\\": \\"bearer generate\\"
+  },
+  \\"dependencies\\": {
+    \\"@bearer/functions\\": \\"next\\",
+    \\"oauth\\": \\"^0.9.15\\"
+  },
+  \\"devDependencies\\": {
+    \\"@bearer/cli\\": \\"next\\",
+    \\"@types/node\\": \\"^10.12.25\\"
+  },
+  \\"license\\": \\"MIT\\"
+}
+"
+`;
+
 exports[`without views OAUTH2 generates an integration without any prompt and OAUTH2 1`] = `
 "
 What's next?
@@ -436,6 +713,34 @@ exports[`without views OAUTH2 generates an integration without any prompt and OA
       \\"controlName\\": \\"clientSecret\\"
     }
   ]
+}
+"
+`;
+
+exports[`without views OAUTH2 generates an integration without any prompt and OAUTH2 3`] = `
+"{
+  \\"name\\": \\"oauth2-integration\\",
+  \\"version\\": \\"0.0.1\\",
+  \\"description\\": \\"OAUTH2Integration\\",
+  \\"main\\": \\"dist/index.js\\",
+  \\"types\\": \\"dist/types/components.d.ts\\",
+  \\"module\\": \\"dist/esm/index.js\\",
+  \\"collection\\": \\"dist/collection/collection-manifest.json\\",
+  \\"scripts\\": {
+    \\"push\\": \\"bearer push\\",
+    \\"start\\": \\"bearer start\\",
+    \\"invoke\\": \\"bearer invoke\\",
+    \\"generate\\": \\"bearer generate\\"
+  },
+  \\"dependencies\\": {
+    \\"@bearer/functions\\": \\"next\\",
+    \\"axios\\": \\"^0.18.0\\"
+  },
+  \\"devDependencies\\": {
+    \\"@bearer/cli\\": \\"next\\",
+    \\"@types/node\\": \\"^10.12.25\\"
+  },
+  \\"license\\": \\"MIT\\"
 }
 "
 `;
