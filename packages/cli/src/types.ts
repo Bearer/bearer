@@ -61,7 +61,6 @@ export type Config = BaseConfig & {
 
 export type AuthConfig = {
   authType: Authentication
-  setupViews?: any[]
 }
 
 export type IntegrationBuildEnv = {

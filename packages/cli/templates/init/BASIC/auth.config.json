@@ -1,15 +1,3 @@
 {
-  "authType": "BASIC",
-  "setupViews": [
-    {
-      "type": "text",
-      "label": "Username",
-      "controlName": "username"
-    },
-    {
-      "type": "password",
-      "label": "Password",
-      "controlName": "password"
-    }
-  ]
+  "authType": "BASIC"
 }

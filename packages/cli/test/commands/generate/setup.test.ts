@@ -6,34 +6,10 @@ import { ensureBearerStructure } from '../../helpers/setup'
 import { readFile } from '../../helpers/utils'
 
 const testCases: any = [
-  [
-    'BASIC',
-    {
-      authType: 'BASIC',
-      setupViews: [
-        { type: 'text', label: 'Username', controlName: 'username' },
-        { type: 'password', label: 'Password', controlName: 'password' }
-      ]
-    }
-  ],
-  [
-    'OAUTH2',
-    {
-      authType: 'OAUTH2',
-      setupViews: [
-        { type: 'text', label: 'Client ID', controlName: 'clientID' },
-        { type: 'password', label: 'Client Secret', controlName: 'clientSecret' }
-      ]
-    }
-  ],
-
-  [
-    'APIKEY',
-    {
-      authType: 'APIKEY',
-      setupViews: [{ type: 'password', label: 'Api Key', controlName: 'apiKey' }]
-    }
-  ]
+  ['BASIC', { authType: 'BASIC' }],
+  ['OAUTH1', { authType: 'OAUTH1' }],
+  ['OAUTH2', { authType: 'OAUTH2' }],
+  ['APIKEY', { authType: 'APIKEY' }]
 ]
 
 describe('generate:setup', () => {

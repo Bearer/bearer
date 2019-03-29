@@ -6,6 +6,7 @@ import BaseCommand from '../../base-command'
 import { RequireIntegrationFolder, skipIfNoViews } from '../../utils/decorators'
 import * as Listr from 'listr'
 import buildSetup from '../../tasks/build-setup'
+import Authentications from '@bearer/types/lib/authentications'
 
 export default class GenerateSetup extends BaseCommand {
   static description = 'Generate a Bearer Setup'
@@ -19,7 +20,29 @@ export default class GenerateSetup extends BaseCommand {
   async run() {
     const { flags } = this.parse(GenerateSetup)
     if (flags.force || !setupExists(this.locator.srcViewsDir)) {
-      const fields = this.integrationAuthConfig.setupViews
+      const { authType } = this.integrationAuthConfig
+
+      let fields
+
+      if (authType === Authentications.Basic) {
+        fields = [
+          { type: 'text', label: 'Username', controlName: 'username' },
+          { type: 'password', label: 'Password', controlName: 'password' }
+        ]
+      } else if (authType === Authentications.ApiKey) {
+        fields = [{ type: 'password', label: 'Api Key', controlName: 'apiKey' }]
+      } else if (authType === Authentications.OAuth1) {
+        fields = [
+          { type: 'text', label: 'Consumer Key', controlName: 'consumerKey' },
+          { type: 'password', label: 'Consumer Secret', controlName: 'consumerSecret' }
+        ]
+      } else if (authType === Authentications.OAuth2) {
+        fields = [
+          { type: 'text', label: 'Client ID', controlName: 'clientID' },
+          { type: 'password', label: 'Client Secret', controlName: 'clientSecret' }
+        ]
+      }
+
       if (fields && fields.length) {
         try {
           const vars = this.getVars(this.bearerConfig.integrationConfig.integrationTitle, fields)

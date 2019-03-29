@@ -36,14 +36,7 @@ export function ensureBearerStructure({
     path.join(bearerFolder, 'auth.config.json'),
     JSON.stringify(
       authConfig || {
-        authType: 'APIKEY',
-        setupViews: [
-          {
-            type: 'password',
-            label: 'Api Key',
-            controlName: 'apiKey'
-          }
-        ]
+        authType: 'APIKEY'
       }
     )
   )

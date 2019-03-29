@@ -9,17 +9,5 @@
   "authorizationParams": {},
   "config": {
     "scope": []
-  },
-  "setupViews": [
-    {
-      "type": "text",
-      "label": "Consumer Key",
-      "controlName": "consumerKey"
-    },
-    {
-      "type": "password",
-      "label": "Consumer Secret",
-      "controlName": "consumerSecret"
-    }
-  ]
+  }
 }

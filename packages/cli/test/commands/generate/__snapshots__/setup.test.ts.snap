@@ -217,6 +217,113 @@ export type ReturnedData = {
 "
 `;
 
+exports[`generate:setup OAUTH1 creates setup files 1`] = `
+"/*
+  The purpose of this component is to save integration credentials.
+  This file has been generated automatically. Edit it at your own risk :-)
+*/
+
+import { RootComponent, State, Prop, Output } from '@bearer/core'
+import '@bearer/ui'
+import { FieldSet } from '@bearer/ui/lib/collection/components/Forms/Fieldset'
+
+@RootComponent({
+  name: 'setup-action',
+})
+export class SetupAction {
+  @Prop() display: 'inline' | 'block' = 'inline'
+
+  @State() fields = new FieldSet([{\\"type\\":\\"text\\",\\"label\\":\\"Consumer Key\\",\\"controlName\\":\\"consumerKey\\"},{\\"type\\":\\"password\\",\\"label\\":\\"Consumer Secret\\",\\"controlName\\":\\"consumerSecret\\"}])
+
+  @Output() setup: any
+
+  setupSubmitHandler = (e: CustomEvent) => {
+    this.setup = e.detail
+  }
+
+  render() {
+    return (
+      <bearer-setup
+        display={this.display}
+        onSetupSubmit={this.setupSubmitHandler}
+        integrationId='BEARER_INTEGRATION_ID'
+        fields={this.fields}
+      />
+    )
+  }
+}
+"
+`;
+
+exports[`generate:setup OAUTH1 creates setup files 2`] = `
+"/*
+  The purpose of this component is to show integration setup id.
+  This file has been generated automatically. Edit it at your own risk :-)
+*/
+
+import { RootComponent, Input } from \\"@bearer/core\\";
+import \\"@bearer/ui\\";
+
+@RootComponent({
+  name: 'setup-view',
+})
+export class SetupView {
+  @Input() setup: any
+
+  render() {
+    return (
+      <bearer-setup-display integrationId=\\"BEARER_INTEGRATION_ID\\" setupId={(this as any).setupId} />
+    )
+  }
+}
+"
+`;
+
+exports[`generate:setup OAUTH1 creates setup files 3`] = `
+"import { TOAUTH1AuthContext, FetchData, TFetchActionEvent, TFetchPromise } from '@bearer/functions'
+
+export default class SaveSetupFunction extends FetchData implements FetchData<ReturnedData, any, TOAUTH1AuthContext> {
+  async action(event: TFetchActionEvent<Params, TOAUTH1AuthContext>): TFetchPromise< ReturnedData> {
+    const { data, referenceId } = await event.store.save<State>(event.params.referenceId, event.params.setup)
+    return { data, referenceId }
+  }
+}
+
+export type Params = {
+  setup: any
+  referenceId?: string
+}
+
+export type State = {
+  consumerKey: string
+  consumerSecret: string
+}
+
+export type ReturnedData = State
+"
+`;
+
+exports[`generate:setup OAUTH1 creates setup files 4`] = `
+"import { TOAUTH1AuthContext, FetchData, TFetchActionEvent, TFetchPromise } from '@bearer/functions'
+
+export default class RetrieveSetupFunction extends FetchData implements FetchData<ReturnedData, any, TOAUTH1AuthContext> {
+  async action(event: TFetchActionEvent<Params, TOAUTH1AuthContext>): TFetchPromise<ReturnedData> {
+    const { data, referenceId } = await event.store.find<ReturnedData>(event.params.referenceId)
+    return { data, referenceId }
+  }
+}
+
+export type Params = {
+  setup: any
+  referenceId: string
+}
+
+export type ReturnedData = {
+  accessToken: string
+}
+"
+`;
+
 exports[`generate:setup OAUTH2 creates setup files 1`] = `
 "/*
   The purpose of this component is to save integration credentials.
