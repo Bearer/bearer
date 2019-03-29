@@ -64,6 +64,7 @@ export default class BuildFunctions extends BaseCommand {
         if (!files.length) {
           return reject(new Error('No func to transpile'))
         }
+        console.log('ok')
 
         const config: webpack.Configuration = {
           ...baseConfig,
@@ -75,10 +76,13 @@ export default class BuildFunctions extends BaseCommand {
             libraryTarget: 'commonjs2',
             filename: '[name].js',
             path: distPath
-          }
+          },
+          // the sdk is already provided within the lamnda through a layer
+          externals: /aws\-sdk/
         }
 
         webpack(config, (err: any, stats: webpack.Stats) => {
+          this.debug(stats.toJson('verbose'))
           if (err || stats.hasErrors()) {
             reject(
               stats.toString({
