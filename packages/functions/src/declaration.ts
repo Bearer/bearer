@@ -20,11 +20,13 @@ export type TOAUTH1AuthContext = TBaseAuthContext<{ accessToken: string; tokenSe
 }
 export type TOAUTH2AuthContext = TBaseAuthContext<{ accessToken: string }>
 export type TNONEAuthContext = TBaseAuthContext<undefined>
+export type TCUSTOMAuthContext = TBaseAuthContext<undefined>
 export type TBASICAuthContext = TBaseAuthContext<{ username: string; password: string }>
 export type TAPIKEYAuthContext = TBaseAuthContext<{ apiKey: string }>
 
 export type TAuthContext =
   | TNONEAuthContext
+  | TCUSTOMAuthContext
   | TOAUTH2AuthContext
   | TBASICAuthContext
   | TAPIKEYAuthContext

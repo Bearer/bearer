@@ -3,7 +3,8 @@ export enum Authentications {
   OAuth1 = 'OAUTH1',
   Basic = 'BASIC',
   ApiKey = 'APIKEY',
-  NoAuth = 'NONE'
+  NoAuth = 'NONE',
+  Custom = 'CUSTOM'
 }
 
 export default Authentications

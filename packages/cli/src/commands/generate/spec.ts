@@ -5,6 +5,7 @@ import * as path from 'path'
 import BaseCommand from '../../base-command'
 import { RequireIntegrationFolder, skipIfNoViews } from '../../utils/decorators'
 import { copyFiles } from '../../utils/helpers'
+import Authentications from '@bearer/types/lib/authentications'
 
 export default class GenerateSpec extends BaseCommand {
   static description = 'Generate spec file for bearer integration'
@@ -39,7 +40,10 @@ export default class GenerateSpec extends BaseCommand {
       label: 'Setup Display Component'
     },`
         const authType: string = this.integrationAuthConfig.authType
-        const vars = authType === 'noAuth' || authType === 'NONE' ? {} : { setup }
+        const vars =
+          authType === 'noAuth' || authType === Authentications.NoAuth || authType === Authentications.Custom
+            ? {}
+            : { setup }
         await copyFiles(this, 'generate/integration_specs', targetFolder, vars)
         this.success('Spec file successfully generated! 🎉')
       } catch (e) {

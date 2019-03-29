@@ -34,9 +34,21 @@ describe('generate:setup', () => {
   })
 })
 
-describe('No auth', () => {
+describe('No Auth', () => {
   it('create setup files ', async () => {
     const bearerPath: string = ensureBearerStructure({ authConfig: { authType: 'NONE' }, folderName: 'none' })
+    await GenerateSetup.run(['--path', bearerPath])
+    expect(fs.existsSync(path.join(bearerPath, 'views', 'setup-action.tsx'))).toBeFalsy()
+    expect(fs.existsSync(path.join(bearerPath, 'views', 'setup-display.tsx'))).toBeFalsy()
+    expect(fs.existsSync(path.join(bearerPath, 'functions', 'saveSetup.ts'))).toBeFalsy()
+    expect(fs.existsSync(path.join(bearerPath, 'functions', 'retrieveSetup.ts'))).toBeFalsy()
+    await setTimeout(() => {}, 100)
+  })
+})
+
+describe('Custom Auth', () => {
+  it('create setup files ', async () => {
+    const bearerPath: string = ensureBearerStructure({ authConfig: { authType: 'CUSTOM' }, folderName: 'none' })
     await GenerateSetup.run(['--path', bearerPath])
     expect(fs.existsSync(path.join(bearerPath, 'views', 'setup-action.tsx'))).toBeFalsy()
     expect(fs.existsSync(path.join(bearerPath, 'views', 'setup-display.tsx'))).toBeFalsy()
