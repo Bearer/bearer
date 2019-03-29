@@ -25,7 +25,7 @@ export const invoke = (emitter, config, locator: Locator) => async (func, cmd) =
   try {
     const integrationHostURL = await startLocalDevelopmentServer(emitter, config, locator)
 
-    const client = axios.create({ baseURL: `${integrationHostURL}api/v1`, timeout: 5000 })
+    const client = axios.create({ baseURL: `${integrationHostURL}api/v3/backend/functions`, timeout: 5000 })
 
     const { data } = await client.post(`${integrationUuid}/${func}`, body, { params })
     // used by cli: do not remove

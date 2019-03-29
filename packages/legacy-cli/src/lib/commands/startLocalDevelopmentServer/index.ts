@@ -84,19 +84,13 @@ export default function startLocalDevelopmentServer(
       process.env.bearerBaseURL = bearerBaseURL
 
       router.post(
-        `v3/functions/${config.integrationUuid}/:functionName`,
-        functionHandler(distPath, devFunctionsContext, bearerBaseURL),
+        `v3/backend/functions/${config.integrationUuid}/:functionName`,
+        functionHandler(distPath, devFunctionsContext, bearerBaseURL, true),
         (ctx, _next) => ctx.ok(ctx.funcDatum)
       )
 
       router.post(
-        `v2/functions/${config.integrationUuid}/:functionName`,
-        functionHandler(distPath, devFunctionsContext, bearerBaseURL),
-        (ctx, _next) => ctx.ok(ctx.funcDatum)
-      )
-
-      router.all(
-        `v1/${config.integrationUuid}/:functionName`,
+        `v3/functions/${config.integrationUuid}/:functionName`,
         functionHandler(distPath, devFunctionsContext, bearerBaseURL),
         (ctx, _next) => ctx.ok(ctx.funcDatum)
       )
@@ -127,7 +121,10 @@ export default function startLocalDevelopmentServer(
   })
 }
 
-const functionHandler = (distPath: string, devFunctionsContext, bearerBaseURL: string) => async (ctx, next) =>
+const functionHandler = (distPath: string, devFunctionsContext, bearerBaseURL: string, isBackend = false) => async (
+  ctx,
+  next
+) =>
   new Promise(async (resolve, _reject) => {
     try {
       const func = requireUncached(`${distPath}/${ctx.params.functionName}`).default
@@ -140,7 +137,8 @@ const functionHandler = (distPath: string, devFunctionsContext, bearerBaseURL: s
             ...devFunctionsContext.global,
             ...devFunctionsContext[ctx.params.functionName],
             bearerBaseURL,
-            ...userDefinedData
+            ...userDefinedData,
+            isBackend
           },
           queryStringParameters: ctx.query,
           body: JSON.stringify(ctx.request.body)
