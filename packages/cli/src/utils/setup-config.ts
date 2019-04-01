@@ -7,7 +7,10 @@ import * as path from 'path'
 import * as rc from 'rc'
 import { promisify } from 'util'
 
-import { BaseConfig, BearerConfig, BearerEnv, Config, IntegrationConfig } from '../types'
+import { BaseConfig, BearerConfig, BearerEnv, Config, IntegrationConfig, TAccessToken } from '../types'
+
+const writeFile = promisify(fs.writeFile)
+const readFile = promisify(fs.readFile)
 
 const configs: Record<BearerEnv, BaseConfig> = {
   dev: {
@@ -90,7 +93,6 @@ export default (runPath: string = process.cwd()): Config => {
     },
     async storeBearerConfig(config) {
       const { Username, ExpiresAt, authorization } = config
-      const writeFile = promisify(fs.writeFile)
       try {
         await writeFile(
           this.bearerConfig.config || path.join(os.homedir(), '.bearerrc'),
@@ -104,6 +106,21 @@ export default (runPath: string = process.cwd()): Config => {
         console.error('Error while writing the token', e)
       }
       this.bearerConfig.authorization = authorization
+    },
+    async storeToken(token: TAccessToken) {
+      try {
+        const file = this.bearerConfig.config || path.join(os.homedir(), '.bearerrc')
+        let config = {}
+
+        if (fs.existsSync(file)) {
+          const configContent = await readFile(file, { encoding: 'utf8' })
+          config = ini.parse(configContent)
+        }
+
+        await writeFile(file, ini.stringify({ ...config, token }))
+      } catch (e) {
+        console.error('Error while writing token', e)
+      }
     }
   }
 }

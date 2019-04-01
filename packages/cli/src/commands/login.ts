@@ -6,12 +6,10 @@ import * as opn from 'opn'
 import * as crypto from 'crypto'
 
 import BaseCommand from '../base-command'
-
-// const domain = 'login.bearer.sh'
+import { TAccessToken } from '../types'
 
 const BEARER_LOGIN_PORT = 56789
 const domain = 'https://login.bearer.sh'
-const callbackurl = `http://localhost:4444`
 
 export default class Login extends BaseCommand {
   _server?: http.Server
@@ -41,7 +39,7 @@ export default class Login extends BaseCommand {
       client_id: this.clientId,
       code_challenge: this._challenge,
       code_challenge_method: 'S256',
-      redirect_uri: callbackurl
+      redirect_uri: this.callbackUrl
     }
     this.debug('authoriwe params %j', params)
     const url = `${domain}/authorize?${toParams(params)}`
@@ -91,14 +89,15 @@ export default class Login extends BaseCommand {
 
   getToken = async (code: string) => {
     try {
-      const token = await axios.post<IToken>(`${domain}/oauth/token`, {
+      const { data: token } = await axios.post<TAccessToken>(`${domain}/oauth/token`, {
         code,
         grant_type: 'authorization_code',
         client_id: `${this.clientId}`,
         code_verifier: `${this._verifier}`,
-        redirect_uri: callbackurl
+        redirect_uri: this.callbackUrl
       })
       this.debug(token)
+      await this.bearerConfig.storeToken(token)
       this.ux.action.stop()
     } catch (e) {
       this.error(e)
@@ -106,7 +105,11 @@ export default class Login extends BaseCommand {
   }
 
   get clientId(): string {
-    return 'yL4bcogYQCa7pwE2Xkc0MfDocDBBI3G3'
+    return process.env.BEARER_LOGIN_CLIENT_ID || 'Wgll39KqWnJWud473wq7hZhiXxeNjEU7'
+  }
+
+  get callbackUrl(): string {
+    return process.env.BEARER_LOGIN_CALLBACK_URL || `${this.bearerConfig.DeveloperPortalUrl}cli-login`
   }
 }
 
@@ -123,17 +126,10 @@ function base64URLEncode(str: Buffer) {
     .replace(/\//g, '_')
     .replace(/=/g, '')
 }
+
 function sha256(str: string) {
   return crypto
     .createHash('sha256')
     .update(str)
     .digest()
-}
-
-interface IToken {
-  access_token: string
-  refresh_token: string
-  scope: string
-  expires_in: number
-  token_type: string
 }

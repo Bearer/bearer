@@ -57,6 +57,7 @@ export type Config = BaseConfig & {
   hasIntegrationLinked: boolean
   setIntegrationConfig(config: any): void
   storeBearerConfig(config: any): void
+  storeToken(token: TAccessToken): void
 }
 
 export type AuthConfig = {
@@ -70,4 +71,12 @@ export type IntegrationBuildEnv = {
   BEARER_INTEGRATION_HOST: string
   BEARER_AUTHORIZATION_HOST: string
   CDN_HOST: string
+}
+
+export type TAccessToken = {
+  access_token: string
+  refresh_token: string
+  scope: string
+  expires_in: number
+  token_type: string
 }
