@@ -74,5 +74,6 @@ const FIELDS: Record<Authentications, any[]> = {
     { type: 'text', label: 'Client ID', controlName: 'clientID' },
     { type: 'password', label: 'Client Secret', controlName: 'clientSecret' }
   ],
-  [Authentications.NoAuth]: []
+  [Authentications.NoAuth]: [],
+  [Authentications.Custom]: []
 }
