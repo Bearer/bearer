@@ -7,4 +7,6 @@ export enum Authentications {
   Custom = 'CUSTOM'
 }
 
+export type TAuthentications = Record<Authentications, { name: string; value: Authentications }>
+
 export default Authentications

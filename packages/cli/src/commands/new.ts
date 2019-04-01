@@ -1,4 +1,4 @@
-import Authentications from '@bearer/types/lib/authentications'
+import { Authentications, TAuthentications } from '@bearer/types/lib/authentications'
 import { flags } from '@oclif/command'
 import * as fs from 'fs-extra'
 import * as Listr from 'listr'
@@ -13,12 +13,13 @@ import GenerateComponent from './generate/component'
 import GenerateSetup from './generate/setup'
 import GenerateSpec from './generate/spec'
 
-const authTypes = {
+const authTypes: TAuthentications = {
   [Authentications.OAuth1]: { name: 'OAuth1', value: Authentications.OAuth1 },
   [Authentications.OAuth2]: { name: 'OAuth2', value: Authentications.OAuth2 },
   [Authentications.Basic]: { name: 'Basic Auth', value: Authentications.Basic },
   [Authentications.ApiKey]: { name: 'API Key', value: Authentications.ApiKey },
-  [Authentications.NoAuth]: { name: 'NoAuth', value: Authentications.NoAuth }
+  [Authentications.NoAuth]: { name: 'NoAuth', value: Authentications.NoAuth },
+  [Authentications.Custom]: { name: 'Custom', value: Authentications.Custom }
 }
 
 export default class New extends BaseCommand {
