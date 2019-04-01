@@ -59,7 +59,12 @@ function setupExists(location: string): boolean {
   )
 }
 
-const FIELDS: Record<Authentications, any[]> = {
+type TAuthenticationsField = {
+  type: string,
+  label: string,
+  controlName: string
+}
+const FIELDS: Record<Authentications, TAuthenticationsField[]> = {
   [Authentications.Basic]: [
     { type: 'text', label: 'Username', controlName: 'username' },
     { type: 'password', label: 'Password', controlName: 'password' }
