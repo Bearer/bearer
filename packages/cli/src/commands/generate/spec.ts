@@ -40,10 +40,7 @@ export default class GenerateSpec extends BaseCommand {
       label: 'Setup Display Component'
     },`
         const authType: string = this.integrationAuthConfig.authType
-        const vars =
-          authType === 'noAuth' || authType === Authentications.NoAuth || authType === Authentications.Custom
-            ? {}
-            : { setup }
+        const vars = authType === Authentications.NoAuth || authType === Authentications.Custom ? {} : { setup }
         await copyFiles(this, 'generate/integration_specs', targetFolder, vars)
         this.success('Spec file successfully generated! 🎉')
       } catch (e) {
