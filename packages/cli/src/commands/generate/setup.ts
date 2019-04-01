@@ -22,26 +22,7 @@ export default class GenerateSetup extends BaseCommand {
     if (flags.force || !setupExists(this.locator.srcViewsDir)) {
       const { authType } = this.integrationAuthConfig
 
-      let fields
-
-      if (authType === Authentications.Basic) {
-        fields = [
-          { type: 'text', label: 'Username', controlName: 'username' },
-          { type: 'password', label: 'Password', controlName: 'password' }
-        ]
-      } else if (authType === Authentications.ApiKey) {
-        fields = [{ type: 'password', label: 'Api Key', controlName: 'apiKey' }]
-      } else if (authType === Authentications.OAuth1) {
-        fields = [
-          { type: 'text', label: 'Consumer Key', controlName: 'consumerKey' },
-          { type: 'password', label: 'Consumer Secret', controlName: 'consumerSecret' }
-        ]
-      } else if (authType === Authentications.OAuth2) {
-        fields = [
-          { type: 'text', label: 'Client ID', controlName: 'clientID' },
-          { type: 'password', label: 'Client Secret', controlName: 'clientSecret' }
-        ]
-      }
+      const fields = FIELDS[authType]
 
       if (fields && fields.length) {
         try {
@@ -76,4 +57,22 @@ function setupExists(location: string): boolean {
   return (
     fs.existsSync(path.join(location, 'setup-action.tsx')) || fs.existsSync(path.join(location, 'setup-display.tsx'))
   )
+}
+
+const FIELDS: Record<Authentications, any[]> = {
+  [Authentications.Basic]: [
+    { type: 'text', label: 'Username', controlName: 'username' },
+    { type: 'password', label: 'Password', controlName: 'password' }
+  ],
+
+  [Authentications.ApiKey]: [{ type: 'password', label: 'Api Key', controlName: 'apiKey' }],
+  [Authentications.OAuth1]: [
+    { type: 'text', label: 'Consumer Key', controlName: 'consumerKey' },
+    { type: 'password', label: 'Consumer Secret', controlName: 'consumerSecret' }
+  ],
+  [Authentications.OAuth2]: [
+    { type: 'text', label: 'Client ID', controlName: 'clientID' },
+    { type: 'password', label: 'Client Secret', controlName: 'clientSecret' }
+  ],
+  [Authentications.NoAuth]: []
 }
