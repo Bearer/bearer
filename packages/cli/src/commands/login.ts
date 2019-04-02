@@ -80,8 +80,8 @@ export default class Login extends BaseCommand {
               )
               response.write('OK')
               response.end()
-              this.getToken(data.code)
               this.stopServer()
+              this.getToken(data.code)
             } catch (e) {
               this.debug(e)
             }
@@ -103,6 +103,7 @@ export default class Login extends BaseCommand {
       this.debug(token)
       await this.bearerConfig.storeToken(token)
       this.ux.action.stop()
+      this.success('Successfully logged in!! 🐻')
     } catch (e) {
       this.error(e)
     }
