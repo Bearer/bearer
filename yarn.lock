@@ -961,13 +961,6 @@
     lodash "^4.17.11"
     to-fast-properties "^2.0.0"
 
-"@bearer/logger@^0.95.1":
-  version "0.95.1"
-  resolved "https://registry.npmjs.org/@bearer/logger/-/logger-0.95.1.tgz#b74f21f1f0b57d479f1d60368c8c3a37f28ce224"
-  integrity sha512-Fpuuf4WS+xKXJeJsxdh4SAi4745626trz66CZCX61pBqL3JmYqIzZbvRfCu1XhJgdtNeBalBboXb0psFPgYVFg==
-  dependencies:
-    debug "^4.1.0"
-
 "@bearer/package-init@^0.78.0":
   version "0.78.0"
   resolved "https://registry.yarnpkg.com/@bearer/package-init/-/package-init-0.78.0.tgz#1f899a7c56f25f58c32902e7b9a6e11e24656b01"
@@ -7874,6 +7867,11 @@ get-port@^3.2.0:
   resolved "https://registry.yarnpkg.com/get-port/-/get-port-3.2.0.tgz#dd7ce7de187c06c8bf353796ac71e099f0980ebc"
   integrity sha1-3Xzn3hh8Bsi/NTeWrHHgmfCYDrw=
 
+get-port@^4.2.0:
+  version "4.2.0"
+  resolved "https://registry.yarnpkg.com/get-port/-/get-port-4.2.0.tgz#e37368b1e863b7629c43c5a323625f95cf24b119"
+  integrity sha512-/b3jarXkH8KJoOMQc3uVGHASwGLPq3gSFJ7tgJm2diza+bydJPTGOibin2steecKeOylE8oY2JERlVWkAJO6yw==
+
 get-stdin@5.0.1:
   version "5.0.1"
   resolved "https://registry.yarnpkg.com/get-stdin/-/get-stdin-5.0.1.tgz#122e161591e21ff4c52530305693f20e6393a398"
@@ -12299,6 +12297,13 @@ only@~0.0.2:
   version "0.0.2"
   resolved "https://registry.yarnpkg.com/only/-/only-0.0.2.tgz#2afde84d03e50b9a8edc444e30610a70295edfb4"
   integrity sha1-Kv3oTQPlC5qO3EROMGEKcCle37Q=
+
+open@^6.0.0:
+  version "6.0.0"
+  resolved "https://registry.yarnpkg.com/open/-/open-6.0.0.tgz#cae5e2c1a3a1bfaee0d0acc8c4b7609374750346"
+  integrity sha512-/yb5mVZBz7mHLySMiSj2DcLtMBbFPJk5JBKEkHVZFxZAPzeg3L026O0T+lbdz1B2nyDnkClRSwRQJdeVUIF7zw==
+  dependencies:
+    is-wsl "^1.1.0"
 
 opn@5.4.0, opn@^5.1.0, opn@^5.4.0:
   version "5.4.0"

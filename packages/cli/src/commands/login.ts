@@ -2,7 +2,8 @@ import { flags } from '@oclif/command'
 import getPort from 'get-port'
 import * as http from 'http'
 import axios from 'axios'
-import * as opn from 'opn'
+// @ts-ignore
+import * as opn from 'open'
 import * as crypto from 'crypto'
 
 import BaseCommand from '../base-command'
@@ -30,7 +31,7 @@ export default class Login extends BaseCommand {
     this._verifier = base64URLEncode(crypto.randomBytes(32))
     this._challenge = base64URLEncode(sha256(this._verifier))
     this.ux.action.start('Logging you in')
-    const scopes = 'profile+offline_access'
+    const scopes = 'offline_access email openid'
     const audience = `cli-${process.env.BEARER_ENV || 'production'}`
     const params = {
       audience,
