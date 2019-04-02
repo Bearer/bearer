@@ -86,47 +86,4 @@ export function ensureFreshToken() {
 async function refreshMyToken(command: TCommand): Promise<boolean | Error> {
   // TODO: rework refresh mechanism
   return true
-  const { RefreshToken } = command.bearerConfig.bearerConfig.authorization.AuthenticationResult!
-  if (!RefreshToken) {
-    throw new UnauthorizedRefreshTokenError()
-  }
-  // try {
-  const { statusCode, body } = await command.serviceClient.refresh({ RefreshToken })
-
-  switch (statusCode) {
-    case 200: {
-      const {
-        authorization: { AuthenticationResult }
-      } = body
-
-      await command.bearerConfig.storeBearerConfig({
-        ExpiresAt: Date.now() + AuthenticationResult.ExpiresIn * 1000,
-        authorization: {
-          AuthenticationResult: {
-            ...AuthenticationResult,
-            RefreshToken
-          }
-        }
-      })
-      return true
-    }
-    case 401: {
-      throw new UnauthorizedRefreshTokenError()
-    }
-    default: {
-      throw new UnexpectedRefreshTokenError(JSON.stringify(body, undefined, 2))
-    }
-  }
-}
-
-class UnauthorizedRefreshTokenError extends Error {
-  constructor() {
-    super('Something went wrong, please run bearer login and try again')
-  }
-}
-
-class UnexpectedRefreshTokenError extends Error {
-  constructor(body: any) {
-    super(`body : ${body}`)
-  }
 }
