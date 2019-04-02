@@ -8,42 +8,10 @@ import * as rc from 'rc'
 import { promisify } from 'util'
 
 import { BaseConfig, BearerConfig, BearerEnv, IntegrationConfig, TAccessToken } from '../types'
+import { BEARER_ENV, CONFIGS } from './constants'
 
 const writeFile = promisify(fs.writeFile)
 const readFile = promisify(fs.readFile)
-
-const configs: Record<BearerEnv, BaseConfig> = {
-  dev: {
-    DeploymentUrl: 'https://developer.dev.bearer.sh/v1/',
-    IntegrationServiceHost: 'https://int.dev.bearer.sh/',
-    IntegrationServiceUrl: 'https://int.dev.bearer.sh/api/v1/',
-    DeveloperPortalAPIUrl: 'https://api.staging.bearer.sh/graphql',
-    DeveloperPortalUrl: 'https://app.staging.bearer.sh/',
-    CdnHost: 'https://static.dev.bearer.sh',
-    BearerEnv: 'dev',
-    LoginDomain: 'https://login.bearer.sh'
-  },
-  staging: {
-    DeploymentUrl: 'https://developer.staging.bearer.sh/cicd/v2',
-    IntegrationServiceHost: 'https://int.staging.bearer.sh/',
-    IntegrationServiceUrl: 'https://int.staging.bearer.sh/api/v1/',
-    DeveloperPortalAPIUrl: 'https://api.staging.bearer.sh/graphql',
-    DeveloperPortalUrl: 'https://app.staging.bearer.sh/',
-    CdnHost: 'https://static.staging.bearer.sh',
-    BearerEnv: 'staging',
-    LoginDomain: 'https://login.bearer.sh'
-  },
-  production: {
-    DeploymentUrl: 'https://developer.bearer.sh/cicd/v2/',
-    IntegrationServiceHost: 'https://int.bearer.sh/',
-    IntegrationServiceUrl: 'https://int.bearer.sh/api/v1/',
-    DeveloperPortalAPIUrl: 'https://api.bearer.sh/graphql',
-    DeveloperPortalUrl: 'https://app.bearer.sh/',
-    CdnHost: 'https://static.bearer.sh',
-    BearerEnv: 'production',
-    LoginDomain: 'https://login.bearer.sh'
-  }
-}
 
 export class Config {
   integrationLocation: string
@@ -108,24 +76,6 @@ export class Config {
     }
   }
 
-  storeBearerConfig = async (config: { Username?: string; ExpiresAt: number; authorization: any }) => {
-    // deprecated
-    const { Username, ExpiresAt, authorization } = config
-    try {
-      await writeFile(
-        this.bearerConfig.config || path.join(os.homedir(), '.bearerrc'),
-        ini.stringify({
-          Username,
-          ExpiresAt,
-          authorization
-        })
-      )
-    } catch (e) {
-      console.error('Error while writing the token', e)
-    }
-    this.bearerConfig.authorization = authorization
-  }
-
   storeToken = async (token: TAccessToken) => {
     try {
       const file = this.bearerConfig.config || path.join(os.homedir(), '.bearerrc')
@@ -153,10 +103,8 @@ export class Config {
 }
 
 export default (runPath: string = process.cwd()): { constants: BaseConfig; config: Config } => {
-  const { BEARER_ENV = 'production' } = process.env
-  const config = new Config(runPath)
   return {
-    config,
-    constants: configs[BEARER_ENV as BearerEnv]
+    config: new Config(runPath),
+    constants: CONFIGS[BEARER_ENV as BearerEnv]
   }
 }

@@ -39,7 +39,6 @@ export type IntegrationConfig = {
   open: boolean
   configs: string[]
   rootPathRc: string | null
-  storeBearerConfig: any
   config: string
 }
 
