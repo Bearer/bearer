@@ -1,11 +1,15 @@
 import BaseCommand from '../base-command'
-import { getIntegrations, Integration } from '../utils/devPortal'
 
 export async function linkIntegration(this: BaseCommand, anIdentifier: string) {
   let identifier = anIdentifier
   let { integrationTitle } = this.bearerConfig as { integrationTitle: string }
   if (!identifier) {
-    const { integrations } = await getIntegrations(this)
+    const { data } = await this.devPortalClient.request<{ integrations: Integration[] }>({ query: QUERY })
+    if (!data.data) {
+      throw 'Unable to fetch integration list'
+    }
+
+    const { integrations } = data.data!
     const { integration } = await this.inquirer.prompt<{ integration: Integration }>([
       {
         name: 'integration',
@@ -25,3 +29,25 @@ export async function linkIntegration(this: BaseCommand, anIdentifier: string) {
   this.bearerConfig.setIntegrationConfig(integrationRc)
   this.log('Integration successfully linked! 🎉')
 }
+
+type Integration = {
+  deprecated_uuid: string
+  uuid: string
+  name: string
+  latestActivity?: {
+    state: string
+  }
+}
+
+const QUERY = `
+query CLILinkIntegrationList {
+  integrations(includeGloballyAvailable: false) {
+    deprecated_uuid: uuid
+    uuid: uuidv2
+    name
+    latestActivity {
+      state
+    }
+  }
+}
+`

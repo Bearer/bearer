@@ -20,35 +20,29 @@ export default class IntegrationsCreate extends BaseCommand {
 
     if (token) {
       try {
-        const response = await axios.post<CreateIntegration>(
-          this.constants.DeveloperPortalAPIUrl,
-          {
-            query: MUTATION,
-            variables: {
-              name,
-              description
-            }
-          },
-          {
-            headers: {
-              Authorization: `Bearer ${token.id_token}`
+        const { data } = await this.devPortalClient.request<CreateIntegration>({
+          query: MUTATION,
+          variables: { name, description }
+        })
+        if (data.data) {
+          const { integration } = data.data.createIntegration
+          this.success('Integration successfully created')
+          this.log(
+            '      name: %s\n      uuid: %s\nidentifier: %s\n       Url:',
+            integration.name,
+            integration.uuid,
+            integration.deprecated_uuid,
+            `${this.constants.DeveloperPortalUrl}integrations/${integration.deprecated_uuid}`
+          )
+          if (this.bearerConfig.isIntegrationLocation) {
+            // tslint:disable-next-line no-boolean-literal-compare
+            if (!flags.skipLink) {
+              await linkIntegration.bind(this)(integration.deprecated_uuid)
             }
           }
-        )
-        const { integration } = response.data.data.createIntegration
-        this.success('Integration successfully created')
-        this.log(
-          '      name: %s\n      uuid: %s\nidentifier: %s\n       Url:',
-          integration.name,
-          integration.uuid,
-          integration.deprecated_uuid,
-          `${this.constants.DeveloperPortalUrl}integrations/${integration.deprecated_uuid}`
-        )
-        if (this.bearerConfig.isIntegrationLocation) {
-          // tslint:disable-next-line no-boolean-literal-compare
-          if (!flags.skipLink) {
-            await linkIntegration.bind(this)(integration.deprecated_uuid)
-          }
+        } else {
+          this.debug(data)
+          this.error('Unable to create this integration, please retry')
         }
       } catch (e) {
         this.debug('%j', e.response)
@@ -74,7 +68,7 @@ type Integration = {
   }
 }
 
-type CreateIntegration = { data: { createIntegration: { integration: Integration } } }
+type CreateIntegration = { createIntegration: { integration: Integration } }
 
 const MUTATION = `
 mutation CLICreateIntegration($name: String!, $description: String!) {

@@ -180,7 +180,7 @@ export default class Push extends BaseCommand {
 }
 
 const QUERY = `
-{
+query CLIPush {
   currentUser {
     email
     infrastructure {

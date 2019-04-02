@@ -9,6 +9,7 @@ import * as fs from 'fs'
 import { AuthConfig, BaseConfig } from './types'
 import Locator from './utils/locator'
 import setupConfig, { Config } from './utils/setup-config'
+import { devPortalClient } from './utils/devPortal'
 
 export default abstract class extends Command {
   constants!: BaseConfig
@@ -71,6 +72,10 @@ export default abstract class extends Command {
       // @ts-ignore
       super.warn.apply(this, arguments)
     }
+  }
+
+  get devPortalClient() {
+    return devPortalClient(this)
   }
 
   // protected logLevel: any
