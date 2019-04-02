@@ -29,7 +29,7 @@ export default class Push extends BaseCommand {
     const { Username, Password } = await this.fetchLoginInformation()
     this.serviceClient = serviceClient(this.constants.IntegrationServiceUrl)
     const data = await this.serviceClient.login({ Username, Password })
-    this.log('auth info : %j', data)
+    this.debug('auth info : %j', data)
 
     this.integrationClient = new IntegrationClient(
       this.constants.DeploymentUrl,
