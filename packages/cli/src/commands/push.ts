@@ -3,12 +3,18 @@ import axios from 'axios'
 import * as fs from 'fs-extra'
 import * as globby from 'globby'
 import * as Listr from 'listr'
+import serviceClient from '@bearer/bearer-cli/lib/lib/serviceClient'
 
 import BaseCommand from '../base-command'
 import { ensureFreshToken, RequireLinkedIntegration, RequireIntegrationFolder } from '../utils/decorators'
 import { ensureFolderExists } from '../utils/helpers'
+import { IntegrationClient } from '../utils/integration-client'
+
 export default class Push extends BaseCommand {
   static description = 'Deploy Integration to Bearer Platform'
+  private integrationClient!: IntegrationClient
+  // TODO: fix typing
+  private serviceClient!: any
 
   static flags = {
     ...BaseCommand.flags
@@ -20,6 +26,17 @@ export default class Push extends BaseCommand {
   @RequireLinkedIntegration()
   @ensureFreshToken()
   async run() {
+    const { Username, Password } = await this.fetchLoginInformation()
+    this.serviceClient = serviceClient(this.constants.IntegrationServiceUrl)
+    const data = await this.serviceClient.login({ Username, Password })
+    this.log('auth info : %j', data)
+
+    this.integrationClient = new IntegrationClient(
+      this.constants.DeploymentUrl,
+      data.body.authorization.AuthenticationResult.IdToken,
+      this.config.version
+    )
+
     ensureFolderExists(this.locator.buildArtifactDir, true)
     const archivePath = this.locator.buildArtifactResourcePath('integration.zip')
     const tasks = [
@@ -134,4 +151,42 @@ export default class Push extends BaseCommand {
       return false
     }
   }
+
+  fetchLoginInformation = async () => {
+    const { BEARER_TOKEN, BEARER_EMAIL } = process.env
+    if (BEARER_TOKEN && BEARER_EMAIL) {
+      return {
+        Username: BEARER_EMAIL,
+        Password: BEARER_TOKEN
+      }
+    }
+    const token = await this.bearerConfig.getToken()
+    if (token) {
+      const { data } = await axios.post(
+        this.constants.DeveloperPortalAPIUrl,
+        {
+          query: QUERY
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token.id_token}`
+          }
+        }
+      )
+      return { Username: data.data.currentUser.email, Password: data.data.currentUser.infrastructure.password }
+    }
+    throw 'error'
+  }
 }
+
+const QUERY = `
+{
+  currentUser {
+    email
+    infrastructure {
+      id
+      password
+    }
+  }
+}
+`

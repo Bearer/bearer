@@ -100,8 +100,9 @@ export default class Login extends BaseCommand {
         code_verifier: `${this._verifier}`,
         redirect_uri: this.callbackUrl
       })
+
       this.debug(token)
-      await this.bearerConfig.storeToken(token)
+      await this.bearerConfig.storeToken({ ...token, expires_at: Date.now() + token.expires_in * 1000 })
       this.ux.action.stop()
       this.success('Successfully logged in!! 🐻')
     } catch (e) {

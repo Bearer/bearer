@@ -1,7 +1,5 @@
 import axios, { AxiosInstance } from 'axios'
 
-import BaseCommand from '../base-command'
-
 export class IntegrationClient {
   private client: AxiosInstance
 
@@ -24,12 +22,4 @@ export class IntegrationClient {
       throw e
     }
   }
-}
-
-export default (command: BaseCommand): IntegrationClient => {
-  return new IntegrationClient(
-    command.constants.DeploymentUrl,
-    command.bearerConfig.bearerConfig.authorization.AuthenticationResult!.IdToken,
-    command.config.version
-  )
 }
