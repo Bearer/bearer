@@ -21,7 +21,7 @@ export const sendToCloudwatchGroup = async (payload: any, cloudWatchLogsClient =
       ]
     } as CloudWatchLogs.Types.PutLogEventsRequest
     await createLogStream(cloudWatchLogsClient, streamName)
-    logger(`send event ${JSON.stringify(event)}`)
+    logger(`send event %j`, event)
     const putLogEvent = await cloudWatchLogsClient.putLogEvents(event).promise()
     logger('%j', putLogEvent.$response.data)
     logger('%j', putLogEvent.rejectedLogEventsInfo)
