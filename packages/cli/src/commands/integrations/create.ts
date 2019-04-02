@@ -52,7 +52,11 @@ export default class IntegrationsCreate extends BaseCommand {
   }
 
   async askForName(): Promise<string> {
-    return this.askForString('Integration name')
+    return this.askForString('Integration name', {
+      validate: (input: string) => {
+        return input.length > 0
+      }
+    })
   }
   async askForDescription(): Promise<string> {
     return this.askForString('Description (optional)')

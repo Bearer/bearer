@@ -93,13 +93,18 @@ export default abstract class extends Command {
    * Interactivity helpers
    */
 
-  protected async askForString(phrase: string): Promise<string> {
+  protected async askForString(phrase: string, options: Options = {}): Promise<string> {
     const { response } = await this.inquirer.prompt<{ response: string }>([
       {
         message: `${phrase}:`,
-        name: 'response'
+        name: 'response',
+        ...options
       }
     ])
     return response
   }
 }
+
+type Omit<T, K> = Pick<T, Exclude<keyof T, K>>
+
+export type Options = Partial<Omit<inquirer.Question, 'message' | 'name'>>
