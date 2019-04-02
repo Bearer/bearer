@@ -20,7 +20,8 @@ const configs: Record<BearerEnv, BaseConfig> = {
     DeveloperPortalAPIUrl: 'https://api.staging.bearer.sh/graphql',
     DeveloperPortalUrl: 'https://app.staging.bearer.sh/',
     CdnHost: 'https://static.dev.bearer.sh',
-    BearerEnv: 'dev'
+    BearerEnv: 'dev',
+    LoginDomain: 'https://login.bearer.sh'
   },
   staging: {
     DeploymentUrl: 'https://developer.staging.bearer.sh/cicd/v2',
@@ -29,7 +30,8 @@ const configs: Record<BearerEnv, BaseConfig> = {
     DeveloperPortalAPIUrl: 'https://api.staging.bearer.sh/graphql',
     DeveloperPortalUrl: 'https://app.staging.bearer.sh/',
     CdnHost: 'https://static.staging.bearer.sh',
-    BearerEnv: 'staging'
+    BearerEnv: 'staging',
+    LoginDomain: 'https://login.bearer.sh'
   },
   production: {
     DeploymentUrl: 'https://developer.bearer.sh/cicd/v2/',
@@ -38,7 +40,8 @@ const configs: Record<BearerEnv, BaseConfig> = {
     DeveloperPortalAPIUrl: 'https://api.bearer.sh/graphql',
     DeveloperPortalUrl: 'https://app.bearer.sh/',
     CdnHost: 'https://static.bearer.sh',
-    BearerEnv: 'production'
+    BearerEnv: 'production',
+    LoginDomain: 'https://login.bearer.sh'
   }
 }
 
@@ -132,8 +135,8 @@ export class Config {
         const configContent = await readFile(file, { encoding: 'utf8' })
         config = ini.parse(configContent)
       }
-
-      await writeFile(file, ini.stringify({ ...config, token }))
+      const tokenWithExpires = { ...token, expires_at: Date.now() + token.expires_in * 1000 }
+      await writeFile(file, ini.stringify({ ...config, token: tokenWithExpires }))
     } catch (e) {
       console.error('Error while writing token', e)
     }

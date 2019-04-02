@@ -1,4 +1,7 @@
+import axios from 'axios'
+
 import Command from '../base-command'
+import { LOGIN_CLIENT_ID } from './constants'
 
 type Constructor<T> = new (...args: any[]) => T
 type TCommand = InstanceType<Constructor<Command>>
@@ -54,21 +57,22 @@ export function ensureFreshToken() {
   return function(_target: any, _propertyKey: string | symbol, descriptor: PropertyDescriptor) {
     const originalMethod = descriptor.value
     descriptor.value = async function(this: TCommand) {
-      const { expires_at } = (await this.bearerConfig.getToken()) || { expires_at: null }
+      const { expires_at, refresh_token } = (await this.bearerConfig.getToken()) || {
+        expires_at: null,
+        refresh_token: null
+      }
 
-      if (expires_at) {
+      if (expires_at && refresh_token) {
         try {
           if (expires_at < Date.now()) {
             this.ux.action.start('Refreshing token')
-            await refreshMyToken(this)
+            await refreshMyToken(this, refresh_token)
             this.ux.action.stop()
           }
         } catch (error) {
           this.ux.action.stop(`Failed`)
           this.error(error.message)
         }
-        // TS is complaining with TS2445, commenting out this for now
-        // this.debug('Running original method')
         await originalMethod.apply(this, arguments)
         return descriptor
       }
@@ -83,7 +87,14 @@ export function ensureFreshToken() {
   }
 }
 
-async function refreshMyToken(command: TCommand): Promise<boolean | Error> {
+// tslint:disable-next-line variable-name
+async function refreshMyToken(command: TCommand, refresh_token: string): Promise<boolean | Error> {
   // TODO: rework refresh mechanism
+  const response = await axios.post(`${command.constants.LoginDomain}/oauth/token`, {
+    refresh_token,
+    grant_type: 'refresh_token',
+    client_id: LOGIN_CLIENT_ID
+  })
+  await command.bearerConfig.storeToken({ ...response.data, refresh_token })
   return true
 }

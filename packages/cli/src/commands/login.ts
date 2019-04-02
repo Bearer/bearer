@@ -8,9 +8,10 @@ import * as crypto from 'crypto'
 
 import BaseCommand from '../base-command'
 import { TAccessToken } from '../types'
+import { toParams } from '../utils/helpers'
+import { LOGIN_CLIENT_ID, BEARER_ENV } from '../utils/constants'
 
 const BEARER_LOGIN_PORT = 56789
-const domain = 'https://login.bearer.sh'
 
 export default class Login extends BaseCommand {
   _server?: http.Server
@@ -32,18 +33,18 @@ export default class Login extends BaseCommand {
     this._challenge = base64URLEncode(sha256(this._verifier))
     this.ux.action.start('Logging you in')
     const scopes = 'offline_access email openid'
-    const audience = `cli-${process.env.BEARER_ENV || 'production'}`
+    const audience = `cli-${BEARER_ENV}`
     const params = {
       audience,
       scope: scopes,
       response_type: 'code',
-      client_id: this.clientId,
+      client_id: LOGIN_CLIENT_ID,
       code_challenge: this._challenge,
       code_challenge_method: 'S256',
       redirect_uri: this.callbackUrl
     }
     this.debug('authoriwe params %j', params)
-    const url = `${domain}/authorize?${toParams(params)}`
+    const url = `${this.constants.LoginDomain}/authorize?${toParams(params)}`
     opn(url)
   }
 
@@ -93,16 +94,16 @@ export default class Login extends BaseCommand {
 
   getToken = async (code: string) => {
     try {
-      const { data: token } = await axios.post<TAccessToken>(`${domain}/oauth/token`, {
+      const { data: token } = await axios.post<TAccessToken>(`${this.constants.LoginDomain}/oauth/token`, {
         code,
         grant_type: 'authorization_code',
-        client_id: `${this.clientId}`,
+        client_id: `${LOGIN_CLIENT_ID}`,
         code_verifier: `${this._verifier}`,
         redirect_uri: this.callbackUrl
       })
 
       this.debug(token)
-      await this.bearerConfig.storeToken({ ...token, expires_at: Date.now() + token.expires_in * 1000 })
+      await this.bearerConfig.storeToken(token)
       this.ux.action.stop()
       this.success('Successfully logged in!! 🐻')
     } catch (e) {
@@ -110,19 +111,9 @@ export default class Login extends BaseCommand {
     }
   }
 
-  get clientId(): string {
-    return process.env.BEARER_LOGIN_CLIENT_ID || 'Wgll39KqWnJWud473wq7hZhiXxeNjEU7'
-  }
-
   get callbackUrl(): string {
     return process.env.BEARER_LOGIN_CALLBACK_URL || `${this.constants.DeveloperPortalUrl}cli-login-callback`
   }
-}
-
-function toParams(obj: Record<string, string | number>) {
-  return Object.keys(obj)
-    .map(key => [key, obj[key]].join('='))
-    .join('&')
 }
 
 function base64URLEncode(str: Buffer) {

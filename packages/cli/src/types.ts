@@ -10,6 +10,7 @@ export type BaseConfig = {
   DeveloperPortalAPIUrl: string
   DeveloperPortalUrl: string
   CdnHost: string
+  LoginDomain: string
 }
 
 export type BearerConfig = {

@@ -51,3 +51,9 @@ export function ensureSymlinked(target: string, sourcePath: string): void {
     }
   }
 }
+
+export function toParams(obj: Record<string, string | number>) {
+  return Object.keys(obj)
+    .map(key => [key, obj[key]].join('='))
+    .join('&')
+}
