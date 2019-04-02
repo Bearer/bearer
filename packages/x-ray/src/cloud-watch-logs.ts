@@ -33,7 +33,7 @@ export const sendToCloudwatchGroup = async (payload: any, cloudWatchLogsClient =
 
 const createLogStream = async (client: CloudWatchLogs, streamName: string) => {
   try {
-    logger(`create stream ${streamName}`)
+    logger(`create stream %s`, streamName)
     const stream = await client
       .createLogStream({
         logGroupName: BEARER_XRAY_LOG_GROUP!,
