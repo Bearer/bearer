@@ -133,6 +133,7 @@ export default class New extends BaseCommand {
       case Authentications.Basic:
       case Authentications.NoAuth:
       case Authentications.OAuth2:
+      case Authentications.Custom:
         return '"axios": "^0.18.0"'
       default:
         throw new Error(`Authentication not found: ${authType}`)
