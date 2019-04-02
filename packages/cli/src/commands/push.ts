@@ -23,8 +23,8 @@ export default class Push extends BaseCommand {
   static args = []
 
   @RequireIntegrationFolder()
-  @RequireLinkedIntegration()
   @ensureFreshToken()
+  @RequireLinkedIntegration()
   async run() {
     const { Username, Password } = await this.fetchLoginInformation()
     this.serviceClient = serviceClient(this.constants.IntegrationServiceUrl)

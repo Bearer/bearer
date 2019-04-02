@@ -1,6 +1,9 @@
 import axios from 'axios'
 
 import Command from '../base-command'
+import CreateIntegration from '../commands/integrations/create'
+import LinkIntegration from '../commands/link'
+
 import { LOGIN_CLIENT_ID } from './constants'
 
 type Constructor<T> = new (...args: any[]) => T
@@ -40,14 +43,36 @@ export function RequireLinkedIntegration() {
   return function(_target: any, _propertyKey: string | symbol, descriptor: PropertyDescriptor) {
     const originalMethod = descriptor.value
     descriptor.value = async function(this: TCommand) {
-      if (this.bearerConfig.hasIntegrationLinked) {
-        await originalMethod.apply(this, arguments)
-      } else {
-        const error =
-          this.colors.bold('You integration must be linked before running this command\n') +
-          this.colors.yellow(this.colors.italic('Please run: bearer link'))
-        this.error(error)
+      if (!this.bearerConfig.hasIntegrationLinked) {
+        const { choice } = await this.inquirer.prompt([
+          {
+            name: 'choice',
+            message: "Your integration isn't linked, what would you like to do?",
+            type: 'list',
+            choices: [
+              {
+                name: 'Create a new integration',
+                value: 'create'
+              },
+              {
+                name: 'Select an integration from my list',
+                value: 'select'
+              }
+            ]
+          }
+        ])
+        switch (choice) {
+          case 'create':
+            await CreateIntegration.run([])
+            break
+          case 'select':
+            await LinkIntegration.run([])
+          default:
+            break
+        }
       }
+
+      await originalMethod.apply(this, arguments)
     }
     return descriptor
   }
