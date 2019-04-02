@@ -10,6 +10,7 @@ describe('function request', () => {
     // @ts-ignore
     fetch.resetMocks()
   })
+
   describe('when successful request', () => {
     it('returns payload if success', async () => {
       //@ts-ignore
@@ -18,12 +19,12 @@ describe('function request', () => {
       const response = await instance.invoke('integration', 'function')
 
       expect(response.data).toEqual(returnedData)
-      expect(response.referenceId).toBe(null)
+      expect(response.referenceId).toBe(undefined)
     })
 
     it('sets referenceId from meta', async () => {
       // @ts-ignore
-      fetch.once(JSON.stringify({ data: returnedData, meta: { referenceId: 'a-reference' } }))
+      fetch.once(JSON.stringify({ data: returnedData, referenceId: 'a-reference' }))
 
       const response = await instance.invoke('integration', 'function', {
         query: { something: 'query' },
@@ -66,6 +67,7 @@ describe('function request', () => {
       })
     })
   })
+
   describe('with server error', () => {
     it('throws an error', async () => {
       //@ts-ignore

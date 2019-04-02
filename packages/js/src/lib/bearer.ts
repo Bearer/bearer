@@ -103,12 +103,15 @@ export default class Bearer {
 
     try {
       const response = await this._jsonRequest(path, { query, params })
-      const payload = await response.json()
+      const payload: {
+        data: any
+        referenceId?: string
+        error: any
+      } = await response.json()
       logger('successful request %j', payload)
 
       if (!payload.error) {
-        const { data, meta: { referenceId } = { referenceId: null } } = payload
-        return { data, referenceId }
+        return payload
       } else {
         throw { error: payload.error }
       }
