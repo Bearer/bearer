@@ -2,6 +2,7 @@ import axios from 'axios'
 
 import Command from '../base-command'
 import CreateIntegration from '../commands/integrations/create'
+import Login from '../commands/login'
 import LinkIntegration from '../commands/link'
 
 import { LOGIN_CLIENT_ID } from './constants'
@@ -98,14 +99,24 @@ export function ensureFreshToken() {
           this.ux.action.stop(`Failed`)
           this.error(error.message)
         }
-        await originalMethod.apply(this, arguments)
-        return descriptor
+      } else {
+        const error = this.colors.bold('⚠️ It looks like you are not logged in')
+        this.log(error)
+        const { shoudlLogin } = await this.inquirer.prompt<{ shoudlLogin: boolean }>([
+          {
+            message: 'Would you like to login?',
+            name: 'shoudlLogin',
+            type: 'list',
+            choices: [{ name: 'Yes', value: true }, { name: 'No', value: false }]
+          }
+        ])
+        if (shoudlLogin) {
+          await Login.run([])
+        } else {
+          this.exit(0)
+        }
       }
-
-      const error =
-        this.colors.bold('⚠️ It looks like you are not logged in\n') +
-        this.colors.yellow(this.colors.italic('Please run: bearer login'))
-      this.error(error)
+      await originalMethod.apply(this, arguments)
       return descriptor
     }
     return descriptor

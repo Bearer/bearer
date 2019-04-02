@@ -12,26 +12,32 @@ import { toParams } from '../utils/helpers'
 import { LOGIN_CLIENT_ID, BEARER_ENV } from '../utils/constants'
 
 const BEARER_LOGIN_PORT = 56789
-
+type Event = 'success' | 'error' | 'shutdown'
 export default class Login extends BaseCommand {
   _server?: http.Server
   _verifier!: string
   _challenge!: string
+  private _listerners!: Record<Event, (() => void)[]>
 
   static description = 'Login to Bearer platform'
 
   static flags = {
-    ...BaseCommand.flags,
-    email: flags.string({ char: 'e' })
+    ...BaseCommand.flags
   }
 
   static args = []
 
   async run() {
+    this._listerners = {
+      success: [],
+      error: [],
+      shutdown: []
+    }
     this._server = await this.startServer()
     this._verifier = base64URLEncode(crypto.randomBytes(32))
     this._challenge = base64URLEncode(sha256(this._verifier))
     this.ux.action.start('Logging you in')
+
     const scopes = 'offline_access email openid'
     const audience = `cli-${BEARER_ENV}`
     const params = {
@@ -46,6 +52,21 @@ export default class Login extends BaseCommand {
     this.debug('authoriwe params %j', params)
     const url = `${this.constants.LoginDomain}/authorize?${toParams(params)}`
     opn(url)
+
+    await Promise.all([
+      new Promise((resolve, reject) => {
+        this.on('success', resolve)
+        this.on('error', reject)
+      }),
+      new Promise((resolve, reject) => {
+        this.on('shutdown', resolve)
+        this.on('error', reject)
+      })
+    ])
+  }
+
+  on = (event: Event, callback: () => void) => {
+    this._listerners[event] = [...this._listerners[event], callback]
   }
 
   private stopServer = () => {
@@ -53,6 +74,7 @@ export default class Login extends BaseCommand {
     if (this._server) {
       this._server.close(() => {
         this.debug('server stopped')
+        this._listerners['shutdown'].map(cb => cb())
       })
     }
   }
@@ -106,6 +128,7 @@ export default class Login extends BaseCommand {
       await this.bearerConfig.storeToken(token)
       this.ux.action.stop()
       this.success('Successfully logged in!! 🐻')
+      this._listerners['success'].map(cb => cb())
     } catch (e) {
       this.error(e)
     }
