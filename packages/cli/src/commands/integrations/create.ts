@@ -1,0 +1,89 @@
+import { flags } from '@oclif/command'
+import axios from 'axios'
+
+import BaseCommand from '../../base-command'
+import Link from '../link'
+
+export default class IntegrationsCreate extends BaseCommand {
+  static flags = {
+    ...BaseCommand.flags,
+    description: flags.string({ char: 'd' }),
+    name: flags.string({ char: 'n' }),
+    skipLink: flags.boolean({ char: 'l' })
+  }
+
+  async run() {
+    const { flags } = this.parse(IntegrationsCreate)
+    const name = flags.name || (await this.askForName())
+    const description = flags.description || (await this.askForDescription())
+    const token = await this.bearerConfig.getToken()
+
+    if (token) {
+      try {
+        const response = await axios.post<CreateIntegration>(
+          this.constants.DeveloperPortalAPIUrl,
+          {
+            query: MUTATION,
+            variables: {
+              name,
+              description
+            }
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${token.id_token}`
+            }
+          }
+        )
+        const { integration } = response.data.data.createIntegration
+        this.success('Integration successfully created')
+        this.log(
+          '      name: %s\n      uuid: %s\nidentifier: %s\n       Url:',
+          integration.name,
+          integration.uuid,
+          integration.deprecated_uuid,
+          `${this.constants.DeveloperPortalUrl}integrations/${integration.deprecated_uuid}`
+        )
+        if (this.bearerConfig.isIntegrationLocation) {
+          // tslint:disable-next-line no-boolean-literal-compare
+          if (!flags.skipLink) {
+            await Link.run([integration.deprecated_uuid, '--path', this.bearerConfig.integrationLocation])
+          }
+        }
+      } catch (e) {
+        this.debug('%j', e.response)
+        this.error(e)
+      }
+    }
+  }
+
+  async askForName(): Promise<string> {
+    return this.askForString('Integration name')
+  }
+  async askForDescription(): Promise<string> {
+    return this.askForString('Description (optional)')
+  }
+}
+
+type Integration = {
+  deprecated_uuid: string
+  uuid: string
+  name: string
+  latestActivity?: {
+    state: string
+  }
+}
+
+type CreateIntegration = { data: { createIntegration: { integration: Integration } } }
+
+const MUTATION = `
+mutation CLICreateIntegration($name: String!, $description: String!) {
+  createIntegration(name: $name, description: $description) {
+    integration {
+      deprecated_uuid: uuid
+      uuid: uuidv2
+      name
+    }
+  }
+} 
+`
