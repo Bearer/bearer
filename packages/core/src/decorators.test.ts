@@ -58,7 +58,7 @@ describe('Function decorator', () => {
         }
       )
 
-      expect(success).toBeCalledWith({ data: collection, referenceId: null })
+      expect(success).toBeCalledWith({ data: collection })
     })
 
     it('allows custom setupId', async () => {
@@ -76,7 +76,7 @@ describe('Function decorator', () => {
         }
       )
 
-      expect(success).toBeCalledWith({ data: collection, referenceId: null })
+      expect(success).toBeCalledWith({ data: collection })
     })
   })
 
