@@ -74,7 +74,10 @@ export default class Login extends BaseCommand {
             try {
               const data: { code: string } = JSON.parse(body)
               this.debug(data)
-              response.setHeader('Access-Control-Allow-Origin', this.constants.DeveloperPortalUrl)
+              response.setHeader(
+                'Access-Control-Allow-Origin',
+                process.env.LOGIN_ALLOWED_ORIGIN || this.constants.DeveloperPortalUrl
+              )
               response.write('OK')
               response.end()
               this.getToken(data.code)
@@ -110,7 +113,7 @@ export default class Login extends BaseCommand {
   }
 
   get callbackUrl(): string {
-    return process.env.BEARER_LOGIN_CALLBACK_URL || `${this.constants.DeveloperPortalUrl}cli-login`
+    return process.env.BEARER_LOGIN_CALLBACK_URL || `${this.constants.DeveloperPortalUrl}cli-login-callback`
   }
 }
 
