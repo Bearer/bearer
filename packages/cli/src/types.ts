@@ -61,5 +61,6 @@ export type TAccessToken = {
   refresh_token: string
   scope: string
   expires_in: number
+  expires_at: number
   token_type: string
 }

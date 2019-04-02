@@ -1,4 +1,3 @@
-import serviceClient from '@bearer/bearer-cli/lib/lib/serviceClient'
 import Command, { flags } from '@oclif/command'
 import * as Case from 'case'
 import cliUx from 'cli-ux'
@@ -9,7 +8,6 @@ import * as fs from 'fs'
 
 import { AuthConfig, BaseConfig } from './types'
 import Locator from './utils/locator'
-import integrationClientFactory, { IntegrationClient } from './utils/integration-client'
 import setupConfig, { Config } from './utils/setup-config'
 
 export default abstract class extends Command {
@@ -40,15 +38,6 @@ export default abstract class extends Command {
 
   get colors() {
     return colors
-  }
-
-  // TODO: fix typing
-  get serviceClient(): any {
-    return serviceClient(this.constants.IntegrationServiceUrl)
-  }
-
-  get integrationClient(): IntegrationClient {
-    return integrationClientFactory(this)
   }
 
   get integrationAuthConfig(): AuthConfig {

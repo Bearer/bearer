@@ -54,11 +54,11 @@ export function ensureFreshToken() {
   return function(_target: any, _propertyKey: string | symbol, descriptor: PropertyDescriptor) {
     const originalMethod = descriptor.value
     descriptor.value = async function(this: TCommand) {
-      const { authorization, ExpiresAt } = this.bearerConfig.bearerConfig
+      const { expires_at } = (await this.bearerConfig.getToken()) || { expires_at: null }
 
-      if (authorization && authorization.AuthenticationResult) {
+      if (expires_at) {
         try {
-          if (ExpiresAt < Date.now()) {
+          if (expires_at < Date.now()) {
             this.ux.action.start('Refreshing token')
             await refreshMyToken(this)
             this.ux.action.stop()
@@ -72,6 +72,7 @@ export function ensureFreshToken() {
         await originalMethod.apply(this, arguments)
         return descriptor
       }
+
       const error =
         this.colors.bold('⚠️ It looks like you are not logged in\n') +
         this.colors.yellow(this.colors.italic('Please run: bearer login'))
@@ -83,6 +84,8 @@ export function ensureFreshToken() {
 }
 
 async function refreshMyToken(command: TCommand): Promise<boolean | Error> {
+  // TODO: rework refresh mechanism
+  return true
   const { RefreshToken } = command.bearerConfig.bearerConfig.authorization.AuthenticationResult!
   if (!RefreshToken) {
     throw new UnauthorizedRefreshTokenError()
