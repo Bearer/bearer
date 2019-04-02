@@ -1,5 +1,4 @@
 import { flags } from '@oclif/command'
-import axios from 'axios'
 
 import BaseCommand from '../../base-command'
 import { linkIntegration } from '../../utils/commands'
