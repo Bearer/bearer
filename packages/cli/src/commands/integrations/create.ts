@@ -2,12 +2,14 @@ import { flags } from '@oclif/command'
 import axios from 'axios'
 
 import BaseCommand from '../../base-command'
+import Link from '../link'
 
 export default class IntegrationsCreate extends BaseCommand {
   static flags = {
     ...BaseCommand.flags,
     description: flags.string({ char: 'd' }),
-    name: flags.string({ char: 'n' })
+    name: flags.string({ char: 'n' }),
+    skipLink: flags.boolean({ char: 'l' })
   }
 
   async run() {
@@ -42,6 +44,12 @@ export default class IntegrationsCreate extends BaseCommand {
           int.deprecated_uuid,
           `${this.constants.DeveloperPortalUrl}integrations/${int.deprecated_uuid}`
         )
+        if (this.bearerConfig.isIntegrationLocation) {
+          // tslint:disable-next-line no-boolean-literal-compare
+          if (!flags.skipLink) {
+            await Link.run([int.deprecated_uuid, '--path', this.bearerConfig.integrationLocation])
+          }
+        }
       } catch (e) {
         this.debug('%j', e.response)
         this.error(e)
