@@ -2,9 +2,8 @@ import axios from 'axios'
 
 import Command from '../base-command'
 import CreateIntegration from '../commands/integrations/create'
-import Login from '../commands/login'
-import LinkIntegration from '../commands/link'
 
+import Login from '../commands/login'
 import { LOGIN_CLIENT_ID } from './constants'
 
 type Constructor<T> = new (...args: any[]) => T
@@ -38,6 +37,10 @@ export function RequireIntegrationFolder() {
     return descriptor
   }
 }
+
+// note: moving this line here, since link require RequireIntegrationFolder to be defined because it produces
+// this error: decorators_1.RequireIntegrationFolder is not a function
+import LinkIntegration from '../commands/link'
 
 // tslint:disable-next-line:function-name
 export function RequireLinkedIntegration() {

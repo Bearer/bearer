@@ -1,4 +1,3 @@
-import { flags } from '@oclif/command'
 import getPort from 'get-port'
 import * as http from 'http'
 import axios from 'axios'

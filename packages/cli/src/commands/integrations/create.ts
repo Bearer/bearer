@@ -2,7 +2,7 @@ import { flags } from '@oclif/command'
 import axios from 'axios'
 
 import BaseCommand from '../../base-command'
-import Link from '../link'
+import { linkIntegration } from '../../utils/commands'
 
 export default class IntegrationsCreate extends BaseCommand {
   static flags = {
@@ -47,7 +47,7 @@ export default class IntegrationsCreate extends BaseCommand {
         if (this.bearerConfig.isIntegrationLocation) {
           // tslint:disable-next-line no-boolean-literal-compare
           if (!flags.skipLink) {
-            await Link.run([integration.deprecated_uuid, '--path', this.bearerConfig.integrationLocation])
+            await linkIntegration.bind(this)(integration.deprecated_uuid)
           }
         }
       } catch (e) {
