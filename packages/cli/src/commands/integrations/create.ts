@@ -20,7 +20,7 @@ export default class IntegrationsCreate extends BaseCommand {
 
     if (token) {
       try {
-        const response = await axios.post<{ data: { createIntegration: { integration: Integration } } }>(
+        const response = await axios.post<CreateIntegration>(
           this.constants.DeveloperPortalAPIUrl,
           {
             query: MUTATION,
@@ -35,19 +35,19 @@ export default class IntegrationsCreate extends BaseCommand {
             }
           }
         )
-        const int = response.data.data.createIntegration.integration
+        const { integration } = response.data.data.createIntegration
         this.success('Integration successfully created')
         this.log(
           '      name: %s\n      uuid: %s\nidentifier: %s\n       Url:',
-          int.name,
-          int.uuid,
-          int.deprecated_uuid,
-          `${this.constants.DeveloperPortalUrl}integrations/${int.deprecated_uuid}`
+          integration.name,
+          integration.uuid,
+          integration.deprecated_uuid,
+          `${this.constants.DeveloperPortalUrl}integrations/${integration.deprecated_uuid}`
         )
         if (this.bearerConfig.isIntegrationLocation) {
           // tslint:disable-next-line no-boolean-literal-compare
           if (!flags.skipLink) {
-            await Link.run([int.deprecated_uuid, '--path', this.bearerConfig.integrationLocation])
+            await Link.run([integration.deprecated_uuid, '--path', this.bearerConfig.integrationLocation])
           }
         }
       } catch (e) {
@@ -73,6 +73,8 @@ type Integration = {
     state: string
   }
 }
+
+type CreateIntegration = { data: { createIntegration: { integration: Integration } } }
 
 const MUTATION = `
 mutation CLICreateIntegration($name: String!, $description: String!) {

@@ -1,3 +1,3 @@
-describe.skip('create integration', () => {
+describe.skip('list integrations', () => {
   it('TODO', () => {})
 })
