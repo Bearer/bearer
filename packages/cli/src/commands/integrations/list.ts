@@ -1,5 +1,5 @@
 import BaseCommand from '../../base-command'
-import axios from 'axios'
+import { getIntegrations } from '../../utils/devPortal'
 
 export default class IntegrationsList extends BaseCommand {
   static flags = {
@@ -12,18 +12,9 @@ export default class IntegrationsList extends BaseCommand {
     const token = await this.bearerConfig.getToken()
     if (token) {
       try {
-        const response = await axios.post<{ data: { integrations: Integration[] } }>(
-          this.constants.DeveloperPortalAPIUrl,
-          {
-            query: QUERY
-          },
-          {
-            headers: {
-              Authorization: `Bearer ${token.id_token}`
-            }
-          }
-        )
-        const max = response.data.data.integrations.reduce(
+        const { integrations } = await getIntegrations(this)
+
+        const max = integrations.reduce(
           (acc, inte) => {
             acc.name = Math.max(inte.name.length, acc.name)
             acc.name = Math.max((inte.latestActivity || { state: '' }).state.length, acc.name)
@@ -33,7 +24,7 @@ export default class IntegrationsList extends BaseCommand {
           { name: 0, state: 0, uuid: 0 }
         )
 
-        response.data.data.integrations.forEach(inte => {
+        integrations.forEach(inte => {
           this.log(
             '| %s | %s | %s',
             inte.name.padEnd(max.name),
@@ -47,24 +38,3 @@ export default class IntegrationsList extends BaseCommand {
     }
   }
 }
-
-type Integration = {
-  uuid: string
-  name: string
-  latestActivity?: {
-    state: string
-  }
-}
-
-const QUERY = `
-query CLIListIntegrations {
-  integrations(includeGloballyAvailable: false) {
-    identifier
-    uuid
-    name
-    latestActivity {
-      state
-    }
-  }
-}
-`
