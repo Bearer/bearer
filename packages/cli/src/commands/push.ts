@@ -153,6 +153,13 @@ export default class Push extends BaseCommand {
   }
 
   fetchLoginInformation = async () => {
+    const { BEARER_TOKEN, BEARER_EMAIL } = process.env
+    if (BEARER_TOKEN && BEARER_EMAIL) {
+      return {
+        Username: BEARER_EMAIL,
+        Password: BEARER_TOKEN
+      }
+    }
     const token = await this.bearerConfig.getToken()
     if (token) {
       const { data } = await axios.post(
