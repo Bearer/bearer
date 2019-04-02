@@ -7,12 +7,16 @@ import * as copy from 'copy-template-dir'
 import * as inquirer from 'inquirer'
 import * as fs from 'fs'
 
-import { AuthConfig, Config } from './types'
+import { AuthConfig, BaseConfig } from './types'
 import Locator from './utils/locator'
 import integrationClientFactory, { IntegrationClient } from './utils/integration-client'
-import setupConfig from './utils/setup-config'
+import setupConfig, { Config } from './utils/setup-config'
 
 export default abstract class extends Command {
+  constants!: BaseConfig
+  bearerConfig!: Config
+  silent = false
+
   get locator() {
     return new Locator(this.bearerConfig)
   }
@@ -40,7 +44,7 @@ export default abstract class extends Command {
 
   // TODO: fix typing
   get serviceClient(): any {
-    return serviceClient(this.bearerConfig.IntegrationServiceUrl)
+    return serviceClient(this.constants.IntegrationServiceUrl)
   }
 
   get integrationClient(): IntegrationClient {
@@ -61,9 +65,6 @@ export default abstract class extends Command {
     silent: flags.boolean({})
     // logLevel: flags.string({ options: ['error', 'warn', 'info', 'debug'], default: 'info' })
   }
-
-  bearerConfig!: Config
-  silent = false
 
   success(message: string) {
     this.log(this.colors.green(message))
@@ -88,8 +89,10 @@ export default abstract class extends Command {
   async init() {
     const { flags } = this.parse(this.constructor as any)
     const path = flags.path || undefined
+    const { constants, config } = setupConfig(path)
+    this.bearerConfig = config
+    this.constants = constants
     this.silent = flags.silent
-    this.bearerConfig = setupConfig(path)
   }
 
   /**

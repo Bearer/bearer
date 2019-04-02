@@ -28,7 +28,7 @@ export class IntegrationClient {
 
 export default (command: BaseCommand): IntegrationClient => {
   return new IntegrationClient(
-    command.bearerConfig.DeploymentUrl,
+    command.constants.DeploymentUrl,
     command.bearerConfig.bearerConfig.authorization.AuthenticationResult!.IdToken,
     command.config.version
   )

@@ -33,7 +33,7 @@ export default class PackViews extends BaseCommand {
   async run() {
     const { flags } = this.parse(PackViews)
 
-    const config = this.bearerConfig
+    const config = this.constants
     const env: IntegrationBuildEnv = {
       ...process.env,
       BEARER_INTEGRATION_ID: flags[integrationUuid],

@@ -1,6 +1,6 @@
 import * as path from 'path'
 
-import { Config } from '../types'
+import { Config } from './setup-config'
 
 export default class LocationProvider {
   bearerDir = ''

@@ -1,8 +1,7 @@
 import Command from '@oclif/command'
 
 import Locator from './utils/locator'
-import setupConfig from './utils/setup-config'
-import { Config } from './types'
+import setupConfig, { Config } from './utils/setup-config'
 import * as fs from 'fs-extra'
 
 export default abstract class extends Command {
@@ -14,7 +13,7 @@ export default abstract class extends Command {
 
   async init() {
     const path = process.cwd()
-    this.bearerConfig = setupConfig(path)
+    this.bearerConfig = setupConfig(path).config
   }
 
   get locator() {

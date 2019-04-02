@@ -14,7 +14,7 @@ export default class Link extends BaseCommand {
   async run() {
     const { args } = this.parse(Link)
     const identifier = args.Integration_Identifier
-    const { integrationTitle } = this.bearerConfig
+    const { integrationTitle } = this.bearerConfig as { integrationTitle: string }
     const [orgId, integrationId] = identifier.replace(/\-/, '|').split('|')
     const integrationRc = { orgId, integrationId, integrationTitle }
     this.bearerConfig.setIntegrationConfig(integrationRc)

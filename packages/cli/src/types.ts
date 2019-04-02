@@ -42,24 +42,6 @@ export type IntegrationConfig = {
   config: string
 }
 
-export type Config = BaseConfig & {
-  runPath: string
-  isYarnInstalled: boolean
-  isIntegrationLocation: boolean
-  command: 'yarn' | 'npm'
-  bearerConfig: BearerConfig
-  integrationConfig: IntegrationConfig
-  orgId: string | undefined
-  integrationTitle: string | undefined
-  integrationId: string | undefined
-  integrationUuid: string
-  rootPathRc: string | null
-  hasIntegrationLinked: boolean
-  setIntegrationConfig(config: any): void
-  storeBearerConfig(config: any): void
-  storeToken(token: TAccessToken): void
-}
-
 export type AuthConfig = {
   authType: Authentication
   setupViews?: any[]
@@ -75,6 +57,7 @@ export type IntegrationBuildEnv = {
 
 export type TAccessToken = {
   access_token: string
+  id_token: string
   refresh_token: string
   scope: string
   expires_in: number
