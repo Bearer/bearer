@@ -8,14 +8,21 @@ import { LOGIN_CLIENT_ID } from './constants'
 type Constructor<T> = new (...args: any[]) => T
 type TCommand = InstanceType<Constructor<Command>>
 
-export function skipIfNoViews() {
+export function skipIfNoViews(displayError = false) {
   return function(_target: any, _propertyKey: string | symbol, descriptor: PropertyDescriptor) {
     const originalMethod = descriptor.value
     descriptor.value = async function(this: TCommand) {
       if (this.hasViews) {
         await originalMethod.apply(this, arguments)
       } else {
-        this.debug('No views present, skipping')
+        if (displayError) {
+          this.error(
+            // tslint:disable-next-line
+            'This integration does not contain any views. If you want to use this command please generate a new integration with --withViews flag'
+          )
+        } else {
+          this.debug('No views present, skipping')
+        }
       }
     }
     return descriptor

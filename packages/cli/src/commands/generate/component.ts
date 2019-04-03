@@ -2,7 +2,7 @@ import Authentications from '@bearer/types/lib/authentications'
 import { flags } from '@oclif/command'
 
 import BaseCommand from '../../base-command'
-import { RequireIntegrationFolder } from '../../utils/decorators'
+import { RequireIntegrationFolder, skipIfNoViews } from '../../utils/decorators'
 import { copyFiles } from '../../utils/helpers'
 
 enum TComponent {
@@ -21,6 +21,7 @@ export default class GenerateComponent extends BaseCommand {
 
   static args = [{ name: 'name' }]
 
+  @skipIfNoViews(true)
   @RequireIntegrationFolder()
   async run() {
     const { args, flags } = this.parse(GenerateComponent)

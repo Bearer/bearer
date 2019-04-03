@@ -34,6 +34,6 @@ export default class GenerateFunction extends BaseCommand {
   }
 
   async askForName(): Promise<string> {
-    return this.askForString('Name')
+    return this.askForString('Function name')
   }
 }
