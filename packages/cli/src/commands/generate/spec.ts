@@ -5,7 +5,6 @@ import * as path from 'path'
 import BaseCommand from '../../base-command'
 import { RequireIntegrationFolder, skipIfNoViews } from '../../utils/decorators'
 import { copyFiles } from '../../utils/helpers'
-import Authentications from '@bearer/types/lib/authentications'
 
 export default class GenerateSpec extends BaseCommand {
   static description = 'Generate spec file for bearer integration'
@@ -24,24 +23,7 @@ export default class GenerateSpec extends BaseCommand {
     const targetFolder = this.locator.integrationRoot
     if (flags.force || !specExists(targetFolder)) {
       try {
-        const setup = `
-    {
-      classname: 'SetupAction',
-      isRoot: true,
-      initialTagName: 'setup-action',
-      name: 'setup-action',
-      label: 'Setup Action Component'
-    },
-    {
-      classname: 'SetupDisplay',
-      isRoot: true,
-      initialTagName: 'setup-view',
-      name: 'setup-view',
-      label: 'Setup Display Component'
-    },`
-        const authType: string = this.integrationAuthConfig.authType
-        const vars = authType === Authentications.NoAuth || authType === Authentications.Custom ? {} : { setup }
-        await copyFiles(this, 'generate/integration_specs', targetFolder, vars)
+        await copyFiles(this, 'generate/integration_specs', targetFolder, {})
         this.success('Spec file successfully generated! 🎉')
       } catch (e) {
         this.error(e)

@@ -21,7 +21,7 @@ export default class GenerateIndex extends BaseCommand {
   async run() {
     const { flags } = this.parse(GenerateIndex)
     const pathParams = flags.path ? ['--path', flags.path] : []
-    const type = await this.askForType()
+    const type = this.hasViews ? await this.askForType() : TType.Function
 
     switch (type) {
       case TType.Function: {

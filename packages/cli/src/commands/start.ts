@@ -3,7 +3,6 @@ import { flags } from '@oclif/command'
 import BaseLegacyCommand from '../base-legacy-command'
 
 import GenerateApiDocumenation from './generate/api-documentation'
-import GenerateSetup from './generate/setup'
 import GenerateSpec from './generate/spec'
 import PrepareViews from './prepare/views'
 
@@ -37,7 +36,6 @@ export default class Start extends BaseLegacyCommand {
     }
 
     if (this.hasViews) {
-      await GenerateSetup.run(['--silent'])
       await GenerateSpec.run(['--silent'])
       await PrepareViews.run(['--silent'])
       await GenerateApiDocumenation.run(['--silent'])

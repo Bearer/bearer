@@ -10,7 +10,6 @@ import initViews from '../tasks/init-views'
 import { copyFiles, printFiles } from '../utils/helpers'
 
 import GenerateComponent from './generate/component'
-import GenerateSetup from './generate/setup'
 import GenerateSpec from './generate/spec'
 
 const authTypes: TAuthentications = {
@@ -82,10 +81,6 @@ export default class New extends BaseCommand {
                 cmd: this,
                 vars: this.initViewsVars(name, authType)
               }),
-              {
-                title: 'Create setup files',
-                task: async (_ctx: any, _task: any) => GenerateSetup.run(['--path', this.copyDestFolder, '--silent'])
-              },
               {
                 title: 'Create integration specification file',
                 task: async (_ctx: any, _task: any) => GenerateSpec.run(['--path', this.copyDestFolder, '--silent'])
