@@ -4,31 +4,14 @@ exports[`generators build generates openapi documentation 1`] = `
 "{
   \\"openapi\\": \\"3.0.0\\",
   \\"info\\": {
-    \\"description\\": \\"openapi definition file for test\\",
-    \\"version\\": \\"0.0.1\\",
-    \\"title\\": \\"test\\",
-    \\"contact\\": {
-      \\"email\\": \\"bearer@bearer.sh\\"
-    },
-    \\"license\\": {
-      \\"name\\": \\"MIT\\"
-    }
+    \\"title\\": \\"test\\"
   },
   \\"servers\\": [
     {
       \\"url\\": \\"https://int.bearer.sh/api/v3/functions/backend/\\"
     }
   ],
-  \\"tags\\": [
-    {
-      \\"name\\": \\"integration\\",
-      \\"description\\": \\"List of endpoints providing backend to backend integration with test\\",
-      \\"externalDocs\\": {
-        \\"description\\": \\"Find out more\\",
-        \\"url\\": \\"https://www.bearer.sh\\"
-      }
-    }
-  ],
+  \\"tags\\": [],
   \\"paths\\": {
     \\"/123-test/object-literal-type\\": {
       \\"post\\": {
