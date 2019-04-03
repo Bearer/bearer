@@ -12,6 +12,7 @@ import { LOGIN_CLIENT_ID, BEARER_ENV } from '../utils/constants'
 
 const BEARER_LOGIN_PORT = 56789
 type Event = 'success' | 'error' | 'shutdown'
+
 export default class Login extends BaseCommand {
   _server?: http.Server
   _verifier!: string

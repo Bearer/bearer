@@ -1,7 +1,6 @@
 import axios from 'axios'
 
 import Command from '../base-command'
-import CreateIntegration from '../commands/integrations/create'
 
 import Login from '../commands/login'
 import { LOGIN_CLIENT_ID } from './constants'
@@ -37,10 +36,6 @@ export function RequireIntegrationFolder() {
     return descriptor
   }
 }
-
-// note: moving this line here, since link require RequireIntegrationFolder to be defined because it produces
-// this error: decorators_1.RequireIntegrationFolder is not a function
-import LinkIntegration from '../commands/link'
 
 // tslint:disable-next-line:function-name
 export function RequireLinkedIntegration() {
@@ -90,7 +85,6 @@ export function ensureFreshToken() {
         expires_at: null,
         refresh_token: null
       }
-
       if (expires_at && refresh_token) {
         try {
           if (expires_at < Date.now()) {
@@ -137,3 +131,8 @@ async function refreshMyToken(command: TCommand, refresh_token: string): Promise
   await command.bearerConfig.storeToken({ ...response.data, refresh_token })
   return true
 }
+
+// note: moving this line here, since link require RequireIntegrationFolder to be defined because it produces
+// this error: decorators_1.RequireIntegrationFolder is not a function
+import LinkIntegration from '../commands/link'
+import CreateIntegration from '../commands/integrations/create'

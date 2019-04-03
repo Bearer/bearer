@@ -1,4 +1,5 @@
 import BaseCommand from '../../base-command'
+import { ensureFreshToken } from '../../utils/decorators'
 
 export default class IntegrationsList extends BaseCommand {
   static flags = {
@@ -7,39 +8,37 @@ export default class IntegrationsList extends BaseCommand {
 
   static args = []
 
+  @ensureFreshToken()
   async run() {
-    const token = await this.bearerConfig.getToken()
-    if (token) {
-      try {
-        const { data } = await this.devPortalClient.request<{ integrations: Integration[] }>({
-          query: QUERY
-        })
-        if (data.data) {
-          const { integrations } = data.data
-          const max = integrations.reduce(
-            (acc, inte) => {
-              acc.name = Math.max(inte.name.length, acc.name)
-              acc.name = Math.max((inte.latestActivity || { state: '' }).state.length, acc.name)
-              acc.uuid = Math.max(inte.uuid.length, acc.uuid)
-              return acc
-            },
-            { name: 0, state: 0, uuid: 0 }
-          )
+    try {
+      const { data } = await this.devPortalClient.request<{ integrations: Integration[] }>({
+        query: QUERY
+      })
+      if (data.data) {
+        const { integrations } = data.data
+        const max = integrations.reduce(
+          (acc, inte) => {
+            acc.name = Math.max(inte.name.length, acc.name)
+            acc.name = Math.max((inte.latestActivity || { state: '' }).state.length, acc.name)
+            acc.uuid = Math.max(inte.uuid.length, acc.uuid)
+            return acc
+          },
+          { name: 0, state: 0, uuid: 0 }
+        )
 
-          integrations.forEach(inte => {
-            this.log(
-              '| %s | %s | %s',
-              inte.name.padEnd(max.name),
-              (inte.latestActivity || { state: '' }).state.padEnd(max.state),
-              inte.uuid.padEnd(max.uuid)
-            )
-          })
-        } else {
-          this.error('Unable to fetch integration list')
-        }
-      } catch (e) {
-        console.log(e.request)
+        integrations.forEach(inte => {
+          this.log(
+            '| %s | %s | %s',
+            inte.name.padEnd(max.name),
+            (inte.latestActivity || { state: '' }).state.padEnd(max.state),
+            inte.uuid.padEnd(max.uuid)
+          )
+        })
+      } else {
+        this.error('Unable to fetch integration list')
       }
+    } catch (e) {
+      this.error(e)
     }
   }
 }
