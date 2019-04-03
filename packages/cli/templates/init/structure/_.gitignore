@@ -1,6 +1,8 @@
-.bearer
+.bearer/*
+!.bearer/.keep
 node_modules/
 dist/
 www/
 .build/
 config.dev.js
+.integrationrc

@@ -77,6 +77,7 @@ export default class Push extends BaseCommand {
       // pipe archive data to the file
       archive.pipe(output)
       const files = await globby([
+        '.bearer/.keep',
         'views/**/*',
         'functions/**/*.ts',
         'functions/tsconfig.json',
