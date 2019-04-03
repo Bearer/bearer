@@ -35,7 +35,11 @@ export class Config {
   }
 
   get integrationConfig(): IntegrationConfig {
-    return rc('integration', { config: path.join(this.integrationLocation, '.integrationrc') })
+    return rc('integration', { config: this.integrationRc })
+  }
+
+  get integrationRc() {
+    return path.join(this.integrationLocation, '.integrationrc')
   }
 
   get orgId(): string | undefined {
@@ -72,7 +76,7 @@ export class Config {
   setIntegrationConfig = (config: { integrationTitle: string; orgId: string; integrationId: string }) => {
     const { integrationTitle, orgId, integrationId } = config
     if (this.rootPath) {
-      fs.writeFileSync(this.rootPath, ini.stringify({ integrationTitle, orgId, integrationId }))
+      fs.writeFileSync(this.integrationRc, ini.stringify({ integrationTitle, orgId, integrationId }))
     }
   }
 

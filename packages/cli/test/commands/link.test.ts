@@ -18,6 +18,7 @@ describe('Link', () => {
 
   it('does not fail :-P ', async () => {
     await LinkCommand.run(['123-integration-id', '--path', bearerPath])
+
     expect(result.join()).toContain('Integration successfully linked')
     expect(readFile(bearerPath, '.integrationrc')).toMatchSnapshot()
   })

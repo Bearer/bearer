@@ -19,12 +19,10 @@ export function ensureBearerStructure({
     fs.mkdirpSync(bearerFolder)
   }
 
-  if (!fs.existsSync(bearerFolder)) {
-    fs.mkdirpSync(bearerFolder)
-  }
   if (clean) {
     fs.emptyDirSync(bearerFolder)
   }
+
   if (withViews) {
     const views = path.join(bearerFolder, 'views')
     if (!fs.existsSync(views)) {
