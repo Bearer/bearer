@@ -56,9 +56,7 @@ export default class Push extends BaseCommand {
       this.log(
         // tslint:disable-next-line:prefer-template
         `Your Integration will be available shortly here: ` +
-          this.colors.bold(
-            `${this.constants.DeveloperPortalUrl}integrations/${this.bearerConfig.integrationUuid}/preview`
-          )
+          this.colors.bold(`${this.constants.DeveloperPortalUrl}integrations/${this.bearerConfig.integrationUuid}`)
       )
       this.log(
         // tslint:disable-next-line:prefer-template
@@ -160,22 +158,15 @@ export default class Push extends BaseCommand {
         Password: BEARER_TOKEN
       }
     }
-    const token = await this.bearerConfig.getToken()
-    if (token) {
-      const { data } = await axios.post(
-        this.constants.DeveloperPortalAPIUrl,
-        {
-          query: QUERY
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${token.id_token}`
-          }
-        }
-      )
+    const { data } = await this.devPortalClient.request<{
+      currentUser: { email: string; infrastructure: { password: string } }
+    }>({
+      query: QUERY
+    })
+    if (data.data) {
       return { Username: data.data.currentUser.email, Password: data.data.currentUser.infrastructure.password }
     }
-    throw 'error'
+    throw 'Fetch credentials error'
   }
 }
 
@@ -184,7 +175,6 @@ query CLIPush {
   currentUser {
     email
     infrastructure {
-      id
       password
     }
   }
