@@ -39,7 +39,7 @@ export class Config {
   }
 
   get orgId(): string | undefined {
-    return this.integrationConfig.orgId
+    return process.env.BEARER_ORG_ID || this.integrationConfig.orgId
   }
 
   get integrationTitle(): string | undefined {
@@ -47,7 +47,7 @@ export class Config {
   }
 
   get integrationId(): string | undefined {
-    return this.integrationConfig.integrationId
+    return process.env.BEARER_INTEGRATION_ID || this.integrationConfig.integrationId
   }
 
   get integrationUuid(): string {
