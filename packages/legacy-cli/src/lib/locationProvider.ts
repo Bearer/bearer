@@ -7,10 +7,10 @@ export default class LocationProvider {
   integrationRoot: string
   integrationRc: string
 
-  constructor(private readonly config: Config) {
-    this.integrationRc = this.config.integrationConfig.config
+  constructor(private readonly _config: Config) {
+    this.integrationRc = process.cwd()
     if (this.integrationRc) {
-      this.integrationRoot = path.dirname(this.integrationRc)
+      this.integrationRoot = this.integrationRc
       this.bearerDir = path.join(this.integrationRoot, '.bearer')
     }
   }
