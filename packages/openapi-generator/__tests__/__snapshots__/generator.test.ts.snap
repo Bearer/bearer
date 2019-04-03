@@ -4,31 +4,14 @@ exports[`#generator generates the valid openapi 3.0 document 1`] = `
 "{
   \\"openapi\\": \\"3.0.0\\",
   \\"info\\": {
-    \\"description\\": \\"openapi definition file for happy-goats\\",
-    \\"version\\": \\"0.0.1\\",
-    \\"title\\": \\"happy-goats\\",
-    \\"contact\\": {
-      \\"email\\": \\"bearer@bearer.sh\\"
-    },
-    \\"license\\": {
-      \\"name\\": \\"MIT\\"
-    }
+    \\"title\\": \\"happy-goats\\"
   },
   \\"servers\\": [
     {
       \\"url\\": \\"https://int.bearer.sh/api/v3/functions/backend/\\"
     }
   ],
-  \\"tags\\": [
-    {
-      \\"name\\": \\"integration\\",
-      \\"description\\": \\"List of endpoints providing backend to backend integration with happy-goats\\",
-      \\"externalDocs\\": {
-        \\"description\\": \\"Find out more\\",
-        \\"url\\": \\"https://www.bearer.sh\\"
-      }
-    }
-  ],
+  \\"tags\\": [],
   \\"paths\\": {
     \\"/4l1c3-happy-goats/fetchDataApiKey\\": {
       \\"post\\": {

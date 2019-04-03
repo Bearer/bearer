@@ -1,18 +1,10 @@
 type THeader = {
   openapi: string
   info: {
-    description: string
-    version: string
     title: string
-    contact: { email: string }
-    license: { name: string }
   }
   servers: { url: string }[]
-  tags: {
-    name: string
-    description: string
-    externalDocs: { description: string; url: string }
-  }[]
+  tags: {}[]
 }
 
 type TParam = {
@@ -88,19 +80,9 @@ export function topOfSpec(integrationName: string): THeader {
   return {
     openapi: '3.0.0',
     info: {
-      description: `openapi definition file for ${integrationName}`,
-      version: '0.0.1',
-      title: integrationName,
-      contact: { email: 'bearer@bearer.sh' },
-      license: { name: 'MIT' }
+      title: integrationName
     },
     servers: [{ url: 'https://int.bearer.sh/api/v3/functions/backend/' }],
-    tags: [
-      {
-        name: 'integration',
-        description: `List of endpoints providing backend to backend integration with ${integrationName}`,
-        externalDocs: { description: 'Find out more', url: 'https://www.bearer.sh' }
-      }
-    ]
+    tags: []
   }
 }
