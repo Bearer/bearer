@@ -20,7 +20,7 @@ export default ({
 }): Listr.ListrTask => ({
   title: 'Generating views directory',
   task: async (ctx: any) => {
-    const files = await copyFiles(cmd, 'init/views', cmd.locator.integrationRoot, vars)
+    const files = await copyFiles(cmd, 'init/views', cmd.copyDestFolder, vars, true)
     const packageJson = path.join(cmd.copyDestFolder, 'package.json')
     const projectPackage: any = JSON.parse(fs.readFileSync(packageJson, { encoding: 'utf8' }))
 

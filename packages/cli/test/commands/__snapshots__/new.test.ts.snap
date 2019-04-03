@@ -15,11 +15,8 @@ What's next?
 ,[90m    create: [39m[37m.bearer/initWithView/new/APIKEY/functions/tsconfig.json[39m
 ,[90m    create: [39m[37m.bearer/initWithView/new/APIKEY/package.json[39m
 ,[90m    create: [39m[37m.bearer/initWithView/new/APIKEY/spec.ts[39m
-,[90m    create: [39m[37m.bearer/initWithView/new/APIKEY/spec.ts[39m
 ,[90m    create: [39m[37m.bearer/initWithView/new/APIKEY/tsconfig.json[39m
 ,[90m    create: [39m[37m.bearer/initWithView/new/APIKEY/views/index.html[39m
-,[90m    create: [39m[37m.bearer/initWithView/new/APIKEY/views/index.html[39m
-,[90m    create: [39m[37m.bearer/initWithView/new/APIKEY/views/index.ts[39m
 ,[90m    create: [39m[37m.bearer/initWithView/new/APIKEY/views/index.ts[39m
 ,* read the bearer documentation at https://docs.bearer.sh
 
@@ -83,11 +80,8 @@ What's next?
 ,[90m    create: [39m[37m.bearer/initWithView/new/BASIC/functions/tsconfig.json[39m
 ,[90m    create: [39m[37m.bearer/initWithView/new/BASIC/package.json[39m
 ,[90m    create: [39m[37m.bearer/initWithView/new/BASIC/spec.ts[39m
-,[90m    create: [39m[37m.bearer/initWithView/new/BASIC/spec.ts[39m
 ,[90m    create: [39m[37m.bearer/initWithView/new/BASIC/tsconfig.json[39m
 ,[90m    create: [39m[37m.bearer/initWithView/new/BASIC/views/index.html[39m
-,[90m    create: [39m[37m.bearer/initWithView/new/BASIC/views/index.html[39m
-,[90m    create: [39m[37m.bearer/initWithView/new/BASIC/views/index.ts[39m
 ,[90m    create: [39m[37m.bearer/initWithView/new/BASIC/views/index.ts[39m
 ,* read the bearer documentation at https://docs.bearer.sh
 
@@ -151,11 +145,8 @@ What's next?
 ,[90m    create: [39m[37m.bearer/initWithView/new/NONE/functions/tsconfig.json[39m
 ,[90m    create: [39m[37m.bearer/initWithView/new/NONE/package.json[39m
 ,[90m    create: [39m[37m.bearer/initWithView/new/NONE/spec.ts[39m
-,[90m    create: [39m[37m.bearer/initWithView/new/NONE/spec.ts[39m
 ,[90m    create: [39m[37m.bearer/initWithView/new/NONE/tsconfig.json[39m
 ,[90m    create: [39m[37m.bearer/initWithView/new/NONE/views/index.html[39m
-,[90m    create: [39m[37m.bearer/initWithView/new/NONE/views/index.html[39m
-,[90m    create: [39m[37m.bearer/initWithView/new/NONE/views/index.ts[39m
 ,[90m    create: [39m[37m.bearer/initWithView/new/NONE/views/index.ts[39m
 ,* read the bearer documentation at https://docs.bearer.sh
 
@@ -219,11 +210,8 @@ What's next?
 ,[90m    create: [39m[37m.bearer/initWithView/new/OAUTH1/functions/tsconfig.json[39m
 ,[90m    create: [39m[37m.bearer/initWithView/new/OAUTH1/package.json[39m
 ,[90m    create: [39m[37m.bearer/initWithView/new/OAUTH1/spec.ts[39m
-,[90m    create: [39m[37m.bearer/initWithView/new/OAUTH1/spec.ts[39m
 ,[90m    create: [39m[37m.bearer/initWithView/new/OAUTH1/tsconfig.json[39m
 ,[90m    create: [39m[37m.bearer/initWithView/new/OAUTH1/views/index.html[39m
-,[90m    create: [39m[37m.bearer/initWithView/new/OAUTH1/views/index.html[39m
-,[90m    create: [39m[37m.bearer/initWithView/new/OAUTH1/views/index.ts[39m
 ,[90m    create: [39m[37m.bearer/initWithView/new/OAUTH1/views/index.ts[39m
 ,* read the bearer documentation at https://docs.bearer.sh
 
@@ -297,11 +285,8 @@ What's next?
 ,[90m    create: [39m[37m.bearer/initWithView/new/OAUTH2/functions/tsconfig.json[39m
 ,[90m    create: [39m[37m.bearer/initWithView/new/OAUTH2/package.json[39m
 ,[90m    create: [39m[37m.bearer/initWithView/new/OAUTH2/spec.ts[39m
-,[90m    create: [39m[37m.bearer/initWithView/new/OAUTH2/spec.ts[39m
 ,[90m    create: [39m[37m.bearer/initWithView/new/OAUTH2/tsconfig.json[39m
 ,[90m    create: [39m[37m.bearer/initWithView/new/OAUTH2/views/index.html[39m
-,[90m    create: [39m[37m.bearer/initWithView/new/OAUTH2/views/index.html[39m
-,[90m    create: [39m[37m.bearer/initWithView/new/OAUTH2/views/index.ts[39m
 ,[90m    create: [39m[37m.bearer/initWithView/new/OAUTH2/views/index.ts[39m
 ,* read the bearer documentation at https://docs.bearer.sh
 
