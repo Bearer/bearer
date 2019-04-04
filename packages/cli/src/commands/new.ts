@@ -22,7 +22,7 @@ const authTypes: TAuthentications = {
 }
 
 export default class New extends BaseCommand {
-  static description = 'Generate a new integration'
+  static description = 'generate integration boilerplate'
 
   static flags = {
     ...BaseCommand.flags,

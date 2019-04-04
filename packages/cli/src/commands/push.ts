@@ -11,7 +11,7 @@ import { ensureFolderExists } from '../utils/helpers'
 import { IntegrationClient } from '../utils/integration-client'
 
 export default class Push extends BaseCommand {
-  static description = 'Deploy Integration to Bearer Platform'
+  static description = 'deploy Integration to Bearer'
   private integrationClient!: IntegrationClient
   // TODO: fix typing
   private serviceClient!: any

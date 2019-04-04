@@ -19,7 +19,7 @@ export default class Login extends BaseCommand {
   _challenge!: string
   private _listerners!: Record<Event, (() => void)[]>
 
-  static description = 'Login to Bearer platform'
+  static description = 'login using Bearer credentials'
 
   static flags = {
     ...BaseCommand.flags

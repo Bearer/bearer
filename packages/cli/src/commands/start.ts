@@ -11,7 +11,7 @@ const noInstall = 'no-install'
 const noWatcher = 'no-watcher'
 
 export default class Start extends BaseLegacyCommand {
-  static description = 'Start local development environment'
+  static description = 'start local development environment'
 
   static flags = {
     help: flags.help({ char: 'h' }),

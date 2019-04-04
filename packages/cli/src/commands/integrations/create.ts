@@ -5,6 +5,8 @@ import { linkIntegration } from '../../utils/commands'
 import { ensureFreshToken } from '../../utils/decorators'
 
 export default class IntegrationsCreate extends BaseCommand {
+  static description = 'create a new bearer integation'
+
   static flags = {
     ...BaseCommand.flags,
     description: flags.string({ char: 'd' }),

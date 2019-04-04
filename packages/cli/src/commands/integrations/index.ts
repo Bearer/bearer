@@ -2,6 +2,8 @@ import BaseCommand from '../../base-command'
 import { ensureFreshToken } from '../../utils/decorators'
 
 export default class IntegrationsList extends BaseCommand {
+  static description = 'list deployed integrations'
+
   static flags = {
     ...BaseCommand.flags
   }
@@ -24,8 +26,14 @@ export default class IntegrationsList extends BaseCommand {
           },
           { name: 0, state: 0 }
         )
-        this.success('Your integrations\n')
-        integrations.forEach(inte => {
+        this.log('')
+        const headers = [
+          {
+            name: this.colors.bold('Name'.padEnd(max.name)),
+            latestActivity: { state: this.colors.bold('Status'.padEnd(max.state)) }
+          }
+        ] as Integration[]
+        headers.concat(integrations).forEach(inte => {
           this.log(
             '| %s | %s |',
             inte.name.padEnd(max.name),

@@ -10,7 +10,7 @@ const enum TType {
 }
 
 export default class GenerateIndex extends BaseCommand {
-  static description = 'Generate Function or Component'
+  static description = 'generate Function or Component'
   static aliases = ['g']
 
   static flags = { ...BaseCommand.flags }

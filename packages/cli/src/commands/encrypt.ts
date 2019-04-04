@@ -2,7 +2,8 @@ import BaseCommand from '../base-command'
 import Cipher from '@bearer/security'
 
 export default class Encrypt extends BaseCommand {
-  static description = 'Encrypt using bearer security'
+  static hidden = true
+  static description = 'encrypt using bearer security'
 
   static flags = {
     ...BaseCommand.flags
