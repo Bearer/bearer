@@ -95,6 +95,16 @@ export default function startLocalDevelopmentServer(
         (ctx, _next) => ctx.ok(ctx.funcDatum)
       )
 
+      router.post(
+        `backend/:functionName`,
+        functionHandler(distPath, devFunctionsContext, bearerBaseURL, true),
+        (ctx, _next) => ctx.ok(ctx.funcDatum)
+      )
+
+      router.post(`:functionName`, functionHandler(distPath, devFunctionsContext, bearerBaseURL), (ctx, _next) =>
+        ctx.ok(ctx.funcDatum)
+      )
+
       if (logs) {
         server.use(Logger())
       }
