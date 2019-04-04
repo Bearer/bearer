@@ -35,22 +35,18 @@
     "async": "^2.6.0",
     "aws-sdk": "^2.224.1",
     "axios": "^0.18.0",
-    "case": "^1.5.5",
     "chokidar": "^2.0.4",
     "commander": "^2.17.1",
-    "copy-template-dir": "^1.4.0",
     "cosmiconfig": "^5.0.5",
     "del": "^3.0.0",
     "detect-file": "^1.0.0",
     "express": "^4.16.3",
     "find-up": "^2.1.0",
     "fs-extra": "^6.0.1",
-    "g": "^2.0.1",
-    "get-port": "^3.2.0",
+    "get-port": "^4.2.0",
     "globby": "^8.0.1",
     "graceful-fs": "^4.1.11",
     "ini": "^1.3.5",
-    "inquirer": "^5.2.0",
     "knex": "^0.15.2",
     "koa": "^2.5.2",
     "koa-bodyparser": "^4.2.1",
@@ -65,13 +61,11 @@
     "sqlite3": "^4.0.2",
     "stream-buffers": "^3.0.1",
     "terminal-kit": "^1.15.1",
-    "ts-loader": "^4.4.1",
-    "typescript": "^3.4.1",
     "unzip": "^0.1.11",
     "unzip-stream": "^0.3.0",
     "update-notifier": "^2.5.0",
     "uuid": "^3.3.2",
-    "webpack": "^4.12.0"
+    "webpack": "^4.29.6"
   },
   "devDependencies": {
     "@types/jest": "^24.0.11",
@@ -84,7 +78,9 @@
     "copyfiles": "^2.1.0",
     "jest": "^24.7.1",
     "mkdir-recursive": "^0.4.0",
-    "ts-jest": "^24.0.1"
+    "ts-jest": "^24.0.1",
+    "ts-loader": "^4.4.1",
+    "typescript": "^3.4.1"
   },
   "gitHead": "cb2654b19000e2ad6f31a0e4ed715a6298c8df2d"
 }

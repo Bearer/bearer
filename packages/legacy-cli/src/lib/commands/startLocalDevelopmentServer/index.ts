@@ -1,6 +1,6 @@
 import * as chokidar from 'chokidar'
 import * as cosmiconfig from 'cosmiconfig'
-import * as getPort from 'get-port'
+import getPort from 'get-port'
 import * as Logger from 'koa-logger'
 import * as Router from 'koa-router'
 
@@ -66,7 +66,7 @@ export default function startLocalDevelopmentServer(
         .on('change', refreshFunctions)
 
       const storage = Storage()
-      const expectedPort = process.env.PORT || DEFAULT_PORT
+      const expectedPort = process.env.PORT ? parseInt(process.env.PORT) : DEFAULT_PORT
 
       const port = await getPort({ port: expectedPort })
 
