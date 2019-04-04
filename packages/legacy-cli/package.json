@@ -61,6 +61,8 @@
     "sqlite3": "^4.0.2",
     "stream-buffers": "^3.0.1",
     "terminal-kit": "^1.15.1",
+    "ts-loader": "^4.4.1",
+    "typescript": "^3.4.1",
     "unzip": "^0.1.11",
     "unzip-stream": "^0.3.0",
     "update-notifier": "^2.5.0",
@@ -78,9 +80,7 @@
     "copyfiles": "^2.1.0",
     "jest": "^24.7.1",
     "mkdir-recursive": "^0.4.0",
-    "ts-jest": "^24.0.1",
-    "ts-loader": "^4.4.1",
-    "typescript": "^3.4.1"
+    "ts-jest": "^24.0.1"
   },
   "gitHead": "cb2654b19000e2ad6f31a0e4ed715a6298c8df2d"
 }

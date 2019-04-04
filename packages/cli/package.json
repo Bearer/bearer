@@ -44,6 +44,7 @@
     "path": "^0.12.7",
     "rc": "^1.2.8",
     "sqlite3": "^4.0.2",
+    "ts-loader": "^5.3.3",
     "tslib": "^1",
     "typescript-json-schema": "^0.34.0",
     "webpack": "^4.29.6"
