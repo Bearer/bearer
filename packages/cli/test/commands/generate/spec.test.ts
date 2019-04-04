@@ -4,11 +4,14 @@ import { readFile } from '../../helpers/utils'
 
 describe('Generate', () => {
   let bearerPath: string
-  let result: Array<string>
+  let result: string[]
 
   beforeEach(() => {
     result = []
-    jest.spyOn(process.stdout, 'write').mockImplementation(val => result.push(val))
+    jest.spyOn(process.stdout, 'write').mockImplementation(val => {
+      result.push(val)
+      return true
+    })
     bearerPath = ensureBearerStructure()
   })
 

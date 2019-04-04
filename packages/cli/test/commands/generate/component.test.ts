@@ -8,7 +8,10 @@ describe('Generate', () => {
 
   beforeEach(() => {
     result = []
-    jest.spyOn(process.stdout, 'write').mockImplementation(val => result.push(val))
+    jest.spyOn(process.stdout, 'write').mockImplementation(val => {
+      result.push(val)
+      return true
+    })
     bearerPath = ensureBearerStructure({ withViews: true })
   })
 

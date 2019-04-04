@@ -14,7 +14,10 @@ const auths = ['OAUTH2', 'BASIC', 'APIKEY', 'NONE', 'OAUTH1']
 describe.each(Object.values(auths))('without views %s', auth => {
   it(`generates an integration without any prompt and ${auth}`, async () => {
     const result: string[] = []
-    jest.spyOn(process.stdout, 'write').mockImplementation(val => result.push(val))
+    jest.spyOn(process.stdout, 'write').mockImplementation(val => {
+      result.push(val)
+      return true
+    })
 
     const out = path.join(destination, 'new', auth)
 
@@ -32,7 +35,10 @@ describe.each(Object.values(auths))('without views %s', auth => {
 describe.each(Object.values(auths))('with views %s', auth => {
   it(`generates an integration without any prompt and ${auth}`, async () => {
     const result: string[] = []
-    jest.spyOn(process.stdout, 'write').mockImplementation(val => result.push(val))
+    jest.spyOn(process.stdout, 'write').mockImplementation(val => {
+      result.push(val)
+      return true
+    })
     const out = path.join(destinationWithViews, 'new', auth)
 
     await NewCommand.run([`${auth}Integration`, '-a', auth, '--skipInstall', '--withViews', '--path', out])

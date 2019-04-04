@@ -100,12 +100,12 @@ describe('fromBearer', () => {
       { createNodeMock }
     )
     expect(render.toJSON()).toMatchSnapshot()
+
     render.unmount()
+
     expect(addEventListener.mock.calls.length).toBe(2)
-    expect(addEventListener.mock.calls[1][0]).toBe(outputEventName)
-    expect(addEventListener.mock.calls[1][1]).toBe(onShared)
+    expect(addEventListener.mock.calls[1]).toEqual([outputEventName, onShared])
     expect(removeEventListener.mock.calls.length).toBe(2)
-    expect(removeEventListener.mock.calls[1][0]).toBe(outputEventName)
-    expect(removeEventListener.mock.calls[1][1]).toBe(onShared)
+    expect(removeEventListener.mock.calls[1]).toEqual([outputEventName, onShared])
   })
 })

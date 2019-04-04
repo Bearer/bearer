@@ -10,7 +10,10 @@ describe('Generate', () => {
   describe.each(Object.values(Authentications))(`%s - generate:function`, authType => {
     beforeAll(() => {
       result = []
-      jest.spyOn(process.stdout, 'write').mockImplementation(val => result.push(val))
+      jest.spyOn(process.stdout, 'write').mockImplementation(val => {
+        result.push(val)
+        return true
+      })
       bearerPath = ensureBearerStructure({ clean: true, authConfig: { authType }, folderName: authType })
     })
 

@@ -16,7 +16,7 @@ describe('db-client', () => {
 
     describe('#getData', () => {
       describe.each([false, '', undefined])('%s no reference given', falsyValue => {
-        const promise = instance.getData(falsyValue)
+        const promise = instance.getData(falsyValue as string)
 
         it('returns a promise', () => {
           expect(promise).toBeInstanceOf(Promise)

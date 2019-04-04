@@ -3,7 +3,7 @@ import { IncomingMessage } from 'http'
 import request from 'supertest'
 import Cipher from '@bearer/security'
 
-import middleware from './express'
+import middleware, { TWebhookHandlers } from './express'
 
 const SUCCESS_HANDLER = 'sponge-bob-integration-handler'
 const REJECTED_HANDLER = 'patrick-is-rejecting'
@@ -11,14 +11,11 @@ const FAILING_HANDLER = 'patrick-is-failing'
 
 const webHookHandlers = {
   [SUCCESS_HANDLER]: jest.fn((req: Request & { title: string }) => Promise.resolve(req.title)),
-  [REJECTED_HANDLER]: jest.fn(() => Promise.reject()),
-  [FAILING_HANDLER]: jest.fn(() => {
+  [REJECTED_HANDLER]: jest.fn((req: Request) => Promise.reject()),
+  [FAILING_HANDLER]: jest.fn((req: Request) => {
     throw new Error('ok')
-    return new Promise(() => {
-      throw new Error('ok')
-    })
   })
-}
+} as TWebhookHandlers
 
 describe('Bearer middleware', () => {
   beforeEach(() => {
@@ -50,7 +47,7 @@ describe('Bearer middleware', () => {
           .post('/whatever/webhooks')
           .set('BEARER-INTEGRATION-HANDLER', SUCCESS_HANDLER)
 
-        const mock = webHookHandlers[SUCCESS_HANDLER]
+        const mock = webHookHandlers[SUCCESS_HANDLER] as jest.Mock
         // request is passed down
         expect(mock.mock.calls[0][0]).toBeInstanceOf(IncomingMessage)
         expect(mock.mock.calls[0][0].title).toBe('Sponge bob is the king')
