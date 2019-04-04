@@ -8,9 +8,8 @@ import * as crypto from 'crypto'
 import BaseCommand from '../base-command'
 import { TAccessToken } from '../types'
 import { toParams } from '../utils/helpers'
-import { LOGIN_CLIENT_ID, BEARER_ENV } from '../utils/constants'
+import { LOGIN_CLIENT_ID, BEARER_ENV, BEARER_LOGIN_PORT } from '../utils/constants'
 
-const BEARER_LOGIN_PORT = 56789
 type Event = 'success' | 'error' | 'shutdown'
 
 export default class Login extends BaseCommand {

@@ -2,6 +2,8 @@ import { BearerEnv, BaseConfig } from '../types'
 
 export const LOGIN_CLIENT_ID = process.env.BEARER_LOGIN_CLIENT_ID || 'Wgll39KqWnJWud473wq7hZhiXxeNjEU7'
 export const BEARER_ENV = process.env.BEARER_ENV || 'production'
+export const BEARER_AUTH_PORT = 45677
+export const BEARER_LOGIN_PORT = 56789
 
 export const CONFIGS: Record<BearerEnv, BaseConfig> = {
   dev: {
