@@ -1,5 +1,6 @@
 import { flags } from '@oclif/command'
 import * as http from 'http'
+import * as fs from 'fs'
 import axios from 'axios'
 import BaseCommand from '../base-command'
 // @ts-ignore
@@ -34,6 +35,13 @@ export default class IntegrationsCreate extends BaseCommand {
       shutdown: []
     }
     this._server = await this.startServer()
+    const config: any = JSON.parse(
+      fs.readFileSync(this.locator.integrationRootResourcePath('auth.config.json'), {
+        encoding: 'utf8'
+      })
+    )
+
+    this.debug(config)
     const location = await axios
       .post(`${this.constants.IntegrationServiceHost}v2/auth/local-auth`, { config }, { maxRedirects: 0 })
       .catch(e => e.response.headers.location)
