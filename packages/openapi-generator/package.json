@@ -12,12 +12,12 @@
   ],
   "devDependencies": {
     "@bearer/package-init": "^0.78.0",
-    "@types/jest": "^23.3.13",
-    "@types/lodash.merge": "^4.6.5",
+    "@types/jest": "^24.0.11",
+    "@types/lodash.merge": "^4.6.6",
     "@types/node": "^10.12.19",
-    "jest": "^24.0.0",
-    "ts-jest": "^24.0.0",
-    "typescript": "^3.3.3333"
+    "jest": "^24.7.1",
+    "ts-jest": "^24.0.1",
+    "typescript": "^3.4.1"
   },
   "scripts": {
     "start": "tsc --watch",

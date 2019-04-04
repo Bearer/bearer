@@ -22,12 +22,12 @@
   },
   "devDependencies": {
     "@bearer/types": "^0.108.0",
-    "@types/fs-extra": "^5.0.3",
-    "@types/jest": "^23.3.13",
+    "@types/fs-extra": "^5.0.5",
+    "@types/jest": "^24.0.11",
     "@types/node": "^10.12.18",
     "globby": "^8.0.1",
-    "jest": "^24.1.0",
-    "ts-jest": "^24.0.0"
+    "jest": "^24.7.1",
+    "ts-jest": "^24.0.1"
   },
   "dependencies": {
     "@bearer/logger": "^0.108.0",
@@ -35,7 +35,7 @@
     "case": "^1.5.5",
     "command-line-args": "^5.0.2",
     "fs-extra": "^6.0.1",
-    "typescript": "^3.3.3333",
+    "typescript": "^3.4.1",
     "typescript-json-schema": "^0.34.0"
   },
   "gitHead": "cb2654b19000e2ad6f31a0e4ed715a6298c8df2d"

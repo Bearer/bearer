@@ -26,10 +26,10 @@
   ],
   "license": "MIT",
   "devDependencies": {
-    "@types/jest": "^23.3.13",
-    "jest": "^24.1.0",
-    "ts-jest": "^24.0.0",
-    "typescript": "^3.3.3333"
+    "@types/jest": "^24.0.11",
+    "jest": "^24.7.1",
+    "ts-jest": "^24.0.1",
+    "typescript": "^3.4.1"
   },
   "jest": {
     "transform": {

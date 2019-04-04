@@ -23,15 +23,15 @@
   "dependencies": {
     "@bearer/logger": "^0.108.0",
     "@bearer/x-ray": "^0.108.0",
-    "axios": "^0.18.0",
-    "typescript": "^3.3.3333"
+    "axios": "^0.18.0"
   },
   "devDependencies": {
-    "@types/jest": "^23.3.13",
+    "@types/jest": "^24.0.11",
     "@types/node": "^10.12.18",
-    "jest": "^24.1.0",
-    "jest-mock-axios": "^2.1.11",
-    "ts-jest": "^24.0.0"
+    "jest": "^24.7.1",
+    "jest-mock-axios": "^2.3.0",
+    "ts-jest": "^24.0.1",
+    "typescript": "^3.4.1"
   },
   "gitHead": "cb2654b19000e2ad6f31a0e4ed715a6298c8df2d"
 }

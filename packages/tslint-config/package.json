@@ -22,6 +22,6 @@
   },
   "dependencies": {
     "tslint-config-airbnb": "^5.11.1",
-    "tslint-config-prettier": "^1.17.0"
+    "tslint-config-prettier": "^1.18.0"
   }
 }
