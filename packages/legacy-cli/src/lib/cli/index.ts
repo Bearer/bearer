@@ -15,6 +15,6 @@ export class CLI {
   }
 
   use(cliCommand) {
-    cliCommand.useWith(this.program, this.emitter, this.config, new Locator(this.config))
+    cliCommand.useWith(this.program, this.emitter, this.config, new Locator())
   }
 }
