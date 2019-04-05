@@ -13,7 +13,7 @@ interface FetchDataImplementation<T extends FetchData> {
 }
 
 export abstract class FetchData<ReturnedData = any, TError = any, AuthContext = d.TAuthContext> {
-  static backendOnly = false
+  static serverSideRestricted = false
 
   // expected implementation
   abstract async action(
@@ -23,7 +23,7 @@ export abstract class FetchData<ReturnedData = any, TError = any, AuthContext = 
   // Internal
   static call(aPrototype: FetchDataImplementation<any>) {
     const action = new aPrototype.prototype.constructor().action as d.TFetchAction
-    const requiresBackend = (aPrototype as any).backendOnly
+    const requiresBackend = (aPrototype as any).serverSideRestricted
 
     return async (event: d.TLambdaEvent) => {
       if (requiresBackend && !event.context.isBackend) {

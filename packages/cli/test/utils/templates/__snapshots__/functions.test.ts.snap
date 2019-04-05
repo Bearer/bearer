@@ -2,7 +2,7 @@
 
 exports[`functions generator When APIKEY function type: FetchData matches snapshot 1`] = `
 "import { TAPIKEYAuthContext, FetchData, TFetchActionEvent, TFetchPromise } from '@bearer/functions'
-// Uncomment this line if you need to use Client
+// Uncomment the line below to use the API Client
 // import Client from './client'
 
 export default class APIKEYFetchDataFunctionFunction extends FetchData implements FetchData<ReturnedData, any, TAPIKEYAuthContext> {
@@ -12,8 +12,8 @@ export default class APIKEYFetchDataFunctionFunction extends FetchData implement
     return { data: [] }
   }
 
-  // Uncomment the line below if you don't want your function to be called from the frontend
-  // static backendOnly = true
+  // Uncomment the line below to restrict the function to be called only from a server-side context
+  // static serverSideRestricted = true
 
 }
 
@@ -32,7 +32,7 @@ export type ReturnedData = {
 
 exports[`functions generator When BASIC function type: FetchData matches snapshot 1`] = `
 "import { TBASICAuthContext, FetchData, TFetchActionEvent, TFetchPromise } from '@bearer/functions'
-// Uncomment this line if you need to use Client
+// Uncomment the line below to use the API Client
 // import Client from './client'
 
 export default class BASICFetchDataFunctionFunction extends FetchData implements FetchData<ReturnedData, any, TBASICAuthContext>{
@@ -42,8 +42,8 @@ export default class BASICFetchDataFunctionFunction extends FetchData implements
     return { data: [] }
   }
 
-  // Uncomment the line below if you don't want your function to be called from the frontend
-  // static backendOnly = true
+  // Uncomment the line below to restrict the function to be called only from a server-side context
+  // static serverSideRestricted = true
 
 }
 
@@ -62,7 +62,7 @@ export type ReturnedData = {
 
 exports[`functions generator When CUSTOM function type: FetchData matches snapshot 1`] = `
 "import { TCUSTOMAuthContext, FetchData, TFetchActionEvent, TFetchPromise } from '@bearer/functions'
-// Uncomment this line if you need to use Client
+// Uncomment the line below to use the API Client
 // import Client from './client'
 
 export default class CUSTOMFetchDataFunctionFunction extends FetchData implements FetchData<ReturnedData, any, TCUSTOMAuthContext> {
@@ -71,8 +71,8 @@ export default class CUSTOMFetchDataFunctionFunction extends FetchData implement
     return { data: [] }
   }
 
-  // Uncomment the line below if you don't want your function to be called from the frontend
-  // static backendOnly = true
+  // Uncomment the line below to restrict the function to be called only from a server-side context
+  // static serverSideRestricted = true
 
 }
 
@@ -91,7 +91,7 @@ export type ReturnedData = {
 
 exports[`functions generator When NONE function type: FetchData matches snapshot 1`] = `
 "import { FetchData, TFetchActionEvent, TFetchPromise } from '@bearer/functions'
-// Uncomment this line if you need to use Client
+// Uncomment the line below to use the API Client
 // import Client from './client'
 
 export default class NONEFetchDataFunctionFunction extends FetchData implements FetchData<ReturnedData, any> {
@@ -100,8 +100,8 @@ export default class NONEFetchDataFunctionFunction extends FetchData implements 
     return { data: [] }
   }
 
-  // Uncomment the line below if you don't want your function to be called from the frontend
-  // static backendOnly = true
+  // Uncomment the line below to restrict the function to be called only from a server-side context
+  // static serverSideRestricted = true
 
 }
 
@@ -120,7 +120,7 @@ export type ReturnedData = {
 
 exports[`functions generator When OAUTH1 function type: FetchData matches snapshot 1`] = `
 "import { TOAUTH1AuthContext, FetchData, TFetchActionEvent, TFetchPromise } from '@bearer/functions'
-// Uncomment this line if you need to use Client
+// Uncomment the line below to use the API Client
 // import Client from './client'
 
 export default class OAUTH1FetchDataFunctionFunction extends FetchData implements FetchData<ReturnedData, any, TOAUTH1AuthContext> {
@@ -129,8 +129,8 @@ export default class OAUTH1FetchDataFunctionFunction extends FetchData implement
     return { data: [] }
   }
 
-  // Uncomment the line below if you don't want your function to be called from the frontend
-  // static backendOnly = true
+  // Uncomment the line below to restrict the function to be called only from a server-side context
+  // static serverSideRestricted = true
 
 }
 
@@ -149,7 +149,7 @@ export type ReturnedData = {
 
 exports[`functions generator When OAUTH2 function type: FetchData matches snapshot 1`] = `
 "import { TOAUTH2AuthContext, FetchData, TFetchActionEvent, TFetchPromise } from '@bearer/functions'
-// Uncomment this line if you need to use Client
+// Uncomment the line below to use the API Client
 // import Client from './client'
 
 export default class OAUTH2FetchDataFunctionFunction extends FetchData implements FetchData<ReturnedData, any, TOAUTH2AuthContext> {
@@ -159,8 +159,8 @@ export default class OAUTH2FetchDataFunctionFunction extends FetchData implement
     return { data: [] }
   }
 
-  // Uncomment the line below if you don't want your function to be called from the frontend
-  // static backendOnly = true
+  // Uncomment the line below to restrict the function to be called only from a server-side context
+  // static serverSideRestricted = true
 
 }
 

@@ -1,5 +1,5 @@
 import { TAPIKEYAuthContext, FetchData, TFetchActionEvent, TFetchPromise } from '@bearer/functions'
-// Uncomment this line if you need to use Client
+// Uncomment the line below to use the API Client
 // import Client from './client'
 
 export default class {{functionClassName}}Function extends FetchData implements FetchData<ReturnedData, any, TAPIKEYAuthContext> {
@@ -9,8 +9,8 @@ export default class {{functionClassName}}Function extends FetchData implements 
     return { data: [] }
   }
 
-  // Uncomment the line below if you don't want your function to be called from the frontend
-  // static backendOnly = true
+  // Uncomment the line below to restrict the function to be called only from a server-side context
+  // static serverSideRestricted = true
 
 }
 

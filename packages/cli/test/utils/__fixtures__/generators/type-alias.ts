@@ -1,5 +1,5 @@
 import { TOAUTH2AuthContext, FetchData, TFetchActionEvent, TFetchPromise } from '@bearer/functions'
-// Uncomment this line if you need to use Client
+// Uncomment the line below to use the API Client
 // import Client from './client'
 
 export default class FunctionTypeAlias extends FetchData implements FetchData<ReturnedData, any, TOAUTH2AuthContext> {
