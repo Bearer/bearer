@@ -14,7 +14,7 @@ describe('Generate', () => {
         result.push(val)
         return true
       })
-      bearerPath = ensureBearerStructure({ clean: true, authConfig: { authType }, folderName: authType })
+      bearerPath = ensureBearerStructure({ authConfig: { authType }, folderName: authType })
     })
 
     it('Fetch function', async () => {
