@@ -4,13 +4,13 @@ import axios from 'axios'
 
 import { TConfig, Authentications, configs } from '@bearer/types/lib/authentications'
 
-import BaseCommand from '../base-command'
+import BaseCommand from '../../base-command'
 // @ts-ignore
 import * as open from 'open'
 import getPort from 'get-port'
 
-import { RequireIntegrationFolder } from '../utils/decorators'
-import { BEARER_AUTH_PORT } from '../utils/constants'
+import { RequireIntegrationFolder } from '../../utils/decorators'
+import { BEARER_AUTH_PORT } from '../../utils/constants'
 
 type Event = 'success' | 'error' | 'shutdown'
 
@@ -42,21 +42,27 @@ export default class IntegrationsCreate extends BaseCommand {
     switch (authType) {
       case Authentications.OAuth2: {
         const { token } = await this.fetchAuthTken(config as configs.TOAuth2Config)
+        this.log('Your token: %s', token)
+        // TODO: save
         break
       }
-      case Authentications.OAuth1: {
-        break
-      }
+
       case Authentications.Basic: {
         const username = await this.askForString('Username')
         const password = await this.askForPassword('Password')
         this.debug(username, password)
         // TODO: save
+        this.log('Your credentials: username => %s  password => ', username, password.replace(/./g, '*'))
         break
       }
       case Authentications.ApiKey: {
-        const apiKey = await this.askForString('API Key')
+        const apiKey = await this.askForPassword('API Key')
         this.debug(apiKey)
+        this.log('Your api Key: %s', apiKey)
+
+        break
+      }
+      case Authentications.OAuth1: {
         break
       }
       case Authentications.Custom:
