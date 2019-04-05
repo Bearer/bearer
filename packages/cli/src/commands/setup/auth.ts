@@ -14,8 +14,8 @@ import { BEARER_AUTH_PORT } from '../../utils/constants'
 
 type Event = 'success' | 'error' | 'shutdown'
 
-export default class IntegrationsCreate extends BaseCommand {
-  static description = 'create a new bearer integation'
+export default class SetupAuth extends BaseCommand {
+  static description = 'setup local credentials'
 
   static flags = {
     ...BaseCommand.flags
