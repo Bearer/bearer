@@ -100,6 +100,7 @@ export default class Login extends BaseCommand {
                 'Access-Control-Allow-Origin',
                 process.env.LOGIN_ALLOWED_ORIGIN || this.constants.DeveloperPortalUrl
               )
+              response.setHeader('Connection', 'close')
               response.write('OK')
               response.end()
               this.stopServer()
