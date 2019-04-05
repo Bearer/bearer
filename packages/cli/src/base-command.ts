@@ -103,6 +103,10 @@ export default abstract class extends Command {
     ])
     return response
   }
+
+  protected async askForPassword(phrase: string, options: Options = {}): Promise<string> {
+    return this.askForString(phrase, { ...options, type: 'password' })
+  }
 }
 
 type Omit<T, K> = Pick<T, Exclude<keyof T, K>>
