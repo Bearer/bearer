@@ -99,7 +99,22 @@ export default class IntegrationsCreate extends BaseCommand {
         this.debug(data)
         reject('Error while receiving token')
       })
-      open(`${this.constants.IntegrationServiceHost}v2/auth/${location.replace('./', '')}&clientId=NONE`)
+      const url = `${this.constants.IntegrationServiceHost}v2/auth/${location.replace('./', '')}&clientId=NONE`
+      const a = await open(url)
+      a.on('close', (code: any, signal: any) => {
+        if (code !== 0) {
+          this.stopServer()
+          this.warn(
+            this.colors.yellow(`Unable to open a browser. If you want to retrieve a token please follow these steps\n`)
+          )
+          this.log(this.colors.bold('1/ access the url below  and follow the login process:\n\n'), url)
+          this.log()
+          this.log(this.colors.bold(`2/ when you access the success page copy the token and paste it here`))
+          this.askForString('Token').then(token => {
+            resolve({ token })
+          })
+        }
+      })
     })
   }
 
