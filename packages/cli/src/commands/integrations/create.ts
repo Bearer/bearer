@@ -1,4 +1,6 @@
 import { flags } from '@oclif/command'
+// @ts-ignore
+import * as suggest from 'inquirer-prompt-suggest'
 
 import BaseCommand from '../../base-command'
 import { linkIntegration } from '../../utils/commands'
@@ -52,11 +54,16 @@ export default class IntegrationsCreate extends BaseCommand {
   }
 
   async askForName(): Promise<string> {
+    this.inquirer.registerPrompt('suggest', suggest)
+    const suggestions = Array.from(Array(30).keys()).map(randomName)
+    this.debug('%j', suggestions)
     return this.askForString('Integration name', {
+      suggestions,
       validate: (input: string) => {
         return input.length > 0
-      }
-    })
+      },
+      type: 'suggest'
+    } as any)
   }
   async askForDescription(): Promise<string> {
     return this.askForString('Description (optional)')
@@ -71,6 +78,80 @@ type Integration = {
     state: string
   }
 }
+
+function randomName() {
+  return [bearSample(), nameSample()].join(' ')
+}
+
+function bearSample() {
+  return bears[Math.floor(Math.random() * bears.length)]
+}
+
+function nameSample() {
+  return names[Math.floor(Math.random() * names.length)]
+}
+
+const bears = [
+  'Cinnamon',
+  'Florida',
+  'Glacier',
+  'Haida Gwaii',
+  'Kermode',
+  'Spirit',
+  'Louisiana',
+  'Newfoundland',
+  'Baluchistan',
+  'Formosan',
+  'Himalayan',
+  'Ussuri',
+  'Alaska Peninsula',
+  'Atlas',
+  'Bergman',
+  'Cantabrian',
+  'Gobi',
+  'Grizzly',
+  'Kamchatka',
+  'Kodiak',
+  'Marsican',
+  'Sitka',
+  'Stickeen',
+  'Ussuri',
+  'Giant',
+  'Qinling',
+  'Sloth',
+  'Sun',
+  'Polar',
+  'Ursid hybrid',
+  'Spectacled'
+]
+const names = [
+  'Alpha',
+  'Bravo',
+  'Charlie',
+  'Delta',
+  'Echo',
+  'Foxtrot',
+  'Golf',
+  'Hotel',
+  'India',
+  'Juliet',
+  'Kilo',
+  'Lima',
+  'Mike',
+  'November',
+  'Oscar',
+  'Papa',
+  'Quebec',
+  'Romeo',
+  'Sierra',
+  'Tango',
+  'Uniform',
+  'Victor',
+  'Whiskey',
+  'X-ray',
+  'Yankee',
+  'Zulu'
+]
 
 type CreateIntegration = { createIntegration: { integration: Integration } }
 

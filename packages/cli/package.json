@@ -37,6 +37,7 @@
     "globby": "^8.0.1",
     "ini": "^1.3.5",
     "inquirer": "^6.2.2",
+    "inquirer-prompt-suggest": "^0.1.0",
     "listr": "^0.14.2",
     "lodash.set": "^4.3.2",
     "open": "^6.0.0",
