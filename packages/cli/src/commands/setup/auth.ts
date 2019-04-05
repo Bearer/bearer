@@ -58,8 +58,8 @@ export default class IntegrationsCreate extends BaseCommand {
       case Authentications.ApiKey: {
         const apiKey = await this.askForPassword('API Key')
         this.debug(apiKey)
+        // TODO: save
         this.log('Your api Key: %s', apiKey)
-
         break
       }
       case Authentications.OAuth1: {
@@ -74,6 +74,7 @@ export default class IntegrationsCreate extends BaseCommand {
       default:
         // unsure we handled all authentications
         // http://ideasintosoftware.com/exhaustive-switch-in-typescript/
+        this.error(`The current authentication type of the integraion is not supported by this command: ${authType}`)
         throw new UnreachableCaseError(authType)
     }
   }
