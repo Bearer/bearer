@@ -16,10 +16,7 @@ export default class IntegrationsCreate extends BaseCommand {
   static description = 'create a new bearer integation'
 
   static flags = {
-    ...BaseCommand.flags,
-    description: flags.string({ char: 'd' }),
-    name: flags.string({ char: 'n' }),
-    skipLink: flags.boolean({ char: 'l' })
+    ...BaseCommand.flags
   }
 
   _server?: http.Server
@@ -40,7 +37,8 @@ export default class IntegrationsCreate extends BaseCommand {
         encoding: 'utf8'
       })
     )
-
+    config.clientID = await this.askForString('Client ID', { type: 'password' })
+    config.clientSecret = await this.askForString('Client secret', { type: 'password' })
     this.debug(config)
     const location = await axios
       .post(`${this.constants.IntegrationServiceHost}v2/auth/local-auth`, { config }, { maxRedirects: 0 })
