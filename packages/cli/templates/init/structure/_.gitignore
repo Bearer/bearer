@@ -6,3 +6,4 @@ www/
 .build/
 config.dev.js
 .integrationrc
+.setup.jsonc
