@@ -21,7 +21,7 @@
   },
   "scripts": {
     "start": "tsc --watch",
-    "build": "tsc -p tsconfig.json",
+    "build": "tsc -p tsconfig.build.json",
     "clean": "rm -rf lib",
     "prepack": "NODE_ENV=production yarn build",
     "prepare": "yarn clean && yarn build",

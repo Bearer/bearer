@@ -8,5 +8,5 @@
     "outDir": "lib/",
     "allowSyntheticDefaultImports": true
   },
-  "include": ["src"]
+  "include": ["src", "__tests__"]
 }
