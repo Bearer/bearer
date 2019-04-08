@@ -178,7 +178,7 @@ export default class SetupAuth extends BaseCommand {
   }
 
   persistSetup(config: contexts.OAuth2 | contexts.OAuth1 | contexts.ApiKey | contexts.Basic) {
-    const setupRc = this.locator.integrationRootResourcePath('.setup.jsonc')
+    const setupRc = this.locator.localConfigPath
     if (!fs.existsSync(setupRc)) {
       fs.writeFileSync(setupRc, '{}', { encoding: 'utf8' })
     }
