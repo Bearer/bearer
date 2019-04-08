@@ -12,7 +12,7 @@ import { copyFiles, printFiles } from '../utils/helpers'
 import GenerateComponent from './generate/component'
 import GenerateSpec from './generate/spec'
 
-const authTypes: TAuthentications = {
+export const authTypes: TAuthentications = {
   [Authentications.OAuth1]: { name: 'OAuth1', value: Authentications.OAuth1 },
   [Authentications.OAuth2]: { name: 'OAuth2', value: Authentications.OAuth2 },
   [Authentications.Basic]: { name: 'Basic Auth', value: Authentications.Basic },

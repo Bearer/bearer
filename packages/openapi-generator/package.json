@@ -1,6 +1,6 @@
 {
   "name": "@bearer/openapi-generator",
-  "version": "0.108.0",
+  "version": "0.109.0",
   "description": "Function openapi spec generator",
   "main": "lib/index.js",
   "repository": "Bearer/bearer",
@@ -29,7 +29,7 @@
     "test:ci": "jest --coverage --colors"
   },
   "dependencies": {
-    "@bearer/functions": "^0.108.0",
+    "@bearer/functions": "^0.109.0",
     "lodash.merge": "^4.6.1"
   }
 }

@@ -73,7 +73,7 @@ describe('FetchData function', () => {
 })
 
 class RestrictedFunction extends FetchData implements FetchData<any, any, any> {
-  static backendOnly = true
+  static serverSideRestricted = true
 
   async action(_event: d.TFetchActionEvent) {
     return { data: 'success' }

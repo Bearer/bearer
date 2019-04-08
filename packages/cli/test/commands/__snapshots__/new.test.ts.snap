@@ -132,6 +132,72 @@ exports[`with views BASIC generates an integration without any prompt and BASIC 
 }"
 `;
 
+exports[`with views CUSTOM generates an integration without any prompt and CUSTOM 1`] = `
+"
+What's next?
+
+,[1m   cd CUSTOMIntegration && bearer start[22m
+,[32mIntegration initialized, name: CUSTOMIntegration, authentication type: Custom[39m
+,[90m    create: [39m[37m.bearer/initWithView/new/CUSTOM/.bearer/.keep[39m
+,[90m    create: [39m[37m.bearer/initWithView/new/CUSTOM/.gitignore[39m
+,[90m    create: [39m[37m.bearer/initWithView/new/CUSTOM/.integrationrc[39m
+,[90m    create: [39m[37m.bearer/initWithView/new/CUSTOM/LICENSE[39m
+,[90m    create: [39m[37m.bearer/initWithView/new/CUSTOM/auth.config.json[39m
+,[90m    create: [39m[37m.bearer/initWithView/new/CUSTOM/config.dev.js.example[39m
+,[90m    create: [39m[37m.bearer/initWithView/new/CUSTOM/functions/client.ts[39m
+,[90m    create: [39m[37m.bearer/initWithView/new/CUSTOM/functions/tsconfig.json[39m
+,[90m    create: [39m[37m.bearer/initWithView/new/CUSTOM/package.json[39m
+,[90m    create: [39m[37m.bearer/initWithView/new/CUSTOM/spec.ts[39m
+,[90m    create: [39m[37m.bearer/initWithView/new/CUSTOM/tsconfig.json[39m
+,[90m    create: [39m[37m.bearer/initWithView/new/CUSTOM/views/index.html[39m
+,[90m    create: [39m[37m.bearer/initWithView/new/CUSTOM/views/index.ts[39m
+,* read the bearer documentation at https://docs.bearer.sh
+
+,* start your local development environement by running:
+
+"
+`;
+
+exports[`with views CUSTOM generates an integration without any prompt and CUSTOM 2`] = `
+"{
+  \\"authType\\": \\"CUSTOM\\"
+}
+"
+`;
+
+exports[`with views CUSTOM generates an integration without any prompt and CUSTOM 3`] = `
+"{
+  \\"name\\": \\"customintegration\\",
+  \\"version\\": \\"0.0.1\\",
+  \\"description\\": \\"CUSTOMIntegration\\",
+  \\"main\\": \\"dist/index.js\\",
+  \\"types\\": \\"dist/types/components.d.ts\\",
+  \\"module\\": \\"dist/esm/index.js\\",
+  \\"collection\\": \\"dist/collection/collection-manifest.json\\",
+  \\"scripts\\": {
+    \\"push\\": \\"bearer push\\",
+    \\"start\\": \\"bearer start\\",
+    \\"invoke\\": \\"bearer invoke\\",
+    \\"generate\\": \\"bearer generate\\"
+  },
+  \\"dependencies\\": {
+    \\"@bearer/functions\\": \\"beta6\\",
+    \\"axios\\": \\"^0.18.0\\",
+    \\"@bearer/core\\": \\"beta6\\",
+    \\"@bearer/ui\\": \\"beta6\\"
+  },
+  \\"devDependencies\\": {
+    \\"@bearer/cli\\": \\"beta6\\",
+    \\"@types/node\\": \\"^10.12.25\\",
+    \\"@bearer/js\\": \\"beta6\\"
+  },
+  \\"license\\": \\"MIT\\",
+  \\"peerDependencies\\": {
+    \\"@bearer/js\\": \\"beta6\\"
+  }
+}"
+`;
+
 exports[`with views NONE generates an integration without any prompt and NONE 1`] = `
 "
 What's next?
@@ -440,6 +506,64 @@ exports[`without views BASIC generates an integration without any prompt and BAS
   \\"name\\": \\"basicintegration\\",
   \\"version\\": \\"0.0.1\\",
   \\"description\\": \\"BASICIntegration\\",
+  \\"main\\": \\"dist/index.js\\",
+  \\"types\\": \\"dist/types/components.d.ts\\",
+  \\"module\\": \\"dist/esm/index.js\\",
+  \\"collection\\": \\"dist/collection/collection-manifest.json\\",
+  \\"scripts\\": {
+    \\"push\\": \\"bearer push\\",
+    \\"start\\": \\"bearer start\\",
+    \\"invoke\\": \\"bearer invoke\\",
+    \\"generate\\": \\"bearer generate\\"
+  },
+  \\"dependencies\\": {
+    \\"@bearer/functions\\": \\"beta6\\",
+    \\"axios\\": \\"^0.18.0\\"
+  },
+  \\"devDependencies\\": {
+    \\"@bearer/cli\\": \\"beta6\\",
+    \\"@types/node\\": \\"^10.12.25\\"
+  },
+  \\"license\\": \\"MIT\\"
+}
+"
+`;
+
+exports[`without views CUSTOM generates an integration without any prompt and CUSTOM 1`] = `
+"
+What's next?
+
+,[1m   cd CUSTOMIntegration && bearer start[22m
+,[32mIntegration initialized, name: CUSTOMIntegration, authentication type: Custom[39m
+,[90m    create: [39m[37m.bearer/init/new/CUSTOM/.bearer/.keep[39m
+,[90m    create: [39m[37m.bearer/init/new/CUSTOM/.gitignore[39m
+,[90m    create: [39m[37m.bearer/init/new/CUSTOM/.integrationrc[39m
+,[90m    create: [39m[37m.bearer/init/new/CUSTOM/LICENSE[39m
+,[90m    create: [39m[37m.bearer/init/new/CUSTOM/auth.config.json[39m
+,[90m    create: [39m[37m.bearer/init/new/CUSTOM/config.dev.js.example[39m
+,[90m    create: [39m[37m.bearer/init/new/CUSTOM/functions/client.ts[39m
+,[90m    create: [39m[37m.bearer/init/new/CUSTOM/functions/tsconfig.json[39m
+,[90m    create: [39m[37m.bearer/init/new/CUSTOM/package.json[39m
+,[90m    create: [39m[37m.bearer/init/new/CUSTOM/tsconfig.json[39m
+,* read the bearer documentation at https://docs.bearer.sh
+
+,* start your local development environement by running:
+
+"
+`;
+
+exports[`without views CUSTOM generates an integration without any prompt and CUSTOM 2`] = `
+"{
+  \\"authType\\": \\"CUSTOM\\"
+}
+"
+`;
+
+exports[`without views CUSTOM generates an integration without any prompt and CUSTOM 3`] = `
+"{
+  \\"name\\": \\"customintegration\\",
+  \\"version\\": \\"0.0.1\\",
+  \\"description\\": \\"CUSTOMIntegration\\",
   \\"main\\": \\"dist/index.js\\",
   \\"types\\": \\"dist/types/components.d.ts\\",
   \\"module\\": \\"dist/esm/index.js\\",

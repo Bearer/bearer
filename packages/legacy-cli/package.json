@@ -1,6 +1,6 @@
 {
   "name": "@bearer/bearer-cli",
-  "version": "0.108.0",
+  "version": "0.109.0",
   "main": "lib/bin/index.js",
   "repository": "Bearer/bearer",
   "homepage": "https://github.com/Bearer/bearer/packages/legacy-cli#readme",
@@ -25,10 +25,10 @@
     "requirements-check": "node ./check-version.js"
   },
   "dependencies": {
-    "@bearer/functions": "^0.108.0",
-    "@bearer/logger": "^0.108.0",
-    "@bearer/transpiler": "^0.108.0",
-    "@bearer/types": "^0.108.0",
+    "@bearer/functions": "^0.109.0",
+    "@bearer/logger": "^0.109.0",
+    "@bearer/transpiler": "^0.109.0",
+    "@bearer/types": "^0.109.0",
     "@koa/cors": "^2.2.2",
     "amazon-cognito-identity-js": "^2.0.3",
     "archiver": "^2.1.1",
@@ -61,6 +61,8 @@
     "sqlite3": "^4.0.2",
     "stream-buffers": "^3.0.1",
     "terminal-kit": "^1.15.1",
+    "ts-loader": "^4.4.1",
+    "typescript": "^3.4.1",
     "unzip": "^0.1.11",
     "unzip-stream": "^0.3.0",
     "update-notifier": "^2.5.0",
@@ -78,9 +80,7 @@
     "copyfiles": "^2.1.0",
     "jest": "^24.7.1",
     "mkdir-recursive": "^0.4.0",
-    "ts-jest": "^24.0.1",
-    "ts-loader": "^4.4.1",
-    "typescript": "^3.4.1"
+    "ts-jest": "^24.0.1"
   },
   "gitHead": "cb2654b19000e2ad6f31a0e4ed715a6298c8df2d"
 }

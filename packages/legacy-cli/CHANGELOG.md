@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.109.0](https://github.com/Bearer/bearer/compare/v0.108.0...v0.109.0) (2019-04-04)
+
+
+### Bug Fixes
+
+* **cli:** is bearer integration check update([#617](https://github.com/Bearer/bearer/issues/617)) ([df39021](https://github.com/Bearer/bearer/commit/df39021))
+
+
+### Features
+
+* **legacy-cli:** facilitate local calls ([6032921](https://github.com/Bearer/bearer/commit/6032921))
+
+
+
+
+
 # [0.108.0](https://github.com/Bearer/bearer/compare/v0.107.4...v0.108.0) (2019-04-03)
 
 **Note:** Version bump only for package @bearer/bearer-cli

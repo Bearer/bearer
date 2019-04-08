@@ -7,7 +7,8 @@ import { linkIntegration } from '../../utils/commands'
 import { ensureFreshToken } from '../../utils/decorators'
 
 export default class IntegrationsCreate extends BaseCommand {
-  static description = 'create a new bearer integration'
+
+  static description = 'create a new Integration'
 
   static flags = {
     ...BaseCommand.flags,

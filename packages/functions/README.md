@@ -10,7 +10,7 @@ import Client from './client'
 
 export default class FunctionName extends FetchData implements FetchData<ReturnedData, any, TOAUTH2AuthContext> {
   // Uncomment the line above if you don't want your function to be called from the frontend
-  // static backendOnly = true
+  // static serverSideRestricted = true
 
   async action(event: TFetchActionEvent<Params, TOAUTH2AuthContext>): TFetchPromise<ReturnedData> {
     // const token = event.context.authAccess.accessToken

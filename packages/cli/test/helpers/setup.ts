@@ -8,20 +8,24 @@ type TSetupConfig = {
   withViews?: boolean
 }
 
-export function ensureBearerStructure({
-  clean = true,
-  authConfig,
-  folderName = 'fakeintegration',
-  withViews = false
-}: TSetupConfig = {}): string {
-  const bearerFolder = path.join(__dirname, '..', '..', '.bearer', folderName)
+export const ARTIFACT_ROOT = path.join(__dirname, '..', '..', '.bearer')
+
+export function cleanArtifactFolder(name: string) {
+  const bearerFolder = path.join(ARTIFACT_ROOT, name)
   if (!fs.existsSync(bearerFolder)) {
     fs.mkdirpSync(bearerFolder)
   }
 
-  if (clean) {
-    fs.emptyDirSync(bearerFolder)
-  }
+  fs.emptyDirSync(bearerFolder)
+
+  return bearerFolder
+}
+export function ensureBearerStructure({
+  authConfig,
+  folderName = 'fakeintegration',
+  withViews = false
+}: TSetupConfig = {}): string {
+  const bearerFolder = cleanArtifactFolder(folderName)
 
   if (withViews) {
     const views = path.join(bearerFolder, 'views')
