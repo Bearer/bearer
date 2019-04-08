@@ -1,6 +1,7 @@
 import * as http from 'http'
 import * as fs from 'fs'
 import axios from 'axios'
+import { modify, applyEdits } from 'jsonc-parser'
 
 import { TConfig, Authentications, configs } from '@bearer/types/lib/authentications'
 
@@ -47,8 +48,7 @@ export default class SetupAuth extends BaseCommand {
           BEARER_AUTH_CLIENT_SECRET || (await this.askForString('Client secret', { type: 'password' }))
         const newConfig = { ...config, clientID, clientSecret }
         const { token } = await this.fetchAuthTken(newConfig as configs.TOAuth2Config)
-        this.log('Your token: %s', token)
-        // TODO: save
+        await this.persistSetup({ token })
         break
       }
 
@@ -56,15 +56,13 @@ export default class SetupAuth extends BaseCommand {
         const username = await this.askForString('Username')
         const password = await this.askForPassword('Password')
         this.debug(username, password)
-        // TODO: save
-        this.log('Your credentials: username => %s  password => ', username, password.replace(/./g, '*'))
+        await this.persistSetup({ username, password })
         break
       }
       case Authentications.ApiKey: {
         const apiKey = await this.askForPassword('API Key')
         this.debug(apiKey)
-        // TODO: save
-        this.log('Your api Key: %s', apiKey)
+        await this.persistSetup({ apiKey })
         break
       }
       case Authentications.OAuth1: {
@@ -78,8 +76,7 @@ export default class SetupAuth extends BaseCommand {
         )
         const newConfig = { ...config, consumerKey, consumerSecret }
         const { token } = await this.fetchAuthTken(newConfig as configs.TOAuth1Config)
-        this.log('Your token: %s', token)
-        // TODO: save
+        await this.persistSetup({ token, consumerKey })
         break
       }
       case Authentications.Custom:
@@ -182,6 +179,24 @@ export default class SetupAuth extends BaseCommand {
 
   on = <T>(event: Event, callback: (data: T) => void) => {
     this._listerners[event] = [...this._listerners[event], callback as any]
+  }
+
+  persistSetup(config: Record<string, string>) {
+    const setupRc = this.locator.integrationRootResourcePath('.setuprc')
+    if (!fs.existsSync(setupRc)) {
+      fs.writeFileSync(setupRc, '{}', { encoding: 'utf8' })
+    }
+    const rawSetup = fs.readFileSync(setupRc, { encoding: 'utf8' })
+    const updates = modify(rawSetup, ['setup', 'auth'], config, {
+      formattingOptions: {
+        insertSpaces: true,
+        tabSize: 2,
+        eol: '\n'
+      }
+    })
+    const newSetupRc = applyEdits(rawSetup, updates)
+    fs.writeFileSync(setupRc, newSetupRc, { encoding: 'utf8' })
+    this.debug(config)
   }
 }
 
