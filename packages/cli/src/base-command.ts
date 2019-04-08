@@ -32,8 +32,7 @@ export default abstract class extends Command {
     return Case
   }
 
-  // TODO: fix typing
-  get ux(): any {
+  get ux() {
     return cliUx
   }
 

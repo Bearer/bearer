@@ -47,6 +47,7 @@ export default class SetupAuth extends BaseCommand {
         const clientSecret =
           BEARER_AUTH_CLIENT_SECRET || (await this.askForString('Client secret', { type: 'password' }))
         const newConfig = { ...config, clientID, clientSecret }
+        this.debug('Your credentials:\n%j', { ...config, clientID, clientSecret: clientSecret.replace(/./g, '*') })
         const { token } = await this.fetchAuthTken(newConfig as configs.TOAuth2Config)
         await this.persistSetup({ token })
         break
@@ -55,25 +56,18 @@ export default class SetupAuth extends BaseCommand {
       case Authentications.Basic: {
         const username = await this.askForString('Username')
         const password = await this.askForPassword('Password')
-        this.debug(username, password)
         await this.persistSetup({ username, password })
         break
       }
       case Authentications.ApiKey: {
         const apiKey = await this.askForPassword('API Key')
-        this.debug(apiKey)
         await this.persistSetup({ apiKey })
         break
       }
       case Authentications.OAuth1: {
         const consumerKey = process.env.BEARER_AUTH_CONSUMER_KEY || (await this.askForString('Consumer key'))
         const consumerSecret = process.env.BEARER_AUTH_CONSUMER_SECRET || (await this.askForPassword('Consumer secret'))
-        this.debug(consumerKey, consumerSecret)
-        this.log(
-          'Your credentials: consumerKey => %s  consumerSecret => ',
-          consumerKey,
-          consumerSecret.replace(/./g, '*')
-        )
+        this.debug('Your credentials:\n%j', { consumerKey, consumerSecret: consumerSecret.replace(/./g, '*') })
         const newConfig = { ...config, consumerKey, consumerSecret }
         const { token } = await this.fetchAuthTken(newConfig as configs.TOAuth1Config)
         await this.persistSetup({ token, consumerKey })
@@ -182,7 +176,7 @@ export default class SetupAuth extends BaseCommand {
   }
 
   persistSetup(config: Record<string, string>) {
-    const setupRc = this.locator.integrationRootResourcePath('.setuprc')
+    const setupRc = this.locator.integrationRootResourcePath('.setup.jsonc')
     if (!fs.existsSync(setupRc)) {
       fs.writeFileSync(setupRc, '{}', { encoding: 'utf8' })
     }
@@ -195,8 +189,8 @@ export default class SetupAuth extends BaseCommand {
       }
     })
     const newSetupRc = applyEdits(rawSetup, updates)
+    this.debug('Writing setup config\n%j', { config, setupRc })
     fs.writeFileSync(setupRc, newSetupRc, { encoding: 'utf8' })
-    this.debug(config)
   }
 }
 
