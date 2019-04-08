@@ -191,7 +191,7 @@ export default class SetupAuth extends BaseCommand {
       }
     })
     const newSetupRc = applyEdits(rawSetup, updates)
-    this.debug('Writing setup config\n%j', { config, setupRc })
+    this.debug('Writing setup config\n%j', { config, setupRc: newSetupRc })
     fs.writeFileSync(setupRc, newSetupRc, { encoding: 'utf8' })
   }
 }
