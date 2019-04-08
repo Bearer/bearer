@@ -15,14 +15,38 @@ export type TFetchPayload<ReturnedData = any, ReturnedError = any> = Partial<TDa
 
 type TBaseAuthContext<TAuthAccessContent> = { authAccess: TAuthAccessContent; [key: string]: any }
 
-export type TOAUTH1AuthContext = TBaseAuthContext<{ accessToken: string; tokenSecret: string }> & {
+export namespace contexts {
+  export interface OAuth2 {
+    accessToken: string
+  }
+
+  export interface OAuth1 {
+    accessToken: string
+    tokenSecret: string
+  }
+
+  export interface Basic {
+    username: string
+    password: string
+  }
+
+  export interface ApiKey {
+    apiKey: string
+  }
+
+  export interface Custom {}
+  export interface None {}
+}
+
+export type TOAUTH1AuthContext = TBaseAuthContext<contexts.OAuth1> & {
   setup: { consumerKey: string; consumerSecret: string }
 }
-export type TOAUTH2AuthContext = TBaseAuthContext<{ accessToken: string }>
-export type TNONEAuthContext = TBaseAuthContext<undefined>
-export type TCUSTOMAuthContext = TBaseAuthContext<undefined>
-export type TBASICAuthContext = TBaseAuthContext<{ username: string; password: string }>
-export type TAPIKEYAuthContext = TBaseAuthContext<{ apiKey: string }>
+
+export type TOAUTH2AuthContext = TBaseAuthContext<contexts.OAuth2>
+export type TNONEAuthContext = TBaseAuthContext<contexts.None>
+export type TCUSTOMAuthContext = TBaseAuthContext<contexts.Custom>
+export type TBASICAuthContext = TBaseAuthContext<contexts.Basic>
+export type TAPIKEYAuthContext = TBaseAuthContext<contexts.ApiKey>
 
 export type TAuthContext =
   | TNONEAuthContext

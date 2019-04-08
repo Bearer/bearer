@@ -4,7 +4,7 @@ import axios from 'axios'
 import { modify, applyEdits } from 'jsonc-parser'
 
 import { TConfig, Authentications, configs } from '@bearer/types/lib/authentications'
-
+import { contexts } from '@bearer/functions/lib/declaration'
 import BaseCommand from '../../base-command'
 // @ts-ignore
 import * as open from 'open'
@@ -48,20 +48,21 @@ export default class SetupAuth extends BaseCommand {
           BEARER_AUTH_CLIENT_SECRET || (await this.askForString('Client secret', { type: 'password' }))
         const newConfig = { ...config, clientID, clientSecret }
         this.debug('Your credentials:\n%j', { ...config, clientID, clientSecret: clientSecret.replace(/./g, '*') })
-        const { token } = await this.fetchAuthTken(newConfig as configs.TOAuth2Config)
-        await this.persistSetup({ token })
+        const { token: accessToken } = await this.fetchAuthTken(newConfig as configs.TOAuth2Config)
+
+        await this.persistSetup({ accessToken } as contexts.OAuth2)
         break
       }
 
       case Authentications.Basic: {
         const username = await this.askForString('Username')
         const password = await this.askForPassword('Password')
-        await this.persistSetup({ username, password })
+        await this.persistSetup({ username, password } as contexts.Basic)
         break
       }
       case Authentications.ApiKey: {
         const apiKey = await this.askForPassword('API Key')
-        await this.persistSetup({ apiKey })
+        await this.persistSetup({ apiKey } as contexts.ApiKey)
         break
       }
       case Authentications.OAuth1: {
@@ -69,8 +70,9 @@ export default class SetupAuth extends BaseCommand {
         const consumerSecret = process.env.BEARER_AUTH_CONSUMER_SECRET || (await this.askForPassword('Consumer secret'))
         this.debug('Your credentials:\n%j', { consumerKey, consumerSecret: consumerSecret.replace(/./g, '*') })
         const newConfig = { ...config, consumerKey, consumerSecret }
-        const { token } = await this.fetchAuthTken(newConfig as configs.TOAuth1Config)
-        await this.persistSetup({ token, consumerKey })
+        const { token: accessToken } = await this.fetchAuthTken(newConfig as configs.TOAuth1Config)
+        // TODO: fix this when context.OAuth1 is fixed  and well defined
+        await this.persistSetup({ accessToken, consumerKey } as any)
         break
       }
       case Authentications.Custom:
@@ -175,7 +177,7 @@ export default class SetupAuth extends BaseCommand {
     this._listerners[event] = [...this._listerners[event], callback as any]
   }
 
-  persistSetup(config: Record<string, string>) {
+  persistSetup(config: contexts.OAuth2 | contexts.OAuth1 | contexts.ApiKey | contexts.Basic) {
     const setupRc = this.locator.integrationRootResourcePath('.setup.jsonc')
     if (!fs.existsSync(setupRc)) {
       fs.writeFileSync(setupRc, '{}', { encoding: 'utf8' })
