@@ -41,7 +41,12 @@ export default class SetupAuth extends BaseCommand {
     const { authType } = config
     switch (authType) {
       case Authentications.OAuth2: {
-        const { token } = await this.fetchAuthTken(config as configs.TOAuth2Config)
+        const { BEARER_AUTH_CLIENT_ID, BEARER_AUTH_CLIENT_SECRET } = process.env
+        const clientID = BEARER_AUTH_CLIENT_ID || (await this.askForString('Client ID', { type: 'password' }))
+        const clientSecret =
+          BEARER_AUTH_CLIENT_SECRET || (await this.askForString('Client secret', { type: 'password' }))
+        const newConfig = { ...config, clientID, clientSecret }
+        const { token } = await this.fetchAuthTken(newConfig as configs.TOAuth2Config)
         this.log('Your token: %s', token)
         // TODO: save
         break
@@ -63,6 +68,18 @@ export default class SetupAuth extends BaseCommand {
         break
       }
       case Authentications.OAuth1: {
+        const consumerKey = process.env.BEARER_AUTH_CONSUMER_KEY || (await this.askForString('Consumer key'))
+        const consumerSecret = process.env.BEARER_AUTH_CONSUMER_SECRET || (await this.askForPassword('Consumer secret'))
+        this.debug(consumerKey, consumerSecret)
+        this.log(
+          'Your credentials: consumerKey => %s  consumerSecret => ',
+          consumerKey,
+          consumerSecret.replace(/./g, '*')
+        )
+        const newConfig = { ...config, consumerKey, consumerSecret }
+        const { token } = await this.fetchAuthTken(newConfig as configs.TOAuth1Config)
+        this.log('Your token: %s', token)
+        // TODO: save
         break
       }
       case Authentications.Custom:
@@ -79,15 +96,11 @@ export default class SetupAuth extends BaseCommand {
     }
   }
 
-  fetchAuthTken = async (config: configs.TOAuth2Config): Promise<{ token: string }> => {
+  fetchAuthTken = async (config: configs.TOAuth2Config | configs.TOAuth1Config): Promise<{ token: string }> => {
     return new Promise(async (resolve, reject) => {
       this._server = await this.startServer()
-      const { BEARER_AUTH_CLIENT_ID, BEARER_AUTH_CLIENT_SECRET } = process.env
-      const clientID = BEARER_AUTH_CLIENT_ID || (await this.askForString('Client ID', { type: 'password' }))
-      const clientSecret = BEARER_AUTH_CLIENT_SECRET || (await this.askForString('Client secret', { type: 'password' }))
-      const newConfig = { ...config, clientID, clientSecret }
       const location = await axios
-        .post(`${this.constants.IntegrationServiceHost}v2/auth/local-auth`, { config: newConfig }, { maxRedirects: 0 })
+        .post(`${this.constants.IntegrationServiceHost}v2/auth/local-auth`, { config }, { maxRedirects: 0 })
         .catch(e => e.response.headers.location)
       this.debug(config)
 
