@@ -7,7 +7,6 @@ import { linkIntegration } from '../../utils/commands'
 import { ensureFreshToken } from '../../utils/decorators'
 
 export default class IntegrationsCreate extends BaseCommand {
-
   static description = 'create a new Integration'
 
   static flags = {
@@ -38,7 +37,7 @@ export default class IntegrationsCreate extends BaseCommand {
           integration.deprecated_uuid,
           `${this.constants.DeveloperPortalUrl}integrations/${integration.deprecated_uuid}`
         )
-        if (this.bearerConfig.isIntegrationLocation) {
+        if (this.isIntegrationLocation) {
           // tslint:disable-next-line no-boolean-literal-compare
           if (!flags.skipLink) {
             await linkIntegration.bind(this)(integration.deprecated_uuid)

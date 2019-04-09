@@ -9,6 +9,7 @@ import BaseCommand from '../base-command'
 import { ensureFreshToken, RequireLinkedIntegration, RequireIntegrationFolder } from '../utils/decorators'
 import { ensureFolderExists } from '../utils/helpers'
 import { IntegrationClient } from '../utils/integration-client'
+import { AUTH_CONFIG_FILENAME } from '../utils/locator'
 
 export default class Push extends BaseCommand {
   static description = 'deploy Integration to Bearer'
@@ -77,7 +78,6 @@ export default class Push extends BaseCommand {
       // pipe archive data to the file
       archive.pipe(output)
       const files = await globby([
-        '.bearer/.keep',
         'views/**/*',
         'functions/**/*.ts',
         'functions/tsconfig.json',
@@ -85,7 +85,7 @@ export default class Push extends BaseCommand {
         'package-json.lock',
         'spec.ts',
         'package.json',
-        'auth.config.json'
+        AUTH_CONFIG_FILENAME
       ])
       this.debug('Files to upload', files.join('\n'))
 

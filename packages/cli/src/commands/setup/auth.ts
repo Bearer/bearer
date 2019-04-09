@@ -35,7 +35,7 @@ export default class SetupAuth extends BaseCommand {
       shutdown: []
     }
     const config: TConfig = JSON.parse(
-      fs.readFileSync(this.locator.integrationRootResourcePath('auth.config.json'), {
+      fs.readFileSync(this.locator.authConfigPath, {
         encoding: 'utf8'
       })
     )

@@ -26,10 +26,6 @@ export class Config {
     return this.isYarnInstalled ? 'yarn' : 'npm'
   }
 
-  get isIntegrationLocation(): boolean {
-    return this.rootPath !== null
-  }
-
   get bearerConfig(): BearerConfig {
     return rc('bearer')
   }

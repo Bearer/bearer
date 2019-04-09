@@ -77,6 +77,10 @@ export default abstract class extends Command {
     return devPortalClient(this)
   }
 
+  get isIntegrationLocation() {
+    return fs.existsSync(this.locator.authConfigPath)
+  }
+
   // protected logLevel: any
 
   async init() {

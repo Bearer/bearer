@@ -1,5 +1,4 @@
 .bearer/*
-!.bearer/.keep
 node_modules/
 dist/
 www/

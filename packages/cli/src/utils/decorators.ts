@@ -34,9 +34,13 @@ export function RequireIntegrationFolder() {
   return function(_target: any, _propertyKey: string | symbol, descriptor: PropertyDescriptor) {
     const originalMethod = descriptor.value
     descriptor.value = async function(this: TCommand) {
-      if (this.bearerConfig.isIntegrationLocation) {
+      if (this.isIntegrationLocation) {
         await originalMethod.apply(this, arguments)
       } else {
+        this.warn(
+          // tslint:disable-next-line: max-line-length
+          `We couldn't find any auth.config.json file, please make sure this file exists at the root of your integration`
+        )
         this.error('This command must be run within a integration folder.')
       }
     }

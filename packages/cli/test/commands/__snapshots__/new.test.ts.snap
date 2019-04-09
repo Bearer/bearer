@@ -6,7 +6,6 @@ What's next?
 
 ,[1m   cd APIKEYIntegration && bearer start[22m
 ,[32mIntegration initialized, name: APIKEYIntegration, authentication type: API Key[39m
-,[90m    create: [39m[37m.bearer/initWithView/new/APIKEY/.bearer/.keep[39m
 ,[90m    create: [39m[37m.bearer/initWithView/new/APIKEY/.gitignore[39m
 ,[90m    create: [39m[37m.bearer/initWithView/new/APIKEY/.integrationrc[39m
 ,[90m    create: [39m[37m.bearer/initWithView/new/APIKEY/LICENSE[39m
@@ -72,7 +71,6 @@ What's next?
 
 ,[1m   cd BASICIntegration && bearer start[22m
 ,[32mIntegration initialized, name: BASICIntegration, authentication type: Basic Auth[39m
-,[90m    create: [39m[37m.bearer/initWithView/new/BASIC/.bearer/.keep[39m
 ,[90m    create: [39m[37m.bearer/initWithView/new/BASIC/.gitignore[39m
 ,[90m    create: [39m[37m.bearer/initWithView/new/BASIC/.integrationrc[39m
 ,[90m    create: [39m[37m.bearer/initWithView/new/BASIC/LICENSE[39m
@@ -138,7 +136,6 @@ What's next?
 
 ,[1m   cd CUSTOMIntegration && bearer start[22m
 ,[32mIntegration initialized, name: CUSTOMIntegration, authentication type: Custom[39m
-,[90m    create: [39m[37m.bearer/initWithView/new/CUSTOM/.bearer/.keep[39m
 ,[90m    create: [39m[37m.bearer/initWithView/new/CUSTOM/.gitignore[39m
 ,[90m    create: [39m[37m.bearer/initWithView/new/CUSTOM/.integrationrc[39m
 ,[90m    create: [39m[37m.bearer/initWithView/new/CUSTOM/LICENSE[39m
@@ -204,7 +201,6 @@ What's next?
 
 ,[1m   cd NONEIntegration && bearer start[22m
 ,[32mIntegration initialized, name: NONEIntegration, authentication type: NoAuth[39m
-,[90m    create: [39m[37m.bearer/initWithView/new/NONE/.bearer/.keep[39m
 ,[90m    create: [39m[37m.bearer/initWithView/new/NONE/.gitignore[39m
 ,[90m    create: [39m[37m.bearer/initWithView/new/NONE/.integrationrc[39m
 ,[90m    create: [39m[37m.bearer/initWithView/new/NONE/LICENSE[39m
@@ -270,7 +266,6 @@ What's next?
 
 ,[1m   cd OAUTH1Integration && bearer start[22m
 ,[32mIntegration initialized, name: OAUTH1Integration, authentication type: OAuth1[39m
-,[90m    create: [39m[37m.bearer/initWithView/new/OAUTH1/.bearer/.keep[39m
 ,[90m    create: [39m[37m.bearer/initWithView/new/OAUTH1/.gitignore[39m
 ,[90m    create: [39m[37m.bearer/initWithView/new/OAUTH1/.integrationrc[39m
 ,[90m    create: [39m[37m.bearer/initWithView/new/OAUTH1/LICENSE[39m
@@ -346,7 +341,6 @@ What's next?
 
 ,[1m   cd OAUTH2Integration && bearer start[22m
 ,[32mIntegration initialized, name: OAUTH2Integration, authentication type: OAuth2[39m
-,[90m    create: [39m[37m.bearer/initWithView/new/OAUTH2/.bearer/.keep[39m
 ,[90m    create: [39m[37m.bearer/initWithView/new/OAUTH2/.gitignore[39m
 ,[90m    create: [39m[37m.bearer/initWithView/new/OAUTH2/.integrationrc[39m
 ,[90m    create: [39m[37m.bearer/initWithView/new/OAUTH2/LICENSE[39m
@@ -419,7 +413,6 @@ What's next?
 
 ,[1m   cd APIKEYIntegration && bearer start[22m
 ,[32mIntegration initialized, name: APIKEYIntegration, authentication type: API Key[39m
-,[90m    create: [39m[37m.bearer/init/new/APIKEY/.bearer/.keep[39m
 ,[90m    create: [39m[37m.bearer/init/new/APIKEY/.gitignore[39m
 ,[90m    create: [39m[37m.bearer/init/new/APIKEY/.integrationrc[39m
 ,[90m    create: [39m[37m.bearer/init/new/APIKEY/LICENSE[39m
@@ -477,7 +470,6 @@ What's next?
 
 ,[1m   cd BASICIntegration && bearer start[22m
 ,[32mIntegration initialized, name: BASICIntegration, authentication type: Basic Auth[39m
-,[90m    create: [39m[37m.bearer/init/new/BASIC/.bearer/.keep[39m
 ,[90m    create: [39m[37m.bearer/init/new/BASIC/.gitignore[39m
 ,[90m    create: [39m[37m.bearer/init/new/BASIC/.integrationrc[39m
 ,[90m    create: [39m[37m.bearer/init/new/BASIC/LICENSE[39m
@@ -535,7 +527,6 @@ What's next?
 
 ,[1m   cd CUSTOMIntegration && bearer start[22m
 ,[32mIntegration initialized, name: CUSTOMIntegration, authentication type: Custom[39m
-,[90m    create: [39m[37m.bearer/init/new/CUSTOM/.bearer/.keep[39m
 ,[90m    create: [39m[37m.bearer/init/new/CUSTOM/.gitignore[39m
 ,[90m    create: [39m[37m.bearer/init/new/CUSTOM/.integrationrc[39m
 ,[90m    create: [39m[37m.bearer/init/new/CUSTOM/LICENSE[39m
@@ -593,7 +584,6 @@ What's next?
 
 ,[1m   cd NONEIntegration && bearer start[22m
 ,[32mIntegration initialized, name: NONEIntegration, authentication type: NoAuth[39m
-,[90m    create: [39m[37m.bearer/init/new/NONE/.bearer/.keep[39m
 ,[90m    create: [39m[37m.bearer/init/new/NONE/.gitignore[39m
 ,[90m    create: [39m[37m.bearer/init/new/NONE/.integrationrc[39m
 ,[90m    create: [39m[37m.bearer/init/new/NONE/LICENSE[39m
@@ -651,7 +641,6 @@ What's next?
 
 ,[1m   cd OAUTH1Integration && bearer start[22m
 ,[32mIntegration initialized, name: OAUTH1Integration, authentication type: OAuth1[39m
-,[90m    create: [39m[37m.bearer/init/new/OAUTH1/.bearer/.keep[39m
 ,[90m    create: [39m[37m.bearer/init/new/OAUTH1/.gitignore[39m
 ,[90m    create: [39m[37m.bearer/init/new/OAUTH1/.integrationrc[39m
 ,[90m    create: [39m[37m.bearer/init/new/OAUTH1/LICENSE[39m
@@ -719,7 +708,6 @@ What's next?
 
 ,[1m   cd OAUTH2Integration && bearer start[22m
 ,[32mIntegration initialized, name: OAUTH2Integration, authentication type: OAuth2[39m
-,[90m    create: [39m[37m.bearer/init/new/OAUTH2/.bearer/.keep[39m
 ,[90m    create: [39m[37m.bearer/init/new/OAUTH2/.gitignore[39m
 ,[90m    create: [39m[37m.bearer/init/new/OAUTH2/.integrationrc[39m
 ,[90m    create: [39m[37m.bearer/init/new/OAUTH2/LICENSE[39m
