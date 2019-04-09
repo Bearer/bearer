@@ -27,7 +27,7 @@ export default function startLocalDevelopmentServer(
   emitter,
   config: Config,
   locator: LocationProvider,
-  logs: boolean = true
+  { logs = true, force = false } = {}
 ) {
   const rootLevel = locator.integrationRoot
 
@@ -77,7 +77,7 @@ export default function startLocalDevelopmentServer(
         emitter.emit('start:localServer:customPort', { port, host })
       }
 
-      if (port !== Number(expectedPort)) {
+      if (port !== Number(expectedPort) && !force) {
         throw `Could not start local server port ${expectedPort} is already in use. You can specify your own port by running PORT=3322 yarn bearer start`
       }
       const bearerBaseURL = `${host}/`

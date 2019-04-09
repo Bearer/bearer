@@ -79,7 +79,7 @@ export function prepare(emitter, config, locator: Locator) {
   }
 }
 
-export const start = (emitter, config, locator: Locator) => async ({ open, install, watcher, views }) => {
+export const start = (emitter, config, locator: Locator) => async ({ open, install, watcher, views, force }) => {
   const { integrationUuid } = config
   try {
     await prepare(emitter, config, locator)({
@@ -90,7 +90,7 @@ export const start = (emitter, config, locator: Locator) => async ({ open, insta
 
     const { integrationRoot, buildViewsDir } = locator
     // start local development server
-    const integrationHost = await startLocalDevelopmentServer(emitter, config, locator)
+    const integrationHost = await startLocalDevelopmentServer(emitter, config, locator, { force: Boolean(force) })
 
     // Integration does no have views, let's skip transpile phase
     if (!views) {
@@ -177,6 +177,7 @@ export function useWith(program, emitter, config, locator: Locator) {
     .option('--no-install', 'Do not run yarn|npm install')
     .option('--no-watcher', 'Run transpiler only once')
     .option('--no-views', 'Local server only')
+    .option('--force', 'Force server to start on a random port if expected port is not available')
     .action(start(emitter, config, locator))
 }
 

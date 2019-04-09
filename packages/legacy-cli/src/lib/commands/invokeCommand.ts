@@ -23,7 +23,7 @@ export const invoke = (emitter, config, locator: Locator) => async (func, cmd) =
   }
   const { params = {}, body = {} } = fileData
   try {
-    const integrationHostURL = await startLocalDevelopmentServer(emitter, config, locator)
+    const integrationHostURL = await startLocalDevelopmentServer(emitter, config, locator, { force: true })
 
     const client = axios.create({ baseURL: `${integrationHostURL}api/v3/backend/functions`, timeout: 5000 })
 
