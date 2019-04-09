@@ -3,6 +3,5 @@ node_modules/
 dist/
 www/
 .build/
-config.dev.js
 .integrationrc
 local.config.jsonc
