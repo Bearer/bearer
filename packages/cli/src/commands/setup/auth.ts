@@ -48,7 +48,7 @@ export default class SetupAuth extends BaseCommand {
           BEARER_AUTH_CLIENT_SECRET || (await this.askForString('Client secret', { type: 'password' }))
         const newConfig = { ...config, clientID, clientSecret }
         this.debug('Your credentials:\n%j', { ...config, clientID, clientSecret: clientSecret.replace(/./g, '*') })
-        const { token: accessToken } = await this.fetchAuthTken(newConfig as configs.TOAuth2Config)
+        const { token: accessToken } = await this.fetchAuthToken(newConfig as configs.TOAuth2Config)
 
         await this.persistSetup({ accessToken } as contexts.OAuth2)
         break
@@ -70,7 +70,7 @@ export default class SetupAuth extends BaseCommand {
         const consumerSecret = process.env.BEARER_AUTH_CONSUMER_SECRET || (await this.askForPassword('Consumer secret'))
         this.debug('Your credentials:\n%j', { consumerKey, consumerSecret: consumerSecret.replace(/./g, '*') })
         const newConfig = { ...config, consumerKey, consumerSecret }
-        const { token: accessToken } = await this.fetchAuthTken(newConfig as configs.TOAuth1Config)
+        const { token: accessToken } = await this.fetchAuthToken(newConfig as configs.TOAuth1Config)
         // TODO: fix this when context.OAuth1 is fixed  and well defined
         await this.persistSetup({ accessToken, consumerKey } as any)
         break
@@ -89,7 +89,7 @@ export default class SetupAuth extends BaseCommand {
     }
   }
 
-  fetchAuthTken = async (config: configs.TOAuth2Config | configs.TOAuth1Config): Promise<{ token: string }> => {
+  fetchAuthToken = async (config: configs.TOAuth2Config | configs.TOAuth1Config): Promise<{ token: string }> => {
     return new Promise(async (resolve, reject) => {
       this._server = await this.startServer()
       const location = await axios
