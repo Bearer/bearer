@@ -78,13 +78,13 @@ export default class SetupAuth extends BaseCommand {
       case Authentications.Custom:
       case Authentications.NoAuth: {
         return this.warn(
-          `The current authentication type of the integraion is not supported by this command: ${authType}`
+          `The current authentication type of this integration is not supported by this command: ${authType}`
         )
       }
       default:
         // unsure we handled all authentications
         // http://ideasintosoftware.com/exhaustive-switch-in-typescript/
-        this.error(`The current authentication type of the integraion is not supported by this command: ${authType}`)
+        this.error(`The current authentication type of this integration is not supported by this command: ${authType}`)
         throw new UnreachableCaseError(authType)
     }
   }
