@@ -135,18 +135,18 @@ export function functionTypesToSchemaConverter(
  *  Generate full openapi spec from functions
  *  @param functionsDir absolute path to functions directory
  *  @param functions list of func names
- *  @param integrationUuid integration unique identifier
+ *  @param buid integration unique identifier
  *  @param integrationName name of the integration
  */
 export default function generator({
   functionsDir,
   functions,
-  integrationUuid,
+  buid,
   integrationName
 }: {
   functionsDir: string
   functions: string[]
-  integrationUuid: string
+  buid: string
   integrationName: string
 }): string {
   const doc = topOfSpec(integrationName)
@@ -156,7 +156,7 @@ export default function generator({
     return Object.assign(
       acc,
       specPath({
-        integrationUuid,
+        buid,
         functionName: func,
         response: { type: 'object', properties: typeSchema.response },
         requestBody: typeSchema.requestBody,

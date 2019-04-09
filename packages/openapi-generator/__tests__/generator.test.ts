@@ -9,9 +9,9 @@ const functions = fs.readdirSync(FUNCTIONS_DIR).map(func => func.replace(/\.ts$/
 
 describe('#generator', () => {
   test('generates the valid openapi 3.0 document', () => {
-    const integrationUuid = '4l1c3-happy-goats'
+    const buid = '4l1c3-happy-goats'
     const integrationName = 'happy-goats'
-    const document = generator({ functions, integrationUuid, integrationName, functionsDir: FUNCTIONS_DIR })
+    const document = generator({ functions, buid, integrationName, functionsDir: FUNCTIONS_DIR })
     expect(document).toMatchSnapshot()
   })
 })

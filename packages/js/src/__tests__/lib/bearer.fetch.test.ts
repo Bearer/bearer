@@ -45,7 +45,7 @@ describe('function request', () => {
       })
 
       expect(fetch).toHaveBeenCalledWith(
-        'custom-host/api/v3/functions/integration/function?something=query&clientId=a-client-id',
+        'custom-host/api/v4/functions/integration/function?something=query&clientId=a-client-id',
         {
           body: '{"somethingElse":"query"}',
           credentials: 'include',

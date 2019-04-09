@@ -20,7 +20,7 @@ describe('Bearer client', () => {
           authorization: clientId
         }
       })
-        .post('/api/v3/functions/backend/12345-integration-name/functionName')
+        .post('/api/v4/functions/backend/12345-integration-name/functionName')
         .reply(200, distantApi)
 
       const { data } = await client.invoke('12345-integration-name', 'functionName')
@@ -48,7 +48,7 @@ describe('IntegrationClient', () => {
         authorization: token
       }
     })
-      .post(`/api/v3/functions/backend/${anotherIntegrationName}/function-name`)
+      .post(`/api/v4/functions/backend/${anotherIntegrationName}/function-name`)
       .query({ sponge: 'bob' })
       .reply(200, distantApi)
 

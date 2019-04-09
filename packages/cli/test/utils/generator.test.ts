@@ -12,7 +12,7 @@ describe('generators', () => {
     it('generates openapi documentation', async () => {
       const generator = new OpenApiSpecGenerator(path.join(__dirname, '__fixtures__/generators'), {
         integrationTitle: 'test',
-        integrationUuid: '123-test'
+        buid: '123-test'
       })
       const build = await generator.build()
       expect(build).toMatchSnapshot()

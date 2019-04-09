@@ -11,7 +11,7 @@ type IConfig = {
 
 export const invoke = (emitter, config, locator: Locator) => async (func, cmd) => {
   const { path } = cmd
-  const { integrationUuid } = config
+  const { buid } = config
 
   let fileData: IConfig = {}
   if (path) {
@@ -25,9 +25,9 @@ export const invoke = (emitter, config, locator: Locator) => async (func, cmd) =
   try {
     const integrationHostURL = await startLocalDevelopmentServer(emitter, config, locator, { force: true })
 
-    const client = axios.create({ baseURL: `${integrationHostURL}api/v3/backend/functions`, timeout: 5000 })
+    const client = axios.create({ baseURL: `${integrationHostURL}api/v4/backend/functions`, timeout: 5000 })
 
-    const { data } = await client.post(`${integrationUuid}/${func}`, body, { params })
+    const { data } = await client.post(`${buid}/${func}`, body, { params })
     // used by cli: do not remove
     console.log(JSON.stringify(data, null, 2))
     process.exit(0)

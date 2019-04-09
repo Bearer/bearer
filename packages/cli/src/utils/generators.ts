@@ -160,7 +160,7 @@ export class FunctionCodeProcessor {
 export class OpenApiSpecGenerator {
   constructor(
     private readonly srcFunctionsDir: string,
-    private readonly bearerConfig: { integrationTitle: string | undefined; integrationUuid: string }
+    private readonly bearerConfig: { integrationTitle: string | undefined; buid: string }
   ) {}
 
   async build() {
@@ -198,7 +198,7 @@ export class OpenApiSpecGenerator {
     return specGenerator({
       functions: functionEntries.map(entry => entry.functionName),
       functionsDir: this.srcFunctionsDir,
-      integrationUuid: this.bearerConfig.integrationUuid,
+      buid: this.bearerConfig.buid,
       integrationName: this.bearerConfig.integrationTitle || ''
     })
   }
@@ -214,17 +214,6 @@ const DEFAULT_PARAMS: ISchemaParam[] = [
     description: 'API Key',
     required: true
   }
-  // we probably don't neet this one anymore
-  // ,{
-  //   name: 'authId',
-  //   schema: {
-  //     type: 'string',
-  //     format: 'uuid'
-  //   },
-  //   in: 'query',
-  //   description: 'User Identifier',
-  //   required: true
-  // }
 ]
 
 export interface ISchemaParam {

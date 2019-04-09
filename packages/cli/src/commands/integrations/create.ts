@@ -34,13 +34,12 @@ export default class IntegrationsCreate extends BaseCommand {
           '      name: %s\n      uuid: %s\nidentifier: %s\n       Url:',
           integration.name,
           integration.uuid,
-          integration.deprecated_uuid,
-          `${this.constants.DeveloperPortalUrl}integrations/${integration.deprecated_uuid}`
+          `${this.constants.DeveloperPortalUrl}integrations/${integration.uuid}`
         )
         if (this.isIntegrationLocation) {
           // tslint:disable-next-line no-boolean-literal-compare
           if (!flags.skipLink) {
-            await linkIntegration.bind(this)(integration.deprecated_uuid)
+            await linkIntegration.bind(this)(integration.uuid)
           }
         }
       } else {
@@ -71,7 +70,6 @@ export default class IntegrationsCreate extends BaseCommand {
 }
 
 type Integration = {
-  deprecated_uuid: string
   uuid: string
   name: string
   latestActivity?: {
@@ -159,7 +157,6 @@ const MUTATION = `
 mutation CLICreateIntegration($name: String!, $description: String!) {
   createIntegration(name: $name, description: $description) {
     integration {
-      deprecated_uuid: uuid
       uuid: uuidv2
       name
     }

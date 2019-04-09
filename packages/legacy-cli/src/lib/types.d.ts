@@ -11,7 +11,6 @@ export type BaseConfig = {
 }
 
 export type BearerConfig = {
-  OrgId: string
   Username: string
   ExpiresAt: number
   authorization: {
@@ -24,8 +23,6 @@ export type BearerConfig = {
 
 export type IntegrationConfig = {
   integrationId: string
-  integrationUuid: string
-  orgId: string
   integrationTitle: string
   open: boolean
   configs: Array<string>
@@ -39,12 +36,7 @@ export type Config = BaseConfig & {
   command: 'yarn' | 'npm'
   bearerConfig: BearerConfig
   integrationConfig: IntegrationConfig
-  orgId: string | undefined
   integrationTitle: string | undefined
-  integrationId: string | undefined
-  integrationUuid: string
+  buid: string
   rootPathRc: string
-  hasIntegrationLinked: boolean
-  setIntegrationConfig(config: any): void
-  storeBearerConfig(config: any): void
 }

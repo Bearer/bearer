@@ -100,13 +100,13 @@ export default function startLocalDevelopmentServer(
 
       const context = await getFunctionContext(locator)
       router.post(
-        `v3/backend/functions/${config.integrationUuid}/:functionName`,
+        `v4/backend/functions/${config.buid}/:functionName`,
         functionHandler(distPath, context, bearerBaseURL, true),
         (ctx, _next) => ctx.ok(ctx.funcDatum)
       )
 
       router.post(
-        `v3/functions/${config.integrationUuid}/:functionName`,
+        `v4/functions/${config.buid}/:functionName`,
         functionHandler(distPath, context, bearerBaseURL),
         (ctx, _next) => ctx.ok(ctx.funcDatum)
       )

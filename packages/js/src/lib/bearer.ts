@@ -99,7 +99,7 @@ export default class Bearer {
     functionName: string,
     { query = {}, ...params }: { query?: Record<string, string>; [key: string]: any } = {}
   ): Promise<TFetchBearerData<DataPayload>> => {
-    const path = `/api/v3/functions/${integrationId}/${functionName}`
+    const path = `/api/v4/functions/${integrationId}/${functionName}`
 
     try {
       const response = await this._jsonRequest(path, { query, params })

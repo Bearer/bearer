@@ -8,7 +8,7 @@ type TFunctionParams = { query?: any; body?: any }
 const defaultFunctionParams = { query: {}, body: {} }
 
 export class BearerClient<T = string> {
-  protected static defaultOptions = { hostUrl: 'https://int.bearer.sh/api/v3/functions/backend' }
+  protected static defaultOptions = { hostUrl: 'https://int.bearer.sh/api/v4/functions/backend' }
   protected options: TClientOptions
   protected client: AxiosInstance
 

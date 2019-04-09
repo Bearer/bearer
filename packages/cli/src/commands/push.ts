@@ -57,12 +57,12 @@ export default class Push extends BaseCommand {
       this.log(
         // tslint:disable-next-line:prefer-template
         `Your Integration will be available shortly here: ` +
-          this.colors.bold(`${this.constants.DeveloperPortalUrl}integrations/${this.bearerConfig.integrationUuid}`)
+          this.colors.bold(`${this.constants.DeveloperPortalUrl}integrations/${this.bearerConfig.bearerUid}`)
       )
       this.log(
         // tslint:disable-next-line:prefer-template
         `\nIn the meantime you can follow the deployment here: ` +
-          this.colors.bold(`${this.constants.DeveloperPortalUrl}integrations/${this.bearerConfig.integrationUuid}/logs`)
+          this.colors.bold(`${this.constants.DeveloperPortalUrl}integrations/${this.bearerConfig.bearerUid}/logs`)
       )
     } catch (e) {
       this.error(e)
@@ -117,10 +117,7 @@ export default class Push extends BaseCommand {
   }
 
   async getSignedUrl(): Promise<string> {
-    return this.integrationClient.getIntegrationArchiveUploadUrl(
-      this.bearerConfig.orgId!,
-      this.bearerConfig.integrationId!
-    )
+    return this.integrationClient.getIntegrationArchiveUploadUrl(this.bearerConfig.bearerUid)
   }
 
   async transfer(archivePath: string): Promise<boolean> {
@@ -137,8 +134,8 @@ export default class Push extends BaseCommand {
           case 401: {
             this.error(
               `Unauthorized to push, please visit ${this.constants.DeveloperPortalUrl}integrations/${
-                this.bearerConfig.integrationUuid
-              } to confirm you have access to ${this.colors.bold(this.bearerConfig.integrationUuid)} integration.`
+                this.bearerConfig.bearerUid
+              } to confirm you have access to ${this.colors.bold(this.bearerConfig.bearerUid)} integration.`
             )
           }
           default: {

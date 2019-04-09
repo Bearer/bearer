@@ -9,7 +9,7 @@ describe('prepareConfig', () => {
     const config = await prepareConfig(path.join(base, 'auth.json'), '123-ok', path.join(base, 'functions'))
     expect(config).toMatchObject({
       auth: {},
-      integration_uuid: '123-ok',
+      buid: '123-ok',
       functions: expect.arrayContaining(['a-wonderful-function-as-method', 'a-wonderful-function'])
     })
   })

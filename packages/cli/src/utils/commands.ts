@@ -21,17 +21,15 @@ export async function linkIntegration(this: BaseCommand, anIdentifier: string) {
       }
     ])
     integrationTitle = integration.name
-    identifier = integration.deprecated_uuid
+    identifier = integration.uuid
   }
 
-  const [orgId, integrationId] = identifier.replace(/\-/, '|').split('|')
-  const integrationRc = { orgId, integrationId, integrationTitle }
+  const integrationRc = { integrationTitle, integrationId: identifier }
   this.bearerConfig.setIntegrationConfig(integrationRc)
   this.log('Integration successfully linked! 🎉')
 }
 
 type Integration = {
-  deprecated_uuid: string
   uuid: string
   name: string
   latestActivity?: {
@@ -42,7 +40,6 @@ type Integration = {
 const QUERY = `
 query CLILinkIntegrationList {
   integrations(includeGloballyAvailable: false) {
-    deprecated_uuid: uuid
     uuid: uuidv2
     name
     latestActivity {

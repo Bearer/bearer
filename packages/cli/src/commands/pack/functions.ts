@@ -95,7 +95,7 @@ export default class PackFunctions extends BaseCommand {
     try {
       const config = await prepareConfig(
         this.locator.authConfigPath,
-        this.bearerConfig.integrationUuid,
+        this.bearerConfig.bearerUid,
         this.locator.srcFunctionsDir
       )
       return config.functions

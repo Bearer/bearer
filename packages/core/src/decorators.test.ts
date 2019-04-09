@@ -49,7 +49,7 @@ describe('Function decorator', () => {
       await decoratedInstance.getCollectionFunctionProp({ page: 1 }).then(success)
 
       expect(global.fetch).toBeCalledWith(
-        'HOST/api/v3/functions/1234/getCollectionFunction?setupId=setup-id-from-props&clientId=client-id',
+        'HOST/api/v4/functions/1234/getCollectionFunction?setupId=setup-id-from-props&clientId=client-id',
         {
           body: '{"page":1}',
           credentials: 'include',
@@ -67,7 +67,7 @@ describe('Function decorator', () => {
       await decoratedInstance.getCollectionFunctionProp({ page: 1, setupId: 'custom-setupId' }).then(success)
 
       expect(global.fetch).toBeCalledWith(
-        'HOST/api/v3/functions/1234/getCollectionFunction?setupId=setup-id-from-props&clientId=client-id',
+        'HOST/api/v4/functions/1234/getCollectionFunction?setupId=setup-id-from-props&clientId=client-id',
         {
           body: '{"page":1,"setupId":"custom-setupId"}',
           credentials: 'include',
@@ -92,7 +92,7 @@ describe('Function decorator', () => {
       await decoratedInstance.getCollectionFunctionProp({ page: 1 }).catch(error)
 
       expect(global.fetch).toBeCalledWith(
-        'HOST/api/v3/functions/1234/getCollectionFunction?setupId=setup-id-from-props&clientId=client-id',
+        'HOST/api/v4/functions/1234/getCollectionFunction?setupId=setup-id-from-props&clientId=client-id',
         {
           body: '{"page":1}',
           credentials: 'include',

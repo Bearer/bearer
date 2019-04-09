@@ -6,7 +6,7 @@ import { IntegrationBuildEnv } from '../../types'
 import { RequireIntegrationFolder, skipIfNoViews } from '../../utils/decorators'
 
 const integrationId = 'integration-id'
-const integrationUuid = 'integration-uuid'
+const buid = 'buid'
 const cdnHost = 'cdn-host'
 
 export default class PackViews extends BaseCommand {
@@ -14,7 +14,7 @@ export default class PackViews extends BaseCommand {
   static hidden = true
   static flags = {
     ...BaseCommand.flags,
-    [integrationUuid]: flags.string({
+    [buid]: flags.string({
       required: true,
       description: 'Integration unique identifier'
     }),
@@ -36,7 +36,7 @@ export default class PackViews extends BaseCommand {
     const config = this.constants
     const env: IntegrationBuildEnv = {
       ...process.env,
-      BEARER_INTEGRATION_ID: flags[integrationUuid],
+      BEARER_INTEGRATION_ID: flags[buid],
       BEARER_INTEGRATION_TAG_NAME: flags[integrationId],
       BEARER_INTEGRATION_HOST: config.IntegrationServiceHost,
       BEARER_AUTHORIZATION_HOST: config.IntegrationServiceHost,

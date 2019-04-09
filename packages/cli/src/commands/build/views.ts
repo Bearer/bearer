@@ -55,10 +55,17 @@ export default class BuildViews extends BaseCommand {
   }
 
   transpile = () => {
-    const prefix = ['bearer', this.bearerConfig.orgId].join('-')
-    const suffix = this.bearerConfig.integrationId
     try {
-      transpiler(['--no-watcher', '--prefix-tag', prefix, '--suffix-tag', suffix, '--no-process', '--build', true])
+      transpiler([
+        '--no-watcher',
+        '--prefix-tag',
+        'bearer',
+        '--suffix-tag',
+        this.bearerConfig.bearerUid,
+        '--no-process',
+        '--build',
+        true
+      ])
     } catch (e) {
       this.error(e)
     }

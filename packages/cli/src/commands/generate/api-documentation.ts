@@ -24,10 +24,10 @@ export default class GenerateApiDocumentation extends BaseCommand {
       const { flags } = this.parse(GenerateApiDocumentation)
       const { srcFunctionsDir, buildFunctionsDir } = this.locator
 
-      const { integrationTitle, integrationUuid } = this.bearerConfig
+      const { integrationTitle, bearerUid } = this.bearerConfig
       const spec = flags.soft
         ? {}
-        : await new OpenApiSpecGenerator(srcFunctionsDir, { integrationTitle, integrationUuid }).build()
+        : await new OpenApiSpecGenerator(srcFunctionsDir, { integrationTitle, buid: bearerUid }).build()
 
       fs.ensureDirSync(buildFunctionsDir)
 

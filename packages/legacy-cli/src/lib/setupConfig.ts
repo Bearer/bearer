@@ -1,10 +1,5 @@
 const findUp = require('find-up')
 const rc = require('rc')
-const os = require('os')
-
-const fs = require('fs')
-const ini = require('ini')
-const path = require('path')
 const { spawnSync } = require('child_process')
 
 import { BaseConfig, BearerConfig, BearerEnv, Config, IntegrationConfig } from './types'
@@ -55,41 +50,14 @@ export default (): Config => {
     get integrationConfig(): IntegrationConfig {
       return rc('integration')
     },
-    get orgId(): string | undefined {
-      return this.integrationConfig.orgId
-    },
     get integrationTitle(): string | undefined {
       return this.integrationConfig.integrationTitle
     },
-    get integrationId(): string | undefined {
-      return this.integrationConfig.integrationId
-    },
-    get integrationUuid(): string {
-      if (this.hasIntegrationLinked) {
-        return `${this.orgId}-${this.integrationId}`
-      }
-      return 'unset-scenari0-uuid'
-    },
-    get hasIntegrationLinked(): boolean {
-      return Boolean(this.orgId) && Boolean(this.integrationId)
+    get buid(): string {
+      return 'local'
     },
     get rootPathRc(): string {
       return findUp.sync('.integrationrc')
-    },
-    setIntegrationConfig(config: { integrationTitle: string; orgId: string; integrationId: string }) {
-      const { integrationTitle, orgId, integrationId } = config
-      fs.writeFileSync(this.rootPathRc, ini.stringify({ integrationTitle, orgId, integrationId }))
-    },
-    storeBearerConfig(config) {
-      const { Username, ExpiresAt, authorization } = config
-      fs.writeFileSync(
-        this.bearerConfig.config || path.join(os.homedir(), '.bearerrc'),
-        ini.stringify({
-          Username,
-          ExpiresAt,
-          authorization
-        })
-      )
     }
   }
 }

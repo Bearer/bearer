@@ -8,7 +8,7 @@ exports[`#generator generates the valid openapi 3.0 document 1`] = `
   },
   \\"servers\\": [
     {
-      \\"url\\": \\"https://int.bearer.sh/api/v3/functions/backend/\\"
+      \\"url\\": \\"https://int.bearer.sh/api/v4/functions/backend/\\"
     }
   ],
   \\"tags\\": [],

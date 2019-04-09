@@ -38,27 +38,23 @@ export class Config {
     return path.join(this.integrationLocation, '.integrationrc')
   }
 
-  get orgId(): string | undefined {
-    return process.env.BEARER_ORG_ID || this.integrationConfig.orgId
-  }
-
   get integrationTitle(): string | undefined {
     return this.integrationConfig.integrationTitle
   }
 
-  get integrationId(): string | undefined {
+  get BUID(): string | undefined {
     return process.env.BEARER_INTEGRATION_ID || this.integrationConfig.integrationId
   }
 
-  get integrationUuid(): string {
+  get bearerUid(): string {
     if (this.hasIntegrationLinked) {
-      return `${this.orgId}-${this.integrationId}`
+      return this.BUID!
     }
-    return 'unset-integration-uuid'
+    return 'unset'
   }
 
   get hasIntegrationLinked(): boolean {
-    return Boolean(this.orgId) && Boolean(this.integrationId)
+    return Boolean(this.BUID)
   }
 
   get rootPath(): string | null {
@@ -69,10 +65,10 @@ export class Config {
     return !!spawnSync('yarn', ['bin']).output
   }
 
-  setIntegrationConfig = (config: { integrationTitle: string; orgId: string; integrationId: string }) => {
-    const { integrationTitle, orgId, integrationId } = config
+  setIntegrationConfig = (config: { integrationTitle: string; integrationId: string }) => {
+    const { integrationTitle, integrationId } = config
     if (this.rootPath) {
-      fs.writeFileSync(this.integrationRc, ini.stringify({ integrationTitle, orgId, integrationId }))
+      fs.writeFileSync(this.integrationRc, ini.stringify({ integrationTitle, integrationId }))
     }
   }
 

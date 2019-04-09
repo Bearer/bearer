@@ -14,7 +14,6 @@ export type BaseConfig = {
 }
 
 export type BearerConfig = {
-  OrgId: string
   Username: string
   ExpiresAt: number
   authorization: {
@@ -33,8 +32,6 @@ export type BearerConfig = {
 
 export type IntegrationConfig = {
   integrationId: string
-  integrationUuid: string | null
-  orgId: string
   integrationTitle: string
   open: boolean
   configs: string[]

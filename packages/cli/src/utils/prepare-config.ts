@@ -6,7 +6,7 @@ import { getFunctionName, FunctionCodeProcessor, isFunctionClass } from './gener
 
 type TConfig = {
   functions: string[]
-  integration_uuid: string
+  buid: string
   auth?: any
 }
 
@@ -23,14 +23,14 @@ export const transformer = (functions: string[]) => (context: ts.TransformationC
   }
 }
 
-export default (authConfigFile: string, integrationUuid: string, functionsDir: string): Promise<TConfig> => {
+export default (authConfigFile: string, buid: string, functionsDir: string): Promise<TConfig> => {
   return new Promise((resolve, reject) => {
     const functions: string[] = []
     new FunctionCodeProcessor(functionsDir, transformer(functions))
       .run()
       .then(() => {
         const content = fs.readFileSync(authConfigFile, { encoding: 'utf8' })
-        const config: TConfig = { functions, integration_uuid: integrationUuid, auth: JSON.parse(content) }
+        const config: TConfig = { functions, buid, auth: JSON.parse(content) }
         resolve(config)
       })
       .catch(error => {

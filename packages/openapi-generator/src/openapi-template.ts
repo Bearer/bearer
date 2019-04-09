@@ -16,20 +16,20 @@ type TParam = {
 }
 
 export function specPath({
-  integrationUuid,
+  buid,
   functionName,
   requestBody,
   response,
   oauth
 }: {
-  integrationUuid: string
+  buid: string
   functionName: string
   requestBody: any
   response: any
   oauth: boolean
 }) {
   return {
-    [`/${integrationUuid}/${functionName}`]: {
+    [`/${buid}/${functionName}`]: {
       post: {
         parameters: [
           {
@@ -82,7 +82,7 @@ export function topOfSpec(integrationName: string): THeader {
     info: {
       title: integrationName
     },
-    servers: [{ url: 'https://int.bearer.sh/api/v3/functions/backend/' }],
+    servers: [{ url: 'https://int.bearer.sh/api/v4/functions/backend/' }],
     tags: []
   }
 }
