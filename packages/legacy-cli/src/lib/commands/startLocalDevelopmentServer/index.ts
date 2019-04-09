@@ -1,8 +1,10 @@
 import * as chokidar from 'chokidar'
-import * as cosmiconfig from 'cosmiconfig'
 import getPort from 'get-port'
 import * as Logger from 'koa-logger'
 import * as Router from 'koa-router'
+import * as fs from 'fs'
+import { parse } from 'jsonc-parser'
+import { TAuthContext } from '@bearer/functions/lib/declaration'
 
 import { transpileFunctions } from '../../buildArtifact'
 import LocationProvider from '../../locationProvider'
@@ -23,6 +25,24 @@ function requireUncached(module) {
 
 const DEFAULT_PORT = 3000
 
+async function getFunctionContext(locator: LocationProvider) {
+  const localConfig = locator.localConfigPath
+  let context = {} as TAuthContext
+  if (fs.existsSync(localConfig)) {
+    const rawConfig = fs.readFileSync(localConfig, { encoding: 'utf8' })
+    const parsed = parse(rawConfig)
+    const { setup } = parsed || { setup: null }
+    debug('local config: %j', parsed)
+    if (setup && setup.auth) {
+      context.authAccess = setup.auth
+    }
+  } else {
+    debug('no local config found')
+  }
+
+  return context
+}
+
 export default function startLocalDevelopmentServer(
   emitter,
   config: Config,
@@ -31,15 +51,10 @@ export default function startLocalDevelopmentServer(
 ) {
   const rootLevel = locator.integrationRoot
 
-  const LOCAL_DEV_CONFIGURATION = 'dev'
-  const explorer = cosmiconfig(LOCAL_DEV_CONFIGURATION, {
-    searchPlaces: [`config.${LOCAL_DEV_CONFIGURATION}.js`]
-  })
   const router = new Router({ prefix: '/api/' })
 
   return new Promise<string>(async (resolve, reject) => {
     try {
-      const { config: devFunctionsContext = {} } = (await explorer.search(rootLevel)) || {}
       const distPath = locator.buildFunctionsResourcePath('dist')
 
       // tslint:disable-next-line:no-inner-declarations
@@ -83,25 +98,24 @@ export default function startLocalDevelopmentServer(
       const bearerBaseURL = `${host}/`
       process.env.bearerBaseURL = bearerBaseURL
 
+      const context = await getFunctionContext(locator)
       router.post(
         `v3/backend/functions/${config.integrationUuid}/:functionName`,
-        functionHandler(distPath, devFunctionsContext, bearerBaseURL, true),
+        functionHandler(distPath, context, bearerBaseURL, true),
         (ctx, _next) => ctx.ok(ctx.funcDatum)
       )
 
       router.post(
         `v3/functions/${config.integrationUuid}/:functionName`,
-        functionHandler(distPath, devFunctionsContext, bearerBaseURL),
+        functionHandler(distPath, context, bearerBaseURL),
         (ctx, _next) => ctx.ok(ctx.funcDatum)
       )
 
-      router.post(
-        `backend/:functionName`,
-        functionHandler(distPath, devFunctionsContext, bearerBaseURL, true),
-        (ctx, _next) => ctx.ok(ctx.funcDatum)
+      router.post(`backend/:functionName`, functionHandler(distPath, context, bearerBaseURL, true), (ctx, _next) =>
+        ctx.ok(ctx.funcDatum)
       )
 
-      router.post(`:functionName`, functionHandler(distPath, devFunctionsContext, bearerBaseURL), (ctx, _next) =>
+      router.post(`:functionName`, functionHandler(distPath, context, bearerBaseURL), (ctx, _next) =>
         ctx.ok(ctx.funcDatum)
       )
 
@@ -144,8 +158,7 @@ const functionHandler = (distPath: string, devFunctionsContext, bearerBaseURL: s
       const datum = await func.init()(
         {
           context: {
-            ...devFunctionsContext.global,
-            ...devFunctionsContext[ctx.params.functionName],
+            ...devFunctionsContext,
             bearerBaseURL,
             ...userDefinedData,
             isBackend

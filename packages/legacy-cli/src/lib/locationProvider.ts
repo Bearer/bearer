@@ -68,4 +68,8 @@ export default class LocationProvider {
   get authConfigPath(): string {
     return this.integrationRootResourcePath('auth.config.json')
   }
+
+  get localConfigPath(): string {
+    return this.integrationRootResourcePath('local.config.jsonc')
+  }
 }
