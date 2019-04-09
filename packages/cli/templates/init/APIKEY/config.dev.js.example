@@ -1,4 +1,0 @@
-module.exports = {
-  global: { authAccess: { apiKey: 'CHANGE_ME' } },
-  // FunctionName: { customField: 'Custom Value that will be added to the context' }
-}
