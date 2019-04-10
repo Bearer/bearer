@@ -2,7 +2,7 @@ import { Config } from '@stencil/core'
 const { plugins } = require('@bearer/core/lib/plugins')
 
 export const config: Config = {
-  namespace: process.env.BEARER_INTEGRATION_ID,
+  namespace: 'bearer-' + process.env.BEARER_INTEGRATION_ID,
   enableCache: false,
   copy: [
     {
