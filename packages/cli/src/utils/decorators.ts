@@ -49,11 +49,14 @@ export function RequireIntegrationFolder() {
 }
 
 // tslint:disable-next-line:function-name
-export function RequireLinkedIntegration() {
+export function RequireLinkedIntegration(prompt = true) {
   return function(_target: any, _propertyKey: string | symbol, descriptor: PropertyDescriptor) {
     const originalMethod = descriptor.value
     descriptor.value = async function(this: TCommand) {
       if (!this.bearerConfig.hasIntegrationLinked) {
+        if (!prompt) {
+          this.error('Can not run this command, please run link command before')
+        }
         const { choice } = await this.inquirer.prompt([
           {
             name: 'choice',

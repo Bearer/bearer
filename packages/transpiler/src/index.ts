@@ -46,6 +46,8 @@ export type TranpilerOptions = {
   verbose?: boolean
   tagNamePrefix?: string
   tagNameSuffix?: string
+  failFast: boolean
+  buid?: string
 }
 
 export default class Transpiler {
@@ -58,7 +60,7 @@ export default class Transpiler {
         InputDecoratorModifier({ verbose, metadata: this.metadata }),
         OutputDecoratorModifier({ verbose, metadata: this.metadata }),
         ReplaceFunctionDecorators({ verbose, metadata: this.metadata }),
-        BearerIntegrationIdInjector({ verbose, metadata: this.metadata }),
+        BearerIntegrationIdInjector({ verbose, metadata: this.metadata, buid: this.buid }),
         PropBearerContextInjector({ verbose, metadata: this.metadata }),
         BearerStateInjector({ verbose, metadata: this.metadata }),
         NavigatorScreenTransformer({ verbose, metadata: this.metadata }),
@@ -99,16 +101,17 @@ export default class Transpiler {
   generator!: any
   private service: ts.LanguageService
   private rootFileNames: string[] = []
-  private subscribers: ts.MapLike<(() => void)[]> = {}
+  private subscribers: ts.MapLike<((data: any) => void)[]> = {}
 
   private readonly ROOT_DIRECTORY
   private watchFiles = true
   private buildFolder = '.bearer/views'
   private srcFolder = 'views'
   private verbose = true
+  private failFast = false
   private files: ts.MapLike<{ version: number }> = {}
   private metadata: Metadata
-
+  private buid?: string
   private compilerOptions: ts.CompilerOptions = {
     module: ts.ModuleKind.CommonJS
   }
@@ -208,7 +211,7 @@ export default class Transpiler {
     })
   }
 
-  on(event: string, callback: () => void) {
+  on(event: string, callback: (data: any) => void) {
     this.subscribers[event] = this.subscribers[event] || []
     this.subscribers[event].push(callback)
   }
@@ -227,6 +230,9 @@ export default class Transpiler {
       }
     } catch (e) {
       logger('getEmitOutput failed for:\n %s \n %O \n %s', fileName, e.stack, e.message)
+      if (this.failFast) {
+        this.trigger('ERROR', { error: e })
+      }
     }
   }
 
@@ -247,10 +253,10 @@ export default class Transpiler {
     })
   }
 
-  private trigger = (eventName: string) => {
+  private trigger = (eventName: string, data: any = {}) => {
     const subscribers = this.subscribers[eventName] || []
     subscribers.forEach(callback => {
-      callback()
+      callback(data)
     })
   }
 }

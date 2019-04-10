@@ -45,7 +45,6 @@ export type AuthConfig = {
 
 export type IntegrationBuildEnv = {
   BEARER_INTEGRATION_ID: string
-  BEARER_INTEGRATION_TAG_NAME: string
   BEARER_INTEGRATION_HOST: string
   BEARER_AUTHORIZATION_HOST: string
   CDN_HOST: string

@@ -28,10 +28,11 @@ export function retrieveIntegrationId(): string {
   return process.env[Env.BEARER_INTEGRATION_ID]
 }
 
-export default function componentTransformer({  }: TransformerOptions = {}): ts.TransformerFactory<ts.SourceFile> {
+export default function componentTransformer({
+  buid
+}: TransformerOptions & { buid?: string } = {}): ts.TransformerFactory<ts.SourceFile> {
   return transformContext => {
-    const integrationId = retrieveIntegrationId()
-
+    const integrationId = retrieveIntegrationId() || buid
     function visit(node: ts.Node): ts.VisitResult<ts.Node> {
       // TODO: filter components which really need it
       if (shouldInject(node)) {

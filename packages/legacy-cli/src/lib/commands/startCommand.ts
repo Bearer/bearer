@@ -110,7 +110,6 @@ export const start = (emitter, config, locator: Locator) => async ({ open, insta
     // Build env for sub commands
     const envVariables: NodeJS.ProcessEnv = {
       ...process.env,
-      BEARER_INTEGRATION_TAG_NAME: 'localhost',
       BEARER_INTEGRATION_ID: buid,
       BEARER_INTEGRATION_HOST: integrationHost,
       BEARER_AUTHORIZATION_HOST: integrationHost

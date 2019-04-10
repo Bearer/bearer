@@ -8,7 +8,7 @@ import * as path from 'path'
 import BaseCommand from '../../base-command'
 import installDependencies from '../../tasks/install-dependencies'
 
-import { RequireIntegrationFolder, skipIfNoViews } from '../../utils/decorators'
+import { RequireIntegrationFolder, skipIfNoViews, RequireLinkedIntegration } from '../../utils/decorators'
 
 const skipInstall = 'skip-install'
 
@@ -24,6 +24,7 @@ export default class BuildViews extends BaseCommand {
 
   @skipIfNoViews()
   @RequireIntegrationFolder()
+  @RequireLinkedIntegration(false)
   async run() {
     const { flags } = this.parse(BuildViews)
     const tasks: Listr.ListrTask[] = [
@@ -64,7 +65,11 @@ export default class BuildViews extends BaseCommand {
         this.bearerConfig.bearerUid,
         '--no-process',
         '--build',
-        true
+        true,
+        '--fail-fast',
+        true,
+        '--buid',
+        this.bearerConfig.bearerUid
       ])
     } catch (e) {
       this.error(e)

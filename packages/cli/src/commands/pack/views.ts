@@ -5,7 +5,6 @@ import BaseCommand from '../../base-command'
 import { IntegrationBuildEnv } from '../../types'
 import { RequireIntegrationFolder, skipIfNoViews } from '../../utils/decorators'
 
-const integrationId = 'integration-id'
 const buid = 'buid'
 const cdnHost = 'cdn-host'
 
@@ -17,10 +16,6 @@ export default class PackViews extends BaseCommand {
     [buid]: flags.string({
       required: true,
       description: 'Integration unique identifier'
-    }),
-    [integrationId]: flags.string({
-      required: true,
-      description: 'stencil integration namespace'
     }),
     [cdnHost]: flags.string({
       required: true,
@@ -37,7 +32,6 @@ export default class PackViews extends BaseCommand {
     const env: IntegrationBuildEnv = {
       ...process.env,
       BEARER_INTEGRATION_ID: flags[buid],
-      BEARER_INTEGRATION_TAG_NAME: flags[integrationId],
       BEARER_INTEGRATION_HOST: config.IntegrationServiceHost,
       BEARER_AUTHORIZATION_HOST: config.IntegrationServiceHost,
       CDN_HOST: flags[cdnHost]
@@ -65,7 +59,7 @@ export default class PackViews extends BaseCommand {
 
       build.on('close', code => {
         if (code === 0) {
-          resolve()
+          resolve(this.locator.buildViewsDir)
         } else {
           reject(new Error("Can't build integration views. please check logs"))
         }
