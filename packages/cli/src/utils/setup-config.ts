@@ -67,9 +67,7 @@ export class Config {
 
   setIntegrationConfig = (config: { integrationTitle: string; integrationId: string }) => {
     const { integrationTitle, integrationId } = config
-    if (this.rootPath) {
-      fs.writeFileSync(this.integrationRc, ini.stringify({ integrationTitle, integrationId }))
-    }
+    fs.writeFileSync(this.integrationRc, ini.stringify({ integrationTitle, integrationId }))
   }
 
   storeToken = async (token: TAccessToken) => {
