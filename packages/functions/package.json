@@ -1,6 +1,6 @@
 {
   "name": "@bearer/functions",
-  "version": "0.110.0",
+  "version": "0.111.0",
   "description": "Bearer Functions",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -21,8 +21,8 @@
     "test:ci": "jest --coverage --runInBand --colors"
   },
   "dependencies": {
-    "@bearer/logger": "^0.110.0",
-    "@bearer/x-ray": "^0.110.0",
+    "@bearer/logger": "^0.111.0",
+    "@bearer/x-ray": "^0.111.0",
     "axios": "^0.18.0"
   },
   "devDependencies": {

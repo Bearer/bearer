@@ -1,6 +1,6 @@
 {
   "name": "create-bearer",
-  "version": "0.110.0",
+  "version": "0.111.0",
   "description": "Quickly create a new Bearer integration",
   "main": "lib/index.js",
   "repository": "Bearer/bearer",
@@ -25,6 +25,6 @@
     "static/"
   ],
   "dependencies": {
-    "@bearer/cli": "^0.110.0"
+    "@bearer/cli": "^0.111.0"
   }
 }
