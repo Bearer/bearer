@@ -2,7 +2,6 @@
 
 exports[`Link does not fail :-P  1`] = `
 "integrationTitle=undefined
-orgId=123
-integrationId=integration-id
+integrationId=123-integration-id
 "
 `;
