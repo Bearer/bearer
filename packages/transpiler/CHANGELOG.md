@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.112.0](https://github.com/Bearer/bearer/compare/v0.110.0...v0.112.0) (2019-04-11)
+
+
+### Bug Fixes
+
+* **cli:** fail fast on build ([60cc314](https://github.com/Bearer/bearer/commit/60cc314))
+* **transpiler:** optional fail fast ([ba4db1d](https://github.com/Bearer/bearer/commit/ba4db1d))
+
+
+
+
+
 # [0.111.0](https://github.com/Bearer/bearer/compare/v0.110.0...v0.111.0) (2019-04-11)
 
 

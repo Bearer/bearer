@@ -1,7 +1,7 @@
 {
   "name": "@bearer/react",
   "private": false,
-  "version": "0.111.0",
+  "version": "0.112.0",
   "description": "React tooling for bearer.sh components",
   "keywords": [
     "react",
@@ -21,7 +21,7 @@
     "lib/"
   ],
   "devDependencies": {
-    "@bearer/js": "^0.111.0",
+    "@bearer/js": "^0.112.0",
     "@types/jest": "^24.0.11",
     "@types/lodash.kebabcase": "^4.1.6",
     "@types/react": "^16.7.17",

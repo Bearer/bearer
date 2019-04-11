@@ -1,6 +1,6 @@
 {
   "name": "@bearer/core",
-  "version": "0.111.0",
+  "version": "0.112.0",
   "description": "Bearer Core",
   "main": "lib/main.js",
   "types": "lib/index.d.ts",
@@ -38,7 +38,7 @@
     ]
   },
   "devDependencies": {
-    "@bearer/js": "^0.111.0",
+    "@bearer/js": "^0.112.0",
     "@types/fbemitter": "^2.0.32",
     "@types/jest": "^24.0.11",
     "@types/lodash.get": "^4.4.6",
@@ -66,8 +66,8 @@
     "typescript": "^3.4.1"
   },
   "dependencies": {
-    "@bearer/logger": "^0.111.0",
-    "@bearer/types": "^0.111.0",
+    "@bearer/logger": "^0.112.0",
+    "@bearer/types": "^0.112.0",
     "@stencil/core": "0.11.2",
     "fbemitter": "^2.1.1",
     "lodash.get": "^4.4.2",
