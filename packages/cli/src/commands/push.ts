@@ -24,10 +24,10 @@ export default class Push extends BaseCommand {
   static args = []
 
   @RequireIntegrationFolder()
-  @ensureFreshToken()
   @RequireLinkedIntegration()
   async run() {
     const { Username, Password } = await this.fetchLoginInformation()
+    this.debug({ Username, Password })
     this.serviceClient = serviceClient(this.constants.IntegrationServiceUrl)
     const data = await this.serviceClient.login({ Username, Password })
     this.debug('auth info : %j', data)
@@ -148,14 +148,8 @@ export default class Push extends BaseCommand {
     }
   }
 
-  fetchLoginInformation = async () => {
-    const { BEARER_TOKEN, BEARER_EMAIL } = process.env
-    if (BEARER_TOKEN && BEARER_EMAIL) {
-      return {
-        Username: BEARER_EMAIL,
-        Password: BEARER_TOKEN
-      }
-    }
+  @ensureFreshToken()
+  async fetchCredentials() {
     const { data } = await this.devPortalClient.request<{
       currentUser: { email: string; infrastructure: { password: string } }
     }>({
@@ -165,6 +159,19 @@ export default class Push extends BaseCommand {
       return { Username: data.data.currentUser.email, Password: data.data.currentUser.infrastructure.password }
     }
     throw 'Fetch credentials error'
+  }
+
+  fetchLoginInformation = async () => {
+    const { BEARER_TOKEN, BEARER_EMAIL } = process.env
+    if (BEARER_TOKEN && BEARER_EMAIL) {
+      return {
+        Username: BEARER_EMAIL,
+        Password: BEARER_TOKEN
+      }
+    }
+    const data = await this.fetchCredentials()
+    console.log('[BEARER]', 'fetch', data)
+    return await this.fetchCredentials()
   }
 }
 

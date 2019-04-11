@@ -127,8 +127,7 @@ export function ensureFreshToken() {
           this.exit(0)
         }
       }
-      await originalMethod.apply(this, arguments)
-      return descriptor
+      return await originalMethod.apply(this, arguments)
     }
     return descriptor
   }
