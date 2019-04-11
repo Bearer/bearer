@@ -29,7 +29,11 @@ export abstract class FetchData<ReturnedData = any, TError = any, AuthContext = 
       if (requiresBackend && !event.context.isBackend) {
         return { error: BACKEND_ONLY_ERROR }
       }
-      captureHttps(http, event)
+
+      const updatedEvent = Object.assign({}, event)
+      updatedEvent.context.integrationUuid = event.context.buid
+
+      captureHttps(http, updatedEvent)
 
       const functionEvent: d.TFetchActionEvent = {
         ...eventAsActionParams(event),
