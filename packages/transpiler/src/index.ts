@@ -46,7 +46,7 @@ export type TranpilerOptions = {
   verbose?: boolean
   tagNamePrefix?: string
   tagNameSuffix?: string
-  failFast: boolean
+  failFast?: boolean
   buid?: string
 }
 
