@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.112.0-alpha.0](https://github.com/Bearer/bearer/compare/v0.110.0...v0.112.0-alpha.0) (2019-04-11)
+
+
+### Bug Fixes
+
+* **cli:** fail fast on build ([60cc314](https://github.com/Bearer/bearer/commit/60cc314))
+* add missing dependency ([09f928a](https://github.com/Bearer/bearer/commit/09f928a))
+* **cli:** prefix namespace ([ca43e43](https://github.com/Bearer/bearer/commit/ca43e43))
+* **cli:** rely on auth.config.json instead of a hidden file ([8850a2a](https://github.com/Bearer/bearer/commit/8850a2a))
+* **cli:** rely on linked integration ([35811bb](https://github.com/Bearer/bearer/commit/35811bb))
+* **cli:** remove unnecessary check ([4d7b41d](https://github.com/Bearer/bearer/commit/4d7b41d))
+
+
+### Features
+
+* **cli:** allow force start on random port ([#630](https://github.com/Bearer/bearer/issues/630)) ([bc5a28b](https://github.com/Bearer/bearer/commit/bc5a28b))
+
+
+
+
+
 # [0.111.0](https://github.com/Bearer/bearer/compare/v0.110.0...v0.111.0) (2019-04-11)
 
 

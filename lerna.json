@@ -2,7 +2,7 @@
   "npmClient": "yarn",
   "useWorkspaces": true,
   "packages": ["packages/*"],
-  "version": "0.111.0",
+  "version": "0.112.0-alpha.0",
   "command": {
     "version": {
       "npmClient": "npm"
