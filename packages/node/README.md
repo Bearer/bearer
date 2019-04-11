@@ -8,9 +8,9 @@
 
 ```tsx
 // somewhere in your application, we'll use an express route here
-import clientFactory from '@bearer/node/lib/client'
+import bearer from '@bearer/node'
 
-const bearerClient = clientFactory(process.env.BEARER_API_KEY)
+const bearerClient = bearer(process.env.BEARER_API_KEY)
 // You can pass query or body parameter depending on Function requirement
 const options = { query: { status: 'open' } }
 

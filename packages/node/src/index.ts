@@ -1,7 +1,3 @@
-import client from './client'
-import middleware from './express'
+import { default as client } from './client'
 
-export default {
-  client,
-  middleware
-}
+export default client
