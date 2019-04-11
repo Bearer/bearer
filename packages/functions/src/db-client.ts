@@ -29,7 +29,7 @@ export class DBClient {
       return Promise.resolve({ Item: { referenceId, ReadAllowed: false } })
     }
     try {
-      const data = await this.client.get<TPersistedData<SavedData>>(`api/v2/items/${referenceId}`, {
+      const data = await this.client.get<TPersistedData<SavedData>>(`api/v4/items/${referenceId}`, {
         params: { signature: this.signature }
       })
       return data.data
@@ -47,7 +47,7 @@ export class DBClient {
     }
     try {
       await this.client.put<TPersistedData<InputData>>(
-        `api/v2/items/${referenceId}`,
+        `api/v4/items/${referenceId}`,
         { data, referenceId, ReadAllowed: true },
         { params: { signature: this.signature } }
       )

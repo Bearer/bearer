@@ -107,15 +107,19 @@ export default () => {
   }
   router.get('v1/items/:referenceId', getItem)
   router.get('v2/items/:referenceId', getItem)
+  router.get('v4/items/:referenceId', getItem)
 
   router.delete('v1/items/:referenceId', deleteItem)
   router.delete('v2/items/:referenceId', deleteItem)
+  router.delete('v4/items/:referenceId', deleteItem)
 
   router.put('v1/items/:referenceId', putItem)
   router.put('v2/items/:referenceId', putItem)
+  router.put('v4/items/:referenceId', putItem)
 
   router.post('v1/items', postItem)
   router.post('v2/items', postItem)
+  router.post('v4/items', postItem)
 
   return router
 }

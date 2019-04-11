@@ -41,7 +41,7 @@ describe('db-client', () => {
           // @ts-ignore
           instance.client = { get }
           const result = await instance.getData('a-refe')
-          expect(get).toBeCalledWith('api/v2/items/a-refe', { params: { signature: 'asdasd' } })
+          expect(get).toBeCalledWith('api/v4/items/a-refe', { params: { signature: 'asdasd' } })
           expect(result).toEqual({ Item: { something: true } })
         })
 
@@ -54,7 +54,7 @@ describe('db-client', () => {
           instance.client = { get }
           const result = await instance.getData('a-refe')
 
-          expect(get).toBeCalledWith('api/v2/items/a-refe', { params: { signature: 'asdasd' } })
+          expect(get).toBeCalledWith('api/v4/items/a-refe', { params: { signature: 'asdasd' } })
           expect(result).toEqual({ Item: { ReadAllowed: false, referenceId: 'a-refe' } })
         })
 
@@ -69,7 +69,7 @@ describe('db-client', () => {
 
           expect.assertions(2)
 
-          expect(get).toBeCalledWith('api/v2/items/a-refe', { params: { signature: 'asdasd' } })
+          expect(get).toBeCalledWith('api/v4/items/a-refe', { params: { signature: 'asdasd' } })
           return expect(instance.getData('a-refe')).rejects.toThrowError('Error while retrieving data')
         })
       })
@@ -100,7 +100,7 @@ describe('db-client', () => {
           const result = await instance.upsertData('a-reference', { someData: 'ok' })
 
           expect(put).toBeCalledWith(
-            'api/v2/items/a-reference',
+            'api/v4/items/a-reference',
             { data: { someData: 'ok' }, ReadAllowed: true, referenceId: 'a-reference' },
             { params: { signature: 'asdasd' } }
           )
