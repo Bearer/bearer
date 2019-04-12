@@ -12,7 +12,7 @@ import { IntegrationClient } from '../utils/integration-client'
 import { AUTH_CONFIG_FILENAME } from '../utils/locator'
 
 export default class Push extends BaseCommand {
-  static description = 'deploy Integration to Bearer'
+  static description = 'deploy integration to Bearer'
   private integrationClient!: IntegrationClient
   // TODO: fix typing
   private serviceClient!: any
