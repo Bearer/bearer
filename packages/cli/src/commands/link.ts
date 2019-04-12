@@ -3,7 +3,7 @@ import { RequireIntegrationFolder } from '../utils/decorators'
 import { linkIntegration } from '../utils/commands'
 
 export default class Link extends BaseCommand {
-  static description = 'link to remote Bearer Integration'
+  static description = 'link to remote Bearer integration'
 
   static flags = {
     ...BaseCommand.flags
