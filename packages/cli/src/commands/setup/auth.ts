@@ -16,7 +16,7 @@ import { BEARER_AUTH_PORT } from '../../utils/constants'
 type Event = 'success' | 'error' | 'shutdown'
 
 export default class SetupAuth extends BaseCommand {
-  static description = 'setup local credentials'
+  static description = 'setup API credentials for local development'
 
   static flags = {
     ...BaseCommand.flags
