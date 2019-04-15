@@ -56,12 +56,13 @@ export default class Invoke extends BaseCommand {
 
     this.debug('calling')
     process.env.bearerBaseURL = 'https://test.bearer.sh'
+
     const datum = await func.init()({
       body,
       context: {
         ...context,
         bearerBaseURL,
-        isBackend: true
+        isBackend: true // TODO: flag option
       }
     })
     // print output
@@ -99,6 +100,7 @@ export default class Invoke extends BaseCommand {
       }
     } else {
       this.debug('no local config found')
+      context.authAccess = {}
     }
 
     return context
