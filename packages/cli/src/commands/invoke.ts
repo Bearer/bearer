@@ -3,6 +3,9 @@ import { flags } from '@oclif/command'
 import * as path from 'path'
 import * as fs from 'fs'
 import * as tsNode from 'ts-node'
+import { parse } from 'jsonc-parser'
+import { TAuthContext } from '@bearer/functions/lib/declaration'
+
 import BaseCommand from '../base-command'
 
 export default class Invoke extends BaseCommand {
@@ -45,11 +48,10 @@ export default class Invoke extends BaseCommand {
     const body = flags.data || (flags.file && this.getFileContent(flags.file)) || '{}'
     this.debug('Injected body, %j', body)
 
-    const config = {} as any
+    const context = this.getFunctionContext()
     // injected within the function (let's remove it?)
     const bearerBaseURL = 'ok'
-    // TODO: access sqlite database and load defined data from params sent
-    const userDefinedData = {}
+
     this.ensureJson(body)
 
     this.debug('calling')
@@ -57,10 +59,9 @@ export default class Invoke extends BaseCommand {
     const datum = await func.init()({
       body,
       context: {
-        ...config.global,
-        ...config[funcName],
+        ...context,
         bearerBaseURL,
-        ...userDefinedData
+        isBackend: true
       }
     })
     // print output
@@ -83,5 +84,23 @@ export default class Invoke extends BaseCommand {
         : this.error(`File not found: ${location}`)
     }
     return undefined
+  }
+
+  getFunctionContext() {
+    const localConfig = this.locator.localConfigPath
+    const context = {} as TAuthContext
+    if (fs.existsSync(localConfig)) {
+      const rawConfig = fs.readFileSync(localConfig, { encoding: 'utf8' })
+      const parsed = parse(rawConfig)
+      const { setup } = parsed || { setup: null }
+      this.debug('local config: %j', parsed)
+      if (setup && setup.auth) {
+        context.authAccess = setup.auth
+      }
+    } else {
+      this.debug('no local config found')
+    }
+
+    return context
   }
 }
