@@ -3,8 +3,11 @@ import { flags } from '@oclif/command'
 import * as path from 'path'
 import * as fs from 'fs'
 import * as tsNode from 'ts-node'
+import * as http from 'http'
+
 import { parse } from 'jsonc-parser'
 import { TAuthContext } from '@bearer/functions/lib/declaration'
+import { TPersistedData } from '@bearer/functions/lib/db-client'
 
 import BaseCommand from '../base-command'
 
@@ -55,7 +58,57 @@ export default class Invoke extends BaseCommand {
     this.ensureJson(body)
 
     this.debug('calling')
-    process.env.bearerBaseURL = 'https://test.bearer.sh'
+    process.env.bearerBaseURL = 'http://localhost:5678'
+    this.debug('starting')
+    const a: any = {}
+    const server: http.Server = await new Promise((resolve, reject) => {
+      const _server = http
+        .createServer((request, response) => {
+          this.debug('Incoming request')
+          let body = ''
+          request.on('data', chunk => {
+            body += chunk
+          })
+          request.on('end', () => {
+            request.method
+            try {
+              // const data: { code: string } = JSON.parse(body)
+              this.debug('method: %s body: %s', request.method, body || '{}')
+              response.setHeader('Connection', 'close')
+
+              switch (request.method) {
+                case 'GET': {
+                  const referenceId = request.url!.split('/').reverse()[0]
+                  const existingData = a[referenceId]
+                  this.debug('lookup id: %s data:%j', referenceId, existingData)
+                  const payload: TPersistedData = { Item: { referenceId, ReadAllowed: true } }
+                  if (existingData) {
+                    payload.Item.data = existingData
+                  }
+                  this.debug('GET sending %j', payload)
+                  response.write(JSON.stringify(payload))
+                  break
+                }
+                case 'POST':
+                case 'PUT': {
+                  const { referenceId, data } = JSON.parse(body)
+                  const returnedData: TPersistedData = { Item: { ...data } }
+                  a[referenceId] = data
+                  this.debug('perisisting data %j', data)
+                  response.write(JSON.stringify(returnedData))
+                }
+              }
+            } catch (e) {
+              this.debug('error:', e)
+            }
+            response.end()
+          })
+        })
+        .listen(5678, () => {
+          this.debug('started')
+          resolve(_server)
+        })
+    })
 
     const datum = await func.init()({
       body,
@@ -65,6 +118,7 @@ export default class Invoke extends BaseCommand {
         isBackend: true // TODO: flag option
       }
     })
+    server.close()
     // print output
     console.log(JSON.stringify(datum, null, 2))
   }

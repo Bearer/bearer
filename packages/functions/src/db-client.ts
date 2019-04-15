@@ -2,7 +2,7 @@ import axios, { AxiosInstance } from 'axios'
 class FetchDataError extends Error {}
 class SaveDataError extends Error {}
 
-type TPersistedData<T extends {} = { [key: string]: any }> = {
+export type TPersistedData<T extends {} = { [key: string]: any }> = {
   Item: { referenceId: string; data?: T; ReadAllowed: boolean }
 }
 
