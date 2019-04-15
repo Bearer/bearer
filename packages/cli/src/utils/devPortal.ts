@@ -21,7 +21,7 @@ export const devPortalClient = (command: BaseCommand) => {
       if (token) {
         return instance.post<{ data?: DataReturned }>('', data, {
           headers: {
-            Authorization: `Bearer ${token.id_token}`
+            Authorization: `Bearer ${token.access_token}`
           }
         })
       }
@@ -30,7 +30,7 @@ export const devPortalClient = (command: BaseCommand) => {
   }
 }
 
-class UnauthorizedError extends Error {
+export class UnauthorizedError extends Error {
   constructor() {
     super('Unauthorized request')
   }
