@@ -21,7 +21,6 @@ export default class Invoke extends BaseCommand {
     ...BaseCommand.flags,
     data: flags.string({ char: 'd' }),
     file: flags.string({ char: 'f' })
-    // TODO: add arguments : allow file or daja
   }
 
   static args = [{ name: 'Function_Name', required: true }]
@@ -40,29 +39,24 @@ export default class Invoke extends BaseCommand {
     } catch (e) {
       const funcName = args.Function_Name
       if (e.code === 'MODULE_NOT_FOUND') {
-        // TODO: add information, check file presence or generator
         this.error(`"${funcName}" function does not exist. `)
       }
       this.error(e.message)
     }
 
     this.debug('required')
-    // inject auth data
-    // use body
-    // inject required data
 
     const body = flags.data || (flags.file && this.getFileContent(flags.file)) || '{}'
     this.debug('Injected body, %j', body)
 
     const context = this.getFunctionContext()
-    // injected within the function (let's remove it?)
-    const bearerBaseURL = 'ok'
 
     this.ensureJson(body)
 
     this.debug('calling')
     const port = await getPort()
-    process.env.bearerBaseURL = `http://localhost:${port}`
+    const bearerBaseURL = `http://localhost:${port}`
+    process.env.bearerBaseURL = bearerBaseURL
     this.debug('starting')
     const server: http.Server = await this._startServer(port)
 
@@ -78,8 +72,8 @@ export default class Invoke extends BaseCommand {
     if (this._db) {
       this._db.destroy()
     }
-    // print output
 
+    // print output
     console.log(JSON.stringify(datum, null, 2))
   }
 
@@ -132,9 +126,9 @@ export default class Invoke extends BaseCommand {
           request.on('end', async () => {
             request.method
             try {
-              // const data: { code: string } = JSON.parse(body)
               this.debug('method: %s body: %s', request.method, body || '{}')
               response.setHeader('Connection', 'close')
+
               switch (request.method) {
                 case 'GET': {
                   const referenceId = request.url!.split('/').reverse()[0]
