@@ -3,13 +3,10 @@ import { flags } from '@oclif/command'
 import * as path from 'path'
 import * as fs from 'fs'
 import * as tsNode from 'ts-node'
-import * as cosmiconfig from 'cosmiconfig'
 import BaseCommand from '../base-command'
 
-  const LOCAL_DEV_CONFIGURATION = 'dev'
-  
-  export default class Invoke extends BaseCommand {
-    static description = 'invoke function locally'
+export default class Invoke extends BaseCommand {
+  static description = 'invoke function locally'
 
   static flags = {
     ...BaseCommand.flags,
@@ -39,10 +36,12 @@ import BaseCommand from '../base-command'
       this.error(e.message)
     }
 
-    // manually injected data
-    const { config = {} }: TDevConfig = (await this.devConfig.search(this.locator.integrationRoot)) || {}
-    // data sent to the event
+    // inject auth data
+    // use body
+    // inject required data
+
     const body = flags.data || (flags.file && this.getFilecontent(flags.file)) || '{}'
+    const config = {} as any
     // injected within the function (let's remove it?)
     const bearerBaseURL = 'ok'
     // TODO: access sqlite database and load defined data from params sent
@@ -62,10 +61,12 @@ import BaseCommand from '../base-command'
     console.log(JSON.stringify(datum, null, 2))
   }
 
-  get devConfig() {
-    return cosmiconfig(LOCAL_DEV_CONFIGURATION, {
-      searchPlaces: [`config.${LOCAL_DEV_CONFIGURATION}.js`]
-    })
+  ensureJson = (maybeJson: string) => {
+    try {
+      JSON.parse(maybeJson)
+    } catch (e) {
+      this.error('Invalid JSON provided')
+    }
   }
 
   getFilecontent = (filePath: string): string | undefined => {
@@ -77,17 +78,4 @@ import BaseCommand from '../base-command'
     }
     return undefined
   }
-
-  ensureJson = (maybeJson: string) => {
-    try {
-      JSON.parse(maybeJson)
-    } catch (e) {
-      this.error('Invalid JSON provided')
-    }
-  }
-}
-
-type TDevConfig = {
-  global?: any
-  [key: string]: any
 }
