@@ -41,6 +41,7 @@ exports[`with views APIKEY generates an integration without any prompt and APIKE
   \\"module\\": \\"dist/esm/index.js\\",
   \\"collection\\": \\"dist/collection/collection-manifest.json\\",
   \\"scripts\\": {
+    \\"bearer\\": \\"bearer\\",
     \\"push\\": \\"bearer push\\",
     \\"start\\": \\"bearer start\\",
     \\"invoke\\": \\"bearer invoke\\",
@@ -105,6 +106,7 @@ exports[`with views BASIC generates an integration without any prompt and BASIC 
   \\"module\\": \\"dist/esm/index.js\\",
   \\"collection\\": \\"dist/collection/collection-manifest.json\\",
   \\"scripts\\": {
+    \\"bearer\\": \\"bearer\\",
     \\"push\\": \\"bearer push\\",
     \\"start\\": \\"bearer start\\",
     \\"invoke\\": \\"bearer invoke\\",
@@ -169,6 +171,7 @@ exports[`with views CUSTOM generates an integration without any prompt and CUSTO
   \\"module\\": \\"dist/esm/index.js\\",
   \\"collection\\": \\"dist/collection/collection-manifest.json\\",
   \\"scripts\\": {
+    \\"bearer\\": \\"bearer\\",
     \\"push\\": \\"bearer push\\",
     \\"start\\": \\"bearer start\\",
     \\"invoke\\": \\"bearer invoke\\",
@@ -233,6 +236,7 @@ exports[`with views NONE generates an integration without any prompt and NONE 3`
   \\"module\\": \\"dist/esm/index.js\\",
   \\"collection\\": \\"dist/collection/collection-manifest.json\\",
   \\"scripts\\": {
+    \\"bearer\\": \\"bearer\\",
     \\"push\\": \\"bearer push\\",
     \\"start\\": \\"bearer start\\",
     \\"invoke\\": \\"bearer invoke\\",
@@ -307,6 +311,7 @@ exports[`with views OAUTH1 generates an integration without any prompt and OAUTH
   \\"module\\": \\"dist/esm/index.js\\",
   \\"collection\\": \\"dist/collection/collection-manifest.json\\",
   \\"scripts\\": {
+    \\"bearer\\": \\"bearer\\",
     \\"push\\": \\"bearer push\\",
     \\"start\\": \\"bearer start\\",
     \\"invoke\\": \\"bearer invoke\\",
@@ -378,6 +383,7 @@ exports[`with views OAUTH2 generates an integration without any prompt and OAUTH
   \\"module\\": \\"dist/esm/index.js\\",
   \\"collection\\": \\"dist/collection/collection-manifest.json\\",
   \\"scripts\\": {
+    \\"bearer\\": \\"bearer\\",
     \\"push\\": \\"bearer push\\",
     \\"start\\": \\"bearer start\\",
     \\"invoke\\": \\"bearer invoke\\",
@@ -439,6 +445,7 @@ exports[`without views APIKEY generates an integration without any prompt and AP
   \\"module\\": \\"dist/esm/index.js\\",
   \\"collection\\": \\"dist/collection/collection-manifest.json\\",
   \\"scripts\\": {
+    \\"bearer\\": \\"bearer\\",
     \\"push\\": \\"bearer push\\",
     \\"start\\": \\"bearer start\\",
     \\"invoke\\": \\"bearer invoke\\",
@@ -495,6 +502,7 @@ exports[`without views BASIC generates an integration without any prompt and BAS
   \\"module\\": \\"dist/esm/index.js\\",
   \\"collection\\": \\"dist/collection/collection-manifest.json\\",
   \\"scripts\\": {
+    \\"bearer\\": \\"bearer\\",
     \\"push\\": \\"bearer push\\",
     \\"start\\": \\"bearer start\\",
     \\"invoke\\": \\"bearer invoke\\",
@@ -551,6 +559,7 @@ exports[`without views CUSTOM generates an integration without any prompt and CU
   \\"module\\": \\"dist/esm/index.js\\",
   \\"collection\\": \\"dist/collection/collection-manifest.json\\",
   \\"scripts\\": {
+    \\"bearer\\": \\"bearer\\",
     \\"push\\": \\"bearer push\\",
     \\"start\\": \\"bearer start\\",
     \\"invoke\\": \\"bearer invoke\\",
@@ -607,6 +616,7 @@ exports[`without views NONE generates an integration without any prompt and NONE
   \\"module\\": \\"dist/esm/index.js\\",
   \\"collection\\": \\"dist/collection/collection-manifest.json\\",
   \\"scripts\\": {
+    \\"bearer\\": \\"bearer\\",
     \\"push\\": \\"bearer push\\",
     \\"start\\": \\"bearer start\\",
     \\"invoke\\": \\"bearer invoke\\",
@@ -673,6 +683,7 @@ exports[`without views OAUTH1 generates an integration without any prompt and OA
   \\"module\\": \\"dist/esm/index.js\\",
   \\"collection\\": \\"dist/collection/collection-manifest.json\\",
   \\"scripts\\": {
+    \\"bearer\\": \\"bearer\\",
     \\"push\\": \\"bearer push\\",
     \\"start\\": \\"bearer start\\",
     \\"invoke\\": \\"bearer invoke\\",
@@ -736,6 +747,7 @@ exports[`without views OAUTH2 generates an integration without any prompt and OA
   \\"module\\": \\"dist/esm/index.js\\",
   \\"collection\\": \\"dist/collection/collection-manifest.json\\",
   \\"scripts\\": {
+    \\"bearer\\": \\"bearer\\",
     \\"push\\": \\"bearer push\\",
     \\"start\\": \\"bearer start\\",
     \\"invoke\\": \\"bearer invoke\\",

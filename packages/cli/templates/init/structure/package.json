@@ -7,6 +7,7 @@
   "module": "dist/esm/index.js",
   "collection": "dist/collection/collection-manifest.json",
   "scripts": {
+    "bearer": "bearer",
     "push": "bearer push",
     "start": "bearer start",
     "invoke": "bearer invoke",
