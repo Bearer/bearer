@@ -20,10 +20,11 @@ export default class Invoke extends BaseCommand {
   async run() {
     const { args, flags } = this.parse(Invoke)
     const funcName = args.Function_Name
-    this.debug(funcName)
+    this.debug('start invoking: %j', funcName)
     tsNode.register({
       project: path.join(this.locator.srcFunctionsDir, 'tsconfig.json')
     })
+    this.debug('ts-node registered')
     let func
     try {
       func = require(path.join(this.locator.srcFunctionsDir, funcName)).default
@@ -36,10 +37,12 @@ export default class Invoke extends BaseCommand {
       this.error(e.message)
     }
 
+    this.debug('required')
     // inject auth data
     // use body
     // inject required data
 
+    this.debug('injecting data')
     const body = flags.data || (flags.file && this.getFilecontent(flags.file)) || '{}'
     const config = {} as any
     // injected within the function (let's remove it?)
@@ -48,6 +51,7 @@ export default class Invoke extends BaseCommand {
     const userDefinedData = {}
     this.ensureJson(body)
 
+    this.debug('calling')
     const datum = await func.init()({
       body,
       context: {
