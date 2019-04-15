@@ -42,8 +42,9 @@ export default class Invoke extends BaseCommand {
     // use body
     // inject required data
 
-    this.debug('injecting data')
-    const body = flags.data || (flags.file && this.getFilecontent(flags.file)) || '{}'
+    const body = flags.data || (flags.file && this.getFileContent(flags.file)) || '{}'
+    this.debug('Injected body, %j', body)
+
     const config = {} as any
     // injected within the function (let's remove it?)
     const bearerBaseURL = 'ok'
@@ -52,6 +53,7 @@ export default class Invoke extends BaseCommand {
     this.ensureJson(body)
 
     this.debug('calling')
+    process.env.bearerBaseURL = 'https://test.bearer.sh'
     const datum = await func.init()({
       body,
       context: {
@@ -73,7 +75,7 @@ export default class Invoke extends BaseCommand {
     }
   }
 
-  getFilecontent = (filePath: string): string | undefined => {
+  getFileContent = (filePath: string): string | undefined => {
     const location = path.resolve(filePath)
     if (filePath) {
       return fs.existsSync(location)
