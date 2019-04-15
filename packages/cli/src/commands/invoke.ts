@@ -1,15 +1,18 @@
 import { flags } from '@oclif/command'
 
 import * as path from 'path'
+import getPort from 'get-port'
 import * as fs from 'fs'
 import * as tsNode from 'ts-node'
 import * as http from 'http'
+import * as knex from 'knex'
 
 import { parse } from 'jsonc-parser'
 import { TAuthContext } from '@bearer/functions/lib/declaration'
 import { TPersistedData } from '@bearer/functions/lib/db-client'
 
 import BaseCommand from '../base-command'
+const filename = process.env.BEARER_LOCAL_DATABASE || ':memory:'
 
 export default class Invoke extends BaseCommand {
   static description = 'invoke function locally'
@@ -58,57 +61,10 @@ export default class Invoke extends BaseCommand {
     this.ensureJson(body)
 
     this.debug('calling')
-    process.env.bearerBaseURL = 'http://localhost:5678'
+    const port = await getPort()
+    process.env.bearerBaseURL = `http://localhost:${port}`
     this.debug('starting')
-    const a: any = {}
-    const server: http.Server = await new Promise((resolve, reject) => {
-      const _server = http
-        .createServer((request, response) => {
-          this.debug('Incoming request')
-          let body = ''
-          request.on('data', chunk => {
-            body += chunk
-          })
-          request.on('end', () => {
-            request.method
-            try {
-              // const data: { code: string } = JSON.parse(body)
-              this.debug('method: %s body: %s', request.method, body || '{}')
-              response.setHeader('Connection', 'close')
-
-              switch (request.method) {
-                case 'GET': {
-                  const referenceId = request.url!.split('/').reverse()[0]
-                  const existingData = a[referenceId]
-                  this.debug('lookup id: %s data:%j', referenceId, existingData)
-                  const payload: TPersistedData = { Item: { referenceId, ReadAllowed: true } }
-                  if (existingData) {
-                    payload.Item.data = existingData
-                  }
-                  this.debug('GET sending %j', payload)
-                  response.write(JSON.stringify(payload))
-                  break
-                }
-                case 'POST':
-                case 'PUT': {
-                  const { referenceId, data } = JSON.parse(body)
-                  const returnedData: TPersistedData = { Item: { ...data } }
-                  a[referenceId] = data
-                  this.debug('perisisting data %j', data)
-                  response.write(JSON.stringify(returnedData))
-                }
-              }
-            } catch (e) {
-              this.debug('error:', e)
-            }
-            response.end()
-          })
-        })
-        .listen(5678, () => {
-          this.debug('started')
-          resolve(_server)
-        })
-    })
+    const server: http.Server = await this._startServer(port)
 
     const datum = await func.init()({
       body,
@@ -119,7 +75,11 @@ export default class Invoke extends BaseCommand {
       }
     })
     server.close()
+    if (this._db) {
+      this._db.destroy()
+    }
     // print output
+
     console.log(JSON.stringify(datum, null, 2))
   }
 
@@ -158,5 +118,112 @@ export default class Invoke extends BaseCommand {
     }
 
     return context
+  }
+
+  _startServer = async (port: number) => {
+    return new Promise<http.Server>((resolve, reject) => {
+      const _server = http
+        .createServer((request, response) => {
+          this.debug('Incoming request')
+          let body = ''
+          request.on('data', chunk => {
+            body += chunk
+          })
+          request.on('end', async () => {
+            request.method
+            try {
+              // const data: { code: string } = JSON.parse(body)
+              this.debug('method: %s body: %s', request.method, body || '{}')
+              response.setHeader('Connection', 'close')
+              switch (request.method) {
+                case 'GET': {
+                  const referenceId = request.url!.split('/').reverse()[0]
+                  const existingData = await this.getData(referenceId)
+                  this.debug('lookup id: %s data:%j', referenceId, existingData)
+                  const payload: TPersistedData = { Item: { referenceId, ReadAllowed: true } }
+                  if (existingData) {
+                    payload.Item.data = existingData
+                  }
+                  this.debug('GET sending %j', payload)
+                  response.write(JSON.stringify(payload))
+                  break
+                }
+                case 'POST':
+                case 'PUT': {
+                  const { referenceId, data } = JSON.parse(body)
+                  await this.putData(referenceId, data)
+                  this.debug('persisting data %j', data)
+                  const returnedData: TPersistedData = { Item: { ...data } }
+                  response.write(JSON.stringify(returnedData))
+                }
+              }
+            } catch (e) {
+              this.debug('error:', e)
+            }
+            response.end()
+          })
+        })
+        .listen(port, () => {
+          this.debug('started')
+          resolve(_server)
+        })
+    })
+  }
+
+  private _db!: knex
+
+  async db(): Promise<knex.QueryInterface> {
+    if (!this._db) {
+      this._db = knex({
+        dialect: 'sqlite3',
+        connection: {
+          filename
+        },
+        pool: { min: 0 },
+        useNullAsDefault: true,
+        debug: /bearer:/.test(process.env.DEBUG || '')
+      })
+      await this._db.schema
+        .hasTable('records')
+        .then(async (exists: boolean) => {
+          if (!exists) {
+            await this._db.schema.createTable('records', (table: any) => {
+              table.index(['referenceId'], 'ref_id_idx')
+              table.string('referenceId')
+              table.text('data')
+            })
+          }
+        })
+        .catch(() =>
+          this._db.schema.createTable('records', (table: any) => {
+            table.index(['referenceId'], 'ref_id_idx')
+            table.string('referenceId')
+            table.text('data')
+          })
+        )
+    }
+    return this._db
+  }
+
+  getData = async (referenceId: string) => {
+    const db = await this.db()
+    const rows = await db
+      .table('records')
+      .select('data')
+      .where({ referenceId })
+      .limit(1)
+
+    if (rows[0] as any) {
+      return JSON.parse(rows[0].data)
+    }
+    return {}
+  }
+
+  putData = async (referenceId: string, data: any) => {
+    const db = await this.db()
+    db.table('records')
+      .where({ referenceId })
+      .delete()
+    await db.table('records').insert({ referenceId, data: JSON.stringify(data) })
   }
 }
