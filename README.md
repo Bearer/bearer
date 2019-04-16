@@ -1,15 +1,15 @@
-# Bearer
-
-The API Integration Framework
+# Bearer - The API Integration Framework
 
 <p align="center">
-  <a href="https://docs.bearer.sh">
-    <img alt="Bearer Documentation" src="https://static.bearer.sh/logo.svg" width="250">
+  <a href="https://www.bearer.sh">
+    <img alt="Bearer Documentation" src="https://bearer-hub-staging.netlify.com/static/bearer-api-integration-0fc65950490996a35829334804035862.jpg" width="500">
   </a>
 
   <p align="center">
 
-Create your account on <a href="https://www.bearer.sh/?utm_source=github&utm_campaign=repository">Bearer</a>.
+Bearer provides all of the tools to build, run and manage API
+<br/>
+<a href="https://www.bearer.sh/?utm_source=github&utm_campaign=repository">Learn more</a>
 
   </p>
 </p>
@@ -20,22 +20,49 @@ Create your account on <a href="https://www.bearer.sh/?utm_source=github&utm_cam
 [![License][license-image]][license-url]
 [![Build Status][ci-svg]][ci-url]
 
-Bearer provides all of the tools to build, run and manage API integrations.
-
-Your app, your integration, your code.
-
 <details>
   <summary><strong>Table of contents</strong></summary>
 
-- [Get Started](#getting-started)
+- [Why](#why)
+- [Installation](#installation)
+- [Quick Start](#quick-start)
+- [Documentation](#documentation)
 - [Command References](#command-references)
 - [Contributing](#contributing)
 - [License](#license)
   </details>
 
-## Getting Started
+## Why
 
-Bearer
+You should use Bearer if you want to:
+
+- Consume any API in minutes
+- Map API endpoints to your app model
+- Integrate into your code with one line
+- Deploy and Scale without fuss
+- Monitor every API call
+- Manage your integrations
+
+## Installation
+
+```bash
+# Using yarn
+yarn create bearer helloWorld
+
+# Using npm
+npm init bearer helloWorld
+
+# Using npx
+npx create-bearer helloWorld
+```
+
+## Quick Start
+
+Follow the [quick start](http://docs.bearer.sh/building-integration/quick-start) to create your first integration.
+
+## Documentation
+
+The documentation is available on the Bearer [doc center](http://docs.bearer.sh).
 
 ## Command References
 
