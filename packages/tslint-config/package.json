@@ -1,4 +1,5 @@
 {
+  "private": false,
   "name": "@bearer/tslint-config",
   "version": "0.115.0",
   "description": "TSLint config for bearer team",
@@ -7,7 +8,6 @@
   "homepage": "https://github.com/Bearer/bearer/packages/tslint-config#readme",
   "license": "MIT",
   "main": "tslint.json",
-  "private": false,
   "scripts": {
     "prepare": "echo 'nothing to do'",
     "prepack": "echo 'nothing to do'",

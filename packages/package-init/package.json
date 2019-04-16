@@ -1,4 +1,5 @@
 {
+  "private": false,
   "name": "@bearer/package-init",
   "version": "0.115.0",
   "author": "Bearer Team<engineering@bearer.sh>",

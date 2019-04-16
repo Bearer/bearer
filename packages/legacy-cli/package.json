@@ -1,4 +1,5 @@
 {
+  "private": false,
   "name": "@bearer/bearer-cli",
   "version": "0.115.0",
   "main": "lib/bin/index.js",

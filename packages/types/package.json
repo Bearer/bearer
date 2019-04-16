@@ -1,4 +1,5 @@
 {
+  "private": false,
   "name": "@bearer/types",
   "version": "0.115.0",
   "description": "Provide typing for Bearer packages",
