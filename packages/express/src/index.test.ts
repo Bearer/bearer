@@ -3,7 +3,7 @@ import { IncomingMessage } from 'http'
 import request from 'supertest'
 import Cipher from '@bearer/security'
 
-import middleware, { TWebhookHandlers } from './express'
+import middleware, { TWebhookHandlers } from '.'
 
 const SUCCESS_HANDLER = 'sponge-bob-integration-handler'
 const REJECTED_HANDLER = 'patrick-is-rejecting'

@@ -7,12 +7,11 @@
 ### Call a Bearer function
 
 ```tsx
-// somewhere in your application, we'll use an express route here
 import bearer from '@bearer/node'
 
 const bearerClient = bearer(process.env.BEARER_API_KEY)
 // You can pass query or body parameter depending on Function requirement
-const options = { query: { status: 'open' } }
+const options = { query: { status: 'open' }, someData: 'anything' }
 
 bearerClient
   .invoke('INTEGRATION_ID', 'myFunction', options)
@@ -60,39 +59,3 @@ integrationClient.invoke('other-function', options) // OK
 integrationClient.invoke('unknow-function', options) // Argument of type '"unknow-function"' is not assignable to parameter of type 'TIntegrationFunctionNames'.
 ```
 
-### Use Bearer express webhook middleware
-
-```tsx
-// your server.ts
-import express from 'express'
-import bearerWebhooks from '@bearer/node/lib/express'
-
-const app = express()
-
-// each valueS must be a fonction returning a promise
-const webhookHandlers = {
-  ['integration-name-to_handle']: req =>
-    new Promise(() => {
-      // you logic goes here
-      if (something) resolve()
-      else {
-        reject()
-      }
-    }),
-  ['with-async-await']: async req => {
-    // you logic goes here
-    // ex: console.log(req.body)
-    const reponse = await somethingYouWantToWaitFor
-    if (response.success) {
-      return whatever
-    } else {
-      throw new Error('An error occured')
-    }
-  }
-}
-// Without options
-app.use('/whaterver_path_you_want/webhhoks', bearerWebhooks(webhookHandlers))
-
-// With options
-app.use('/whaterver_path_you_want/webhhoks', bearerWebhooks(webhookHandlers), { token: 'YOU_SECRET_TOKEN' })
-```
