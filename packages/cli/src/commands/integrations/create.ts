@@ -5,6 +5,8 @@ import * as suggest from 'inquirer-prompt-suggest'
 import BaseCommand from '../../base-command'
 import { linkIntegration } from '../../utils/commands'
 import { ensureFreshToken } from '../../utils/decorators'
+import { askForString } from '../../utils/prompts'
+import * as inquirer from 'inquirer'
 
 export default class IntegrationsCreate extends BaseCommand {
   static description = 'create a new Integration'
@@ -20,7 +22,7 @@ export default class IntegrationsCreate extends BaseCommand {
   async run() {
     const { flags } = this.parse(IntegrationsCreate)
     const name = flags.name || (await this.askForName())
-    const description = flags.description || (await this.askForDescription())
+    const description = flags.description || (await askForString('Description (optional)'))
 
     try {
       const { data } = await this.devPortalClient.request<CreateIntegration>({
@@ -53,19 +55,16 @@ export default class IntegrationsCreate extends BaseCommand {
   }
 
   async askForName(): Promise<string> {
-    this.inquirer.registerPrompt('suggest', suggest)
+    inquirer.registerPrompt('suggest', suggest)
     const suggestions = Array.from(Array(30).keys()).map(randomName)
     this.debug('%j', suggestions)
-    return this.askForString('Integration name', {
+    return askForString('Integration name', {
       suggestions,
       validate: (input: string) => {
         return input.length > 0
       },
       type: 'suggest'
     } as any)
-  }
-  async askForDescription(): Promise<string> {
-    return this.askForString('Description (optional)')
   }
 }
 

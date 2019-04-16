@@ -1,6 +1,6 @@
 import axios from 'axios'
 import cliUx from 'cli-ux'
-
+import * as inquirer from 'inquirer'
 import Command from '../base-command'
 
 import Login from '../commands/login'
@@ -58,7 +58,7 @@ export function RequireLinkedIntegration(prompt = true) {
         if (!prompt) {
           this.error('Can not run this command, please run link command before')
         }
-        const { choice } = await this.inquirer.prompt([
+        const { choice } = await inquirer.prompt([
           {
             name: 'choice',
             message: "Your integration isn't linked, what would you like to do?",
@@ -114,7 +114,7 @@ export function ensureFreshToken() {
       } else {
         const error = this.colors.bold('⚠️ It looks like you are not logged in')
         this.log(error)
-        const { shoudlLogin } = await this.inquirer.prompt<{ shoudlLogin: boolean }>([
+        const { shoudlLogin } = await inquirer.prompt<{ shoudlLogin: boolean }>([
           {
             message: 'Would you like to login?',
             name: 'shoudlLogin',

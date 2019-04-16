@@ -4,6 +4,7 @@ import FunctionType from '@bearer/types/lib/function-types'
 import BaseCommand from '../../base-command'
 import { RequireIntegrationFolder } from '../../utils/decorators'
 import generateFunction from '../../utils/templates/functions'
+import { askForString } from '../../utils/prompts'
 
 export default class GenerateFunction extends BaseCommand {
   static description = 'Generate a Bearer Function'
@@ -15,7 +16,7 @@ export default class GenerateFunction extends BaseCommand {
   @RequireIntegrationFolder()
   async run() {
     const { args } = this.parse(GenerateFunction)
-    const name = args.name || (await this.askForName())
+    const name = args.name || (await askForString('Function name'))
     const authType = this.integrationAuthConfig.authType
 
     if (!Object.values(Authentications).includes(authType)) {
@@ -31,9 +32,5 @@ export default class GenerateFunction extends BaseCommand {
     } catch (e) {
       this.error(e)
     }
-  }
-
-  async askForName(): Promise<string> {
-    return this.askForString('Function name')
   }
 }

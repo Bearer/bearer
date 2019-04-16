@@ -3,6 +3,7 @@ import { flags } from '@oclif/command'
 import * as fs from 'fs-extra'
 import * as Listr from 'listr'
 import * as path from 'path'
+import * as Case from 'case'
 
 import BaseCommand from '../base-command'
 import installDependencies from '../tasks/install-dependencies'
@@ -11,6 +12,8 @@ import { copyFiles, printFiles } from '../utils/helpers'
 
 import GenerateComponent from './generate/component'
 import GenerateSpec from './generate/spec'
+import * as inquirer from 'inquirer'
+import { askForString } from '../utils/prompts'
 
 export const authTypes: TAuthentications = {
   [Authentications.OAuth1]: { name: 'OAuth1', value: Authentications.OAuth1 },
@@ -46,7 +49,7 @@ export default class New extends BaseCommand {
     this.path = flags.path
 
     try {
-      const name: string = args.IntegrationName || (await this.askForString('Integration name'))
+      const name: string = args.IntegrationName || (await askForString('Integration name'))
       const authType: Authentications = (flags.authType as Authentications) || (await this.askForAuthType())
       const skipInstall = flags.skipInstall
       this.destinationFolder = name
@@ -114,8 +117,8 @@ export default class New extends BaseCommand {
 
   getVars = (name: string, authType: Authentications) => ({
     integrationTitle: name,
-    componentName: this.case.pascal(name),
-    componentTagName: this.case.kebab(name),
+    componentName: Case.pascal(name),
+    componentTagName: Case.kebab(name),
     bearerTagVersion: process.env.BEARER_PACKAGE_VERSION || 'beta6',
     bearerRestClient: this.bearerRestClient(authType)
   })
@@ -177,7 +180,7 @@ export default class New extends BaseCommand {
   }
 
   async askForAuthType(): Promise<Authentications> {
-    const { authenticationType } = await this.inquirer.prompt<{ authenticationType: Authentications }>([
+    const { authenticationType } = await inquirer.prompt<{ authenticationType: Authentications }>([
       {
         message: 'Select an authentication method for the API you want to consume:',
         type: 'list',

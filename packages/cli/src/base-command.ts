@@ -1,8 +1,5 @@
 import Command, { flags } from '@oclif/command'
-import * as Case from 'case'
 import * as colors from 'colors/safe'
-import * as copy from 'copy-template-dir'
-import * as inquirer from 'inquirer'
 import * as fs from 'fs'
 
 import { AuthConfig, BaseConfig } from './types'
@@ -17,18 +14,6 @@ export default abstract class extends Command {
 
   get locator() {
     return new Locator(this.bearerConfig)
-  }
-
-  get inquirer() {
-    return inquirer
-  }
-
-  get copy() {
-    return copy
-  }
-
-  get case() {
-    return Case
   }
 
   get colors() {
@@ -86,27 +71,4 @@ export default abstract class extends Command {
     this.constants = constants
     this.silent = flags.silent
   }
-
-  /**
-   * Interactivity helpers
-   */
-
-  protected async askForString(phrase: string, options: Options = {}): Promise<string> {
-    const { response } = await this.inquirer.prompt<{ response: string }>([
-      {
-        message: `${phrase}:`,
-        name: 'response',
-        ...options
-      }
-    ])
-    return response
-  }
-
-  protected async askForPassword(phrase: string, options: Options = {}): Promise<string> {
-    return this.askForString(phrase, { ...options, type: 'password' })
-  }
 }
-
-type Omit<T, K> = Pick<T, Exclude<keyof T, K>>
-
-export type Options = Partial<Omit<inquirer.Question, 'message' | 'name'>>

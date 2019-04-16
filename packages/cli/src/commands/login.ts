@@ -10,6 +10,7 @@ import BaseCommand from '../base-command'
 import { TAccessToken } from '../types'
 import { toParams } from '../utils/helpers'
 import { LOGIN_CLIENT_ID, BEARER_ENV, BEARER_LOGIN_PORT } from '../utils/constants'
+import { askForString } from '../utils/prompts'
 
 type Event = 'success' | 'error' | 'shutdown'
 
@@ -66,7 +67,7 @@ export default class Login extends BaseCommand {
             this.log(this.colors.bold('1/ access the url below  and follow the login process:\n\n'), url)
             this.log()
             this.log(this.colors.bold(`2/ when you access the success page copy the token and paste it here`))
-            const token = await this.askForString('Token')
+            const token = await askForString('Token')
             await this.getToken(token)
           }
         })

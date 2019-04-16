@@ -12,6 +12,7 @@ import getPort from 'get-port'
 
 import { RequireIntegrationFolder } from '../../utils/decorators'
 import { BEARER_AUTH_PORT } from '../../utils/constants'
+import { askForString, askForPassword } from '../../utils/prompts'
 
 type Event = 'success' | 'error' | 'shutdown'
 
@@ -43,9 +44,8 @@ export default class SetupAuth extends BaseCommand {
     switch (authType) {
       case Authentications.OAuth2: {
         const { BEARER_AUTH_CLIENT_ID, BEARER_AUTH_CLIENT_SECRET } = process.env
-        const clientID = BEARER_AUTH_CLIENT_ID || (await this.askForString('Client ID', { type: 'password' }))
-        const clientSecret =
-          BEARER_AUTH_CLIENT_SECRET || (await this.askForString('Client secret', { type: 'password' }))
+        const clientID = BEARER_AUTH_CLIENT_ID || (await askForString('Client ID', { type: 'password' }))
+        const clientSecret = BEARER_AUTH_CLIENT_SECRET || (await askForString('Client secret', { type: 'password' }))
         const newConfig = { ...config, clientID, clientSecret }
         this.debug('Your credentials:\n%j', { ...config, clientID, clientSecret: clientSecret.replace(/./g, '*') })
         const { token: accessToken } = await this.fetchAuthToken(newConfig as configs.TOAuth2Config)
@@ -55,19 +55,19 @@ export default class SetupAuth extends BaseCommand {
       }
 
       case Authentications.Basic: {
-        const username = await this.askForString('Username')
-        const password = await this.askForPassword('Password')
+        const username = await askForString('Username')
+        const password = await askForPassword('Password')
         await this.persistSetup({ username, password } as contexts.Basic)
         break
       }
       case Authentications.ApiKey: {
-        const apiKey = await this.askForPassword('API Key')
+        const apiKey = await askForPassword('API Key')
         await this.persistSetup({ apiKey } as contexts.ApiKey)
         break
       }
       case Authentications.OAuth1: {
-        const consumerKey = process.env.BEARER_AUTH_CONSUMER_KEY || (await this.askForString('Consumer key'))
-        const consumerSecret = process.env.BEARER_AUTH_CONSUMER_SECRET || (await this.askForPassword('Consumer secret'))
+        const consumerKey = process.env.BEARER_AUTH_CONSUMER_KEY || (await askForString('Consumer key'))
+        const consumerSecret = process.env.BEARER_AUTH_CONSUMER_SECRET || (await askForPassword('Consumer secret'))
         this.debug('Your credentials:\n%j', { consumerKey, consumerSecret: consumerSecret.replace(/./g, '*') })
         const newConfig = { ...config, consumerKey, consumerSecret }
         const { token: accessToken } = await this.fetchAuthToken(newConfig as configs.TOAuth1Config)
@@ -116,7 +116,7 @@ export default class SetupAuth extends BaseCommand {
           this.log(this.colors.bold('1/ access the url below  and follow the login process:\n\n'), url)
           this.log()
           this.log(this.colors.bold(`2/ when you access the success page copy the token and paste it here`))
-          this.askForString('Token').then(token => {
+          askForString('Token').then(token => {
             resolve({ token })
           })
         }

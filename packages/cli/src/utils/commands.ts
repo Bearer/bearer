@@ -1,4 +1,5 @@
 import BaseCommand from '../base-command'
+import * as inquirer from 'inquirer'
 
 export async function linkIntegration(this: BaseCommand, anIdentifier: string) {
   let identifier = anIdentifier
@@ -10,7 +11,7 @@ export async function linkIntegration(this: BaseCommand, anIdentifier: string) {
     }
 
     const { integrations } = data.data!
-    const { integration } = await this.inquirer.prompt<{ integration: Integration }>([
+    const { integration } = await inquirer.prompt<{ integration: Integration }>([
       {
         name: 'integration',
         type: 'list',

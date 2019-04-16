@@ -3,6 +3,7 @@ import { RequireIntegrationFolder } from '../../utils/decorators'
 
 import GenerateComponent from './component'
 import GenerateFunction from './function'
+import * as inquirer from 'inquirer'
 
 const enum TType {
   Component,
@@ -34,7 +35,7 @@ export default class GenerateIndex extends BaseCommand {
   }
 
   async askForType(): Promise<TType> {
-    const { type } = await this.inquirer.prompt<{ type: TType }>([
+    const { type } = await inquirer.prompt<{ type: TType }>([
       {
         message: 'What would you like to generate:',
         type: 'list',

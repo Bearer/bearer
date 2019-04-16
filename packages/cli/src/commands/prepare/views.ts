@@ -1,5 +1,6 @@
 import { flags } from '@oclif/command'
 import * as path from 'path'
+import * as Case from 'case'
 
 import BaseCommand from '../../base-command'
 import { RequireIntegrationFolder, skipIfNoViews } from '../../utils/decorators'
@@ -37,7 +38,7 @@ export default class PrepareViews extends BaseCommand {
     )
 
     this.debug('Copying stencil config')
-    const vars = { componentTagName: this.case.kebab(this.bearerConfig.integrationConfig.integrationTitle) }
+    const vars = { componentTagName: Case.kebab(this.bearerConfig.integrationConfig.integrationTitle) }
     await copyFiles(this, 'start', this.locator.buildViewsDir, vars)
 
     ensureSymlinked(

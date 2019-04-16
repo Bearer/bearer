@@ -1,9 +1,12 @@
 import Authentications from '@bearer/types/lib/authentications'
 import { flags } from '@oclif/command'
+import * as Case from 'case'
 
 import BaseCommand from '../../base-command'
 import { RequireIntegrationFolder, skipIfNoViews } from '../../utils/decorators'
 import { copyFiles } from '../../utils/helpers'
+import { askForString } from '../../utils/prompts'
+import * as inquirer from 'inquirer'
 
 enum TComponent {
   BLANK = 'blank',
@@ -26,7 +29,7 @@ export default class GenerateComponent extends BaseCommand {
   async run() {
     const { args, flags } = this.parse(GenerateComponent)
     const type: TComponent = (flags.type as TComponent) || (await this.askForComponentType())
-    const name: string = args.name || (await this.askForString('Name'))
+    const name: string = args.name || (await askForString('Name'))
     const outDir = type === TComponent.ROOT ? this.locator.srcViewsDir : this.locator.srcViewsDirResource('components')
 
     try {
@@ -52,19 +55,19 @@ export default class GenerateComponent extends BaseCommand {
   }
 
   getVars(name: string, authType: Authentications) {
-    const componentName = this.case.pascal(name)
+    const componentName = Case.pascal(name)
     return {
       componentName,
       fileName: name,
       componentClassName: componentName, // it gives more meaning within templates
-      componentTagName: this.case.kebab(componentName),
-      groupName: this.case.kebab(componentName),
+      componentTagName: Case.kebab(componentName),
+      groupName: Case.kebab(componentName),
       withAuthScreen: authType === Authentications.OAuth2 ? '<bearer-navigator-auth-screen />' : null
     }
   }
 
   async askForComponentType(): Promise<TComponent> {
-    const { type } = await this.inquirer.prompt<{ type: TComponent }>([
+    const { type } = await inquirer.prompt<{ type: TComponent }>([
       {
         choices,
         message: 'What kind of component would you like to generate:',
