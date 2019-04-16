@@ -1,4 +1,5 @@
 import axios from 'axios'
+import cliUx from 'cli-ux'
 
 import Command from '../base-command'
 
@@ -102,12 +103,12 @@ export function ensureFreshToken() {
       if (expires_at && refresh_token) {
         try {
           if (expires_at < Date.now()) {
-            this.ux.action.start('Refreshing token')
+            cliUx.action.start('Refreshing token')
             await refreshMyToken(this, refresh_token)
-            this.ux.action.stop()
+            cliUx.action.stop()
           }
         } catch (error) {
-          this.ux.action.stop(`Failed`)
+          cliUx.action.stop(`Failed`)
           this.error(error.message)
         }
       } else {

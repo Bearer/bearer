@@ -4,6 +4,7 @@ import axios from 'axios'
 // @ts-ignore
 import * as opn from 'open'
 import * as crypto from 'crypto'
+import cliUx from 'cli-ux'
 
 import BaseCommand from '../base-command'
 import { TAccessToken } from '../types'
@@ -35,7 +36,7 @@ export default class Login extends BaseCommand {
     this._server = await this.startServer()
     this._verifier = base64URLEncode(crypto.randomBytes(32))
     this._challenge = base64URLEncode(sha256(this._verifier))
-    this.ux.action.start('Logging you in')
+    cliUx.action.start('Logging you in')
 
     const scopes = 'offline_access email openid'
     const audience = `cli-${BEARER_ENV}`
@@ -95,7 +96,7 @@ export default class Login extends BaseCommand {
         this._listerners['shutdown'].map(cb => cb())
       })
     }
-    this.ux.action.stop()
+    cliUx.action.stop()
   }
 
   private startServer = async (): Promise<http.Server> => {

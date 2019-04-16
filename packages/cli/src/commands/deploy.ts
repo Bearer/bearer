@@ -1,5 +1,6 @@
 import BaseCommand from '../base-command'
 import { RequireIntegrationFolder } from '../utils/decorators'
+import cliUx from 'cli-ux'
 
 import PushCommand from './push'
 
@@ -21,7 +22,7 @@ export default class Deploy extends BaseCommand {
     )
     try {
       await PushCommand.run(['--path', this.locator.integrationRoot])
-      this.ux.action.stop()
+      cliUx.action.stop()
     } catch (e) {
       this.error(e)
     }

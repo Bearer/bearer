@@ -1,6 +1,5 @@
 import Command, { flags } from '@oclif/command'
 import * as Case from 'case'
-import cliUx from 'cli-ux'
 import * as colors from 'colors/safe'
 import * as copy from 'copy-template-dir'
 import * as inquirer from 'inquirer'
@@ -30,10 +29,6 @@ export default abstract class extends Command {
 
   get case() {
     return Case
-  }
-
-  get ux() {
-    return cliUx
   }
 
   get colors() {
