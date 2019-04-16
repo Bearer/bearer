@@ -11,7 +11,7 @@ import bearerWebhooks from '@bearer/express'
 
 const app = express()
 
-// each valueS must be a fonction returning a promise
+// each value must be a function returning a promise
 const webhookHandlers = {
   ['integration-name-to_handle']: req =>
     new Promise(() => {
