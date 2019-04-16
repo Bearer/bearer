@@ -983,6 +983,19 @@
     lodash "^4.17.11"
     tslib "^1"
 
+"@bearer/tsconfig@^0.115.0":
+  version "0.115.0"
+  resolved "https://registry.yarnpkg.com/@bearer/tsconfig/-/tsconfig-0.115.0.tgz#7b1716ec0b62ad51d95c9c1f5c35f2cdcf98353f"
+  integrity sha512-8YicOxrkb6lMlrTQN/9myfUHjDRJlUgQNsYDPD4ID2jnDZ1SClJ0jHzJxKQ6garue4yoKmSsoSz+xJFMCm1AVg==
+
+"@bearer/tslint-config@>=0.80.1":
+  version "0.114.1"
+  resolved "https://registry.yarnpkg.com/@bearer/tslint-config/-/tslint-config-0.114.1.tgz#000b92d57851d4d40d6e6c31673279f462de50ae"
+  integrity sha512-11Z/lZ04I+EavcjbbXK/Uprf3fM3ox6H9VfV7uMnJyDP7rtY+9ZYKJR8PhxK4d33m23F/oplqW/Gelqici5ASA==
+  dependencies:
+    tslint-config-airbnb "^5.11.1"
+    tslint-config-prettier "^1.18.0"
+
 "@cnakazawa/watch@^1.0.3":
   version "1.0.3"
   resolved "https://registry.npmjs.org/@cnakazawa/watch/-/watch-1.0.3.tgz#099139eaec7ebf07a27c1786a3ff64f39464d2ef"
@@ -2817,11 +2830,6 @@
   resolved "https://registry.yarnpkg.com/@types/clone/-/clone-0.1.30.tgz#e7365648c1b42136a59c7d5040637b3b5c83b614"
   integrity sha1-5zZWSMG0ITalnH1QQGN7O1yDthQ=
 
-"@types/comment-json@^1.1.1":
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/@types/comment-json/-/comment-json-1.1.1.tgz#b4ae889912a93e64619f97989aecaff8ce889dca"
-  integrity sha512-U70oEqvnkeSSp8BIJwJclERtT13rd9ejK7XkIzMCQQePZe3VW1b7iQggXyW4ZvfGtGeXD0pZw24q5iWNe++HqQ==
-
 "@types/connect@*":
   version "3.4.32"
   resolved "https://registry.yarnpkg.com/@types/connect/-/connect-3.4.32.tgz#aa0e9616b9435ccad02bc52b5b454ffc2c70ba28"
@@ -3062,11 +3070,6 @@
   version "4.14.121"
   resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.121.tgz#9327e20d49b95fc2bf983fc2f045b2c6effc80b9"
   integrity sha512-ORj7IBWj13iYufXt/VXrCNMbUuCTJfhzme5kx9U/UtcIPdJYuvPDUAlHlbNhz/8lKCLy9XGIZnGrqXOtQbPGoQ==
-
-"@types/lodash@^4.14.123":
-  version "4.14.123"
-  resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.123.tgz#39be5d211478c8dd3bdae98ee75bb7efe4abfe4d"
-  integrity sha512-pQvPkc4Nltyx7G1Ww45OjVqUsJP4UsZm+GWJpigXgkikZqJgRm4c48g027o6tdgubWHwFRF15iFd+Y4Pmqv6+Q==
 
 "@types/mime@*":
   version "2.0.0"
