@@ -46,7 +46,7 @@ export default abstract class extends Command {
     }
   }
 
-  warn(_input: string | Error) {
+  warn(_input: string | Error, ..._args: any[]) {
     if (!this.silent) {
       // @ts-ignore
       super.warn.apply(this, arguments)
