@@ -6,15 +6,15 @@ import * as url from 'url'
 // @ts-ignore
 import * as Router from 'router'
 import * as finalhandler from 'finalhandler'
+import invokeFunction from './invokeFunction'
+import baseCommand from '../base-command'
 // import * as finalhandler = require('finalhandler')
 // var http = require('http')
 // var Router = require('router')
-
 const iframePath = path.join(__dirname, '../../static/iframe.js')
 
-export default (command: any) => {
+export default (command: baseCommand, host: string) => {
   const router = Router()
-
   /**
    * API
    */
@@ -24,15 +24,30 @@ export default (command: any) => {
     next()
   })
 
-  api.post(
-    '/v4/backend/functions/:integration/:functionName',
-    (req: http.IncomingMessage, res: http.ServerResponse) => {
-      res.end('{}')
-    }
-  )
-  api.post('/v4/functions/:int/:functionName', (req: http.IncomingMessage, res: http.ServerResponse) => {})
-  api.post('/backend/:functionName', (req: http.IncomingMessage, res: http.ServerResponse) => {})
-  api.post('/:functionName', (req: http.IncomingMessage, res: http.ServerResponse) => {})
+  async function backendHandler(req: http.IncomingMessage, res: http.ServerResponse) {
+    const data = await invokeFunction(
+      command,
+      (req as any).params.functionName,
+      {},
+      { bearerBaseURL: host, isBackend: true }
+    )
+    res.end(JSON.stringify(data))
+  }
+
+  async function frontendHandler(req: http.IncomingMessage, res: http.ServerResponse) {
+    const data = await invokeFunction(
+      command,
+      (req as any).params.functionName,
+      {},
+      { bearerBaseURL: host, isBackend: true }
+    )
+    res.end(JSON.stringify(data))
+  }
+
+  api.post('/v4/backend/functions/:integration/:functionName', backendHandler)
+  api.post('/v4/functions/:int/:functionName', frontendHandler)
+  api.post('/backend/:functionName', backendHandler)
+  api.post('/:functionName', frontendHandler)
 
   /**
    * Auth

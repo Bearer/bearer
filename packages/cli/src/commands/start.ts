@@ -142,7 +142,7 @@ You can specify your own port by running PORT=3322 yarn bearer start`
     process.env.bearerBaseURL = bearerBaseURL
 
     return new Promise<string>((resolve, reject) => {
-      this._server = http.createServer(localServerRouter()).listen(port, () => {
+      this._server = http.createServer(localServerRouter(this, host)).listen(port, () => {
         this.success(`Local server started. Available at this location: ${host}`)
         resolve(host)
       })
