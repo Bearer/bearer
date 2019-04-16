@@ -4,6 +4,8 @@
 
 ## Usage
 
+Get your Bearer's [credentials](https://app.bearer.sh/keys) and setup Bearer as follow:
+
 ```tsx
 // your server.ts
 import express from 'express'
@@ -13,7 +15,7 @@ const app = express()
 
 // each value must be a function returning a promise
 const webhookHandlers = {
-  ['integration-name-to_handle']: req =>
+  ['INTEGRATION_UUID']: req =>
     new Promise(() => {
       // you logic goes here
       if (something) resolve()
@@ -21,7 +23,8 @@ const webhookHandlers = {
         reject()
       }
     }),
-  ['with-async-await']: async req => {
+  // With ASync
+  ['INTEGRATION_UUID']: async req => {
     // you logic goes here
     // ex: console.log(req.body)
     const reponse = await somethingYouWantToWaitFor
@@ -32,9 +35,6 @@ const webhookHandlers = {
     }
   }
 }
-// Without options
-app.use('/whaterver_path_you_want/webhhoks', bearerWebhooks(webhookHandlers))
 
-// With options
-app.use('/whaterver_path_you_want/webhhoks', bearerWebhooks(webhookHandlers), { token: 'YOU_SECRET_TOKEN' })
+app.use('/webhooks', bearerWebhooks(webhookHandlers), { token: 'ENCRYPTION_KEY' }) // Copy and Paste you Encryption Key
 ```
