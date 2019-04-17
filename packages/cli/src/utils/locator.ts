@@ -71,7 +71,11 @@ export default class LocationProvider {
   }
 
   get authConfigPath(): string {
-    return this.integrationRootResourcePath(AUTH_CONFIG_FILENAME)
+    return this.integrationRootResourcePath(this.integrationFileProof)
+  }
+
+  get integrationFileProof() {
+    return AUTH_CONFIG_FILENAME
   }
 
   get localConfigPath(): string {
