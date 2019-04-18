@@ -8,6 +8,7 @@ import * as os from 'os'
 import * as globby from 'globby'
 import cliUx from 'cli-ux'
 import { exec } from 'child_process'
+import * as util from 'util'
 
 import BaseCommand from '../base-command'
 import installDependencies from '../tasks/install-dependencies'
@@ -18,6 +19,8 @@ import GenerateComponent from './generate/component'
 import GenerateSpec from './generate/spec'
 import * as inquirer from 'inquirer'
 import { askForString } from '../utils/prompts'
+
+const asyncExec = util.promisify(exec)
 
 export const authTypes: TAuthentications = {
   [Authentications.OAuth1]: { name: 'OAuth1', value: Authentications.OAuth1 },
@@ -73,10 +76,9 @@ export default class New extends BaseCommand {
 
       if (template) {
         let folder = directory
-        cliUx.action.start('cloning')
+
         const tmp = path.join(os.tmpdir(), Date.now().toString())
         await cloneRepository(template, tmp, this)
-        cliUx.action.stop()
 
         if (!fs.existsSync(path.join(tmp, this.locator.integrationFileProof))) {
           const { selected } = await selectFolder(tmp, this.locator.integrationFileProof)
@@ -122,6 +124,7 @@ export default class New extends BaseCommand {
       this.log(`* start your local development environement by running:\n`)
       this.log(this.colors.bold(`   cd ${this.name} && yarn bearer start`))
     } catch (e) {
+      this.debug('error: %j', e)
       this.error(e)
     }
   }
@@ -207,6 +210,14 @@ function bearerRestClient(authType: Authentications): string {
 }
 
 async function cloneRepository(url: string, destination: string, logger: BaseCommand) {
+  cliUx.action.start('cloning')
+  try {
+    await asyncExec('git --version')
+  } catch (e) {
+    cliUx.action.stop()
+    throw 'git command not found in your path, please install it'
+  }
+
   await new Promise((resolve, reject) => {
     try {
       const command = `git clone ${url} --depth=1 ${destination}`
@@ -217,6 +228,7 @@ async function cloneRepository(url: string, destination: string, logger: BaseCom
       logger.error('Error while cloning the repository')
     }
   })
+  cliUx.action.stop()
 }
 
 async function selectFolder(location: string, integrationRootProof: string) {

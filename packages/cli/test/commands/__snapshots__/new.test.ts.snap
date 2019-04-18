@@ -4,7 +4,7 @@ exports[`with views APIKEY generates an integration without any prompt and APIKE
 "
 What's next?
 
-,[1m   cd APIKEYIntegration && bearer start[22m
+,[1m   cd APIKEYIntegration && yarn bearer start[22m
 ,[32mIntegration initialized, name: APIKEYIntegration, authentication type: API Key[39m
 ,[90m    create: [39m[37m.bearer/initWithView/new/APIKEY/.gitignore[39m
 ,[90m    create: [39m[37m.bearer/initWithView/new/APIKEY/.integrationrc[39m
@@ -17,6 +17,42 @@ What's next?
 ,[90m    create: [39m[37m.bearer/initWithView/new/APIKEY/tsconfig.json[39m
 ,[90m    create: [39m[37m.bearer/initWithView/new/APIKEY/views/index.html[39m
 ,[90m    create: [39m[37m.bearer/initWithView/new/APIKEY/views/index.ts[39m
+,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
+    [2m[15:37:49][22m Create auth files [completed]
+
+,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
+    [2m[15:37:49][22m Create auth files [started]
+
+,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
+    [2m[15:37:49][22m Create integration specification file [completed]
+
+,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
+    [2m[15:37:49][22m Create integration specification file [started]
+
+,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
+    [2m[15:37:49][22m Create intial components [completed]
+
+,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
+    [2m[15:37:49][22m Create intial components [started]
+
+,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
+    [2m[15:37:49][22m Create views related files [completed]
+
+,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
+    [2m[15:37:49][22m Create views related files [started]
+
+,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
+    [2m[15:37:49][22m Generating integration structure [completed]
+
+,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
+    [2m[15:37:49][22m Generating integration structure [started]
+
+,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
+    [2m[15:37:49][22m Generating views directory [completed]
+
+,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
+    [2m[15:37:49][22m Generating views directory [started]
+
 ,* read the bearer documentation at https://docs.bearer.sh
 
 ,* start your local development environement by running:
@@ -69,7 +105,7 @@ exports[`with views BASIC generates an integration without any prompt and BASIC 
 "
 What's next?
 
-,[1m   cd BASICIntegration && bearer start[22m
+,[1m   cd BASICIntegration && yarn bearer start[22m
 ,[32mIntegration initialized, name: BASICIntegration, authentication type: Basic Auth[39m
 ,[90m    create: [39m[37m.bearer/initWithView/new/BASIC/.gitignore[39m
 ,[90m    create: [39m[37m.bearer/initWithView/new/BASIC/.integrationrc[39m
@@ -82,6 +118,42 @@ What's next?
 ,[90m    create: [39m[37m.bearer/initWithView/new/BASIC/tsconfig.json[39m
 ,[90m    create: [39m[37m.bearer/initWithView/new/BASIC/views/index.html[39m
 ,[90m    create: [39m[37m.bearer/initWithView/new/BASIC/views/index.ts[39m
+,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
+    [2m[15:37:49][22m Create auth files [completed]
+
+,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
+    [2m[15:37:49][22m Create auth files [started]
+
+,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
+    [2m[15:37:49][22m Create integration specification file [completed]
+
+,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
+    [2m[15:37:49][22m Create integration specification file [started]
+
+,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
+    [2m[15:37:49][22m Create intial components [completed]
+
+,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
+    [2m[15:37:49][22m Create intial components [started]
+
+,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
+    [2m[15:37:49][22m Create views related files [completed]
+
+,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
+    [2m[15:37:49][22m Create views related files [started]
+
+,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
+    [2m[15:37:49][22m Generating integration structure [completed]
+
+,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
+    [2m[15:37:49][22m Generating integration structure [started]
+
+,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
+    [2m[15:37:49][22m Generating views directory [completed]
+
+,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
+    [2m[15:37:49][22m Generating views directory [started]
+
 ,* read the bearer documentation at https://docs.bearer.sh
 
 ,* start your local development environement by running:
@@ -134,7 +206,7 @@ exports[`with views CUSTOM generates an integration without any prompt and CUSTO
 "
 What's next?
 
-,[1m   cd CUSTOMIntegration && bearer start[22m
+,[1m   cd CUSTOMIntegration && yarn bearer start[22m
 ,[32mIntegration initialized, name: CUSTOMIntegration, authentication type: Custom[39m
 ,[90m    create: [39m[37m.bearer/initWithView/new/CUSTOM/.gitignore[39m
 ,[90m    create: [39m[37m.bearer/initWithView/new/CUSTOM/.integrationrc[39m
@@ -147,6 +219,42 @@ What's next?
 ,[90m    create: [39m[37m.bearer/initWithView/new/CUSTOM/tsconfig.json[39m
 ,[90m    create: [39m[37m.bearer/initWithView/new/CUSTOM/views/index.html[39m
 ,[90m    create: [39m[37m.bearer/initWithView/new/CUSTOM/views/index.ts[39m
+,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
+    [2m[15:37:49][22m Create auth files [completed]
+
+,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
+    [2m[15:37:49][22m Create auth files [started]
+
+,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
+    [2m[15:37:49][22m Create integration specification file [completed]
+
+,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
+    [2m[15:37:49][22m Create integration specification file [started]
+
+,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
+    [2m[15:37:49][22m Create intial components [completed]
+
+,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
+    [2m[15:37:49][22m Create intial components [started]
+
+,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
+    [2m[15:37:49][22m Create views related files [completed]
+
+,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
+    [2m[15:37:49][22m Create views related files [started]
+
+,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
+    [2m[15:37:49][22m Generating integration structure [completed]
+
+,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
+    [2m[15:37:49][22m Generating integration structure [started]
+
+,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
+    [2m[15:37:49][22m Generating views directory [completed]
+
+,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
+    [2m[15:37:49][22m Generating views directory [started]
+
 ,* read the bearer documentation at https://docs.bearer.sh
 
 ,* start your local development environement by running:
@@ -199,7 +307,7 @@ exports[`with views NONE generates an integration without any prompt and NONE 1`
 "
 What's next?
 
-,[1m   cd NONEIntegration && bearer start[22m
+,[1m   cd NONEIntegration && yarn bearer start[22m
 ,[32mIntegration initialized, name: NONEIntegration, authentication type: NoAuth[39m
 ,[90m    create: [39m[37m.bearer/initWithView/new/NONE/.gitignore[39m
 ,[90m    create: [39m[37m.bearer/initWithView/new/NONE/.integrationrc[39m
@@ -212,6 +320,42 @@ What's next?
 ,[90m    create: [39m[37m.bearer/initWithView/new/NONE/tsconfig.json[39m
 ,[90m    create: [39m[37m.bearer/initWithView/new/NONE/views/index.html[39m
 ,[90m    create: [39m[37m.bearer/initWithView/new/NONE/views/index.ts[39m
+,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
+    [2m[15:37:49][22m Create auth files [completed]
+
+,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
+    [2m[15:37:49][22m Create auth files [started]
+
+,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
+    [2m[15:37:49][22m Create integration specification file [completed]
+
+,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
+    [2m[15:37:49][22m Create integration specification file [started]
+
+,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
+    [2m[15:37:49][22m Create intial components [completed]
+
+,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
+    [2m[15:37:49][22m Create intial components [started]
+
+,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
+    [2m[15:37:49][22m Create views related files [completed]
+
+,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
+    [2m[15:37:49][22m Create views related files [started]
+
+,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
+    [2m[15:37:49][22m Generating integration structure [completed]
+
+,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
+    [2m[15:37:49][22m Generating integration structure [started]
+
+,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
+    [2m[15:37:49][22m Generating views directory [completed]
+
+,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
+    [2m[15:37:49][22m Generating views directory [started]
+
 ,* read the bearer documentation at https://docs.bearer.sh
 
 ,* start your local development environement by running:
@@ -264,7 +408,7 @@ exports[`with views OAUTH1 generates an integration without any prompt and OAUTH
 "
 What's next?
 
-,[1m   cd OAUTH1Integration && bearer start[22m
+,[1m   cd OAUTH1Integration && yarn bearer start[22m
 ,[32mIntegration initialized, name: OAUTH1Integration, authentication type: OAuth1[39m
 ,[90m    create: [39m[37m.bearer/initWithView/new/OAUTH1/.gitignore[39m
 ,[90m    create: [39m[37m.bearer/initWithView/new/OAUTH1/.integrationrc[39m
@@ -277,6 +421,42 @@ What's next?
 ,[90m    create: [39m[37m.bearer/initWithView/new/OAUTH1/tsconfig.json[39m
 ,[90m    create: [39m[37m.bearer/initWithView/new/OAUTH1/views/index.html[39m
 ,[90m    create: [39m[37m.bearer/initWithView/new/OAUTH1/views/index.ts[39m
+,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
+    [2m[15:37:49][22m Create auth files [completed]
+
+,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
+    [2m[15:37:49][22m Create auth files [started]
+
+,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
+    [2m[15:37:49][22m Create integration specification file [completed]
+
+,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
+    [2m[15:37:49][22m Create integration specification file [started]
+
+,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
+    [2m[15:37:49][22m Create intial components [completed]
+
+,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
+    [2m[15:37:49][22m Create intial components [started]
+
+,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
+    [2m[15:37:49][22m Create views related files [completed]
+
+,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
+    [2m[15:37:49][22m Create views related files [started]
+
+,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
+    [2m[15:37:49][22m Generating integration structure [completed]
+
+,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
+    [2m[15:37:49][22m Generating integration structure [started]
+
+,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
+    [2m[15:37:49][22m Generating views directory [completed]
+
+,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
+    [2m[15:37:49][22m Generating views directory [started]
+
 ,* read the bearer documentation at https://docs.bearer.sh
 
 ,* start your local development environement by running:
@@ -339,7 +519,7 @@ exports[`with views OAUTH2 generates an integration without any prompt and OAUTH
 "
 What's next?
 
-,[1m   cd OAUTH2Integration && bearer start[22m
+,[1m   cd OAUTH2Integration && yarn bearer start[22m
 ,[32mIntegration initialized, name: OAUTH2Integration, authentication type: OAuth2[39m
 ,[90m    create: [39m[37m.bearer/initWithView/new/OAUTH2/.gitignore[39m
 ,[90m    create: [39m[37m.bearer/initWithView/new/OAUTH2/.integrationrc[39m
@@ -352,6 +532,42 @@ What's next?
 ,[90m    create: [39m[37m.bearer/initWithView/new/OAUTH2/tsconfig.json[39m
 ,[90m    create: [39m[37m.bearer/initWithView/new/OAUTH2/views/index.html[39m
 ,[90m    create: [39m[37m.bearer/initWithView/new/OAUTH2/views/index.ts[39m
+,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
+    [2m[15:37:49][22m Create auth files [completed]
+
+,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
+    [2m[15:37:49][22m Create auth files [started]
+
+,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
+    [2m[15:37:49][22m Create integration specification file [completed]
+
+,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
+    [2m[15:37:49][22m Create integration specification file [started]
+
+,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
+    [2m[15:37:49][22m Create intial components [completed]
+
+,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
+    [2m[15:37:49][22m Create intial components [started]
+
+,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
+    [2m[15:37:49][22m Create views related files [completed]
+
+,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
+    [2m[15:37:49][22m Create views related files [started]
+
+,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
+    [2m[15:37:49][22m Generating integration structure [completed]
+
+,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
+    [2m[15:37:49][22m Generating integration structure [started]
+
+,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
+    [2m[15:37:49][22m Generating views directory [completed]
+
+,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
+    [2m[15:37:49][22m Generating views directory [started]
+
 ,* read the bearer documentation at https://docs.bearer.sh
 
 ,* start your local development environement by running:
@@ -411,7 +627,7 @@ exports[`without views APIKEY generates an integration without any prompt and AP
 "
 What's next?
 
-,[1m   cd APIKEYIntegration && bearer start[22m
+,[1m   cd APIKEYIntegration && yarn bearer start[22m
 ,[32mIntegration initialized, name: APIKEYIntegration, authentication type: API Key[39m
 ,[90m    create: [39m[37m.bearer/init/new/APIKEY/.gitignore[39m
 ,[90m    create: [39m[37m.bearer/init/new/APIKEY/.integrationrc[39m
@@ -421,6 +637,18 @@ What's next?
 ,[90m    create: [39m[37m.bearer/init/new/APIKEY/functions/tsconfig.json[39m
 ,[90m    create: [39m[37m.bearer/init/new/APIKEY/package.json[39m
 ,[90m    create: [39m[37m.bearer/init/new/APIKEY/tsconfig.json[39m
+,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
+    [2m[15:37:48][22m Create auth files [completed]
+
+,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
+    [2m[15:37:48][22m Create auth files [started]
+
+,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
+    [2m[15:37:48][22m Generating integration structure [completed]
+
+,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
+    [2m[15:37:48][22m Generating integration structure [started]
+
 ,* read the bearer documentation at https://docs.bearer.sh
 
 ,* start your local development environement by running:
@@ -468,7 +696,7 @@ exports[`without views BASIC generates an integration without any prompt and BAS
 "
 What's next?
 
-,[1m   cd BASICIntegration && bearer start[22m
+,[1m   cd BASICIntegration && yarn bearer start[22m
 ,[32mIntegration initialized, name: BASICIntegration, authentication type: Basic Auth[39m
 ,[90m    create: [39m[37m.bearer/init/new/BASIC/.gitignore[39m
 ,[90m    create: [39m[37m.bearer/init/new/BASIC/.integrationrc[39m
@@ -478,6 +706,18 @@ What's next?
 ,[90m    create: [39m[37m.bearer/init/new/BASIC/functions/tsconfig.json[39m
 ,[90m    create: [39m[37m.bearer/init/new/BASIC/package.json[39m
 ,[90m    create: [39m[37m.bearer/init/new/BASIC/tsconfig.json[39m
+,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
+    [2m[15:37:48][22m Create auth files [completed]
+
+,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
+    [2m[15:37:48][22m Create auth files [started]
+
+,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
+    [2m[15:37:48][22m Generating integration structure [completed]
+
+,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
+    [2m[15:37:48][22m Generating integration structure [started]
+
 ,* read the bearer documentation at https://docs.bearer.sh
 
 ,* start your local development environement by running:
@@ -525,7 +765,7 @@ exports[`without views CUSTOM generates an integration without any prompt and CU
 "
 What's next?
 
-,[1m   cd CUSTOMIntegration && bearer start[22m
+,[1m   cd CUSTOMIntegration && yarn bearer start[22m
 ,[32mIntegration initialized, name: CUSTOMIntegration, authentication type: Custom[39m
 ,[90m    create: [39m[37m.bearer/init/new/CUSTOM/.gitignore[39m
 ,[90m    create: [39m[37m.bearer/init/new/CUSTOM/.integrationrc[39m
@@ -535,6 +775,18 @@ What's next?
 ,[90m    create: [39m[37m.bearer/init/new/CUSTOM/functions/tsconfig.json[39m
 ,[90m    create: [39m[37m.bearer/init/new/CUSTOM/package.json[39m
 ,[90m    create: [39m[37m.bearer/init/new/CUSTOM/tsconfig.json[39m
+,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
+    [2m[15:37:49][22m Create auth files [completed]
+
+,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
+    [2m[15:37:49][22m Create auth files [started]
+
+,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
+    [2m[15:37:49][22m Generating integration structure [completed]
+
+,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
+    [2m[15:37:49][22m Generating integration structure [started]
+
 ,* read the bearer documentation at https://docs.bearer.sh
 
 ,* start your local development environement by running:
@@ -582,7 +834,7 @@ exports[`without views NONE generates an integration without any prompt and NONE
 "
 What's next?
 
-,[1m   cd NONEIntegration && bearer start[22m
+,[1m   cd NONEIntegration && yarn bearer start[22m
 ,[32mIntegration initialized, name: NONEIntegration, authentication type: NoAuth[39m
 ,[90m    create: [39m[37m.bearer/init/new/NONE/.gitignore[39m
 ,[90m    create: [39m[37m.bearer/init/new/NONE/.integrationrc[39m
@@ -592,6 +844,18 @@ What's next?
 ,[90m    create: [39m[37m.bearer/init/new/NONE/functions/tsconfig.json[39m
 ,[90m    create: [39m[37m.bearer/init/new/NONE/package.json[39m
 ,[90m    create: [39m[37m.bearer/init/new/NONE/tsconfig.json[39m
+,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
+    [2m[15:37:48][22m Generating integration structure [started]
+
+,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
+    [2m[15:37:49][22m Create auth files [completed]
+
+,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
+    [2m[15:37:49][22m Create auth files [started]
+
+,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
+    [2m[15:37:49][22m Generating integration structure [completed]
+
 ,* read the bearer documentation at https://docs.bearer.sh
 
 ,* start your local development environement by running:
@@ -639,7 +903,7 @@ exports[`without views OAUTH1 generates an integration without any prompt and OA
 "
 What's next?
 
-,[1m   cd OAUTH1Integration && bearer start[22m
+,[1m   cd OAUTH1Integration && yarn bearer start[22m
 ,[32mIntegration initialized, name: OAUTH1Integration, authentication type: OAuth1[39m
 ,[90m    create: [39m[37m.bearer/init/new/OAUTH1/.gitignore[39m
 ,[90m    create: [39m[37m.bearer/init/new/OAUTH1/.integrationrc[39m
@@ -649,6 +913,18 @@ What's next?
 ,[90m    create: [39m[37m.bearer/init/new/OAUTH1/functions/tsconfig.json[39m
 ,[90m    create: [39m[37m.bearer/init/new/OAUTH1/package.json[39m
 ,[90m    create: [39m[37m.bearer/init/new/OAUTH1/tsconfig.json[39m
+,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
+    [2m[15:37:48][22m Create auth files [completed]
+
+,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
+    [2m[15:37:48][22m Create auth files [started]
+
+,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
+    [2m[15:37:48][22m Generating integration structure [completed]
+
+,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
+    [2m[15:37:48][22m Generating integration structure [started]
+
 ,* read the bearer documentation at https://docs.bearer.sh
 
 ,* start your local development environement by running:
@@ -706,7 +982,7 @@ exports[`without views OAUTH2 generates an integration without any prompt and OA
 "
 What's next?
 
-,[1m   cd OAUTH2Integration && bearer start[22m
+,[1m   cd OAUTH2Integration && yarn bearer start[22m
 ,[32mIntegration initialized, name: OAUTH2Integration, authentication type: OAuth2[39m
 ,[90m    create: [39m[37m.bearer/init/new/OAUTH2/.gitignore[39m
 ,[90m    create: [39m[37m.bearer/init/new/OAUTH2/.integrationrc[39m
@@ -716,6 +992,18 @@ What's next?
 ,[90m    create: [39m[37m.bearer/init/new/OAUTH2/functions/tsconfig.json[39m
 ,[90m    create: [39m[37m.bearer/init/new/OAUTH2/package.json[39m
 ,[90m    create: [39m[37m.bearer/init/new/OAUTH2/tsconfig.json[39m
+,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
+    [2m[15:37:48][22m Create auth files [completed]
+
+,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
+    [2m[15:37:48][22m Create auth files [started]
+
+,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
+    [2m[15:37:48][22m Generating integration structure [completed]
+
+,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
+    [2m[15:37:48][22m Generating integration structure [started]
+
 ,* read the bearer documentation at https://docs.bearer.sh
 
 ,* start your local development environement by running:
