@@ -56,104 +56,62 @@ export default class New extends BaseCommand {
   static args = [{ name: 'IntegrationName' }]
   private destinationFolder!: string
   private path?: string
+  private name!: string
 
   async run() {
     const { args, flags } = this.parse(New)
+    this.debug('url: %j', flags)
+
+    const { template, directory } = flags
     this.path = flags.path
 
     try {
-      const name: string = args.IntegrationName || (await askForString('Integration name'))
-
+      this.name = args.IntegrationName || (await askForString('Integration name'))
       const skipInstall = flags.skipInstall
-      this.destinationFolder = name
+      this.destinationFolder = this.name
       let files: string[] = []
-      if (flags.template) {
-        this.debug('url: %s', flags.template)
+
+      if (template) {
+        let folder = directory
         cliUx.action.start('cloning')
         const tmp = path.join(os.tmpdir(), Date.now().toString())
-        await new Promise((resolve, reject) => {
-          try {
-            exec(`git clone ${flags.template} --depth=1 ${tmp}`, () => resolve())
-          } catch (e) {
-            reject()
-          }
-        })
+        await cloneRepository(template, tmp, this)
         cliUx.action.stop()
-        let folder = flags.directory
-        if (!fs.existsSync(path.join(tmp, this.locator.integrationFileProof))) {
-          const list = await globby([`**/${this.locator.integrationFileProof}`], { cwd: tmp })
 
-          const { folder: selected } = await inquirer.prompt([
-            {
-              name: 'folder',
-              message: 'Select a template',
-              type: 'list',
-              choices: list.map(path => {
-                return {
-                  name: path.split(`/${this.locator.integrationFileProof}`)[0],
-                  value: path.split(`/${this.locator.integrationFileProof}`)[0]
-                }
-              })
-            }
-          ])
+        if (!fs.existsSync(path.join(tmp, this.locator.integrationFileProof))) {
+          const { selected } = await selectFolder(tmp, this.locator.integrationFileProof)
           folder = selected
         }
+
         const destination = path.join(tmp, folder || '')
-        fs.copySync(destination, name)
-        this.debug('copied from %s to %s', destination, folder)
-        files = await globby(['**/*'], { cwd: name })
+        fs.copySync(destination, this.name)
+        this.debug('copied from %s to %s', destination, this.name)
+        files = await globby(['**/*'], { cwd: this.name })
       } else {
-        const authType: Authentications = (flags.authType as Authentications) || (await this.askForAuthType())
+        const authType: Authentications = (flags.authType as Authentications) || (await askForAuthType())
         const tasks: Listr.ListrTask[] = [
           {
             title: 'Generating integration structure',
-            task: async (ctx: any) => {
-              try {
-                const files = await this.createStructure(name, authType)
-                ctx.files = files
-                return true
-              } catch (e) {
-                this.error(e)
-                return null
-              }
-            }
+            task: this.createIntegrationStructure(authType)
           },
           {
             title: 'Create auth files',
-            task: async (ctx: any, _task: any) => {
-              const files = await this.createAuthenticationFiles(name, authType)
-              ctx.files = [...ctx.files, ...files]
-            }
+            task: this.createAuthFiles(authType)
           },
           {
             title: 'Create views related files',
             enabled: () => flags.withViews,
-            task: async (_ctx: any, _task: any) => {
-              return new Listr([
-                initViews({
-                  cmd: this,
-                  vars: this.initViewsVars(name, authType)
-                }),
-                {
-                  title: 'Create integration specification file',
-                  task: async (_ctx: any, _task: any) => GenerateSpec.run(['--path', this.copyDestFolder, '--silent'])
-                },
-                {
-                  title: 'Create intial components',
-                  task: async (_ctx: any, _task: any) =>
-                    GenerateComponent.run(['feature', '--type', 'root', '--path', this.copyDestFolder, '--silent'])
-                }
-              ])
-            }
+            task: this.createViewsStructure(authType)
           }
         ]
 
         const { files: created } = await new Listr(tasks).run()
         files = created
         if (authType) {
-          this.success(`Integration initialized, name: ${name}, authentication type: ${authTypes[authType].name}`)
+          this.success(`Integration initialized, name: ${this.name}, authentication type: ${authTypes[authType].name}`)
         }
       }
+
       if (!skipInstall) {
         await new Listr([installDependencies({ cwd: this.copyDestFolder })]).run()
       }
@@ -162,85 +120,141 @@ export default class New extends BaseCommand {
       this.log("\nWhat's next?\n")
       this.log('* read the bearer documentation at https://docs.bearer.sh\n')
       this.log(`* start your local development environement by running:\n`)
-      this.log(this.colors.bold(`   cd ${name} && yarn bearer start`))
+      this.log(this.colors.bold(`   cd ${this.name} && yarn bearer start`))
     } catch (e) {
       this.error(e)
     }
   }
 
-  getVars = (name: string, authType: Authentications) => ({
-    integrationTitle: name,
-    componentName: Case.pascal(name),
-    componentTagName: Case.kebab(name),
-    bearerTagVersion: process.env.BEARER_PACKAGE_VERSION || 'latest',
-    bearerRestClient: this.bearerRestClient(authType)
-  })
-
-  bearerRestClient(authType: Authentications): string {
-    switch (authType) {
-      case Authentications.OAuth1:
-        return '"oauth": "^0.9.15"'
-      case Authentications.ApiKey:
-      case Authentications.Basic:
-      case Authentications.NoAuth:
-      case Authentications.OAuth2:
-      case Authentications.Custom:
-        return '"axios": "^0.18.0"'
-      default:
-        throw new Error(`Authentication not found: ${authType}`)
+  createIntegrationStructure = (authType: Authentications) => async (ctx: { files: string[] }) => {
+    if (fs.existsSync(this.copyDestFolder)) {
+      this.error(this.colors.bold('Destination already exists: ') + this.copyDestFolder)
+    } else {
+      ctx.files = await copyFiles(
+        this,
+        path.join('init', 'structure'),
+        this.copyDestFolder,
+        this.getVars(authType),
+        true
+      )
     }
   }
+
+  createAuthFiles = (authType: Authentications) => async (ctx: { files: string[] }) => {
+    const files = await copyFiles(this, path.join('init', authType), this.copyDestFolder, this.getVars(authType), true)
+    ctx.files = [...ctx.files, ...files]
+  }
+
+  createViewsStructure = (authType: Authentications) => async (_ctx: any, _task: any) => {
+    return new Listr([
+      initViews({
+        cmd: this,
+        vars: { ...this.getVars(authType), ...initViewsVars(authType) }
+      }),
+      {
+        title: 'Create integration specification file',
+        task: async (_ctx: any, _task: any) => GenerateSpec.run(['--path', this.copyDestFolder, '--silent'])
+      },
+      {
+        title: 'Create intial components',
+        task: async (_ctx: any, _task: any) =>
+          GenerateComponent.run(['feature', '--type', 'root', '--path', this.copyDestFolder, '--silent'])
+      }
+    ])
+  }
+
+  getVars = (authType: Authentications) => ({
+    integrationTitle: this.name,
+    componentName: Case.pascal(this.name),
+    componentTagName: Case.kebab(this.name),
+    bearerTagVersion: process.env.BEARER_PACKAGE_VERSION || 'latest',
+    bearerRestClient: bearerRestClient(authType)
+  })
+
   get copyDestFolder(): string {
     if (this.path) {
       return path.resolve(this.path)
     }
     return path.join(process.cwd(), this.destinationFolder)
   }
+}
 
-  createStructure(name: string, authType: Authentications): Promise<string[]> {
-    if (fs.existsSync(this.copyDestFolder)) {
-      return Promise.reject(this.colors.bold('Destination already exists: ') + this.copyDestFolder)
+async function askForAuthType(): Promise<Authentications> {
+  const { authenticationType } = await inquirer.prompt<{ authenticationType: Authentications }>([
+    {
+      message: 'Select an authentication method for the API you want to consume:',
+      type: 'list',
+      name: 'authenticationType',
+      choices: Object.values(authTypes)
     }
+  ])
+  return authenticationType
+}
 
-    return copyFiles(this, path.join('init', 'structure'), this.copyDestFolder, this.getVars(name, authType), true)
+function bearerRestClient(authType: Authentications): string {
+  switch (authType) {
+    case Authentications.OAuth1:
+      return '"oauth": "^0.9.15"'
+    case Authentications.ApiKey:
+    case Authentications.Basic:
+    case Authentications.NoAuth:
+    case Authentications.OAuth2:
+    case Authentications.Custom:
+      return '"axios": "^0.18.0"'
+    default:
+      throw new Error(`Authentication not found: ${authType}`)
   }
+}
 
-  initViewsVars = (name: string, authType: Authentications) => {
-    const setup =
-      authType === Authentications.NoAuth
-        ? ''
-        : `
+async function cloneRepository(url: string, destination: string, logger: BaseCommand) {
+  await new Promise((resolve, reject) => {
+    try {
+      const command = `git clone ${url} --depth=1 ${destination}`
+      // @ts-ignore
+      logger.debug(`Running ${command}`)
+      exec(command, () => resolve())
+    } catch (e) {
+      logger.error('Error while cloning the repository')
+    }
+  })
+}
+
+async function selectFolder(location: string, integrationRootProof: string) {
+  const list = await globby([`**/${integrationRootProof}`], { cwd: location })
+  return await inquirer.prompt<{ selected: string }>([
     {
-      classname: 'SetupAction',
-      isRoot: true,
-      initialTagName: 'setup-action',
-      name: 'setup-action',
-      label: 'Setup Action Component'
-    },
-    {
-      classname: 'SetupView',
-      isRoot: true,
-      initialTagName: 'setup-view',
-      name: 'setup-view',
-      label: 'Setup Display Component'
-    },`
+      name: 'selected',
+      message: 'Select a template',
+      type: 'list',
+      choices: list.map(path => {
+        return {
+          name: path.split(`/${integrationRootProof}`)[0],
+          value: path.split(`/${integrationRootProof}`)[0]
+        }
+      })
+    }
+  ])
+}
 
-    return { ...this.getVars(name, authType), setup }
-  }
+function initViewsVars(authType: Authentications) {
+  const setup =
+    authType === Authentications.NoAuth
+      ? ''
+      : `
+  {
+    classname: 'SetupAction',
+    isRoot: true,
+    initialTagName: 'setup-action',
+    name: 'setup-action',
+    label: 'Setup Action Component'
+  },
+  {
+    classname: 'SetupView',
+    isRoot: true,
+    initialTagName: 'setup-view',
+    name: 'setup-view',
+    label: 'Setup Display Component'
+  },`
 
-  createAuthenticationFiles(name: string, authType: Authentications): Promise<string[]> {
-    return copyFiles(this, path.join('init', authType), this.copyDestFolder, this.getVars(name, authType), true)
-  }
-
-  async askForAuthType(): Promise<Authentications> {
-    const { authenticationType } = await inquirer.prompt<{ authenticationType: Authentications }>([
-      {
-        message: 'Select an authentication method for the API you want to consume:',
-        type: 'list',
-        name: 'authenticationType',
-        choices: Object.values(authTypes)
-      }
-    ])
-    return authenticationType
-  }
+  return { setup }
 }
