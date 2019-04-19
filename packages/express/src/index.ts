@@ -108,7 +108,7 @@ function verifyPayload(token: string) {
       next()
     } else {
       res.status(401)
-      next(new WebhookIncorrectSignature('Incorrect signature, please make ure you provided the correct token'))
+      next(new WebhookIncorrectSignature('Incorrect signature, please make sure you provided the correct token'))
     }
   }
 }
