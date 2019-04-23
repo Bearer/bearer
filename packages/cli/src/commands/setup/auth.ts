@@ -114,7 +114,7 @@ export default class SetupAuth extends BaseCommand {
       const { url, fallback } = getOpeningUrls(
         `${this.constants.IntegrationServiceHost}v2/auth/${redirectLocation.replace('./', '')}&clientId=NONE`
       )
-      this.debug('config: %j , location: %s', config, url)
+      this.debug('config: %j, location: %s', config, url)
       const a = await open(url)
       a.on('close', (code: any, signal: any) => {
         if (code !== 0) {
@@ -158,7 +158,7 @@ export default class SetupAuth extends BaseCommand {
         try {
           this._listerners.success.map(cb => cb(token))
           res.setHeader('Connection', 'close')
-          res.send('OK;').end()
+          res.send(page).end()
           this.stopServer()
         } catch (e) {}
       })
@@ -196,7 +196,7 @@ export default class SetupAuth extends BaseCommand {
 
 function getOpeningUrls(url: string) {
   return {
-    url: `${url}&localHostRedirectSupported=inline`,
+    url: `${url}&localHostRedirectSupported=true`,
     fallback: `${url}&localHostRedirectSupported=inline`
   }
 }
@@ -207,3 +207,98 @@ class UnreachableCaseError extends Error {
 }
 
 type TBase64EncodedString = string
+
+// tslint:disable max-line-length
+const page = `
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Authentication callback</title>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      * {
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+      html,
+      body {
+        background-color: #f5f7fb;
+        font-family: 'Proxima Nova', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif,
+          'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+        text-align: center;
+        font-size: 16px;
+        line-height: 16px;
+      }
+      h1 {
+        color: #00c682;
+        font-size: 2rem;
+        font-weight: 600;
+        letter-spacing: 0.99px;
+        line-height: 29px;
+      }
+      p {
+        color: #343c5d;
+        letter-spacing: 0.56px;
+      }
+      a {
+        border-radius: 4px;
+        display: inline-block;
+        margin-top: 32px;
+        padding: 12px 18px;
+        background-color: #030d36;
+        color: #ffffff;
+        font-weight: 600;
+        letter-spacing: 0.2px;
+        text-decoration: none;
+      }
+      .outer {
+        display: table;
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+      }
+      .middle {
+        display: table-cell;
+        vertical-align: middle;
+      }
+      .inner {
+        margin-left: auto;
+        margin-right: auto;
+        max-width: 700px;
+      }
+      .hint {
+        font-size: 0.9rem;
+        padding: 1.5rem;
+        border: 1px solid #c2c9ea;
+        border-radius: 4px;
+        background-color: #ffffff;
+        position: relative;
+        top: 60px;
+        margin-bottom: 60px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="outer">
+      <div class="middle">
+        <div class="inner">
+          <svg width="37" height="40" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M.8 19.2h25.269l-6.635-6.634a.8.8 0 0 1 1.132-1.132l8 8a.8.8 0 0 1 0 1.132l-8 8a.8.8 0 0 1-1.132-1.132L26.07 20.8H.8a.8.8 0 0 1 0-1.6zm14.4 11.2a.8.8 0 0 1 .8.8v6.4a.8.8 0 0 0 .8.8h17.6a.8.8 0 0 0 .8-.8V2.4a.8.8 0 0 0-.8-.8H16.8a.8.8 0 0 0-.8.8v6.4a.8.8 0 0 1-1.6 0V2.4A2.4 2.4 0 0 1 16.8 0h17.6a2.4 2.4 0 0 1 2.4 2.4v35.2a2.4 2.4 0 0 1-2.4 2.4H16.8a2.4 2.4 0 0 1-2.4-2.4v-6.4a.8.8 0 0 1 .8-.8z"
+              fill="#00C682"
+              fill-rule="nonzero"
+            />
+          </svg>
+          <h1>Successfully authenticated</h1>
+          <p>You can close this window</p>
+          <br />
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+`
