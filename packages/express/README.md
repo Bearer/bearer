@@ -42,5 +42,5 @@ const webhookHandlers = {
   }
 }
 
-app.use('/webhooks', bearerWebhooks(webhookHandlers), { token: 'ENCRYPTION_KEY' }) // Copy and Paste you Encryption Key
+app.use('/webhooks', bearerWebhooks(webhookHandlers, { token: 'ENCRYPTION_KEY' })) // Copy and Paste you Encryption Key
 ```
