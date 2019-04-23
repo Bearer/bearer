@@ -4,7 +4,7 @@ import { TBASICAuthContext, FetchData, TFetchActionEvent, TFetchPromise } from '
 
 export default class {{functionClassName}}Function extends FetchData implements FetchData<ReturnedData, any, TBASICAuthContext>{
   async action(event: TFetchActionEvent<Params, TBASICAuthContext>): TFetchPromise<ReturnedData> {
-    // const { username, password } = event.context.authAccess
+    // const { username, password } = event.context.auth
     // Put your logic here
     return { data: [] }
   }

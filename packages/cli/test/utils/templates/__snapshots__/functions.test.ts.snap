@@ -7,7 +7,7 @@ exports[`functions generator When APIKEY function type: FetchData matches snapsh
 
 export default class APIKEYFetchDataFunctionFunction extends FetchData implements FetchData<ReturnedData, any, TAPIKEYAuthContext> {
   async action(event: TFetchActionEvent<Params, TAPIKEYAuthContext>): TFetchPromise<ReturnedData> {
-    // const token = event.context.authAccess.apiKey
+    // const token = event.context.auth.apiKey
     // Put your logic here
     return { data: [] }
   }
@@ -37,7 +37,7 @@ exports[`functions generator When BASIC function type: FetchData matches snapsho
 
 export default class BASICFetchDataFunctionFunction extends FetchData implements FetchData<ReturnedData, any, TBASICAuthContext>{
   async action(event: TFetchActionEvent<Params, TBASICAuthContext>): TFetchPromise<ReturnedData> {
-    // const { username, password } = event.context.authAccess
+    // const { username, password } = event.context.auth
     // Put your logic here
     return { data: [] }
   }
@@ -154,7 +154,7 @@ exports[`functions generator When OAUTH2 function type: FetchData matches snapsh
 
 export default class OAUTH2FetchDataFunctionFunction extends FetchData implements FetchData<ReturnedData, any, TOAUTH2AuthContext> {
   async action(event: TFetchActionEvent<Params, TOAUTH2AuthContext>): TFetchPromise<ReturnedData> {
-    // const token = event.context.authAccess.accessToken
+    // const token = event.context.auth.accessToken
     // Put your logic here
     return { data: [] }
   }

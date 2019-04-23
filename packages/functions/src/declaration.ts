@@ -13,7 +13,17 @@ export type TFetchPayload<ReturnedData = any, ReturnedError = any> = Partial<TDa
  * Contexts
  */
 
-type TBaseAuthContext<TAuthAccessContent> = { authAccess: TAuthAccessContent; [key: string]: any }
+type TBaseAuthContext<TAuthAccessContent> = {
+  /**
+   * Provides a authentication data
+   */
+  auth: TAuthAccessContent
+  /**
+   * DEPRECATED:  please use auth
+   */
+  authAccess: TAuthAccessContent
+  [key: string]: any
+}
 
 export namespace contexts {
   export interface OAuth2 {

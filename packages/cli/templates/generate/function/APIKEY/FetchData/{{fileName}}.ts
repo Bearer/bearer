@@ -4,7 +4,7 @@ import { TAPIKEYAuthContext, FetchData, TFetchActionEvent, TFetchPromise } from 
 
 export default class {{functionClassName}}Function extends FetchData implements FetchData<ReturnedData, any, TAPIKEYAuthContext> {
   async action(event: TFetchActionEvent<Params, TAPIKEYAuthContext>): TFetchPromise<ReturnedData> {
-    // const token = event.context.authAccess.apiKey
+    // const token = event.context.auth.apiKey
     // Put your logic here
     return { data: [] }
   }

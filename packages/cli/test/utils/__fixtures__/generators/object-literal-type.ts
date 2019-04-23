@@ -15,7 +15,7 @@ export default class FunctionObjectLiteralType extends FetchData
       TOAUTH2AuthContext
     >
   ): TFetchPromise<{ expectedData: string[] }> {
-    // const token = event.context.authAccess.accessToken
+    // const token = event.context.auth.accessToken
     // Put your logic here
     return { data: { expectedData: [] } }
   }

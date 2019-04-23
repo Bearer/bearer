@@ -10,7 +10,7 @@ describe('FetchData function', () => {
       expect(result.data).toMatchObject({
         context: {
           iDefinedData: 'iDefinedDataExisting',
-          authAccess: {
+          auth: {
             apiKey: 'aKey'
           }
         },
@@ -113,7 +113,7 @@ class HardFailingFunction extends FetchData implements FetchData {
 function setup(functionClass: any) {
   const event: d.TLambdaEvent = {
     context: {
-      authAccess: { apiKey: 'aKey' },
+      auth: { apiKey: 'aKey' },
       iDefinedData: 'iDefinedDataExisting'
     },
     queryStringParameters: {

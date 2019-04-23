@@ -104,11 +104,17 @@ export default class Invoke extends BaseCommand {
       const { setup } = parsed || { setup: null }
       this.debug('local config: %j', parsed)
       if (setup && setup.auth) {
-        context.authAccess = setup.auth
+        context.auth = setup.auth
+
+        // DEPRECATED: to remove by 15th of may
+        context.authAccess = context.auth
       }
     } else {
       this.debug('no local config found')
-      context.authAccess = {}
+      context.auth = {}
+
+      // DEPRECATED: to remove by 15th of may
+      context.authAccess = context.auth
     }
 
     return context

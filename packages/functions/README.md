@@ -18,7 +18,7 @@ export default class FunctionName extends FetchData implements FetchData<Returne
   // static serverSideRestricted = true
 
   async action(event: TFetchActionEvent<Params, TOAUTH2AuthContext>): TFetchPromise<ReturnedData> {
-    // const token = event.context.authAccess.accessToken
+    // const token = event.context.auth.accessToken
     // Put your logic here
     return { data: [] }
   }

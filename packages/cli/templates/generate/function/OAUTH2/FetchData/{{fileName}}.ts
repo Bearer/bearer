@@ -4,7 +4,7 @@ import { TOAUTH2AuthContext, FetchData, TFetchActionEvent, TFetchPromise } from 
 
 export default class {{functionClassName}}Function extends FetchData implements FetchData<ReturnedData, any, TOAUTH2AuthContext> {
   async action(event: TFetchActionEvent<Params, TOAUTH2AuthContext>): TFetchPromise<ReturnedData> {
-    // const token = event.context.authAccess.accessToken
+    // const token = event.context.auth.accessToken
     // Put your logic here
     return { data: [] }
   }
