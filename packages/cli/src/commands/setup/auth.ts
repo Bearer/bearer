@@ -1,12 +1,13 @@
+import * as express from 'express'
 import * as fs from 'fs'
 import * as http from 'http'
 import axios from 'axios'
+import getPort from 'get-port'
 import { modify, applyEdits } from 'jsonc-parser'
-import * as express from 'express'
 import { TConfig, Authentications, configs } from '@bearer/types/lib/authentications'
 import { contexts } from '@bearer/functions/lib/declaration'
-import getPort from 'get-port'
 
+// TODO: use esModuleInterop config
 // @ts-ignore
 import * as open from 'open'
 
@@ -15,7 +16,7 @@ import { RequireIntegrationFolder } from '../../utils/decorators'
 import { BEARER_AUTH_PORT, SUCCESS_LOGIN_PAGE } from '../../utils/constants'
 import { askForString, askForPassword } from '../../utils/prompts'
 
-type Event = 'success' | 'error' | 'shutdown'
+type Event = 'success' | 'error'
 
 export default class SetupAuth extends BaseCommand {
   static description = 'setup API credentials for local development'
@@ -30,11 +31,9 @@ export default class SetupAuth extends BaseCommand {
   private _listerners: {
     success: ((data: TBase64EncodedString) => void)[]
     error: ((data: any) => void)[]
-    shutdown: ((data: any) => void)[]
   } = {
     success: [],
-    error: [],
-    shutdown: []
+    error: []
   }
 
   @RequireIntegrationFolder()
@@ -139,19 +138,23 @@ export default class SetupAuth extends BaseCommand {
     if (this._server) {
       this._server.close(() => {
         this.debug('server stopped')
-        this._listerners.shutdown.map(cb => cb({}))
       })
     }
   }
 
   private startServer = async (): Promise<http.Server> => {
+    this.on('success', this.stopServer)
+    this.on('error', this.stopServer)
+
     const port = await getPort({ port: BEARER_AUTH_PORT })
+
     return new Promise((resolve, reject) => {
       if (port !== BEARER_AUTH_PORT) {
         this.error(`bearer setup requires port ${BEARER_AUTH_PORT} to be available`)
         reject()
       }
       this.debug('starting server')
+
       const app = express()
       app.use((_req: express.Request, res: express.Response, next: express.NextFunction) => {
         res.setHeader('Connection', 'close')
@@ -160,13 +163,15 @@ export default class SetupAuth extends BaseCommand {
       app.get('/setup/auth-callback', (req: express.Request, res: express.Response) => {
         const token: TBase64EncodedString = req.query.token || ''
         try {
-          this._listerners.success.map(cb => cb(token))
           res.setHeader('Connection', 'close')
           res.send(SUCCESS_LOGIN_PAGE).end()
-          this.stopServer()
+          setTimeout(() => {
+            this._listerners.success.map(cb => cb(token))
+          }, 0)
         } catch (e) {
           this.debug(e)
-          this.error('Error while handlking callback')
+          this._listerners.error.map(cb => cb(e))
+          this.error('Error while handling callback')
         }
       })
 

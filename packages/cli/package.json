@@ -72,6 +72,7 @@
     "@types/listr": "^0.13.0",
     "@types/lodash.set": "^4.3.6",
     "@types/nock": "^9.3.1",
+    "@types/open": "^6.1.0",
     "@types/webpack": "^4.4.27",
     "archiver": "^3.0.0",
     "jest": "^24.7.1",
