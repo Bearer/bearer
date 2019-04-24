@@ -20,6 +20,7 @@ export function cleanArtifactFolder(name: string) {
 
   return bearerFolder
 }
+
 export function ensureBearerStructure({
   authConfig,
   folderName = 'fakeintegration',

@@ -17,13 +17,49 @@ import { BEARER_AUTH_PORT, SUCCESS_LOGIN_PAGE } from '../../utils/constants'
 import { askForString, askForPassword } from '../../utils/prompts'
 
 type Event = 'success' | 'error'
-
+const SEPARATOR = ':'
+const COMMAND = `bearer setup:auth`
+const enum keys {
+  BEARER_AUTH_CLIENT_ID = 'BEARER_AUTH_CLIENT_ID',
+  BEARER_AUTH_CLIENT_SECRET = 'BEARER_AUTH_CLIENT_SECRET',
+  BEARER_AUTH_CONSUMER_KEY = 'BEARER_AUTH_CONSUMER_KEY',
+  BEARER_AUTH_CONSUMER_SECRET = 'BEARER_AUTH_CONSUMER_SECRET',
+  BEARER_AUTH_USERNAME = 'BEARER_AUTH_USERNAME',
+  BEARER_AUTH_PASSWORD = 'BEARER_AUTH_PASSWORD',
+  BEARER_AUTH_APIKEY = 'BEARER_AUTH_APIKEY'
+}
 export default class SetupAuth extends BaseCommand {
-  static description = 'setup API credentials for local development'
+  static description = `setup API credentials for local development.
+If you would like to bypass prompt, you can either:
+\t* pass credentials as argument (see description later)
+\t* use environment variables
+see examples`
 
   static flags = {
     ...BaseCommand.flags
   }
+
+  static examples = [
+    `With argument`,
+    `\t${COMMAND} CLIENT_ID${SEPARATOR}CLIENT_SECRET`,
+    `\t${COMMAND} CONSUMER_KEY${SEPARATOR}CONSUMER_SECRET`,
+    `\t${COMMAND} USERNAME${SEPARATOR}PASSWORD`,
+    `\t${COMMAND} APIKEY`,
+    `With environment variables`,
+    `\t${keys.BEARER_AUTH_CLIENT_ID}=CLIENT_ID ${keys.BEARER_AUTH_CLIENT_SECRET}=CLIENT_SECRET ${COMMAND}`,
+    `\t${keys.BEARER_AUTH_CONSUMER_KEY}=CONSUMER_KEY ${keys.BEARER_AUTH_CONSUMER_SECRET}=CONSUMER_SECRET ${COMMAND}`,
+    `\t${keys.BEARER_AUTH_USERNAME}=USERNAME ${keys.BEARER_AUTH_CONSUMER_SECRET}=PASSWORD ${COMMAND}`,
+    `\t${keys.BEARER_AUTH_APIKEY}=APIKEY ${COMMAND}`
+  ]
+
+  static args = [
+    {
+      name: 'credentials',
+      description: `Provide inline credentials`,
+      required: false,
+      default: ''
+    }
+  ]
 
   _server?: http.Server
   _verifier!: string
@@ -38,6 +74,7 @@ export default class SetupAuth extends BaseCommand {
 
   @RequireIntegrationFolder()
   async run() {
+    const { args } = this.parse(SetupAuth)
     const config: TConfig = JSON.parse(
       fs.readFileSync(this.locator.authConfigPath, {
         encoding: 'utf8'
@@ -46,20 +83,34 @@ export default class SetupAuth extends BaseCommand {
     const { authType } = config
     switch (authType) {
       case Authentications.OAuth2: {
-        const { BEARER_AUTH_CLIENT_ID, BEARER_AUTH_CLIENT_SECRET } = process.env
-        const clientID = BEARER_AUTH_CLIENT_ID || (await askForString('Client ID', { type: 'password' }))
-        const clientSecret = BEARER_AUTH_CLIENT_SECRET || (await askForString('Client secret', { type: 'password' }))
-        const newConfig = { ...config, clientID, clientSecret }
+        const [idArg, secretArg] = args.credentials.split(SEPARATOR)
+        const {
+          [keys.BEARER_AUTH_CLIENT_ID]: id = idArg,
+          [keys.BEARER_AUTH_CLIENT_SECRET]: secret = secretArg
+        } = process.env
+        const clientID = id || (await askForString('Client ID', { type: 'password' }))
+        const clientSecret = secret || (await askForString('Client secret', { type: 'password' }))
+
         this.debug('Your credentials:\n%j', { ...config, clientID, clientSecret: clientSecret.replace(/./g, '*') })
+
+        const newConfig = { ...config, clientID, clientSecret }
         const token = await this.fetchAuthToken(newConfig as configs.TOAuth2Config)
         const setup = JSON.parse(Buffer.from(token, 'base64').toString('ascii')) as contexts.OAuth2
         await this.persistSetup(setup)
         break
       }
       case Authentications.OAuth1: {
-        const consumerKey = process.env.BEARER_AUTH_CONSUMER_KEY || (await askForString('Consumer key'))
-        const consumerSecret = process.env.BEARER_AUTH_CONSUMER_SECRET || (await askForPassword('Consumer secret'))
+        const [keyArg, secretArg] = args.credentials.split(SEPARATOR)
+        const {
+          [keys.BEARER_AUTH_CONSUMER_KEY]: key = keyArg,
+          [keys.BEARER_AUTH_CONSUMER_SECRET]: secret = secretArg
+        } = process.env
+
+        const consumerKey = key || (await askForString('Consumer key'))
+        const consumerSecret = secret || (await askForPassword('Consumer secret'))
+
         this.debug('Your credentials:\n%j', { consumerKey, consumerSecret: consumerSecret.replace(/./g, '*') })
+
         const newConfig = { ...config, consumerKey, consumerSecret }
         const token = await this.fetchAuthToken(newConfig as configs.TOAuth1Config)
         const setup = JSON.parse(Buffer.from(token, 'base64').toString('ascii')) as contexts.OAuth1
@@ -69,18 +120,27 @@ export default class SetupAuth extends BaseCommand {
       }
 
       case Authentications.Basic: {
-        const username = await askForString('Username')
-        const password = await askForPassword('Password')
+        const [usernameArg, passwordArg] = args.credentials.split(SEPARATOR)
+        const {
+          [keys.BEARER_AUTH_USERNAME]: basicUsername = usernameArg,
+          [keys.BEARER_AUTH_PASSWORD]: basicPassword = passwordArg
+        } = process.env
+        const username = basicUsername || (await askForString('Username'))
+        const password = basicPassword || (await askForPassword('Password'))
+
         await this.persistSetup({ username, password } as contexts.Basic)
+
         break
       }
       case Authentications.ApiKey: {
-        const apiKey = await askForPassword('API Key')
+        const { [keys.BEARER_AUTH_APIKEY]: key = args.credentials } = process.env
+        const apiKey = key || (await askForPassword('API Key'))
         await this.persistSetup({ apiKey } as contexts.ApiKey)
         break
       }
       case Authentications.Custom:
       case Authentications.NoAuth: {
+        await this.persistSetup({})
         return this.warn(
           `The current authentication type of this integration is not supported by this command: ${authType}`
         )
@@ -93,7 +153,7 @@ export default class SetupAuth extends BaseCommand {
     }
   }
 
-  fetchAuthToken = async (config: configs.TOAuth2Config | configs.TOAuth1Config): Promise<TBase64EncodedString> => {
+  async fetchAuthToken(config: configs.TOAuth2Config | configs.TOAuth1Config): Promise<TBase64EncodedString> {
     return new Promise(async (resolve, reject) => {
       this._server = await this.startServer()
       const redirectLocation = await axios
