@@ -48,19 +48,19 @@ exports[`with views APIKEY generates an integration without any prompt and APIKE
     \\"generate\\": \\"bearer generate\\"
   },
   \\"dependencies\\": {
-    \\"@bearer/functions\\": \\"beta6\\",
+    \\"@bearer/functions\\": \\"latest\\",
     \\"axios\\": \\"^0.18.0\\",
-    \\"@bearer/core\\": \\"beta6\\",
-    \\"@bearer/ui\\": \\"beta6\\"
+    \\"@bearer/core\\": \\"latest\\",
+    \\"@bearer/ui\\": \\"latest\\"
   },
   \\"devDependencies\\": {
-    \\"@bearer/cli\\": \\"beta6\\",
+    \\"@bearer/cli\\": \\"latest\\",
     \\"@types/node\\": \\"^10.12.25\\",
-    \\"@bearer/js\\": \\"beta6\\"
+    \\"@bearer/js\\": \\"latest\\"
   },
   \\"license\\": \\"MIT\\",
   \\"peerDependencies\\": {
-    \\"@bearer/js\\": \\"beta6\\"
+    \\"@bearer/js\\": \\"latest\\"
   }
 }"
 `;
@@ -113,19 +113,19 @@ exports[`with views BASIC generates an integration without any prompt and BASIC 
     \\"generate\\": \\"bearer generate\\"
   },
   \\"dependencies\\": {
-    \\"@bearer/functions\\": \\"beta6\\",
+    \\"@bearer/functions\\": \\"latest\\",
     \\"axios\\": \\"^0.18.0\\",
-    \\"@bearer/core\\": \\"beta6\\",
-    \\"@bearer/ui\\": \\"beta6\\"
+    \\"@bearer/core\\": \\"latest\\",
+    \\"@bearer/ui\\": \\"latest\\"
   },
   \\"devDependencies\\": {
-    \\"@bearer/cli\\": \\"beta6\\",
+    \\"@bearer/cli\\": \\"latest\\",
     \\"@types/node\\": \\"^10.12.25\\",
-    \\"@bearer/js\\": \\"beta6\\"
+    \\"@bearer/js\\": \\"latest\\"
   },
   \\"license\\": \\"MIT\\",
   \\"peerDependencies\\": {
-    \\"@bearer/js\\": \\"beta6\\"
+    \\"@bearer/js\\": \\"latest\\"
   }
 }"
 `;
@@ -178,19 +178,19 @@ exports[`with views CUSTOM generates an integration without any prompt and CUSTO
     \\"generate\\": \\"bearer generate\\"
   },
   \\"dependencies\\": {
-    \\"@bearer/functions\\": \\"beta6\\",
+    \\"@bearer/functions\\": \\"latest\\",
     \\"axios\\": \\"^0.18.0\\",
-    \\"@bearer/core\\": \\"beta6\\",
-    \\"@bearer/ui\\": \\"beta6\\"
+    \\"@bearer/core\\": \\"latest\\",
+    \\"@bearer/ui\\": \\"latest\\"
   },
   \\"devDependencies\\": {
-    \\"@bearer/cli\\": \\"beta6\\",
+    \\"@bearer/cli\\": \\"latest\\",
     \\"@types/node\\": \\"^10.12.25\\",
-    \\"@bearer/js\\": \\"beta6\\"
+    \\"@bearer/js\\": \\"latest\\"
   },
   \\"license\\": \\"MIT\\",
   \\"peerDependencies\\": {
-    \\"@bearer/js\\": \\"beta6\\"
+    \\"@bearer/js\\": \\"latest\\"
   }
 }"
 `;
@@ -243,19 +243,19 @@ exports[`with views NONE generates an integration without any prompt and NONE 3`
     \\"generate\\": \\"bearer generate\\"
   },
   \\"dependencies\\": {
-    \\"@bearer/functions\\": \\"beta6\\",
+    \\"@bearer/functions\\": \\"latest\\",
     \\"axios\\": \\"^0.18.0\\",
-    \\"@bearer/core\\": \\"beta6\\",
-    \\"@bearer/ui\\": \\"beta6\\"
+    \\"@bearer/core\\": \\"latest\\",
+    \\"@bearer/ui\\": \\"latest\\"
   },
   \\"devDependencies\\": {
-    \\"@bearer/cli\\": \\"beta6\\",
+    \\"@bearer/cli\\": \\"latest\\",
     \\"@types/node\\": \\"^10.12.25\\",
-    \\"@bearer/js\\": \\"beta6\\"
+    \\"@bearer/js\\": \\"latest\\"
   },
   \\"license\\": \\"MIT\\",
   \\"peerDependencies\\": {
-    \\"@bearer/js\\": \\"beta6\\"
+    \\"@bearer/js\\": \\"latest\\"
   }
 }"
 `;
@@ -318,19 +318,19 @@ exports[`with views OAUTH1 generates an integration without any prompt and OAUTH
     \\"generate\\": \\"bearer generate\\"
   },
   \\"dependencies\\": {
-    \\"@bearer/functions\\": \\"beta6\\",
+    \\"@bearer/functions\\": \\"latest\\",
     \\"oauth\\": \\"^0.9.15\\",
-    \\"@bearer/core\\": \\"beta6\\",
-    \\"@bearer/ui\\": \\"beta6\\"
+    \\"@bearer/core\\": \\"latest\\",
+    \\"@bearer/ui\\": \\"latest\\"
   },
   \\"devDependencies\\": {
-    \\"@bearer/cli\\": \\"beta6\\",
+    \\"@bearer/cli\\": \\"latest\\",
     \\"@types/node\\": \\"^10.12.25\\",
-    \\"@bearer/js\\": \\"beta6\\"
+    \\"@bearer/js\\": \\"latest\\"
   },
   \\"license\\": \\"MIT\\",
   \\"peerDependencies\\": {
-    \\"@bearer/js\\": \\"beta6\\"
+    \\"@bearer/js\\": \\"latest\\"
   }
 }"
 `;
@@ -390,19 +390,19 @@ exports[`with views OAUTH2 generates an integration without any prompt and OAUTH
     \\"generate\\": \\"bearer generate\\"
   },
   \\"dependencies\\": {
-    \\"@bearer/functions\\": \\"beta6\\",
+    \\"@bearer/functions\\": \\"latest\\",
     \\"axios\\": \\"^0.18.0\\",
-    \\"@bearer/core\\": \\"beta6\\",
-    \\"@bearer/ui\\": \\"beta6\\"
+    \\"@bearer/core\\": \\"latest\\",
+    \\"@bearer/ui\\": \\"latest\\"
   },
   \\"devDependencies\\": {
-    \\"@bearer/cli\\": \\"beta6\\",
+    \\"@bearer/cli\\": \\"latest\\",
     \\"@types/node\\": \\"^10.12.25\\",
-    \\"@bearer/js\\": \\"beta6\\"
+    \\"@bearer/js\\": \\"latest\\"
   },
   \\"license\\": \\"MIT\\",
   \\"peerDependencies\\": {
-    \\"@bearer/js\\": \\"beta6\\"
+    \\"@bearer/js\\": \\"latest\\"
   }
 }"
 `;
@@ -452,11 +452,11 @@ exports[`without views APIKEY generates an integration without any prompt and AP
     \\"generate\\": \\"bearer generate\\"
   },
   \\"dependencies\\": {
-    \\"@bearer/functions\\": \\"beta6\\",
+    \\"@bearer/functions\\": \\"latest\\",
     \\"axios\\": \\"^0.18.0\\"
   },
   \\"devDependencies\\": {
-    \\"@bearer/cli\\": \\"beta6\\",
+    \\"@bearer/cli\\": \\"latest\\",
     \\"@types/node\\": \\"^10.12.25\\"
   },
   \\"license\\": \\"MIT\\"
@@ -509,11 +509,11 @@ exports[`without views BASIC generates an integration without any prompt and BAS
     \\"generate\\": \\"bearer generate\\"
   },
   \\"dependencies\\": {
-    \\"@bearer/functions\\": \\"beta6\\",
+    \\"@bearer/functions\\": \\"latest\\",
     \\"axios\\": \\"^0.18.0\\"
   },
   \\"devDependencies\\": {
-    \\"@bearer/cli\\": \\"beta6\\",
+    \\"@bearer/cli\\": \\"latest\\",
     \\"@types/node\\": \\"^10.12.25\\"
   },
   \\"license\\": \\"MIT\\"
@@ -566,11 +566,11 @@ exports[`without views CUSTOM generates an integration without any prompt and CU
     \\"generate\\": \\"bearer generate\\"
   },
   \\"dependencies\\": {
-    \\"@bearer/functions\\": \\"beta6\\",
+    \\"@bearer/functions\\": \\"latest\\",
     \\"axios\\": \\"^0.18.0\\"
   },
   \\"devDependencies\\": {
-    \\"@bearer/cli\\": \\"beta6\\",
+    \\"@bearer/cli\\": \\"latest\\",
     \\"@types/node\\": \\"^10.12.25\\"
   },
   \\"license\\": \\"MIT\\"
@@ -623,11 +623,11 @@ exports[`without views NONE generates an integration without any prompt and NONE
     \\"generate\\": \\"bearer generate\\"
   },
   \\"dependencies\\": {
-    \\"@bearer/functions\\": \\"beta6\\",
+    \\"@bearer/functions\\": \\"latest\\",
     \\"axios\\": \\"^0.18.0\\"
   },
   \\"devDependencies\\": {
-    \\"@bearer/cli\\": \\"beta6\\",
+    \\"@bearer/cli\\": \\"latest\\",
     \\"@types/node\\": \\"^10.12.25\\"
   },
   \\"license\\": \\"MIT\\"
@@ -690,11 +690,11 @@ exports[`without views OAUTH1 generates an integration without any prompt and OA
     \\"generate\\": \\"bearer generate\\"
   },
   \\"dependencies\\": {
-    \\"@bearer/functions\\": \\"beta6\\",
+    \\"@bearer/functions\\": \\"latest\\",
     \\"oauth\\": \\"^0.9.15\\"
   },
   \\"devDependencies\\": {
-    \\"@bearer/cli\\": \\"beta6\\",
+    \\"@bearer/cli\\": \\"latest\\",
     \\"@types/node\\": \\"^10.12.25\\"
   },
   \\"license\\": \\"MIT\\"
@@ -754,11 +754,11 @@ exports[`without views OAUTH2 generates an integration without any prompt and OA
     \\"generate\\": \\"bearer generate\\"
   },
   \\"dependencies\\": {
-    \\"@bearer/functions\\": \\"beta6\\",
+    \\"@bearer/functions\\": \\"latest\\",
     \\"axios\\": \\"^0.18.0\\"
   },
   \\"devDependencies\\": {
-    \\"@bearer/cli\\": \\"beta6\\",
+    \\"@bearer/cli\\": \\"latest\\",
     \\"@types/node\\": \\"^10.12.25\\"
   },
   \\"license\\": \\"MIT\\"

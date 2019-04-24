@@ -119,7 +119,7 @@ export default class New extends BaseCommand {
     integrationTitle: name,
     componentName: Case.pascal(name),
     componentTagName: Case.kebab(name),
-    bearerTagVersion: process.env.BEARER_PACKAGE_VERSION || 'beta6',
+    bearerTagVersion: process.env.BEARER_PACKAGE_VERSION || 'latest',
     bearerRestClient: this.bearerRestClient(authType)
   })
 

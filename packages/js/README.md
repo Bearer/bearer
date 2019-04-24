@@ -14,7 +14,7 @@ Bearer lib can be used instantly in your page or with a package system.
 ### Directly in your page
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/@bearer/js@beta6/lib/bearer.production.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@bearer/js@latest/lib/bearer.production.min.js"></script>
 <script>
   // you have now access to a global `bearer` function, initialize your code by passing the `clientId` as parameter
   const bearerClient = bearer('clientId')
@@ -46,23 +46,27 @@ class MyApp {
 ### Invoke js
 
 The Bearer SDK for JavaScript lets you invoke integration's js.
-```js
-const integrations = bearer('BEARER_CLIENT_ID');
 
-integrations.invoke('INTEGRATION_ID', 'myFunction')
-.then(console.log)
-.catch(console.error)
+```js
+const integrations = bearer('BEARER_CLIENT_ID')
+
+integrations
+  .invoke('INTEGRATION_ID', 'myFunction')
+  .then(console.log)
+  .catch(console.error)
 ```
 
 Passing params to your function works as follow:
-```js
-const integrations = bearer('BEARER_CLIENT_ID');
 
-integrations.invoke('INTEGRATION_ID', 'myFunction', {
-  query: { foo: 'bar' }
-})
-.then(console.log)
-.catch(console.error)
+```js
+const integrations = bearer('BEARER_CLIENT_ID')
+
+integrations
+  .invoke('INTEGRATION_ID', 'myFunction', {
+    query: { foo: 'bar' }
+  })
+  .then(console.log)
+  .catch(console.error)
 ```
 
 ### i18n
