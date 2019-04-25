@@ -5,6 +5,9 @@ export function readFile(...args: string[]): string {
   try {
     return fs.readFileSync(path.join(...args), { encoding: 'utf8' })
   } catch (err) {
+    if (err.code === 'ENOENT') {
+      return `Not found`
+    }
     return err.toString()
   }
 }

@@ -23,43 +23,38 @@ afterAll(() => {
   jest.unmock('inquirer')
 })
 
-describe.skip.each(Object.keys(authTypes))('without views %s', auth => {
-  it(`generates an integration without any prompt and ${auth}`, async () => {
+describe.each(Object.keys(authTypes))('Authentication: %s', auth => {
+  const inputSet: [string, string[], string][] = [
+    ['No Views', [], destination],
+    ['With Views', ['--withViews'], destinationWithViews]
+  ]
+  inputSet.forEach(([title, args, destinationPath]) => {
     const result: string[] = []
-    jest.spyOn(process.stdout, 'write').mockImplementation(val => {
-      result.push(val)
-      return true
+    const out = path.join(destinationPath, 'new', auth)
+    describe(title, () => {
+      describe(auth, () => {
+        beforeAll(async () => {
+          jest.spyOn(process.stdout, 'write').mockImplementation(val => {
+            result.push(val)
+            return true
+          })
+          await NewCommand.run([`${auth}Integration`, '-a', auth, '--skipInstall', '--path', out, ...args])
+        })
+
+        it('produces an output', () => {
+          const outPut = result.sort().join()
+          expect(outPut).toMatchSnapshot()
+        })
+
+        it('creates an auth.config.json file', () => {
+          expect(_readFile(out, `${auth}Integration`, AUTHCONFIG)).toMatchSnapshot()
+        })
+
+        it('creates a package.json file', () => {
+          expect(_readFile(out, `${auth}Integration`, PACKAGE_JSON)).toMatchSnapshot()
+        })
+      })
     })
-
-    const out = path.join(destination, 'new', auth)
-
-    await NewCommand.run([`${auth}Integration`, '-a', auth, '--skipInstall', '--path', out])
-
-    const outPut = result.sort().join()
-    expect(outPut).toMatchSnapshot()
-    expect(_readFile(out, AUTHCONFIG)).toMatchSnapshot()
-
-    expect(_readFile(out, PACKAGE_JSON)).toMatchSnapshot()
-    await setTimeout(() => {}, 10)
-  })
-})
-
-describe.skip.each(Object.keys(authTypes))('with views %s', auth => {
-  it(`generates an integration without any prompt and ${auth}`, async () => {
-    const result: string[] = []
-    jest.spyOn(process.stdout, 'write').mockImplementation(val => {
-      result.push(val)
-      return true
-    })
-    const out = path.join(destinationWithViews, 'new', auth)
-
-    await NewCommand.run([`${auth}Integration`, '-a', auth, '--skipInstall', '--withViews', '--path', out])
-
-    const outPut = result.sort().join()
-
-    expect(outPut).toMatchSnapshot()
-    expect(_readFile(out, AUTHCONFIG)).toMatchSnapshot()
-    expect(_readFile(out, PACKAGE_JSON)).toMatchSnapshot()
   })
 })
 

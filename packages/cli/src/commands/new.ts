@@ -113,7 +113,7 @@ export default class New extends BaseCommand {
           }
         ]
 
-        const { files: created } = await new Listr(tasks).run()
+        const { files: created } = await new Listr(tasks, { nonTTYRenderer: 'silent' }).run()
         files = created
         if (authType) {
           this.success(`Integration initialized, name: ${this.name}, authentication type: ${authTypes[authType].name}`)
@@ -127,7 +127,7 @@ export default class New extends BaseCommand {
       printFiles(this, files)
       this.log("\nWhat's next?\n")
       this.log('* read the bearer documentation at https://docs.bearer.sh\n')
-      this.log(`* start your local development environement by running:\n`)
+      this.log(`* start your local development environment by running:\n`)
       this.log(this.colors.bold(`   cd ${this.name} && yarn bearer start`))
     } catch (e) {
       this.debug('error: %j', e)
@@ -257,7 +257,7 @@ export async function defineLocationPath(
 
   while (fs.existsSync(location) && shouldForce !== true) {
     if (shouldForce === false) {
-      logger.warn(`${location} already exists\n please provide a different folder name`)
+      logger.warn(`${location.replace(cwd, '')} already exists\n please provide a different folder name`)
       const folderName = await askForString('Folder name to use')
       location = path.join(cwd, folderName)
     } else {

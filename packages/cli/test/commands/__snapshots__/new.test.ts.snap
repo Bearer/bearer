@@ -1,73 +1,63 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`with views APIKEY generates an integration without any prompt and APIKEY 1`] = `
-"
-What's next?
-
-,[1m   cd APIKEYIntegration && yarn bearer start[22m
-,[32mIntegration initialized, name: APIKEYIntegration, authentication type: API Key[39m
-,[90m    create: [39m[37m.bearer/initWithView/new/APIKEY/.gitignore[39m
-,[90m    create: [39m[37m.bearer/initWithView/new/APIKEY/.integrationrc[39m
-,[90m    create: [39m[37m.bearer/initWithView/new/APIKEY/LICENSE[39m
-,[90m    create: [39m[37m.bearer/initWithView/new/APIKEY/auth.config.json[39m
-,[90m    create: [39m[37m.bearer/initWithView/new/APIKEY/functions/client.ts[39m
-,[90m    create: [39m[37m.bearer/initWithView/new/APIKEY/functions/tsconfig.json[39m
-,[90m    create: [39m[37m.bearer/initWithView/new/APIKEY/package.json[39m
-,[90m    create: [39m[37m.bearer/initWithView/new/APIKEY/spec.ts[39m
-,[90m    create: [39m[37m.bearer/initWithView/new/APIKEY/tsconfig.json[39m
-,[90m    create: [39m[37m.bearer/initWithView/new/APIKEY/views/index.html[39m
-,[90m    create: [39m[37m.bearer/initWithView/new/APIKEY/views/index.ts[39m
-,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
-    [2m[15:37:49][22m Create auth files [completed]
-
-,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
-    [2m[15:37:49][22m Create auth files [started]
-
-,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
-    [2m[15:37:49][22m Create integration specification file [completed]
-
-,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
-    [2m[15:37:49][22m Create integration specification file [started]
-
-,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
-    [2m[15:37:49][22m Create intial components [completed]
-
-,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
-    [2m[15:37:49][22m Create intial components [started]
-
-,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
-    [2m[15:37:49][22m Create views related files [completed]
-
-,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
-    [2m[15:37:49][22m Create views related files [started]
-
-,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
-    [2m[15:37:49][22m Generating integration structure [completed]
-
-,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
-    [2m[15:37:49][22m Generating integration structure [started]
-
-,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
-    [2m[15:37:49][22m Generating views directory [completed]
-
-,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
-    [2m[15:37:49][22m Generating views directory [started]
-
-,* read the bearer documentation at https://docs.bearer.sh
-
-,* start your local development environement by running:
-
+exports[`Authentication: APIKEY No Views APIKEY creates a package.json file 1`] = `
+"{
+  \\"name\\": \\"apikeyintegration\\",
+  \\"version\\": \\"0.0.1\\",
+  \\"description\\": \\"APIKEYIntegration\\",
+  \\"main\\": \\"dist/index.js\\",
+  \\"types\\": \\"dist/types/components.d.ts\\",
+  \\"module\\": \\"dist/esm/index.js\\",
+  \\"collection\\": \\"dist/collection/collection-manifest.json\\",
+  \\"scripts\\": {
+    \\"bearer\\": \\"bearer\\",
+    \\"push\\": \\"bearer push\\",
+    \\"start\\": \\"bearer start\\",
+    \\"invoke\\": \\"bearer invoke\\",
+    \\"generate\\": \\"bearer generate\\"
+  },
+  \\"dependencies\\": {
+    \\"@bearer/functions\\": \\"latest\\",
+    \\"axios\\": \\"^0.18.0\\"
+  },
+  \\"devDependencies\\": {
+    \\"@bearer/cli\\": \\"latest\\",
+    \\"@types/node\\": \\"^10.12.25\\"
+  },
+  \\"license\\": \\"MIT\\"
+}
 "
 `;
 
-exports[`with views APIKEY generates an integration without any prompt and APIKEY 2`] = `
+exports[`Authentication: APIKEY No Views APIKEY creates an auth.config.json file 1`] = `
 "{
   \\"authType\\": \\"APIKEY\\"
 }
 "
 `;
 
-exports[`with views APIKEY generates an integration without any prompt and APIKEY 3`] = `
+exports[`Authentication: APIKEY No Views APIKEY produces an output 1`] = `
+"
+What's next?
+
+,[1m   cd APIKEYIntegration && yarn bearer start[22m
+,[32mIntegration initialized, name: APIKEYIntegration, authentication type: API Key[39m
+,[90m    create: [39m[37m.bearer/init/new/APIKEY/APIKEYIntegration/.gitignore[39m
+,[90m    create: [39m[37m.bearer/init/new/APIKEY/APIKEYIntegration/.integrationrc[39m
+,[90m    create: [39m[37m.bearer/init/new/APIKEY/APIKEYIntegration/LICENSE[39m
+,[90m    create: [39m[37m.bearer/init/new/APIKEY/APIKEYIntegration/auth.config.json[39m
+,[90m    create: [39m[37m.bearer/init/new/APIKEY/APIKEYIntegration/functions/client.ts[39m
+,[90m    create: [39m[37m.bearer/init/new/APIKEY/APIKEYIntegration/functions/tsconfig.json[39m
+,[90m    create: [39m[37m.bearer/init/new/APIKEY/APIKEYIntegration/package.json[39m
+,[90m    create: [39m[37m.bearer/init/new/APIKEY/APIKEYIntegration/tsconfig.json[39m
+,* read the bearer documentation at https://docs.bearer.sh
+
+,* start your local development environment by running:
+
+"
+`;
+
+exports[`Authentication: APIKEY With Views APIKEY creates a package.json file 1`] = `
 "{
   \\"name\\": \\"apikeyintegration\\",
   \\"version\\": \\"0.0.1\\",
@@ -101,74 +91,95 @@ exports[`with views APIKEY generates an integration without any prompt and APIKE
 }"
 `;
 
-exports[`with views BASIC generates an integration without any prompt and BASIC 1`] = `
+exports[`Authentication: APIKEY With Views APIKEY creates an auth.config.json file 1`] = `
+"{
+  \\"authType\\": \\"APIKEY\\"
+}
+"
+`;
+
+exports[`Authentication: APIKEY With Views APIKEY produces an output 1`] = `
 "
 What's next?
 
-,[1m   cd BASICIntegration && yarn bearer start[22m
-,[32mIntegration initialized, name: BASICIntegration, authentication type: Basic Auth[39m
-,[90m    create: [39m[37m.bearer/initWithView/new/BASIC/.gitignore[39m
-,[90m    create: [39m[37m.bearer/initWithView/new/BASIC/.integrationrc[39m
-,[90m    create: [39m[37m.bearer/initWithView/new/BASIC/LICENSE[39m
-,[90m    create: [39m[37m.bearer/initWithView/new/BASIC/auth.config.json[39m
-,[90m    create: [39m[37m.bearer/initWithView/new/BASIC/functions/client.ts[39m
-,[90m    create: [39m[37m.bearer/initWithView/new/BASIC/functions/tsconfig.json[39m
-,[90m    create: [39m[37m.bearer/initWithView/new/BASIC/package.json[39m
-,[90m    create: [39m[37m.bearer/initWithView/new/BASIC/spec.ts[39m
-,[90m    create: [39m[37m.bearer/initWithView/new/BASIC/tsconfig.json[39m
-,[90m    create: [39m[37m.bearer/initWithView/new/BASIC/views/index.html[39m
-,[90m    create: [39m[37m.bearer/initWithView/new/BASIC/views/index.ts[39m
-,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
-    [2m[15:37:49][22m Create auth files [completed]
-
-,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
-    [2m[15:37:49][22m Create auth files [started]
-
-,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
-    [2m[15:37:49][22m Create integration specification file [completed]
-
-,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
-    [2m[15:37:49][22m Create integration specification file [started]
-
-,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
-    [2m[15:37:49][22m Create intial components [completed]
-
-,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
-    [2m[15:37:49][22m Create intial components [started]
-
-,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
-    [2m[15:37:49][22m Create views related files [completed]
-
-,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
-    [2m[15:37:49][22m Create views related files [started]
-
-,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
-    [2m[15:37:49][22m Generating integration structure [completed]
-
-,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
-    [2m[15:37:49][22m Generating integration structure [started]
-
-,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
-    [2m[15:37:49][22m Generating views directory [completed]
-
-,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
-    [2m[15:37:49][22m Generating views directory [started]
-
+,[1m   cd APIKEYIntegration && yarn bearer start[22m
+,[32mIntegration initialized, name: APIKEYIntegration, authentication type: API Key[39m
+,[90m    create: [39m[37m.bearer/initWithView/new/APIKEY/APIKEYIntegration/.gitignore[39m
+,[90m    create: [39m[37m.bearer/initWithView/new/APIKEY/APIKEYIntegration/.integrationrc[39m
+,[90m    create: [39m[37m.bearer/initWithView/new/APIKEY/APIKEYIntegration/LICENSE[39m
+,[90m    create: [39m[37m.bearer/initWithView/new/APIKEY/APIKEYIntegration/auth.config.json[39m
+,[90m    create: [39m[37m.bearer/initWithView/new/APIKEY/APIKEYIntegration/functions/client.ts[39m
+,[90m    create: [39m[37m.bearer/initWithView/new/APIKEY/APIKEYIntegration/functions/tsconfig.json[39m
+,[90m    create: [39m[37m.bearer/initWithView/new/APIKEY/APIKEYIntegration/package.json[39m
+,[90m    create: [39m[37m.bearer/initWithView/new/APIKEY/APIKEYIntegration/spec.ts[39m
+,[90m    create: [39m[37m.bearer/initWithView/new/APIKEY/APIKEYIntegration/tsconfig.json[39m
+,[90m    create: [39m[37m.bearer/initWithView/new/APIKEY/APIKEYIntegration/views/index.html[39m
+,[90m    create: [39m[37m.bearer/initWithView/new/APIKEY/APIKEYIntegration/views/index.ts[39m
 ,* read the bearer documentation at https://docs.bearer.sh
 
-,* start your local development environement by running:
+,* start your local development environment by running:
 
 "
 `;
 
-exports[`with views BASIC generates an integration without any prompt and BASIC 2`] = `
+exports[`Authentication: BASIC No Views BASIC creates a package.json file 1`] = `
+"{
+  \\"name\\": \\"basicintegration\\",
+  \\"version\\": \\"0.0.1\\",
+  \\"description\\": \\"BASICIntegration\\",
+  \\"main\\": \\"dist/index.js\\",
+  \\"types\\": \\"dist/types/components.d.ts\\",
+  \\"module\\": \\"dist/esm/index.js\\",
+  \\"collection\\": \\"dist/collection/collection-manifest.json\\",
+  \\"scripts\\": {
+    \\"bearer\\": \\"bearer\\",
+    \\"push\\": \\"bearer push\\",
+    \\"start\\": \\"bearer start\\",
+    \\"invoke\\": \\"bearer invoke\\",
+    \\"generate\\": \\"bearer generate\\"
+  },
+  \\"dependencies\\": {
+    \\"@bearer/functions\\": \\"latest\\",
+    \\"axios\\": \\"^0.18.0\\"
+  },
+  \\"devDependencies\\": {
+    \\"@bearer/cli\\": \\"latest\\",
+    \\"@types/node\\": \\"^10.12.25\\"
+  },
+  \\"license\\": \\"MIT\\"
+}
+"
+`;
+
+exports[`Authentication: BASIC No Views BASIC creates an auth.config.json file 1`] = `
 "{
   \\"authType\\": \\"BASIC\\"
 }
 "
 `;
 
-exports[`with views BASIC generates an integration without any prompt and BASIC 3`] = `
+exports[`Authentication: BASIC No Views BASIC produces an output 1`] = `
+"
+What's next?
+
+,[1m   cd BASICIntegration && yarn bearer start[22m
+,[32mIntegration initialized, name: BASICIntegration, authentication type: Basic Auth[39m
+,[90m    create: [39m[37m.bearer/init/new/BASIC/BASICIntegration/.gitignore[39m
+,[90m    create: [39m[37m.bearer/init/new/BASIC/BASICIntegration/.integrationrc[39m
+,[90m    create: [39m[37m.bearer/init/new/BASIC/BASICIntegration/LICENSE[39m
+,[90m    create: [39m[37m.bearer/init/new/BASIC/BASICIntegration/auth.config.json[39m
+,[90m    create: [39m[37m.bearer/init/new/BASIC/BASICIntegration/functions/client.ts[39m
+,[90m    create: [39m[37m.bearer/init/new/BASIC/BASICIntegration/functions/tsconfig.json[39m
+,[90m    create: [39m[37m.bearer/init/new/BASIC/BASICIntegration/package.json[39m
+,[90m    create: [39m[37m.bearer/init/new/BASIC/BASICIntegration/tsconfig.json[39m
+,* read the bearer documentation at https://docs.bearer.sh
+
+,* start your local development environment by running:
+
+"
+`;
+
+exports[`Authentication: BASIC With Views BASIC creates a package.json file 1`] = `
 "{
   \\"name\\": \\"basicintegration\\",
   \\"version\\": \\"0.0.1\\",
@@ -202,74 +213,95 @@ exports[`with views BASIC generates an integration without any prompt and BASIC 
 }"
 `;
 
-exports[`with views CUSTOM generates an integration without any prompt and CUSTOM 1`] = `
+exports[`Authentication: BASIC With Views BASIC creates an auth.config.json file 1`] = `
+"{
+  \\"authType\\": \\"BASIC\\"
+}
+"
+`;
+
+exports[`Authentication: BASIC With Views BASIC produces an output 1`] = `
 "
 What's next?
 
-,[1m   cd CUSTOMIntegration && yarn bearer start[22m
-,[32mIntegration initialized, name: CUSTOMIntegration, authentication type: Custom[39m
-,[90m    create: [39m[37m.bearer/initWithView/new/CUSTOM/.gitignore[39m
-,[90m    create: [39m[37m.bearer/initWithView/new/CUSTOM/.integrationrc[39m
-,[90m    create: [39m[37m.bearer/initWithView/new/CUSTOM/LICENSE[39m
-,[90m    create: [39m[37m.bearer/initWithView/new/CUSTOM/auth.config.json[39m
-,[90m    create: [39m[37m.bearer/initWithView/new/CUSTOM/functions/client.ts[39m
-,[90m    create: [39m[37m.bearer/initWithView/new/CUSTOM/functions/tsconfig.json[39m
-,[90m    create: [39m[37m.bearer/initWithView/new/CUSTOM/package.json[39m
-,[90m    create: [39m[37m.bearer/initWithView/new/CUSTOM/spec.ts[39m
-,[90m    create: [39m[37m.bearer/initWithView/new/CUSTOM/tsconfig.json[39m
-,[90m    create: [39m[37m.bearer/initWithView/new/CUSTOM/views/index.html[39m
-,[90m    create: [39m[37m.bearer/initWithView/new/CUSTOM/views/index.ts[39m
-,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
-    [2m[15:37:49][22m Create auth files [completed]
-
-,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
-    [2m[15:37:49][22m Create auth files [started]
-
-,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
-    [2m[15:37:49][22m Create integration specification file [completed]
-
-,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
-    [2m[15:37:49][22m Create integration specification file [started]
-
-,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
-    [2m[15:37:49][22m Create intial components [completed]
-
-,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
-    [2m[15:37:49][22m Create intial components [started]
-
-,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
-    [2m[15:37:49][22m Create views related files [completed]
-
-,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
-    [2m[15:37:49][22m Create views related files [started]
-
-,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
-    [2m[15:37:49][22m Generating integration structure [completed]
-
-,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
-    [2m[15:37:49][22m Generating integration structure [started]
-
-,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
-    [2m[15:37:49][22m Generating views directory [completed]
-
-,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
-    [2m[15:37:49][22m Generating views directory [started]
-
+,[1m   cd BASICIntegration && yarn bearer start[22m
+,[32mIntegration initialized, name: BASICIntegration, authentication type: Basic Auth[39m
+,[90m    create: [39m[37m.bearer/initWithView/new/BASIC/BASICIntegration/.gitignore[39m
+,[90m    create: [39m[37m.bearer/initWithView/new/BASIC/BASICIntegration/.integrationrc[39m
+,[90m    create: [39m[37m.bearer/initWithView/new/BASIC/BASICIntegration/LICENSE[39m
+,[90m    create: [39m[37m.bearer/initWithView/new/BASIC/BASICIntegration/auth.config.json[39m
+,[90m    create: [39m[37m.bearer/initWithView/new/BASIC/BASICIntegration/functions/client.ts[39m
+,[90m    create: [39m[37m.bearer/initWithView/new/BASIC/BASICIntegration/functions/tsconfig.json[39m
+,[90m    create: [39m[37m.bearer/initWithView/new/BASIC/BASICIntegration/package.json[39m
+,[90m    create: [39m[37m.bearer/initWithView/new/BASIC/BASICIntegration/spec.ts[39m
+,[90m    create: [39m[37m.bearer/initWithView/new/BASIC/BASICIntegration/tsconfig.json[39m
+,[90m    create: [39m[37m.bearer/initWithView/new/BASIC/BASICIntegration/views/index.html[39m
+,[90m    create: [39m[37m.bearer/initWithView/new/BASIC/BASICIntegration/views/index.ts[39m
 ,* read the bearer documentation at https://docs.bearer.sh
 
-,* start your local development environement by running:
+,* start your local development environment by running:
 
 "
 `;
 
-exports[`with views CUSTOM generates an integration without any prompt and CUSTOM 2`] = `
+exports[`Authentication: CUSTOM No Views CUSTOM creates a package.json file 1`] = `
+"{
+  \\"name\\": \\"customintegration\\",
+  \\"version\\": \\"0.0.1\\",
+  \\"description\\": \\"CUSTOMIntegration\\",
+  \\"main\\": \\"dist/index.js\\",
+  \\"types\\": \\"dist/types/components.d.ts\\",
+  \\"module\\": \\"dist/esm/index.js\\",
+  \\"collection\\": \\"dist/collection/collection-manifest.json\\",
+  \\"scripts\\": {
+    \\"bearer\\": \\"bearer\\",
+    \\"push\\": \\"bearer push\\",
+    \\"start\\": \\"bearer start\\",
+    \\"invoke\\": \\"bearer invoke\\",
+    \\"generate\\": \\"bearer generate\\"
+  },
+  \\"dependencies\\": {
+    \\"@bearer/functions\\": \\"latest\\",
+    \\"axios\\": \\"^0.18.0\\"
+  },
+  \\"devDependencies\\": {
+    \\"@bearer/cli\\": \\"latest\\",
+    \\"@types/node\\": \\"^10.12.25\\"
+  },
+  \\"license\\": \\"MIT\\"
+}
+"
+`;
+
+exports[`Authentication: CUSTOM No Views CUSTOM creates an auth.config.json file 1`] = `
 "{
   \\"authType\\": \\"CUSTOM\\"
 }
 "
 `;
 
-exports[`with views CUSTOM generates an integration without any prompt and CUSTOM 3`] = `
+exports[`Authentication: CUSTOM No Views CUSTOM produces an output 1`] = `
+"
+What's next?
+
+,[1m   cd CUSTOMIntegration && yarn bearer start[22m
+,[32mIntegration initialized, name: CUSTOMIntegration, authentication type: Custom[39m
+,[90m    create: [39m[37m.bearer/init/new/CUSTOM/CUSTOMIntegration/.gitignore[39m
+,[90m    create: [39m[37m.bearer/init/new/CUSTOM/CUSTOMIntegration/.integrationrc[39m
+,[90m    create: [39m[37m.bearer/init/new/CUSTOM/CUSTOMIntegration/LICENSE[39m
+,[90m    create: [39m[37m.bearer/init/new/CUSTOM/CUSTOMIntegration/auth.config.json[39m
+,[90m    create: [39m[37m.bearer/init/new/CUSTOM/CUSTOMIntegration/functions/client.ts[39m
+,[90m    create: [39m[37m.bearer/init/new/CUSTOM/CUSTOMIntegration/functions/tsconfig.json[39m
+,[90m    create: [39m[37m.bearer/init/new/CUSTOM/CUSTOMIntegration/package.json[39m
+,[90m    create: [39m[37m.bearer/init/new/CUSTOM/CUSTOMIntegration/tsconfig.json[39m
+,* read the bearer documentation at https://docs.bearer.sh
+
+,* start your local development environment by running:
+
+"
+`;
+
+exports[`Authentication: CUSTOM With Views CUSTOM creates a package.json file 1`] = `
 "{
   \\"name\\": \\"customintegration\\",
   \\"version\\": \\"0.0.1\\",
@@ -303,74 +335,95 @@ exports[`with views CUSTOM generates an integration without any prompt and CUSTO
 }"
 `;
 
-exports[`with views NONE generates an integration without any prompt and NONE 1`] = `
+exports[`Authentication: CUSTOM With Views CUSTOM creates an auth.config.json file 1`] = `
+"{
+  \\"authType\\": \\"CUSTOM\\"
+}
+"
+`;
+
+exports[`Authentication: CUSTOM With Views CUSTOM produces an output 1`] = `
 "
 What's next?
 
-,[1m   cd NONEIntegration && yarn bearer start[22m
-,[32mIntegration initialized, name: NONEIntegration, authentication type: NoAuth[39m
-,[90m    create: [39m[37m.bearer/initWithView/new/NONE/.gitignore[39m
-,[90m    create: [39m[37m.bearer/initWithView/new/NONE/.integrationrc[39m
-,[90m    create: [39m[37m.bearer/initWithView/new/NONE/LICENSE[39m
-,[90m    create: [39m[37m.bearer/initWithView/new/NONE/auth.config.json[39m
-,[90m    create: [39m[37m.bearer/initWithView/new/NONE/functions/client.ts[39m
-,[90m    create: [39m[37m.bearer/initWithView/new/NONE/functions/tsconfig.json[39m
-,[90m    create: [39m[37m.bearer/initWithView/new/NONE/package.json[39m
-,[90m    create: [39m[37m.bearer/initWithView/new/NONE/spec.ts[39m
-,[90m    create: [39m[37m.bearer/initWithView/new/NONE/tsconfig.json[39m
-,[90m    create: [39m[37m.bearer/initWithView/new/NONE/views/index.html[39m
-,[90m    create: [39m[37m.bearer/initWithView/new/NONE/views/index.ts[39m
-,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
-    [2m[15:37:49][22m Create auth files [completed]
-
-,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
-    [2m[15:37:49][22m Create auth files [started]
-
-,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
-    [2m[15:37:49][22m Create integration specification file [completed]
-
-,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
-    [2m[15:37:49][22m Create integration specification file [started]
-
-,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
-    [2m[15:37:49][22m Create intial components [completed]
-
-,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
-    [2m[15:37:49][22m Create intial components [started]
-
-,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
-    [2m[15:37:49][22m Create views related files [completed]
-
-,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
-    [2m[15:37:49][22m Create views related files [started]
-
-,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
-    [2m[15:37:49][22m Generating integration structure [completed]
-
-,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
-    [2m[15:37:49][22m Generating integration structure [started]
-
-,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
-    [2m[15:37:49][22m Generating views directory [completed]
-
-,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
-    [2m[15:37:49][22m Generating views directory [started]
-
+,[1m   cd CUSTOMIntegration && yarn bearer start[22m
+,[32mIntegration initialized, name: CUSTOMIntegration, authentication type: Custom[39m
+,[90m    create: [39m[37m.bearer/initWithView/new/CUSTOM/CUSTOMIntegration/.gitignore[39m
+,[90m    create: [39m[37m.bearer/initWithView/new/CUSTOM/CUSTOMIntegration/.integrationrc[39m
+,[90m    create: [39m[37m.bearer/initWithView/new/CUSTOM/CUSTOMIntegration/LICENSE[39m
+,[90m    create: [39m[37m.bearer/initWithView/new/CUSTOM/CUSTOMIntegration/auth.config.json[39m
+,[90m    create: [39m[37m.bearer/initWithView/new/CUSTOM/CUSTOMIntegration/functions/client.ts[39m
+,[90m    create: [39m[37m.bearer/initWithView/new/CUSTOM/CUSTOMIntegration/functions/tsconfig.json[39m
+,[90m    create: [39m[37m.bearer/initWithView/new/CUSTOM/CUSTOMIntegration/package.json[39m
+,[90m    create: [39m[37m.bearer/initWithView/new/CUSTOM/CUSTOMIntegration/spec.ts[39m
+,[90m    create: [39m[37m.bearer/initWithView/new/CUSTOM/CUSTOMIntegration/tsconfig.json[39m
+,[90m    create: [39m[37m.bearer/initWithView/new/CUSTOM/CUSTOMIntegration/views/index.html[39m
+,[90m    create: [39m[37m.bearer/initWithView/new/CUSTOM/CUSTOMIntegration/views/index.ts[39m
 ,* read the bearer documentation at https://docs.bearer.sh
 
-,* start your local development environement by running:
+,* start your local development environment by running:
 
 "
 `;
 
-exports[`with views NONE generates an integration without any prompt and NONE 2`] = `
+exports[`Authentication: NONE No Views NONE creates a package.json file 1`] = `
+"{
+  \\"name\\": \\"noneintegration\\",
+  \\"version\\": \\"0.0.1\\",
+  \\"description\\": \\"NONEIntegration\\",
+  \\"main\\": \\"dist/index.js\\",
+  \\"types\\": \\"dist/types/components.d.ts\\",
+  \\"module\\": \\"dist/esm/index.js\\",
+  \\"collection\\": \\"dist/collection/collection-manifest.json\\",
+  \\"scripts\\": {
+    \\"bearer\\": \\"bearer\\",
+    \\"push\\": \\"bearer push\\",
+    \\"start\\": \\"bearer start\\",
+    \\"invoke\\": \\"bearer invoke\\",
+    \\"generate\\": \\"bearer generate\\"
+  },
+  \\"dependencies\\": {
+    \\"@bearer/functions\\": \\"latest\\",
+    \\"axios\\": \\"^0.18.0\\"
+  },
+  \\"devDependencies\\": {
+    \\"@bearer/cli\\": \\"latest\\",
+    \\"@types/node\\": \\"^10.12.25\\"
+  },
+  \\"license\\": \\"MIT\\"
+}
+"
+`;
+
+exports[`Authentication: NONE No Views NONE creates an auth.config.json file 1`] = `
 "{
   \\"authType\\": \\"NONE\\"
 }
 "
 `;
 
-exports[`with views NONE generates an integration without any prompt and NONE 3`] = `
+exports[`Authentication: NONE No Views NONE produces an output 1`] = `
+"
+What's next?
+
+,[1m   cd NONEIntegration && yarn bearer start[22m
+,[32mIntegration initialized, name: NONEIntegration, authentication type: NoAuth[39m
+,[90m    create: [39m[37m.bearer/init/new/NONE/NONEIntegration/.gitignore[39m
+,[90m    create: [39m[37m.bearer/init/new/NONE/NONEIntegration/.integrationrc[39m
+,[90m    create: [39m[37m.bearer/init/new/NONE/NONEIntegration/LICENSE[39m
+,[90m    create: [39m[37m.bearer/init/new/NONE/NONEIntegration/auth.config.json[39m
+,[90m    create: [39m[37m.bearer/init/new/NONE/NONEIntegration/functions/client.ts[39m
+,[90m    create: [39m[37m.bearer/init/new/NONE/NONEIntegration/functions/tsconfig.json[39m
+,[90m    create: [39m[37m.bearer/init/new/NONE/NONEIntegration/package.json[39m
+,[90m    create: [39m[37m.bearer/init/new/NONE/NONEIntegration/tsconfig.json[39m
+,* read the bearer documentation at https://docs.bearer.sh
+
+,* start your local development environment by running:
+
+"
+`;
+
+exports[`Authentication: NONE With Views NONE creates a package.json file 1`] = `
 "{
   \\"name\\": \\"noneintegration\\",
   \\"version\\": \\"0.0.1\\",
@@ -404,67 +457,67 @@ exports[`with views NONE generates an integration without any prompt and NONE 3`
 }"
 `;
 
-exports[`with views OAUTH1 generates an integration without any prompt and OAUTH1 1`] = `
+exports[`Authentication: NONE With Views NONE creates an auth.config.json file 1`] = `
+"{
+  \\"authType\\": \\"NONE\\"
+}
+"
+`;
+
+exports[`Authentication: NONE With Views NONE produces an output 1`] = `
 "
 What's next?
 
-,[1m   cd OAUTH1Integration && yarn bearer start[22m
-,[32mIntegration initialized, name: OAUTH1Integration, authentication type: OAuth1[39m
-,[90m    create: [39m[37m.bearer/initWithView/new/OAUTH1/.gitignore[39m
-,[90m    create: [39m[37m.bearer/initWithView/new/OAUTH1/.integrationrc[39m
-,[90m    create: [39m[37m.bearer/initWithView/new/OAUTH1/LICENSE[39m
-,[90m    create: [39m[37m.bearer/initWithView/new/OAUTH1/auth.config.json[39m
-,[90m    create: [39m[37m.bearer/initWithView/new/OAUTH1/functions/client.ts[39m
-,[90m    create: [39m[37m.bearer/initWithView/new/OAUTH1/functions/tsconfig.json[39m
-,[90m    create: [39m[37m.bearer/initWithView/new/OAUTH1/package.json[39m
-,[90m    create: [39m[37m.bearer/initWithView/new/OAUTH1/spec.ts[39m
-,[90m    create: [39m[37m.bearer/initWithView/new/OAUTH1/tsconfig.json[39m
-,[90m    create: [39m[37m.bearer/initWithView/new/OAUTH1/views/index.html[39m
-,[90m    create: [39m[37m.bearer/initWithView/new/OAUTH1/views/index.ts[39m
-,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
-    [2m[15:37:49][22m Create auth files [completed]
-
-,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
-    [2m[15:37:49][22m Create auth files [started]
-
-,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
-    [2m[15:37:49][22m Create integration specification file [completed]
-
-,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
-    [2m[15:37:49][22m Create integration specification file [started]
-
-,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
-    [2m[15:37:49][22m Create intial components [completed]
-
-,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
-    [2m[15:37:49][22m Create intial components [started]
-
-,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
-    [2m[15:37:49][22m Create views related files [completed]
-
-,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
-    [2m[15:37:49][22m Create views related files [started]
-
-,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
-    [2m[15:37:49][22m Generating integration structure [completed]
-
-,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
-    [2m[15:37:49][22m Generating integration structure [started]
-
-,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
-    [2m[15:37:49][22m Generating views directory [completed]
-
-,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
-    [2m[15:37:49][22m Generating views directory [started]
-
+,[1m   cd NONEIntegration && yarn bearer start[22m
+,[32mIntegration initialized, name: NONEIntegration, authentication type: NoAuth[39m
+,[90m    create: [39m[37m.bearer/initWithView/new/NONE/NONEIntegration/.gitignore[39m
+,[90m    create: [39m[37m.bearer/initWithView/new/NONE/NONEIntegration/.integrationrc[39m
+,[90m    create: [39m[37m.bearer/initWithView/new/NONE/NONEIntegration/LICENSE[39m
+,[90m    create: [39m[37m.bearer/initWithView/new/NONE/NONEIntegration/auth.config.json[39m
+,[90m    create: [39m[37m.bearer/initWithView/new/NONE/NONEIntegration/functions/client.ts[39m
+,[90m    create: [39m[37m.bearer/initWithView/new/NONE/NONEIntegration/functions/tsconfig.json[39m
+,[90m    create: [39m[37m.bearer/initWithView/new/NONE/NONEIntegration/package.json[39m
+,[90m    create: [39m[37m.bearer/initWithView/new/NONE/NONEIntegration/spec.ts[39m
+,[90m    create: [39m[37m.bearer/initWithView/new/NONE/NONEIntegration/tsconfig.json[39m
+,[90m    create: [39m[37m.bearer/initWithView/new/NONE/NONEIntegration/views/index.html[39m
+,[90m    create: [39m[37m.bearer/initWithView/new/NONE/NONEIntegration/views/index.ts[39m
 ,* read the bearer documentation at https://docs.bearer.sh
 
-,* start your local development environement by running:
+,* start your local development environment by running:
 
 "
 `;
 
-exports[`with views OAUTH1 generates an integration without any prompt and OAUTH1 2`] = `
+exports[`Authentication: OAUTH1 No Views OAUTH1 creates a package.json file 1`] = `
+"{
+  \\"name\\": \\"oauth1-integration\\",
+  \\"version\\": \\"0.0.1\\",
+  \\"description\\": \\"OAUTH1Integration\\",
+  \\"main\\": \\"dist/index.js\\",
+  \\"types\\": \\"dist/types/components.d.ts\\",
+  \\"module\\": \\"dist/esm/index.js\\",
+  \\"collection\\": \\"dist/collection/collection-manifest.json\\",
+  \\"scripts\\": {
+    \\"bearer\\": \\"bearer\\",
+    \\"push\\": \\"bearer push\\",
+    \\"start\\": \\"bearer start\\",
+    \\"invoke\\": \\"bearer invoke\\",
+    \\"generate\\": \\"bearer generate\\"
+  },
+  \\"dependencies\\": {
+    \\"@bearer/functions\\": \\"latest\\",
+    \\"oauth\\": \\"^0.9.15\\"
+  },
+  \\"devDependencies\\": {
+    \\"@bearer/cli\\": \\"latest\\",
+    \\"@types/node\\": \\"^10.12.25\\"
+  },
+  \\"license\\": \\"MIT\\"
+}
+"
+`;
+
+exports[`Authentication: OAUTH1 No Views OAUTH1 creates an auth.config.json file 1`] = `
 "{
   \\"requestTokenURL\\": \\"https://example.com/oauth/RequestToken\\",
   \\"accessTokenURL\\": \\"https://example.com/oauth/AccessToken\\",
@@ -481,7 +534,28 @@ exports[`with views OAUTH1 generates an integration without any prompt and OAUTH
 "
 `;
 
-exports[`with views OAUTH1 generates an integration without any prompt and OAUTH1 3`] = `
+exports[`Authentication: OAUTH1 No Views OAUTH1 produces an output 1`] = `
+"
+What's next?
+
+,[1m   cd OAUTH1Integration && yarn bearer start[22m
+,[32mIntegration initialized, name: OAUTH1Integration, authentication type: OAuth1[39m
+,[90m    create: [39m[37m.bearer/init/new/OAUTH1/OAUTH1Integration/.gitignore[39m
+,[90m    create: [39m[37m.bearer/init/new/OAUTH1/OAUTH1Integration/.integrationrc[39m
+,[90m    create: [39m[37m.bearer/init/new/OAUTH1/OAUTH1Integration/LICENSE[39m
+,[90m    create: [39m[37m.bearer/init/new/OAUTH1/OAUTH1Integration/auth.config.json[39m
+,[90m    create: [39m[37m.bearer/init/new/OAUTH1/OAUTH1Integration/functions/client.ts[39m
+,[90m    create: [39m[37m.bearer/init/new/OAUTH1/OAUTH1Integration/functions/tsconfig.json[39m
+,[90m    create: [39m[37m.bearer/init/new/OAUTH1/OAUTH1Integration/package.json[39m
+,[90m    create: [39m[37m.bearer/init/new/OAUTH1/OAUTH1Integration/tsconfig.json[39m
+,* read the bearer documentation at https://docs.bearer.sh
+
+,* start your local development environment by running:
+
+"
+`;
+
+exports[`Authentication: OAUTH1 With Views OAUTH1 creates a package.json file 1`] = `
 "{
   \\"name\\": \\"oauth1-integration\\",
   \\"version\\": \\"0.0.1\\",
@@ -515,67 +589,77 @@ exports[`with views OAUTH1 generates an integration without any prompt and OAUTH
 }"
 `;
 
-exports[`with views OAUTH2 generates an integration without any prompt and OAUTH2 1`] = `
+exports[`Authentication: OAUTH1 With Views OAUTH1 creates an auth.config.json file 1`] = `
+"{
+  \\"requestTokenURL\\": \\"https://example.com/oauth/RequestToken\\",
+  \\"accessTokenURL\\": \\"https://example.com/oauth/AccessToken\\",
+  \\"userAuthorizationURL\\": \\"https://example.com/oauth/Authorize\\",
+  \\"callbackURL\\": \\"https://int.bearer.sh/v2/auth/callback\\",
+  \\"authType\\": \\"OAUTH1\\",
+  \\"signatureMethod\\": \\"HMAC-SHA1\\",
+  \\"tokenParams\\": {},
+  \\"authorizationParams\\": {},
+  \\"config\\": {
+    \\"scope\\": []
+  }
+}
+"
+`;
+
+exports[`Authentication: OAUTH1 With Views OAUTH1 produces an output 1`] = `
 "
 What's next?
 
-,[1m   cd OAUTH2Integration && yarn bearer start[22m
-,[32mIntegration initialized, name: OAUTH2Integration, authentication type: OAuth2[39m
-,[90m    create: [39m[37m.bearer/initWithView/new/OAUTH2/.gitignore[39m
-,[90m    create: [39m[37m.bearer/initWithView/new/OAUTH2/.integrationrc[39m
-,[90m    create: [39m[37m.bearer/initWithView/new/OAUTH2/LICENSE[39m
-,[90m    create: [39m[37m.bearer/initWithView/new/OAUTH2/auth.config.json[39m
-,[90m    create: [39m[37m.bearer/initWithView/new/OAUTH2/functions/client.ts[39m
-,[90m    create: [39m[37m.bearer/initWithView/new/OAUTH2/functions/tsconfig.json[39m
-,[90m    create: [39m[37m.bearer/initWithView/new/OAUTH2/package.json[39m
-,[90m    create: [39m[37m.bearer/initWithView/new/OAUTH2/spec.ts[39m
-,[90m    create: [39m[37m.bearer/initWithView/new/OAUTH2/tsconfig.json[39m
-,[90m    create: [39m[37m.bearer/initWithView/new/OAUTH2/views/index.html[39m
-,[90m    create: [39m[37m.bearer/initWithView/new/OAUTH2/views/index.ts[39m
-,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
-    [2m[15:37:49][22m Create auth files [completed]
-
-,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
-    [2m[15:37:49][22m Create auth files [started]
-
-,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
-    [2m[15:37:49][22m Create integration specification file [completed]
-
-,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
-    [2m[15:37:49][22m Create integration specification file [started]
-
-,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
-    [2m[15:37:49][22m Create intial components [completed]
-
-,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
-    [2m[15:37:49][22m Create intial components [started]
-
-,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
-    [2m[15:37:49][22m Create views related files [completed]
-
-,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
-    [2m[15:37:49][22m Create views related files [started]
-
-,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
-    [2m[15:37:49][22m Generating integration structure [completed]
-
-,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
-    [2m[15:37:49][22m Generating integration structure [started]
-
-,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
-    [2m[15:37:49][22m Generating views directory [completed]
-
-,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
-    [2m[15:37:49][22m Generating views directory [started]
-
+,[1m   cd OAUTH1Integration && yarn bearer start[22m
+,[32mIntegration initialized, name: OAUTH1Integration, authentication type: OAuth1[39m
+,[90m    create: [39m[37m.bearer/initWithView/new/OAUTH1/OAUTH1Integration/.gitignore[39m
+,[90m    create: [39m[37m.bearer/initWithView/new/OAUTH1/OAUTH1Integration/.integrationrc[39m
+,[90m    create: [39m[37m.bearer/initWithView/new/OAUTH1/OAUTH1Integration/LICENSE[39m
+,[90m    create: [39m[37m.bearer/initWithView/new/OAUTH1/OAUTH1Integration/auth.config.json[39m
+,[90m    create: [39m[37m.bearer/initWithView/new/OAUTH1/OAUTH1Integration/functions/client.ts[39m
+,[90m    create: [39m[37m.bearer/initWithView/new/OAUTH1/OAUTH1Integration/functions/tsconfig.json[39m
+,[90m    create: [39m[37m.bearer/initWithView/new/OAUTH1/OAUTH1Integration/package.json[39m
+,[90m    create: [39m[37m.bearer/initWithView/new/OAUTH1/OAUTH1Integration/spec.ts[39m
+,[90m    create: [39m[37m.bearer/initWithView/new/OAUTH1/OAUTH1Integration/tsconfig.json[39m
+,[90m    create: [39m[37m.bearer/initWithView/new/OAUTH1/OAUTH1Integration/views/index.html[39m
+,[90m    create: [39m[37m.bearer/initWithView/new/OAUTH1/OAUTH1Integration/views/index.ts[39m
 ,* read the bearer documentation at https://docs.bearer.sh
 
-,* start your local development environement by running:
+,* start your local development environment by running:
 
 "
 `;
 
-exports[`with views OAUTH2 generates an integration without any prompt and OAUTH2 2`] = `
+exports[`Authentication: OAUTH2 No Views OAUTH2 creates a package.json file 1`] = `
+"{
+  \\"name\\": \\"oauth2-integration\\",
+  \\"version\\": \\"0.0.1\\",
+  \\"description\\": \\"OAUTH2Integration\\",
+  \\"main\\": \\"dist/index.js\\",
+  \\"types\\": \\"dist/types/components.d.ts\\",
+  \\"module\\": \\"dist/esm/index.js\\",
+  \\"collection\\": \\"dist/collection/collection-manifest.json\\",
+  \\"scripts\\": {
+    \\"bearer\\": \\"bearer\\",
+    \\"push\\": \\"bearer push\\",
+    \\"start\\": \\"bearer start\\",
+    \\"invoke\\": \\"bearer invoke\\",
+    \\"generate\\": \\"bearer generate\\"
+  },
+  \\"dependencies\\": {
+    \\"@bearer/functions\\": \\"latest\\",
+    \\"axios\\": \\"^0.18.0\\"
+  },
+  \\"devDependencies\\": {
+    \\"@bearer/cli\\": \\"latest\\",
+    \\"@types/node\\": \\"^10.12.25\\"
+  },
+  \\"license\\": \\"MIT\\"
+}
+"
+`;
+
+exports[`Authentication: OAUTH2 No Views OAUTH2 creates an auth.config.json file 1`] = `
 "{
   \\"authorizationURL\\": \\"https://example.com/authorizationUrl\\",
   \\"tokenURL\\": \\"https://example.com/tokenUrl\\",
@@ -589,7 +673,28 @@ exports[`with views OAUTH2 generates an integration without any prompt and OAUTH
 "
 `;
 
-exports[`with views OAUTH2 generates an integration without any prompt and OAUTH2 3`] = `
+exports[`Authentication: OAUTH2 No Views OAUTH2 produces an output 1`] = `
+"
+What's next?
+
+,[1m   cd OAUTH2Integration && yarn bearer start[22m
+,[32mIntegration initialized, name: OAUTH2Integration, authentication type: OAuth2[39m
+,[90m    create: [39m[37m.bearer/init/new/OAUTH2/OAUTH2Integration/.gitignore[39m
+,[90m    create: [39m[37m.bearer/init/new/OAUTH2/OAUTH2Integration/.integrationrc[39m
+,[90m    create: [39m[37m.bearer/init/new/OAUTH2/OAUTH2Integration/LICENSE[39m
+,[90m    create: [39m[37m.bearer/init/new/OAUTH2/OAUTH2Integration/auth.config.json[39m
+,[90m    create: [39m[37m.bearer/init/new/OAUTH2/OAUTH2Integration/functions/client.ts[39m
+,[90m    create: [39m[37m.bearer/init/new/OAUTH2/OAUTH2Integration/functions/tsconfig.json[39m
+,[90m    create: [39m[37m.bearer/init/new/OAUTH2/OAUTH2Integration/package.json[39m
+,[90m    create: [39m[37m.bearer/init/new/OAUTH2/OAUTH2Integration/tsconfig.json[39m
+,* read the bearer documentation at https://docs.bearer.sh
+
+,* start your local development environment by running:
+
+"
+`;
+
+exports[`Authentication: OAUTH2 With Views OAUTH2 creates a package.json file 1`] = `
 "{
   \\"name\\": \\"oauth2-integration\\",
   \\"version\\": \\"0.0.1\\",
@@ -623,395 +728,7 @@ exports[`with views OAUTH2 generates an integration without any prompt and OAUTH
 }"
 `;
 
-exports[`without views APIKEY generates an integration without any prompt and APIKEY 1`] = `
-"
-What's next?
-
-,[1m   cd APIKEYIntegration && yarn bearer start[22m
-,[32mIntegration initialized, name: APIKEYIntegration, authentication type: API Key[39m
-,[90m    create: [39m[37m.bearer/init/new/APIKEY/.gitignore[39m
-,[90m    create: [39m[37m.bearer/init/new/APIKEY/.integrationrc[39m
-,[90m    create: [39m[37m.bearer/init/new/APIKEY/LICENSE[39m
-,[90m    create: [39m[37m.bearer/init/new/APIKEY/auth.config.json[39m
-,[90m    create: [39m[37m.bearer/init/new/APIKEY/functions/client.ts[39m
-,[90m    create: [39m[37m.bearer/init/new/APIKEY/functions/tsconfig.json[39m
-,[90m    create: [39m[37m.bearer/init/new/APIKEY/package.json[39m
-,[90m    create: [39m[37m.bearer/init/new/APIKEY/tsconfig.json[39m
-,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
-    [2m[15:37:48][22m Create auth files [completed]
-
-,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
-    [2m[15:37:48][22m Create auth files [started]
-
-,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
-    [2m[15:37:48][22m Generating integration structure [completed]
-
-,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
-    [2m[15:37:48][22m Generating integration structure [started]
-
-,* read the bearer documentation at https://docs.bearer.sh
-
-,* start your local development environement by running:
-
-"
-`;
-
-exports[`without views APIKEY generates an integration without any prompt and APIKEY 2`] = `
-"{
-  \\"authType\\": \\"APIKEY\\"
-}
-"
-`;
-
-exports[`without views APIKEY generates an integration without any prompt and APIKEY 3`] = `
-"{
-  \\"name\\": \\"apikeyintegration\\",
-  \\"version\\": \\"0.0.1\\",
-  \\"description\\": \\"APIKEYIntegration\\",
-  \\"main\\": \\"dist/index.js\\",
-  \\"types\\": \\"dist/types/components.d.ts\\",
-  \\"module\\": \\"dist/esm/index.js\\",
-  \\"collection\\": \\"dist/collection/collection-manifest.json\\",
-  \\"scripts\\": {
-    \\"bearer\\": \\"bearer\\",
-    \\"push\\": \\"bearer push\\",
-    \\"start\\": \\"bearer start\\",
-    \\"invoke\\": \\"bearer invoke\\",
-    \\"generate\\": \\"bearer generate\\"
-  },
-  \\"dependencies\\": {
-    \\"@bearer/functions\\": \\"latest\\",
-    \\"axios\\": \\"^0.18.0\\"
-  },
-  \\"devDependencies\\": {
-    \\"@bearer/cli\\": \\"latest\\",
-    \\"@types/node\\": \\"^10.12.25\\"
-  },
-  \\"license\\": \\"MIT\\"
-}
-"
-`;
-
-exports[`without views BASIC generates an integration without any prompt and BASIC 1`] = `
-"
-What's next?
-
-,[1m   cd BASICIntegration && yarn bearer start[22m
-,[32mIntegration initialized, name: BASICIntegration, authentication type: Basic Auth[39m
-,[90m    create: [39m[37m.bearer/init/new/BASIC/.gitignore[39m
-,[90m    create: [39m[37m.bearer/init/new/BASIC/.integrationrc[39m
-,[90m    create: [39m[37m.bearer/init/new/BASIC/LICENSE[39m
-,[90m    create: [39m[37m.bearer/init/new/BASIC/auth.config.json[39m
-,[90m    create: [39m[37m.bearer/init/new/BASIC/functions/client.ts[39m
-,[90m    create: [39m[37m.bearer/init/new/BASIC/functions/tsconfig.json[39m
-,[90m    create: [39m[37m.bearer/init/new/BASIC/package.json[39m
-,[90m    create: [39m[37m.bearer/init/new/BASIC/tsconfig.json[39m
-,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
-    [2m[15:37:48][22m Create auth files [completed]
-
-,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
-    [2m[15:37:48][22m Create auth files [started]
-
-,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
-    [2m[15:37:48][22m Generating integration structure [completed]
-
-,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
-    [2m[15:37:48][22m Generating integration structure [started]
-
-,* read the bearer documentation at https://docs.bearer.sh
-
-,* start your local development environement by running:
-
-"
-`;
-
-exports[`without views BASIC generates an integration without any prompt and BASIC 2`] = `
-"{
-  \\"authType\\": \\"BASIC\\"
-}
-"
-`;
-
-exports[`without views BASIC generates an integration without any prompt and BASIC 3`] = `
-"{
-  \\"name\\": \\"basicintegration\\",
-  \\"version\\": \\"0.0.1\\",
-  \\"description\\": \\"BASICIntegration\\",
-  \\"main\\": \\"dist/index.js\\",
-  \\"types\\": \\"dist/types/components.d.ts\\",
-  \\"module\\": \\"dist/esm/index.js\\",
-  \\"collection\\": \\"dist/collection/collection-manifest.json\\",
-  \\"scripts\\": {
-    \\"bearer\\": \\"bearer\\",
-    \\"push\\": \\"bearer push\\",
-    \\"start\\": \\"bearer start\\",
-    \\"invoke\\": \\"bearer invoke\\",
-    \\"generate\\": \\"bearer generate\\"
-  },
-  \\"dependencies\\": {
-    \\"@bearer/functions\\": \\"latest\\",
-    \\"axios\\": \\"^0.18.0\\"
-  },
-  \\"devDependencies\\": {
-    \\"@bearer/cli\\": \\"latest\\",
-    \\"@types/node\\": \\"^10.12.25\\"
-  },
-  \\"license\\": \\"MIT\\"
-}
-"
-`;
-
-exports[`without views CUSTOM generates an integration without any prompt and CUSTOM 1`] = `
-"
-What's next?
-
-,[1m   cd CUSTOMIntegration && yarn bearer start[22m
-,[32mIntegration initialized, name: CUSTOMIntegration, authentication type: Custom[39m
-,[90m    create: [39m[37m.bearer/init/new/CUSTOM/.gitignore[39m
-,[90m    create: [39m[37m.bearer/init/new/CUSTOM/.integrationrc[39m
-,[90m    create: [39m[37m.bearer/init/new/CUSTOM/LICENSE[39m
-,[90m    create: [39m[37m.bearer/init/new/CUSTOM/auth.config.json[39m
-,[90m    create: [39m[37m.bearer/init/new/CUSTOM/functions/client.ts[39m
-,[90m    create: [39m[37m.bearer/init/new/CUSTOM/functions/tsconfig.json[39m
-,[90m    create: [39m[37m.bearer/init/new/CUSTOM/package.json[39m
-,[90m    create: [39m[37m.bearer/init/new/CUSTOM/tsconfig.json[39m
-,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
-    [2m[15:37:49][22m Create auth files [completed]
-
-,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
-    [2m[15:37:49][22m Create auth files [started]
-
-,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
-    [2m[15:37:49][22m Generating integration structure [completed]
-
-,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
-    [2m[15:37:49][22m Generating integration structure [started]
-
-,* read the bearer documentation at https://docs.bearer.sh
-
-,* start your local development environement by running:
-
-"
-`;
-
-exports[`without views CUSTOM generates an integration without any prompt and CUSTOM 2`] = `
-"{
-  \\"authType\\": \\"CUSTOM\\"
-}
-"
-`;
-
-exports[`without views CUSTOM generates an integration without any prompt and CUSTOM 3`] = `
-"{
-  \\"name\\": \\"customintegration\\",
-  \\"version\\": \\"0.0.1\\",
-  \\"description\\": \\"CUSTOMIntegration\\",
-  \\"main\\": \\"dist/index.js\\",
-  \\"types\\": \\"dist/types/components.d.ts\\",
-  \\"module\\": \\"dist/esm/index.js\\",
-  \\"collection\\": \\"dist/collection/collection-manifest.json\\",
-  \\"scripts\\": {
-    \\"bearer\\": \\"bearer\\",
-    \\"push\\": \\"bearer push\\",
-    \\"start\\": \\"bearer start\\",
-    \\"invoke\\": \\"bearer invoke\\",
-    \\"generate\\": \\"bearer generate\\"
-  },
-  \\"dependencies\\": {
-    \\"@bearer/functions\\": \\"latest\\",
-    \\"axios\\": \\"^0.18.0\\"
-  },
-  \\"devDependencies\\": {
-    \\"@bearer/cli\\": \\"latest\\",
-    \\"@types/node\\": \\"^10.12.25\\"
-  },
-  \\"license\\": \\"MIT\\"
-}
-"
-`;
-
-exports[`without views NONE generates an integration without any prompt and NONE 1`] = `
-"
-What's next?
-
-,[1m   cd NONEIntegration && yarn bearer start[22m
-,[32mIntegration initialized, name: NONEIntegration, authentication type: NoAuth[39m
-,[90m    create: [39m[37m.bearer/init/new/NONE/.gitignore[39m
-,[90m    create: [39m[37m.bearer/init/new/NONE/.integrationrc[39m
-,[90m    create: [39m[37m.bearer/init/new/NONE/LICENSE[39m
-,[90m    create: [39m[37m.bearer/init/new/NONE/auth.config.json[39m
-,[90m    create: [39m[37m.bearer/init/new/NONE/functions/client.ts[39m
-,[90m    create: [39m[37m.bearer/init/new/NONE/functions/tsconfig.json[39m
-,[90m    create: [39m[37m.bearer/init/new/NONE/package.json[39m
-,[90m    create: [39m[37m.bearer/init/new/NONE/tsconfig.json[39m
-,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
-    [2m[15:37:48][22m Generating integration structure [started]
-
-,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
-    [2m[15:37:49][22m Create auth files [completed]
-
-,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
-    [2m[15:37:49][22m Create auth files [started]
-
-,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
-    [2m[15:37:49][22m Generating integration structure [completed]
-
-,* read the bearer documentation at https://docs.bearer.sh
-
-,* start your local development environement by running:
-
-"
-`;
-
-exports[`without views NONE generates an integration without any prompt and NONE 2`] = `
-"{
-  \\"authType\\": \\"NONE\\"
-}
-"
-`;
-
-exports[`without views NONE generates an integration without any prompt and NONE 3`] = `
-"{
-  \\"name\\": \\"noneintegration\\",
-  \\"version\\": \\"0.0.1\\",
-  \\"description\\": \\"NONEIntegration\\",
-  \\"main\\": \\"dist/index.js\\",
-  \\"types\\": \\"dist/types/components.d.ts\\",
-  \\"module\\": \\"dist/esm/index.js\\",
-  \\"collection\\": \\"dist/collection/collection-manifest.json\\",
-  \\"scripts\\": {
-    \\"bearer\\": \\"bearer\\",
-    \\"push\\": \\"bearer push\\",
-    \\"start\\": \\"bearer start\\",
-    \\"invoke\\": \\"bearer invoke\\",
-    \\"generate\\": \\"bearer generate\\"
-  },
-  \\"dependencies\\": {
-    \\"@bearer/functions\\": \\"latest\\",
-    \\"axios\\": \\"^0.18.0\\"
-  },
-  \\"devDependencies\\": {
-    \\"@bearer/cli\\": \\"latest\\",
-    \\"@types/node\\": \\"^10.12.25\\"
-  },
-  \\"license\\": \\"MIT\\"
-}
-"
-`;
-
-exports[`without views OAUTH1 generates an integration without any prompt and OAUTH1 1`] = `
-"
-What's next?
-
-,[1m   cd OAUTH1Integration && yarn bearer start[22m
-,[32mIntegration initialized, name: OAUTH1Integration, authentication type: OAuth1[39m
-,[90m    create: [39m[37m.bearer/init/new/OAUTH1/.gitignore[39m
-,[90m    create: [39m[37m.bearer/init/new/OAUTH1/.integrationrc[39m
-,[90m    create: [39m[37m.bearer/init/new/OAUTH1/LICENSE[39m
-,[90m    create: [39m[37m.bearer/init/new/OAUTH1/auth.config.json[39m
-,[90m    create: [39m[37m.bearer/init/new/OAUTH1/functions/client.ts[39m
-,[90m    create: [39m[37m.bearer/init/new/OAUTH1/functions/tsconfig.json[39m
-,[90m    create: [39m[37m.bearer/init/new/OAUTH1/package.json[39m
-,[90m    create: [39m[37m.bearer/init/new/OAUTH1/tsconfig.json[39m
-,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
-    [2m[15:37:48][22m Create auth files [completed]
-
-,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
-    [2m[15:37:48][22m Create auth files [started]
-
-,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
-    [2m[15:37:48][22m Generating integration structure [completed]
-
-,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
-    [2m[15:37:48][22m Generating integration structure [started]
-
-,* read the bearer documentation at https://docs.bearer.sh
-
-,* start your local development environement by running:
-
-"
-`;
-
-exports[`without views OAUTH1 generates an integration without any prompt and OAUTH1 2`] = `
-"{
-  \\"requestTokenURL\\": \\"https://example.com/oauth/RequestToken\\",
-  \\"accessTokenURL\\": \\"https://example.com/oauth/AccessToken\\",
-  \\"userAuthorizationURL\\": \\"https://example.com/oauth/Authorize\\",
-  \\"callbackURL\\": \\"https://int.bearer.sh/v2/auth/callback\\",
-  \\"authType\\": \\"OAUTH1\\",
-  \\"signatureMethod\\": \\"HMAC-SHA1\\",
-  \\"tokenParams\\": {},
-  \\"authorizationParams\\": {},
-  \\"config\\": {
-    \\"scope\\": []
-  }
-}
-"
-`;
-
-exports[`without views OAUTH1 generates an integration without any prompt and OAUTH1 3`] = `
-"{
-  \\"name\\": \\"oauth1-integration\\",
-  \\"version\\": \\"0.0.1\\",
-  \\"description\\": \\"OAUTH1Integration\\",
-  \\"main\\": \\"dist/index.js\\",
-  \\"types\\": \\"dist/types/components.d.ts\\",
-  \\"module\\": \\"dist/esm/index.js\\",
-  \\"collection\\": \\"dist/collection/collection-manifest.json\\",
-  \\"scripts\\": {
-    \\"bearer\\": \\"bearer\\",
-    \\"push\\": \\"bearer push\\",
-    \\"start\\": \\"bearer start\\",
-    \\"invoke\\": \\"bearer invoke\\",
-    \\"generate\\": \\"bearer generate\\"
-  },
-  \\"dependencies\\": {
-    \\"@bearer/functions\\": \\"latest\\",
-    \\"oauth\\": \\"^0.9.15\\"
-  },
-  \\"devDependencies\\": {
-    \\"@bearer/cli\\": \\"latest\\",
-    \\"@types/node\\": \\"^10.12.25\\"
-  },
-  \\"license\\": \\"MIT\\"
-}
-"
-`;
-
-exports[`without views OAUTH2 generates an integration without any prompt and OAUTH2 1`] = `
-"
-What's next?
-
-,[1m   cd OAUTH2Integration && yarn bearer start[22m
-,[32mIntegration initialized, name: OAUTH2Integration, authentication type: OAuth2[39m
-,[90m    create: [39m[37m.bearer/init/new/OAUTH2/.gitignore[39m
-,[90m    create: [39m[37m.bearer/init/new/OAUTH2/.integrationrc[39m
-,[90m    create: [39m[37m.bearer/init/new/OAUTH2/LICENSE[39m
-,[90m    create: [39m[37m.bearer/init/new/OAUTH2/auth.config.json[39m
-,[90m    create: [39m[37m.bearer/init/new/OAUTH2/functions/client.ts[39m
-,[90m    create: [39m[37m.bearer/init/new/OAUTH2/functions/tsconfig.json[39m
-,[90m    create: [39m[37m.bearer/init/new/OAUTH2/package.json[39m
-,[90m    create: [39m[37m.bearer/init/new/OAUTH2/tsconfig.json[39m
-,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
-    [2m[15:37:48][22m Create auth files [completed]
-
-,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
-    [2m[15:37:48][22m Create auth files [started]
-
-,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
-    [2m[15:37:48][22m Generating integration structure [completed]
-
-,  [2mconsole.log[22m [2m../../node_modules/listr-verbose-renderer/lib/utils.js:13[22m
-    [2m[15:37:48][22m Generating integration structure [started]
-
-,* read the bearer documentation at https://docs.bearer.sh
-
-,* start your local development environement by running:
-
-"
-`;
-
-exports[`without views OAUTH2 generates an integration without any prompt and OAUTH2 2`] = `
+exports[`Authentication: OAUTH2 With Views OAUTH2 creates an auth.config.json file 1`] = `
 "{
   \\"authorizationURL\\": \\"https://example.com/authorizationUrl\\",
   \\"tokenURL\\": \\"https://example.com/tokenUrl\\",
@@ -1025,31 +742,26 @@ exports[`without views OAUTH2 generates an integration without any prompt and OA
 "
 `;
 
-exports[`without views OAUTH2 generates an integration without any prompt and OAUTH2 3`] = `
-"{
-  \\"name\\": \\"oauth2-integration\\",
-  \\"version\\": \\"0.0.1\\",
-  \\"description\\": \\"OAUTH2Integration\\",
-  \\"main\\": \\"dist/index.js\\",
-  \\"types\\": \\"dist/types/components.d.ts\\",
-  \\"module\\": \\"dist/esm/index.js\\",
-  \\"collection\\": \\"dist/collection/collection-manifest.json\\",
-  \\"scripts\\": {
-    \\"bearer\\": \\"bearer\\",
-    \\"push\\": \\"bearer push\\",
-    \\"start\\": \\"bearer start\\",
-    \\"invoke\\": \\"bearer invoke\\",
-    \\"generate\\": \\"bearer generate\\"
-  },
-  \\"dependencies\\": {
-    \\"@bearer/functions\\": \\"latest\\",
-    \\"axios\\": \\"^0.18.0\\"
-  },
-  \\"devDependencies\\": {
-    \\"@bearer/cli\\": \\"latest\\",
-    \\"@types/node\\": \\"^10.12.25\\"
-  },
-  \\"license\\": \\"MIT\\"
-}
+exports[`Authentication: OAUTH2 With Views OAUTH2 produces an output 1`] = `
+"
+What's next?
+
+,[1m   cd OAUTH2Integration && yarn bearer start[22m
+,[32mIntegration initialized, name: OAUTH2Integration, authentication type: OAuth2[39m
+,[90m    create: [39m[37m.bearer/initWithView/new/OAUTH2/OAUTH2Integration/.gitignore[39m
+,[90m    create: [39m[37m.bearer/initWithView/new/OAUTH2/OAUTH2Integration/.integrationrc[39m
+,[90m    create: [39m[37m.bearer/initWithView/new/OAUTH2/OAUTH2Integration/LICENSE[39m
+,[90m    create: [39m[37m.bearer/initWithView/new/OAUTH2/OAUTH2Integration/auth.config.json[39m
+,[90m    create: [39m[37m.bearer/initWithView/new/OAUTH2/OAUTH2Integration/functions/client.ts[39m
+,[90m    create: [39m[37m.bearer/initWithView/new/OAUTH2/OAUTH2Integration/functions/tsconfig.json[39m
+,[90m    create: [39m[37m.bearer/initWithView/new/OAUTH2/OAUTH2Integration/package.json[39m
+,[90m    create: [39m[37m.bearer/initWithView/new/OAUTH2/OAUTH2Integration/spec.ts[39m
+,[90m    create: [39m[37m.bearer/initWithView/new/OAUTH2/OAUTH2Integration/tsconfig.json[39m
+,[90m    create: [39m[37m.bearer/initWithView/new/OAUTH2/OAUTH2Integration/views/index.html[39m
+,[90m    create: [39m[37m.bearer/initWithView/new/OAUTH2/OAUTH2Integration/views/index.ts[39m
+,* read the bearer documentation at https://docs.bearer.sh
+
+,* start your local development environment by running:
+
 "
 `;
