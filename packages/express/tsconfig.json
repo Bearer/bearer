@@ -5,7 +5,8 @@
     "outDir": "./lib",
     "strict": true,
     "esModuleInterop": true,
-    "declaration": true
+    "declaration": true,
+    "moduleResolution": "node"
   },
   "include": ["src/"]
 }

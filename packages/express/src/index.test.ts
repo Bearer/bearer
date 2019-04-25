@@ -136,7 +136,7 @@ describe('Bearer middleware', () => {
           .expect(401, {
             error: {
               name: 'Bearer:WebhookIncorrectSignature',
-              message: 'Incorrect signature, please make ure you provided the correct token'
+              message: 'Incorrect signature, please make sure you provided the correct token'
             }
           })
       })
@@ -149,7 +149,7 @@ describe('Bearer middleware', () => {
           .expect(401, {
             error: {
               name: 'Bearer:WebhookIncorrectSignature',
-              message: 'Incorrect signature, please make ure you provided the correct token'
+              message: 'Incorrect signature, please make sure you provided the correct token'
             }
           })
       })
