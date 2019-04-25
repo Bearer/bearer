@@ -30,7 +30,7 @@ const enum keys {
 }
 export default class SetupAuth extends BaseCommand {
   static description = `setup API credentials for local development.
-If you would like to bypass prompt, you can either:
+If you would like to bypass the prompt, you can either:
 \t* pass credentials as argument (see description later)
 \t* use environment variables
 see examples`
