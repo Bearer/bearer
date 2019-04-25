@@ -2881,7 +2881,7 @@
     "@types/node" "*"
     "@types/range-parser" "*"
 
-"@types/express@*", "@types/express@^4.16.0":
+"@types/express@*", "@types/express@^4.16.0", "@types/express@^4.16.1":
   version "4.16.1"
   resolved "https://registry.yarnpkg.com/@types/express/-/express-4.16.1.tgz#d756bd1a85c34d87eaf44c888bad27ba8a4b7cf0"
   integrity sha512-V0clmJow23WeyblmACoxbHBu2JKlE5TiIme6Lem14FnPW9gsttyHtk6wq7njcdIWH1njAaFgR8gW09lgY98gQg==
@@ -3122,6 +3122,13 @@
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/@types/on-headers/-/on-headers-1.0.0.tgz#12e80879ff22257036d3f18310c39de1881d141e"
   integrity sha512-m5LRgPZzWPHGoEQDbuVuduRMctCW5tDarxi9f7+rYZoJDy7nMHMMrODtqbwPpNjYc6Ilg4vL2NeYAwimJfku3w==
+  dependencies:
+    "@types/node" "*"
+
+"@types/open@^6.1.0":
+  version "6.1.0"
+  resolved "https://registry.yarnpkg.com/@types/open/-/open-6.1.0.tgz#3cdf3db197a6a5d823babe6effeed243fad5d28a"
+  integrity sha512-sdB0OltczakZfdn5DYg3ZbHoQeYtU8Vbo4dys0U98gikn++M4gGDI02dzEWXPMP5uXGSjGx9GnK/yLlJMfGjlg==
   dependencies:
     "@types/node" "*"
 
