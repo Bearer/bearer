@@ -58,7 +58,7 @@ export default class New extends BaseCommand {
   }
 
   static args = [{ name: 'IntegrationName' }]
-  private copyDestinationFolder!: string
+  copyDestinationFolder!: string
   private path?: string
   private name!: string
 
