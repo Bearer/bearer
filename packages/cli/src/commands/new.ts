@@ -125,10 +125,11 @@ export default class New extends BaseCommand {
       }
 
       printFiles(this, files)
+      const finalLocation = this.copyDestinationFolder.replace(path.resolve(args.path || process.cwd()), '.')
       this.log("\nWhat's next?\n")
       this.log('* read the bearer documentation at https://docs.bearer.sh\n')
       this.log(`* start your local development environment by running:\n`)
-      this.log(this.colors.bold(`   cd ${this.name} && yarn bearer start`))
+      this.log(this.colors.bold(`   cd ${finalLocation} && yarn bearer start`))
     } catch (e) {
       this.debug('error: %j', e)
       this.error(e)
@@ -266,7 +267,7 @@ export async function defineLocationPath(
           type: 'confirm',
           name: 'override',
           default: false,
-          message: 'Copy files anyway'
+          message: `${location} is not empty, copy files anyway?`
         }
       ])
       shouldForce = override
