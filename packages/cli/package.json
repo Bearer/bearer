@@ -111,7 +111,7 @@
     "prepack": "rm -rf lib && tsc && oclif-dev manifest && oclif-dev readme",
     "prepare": "rm -rf lib && tsc",
     "test": "rm -rf .bearer && jest --runInBand --colors",
-    "test:ci": "rm -rf .bearer && jest --runInBand --colors",
+    "test:ci": "rm -rf .bearer && jest --runInBand --colors --coverage",
     "version": "oclif-dev readme && git add README.md"
   },
   "types": "lib/index.d.ts",
