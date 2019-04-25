@@ -8,3 +8,5 @@ export function readFile(...args: string[]): string {
     return err.toString()
   }
 }
+
+export const ARTIFACT_FOLDER = path.join(__dirname, '..', '.artifacts')

@@ -48,6 +48,7 @@ export default class New extends BaseCommand {
     }),
     skipInstall: flags.boolean({ hidden: true, description: 'Do not install dependencies' }),
     withViews: flags.boolean({ description: 'Experimental - generate views' }),
+    force: flags.boolean({ description: 'Force copying files' }),
     authType: flags.string({
       char: 'a',
       description: 'Authorization type', // help description for flag
@@ -57,21 +58,26 @@ export default class New extends BaseCommand {
   }
 
   static args = [{ name: 'IntegrationName' }]
-  private destinationFolder!: string
+  private copyDestinationFolder!: string
   private path?: string
   private name!: string
 
   async run() {
     const { args, flags } = this.parse(New)
     this.debug('url: %j', flags)
-
     const { template, directory } = flags
     this.path = flags.path
 
     try {
       this.name = args.IntegrationName || (await askForString('Integration name'))
+      this.copyDestinationFolder = await defineLocationPath(this, {
+        name: this.name,
+        cwd: this.path || process.cwd(),
+        force: args.force
+      })
+
+      this.debug('target path: %s', this.copyDestinationFolder)
       const skipInstall = flags.skipInstall
-      this.destinationFolder = this.name
       let files: string[] = []
 
       if (template) {
@@ -85,10 +91,10 @@ export default class New extends BaseCommand {
           folder = selected
         }
 
-        const destination = path.join(tmp, folder || '')
-        fs.copySync(destination, this.name)
-        this.debug('copied from %s to %s', destination, this.name)
-        files = await globby(['**/*'], { cwd: this.name })
+        const source = path.join(tmp, folder || '')
+        fs.copySync(source, this.copyDestinationFolder)
+        this.debug('copied from %s to %s', source, this.copyDestinationFolder)
+        files = await globby(['**/*'], { cwd: this.copyDestinationFolder })
       } else {
         const authType: Authentications = (flags.authType as Authentications) || (await askForAuthType())
         const tasks: Listr.ListrTask[] = [
@@ -115,7 +121,7 @@ export default class New extends BaseCommand {
       }
 
       if (!skipInstall) {
-        await new Listr([installDependencies({ cwd: this.copyDestFolder })]).run()
+        await new Listr([installDependencies({ cwd: this.copyDestinationFolder })]).run()
       }
 
       printFiles(this, files)
@@ -130,21 +136,23 @@ export default class New extends BaseCommand {
   }
 
   createIntegrationStructure = (authType: Authentications) => async (ctx: { files: string[] }) => {
-    if (fs.existsSync(this.copyDestFolder)) {
-      this.error(this.colors.bold('Destination already exists: ') + this.copyDestFolder)
-    } else {
-      ctx.files = await copyFiles(
-        this,
-        path.join('init', 'structure'),
-        this.copyDestFolder,
-        this.getVars(authType),
-        true
-      )
-    }
+    ctx.files = await copyFiles(
+      this,
+      path.join('init', 'structure'),
+      this.copyDestinationFolder,
+      this.getVars(authType),
+      true
+    )
   }
 
   createAuthFiles = (authType: Authentications) => async (ctx: { files: string[] }) => {
-    const files = await copyFiles(this, path.join('init', authType), this.copyDestFolder, this.getVars(authType), true)
+    const files = await copyFiles(
+      this,
+      path.join('init', authType),
+      this.copyDestinationFolder,
+      this.getVars(authType),
+      true
+    )
     ctx.files = [...ctx.files, ...files]
   }
 
@@ -156,12 +164,12 @@ export default class New extends BaseCommand {
       }),
       {
         title: 'Create integration specification file',
-        task: async (_ctx: any, _task: any) => GenerateSpec.run(['--path', this.copyDestFolder, '--silent'])
+        task: async (_ctx: any, _task: any) => GenerateSpec.run(['--path', this.copyDestinationFolder, '--silent'])
       },
       {
         title: 'Create intial components',
         task: async (_ctx: any, _task: any) =>
-          GenerateComponent.run(['feature', '--type', 'root', '--path', this.copyDestFolder, '--silent'])
+          GenerateComponent.run(['feature', '--type', 'root', '--path', this.copyDestinationFolder, '--silent'])
       }
     ])
   }
@@ -173,16 +181,9 @@ export default class New extends BaseCommand {
     bearerTagVersion: process.env.BEARER_PACKAGE_VERSION || 'latest',
     bearerRestClient: bearerRestClient(authType)
   })
-
-  get copyDestFolder(): string {
-    if (this.path) {
-      return path.resolve(this.path)
-    }
-    return path.join(process.cwd(), this.destinationFolder)
-  }
 }
 
-async function askForAuthType(): Promise<Authentications> {
+export async function askForAuthType(): Promise<Authentications> {
   const { authenticationType } = await inquirer.prompt<{ authenticationType: Authentications }>([
     {
       message: 'Select an authentication method for the API you want to consume:',
@@ -194,7 +195,7 @@ async function askForAuthType(): Promise<Authentications> {
   return authenticationType
 }
 
-function bearerRestClient(authType: Authentications): string {
+export function bearerRestClient(authType: Authentications): string {
   switch (authType) {
     case Authentications.OAuth1:
       return '"oauth": "^0.9.15"'
@@ -204,12 +205,11 @@ function bearerRestClient(authType: Authentications): string {
     case Authentications.OAuth2:
     case Authentications.Custom:
       return '"axios": "^0.18.0"'
-    default:
-      throw new Error(`Authentication not found: ${authType}`)
   }
+  throw new Error(`Authentication not found: ${authType}`)
 }
 
-async function cloneRepository(url: string, destination: string, logger: BaseCommand) {
+export async function cloneRepository(url: string, destination: string, logger: BaseCommand) {
   cliUx.action.start('cloning')
   try {
     await asyncExec('git --version')
@@ -231,7 +231,7 @@ async function cloneRepository(url: string, destination: string, logger: BaseCom
   cliUx.action.stop()
 }
 
-async function selectFolder(location: string, integrationRootProof: string) {
+export async function selectFolder(location: string, integrationRootProof: string) {
   const list = await globby([`**/${integrationRootProof}`], { cwd: location })
   return await inquirer.prompt<{ selected: string }>([
     {
@@ -248,7 +248,34 @@ async function selectFolder(location: string, integrationRootProof: string) {
   ])
 }
 
-function initViewsVars(authType: Authentications) {
+export async function defineLocationPath(
+  logger: { warn: (message: string) => void },
+  { name, cwd, force }: { name: string; cwd: string; force?: boolean | undefined }
+) {
+  let location = path.join(cwd, name)
+  let shouldForce = force
+
+  while (fs.existsSync(location) && shouldForce !== true) {
+    if (shouldForce === false) {
+      logger.warn(`${location} already exists\n please provide a different folder name`)
+      const folderName = await askForString('Folder name to use')
+      location = path.join(cwd, folderName)
+    } else {
+      const { override } = await inquirer.prompt<{ override: boolean }>([
+        {
+          type: 'confirm',
+          name: 'override',
+          default: false,
+          message: 'Copy files anyway'
+        }
+      ])
+      shouldForce = override
+    }
+  }
+  return location
+}
+
+export function initViewsVars(authType: Authentications) {
   const setup =
     authType === Authentications.NoAuth
       ? ''
