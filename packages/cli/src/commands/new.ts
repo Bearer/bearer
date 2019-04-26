@@ -234,9 +234,8 @@ export async function cloneRepository(url: string, destination: string, logger: 
 }
 
 export async function selectFolder(location: string, integrationRootProof: string = INTEGRATION_PROOF) {
-  console.log('[BEARER]', 'location', location)
   const list = await globby([`**/${integrationRootProof}`], { cwd: location })
-  const choices = list.map(path => {
+  const choices = list.sort().map(path => {
     return {
       name: path.split(`/${integrationRootProof}`)[0],
       value: path.split(integrationRootProof)[0].replace(/\/$/, '')

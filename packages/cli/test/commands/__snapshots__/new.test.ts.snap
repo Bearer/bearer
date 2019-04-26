@@ -814,12 +814,12 @@ Array [
           "value": "provider/1-one",
         },
         Object {
-          "name": "provider/3-one",
-          "value": "provider/3-one",
-        },
-        Object {
           "name": "provider/2-one",
           "value": "provider/2-one",
+        },
+        Object {
+          "name": "provider/3-one",
+          "value": "provider/3-one",
         },
       ],
       "message": "Select a template",
