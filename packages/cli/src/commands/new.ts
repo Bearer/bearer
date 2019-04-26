@@ -234,19 +234,31 @@ export async function cloneRepository(url: string, destination: string, logger: 
 
 export async function selectFolder(location: string, integrationRootProof: string) {
   const list = await globby([`**/${integrationRootProof}`], { cwd: location })
-  return await inquirer.prompt<{ selected: string }>([
-    {
-      name: 'selected',
-      message: 'Select a template',
-      type: 'list',
-      choices: list.map(path => {
-        return {
-          name: path.split(`/${integrationRootProof}`)[0],
-          value: path.split(`/${integrationRootProof}`)[0]
-        }
-      })
+  const choices = list.map(path => {
+    return {
+      name: path.split(`/${integrationRootProof}`)[0],
+      value: path.split(`/${integrationRootProof}`)[0]
     }
-  ])
+  })
+
+  switch (choices.length) {
+    case 0: {
+      throw new NoIntegrationFoundError()
+    }
+    case 1: {
+      return { selected: choices[0].value }
+    }
+    default: {
+      return await inquirer.prompt<{ selected: string }>([
+        {
+          choices,
+          name: 'selected',
+          message: 'Select a template',
+          type: 'list'
+        }
+      ])
+    }
+  }
 }
 
 export async function defineLocationPath(
@@ -297,4 +309,14 @@ export function initViewsVars(authType: Authentications) {
   },`
 
   return { setup }
+}
+
+/**
+ * Custom errors
+ */
+
+class NoIntegrationFoundError extends Error {
+  constructor() {
+    super('No valid integration found within the cloned archive')
+  }
 }

@@ -19,10 +19,6 @@ beforeAll(() => {
   }
 })
 
-afterAll(() => {
-  jest.unmock('inquirer')
-})
-
 describe.each(Object.keys(authTypes))('Authentication: %s', auth => {
   const inputSet: [string, string[], string][] = [
     ['No Views', [], destination],
