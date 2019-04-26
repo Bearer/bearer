@@ -1,7 +1,7 @@
 import * as fs from 'fs-extra'
 import * as path from 'path'
 import * as inquirer from 'inquirer'
-import NewCommand, { authTypes, defineLocationPath } from '../../src/commands/new'
+import NewCommand, { authTypes, defineLocationPath, askForAuthType } from '../../src/commands/new'
 import { readFile as _readFile, ARTIFACT_FOLDER } from '../helpers/utils'
 
 const destination = path.join(__dirname, '..', '..', '.bearer/init')
@@ -104,7 +104,7 @@ describe('defineLocationPath', () => {
 
       it('asks for override and returns path if confirmed', async () => {
         expect.assertions(1)
-        mockInquirer({ override: true })
+        mockInquirer(async () => ({ override: true }))
 
         const location = await defineLocationPath(logger, { name, cwd: ARTIFACT_FOLDER })
 
@@ -113,7 +113,7 @@ describe('defineLocationPath', () => {
 
       it('prompts for foldername if not confirmed', async () => {
         const newName = 'newName'
-        mockInquirer({ override: false, response: newName })
+        mockInquirer(async () => ({ override: false, response: newName }))
         expect.assertions(1)
 
         const location = await defineLocationPath(logger, { name, cwd: ARTIFACT_FOLDER })
@@ -124,11 +124,22 @@ describe('defineLocationPath', () => {
   })
 })
 
-function mockInquirer(response: any) {
-  // @ts-ignore
-  inquirer.prompt.mockImplementation(() => {
-    return Promise.resolve(response)
+describe('askForAuthType', () => {
+  it('display all autentication types', async () => {
+    const inquirerReturn = jest.fn(() => {
+      return Promise.resolve({ authenticationType: 'ok' })
+    })
+    mockInquirer(inquirerReturn)
+
+    await askForAuthType()
+
+    expect(inquirerReturn.mock.calls[0]).toMatchSnapshot()
   })
+})
+
+function mockInquirer(response: (...args: any[]) => Promise<any>) {
+  // @ts-ignore
+  inquirer.prompt.mockImplementation(response)
 }
 
 function resetInquirerMock() {

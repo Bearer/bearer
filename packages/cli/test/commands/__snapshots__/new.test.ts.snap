@@ -765,3 +765,41 @@ What's next?
 
 "
 `;
+
+exports[`askForAuthType display all autentication types 1`] = `
+Array [
+  Array [
+    Object {
+      "choices": Array [
+        Object {
+          "name": "OAuth1",
+          "value": "OAUTH1",
+        },
+        Object {
+          "name": "OAuth2",
+          "value": "OAUTH2",
+        },
+        Object {
+          "name": "Basic Auth",
+          "value": "BASIC",
+        },
+        Object {
+          "name": "API Key",
+          "value": "APIKEY",
+        },
+        Object {
+          "name": "NoAuth",
+          "value": "NONE",
+        },
+        Object {
+          "name": "Custom",
+          "value": "CUSTOM",
+        },
+      ],
+      "message": "Select an authentication method for the API you want to consume:",
+      "name": "authenticationType",
+      "type": "list",
+    },
+  ],
+]
+`;
