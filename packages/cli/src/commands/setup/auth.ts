@@ -280,7 +280,9 @@ function getOpeningUrls(url: string) {
 }
 
 function prefix(message: string, prefix?: string) {
-  return [prefix, message].filter(Boolean).join(' - ')
+  const prefixedMessage = [prefix, message].filter(Boolean).join(' ')
+
+  return `Enter ${prefixedMessage}`
 }
 
 class UnreachableCaseError extends Error {
