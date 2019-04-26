@@ -10,6 +10,15 @@ type TSetupConfig = {
 
 export const ARTIFACT_ROOT = path.join(__dirname, '..', '..', '.bearer')
 
+export function ensureFolderExist(folder: string, empty = true) {
+  if (!fs.existsSync(folder)) {
+    fs.mkdirSync(folder)
+  }
+  if (empty) {
+    fs.emptyDirSync(folder)
+  }
+}
+
 export function cleanArtifactFolder(name: string) {
   const bearerFolder = path.join(ARTIFACT_ROOT, name)
   if (!fs.existsSync(bearerFolder)) {

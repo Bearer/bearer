@@ -3,6 +3,7 @@ import * as path from 'path'
 import * as inquirer from 'inquirer'
 import NewCommand, { authTypes, defineLocationPath, askForAuthType, selectFolder } from '../../src/commands/new'
 import { readFile as _readFile, ARTIFACT_FOLDER, fixturesPath } from '../helpers/utils'
+import { ensureFolderExist } from '../helpers/setup'
 
 const destination = path.join(__dirname, '..', '..', '.bearer/init')
 const destinationWithViews = path.join(__dirname, '..', '..', '.bearer/initWithView')
@@ -11,13 +12,6 @@ const AUTHCONFIG = 'auth.config.json'
 const PACKAGE_JSON = 'package.json'
 
 jest.mock('inquirer')
-beforeAll(() => {
-  if (!fs.existsSync(ARTIFACT_FOLDER)) {
-    fs.mkdirSync(ARTIFACT_FOLDER)
-  } else {
-    fs.emptyDirSync(ARTIFACT_FOLDER)
-  }
-})
 
 describe.each(Object.keys(authTypes))('Authentication: %s', auth => {
   const inputSet: [string, string[], string][] = [
@@ -26,6 +20,11 @@ describe.each(Object.keys(authTypes))('Authentication: %s', auth => {
   ]
   inputSet.forEach(([title, args, destinationPath]) => {
     const out = path.join(destinationPath, 'new', auth)
+
+    beforeAll(() => {
+      ensureFolderExist(out)
+    })
+
     describe(title, () => {
       describe(auth, () => {
         const result: string[] = []
@@ -94,6 +93,10 @@ describe('defineLocationPath', () => {
     describe('when folder exists', () => {
       const name = 'existing'
       const destination = path.join(ARTIFACT_FOLDER, name)
+
+      beforeAll(() => {
+        ensureFolderExist(ARTIFACT_FOLDER)
+      })
 
       beforeEach(() => {
         resetInquirerMock()
