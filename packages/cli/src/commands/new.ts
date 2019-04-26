@@ -21,8 +21,6 @@ import * as inquirer from 'inquirer'
 import { askForString } from '../utils/prompts'
 import { INTEGRATION_PROOF } from '../utils/locator'
 
-const asyncExec = util.promisify(exec)
-
 export const authTypes: TAuthentications = {
   [Authentications.OAuth1]: { name: 'OAuth1', value: Authentications.OAuth1 },
   [Authentications.OAuth2]: { name: 'OAuth2', value: Authentications.OAuth2 },
@@ -210,24 +208,33 @@ export function bearerRestClient(authType: Authentications): string {
   }
   throw new Error(`Authentication not found: ${authType}`)
 }
-
+// @ts-ignore
 export async function cloneRepository(url: string, destination: string, logger: BaseCommand) {
+  const asyncExec = util.promisify(exec)
   cliUx.action.start('cloning')
   try {
-    await asyncExec('git --version')
+    const { stdout, stderr } = await asyncExec('git --version')
+    // @ts-ignore
+    logger.debug('out: %j\n, err: %j', stdout, stderr)
   } catch (e) {
+    // @ts-ignore
+    logger.debug('error: %j', e)
     cliUx.action.stop()
-    throw 'git command not found in your path, please install it'
+    throw new GitNotAvailable()
   }
 
-  await new Promise((resolve, reject) => {
+  await new Promise(async (resolve, reject) => {
     try {
       const command = `git clone ${url} --depth=1 ${destination}`
       // @ts-ignore
       logger.debug(`Running ${command}`)
-      exec(command, () => resolve())
+      await asyncExec(command)
+      resolve()
     } catch (e) {
-      logger.error('Error while cloning the repository')
+      cliUx.action.stop()
+      // @ts-ignore
+      logger.debug(`%j`, e)
+      reject(new CloningError())
     }
   })
   cliUx.action.stop()
@@ -319,5 +326,17 @@ export function initViewsVars(authType: Authentications) {
 class NoIntegrationFoundError extends Error {
   constructor(location: string) {
     super(`No valid integration found within the cloned archive: location ${location}`)
+  }
+}
+
+class GitNotAvailable extends Error {
+  constructor() {
+    super('git command not found in your path, please install it')
+  }
+}
+
+class CloningError extends Error {
+  constructor() {
+    super('Error while cloning the repository')
   }
 }

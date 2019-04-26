@@ -1,7 +1,16 @@
 import * as fs from 'fs-extra'
 import * as path from 'path'
 import * as inquirer from 'inquirer'
-import NewCommand, { authTypes, defineLocationPath, askForAuthType, selectFolder } from '../../src/commands/new'
+import * as os from 'os'
+import { exec } from 'child_process'
+
+import NewCommand, {
+  authTypes,
+  defineLocationPath,
+  askForAuthType,
+  selectFolder,
+  cloneRepository
+} from '../../src/commands/new'
 import { readFile as _readFile, ARTIFACT_FOLDER, fixturesPath } from '../helpers/utils'
 import { ensureFolderExist } from '../helpers/setup'
 
@@ -12,6 +21,7 @@ const AUTHCONFIG = 'auth.config.json'
 const PACKAGE_JSON = 'package.json'
 
 jest.mock('inquirer')
+jest.mock('child_process')
 
 describe.each(Object.keys(authTypes))('Authentication: %s', auth => {
   const inputSet: [string, string[], string][] = [
@@ -182,6 +192,61 @@ describe('selectFolder', () => {
   })
 })
 
+describe.only('cloneRepository', () => {
+  describe('wihtout git command', () => {
+    it('raise an error when git is not available', async () => {
+      const logger = { debug: jest.fn(), error: jest.fn() } as any
+      // @ts-ignore
+      exec.mockReset()
+      // @ts-ignore
+      exec.mockImplementation((a, cb) => {
+        return cb(new Error('ok'))
+      })
+      await expect(cloneRepository('ok', os.tmpdir(), logger)).rejects.toThrow(
+        'git command not found in your path, please install it'
+      )
+    })
+  })
+
+  describe('with git installed', () => {
+    beforeEach(() => {
+      // @ts-ignore
+      exec.mockReset()
+      mockExecOnce(null, '1.0.0')
+    })
+
+    describe('no cloning errors', () => {
+      it('resolves', async () => {
+        expect.assertions(3)
+        const logger = { debug: jest.fn(), error: jest.fn() } as any
+
+        mockExecOnce(null, 'successfuly cloned')
+
+        await expect(cloneRepository('ok', os.tmpdir(), logger)).resolves.toEqual(undefined)
+
+        expect(logger.debug.mock.calls[1][0]).toContain('Running git clone ok ')
+        expect(logger.error).not.toBeCalled()
+      })
+    })
+
+    describe('error while cloning', () => {
+      it('logs error', async () => {
+        expect.assertions(1)
+        const logger = { debug: jest.fn(), error: jest.fn() } as any
+        mockExecOnce(new Error('failed'), '', '')
+
+        await expect(cloneRepository('ok', os.tmpdir(), logger)).rejects.toThrow('Error while cloning the repository')
+      })
+    })
+  })
+})
+
+function mockExecOnce(...args: any[]) {
+  // @ts-ignore
+  exec.mockImplementationOnce((a, cb) => {
+    return cb(...args)
+  })
+}
 function mockInquirer(response: (...args: any[]) => Promise<any>) {
   // @ts-ignore
   inquirer.prompt.mockImplementation(response)

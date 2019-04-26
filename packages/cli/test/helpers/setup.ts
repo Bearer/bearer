@@ -12,7 +12,7 @@ export const ARTIFACT_ROOT = path.join(__dirname, '..', '..', '.bearer')
 
 export function ensureFolderExist(folder: string, empty = true) {
   if (!fs.existsSync(folder)) {
-    fs.mkdirSync(folder)
+    fs.mkdirpSync(folder)
   }
   if (empty) {
     fs.emptyDirSync(folder)
