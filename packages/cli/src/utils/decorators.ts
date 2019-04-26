@@ -4,7 +4,9 @@ import * as inquirer from 'inquirer'
 import Command from '../base-command'
 
 import Link from '../actions/link'
-import Login from '../commands/login'
+import Create from '../actions/createIntegration'
+import Login from '../actions/login'
+
 import { LOGIN_CLIENT_ID } from './constants'
 
 type Constructor<T> = new (...args: any[]) => T
@@ -78,7 +80,7 @@ export function RequireLinkedIntegration(prompt = true) {
         ])
         switch (choice) {
           case 'create':
-            await CreateIntegration.run([])
+            await Create(this, { link: true })
             break
           case 'select':
             await Link(this)
@@ -124,7 +126,7 @@ export function ensureFreshToken() {
           }
         ])
         if (shoudlLogin) {
-          await Login.run([])
+          await Login(this)
         } else {
           this.exit(0)
         }
@@ -146,7 +148,3 @@ async function refreshMyToken(command: TCommand, refresh_token: string): Promise
   await command.bearerConfig.storeToken({ ...response.data, refresh_token })
   return true
 }
-
-// note: moving this line here, since link require RequireIntegrationFolder to be defined because it produces
-// this error: decorators_1.RequireIntegrationFolder is not a function
-import CreateIntegration from '../commands/integrations/create'

@@ -38,6 +38,10 @@ export default abstract class extends Command {
   success(message: string) {
     this.log(this.colors.green(message))
   }
+  // @ts-ignore
+  debug(...args: any[]) {
+    super.debug.apply(this, args)
+  }
 
   log(_message?: string, ..._args: any[]) {
     if (!this.silent) {
