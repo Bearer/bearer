@@ -19,6 +19,7 @@ import GenerateComponent from './generate/component'
 import GenerateSpec from './generate/spec'
 import * as inquirer from 'inquirer'
 import { askForString } from '../utils/prompts'
+import { INTEGRATION_PROOF } from '../utils/locator'
 
 const asyncExec = util.promisify(exec)
 
@@ -86,8 +87,8 @@ export default class New extends BaseCommand {
         const tmp = path.join(os.tmpdir(), Date.now().toString())
         await cloneRepository(template, tmp, this)
 
-        if (!fs.existsSync(path.join(tmp, this.locator.integrationFileProof))) {
-          const { selected } = await selectFolder(tmp, this.locator.integrationFileProof)
+        if (!fs.existsSync(path.join(tmp, INTEGRATION_PROOF))) {
+          const { selected } = await selectFolder(tmp)
           folder = selected
         }
 
@@ -232,18 +233,19 @@ export async function cloneRepository(url: string, destination: string, logger: 
   cliUx.action.stop()
 }
 
-export async function selectFolder(location: string, integrationRootProof: string) {
+export async function selectFolder(location: string, integrationRootProof: string = INTEGRATION_PROOF) {
+  console.log('[BEARER]', 'location', location)
   const list = await globby([`**/${integrationRootProof}`], { cwd: location })
   const choices = list.map(path => {
     return {
       name: path.split(`/${integrationRootProof}`)[0],
-      value: path.split(`/${integrationRootProof}`)[0]
+      value: path.split(integrationRootProof)[0].replace(/\/$/, '')
     }
   })
 
   switch (choices.length) {
     case 0: {
-      throw new NoIntegrationFoundError()
+      throw new NoIntegrationFoundError(location)
     }
     case 1: {
       return { selected: choices[0].value }
@@ -316,7 +318,7 @@ export function initViewsVars(authType: Authentications) {
  */
 
 class NoIntegrationFoundError extends Error {
-  constructor() {
-    super('No valid integration found within the cloned archive')
+  constructor(location: string) {
+    super(`No valid integration found within the cloned archive: location ${location}`)
   }
 }

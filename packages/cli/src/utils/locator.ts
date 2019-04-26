@@ -2,6 +2,7 @@ import * as path from 'path'
 
 import { Config } from './setup-config'
 export const AUTH_CONFIG_FILENAME = 'auth.config.json'
+export const INTEGRATION_PROOF = AUTH_CONFIG_FILENAME
 
 export default class LocationProvider {
   bearerDir = ''
@@ -71,11 +72,7 @@ export default class LocationProvider {
   }
 
   get authConfigPath(): string {
-    return this.integrationRootResourcePath(this.integrationFileProof)
-  }
-
-  get integrationFileProof() {
-    return AUTH_CONFIG_FILENAME
+    return this.integrationRootResourcePath(AUTH_CONFIG_FILENAME)
   }
 
   get localConfigPath(): string {

@@ -13,3 +13,8 @@ export function readFile(...args: string[]): string {
 }
 
 export const ARTIFACT_FOLDER = path.join(__dirname, '..', '.artifacts')
+export const FIXTURE_FOLDER = path.join(__dirname, '..', '__FIXTURES__')
+
+export function fixturesPath(...args: string[]) {
+  return path.join(FIXTURE_FOLDER, ...args)
+}

@@ -803,3 +803,29 @@ Array [
   ],
 ]
 `;
+
+exports[`selectFolder multiple integrations found prompt to choose one from a list 1`] = `
+Array [
+  Array [
+    Object {
+      "choices": Array [
+        Object {
+          "name": "provider/1-one",
+          "value": "provider/1-one",
+        },
+        Object {
+          "name": "provider/3-one",
+          "value": "provider/3-one",
+        },
+        Object {
+          "name": "provider/2-one",
+          "value": "provider/2-one",
+        },
+      ],
+      "message": "Select a template",
+      "name": "selected",
+      "type": "list",
+    },
+  ],
+]
+`;

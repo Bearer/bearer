@@ -1,8 +1,8 @@
 import * as fs from 'fs-extra'
 import * as path from 'path'
 import * as inquirer from 'inquirer'
-import NewCommand, { authTypes, defineLocationPath, askForAuthType } from '../../src/commands/new'
-import { readFile as _readFile, ARTIFACT_FOLDER } from '../helpers/utils'
+import NewCommand, { authTypes, defineLocationPath, askForAuthType, selectFolder } from '../../src/commands/new'
+import { readFile as _readFile, ARTIFACT_FOLDER, fixturesPath } from '../helpers/utils'
 
 const destination = path.join(__dirname, '..', '..', '.bearer/init')
 const destinationWithViews = path.join(__dirname, '..', '..', '.bearer/initWithView')
@@ -134,6 +134,48 @@ describe('askForAuthType', () => {
     await askForAuthType()
 
     expect(inquirerReturn.mock.calls[0]).toMatchSnapshot()
+  })
+})
+
+describe('selectFolder', () => {
+  describe('without any valid integration', () => {
+    it('throws an no integration found error', async () => {
+      await expect(selectFolder(fixturesPath('new/template-without-integration'))).rejects.toThrow(
+        'No valid integration found within the cloned archive: location'
+      )
+    })
+  })
+
+  describe('with 1 valid integration found', () => {
+    it('returns early', async () => {
+      expect.assertions(1)
+
+      const folder = await selectFolder(fixturesPath('new', 'template-with-one-integration'))
+
+      expect(folder).toEqual({ selected: '' })
+    })
+
+    it('returns early (nested)', async () => {
+      expect.assertions(1)
+
+      const folder = await selectFolder(fixturesPath('new', 'template-with-one-integration-nested'))
+
+      expect(folder).toEqual({ selected: 'nested-here' })
+    })
+  })
+
+  describe('multiple integrations found', () => {
+    it('prompt to choose one from a list', async () => {
+      expect.assertions(1)
+      const inquirerReturn = jest.fn(() => {
+        return Promise.resolve({ selected: 'ok' })
+      })
+      mockInquirer(inquirerReturn)
+
+      await selectFolder(fixturesPath('new/template-with-multiple-integrations'))
+
+      expect(inquirerReturn.mock.calls[0]).toMatchSnapshot()
+    })
   })
 })
 
