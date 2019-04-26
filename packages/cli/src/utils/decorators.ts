@@ -3,6 +3,7 @@ import cliUx from 'cli-ux'
 import * as inquirer from 'inquirer'
 import Command from '../base-command'
 
+import Link from '../actions/link'
 import Login from '../commands/login'
 import { LOGIN_CLIENT_ID } from './constants'
 
@@ -80,7 +81,7 @@ export function RequireLinkedIntegration(prompt = true) {
             await CreateIntegration.run([])
             break
           case 'select':
-            await LinkIntegration.run([])
+            await Link(this)
           default:
             break
         }
@@ -148,5 +149,4 @@ async function refreshMyToken(command: TCommand, refresh_token: string): Promise
 
 // note: moving this line here, since link require RequireIntegrationFolder to be defined because it produces
 // this error: decorators_1.RequireIntegrationFolder is not a function
-import LinkIntegration from '../commands/link'
 import CreateIntegration from '../commands/integrations/create'

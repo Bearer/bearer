@@ -1,8 +1,8 @@
 import BaseCommand from '../base-command'
 import { RequireIntegrationFolder } from '../utils/decorators'
-import { linkIntegration } from '../utils/commands'
+import Link from '../actions/link'
 
-export default class Link extends BaseCommand {
+export default class LinkCommand extends BaseCommand {
   static description = 'link to remote Bearer integration'
 
   static flags = {
@@ -13,7 +13,7 @@ export default class Link extends BaseCommand {
 
   @RequireIntegrationFolder()
   async run() {
-    const { args } = this.parse(Link)
-    await linkIntegration.bind(this)(args.Integration_Identifier)
+    const { args } = this.parse(LinkCommand)
+    await Link(this, args.Integration_Identifier)
   }
 }
