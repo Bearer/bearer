@@ -129,7 +129,7 @@ export default class New extends BaseCommand {
       this.log("\nWhat's next?\n")
       this.log('* read the bearer documentation at https://docs.bearer.sh\n')
       this.log(`* start your local development environment by running:\n`)
-      this.log(this.colors.bold(`   cd ${finalLocation} && yarn bearer start`))
+      this.log(this.colors.bold(`   cd ${finalLocation}`))
     } catch (e) {
       this.debug('error: %j', e)
       this.error(e)

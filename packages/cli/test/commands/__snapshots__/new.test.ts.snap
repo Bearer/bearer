@@ -40,7 +40,7 @@ exports[`Authentication: APIKEY No Views APIKEY produces an output 1`] = `
 "
 What's next?
 
-,[1m   cd ./.bearer/init/new/APIKEY/APIKEYIntegration && yarn bearer start[22m
+,[1m   cd ./.bearer/init/new/APIKEY/APIKEYIntegration[22m
 ,[32mIntegration initialized, name: APIKEYIntegration, authentication type: API Key[39m
 ,[90m    create: [39m[37m.bearer/init/new/APIKEY/APIKEYIntegration/.gitignore[39m
 ,[90m    create: [39m[37m.bearer/init/new/APIKEY/APIKEYIntegration/.integrationrc[39m
@@ -102,7 +102,7 @@ exports[`Authentication: APIKEY With Views APIKEY produces an output 1`] = `
 "
 What's next?
 
-,[1m   cd ./.bearer/initWithView/new/APIKEY/APIKEYIntegration && yarn bearer start[22m
+,[1m   cd ./.bearer/initWithView/new/APIKEY/APIKEYIntegration[22m
 ,[32mIntegration initialized, name: APIKEYIntegration, authentication type: API Key[39m
 ,[90m    create: [39m[37m.bearer/initWithView/new/APIKEY/APIKEYIntegration/.gitignore[39m
 ,[90m    create: [39m[37m.bearer/initWithView/new/APIKEY/APIKEYIntegration/.integrationrc[39m
@@ -162,7 +162,7 @@ exports[`Authentication: BASIC No Views BASIC produces an output 1`] = `
 "
 What's next?
 
-,[1m   cd ./.bearer/init/new/BASIC/BASICIntegration && yarn bearer start[22m
+,[1m   cd ./.bearer/init/new/BASIC/BASICIntegration[22m
 ,[32mIntegration initialized, name: BASICIntegration, authentication type: Basic Auth[39m
 ,[90m    create: [39m[37m.bearer/init/new/BASIC/BASICIntegration/.gitignore[39m
 ,[90m    create: [39m[37m.bearer/init/new/BASIC/BASICIntegration/.integrationrc[39m
@@ -224,7 +224,7 @@ exports[`Authentication: BASIC With Views BASIC produces an output 1`] = `
 "
 What's next?
 
-,[1m   cd ./.bearer/initWithView/new/BASIC/BASICIntegration && yarn bearer start[22m
+,[1m   cd ./.bearer/initWithView/new/BASIC/BASICIntegration[22m
 ,[32mIntegration initialized, name: BASICIntegration, authentication type: Basic Auth[39m
 ,[90m    create: [39m[37m.bearer/initWithView/new/BASIC/BASICIntegration/.gitignore[39m
 ,[90m    create: [39m[37m.bearer/initWithView/new/BASIC/BASICIntegration/.integrationrc[39m
@@ -284,7 +284,7 @@ exports[`Authentication: CUSTOM No Views CUSTOM produces an output 1`] = `
 "
 What's next?
 
-,[1m   cd ./.bearer/init/new/CUSTOM/CUSTOMIntegration && yarn bearer start[22m
+,[1m   cd ./.bearer/init/new/CUSTOM/CUSTOMIntegration[22m
 ,[32mIntegration initialized, name: CUSTOMIntegration, authentication type: Custom[39m
 ,[90m    create: [39m[37m.bearer/init/new/CUSTOM/CUSTOMIntegration/.gitignore[39m
 ,[90m    create: [39m[37m.bearer/init/new/CUSTOM/CUSTOMIntegration/.integrationrc[39m
@@ -346,7 +346,7 @@ exports[`Authentication: CUSTOM With Views CUSTOM produces an output 1`] = `
 "
 What's next?
 
-,[1m   cd ./.bearer/initWithView/new/CUSTOM/CUSTOMIntegration && yarn bearer start[22m
+,[1m   cd ./.bearer/initWithView/new/CUSTOM/CUSTOMIntegration[22m
 ,[32mIntegration initialized, name: CUSTOMIntegration, authentication type: Custom[39m
 ,[90m    create: [39m[37m.bearer/initWithView/new/CUSTOM/CUSTOMIntegration/.gitignore[39m
 ,[90m    create: [39m[37m.bearer/initWithView/new/CUSTOM/CUSTOMIntegration/.integrationrc[39m
@@ -406,7 +406,7 @@ exports[`Authentication: NONE No Views NONE produces an output 1`] = `
 "
 What's next?
 
-,[1m   cd ./.bearer/init/new/NONE/NONEIntegration && yarn bearer start[22m
+,[1m   cd ./.bearer/init/new/NONE/NONEIntegration[22m
 ,[32mIntegration initialized, name: NONEIntegration, authentication type: NoAuth[39m
 ,[90m    create: [39m[37m.bearer/init/new/NONE/NONEIntegration/.gitignore[39m
 ,[90m    create: [39m[37m.bearer/init/new/NONE/NONEIntegration/.integrationrc[39m
@@ -468,7 +468,7 @@ exports[`Authentication: NONE With Views NONE produces an output 1`] = `
 "
 What's next?
 
-,[1m   cd ./.bearer/initWithView/new/NONE/NONEIntegration && yarn bearer start[22m
+,[1m   cd ./.bearer/initWithView/new/NONE/NONEIntegration[22m
 ,[32mIntegration initialized, name: NONEIntegration, authentication type: NoAuth[39m
 ,[90m    create: [39m[37m.bearer/initWithView/new/NONE/NONEIntegration/.gitignore[39m
 ,[90m    create: [39m[37m.bearer/initWithView/new/NONE/NONEIntegration/.integrationrc[39m
@@ -538,7 +538,7 @@ exports[`Authentication: OAUTH1 No Views OAUTH1 produces an output 1`] = `
 "
 What's next?
 
-,[1m   cd ./.bearer/init/new/OAUTH1/OAUTH1Integration && yarn bearer start[22m
+,[1m   cd ./.bearer/init/new/OAUTH1/OAUTH1Integration[22m
 ,[32mIntegration initialized, name: OAUTH1Integration, authentication type: OAuth1[39m
 ,[90m    create: [39m[37m.bearer/init/new/OAUTH1/OAUTH1Integration/.gitignore[39m
 ,[90m    create: [39m[37m.bearer/init/new/OAUTH1/OAUTH1Integration/.integrationrc[39m
@@ -610,7 +610,7 @@ exports[`Authentication: OAUTH1 With Views OAUTH1 produces an output 1`] = `
 "
 What's next?
 
-,[1m   cd ./.bearer/initWithView/new/OAUTH1/OAUTH1Integration && yarn bearer start[22m
+,[1m   cd ./.bearer/initWithView/new/OAUTH1/OAUTH1Integration[22m
 ,[32mIntegration initialized, name: OAUTH1Integration, authentication type: OAuth1[39m
 ,[90m    create: [39m[37m.bearer/initWithView/new/OAUTH1/OAUTH1Integration/.gitignore[39m
 ,[90m    create: [39m[37m.bearer/initWithView/new/OAUTH1/OAUTH1Integration/.integrationrc[39m
@@ -677,7 +677,7 @@ exports[`Authentication: OAUTH2 No Views OAUTH2 produces an output 1`] = `
 "
 What's next?
 
-,[1m   cd ./.bearer/init/new/OAUTH2/OAUTH2Integration && yarn bearer start[22m
+,[1m   cd ./.bearer/init/new/OAUTH2/OAUTH2Integration[22m
 ,[32mIntegration initialized, name: OAUTH2Integration, authentication type: OAuth2[39m
 ,[90m    create: [39m[37m.bearer/init/new/OAUTH2/OAUTH2Integration/.gitignore[39m
 ,[90m    create: [39m[37m.bearer/init/new/OAUTH2/OAUTH2Integration/.integrationrc[39m
@@ -746,7 +746,7 @@ exports[`Authentication: OAUTH2 With Views OAUTH2 produces an output 1`] = `
 "
 What's next?
 
-,[1m   cd ./.bearer/initWithView/new/OAUTH2/OAUTH2Integration && yarn bearer start[22m
+,[1m   cd ./.bearer/initWithView/new/OAUTH2/OAUTH2Integration[22m
 ,[32mIntegration initialized, name: OAUTH2Integration, authentication type: OAuth2[39m
 ,[90m    create: [39m[37m.bearer/initWithView/new/OAUTH2/OAUTH2Integration/.gitignore[39m
 ,[90m    create: [39m[37m.bearer/initWithView/new/OAUTH2/OAUTH2Integration/.integrationrc[39m
