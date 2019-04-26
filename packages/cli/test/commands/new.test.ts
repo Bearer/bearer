@@ -25,10 +25,10 @@ describe.each(Object.keys(authTypes))('Authentication: %s', auth => {
     ['With Views', ['--withViews'], destinationWithViews]
   ]
   inputSet.forEach(([title, args, destinationPath]) => {
-    const result: string[] = []
     const out = path.join(destinationPath, 'new', auth)
     describe(title, () => {
       describe(auth, () => {
+        const result: string[] = []
         beforeAll(async () => {
           jest.spyOn(process.stdout, 'write').mockImplementation(val => {
             result.push(val)
