@@ -81,12 +81,15 @@ see examples`
       })
     )
     const { authType, provider, hint } = config as { authType: Authentications; provider?: string; hint?: string }
+
     if (hint) {
       this.log(this.colors.italic(this.colors.yellow(`\n${hint}\n`)))
     }
+
     function prefixedPrompt(message: string) {
       return prefix(message, provider)
     }
+
     switch (authType) {
       case Authentications.OAuth2: {
         const [idArg, secretArg] = args.credentials.split(SEPARATOR)
