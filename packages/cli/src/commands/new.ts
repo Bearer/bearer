@@ -136,7 +136,7 @@ export default class New extends BaseCommand {
     }
   }
 
-  createIntegrationStructure = (authType: Authentications) => async (ctx: { files: string[] }) => {
+  private createIntegrationStructure = (authType: Authentications) => async (ctx: { files: string[] }) => {
     ctx.files = await copyFiles(
       this,
       path.join('init', 'structure'),
@@ -146,7 +146,7 @@ export default class New extends BaseCommand {
     )
   }
 
-  createAuthFiles = (authType: Authentications) => async (ctx: { files: string[] }) => {
+  private createAuthFiles = (authType: Authentications) => async (ctx: { files: string[] }) => {
     const files = await copyFiles(
       this,
       path.join('init', authType),
@@ -157,7 +157,7 @@ export default class New extends BaseCommand {
     ctx.files = [...ctx.files, ...files]
   }
 
-  createViewsStructure = (authType: Authentications) => async (_ctx: any, _task: any) => {
+  private createViewsStructure = (authType: Authentications) => async (_ctx: any, _task: any) => {
     return new Listr([
       initViews({
         cmd: this,
@@ -175,7 +175,7 @@ export default class New extends BaseCommand {
     ])
   }
 
-  getVars = (authType: Authentications) => ({
+  private getVars = (authType: Authentications) => ({
     integrationTitle: this.name,
     componentName: Case.pascal(this.name),
     componentTagName: Case.kebab(this.name),
