@@ -56,7 +56,7 @@ class LoginAction extends BaseAction {
                 `Unable to open a browser. If you want to retrieve a token please follow these steps\n`
               )
             )
-            this.logger.log(this.logger.colors.bold('1/ access the url below  and follow the login process:\n\n'), url)
+            this.logger.log(this.logger.colors.bold('1/ access the url below and follow the login process:\n\n'), url)
             this.logger.log()
             this.logger.log(
               this.logger.colors.bold(`2/ when you access the success page copy the token and paste it here`)
@@ -67,14 +67,10 @@ class LoginAction extends BaseAction {
           }
         })
       }),
-      Promise.race([
-        new Promise((_resolve, reject) => {
-          this.on('error', reject)
-        }),
-        new Promise((resolve, _reject) => {
-          this.on('success', resolve)
-        })
-      ])
+      new Promise((resolve, reject) => {
+        this.on('error', reject)
+        this.on('success', resolve)
+      })
     ])
     this.logger.debug('login done')
     cliUx.action.stop()

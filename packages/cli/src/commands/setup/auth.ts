@@ -191,7 +191,7 @@ see examples`
           this.warn(
             this.colors.yellow(`Unable to open a browser. If you want to retrieve a token please follow these steps\n`)
           )
-          this.log(this.colors.bold('1/ access the url below  and follow the login process:\n\n'), fallback)
+          this.log(this.colors.bold('1/ access the url below and follow the login process:\n\n'), fallback)
           this.log()
           this.log(this.colors.bold(`2/ when you access the success page copy the token and paste it here`))
           askForString('Token').then((token: TBase64EncodedString) => {

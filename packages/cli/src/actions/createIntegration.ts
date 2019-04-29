@@ -26,7 +26,6 @@ class CreateIntegrationAction extends BaseAction {
           `${this.logger.constants.DeveloperPortalUrl}integrations/${integration.uuid}`
         )
         if (this.logger.isIntegrationLocation) {
-          // tslint:disable-next-line no-boolean-literal-compare
           if (options.link) {
             await Link(this.logger, integration.uuid)
           }
