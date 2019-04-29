@@ -20,7 +20,6 @@ export const devPortalClient = (command: BaseCommand) => {
     if (!token) {
       command.debug('no token found, trying to log you in')
       await promptToLogin(command)
-      // command.debug('login prompt done')
       token = await command.bearerConfig.getToken()
     }
 
