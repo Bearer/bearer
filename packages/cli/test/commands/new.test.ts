@@ -153,7 +153,7 @@ describe('askForAuthType', () => {
 describe('selectFolder', () => {
   describe('without any valid integration', () => {
     it('throws an no integration found error', async () => {
-      await expect(selectFolder(fixturesPath('new/template-without-integration'))).rejects.toThrow(
+      await expect(selectFolder(fixturesPath('new/template-without-integration'), {})).rejects.toThrow(
         'No valid integration found within the cloned archive: location'
       )
     })
@@ -163,7 +163,7 @@ describe('selectFolder', () => {
     it('returns early', async () => {
       expect.assertions(1)
 
-      const folder = await selectFolder(fixturesPath('new', 'template-with-one-integration'))
+      const folder = await selectFolder(fixturesPath('new', 'template-with-one-integration'), {})
 
       expect(folder).toEqual({ selected: '' })
     })
@@ -171,7 +171,7 @@ describe('selectFolder', () => {
     it('returns early (nested)', async () => {
       expect.assertions(1)
 
-      const folder = await selectFolder(fixturesPath('new', 'template-with-one-integration-nested'))
+      const folder = await selectFolder(fixturesPath('new', 'template-with-one-integration-nested'), {})
 
       expect(folder).toEqual({ selected: 'nested-here' })
     })
@@ -185,14 +185,32 @@ describe('selectFolder', () => {
       })
       mockInquirer(inquirerReturn)
 
-      await selectFolder(fixturesPath('new/template-with-multiple-integrations'))
+      await selectFolder(fixturesPath('new/template-with-multiple-integrations'), {})
 
       expect(inquirerReturn.mock.calls[0]).toMatchSnapshot()
+    })
+
+    it('does not prompt if selectedPath exist', async () => {
+      expect.assertions(1)
+
+      const { selected } = await selectFolder(fixturesPath('new/template-with-multiple-integrations'), {
+        selectedPath: 'provider/2-one'
+      })
+
+      expect(selected).toEqual('provider/2-one')
+    })
+
+    it('throws an no integration found error if selectedPath does not exist', async () => {
+      expect.assertions(1)
+
+      await expect(
+        selectFolder(fixturesPath('new/template-with-multiple-integrations'), { selectedPath: 'wrong-one' })
+      ).rejects.toThrow('No valid integration found within the cloned archive: location')
     })
   })
 })
 
-describe.only('cloneRepository', () => {
+describe('cloneRepository', () => {
   describe('wihtout git command', () => {
     it('raise an error when git is not available', async () => {
       const logger = { debug: jest.fn(), error: jest.fn() } as any
