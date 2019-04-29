@@ -47,7 +47,7 @@ export default class New extends BaseCommand {
     }),
     skipInstall: flags.boolean({ hidden: true, description: 'Do not install dependencies' }),
     withViews: flags.boolean({ description: 'Experimental - generate views' }),
-    force: flags.boolean({ description: 'Force copying files' }),
+    force: flags.boolean({ description: 'Force copying files', char: 'f' }),
     authType: flags.string({
       char: 'a',
       description: 'Authorization type', // help description for flag
@@ -72,7 +72,7 @@ export default class New extends BaseCommand {
       this.copyDestinationFolder = await defineLocationPath(this, {
         name: this.name,
         cwd: this.path || process.cwd(),
-        force: args.force
+        force: flags.force
       })
 
       this.debug('target path: %s', this.copyDestinationFolder)
@@ -126,7 +126,11 @@ export default class New extends BaseCommand {
       this.log(this.colors.bold(`   cd ${finalLocation}`))
     } catch (e) {
       this.debug('error: %j', e)
-      this.error(e)
+      if (e instanceof NoIntegrationFoundError) {
+        this.error(this.colors.red('No valid integration found within the cloned git repository'))
+      } else {
+        this.error(e)
+      }
     }
   }
 
@@ -249,7 +253,7 @@ export async function selectFolder(
       }
     })
     .filter(choice => {
-      return !selectedPath || choice.value === selectedPath
+      return !Boolean(selectedPath) || choice.value === selectedPath
     })
 
   switch (choices.length) {
@@ -278,7 +282,6 @@ export async function defineLocationPath(
 ) {
   let location = path.join(cwd, name)
   let shouldForce = force
-
   while (fs.existsSync(location) && shouldForce !== true) {
     if (shouldForce === false) {
       logger.warn(`${location.replace(cwd, '')} already exists\n please provide a different folder name`)
@@ -327,8 +330,8 @@ export function initViewsVars(authType: Authentications) {
  */
 
 class NoIntegrationFoundError extends Error {
-  constructor(location: string) {
-    super(`No valid integration found within the cloned archive: location ${location}`)
+  constructor(location: string, url: string, selectedFolder: string) {
+    super(`No valid integration found within the cloned archive`)
   }
 }
 
