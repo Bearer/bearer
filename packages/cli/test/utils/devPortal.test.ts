@@ -1,4 +1,4 @@
-import { devPortalClient, UnauthorizedError } from '../../src/utils/devPortal'
+import { devPortalClient } from '../../src/utils/devPortal'
 import * as nock from 'nock'
 
 describe('devPortalClient', () => {
@@ -20,12 +20,6 @@ describe('devPortalClient', () => {
       const instance = devPortalClient(command)
       return instance
     }
-
-    it('throws error no token present', () => {
-      const instance = setup({ token: undefined })
-
-      return expect(instance.request({ query: 'somehting' })).rejects.toThrowError(UnauthorizedError)
-    })
 
     it('throws error no token present', async () => {
       nock('http://test.bearer.sh', { reqheaders: { authorization: 'Bearer valid_token' } })
