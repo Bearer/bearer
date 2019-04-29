@@ -1,5 +1,6 @@
 import axios from 'axios'
 import BaseCommand from '../base-command'
+import { promptToLogin } from '../actions/login'
 
 export const devPortalClient = (command: BaseCommand) => {
   const instance = axios.create({
@@ -14,24 +15,23 @@ export const devPortalClient = (command: BaseCommand) => {
       return Promise.reject(error)
     }
   )
+  async function requestFunction<DataReturned>(data: { query: string; variables?: any }) {
+    let token = await command.bearerConfig.getToken()
+    if (!token) {
+      command.debug('no token found, trying to log you in')
+      await promptToLogin(command)
+      // command.debug('login prompt done')
+      token = await command.bearerConfig.getToken()
+    }
+
+    return await instance.post<{ data?: DataReturned }>('', data, {
+      headers: {
+        Authorization: `Bearer ${token!.access_token}`
+      }
+    })
+  }
 
   return {
-    request: async <DataReturned>(data: { query: string; variables?: any }) => {
-      const token = await command.bearerConfig.getToken()
-      if (token) {
-        return instance.post<{ data?: DataReturned }>('', data, {
-          headers: {
-            Authorization: `Bearer ${token.access_token}`
-          }
-        })
-      }
-      throw new UnauthorizedError()
-    }
-  }
-}
-
-export class UnauthorizedError extends Error {
-  constructor() {
-    super('Unauthorized request')
+    request: requestFunction
   }
 }

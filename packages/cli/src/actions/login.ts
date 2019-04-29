@@ -3,6 +3,8 @@ import * as express from 'express'
 import * as crypto from 'crypto'
 import getPort from 'get-port'
 import axios from 'axios'
+import baseCommand from '../base-command'
+import * as inquirer from 'inquirer'
 
 // TODO: use esModuleInterop config
 // @ts-ignore
@@ -61,10 +63,11 @@ class LoginAction extends BaseAction {
             )
             const token = await askForString('Token')
             await this.getToken(token)
+            resolve()
           }
         })
       }),
-      Promise.all([
+      Promise.race([
         new Promise((_resolve, reject) => {
           this.on('error', reject)
         }),
@@ -74,7 +77,7 @@ class LoginAction extends BaseAction {
       ])
     ])
     this.logger.debug('login done')
-    this.stopServer()
+    cliUx.action.stop()
   }
 
   on = (event: Event, callback: () => void) => {
@@ -82,18 +85,23 @@ class LoginAction extends BaseAction {
   }
 
   private stopServer = () => {
-    this.logger.debug('stopping server')
-    if (this._server) {
-      this._server.close(() => {
-        this.logger.debug('server stopped')
-        cliUx.action.stop()
-      })
-    }
+    return new Promise((resolve, _reject) => {
+      this.logger.debug('stopping server')
+      if (this._server) {
+        this._server.close(() => {
+          this.logger.debug('server stopped')
+          resolve()
+        })
+      } else {
+        resolve()
+      }
+    })
   }
 
   private startServer = async (): Promise<http.Server> => {
     // stop the server if successfully authenticated
     this.on('success', this.stopServer)
+    this.on('error', this.stopServer)
     const port = await getPort({ port: BEARER_LOGIN_PORT })
     return new Promise((resolve, reject) => {
       if (port !== BEARER_LOGIN_PORT) {
@@ -102,19 +110,27 @@ class LoginAction extends BaseAction {
       }
       this.logger.debug('starting server')
       const app = express()
+
       app.use((_req: express.Request, res: express.Response, next: express.NextFunction) => {
         res.setHeader('Connection', 'close')
         next()
       })
+
       app.get('/login/callback', (req: express.Request, res: express.Response) => {
         const code: string = req.query.code || ''
         try {
           res.send(SUCCESS_LOGIN_PAGE)
+          setTimeout(() => {
+            Promise.all([this.getToken(code), this.stopServer()]).then(() => {
+              this.logger.debug('calling success listeners')
+              this._listerners.success.map(cb => cb())
+            })
+          }, 0)
           res.end()
-          this.getToken(code)
         } catch (e) {
           this.logger.debug(e)
           this.logger.error('Error while fetching token')
+          this._listerners.error.map(cb => cb())
         }
       })
 
@@ -141,7 +157,6 @@ class LoginAction extends BaseAction {
       this.logger.debug('saving token: %j', token)
       await this.logger.bearerConfig.storeToken(token)
       this.logger.success('Successfully logged in!! 🐻')
-      this._listerners.success.map(cb => cb())
     } catch (e) {
       this.logger.error(e)
     }
@@ -152,7 +167,26 @@ class LoginAction extends BaseAction {
   }
 }
 
-export default createExport(LoginAction)
+const loginFlow = createExport(LoginAction)
+
+export default loginFlow
+
+export async function promptToLogin(command: baseCommand) {
+  command.log(command.colors.bold('⚠️ It looks like you are not logged in'))
+  const { shoudlLogin } = await inquirer.prompt<{ shoudlLogin: boolean }>([
+    {
+      message: 'Would you like to login?',
+      name: 'shoudlLogin',
+      type: 'list',
+      choices: [{ name: 'Yes', value: true }, { name: 'No', value: false }]
+    }
+  ])
+  if (shoudlLogin) {
+    await loginFlow(command)
+  } else {
+    command.exit(0)
+  }
+}
 
 function base64URLEncode(str: Buffer) {
   return str

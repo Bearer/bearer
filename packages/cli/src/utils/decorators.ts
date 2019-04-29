@@ -5,7 +5,7 @@ import Command from '../base-command'
 
 import Link from '../actions/link'
 import Create from '../actions/createIntegration'
-import Login from '../actions/login'
+import { promptToLogin } from '../actions/login'
 
 import { LOGIN_CLIENT_ID } from './constants'
 
@@ -115,21 +115,7 @@ export function ensureFreshToken() {
           this.error(error.message)
         }
       } else {
-        const error = this.colors.bold('⚠️ It looks like you are not logged in')
-        this.log(error)
-        const { shoudlLogin } = await inquirer.prompt<{ shoudlLogin: boolean }>([
-          {
-            message: 'Would you like to login?',
-            name: 'shoudlLogin',
-            type: 'list',
-            choices: [{ name: 'Yes', value: true }, { name: 'No', value: false }]
-          }
-        ])
-        if (shoudlLogin) {
-          await Login(this)
-        } else {
-          this.exit(0)
-        }
+        await promptToLogin(this)
       }
       return await originalMethod.apply(this, arguments)
     }
