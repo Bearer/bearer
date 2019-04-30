@@ -23,7 +23,7 @@ export const devPortalClient = (command: BaseCommand) => {
       token = await command.bearerConfig.getToken()
     }
 
-    return await instance.post<{ data?: DataReturned }>('', data, {
+    return await instance.post<{ data?: DataReturned; errors?: any }>('', data, {
       headers: {
         Authorization: `Bearer ${token!.access_token}`
       }

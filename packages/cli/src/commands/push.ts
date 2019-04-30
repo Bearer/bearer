@@ -3,19 +3,14 @@ import axios from 'axios'
 import * as fs from 'fs-extra'
 import * as globby from 'globby'
 import * as Listr from 'listr'
-import serviceClient from '@bearer/bearer-cli/lib/lib/serviceClient'
 
 import BaseCommand from '../base-command'
-import { ensureFreshToken, RequireLinkedIntegration, RequireIntegrationFolder } from '../utils/decorators'
+import { RequireLinkedIntegration, RequireIntegrationFolder } from '../utils/decorators'
 import { ensureFolderExists } from '../utils/helpers'
-import { IntegrationClient } from '../utils/integration-client'
 import { AUTH_CONFIG_FILENAME } from '../utils/locator'
 
 export default class Push extends BaseCommand {
   static description = 'deploy integration to Bearer'
-  private integrationClient!: IntegrationClient
-  // TODO: fix typing
-  private serviceClient!: any
 
   static flags = {
     ...BaseCommand.flags
@@ -26,18 +21,6 @@ export default class Push extends BaseCommand {
   @RequireIntegrationFolder()
   @RequireLinkedIntegration()
   async run() {
-    const { Username, Password } = await this.fetchLoginInformation()
-    this.debug({ Username, Password })
-    this.serviceClient = serviceClient(this.constants.IntegrationServiceUrl)
-    const data = await this.serviceClient.login({ Username, Password })
-    this.debug('auth info : %j', data)
-
-    this.integrationClient = new IntegrationClient(
-      this.constants.DeploymentUrl,
-      data.body.authorization.AuthenticationResult.IdToken,
-      this.config.version
-    )
-
     ensureFolderExists(this.locator.buildArtifactDir, true)
     const archivePath = this.locator.buildArtifactResourcePath('integration.zip')
     const tasks = [
@@ -116,8 +99,22 @@ export default class Push extends BaseCommand {
     })
   }
 
-  async getSignedUrl(): Promise<string> {
-    return this.integrationClient.getIntegrationArchiveUploadUrl(this.bearerConfig.bearerUid)
+  async getSignedUrl() {
+    try {
+      const { data } = await this.devPortalClient.request<{ integration: { url: string } }>({
+        query: QUERY,
+        variables: { buid: this.bearerConfig.BUID }
+      })
+
+      if (!data.data) {
+        this.debug('received: %j', data)
+        this.error(new Error('Integration not found please make sure you have correctly linked your integration'))
+      }
+      return data!.data!.integration.url
+    } catch (e) {
+      this.error(e)
+      throw e
+    }
   }
 
   async transfer(archivePath: string): Promise<boolean> {
@@ -131,6 +128,7 @@ export default class Push extends BaseCommand {
       if (e.response) {
         this.debug(e.response)
         switch (e.response.status) {
+          case 403:
           case 401: {
             this.error(
               `Unauthorized to push, please visit ${this.constants.DeveloperPortalUrl}integrations/${
@@ -147,41 +145,12 @@ export default class Push extends BaseCommand {
       return false
     }
   }
-
-  @ensureFreshToken()
-  async fetchCredentials() {
-    const { data } = await this.devPortalClient.request<{
-      currentUser: { email: string; infrastructure: { password: string } }
-    }>({
-      query: QUERY
-    })
-    if (data.data) {
-      return { Username: data.data.currentUser.email, Password: data.data.currentUser.infrastructure.password }
-    }
-    throw 'Fetch credentials error'
-  }
-
-  fetchLoginInformation = async () => {
-    const { BEARER_TOKEN, BEARER_EMAIL } = process.env
-    if (BEARER_TOKEN && BEARER_EMAIL) {
-      return {
-        Username: BEARER_EMAIL,
-        Password: BEARER_TOKEN
-      }
-    }
-    const data = await this.fetchCredentials()
-    this.debug('received credentials: %j', data)
-    return data
-  }
 }
 
 const QUERY = `
-query CLIPush {
-  currentUser {
-    email
-    infrastructure {
-      password
-    }
+query CLIGetIntegrationUploadUrl($buid: String!) {
+  integration(buid: $buid) {
+    url: archiveUploadUrl
   }
 }
 `
