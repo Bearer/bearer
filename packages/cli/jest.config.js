@@ -4,12 +4,13 @@ module.exports = {
   coveragePathIgnorePatterns: ['<rootDir>/node_modules', '<rootDir>/test'],
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
   setupFiles: ['<rootDir>/test/setup.js'],
+  globalSetup: '<rootDir>/test/globalSetup.ts',
   testEnvironment: 'node',
   modulePathIgnorePatterns: ['<rootDir>/templates'],
   testPathIgnorePatterns: [
     '/node_modules/',
     '<rootDir>/templates',
-    '/.bearer/',
+    '<rootDir>/test/.artifacts/',
     '<rootDir>/src/commands/generate/spec.ts',
     '<rootDir>/lib'
   ],

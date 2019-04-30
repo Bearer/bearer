@@ -18,3 +18,7 @@ export const FIXTURE_FOLDER = path.join(__dirname, '..', '__FIXTURES__')
 export function fixturesPath(...args: string[]) {
   return path.join(FIXTURE_FOLDER, ...args)
 }
+
+export function artifactPath(...args: string[]) {
+  return path.join(ARTIFACT_FOLDER, ...args)
+}

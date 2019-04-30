@@ -1,5 +1,6 @@
 import * as fs from 'fs-extra'
 import * as path from 'path'
+import { artifactPath } from './utils'
 
 type TSetupConfig = {
   clean?: boolean
@@ -7,8 +8,6 @@ type TSetupConfig = {
   folderName?: string
   withViews?: boolean
 }
-
-export const ARTIFACT_ROOT = path.join(__dirname, '..', '..', '.bearer')
 
 export function ensureFolderExist(folder: string, empty = true) {
   if (!fs.existsSync(folder)) {
@@ -20,7 +19,7 @@ export function ensureFolderExist(folder: string, empty = true) {
 }
 
 export function cleanArtifactFolder(name: string) {
-  const bearerFolder = path.join(ARTIFACT_ROOT, name)
+  const bearerFolder = artifactPath(name)
   if (!fs.existsSync(bearerFolder)) {
     fs.mkdirpSync(bearerFolder)
   }

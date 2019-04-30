@@ -11,11 +11,11 @@ import NewCommand, {
   selectFolder,
   cloneRepository
 } from '../../src/commands/new'
-import { readFile as _readFile, ARTIFACT_FOLDER, fixturesPath } from '../helpers/utils'
+import { readFile as _readFile, ARTIFACT_FOLDER, fixturesPath, artifactPath } from '../helpers/utils'
 import { ensureFolderExist } from '../helpers/setup'
 
-const destination = path.join(__dirname, '..', '..', '.bearer/init')
-const destinationWithViews = path.join(__dirname, '..', '..', '.bearer/initWithView')
+const destination = artifactPath('init')
+const destinationWithViews = artifactPath('initWithViews')
 
 const AUTHCONFIG = 'auth.config.json'
 const PACKAGE_JSON = 'package.json'
@@ -31,14 +31,12 @@ describe.each(Object.keys(authTypes))('Authentication: %s', auth => {
   inputSet.forEach(([title, args, destinationPath]) => {
     const out = path.join(destinationPath, 'new', auth)
 
-    beforeAll(() => {
-      ensureFolderExist(out)
-    })
-
     describe(title, () => {
       describe(auth, () => {
         const result: string[] = []
         beforeAll(async () => {
+          await ensureFolderExist(out)
+
           jest.spyOn(process.stdout, 'write').mockImplementation(val => {
             result.push(val)
             return true
@@ -151,6 +149,9 @@ describe('askForAuthType', () => {
 })
 
 describe('selectFolder', () => {
+  beforeEach(() => {
+    resetInquirerMock()
+  })
   describe('without any valid integration', () => {
     it('throws an no integration found error', async () => {
       await expect(selectFolder(fixturesPath('new/template-without-integration'), {})).rejects.toThrow(
@@ -165,7 +166,7 @@ describe('selectFolder', () => {
 
       const folder = await selectFolder(fixturesPath('new', 'template-with-one-integration'), {})
 
-      expect(folder).toEqual({ selected: '' })
+      await expect(folder).toEqual({ selected: '' })
     })
 
     it('returns early (nested)', async () => {
@@ -173,7 +174,7 @@ describe('selectFolder', () => {
 
       const folder = await selectFolder(fixturesPath('new', 'template-with-one-integration-nested'), {})
 
-      expect(folder).toEqual({ selected: 'nested-here' })
+      await expect(folder).toEqual({ selected: 'nested-here' })
     })
   })
 
