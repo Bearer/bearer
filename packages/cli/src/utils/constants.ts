@@ -7,7 +7,6 @@ export const BEARER_LOGIN_PORT = 56789
 
 export const CONFIGS: Record<BearerEnv, BaseConfig> = {
   dev: {
-    DeploymentUrl: 'https://developer.dev.bearer.sh/v1/',
     IntegrationServiceHost: 'https://int.dev.bearer.sh/',
     IntegrationServiceUrl: 'https://int.dev.bearer.sh/api/v1/',
     DeveloperPortalAPIUrl: 'https://api.staging.bearer.sh/graphql',
@@ -17,7 +16,6 @@ export const CONFIGS: Record<BearerEnv, BaseConfig> = {
     LoginDomain: 'https://login.bearer.sh'
   },
   staging: {
-    DeploymentUrl: 'https://developer.staging.bearer.sh/cicd/v2',
     IntegrationServiceHost: 'https://int.staging.bearer.sh/',
     IntegrationServiceUrl: 'https://int.staging.bearer.sh/api/v1/',
     DeveloperPortalAPIUrl: 'https://api.staging.bearer.sh/graphql',
@@ -27,7 +25,6 @@ export const CONFIGS: Record<BearerEnv, BaseConfig> = {
     LoginDomain: 'https://login.bearer.sh'
   },
   production: {
-    DeploymentUrl: 'https://developer.bearer.sh/cicd/v2/',
     IntegrationServiceHost: 'https://int.bearer.sh/',
     IntegrationServiceUrl: 'https://int.bearer.sh/api/v1/',
     DeveloperPortalAPIUrl: 'https://api.bearer.sh/graphql',

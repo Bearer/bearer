@@ -3,7 +3,6 @@ import Authentication from '@bearer/types/lib/authentications'
 export type BearerEnv = 'dev' | 'staging' | 'production'
 
 export type BaseConfig = {
-  DeploymentUrl: string
   IntegrationServiceHost: string
   IntegrationServiceUrl: string
   BearerEnv: string
