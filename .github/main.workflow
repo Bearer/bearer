@@ -15,5 +15,8 @@ workflow "Test Toolkit" {
   # postinstall is runing bootstrap
   needs = "Install"
   runs = "yarn"
+  env = {
+    DEBUG = "bearer:*"
+  } 
   args = ["test"]
 }

@@ -84,10 +84,10 @@ describe('setup', () => {
           SetupAuth.prototype.fetchAuthToken = () => {
             return Promise.resolve(Buffer.from(JSON.stringify(returned)).toString('base64') as any)
           }
+        })
 
-          afterAll(() => {
-            process.env = { ...OLD_ENV }
-          })
+        afterAll(() => {
+          process.env = { ...OLD_ENV }
         })
 
         test(`save to local.config.jsonc`, async () => {

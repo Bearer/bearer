@@ -141,8 +141,8 @@ see examples`
         break
       }
       case Authentications.ApiKey: {
-        const { [keys.BEARER_AUTH_APIKEY]: key = args.credentials } = process.env
-        const apiKey = key || (await askForPassword(prefixedPrompt('API Key')))
+        const { [keys.BEARER_AUTH_APIKEY]: key } = process.env
+        const apiKey = key || args.credentials || (await askForPassword(prefixedPrompt('API Key')))
         await this.persistSetup({ apiKey } as contexts.ApiKey)
         break
       }
