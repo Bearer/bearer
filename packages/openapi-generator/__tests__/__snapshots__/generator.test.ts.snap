@@ -12,20 +12,20 @@ exports[`#generator generates the valid openapi 3.0 document 1`] = `
     }
   ],
   \\"tags\\": [],
+  \\"components\\": {
+    \\"securitySchemes\\": {
+      \\"API Key\\": {
+        \\"type\\": \\"apiKey\\",
+        \\"in\\": \\"header\\",
+        \\"name\\": \\"Authorization\\",
+        \\"description\\": \\"You can find your **Bearer API Key** [here](https://app.bearer.sh/keys).\\"
+      }
+    }
+  },
   \\"paths\\": {
     \\"/4l1c3-happy-goats/fetchDataApiKey\\": {
       \\"post\\": {
-        \\"parameters\\": [
-          {
-            \\"in\\": \\"header\\",
-            \\"name\\": \\"authorization\\",
-            \\"schema\\": {
-              \\"type\\": \\"string\\"
-            },
-            \\"description\\": \\"API Key\\",
-            \\"required\\": true
-          }
-        ],
+        \\"parameters\\": [],
         \\"summary\\": \\"fetchDataApiKey\\",
         \\"requestBody\\": {
           \\"content\\": {
@@ -115,22 +115,17 @@ exports[`#generator generates the valid openapi 3.0 document 1`] = `
               }
             }
           }
-        }
+        },
+        \\"security\\": [
+          {
+            \\"API Key\\": []
+          }
+        ]
       }
     },
     \\"/4l1c3-happy-goats/fetchDataBasic\\": {
       \\"post\\": {
-        \\"parameters\\": [
-          {
-            \\"in\\": \\"header\\",
-            \\"name\\": \\"authorization\\",
-            \\"schema\\": {
-              \\"type\\": \\"string\\"
-            },
-            \\"description\\": \\"API Key\\",
-            \\"required\\": true
-          }
-        ],
+        \\"parameters\\": [],
         \\"summary\\": \\"fetchDataBasic\\",
         \\"requestBody\\": {
           \\"content\\": {
@@ -220,21 +215,17 @@ exports[`#generator generates the valid openapi 3.0 document 1`] = `
               }
             }
           }
-        }
+        },
+        \\"security\\": [
+          {
+            \\"API Key\\": []
+          }
+        ]
       }
     },
     \\"/4l1c3-happy-goats/fetchDataInlineType\\": {
       \\"post\\": {
         \\"parameters\\": [
-          {
-            \\"in\\": \\"header\\",
-            \\"name\\": \\"authorization\\",
-            \\"schema\\": {
-              \\"type\\": \\"string\\"
-            },
-            \\"description\\": \\"API Key\\",
-            \\"required\\": true
-          },
           {
             \\"name\\": \\"authId\\",
             \\"schema\\": {
@@ -332,22 +323,17 @@ exports[`#generator generates the valid openapi 3.0 document 1`] = `
               }
             }
           }
-        }
+        },
+        \\"security\\": [
+          {
+            \\"API Key\\": []
+          }
+        ]
       }
     },
     \\"/4l1c3-happy-goats/fetchDataNone\\": {
       \\"post\\": {
-        \\"parameters\\": [
-          {
-            \\"in\\": \\"header\\",
-            \\"name\\": \\"authorization\\",
-            \\"schema\\": {
-              \\"type\\": \\"string\\"
-            },
-            \\"description\\": \\"API Key\\",
-            \\"required\\": true
-          }
-        ],
+        \\"parameters\\": [],
         \\"summary\\": \\"fetchDataNone\\",
         \\"requestBody\\": {
           \\"content\\": {
@@ -437,22 +423,17 @@ exports[`#generator generates the valid openapi 3.0 document 1`] = `
               }
             }
           }
-        }
+        },
+        \\"security\\": [
+          {
+            \\"API Key\\": []
+          }
+        ]
       }
     },
     \\"/4l1c3-happy-goats/fetchDataOauth1\\": {
       \\"post\\": {
-        \\"parameters\\": [
-          {
-            \\"in\\": \\"header\\",
-            \\"name\\": \\"authorization\\",
-            \\"schema\\": {
-              \\"type\\": \\"string\\"
-            },
-            \\"description\\": \\"API Key\\",
-            \\"required\\": true
-          }
-        ],
+        \\"parameters\\": [],
         \\"summary\\": \\"fetchDataOauth1\\",
         \\"requestBody\\": {
           \\"content\\": {
@@ -542,21 +523,17 @@ exports[`#generator generates the valid openapi 3.0 document 1`] = `
               }
             }
           }
-        }
+        },
+        \\"security\\": [
+          {
+            \\"API Key\\": []
+          }
+        ]
       }
     },
     \\"/4l1c3-happy-goats/fetchDataOauth2\\": {
       \\"post\\": {
         \\"parameters\\": [
-          {
-            \\"in\\": \\"header\\",
-            \\"name\\": \\"authorization\\",
-            \\"schema\\": {
-              \\"type\\": \\"string\\"
-            },
-            \\"description\\": \\"API Key\\",
-            \\"required\\": true
-          },
           {
             \\"name\\": \\"authId\\",
             \\"schema\\": {
@@ -657,21 +634,17 @@ exports[`#generator generates the valid openapi 3.0 document 1`] = `
               }
             }
           }
-        }
+        },
+        \\"security\\": [
+          {
+            \\"API Key\\": []
+          }
+        ]
       }
     },
     \\"/4l1c3-happy-goats/fetchDataRefType\\": {
       \\"post\\": {
         \\"parameters\\": [
-          {
-            \\"in\\": \\"header\\",
-            \\"name\\": \\"authorization\\",
-            \\"schema\\": {
-              \\"type\\": \\"string\\"
-            },
-            \\"description\\": \\"API Key\\",
-            \\"required\\": true
-          },
           {
             \\"name\\": \\"authId\\",
             \\"schema\\": {
@@ -758,22 +731,17 @@ exports[`#generator generates the valid openapi 3.0 document 1`] = `
               }
             }
           }
-        }
+        },
+        \\"security\\": [
+          {
+            \\"API Key\\": []
+          }
+        ]
       }
     },
     \\"/4l1c3-happy-goats/fetchDataUndefined\\": {
       \\"post\\": {
-        \\"parameters\\": [
-          {
-            \\"in\\": \\"header\\",
-            \\"name\\": \\"authorization\\",
-            \\"schema\\": {
-              \\"type\\": \\"string\\"
-            },
-            \\"description\\": \\"API Key\\",
-            \\"required\\": true
-          }
-        ],
+        \\"parameters\\": [],
         \\"summary\\": \\"fetchDataUndefined\\",
         \\"requestBody\\": {
           \\"content\\": {
@@ -822,7 +790,12 @@ exports[`#generator generates the valid openapi 3.0 document 1`] = `
               }
             }
           }
-        }
+        },
+        \\"security\\": [
+          {
+            \\"API Key\\": []
+          }
+        ]
       }
     }
   }

@@ -5,6 +5,16 @@ type THeader = {
   }
   servers: { url: string }[]
   tags: {}[]
+  components: {
+    securitySchemes: {
+      [key: string]: {
+        type: string
+        in: string
+        description: string
+        name: string
+      }
+    }
+  }
 }
 
 type TParam = {
@@ -31,16 +41,7 @@ export function specPath({
   return {
     [`/${buid}/${functionName}`]: {
       post: {
-        parameters: [
-          {
-            in: 'header',
-            name: 'authorization',
-            schema: { type: 'string' },
-            description: 'API Key',
-            required: true
-          },
-          oauthParam(oauth)
-        ].filter(e => e !== undefined),
+        parameters: [oauthParam(oauth)].filter(e => e !== undefined),
         summary: functionName,
         requestBody: { content: { 'application/json': { schema: requestBody } } },
         responses: {
@@ -57,7 +58,12 @@ export function specPath({
               'application/json': { schema: { type: 'object', properties: { error: { type: 'string' } } } }
             }
           }
-        }
+        },
+        security: [
+          {
+            'API Key': []
+          }
+        ]
       }
     }
   }
@@ -83,6 +89,16 @@ export function topOfSpec(integrationName: string): THeader {
       title: integrationName
     },
     servers: [{ url: 'https://int.bearer.sh/api/v4/functions/backend/' }],
-    tags: []
+    tags: [],
+    components: {
+      securitySchemes: {
+        'API Key': {
+          type: 'apiKey',
+          in: 'header',
+          name: 'Authorization',
+          description: 'You can find your **Bearer API Key** [here](https://app.bearer.sh/keys).'
+        }
+      }
+    }
   }
 }

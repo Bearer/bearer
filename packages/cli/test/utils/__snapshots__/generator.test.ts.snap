@@ -12,19 +12,20 @@ exports[`generators build generates openapi documentation 1`] = `
     }
   ],
   \\"tags\\": [],
+  \\"components\\": {
+    \\"securitySchemes\\": {
+      \\"API Key\\": {
+        \\"type\\": \\"apiKey\\",
+        \\"in\\": \\"header\\",
+        \\"name\\": \\"Authorization\\",
+        \\"description\\": \\"You can find your **Bearer API Key** [here](https://app.bearer.sh/keys).\\"
+      }
+    }
+  },
   \\"paths\\": {
     \\"/123-test/object-literal-type\\": {
       \\"post\\": {
         \\"parameters\\": [
-          {
-            \\"in\\": \\"header\\",
-            \\"name\\": \\"authorization\\",
-            \\"schema\\": {
-              \\"type\\": \\"string\\"
-            },
-            \\"description\\": \\"API Key\\",
-            \\"required\\": true
-          },
           {
             \\"name\\": \\"authId\\",
             \\"schema\\": {
@@ -122,21 +123,17 @@ exports[`generators build generates openapi documentation 1`] = `
               }
             }
           }
-        }
+        },
+        \\"security\\": [
+          {
+            \\"API Key\\": []
+          }
+        ]
       }
     },
     \\"/123-test/type-alias\\": {
       \\"post\\": {
         \\"parameters\\": [
-          {
-            \\"in\\": \\"header\\",
-            \\"name\\": \\"authorization\\",
-            \\"schema\\": {
-              \\"type\\": \\"string\\"
-            },
-            \\"description\\": \\"API Key\\",
-            \\"required\\": true
-          },
           {
             \\"name\\": \\"authId\\",
             \\"schema\\": {
@@ -217,22 +214,17 @@ exports[`generators build generates openapi documentation 1`] = `
               }
             }
           }
-        }
+        },
+        \\"security\\": [
+          {
+            \\"API Key\\": []
+          }
+        ]
       }
     },
     \\"/123-test/undefined-params-and-return\\": {
       \\"post\\": {
-        \\"parameters\\": [
-          {
-            \\"in\\": \\"header\\",
-            \\"name\\": \\"authorization\\",
-            \\"schema\\": {
-              \\"type\\": \\"string\\"
-            },
-            \\"description\\": \\"API Key\\",
-            \\"required\\": true
-          }
-        ],
+        \\"parameters\\": [],
         \\"summary\\": \\"undefined-params-and-return\\",
         \\"requestBody\\": {
           \\"content\\": {
@@ -283,7 +275,12 @@ exports[`generators build generates openapi documentation 1`] = `
               }
             }
           }
-        }
+        },
+        \\"security\\": [
+          {
+            \\"API Key\\": []
+          }
+        ]
       }
     }
   }
