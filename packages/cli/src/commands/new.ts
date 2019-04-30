@@ -127,7 +127,7 @@ export default class New extends BaseCommand {
     } catch (e) {
       this.debug('error: %j', e)
       if (e instanceof NoIntegrationFoundError) {
-        this.error(this.colors.red('No valid integration found within the cloned git repository'))
+        this.error(this.colors.red('No valid integrations found within the cloned git repository'))
       } else {
         this.error(e)
       }
@@ -258,7 +258,7 @@ export async function selectFolder(
 
   switch (choices.length) {
     case 0: {
-      throw new NoIntegrationFoundError(location)
+      throw new NoIntegrationFoundError(selectedPath)
     }
     case 1: {
       return { selected: choices[0].value }
@@ -330,8 +330,8 @@ export function initViewsVars(authType: Authentications) {
  */
 
 class NoIntegrationFoundError extends Error {
-  constructor(location: string, url: string, selectedFolder: string) {
-    super(`No valid integration found within the cloned archive`)
+  constructor(selectedFolder?: string) {
+    super(`No valid integrations found ${selectedFolder ? `under ${selectedFolder}` : ''}`)
   }
 }
 

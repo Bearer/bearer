@@ -154,7 +154,7 @@ describe('selectFolder', () => {
   describe('without any valid integration', () => {
     it('throws an no integration found error', async () => {
       await expect(selectFolder(fixturesPath('new/template-without-integration'), {})).rejects.toThrow(
-        'No valid integration found within the cloned archive: location'
+        'No valid integrations found'
       )
     })
   })
@@ -205,7 +205,7 @@ describe('selectFolder', () => {
 
       await expect(
         selectFolder(fixturesPath('new/template-with-multiple-integrations'), { selectedPath: 'wrong-one' })
-      ).rejects.toThrow('No valid integration found within the cloned archive: location')
+      ).rejects.toThrow('No valid integrations found under wrong-one')
     })
   })
 })
