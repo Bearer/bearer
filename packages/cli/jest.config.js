@@ -1,5 +1,6 @@
 module.exports = {
   automock: false,
+  verbose: true,
   coveragePathIgnorePatterns: ['<rootDir>/node_modules', '<rootDir>/test'],
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
   setupFiles: ['<rootDir>/test/setup.js'],
