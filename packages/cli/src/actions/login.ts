@@ -80,8 +80,8 @@ class LoginAction extends BaseAction {
     this._listerners[event] = [...this._listerners[event], callback]
   }
 
-  private stopServer = () => {
-    return new Promise((resolve, _reject) => {
+  private stopServer = () =>
+    new Promise((resolve, _reject) => {
       if (this._server) {
         this.logger.debug('stopping server')
         this._server.destroy(() => {
@@ -92,7 +92,6 @@ class LoginAction extends BaseAction {
         resolve()
       }
     })
-  }
 
   private startServer = async (): Promise<TDestroyableServer> => {
     this.on('error', this.stopServer)
@@ -156,15 +155,15 @@ export default loginFlow
 
 export async function promptToLogin(command: baseCommand) {
   command.log(command.colors.bold('⚠️ It looks like you are not logged in'))
-  const { shoudlLogin } = await inquirer.prompt<{ shoudlLogin: boolean }>([
+  const { shouldLogin } = await inquirer.prompt<{ shouldLogin: boolean }>([
     {
       message: 'Would you like to login?',
-      name: 'shoudlLogin',
+      name: 'shouldLogin',
       type: 'list',
       choices: [{ name: 'Yes', value: true }, { name: 'No', value: false }]
     }
   ])
-  if (shoudlLogin) {
+  if (shouldLogin) {
     await loginFlow(command)
   } else {
     command.exit(0)
