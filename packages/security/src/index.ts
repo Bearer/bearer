@@ -23,9 +23,9 @@ export default class Cipher {
 
   decrypt = (encryptedMessage: string) => {
     const textParts = encryptedMessage.split(':')
-    const iv = new Buffer(textParts.shift()!, 'hex')
-    const encryptedText = new Buffer(textParts.join(':'), 'hex')
-    const decipher = crypto.createDecipheriv('aes-256-cbc', new Buffer(this.key), iv)
+    const iv = Buffer.from(textParts.shift()!, 'hex')
+    const encryptedText = Buffer.from(textParts.join(':'), 'hex')
+    const decipher = crypto.createDecipheriv('aes-256-cbc', Buffer.from(this.key), iv)
     const decrypted = decipher.update(encryptedText)
 
     return Buffer.concat([decrypted, decipher.final()]).toString()
@@ -34,7 +34,7 @@ export default class Cipher {
   digest = (message: string) => {
     return crypto
       .createHmac(this.config.digestAlgo, this.key)
-      .update(new Buffer(message, this.config.encoding))
+      .update(Buffer.from(message, this.config.encoding))
       .digest('hex')
   }
 }
