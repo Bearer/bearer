@@ -1,10 +1,10 @@
-import * as http from 'http'
 import * as express from 'express'
 import * as crypto from 'crypto'
-import getPort from 'get-port'
 import axios from 'axios'
-import baseCommand from '../base-command'
 import * as inquirer from 'inquirer'
+
+import baseCommand from '../base-command'
+import { startServer, TDestroyableServer, UnavailablePort } from '../actions/startLocalServer'
 
 // TODO: use esModuleInterop config
 // @ts-ignore
@@ -22,7 +22,7 @@ import { askForString } from '../utils/prompts'
 type Event = 'success' | 'error'
 
 class LoginAction extends BaseAction {
-  _server?: http.Server
+  _server?: TDestroyableServer
   _verifier!: string
   _challenge!: string
   private _listerners: Record<Event, (() => void)[]> = { success: [], error: [] }
@@ -72,7 +72,7 @@ class LoginAction extends BaseAction {
         this.on('success', resolve)
       })
     ])
-    this.logger.debug('login done')
+    this.logger.success('Successfully logged in!! 🐻')
     cliUx.action.stop()
   }
 
@@ -82,9 +82,9 @@ class LoginAction extends BaseAction {
 
   private stopServer = () => {
     return new Promise((resolve, _reject) => {
-      this.logger.debug('stopping server')
       if (this._server) {
-        this._server.close(() => {
+        this.logger.debug('stopping server')
+        this._server.destroy(() => {
           this.logger.debug('server stopped')
           resolve()
         })
@@ -94,35 +94,23 @@ class LoginAction extends BaseAction {
     })
   }
 
-  private startServer = async (): Promise<http.Server> => {
-    // stop the server if successfully authenticated
-    this.on('success', this.stopServer)
+  private startServer = async (): Promise<TDestroyableServer> => {
     this.on('error', this.stopServer)
-    const port = await getPort({ port: BEARER_LOGIN_PORT })
-    return new Promise((resolve, reject) => {
-      if (port !== BEARER_LOGIN_PORT) {
-        this.logger.error(`bearer login requires port ${BEARER_LOGIN_PORT} to be available`)
-        reject()
-      }
-      this.logger.debug('starting server')
+    try {
       const app = express()
 
       app.use((_req: express.Request, res: express.Response, next: express.NextFunction) => {
         res.setHeader('Connection', 'close')
         next()
       })
-
-      app.get('/login/callback', (req: express.Request, res: express.Response) => {
+      app.get('/login/callback', (req: express.Request, res: express.Response, next: express.NextFunction) => {
         const code: string = req.query.code || ''
         try {
-          res.send(SUCCESS_LOGIN_PAGE)
-          setTimeout(() => {
-            Promise.all([this.getToken(code), this.stopServer()]).then(() => {
-              this.logger.debug('calling success listeners')
-              this._listerners.success.map(cb => cb())
-            })
-          }, 0)
-          res.end()
+          res.send(SUCCESS_LOGIN_PAGE).end()
+          Promise.all([this.getToken(code), this.stopServer()]).then(() => {
+            this.logger.debug('calling success listeners')
+            this._listerners.success.map(cb => cb())
+          })
         } catch (e) {
           this.logger.debug(e)
           this.logger.error('Error while fetching token')
@@ -130,14 +118,14 @@ class LoginAction extends BaseAction {
         }
       })
 
-      const server = app.listen(BEARER_LOGIN_PORT, () => {
-        this.logger.debug('server started')
-        resolve(server)
-      })
-      server.addListener('connection', socket => {
-        socket.setTimeout(0)
-      })
-    })
+      this.logger.debug('starting server')
+      return await startServer(BEARER_LOGIN_PORT, app)
+    } catch (e) {
+      if (e instanceof UnavailablePort) {
+        this.logger.error('bearer login cannot start')
+      }
+      throw e
+    }
   }
 
   getToken = async (code: string) => {
@@ -152,7 +140,6 @@ class LoginAction extends BaseAction {
 
       this.logger.debug('saving token: %j', token)
       await this.logger.bearerConfig.storeToken(token)
-      this.logger.success('Successfully logged in!! 🐻')
     } catch (e) {
       this.logger.error(e)
     }

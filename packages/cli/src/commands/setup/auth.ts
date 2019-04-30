@@ -1,8 +1,6 @@
 import * as express from 'express'
 import * as fs from 'fs'
-import * as http from 'http'
 import axios from 'axios'
-import getPort from 'get-port'
 import { modify, applyEdits } from 'jsonc-parser'
 import { TConfig, Authentications, configs } from '@bearer/types/lib/authentications'
 import { contexts } from '@bearer/functions/lib/declaration'
@@ -15,6 +13,7 @@ import BaseCommand from '../../base-command'
 import { RequireIntegrationFolder } from '../../utils/decorators'
 import { BEARER_AUTH_PORT, SUCCESS_LOGIN_PAGE } from '../../utils/constants'
 import { askForString, askForPassword } from '../../utils/prompts'
+import { startServer, TDestroyableServer, UnavailablePort } from '../../actions/startLocalServer'
 
 type Event = 'success' | 'error'
 const SEPARATOR = ':'
@@ -61,7 +60,7 @@ see examples`
     }
   ]
 
-  _server?: http.Server
+  _server?: TDestroyableServer
   _verifier!: string
   _challenge!: string
   private _listerners: {
@@ -203,36 +202,34 @@ see examples`
   }
 
   private stopServer = () => {
-    this.debug('stopping server')
-    if (this._server) {
-      this._server.close(() => {
-        this.debug('server stopped')
-      })
-    }
+    return new Promise((resolve, _reject) => {
+      if (this._server) {
+        this.debug('stopping server')
+        this._server.destroy(() => {
+          this.debug('server stopped')
+          resolve()
+        })
+      } else {
+        resolve()
+      }
+    })
   }
 
-  private startServer = async (): Promise<http.Server> => {
+  private startServer = async (): Promise<TDestroyableServer> => {
     this.on('success', this.stopServer)
     this.on('error', this.stopServer)
 
-    const port = await getPort({ port: BEARER_AUTH_PORT })
-
-    return new Promise((resolve, reject) => {
-      if (port !== BEARER_AUTH_PORT) {
-        this.error(`bearer setup requires port ${BEARER_AUTH_PORT} to be available`)
-        reject()
-      }
-      this.debug('starting server')
-
+    try {
       const app = express()
+
       app.use((_req: express.Request, res: express.Response, next: express.NextFunction) => {
         res.setHeader('Connection', 'close')
         next()
       })
+
       app.get('/setup/auth-callback', (req: express.Request, res: express.Response) => {
         const token: TBase64EncodedString = req.query.token || ''
         try {
-          res.setHeader('Connection', 'close')
           res.send(SUCCESS_LOGIN_PAGE).end()
           setTimeout(() => {
             this._listerners.success.map(cb => cb(token))
@@ -244,11 +241,14 @@ see examples`
         }
       })
 
-      const server = app.listen(BEARER_AUTH_PORT, () => {
-        this.debug('server started')
-        resolve(server)
-      })
-    })
+      this.debug('starting server')
+      return await startServer(BEARER_AUTH_PORT, app)
+    } catch (e) {
+      if (e instanceof UnavailablePort) {
+        this.error('bearer setup:auth cannot start')
+      }
+      throw e
+    }
   }
 
   private persistSetup(config: contexts.OAuth2 | contexts.OAuth1 | contexts.ApiKey | contexts.Basic) {
