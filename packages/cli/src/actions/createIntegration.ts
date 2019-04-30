@@ -5,6 +5,7 @@ import * as suggest from 'inquirer-prompt-suggest'
 import BaseAction, { createExport } from './base'
 import { askForString } from '../utils/prompts'
 import Link from './link'
+import { randomNames } from '../utils/random'
 
 class CreateIntegrationAction extends BaseAction {
   async run(options: TOptions = {}) {
@@ -42,7 +43,7 @@ class CreateIntegrationAction extends BaseAction {
 
   async askForName(): Promise<string> {
     inquirer.registerPrompt('suggest', suggest)
-    const suggestions = Array.from(Array(30).keys()).map(randomName)
+    const suggestions = randomNames(30)
     this.logger.debug('%j', suggestions)
     return askForString('Integration name', {
       suggestions,
@@ -65,80 +66,6 @@ type Integration = {
 }
 
 type TOptions = { name?: string; description?: string; link?: boolean }
-
-function randomName() {
-  return [bearSample(), nameSample()].join(' ')
-}
-
-function bearSample() {
-  return bears[Math.floor(Math.random() * bears.length)]
-}
-
-function nameSample() {
-  return names[Math.floor(Math.random() * names.length)]
-}
-
-const bears = [
-  'Cinnamon',
-  'Florida',
-  'Glacier',
-  'Haida Gwaii',
-  'Kermode',
-  'Spirit',
-  'Louisiana',
-  'Newfoundland',
-  'Baluchistan',
-  'Formosan',
-  'Himalayan',
-  'Ussuri',
-  'Alaska Peninsula',
-  'Atlas',
-  'Bergman',
-  'Cantabrian',
-  'Gobi',
-  'Grizzly',
-  'Kamchatka',
-  'Kodiak',
-  'Marsican',
-  'Sitka',
-  'Stickeen',
-  'Ussuri',
-  'Giant',
-  'Qinling',
-  'Sloth',
-  'Sun',
-  'Polar',
-  'Ursid hybrid',
-  'Spectacled'
-]
-const names = [
-  'Alpha',
-  'Bravo',
-  'Charlie',
-  'Delta',
-  'Echo',
-  'Foxtrot',
-  'Golf',
-  'Hotel',
-  'India',
-  'Juliet',
-  'Kilo',
-  'Lima',
-  'Mike',
-  'November',
-  'Oscar',
-  'Papa',
-  'Quebec',
-  'Romeo',
-  'Sierra',
-  'Tango',
-  'Uniform',
-  'Victor',
-  'Whiskey',
-  'X-ray',
-  'Yankee',
-  'Zulu'
-]
 
 type CreateIntegration = { createIntegration: { integration: Integration } }
 
