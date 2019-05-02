@@ -2,7 +2,8 @@
   "extends": "@bearer/tslint-config",
   "rules": {
     "object-curly-spacing": [true, "always"],
-    "no-console": false
+    "no-console": false,
+    "variable-name": [true, "ban-keywords", "check-format", "allow-leading-underscore", "allow-pascal-case"]
   },
   "linterOptions": {
     "exclude": [

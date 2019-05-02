@@ -7,14 +7,15 @@
     ],
     "nohoist": [
       "**/@types",
-      "**/@types/**"
+      "**/@types/**",
+      "**/@stencil/core/**"
     ]
   },
   "lint-staged": {
-    "*.{md}": [
+    "*.{md,css}": [
       "prettier --write"
     ],
-    "*.{js,css,tsx,ts,json}": [
+    "*.{js,tsx,ts,json}": [
       "prettier --write --config ./.prettierrc",
       "tslint --fix",
       "git add"

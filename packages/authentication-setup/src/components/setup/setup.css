@@ -1,0 +1,93 @@
+bearer-save-setup {
+  display: inherit;
+}
+
+bearer-save-setup[inline] input,
+bearer-save-setup[inline] button {
+  display: inline-block;
+}
+
+bearer-save-setup[inline] label {
+  display: none;
+}
+
+bearer-save-setup input {
+  display: block;
+}
+
+bearer-save-setup[no-error] .errors,
+bearer-save-setup[client-id][integration][type] .errors {
+  display: none;
+}
+
+bearer-save-setup .error {
+  display: none;
+}
+
+bearer-save-setup:not([client-id]):not([no-error]) .missing-client {
+  display: inherit;
+}
+
+bearer-save-setup:not([integration]):not([no-error]) .missing-integration {
+  display: inherit;
+}
+
+bearer-save-setup:not([type]):not([no-error]) .missing-type {
+  display: inherit;
+}
+
+bearer-save-setup:not([client-id]) button,
+bearer-save-setup:not([type]) button,
+bearer-save-setup:not([integration]) button {
+  pointer-events: none;
+}
+
+:root {
+  --bearer-background: #0fe49b;
+  --bearer-hover-background: #0ebd81;
+  --bearer-active-background: #5eb597;
+  --bearer-disabled-background: #d5e7e1;
+  --bearer-border: none;
+  --bearer-border-radius: 4px;
+  --bearer-box-shadow: 4px;
+  --bearer-color: #fff;
+  --bearer-padding: 12px 16px;
+  --bearer-font-size: inherit;
+  --bearer-font-family: inherit;
+}
+
+bearer-save-setup:not([unstyled]) input {
+  padding: var(--bearer-padding);
+}
+
+bearer-save-setup:not([unstyled]) button {
+  -webkit-appearance: none;
+  background: var(--bearer-background);
+  border: var(--bearer-border);
+  border-radius: var(--bearer-border-radius);
+  box-shadow: var(--bearer-box-shadow);
+  color: var(--bearer-color);
+  padding: var(--bearer-padding);
+  font-size: var(--bearer-font-size);
+  line-height: var(--bearer-font-size);
+  font-family: var(--bearer-font-family);
+  opacity: var(--bearer-opacity, 1);
+  cursor: var(--bearer-cursor);
+}
+
+bearer-save-setup:not([unstyled]) button:hover {
+  background: var(--bearer-hover-background);
+}
+
+bearer-save-setup:not([unstyled]) button:active {
+  background: var(--bearer-active-background);
+}
+
+.bearer-save-setup-unknown + button {
+  display: none !important;
+}
+
+bearer-save-setup:not([unstyled]) ul {
+  margin: 0;
+  padding: 0;
+}

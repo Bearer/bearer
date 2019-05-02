@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0" />
+    <title>Stencil Component Starter</title>
+    <script src="https://cdn.jsdelivr.net/npm/@bearer/js/lib/bearer.production.min.js"></script>
+    <script src="/build/bearer-setup.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" />
+    <style>
+      input {
+        border-radius: 2px;
+        border: 1px solid whitesmoke;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg">
+          <h1>Save setup</h1>
+          <h2>Valid</h2>
+
+          <bearer-save-setup
+            inline
+            type="apikey"
+            client-id="a2c2302ad9f714f7aa65f6b53d5627e8cd2e5dc0dd35089e79"
+            integration="d8d2da"
+          ></bearer-save-setup>
+
+          <bearer-save-setup
+            inline
+            type="oauth1"
+            client-id="a2c2302ad9f714f7aa65f6b53d5627e8cd2e5dc0dd35089e79"
+            integration="d8d2da"
+          ></bearer-save-setup>
+
+          <bearer-save-setup
+            inline
+            type="oauth2"
+            client-id="a2c2302ad9f714f7aa65f6b53d5627e8cd2e5dc0dd35089e79"
+            integration="d8d2da"
+          ></bearer-save-setup>
+
+          <bearer-save-setup
+            inline
+            type="basic"
+            client-id="a2c2302ad9f714f7aa65f6b53d5627e8cd2e5dc0dd35089e79"
+            integration="d8d2da"
+          ></bearer-save-setup>
+
+          <hr />
+          <h2>Invalid</h2>
+          <bearer-save-setup
+            inline
+            client-id="a2c2302ad9f714f7aa65f6b53d5627e8cd2e5dc0dd35089e79"
+            integration="d8d2da"
+          ></bearer-save-setup>
+          <bearer-save-setup inline type="basic" integration="d8d2da"></bearer-save-setup>
+          <bearer-save-setup
+            inline
+            type="basic"
+            client-id="a2c2302ad9f714f7aa65f6b53d5627e8cd2e5dc0dd35089e79"
+          ></bearer-save-setup>
+        </div>
+        <div class="col-sm">
+          <h1>Retrieve setup</h1>
+        </div>
+      </div>
+    </div>
+    <script>
+      document.querySelectorAll('bearer-save-setup').forEach(el => {
+        el.addEventListener('saved', e => {
+          alert(`Your setupId: ${e.detail.referenceId}`)
+        })
+      })
+    </script>
+  </body>
+</html>

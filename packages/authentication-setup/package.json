@@ -1,0 +1,35 @@
+{
+  "name": "@bearer/authentication-setup",
+  "public": "true",
+  "version": "0.0.3",
+  "description": "Bearer authentication setup components",
+  "jsdelivr": "dist/bearer-setup.js",
+  "module": "dist/esm/index.js",
+  "main": "dist/index.js",
+  "unpkg": "dist/bearer-setup.js",
+  "types": "dist/types/components.d.ts",
+  "collection": "dist/collection/collection-manifest.json",
+  "files": [
+    "dist/"
+  ],
+  "scripts": {
+    "prepack": "stencil build --docs",
+    "start": "stencil build --dev --watch --serve",
+    "test": "stencil test --spec --e2e",
+    "test.watch": "stencil test --spec --e2e --watchAll"
+  },
+  "dependencies": {
+    "@bearer/js": "^1.0.2",
+    "@bearer/types": "^1.0.2"
+  },
+  "devDependencies": {
+    "@stencil/core": "~0.16.2",
+    "@types/jest": "23.3.14",
+    "@types/puppeteer": "1.12.3",
+    "jest": "23.6.0",
+    "jest-cli": "23.6.0",
+    "nock": "^10.0.6",
+    "puppeteer": "1.8.0"
+  },
+  "license": "MIT"
+}
