@@ -12,13 +12,17 @@
     "create-bearer": "lib/index.js"
   },
   "devDependencies": {
+    "@types/jest": "^24.0.11",
     "@types/node": "^10.12.18",
+    "@babel/preset-typescript": "latest",
+    "jest": "^24.7.1",
     "typescript": "^3.4.1"
   },
   "scripts": {
     "prepare": "echo 'nothing to do'",
     "prepack": "tsc",
-    "start": "tsc -w"
+    "start": "tsc -w",
+    "test": "jest"
   },
   "files": [
     "lib/",

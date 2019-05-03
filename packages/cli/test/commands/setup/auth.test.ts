@@ -10,6 +10,8 @@ jest.mock('open', () => {
   })
 })
 
+// Github actions are slow
+jest.setTimeout(10000)
 describe('setup', () => {
   describe('auth', () => {
     describe('with argument', () => {
