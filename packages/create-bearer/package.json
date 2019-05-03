@@ -22,7 +22,8 @@
     "prepare": "echo 'nothing to do'",
     "prepack": "tsc",
     "start": "tsc -w",
-    "test": "jest"
+    "test": "jest",
+    "test:ci": "jest --coverage"
   },
   "files": [
     "lib/",
