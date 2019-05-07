@@ -28,7 +28,7 @@ describe('override http', () => {
       })
     })
 
-    expect(sendToCloudwatchGroup).toHaveBeenCalledWith(expectedResponse)
+    expect(sendToCloudwatchGroup).toHaveBeenCalledWith(expectedResponse())
   })
 
   it('overrides the get method', () => {
@@ -51,7 +51,7 @@ describe('override http', () => {
       })
     })
 
-    expect(sendToCloudwatchGroup).toHaveBeenCalledWith(expectedResponse)
+    expect(sendToCloudwatchGroup).toHaveBeenCalledWith(expectedResponse())
   })
 
   it('skips the shim when calling AWS infra', async () => {

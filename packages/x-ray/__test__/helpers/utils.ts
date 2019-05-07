@@ -49,17 +49,30 @@ export const httpClient = {
   }
 }
 
-export const expectedResponse = {
-  message: {
-    clientId: '132464737464748494404949984847474848',
-    integrationUuid: 'scenarioUuid',
-    intentName: 'MyHandler',
-    method: 'GET',
-    path: 'www.google.com',
-    pathname: '/',
-    responseStatus: 200,
-    responseStatusMesage: 'OK',
-    stage: 'test'
-  },
-  timestamp: expect.any(Number)
+export const expectedResponse = (
+  opts = { clientId: '132464737464748494404949984847474848', integrationUuid: 'scenarioUuid' }
+) => {
+  return {
+    message: {
+      clientId: opts.clientId,
+      integrationUuid: opts.integrationUuid,
+      intentName: 'MyHandler',
+      method: 'GET',
+      path: 'www.google.com',
+      pathname: '/',
+      responseStatus: 200,
+      responseStatusMesage: 'OK',
+      stage: 'test'
+    },
+    timestamp: expect.any(Number)
+  }
+}
+
+export const event = function() {
+  return {
+    context: {
+      clientId: 'myClientId',
+      integrationUuid: 'myIntegrationUuid'
+    }
+  }
 }
