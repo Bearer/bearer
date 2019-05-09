@@ -1,10 +1,8 @@
 import { captureHttps, setupFunctionIdentifiers } from '../src/index'
-import { sendToCloudwatchGroup } from '../src/cloud-watch-logs'
-import { httpClient, expectedResponse, event } from './helpers/utils'
+import { httpClient, event } from './helpers/utils'
 import http from 'http'
 
 jest.mock('../src/constants')
-jest.mock('../src/cloud-watch-logs')
 
 describe('captureHttp', () => {
   it('captures https without identifiers', async () => {
@@ -17,9 +15,6 @@ describe('captureHttp', () => {
       })
     })
 
-    expect(sendToCloudwatchGroup).toHaveBeenCalledWith(
-      expectedResponse({ clientId: undefined, integrationUuid: undefined } as any)
-    )
     expect(process.env.clientId).toEqual(undefined)
     expect(process.env.scenarioUuid).toEqual(undefined)
   })
@@ -35,12 +30,6 @@ describe('captureHttp', () => {
       })
     })
 
-    expect(sendToCloudwatchGroup).toHaveBeenCalledWith(
-      expectedResponse({
-        clientId: functionEvent.context.clientId,
-        integrationUuid: functionEvent.context.integrationUuid
-      } as any)
-    )
     expect(process.env.clientId).toEqual(functionEvent.context.clientId)
     expect(process.env.scenarioUuid).toEqual(functionEvent.context.integrationUuid)
   })

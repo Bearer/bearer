@@ -1,71 +1,27 @@
 import logger from './logger'
-import { sendToCloudwatchGroup } from './cloud-watch-logs'
 import { STAGE, _HANDLER } from './constants'
 import url from 'url'
+import uuid = require('uuid')
+
+const EXCLUDED_API = ['logs.eu-west-3.amazonaws.com']
 
 export const overrideRequestMethod = (module: any) => {
   // override http.request method
   module._request = module.request
-  module.request = (options: any, callaback: any) => {
+  module.request = (options: any, callback: any) => {
     const settings = parseOptions(options)
-
-    if (settings.host === 'logs.eu-west-3.amazonaws.com') {
-      logger('ignore logs.eu-west-3.amazonaws.com requests')
-      return module._request(options, callaback)
-    }
-
-    const payload: any = buildTracePatload(settings)
-
-    return module._request(options, (res: any) => {
-      res.on('end', async () => {
-        payload.message.responseStatus = res.statusCode
-        payload.message.responseStatusMesage = res.statusMessage
-
-        if (!STAGE) {
-          logger('%j', payload)
-        } else {
-          await sendToCloudwatchGroup(payload)
-        }
-      })
-
-      if (typeof callaback === 'function') {
-        callaback(res)
-      } else {
-        res.resume()
-      }
-    })
+    const payload: any = buildTracePayload(settings)
+    return baseRequest(module, options, payload, settings, callback)
   }
 }
 
 export const overrideGetMethod = (module: any) => {
-  // overrride the http.get method
+  // override the http.get method
   module._get = module.get
-  module.get = (options: any, callaback: any) => {
+  module.get = (options: any, callback: any) => {
     const settings = parseOptions(options)
-
-    if (settings.host === 'logs.eu-west-3.amazonaws.com') {
-      logger('ignore logs.eu-west-3.amazonaws.com requests')
-      return module._get(options, callaback)
-    }
-
-    const payload: any = buildTracePatload(settings)
-    return module._get(options, (res: any) => {
-      res.on('end', async () => {
-        payload.message.responseStatus = res.statusCode
-        payload.message.responseStatusMesage = res.statusMessage
-
-        if (!STAGE) {
-          logger('%j', payload)
-        } else {
-          await sendToCloudwatchGroup(payload)
-        }
-      })
-      if (typeof callaback === 'function') {
-        callaback(res)
-      } else {
-        res.resume()
-      }
-    })
+    const payload: any = buildTracePayload(settings)
+    return baseGet(module, options, payload, settings, callback)
   }
 }
 
@@ -77,7 +33,7 @@ const parseOptions = (options: any) => {
   return options
 }
 
-const buildTracePatload = (settings: any) => {
+const buildTracePayload = (settings: any) => {
   return {
     message: {
       path: settings.hostname || settings.host,
@@ -86,8 +42,49 @@ const buildTracePatload = (settings: any) => {
       intentName: _HANDLER,
       clientId: process.env.clientId,
       integrationUuid: process.env.scenarioUuid,
-      stage: STAGE
+      stage: STAGE,
+      uuid: uuid(),
+      type: 'externalCall'
     },
     timestamp: new Date().getTime()
+  }
+}
+function baseGet(module: any, options: any, payload: any, settings: any, callback: any) {
+  const req = module
+    ._get(options, async (res: any) => {
+      onRequestEnd(res, payload, settings, callback)
+    })
+    .on('err', async (e: { message: string }) => {
+      logger('error event received')
+      logger('response error %s', e.message)
+    })
+  return req
+}
+
+function baseRequest(module: any, options: any, payload: any, settings: any, callback: any) {
+  const req = module
+    ._request(options, async (res: any) => {
+      onRequestEnd(res, payload, settings, callback)
+    })
+    .on('err', async (e: { message: string }) => {
+      logger('error event received')
+      logger('response error %s', e.message)
+    })
+  return req
+}
+
+const onRequestEnd = (res: any, payload: any, settings: any, callback: any) => {
+  res.on('end', () => {
+    payload.message.responseStatus = res.statusCode
+    payload.message.responseStatusMessage = res.statusMessage
+    if (!EXCLUDED_API.includes(settings.host)) {
+      logger.extend('externalCall')('%j', payload)
+    }
+  })
+
+  if (typeof callback === 'function') {
+    callback(res)
+  } else if (res && res.listenerCount('end') === 1) {
+    res.resume()
   }
 }

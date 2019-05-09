@@ -1,14 +1,15 @@
 import logger from './logger'
-import { overrideRequestMethod, overrideGetMethod } from './http-overrides'
+import { overrideGetMethod, overrideRequestMethod } from './http-overrides'
 
 export const captureHttps = function(module: any) {
-  logger('%j', { message: 'Override request and get methods', application: 'x-ray' })
   if (module._request && module._get) {
+    logger('%j', { message: 'request & get already overridden', application: 'x-ray' })
     // This because the cold lambda start
     // Avoid overriding methods for next calls
     return
   }
 
+  logger('%j', { message: 'Override request and get methods', application: 'x-ray' })
   overrideRequestMethod(module)
   overrideGetMethod(module)
 }
