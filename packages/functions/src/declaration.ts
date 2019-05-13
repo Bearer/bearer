@@ -33,6 +33,8 @@ export namespace contexts {
   export interface OAuth1 {
     accessToken?: string
     tokenSecret?: string
+    consumerKey?: string
+    consumerSecret?: string
   }
 
   export interface Basic {
