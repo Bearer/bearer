@@ -42,7 +42,7 @@
     "rollup-plugin-node-globals": "^1.4.0",
     "rollup-plugin-node-resolve": "^4.0.1",
     "rollup-plugin-terser": "^4.0.4",
-    "rollup-plugin-typescript2": "^0.19.3",
+    "rollup-plugin-typescript2": "^0.21.1",
     "ts-jest": "^24.0.1",
     "typescript": "^3.4.1"
   },
