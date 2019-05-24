@@ -29,7 +29,7 @@
     "@types/lodash.merge": "^4.6.6",
     "jest": "^24.7.1",
     "jest-fetch-mock": "^2.1.1",
-    "rollup-plugin-commonjs": "^9.2.1",
+    "rollup-plugin-commonjs": "^10.0.0",
     "rollup-plugin-filesize": "^6.0.1",
     "rollup-plugin-node-resolve": "^4.0.1",
     "rollup-plugin-typescript2": "^0.19.3",
