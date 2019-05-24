@@ -30,7 +30,7 @@
   "dependencies": {
     "@bearer/core": "^1.0.2",
     "@bearer/logger": "^1.0.2",
-    "@stencil/core": "0.11.2",
+    "@stencil/core": "0.18.1",
     "@stencil/sass": "^0.1.0",
     "bootstrap": "^4.1.0",
     "rollup-plugin-strip": "^1.2.0"

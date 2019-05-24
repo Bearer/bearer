@@ -69,7 +69,7 @@
   "dependencies": {
     "@bearer/logger": "^1.0.2",
     "@bearer/types": "^1.0.2",
-    "@stencil/core": "0.11.2",
+    "@stencil/core": "0.18.1",
     "fbemitter": "^2.1.1",
     "lodash.get": "^4.4.2",
     "lodash.merge": "^4.6.1",
