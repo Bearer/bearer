@@ -19,7 +19,7 @@
   "dependencies": {
     "@bearer/logger": "^1.0.2",
     "debounce": "^1.2.0",
-    "post-robot": "^8.0.26"
+    "post-robot": "^10.0.16"
   },
   "devDependencies": {
     "@bearer/tsconfig": "^0.115.0",
