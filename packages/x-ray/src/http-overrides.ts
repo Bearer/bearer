@@ -3,7 +3,7 @@ import { STAGE, _HANDLER } from './constants'
 import url from 'url'
 import uuid = require('uuid')
 
-const EXCLUDED_API = ['logs.eu-west-3.amazonaws.com']
+const EXCLUDED_API = ['logs.eu-west-3.amazonaws.com', 'logs.eu-west-1.amazonaws.com']
 
 export const overrideRequestMethod = (module: any) => {
   // override http.request method

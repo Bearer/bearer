@@ -1,8 +1,9 @@
 import http from 'http'
-import https from 'https'
 import { overrideGetMethod, overrideRequestMethod } from '../src/http-overrides'
 import { httpClient } from './helpers/utils'
+import logger from '../src/logger'
 
+jest.mock('../src/logger')
 jest.mock('../src/constants')
 process.env.clientId = '132464737464748494404949984847474848'
 process.env.scenarioUuid = 'scenarioUuid'
@@ -47,5 +48,46 @@ describe('override http', () => {
         data.resume()
       })
     })
+  })
+})
+
+describe('log filtering', () => {
+  const spy = jest.spyOn(logger, 'extend')
+  beforeEach(() => {
+    spy.mockImplementationOnce(jest.fn())
+    spy.mockReset()
+  })
+
+  it('is calling logger for non aws calls', async () => {
+    await new Promise((res, _rej) => {
+      httpClient.request('http://www.google.com/', (data: http.IncomingMessage) => {
+        res(data)
+        data.resume()
+      })
+    })
+
+    expect(spy).toHaveBeenCalledWith('externalCall')
+  })
+
+  it('is not calling logger for eu-west-3 aws logs calls', async () => {
+    await new Promise((res, _rej) => {
+      httpClient.request('http://logs.eu-west-3.amazonaws.com/', (data: http.IncomingMessage) => {
+        res(data)
+        data.resume()
+      })
+    })
+
+    expect(spy).not.toHaveBeenCalled()
+  })
+
+  it('is not calling logger for eu-west-1 aws logs calls', async () => {
+    await new Promise((res, _rej) => {
+      httpClient.request('http://logs.eu-west-1.amazonaws.com/', (data: http.IncomingMessage) => {
+        res(data)
+        data.resume()
+      })
+    })
+
+    expect(spy).not.toHaveBeenCalled()
   })
 })
