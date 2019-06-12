@@ -1,5 +1,5 @@
 import logger from './logger'
-import { STAGE, _HANDLER } from './constants'
+import { STAGE, _HANDLER, _X_AMZN_TRACE_ID } from './constants'
 import url from 'url'
 import uuid = require('uuid')
 
@@ -44,7 +44,8 @@ const buildTracePayload = (settings: any) => {
       integrationUuid: process.env.scenarioUuid,
       stage: STAGE,
       uuid: uuid(),
-      type: 'externalCall'
+      type: 'externalCall',
+      tid: _X_AMZN_TRACE_ID
     },
     timestamp: new Date().getTime()
   }
