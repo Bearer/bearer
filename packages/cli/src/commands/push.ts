@@ -106,7 +106,7 @@ export default class Push extends BaseCommand {
         variables: { buid: this.bearerConfig.BUID }
       })
 
-      if (!data.data) {
+      if (!(data.data && data.data.integration)) {
         this.debug('received: %j', data)
         this.error(new Error('Integration not found please make sure you have correctly linked your integration'))
       }
