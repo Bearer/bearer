@@ -8,15 +8,16 @@ jest.mock('uuid')
 jest.mock('../src/constants')
 process.env.clientId = '132464737464748494404949984847474848'
 process.env.scenarioUuid = 'scenarioUuid'
-process.env._X_AMZN_TRACE_ID = 'Root=is-uuid;Parent=my-uuid'
 
 const spy = jest.spyOn(logger, 'extend')
 const payloadUUID = 'test-uuid'
+const defaultTraceId = 'Root=is-uuid;Parent=my-uuid'
 
 // @ts-ignore
 uuid.mockImplementation(() => payloadUUID)
 
 beforeEach(() => {
+  process.env._X_AMZN_TRACE_ID = defaultTraceId
   spy.mockClear()
 })
 
@@ -40,6 +41,7 @@ describe('override http', () => {
   it('traces request call with the right payload', async () => {
     // @ts-ignore
     expect(httpClient._request).toBeDefined()
+    process.env._X_AMZN_TRACE_ID = 'request-trace-id'
 
     await new Promise((res, _rej) => {
       httpClient.request('http://www.google.com/', (data: http.IncomingMessage) => {
@@ -64,6 +66,8 @@ describe('override http', () => {
   it('traces get call with the right payload', async () => {
     // @ts-ignore
     expect(httpClient.get).toBeDefined()
+    process.env._X_AMZN_TRACE_ID = 'get-trace-id'
+
     await new Promise((res, _rej) => {
       httpClient.get('http://www.google.com/', (data: http.IncomingMessage) => {
         res(data)
