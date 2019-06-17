@@ -2,12 +2,32 @@ import http from 'http'
 import { overrideGetMethod, overrideRequestMethod } from '../src/http-overrides'
 import { httpClient } from './helpers/utils'
 import logger from '../src/logger'
+import uuid from 'uuid'
 
+jest.mock('uuid')
 jest.mock('../src/constants')
 process.env.clientId = '132464737464748494404949984847474848'
 process.env.scenarioUuid = 'scenarioUuid'
+process.env._X_AMZN_TRACE_ID = 'Root=is-uuid;Parent=my-uuid'
+
+const spy = jest.spyOn(logger, 'extend')
+const payloadUUID = 'test-uuid'
+
+// @ts-ignore
+uuid.mockImplementation(() => payloadUUID)
+
+beforeEach(() => {
+  spy.mockClear()
+})
 
 describe('override http', () => {
+  const log = jest.fn()
+
+  beforeEach(() => {
+    log.mockClear()
+    spy.mockImplementationOnce(() => log as any)
+  })
+
   it('overrides request method', () => {
     // @ts-ignore
     expect(httpClient._request).toBeUndefined()
@@ -20,12 +40,15 @@ describe('override http', () => {
   it('traces request call with the right payload', async () => {
     // @ts-ignore
     expect(httpClient._request).toBeDefined()
+
     await new Promise((res, _rej) => {
       httpClient.request('http://www.google.com/', (data: http.IncomingMessage) => {
         res(data)
         data.resume()
       })
     })
+
+    expect(log.mock.calls[0][1]).toMatchSnapshot({ timestamp: expect.any(Number) })
   })
 
   it('overrides the get method', () => {
@@ -47,15 +70,12 @@ describe('override http', () => {
         data.resume()
       })
     })
+
+    expect(log.mock.calls[0][1]).toMatchSnapshot({ timestamp: expect.any(Number) })
   })
 })
 
 describe('log filtering', () => {
-  const spy = jest.spyOn(logger, 'extend')
-  beforeEach(() => {
-    spy.mockClear()
-  })
-
   it('is calling logger for non aws calls', async () => {
     await new Promise((res, _rej) => {
       httpClient.request('http://www.google.com/', (data: http.IncomingMessage) => {
