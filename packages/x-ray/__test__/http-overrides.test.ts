@@ -3,7 +3,6 @@ import { overrideGetMethod, overrideRequestMethod } from '../src/http-overrides'
 import { httpClient } from './helpers/utils'
 import logger from '../src/logger'
 
-jest.mock('../src/logger')
 jest.mock('../src/constants')
 process.env.clientId = '132464737464748494404949984847474848'
 process.env.scenarioUuid = 'scenarioUuid'
@@ -54,8 +53,7 @@ describe('override http', () => {
 describe('log filtering', () => {
   const spy = jest.spyOn(logger, 'extend')
   beforeEach(() => {
-    spy.mockImplementationOnce(jest.fn())
-    spy.mockReset()
+    spy.mockClear()
   })
 
   it('is calling logger for non aws calls', async () => {
