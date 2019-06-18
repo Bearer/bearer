@@ -108,7 +108,15 @@ export default class Push extends BaseCommand {
 
       if (!(data.data && data.data.integration)) {
         this.debug('received: %j', data)
-        this.error(new Error('Integration not found please make sure you have correctly linked your integration'))
+        this.error(
+          new Error(
+            `Integration not found. Please make sure you have correctly linked your integration and visit ${
+              this.constants.DeveloperPortalUrl
+            }integrations/${this.bearerConfig.bearerUid} to confirm you have access to ${this.colors.bold(
+              this.bearerConfig.bearerUid
+            )} integration.`
+          )
+        )
       }
       return data!.data!.integration.url
     } catch (e) {
@@ -131,7 +139,7 @@ export default class Push extends BaseCommand {
           case 403:
           case 401: {
             this.error(
-              `Unauthorized to push, please visit ${this.constants.DeveloperPortalUrl}integrations/${
+              `Unauthorized to push. Please visit ${this.constants.DeveloperPortalUrl}integrations/${
                 this.bearerConfig.bearerUid
               } to confirm you have access to ${this.colors.bold(this.bearerConfig.bearerUid)} integration.`
             )
