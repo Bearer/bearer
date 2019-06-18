@@ -28,6 +28,7 @@ type TBaseAuthContext<TAuthAccessContent> = {
 export namespace contexts {
   export interface OAuth2 {
     accessToken?: string
+    idToken?: string
   }
 
   export interface OAuth1 {
