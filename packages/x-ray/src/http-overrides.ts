@@ -1,7 +1,9 @@
-import logger from './logger'
-import { STAGE, _HANDLER } from './constants'
 import url from 'url'
 import uuid = require('uuid')
+import { ServerResponse } from 'http'
+
+import logger from './logger'
+import { STAGE, _HANDLER } from './constants'
 
 const EXCLUDED_API = ['logs.eu-west-3.amazonaws.com', 'logs.eu-west-1.amazonaws.com']
 
@@ -50,6 +52,7 @@ const buildTracePayload = (settings: any) => {
     timestamp: new Date().getTime()
   }
 }
+
 function baseGet(module: any, options: any, payload: any, settings: any, callback: any) {
   const req = module
     ._get(options, async (res: any) => {
@@ -64,7 +67,7 @@ function baseGet(module: any, options: any, payload: any, settings: any, callbac
 
 function baseRequest(module: any, options: any, payload: any, settings: any, callback: any) {
   const req = module
-    ._request(options, async (res: any) => {
+    ._request(options, async (res: ServerResponse) => {
       onRequestEnd(res, payload, settings, callback)
     })
     .on('err', async (e: { message: string }) => {
@@ -74,10 +77,11 @@ function baseRequest(module: any, options: any, payload: any, settings: any, cal
   return req
 }
 
-const onRequestEnd = (res: any, payload: any, settings: any, callback: any) => {
+const onRequestEnd = (res: ServerResponse, payload: any, settings: any, callback: any) => {
   res.on('end', () => {
     payload.message.responseStatus = res.statusCode
     payload.message.responseStatusMessage = res.statusMessage
+    payload.message.headers = res.getHeaders()
     if (!EXCLUDED_API.includes(settings.host)) {
       logger.extend('externalCall')('%j', payload)
     }
