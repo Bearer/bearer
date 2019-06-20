@@ -39,7 +39,7 @@
     "get-port": "^4.2.0",
     "globby": "^8.0.1",
     "ini": "^1.3.5",
-    "inquirer": "^6.2.2",
+    "inquirer": "~6.3.1",
     "inquirer-prompt-suggest": "^0.1.0",
     "jsonc-parser": "^2.1.0",
     "knex": "^0.16.5",
