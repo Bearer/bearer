@@ -5,7 +5,6 @@ let check: number
 
 export const captureHttps = () => {
   const httpModule = require('http')
-  const httpsModule = require('https')
   if (httpModule._bearerLoading === check && check) {
     logger('%j', { message: 'http module has already been loaded', application: 'x-ray' })
     return
@@ -13,7 +12,9 @@ export const captureHttps = () => {
   httpModule._bearerLoading = check = Math.random()
   logger('%j', { message: 'Overriding request and get methods', application: 'x-ray' })
   overrideRequestMethod(httpModule)
-  overrideRequestMethod(httpsModule)
+  // It seems like https is using http behind the scenes
+  // const httpsModule = require('https')
+  // overrideRequestMethod(httpsModule)
 }
 
 export const setupFunctionIdentifiers = function(event: any) {
