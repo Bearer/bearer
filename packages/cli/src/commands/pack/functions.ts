@@ -135,7 +135,7 @@ export function buildLambdaDefinitions(functions: TFunctionNames): TLambdaDefini
 }
 
 function buildLambdaIndex(functions: TFunctionNames): string {
-  const handlers = functions
+  return functions
     .map((func, index) => {
       const funcConstName = `func${index}`
       return `const ${funcConstName} = require("./dist/${func}").default;
@@ -143,8 +143,4 @@ module.exports['${func}'] = ${funcConstName}.init();
 `
     })
     .join('\n')
-  return `const captureRequest = require('@bearer/x-ray').default
-captureRequest()
-${handlers}
-  `
 }

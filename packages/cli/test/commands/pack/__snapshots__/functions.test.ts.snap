@@ -1,13 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`pack:functions lambdas declaration generates a correct handlers 1`] = `
-"const captureRequest = require('@bearer/x-ray').default
-captureRequest()
-const func0 = require(\\"./dist/my-function\\").default;
+"const func0 = require(\\"./dist/my-function\\").default;
 module.exports['my-function'] = func0.init();
 
 const func1 = require(\\"./dist/spongeBobFunction\\").default;
 module.exports['spongeBobFunction'] = func1.init();
-
-  "
+"
 `;
