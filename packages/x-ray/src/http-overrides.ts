@@ -4,12 +4,15 @@ import urlParser from 'url'
 import http from 'http'
 import https from 'https'
 
-import logger from './logger'
+import log from './logger'
 import { _HANDLER } from './constants'
 
 const EXCLUDED_API = new Set(['logs.eu-west-3.amazonaws.com', 'logs.eu-west-1.amazonaws.com'])
 
-export const overrideRequestMethod = (module: typeof http | typeof https) => {
+export const overrideRequestMethod = (
+  module: typeof http | typeof https,
+  logger: (...arg: any[]) => void = log.extend('externalCall')
+) => {
   // override http.request method
   const _request = module.request
 
@@ -74,10 +77,10 @@ export const overrideRequestMethod = (module: typeof http | typeof https) => {
       })
 
       res.on('end', () => {
-        if (!EXCLUDED_API.has(info.request.host!)) {
+        if (!EXCLUDED_API.has(info.request.hostname!)) {
           info.response.body = responseData.join('')
           info.duration = Date.now() - requestStart
-          logger.extend('externalCall')('%j', {
+          logger('%j', {
             buid: process.env.scenarioUuid,
             payloadType: 'EXTERNAL_CALL',
             payload: info,
