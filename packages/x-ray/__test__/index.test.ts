@@ -1,5 +1,4 @@
 import { captureHttps, setupFunctionIdentifiers } from '../src/index'
-import { event } from './helpers/utils'
 
 jest.mock('../src/constants')
 
@@ -17,11 +16,16 @@ describe('captureHttp', () => {
 
 describe('setupFunctionIdentifiers', () => {
   it('setup all function identifiers', () => {
-    const functionEvent = event()
+    const event = {
+      context: {
+        clientId: 'myClientId',
+        integrationUuid: 'myIntegrationUuid'
+      }
+    }
 
-    setupFunctionIdentifiers(functionEvent)
+    setupFunctionIdentifiers(event)
 
-    expect(process.env.clientId).toEqual(functionEvent.context.clientId)
-    expect(process.env.scenarioUuid).toEqual(functionEvent.context.integrationUuid)
+    expect(process.env.clientId).toEqual('myClientId')
+    expect(process.env.scenarioUuid).toEqual('myIntegrationUuid')
   })
 })
