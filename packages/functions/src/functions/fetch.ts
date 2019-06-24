@@ -1,4 +1,5 @@
 import debug from '@bearer/logger'
+import { captureHttps, setupFunctionIdentifiers } from '@bearer/x-ray'
 
 import * as d from '../declaration'
 import { eventAsActionParams, BACKEND_ONLY_ERROR } from './utils'
@@ -28,8 +29,9 @@ export abstract class FetchData<ReturnedData = any, TError = any, AuthContext = 
         return { error: BACKEND_ONLY_ERROR }
       }
 
-      process.env.clientId = event.context.clientId
-      process.env.scenarioUuid = event.context.buid
+      const updatedEvent = Object.assign({}, event)
+      updatedEvent.context.integrationUuid = event.context.buid
+      setupFunctionIdentifiers(updatedEvent)
 
       const functionEvent: d.TFetchActionEvent = {
         ...eventAsActionParams(event),
@@ -51,6 +53,7 @@ export abstract class FetchData<ReturnedData = any, TError = any, AuthContext = 
   }
 
   static init() {
+    captureHttps()
     return FetchData.call(this as any)
   }
 }
