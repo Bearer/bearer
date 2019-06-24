@@ -30,6 +30,6 @@
     "prepack": "yarn clean && yarn build",
     "prepare": "yarn clean && yarn build",
     "test": "jest --colors",
-    "test:ci": "jest --coverage --colors"
+    "test:ci": "jest --coverage --colors --runInBand"
   }
 }
