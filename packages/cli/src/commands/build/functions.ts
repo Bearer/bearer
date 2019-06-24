@@ -64,7 +64,6 @@ export default class BuildFunctions extends BaseCommand {
         if (!files.length) {
           return reject(new Error('No func to transpile'))
         }
-        console.log('ok')
 
         const config: webpack.Configuration = {
           ...baseConfig,

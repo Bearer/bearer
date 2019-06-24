@@ -1,6 +1,6 @@
 // Mostly inspired from: https://github.com/meetearnest/global-request-logger/blob/master/index.js
 
-import url from 'url'
+import urlParser from 'url'
 import http from 'http'
 import https from 'https'
 
@@ -16,38 +16,40 @@ export const overrideRequestMethod = (module: typeof http | typeof https) => {
   function request(...args: any): http.ClientRequest {
     // @ts-ignore
     const req = _request(...arguments)
-    const info = {
+    const info: TRequestPayload = {
       request: {
         method: req.method || 'get',
         headers: { ...req.getHeaders() }
-      } as { method: string; headers: any; error?: any; body: any } & url.UrlWithStringQuery,
-      response: {} as {
-        body: any
-        statusCode: number
-        headers: any
-        error?: any
-      }
+      } as any,
+      response: {} as any
     }
-    const requestUrl = args[0]
+    const url: string | urlParser.UrlWithParsedQuery = args[0]
 
-    if (requestUrl === 'string') {
-      const { port, path, host, protocol, auth, hostname, hash, search, query, pathname, href } = url.parse(requestUrl)
-      info.request = {
-        ...info.request,
-        port,
-        path,
-        host,
-        protocol,
-        auth,
-        hostname,
-        hash,
-        search,
-        query,
-        pathname,
-        href
-      }
+    let parsedUrl: urlParser.UrlWithParsedQuery
+
+    if (typeof url === 'string') {
+      parsedUrl = urlParser.parse(url, true)
+    } else {
+      parsedUrl = url
+    }
+    const { port, path, host, protocol, auth, hostname, hash, search, query, pathname, href } = parsedUrl
+    info.request = {
+      ...info.request,
+      port,
+      path,
+      host,
+      protocol,
+      auth,
+      hostname,
+      hash,
+      search,
+      query,
+      pathname,
+      href,
+      url: `${protocol}//${host || hostname}${path}`
     }
     const requestData: string[] = []
+    const requestStart = Date.now()
     const originalWrite = req.write
 
     req.write = function() {
@@ -61,8 +63,10 @@ export const overrideRequestMethod = (module: typeof http | typeof https) => {
 
     req.on('response', (res: http.ServerResponse) => {
       info.request.body = requestData.join('')
-      info.response.statusCode = res.statusCode
-      info.response.headers = (res as any).headers
+      info.response = {
+        status: res.statusCode,
+        headers: (res as any).headers
+      }
 
       const responseData: string[] = []
       res.on('data', (data: string) => {
@@ -72,9 +76,10 @@ export const overrideRequestMethod = (module: typeof http | typeof https) => {
       res.on('end', () => {
         if (!EXCLUDED_API.has(info.request.host!)) {
           info.response.body = responseData.join('')
+          info.duration = Date.now() - requestStart
           logger.extend('externalCall')('%j', {
             buid: process.env.scenarioUuid,
-            payloadType: 'FUNCTION',
+            payloadType: 'EXTERNAL_CALL',
             payload: info,
             service: 'function',
             tid: process.env._X_AMZN_TRACE_ID
@@ -100,6 +105,16 @@ export const overrideRequestMethod = (module: typeof http | typeof https) => {
   module.get = get
 }
 
+type TRequestPayload = {
+  request: { url: string; method: string; headers: any; error?: any; body?: any } & urlParser.UrlWithParsedQuery
+  response: {
+    body?: any
+    status: number
+    headers: any
+    error?: any
+  }
+  duration?: number
+}
 const maxBodyLength = 2024 * 1000 * 3
 
 function logBodyChunk(array: any[], chunk: string) {
