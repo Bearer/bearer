@@ -99,7 +99,11 @@
       "@oclif/plugin-warn-if-update-available",
       "@oclif/plugin-autocomplete",
       "@oclif/plugin-not-found"
-    ]
+    ],
+    "warn-if-update-available": {
+      "timeoutInDays": 7,
+      "message": "<%= config.name %> update available from <%= chalk.greenBright(config.version) %> to <%= chalk.greenBright(latest) %>. Please run the following command: npm install -g <%= config.name %>@latest"
+    }
   },
   "scripts": {
     "clean": "rm -rf lib",
