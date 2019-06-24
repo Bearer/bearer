@@ -1,41 +1,83 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`override http traces get call with the right payload 1`] = `
-Object {
-  "message": Object {
-    "clientId": "132464737464748494404949984847474848",
-    "integrationUuid": "scenarioUuid",
-    "intentName": "MyHandler",
-    "method": "GET",
-    "path": "www.google.com",
-    "pathname": "/",
-    "responseStatus": 200,
-    "responseStatusMessage": "OK",
-    "stage": "test",
-    "tid": "get-trace-id",
-    "type": "externalCall",
-    "uuid": "test-uuid",
+exports[`overrideRequestMethod https get logs request 1`] = `
+Array [
+  "%j",
+  Object {
+    "buid": "custom0buid",
+    "payload": Object {
+      "duration": 10,
+      "request": Object {
+        "auth": null,
+        "body": "",
+        "hash": null,
+        "headers": Object {},
+        "host": "bearer.sh",
+        "hostname": "bearer.sh",
+        "href": "https://bearer.sh/path?ok=false",
+        "method": "get",
+        "path": "/path?ok=false",
+        "pathname": "/path",
+        "port": null,
+        "protocol": "https:",
+        "query": Object {
+          "ok": "false",
+        },
+        "search": "?ok=false",
+        "url": "https://bearer.sh/path?ok=false",
+      },
+      "response": Object {
+        "body": "{\\"great\\":\\"sponge bob is the king\\"}",
+        "headers": Object {
+          "content-type": "application/json",
+        },
+        "status": 201,
+      },
+    },
+    "payloadType": "EXTERNAL_CALL",
+    "service": "function",
+    "tid": "aws_trace",
   },
-  "timestamp": Any<Number>,
-}
+]
 `;
 
-exports[`override http traces request call with the right payload 1`] = `
-Object {
-  "message": Object {
-    "clientId": "132464737464748494404949984847474848",
-    "integrationUuid": "scenarioUuid",
-    "intentName": "MyHandler",
-    "method": "GET",
-    "path": "www.google.com",
-    "pathname": "/",
-    "responseStatus": 200,
-    "responseStatusMessage": "OK",
-    "stage": "test",
-    "tid": "request-trace-id",
-    "type": "externalCall",
-    "uuid": "test-uuid",
+exports[`overrideRequestMethod https request logs request 1`] = `
+Array [
+  "%j",
+  Object {
+    "buid": "custom0buid",
+    "payload": Object {
+      "duration": 15,
+      "request": Object {
+        "auth": undefined,
+        "body": "{\\"todo\\":\\"Buy the milk\\"}",
+        "hash": undefined,
+        "headers": Object {
+          "useragent": "Bearer",
+        },
+        "host": "bearer.sh:443",
+        "hostname": "bearer.sh",
+        "href": undefined,
+        "method": "get",
+        "path": "/postPath?postQuery=sponge",
+        "pathname": undefined,
+        "port": 443,
+        "protocol": undefined,
+        "query": undefined,
+        "search": undefined,
+        "url": "undefined//bearer.sh:443/postPath?postQuery=sponge",
+      },
+      "response": Object {
+        "body": "{\\"great\\":\\"sponge bob is the king of posts\\"}",
+        "headers": Object {
+          "content-type": "application/json",
+        },
+        "status": 204,
+      },
+    },
+    "payloadType": "EXTERNAL_CALL",
+    "service": "function",
+    "tid": "aws_trace",
   },
-  "timestamp": Any<Number>,
-}
+]
 `;

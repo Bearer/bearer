@@ -1,115 +1,141 @@
-import http from 'http'
-import { overrideGetMethod, overrideRequestMethod } from '../src/http-overrides'
-import { httpClient } from './helpers/utils'
-import logger from '../src/logger'
-import uuid from 'uuid'
+import https from 'https'
+import nock from 'nock'
 
-jest.mock('uuid')
-jest.mock('../src/constants')
-process.env.clientId = '132464737464748494404949984847474848'
-process.env.scenarioUuid = 'scenarioUuid'
+import { overrideRequestMethod } from '../src/http-overrides'
+import { setupFunctionIdentifiers } from '../src'
 
-const spy = jest.spyOn(logger, 'extend')
-const payloadUUID = 'test-uuid'
-const defaultTraceId = 'Root=is-uuid;Parent=my-uuid'
+const logger = jest.fn()
+Date.now = jest.fn()
 
-// @ts-ignore
-uuid.mockImplementation(() => payloadUUID)
-
-beforeEach(() => {
-  process.env._X_AMZN_TRACE_ID = defaultTraceId
-  spy.mockClear()
+beforeAll(() => {
+  setupFunctionIdentifiers({
+    context: {
+      clientId: 'a-client-id',
+      integrationUuid: 'custom0buid'
+    }
+  })
+  process.env._X_AMZN_TRACE_ID = 'aws_trace'
 })
 
-describe('override http', () => {
-  const log = jest.fn()
+describe('overrideRequestMethod', () => {
+  describe('https', () => {
+    const url = 'https://bearer.sh'
 
-  beforeEach(() => {
-    log.mockClear()
-    spy.mockImplementationOnce(() => log as any)
-  })
+    beforeAll(() => {
+      nock(url)
+        .get('/path?ok=false')
+        .reply(201, { great: 'sponge bob is the king' })
+      nock(url)
+        .post('/postPath?postQuery=sponge')
+        .reply(204, { great: 'sponge bob is the king of posts' })
 
-  it('overrides request method', () => {
-    // @ts-ignore
-    expect(httpClient._request).toBeUndefined()
-    // @ts-ignore
-    overrideRequestMethod(httpClient)
-    // @ts-ignore
-    expect(httpClient._request).toBeDefined()
-  })
+      overrideRequestMethod(https, logger)
+    })
 
-  it('traces request call with the right payload', async () => {
-    // @ts-ignore
-    expect(httpClient._request).toBeDefined()
-    process.env._X_AMZN_TRACE_ID = 'request-trace-id'
+    beforeEach(() => {
+      logger.mockClear()
+    })
 
-    await new Promise((res, _rej) => {
-      httpClient.request('http://www.google.com/', (data: http.IncomingMessage) => {
-        res(data)
-        data.resume()
+    describe('get', () => {
+      it('logs request', async () => {
+        mockDuration(10)
+
+        nock(url)
+          .get('/path?ok=false')
+          .reply(201, { great: 'sponge bob is the king' })
+
+        await new Promise(resolve => {
+          https.get(`${url}/path?ok=false`, res => {
+            res.on('end', resolve)
+          })
+        })
+
+        expect(logger).toHaveBeenCalledTimes(1)
+        expect(logger.mock.calls[0]).toMatchSnapshot()
       })
     })
 
-    expect(log.mock.calls[0][1]).toMatchSnapshot({ timestamp: expect.any(Number) })
-  })
+    describe('request', () => {
+      it('logs request', async () => {
+        mockDuration(15)
 
-  it('overrides the get method', () => {
-    // @ts-ignore
-    expect(httpClient._get).toBeUndefined()
-    overrideGetMethod(httpClient)
-    // @ts-ignore
-    expect(httpClient._get.name).toEqual('get')
-    // @ts-ignore
-    expect(httpClient._get).toBeDefined()
-  })
+        nock(url)
+          .post('/postPath?postQuery=sponge')
+          .reply(201, { great: 'sponge bob is the king' })
 
-  it('traces get call with the right payload', async () => {
-    // @ts-ignore
-    expect(httpClient.get).toBeDefined()
-    process.env._X_AMZN_TRACE_ID = 'get-trace-id'
+        const data = JSON.stringify({
+          todo: 'Buy the milk'
+        })
 
-    await new Promise((res, _rej) => {
-      httpClient.get('http://www.google.com/', (data: http.IncomingMessage) => {
-        res(data)
-        data.resume()
+        const options = {
+          hostname: 'bearer.sh',
+          path: '/postPath?postQuery=sponge',
+          method: 'POST',
+          headers: {
+            UserAgent: 'Bearer'
+          }
+        }
+
+        await new Promise((resolve, reject) => {
+          const req = https.request(options, res => {
+            res.on('end', resolve)
+            res.on('error', reject)
+          })
+          req.write(data)
+          req.end()
+        })
+
+        expect(logger).toHaveBeenCalledTimes(1)
+        expect(logger.mock.calls[0]).toMatchSnapshot()
       })
     })
 
-    expect(log.mock.calls[0][1]).toMatchSnapshot({ timestamp: expect.any(Number) })
+    describe('special urls', () => {
+      const url = 'https://logs.eu-west-3.amazonaws.com'
+
+      beforeAll(() => {
+        nock(url)
+      })
+
+      it('does not log request', async () => {
+        mockDuration(5)
+
+        nock(url)
+          .post('/whatever')
+          .reply(201, { great: 'sponge bob is the king' })
+
+        const data = JSON.stringify({
+          todo: 'Buy the milk'
+        })
+
+        const options = {
+          hostname: 'logs.eu-west-3.amazonaws.com',
+          port: 443,
+          path: '/whatever',
+          method: 'POST',
+          headers: {
+            UserAgent: 'Bearer'
+          }
+        }
+
+        await new Promise((resolve, reject) => {
+          const req = https.request(options, res => {
+            res.on('end', resolve)
+            res.on('error', reject)
+          })
+          req.write(data)
+          req.end()
+        })
+
+        expect(logger).not.toHaveBeenCalled()
+      })
+    })
   })
 })
 
-describe('log filtering', () => {
-  it('is calling logger for non aws calls', async () => {
-    await new Promise((res, _rej) => {
-      httpClient.request('http://www.google.com/', (data: http.IncomingMessage) => {
-        res(data)
-        data.resume()
-      })
-    })
-
-    expect(spy).toHaveBeenCalledWith('externalCall')
-  })
-
-  it('is not calling logger for eu-west-3 aws logs calls', async () => {
-    await new Promise((res, _rej) => {
-      httpClient.request('http://logs.eu-west-3.amazonaws.com/', (data: http.IncomingMessage) => {
-        res(data)
-        data.resume()
-      })
-    })
-
-    expect(spy).not.toHaveBeenCalled()
-  })
-
-  it('is not calling logger for eu-west-1 aws logs calls', async () => {
-    await new Promise((res, _rej) => {
-      httpClient.request('http://logs.eu-west-1.amazonaws.com/', (data: http.IncomingMessage) => {
-        res(data)
-        data.resume()
-      })
-    })
-
-    expect(spy).not.toHaveBeenCalled()
-  })
-})
+function mockDuration(duration: number) {
+  // @ts-ignore
+  Date.now.mockReturnValueOnce(10)
+  // @ts-ignore
+  Date.now.mockReturnValueOnce(10 + duration)
+}
