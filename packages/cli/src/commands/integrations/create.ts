@@ -4,7 +4,6 @@ import * as suggest from 'inquirer-prompt-suggest'
 
 import BaseCommand from '../../base-command'
 import CreateIntegration from '../../actions/createIntegration'
-import { ensureFreshToken } from '../../utils/decorators'
 
 export default class IntegrationsCreate extends BaseCommand {
   static description = 'create a new Integration'
@@ -16,7 +15,6 @@ export default class IntegrationsCreate extends BaseCommand {
     skipLink: flags.boolean({ char: 'l' })
   }
 
-  @ensureFreshToken()
   async run() {
     const {
       flags: { name, description, skipLink }

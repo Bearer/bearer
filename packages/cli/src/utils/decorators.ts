@@ -95,6 +95,28 @@ export function RequireLinkedIntegration(prompt = true) {
   }
 }
 
+export async function withFreshToken(command: TCommand) {
+  const { expires_at, refresh_token } = (await command.bearerConfig.getToken()) || {
+    expires_at: null,
+    refresh_token: null
+  }
+
+  if (expires_at && refresh_token) {
+    try {
+      if (expires_at < Date.now()) {
+        cliUx.action.start('Refreshing token')
+        await refreshMyToken(command, refresh_token)
+        cliUx.action.stop()
+      }
+    } catch (error) {
+      cliUx.action.stop(`Failed`)
+      command.error(error.message)
+    }
+  } else {
+    await promptToLogin(command)
+  }
+}
+
 export function ensureFreshToken() {
   return function(_target: any, _propertyKey: string | symbol, descriptor: PropertyDescriptor) {
     const originalMethod = descriptor.value
