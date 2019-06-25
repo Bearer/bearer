@@ -4,8 +4,9 @@ import nock from 'nock'
 import { overrideRequestMethod } from '../src/http-overrides'
 import { setupFunctionIdentifiers } from '../src'
 
-const logger = jest.fn()
-Date.now = jest.fn()
+const billingLogger = jest.fn()
+const userLogger = jest.fn()
+Date.now = jest.fn(() => 5)
 
 beforeAll(() => {
   setupFunctionIdentifiers({
@@ -29,11 +30,12 @@ describe('overrideRequestMethod', () => {
         .post('/postPath?postQuery=sponge')
         .reply(204, { great: 'sponge bob is the king of posts' })
 
-      overrideRequestMethod(https, logger)
+      overrideRequestMethod(https, billingLogger, userLogger)
     })
 
     beforeEach(() => {
-      logger.mockClear()
+      billingLogger.mockClear()
+      userLogger.mockClear()
     })
 
     describe('get', () => {
@@ -50,8 +52,10 @@ describe('overrideRequestMethod', () => {
           })
         })
 
-        expect(logger).toHaveBeenCalledTimes(1)
-        expect(logger.mock.calls[0]).toMatchSnapshot()
+        expect(billingLogger).toHaveBeenCalledTimes(1)
+        expect(billingLogger.mock.calls[0]).toMatchSnapshot()
+        expect(userLogger).toHaveBeenCalledTimes(1)
+        expect(userLogger.mock.calls[0]).toMatchSnapshot()
       })
     })
 
@@ -85,8 +89,10 @@ describe('overrideRequestMethod', () => {
           req.end()
         })
 
-        expect(logger).toHaveBeenCalledTimes(1)
-        expect(logger.mock.calls[0]).toMatchSnapshot()
+        expect(billingLogger).toHaveBeenCalledTimes(1)
+        expect(billingLogger.mock.calls[0]).toMatchSnapshot()
+        expect(userLogger).toHaveBeenCalledTimes(1)
+        expect(userLogger.mock.calls[0]).toMatchSnapshot()
       })
     })
 
@@ -127,7 +133,8 @@ describe('overrideRequestMethod', () => {
           req.end()
         })
 
-        expect(logger).not.toHaveBeenCalled()
+        expect(billingLogger).not.toHaveBeenCalled()
+        expect(userLogger).not.toHaveBeenCalled()
       })
     })
   })

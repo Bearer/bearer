@@ -4,6 +4,26 @@ exports[`overrideRequestMethod https get logs request 1`] = `
 Array [
   "%j",
   Object {
+    "message": Object {
+      "clientId": "a-client-id",
+      "integrationUuid": "custom0buid",
+      "intentName": undefined,
+      "method": "get",
+      "path": "bearer.sh",
+      "pathname": "/path",
+      "stage": undefined,
+      "tid": "aws_trace",
+      "type": "externalCall",
+    },
+    "timestamp": 5,
+  },
+]
+`;
+
+exports[`overrideRequestMethod https get logs request 2`] = `
+Array [
+  "%j",
+  Object {
     "buid": "custom0buid",
     "payload": Object {
       "duration": 10,
@@ -42,6 +62,26 @@ Array [
 `;
 
 exports[`overrideRequestMethod https request logs request 1`] = `
+Array [
+  "%j",
+  Object {
+    "message": Object {
+      "clientId": "a-client-id",
+      "integrationUuid": "custom0buid",
+      "intentName": undefined,
+      "method": "get",
+      "path": "bearer.sh:443",
+      "pathname": undefined,
+      "stage": undefined,
+      "tid": "aws_trace",
+      "type": "externalCall",
+    },
+    "timestamp": 5,
+  },
+]
+`;
+
+exports[`overrideRequestMethod https request logs request 2`] = `
 Array [
   "%j",
   Object {

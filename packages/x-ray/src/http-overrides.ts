@@ -5,13 +5,33 @@ import http from 'http'
 import https from 'https'
 
 import log from './logger'
-import { _HANDLER } from './constants'
+import { _HANDLER, STAGE } from './constants'
 
 const EXCLUDED_API = new Set(['logs.eu-west-3.amazonaws.com', 'logs.eu-west-1.amazonaws.com'])
 
+const buildBillingPayload = (info: TRequestPayload) => {
+  const { host, pathname, method } = info.request
+
+  return {
+    message: {
+      pathname,
+      method,
+      path: host,
+      intentName: _HANDLER,
+      clientId: process.env.clientId,
+      integrationUuid: process.env.scenarioUuid,
+      stage: STAGE,
+      type: 'externalCall',
+      tid: process.env._X_AMZN_TRACE_ID
+    },
+    timestamp: Date.now()
+  }
+}
+
 export const overrideRequestMethod = (
   module: typeof http | typeof https,
-  logger: (...arg: any[]) => void = log.extend('externalCall')
+  billingLogger: (...arg: any[]) => void = log.extend('externalCall'),
+  userLogger: (...arg: any[]) => void = log.extend('user')
 ) => {
   // override http.request method
   const _request = module.request
@@ -80,7 +100,9 @@ export const overrideRequestMethod = (
         if (!EXCLUDED_API.has(info.request.hostname!)) {
           info.response.body = responseData.join('')
           info.duration = Date.now() - requestStart
-          logger('%j', {
+
+          billingLogger('%j', buildBillingPayload(info))
+          userLogger('%j', {
             buid: process.env.scenarioUuid,
             payloadType: 'EXTERNAL_CALL',
             payload: info,
