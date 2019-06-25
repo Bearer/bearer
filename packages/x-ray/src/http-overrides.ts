@@ -140,12 +140,12 @@ type TRequestPayload = {
   }
   duration?: number
 }
-const maxBodyLength = 2024 * 1000 * 3
+const maxBodyLength = 1024 * 30
 
 function logBodyChunk(array: any[], chunk: string) {
   if (chunk) {
     let toAdd = chunk
-    const newLength = array.length + chunk.length
+    const newLength = array.reduce((sum, item) => sum + item.length, 0) + chunk.length
     if (newLength > maxBodyLength) {
       toAdd = chunk.slice(0, maxBodyLength - newLength)
     }
