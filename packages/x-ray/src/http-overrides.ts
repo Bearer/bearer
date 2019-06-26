@@ -10,13 +10,13 @@ import { _HANDLER, STAGE } from './constants'
 const EXCLUDED_API = new Set(['logs.eu-west-3.amazonaws.com', 'logs.eu-west-1.amazonaws.com'])
 
 const buildBillingPayload = (info: TRequestPayload) => {
-  const { host, pathname, method } = info.request
+  const { hostname, pathname, method } = info.request
 
   return {
     message: {
       pathname,
       method,
-      path: host,
+      path: hostname,
       intentName: _HANDLER,
       clientId: process.env.clientId,
       integrationUuid: process.env.scenarioUuid,
