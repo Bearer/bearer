@@ -1,4 +1,5 @@
 import debug from '@bearer/logger'
+import http from 'http'
 import { captureHttps, setupFunctionIdentifiers } from '@bearer/x-ray'
 
 import * as d from '../declaration'
@@ -53,7 +54,7 @@ export abstract class FetchData<ReturnedData = any, TError = any, AuthContext = 
   }
 
   static init() {
-    captureHttps()
+    captureHttps(http)
     return FetchData.call(this as any)
   }
 }
