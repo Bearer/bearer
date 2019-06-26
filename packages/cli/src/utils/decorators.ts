@@ -117,34 +117,6 @@ export async function withFreshToken(command: TCommand) {
   }
 }
 
-export function ensureFreshToken() {
-  return function(_target: any, _propertyKey: string | symbol, descriptor: PropertyDescriptor) {
-    const originalMethod = descriptor.value
-    descriptor.value = async function(this: TCommand) {
-      const { expires_at, refresh_token } = (await this.bearerConfig.getToken()) || {
-        expires_at: null,
-        refresh_token: null
-      }
-      if (expires_at && refresh_token) {
-        try {
-          if (expires_at < Date.now()) {
-            cliUx.action.start('Refreshing token')
-            await refreshMyToken(this, refresh_token)
-            cliUx.action.stop()
-          }
-        } catch (error) {
-          cliUx.action.stop(`Failed`)
-          this.error(error.message)
-        }
-      } else {
-        await promptToLogin(this)
-      }
-      return await originalMethod.apply(this, arguments)
-    }
-    return descriptor
-  }
-}
-
 // tslint:disable-next-line variable-name
 async function refreshMyToken(command: TCommand, refresh_token: string): Promise<boolean | Error> {
   // TODO: rework refresh mechanism
