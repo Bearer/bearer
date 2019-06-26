@@ -17,11 +17,11 @@ export function bodyFromEvent(event: d.TLambdaEvent): any {
   return body
 }
 
-export function fetchData(callback: d.TLambdaCallback, { data, error }: { data?: any; error?: any }) {
+export function fetchData(callback: d.TLambdaCallback, { data, error, statusCode }: { data?: any; error?: any, statusCode?: any }) {
   if (data) {
-    sendSuccessMessage(callback, { data })
+    sendSuccessMessage(callback, { data, statusCode })
   } else {
-    sendErrorMessage(callback, { error: error || 'Unkown error' })
+    sendErrorMessage(callback, { statusCode, error: error || 'Unkown error' })
   }
 }
 
