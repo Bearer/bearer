@@ -3,8 +3,8 @@ import { Store } from './store'
 /**
  * Simplest error payload, better add code and message so that debugging is made easier
  */
-export type TErrorPayload<ReturnedError> = { error: ReturnedError }
-export type TDataPayload<ReturnedData> = { data: ReturnedData; referenceId?: string }
+export type TErrorPayload<ReturnedError> = { error: ReturnedError, statusCode?: number }
+export type TDataPayload<ReturnedData> = { data: ReturnedData; referenceId?: string, statusCode?: number }
 
 export type TFetchPayload<ReturnedData = any, ReturnedError = any> = Partial<TDataPayload<ReturnedData>> &
   Partial<TErrorPayload<ReturnedError>>
@@ -100,4 +100,4 @@ export type TLambdaEvent<T = TAuthContext> = {
   body?: any
 }
 
-export type TLambdaCallback = (error: any | null, data: any) => void
+export type TLambdaCallback = (error: any | null, data: any, statusCode?: number) => void
