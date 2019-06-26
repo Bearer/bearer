@@ -70,7 +70,7 @@ Array [
       "integrationUuid": "custom0buid",
       "intentName": undefined,
       "method": "get",
-      "path": "bearer.sh:443",
+      "path": "bearer.sh",
       "pathname": undefined,
       "stage": undefined,
       "tid": "aws_trace",
