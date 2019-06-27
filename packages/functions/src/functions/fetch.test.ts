@@ -29,6 +29,17 @@ describe('FetchData function', () => {
       expect(result).toMatchObject({ data: ['returned-data', 'somethingFromParams', 'iDefinedDataExisting'] })
     })
 
+    it('returns a payload with StatusCode', async () => {
+      const { func, event } = setup(FetchWithStatusCodeFunction)
+
+      const result = await func(event)
+
+      expect(result).toMatchObject({
+        data: ['returned-data', 'somethingFromParams', 'iDefinedDataExisting'],
+        statusCode: 201
+      })
+    })
+
     describe('when errors occur', () => {
       describe('when error is thrown within the action', () => {
         it('fails gracefully', async () => {
@@ -45,6 +56,16 @@ describe('FetchData function', () => {
           const result = await func(event)
 
           expect(result).toMatchObject({ error: '😨 No luck today' })
+        })
+      })
+
+      describe('when action returns an error payload with a statusCode', () => {
+        it('fails gracefully', async () => {
+          const { func, event } = setup(FailingWithStatusCodeFunction)
+
+          const result = await func(event)
+
+          expect(result).toMatchObject({ statusCode: 404, error: '😨 No luck today' })
         })
       })
     })
@@ -92,9 +113,21 @@ class FetchFunction extends FetchData implements FetchData<string[], any, d.TAPI
   }
 }
 
+class FetchWithStatusCodeFunction extends FetchData implements FetchData<string[], any, d.TAPIKEYAuthContext> {
+  async action(event: d.TFetchActionEvent<{ typedParam: string }, d.TAPIKEYAuthContext, { iDefinedData: string }>) {
+    return { data: ['returned-data', event.params.typedParam, event.context.iDefinedData], statusCode: 201 }
+  }
+}
+
 class FailingFunction extends FetchData implements FetchData<any, string, d.TAPIKEYAuthContext> {
   async action(_event: d.TFetchActionEvent) {
     return { error: '😨 No luck today' }
+  }
+}
+
+class FailingWithStatusCodeFunction extends FetchData implements FetchData<any, string, d.TAPIKEYAuthContext> {
+  async action(_event: d.TFetchActionEvent) {
+    return { error: '😨 No luck today', statusCode: 404 }
   }
 }
 

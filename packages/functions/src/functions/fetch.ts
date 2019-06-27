@@ -39,12 +39,12 @@ export abstract class FetchData<ReturnedData = any, TError = any, AuthContext = 
       }
 
       try {
-        const { error, data, referenceId }: d.TFetchPayload<any, any> = await action(functionEvent)
+        const { statusCode, error, data, referenceId }: d.TFetchPayload<any, any> = await action(functionEvent)
         if (error) {
           logger(error)
-          return { error }
+          return { statusCode, error }
         }
-        return { data, referenceId }
+        return { statusCode, data, referenceId }
       } catch (error) {
         logger.extend('FetchActionExecutionError')(error)
         throw new FetchActionExecutionError(error)
