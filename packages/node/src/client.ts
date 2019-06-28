@@ -13,6 +13,9 @@ export class BearerClient<T = string> {
   protected client: AxiosInstance
 
   constructor(protected readonly token: string, clientOptions: Partial<TClientOptions> = {}) {
+    if (!token) {
+      throw new InvalidAPIKey(token)
+    }
     this.options = { ...BearerClient.defaultOptions, ...clientOptions }
 
     this.client = axios.create({
@@ -44,4 +47,11 @@ export class IntegrationClient<T = string> {
 
 export default (token: string): BearerClient => {
   return new BearerClient(token)
+}
+
+class InvalidAPIKey extends Error {
+  constructor(token: any) {
+    super(`Invalid Bearer API key provided.  Value: ${token}
+You'll find you API key at this location: https://app.bearer.sh`)
+  }
 }

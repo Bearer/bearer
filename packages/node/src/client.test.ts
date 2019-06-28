@@ -12,6 +12,15 @@ describe('Bearer client', () => {
     expect(client).toBeInstanceOf(BearerClient)
   })
 
+  it('throws an error if the token is not correct', () => {
+    expect(() => {
+      new BearerClient(undefined as any)
+    }).toThrowError(
+      `Invalid Bearer API key provided.  Value: undefined
+You'll find you API key at this location: https://app.bearer.sh`
+    )
+  })
+
   describe('#invoke', () => {
     it('send request to the function', async () => {
       distantApi.mockClear()
