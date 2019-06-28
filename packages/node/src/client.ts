@@ -52,6 +52,6 @@ export default (token: string): BearerClient => {
 class InvalidAPIKey extends Error {
   constructor(token: any) {
     super(`Invalid Bearer API key provided.  Value: ${token}
-You'll find you API key at this location: https://app.bearer.sh`)
+You'll find you API key at this location: https://app.bearer.sh/keys`)
   }
 }
