@@ -1,6 +1,6 @@
 import nock from 'nock'
 
-import clientFactory, { BearerClient BearerClientInstance } from './client'
+import clientFactory, { BearerClient, BearerClientInstance } from './client'
 const apiKey = 'spongeBobApiKey'
 
 const distantApi = jest.fn(() => ({ ok: 'ok' }))
@@ -16,7 +16,7 @@ describe('Bearer client', () => {
     expect(() => {
       new BearerClient(undefined as any)
     }).toThrowError(
-      `Invalid Bearer API key provided.  Value: undefined
+      `Invalid Bearer API key provided.  Value: undefined \
 You'll find you API key at this location: https://app.bearer.sh/keys`
     )
   })
@@ -63,6 +63,5 @@ You'll find you API key at this location: https://app.bearer.sh/keys`
       expect(distantApi).toHaveBeenCalled()
       expect(data).toEqual({ ok: 'ok' })
     })
-
   })
 })
