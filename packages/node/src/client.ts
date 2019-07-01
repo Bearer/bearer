@@ -1,20 +1,16 @@
 import axios, { AxiosRequestConfig, AxiosInstance } from 'axios'
 
 export class BearerClient {
-  protected readonly BEARER_API_KEY: string
+  protected readonly bearerApiKey: string
   protected options: BearerClientOptions = { host: 'https://int.bearer.sh' }
 
-  constructor(bearerApiKey: string | undefined, options?: BearerClientOptions) {
-    if (!bearerApiKey) {
-      throw new InvalidAPIKey(bearerApiKey)
-    }
-
+  constructor(bearerApiKey: string, options?: BearerClientOptions) {
     this.options = { ...this.options, ...options }
-    this.BEARER_API_KEY = bearerApiKey
+    this.bearerApiKey = bearerApiKey
   }
 
   public integration(integrationId: string) {
-    return new BearerClientInstance(integrationId, this.options, this.BEARER_API_KEY)
+    return new BearerClientInstance(integrationId, this.options, this.bearerApiKey)
   }
 
   /**
@@ -26,32 +22,32 @@ export class BearerClient {
     functionName: string,
     { query, body }: { query?: any; body?: any } = { query: {}, body: {} }
   ) {
-    const instance = new BearerClientInstance(integrationId, this.options, this.BEARER_API_KEY)
+    const instance = new BearerClientInstance(integrationId, this.options, this.bearerApiKey)
     return instance.invoke(functionName, { query, body })
   }
 }
 
 export class BearerClientInstance {
-  protected readonly BEARER_API_KEY: string
+  protected readonly bearerApiKey: string
 
-  protected INTEGRATION_ID: string
-  protected SETUP_ID?: string
-  protected AUTH_ID?: string
+  protected integrationId: string
+  protected setupId?: string
+  protected authId?: string
 
   protected client: AxiosInstance
   protected clientOptions: BearerClientOptions
 
-  constructor(integrationId: string, options: BearerClientOptions, BEARER_API_KEY: string) {
-    this.INTEGRATION_ID = integrationId
-    this.BEARER_API_KEY = BEARER_API_KEY
+  constructor(integrationId: string, options: BearerClientOptions, bearerApiKey: string) {
+    this.integrationId = integrationId
+    this.bearerApiKey = bearerApiKey
     this.clientOptions = options
 
     this.client = axios
   }
 
   public auth = ({ authId, setupId }: { authId?: string; setupId?: string }) => {
-    this.AUTH_ID = authId || ''
-    this.SETUP_ID = setupId || ''
+    this.setupId = setupId || ''
+    this.authId = authId || ''
 
     return this
   }
@@ -78,10 +74,6 @@ export class BearerClientInstance {
     return this.makeRequest('PUT', endpoint, parameters, options)
   }
 
-  public options = (endpoint: string, parameters?: BearerRequestParameters, options?: any) => {
-    return this.makeRequest('OPTIONS', endpoint, parameters, options)
-  }
-
   public delete = (endpoint: string, parameters?: BearerRequestParameters, options?: any) => {
     return this.makeRequest('DELETE', endpoint, parameters, options)
   }
@@ -96,24 +88,20 @@ export class BearerClientInstance {
     parameters?: BearerRequestParameters,
     options?: BearerRequestOptions
   ) => {
-    if (!this.BEARER_API_KEY) {
-      throw new InvalidAPIKey(this.BEARER_API_KEY)
-    }
     if (parameters && typeof parameters !== 'object') {
       throw new InvalidRequestOptions()
     }
 
     const preheaders: { [key: string]: string } = {
-      Authorization: this.BEARER_API_KEY,
-      'User-Agent': 'Bearer.sh (nodejs)',
-      'X-Bearer-Proxy-User-Agent': 'Bearer.sh',
-      'X-Bearer-Auth-Id': this.AUTH_ID!,
-      'X-Bearer-Setup-Id': this.SETUP_ID!
+      Authorization: this.bearerApiKey,
+      'User-Agent': 'Bearer.sh',
+      'Bearer-Auth-Id': this.authId!,
+      'Bearer-Setup-Id': this.setupId!
     }
 
     if (parameters && parameters.headers) {
-      for (let key in parameters.headers) {
-        preheaders[`X-Bearer-Proxy-${key}`] = parameters.headers[key]
+      for (const key in parameters.headers) {
+        preheaders[`Bearer-Proxy-${key}`] = parameters.headers[key]
       }
     }
 
@@ -132,9 +120,9 @@ export class BearerClientInstance {
 
     return this.client.request({
       method,
-      baseURL: `${this.clientOptions.host}/api/v4/functions/backend/${this.INTEGRATION_ID}/bearer-proxy`,
+      headers,
+      baseURL: `${this.clientOptions.host}/api/v4/functions/backend/${this.integrationId}/bearer-proxy`,
       url: endpoint,
-      headers: headers,
       params: parameters && parameters.query,
       data: parameters && parameters.body
     })
@@ -145,15 +133,11 @@ export class BearerClientInstance {
    */
 
   public invoke = (functionName: string, { query, body }: { query?: any; body?: any } = { query: {}, body: {} }) => {
-    if (!this.BEARER_API_KEY) {
-      throw new InvalidAPIKey(this.BEARER_API_KEY)
-    }
-
     return this.client.request({
-      baseURL: `${this.clientOptions.host}/api/v4/functions/backend/${this.INTEGRATION_ID}`,
+      baseURL: `${this.clientOptions.host}/api/v4/functions/backend/${this.integrationId}`,
       url: `/${functionName}`,
       headers: {
-        Authorization: this.BEARER_API_KEY
+        Authorization: this.bearerApiKey
       },
       method: 'post',
       data: body,
@@ -167,6 +151,10 @@ export class BearerClientInstance {
  */
 
 export default (apiKey: string | undefined): BearerClient => {
+  if (!apiKey) {
+    throw new InvalidAPIKey(apiKey)
+  }
+
   return new BearerClient(apiKey)
 }
 

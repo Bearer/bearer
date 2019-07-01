@@ -14,7 +14,7 @@ describe('Bearer client', () => {
 
   it('throws an error if the API KEY is not correct', () => {
     expect(() => {
-      new BearerClient(undefined as any)
+      clientFactory(undefined as any)
     }).toThrowError(
       `Invalid Bearer API key provided.  Value: undefined \
 You'll find you API key at this location: https://app.bearer.sh/keys`

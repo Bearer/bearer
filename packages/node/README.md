@@ -6,18 +6,34 @@
 [![Downloads/week](https://img.shields.io/npm/dw/@bearer/logger.svg)](https://npmjs.org/package/@bearer/logger)
 [![License](https://img.shields.io/npm/l/@bearer/logger.svg)](https://github.com/Bearer/bearer/packages/logger/blob/master/package.json)
 
-This is the Node client to interact with Bearer's integrations.
+This is the Node client to interact with [Bearer.sh](https://www.bearer.sh)
 
 ## Usage
 
 Get your Bearer's [credentials](https://app.bearer.sh/keys) and setup Bearer as follow:
 
-### Call a Bearer function
+### Calling an API using Bearer
 
 ```tsx
-import bearer from '@bearer/node'
+import bearerSDK from '@bearer/node'
 
-const bearerClient = bearer(process.env.BEARER_API_KEY) // copy and paste the `API key`
+const bearer = bearerSDK(process.env.BEARER_API_KEY) // copy and paste the `API key`
+const github = bearer.integration('INTEGRATION_UUID') // you'll find it on the Bearer's dashboard
+
+github
+  .get('/users/repos')
+  .then(console.log)
+  .catch(console.error)
+```
+
+### Calling a function previously deployed to Bearer
+
+You'll need to push your function to Bearer first ([discover how](https://docs.bearer.sh/working-with-bearer/manipulating-apis)):
+
+```tsx
+import bearerSDK from '@bearer/node'
+
+const bearerClient = bearerSDK(process.env.BEARER_API_KEY) // copy and paste the `API key`
 // You can pass query or body parameter depending on Function requirement
 const options = { query: { status: 'open' }, someData: 'anything' }
 
@@ -29,42 +45,8 @@ bearerClient
   .catch(() => {
     console.log('Something went wrong')
   })
-
-// or async/await
-try {
-  const response = await bearerClient.invoke('INTEGRATION_UUID', 'myFunction', options)
-
-  // play with response here
-} catch (e) {
-  // handle error
-}
 ```
 
-_Note_: we are using axios a http client. Each `.invoke()` returns an Axios Promise. https://github.com/axios/axios
+_Note 1_: we are using axios as the http client. Each `.get()`, `.post()`, `.put()`, ... or `.invoke()` returns an Axios Promise. https://github.com/axios/axios
 
-### Integration Client
-
-Integration Client allows you to pass the `INTEGRATION_UUID` only once:
-
-```tsx
-import { IntegrationClient } from '@bearer/node/lib/client'
-
-const integrationClient = new IntegrationClient(process.env.BEARER_API_KEY, 'INTEGRATION_UUID') // copy and paste the `API key`
-
-const reponse = await integrationClient.invoke('myFunction', options)
-```
-
-If you are a TypeScript user, you can provide a list of functions to use for an integration:
-
-```tsx
-const integrationClient = new IntegrationClient<'functionName' | 'other-function'>(
-  process.env.BEARER_API_KEY, // copy and paste the `API key`
-  'INTEGRATION_UUID'
-)
-
-integrationClient.invoke('functionName', options) // OK
-integrationClient.invoke('other-function', options) // OK
-integrationClient.invoke('unknow-function', options) // Argument of type '"unknow-function"' is not assignable to parameter of type 'TIntegrationFunctionNames'.
-```
-
-_NB: If you are using ExpressJS, have a look at the [ExpressJS](https://github.com/Bearer/bearer/tree/master/packages/express) client_
+_Note 2_: If you are using ExpressJS, have a look at the [ExpressJS](https://github.com/Bearer/bearer/tree/master/packages/express) client
