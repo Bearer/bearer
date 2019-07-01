@@ -1,18 +1,18 @@
 import nock from 'nock'
 
-import clientFactory, { BearerClient, IntegrationClient } from './client'
-const clientId = 'spongeBobClientId'
+import clientFactory, { BearerClient BearerClientInstance } from './client'
+const apiKey = 'spongeBobApiKey'
 
 const distantApi = jest.fn(() => ({ ok: 'ok' }))
 
 describe('Bearer client', () => {
-  const client = clientFactory(clientId)
+  const client = clientFactory(apiKey)
 
   it('returns a client instance', () => {
     expect(client).toBeInstanceOf(BearerClient)
   })
 
-  it('throws an error if the token is not correct', () => {
+  it('throws an error if the API KEY is not correct', () => {
     expect(() => {
       new BearerClient(undefined as any)
     }).toThrowError(
@@ -26,7 +26,7 @@ You'll find you API key at this location: https://app.bearer.sh/keys`
       distantApi.mockClear()
       nock('https://int.bearer.sh', {
         reqheaders: {
-          authorization: clientId
+          authorization: apiKey
         }
       })
         .post('/api/v4/functions/backend/12345-integration-name/functionName')
@@ -38,32 +38,31 @@ You'll find you API key at this location: https://app.bearer.sh/keys`
       expect(data).toEqual({ ok: 'ok' })
     })
   })
-})
 
-describe('IntegrationClient', () => {
-  const token = 'a-different-token'
-  const anotherIntegrationName = 'integration-name'
-  type TIntegrationFunctionNames = 'function-name' | 'other-function'
-  const client = new IntegrationClient<TIntegrationFunctionNames>(token, {}, anotherIntegrationName)
+  describe('#integration', () => {
+    const integrationName = '12345'
+    const api = client.integration(integrationName)
 
-  it('creates a integration client', () => {
-    expect(client).toBeInstanceOf(IntegrationClient)
-  })
-
-  it('invokes correct integration functions', async () => {
-    distantApi.mockClear()
-    nock('https://int.bearer.sh', {
-      reqheaders: {
-        authorization: token
-      }
+    it('creates a bearer client instance', () => {
+      expect(api).toBeInstanceOf(BearerClientInstance)
     })
-      .post(`/api/v4/functions/backend/${anotherIntegrationName}/function-name`)
-      .query({ sponge: 'bob' })
-      .reply(200, distantApi)
 
-    const { data } = await client.invoke('function-name', { query: { sponge: 'bob' } })
+    it('performs correct API calls', async () => {
+      distantApi.mockClear()
+      nock('https://int.bearer.sh', {
+        reqheaders: {
+          authorization: apiKey
+        }
+      })
+        .post(`/api/v4/functions/backend/${integrationName}/bearer-proxy/test`)
+        .query({ sponge: 'bob' })
+        .reply(200, distantApi)
 
-    expect(distantApi).toHaveBeenCalled()
-    expect(data).toEqual({ ok: 'ok' })
+      const { data } = await api.post('/test', { query: { sponge: 'bob' } })
+
+      expect(distantApi).toHaveBeenCalled()
+      expect(data).toEqual({ ok: 'ok' })
+    })
+
   })
 })
