@@ -1,6 +1,6 @@
 import axios, { AxiosRequestConfig, AxiosInstance } from 'axios'
 
-export class BearerClient {
+class Bearer {
   protected readonly bearerApiKey: string
   protected options: BearerClientOptions = { host: 'https://int.bearer.sh' }
 
@@ -10,7 +10,7 @@ export class BearerClient {
   }
 
   public integration(integrationId: string) {
-    return new BearerClientInstance(integrationId, this.options, this.bearerApiKey)
+    return new BearerClient(integrationId, this.options, this.bearerApiKey)
   }
 
   /**
@@ -22,12 +22,12 @@ export class BearerClient {
     functionName: string,
     { query, body }: { query?: any; body?: any } = { query: {}, body: {} }
   ) {
-    const instance = new BearerClientInstance(integrationId, this.options, this.bearerApiKey)
+    const instance = new BearerClient(integrationId, this.options, this.bearerApiKey)
     return instance.invoke(functionName, { query, body })
   }
 }
 
-export class BearerClientInstance {
+class BearerClient {
   protected readonly bearerApiKey: string
 
   protected integrationId: string
@@ -147,30 +147,17 @@ export class BearerClientInstance {
 }
 
 /**
- * Export
- */
-
-export default (apiKey: string | undefined): BearerClient => {
-  if (!apiKey) {
-    throw new InvalidAPIKey(apiKey)
-  }
-
-  return new BearerClient(apiKey)
-}
-
-/**
  * Types
  */
 
+type BearerRequestMethod = AxiosRequestConfig['method']
 interface BearerRequestParameters {
   headers?: { [key: string]: string }
   query?: string | { [key: string]: string }
   body?: any
 }
 
-type BearerRequestMethod = AxiosRequestConfig['method']
 type BearerRequestOptions = any
-
 type BearerClientOptions = { [key: string]: string }
 
 /**
@@ -190,3 +177,17 @@ class InvalidRequestOptions extends Error {
 in the form "{ headers: { "Foo": "bar" }, body: "My body" }"`)
   }
 }
+
+/**
+ * Exports
+ */
+
+export default (apiKey: string | undefined): Bearer => {
+  if (!apiKey) {
+    throw new InvalidAPIKey(apiKey)
+  }
+
+  return new Bearer(apiKey)
+}
+
+export { Bearer }
