@@ -15,10 +15,10 @@ Get your Bearer's [credentials](https://app.bearer.sh/keys) and setup Bearer as 
 ### Calling an API using Bearer
 
 ```tsx
-import bearerSDK from '@bearer/node'
+import Bearer from '@bearer/node'
 
-const bearer = bearerSDK(process.env.BEARER_API_KEY) // copy and paste the `API key`
-const github = bearer.integration('INTEGRATION_UUID') // you'll find it on the Bearer's dashboard
+const bearerClient = Bearer(process.env.BEARER_API_KEY) // copy and paste the `API key`
+const github = bearerClient.integration('INTEGRATION_UUID') // you'll find it on the Bearer's dashboard
 
 github
   .get('/users/repos')
@@ -31,9 +31,9 @@ github
 You'll need to push your function to Bearer first ([discover how](https://docs.bearer.sh/working-with-bearer/manipulating-apis)):
 
 ```tsx
-import bearerSDK from '@bearer/node'
+import Bearer from '@bearer/node'
 
-const bearerClient = bearerSDK(process.env.BEARER_API_KEY) // copy and paste the `API key`
+const bearerClient = Bearer(process.env.BEARER_API_KEY) // copy and paste the `API key`
 // You can pass query or body parameter depending on Function requirement
 const options = { query: { status: 'open' }, someData: 'anything' }
 
