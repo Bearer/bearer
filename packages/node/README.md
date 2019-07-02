@@ -17,36 +17,50 @@ Get your Bearer's [credentials](https://app.bearer.sh/keys) and setup Bearer as 
 ```tsx
 import Bearer from '@bearer/node'
 
-const bearerClient = Bearer(process.env.BEARER_API_KEY) // copy and paste the `API key`
+const bearerClient = Bearer(process.env.BEARER_API_KEY) // find it on https://app.bearer.sh/keys
 const github = bearerClient.integration('INTEGRATION_ID') // you'll find it on the Bearer's dashboard
 
 github
-  .get('/users/repos')
+  .get('/repositories')
   .then(console.log)
   .catch(console.error)
 ```
 
-### Calling a custom backend function
+More advanced examples:
 
-You'll need to push your function to Bearer first ([discover how](https://docs.bearer.sh/working-with-bearer/manipulating-apis)):
+```tsx
+// With query parameters
+github
+  .get('/repositories', { query: { since: 364 } })
+  .then(console.log)
+  .catch(console.error)
+
+// Making an authenticated POST
+github
+  .auth({ authId }) // Create an authId for GitHub on https://app.bearer.sh
+  .post('/user/repos', { body: { name: 'Just setting up my Bearer.sh' } })
+  .then(console.log)
+  .catch(console.error)
+```
+
+### Calling custom functions
 
 ```tsx
 import Bearer from '@bearer/node'
 
 const bearerClient = Bearer(process.env.BEARER_API_KEY) // copy and paste the `API key`
-// You can pass query or body parameter depending on Function requirement
-const options = { query: { status: 'open' }, someData: 'anything' }
+const github = bearerClient.integration('INTEGRATION_ID')
 
-bearerClient
-  .invoke('INTEGRATION_UUID', 'myFunction', options)
-  .then(() => {
-    console.log('Successfully invoked function')
-  })
-  .catch(() => {
-    console.log('Something went wrong')
-  })
+github
+  .invoke('myFunction')
+  .then(console.log)
+  .catch(console.error)
 ```
 
-_Note 1_: we are using axios as the http client. Each `.get()`, `.post()`, `.put()`, ... or `.invoke()` returns an Axios Promise. https://github.com/axios/axios
+[Learn more](https://docs.bearer.sh/working-with-bearer/manipulating-apis) on how to use custom functions with Bearer.sh.
+
+## Notes
+
+_Note 1_: we are using [axios](https://github.com/axios/axios) as the http client. Each `.get()`, `.post()`, `.put()`, ... or `.invoke()` returns an Axios Promise.
 
 _Note 2_: If you are using ExpressJS, have a look at the [@bearer/express](https://github.com/Bearer/bearer/tree/master/packages/express) client
