@@ -59,5 +59,28 @@ You'll find you API key at this location: https://app.bearer.sh/keys`
       expect(distantApi).toHaveBeenCalled()
       expect(data).toEqual({ ok: 'ok' })
     })
+
+    it('allows to make authenticated API calls', async () => {
+      const authId = 'abcde12345...'
+      distantApi.mockClear()
+      nock('https://int.bearer.sh', {
+        reqheaders: {
+          authorization: apiKey,
+          'Bearer-Auth-Id': authId
+        }
+      })
+        .post(`/api/v4/functions/backend/${integrationName}/bearer-proxy/test`)
+        .query({ sponge: 'bob' })
+        .reply(200, distantApi)
+
+      const { data } = await api.auth({ authId }).post('/test', { query: { sponge: 'bob' } })
+
+      expect(distantApi).toHaveBeenCalled()
+      expect(data).toEqual({ ok: 'ok' })
+    })
+
+    it('has an alias function "authenticate"', async () => {
+      expect(api.authenticate).toEqual(api.auth)
+    })
   })
 })
