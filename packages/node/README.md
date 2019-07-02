@@ -6,13 +6,13 @@
 [![Downloads/week](https://img.shields.io/npm/dw/@bearer/logger.svg)](https://npmjs.org/package/@bearer/logger)
 [![License](https://img.shields.io/npm/l/@bearer/logger.svg)](https://github.com/Bearer/bearer/packages/logger/blob/master/package.json)
 
-Node client to interact with [Bearer.sh](https://www.bearer.sh)
+Node client to query any APIs and custom functions using [Bearer.sh](https://www.bearer.sh)
 
 ## Usage
 
 Get your Bearer's [credentials](https://app.bearer.sh/keys) and setup Bearer as follow:
 
-### Calling an API using Bearer
+### Calling any APIs
 
 ```tsx
 import Bearer from '@bearer/node'

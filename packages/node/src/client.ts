@@ -28,28 +28,18 @@ class Bearer {
 }
 
 class BearerClient {
-  protected readonly bearerApiKey: string
+  protected readonly client: AxiosInstance = axios
 
-  protected integrationId: string
-  protected setupId?: string
-  protected authId?: string
+  constructor(
+    readonly integrationId: string,
+    readonly options: BearerClientOptions,
+    readonly bearerApiKey: string,
+    readonly setupId?: string,
+    readonly authId?: string
+  ) {}
 
-  protected client: AxiosInstance
-  protected clientOptions: BearerClientOptions
-
-  constructor(integrationId: string, options: BearerClientOptions, bearerApiKey: string) {
-    this.integrationId = integrationId
-    this.bearerApiKey = bearerApiKey
-    this.clientOptions = options
-
-    this.client = axios
-  }
-
-  public auth = ({ authId, setupId }: { authId?: string; setupId?: string }) => {
-    this.setupId = setupId || ''
-    this.authId = authId || ''
-
-    return this
+  public auth = ({ setupId, authId }: { setupId?: string; authId?: string }) => {
+    return new BearerClient(this.integrationId, this.options, this.bearerApiKey, setupId, authId)
   }
 
   public authenticate = this.auth // Alias
@@ -121,7 +111,7 @@ class BearerClient {
     return this.client.request({
       method,
       headers,
-      baseURL: `${this.clientOptions.host}/api/v4/functions/backend/${this.integrationId}/bearer-proxy`,
+      baseURL: `${this.options.host}/api/v4/functions/backend/${this.integrationId}/bearer-proxy`,
       url: endpoint,
       params: parameters && parameters.query,
       data: parameters && parameters.body
@@ -134,7 +124,7 @@ class BearerClient {
 
   public invoke = (functionName: string, { query, body }: { query?: any; body?: any } = { query: {}, body: {} }) => {
     return this.client.request({
-      baseURL: `${this.clientOptions.host}/api/v4/functions/backend/${this.integrationId}`,
+      baseURL: `${this.options.host}/api/v4/functions/backend/${this.integrationId}`,
       url: `/${functionName}`,
       headers: {
         Authorization: this.bearerApiKey
