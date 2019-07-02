@@ -1,16 +1,18 @@
-import { captureHttps, setupFunctionIdentifiers } from '../src/index'
+import { bearerOverride, setupFunctionIdentifiers } from '../src/index'
 
 jest.mock('../src/constants')
 
-describe('captureHttp', () => {
-  it('overrides http and https modules', async () => {
+describe('bearerOverride', () => {
+  it('overrides modules', async () => {
     expect(require('http')._bearerLoading).toBeUndefined()
     expect(require('https')._bearerLoading).toBeUndefined()
+    expect(require('console')._bearerLoading).toBeUndefined()
 
-    captureHttps()
+    bearerOverride()
 
     expect(require('http')._bearerLoading).toBeDefined()
     expect(require('https')._bearerLoading).toBeDefined()
+    expect(require('console')._bearerLoading).toBeDefined()
   })
 })
 
