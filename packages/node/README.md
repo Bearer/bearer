@@ -6,7 +6,7 @@
 [![Downloads/week](https://img.shields.io/npm/dw/@bearer/logger.svg)](https://npmjs.org/package/@bearer/logger)
 [![License](https://img.shields.io/npm/l/@bearer/logger.svg)](https://github.com/Bearer/bearer/packages/logger/blob/master/package.json)
 
-This is the Node client to interact with [Bearer.sh](https://www.bearer.sh)
+Node client to interact with [Bearer.sh](https://www.bearer.sh)
 
 ## Usage
 
