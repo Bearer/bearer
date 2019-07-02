@@ -26,7 +26,7 @@ github
   .catch(console.error)
 ```
 
-### Calling a function previously deployed to Bearer
+### Calling a custom backend function
 
 You'll need to push your function to Bearer first ([discover how](https://docs.bearer.sh/working-with-bearer/manipulating-apis)):
 
