@@ -1,7 +1,7 @@
 {
   "private": false,
   "name": "@bearer/node",
-  "version": "1.0.2",
+  "version": "1.6.0",
   "description": "Bearer platform bindings",
   "keywords": [
     "node",

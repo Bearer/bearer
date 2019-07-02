@@ -23,7 +23,7 @@ $ npm install -g @bearer/cli
 $ bearer COMMAND
 running command...
 $ bearer (-v|--version|version)
-@bearer/cli/1.4.1 linux-x64 node-v10.15.3
+@bearer/cli/1.6.0 darwin-x64 node-v10.15.3
 $ bearer --help [COMMAND]
 USAGE
   $ bearer COMMAND
@@ -89,7 +89,7 @@ ALIASES
   $ bearer g
 ```
 
-_See code: [src/commands/generate/index.ts](https://github.com/Bearer/bearer/blob/v1.4.1/src/commands/generate/index.ts)_
+_See code: [src/commands/generate/index.ts](https://github.com/Bearer/bearer/blob/v1.6.0/src/commands/generate/index.ts)_
 
 ## `bearer generate:component [NAME]`
 
@@ -109,7 +109,7 @@ ALIASES
   $ bearer g:c
 ```
 
-_See code: [src/commands/generate/component.ts](https://github.com/Bearer/bearer/blob/v1.4.1/src/commands/generate/component.ts)_
+_See code: [src/commands/generate/component.ts](https://github.com/Bearer/bearer/blob/v1.6.0/src/commands/generate/component.ts)_
 
 ## `bearer generate:function [NAME]`
 
@@ -128,7 +128,7 @@ ALIASES
   $ bearer g:f
 ```
 
-_See code: [src/commands/generate/function.ts](https://github.com/Bearer/bearer/blob/v1.4.1/src/commands/generate/function.ts)_
+_See code: [src/commands/generate/function.ts](https://github.com/Bearer/bearer/blob/v1.6.0/src/commands/generate/function.ts)_
 
 ## `bearer help [COMMAND]`
 
@@ -161,7 +161,7 @@ OPTIONS
   --silent
 ```
 
-_See code: [src/commands/integrations/index.ts](https://github.com/Bearer/bearer/blob/v1.4.1/src/commands/integrations/index.ts)_
+_See code: [src/commands/integrations/index.ts](https://github.com/Bearer/bearer/blob/v1.6.0/src/commands/integrations/index.ts)_
 
 ## `bearer integrations:create`
 
@@ -180,7 +180,7 @@ OPTIONS
   --silent
 ```
 
-_See code: [src/commands/integrations/create.ts](https://github.com/Bearer/bearer/blob/v1.4.1/src/commands/integrations/create.ts)_
+_See code: [src/commands/integrations/create.ts](https://github.com/Bearer/bearer/blob/v1.6.0/src/commands/integrations/create.ts)_
 
 ## `bearer invoke FUNCTION_NAME`
 
@@ -198,7 +198,7 @@ OPTIONS
   --silent
 ```
 
-_See code: [src/commands/invoke.ts](https://github.com/Bearer/bearer/blob/v1.4.1/src/commands/invoke.ts)_
+_See code: [src/commands/invoke.ts](https://github.com/Bearer/bearer/blob/v1.6.0/src/commands/invoke.ts)_
 
 ## `bearer link [INTEGRATION_IDENTIFIER]`
 
@@ -214,7 +214,7 @@ OPTIONS
   --silent
 ```
 
-_See code: [src/commands/link.ts](https://github.com/Bearer/bearer/blob/v1.4.1/src/commands/link.ts)_
+_See code: [src/commands/link.ts](https://github.com/Bearer/bearer/blob/v1.6.0/src/commands/link.ts)_
 
 ## `bearer login`
 
@@ -230,7 +230,7 @@ OPTIONS
   --silent
 ```
 
-_See code: [src/commands/login.ts](https://github.com/Bearer/bearer/blob/v1.4.1/src/commands/login.ts)_
+_See code: [src/commands/login.ts](https://github.com/Bearer/bearer/blob/v1.6.0/src/commands/login.ts)_
 
 ## `bearer new [INTEGRATIONNAME]`
 
@@ -251,7 +251,7 @@ OPTIONS
   --withViews                                            Experimental - generate views
 ```
 
-_See code: [src/commands/new.ts](https://github.com/Bearer/bearer/blob/v1.4.1/src/commands/new.ts)_
+_See code: [src/commands/new.ts](https://github.com/Bearer/bearer/blob/v1.6.0/src/commands/new.ts)_
 
 ## `bearer push`
 
@@ -267,7 +267,7 @@ OPTIONS
   --silent
 ```
 
-_See code: [src/commands/push.ts](https://github.com/Bearer/bearer/blob/v1.4.1/src/commands/push.ts)_
+_See code: [src/commands/push.ts](https://github.com/Bearer/bearer/blob/v1.6.0/src/commands/push.ts)_
 
 ## `bearer setup:auth [CREDENTIALS]`
 
@@ -304,7 +304,7 @@ EXAMPLES
   	BEARER_AUTH_APIKEY=APIKEY bearer setup:auth
 ```
 
-_See code: [src/commands/setup/auth.ts](https://github.com/Bearer/bearer/blob/v1.4.1/src/commands/setup/auth.ts)_
+_See code: [src/commands/setup/auth.ts](https://github.com/Bearer/bearer/blob/v1.6.0/src/commands/setup/auth.ts)_
 
 ## `bearer start`
 
@@ -321,5 +321,5 @@ OPTIONS
   --no-open
 ```
 
-_See code: [src/commands/start.ts](https://github.com/Bearer/bearer/blob/v1.4.1/src/commands/start.ts)_
+_See code: [src/commands/start.ts](https://github.com/Bearer/bearer/blob/v1.6.0/src/commands/start.ts)_
 <!-- commandsstop -->

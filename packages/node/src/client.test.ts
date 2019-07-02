@@ -1,22 +1,22 @@
 import nock from 'nock'
 
-import clientFactory, { BearerClient, IntegrationClient } from './client'
-const clientId = 'spongeBobClientId'
+import clientFactory, { Bearer } from './client'
+const apiKey = 'spongeBobApiKey'
 
 const distantApi = jest.fn(() => ({ ok: 'ok' }))
 
 describe('Bearer client', () => {
-  const client = clientFactory(clientId)
+  const client = clientFactory(apiKey)
 
   it('returns a client instance', () => {
-    expect(client).toBeInstanceOf(BearerClient)
+    expect(client).toBeInstanceOf(Bearer)
   })
 
-  it('throws an error if the token is not correct', () => {
+  it('throws an error if the API KEY is not correct', () => {
     expect(() => {
-      new BearerClient(undefined as any)
+      clientFactory(undefined as any)
     }).toThrowError(
-      `Invalid Bearer API key provided.  Value: undefined
+      `Invalid Bearer API key provided.  Value: undefined \
 You'll find you API key at this location: https://app.bearer.sh/keys`
     )
   })
@@ -26,7 +26,7 @@ You'll find you API key at this location: https://app.bearer.sh/keys`
       distantApi.mockClear()
       nock('https://int.bearer.sh', {
         reqheaders: {
-          authorization: clientId
+          authorization: apiKey
         }
       })
         .post('/api/v4/functions/backend/12345-integration-name/functionName')
@@ -38,32 +38,49 @@ You'll find you API key at this location: https://app.bearer.sh/keys`
       expect(data).toEqual({ ok: 'ok' })
     })
   })
-})
 
-describe('IntegrationClient', () => {
-  const token = 'a-different-token'
-  const anotherIntegrationName = 'integration-name'
-  type TIntegrationFunctionNames = 'function-name' | 'other-function'
-  const client = new IntegrationClient<TIntegrationFunctionNames>(token, {}, anotherIntegrationName)
+  describe('#integration', () => {
+    const integrationName = '12345'
+    const api = client.integration(integrationName)
 
-  it('creates a integration client', () => {
-    expect(client).toBeInstanceOf(IntegrationClient)
-  })
+    it('performs correct API calls', async () => {
+      distantApi.mockClear()
+      nock('https://int.bearer.sh', {
+        reqheaders: {
+          authorization: apiKey
+        }
+      })
+        .post(`/api/v4/functions/backend/${integrationName}/bearer-proxy/test`)
+        .query({ sponge: 'bob' })
+        .reply(200, distantApi)
 
-  it('invokes correct integration functions', async () => {
-    distantApi.mockClear()
-    nock('https://int.bearer.sh', {
-      reqheaders: {
-        authorization: token
-      }
+      const { data } = await api.post('/test', { query: { sponge: 'bob' } })
+
+      expect(distantApi).toHaveBeenCalled()
+      expect(data).toEqual({ ok: 'ok' })
     })
-      .post(`/api/v4/functions/backend/${anotherIntegrationName}/function-name`)
-      .query({ sponge: 'bob' })
-      .reply(200, distantApi)
 
-    const { data } = await client.invoke('function-name', { query: { sponge: 'bob' } })
+    it('allows to make authenticated API calls', async () => {
+      const authId = 'abcde12345...'
+      distantApi.mockClear()
+      nock('https://int.bearer.sh', {
+        reqheaders: {
+          authorization: apiKey,
+          'Bearer-Auth-Id': authId
+        }
+      })
+        .post(`/api/v4/functions/backend/${integrationName}/bearer-proxy/test`)
+        .query({ sponge: 'bob' })
+        .reply(200, distantApi)
 
-    expect(distantApi).toHaveBeenCalled()
-    expect(data).toEqual({ ok: 'ok' })
+      const { data } = await api.auth({ authId }).post('/test', { query: { sponge: 'bob' } })
+
+      expect(distantApi).toHaveBeenCalled()
+      expect(data).toEqual({ ok: 'ok' })
+    })
+
+    it('has an alias function "authenticate"', async () => {
+      expect(api.authenticate).toEqual(api.auth)
+    })
   })
 })

@@ -23,7 +23,7 @@
   "scripts": {
     "clean": "lerna run clean",
     "upgrade-stencil": "(lerna clean --scope=@bearer/ui --scope=@bearer/core --yes) && (lerna exec --scope=@bearer/ui --scope=@bearer/core yarn install) && (lerna exec --scope=@bearer/ui --scope=@bearer/core yarn remove @stencil/core)  && (lerna add --exact @stencil/core --scope=@bearer/ui --scope=@bearer/core ) && lerna bootstrap",
-    "lerna-publish": "lerna publish --conventional-commits  --registry=https://registry.npmjs.org/",
+    "lerna-publish": "lerna publish --conventional-commits  --registry=https://registry.npmjs.org/ ---create-release=github",
     "test": "lerna run test:ci --stream",
     "cm": "git-cz",
     "postinstall": "lerna run prepare && lerna link"
@@ -41,7 +41,7 @@
     "@commitlint/config-conventional": "^7.5.0",
     "cz-conventional-changelog": "^2.1.0",
     "husky": "^1.3.1",
-    "lerna": "^3.10.6",
+    "lerna": "^3.15.0",
     "lint-staged": "^8.1.0",
     "per-env": "^1.0.2",
     "prettier": "^1.16.1",

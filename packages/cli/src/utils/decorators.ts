@@ -1,13 +1,8 @@
-import axios from 'axios'
-import cliUx from 'cli-ux'
 import * as inquirer from 'inquirer'
 import Command from '../base-command'
 
 import Link from '../actions/link'
 import Create from '../actions/createIntegration'
-import { promptToLogin } from '../actions/login'
-
-import { LOGIN_CLIENT_ID } from './constants'
 
 type Constructor<T> = new (...args: any[]) => T
 type TCommand = InstanceType<Constructor<Command>>
@@ -93,44 +88,4 @@ export function RequireLinkedIntegration(prompt = true) {
     }
     return descriptor
   }
-}
-
-export function ensureFreshToken() {
-  return function(_target: any, _propertyKey: string | symbol, descriptor: PropertyDescriptor) {
-    const originalMethod = descriptor.value
-    descriptor.value = async function(this: TCommand) {
-      const { expires_at, refresh_token } = (await this.bearerConfig.getToken()) || {
-        expires_at: null,
-        refresh_token: null
-      }
-      if (expires_at && refresh_token) {
-        try {
-          if (expires_at < Date.now()) {
-            cliUx.action.start('Refreshing token')
-            await refreshMyToken(this, refresh_token)
-            cliUx.action.stop()
-          }
-        } catch (error) {
-          cliUx.action.stop(`Failed`)
-          this.error(error.message)
-        }
-      } else {
-        await promptToLogin(this)
-      }
-      return await originalMethod.apply(this, arguments)
-    }
-    return descriptor
-  }
-}
-
-// tslint:disable-next-line variable-name
-async function refreshMyToken(command: TCommand, refresh_token: string): Promise<boolean | Error> {
-  // TODO: rework refresh mechanism
-  const response = await axios.post(`${command.constants.LoginDomain}/oauth/token`, {
-    refresh_token,
-    grant_type: 'refresh_token',
-    client_id: LOGIN_CLIENT_ID
-  })
-  await command.bearerConfig.storeToken({ ...response.data, refresh_token })
-  return true
 }

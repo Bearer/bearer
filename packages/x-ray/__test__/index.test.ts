@@ -11,7 +11,6 @@ describe('bearerOverride', () => {
     bearerOverride()
 
     expect(require('http')._bearerLoading).toBeDefined()
-    expect(require('https')._bearerLoading).toBeDefined()
     expect(require('console')._bearerLoading).toBeDefined()
   })
 })

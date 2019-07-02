@@ -1,57 +1,183 @@
-import axios, { AxiosInstance } from 'axios'
+import axios, { AxiosRequestConfig, AxiosInstance } from 'axios'
 
-type TClientOptions = {
-  hostUrl: string
+class Bearer {
+  protected readonly bearerApiKey: string
+  protected options: BearerClientOptions = { host: 'https://int.bearer.sh' }
+
+  constructor(bearerApiKey: string, options?: BearerClientOptions) {
+    this.options = { ...this.options, ...options }
+    this.bearerApiKey = bearerApiKey
+  }
+
+  public integration(integrationId: string) {
+    return new BearerClient(integrationId, this.options, this.bearerApiKey)
+  }
+
+  /**
+   * Deprecated. Please use integration(...).invoke(...) instead
+   */
+
+  public invoke(
+    integrationId: string,
+    functionName: string,
+    { query, body }: { query?: any; body?: any } = { query: {}, body: {} }
+  ) {
+    const instance = new BearerClient(integrationId, this.options, this.bearerApiKey)
+    return instance.invoke(functionName, { query, body })
+  }
 }
 
-type TFunctionParams = { query?: any; body?: any }
-const defaultFunctionParams = { query: {}, body: {} }
+class BearerClient {
+  protected readonly client: AxiosInstance = axios
 
-export class BearerClient<T = string> {
-  protected static defaultOptions = { hostUrl: 'https://int.bearer.sh/api/v4/functions/backend' }
-  protected options: TClientOptions
-  protected client: AxiosInstance
+  constructor(
+    readonly integrationId: string,
+    readonly options: BearerClientOptions,
+    readonly bearerApiKey: string,
+    readonly setupId?: string,
+    readonly authId?: string
+  ) {}
 
-  constructor(protected readonly token: string, clientOptions: Partial<TClientOptions> = {}) {
-    if (!token) {
-      throw new InvalidAPIKey(token)
+  public auth = ({ setupId, authId }: { setupId?: string; authId?: string }) => {
+    return new BearerClient(this.integrationId, this.options, this.bearerApiKey, setupId, authId)
+  }
+
+  public authenticate = this.auth // Alias
+
+  /**
+   * HTTP methods
+   */
+
+  public get = (endpoint: string, parameters?: BearerRequestParameters, options?: any) => {
+    return this.makeRequest('GET', endpoint, parameters, options)
+  }
+
+  public head = (endpoint: string, parameters?: BearerRequestParameters, options?: any) => {
+    return this.makeRequest('HEAD', endpoint, parameters, options)
+  }
+
+  public post = (endpoint: string, parameters?: BearerRequestParameters, options?: any) => {
+    return this.makeRequest('POST', endpoint, parameters, options)
+  }
+
+  public put = (endpoint: string, parameters?: BearerRequestParameters, options?: any) => {
+    return this.makeRequest('PUT', endpoint, parameters, options)
+  }
+
+  public delete = (endpoint: string, parameters?: BearerRequestParameters, options?: any) => {
+    return this.makeRequest('DELETE', endpoint, parameters, options)
+  }
+
+  public patch = (endpoint: string, parameters?: BearerRequestParameters, options?: any) => {
+    return this.makeRequest('PATCH', endpoint, parameters, options)
+  }
+
+  protected makeRequest = (
+    method: BearerRequestMethod,
+    endpoint: string,
+    parameters?: BearerRequestParameters,
+    options?: BearerRequestOptions
+  ) => {
+    if (parameters && typeof parameters !== 'object') {
+      throw new InvalidRequestOptions()
     }
-    this.options = { ...BearerClient.defaultOptions, ...clientOptions }
 
-    this.client = axios.create({
-      baseURL: this.options.hostUrl,
-      headers: {
-        Authorization: token
+    const preheaders: { [key: string]: string } = {
+      Authorization: this.bearerApiKey,
+      'User-Agent': 'Bearer.sh',
+      'Bearer-Auth-Id': this.authId!,
+      'Bearer-Setup-Id': this.setupId!
+    }
+
+    if (parameters && parameters.headers) {
+      for (const key in parameters.headers) {
+        preheaders[`Bearer-Proxy-${key}`] = parameters.headers[key]
       }
+    }
+
+    const headers = Object.keys(preheaders).reduce(
+      (acc, key) => {
+        const header = preheaders[key]
+
+        if (header !== undefined && header !== null) {
+          acc[key] = preheaders[key]
+        }
+
+        return acc
+      },
+      {} as any
+    )
+
+    return this.client.request({
+      method,
+      headers,
+      baseURL: `${this.options.host}/api/v4/functions/backend/${this.integrationId}/bearer-proxy`,
+      url: endpoint,
+      params: parameters && parameters.query,
+      data: parameters && parameters.body
     })
   }
 
-  public invoke(integrationName: string, functionName: T, { query, body }: TFunctionParams = defaultFunctionParams) {
-    return this.client.post(`${integrationName}/${functionName}`, body, {
+  /**
+   * Invoke custom functions
+   */
+
+  public invoke = (functionName: string, { query, body }: { query?: any; body?: any } = { query: {}, body: {} }) => {
+    return this.client.request({
+      baseURL: `${this.options.host}/api/v4/functions/backend/${this.integrationId}`,
+      url: `/${functionName}`,
+      headers: {
+        Authorization: this.bearerApiKey
+      },
+      method: 'post',
+      data: body,
       params: query
     })
   }
 }
 
-export class IntegrationClient<T = string> {
-  private bearerClient: BearerClient<T>
+/**
+ * Types
+ */
 
-  constructor(token: string, clientOptions: Partial<TClientOptions> = {}, private readonly integrationName: string) {
-    this.bearerClient = new BearerClient<T>(token, clientOptions)
-  }
-
-  public invoke(functionName: T, functionParams: TFunctionParams = defaultFunctionParams) {
-    return this.bearerClient.invoke(this.integrationName, functionName, functionParams)
-  }
+type BearerRequestMethod = AxiosRequestConfig['method']
+interface BearerRequestParameters {
+  headers?: { [key: string]: string }
+  query?: string | { [key: string]: string }
+  body?: any
 }
 
-export default (token: string): BearerClient => {
-  return new BearerClient(token)
-}
+type BearerRequestOptions = any
+type BearerClientOptions = { [key: string]: string }
+
+/**
+ * Errors handling
+ */
 
 class InvalidAPIKey extends Error {
   constructor(token: any) {
-    super(`Invalid Bearer API key provided.  Value: ${token}
+    super(`Invalid Bearer API key provided.  Value: ${token} \
 You'll find you API key at this location: https://app.bearer.sh/keys`)
   }
 }
+
+class InvalidRequestOptions extends Error {
+  constructor() {
+    super(`Unable to trigger API request. Request parameters should be an object \
+in the form "{ headers: { "Foo": "bar" }, body: "My body" }"`)
+  }
+}
+
+/**
+ * Exports
+ */
+
+export default (apiKey: string | undefined): Bearer => {
+  if (!apiKey) {
+    throw new InvalidAPIKey(apiKey)
+  }
+
+  return new Bearer(apiKey)
+}
+
+export { Bearer }

@@ -3,6 +3,38 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.6.0](https://github.com/Bearer/bearer/compare/v1.5.0...v1.6.0) (2019-07-02)
+
+
+### Bug Fixes
+
+* **x-ray:** remove duplicate override ([cda0519](https://github.com/Bearer/bearer/commit/cda0519))
+
+
+
+
+
+# [1.5.0](https://github.com/Bearer/bearer/compare/v1.4.1...v1.5.0) (2019-07-02)
+
+
+### Bug Fixes
+
+* **x-ray:** http is enough ([822b1b9](https://github.com/Bearer/bearer/commit/822b1b9))
+* add more fields to logs ([50b6c96](https://github.com/Bearer/bearer/commit/50b6c96))
+* revert current behaviour ([8b178e4](https://github.com/Bearer/bearer/commit/8b178e4))
+* truncate bodies to 30kb ([d8d6eeb](https://github.com/Bearer/bearer/commit/d8d6eeb))
+* use correct hostname attribute ([9d7b852](https://github.com/Bearer/bearer/commit/9d7b852))
+
+
+### Features
+
+* **x-ray:** drop more information into logs ([90c35e8](https://github.com/Bearer/bearer/commit/90c35e8))
+* add separate logs for billing ([b22e743](https://github.com/Bearer/bearer/commit/b22e743))
+
+
+
+
+
 # [1.4.0](https://github.com/Bearer/bearer/compare/v1.3.1...v1.4.0) (2019-06-20)
 
 

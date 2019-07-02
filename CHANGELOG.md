@@ -3,6 +3,50 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.6.0](https://github.com/Bearer/bearer/compare/v1.5.0...v1.6.0) (2019-07-02)
+
+
+### Bug Fixes
+
+* **x-ray:** remove duplicate override ([cda0519](https://github.com/Bearer/bearer/commit/cda0519))
+
+
+### Features
+
+* **node:** multi-method client ([#700](https://github.com/Bearer/bearer/issues/700)) ([d9ef122](https://github.com/Bearer/bearer/commit/d9ef122))
+
+
+
+
+
+# [1.5.0](https://github.com/Bearer/bearer/compare/v1.4.1...v1.5.0) (2019-07-02)
+
+
+### Bug Fixes
+
+* add more fields to logs ([50b6c96](https://github.com/Bearer/bearer/commit/50b6c96))
+* add statusCode to fetch ([#697](https://github.com/Bearer/bearer/issues/697)) ([2bfa2ad](https://github.com/Bearer/bearer/commit/2bfa2ad))
+* improve integration not found error message ([06207cb](https://github.com/Bearer/bearer/commit/06207cb))
+* revert cli update ([368a7c5](https://github.com/Bearer/bearer/commit/368a7c5))
+* revert current behaviour ([8b178e4](https://github.com/Bearer/bearer/commit/8b178e4))
+* **cli:** use refresh token for every dev portal request ([#695](https://github.com/Bearer/bearer/issues/695)) ([c913308](https://github.com/Bearer/bearer/commit/c913308))
+* **functions:** remove x-ray dependency ([16f0f91](https://github.com/Bearer/bearer/commit/16f0f91))
+* truncate bodies to 30kb ([d8d6eeb](https://github.com/Bearer/bearer/commit/d8d6eeb))
+* use correct hostname attribute ([9d7b852](https://github.com/Bearer/bearer/commit/9d7b852))
+* **node:** direct link to developer keys ([d7e1bd0](https://github.com/Bearer/bearer/commit/d7e1bd0))
+* **x-ray:** http is enough ([822b1b9](https://github.com/Bearer/bearer/commit/822b1b9))
+
+
+### Features
+
+* add separate logs for billing ([b22e743](https://github.com/Bearer/bearer/commit/b22e743))
+* **node:** raise error if apiKey is not provided ([6fcc6cd](https://github.com/Bearer/bearer/commit/6fcc6cd))
+* **x-ray:** drop more information into logs ([90c35e8](https://github.com/Bearer/bearer/commit/90c35e8))
+
+
+
+
+
 ## [1.4.1](https://github.com/Bearer/bearer/compare/v1.4.0...v1.4.1) (2019-06-21)
 
 

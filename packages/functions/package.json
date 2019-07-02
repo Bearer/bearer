@@ -1,7 +1,7 @@
 {
   "private": false,
   "name": "@bearer/functions",
-  "version": "1.4.0",
+  "version": "1.6.0",
   "description": "Bearer Functions",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -23,7 +23,7 @@
   },
   "dependencies": {
     "@bearer/logger": "^1.0.2",
-    "@bearer/x-ray": "^1.4.0",
+    "@bearer/x-ray": "^1.6.0",
     "axios": "^0.18.0"
   },
   "devDependencies": {

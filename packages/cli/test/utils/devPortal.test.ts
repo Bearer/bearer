@@ -1,8 +1,11 @@
-import { devPortalClient } from '../../src/utils/devPortal'
-import * as nock from 'nock'
+import { devPortalClient, withFreshToken } from '../../src/utils/devPortal'
+
+jest.mock('../../src/actions/login')
+
+import { promptToLogin } from '../../src/actions/login'
 
 describe('devPortalClient', () => {
-  it('export a facotry and expect a command as argument', () => {
+  it('export a factory and expect a command as argument', () => {
     expect(devPortalClient).toHaveLength(1)
   })
 
@@ -10,26 +13,42 @@ describe('devPortalClient', () => {
     const instance = devPortalClient({ constants: { DeveloperPortalAPIUrl: 'http://test.bearer.sh' } } as any)
     expect(instance.request).toHaveLength(1)
   })
+})
 
-  describe('instance', () => {
-    function setup({ token }: { token?: { access_token: string } }) {
+describe('withFreshToken', () => {
+  describe('when token is still valid', () => {
+    it('does nothing', async () => {
       const command = {
-        constants: { DeveloperPortalAPIUrl: 'http://test.bearer.sh' },
-        bearerConfig: { getToken: jest.fn(() => token) }
-      } as any
-      const instance = devPortalClient(command)
-      return instance
-    }
-
-    it('throws error no token present', async () => {
-      nock('http://test.bearer.sh', { reqheaders: { authorization: 'Bearer valid_token' } })
-        .post('/', { query: 'somehting' })
-        .reply(200, 'OK')
-      const instance = setup({ token: { access_token: 'valid_token' } })
-
-      const { data } = await instance.request({ query: 'somehting' })
-
-      expect(data).toEqual('OK')
+        bearerConfig: {
+          getToken: jest.fn(() => ({
+            expires_at: Date.now() + 2000,
+            refresh_token: 'a token'
+          }))
+        }
+      }
+      await withFreshToken(command as any)
     })
+  })
+
+  describe('when token does not exists (never logged in)', () => {
+    it('prompt to log in', async () => {
+      const command = {
+        bearerConfig: {
+          getToken: jest.fn()
+        },
+        colors: {
+          bold: jest.fn()
+        },
+        log: jest.fn()
+      }
+
+      await withFreshToken(command as any)
+
+      expect(promptToLogin).toHaveBeenCalledTimes(1)
+    })
+  })
+
+  describe('when token is outdated', () => {
+    it('refresh the token', () => {})
   })
 })

@@ -1,5 +1,4 @@
 import BaseCommand from '../../base-command'
-import { ensureFreshToken } from '../../utils/decorators'
 
 export default class IntegrationsList extends BaseCommand {
   static description = 'list deployed integrations'
@@ -10,7 +9,6 @@ export default class IntegrationsList extends BaseCommand {
 
   static args = []
 
-  @ensureFreshToken()
   async run() {
     try {
       const { data } = await this.devPortalClient.request<{ integrations: Integration[] }>({

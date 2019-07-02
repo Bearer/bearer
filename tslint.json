@@ -13,6 +13,7 @@
       "**/lib/**",
       "**/www/**",
       "package.json",
+      "packages/cli/package.json",
       ".github/PULL_REQUEST_TEMPLATE.md"
     ]
   }

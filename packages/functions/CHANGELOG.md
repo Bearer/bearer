@@ -3,6 +3,32 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.6.0](https://github.com/Bearer/bearer/compare/v1.5.0...v1.6.0) (2019-07-02)
+
+**Note:** Version bump only for package @bearer/functions
+
+
+
+
+
+# [1.5.0](https://github.com/Bearer/bearer/compare/v1.4.1...v1.5.0) (2019-07-02)
+
+
+### Bug Fixes
+
+* **functions:** remove x-ray dependency ([16f0f91](https://github.com/Bearer/bearer/commit/16f0f91))
+* add statusCode to fetch ([#697](https://github.com/Bearer/bearer/issues/697)) ([2bfa2ad](https://github.com/Bearer/bearer/commit/2bfa2ad))
+* revert current behaviour ([8b178e4](https://github.com/Bearer/bearer/commit/8b178e4))
+
+
+### Features
+
+* **x-ray:** drop more information into logs ([90c35e8](https://github.com/Bearer/bearer/commit/90c35e8))
+
+
+
+
+
 # [1.4.0](https://github.com/Bearer/bearer/compare/v1.3.1...v1.4.0) (2019-06-20)
 
 
