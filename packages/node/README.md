@@ -18,7 +18,7 @@ Get your Bearer's [credentials](https://app.bearer.sh/keys) and setup Bearer as 
 import Bearer from '@bearer/node'
 
 const bearerClient = Bearer(process.env.BEARER_API_KEY) // copy and paste the `API key`
-const github = bearerClient.integration('INTEGRATION_UUID') // you'll find it on the Bearer's dashboard
+const github = bearerClient.integration('INTEGRATION_ID') // you'll find it on the Bearer's dashboard
 
 github
   .get('/users/repos')
