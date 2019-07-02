@@ -28,7 +28,7 @@
     "@bearer/logger": "^1.6.1",
     "@bearer/transpiler": "^1.6.1",
     "@bearer/types": "^1.6.1",
-    "@koa/cors": "^2.2.2",
+    "@koa/cors": "^3.0.0",
     "amazon-cognito-identity-js": "^2.0.3",
     "aws-sdk": "^2.224.1",
     "axios": "^0.18.0",
