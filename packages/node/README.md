@@ -49,4 +49,4 @@ bearerClient
 
 _Note 1_: we are using axios as the http client. Each `.get()`, `.post()`, `.put()`, ... or `.invoke()` returns an Axios Promise. https://github.com/axios/axios
 
-_Note 2_: If you are using ExpressJS, have a look at the [ExpressJS](https://github.com/Bearer/bearer/tree/master/packages/express) client
+_Note 2_: If you are using ExpressJS, have a look at the [@bearer/express](https://github.com/Bearer/bearer/tree/master/packages/express) client
