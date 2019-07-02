@@ -3,12 +3,25 @@ import uuid = require('uuid')
 import console from 'console'
 
 import log from './logger'
+import stream from 'stream'
 
-export const overrideConsole = (module: typeof console, userLogger: any = log.extend('user')) => {
+const out = new stream.Writable()
+
+out._write = (chunk, _encoding, next) => {
+  userLogger('%j', buildLog(chunk.toString()))
+  next()
+}
+
+const userLogger = log.extend('user')
+
+const myConsole = new console.Console(out)
+
+export const overrideConsole = (module: typeof console) => {
   const _log = module.log
 
-  module.log = (args: any) => {
-    userLogger('%j', buildLog(args))
+  module.log = (...args: any) => {
+    myConsole.log(args)
+
     return _log.apply(module, args)
   }
 }
@@ -19,7 +32,7 @@ const buildLog = (args: any) => {
     payloadType: 'DEBUG',
     service: 'function',
     payload: {
-      log: args.toString(),
+      log: args,
       intentName: _HANDLER,
       uuid: uuid()
     },
