@@ -4,11 +4,9 @@ import * as path from 'path'
 
 import BaseCommand from '../../base-command'
 import { RequireIntegrationFolder } from '../../utils/decorators'
-import prepareConfig from '../../utils/prepare-config'
+import prepareConfig, { HANDLER_NAME } from '../../utils/prepare-config'
 
 const CONFIG_FILE = 'bearer.config.json'
-const HANDLER_NAME = 'index'
-const HANDLER_NAME_WITH_EXT = [HANDLER_NAME, 'js'].join('.')
 
 export default class PackFunctions extends BaseCommand {
   static description = 'Pack integration functions'
@@ -55,18 +53,17 @@ export default class PackFunctions extends BaseCommand {
 
     try {
       // add functions
-      archive.directory(this.locator.buildFunctionsDir, false)
+      archive.directory(this.locator.buildFunctionsResourcePath('dist'), false)
       // add CONFIG
       const functions = await this.retrieveFunctions()
 
-      const { config, handlers } = buildLambdaDefinitions(functions)
+      const { config } = buildLambdaDefinitions(functions)
       const finalConfig = await this.retrieveAuthConfig(config)
 
       archive.append(JSON.stringify(finalConfig, null, 2), { name: CONFIG_FILE })
 
       // add handlers
       this.debug(`Generated config: ${JSON.stringify(config, null, 2)}`)
-      archive.append(handlers, { name: HANDLER_NAME_WITH_EXT })
 
       // ZIP
       archive.finalize()
@@ -116,7 +113,6 @@ type TLambdaDefinition = {
   config: {
     functions: Record<string, string>[]
   }
-  handlers: string
 }
 
 export function buildLambdaDefinitions(functions: TFunctionNames): TLambdaDefinition {
@@ -129,18 +125,6 @@ export function buildLambdaDefinitions(functions: TFunctionNames): TLambdaDefini
         },
         [] as Record<string, string>[]
       )
-    },
-    handlers: buildLambdaIndex(functions)
+    }
   }
-}
-
-function buildLambdaIndex(functions: TFunctionNames): string {
-  return functions
-    .map((func, index) => {
-      const funcConstName = `func${index}`
-      return `const ${funcConstName} = require("./dist/${func}").default;
-module.exports['${func}'] = ${funcConstName}.init();
-`
-    })
-    .join('\n')
 }

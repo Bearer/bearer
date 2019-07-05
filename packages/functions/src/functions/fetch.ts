@@ -1,5 +1,5 @@
 import debug from '@bearer/logger'
-import { bearerOverride, setupFunctionIdentifiers } from '@bearer/x-ray'
+import { setupFunctionIdentifiers } from '@bearer/x-ray'
 
 import * as d from '../declaration'
 import { eventAsActionParams, BACKEND_ONLY_ERROR } from './utils'
@@ -53,7 +53,6 @@ export abstract class FetchData<ReturnedData = any, TError = any, AuthContext = 
   }
 
   static init() {
-    bearerOverride()
     return FetchData.call(this as any)
   }
 }

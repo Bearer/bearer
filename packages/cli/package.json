@@ -47,7 +47,6 @@
     "open": "^6.0.0",
     "rc": "^1.2.8",
     "sqlite3": "^4.0.2",
-    "ts-loader": "^5.3.3",
     "ts-node": "^8.0.3",
     "tslib": "^1",
     "typescript-json-schema": "^0.34.0",

@@ -38,3 +38,6 @@ export default (authConfigFile: string, buid: string, functionsDir: string): Pro
       })
   })
 }
+
+export const HANDLER_NAME = 'index'
+export const HANDLER_NAME_WITH_EXT = [HANDLER_NAME, 'js'].join('.')

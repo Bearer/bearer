@@ -1,5 +1,7 @@
 import { flags } from '@oclif/command'
 import * as globby from 'globby'
+import * as fs from 'fs-extra'
+import * as ts from 'typescript'
 import * as Listr from 'listr'
 import * as path from 'path'
 import * as webpack from 'webpack'
@@ -9,6 +11,7 @@ import installDependencies from '../../tasks/install-dependencies'
 import { RequireIntegrationFolder } from '../../utils/decorators'
 import GenerateApiDocumenation from '../generate/api-documentation'
 import compilerOptions from '../../utils/function-ts-compiler-options'
+import prepareConfig, { HANDLER_NAME_WITH_EXT } from '../../utils/prepare-config'
 
 const skipInstall = 'skip-install'
 
@@ -60,21 +63,42 @@ export default class BuildFunctions extends BaseCommand {
   transpile = (entriesPath: string, distPath: string): Promise<string[]> => {
     return new Promise<string[]>(async (resolve, reject) => {
       try {
+        // generate bundle
         const files = await globby([`${entriesPath}/*.ts`])
+
         if (!files.length) {
           return reject(new Error('No func to transpile'))
         }
-        console.log('ok')
+
+        // transpile ts files
+        files.forEach(file => {
+          const content = fs.readFileSync(file, { encoding: 'utf8' })
+          const { outputText } = ts.transpileModule(content, {
+            compilerOptions: { ...compilerOptions, module: ts.ModuleKind.ES2015 }
+          })
+          const newFile = path.join(this.locator.buildFunctionsDir, file.replace(entriesPath, '').replace(/ts$/, 'js'))
+          fs.writeFileSync(newFile, outputText, {
+            encoding: 'utf8'
+          })
+        })
+
+        const functions = await this.retrieveFunctions()
+        const indexHandler = this.locator.buildFunctionsResourcePath(HANDLER_NAME_WITH_EXT)
+        // generate handler
+
+        fs.writeFileSync(indexHandler, buildLambdaIndex(functions), {
+          encoding: 'utf8'
+        })
 
         const config: webpack.Configuration = {
           ...baseConfig,
-          // optimization: {
-          //   minimize: false
-          // },
-          entry: getEntries(files),
+          optimization: {
+            minimize: false
+          },
+          entry: indexHandler,
           output: {
             libraryTarget: 'commonjs2',
-            filename: '[name].js',
+            filename: HANDLER_NAME_WITH_EXT,
             path: distPath
           },
           // the sdk is already provided within the lamnda through a layer
@@ -106,34 +130,41 @@ export default class BuildFunctions extends BaseCommand {
       }
     })
   }
+
+  async retrieveFunctions(): Promise<string[]> {
+    try {
+      const config = await prepareConfig(
+        this.locator.authConfigPath,
+        this.bearerConfig.bearerUid,
+        this.locator.srcFunctionsDir
+      )
+      return config.functions
+    } catch (e) {
+      throw e
+    }
+  }
 }
 
-function getEntries(files: string[]): webpack.Entry {
-  return files.reduceRight(
-    (entriesAcc, file) => ({
-      ...entriesAcc,
-      [path.basename(file).split('.')[0]]: file
-    }),
-    {}
+function buildLambdaIndex(functions: string[]): string {
+  return functions.reduce(
+    (out, func, index) => {
+      const funcConstName = `func${index}`
+      return `${out}\n
+const ${funcConstName} = require("./${func}").default;
+module.exports['${func}'] = ${funcConstName}.init();
+`
+    },
+    `const bearerOverride = require('@bearer/x-ray').bearerOverride;
+bearerOverride()
+// functions
+`
   )
 }
 
 const baseConfig: Partial<webpack.Configuration> = {
   mode: 'production',
-  module: {
-    rules: [
-      {
-        test: /\.tsx?$/,
-        loader: 'ts-loader',
-        exclude: /node_modules/,
-        options: {
-          compilerOptions
-        }
-      }
-    ]
-  },
   resolve: {
-    extensions: ['.tsx', '.ts', '.js', '.json']
+    extensions: ['.js', '.json']
   },
   target: 'node'
 }
