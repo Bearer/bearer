@@ -54,13 +54,15 @@ export const overrideRequestMethod = (
       parsedUrl = urlParser.parse(url, true)
     } else {
       parsedUrl = url
+      // http accepts either host or hostname
+      parsedUrl.protocol = parsedUrl.protocol || 'http'
+      parsedUrl.hostname = parsedUrl.hostname || parsedUrl.host
     }
-    const { port, path, host, protocol, auth, hostname, hash, search, query, pathname, href } = parsedUrl
+    const { port, path, protocol, auth, hostname, hash, search, query, pathname, href } = parsedUrl
     info.request = {
       ...info.request,
       port,
       path,
-      host,
       protocol,
       auth,
       hostname,
@@ -69,7 +71,7 @@ export const overrideRequestMethod = (
       query,
       pathname,
       href,
-      url: `${protocol}//${host || hostname}${path}`
+      url: `${protocol}//${hostname}${path}`
     }
     const requestData: string[] = []
     const requestStart = Date.now()

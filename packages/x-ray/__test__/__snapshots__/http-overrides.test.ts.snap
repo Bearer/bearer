@@ -32,7 +32,6 @@ Array [
         "body": "",
         "hash": null,
         "headers": Object {},
-        "host": "bearer.sh",
         "hostname": "bearer.sh",
         "href": "https://bearer.sh/path?ok=false",
         "method": "get",
@@ -95,17 +94,16 @@ Array [
         "headers": Object {
           "useragent": "Bearer",
         },
-        "host": "bearer.sh:443",
         "hostname": "bearer.sh",
         "href": undefined,
         "method": "get",
         "path": "/postPath?postQuery=sponge",
         "pathname": undefined,
         "port": 443,
-        "protocol": undefined,
+        "protocol": "http",
         "query": undefined,
         "search": undefined,
-        "url": "undefined//bearer.sh:443/postPath?postQuery=sponge",
+        "url": "http//bearer.sh/postPath?postQuery=sponge",
       },
       "response": Object {
         "body": "{\\"great\\":\\"sponge bob is the king of posts\\"}",
@@ -113,6 +111,66 @@ Array [
           "content-type": "application/json",
         },
         "status": 204,
+      },
+    },
+    "payloadType": "EXTERNAL_CALL",
+    "service": "function",
+    "tid": "aws_trace",
+  },
+]
+`;
+
+exports[`overrideRequestMethod https request when hostname attribute is passed logs the same way 1`] = `
+Array [
+  "%j",
+  Object {
+    "message": Object {
+      "clientId": "a-client-id",
+      "integrationUuid": "custom0buid",
+      "intentName": undefined,
+      "method": "get",
+      "path": "bearer.sh",
+      "pathname": undefined,
+      "stage": undefined,
+      "tid": "aws_trace",
+      "type": "externalCall",
+    },
+    "timestamp": 5,
+  },
+]
+`;
+
+exports[`overrideRequestMethod https request when hostname attribute is passed logs the same way 2`] = `
+Array [
+  "%j",
+  Object {
+    "buid": "custom0buid",
+    "payload": Object {
+      "duration": 0,
+      "request": Object {
+        "auth": undefined,
+        "body": "{\\"todo\\":\\"Buy the milk\\"}",
+        "hash": undefined,
+        "headers": Object {
+          "useragent": "Bearer",
+        },
+        "hostname": "bearer.sh",
+        "href": undefined,
+        "method": "get",
+        "path": "/postPath?postQuery=sponge",
+        "pathname": undefined,
+        "port": 443,
+        "protocol": "https",
+        "query": undefined,
+        "search": undefined,
+        "url": "https//bearer.sh/postPath?postQuery=sponge",
+      },
+      "response": Object {
+        "body": "{\\"great\\":\\"sponge bob is the king\\"}",
+        "headers": Object {
+          "content-type": "application/json",
+        },
+        "status": 201,
       },
     },
     "payloadType": "EXTERNAL_CALL",

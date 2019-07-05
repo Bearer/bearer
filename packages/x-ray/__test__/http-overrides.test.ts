@@ -60,19 +60,21 @@ describe('overrideRequestMethod', () => {
     })
 
     describe('request', () => {
-      it('logs request', async () => {
+      const data = JSON.stringify({
+        todo: 'Buy the milk'
+      })
+
+      beforeAll(() => {
         mockDuration(15)
 
         nock(url)
           .post('/postPath?postQuery=sponge')
           .reply(201, { great: 'sponge bob is the king' })
+      })
 
-        const data = JSON.stringify({
-          todo: 'Buy the milk'
-        })
-
-        const options = {
-          hostname: 'bearer.sh',
+      it('logs request', async () => {
+        const options: https.RequestOptions = {
+          host: 'bearer.sh',
           path: '/postPath?postQuery=sponge',
           method: 'POST',
           headers: {
@@ -93,6 +95,34 @@ describe('overrideRequestMethod', () => {
         expect(billingLogger.mock.calls[0]).toMatchSnapshot()
         expect(userLogger).toHaveBeenCalledTimes(1)
         expect(userLogger.mock.calls[0]).toMatchSnapshot()
+      })
+
+      describe('when hostname attribute is passed', () => {
+        it('logs the same way', async () => {
+          const options: https.RequestOptions = {
+            host: 'bearer.sh',
+            path: '/postPath?postQuery=sponge',
+            method: 'POST',
+            protocol: 'https',
+            headers: {
+              UserAgent: 'Bearer'
+            }
+          }
+
+          await new Promise((resolve, reject) => {
+            const req = https.request(options, res => {
+              res.on('end', resolve)
+              res.on('error', reject)
+            })
+            req.write(data)
+            req.end()
+          })
+
+          expect(billingLogger).toHaveBeenCalledTimes(1)
+          expect(billingLogger.mock.calls[0]).toMatchSnapshot()
+          expect(userLogger).toHaveBeenCalledTimes(1)
+          expect(userLogger.mock.calls[0]).toMatchSnapshot()
+        })
       })
     })
 
