@@ -2,11 +2,7 @@ import { buildLambdaDefinitions } from '../../../src/commands/pack/functions'
 
 describe('pack:functions', () => {
   describe('lambdas declaration', () => {
-    const { config, handlers } = buildLambdaDefinitions(['my-function', 'spongeBobFunction'])
-
-    it('generates a correct handlers', () => {
-      expect(handlers).toMatchSnapshot()
-    })
+    const { config } = buildLambdaDefinitions(['my-function', 'spongeBobFunction'])
 
     it('build functions bearer config', () => {
       expect(config).toEqual({

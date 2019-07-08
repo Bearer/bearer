@@ -2,7 +2,6 @@ import * as ts from 'typescript'
 const options: ts.CompilerOptions = {
   allowUnreachableCode: false,
   declaration: false,
-  lib: ['es2017'],
   noUnusedLocals: false,
   noUnusedParameters: false,
   allowSyntheticDefaultImports: true,

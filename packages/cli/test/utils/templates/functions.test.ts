@@ -24,8 +24,7 @@ describe('functions generator', () => {
       beforeAll(async () => {
         const command = { silent: true, locator: { srcFunctionsDir: destination } }
         files = await generateFunction(command as any, auth, functionType, `${auth}-${functionType}-Function`)
-        const options = ts.convertCompilerOptionsFromJson(compilerOptions, 'ok')
-        const program = ts.createProgram(files, { ...options.options, noEmit: true })
+        const program = ts.createProgram(files, { ...compilerOptions, noEmit: true, skipLibCheck: true })
         const emitResult = program.emit()
         diagnostics = ts.getPreEmitDiagnostics(program).concat(emitResult.diagnostics)
       })
