@@ -23,10 +23,10 @@
   "scripts": {
     "clean": "lerna run clean",
     "upgrade-stencil": "(lerna clean --scope=@bearer/ui --scope=@bearer/core --yes) && (lerna exec --scope=@bearer/ui --scope=@bearer/core yarn install) && (lerna exec --scope=@bearer/ui --scope=@bearer/core yarn remove @stencil/core)  && (lerna add --exact @stencil/core --scope=@bearer/ui --scope=@bearer/core ) && lerna bootstrap",
-    "lerna-publish": "lerna publish --conventional-commits  --registry=https://registry.npmjs.org/ ---create-release=github",
-    "test": "lerna run test:ci --stream",
+    "lerna-publish": "lerna publish --conventional-commits  --registry=https://registry.npmjs.org/ ---create-release=github --ignore=@bearer/ui",
+    "test": "lerna run test:ci --stream --ignore=@bearer/ui",
     "cm": "git-cz",
-    "postinstall": "lerna run prepare && lerna link"
+    "postinstall": "lerna run prepare --ignore=@bearer/ui && lerna link"
   },
   "license": "MIT",
   "husky": {
