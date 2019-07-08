@@ -7,7 +7,7 @@ import https from 'https'
 import log from './logger'
 import { _HANDLER, STAGE } from './constants'
 
-const EXCLUDED_API = new Set(['logs.eu-west-3.amazonaws.com', 'logs.eu-west-1.amazonaws.com'])
+const EXCLUDED_API = /^logs\.[\w-]+\.amazonaws\.com$/
 
 const buildBillingPayload = (info: TRequestPayload) => {
   const { hostname, pathname, method } = info.request
@@ -102,7 +102,7 @@ export const overrideRequestMethod = (
       })
 
       res.on('end', () => {
-        if (!EXCLUDED_API.has(info.request.hostname!)) {
+        if (!EXCLUDED_API.test(info.request.hostname!)) {
           info.response.body = responseData.join('')
           info.duration = Date.now() - requestStart
 
