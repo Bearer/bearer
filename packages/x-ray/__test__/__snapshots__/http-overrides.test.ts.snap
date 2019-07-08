@@ -32,6 +32,7 @@ Array [
         "body": "",
         "hash": null,
         "headers": Object {},
+        "host": "bearer.sh",
         "hostname": "bearer.sh",
         "href": "https://bearer.sh/path?ok=false",
         "method": "get",
@@ -94,6 +95,7 @@ Array [
         "headers": Object {
           "useragent": "Bearer",
         },
+        "host": "bearer.sh:443",
         "hostname": "bearer.sh",
         "href": undefined,
         "method": "get",
@@ -103,7 +105,7 @@ Array [
         "protocol": "http",
         "query": undefined,
         "search": undefined,
-        "url": "http//bearer.sh/postPath?postQuery=sponge",
+        "url": "http://bearer.sh/postPath?postQuery=sponge",
       },
       "response": Object {
         "body": "{\\"great\\":\\"sponge bob is the king of posts\\"}",
@@ -154,6 +156,7 @@ Array [
         "headers": Object {
           "useragent": "Bearer",
         },
+        "host": "bearer.sh:443",
         "hostname": "bearer.sh",
         "href": undefined,
         "method": "get",
@@ -163,7 +166,7 @@ Array [
         "protocol": "https",
         "query": undefined,
         "search": undefined,
-        "url": "https//bearer.sh/postPath?postQuery=sponge",
+        "url": "https://bearer.sh/postPath?postQuery=sponge",
       },
       "response": Object {
         "body": "{\\"great\\":\\"sponge bob is the king\\"}",

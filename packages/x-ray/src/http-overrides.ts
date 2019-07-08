@@ -49,16 +49,18 @@ export const overrideRequestMethod = (
     const url: string | urlParser.UrlWithParsedQuery = args[0]
 
     let parsedUrl: urlParser.UrlWithParsedQuery
-
+    let builtUrl: string = ''
     if (typeof url === 'string') {
       parsedUrl = urlParser.parse(url, true)
+      builtUrl = url
     } else {
       parsedUrl = url
       // http accepts either host or hostname
       parsedUrl.protocol = parsedUrl.protocol || 'http'
       parsedUrl.hostname = parsedUrl.hostname || parsedUrl.host
     }
-    const { port, path, protocol, auth, hostname, hash, search, query, pathname, href } = parsedUrl
+    const { port, path, protocol, auth, hostname, hash, search, query, pathname, href, host } = parsedUrl
+
     info.request = {
       ...info.request,
       port,
@@ -71,7 +73,8 @@ export const overrideRequestMethod = (
       query,
       pathname,
       href,
-      url: `${protocol}//${hostname}${path}`
+      host,
+      url: builtUrl || `${protocol}://${hostname}${path}`
     }
     const requestData: string[] = []
     const requestStart = Date.now()
