@@ -12,8 +12,8 @@ pipeline {
         }
     }
 
-    environment { 
-        AWS_ACCESS = credentials('aws-identity') 
+    environment {
+        AWS_ACCESS = credentials('aws-identity')
         NPM_TOKEN =  credentials("npm-token")
         JENKINS_PRIVATE_KEY = credentials("jenkins-github-ssh-private")
     }
@@ -29,27 +29,28 @@ pipeline {
     }
 
     stages {
+
         stage('checkout') {
+            when {
+                expression { params.LERNA_TAG  != '' }
+                branch 'master'
+            }
             steps {
                 checkout scm
             }
         }
+
         stage("Build") {
+            when {
+                expression { params.LERNA_TAG  != '' }
+                branch 'master'
+            }
             steps {
                 container("bearercli") {
                     ansiColor('xterm') {
                         sh ".jenkins/prepare.sh"
                         sh "yarn install --frozen-lockfile"
                      }
-                }
-            }
-        }
-        stage('Test') {
-            steps {
-                container("bearercli") {
-                    ansiColor('xterm') {
-                        sh ".jenkins/test.sh"
-                    }
                 }
             }
         }
