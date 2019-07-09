@@ -64,7 +64,7 @@ export default class BuildFunctions extends BaseCommand {
     return new Promise<string[]>(async (resolve, reject) => {
       try {
         // generate bundle
-        const files = await globby([`${entriesPath}/*.ts`])
+        const files = await globby([`${entriesPath}/**/*.ts`])
 
         if (!files.length) {
           return reject(new Error('No func to transpile'))
@@ -77,6 +77,10 @@ export default class BuildFunctions extends BaseCommand {
             compilerOptions: { ...compilerOptions, module: ts.ModuleKind.ES2015 }
           })
           const newFile = path.join(this.locator.buildFunctionsDir, file.replace(entriesPath, '').replace(/ts$/, 'js'))
+          const dir = path.dirname(newFile)
+          if (!fs.pathExistsSync(dir)) {
+            fs.mkdirpSync(dir)
+          }
           fs.writeFileSync(newFile, outputText, {
             encoding: 'utf8'
           })
