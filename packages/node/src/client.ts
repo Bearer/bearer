@@ -53,30 +53,30 @@ class BearerClient {
    */
 
   public get = (endpoint: string, parameters?: BearerRequestParameters, options?: any) => {
-    return this.makeRequest('GET', endpoint, parameters, options)
+    return this.request('GET', endpoint, parameters, options)
   }
 
   public head = (endpoint: string, parameters?: BearerRequestParameters, options?: any) => {
-    return this.makeRequest('HEAD', endpoint, parameters, options)
+    return this.request('HEAD', endpoint, parameters, options)
   }
 
   public post = (endpoint: string, parameters?: BearerRequestParameters, options?: any) => {
-    return this.makeRequest('POST', endpoint, parameters, options)
+    return this.request('POST', endpoint, parameters, options)
   }
 
   public put = (endpoint: string, parameters?: BearerRequestParameters, options?: any) => {
-    return this.makeRequest('PUT', endpoint, parameters, options)
+    return this.request('PUT', endpoint, parameters, options)
   }
 
   public delete = (endpoint: string, parameters?: BearerRequestParameters, options?: any) => {
-    return this.makeRequest('DELETE', endpoint, parameters, options)
+    return this.request('DELETE', endpoint, parameters, options)
   }
 
   public patch = (endpoint: string, parameters?: BearerRequestParameters, options?: any) => {
-    return this.makeRequest('PATCH', endpoint, parameters, options)
+    return this.request('PATCH', endpoint, parameters, options)
   }
 
-  protected makeRequest = (
+  public request = (
     method: BearerRequestMethod,
     endpoint: string,
     parameters?: BearerRequestParameters,

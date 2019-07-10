@@ -8,6 +8,10 @@ const distantApi = jest.fn(() => okResponse)
 describe('Bearer client', () => {
   const client = clientFactory(apiKey)
 
+  beforeEach(() => {
+    distantApi.mockClear()
+  })
+
   it('returns a client instance', () => {
     expect(client).toBeInstanceOf(Bearer)
   })
@@ -23,7 +27,6 @@ You'll find you API key at this location: https://app.bearer.sh/keys`
 
   describe('#invoke', () => {
     it('send request to the function', async () => {
-      distantApi.mockClear()
       nock('https://int.bearer.sh', {
         reqheaders: {
           authorization: apiKey
@@ -42,63 +45,121 @@ You'll find you API key at this location: https://app.bearer.sh/keys`
   describe('#integration', () => {
     const integrationName = '12345'
     const api = client.integration(integrationName)
+    const query = { sponge: 'bob' }
+    const headers = {}
+    const body = '{"body":"data"}'
+
+    interface IMockRequestParams {
+      method: string
+      extraHeaders?: Record<string, string>
+      body?: any
+    }
+
+    const mockRequest = ({ method, extraHeaders = {}, body }: IMockRequestParams) => {
+      nock('https://int.bearer.sh', {
+        reqheaders: {
+          authorization: apiKey,
+          ...headers,
+          ...extraHeaders
+        }
+      })
+        .intercept(`/api/v4/functions/backend/${integrationName}/bearer-proxy/test`, method, body)
+        .once()
+        .query(query)
+        .reply(200, distantApi)
+    }
 
     it('performs correct API calls', async () => {
-      distantApi.mockClear()
-      nock('https://int.bearer.sh', {
-        reqheaders: {
-          authorization: apiKey
-        }
-      })
-        .post(`/api/v4/functions/backend/${integrationName}/bearer-proxy/test`)
-        .query({ sponge: 'bob' })
-        .reply(200, distantApi)
+      mockRequest({ body, method: 'POST' })
 
-      const { data } = await api.post('/test', { query: { sponge: 'bob' } })
+      const { data } = await api.post('/test', { headers, query, body })
 
       expect(distantApi).toHaveBeenCalled()
       expect(data).toEqual(okResponse)
     })
 
-    it('allows to make authenticated API calls', async () => {
-      const authId = 'abcde12345...'
-      distantApi.mockClear()
-      nock('https://int.bearer.sh', {
-        reqheaders: {
-          authorization: apiKey,
-          'Bearer-Auth-Id': authId
-        }
+    describe('#request', () => {
+      it('supports GET requests', async () => {
+        mockRequest({ method: 'GET' })
+
+        const { data } = await api.request('GET', '/test', { headers, query })
+
+        expect(distantApi).toHaveBeenCalled()
+        expect(data).toEqual(okResponse)
       })
-        .post(`/api/v4/functions/backend/${integrationName}/bearer-proxy/test`)
-        .query({ sponge: 'bob' })
-        .reply(200, distantApi)
 
-      const { data } = await api.auth(authId).post('/test', { query: { sponge: 'bob' } })
+      it('supports HEAD requests', async () => {
+        mockRequest({ method: 'HEAD' })
 
-      expect(distantApi).toHaveBeenCalled()
-      expect(data).toEqual(okResponse)
+        const { data } = await api.request('HEAD', '/test', { headers, query })
+
+        expect(distantApi).toHaveBeenCalled()
+        expect(data).toEqual(okResponse)
+      })
+
+      it('supports POST requests', async () => {
+        mockRequest({ body, method: 'POST' })
+
+        const { data } = await api.request('POST', '/test', { headers, query, body })
+
+        expect(distantApi).toHaveBeenCalled()
+        expect(data).toEqual(okResponse)
+      })
+
+      it('supports PUT requests', async () => {
+        mockRequest({ body, method: 'PUT' })
+
+        const { data } = await api.request('PUT', '/test', { headers, query, body })
+
+        expect(distantApi).toHaveBeenCalled()
+        expect(data).toEqual(okResponse)
+      })
+
+      it('supports PATCH requests', async () => {
+        mockRequest({ body, method: 'PATCH' })
+
+        const { data } = await api.request('PATCH', '/test', { headers, query, body })
+
+        expect(distantApi).toHaveBeenCalled()
+        expect(data).toEqual(okResponse)
+      })
+
+      it('supports DELETE requests', async () => {
+        mockRequest({ body, method: 'DELETE' })
+
+        const { data } = await api.request('DELETE', '/test', { headers, query, body })
+
+        expect(distantApi).toHaveBeenCalled()
+        expect(data).toEqual(okResponse)
+      })
     })
 
-    it('has an alias function "authenticate"', async () => {
-      expect(api.authenticate).toEqual(api.auth)
+    describe('#auth', () => {
+      it('sends any configured auth id in a Bearer-Auth-Id header', async () => {
+        const authId = 'abcde12345...'
+        mockRequest({ method: 'POST', extraHeaders: { 'Bearer-Auth-Id': authId } })
+
+        const { data } = await api.auth(authId).post('/test', { query })
+
+        expect(distantApi).toHaveBeenCalled()
+        expect(data).toEqual(okResponse)
+      })
+
+      it('has an alias function "authenticate"', async () => {
+        expect(api.authenticate).toEqual(api.auth)
+      })
     })
 
-    it('sends any configured setup id in a Bearer-Setup-Id header', async () => {
-      const setupId = 'test-setup-id'
+    describe('#setup', () => {
+      it('sends any configured setup id in a Bearer-Setup-Id header', async () => {
+        const setupId = 'test-setup-id'
+        mockRequest({ method: 'GET', extraHeaders: { 'Bearer-Setup-Id': setupId } })
 
-      nock('https://int.bearer.sh', {
-        reqheaders: {
-          authorization: apiKey,
-          'Bearer-Setup-Id': setupId
-        }
+        const { data } = await api.setup(setupId).get('/test', { query })
+
+        expect(distantApi).toHaveBeenCalled()
+        expect(data).toEqual(okResponse)
       })
-        .get(`/api/v4/functions/backend/${integrationName}/bearer-proxy/test`)
-        .reply(200, distantApi)
-
-      const { data } = await api.setup(setupId).get('/test')
-
-      expect(distantApi).toHaveBeenCalled()
-      expect(data).toEqual(okResponse)
     })
   })
 })
