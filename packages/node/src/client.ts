@@ -38,8 +38,12 @@ class BearerClient {
     readonly authId?: string
   ) {}
 
-  public auth = ({ setupId, authId }: { setupId?: string; authId?: string }) => {
-    return new BearerClient(this.integrationId, this.options, this.bearerApiKey, setupId, authId)
+  public auth = (authId: string) => {
+    return new BearerClient(this.integrationId, this.options, this.bearerApiKey, this.setupId, authId)
+  }
+
+  public setup = (setupId: string) => {
+    return new BearerClient(this.integrationId, this.options, this.bearerApiKey, setupId, this.authId)
   }
 
   public authenticate = this.auth // Alias

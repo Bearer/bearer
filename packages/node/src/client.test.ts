@@ -2,8 +2,8 @@ import nock from 'nock'
 
 import clientFactory, { Bearer } from './client'
 const apiKey = 'spongeBobApiKey'
-
-const distantApi = jest.fn(() => ({ ok: 'ok' }))
+const okResponse = { ok: 'ok' }
+const distantApi = jest.fn(() => okResponse)
 
 describe('Bearer client', () => {
   const client = clientFactory(apiKey)
@@ -35,7 +35,7 @@ You'll find you API key at this location: https://app.bearer.sh/keys`
       const { data } = await client.invoke('12345-integration-name', 'functionName')
 
       expect(distantApi).toHaveBeenCalled()
-      expect(data).toEqual({ ok: 'ok' })
+      expect(data).toEqual(okResponse)
     })
   })
 
@@ -57,7 +57,7 @@ You'll find you API key at this location: https://app.bearer.sh/keys`
       const { data } = await api.post('/test', { query: { sponge: 'bob' } })
 
       expect(distantApi).toHaveBeenCalled()
-      expect(data).toEqual({ ok: 'ok' })
+      expect(data).toEqual(okResponse)
     })
 
     it('allows to make authenticated API calls', async () => {
@@ -73,14 +73,32 @@ You'll find you API key at this location: https://app.bearer.sh/keys`
         .query({ sponge: 'bob' })
         .reply(200, distantApi)
 
-      const { data } = await api.auth({ authId }).post('/test', { query: { sponge: 'bob' } })
+      const { data } = await api.auth(authId).post('/test', { query: { sponge: 'bob' } })
 
       expect(distantApi).toHaveBeenCalled()
-      expect(data).toEqual({ ok: 'ok' })
+      expect(data).toEqual(okResponse)
     })
 
     it('has an alias function "authenticate"', async () => {
       expect(api.authenticate).toEqual(api.auth)
+    })
+
+    it('sends any configured setup id in a Bearer-Setup-Id header', async () => {
+      const setupId = 'test-setup-id'
+
+      nock('https://int.bearer.sh', {
+        reqheaders: {
+          authorization: apiKey,
+          'Bearer-Setup-Id': setupId
+        }
+      })
+        .get(`/api/v4/functions/backend/${integrationName}/bearer-proxy/test`)
+        .reply(200, distantApi)
+
+      const { data } = await api.setup(setupId).get('/test')
+
+      expect(distantApi).toHaveBeenCalled()
+      expect(data).toEqual(okResponse)
     })
   })
 })
