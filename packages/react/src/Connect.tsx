@@ -7,7 +7,7 @@ type TAuthPayload = { authId: string; integration: string }
 export interface IConnectProps {
   integration: string
   authId?: string
-  setupId: string
+  setupId?: string
   onSuccess: (data: TAuthPayload) => void
   onError?: (data: { authId?: string; integration: string; error: Error }) => void
   render: (props: { loading: boolean; connect: () => void; error: any }) => JSX.Element
