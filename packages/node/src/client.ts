@@ -176,12 +176,12 @@ in the form "{ headers: { "Foo": "bar" }, body: "My body" }"`)
  * Exports
  */
 
-export default (apiKey: string | undefined): Bearer => {
+export default (apiKey: string | undefined, options?: BearerClientOptions): Bearer => {
   if (!apiKey) {
     throw new InvalidAPIKey(apiKey)
   }
 
-  return new Bearer(apiKey)
+  return new Bearer(apiKey, options)
 }
 
 export { Bearer }
