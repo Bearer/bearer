@@ -42,7 +42,7 @@ export default class Bearer {
    * @argument {string} setupId Setup's identifier you received earlier, a Bearer reference containing all required information about auth mechanism
    * @argument {Object} options Optional parameters like authId if you already have one
    */
-  connect = (integration: string, setupId: string, { authId }: { authId?: string } = {}) => {
+  connect = (integration: string, setupId?: string, { authId }: { authId?: string } = {}) => {
     const query = formatQuery({
       setupId,
       authId,
