@@ -37,7 +37,7 @@ github
 
 // Making an authenticated POST
 github
-  .auth({ authId }) // Create an authId for GitHub on https://app.bearer.sh
+  .auth(authId) // Create an authId for GitHub on https://app.bearer.sh
   .post('/user/repos', { body: { name: 'Just setting up my Bearer.sh' } })
   .then(console.log)
   .catch(console.error)
