@@ -6,12 +6,10 @@ import { getSourceCode } from '../utils'
 import debug from '../logger'
 const logger = debug.extend('source-code-dumping')
 
-export default function dumpSourceCode(
-  { srcDirectory, buildDirectory }: SourceCodeTransformerOptions = {
-    srcDirectory,
-    buildDirectory
-  }
-): ts.TransformerFactory<ts.SourceFile> {
+export default function dumpSourceCode({
+  srcDirectory,
+  buildDirectory
+}: SourceCodeTransformerOptions): ts.TransformerFactory<ts.SourceFile> {
   return _transformContext => {
     return tsSourceFile => {
       logger('processing %s', tsSourceFile.fileName)
