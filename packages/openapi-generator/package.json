@@ -16,9 +16,9 @@
     "@types/jest": "^24.0.11",
     "@types/lodash.merge": "^4.6.6",
     "@types/node": "^10.12.19",
-    "jest": "^24.7.1",
-    "ts-jest": "^24.0.1",
-    "typescript": "^3.4.1"
+    "jest": "^24.8.0",
+    "ts-jest": "^24.0.2",
+    "typescript": "^3.5.3"
   },
   "scripts": {
     "start": "tsc --watch",
@@ -31,6 +31,6 @@
   },
   "dependencies": {
     "@bearer/functions": "^1.6.2",
-    "lodash.merge": "^4.6.1"
+    "lodash.merge": "^4.6.2"
   }
 }

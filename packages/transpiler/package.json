@@ -27,8 +27,8 @@
     "@types/jest": "^24.0.11",
     "@types/node": "^10.12.18",
     "globby": "^8.0.1",
-    "jest": "^24.7.1",
-    "ts-jest": "^24.0.1"
+    "jest": "^24.8.0",
+    "ts-jest": "^24.0.2"
   },
   "dependencies": {
     "@bearer/logger": "^1.6.1",
@@ -36,7 +36,7 @@
     "case": "^1.5.5",
     "command-line-args": "^5.0.2",
     "fs-extra": "^6.0.1",
-    "typescript": "^3.4.1",
+    "typescript": "^3.5.3",
     "typescript-json-schema": "^0.34.0"
   },
   "gitHead": "cb2654b19000e2ad6f31a0e4ed715a6298c8df2d"

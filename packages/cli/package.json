@@ -25,14 +25,14 @@
     "@oclif/plugin-update": "^1.3.3",
     "@oclif/plugin-warn-if-update-available": "^1.7.0",
     "archiver": "^3.0.0",
-    "axios": "^0.18.0",
+    "axios": "^0.19.0",
     "case": "^1.5.5",
     "chokidar": "^2.0.4",
     "cli-ux": "^5.2.1",
     "colors": "^1.3.1",
     "commander": "^2.19.0",
     "copy-template-dir": "^1.4.0",
-    "express": "^4.16.4",
+    "express": "^4.17.1",
     "find-up": "^3.0.0",
     "fs-extra": "^7.0.0",
     "get-port": "^4.2.0",
@@ -71,10 +71,10 @@
     "@types/open": "^6.1.0",
     "@types/webpack": "^4.4.27",
     "archiver": "^3.0.0",
-    "jest": "^24.7.1",
+    "jest": "^24.8.0",
     "nock": "^10.0.6",
-    "ts-jest": "^24.0.1",
-    "typescript": "^3.4.1"
+    "ts-jest": "^24.0.2",
+    "typescript": "^3.5.3"
   },
   "engines": {
     "node": ">=8.0.0"
