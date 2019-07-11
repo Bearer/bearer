@@ -4,6 +4,7 @@ import postRobot from 'post-robot'
 import { TIntegration } from './types'
 import debug from './logger'
 import { formatQuery } from './utils'
+import { EventEmitter } from './event'
 
 const logger = debug.extend('Bearer')
 const prefix = 'bearer'
@@ -14,14 +15,29 @@ const DEFAULT_OPTIONS = {
   refreshDebounceDelay: 200
 }
 
+const LISTENER_KEY = 'bearer-listeners'
+declare const window: Window & { [LISTENER_KEY]: EventEmitter }
+
 export default class Bearer {
+  static get authorizedListener() {
+    if (!window[LISTENER_KEY]) {
+      // TODO: get rid of post robot, too heqvy for our needs
+      window[LISTENER_KEY] = new EventEmitter()
+      postRobot.on('BEARER_AUTHORIZED', ({ data }) => {
+        window[LISTENER_KEY].emit(authorizeEvent(data.scenarioId || data.integrationId), data)
+      })
+      postRobot.on('BEARER_REJECTED', ({ data }) => {
+        window[LISTENER_KEY].emit(rejectEvent(data.scenarioId || data.integrationId), data)
+      })
+    }
+    return window[LISTENER_KEY]
+  }
+
   secured?: boolean
   config: TBearerOptions = DEFAULT_OPTIONS
   private registeredIntegrations: Record<string, boolean> = {}
   private observer?: MutationObserver
   private debounceRefresh: () => void
-  private authorizedListener!: postRobot.Cancellable
-  private rejectedListener!: postRobot.Cancellable
 
   constructor(readonly clientId: string | undefined, options: Partial<TBearerOptions> = {}) {
     this.config = { ...DEFAULT_OPTIONS, ...cleanOptions(options) }
@@ -50,20 +66,18 @@ export default class Bearer {
       clientId: this.clientId
     })
     const AUTHORIZED_URL = `${this.config.integrationHost}/v2/auth/${integration}?${query}`
-    // TODO: get rid of post robot, too heqvy for our needs
+
     const promise = new Promise<{ integration: string; authId: string }>((resolve, reject) => {
-      // TODO: use constants
-      if (this.authorizedListener) {
-        debug('canceling previous listener')
-        this.authorizedListener.cancel()
-        this.rejectedListener.cancel()
-      }
+      Bearer.authorizedListener.clearListeners(authorizeEvent(integration))
+      Bearer.authorizedListener.clearListeners(rejectEvent(integration))
+
       debug('add authorization listeners')
-      this.authorizedListener = postRobot.on('BEARER_AUTHORIZED', ({ data }) => {
+      Bearer.authorizedListener.once(authorizeEvent(integration), (data: any) => {
         debug('Authorized: %s => %j', integration, data)
         resolve({ ...data, integration })
       })
-      this.rejectedListener = postRobot.on('BEARER_REJECTED', ({ data }) => {
+
+      Bearer.authorizedListener.once(rejectEvent(integration), (data: any) => {
         debug('Rejected: %s => %j', integration, data)
         reject({ ...data, integration })
       })
@@ -258,6 +272,14 @@ function getScriptDOM(clientId: string, integration: TIntegration): HTMLScriptEl
   s.src = [integration.asset, [`clientId=${clientId}`].join('&')].join(separator)
   s.id = getScriptId(integration.uuid)
   return s
+}
+
+function authorizeEvent(intId: string) {
+  return `authorize_${intId}`
+}
+
+function rejectEvent(intId: string) {
+  return `reject_${intId}`
 }
 
 function buildQuery(params: any) {

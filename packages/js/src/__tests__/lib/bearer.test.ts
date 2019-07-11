@@ -2,9 +2,20 @@ import Bearer, { findElements } from '../../lib/bearer'
 
 const clientId = 'a-client-id'
 
-describe('main', () => {
+describe('bearer', () => {
   it('exports a Bearer class', () => {
     expect(Bearer).toBeTruthy()
+  })
+
+  describe('Events', () => {
+    it('has singleton event emitter', () => {
+      // @ts-ignore
+      expect(window['bearer-listeners']).toBeUndefined()
+
+      expect(Bearer.authorizedListener).toEqual(Bearer.authorizedListener)
+      // @ts-ignore
+      expect(window['bearer-listeners']).not.toBeUndefined()
+    })
   })
 
   describe('constructor', () => {
@@ -58,6 +69,7 @@ describe('main', () => {
       expect(false).toBeTruthy()
     })
   })
+
   describe('function request', () => {
     it.skip('returns payload if success', () => {
       expect(false).toBeTruthy()
