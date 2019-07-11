@@ -86,7 +86,7 @@ class BearerClient {
       throw new InvalidRequestOptions()
     }
 
-    const preheaders: { [key: string]: string } = {
+    const preheaders: BearerHeaders = {
       Authorization: this.bearerApiKey,
       'User-Agent': 'Bearer.sh',
       'Bearer-Auth-Id': this.authId!,
@@ -144,10 +144,12 @@ class BearerClient {
  * Types
  */
 
+type BearerHeaders = Record<string, string | number | undefined>
 type BearerRequestMethod = AxiosRequestConfig['method']
+
 interface BearerRequestParameters {
-  headers?: { [key: string]: string }
-  query?: string | { [key: string]: string }
+  headers?: BearerHeaders
+  query?: string | Record<string, string | number>
   body?: any
 }
 
