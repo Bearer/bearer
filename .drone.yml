@@ -1,0 +1,92 @@
+--------
+kind: pipeline
+name: Build and Test
+
+steps:
+  - name: Install
+    image: node:10
+    commands:
+      - yarn install
+
+  - name: Test
+    image: node:10
+    commands:
+      - yarn test
+trigger:
+  event:
+  - push
+
+
+--------
+kind: pipeline
+name: Release (next)
+
+steps:
+  - name: Install
+    image: node:10
+    commands:
+      - yarn install
+
+  - name: Test
+    image: node:10
+    commands:
+      - yarn test
+
+  - name: release
+    image: node:10
+    commands:
+      - yarn lerna-publish --dist-tag=next
+
+trigger:
+  event:
+    - push
+  ref:
+    include:
+      - refs/tags/release-next-*
+
+--------
+kind: pipeline
+name: Release (forced)
+
+steps:
+  - name: Install
+    image: node:10
+    commands:
+      - yarn install
+
+  - name: Test
+    image: node:10
+    commands:
+      - yarn test
+
+  - name: release (force)
+    image: node:10
+    commands:
+      - yarn lerna-publish --force-publish --dist-tag=latest
+
+trigger:
+  event:
+    - push
+  ref:
+    include:
+      - refs/tags/release-forced-*
+
+--------
+kind: pipeline
+name: Canary release
+
+steps:
+  - name: Install
+    image: node:10
+    commands:
+      - yarn install
+
+  - name: Test
+    image: node:10
+    commands:
+      - yarn test
+trigger:
+  event:
+    - push
+  branch:
+    - canary

@@ -11,6 +11,9 @@
     ]
   },
   "lint-staged": {
+    ".drone.yml": [
+      "npm run drone:sign"
+    ],
     "*.{md}": [
       "prettier --write"
     ],
@@ -26,7 +29,8 @@
     "lerna-publish": "lerna publish --conventional-commits  --registry=https://registry.npmjs.org/ --ignore=@bearer/ui",
     "test": "lerna run test:ci --stream --ignore=@bearer/ui",
     "cm": "git-cz",
-    "postinstall": "lerna run prepare --ignore=@bearer/ui && lerna link"
+    "postinstall": "lerna run prepare --ignore=@bearer/ui && lerna link",
+    "drone:sign": "DRONE_SERVER=https://cloud.drone.io drone sign Bearer/bearer --save"
   },
   "license": "MIT",
   "husky": {
