@@ -7,7 +7,7 @@ import https from 'https'
 import log from './logger'
 import { _HANDLER, STAGE } from './constants'
 
-const EXCLUDED_API = /^logs\.[\w-]+\.amazonaws\.com$/
+const EXCLUDED_API = /^(logs\.[\w-]+\.amazonaws\.com|int(\.\w+)*\.bearer\.sh)$/
 
 const buildBillingPayload = (info: TRequestPayload) => {
   const { hostname, pathname, method } = info.request
