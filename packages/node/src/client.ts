@@ -52,31 +52,31 @@ class BearerClient {
    * HTTP methods
    */
 
-  public get = (endpoint: string, parameters?: BearerRequestParameters, options?: any) => {
-    return this.request('GET', endpoint, parameters, options)
+  public get = <DataReturned = any>(endpoint: string, parameters?: BearerRequestParameters, options?: any) => {
+    return this.request<DataReturned>('GET', endpoint, parameters, options)
   }
 
-  public head = (endpoint: string, parameters?: BearerRequestParameters, options?: any) => {
-    return this.request('HEAD', endpoint, parameters, options)
+  public head = <DataReturned = any>(endpoint: string, parameters?: BearerRequestParameters, options?: any) => {
+    return this.request<DataReturned>('HEAD', endpoint, parameters, options)
   }
 
-  public post = (endpoint: string, parameters?: BearerRequestParameters, options?: any) => {
-    return this.request('POST', endpoint, parameters, options)
+  public post = <DataReturned = any>(endpoint: string, parameters?: BearerRequestParameters, options?: any) => {
+    return this.request<DataReturned>('POST', endpoint, parameters, options)
   }
 
-  public put = (endpoint: string, parameters?: BearerRequestParameters, options?: any) => {
-    return this.request('PUT', endpoint, parameters, options)
+  public put = <DataReturned = any>(endpoint: string, parameters?: BearerRequestParameters, options?: any) => {
+    return this.request<DataReturned>('PUT', endpoint, parameters, options)
   }
 
-  public delete = (endpoint: string, parameters?: BearerRequestParameters, options?: any) => {
-    return this.request('DELETE', endpoint, parameters, options)
+  public delete = <DataReturned = any>(endpoint: string, parameters?: BearerRequestParameters, options?: any) => {
+    return this.request<DataReturned>('DELETE', endpoint, parameters, options)
   }
 
-  public patch = (endpoint: string, parameters?: BearerRequestParameters, options?: any) => {
-    return this.request('PATCH', endpoint, parameters, options)
+  public patch = <DataReturned = any>(endpoint: string, parameters?: BearerRequestParameters, options?: any) => {
+    return this.request<DataReturned>('PATCH', endpoint, parameters, options)
   }
 
-  public request = (
+  public request = <TData = any>(
     method: BearerRequestMethod,
     endpoint: string,
     parameters?: BearerRequestParameters,
@@ -112,7 +112,7 @@ class BearerClient {
       {} as any
     )
 
-    return this.client.request({
+    return this.client.request<TData>({
       method,
       headers,
       baseURL: `${this.options.host}/api/v4/functions/backend/${this.integrationId}/bearer-proxy`,
@@ -126,8 +126,11 @@ class BearerClient {
    * Invoke custom functions
    */
 
-  public invoke = (functionName: string, { query, body }: { query?: any; body?: any } = { query: {}, body: {} }) => {
-    return this.client.request({
+  public invoke = <DataReturned = any>(
+    functionName: string,
+    { query, body }: { query?: any; body?: any } = { query: {}, body: {} }
+  ) => {
+    return this.client.request<DataReturned>({
       baseURL: `${this.options.host}/api/v4/functions/backend/${this.integrationId}`,
       url: `/${functionName}`,
       headers: {
@@ -152,7 +155,7 @@ interface BearerRequestParameters {
 }
 
 type BearerRequestOptions = any
-type BearerClientOptions = { [key: string]: string }
+type BearerClientOptions = { host: string }
 
 /**
  * Errors handling
