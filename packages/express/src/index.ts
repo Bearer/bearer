@@ -81,17 +81,20 @@ export type TWebhookOptions = {
  * Middlwares
  */
 const INTEGRATION_HANDLER = 'bearer-integration-handler'
+const ALIAS_HANDLER = 'bearer-integration-alias'
 const BEARER_SHA = 'bearer-sha'
 const FUNCTION_DURATION_HEADER = 'X-BEARER-WEBHOOK-HANDLER-DURATION'
 
 function ensureHandlerExists(handlers: TWebhookHandlers) {
   return (req: Request & Partial<TWithHandlerReq>, res: Response, next: NextFunction) => {
     const integrationHandler = req.headers[INTEGRATION_HANDLER] as string
-    if (!handlers[integrationHandler]) {
+    const aliasHandler = req.headers[ALIAS_HANDLER] as string
+    const handler = handlers[integrationHandler] || handlers[aliasHandler]
+    if (!handler) {
       res.status(422)
       next(new WebhookMissingHandler(`Integration handler not found: ${integrationHandler}`))
     } else {
-      req.bearerHandler = handlers[integrationHandler]
+      req.bearerHandler = handler
       req.bearerHandlerName = integrationHandler
       next()
     }

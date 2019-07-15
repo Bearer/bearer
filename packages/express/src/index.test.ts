@@ -53,6 +53,18 @@ describe('Bearer middleware', () => {
         expect(mock.mock.calls[0][0].title).toBe('Sponge bob is the king')
       })
 
+      it('with alias - calls handler with req object', async () => {
+        await request(app)
+          .post('/whatever/webhooks')
+          .set('BEARER-INTEGRATION-HANDLER', 'whatever')
+          .set('BEARER-INTEGRATION-ALIAS', SUCCESS_HANDLER)
+
+        const mock = webHookHandlers[SUCCESS_HANDLER] as jest.Mock
+        // request is passed down
+        expect(mock.mock.calls[0][0]).toBeInstanceOf(IncomingMessage)
+        expect(mock.mock.calls[0][0].title).toBe('Sponge bob is the king')
+      })
+
       it('returns correct success payload', async () => {
         const response = await request(app)
           .post('/whatever/webhooks')
