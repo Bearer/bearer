@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "@bearer/functions": "{{bearerTagVersion}}",
+    "@bearer/node": "{{bearerTagVersion}}",
     {{bearerRestClient}}
   },
   "devDependencies": {

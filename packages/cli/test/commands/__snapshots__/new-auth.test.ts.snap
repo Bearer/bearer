@@ -18,6 +18,7 @@ exports[`Authentication: APIKEY No Views APIKEY creates a package.json file 1`] 
   },
   \\"dependencies\\": {
     \\"@bearer/functions\\": \\"latest\\",
+    \\"@bearer/node\\": \\"latest\\",
     \\"axios\\": \\"^0.18.0\\"
   },
   \\"devDependencies\\": {
@@ -75,6 +76,7 @@ exports[`Authentication: APIKEY With Views APIKEY creates a package.json file 1`
   },
   \\"dependencies\\": {
     \\"@bearer/functions\\": \\"latest\\",
+    \\"@bearer/node\\": \\"latest\\",
     \\"axios\\": \\"^0.18.0\\",
     \\"@bearer/core\\": \\"latest\\",
     \\"@bearer/ui\\": \\"latest\\"
@@ -140,6 +142,7 @@ exports[`Authentication: BASIC No Views BASIC creates a package.json file 1`] = 
   },
   \\"dependencies\\": {
     \\"@bearer/functions\\": \\"latest\\",
+    \\"@bearer/node\\": \\"latest\\",
     \\"axios\\": \\"^0.18.0\\"
   },
   \\"devDependencies\\": {
@@ -197,6 +200,7 @@ exports[`Authentication: BASIC With Views BASIC creates a package.json file 1`] 
   },
   \\"dependencies\\": {
     \\"@bearer/functions\\": \\"latest\\",
+    \\"@bearer/node\\": \\"latest\\",
     \\"axios\\": \\"^0.18.0\\",
     \\"@bearer/core\\": \\"latest\\",
     \\"@bearer/ui\\": \\"latest\\"
@@ -262,6 +266,7 @@ exports[`Authentication: CUSTOM No Views CUSTOM creates a package.json file 1`] 
   },
   \\"dependencies\\": {
     \\"@bearer/functions\\": \\"latest\\",
+    \\"@bearer/node\\": \\"latest\\",
     \\"axios\\": \\"^0.18.0\\"
   },
   \\"devDependencies\\": {
@@ -319,6 +324,7 @@ exports[`Authentication: CUSTOM With Views CUSTOM creates a package.json file 1`
   },
   \\"dependencies\\": {
     \\"@bearer/functions\\": \\"latest\\",
+    \\"@bearer/node\\": \\"latest\\",
     \\"axios\\": \\"^0.18.0\\",
     \\"@bearer/core\\": \\"latest\\",
     \\"@bearer/ui\\": \\"latest\\"
@@ -384,6 +390,7 @@ exports[`Authentication: NONE No Views NONE creates a package.json file 1`] = `
   },
   \\"dependencies\\": {
     \\"@bearer/functions\\": \\"latest\\",
+    \\"@bearer/node\\": \\"latest\\",
     \\"axios\\": \\"^0.18.0\\"
   },
   \\"devDependencies\\": {
@@ -441,6 +448,7 @@ exports[`Authentication: NONE With Views NONE creates a package.json file 1`] = 
   },
   \\"dependencies\\": {
     \\"@bearer/functions\\": \\"latest\\",
+    \\"@bearer/node\\": \\"latest\\",
     \\"axios\\": \\"^0.18.0\\",
     \\"@bearer/core\\": \\"latest\\",
     \\"@bearer/ui\\": \\"latest\\"
@@ -506,6 +514,7 @@ exports[`Authentication: OAUTH1 No Views OAUTH1 creates a package.json file 1`] 
   },
   \\"dependencies\\": {
     \\"@bearer/functions\\": \\"latest\\",
+    \\"@bearer/node\\": \\"latest\\",
     \\"oauth\\": \\"^0.9.15\\"
   },
   \\"devDependencies\\": {
@@ -573,6 +582,7 @@ exports[`Authentication: OAUTH1 With Views OAUTH1 creates a package.json file 1`
   },
   \\"dependencies\\": {
     \\"@bearer/functions\\": \\"latest\\",
+    \\"@bearer/node\\": \\"latest\\",
     \\"oauth\\": \\"^0.9.15\\",
     \\"@bearer/core\\": \\"latest\\",
     \\"@bearer/ui\\": \\"latest\\"
@@ -648,6 +658,7 @@ exports[`Authentication: OAUTH2 No Views OAUTH2 creates a package.json file 1`] 
   },
   \\"dependencies\\": {
     \\"@bearer/functions\\": \\"latest\\",
+    \\"@bearer/node\\": \\"latest\\",
     \\"axios\\": \\"^0.18.0\\"
   },
   \\"devDependencies\\": {
@@ -712,6 +723,7 @@ exports[`Authentication: OAUTH2 With Views OAUTH2 creates a package.json file 1`
   },
   \\"dependencies\\": {
     \\"@bearer/functions\\": \\"latest\\",
+    \\"@bearer/node\\": \\"latest\\",
     \\"axios\\": \\"^0.18.0\\",
     \\"@bearer/core\\": \\"latest\\",
     \\"@bearer/ui\\": \\"latest\\"
