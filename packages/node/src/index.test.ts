@@ -1,9 +1,10 @@
-import bearer from './index'
+import exportOfIndex from './index'
+import defaultOfClient from './client'
 
 describe('index', () => {
   describe('exports', () => {
     it('client is exported', () => {
-      expect(bearer).toBeTruthy()
+      expect(exportOfIndex).toEqual(defaultOfClient)
     })
   })
 })
