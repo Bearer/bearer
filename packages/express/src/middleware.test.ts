@@ -77,7 +77,7 @@ describe('Bearer middleware', () => {
       })
 
       it('perform promise even if rejecting', async () => {
-        const response = await request(app)
+        await request(app)
           .post('/whatever/webhooks')
           .set('BEARER-INTEGRATION-HANDLER', REJECTED_HANDLER)
           .expect('Content-Type', /json/)
@@ -89,7 +89,7 @@ describe('Bearer middleware', () => {
       })
 
       it('fails gracefully if the handler raises an error', async () => {
-        const response = await request(app)
+        await request(app)
           .post('/whatever/webhooks')
           .set('BEARER-INTEGRATION-HANDLER', FAILING_HANDLER)
           .expect('Content-Type', /json/)
@@ -104,7 +104,7 @@ describe('Bearer middleware', () => {
 
     describe('non existing handler', () => {
       it('returns unprocessable entity status', async () => {
-        const response = await request(app)
+        await request(app)
           .post('/whatever/webhooks')
           .set('BEARER-INTEGRATION-HANDLER', 'unknow')
           .expect('Content-Type', /json/)
@@ -118,11 +118,11 @@ describe('Bearer middleware', () => {
     })
 
     it('handles only the route it needs', async () => {
-      const getResponse = await request(app)
+      await request(app)
         .get('/spongebobdoesnotneedwebhooks')
         .expect('Content-Type', /json/)
         .expect(200, { name: 'john' })
-      const postResponse = await request(app)
+      await request(app)
         .post('/spongebobdoesnotneedwebhooks')
         .expect('Content-Type', /json/)
         .expect(200, { name: 'john' })

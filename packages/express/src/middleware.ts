@@ -24,6 +24,7 @@ export const middleware = (handlers: TWebhookHandlers, options: TWebhookOptions 
     const startAt = Date.now()
 
     // please do not transform to arrow function
+    // here "this" refers to the request, using arrow function would break the scope and the expected behaviour
     onHeaders(res, function() {
       this.setHeader(FUNCTION_DURATION_HEADER, Date.now() - startAt)
     })
