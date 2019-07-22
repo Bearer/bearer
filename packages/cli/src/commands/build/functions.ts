@@ -106,7 +106,7 @@ export default class BuildFunctions extends BaseCommand {
             path: distPath
           },
           // the sdk is already provided within the lamnda through a layer
-          externals: /aws\-sdk/
+          externals: /aws\-sdk|@bearer\/xray/
         }
 
         webpack(config, (err: any, stats: webpack.Stats) => {
@@ -158,7 +158,7 @@ const ${funcConstName} = require("./${func}").default;
 module.exports['${func}'] = ${funcConstName}.init();
 `
     },
-    `const bearerOverride = require('@bearer/x-ray').bearerOverride;
+    `const bearerOverride = require('@bearer/xray').bearerOverride;
 bearerOverride()
 // functions
 `

@@ -1,1 +1,0 @@
-export const { _HANDLER, STAGE, BEARER_XRAY_LOG_GROUP, AWS_LAMBDA_LOG_STREAM_NAME } = process.env

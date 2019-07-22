@@ -1,5 +1,4 @@
 import debug from '@bearer/logger'
-import { setupFunctionIdentifiers } from '@bearer/x-ray'
 
 import * as d from '../declaration'
 import { eventAsActionParams, BACKEND_ONLY_ERROR } from './utils'
@@ -55,6 +54,17 @@ export abstract class FetchData<ReturnedData = any, TError = any, AuthContext = 
   static init() {
     return FetchData.call(this as any)
   }
+}
+
+export const setupFunctionIdentifiers = function(event: d.TLambdaEvent<d.TAuthContext>) {
+  const context = event.context || {}
+  const { clientId, integrationUuid, organizationIdentifier } = context
+  logger('%j', {
+    message: `Injecting ${JSON.stringify({ clientId, integrationUuid, organizationIdentifier })} `,
+    application: 'x-ray'
+  })
+  process.env.clientId = organizationIdentifier || clientId
+  process.env.scenarioUuid = integrationUuid
 }
 
 export class FetchActionExecutionError extends Error {}

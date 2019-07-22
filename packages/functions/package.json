@@ -23,7 +23,6 @@
   },
   "dependencies": {
     "@bearer/logger": "^1.7.0",
-    "@bearer/x-ray": "^1.8.1",
     "axios": "^0.18.0"
   },
   "devDependencies": {
