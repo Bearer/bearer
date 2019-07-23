@@ -5,7 +5,6 @@ exports[`BearerProvider allow custom integration host 1`] = `
   value={
     Object {
       "bearer": Bearer {
-        "_jsonRequest": [Function],
         "clientId": "abc123",
         "config": Object {
           "domObserver": true,
@@ -17,6 +16,7 @@ exports[`BearerProvider allow custom integration host 1`] = `
         "debounceRefresh": [Function],
         "disconnectObserver": [Function],
         "initialIntegrationLoading": [Function],
+        "integration": [Function],
         "invoke": [Function],
         "loadMissingIntegrations": [Function],
         "observerCallback": [Function],
@@ -49,7 +49,6 @@ exports[`BearerProvider renders basic provider tag 1`] = `
   value={
     Object {
       "bearer": Bearer {
-        "_jsonRequest": [Function],
         "clientId": "abc123",
         "config": Object {
           "domObserver": true,
@@ -61,6 +60,7 @@ exports[`BearerProvider renders basic provider tag 1`] = `
         "debounceRefresh": [Function],
         "disconnectObserver": [Function],
         "initialIntegrationLoading": [Function],
+        "integration": [Function],
         "invoke": [Function],
         "loadMissingIntegrations": [Function],
         "observerCallback": [Function],
