@@ -1,7 +1,7 @@
 import { cleanQuery, buildQuery, cleanOptions } from '../../lib/utils'
 
 describe('cleanQuery', () => {
-  it('filters empty params and retunrs a string', () => {
+  it('filters empty params and returns a string', () => {
     const params = {
       aNullParams: null,
       undefinedParams: undefined,

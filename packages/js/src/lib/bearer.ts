@@ -1,10 +1,11 @@
 import debounce from 'debounce'
-// must be the same version as the one used within the integation service
+// must be the same version as the one used within the integration service
 import postRobot from 'post-robot'
 import { TIntegration } from './types'
 import debug from './logger'
-import { formatQuery } from './utils'
+import { buildQuery, cleanOptions } from './utils'
 import { EventEmitter } from './event'
+import { IntegrationClient } from './integrationClient'
 
 const logger = debug.extend('Bearer')
 const prefix = 'bearer'
@@ -18,10 +19,10 @@ const DEFAULT_OPTIONS = {
 const LISTENER_KEY = 'bearer-listeners'
 declare const window: Window & { [LISTENER_KEY]: EventEmitter }
 
-export default class Bearer {
+export class Bearer {
   static get authorizedListener() {
     if (!window[LISTENER_KEY]) {
-      // TODO: get rid of post robot, too heqvy for our needs
+      // TODO: get rid of post robot, too heavy for our needs
       window[LISTENER_KEY] = new EventEmitter()
       postRobot.on('BEARER_AUTHORIZED', ({ data }) => {
         window[LISTENER_KEY].emit(authorizeEvent(data.scenarioId || data.integrationId), data)
@@ -59,7 +60,7 @@ export default class Bearer {
    * @argument {Object} options Optional parameters like authId if you already have one
    */
   connect = (integration: string, setupId?: string, { authId }: { authId?: string } = {}) => {
-    const query = formatQuery({
+    const query = buildQuery({
       setupId,
       authId,
       secured: this.config.secured,
@@ -86,53 +87,25 @@ export default class Bearer {
     return promise
   }
 
-  private _jsonRequest = async (path: string, { query = {}, params = {} } = {}) => {
-    const url = [this.config.integrationHost, path].join('')
-    const queryParams = { ...query, clientId: this.clientId, secured: this.config.secured }
-    const queryString = buildQuery(cleanOptions(queryParams))
+  /**
+   * `integration` Creates an Integration Client to easily interact with integration service
+   * @argument {string} integration the identifier of the Integration you want to target
+   */
+  integration = (integration: string) => new IntegrationClient(this, integration)
 
-    logger('json request: path %s', path)
-
-    return fetch(`${url}?${queryString}`, {
-      method: 'POST',
-      body: JSON.stringify(params || {}),
-      headers: {
-        'content-type': 'application/json'
-      },
-      credentials: 'include'
-    }).then(async response => {
-      if (response.status > 399) {
-        logger('failing request %j', await response.clone().json())
-      }
-      return response
-    })
-  }
-
+  /**
+   * `invoke` Invoke a custom function of a given integration
+   * @argument {string} integration the identifier of the Integration you want to target
+   * @argument {string} functionName the identifier of the Function you would like to invoke
+   * @argument {object} params extra params
+   */
   invoke = async <DataPayload = any>(
-    integrationId: string,
+    integration: string,
     functionName: string,
-    { query = {}, ...params }: { query?: Record<string, string>; [key: string]: any } = {}
-  ): Promise<TFetchBearerData<DataPayload>> => {
-    const path = `/api/v4/functions/${integrationId}/${functionName}`
-
-    try {
-      const response = await this._jsonRequest(path, { query, params })
-      const payload: {
-        data: any
-        referenceId?: string
-        error: any
-      } = await response.json()
-      logger('successful request %j', payload)
-
-      if (!payload.error) {
-        return payload
-      } else {
-        throw { error: payload.error }
-      }
-    } catch (error) {
-      logger('invoke failed %j', error, error.message)
-      throw { error }
-    }
+    params: { query?: Record<string, string>; [key: string]: any } = {}
+  ) => {
+    const client = this.integration(integration)
+    return client.invoke<DataPayload>(functionName, params)
   }
 
   /**
@@ -146,7 +119,7 @@ export default class Bearer {
   }
 
   /**
-   * check wether if an integration is resgistered
+   * check wether if an integration is registered
    */
   registeredIntegration = (tagName: string): boolean => {
     // NOTE:
@@ -233,6 +206,8 @@ export default class Bearer {
   }
 }
 
+export default Bearer
+
 export type TBearerOptions = {
   secured?: boolean
   domObserver: boolean
@@ -281,26 +256,3 @@ function authorizeEvent(intId: string) {
 function rejectEvent(intId: string) {
   return `reject_${intId}`
 }
-
-function buildQuery(params: any) {
-  function encode(k: string) {
-    return encodeURIComponent(k) + '=' + encodeURIComponent(params[k])
-  }
-  return Object.keys(params)
-    .map(encode)
-    .join('&')
-}
-
-function cleanOptions(obj: Record<string, any>) {
-  return Object.keys(obj).reduce(
-    (acc, key: string) => {
-      if (obj[key] !== undefined) {
-        acc[key] = obj[key]
-      }
-      return acc
-    },
-    {} as Record<string, any>
-  )
-}
-
-export type TFetchBearerData<T = any> = { data: T; referenceId?: string }
