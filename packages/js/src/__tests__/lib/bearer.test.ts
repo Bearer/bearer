@@ -1,4 +1,5 @@
 import Bearer, { findElements } from '../../lib/bearer'
+import { IntegrationClient } from '../../lib/integrationClient'
 
 const clientId = 'a-client-id'
 
@@ -64,15 +65,23 @@ describe('bearer', () => {
     })
   })
 
-  describe('fetch request', () => {
-    it.skip('returns payload if success', () => {
-      expect(false).toBeTruthy()
+  describe('integration', () => {
+    it('returns an instance of an  integration client', () => {
+      expect(new Bearer('client-id').integration('integration-id')).toBeInstanceOf(IntegrationClient)
     })
   })
 
-  describe('function request', () => {
-    it.skip('returns payload if success', () => {
-      expect(false).toBeTruthy()
+  describe('invoke function', () => {
+    it('delegates to Integration Client', () => {
+      const instance = new Bearer('client-id')
+      const integrationSpy = jest.spyOn(instance, 'integration')
+      const invokeSpy = jest.fn()
+      integrationSpy.mockReturnValue({ invoke: invokeSpy } as any)
+
+      instance.invoke('integration-name', 'function-name', { someData: 'data value' })
+
+      expect(integrationSpy).toHaveBeenCalledWith('integration-name')
+      expect(invokeSpy).toHaveBeenCalledWith('function-name', { someData: 'data value' })
     })
   })
 })
