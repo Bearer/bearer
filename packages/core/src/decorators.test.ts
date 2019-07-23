@@ -5,7 +5,7 @@ declare const global: { fetch: any }
 
 const INTEGRATION_ID = '1234'
 
-describe('Function decorator', () => {
+describe.skip('Function decorator', () => {
   beforeAll(() => {
     bearer('client-id', { integrationHost: 'HOST' })
     // @ts-ignore
