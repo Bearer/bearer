@@ -18,6 +18,7 @@
   ],
   "dependencies": {
     "@bearer/logger": "^1.7.0",
+    "axios": "^0.19.0",
     "debounce": "^1.2.0",
     "post-robot": "^8.0.26"
   },
@@ -27,8 +28,10 @@
     "@types/jest": "^24.0.11",
     "@types/lodash.get": "^4.4.6",
     "@types/lodash.merge": "^4.6.6",
+    "@types/nock": "^10.0.3",
     "jest": "^24.7.1",
     "jest-fetch-mock": "^2.1.1",
+    "nock": "^10.0.6",
     "rollup-plugin-commonjs": "^9.2.1",
     "rollup-plugin-filesize": "^6.0.1",
     "rollup-plugin-node-resolve": "^4.0.1",

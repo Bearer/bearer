@@ -3,7 +3,7 @@ import debounce from 'debounce'
 import postRobot from 'post-robot'
 import { TIntegration } from './types'
 import debug from './logger'
-import { buildQuery, cleanOptions } from './utils'
+import { buildQuery, cleanQuery, cleanOptions } from './utils'
 import { EventEmitter } from './event'
 import { IntegrationClient } from './integrationClient'
 
@@ -60,12 +60,14 @@ export class Bearer {
    * @argument {Object} options Optional parameters like authId if you already have one
    */
   connect = (integration: string, setupId?: string, { authId }: { authId?: string } = {}) => {
-    const query = buildQuery({
-      setupId,
-      authId,
-      secured: this.config.secured,
-      clientId: this.clientId
-    })
+    const query = buildQuery(
+      cleanQuery({
+        setupId,
+        authId,
+        secured: this.config.secured,
+        clientId: this.clientId
+      })
+    )
     const AUTHORIZED_URL = `${this.config.integrationHost}/v2/auth/${integration}?${query}`
 
     const promise = new Promise<{ integration: string; authId: string }>((resolve, reject) => {
