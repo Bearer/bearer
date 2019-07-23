@@ -43,14 +43,47 @@ class MyApp {
 
 ## Usage
 
-### Invoke js
+## Calling any APIs
 
-The Bearer SDK for JavaScript lets you invoke integration's js.
+Out of the box, Bearer provides an added value proxy for any API. You can call any API (aka integration) endpoint as follow
 
 ```js
-const integrations = bearer('BEARER_CLIENT_ID')
+const bearerClient = bearer('BEARER_CLIENT_ID')
 
-integrations
+// initialize an API client to target a specific service (ex: slack, github, etc...)
+const slack = bearerClient.integration('INTEGRATION_ID')
+
+// re-use previously created API client
+slack
+  .auth(authId) // see #connect section for more information
+  .get('/reminders.list') // all REST verbs are available here: .post, .put, .delete etc...
+  .then(console.log)
+  .catch(console.error)
+
+// passing extra arguments
+slack
+  .auth(authId)
+  .post('/reminders.add', { text: 'Remind me something', time: 'in 10 seconds'})
+  .then(console.log)
+  .catch(console.error)
+```
+
+
+### Invoke js
+
+The Bearer SDK for JavaScript lets you invoke integration's function (if their execution is not restricted to server side usage).
+
+```js
+const bearerClient = bearer('BEARER_CLIENT_ID')
+
+const myIntegration = bearerClient.integration('INTEGRATION_ID')
+myIntegration
+  .invoke('myFunction')
+  .then(console.log)
+  .catch(console.error)
+
+// is equivalent to
+bearerClient
   .invoke('INTEGRATION_ID', 'myFunction')
   .then(console.log)
   .catch(console.error)
@@ -59,9 +92,7 @@ integrations
 Passing params to your function works as follow:
 
 ```js
-const integrations = bearer('BEARER_CLIENT_ID')
-
-integrations
+bearerClient
   .invoke('INTEGRATION_ID', 'myFunction', {
     query: { foo: 'bar' }
   })
