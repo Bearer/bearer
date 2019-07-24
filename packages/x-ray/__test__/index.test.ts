@@ -19,6 +19,7 @@ describe('setupFunctionIdentifiers', () => {
   it('setup all function identifiers', () => {
     const event = {
       context: {
+        organizationIdentifier: 'organizationIdentifier',
         clientId: 'myClientId',
         integrationUuid: 'myIntegrationUuid'
       }
@@ -26,7 +27,23 @@ describe('setupFunctionIdentifiers', () => {
 
     setupFunctionIdentifiers(event)
 
-    expect(process.env.clientId).toEqual('myClientId')
+    expect(process.env.clientId).toEqual('organizationIdentifier')
     expect(process.env.scenarioUuid).toEqual('myIntegrationUuid')
+  })
+
+  describe('when organizationIdentifier is missing in context', () => {
+    it('setup fallbacks to clientId', () => {
+      const event = {
+        context: {
+          clientId: 'myClientId',
+          integrationUuid: 'myIntegrationUuid'
+        }
+      }
+
+      setupFunctionIdentifiers(event)
+
+      expect(process.env.clientId).toEqual('myClientId')
+      expect(process.env.scenarioUuid).toEqual('myIntegrationUuid')
+    })
   })
 })

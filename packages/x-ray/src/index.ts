@@ -25,9 +25,12 @@ export const bearerOverride = () => {
 
 export const setupFunctionIdentifiers = function(event: any) {
   const context = event.context || {}
-  const { clientId, integrationUuid } = context
-  logger('%j', { message: `Ìnject ${clientId} and ${integrationUuid}`, application: 'x-ray' })
-  process.env.clientId = clientId
+  const { clientId, integrationUuid, organizationIdentifier } = context
+  logger('%j', {
+    message: `Injecting ${JSON.stringify({ clientId, integrationUuid, organizationIdentifier })} `,
+    application: 'x-ray'
+  })
+  process.env.clientId = organizationIdentifier || clientId
   process.env.scenarioUuid = integrationUuid
 }
 
