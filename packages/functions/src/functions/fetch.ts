@@ -56,7 +56,7 @@ export abstract class FetchData<ReturnedData = any, TError = any, AuthContext = 
   }
 }
 
-export const setupFunctionIdentifiers = function(event: d.TLambdaEvent<d.TAuthContext>) {
+const setupFunctionIdentifiers = function(event: d.TLambdaEvent<d.TAuthContext>) {
   const context = event.context || {}
   const { clientId, integrationUuid, organizationIdentifier } = context
   logger('%j', {
