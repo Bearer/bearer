@@ -29,8 +29,7 @@ exports[`generators build generates openapi documentation 1`] = `
           {
             \\"name\\": \\"authId\\",
             \\"schema\\": {
-              \\"type\\": \\"string\\",
-              \\"format\\": \\"uuid\\"
+              \\"type\\": \\"string\\"
             },
             \\"in\\": \\"query\\",
             \\"description\\": \\"User Identifier\\",
@@ -137,8 +136,7 @@ exports[`generators build generates openapi documentation 1`] = `
           {
             \\"name\\": \\"authId\\",
             \\"schema\\": {
-              \\"type\\": \\"string\\",
-              \\"format\\": \\"uuid\\"
+              \\"type\\": \\"string\\"
             },
             \\"in\\": \\"query\\",
             \\"description\\": \\"User Identifier\\",

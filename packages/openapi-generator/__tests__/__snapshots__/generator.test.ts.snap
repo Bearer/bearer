@@ -229,8 +229,7 @@ exports[`#generator generates the valid openapi 3.0 document 1`] = `
           {
             \\"name\\": \\"authId\\",
             \\"schema\\": {
-              \\"type\\": \\"string\\",
-              \\"format\\": \\"uuid\\"
+              \\"type\\": \\"string\\"
             },
             \\"in\\": \\"query\\",
             \\"description\\": \\"User Identifier\\",
@@ -433,7 +432,17 @@ exports[`#generator generates the valid openapi 3.0 document 1`] = `
     },
     \\"/4l1c3-happy-goats/fetchDataOauth1\\": {
       \\"post\\": {
-        \\"parameters\\": [],
+        \\"parameters\\": [
+          {
+            \\"name\\": \\"authId\\",
+            \\"schema\\": {
+              \\"type\\": \\"string\\"
+            },
+            \\"in\\": \\"query\\",
+            \\"description\\": \\"User Identifier\\",
+            \\"required\\": true
+          }
+        ],
         \\"summary\\": \\"fetchDataOauth1\\",
         \\"requestBody\\": {
           \\"content\\": {
@@ -537,8 +546,7 @@ exports[`#generator generates the valid openapi 3.0 document 1`] = `
           {
             \\"name\\": \\"authId\\",
             \\"schema\\": {
-              \\"type\\": \\"string\\",
-              \\"format\\": \\"uuid\\"
+              \\"type\\": \\"string\\"
             },
             \\"in\\": \\"query\\",
             \\"description\\": \\"User Identifier\\",
@@ -648,8 +656,7 @@ exports[`#generator generates the valid openapi 3.0 document 1`] = `
           {
             \\"name\\": \\"authId\\",
             \\"schema\\": {
-              \\"type\\": \\"string\\",
-              \\"format\\": \\"uuid\\"
+              \\"type\\": \\"string\\"
             },
             \\"in\\": \\"query\\",
             \\"description\\": \\"User Identifier\\",

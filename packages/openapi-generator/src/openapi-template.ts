@@ -19,7 +19,7 @@ type THeader = {
 
 type TParam = {
   name: string
-  schema: { type: string; format: string }
+  schema: { type: string; format?: string }
   in: string
   description: string
   required?: boolean
@@ -73,7 +73,7 @@ function oauthParam(oauth: boolean): TParam | undefined {
   if (oauth) {
     return {
       name: 'authId',
-      schema: { type: 'string', format: 'uuid' },
+      schema: { type: 'string' },
       in: 'query',
       description: 'User Identifier',
       required: true

@@ -68,11 +68,11 @@ function getFunctionAuthType(sym: ts.Symbol | undefined, node: ts.Node, checker:
     const typ = checker.getTypeOfSymbolAtLocation(sym, node)
     if (typ.aliasTypeArguments) {
       const authType = checker.typeToString(typ.aliasTypeArguments[1])
-      if (/ApiKey/.test(authType)) return 'APIKEY'
-      if (/Basic/.test(authType)) return 'BASIC'
-      if (/OAuth1/.test(authType)) return 'OAUTH1'
-      if (/OAuth2/.test(authType)) return 'OAUTH2'
-      if (/None/.test(authType)) return 'NONE'
+      if (/ApiKey/i.test(authType)) return 'APIKEY'
+      if (/Basic/i.test(authType)) return 'BASIC'
+      if (/OAuth1/i.test(authType)) return 'OAUTH1'
+      if (/OAuth2/i.test(authType)) return 'OAUTH2'
+      if (/None/i.test(authType)) return 'NONE'
       return authType
     }
   }

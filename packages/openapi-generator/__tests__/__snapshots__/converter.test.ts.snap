@@ -191,7 +191,7 @@ Object {
 
 exports[`#functionTypeToSchemaConverter converts types to schemas for fetchDataOauth1.ts 1`] = `
 Object {
-  "functionAuthType": "TOAUTH1AuthContext",
+  "functionAuthType": "OAUTH1",
   "requestBody": Object {
     "properties": Object {
       "id": Object {
