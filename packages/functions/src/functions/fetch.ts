@@ -64,6 +64,7 @@ const setupFunctionIdentifiers = function(event: d.TLambdaEvent<d.TAuthContext>)
     application: 'x-ray'
   })
   process.env.clientId = organizationIdentifier || clientId
+  process.env.environmentId = clientId
   process.env.scenarioUuid = integrationUuid
 }
 
