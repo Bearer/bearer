@@ -41,6 +41,8 @@ class MyApp {
 }
 ```
 
+**:warning: `@bearer/js` is written in ES6**. If you want to support older browser (IE11) you'll have to add extra configuration to your bundling system. You'll need to explicitly tell your bundler (ex: webpack) to process and transform bearer's files.
+
 ## Usage
 
 ## Calling any APIs
@@ -63,11 +65,10 @@ slack
 // passing extra arguments
 slack
   .auth(authId)
-  .post('/reminders.add', { text: 'Remind me something', time: 'in 10 seconds'})
+  .post('/reminders.add', { text: 'Remind me something', time: 'in 10 seconds' })
   .then(console.log)
   .catch(console.error)
 ```
-
 
 ### Invoke js
 

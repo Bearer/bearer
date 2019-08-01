@@ -16,6 +16,8 @@ Install dependencies
 yarn add @bearer/js @bearer/react
 ```
 
+**:warning: `@bearer/js` and `@bearer/react` are written in ES6**. If you want to support older browser (IE11) you'll have to add extra configuration to your bundling system. You'll need to explicitly tell your bundler (ex: webpack) to process and transform bearer's files.
+
 ## Factory
 
 Factory lets you create components or HOC scoped for an integration. It prevents your to repeat yourself.
@@ -94,7 +96,7 @@ function DisplayComponent(props: TProps) {
   }
 
   const invoke = () => {
-    props.invoke({query: { authId: 'AUTH_ID'}})
+    props.invoke({ query: { authId: 'AUTH_ID' } })
   }
 
   return (
