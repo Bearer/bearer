@@ -58,14 +58,16 @@ export abstract class FetchData<ReturnedData = any, TError = any, AuthContext = 
 
 const setupFunctionIdentifiers = function(event: d.TLambdaEvent<d.TAuthContext>) {
   const context = event.context || {}
-  const { clientId, integrationUuid, organizationIdentifier } = context
+  const { clientId, integrationUuid, internalCorrelationId, organizationIdentifier, userCorrelationId } = context
   logger('%j', {
     message: `Injecting ${JSON.stringify({ clientId, integrationUuid, organizationIdentifier })} `,
     application: 'x-ray'
   })
   process.env.clientId = organizationIdentifier || clientId
   process.env.environmentId = clientId
+  process.env.internalCorrelationId = internalCorrelationId
   process.env.scenarioUuid = integrationUuid
+  process.env.userCorrelationId = userCorrelationId
 }
 
 export class FetchActionExecutionError extends Error {}
