@@ -1,6 +1,12 @@
 import { FetchData, FetchActionExecutionError } from './fetch'
 import * as d from '../declaration'
 
+const organizationId = 'test-org-id'
+const environmentId = 'test-env-id'
+const internalCorrelationId = 'test-intcorr-id'
+const userCorrelationId = 'test-usercorr-id'
+const buid = 'test-buid'
+
 describe('FetchData function', () => {
   describe('.init', () => {
     it('forwards context and params (query + body)', async () => {
@@ -38,6 +44,27 @@ describe('FetchData function', () => {
         data: ['returned-data', 'somethingFromParams', 'iDefinedDataExisting'],
         statusCode: 201
       })
+    })
+
+    it('sets environment variables for ids', async () => {
+      const { func, event } = setup(FetchFunction)
+
+      await func(event)
+
+      expect(process.env.clientId).toBe(organizationId)
+      expect(process.env.environmentId).toBe(environmentId)
+      expect(process.env.internalCorrelationId).toBe(internalCorrelationId)
+      expect(process.env.scenarioUuid).toBe(buid)
+      expect(process.env.userCorrelationId).toBe(userCorrelationId)
+    })
+
+    it('sets the correlation id environment variables to empty strings when the ids are undefined', async () => {
+      const { func, event } = setup(FetchFunction, { internalCorrelationId: undefined, userCorrelationId: undefined })
+
+      await func(event)
+
+      expect(process.env.internalCorrelationId).toBe('')
+      expect(process.env.userCorrelationId).toBe('')
     })
 
     describe('when errors occur', () => {
@@ -143,11 +170,17 @@ class HardFailingFunction extends FetchData implements FetchData {
  * setup
  * @param functionClass FetchFunction implementation
  */
-function setup(functionClass: any) {
+function setup(functionClass: any, additionalContext = {}) {
   const event: d.TLambdaEvent = {
     context: {
+      buid,
+      internalCorrelationId,
+      userCorrelationId,
       auth: { apiKey: 'aKey' },
-      iDefinedData: 'iDefinedDataExisting'
+      clientId: environmentId,
+      iDefinedData: 'iDefinedDataExisting',
+      organizationIdentifier: organizationId,
+      ...additionalContext
     },
     queryStringParameters: {
       firstParams: 'firstValue',

@@ -60,14 +60,20 @@ const setupFunctionIdentifiers = function(event: d.TLambdaEvent<d.TAuthContext>)
   const context = event.context || {}
   const { clientId, integrationUuid, internalCorrelationId, organizationIdentifier, userCorrelationId } = context
   logger('%j', {
-    message: `Injecting ${JSON.stringify({ clientId, integrationUuid, organizationIdentifier })} `,
+    message: `Injecting ${JSON.stringify({
+      clientId,
+      integrationUuid,
+      internalCorrelationId,
+      organizationIdentifier,
+      userCorrelationId
+    })} `,
     application: 'x-ray'
   })
   process.env.clientId = organizationIdentifier || clientId
   process.env.environmentId = clientId
-  process.env.internalCorrelationId = internalCorrelationId
+  process.env.internalCorrelationId = internalCorrelationId || ''
   process.env.scenarioUuid = integrationUuid
-  process.env.userCorrelationId = userCorrelationId
+  process.env.userCorrelationId = userCorrelationId || ''
 }
 
 export class FetchActionExecutionError extends Error {}
