@@ -58,12 +58,20 @@ export abstract class FetchData<ReturnedData = any, TError = any, AuthContext = 
 
 const setupFunctionIdentifiers = function(event: d.TLambdaEvent<d.TAuthContext>) {
   const context = event.context || {}
-  const { clientId, integrationUuid, internalCorrelationId, organizationIdentifier, userCorrelationId } = context
+  const {
+    clientId,
+    integrationUuid,
+    internalCorrelationId,
+    logSettings,
+    organizationIdentifier,
+    userCorrelationId
+  } = context
   logger('%j', {
     message: `Injecting ${JSON.stringify({
       clientId,
       integrationUuid,
       internalCorrelationId,
+      logSettings,
       organizationIdentifier,
       userCorrelationId
     })} `,
@@ -72,6 +80,7 @@ const setupFunctionIdentifiers = function(event: d.TLambdaEvent<d.TAuthContext>)
   process.env.clientId = organizationIdentifier || clientId
   process.env.environmentId = clientId
   process.env.internalCorrelationId = internalCorrelationId || ''
+  process.env.logSettings = logSettings ? JSON.stringify(logSettings) : ''
   process.env.scenarioUuid = integrationUuid
   process.env.userCorrelationId = userCorrelationId || ''
 }

@@ -67,6 +67,22 @@ describe('FetchData function', () => {
       expect(process.env.userCorrelationId).toBe('')
     })
 
+    it('puts the log settings into an environment variable', async () => {
+      const { func, event } = setup(FetchFunction, { logSettings: { detailedLogs: true } })
+
+      await func(event)
+
+      expect(process.env.logSettings).toBe('{"detailedLogs":true}')
+    })
+
+    it('sets the log settings to an empty string', async () => {
+      const { func, event } = setup(FetchFunction)
+
+      await func(event)
+
+      expect(process.env.logSettings).toBe('')
+    })
+
     describe('when errors occur', () => {
       describe('when error is thrown within the action', () => {
         it('fails gracefully', async () => {
