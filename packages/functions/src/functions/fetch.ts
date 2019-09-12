@@ -62,7 +62,7 @@ const setupFunctionIdentifiers = function(event: d.TLambdaEvent<d.TAuthContext>)
     clientId,
     integrationUuid,
     internalCorrelationId,
-    logSettings,
+    metadata,
     organizationIdentifier,
     userCorrelationId
   } = context
@@ -71,7 +71,7 @@ const setupFunctionIdentifiers = function(event: d.TLambdaEvent<d.TAuthContext>)
       clientId,
       integrationUuid,
       internalCorrelationId,
-      logSettings,
+      metadata,
       organizationIdentifier,
       userCorrelationId
     })} `,
@@ -80,7 +80,7 @@ const setupFunctionIdentifiers = function(event: d.TLambdaEvent<d.TAuthContext>)
   process.env.clientId = organizationIdentifier || clientId
   process.env.environmentId = clientId
   process.env.internalCorrelationId = internalCorrelationId || ''
-  process.env.logSettings = logSettings ? JSON.stringify(logSettings) : ''
+  process.env.bearerMetadata = metadata ? JSON.stringify(metadata) : ''
   process.env.scenarioUuid = integrationUuid
   process.env.userCorrelationId = userCorrelationId || ''
 }
