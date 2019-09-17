@@ -1,6 +1,6 @@
 import nock from 'nock'
 
-import clientFactory, { Bearer } from './client'
+import clientFactory, { bearer } from './client'
 const apiKey = 'spongeBobApiKey'
 const okResponse = { ok: 'ok' }
 const distantApi = jest.fn(() => okResponse)
@@ -13,7 +13,7 @@ describe('Bearer client', () => {
   })
 
   it('returns a client instance', () => {
-    expect(client).toBeInstanceOf(Bearer)
+    expect(client).toBeInstanceOf(bearer)
   })
 
   it('throws an error if the API KEY is not correct', () => {

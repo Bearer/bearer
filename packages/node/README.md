@@ -15,10 +15,10 @@ Get your Bearer's [credentials](https://app.bearer.sh/keys) and setup Bearer as 
 ### Calling any APIs
 
 ```tsx
-import Bearer from '@bearer/node'
+import bearer from '@bearer/node'
 
-const bearerClient = Bearer(process.env.BEARER_API_KEY) // find it on https://app.bearer.sh/keys
-const github = bearerClient.integration('INTEGRATION_ID') // you'll find it on the Bearer's dashboard
+const client = bearer(process.env.BEARER_API_KEY) // find it on https://app.bearer.sh/keys
+const github = client.integration('INTEGRATION_ID') // you'll find it on the Bearer's dashboard
 
 github
   .get('/repositories')
@@ -43,13 +43,23 @@ github
   .catch(console.error)
 ```
 
+Using `async/await`:
+
+```tsx
+const response = await github
+  .auth(authId) // Create an authId for GitHub on https://app.bearer.sh
+  .post('/user/repos', { body: { name: 'Just setting up my Bearer.sh' } })
+
+console.log(response)
+```
+
 ### Calling custom functions
 
 ```tsx
-import Bearer from '@bearer/node'
+import bearer from '@bearer/node'
 
-const bearerClient = Bearer(process.env.BEARER_API_KEY) // copy and paste the `API key`
-const github = bearerClient.integration('INTEGRATION_ID')
+const client = bearer(process.env.BEARER_API_KEY) // copy and paste the `API key`
+const github = client.integration('INTEGRATION_ID')
 
 github
   .invoke('myFunction')

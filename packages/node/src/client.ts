@@ -189,4 +189,4 @@ export default (apiKey: string | undefined, options?: BearerClientOptions): Bear
   return new Bearer(apiKey, options)
 }
 
-export { Bearer }
+export { Bearer as bearer }
