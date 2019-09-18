@@ -16,8 +16,9 @@ Bearer lib can be used instantly in your page or with a package system.
 ```html
 <script src="https://cdn.jsdelivr.net/npm/@bearer/js@latest/lib/bearer.production.min.js"></script>
 <script>
-  // you have now access to a global `bearer` function, initialize your code by passing the `clientId` as parameter
-  const bearerClient = bearer('clientId')
+  // you have now access to a global `bearer` function,
+  // initialize your code by passing your `PUBLISHABLE_KEY` as parameter (you'll find it at https://app.bearer.sh/keys)
+  const bearerClient = bearer('BEARER_PUBLISHABLE_KEY')
 </script>
 ```
 
@@ -36,7 +37,7 @@ import bearer from '@bearer/js'
 
 class MyApp {
   componentDidMount() {
-    bearer('clientId')
+    bearer('BEARER_PUBLISHABLE_KEY')
   }
 }
 ```
@@ -48,7 +49,7 @@ class MyApp {
 Out of the box, Bearer provides an added value proxy for any API. You can call any API (aka integration) endpoint as follow
 
 ```js
-const bearerClient = bearer('BEARER_CLIENT_ID')
+const bearerClient = bearer('BEARER_PUBLISHABLE_KEY')
 
 // initialize an API client to target a specific service (ex: slack, github, etc...)
 const slack = bearerClient.integration('INTEGRATION_ID')
@@ -74,7 +75,7 @@ slack
 The Bearer SDK for JavaScript lets you invoke integration's function (if their execution is not restricted to server side usage).
 
 ```js
-const bearerClient = bearer('BEARER_CLIENT_ID')
+const bearerClient = bearer('BEARER_PUBLISHABLE_KEY')
 
 const myIntegration = bearerClient.integration('INTEGRATION_ID')
 myIntegration
