@@ -40,7 +40,7 @@ class MyComponent extends React.Component {
   }
   render() {
     return (
-      <Bearer clientId="clientId">
+      <Bearer clientId="BEARER_PUBLISHABLE_KEY">
         <Connect
           setupId="setupId"
           render={({ loading, connect, error }) => {
