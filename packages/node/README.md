@@ -17,7 +17,7 @@ Get your Bearer's [credentials](https://app.bearer.sh/keys) and setup Bearer as 
 ```tsx
 import bearer from '@bearer/node'
 
-const client = bearer(process.env.BEARER_API_KEY) // find it on https://app.bearer.sh/keys
+const client = bearer(process.env.BEARER_SECRET_KEY) // find it on https://app.bearer.sh/keys
 const github = client.integration('INTEGRATION_ID') // you'll find it on the Bearer's dashboard
 
 github
@@ -58,7 +58,7 @@ console.log(response)
 ```tsx
 import bearer from '@bearer/node'
 
-const client = bearer(process.env.BEARER_API_KEY) // copy and paste the `API key`
+const client = bearer(process.env.BEARER_SECRET_KEY) // copy and paste the `API key`
 const github = client.integration('INTEGRATION_ID')
 
 github
