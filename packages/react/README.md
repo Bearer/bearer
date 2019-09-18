@@ -166,7 +166,7 @@ export default class SlackShareSetup extends React.Component {
   public render() {
     const intialContext = { 'setup-id': 'SETUP_ID_SAMPLE' }
     return (
-      <Bearer clientId="YOUR_CLIENT_ID" initialContext={intialContext}>
+      <Bearer clientId="BEARER_PUBLISHABLE_KEY" initialContext={intialContext}>
         <SlackConnect />
         <ChannelSelect />
         <Share message="hello world!" text="Test!" bearer-6d29c4-share-slack-beta-4-feature-shared={this.onShared} />
@@ -194,7 +194,7 @@ export default class SlackShareSetup extends React.Component {
     const intialContext = { 'setup-id': 'SETUP_ID_SAMPLE' }
     return (
       <Bearer
-        clientId="YOUR_CLIENT_ID"
+        clientId="BEARER_PUBLISHABLE_KEY"
         initialContext={intialContext}
         onUpdate={(data: any) => {
           this.setState({ data })
@@ -226,7 +226,7 @@ export default class SlackShareSetup extends React.Component {
   public render() {
     const intialContext = { 'setup-id': 'SETUP_ID_SAMPLE' }
     return (
-      <Bearer clientId="YOUR_CLIENT_ID" initialContext={intialContext}>
+      <Bearer clientId="BEARER_PUBLISHABLE_KEY" initialContext={intialContext}>
         <SlackConnect />
         <ChannelSelect />
         <Share message="hello world!" text="Test!" bearer-6d29c4-share-slack-beta-4-feature-shared={this.onShared} />
