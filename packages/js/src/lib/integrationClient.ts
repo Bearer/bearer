@@ -41,7 +41,6 @@ export class IntegrationClient {
       authId: this.authId,
       setupId: this.setupId,
       ...query,
-      clientId: this.bearerInstance.clientId,
       secured: this.bearerInstance.config.secured
     }
     this.logger('json request: path %s', functionName)
@@ -56,7 +55,10 @@ export class IntegrationClient {
         baseURL: `${this.bearerInstance.config.integrationHost}/api/v4/functions/${this.integrationId}`,
         url: functionName,
         params: cleanOptions(queryParams),
-        data: params || {}
+        data: params || {},
+        headers: {
+          ['Bearer-Publishable-Key']: this.bearerInstance.clientId
+        }
       })
       this.logger('successful request %j', payload)
 
@@ -130,7 +132,8 @@ export class IntegrationClient {
 
     const headers: BearerHeaders = {
       'Bearer-Auth-Id': this.authId!,
-      'Bearer-Setup-Id': this.setupId!
+      'Bearer-Setup-Id': this.setupId!,
+      'Bearer-Publishable-Key': this.bearerInstance.clientId
     }
 
     if (parameters && parameters.headers) {
@@ -144,7 +147,7 @@ export class IntegrationClient {
       headers: cleanOptions(headers),
       baseURL: `${this.bearerInstance.config.integrationHost}/api/v4/functions/${this.integrationId}/bearer-proxy`,
       url: endpoint,
-      params: { ...parameters.query, clientId: this.bearerInstance.clientId },
+      params: parameters.query,
       data: parameters && parameters.body
     })
   }

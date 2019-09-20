@@ -4,7 +4,10 @@ import { IntegrationClient } from '../../lib/integrationClient'
 
 describe('IntegrationClient', () => {
   const integrationId = 'integration-id'
-  const instance = new IntegrationClient({ config: { integrationHost: 'https://int.bearer.sh' } } as any, integrationId)
+  const instance = new IntegrationClient(
+    { config: { integrationHost: 'https://int.bearer.sh' }, clientId: 'ClientId' } as any,
+    integrationId
+  )
 
   describe('constructor', () => {
     it('set properties', () => {
@@ -38,7 +41,7 @@ describe('IntegrationClient', () => {
     const apiResponse = jest.fn(() => ({ data: 'ok' }))
 
     it('performs a post request', async () => {
-      nock('https://int.bearer.sh', {})
+      nock('https://int.bearer.sh', { reqheaders: { 'bearer-publishable-key': 'ClientId' } })
         .intercept(`/api/v4/functions/${integrationId}/customFunction`, 'post', { bodyData: 'ok' })
         .once()
         .reply(200, apiResponse)
@@ -50,7 +53,7 @@ describe('IntegrationClient', () => {
     })
 
     it('forwards setup and auth', async () => {
-      nock('https://int.bearer.sh', {})
+      nock('https://int.bearer.sh', { reqheaders: { 'bearer-publishable-key': 'ClientId' } })
         .intercept(`/api/v4/functions/${integrationId}/customFunction`, 'post', { extraData: { key: 'value' } })
         .once()
         .query({
@@ -70,11 +73,13 @@ describe('IntegrationClient', () => {
   describe('proxy', () => {
     const okResponse = { ok: 'ok' }
     const distantApi = jest.fn(() => okResponse)
-    const headers = { extra: 'headers' }
+    const headers = { extra: 'header-forwarded' }
     const query = { extraQuery: 'value' }
 
     function mockRequest({ method, body }: any) {
-      nock('https://int.bearer.sh', {})
+      nock('https://int.bearer.sh', {
+        reqheaders: { 'bearer-publishable-key': 'ClientId', 'bearer-proxy-extra': 'header-forwarded' }
+      })
         .intercept(`/api/v4/functions/${integrationId}/bearer-proxy/test`, method, body)
         .once()
         .query(query)
