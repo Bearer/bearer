@@ -68,7 +68,7 @@ export class Bearer {
         clientId: this.clientId
       })
     )
-    const AUTHORIZED_URL = `${this.config.integrationHost}/v2/auth/${integration}?${query}`
+    const AUTHORIZED_URL = `${this.config.integrationHost}/auth/${integration}?${query}`
 
     const promise = new Promise<{ integration: string; authId: string }>((resolve, reject) => {
       Bearer.authorizedListener.clearListeners(authorizeEvent(integration))
