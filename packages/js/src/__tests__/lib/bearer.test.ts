@@ -84,6 +84,31 @@ describe('bearer', () => {
       expect(invokeSpy).toHaveBeenCalledWith('function-name', { someData: 'data value' })
     })
   })
+
+  describe('connect', () => {
+    const instance = new Bearer('client-id')
+    const openSpy = jest.fn()
+    // @ts-ignore
+    window.open = openSpy
+
+    beforeEach(() => {
+      openSpy.mockClear()
+    })
+
+    test('opens a modal', () => {
+      instance.connect('my-integration')
+
+      expect(openSpy).toHaveBeenCalledWith(
+        'INTEGRATION_HOST_URL/v2/auth/my-integration?clientId=client-id',
+        '',
+        'resizable,scrollbars,status,centerscreen=yes,width=500,height=600'
+      )
+    })
+
+    test('returns a promise', () => {
+      expect(instance.connect('my-integration')).toBeInstanceOf(Promise)
+    })
+  })
 })
 
 describe('findElements', () => {
