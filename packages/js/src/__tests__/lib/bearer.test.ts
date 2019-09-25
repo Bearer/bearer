@@ -1,4 +1,4 @@
-import Bearer, { findElements } from '../../lib/bearer'
+import Bearer, { findElements, calculateModalPosition } from '../../lib/bearer'
 import { IntegrationClient } from '../../lib/integrationClient'
 
 const clientId = 'a-client-id'
@@ -88,7 +88,6 @@ describe('bearer', () => {
   describe('connect', () => {
     const instance = new Bearer('client-id')
     const openSpy = jest.fn()
-    // @ts-ignore
     window.open = openSpy
 
     beforeEach(() => {
@@ -101,8 +100,24 @@ describe('bearer', () => {
       expect(openSpy).toHaveBeenCalledWith(
         'INTEGRATION_HOST_URL/v2/auth/my-integration?clientId=client-id',
         '',
-        'resizable,scrollbars,status,centerscreen=yes,width=500,height=600'
+        // jsdom has no easy to configure jsdom screen size, unit tests are covering calculateModalPosition
+        'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no, width=0, height=0, top=0, left=0'
       )
+    })
+
+    describe('calculateModalPosition - screen variations', () => {
+      test('center the modal', () => {
+        // @ts-ignore
+        const values = calculateModalPosition({ screen: { height: 1000, width: 2000 } }, 500, 600)
+
+        expect(values).toEqual({ left: 750, top: 200, calculatedWidth: 500, calculatedHeight: 600 })
+      })
+
+      test('resize the modal for a small screen', () => {
+        const values = calculateModalPosition({ screen: { height: 400, width: 300 } }, 500, 600)
+
+        expect(values).toEqual({ left: 0, top: 0, calculatedWidth: 300, calculatedHeight: 400 })
+      })
     })
 
     test('returns a promise', () => {

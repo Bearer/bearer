@@ -59,7 +59,11 @@ export class Bearer {
    * @argument {string} setupId Setup's identifier you received earlier, a Bearer reference containing all required information about auth mechanism
    * @argument {Object} options Optional parameters like authId if you already have one
    */
-  connect = (integration: string, setupId?: string, { authId }: { authId?: string } = {}) => {
+  connect = (
+    integration: string,
+    setupId?: string,
+    { authId, width = 500, height = 600 }: { authId?: string; width?: number; height?: number } = {}
+  ) => {
     const query = buildQuery(
       cleanQuery({
         setupId,
@@ -85,7 +89,21 @@ export class Bearer {
         reject({ ...data, integration })
       })
     }).then()
-    window.open(AUTHORIZED_URL, '', 'resizable,scrollbars,status,centerscreen=yes,width=500,height=600')
+
+    const { left, top, calculatedWidth, calculatedHeight } = calculateModalPosition(window, width, height)
+
+    window.open(
+      AUTHORIZED_URL,
+      '',
+      'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no, width=' +
+        calculatedWidth +
+        ', height=' +
+        calculatedHeight +
+        ', top=' +
+        top +
+        ', left=' +
+        left
+    )
     return promise
   }
 
@@ -257,4 +275,18 @@ function authorizeEvent(intId: string) {
 
 function rejectEvent(intId: string) {
   return `reject_${intId}`
+}
+
+export function calculateModalPosition(
+  { screen: { width, height } }: { screen: { width: number; height: number } },
+  expectedWidth: number,
+  expectedHeight: number
+) {
+  const left = width / 2 - expectedWidth / 2
+  const top = height / 2 - expectedHeight / 2
+
+  const calculatedWidth = Math.min(expectedWidth, width)
+  const calculatedHeight = Math.min(expectedHeight, height)
+
+  return { left: Math.max(left, 0), top: Math.max(top, 0), calculatedWidth, calculatedHeight }
 }
