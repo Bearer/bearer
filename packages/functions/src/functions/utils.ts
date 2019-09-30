@@ -17,7 +17,10 @@ export function bodyFromEvent(event: d.TLambdaEvent): any {
   return body
 }
 
-export function fetchData(callback: d.TLambdaCallback, { data, error, statusCode }: { data?: any; error?: any, statusCode?: any }) {
+export function fetchData(
+  callback: d.TLambdaCallback,
+  { data, error, statusCode }: { data?: any; error?: any; statusCode?: any }
+) {
   if (data) {
     sendSuccessMessage(callback, { data, statusCode })
   } else {
@@ -41,5 +44,7 @@ function paramsFromEvent(event: d.TLambdaEvent) {
 
 export const BACKEND_ONLY_ERROR = {
   code: 'UNAUTHORIZED_FUNCTION_CALL',
-  message: "This function can't be called"
+  message:
+    // tslint:disable-next-line:max-line-length
+    "This function can't be called from the frontend. If you want to call APIs from the frontend, please refer to this link for more information: https://docs.bearer.sh/integration-clients/javascript#calling-apis"
 }

@@ -129,7 +129,9 @@ describe('FetchData function', () => {
 
         expect(result.error).toMatchObject({
           code: 'UNAUTHORIZED_FUNCTION_CALL',
-          message: "This function can't be called"
+          message:
+            // tslint:disable-next-line:max-line-length
+            "This function can't be called from the frontend. If you want to call APIs from the frontend, please refer to this link for more information: https://docs.bearer.sh/integration-clients/javascript#calling-apis"
         })
       })
     })
