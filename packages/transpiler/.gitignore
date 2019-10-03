@@ -1,7 +1,0 @@
-.env
-node_modules
-.rpt2_cache
-lib/
-.build/
-.build-transformers/
-**/__fixtures__/post/**
