@@ -1,5 +1,0 @@
-components.d.ts
-www/
-node_modules
-**/node_modules/**
-**/cli/templates/**

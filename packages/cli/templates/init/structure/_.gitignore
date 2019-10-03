@@ -1,7 +1,0 @@
-.bearer/*
-node_modules/
-dist/
-www/
-.build/
-.integrationrc
-local.config.jsonc
