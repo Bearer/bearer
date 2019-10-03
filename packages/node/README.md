@@ -67,6 +67,23 @@ github
   .catch(console.error)
 ```
 
+### Setting the request timeout
+
+By default bearer client times out after 5 seconds. Bearer allows to increase the timeout to up to 30 seconds
+
+``` tsx
+import bearer from '@bearer/node'
+
+const client = bearer(process.env.BEARER_SECRET_KEY, { timeout: 10 * 1000 }) // sets the timeout to 10 seconds
+const github = client.integration('INTEGRATION_ID')
+
+github
+  .invoke('myFunction')
+  .then(console.log)
+  .catch(console.error)
+
+```
+
 [Learn more](https://docs.bearer.sh/working-with-bearer/manipulating-apis) on how to use custom functions with Bearer.sh.
 
 ## Notes

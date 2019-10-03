@@ -43,10 +43,11 @@ You'll find you API key at this location: https://app.bearer.sh/keys`
   })
 
   describe('#integration', () => {
+    const pkg = require('../package.json')
     const integrationName = '12345'
     const api = client.integration(integrationName)
     const query = { sponge: 'bob' }
-    const headers = {}
+    const headers = { 'User-Agent': `Bearer-Node (${pkg.version})` }
     const body = '{"body":"data"}'
 
     interface IMockRequestParams {

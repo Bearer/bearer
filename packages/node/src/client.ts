@@ -39,7 +39,9 @@ class BearerClient {
     readonly setupId?: string,
     readonly authId?: string
   ) {
-    this.client.defaults.timeout = this.options.timeout
+    this.client = axios.create({
+      timeout: this.options.timeout || DEFAULT_TIMEOUT
+    })
   }
 
   public auth = (authId: string) => {
