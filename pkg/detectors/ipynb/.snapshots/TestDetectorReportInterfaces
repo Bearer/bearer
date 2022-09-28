@@ -1,0 +1,27 @@
+([]*report.Detection) (len=1) {
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=9) "interface",
+    DetectorType: (detectors.Type) (len=6) "python",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=11) "small.ipynb",
+      Language: (string) (len=16) "Jupyter Notebook",
+      LanguageType: (string) (len=6) "markup",
+      LineNumber: (*int)(39),
+      ColumnNumber: (*int)(16),
+      Text: (*string)((len=22) "\"variable.example.com\"")
+    },
+    Value: (interfaces.Interface) {
+      Type: (interfaces.Type) (len=3) "url",
+      Value: (*values.Value)({
+        Parts: ([]values.Part) (len=1) {
+          (*values.String)({
+            Type: (values.PartType) (len=6) "string",
+            Value: (string) (len=20) "variable.example.com"
+          })
+        }
+      }),
+      VariableName: (string) ""
+    }
+  })
+}

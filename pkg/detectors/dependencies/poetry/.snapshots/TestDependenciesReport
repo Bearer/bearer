@@ -1,0 +1,344 @@
+([]*report.Detection) (len=19) {
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=6) "poetry",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=11) "poetry.lock",
+      Language: (string) (len=4) "TOML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(4),
+      ColumnNumber: (*int)(7),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=12) "atomicwrites",
+      Version: (string) (len=5) "1.3.0"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=6) "poetry",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=11) "poetry.lock",
+      Language: (string) (len=4) "TOML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(12),
+      ColumnNumber: (*int)(7),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=5) "attrs",
+      Version: (string) (len=6) "19.1.0"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=6) "poetry",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=11) "poetry.lock",
+      Language: (string) (len=4) "TOML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(21),
+      ColumnNumber: (*int)(7),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=8) "colorama",
+      Version: (string) (len=5) "0.4.1"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=6) "poetry",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=11) "poetry.lock",
+      Language: (string) (len=4) "TOML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(29),
+      ColumnNumber: (*int)(7),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=6) "django",
+      Version: (string) (len=5) "2.2.1"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=6) "poetry",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=11) "poetry.lock",
+      Language: (string) (len=4) "TOML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(41),
+      ColumnNumber: (*int)(7),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=19) "djangorestframework",
+      Version: (string) (len=5) "3.8.2"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=6) "poetry",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=11) "poetry.lock",
+      Language: (string) (len=4) "TOML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(49),
+      ColumnNumber: (*int)(7),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=18) "importlib-metadata",
+      Version: (string) (len=4) "0.23"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=6) "poetry",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=11) "poetry.lock",
+      Language: (string) (len=4) "TOML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(60),
+      ColumnNumber: (*int)(7),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=14) "more-itertools",
+      Version: (string) (len=5) "7.2.0"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=6) "poetry",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=11) "poetry.lock",
+      Language: (string) (len=4) "TOML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(68),
+      ColumnNumber: (*int)(7),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=9) "packaging",
+      Version: (string) (len=4) "19.2"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=6) "poetry",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=11) "poetry.lock",
+      Language: (string) (len=4) "TOML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(80),
+      ColumnNumber: (*int)(7),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=6) "pluggy",
+      Version: (string) (len=6) "0.13.0"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=6) "poetry",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=11) "poetry.lock",
+      Language: (string) (len=4) "TOML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(93),
+      ColumnNumber: (*int)(7),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=2) "py",
+      Version: (string) (len=5) "1.8.0"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=6) "poetry",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=11) "poetry.lock",
+      Language: (string) (len=4) "TOML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(101),
+      ColumnNumber: (*int)(7),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=9) "pyparsing",
+      Version: (string) (len=5) "2.4.2"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=6) "poetry",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=11) "poetry.lock",
+      Language: (string) (len=4) "TOML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(109),
+      ColumnNumber: (*int)(7),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=6) "pytest",
+      Version: (string) (len=5) "4.6.5"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=6) "poetry",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=11) "poetry.lock",
+      Language: (string) (len=4) "TOML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(132),
+      ColumnNumber: (*int)(7),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=4) "pytz",
+      Version: (string) (len=6) "2019.2"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=6) "poetry",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=11) "poetry.lock",
+      Language: (string) (len=4) "TOML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(140),
+      ColumnNumber: (*int)(7),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=8) "requests",
+      Version: (string) (len=5) "2.5.2"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=6) "poetry",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=11) "poetry.lock",
+      Language: (string) (len=4) "TOML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(148),
+      ColumnNumber: (*int)(7),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=3) "six",
+      Version: (string) (len=6) "1.12.0"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=6) "poetry",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=11) "poetry.lock",
+      Language: (string) (len=4) "TOML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(156),
+      ColumnNumber: (*int)(7),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=8) "sqlparse",
+      Version: (string) (len=5) "0.3.0"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=6) "poetry",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=11) "poetry.lock",
+      Language: (string) (len=4) "TOML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(164),
+      ColumnNumber: (*int)(7),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=7) "wcwidth",
+      Version: (string) (len=5) "0.1.7"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=6) "poetry",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=11) "poetry.lock",
+      Language: (string) (len=4) "TOML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(172),
+      ColumnNumber: (*int)(7),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=8) "werkzeug",
+      Version: (string) (len=6) "0.15.2"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=6) "poetry",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=11) "poetry.lock",
+      Language: (string) (len=4) "TOML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(180),
+      ColumnNumber: (*int)(7),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=4) "zipp",
+      Version: (string) (len=5) "0.6.0"
+    }
+  })
+}

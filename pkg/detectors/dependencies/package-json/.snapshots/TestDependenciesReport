@@ -1,0 +1,686 @@
+([]*report.Detection) (len=38) {
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=12) "package-json",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=12) "package.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(23),
+      ColumnNumber: (*int)(6),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=26) "@apideck/better-ajv-errors",
+      Version: (string) (len=6) "^0.3.1"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=12) "package-json",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=12) "package.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(24),
+      ColumnNumber: (*int)(6),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=11) "@babel/core",
+      Version: (string) (len=7) "^7.11.1"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=12) "package-json",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=12) "package.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(25),
+      ColumnNumber: (*int)(6),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=17) "@babel/preset-env",
+      Version: (string) (len=7) "^7.11.0"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=12) "package-json",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=12) "package.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(26),
+      ColumnNumber: (*int)(6),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=14) "@babel/runtime",
+      Version: (string) (len=7) "^7.11.2"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=12) "package-json",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=12) "package.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(27),
+      ColumnNumber: (*int)(6),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=20) "@rollup/plugin-babel",
+      Version: (string) (len=6) "^5.2.0"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=12) "package-json",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=12) "package.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(28),
+      ColumnNumber: (*int)(6),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=27) "@rollup/plugin-node-resolve",
+      Version: (string) (len=7) "^11.2.1"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=12) "package-json",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=12) "package.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(29),
+      ColumnNumber: (*int)(6),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=22) "@rollup/plugin-replace",
+      Version: (string) (len=6) "^2.4.1"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=12) "package-json",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=12) "package.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(30),
+      ColumnNumber: (*int)(6),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=36) "@surma/rollup-plugin-off-main-thread",
+      Version: (string) (len=6) "^2.2.3"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=12) "package-json",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=12) "package.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(31),
+      ColumnNumber: (*int)(6),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=3) "ajv",
+      Version: (string) (len=6) "^8.6.0"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=12) "package-json",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=12) "package.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(32),
+      ColumnNumber: (*int)(6),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=11) "common-tags",
+      Version: (string) (len=6) "^1.8.0"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=12) "package-json",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=12) "package.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(33),
+      ColumnNumber: (*int)(6),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=26) "fast-json-stable-stringify",
+      Version: (string) (len=6) "^2.1.0"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=12) "package-json",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=12) "package.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(34),
+      ColumnNumber: (*int)(6),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=8) "fs-extra",
+      Version: (string) (len=6) "^9.0.1"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=12) "package-json",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=12) "package.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(35),
+      ColumnNumber: (*int)(6),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=4) "glob",
+      Version: (string) (len=6) "^7.1.6"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=12) "package-json",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=12) "package.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(36),
+      ColumnNumber: (*int)(6),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=6) "lodash",
+      Version: (string) (len=8) "^4.17.20"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=12) "package-json",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=12) "package.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(37),
+      ColumnNumber: (*int)(6),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=12) "pretty-bytes",
+      Version: (string) (len=6) "^5.3.0"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=12) "package-json",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=12) "package.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(38),
+      ColumnNumber: (*int)(6),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=6) "rollup",
+      Version: (string) (len=7) "^2.43.1"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=12) "package-json",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=12) "package.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(39),
+      ColumnNumber: (*int)(6),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=20) "rollup-plugin-terser",
+      Version: (string) (len=6) "^7.0.0"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=12) "package-json",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=12) "package.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(40),
+      ColumnNumber: (*int)(6),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=10) "source-map",
+      Version: (string) (len=13) "^0.8.0-beta.0"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=12) "package-json",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=12) "package.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(41),
+      ColumnNumber: (*int)(6),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=14) "source-map-url",
+      Version: (string) (len=6) "^0.4.0"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=12) "package-json",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=12) "package.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(42),
+      ColumnNumber: (*int)(6),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=16) "stringify-object",
+      Version: (string) (len=6) "^3.3.0"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=12) "package-json",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=12) "package.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(43),
+      ColumnNumber: (*int)(6),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=14) "strip-comments",
+      Version: (string) (len=6) "^2.0.1"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=12) "package-json",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=12) "package.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(44),
+      ColumnNumber: (*int)(6),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=5) "tempy",
+      Version: (string) (len=6) "^0.6.0"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=12) "package-json",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=12) "package.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(45),
+      ColumnNumber: (*int)(6),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=5) "upath",
+      Version: (string) (len=6) "^1.2.0"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=12) "package-json",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=12) "package.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(46),
+      ColumnNumber: (*int)(6),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=23) "workbox-background-sync",
+      Version: (string) (len=5) "6.4.2"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=12) "package-json",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=12) "package.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(47),
+      ColumnNumber: (*int)(6),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=24) "workbox-broadcast-update",
+      Version: (string) (len=5) "6.4.2"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=12) "package-json",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=12) "package.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(48),
+      ColumnNumber: (*int)(6),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=26) "workbox-cacheable-response",
+      Version: (string) (len=5) "6.4.2"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=12) "package-json",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=12) "package.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(49),
+      ColumnNumber: (*int)(6),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=12) "workbox-core",
+      Version: (string) (len=5) "6.4.2"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=12) "package-json",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=12) "package.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(50),
+      ColumnNumber: (*int)(6),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=18) "workbox-expiration",
+      Version: (string) (len=5) "6.4.2"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=12) "package-json",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=12) "package.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(51),
+      ColumnNumber: (*int)(6),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=24) "workbox-google-analytics",
+      Version: (string) (len=5) "6.4.2"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=12) "package-json",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=12) "package.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(52),
+      ColumnNumber: (*int)(6),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=26) "workbox-navigation-preload",
+      Version: (string) (len=5) "6.4.2"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=12) "package-json",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=12) "package.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(53),
+      ColumnNumber: (*int)(6),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=18) "workbox-precaching",
+      Version: (string) (len=5) "6.4.2"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=12) "package-json",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=12) "package.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(54),
+      ColumnNumber: (*int)(6),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=22) "workbox-range-requests",
+      Version: (string) (len=5) "6.4.2"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=12) "package-json",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=12) "package.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(55),
+      ColumnNumber: (*int)(6),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=15) "workbox-recipes",
+      Version: (string) (len=5) "6.4.2"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=12) "package-json",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=12) "package.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(56),
+      ColumnNumber: (*int)(6),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=15) "workbox-routing",
+      Version: (string) (len=5) "6.4.2"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=12) "package-json",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=12) "package.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(57),
+      ColumnNumber: (*int)(6),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=18) "workbox-strategies",
+      Version: (string) (len=5) "6.4.2"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=12) "package-json",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=12) "package.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(58),
+      ColumnNumber: (*int)(6),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=15) "workbox-streams",
+      Version: (string) (len=5) "6.4.2"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=12) "package-json",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=12) "package.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(59),
+      ColumnNumber: (*int)(6),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=10) "workbox-sw",
+      Version: (string) (len=5) "6.4.2"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=12) "package-json",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=12) "package.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(60),
+      ColumnNumber: (*int)(6),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=14) "workbox-window",
+      Version: (string) (len=5) "6.4.2"
+    }
+  })
+}

@@ -1,0 +1,107 @@
+([]*report.Detection) (len=5) {
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=5) "rails",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=12) "db/schema.rb",
+      Language: (string) (len=4) "Ruby",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(20),
+      ColumnNumber: (*int)(7),
+      Text: (*string)(<nil>)
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=26) "active_storage_attachments",
+      ObjectUUID: (string) (len=1) "1",
+      FieldName: (string) (len=4) "name",
+      FieldUUID: (string) (len=1) "2",
+      FieldType: (string) (len=6) "string",
+      SimpleFieldType: (string) (len=6) "string"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=5) "rails",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=12) "db/schema.rb",
+      Language: (string) (len=4) "Ruby",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(21),
+      ColumnNumber: (*int)(7),
+      Text: (*string)(<nil>)
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=26) "active_storage_attachments",
+      ObjectUUID: (string) (len=1) "1",
+      FieldName: (string) (len=11) "record_type",
+      FieldUUID: (string) (len=1) "3",
+      FieldType: (string) (len=6) "string",
+      SimpleFieldType: (string) (len=6) "string"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=5) "rails",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=12) "db/schema.rb",
+      Language: (string) (len=4) "Ruby",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(22),
+      ColumnNumber: (*int)(7),
+      Text: (*string)(<nil>)
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=26) "active_storage_attachments",
+      ObjectUUID: (string) (len=1) "1",
+      FieldName: (string) (len=9) "record_id",
+      FieldUUID: (string) (len=1) "4",
+      FieldType: (string) (len=6) "bigint",
+      SimpleFieldType: (string) (len=6) "number"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=5) "rails",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=12) "db/schema.rb",
+      Language: (string) (len=4) "Ruby",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(23),
+      ColumnNumber: (*int)(7),
+      Text: (*string)(<nil>)
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=26) "active_storage_attachments",
+      ObjectUUID: (string) (len=1) "1",
+      FieldName: (string) (len=7) "blob_id",
+      FieldUUID: (string) (len=1) "5",
+      FieldType: (string) (len=6) "bigint",
+      SimpleFieldType: (string) (len=6) "number"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=5) "rails",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=12) "db/schema.rb",
+      Language: (string) (len=4) "Ruby",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(24),
+      ColumnNumber: (*int)(7),
+      Text: (*string)(<nil>)
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=26) "active_storage_attachments",
+      ObjectUUID: (string) (len=1) "1",
+      FieldName: (string) (len=10) "created_at",
+      FieldUUID: (string) (len=1) "6",
+      FieldType: (string) (len=8) "datetime",
+      SimpleFieldType: (string) (len=4) "date"
+    }
+  })
+}

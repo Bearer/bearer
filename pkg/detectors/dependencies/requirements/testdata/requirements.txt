@@ -1,0 +1,5 @@
+#
+Babel==0.9.5 # translation
+CherryPy # web server
+Creoleparser >0.7.1,<0.8 # wiki formatting
+Genshi>0.5.1 # templating

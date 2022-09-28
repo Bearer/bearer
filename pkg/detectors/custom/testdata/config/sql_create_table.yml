@@ -1,0 +1,10 @@
+rules:
+  detect_create_table:
+    patterns:
+      - |
+        CREATE TABLE public.$TABLE_NAME (
+          <$COLUMN>
+        )
+    param_parenting: true
+    languages:
+      - sql

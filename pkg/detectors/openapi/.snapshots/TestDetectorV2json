@@ -1,0 +1,260 @@
+([]*report.Detection) (len=12) {
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=9) "operation",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-swagger.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(17),
+      ColumnNumber: (*int)(7),
+      Text: (*string)((len=5) "\"get\"")
+    },
+    Value: (operations.Operation) {
+      Path: (string) (len=5) "/pets",
+      Type: (string) (len=3) "GET",
+      Urls: ([]operations.Url) (len=1) {
+        (operations.Url) {
+          Url: (string) (len=29) "http://petstore.swagger.io/v1",
+          Variables: ([]operations.Variable) <nil>
+        }
+      }
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=9) "operation",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-swagger.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(58),
+      ColumnNumber: (*int)(7),
+      Text: (*string)((len=6) "\"post\"")
+    },
+    Value: (operations.Operation) {
+      Path: (string) (len=5) "/pets",
+      Type: (string) (len=4) "POST",
+      Urls: ([]operations.Url) (len=1) {
+        (operations.Url) {
+          Url: (string) (len=29) "http://petstore.swagger.io/v1",
+          Variables: ([]operations.Variable) <nil>
+        }
+      }
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=9) "operation",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-swagger.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(76),
+      ColumnNumber: (*int)(7),
+      Text: (*string)((len=5) "\"get\"")
+    },
+    Value: (operations.Operation) {
+      Path: (string) (len=7) "/pets/*",
+      Type: (string) (len=3) "GET",
+      Urls: ([]operations.Url) (len=1) {
+        (operations.Url) {
+          Url: (string) (len=29) "http://petstore.swagger.io/v1",
+          Variables: ([]operations.Variable) <nil>
+        }
+      }
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-swagger.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(23),
+      ColumnNumber: (*int)(21),
+      Text: (*string)((len=5) "\"id1\"")
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=8) "listPets",
+      ObjectUUID: (string) (len=4) "7475",
+      FieldName: (string) (len=3) "id1",
+      FieldUUID: (string) (len=4) "7483",
+      FieldType: (string) (len=7) "integer",
+      SimpleFieldType: (string) (len=6) "number"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-swagger.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(31),
+      ColumnNumber: (*int)(21),
+      Text: (*string)((len=5) "\"id2\"")
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=8) "listPets",
+      ObjectUUID: (string) (len=4) "7475",
+      FieldName: (string) (len=3) "id2",
+      FieldUUID: (string) (len=4) "7502",
+      FieldType: (string) (len=6) "string",
+      SimpleFieldType: (string) (len=6) "string"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-swagger.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(82),
+      ColumnNumber: (*int)(21),
+      Text: (*string)((len=7) "\"petId\"")
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=11) "showPetById",
+      ObjectUUID: (string) (len=4) "7599",
+      FieldName: (string) (len=5) "petId",
+      FieldUUID: (string) (len=4) "7607",
+      FieldType: (string) (len=6) "string",
+      SimpleFieldType: (string) (len=6) "string"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-swagger.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(118),
+      ColumnNumber: (*int)(9),
+      Text: (*string)((len=6) "\"name\"")
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=6) "Person",
+      ObjectUUID: (string) (len=4) "7676",
+      FieldName: (string) (len=4) "name",
+      FieldUUID: (string) (len=4) "7678",
+      FieldType: (string) (len=6) "string",
+      SimpleFieldType: (string) (len=6) "string"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-swagger.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(121),
+      ColumnNumber: (*int)(9),
+      Text: (*string)((len=4) "\"id\"")
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=6) "Person",
+      ObjectUUID: (string) (len=4) "7676",
+      FieldName: (string) (len=2) "id",
+      FieldUUID: (string) (len=4) "7684",
+      FieldType: (string) "",
+      SimpleFieldType: (string) (len=6) "object"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-swagger.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(123),
+      ColumnNumber: (*int)(15),
+      Text: (*string)((len=5) "\"id1\"")
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=2) "id",
+      ObjectUUID: (string) (len=4) "7684",
+      FieldName: (string) (len=3) "id1",
+      FieldUUID: (string) (len=4) "7686",
+      FieldType: (string) (len=6) "string",
+      SimpleFieldType: (string) (len=6) "string"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-swagger.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(126),
+      ColumnNumber: (*int)(15),
+      Text: (*string)((len=5) "\"id2\"")
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=2) "id",
+      ObjectUUID: (string) (len=4) "7684",
+      FieldName: (string) (len=3) "id2",
+      FieldUUID: (string) (len=4) "7692",
+      FieldType: (string) (len=6) "string",
+      SimpleFieldType: (string) (len=6) "string"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-swagger.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(136),
+      ColumnNumber: (*int)(9),
+      Text: (*string)((len=6) "\"code\"")
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=5) "Error",
+      ObjectUUID: (string) (len=4) "7706",
+      FieldName: (string) (len=4) "code",
+      FieldUUID: (string) (len=4) "7713",
+      FieldType: (string) (len=7) "integer",
+      SimpleFieldType: (string) (len=6) "number"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-swagger.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(140),
+      ColumnNumber: (*int)(9),
+      Text: (*string)((len=9) "\"message\"")
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=5) "Error",
+      ObjectUUID: (string) (len=4) "7706",
+      FieldName: (string) (len=7) "message",
+      FieldUUID: (string) (len=4) "7722",
+      FieldType: (string) (len=6) "string",
+      SimpleFieldType: (string) (len=6) "string"
+    }
+  })
+}

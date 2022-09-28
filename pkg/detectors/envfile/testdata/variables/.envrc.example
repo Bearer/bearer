@@ -1,0 +1,12 @@
+# Note: Remember to add any new vars to the Docker templates
+# e.g. .jenkins/docker-compose-production.yml.tpl and .jenkins/docker-compose-staging.yml.tpl
+
+
+
+# optional export REACT_AUDIENCES="some-valid-aud,another-aud"
+export AGENT_REPORT_HOST="https://agent.staging.google.com"
+export WEBHOOKS_ADDRESS="https://webhooks.staging.google.com/webhook/webhook/v1/t"
+
+export GITHUB_APP_PRIVATE_KEY="-----BEGIN RSA PRIVATE KEY-----
+your-key-here
+-----END RSA PRIVATE KEY-----"

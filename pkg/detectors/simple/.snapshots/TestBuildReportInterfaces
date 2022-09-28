@@ -1,0 +1,152 @@
+([]*report.Detection) (len=6) {
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=9) "interface",
+    DetectorType: (detectors.Type) (len=6) "simple",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=10) "unknown.pl",
+      Language: (string) (len=4) "Raku",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(16),
+      ColumnNumber: (*int)(14),
+      Text: (*string)((len=23) "https://url.example.com")
+    },
+    Value: (interfaces.Interface) {
+      Type: (interfaces.Type) (len=3) "url",
+      Value: (*values.Value)({
+        Parts: ([]values.Part) (len=1) {
+          (*values.String)({
+            Type: (values.PartType) (len=6) "string",
+            Value: (string) (len=23) "https://url.example.com"
+          })
+        }
+      }),
+      VariableName: (string) ""
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=9) "interface",
+    DetectorType: (detectors.Type) (len=6) "simple",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=10) "unknown.pl",
+      Language: (string) (len=4) "Raku",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(19),
+      ColumnNumber: (*int)(14),
+      Text: (*string)((len=35) "https://multi-a.example.com/foo?x=1")
+    },
+    Value: (interfaces.Interface) {
+      Type: (interfaces.Type) (len=3) "url",
+      Value: (*values.Value)({
+        Parts: ([]values.Part) (len=1) {
+          (*values.String)({
+            Type: (values.PartType) (len=6) "string",
+            Value: (string) (len=35) "https://multi-a.example.com/foo?x=1"
+          })
+        }
+      }),
+      VariableName: (string) ""
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=9) "interface",
+    DetectorType: (detectors.Type) (len=6) "simple",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=10) "unknown.pl",
+      Language: (string) (len=4) "Raku",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(19),
+      ColumnNumber: (*int)(53),
+      Text: (*string)((len=31) "https://multi-b.example.com/bar")
+    },
+    Value: (interfaces.Interface) {
+      Type: (interfaces.Type) (len=3) "url",
+      Value: (*values.Value)({
+        Parts: ([]values.Part) (len=1) {
+          (*values.String)({
+            Type: (values.PartType) (len=6) "string",
+            Value: (string) (len=31) "https://multi-b.example.com/bar"
+          })
+        }
+      }),
+      VariableName: (string) ""
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=9) "interface",
+    DetectorType: (detectors.Type) (len=6) "simple",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=10) "unknown.pl",
+      Language: (string) (len=4) "Raku",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(24),
+      ColumnNumber: (*int)(0),
+      Text: (*string)((len=38) "https://port1.example.com:3000/foo?x=1")
+    },
+    Value: (interfaces.Interface) {
+      Type: (interfaces.Type) (len=3) "url",
+      Value: (*values.Value)({
+        Parts: ([]values.Part) (len=1) {
+          (*values.String)({
+            Type: (values.PartType) (len=6) "string",
+            Value: (string) (len=38) "https://port1.example.com:3000/foo?x=1"
+          })
+        }
+      }),
+      VariableName: (string) ""
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=9) "interface",
+    DetectorType: (detectors.Type) (len=6) "simple",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=10) "unknown.pl",
+      Language: (string) (len=4) "Raku",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(24),
+      ColumnNumber: (*int)(39),
+      Text: (*string)((len=30) "https://port2.example.com:3000")
+    },
+    Value: (interfaces.Interface) {
+      Type: (interfaces.Type) (len=3) "url",
+      Value: (*values.Value)({
+        Parts: ([]values.Part) (len=1) {
+          (*values.String)({
+            Type: (values.PartType) (len=6) "string",
+            Value: (string) (len=30) "https://port2.example.com:3000"
+          })
+        }
+      }),
+      VariableName: (string) ""
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=9) "interface",
+    DetectorType: (detectors.Type) (len=6) "simple",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=10) "unknown.pl",
+      Language: (string) (len=4) "Raku",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(27),
+      ColumnNumber: (*int)(1),
+      Text: (*string)((len=23) "http://link.example.com")
+    },
+    Value: (interfaces.Interface) {
+      Type: (interfaces.Type) (len=3) "url",
+      Value: (*values.Value)({
+        Parts: ([]values.Part) (len=1) {
+          (*values.String)({
+            Type: (values.PartType) (len=6) "string",
+            Value: (string) (len=23) "http://link.example.com"
+          })
+        }
+      }),
+      VariableName: (string) ""
+    }
+  })
+}

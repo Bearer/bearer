@@ -1,0 +1,18 @@
+local:
+  service: Disk
+  root: <%= Rails.root.join("storage") %>
+
+amazon:
+  service: S3
+  region: eu-west-1
+  http_open_timeout: 60
+  http_read_timeout: 60
+  retry_limit: 5
+  bucket: <%= ENV["S3_UPLOAD_BUCKET"] %>
+  upload:
+    server_side_encryption: "AES256"
+
+amazon_other:
+  service: S3
+  region: eu-west-1
+  bucket: <%= ENV["S3_UPLOAD_BUCKET2"] %>

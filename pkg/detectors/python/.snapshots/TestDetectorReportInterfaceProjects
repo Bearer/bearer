@@ -1,0 +1,369 @@
+([]*report.Detection) (len=15) {
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=6) "python",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=9) "config.py",
+      Language: (string) (len=6) "Python",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(6),
+      ColumnNumber: (*int)(26),
+      Text: (*string)(<nil>)
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=4) "fred",
+      ObjectUUID: (string) (len=1) "4",
+      FieldName: (string) (len=7) "environ",
+      FieldUUID: (string) (len=1) "5",
+      FieldType: (string) "",
+      SimpleFieldType: (string) (len=7) "unknown"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=6) "python",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=9) "config.py",
+      Language: (string) (len=6) "Python",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(6),
+      ColumnNumber: (*int)(34),
+      Text: (*string)(<nil>)
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=7) "environ",
+      ObjectUUID: (string) (len=1) "5",
+      FieldName: (string) (len=3) "get",
+      FieldUUID: (string) (len=1) "6",
+      FieldType: (string) "",
+      SimpleFieldType: (string) (len=7) "unknown"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=6) "python",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=9) "config.py",
+      Language: (string) (len=6) "Python",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(7),
+      ColumnNumber: (*int)(29),
+      Text: (*string)(<nil>)
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=7) "environ",
+      ObjectUUID: (string) (len=1) "7",
+      FieldName: (string) (len=3) "pop",
+      FieldUUID: (string) (len=1) "8",
+      FieldType: (string) "",
+      SimpleFieldType: (string) (len=7) "unknown"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=9) "interface",
+    DetectorType: (detectors.Type) (len=6) "python",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=9) "config.py",
+      Language: (string) (len=6) "Python",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(5),
+      ColumnNumber: (*int)(24),
+      Text: (*string)((len=34) "os.environ[\"ORDER_SERVICE_DOMAIN\"]")
+    },
+    Value: (interfaces.Interface) {
+      Type: (interfaces.Type) (len=3) "url",
+      Value: (*values.Value)({
+        Parts: ([]values.Part) (len=1) {
+          (*values.VariableReference)({
+            Type: (values.PartType) (len=18) "variable_reference",
+            Identifier: (variables.Identifier) {
+              Type: (variables.Type) (len=11) "environment",
+              Name: (string) (len=20) "ORDER_SERVICE_DOMAIN"
+            }
+          })
+        }
+      }),
+      VariableName: (string) ""
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=9) "interface",
+    DetectorType: (detectors.Type) (len=6) "python",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=9) "config.py",
+      Language: (string) (len=6) "Python",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(6),
+      ColumnNumber: (*int)(21),
+      Text: (*string)((len=37) "fred.environ.get('ORDER_SERVICE_URL')")
+    },
+    Value: (interfaces.Interface) {
+      Type: (interfaces.Type) (len=3) "url",
+      Value: (*values.Value)({
+        Parts: ([]values.Part) (len=1) {
+          (*values.VariableReference)({
+            Type: (values.PartType) (len=18) "variable_reference",
+            Identifier: (variables.Identifier) {
+              Type: (variables.Type) (len=11) "environment",
+              Name: (string) (len=17) "ORDER_SERVICE_URL"
+            }
+          })
+        }
+      }),
+      VariableName: (string) ""
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=9) "interface",
+    DetectorType: (detectors.Type) (len=6) "python",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=9) "config.py",
+      Language: (string) (len=6) "Python",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(7),
+      ColumnNumber: (*int)(21),
+      Text: (*string)((len=32) "environ.pop(\"USER_SERVICE_HOST\")")
+    },
+    Value: (interfaces.Interface) {
+      Type: (interfaces.Type) (len=3) "url",
+      Value: (*values.Value)({
+        Parts: ([]values.Part) (len=1) {
+          (*values.VariableReference)({
+            Type: (values.PartType) (len=18) "variable_reference",
+            Identifier: (variables.Identifier) {
+              Type: (variables.Type) (len=11) "environment",
+              Name: (string) (len=17) "USER_SERVICE_HOST"
+            }
+          })
+        }
+      }),
+      VariableName: (string) ""
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=6) "python",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=7) "urls.py",
+      Language: (string) (len=6) "Python",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(29),
+      ColumnNumber: (*int)(23),
+      Text: (*string)(<nil>)
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=6) "CONFIG",
+      ObjectUUID: (string) (len=2) "10",
+      FieldName: (string) (len=17) "ignore.domain.com",
+      FieldUUID: (string) (len=2) "11",
+      FieldType: (string) "",
+      SimpleFieldType: (string) (len=7) "unknown"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=6) "python",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=7) "urls.py",
+      Language: (string) (len=6) "Python",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(42),
+      ColumnNumber: (*int)(10),
+      Text: (*string)(<nil>)
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=3) "app",
+      ObjectUUID: (string) (len=2) "12",
+      FieldName: (string) (len=4) "task",
+      FieldUUID: (string) (len=2) "13",
+      FieldType: (string) "",
+      SimpleFieldType: (string) (len=7) "unknown"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=6) "python",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=7) "urls.py",
+      Language: (string) (len=6) "Python",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(44),
+      ColumnNumber: (*int)(13),
+      Text: (*string)(<nil>)
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=3) "app",
+      ObjectUUID: (string) (len=2) "14",
+      FieldName: (string) (len=7) "backend",
+      FieldUUID: (string) (len=2) "15",
+      FieldType: (string) "",
+      SimpleFieldType: (string) (len=7) "unknown"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=6) "python",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=7) "urls.py",
+      Language: (string) (len=6) "Python",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(44),
+      ColumnNumber: (*int)(21),
+      Text: (*string)(<nil>)
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=7) "backend",
+      ObjectUUID: (string) (len=2) "15",
+      FieldName: (string) (len=7) "cleanup",
+      FieldUUID: (string) (len=2) "16",
+      FieldType: (string) "",
+      SimpleFieldType: (string) (len=7) "unknown"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=9) "interface",
+    DetectorType: (detectors.Type) (len=6) "python",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=7) "urls.py",
+      Language: (string) (len=6) "Python",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(9),
+      ColumnNumber: (*int)(26),
+      Text: (*string)((len=24) "\"string-key.example.com\"")
+    },
+    Value: (interfaces.Interface) {
+      Type: (interfaces.Type) (len=3) "url",
+      Value: (*values.Value)({
+        Parts: ([]values.Part) (len=1) {
+          (*values.String)({
+            Type: (values.PartType) (len=6) "string",
+            Value: (string) (len=22) "string-key.example.com"
+          })
+        }
+      }),
+      VariableName: (string) ""
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=9) "interface",
+    DetectorType: (detectors.Type) (len=6) "python",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=7) "urls.py",
+      Language: (string) (len=6) "Python",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(21),
+      ColumnNumber: (*int)(16),
+      Text: (*string)((len=22) "\"variable.example.com\"")
+    },
+    Value: (interfaces.Interface) {
+      Type: (interfaces.Type) (len=3) "url",
+      Value: (*values.Value)({
+        Parts: ([]values.Part) (len=1) {
+          (*values.String)({
+            Type: (values.PartType) (len=6) "string",
+            Value: (string) (len=20) "variable.example.com"
+          })
+        }
+      }),
+      VariableName: (string) ""
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=9) "interface",
+    DetectorType: (detectors.Type) (len=6) "python",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=7) "urls.py",
+      Language: (string) (len=6) "Python",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(23),
+      ColumnNumber: (*int)(16),
+      Text: (*string)((len=25) "\"concat\" + \".example.com\"")
+    },
+    Value: (interfaces.Interface) {
+      Type: (interfaces.Type) (len=3) "url",
+      Value: (*values.Value)({
+        Parts: ([]values.Part) (len=1) {
+          (*values.String)({
+            Type: (values.PartType) (len=6) "string",
+            Value: (string) (len=18) "concat.example.com"
+          })
+        }
+      }),
+      VariableName: (string) ""
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=9) "interface",
+    DetectorType: (detectors.Type) (len=6) "python",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=7) "urls.py",
+      Language: (string) (len=6) "Python",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(25),
+      ColumnNumber: (*int)(16),
+      Text: (*string)((len=40) "f'a.{user_id}.interpolation.example.com'")
+    },
+    Value: (interfaces.Interface) {
+      Type: (interfaces.Type) (len=3) "url",
+      Value: (*values.Value)({
+        Parts: ([]values.Part) (len=3) {
+          (*values.String)({
+            Type: (values.PartType) (len=6) "string",
+            Value: (string) (len=2) "a."
+          }),
+          (*values.VariableReference)({
+            Type: (values.PartType) (len=18) "variable_reference",
+            Identifier: (variables.Identifier) {
+              Type: (variables.Type) (len=8) "variable",
+              Name: (string) (len=7) "user_id"
+            }
+          }),
+          (*values.String)({
+            Type: (values.PartType) (len=6) "string",
+            Value: (string) (len=26) ".interpolation.example.com"
+          })
+        }
+      }),
+      VariableName: (string) ""
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=9) "interface",
+    DetectorType: (detectors.Type) (len=6) "python",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=7) "urls.py",
+      Language: (string) (len=6) "Python",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(27),
+      ColumnNumber: (*int)(16),
+      Text: (*string)((len=18) "r\"raw.example.com\"")
+    },
+    Value: (interfaces.Interface) {
+      Type: (interfaces.Type) (len=3) "url",
+      Value: (*values.Value)({
+        Parts: ([]values.Part) (len=1) {
+          (*values.String)({
+            Type: (values.PartType) (len=6) "string",
+            Value: (string) (len=15) "raw.example.com"
+          })
+        }
+      }),
+      VariableName: (string) ""
+    }
+  })
+}

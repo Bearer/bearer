@@ -1,0 +1,244 @@
+[
+    {
+        "dependencies": [], 
+        "package": {
+            "installed_version": "0.11", 
+            "package_name": "docutils", 
+            "key": "docutils"
+        }
+    }, 
+    {
+        "dependencies": [], 
+        "package": {
+            "installed_version": "1.4.12", 
+            "package_name": "Django", 
+            "key": "django"
+        }
+    }, 
+    {
+        "dependencies": [], 
+        "package": {
+            "installed_version": "2.4", 
+            "package_name": "Markdown", 
+            "key": "markdown"
+        }
+    }, 
+    {
+        "dependencies": [], 
+        "package": {
+            "installed_version": "0.8", 
+            "package_name": "django-registration", 
+            "key": "django-registration"
+        }
+    }, 
+    {
+        "dependencies": [
+            {
+                "required_version": ">=1.2.1", 
+                "installed_version": "1.3.7", 
+                "package_name": "nose", 
+                "key": "nose"
+            }, 
+            {
+                "required_version": ">=1.2", 
+                "installed_version": "1.4.12", 
+                "package_name": "Django", 
+                "key": "django"
+            }
+        ], 
+        "package": {
+            "installed_version": "1.2", 
+            "package_name": "django-nose", 
+            "key": "django-nose"
+        }
+    }, 
+    {
+        "dependencies": [], 
+        "package": {
+            "installed_version": "4.4.2", 
+            "package_name": "coverage", 
+            "key": "coverage"
+        }
+    }, 
+    {
+        "dependencies": [], 
+        "package": {
+            "installed_version": "1.3.7", 
+            "package_name": "nose", 
+            "key": "nose"
+        }
+    }, 
+    {
+        "dependencies": [
+            {
+                "required_version": ">=1.9", 
+                "installed_version": "1.11.0", 
+                "package_name": "six", 
+                "key": "six"
+            }, 
+            {
+                "required_version": null, 
+                "installed_version": "0.5.1", 
+                "package_name": "webencodings", 
+                "key": "webencodings"
+            }
+        ], 
+        "package": {
+            "installed_version": "1.0.1", 
+            "package_name": "html5lib", 
+            "key": "html5lib"
+        }
+    }, 
+    {
+        "dependencies": [
+            {
+                "required_version": ">=6.0.0", 
+                "installed_version": "9.0.1", 
+                "package_name": "pip", 
+                "key": "pip"
+            }
+        ], 
+        "package": {
+            "installed_version": "0.10.1", 
+            "package_name": "pipdeptree", 
+            "key": "pipdeptree"
+        }
+    }, 
+    {
+        "dependencies": [], 
+        "package": {
+            "installed_version": "1.11.0", 
+            "package_name": "six", 
+            "key": "six"
+        }
+    }, 
+    {
+        "dependencies": [
+            {
+                "required_version": null, 
+                "installed_version": "1.11.0", 
+                "package_name": "six", 
+                "key": "six"
+            }, 
+            {
+                "required_version": ">=0.999", 
+                "installed_version": "1.0.1", 
+                "package_name": "html5lib", 
+                "key": "html5lib"
+            }
+        ], 
+        "package": {
+            "installed_version": "1.4", 
+            "package_name": "bleach", 
+            "key": "bleach"
+        }
+    }, 
+    {
+        "dependencies": [], 
+        "package": {
+            "installed_version": "1.8.3", 
+            "package_name": "smartypants", 
+            "key": "smartypants"
+        }
+    }, 
+    {
+        "dependencies": [], 
+        "package": {
+            "installed_version": "38.2.4", 
+            "package_name": "setuptools", 
+            "key": "setuptools"
+        }
+    }, 
+    {
+        "dependencies": [], 
+        "package": {
+            "installed_version": "0.30.0", 
+            "package_name": "wheel", 
+            "key": "wheel"
+        }
+    }, 
+    {
+        "dependencies": [], 
+        "package": {
+            "installed_version": "0.2.4", 
+            "package_name": "sqlparse", 
+            "key": "sqlparse"
+        }
+    }, 
+    {
+        "dependencies": [], 
+        "package": {
+            "installed_version": "15.1.0", 
+            "package_name": "virtualenv", 
+            "key": "virtualenv"
+        }
+    }, 
+    {
+        "dependencies": [], 
+        "package": {
+            "installed_version": "0.8.4", 
+            "package_name": "South", 
+            "key": "south"
+        }
+    }, 
+    {
+        "dependencies": [], 
+        "package": {
+            "installed_version": "0.5.1", 
+            "package_name": "webencodings", 
+            "key": "webencodings"
+        }
+    }, 
+    {
+        "dependencies": [], 
+        "package": {
+            "installed_version": "2.7.3.2", 
+            "package_name": "psycopg2", 
+            "key": "psycopg2"
+        }
+    }, 
+    {
+        "dependencies": [], 
+        "package": {
+            "installed_version": "9.0.1", 
+            "package_name": "pip", 
+            "key": "pip"
+        }
+    }, 
+    {
+        "dependencies": [
+            {
+                "required_version": ">=1.4.2,<1.7", 
+                "installed_version": "1.4.12", 
+                "package_name": "django", 
+                "key": "django"
+            }, 
+            {
+                "required_version": null, 
+                "installed_version": "0.2.4", 
+                "package_name": "sqlparse", 
+                "key": "sqlparse"
+            }
+        ], 
+        "package": {
+            "installed_version": "0.11", 
+            "package_name": "django-debug-toolbar", 
+            "key": "django-debug-toolbar"
+        }
+    }, 
+    {
+        "dependencies": [
+            {
+                "required_version": ">=1.4.2", 
+                "installed_version": "1.4.12", 
+                "package_name": "Django", 
+                "key": "django"
+            }
+        ], 
+        "package": {
+            "installed_version": "1.0", 
+            "package_name": "django-secure", 
+            "key": "django-secure"
+        }
+    }
+]

@@ -1,0 +1,170 @@
+([]*report.Detection) (len=8) {
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=6) "golang",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=11) "datatype.go",
+      Language: (string) (len=2) "Go",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(4),
+      ColumnNumber: (*int)(2),
+      Text: (*string)(<nil>)
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=4) "User",
+      ObjectUUID: (string) (len=1) "2",
+      FieldName: (string) (len=4) "name",
+      FieldUUID: (string) (len=1) "3",
+      FieldType: (string) (len=6) "string",
+      SimpleFieldType: (string) (len=6) "string"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=6) "golang",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=11) "datatype.go",
+      Language: (string) (len=2) "Go",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(6),
+      ColumnNumber: (*int)(2),
+      Text: (*string)(<nil>)
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=4) "User",
+      ObjectUUID: (string) (len=1) "2",
+      FieldName: (string) (len=6) "person",
+      FieldUUID: (string) (len=1) "4",
+      FieldType: (string) (len=6) "person",
+      SimpleFieldType: (string) (len=6) "object"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=6) "golang",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=11) "datatype.go",
+      Language: (string) (len=2) "Go",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(19),
+      ColumnNumber: (*int)(19),
+      Text: (*string)(<nil>)
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=4) "User",
+      ObjectUUID: (string) (len=1) "2",
+      FieldName: (string) (len=4) "Save",
+      FieldUUID: (string) (len=1) "5",
+      FieldType: (string) (len=8) "function",
+      SimpleFieldType: (string) (len=8) "function"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=6) "golang",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=11) "datatype.go",
+      Language: (string) (len=2) "Go",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(24),
+      ColumnNumber: (*int)(19),
+      Text: (*string)(<nil>)
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=4) "User",
+      ObjectUUID: (string) (len=1) "2",
+      FieldName: (string) (len=4) "Load",
+      FieldUUID: (string) (len=1) "6",
+      FieldType: (string) (len=8) "function",
+      SimpleFieldType: (string) (len=8) "function"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=6) "golang",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=11) "datatype.go",
+      Language: (string) (len=2) "Go",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(28),
+      ColumnNumber: (*int)(18),
+      Text: (*string)(<nil>)
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=4) "User",
+      ObjectUUID: (string) (len=1) "2",
+      FieldName: (string) (len=5) "Store",
+      FieldUUID: (string) (len=1) "7",
+      FieldType: (string) (len=8) "function",
+      SimpleFieldType: (string) (len=8) "function"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=6) "golang",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=11) "datatype.go",
+      Language: (string) (len=2) "Go",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(11),
+      ColumnNumber: (*int)(2),
+      Text: (*string)(<nil>)
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=6) "person",
+      ObjectUUID: (string) (len=1) "8",
+      FieldName: (string) (len=4) "city",
+      FieldUUID: (string) (len=1) "9",
+      FieldType: (string) (len=6) "string",
+      SimpleFieldType: (string) (len=6) "string"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=6) "golang",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=11) "datatype.go",
+      Language: (string) (len=2) "Go",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(15),
+      ColumnNumber: (*int)(2),
+      Text: (*string)(<nil>)
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=9) "BodyStats",
+      ObjectUUID: (string) (len=2) "10",
+      FieldName: (string) (len=6) "height",
+      FieldUUID: (string) (len=2) "11",
+      FieldType: (string) (len=3) "int",
+      SimpleFieldType: (string) (len=6) "number"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=6) "golang",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=11) "datatype.go",
+      Language: (string) (len=2) "Go",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(16),
+      ColumnNumber: (*int)(2),
+      Text: (*string)(<nil>)
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=9) "BodyStats",
+      ObjectUUID: (string) (len=2) "10",
+      FieldName: (string) (len=5) "width",
+      FieldUUID: (string) (len=2) "12",
+      FieldType: (string) (len=3) "int",
+      SimpleFieldType: (string) (len=6) "number"
+    }
+  })
+}

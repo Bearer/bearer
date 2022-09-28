@@ -1,0 +1,56 @@
+([]*report.Detection) (len=3) {
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=9) "pyproject",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=14) "pyproject.toml",
+      Language: (string) (len=4) "TOML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(8),
+      ColumnNumber: (*int)(0),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=6) "python",
+      Version: (string) (len=4) "^3.7"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=9) "pyproject",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=14) "pyproject.toml",
+      Language: (string) (len=4) "TOML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(9),
+      ColumnNumber: (*int)(0),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=11) "synapse-p2p",
+      Version: (string) (len=6) "^0.1.4"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=9) "pyproject",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=14) "pyproject.toml",
+      Language: (string) (len=4) "TOML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(10),
+      ColumnNumber: (*int)(0),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=5) "faker",
+      Version: (string) (len=4) "^1.0"
+    }
+  })
+}

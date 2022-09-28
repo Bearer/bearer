@@ -1,0 +1,128 @@
+([]*report.Detection) (len=7) {
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=12) "composerlock",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=13) "composer.lock",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(10),
+      ColumnNumber: (*int)(20),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=14) "league/climate",
+      Version: (string) (len=5) "2.4.0"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=12) "composerlock",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=13) "composer.lock",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(59),
+      ColumnNumber: (*int)(20),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=20) "t4web/authentication",
+      Version: (string) (len=10) "dev-master"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=12) "composerlock",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=13) "composer.lock",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(107),
+      ColumnNumber: (*int)(20),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=26) "t4web/composer-lock-parser",
+      Version: (string) (len=5) "0.1.0"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=12) "composerlock",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=13) "composer.lock",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(151),
+      ColumnNumber: (*int)(20),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=13) "t4web/modules",
+      Version: (string) (len=10) "dev-master"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=12) "composerlock",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=13) "composer.lock",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(202),
+      ColumnNumber: (*int)(20),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=27) "zendframework/zendframework",
+      Version: (string) (len=5) "2.3.3"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=12) "composerlock",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=13) "composer.lock",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(320),
+      ColumnNumber: (*int)(20),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=21) "zendframework/zendxml",
+      Version: (string) (len=5) "1.0.0"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=12) "composerlock",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=13) "composer.lock",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(365),
+      ColumnNumber: (*int)(20),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=19) "zf-commons/zfc-base",
+      Version: (string) (len=10) "dev-master"
+    }
+  })
+}

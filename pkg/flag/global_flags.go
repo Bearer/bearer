@@ -66,7 +66,7 @@ var (
 		Name:       "generate-default-config",
 		ConfigName: "generate-default-config",
 		Value:      false,
-		Usage:      "write the default config to trivy-default.yaml",
+		Usage:      "write the default config to curio-default.yaml",
 		Persistent: true,
 	}
 )

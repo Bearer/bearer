@@ -1,0 +1,10 @@
+[{
+    "groupId": "test0",
+    "artifactId": "testartifact0",
+    "version": "0.0.beta"
+},
+{
+    "groupId": "test1",
+    "artifactId": "testartifact1",
+    "version": "1.0.beta"
+}]

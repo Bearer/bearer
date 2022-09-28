@@ -1,0 +1,1431 @@
+([]*report.Detection) (len=61) {
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=10) "javascript",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=7) "app.vue",
+      Language: (string) (len=10) "JavaScript",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(18),
+      ColumnNumber: (*int)(31),
+      Text: (*string)(<nil>)
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=8) "response",
+      ObjectUUID: (string) (len=1) "5",
+      FieldName: (string) (len=4) "data",
+      FieldUUID: (string) (len=1) "6",
+      FieldType: (string) "",
+      SimpleFieldType: (string) (len=7) "unknown"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=10) "javascript",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=7) "app.vue",
+      Language: (string) (len=10) "JavaScript",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(20),
+      ColumnNumber: (*int)(17),
+      Text: (*string)(<nil>)
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=7) "console",
+      ObjectUUID: (string) (len=1) "7",
+      FieldName: (string) (len=3) "log",
+      FieldUUID: (string) (len=1) "8",
+      FieldType: (string) "",
+      SimpleFieldType: (string) (len=7) "unknown"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=9) "interface",
+    DetectorType: (detectors.Type) (len=10) "javascript",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=7) "app.vue",
+      Language: (string) (len=10) "JavaScript",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(15),
+      ColumnNumber: (*int)(11),
+      Text: (*string)((len=43) "\"http://jsonplaceholder.typicode.com/posts\"")
+    },
+    Value: (interfaces.Interface) {
+      Type: (interfaces.Type) (len=3) "url",
+      Value: (*values.Value)({
+        Parts: ([]values.Part) (len=1) {
+          (*values.String)({
+            Type: (values.PartType) (len=6) "string",
+            Value: (string) (len=41) "http://jsonplaceholder.typicode.com/posts"
+          })
+        }
+      }),
+      VariableName: (string) ""
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=10) "javascript",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=14) "base.html.twig",
+      Language: (string) (len=10) "JavaScript",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(23),
+      ColumnNumber: (*int)(10),
+      Text: (*string)(<nil>)
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=8) "document",
+      ObjectUUID: (string) (len=2) "10",
+      FieldName: (string) (len=16) "addEventListener",
+      FieldUUID: (string) (len=2) "11",
+      FieldType: (string) "",
+      SimpleFieldType: (string) (len=7) "unknown"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=10) "javascript",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=14) "base.html.twig",
+      Language: (string) (len=10) "JavaScript",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(24),
+      ColumnNumber: (*int)(37),
+      Text: (*string)(<nil>)
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=7) "options",
+      ObjectUUID: (string) (len=2) "12",
+      FieldName: (string) (len=6) "detail",
+      FieldUUID: (string) (len=2) "13",
+      FieldType: (string) "",
+      SimpleFieldType: (string) (len=7) "unknown"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=10) "javascript",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=14) "base.html.twig",
+      Language: (string) (len=10) "JavaScript",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(24),
+      ColumnNumber: (*int)(44),
+      Text: (*string)(<nil>)
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=6) "detail",
+      ObjectUUID: (string) (len=2) "13",
+      FieldName: (string) (len=5) "kimai",
+      FieldUUID: (string) (len=2) "14",
+      FieldType: (string) "",
+      SimpleFieldType: (string) (len=7) "unknown"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=10) "javascript",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=14) "base.html.twig",
+      Language: (string) (len=10) "JavaScript",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(24),
+      ColumnNumber: (*int)(50),
+      Text: (*string)(<nil>)
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=5) "kimai",
+      ObjectUUID: (string) (len=2) "14",
+      FieldName: (string) (len=9) "getPlugin",
+      FieldUUID: (string) (len=2) "15",
+      FieldType: (string) "",
+      SimpleFieldType: (string) (len=7) "unknown"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=10) "javascript",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=14) "base.html.twig",
+      Language: (string) (len=10) "JavaScript",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(25),
+      ColumnNumber: (*int)(46),
+      Text: (*string)(<nil>)
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=3) "app",
+      ObjectUUID: (string) (len=2) "16",
+      FieldName: (string) (len=7) "session",
+      FieldUUID: (string) (len=2) "17",
+      FieldType: (string) "",
+      SimpleFieldType: (string) (len=7) "unknown"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=10) "javascript",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=14) "base.html.twig",
+      Language: (string) (len=10) "JavaScript",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(25),
+      ColumnNumber: (*int)(54),
+      Text: (*string)(<nil>)
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=7) "session",
+      ObjectUUID: (string) (len=2) "17",
+      FieldName: (string) (len=8) "flashbag",
+      FieldUUID: (string) (len=2) "18",
+      FieldType: (string) "",
+      SimpleFieldType: (string) (len=7) "unknown"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=10) "javascript",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=14) "base.html.twig",
+      Language: (string) (len=10) "JavaScript",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(25),
+      ColumnNumber: (*int)(63),
+      Text: (*string)(<nil>)
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=8) "flashbag",
+      ObjectUUID: (string) (len=2) "18",
+      FieldName: (string) (len=3) "all",
+      FieldUUID: (string) (len=2) "19",
+      FieldType: (string) "",
+      SimpleFieldType: (string) (len=7) "unknown"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=10) "javascript",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=14) "base.html.twig",
+      Language: (string) (len=10) "JavaScript",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(28),
+      ColumnNumber: (*int)(35),
+      Text: (*string)(<nil>)
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=5) "ALERT",
+      ObjectUUID: (string) (len=2) "20",
+      FieldName: (string) (len=5) "error",
+      FieldUUID: (string) (len=2) "21",
+      FieldType: (string) "",
+      SimpleFieldType: (string) (len=7) "unknown"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=10) "javascript",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=14) "base.html.twig",
+      Language: (string) (len=10) "JavaScript",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(30),
+      ColumnNumber: (*int)(35),
+      Text: (*string)(<nil>)
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=5) "ALERT",
+      ObjectUUID: (string) (len=2) "20",
+      FieldName: (string) (len=7) "warning",
+      FieldUUID: (string) (len=2) "22",
+      FieldType: (string) "",
+      SimpleFieldType: (string) (len=7) "unknown"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=10) "javascript",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=14) "base.html.twig",
+      Language: (string) (len=10) "JavaScript",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(292),
+      ColumnNumber: (*int)(8),
+      Text: (*string)(<nil>)
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=6) "window",
+      ObjectUUID: (string) (len=2) "24",
+      FieldName: (string) (len=16) "addEventListener",
+      FieldUUID: (string) (len=2) "25",
+      FieldType: (string) "",
+      SimpleFieldType: (string) (len=7) "unknown"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=10) "javascript",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=14) "base.html.twig",
+      Language: (string) (len=10) "JavaScript",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(298),
+      ColumnNumber: (*int)(59),
+      Text: (*string)(<nil>)
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=3) "app",
+      ObjectUUID: (string) (len=2) "26",
+      FieldName: (string) (len=4) "user",
+      FieldUUID: (string) (len=2) "27",
+      FieldType: (string) "",
+      SimpleFieldType: (string) (len=7) "unknown"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=10) "javascript",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=14) "base.html.twig",
+      Language: (string) (len=10) "JavaScript",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(298),
+      ColumnNumber: (*int)(64),
+      Text: (*string)(<nil>)
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=4) "user",
+      ObjectUUID: (string) (len=2) "27",
+      FieldName: (string) (len=14) "firstDayOfWeek",
+      FieldUUID: (string) (len=2) "28",
+      FieldType: (string) "",
+      SimpleFieldType: (string) (len=7) "unknown"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=10) "javascript",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=14) "base.html.twig",
+      Language: (string) (len=10) "JavaScript",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(299),
+      ColumnNumber: (*int)(50),
+      Text: (*string)(<nil>)
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=4) "user",
+      ObjectUUID: (string) (len=2) "30",
+      FieldName: (string) (len=8) "is24Hour",
+      FieldUUID: (string) (len=2) "31",
+      FieldType: (string) "",
+      SimpleFieldType: (string) (len=7) "unknown"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=10) "javascript",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=14) "base.html.twig",
+      Language: (string) (len=10) "JavaScript",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(302),
+      ColumnNumber: (*int)(51),
+      Text: (*string)(<nil>)
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=3) "app",
+      ObjectUUID: (string) (len=2) "26",
+      FieldName: (string) (len=4) "user",
+      FieldUUID: (string) (len=2) "27",
+      FieldType: (string) "",
+      SimpleFieldType: (string) (len=7) "unknown"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=10) "javascript",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=14) "base.html.twig",
+      Language: (string) (len=10) "JavaScript",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(302),
+      ColumnNumber: (*int)(56),
+      Text: (*string)(<nil>)
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=4) "user",
+      ObjectUUID: (string) (len=2) "27",
+      FieldName: (string) (len=15) "preferenceValue",
+      FieldUUID: (string) (len=2) "29",
+      FieldType: (string) "",
+      SimpleFieldType: (string) (len=7) "unknown"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=10) "javascript",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=14) "base.html.twig",
+      Language: (string) (len=10) "JavaScript",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(310),
+      ColumnNumber: (*int)(20),
+      Text: (*string)(<nil>)
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=6) "window",
+      ObjectUUID: (string) (len=2) "33",
+      FieldName: (string) (len=5) "kimai",
+      FieldUUID: (string) (len=2) "34",
+      FieldType: (string) "",
+      SimpleFieldType: (string) (len=7) "unknown"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=10) "javascript",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=14) "base.html.twig",
+      Language: (string) (len=10) "JavaScript",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(310),
+      ColumnNumber: (*int)(35),
+      Text: (*string)(<nil>)
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=6) "loader",
+      ObjectUUID: (string) (len=2) "35",
+      FieldName: (string) (len=8) "getKimai",
+      FieldUUID: (string) (len=2) "36",
+      FieldType: (string) "",
+      SimpleFieldType: (string) (len=7) "unknown"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=10) "javascript",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "google_analytics.html",
+      Language: (string) (len=10) "JavaScript",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(6),
+      ColumnNumber: (*int)(14),
+      Text: (*string)(<nil>)
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=6) "window",
+      ObjectUUID: (string) (len=2) "38",
+      FieldName: (string) (len=9) "dataLayer",
+      FieldUUID: (string) (len=2) "39",
+      FieldType: (string) "",
+      SimpleFieldType: (string) (len=7) "unknown"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=10) "javascript",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "google_analytics.html",
+      Language: (string) (len=10) "JavaScript",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(6),
+      ColumnNumber: (*int)(33),
+      Text: (*string)(<nil>)
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=6) "window",
+      ObjectUUID: (string) (len=2) "38",
+      FieldName: (string) (len=9) "dataLayer",
+      FieldUUID: (string) (len=2) "39",
+      FieldType: (string) "",
+      SimpleFieldType: (string) (len=7) "unknown"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=10) "javascript",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "google_analytics.html",
+      Language: (string) (len=10) "JavaScript",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(7),
+      ColumnNumber: (*int)(33),
+      Text: (*string)(<nil>)
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=9) "dataLayer",
+      ObjectUUID: (string) (len=2) "40",
+      FieldName: (string) (len=4) "push",
+      FieldUUID: (string) (len=2) "41",
+      FieldType: (string) "",
+      SimpleFieldType: (string) (len=7) "unknown"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=10) "javascript",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "google_analytics.html",
+      Language: (string) (len=10) "JavaScript",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(10),
+      ColumnNumber: (*int)(18),
+      Text: (*string)(<nil>)
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=4) "user",
+      ObjectUUID: (string) (len=2) "42",
+      FieldName: (string) (len=16) "is_authenticated",
+      FieldUUID: (string) (len=2) "43",
+      FieldType: (string) "",
+      SimpleFieldType: (string) (len=7) "unknown"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=10) "javascript",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "google_analytics.html",
+      Language: (string) (len=10) "JavaScript",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(11),
+      ColumnNumber: (*int)(55),
+      Text: (*string)(<nil>)
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=4) "gtag",
+      ObjectUUID: (string) (len=2) "45",
+      FieldName: (string) (len=9) "'user_id'",
+      FieldUUID: (string) (len=2) "46",
+      FieldType: (string) "",
+      SimpleFieldType: (string) (len=7) "unknown"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=9) "interface",
+    DetectorType: (detectors.Type) (len=10) "javascript",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=12) "index.cshtml",
+      Language: (string) (len=10) "JavaScript",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(9),
+      ColumnNumber: (*int)(11),
+      Text: (*string)((len=27) "\"https://inline.domain.com\"")
+    },
+    Value: (interfaces.Interface) {
+      Type: (interfaces.Type) (len=3) "url",
+      Value: (*values.Value)({
+        Parts: ([]values.Part) (len=1) {
+          (*values.String)({
+            Type: (values.PartType) (len=6) "string",
+            Value: (string) (len=25) "https://inline.domain.com"
+          })
+        }
+      }),
+      VariableName: (string) ""
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=9) "interface",
+    DetectorType: (detectors.Type) (len=10) "javascript",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=12) "index.cshtml",
+      Language: (string) (len=10) "JavaScript",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(13),
+      ColumnNumber: (*int)(11),
+      Text: (*string)((len=25) "\"https://api1.domain.com\"")
+    },
+    Value: (interfaces.Interface) {
+      Type: (interfaces.Type) (len=3) "url",
+      Value: (*values.Value)({
+        Parts: ([]values.Part) (len=1) {
+          (*values.String)({
+            Type: (values.PartType) (len=6) "string",
+            Value: (string) (len=23) "https://api1.domain.com"
+          })
+        }
+      }),
+      VariableName: (string) ""
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=9) "interface",
+    DetectorType: (detectors.Type) (len=10) "javascript",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=12) "index.cshtml",
+      Language: (string) (len=10) "JavaScript",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(16),
+      ColumnNumber: (*int)(11),
+      Text: (*string)((len=25) "\"https://api2.domain.com\"")
+    },
+    Value: (interfaces.Interface) {
+      Type: (interfaces.Type) (len=3) "url",
+      Value: (*values.Value)({
+        Parts: ([]values.Part) (len=1) {
+          (*values.String)({
+            Type: (values.PartType) (len=6) "string",
+            Value: (string) (len=23) "https://api2.domain.com"
+          })
+        }
+      }),
+      VariableName: (string) ""
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=9) "interface",
+    DetectorType: (detectors.Type) (len=4) "html",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=9) "index.ejs",
+      Language: (string) (len=3) "EJS",
+      LanguageType: (string) (len=6) "markup",
+      LineNumber: (*int)(3),
+      ColumnNumber: (*int)(2),
+      Text: (*string)((len=37) "<script src=\"https://cdn.domain.com\">")
+    },
+    Value: (interfaces.Interface) {
+      Type: (interfaces.Type) (len=3) "url",
+      Value: (*values.Value)({
+        Parts: ([]values.Part) (len=1) {
+          (*values.String)({
+            Type: (values.PartType) (len=6) "string",
+            Value: (string) (len=22) "https://cdn.domain.com"
+          })
+        }
+      }),
+      VariableName: (string) ""
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=9) "interface",
+    DetectorType: (detectors.Type) (len=10) "javascript",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=9) "index.ejs",
+      Language: (string) (len=10) "JavaScript",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(7),
+      ColumnNumber: (*int)(11),
+      Text: (*string)((len=27) "\"https://inline.domain.com\"")
+    },
+    Value: (interfaces.Interface) {
+      Type: (interfaces.Type) (len=3) "url",
+      Value: (*values.Value)({
+        Parts: ([]values.Part) (len=1) {
+          (*values.String)({
+            Type: (values.PartType) (len=6) "string",
+            Value: (string) (len=25) "https://inline.domain.com"
+          })
+        }
+      }),
+      VariableName: (string) ""
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=9) "interface",
+    DetectorType: (detectors.Type) (len=10) "javascript",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=9) "index.ejs",
+      Language: (string) (len=10) "JavaScript",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(9),
+      ColumnNumber: (*int)(11),
+      Text: (*string)((len=25) "\"https://api1.domain.com\"")
+    },
+    Value: (interfaces.Interface) {
+      Type: (interfaces.Type) (len=3) "url",
+      Value: (*values.Value)({
+        Parts: ([]values.Part) (len=1) {
+          (*values.String)({
+            Type: (values.PartType) (len=6) "string",
+            Value: (string) (len=23) "https://api1.domain.com"
+          })
+        }
+      }),
+      VariableName: (string) ""
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=9) "interface",
+    DetectorType: (detectors.Type) (len=10) "javascript",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=9) "index.ejs",
+      Language: (string) (len=10) "JavaScript",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(12),
+      ColumnNumber: (*int)(11),
+      Text: (*string)((len=25) "\"https://api2.domain.com\"")
+    },
+    Value: (interfaces.Interface) {
+      Type: (interfaces.Type) (len=3) "url",
+      Value: (*values.Value)({
+        Parts: ([]values.Part) (len=1) {
+          (*values.String)({
+            Type: (values.PartType) (len=6) "string",
+            Value: (string) (len=23) "https://api2.domain.com"
+          })
+        }
+      }),
+      VariableName: (string) ""
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=9) "interface",
+    DetectorType: (detectors.Type) (len=4) "html",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=16) "index.handlebars",
+      Language: (string) (len=10) "Handlebars",
+      LanguageType: (string) (len=6) "markup",
+      LineNumber: (*int)(3),
+      ColumnNumber: (*int)(2),
+      Text: (*string)((len=37) "<script src=\"https://cdn.domain.com\">")
+    },
+    Value: (interfaces.Interface) {
+      Type: (interfaces.Type) (len=3) "url",
+      Value: (*values.Value)({
+        Parts: ([]values.Part) (len=1) {
+          (*values.String)({
+            Type: (values.PartType) (len=6) "string",
+            Value: (string) (len=22) "https://cdn.domain.com"
+          })
+        }
+      }),
+      VariableName: (string) ""
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=9) "interface",
+    DetectorType: (detectors.Type) (len=10) "javascript",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=16) "index.handlebars",
+      Language: (string) (len=10) "JavaScript",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(6),
+      ColumnNumber: (*int)(11),
+      Text: (*string)((len=27) "\"https://inline.domain.com\"")
+    },
+    Value: (interfaces.Interface) {
+      Type: (interfaces.Type) (len=3) "url",
+      Value: (*values.Value)({
+        Parts: ([]values.Part) (len=1) {
+          (*values.String)({
+            Type: (values.PartType) (len=6) "string",
+            Value: (string) (len=25) "https://inline.domain.com"
+          })
+        }
+      }),
+      VariableName: (string) ""
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=9) "interface",
+    DetectorType: (detectors.Type) (len=10) "javascript",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=16) "index.handlebars",
+      Language: (string) (len=10) "JavaScript",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(8),
+      ColumnNumber: (*int)(11),
+      Text: (*string)((len=25) "\"https://api1.domain.com\"")
+    },
+    Value: (interfaces.Interface) {
+      Type: (interfaces.Type) (len=3) "url",
+      Value: (*values.Value)({
+        Parts: ([]values.Part) (len=1) {
+          (*values.String)({
+            Type: (values.PartType) (len=6) "string",
+            Value: (string) (len=23) "https://api1.domain.com"
+          })
+        }
+      }),
+      VariableName: (string) ""
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=9) "interface",
+    DetectorType: (detectors.Type) (len=10) "javascript",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=16) "index.handlebars",
+      Language: (string) (len=10) "JavaScript",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(11),
+      ColumnNumber: (*int)(11),
+      Text: (*string)((len=25) "\"https://api2.domain.com\"")
+    },
+    Value: (interfaces.Interface) {
+      Type: (interfaces.Type) (len=3) "url",
+      Value: (*values.Value)({
+        Parts: ([]values.Part) (len=1) {
+          (*values.String)({
+            Type: (values.PartType) (len=6) "string",
+            Value: (string) (len=23) "https://api2.domain.com"
+          })
+        }
+      }),
+      VariableName: (string) ""
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=9) "interface",
+    DetectorType: (detectors.Type) (len=4) "html",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=10) "index.html",
+      Language: (string) (len=4) "HTML",
+      LanguageType: (string) (len=6) "markup",
+      LineNumber: (*int)(3),
+      ColumnNumber: (*int)(2),
+      Text: (*string)((len=37) "<script src=\"https://cdn.domain.com\">")
+    },
+    Value: (interfaces.Interface) {
+      Type: (interfaces.Type) (len=3) "url",
+      Value: (*values.Value)({
+        Parts: ([]values.Part) (len=1) {
+          (*values.String)({
+            Type: (values.PartType) (len=6) "string",
+            Value: (string) (len=22) "https://cdn.domain.com"
+          })
+        }
+      }),
+      VariableName: (string) ""
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=9) "interface",
+    DetectorType: (detectors.Type) (len=10) "javascript",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=10) "index.html",
+      Language: (string) (len=10) "JavaScript",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(6),
+      ColumnNumber: (*int)(11),
+      Text: (*string)((len=27) "\"https://inline.domain.com\"")
+    },
+    Value: (interfaces.Interface) {
+      Type: (interfaces.Type) (len=3) "url",
+      Value: (*values.Value)({
+        Parts: ([]values.Part) (len=1) {
+          (*values.String)({
+            Type: (values.PartType) (len=6) "string",
+            Value: (string) (len=25) "https://inline.domain.com"
+          })
+        }
+      }),
+      VariableName: (string) ""
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=9) "interface",
+    DetectorType: (detectors.Type) (len=10) "javascript",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=10) "index.html",
+      Language: (string) (len=10) "JavaScript",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(8),
+      ColumnNumber: (*int)(11),
+      Text: (*string)((len=25) "\"https://api1.domain.com\"")
+    },
+    Value: (interfaces.Interface) {
+      Type: (interfaces.Type) (len=3) "url",
+      Value: (*values.Value)({
+        Parts: ([]values.Part) (len=1) {
+          (*values.String)({
+            Type: (values.PartType) (len=6) "string",
+            Value: (string) (len=23) "https://api1.domain.com"
+          })
+        }
+      }),
+      VariableName: (string) ""
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=9) "interface",
+    DetectorType: (detectors.Type) (len=10) "javascript",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=10) "index.html",
+      Language: (string) (len=10) "JavaScript",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(11),
+      ColumnNumber: (*int)(11),
+      Text: (*string)((len=25) "\"https://api2.domain.com\"")
+    },
+    Value: (interfaces.Interface) {
+      Type: (interfaces.Type) (len=3) "url",
+      Value: (*values.Value)({
+        Parts: ([]values.Part) (len=1) {
+          (*values.String)({
+            Type: (values.PartType) (len=6) "string",
+            Value: (string) (len=23) "https://api2.domain.com"
+          })
+        }
+      }),
+      VariableName: (string) ""
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=9) "interface",
+    DetectorType: (detectors.Type) (len=10) "javascript",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=14) "index.html.erb",
+      Language: (string) (len=10) "JavaScript",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(8),
+      ColumnNumber: (*int)(11),
+      Text: (*string)((len=27) "\"https://inline.domain.com\"")
+    },
+    Value: (interfaces.Interface) {
+      Type: (interfaces.Type) (len=3) "url",
+      Value: (*values.Value)({
+        Parts: ([]values.Part) (len=1) {
+          (*values.String)({
+            Type: (values.PartType) (len=6) "string",
+            Value: (string) (len=25) "https://inline.domain.com"
+          })
+        }
+      }),
+      VariableName: (string) ""
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=9) "interface",
+    DetectorType: (detectors.Type) (len=10) "javascript",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=14) "index.html.erb",
+      Language: (string) (len=10) "JavaScript",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(13),
+      ColumnNumber: (*int)(11),
+      Text: (*string)((len=25) "\"https://api1.domain.com\"")
+    },
+    Value: (interfaces.Interface) {
+      Type: (interfaces.Type) (len=3) "url",
+      Value: (*values.Value)({
+        Parts: ([]values.Part) (len=1) {
+          (*values.String)({
+            Type: (values.PartType) (len=6) "string",
+            Value: (string) (len=23) "https://api1.domain.com"
+          })
+        }
+      }),
+      VariableName: (string) ""
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=9) "interface",
+    DetectorType: (detectors.Type) (len=10) "javascript",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=14) "index.html.erb",
+      Language: (string) (len=10) "JavaScript",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(16),
+      ColumnNumber: (*int)(11),
+      Text: (*string)((len=25) "\"https://api2.domain.com\"")
+    },
+    Value: (interfaces.Interface) {
+      Type: (interfaces.Type) (len=3) "url",
+      Value: (*values.Value)({
+        Parts: ([]values.Part) (len=1) {
+          (*values.String)({
+            Type: (values.PartType) (len=6) "string",
+            Value: (string) (len=23) "https://api2.domain.com"
+          })
+        }
+      }),
+      VariableName: (string) ""
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=9) "interface",
+    DetectorType: (detectors.Type) (len=4) "html",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=15) "index.html.twig",
+      Language: (string) (len=4) "Twig",
+      LanguageType: (string) (len=6) "markup",
+      LineNumber: (*int)(3),
+      ColumnNumber: (*int)(2),
+      Text: (*string)((len=37) "<script src=\"https://cdn.domain.com\">")
+    },
+    Value: (interfaces.Interface) {
+      Type: (interfaces.Type) (len=3) "url",
+      Value: (*values.Value)({
+        Parts: ([]values.Part) (len=1) {
+          (*values.String)({
+            Type: (values.PartType) (len=6) "string",
+            Value: (string) (len=22) "https://cdn.domain.com"
+          })
+        }
+      }),
+      VariableName: (string) ""
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=9) "interface",
+    DetectorType: (detectors.Type) (len=10) "javascript",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=15) "index.html.twig",
+      Language: (string) (len=10) "JavaScript",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(6),
+      ColumnNumber: (*int)(11),
+      Text: (*string)((len=27) "\"https://inline.domain.com\"")
+    },
+    Value: (interfaces.Interface) {
+      Type: (interfaces.Type) (len=3) "url",
+      Value: (*values.Value)({
+        Parts: ([]values.Part) (len=1) {
+          (*values.String)({
+            Type: (values.PartType) (len=6) "string",
+            Value: (string) (len=25) "https://inline.domain.com"
+          })
+        }
+      }),
+      VariableName: (string) ""
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=9) "interface",
+    DetectorType: (detectors.Type) (len=10) "javascript",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=15) "index.html.twig",
+      Language: (string) (len=10) "JavaScript",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(8),
+      ColumnNumber: (*int)(11),
+      Text: (*string)((len=25) "\"https://api1.domain.com\"")
+    },
+    Value: (interfaces.Interface) {
+      Type: (interfaces.Type) (len=3) "url",
+      Value: (*values.Value)({
+        Parts: ([]values.Part) (len=1) {
+          (*values.String)({
+            Type: (values.PartType) (len=6) "string",
+            Value: (string) (len=23) "https://api1.domain.com"
+          })
+        }
+      }),
+      VariableName: (string) ""
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=9) "interface",
+    DetectorType: (detectors.Type) (len=10) "javascript",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=15) "index.html.twig",
+      Language: (string) (len=10) "JavaScript",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(11),
+      ColumnNumber: (*int)(11),
+      Text: (*string)((len=25) "\"https://api2.domain.com\"")
+    },
+    Value: (interfaces.Interface) {
+      Type: (interfaces.Type) (len=3) "url",
+      Value: (*values.Value)({
+        Parts: ([]values.Part) (len=1) {
+          (*values.String)({
+            Type: (values.PartType) (len=6) "string",
+            Value: (string) (len=23) "https://api2.domain.com"
+          })
+        }
+      }),
+      VariableName: (string) ""
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=9) "interface",
+    DetectorType: (detectors.Type) (len=10) "javascript",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=11) "index.jinja",
+      Language: (string) (len=10) "JavaScript",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(10),
+      ColumnNumber: (*int)(11),
+      Text: (*string)((len=27) "\"https://inline.domain.com\"")
+    },
+    Value: (interfaces.Interface) {
+      Type: (interfaces.Type) (len=3) "url",
+      Value: (*values.Value)({
+        Parts: ([]values.Part) (len=1) {
+          (*values.String)({
+            Type: (values.PartType) (len=6) "string",
+            Value: (string) (len=25) "https://inline.domain.com"
+          })
+        }
+      }),
+      VariableName: (string) ""
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=9) "interface",
+    DetectorType: (detectors.Type) (len=10) "javascript",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=11) "index.jinja",
+      Language: (string) (len=10) "JavaScript",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(13),
+      ColumnNumber: (*int)(11),
+      Text: (*string)((len=25) "\"https://api1.domain.com\"")
+    },
+    Value: (interfaces.Interface) {
+      Type: (interfaces.Type) (len=3) "url",
+      Value: (*values.Value)({
+        Parts: ([]values.Part) (len=1) {
+          (*values.String)({
+            Type: (values.PartType) (len=6) "string",
+            Value: (string) (len=23) "https://api1.domain.com"
+          })
+        }
+      }),
+      VariableName: (string) ""
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=9) "interface",
+    DetectorType: (detectors.Type) (len=10) "javascript",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=11) "index.jinja",
+      Language: (string) (len=10) "JavaScript",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(16),
+      ColumnNumber: (*int)(11),
+      Text: (*string)((len=25) "\"https://api2.domain.com\"")
+    },
+    Value: (interfaces.Interface) {
+      Type: (interfaces.Type) (len=3) "url",
+      Value: (*values.Value)({
+        Parts: ([]values.Part) (len=1) {
+          (*values.String)({
+            Type: (values.PartType) (len=6) "string",
+            Value: (string) (len=23) "https://api2.domain.com"
+          })
+        }
+      }),
+      VariableName: (string) ""
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=9) "interface",
+    DetectorType: (detectors.Type) (len=4) "html",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=12) "index.liquid",
+      Language: (string) (len=6) "Liquid",
+      LanguageType: (string) (len=6) "markup",
+      LineNumber: (*int)(3),
+      ColumnNumber: (*int)(2),
+      Text: (*string)((len=37) "<script src=\"https://cdn.domain.com\">")
+    },
+    Value: (interfaces.Interface) {
+      Type: (interfaces.Type) (len=3) "url",
+      Value: (*values.Value)({
+        Parts: ([]values.Part) (len=1) {
+          (*values.String)({
+            Type: (values.PartType) (len=6) "string",
+            Value: (string) (len=22) "https://cdn.domain.com"
+          })
+        }
+      }),
+      VariableName: (string) ""
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=9) "interface",
+    DetectorType: (detectors.Type) (len=10) "javascript",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=12) "index.liquid",
+      Language: (string) (len=10) "JavaScript",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(6),
+      ColumnNumber: (*int)(11),
+      Text: (*string)((len=27) "\"https://inline.domain.com\"")
+    },
+    Value: (interfaces.Interface) {
+      Type: (interfaces.Type) (len=3) "url",
+      Value: (*values.Value)({
+        Parts: ([]values.Part) (len=1) {
+          (*values.String)({
+            Type: (values.PartType) (len=6) "string",
+            Value: (string) (len=25) "https://inline.domain.com"
+          })
+        }
+      }),
+      VariableName: (string) ""
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=9) "interface",
+    DetectorType: (detectors.Type) (len=10) "javascript",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=12) "index.liquid",
+      Language: (string) (len=10) "JavaScript",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(8),
+      ColumnNumber: (*int)(11),
+      Text: (*string)((len=25) "\"https://api1.domain.com\"")
+    },
+    Value: (interfaces.Interface) {
+      Type: (interfaces.Type) (len=3) "url",
+      Value: (*values.Value)({
+        Parts: ([]values.Part) (len=1) {
+          (*values.String)({
+            Type: (values.PartType) (len=6) "string",
+            Value: (string) (len=23) "https://api1.domain.com"
+          })
+        }
+      }),
+      VariableName: (string) ""
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=9) "interface",
+    DetectorType: (detectors.Type) (len=10) "javascript",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=12) "index.liquid",
+      Language: (string) (len=10) "JavaScript",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(11),
+      ColumnNumber: (*int)(11),
+      Text: (*string)((len=25) "\"https://api2.domain.com\"")
+    },
+    Value: (interfaces.Interface) {
+      Type: (interfaces.Type) (len=3) "url",
+      Value: (*values.Value)({
+        Parts: ([]values.Part) (len=1) {
+          (*values.String)({
+            Type: (values.PartType) (len=6) "string",
+            Value: (string) (len=23) "https://api2.domain.com"
+          })
+        }
+      }),
+      VariableName: (string) ""
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=9) "interface",
+    DetectorType: (detectors.Type) (len=4) "html",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=14) "index.mustache",
+      Language: (string) (len=8) "Mustache",
+      LanguageType: (string) (len=6) "markup",
+      LineNumber: (*int)(3),
+      ColumnNumber: (*int)(2),
+      Text: (*string)((len=37) "<script src=\"https://cdn.domain.com\">")
+    },
+    Value: (interfaces.Interface) {
+      Type: (interfaces.Type) (len=3) "url",
+      Value: (*values.Value)({
+        Parts: ([]values.Part) (len=1) {
+          (*values.String)({
+            Type: (values.PartType) (len=6) "string",
+            Value: (string) (len=22) "https://cdn.domain.com"
+          })
+        }
+      }),
+      VariableName: (string) ""
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=9) "interface",
+    DetectorType: (detectors.Type) (len=10) "javascript",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=14) "index.mustache",
+      Language: (string) (len=10) "JavaScript",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(6),
+      ColumnNumber: (*int)(11),
+      Text: (*string)((len=27) "\"https://inline.domain.com\"")
+    },
+    Value: (interfaces.Interface) {
+      Type: (interfaces.Type) (len=3) "url",
+      Value: (*values.Value)({
+        Parts: ([]values.Part) (len=1) {
+          (*values.String)({
+            Type: (values.PartType) (len=6) "string",
+            Value: (string) (len=25) "https://inline.domain.com"
+          })
+        }
+      }),
+      VariableName: (string) ""
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=9) "interface",
+    DetectorType: (detectors.Type) (len=10) "javascript",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=14) "index.mustache",
+      Language: (string) (len=10) "JavaScript",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(8),
+      ColumnNumber: (*int)(11),
+      Text: (*string)((len=25) "\"https://api1.domain.com\"")
+    },
+    Value: (interfaces.Interface) {
+      Type: (interfaces.Type) (len=3) "url",
+      Value: (*values.Value)({
+        Parts: ([]values.Part) (len=1) {
+          (*values.String)({
+            Type: (values.PartType) (len=6) "string",
+            Value: (string) (len=23) "https://api1.domain.com"
+          })
+        }
+      }),
+      VariableName: (string) ""
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=9) "interface",
+    DetectorType: (detectors.Type) (len=10) "javascript",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=14) "index.mustache",
+      Language: (string) (len=10) "JavaScript",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(11),
+      ColumnNumber: (*int)(11),
+      Text: (*string)((len=25) "\"https://api2.domain.com\"")
+    },
+    Value: (interfaces.Interface) {
+      Type: (interfaces.Type) (len=3) "url",
+      Value: (*values.Value)({
+        Parts: ([]values.Part) (len=1) {
+          (*values.String)({
+            Type: (values.PartType) (len=6) "string",
+            Value: (string) (len=23) "https://api2.domain.com"
+          })
+        }
+      }),
+      VariableName: (string) ""
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=9) "interface",
+    DetectorType: (detectors.Type) (len=10) "javascript",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=11) "index.phtml",
+      Language: (string) (len=10) "JavaScript",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(10),
+      ColumnNumber: (*int)(11),
+      Text: (*string)((len=27) "\"https://inline.domain.com\"")
+    },
+    Value: (interfaces.Interface) {
+      Type: (interfaces.Type) (len=3) "url",
+      Value: (*values.Value)({
+        Parts: ([]values.Part) (len=1) {
+          (*values.String)({
+            Type: (values.PartType) (len=6) "string",
+            Value: (string) (len=25) "https://inline.domain.com"
+          })
+        }
+      }),
+      VariableName: (string) ""
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=9) "interface",
+    DetectorType: (detectors.Type) (len=10) "javascript",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=11) "index.phtml",
+      Language: (string) (len=10) "JavaScript",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(13),
+      ColumnNumber: (*int)(11),
+      Text: (*string)((len=25) "\"https://api1.domain.com\"")
+    },
+    Value: (interfaces.Interface) {
+      Type: (interfaces.Type) (len=3) "url",
+      Value: (*values.Value)({
+        Parts: ([]values.Part) (len=1) {
+          (*values.String)({
+            Type: (values.PartType) (len=6) "string",
+            Value: (string) (len=23) "https://api1.domain.com"
+          })
+        }
+      }),
+      VariableName: (string) ""
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=9) "interface",
+    DetectorType: (detectors.Type) (len=10) "javascript",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=11) "index.phtml",
+      Language: (string) (len=10) "JavaScript",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(16),
+      ColumnNumber: (*int)(11),
+      Text: (*string)((len=25) "\"https://api2.domain.com\"")
+    },
+    Value: (interfaces.Interface) {
+      Type: (interfaces.Type) (len=3) "url",
+      Value: (*values.Value)({
+        Parts: ([]values.Part) (len=1) {
+          (*values.String)({
+            Type: (values.PartType) (len=6) "string",
+            Value: (string) (len=23) "https://api2.domain.com"
+          })
+        }
+      }),
+      VariableName: (string) ""
+    }
+  })
+}

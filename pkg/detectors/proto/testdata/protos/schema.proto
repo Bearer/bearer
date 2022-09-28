@@ -1,0 +1,89 @@
+
+syntax = "proto3";
+
+import "google/protobuf/timestamp.proto";
+
+option csharp_namespace = "Import.Api";
+
+package member;
+
+service Import {
+  rpc ImportMembers (MembersBatch) returns (ImportReply);
+  rpc ImportAddresses (AddressesBatch) returns (ImportReply);
+}
+
+message AddressesBatch{
+	repeated MemberAddresses member_addresses = 1;
+}
+
+message MembersBatch{
+	repeated Member members = 1;
+}
+
+message ImportReply {
+	bool status = 1;
+}
+
+message MemberPhone{
+	string phone = 1;
+	string phone_type = 2;
+}
+
+message SocialAccount{
+	int32 social_type_id = 1;
+	string social_user_id = 2;
+}
+
+message LoyaltyProgram{
+	string member_premium_status = 1;
+	google.protobuf.Timestamp start_date = 2;
+	google.protobuf.Timestamp end_date = 3;
+}
+
+message MarketingItem{
+	string segmentation = 1;
+}
+
+
+message Member {
+  string member_id = 1;
+  string firstname = 2;
+  string lastname = 3;
+  string gender = 4;
+  string external_user_id = 5;
+  google.protobuf.Timestamp birthdate = 6;
+  google.protobuf.Timestamp modification_date = 7;
+  string shop_name = 8;
+  string status = 9;
+  google.protobuf.Timestamp registration_date = 10;
+  string email = 11;
+  string password = 12;
+  repeated MemberPhone phone_list = 13;
+  repeated SocialAccount social_accounts = 14;
+  LoyaltyProgram loyalty_program = 15;
+  MarketingItem marketing_item = 16;
+  string communication_model = 17;
+  string communication_channel = 18;
+  string autologin_token = 19;
+  bool is_employee = 20;
+  string godfather = 21;
+  bool has_ordered = 22;
+}
+
+
+message MemberAddresses {
+	string member_id = 1;
+	repeated Address addresses = 2;
+}
+
+message Address {
+	string firstname = 2;
+	string lastname = 3;
+	string address_details = 4;
+	string zip_code = 5;
+	string city = 6;
+	string phone = 7;
+	google.protobuf.Timestamp creation_date = 8;
+	bool is_last_used_address = 9;
+	string company = 10;
+}

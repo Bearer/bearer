@@ -1,0 +1,328 @@
+([]*report.Detection) (len=11) {
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=9) "interface",
+    DetectorType: (detectors.Type) (len=11) "yaml_config",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=24) "config/parameters.yml.j2",
+      Language: (string) (len=5) "Jinja",
+      LanguageType: (string) (len=6) "markup",
+      LineNumber: (*int)(20),
+      ColumnNumber: (*int)(9),
+      Text: (*string)((len=86) "http.ms.messenger.google.com.host: 'http://{{ udata_assets.ms_messenger_appli.host }}'")
+    },
+    Value: (interfaces.Interface) {
+      Type: (interfaces.Type) (len=3) "url",
+      Value: (*values.Value)({
+        Parts: ([]values.Part) (len=2) {
+          (*values.String)({
+            Type: (values.PartType) (len=6) "string",
+            Value: (string) (len=7) "http://"
+          }),
+          (*values.VariableReference)({
+            Type: (values.PartType) (len=18) "variable_reference",
+            Identifier: (variables.Identifier) {
+              Type: (variables.Type) (len=8) "template",
+              Name: (string) (len=36) "udata_assets.ms_messenger_appli.host"
+            }
+          })
+        }
+      }),
+      VariableName: (string) (len=33) "http.ms.messenger.google.com.host"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=9) "interface",
+    DetectorType: (detectors.Type) (len=11) "yaml_config",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=24) "config/parameters.yml.j2",
+      Language: (string) (len=5) "Jinja",
+      LanguageType: (string) (len=6) "markup",
+      LineNumber: (*int)(21),
+      ColumnNumber: (*int)(9),
+      Text: (*string)((len=102) "http.ms.shipment-tracking.google.com.host: 'http://{{ udata_assets.ms_shipment_tracking_appli.host }}'")
+    },
+    Value: (interfaces.Interface) {
+      Type: (interfaces.Type) (len=3) "url",
+      Value: (*values.Value)({
+        Parts: ([]values.Part) (len=2) {
+          (*values.String)({
+            Type: (values.PartType) (len=6) "string",
+            Value: (string) (len=7) "http://"
+          }),
+          (*values.VariableReference)({
+            Type: (values.PartType) (len=18) "variable_reference",
+            Identifier: (variables.Identifier) {
+              Type: (variables.Type) (len=8) "template",
+              Name: (string) (len=44) "udata_assets.ms_shipment_tracking_appli.host"
+            }
+          })
+        }
+      }),
+      VariableName: (string) (len=41) "http.ms.shipment-tracking.google.com.host"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=9) "interface",
+    DetectorType: (detectors.Type) (len=11) "yaml_config",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=24) "config/parameters.yml.j2",
+      Language: (string) (len=5) "Jinja",
+      LanguageType: (string) (len=6) "markup",
+      LineNumber: (*int)(22),
+      ColumnNumber: (*int)(9),
+      Text: (*string)((len=92) "http.ms.seller-order.google.com.host: 'http://{{ udata_assets.ms_seller_order_appli.host }}'")
+    },
+    Value: (interfaces.Interface) {
+      Type: (interfaces.Type) (len=3) "url",
+      Value: (*values.Value)({
+        Parts: ([]values.Part) (len=2) {
+          (*values.String)({
+            Type: (values.PartType) (len=6) "string",
+            Value: (string) (len=7) "http://"
+          }),
+          (*values.VariableReference)({
+            Type: (values.PartType) (len=18) "variable_reference",
+            Identifier: (variables.Identifier) {
+              Type: (variables.Type) (len=8) "template",
+              Name: (string) (len=39) "udata_assets.ms_seller_order_appli.host"
+            }
+          })
+        }
+      }),
+      VariableName: (string) (len=36) "http.ms.seller-order.google.com.host"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=9) "interface",
+    DetectorType: (detectors.Type) (len=11) "yaml_config",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=24) "config/parameters.yml.j2",
+      Language: (string) (len=5) "Jinja",
+      LanguageType: (string) (len=6) "markup",
+      LineNumber: (*int)(23),
+      ColumnNumber: (*int)(9),
+      Text: (*string)((len=84) "http.ms.customer.google.com.host: 'http://{{ udata_assets.ms_customer_appli.host }}'")
+    },
+    Value: (interfaces.Interface) {
+      Type: (interfaces.Type) (len=3) "url",
+      Value: (*values.Value)({
+        Parts: ([]values.Part) (len=2) {
+          (*values.String)({
+            Type: (values.PartType) (len=6) "string",
+            Value: (string) (len=7) "http://"
+          }),
+          (*values.VariableReference)({
+            Type: (values.PartType) (len=18) "variable_reference",
+            Identifier: (variables.Identifier) {
+              Type: (variables.Type) (len=8) "template",
+              Name: (string) (len=35) "udata_assets.ms_customer_appli.host"
+            }
+          })
+        }
+      }),
+      VariableName: (string) (len=32) "http.ms.customer.google.com.host"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=9) "interface",
+    DetectorType: (detectors.Type) (len=11) "yaml_config",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=24) "config/parameters.yml.j2",
+      Language: (string) (len=5) "Jinja",
+      LanguageType: (string) (len=6) "markup",
+      LineNumber: (*int)(24),
+      ColumnNumber: (*int)(9),
+      Text: (*string)((len=78) "http.ms.order.google.com.host: 'http://{{ udata_assets.ms_order_appli.host }}'")
+    },
+    Value: (interfaces.Interface) {
+      Type: (interfaces.Type) (len=3) "url",
+      Value: (*values.Value)({
+        Parts: ([]values.Part) (len=2) {
+          (*values.String)({
+            Type: (values.PartType) (len=6) "string",
+            Value: (string) (len=7) "http://"
+          }),
+          (*values.VariableReference)({
+            Type: (values.PartType) (len=18) "variable_reference",
+            Identifier: (variables.Identifier) {
+              Type: (variables.Type) (len=8) "template",
+              Name: (string) (len=32) "udata_assets.ms_order_appli.host"
+            }
+          })
+        }
+      }),
+      VariableName: (string) (len=29) "http.ms.order.google.com.host"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=9) "interface",
+    DetectorType: (detectors.Type) (len=11) "yaml_config",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=24) "config/parameters.yml.j2",
+      Language: (string) (len=5) "Jinja",
+      LanguageType: (string) (len=6) "markup",
+      LineNumber: (*int)(25),
+      ColumnNumber: (*int)(9),
+      Text: (*string)((len=80) "http.ms.seller.google.com.host: 'http://{{ udata_assets.ms_seller_appli.host }}'")
+    },
+    Value: (interfaces.Interface) {
+      Type: (interfaces.Type) (len=3) "url",
+      Value: (*values.Value)({
+        Parts: ([]values.Part) (len=2) {
+          (*values.String)({
+            Type: (values.PartType) (len=6) "string",
+            Value: (string) (len=7) "http://"
+          }),
+          (*values.VariableReference)({
+            Type: (values.PartType) (len=18) "variable_reference",
+            Identifier: (variables.Identifier) {
+              Type: (variables.Type) (len=8) "template",
+              Name: (string) (len=33) "udata_assets.ms_seller_appli.host"
+            }
+          })
+        }
+      }),
+      VariableName: (string) (len=30) "http.ms.seller.google.com.host"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=9) "interface",
+    DetectorType: (detectors.Type) (len=11) "yaml_config",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=22) "docker-compose.yml.tpl",
+      Language: (string) (len=6) "Smarty",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(16),
+      ColumnNumber: (*int)(9),
+      Text: (*string)((len=46) "DD_APM_DD_URL=https://trace.agent.datadoghq.eu")
+    },
+    Value: (interfaces.Interface) {
+      Type: (interfaces.Type) (len=3) "url",
+      Value: (*values.Value)({
+        Parts: ([]values.Part) (len=1) {
+          (*values.String)({
+            Type: (values.PartType) (len=6) "string",
+            Value: (string) (len=32) "https://trace.agent.datadoghq.eu"
+          })
+        }
+      }),
+      VariableName: (string) (len=13) "DD_APM_DD_URL"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=9) "interface",
+    DetectorType: (detectors.Type) (len=11) "yaml_config",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=22) "docker-compose.yml.tpl",
+      Language: (string) (len=6) "Smarty",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(21),
+      ColumnNumber: (*int)(5),
+      Text: (*string)((len=17) "image: $IMAGE_URL")
+    },
+    Value: (interfaces.Interface) {
+      Type: (interfaces.Type) (len=3) "url",
+      Value: (*values.Value)({
+        Parts: ([]values.Part) (len=1) {
+          (*values.VariableReference)({
+            Type: (values.PartType) (len=18) "variable_reference",
+            Identifier: (variables.Identifier) {
+              Type: (variables.Type) (len=11) "environment",
+              Name: (string) (len=9) "IMAGE_URL"
+            }
+          })
+        }
+      }),
+      VariableName: (string) (len=5) "image"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=9) "interface",
+    DetectorType: (detectors.Type) (len=11) "yaml_config",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=22) "docker-compose.yml.tpl",
+      Language: (string) (len=6) "Smarty",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(31),
+      ColumnNumber: (*int)(9),
+      Text: (*string)((len=32) "BASE_DOMAIN=$PRODUCTIBASE_DOMAIN")
+    },
+    Value: (interfaces.Interface) {
+      Type: (interfaces.Type) (len=3) "url",
+      Value: (*values.Value)({
+        Parts: ([]values.Part) (len=1) {
+          (*values.VariableReference)({
+            Type: (values.PartType) (len=18) "variable_reference",
+            Identifier: (variables.Identifier) {
+              Type: (variables.Type) (len=11) "environment",
+              Name: (string) (len=19) "PRODUCTIBASE_DOMAIN"
+            }
+          })
+        }
+      }),
+      VariableName: (string) (len=11) "BASE_DOMAIN"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=9) "interface",
+    DetectorType: (detectors.Type) (len=11) "yaml_config",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=22) "docker-compose.yml.tpl",
+      Language: (string) (len=6) "Smarty",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(32),
+      ColumnNumber: (*int)(9),
+      Text: (*string)((len=38) "BEARER_ASSETS_HOST=$BEARER_ASSETS_HOST")
+    },
+    Value: (interfaces.Interface) {
+      Type: (interfaces.Type) (len=3) "url",
+      Value: (*values.Value)({
+        Parts: ([]values.Part) (len=1) {
+          (*values.VariableReference)({
+            Type: (values.PartType) (len=18) "variable_reference",
+            Identifier: (variables.Identifier) {
+              Type: (variables.Type) (len=11) "environment",
+              Name: (string) (len=18) "BEARER_ASSETS_HOST"
+            }
+          })
+        }
+      }),
+      VariableName: (string) (len=18) "BEARER_ASSETS_HOST"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=9) "interface",
+    DetectorType: (detectors.Type) (len=11) "yaml_config",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=22) "docker-compose.yml.tpl",
+      Language: (string) (len=6) "Smarty",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(33),
+      ColumnNumber: (*int)(9),
+      Text: (*string)((len=44) "WEBHOOKS_ADDRESS=http://example.com/webhooks")
+    },
+    Value: (interfaces.Interface) {
+      Type: (interfaces.Type) (len=3) "url",
+      Value: (*values.Value)({
+        Parts: ([]values.Part) (len=1) {
+          (*values.String)({
+            Type: (values.PartType) (len=6) "string",
+            Value: (string) (len=27) "http://example.com/webhooks"
+          })
+        }
+      }),
+      VariableName: (string) (len=16) "WEBHOOKS_ADDRESS"
+    }
+  })
+}

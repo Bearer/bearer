@@ -1,0 +1,328 @@
+([]*report.Detection) (len=11) {
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=9) "interface",
+    DetectorType: (detectors.Type) (len=6) "golang",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=9) "config.go",
+      Language: (string) (len=2) "Go",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(9),
+      ColumnNumber: (*int)(11),
+      Text: (*string)((len=59) "\"http://\" + os.Getenv(\"ORDER_SERVICE_DOMAIN\") + \"/whatever\"")
+    },
+    Value: (interfaces.Interface) {
+      Type: (interfaces.Type) (len=3) "url",
+      Value: (*values.Value)({
+        Parts: ([]values.Part) (len=3) {
+          (*values.String)({
+            Type: (values.PartType) (len=6) "string",
+            Value: (string) (len=7) "http://"
+          }),
+          (*values.VariableReference)({
+            Type: (values.PartType) (len=18) "variable_reference",
+            Identifier: (variables.Identifier) {
+              Type: (variables.Type) (len=11) "environment",
+              Name: (string) (len=20) "ORDER_SERVICE_DOMAIN"
+            }
+          }),
+          (*values.String)({
+            Type: (values.PartType) (len=6) "string",
+            Value: (string) (len=9) "/whatever"
+          })
+        }
+      }),
+      VariableName: (string) ""
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=9) "interface",
+    DetectorType: (detectors.Type) (len=6) "golang",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=9) "config.go",
+      Language: (string) (len=2) "Go",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(10),
+      ColumnNumber: (*int)(23),
+      Text: (*string)((len=30) "os.Getenv(\"ORDER_SERVICE_URL\")")
+    },
+    Value: (interfaces.Interface) {
+      Type: (interfaces.Type) (len=3) "url",
+      Value: (*values.Value)({
+        Parts: ([]values.Part) (len=1) {
+          (*values.VariableReference)({
+            Type: (values.PartType) (len=18) "variable_reference",
+            Identifier: (variables.Identifier) {
+              Type: (variables.Type) (len=11) "environment",
+              Name: (string) (len=17) "ORDER_SERVICE_URL"
+            }
+          })
+        }
+      }),
+      VariableName: (string) ""
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=9) "interface",
+    DetectorType: (detectors.Type) (len=6) "golang",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=9) "config.go",
+      Language: (string) (len=2) "Go",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(12),
+      ColumnNumber: (*int)(23),
+      Text: (*string)((len=31) "os.Getenv(\"ORDER_SERVICE_ADDR\")")
+    },
+    Value: (interfaces.Interface) {
+      Type: (interfaces.Type) (len=3) "url",
+      Value: (*values.Value)({
+        Parts: ([]values.Part) (len=1) {
+          (*values.VariableReference)({
+            Type: (values.PartType) (len=18) "variable_reference",
+            Identifier: (variables.Identifier) {
+              Type: (variables.Type) (len=11) "environment",
+              Name: (string) (len=18) "ORDER_SERVICE_ADDR"
+            }
+          })
+        }
+      }),
+      VariableName: (string) ""
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=9) "interface",
+    DetectorType: (detectors.Type) (len=6) "golang",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=9) "config.go",
+      Language: (string) (len=2) "Go",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(13),
+      ColumnNumber: (*int)(23),
+      Text: (*string)((len=30) "os.Getenv(\"ORDER_SERVICE_SVC\")")
+    },
+    Value: (interfaces.Interface) {
+      Type: (interfaces.Type) (len=3) "url",
+      Value: (*values.Value)({
+        Parts: ([]values.Part) (len=1) {
+          (*values.VariableReference)({
+            Type: (values.PartType) (len=18) "variable_reference",
+            Identifier: (variables.Identifier) {
+              Type: (variables.Type) (len=11) "environment",
+              Name: (string) (len=17) "ORDER_SERVICE_SVC"
+            }
+          })
+        }
+      }),
+      VariableName: (string) ""
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=9) "interface",
+    DetectorType: (detectors.Type) (len=6) "golang",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=9) "config.go",
+      Language: (string) (len=2) "Go",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(15),
+      ColumnNumber: (*int)(1),
+      Text: (*string)((len=70) "MustMapEnv(&svc.productCatalogSvcAddr, \"PRODUCT_CATALOG_SERVICE_ADDR\")")
+    },
+    Value: (interfaces.Interface) {
+      Type: (interfaces.Type) (len=3) "url",
+      Value: (*values.Value)({
+        Parts: ([]values.Part) (len=1) {
+          (*values.VariableReference)({
+            Type: (values.PartType) (len=18) "variable_reference",
+            Identifier: (variables.Identifier) {
+              Type: (variables.Type) (len=11) "environment",
+              Name: (string) (len=28) "PRODUCT_CATALOG_SERVICE_ADDR"
+            }
+          })
+        }
+      }),
+      VariableName: (string) ""
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=9) "interface",
+    DetectorType: (detectors.Type) (len=6) "golang",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=9) "config.go",
+      Language: (string) (len=2) "Go",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(16),
+      ColumnNumber: (*int)(1),
+      Text: (*string)((len=35) "MustGetEnv(\"CURRENCY_SERVICE_ADDR\")")
+    },
+    Value: (interfaces.Interface) {
+      Type: (interfaces.Type) (len=3) "url",
+      Value: (*values.Value)({
+        Parts: ([]values.Part) (len=1) {
+          (*values.VariableReference)({
+            Type: (values.PartType) (len=18) "variable_reference",
+            Identifier: (variables.Identifier) {
+              Type: (variables.Type) (len=11) "environment",
+              Name: (string) (len=21) "CURRENCY_SERVICE_ADDR"
+            }
+          })
+        }
+      }),
+      VariableName: (string) ""
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=9) "interface",
+    DetectorType: (detectors.Type) (len=6) "golang",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=9) "config.go",
+      Language: (string) (len=2) "Go",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(19),
+      ColumnNumber: (*int)(26),
+      Text: (*string)((len=37) "sneeky.LookupEnv(`USER_SERVICE_HOST`)")
+    },
+    Value: (interfaces.Interface) {
+      Type: (interfaces.Type) (len=3) "url",
+      Value: (*values.Value)({
+        Parts: ([]values.Part) (len=1) {
+          (*values.VariableReference)({
+            Type: (values.PartType) (len=18) "variable_reference",
+            Identifier: (variables.Identifier) {
+              Type: (variables.Type) (len=11) "environment",
+              Name: (string) (len=17) "USER_SERVICE_HOST"
+            }
+          })
+        }
+      }),
+      VariableName: (string) ""
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=9) "interface",
+    DetectorType: (detectors.Type) (len=6) "golang",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=7) "urls.go",
+      Language: (string) (len=2) "Go",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(11),
+      ColumnNumber: (*int)(24),
+      Text: (*string)((len=20) "\"string.example.com\"")
+    },
+    Value: (interfaces.Interface) {
+      Type: (interfaces.Type) (len=3) "url",
+      Value: (*values.Value)({
+        Parts: ([]values.Part) (len=1) {
+          (*values.String)({
+            Type: (values.PartType) (len=6) "string",
+            Value: (string) (len=18) "string.example.com"
+          })
+        }
+      }),
+      VariableName: (string) ""
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=9) "interface",
+    DetectorType: (detectors.Type) (len=6) "golang",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=7) "urls.go",
+      Language: (string) (len=2) "Go",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(15),
+      ColumnNumber: (*int)(9),
+      Text: (*string)((len=25) "\"http://find.example.com\"")
+    },
+    Value: (interfaces.Interface) {
+      Type: (interfaces.Type) (len=3) "url",
+      Value: (*values.Value)({
+        Parts: ([]values.Part) (len=1) {
+          (*values.String)({
+            Type: (values.PartType) (len=6) "string",
+            Value: (string) (len=23) "http://find.example.com"
+          })
+        }
+      }),
+      VariableName: (string) ""
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=9) "interface",
+    DetectorType: (detectors.Type) (len=6) "golang",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=7) "urls.go",
+      Language: (string) (len=2) "Go",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(18),
+      ColumnNumber: (*int)(10),
+      Text: (*string)((len=44) "\"http://\" + \"simple.\" + \"concat.example.com\"")
+    },
+    Value: (interfaces.Interface) {
+      Type: (interfaces.Type) (len=3) "url",
+      Value: (*values.Value)({
+        Parts: ([]values.Part) (len=1) {
+          (*values.String)({
+            Type: (values.PartType) (len=6) "string",
+            Value: (string) (len=32) "http://simple.concat.example.com"
+          })
+        }
+      }),
+      VariableName: (string) ""
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=9) "interface",
+    DetectorType: (detectors.Type) (len=6) "golang",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=7) "urls.go",
+      Language: (string) (len=2) "Go",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(28),
+      ColumnNumber: (*int)(10),
+      Text: (*string)((len=128) "fmt.Sprintf(\n\t\t\"https://%s.example.com/%s\"+\"/api/shop/supplier/%d/%%5B\",\n\t\tos.Getenv(\"DOMAIN_PREFIX\"),\n\t\t\"path\",\n\t\tsupplierId\n\t)")
+    },
+    Value: (interfaces.Interface) {
+      Type: (interfaces.Type) (len=3) "url",
+      Value: (*values.Value)({
+        Parts: ([]values.Part) (len=5) {
+          (*values.String)({
+            Type: (values.PartType) (len=6) "string",
+            Value: (string) (len=8) "https://"
+          }),
+          (*values.VariableReference)({
+            Type: (values.PartType) (len=18) "variable_reference",
+            Identifier: (variables.Identifier) {
+              Type: (variables.Type) (len=11) "environment",
+              Name: (string) (len=13) "DOMAIN_PREFIX"
+            }
+          }),
+          (*values.String)({
+            Type: (values.PartType) (len=6) "string",
+            Value: (string) (len=36) ".example.com/path/api/shop/supplier/"
+          }),
+          (*values.VariableReference)({
+            Type: (values.PartType) (len=18) "variable_reference",
+            Identifier: (variables.Identifier) {
+              Type: (variables.Type) (len=8) "variable",
+              Name: (string) (len=10) "supplierId"
+            }
+          }),
+          (*values.String)({
+            Type: (values.PartType) (len=6) "string",
+            Value: (string) (len=4) "/%5B"
+          })
+        }
+      }),
+      VariableName: (string) ""
+    }
+  })
+}

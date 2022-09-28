@@ -1,0 +1,74 @@
+([]*report.FrameworkDetection) (len=4) {
+  (*report.FrameworkDetection)({
+    Type: (report.DetectionType) (len=9) "framework",
+    DetectorType: (detectors.Type) (len=7) "symfony",
+    FrameworkType: (frameworks.Type) (len=8) "database",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "app/config/config.yml",
+      Language: (string) (len=4) "YAML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(43),
+      ColumnNumber: (*int)(<nil>),
+      Text: (*string)(<nil>)
+    },
+    Value: (symfony.Database) {
+      Name: (string) "",
+      Driver: (string) (len=9) "pdo_mysql"
+    }
+  }),
+  (*report.FrameworkDetection)({
+    Type: (report.DetectionType) (len=9) "framework",
+    DetectorType: (detectors.Type) (len=7) "symfony",
+    FrameworkType: (frameworks.Type) (len=8) "database",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=28) "config/packages/doctrine.yml",
+      Language: (string) (len=4) "YAML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(11),
+      ColumnNumber: (*int)(<nil>),
+      Text: (*string)(<nil>)
+    },
+    Value: (symfony.Database) {
+      Name: (string) (len=8) "customer",
+      Driver: (string) (len=9) "pdo_mysql"
+    }
+  }),
+  (*report.FrameworkDetection)({
+    Type: (report.DetectionType) (len=9) "framework",
+    DetectorType: (detectors.Type) (len=7) "symfony",
+    FrameworkType: (frameworks.Type) (len=8) "database",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=28) "config/packages/doctrine.yml",
+      Language: (string) (len=4) "YAML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(6),
+      ColumnNumber: (*int)(<nil>),
+      Text: (*string)(<nil>)
+    },
+    Value: (symfony.Database) {
+      Name: (string) (len=7) "default",
+      Driver: (string) ""
+    }
+  }),
+  (*report.FrameworkDetection)({
+    Type: (report.DetectionType) (len=9) "framework",
+    DetectorType: (detectors.Type) (len=7) "symfony",
+    FrameworkType: (frameworks.Type) (len=8) "database",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=28) "config/packages/doctrine.yml",
+      Language: (string) (len=4) "YAML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(8),
+      ColumnNumber: (*int)(<nil>),
+      Text: (*string)(<nil>)
+    },
+    Value: (symfony.Database) {
+      Name: (string) (len=5) "sales",
+      Driver: (string) (len=10) "postgresql"
+    }
+  })
+}

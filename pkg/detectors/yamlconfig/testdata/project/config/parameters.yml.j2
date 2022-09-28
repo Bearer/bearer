@@ -1,0 +1,25 @@
+# https://jinja2online.com
+# {
+#   "ntp_servers": ["1.1.1.1","8.8.8.8"],
+#   "host_enabled": false,
+#   "messenger_host": "example.com/messenger",
+#   "tracking_host": "example.com/tracking",
+#   "order_host": "example.com/order"
+# }
+{# This is a comment #}
+doctrine:
+  dbal:
+    {%- for ntp_server in ntp_servers %}
+    - {{ ntp_server }}
+    {%- endfor %}
+    {% if host_enabled %}default_connection: default{%- endif %}
+    {{ bearer_key }}: {{ bearer_value }}
+    connections:
+      # database connection default
+      default:
+        http.ms.messenger.google.com.host: 'http://{{ udata_assets.ms_messenger_appli.host }}'
+        http.ms.shipment-tracking.google.com.host: 'http://{{ udata_assets.ms_shipment_tracking_appli.host }}'
+        http.ms.seller-order.google.com.host: 'http://{{ udata_assets.ms_seller_order_appli.host }}'
+        http.ms.customer.google.com.host: 'http://{{ udata_assets.ms_customer_appli.host }}'
+        http.ms.order.google.com.host: 'http://{{ udata_assets.ms_order_appli.host }}'
+        http.ms.seller.google.com.host: 'http://{{ udata_assets.ms_seller_appli.host }}'

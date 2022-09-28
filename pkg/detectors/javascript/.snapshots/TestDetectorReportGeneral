@@ -1,0 +1,708 @@
+([]*report.Detection) (len=22) {
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=10) "javascript",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=13) "paths/main.js",
+      Language: (string) (len=10) "JavaScript",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(24),
+      ColumnNumber: (*int)(66),
+      Text: (*string)(<nil>)
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=8) "platform",
+      ObjectUUID: (string) (len=2) "11",
+      FieldName: (string) (len=5) "GetID",
+      FieldUUID: (string) (len=2) "12",
+      FieldType: (string) "",
+      SimpleFieldType: (string) (len=7) "unknown"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=9) "interface",
+    DetectorType: (detectors.Type) (len=10) "javascript",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=13) "paths/main.js",
+      Language: (string) (len=10) "JavaScript",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(2),
+      ColumnNumber: (*int)(47),
+      Text: (*string)((len=24) "\"/api/delivery-messages\"")
+    },
+    Value: (interfaces.Interface) {
+      Type: (interfaces.Type) (len=4) "path",
+      Value: (*values.Value)({
+        Parts: ([]values.Part) (len=1) {
+          (*values.String)({
+            Type: (values.PartType) (len=6) "string",
+            Value: (string) (len=22) "/api/delivery-messages"
+          })
+        }
+      }),
+      VariableName: (string) ""
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=9) "interface",
+    DetectorType: (detectors.Type) (len=10) "javascript",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=13) "paths/main.js",
+      Language: (string) (len=10) "JavaScript",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(10),
+      ColumnNumber: (*int)(5),
+      Text: (*string)((len=106) "this.app.api_url +\n      \"/api/customers\" +\n      customer_id +\n      \"/transactions/\" +\n      platform_id")
+    },
+    Value: (interfaces.Interface) {
+      Type: (interfaces.Type) (len=4) "path",
+      Value: (*values.Value)({
+        Parts: ([]values.Part) (len=5) {
+          (*values.Unknown)({
+            Type: (values.PartType) (len=7) "unknown",
+            Parts: ([]values.Part) (len=2) {
+              (*values.VariableReference)({
+                Type: (values.PartType) (len=18) "variable_reference",
+                Identifier: (variables.Identifier) {
+                  Type: (variables.Type) (len=8) "variable",
+                  Name: (string) (len=3) "app"
+                }
+              }),
+              (*values.VariableReference)({
+                Type: (values.PartType) (len=18) "variable_reference",
+                Identifier: (variables.Identifier) {
+                  Type: (variables.Type) (len=8) "variable",
+                  Name: (string) (len=7) "api_url"
+                }
+              })
+            }
+          }),
+          (*values.String)({
+            Type: (values.PartType) (len=6) "string",
+            Value: (string) (len=14) "/api/customers"
+          }),
+          (*values.VariableReference)({
+            Type: (values.PartType) (len=18) "variable_reference",
+            Identifier: (variables.Identifier) {
+              Type: (variables.Type) (len=8) "variable",
+              Name: (string) (len=11) "customer_id"
+            }
+          }),
+          (*values.String)({
+            Type: (values.PartType) (len=6) "string",
+            Value: (string) (len=14) "/transactions/"
+          }),
+          (*values.VariableReference)({
+            Type: (values.PartType) (len=18) "variable_reference",
+            Identifier: (variables.Identifier) {
+              Type: (variables.Type) (len=8) "variable",
+              Name: (string) (len=11) "platform_id"
+            }
+          })
+        }
+      }),
+      VariableName: (string) ""
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=9) "interface",
+    DetectorType: (detectors.Type) (len=10) "javascript",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=13) "paths/main.js",
+      Language: (string) (len=10) "JavaScript",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(24),
+      ColumnNumber: (*int)(5),
+      Text: (*string)((len=68) "\"/api/customers\" + customer.ID + \"/transactions/\" + platform.GetID()")
+    },
+    Value: (interfaces.Interface) {
+      Type: (interfaces.Type) (len=4) "path",
+      Value: (*values.Value)({
+        Parts: ([]values.Part) (len=4) {
+          (*values.String)({
+            Type: (values.PartType) (len=6) "string",
+            Value: (string) (len=14) "/api/customers"
+          }),
+          (*values.Unknown)({
+            Type: (values.PartType) (len=7) "unknown",
+            Parts: ([]values.Part) (len=2) {
+              (*values.VariableReference)({
+                Type: (values.PartType) (len=18) "variable_reference",
+                Identifier: (variables.Identifier) {
+                  Type: (variables.Type) (len=8) "variable",
+                  Name: (string) (len=8) "customer"
+                }
+              }),
+              (*values.VariableReference)({
+                Type: (values.PartType) (len=18) "variable_reference",
+                Identifier: (variables.Identifier) {
+                  Type: (variables.Type) (len=8) "variable",
+                  Name: (string) (len=2) "ID"
+                }
+              })
+            }
+          }),
+          (*values.String)({
+            Type: (values.PartType) (len=6) "string",
+            Value: (string) (len=14) "/transactions/"
+          }),
+          (*values.Unknown)({
+            Type: (values.PartType) (len=7) "unknown",
+            Parts: ([]values.Part) (len=2) {
+              (*values.VariableReference)({
+                Type: (values.PartType) (len=18) "variable_reference",
+                Identifier: (variables.Identifier) {
+                  Type: (variables.Type) (len=8) "variable",
+                  Name: (string) (len=8) "platform"
+                }
+              }),
+              (*values.VariableReference)({
+                Type: (values.PartType) (len=18) "variable_reference",
+                Identifier: (variables.Identifier) {
+                  Type: (variables.Type) (len=8) "variable",
+                  Name: (string) (len=5) "GetID"
+                }
+              })
+            }
+          })
+        }
+      }),
+      VariableName: (string) ""
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=9) "interface",
+    DetectorType: (detectors.Type) (len=10) "javascript",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=13) "paths/main.js",
+      Language: (string) (len=10) "JavaScript",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(33),
+      ColumnNumber: (*int)(5),
+      Text: (*string)((len=101) "`${CUSTOMERS_HOST}:${CUSTOMER_HOST_PORT}/api/delivery-messages?num_page=${page}&filters[]=${filters}`")
+    },
+    Value: (interfaces.Interface) {
+      Type: (interfaces.Type) (len=4) "path",
+      Value: (*values.Value)({
+        Parts: ([]values.Part) (len=7) {
+          (*values.VariableReference)({
+            Type: (values.PartType) (len=18) "variable_reference",
+            Identifier: (variables.Identifier) {
+              Type: (variables.Type) (len=8) "variable",
+              Name: (string) (len=14) "CUSTOMERS_HOST"
+            }
+          }),
+          (*values.String)({
+            Type: (values.PartType) (len=6) "string",
+            Value: (string) (len=1) ":"
+          }),
+          (*values.VariableReference)({
+            Type: (values.PartType) (len=18) "variable_reference",
+            Identifier: (variables.Identifier) {
+              Type: (variables.Type) (len=8) "variable",
+              Name: (string) (len=18) "CUSTOMER_HOST_PORT"
+            }
+          }),
+          (*values.String)({
+            Type: (values.PartType) (len=6) "string",
+            Value: (string) (len=32) "/api/delivery-messages?num_page="
+          }),
+          (*values.VariableReference)({
+            Type: (values.PartType) (len=18) "variable_reference",
+            Identifier: (variables.Identifier) {
+              Type: (variables.Type) (len=8) "variable",
+              Name: (string) (len=4) "page"
+            }
+          }),
+          (*values.String)({
+            Type: (values.PartType) (len=6) "string",
+            Value: (string) (len=11) "&filters[]="
+          }),
+          (*values.VariableReference)({
+            Type: (values.PartType) (len=18) "variable_reference",
+            Identifier: (variables.Identifier) {
+              Type: (variables.Type) (len=8) "variable",
+              Name: (string) (len=7) "filters"
+            }
+          })
+        }
+      }),
+      VariableName: (string) ""
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=9) "interface",
+    DetectorType: (detectors.Type) (len=10) "javascript",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=13) "paths/main.js",
+      Language: (string) (len=10) "JavaScript",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(42),
+      ColumnNumber: (*int)(5),
+      Text: (*string)((len=99) "`${this.app.apiURL}api/customers/` +\n      customer_id +\n      \"/transactions/\" +\n      platform_id")
+    },
+    Value: (interfaces.Interface) {
+      Type: (interfaces.Type) (len=4) "path",
+      Value: (*values.Value)({
+        Parts: ([]values.Part) (len=5) {
+          (*values.Unknown)({
+            Type: (values.PartType) (len=7) "unknown",
+            Parts: ([]values.Part) (len=2) {
+              (*values.VariableReference)({
+                Type: (values.PartType) (len=18) "variable_reference",
+                Identifier: (variables.Identifier) {
+                  Type: (variables.Type) (len=8) "variable",
+                  Name: (string) (len=3) "app"
+                }
+              }),
+              (*values.VariableReference)({
+                Type: (values.PartType) (len=18) "variable_reference",
+                Identifier: (variables.Identifier) {
+                  Type: (variables.Type) (len=8) "variable",
+                  Name: (string) (len=6) "apiURL"
+                }
+              })
+            }
+          }),
+          (*values.String)({
+            Type: (values.PartType) (len=6) "string",
+            Value: (string) (len=14) "api/customers/"
+          }),
+          (*values.VariableReference)({
+            Type: (values.PartType) (len=18) "variable_reference",
+            Identifier: (variables.Identifier) {
+              Type: (variables.Type) (len=8) "variable",
+              Name: (string) (len=11) "customer_id"
+            }
+          }),
+          (*values.String)({
+            Type: (values.PartType) (len=6) "string",
+            Value: (string) (len=14) "/transactions/"
+          }),
+          (*values.VariableReference)({
+            Type: (values.PartType) (len=18) "variable_reference",
+            Identifier: (variables.Identifier) {
+              Type: (variables.Type) (len=8) "variable",
+              Name: (string) (len=11) "platform_id"
+            }
+          })
+        }
+      }),
+      VariableName: (string) ""
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=10) "javascript",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=19) "variables/config.js",
+      Language: (string) (len=10) "JavaScript",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(3),
+      ColumnNumber: (*int)(33),
+      Text: (*string)(<nil>)
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=7) "process",
+      ObjectUUID: (string) (len=2) "14",
+      FieldName: (string) (len=3) "ENV",
+      FieldUUID: (string) (len=2) "15",
+      FieldType: (string) "",
+      SimpleFieldType: (string) (len=7) "unknown"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=10) "javascript",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=19) "variables/config.js",
+      Language: (string) (len=10) "JavaScript",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(4),
+      ColumnNumber: (*int)(31),
+      Text: (*string)(<nil>)
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=7) "process",
+      ObjectUUID: (string) (len=2) "14",
+      FieldName: (string) (len=3) "ENV",
+      FieldUUID: (string) (len=2) "15",
+      FieldType: (string) "",
+      SimpleFieldType: (string) (len=7) "unknown"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=10) "javascript",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=19) "variables/config.js",
+      Language: (string) (len=10) "JavaScript",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(4),
+      ColumnNumber: (*int)(35),
+      Text: (*string)(<nil>)
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=3) "ENV",
+      ObjectUUID: (string) (len=2) "15",
+      FieldName: (string) (len=17) "USER_SERVICE_HOST",
+      FieldUUID: (string) (len=2) "16",
+      FieldType: (string) "",
+      SimpleFieldType: (string) (len=7) "unknown"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=10) "javascript",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=19) "variables/config.js",
+      Language: (string) (len=10) "JavaScript",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(6),
+      ColumnNumber: (*int)(54),
+      Text: (*string)(<nil>)
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=7) "process",
+      ObjectUUID: (string) (len=2) "14",
+      FieldName: (string) (len=3) "ENV",
+      FieldUUID: (string) (len=2) "15",
+      FieldType: (string) "",
+      SimpleFieldType: (string) (len=7) "unknown"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=10) "javascript",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=19) "variables/config.js",
+      Language: (string) (len=10) "JavaScript",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(8),
+      ColumnNumber: (*int)(27),
+      Text: (*string)(<nil>)
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=7) "process",
+      ObjectUUID: (string) (len=2) "14",
+      FieldName: (string) (len=3) "ENV",
+      FieldUUID: (string) (len=2) "15",
+      FieldType: (string) "",
+      SimpleFieldType: (string) (len=7) "unknown"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=10) "javascript",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=19) "variables/config.js",
+      Language: (string) (len=10) "JavaScript",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(8),
+      ColumnNumber: (*int)(31),
+      Text: (*string)(<nil>)
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=3) "ENV",
+      ObjectUUID: (string) (len=2) "15",
+      FieldName: (string) (len=10) "ACCOUNT_ID",
+      FieldUUID: (string) (len=2) "17",
+      FieldType: (string) "",
+      SimpleFieldType: (string) (len=7) "unknown"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=10) "javascript",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=19) "variables/config.js",
+      Language: (string) (len=10) "JavaScript",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(11),
+      ColumnNumber: (*int)(41),
+      Text: (*string)(<nil>)
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=7) "process",
+      ObjectUUID: (string) (len=2) "14",
+      FieldName: (string) (len=3) "ENV",
+      FieldUUID: (string) (len=2) "15",
+      FieldType: (string) "",
+      SimpleFieldType: (string) (len=7) "unknown"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=10) "javascript",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=19) "variables/config.js",
+      Language: (string) (len=10) "JavaScript",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(11),
+      ColumnNumber: (*int)(45),
+      Text: (*string)(<nil>)
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=3) "ENV",
+      ObjectUUID: (string) (len=2) "15",
+      FieldName: (string) (len=13) "CUSTOMER_HOST",
+      FieldUUID: (string) (len=2) "18",
+      FieldType: (string) "",
+      SimpleFieldType: (string) (len=7) "unknown"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=10) "javascript",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=19) "variables/config.js",
+      Language: (string) (len=10) "JavaScript",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(12),
+      ColumnNumber: (*int)(36),
+      Text: (*string)(<nil>)
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=7) "process",
+      ObjectUUID: (string) (len=2) "14",
+      FieldName: (string) (len=3) "ENV",
+      FieldUUID: (string) (len=2) "15",
+      FieldType: (string) "",
+      SimpleFieldType: (string) (len=7) "unknown"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=10) "javascript",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=19) "variables/config.js",
+      Language: (string) (len=10) "JavaScript",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(12),
+      ColumnNumber: (*int)(40),
+      Text: (*string)(<nil>)
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=3) "ENV",
+      ObjectUUID: (string) (len=2) "15",
+      FieldName: (string) (len=13) "CUSTOMER_HOST",
+      FieldUUID: (string) (len=2) "18",
+      FieldType: (string) "",
+      SimpleFieldType: (string) (len=7) "unknown"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=9) "interface",
+    DetectorType: (detectors.Type) (len=10) "javascript",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=19) "variables/config.js",
+      Language: (string) (len=10) "JavaScript",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(3),
+      ColumnNumber: (*int)(25),
+      Text: (*string)((len=32) "process.ENV[\"ORDER_SERVICE_URL\"]")
+    },
+    Value: (interfaces.Interface) {
+      Type: (interfaces.Type) (len=3) "url",
+      Value: (*values.Value)({
+        Parts: ([]values.Part) (len=1) {
+          (*values.VariableReference)({
+            Type: (values.PartType) (len=18) "variable_reference",
+            Identifier: (variables.Identifier) {
+              Type: (variables.Type) (len=11) "environment",
+              Name: (string) (len=17) "ORDER_SERVICE_URL"
+            }
+          })
+        }
+      }),
+      VariableName: (string) ""
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=9) "interface",
+    DetectorType: (detectors.Type) (len=10) "javascript",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=19) "variables/config.js",
+      Language: (string) (len=10) "JavaScript",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(4),
+      ColumnNumber: (*int)(23),
+      Text: (*string)((len=29) "process.ENV.USER_SERVICE_HOST")
+    },
+    Value: (interfaces.Interface) {
+      Type: (interfaces.Type) (len=3) "url",
+      Value: (*values.Value)({
+        Parts: ([]values.Part) (len=1) {
+          (*values.VariableReference)({
+            Type: (values.PartType) (len=18) "variable_reference",
+            Identifier: (variables.Identifier) {
+              Type: (variables.Type) (len=11) "environment",
+              Name: (string) (len=17) "USER_SERVICE_HOST"
+            }
+          })
+        }
+      }),
+      VariableName: (string) ""
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=9) "interface",
+    DetectorType: (detectors.Type) (len=10) "javascript",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=19) "variables/config.js",
+      Language: (string) (len=10) "JavaScript",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(6),
+      ColumnNumber: (*int)(9),
+      Text: (*string)((len=19) "PRODUCT_SERVICE_URL")
+    },
+    Value: (interfaces.Interface) {
+      Type: (interfaces.Type) (len=3) "url",
+      Value: (*values.Value)({
+        Parts: ([]values.Part) (len=1) {
+          (*values.VariableReference)({
+            Type: (values.PartType) (len=18) "variable_reference",
+            Identifier: (variables.Identifier) {
+              Type: (variables.Type) (len=11) "environment",
+              Name: (string) (len=19) "PRODUCT_SERVICE_URL"
+            }
+          })
+        }
+      }),
+      VariableName: (string) ""
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=9) "interface",
+    DetectorType: (detectors.Type) (len=10) "javascript",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=19) "variables/config.js",
+      Language: (string) (len=10) "JavaScript",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(6),
+      ColumnNumber: (*int)(30),
+      Text: (*string)((len=11) "AUTH_DOMAIN")
+    },
+    Value: (interfaces.Interface) {
+      Type: (interfaces.Type) (len=3) "url",
+      Value: (*values.Value)({
+        Parts: ([]values.Part) (len=1) {
+          (*values.VariableReference)({
+            Type: (values.PartType) (len=18) "variable_reference",
+            Identifier: (variables.Identifier) {
+              Type: (variables.Type) (len=11) "environment",
+              Name: (string) (len=11) "AUTH_DOMAIN"
+            }
+          })
+        }
+      }),
+      VariableName: (string) ""
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=9) "interface",
+    DetectorType: (detectors.Type) (len=10) "javascript",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=19) "variables/config.js",
+      Language: (string) (len=10) "JavaScript",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(11),
+      ColumnNumber: (*int)(23),
+      Text: (*string)((len=55) "`http://${process.ENV.CUSTOMER_HOST}/path/${accountId}`")
+    },
+    Value: (interfaces.Interface) {
+      Type: (interfaces.Type) (len=3) "url",
+      Value: (*values.Value)({
+        Parts: ([]values.Part) (len=4) {
+          (*values.String)({
+            Type: (values.PartType) (len=6) "string",
+            Value: (string) (len=7) "http://"
+          }),
+          (*values.VariableReference)({
+            Type: (values.PartType) (len=18) "variable_reference",
+            Identifier: (variables.Identifier) {
+              Type: (variables.Type) (len=11) "environment",
+              Name: (string) (len=13) "CUSTOMER_HOST"
+            }
+          }),
+          (*values.String)({
+            Type: (values.PartType) (len=6) "string",
+            Value: (string) (len=6) "/path/"
+          }),
+          (*values.VariableReference)({
+            Type: (values.PartType) (len=18) "variable_reference",
+            Identifier: (variables.Identifier) {
+              Type: (variables.Type) (len=8) "variable",
+              Name: (string) (len=9) "accountId"
+            }
+          })
+        }
+      }),
+      VariableName: (string) ""
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=9) "interface",
+    DetectorType: (detectors.Type) (len=10) "javascript",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=19) "variables/config.js",
+      Language: (string) (len=10) "JavaScript",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(12),
+      ColumnNumber: (*int)(16),
+      Text: (*string)((len=65) "\"http://\" + process.ENV.CUSTOMER_HOST + \"/\" + \"path/\" + accountId")
+    },
+    Value: (interfaces.Interface) {
+      Type: (interfaces.Type) (len=3) "url",
+      Value: (*values.Value)({
+        Parts: ([]values.Part) (len=4) {
+          (*values.String)({
+            Type: (values.PartType) (len=6) "string",
+            Value: (string) (len=7) "http://"
+          }),
+          (*values.VariableReference)({
+            Type: (values.PartType) (len=18) "variable_reference",
+            Identifier: (variables.Identifier) {
+              Type: (variables.Type) (len=11) "environment",
+              Name: (string) (len=13) "CUSTOMER_HOST"
+            }
+          }),
+          (*values.String)({
+            Type: (values.PartType) (len=6) "string",
+            Value: (string) (len=6) "/path/"
+          }),
+          (*values.VariableReference)({
+            Type: (values.PartType) (len=18) "variable_reference",
+            Identifier: (variables.Identifier) {
+              Type: (variables.Type) (len=8) "variable",
+              Name: (string) (len=9) "accountId"
+            }
+          })
+        }
+      }),
+      VariableName: (string) ""
+    }
+  })
+}

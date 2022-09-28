@@ -1,0 +1,38 @@
+([]*report.Detection) (len=2) {
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=9) "mvnplugin",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=23) "maven-dependencies.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(3),
+      ColumnNumber: (*int)(18),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) (len=5) "test0",
+      Name: (string) (len=13) "testartifact0",
+      Version: (string) (len=8) "0.0.beta"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=9) "mvnplugin",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=23) "maven-dependencies.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(8),
+      ColumnNumber: (*int)(18),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) (len=5) "test1",
+      Name: (string) (len=13) "testartifact1",
+      Version: (string) (len=8) "1.0.beta"
+    }
+  })
+}

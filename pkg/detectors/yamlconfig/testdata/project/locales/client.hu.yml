@@ -1,0 +1,1625 @@
+hu:
+  doctypes:
+    document: Dokumentum
+  loomio_onboarding:
+    group_progress_card:
+      activities:
+        set_description: Állítsd be a csoportod leírását
+        invite_people_in: Hívj meg embereket
+        start_thread: Indíts el egy beszélgetési témát
+        make_decision: Döntéshozatal elindítása
+      learn_more: További információ a Loomio Súgóban
+      dismiss_this_card: Kártya elvetése
+  plan_names:
+    free: Ingyenes
+    trial: Próbaidőszak
+    pro: Pro
+    community: Közösség
+    small: Kicsi
+    medium: Közepes
+    large: Nagy
+    monthly: Havi
+    yearly: Éves
+  current_plan_button:
+    upgrade: Frissítés
+    free_trial: Ingyenes próbaidőszak. {{days}} nap van hátra.
+  subscription_status:
+    members: "Tagok"
+  loomio_tags:
+    all_tags: Összes címke
+    tags: Címkék
+    apply_tags: Címkék alkalmazása
+    name_label: Név
+    color_label: Szín
+    card_title: Kategória címkék
+    modal_title: Címke létrehozása
+    modal_edit_title: Címke szerkesztése
+    modal_destroy_title: Címke eltávolítása
+    helptext: A címkék lehetővé teszik a beszélgetések kategorizálását, és hogy később könnyebben megtalálhatóak legyenek.
+    discussions_count_singular: ({{count}} téma)
+    discussions_count_plural: ({{count}} témák)
+    tag_created: Címke mentve
+    tags_marked: "A(z) '{{name}}' jelöléssel ellátott témák itt: {{groupName}}"
+  reactions:
+    slight_smile: Tetszik
+    heart: Szeret
+    laughing: Nevet
+    clap: Taps
+    hugging: Ölel
+    sunglasses: Menő
+    wink: Kacsint
+    nerd: Okos
+    relieved: Megkönnyebült
+    worried: Aggódó
+    confused: Összezavart
+    confounded: Felkavart
+    neutral_face: Semleges
+    slight_frown: Szomorú
+    disappointed: Csalódott
+    angry: Mérges
+    weary: Fáradt
+    astonished: Döbbent
+    rolling_eyes: Szemet forgat
+    cry: Sír
+    scream: Sikolt
+    sleeping: Unott
+    thinking: Gondolkodik
+    raised_hands: Kezet felemel
+    pray: Imádkozik
+    fingers_crossed: Drukkol
+    v: Béke
+    metal: Metál
+    ok_hand: Rendben
+    wave: Integet
+    thumbsup: Egyetért
+    thumbsdown: Nem ért egyet
+  poll_types:
+    proposal: javaslat
+    count: ellenőrzés
+    poll: szavazás
+    dot_vote: pont-szavazás
+    meeting: idő-szavazás
+    ranked_choice: sorrend szavazás
+    score: pontszám felmérés
+  new_poll_types:
+    proposal: javaslat
+    count: mennyiség
+    poll: válassz
+    score: pontszám
+    ranked_choice: rang
+    dot_vote: hozzárendel
+    meeting: idő-szavazás
+  timezones:
+    local: Helyi idő ({{value}})
+  common:
+    version: Verzió
+    no_results_found: Nem található eredmény
+    view: Megnéz
+    history: Előzmény
+    option: Választási lehetőség
+    add: Hozzáad
+    you: Te
+    expand: Bővebben
+    all_day: Egész nap
+    ok_got_it: Értettem
+    learn_more: Tudj meg többet
+    not_found: Nem található
+    time_zone: Időzóna
+    local_time: Helyi idő
+    attachments: Mellékletek
+    active_time_ago: Utoljára aktív {{time_ago}}
+    confirm_discard_changes: Elveted a módosításokat?
+    time:
+      am: de
+      pm: du
+    closing_in: "Zárás {{time}}"
+    closed_ago: "Zárva {{time}}"
+    volume: "Hangerő"
+    notification_volume: "Értesítési hangerő"
+    group: "Csoport"
+    groups: "Csoportok"
+    organization: "Szervezet"
+    organizations: "Szervezetek"
+    threads: "Témák"
+    decisions: "Döntések"
+    settings: "Beállítások"
+    help: "Segítség"
+    anonymous: Névtelen
+    email_address: E-mail cím
+    privacy:
+      privacy: "Adatvédelem"
+      public: "Nyilvános"
+      open: "Nyitva"
+      closed: "Zárva"
+      private: "Zártkörű"
+      secret: "Titkos"
+    selected: "Kiválasztva"
+    date_range:
+      today: "Ma"
+      yesterday: "Tegnap"
+      thisweek: "Ezen a héten"
+      thismonth: "Ebben a hónapban"
+      older: "Régebbi"
+    more_help: "További segítség"
+    models:
+      proposal: "Javaslat"
+    copy: "Másolás"
+    reset: "Visszaállítás"
+    copy_text: "Szöveg másolása"
+    copied: "Vágólapra másolva"
+    points_abbrev: Minden szavazat {{score}} pontot ér
+    total: Összesen
+    action:
+      print: Nyomtatás
+      preview: Előnézet
+      pin: Rögzít
+      unpin: Rögzítés feloldása
+      search: "Keresés"
+      filter: "Szűrő"
+      back: "Vissza"
+      next: "Következő"
+      close: "Bezár"
+      reopen: "Újranyit"
+      save: "Mentés"
+      move: "Mozgat"
+      save_changes: "Változások mentése"
+      update_settings: "Beállítások frissítése"
+      reply: "Válasz"
+      edit: "Szerkesztés"
+      remove: "Eltávolít"
+      like: "Tetszik"
+      unlike: "Nem tetszik"
+      update: "Frissít"
+      cancel: "Mégse"
+      show_more: "Bővebben"
+      count_more: "{{count}} további"
+      count_responses: "{{count}} válasz"
+      view_all: "Mutasd mind"
+      new_thread: "Új téma"
+      add_subgroup: "Új alcsoport"
+      loading: "Betöltés"
+      translate: "Fordítás"
+      upload: "Feltölt"
+      uploading: "Feltöltés"
+      load_more: "Több betöltése"
+      share: Megoszt
+      ok: Rendben
+      retry: Újra
+      clear: Töröl
+      done: Kész
+      start: Indítás
+      delete: Törlés
+      unsubscribe: Leiratkozás
+      subscribe: Feliratkozás
+      unignore: Figyelmen kívül hagyás visszavonása
+      remind: Emlékeztet
+      resend: Újraküldés
+      send: Küldés
+      joined: Csatlakozott
+      last_seen: Utoljára megnézve
+      invite: Meghív
+      resent: Meghívás újraküldve
+      export: Letölt
+      fork: Elágaztatás
+      apply: Alkalmaz
+      add_people: Adj hozzá embereket
+      zoom: Zoomolás
+    formatting_help:
+      label: "Formázás"
+      title: "Így használhatod a Markdown-t a szöveg formázására"
+  merge_accounts:
+    modal:
+      submit: Ellenőrzés
+  emoji_picker:
+    search: Keresés
+    common: Gyakran használt
+    hands: Kezek
+    nature: Természet
+    objects: Dolgok
+    places: Helyek
+  ordinal:
+    _1: "1."
+    _2: "2."
+    _3: "3."
+    _4: "4."
+    _5: "5."
+    _6: "6."
+    _7: "7."
+    _8: "8."
+    _9: "9."
+    _10: "10."
+  devise:
+    sessions:
+      signed_up: Sikeres csatlakozás!
+    failure:
+      inactive: "Ehhez az e-mail címhez egy inaktív felhasználó van csatolva. Ha újra szeretnéd aktiválni a felhasználód, lépj velünk kapcsolatba."
+  error_page:
+    forbidden: "Ehhez nincs jogosultságod."
+    page_not_found: "Ezt nem találjuk. Lehet, hogy törölték vagy áthelyezték."
+    internal_server_error: "Sajnáljuk, de valami hiba történt. Kérlek próbáld újra."
+  verify_email_notice:
+    please_verify: Köszönjük a részvételt! Az e-mailben elküldött linken tudod ellenőrizni a szavazatod.
+  previous_polls_page:
+    heading: "{{name}} tevékenységei"
+    polls_count: "{{total}} döntésből {{loaded}} mutatása"
+    search_activities: Döntések keresése
+  volume_levels:
+    loud: "Hangos"
+    normal: "Normál"
+    quiet: "Csendes"
+    mute: "Néma"
+    unmute: "Néma üzemmód kikapcsolása"
+  pin_event_form:
+    title: Rögzítsd az idővonalhoz
+    title_label: Cím
+  change_volume_form:
+    simple:
+      label: Értesítések
+      loud: Felíratkozott
+      normal: Normál
+      quiet: Figyelmen kívül hagyás
+      question: Mikor szeretnél értesítést?
+      loud_explain: amikor valami történik
+      normal_explain: amikor valaki figyelmet kér
+      quiet_explain: nincsenek értesítések
+    aria_label: "E-mail beállítások módosítása"
+    loud_label: "Összes tevékenység"
+    normal_label: "Bejelentések"
+    quiet_label: "Nincs új e-mail"
+    mute_label: "Néma"
+    saved: "Értesítési beállítások frissítve"
+    discussion:
+      title: "Téma értesítések"
+      loud_description: "A témán belüli összes tevékenységről értesítést kapsz e-mailben."
+      normal_description: "A témán belül csak a fontos tevékenységekről kapsz értesítést e-mailben."
+      quiet_description: "Nem fogsz e-mailt kapni az ebben a témában történő tevékenységről."
+      apply_to_all: "Azonos beállítások alkalmazása a csoporton belüli összes témára."
+      only_this_thread: "Csak erre a témára vonatkozik"
+      group: "Csoport értesítéseinek megváltoztatása"
+      user: "Felhasználó értesítéseinek megváltoztatása"
+      messages:
+        loud: "A témán belüli új tevékenység esetén értesítést kapsz e-mailben."
+        normal: "A témán belüli új javaslat esetén értesítést kapsz e-mailben."
+        quiet: "Nem fogsz e-mailt kapni a téma változásairól."
+    membership:
+      title: "Értesítések ehhez {{title}}"
+      loud_description: "A csoporton belüli tevékenység esetén értesítést kapsz e-mailben."
+      normal_description: "A csoporton belüli tevékenység esetén értesítést kapsz e-mailben."
+      quiet_description: "Nem fogsz e-mailt kapni a csoport tevékenységeiről."
+      apply_to_all: "Ezen beállítások alkalmazása minden csoportomra."
+      messages:
+        loud: "A csoporton belüli összes tevékenységről értesítést kapsz e-mailben."
+        normal: "Csak a csoport bejelentéseiről fogsz e-mailt kapni."
+        quiet: "Nem fogsz e-mailt kapni ezzel a csoporttal kapcsolatban."
+    all_groups:
+      loud_description: "Értesítést kapsz e-mailben csoportjaid összes tevékenységéről."
+      messages:
+        loud: "Értesítést kapsz e-mailben csoportjaid összes tevékenységéről."
+        normal: "Csak a bejelentéseket kapod meg e-mailben minden csoportodból."
+        quiet: "Nem kérek e-mailt egyik csoportom tevékenységeiről sem."
+    user:
+      title: E-mail beállítások új csoportokra
+      loud_description: "Új csoportjaidon belül minden új tevékenységről értesítést kapsz e-mailben."
+      normal_description: "Minden új csoportodból e-mailben megkapod a bejelentéseket."
+      quiet_description: "Nem kérek e-mailt az új csoportjaim tevékenységeiről."
+      apply_to_all: "Ezen beállítások alkalmazása minden csoportomra."
+      messages:
+        loud: "Az új csoportjaidon belüli összes tevékenységről értesítést kapsz e-mailben."
+        normal: "Új csoportjaidból a bejelentéseket kapod meg e-mailben. "
+        quiet: "Nem kérek e-mailt az új csoportokról."
+  close_explanation_modal:
+    aria_label: Téma lezárása
+    close_thread: Téma lezárása
+    image_alt: Minden téma lezárása
+  mute_explanation_modal:
+    aria_label: Téma némítása
+    mute_thread: Téma némítása
+    body_html: |
+      A némítás azt jelenti, hogy <strong>nem kapsz értesítést a javaslatokról</strong>, vagy bármi más tevékenységről a témában, kivéve, ha valaki <strong>@megemlít téged</strong>.
+    body_html_2: |
+      A némított témák nincsenek feltüntetve a <strong>Friss</strong> és <strong>Olvasatlan</strong> oldalakon. Némított témáid megtalálásához válaszd ki a <strong>Némított</strong> menüpontot az oldalsávban.
+    image_alt: Némított témák beállításai az oldalsávban
+  dismiss_explanation_modal:
+    aria_label: Téma elvetése
+    dismiss_thread: Téma elvetése
+    body_html: |
+      <p>Ha elvetsz egy témát, eltűnik az olvasatlan témáid közül. Ha bármi történik, újra bekerül az olvastlanok közé.</p>
+  inbox:
+    clear: "Töröl"
+    latest: "Legutóbbi"
+    unread: "Olvasatlan"
+    closing_in: "Zárás"
+  sign_up_form:
+    password_label: "Jelszó:"
+    password_confirmation_label: "Jelszó megismétlése:"
+  signed_out_modal:
+    aria_label: "Az értekezésnek vége"
+    title: "Az értekezésednek vége"
+    message: "Kijelentkeztél egy másik ablakban. Kérlek jelentkezz be újra a folytatáshoz."
+    ok: "Rendben"
+  comment_reply_form:
+    aria_label: "Válasz írása"
+  comment_form:
+    aria_label: "Hozzászólás"
+    attachments:
+      add_attachment: "Fájl csatolása"
+      remove_attachment: "Csatolmány eltávolítása"
+    messages:
+      created: "Hozzászólás hozzáadva."
+      replied: "{{name}} értesítve a válaszról"
+      updated: "Hozzászólás frissítve"
+      destroyed: "Hozzászólás törölve"
+    say_something: Mondj valamit...
+    edit_comment: "Hozzászólás szerkesztése"
+    delete_comment: "Hozzászólás törlése"
+    cancel_reply: "Válasz törlése"
+    confirm_delete_message: "Biztosan törölni akarod ezt a hozzászólást?"
+    confirm_delete: "Hozzászólás törlése"
+    in_reply_to: "Válasz neki: {{name}}"
+    write_a_comment: "Írj egy hozzászólást..."
+    post_comment: "Hozzászólás"
+    submit_button:
+      label: "Bejegyzés"
+    private_privacy_notice: "A hozzászólásod csak a {{groupName}} csoport tagjainak lesz látható."
+    public_privacy_notice: "A hozzászólás mindenki számára nyilvános lesz."
+    sign_in: "Lépj be, hogy hozzászolhass a témakörhöz."
+  thread_nav:
+    participants: Résztvevők
+  sidebar:
+    threads: "Témák"
+    my_groups: "Saját csoportjaim"
+    other_groups: "Más csoportok"
+    all_groups: "Összes csoport"
+    recent_threads: "Új témák"
+    unread_threads: "Olvasatlan szálak ({{count}})"
+    muted_threads: "Némított témák"
+    start_group: "Új szervezet"
+    start_subgroup: "Új alcsoport"
+    explore: "Nyilvános csoportok"
+    explore_groups: Fedezd fel a csoportokat
+    start_thread: Új téma
+    start_decision: Új döntés
+    more_groups: Több csoport
+    aria_labels:
+      heading: "Oldalsáv"
+      threads_list: "Téma műveletek"
+      groups_list: "Csoportok"
+      user_list: "Felhasználói tevékenység"
+  strand_nav:
+    newest: Legújabb
+    oldest: Legrégebbi
+    newest_first: Először a legújabb
+    oldest_first: A legrégebbi előbb
+  navbar:
+    search_all_threads: Keresés minden témában
+    search_threads: "Keresés a témákban itt: {{name}}"
+    search_polls: "Szavazások keresése a (z) {{name}} helyen"
+    search_members: "Tagok keresése itt: {{name}}"
+    search_subgroups: "Tagok keresése itt: {{name}}"
+    search_files: "Keresés a (z) {{name}} fájlban"
+    recent_title: "Ugrás az irányítópultra"
+    unread_title: "Olvasatlan tevékenységek megtekintése"
+    start_thread: "Új téma"
+    notifications: "Értesítési panel"
+    search:
+      label: "Kereső mező; csoportok és témák keresése"
+      results_aria_label: "Keresési eredmények"
+      no_results: "Nem található eredmény erre a témára"
+      close: "Keresőpanel bezárása"
+      placeholder: "Keresés"
+      loading: "Eredmények betöltése..."
+      discussions: "Témák"
+      proposals: "Javaslatok"
+      comments: "Hozzászólások"
+    sign_in: "Bejelentkezés"
+    toggle_sidebar: "Oldalsáv ki/be kapcsolása"
+    logo_title: "Főoldal"
+    group_and_subgroups: "{{group}} & alcsoportok"
+  user_dropdown:
+    pin_sidebar: "Oldalsáv rögzítése"
+    unpin_sidebar: "Oldalsáv rögzítésének feloldása"
+    button_label: "Felhasználó menü"
+    edit_profile: "Profil szerkesztése"
+    email_settings: "Értesítési beállítások"
+    help: "Súgó"
+    contact_site_name: "Kapcsolatfelvétel vele: {{site_name}}"
+    sign_out: "Kijelentkezés"
+  membership_card:
+    group_members: "Csoporttagok"
+    discussion_members: "Témában résztvevők"
+    poll_members: "{{pollType}} tagjai"
+    invite_to_group: "Meghívás a csoportba"
+    invite_to_discussion: "Meghívás a témába"
+    invite_to_poll: "Meghívás szavazásra"
+    invitations: "Meghívások"
+  membership_dropdown:
+    set_title: "Cím megadása"
+    resend: "Meghívás újraküldése"
+    invitation_resent: "Meghívás újraküldve"
+    make_coordinator: "Adminisztrátor jogok megadása"
+    demote_coordinator: "Adminisztrátor lefokozása"
+    remove_from:
+      discussion: "Eltávolítás a témából"
+      group: "Eltávolítás a csoportból"
+      poll: "Eltávolítás innen: {{pollType}}"
+    cancel_invitation: Meghívás visszavonása
+  notification_models:
+    discussion: "téma:"
+    comment: "hozzászólás itt"
+    outcome: "eredmény:"
+  notifications:
+    header: "Értesítések"
+    no_notifications: "Nincsenek új értesítéseid"
+    new_motion: "<strong>{{name}}</strong>  elindított egy szavazást<strong>{{title}}</strong> címmel"
+    motion_closed: "Szavazás vége: <strong>{{title}}</strong>"
+    publish_outcome: "Eredmény közzététele"
+    motion_closed_by_user: "<strong>{{name}}</strong> lezárta a  <strong>{{title}}</strong> szavazást"
+    motion_closed_by_expiry: "A <strong>{{title}}</strong> szavazás lezárult"
+    new_vote: "<strong>{{name}}</strong>álláspontja {{position}}  a <strong>{{title}}</strong> javaslatban"
+    new_comment: "<strong>{{name}}</strong> hozzászólt a <strong>{{title}}</strong> témához"
+    comment_replied_to: "<strong>{{name}}</strong> válaszolt a hozzászólásodra a <strong>{{title}}</strong>témában"
+    reaction_created: "<strong>{{name}}</strong> reagált<img class='emojione' src='{{reaction_src}}' alt='{{reaction}}'/> a hozzászólásodra itt: {{model}}<strong>{{title}}</strong>"
+    user_mentioned: "<strong>{{name}}</strong> megemlített téged itt: <strong>{{title}}</strong>"
+    user_reminded: "<strong>{{name}}</strong> vár a visszaigazolásodra itt: <strong>{{title}}</strong>"
+    membership_requested: "<strong>{{name}}</strong> szeretne csatlakozni ide: <strong>{{title}}</strong>"
+    membership_request_approved: "<strong>{{name}}</strong> elfogadta a csatlakozási kérelmed a <strong>{{title}}</strong> témába"
+    user_added_to_group: "<strong>{{name}}</strong> felvett a <strong>{{title}}</strong> csoportba"
+    user_added_to_group_no_inviter: "Csatlakoztál ide: <strong>{{title}}</strong>"
+    motion_closing_soon: "Javaslat hamarosan lezárul: <strong>{{title}}</strong>"
+    motion_outcome_created: "<strong>{{name}}</strong> közzétett egy végeredményt a <strong>{{title}}</strong> szavazásban"
+    motion_outcome_updated: "<strong>{{name}}</strong> frissített egy végeredményt a <strong>{{title}}</strong>szavazásban"
+    invitation_accepted: "<strong>{{name}}</strong> elfogadta a csatlakozási kérelmed itt: <strong>{{title}}</strong>"
+    poll_closing_soon: "A {{poll_type}} hamarosan lezárul: <strong> {{title}} </strong>"
+    poll_expired: "{{poll_type}} lezárult: <strong>{{title}}</strong>"
+  discussion_fork_actions:
+    move: Mozgat
+  discussion_form:
+    invite: Meghív
+    aria_label: "Téma űrlap"
+    messages:
+      created: "A téma elindult"
+      updated: "A téma frissítve"
+      forked: "Téma elágazás létrehozva"
+    new_discussion_title: "Új téma indítása"
+    edit_discussion_title: "Téma szerkesztése"
+    group_label: "Csoport"
+    group_placeholder: "Válassz egy csoportot"
+    title_label: "Cím"
+    title_placeholder: "Mit szeretnél megtárgyalni?"
+    context_label: "Leírás"
+    privacy_label: "Adatvédelem"
+    privacy_public: "Bárki láthatja a témát. Csak a tagok vehetnek részt."
+    privacy_private: "A téma csak a(z) {{group}} tagjai számára lesz látható."
+    privacy_organisation: "A téma látható lesz a(z) {{parent}} és a(z) {{group}} tagjai számára."
+    fork_notice: "Új témát hozunk létre {{count}} elemmel innen: {{title}}"
+  announcement:
+    send_discussion: Téma küldése
+    send_discussion_explain: Emberek meghívása, hogy részt vegyenek ebben a megbeszélésben
+    send_group: "Meghívás a következőhöz: {{name}}"
+    send_poll: Elküld {{type}}
+    send_outcome: Oszd meg a végeredményt
+    quick_add: "Gyors hozzáadás:"
+    any_other_groups: "Más csoportok?"
+    preview: E-mail előnézete
+    no_notifications_sent: Nem lettek értesítések küldve
+    history_error: Valami elromlott! Nem tudtuk betölteni az előzményeket.
+    audiences:
+      group: A(z) {{name}} tagjai
+    form:
+      too_many_invitations: |
+        A meghívási korlátot meghaladtad. <a href="{{upgradeUrl}}" target="_blank"> Frissítés </a>
+      invitations_remaining: '{{count}} meghívó maradt. <a href="{{upgradeUrl}}" target="_blank"> Frissítés </a>'
+      invitation_message_label: Üzenet
+      group_announced:
+        title: Meghívás a csoportba
+        helptext: Kit szeretnél meghívni a csoportba?
+      discussion_announced:
+        title: Meghívás a témába
+        helptext: Kit szeretnél meghívni a témához?
+      discussion_edited:
+        title: Értesítés a módosításokról
+      poll_announced:
+        title: Meghívás szavazásra
+        helptext: Kit szeretnél meghívni a szavazásra?
+      poll_reminder:
+        message_label: Üzenet
+      wip_poll_reminder:
+        message_label: Üzenet
+      poll_edited:
+        title: Értesítés a módosításokról
+      outcome_announced:
+        title: Oszd meg az eredményt
+      anyone_can_participate: Bárki részt vehet, akinek megvan ez a link
+      group_title: "{{name}} ({{count}} ember)"
+    members_list:
+      title: Megosztva vele
+      last_notified: Értesített
+      not_notified: Még nincs értesítve
+      no_members: "Ez még senkivel sincs megosztva!"
+    group_form:
+      search_placeholder: Emberek keresése ...
+      modal_title: Válassza ki a csoporttagokat
+    flash:
+      success: "{{count}} értesítés elküldve"
+  action_dock:
+    react: Érzelmi válasz
+    notify: Értesít
+    add_resource: Melléklet hozzáadása
+    edit_group: Csoport leírás szerkesztése
+    add_comment: Megjegyzés
+    edit_thread: Leírás szerkesztése
+    announce_thread: Téma küldése
+    invite_guests: Vendégek meghívása
+    translate_thread: Leírás fordítása
+    edit_poll: A szavazás szerkesztése
+    announce_poll: Hívja meg az embereket szavazásra
+    announce_poll_active: (Még senkit sem hívtak meg.)
+    translate_poll: Szavazás lefordítása
+    edit_stance: Álláspontod megváltoztatása
+    translate_stance: Felmérés lefordítása
+    edit_comment: Hozzászólás módosítása
+    delete_comment: Hozzászólás törlése
+    reply_to_comment: Válasz
+    fork_comment: Téma elágaztatása
+    translate_comment: Megjegyzés lefordítása
+    edit_outcome: Eredmény szerkesztése
+    announce_outcome: Értesítse az embereket erről az eredményről
+    announce_outcome_active: (Senki nem kapott értesítést erről az eredményről)
+    translate_outcome: Az eredmény lefordítása
+    show_history: A szerkesztési előzmények megjelenítése
+    edited: Szerkesztette
+    history: Előzmény
+    pin_thread: Téma rögzítése
+    unpin_thread: Téma rögzítésének megszüntetése
+    pin_event: Rögzítse az idővonalhoz
+    unpin_event: Idővonalon rögzítés megszüntetése
+    comment_copied: A megjegyzés URL-jét a vágólapra másolta
+    move_thread: Mozgasd a csoportba
+    poll_copied: A döntés URL-je a vágólapra másolva
+    discussion_copied: A téma URL-jét a vágólapra másolta
+    tag_thread: Címkék kezelése
+    close_thread: Téma lezárása
+    reopen_thread: Téma újranyitása
+    delete_thread: Téma törlése
+    notification_history: Értesítési előtörténet
+  formatting:
+    bold: Félkövér
+    italicize: Dőlt
+    blockquote: Idézet
+    strikethrough: Áthúzott
+    underline: Aláhúzott
+    link: Illessz be egy hivatkozást
+    code_block: Kód rész
+    attach: Fájl csatolása
+    bullet_list: Lista
+    number_list: Számozott lista
+    check_list: Ellenőrzőlista
+    reset: Visszaállítás
+    quote: Idézet
+    embed: Videó beágyazása
+    divider: Osztó
+    add_table: Táblázat hozzáadása
+    remove_table: Táblázat eltávolítása
+    add_column_before: Oszlop hozzáadása előtte
+    add_column_after: Oszlop hozzáadása utána
+    remove_column: Oszlop eltávolítása
+    add_row_before: Sor hozzáadása előtte
+    add_row_after: Sor hozzáadása utána
+    remove_row: Sor eltávolítása
+    merge_selected: Kiválaszott cellák egyesítése
+  cover_photo_form:
+    aria_label: "Borítófotó csere"
+    heading: "Új borítókép"
+    upload_link: "Tölts fel új borítófotót"
+    image_size_helptext: "Az ideális képméret 1400 × 320px"
+    upload_success: "A borítókép sikeresen frissítve"
+  logo_photo_form:
+    aria_label: "A csoport logójának módosítása"
+    heading: "Új csoport embléma"
+    upload_link: "Tölts fel új csoportlogót"
+    image_size_helptext: "Az ideális képméret 100 × 100 képpont"
+    upload_success: "A logó sikeresen frissítve"
+  join_group_button:
+    join_group: Kapcsolódj a csoporthoz
+    membership_requested: Felvétel kérve
+    messages:
+      joined_group: "Most a(z) {{group}} tagja vagy"
+  membership_request_form:
+    aria_label: Tagsági igénylőlap
+    heading: Kérj belépőt a csoportba
+    name_label: Név
+    email_label: E-mail
+    introduction_label: Miért akarsz csatlakozni?
+    submit_button: Kérdezz a csatlakozáshoz
+    introduction_over_limit: A válasz túl hosszú
+    messages:
+      membership_requested: "Ön a(z) {{group}} tagságát kérte"
+  revision_history_modal:
+    aria_label: Módosítási előzmények
+    started_by: "Indította: <strong> {{name}} </strong>"
+    edited_by: "Szerkesztette: <strong> {{name}} </strong>"
+    edit_by: "Szerkesztés: {{name}} · {{date}}"
+    posted: Közzétett
+    original_text: Eredeti
+    current_revision: Legutóbbi
+    closing_at_changed: "a záró időpontot erre állították: {{time}}"
+    private_changed: "Adatvédelem beállítása {{private}}"
+    group_id_changed: "áthelyezve ide: {{name}}"
+  reactions_input:
+    add_your_reaction: Válasz hozzáadása
+  reactions_display:
+    more_reactions: "{{count}} további"
+    you: "Te"
+    you_and_name: "Te és {{name}}"
+    you_and_name_and_count_more: "Te, {{name}} és még {{count}}"
+    name_and_count_more: "{{name}} és még {{count}}"
+  context_panel:
+    thread_status:
+      pinned: "Ezt a témát rögzítették. Az összes felhasználó számára a témák listájának tetején fog maradni."
+      closed: "Ezt a témát lezárták. Már nem jelenik meg a műszerfalon, és a csoportoldal „lezárt” részében kerül felsorolásra"
+  group_page:
+    threads: Témák
+    polls: Szavazások
+    members: Tagok
+    files: Fájlok
+    settings: Beállítások
+    subgroups: Alcsoportok
+    show_opened: "{{count}} nyitott"
+    show_closed: "{{count}} lezárt"
+    no_threads_here: Nincsenek témák itt!
+    search_threads: Témák keresése ...
+    private_threads: Tagnak kell lenned ahhoz, hogy megtekintsd a csoport zártkörű témáit
+    messages:
+      privacy:
+        members: "Ez a csoport most csak a tagok számára látható"
+        parent_members: "Ez a csoport most csak a szervezet tagjai számára látható"
+        public: "Ez a csoport most látható a nyilvánosság számára"
+      leave_group_success: "Elhagytad ezt a csoportot"
+      archive_group_success: "Ezt a csoportot deaktiválták"
+    group_logo: "Csoport logó"
+    new_photo: "új fénykép"
+    new_cover_photo: "Tölts fel új borítóképet"
+    new_group_logo: "Tölts fel új csoportlogót"
+    open_discussions: "Nyitott témák"
+    closed_discussions: "Zárt témák"
+    discussions_placeholder: "Egy téma az, ahol mindenki megbeszélhet egy témát és együtt hozhat döntéseket."
+    members_placeholder: "Te vagy az egyetlen itt: hívj meg embereket, hogy csatlakozzanak hozzád!"
+    member_options: Tagság beállítások
+    see_all_members: "Az összes {{count}} tag megtekintése"
+    pending_invitations: "{{count}} függőben van"
+    subgroups_placeholder: "Az alcsoportok a csapatok számára saját teret biztosítanak, és az értesítéseket a megfelelő emberekre összpontosítják."
+    invite_people: "Meghív"
+    visibility_label: "Láthatóság"
+    options_label: "Lehetőségek"
+    options:
+      label: "Lehetőségek"
+      edit_group: "A csoportbeállítások szerkesztése"
+      export_data: Csoport adatok letöltése
+      manage_members: "Tagok kezelése"
+      add_subgroup: "Alcsoport hozzáadása"
+      email_settings: "E-mail beállítások"
+      leave_group: "Kilépés a csoportból"
+      deactivate_group: "Csoport deaktiválása"
+    volume:
+      loud: Kapjak e-mailt a történésekről
+      loud_aria_description: A csoport értesítési hangereje Hangosra van állítva. Akkor kap e-mailt, ha van tevékenység.
+      loud_message: Minden tevékenységet e-mailben kapunk a(z) "{{name}}" mappában.
+      normal: "Csak fontos tevékenység e-mailben küldése: Új témák és javaslatok, eredmények stb."
+      normal_aria_description: A csoport értesítési hangereje Normál értékre van állítva. Csak fontos tevékenységet küld e-mailben, például amikor valaki új témát indít, javaslatot tesz vagy eredményt határoz meg.
+      normal_message: 'Csak a(z) {{name}} "fontos eseményekről küld e-mailt.'
+      quiet: Nem kérek e-mailt erről a csoportról. Az aktivitások megjelennek a műszerfalon.
+      quiet_aria_description: A csoport értesítési hangereje Csendesre lett állítva. Nem kap e-mailt e csoport tevékenységeiről. A csoporttevékenység megjelenik a műszerfalon.
+      quiet_message: 'Nem kap e-mailt a(z) "{{name}}" tevékenységekkel kapcsolatban.'
+      mute: Ez a csoport ne jelenjen meg a műszerfalon és ne értesítsen amíg nem @említenek meg.
+      mute_aria_description: A csoport értesítési hangereje Némítottra van állítva. Csak akkor küld e-mailt, ha valaki megemlít téged, és a csoporttevékenység nem jelenik meg a műszerfalon.
+      mute_message: 'A(z) "{{name}}" eltávolításra került a műszerfalról.'
+    privacy:
+      private: "Adatvédelem: Ez a csoport csak a tagok számára látható"
+      parent_members: "Adatvédelem: Ez a csoport a(z) {{parentGroupName}} és a {{groupName}} tagjai számára látható."
+      public: "Adatvédelem: Ez a csoport látható az interneten"
+      aria_label: "Csoportos adatvédelem: {{privacy}}"
+  description_card:
+    title: "A csoport leírása"
+    placeholder: "A csoport adminisztrátorai ezt a területet használhatják a csoport céljának leírására, így mindenki tudja, miért van itt."
+    messages:
+      description_updated: "Leírás frissítve"
+  leave_group_form:
+    aria_label: "Kilépés a csoportból"
+    title: "Kilépés a csoportból"
+    question: "Biztosan el akarja hagyni ezt a csoportot?"
+    submit: "Igen, hagyja el ezt a csoportot"
+  archive_group_form:
+    aria_label: "Csoport deaktiválása"
+    title: "Csoport deaktiválása"
+    question: "Biztosan kikapcsolja ezt a csoportot?"
+    submit: "Igen, deaktiválja ezt a csoportot"
+  group_form:
+    aria_label: Csoport forma
+    new_organisation: Új szervezet
+    new_group: Új csoport
+    new_subgroup: Új alcsoport
+    start_group_heading: Indíts egy csoportot
+    start_subgroup_heading: Indíts egy alcsoportot
+    edit_group_heading: A csoportbeállítások szerkesztése
+    edit_subgroup_heading: Az alcsoport beállításainak szerkesztése
+    group_settings: Csoport beállítások
+    group_name: Csoport neve
+    start_organization_heading: Új szervezet
+    edit_organization_heading: Szervezet beállításainak szerkesztése
+    group_name_placeholder: "Csoportod neve?"
+    organization_name_placeholder: "Mi a szervezeted neve?"
+    description: "Leírás"
+    description_placeholder: "Mutassa be csoportjának célját, hogy a csoport tagjai tudják, miért vannak itt."
+    privacy_statement:
+      public_on_web: "A csoport kontextusának neve, leírása és mellékletei a nyilvánosság számára láthatóak lesznek"
+      private_to_group: "A név és a leírás csak a tagok számára lesz látható."
+      private_to_parent_members: "A név és a leírás a(z) {{parent}} tagjai számára látható lesz"
+    privacy: "Adatvédelem"
+    confirm_change_to_secret: "Ha folytatod, a csoport és az alcsoportok összes témája zártkörűvé válik."
+    confirm_change_to_secret_subgroup: "Ha folytatja, az összes téma zártkörű lesz."
+    confirm_change_to_public: "Ha folytatja, akkor a csoport összes témát közzéteszi az interneten."
+    confirm_change_to_private_discussions_only: "Ha folytatja, a csoport összes nyilvános témája zártkörű lesz."
+    profile: Profil
+    subgroup_privacy_is_open_description: "Bárki megtalálhatja ezt az alcsoportot, és kérheti a csatlakozást. Csak a tagok láthatják, ki van a csoportban. Az összes téma nyilvános."
+    subgroup_privacy_is_closed_description: "Bárki megtalálhatja ezt az alcsoportot, és kérheti a csatlakozást. Csak a tagok láthatják, ki van a csoportban. Az összes téma zártkörű."
+    subgroup_privacy_is_closed_public_threads_description: "Bárki megtalálhatja ezt az alcsoportot, és kérheti a csatlakozást. Csak a tagok láthatják, ki van a csoportban. A témák lehetnek nyilvános vagy magántémák"
+    subgroup_privacy_is_closed_secret_parent_description: "A(z) {{parent}} tagjai megtalálhatják ezt az alcsoportot, és kérhetik, hogy csatlakozhassanak. Az összes téma zártkörű. Csak a tagok láthatják, hogy ki van a csoportban."
+    subgroup_privacy_is_secret_description: "Csak az meghívott tagok találhatják meg ezt az alcsoportot, megnézhetik, ki van benne, és láthatják a témákat."
+    advanced_settings: "További beállítások"
+    how_do_people_join: "Hogyan csatlakoznak az emberek?"
+    membership_granted_upon_request: "Bárki csatlakozhat a csoporthoz."
+    membership_granted_upon_approval: "Bárki kérheti a csatlakozást, de jóvá kell hagynia."
+    membership_granted_upon_approval_secret_parent: "<strong> Kérésre </strong>bárki a(z) {{parent}} -től, kérheti, hogy csatlakozzon a csoporthoz."
+    permissions: "Engedélyek"
+    features: "Csoportra jellemző lehetőségek"
+    thread_privacy: "Téma adatvédelme"
+    public_threads: "Csak nyilvános témák"
+    public_discussions_subgroup: "Bárki a(z) {{parentGroupName}} csoport tagjai közül láthatják a beszélgetéseket"
+    public_or_private_threads: "Engedélyezd a nyilvános és a zártkörű témákat"
+    private_threads: "Csak a tagok láthatják a beszélgetéseket"
+    allow_public_threads: "Engedélyezd a nyilvános témákat ebben a csoportban."
+    submit_start_group: "Indíts csoportot"
+    submit_start_subgroup: "Az alcsoport indítása"
+    submit_update: "Beállítások frissítése"
+    messages:
+      group_created: "A csoport elindult"
+      group_updated: "A csoport frissítve"
+    upload_logo: "Tölts fel logót"
+    upload_cover_photo: "Töltse fel a borítóképét"
+  group_export_modal:
+    title: Csoport adatok letöltése
+    submit: Letöltés indítása
+    flash: A csoport adatok exportálása megkezdődött
+  membership_requests_card:
+    heading: "Tagsági kérelmek"
+    manage_requests: Kezeld a kéréseket
+    manage_requests_with_count: Kezeld a kérelmeket ({{count}})
+  membership_requests_page:
+    heading: Tagsági kérelmek
+    approve: Érvényesítés
+    ignore: Figyelmen kívül hagyás
+    no_pending_requests: Jelenleg nincs függőben lévő tagsági kérelem ehhez a csoporthoz.
+    no_previous_requests: Jelenleg nincs korábbi tagsági kérelem ehhez a csoporthoz.
+    previous_requests: Korábbi kérések
+    previous_request_response: "{{response}} előterjesztette: {{responder}}"
+    messages:
+      request_approved_success: A tagsági kérelem jóváhagyva
+      request_ignored_success: A tagsági kérelmet figyelmen kívül hagyták
+  group_previous_proposals_card:
+    heading: Előző javaslatok
+    see_more: Többet látni
+  group_decisions_card:
+    see_more: "Lásd az összes: ({{count}}) döntést"
+  invitation_form:
+    aria_label: "Meghívó"
+    invite_people: "Hívj meg embereket"
+    invite_guests: "Vendégek meghívása"
+    notify_people: "Emberek értesítése"
+    invite_people_to_group: "Meghívó a következőhöz: {{name}}"
+    group: "Csoport"
+    group_placeholder: "Válasszon egy csoportot"
+    shareable_link: "Megosztható link"
+    copy_link: "Másolás"
+    email_addresses: "E-mail címek"
+    email_addresses_placeholder: "például. helperbot@loomio.org, friendlybot@loomio.org"
+    shareable_link_reset: "Megosztható link visszaállítása. Az előző link már nem működik."
+    email_explanation: "Alternatív megoldásként írhatja be az e-mail címeket az alábbiakba, hogy e-mailben meghívókat küldjön."
+    add_custom_message: "Tedd személyessé a meghívást,"
+    add_custom_message_link: "adjon hozzá egyéni üzenetet."
+    custom_message: "Egyéni üzenet"
+    custom_message_placeholder: "Írjon be egy személyes üzenetet, amelyet a meghívóhoz mellékel."
+    team_invitation_message: "Egy másik változat szerint"
+    team_invitation_link: "kap egy linket a megosztáshoz."
+    add_members: "Tagok felvétele"
+    from_parent_group: "tőle {{name}}."
+    send: "Küldés"
+    done: "Kész"
+    messages:
+      invitation_sent: "Meghívó elküldve."
+      invitations_sent: "{{count}} meghívó elküldve."
+      no_invitations: "UH Oh! Ellenőrizze, hogy az e-mail cím helyes-e, és próbálja újra."
+      max_invitations: "Ha több mint 100 meghívót szeretne küldeni, használjon egy csapat linket."
+  memberships_page:
+    members: "Tagok"
+    name_label: "Név"
+    coordinator_label: "Admin"
+    remove_member_label: "Eltávolít"
+    fragment_placeholder: "A felhasználók szűrése név vagy felhasználónév alapján ..."
+    messages:
+      remove_member_success: "Eltávolítva {{name}}"
+      make_admin_success: "A {{name}} rendszergazda"
+      remove_admin_success: "A(z) {{name}} már nem rendszergazda"
+    remove_admin_from_self:
+      question: "Biztos benne, hogy már nem akar adminisztrátorként lenni?"
+  membership_remove_modal:
+    invitation:
+      title: Meghívás elvetése
+      message: Biztosan visszavonja a(z) {{name}} meghívót?
+      flash: A meghívó visszavonva
+      submit: Meghívás elvetése
+    membership:
+      title: Távolítsa el a tagot
+      message: Biztosan eltávolítani akarja a(z) {{name}} fájlt?
+      flash: Tag eltávolítva
+      submit: Távolítsa el a tagot
+  memberships_panel:
+    add_coordinator: Tedd rendszergazdává
+    remove_coordinator: Admin adminisztrátor
+  membership_form:
+    modal_title:
+      group: Állítsa be a csoport címét
+    title_helptext:
+      group: Ez a cím a csoporton belül a {{name}} neve mellett jelenik meg. Használja azt, hogy megtudja az emberek szerepét.
+    title_label: cím
+    title_placeholder: Például. „Koordinátor” vagy „Levezető”
+    updated: A tagság címe frissítve
+  user_page:
+    contact_user: "Kapcsolattartó: {{name}}"
+    location_field: "Hely: {{value}}"
+    locale_field: "Nyelv: {{value}}"
+    online_field: "Online: {{value}}"
+    invited: "Meghívott {{value}}"
+  contact_request_form:
+    modal_title: "E-mail: {{name}}"
+    message_placeholder: Mutassa be magát és ossza meg miért szeretne kapcsolatba lépni.
+    helptext: "A(z) {{name}} e-mailben küldi el a nevét, e-mail címét és üzenetét"
+    email_sent: "E-mail küldve a következőhöz: {{name}}"
+  profile_page:
+    messages:
+      updated: "profil frissítve"
+      picture_changed: "A profilkép frissítve"
+      password_changed: "A jelszó frissítve"
+      deactivated: "A fiók inaktiválva"
+    change_picture_link: "Kép megváltoztatása"
+    change_password_link: "Jelszó visszaállítása"
+    delete_account: "Véglegesen törölje a fiókot"
+    delete_user_link: "Fiók törlése"
+    profile: "Profil"
+    edit_profile: "Profil szerkesztése"
+    picture_label: "Kép"
+    name_label: "Név"
+    username_label: "Felhasználónév"
+    username_helptext: "Minden kisbetű és szám, legfeljebb 30 karakter"
+    email_label: "E-mail"
+    short_bio_label: "Bevezetés"
+    locale_label: "Nyelv"
+    short_bio_placeholder: "Kérjük, mutassa be magát, adja meg a szakterületet, az érdeklődésre számot tartó témákat és az esetleges kapcsolt szervezeteket"
+    locale_placeholder: Válassza ki a kívánt nyelvet
+    location_label: "Helyszín"
+    location_placeholder: "Hol vagy?"
+    update_profile: "Profil frissítése"
+    deactivate_account: "Deaktiválja a felhasználói fiókot"
+    help_translate: "Segítsen a Loomio fordításában"
+  text_editor:
+    insert_link: Illessz be egy hivatkozást
+    insert_embedded_url: Videó beágyazása
+  change_picture_form:
+    aria_label: "Profilkép űrlap"
+    title: "Profilkép beállítása"
+    helptext: 'Feltöltheted a saját profilképed, vagy ha van egy <a href="https://en.gravatar.com/support/whatisgravatar/">Gravatar</a>fiókod, akkor használhatod azt.'
+    use_initials: "Használj kezdőbetűket"
+    use_gravatar: "Használj Gravatart"
+    use_uploaded: "Tölts fel új fényképet"
+    use_provider: "Használj {{provider}} fotót"
+  change_password_form:
+    set_password_title: Állítsd be a jelszavad
+    set_password_helptext: Adjon meg egy jelszót - legalább 8 karakter
+    set_password: Állítsd be a jelszót
+    password_changed: Jelszava frissült
+  deactivation_modal:
+    aria_label: "Deaktiválja a felhasználói fiókot"
+    introduction: "A fiók deaktiválásakor:"
+    you_will_be_deleted: "Felhasználói fiókját, beleértve a nevét, e-mail címét és egyéb személyes azonosító adatait, rendszerünkből töröljük."
+    name_removed: "Az észrevételek, javaslatok és megbeszélések megmaradnak, de a nevét eltávolítják róluk"
+    no_longer_group_member: "Már nem kerülnek felsorolásra egyetlen csoport tagjaként sem"
+    no_emails: "Többé nem kap értesítési e-maileket"
+    you_can_reactivate: "Később újra aktiválhatja fiókját, ha szeretné"
+    submit: "Igen, szeretnék kikapcsolni"
+  email_settings_page:
+    monday: Hétfő
+    tuesday: Kedd
+    wednesday: Szerda
+    thursday: Csütörtök
+    friday: Péntek
+    saturday: Szombat
+    sunday: Vasárnap
+    header: Értesítési beállítások
+    account_deactivated: Fiókját inaktiválták. Soha nem fog e-mailt kapni.
+    deactivate_header: Állítson le minden e-mailt örökre
+    deactivate_description: Ha soha többé nem szeretne új e-mailt kapni tőlünk, deaktiválhatja felhasználói fiókját.
+    email_newsletter: Loomio hírlevél
+    email_newsletter_description: "Frissítse az új funkciókat, képzéseket, eseményeket a városában és a Loomio jövőjét. Általában 2 vagy 3 e-mail évente."
+    on_participation_label: Feliratkozás a részvételre
+    on_participation_description: "Amikor részt vesz egy témában, az összes további tevékenységet azonnal elküldjük Önnek e-mailben."
+    announcement_label: Bejelentések
+    announcement_description: "E-mailt fog kapni az összes olyan tartalomról, amelyet a csoportok tagjai bejelentettek"
+    mentioned_label: Megemlíti és válaszokat
+    update_settings: Változtatások mentése
+    specific_groups: Beállítások az egyes csoportokhoz
+    default_settings:
+      loud_description: "Ha csatlakozik egy új csoporthoz, akkor e-mailt küld <strong>, ha van tevékenység </strong>"
+      normal_description: "Amikor csatlakozik egy új csoporthoz, e-mailt kap az <strong>új témák és javaslatok </strong>"
+      quiet_description: "Ha csatlakozik egy új csoporthoz, akkor <strong>nem kap e-mailt a tevékenységről </strong>"
+    edit: szerkesztése
+    messages:
+      updated: Az e-mail beállítások frissítve
+    learn_more: További információ az e-mail beállításokról ...
+  thread_preview:
+    replies_count: "{{count}} válasz"
+    unread_count: "{{count}} olvasatlan"
+  dashboard_page:
+    aria_label: "Műszerfal"
+    recent_threads: "Új témák"
+    no_groups:
+      show_all: Üdvözöljük! Még nem tagja egyetlen csoportnak sem. <a href="/explore">Böngészd a nyilvános csoportokat</a> vagy <a href="/g/new">Indítsd egy csoportot</a>.
+      show_muted: Nincs elnémított témája, mert nem tagja egyetlen csoportnak sem.
+    no_threads:
+      show_all: Nincs legutóbbi témája.
+      show_proposals: Jelenleg nincs aktív javaslat.
+      show_muted: Nincs elnémított téma.
+    view_recent: Az összes legutóbbi téma megtekintése?
+    load_more: Töltsön be további témákat
+    mark_as_read: Olvasottként jelöl
+    dismiss: Bezárás
+    thread_dismissed: A téma olvasottként van megjelölve
+    thread_recalled: A téma visszahívásra került
+    explain_mute:
+      title: Még egyetlen témát sem némított el.
+      explanation_html: |
+        A némítás egy olyan módszer, amellyel elrejtheti vagy elnémíthatja azokat a szálakat, amelyeket nem érdekel.
+        A némítás azt jelenti, hogy nem fogja látni az <strong>Legutóbbi</strong> vagy a <strong>Olvasatlan</strong> verzióban, és nem kap értesítést az adott szálban zajló tevékenységekről, például a javaslatokról.
+        Csak akkor figyelmeztetünk, ha valaki <strong>@megemlíti</strong> a neved
+      instructions: "A témát elnémításához vigye az egérmutatót rá, és kattintson a némítás ikonra."
+      see_muted_html: 'A némított témák megtekintéséhez kattints ide: <strong> "Némított" </strong> A némítást kikapcsolhatod ha rákattintasz ugyanarra az ikonra.'
+    filtering:
+      filter_threads: Témák szűrése
+      filter_threads_aria_label: Témák szűrése
+      dropdown_heading: Szűrő műszerfal
+      all: Legutóbbi témák
+      all_aria_label: Jelenleg a legutóbbi témákat mutatjuk be
+      all_description: Tekintse meg a legutóbbi témákat
+      proposals: Javaslatok
+      proposals_aria_label: Jelenleg a témákat mutatják aktív javaslatokkal
+      proposals_description: Csak az aktív javaslatokkal ellátott témák megtekintése
+      muted: Néma témák
+      muted_aria_label: A jelenlegi néma témák
+      muted_description: Csak a néma témák megtekintése
+    aria_thread:
+      unread: "{{count}} olvasatlan elem."
+      current_proposal: "Jelenlegi javaslat: {{name}}."
+      you_voted: "Szavaztál: {{position}}."
+    thread_preview:
+      you_voted: "Erre szavaztál {{position}}"
+      undecided: "Még nem szavaztál"
+    threads_from:
+      group: "Témák"
+      pinned: "Rögzített témák"
+      proposals: "Témák aktív döntésekkel"
+      starred: "Csillagozott témák"
+      today: "Ma"
+      yesterday: "Tegnap"
+      thisweek: "Ezen a héten"
+      thismonth: "Ebben a hónapban"
+      older: "Egy hónapnál régebbi"
+  inbox_page:
+    no_threads: Ju Hú! Elolvasta a beérkező levelek összes témát.
+    unread_threads: Olvasatlan témák
+    view_more: Mutass többet
+    no_groups:
+      explanation: Nincsenek olvasatlan témái, mert nem tagja egyetlen csoportnak sem.
+      start: Indítás
+      or: vagy
+  discussion:
+    activity: "Tevékenység"
+    activity_placeholder: "Még nincs tevékenység!"
+    load_previous: "Töltsön be korábbi tevékenységet"
+    started_by: "<strong>{{name}}</strong> indította"
+    pin:
+      pinned: "Téma rögzítve"
+      unpinned: "A téma nincs rögzítve"
+    volume:
+      mute_message: "A téma le van némítva"
+      unmute_message: "Téma némítás feloldva"
+    closed:
+      reopened: "A téma újra nyitott"
+      closed: "A téma lezárva"
+  discussion_last_seen_by:
+    title: Látta
+    no_one: Még senki sem látta
+  activity_card:
+    count_responses: "{{count}} válasz"
+    event_pinned: "Idővonalhoz rögzítve"
+    event_unpinned: "Nem szerepel az idővonalon"
+    beginning: Kezdet
+    end: Vége
+    unread: "Olvasatlan ({{count}})"
+    latest: Legutóbbi
+    context: Háttér
+    chronological: Időrendi
+    nested: Beágyazott
+    attachment_display:
+      aria_label: "Fájl csatolva:"
+      image_alt: "Csatolt kép"
+    n_previous: "Tölts be a(z) {{count}} korábbi választ"
+    n_more: "{{count}} válasz betöltése"
+    add_comment: Megjegyzés hozzáadása
+    add_poll: Szavazás hozzáadása
+    add_outcome: Végeredmény hozzáadása
+    comment: Megjegyzés
+    facilitate: Döntéstámogatás
+  thread_group:
+    aria_label: Csoport neve
+  thread_context:
+    aria_label: "Téma háttere"
+    thread_options: "Téma beállítások"
+    email_settings: "Értesítési beállítások"
+    edit: "Szerkeszt"
+    edit_thread: "Szerkeszt"
+    close_thread: "Lezár"
+    reopen_thread: "Újranyit"
+    pin_thread: "Rögzít"
+    unpin_thread: "Rögzítés feloldása"
+    mute_thread: "Néma"
+    move_thread: "Mozgat"
+    print_thread: "Nyomtatás"
+    delete_thread: "Törlés"
+    add_comment: "Megjegyzés"
+    seen_by_count: "Látta: {{count}}"
+    forked_from: "Leágaztatva innen: "
+  pin_thread_modal:
+    title: Téma rögzítése
+    helptext: "A rögzített témák mindig a csoportjuk témáinak tetején jelennek meg. Használhatók a tagok tájékoztatására a fontos bejelentésekről, vagy közös anyagok, például magatartási kódex vagy közösségi irányelvek előmozdítására."
+    helptext_two: "A csapokat bármikor eltávolíthatja, ha a téma legördülő menüből kiválasztja az „Unpin” elemet"
+    pin_thread: Téma rögzítése
+  thread_arrangement_form:
+    title: Téma elrendezés
+    for_everyone: Ez megváltoztatja az elrendezést mindenkinek, nem csak neked.
+    sorting: Legrégebbi vagy legújabb elől?
+    latest: Legújabb
+    earliest: Legrégebbi
+  delete_thread_form:
+    aria_label: "Törölje a témát"
+    title: Törölje a témát
+    body: Biztosan törli ezt a témát?
+    confirm: "Törölje a témát"
+    messages:
+      success: A téma törölve
+  move_thread_form:
+    aria_label: Mozgassa a témát
+    title: Mozgassa a témát
+    confirm: Mozgassa a témát
+    confirm_change_to_private_thread: "A {{groupName}} egy nyitott csoport. Ha folytatja, ezt a témát nyilvánosságra hozzák."
+    messages:
+      success: A téma áthelyezve a(z) {{name}} mappába
+  delete_comment_dialog:
+    title: "Hozzászólás törlése"
+    question: "Biztosan törölni akarod ezt a hozzászólást?"
+    confirm: "Hozzászólás törlése"
+  contact_message_form:
+    title: "Szia! Hogyan segíthetünk?"
+    contact_us_email: 'E-mailt is küldhetsz nekünk: <a href="mailto:{{email}}"> {{email}} </a>'
+    contact_us: "Lépjen kapcsolatba velünk"
+    name_label: "Neved"
+    name_placeholder: "Adja meg nevét..."
+    subject_label: "Téma"
+    subject_placeholder: |-
+      Pl .: Hiba a bejelentkezéskor, vagy Feature javaslat
+    email_label: "E-mail címed"
+    email_placeholder: "Írd be az e-mail címed..."
+    message_label: "Üzeneted"
+    message_placeholder: "Ha támogatást kér, kérjük, próbálja meg minél több információt megadni."
+    send_message: "Üzenet küldése"
+    new_contact_message: "Köszönjük, hogy felvette a kapcsolatot; hamarosan visszatérünk hozzád!"
+    consent_message: |
+      Ha felveszi velünk a kapcsolatot, hozzájárul ahhoz, hogy munkatársaink szükség esetén hozzáférjenek az Ön fiókjához. <br />
+      Ügyfélszolgálatunk angolul beszél, és szükség esetén lefordítja az üzenetet a Google Translate segítségével. <br />
+      Célunk, hogy minden üzenetre 24 órán belül válaszoljunk.
+    success: "Köszönöm az üzenetet, {{name}}. Hamarosan vissza fog hallani."
+  hint:
+    context: "Hogyan használd a téma leírását"
+    discussion: "Hogyan kezdj izgalmas témát"
+    invitation: "Hogyan írj jó meghívót"
+    proposal: "Hogyan írj egyértelmű javaslatot"
+    vote: "Bármikor megváltoztathatod az álláspontodat"
+  explore_page:
+    header: Fedezze fel a csoportokat
+    search_placeholder: Keress nyilvános csoportokat
+    single_search_result: "1 nyilvános csoport felel meg a <strong> {{searchTerm}}:</strong>"
+    no_results_found: "<strong> Nem találja a keresett csoportot? </strong> Ha egy csoport adatvédelmének „titkos” beállítása van, akkor itt nem jelenik meg."
+    newest_first: Először a legújabb
+  global:
+    messages:
+      app_update: "Az alkalmazás új verziója elérhető"
+      reload: "Reload"
+  decision_tools_card:
+    title: Döntéstámogatás
+    help_text: <a href="https://help.loomio.org/en/user_manual/getting_started/decision_tools/" target="_blank">Súgó</a>
+    proposal_title: Javaslat
+    count_title: Ellenőrzés
+    poll_title: Szavazás
+    score_title: Pontszám-felmérés
+    dot_vote_title: Pontozó szavazás
+    meeting_title: Időpont választás
+    ranked_choice_title: Sorrend választás
+  poll_common:
+    vote_now: Szavazz most
+    have_your_say: Mondd el a véleményed
+    your_response: Válaszod
+    change_your_response: A válasz szerkesztése
+    reason: Ok
+    message: Üzenet
+    results: Eredmények
+    responses: Válaszok
+    close_poll_type: Lezárás {{pollType}}
+    totals: Összesítések
+    participate: Részt vesz
+    vote: Szavazás
+    votes: Szavazatok
+    update_outcome: Frissítsd az eredményt
+    outcome: Eredmény
+    statement: Nyilatkozat
+    change_your_stance: A válasz szerkesztése
+    load_more: Több betöltése
+    details: Részletek
+    participant_name: A neved
+    participant_email: E-mail cím
+    share_poll: Szavazás megosztása
+    share_proposal: Javaslat megosztása
+    share_count: Ellenőrzés megosztása
+    start_poll: Döntés elindítása
+    publish_poll: Osszd meg a szavazást
+    view_all: Összes megtekintése
+    save_changes: Mentés
+    max_score: Maximális pontszám
+    min_score: Minimális pontszám
+    too_long: Túl hosszú
+  poll_common_attachment_form:
+    label: Mellékletek
+  poll_common_add_option:
+    button:
+      add_option: Adj hozzá még egy lehetőséget
+    modal:
+      title: Adj meg egy lehetőséget
+    form:
+      add_options: Lehetőségek hozzáadása
+      options_added: Új lehetőségek hozzáadva
+  poll_common_card:
+    show_results: Eredmények mutatása
+  poll_common_index_card:
+    title: Korábbi döntések
+    no_polls: Nem található korábbi döntés
+    count: "Lásd az összes: ({{count}}) döntést"
+  discussions_panel:
+    open: Nyitva
+    all: Minden
+    unread: Olvasatlan ({{count}})
+    closed: Zárva
+    include_subgroups_mine: "{{name}} és az alcsoportjaim"
+    include_subgroups_all: "{{name}} és minden alcsoport"
+    no_results_found: Nincs eredmény a (z) "{{search}}" kifejezésre
+  members_panel:
+    everyone: "Mindenki"
+    sort: "Rendezés"
+    order_label: "Sorrend"
+    order_by_name: "Név"
+    order_by_created: "Legrégebbi"
+    order_by_created_desc: "Legújabb"
+    order_by_admin_desc: "Adminok"
+    loaded_of_total: "{{loaded}} ennyiből {{total}}"
+    view_requests: Kérések megtekintése
+    header_name: "Név"
+    header_username: "Felhasználónév"
+    header_role: "Szerep"
+    header_invited_by: "Meghívta"
+    header_invited: "Meghívott"
+    header_actions: "Műveletek"
+    directory: "Taglista"
+    invitations: "Meghívások"
+    requests: "Kérések"
+    admin: "Admin"
+    sharable_link: "Megosztható hivatkozás"
+    accepted: "Tagok"
+  polls_panel:
+    new_poll: Új szavazás
+    any_type: "Minden típus"
+    all: "Minden"
+    open: "Nyitva"
+    closed: "Zárva"
+    no_polls: "Nem található szavazás"
+  group_files_panel:
+    no_files: Nem található fájl
+    filename: Fájlnév
+    uploaded_by: Feltöltötte
+    uploaded_at: Feltöltve
+  current_polls_card:
+    title: Jelenlegi döntések
+    start_poll: Új döntés
+    no_polls: Jelenleg nincs éppen futó döntés.
+  poll_common_collapsed:
+    by_who: "tőle {{name}}"
+  poll_common_select_group:
+    loomio_group: Csoport
+    loomio_group_placeholder: (nincs kiválasztva csoport)
+  poll_common_calendar_invite:
+    calendar_invite: Mellékelj egy naptármeghívást ezzel az eredménnyel
+    poll_option_id: Találkozási idő
+    helptext_on: A felhasználók ezt a találkozót hozzáadhatják naptárukhoz
+    helptext_off: Nem küldünk meghívót a találkozóra
+    event_duration: Időtartam
+    event_summary: Találkozás neve
+    event_summary_placeholder: Minek szeretnéd hívni ezt a találkozót?
+    event_description: Találkozó leírása
+    event_description_placeholder: Mi a találkozó napirendje?
+    location: Helyszín
+    location_placeholder: Hol lesz ez a találkozó?
+  poll_common_settings:
+    multiple_choice:
+      title: Több választási lehetőség
+      helptext_on: Ha kiválasztod, a résztvevők több lehetőséget is kiválaszthatnak.
+    anyone_can_participate:
+      title: Bárki részt vehet, akinek megvan ez a link
+      helptext_on: Ha kiválasztod, bárki részt vehet a szavazási hivatkozással
+    notify_on_participate:
+      title: Értesíts engem, ha az emberek részt vesznek
+      helptext_on: Ha kiválasztod, akkor értesítést kapsz, ha valaki részt vesz.
+    anonymous:
+      title: Névtelen szavazók
+      helptext_on: Ha kiválasztja, a résztvevő információk nem kerülnek megjelenítésre minden válasznál.
+    voter_can_add_options:
+      title: A szavazók lehetőségeket vehetnek fel
+      helptext_on: Ha kiválasztják, a résztvevők saját szavazati lehetőségeket is felvehetnek.
+    can_respond_maybe:
+      title: A szavazók válaszolhatnak "ha szükséges"
+      helptext_on: A szavazók jelölhetik az időpontokat "ha szükséges"
+  poll_common_close_form:
+    close_proposal: Bezárja a javaslatot
+    close_poll: Bezárja a szavazást
+    close_count: Felmérés lezárása
+    close_dot_vote: Bezárásos szavazás
+    close_meeting: Záró időmérő
+    close_ranked_choice: Lezárja a rangsorolásos szavazást
+    proposal_closed: A javaslat lezárva
+    poll_closed: A szavazás lezárult
+    count_closed: Az ellenőrzés zárva van
+    dot_vote_closed: A pontozó szavazás lezárult
+    meeting_closed: Időpont-felmérés lezárva
+    ranked_choice_closed: A rangsoroló szavazás lezárva
+  poll_common_closing_at_field:
+    closing: Záródik
+    closing_hour: Záróra
+    invalid_date: Hibás dátum
+  poll_card:
+    started_by: "Kezdte: {{name}}"
+  poll_common_votes_panel:
+    newest_first: Először a legújabb
+    oldest_first: A legrégebbi előbb
+    priority_first: Egyetértők először
+    priority_last: Vétók először
+    no_votes_yet: Még nem szavaztak.
+    change_results_order: Az eredmények sorrendjének módosítása
+    none_of_the_above: (A fentiek egyike sem)
+  poll_common_undecided_panel:
+    show_undecided: "Mutasd a(z) {{count}} -ot határozatlanul"
+    show_invitations: A függőben lévő meghívók megjelenítése
+    undecided_users: "Meghatározatlan ({{count}})"
+    invitation_count_singular: "1 további személyt hívtak meg e-mailben a részvételre"
+    invitation_count_plural: "{{count}} további embert hívtak meg e-mailben a részvételre"
+  poll_common_undecided_user:
+    reminded: Emlékeztető elküldve!
+    reminder_sent: Emlékeztető értesítés elküldve
+  poll_common_set_outcome_panel:
+    enter_outcome: Írd be a végeredményt
+    share_outcome: Oszd meg az eredményt
+    poll: "Ez a szavazás lezárult. <strong> Ossza meg az eredményt </strong> a csoporttal."
+    proposal: "Ez a javaslat  <strong>lezárult</strong>. Kérjük szentelj egy kis időt az elhangzottak figyelembe vételére, és <strong>oszd meg az eredményt</strong> a csoporttal, hogy az emberek tudják, mi fog történni ezután."
+    count: "Ez a felmérés lezárult. <strong> Oszd meg az eredményt </strong>, hogy befejezd a folyamatot."
+    meeting: "Ez az időpont-felmérés lezárult.  <strong>Oszd meg az eredményt</strong> másokkal, hogy megtudják mikor lesz a megbeszélés."
+    dot_vote: "Ez a pontozó szavazás lezárult. <storng> Oszd meg az eredményt </strong> a csoporttal."
+    ranked_choice: "Ez a rangsoroló felmérést lezárult. <strong>Oszd meg az eredményt</strong> a csoporttal."
+  poll_common_outcome_form:
+    new_title: Írd be a végeredményt
+    update_title: Frissítse az eredményt
+    outcome_created: Eredményt teremtett
+    outcome_updated: Az eredmény frissítve
+    statement_placeholder: Összegezze a válaszokat és magyarázza el, mi fog történni a következőkben.
+    submit: Ossza meg az eredményt
+  poll_common_outcome_panel:
+    authored_by: "tőle: {{name}}"
+  poll_common_delete_modal:
+    question: Biztosan törli ezt?
+    success: Sikeresen törölve
+  poll_common_form:
+    title: Cím
+    details: Részletek
+    options: Lehetőségek
+    options_placeholder: Sorolja fel a rendelkezésre álló lehetőségeket
+    no_options: Még nem adtál meg egyetlen lehetőséget sem.
+    closing: Záródik
+    closed: Zárva
+    start: Indítás
+    update: Frissít
+    loomio_school_link: |
+      <p> Tudj meg többet a <a href="https://help.loomio.org/en/user_manual/getting_started/decision_tools/" target="_blank"> Loomio Súgóban</a>.</p>
+  poll_proposal_form:
+    tool_tip_expanded: |
+      <p> A javaslat egy eszköz állásfoglalással vagy cselekvési tervvel kapcsolatos közös egyetértés megtalálására.</p>
+      <p> A résztvevők egyetérthetnek, tartózkodhatnak, nem érthetnek egyet vagy megvétózhatják a döntést, és indokolják, elmagyarázzák az álláspontjukat.</p>
+      <p>A kördiagram áttekintést nyújt a csoport helyzetéről, míg a hozzászólások lehetővé teszik az egyéni vélemények meghallgatását. </p>
+      <p> Nem szabad elkedvetlenedni, ha eleinte nem sikerül megállapodni, a javaslatokat olyan kérdések felvázolására tervezték, amelyeket meg kell oldani.</p>
+      <p> jó részvétel mellett a javaslat erős felhatalmazás a cselekvéshez.</p>
+    start_header: Javaslat indítása
+    edit_header: A javaslat szerkesztése
+    tip: Keresd a közös egyetértést olyan folyamaton keresztül, amely lehetővé teszi az összes vélemény meghallgatását. <a href="https://help.loomio.org/en/user_manual/getting_started/decision_tools/#proposal" target="_blank">Tudj meg többet</a>
+    title_placeholder: Például. Menjünk a holdra!
+    details_placeholder: Adj elegendő információt, hogy mindenki tudja, mit jelent egyetértés vagy a nem értek egyet válaszlehetőség
+    proposal_created: A javaslat elindult
+    proposal_updated: A javaslat frissítve
+  poll_poll_form:
+    tool_tip_expanded: |
+      <p>Használjon egy szavazást a népszerűség felmérésére, vagy adj választási lehetőségeket.</p>
+      <p>Adj meg néhány választási lehetőséget. Döntsd el, hogy a résztvevők válaszként egy vagy több lehetőséget választhatnak-e.</p>
+      <p>Mindenki szavaz, és meglátásokat is írhat, ha szeretné. Az eredményeket oszlopdiagramon ábrázoljuk.</p>
+    tool_tip_collapsed: Válasszon a lehetőségek listájából
+    start_header: Indítsd el a szavazást
+    edit_header: Szavazás szerkesztése
+    tip: Válasszon a lehetőségek közül
+    title_placeholder: Például. Hova akarsz menni nyaralni?
+    details_placeholder: Adjon meg minden tisztázó részletet, amelyre az embereknek szüksége lehet a kérdés megválaszolásához.
+    add_option_placeholder: Lehetőség hozzáadása
+    remove_option: Lehetőség eltávolítása
+    poll_created: Szavazás létrehozva
+    poll_updated: A szavazás frissítve
+  poll_count_form:
+    tool_tip_collapsed: Számold meg, hogy hány ember fejezte be a feladatot, vagy keress jelentkezőket
+    start_header: Felmérés indítása
+    edit_header: Csekk szerkesztése
+    tip: Kérdezze meg, ki teljesítette a feladatot, vagy önként kíván jelentkezni
+    title_placeholder: Például. Ki akar csatlakozni a munkacsoporthoz?
+    details_placeholder: Magyarázza el, hogy mi a kötelezettségvállalás, vagy mutasson részleteket a részvételről.
+    count_created: Felmérés elindult
+    count_updated: Felmérés frissült
+  poll_dot_vote_form:
+    tool_tip_expanded: |
+      <p>nem szavazás a lehetőségek listájának prioritása</p>
+      <p> résztvevők korlátozott számú „pontot” kapnak, amelyeket fel lehet osztani, bárcsak kedvelik a választott lehetőségek között, amelyek a saját preferenciáik ábrázolására szolgálnak.</p>
+      <p>Az eredmények összesített értéke, valamint az egyes szavazatok megjelennek, így különféle szempontokat vehet figyelembe.</p>
+    tool_tip_collapsed: Rendelj hozzá egy maximális pontszámot
+    start_header: Pontozott szavazás indítása
+    edit_header: Pontozott szavazás szerkesztése
+    tip: Rendelj hozzá egy maximális pontszámot
+    title_placeholder: Például. Hogyan kell elosztani a költségvetést?
+    details_placeholder: Adjon meg minden tisztázó részletet az emberek részvételéhez
+    add_option_placeholder: Lehetőség hozzáadása
+    dots_per_person: Pontok személyenként
+    dots_per_person_helptext: Azon pontok száma, amelyeket mindenkinek fel kell kérnie.
+    dot_vote_created: Pontozó szavazás létrehozva
+    dot_vote_updated: Pontozó szavazás frissítve
+  poll_score_form:
+    tool_tip_expanded: |
+      <p> A pontszám-felmérések lehetővé teszik az emberek számára, hogy kifejezzék az egyes lehetőségek támogatottságát. </p>
+      <p>Az egyes lehetőségek teljes pontszámát az eredmények részeként mutatjuk be.</p>
+    tool_tip_collapsed: Pontozási lehetőségek skálán
+    start_header: Indítsd el a pontozó szavazást
+    edit_header: Szerkessze a pontozási szavazást
+    tip: Az egyes lehetőségeket gördülő skálán pontozza
+    title_placeholder: Például. A jelöltek pontszáma 0–9
+    details_placeholder: Adjon meg minden tisztázó részletet az emberek részvételéhez
+    add_option_placeholder: Lehetőség hozzáadása
+    score_created: Pontszám-felmérés létrehozva
+    score_updated: A pontszáma frissítve
+  poll_meeting_form:
+    tool_tip_expanded: |
+      <p>Használjon egy időmérést, hogy megtudja, mikor állnak meg az emberek találkozni.</p>
+      <p>Írja be azon dátumok vagy időpontok listáját, amikor megtarthatta a találkozót</p>
+      <p>A résztvevők megjelölik azokat, amelyekben részt vehetnek, vagy a nyilatkozat mezőt használhatják a körülmények magyarázatához, így szükség esetén frissíthetik a lehetőségeket.</p>
+      <p>Ha új idõket ad hozzá egy idõmérés során, a már megszavazott embereket felkérjük, hogy frissítsék válaszukat.</p>
+      <p>Ekkor láthatja, hogy mikor áll rendelkezésre, és eldöntheti, hogy mikor találkozik.</p>
+      <p> Az időszakokat automatikusan átalakítják a résztvevő helyi időzónájává.</p>
+    tool_tip_collapsed: Keresd meg az időpontot, ami az embereknek a legalkalmasabb a találkozásra
+    start_header: Kezdő idő közvélemény-kutatás
+    edit_header: Az időmérés szerkesztése
+    tip: Keresd meg az időpontot, ami az embereknek a legalkalmasabb a találkozásra
+    title_placeholder: Például. Mikor legyen a következő találkozónk?
+    details_placeholder: Adjon meg minden tisztázó részletet az emberek részvételéhez
+    meeting_created: Időmérés létrehozva
+    meeting_updated: Az időmérés frissítve
+    timeslots: Időrések
+    no_options: Adja meg az időt az aktuális időzónájában ({{zone}}). A résztvevők a helyi időzónába lefordított időket látják.
+    meeting_duration: Találkozó időtartama
+    add_option_placeholder: Új idő hozzáadása
+    time_slot_added: Időrés hozzáadva
+    time_slot_already_added: Az időrés már hozzáadva
+  poll_ranked_choice_form:
+    tool_tip_expanded: |
+      <p>A megválasztott választás olyan szavazási módszer, amely lehetővé teszi minden választópolgár számára, hogy választása szerint sorrendben válaszoljon.</p>
+      <p>Akkor előnyös, ha a „szavazatok lopása” aggodalomra ad okot (azaz két kissé népszerű lehetőség hasonló ahhoz hasonlóan
+      végül megosztja a szavazatokat közöttük), és felhasználható Condorcet vagy azonnali lefolyású stílusú választások végrehajtására.
+      </p>
+    tool_tip_collapsed: Rangsorold a lehetőségeket az elsőtől az utolsóig
+    start_header: Start rangsorolt választás
+    edit_header: Szerkessze a rangsorolt választást
+    tip: Rangsorold a lehetőségeket az elsőtől az utolsóig
+    title_placeholder: Például. Ki szeretne polgármesterként?
+    details_placeholder: Adjon meg minden tisztázó részletet az emberek részvételéhez
+    meeting_created: Ranked választás létrejött
+    meeting_updated: A rangsorolt választás frissítve
+    no_options: "Még nem adtál meg egyetlen lehetőséget sem."
+    add_option_placeholder: Írjon be egy új választást
+    minimum_stance_choices: Lehetőségek, amiket rangsorolni kell
+    minimum_stance_choices_helptext: A lehetőségek száma, amit a szavazók rangsorolhatnak
+    ranked_choice_created: Ranked választás létrejött
+    ranked_choice_updated: A rangsorolt választás frissítve
+    rank: Rangsorolás
+    points: Pont
+  poll_meeting_time_field:
+    new_time_slot: Új időrés
+    closing_hour: Záró óra
+  poll_proposal_vote_form:
+    default_reason_placeholder: Kérjük, magyarázza meg érvelését
+    abstain_reason_placeholder: Mondja meg az embereknek, hogy miért választja ezt a döntést
+    agree_reason_placeholder: Mi szereti a javaslatot, és mi lesz az előnye a csoportnak?
+    disagree_reason_placeholder: Hogyan lehetne javítani ezt a javaslatot, hogy támogassa azt?
+    block_reason_placeholder: Magyarázza el, miért kifogja ezt a javaslatot, és miért nem szabad tovább menni
+    stance_created: Szavazás létrehozva
+    stance_updated: A szavazás frissítve
+    vote: Szavazás
+  poll_proposal_options:
+    agree: Egyetért
+    consent: Egyetértés
+    agree_verb: "egyetértett"
+    agree_meaning: Ez a javaslat elég jó ahhoz, hogy a csoport elfogadhassa
+    abstain: Tartózkodik
+    abstain_verb: "tartózkodott"
+    abstain_meaning: Nem biztos, nem tudom, vagy nem bánom. Mindkét módon támogatni fogja az eredményt
+    disagree: Nem ért egyet
+    disagree_verb: "nem értett egyet"
+    disagree_meaning: Nem támogatom a javaslatot. Nem szabad tovább mennie.
+    objection: Tiltakozás
+    block: Tiltakozás
+    block_verb: "tiltakozott"
+    block_meaning: A mély aggodalom kezelése érdekében a csoport sürgős figyelmére van szükség
+    agree_abstain_disagree_block: "Egyetértek, Tartózkodok, Nem értek egyet, Vétó"
+    agree_disagree: "Egyetért, Nem ért egyet"
+    agree_abstain_disagree: "Egyetértek, Tartózkodok, Nem értek egyet"
+    consent_abstain_object: "Beleegyezés, Tartózkodás, Tiltakozás"
+    no_voting: "Nincs szavazás"
+  poll_count_options:
+    "yes": "Igen"
+    "no": "Nem"
+  poll_count_vote_form:
+    reason_label: Üzenet
+    reason_placeholder: Ha szeretne, hagyjon üzenetet
+    stance_created: Szavazás létrehozva
+    stance_updated: Szavazás frissítve
+  poll_count_chart_panel:
+    out_of: a(z) {{goal}} közül
+  poll_meeting_chart_panel:
+    total: Összesen
+  poll_poll_vote_form:
+    stance_created: Szavazás létrehozva
+    stance_updated: A szavazás frissítve
+  poll_score_vote_form:
+    stance_created: Szavazás létrehozva
+    stance_updated: Szavazás frissítve
+  poll_meeting_vote_form:
+    local_time_zone: Helyi idő - {{zone}}
+    can_attend: "Lehet részt venni"
+    unable: "Képtelen"
+    if_need_be: Ha szükséges
+    your_response: Mikor lehet részt venni?
+    stance_created: Elérhetőség mentve
+    stance_updated: A rendelkezésre állás frissítve
+    reason_placeholder: Mondd el, hogy mikor vagy szabad (vagy elfoglalt), hogy a szavazás elindítója könnyebben tudjon további lehetőségeket hozzáadni, ha szükséges.
+  poll_dot_vote_vote_form:
+    dots_remaining: "{{count}} pont maradt"
+    too_many_dots: Túl sok pontot használt
+    stance_created: Szavazás létrehozva
+    stance_updated: A szavazás frissítve
+  poll_ranked_choice_vote_form:
+    helptext: Állítsd a lehetőségeket fontossági sorrendbe a fogd és vidd módszerrel (az 1 a legelőnyösebb lehetőség). A legfontosabb {{count}} választásodat rögzítjük.
+    stance_created: A választást rögzítették
+    stance_updated: A választás frissítve
+  thread_item:
+    event_removed: "Eltávolítva a témából"
+  poll_common_subscribe_form:
+    receive_updates_title: Szavazatát rögzítették
+    receive_updates_helptext: Ha e-mailt szeretne kapni a szavazás eredményéről, írja be az e-mail címét alább
+    email_saved: E-mailt kap a szavazás eredményéről
+    subscribe: Feliratkozás
+    no_thanks: Nem köszönöm
+  poll_common_example_card:
+    what_is_this: "Ez a {{type}} élő példája. Ön résztvevő - próbáld ki!"
+  share_poll_page:
+    title: Közvélemény-kutatás megosztása - {{title}}
+  auth_form:
+    code: "000000"
+    sign_in: Bejelentkezés
+    continue: Folytatni
+    create_account: Fiók létrehozása
+    sign_in_as: "Bejelentkezés itt: {{name}}"
+    or_enter_your_email: Vagy írja be az e-mail címét
+    enter_your_name: Add meg a neved
+    invitation_required: A fiók létrehozásához meghívásra van szüksége.
+    more_providers: Több
+    email_not_present: E-mail címre van szükség
+    invalid_email: "Sajnos ez nem tűnik érvényes e-mail címnek"
+    invalid_password: "Sajnáljuk, de ez a jelszó nem egyezik meg a fájlunkkal"
+    invalid_token: "Sajnáljuk, nem tudtuk használni ezt a tokent, hogy bejelentkezzenek. Kattintson az alábbi linkre, hogy újat küldjön."
+    account_locked: "Túl sok sikertelen bejelentkezési kísérlet után zárolódott a fiókod. Ellenőrizze e-mail címét, hogy nincs-e kinyitási link"
+    email_not_found: "Sajnos nem találtunk ilyen e-mail címmel rendelkező fiókot"
+    email_placeholder: you@example.com
+    login_with_token: Minden készen állsz A folytatáshoz kattintson az alábbi linkre.
+    login_link_helptext: Kattintson az alábbi gombra, és küldünk egy linket a bejelentkezéshez.
+    check_spam_folder: Ha az e-mail nem érkezik meg hamarosan, ellenőrizze a spam mappát.
+    sign_up_helptext: Kérjük, töltse ki ezt az űrlapot felhasználói fiók létrehozásához
+    name_placeholder: Neved
+    name_required: Adjon meg egy nevet
+    terms_required: El kell fogadnia a Szolgáltatási feltételeket
+    account_inactive: Hoppá, úgy tűnik, hogy a(z) {{email}} fiókot deaktiválták!
+    welcome: Új a(z) {{siteName}} oldalán?
+    welcome_back: Üdvözlet újra, {{name}}!
+    forgot_password: Elfelejtettem a jelszót
+    login_link: Bejelentkező hivatkozás elküldése e-mailben
+    set_password: Állítsd be a jelszót
+    set_password_helptext: A következő alkalommal szeretne jelszót használni?
+    hello: "Üdvözlet, {{name}}!"
+    link_accounts: Fiókok összekapcsolása
+    check_your_email: Nézd meg az e-mailedet!
+    login_link_sent: "Küldtünk egy e-mailt a(z) {{email}} címre."
+    instructions: "Kattints a hivatkozásra a bejelentkezéshez, vagy írjd be az alábbi kódot:"
+    invalid_code: "Sajnos ez a kód nem egyezett. Ellenőrizze az e-mailt, és próbálja újra."
+    password_link_sent: "Küldtünk egy e-mailt a(z) {{email}} címre, amely leírja a jelszó beállításának menetét."
+    reactivate_link_sent: "Küldtünk egy e-mailt az Ön fiókjának újraaktiválására vonatkozó utasításokkal"
+    signed_in: Sikeres bejelentkezés
+    email_verified: Az e-mail sikeresen ellenőrizve
+    name: Név
+    email: E-mail
+    password: Jelszó
+    reactivate: A fiók újraaktiválása
+  webhook:
+    formats:
+      microsoft: Microsoft csapatok
+      slack: Laza
+    removed: Az összekapcsolás eltávolítva
+    url_label: Webhook URL
+    name_label: Név
+    event_kinds:
+      poll_closing_soon: A szavazás hamarosan lejár
+  browser_warning:
+    message: "FONTOS! Egy elavult böngészőt használsz ({{name}} {{version}}), amelyet a {{site}} nem támogat."
+    link: Kérünk válts egy másik böngészőre
+  powered_by:
+    slogan: Jobb döntések közösen
+    powered_by_loomio: A Loomio az oldal motorja
+    privacy_policy: Adatvédelmi irányelvek
+    terms_of_service: Szolgáltatási feltételek
+    front_page: Címlap
+  group_survey:
+    success: Köszi!
+    categories:
+      community: Közösségi csoport
+      other: Egyéb
+    uses:
+      other: Egyéb
+    referrers:
+      other: Egyéb

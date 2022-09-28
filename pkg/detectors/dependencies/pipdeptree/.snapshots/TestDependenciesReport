@@ -1,0 +1,578 @@
+([]*report.Detection) (len=32) {
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=10) "pipdeptree",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=15) "pipdeptree.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(7),
+      ColumnNumber: (*int)(19),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=8) "docutils",
+      Version: (string) (len=4) "0.11"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=10) "pipdeptree",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=15) "pipdeptree.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(15),
+      ColumnNumber: (*int)(19),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=6) "django",
+      Version: (string) (len=6) "1.4.12"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=10) "pipdeptree",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=15) "pipdeptree.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(23),
+      ColumnNumber: (*int)(19),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=8) "markdown",
+      Version: (string) (len=3) "2.4"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=10) "pipdeptree",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=15) "pipdeptree.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(31),
+      ColumnNumber: (*int)(19),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=19) "django-registration",
+      Version: (string) (len=3) "0.8"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=10) "pipdeptree",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=15) "pipdeptree.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(40),
+      ColumnNumber: (*int)(23),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=4) "nose",
+      Version: (string) (len=5) "1.3.7"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=10) "pipdeptree",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=15) "pipdeptree.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(46),
+      ColumnNumber: (*int)(23),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=6) "django",
+      Version: (string) (len=6) "1.4.12"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=10) "pipdeptree",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=15) "pipdeptree.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(52),
+      ColumnNumber: (*int)(19),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=11) "django-nose",
+      Version: (string) (len=3) "1.2"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=10) "pipdeptree",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=15) "pipdeptree.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(60),
+      ColumnNumber: (*int)(19),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=8) "coverage",
+      Version: (string) (len=5) "4.4.2"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=10) "pipdeptree",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=15) "pipdeptree.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(68),
+      ColumnNumber: (*int)(19),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=4) "nose",
+      Version: (string) (len=5) "1.3.7"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=10) "pipdeptree",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=15) "pipdeptree.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(77),
+      ColumnNumber: (*int)(23),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=3) "six",
+      Version: (string) (len=6) "1.11.0"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=10) "pipdeptree",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=15) "pipdeptree.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(83),
+      ColumnNumber: (*int)(23),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=12) "webencodings",
+      Version: (string) (len=5) "0.5.1"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=10) "pipdeptree",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=15) "pipdeptree.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(89),
+      ColumnNumber: (*int)(19),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=8) "html5lib",
+      Version: (string) (len=5) "1.0.1"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=10) "pipdeptree",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=15) "pipdeptree.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(98),
+      ColumnNumber: (*int)(23),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=3) "pip",
+      Version: (string) (len=5) "9.0.1"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=10) "pipdeptree",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=15) "pipdeptree.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(104),
+      ColumnNumber: (*int)(19),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=10) "pipdeptree",
+      Version: (string) (len=6) "0.10.1"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=10) "pipdeptree",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=15) "pipdeptree.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(112),
+      ColumnNumber: (*int)(19),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=3) "six",
+      Version: (string) (len=6) "1.11.0"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=10) "pipdeptree",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=15) "pipdeptree.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(121),
+      ColumnNumber: (*int)(23),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=3) "six",
+      Version: (string) (len=6) "1.11.0"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=10) "pipdeptree",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=15) "pipdeptree.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(127),
+      ColumnNumber: (*int)(23),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=8) "html5lib",
+      Version: (string) (len=5) "1.0.1"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=10) "pipdeptree",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=15) "pipdeptree.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(133),
+      ColumnNumber: (*int)(19),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=6) "bleach",
+      Version: (string) (len=3) "1.4"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=10) "pipdeptree",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=15) "pipdeptree.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(141),
+      ColumnNumber: (*int)(19),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=11) "smartypants",
+      Version: (string) (len=5) "1.8.3"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=10) "pipdeptree",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=15) "pipdeptree.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(149),
+      ColumnNumber: (*int)(19),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=10) "setuptools",
+      Version: (string) (len=6) "38.2.4"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=10) "pipdeptree",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=15) "pipdeptree.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(157),
+      ColumnNumber: (*int)(19),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=5) "wheel",
+      Version: (string) (len=6) "0.30.0"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=10) "pipdeptree",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=15) "pipdeptree.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(165),
+      ColumnNumber: (*int)(19),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=8) "sqlparse",
+      Version: (string) (len=5) "0.2.4"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=10) "pipdeptree",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=15) "pipdeptree.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(173),
+      ColumnNumber: (*int)(19),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=10) "virtualenv",
+      Version: (string) (len=6) "15.1.0"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=10) "pipdeptree",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=15) "pipdeptree.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(181),
+      ColumnNumber: (*int)(19),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=5) "south",
+      Version: (string) (len=5) "0.8.4"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=10) "pipdeptree",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=15) "pipdeptree.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(189),
+      ColumnNumber: (*int)(19),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=12) "webencodings",
+      Version: (string) (len=5) "0.5.1"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=10) "pipdeptree",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=15) "pipdeptree.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(197),
+      ColumnNumber: (*int)(19),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=8) "psycopg2",
+      Version: (string) (len=7) "2.7.3.2"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=10) "pipdeptree",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=15) "pipdeptree.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(205),
+      ColumnNumber: (*int)(19),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=3) "pip",
+      Version: (string) (len=5) "9.0.1"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=10) "pipdeptree",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=15) "pipdeptree.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(214),
+      ColumnNumber: (*int)(23),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=6) "django",
+      Version: (string) (len=6) "1.4.12"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=10) "pipdeptree",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=15) "pipdeptree.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(220),
+      ColumnNumber: (*int)(23),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=8) "sqlparse",
+      Version: (string) (len=5) "0.2.4"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=10) "pipdeptree",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=15) "pipdeptree.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(226),
+      ColumnNumber: (*int)(19),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=20) "django-debug-toolbar",
+      Version: (string) (len=4) "0.11"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=10) "pipdeptree",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=15) "pipdeptree.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(235),
+      ColumnNumber: (*int)(23),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=6) "django",
+      Version: (string) (len=6) "1.4.12"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=10) "pipdeptree",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=15) "pipdeptree.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(241),
+      ColumnNumber: (*int)(19),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=13) "django-secure",
+      Version: (string) (len=3) "1.0"
+    }
+  })
+}

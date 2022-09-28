@@ -1,0 +1,38 @@
+([]*report.Detection) (len=2) {
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=12) "composerjson",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=13) "composer.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(15),
+      ColumnNumber: (*int)(8),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=3) "php",
+      Version: (string) (len=7) ">=7.2.0"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=12) "composerjson",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=13) "composer.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(16),
+      ColumnNumber: (*int)(8),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=19) "composer-plugin-api",
+      Version: (string) (len=10) "^1.1||^2.0"
+    }
+  })
+}

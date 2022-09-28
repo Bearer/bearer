@@ -1,0 +1,86 @@
+([]*report.Detection) (len=4) {
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=4) "java",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=13) "datatype.java",
+      Language: (string) (len=4) "Java",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(2),
+      ColumnNumber: (*int)(5),
+      Text: (*string)(<nil>)
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=4) "Main",
+      ObjectUUID: (string) (len=1) "2",
+      FieldName: (string) (len=6) "assign",
+      FieldUUID: (string) (len=1) "3",
+      FieldType: (string) (len=3) "int",
+      SimpleFieldType: (string) (len=6) "number"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=4) "java",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=13) "datatype.java",
+      Language: (string) (len=4) "Java",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(3),
+      ColumnNumber: (*int)(5),
+      Text: (*string)(<nil>)
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=4) "Main",
+      ObjectUUID: (string) (len=1) "2",
+      FieldName: (string) (len=7) "declare",
+      FieldUUID: (string) (len=1) "4",
+      FieldType: (string) (len=3) "int",
+      SimpleFieldType: (string) (len=6) "number"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=4) "java",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=13) "datatype.java",
+      Language: (string) (len=4) "Java",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(4),
+      ColumnNumber: (*int)(5),
+      Text: (*string)(<nil>)
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=4) "Main",
+      ObjectUUID: (string) (len=1) "2",
+      FieldName: (string) (len=8) "imported",
+      FieldUUID: (string) (len=1) "5",
+      FieldType: (string) (len=4) "User",
+      SimpleFieldType: (string) (len=6) "object"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=4) "java",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=13) "datatype.java",
+      Language: (string) (len=4) "Java",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(6),
+      ColumnNumber: (*int)(5),
+      Text: (*string)(<nil>)
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=4) "Main",
+      ObjectUUID: (string) (len=1) "2",
+      FieldName: (string) (len=8) "doMethod",
+      FieldUUID: (string) (len=1) "6",
+      FieldType: (string) "",
+      SimpleFieldType: (string) (len=8) "function"
+    }
+  })
+}

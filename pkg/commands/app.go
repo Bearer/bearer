@@ -15,11 +15,6 @@ import (
 	"golang.org/x/xerrors"
 )
 
-// VersionInfo holds the trivy DB version Info
-type VersionInfo struct {
-	Version string `json:",omitempty"`
-}
-
 const (
 	usageTemplate = `Usage:{{if .Runnable}}
   {{.UseLine}}{{end}}{{if .HasAvailableSubCommands}}
@@ -48,7 +43,7 @@ func SetOut(out io.Writer) {
 	outputWriter = out
 }
 
-// NewApp is the factory method to return Trivy CLI
+// NewApp is the factory method to return Curio CLI
 func NewApp(version string) *cobra.Command {
 	globalFlags := flag.NewGlobalFlagGroup()
 	rootCmd := NewRootCommand(version, globalFlags)
@@ -91,7 +86,7 @@ func NewRootCommand(version string, globalFlags *flag.GlobalFlagGroup) *cobra.Co
 		PersistentPreRunE: func(cmd *cobra.Command, args []string) error {
 			cmd.SetOut(outputWriter)
 
-			// Set the Trivy version here so that we can override version printer.
+			// Set the Curio version here so that we can override version printer.
 			cmd.Version = version
 
 			// viper.BindPFlag cannot be called in init().
@@ -157,7 +152,7 @@ func NewScanCommand(globalFlags *flag.GlobalFlagGroup) *cobra.Command {
 		Example: `  # Scan a local project including language-specific files
   $ curio s /path/to/your_project
   # Scan a single file
-  $ trivy s ./curio-ci-test/Pipfile.lock`,
+  $ curio s ./curio-ci-test/Pipfile.lock`,
 		PreRunE: func(cmd *cobra.Command, args []string) error {
 			if err := fsFlags.Bind(cmd); err != nil {
 				return xerrors.Errorf("flag bind error: %w", err)
@@ -199,7 +194,7 @@ func NewRepositoryCommand(globalFlags *flag.GlobalFlagGroup) *cobra.Command {
 		Aliases: []string{"repo"},
 		Short:   "Scan a remote repository",
 		Example: `  # Scan your remote git repository
-  $ trivy repo https://github.com/knqyf263/trivy-ci-test`,
+  $ curio repo https://github.com/curio/curio-ci-test`,
 		PreRunE: func(cmd *cobra.Command, args []string) error {
 			if err := repoFlags.Bind(cmd); err != nil {
 				return xerrors.Errorf("flag bind error: %w", err)

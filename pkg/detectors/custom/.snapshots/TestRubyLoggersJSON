@@ -1,0 +1,380 @@
+[
+	{
+		"type": "custom",
+		"detector_type": "detect_rails_logger",
+		"commit_sha": "",
+		"source": {
+			"filename": "log.rb",
+			"language": "Ruby",
+			"language_type": "programming",
+			"line_number": 9,
+			"column_number": 31,
+			"text": null
+		},
+		"value": {
+			"object_name": "",
+			"object_uuid": "1",
+			"field_name": "address",
+			"field_uuid": "2",
+			"field_type": "",
+			"field_type_simple": "unknown"
+		}
+	},
+	{
+		"type": "custom",
+		"detector_type": "detect_rails_logger",
+		"commit_sha": "",
+		"source": {
+			"filename": "log.rb",
+			"language": "Ruby",
+			"language_type": "programming",
+			"line_number": 10,
+			"column_number": 19,
+			"text": null
+		},
+		"value": {
+			"object_name": "",
+			"object_uuid": "3",
+			"field_name": "address2",
+			"field_uuid": "4",
+			"field_type": "",
+			"field_type_simple": "unknown"
+		}
+	},
+	{
+		"type": "custom",
+		"detector_type": "detect_ruby_logger",
+		"commit_sha": "",
+		"source": {
+			"filename": "",
+			"language": "",
+			"language_type": "",
+			"line_number": 3,
+			"column_number": 1,
+			"text": null
+		},
+		"value": {
+			"object_name": "",
+			"object_uuid": "7",
+			"field_name": "user",
+			"field_uuid": "5",
+			"field_type": "",
+			"field_type_simple": "unknown"
+		}
+	},
+	{
+		"type": "custom",
+		"detector_type": "detect_ruby_logger",
+		"commit_sha": "",
+		"source": {
+			"filename": "",
+			"language": "",
+			"language_type": "",
+			"line_number": 3,
+			"column_number": 6,
+			"text": null
+		},
+		"value": {
+			"object_name": "user",
+			"object_uuid": "5",
+			"field_name": "email",
+			"field_uuid": "6",
+			"field_type": "",
+			"field_type_simple": "unknown"
+		}
+	},
+	{
+		"type": "custom",
+		"detector_type": "detect_ruby_logger",
+		"commit_sha": "",
+		"source": {
+			"filename": "",
+			"language": "",
+			"language_type": "",
+			"line_number": 4,
+			"column_number": 1,
+			"text": null
+		},
+		"value": {
+			"object_name": "",
+			"object_uuid": "10",
+			"field_name": "user",
+			"field_uuid": "8",
+			"field_type": "",
+			"field_type_simple": "unknown"
+		}
+	},
+	{
+		"type": "custom",
+		"detector_type": "detect_ruby_logger",
+		"commit_sha": "",
+		"source": {
+			"filename": "",
+			"language": "",
+			"language_type": "",
+			"line_number": 4,
+			"column_number": 6,
+			"text": null
+		},
+		"value": {
+			"object_name": "user",
+			"object_uuid": "8",
+			"field_name": "email",
+			"field_uuid": "9",
+			"field_type": "",
+			"field_type_simple": "unknown"
+		}
+	},
+	{
+		"type": "custom",
+		"detector_type": "detect_ruby_logger",
+		"commit_sha": "",
+		"source": {
+			"filename": "",
+			"language": "",
+			"language_type": "",
+			"line_number": 5,
+			"column_number": 1,
+			"text": null
+		},
+		"value": {
+			"object_name": "",
+			"object_uuid": "15",
+			"field_name": "user",
+			"field_uuid": "11",
+			"field_type": "",
+			"field_type_simple": "unknown"
+		}
+	},
+	{
+		"type": "custom",
+		"detector_type": "detect_ruby_logger",
+		"commit_sha": "",
+		"source": {
+			"filename": "",
+			"language": "",
+			"language_type": "",
+			"line_number": 5,
+			"column_number": 6,
+			"text": null
+		},
+		"value": {
+			"object_name": "user",
+			"object_uuid": "11",
+			"field_name": "contact",
+			"field_uuid": "12",
+			"field_type": "",
+			"field_type_simple": "unknown"
+		}
+	},
+	{
+		"type": "custom",
+		"detector_type": "detect_ruby_logger",
+		"commit_sha": "",
+		"source": {
+			"filename": "",
+			"language": "",
+			"language_type": "",
+			"line_number": 5,
+			"column_number": 14,
+			"text": null
+		},
+		"value": {
+			"object_name": "contact",
+			"object_uuid": "12",
+			"field_name": "email",
+			"field_uuid": "13",
+			"field_type": "",
+			"field_type_simple": "unknown"
+		}
+	},
+	{
+		"type": "custom",
+		"detector_type": "detect_ruby_logger",
+		"commit_sha": "",
+		"source": {
+			"filename": "",
+			"language": "",
+			"language_type": "",
+			"line_number": 5,
+			"column_number": 20,
+			"text": null
+		},
+		"value": {
+			"object_name": "email",
+			"object_uuid": "13",
+			"field_name": "address",
+			"field_uuid": "14",
+			"field_type": "",
+			"field_type_simple": "unknown"
+		}
+	},
+	{
+		"type": "custom",
+		"detector_type": "detect_ruby_logger",
+		"commit_sha": "",
+		"source": {
+			"filename": "log.rb",
+			"language": "Ruby",
+			"language_type": "programming",
+			"line_number": 6,
+			"column_number": 10,
+			"text": null
+		},
+		"value": {
+			"object_name": "",
+			"object_uuid": "16",
+			"field_name": "user",
+			"field_uuid": "17",
+			"field_type": "",
+			"field_type_simple": "unknown"
+		}
+	},
+	{
+		"type": "custom",
+		"detector_type": "detect_ruby_logger",
+		"commit_sha": "",
+		"source": {
+			"filename": "log.rb",
+			"language": "Ruby",
+			"language_type": "programming",
+			"line_number": 6,
+			"column_number": 16,
+			"text": null
+		},
+		"value": {
+			"object_name": "",
+			"object_uuid": "16",
+			"field_name": "email",
+			"field_uuid": "18",
+			"field_type": "",
+			"field_type_simple": "unknown"
+		}
+	},
+	{
+		"type": "custom",
+		"detector_type": "detect_ruby_logger",
+		"commit_sha": "",
+		"source": {
+			"filename": "",
+			"language": "",
+			"language_type": "",
+			"line_number": 7,
+			"column_number": 20,
+			"text": null
+		},
+		"value": {
+			"object_name": "",
+			"object_uuid": "21",
+			"field_name": "user",
+			"field_uuid": "19",
+			"field_type": "",
+			"field_type_simple": "unknown"
+		}
+	},
+	{
+		"type": "custom",
+		"detector_type": "detect_ruby_logger",
+		"commit_sha": "",
+		"source": {
+			"filename": "",
+			"language": "",
+			"language_type": "",
+			"line_number": 7,
+			"column_number": 25,
+			"text": null
+		},
+		"value": {
+			"object_name": "user",
+			"object_uuid": "19",
+			"field_name": "email",
+			"field_uuid": "20",
+			"field_type": "",
+			"field_type_simple": "unknown"
+		}
+	},
+	{
+		"type": "custom",
+		"detector_type": "detect_ruby_logger",
+		"commit_sha": "",
+		"source": {
+			"filename": "",
+			"language": "",
+			"language_type": "",
+			"line_number": 8,
+			"column_number": 19,
+			"text": null
+		},
+		"value": {
+			"object_name": "",
+			"object_uuid": "25",
+			"field_name": "user",
+			"field_uuid": "22",
+			"field_type": "",
+			"field_type_simple": "unknown"
+		}
+	},
+	{
+		"type": "custom",
+		"detector_type": "detect_ruby_logger",
+		"commit_sha": "",
+		"source": {
+			"filename": "",
+			"language": "",
+			"language_type": "",
+			"line_number": 8,
+			"column_number": 24,
+			"text": null
+		},
+		"value": {
+			"object_name": "user",
+			"object_uuid": "22",
+			"field_name": "name",
+			"field_uuid": "23",
+			"field_type": "",
+			"field_type_simple": "unknown"
+		}
+	},
+	{
+		"type": "custom",
+		"detector_type": "detect_ruby_logger",
+		"commit_sha": "",
+		"source": {
+			"filename": "",
+			"language": "",
+			"language_type": "",
+			"line_number": 8,
+			"column_number": 50,
+			"text": null
+		},
+		"value": {
+			"object_name": "",
+			"object_uuid": "25",
+			"field_name": "user",
+			"field_uuid": "22",
+			"field_type": "",
+			"field_type_simple": "unknown"
+		}
+	},
+	{
+		"type": "custom",
+		"detector_type": "detect_ruby_logger",
+		"commit_sha": "",
+		"source": {
+			"filename": "",
+			"language": "",
+			"language_type": "",
+			"line_number": 8,
+			"column_number": 55,
+			"text": null
+		},
+		"value": {
+			"object_name": "user",
+			"object_uuid": "22",
+			"field_name": "email",
+			"field_uuid": "24",
+			"field_type": "",
+			"field_type_simple": "unknown"
+		}
+	}
+]

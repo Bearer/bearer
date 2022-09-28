@@ -1,0 +1,15 @@
+rules:
+  detect_ruby_logger:
+    patterns:
+      - |
+        log.info(<$ARGUMENT>)
+    languages:
+      - ruby
+  detect_rails_logger:
+    patterns:
+      - |
+        Rails.logger.info(<$ARGUMENT>)
+      - |
+        Rails.logger.warning(<$ARGUMENT>)
+    languages:
+      - ruby

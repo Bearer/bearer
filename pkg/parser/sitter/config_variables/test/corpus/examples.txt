@@ -1,0 +1,64 @@
+========
+Mustache
+========
+
+An expansion of {{ x }} variable
+
+---
+
+(string (literal) (variable) (literal))
+
+
+==============
+Github Actions
+==============
+
+An expansion of ${{ secrets.x }} variable
+
+---
+
+(string (literal) (variable) (literal))
+
+
+=================================
+Github Actions Complex Expression
+=================================
+
+${{ steps.dockerhub-check.outcome == 'success' }}
+
+---
+
+(string (literal) (unknown) (literal))
+
+
+===========================
+Simple Environment Variable
+===========================
+
+An expansion of $ENV_VAR variable
+
+---
+
+(string (literal) (variable) (literal))
+
+
+==============================
+Bracketed Environment Variable
+==============================
+
+An expansion of ${ENV_VAR} variable
+
+---
+
+(string (literal) (variable) (literal))
+
+
+==============
+String literal
+==============
+
+<%= ENV.fetch(\"RAILS_MAX_THREADS\") { 5 } %>
+
+---
+
+(string (literal))

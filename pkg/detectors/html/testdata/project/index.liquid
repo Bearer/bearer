@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<head>
+	<script src="https://cdn.domain.com"></script>
+</head>
+<body>
+	<script>var url = "https://inline.domain.com"</script>
+	<script>
+		var url = "https://api1.domain.com"
+	</script>
+	<script type="text/javascript">
+		var url = "https://api2.domain.com"
+	</script>
+	<script type="text/json">
+		{"url":"https://ignored-api.domain.com"}
+	</script>
+	<div class="links">
+		<a href="https://ignored-domain.com">Foo</a>
+		<a href="https://ignored-domain2.com">Bar</a>
+	</div>
+	{%- paginate blog.articles by 5 -%}
+		{%- for article in blog.articles -%}
+			<!-- show blog article details here -->
+		{%- endfor -%}
+
+		{%- if paginate.pages > 1 -%}
+			<nav role="navigation">
+				<ol class="pagination">
+					{%- if paginate.previous-%}
+						<li>
+							<a href="{{ paginate.previous.url }}">
+								<span aria-hidden="true">&laquo;</span>
+								Previous <span class="visuallyhidden">page</span>
+							</a>
+						</li>
+					{%- else -%}
+						<li class="disabled">
+							<span aria-hidden="true">&laquo;</span>
+							Previous <span class="visuallyhidden">page</span>
+						</li>
+					{%- endif -%}
+
+					{%- for part in paginate.parts -%}
+						{%- if part.is_link -%}
+							<li>
+								<a href="{{ part.url }}">
+									<span class="visuallyhidden">page</span> {{ part.title }}
+								</a>
+							</li>
+						{%- else -%}
+							{%- if part.title == paginate.current_page -%}
+								<li class="active" aria-current="page">
+									<span class="visuallyhidden">page</span> {{ part.title }}
+								</li>
+							{%- else -%}
+								<li>
+									<span class="visuallyhidden">page</span> {{ part.title }}
+								</li>
+							{%- endif -%}
+						{%- endif -%}
+					{%- endfor -%}
+
+					{%- if paginate.next -%}
+						<li>
+							<a href="{{ paginate.next.url }}">
+								Next <span class="visuallyhidden">page</span>
+								<span aria-hidden="true">&raquo;</span>
+							</a>
+						</li>
+					{%- else -%}
+						<li class="disabled">
+							Next <span class="visuallyhidden">page</span>
+							<span aria-hidden="true">&raquo;</span>
+						</li>
+					{%- endif -%}
+				</ol>
+			</nav>
+		{%- endif -%}
+	{%- endpaginate -%}
+</body>
+</html>

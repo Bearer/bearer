@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<head>
+	<script src="https://cdn.domain.com"></script>
+</head>
+<body>
+	<script>var url = "https://inline.domain.com"</script>
+	<script>
+		var url = "https://api1.domain.com"
+	</script>
+	<script type="text/javascript">
+		var url = "https://api2.domain.com"
+	</script>
+	<script type="text/json">
+		{"url":"https://ignored-api.domain.com"}
+	</script>
+	<div class="links">
+		<a href="https://ignored-domain.com">Foo</a>
+		<a href="https://ignored-domain2.com">Bar</a>
+	</div>
+
+	<ul id="navigation">
+	{% for item in navigation %}
+			<li><a href="{{ item.href }}">{{ item.caption }}</a></li>
+	{% endfor %}
+	</ul>
+
+	<h1>My Webpage</h1>
+	{{ a_variable }}
+</body>
+</html>

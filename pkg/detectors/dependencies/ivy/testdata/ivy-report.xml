@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?xml-stylesheet type="text/xsl" href="ivy-report.xsl"?>
+
+<ivy-report version="1.0">
+    <info
+        organisation="org.workingonit"
+        module="addenda"
+        revision="alpha"
+        conf="endorsed"
+        confs="distributed, endorsed"
+        date="20090704010933"/>
+    <dependencies>
+        <module organisation="net.sourceforge.freemarker" name="freemarker" >
+            <revision name="2.3.15" status="release" pubdate="20081216120000" resolver="roundup" artresolver="roundup" homepage="http://freemarker.sourceforge.net/" downloaded="false" searched="false" default="false" conf="default" position="15">
+                <license name="BSD style" url="http://freemarker.sourceforge.net/docs/app_license.html"/>
+                <metadata-artifact status="no" details="" size="4763" time="0" location="/opt/ivyroundup/net.sourceforge.freemarker/freemarker/ivy-2.3.15.xml" searched="false" origin-is-local="false" origin-location="http://ivyroundup.googlecode.com/svn/trunk/repo/modules/net.sourceforge.freemarker/freemarker/2.3.15/ivy.xml"/>
+                <caller organisation="org.workingonit" name="addenda" conf="endorsed" rev="2.3.15" rev-constraint-default="2.3.15" rev-constraint-dynamic="2.3.15" callerrev="alpha"/>
+                <artifacts>
+                    <artifact name="source" type="source" ext="zip" status="no" details="" size="908545" time="0" location="/opt/ivyroundup/net.sourceforge.freemarker/freemarker/sources/source-2.3.15.zip">
+                        <origin-location is-local="false" location="file:/opt/roundup/build/net.sourceforge.freemarker/freemarker/2.3.15/artifacts/sources/source.zip"/>
+                    </artifact>
+                    <artifact name="freemarker" type="jar" ext="jar" status="no" details="" size="879259" time="0" location="/opt/ivyroundup/net.sourceforge.freemarker/freemarker/jars/freemarker-2.3.15.jar">
+                        <origin-location is-local="false" location="file:/opt/roundup/build/net.sourceforge.freemarker/freemarker/2.3.15/artifacts/jars/freemarker.jar"/>
+                    </artifact>
+                    <artifact name="javadoc" type="javadoc" ext="zip" status="no" details="" size="1066187" time="0" location="/opt/ivyroundup/net.sourceforge.freemarker/freemarker/javadocs/javadoc-2.3.15.zip">
+                        <origin-location is-local="false" location="file:/opt/roundup/build/net.sourceforge.freemarker/freemarker/2.3.15/artifacts/javadocs/javadoc.zip"/>
+                    </artifact>
+                </artifacts>
+            </revision>
+        </module>
+        <module organisation="net.miginfocom" name="miglayout" >
+            <revision name="3.6.2" status="release" pubdate="20081216120000" resolver="roundup" artresolver="roundup" homepage="http://www.miglayout.com/" downloaded="false" searched="false" default="false" conf="default" position="14">
+                <license name="BSD License" url="http://www.opensource.org/licenses/bsd-license.php"/>
+                <metadata-artifact status="no" details="" size="3885" time="0" location="/opt/ivyroundup/net.miginfocom/miglayout/ivy-3.6.2.xml" searched="false" origin-is-local="false" origin-location="http://ivyroundup.googlecode.com/svn/trunk/repo/modules/net.miginfocom/miglayout/3.6.2/ivy.xml"/>
+                <caller organisation="org.workingonit" name="addenda" conf="endorsed" rev="3.6.2" rev-constraint-default="3.6.2" rev-constraint-dynamic="3.6.2" callerrev="alpha"/>
+                <artifacts>
+                    <artifact name="javadoc" type="javadoc" ext="zip" status="no" details="" size="281029" time="0" location="/opt/ivyroundup/net.miginfocom/miglayout/javadocs/javadoc-3.6.2.zip">
+                        <origin-location is-local="false" location="file:/opt/roundup/build/net.miginfocom/miglayout/3.6.2/artifacts/javadocs/javadoc.zip"/>
+                    </artifact>
+                    <artifact name="miglayout" type="jar" ext="jar" status="no" details="" size="194875" time="0" location="/opt/ivyroundup/net.miginfocom/miglayout/jars/miglayout-3.6.2.jar">
+                        <origin-location is-local="false" location="file:/opt/roundup/build/net.miginfocom/miglayout/3.6.2/artifacts/jars/miglayout.jar"/>
+                    </artifact>
+                    <artifact name="source" type="source" ext="zip" status="no" details="" size="179491" time="0" location="/opt/ivyroundup/net.miginfocom/miglayout/sources/source-3.6.2.zip">
+                        <origin-location is-local="false" location="file:/opt/roundup/build/net.miginfocom/miglayout/3.6.2/artifacts/sources/source.zip"/>
+                    </artifact>
+                </artifacts>
+            </revision>
+        </module>
+        <module organisation="com.svnkit" name="svnkit" >
+            <revision name="1.2.2" status="release" pubdate="20081128120000" resolver="roundup" artresolver="roundup" homepage="http://www.svnkit.com/" downloaded="false" searched="false" default="false" conf="default, core" position="12">
+                <license name="The TMate Open Source License" url="http://svnkit.com/license.html"/>
+                <license name="TriLead License" url="http://www.trilead.com/Products/Trilead_SSH_for_Java/License/"/>
+                <metadata-artifact status="no" details="" size="3738" time="0" location="/opt/ivyroundup/com.svnkit/svnkit/ivy-1.2.2.xml" searched="false" origin-is-local="false" origin-location="http://ivyroundup.googlecode.com/svn/trunk/repo/modules/com.svnkit/svnkit/1.2.2/ivy.xml"/>
+                <caller organisation="org.workingonit" name="addenda" conf="endorsed" rev="1.2.2" rev-constraint-default="1.2.2" rev-constraint-dynamic="1.2.2" callerrev="alpha"/>
+                <artifacts>
+                    <artifact name="source" type="source" ext="zip" status="no" details="" size="1318413" time="0" location="/opt/ivyroundup/com.svnkit/svnkit/sources/source-1.2.2.zip">
+                        <origin-location is-local="false" location="file:/opt/roundup/build/com.svnkit/svnkit/1.2.2/artifacts/sources/source.zip"/>
+                    </artifact>
+                    <artifact name="svnkit" type="jar" ext="jar" status="no" details="" size="1724058" time="0" location="/opt/ivyroundup/com.svnkit/svnkit/jars/svnkit-1.2.2.jar">
+                        <origin-location is-local="false" location="file:/opt/roundup/build/com.svnkit/svnkit/1.2.2/artifacts/jars/svnkit.jar"/>
+                    </artifact>
+                    <artifact name="clisource" type="source" ext="zip" status="no" details="" size="194551" time="0" location="/opt/ivyroundup/com.svnkit/svnkit/sources/clisource-1.2.2.zip">
+                        <origin-location is-local="false" location="file:/opt/roundup/build/com.svnkit/svnkit/1.2.2/artifacts/sources/clisource.zip"/>
+                    </artifact>
+                    <artifact name="javadoc" type="javadoc" ext="zip" status="no" details="" size="916689" time="0" location="/opt/ivyroundup/com.svnkit/svnkit/javadocs/javadoc-1.2.2.zip">
+                        <origin-location is-local="false" location="file:/opt/roundup/build/com.svnkit/svnkit/1.2.2/artifacts/javadocs/javadoc.zip"/>
+                    </artifact>
+                </artifacts>
+            </revision>
+        </module>
+        <module organisation="net.java.dev.jna" name="jna" >
+            <revision name="3.0.9" status="release" pubdate="20081030120000" resolver="roundup" artresolver="roundup" homepage="https://jna.dev.java.net/" downloaded="false" searched="false" default="false" conf="default" position="13">
+                <license name="GNU Lesser General Public License, version 2.1" url="http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html"/>
+                <metadata-artifact status="no" details="" size="3225" time="0" location="/opt/ivyroundup/net.java.dev.jna/jna/ivy-3.0.9.xml" searched="false" origin-is-local="false" origin-location="http://ivyroundup.googlecode.com/svn/trunk/repo/modules/net.java.dev.jna/jna/3.0.9/ivy.xml"/>
+                <caller organisation="com.svnkit" name="svnkit" conf="core" rev="3.0.9" rev-constraint-default="3.0.9" rev-constraint-dynamic="3.0.9" callerrev="1.2.2"/>
+                <artifacts>
+                    <artifact name="jna" type="jar" ext="jar" status="no" details="" size="795871" time="0" location="/opt/ivyroundup/net.java.dev.jna/jna/jars/jna-3.0.9.jar">
+                        <origin-location is-local="false" location="file:/opt/roundup/build/net.java.dev.jna/jna/3.0.9/artifacts/jars/jna.jar"/>
+                    </artifact>
+                </artifacts>
+            </revision>
+        </module>
+        <module organisation="org.testng" name="testng" >
+            <revision name="5.8" status="release" pubdate="20090108120000" resolver="roundup" artresolver="roundup" homepage="http://www.testng.org/" downloaded="false" searched="false" default="false" conf="default" position="11">
+                <license name="Apache License, Version 2.0" url="http://www.apache.org/licenses/LICENSE-2.0"/>
+                <metadata-artifact status="no" details="" size="2544" time="0" location="/opt/ivyroundup/org.testng/testng/ivy-5.8.xml" searched="false" origin-is-local="false" origin-location="http://ivyroundup.googlecode.com/svn/trunk/repo/modules/org.testng/testng/5.8/ivy.xml"/>
+                <caller organisation="org.workingonit" name="addenda" conf="endorsed" rev="5.8" rev-constraint-default="5.8" rev-constraint-dynamic="5.8" callerrev="alpha"/>
+                <artifacts>
+                    <artifact name="testng" type="source" ext="zip" status="no" details="" size="318023" time="0" location="/opt/ivyroundup/org.testng/testng/sources/testng-5.8.zip">
+                        <origin-location is-local="false" location="file:/opt/roundup/build/org.testng/testng/5.8/artifacts/sources/testng.zip"/>
+                    </artifact>
+                    <artifact name="testng-jdk15" type="jar" ext="jar" status="no" details="" size="843450" time="0" location="/opt/ivyroundup/org.testng/testng/jars/testng-jdk15-5.8.jar">
+                        <origin-location is-local="false" location="file:/opt/roundup/build/org.testng/testng/5.8/artifacts/jars/testng-jdk15.jar"/>
+                    </artifact>
+                    <artifact name="javadoc" type="javadoc" ext="zip" status="no" details="" size="271731" time="0" location="/opt/ivyroundup/org.testng/testng/javadocs/javadoc-5.8.zip">
+                        <origin-location is-local="false" location="file:/opt/roundup/build/org.testng/testng/5.8/artifacts/javadocs/javadoc.zip"/>
+                    </artifact>
+                </artifacts>
+            </revision>
+        </module>
+        <module organisation="org.springframework" name="spring" >
+            <revision name="2.5.6" status="release" pubdate="20090110180000" resolver="roundups" artresolver="roundups" homepage="http://www.springframework.org/" downloaded="false" searched="false" default="false" conf="aop, tx, test, beans, context, web, core, jdbc" position="9">
+                <license name="Apache License, Version 2.0" url="http://www.apache.org/licenses/LICENSE-2.0"/>
+                <metadata-artifact status="no" details="" size="8548" time="0" location="/opt/ivyroundup/org.springframework/spring/ivy-2.5.6.xml" searched="false" origin-is-local="false" origin-location="file:/C:/home/projects/graphium/conf/ivy/org.springframework/spring/2.5.6/ivy.xml"/>
+                <caller organisation="org.workingonit" name="addenda" conf="endorsed" rev="2.5.6" rev-constraint-default="2.5.6" rev-constraint-dynamic="2.5.6" callerrev="alpha"/>
+                <artifacts>
+                    <artifact name="web" type="jar" ext="jar" status="no" details="" size="194577" time="0" location="/opt/ivyroundup/org.springframework/spring/jars/web-2.5.6.jar">
+                        <origin-location is-local="false" location="file:/c:/temp/packager/build/org.springframework/spring/2.5.6/artifacts/jars/web.jar"/>
+                    </artifact>
+                    <artifact name="context" type="jar" ext="jar" status="no" details="" size="476940" time="0" location="/opt/ivyroundup/org.springframework/spring/jars/context-2.5.6.jar">
+                        <origin-location is-local="false" location="file:/c:/temp/packager/build/org.springframework/spring/2.5.6/artifacts/jars/context.jar"/>
+                    </artifact>
+                    <artifact name="beans" type="jar" ext="jar" status="no" details="" size="488282" time="0" location="/opt/ivyroundup/org.springframework/spring/jars/beans-2.5.6.jar">
+                        <origin-location is-local="false" location="file:/c:/temp/packager/build/org.springframework/spring/2.5.6/artifacts/jars/beans.jar"/>
+                    </artifact>
+                    <artifact name="spring" type="source" ext="zip" status="no" details="" size="3169452" time="0" location="/opt/ivyroundup/org.springframework/spring/sources/spring-2.5.6.zip">
+                        <origin-location is-local="false" location="file:/c:/temp/packager/build/org.springframework/spring/2.5.6/artifacts/sources/spring.zip"/>
+                    </artifact>
+                    <artifact name="jdbc" type="jar" ext="jar" status="no" details="" size="335484" time="0" location="/opt/ivyroundup/org.springframework/spring/jars/jdbc-2.5.6.jar">
+                        <origin-location is-local="false" location="file:/c:/temp/packager/build/org.springframework/spring/2.5.6/artifacts/jars/jdbc.jar"/>
+                    </artifact>
+                    <artifact name="javadoc" type="javadoc" ext="zip" status="no" details="" size="15577876" time="0" location="/opt/ivyroundup/org.springframework/spring/javadocs/javadoc-2.5.6.zip">
+                        <origin-location is-local="false" location="file:/c:/temp/packager/build/org.springframework/spring/2.5.6/artifacts/javadocs/javadoc.zip"/>
+                    </artifact>
+                    <artifact name="test" type="jar" ext="jar" status="no" details="" size="180924" time="0" location="/opt/ivyroundup/org.springframework/spring/jars/test-2.5.6.jar">
+                        <origin-location is-local="false" location="file:/c:/temp/packager/build/org.springframework/spring/2.5.6/artifacts/jars/test.jar"/>
+                    </artifact>
+                    <artifact name="tx" type="jar" ext="jar" status="no" details="" size="231173" time="0" location="/opt/ivyroundup/org.springframework/spring/jars/tx-2.5.6.jar">
+                        <origin-location is-local="false" location="file:/c:/temp/packager/build/org.springframework/spring/2.5.6/artifacts/jars/tx.jar"/>
+                    </artifact>
+                    <artifact name="core" type="jar" ext="jar" status="no" details="" size="285491" time="0" location="/opt/ivyroundup/org.springframework/spring/jars/core-2.5.6.jar">
+                        <origin-location is-local="false" location="file:/c:/temp/packager/build/org.springframework/spring/2.5.6/artifacts/jars/core.jar"/>
+                    </artifact>
+                    <artifact name="aop" type="jar" ext="jar" status="no" details="" size="325942" time="0" location="/opt/ivyroundup/org.springframework/spring/jars/aop-2.5.6.jar">
+                        <origin-location is-local="false" location="file:/c:/temp/packager/build/org.springframework/spring/2.5.6/artifacts/jars/aop.jar"/>
+                    </artifact>
+                </artifacts>
+            </revision>
+        </module>
+        <module organisation="org.aopalliance" name="aopalliance" >
+            <revision name="1.0" status="release" pubdate="20040322000000" resolver="roundups" artresolver="roundups" homepage="http://aopalliance.sourceforge.net/" downloaded="false" searched="true" default="false" conf="default" position="10">
+                <license name="Public Domain" url="http://aopalliance.sourceforge.net/"/>
+                <metadata-artifact status="no" details="" size="2536" time="0" location="/opt/ivyroundup/org.aopalliance/aopalliance/ivy-1.0.xml" searched="true" origin-is-local="false" origin-location="http://ivyroundup.googlecode.com/svn/trunk/repo/modules/org.aopalliance/aopalliance/1.0/ivy.xml"/>
+                <caller organisation="org.springframework" name="spring" conf="aop" rev="1.+" rev-constraint-default="1.+" rev-constraint-dynamic="1.+" callerrev="2.5.6"/>
+                <artifacts>
+                    <artifact name="javadoc" type="javadoc" ext="zip" status="no" details="" size="44041" time="0" location="/opt/ivyroundup/org.aopalliance/aopalliance/javadocs/javadoc-1.0.zip">
+                        <origin-location is-local="false" location="file:/c:/temp/packager/build/org.aopalliance/aopalliance/1.0/artifacts/javadocs/javadoc.zip"/>
+                    </artifact>
+                    <artifact name="aopalliance" type="jar" ext="jar" status="no" details="" size="4467" time="0" location="/opt/ivyroundup/org.aopalliance/aopalliance/jars/aopalliance-1.0.jar">
+                        <origin-location is-local="false" location="file:/c:/temp/packager/build/org.aopalliance/aopalliance/1.0/artifacts/jars/aopalliance.jar"/>
+                    </artifact>
+                </artifacts>
+            </revision>
+        </module>
+        <module organisation="org.slf4j" name="slf4j" >
+            <revision name="1.5.6" status="release" pubdate="20081120120000" resolver="roundup" artresolver="roundup" homepage="http://www.slf4j.org/" downloaded="false" searched="false" default="false" conf="default, core, log4j" position="7">
+                <license name="SLF4J License" url="http://www.slf4j.org/license.html"/>
+                <metadata-artifact status="no" details="" size="5280" time="0" location="/opt/ivyroundup/org.slf4j/slf4j/ivy-1.5.6.xml" searched="false" origin-is-local="false" origin-location="http://ivyroundup.googlecode.com/svn/trunk/repo/modules/org.slf4j/slf4j/1.5.6/ivy.xml"/>
+                <caller organisation="org.workingonit" name="addenda" conf="endorsed" rev="1.5.6" rev-constraint-default="1.5.6" rev-constraint-dynamic="1.5.6" callerrev="alpha"/>
+                <artifacts>
+                    <artifact name="javadoc" type="javadoc" ext="zip" status="no" details="" size="469562" time="0" location="/opt/ivyroundup/org.slf4j/slf4j/javadocs/javadoc-1.5.6.zip">
+                        <origin-location is-local="false" location="file:/opt/roundup/build/org.slf4j/slf4j/1.5.6/artifacts/javadocs/javadoc.zip"/>
+                    </artifact>
+                    <artifact name="slf4j-log4j12" type="jar" ext="jar" status="no" details="" size="9678" time="0" location="/opt/ivyroundup/org.slf4j/slf4j/jars/slf4j-log4j12-1.5.6.jar">
+                        <origin-location is-local="false" location="file:/opt/roundup/build/org.slf4j/slf4j/1.5.6/artifacts/jars/slf4j-log4j12.jar"/>
+                    </artifact>
+                    <artifact name="slf4j-api" type="jar" ext="jar" status="no" details="" size="22338" time="0" location="/opt/ivyroundup/org.slf4j/slf4j/jars/slf4j-api-1.5.6.jar">
+                        <origin-location is-local="false" location="file:/opt/roundup/build/org.slf4j/slf4j/1.5.6/artifacts/jars/slf4j-api.jar"/>
+                    </artifact>
+                    <artifact name="source" type="source" ext="zip" status="no" details="" size="88977" time="0" location="/opt/ivyroundup/org.slf4j/slf4j/sources/source-1.5.6.zip">
+                        <origin-location is-local="false" location="file:/opt/roundup/build/org.slf4j/slf4j/1.5.6/artifacts/sources/source.zip"/>
+                    </artifact>
+                </artifacts>
+            </revision>
+        </module>
+        <module organisation="org.apache.log4j" name="log4j" >
+            <revision name="1.2.15" status="release" pubdate="20070824000000" resolver="roundup" artresolver="roundup" homepage="http://projects.apache.org/projects/log4j.html" downloaded="false" searched="true" default="false" conf="default" position="8">
+                <license name="Apache License, Version 2.0" url="http://www.apache.org/licenses/LICENSE-2.0"/>
+                <metadata-artifact status="no" details="" size="2540" time="0" location="/opt/ivyroundup/org.apache.log4j/log4j/ivy-1.2.15.xml" searched="true" origin-is-local="false" origin-location="http://ivyroundup.googlecode.com/svn/trunk/repo/modules/org.apache.log4j/log4j/1.2.15/ivy.xml"/>
+                <caller organisation="org.slf4j" name="slf4j" conf="log4j" rev="[1.2,1.3[" rev-constraint-default="[1.2,1.3[" rev-constraint-dynamic="[1.2,1.3[" callerrev="1.5.6"/>
+                <artifacts>
+                    <artifact name="source" type="source" ext="zip" status="no" details="" size="389160" time="0" location="/opt/ivyroundup/org.apache.log4j/log4j/sources/source-1.2.15.zip">
+                        <origin-location is-local="false" location="file:/opt/roundup/build/org.apache.log4j/log4j/1.2.15/artifacts/sources/source.zip"/>
+                    </artifact>
+                    <artifact name="log4j" type="jar" ext="jar" status="no" details="" size="391834" time="0" location="/opt/ivyroundup/org.apache.log4j/log4j/jars/log4j-1.2.15.jar">
+                        <origin-location is-local="false" location="file:/opt/roundup/build/org.apache.log4j/log4j/1.2.15/artifacts/jars/log4j.jar"/>
+                    </artifact>
+                </artifacts>
+            </revision>
+        </module>
+        <module organisation="org.codehaus.groovy" name="groovy" >
+            <revision name="1.5.7" status="release" pubdate="20090110180000" resolver="roundups" artresolver="roundups" homepage="http://groovy.codehaus.org/" downloaded="false" searched="false" default="false" conf="embeddable" position="6">
+                <license name="Apache License, Version 2.0" url="http://www.apache.org/licenses/LICENSE-2.0"/>
+                <metadata-artifact status="no" details="" size="2063" time="0" location="/opt/ivyroundup/org.codehaus.groovy/groovy/ivy-1.5.7.xml" searched="false" origin-is-local="false" origin-location="file:/C:/home/projects/addenda-groovy/conf/ivy/org.codehaus.groovy/groovy/1.5.7/ivy.xml"/>
+                <caller organisation="org.workingonit" name="addenda" conf="endorsed" rev="1.5.7" rev-constraint-default="1.5.7" rev-constraint-dynamic="1.5.7" callerrev="alpha"/>
+                <artifacts>
+                    <artifact name="groovy-all" type="jar" ext="jar" status="no" details="" size="2895520" time="0" location="/opt/ivyroundup/org.codehaus.groovy/groovy/jars/groovy-all-1.5.7.jar">
+                        <origin-location is-local="false" location="file:/c:/temp/packager/build/org.codehaus.groovy/groovy/1.5.7/artifacts/jars/groovy-all.jar"/>
+                    </artifact>
+                </artifacts>
+            </revision>
+        </module>
+        <module organisation="org.apache.commons" name="commons-lang" >
+            <revision name="2.4" status="release" pubdate="20080318000000" resolver="roundups" artresolver="roundups" homepage="http://commons.apache.org/lang/" downloaded="false" searched="true" default="false" conf="default" position="5">
+                <license name="Apache License, Version 2.0" url="http://www.apache.org/licenses/LICENSE-2.0"/>
+                <metadata-artifact status="no" details="" size="2733" time="0" location="/opt/ivyroundup/org.apache.commons/commons-lang/ivy-2.4.xml" searched="true" origin-is-local="false" origin-location="http://ivyroundup.googlecode.com/svn/trunk/repo/modules/org.apache.commons/commons-lang/2.4/ivy.xml"/>
+                <caller organisation="org.workingonit" name="addenda" conf="endorsed" rev="2.+" rev-constraint-default="2.+" rev-constraint-dynamic="2.+" callerrev="alpha"/>
+                <artifacts>
+                    <artifact name="javadoc" type="javadoc" ext="zip" status="no" details="" size="712606" time="0" location="/opt/ivyroundup/org.apache.commons/commons-lang/javadocs/javadoc-2.4.zip">
+                        <origin-location is-local="false" location="file:/c:/temp/packager/build/org.apache.commons/commons-lang/2.4/artifacts/javadocs/javadoc.zip"/>
+                    </artifact>
+                    <artifact name="source" type="source" ext="zip" status="no" details="" size="339321" time="0" location="/opt/ivyroundup/org.apache.commons/commons-lang/sources/source-2.4.zip">
+                        <origin-location is-local="false" location="file:/c:/temp/packager/build/org.apache.commons/commons-lang/2.4/artifacts/sources/source.zip"/>
+                    </artifact>
+                    <artifact name="commons-lang" type="jar" ext="jar" status="no" details="" size="261809" time="0" location="/opt/ivyroundup/org.apache.commons/commons-lang/jars/commons-lang-2.4.jar">
+                        <origin-location is-local="false" location="file:/c:/temp/packager/build/org.apache.commons/commons-lang/2.4/artifacts/jars/commons-lang.jar"/>
+                    </artifact>
+                </artifacts>
+            </revision>
+        </module>
+        <module organisation="org.apache.commons" name="commons-httpclient" >
+            <revision name="3.1" status="release" pubdate="20070821120000" resolver="roundup" artresolver="roundup" homepage="http://hc.apache.org/httpclient-3.x/" downloaded="false" searched="false" default="false" conf="default" position="2">
+                <license name="Apache License, Version 2.0" url="http://www.apache.org/licenses/LICENSE-2.0"/>
+                <metadata-artifact status="no" details="" size="4181" time="0" location="/opt/ivyroundup/org.apache.commons/commons-httpclient/ivy-3.1.xml" searched="false" origin-is-local="false" origin-location="http://ivyroundup.googlecode.com/svn/trunk/repo/modules/org.apache.commons/commons-httpclient/3.1/ivy.xml"/>
+                <caller organisation="org.workingonit" name="addenda" conf="endorsed" rev="3.1" rev-constraint-default="3.1" rev-constraint-dynamic="3.1" callerrev="alpha"/>
+                <artifacts>
+                    <artifact name="commons-httpclient" type="jar" ext="jar" status="no" details="" size="305001" time="0" location="/opt/ivyroundup/org.apache.commons/commons-httpclient/jars/commons-httpclient-3.1.jar">
+                        <origin-location is-local="false" location="file:/c:/temp/packager/build/org.apache.commons/commons-httpclient/3.1/artifacts/jars/commons-httpclient.jar"/>
+                    </artifact>
+                </artifacts>
+            </revision>
+        </module>
+        <module organisation="org.apache.commons" name="commons-codec" >
+            <revision name="1.3" status="release" pubdate="20040710000000" resolver="roundup" artresolver="roundup" homepage="http://commons.apache.org/codec/" downloaded="false" searched="true" default="false" conf="default" position="4">
+                <license name="Apache License, Version 2.0" url="http://www.apache.org/licenses/LICENSE-2.0"/>
+                <metadata-artifact status="no" details="" size="2048" time="0" location="/opt/ivyroundup/org.apache.commons/commons-codec/ivy-1.3.xml" searched="true" origin-is-local="false" origin-location="http://ivyroundup.googlecode.com/svn/trunk/repo/modules/org.apache.commons/commons-codec/1.3/ivy.xml"/>
+                <caller organisation="org.apache.commons" name="commons-httpclient" conf="default" rev="[1.2,2.0[" rev-constraint-default="[1.2,2.0[" rev-constraint-dynamic="[1.2,2.0[" callerrev="3.1"/>
+                <artifacts>
+                    <artifact name="source" type="source" ext="zip" status="no" details="" size="55191" time="0" location="/opt/ivyroundup/org.apache.commons/commons-codec/sources/source-1.3.zip">
+                        <origin-location is-local="false" location="file:/c:/temp/packager/build/org.apache.commons/commons-codec/1.3/artifacts/sources/source.zip"/>
+                    </artifact>
+                    <artifact name="commons-codec" type="jar" ext="jar" status="no" details="" size="46725" time="0" location="/opt/ivyroundup/org.apache.commons/commons-codec/jars/commons-codec-1.3.jar">
+                        <origin-location is-local="false" location="file:/c:/temp/packager/build/org.apache.commons/commons-codec/1.3/artifacts/jars/commons-codec.jar"/>
+                    </artifact>
+                    <artifact name="javadoc" type="javadoc" ext="zip" status="no" details="" size="198607" time="0" location="/opt/ivyroundup/org.apache.commons/commons-codec/javadocs/javadoc-1.3.zip">
+                        <origin-location is-local="false" location="file:/c:/temp/packager/build/org.apache.commons/commons-codec/1.3/artifacts/javadocs/javadoc.zip"/>
+                    </artifact>
+                </artifacts>
+            </revision>
+        </module>
+        <module organisation="org.apache.commons" name="commons-logging" >
+            <revision name="1.1.1" status="release" pubdate="20071126000000" resolver="roundups" artresolver="roundups" homepage="http://commons.apache.org/logging" downloaded="false" searched="true" default="false" conf="default" position="3">
+                <license name="Apache License, Version 2.0" url="http://www.apache.org/licenses/LICENSE-2.0"/>
+                <metadata-artifact status="no" details="" size="2346" time="0" location="/opt/ivyroundup/org.apache.commons/commons-logging/ivy-1.1.1.xml" searched="true" origin-is-local="false" origin-location="http://ivyroundup.googlecode.com/svn/trunk/repo/modules/org.apache.commons/commons-logging/1.1.1/ivy.xml"/>
+                <caller organisation="org.springframework" name="spring" conf="core" rev="1.+" rev-constraint-default="1.+" rev-constraint-dynamic="1.+" callerrev="2.5.6"/>
+                <caller organisation="org.apache.commons" name="commons-httpclient" conf="default" rev="[1.0.4,2.0[" rev-constraint-default="[1.0.4,2.0[" rev-constraint-dynamic="[1.0.4,2.0[" callerrev="3.1"/>
+                <artifacts>
+                    <artifact name="javadoc" type="javadoc" ext="zip" status="no" details="" size="141399" time="0" location="/opt/ivyroundup/org.apache.commons/commons-logging/javadocs/javadoc-1.1.1.zip">
+                        <origin-location is-local="false" location="file:/c:/temp/packager/build/org.apache.commons/commons-logging/1.1.1/artifacts/javadocs/javadoc.zip"/>
+                    </artifact>
+                    <artifact name="commons-logging" type="jar" ext="jar" status="no" details="" size="60686" time="0" location="/opt/ivyroundup/org.apache.commons/commons-logging/jars/commons-logging-1.1.1.jar">
+                        <origin-location is-local="false" location="file:/c:/temp/packager/build/org.apache.commons/commons-logging/1.1.1/artifacts/jars/commons-logging.jar"/>
+                    </artifact>
+                    <artifact name="source" type="source" ext="zip" status="no" details="" size="74976" time="0" location="/opt/ivyroundup/org.apache.commons/commons-logging/sources/source-1.1.1.zip">
+                        <origin-location is-local="false" location="file:/c:/temp/packager/build/org.apache.commons/commons-logging/1.1.1/artifacts/sources/source.zip"/>
+                    </artifact>
+                </artifacts>
+            </revision>
+        </module>
+        <module organisation="org.apache.ant" name="ant" >
+            <revision name="1.7.1" status="release" pubdate="20080627120000" resolver="roundup" artresolver="roundup" homepage="http://ant.apache.org/" downloaded="false" searched="false" default="false" conf="default" position="1">
+                <license name="Apache License, Version 2.0" url="http://www.apache.org/licenses/LICENSE-2.0"/>
+                <metadata-artifact status="no" details="" size="1937" time="0" location="/opt/ivyroundup/org.apache.ant/ant/ivy-1.7.1.xml" searched="false" origin-is-local="false" origin-location="http://ivyroundup.googlecode.com/svn/trunk/repo/modules/org.apache.ant/ant/1.7.1/ivy.xml"/>
+                <caller organisation="org.workingonit" name="addenda" conf="endorsed" rev="1.7.1" rev-constraint-default="1.7.1" rev-constraint-dynamic="1.7.1" callerrev="alpha"/>
+                <artifacts>
+                    <artifact name="javadoc" type="javadoc" ext="zip" status="no" details="" size="4368028" time="0" location="/opt/ivyroundup/org.apache.ant/ant/javadocs/javadoc-1.7.1.zip">
+                        <origin-location is-local="false" location="file:/opt/roundup/build/org.apache.ant/ant/1.7.1/artifacts/javadocs/javadoc.zip"/>
+                    </artifact>
+                    <artifact name="ant" type="jar" ext="jar" status="no" details="" size="1323005" time="0" location="/opt/ivyroundup/org.apache.ant/ant/jars/ant-1.7.1.jar">
+                        <origin-location is-local="false" location="file:/opt/roundup/build/org.apache.ant/ant/1.7.1/artifacts/jars/ant.jar"/>
+                    </artifact>
+                </artifacts>
+            </revision>
+        </module>
+        <module organisation="javax.servlet" name="servletapi" >
+            <revision name="2.4" status="release" pubdate="20090110210000" resolver="roundups" artresolver="roundups" homepage="http://java.sun.com/products/servlet/" downloaded="false" searched="false" default="false" conf="default" position="0">
+                <license name="Sun Microsystems, Inc. Binary Code License Agreement" url="http://www.sun.com/"/>
+                <metadata-artifact status="no" details="" size="2312" time="0" location="/opt/ivyroundup/javax.servlet/servletapi/ivy-2.4.xml" searched="false" origin-is-local="false" origin-location="file:/C:/home/projects/graphium/conf/ivy/javax.servlet/servletapi/2.4/ivy.xml"/>
+                <caller organisation="org.workingonit" name="addenda" conf="endorsed" rev="2.4" rev-constraint-default="2.4" rev-constraint-dynamic="2.4" callerrev="alpha"/>
+                <artifacts>
+                    <artifact name="servletapi" type="jar" ext="jar" status="no" details="" size="97693" time="0" location="/opt/ivyroundup/javax.servlet/servletapi/jars/servletapi-2.4.jar">
+                        <origin-location is-local="false" location="file:/c:/temp/packager/build/javax.servlet/servletapi/2.4/artifacts/jars/servletapi.jar"/>
+                    </artifact>
+                </artifacts>
+            </revision>
+        </module>
+    </dependencies>
+</ivy-report>

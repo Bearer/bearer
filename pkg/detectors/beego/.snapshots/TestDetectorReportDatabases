@@ -1,0 +1,42 @@
+([]*report.FrameworkDetection) (len=2) {
+  (*report.FrameworkDetection)({
+    Type: (report.DetectionType) (len=9) "framework",
+    DetectorType: (detectors.Type) (len=5) "beego",
+    FrameworkType: (frameworks.Type) (len=8) "database",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=11) "database.go",
+      Language: (string) (len=2) "Go",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(12),
+      ColumnNumber: (*int)(2),
+      Text: (*string)((len=20) "orm.RegisterDataBase")
+    },
+    Value: (beego.Database) {
+      Name: (string) (len=7) "default",
+      DriverName: (string) (len=5) "mysql",
+      Package: (string) (len=36) "github.com/beego/beego/v2/client/orm",
+      TypeConstant: (string) (len=7) "DRMySQL"
+    }
+  }),
+  (*report.FrameworkDetection)({
+    Type: (report.DetectionType) (len=9) "framework",
+    DetectorType: (detectors.Type) (len=5) "beego",
+    FrameworkType: (frameworks.Type) (len=8) "database",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=12) "database2.go",
+      Language: (string) (len=2) "Go",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(11),
+      ColumnNumber: (*int)(2),
+      Text: (*string)((len=23) "ormlib.RegisterDataBase")
+    },
+    Value: (beego.Database) {
+      Name: (string) (len=7) "default",
+      DriverName: (string) (len=4) "mydb",
+      Package: (string) (len=26) "github.com/example/mydb/v2",
+      TypeConstant: (string) (len=4) "MyDB"
+    }
+  })
+}
