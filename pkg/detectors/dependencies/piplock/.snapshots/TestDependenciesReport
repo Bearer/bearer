@@ -1,0 +1,74 @@
+([]*report.Detection) (len=4) {
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=7) "piplock",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=12) "Pipfile.lock",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(17),
+      ColumnNumber: (*int)(8),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=12) "atomicwrites",
+      Version: (string) (len=7) "==1.4.0"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=7) "piplock",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=12) "Pipfile.lock",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(25),
+      ColumnNumber: (*int)(8),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=5) "attrs",
+      Version: (string) (len=8) "==21.2.0"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=7) "piplock",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=12) "Pipfile.lock",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(35),
+      ColumnNumber: (*int)(8),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=9) "alabaster",
+      Version: (string) (len=8) "==0.7.12"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=7) "piplock",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=12) "Pipfile.lock",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(42),
+      ColumnNumber: (*int)(8),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=8) "arpeggio",
+      Version: (string) (len=8) "==1.10.2"
+    }
+  })
+}

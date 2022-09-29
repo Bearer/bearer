@@ -1,0 +1,87 @@
+([]*report.FrameworkDetection) (len=5) {
+  (*report.FrameworkDetection)({
+    Type: (report.DetectionType) (len=9) "framework",
+    DetectorType: (detectors.Type) (len=5) "rails",
+    FrameworkType: (frameworks.Type) (len=5) "cache",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "config/application.rb",
+      Language: (string) (len=4) "Ruby",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(43),
+      ColumnNumber: (*int)(26),
+      Text: (*string)(<nil>)
+    },
+    Value: (rails.Cache) {
+      Type: (string) (len=12) "memory_store"
+    }
+  }),
+  (*report.FrameworkDetection)({
+    Type: (report.DetectionType) (len=9) "framework",
+    DetectorType: (detectors.Type) (len=5) "rails",
+    FrameworkType: (frameworks.Type) (len=5) "cache",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "config/application.rb",
+      Language: (string) (len=4) "Ruby",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(44),
+      ColumnNumber: (*int)(26),
+      Text: (*string)(<nil>)
+    },
+    Value: (rails.Cache) {
+      Type: (string) (len=10) "file_store"
+    }
+  }),
+  (*report.FrameworkDetection)({
+    Type: (report.DetectionType) (len=9) "framework",
+    DetectorType: (detectors.Type) (len=5) "rails",
+    FrameworkType: (frameworks.Type) (len=5) "cache",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "config/application.rb",
+      Language: (string) (len=4) "Ruby",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(45),
+      ColumnNumber: (*int)(26),
+      Text: (*string)(<nil>)
+    },
+    Value: (rails.Cache) {
+      Type: (string) (len=15) "mem_cache_store"
+    }
+  }),
+  (*report.FrameworkDetection)({
+    Type: (report.DetectionType) (len=9) "framework",
+    DetectorType: (detectors.Type) (len=5) "rails",
+    FrameworkType: (frameworks.Type) (len=5) "cache",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "config/application.rb",
+      Language: (string) (len=4) "Ruby",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(46),
+      ColumnNumber: (*int)(26),
+      Text: (*string)(<nil>)
+    },
+    Value: (rails.Cache) {
+      Type: (string) (len=17) "redis_cache_store"
+    }
+  }),
+  (*report.FrameworkDetection)({
+    Type: (report.DetectionType) (len=9) "framework",
+    DetectorType: (detectors.Type) (len=5) "rails",
+    FrameworkType: (frameworks.Type) (len=5) "cache",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=33) "config/environments/production.rb",
+      Language: (string) (len=4) "Ruby",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(58),
+      ColumnNumber: (*int)(26),
+      Text: (*string)(<nil>)
+    },
+    Value: (rails.Cache) {
+      Type: (string) (len=17) "redis_cache_store"
+    }
+  })
+}

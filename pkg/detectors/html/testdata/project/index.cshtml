@@ -1,0 +1,27 @@
+@model IEnumerable<MVC_BasicTutorials.Models.Student>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<html>
+</body>
+	<script>var url = "https://inline.domain.com"</script>
+	@Html.DisplayNameFor(model => model.StudentName) // not supported
+  	var url = "https://erb-javascript-tag.domain.com"
+	<script>
+		var url = "https://api1.domain.com"
+	</script>
+	<script type="text/javascript">
+		var url = "https://api2.domain.com"
+	</script>
+	<script type="text/json">
+		{"url":"https://ignored-api.domain.com"}
+	</script>
+	<div class="links">
+		@Html.DisplayNameFor(model => "https://api3.domain.com") // not supported
+	</div>
+
+    </table>
+</body>
+</html>

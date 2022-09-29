@@ -1,0 +1,110 @@
+([]*report.Detection) (len=6) {
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=18) "paket-dependencies",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=18) "paket.dependencies",
+      Language: (string) "",
+      LanguageType: (string) "",
+      LineNumber: (*int)(4),
+      ColumnNumber: (*int)(0),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=5) "NUnit",
+      Version: (string) (len=5) "2.6.3"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=18) "paket-dependencies",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=18) "paket.dependencies",
+      Language: (string) "",
+      LanguageType: (string) "",
+      LineNumber: (*int)(5),
+      ColumnNumber: (*int)(0),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=4) "FAKE",
+      Version: (string) (len=3) "3.4"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=18) "paket-dependencies",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=18) "paket.dependencies",
+      Language: (string) "",
+      LanguageType: (string) "",
+      LineNumber: (*int)(6),
+      ColumnNumber: (*int)(0),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=9) "DotNetZip",
+      Version: (string) (len=3) "N/A"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=18) "paket-dependencies",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=18) "paket.dependencies",
+      Language: (string) "",
+      LanguageType: (string) "",
+      LineNumber: (*int)(11),
+      ColumnNumber: (*int)(0),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=9) "some/repo",
+      Version: (string) (len=3) "N/A"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=18) "paket-dependencies",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=18) "paket.dependencies",
+      Language: (string) "",
+      LanguageType: (string) "",
+      LineNumber: (*int)(12),
+      ColumnNumber: (*int)(0),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=12) "forki/FsUnit",
+      Version: (string) (len=3) "N/A"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=18) "paket-dependencies",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=18) "paket.dependencies",
+      Language: (string) "",
+      LanguageType: (string) "",
+      LineNumber: (*int)(15),
+      ColumnNumber: (*int)(0),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=39) "https://github.com/fsprojects/Paket.git",
+      Version: (string) (len=3) "N/A"
+    }
+  })
+}

@@ -1,0 +1,72 @@
+([]*report.FrameworkDetection) (len=4) {
+  (*report.FrameworkDetection)({
+    Type: (report.DetectionType) (len=9) "framework",
+    DetectorType: (detectors.Type) (len=10) "typescript",
+    FrameworkType: (frameworks.Type) (len=13) "knex_function",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=16) "datatype_knex.ts",
+      Language: (string) (len=10) "TypeScript",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(4),
+      ColumnNumber: (*int)(1),
+      Text: (*string)(<nil>)
+    },
+    Value: (knex.Function) {
+      DataType: (string) (len=4) "User"
+    }
+  }),
+  (*report.FrameworkDetection)({
+    Type: (report.DetectionType) (len=9) "framework",
+    DetectorType: (detectors.Type) (len=10) "typescript",
+    FrameworkType: (frameworks.Type) (len=13) "knex_function",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=16) "datatype_knex.ts",
+      Language: (string) (len=10) "TypeScript",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(5),
+      ColumnNumber: (*int)(1),
+      Text: (*string)(<nil>)
+    },
+    Value: (knex.Function) {
+      DataType: (string) (len=4) "User"
+    }
+  }),
+  (*report.FrameworkDetection)({
+    Type: (report.DetectionType) (len=9) "framework",
+    DetectorType: (detectors.Type) (len=10) "typescript",
+    FrameworkType: (frameworks.Type) (len=11) "knex_schema",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=16) "datatype_knex.ts",
+      Language: (string) (len=10) "TypeScript",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(20),
+      ColumnNumber: (*int)(7),
+      Text: (*string)(<nil>)
+    },
+    Value: (knex.Schema) {
+      DataType: (string) (len=6) ": User",
+      PropertyName: (string) (len=5) "users"
+    }
+  }),
+  (*report.FrameworkDetection)({
+    Type: (report.DetectionType) (len=9) "framework",
+    DetectorType: (detectors.Type) (len=10) "typescript",
+    FrameworkType: (frameworks.Type) (len=11) "knex_schema",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=16) "datatype_knex.ts",
+      Language: (string) (len=10) "TypeScript",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(21),
+      ColumnNumber: (*int)(7),
+      Text: (*string)(<nil>)
+    },
+    Value: (knex.Schema) {
+      DataType: (string) (len=161) ": Knex.CompositeTableType<\n        User,\n        Pick<User, 'name'> & Partial<Pick<User, 'created_at' | 'updated_at'>>,\n        Partial<Omit<User, 'id'>>\n      >",
+      PropertyName: (string) (len=15) "users_composite"
+    }
+  })
+}

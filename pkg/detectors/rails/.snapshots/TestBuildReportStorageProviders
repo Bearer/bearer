@@ -1,0 +1,59 @@
+([]*report.FrameworkDetection) (len=3) {
+  (*report.FrameworkDetection)({
+    Type: (report.DetectionType) (len=9) "framework",
+    DetectorType: (detectors.Type) (len=5) "rails",
+    FrameworkType: (frameworks.Type) (len=7) "storage",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=18) "config/storage.yml",
+      Language: (string) (len=4) "YAML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(5),
+      ColumnNumber: (*int)(<nil>),
+      Text: (*string)(<nil>)
+    },
+    Value: (rails.Storage) {
+      Name: (string) (len=6) "amazon",
+      Service: (string) (len=2) "S3",
+      Encryption: (string) (len=6) "AES256"
+    }
+  }),
+  (*report.FrameworkDetection)({
+    Type: (report.DetectionType) (len=9) "framework",
+    DetectorType: (detectors.Type) (len=5) "rails",
+    FrameworkType: (frameworks.Type) (len=7) "storage",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=18) "config/storage.yml",
+      Language: (string) (len=4) "YAML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(15),
+      ColumnNumber: (*int)(<nil>),
+      Text: (*string)(<nil>)
+    },
+    Value: (rails.Storage) {
+      Name: (string) (len=12) "amazon_other",
+      Service: (string) (len=2) "S3",
+      Encryption: (string) ""
+    }
+  }),
+  (*report.FrameworkDetection)({
+    Type: (report.DetectionType) (len=9) "framework",
+    DetectorType: (detectors.Type) (len=5) "rails",
+    FrameworkType: (frameworks.Type) (len=7) "storage",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=18) "config/storage.yml",
+      Language: (string) (len=4) "YAML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(1),
+      ColumnNumber: (*int)(<nil>),
+      Text: (*string)(<nil>)
+    },
+    Value: (rails.Storage) {
+      Name: (string) (len=5) "local",
+      Service: (string) (len=4) "Disk",
+      Encryption: (string) ""
+    }
+  })
+}

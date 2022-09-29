@@ -1,0 +1,490 @@
+([]*report.Detection) (len=16) {
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=4) "java",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=11) "config.java",
+      Language: (string) (len=4) "Java",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(4),
+      ColumnNumber: (*int)(3),
+      Text: (*string)(<nil>)
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=8) "Delivery",
+      ObjectUUID: (string) (len=1) "2",
+      FieldName: (string) (len=10) "httpClient",
+      FieldUUID: (string) (len=1) "3",
+      FieldType: (string) (len=19) "CloseableHttpClient",
+      SimpleFieldType: (string) (len=6) "object"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=4) "java",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=11) "config.java",
+      Language: (string) (len=4) "Java",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(5),
+      ColumnNumber: (*int)(3),
+      Text: (*string)(<nil>)
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=8) "Delivery",
+      ObjectUUID: (string) (len=1) "2",
+      FieldName: (string) (len=6) "apiUrl",
+      FieldUUID: (string) (len=1) "4",
+      FieldType: (string) (len=6) "String",
+      SimpleFieldType: (string) (len=6) "string"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=4) "java",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=11) "config.java",
+      Language: (string) (len=4) "Java",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(7),
+      ColumnNumber: (*int)(3),
+      Text: (*string)(<nil>)
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=8) "Delivery",
+      ObjectUUID: (string) (len=1) "2",
+      FieldName: (string) (len=4) "main",
+      FieldUUID: (string) (len=1) "5",
+      FieldType: (string) "",
+      SimpleFieldType: (string) (len=8) "function"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=4) "java",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=11) "config.java",
+      Language: (string) (len=4) "Java",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(21),
+      ColumnNumber: (*int)(3),
+      Text: (*string)(<nil>)
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=8) "Delivery",
+      ObjectUUID: (string) (len=1) "2",
+      FieldName: (string) (len=5) "close",
+      FieldUUID: (string) (len=1) "6",
+      FieldType: (string) "",
+      SimpleFieldType: (string) (len=8) "function"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=4) "java",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=11) "config.java",
+      Language: (string) (len=4) "Java",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(25),
+      ColumnNumber: (*int)(3),
+      Text: (*string)(<nil>)
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=8) "Delivery",
+      ObjectUUID: (string) (len=1) "2",
+      FieldName: (string) (len=11) "getOnlyPath",
+      FieldUUID: (string) (len=1) "7",
+      FieldType: (string) "",
+      SimpleFieldType: (string) (len=8) "function"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=4) "java",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=11) "config.java",
+      Language: (string) (len=4) "Java",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(47),
+      ColumnNumber: (*int)(3),
+      Text: (*string)(<nil>)
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=8) "Delivery",
+      ObjectUUID: (string) (len=1) "2",
+      FieldName: (string) (len=22) "getWithUrlConcatenated",
+      FieldUUID: (string) (len=1) "8",
+      FieldType: (string) "",
+      SimpleFieldType: (string) (len=8) "function"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=4) "java",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=11) "config.java",
+      Language: (string) (len=4) "Java",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(72),
+      ColumnNumber: (*int)(3),
+      Text: (*string)(<nil>)
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=8) "Delivery",
+      ObjectUUID: (string) (len=1) "2",
+      FieldName: (string) (len=21) "getWithUrlPassedAsArg",
+      FieldUUID: (string) (len=1) "9",
+      FieldType: (string) "",
+      SimpleFieldType: (string) (len=8) "function"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=4) "java",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=11) "config.java",
+      Language: (string) (len=4) "Java",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(98),
+      ColumnNumber: (*int)(3),
+      Text: (*string)(<nil>)
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=8) "Delivery",
+      ObjectUUID: (string) (len=1) "2",
+      FieldName: (string) (len=27) "getWithUrlFullyInterpolated",
+      FieldUUID: (string) (len=2) "10",
+      FieldType: (string) "",
+      SimpleFieldType: (string) (len=8) "function"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=4) "java",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=11) "config.java",
+      Language: (string) (len=4) "Java",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(123),
+      ColumnNumber: (*int)(3),
+      Text: (*string)(<nil>)
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=8) "Delivery",
+      ObjectUUID: (string) (len=1) "2",
+      FieldName: (string) (len=22) "getWithUrlInterpolated",
+      FieldUUID: (string) (len=2) "11",
+      FieldType: (string) "",
+      SimpleFieldType: (string) (len=8) "function"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=9) "interface",
+    DetectorType: (detectors.Type) (len=4) "java",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=11) "config.java",
+      Language: (string) (len=4) "Java",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(26),
+      ColumnNumber: (*int)(35),
+      Text: (*string)((len=24) "\"/api/delivery-messages\"")
+    },
+    Value: (interfaces.Interface) {
+      Type: (interfaces.Type) (len=4) "path",
+      Value: (*values.Value)({
+        Parts: ([]values.Part) (len=1) {
+          (*values.String)({
+            Type: (values.PartType) (len=6) "string",
+            Value: (string) (len=22) "/api/delivery-messages"
+          })
+        }
+      }),
+      VariableName: (string) ""
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=9) "interface",
+    DetectorType: (detectors.Type) (len=4) "java",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=11) "config.java",
+      Language: (string) (len=4) "Java",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(50),
+      ColumnNumber: (*int)(7),
+      Text: (*string)((len=70) "apiUrl + \"/api/customers\" + customerId + \"/transactions/\" + platformId")
+    },
+    Value: (interfaces.Interface) {
+      Type: (interfaces.Type) (len=4) "path",
+      Value: (*values.Value)({
+        Parts: ([]values.Part) (len=5) {
+          (*values.VariableReference)({
+            Type: (values.PartType) (len=18) "variable_reference",
+            Identifier: (variables.Identifier) {
+              Type: (variables.Type) (len=8) "variable",
+              Name: (string) (len=6) "apiUrl"
+            }
+          }),
+          (*values.String)({
+            Type: (values.PartType) (len=6) "string",
+            Value: (string) (len=14) "/api/customers"
+          }),
+          (*values.VariableReference)({
+            Type: (values.PartType) (len=18) "variable_reference",
+            Identifier: (variables.Identifier) {
+              Type: (variables.Type) (len=8) "variable",
+              Name: (string) (len=10) "customerId"
+            }
+          }),
+          (*values.String)({
+            Type: (values.PartType) (len=6) "string",
+            Value: (string) (len=14) "/transactions/"
+          }),
+          (*values.VariableReference)({
+            Type: (values.PartType) (len=18) "variable_reference",
+            Identifier: (variables.Identifier) {
+              Type: (variables.Type) (len=8) "variable",
+              Name: (string) (len=10) "platformId"
+            }
+          })
+        }
+      }),
+      VariableName: (string) ""
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=9) "interface",
+    DetectorType: (detectors.Type) (len=4) "java",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=11) "config.java",
+      Language: (string) (len=4) "Java",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(76),
+      ColumnNumber: (*int)(7),
+      Text: (*string)((len=70) "\"/api/customers/\" + customer.Foo.Id() + \"/transactions/\" + platform.Id")
+    },
+    Value: (interfaces.Interface) {
+      Type: (interfaces.Type) (len=4) "path",
+      Value: (*values.Value)({
+        Parts: ([]values.Part) (len=4) {
+          (*values.String)({
+            Type: (values.PartType) (len=6) "string",
+            Value: (string) (len=15) "/api/customers/"
+          }),
+          (*values.Unknown)({
+            Type: (values.PartType) (len=7) "unknown",
+            Parts: ([]values.Part) (len=3) {
+              (*values.VariableReference)({
+                Type: (values.PartType) (len=18) "variable_reference",
+                Identifier: (variables.Identifier) {
+                  Type: (variables.Type) (len=8) "variable",
+                  Name: (string) (len=8) "customer"
+                }
+              }),
+              (*values.VariableReference)({
+                Type: (values.PartType) (len=18) "variable_reference",
+                Identifier: (variables.Identifier) {
+                  Type: (variables.Type) (len=8) "variable",
+                  Name: (string) (len=3) "Foo"
+                }
+              }),
+              (*values.VariableReference)({
+                Type: (values.PartType) (len=18) "variable_reference",
+                Identifier: (variables.Identifier) {
+                  Type: (variables.Type) (len=8) "variable",
+                  Name: (string) (len=2) "Id"
+                }
+              })
+            }
+          }),
+          (*values.String)({
+            Type: (values.PartType) (len=6) "string",
+            Value: (string) (len=14) "/transactions/"
+          }),
+          (*values.Unknown)({
+            Type: (values.PartType) (len=7) "unknown",
+            Parts: ([]values.Part) (len=2) {
+              (*values.VariableReference)({
+                Type: (values.PartType) (len=18) "variable_reference",
+                Identifier: (variables.Identifier) {
+                  Type: (variables.Type) (len=8) "variable",
+                  Name: (string) (len=8) "platform"
+                }
+              }),
+              (*values.VariableReference)({
+                Type: (values.PartType) (len=18) "variable_reference",
+                Identifier: (variables.Identifier) {
+                  Type: (variables.Type) (len=8) "variable",
+                  Name: (string) (len=2) "Id"
+                }
+              })
+            }
+          })
+        }
+      }),
+      VariableName: (string) ""
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=9) "interface",
+    DetectorType: (detectors.Type) (len=4) "java",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=11) "config.java",
+      Language: (string) (len=4) "Java",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(101),
+      ColumnNumber: (*int)(25),
+      Text: (*string)((len=31) "System.getenv(\"CUSTOMERS_HOST\")")
+    },
+    Value: (interfaces.Interface) {
+      Type: (interfaces.Type) (len=3) "url",
+      Value: (*values.Value)({
+        Parts: ([]values.Part) (len=1) {
+          (*values.VariableReference)({
+            Type: (values.PartType) (len=18) "variable_reference",
+            Identifier: (variables.Identifier) {
+              Type: (variables.Type) (len=11) "environment",
+              Name: (string) (len=14) "CUSTOMERS_HOST"
+            }
+          })
+        }
+      }),
+      VariableName: (string) ""
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=9) "interface",
+    DetectorType: (detectors.Type) (len=4) "java",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=11) "config.java",
+      Language: (string) (len=4) "Java",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(101),
+      ColumnNumber: (*int)(77),
+      Text: (*string)((len=35) "System.getenv(\"CUSTOMER_HOST_PORT\")")
+    },
+    Value: (interfaces.Interface) {
+      Type: (interfaces.Type) (len=3) "url",
+      Value: (*values.Value)({
+        Parts: ([]values.Part) (len=1) {
+          (*values.VariableReference)({
+            Type: (values.PartType) (len=18) "variable_reference",
+            Identifier: (variables.Identifier) {
+              Type: (variables.Type) (len=11) "environment",
+              Name: (string) (len=18) "CUSTOMER_HOST_PORT"
+            }
+          })
+        }
+      }),
+      VariableName: (string) ""
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=9) "interface",
+    DetectorType: (detectors.Type) (len=4) "java",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=11) "config.java",
+      Language: (string) (len=4) "Java",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(101),
+      ColumnNumber: (*int)(121),
+      Text: (*string)((len=34) "\"/api/delivery-messages?num_page=\"")
+    },
+    Value: (interfaces.Interface) {
+      Type: (interfaces.Type) (len=4) "path",
+      Value: (*values.Value)({
+        Parts: ([]values.Part) (len=1) {
+          (*values.String)({
+            Type: (values.PartType) (len=6) "string",
+            Value: (string) (len=32) "/api/delivery-messages?num_page="
+          })
+        }
+      }),
+      VariableName: (string) ""
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=9) "interface",
+    DetectorType: (detectors.Type) (len=4) "java",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=11) "config.java",
+      Language: (string) (len=4) "Java",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(126),
+      ColumnNumber: (*int)(9),
+      Text: (*string)((len=106) "new StringBuilder(apiUrl).append(\"api/customers/\").toString() + customerId + \"/transactions/\" + platformId")
+    },
+    Value: (interfaces.Interface) {
+      Type: (interfaces.Type) (len=4) "path",
+      Value: (*values.Value)({
+        Parts: ([]values.Part) (len=4) {
+          (*values.Unknown)({
+            Type: (values.PartType) (len=7) "unknown",
+            Parts: ([]values.Part) (len=4) {
+              (*values.VariableReference)({
+                Type: (values.PartType) (len=18) "variable_reference",
+                Identifier: (variables.Identifier) {
+                  Type: (variables.Type) (len=8) "variable",
+                  Name: (string) (len=6) "apiUrl"
+                }
+              }),
+              (*values.VariableReference)({
+                Type: (values.PartType) (len=18) "variable_reference",
+                Identifier: (variables.Identifier) {
+                  Type: (variables.Type) (len=8) "variable",
+                  Name: (string) (len=6) "append"
+                }
+              }),
+              (*values.String)({
+                Type: (values.PartType) (len=6) "string",
+                Value: (string) (len=14) "api/customers/"
+              }),
+              (*values.VariableReference)({
+                Type: (values.PartType) (len=18) "variable_reference",
+                Identifier: (variables.Identifier) {
+                  Type: (variables.Type) (len=8) "variable",
+                  Name: (string) (len=8) "toString"
+                }
+              })
+            }
+          }),
+          (*values.VariableReference)({
+            Type: (values.PartType) (len=18) "variable_reference",
+            Identifier: (variables.Identifier) {
+              Type: (variables.Type) (len=8) "variable",
+              Name: (string) (len=10) "customerId"
+            }
+          }),
+          (*values.String)({
+            Type: (values.PartType) (len=6) "string",
+            Value: (string) (len=14) "/transactions/"
+          }),
+          (*values.VariableReference)({
+            Type: (values.PartType) (len=18) "variable_reference",
+            Identifier: (variables.Identifier) {
+              Type: (variables.Type) (len=8) "variable",
+              Name: (string) (len=10) "platformId"
+            }
+          })
+        }
+      }),
+      VariableName: (string) ""
+    }
+  })
+}

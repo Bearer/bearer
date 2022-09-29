@@ -1,0 +1,24 @@
+name: Docker Production
+
+on:
+  push:
+    tags:
+      - "*"
+
+jobs:
+  build:
+    name: Docker image
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+
+      - name: Set version
+        run: echo -e "package version\n\nvar Version=\"$GITHUB_SHA\"\n" > version/version.go
+
+      - name: Set git credentials for private dependencies
+        env:
+          CLONE_GITHUB_TOKEN: ${{ secrets.CLONE_GITHUB_TOKEN }}
+        run: |
+          envsubst < .github/.gitconfig.tpl > .gitconfig
+          cp .gitconfig $HOME/

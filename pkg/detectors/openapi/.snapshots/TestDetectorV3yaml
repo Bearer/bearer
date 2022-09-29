@@ -1,0 +1,2055 @@
+([]*report.Detection) (len=67) {
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=9) "operation",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-openapi.yaml",
+      Language: (string) (len=4) "YAML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(55),
+      ColumnNumber: (*int)(5),
+      Text: (*string)((len=4) "post")
+    },
+    Value: (operations.Operation) {
+      Path: (string) (len=4) "/pet",
+      Type: (string) (len=4) "POST",
+      Urls: ([]operations.Url) (len=3) {
+        (operations.Url) {
+          Url: (string) (len=28) "{protocol}://api.example.com",
+          Variables: ([]operations.Variable) (len=1) {
+            (operations.Variable) {
+              Name: (string) (len=8) "protocol",
+              Values: ([]string) (len=2) {
+                (string) (len=4) "http",
+                (string) (len=5) "https"
+              }
+            }
+          }
+        },
+        (operations.Url) {
+          Url: (string) (len=36) "https://{environment}.example.com/v2",
+          Variables: ([]operations.Variable) (len=1) {
+            (operations.Variable) {
+              Name: (string) (len=11) "environment",
+              Values: ([]string) (len=3) {
+                (string) (len=3) "api",
+                (string) (len=7) "api.dev",
+                (string) (len=11) "api.staging"
+              }
+            }
+          }
+        },
+        (operations.Url) {
+          Url: (string) (len=11) "{server}/v1",
+          Variables: ([]operations.Variable) (len=1) {
+            (operations.Variable) {
+              Name: (string) (len=6) "server",
+              Values: ([]string) (len=1) {
+                (string) (len=23) "https://api.example.com"
+              }
+            }
+          }
+        }
+      }
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=9) "operation",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-openapi.yaml",
+      Language: (string) (len=4) "YAML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(90),
+      ColumnNumber: (*int)(5),
+      Text: (*string)((len=3) "put")
+    },
+    Value: (operations.Operation) {
+      Path: (string) (len=4) "/pet",
+      Type: (string) (len=3) "PUT",
+      Urls: ([]operations.Url) (len=3) {
+        (operations.Url) {
+          Url: (string) (len=28) "{protocol}://api.example.com",
+          Variables: ([]operations.Variable) (len=1) {
+            (operations.Variable) {
+              Name: (string) (len=8) "protocol",
+              Values: ([]string) (len=2) {
+                (string) (len=4) "http",
+                (string) (len=5) "https"
+              }
+            }
+          }
+        },
+        (operations.Url) {
+          Url: (string) (len=36) "https://{environment}.example.com/v2",
+          Variables: ([]operations.Variable) (len=1) {
+            (operations.Variable) {
+              Name: (string) (len=11) "environment",
+              Values: ([]string) (len=3) {
+                (string) (len=3) "api",
+                (string) (len=7) "api.dev",
+                (string) (len=11) "api.staging"
+              }
+            }
+          }
+        },
+        (operations.Url) {
+          Url: (string) (len=11) "{server}/v1",
+          Variables: ([]operations.Variable) (len=1) {
+            (operations.Variable) {
+              Name: (string) (len=6) "server",
+              Values: ([]string) (len=1) {
+                (string) (len=23) "https://api.example.com"
+              }
+            }
+          }
+        }
+      }
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=9) "operation",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-openapi.yaml",
+      Language: (string) (len=4) "YAML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(130),
+      ColumnNumber: (*int)(5),
+      Text: (*string)((len=3) "get")
+    },
+    Value: (operations.Operation) {
+      Path: (string) (len=17) "/pet/findByStatus",
+      Type: (string) (len=3) "GET",
+      Urls: ([]operations.Url) (len=3) {
+        (operations.Url) {
+          Url: (string) (len=28) "{protocol}://api.example.com",
+          Variables: ([]operations.Variable) (len=1) {
+            (operations.Variable) {
+              Name: (string) (len=8) "protocol",
+              Values: ([]string) (len=2) {
+                (string) (len=4) "http",
+                (string) (len=5) "https"
+              }
+            }
+          }
+        },
+        (operations.Url) {
+          Url: (string) (len=36) "https://{environment}.example.com/v2",
+          Variables: ([]operations.Variable) (len=1) {
+            (operations.Variable) {
+              Name: (string) (len=11) "environment",
+              Values: ([]string) (len=3) {
+                (string) (len=3) "api",
+                (string) (len=7) "api.dev",
+                (string) (len=11) "api.staging"
+              }
+            }
+          }
+        },
+        (operations.Url) {
+          Url: (string) (len=11) "{server}/v1",
+          Variables: ([]operations.Variable) (len=1) {
+            (operations.Variable) {
+              Name: (string) (len=6) "server",
+              Values: ([]string) (len=1) {
+                (string) (len=23) "https://api.example.com"
+              }
+            }
+          }
+        }
+      }
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=9) "operation",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-openapi.yaml",
+      Language: (string) (len=4) "YAML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(170),
+      ColumnNumber: (*int)(5),
+      Text: (*string)((len=3) "get")
+    },
+    Value: (operations.Operation) {
+      Path: (string) (len=15) "/pet/findByTags",
+      Type: (string) (len=3) "GET",
+      Urls: ([]operations.Url) (len=3) {
+        (operations.Url) {
+          Url: (string) (len=28) "{protocol}://api.example.com",
+          Variables: ([]operations.Variable) (len=1) {
+            (operations.Variable) {
+              Name: (string) (len=8) "protocol",
+              Values: ([]string) (len=2) {
+                (string) (len=4) "http",
+                (string) (len=5) "https"
+              }
+            }
+          }
+        },
+        (operations.Url) {
+          Url: (string) (len=36) "https://{environment}.example.com/v2",
+          Variables: ([]operations.Variable) (len=1) {
+            (operations.Variable) {
+              Name: (string) (len=11) "environment",
+              Values: ([]string) (len=3) {
+                (string) (len=3) "api",
+                (string) (len=7) "api.dev",
+                (string) (len=11) "api.staging"
+              }
+            }
+          }
+        },
+        (operations.Url) {
+          Url: (string) (len=11) "{server}/v1",
+          Variables: ([]operations.Variable) (len=1) {
+            (operations.Variable) {
+              Name: (string) (len=6) "server",
+              Values: ([]string) (len=1) {
+                (string) (len=23) "https://api.example.com"
+              }
+            }
+          }
+        }
+      }
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=9) "operation",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-openapi.yaml",
+      Language: (string) (len=4) "YAML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(209),
+      ColumnNumber: (*int)(5),
+      Text: (*string)((len=3) "get")
+    },
+    Value: (operations.Operation) {
+      Path: (string) (len=6) "/pet/*",
+      Type: (string) (len=3) "GET",
+      Urls: ([]operations.Url) (len=3) {
+        (operations.Url) {
+          Url: (string) (len=28) "{protocol}://api.example.com",
+          Variables: ([]operations.Variable) (len=1) {
+            (operations.Variable) {
+              Name: (string) (len=8) "protocol",
+              Values: ([]string) (len=2) {
+                (string) (len=4) "http",
+                (string) (len=5) "https"
+              }
+            }
+          }
+        },
+        (operations.Url) {
+          Url: (string) (len=36) "https://{environment}.example.com/v2",
+          Variables: ([]operations.Variable) (len=1) {
+            (operations.Variable) {
+              Name: (string) (len=11) "environment",
+              Values: ([]string) (len=3) {
+                (string) (len=3) "api",
+                (string) (len=7) "api.dev",
+                (string) (len=11) "api.staging"
+              }
+            }
+          }
+        },
+        (operations.Url) {
+          Url: (string) (len=11) "{server}/v1",
+          Variables: ([]operations.Variable) (len=1) {
+            (operations.Variable) {
+              Name: (string) (len=6) "server",
+              Values: ([]string) (len=1) {
+                (string) (len=23) "https://api.example.com"
+              }
+            }
+          }
+        }
+      }
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=9) "operation",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-openapi.yaml",
+      Language: (string) (len=4) "YAML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(249),
+      ColumnNumber: (*int)(5),
+      Text: (*string)((len=4) "post")
+    },
+    Value: (operations.Operation) {
+      Path: (string) (len=6) "/pet/*",
+      Type: (string) (len=4) "POST",
+      Urls: ([]operations.Url) (len=3) {
+        (operations.Url) {
+          Url: (string) (len=28) "{protocol}://api.example.com",
+          Variables: ([]operations.Variable) (len=1) {
+            (operations.Variable) {
+              Name: (string) (len=8) "protocol",
+              Values: ([]string) (len=2) {
+                (string) (len=4) "http",
+                (string) (len=5) "https"
+              }
+            }
+          }
+        },
+        (operations.Url) {
+          Url: (string) (len=36) "https://{environment}.example.com/v2",
+          Variables: ([]operations.Variable) (len=1) {
+            (operations.Variable) {
+              Name: (string) (len=11) "environment",
+              Values: ([]string) (len=3) {
+                (string) (len=3) "api",
+                (string) (len=7) "api.dev",
+                (string) (len=11) "api.staging"
+              }
+            }
+          }
+        },
+        (operations.Url) {
+          Url: (string) (len=11) "{server}/v1",
+          Variables: ([]operations.Variable) (len=1) {
+            (operations.Variable) {
+              Name: (string) (len=6) "server",
+              Values: ([]string) (len=1) {
+                (string) (len=23) "https://api.example.com"
+              }
+            }
+          }
+        }
+      }
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=9) "operation",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-openapi.yaml",
+      Language: (string) (len=4) "YAML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(280),
+      ColumnNumber: (*int)(5),
+      Text: (*string)((len=6) "delete")
+    },
+    Value: (operations.Operation) {
+      Path: (string) (len=6) "/pet/*",
+      Type: (string) (len=6) "DELETE",
+      Urls: ([]operations.Url) (len=3) {
+        (operations.Url) {
+          Url: (string) (len=28) "{protocol}://api.example.com",
+          Variables: ([]operations.Variable) (len=1) {
+            (operations.Variable) {
+              Name: (string) (len=8) "protocol",
+              Values: ([]string) (len=2) {
+                (string) (len=4) "http",
+                (string) (len=5) "https"
+              }
+            }
+          }
+        },
+        (operations.Url) {
+          Url: (string) (len=36) "https://{environment}.example.com/v2",
+          Variables: ([]operations.Variable) (len=1) {
+            (operations.Variable) {
+              Name: (string) (len=11) "environment",
+              Values: ([]string) (len=3) {
+                (string) (len=3) "api",
+                (string) (len=7) "api.dev",
+                (string) (len=11) "api.staging"
+              }
+            }
+          }
+        },
+        (operations.Url) {
+          Url: (string) (len=11) "{server}/v1",
+          Variables: ([]operations.Variable) (len=1) {
+            (operations.Variable) {
+              Name: (string) (len=6) "server",
+              Values: ([]string) (len=1) {
+                (string) (len=23) "https://api.example.com"
+              }
+            }
+          }
+        }
+      }
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=9) "operation",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-openapi.yaml",
+      Language: (string) (len=4) "YAML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(308),
+      ColumnNumber: (*int)(5),
+      Text: (*string)((len=4) "post")
+    },
+    Value: (operations.Operation) {
+      Path: (string) (len=18) "/pet/*/uploadImage",
+      Type: (string) (len=4) "POST",
+      Urls: ([]operations.Url) (len=3) {
+        (operations.Url) {
+          Url: (string) (len=28) "{protocol}://api.example.com",
+          Variables: ([]operations.Variable) (len=1) {
+            (operations.Variable) {
+              Name: (string) (len=8) "protocol",
+              Values: ([]string) (len=2) {
+                (string) (len=4) "http",
+                (string) (len=5) "https"
+              }
+            }
+          }
+        },
+        (operations.Url) {
+          Url: (string) (len=36) "https://{environment}.example.com/v2",
+          Variables: ([]operations.Variable) (len=1) {
+            (operations.Variable) {
+              Name: (string) (len=11) "environment",
+              Values: ([]string) (len=3) {
+                (string) (len=3) "api",
+                (string) (len=7) "api.dev",
+                (string) (len=11) "api.staging"
+              }
+            }
+          }
+        },
+        (operations.Url) {
+          Url: (string) (len=11) "{server}/v1",
+          Variables: ([]operations.Variable) (len=1) {
+            (operations.Variable) {
+              Name: (string) (len=6) "server",
+              Values: ([]string) (len=1) {
+                (string) (len=23) "https://api.example.com"
+              }
+            }
+          }
+        }
+      }
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=9) "operation",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-openapi.yaml",
+      Language: (string) (len=4) "YAML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(346),
+      ColumnNumber: (*int)(5),
+      Text: (*string)((len=3) "get")
+    },
+    Value: (operations.Operation) {
+      Path: (string) (len=16) "/store/inventory",
+      Type: (string) (len=3) "GET",
+      Urls: ([]operations.Url) (len=3) {
+        (operations.Url) {
+          Url: (string) (len=28) "{protocol}://api.example.com",
+          Variables: ([]operations.Variable) (len=1) {
+            (operations.Variable) {
+              Name: (string) (len=8) "protocol",
+              Values: ([]string) (len=2) {
+                (string) (len=4) "http",
+                (string) (len=5) "https"
+              }
+            }
+          }
+        },
+        (operations.Url) {
+          Url: (string) (len=36) "https://{environment}.example.com/v2",
+          Variables: ([]operations.Variable) (len=1) {
+            (operations.Variable) {
+              Name: (string) (len=11) "environment",
+              Values: ([]string) (len=3) {
+                (string) (len=3) "api",
+                (string) (len=7) "api.dev",
+                (string) (len=11) "api.staging"
+              }
+            }
+          }
+        },
+        (operations.Url) {
+          Url: (string) (len=11) "{server}/v1",
+          Variables: ([]operations.Variable) (len=1) {
+            (operations.Variable) {
+              Name: (string) (len=6) "server",
+              Values: ([]string) (len=1) {
+                (string) (len=23) "https://api.example.com"
+              }
+            }
+          }
+        }
+      }
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=9) "operation",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-openapi.yaml",
+      Language: (string) (len=4) "YAML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(366),
+      ColumnNumber: (*int)(5),
+      Text: (*string)((len=4) "post")
+    },
+    Value: (operations.Operation) {
+      Path: (string) (len=12) "/store/order",
+      Type: (string) (len=4) "POST",
+      Urls: ([]operations.Url) (len=3) {
+        (operations.Url) {
+          Url: (string) (len=28) "{protocol}://api.example.com",
+          Variables: ([]operations.Variable) (len=1) {
+            (operations.Variable) {
+              Name: (string) (len=8) "protocol",
+              Values: ([]string) (len=2) {
+                (string) (len=4) "http",
+                (string) (len=5) "https"
+              }
+            }
+          }
+        },
+        (operations.Url) {
+          Url: (string) (len=36) "https://{environment}.example.com/v2",
+          Variables: ([]operations.Variable) (len=1) {
+            (operations.Variable) {
+              Name: (string) (len=11) "environment",
+              Values: ([]string) (len=3) {
+                (string) (len=3) "api",
+                (string) (len=7) "api.dev",
+                (string) (len=11) "api.staging"
+              }
+            }
+          }
+        },
+        (operations.Url) {
+          Url: (string) (len=11) "{server}/v1",
+          Variables: ([]operations.Variable) (len=1) {
+            (operations.Variable) {
+              Name: (string) (len=6) "server",
+              Values: ([]string) (len=1) {
+                (string) (len=23) "https://api.example.com"
+              }
+            }
+          }
+        }
+      }
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=9) "operation",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-openapi.yaml",
+      Language: (string) (len=4) "YAML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(394),
+      ColumnNumber: (*int)(5),
+      Text: (*string)((len=3) "get")
+    },
+    Value: (operations.Operation) {
+      Path: (string) (len=14) "/store/order/*",
+      Type: (string) (len=3) "GET",
+      Urls: ([]operations.Url) (len=3) {
+        (operations.Url) {
+          Url: (string) (len=28) "{protocol}://api.example.com",
+          Variables: ([]operations.Variable) (len=1) {
+            (operations.Variable) {
+              Name: (string) (len=8) "protocol",
+              Values: ([]string) (len=2) {
+                (string) (len=4) "http",
+                (string) (len=5) "https"
+              }
+            }
+          }
+        },
+        (operations.Url) {
+          Url: (string) (len=36) "https://{environment}.example.com/v2",
+          Variables: ([]operations.Variable) (len=1) {
+            (operations.Variable) {
+              Name: (string) (len=11) "environment",
+              Values: ([]string) (len=3) {
+                (string) (len=3) "api",
+                (string) (len=7) "api.dev",
+                (string) (len=11) "api.staging"
+              }
+            }
+          }
+        },
+        (operations.Url) {
+          Url: (string) (len=11) "{server}/v1",
+          Variables: ([]operations.Variable) (len=1) {
+            (operations.Variable) {
+              Name: (string) (len=6) "server",
+              Values: ([]string) (len=1) {
+                (string) (len=23) "https://api.example.com"
+              }
+            }
+          }
+        }
+      }
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=9) "operation",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-openapi.yaml",
+      Language: (string) (len=4) "YAML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(425),
+      ColumnNumber: (*int)(5),
+      Text: (*string)((len=6) "delete")
+    },
+    Value: (operations.Operation) {
+      Path: (string) (len=14) "/store/order/*",
+      Type: (string) (len=6) "DELETE",
+      Urls: ([]operations.Url) (len=3) {
+        (operations.Url) {
+          Url: (string) (len=28) "{protocol}://api.example.com",
+          Variables: ([]operations.Variable) (len=1) {
+            (operations.Variable) {
+              Name: (string) (len=8) "protocol",
+              Values: ([]string) (len=2) {
+                (string) (len=4) "http",
+                (string) (len=5) "https"
+              }
+            }
+          }
+        },
+        (operations.Url) {
+          Url: (string) (len=36) "https://{environment}.example.com/v2",
+          Variables: ([]operations.Variable) (len=1) {
+            (operations.Variable) {
+              Name: (string) (len=11) "environment",
+              Values: ([]string) (len=3) {
+                (string) (len=3) "api",
+                (string) (len=7) "api.dev",
+                (string) (len=11) "api.staging"
+              }
+            }
+          }
+        },
+        (operations.Url) {
+          Url: (string) (len=11) "{server}/v1",
+          Variables: ([]operations.Variable) (len=1) {
+            (operations.Variable) {
+              Name: (string) (len=6) "server",
+              Values: ([]string) (len=1) {
+                (string) (len=23) "https://api.example.com"
+              }
+            }
+          }
+        }
+      }
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=9) "operation",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-openapi.yaml",
+      Language: (string) (len=4) "YAML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(448),
+      ColumnNumber: (*int)(5),
+      Text: (*string)((len=4) "post")
+    },
+    Value: (operations.Operation) {
+      Path: (string) (len=5) "/user",
+      Type: (string) (len=4) "POST",
+      Urls: ([]operations.Url) (len=3) {
+        (operations.Url) {
+          Url: (string) (len=28) "{protocol}://api.example.com",
+          Variables: ([]operations.Variable) (len=1) {
+            (operations.Variable) {
+              Name: (string) (len=8) "protocol",
+              Values: ([]string) (len=2) {
+                (string) (len=4) "http",
+                (string) (len=5) "https"
+              }
+            }
+          }
+        },
+        (operations.Url) {
+          Url: (string) (len=36) "https://{environment}.example.com/v2",
+          Variables: ([]operations.Variable) (len=1) {
+            (operations.Variable) {
+              Name: (string) (len=11) "environment",
+              Values: ([]string) (len=3) {
+                (string) (len=3) "api",
+                (string) (len=7) "api.dev",
+                (string) (len=11) "api.staging"
+              }
+            }
+          }
+        },
+        (operations.Url) {
+          Url: (string) (len=11) "{server}/v1",
+          Variables: ([]operations.Variable) (len=1) {
+            (operations.Variable) {
+              Name: (string) (len=6) "server",
+              Values: ([]string) (len=1) {
+                (string) (len=23) "https://api.example.com"
+              }
+            }
+          }
+        }
+      }
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=9) "operation",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-openapi.yaml",
+      Language: (string) (len=4) "YAML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(477),
+      ColumnNumber: (*int)(5),
+      Text: (*string)((len=4) "post")
+    },
+    Value: (operations.Operation) {
+      Path: (string) (len=20) "/user/createWithList",
+      Type: (string) (len=4) "POST",
+      Urls: ([]operations.Url) (len=3) {
+        (operations.Url) {
+          Url: (string) (len=28) "{protocol}://api.example.com",
+          Variables: ([]operations.Variable) (len=1) {
+            (operations.Variable) {
+              Name: (string) (len=8) "protocol",
+              Values: ([]string) (len=2) {
+                (string) (len=4) "http",
+                (string) (len=5) "https"
+              }
+            }
+          }
+        },
+        (operations.Url) {
+          Url: (string) (len=36) "https://{environment}.example.com/v2",
+          Variables: ([]operations.Variable) (len=1) {
+            (operations.Variable) {
+              Name: (string) (len=11) "environment",
+              Values: ([]string) (len=3) {
+                (string) (len=3) "api",
+                (string) (len=7) "api.dev",
+                (string) (len=11) "api.staging"
+              }
+            }
+          }
+        },
+        (operations.Url) {
+          Url: (string) (len=11) "{server}/v1",
+          Variables: ([]operations.Variable) (len=1) {
+            (operations.Variable) {
+              Name: (string) (len=6) "server",
+              Values: ([]string) (len=1) {
+                (string) (len=23) "https://api.example.com"
+              }
+            }
+          }
+        }
+      }
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=9) "operation",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-openapi.yaml",
+      Language: (string) (len=4) "YAML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(504),
+      ColumnNumber: (*int)(5),
+      Text: (*string)((len=3) "get")
+    },
+    Value: (operations.Operation) {
+      Path: (string) (len=11) "/user/login",
+      Type: (string) (len=3) "GET",
+      Urls: ([]operations.Url) (len=3) {
+        (operations.Url) {
+          Url: (string) (len=28) "{protocol}://api.example.com",
+          Variables: ([]operations.Variable) (len=1) {
+            (operations.Variable) {
+              Name: (string) (len=8) "protocol",
+              Values: ([]string) (len=2) {
+                (string) (len=4) "http",
+                (string) (len=5) "https"
+              }
+            }
+          }
+        },
+        (operations.Url) {
+          Url: (string) (len=36) "https://{environment}.example.com/v2",
+          Variables: ([]operations.Variable) (len=1) {
+            (operations.Variable) {
+              Name: (string) (len=11) "environment",
+              Values: ([]string) (len=3) {
+                (string) (len=3) "api",
+                (string) (len=7) "api.dev",
+                (string) (len=11) "api.staging"
+              }
+            }
+          }
+        },
+        (operations.Url) {
+          Url: (string) (len=11) "{server}/v1",
+          Variables: ([]operations.Variable) (len=1) {
+            (operations.Variable) {
+              Name: (string) (len=6) "server",
+              Values: ([]string) (len=1) {
+                (string) (len=23) "https://api.example.com"
+              }
+            }
+          }
+        }
+      }
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=9) "operation",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-openapi.yaml",
+      Language: (string) (len=4) "YAML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(547),
+      ColumnNumber: (*int)(5),
+      Text: (*string)((len=3) "get")
+    },
+    Value: (operations.Operation) {
+      Path: (string) (len=12) "/user/logout",
+      Type: (string) (len=3) "GET",
+      Urls: ([]operations.Url) (len=3) {
+        (operations.Url) {
+          Url: (string) (len=28) "{protocol}://api.example.com",
+          Variables: ([]operations.Variable) (len=1) {
+            (operations.Variable) {
+              Name: (string) (len=8) "protocol",
+              Values: ([]string) (len=2) {
+                (string) (len=4) "http",
+                (string) (len=5) "https"
+              }
+            }
+          }
+        },
+        (operations.Url) {
+          Url: (string) (len=36) "https://{environment}.example.com/v2",
+          Variables: ([]operations.Variable) (len=1) {
+            (operations.Variable) {
+              Name: (string) (len=11) "environment",
+              Values: ([]string) (len=3) {
+                (string) (len=3) "api",
+                (string) (len=7) "api.dev",
+                (string) (len=11) "api.staging"
+              }
+            }
+          }
+        },
+        (operations.Url) {
+          Url: (string) (len=11) "{server}/v1",
+          Variables: ([]operations.Variable) (len=1) {
+            (operations.Variable) {
+              Name: (string) (len=6) "server",
+              Values: ([]string) (len=1) {
+                (string) (len=23) "https://api.example.com"
+              }
+            }
+          }
+        }
+      }
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=9) "operation",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-openapi.yaml",
+      Language: (string) (len=4) "YAML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(558),
+      ColumnNumber: (*int)(5),
+      Text: (*string)((len=3) "get")
+    },
+    Value: (operations.Operation) {
+      Path: (string) (len=7) "/user/*",
+      Type: (string) (len=3) "GET",
+      Urls: ([]operations.Url) (len=3) {
+        (operations.Url) {
+          Url: (string) (len=28) "{protocol}://api.example.com",
+          Variables: ([]operations.Variable) (len=1) {
+            (operations.Variable) {
+              Name: (string) (len=8) "protocol",
+              Values: ([]string) (len=2) {
+                (string) (len=4) "http",
+                (string) (len=5) "https"
+              }
+            }
+          }
+        },
+        (operations.Url) {
+          Url: (string) (len=36) "https://{environment}.example.com/v2",
+          Variables: ([]operations.Variable) (len=1) {
+            (operations.Variable) {
+              Name: (string) (len=11) "environment",
+              Values: ([]string) (len=3) {
+                (string) (len=3) "api",
+                (string) (len=7) "api.dev",
+                (string) (len=11) "api.staging"
+              }
+            }
+          }
+        },
+        (operations.Url) {
+          Url: (string) (len=11) "{server}/v1",
+          Variables: ([]operations.Variable) (len=1) {
+            (operations.Variable) {
+              Name: (string) (len=6) "server",
+              Values: ([]string) (len=1) {
+                (string) (len=23) "https://api.example.com"
+              }
+            }
+          }
+        }
+      }
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=9) "operation",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-openapi.yaml",
+      Language: (string) (len=4) "YAML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(585),
+      ColumnNumber: (*int)(5),
+      Text: (*string)((len=3) "put")
+    },
+    Value: (operations.Operation) {
+      Path: (string) (len=7) "/user/*",
+      Type: (string) (len=3) "PUT",
+      Urls: ([]operations.Url) (len=3) {
+        (operations.Url) {
+          Url: (string) (len=28) "{protocol}://api.example.com",
+          Variables: ([]operations.Variable) (len=1) {
+            (operations.Variable) {
+              Name: (string) (len=8) "protocol",
+              Values: ([]string) (len=2) {
+                (string) (len=4) "http",
+                (string) (len=5) "https"
+              }
+            }
+          }
+        },
+        (operations.Url) {
+          Url: (string) (len=36) "https://{environment}.example.com/v2",
+          Variables: ([]operations.Variable) (len=1) {
+            (operations.Variable) {
+              Name: (string) (len=11) "environment",
+              Values: ([]string) (len=3) {
+                (string) (len=3) "api",
+                (string) (len=7) "api.dev",
+                (string) (len=11) "api.staging"
+              }
+            }
+          }
+        },
+        (operations.Url) {
+          Url: (string) (len=11) "{server}/v1",
+          Variables: ([]operations.Variable) (len=1) {
+            (operations.Variable) {
+              Name: (string) (len=6) "server",
+              Values: ([]string) (len=1) {
+                (string) (len=23) "https://api.example.com"
+              }
+            }
+          }
+        }
+      }
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=9) "operation",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-openapi.yaml",
+      Language: (string) (len=4) "YAML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(614),
+      ColumnNumber: (*int)(5),
+      Text: (*string)((len=6) "delete")
+    },
+    Value: (operations.Operation) {
+      Path: (string) (len=7) "/user/*",
+      Type: (string) (len=6) "DELETE",
+      Urls: ([]operations.Url) (len=3) {
+        (operations.Url) {
+          Url: (string) (len=28) "{protocol}://api.example.com",
+          Variables: ([]operations.Variable) (len=1) {
+            (operations.Variable) {
+              Name: (string) (len=8) "protocol",
+              Values: ([]string) (len=2) {
+                (string) (len=4) "http",
+                (string) (len=5) "https"
+              }
+            }
+          }
+        },
+        (operations.Url) {
+          Url: (string) (len=36) "https://{environment}.example.com/v2",
+          Variables: ([]operations.Variable) (len=1) {
+            (operations.Variable) {
+              Name: (string) (len=11) "environment",
+              Values: ([]string) (len=3) {
+                (string) (len=3) "api",
+                (string) (len=7) "api.dev",
+                (string) (len=11) "api.staging"
+              }
+            }
+          }
+        },
+        (operations.Url) {
+          Url: (string) (len=11) "{server}/v1",
+          Variables: ([]operations.Variable) (len=1) {
+            (operations.Variable) {
+              Name: (string) (len=6) "server",
+              Values: ([]string) (len=1) {
+                (string) (len=23) "https://api.example.com"
+              }
+            }
+          }
+        }
+      }
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-openapi.yaml",
+      Language: (string) (len=4) "YAML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(137),
+      ColumnNumber: (*int)(17),
+      Text: (*string)((len=8) "\"status\"")
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=16) "findPetsByStatus",
+      ObjectUUID: (string) (len=4) "3156",
+      FieldName: (string) (len=6) "status",
+      FieldUUID: (string) (len=4) "3165",
+      FieldType: (string) (len=6) "string",
+      SimpleFieldType: (string) (len=6) "string"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-openapi.yaml",
+      Language: (string) (len=4) "YAML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(179),
+      ColumnNumber: (*int)(17),
+      Text: (*string)((len=4) "tags")
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=14) "findPetsByTags",
+      ObjectUUID: (string) (len=4) "3398",
+      FieldName: (string) (len=4) "tags",
+      FieldUUID: (string) (len=4) "3408",
+      FieldType: (string) (len=5) "array",
+      SimpleFieldType: (string) (len=6) "object"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-openapi.yaml",
+      Language: (string) (len=4) "YAML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(216),
+      ColumnNumber: (*int)(17),
+      Text: (*string)((len=6) "petId1")
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=10) "getPetById",
+      ObjectUUID: (string) (len=4) "3629",
+      FieldName: (string) (len=6) "petId1",
+      FieldUUID: (string) (len=4) "3639",
+      FieldType: (string) (len=7) "integer",
+      SimpleFieldType: (string) (len=6) "number"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-openapi.yaml",
+      Language: (string) (len=4) "YAML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(223),
+      ColumnNumber: (*int)(17),
+      Text: (*string)((len=6) "petId2")
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=10) "getPetById",
+      ObjectUUID: (string) (len=4) "3629",
+      FieldName: (string) (len=6) "petId2",
+      FieldUUID: (string) (len=4) "3690",
+      FieldType: (string) (len=7) "integer",
+      SimpleFieldType: (string) (len=6) "number"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-openapi.yaml",
+      Language: (string) (len=4) "YAML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(256),
+      ColumnNumber: (*int)(17),
+      Text: (*string)((len=5) "petId")
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=17) "updatePetWithForm",
+      ObjectUUID: (string) (len=4) "3887",
+      FieldName: (string) (len=5) "petId",
+      FieldUUID: (string) (len=4) "3897",
+      FieldType: (string) (len=7) "integer",
+      SimpleFieldType: (string) (len=6) "number"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-openapi.yaml",
+      Language: (string) (len=4) "YAML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(263),
+      ColumnNumber: (*int)(17),
+      Text: (*string)((len=4) "name")
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=17) "updatePetWithForm",
+      ObjectUUID: (string) (len=4) "3887",
+      FieldName: (string) (len=4) "name",
+      FieldUUID: (string) (len=4) "3948",
+      FieldType: (string) (len=6) "string",
+      SimpleFieldType: (string) (len=6) "string"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-openapi.yaml",
+      Language: (string) (len=4) "YAML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(268),
+      ColumnNumber: (*int)(17),
+      Text: (*string)((len=6) "status")
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=17) "updatePetWithForm",
+      ObjectUUID: (string) (len=4) "3887",
+      FieldName: (string) (len=6) "status",
+      FieldUUID: (string) (len=4) "3985",
+      FieldType: (string) (len=6) "string",
+      SimpleFieldType: (string) (len=6) "string"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-openapi.yaml",
+      Language: (string) (len=4) "YAML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(287),
+      ColumnNumber: (*int)(17),
+      Text: (*string)((len=7) "api_key")
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=9) "deletePet",
+      ObjectUUID: (string) (len=4) "4093",
+      FieldName: (string) (len=7) "api_key",
+      FieldUUID: (string) (len=4) "4103",
+      FieldType: (string) (len=6) "string",
+      SimpleFieldType: (string) (len=6) "string"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-openapi.yaml",
+      Language: (string) (len=4) "YAML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(293),
+      ColumnNumber: (*int)(17),
+      Text: (*string)((len=5) "petId")
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=9) "deletePet",
+      ObjectUUID: (string) (len=4) "4093",
+      FieldName: (string) (len=5) "petId",
+      FieldUUID: (string) (len=4) "4146",
+      FieldType: (string) (len=7) "integer",
+      SimpleFieldType: (string) (len=6) "number"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-openapi.yaml",
+      Language: (string) (len=4) "YAML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(315),
+      ColumnNumber: (*int)(17),
+      Text: (*string)((len=5) "petId")
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=10) "uploadFile",
+      ObjectUUID: (string) (len=4) "4273",
+      FieldName: (string) (len=5) "petId",
+      FieldUUID: (string) (len=4) "4283",
+      FieldType: (string) (len=7) "integer",
+      SimpleFieldType: (string) (len=6) "number"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-openapi.yaml",
+      Language: (string) (len=4) "YAML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(322),
+      ColumnNumber: (*int)(17),
+      Text: (*string)((len=18) "additionalMetadata")
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=10) "uploadFile",
+      ObjectUUID: (string) (len=4) "4273",
+      FieldName: (string) (len=18) "additionalMetadata",
+      FieldUUID: (string) (len=4) "4334",
+      FieldType: (string) (len=6) "string",
+      SimpleFieldType: (string) (len=6) "string"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-openapi.yaml",
+      Language: (string) (len=4) "YAML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(404),
+      ColumnNumber: (*int)(17),
+      Text: (*string)((len=7) "orderId")
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=12) "getOrderById",
+      ObjectUUID: (string) (len=4) "4821",
+      FieldName: (string) (len=7) "orderId",
+      FieldUUID: (string) (len=4) "4831",
+      FieldType: (string) (len=7) "integer",
+      SimpleFieldType: (string) (len=6) "number"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-openapi.yaml",
+      Language: (string) (len=4) "YAML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(435),
+      ColumnNumber: (*int)(17),
+      Text: (*string)((len=7) "orderId")
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=11) "deleteOrder",
+      ObjectUUID: (string) (len=4) "5005",
+      FieldName: (string) (len=7) "orderId",
+      FieldUUID: (string) (len=4) "5015",
+      FieldType: (string) (len=7) "integer",
+      SimpleFieldType: (string) (len=6) "number"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-openapi.yaml",
+      Language: (string) (len=4) "YAML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(511),
+      ColumnNumber: (*int)(17),
+      Text: (*string)((len=8) "username")
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=9) "loginUser",
+      ObjectUUID: (string) (len=4) "5476",
+      FieldName: (string) (len=8) "username",
+      FieldUUID: (string) (len=4) "5486",
+      FieldType: (string) (len=6) "string",
+      SimpleFieldType: (string) (len=6) "string"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-openapi.yaml",
+      Language: (string) (len=4) "YAML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(517),
+      ColumnNumber: (*int)(17),
+      Text: (*string)((len=8) "password")
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=9) "loginUser",
+      ObjectUUID: (string) (len=4) "5476",
+      FieldName: (string) (len=8) "password",
+      FieldUUID: (string) (len=4) "5530",
+      FieldType: (string) (len=6) "string",
+      SimpleFieldType: (string) (len=6) "string"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-openapi.yaml",
+      Language: (string) (len=4) "YAML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(565),
+      ColumnNumber: (*int)(17),
+      Text: (*string)((len=8) "username")
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=13) "getUserByName",
+      ObjectUUID: (string) (len=4) "5824",
+      FieldName: (string) (len=8) "username",
+      FieldUUID: (string) (len=4) "5834",
+      FieldType: (string) (len=6) "string",
+      SimpleFieldType: (string) (len=6) "string"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-openapi.yaml",
+      Language: (string) (len=4) "YAML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(593),
+      ColumnNumber: (*int)(17),
+      Text: (*string)((len=8) "username")
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=10) "updateUser",
+      ObjectUUID: (string) (len=4) "6001",
+      FieldName: (string) (len=8) "username",
+      FieldUUID: (string) (len=4) "6011",
+      FieldType: (string) (len=6) "string",
+      SimpleFieldType: (string) (len=6) "string"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-openapi.yaml",
+      Language: (string) (len=4) "YAML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(621),
+      ColumnNumber: (*int)(17),
+      Text: (*string)((len=8) "username")
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=10) "deleteUser",
+      ObjectUUID: (string) (len=4) "6180",
+      FieldName: (string) (len=8) "username",
+      FieldUUID: (string) (len=4) "6190",
+      FieldType: (string) (len=6) "string",
+      SimpleFieldType: (string) (len=6) "string"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-openapi.yaml",
+      Language: (string) (len=4) "YAML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(642),
+      ColumnNumber: (*int)(9),
+      Text: (*string)((len=2) "id")
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=5) "Order",
+      ObjectUUID: (string) (len=4) "6310",
+      FieldName: (string) (len=2) "id",
+      FieldUUID: (string) (len=4) "6323",
+      FieldType: (string) (len=7) "integer",
+      SimpleFieldType: (string) (len=6) "number"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-openapi.yaml",
+      Language: (string) (len=4) "YAML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(646),
+      ColumnNumber: (*int)(9),
+      Text: (*string)((len=5) "petId")
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=5) "Order",
+      ObjectUUID: (string) (len=4) "6310",
+      FieldName: (string) (len=5) "petId",
+      FieldUUID: (string) (len=4) "6350",
+      FieldType: (string) (len=7) "integer",
+      SimpleFieldType: (string) (len=6) "number"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-openapi.yaml",
+      Language: (string) (len=4) "YAML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(650),
+      ColumnNumber: (*int)(9),
+      Text: (*string)((len=8) "quantity")
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=5) "Order",
+      ObjectUUID: (string) (len=4) "6310",
+      FieldName: (string) (len=8) "quantity",
+      FieldUUID: (string) (len=4) "6377",
+      FieldType: (string) (len=7) "integer",
+      SimpleFieldType: (string) (len=6) "number"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-openapi.yaml",
+      Language: (string) (len=4) "YAML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(654),
+      ColumnNumber: (*int)(9),
+      Text: (*string)((len=8) "shipDate")
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=5) "Order",
+      ObjectUUID: (string) (len=4) "6310",
+      FieldName: (string) (len=8) "shipDate",
+      FieldUUID: (string) (len=4) "6404",
+      FieldType: (string) (len=6) "string",
+      SimpleFieldType: (string) (len=6) "string"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-openapi.yaml",
+      Language: (string) (len=4) "YAML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(657),
+      ColumnNumber: (*int)(9),
+      Text: (*string)((len=6) "status")
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=5) "Order",
+      ObjectUUID: (string) (len=4) "6310",
+      FieldName: (string) (len=6) "status",
+      FieldUUID: (string) (len=4) "6424",
+      FieldType: (string) (len=6) "string",
+      SimpleFieldType: (string) (len=6) "string"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-openapi.yaml",
+      Language: (string) (len=4) "YAML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(665),
+      ColumnNumber: (*int)(9),
+      Text: (*string)((len=8) "complete")
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=5) "Order",
+      ObjectUUID: (string) (len=4) "6310",
+      FieldName: (string) (len=8) "complete",
+      FieldUUID: (string) (len=4) "6469",
+      FieldType: (string) (len=7) "boolean",
+      SimpleFieldType: (string) (len=7) "boolean"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-openapi.yaml",
+      Language: (string) (len=4) "YAML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(672),
+      ColumnNumber: (*int)(9),
+      Text: (*string)((len=2) "id")
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=8) "Customer",
+      ObjectUUID: (string) (len=4) "6508",
+      FieldName: (string) (len=2) "id",
+      FieldUUID: (string) (len=4) "6514",
+      FieldType: (string) (len=7) "integer",
+      SimpleFieldType: (string) (len=6) "number"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-openapi.yaml",
+      Language: (string) (len=4) "YAML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(676),
+      ColumnNumber: (*int)(9),
+      Text: (*string)((len=8) "username")
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=8) "Customer",
+      ObjectUUID: (string) (len=4) "6508",
+      FieldName: (string) (len=8) "username",
+      FieldUUID: (string) (len=4) "6541",
+      FieldType: (string) (len=6) "string",
+      SimpleFieldType: (string) (len=6) "string"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-openapi.yaml",
+      Language: (string) (len=4) "YAML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(679),
+      ColumnNumber: (*int)(9),
+      Text: (*string)((len=7) "address")
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=8) "Customer",
+      ObjectUUID: (string) (len=4) "6508",
+      FieldName: (string) (len=7) "address",
+      FieldUUID: (string) (len=4) "6561",
+      FieldType: (string) (len=5) "array",
+      SimpleFieldType: (string) (len=6) "object"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-openapi.yaml",
+      Language: (string) (len=4) "YAML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(691),
+      ColumnNumber: (*int)(9),
+      Text: (*string)((len=6) "street")
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=7) "Address",
+      ObjectUUID: (string) (len=4) "6632",
+      FieldName: (string) (len=6) "street",
+      FieldUUID: (string) (len=4) "6638",
+      FieldType: (string) (len=6) "string",
+      SimpleFieldType: (string) (len=6) "string"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-openapi.yaml",
+      Language: (string) (len=4) "YAML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(694),
+      ColumnNumber: (*int)(9),
+      Text: (*string)((len=4) "city")
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=7) "Address",
+      ObjectUUID: (string) (len=4) "6632",
+      FieldName: (string) (len=4) "city",
+      FieldUUID: (string) (len=4) "6658",
+      FieldType: (string) (len=6) "string",
+      SimpleFieldType: (string) (len=6) "string"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-openapi.yaml",
+      Language: (string) (len=4) "YAML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(697),
+      ColumnNumber: (*int)(9),
+      Text: (*string)((len=5) "state")
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=7) "Address",
+      ObjectUUID: (string) (len=4) "6632",
+      FieldName: (string) (len=5) "state",
+      FieldUUID: (string) (len=4) "6678",
+      FieldType: (string) (len=6) "string",
+      SimpleFieldType: (string) (len=6) "string"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-openapi.yaml",
+      Language: (string) (len=4) "YAML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(700),
+      ColumnNumber: (*int)(9),
+      Text: (*string)((len=3) "zip")
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=7) "Address",
+      ObjectUUID: (string) (len=4) "6632",
+      FieldName: (string) (len=3) "zip",
+      FieldUUID: (string) (len=4) "6698",
+      FieldType: (string) (len=6) "string",
+      SimpleFieldType: (string) (len=6) "string"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-openapi.yaml",
+      Language: (string) (len=4) "YAML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(709),
+      ColumnNumber: (*int)(9),
+      Text: (*string)((len=2) "id")
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=8) "Category",
+      ObjectUUID: (string) (len=4) "6744",
+      FieldName: (string) (len=2) "id",
+      FieldUUID: (string) (len=4) "6757",
+      FieldType: (string) (len=7) "integer",
+      SimpleFieldType: (string) (len=6) "number"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-openapi.yaml",
+      Language: (string) (len=4) "YAML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(713),
+      ColumnNumber: (*int)(9),
+      Text: (*string)((len=4) "name")
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=8) "Category",
+      ObjectUUID: (string) (len=4) "6744",
+      FieldName: (string) (len=4) "name",
+      FieldUUID: (string) (len=4) "6784",
+      FieldType: (string) (len=6) "string",
+      SimpleFieldType: (string) (len=6) "string"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-openapi.yaml",
+      Language: (string) (len=4) "YAML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(722),
+      ColumnNumber: (*int)(9),
+      Text: (*string)((len=2) "id")
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=4) "User",
+      ObjectUUID: (string) (len=4) "6830",
+      FieldName: (string) (len=2) "id",
+      FieldUUID: (string) (len=4) "6843",
+      FieldType: (string) (len=6) "object",
+      SimpleFieldType: (string) (len=6) "object"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-openapi.yaml",
+      Language: (string) (len=4) "YAML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(725),
+      ColumnNumber: (*int)(13),
+      Text: (*string)((len=3) "id1")
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=2) "id",
+      ObjectUUID: (string) (len=4) "6843",
+      FieldName: (string) (len=3) "id1",
+      FieldUUID: (string) (len=4) "6856",
+      FieldType: (string) (len=6) "string",
+      SimpleFieldType: (string) (len=6) "string"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-openapi.yaml",
+      Language: (string) (len=4) "YAML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(728),
+      ColumnNumber: (*int)(13),
+      Text: (*string)((len=3) "id2")
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=2) "id",
+      ObjectUUID: (string) (len=4) "6843",
+      FieldName: (string) (len=3) "id2",
+      FieldUUID: (string) (len=4) "6876",
+      FieldType: (string) (len=6) "string",
+      SimpleFieldType: (string) (len=6) "string"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-openapi.yaml",
+      Language: (string) (len=4) "YAML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(731),
+      ColumnNumber: (*int)(9),
+      Text: (*string)((len=8) "username")
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=4) "User",
+      ObjectUUID: (string) (len=4) "6830",
+      FieldName: (string) (len=8) "username",
+      FieldUUID: (string) (len=4) "6902",
+      FieldType: (string) (len=6) "string",
+      SimpleFieldType: (string) (len=6) "string"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-openapi.yaml",
+      Language: (string) (len=4) "YAML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(734),
+      ColumnNumber: (*int)(9),
+      Text: (*string)((len=9) "firstName")
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=4) "User",
+      ObjectUUID: (string) (len=4) "6830",
+      FieldName: (string) (len=9) "firstName",
+      FieldUUID: (string) (len=4) "6922",
+      FieldType: (string) (len=6) "string",
+      SimpleFieldType: (string) (len=6) "string"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-openapi.yaml",
+      Language: (string) (len=4) "YAML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(737),
+      ColumnNumber: (*int)(9),
+      Text: (*string)((len=8) "lastName")
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=4) "User",
+      ObjectUUID: (string) (len=4) "6830",
+      FieldName: (string) (len=8) "lastName",
+      FieldUUID: (string) (len=4) "6942",
+      FieldType: (string) (len=6) "string",
+      SimpleFieldType: (string) (len=6) "string"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-openapi.yaml",
+      Language: (string) (len=4) "YAML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(740),
+      ColumnNumber: (*int)(9),
+      Text: (*string)((len=5) "email")
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=4) "User",
+      ObjectUUID: (string) (len=4) "6830",
+      FieldName: (string) (len=5) "email",
+      FieldUUID: (string) (len=4) "6962",
+      FieldType: (string) (len=6) "string",
+      SimpleFieldType: (string) (len=6) "string"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-openapi.yaml",
+      Language: (string) (len=4) "YAML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(743),
+      ColumnNumber: (*int)(9),
+      Text: (*string)((len=8) "password")
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=4) "User",
+      ObjectUUID: (string) (len=4) "6830",
+      FieldName: (string) (len=8) "password",
+      FieldUUID: (string) (len=4) "6982",
+      FieldType: (string) (len=6) "string",
+      SimpleFieldType: (string) (len=6) "string"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-openapi.yaml",
+      Language: (string) (len=4) "YAML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(746),
+      ColumnNumber: (*int)(9),
+      Text: (*string)((len=5) "phone")
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=4) "User",
+      ObjectUUID: (string) (len=4) "6830",
+      FieldName: (string) (len=5) "phone",
+      FieldUUID: (string) (len=4) "7002",
+      FieldType: (string) (len=6) "string",
+      SimpleFieldType: (string) (len=6) "string"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-openapi.yaml",
+      Language: (string) (len=4) "YAML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(749),
+      ColumnNumber: (*int)(9),
+      Text: (*string)((len=10) "userStatus")
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=4) "User",
+      ObjectUUID: (string) (len=4) "6830",
+      FieldName: (string) (len=10) "userStatus",
+      FieldUUID: (string) (len=4) "7022",
+      FieldType: (string) (len=7) "integer",
+      SimpleFieldType: (string) (len=6) "number"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-openapi.yaml",
+      Language: (string) (len=4) "YAML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(760),
+      ColumnNumber: (*int)(9),
+      Text: (*string)((len=2) "id")
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=3) "Tag",
+      ObjectUUID: (string) (len=4) "7082",
+      FieldName: (string) (len=2) "id",
+      FieldUUID: (string) (len=4) "7095",
+      FieldType: (string) (len=7) "integer",
+      SimpleFieldType: (string) (len=6) "number"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-openapi.yaml",
+      Language: (string) (len=4) "YAML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(763),
+      ColumnNumber: (*int)(9),
+      Text: (*string)((len=4) "name")
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=3) "Tag",
+      ObjectUUID: (string) (len=4) "7082",
+      FieldName: (string) (len=4) "name",
+      FieldUUID: (string) (len=4) "7115",
+      FieldType: (string) (len=6) "string",
+      SimpleFieldType: (string) (len=6) "string"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-openapi.yaml",
+      Language: (string) (len=4) "YAML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(770),
+      ColumnNumber: (*int)(9),
+      Text: (*string)((len=4) "code")
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=11) "ApiResponse",
+      ObjectUUID: (string) (len=4) "7154",
+      FieldName: (string) (len=4) "code",
+      FieldUUID: (string) (len=4) "7160",
+      FieldType: (string) (len=7) "integer",
+      SimpleFieldType: (string) (len=6) "number"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-openapi.yaml",
+      Language: (string) (len=4) "YAML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(773),
+      ColumnNumber: (*int)(9),
+      Text: (*string)((len=4) "type")
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=11) "ApiResponse",
+      ObjectUUID: (string) (len=4) "7154",
+      FieldName: (string) (len=4) "type",
+      FieldUUID: (string) (len=4) "7180",
+      FieldType: (string) (len=6) "string",
+      SimpleFieldType: (string) (len=6) "string"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-openapi.yaml",
+      Language: (string) (len=4) "YAML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(775),
+      ColumnNumber: (*int)(9),
+      Text: (*string)((len=7) "message")
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=11) "ApiResponse",
+      ObjectUUID: (string) (len=4) "7154",
+      FieldName: (string) (len=7) "message",
+      FieldUUID: (string) (len=4) "7193",
+      FieldType: (string) (len=6) "string",
+      SimpleFieldType: (string) (len=6) "string"
+    }
+  })
+}

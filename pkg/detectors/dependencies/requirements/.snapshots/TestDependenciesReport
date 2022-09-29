@@ -1,0 +1,74 @@
+([]*report.Detection) (len=4) {
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=16) "requirements.txt",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=16) "requirements.txt",
+      Language: (string) (len=4) "Text",
+      LanguageType: (string) (len=5) "prose",
+      LineNumber: (*int)(2),
+      ColumnNumber: (*int)(0),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=5) "Babel",
+      Version: (string) (len=5) "0.9.5"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=16) "requirements.txt",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=16) "requirements.txt",
+      Language: (string) (len=4) "Text",
+      LanguageType: (string) (len=5) "prose",
+      LineNumber: (*int)(3),
+      ColumnNumber: (*int)(0),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=8) "CherryPy",
+      Version: (string) (len=7) "unknown"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=16) "requirements.txt",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=16) "requirements.txt",
+      Language: (string) (len=4) "Text",
+      LanguageType: (string) (len=5) "prose",
+      LineNumber: (*int)(4),
+      ColumnNumber: (*int)(0),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=12) "Creoleparser",
+      Version: (string) (len=5) "0.7.1"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=16) "requirements.txt",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=16) "requirements.txt",
+      Language: (string) (len=4) "Text",
+      LanguageType: (string) (len=5) "prose",
+      LineNumber: (*int)(5),
+      ColumnNumber: (*int)(0),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=6) "Genshi",
+      Version: (string) (len=5) "0.5.1"
+    }
+  })
+}

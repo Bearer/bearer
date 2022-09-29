@@ -1,0 +1,598 @@
+([]*report.Detection) (len=18) {
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=3) "php",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=11) "context.php",
+      Language: (string) (len=3) "PHP",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(18),
+      ColumnNumber: (*int)(40),
+      Text: (*string)(<nil>)
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=4) "this",
+      ObjectUUID: (string) (len=1) "8",
+      FieldName: (string) (len=4) "test",
+      FieldUUID: (string) (len=1) "9",
+      FieldType: (string) "",
+      SimpleFieldType: (string) (len=7) "unknown"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=3) "php",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=11) "context.php",
+      Language: (string) (len=3) "PHP",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(18),
+      ColumnNumber: (*int)(57),
+      Text: (*string)(<nil>)
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=4) "this",
+      ObjectUUID: (string) (len=1) "8",
+      FieldName: (string) (len=10) "testmember",
+      FieldUUID: (string) (len=2) "10",
+      FieldType: (string) "",
+      SimpleFieldType: (string) (len=7) "unknown"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=3) "php",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=11) "context.php",
+      Language: (string) (len=3) "PHP",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(24),
+      ColumnNumber: (*int)(13),
+      Text: (*string)(<nil>)
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=3) "Foo",
+      ObjectUUID: (string) (len=1) "1",
+      FieldName: (string) (len=4) "test",
+      FieldUUID: (string) (len=1) "4",
+      FieldType: (string) "",
+      SimpleFieldType: (string) (len=7) "unknown"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=3) "php",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=11) "context.php",
+      Language: (string) (len=3) "PHP",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(25),
+      ColumnNumber: (*int)(13),
+      Text: (*string)(<nil>)
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=3) "Foo",
+      ObjectUUID: (string) (len=1) "1",
+      FieldName: (string) (len=10) "testmember",
+      FieldUUID: (string) (len=1) "5",
+      FieldType: (string) "",
+      SimpleFieldType: (string) (len=7) "unknown"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=3) "php",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=11) "context.php",
+      Language: (string) (len=3) "PHP",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(27),
+      ColumnNumber: (*int)(14),
+      Text: (*string)(<nil>)
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=3) "Foo",
+      ObjectUUID: (string) (len=1) "1",
+      FieldName: (string) (len=11) "aMemberFunc",
+      FieldUUID: (string) (len=1) "3",
+      FieldType: (string) "",
+      SimpleFieldType: (string) (len=7) "unknown"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=3) "php",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=11) "context.php",
+      Language: (string) (len=3) "PHP",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(35),
+      ColumnNumber: (*int)(21),
+      Text: (*string)(<nil>)
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=3) "Foo",
+      ObjectUUID: (string) (len=1) "1",
+      FieldName: (string) (len=11) "__construct",
+      FieldUUID: (string) (len=1) "2",
+      FieldType: (string) "",
+      SimpleFieldType: (string) (len=7) "unknown"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=3) "php",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=11) "context.php",
+      Language: (string) (len=3) "PHP",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(30),
+      ColumnNumber: (*int)(40),
+      Text: (*string)(<nil>)
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=3) "Foo",
+      ObjectUUID: (string) (len=1) "1",
+      FieldName: (string) (len=4) "test",
+      FieldUUID: (string) (len=1) "4",
+      FieldType: (string) "",
+      SimpleFieldType: (string) (len=7) "unknown"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=3) "php",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=11) "context.php",
+      Language: (string) (len=3) "PHP",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(30),
+      ColumnNumber: (*int)(57),
+      Text: (*string)(<nil>)
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=3) "Foo",
+      ObjectUUID: (string) (len=1) "1",
+      FieldName: (string) (len=10) "testmember",
+      FieldUUID: (string) (len=1) "5",
+      FieldType: (string) "",
+      SimpleFieldType: (string) (len=7) "unknown"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=3) "php",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=11) "context.php",
+      Language: (string) (len=3) "PHP",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(39),
+      ColumnNumber: (*int)(40),
+      Text: (*string)(<nil>)
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=3) "Foo",
+      ObjectUUID: (string) (len=1) "1",
+      FieldName: (string) (len=4) "test",
+      FieldUUID: (string) (len=1) "4",
+      FieldType: (string) "",
+      SimpleFieldType: (string) (len=7) "unknown"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=3) "php",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=11) "context.php",
+      Language: (string) (len=3) "PHP",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(39),
+      ColumnNumber: (*int)(57),
+      Text: (*string)(<nil>)
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=3) "Foo",
+      ObjectUUID: (string) (len=1) "1",
+      FieldName: (string) (len=10) "testmember",
+      FieldUUID: (string) (len=1) "5",
+      FieldType: (string) "",
+      SimpleFieldType: (string) (len=7) "unknown"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=3) "php",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=11) "context.php",
+      Language: (string) (len=3) "PHP",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(41),
+      ColumnNumber: (*int)(16),
+      Text: (*string)(<nil>)
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=3) "Foo",
+      ObjectUUID: (string) (len=1) "1",
+      FieldName: (string) (len=4) "name",
+      FieldUUID: (string) (len=1) "7",
+      FieldType: (string) "",
+      SimpleFieldType: (string) (len=7) "unknown"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=9) "interface",
+    DetectorType: (detectors.Type) (len=3) "php",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=11) "context.php",
+      Language: (string) (len=3) "PHP",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(8),
+      ColumnNumber: (*int)(3),
+      Text: (*string)((len=45) "\"https://test.api.com/\".$test.\"/\".$testglobal")
+    },
+    Value: (interfaces.Interface) {
+      Type: (interfaces.Type) (len=3) "url",
+      Value: (*values.Value)({
+        Parts: ([]values.Part) (len=4) {
+          (*values.String)({
+            Type: (values.PartType) (len=6) "string",
+            Value: (string) (len=21) "https://test.api.com/"
+          }),
+          (*values.String)({
+            Type: (values.PartType) (len=6) "string",
+            Value: (string) (len=18) "test anon function"
+          }),
+          (*values.String)({
+            Type: (values.PartType) (len=6) "string",
+            Value: (string) (len=1) "/"
+          }),
+          (*values.String)({
+            Type: (values.PartType) (len=6) "string",
+            Value: (string) (len=6) "global"
+          })
+        }
+      }),
+      VariableName: (string) ""
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=9) "interface",
+    DetectorType: (detectors.Type) (len=3) "php",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=11) "context.php",
+      Language: (string) (len=3) "PHP",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(17),
+      ColumnNumber: (*int)(9),
+      Text: (*string)((len=57) "\"https://test.api.com/\".$test.\"/\".$testmember.$testglobal")
+    },
+    Value: (interfaces.Interface) {
+      Type: (interfaces.Type) (len=3) "url",
+      Value: (*values.Value)({
+        Parts: ([]values.Part) (len=5) {
+          (*values.String)({
+            Type: (values.PartType) (len=6) "string",
+            Value: (string) (len=21) "https://test.api.com/"
+          }),
+          (*values.String)({
+            Type: (values.PartType) (len=6) "string",
+            Value: (string) (len=31) "test anon class member function"
+          }),
+          (*values.String)({
+            Type: (values.PartType) (len=6) "string",
+            Value: (string) (len=1) "/"
+          }),
+          (*values.String)({
+            Type: (values.PartType) (len=6) "string",
+            Value: (string) (len=24) "test anon class property"
+          }),
+          (*values.String)({
+            Type: (values.PartType) (len=6) "string",
+            Value: (string) (len=6) "global"
+          })
+        }
+      }),
+      VariableName: (string) ""
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=9) "interface",
+    DetectorType: (detectors.Type) (len=3) "php",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=11) "context.php",
+      Language: (string) (len=3) "PHP",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(18),
+      ColumnNumber: (*int)(9),
+      Text: (*string)((len=59) "\"https://test.api.com/\".$this->$test.\"/\".$this->$testmember")
+    },
+    Value: (interfaces.Interface) {
+      Type: (interfaces.Type) (len=3) "url",
+      Value: (*values.Value)({
+        Parts: ([]values.Part) (len=4) {
+          (*values.String)({
+            Type: (values.PartType) (len=6) "string",
+            Value: (string) (len=21) "https://test.api.com/"
+          }),
+          (*values.Unknown)({
+            Type: (values.PartType) (len=7) "unknown",
+            Parts: ([]values.Part) (len=2) {
+              (*values.VariableReference)({
+                Type: (values.PartType) (len=18) "variable_reference",
+                Identifier: (variables.Identifier) {
+                  Type: (variables.Type) (len=8) "variable",
+                  Name: (string) (len=4) "this"
+                }
+              }),
+              (*values.VariableReference)({
+                Type: (values.PartType) (len=18) "variable_reference",
+                Identifier: (variables.Identifier) {
+                  Type: (variables.Type) (len=8) "variable",
+                  Name: (string) (len=4) "test"
+                }
+              })
+            }
+          }),
+          (*values.String)({
+            Type: (values.PartType) (len=6) "string",
+            Value: (string) (len=1) "/"
+          }),
+          (*values.Unknown)({
+            Type: (values.PartType) (len=7) "unknown",
+            Parts: ([]values.Part) (len=2) {
+              (*values.VariableReference)({
+                Type: (values.PartType) (len=18) "variable_reference",
+                Identifier: (variables.Identifier) {
+                  Type: (variables.Type) (len=8) "variable",
+                  Name: (string) (len=4) "this"
+                }
+              }),
+              (*values.VariableReference)({
+                Type: (values.PartType) (len=18) "variable_reference",
+                Identifier: (variables.Identifier) {
+                  Type: (variables.Type) (len=8) "variable",
+                  Name: (string) (len=10) "testmember"
+                }
+              })
+            }
+          })
+        }
+      }),
+      VariableName: (string) ""
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=9) "interface",
+    DetectorType: (detectors.Type) (len=3) "php",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=11) "context.php",
+      Language: (string) (len=3) "PHP",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(29),
+      ColumnNumber: (*int)(9),
+      Text: (*string)((len=57) "\"https://test.api.com/\".$test.\"/\".$testmember.$testglobal")
+    },
+    Value: (interfaces.Interface) {
+      Type: (interfaces.Type) (len=3) "url",
+      Value: (*values.Value)({
+        Parts: ([]values.Part) (len=5) {
+          (*values.String)({
+            Type: (values.PartType) (len=6) "string",
+            Value: (string) (len=21) "https://test.api.com/"
+          }),
+          (*values.String)({
+            Type: (values.PartType) (len=6) "string",
+            Value: (string) (len=26) "test class member function"
+          }),
+          (*values.String)({
+            Type: (values.PartType) (len=6) "string",
+            Value: (string) (len=1) "/"
+          }),
+          (*values.String)({
+            Type: (values.PartType) (len=6) "string",
+            Value: (string) (len=19) "test class property"
+          }),
+          (*values.String)({
+            Type: (values.PartType) (len=6) "string",
+            Value: (string) (len=6) "global"
+          })
+        }
+      }),
+      VariableName: (string) ""
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=9) "interface",
+    DetectorType: (detectors.Type) (len=3) "php",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=11) "context.php",
+      Language: (string) (len=3) "PHP",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(30),
+      ColumnNumber: (*int)(9),
+      Text: (*string)((len=59) "\"https://test.api.com/\".$this->$test.\"/\".$this->$testmember")
+    },
+    Value: (interfaces.Interface) {
+      Type: (interfaces.Type) (len=3) "url",
+      Value: (*values.Value)({
+        Parts: ([]values.Part) (len=4) {
+          (*values.String)({
+            Type: (values.PartType) (len=6) "string",
+            Value: (string) (len=21) "https://test.api.com/"
+          }),
+          (*values.Unknown)({
+            Type: (values.PartType) (len=7) "unknown",
+            Parts: ([]values.Part) (len=2) {
+              (*values.VariableReference)({
+                Type: (values.PartType) (len=18) "variable_reference",
+                Identifier: (variables.Identifier) {
+                  Type: (variables.Type) (len=8) "variable",
+                  Name: (string) (len=4) "this"
+                }
+              }),
+              (*values.VariableReference)({
+                Type: (values.PartType) (len=18) "variable_reference",
+                Identifier: (variables.Identifier) {
+                  Type: (variables.Type) (len=8) "variable",
+                  Name: (string) (len=4) "test"
+                }
+              })
+            }
+          }),
+          (*values.String)({
+            Type: (values.PartType) (len=6) "string",
+            Value: (string) (len=1) "/"
+          }),
+          (*values.Unknown)({
+            Type: (values.PartType) (len=7) "unknown",
+            Parts: ([]values.Part) (len=2) {
+              (*values.VariableReference)({
+                Type: (values.PartType) (len=18) "variable_reference",
+                Identifier: (variables.Identifier) {
+                  Type: (variables.Type) (len=8) "variable",
+                  Name: (string) (len=4) "this"
+                }
+              }),
+              (*values.VariableReference)({
+                Type: (values.PartType) (len=18) "variable_reference",
+                Identifier: (variables.Identifier) {
+                  Type: (variables.Type) (len=8) "variable",
+                  Name: (string) (len=10) "testmember"
+                }
+              })
+            }
+          })
+        }
+      }),
+      VariableName: (string) ""
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=9) "interface",
+    DetectorType: (detectors.Type) (len=3) "php",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=11) "context.php",
+      Language: (string) (len=3) "PHP",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(38),
+      ColumnNumber: (*int)(9),
+      Text: (*string)((len=61) "\"https://test.api.com/\".$test.\"/\".$testmember.\"/\".$testglobal")
+    },
+    Value: (interfaces.Interface) {
+      Type: (interfaces.Type) (len=3) "url",
+      Value: (*values.Value)({
+        Parts: ([]values.Part) (len=6) {
+          (*values.String)({
+            Type: (values.PartType) (len=6) "string",
+            Value: (string) (len=21) "https://test.api.com/"
+          }),
+          (*values.String)({
+            Type: (values.PartType) (len=6) "string",
+            Value: (string) (len=29) "test class member constructor"
+          }),
+          (*values.String)({
+            Type: (values.PartType) (len=6) "string",
+            Value: (string) (len=1) "/"
+          }),
+          (*values.String)({
+            Type: (values.PartType) (len=6) "string",
+            Value: (string) (len=19) "test class property"
+          }),
+          (*values.String)({
+            Type: (values.PartType) (len=6) "string",
+            Value: (string) (len=1) "/"
+          }),
+          (*values.String)({
+            Type: (values.PartType) (len=6) "string",
+            Value: (string) (len=6) "global"
+          })
+        }
+      }),
+      VariableName: (string) ""
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=9) "interface",
+    DetectorType: (detectors.Type) (len=3) "php",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=11) "context.php",
+      Language: (string) (len=3) "PHP",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(39),
+      ColumnNumber: (*int)(9),
+      Text: (*string)((len=59) "\"https://test.api.com/\".$this->$test.\"/\".$this->$testmember")
+    },
+    Value: (interfaces.Interface) {
+      Type: (interfaces.Type) (len=3) "url",
+      Value: (*values.Value)({
+        Parts: ([]values.Part) (len=4) {
+          (*values.String)({
+            Type: (values.PartType) (len=6) "string",
+            Value: (string) (len=21) "https://test.api.com/"
+          }),
+          (*values.Unknown)({
+            Type: (values.PartType) (len=7) "unknown",
+            Parts: ([]values.Part) (len=2) {
+              (*values.VariableReference)({
+                Type: (values.PartType) (len=18) "variable_reference",
+                Identifier: (variables.Identifier) {
+                  Type: (variables.Type) (len=8) "variable",
+                  Name: (string) (len=4) "this"
+                }
+              }),
+              (*values.VariableReference)({
+                Type: (values.PartType) (len=18) "variable_reference",
+                Identifier: (variables.Identifier) {
+                  Type: (variables.Type) (len=8) "variable",
+                  Name: (string) (len=4) "test"
+                }
+              })
+            }
+          }),
+          (*values.String)({
+            Type: (values.PartType) (len=6) "string",
+            Value: (string) (len=1) "/"
+          }),
+          (*values.Unknown)({
+            Type: (values.PartType) (len=7) "unknown",
+            Parts: ([]values.Part) (len=2) {
+              (*values.VariableReference)({
+                Type: (values.PartType) (len=18) "variable_reference",
+                Identifier: (variables.Identifier) {
+                  Type: (variables.Type) (len=8) "variable",
+                  Name: (string) (len=4) "this"
+                }
+              }),
+              (*values.VariableReference)({
+                Type: (values.PartType) (len=18) "variable_reference",
+                Identifier: (variables.Identifier) {
+                  Type: (variables.Type) (len=8) "variable",
+                  Name: (string) (len=10) "testmember"
+                }
+              })
+            }
+          })
+        }
+      }),
+      VariableName: (string) ""
+    }
+  })
+}

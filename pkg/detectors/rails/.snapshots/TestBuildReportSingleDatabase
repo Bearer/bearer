@@ -1,0 +1,20 @@
+([]*report.FrameworkDetection) (len=1) {
+  (*report.FrameworkDetection)({
+    Type: (report.DetectionType) (len=9) "framework",
+    DetectorType: (detectors.Type) (len=5) "rails",
+    FrameworkType: (frameworks.Type) (len=8) "database",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=19) "config/database.yml",
+      Language: (string) (len=4) "YAML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(26),
+      ColumnNumber: (*int)(<nil>),
+      Text: (*string)(<nil>)
+    },
+    Value: (*rails.Database)({
+      Name: (string) "",
+      Adapter: (string) (len=10) "postgresql"
+    })
+  })
+}

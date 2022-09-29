@@ -1,0 +1,52 @@
+([]*report.Detection) (len=2) {
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=9) "interface",
+    DetectorType: (detectors.Type) (len=8) "env_file",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=14) ".envrc.example",
+      Language: (string) "",
+      LanguageType: (string) "",
+      LineNumber: (*int)(7),
+      ColumnNumber: (*int)(8),
+      Text: (*string)((len=52) "AGENT_REPORT_HOST=\"https://agent.staging.google.com\"")
+    },
+    Value: (interfaces.Interface) {
+      Type: (interfaces.Type) (len=3) "url",
+      Value: (*values.Value)({
+        Parts: ([]values.Part) (len=1) {
+          (*values.String)({
+            Type: (values.PartType) (len=6) "string",
+            Value: (string) (len=32) "https://agent.staging.google.com"
+          })
+        }
+      }),
+      VariableName: (string) (len=17) "AGENT_REPORT_HOST"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=9) "interface",
+    DetectorType: (detectors.Type) (len=8) "env_file",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=14) ".envrc.example",
+      Language: (string) "",
+      LanguageType: (string) "",
+      LineNumber: (*int)(8),
+      ColumnNumber: (*int)(8),
+      Text: (*string)((len=75) "WEBHOOKS_ADDRESS=\"https://webhooks.staging.google.com/webhook/webhook/v1/t\"")
+    },
+    Value: (interfaces.Interface) {
+      Type: (interfaces.Type) (len=3) "url",
+      Value: (*values.Value)({
+        Parts: ([]values.Part) (len=1) {
+          (*values.String)({
+            Type: (values.PartType) (len=6) "string",
+            Value: (string) (len=56) "https://webhooks.staging.google.com/webhook/webhook/v1/t"
+          })
+        }
+      }),
+      VariableName: (string) (len=16) "WEBHOOKS_ADDRESS"
+    }
+  })
+}

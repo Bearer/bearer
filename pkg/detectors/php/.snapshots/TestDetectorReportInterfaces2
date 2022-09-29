@@ -1,0 +1,261 @@
+([]*report.Detection) (len=9) {
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=9) "interface",
+    DetectorType: (detectors.Type) (len=10) "javascript",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=10) "config.php",
+      Language: (string) (len=10) "JavaScript",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(21),
+      ColumnNumber: (*int)(11),
+      Text: (*string)((len=27) "\"https://inline.domain.com\"")
+    },
+    Value: (interfaces.Interface) {
+      Type: (interfaces.Type) (len=3) "url",
+      Value: (*values.Value)({
+        Parts: ([]values.Part) (len=1) {
+          (*values.String)({
+            Type: (values.PartType) (len=6) "string",
+            Value: (string) (len=25) "https://inline.domain.com"
+          })
+        }
+      }),
+      VariableName: (string) ""
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=9) "interface",
+    DetectorType: (detectors.Type) (len=10) "javascript",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=10) "config.php",
+      Language: (string) (len=10) "JavaScript",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(23),
+      ColumnNumber: (*int)(11),
+      Text: (*string)((len=25) "\"https://api1.domain.com\"")
+    },
+    Value: (interfaces.Interface) {
+      Type: (interfaces.Type) (len=3) "url",
+      Value: (*values.Value)({
+        Parts: ([]values.Part) (len=1) {
+          (*values.String)({
+            Type: (values.PartType) (len=6) "string",
+            Value: (string) (len=23) "https://api1.domain.com"
+          })
+        }
+      }),
+      VariableName: (string) ""
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=9) "interface",
+    DetectorType: (detectors.Type) (len=10) "javascript",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=10) "config.php",
+      Language: (string) (len=10) "JavaScript",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(26),
+      ColumnNumber: (*int)(11),
+      Text: (*string)((len=25) "\"https://api2.domain.com\"")
+    },
+    Value: (interfaces.Interface) {
+      Type: (interfaces.Type) (len=3) "url",
+      Value: (*values.Value)({
+        Parts: ([]values.Part) (len=1) {
+          (*values.String)({
+            Type: (values.PartType) (len=6) "string",
+            Value: (string) (len=23) "https://api2.domain.com"
+          })
+        }
+      }),
+      VariableName: (string) ""
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=9) "interface",
+    DetectorType: (detectors.Type) (len=10) "javascript",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=10) "config.php",
+      Language: (string) (len=10) "JavaScript",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(43),
+      ColumnNumber: (*int)(11),
+      Text: (*string)((len=25) "\"https://api3.domain.com\"")
+    },
+    Value: (interfaces.Interface) {
+      Type: (interfaces.Type) (len=3) "url",
+      Value: (*values.Value)({
+        Parts: ([]values.Part) (len=1) {
+          (*values.String)({
+            Type: (values.PartType) (len=6) "string",
+            Value: (string) (len=23) "https://api3.domain.com"
+          })
+        }
+      }),
+      VariableName: (string) ""
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=9) "interface",
+    DetectorType: (detectors.Type) (len=3) "php",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=10) "config.php",
+      Language: (string) (len=3) "PHP",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(3),
+      ColumnNumber: (*int)(20),
+      Text: (*string)((len=26) "$_ENV[\"ORDER_SERVICE_URL\"]")
+    },
+    Value: (interfaces.Interface) {
+      Type: (interfaces.Type) (len=3) "url",
+      Value: (*values.Value)({
+        Parts: ([]values.Part) (len=1) {
+          (*values.VariableReference)({
+            Type: (values.PartType) (len=18) "variable_reference",
+            Identifier: (variables.Identifier) {
+              Type: (variables.Type) (len=11) "environment",
+              Name: (string) (len=17) "ORDER_SERVICE_URL"
+            }
+          })
+        }
+      }),
+      VariableName: (string) ""
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=9) "interface",
+    DetectorType: (detectors.Type) (len=3) "php",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=10) "config.php",
+      Language: (string) (len=3) "PHP",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(4),
+      ColumnNumber: (*int)(20),
+      Text: (*string)((len=26) "$_ENV['USER_SERVICE_HOST']")
+    },
+    Value: (interfaces.Interface) {
+      Type: (interfaces.Type) (len=3) "url",
+      Value: (*values.Value)({
+        Parts: ([]values.Part) (len=1) {
+          (*values.VariableReference)({
+            Type: (values.PartType) (len=18) "variable_reference",
+            Identifier: (variables.Identifier) {
+              Type: (variables.Type) (len=11) "environment",
+              Name: (string) (len=17) "USER_SERVICE_HOST"
+            }
+          })
+        }
+      }),
+      VariableName: (string) ""
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=9) "interface",
+    DetectorType: (detectors.Type) (len=3) "php",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=10) "config.php",
+      Language: (string) (len=3) "PHP",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(8),
+      ColumnNumber: (*int)(11),
+      Text: (*string)((len=32) "$_ENV[\"CUSTOMERS_URL\"] . \"/path\"")
+    },
+    Value: (interfaces.Interface) {
+      Type: (interfaces.Type) (len=3) "url",
+      Value: (*values.Value)({
+        Parts: ([]values.Part) (len=2) {
+          (*values.VariableReference)({
+            Type: (values.PartType) (len=18) "variable_reference",
+            Identifier: (variables.Identifier) {
+              Type: (variables.Type) (len=11) "environment",
+              Name: (string) (len=13) "CUSTOMERS_URL"
+            }
+          }),
+          (*values.String)({
+            Type: (values.PartType) (len=6) "string",
+            Value: (string) (len=5) "/path"
+          })
+        }
+      }),
+      VariableName: (string) ""
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=9) "interface",
+    DetectorType: (detectors.Type) (len=3) "php",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=10) "config.php",
+      Language: (string) (len=3) "PHP",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(9),
+      ColumnNumber: (*int)(18),
+      Text: (*string)((len=40) "\"{$_ENV[\"CUSTOMERS_HOST\"]}:{$port}/path\"")
+    },
+    Value: (interfaces.Interface) {
+      Type: (interfaces.Type) (len=3) "url",
+      Value: (*values.Value)({
+        Parts: ([]values.Part) (len=4) {
+          (*values.VariableReference)({
+            Type: (values.PartType) (len=18) "variable_reference",
+            Identifier: (variables.Identifier) {
+              Type: (variables.Type) (len=11) "environment",
+              Name: (string) (len=14) "CUSTOMERS_HOST"
+            }
+          }),
+          (*values.String)({
+            Type: (values.PartType) (len=6) "string",
+            Value: (string) (len=1) ":"
+          }),
+          (*values.VariableReference)({
+            Type: (values.PartType) (len=18) "variable_reference",
+            Identifier: (variables.Identifier) {
+              Type: (variables.Type) (len=8) "variable",
+              Name: (string) (len=4) "port"
+            }
+          }),
+          (*values.String)({
+            Type: (values.PartType) (len=6) "string",
+            Value: (string) (len=5) "/path"
+          })
+        }
+      }),
+      VariableName: (string) ""
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=9) "interface",
+    DetectorType: (detectors.Type) (len=3) "php",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=10) "config.php",
+      Language: (string) (len=3) "PHP",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(38),
+      ColumnNumber: (*int)(21),
+      Text: (*string)((len=26) "$_ENV[\"PERSONAL_DATA_URL\"]")
+    },
+    Value: (interfaces.Interface) {
+      Type: (interfaces.Type) (len=3) "url",
+      Value: (*values.Value)({
+        Parts: ([]values.Part) (len=1) {
+          (*values.VariableReference)({
+            Type: (values.PartType) (len=18) "variable_reference",
+            Identifier: (variables.Identifier) {
+              Type: (variables.Type) (len=11) "environment",
+              Name: (string) (len=17) "PERSONAL_DATA_URL"
+            }
+          })
+        }
+      }),
+      VariableName: (string) ""
+    }
+  })
+}

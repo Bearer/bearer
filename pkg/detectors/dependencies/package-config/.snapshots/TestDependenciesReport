@@ -1,0 +1,38 @@
+([]*report.Detection) (len=2) {
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=14) "package-config",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=15) "packages.config",
+      Language: (string) (len=3) "XML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(3),
+      ColumnNumber: (*int)(14),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=50) "Microsoft.CodeDom.Providers.DotNetCompilerPlatform",
+      Version: (string) (len=5) "1.0.0"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=14) "package-config",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=15) "packages.config",
+      Language: (string) (len=3) "XML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(4),
+      ColumnNumber: (*int)(14),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=23) "Microsoft.Net.Compilers",
+      Version: (string) (len=5) "1.0.0"
+    }
+  })
+}

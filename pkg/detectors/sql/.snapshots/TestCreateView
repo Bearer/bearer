@@ -1,0 +1,965 @@
+[
+	{
+		"type": "create_view",
+		"detector_type": "sql",
+		"commit_sha": "",
+		"source": {
+			"filename": "structure.sql",
+			"language": "SQL",
+			"language_type": "data",
+			"line_number": 1,
+			"column_number": 1,
+			"text": null
+		},
+		"value": {
+			"schema_name": "s3_export_data",
+			"view_name": "users_export",
+			"source": {
+				"filename": "structure.sql",
+				"language": "SQL",
+				"language_type": "data",
+				"line_number": 1,
+				"column_number": 1,
+				"text": null
+			},
+			"from": [
+				{
+					"table_name": "public",
+					"field_name": "users",
+					"commit_sha": "",
+					"source": {
+						"filename": "structure.sql",
+						"language": "SQL",
+						"language_type": "data",
+						"line_number": 10,
+						"column_number": 6,
+						"text": null
+					},
+					"alias": "users"
+				}
+			],
+			"fields": [
+				{
+					"table_name": "users",
+					"field_name": "id",
+					"commit_sha": "",
+					"source": {
+						"filename": "structure.sql",
+						"language": "SQL",
+						"language_type": "data",
+						"line_number": 2,
+						"column_number": 9,
+						"text": null
+					}
+				},
+				{
+					"table_name": "users",
+					"field_name": "created_at",
+					"commit_sha": "",
+					"source": {
+						"filename": "structure.sql",
+						"language": "SQL",
+						"language_type": "data",
+						"line_number": 3,
+						"column_number": 5,
+						"text": null
+					}
+				},
+				{
+					"table_name": "users",
+					"field_name": "updated_at",
+					"commit_sha": "",
+					"source": {
+						"filename": "structure.sql",
+						"language": "SQL",
+						"language_type": "data",
+						"line_number": 4,
+						"column_number": 5,
+						"text": null
+					}
+				},
+				{
+					"table_name": "users",
+					"field_name": "name",
+					"commit_sha": "",
+					"source": {
+						"filename": "structure.sql",
+						"language": "SQL",
+						"language_type": "data",
+						"line_number": 5,
+						"column_number": 5,
+						"text": null
+					}
+				},
+				{
+					"table_name": "users",
+					"field_name": "vaccinated",
+					"commit_sha": "",
+					"source": {
+						"filename": "structure.sql",
+						"language": "SQL",
+						"language_type": "data",
+						"line_number": 6,
+						"column_number": 5,
+						"text": null
+					}
+				},
+				{
+					"table_name": "users",
+					"field_name": "origin",
+					"commit_sha": "",
+					"source": {
+						"filename": "structure.sql",
+						"language": "SQL",
+						"language_type": "data",
+						"line_number": 7,
+						"column_number": 19,
+						"text": null
+					}
+				},
+				{
+					"table_name": "cms_login_page_contents",
+					"field_name": "country",
+					"commit_sha": "",
+					"source": {
+						"filename": "structure.sql",
+						"language": "SQL",
+						"language_type": "data",
+						"line_number": 8,
+						"column_number": 5,
+						"text": null
+					}
+				}
+			]
+		}
+	},
+	{
+		"type": "create_view",
+		"detector_type": "sql",
+		"commit_sha": "",
+		"source": {
+			"filename": "structure.sql",
+			"language": "SQL",
+			"language_type": "data",
+			"line_number": 12,
+			"column_number": 1,
+			"text": null
+		},
+		"value": {
+			"schema_name": "s3_export_data",
+			"view_name": "users_account",
+			"source": {
+				"filename": "structure.sql",
+				"language": "SQL",
+				"language_type": "data",
+				"line_number": 12,
+				"column_number": 1,
+				"text": null
+			},
+			"from": [
+				{
+					"table_name": "public",
+					"field_name": "users",
+					"commit_sha": "",
+					"source": {
+						"filename": "structure.sql",
+						"language": "SQL",
+						"language_type": "data",
+						"line_number": 21,
+						"column_number": 6,
+						"text": null
+					},
+					"alias": "users"
+				}
+			],
+			"fields": [
+				{
+					"table_name": "users",
+					"field_name": "id",
+					"commit_sha": "",
+					"source": {
+						"filename": "structure.sql",
+						"language": "SQL",
+						"language_type": "data",
+						"line_number": 13,
+						"column_number": 9,
+						"text": null
+					}
+				},
+				{
+					"table_name": "users",
+					"field_name": "created_at",
+					"commit_sha": "",
+					"source": {
+						"filename": "structure.sql",
+						"language": "SQL",
+						"language_type": "data",
+						"line_number": 14,
+						"column_number": 5,
+						"text": null
+					}
+				},
+				{
+					"table_name": "users",
+					"field_name": "updated_at",
+					"commit_sha": "",
+					"source": {
+						"filename": "structure.sql",
+						"language": "SQL",
+						"language_type": "data",
+						"line_number": 15,
+						"column_number": 5,
+						"text": null
+					}
+				},
+				{
+					"table_name": "users",
+					"field_name": "name",
+					"commit_sha": "",
+					"source": {
+						"filename": "structure.sql",
+						"language": "SQL",
+						"language_type": "data",
+						"line_number": 16,
+						"column_number": 5,
+						"text": null
+					}
+				},
+				{
+					"table_name": "users",
+					"field_name": "vaccinated",
+					"commit_sha": "",
+					"source": {
+						"filename": "structure.sql",
+						"language": "SQL",
+						"language_type": "data",
+						"line_number": 17,
+						"column_number": 5,
+						"text": null
+					}
+				},
+				{
+					"table_name": "users",
+					"field_name": "email",
+					"commit_sha": "",
+					"source": {
+						"filename": "structure.sql",
+						"language": "SQL",
+						"language_type": "data",
+						"line_number": 18,
+						"column_number": 10,
+						"text": null
+					}
+				}
+			]
+		}
+	},
+	{
+		"type": "create_view",
+		"detector_type": "sql",
+		"commit_sha": "",
+		"source": {
+			"filename": "structure.sql",
+			"language": "SQL",
+			"language_type": "data",
+			"line_number": 24,
+			"column_number": 1,
+			"text": null
+		},
+		"value": {
+			"schema_name": "s3_export_data",
+			"view_name": "users_audit",
+			"source": {
+				"filename": "structure.sql",
+				"language": "SQL",
+				"language_type": "data",
+				"line_number": 24,
+				"column_number": 1,
+				"text": null
+			},
+			"from": [
+				{
+					"table_name": "public",
+					"field_name": "users",
+					"commit_sha": "",
+					"source": {
+						"filename": "structure.sql",
+						"language": "SQL",
+						"language_type": "data",
+						"line_number": 31,
+						"column_number": 7,
+						"text": null
+					},
+					"alias": "us"
+				},
+				{
+					"table_name": "public",
+					"field_name": "admins",
+					"commit_sha": "",
+					"source": {
+						"filename": "structure.sql",
+						"language": "SQL",
+						"language_type": "data",
+						"line_number": 32,
+						"column_number": 11,
+						"text": null
+					},
+					"alias": "ad"
+				}
+			],
+			"fields": [
+				{
+					"table_name": "us",
+					"field_name": "id",
+					"commit_sha": "",
+					"source": {
+						"filename": "structure.sql",
+						"language": "SQL",
+						"language_type": "data",
+						"line_number": 25,
+						"column_number": 9,
+						"text": null
+					}
+				},
+				{
+					"table_name": "us",
+					"field_name": "item_type",
+					"commit_sha": "",
+					"source": {
+						"filename": "structure.sql",
+						"language": "SQL",
+						"language_type": "data",
+						"line_number": 26,
+						"column_number": 5,
+						"text": null
+					}
+				},
+				{
+					"table_name": "us",
+					"field_name": "item_id",
+					"commit_sha": "",
+					"source": {
+						"filename": "structure.sql",
+						"language": "SQL",
+						"language_type": "data",
+						"line_number": 27,
+						"column_number": 5,
+						"text": null
+					}
+				},
+				{
+					"table_name": "ad",
+					"field_name": "event",
+					"commit_sha": "",
+					"source": {
+						"filename": "structure.sql",
+						"language": "SQL",
+						"language_type": "data",
+						"line_number": 28,
+						"column_number": 5,
+						"text": null
+					}
+				},
+				{
+					"table_name": "ad",
+					"field_name": "whodunnit",
+					"commit_sha": "",
+					"source": {
+						"filename": "structure.sql",
+						"language": "SQL",
+						"language_type": "data",
+						"line_number": 29,
+						"column_number": 5,
+						"text": null
+					}
+				},
+				{
+					"table_name": "public",
+					"field_name": "users",
+					"commit_sha": "",
+					"source": {
+						"filename": "structure.sql",
+						"language": "SQL",
+						"language_type": "data",
+						"line_number": 30,
+						"column_number": 10,
+						"text": null
+					}
+				},
+				{
+					"table_name": "public",
+					"field_name": "admins",
+					"commit_sha": "",
+					"source": {
+						"filename": "structure.sql",
+						"language": "SQL",
+						"language_type": "data",
+						"line_number": 31,
+						"column_number": 11,
+						"text": null
+					}
+				},
+				{
+					"table_name": "us",
+					"field_name": "item_id",
+					"commit_sha": "",
+					"source": {
+						"filename": "structure.sql",
+						"language": "SQL",
+						"language_type": "data",
+						"line_number": 31,
+						"column_number": 33,
+						"text": null
+					}
+				},
+				{
+					"table_name": "ad",
+					"field_name": "id",
+					"commit_sha": "",
+					"source": {
+						"filename": "structure.sql",
+						"language": "SQL",
+						"language_type": "data",
+						"line_number": 31,
+						"column_number": 46,
+						"text": null
+					}
+				}
+			]
+		}
+	},
+	{
+		"type": "create_view",
+		"detector_type": "sql",
+		"commit_sha": "",
+		"source": {
+			"filename": "structure.sql",
+			"language": "SQL",
+			"language_type": "data",
+			"line_number": 35,
+			"column_number": 1,
+			"text": null
+		},
+		"value": {
+			"schema_name": "s3_export_data",
+			"view_name": "user_ids",
+			"source": {
+				"filename": "structure.sql",
+				"language": "SQL",
+				"language_type": "data",
+				"line_number": 35,
+				"column_number": 1,
+				"text": null
+			},
+			"from": [
+				{
+					"table_name": "public",
+					"field_name": "users",
+					"commit_sha": "",
+					"source": {
+						"filename": "structure.sql",
+						"language": "SQL",
+						"language_type": "data",
+						"line_number": 38,
+						"column_number": 6,
+						"text": null
+					},
+					"alias": ""
+				}
+			],
+			"fields": [
+				{
+					"table_name": "users",
+					"field_name": "id",
+					"commit_sha": "",
+					"source": {
+						"filename": "structure.sql",
+						"language": "SQL",
+						"language_type": "data",
+						"line_number": 36,
+						"column_number": 9,
+						"text": null
+					}
+				},
+				{
+					"table_name": "public",
+					"field_name": "users",
+					"commit_sha": "",
+					"source": {
+						"filename": "structure.sql",
+						"language": "SQL",
+						"language_type": "data",
+						"line_number": 37,
+						"column_number": 9,
+						"text": null
+					}
+				}
+			]
+		}
+	},
+	{
+		"type": "create_view",
+		"detector_type": "sql",
+		"commit_sha": "",
+		"source": {
+			"filename": "structure.sql",
+			"language": "SQL",
+			"language_type": "data",
+			"line_number": 40,
+			"column_number": 1,
+			"text": null
+		},
+		"value": {
+			"schema_name": "s3_export_data",
+			"view_name": "notifications",
+			"source": {
+				"filename": "structure.sql",
+				"language": "SQL",
+				"language_type": "data",
+				"line_number": 40,
+				"column_number": 1,
+				"text": null
+			},
+			"from": [
+				{
+					"table_name": "public",
+					"field_name": "notifications",
+					"commit_sha": "",
+					"source": {
+						"filename": "structure.sql",
+						"language": "SQL",
+						"language_type": "data",
+						"line_number": 47,
+						"column_number": 6,
+						"text": null
+					},
+					"alias": ""
+				}
+			],
+			"fields": [
+				{
+					"table_name": "notifications",
+					"field_name": "id",
+					"commit_sha": "",
+					"source": {
+						"filename": "structure.sql",
+						"language": "SQL",
+						"language_type": "data",
+						"line_number": 41,
+						"column_number": 9,
+						"text": null
+					}
+				},
+				{
+					"table_name": "notifications",
+					"field_name": "account_id",
+					"commit_sha": "",
+					"source": {
+						"filename": "structure.sql",
+						"language": "SQL",
+						"language_type": "data",
+						"line_number": 42,
+						"column_number": 5,
+						"text": null
+					}
+				},
+				{
+					"table_name": "notifications",
+					"field_name": "version_id_bigint",
+					"commit_sha": "",
+					"source": {
+						"filename": "structure.sql",
+						"language": "SQL",
+						"language_type": "data",
+						"line_number": 43,
+						"column_number": 5,
+						"text": null
+					}
+				},
+				{
+					"table_name": "public",
+					"field_name": "yaml_to_json",
+					"commit_sha": "",
+					"source": {
+						"filename": "structure.sql",
+						"language": "SQL",
+						"language_type": "data",
+						"line_number": 44,
+						"column_number": 7,
+						"text": null
+					}
+				},
+				{
+					"table_name": "notifications",
+					"field_name": "meta_data",
+					"commit_sha": "",
+					"source": {
+						"filename": "structure.sql",
+						"language": "SQL",
+						"language_type": "data",
+						"line_number": 44,
+						"column_number": 27,
+						"text": null
+					}
+				},
+				{
+					"table_name": "public",
+					"field_name": "yaml_to_json",
+					"commit_sha": "",
+					"source": {
+						"filename": "structure.sql",
+						"language": "SQL",
+						"language_type": "data",
+						"line_number": 45,
+						"column_number": 7,
+						"text": null
+					}
+				},
+				{
+					"table_name": "notifications",
+					"field_name": "meta_data",
+					"commit_sha": "",
+					"source": {
+						"filename": "structure.sql",
+						"language": "SQL",
+						"language_type": "data",
+						"line_number": 45,
+						"column_number": 27,
+						"text": null
+					}
+				},
+				{
+					"table_name": "public",
+					"field_name": "notifications",
+					"commit_sha": "",
+					"source": {
+						"filename": "structure.sql",
+						"language": "SQL",
+						"language_type": "data",
+						"line_number": 46,
+						"column_number": 9,
+						"text": null
+					}
+				}
+			]
+		}
+	},
+	{
+		"type": "create_view",
+		"detector_type": "sql",
+		"commit_sha": "",
+		"source": {
+			"filename": "structure.sql",
+			"language": "SQL",
+			"language_type": "data",
+			"line_number": 48,
+			"column_number": 1,
+			"text": null
+		},
+		"value": {
+			"schema_name": "s3_export_data",
+			"view_name": "administrators",
+			"source": {
+				"filename": "structure.sql",
+				"language": "SQL",
+				"language_type": "data",
+				"line_number": 48,
+				"column_number": 1,
+				"text": null
+			},
+			"from": [
+				{
+					"table_name": "public",
+					"field_name": "admins",
+					"commit_sha": "",
+					"source": {
+						"filename": "structure.sql",
+						"language": "SQL",
+						"language_type": "data",
+						"line_number": 80,
+						"column_number": 8,
+						"text": null
+					},
+					"alias": ""
+				},
+				{
+					"table_name": "public",
+					"field_name": "users",
+					"commit_sha": "",
+					"source": {
+						"filename": "structure.sql",
+						"language": "SQL",
+						"language_type": "data",
+						"line_number": 81,
+						"column_number": 16,
+						"text": null
+					},
+					"alias": ""
+				},
+				{
+					"table_name": "public",
+					"field_name": "master_users",
+					"commit_sha": "",
+					"source": {
+						"filename": "structure.sql",
+						"language": "SQL",
+						"language_type": "data",
+						"line_number": 82,
+						"column_number": 16,
+						"text": null
+					},
+					"alias": ""
+				}
+			],
+			"fields": [
+				{
+					"table_name": "master_users",
+					"field_name": "id",
+					"commit_sha": "",
+					"source": {
+						"filename": "structure.sql",
+						"language": "SQL",
+						"language_type": "data",
+						"line_number": 49,
+						"column_number": 9,
+						"text": null
+					}
+				},
+				{
+					"table_name": "master_users",
+					"field_name": "created_at",
+					"commit_sha": "",
+					"source": {
+						"filename": "structure.sql",
+						"language": "SQL",
+						"language_type": "data",
+						"line_number": 50,
+						"column_number": 5,
+						"text": null
+					}
+				},
+				{
+					"table_name": "master_users",
+					"field_name": "identity_fraud_alert",
+					"commit_sha": "",
+					"source": {
+						"filename": "structure.sql",
+						"language": "SQL",
+						"language_type": "data",
+						"line_number": 51,
+						"column_number": 5,
+						"text": null
+					}
+				},
+				{
+					"table_name": "admins",
+					"field_name": "email",
+					"commit_sha": "",
+					"source": {
+						"filename": "structure.sql",
+						"language": "SQL",
+						"language_type": "data",
+						"line_number": 53,
+						"column_number": 29,
+						"text": null
+					}
+				},
+				{
+					"table_name": "admins",
+					"field_name": "phone_number",
+					"commit_sha": "",
+					"source": {
+						"filename": "structure.sql",
+						"language": "SQL",
+						"language_type": "data",
+						"line_number": 57,
+						"column_number": 29,
+						"text": null
+					}
+				},
+				{
+					"table_name": "admins",
+					"field_name": "secondary_phone_number",
+					"commit_sha": "",
+					"source": {
+						"filename": "structure.sql",
+						"language": "SQL",
+						"language_type": "data",
+						"line_number": 61,
+						"column_number": 29,
+						"text": null
+					}
+				},
+				{
+					"table_name": "admins",
+					"field_name": "birthdate",
+					"commit_sha": "",
+					"source": {
+						"filename": "structure.sql",
+						"language": "SQL",
+						"language_type": "data",
+						"line_number": 65,
+						"column_number": 19,
+						"text": null
+					}
+				},
+				{
+					"table_name": "users",
+					"field_name": "birthdate",
+					"commit_sha": "",
+					"source": {
+						"filename": "structure.sql",
+						"language": "SQL",
+						"language_type": "data",
+						"line_number": 69,
+						"column_number": 91,
+						"text": null
+					}
+				},
+				{
+					"table_name": "users",
+					"field_name": "birthdate",
+					"commit_sha": "",
+					"source": {
+						"filename": "structure.sql",
+						"language": "SQL",
+						"language_type": "data",
+						"line_number": 70,
+						"column_number": 91,
+						"text": null
+					}
+				},
+				{
+					"table_name": "users",
+					"field_name": "birthdate",
+					"commit_sha": "",
+					"source": {
+						"filename": "structure.sql",
+						"language": "SQL",
+						"language_type": "data",
+						"line_number": 71,
+						"column_number": 91,
+						"text": null
+					}
+				},
+				{
+					"table_name": "users",
+					"field_name": "birthdate",
+					"commit_sha": "",
+					"source": {
+						"filename": "structure.sql",
+						"language": "SQL",
+						"language_type": "data",
+						"line_number": 72,
+						"column_number": 91,
+						"text": null
+					}
+				},
+				{
+					"table_name": "users",
+					"field_name": "birthdate",
+					"commit_sha": "",
+					"source": {
+						"filename": "structure.sql",
+						"language": "SQL",
+						"language_type": "data",
+						"line_number": 73,
+						"column_number": 91,
+						"text": null
+					}
+				},
+				{
+					"table_name": "users",
+					"field_name": "birthdate",
+					"commit_sha": "",
+					"source": {
+						"filename": "structure.sql",
+						"language": "SQL",
+						"language_type": "data",
+						"line_number": 74,
+						"column_number": 91,
+						"text": null
+					}
+				},
+				{
+					"table_name": "users",
+					"field_name": "birthdate",
+					"commit_sha": "",
+					"source": {
+						"filename": "structure.sql",
+						"language": "SQL",
+						"language_type": "data",
+						"line_number": 75,
+						"column_number": 91,
+						"text": null
+					}
+				},
+				{
+					"table_name": "users",
+					"field_name": "birthdate",
+					"commit_sha": "",
+					"source": {
+						"filename": "structure.sql",
+						"language": "SQL",
+						"language_type": "data",
+						"line_number": 78,
+						"column_number": 78,
+						"text": null
+					}
+				},
+				{
+					"table_name": "public",
+					"field_name": "admins",
+					"commit_sha": "",
+					"source": {
+						"filename": "structure.sql",
+						"language": "SQL",
+						"language_type": "data",
+						"line_number": 79,
+						"column_number": 11,
+						"text": null
+					}
+				},
+				{
+					"table_name": "public",
+					"field_name": "users",
+					"commit_sha": "",
+					"source": {
+						"filename": "structure.sql",
+						"language": "SQL",
+						"language_type": "data",
+						"line_number": 80,
+						"column_number": 16,
+						"text": null
+					}
+				},
+				{
+					"table_name": "public",
+					"field_name": "users",
+					"commit_sha": "",
+					"source": {
+						"filename": "structure.sql",
+						"language": "SQL",
+						"language_type": "data",
+						"line_number": 80,
+						"column_number": 34,
+						"text": null
+					}
+				},
+				{
+					"table_name": "admins",
+					"field_name": "id",
+					"commit_sha": "",
+					"source": {
+						"filename": "structure.sql",
+						"language": "SQL",
+						"language_type": "data",
+						"line_number": 80,
+						"column_number": 49,
+						"text": null
+					}
+				}
+			]
+		}
+	}
+]

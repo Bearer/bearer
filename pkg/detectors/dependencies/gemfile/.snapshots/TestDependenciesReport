@@ -1,0 +1,1676 @@
+([]*report.Detection) (len=93) {
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=12) "gemfile-lock",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=12) "Gemfile.lock",
+      Language: (string) (len=12) "Gemfile.lock",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(4),
+      ColumnNumber: (*int)(0),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=13) "activesupport",
+      Version: (string) (len=7) "6.0.3.4"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=12) "gemfile-lock",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=12) "Gemfile.lock",
+      Language: (string) (len=12) "Gemfile.lock",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(10),
+      ColumnNumber: (*int)(0),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=11) "addressable",
+      Version: (string) (len=5) "2.8.0"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=12) "gemfile-lock",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=12) "Gemfile.lock",
+      Language: (string) (len=12) "Gemfile.lock",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(12),
+      ColumnNumber: (*int)(0),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=13) "coffee-script",
+      Version: (string) (len=5) "2.4.1"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=12) "gemfile-lock",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=12) "Gemfile.lock",
+      Language: (string) (len=12) "Gemfile.lock",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(15),
+      ColumnNumber: (*int)(0),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=20) "coffee-script-source",
+      Version: (string) (len=6) "1.11.1"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=12) "gemfile-lock",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=12) "Gemfile.lock",
+      Language: (string) (len=12) "Gemfile.lock",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(16),
+      ColumnNumber: (*int)(0),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=9) "colorator",
+      Version: (string) (len=5) "1.1.0"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=12) "gemfile-lock",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=12) "Gemfile.lock",
+      Language: (string) (len=12) "Gemfile.lock",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(17),
+      ColumnNumber: (*int)(0),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=12) "commonmarker",
+      Version: (string) (len=7) "0.17.13"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=12) "gemfile-lock",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=12) "Gemfile.lock",
+      Language: (string) (len=12) "Gemfile.lock",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(19),
+      ColumnNumber: (*int)(0),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=15) "concurrent-ruby",
+      Version: (string) (len=5) "1.1.7"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=12) "gemfile-lock",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=12) "Gemfile.lock",
+      Language: (string) (len=12) "Gemfile.lock",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(20),
+      ColumnNumber: (*int)(0),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=7) "dnsruby",
+      Version: (string) (len=6) "1.61.5"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=12) "gemfile-lock",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=12) "Gemfile.lock",
+      Language: (string) (len=12) "Gemfile.lock",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(22),
+      ColumnNumber: (*int)(0),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=12) "em-websocket",
+      Version: (string) (len=5) "0.5.2"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=12) "gemfile-lock",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=12) "Gemfile.lock",
+      Language: (string) (len=12) "Gemfile.lock",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(25),
+      ColumnNumber: (*int)(0),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=5) "ethon",
+      Version: (string) (len=6) "0.12.0"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=12) "gemfile-lock",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=12) "Gemfile.lock",
+      Language: (string) (len=12) "Gemfile.lock",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(27),
+      ColumnNumber: (*int)(0),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=12) "eventmachine",
+      Version: (string) (len=5) "1.2.7"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=12) "gemfile-lock",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=12) "Gemfile.lock",
+      Language: (string) (len=12) "Gemfile.lock",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(28),
+      ColumnNumber: (*int)(0),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=6) "execjs",
+      Version: (string) (len=5) "2.7.0"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=12) "gemfile-lock",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=12) "Gemfile.lock",
+      Language: (string) (len=12) "Gemfile.lock",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(29),
+      ColumnNumber: (*int)(0),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=7) "faraday",
+      Version: (string) (len=5) "1.3.0"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=12) "gemfile-lock",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=12) "Gemfile.lock",
+      Language: (string) (len=12) "Gemfile.lock",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(33),
+      ColumnNumber: (*int)(0),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=16) "faraday-net_http",
+      Version: (string) (len=5) "1.0.0"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=12) "gemfile-lock",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=12) "Gemfile.lock",
+      Language: (string) (len=12) "Gemfile.lock",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(34),
+      ColumnNumber: (*int)(0),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=3) "ffi",
+      Version: (string) (len=6) "1.14.2"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=12) "gemfile-lock",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=12) "Gemfile.lock",
+      Language: (string) (len=12) "Gemfile.lock",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(35),
+      ColumnNumber: (*int)(0),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=20) "forwardable-extended",
+      Version: (string) (len=5) "2.6.0"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=12) "gemfile-lock",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=12) "Gemfile.lock",
+      Language: (string) (len=12) "Gemfile.lock",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(36),
+      ColumnNumber: (*int)(0),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=6) "gemoji",
+      Version: (string) (len=5) "3.0.1"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=12) "gemfile-lock",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=12) "Gemfile.lock",
+      Language: (string) (len=12) "Gemfile.lock",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(37),
+      ColumnNumber: (*int)(0),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=12) "github-pages",
+      Version: (string) (len=3) "209"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=12) "gemfile-lock",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=12) "Gemfile.lock",
+      Language: (string) (len=12) "Gemfile.lock",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(81),
+      ColumnNumber: (*int)(0),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=25) "github-pages-health-check",
+      Version: (string) (len=6) "1.16.1"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=12) "gemfile-lock",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=12) "Gemfile.lock",
+      Language: (string) (len=12) "Gemfile.lock",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(87),
+      ColumnNumber: (*int)(0),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=13) "html-pipeline",
+      Version: (string) (len=6) "2.14.0"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=12) "gemfile-lock",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=12) "Gemfile.lock",
+      Language: (string) (len=12) "Gemfile.lock",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(90),
+      ColumnNumber: (*int)(0),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=14) "http_parser.rb",
+      Version: (string) (len=5) "0.6.0"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=12) "gemfile-lock",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=12) "Gemfile.lock",
+      Language: (string) (len=12) "Gemfile.lock",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(91),
+      ColumnNumber: (*int)(0),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=4) "i18n",
+      Version: (string) (len=5) "0.9.5"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=12) "gemfile-lock",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=12) "Gemfile.lock",
+      Language: (string) (len=12) "Gemfile.lock",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(93),
+      ColumnNumber: (*int)(0),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=6) "jekyll",
+      Version: (string) (len=5) "3.9.0"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=12) "gemfile-lock",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=12) "Gemfile.lock",
+      Language: (string) (len=12) "Gemfile.lock",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(106),
+      ColumnNumber: (*int)(0),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=13) "jekyll-avatar",
+      Version: (string) (len=5) "0.7.0"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=12) "gemfile-lock",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=12) "Gemfile.lock",
+      Language: (string) (len=12) "Gemfile.lock",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(108),
+      ColumnNumber: (*int)(0),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=19) "jekyll-coffeescript",
+      Version: (string) (len=5) "1.1.1"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=12) "gemfile-lock",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=12) "Gemfile.lock",
+      Language: (string) (len=12) "Gemfile.lock",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(111),
+      ColumnNumber: (*int)(0),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=17) "jekyll-commonmark",
+      Version: (string) (len=5) "1.3.1"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=12) "gemfile-lock",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=12) "Gemfile.lock",
+      Language: (string) (len=12) "Gemfile.lock",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(114),
+      ColumnNumber: (*int)(0),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=25) "jekyll-commonmark-ghpages",
+      Version: (string) (len=5) "0.1.6"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=12) "gemfile-lock",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=12) "Gemfile.lock",
+      Language: (string) (len=12) "Gemfile.lock",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(118),
+      ColumnNumber: (*int)(0),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=21) "jekyll-default-layout",
+      Version: (string) (len=5) "0.1.4"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=12) "gemfile-lock",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=12) "Gemfile.lock",
+      Language: (string) (len=12) "Gemfile.lock",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(120),
+      ColumnNumber: (*int)(0),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=11) "jekyll-feed",
+      Version: (string) (len=6) "0.15.1"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=12) "gemfile-lock",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=12) "Gemfile.lock",
+      Language: (string) (len=12) "Gemfile.lock",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(122),
+      ColumnNumber: (*int)(0),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=11) "jekyll-gist",
+      Version: (string) (len=5) "1.5.0"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=12) "gemfile-lock",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=12) "Gemfile.lock",
+      Language: (string) (len=12) "Gemfile.lock",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(124),
+      ColumnNumber: (*int)(0),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=22) "jekyll-github-metadata",
+      Version: (string) (len=6) "2.13.0"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=12) "gemfile-lock",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=12) "Gemfile.lock",
+      Language: (string) (len=12) "Gemfile.lock",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(127),
+      ColumnNumber: (*int)(0),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=15) "jekyll-mentions",
+      Version: (string) (len=5) "1.6.0"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=12) "gemfile-lock",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=12) "Gemfile.lock",
+      Language: (string) (len=12) "Gemfile.lock",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(130),
+      ColumnNumber: (*int)(0),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=28) "jekyll-optional-front-matter",
+      Version: (string) (len=5) "0.3.2"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=12) "gemfile-lock",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=12) "Gemfile.lock",
+      Language: (string) (len=12) "Gemfile.lock",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(132),
+      ColumnNumber: (*int)(0),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=15) "jekyll-paginate",
+      Version: (string) (len=5) "1.1.0"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=12) "gemfile-lock",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=12) "Gemfile.lock",
+      Language: (string) (len=12) "Gemfile.lock",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(133),
+      ColumnNumber: (*int)(0),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=19) "jekyll-readme-index",
+      Version: (string) (len=5) "0.3.0"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=12) "gemfile-lock",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=12) "Gemfile.lock",
+      Language: (string) (len=12) "Gemfile.lock",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(135),
+      ColumnNumber: (*int)(0),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=20) "jekyll-redirect-from",
+      Version: (string) (len=6) "0.16.0"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=12) "gemfile-lock",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=12) "Gemfile.lock",
+      Language: (string) (len=12) "Gemfile.lock",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(137),
+      ColumnNumber: (*int)(0),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=21) "jekyll-relative-links",
+      Version: (string) (len=5) "0.6.1"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=12) "gemfile-lock",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=12) "Gemfile.lock",
+      Language: (string) (len=12) "Gemfile.lock",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(139),
+      ColumnNumber: (*int)(0),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=19) "jekyll-remote-theme",
+      Version: (string) (len=5) "0.4.2"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=12) "gemfile-lock",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=12) "Gemfile.lock",
+      Language: (string) (len=12) "Gemfile.lock",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(144),
+      ColumnNumber: (*int)(0),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=21) "jekyll-sass-converter",
+      Version: (string) (len=5) "1.5.2"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=12) "gemfile-lock",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=12) "Gemfile.lock",
+      Language: (string) (len=12) "Gemfile.lock",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(146),
+      ColumnNumber: (*int)(0),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=14) "jekyll-seo-tag",
+      Version: (string) (len=5) "2.6.1"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=12) "gemfile-lock",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=12) "Gemfile.lock",
+      Language: (string) (len=12) "Gemfile.lock",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(148),
+      ColumnNumber: (*int)(0),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=14) "jekyll-sitemap",
+      Version: (string) (len=5) "1.4.0"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=12) "gemfile-lock",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=12) "Gemfile.lock",
+      Language: (string) (len=12) "Gemfile.lock",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(150),
+      ColumnNumber: (*int)(0),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=12) "jekyll-swiss",
+      Version: (string) (len=5) "1.0.0"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=12) "gemfile-lock",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=12) "Gemfile.lock",
+      Language: (string) (len=12) "Gemfile.lock",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(151),
+      ColumnNumber: (*int)(0),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=22) "jekyll-theme-architect",
+      Version: (string) (len=5) "0.1.1"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=12) "gemfile-lock",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=12) "Gemfile.lock",
+      Language: (string) (len=12) "Gemfile.lock",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(154),
+      ColumnNumber: (*int)(0),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=19) "jekyll-theme-cayman",
+      Version: (string) (len=5) "0.1.1"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=12) "gemfile-lock",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=12) "Gemfile.lock",
+      Language: (string) (len=12) "Gemfile.lock",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(157),
+      ColumnNumber: (*int)(0),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=18) "jekyll-theme-dinky",
+      Version: (string) (len=5) "0.1.1"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=12) "gemfile-lock",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=12) "Gemfile.lock",
+      Language: (string) (len=12) "Gemfile.lock",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(160),
+      ColumnNumber: (*int)(0),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=19) "jekyll-theme-hacker",
+      Version: (string) (len=5) "0.1.2"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=12) "gemfile-lock",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=12) "Gemfile.lock",
+      Language: (string) (len=12) "Gemfile.lock",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(163),
+      ColumnNumber: (*int)(0),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=21) "jekyll-theme-leap-day",
+      Version: (string) (len=5) "0.1.1"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=12) "gemfile-lock",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=12) "Gemfile.lock",
+      Language: (string) (len=12) "Gemfile.lock",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(166),
+      ColumnNumber: (*int)(0),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=19) "jekyll-theme-merlot",
+      Version: (string) (len=5) "0.1.1"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=12) "gemfile-lock",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=12) "Gemfile.lock",
+      Language: (string) (len=12) "Gemfile.lock",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(169),
+      ColumnNumber: (*int)(0),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=21) "jekyll-theme-midnight",
+      Version: (string) (len=5) "0.1.1"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=12) "gemfile-lock",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=12) "Gemfile.lock",
+      Language: (string) (len=12) "Gemfile.lock",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(172),
+      ColumnNumber: (*int)(0),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=20) "jekyll-theme-minimal",
+      Version: (string) (len=5) "0.1.1"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=12) "gemfile-lock",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=12) "Gemfile.lock",
+      Language: (string) (len=12) "Gemfile.lock",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(175),
+      ColumnNumber: (*int)(0),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=22) "jekyll-theme-modernist",
+      Version: (string) (len=5) "0.1.1"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=12) "gemfile-lock",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=12) "Gemfile.lock",
+      Language: (string) (len=12) "Gemfile.lock",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(178),
+      ColumnNumber: (*int)(0),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=19) "jekyll-theme-primer",
+      Version: (string) (len=5) "0.5.4"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=12) "gemfile-lock",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=12) "Gemfile.lock",
+      Language: (string) (len=12) "Gemfile.lock",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(182),
+      ColumnNumber: (*int)(0),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=18) "jekyll-theme-slate",
+      Version: (string) (len=5) "0.1.1"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=12) "gemfile-lock",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=12) "Gemfile.lock",
+      Language: (string) (len=12) "Gemfile.lock",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(185),
+      ColumnNumber: (*int)(0),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=20) "jekyll-theme-tactile",
+      Version: (string) (len=5) "0.1.1"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=12) "gemfile-lock",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=12) "Gemfile.lock",
+      Language: (string) (len=12) "Gemfile.lock",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(188),
+      ColumnNumber: (*int)(0),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=25) "jekyll-theme-time-machine",
+      Version: (string) (len=5) "0.1.1"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=12) "gemfile-lock",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=12) "Gemfile.lock",
+      Language: (string) (len=12) "Gemfile.lock",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(191),
+      ColumnNumber: (*int)(0),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=27) "jekyll-titles-from-headings",
+      Version: (string) (len=5) "0.5.3"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=12) "gemfile-lock",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=12) "Gemfile.lock",
+      Language: (string) (len=12) "Gemfile.lock",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(193),
+      ColumnNumber: (*int)(0),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=12) "jekyll-watch",
+      Version: (string) (len=5) "2.2.1"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=12) "gemfile-lock",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=12) "Gemfile.lock",
+      Language: (string) (len=12) "Gemfile.lock",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(195),
+      ColumnNumber: (*int)(0),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=6) "jemoji",
+      Version: (string) (len=6) "0.12.0"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=12) "gemfile-lock",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=12) "Gemfile.lock",
+      Language: (string) (len=12) "Gemfile.lock",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(199),
+      ColumnNumber: (*int)(0),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=8) "kramdown",
+      Version: (string) (len=5) "2.3.1"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=12) "gemfile-lock",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=12) "Gemfile.lock",
+      Language: (string) (len=12) "Gemfile.lock",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(201),
+      ColumnNumber: (*int)(0),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=19) "kramdown-parser-gfm",
+      Version: (string) (len=5) "1.1.0"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=12) "gemfile-lock",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=12) "Gemfile.lock",
+      Language: (string) (len=12) "Gemfile.lock",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(203),
+      ColumnNumber: (*int)(0),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=6) "liquid",
+      Version: (string) (len=5) "4.0.3"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=12) "gemfile-lock",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=12) "Gemfile.lock",
+      Language: (string) (len=12) "Gemfile.lock",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(204),
+      ColumnNumber: (*int)(0),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=6) "listen",
+      Version: (string) (len=5) "3.4.0"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=12) "gemfile-lock",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=12) "Gemfile.lock",
+      Language: (string) (len=12) "Gemfile.lock",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(207),
+      ColumnNumber: (*int)(0),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=9) "mercenary",
+      Version: (string) (len=5) "0.3.6"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=12) "gemfile-lock",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=12) "Gemfile.lock",
+      Language: (string) (len=12) "Gemfile.lock",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(208),
+      ColumnNumber: (*int)(0),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=13) "mini_portile2",
+      Version: (string) (len=5) "2.6.1"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=12) "gemfile-lock",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=12) "Gemfile.lock",
+      Language: (string) (len=12) "Gemfile.lock",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(209),
+      ColumnNumber: (*int)(0),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=6) "minima",
+      Version: (string) (len=5) "2.5.1"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=12) "gemfile-lock",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=12) "Gemfile.lock",
+      Language: (string) (len=12) "Gemfile.lock",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(213),
+      ColumnNumber: (*int)(0),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=8) "minitest",
+      Version: (string) (len=6) "5.14.3"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=12) "gemfile-lock",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=12) "Gemfile.lock",
+      Language: (string) (len=12) "Gemfile.lock",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(214),
+      ColumnNumber: (*int)(0),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=14) "multipart-post",
+      Version: (string) (len=5) "2.1.1"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=12) "gemfile-lock",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=12) "Gemfile.lock",
+      Language: (string) (len=12) "Gemfile.lock",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(215),
+      ColumnNumber: (*int)(0),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=8) "nokogiri",
+      Version: (string) (len=6) "1.12.5"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=12) "gemfile-lock",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=12) "Gemfile.lock",
+      Language: (string) (len=12) "Gemfile.lock",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(218),
+      ColumnNumber: (*int)(0),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=7) "octokit",
+      Version: (string) (len=6) "4.20.0"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=12) "gemfile-lock",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=12) "Gemfile.lock",
+      Language: (string) (len=12) "Gemfile.lock",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(221),
+      ColumnNumber: (*int)(0),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=8) "pathutil",
+      Version: (string) (len=6) "0.16.2"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=12) "gemfile-lock",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=12) "Gemfile.lock",
+      Language: (string) (len=12) "Gemfile.lock",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(223),
+      ColumnNumber: (*int)(0),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=13) "public_suffix",
+      Version: (string) (len=5) "3.1.1"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=12) "gemfile-lock",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=12) "Gemfile.lock",
+      Language: (string) (len=12) "Gemfile.lock",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(224),
+      ColumnNumber: (*int)(0),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=4) "racc",
+      Version: (string) (len=5) "1.5.2"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=12) "gemfile-lock",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=12) "Gemfile.lock",
+      Language: (string) (len=12) "Gemfile.lock",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(225),
+      ColumnNumber: (*int)(0),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=10) "rb-fsevent",
+      Version: (string) (len=6) "0.10.4"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=12) "gemfile-lock",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=12) "Gemfile.lock",
+      Language: (string) (len=12) "Gemfile.lock",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(226),
+      ColumnNumber: (*int)(0),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=10) "rb-inotify",
+      Version: (string) (len=6) "0.10.1"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=12) "gemfile-lock",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=12) "Gemfile.lock",
+      Language: (string) (len=12) "Gemfile.lock",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(228),
+      ColumnNumber: (*int)(0),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=5) "rexml",
+      Version: (string) (len=5) "3.2.5"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=12) "gemfile-lock",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=12) "Gemfile.lock",
+      Language: (string) (len=12) "Gemfile.lock",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(229),
+      ColumnNumber: (*int)(0),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=5) "rouge",
+      Version: (string) (len=6) "3.23.0"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=12) "gemfile-lock",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=12) "Gemfile.lock",
+      Language: (string) (len=12) "Gemfile.lock",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(230),
+      ColumnNumber: (*int)(0),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=9) "ruby-enum",
+      Version: (string) (len=5) "0.8.0"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=12) "gemfile-lock",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=12) "Gemfile.lock",
+      Language: (string) (len=12) "Gemfile.lock",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(232),
+      ColumnNumber: (*int)(0),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=14) "ruby2_keywords",
+      Version: (string) (len=5) "0.0.2"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=12) "gemfile-lock",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=12) "Gemfile.lock",
+      Language: (string) (len=12) "Gemfile.lock",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(233),
+      ColumnNumber: (*int)(0),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=7) "rubyzip",
+      Version: (string) (len=5) "2.3.0"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=12) "gemfile-lock",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=12) "Gemfile.lock",
+      Language: (string) (len=12) "Gemfile.lock",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(234),
+      ColumnNumber: (*int)(0),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=9) "safe_yaml",
+      Version: (string) (len=5) "1.0.5"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=12) "gemfile-lock",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=12) "Gemfile.lock",
+      Language: (string) (len=12) "Gemfile.lock",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(235),
+      ColumnNumber: (*int)(0),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=4) "sass",
+      Version: (string) (len=5) "3.7.4"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=12) "gemfile-lock",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=12) "Gemfile.lock",
+      Language: (string) (len=12) "Gemfile.lock",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(237),
+      ColumnNumber: (*int)(0),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=11) "sass-listen",
+      Version: (string) (len=5) "4.0.0"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=12) "gemfile-lock",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=12) "Gemfile.lock",
+      Language: (string) (len=12) "Gemfile.lock",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(240),
+      ColumnNumber: (*int)(0),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=6) "sawyer",
+      Version: (string) (len=5) "0.8.2"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=12) "gemfile-lock",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=12) "Gemfile.lock",
+      Language: (string) (len=12) "Gemfile.lock",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(243),
+      ColumnNumber: (*int)(0),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=9) "simpleidn",
+      Version: (string) (len=5) "0.1.1"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=12) "gemfile-lock",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=12) "Gemfile.lock",
+      Language: (string) (len=12) "Gemfile.lock",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(245),
+      ColumnNumber: (*int)(0),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=14) "terminal-table",
+      Version: (string) (len=5) "1.8.0"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=12) "gemfile-lock",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=12) "Gemfile.lock",
+      Language: (string) (len=12) "Gemfile.lock",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(247),
+      ColumnNumber: (*int)(0),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=11) "thread_safe",
+      Version: (string) (len=5) "0.3.6"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=12) "gemfile-lock",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=12) "Gemfile.lock",
+      Language: (string) (len=12) "Gemfile.lock",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(248),
+      ColumnNumber: (*int)(0),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=8) "typhoeus",
+      Version: (string) (len=5) "1.4.0"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=12) "gemfile-lock",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=12) "Gemfile.lock",
+      Language: (string) (len=12) "Gemfile.lock",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(250),
+      ColumnNumber: (*int)(0),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=6) "tzinfo",
+      Version: (string) (len=5) "1.2.9"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=12) "gemfile-lock",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=12) "Gemfile.lock",
+      Language: (string) (len=12) "Gemfile.lock",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(252),
+      ColumnNumber: (*int)(0),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=3) "unf",
+      Version: (string) (len=5) "0.1.4"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=12) "gemfile-lock",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=12) "Gemfile.lock",
+      Language: (string) (len=12) "Gemfile.lock",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(254),
+      ColumnNumber: (*int)(0),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=7) "unf_ext",
+      Version: (string) (len=7) "0.0.7.7"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=12) "gemfile-lock",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=12) "Gemfile.lock",
+      Language: (string) (len=12) "Gemfile.lock",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(255),
+      ColumnNumber: (*int)(0),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=21) "unicode-display_width",
+      Version: (string) (len=5) "1.7.0"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=12) "gemfile-lock",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=12) "Gemfile.lock",
+      Language: (string) (len=12) "Gemfile.lock",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(256),
+      ColumnNumber: (*int)(0),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=7) "webrick",
+      Version: (string) (len=5) "1.7.0"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=12) "gemfile-lock",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=12) "Gemfile.lock",
+      Language: (string) (len=12) "Gemfile.lock",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(257),
+      ColumnNumber: (*int)(0),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=8) "zeitwerk",
+      Version: (string) (len=5) "2.4.2"
+    }
+  })
+}

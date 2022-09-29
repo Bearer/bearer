@@ -1,0 +1,1075 @@
+([]*report.Detection) (len=43) {
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=3) "php",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=9) "paths.php",
+      Language: (string) (len=3) "PHP",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(11),
+      ColumnNumber: (*int)(24),
+      Text: (*string)(<nil>)
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=4) "this",
+      ObjectUUID: (string) (len=1) "1",
+      FieldName: (string) (len=6) "client",
+      FieldUUID: (string) (len=1) "2",
+      FieldType: (string) "",
+      SimpleFieldType: (string) (len=7) "unknown"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=3) "php",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=9) "paths.php",
+      Language: (string) (len=3) "PHP",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(11),
+      ColumnNumber: (*int)(32),
+      Text: (*string)(<nil>)
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=6) "client",
+      ObjectUUID: (string) (len=1) "2",
+      FieldName: (string) (len=7) "request",
+      FieldUUID: (string) (len=1) "3",
+      FieldType: (string) "",
+      SimpleFieldType: (string) (len=7) "unknown"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=3) "php",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=9) "paths.php",
+      Language: (string) (len=3) "PHP",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(16),
+      ColumnNumber: (*int)(42),
+      Text: (*string)(<nil>)
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=8) "response",
+      ObjectUUID: (string) (len=1) "6",
+      FieldName: (string) (len=13) "getStatusCode",
+      FieldUUID: (string) (len=1) "7",
+      FieldType: (string) "",
+      SimpleFieldType: (string) (len=7) "unknown"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=3) "php",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=9) "paths.php",
+      Language: (string) (len=3) "PHP",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(18),
+      ColumnNumber: (*int)(36),
+      Text: (*string)(<nil>)
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=4) "this",
+      ObjectUUID: (string) (len=1) "1",
+      FieldName: (string) (len=10) "serializer",
+      FieldUUID: (string) (len=1) "4",
+      FieldType: (string) "",
+      SimpleFieldType: (string) (len=7) "unknown"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=3) "php",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=9) "paths.php",
+      Language: (string) (len=3) "PHP",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(18),
+      ColumnNumber: (*int)(48),
+      Text: (*string)(<nil>)
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=10) "serializer",
+      ObjectUUID: (string) (len=1) "4",
+      FieldName: (string) (len=11) "deserialize",
+      FieldUUID: (string) (len=1) "5",
+      FieldType: (string) "",
+      SimpleFieldType: (string) (len=7) "unknown"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=3) "php",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=9) "paths.php",
+      Language: (string) (len=3) "PHP",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(18),
+      ColumnNumber: (*int)(71),
+      Text: (*string)(<nil>)
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=8) "response",
+      ObjectUUID: (string) (len=1) "6",
+      FieldName: (string) (len=10) "getContent",
+      FieldUUID: (string) (len=1) "8",
+      FieldType: (string) "",
+      SimpleFieldType: (string) (len=7) "unknown"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=3) "php",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=9) "paths.php",
+      Language: (string) (len=3) "PHP",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(23),
+      ColumnNumber: (*int)(42),
+      Text: (*string)(<nil>)
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=15) "deliveryMessage",
+      ObjectUUID: (string) (len=2) "10",
+      FieldName: (string) (len=8) "platform",
+      FieldUUID: (string) (len=2) "11",
+      FieldType: (string) "",
+      SimpleFieldType: (string) (len=7) "unknown"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=3) "php",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=9) "paths.php",
+      Language: (string) (len=3) "PHP",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(35),
+      ColumnNumber: (*int)(24),
+      Text: (*string)(<nil>)
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=4) "this",
+      ObjectUUID: (string) (len=2) "12",
+      FieldName: (string) (len=6) "client",
+      FieldUUID: (string) (len=2) "13",
+      FieldType: (string) "",
+      SimpleFieldType: (string) (len=7) "unknown"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=3) "php",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=9) "paths.php",
+      Language: (string) (len=3) "PHP",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(35),
+      ColumnNumber: (*int)(32),
+      Text: (*string)(<nil>)
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=6) "client",
+      ObjectUUID: (string) (len=2) "13",
+      FieldName: (string) (len=7) "request",
+      FieldUUID: (string) (len=2) "14",
+      FieldType: (string) "",
+      SimpleFieldType: (string) (len=7) "unknown"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=3) "php",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=9) "paths.php",
+      Language: (string) (len=3) "PHP",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(37),
+      ColumnNumber: (*int)(50),
+      Text: (*string)(<nil>)
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=8) "customer",
+      ObjectUUID: (string) (len=2) "17",
+      FieldName: (string) (len=3) "Foo",
+      FieldUUID: (string) (len=2) "18",
+      FieldType: (string) "",
+      SimpleFieldType: (string) (len=7) "unknown"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=3) "php",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=9) "paths.php",
+      Language: (string) (len=3) "PHP",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(37),
+      ColumnNumber: (*int)(90),
+      Text: (*string)(<nil>)
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=8) "platform",
+      ObjectUUID: (string) (len=2) "20",
+      FieldName: (string) (len=3) "Bar",
+      FieldUUID: (string) (len=2) "21",
+      FieldType: (string) "",
+      SimpleFieldType: (string) (len=7) "unknown"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=3) "php",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=9) "paths.php",
+      Language: (string) (len=3) "PHP",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(40),
+      ColumnNumber: (*int)(42),
+      Text: (*string)(<nil>)
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=8) "response",
+      ObjectUUID: (string) (len=2) "23",
+      FieldName: (string) (len=13) "getStatusCode",
+      FieldUUID: (string) (len=2) "24",
+      FieldType: (string) "",
+      SimpleFieldType: (string) (len=7) "unknown"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=3) "php",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=9) "paths.php",
+      Language: (string) (len=3) "PHP",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(42),
+      ColumnNumber: (*int)(36),
+      Text: (*string)(<nil>)
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=4) "this",
+      ObjectUUID: (string) (len=2) "12",
+      FieldName: (string) (len=10) "serializer",
+      FieldUUID: (string) (len=2) "15",
+      FieldType: (string) "",
+      SimpleFieldType: (string) (len=7) "unknown"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=3) "php",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=9) "paths.php",
+      Language: (string) (len=3) "PHP",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(42),
+      ColumnNumber: (*int)(48),
+      Text: (*string)(<nil>)
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=10) "serializer",
+      ObjectUUID: (string) (len=2) "15",
+      FieldName: (string) (len=11) "deserialize",
+      FieldUUID: (string) (len=2) "16",
+      FieldType: (string) "",
+      SimpleFieldType: (string) (len=7) "unknown"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=3) "php",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=9) "paths.php",
+      Language: (string) (len=3) "PHP",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(42),
+      ColumnNumber: (*int)(71),
+      Text: (*string)(<nil>)
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=8) "response",
+      ObjectUUID: (string) (len=2) "23",
+      FieldName: (string) (len=10) "getContent",
+      FieldUUID: (string) (len=2) "25",
+      FieldType: (string) "",
+      SimpleFieldType: (string) (len=7) "unknown"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=3) "php",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=9) "paths.php",
+      Language: (string) (len=3) "PHP",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(47),
+      ColumnNumber: (*int)(42),
+      Text: (*string)(<nil>)
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=15) "deliveryMessage",
+      ObjectUUID: (string) (len=2) "27",
+      FieldName: (string) (len=8) "platform",
+      FieldUUID: (string) (len=2) "28",
+      FieldType: (string) "",
+      SimpleFieldType: (string) (len=7) "unknown"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=3) "php",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=9) "paths.php",
+      Language: (string) (len=3) "PHP",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(59),
+      ColumnNumber: (*int)(24),
+      Text: (*string)(<nil>)
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=4) "this",
+      ObjectUUID: (string) (len=2) "29",
+      FieldName: (string) (len=6) "client",
+      FieldUUID: (string) (len=2) "30",
+      FieldType: (string) "",
+      SimpleFieldType: (string) (len=7) "unknown"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=3) "php",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=9) "paths.php",
+      Language: (string) (len=3) "PHP",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(59),
+      ColumnNumber: (*int)(32),
+      Text: (*string)(<nil>)
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=6) "client",
+      ObjectUUID: (string) (len=2) "30",
+      FieldName: (string) (len=7) "request",
+      FieldUUID: (string) (len=2) "31",
+      FieldType: (string) "",
+      SimpleFieldType: (string) (len=7) "unknown"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=3) "php",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=9) "paths.php",
+      Language: (string) (len=3) "PHP",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(65),
+      ColumnNumber: (*int)(42),
+      Text: (*string)(<nil>)
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=8) "response",
+      ObjectUUID: (string) (len=2) "34",
+      FieldName: (string) (len=13) "getStatusCode",
+      FieldUUID: (string) (len=2) "35",
+      FieldType: (string) "",
+      SimpleFieldType: (string) (len=7) "unknown"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=3) "php",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=9) "paths.php",
+      Language: (string) (len=3) "PHP",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(66),
+      ColumnNumber: (*int)(36),
+      Text: (*string)(<nil>)
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=4) "this",
+      ObjectUUID: (string) (len=2) "29",
+      FieldName: (string) (len=10) "serializer",
+      FieldUUID: (string) (len=2) "32",
+      FieldType: (string) "",
+      SimpleFieldType: (string) (len=7) "unknown"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=3) "php",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=9) "paths.php",
+      Language: (string) (len=3) "PHP",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(66),
+      ColumnNumber: (*int)(48),
+      Text: (*string)(<nil>)
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=10) "serializer",
+      ObjectUUID: (string) (len=2) "32",
+      FieldName: (string) (len=11) "deserialize",
+      FieldUUID: (string) (len=2) "33",
+      FieldType: (string) "",
+      SimpleFieldType: (string) (len=7) "unknown"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=3) "php",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=9) "paths.php",
+      Language: (string) (len=3) "PHP",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(66),
+      ColumnNumber: (*int)(71),
+      Text: (*string)(<nil>)
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=8) "response",
+      ObjectUUID: (string) (len=2) "34",
+      FieldName: (string) (len=10) "getContent",
+      FieldUUID: (string) (len=2) "36",
+      FieldType: (string) "",
+      SimpleFieldType: (string) (len=7) "unknown"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=3) "php",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=9) "paths.php",
+      Language: (string) (len=3) "PHP",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(71),
+      ColumnNumber: (*int)(42),
+      Text: (*string)(<nil>)
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=15) "deliveryMessage",
+      ObjectUUID: (string) (len=2) "38",
+      FieldName: (string) (len=8) "platform",
+      FieldUUID: (string) (len=2) "39",
+      FieldType: (string) "",
+      SimpleFieldType: (string) (len=7) "unknown"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=3) "php",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=9) "paths.php",
+      Language: (string) (len=3) "PHP",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(83),
+      ColumnNumber: (*int)(24),
+      Text: (*string)(<nil>)
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=4) "this",
+      ObjectUUID: (string) (len=2) "40",
+      FieldName: (string) (len=6) "client",
+      FieldUUID: (string) (len=2) "41",
+      FieldType: (string) "",
+      SimpleFieldType: (string) (len=7) "unknown"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=3) "php",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=9) "paths.php",
+      Language: (string) (len=3) "PHP",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(83),
+      ColumnNumber: (*int)(32),
+      Text: (*string)(<nil>)
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=6) "client",
+      ObjectUUID: (string) (len=2) "41",
+      FieldName: (string) (len=7) "request",
+      FieldUUID: (string) (len=2) "42",
+      FieldType: (string) "",
+      SimpleFieldType: (string) (len=7) "unknown"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=3) "php",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=9) "paths.php",
+      Language: (string) (len=3) "PHP",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(88),
+      ColumnNumber: (*int)(42),
+      Text: (*string)(<nil>)
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=8) "response",
+      ObjectUUID: (string) (len=2) "45",
+      FieldName: (string) (len=13) "getStatusCode",
+      FieldUUID: (string) (len=2) "46",
+      FieldType: (string) "",
+      SimpleFieldType: (string) (len=7) "unknown"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=3) "php",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=9) "paths.php",
+      Language: (string) (len=3) "PHP",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(89),
+      ColumnNumber: (*int)(36),
+      Text: (*string)(<nil>)
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=4) "this",
+      ObjectUUID: (string) (len=2) "40",
+      FieldName: (string) (len=10) "serializer",
+      FieldUUID: (string) (len=2) "43",
+      FieldType: (string) "",
+      SimpleFieldType: (string) (len=7) "unknown"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=3) "php",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=9) "paths.php",
+      Language: (string) (len=3) "PHP",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(89),
+      ColumnNumber: (*int)(48),
+      Text: (*string)(<nil>)
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=10) "serializer",
+      ObjectUUID: (string) (len=2) "43",
+      FieldName: (string) (len=11) "deserialize",
+      FieldUUID: (string) (len=2) "44",
+      FieldType: (string) "",
+      SimpleFieldType: (string) (len=7) "unknown"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=3) "php",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=9) "paths.php",
+      Language: (string) (len=3) "PHP",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(89),
+      ColumnNumber: (*int)(71),
+      Text: (*string)(<nil>)
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=8) "response",
+      ObjectUUID: (string) (len=2) "45",
+      FieldName: (string) (len=10) "getContent",
+      FieldUUID: (string) (len=2) "47",
+      FieldType: (string) "",
+      SimpleFieldType: (string) (len=7) "unknown"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=3) "php",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=9) "paths.php",
+      Language: (string) (len=3) "PHP",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(94),
+      ColumnNumber: (*int)(42),
+      Text: (*string)(<nil>)
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=15) "deliveryMessage",
+      ObjectUUID: (string) (len=2) "49",
+      FieldName: (string) (len=8) "platform",
+      FieldUUID: (string) (len=2) "50",
+      FieldType: (string) "",
+      SimpleFieldType: (string) (len=7) "unknown"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=3) "php",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=9) "paths.php",
+      Language: (string) (len=3) "PHP",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(106),
+      ColumnNumber: (*int)(24),
+      Text: (*string)(<nil>)
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=4) "this",
+      ObjectUUID: (string) (len=2) "51",
+      FieldName: (string) (len=6) "client",
+      FieldUUID: (string) (len=2) "52",
+      FieldType: (string) "",
+      SimpleFieldType: (string) (len=7) "unknown"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=3) "php",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=9) "paths.php",
+      Language: (string) (len=3) "PHP",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(106),
+      ColumnNumber: (*int)(32),
+      Text: (*string)(<nil>)
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=6) "client",
+      ObjectUUID: (string) (len=2) "52",
+      FieldName: (string) (len=7) "request",
+      FieldUUID: (string) (len=2) "53",
+      FieldType: (string) "",
+      SimpleFieldType: (string) (len=7) "unknown"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=3) "php",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=9) "paths.php",
+      Language: (string) (len=3) "PHP",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(111),
+      ColumnNumber: (*int)(42),
+      Text: (*string)(<nil>)
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=8) "response",
+      ObjectUUID: (string) (len=2) "56",
+      FieldName: (string) (len=13) "getStatusCode",
+      FieldUUID: (string) (len=2) "57",
+      FieldType: (string) "",
+      SimpleFieldType: (string) (len=7) "unknown"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=3) "php",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=9) "paths.php",
+      Language: (string) (len=3) "PHP",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(113),
+      ColumnNumber: (*int)(36),
+      Text: (*string)(<nil>)
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=4) "this",
+      ObjectUUID: (string) (len=2) "51",
+      FieldName: (string) (len=10) "serializer",
+      FieldUUID: (string) (len=2) "54",
+      FieldType: (string) "",
+      SimpleFieldType: (string) (len=7) "unknown"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=3) "php",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=9) "paths.php",
+      Language: (string) (len=3) "PHP",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(113),
+      ColumnNumber: (*int)(48),
+      Text: (*string)(<nil>)
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=10) "serializer",
+      ObjectUUID: (string) (len=2) "54",
+      FieldName: (string) (len=11) "deserialize",
+      FieldUUID: (string) (len=2) "55",
+      FieldType: (string) "",
+      SimpleFieldType: (string) (len=7) "unknown"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=3) "php",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=9) "paths.php",
+      Language: (string) (len=3) "PHP",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(113),
+      ColumnNumber: (*int)(71),
+      Text: (*string)(<nil>)
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=8) "response",
+      ObjectUUID: (string) (len=2) "56",
+      FieldName: (string) (len=10) "getContent",
+      FieldUUID: (string) (len=2) "58",
+      FieldType: (string) "",
+      SimpleFieldType: (string) (len=7) "unknown"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=3) "php",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=9) "paths.php",
+      Language: (string) (len=3) "PHP",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(118),
+      ColumnNumber: (*int)(42),
+      Text: (*string)(<nil>)
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=15) "deliveryMessage",
+      ObjectUUID: (string) (len=2) "60",
+      FieldName: (string) (len=8) "platform",
+      FieldUUID: (string) (len=2) "61",
+      FieldType: (string) "",
+      SimpleFieldType: (string) (len=7) "unknown"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=9) "interface",
+    DetectorType: (detectors.Type) (len=3) "php",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=9) "paths.php",
+      Language: (string) (len=3) "PHP",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(9),
+      ColumnNumber: (*int)(13),
+      Text: (*string)((len=11) "\"/somepath\"")
+    },
+    Value: (interfaces.Interface) {
+      Type: (interfaces.Type) (len=4) "path",
+      Value: (*values.Value)({
+        Parts: ([]values.Part) (len=1) {
+          (*values.String)({
+            Type: (values.PartType) (len=6) "string",
+            Value: (string) (len=9) "/somepath"
+          })
+        }
+      }),
+      VariableName: (string) ""
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=9) "interface",
+    DetectorType: (detectors.Type) (len=3) "php",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=9) "paths.php",
+      Language: (string) (len=3) "PHP",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(13),
+      ColumnNumber: (*int)(9),
+      Text: (*string)((len=31) "'/api/delivery-messages1'.$test")
+    },
+    Value: (interfaces.Interface) {
+      Type: (interfaces.Type) (len=4) "path",
+      Value: (*values.Value)({
+        Parts: ([]values.Part) (len=2) {
+          (*values.String)({
+            Type: (values.PartType) (len=6) "string",
+            Value: (string) (len=23) "/api/delivery-messages1"
+          }),
+          (*values.String)({
+            Type: (values.PartType) (len=6) "string",
+            Value: (string) (len=9) "/somepath"
+          })
+        }
+      }),
+      VariableName: (string) ""
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=9) "interface",
+    DetectorType: (detectors.Type) (len=3) "php",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=9) "paths.php",
+      Language: (string) (len=3) "PHP",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(37),
+      ColumnNumber: (*int)(9),
+      Text: (*string)((len=88) "$apiURL . \"/api/customers/\" . $customer->Foo->id . \"/transactions/\" . $platform->Bar->id")
+    },
+    Value: (interfaces.Interface) {
+      Type: (interfaces.Type) (len=4) "path",
+      Value: (*values.Value)({
+        Parts: ([]values.Part) (len=5) {
+          (*values.VariableReference)({
+            Type: (values.PartType) (len=18) "variable_reference",
+            Identifier: (variables.Identifier) {
+              Type: (variables.Type) (len=8) "variable",
+              Name: (string) (len=6) "apiURL"
+            }
+          }),
+          (*values.String)({
+            Type: (values.PartType) (len=6) "string",
+            Value: (string) (len=15) "/api/customers/"
+          }),
+          (*values.Unknown)({
+            Type: (values.PartType) (len=7) "unknown",
+            Parts: ([]values.Part) (len=3) {
+              (*values.VariableReference)({
+                Type: (values.PartType) (len=18) "variable_reference",
+                Identifier: (variables.Identifier) {
+                  Type: (variables.Type) (len=8) "variable",
+                  Name: (string) (len=8) "customer"
+                }
+              }),
+              (*values.VariableReference)({
+                Type: (values.PartType) (len=18) "variable_reference",
+                Identifier: (variables.Identifier) {
+                  Type: (variables.Type) (len=8) "variable",
+                  Name: (string) (len=3) "Foo"
+                }
+              }),
+              (*values.VariableReference)({
+                Type: (values.PartType) (len=18) "variable_reference",
+                Identifier: (variables.Identifier) {
+                  Type: (variables.Type) (len=8) "variable",
+                  Name: (string) (len=2) "id"
+                }
+              })
+            }
+          }),
+          (*values.String)({
+            Type: (values.PartType) (len=6) "string",
+            Value: (string) (len=14) "/transactions/"
+          }),
+          (*values.Unknown)({
+            Type: (values.PartType) (len=7) "unknown",
+            Parts: ([]values.Part) (len=3) {
+              (*values.VariableReference)({
+                Type: (values.PartType) (len=18) "variable_reference",
+                Identifier: (variables.Identifier) {
+                  Type: (variables.Type) (len=8) "variable",
+                  Name: (string) (len=8) "platform"
+                }
+              }),
+              (*values.VariableReference)({
+                Type: (values.PartType) (len=18) "variable_reference",
+                Identifier: (variables.Identifier) {
+                  Type: (variables.Type) (len=8) "variable",
+                  Name: (string) (len=3) "Bar"
+                }
+              }),
+              (*values.VariableReference)({
+                Type: (values.PartType) (len=18) "variable_reference",
+                Identifier: (variables.Identifier) {
+                  Type: (variables.Type) (len=8) "variable",
+                  Name: (string) (len=2) "id"
+                }
+              })
+            }
+          })
+        }
+      }),
+      VariableName: (string) ""
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=9) "interface",
+    DetectorType: (detectors.Type) (len=3) "php",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=9) "paths.php",
+      Language: (string) (len=3) "PHP",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(62),
+      ColumnNumber: (*int)(9),
+      Text: (*string)((len=64) "\"/api/customers/\" . $customerID . \"/transactions/\" . $platformID")
+    },
+    Value: (interfaces.Interface) {
+      Type: (interfaces.Type) (len=4) "path",
+      Value: (*values.Value)({
+        Parts: ([]values.Part) (len=4) {
+          (*values.String)({
+            Type: (values.PartType) (len=6) "string",
+            Value: (string) (len=15) "/api/customers/"
+          }),
+          (*values.VariableReference)({
+            Type: (values.PartType) (len=18) "variable_reference",
+            Identifier: (variables.Identifier) {
+              Type: (variables.Type) (len=8) "variable",
+              Name: (string) (len=10) "customerID"
+            }
+          }),
+          (*values.String)({
+            Type: (values.PartType) (len=6) "string",
+            Value: (string) (len=14) "/transactions/"
+          }),
+          (*values.VariableReference)({
+            Type: (values.PartType) (len=18) "variable_reference",
+            Identifier: (variables.Identifier) {
+              Type: (variables.Type) (len=8) "variable",
+              Name: (string) (len=10) "platformID"
+            }
+          })
+        }
+      }),
+      VariableName: (string) ""
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=9) "interface",
+    DetectorType: (detectors.Type) (len=3) "php",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=9) "paths.php",
+      Language: (string) (len=3) "PHP",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(85),
+      ColumnNumber: (*int)(9),
+      Text: (*string)((len=95) "\"{$_ENV[\"CUSTOMERS_HOST\"]}:{$port}/api/delivery-messages?num_page={$page}&filters[]={$filters}\"")
+    },
+    Value: (interfaces.Interface) {
+      Type: (interfaces.Type) (len=3) "url",
+      Value: (*values.Value)({
+        Parts: ([]values.Part) (len=7) {
+          (*values.VariableReference)({
+            Type: (values.PartType) (len=18) "variable_reference",
+            Identifier: (variables.Identifier) {
+              Type: (variables.Type) (len=11) "environment",
+              Name: (string) (len=14) "CUSTOMERS_HOST"
+            }
+          }),
+          (*values.String)({
+            Type: (values.PartType) (len=6) "string",
+            Value: (string) (len=1) ":"
+          }),
+          (*values.VariableReference)({
+            Type: (values.PartType) (len=18) "variable_reference",
+            Identifier: (variables.Identifier) {
+              Type: (variables.Type) (len=8) "variable",
+              Name: (string) (len=4) "port"
+            }
+          }),
+          (*values.String)({
+            Type: (values.PartType) (len=6) "string",
+            Value: (string) (len=32) "/api/delivery-messages?num_page="
+          }),
+          (*values.VariableReference)({
+            Type: (values.PartType) (len=18) "variable_reference",
+            Identifier: (variables.Identifier) {
+              Type: (variables.Type) (len=8) "variable",
+              Name: (string) (len=4) "page"
+            }
+          }),
+          (*values.String)({
+            Type: (values.PartType) (len=6) "string",
+            Value: (string) (len=11) "&filters[]="
+          }),
+          (*values.VariableReference)({
+            Type: (values.PartType) (len=18) "variable_reference",
+            Identifier: (variables.Identifier) {
+              Type: (variables.Type) (len=8) "variable",
+              Name: (string) (len=7) "filters"
+            }
+          })
+        }
+      }),
+      VariableName: (string) ""
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=9) "interface",
+    DetectorType: (detectors.Type) (len=3) "php",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=9) "paths.php",
+      Language: (string) (len=3) "PHP",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(108),
+      ColumnNumber: (*int)(9),
+      Text: (*string)((len=72) "\"{$apiURL}api/customers/\" . $customerID . \"/transactions/\" . $platformID")
+    },
+    Value: (interfaces.Interface) {
+      Type: (interfaces.Type) (len=4) "path",
+      Value: (*values.Value)({
+        Parts: ([]values.Part) (len=5) {
+          (*values.VariableReference)({
+            Type: (values.PartType) (len=18) "variable_reference",
+            Identifier: (variables.Identifier) {
+              Type: (variables.Type) (len=8) "variable",
+              Name: (string) (len=6) "apiURL"
+            }
+          }),
+          (*values.String)({
+            Type: (values.PartType) (len=6) "string",
+            Value: (string) (len=14) "api/customers/"
+          }),
+          (*values.VariableReference)({
+            Type: (values.PartType) (len=18) "variable_reference",
+            Identifier: (variables.Identifier) {
+              Type: (variables.Type) (len=8) "variable",
+              Name: (string) (len=10) "customerID"
+            }
+          }),
+          (*values.String)({
+            Type: (values.PartType) (len=6) "string",
+            Value: (string) (len=14) "/transactions/"
+          }),
+          (*values.VariableReference)({
+            Type: (values.PartType) (len=18) "variable_reference",
+            Identifier: (variables.Identifier) {
+              Type: (variables.Type) (len=8) "variable",
+              Name: (string) (len=10) "platformID"
+            }
+          })
+        }
+      }),
+      VariableName: (string) ""
+    }
+  })
+}

@@ -1,0 +1,15 @@
+{% if google_analytics_id %}
+    <script async src="https://www.googletagmanager.com/gtag/js?id={{ google_analytics_id }}"></script>
+    <script>
+      {% endif %}
+      {% block extratracking %}{% endblock %}
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments)};
+      gtag('js', new Date());
+
+      {% if user.is_authenticated %}
+        gtag('config', "{{ google_analytics_id }}", { 'user_id': "{{ user.pk }}" });
+      {% else %}
+        gtag('config', "{{ google_analytics_id }}");
+    </script>
+{% endif %}

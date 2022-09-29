@@ -1,0 +1,1449 @@
+([]*report.Detection) (len=67) {
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=9) "operation",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-swagger.yaml",
+      Language: (string) (len=4) "YAML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(34),
+      ColumnNumber: (*int)(5),
+      Text: (*string)((len=4) "post")
+    },
+    Value: (operations.Operation) {
+      Path: (string) (len=4) "/pet",
+      Type: (string) (len=4) "POST",
+      Urls: ([]operations.Url) (len=1) {
+        (operations.Url) {
+          Url: (string) (len=29) "http://petstore.swagger.io/v2",
+          Variables: ([]operations.Variable) <nil>
+        }
+      }
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=9) "operation",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-swagger.yaml",
+      Language: (string) (len=4) "YAML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(63),
+      ColumnNumber: (*int)(5),
+      Text: (*string)((len=3) "put")
+    },
+    Value: (operations.Operation) {
+      Path: (string) (len=4) "/pet",
+      Type: (string) (len=3) "PUT",
+      Urls: ([]operations.Url) (len=1) {
+        (operations.Url) {
+          Url: (string) (len=29) "http://petstore.swagger.io/v2",
+          Variables: ([]operations.Variable) <nil>
+        }
+      }
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=9) "operation",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-swagger.yaml",
+      Language: (string) (len=4) "YAML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(94),
+      ColumnNumber: (*int)(5),
+      Text: (*string)((len=3) "get")
+    },
+    Value: (operations.Operation) {
+      Path: (string) (len=17) "/pet/findByStatus",
+      Type: (string) (len=3) "GET",
+      Urls: ([]operations.Url) (len=1) {
+        (operations.Url) {
+          Url: (string) (len=29) "http://petstore.swagger.io/v2",
+          Variables: ([]operations.Variable) <nil>
+        }
+      }
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=9) "operation",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-swagger.yaml",
+      Language: (string) (len=4) "YAML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(131),
+      ColumnNumber: (*int)(5),
+      Text: (*string)((len=3) "get")
+    },
+    Value: (operations.Operation) {
+      Path: (string) (len=15) "/pet/findByTags",
+      Type: (string) (len=3) "GET",
+      Urls: ([]operations.Url) (len=1) {
+        (operations.Url) {
+          Url: (string) (len=29) "http://petstore.swagger.io/v2",
+          Variables: ([]operations.Variable) <nil>
+        }
+      }
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=9) "operation",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-swagger.yaml",
+      Language: (string) (len=4) "YAML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(163),
+      ColumnNumber: (*int)(5),
+      Text: (*string)((len=3) "get")
+    },
+    Value: (operations.Operation) {
+      Path: (string) (len=6) "/pet/*",
+      Type: (string) (len=3) "GET",
+      Urls: ([]operations.Url) (len=1) {
+        (operations.Url) {
+          Url: (string) (len=29) "http://petstore.swagger.io/v2",
+          Variables: ([]operations.Variable) <nil>
+        }
+      }
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=9) "operation",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-swagger.yaml",
+      Language: (string) (len=4) "YAML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(190),
+      ColumnNumber: (*int)(5),
+      Text: (*string)((len=4) "post")
+    },
+    Value: (operations.Operation) {
+      Path: (string) (len=6) "/pet/*",
+      Type: (string) (len=4) "POST",
+      Urls: ([]operations.Url) (len=1) {
+        (operations.Url) {
+          Url: (string) (len=29) "http://petstore.swagger.io/v2",
+          Variables: ([]operations.Variable) <nil>
+        }
+      }
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=9) "operation",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-swagger.yaml",
+      Language: (string) (len=4) "YAML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(225),
+      ColumnNumber: (*int)(5),
+      Text: (*string)((len=6) "delete")
+    },
+    Value: (operations.Operation) {
+      Path: (string) (len=6) "/pet/*",
+      Type: (string) (len=6) "DELETE",
+      Urls: ([]operations.Url) (len=1) {
+        (operations.Url) {
+          Url: (string) (len=29) "http://petstore.swagger.io/v2",
+          Variables: ([]operations.Variable) <nil>
+        }
+      }
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=9) "operation",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-swagger.yaml",
+      Language: (string) (len=4) "YAML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(253),
+      ColumnNumber: (*int)(5),
+      Text: (*string)((len=4) "post")
+    },
+    Value: (operations.Operation) {
+      Path: (string) (len=18) "/pet/*/uploadImage",
+      Type: (string) (len=4) "POST",
+      Urls: ([]operations.Url) (len=1) {
+        (operations.Url) {
+          Url: (string) (len=29) "http://petstore.swagger.io/v2",
+          Variables: ([]operations.Variable) <nil>
+        }
+      }
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=9) "operation",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-swagger.yaml",
+      Language: (string) (len=4) "YAML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(290),
+      ColumnNumber: (*int)(5),
+      Text: (*string)((len=3) "get")
+    },
+    Value: (operations.Operation) {
+      Path: (string) (len=16) "/store/inventory",
+      Type: (string) (len=3) "GET",
+      Urls: ([]operations.Url) (len=1) {
+        (operations.Url) {
+          Url: (string) (len=29) "http://petstore.swagger.io/v2",
+          Variables: ([]operations.Variable) <nil>
+        }
+      }
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=9) "operation",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-swagger.yaml",
+      Language: (string) (len=4) "YAML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(310),
+      ColumnNumber: (*int)(5),
+      Text: (*string)((len=4) "post")
+    },
+    Value: (operations.Operation) {
+      Path: (string) (len=12) "/store/order",
+      Type: (string) (len=4) "POST",
+      Urls: ([]operations.Url) (len=1) {
+        (operations.Url) {
+          Url: (string) (len=29) "http://petstore.swagger.io/v2",
+          Variables: ([]operations.Variable) <nil>
+        }
+      }
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=9) "operation",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-swagger.yaml",
+      Language: (string) (len=4) "YAML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(334),
+      ColumnNumber: (*int)(5),
+      Text: (*string)((len=3) "get")
+    },
+    Value: (operations.Operation) {
+      Path: (string) (len=14) "/store/order/*",
+      Type: (string) (len=3) "GET",
+      Urls: ([]operations.Url) (len=1) {
+        (operations.Url) {
+          Url: (string) (len=29) "http://petstore.swagger.io/v2",
+          Variables: ([]operations.Variable) <nil>
+        }
+      }
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=9) "operation",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-swagger.yaml",
+      Language: (string) (len=4) "YAML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(361),
+      ColumnNumber: (*int)(5),
+      Text: (*string)((len=6) "delete")
+    },
+    Value: (operations.Operation) {
+      Path: (string) (len=14) "/store/order/*",
+      Type: (string) (len=6) "DELETE",
+      Urls: ([]operations.Url) (len=1) {
+        (operations.Url) {
+          Url: (string) (len=29) "http://petstore.swagger.io/v2",
+          Variables: ([]operations.Variable) <nil>
+        }
+      }
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=9) "operation",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-swagger.yaml",
+      Language: (string) (len=4) "YAML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(387),
+      ColumnNumber: (*int)(5),
+      Text: (*string)((len=4) "post")
+    },
+    Value: (operations.Operation) {
+      Path: (string) (len=5) "/user",
+      Type: (string) (len=4) "POST",
+      Urls: ([]operations.Url) (len=1) {
+        (operations.Url) {
+          Url: (string) (len=29) "http://petstore.swagger.io/v2",
+          Variables: ([]operations.Variable) <nil>
+        }
+      }
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=9) "operation",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-swagger.yaml",
+      Language: (string) (len=4) "YAML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(407),
+      ColumnNumber: (*int)(5),
+      Text: (*string)((len=4) "post")
+    },
+    Value: (operations.Operation) {
+      Path: (string) (len=21) "/user/createWithArray",
+      Type: (string) (len=4) "POST",
+      Urls: ([]operations.Url) (len=1) {
+        (operations.Url) {
+          Url: (string) (len=29) "http://petstore.swagger.io/v2",
+          Variables: ([]operations.Variable) <nil>
+        }
+      }
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=9) "operation",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-swagger.yaml",
+      Language: (string) (len=4) "YAML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(429),
+      ColumnNumber: (*int)(5),
+      Text: (*string)((len=4) "post")
+    },
+    Value: (operations.Operation) {
+      Path: (string) (len=20) "/user/createWithList",
+      Type: (string) (len=4) "POST",
+      Urls: ([]operations.Url) (len=1) {
+        (operations.Url) {
+          Url: (string) (len=29) "http://petstore.swagger.io/v2",
+          Variables: ([]operations.Variable) <nil>
+        }
+      }
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=9) "operation",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-swagger.yaml",
+      Language: (string) (len=4) "YAML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(451),
+      ColumnNumber: (*int)(5),
+      Text: (*string)((len=3) "get")
+    },
+    Value: (operations.Operation) {
+      Path: (string) (len=11) "/user/login",
+      Type: (string) (len=3) "GET",
+      Urls: ([]operations.Url) (len=1) {
+        (operations.Url) {
+          Url: (string) (len=29) "http://petstore.swagger.io/v2",
+          Variables: ([]operations.Variable) <nil>
+        }
+      }
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=9) "operation",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-swagger.yaml",
+      Language: (string) (len=4) "YAML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(488),
+      ColumnNumber: (*int)(5),
+      Text: (*string)((len=3) "get")
+    },
+    Value: (operations.Operation) {
+      Path: (string) (len=12) "/user/logout",
+      Type: (string) (len=3) "GET",
+      Urls: ([]operations.Url) (len=1) {
+        (operations.Url) {
+          Url: (string) (len=29) "http://petstore.swagger.io/v2",
+          Variables: ([]operations.Variable) <nil>
+        }
+      }
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=9) "operation",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-swagger.yaml",
+      Language: (string) (len=4) "YAML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(502),
+      ColumnNumber: (*int)(5),
+      Text: (*string)((len=3) "get")
+    },
+    Value: (operations.Operation) {
+      Path: (string) (len=7) "/user/*",
+      Type: (string) (len=3) "GET",
+      Urls: ([]operations.Url) (len=1) {
+        (operations.Url) {
+          Url: (string) (len=29) "http://petstore.swagger.io/v2",
+          Variables: ([]operations.Variable) <nil>
+        }
+      }
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=9) "operation",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-swagger.yaml",
+      Language: (string) (len=4) "YAML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(526),
+      ColumnNumber: (*int)(5),
+      Text: (*string)((len=3) "put")
+    },
+    Value: (operations.Operation) {
+      Path: (string) (len=7) "/user/*",
+      Type: (string) (len=3) "PUT",
+      Urls: ([]operations.Url) (len=1) {
+        (operations.Url) {
+          Url: (string) (len=29) "http://petstore.swagger.io/v2",
+          Variables: ([]operations.Variable) <nil>
+        }
+      }
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=9) "operation",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-swagger.yaml",
+      Language: (string) (len=4) "YAML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(552),
+      ColumnNumber: (*int)(5),
+      Text: (*string)((len=6) "delete")
+    },
+    Value: (operations.Operation) {
+      Path: (string) (len=7) "/user/*",
+      Type: (string) (len=6) "DELETE",
+      Urls: ([]operations.Url) (len=1) {
+        (operations.Url) {
+          Url: (string) (len=29) "http://petstore.swagger.io/v2",
+          Variables: ([]operations.Variable) <nil>
+        }
+      }
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-swagger.yaml",
+      Language: (string) (len=4) "YAML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(48),
+      ColumnNumber: (*int)(17),
+      Text: (*string)((len=5) "\"id1\"")
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=6) "addPet",
+      ObjectUUID: (string) (len=4) "7947",
+      FieldName: (string) (len=3) "id1",
+      FieldUUID: (string) (len=4) "7986",
+      FieldType: (string) (len=6) "string",
+      SimpleFieldType: (string) (len=6) "string"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-swagger.yaml",
+      Language: (string) (len=4) "YAML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(53),
+      ColumnNumber: (*int)(17),
+      Text: (*string)((len=5) "\"id2\"")
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=6) "addPet",
+      ObjectUUID: (string) (len=4) "7947",
+      FieldName: (string) (len=3) "id2",
+      FieldUUID: (string) (len=4) "8020",
+      FieldType: (string) (len=6) "string",
+      SimpleFieldType: (string) (len=6) "string"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-swagger.yaml",
+      Language: (string) (len=4) "YAML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(104),
+      ColumnNumber: (*int)(17),
+      Text: (*string)((len=8) "\"status\"")
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=16) "findPetsByStatus",
+      ObjectUUID: (string) (len=4) "8282",
+      FieldName: (string) (len=6) "status",
+      FieldUUID: (string) (len=4) "8303",
+      FieldType: (string) (len=5) "array",
+      SimpleFieldType: (string) (len=6) "object"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-swagger.yaml",
+      Language: (string) (len=4) "YAML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(141),
+      ColumnNumber: (*int)(17),
+      Text: (*string)((len=6) "\"tags\"")
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=14) "findPetsByTags",
+      ObjectUUID: (string) (len=4) "8487",
+      FieldName: (string) (len=4) "tags",
+      FieldUUID: (string) (len=4) "8508",
+      FieldType: (string) (len=5) "array",
+      SimpleFieldType: (string) (len=6) "object"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-swagger.yaml",
+      Language: (string) (len=4) "YAML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(173),
+      ColumnNumber: (*int)(17),
+      Text: (*string)((len=7) "\"petId\"")
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=10) "getPetById",
+      ObjectUUID: (string) (len=4) "8671",
+      FieldName: (string) (len=5) "petId",
+      FieldUUID: (string) (len=4) "8692",
+      FieldType: (string) (len=7) "integer",
+      SimpleFieldType: (string) (len=6) "number"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-swagger.yaml",
+      Language: (string) (len=4) "YAML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(202),
+      ColumnNumber: (*int)(17),
+      Text: (*string)((len=7) "\"petId\"")
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=17) "updatePetWithForm",
+      ObjectUUID: (string) (len=4) "8831",
+      FieldName: (string) (len=5) "petId",
+      FieldUUID: (string) (len=4) "8861",
+      FieldType: (string) (len=7) "integer",
+      SimpleFieldType: (string) (len=6) "number"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-swagger.yaml",
+      Language: (string) (len=4) "YAML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(208),
+      ColumnNumber: (*int)(17),
+      Text: (*string)((len=6) "\"name\"")
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=17) "updatePetWithForm",
+      ObjectUUID: (string) (len=4) "8831",
+      FieldName: (string) (len=4) "name",
+      FieldUUID: (string) (len=4) "8901",
+      FieldType: (string) (len=6) "string",
+      SimpleFieldType: (string) (len=6) "string"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-swagger.yaml",
+      Language: (string) (len=4) "YAML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(213),
+      ColumnNumber: (*int)(17),
+      Text: (*string)((len=8) "\"status\"")
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=17) "updatePetWithForm",
+      ObjectUUID: (string) (len=4) "8831",
+      FieldName: (string) (len=6) "status",
+      FieldUUID: (string) (len=4) "8935",
+      FieldType: (string) (len=6) "string",
+      SimpleFieldType: (string) (len=6) "string"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-swagger.yaml",
+      Language: (string) (len=4) "YAML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(235),
+      ColumnNumber: (*int)(17),
+      Text: (*string)((len=9) "\"api_key\"")
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=9) "deletePet",
+      ObjectUUID: (string) (len=4) "9038",
+      FieldName: (string) (len=7) "api_key",
+      FieldUUID: (string) (len=4) "9059",
+      FieldType: (string) (len=6) "string",
+      SimpleFieldType: (string) (len=6) "string"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-swagger.yaml",
+      Language: (string) (len=4) "YAML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(239),
+      ColumnNumber: (*int)(17),
+      Text: (*string)((len=7) "\"petId\"")
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=9) "deletePet",
+      ObjectUUID: (string) (len=4) "9038",
+      FieldName: (string) (len=5) "petId",
+      FieldUUID: (string) (len=4) "9087",
+      FieldType: (string) (len=7) "integer",
+      SimpleFieldType: (string) (len=6) "number"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-swagger.yaml",
+      Language: (string) (len=4) "YAML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(264),
+      ColumnNumber: (*int)(17),
+      Text: (*string)((len=7) "\"petId\"")
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=10) "uploadFile",
+      ObjectUUID: (string) (len=4) "9202",
+      FieldName: (string) (len=5) "petId",
+      FieldUUID: (string) (len=4) "9229",
+      FieldType: (string) (len=7) "integer",
+      SimpleFieldType: (string) (len=6) "number"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-swagger.yaml",
+      Language: (string) (len=4) "YAML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(270),
+      ColumnNumber: (*int)(17),
+      Text: (*string)((len=20) "\"additionalMetadata\"")
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=10) "uploadFile",
+      ObjectUUID: (string) (len=4) "9202",
+      FieldName: (string) (len=18) "additionalMetadata",
+      FieldUUID: (string) (len=4) "9269",
+      FieldType: (string) (len=6) "string",
+      SimpleFieldType: (string) (len=6) "string"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-swagger.yaml",
+      Language: (string) (len=4) "YAML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(275),
+      ColumnNumber: (*int)(17),
+      Text: (*string)((len=6) "\"file\"")
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=10) "uploadFile",
+      ObjectUUID: (string) (len=4) "9202",
+      FieldName: (string) (len=4) "file",
+      FieldUUID: (string) (len=4) "9303",
+      FieldType: (string) (len=4) "file",
+      SimpleFieldType: (string) (len=6) "object"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-swagger.yaml",
+      Language: (string) (len=4) "YAML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(344),
+      ColumnNumber: (*int)(17),
+      Text: (*string)((len=9) "\"orderId\"")
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=12) "getOrderById",
+      ObjectUUID: (string) (len=4) "9680",
+      FieldName: (string) (len=7) "orderId",
+      FieldUUID: (string) (len=4) "9701",
+      FieldType: (string) (len=7) "integer",
+      SimpleFieldType: (string) (len=6) "number"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-swagger.yaml",
+      Language: (string) (len=4) "YAML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(371),
+      ColumnNumber: (*int)(17),
+      Text: (*string)((len=9) "\"orderId\"")
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=11) "deleteOrder",
+      ObjectUUID: (string) (len=4) "9839",
+      FieldName: (string) (len=7) "orderId",
+      FieldUUID: (string) (len=4) "9860",
+      FieldType: (string) (len=6) "string",
+      SimpleFieldType: (string) (len=6) "string"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-swagger.yaml",
+      Language: (string) (len=4) "YAML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(377),
+      ColumnNumber: (*int)(17),
+      Text: (*string)((len=7) "\"email\"")
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=11) "deleteOrder",
+      ObjectUUID: (string) (len=4) "9839",
+      FieldName: (string) (len=5) "email",
+      FieldUUID: (string) (len=4) "9901",
+      FieldType: (string) (len=6) "string",
+      SimpleFieldType: (string) (len=6) "string"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-swagger.yaml",
+      Language: (string) (len=4) "YAML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(461),
+      ColumnNumber: (*int)(17),
+      Text: (*string)((len=10) "\"username\"")
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=9) "loginUser",
+      ObjectUUID: (string) (len=5) "10364",
+      FieldName: (string) (len=8) "username",
+      FieldUUID: (string) (len=5) "10385",
+      FieldType: (string) (len=6) "string",
+      SimpleFieldType: (string) (len=6) "string"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-swagger.yaml",
+      Language: (string) (len=4) "YAML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(466),
+      ColumnNumber: (*int)(17),
+      Text: (*string)((len=10) "\"password\"")
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=9) "loginUser",
+      ObjectUUID: (string) (len=5) "10364",
+      FieldName: (string) (len=8) "password",
+      FieldUUID: (string) (len=5) "10419",
+      FieldType: (string) (len=6) "string",
+      SimpleFieldType: (string) (len=6) "string"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-swagger.yaml",
+      Language: (string) (len=4) "YAML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(512),
+      ColumnNumber: (*int)(17),
+      Text: (*string)((len=10) "\"username\"")
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=13) "getUserByName",
+      ObjectUUID: (string) (len=5) "10660",
+      FieldName: (string) (len=8) "username",
+      FieldUUID: (string) (len=5) "10681",
+      FieldType: (string) (len=6) "string",
+      SimpleFieldType: (string) (len=6) "string"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-swagger.yaml",
+      Language: (string) (len=4) "YAML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(536),
+      ColumnNumber: (*int)(17),
+      Text: (*string)((len=10) "\"username\"")
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=10) "updateUser",
+      ObjectUUID: (string) (len=5) "10799",
+      FieldName: (string) (len=8) "username",
+      FieldUUID: (string) (len=5) "10820",
+      FieldType: (string) (len=6) "string",
+      SimpleFieldType: (string) (len=6) "string"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-swagger.yaml",
+      Language: (string) (len=4) "YAML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(562),
+      ColumnNumber: (*int)(17),
+      Text: (*string)((len=10) "\"username\"")
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=10) "deleteUser",
+      ObjectUUID: (string) (len=5) "10954",
+      FieldName: (string) (len=8) "username",
+      FieldUUID: (string) (len=5) "10975",
+      FieldType: (string) (len=6) "string",
+      SimpleFieldType: (string) (len=6) "string"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-swagger.yaml",
+      Language: (string) (len=4) "YAML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(588),
+      ColumnNumber: (*int)(7),
+      Text: (*string)((len=2) "id")
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=5) "Order",
+      ObjectUUID: (string) (len=5) "11124",
+      FieldName: (string) (len=2) "id",
+      FieldUUID: (string) (len=5) "11136",
+      FieldType: (string) (len=7) "integer",
+      SimpleFieldType: (string) (len=6) "number"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-swagger.yaml",
+      Language: (string) (len=4) "YAML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(591),
+      ColumnNumber: (*int)(7),
+      Text: (*string)((len=5) "petId")
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=5) "Order",
+      ObjectUUID: (string) (len=5) "11124",
+      FieldName: (string) (len=5) "petId",
+      FieldUUID: (string) (len=5) "11154",
+      FieldType: (string) (len=7) "integer",
+      SimpleFieldType: (string) (len=6) "number"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-swagger.yaml",
+      Language: (string) (len=4) "YAML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(594),
+      ColumnNumber: (*int)(7),
+      Text: (*string)((len=8) "quantity")
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=5) "Order",
+      ObjectUUID: (string) (len=5) "11124",
+      FieldName: (string) (len=8) "quantity",
+      FieldUUID: (string) (len=5) "11172",
+      FieldType: (string) (len=7) "integer",
+      SimpleFieldType: (string) (len=6) "number"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-swagger.yaml",
+      Language: (string) (len=4) "YAML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(597),
+      ColumnNumber: (*int)(7),
+      Text: (*string)((len=8) "shipDate")
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=5) "Order",
+      ObjectUUID: (string) (len=5) "11124",
+      FieldName: (string) (len=8) "shipDate",
+      FieldUUID: (string) (len=5) "11190",
+      FieldType: (string) (len=6) "string",
+      SimpleFieldType: (string) (len=6) "string"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-swagger.yaml",
+      Language: (string) (len=4) "YAML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(600),
+      ColumnNumber: (*int)(7),
+      Text: (*string)((len=6) "status")
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=5) "Order",
+      ObjectUUID: (string) (len=5) "11124",
+      FieldName: (string) (len=6) "status",
+      FieldUUID: (string) (len=5) "11208",
+      FieldType: (string) (len=6) "string",
+      SimpleFieldType: (string) (len=6) "string"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-swagger.yaml",
+      Language: (string) (len=4) "YAML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(607),
+      ColumnNumber: (*int)(7),
+      Text: (*string)((len=8) "complete")
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=5) "Order",
+      ObjectUUID: (string) (len=5) "11124",
+      FieldName: (string) (len=8) "complete",
+      FieldUUID: (string) (len=5) "11241",
+      FieldType: (string) (len=7) "boolean",
+      SimpleFieldType: (string) (len=7) "boolean"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-swagger.yaml",
+      Language: (string) (len=4) "YAML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(615),
+      ColumnNumber: (*int)(7),
+      Text: (*string)((len=4) "name")
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=6) "Person",
+      ObjectUUID: (string) (len=5) "11278",
+      FieldName: (string) (len=4) "name",
+      FieldUUID: (string) (len=5) "11290",
+      FieldType: (string) (len=6) "string",
+      SimpleFieldType: (string) (len=6) "string"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-swagger.yaml",
+      Language: (string) (len=4) "YAML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(620),
+      ColumnNumber: (*int)(7),
+      Text: (*string)((len=2) "id")
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=4) "User",
+      ObjectUUID: (string) (len=5) "11308",
+      FieldName: (string) (len=2) "id",
+      FieldUUID: (string) (len=5) "11320",
+      FieldType: (string) (len=6) "object",
+      SimpleFieldType: (string) (len=6) "object"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-swagger.yaml",
+      Language: (string) (len=4) "YAML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(623),
+      ColumnNumber: (*int)(11),
+      Text: (*string)((len=3) "id1")
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=2) "id",
+      ObjectUUID: (string) (len=5) "11320",
+      FieldName: (string) (len=3) "id1",
+      FieldUUID: (string) (len=5) "11332",
+      FieldType: (string) (len=6) "string",
+      SimpleFieldType: (string) (len=6) "string"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-swagger.yaml",
+      Language: (string) (len=4) "YAML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(625),
+      ColumnNumber: (*int)(11),
+      Text: (*string)((len=3) "id2")
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=2) "id",
+      ObjectUUID: (string) (len=5) "11320",
+      FieldName: (string) (len=3) "id2",
+      FieldUUID: (string) (len=5) "11344",
+      FieldType: (string) (len=6) "string",
+      SimpleFieldType: (string) (len=6) "string"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-swagger.yaml",
+      Language: (string) (len=4) "YAML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(627),
+      ColumnNumber: (*int)(7),
+      Text: (*string)((len=8) "username")
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=4) "User",
+      ObjectUUID: (string) (len=5) "11308",
+      FieldName: (string) (len=8) "username",
+      FieldUUID: (string) (len=5) "11362",
+      FieldType: (string) (len=6) "string",
+      SimpleFieldType: (string) (len=6) "string"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-swagger.yaml",
+      Language: (string) (len=4) "YAML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(629),
+      ColumnNumber: (*int)(7),
+      Text: (*string)((len=9) "firstName")
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=4) "User",
+      ObjectUUID: (string) (len=5) "11308",
+      FieldName: (string) (len=9) "firstName",
+      FieldUUID: (string) (len=5) "11374",
+      FieldType: (string) (len=6) "string",
+      SimpleFieldType: (string) (len=6) "string"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-swagger.yaml",
+      Language: (string) (len=4) "YAML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(631),
+      ColumnNumber: (*int)(7),
+      Text: (*string)((len=8) "lastName")
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=4) "User",
+      ObjectUUID: (string) (len=5) "11308",
+      FieldName: (string) (len=8) "lastName",
+      FieldUUID: (string) (len=5) "11386",
+      FieldType: (string) (len=6) "string",
+      SimpleFieldType: (string) (len=6) "string"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-swagger.yaml",
+      Language: (string) (len=4) "YAML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(633),
+      ColumnNumber: (*int)(7),
+      Text: (*string)((len=5) "email")
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=4) "User",
+      ObjectUUID: (string) (len=5) "11308",
+      FieldName: (string) (len=5) "email",
+      FieldUUID: (string) (len=5) "11398",
+      FieldType: (string) (len=6) "string",
+      SimpleFieldType: (string) (len=6) "string"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-swagger.yaml",
+      Language: (string) (len=4) "YAML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(635),
+      ColumnNumber: (*int)(7),
+      Text: (*string)((len=8) "password")
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=4) "User",
+      ObjectUUID: (string) (len=5) "11308",
+      FieldName: (string) (len=8) "password",
+      FieldUUID: (string) (len=5) "11410",
+      FieldType: (string) (len=6) "string",
+      SimpleFieldType: (string) (len=6) "string"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-swagger.yaml",
+      Language: (string) (len=4) "YAML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(637),
+      ColumnNumber: (*int)(7),
+      Text: (*string)((len=5) "phone")
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=4) "User",
+      ObjectUUID: (string) (len=5) "11308",
+      FieldName: (string) (len=5) "phone",
+      FieldUUID: (string) (len=5) "11422",
+      FieldType: (string) (len=6) "string",
+      SimpleFieldType: (string) (len=6) "string"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-swagger.yaml",
+      Language: (string) (len=4) "YAML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(639),
+      ColumnNumber: (*int)(7),
+      Text: (*string)((len=10) "userStatus")
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=4) "User",
+      ObjectUUID: (string) (len=5) "11308",
+      FieldName: (string) (len=10) "userStatus",
+      FieldUUID: (string) (len=5) "11434",
+      FieldType: (string) (len=7) "integer",
+      SimpleFieldType: (string) (len=6) "number"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-swagger.yaml",
+      Language: (string) (len=4) "YAML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(648),
+      ColumnNumber: (*int)(7),
+      Text: (*string)((len=2) "id")
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=8) "Category",
+      ObjectUUID: (string) (len=5) "11476",
+      FieldName: (string) (len=2) "id",
+      FieldUUID: (string) (len=5) "11488",
+      FieldType: (string) (len=7) "integer",
+      SimpleFieldType: (string) (len=6) "number"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-swagger.yaml",
+      Language: (string) (len=4) "YAML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(651),
+      ColumnNumber: (*int)(7),
+      Text: (*string)((len=4) "name")
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=8) "Category",
+      ObjectUUID: (string) (len=5) "11476",
+      FieldName: (string) (len=4) "name",
+      FieldUUID: (string) (len=5) "11506",
+      FieldType: (string) (len=6) "string",
+      SimpleFieldType: (string) (len=6) "string"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-swagger.yaml",
+      Language: (string) (len=4) "YAML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(658),
+      ColumnNumber: (*int)(7),
+      Text: (*string)((len=2) "id")
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=3) "Tag",
+      ObjectUUID: (string) (len=5) "11536",
+      FieldName: (string) (len=2) "id",
+      FieldUUID: (string) (len=5) "11548",
+      FieldType: (string) (len=7) "integer",
+      SimpleFieldType: (string) (len=6) "number"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-swagger.yaml",
+      Language: (string) (len=4) "YAML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(661),
+      ColumnNumber: (*int)(7),
+      Text: (*string)((len=4) "name")
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=3) "Tag",
+      ObjectUUID: (string) (len=5) "11536",
+      FieldName: (string) (len=4) "name",
+      FieldUUID: (string) (len=5) "11566",
+      FieldType: (string) (len=6) "string",
+      SimpleFieldType: (string) (len=6) "string"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-swagger.yaml",
+      Language: (string) (len=4) "YAML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(670),
+      ColumnNumber: (*int)(7),
+      Text: (*string)((len=4) "code")
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=11) "ApiResponse",
+      ObjectUUID: (string) (len=5) "11609",
+      FieldName: (string) (len=4) "code",
+      FieldUUID: (string) (len=5) "11621",
+      FieldType: (string) (len=7) "integer",
+      SimpleFieldType: (string) (len=6) "number"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-swagger.yaml",
+      Language: (string) (len=4) "YAML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(673),
+      ColumnNumber: (*int)(7),
+      Text: (*string)((len=4) "type")
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=11) "ApiResponse",
+      ObjectUUID: (string) (len=5) "11609",
+      FieldName: (string) (len=4) "type",
+      FieldUUID: (string) (len=5) "11639",
+      FieldType: (string) (len=6) "string",
+      SimpleFieldType: (string) (len=6) "string"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-swagger.yaml",
+      Language: (string) (len=4) "YAML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(675),
+      ColumnNumber: (*int)(7),
+      Text: (*string)((len=7) "message")
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=11) "ApiResponse",
+      ObjectUUID: (string) (len=5) "11609",
+      FieldName: (string) (len=7) "message",
+      FieldUUID: (string) (len=5) "11651",
+      FieldType: (string) (len=6) "string",
+      SimpleFieldType: (string) (len=6) "string"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-swagger.yaml",
+      Language: (string) (len=4) "YAML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(677),
+      ColumnNumber: (*int)(7),
+      Text: (*string)((len=4) "test")
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=11) "ApiResponse",
+      ObjectUUID: (string) (len=5) "11609",
+      FieldName: (string) (len=4) "test",
+      FieldUUID: (string) (len=5) "11663",
+      FieldType: (string) (len=6) "object",
+      SimpleFieldType: (string) (len=6) "object"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=7) "openapi",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=21) "petstore-swagger.yaml",
+      Language: (string) (len=4) "YAML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(680),
+      ColumnNumber: (*int)(11),
+      Text: (*string)((len=12) "testproperty")
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=4) "test",
+      ObjectUUID: (string) (len=5) "11663",
+      FieldName: (string) (len=12) "testproperty",
+      FieldUUID: (string) (len=5) "11675",
+      FieldType: (string) (len=6) "string",
+      SimpleFieldType: (string) (len=6) "string"
+    }
+  })
+}

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<head>
+	<%# not supported %>
+	<%# https://github.com/tree-sitter/tree-sitter-embedded-template %>
+	<%= javascript_include_tag "https://cdn.domain.com" %>
+</head>
+<body>
+	<script>var url = "https://inline.domain.com"</script>
+	<%= javascript_tag do -%> // not supported
+  	var url = "https://erb-javascript-tag.domain.com"
+	<% end -%>
+	<script>
+		var url = "https://api1.domain.com"
+	</script>
+	<script type="text/javascript">
+		var url = "https://api2.domain.com"
+	</script>
+	<script type="text/json">
+		{"url":"https://ignored-api.domain.com"}
+	</script>
+	<div class="links">
+		<% link_to "Foo", "https://ignored-domain.com" %>
+	</div>
+</body>
+</html>

@@ -1,0 +1,130 @@
+([]*report.Detection) (len=4) {
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=9) "interface",
+    DetectorType: (detectors.Type) (len=4) "ruby",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=9) "config.rb",
+      Language: (string) (len=4) "Ruby",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(1),
+      ColumnNumber: (*int)(7),
+      Text: (*string)((len=50) "\"http://#{ ENV['ORDER_SERVICE_DOMAIN'] }/whatever\"")
+    },
+    Value: (interfaces.Interface) {
+      Type: (interfaces.Type) (len=3) "url",
+      Value: (*values.Value)({
+        Parts: ([]values.Part) (len=3) {
+          (*values.String)({
+            Type: (values.PartType) (len=6) "string",
+            Value: (string) (len=7) "http://"
+          }),
+          (*values.VariableReference)({
+            Type: (values.PartType) (len=18) "variable_reference",
+            Identifier: (variables.Identifier) {
+              Type: (variables.Type) (len=11) "environment",
+              Name: (string) (len=20) "ORDER_SERVICE_DOMAIN"
+            }
+          }),
+          (*values.String)({
+            Type: (values.PartType) (len=6) "string",
+            Value: (string) (len=9) "/whatever"
+          })
+        }
+      }),
+      VariableName: (string) ""
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=9) "interface",
+    DetectorType: (detectors.Type) (len=4) "ruby",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=9) "config.rb",
+      Language: (string) (len=4) "Ruby",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(2),
+      ColumnNumber: (*int)(7),
+      Text: (*string)((len=38) "\"http://\" + domain + \".com\" + \"/other\"")
+    },
+    Value: (interfaces.Interface) {
+      Type: (interfaces.Type) (len=3) "url",
+      Value: (*values.Value)({
+        Parts: ([]values.Part) (len=3) {
+          (*values.String)({
+            Type: (values.PartType) (len=6) "string",
+            Value: (string) (len=7) "http://"
+          }),
+          (*values.VariableReference)({
+            Type: (values.PartType) (len=18) "variable_reference",
+            Identifier: (variables.Identifier) {
+              Type: (variables.Type) (len=8) "variable",
+              Name: (string) (len=6) "domain"
+            }
+          }),
+          (*values.String)({
+            Type: (values.PartType) (len=6) "string",
+            Value: (string) (len=10) ".com/other"
+          })
+        }
+      }),
+      VariableName: (string) ""
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=9) "interface",
+    DetectorType: (detectors.Type) (len=4) "ruby",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=9) "config.rb",
+      Language: (string) (len=4) "Ruby",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(3),
+      ColumnNumber: (*int)(21),
+      Text: (*string)((len=24) "ENV[\"ORDER_SERVICE_URL\"]")
+    },
+    Value: (interfaces.Interface) {
+      Type: (interfaces.Type) (len=3) "url",
+      Value: (*values.Value)({
+        Parts: ([]values.Part) (len=1) {
+          (*values.VariableReference)({
+            Type: (values.PartType) (len=18) "variable_reference",
+            Identifier: (variables.Identifier) {
+              Type: (variables.Type) (len=11) "environment",
+              Name: (string) (len=17) "ORDER_SERVICE_URL"
+            }
+          })
+        }
+      }),
+      VariableName: (string) ""
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=9) "interface",
+    DetectorType: (detectors.Type) (len=4) "ruby",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=9) "config.rb",
+      Language: (string) (len=4) "Ruby",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(4),
+      ColumnNumber: (*int)(21),
+      Text: (*string)((len=41) "ENV.fetch('USER_SERVICE_HOST', \"default\")")
+    },
+    Value: (interfaces.Interface) {
+      Type: (interfaces.Type) (len=3) "url",
+      Value: (*values.Value)({
+        Parts: ([]values.Part) (len=1) {
+          (*values.VariableReference)({
+            Type: (values.PartType) (len=18) "variable_reference",
+            Identifier: (variables.Identifier) {
+              Type: (variables.Type) (len=11) "environment",
+              Name: (string) (len=17) "USER_SERVICE_HOST"
+            }
+          })
+        }
+      }),
+      VariableName: (string) ""
+    }
+  })
+}

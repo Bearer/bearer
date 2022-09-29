@@ -1,0 +1,62 @@
+([]*report.Detection) (len=2) {
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=6) "schema",
+    DetectorType: (detectors.Type) (len=4) "java",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=11) "config.java",
+      Language: (string) (len=4) "Java",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(4),
+      ColumnNumber: (*int)(5),
+      Text: (*string)(<nil>)
+    },
+    Value: (schema.Schema) {
+      ObjectName: (string) (len=3) "Env",
+      ObjectUUID: (string) (len=1) "2",
+      FieldName: (string) (len=4) "main",
+      FieldUUID: (string) (len=1) "3",
+      FieldType: (string) "",
+      SimpleFieldType: (string) (len=8) "function"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=9) "interface",
+    DetectorType: (detectors.Type) (len=4) "java",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=11) "config.java",
+      Language: (string) (len=4) "Java",
+      LanguageType: (string) (len=11) "programming",
+      LineNumber: (*int)(6),
+      ColumnNumber: (*int)(32),
+      Text: (*string)((len=59) "System.getenv(\"ORDER_SERVICE_URL\") + \"/path?x=\" + accountId")
+    },
+    Value: (interfaces.Interface) {
+      Type: (interfaces.Type) (len=3) "url",
+      Value: (*values.Value)({
+        Parts: ([]values.Part) (len=3) {
+          (*values.VariableReference)({
+            Type: (values.PartType) (len=18) "variable_reference",
+            Identifier: (variables.Identifier) {
+              Type: (variables.Type) (len=11) "environment",
+              Name: (string) (len=17) "ORDER_SERVICE_URL"
+            }
+          }),
+          (*values.String)({
+            Type: (values.PartType) (len=6) "string",
+            Value: (string) (len=8) "/path?x="
+          }),
+          (*values.VariableReference)({
+            Type: (values.PartType) (len=18) "variable_reference",
+            Identifier: (variables.Identifier) {
+              Type: (variables.Type) (len=8) "variable",
+              Name: (string) (len=9) "accountId"
+            }
+          })
+        }
+      }),
+      VariableName: (string) ""
+    }
+  })
+}

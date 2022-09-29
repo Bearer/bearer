@@ -1,0 +1,1928 @@
+([]*report.Detection) (len=107) {
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=5) "nuget",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=18) "packages.lock.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(5),
+      ColumnNumber: (*int)(6),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=41) "Microsoft.CodeAnalysis.BannedApiAnalyzers",
+      Version: (string) (len=5) "3.3.3"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=5) "nuget",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=18) "packages.lock.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(11),
+      ColumnNumber: (*int)(6),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=22) "Nerdbank.GitVersioning",
+      Version: (string) (len=7) "3.4.231"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=5) "nuget",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=18) "packages.lock.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(17),
+      ColumnNumber: (*int)(6),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=35) "OmniSharp.Extensions.LanguageServer",
+      Version: (string) (len=6) "0.19.2"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=5) "nuget",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=18) "packages.lock.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(29),
+      ColumnNumber: (*int)(6),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=17) "Azure.Bicep.Types",
+      Version: (string) (len=7) "0.1.331"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=5) "nuget",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=18) "packages.lock.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(37),
+      ColumnNumber: (*int)(6),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=20) "Azure.Bicep.Types.Az",
+      Version: (string) (len=7) "0.1.331"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=5) "nuget",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=18) "packages.lock.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(45),
+      ColumnNumber: (*int)(6),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=34) "Azure.Containers.ContainerRegistry",
+      Version: (string) (len=12) "1.1.0-beta.3"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=5) "nuget",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=18) "packages.lock.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(54),
+      ColumnNumber: (*int)(6),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=10) "Azure.Core",
+      Version: (string) (len=6) "1.20.0"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=5) "nuget",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=18) "packages.lock.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(68),
+      ColumnNumber: (*int)(6),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=22) "Azure.Deployments.Core",
+      Version: (string) (len=7) "1.0.253"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=5) "nuget",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=18) "packages.lock.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(77),
+      ColumnNumber: (*int)(6),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=28) "Azure.Deployments.Expression",
+      Version: (string) (len=7) "1.0.253"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=5) "nuget",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=18) "packages.lock.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(86),
+      ColumnNumber: (*int)(6),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=27) "Azure.Deployments.Templates",
+      Version: (string) (len=7) "1.0.253"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=5) "nuget",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=18) "packages.lock.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(96),
+      ColumnNumber: (*int)(6),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=14) "Azure.Identity",
+      Version: (string) (len=5) "1.5.0"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=5) "nuget",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=18) "packages.lock.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(110),
+      ColumnNumber: (*int)(6),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=21) "Azure.ResourceManager",
+      Version: (string) (len=12) "1.0.0-beta.5"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=5) "nuget",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=18) "packages.lock.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(119),
+      ColumnNumber: (*int)(6),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=31) "Azure.ResourceManager.Resources",
+      Version: (string) (len=12) "1.0.0-beta.3"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=5) "nuget",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=18) "packages.lock.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(129),
+      ColumnNumber: (*int)(6),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=7) "MediatR",
+      Version: (string) (len=5) "8.1.0"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=5) "nuget",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=18) "packages.lock.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(134),
+      ColumnNumber: (*int)(6),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=29) "Microsoft.Bcl.AsyncInterfaces",
+      Version: (string) (len=5) "1.1.1"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=5) "nuget",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=18) "packages.lock.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(139),
+      ColumnNumber: (*int)(6),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=34) "Microsoft.Extensions.Configuration",
+      Version: (string) (len=5) "6.0.0"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=5) "nuget",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=18) "packages.lock.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(148),
+      ColumnNumber: (*int)(6),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=47) "Microsoft.Extensions.Configuration.Abstractions",
+      Version: (string) (len=5) "6.0.0"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=5) "nuget",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=18) "packages.lock.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(156),
+      ColumnNumber: (*int)(6),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=41) "Microsoft.Extensions.Configuration.Binder",
+      Version: (string) (len=5) "6.0.0"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=5) "nuget",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=18) "packages.lock.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(164),
+      ColumnNumber: (*int)(6),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=49) "Microsoft.Extensions.Configuration.FileExtensions",
+      Version: (string) (len=5) "6.0.0"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=5) "nuget",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=18) "packages.lock.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(176),
+      ColumnNumber: (*int)(6),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=39) "Microsoft.Extensions.Configuration.Json",
+      Version: (string) (len=5) "6.0.0"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=5) "nuget",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=18) "packages.lock.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(188),
+      ColumnNumber: (*int)(6),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=40) "Microsoft.Extensions.DependencyInjection",
+      Version: (string) (len=5) "2.0.0"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=5) "nuget",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=18) "packages.lock.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(196),
+      ColumnNumber: (*int)(6),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=53) "Microsoft.Extensions.DependencyInjection.Abstractions",
+      Version: (string) (len=5) "2.0.0"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=5) "nuget",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=18) "packages.lock.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(201),
+      ColumnNumber: (*int)(6),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=47) "Microsoft.Extensions.FileProviders.Abstractions",
+      Version: (string) (len=5) "6.0.0"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=5) "nuget",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=18) "packages.lock.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(209),
+      ColumnNumber: (*int)(6),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=43) "Microsoft.Extensions.FileProviders.Physical",
+      Version: (string) (len=5) "6.0.0"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=5) "nuget",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=18) "packages.lock.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(219),
+      ColumnNumber: (*int)(6),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=39) "Microsoft.Extensions.FileSystemGlobbing",
+      Version: (string) (len=5) "6.0.0"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=5) "nuget",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=18) "packages.lock.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(224),
+      ColumnNumber: (*int)(6),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=28) "Microsoft.Extensions.Logging",
+      Version: (string) (len=5) "2.0.0"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=5) "nuget",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=18) "packages.lock.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(234),
+      ColumnNumber: (*int)(6),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=41) "Microsoft.Extensions.Logging.Abstractions",
+      Version: (string) (len=5) "2.0.0"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=5) "nuget",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=18) "packages.lock.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(239),
+      ColumnNumber: (*int)(6),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=28) "Microsoft.Extensions.Options",
+      Version: (string) (len=5) "2.0.0"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=5) "nuget",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=18) "packages.lock.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(248),
+      ColumnNumber: (*int)(6),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=52) "Microsoft.Extensions.Options.ConfigurationExtensions",
+      Version: (string) (len=5) "2.0.0"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=5) "nuget",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=18) "packages.lock.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(259),
+      ColumnNumber: (*int)(6),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=31) "Microsoft.Extensions.Primitives",
+      Version: (string) (len=5) "6.0.0"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=5) "nuget",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=18) "packages.lock.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(267),
+      ColumnNumber: (*int)(6),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=25) "Microsoft.Identity.Client",
+      Version: (string) (len=6) "4.30.1"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=5) "nuget",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=18) "packages.lock.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(272),
+      ColumnNumber: (*int)(6),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=41) "Microsoft.Identity.Client.Extensions.Msal",
+      Version: (string) (len=6) "2.18.4"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=5) "nuget",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=18) "packages.lock.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(281),
+      ColumnNumber: (*int)(6),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=27) "Microsoft.NETCore.Platforms",
+      Version: (string) (len=5) "5.0.0"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=5) "nuget",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=18) "packages.lock.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(286),
+      ColumnNumber: (*int)(6),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=25) "Microsoft.NETCore.Targets",
+      Version: (string) (len=5) "1.1.0"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=5) "nuget",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=18) "packages.lock.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(291),
+      ColumnNumber: (*int)(6),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=32) "Microsoft.VisualStudio.Threading",
+      Version: (string) (len=7) "16.7.56"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=5) "nuget",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=18) "packages.lock.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(303),
+      ColumnNumber: (*int)(6),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=42) "Microsoft.VisualStudio.Threading.Analyzers",
+      Version: (string) (len=7) "16.7.56"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=5) "nuget",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=18) "packages.lock.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(308),
+      ColumnNumber: (*int)(6),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=33) "Microsoft.VisualStudio.Validation",
+      Version: (string) (len=7) "15.5.31"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=5) "nuget",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=18) "packages.lock.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(313),
+      ColumnNumber: (*int)(6),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=26) "Microsoft.Win32.Primitives",
+      Version: (string) (len=5) "4.3.0"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=5) "nuget",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=18) "packages.lock.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(323),
+      ColumnNumber: (*int)(6),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=24) "Microsoft.Win32.Registry",
+      Version: (string) (len=5) "4.6.0"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=5) "nuget",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=18) "packages.lock.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(332),
+      ColumnNumber: (*int)(6),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=16) "Nerdbank.Streams",
+      Version: (string) (len=6) "2.6.81"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=5) "nuget",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=18) "packages.lock.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(345),
+      ColumnNumber: (*int)(6),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=15) "Newtonsoft.Json",
+      Version: (string) (len=6) "13.0.1"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=5) "nuget",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=18) "packages.lock.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(350),
+      ColumnNumber: (*int)(6),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=28) "OmniSharp.Extensions.JsonRpc",
+      Version: (string) (len=6) "0.19.2"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=5) "nuget",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=18) "packages.lock.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(367),
+      ColumnNumber: (*int)(6),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=39) "OmniSharp.Extensions.JsonRpc.Generators",
+      Version: (string) (len=6) "0.19.2"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=5) "nuget",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=18) "packages.lock.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(372),
+      ColumnNumber: (*int)(6),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=37) "OmniSharp.Extensions.LanguageProtocol",
+      Version: (string) (len=6) "0.19.2"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=5) "nuget",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=18) "packages.lock.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(384),
+      ColumnNumber: (*int)(6),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=42) "OmniSharp.Extensions.LanguageServer.Shared",
+      Version: (string) (len=6) "0.19.2"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=5) "nuget",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=18) "packages.lock.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(392),
+      ColumnNumber: (*int)(6),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=28) "System.Collections.Immutable",
+      Version: (string) (len=5) "6.0.0"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=5) "nuget",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=18) "packages.lock.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(400),
+      ColumnNumber: (*int)(6),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=35) "System.Diagnostics.DiagnosticSource",
+      Version: (string) (len=5) "4.6.0"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=5) "nuget",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=18) "packages.lock.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(405),
+      ColumnNumber: (*int)(6),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=20) "System.Globalization",
+      Version: (string) (len=5) "4.3.0"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=5) "nuget",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=18) "packages.lock.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(415),
+      ColumnNumber: (*int)(6),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=9) "System.IO",
+      Version: (string) (len=5) "4.3.0"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=5) "nuget",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=18) "packages.lock.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(427),
+      ColumnNumber: (*int)(6),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=22) "System.IO.Abstractions",
+      Version: (string) (len=7) "13.2.47"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=5) "nuget",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=18) "packages.lock.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(435),
+      ColumnNumber: (*int)(6),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=34) "System.IO.FileSystem.AccessControl",
+      Version: (string) (len=5) "5.0.0"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=5) "nuget",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=18) "packages.lock.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(444),
+      ColumnNumber: (*int)(6),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=19) "System.IO.Pipelines",
+      Version: (string) (len=5) "4.7.3"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=5) "nuget",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=18) "packages.lock.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(449),
+      ColumnNumber: (*int)(6),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=13) "System.Memory",
+      Version: (string) (len=5) "4.5.4"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=5) "nuget",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=18) "packages.lock.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(454),
+      ColumnNumber: (*int)(6),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=18) "System.Memory.Data",
+      Version: (string) (len=5) "1.0.2"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=5) "nuget",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=18) "packages.lock.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(463),
+      ColumnNumber: (*int)(6),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=21) "System.Net.WebSockets",
+      Version: (string) (len=5) "4.3.0"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=5) "nuget",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=18) "packages.lock.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(474),
+      ColumnNumber: (*int)(6),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=23) "System.Numerics.Vectors",
+      Version: (string) (len=5) "4.5.0"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=5) "nuget",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=18) "packages.lock.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(479),
+      ColumnNumber: (*int)(6),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=15) "System.Reactive",
+      Version: (string) (len=5) "4.4.1"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=5) "nuget",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=18) "packages.lock.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(484),
+      ColumnNumber: (*int)(6),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=17) "System.Reflection",
+      Version: (string) (len=5) "4.3.0"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=5) "nuget",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=18) "packages.lock.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(496),
+      ColumnNumber: (*int)(6),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=34) "System.Reflection.Emit.Lightweight",
+      Version: (string) (len=5) "4.7.0"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=5) "nuget",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=18) "packages.lock.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(501),
+      ColumnNumber: (*int)(6),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=28) "System.Reflection.Primitives",
+      Version: (string) (len=5) "4.3.0"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=5) "nuget",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=18) "packages.lock.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(511),
+      ColumnNumber: (*int)(6),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=32) "System.Resources.ResourceManager",
+      Version: (string) (len=5) "4.3.0"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=5) "nuget",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=18) "packages.lock.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(523),
+      ColumnNumber: (*int)(6),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=14) "System.Runtime",
+      Version: (string) (len=5) "4.3.0"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=5) "nuget",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=18) "packages.lock.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(532),
+      ColumnNumber: (*int)(6),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=38) "System.Runtime.CompilerServices.Unsafe",
+      Version: (string) (len=5) "6.0.0"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=5) "nuget",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=18) "packages.lock.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(537),
+      ColumnNumber: (*int)(6),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=29) "System.Security.AccessControl",
+      Version: (string) (len=5) "5.0.0"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=5) "nuget",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=18) "packages.lock.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(546),
+      ColumnNumber: (*int)(6),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=42) "System.Security.Cryptography.ProtectedData",
+      Version: (string) (len=5) "4.5.0"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=5) "nuget",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=18) "packages.lock.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(551),
+      ColumnNumber: (*int)(6),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=33) "System.Security.Principal.Windows",
+      Version: (string) (len=5) "5.0.0"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=5) "nuget",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=18) "packages.lock.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(556),
+      ColumnNumber: (*int)(6),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=20) "System.Text.Encoding",
+      Version: (string) (len=5) "4.3.0"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=5) "nuget",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=18) "packages.lock.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(566),
+      ColumnNumber: (*int)(6),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=25) "System.Text.Encodings.Web",
+      Version: (string) (len=5) "6.0.0"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=5) "nuget",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=18) "packages.lock.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(574),
+      ColumnNumber: (*int)(6),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=16) "System.Text.Json",
+      Version: (string) (len=5) "6.0.0"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=5) "nuget",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=18) "packages.lock.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(583),
+      ColumnNumber: (*int)(6),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=25) "System.Threading.Channels",
+      Version: (string) (len=5) "4.7.1"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=5) "nuget",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=18) "packages.lock.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(588),
+      ColumnNumber: (*int)(6),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=22) "System.Threading.Tasks",
+      Version: (string) (len=5) "4.3.0"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=5) "nuget",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=18) "packages.lock.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(598),
+      ColumnNumber: (*int)(6),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=33) "System.Threading.Tasks.Extensions",
+      Version: (string) (len=5) "4.5.4"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=5) "nuget",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=18) "packages.lock.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(644),
+      ColumnNumber: (*int)(6),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=32) "runtime.any.System.Globalization",
+      Version: (string) (len=5) "4.3.0"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=5) "nuget",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=18) "packages.lock.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(649),
+      ColumnNumber: (*int)(6),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=21) "runtime.any.System.IO",
+      Version: (string) (len=5) "4.3.0"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=5) "nuget",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=18) "packages.lock.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(654),
+      ColumnNumber: (*int)(6),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=29) "runtime.any.System.Reflection",
+      Version: (string) (len=5) "4.3.0"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=5) "nuget",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=18) "packages.lock.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(659),
+      ColumnNumber: (*int)(6),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=40) "runtime.any.System.Reflection.Primitives",
+      Version: (string) (len=5) "4.3.0"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=5) "nuget",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=18) "packages.lock.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(664),
+      ColumnNumber: (*int)(6),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=44) "runtime.any.System.Resources.ResourceManager",
+      Version: (string) (len=5) "4.3.0"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=5) "nuget",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=18) "packages.lock.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(669),
+      ColumnNumber: (*int)(6),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=26) "runtime.any.System.Runtime",
+      Version: (string) (len=5) "4.3.0"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=5) "nuget",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=18) "packages.lock.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(677),
+      ColumnNumber: (*int)(6),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=34) "runtime.any.System.Runtime.Handles",
+      Version: (string) (len=5) "4.3.0"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=5) "nuget",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=18) "packages.lock.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(682),
+      ColumnNumber: (*int)(6),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=42) "runtime.any.System.Runtime.InteropServices",
+      Version: (string) (len=5) "4.3.0"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=5) "nuget",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=18) "packages.lock.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(687),
+      ColumnNumber: (*int)(6),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=32) "runtime.any.System.Text.Encoding",
+      Version: (string) (len=5) "4.3.0"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=5) "nuget",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=18) "packages.lock.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(692),
+      ColumnNumber: (*int)(6),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=34) "runtime.any.System.Threading.Tasks",
+      Version: (string) (len=5) "4.3.0"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=5) "nuget",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=18) "packages.lock.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(697),
+      ColumnNumber: (*int)(6),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=21) "runtime.native.System",
+      Version: (string) (len=5) "4.3.0"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=5) "nuget",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=18) "packages.lock.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(706),
+      ColumnNumber: (*int)(6),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=39) "runtime.unix.Microsoft.Win32.Primitives",
+      Version: (string) (len=5) "4.3.0"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=5) "nuget",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=18) "packages.lock.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(716),
+      ColumnNumber: (*int)(6),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=31) "runtime.unix.System.Private.Uri",
+      Version: (string) (len=5) "4.3.0"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=5) "nuget",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=18) "packages.lock.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(757),
+      ColumnNumber: (*int)(6),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=18) "System.Private.Uri",
+      Version: (string) (len=5) "4.3.0"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=5) "nuget",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=18) "packages.lock.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(814),
+      ColumnNumber: (*int)(6),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=22) "System.Runtime.Handles",
+      Version: (string) (len=5) "4.3.0"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=5) "nuget",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=18) "packages.lock.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(825),
+      ColumnNumber: (*int)(6),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=30) "System.Runtime.InteropServices",
+      Version: (string) (len=5) "4.3.0"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=5) "nuget",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=18) "packages.lock.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(2027),
+      ColumnNumber: (*int)(6),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=38) "runtime.win.Microsoft.Win32.Primitives",
+      Version: (string) (len=5) "4.3.0"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=5) "nuget",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=18) "packages.lock.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(23),
+      ColumnNumber: (*int)(10),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=34) "Microsoft.Extensions.Configuration",
+      Version: (string) (len=5) "2.0.0"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=5) "nuget",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=18) "packages.lock.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(34),
+      ColumnNumber: (*int)(10),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=16) "System.Text.Json",
+      Version: (string) (len=5) "5.0.2"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=5) "nuget",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=18) "packages.lock.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(50),
+      ColumnNumber: (*int)(10),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=10) "Azure.Core",
+      Version: (string) (len=6) "1.19.0"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=5) "nuget",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=18) "packages.lock.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(51),
+      ColumnNumber: (*int)(10),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=16) "System.Text.Json",
+      Version: (string) (len=5) "4.6.0"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=5) "nuget",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=18) "packages.lock.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(59),
+      ColumnNumber: (*int)(10),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=29) "Microsoft.Bcl.AsyncInterfaces",
+      Version: (string) (len=5) "1.0.0"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=5) "nuget",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=18) "packages.lock.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(63),
+      ColumnNumber: (*int)(10),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=25) "System.Text.Encodings.Web",
+      Version: (string) (len=5) "4.7.2"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=5) "nuget",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=18) "packages.lock.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(73),
+      ColumnNumber: (*int)(10),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=15) "Newtonsoft.Json",
+      Version: (string) (len=6) "11.0.2"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=5) "nuget",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=18) "packages.lock.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(245),
+      ColumnNumber: (*int)(10),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=31) "Microsoft.Extensions.Primitives",
+      Version: (string) (len=5) "2.0.0"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=5) "nuget",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=18) "packages.lock.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(253),
+      ColumnNumber: (*int)(10),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=47) "Microsoft.Extensions.Configuration.Abstractions",
+      Version: (string) (len=5) "2.0.0"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=5) "nuget",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=18) "packages.lock.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(254),
+      ColumnNumber: (*int)(10),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=41) "Microsoft.Extensions.Configuration.Binder",
+      Version: (string) (len=5) "2.0.0"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=5) "nuget",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=18) "packages.lock.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(277),
+      ColumnNumber: (*int)(10),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=25) "Microsoft.Identity.Client",
+      Version: (string) (len=6) "4.30.0"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=5) "nuget",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=18) "packages.lock.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(300),
+      ColumnNumber: (*int)(10),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=33) "System.Threading.Tasks.Extensions",
+      Version: (string) (len=5) "4.5.3"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=5) "nuget",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=18) "packages.lock.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(318),
+      ColumnNumber: (*int)(10),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=27) "Microsoft.NETCore.Platforms",
+      Version: (string) (len=5) "1.1.0"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=5) "nuget",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=18) "packages.lock.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(328),
+      ColumnNumber: (*int)(10),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=29) "System.Security.AccessControl",
+      Version: (string) (len=5) "4.6.0"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=5) "nuget",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=18) "packages.lock.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(329),
+      ColumnNumber: (*int)(10),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=33) "System.Security.Principal.Windows",
+      Version: (string) (len=5) "4.6.0"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=5) "nuget",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=18) "packages.lock.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(340),
+      ColumnNumber: (*int)(10),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=19) "System.IO.Pipelines",
+      Version: (string) (len=5) "4.7.2"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=5) "nuget",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=18) "packages.lock.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(342),
+      ColumnNumber: (*int)(10),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=38) "System.Runtime.CompilerServices.Unsafe",
+      Version: (string) (len=5) "4.7.1"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=5) "nuget",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=18) "packages.lock.json",
+      Language: (string) (len=4) "JSON",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(361),
+      ColumnNumber: (*int)(10),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) "",
+      Name: (string) (len=28) "System.Collections.Immutable",
+      Version: (string) (len=5) "1.7.1"
+    }
+  })
+}

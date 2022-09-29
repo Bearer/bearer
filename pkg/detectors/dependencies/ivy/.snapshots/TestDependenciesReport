@@ -1,0 +1,290 @@
+([]*report.Detection) (len=16) {
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=3) "ivy",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=14) "ivy-report.xml",
+      Language: (string) (len=3) "XML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(15),
+      ColumnNumber: (*int)(63),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) (len=26) "net.sourceforge.freemarker",
+      Name: (string) (len=10) "freemarker",
+      Version: (string) (len=6) "2.3.15"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=3) "ivy",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=14) "ivy-report.xml",
+      Language: (string) (len=3) "XML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(33),
+      ColumnNumber: (*int)(51),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) (len=14) "net.miginfocom",
+      Name: (string) (len=9) "miglayout",
+      Version: (string) (len=5) "3.6.2"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=3) "ivy",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=14) "ivy-report.xml",
+      Language: (string) (len=3) "XML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(51),
+      ColumnNumber: (*int)(47),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) (len=10) "com.svnkit",
+      Name: (string) (len=6) "svnkit",
+      Version: (string) (len=5) "1.2.2"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=3) "ivy",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=14) "ivy-report.xml",
+      Language: (string) (len=3) "XML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(73),
+      ColumnNumber: (*int)(53),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) (len=16) "net.java.dev.jna",
+      Name: (string) (len=3) "jna",
+      Version: (string) (len=5) "3.0.9"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=3) "ivy",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=14) "ivy-report.xml",
+      Language: (string) (len=3) "XML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(85),
+      ColumnNumber: (*int)(47),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) (len=10) "org.testng",
+      Name: (string) (len=6) "testng",
+      Version: (string) (len=3) "5.8"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=3) "ivy",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=14) "ivy-report.xml",
+      Language: (string) (len=3) "XML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(103),
+      ColumnNumber: (*int)(56),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) (len=19) "org.springframework",
+      Name: (string) (len=6) "spring",
+      Version: (string) (len=5) "2.5.6"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=3) "ivy",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=14) "ivy-report.xml",
+      Language: (string) (len=3) "XML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(142),
+      ColumnNumber: (*int)(52),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) (len=15) "org.aopalliance",
+      Name: (string) (len=11) "aopalliance",
+      Version: (string) (len=3) "1.0"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=3) "ivy",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=14) "ivy-report.xml",
+      Language: (string) (len=3) "XML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(157),
+      ColumnNumber: (*int)(46),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) (len=9) "org.slf4j",
+      Name: (string) (len=5) "slf4j",
+      Version: (string) (len=5) "1.5.6"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=3) "ivy",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=14) "ivy-report.xml",
+      Language: (string) (len=3) "XML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(178),
+      ColumnNumber: (*int)(53),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) (len=16) "org.apache.log4j",
+      Name: (string) (len=5) "log4j",
+      Version: (string) (len=6) "1.2.15"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=3) "ivy",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=14) "ivy-report.xml",
+      Language: (string) (len=3) "XML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(193),
+      ColumnNumber: (*int)(56),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) (len=19) "org.codehaus.groovy",
+      Name: (string) (len=6) "groovy",
+      Version: (string) (len=5) "1.5.7"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=3) "ivy",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=14) "ivy-report.xml",
+      Language: (string) (len=3) "XML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(205),
+      ColumnNumber: (*int)(55),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) (len=18) "org.apache.commons",
+      Name: (string) (len=12) "commons-lang",
+      Version: (string) (len=3) "2.4"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=3) "ivy",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=14) "ivy-report.xml",
+      Language: (string) (len=3) "XML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(223),
+      ColumnNumber: (*int)(55),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) (len=18) "org.apache.commons",
+      Name: (string) (len=18) "commons-httpclient",
+      Version: (string) (len=3) "3.1"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=3) "ivy",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=14) "ivy-report.xml",
+      Language: (string) (len=3) "XML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(235),
+      ColumnNumber: (*int)(55),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) (len=18) "org.apache.commons",
+      Name: (string) (len=13) "commons-codec",
+      Version: (string) (len=3) "1.3"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=3) "ivy",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=14) "ivy-report.xml",
+      Language: (string) (len=3) "XML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(253),
+      ColumnNumber: (*int)(55),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) (len=18) "org.apache.commons",
+      Name: (string) (len=15) "commons-logging",
+      Version: (string) (len=5) "1.1.1"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=3) "ivy",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=14) "ivy-report.xml",
+      Language: (string) (len=3) "XML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(272),
+      ColumnNumber: (*int)(51),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) (len=14) "org.apache.ant",
+      Name: (string) (len=3) "ant",
+      Version: (string) (len=5) "1.7.1"
+    }
+  }),
+  (*report.Detection)({
+    Type: (report.DetectionType) (len=10) "dependency",
+    DetectorType: (detectors.Type) (len=3) "ivy",
+    CommitSHA: (string) "",
+    Source: (source.Source) {
+      Filename: (string) (len=14) "ivy-report.xml",
+      Language: (string) (len=3) "XML",
+      LanguageType: (string) (len=4) "data",
+      LineNumber: (*int)(287),
+      ColumnNumber: (*int)(50),
+      Text: (*string)(<nil>)
+    },
+    Value: (dependencies.Dependency) {
+      Group: (string) (len=13) "javax.servlet",
+      Name: (string) (len=10) "servletapi",
+      Version: (string) (len=3) "2.4"
+    }
+  })
+}
