@@ -3,9 +3,8 @@ package flag
 import (
 	"time"
 
+	"github.com/bearer/curio/pkg/util/cache"
 	"github.com/spf13/cobra"
-
-	"github.com/Bearer/curio/pkg/utils"
 )
 
 var (
@@ -48,17 +47,45 @@ var (
 		Usage:      "allow insecure server connections when using TLS",
 		Persistent: true,
 	}
-	TimeoutFlag = Flag{
-		Name:       "timeout",
-		ConfigName: "timeout",
-		Value:      time.Second * 300, // 5 mins
-		Usage:      "timeout",
+	TimeoutMinimumFlag = Flag{
+		Name:       "timeout-min",
+		ConfigName: "timeout-min",
+		Value:      5 * time.Second,
+		Usage:      "what is the minimum timeout assigned to scanning file, this config superseeds timeout-second-per-bytes",
+		Persistent: true,
+	}
+	TimeoutMaximumFlag = Flag{
+		Name:       "timeout-max",
+		ConfigName: "timeout-max",
+		Value:      300 * time.Second, // 5 mins
+		Usage:      "what is the maximum timeout assigned to scanning file, this config superseeds timeout-second-per-bytes",
+		Persistent: true,
+	}
+	TimeoutSecondPerBytesFlag = Flag{
+		Name:       "timeout-second-per-bytes",
+		ConfigName: "timeout-second-per-bytes",
+		Value:      10 * 1000, // 10kb/s
+		Usage:      "how many file size bytes produces a second of timeout assigned to scanning file",
+		Persistent: true,
+	}
+	FileSizeMaximumFlag = Flag{
+		Name:       "file-size-max",
+		ConfigName: "file-size-max",
+		Value:      25 * 1000 * 1000, // 25 MB
+		Usage:      "ignore files with file size larger than this config",
+		Persistent: true,
+	}
+	MemoryMaximumFlag = Flag{
+		Name:       "memory-max",
+		ConfigName: "memory-max",
+		Value:      800 * 1000 * 1000, // 800 MB
+		Usage:      "if memory needed to scan a file suprasses this limit, skip the file",
 		Persistent: true,
 	}
 	CacheDirFlag = Flag{
 		Name:       "cache-dir",
 		ConfigName: "cache.dir",
-		Value:      utils.DefaultCacheDir(),
+		Value:      cache.DefaultDir(),
 		Usage:      "cache directory",
 		Persistent: true,
 	}
@@ -78,7 +105,11 @@ type GlobalFlagGroup struct {
 	Quiet                 *Flag
 	Debug                 *Flag
 	Insecure              *Flag
-	Timeout               *Flag
+	TimeoutMinimum        *Flag
+	TimeoutMaximum        *Flag
+	TimeoutSecondPerBytes *Flag
+	FileSizeMaximum       *Flag
+	MemoryMaximum         *Flag
 	CacheDir              *Flag
 	GenerateDefaultConfig *Flag
 }
@@ -90,7 +121,11 @@ type GlobalOptions struct {
 	Quiet                 bool
 	Debug                 bool
 	Insecure              bool
-	Timeout               time.Duration
+	TimeoutMinimum        time.Duration
+	TimeoutMaximum        time.Duration
+	TimeoutSecondPerBytes int
+	FileSizeMaximum       int
+	MemoryMaximum         int
 	CacheDir              string
 	GenerateDefaultConfig bool
 }
@@ -102,14 +137,18 @@ func NewGlobalFlagGroup() *GlobalFlagGroup {
 		Quiet:                 &QuietFlag,
 		Debug:                 &DebugFlag,
 		Insecure:              &InsecureFlag,
-		Timeout:               &TimeoutFlag,
+		TimeoutMinimum:        &TimeoutMinimumFlag,
+		TimeoutMaximum:        &TimeoutMaximumFlag,
+		TimeoutSecondPerBytes: &TimeoutSecondPerBytesFlag,
+		FileSizeMaximum:       &FileSizeMaximumFlag,
+		MemoryMaximum:         &MemoryMaximumFlag,
 		CacheDir:              &CacheDirFlag,
 		GenerateDefaultConfig: &GenerateDefaultConfigFlag,
 	}
 }
 
 func (f *GlobalFlagGroup) flags() []*Flag {
-	return []*Flag{f.ConfigFile, f.ShowVersion, f.Quiet, f.Debug, f.Insecure, f.Timeout, f.CacheDir, f.GenerateDefaultConfig}
+	return []*Flag{f.ConfigFile, f.ShowVersion, f.Quiet, f.Debug, f.Insecure, f.TimeoutMinimum, f.TimeoutMaximum, f.TimeoutSecondPerBytes, f.FileSizeMaximum, f.MemoryMaximum, f.CacheDir, f.GenerateDefaultConfig}
 }
 
 func (f *GlobalFlagGroup) AddFlags(cmd *cobra.Command) {
@@ -134,7 +173,11 @@ func (f *GlobalFlagGroup) ToOptions() GlobalOptions {
 		Quiet:                 getBool(f.Quiet),
 		Debug:                 getBool(f.Debug),
 		Insecure:              getBool(f.Insecure),
-		Timeout:               getDuration(f.Timeout),
+		TimeoutMinimum:        getDuration(f.TimeoutMinimum),
+		TimeoutMaximum:        getDuration(f.TimeoutMaximum),
+		TimeoutSecondPerBytes: getInt(f.TimeoutSecondPerBytes),
+		FileSizeMaximum:       getInt(f.FileSizeMaximum),
+		MemoryMaximum:         getInt(f.MemoryMaximum),
 		CacheDir:              getString(f.CacheDir),
 		GenerateDefaultConfig: getBool(f.GenerateDefaultConfig),
 	}

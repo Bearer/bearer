@@ -8,14 +8,14 @@ import (
 
 	"github.com/google/wire"
 
-	"github.com/Bearer/curio/pkg/fanal/artifact"
-	"github.com/Bearer/curio/pkg/fanal/cache"
-	"github.com/Bearer/curio/pkg/fanal/types"
-	"github.com/Bearer/curio/pkg/rpc/client"
-	"github.com/Bearer/curio/pkg/scanner"
+	"github.com/bearer/curio/pkg/fanal/artifact"
+	"github.com/bearer/curio/pkg/fanal/cache"
+	"github.com/bearer/curio/pkg/fanal/types"
+	"github.com/bearer/curio/pkg/rpc/client"
+	"github.com/bearer/curio/pkg/scanner"
 )
 
-/ initializeFilesystemScanner is for filesystem scanning in standalone mode
+// initializeFilesystemScanner is for filesystem scanning in standalone mode
 func initializeFilesystemScanner(ctx context.Context, path string, artifactCache cache.ArtifactCache,
 	localArtifactCache cache.Cache, artifactOption artifact.Option) (scanner.Scanner, func(), error) {
 	wire.Build(scanner.StandaloneFilesystemSet)

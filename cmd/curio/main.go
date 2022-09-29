@@ -3,7 +3,7 @@ package main
 import (
 	"log"
 
-	"github.com/Bearer/curio/pkg/commands"
+	"github.com/bearer/curio/pkg/commands"
 )
 
 var (

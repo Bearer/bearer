@@ -4,7 +4,7 @@ import (
 	"context"
 	"sort"
 
-	"github.com/Bearer/curio/pkg/fanal/types"
+	"github.com/bearer/curio/pkg/fanal/types"
 )
 
 type Option struct {
