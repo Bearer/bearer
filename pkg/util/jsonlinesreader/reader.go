@@ -17,7 +17,7 @@ func New(path string) (*Reader, error) {
 // Next scans next jsonline returning true upon reaching end
 func (reader *Reader) Next() (end bool) {
 	// reads next from bufio.scanner and saves its data returns true upon end
-	return true
+	return false
 }
 
 // Data returns most recent decoded interface

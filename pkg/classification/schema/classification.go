@@ -5,8 +5,7 @@ import (
 )
 
 type ClassifiedSchema struct {
-	Type           string         `json:"type"`
-	Schema         schema.Schema  `json:"schema"`
+	*schema.Schema
 	Classification Classification `json:"classification"`
 }
 

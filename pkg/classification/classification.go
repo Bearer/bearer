@@ -68,6 +68,8 @@ func (classifer *Classifier) Classify(reportPath string) (classifyReportPath str
 				return "", err
 			}
 			// write classifiedData to our newly created file as jsonline
+		default:
+			// write unclassifable data to a report file as jsonline
 		}
 	}
 

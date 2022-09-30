@@ -1,0 +1,1 @@
+{"type":"schema","detector_type":"csharp","source":{"filename":"config.cs","language":"C#","language_type":"programming","line_number":3,"column_number":14,"text":null},"value":{"object_name":"url","field_name":"path", "object_uuid": "1", "field_uuid": "2", "field_type": "User", "simple_field_type": "object"}}
