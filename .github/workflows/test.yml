@@ -1,0 +1,23 @@
+name: unit test
+on:
+  pull_request:
+    types:
+      - opened
+      - synchronize
+      - edited
+      - reopened
+permissions:
+  contents: read
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Go
+        uses: actions/setup-go@v3
+        with:
+          go-version: 1.15
+      - name: Test detectors
+        run: go test -v ./pkg/detectors/...
+      - name: Test classifications
+        run: go test -v ./pkg/classification/...
