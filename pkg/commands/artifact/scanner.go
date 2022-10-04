@@ -5,7 +5,7 @@ import (
 
 	"golang.org/x/xerrors"
 
-	"github.com/Bearer/curio/pkg/scanner"
+	"github.com/bearer/curio/pkg/scanner"
 )
 
 // filesystemStandaloneScanner initializes a filesystem scanner in standalone mode

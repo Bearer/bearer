@@ -1,4 +1,4 @@
-package utils
+package cache
 
 import (
 	"os"
@@ -6,7 +6,7 @@ import (
 )
 
 // DefaultCacheDir returns/creates the cache-dir to be used for curio operations
-func DefaultCacheDir() string {
+func DefaultDir() string {
 	tmpDir, err := os.UserCacheDir()
 	if err != nil {
 		tmpDir = os.TempDir()

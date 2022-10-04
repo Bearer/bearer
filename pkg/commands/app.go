@@ -7,9 +7,9 @@ import (
 	"io"
 	"os"
 
-	"github.com/Bearer/curio/pkg/commands/artifact"
-	"github.com/Bearer/curio/pkg/flag"
-	"github.com/Bearer/curio/pkg/types"
+	"github.com/bearer/curio/pkg/commands/artifact"
+	"github.com/bearer/curio/pkg/flag"
+	"github.com/bearer/curio/pkg/types"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 	"golang.org/x/xerrors"

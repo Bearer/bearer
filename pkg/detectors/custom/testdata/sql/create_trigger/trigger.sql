@@ -1,0 +1,1 @@
+ CREATE TRIGGER anon_account_trigger BEFORE INSERT OR UPDATE ON accounts FOR EACH ROW EXECUTE PROCEDURE anon_account();
