@@ -1,7 +1,7 @@
 [
 	{
 		"type": "custom",
-		"detector_type": "detect_rails_class",
+		"detector_type": "detect_rails_encrypts",
 		"commit_sha": "",
 		"source": {
 			"filename": "class.rb",
@@ -22,7 +22,7 @@
 	},
 	{
 		"type": "custom",
-		"detector_type": "detect_rails_class",
+		"detector_type": "detect_rails_encrypts",
 		"commit_sha": "",
 		"source": {
 			"filename": "class.rb",
