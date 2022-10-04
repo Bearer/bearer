@@ -18,17 +18,17 @@ type testCase struct {
 
 func TestSchema(t *testing.T) {
 	tests := []testCase{
-		testCase{
+		{
 			Name: "simple path",
 			Input: datatype.DataType{
 				Name: "user",
 				Type: reportschema.SimpleTypeObject,
 				Properties: map[string]*datatype.DataType{
-					"address": &datatype.DataType{
+					"address": {
 						Type: reportschema.SimpleTypeString,
 						UUID: "2",
 					},
-					"age": &datatype.DataType{
+					"age": {
 						Type: reportschema.SimpleTypeString,
 						UUID: "3",
 					},
@@ -43,7 +43,7 @@ func TestSchema(t *testing.T) {
 					Name: "personal data",
 				},
 				Properties: map[string]schema.ClassifiedDatatype{
-					"address": schema.ClassifiedDatatype{
+					"address": {
 						Classification: schema.Classification{
 							Name: "personal data",
 						},
@@ -51,7 +51,7 @@ func TestSchema(t *testing.T) {
 							UUID: "2",
 						},
 					},
-					"age": schema.ClassifiedDatatype{
+					"age": {
 						Classification: schema.Classification{},
 					},
 				},

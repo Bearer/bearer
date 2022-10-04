@@ -1,7 +1,7 @@
 package classsification
 
 import (
-	"github.com/bearer/curio/pkg/classification/frameworks"
+	"github.com/bearer/curio/pkg/classification/dependencies"
 	"github.com/bearer/curio/pkg/classification/interfaces"
 	"github.com/bearer/curio/pkg/classification/schema"
 )
@@ -9,9 +9,9 @@ import (
 type Classifier struct {
 	config Config
 
-	interfaces interfaces.Classifier
-	schema     schema.Classifier
-	frameworks frameworks.Classifier
+	Interfaces  interfaces.Classifier
+	Schema      schema.Classifier
+	Dependecies dependencies.Classifier
 }
 
 type Config struct {

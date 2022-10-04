@@ -1,21 +1,39 @@
-package interfaces
+package dependencies
 
 import (
-	"github.com/bearer/curio/pkg/report/dependencies"
+	"github.com/bearer/curio/pkg/classification/db"
+	"github.com/bearer/curio/pkg/report"
 )
+
+type ClassifiedDependency struct {
+	*report.Detection
+	Classification Classification `json:"classification"`
+}
+
+type Classification struct {
+	RecipeMatch bool
+	RecipeName  string
+}
 
 type Classifier struct {
 	config Config
 }
 
 type Config struct {
+	recipes []db.Recipe
 }
 
 func New(config Config) *Classifier {
 	return &Classifier{}
 }
 
-func (classifier *Classifier) Classify(data dependencies.Dependency) (ClassifiedDependency, error) {
+func (classifier *Classifier) Classify(data report.Detection) (ClassifiedDependency, error) {
 	// todo: implement interface classification (bigbear etc...)
-	return ClassifiedDependency{}, nil
+	return ClassifiedDependency{
+		Detection: &data,
+		Classification: Classification{
+			RecipeMatch: true,
+			RecipeName:  "stripe",
+		},
+	}, nil
 }
