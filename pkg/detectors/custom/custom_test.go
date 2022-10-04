@@ -26,8 +26,14 @@ var configRubyLoggers []byte
 //go:embed testdata/config/rails_encrypts.yml
 var configRailsEncrypts []byte
 
+//go:embed testdata/config/sql_create_function.yml
+var configSQLCreateFunction []byte
+
 //go:embed testdata/config/sql_create_table.yml
 var configSQLCreateTable []byte
+
+//go:embed testdata/config/sql_create_trigger.yml
+var configSQLCreateTrigger []byte
 
 func TestRubyLoggersJSON(t *testing.T) {
 	var rulesConfig config.Config
@@ -76,7 +82,7 @@ func TestRailsEncryptsJSON(t *testing.T) {
 	var registrations = []detectors.InitializedDetector{{
 		Type:     detectorType,
 		Detector: detector}}
-	detectorReport := testhelper.Extract(t, filepath.Join("testdata", "rails", "encrypts"), registrations, detectorType)
+	detectorReport := testhelper.Extract(t, filepath.Join("testdata", "ruby", "class", "encrypts"), registrations, detectorType)
 
 	bytes, err := json.MarshalIndent(detectorReport.CustomDetections, "", "\t")
 
@@ -87,6 +93,34 @@ func TestRailsEncryptsJSON(t *testing.T) {
 	cupaloy.SnapshotT(t, string(bytes))
 }
 
+func TestSQLCreateFunctionJSON(t *testing.T) {
+	var rulesConfig config.Config
+
+	detector := custom.New(&nodeid.IntGenerator{Counter: 0})
+	err := yaml.Unmarshal(configSQLCreateFunction, &rulesConfig)
+	if err != nil {
+		t.Fatal(err)
+		return
+	}
+	customDetector := detector.(*custom.Detector)
+	err = customDetector.CompileRules(rulesConfig)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	var registrations = []detectors.InitializedDetector{{
+		Type:     detectorType,
+		Detector: detector}}
+	detectorReport := testhelper.Extract(t, filepath.Join("testdata", "sql", "create_function"), registrations, detectorType)
+
+	bytes, err := json.MarshalIndent(detectorReport.CustomDetections, "", "\t")
+
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	cupaloy.SnapshotT(t, string(bytes))
+}
 func TestSQLCreateTableJSON(t *testing.T) {
 	var rulesConfig config.Config
 
@@ -108,6 +142,35 @@ func TestSQLCreateTableJSON(t *testing.T) {
 	detectorReport := testhelper.Extract(t, filepath.Join("testdata", "sql", "create_table"), registrations, detectorType)
 
 	bytes, err := json.MarshalIndent(detectorReport.CustomDetections, "", "\t")
+
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	cupaloy.SnapshotT(t, string(bytes))
+}
+
+func TestSQLCreateTriggerJSON(t *testing.T) {
+	var rulesConfig config.Config
+
+	detector := custom.New(&nodeid.IntGenerator{Counter: 0})
+	err := yaml.Unmarshal(configSQLCreateTrigger, &rulesConfig)
+	if err != nil {
+		t.Fatal(err)
+		return
+	}
+	customDetector := detector.(*custom.Detector)
+	err = customDetector.CompileRules(rulesConfig)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	var registrations = []detectors.InitializedDetector{{
+		Type:     detectorType,
+		Detector: detector}}
+	detectorReport := testhelper.Extract(t, filepath.Join("testdata", "sql", "create_trigger"), registrations, detectorType)
+
+	bytes, err := json.MarshalIndent(detectorReport.CustomDetections, "", " ")
 
 	if err != nil {
 		t.Fatal(err)
