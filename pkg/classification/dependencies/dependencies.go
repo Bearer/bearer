@@ -1,7 +1,7 @@
-package schema
+package interfaces
 
 import (
-	"github.com/bearer/curio/pkg/parser/datatype"
+	"github.com/bearer/curio/pkg/report/dependencies"
 )
 
 type Classifier struct {
@@ -15,7 +15,7 @@ func New(config Config) *Classifier {
 	return &Classifier{}
 }
 
-func (classifier *Classifier) Classify(data datatype.DataType) (ClassifiedDatatype, error) {
+func (classifier *Classifier) Classify(data dependencies.Dependency) (ClassifiedDependency, error) {
 	// todo: implement interface classification (bigbear etc...)
-	return ClassifiedDatatype{}, nil
+	return ClassifiedDependency{}, nil
 }

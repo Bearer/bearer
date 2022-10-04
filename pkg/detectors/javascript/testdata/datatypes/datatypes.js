@@ -92,3 +92,18 @@ module.exports = function (url) {
 		path: "user",
 	};
 };
+
+class User {
+	constructor(name, age) {
+		this.name = name;
+		this.age = age;
+	}
+
+	get status() {
+		return `${this.name} -> ${this.age}`;
+	}
+}
+
+var user = new User("cedric", "35");
+
+console.log(user.status);
