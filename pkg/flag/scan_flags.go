@@ -1,10 +1,9 @@
 package flag
 
 import (
+	"github.com/bearer/curio/pkg/types"
 	"golang.org/x/exp/slices"
 	"golang.org/x/xerrors"
-
-	"github.com/Bearer/curio/pkg/types"
 )
 
 var (

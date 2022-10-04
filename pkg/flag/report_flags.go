@@ -6,11 +6,9 @@ import (
 	"os"
 	"strings"
 
-	"golang.org/x/exp/slices"
 	"golang.org/x/xerrors"
 
-	"github.com/Bearer/curio/pkg/report"
-	"github.com/Bearer/curio/pkg/result"
+	"github.com/bearer/curio/pkg/report/output"
 )
 
 const (
@@ -43,7 +41,7 @@ var (
 		Name:       "format",
 		ConfigName: "format",
 		Shorthand:  "f",
-		Value:      report.FormatTable,
+		Value:      output.TypeJSONLines,
 		Usage:      "format (table, json, sarif, template, cyclonedx, spdx, spdx-json, github, cosign-vuln)",
 	}
 	ReportFormatFlag = Flag{
@@ -74,7 +72,7 @@ var (
 	IgnoreFileFlag = Flag{
 		Name:       "ignorefile",
 		ConfigName: "ignorefile",
-		Value:      result.DefaultIgnoreFile,
+		Value:      "",
 		Usage:      "specify .trivyignore file",
 	}
 	IgnorePolicyFlag = Flag{
@@ -178,23 +176,23 @@ func (f *ReportFlagGroup) ToOptions(out io.Writer) (ReportOptions, error) {
 			// log.Logger.Warnf("'--template' is ignored because '--format %s' is specified. Use '--template' option with '--format template' option.", format)
 		}
 	} else {
-		if format == report.FormatTemplate {
-			// log.Logger.Warn("'--format template' is ignored because '--template' is not specified. Specify '--template' option when you use '--format template'.")
-		}
+		// if format == report.FormatTemplate {
+		// 	// log.Logger.Warn("'--format template' is ignored because '--template' is not specified. Specify '--template' option when you use '--format template'.")
+		// }
 	}
 
 	// "--list-all-pkgs" option is unavailable with "--format table".
 	// If user specifies "--list-all-pkgs" with "--format table", we should warn it.
-	if listAllPkgs && format == report.FormatTable {
-		// log.Logger.Warn(`"--list-all-pkgs" cannot be used with "--format table". Try "--format json" or other formats.`)
-	}
+	// if listAllPkgs && format == report.FormatTable {
+	// 	// log.Logger.Warn(`"--list-all-pkgs" cannot be used with "--format table". Try "--format json" or other formats.`)
+	// }
 
 	// "--dependency-tree" option is available only with "--format table".
 	if dependencyTree {
 		// log.Logger.Infof(`"--dependency-tree" only shows dependencies for "package-lock.json" files`)
-		if format != report.FormatTable {
-			// log.Logger.Warn(`"--dependency-tree" can be used only with "--format table".`)
-		}
+		// if format != report.FormatTable {
+		// 	// log.Logger.Warn(`"--dependency-tree" can be used only with "--format table".`)
+		// }
 	}
 
 	// Enable '--list-all-pkgs' if needed
@@ -223,10 +221,10 @@ func (f *ReportFlagGroup) ToOptions(out io.Writer) (ReportOptions, error) {
 }
 
 func (f *ReportFlagGroup) forceListAllPkgs(format string, listAllPkgs, dependencyTree bool) bool {
-	if slices.Contains(report.SupportedSBOMFormats, format) && !listAllPkgs {
-		// log.Logger.Debugf("%q automatically enables '--list-all-pkgs'.", report.SupportedSBOMFormats)
-		return true
-	}
+	// if slices.Contains(report.SupportedSBOMFormats, format) && !listAllPkgs {
+	// 	// log.Logger.Debugf("%q automatically enables '--list-all-pkgs'.", report.SupportedSBOMFormats)
+	// 	return true
+	// }
 	if dependencyTree && !listAllPkgs {
 		// log.Logger.Debugf("'--dependency-tree' enables '--list-all-pkgs'.")
 		return true

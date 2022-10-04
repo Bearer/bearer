@@ -7,10 +7,10 @@ import (
 	"github.com/google/wire"
 	"golang.org/x/xerrors"
 
-	"github.com/Bearer/curio/pkg/fanal/artifact"
-	ftypes "github.com/Bearer/curio/pkg/fanal/types"
-	"github.com/Bearer/curio/pkg/scanner/local"
-	"github.com/Bearer/curio/pkg/types"
+	"github.com/bearer/curio/pkg/fanal/artifact"
+	ftypes "github.com/bearer/curio/pkg/fanal/types"
+	"github.com/bearer/curio/pkg/scanner/local"
+	"github.com/bearer/curio/pkg/types"
 )
 
 // StandaloneSuperSet is used in the standalone mode

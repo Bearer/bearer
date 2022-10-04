@@ -1,7 +1,7 @@
 package cache
 
 import (
-	"github.com/Bearer/curio/pkg/fanal/types"
+	"github.com/bearer/curio/pkg/fanal/types"
 )
 
 const (
