@@ -15,6 +15,11 @@ import (
 	"golang.org/x/xerrors"
 )
 
+// VersionInfo holds the trivy DB version Info
+type VersionInfo struct {
+	Version string `json:",omitempty"`
+}
+
 const (
 	usageTemplate = `Usage:{{if .Runnable}}
   {{.UseLine}}{{end}}{{if .HasAvailableSubCommands}}
@@ -157,7 +162,7 @@ func NewScanCommand(globalFlags *flag.GlobalFlagGroup) *cobra.Command {
 			if err := fsFlags.Bind(cmd); err != nil {
 				return xerrors.Errorf("flag bind error: %w", err)
 			}
-			return validateArgs(cmd, args)
+			return nil
 		},
 		RunE: func(cmd *cobra.Command, args []string) error {
 			if err := fsFlags.Bind(cmd); err != nil {
@@ -199,7 +204,7 @@ func NewRepositoryCommand(globalFlags *flag.GlobalFlagGroup) *cobra.Command {
 			if err := repoFlags.Bind(cmd); err != nil {
 				return xerrors.Errorf("flag bind error: %w", err)
 			}
-			return validateArgs(cmd, args)
+			return nil
 		},
 		RunE: func(cmd *cobra.Command, args []string) error {
 			if err := repoFlags.Bind(cmd); err != nil {
@@ -222,11 +227,6 @@ func NewRepositoryCommand(globalFlags *flag.GlobalFlagGroup) *cobra.Command {
 }
 
 func NewConfigCommand(globalFlags *flag.GlobalFlagGroup) *cobra.Command {
-	reportFlagGroup := flag.NewReportFlagGroup()
-	reportFlagGroup.DependencyTree = nil // disable '--dependency-tree'
-	reportFlagGroup.IgnorePolicy = nil   // disable '--ignore-policy'
-	reportFlagGroup.ListAllPkgs = nil    // disable '--list-all-pkgs'
-	reportFlagGroup.ReportFormat = nil   // TODO: support --report summary
 
 	scanFlags := &flag.ScanFlagGroup{
 		// Enable only '--skip-dirs' and '--skip-files' and disable other flags
@@ -236,10 +236,8 @@ func NewConfigCommand(globalFlags *flag.GlobalFlagGroup) *cobra.Command {
 	}
 
 	configFlags := &flag.Flags{
-		CacheFlagGroup:   flag.NewCacheFlagGroup(),
-		MisconfFlagGroup: flag.NewMisconfFlagGroup(),
-		ReportFlagGroup:  reportFlagGroup,
-		ScanFlagGroup:    scanFlags,
+
+		ScanFlagGroup: scanFlags,
 	}
 
 	cmd := &cobra.Command{
@@ -250,7 +248,7 @@ func NewConfigCommand(globalFlags *flag.GlobalFlagGroup) *cobra.Command {
 			if err := configFlags.Bind(cmd); err != nil {
 				return xerrors.Errorf("flag bind error: %w", err)
 			}
-			return validateArgs(cmd, args)
+			return nil
 		},
 		RunE: func(cmd *cobra.Command, args []string) error {
 			if err := configFlags.Bind(cmd); err != nil {
@@ -262,7 +260,6 @@ func NewConfigCommand(globalFlags *flag.GlobalFlagGroup) *cobra.Command {
 			}
 
 			// Disable OS and language analyzers
-			options.DisabledAnalyzers = append(analyzer.TypeOSes, analyzer.TypeLanguages...)
 
 			// Scan only for misconfigurations
 			options.SecurityChecks = []string{types.SecurityCheckConfig}
