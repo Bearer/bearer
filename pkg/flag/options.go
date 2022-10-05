@@ -51,7 +51,7 @@ type Flags struct {
 type Options struct {
 	GlobalOptions
 	RepoOptions
-	// ReportOptions
+	ReportOptions
 	ScanOptions
 
 	// Curio's version, not populated via CLI flags

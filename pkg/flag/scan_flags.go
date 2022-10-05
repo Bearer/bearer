@@ -2,8 +2,6 @@ package flag
 
 import (
 	"github.com/bearer/curio/pkg/types"
-	"golang.org/x/exp/slices"
-	"golang.org/x/xerrors"
 )
 
 var (
@@ -40,33 +38,26 @@ var (
 )
 
 type ScanFlagGroup struct {
-	SkipDirs       *Flag
-	SkipFiles      *Flag
-	OfflineScan    *Flag
-	SecurityChecks *Flag
-	FilePatterns   *Flag
-	SBOMSources    *Flag
-	RekorURL       *Flag
+	SkipDirs  *Flag
+	SkipFiles *Flag
+	// SecurityChecks *Flag
+	FilePatterns *Flag
 }
 
 type ScanOptions struct {
 	Target         string
 	SkipDirs       []string
 	SkipFiles      []string
-	OfflineScan    bool
 	SecurityChecks []string
 	FilePatterns   []string
-	SBOMSources    []string
-	RekorURL       string
 }
 
 func NewScanFlagGroup() *ScanFlagGroup {
 	return &ScanFlagGroup{
-		SkipDirs:       &SkipDirsFlag,
-		SkipFiles:      &SkipFilesFlag,
-		OfflineScan:    &OfflineScanFlag,
-		SecurityChecks: &SecurityChecksFlag,
-		FilePatterns:   &FilePatternsFlag,
+		SkipDirs:  &SkipDirsFlag,
+		SkipFiles: &SkipFilesFlag,
+		// SecurityChecks: &SecurityChecksFlag,
+		FilePatterns: &FilePatternsFlag,
 	}
 }
 
@@ -75,7 +66,7 @@ func (f *ScanFlagGroup) Name() string {
 }
 
 func (f *ScanFlagGroup) Flags() []*Flag {
-	return []*Flag{f.SkipDirs, f.SkipFiles, f.OfflineScan, f.SecurityChecks, f.FilePatterns, f.SBOMSources, f.RekorURL}
+	return []*Flag{f.SkipDirs, f.SkipFiles, f.FilePatterns}
 }
 
 func (f *ScanFlagGroup) ToOptions(args []string) (ScanOptions, error) {
@@ -83,29 +74,27 @@ func (f *ScanFlagGroup) ToOptions(args []string) (ScanOptions, error) {
 	if len(args) == 1 {
 		target = args[0]
 	}
-	securityChecks, err := parseSecurityCheck(getStringSlice(f.SecurityChecks))
-	if err != nil {
-		return ScanOptions{}, xerrors.Errorf("unable to parse security checks: %w", err)
-	}
+	// securityChecks, err := parseSecurityCheck(getStringSlice(f.SecurityChecks))
+	// if err != nil {
+	// 	return ScanOptions{}, xerrors.Errorf("unable to parse security checks: %w", err)
+	// }
 
 	return ScanOptions{
-		Target:         target,
-		SkipDirs:       getStringSlice(f.SkipDirs),
-		SkipFiles:      getStringSlice(f.SkipFiles),
-		OfflineScan:    getBool(f.OfflineScan),
-		SecurityChecks: securityChecks,
-		FilePatterns:   getStringSlice(f.FilePatterns),
-		RekorURL:       getString(f.RekorURL),
+		Target:    target,
+		SkipDirs:  getStringSlice(f.SkipDirs),
+		SkipFiles: getStringSlice(f.SkipFiles),
+		// SecurityChecks: securityChecks,
+		FilePatterns: getStringSlice(f.FilePatterns),
 	}, nil
 }
 
-func parseSecurityCheck(securityCheck []string) ([]string, error) {
-	var securityChecks []string
-	for _, v := range securityCheck {
-		if !slices.Contains(types.SecurityChecks, v) {
-			return nil, xerrors.Errorf("unknown security check: %s", v)
-		}
-		securityChecks = append(securityChecks, v)
-	}
-	return securityChecks, nil
-}
+// func parseSecurityCheck(securityCheck []string) ([]string, error) {
+// 	var securityChecks []string
+// 	for _, v := range securityCheck {
+// 		if !slices.Contains(types.SecurityChecks, v) {
+// 			return nil, xerrors.Errorf("unknown security check: %s", v)
+// 		}
+// 		securityChecks = append(securityChecks, v)
+// 	}
+// 	return securityChecks, nil
+// }
