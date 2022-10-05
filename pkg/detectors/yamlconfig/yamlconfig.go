@@ -1,6 +1,7 @@
 package yamlconfig
 
 import (
+	"context"
 	"fmt"
 	"io/ioutil"
 	"regexp"
@@ -24,16 +25,6 @@ import (
 )
 
 var (
-	variablesQuery = parser.QueryMustCompile(yaml.GetLanguage(), `
-		(block_mapping_pair
-				key: (_) @parentKey
-				value: (block_node [
-					(block_mapping (block_mapping_pair
-					  key: (_) @key
-					  value: (flow_node [(plain_scalar) (single_quote_scalar) (double_quote_scalar)]) @value) @definition)
-					(block_sequence (block_sequence_item (flow_node [(plain_scalar) (single_quote_scalar) (double_quote_scalar)]) @keyValue @definition))]))
-	`)
-
 	interfacesQuery = parser.QueryMustCompile(yaml.GetLanguage(), `
 		(block_mapping (block_mapping_pair
 			key: (_) @key
@@ -44,8 +35,6 @@ var (
 
 	filenamePattern      = regexp.MustCompile(`\.ya?ml(\.|$)`)
 	i18nExclusionPattern = regexp.MustCompile(`(locales?|translations?)`)
-
-	keyValueTrimPattern = regexp.MustCompile(`^\s*-\s+(.*)`)
 
 	environmentVariablePattern = regexp.MustCompile(`^[A-Z0-9_]+$`)
 )
@@ -131,7 +120,11 @@ func extractInterfaces(report report.Report, tree *parser.Tree) error {
 
 func parseValue(text string) (*values.Value, error) {
 	bytes := []byte(text)
-	rootNode := sitter.Parse(bytes, config_variables.GetLanguage())
+	rootNode, err := sitter.ParseCtx(context.Background(), bytes, config_variables.GetLanguage())
+	if err != nil {
+		return nil, err
+	}
+
 	n := int(rootNode.ChildCount())
 
 	value := values.New()

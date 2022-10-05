@@ -73,9 +73,15 @@ func getFileType(file *file.FileInfo) (detectors.OpenAPIFileType, error) {
 
 	var version version
 	if ext == ".json" {
-		json.Unmarshal(input, &version)
+		err := json.Unmarshal(input, &version)
+		if err != nil {
+			return detectors.OpenAPIFileType(""), err
+		}
 	} else {
-		yaml.Unmarshal(input, &version)
+		err := yaml.Unmarshal(input, &version)
+		if err != nil {
+			return detectors.OpenAPIFileType(""), err
+		}
 	}
 
 	versionString := version.OpenAPI

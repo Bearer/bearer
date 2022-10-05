@@ -6,17 +6,11 @@ import (
 	"github.com/bearer/curio/pkg/parser/nodeid"
 	"github.com/bearer/curio/pkg/util/file"
 
-	"github.com/bearer/curio/pkg/parser/sitter/sql"
-
 	createtable "github.com/bearer/curio/pkg/detectors/sql/create_table"
 	createview "github.com/bearer/curio/pkg/detectors/sql/create_view"
 
 	parserdatatype "github.com/bearer/curio/pkg/parser/datatype"
 	reporttypes "github.com/bearer/curio/pkg/report"
-)
-
-var (
-	language = sql.GetLanguage()
 )
 
 type detector struct {

@@ -137,8 +137,11 @@ func (detector *Detector) executeRule(rule config.CompiledRule, file *file.FileI
 		captures := tree.QueryConventional(query)
 
 		filteredCaptures, err := filterCaptures(rule.Params, captures)
+		if err != nil {
+			return err
+		}
 
-		detector.extractData(filteredCaptures, rule, report, lang, idGenerator)
+		err = detector.extractData(filteredCaptures, rule, report, lang, idGenerator)
 		if err != nil {
 			return err
 		}

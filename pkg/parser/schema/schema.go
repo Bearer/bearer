@@ -32,7 +32,7 @@ func New(tree *parser.Tree, parseNode func(finder *Finder, node *parser.Node, va
 }
 
 func (finder *Finder) Annotate() {
-	finder.tree.WalkBottomUp(func(child *parser.Node) error {
+	finder.tree.WalkBottomUp(func(child *parser.Node) error { //nolint:all,errcheck
 
 		value := &Node{}
 		finder.parseNode(finder, child, value)
@@ -73,7 +73,7 @@ func (finder *Finder) NonTerminatingValues(root *parser.Node) []*Variable {
 }
 
 func (finder *Finder) ReportSchemas(detectorType detectors.Type, output report.Report) {
-	finder.tree.WalkBottomUp(func(node *parser.Node) error {
+	finder.tree.WalkBottomUp(func(node *parser.Node) error { //nolint:all,errcheck
 		value := finder.values[node.ID()]
 
 		if !value.Terminating {

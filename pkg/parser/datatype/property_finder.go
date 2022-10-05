@@ -20,7 +20,7 @@ func NewPropertyFinder(tree *parser.Tree, dataTypeMap map[parser.NodeID]*DataTyp
 }
 
 func (finder *PropertyFinder) Find() {
-	finder.tree.WalkBottomUp(func(child *parser.Node) error {
+	finder.tree.WalkBottomUp(func(child *parser.Node) error { //nolint:all,errcheck
 		finder.parseNode(finder, child)
 
 		return nil

@@ -36,7 +36,7 @@ func FindUrls(file *file.FileInfo) (urls []operations.Url) {
 	err = yaml.NewDecoder(bytes.NewBuffer(fileBytes)).Decode(&document)
 
 	if err != nil {
-		json.NewDecoder(bytes.NewBuffer(fileBytes)).Decode(&document)
+		json.NewDecoder(bytes.NewBuffer(fileBytes)).Decode(&document) //nolint:all,errcheck
 	}
 
 	for _, url := range document.Servers {

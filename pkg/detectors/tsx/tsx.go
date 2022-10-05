@@ -103,7 +103,7 @@ func annotate(tree *parser.Tree, environmentVariablesQuery *sitter.Query) error 
 			return
 
 		case "string", "template_string":
-			node.EachPart(func(text string) error {
+			node.EachPart(func(text string) error { //nolint:all,errcheck
 				value.AppendString(text)
 
 				return nil

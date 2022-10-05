@@ -83,9 +83,9 @@ func ProcessRaw(
 	defer tree.Close()
 
 	jsDetector := New(idGenerator).(*detector)
-	jsDetector.processTree(tree, report)
+	_, err = jsDetector.processTree(tree, report)
 
-	return true, nil
+	return true, err
 }
 
 func (detector *detector) processTree(tree *parser.Tree, report report.Report) (bool, error) {
@@ -132,7 +132,7 @@ func annotate(tree *parser.Tree, environmentVariablesQuery *sitter.Query) error 
 			return
 
 		case "string", "template_string":
-			node.EachPart(func(text string) error {
+			node.EachPart(func(text string) error { //nolint:all,errcheck
 				value.AppendString(text)
 
 				return nil

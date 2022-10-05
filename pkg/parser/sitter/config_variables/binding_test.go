@@ -1,6 +1,7 @@
 package config_variables_test
 
 import (
+	"context"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -16,7 +17,10 @@ type NodeContent struct {
 
 func TestGrammar(t *testing.T) {
 	input := []byte("Test {{ my.var }}${{ steps.dockerhub-check.outcome == 'success' }} 123 $VAR ${VAR2}")
-	rootNode := sitter.Parse(input, config_variables.GetLanguage())
+	rootNode, err := sitter.ParseCtx(context.Background(), input, config_variables.GetLanguage())
+	if err != nil {
+		t.Fatal(err)
+	}
 
 	assert.Equal(
 		t,

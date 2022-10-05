@@ -128,7 +128,7 @@ func annotate(tree *parser.Tree) error {
 			}
 
 		case "encapsed_string":
-			node.EachPart(
+			node.EachPart( //nolint:all,errcheck
 				func(text string) error {
 					value.AppendString(stringutil.StripQuotes(text))
 

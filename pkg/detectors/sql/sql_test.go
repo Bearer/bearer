@@ -18,7 +18,7 @@ var detectorType = detectortypes.DetectorGraphQL
 
 func TestCreateTable(t *testing.T) {
 	var (
-		registrations = []detectors.InitializedDetector{{detectorType, sql.New(&nodeid.IntGenerator{Counter: 0})}}
+		registrations = []detectors.InitializedDetector{{Type: detectorType, Detector: sql.New(&nodeid.IntGenerator{Counter: 0})}}
 	)
 	detectorReport := testhelper.Extract(t, filepath.Join("testdata", "create_table"), registrations, detectorType)
 
@@ -27,7 +27,7 @@ func TestCreateTable(t *testing.T) {
 
 func TestCreateView(t *testing.T) {
 	var (
-		registrations = []detectors.InitializedDetector{{detectorType, sql.New(&nodeid.IntGenerator{Counter: 0})}}
+		registrations = []detectors.InitializedDetector{{Type: detectorType, Detector: sql.New(&nodeid.IntGenerator{Counter: 0})}}
 	)
 	detectorReport := testhelper.Extract(t, filepath.Join("testdata", "create_view"), registrations, detectorType)
 

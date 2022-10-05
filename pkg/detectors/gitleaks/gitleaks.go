@@ -48,7 +48,7 @@ var sensitiveFilesRegex = regexp.MustCompile(`.*(
 
 func New(idGenerator nodeid.Generator) types.Detector {
 	var vc config.ViperConfig
-	toml.Unmarshal(RawConfig, &vc)
+	toml.Unmarshal(RawConfig, &vc) //nolint:all,errcheck
 	cfg, err := vc.Translate()
 	if err != nil {
 		log.Fatal(err)

@@ -14,7 +14,7 @@ import (
 
 var detectorType = detectortypes.DetectorOpenAPI
 var (
-	registrations = []detectors.InitializedDetector{{detectortypes.DetectorOpenAPI, openapi.New(&nodeid.IntGenerator{Counter: 0})}}
+	registrations = []detectors.InitializedDetector{{Type: detectortypes.DetectorOpenAPI, Detector: openapi.New(&nodeid.IntGenerator{Counter: 0})}}
 )
 
 func TestDetectorV3json(t *testing.T) {
