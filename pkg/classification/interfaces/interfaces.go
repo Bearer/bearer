@@ -23,7 +23,7 @@ type Config struct {
 }
 
 func New(config Config) *Classifier {
-	return &Classifier{}
+	return &Classifier{config}
 }
 
 func (classifier *Classifier) Classify(data report.Detection) (ClassifiedInterface, error) {
