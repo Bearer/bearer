@@ -120,7 +120,7 @@ func annotate(tree *parser.Tree) error {
 			}
 
 		case "interpreted_string_literal", "raw_string_literal":
-			node.EachPart(func(text string) error {
+			node.EachPart(func(text string) error { //nolint:all,errcheck
 				value.AppendString(text)
 
 				return nil

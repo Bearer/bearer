@@ -7,7 +7,7 @@ import (
 	"github.com/bearer/curio/pkg/types"
 )
 
-func initializeFilesystemScanner(ctx context.Context, path string, artifact types.Artifact) (scanner.Scanner, func(), error) {
+func initializeFilesystemScanner(ctx context.Context, path string, artifact types.Artifact) (scanner.Scanner, func(), error) { //nolint:all,unused
 	// wire.Build(scanner.StandaloneFilesystemSet)
 	return scanner.Scanner{}, nil, nil
 }

@@ -26,13 +26,6 @@ const (
 	TargetRepository     TargetKind = "repo"
 	TargetImageArchive   TargetKind = "archive"
 	TargetSBOM           TargetKind = "sbom"
-
-	devVersion = "dev"
-)
-
-var (
-	defaultPolicyNamespaces = []string{"appshield", "defsec", "builtin"}
-	SkipScan                = errors.New("skip subsequent processes")
 )
 
 // InitializeScanner defines the initialize function signature of scanner
@@ -112,7 +105,7 @@ func Run(ctx context.Context, opts flag.Options, targetKind TargetKind) (err err
 	defer cancel()
 
 	defer func() {
-		if xerrors.Is(err, context.DeadlineExceeded) {
+		if errors.Is(err, context.DeadlineExceeded) {
 			log.Warn().Msg("Increase --timeout value")
 		}
 	}()
@@ -124,9 +117,6 @@ func Run(ctx context.Context, opts flag.Options, targetKind TargetKind) (err err
 
 	r, err := NewRunner(ctx, opts)
 	if err != nil {
-		if errors.Is(err, SkipScan) {
-			return nil
-		}
 		return xerrors.Errorf("init error: %w", err)
 	}
 	defer r.Close(ctx)
@@ -157,7 +147,7 @@ func Run(ctx context.Context, opts flag.Options, targetKind TargetKind) (err err
 	return nil
 }
 
-func initScannerConfig(opts flag.Options) (ScannerConfig, types.ScanOptions, error) {
+func initScannerConfig(opts flag.Options) (ScannerConfig, types.ScanOptions, error) { //nolint:all,unused
 	target := opts.Target
 
 	scanOptions := types.ScanOptions{
@@ -170,7 +160,7 @@ func initScannerConfig(opts flag.Options) (ScannerConfig, types.ScanOptions, err
 	}, scanOptions, nil
 }
 
-func scan(ctx context.Context, opts flag.Options, initializeScanner InitializeScanner) (
+func scan(ctx context.Context, opts flag.Options, initializeScanner InitializeScanner) ( //nolint:all,unused
 	types.Report, error) {
 
 	scannerConfig, scanOptions, err := initScannerConfig(opts)

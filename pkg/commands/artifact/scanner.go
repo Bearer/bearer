@@ -9,7 +9,7 @@ import (
 )
 
 // filesystemStandaloneScanner initializes a filesystem scanner in standalone mode
-func filesystemStandaloneScanner(ctx context.Context, conf ScannerConfig) (scanner.Scanner, func(), error) {
+func filesystemStandaloneScanner(ctx context.Context, conf ScannerConfig) (scanner.Scanner, func(), error) { //nolint:all,unused
 	s, cleanup, err := initializeFilesystemScanner(ctx, conf.Target, conf.Artifact)
 	if err != nil {
 		return scanner.Scanner{}, func() {}, xerrors.Errorf("unable to initialize a filesystem scanner: %w", err)
