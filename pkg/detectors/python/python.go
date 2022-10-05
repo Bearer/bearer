@@ -122,7 +122,7 @@ func annotate(tree *parser.Tree) error {
 				return
 			}
 		case "string":
-			node.EachPart(func(text string) error {
+			node.EachPart(func(text string) error { //nolint:all,errcheck
 				value.AppendString(text)
 
 				return nil

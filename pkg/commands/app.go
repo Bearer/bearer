@@ -305,10 +305,10 @@ func showVersion(cacheDir, outputFormat, version string, outputWriter io.Writer)
 		b, _ := json.Marshal(VersionInfo{
 			Version: version,
 		})
-		fmt.Fprintln(outputWriter, string(b))
+		fmt.Fprint(outputWriter, string(b))
 	default:
 		output := fmt.Sprintf("Version: %s\n", version)
-		fmt.Fprintf(outputWriter, output)
+		fmt.Fprint(outputWriter, output)
 	}
 }
 

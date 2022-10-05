@@ -19,8 +19,6 @@ type Part interface {
 	Pattern() string
 }
 
-type partBase struct{}
-
 type PartType string
 
 const (

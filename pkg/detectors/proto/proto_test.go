@@ -15,7 +15,7 @@ import (
 
 var detectorType = detectortypes.DetectorGraphQL
 var (
-	registrations = []detectors.InitializedDetector{{detectorType, proto.New(&nodeid.IntGenerator{Counter: 0})}}
+	registrations = []detectors.InitializedDetector{{Type: detectorType, Detector: proto.New(&nodeid.IntGenerator{Counter: 0})}}
 )
 
 func TestBuildReportSchema(t *testing.T) {

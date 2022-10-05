@@ -99,7 +99,7 @@ func annotate(tree *parser.Tree) error {
 				return
 			}
 		case "interpolated_string_expression", "string_literal", "verbatim_string_literal":
-			node.EachPart(func(text string) error {
+			node.EachPart(func(text string) error { //nolint:all,errcheck
 				value.AppendString(text)
 
 				return nil

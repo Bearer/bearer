@@ -22,7 +22,7 @@ type Config struct {
 }
 
 func New(config Config) *Classifier {
-	return &Classifier{}
+	return &Classifier{config: config}
 }
 
 func (classifier *Classifier) Classify(data datatype.DataType) (ClassifiedDatatype, error) {

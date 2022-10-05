@@ -57,7 +57,7 @@ func NewCompleteExport(report report.SchemaReport, detectorType detectors.Type, 
 }
 
 func (finder *Finder) Find() {
-	finder.tree.WalkBottomUp(func(child *parser.Node) error {
+	finder.tree.WalkBottomUp(func(child *parser.Node) error { //nolint:all,errcheck
 
 		value := &DataType{
 			Properties: make(map[string]*DataType),

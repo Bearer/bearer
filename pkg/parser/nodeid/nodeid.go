@@ -22,7 +22,7 @@ func New(tree *parser.Tree, generator Generator) *Map {
 }
 
 func (finder *Map) Annotate() {
-	finder.tree.WalkBottomUp(func(child *parser.Node) error {
+	finder.tree.WalkBottomUp(func(child *parser.Node) error { //nolint:all,errcheck
 		finder.values[child.ID()] = finder.generator.GenerateId()
 		return nil
 	})

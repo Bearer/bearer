@@ -1,17 +1,14 @@
 package symfony
 
 import (
-	"errors"
 	"io/ioutil"
 	"net/url"
 	"regexp"
 	"strings"
 
-	"github.com/smacker/go-tree-sitter/php"
 	"gopkg.in/yaml.v3"
 
 	"github.com/bearer/curio/pkg/detectors/types"
-	"github.com/bearer/curio/pkg/parser"
 	"github.com/bearer/curio/pkg/report"
 	"github.com/bearer/curio/pkg/report/detectors"
 	"github.com/bearer/curio/pkg/report/frameworks/symfony"
@@ -22,16 +19,6 @@ import (
 )
 
 var (
-	errFound = errors.New("found")
-
-	language = php.GetLanguage()
-
-	namespaceUseQuery = parser.QueryMustCompile(language, `
-		(namespace_use_declaration)
-			(qualified_name) @namespace
-			(#match? @namespace "^Symfony\\\\")
-	`)
-
 	appConfigPattern      = regexp.MustCompile(`app/config/config.ya?ml$`)
 	doctrineConfigPattern = regexp.MustCompile(`config/packages(/.*)?/doctrine.ya?ml$`)
 )

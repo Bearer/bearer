@@ -1,10 +1,13 @@
 package parser
 
 import (
+	"context"
 	"errors"
 	"fmt"
 	"io/ioutil"
 	"strings"
+
+	"github.com/rs/zerolog/log"
 
 	"github.com/bearer/curio/pkg/report/source"
 	"github.com/bearer/curio/pkg/report/values"
@@ -38,12 +41,18 @@ func ParseBytes(fileInfo *file.FileInfo, file *file.Path, input []byte, language
 	defer parser.Close()
 
 	parser.SetLanguage(language)
+
+	sitterTree, err := parser.ParseCtx(context.Background(), nil, input)
+	if err != nil {
+		return nil, err
+	}
+
 	return &Tree{
 		language:   language,
 		fileInfo:   fileInfo,
 		file:       file,
 		input:      input,
-		sitter:     parser.Parse(nil, input),
+		sitter:     sitterTree,
 		lineOffset: lineOffset,
 		values:     make(map[*sitter.Node]*values.Value),
 	}, nil
@@ -394,7 +403,7 @@ func (node *Node) EachPart(onText func(text string) error, onChild func(child *N
 
 func (node *Node) TextParts() []string {
 	var result []string
-	node.EachPart(func(text string) error {
+	node.EachPart(func(text string) error { //nolint:all,errcheck
 		result = append(result, text)
 		return nil
 	}, func(node *Node) error {
@@ -436,7 +445,10 @@ func (node *Node) QueryMustPass(query *sitter.Query) (captures []Captures) {
 		returningCaptures = append(returningCaptures, captures)
 		return nil
 	}
-	node.Query(query, onMatch)
+	err := node.Query(query, onMatch)
+	if err != nil {
+		log.Fatal().Msgf("invalid query %e", err)
+	}
 	return returningCaptures
 }
 

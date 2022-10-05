@@ -16,7 +16,7 @@ import (
 
 var detectorType = detectortypes.DetectorRails
 var (
-	registrations = []detectors.InitializedDetector{{detectorType, rails.New(&nodeid.IntGenerator{Counter: 0})}}
+	registrations = []detectors.InitializedDetector{{Type: detectorType, Detector: rails.New(&nodeid.IntGenerator{Counter: 0})}}
 )
 
 func TestBuildReportSingleDatabase(t *testing.T) {

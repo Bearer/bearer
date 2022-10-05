@@ -1,6 +1,7 @@
 package proto_test
 
 import (
+	"context"
 	"testing"
 
 	"github.com/bearer/curio/pkg/parser/sitter/proto"
@@ -42,7 +43,10 @@ func TestGrammar(t *testing.T) {
 		string email = 11;
 		string password = 12;
 	}`)
-	rootNode := sitter.Parse(input, proto.GetLanguage())
+	rootNode, err := sitter.ParseCtx(context.Background(), input, proto.GetLanguage())
+	if err != nil {
+		t.Fatal(err)
+	}
 
 	assert.Equal(
 		t,

@@ -24,11 +24,15 @@ type Config struct {
 }
 
 func New(config Config) *Classifier {
-	return &Classifier{}
+	return &Classifier{config: config}
 }
 
 func (classifier *Classifier) Classify(data report.Detection) (ClassifiedDependency, error) {
 	// todo: implement interface classification (bigbear etc...)
+	for _, recipe := range classifier.config.recipes { //nolint:all,unused
+
+	}
+
 	return ClassifiedDependency{
 		Detection: &data,
 		Classification: Classification{

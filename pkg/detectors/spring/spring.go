@@ -2,18 +2,15 @@ package spring
 
 import (
 	"bytes"
-	"errors"
 	"fmt"
 	"io/ioutil"
 	"os"
 	"strings"
 
 	"github.com/rs/zerolog/log"
-	"github.com/smacker/go-tree-sitter/java"
 	"gopkg.in/yaml.v3"
 
 	"github.com/bearer/curio/pkg/detectors/types"
-	"github.com/bearer/curio/pkg/parser"
 	"github.com/bearer/curio/pkg/report"
 	"github.com/bearer/curio/pkg/report/detectors"
 	"github.com/bearer/curio/pkg/report/frameworks/spring"
@@ -24,21 +21,11 @@ import (
 )
 
 var (
-	foundErr = errors.New("found")
-
-	language = java.GetLanguage()
-
 	projectFiles = []string{
 		"pom.xml",
 		"build.gradle",
 		"build.gradle.kts",
 	}
-
-	importQuery = parser.QueryMustCompile(language, `
-		(import_declaration
-			(scoped_identifier scope: (_) @scope)
-			(#match? @scope "^org\\.springframework\\."))
-	`)
 )
 
 type yamlConfig struct {

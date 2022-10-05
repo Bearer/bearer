@@ -21,7 +21,7 @@ type FunctionType struct {
 func detectFunctionTypes(report report.Report, tree *parser.Tree, language *sitter.Language, knexImports []util.Import) {
 	knexFunctionTypes := make(map[parser.NodeID]FunctionType)
 	helperNodes := make(map[parser.NodeID]FunctionType)
-	tree.WalkBottomUp(func(node *parser.Node) error {
+	tree.WalkBottomUp(func(node *parser.Node) error { //nolint:all,errcheck
 		functionType := FunctionType{
 			containsKnex: false,
 			terminating:  false,

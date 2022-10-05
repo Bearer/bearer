@@ -28,6 +28,10 @@ func New(config Config) *Classifier {
 
 func (classifier *Classifier) Classify(data report.Detection) (ClassifiedInterface, error) {
 	// todo: implement interface classification (bigbear etc...)
+	for _, recipe := range classifier.config.recipes { //nolint:all,unused
+
+	}
+
 	return ClassifiedInterface{
 		Detection: &data,
 		Classification: &Classification{
