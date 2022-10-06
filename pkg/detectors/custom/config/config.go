@@ -1,22 +1,12 @@
 package config
 
-type Config struct {
-	Rules map[string]Rule
-}
-
-type Rule struct {
-	Disabled       bool
-	Languages      []string
-	Patterns       []string
-	ParamParenting bool `yaml:"param_parenting"`
-	Metavars       map[string]MetaVar
-}
+import "github.com/bearer/curio/pkg/commands/process/settings"
 
 type CompiledRule struct {
 	RuleName       string
 	Tree           string
 	Params         []Param
-	Metavars       map[string]MetaVar
+	Metavars       map[string]settings.MetaVar
 	ParamParenting bool
 	Languages      []string
 }
@@ -33,10 +23,4 @@ type Param struct {
 
 func (param *Param) BuildFullName() string {
 	return "param_" + param.ParamName
-}
-
-type MetaVar struct {
-	Input  string
-	Output int
-	Regex  string
 }

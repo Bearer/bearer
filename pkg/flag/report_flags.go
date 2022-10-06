@@ -41,7 +41,7 @@ var (
 		ConfigName: "format",
 		Shorthand:  "f",
 		Value:      output.TypeJSONLines,
-		Usage:      "format (table, json, sarif, template, cyclonedx, spdx, spdx-json, github, cosign-vuln)",
+		Usage:      "format (table, json, jsonline)",
 	}
 	// ReportFormatFlag = Flag{
 	// 	Name:       "report",

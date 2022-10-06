@@ -40,7 +40,6 @@ import (
 	"github.com/bearer/curio/pkg/util/memory"
 	"github.com/rs/zerolog/log"
 
-	customconfig "github.com/bearer/curio/pkg/detectors/custom/config"
 	reporttypes "github.com/bearer/curio/pkg/report"
 	reportdetectors "github.com/bearer/curio/pkg/report/detectors"
 )
@@ -57,7 +56,7 @@ type activeDetector struct {
 
 var customDetector = InitializedDetector{reportdetectors.DetectorCustom, custom.New(&nodeid.UUIDGenerator{})}
 
-func SetupCustomDetector(config *customconfig.Config) error {
+func SetupCustomDetector(config *settings.RulesConfig) error {
 	detector := customDetector.Detector.(*custom.Detector)
 	return detector.CompileRules(*config)
 }

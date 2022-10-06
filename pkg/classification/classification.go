@@ -19,5 +19,5 @@ type Config struct {
 
 func NewClassifier(config *Config) *Classifier {
 	// todo: config setup
-	return &Classifier{}
+	return &Classifier{config: *config}
 }

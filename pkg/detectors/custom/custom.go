@@ -7,6 +7,7 @@ import (
 	"sort"
 	"strings"
 
+	processconfig "github.com/bearer/curio/pkg/commands/process/settings"
 	"github.com/bearer/curio/pkg/detectors/custom/config"
 	rubydetector "github.com/bearer/curio/pkg/detectors/ruby/custom_detector"
 	sqldetector "github.com/bearer/curio/pkg/detectors/sql/custom_detector"
@@ -51,7 +52,7 @@ func (detector *Detector) AcceptDir(dir *file.Path) (bool, error) {
 	return true, nil
 }
 
-func (detector *Detector) CompileRules(rulesConfig config.Config) error {
+func (detector *Detector) CompileRules(rulesConfig processconfig.RulesConfig) error {
 	compiledRules := make([]config.CompiledRule, 0)
 
 	for ruleName, rule := range rulesConfig.Rules {

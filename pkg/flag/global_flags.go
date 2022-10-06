@@ -3,7 +3,6 @@ package flag
 import (
 	"time"
 
-	"github.com/bearer/curio/pkg/util/cache"
 	"github.com/spf13/cobra"
 )
 
@@ -40,39 +39,32 @@ var (
 		Usage:      "debug mode",
 		Persistent: true,
 	}
-	InsecureFlag = Flag{
-		Name:       "insecure",
-		ConfigName: "insecure",
-		Value:      false,
-		Usage:      "allow insecure server connections when using TLS",
-		Persistent: true,
-	}
 	TimeoutFlag = Flag{
 		Name:       "timeout",
 		ConfigName: "timeout",
 		Value:      10 * time.Minute,
-		Usage:      "Time allowed to complete scan",
+		Usage:      "time allowed to complete scan",
 		Persistent: true,
 	}
 	TimeoutFileMinimumFlag = Flag{
 		Name:       "timeout-file-min",
 		ConfigName: "timeout-file-min",
 		Value:      5 * time.Second,
-		Usage:      "what is the minimum timeout assigned to scanning file, this config superseeds timeout-second-per-bytes",
+		Usage:      "minimum timeout assigned to scanning file, this config superseeds timeout-second-per-bytes",
 		Persistent: true,
 	}
 	TimeoutFileMaximumFlag = Flag{
 		Name:       "timeout-file-max",
 		ConfigName: "timeout-file-max",
 		Value:      300 * time.Second, // 5 mins
-		Usage:      "what is the maximum timeout assigned to scanning file, this config superseeds timeout-second-per-bytes",
+		Usage:      "maximum timeout assigned to scanning file, this config superseeds timeout-second-per-bytes",
 		Persistent: true,
 	}
 	TimeoutFileSecondPerBytesFlag = Flag{
 		Name:       "timeout-file-second-per-bytes",
 		ConfigName: "timeout-file-second-per-bytes",
 		Value:      10 * 1000, // 10kb/s
-		Usage:      "how many file size bytes produces a second of timeout assigned to scanning file",
+		Usage:      "number of file size bytes producing a second of timeout assigned to scanning a file",
 		Persistent: true,
 	}
 	FileSizeMaximumFlag = Flag{
@@ -86,14 +78,7 @@ var (
 		Name:       "memory-max",
 		ConfigName: "memory-max",
 		Value:      800 * 1000 * 1000, // 800 MB
-		Usage:      "if memory needed to scan a file suprasses this limit, skip the file",
-		Persistent: true,
-	}
-	CacheDirFlag = Flag{
-		Name:       "cache-dir",
-		ConfigName: "cache.dir",
-		Value:      cache.DefaultDir(),
-		Usage:      "cache directory",
+		Usage:      "if memory needed to scan a file surpasses this limit, skip the file",
 		Persistent: true,
 	}
 	GenerateDefaultConfigFlag = Flag{
@@ -118,7 +103,6 @@ type GlobalFlagGroup struct {
 	TimeoutFileSecondPerBytes *Flag
 	FileSizeMaximum           *Flag
 	MemoryMaximum             *Flag
-	CacheDir                  *Flag
 	GenerateDefaultConfig     *Flag
 }
 
@@ -135,7 +119,6 @@ type GlobalOptions struct {
 	TimeoutFileSecondPerBytes int
 	FileSizeMaximum           int
 	MemoryMaximum             int
-	CacheDir                  string
 	GenerateDefaultConfig     bool
 }
 
@@ -145,20 +128,31 @@ func NewGlobalFlagGroup() *GlobalFlagGroup {
 		ShowVersion:               &ShowVersionFlag,
 		Quiet:                     &QuietFlag,
 		Debug:                     &DebugFlag,
-		Insecure:                  &InsecureFlag,
 		Timeout:                   &TimeoutFlag,
 		TimeoutFileMinimum:        &TimeoutFileMinimumFlag,
 		TimeoutFileMaximum:        &TimeoutFileMaximumFlag,
 		TimeoutFileSecondPerBytes: &TimeoutFileSecondPerBytesFlag,
 		FileSizeMaximum:           &FileSizeMaximumFlag,
 		MemoryMaximum:             &MemoryMaximumFlag,
-		CacheDir:                  &CacheDirFlag,
 		GenerateDefaultConfig:     &GenerateDefaultConfigFlag,
 	}
 }
 
 func (f *GlobalFlagGroup) flags() []*Flag {
-	return []*Flag{f.ConfigFile, f.ShowVersion, f.Quiet, f.Debug, f.Insecure, f.TimeoutFileMinimum, f.TimeoutFileMaximum, f.TimeoutFileSecondPerBytes, f.FileSizeMaximum, f.MemoryMaximum, f.CacheDir, f.GenerateDefaultConfig}
+	return []*Flag{
+		f.ConfigFile,
+		f.ShowVersion,
+		f.Quiet,
+		f.Debug,
+		f.Insecure,
+		f.Timeout,
+		f.TimeoutFileMinimum,
+		f.TimeoutFileMaximum,
+		f.TimeoutFileSecondPerBytes,
+		f.FileSizeMaximum,
+		f.MemoryMaximum,
+		f.GenerateDefaultConfig,
+	}
 }
 
 func (f *GlobalFlagGroup) AddFlags(cmd *cobra.Command) {
@@ -189,7 +183,6 @@ func (f *GlobalFlagGroup) ToOptions() GlobalOptions {
 		TimeoutFileSecondPerBytes: getInt(f.TimeoutFileSecondPerBytes),
 		FileSizeMaximum:           getInt(f.FileSizeMaximum),
 		MemoryMaximum:             getInt(f.MemoryMaximum),
-		CacheDir:                  getString(f.CacheDir),
 		GenerateDefaultConfig:     getBool(f.GenerateDefaultConfig),
 	}
 }

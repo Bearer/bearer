@@ -10,7 +10,11 @@ import (
 	"github.com/spf13/viper"
 	"golang.org/x/xerrors"
 
+	"github.com/bearer/curio/pkg/commands/process/balancer"
+	"github.com/bearer/curio/pkg/commands/process/settings"
+	"github.com/bearer/curio/pkg/commands/process/worker/work"
 	"github.com/bearer/curio/pkg/flag"
+	"github.com/bearer/curio/pkg/util/tmpfile"
 
 	"github.com/bearer/curio/pkg/scanner"
 	"github.com/bearer/curio/pkg/types"
@@ -20,12 +24,8 @@ import (
 type TargetKind string
 
 const (
-	TargetContainerImage TargetKind = "image"
-	TargetFilesystem     TargetKind = "fs"
-	TargetRootfs         TargetKind = "rootfs"
-	TargetRepository     TargetKind = "repo"
-	TargetImageArchive   TargetKind = "archive"
-	TargetSBOM           TargetKind = "sbom"
+	TargetFilesystem TargetKind = "fs"
+	TargetRepository TargetKind = "repo"
 )
 
 // InitializeScanner defines the initialize function signature of scanner
@@ -82,11 +82,32 @@ func (r *runner) scanFS(ctx context.Context, opts flag.Options) (types.Report, e
 }
 
 func (r *runner) ScanRepository(ctx context.Context, opts flag.Options) (types.Report, error) {
+
 	return r.scanArtifact(ctx, opts, repositoryStandaloneScanner)
 }
 
 func (r *runner) scanArtifact(ctx context.Context, opts flag.Options, scanner InitializeScanner) (types.Report, error) {
-	return types.Report{}, nil
+	reportpath := tmpfile.Create(os.TempDir(), ".jsonl")
+	balancer := balancer.New(settings.WorkerSettings{})
+	task := balancer.ScheduleTask(work.ProcessRequest{
+		Repository: work.Repository{
+			Dir:               opts.Target,
+			PreviousCommitSHA: "",
+			CommitSHA:         "",
+		},
+		FilePath:             reportpath,
+		CustomDetectorConfig: nil,
+	})
+	result := <-task.Done
+	if result.Error != nil {
+		return types.Report{}, result.Error
+	}
+
+	log.Debug().Msgf("report path is %s", reportpath)
+
+	return types.Report{
+		Path: reportpath,
+	}, nil
 }
 
 func (r *runner) Filter(ctx context.Context, opts flag.Options, report types.Report) (types.Report, error) {
@@ -126,10 +147,6 @@ func Run(ctx context.Context, opts flag.Options, targetKind TargetKind) (err err
 	case TargetFilesystem:
 		if report, err = r.ScanFilesystem(ctx, opts); err != nil {
 			return xerrors.Errorf("filesystem scan error: %w", err)
-		}
-	case TargetRepository:
-		if report, err = r.ScanRepository(ctx, opts); err != nil {
-			return xerrors.Errorf("repository scan error: %w", err)
 		}
 	}
 

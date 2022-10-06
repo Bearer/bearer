@@ -23,7 +23,7 @@ var (
 		Name:       "policy-namespaces",
 		ConfigName: "misconfiguration.namespaces",
 		Value:      []string{},
-		Usage:      "Rego namespaces",
+		Usage:      "rego namespaces",
 	}
 )
 
