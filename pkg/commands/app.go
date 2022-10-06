@@ -15,7 +15,7 @@ import (
 	"golang.org/x/xerrors"
 )
 
-// VersionInfo holds the trivy DB version Info
+// VersionInfo holds the curio version
 type VersionInfo struct {
 	Version string `json:",omitempty"`
 }
