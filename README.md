@@ -1,12 +1,14 @@
 <div align="center">
 
-<a href="https://www.bearer.com" rel="nofollow">
-  <img alt="Bearer logo" data-canonical-src="https://www.bearer.com/assets/bearer-logo.svg" src="https://www.bearer.com/assets/bearer-logo.svg" width="250">
-</a>
+  <a href="https://www.bearer.com" rel="nofollow">
+    <img alt="Bearer logo" data-canonical-src="https://www.bearer.com/assets/bearer-logo.svg" src="https://www.bearer.com/assets/bearer-logo.svg" width="250">
+  </a>
 
-[![GitHub Release][release-img]][release]
-[![Test][test-img]][test]
-[![GitHub All Releases][github-all-releases-img]][release]
+  <hr/>
+  
+  [![GitHub Release][release-img]][release]
+  [![Test][test-img]][test]
+  [![GitHub All Releases][github-all-releases-img]][release]
 </div>
 
 # Curio
