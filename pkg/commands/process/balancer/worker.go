@@ -208,7 +208,7 @@ func (worker *Worker) Start() {
 				break
 			}
 
-			reportGzipWriter.Write(reportBytes)
+			reportGzipWriter.Write(reportBytes) //nolint:all,errcheck
 			f.Close()
 		}
 

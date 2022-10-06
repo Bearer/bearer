@@ -29,12 +29,12 @@ func main() {
 	log.Printf("scan worker listening on port %s", port)
 
 	err := http.ListenAndServe(port, http.HandlerFunc(func(rw http.ResponseWriter, r *http.Request) {
-		defer r.Body.Close()
+		defer r.Body.Close() //golint:all,errcheck
 
 		switch r.URL.Path {
 		case work.RouteStatus:
 			var scanRequest work.ProcessRequest
-			json.NewDecoder(r.Body).Decode(&scanRequest)
+			json.NewDecoder(r.Body).Decode(&scanRequest) //nolint:all,errcheck
 
 			response := &work.ProcessResponse{}
 
@@ -45,12 +45,12 @@ func main() {
 				}
 			}
 
-			json.NewEncoder(rw).Encode(response)
+			json.NewEncoder(rw).Encode(response) //nolint:all,errcheck
 		case work.RouteProcess:
 			runtime.GC()
 
 			var scanRequest work.ProcessRequest
-			json.NewDecoder(r.Body).Decode(&scanRequest)
+			json.NewDecoder(r.Body).Decode(&scanRequest) //nolint:all,errcheck
 
 			blamer := blamer.New(scanRequest.Dir, scanRequest.BlameRevisionsFilePath, scanRequest.PreviousCommitSHA)
 
@@ -62,7 +62,7 @@ func main() {
 
 			response.Error = scanner.Scan(scanRequest.Dir, filesList, blamer, scanRequest.FilePath)
 
-			json.NewEncoder(rw).Encode(response)
+			json.NewEncoder(rw).Encode(response) //nolint:all,errcheck
 		default:
 			rw.WriteHeader(http.StatusNotFound)
 		}
