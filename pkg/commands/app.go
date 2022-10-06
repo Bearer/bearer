@@ -10,6 +10,7 @@ import (
 	"github.com/bearer/curio/pkg/commands/artifact"
 	"github.com/bearer/curio/pkg/flag"
 	"github.com/bearer/curio/pkg/types"
+	"github.com/rs/zerolog/log"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 	"golang.org/x/xerrors"
@@ -53,6 +54,8 @@ func NewApp(version string) *cobra.Command {
 	globalFlags := flag.NewGlobalFlagGroup()
 	rootCmd := NewRootCommand(version, globalFlags)
 	rootCmd.AddCommand(
+		NewServerCommand(),
+		NewScanCommand(globalFlags),
 		NewConfigCommand(globalFlags),
 		NewVersionCommand(globalFlags),
 	)
@@ -75,14 +78,30 @@ func initConfig(configFile string) error {
 	return nil
 }
 
+func NewServerCommand() *cobra.Command {
+	cmd := &cobra.Command{
+		Use:   "processing-worker [flags]",
+		Short: "start scan processing server",
+		Args:  cobra.NoArgs,
+		RunE: func(cmd *cobra.Command, args []string) error {
+			log.Debug().Msgf("started scann processing")
+			return nil
+		},
+		SilenceErrors: true,
+		SilenceUsage:  true,
+	}
+	cmd.SetFlagErrorFunc(flagErrorFunc)
+
+	return cmd
+}
+
 func NewRootCommand(version string, globalFlags *flag.GlobalFlagGroup) *cobra.Command {
 	var versionFormat string
 	cmd := &cobra.Command{
 		Use:   "curio [global flags] command [flags] target",
 		Short: "Unified data security scanner",
 		Long:  "Scanner for Git repositories",
-		Example: `  # Scan a container image
-  # Scan git repository
+		Example: `  # Scan local repository
   $ curio scan <repository>`,
 		CompletionOptions: cobra.CompletionOptions{
 			DisableDefaultCmd: true,
@@ -124,7 +143,7 @@ func NewRootCommand(version string, globalFlags *flag.GlobalFlagGroup) *cobra.Co
 			globalOptions := globalFlags.ToOptions()
 			if globalOptions.ShowVersion {
 				// Customize version output
-				showVersion(globalOptions.CacheDir, versionFormat, version, outputWriter)
+				showVersion(versionFormat, version, outputWriter)
 			} else {
 				return cmd.Help()
 			}
@@ -174,8 +193,8 @@ func NewScanCommand(globalFlags *flag.GlobalFlagGroup) *cobra.Command {
 			}
 			return artifact.Run(cmd.Context(), options, artifact.TargetFilesystem)
 		},
-		SilenceErrors: true,
-		SilenceUsage:  true,
+		SilenceErrors: false,
+		SilenceUsage:  false,
 	}
 
 	cmd.SetFlagErrorFunc(flagErrorFunc)
@@ -283,8 +302,7 @@ func NewVersionCommand(globalFlags *flag.GlobalFlagGroup) *cobra.Command {
 		Short: "Print the version",
 		Args:  cobra.NoArgs,
 		RunE: func(cmd *cobra.Command, args []string) error {
-			options := globalFlags.ToOptions()
-			showVersion(options.CacheDir, versionFormat, cmd.Version, outputWriter)
+			showVersion(versionFormat, cmd.Version, outputWriter)
 
 			return nil
 		},
@@ -299,7 +317,7 @@ func NewVersionCommand(globalFlags *flag.GlobalFlagGroup) *cobra.Command {
 	return cmd
 }
 
-func showVersion(cacheDir, outputFormat, version string, outputWriter io.Writer) {
+func showVersion(outputFormat, version string, outputWriter io.Writer) {
 	switch outputFormat {
 	case "json":
 		b, _ := json.Marshal(VersionInfo{

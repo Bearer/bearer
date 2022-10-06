@@ -9,9 +9,9 @@ import (
 	"github.com/bradleyjkemp/cupaloy"
 	"gopkg.in/yaml.v2"
 
+	"github.com/bearer/curio/pkg/commands/process/settings"
 	"github.com/bearer/curio/pkg/detectors"
 	"github.com/bearer/curio/pkg/detectors/custom"
-	"github.com/bearer/curio/pkg/detectors/custom/config"
 	"github.com/bearer/curio/pkg/parser/nodeid"
 
 	"github.com/bearer/curio/pkg/detectors/internal/testhelper"
@@ -36,7 +36,7 @@ var configSQLCreateTable []byte
 var configSQLCreateTrigger []byte
 
 func TestRubyLoggersJSON(t *testing.T) {
-	var rulesConfig config.Config
+	var rulesConfig settings.RulesConfig
 
 	detector := custom.New(&nodeid.IntGenerator{Counter: 0})
 	err := yaml.Unmarshal(configRubyLoggers, &rulesConfig)
@@ -65,7 +65,7 @@ func TestRubyLoggersJSON(t *testing.T) {
 }
 
 func TestRailsEncryptsJSON(t *testing.T) {
-	var rulesConfig config.Config
+	var rulesConfig settings.RulesConfig
 
 	detector := custom.New(&nodeid.IntGenerator{Counter: 0})
 	err := yaml.Unmarshal(configRailsEncrypts, &rulesConfig)
@@ -94,7 +94,7 @@ func TestRailsEncryptsJSON(t *testing.T) {
 }
 
 func TestSQLCreateFunctionJSON(t *testing.T) {
-	var rulesConfig config.Config
+	var rulesConfig settings.RulesConfig
 
 	detector := custom.New(&nodeid.IntGenerator{Counter: 0})
 	err := yaml.Unmarshal(configSQLCreateFunction, &rulesConfig)
@@ -122,7 +122,7 @@ func TestSQLCreateFunctionJSON(t *testing.T) {
 	cupaloy.SnapshotT(t, string(bytes))
 }
 func TestSQLCreateTableJSON(t *testing.T) {
-	var rulesConfig config.Config
+	var rulesConfig settings.RulesConfig
 
 	detector := custom.New(&nodeid.IntGenerator{Counter: 0})
 	err := yaml.Unmarshal(configSQLCreateTable, &rulesConfig)
@@ -151,7 +151,7 @@ func TestSQLCreateTableJSON(t *testing.T) {
 }
 
 func TestSQLCreateTriggerJSON(t *testing.T) {
-	var rulesConfig config.Config
+	var rulesConfig settings.RulesConfig
 
 	detector := custom.New(&nodeid.IntGenerator{Counter: 0})
 	err := yaml.Unmarshal(configSQLCreateTrigger, &rulesConfig)
