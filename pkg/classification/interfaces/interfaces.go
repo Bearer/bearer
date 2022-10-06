@@ -3,6 +3,7 @@ package interfaces
 import (
 	"github.com/bearer/curio/pkg/classification/db"
 	"github.com/bearer/curio/pkg/report"
+	"github.com/rs/zerolog/log"
 )
 
 type ClassifiedInterface struct {
@@ -28,8 +29,8 @@ func New(config Config) *Classifier {
 
 func (classifier *Classifier) Classify(data report.Detection) (ClassifiedInterface, error) {
 	// todo: implement interface classification (bigbear etc...)
-	for _, recipe := range classifier.config.recipes { //nolint:all,unused
-
+	for _, recipe := range classifier.config.recipes {
+		log.Debug().Msgf("%#v", recipe)
 	}
 
 	return ClassifiedInterface{
