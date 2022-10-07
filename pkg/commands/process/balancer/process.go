@@ -33,7 +33,7 @@ type Process struct {
 	task   *Task
 	client *http.Client
 
-	config config.WorkerSettings
+	config config.Config
 }
 
 func (process *Process) StartProcess(task *workertype.ProcessRequest) error {
@@ -45,7 +45,6 @@ func (process *Process) StartProcess(task *workertype.ProcessRequest) error {
 	}
 
 	log.Debug().Msgf("spawning on port %s", port)
-	log.Debug().Msgf("this is current path %s", currentCommand)
 	cmd := exec.Command(currentCommand, "processing-worker", "--port", port)
 	cmd.Dir, err = os.Getwd()
 	if err != nil {
@@ -87,7 +86,7 @@ func (process *Process) StartProcess(task *workertype.ProcessRequest) error {
 
 func (process *Process) WaitForOnline(task *workertype.ProcessRequest) error {
 	start := time.Now()
-	killTime := time.Now().Add(process.config.ProcessOnlineTimeout)
+	killTime := time.Now().Add(process.config.Worker.Timeout)
 
 	closeCalled := false
 
@@ -218,7 +217,7 @@ func (process *Process) monitorMemory(pid int) {
 				continue
 			}
 
-			if stats.Memory > process.config.Memory {
+			if stats.Memory > float64(process.config.Worker.MemoryMaximum) {
 				log.Debug().Msgf("%s %s memory reporting error", process.workeruuid, process.uuid)
 				process.processErrored <- &workertype.ProcessResponse{Error: ErrorOutOfMemory}
 				return
