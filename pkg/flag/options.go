@@ -46,6 +46,7 @@ type Flags struct {
 	// ReportFlagGroup *ReportFlagGroup
 	ProcessFlagGroup *ProcessFlagGroup
 	ScanFlagGroup    *ScanFlagGroup
+	WorkerFlagGroup  *WorkerFlagGroup
 }
 
 // Options holds all the runtime configuration
@@ -53,6 +54,7 @@ type Options struct {
 	GlobalOptions
 	RepoOptions
 	ReportOptions
+	WorkerOptions
 	ScanOptions
 
 	// Curio's version, not populated via CLI flags
@@ -167,6 +169,9 @@ func (f *Flags) groups() []FlagGroup {
 	if f.RepoFlagGroup != nil {
 		groups = append(groups, f.RepoFlagGroup)
 	}
+	if f.WorkerFlagGroup != nil {
+		groups = append(groups, f.WorkerFlagGroup)
+	}
 	return groups
 }
 
@@ -234,6 +239,10 @@ func (f *Flags) ToOptions(appVersion string, args []string, globalFlags *GlobalF
 	// 		return Options{}, xerrors.Errorf("report flag error: %w", err)
 	// 	}
 	// }
+
+	if f.WorkerFlagGroup != nil {
+		opts.WorkerOptions = f.WorkerFlagGroup.ToOptions()
+	}
 
 	if f.ScanFlagGroup != nil {
 		opts.ScanOptions, err = f.ScanFlagGroup.ToOptions(args)

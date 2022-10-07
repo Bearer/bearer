@@ -182,10 +182,11 @@ func NewScanCommand(globalFlags *flag.GlobalFlagGroup) *cobra.Command {
 	// reportFlagGroup := flag.NewReportFlagGroup()
 	// reportFlagGroup.ReportFormat = nil // TODO: support --report summary
 
-	fsFlags := &flag.Flags{
+	flags := &flag.Flags{
 		// CacheFlagGroup:  flag.NewCacheFlagGroup(),
 		// ReportFlagGroup: reportFlagGroup,
-		ScanFlagGroup: flag.NewScanFlagGroup(),
+		ScanFlagGroup:   flag.NewScanFlagGroup(),
+		WorkerFlagGroup: flag.NewWorkerFlagGroup(),
 	}
 
 	cmd := &cobra.Command{
@@ -197,19 +198,22 @@ func NewScanCommand(globalFlags *flag.GlobalFlagGroup) *cobra.Command {
   # Scan a single file
   $ curio s ./curio-ci-test/Pipfile.lock`,
 		PreRunE: func(cmd *cobra.Command, args []string) error {
-			if err := fsFlags.Bind(cmd); err != nil {
+			if err := flags.Bind(cmd); err != nil {
 				return xerrors.Errorf("flag bind error: %w", err)
 			}
 			return nil
 		},
 		RunE: func(cmd *cobra.Command, args []string) error {
-			if err := fsFlags.Bind(cmd); err != nil {
+			if err := flags.Bind(cmd); err != nil {
 				return xerrors.Errorf("flag bind error: %w", err)
 			}
-			options, err := fsFlags.ToOptions(cmd.Version, args, globalFlags, outputWriter)
+			options, err := flags.ToOptions(cmd.Version, args, globalFlags, outputWriter)
 			if err != nil {
 				return xerrors.Errorf("flag error: %w", err)
 			}
+
+			log.Debug().Msgf("process online timeout is  %d", options.TimeoutWorkerOnline)
+
 			return artifact.Run(cmd.Context(), options, artifact.TargetFilesystem)
 		},
 		SilenceErrors: false,
@@ -217,8 +221,8 @@ func NewScanCommand(globalFlags *flag.GlobalFlagGroup) *cobra.Command {
 	}
 
 	cmd.SetFlagErrorFunc(flagErrorFunc)
-	fsFlags.AddFlags(cmd)
-	cmd.SetUsageTemplate(fmt.Sprintf(usageTemplate, fsFlags.Usages(cmd)))
+	flags.AddFlags(cmd)
+	cmd.SetUsageTemplate(fmt.Sprintf(usageTemplate, flags.Usages(cmd)))
 
 	return cmd
 }

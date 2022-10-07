@@ -41,7 +41,7 @@ type Worker struct {
 
 	uuid string
 
-	config config.WorkerSettings
+	config config.Config
 }
 
 func (worker *Worker) HasNext() bool {
@@ -49,7 +49,7 @@ func (worker *Worker) HasNext() bool {
 }
 
 func (worker *Worker) NextChunk() []workertype.File {
-	end := worker.config.FilesToBatch
+	end := worker.config.Worker.FilesToBatch
 	if end > len(worker.FileList) {
 		end = len(worker.FileList)
 	}
@@ -86,15 +86,16 @@ func (worker *Worker) Start() {
 		}
 		filesize := fileinfo.Size()
 
-		if filesize > worker.config.MaximumFileSize {
+		if filesize > int64(worker.config.Worker.FileSizeMaximum) {
+			log.Debug().Msgf("skipping file : %s", path)
 			return nil
 		}
 
-		file.Timeout = worker.config.TimeoutMinimum
-		timeoutFileSize := time.Duration(filesize / int64(worker.config.TimeoutSecondPerBytes) * int64(time.Second))
+		file.Timeout = worker.config.Worker.TimeoutFileMinimum
+		timeoutFileSize := time.Duration(filesize / int64(worker.config.Worker.TimeoutFileSecondPerBytes) * int64(time.Second))
 		if timeoutFileSize > file.Timeout {
-			if timeoutFileSize > worker.config.TimeoutMaximum {
-				file.Timeout = worker.config.TimeoutMaximum
+			if timeoutFileSize > worker.config.Worker.TimeoutFileMaximum {
+				file.Timeout = worker.config.Worker.TimeoutFileMaximum
 			} else {
 				file.Timeout = timeoutFileSize
 			}

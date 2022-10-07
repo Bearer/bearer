@@ -29,7 +29,7 @@ type Monitor struct {
 	context       context.Context
 	contextCancel context.CancelFunc
 
-	config config.WorkerSettings
+	config config.Config
 }
 
 type Task struct {
@@ -38,14 +38,14 @@ type Task struct {
 	worker     *Worker
 }
 
-func New(settings config.WorkerSettings) *Monitor {
+func New(settings config.Config) *Monitor {
 	monitorCtx, monitorCancel := context.WithCancel(context.Background())
 	monitor := &Monitor{
 		context:       monitorCtx,
 		contextCancel: monitorCancel,
 
 		taskRequest:  make(chan *Task),
-		taskComplete: make(chan *Worker, settings.Count),
+		taskComplete: make(chan *Worker, settings.Worker.Workers),
 
 		config: settings,
 	}
@@ -85,7 +85,7 @@ func (monitor *Monitor) monitor() {
 			return
 		case task := <-monitor.taskRequest:
 			log.Debug().Msgf("balancer got task request")
-			if len(monitor.workers) > monitor.config.Count {
+			if len(monitor.workers) > monitor.config.Worker.Workers {
 				log.Debug().Msgf("balancer adding work to stack")
 
 				monitor.workStack = append(monitor.workStack, task)
