@@ -101,10 +101,11 @@ func NewProcessingServerCommand() *cobra.Command {
 				return fmt.Errorf("options binding error: %w", err)
 			}
 
-			log.Debug().Msgf("got port `%s`", options.Port)
+			log.Debug().Msgf("running scan worker on port `%s`", options.Port)
 
 			return worker.Start(options.Port)
 		},
+		Hidden:        true,
 		SilenceErrors: true,
 		SilenceUsage:  true,
 	}
@@ -187,6 +188,7 @@ func NewScanCommand(globalFlags *flag.GlobalFlagGroup) *cobra.Command {
 		// ReportFlagGroup: reportFlagGroup,
 		ScanFlagGroup:   flag.NewScanFlagGroup(),
 		WorkerFlagGroup: flag.NewWorkerFlagGroup(),
+		ReportFlagGroup: flag.NewReportFlagGroup(),
 	}
 
 	cmd := &cobra.Command{
@@ -212,7 +214,9 @@ func NewScanCommand(globalFlags *flag.GlobalFlagGroup) *cobra.Command {
 				return xerrors.Errorf("flag error: %w", err)
 			}
 
-			log.Debug().Msgf("process online timeout is  %d", options.TimeoutWorkerOnline)
+			if options.Target == "" {
+				return fmt.Errorf("path is required")
+			}
 
 			return artifact.Run(cmd.Context(), options, artifact.TargetFilesystem)
 		},

@@ -14,6 +14,7 @@ import (
 	"github.com/bearer/curio/pkg/commands/process/settings"
 	"github.com/bearer/curio/pkg/commands/process/worker/work"
 	"github.com/bearer/curio/pkg/flag"
+	"github.com/bearer/curio/pkg/report/output"
 	"github.com/bearer/curio/pkg/util/tmpfile"
 
 	"github.com/bearer/curio/pkg/scanner"
@@ -154,6 +155,13 @@ func Run(ctx context.Context, opts flag.Options, targetKind TargetKind) (err err
 		}
 	}
 
+	if opts.Format == flag.FormatJSON {
+		err := output.ReportJSON(report)
+		if err != nil {
+			log.Error().Msgf("error generating report %e", err)
+		}
+	}
+
 	report, err = r.Filter(ctx, opts, report)
 	if err != nil {
 		return xerrors.Errorf("filter error: %w", err)
@@ -162,8 +170,6 @@ func Run(ctx context.Context, opts flag.Options, targetKind TargetKind) (err err
 	if err = r.Report(opts, report); err != nil {
 		return xerrors.Errorf("report error: %w", err)
 	}
-
-	Exit(opts, report.Failed())
 
 	return nil
 }
