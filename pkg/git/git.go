@@ -77,7 +77,7 @@ var regexpPID = regexp.MustCompile("[0-9]+ ")
 
 func killProcess(cmd *exec.Cmd) {
 	if cmd != nil && cmd.Process != nil {
-		cmd.Process.Kill()
+		cmd.Process.Kill() //nolint:all,errcheck
 	}
 }
 

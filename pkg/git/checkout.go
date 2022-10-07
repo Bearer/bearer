@@ -28,8 +28,17 @@ func checkout(rootDir, ref string, filenames []string) error {
 	}
 
 	for _, filename := range filenames {
-		stdin.Write([]byte(filename))
-		stdin.Write([]byte{0})
+		_, err := stdin.Write([]byte(filename))
+		if err != nil {
+			killProcess(cmd)
+			return err
+		}
+
+		_, err = stdin.Write([]byte{0})
+		if err != nil {
+			killProcess(cmd)
+			return err
+		}
 	}
 
 	if err := stdin.Close(); err != nil {
