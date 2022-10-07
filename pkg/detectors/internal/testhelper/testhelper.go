@@ -6,7 +6,6 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/bearer/curio/pkg/commands/process/settings"
 	"github.com/bearer/curio/pkg/detectors"
 	"github.com/bearer/curio/pkg/report"
 
@@ -52,7 +51,7 @@ func Extract(
 		t.Errorf("report has errored %e", err)
 	}
 
-	err = detectors.ExtractWithDetectors(path, files, &report, registrations, settings.Default())
+	err = detectors.ExtractWithDetectors(path, files, &report, registrations)
 	if len(report.Errors) > 0 {
 		t.Errorf("report has some errors %#v", report.Errors)
 	}

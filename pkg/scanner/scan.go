@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/bearer/curio/pkg/commands/process/settings"
 	"github.com/bearer/curio/pkg/detectors"
 	"github.com/bearer/curio/pkg/report"
 	"github.com/bearer/curio/pkg/types"
@@ -42,10 +41,7 @@ func Scan(rootDir string, FilesToScan []string, blamer blamer.Blamer, outputPath
 		File:   file,
 	}
 
-	if err := detectors.Extract(rootDir, FilesToScan, &rep, settings.TypeSettings{
-		MaximumMemoryMb:      uint64(2046),
-		MemoryCheckEachFiles: 100,
-	}); err != nil {
+	if err := detectors.Extract(rootDir, FilesToScan, &rep); err != nil {
 		return err
 	}
 
