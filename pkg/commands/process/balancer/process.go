@@ -130,10 +130,7 @@ func (process *Process) WaitForOnline(task *workertype.ProcessRequest) error {
 			defer resp.Body.Close()
 
 			var result workertype.ProcessResponse
-			err := json.NewDecoder(resp.Body).Decode(&result)
-			if err != nil {
-				return err
-			}
+			json.NewDecoder(resp.Body).Decode(&result)
 
 			if result.Error != nil {
 				return fmt.Errorf("custom config invalid : %w", result.Error)
@@ -171,7 +168,7 @@ func (process *Process) doTask(task *Task) {
 		defer resp.Body.Close()
 
 		var result workertype.ProcessResponse
-		json.NewDecoder(resp.Body).Decode(&result) //nolint:all,errcheck
+		json.NewDecoder(resp.Body).Decode(&result)
 
 		resultChan <- &result
 	}()
@@ -239,6 +236,6 @@ func (process *Process) monitorRunning(cmd *exec.Cmd) {
 		}
 	}()
 
-	cmd.Wait() //nolint:all,errcheck
+	cmd.Wait()
 	ended <- true
 }
