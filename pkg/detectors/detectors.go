@@ -37,7 +37,6 @@ import (
 	"github.com/bearer/curio/pkg/detectors/types"
 	"github.com/bearer/curio/pkg/detectors/yamlconfig"
 	"github.com/bearer/curio/pkg/parser/nodeid"
-	"github.com/bearer/curio/pkg/util/memory"
 	"github.com/rs/zerolog/log"
 
 	reporttypes "github.com/bearer/curio/pkg/report"
@@ -117,9 +116,8 @@ func Extract(
 	path string,
 	files []string,
 	report reporttypes.Report,
-	settings settings.TypeSettings,
 ) error {
-	return ExtractWithDetectors(path, files, report, Registrations(), settings)
+	return ExtractWithDetectors(path, files, report, Registrations())
 }
 
 func ExtractWithDetectors(
@@ -127,9 +125,7 @@ func ExtractWithDetectors(
 	files []string,
 	report reporttypes.Report,
 	allDetectors []InitializedDetector,
-	settings settings.TypeSettings,
 ) error {
-	memConstrain := memory.NewConstraint(settings)
 
 	activeDetectors := make(map[InitializedDetector]activeDetector)
 
@@ -188,13 +184,6 @@ func ExtractWithDetectors(
 				}
 
 				if wasConsumed {
-					memConstrain.FileProcessed()
-
-					if overflowError := memConstrain.CheckOverflow(); overflowError != nil {
-						report.AddError(overflowError)
-						return overflowError
-					}
-
 					break
 				}
 			}
@@ -202,10 +191,7 @@ func ExtractWithDetectors(
 			return nil
 		},
 	); err != nil {
-		err, ok := err.(*memory.OutOfMemoryError)
-		if !ok {
-			return err
-		}
+		return err
 	}
 
 	return nil
