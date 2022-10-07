@@ -1,14 +1,10 @@
-package main
+package worker
 
 import (
 	"encoding/json"
-	"fmt"
 
 	"net/http"
-	"os"
 	"runtime"
-
-	"github.com/rs/zerolog/log"
 
 	"github.com/bearer/curio/pkg/commands/process/worker/blamer"
 	"github.com/bearer/curio/pkg/commands/process/worker/work"
@@ -16,17 +12,7 @@ import (
 	"github.com/bearer/curio/pkg/scanner"
 )
 
-func main() {
-	if len(os.Args) != 2 {
-		log.Err(fmt.Errorf("not enough arguments, usage: ./worker :1234, program <port> ")).Send()
-	}
-
-	port := os.Args[1] // :1234
-
-	// sets up logging level based on env variables
-	// config.Load()
-
-	log.Printf("scan worker listening on port %s", port)
+func Start(port string) error {
 
 	err := http.ListenAndServe(port, http.HandlerFunc(func(rw http.ResponseWriter, r *http.Request) {
 		defer r.Body.Close() //golint:all,errcheck
@@ -68,7 +54,5 @@ func main() {
 		}
 	}))
 
-	if err != nil {
-		log.Printf("error serving %e", err)
-	}
+	return err
 }
