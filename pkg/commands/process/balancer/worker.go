@@ -1,7 +1,6 @@
 package balancer
 
 import (
-	"compress/gzip"
 	"context"
 	"errors"
 	"io/fs"
@@ -127,10 +126,8 @@ func (worker *Worker) Start() {
 	}
 	defer os.Remove(blameRevisionsFilePath)
 
-	reportGzipWriter := gzip.NewWriter(reportFile)
-
 	if err := repo_info.ReportRepositoryInfo(
-		reportGzipWriter,
+		reportFile,
 		worker.task.Definition.Repository,
 		commitList,
 	); err != nil {
@@ -177,7 +174,7 @@ func (worker *Worker) Start() {
 				worker.process = nil
 			}
 
-			worker.logError(reportGzipWriter, work, response)
+			worker.logError(reportFile, work, response)
 
 			err := worker.SpawnProcess(&worker.task.Definition)
 			if err != nil {
@@ -188,7 +185,7 @@ func (worker *Worker) Start() {
 			}
 		case response := <-worker.chunkDone:
 			if response.Error != nil {
-				worker.logError(reportGzipWriter, work, response)
+				worker.logError(reportFile, work, response)
 			}
 
 			// ungzip report and add it to master file
@@ -208,14 +205,14 @@ func (worker *Worker) Start() {
 				break
 			}
 
-			reportGzipWriter.Write(reportBytes) //nolint:all,errcheck
+			reportFile.Write(reportBytes) //nolint:all,errcheck
 			f.Close()
 		}
 
 		os.RemoveAll(tmpReportFile)
 
 		if shouldBreak {
-			err := reportGzipWriter.Close()
+			err := reportFile.Close()
 			if err != nil {
 				log.Debug().Msgf("worker %s failed to close gzipwriter", worker.uuid)
 			}
@@ -237,7 +234,7 @@ func (worker *Worker) Start() {
 			}
 
 			log.Printf("worker %s closing due to work done", worker.uuid)
-			err := reportGzipWriter.Close()
+			err := reportFile.Close()
 			if err != nil {
 				log.Debug().Msgf("worker %s failed to close gzipwriter", worker.uuid)
 			}
@@ -309,7 +306,7 @@ func (worker *Worker) getCommitListAndWriteForBlame() (commitList []git.CommitIn
 	return
 }
 
-func (worker *Worker) logError(reportGzipWriter *gzip.Writer, work []workertype.File, response *workertype.ProcessResponse) {
+func (worker *Worker) logError(reportFile *os.File, work []workertype.File, response *workertype.ProcessResponse) {
 	var errorsToAdd []report.FileFailedDetection
 	for _, file := range work {
 		fileInfo, err := os.Stat(worker.task.Definition.Dir + "/" + file.FilePath)
@@ -327,7 +324,7 @@ func (worker *Worker) logError(reportGzipWriter *gzip.Writer, work []workertype.
 		})
 	}
 
-	err := jsonlines.Encode(reportGzipWriter, &errorsToAdd)
+	err := jsonlines.Encode(reportFile, &errorsToAdd)
 	if err != nil {
 		log.Error().Msgf("worker %s failed to encode data line %e", worker.uuid, err)
 	}
