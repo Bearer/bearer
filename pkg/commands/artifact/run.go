@@ -4,6 +4,7 @@ import (
 	"context"
 	"errors"
 	"os"
+	"time"
 
 	"github.com/rs/zerolog/log"
 
@@ -88,7 +89,16 @@ func (r *runner) ScanRepository(ctx context.Context, opts flag.Options) (types.R
 
 func (r *runner) scanArtifact(ctx context.Context, opts flag.Options, scanner InitializeScanner) (types.Report, error) {
 	reportpath := tmpfile.Create(os.TempDir(), ".jsonl")
-	balancer := balancer.New(settings.WorkerSettings{})
+	balancer := balancer.New(settings.WorkerSettings{
+		FilesToBatch:          1,
+		Count:                 1,
+		Memory:                800 * 1024 * 1024,
+		ProcessOnlineTimeout:  60 * time.Second,
+		TimeoutSecondPerBytes: 10 * 1000,
+		TimeoutMinimum:        5 * time.Second,
+		TimeoutMaximum:        300 * time.Second,
+		MaximumFileSize:       25 * 1000 * 1000,
+	})
 	task := balancer.ScheduleTask(work.ProcessRequest{
 		Repository: work.Repository{
 			Dir:               opts.Target,
@@ -99,11 +109,12 @@ func (r *runner) scanArtifact(ctx context.Context, opts flag.Options, scanner In
 		CustomDetectorConfig: nil,
 	})
 	result := <-task.Done
+
 	if result.Error != nil {
 		return types.Report{}, result.Error
 	}
 
-	log.Debug().Msgf("report path is %s", reportpath)
+	log.Debug().Msgf("report is %s", reportpath)
 
 	return types.Report{
 		Path: reportpath,

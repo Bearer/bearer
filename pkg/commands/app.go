@@ -8,6 +8,7 @@ import (
 	"os"
 
 	"github.com/bearer/curio/pkg/commands/artifact"
+	"github.com/bearer/curio/pkg/commands/process/worker"
 	"github.com/bearer/curio/pkg/flag"
 	"github.com/bearer/curio/pkg/types"
 	"github.com/rs/zerolog/log"
@@ -54,7 +55,7 @@ func NewApp(version string) *cobra.Command {
 	globalFlags := flag.NewGlobalFlagGroup()
 	rootCmd := NewRootCommand(version, globalFlags)
 	rootCmd.AddCommand(
-		NewServerCommand(),
+		NewProcessingServerCommand(),
 		NewScanCommand(globalFlags),
 		NewConfigCommand(globalFlags),
 		NewVersionCommand(globalFlags),
@@ -78,19 +79,37 @@ func initConfig(configFile string) error {
 	return nil
 }
 
-func NewServerCommand() *cobra.Command {
+func NewProcessingServerCommand() *cobra.Command {
+	flags := &flag.Flags{
+		ProcessFlagGroup: flag.NewProcessGroup(),
+	}
+
+	log.Debug().Msgf("args are %#v", os.Args)
+
 	cmd := &cobra.Command{
-		Use:   "processing-worker [flags]",
+		Use:   "processing-worker",
 		Short: "start scan processing server",
 		Args:  cobra.NoArgs,
 		RunE: func(cmd *cobra.Command, args []string) error {
 			log.Debug().Msgf("started scann processing")
-			return nil
+			if err := flags.Bind(cmd); err != nil {
+				return fmt.Errorf("flag bind error: %w", err)
+			}
+
+			options, err := flags.ProcessFlagGroup.ToOptions()
+			if err != nil {
+				return fmt.Errorf("options binding error: %w", err)
+			}
+
+			log.Debug().Msgf("got port `%s`", options.Port)
+
+			return worker.Start(options.Port)
 		},
 		SilenceErrors: true,
 		SilenceUsage:  true,
 	}
 	cmd.SetFlagErrorFunc(flagErrorFunc)
+	flags.AddFlags(cmd)
 
 	return cmd
 }

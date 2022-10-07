@@ -44,7 +44,8 @@ type FlagGroup interface {
 type Flags struct {
 	RepoFlagGroup *RepoFlagGroup
 	// ReportFlagGroup *ReportFlagGroup
-	ScanFlagGroup *ScanFlagGroup
+	ProcessFlagGroup *ProcessFlagGroup
+	ScanFlagGroup    *ScanFlagGroup
 }
 
 // Options holds all the runtime configuration
@@ -160,9 +161,9 @@ func (f *Flags) groups() []FlagGroup {
 	if f.ScanFlagGroup != nil {
 		groups = append(groups, f.ScanFlagGroup)
 	}
-	// if f.ReportFlagGroup != nil {
-	// 	groups = append(groups, f.ReportFlagGroup)
-	// }
+	if f.ProcessFlagGroup != nil {
+		groups = append(groups, f.ProcessFlagGroup)
+	}
 	if f.RepoFlagGroup != nil {
 		groups = append(groups, f.RepoFlagGroup)
 	}
