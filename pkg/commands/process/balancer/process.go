@@ -44,9 +44,6 @@ func (process *Process) StartProcess(task *workertype.ProcessRequest) error {
 		log.Fatal().Msgf("failed to get current command executable %e", err)
 	}
 
-	// fullCommand := currentCommand + " processing-worker -p " + port
-
-	// log.Printf("%s")
 	log.Debug().Msgf("spawning on port %s", port)
 	log.Debug().Msgf("this is current path %s", currentCommand)
 	cmd := exec.Command(currentCommand, "processing-worker", "--port", port)
