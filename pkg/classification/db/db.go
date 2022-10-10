@@ -19,6 +19,7 @@ type Recipe struct {
 type Package struct {
 	Name           string `json:"name"`
 	PackageManager string `json:"package_manager"`
+	Group          string `json:"group"`
 }
 
 type RecipeType string

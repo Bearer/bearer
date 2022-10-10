@@ -35,6 +35,22 @@ func TestDependencies(t *testing.T) {
 			},
 		},
 		{
+			Name: "Dependency match with group (Java case)",
+			Input: report.Detection{
+				Value: reportdependencies.Dependency{
+					Group:          "org.postgresql",
+					Name:           "postgresql",
+					Version:        "v2.1.1",
+					PackageManager: "maven",
+				},
+				Type: report.TypeDependency,
+			},
+			Want: &dependencies.Classification{
+				RecipeMatch: true,
+				RecipeName:  "postgres",
+			},
+		},
+		{
 			Name: "No dependency match",
 			Input: report.Detection{
 				Value: reportdependencies.Dependency{

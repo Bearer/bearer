@@ -25,6 +25,11 @@
             {
                 "name": "pg",
                 "package_manager": "rubygems"
+            },
+            {
+                "name": "postgresql",
+                "group": "org.postgresql",
+                "package_manager": "maven"
             }
         ]
     }

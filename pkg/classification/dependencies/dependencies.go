@@ -65,6 +65,16 @@ func (classifier *Classifier) Classify(data report.Detection) (ClassifiedDepende
 func isRecipeMatch(recipePackage db.Package, data report.Detection) bool {
 	value := data.Value.(dependencies.Dependency)
 
-	return recipePackage.PackageManager == value.PackageManager &&
-		recipePackage.Name == value.Name
+	if isJavaPackage(recipePackage.PackageManager) {
+		return recipePackage.PackageManager == value.PackageManager &&
+			recipePackage.Name == value.Name &&
+			recipePackage.Group == value.Group
+	} else {
+		return recipePackage.PackageManager == value.PackageManager &&
+			recipePackage.Name == value.Name
+	}
+}
+
+func isJavaPackage(packageManager string) bool {
+	return packageManager == "maven"
 }
