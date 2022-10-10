@@ -13,6 +13,6 @@ type Dependency struct {
 type DiscoveredDependency struct {
 	Provider       string       `json:"provider"`
 	Language       string       `json:"language"`
-	PackageManager string       `json:"package_manager`
+	PackageManager string       `json:"package_manager"`
 	Dependencies   []Dependency `json:"dependencies"`
 }
