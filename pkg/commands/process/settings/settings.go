@@ -37,12 +37,12 @@ type MetaVar struct {
 }
 
 //go:embed custom_detector.yml
-var customDetectorConfig []byte
+var customDetector []byte
 
 func DefaultCustomDetector() CustomDetector {
 	var rules RulesConfig
 
-	err := yaml.Unmarshal(customDetectorConfig, &rules)
+	err := yaml.Unmarshal(customDetector, &rules)
 	if err != nil {
 		log.Fatal().Msgf("failed to unmarshal database file %e", err)
 	}
