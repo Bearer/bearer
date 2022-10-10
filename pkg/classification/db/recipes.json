@@ -9,11 +9,11 @@
         "packages": [
             {
                 "name": "github.com/stripe/stripe-go",
-                "manager": "go"
+                "package_manager": "go"
             },
             {
                 "name": "stripe",
-                "manager": "rubygems"
+                "package_manager": "rubygems"
             }
         ]
     },
@@ -24,7 +24,7 @@
         "packages": [
             {
                 "name": "pg",
-                "manager": "rubygems"
+                "package_manager": "rubygems"
             }
         ]
     }

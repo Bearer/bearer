@@ -17,14 +17,18 @@ type Recipe struct {
 }
 
 type Package struct {
-	Name    string `json:"name"`
-	Manager string `json:"manager"`
+	Name           string `json:"name"`
+	PackageManager string `json:"package_manager"`
 }
 
 type RecipeType string
 
 var RecipeTypeDataStore = RecipeType("data_store")
 var RecipeTypeService = RecipeType("service")
+
+func Default() []Recipe {
+	return Unmarshal(Raw)
+}
 
 func Unmarshal(rawBytes []byte) []Recipe {
 	var db []Recipe
