@@ -12,6 +12,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=4) "pypi",
       Group: (string) "",
       Name: (string) (len=12) "atomicwrites",
       Version: (string) (len=5) "1.3.0"
@@ -30,6 +31,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=4) "pypi",
       Group: (string) "",
       Name: (string) (len=5) "attrs",
       Version: (string) (len=6) "19.1.0"
@@ -48,6 +50,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=4) "pypi",
       Group: (string) "",
       Name: (string) (len=8) "colorama",
       Version: (string) (len=5) "0.4.1"
@@ -66,6 +69,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=4) "pypi",
       Group: (string) "",
       Name: (string) (len=6) "django",
       Version: (string) (len=5) "2.2.1"
@@ -84,6 +88,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=4) "pypi",
       Group: (string) "",
       Name: (string) (len=19) "djangorestframework",
       Version: (string) (len=5) "3.8.2"
@@ -102,6 +107,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=4) "pypi",
       Group: (string) "",
       Name: (string) (len=18) "importlib-metadata",
       Version: (string) (len=4) "0.23"
@@ -120,6 +126,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=4) "pypi",
       Group: (string) "",
       Name: (string) (len=14) "more-itertools",
       Version: (string) (len=5) "7.2.0"
@@ -138,6 +145,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=4) "pypi",
       Group: (string) "",
       Name: (string) (len=9) "packaging",
       Version: (string) (len=4) "19.2"
@@ -156,6 +164,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=4) "pypi",
       Group: (string) "",
       Name: (string) (len=6) "pluggy",
       Version: (string) (len=6) "0.13.0"
@@ -174,6 +183,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=4) "pypi",
       Group: (string) "",
       Name: (string) (len=2) "py",
       Version: (string) (len=5) "1.8.0"
@@ -192,6 +202,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=4) "pypi",
       Group: (string) "",
       Name: (string) (len=9) "pyparsing",
       Version: (string) (len=5) "2.4.2"
@@ -210,6 +221,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=4) "pypi",
       Group: (string) "",
       Name: (string) (len=6) "pytest",
       Version: (string) (len=5) "4.6.5"
@@ -228,6 +240,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=4) "pypi",
       Group: (string) "",
       Name: (string) (len=4) "pytz",
       Version: (string) (len=6) "2019.2"
@@ -246,6 +259,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=4) "pypi",
       Group: (string) "",
       Name: (string) (len=8) "requests",
       Version: (string) (len=5) "2.5.2"
@@ -264,6 +278,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=4) "pypi",
       Group: (string) "",
       Name: (string) (len=3) "six",
       Version: (string) (len=6) "1.12.0"
@@ -282,6 +297,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=4) "pypi",
       Group: (string) "",
       Name: (string) (len=8) "sqlparse",
       Version: (string) (len=5) "0.3.0"
@@ -300,6 +316,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=4) "pypi",
       Group: (string) "",
       Name: (string) (len=7) "wcwidth",
       Version: (string) (len=5) "0.1.7"
@@ -318,6 +335,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=4) "pypi",
       Group: (string) "",
       Name: (string) (len=8) "werkzeug",
       Version: (string) (len=6) "0.15.2"
@@ -336,6 +354,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=4) "pypi",
       Group: (string) "",
       Name: (string) (len=4) "zipp",
       Version: (string) (len=5) "0.6.0"

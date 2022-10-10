@@ -12,6 +12,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=9) "packagist",
       Group: (string) "",
       Name: (string) (len=14) "league/climate",
       Version: (string) (len=5) "2.4.0"
@@ -30,6 +31,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=9) "packagist",
       Group: (string) "",
       Name: (string) (len=20) "t4web/authentication",
       Version: (string) (len=10) "dev-master"
@@ -48,6 +50,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=9) "packagist",
       Group: (string) "",
       Name: (string) (len=26) "t4web/composer-lock-parser",
       Version: (string) (len=5) "0.1.0"
@@ -66,6 +69,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=9) "packagist",
       Group: (string) "",
       Name: (string) (len=13) "t4web/modules",
       Version: (string) (len=10) "dev-master"
@@ -84,6 +88,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=9) "packagist",
       Group: (string) "",
       Name: (string) (len=27) "zendframework/zendframework",
       Version: (string) (len=5) "2.3.3"
@@ -102,6 +107,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=9) "packagist",
       Group: (string) "",
       Name: (string) (len=21) "zendframework/zendxml",
       Version: (string) (len=5) "1.0.0"
@@ -120,6 +126,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=9) "packagist",
       Group: (string) "",
       Name: (string) (len=19) "zf-commons/zfc-base",
       Version: (string) (len=10) "dev-master"

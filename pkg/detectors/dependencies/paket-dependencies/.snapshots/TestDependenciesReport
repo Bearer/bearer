@@ -12,6 +12,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "nuget",
       Group: (string) "",
       Name: (string) (len=5) "NUnit",
       Version: (string) (len=5) "2.6.3"
@@ -30,6 +31,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "nuget",
       Group: (string) "",
       Name: (string) (len=4) "FAKE",
       Version: (string) (len=3) "3.4"
@@ -48,6 +50,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "nuget",
       Group: (string) "",
       Name: (string) (len=9) "DotNetZip",
       Version: (string) (len=3) "N/A"
@@ -66,6 +69,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "nuget",
       Group: (string) "",
       Name: (string) (len=9) "some/repo",
       Version: (string) (len=3) "N/A"
@@ -84,6 +88,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "nuget",
       Group: (string) "",
       Name: (string) (len=12) "forki/FsUnit",
       Version: (string) (len=3) "N/A"
@@ -102,6 +107,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "nuget",
       Group: (string) "",
       Name: (string) (len=39) "https://github.com/fsprojects/Paket.git",
       Version: (string) (len=3) "N/A"

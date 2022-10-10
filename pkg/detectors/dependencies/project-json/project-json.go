@@ -31,6 +31,7 @@ func Discover(f *file.FileInfo) (report *depsbase.DiscoveredDependency) {
 	report = &depsbase.DiscoveredDependency{}
 	report.Provider = "package-json"
 	report.Language = "Javascript"
+	report.PackageManager = "nuget"
 	tree, err := parser.ParseFile(f, f.Path, language)
 	if err != nil {
 		log.Error().Msgf("%s: there was an error while parsing the file: %s", report.Provider, err.Error())

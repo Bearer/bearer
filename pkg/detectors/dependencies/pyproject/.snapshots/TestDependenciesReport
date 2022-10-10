@@ -12,6 +12,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=4) "pypi",
       Group: (string) "",
       Name: (string) (len=6) "python",
       Version: (string) (len=4) "^3.7"
@@ -30,6 +31,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=4) "pypi",
       Group: (string) "",
       Name: (string) (len=11) "synapse-p2p",
       Version: (string) (len=6) "^0.1.4"
@@ -48,6 +50,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=4) "pypi",
       Group: (string) "",
       Name: (string) (len=5) "faker",
       Version: (string) (len=4) "^1.0"

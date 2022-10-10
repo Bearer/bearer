@@ -12,6 +12,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=14) "org.infinispan",
       Name: (string) (len=14) "infinispan-bom",
       Version: (string) (len=18) "${project.version}"
@@ -30,6 +31,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=11) "ant-contrib",
       Name: (string) (len=11) "ant-contrib",
       Version: (string) (len=35) "${versionx.ant-contrib.ant-contrib}"
@@ -48,6 +50,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=13) "com.amazonaws",
       Name: (string) (len=17) "aws-java-sdk-core",
       Version: (string) (len=25) "${versionx.com.amazonaws}"
@@ -66,6 +69,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=13) "com.amazonaws",
       Name: (string) (len=15) "aws-java-sdk-s3",
       Version: (string) (len=25) "${versionx.com.amazonaws}"
@@ -84,6 +88,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=13) "com.amazonaws",
       Name: (string) (len=16) "aws-java-sdk-kms",
       Version: (string) (len=25) "${versionx.com.amazonaws}"
@@ -102,6 +107,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=13) "com.amazonaws",
       Name: (string) (len=13) "jmespath-java",
       Version: (string) (len=25) "${versionx.com.amazonaws}"
@@ -120,6 +126,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=16) "org.bouncycastle",
       Name: (string) (len=16) "bcpkix-jdk15to18",
       Version: (string) (len=28) "${versionx.com.bouncycastle}"
@@ -138,6 +145,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=16) "org.bouncycastle",
       Name: (string) (len=14) "bcprov-jdk15on",
       Version: (string) (len=28) "${versionx.com.bouncycastle}"
@@ -156,6 +164,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=25) "com.clearspring.analytics",
       Name: (string) (len=6) "stream",
       Version: (string) (len=44) "${versionx.com.clearspring.analytics.stream}"
@@ -174,6 +183,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=16) "org.apache.maven",
       Name: (string) (len=10) "maven-core",
       Version: (string) (len=39) "${versionx.org.apache.maven.maven-core}"
@@ -192,6 +202,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=19) "org.codehaus.plexus",
       Name: (string) (len=12) "plexus-utils",
       Version: (string) (len=44) "${versionx.org.codehaus.plexus.plexus-utils}"
@@ -210,6 +221,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=20) "com.esotericsoftware",
       Name: (string) (len=4) "kryo",
       Version: (string) (len=37) "${versionx.com.esotericsoftware.kryo}"
@@ -228,6 +240,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=26) "com.fasterxml.jackson.core",
       Name: (string) (len=19) "jackson-annotations",
       Version: (string) (len=58) "${versionx.com.fasterxml.jackson.core.jackson-annotations}"
@@ -246,6 +259,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=26) "com.fasterxml.jackson.core",
       Name: (string) (len=12) "jackson-core",
       Version: (string) (len=51) "${versionx.com.fasterxml.jackson.core.jackson-core}"
@@ -264,6 +278,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=26) "com.fasterxml.jackson.core",
       Name: (string) (len=16) "jackson-databind",
       Version: (string) (len=55) "${versionx.com.fasterxml.jackson.core.jackson-databind}"
@@ -282,6 +297,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=30) "com.fasterxml.jackson.datatype",
       Name: (string) (len=21) "jackson-datatype-jdk8",
       Version: (string) (len=63) "${versionx.com.fasterxml.jackson.modules.jackson-modules-java8}"
@@ -300,6 +316,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=29) "com.github.ben-manes.caffeine",
       Name: (string) (len=8) "caffeine",
       Version: (string) (len=50) "${versionx.com.github.ben-manes.caffeine.caffeine}"
@@ -318,6 +335,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=23) "io.projectreactor.tools",
       Name: (string) (len=10) "blockhound",
       Version: (string) (len=21) "${version.blockhound}"
@@ -336,6 +354,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=21) "com.google.errorprone",
       Name: (string) (len=23) "error_prone_annotations",
       Version: (string) (len=57) "${versionx.com.google.errorprone.error_prone_annotations}"
@@ -354,6 +373,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=16) "com.google.guava",
       Name: (string) (len=5) "guava",
       Version: (string) (len=34) "${versionx.com.google.guava.guava}"
@@ -372,6 +392,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=26) "com.google.testing.compile",
       Name: (string) (len=15) "compile-testing",
       Version: (string) (len=38) "${versionx.com.google.testing.compile}"
@@ -390,6 +411,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=14) "com.h2database",
       Name: (string) (len=2) "h2",
       Version: (string) (len=29) "${versionx.com.h2database.h2}"
@@ -408,6 +430,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=11) "com.ibm.db2",
       Name: (string) (len=3) "jcc",
       Version: (string) (len=23) "${versionx.com.ibm.db2}"
@@ -426,6 +449,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=19) "com.microsoft.azure",
       Name: (string) (len=13) "azure-storage",
       Version: (string) (len=45) "${versionx.com.microsoft.azure.azure-storage}"
@@ -444,6 +468,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=23) "com.microsoft.sqlserver",
       Name: (string) (len=10) "mssql-jdbc",
       Version: (string) (len=35) "${versionx.com.microsoft.sqlserver}"
@@ -462,6 +487,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=20) "com.puppycrawl.tools",
       Name: (string) (len=10) "checkstyle",
       Version: (string) (len=43) "${versionx.com.puppycrawl.tools.checkstyle}"
@@ -480,6 +506,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=20) "com.squareup.okhttp3",
       Name: (string) (len=6) "okhttp",
       Version: (string) (len=39) "${versionx.com.squareup.okhttp3.ohhttp}"
@@ -498,6 +525,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=20) "com.squareup.okhttp3",
       Name: (string) (len=10) "okhttp-sse",
       Version: (string) (len=39) "${versionx.com.squareup.okhttp3.ohhttp}"
@@ -516,6 +544,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=7) "com.sun",
       Name: (string) (len=5) "tools",
       Version: (string) (len=25) "${versionx.com.sun.tools}"
@@ -534,6 +563,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=24) "com.thoughtworks.xstream",
       Name: (string) (len=7) "xstream",
       Version: (string) (len=44) "${versionx.com.thoughtworks.xstream.xstream}"
@@ -552,6 +582,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=18) "org.apache.commons",
       Name: (string) (len=16) "commons-compress",
       Version: (string) (len=47) "${versionx.org.apache.commons.commons-compress}"
@@ -570,6 +601,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=12) "commons-dbcp",
       Name: (string) (len=12) "commons-dbcp",
       Version: (string) (len=37) "${versionx.commons-dbcp.commons-dbcp}"
@@ -588,6 +620,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=10) "commons-io",
       Name: (string) (len=10) "commons-io",
       Version: (string) (len=33) "${versionx.commons-io.commons-io}"
@@ -606,6 +639,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=15) "commons-logging",
       Name: (string) (len=15) "commons-logging",
       Version: (string) (len=43) "${versionx.commons-logging.commons-logging}"
@@ -624,6 +658,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=13) "de.javakaffee",
       Name: (string) (len=16) "kryo-serializers",
       Version: (string) (len=42) "${versionx.de.javakaffee.kryo-serializers}"
@@ -642,6 +677,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=10) "gnu.getopt",
       Name: (string) (len=11) "java-getopt",
       Version: (string) (len=34) "${versionx.gnu.getopt.java-getopt}"
@@ -660,6 +696,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=9) "io.agroal",
       Name: (string) (len=10) "agroal-api",
       Version: (string) (len=20) "${version.io.agroal}"
@@ -678,6 +715,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=9) "io.agroal",
       Name: (string) (len=11) "agroal-pool",
       Version: (string) (len=20) "${version.io.agroal}"
@@ -696,6 +734,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=10) "io.fabric8",
       Name: (string) (len=17) "kubernetes-client",
       Version: (string) (len=40) "${versionx.io.fabric8.kubernetes-client}"
@@ -714,6 +753,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=10) "io.mashona",
       Name: (string) (len=18) "mashona-logwriting",
       Version: (string) (len=21) "${version.io.mashona}"
@@ -732,6 +772,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=18) "io.smallrye.config",
       Name: (string) (len=15) "smallrye-config",
       Version: (string) (len=26) "${version.smallrye-config}"
@@ -750,6 +791,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=11) "io.smallrye",
       Name: (string) (len=16) "smallrye-metrics",
       Version: (string) (len=27) "${version.smallrye-metrics}"
@@ -768,6 +810,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=8) "io.netty",
       Name: (string) (len=12) "netty-buffer",
       Version: (string) (len=33) "${versionx.io.netty.netty-buffer}"
@@ -786,6 +829,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=8) "io.netty",
       Name: (string) (len=11) "netty-codec",
       Version: (string) (len=32) "${versionx.io.netty.netty-codec}"
@@ -804,6 +848,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=8) "io.netty",
       Name: (string) (len=16) "netty-codec-http",
       Version: (string) (len=37) "${versionx.io.netty.netty-codec-http}"
@@ -822,6 +867,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=8) "io.netty",
       Name: (string) (len=17) "netty-codec-http2",
       Version: (string) (len=38) "${versionx.io.netty.netty-codec-http2}"
@@ -840,6 +886,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=8) "io.netty",
       Name: (string) (len=12) "netty-common",
       Version: (string) (len=33) "${versionx.io.netty.netty-common}"
@@ -858,6 +905,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=8) "io.netty",
       Name: (string) (len=13) "netty-handler",
       Version: (string) (len=34) "${versionx.io.netty.netty-handler}"
@@ -876,6 +924,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=8) "io.netty",
       Name: (string) (len=14) "netty-resolver",
       Version: (string) (len=35) "${versionx.io.netty.netty-resolver}"
@@ -894,6 +943,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=8) "io.netty",
       Name: (string) (len=15) "netty-transport",
       Version: (string) (len=36) "${versionx.io.netty.netty-transport}"
@@ -912,6 +962,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=8) "io.netty",
       Name: (string) (len=28) "netty-transport-native-epoll",
       Version: (string) (len=49) "${versionx.io.netty.netty-transport-native-epoll}"
@@ -930,6 +981,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=8) "io.netty",
       Name: (string) (len=28) "netty-transport-native-epoll",
       Version: (string) (len=49) "${versionx.io.netty.netty-transport-native-epoll}"
@@ -948,6 +1000,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=8) "io.netty",
       Name: (string) (len=34) "netty-transport-native-unix-common",
       Version: (string) (len=55) "${versionx.io.netty.netty-transport-native-unix-common}"
@@ -966,6 +1019,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=13) "io.protostuff",
       Name: (string) (len=27) "protostuff-collectionschema",
       Version: (string) (len=53) "${versionx.io.protostuff.protostuff-collectionschema}"
@@ -984,6 +1038,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=13) "io.protostuff",
       Name: (string) (len=15) "protostuff-core",
       Version: (string) (len=41) "${versionx.io.protostuff.protostuff-core}"
@@ -1002,6 +1057,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=13) "io.protostuff",
       Name: (string) (len=18) "protostuff-runtime",
       Version: (string) (len=44) "${versionx.io.protostuff.protostuff-runtime}"
@@ -1020,6 +1076,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=13) "io.protostuff",
       Name: (string) (len=27) "protostuff-runtime-registry",
       Version: (string) (len=53) "${versionx.io.protostuff.protostuff-runtime-registry}"
@@ -1038,6 +1095,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=20) "io.reactivex.rxjava3",
       Name: (string) (len=6) "rxjava",
       Version: (string) (len=39) "${versionx.io.reactivex.rxjava3.rxjava}"
@@ -1056,6 +1114,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=19) "jakarta.persistence",
       Name: (string) (len=23) "jakarta.persistence-api",
       Version: (string) (len=30) "${version.jakarta.persistence}"
@@ -1074,6 +1133,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=19) "jakarta.transaction",
       Name: (string) (len=23) "jakarta.transaction-api",
       Version: (string) (len=30) "${version.jakarta.transaction}"
@@ -1092,6 +1152,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=16) "javax.activation",
       Name: (string) (len=10) "activation",
       Version: (string) (len=39) "${versionx.javax.activation.activation}"
@@ -1110,6 +1171,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=16) "javax.annotation",
       Name: (string) (len=20) "javax.annotation-api",
       Version: (string) (len=49) "${versionx.javax.annotation.javax.annotation-api}"
@@ -1128,6 +1190,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=11) "javax.cache",
       Name: (string) (len=9) "cache-api",
       Version: (string) (len=33) "${versionx.javax.cache.cache-api}"
@@ -1146,6 +1209,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=11) "javax.cache",
       Name: (string) (len=11) "cache-tests",
       Version: (string) (len=35) "${versionx.javax.cache.cache-tests}"
@@ -1164,6 +1228,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=11) "javax.cache",
       Name: (string) (len=11) "cache-tests",
       Version: (string) (len=35) "${versionx.javax.cache.cache-tests}"
@@ -1182,6 +1247,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=11) "javax.cache",
       Name: (string) (len=33) "cdi-weld-annotations-test-harness",
       Version: (string) (len=57) "${versionx.javax.cache.cdi-weld-annotations-test-harness}"
@@ -1200,6 +1266,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=18) "jakarta.enterprise",
       Name: (string) (len=26) "jakarta.enterprise.cdi-api",
       Version: (string) (len=33) "${version.jakarta.enterprise.cdi}"
@@ -1218,6 +1285,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=12) "javax.inject",
       Name: (string) (len=12) "javax.inject",
       Version: (string) (len=37) "${versionx.javax.inject.javax.inject}"
@@ -1236,6 +1304,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=5) "junit",
       Name: (string) (len=5) "junit",
       Version: (string) (len=23) "${versionx.junit.junit}"
@@ -1254,6 +1323,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=17) "org.junit.jupiter",
       Name: (string) (len=17) "junit-jupiter-api",
       Version: (string) (len=24) "${versionx.junit.junit5}"
@@ -1272,6 +1342,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=17) "org.junit.jupiter",
       Name: (string) (len=20) "junit-jupiter-engine",
       Version: (string) (len=24) "${versionx.junit.junit5}"
@@ -1290,6 +1361,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=17) "org.junit.vintage",
       Name: (string) (len=20) "junit-vintage-engine",
       Version: (string) (len=24) "${versionx.junit.junit5}"
@@ -1308,6 +1380,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=5) "mysql",
       Name: (string) (len=20) "mysql-connector-java",
       Version: (string) (len=38) "${versionx.mysql.mysql-connector-java}"
@@ -1326,6 +1399,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=8) "net.jcip",
       Name: (string) (len=16) "jcip-annotations",
       Version: (string) (len=27) "${version.jcip-annotations}"
@@ -1344,6 +1418,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=7) "net.spy",
       Name: (string) (len=12) "spymemcached",
       Version: (string) (len=32) "${versionx.net.spy.spymemcached}"
@@ -1362,6 +1437,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=8) "org.aesh",
       Name: (string) (len=4) "aesh",
       Version: (string) (len=25) "${versionx.org.aesh.aesh}"
@@ -1380,6 +1456,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=9) "org.antlr",
       Name: (string) (len=13) "antlr-runtime",
       Version: (string) (len=35) "${versionx.org.antlr.antlr-runtime}"
@@ -1398,6 +1475,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=14) "org.apache.ant",
       Name: (string) (len=3) "ant",
       Version: (string) (len=30) "${versionx.org.apache.ant.ant}"
@@ -1416,6 +1494,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=15) "org.apache.avro",
       Name: (string) (len=4) "avro",
       Version: (string) (len=32) "${versionx.org.apache.avro.avro}"
@@ -1434,6 +1513,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=18) "org.apache.commons",
       Name: (string) (len=13) "commons-lang3",
       Version: (string) (len=44) "${versionx.org.apache.commons.commons-lang3}"
@@ -1452,6 +1532,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=18) "org.apache.commons",
       Name: (string) (len=12) "commons-math",
       Version: (string) (len=43) "${versionx.org.apache.commons.commons-math}"
@@ -1470,6 +1551,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=27) "org.apache.directory.server",
       Name: (string) (len=23) "apacheds-test-framework",
       Version: (string) (len=48) "${versionx.org.apache.directory.server.apacheds}"
@@ -1488,6 +1570,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=27) "org.apache.directory.server",
       Name: (string) (len=29) "apacheds-interceptor-kerberos",
       Version: (string) (len=48) "${versionx.org.apache.directory.server.apacheds}"
@@ -1506,6 +1589,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=15) "org.apache.mina",
       Name: (string) (len=9) "mina-core",
       Version: (string) (len=32) "${versionx.org.apache.mina.mina}"
@@ -1524,6 +1608,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=30) "org.apache.geronimo.components",
       Name: (string) (len=20) "geronimo-transaction",
       Version: (string) (len=63) "${versionx.org.apache.geronimo.components.geronimo-transaction}"
@@ -1542,6 +1627,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=24) "org.apache.logging.log4j",
       Name: (string) (len=9) "log4j-api",
       Version: (string) (len=46) "${versionx.org.apache.logging.log4j.log4j-api}"
@@ -1560,6 +1646,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=24) "org.apache.logging.log4j",
       Name: (string) (len=10) "log4j-core",
       Version: (string) (len=47) "${versionx.org.apache.logging.log4j.log4j-core}"
@@ -1578,6 +1665,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=24) "org.apache.logging.log4j",
       Name: (string) (len=16) "log4j-slf4j-impl",
       Version: (string) (len=53) "${versionx.org.apache.logging.log4j.log4j-slf4j-impl}"
@@ -1596,6 +1684,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=24) "org.apache.logging.log4j",
       Name: (string) (len=9) "log4j-jul",
       Version: (string) (len=46) "${versionx.org.apache.logging.log4j.log4j-jul}"
@@ -1614,6 +1703,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=17) "org.apache.lucene",
       Name: (string) (len=23) "lucene-analyzers-common",
       Version: (string) (len=53) "${versionx.org.apache.lucene.lucene-analyzers-common}"
@@ -1632,6 +1722,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=17) "org.apache.lucene",
       Name: (string) (len=11) "lucene-core",
       Version: (string) (len=41) "${versionx.org.apache.lucene.lucene-core}"
@@ -1650,6 +1741,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=17) "org.apache.lucene",
       Name: (string) (len=12) "lucene-facet",
       Version: (string) (len=42) "${versionx.org.apache.lucene.lucene-facet}"
@@ -1668,6 +1760,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=17) "org.apache.lucene",
       Name: (string) (len=15) "lucene-grouping",
       Version: (string) (len=45) "${versionx.org.apache.lucene.lucene-grouping}"
@@ -1686,6 +1779,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=17) "org.apache.lucene",
       Name: (string) (len=11) "lucene-join",
       Version: (string) (len=41) "${versionx.org.apache.lucene.lucene-join}"
@@ -1704,6 +1798,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=17) "org.apache.lucene",
       Name: (string) (len=11) "lucene-misc",
       Version: (string) (len=41) "${versionx.org.apache.lucene.lucene-misc}"
@@ -1722,6 +1817,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=17) "org.apache.lucene",
       Name: (string) (len=18) "lucene-queryparser",
       Version: (string) (len=48) "${versionx.org.apache.lucene.lucene-queryparser}"
@@ -1740,6 +1836,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=29) "org.apache.maven.plugin-tools",
       Name: (string) (len=24) "maven-plugin-annotations",
       Version: (string) (len=66) "${versionx.org.apache.maven.plugin-tools.maven-plugin-annotations}"
@@ -1758,6 +1855,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=11) "org.aspectj",
       Name: (string) (len=13) "aspectjweaver",
       Version: (string) (len=37) "${versionx.org.aspectj.aspectjweaver}"
@@ -1776,6 +1874,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=11) "org.assertj",
       Name: (string) (len=12) "assertj-core",
       Version: (string) (len=36) "${versionx.org.assertj.assertj-core}"
@@ -1794,6 +1893,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=9) "org.dom4j",
       Name: (string) (len=5) "dom4j",
       Version: (string) (len=27) "${versionx.org.dom4j.dom4j}"
@@ -1812,6 +1912,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=31) "org.eclipse.microprofile.config",
       Name: (string) (len=23) "microprofile-config-api",
       Version: (string) (len=34) "${version.microprofile-config-api}"
@@ -1830,6 +1931,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=32) "org.eclipse.microprofile.metrics",
       Name: (string) (len=24) "microprofile-metrics-api",
       Version: (string) (len=35) "${version.microprofile-metrics-api}"
@@ -1848,6 +1950,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=18) "org.glassfish.jaxb",
       Name: (string) (len=12) "jaxb-runtime",
       Version: (string) (len=43) "${versionx.org.glassfish.jaxb.jaxb-runtime}"
@@ -1866,6 +1969,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=13) "org.glassfish",
       Name: (string) (len=10) "javax.json",
       Version: (string) (len=25) "${version.glassfish.json}"
@@ -1884,6 +1988,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=12) "org.hamcrest",
       Name: (string) (len=13) "hamcrest-core",
       Version: (string) (len=38) "${versionx.org.hamcrest.hamcrest-core}"
@@ -1902,6 +2007,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=12) "org.hamcrest",
       Name: (string) (len=16) "hamcrest-library",
       Version: (string) (len=41) "${versionx.org.hamcrest.hamcrest-library}"
@@ -1920,6 +2026,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=13) "org.hibernate",
       Name: (string) (len=14) "hibernate-core",
       Version: (string) (len=40) "${versionx.org.hibernate.hibernate-core}"
@@ -1938,6 +2045,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=20) "org.hibernate.search",
       Name: (string) (len=31) "hibernate-search-backend-lucene",
       Version: (string) (len=64) "${versionx.org.hibernate.search.hibernate-search-backend-lucene}"
@@ -1956,6 +2064,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=20) "org.hibernate.search",
       Name: (string) (len=33) "hibernate-search-mapper-pojo-base",
       Version: (string) (len=66) "${versionx.org.hibernate.search.hibernate-search-mapper-pojo-base}"
@@ -1974,6 +2083,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=20) "org.hibernate.search",
       Name: (string) (len=41) "hibernate-search-v5migrationhelper-engine",
       Version: (string) (len=66) "${versionx.org.hibernate.search.hibernate-search-mapper-pojo-base}"
@@ -1992,6 +2102,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=13) "org.hibernate",
       Name: (string) (len=17) "hibernate-testing",
       Version: (string) (len=43) "${versionx.org.hibernate.hibernate-testing}"
@@ -2010,6 +2121,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=20) "org.hibernate.common",
       Name: (string) (len=29) "hibernate-commons-annotations",
       Version: (string) (len=62) "${versionx.org.hibernate.common.hibernate-commons-annotations}"
@@ -2028,6 +2140,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=31) "org.hibernate.javax.persistence",
       Name: (string) (len=21) "hibernate-jpa-2.1-api",
       Version: (string) (len=65) "${versionx.org.hibernate.javax.persistence.hibernate-jpa-2.1-api}"
@@ -2046,6 +2159,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=33) "org.hibernate.lucene-jbossmodules",
       Name: (string) (len=19) "lucene-jbossmodules",
       Version: (string) (len=65) "${versionx.org.hibernate.lucene-jbossmodules.lucene-jbossmodules}"
@@ -2064,6 +2178,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=35) "org.infinispan.arquillian.container",
       Name: (string) (len=26) "infinispan-arquillian-impl",
       Version: (string) (len=32) "${version.infinispan.arquillian}"
@@ -2082,6 +2197,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=14) "org.infinispan",
       Name: (string) (len=26) "infinispan-cachestore-jdbc",
       Version: (string) (len=21) "${version.infinispan}"
@@ -2100,6 +2216,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=14) "org.infinispan",
       Name: (string) (len=33) "infinispan-cachestore-jdbc-common",
       Version: (string) (len=21) "${version.infinispan}"
@@ -2118,6 +2235,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=14) "org.infinispan",
       Name: (string) (len=33) "infinispan-cachestore-jdbc-common",
       Version: (string) (len=21) "${version.infinispan}"
@@ -2136,6 +2254,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=14) "org.infinispan",
       Name: (string) (len=14) "infinispan-cli",
       Version: (string) (len=21) "${version.infinispan}"
@@ -2154,6 +2273,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=14) "org.infinispan",
       Name: (string) (len=24) "infinispan-client-hotrod",
       Version: (string) (len=21) "${version.infinispan}"
@@ -2172,6 +2292,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=14) "org.infinispan",
       Name: (string) (len=18) "infinispan-commons",
       Version: (string) (len=21) "${version.infinispan}"
@@ -2190,6 +2311,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=14) "org.infinispan",
       Name: (string) (len=24) "infinispan-commons-jdk11",
       Version: (string) (len=21) "${version.infinispan}"
@@ -2208,6 +2330,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=14) "org.infinispan",
       Name: (string) (len=23) "infinispan-commons-loom",
       Version: (string) (len=21) "${version.infinispan}"
@@ -2226,6 +2349,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=14) "org.infinispan",
       Name: (string) (len=30) "infinispan-component-processor",
       Version: (string) (len=21) "${version.infinispan}"
@@ -2244,6 +2368,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=14) "org.infinispan",
       Name: (string) (len=30) "infinispan-logging-annotations",
       Version: (string) (len=21) "${version.infinispan}"
@@ -2262,6 +2387,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=14) "org.infinispan",
       Name: (string) (len=28) "infinispan-logging-processor",
       Version: (string) (len=21) "${version.infinispan}"
@@ -2280,6 +2406,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=14) "org.infinispan",
       Name: (string) (len=18) "infinispan-console",
       Version: (string) (len=18) "${version.console}"
@@ -2298,6 +2425,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=14) "org.infinispan",
       Name: (string) (len=15) "infinispan-core",
       Version: (string) (len=21) "${version.infinispan}"
@@ -2316,6 +2444,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=14) "org.infinispan",
       Name: (string) (len=25) "infinispan-jcache-commons",
       Version: (string) (len=21) "${version.infinispan}"
@@ -2334,6 +2463,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=14) "org.infinispan",
       Name: (string) (len=20) "infinispan-scripting",
       Version: (string) (len=21) "${version.infinispan}"
@@ -2352,6 +2482,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=14) "org.infinispan",
       Name: (string) (len=36) "infinispan-security-integrationtests",
       Version: (string) (len=21) "${version.infinispan}"
@@ -2370,6 +2501,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=14) "org.infinispan",
       Name: (string) (len=22) "infinispan-server-core",
       Version: (string) (len=21) "${version.infinispan}"
@@ -2388,6 +2520,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=14) "org.infinispan",
       Name: (string) (len=24) "infinispan-server-hotrod",
       Version: (string) (len=21) "${version.infinispan}"
@@ -2406,6 +2539,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=14) "org.infinispan",
       Name: (string) (len=27) "infinispan-server-memcached",
       Version: (string) (len=21) "${version.infinispan}"
@@ -2424,6 +2558,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=14) "org.infinispan",
       Name: (string) (len=22) "infinispan-server-rest",
       Version: (string) (len=21) "${version.infinispan}"
@@ -2442,6 +2577,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=14) "org.infinispan",
       Name: (string) (len=25) "infinispan-server-runtime",
       Version: (string) (len=21) "${version.infinispan}"
@@ -2460,6 +2596,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=14) "org.infinispan",
       Name: (string) (len=24) "infinispan-server-router",
       Version: (string) (len=18) "${project.version}"
@@ -2478,6 +2615,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=14) "org.infinispan",
       Name: (string) (len=33) "infinispan-server-testdriver-core",
       Version: (string) (len=21) "${version.infinispan}"
@@ -2496,6 +2634,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=14) "org.infinispan",
       Name: (string) (len=35) "infinispan-server-testdriver-junit4",
       Version: (string) (len=21) "${version.infinispan}"
@@ -2514,6 +2653,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=14) "org.infinispan",
       Name: (string) (len=35) "infinispan-server-testdriver-junit5",
       Version: (string) (len=21) "${version.infinispan}"
@@ -2532,6 +2672,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=14) "org.infinispan",
       Name: (string) (len=25) "infinispan-spring5-common",
       Version: (string) (len=21) "${version.infinispan}"
@@ -2550,6 +2691,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=14) "org.infinispan",
       Name: (string) (len=27) "infinispan-spring5-embedded",
       Version: (string) (len=21) "${version.infinispan}"
@@ -2568,6 +2710,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=14) "org.infinispan",
       Name: (string) (len=25) "infinispan-spring5-remote",
       Version: (string) (len=21) "${version.infinispan}"
@@ -2586,6 +2729,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=14) "org.infinispan",
       Name: (string) (len=39) "infinispan-spring-boot-starter-embedded",
       Version: (string) (len=21) "${version.infinispan}"
@@ -2604,6 +2748,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=14) "org.infinispan",
       Name: (string) (len=37) "infinispan-spring-boot-starter-remote",
       Version: (string) (len=21) "${version.infinispan}"
@@ -2622,6 +2767,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=14) "org.infinispan",
       Name: (string) (len=16) "infinispan-query",
       Version: (string) (len=21) "${version.infinispan}"
@@ -2640,6 +2786,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=14) "org.infinispan",
       Name: (string) (len=16) "infinispan-query",
       Version: (string) (len=21) "${version.infinispan}"
@@ -2658,6 +2805,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=14) "org.infinispan",
       Name: (string) (len=23) "infinispan-cdi-embedded",
       Version: (string) (len=21) "${version.infinispan}"
@@ -2676,6 +2824,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=14) "org.infinispan",
       Name: (string) (len=25) "infinispan-cachestore-jpa",
       Version: (string) (len=21) "${version.infinispan}"
@@ -2694,6 +2843,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=14) "org.infinispan",
       Name: (string) (len=34) "infinispan-hibernate-cache-commons",
       Version: (string) (len=21) "${version.infinispan}"
@@ -2712,6 +2862,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=14) "org.infinispan",
       Name: (string) (len=34) "infinispan-hibernate-cache-commons",
       Version: (string) (len=21) "${version.infinispan}"
@@ -2730,6 +2881,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=14) "org.infinispan",
       Name: (string) (len=42) "infinispan-server-integrationtests-commons",
       Version: (string) (len=21) "${version.infinispan}"
@@ -2748,6 +2900,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=14) "org.infinispan",
       Name: (string) (len=30) "infinispan-endpoint-interop-it",
       Version: (string) (len=21) "${version.infinispan}"
@@ -2766,6 +2919,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=14) "org.infinispan",
       Name: (string) (len=27) "infinispan-marshaller-tests",
       Version: (string) (len=21) "${version.infinispan}"
@@ -2784,6 +2938,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=26) "org.infinispan.protostream",
       Name: (string) (len=21) "protostream-processor",
       Version: (string) (len=22) "${version.protostream}"
@@ -2802,6 +2957,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=26) "org.infinispan.protostream",
       Name: (string) (len=24) "sample-domain-definition",
       Version: (string) (len=22) "${version.protostream}"
@@ -2820,6 +2976,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=26) "org.infinispan.protostream",
       Name: (string) (len=28) "sample-domain-implementation",
       Version: (string) (len=22) "${version.protostream}"
@@ -2838,6 +2995,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=10) "org.jacoco",
       Name: (string) (len=16) "org.jacoco.agent",
       Version: (string) (len=39) "${versionx.org.jacoco.org.jacoco.agent}"
@@ -2856,6 +3014,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=9) "org.jboss",
       Name: (string) (len=17) "jboss-common-core",
       Version: (string) (len=39) "${versionx.org.jboss.jboss-common-core}"
@@ -2874,6 +3033,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=9) "org.jboss",
       Name: (string) (len=29) "jboss-transaction-spi-jakarta",
       Version: (string) (len=51) "${versionx.org.jboss.jboss-transaction-spi-jakarta}"
@@ -2892,6 +3052,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=30) "org.jboss.arquillian.container",
       Name: (string) (len=24) "arquillian-weld-embedded",
       Version: (string) (len=67) "${versionx.org.jboss.arquillian.container.arquillian-weld-embedded}"
@@ -2910,6 +3071,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=26) "org.jboss.arquillian.junit",
       Name: (string) (len=26) "arquillian-junit-container",
       Version: (string) (len=65) "${versionx.org.jboss.arquillian.junit.arquillian-junit-container}"
@@ -2928,6 +3090,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=27) "org.jboss.arquillian.testng",
       Name: (string) (len=27) "arquillian-testng-container",
       Version: (string) (len=67) "${versionx.org.jboss.arquillian.testng.arquillian-testng-container}"
@@ -2946,6 +3109,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=17) "org.jboss.byteman",
       Name: (string) (len=7) "byteman",
       Version: (string) (len=37) "${versionx.org.jboss.byteman.byteman}"
@@ -2964,6 +3128,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=17) "org.jboss.byteman",
       Name: (string) (len=14) "byteman-bmunit",
       Version: (string) (len=44) "${versionx.org.jboss.byteman.byteman-bmunit}"
@@ -2982,6 +3147,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=17) "org.jboss.byteman",
       Name: (string) (len=15) "byteman-install",
       Version: (string) (len=45) "${versionx.org.jboss.byteman.byteman-install}"
@@ -3000,6 +3166,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=17) "org.jboss.byteman",
       Name: (string) (len=14) "byteman-submit",
       Version: (string) (len=44) "${versionx.org.jboss.byteman.byteman-submit}"
@@ -3018,6 +3185,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=17) "org.jboss.logging",
       Name: (string) (len=13) "jboss-logging",
       Version: (string) (len=43) "${versionx.org.jboss.logging.jboss-logging}"
@@ -3036,6 +3204,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=17) "org.jboss.logging",
       Name: (string) (len=23) "jboss-logging-processor",
       Version: (string) (len=53) "${versionx.org.jboss.logging.jboss-logging-processor}"
@@ -3054,6 +3223,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=21) "org.jboss.marshalling",
       Name: (string) (len=17) "jboss-marshalling",
       Version: (string) (len=51) "${versionx.org.jboss.marshalling.jboss-marshalling}"
@@ -3072,6 +3242,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=21) "org.jboss.marshalling",
       Name: (string) (len=22) "jboss-marshalling-osgi",
       Version: (string) (len=56) "${versionx.org.jboss.marshalling.jboss-marshalling-osgi}"
@@ -3090,6 +3261,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=21) "org.jboss.marshalling",
       Name: (string) (len=23) "jboss-marshalling-river",
       Version: (string) (len=57) "${versionx.org.jboss.marshalling.jboss-marshalling-river}"
@@ -3108,6 +3280,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=16) "org.jboss.naming",
       Name: (string) (len=10) "jnp-client",
       Version: (string) (len=39) "${versionx.org.jboss.naming.jnp-client}"
@@ -3126,6 +3299,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=16) "org.jboss.naming",
       Name: (string) (len=9) "jnpserver",
       Version: (string) (len=38) "${versionx.org.jboss.naming.jnpserver}"
@@ -3144,6 +3318,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=22) "org.jboss.narayana.jta",
       Name: (string) (len=12) "narayana-jta",
       Version: (string) (len=47) "${versionx.org.jboss.narayana.jta.narayana-jta}"
@@ -3162,6 +3337,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=18) "org.jboss.remoting",
       Name: (string) (len=14) "jboss-remoting",
       Version: (string) (len=45) "${versionx.org.jboss.remoting.jboss-remoting}"
@@ -3180,6 +3356,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=21) "org.jboss.remotingjmx",
       Name: (string) (len=12) "remoting-jmx",
       Version: (string) (len=46) "${versionx.org.jboss.remotingjmx.remoting-jmx}"
@@ -3198,6 +3375,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=18) "org.jboss.security",
       Name: (string) (len=24) "jboss-negotiation-extras",
       Version: (string) (len=55) "${versionx.org.jboss.security.jboss-negotiation-extras}"
@@ -3216,6 +3394,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=20) "org.jboss.shrinkwrap",
       Name: (string) (len=19) "shrinkwrap-depchain",
       Version: (string) (len=41) "${versionx.org.jboss.shrinkwrap.depchain}"
@@ -3234,6 +3413,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=32) "org.jboss.shrinkwrap.descriptors",
       Name: (string) (len=34) "shrinkwrap-descriptors-impl-javaee",
       Version: (string) (len=79) "${versionx.org.jboss.shrinkwrap.descriptors.shrinkwrap-descriptors-impl-javaee}"
@@ -3252,6 +3432,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=29) "org.jboss.shrinkwrap.resolver",
       Name: (string) (len=23) "shrinkwrap-resolver-api",
       Version: (string) (len=65) "${versionx.org.jboss.shrinkwrap.resolver.shrinkwrap-resolver-api}"
@@ -3270,6 +3451,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=29) "org.jboss.shrinkwrap.resolver",
       Name: (string) (len=29) "shrinkwrap-resolver-api-maven",
       Version: (string) (len=71) "${versionx.org.jboss.shrinkwrap.resolver.shrinkwrap-resolver-api-maven}"
@@ -3288,6 +3470,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=29) "org.jboss.shrinkwrap.resolver",
       Name: (string) (len=28) "shrinkwrap-resolver-depchain",
       Version: (string) (len=70) "${versionx.org.jboss.shrinkwrap.resolver.shrinkwrap-resolver-depchain}"
@@ -3306,6 +3489,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=29) "org.jboss.shrinkwrap.resolver",
       Name: (string) (len=30) "shrinkwrap-resolver-impl-maven",
       Version: (string) (len=72) "${versionx.org.jboss.shrinkwrap.resolver.shrinkwrap-resolver-impl-maven}"
@@ -3324,6 +3508,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=29) "org.jboss.shrinkwrap.resolver",
       Name: (string) (len=38) "shrinkwrap-resolver-impl-maven-archive",
       Version: (string) (len=80) "${versionx.org.jboss.shrinkwrap.resolver.shrinkwrap-resolver-impl-maven-archive}"
@@ -3342,6 +3527,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=14) "org.jboss.spec",
       Name: (string) (len=19) "jboss-jakartaee-8.0",
       Version: (string) (len=46) "${versionx.org.jboss.spec.jboss-jakartaee-8.0}"
@@ -3360,6 +3546,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=24) "org.jboss.spec.javax.ejb",
       Name: (string) (len=22) "jboss-ejb-api_3.2_spec",
       Version: (string) (len=59) "${versionx.org.jboss.spec.javax.ejb.jboss-ejb-api_3.2_spec}"
@@ -3378,6 +3565,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=24) "org.jboss.spec.javax.jms",
       Name: (string) (len=22) "jboss-jms-api_2.0_spec",
       Version: (string) (len=59) "${versionx.org.jboss.spec.javax.jms.jboss-jms-api_2.0_spec}"
@@ -3396,6 +3584,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=17) "org.jboss.threads",
       Name: (string) (len=13) "jboss-threads",
       Version: (string) (len=43) "${versionx.org.jboss.threads.jboss-threads}"
@@ -3414,6 +3603,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=14) "org.jboss.weld",
       Name: (string) (len=8) "weld-api",
       Version: (string) (len=35) "${versionx.org.jboss.weld.weld-api}"
@@ -3432,6 +3622,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=14) "org.jboss.weld",
       Name: (string) (len=8) "weld-spi",
       Version: (string) (len=35) "${versionx.org.jboss.weld.weld-api}"
@@ -3450,6 +3641,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=14) "org.jboss.weld",
       Name: (string) (len=14) "weld-core-impl",
       Version: (string) (len=41) "${versionx.org.jboss.weld.weld-core-impl}"
@@ -3468,6 +3660,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=17) "org.jboss.weld.se",
       Name: (string) (len=12) "weld-se-core",
       Version: (string) (len=42) "${versionx.org.jboss.weld.se.weld-se-core}"
@@ -3486,6 +3679,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=14) "org.jboss.xnio",
       Name: (string) (len=8) "xnio-api",
       Version: (string) (len=35) "${versionx.org.jboss.xnio.xnio-api}"
@@ -3504,6 +3698,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=14) "org.jboss.xnio",
       Name: (string) (len=8) "xnio-nio",
       Version: (string) (len=35) "${versionx.org.jboss.xnio.xnio-nio}"
@@ -3522,6 +3717,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=11) "org.jgroups",
       Name: (string) (len=7) "jgroups",
       Version: (string) (len=31) "${versionx.org.jgroups.jgroups}"
@@ -3540,6 +3736,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=18) "org.jgroups.aws.s3",
       Name: (string) (len=14) "native-s3-ping",
       Version: (string) (len=45) "${versionx.org.jgroups.aws.s3.native-s3-ping}"
@@ -3558,6 +3755,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=17) "org.jgroups.azure",
       Name: (string) (len=13) "jgroups-azure",
       Version: (string) (len=43) "${versionx.org.jgroups.azure.jgroups-azure}"
@@ -3576,6 +3774,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=22) "org.jgroups.kubernetes",
       Name: (string) (len=18) "jgroups-kubernetes",
       Version: (string) (len=53) "${versionx.org.jgroups.kubernetes.jgroups-kubernetes}"
@@ -3594,6 +3793,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=9) "org.jsoup",
       Name: (string) (len=5) "jsoup",
       Version: (string) (len=21) "${versionx.org.jsoup}"
@@ -3612,6 +3812,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=28) "org.kohsuke.metainf-services",
       Name: (string) (len=16) "metainf-services",
       Version: (string) (len=57) "${versionx.org.kohsuke.metainf-services.metainf-services}"
@@ -3630,6 +3831,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=16) "org.latencyutils",
       Name: (string) (len=12) "LatencyUtils",
       Version: (string) (len=41) "${versionx.org.latencyutils.LatencyUtils}"
@@ -3648,6 +3850,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=16) "org.mariadb.jdbc",
       Name: (string) (len=19) "mariadb-java-client",
       Version: (string) (len=28) "${versionx.org.mariadb.jdbc}"
@@ -3666,6 +3869,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=16) "com.oracle.ojdbc",
       Name: (string) (len=6) "ojdbc8",
       Version: (string) (len=35) "${versionx.com.oracle.ojdbc.ojdbc8}"
@@ -3684,6 +3888,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=11) "org.mockito",
       Name: (string) (len=12) "mockito-core",
       Version: (string) (len=36) "${versionx.org.mockito.mockito-core}"
@@ -3702,6 +3907,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=18) "org.objectweb.howl",
       Name: (string) (len=4) "howl",
       Version: (string) (len=35) "${versionx.org.objectweb.howl.howl}"
@@ -3720,6 +3926,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=15) "org.openjdk.jmh",
       Name: (string) (len=8) "jmh-core",
       Version: (string) (len=36) "${versionx.org.openjdk.jmh.jmh-core}"
@@ -3738,6 +3945,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=15) "org.openjdk.jmh",
       Name: (string) (len=24) "jmh-generator-annprocess",
       Version: (string) (len=52) "${versionx.org.openjdk.jmh.jmh-generator-annprocess}"
@@ -3756,6 +3964,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=19) "org.openjdk.nashorn",
       Name: (string) (len=12) "nashorn-core",
       Version: (string) (len=31) "${versionx.org.openjdk.nashorn}"
@@ -3774,6 +3983,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=14) "org.postgresql",
       Name: (string) (len=10) "postgresql",
       Version: (string) (len=26) "${versionx.org.postgresql}"
@@ -3792,6 +4002,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=19) "org.reactivestreams",
       Name: (string) (len=16) "reactive-streams",
       Version: (string) (len=48) "${versionx.org.reactivestreams.reactive-streams}"
@@ -3810,6 +4021,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=11) "org.rocksdb",
       Name: (string) (len=10) "rocksdbjni",
       Version: (string) (len=34) "${versionx.org.rocksdb.rocksdbjni}"
@@ -3828,6 +4040,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=19) "org.springframework",
       Name: (string) (len=12) "spring-beans",
       Version: (string) (len=44) "${versionx.org.springframework.spring-beans}"
@@ -3846,6 +4059,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=19) "org.springframework",
       Name: (string) (len=14) "spring-context",
       Version: (string) (len=46) "${versionx.org.springframework.spring-context}"
@@ -3864,6 +4078,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=19) "org.springframework",
       Name: (string) (len=22) "spring-context-support",
       Version: (string) (len=54) "${versionx.org.springframework.spring-context-support}"
@@ -3882,6 +4097,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=19) "org.springframework",
       Name: (string) (len=11) "spring-core",
       Version: (string) (len=43) "${versionx.org.springframework.spring-core}"
@@ -3900,6 +4116,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=19) "org.springframework",
       Name: (string) (len=17) "spring-expression",
       Version: (string) (len=49) "${versionx.org.springframework.spring-expression}"
@@ -3918,6 +4135,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=19) "org.springframework",
       Name: (string) (len=11) "spring-jdbc",
       Version: (string) (len=43) "${versionx.org.springframework.spring-jdbc}"
@@ -3936,6 +4154,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=19) "org.springframework",
       Name: (string) (len=11) "spring-test",
       Version: (string) (len=43) "${versionx.org.springframework.spring-test}"
@@ -3954,6 +4173,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=24) "org.springframework.boot",
       Name: (string) (len=19) "spring-boot-starter",
       Version: (string) (len=56) "${versionx.org.springframework.boot.spring-boot-starter}"
@@ -3972,6 +4192,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=24) "org.springframework.boot",
       Name: (string) (len=26) "spring-boot-starter-log4j2",
       Version: (string) (len=63) "${versionx.org.springframework.boot.spring-boot-starter-log4j2}"
@@ -3990,6 +4211,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=24) "org.springframework.boot",
       Name: (string) (len=28) "spring-boot-starter-security",
       Version: (string) (len=65) "${versionx.org.springframework.boot.spring-boot-starter-security}"
@@ -4008,6 +4230,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=24) "org.springframework.boot",
       Name: (string) (len=24) "spring-boot-starter-test",
       Version: (string) (len=61) "${versionx.org.springframework.boot.spring-boot-starter-test}"
@@ -4026,6 +4249,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=24) "org.springframework.boot",
       Name: (string) (len=23) "spring-boot-starter-web",
       Version: (string) (len=60) "${versionx.org.springframework.boot.spring-boot-starter-web}"
@@ -4044,6 +4268,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=24) "org.springframework.boot",
       Name: (string) (len=35) "spring-boot-configuration-processor",
       Version: (string) (len=72) "${versionx.org.springframework.boot.spring-boot-configuration-processor}"
@@ -4062,6 +4287,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=24) "org.springframework.boot",
       Name: (string) (len=28) "spring-boot-starter-actuator",
       Version: (string) (len=65) "${versionx.org.springframework.boot.spring-boot-starter-actuator}"
@@ -4080,6 +4306,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=24) "org.springframework.boot",
       Name: (string) (len=35) "spring-boot-autoconfigure-processor",
       Version: (string) (len=72) "${versionx.org.springframework.boot.spring-boot-autoconfigure-processor}"
@@ -4098,6 +4325,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=27) "org.springframework.session",
       Name: (string) (len=19) "spring-session-core",
       Version: (string) (len=54) "${versionx.org.springframework.session.spring-session}"
@@ -4116,6 +4344,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=13) "io.micrometer",
       Name: (string) (len=15) "micrometer-test",
       Version: (string) (len=22) "${versionx.micrometer}"
@@ -4134,6 +4363,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=14) "io.opentracing",
       Name: (string) (len=15) "opentracing-api",
       Version: (string) (len=31) "${versionx.org.opentracing.api}"
@@ -4152,6 +4382,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=14) "io.opentracing",
       Name: (string) (len=16) "opentracing-noop",
       Version: (string) (len=31) "${versionx.org.opentracing.api}"
@@ -4170,6 +4401,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=16) "io.jaegertracing",
       Name: (string) (len=11) "jaeger-core",
       Version: (string) (len=42) "${versionx.io.jaegertracing.jaeger-client}"
@@ -4188,6 +4420,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=16) "io.jaegertracing",
       Name: (string) (len=13) "jaeger-thrift",
       Version: (string) (len=42) "${versionx.io.jaegertracing.jaeger-client}"
@@ -4206,6 +4439,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=16) "io.jaegertracing",
       Name: (string) (len=21) "jaeger-tracerresolver",
       Version: (string) (len=42) "${versionx.io.jaegertracing.jaeger-client}"
@@ -4224,6 +4458,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=16) "io.jaegertracing",
       Name: (string) (len=21) "jaeger-testcontainers",
       Version: (string) (len=50) "${versionx.io.jaegertracing.jaeger-testcontainers}"
@@ -4242,6 +4477,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=18) "org.testcontainers",
       Name: (string) (len=14) "testcontainers",
       Version: (string) (len=45) "${versionx.org.testcontainers.testcontainers}"
@@ -4260,6 +4496,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=10) "org.testng",
       Name: (string) (len=6) "testng",
       Version: (string) (len=29) "${versionx.org.testng.testng}"
@@ -4278,6 +4515,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=16) "org.twdata.maven",
       Name: (string) (len=13) "mojo-executor",
       Version: (string) (len=42) "${versionx.org.twdata.maven.mojo-executor}"
@@ -4296,6 +4534,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=19) "org.wildfly.openssl",
       Name: (string) (len=20) "wildfly-openssl-java",
       Version: (string) (len=30) "${version.org.wildfly.openssl}"
@@ -4314,6 +4553,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=19) "org.wildfly.openssl",
       Name: (string) (len=15) "wildfly-openssl",
       Version: (string) (len=30) "${version.org.wildfly.openssl}"
@@ -4332,6 +4572,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=19) "org.wildfly.openssl",
       Name: (string) (len=28) "wildfly-openssl-linux-x86_64",
       Version: (string) (len=60) "${versionx.org.wildfly.openssl.wildfly-openssl-linux-x86_64}"
@@ -4350,6 +4591,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=19) "org.wildfly.openssl",
       Name: (string) (len=29) "wildfly-openssl-macosx-x86_64",
       Version: (string) (len=61) "${versionx.org.wildfly.openssl.wildfly-openssl-macosx-x86_64}"
@@ -4368,6 +4610,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=19) "org.wildfly.openssl",
       Name: (string) (len=30) "wildfly-openssl-windows-x86_64",
       Version: (string) (len=62) "${versionx.org.wildfly.openssl.wildfly-openssl-windows-x86_64}"
@@ -4386,6 +4629,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=22) "org.wildfly.arquillian",
       Name: (string) (len=36) "wildfly-arquillian-container-managed",
       Version: (string) (len=71) "${versionx.org.wildfly.arquillian.wildfly-arquillian-container-managed}"
@@ -4404,6 +4648,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=18) "org.wildfly.common",
       Name: (string) (len=14) "wildfly-common",
       Version: (string) (len=45) "${versionx.org.wildfly.common.wildfly-common}"
@@ -4422,6 +4667,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=16) "org.wildfly.core",
       Name: (string) (len=29) "wildfly-core-testsuite-shared",
       Version: (string) (len=58) "${versionx.org.wildfly.core.wildfly-core-testsuite-shared}"
@@ -4440,6 +4686,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=20) "org.wildfly.security",
       Name: (string) (len=32) "wildfly-elytron-auth-server-http",
       Version: (string) (len=30) "${version.org.wildfly.elytron}"
@@ -4458,6 +4705,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=20) "org.wildfly.security",
       Name: (string) (len=32) "wildfly-elytron-auth-server-sasl",
       Version: (string) (len=30) "${version.org.wildfly.elytron}"
@@ -4476,6 +4724,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=20) "org.wildfly.security",
       Name: (string) (len=32) "wildfly-elytron-credential-store",
       Version: (string) (len=30) "${version.org.wildfly.elytron}"
@@ -4494,6 +4743,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=20) "org.wildfly.security",
       Name: (string) (len=26) "wildfly-elytron-http-basic",
       Version: (string) (len=30) "${version.org.wildfly.elytron}"
@@ -4512,6 +4762,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=20) "org.wildfly.security",
       Name: (string) (len=27) "wildfly-elytron-http-bearer",
       Version: (string) (len=30) "${version.org.wildfly.elytron}"
@@ -4530,6 +4781,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=20) "org.wildfly.security",
       Name: (string) (len=25) "wildfly-elytron-http-cert",
       Version: (string) (len=30) "${version.org.wildfly.elytron}"
@@ -4548,6 +4800,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=20) "org.wildfly.security",
       Name: (string) (len=27) "wildfly-elytron-http-digest",
       Version: (string) (len=30) "${version.org.wildfly.elytron}"
@@ -4566,6 +4819,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=20) "org.wildfly.security",
       Name: (string) (len=27) "wildfly-elytron-http-spnego",
       Version: (string) (len=30) "${version.org.wildfly.elytron}"
@@ -4584,6 +4838,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=20) "org.wildfly.security",
       Name: (string) (len=25) "wildfly-elytron-http-util",
       Version: (string) (len=30) "${version.org.wildfly.elytron}"
@@ -4602,6 +4857,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=20) "org.wildfly.security",
       Name: (string) (len=21) "wildfly-elytron-realm",
       Version: (string) (len=30) "${version.org.wildfly.elytron}"
@@ -4620,6 +4876,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=20) "org.wildfly.security",
       Name: (string) (len=26) "wildfly-elytron-realm-ldap",
       Version: (string) (len=30) "${version.org.wildfly.elytron}"
@@ -4638,6 +4895,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=20) "org.wildfly.security",
       Name: (string) (len=27) "wildfly-elytron-realm-token",
       Version: (string) (len=30) "${version.org.wildfly.elytron}"
@@ -4656,6 +4914,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=20) "org.wildfly.security",
       Name: (string) (len=27) "wildfly-elytron-sasl-digest",
       Version: (string) (len=30) "${version.org.wildfly.elytron}"
@@ -4674,6 +4933,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=20) "org.wildfly.security",
       Name: (string) (len=29) "wildfly-elytron-sasl-external",
       Version: (string) (len=30) "${version.org.wildfly.elytron}"
@@ -4692,6 +4952,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=20) "org.wildfly.security",
       Name: (string) (len=24) "wildfly-elytron-sasl-gs2",
       Version: (string) (len=30) "${version.org.wildfly.elytron}"
@@ -4710,6 +4971,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=20) "org.wildfly.security",
       Name: (string) (len=27) "wildfly-elytron-sasl-gssapi",
       Version: (string) (len=30) "${version.org.wildfly.elytron}"
@@ -4728,6 +4990,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=20) "org.wildfly.security",
       Name: (string) (len=30) "wildfly-elytron-sasl-localuser",
       Version: (string) (len=30) "${version.org.wildfly.elytron}"
@@ -4746,6 +5009,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=20) "org.wildfly.security",
       Name: (string) (len=27) "wildfly-elytron-sasl-oauth2",
       Version: (string) (len=30) "${version.org.wildfly.elytron}"
@@ -4764,6 +5028,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=20) "org.wildfly.security",
       Name: (string) (len=26) "wildfly-elytron-sasl-plain",
       Version: (string) (len=30) "${version.org.wildfly.elytron}"
@@ -4782,6 +5047,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=20) "org.wildfly.security",
       Name: (string) (len=26) "wildfly-elytron-sasl-scram",
       Version: (string) (len=30) "${version.org.wildfly.elytron}"
@@ -4800,6 +5066,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=20) "org.wildfly.security",
       Name: (string) (len=29) "wildfly-elytron-password-impl",
       Version: (string) (len=30) "${version.org.wildfly.elytron}"
@@ -4818,6 +5085,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=20) "org.wildfly.security",
       Name: (string) (len=19) "wildfly-elytron-ssl",
       Version: (string) (len=30) "${version.org.wildfly.elytron}"
@@ -4836,6 +5104,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=10) "org.xerial",
       Name: (string) (len=11) "sqlite-jdbc",
       Version: (string) (len=22) "${versionx.org.xerial}"
@@ -4854,6 +5123,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=8) "org.yaml",
       Name: (string) (len=9) "snakeyaml",
       Version: (string) (len=30) "${versionx.org.yaml.snakeyaml}"
@@ -4872,6 +5142,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=19) "software.amazon.ion",
       Name: (string) (len=8) "ion-java",
       Version: (string) (len=36) "${versionx.software.amazon.ion.java}"
@@ -4890,6 +5161,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=7) "sun.jdk",
       Name: (string) (len=8) "jconsole",
       Version: (string) (len=28) "${versionx.sun.jdk.jconsole}"
@@ -4908,6 +5180,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=14) "org.infinispan",
       Name: (string) (len=32) "infinispan-component-annotations",
       Version: (string) ""
@@ -4926,6 +5199,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=14) "org.infinispan",
       Name: (string) (len=30) "infinispan-logging-annotations",
       Version: (string) ""
@@ -4944,6 +5218,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=24) "org.apache.logging.log4j",
       Name: (string) (len=10) "log4j-core",
       Version: (string) ""
@@ -4962,6 +5237,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=24) "org.apache.logging.log4j",
       Name: (string) (len=9) "log4j-jul",
       Version: (string) ""
@@ -4980,6 +5256,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=8) "net.jcip",
       Name: (string) (len=16) "jcip-annotations",
       Version: (string) ""
@@ -4998,6 +5275,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=9) "org.jboss",
       Name: (string) (len=29) "jboss-transaction-spi-jakarta",
       Version: (string) ""
@@ -5016,6 +5294,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=22) "org.jboss.narayana.jta",
       Name: (string) (len=12) "narayana-jta",
       Version: (string) ""
@@ -5034,6 +5313,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=17) "org.jboss.logging",
       Name: (string) (len=23) "jboss-logging-processor",
       Version: (string) ""
@@ -5052,6 +5332,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=16) "javax.annotation",
       Name: (string) (len=20) "javax.annotation-api",
       Version: (string) ""
@@ -5070,6 +5351,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=10) "org.jacoco",
       Name: (string) (len=16) "org.jacoco.agent",
       Version: (string) ""
@@ -5088,6 +5370,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=3) "xom",
       Name: (string) (len=3) "xom",
       Version: (string) (len=14) "${version.xom}"
@@ -5106,6 +5389,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=9) "org.antlr",
       Name: (string) (len=5) "antlr",
       Version: (string) (len=17) "${version.antlr3}"
@@ -5124,6 +5408,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=14) "org.apache.ant",
       Name: (string) (len=3) "ant",
       Version: (string) (len=14) "${version.ant}"
@@ -5142,6 +5427,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=14) "org.apache.ant",
       Name: (string) (len=8) "ant-jsch",
       Version: (string) (len=14) "${version.ant}"
@@ -5160,6 +5446,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=19) "org.codehaus.groovy",
       Name: (string) (len=10) "groovy-all",
       Version: (string) (len=17) "${version.groovy}"
@@ -5178,6 +5465,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=19) "net.sourceforge.pmd",
       Name: (string) (len=8) "pmd-core",
       Version: (string) (len=31) "${versionx.net.sourceforge.pmd}"
@@ -5196,6 +5484,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=19) "net.sourceforge.pmd",
       Name: (string) (len=8) "pmd-java",
       Version: (string) (len=31) "${versionx.net.sourceforge.pmd}"
@@ -5214,6 +5503,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=19) "net.sourceforge.pmd",
       Name: (string) (len=14) "pmd-javascript",
       Version: (string) (len=31) "${versionx.net.sourceforge.pmd}"
@@ -5232,6 +5522,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=19) "net.sourceforge.pmd",
       Name: (string) (len=7) "pmd-jsp",
       Version: (string) (len=31) "${versionx.net.sourceforge.pmd}"
@@ -5250,6 +5541,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=20) "com.puppycrawl.tools",
       Name: (string) (len=10) "checkstyle",
       Version: (string) (len=43) "${versionx.com.puppycrawl.tools.checkstyle}"
@@ -5268,6 +5560,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=14) "org.infinispan",
       Name: (string) (len=21) "infinispan-checkstyle",
       Version: (string) (len=18) "${project.version}"
@@ -5286,6 +5579,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=7) "com.sun",
       Name: (string) (len=5) "tools",
       Version: (string) ""
@@ -5304,6 +5598,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=14) "org.apache.ant",
       Name: (string) (len=3) "ant",
       Version: (string) (len=14) "${version.ant}"
@@ -5322,6 +5617,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=11) "ant-contrib",
       Name: (string) (len=11) "ant-contrib",
       Version: (string) (len=22) "${version.ant-contrib}"
@@ -5340,6 +5636,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=14) "org.apache.ant",
       Name: (string) (len=10) "ant-nodeps",
       Version: (string) (len=21) "${version.ant-nodeps}"
@@ -5358,6 +5655,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=5) "junit",
       Name: (string) (len=5) "junit",
       Version: (string) (len=5) "3.8.1"
@@ -5376,6 +5674,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=13) "org.hibernate",
       Name: (string) (len=14) "hibernate-core",
       Version: (string) (len=11) "3.6.3.Final"
@@ -5394,6 +5693,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=13) "org.hibernate",
       Name: (string) (len=9) "hibernate",
       Version: (string) (len=8) "3.2.5.ga"
@@ -5412,6 +5712,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=13) "org.hibernate",
       Name: (string) (len=23) "hibernate-entitymanager",
       Version: (string) (len=8) "3.3.2.GA"
@@ -5430,6 +5731,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=9) "javax.sql",
       Name: (string) (len=11) "jdbc-stdext",
       Version: (string) (len=3) "2.0"
@@ -5448,6 +5750,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=17) "javax.transaction",
       Name: (string) (len=3) "jta",
       Version: (string) (len=6) "1.0.1B"
@@ -5466,6 +5769,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=13) "org.hibernate",
       Name: (string) (len=16) "ejb3-persistence",
       Version: (string) (len=8) "1.0.1.GA"
@@ -5484,6 +5788,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=5) "mysql",
       Name: (string) (len=20) "mysql-connector-java",
       Version: (string) (len=6) "5.1.14"
@@ -5502,6 +5807,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=9) "org.slf4j",
       Name: (string) (len=9) "slf4j-api",
       Version: (string) (len=5) "1.6.1"
@@ -5520,6 +5826,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=9) "org.slf4j",
       Name: (string) (len=16) "log4j-over-slf4j",
       Version: (string) (len=5) "1.6.1"
@@ -5538,6 +5845,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=9) "org.slf4j",
       Name: (string) (len=12) "slf4j-simple",
       Version: (string) (len=5) "1.6.1"
@@ -5556,6 +5864,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=11) "org.mybatis",
       Name: (string) (len=7) "mybatis",
       Version: (string) (len=18) "${mybatis.version}"
@@ -5574,6 +5883,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=11) "org.mybatis",
       Name: (string) (len=14) "mybatis-spring",
       Version: (string) (len=25) "${mybatis-spring.version}"
@@ -5592,6 +5902,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=21) "org.mybatis.scripting",
       Name: (string) (len=18) "mybatis-freemarker",
       Version: (string) (len=29) "${mybatis-freemarker.version}"
@@ -5610,6 +5921,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=21) "org.mybatis.scripting",
       Name: (string) (len=16) "mybatis-velocity",
       Version: (string) (len=27) "${mybatis-velocity.version}"
@@ -5628,6 +5940,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=21) "org.mybatis.scripting",
       Name: (string) (len=17) "mybatis-thymeleaf",
       Version: (string) (len=28) "${mybatis-thymeleaf.version}"
@@ -5646,6 +5959,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=23) "org.mybatis.spring.boot",
       Name: (string) (len=33) "mybatis-spring-boot-autoconfigure",
       Version: (string) (len=14) "2.1.4-SNAPSHOT"
@@ -5664,6 +5978,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=23) "org.mybatis.spring.boot",
       Name: (string) (len=27) "mybatis-spring-boot-starter",
       Version: (string) (len=14) "2.1.4-SNAPSHOT"
@@ -5682,6 +5997,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=23) "org.mybatis.spring.boot",
       Name: (string) (len=38) "mybatis-spring-boot-test-autoconfigure",
       Version: (string) (len=14) "2.1.4-SNAPSHOT"
@@ -5700,6 +6016,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=23) "org.mybatis.spring.boot",
       Name: (string) (len=32) "mybatis-spring-boot-starter-test",
       Version: (string) (len=14) "2.1.4-SNAPSHOT"
@@ -5718,6 +6035,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=24) "org.springframework.boot",
       Name: (string) (len=24) "spring-boot-dependencies",
       Version: (string) (len=22) "${spring-boot.version}"
@@ -5736,6 +6054,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=24) "org.springframework.boot",
       Name: (string) (len=24) "spring-boot-starter-test",
       Version: (string) (len=22) "${spring-boot.version}"
@@ -5754,6 +6073,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=17) "org.junit.jupiter",
       Name: (string) (len=20) "junit-jupiter-engine",
       Version: (string) ""
@@ -5772,6 +6092,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=11) "org.mybatis",
       Name: (string) (len=7) "mybatis",
       Version: (string) (len=18) "${mybatis.version}"
@@ -5790,6 +6111,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=11) "org.mybatis",
       Name: (string) (len=14) "mybatis-spring",
       Version: (string) (len=25) "${mybatis-spring.version}"
@@ -5808,6 +6130,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=21) "org.mybatis.scripting",
       Name: (string) (len=18) "mybatis-freemarker",
       Version: (string) (len=29) "${mybatis-freemarker.version}"
@@ -5826,6 +6149,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=21) "org.mybatis.scripting",
       Name: (string) (len=16) "mybatis-velocity",
       Version: (string) (len=27) "${mybatis-velocity.version}"
@@ -5844,6 +6168,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=21) "org.mybatis.scripting",
       Name: (string) (len=17) "mybatis-thymeleaf",
       Version: (string) (len=28) "${mybatis-thymeleaf.version}"
@@ -5862,6 +6187,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=23) "org.mybatis.spring.boot",
       Name: (string) (len=33) "mybatis-spring-boot-autoconfigure",
       Version: (string) (len=14) "2.1.4-SNAPSHOT"
@@ -5880,6 +6206,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=23) "org.mybatis.spring.boot",
       Name: (string) (len=27) "mybatis-spring-boot-starter",
       Version: (string) (len=14) "2.1.4-SNAPSHOT"
@@ -5898,6 +6225,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=23) "org.mybatis.spring.boot",
       Name: (string) (len=38) "mybatis-spring-boot-test-autoconfigure",
       Version: (string) (len=14) "2.1.4-SNAPSHOT"
@@ -5916,6 +6244,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=23) "org.mybatis.spring.boot",
       Name: (string) (len=32) "mybatis-spring-boot-starter-test",
       Version: (string) (len=14) "2.1.4-SNAPSHOT"
@@ -5934,6 +6263,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=24) "org.springframework.boot",
       Name: (string) (len=24) "spring-boot-dependencies",
       Version: (string) (len=22) "${spring-boot.version}"
@@ -5952,6 +6282,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=24) "org.springframework.boot",
       Name: (string) (len=24) "spring-boot-starter-test",
       Version: (string) (len=22) "${spring-boot.version}"
@@ -5970,6 +6301,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=17) "org.junit.jupiter",
       Name: (string) (len=20) "junit-jupiter-engine",
       Version: (string) ""
