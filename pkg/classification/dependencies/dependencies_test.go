@@ -31,7 +31,7 @@ func TestDependencies(t *testing.T) {
 			},
 			Want: &dependencies.Classification{
 				RecipeMatch: true,
-				RecipeName:  "stripe",
+				RecipeName:  "Stripe",
 			},
 		},
 		{
@@ -47,7 +47,7 @@ func TestDependencies(t *testing.T) {
 			},
 			Want: &dependencies.Classification{
 				RecipeMatch: true,
-				RecipeName:  "postgres",
+				RecipeName:  "PostgreSQL",
 			},
 		},
 		{

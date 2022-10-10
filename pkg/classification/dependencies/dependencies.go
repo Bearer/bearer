@@ -4,7 +4,6 @@ import (
 	"github.com/bearer/curio/pkg/classification/db"
 	"github.com/bearer/curio/pkg/report"
 	"github.com/bearer/curio/pkg/report/dependencies"
-	"github.com/rs/zerolog/log"
 )
 
 type ClassifiedDependency struct {
@@ -41,12 +40,6 @@ func (classifier *Classifier) Classify(data report.Detection) (ClassifiedDepende
 	var classification *Classification
 	for _, recipe := range classifier.config.Recipes {
 		for _, recipePackage := range recipe.Packages {
-			log.Debug().Msgf(
-				"Matching recipe package manager %s against data detector type %s",
-				recipePackage.PackageManager,
-				data.DetectorType,
-			)
-
 			if isRecipeMatch(recipePackage, data) {
 				classification = &Classification{
 					RecipeName:  recipe.Name,
