@@ -11,7 +11,8 @@ type Dependency struct {
 
 // DiscoveredDependency holds a list of dependencies defined in package file
 type DiscoveredDependency struct {
-	Provider     string       `json:"provider"`
-	Language     string       `json:"language"`
-	Dependencies []Dependency `json:"dependencies"`
+	Provider       string       `json:"provider"`
+	Language       string       `json:"language"`
+	PackageManager string       `json:"package_manager`
+	Dependencies   []Dependency `json:"dependencies"`
 }
