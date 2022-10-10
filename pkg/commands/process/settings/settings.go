@@ -1,6 +1,11 @@
 package settings
 
 import (
+	_ "embed"
+
+	"github.com/rs/zerolog/log"
+	"gopkg.in/yaml.v2"
+
 	"github.com/bearer/curio/pkg/flag"
 )
 
@@ -29,4 +34,20 @@ type MetaVar struct {
 	Input  string
 	Output int
 	Regex  string
+}
+
+//go:embed custom_detector.yml
+var customDetectorConfig []byte
+
+func DefaultCustomDetector() CustomDetector {
+	var rules RulesConfig
+
+	err := yaml.Unmarshal(customDetectorConfig, &rules)
+	if err != nil {
+		log.Fatal().Msgf("failed to unmarshal database file %e", err)
+	}
+
+	return CustomDetector{
+		RulesConfig: &rules,
+	}
 }

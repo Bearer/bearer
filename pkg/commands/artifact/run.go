@@ -91,7 +91,8 @@ func (r *runner) scanArtifact(ctx context.Context, opts flag.Options, scanner In
 	reportpath := tmpfile.Create(os.TempDir(), ".jsonl")
 
 	balancer := balancer.New(settings.Config{
-		Worker: opts.WorkerOptions,
+		Worker:         opts.WorkerOptions,
+		CustomDetector: settings.DefaultCustomDetector(),
 	})
 	task := balancer.ScheduleTask(work.ProcessRequest{
 		Repository: work.Repository{
@@ -108,7 +109,7 @@ func (r *runner) scanArtifact(ctx context.Context, opts flag.Options, scanner In
 		return types.Report{}, result.Error
 	}
 
-	log.Debug().Msgf("report is %s", reportpath)
+	log.Debug().Msgf("report location: %s", reportpath)
 
 	return types.Report{
 		Path: reportpath,
