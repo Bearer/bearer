@@ -42,8 +42,8 @@ type FlagGroup interface {
 }
 
 type Flags struct {
-	RepoFlagGroup *RepoFlagGroup
-	// ReportFlagGroup *ReportFlagGroup
+	RepoFlagGroup    *RepoFlagGroup
+	ReportFlagGroup  *ReportFlagGroup
 	ProcessFlagGroup *ProcessFlagGroup
 	ScanFlagGroup    *ScanFlagGroup
 	WorkerFlagGroup  *WorkerFlagGroup
@@ -172,6 +172,10 @@ func (f *Flags) groups() []FlagGroup {
 	if f.WorkerFlagGroup != nil {
 		groups = append(groups, f.WorkerFlagGroup)
 	}
+	if f.ReportFlagGroup != nil {
+		groups = append(groups, f.ReportFlagGroup)
+	}
+
 	return groups
 }
 
@@ -233,12 +237,9 @@ func (f *Flags) ToOptions(appVersion string, args []string, globalFlags *GlobalF
 		opts.RepoOptions = f.RepoFlagGroup.ToOptions()
 	}
 
-	// if f.ReportFlagGroup != nil {
-	// 	opts.ReportOptions, err = f.ReportFlagGroup.ToOptions(output)
-	// 	if err != nil {
-	// 		return Options{}, xerrors.Errorf("report flag error: %w", err)
-	// 	}
-	// }
+	if f.ReportFlagGroup != nil {
+		opts.ReportOptions = f.ReportFlagGroup.ToOptions(output)
+	}
 
 	if f.WorkerFlagGroup != nil {
 		opts.WorkerOptions = f.WorkerFlagGroup.ToOptions()

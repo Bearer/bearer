@@ -3,11 +3,6 @@ package flag
 import (
 	"fmt"
 	"io"
-	"os"
-
-	"golang.org/x/xerrors"
-
-	"github.com/bearer/curio/pkg/report/output"
 )
 
 const (
@@ -30,17 +25,17 @@ var (
 
 type Severity int
 
-// e.g. config yaml:
-//
-//	format: table
-//	dependency-tree: true
-//	severity: HIGH,CRITICAL
+var (
+	FormatJSON      = "json"
+	FormatJSONLines = "jsonlines"
+)
+
 var (
 	FormatFlag = Flag{
 		Name:       "format",
 		ConfigName: "format",
 		Shorthand:  "f",
-		Value:      output.TypeJSONLines,
+		Value:      FormatJSONLines,
 		Usage:      "format (table, json, jsonline)",
 	}
 	// ReportFormatFlag = Flag{
@@ -49,12 +44,12 @@ var (
 	// 	Value:      "all",
 	// 	Usage:      "specify a report format for the output. (all,summary)",
 	// }
-	IgnoreFileFlag = Flag{
-		Name:       "ignorefile",
-		ConfigName: "ignorefile",
-		Value:      "",
-		Usage:      "specify .curioignore file",
-	}
+	// IgnoreFileFlag = Flag{
+	// 	Name:       "ignorefile",
+	// 	ConfigName: "ignorefile",
+	// 	Value:      "",
+	// 	Usage:      "specify .curioignore file",
+	// }
 	// IgnorePolicyFlag = Flag{
 	// 	Name:       "ignore-policy",
 	// 	ConfigName: "ignore-policy",
@@ -127,24 +122,13 @@ func (f *ReportFlagGroup) Flags() []*Flag {
 	}
 }
 
-func (f *ReportFlagGroup) ToOptions(out io.Writer) (ReportOptions, error) {
-	format := getString(f.Format)
-	output := getString(f.Output)
-
-	if output != "" {
-		var err error
-		if out, err = os.Create(output); err != nil {
-			return ReportOptions{}, xerrors.Errorf("failed to create an output file: %w", err)
-		}
-	}
-
+func (f *ReportFlagGroup) ToOptions(out io.Writer) ReportOptions {
 	return ReportOptions{
-		Format: format,
-		// ReportFormat:   getString(f.ReportFormat),
+		Format:     getString(f.Format),
 		IgnoreFile: getString(f.IgnoreFile),
 		ExitCode:   getInt(f.ExitCode),
 		Output:     out,
-	}, nil
+	}
 }
 
 // func splitSeverity(severity []string) []Severity {

@@ -23,9 +23,7 @@ func NewScanner(ar types.Artifact) Scanner {
 
 // ScanArtifact scans the artifacts and returns results
 func (s Scanner) ScanArtifact(ctx context.Context, options types.ScanOptions) (types.Report, error) {
-	return types.Report{
-		Artifact: s.artifact,
-	}, nil
+	return types.Report{}, nil
 }
 
 func Scan(rootDir string, FilesToScan []string, blamer blamer.Blamer, outputPath string) error {
