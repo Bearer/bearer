@@ -1,0 +1,47 @@
+rules:
+  corruptible_columns_detector:
+    patterns:
+      - |
+        class $CLASS_NAME < Db1Record
+          include Corruptible
+
+          def corruptible_attributes_by_type
+          {
+            CorruptibleType::$ANYTHING => %i[<$ARGUMENT>],
+          }
+          end
+        end
+    param_parenting: true
+    languages:
+      - ruby
+  # detect_ruby_logger:
+  #   patterns:
+  #     - |
+  #       log.info(<$ARGUMENT>)
+  #   languages:
+  #     - ruby
+  # detect_rails_logger:
+  #   patterns:
+  #     - |
+  #       Rails.logger.info(<$ARGUMENT>)
+  #     - |
+  #       Rails.logger.warning(<$ARGUMENT>)
+  #   languages:
+  #     - ruby
+  corruptible_function_detector:
+    patterns:
+      - CREATE OR REPLACE FUNCTION $FUNCTION_NAME RETURNS trigger AS $SCRIPT
+    metavars:
+      regex_match:
+        input: $SCRIPT
+        regex: NEW.(\w+)
+        output: 1
+    param_parenting: true
+    languages:
+      - sql
+  trigger_detector:
+    patterns:
+      - CREATE TRIGGER $ANTYHING BEFORE INSERT OR UPDATE ON $TABLE_NAME FOR EACH ROW EXECUTE PROCEDURE $FUNCTION_NAME;
+    param_parenting: true
+    languages:
+      - sql

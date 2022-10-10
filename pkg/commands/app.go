@@ -84,8 +84,6 @@ func NewProcessingServerCommand() *cobra.Command {
 		ProcessFlagGroup: flag.NewProcessGroup(),
 	}
 
-	log.Debug().Msgf("args are %#v", os.Args)
-
 	cmd := &cobra.Command{
 		Use:   "processing-worker",
 		Short: "start scan processing server",
