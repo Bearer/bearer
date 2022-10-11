@@ -1,0 +1,1 @@
+{"metadata":{"version":"1.0"},"name":"Exoscale Cloud APIs","type":"external_service","urls":[],"packages":[{"name":"github.com/exoscale/egoscale","group":null,"package_manager":"go"}]}

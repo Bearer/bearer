@@ -1,0 +1,1 @@
+{"metadata":{"version":"1.0"},"name":"HyperSQL","type":"data_store","urls":[],"packages":[{"name":"hsqldb","group":"org.hsqldb","package_manager":"maven"}]}

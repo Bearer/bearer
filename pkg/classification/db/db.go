@@ -1,13 +1,14 @@
 package db
 
 import (
-	_ "embed"
+	"embed"
 	"encoding/json"
+	"fmt"
 	"log"
 )
 
-//go:embed recipes.json
-var Raw []byte
+//go:embed recipes
+var recipesDir embed.FS
 
 type Recipe struct {
 	URLS     []string  `json:"urls"`
@@ -28,16 +29,43 @@ var RecipeTypeDataStore = RecipeType("data_store")
 var RecipeTypeService = RecipeType("service")
 
 func Default() []Recipe {
-	return Unmarshal(Raw)
-}
+	recipes := []Recipe{}
 
-func Unmarshal(rawBytes []byte) []Recipe {
-	var db []Recipe
-
-	err := json.Unmarshal(rawBytes, &db)
+	files, err := recipesDir.ReadDir("recipes")
 	if err != nil {
-		log.Fatalf("failed to unmarshall db %e", err)
+		log.Fatalln(err)
 	}
 
-	return db
+	for _, file := range files {
+		val, err := recipesDir.ReadFile("recipes/" + file.Name())
+		if err != nil {
+			fmt.Println(err)
+			continue
+		}
+
+		recipe, err := Unmarshal(val)
+		if err != nil {
+			fmt.Println(err)
+			continue
+		}
+
+		fmt.Printf("%+v\n", recipe)
+
+		recipes = append(recipes, *recipe)
+	}
+
+	return recipes
+}
+
+func Unmarshal(rawBytes []byte) (*Recipe, error) {
+	var db Recipe
+
+	err := json.Unmarshal(rawBytes, &db)
+
+	if err != nil {
+		log.Fatalf("failed to unmarshal db %e", err)
+		return nil, err
+	}
+
+	return &db, nil
 }

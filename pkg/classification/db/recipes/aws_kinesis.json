@@ -1,0 +1,1 @@
+{"metadata":{"version":"1.0"},"name":"AWS Kinesis","type":"internal_service","urls":[],"packages":[{"name":"aws-sdk-kinesis","group":null,"package_manager":"rubygems"},{"name":"aws-kinesisanalytics-runtime","group":"com.amazonaws","package_manager":"maven"}]}

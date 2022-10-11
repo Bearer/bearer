@@ -1,0 +1,1 @@
+{"metadata":{"version":"1.0"},"name":"Gitea","type":"external_service","urls":[],"packages":[{"name":"code.gitea.io/sdk/gitea","group":null,"package_manager":"go"}]}

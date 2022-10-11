@@ -1,0 +1,1 @@
+{"metadata":{"version":"1.0"},"name":"OpenTok","type":"external_service","urls":[],"packages":[{"name":"opentok","group":null,"package_manager":"rubygems"},{"name":"opentok-react-native","group":null,"package_manager":"npm"}]}

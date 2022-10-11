@@ -1,0 +1,1 @@
+{"metadata":{"version":"1.0"},"name":"Azure Cognitive Search","type":"data_store","urls":[],"packages":[{"name":"Microsoft.Azure.Search","group":"","package_manager":"nuget"}]}

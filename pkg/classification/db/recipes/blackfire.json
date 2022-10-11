@@ -1,0 +1,1 @@
+{"metadata":{"version":"1.0"},"name":"Blackfire","type":"external_service","urls":[],"packages":[{"name":"blackfire/php-sdk","group":null,"package_manager":"packagist"}]}

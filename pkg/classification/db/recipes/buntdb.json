@@ -1,0 +1,1 @@
+{"metadata":{"version":"1.0"},"name":"BuntDB","type":"data_store","urls":[],"packages":[{"name":"github.com/tidwall/buntdb","group":null,"package_manager":"go"}]}
