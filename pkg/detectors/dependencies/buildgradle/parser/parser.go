@@ -32,6 +32,7 @@ func Discover(file *file.FileInfo) (report *depsbase.DiscoveredDependency) {
 	report = &depsbase.DiscoveredDependency{}
 	report.Provider = "gradleparser"
 	report.Language = "Java"
+	report.PackageManager = "maven"
 
 	fileBytes, err := os.ReadFile(file.AbsolutePath)
 	if err != nil {

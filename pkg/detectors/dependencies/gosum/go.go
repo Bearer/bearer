@@ -16,6 +16,7 @@ func Discover(file *file.FileInfo) (report *depsbase.DiscoveredDependency) {
 	report = &depsbase.DiscoveredDependency{}
 	report.Provider = "gosum"
 	report.Language = "Go"
+	report.PackageManager = "go"
 
 	fileBytes, err := os.ReadFile(file.AbsolutePath)
 	if err != nil {

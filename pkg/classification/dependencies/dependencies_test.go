@@ -13,35 +13,62 @@ import (
 type testCase struct {
 	Name  string
 	Input report.Detection
-	Want  dependencies.Classification
+	Want  *dependencies.Classification
 }
 
-func TestSchema(t *testing.T) {
+func TestDependencies(t *testing.T) {
 	tests := []testCase{
 		{
-			Name: "simple path",
+			Name: "Dependency match",
 			Input: report.Detection{
 				Value: reportdependencies.Dependency{
-					Group:   "",
-					Name:    "stripe",
-					Version: "v1.1.1",
+					Group:          "",
+					Name:           "stripe",
+					Version:        "v1.1.1",
+					PackageManager: "rubygems",
 				},
-				Type:         report.TypeDependency,
-				DetectorType: reportdependencies.DetectorGemFileLock,
+				Type: report.TypeDependency,
 			},
-			Want: dependencies.Classification{
+			Want: &dependencies.Classification{
 				RecipeMatch: true,
-				RecipeName:  "stripe",
+				RecipeName:  "Stripe",
 			},
+		},
+		{
+			Name: "Dependency match with group (Java case)",
+			Input: report.Detection{
+				Value: reportdependencies.Dependency{
+					Group:          "org.postgresql",
+					Name:           "postgresql",
+					Version:        "v2.1.1",
+					PackageManager: "maven",
+				},
+				Type: report.TypeDependency,
+			},
+			Want: &dependencies.Classification{
+				RecipeMatch: true,
+				RecipeName:  "PostgreSQL",
+			},
+		},
+		{
+			Name: "No dependency match",
+			Input: report.Detection{
+				Value: reportdependencies.Dependency{
+					Group:          "",
+					Name:           "my-non-matching-dependency",
+					Version:        "v2.1.1",
+					PackageManager: "rubygems",
+				},
+				Type: report.TypeDependency,
+			},
+			Want: nil,
 		},
 	}
 
-	classifier := dependencies.New(dependencies.Config{})
+	classifier := dependencies.NewDefault()
 
 	for _, testCase := range tests {
 		t.Run(testCase.Name, func(t *testing.T) {
-			t.Skip("dependencies not implemented")
-
 			output, err := classifier.Classify(testCase.Input)
 			if err != nil {
 				t.Errorf("classifier returned error %s", err)

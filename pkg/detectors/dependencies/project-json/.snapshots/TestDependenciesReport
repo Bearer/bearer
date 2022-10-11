@@ -12,6 +12,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "nuget",
       Group: (string) "",
       Name: (string) (len=5) "xunit",
       Version: (string) (len=21) "2.2.0-beta2-build3300"
@@ -30,6 +31,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "nuget",
       Group: (string) "",
       Name: (string) (len=17) "dotnet-test-xunit",
       Version: (string) (len=24) "2.2.0-preview2-build1029"
@@ -48,6 +50,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "nuget",
       Group: (string) "",
       Name: (string) (len=15) "CSVOnlineEditor",
       Version: (string) (len=7) "1.0.0-*"

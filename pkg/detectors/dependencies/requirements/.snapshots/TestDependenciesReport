@@ -12,6 +12,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=4) "pypi",
       Group: (string) "",
       Name: (string) (len=5) "Babel",
       Version: (string) (len=5) "0.9.5"
@@ -30,6 +31,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=4) "pypi",
       Group: (string) "",
       Name: (string) (len=8) "CherryPy",
       Version: (string) (len=7) "unknown"
@@ -48,6 +50,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=4) "pypi",
       Group: (string) "",
       Name: (string) (len=12) "Creoleparser",
       Version: (string) (len=5) "0.7.1"
@@ -66,6 +69,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=4) "pypi",
       Group: (string) "",
       Name: (string) (len=6) "Genshi",
       Version: (string) (len=5) "0.5.1"

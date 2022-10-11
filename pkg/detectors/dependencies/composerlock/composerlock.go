@@ -28,13 +28,14 @@ var queryDependencies = parser.QueryMustCompile(language, `
                 value: (string) @param_version
             )
         )
-    )]) 
+    )])
 )`)
 
 func Discover(f *file.FileInfo) (report *depsbase.DiscoveredDependency) {
 	report = &depsbase.DiscoveredDependency{}
 	report.Provider = "composerlock"
 	report.Language = "PHP"
+	report.PackageManager = "packagist"
 	tree, err := parser.ParseFile(f, f.Path, javascript.GetLanguage())
 	if err != nil {
 		log.Error().Msgf("%s: there was an error while parsing the composer lock file: %s", report.Provider, err.Error())

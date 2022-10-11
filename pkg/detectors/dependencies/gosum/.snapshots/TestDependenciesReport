@@ -12,6 +12,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=2) "go",
       Group: (string) "",
       Name: (string) (len=26) "github.com/BurntSushi/toml",
       Version: (string) (len=6) "v0.3.1"
@@ -30,6 +31,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=2) "go",
       Group: (string) "",
       Name: (string) (len=31) "github.com/bradleyjkemp/cupaloy",
       Version: (string) (len=6) "v2.3.0"
@@ -48,6 +50,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=2) "go",
       Group: (string) "",
       Name: (string) (len=32) "github.com/coreos/go-systemd/v22",
       Version: (string) (len=7) "v22.3.2"
@@ -66,6 +69,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=2) "go",
       Group: (string) "",
       Name: (string) (len=26) "github.com/davecgh/go-spew",
       Version: (string) (len=6) "v1.1.0"
@@ -84,6 +88,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=2) "go",
       Group: (string) "",
       Name: (string) (len=26) "github.com/davecgh/go-spew",
       Version: (string) (len=6) "v1.1.1"
@@ -102,6 +107,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=2) "go",
       Group: (string) "",
       Name: (string) (len=29) "github.com/getkin/kin-openapi",
       Version: (string) (len=7) "v0.66.0"
@@ -120,6 +126,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=2) "go",
       Group: (string) "",
       Name: (string) (len=22) "github.com/ghodss/yaml",
       Version: (string) (len=6) "v1.0.0"
@@ -138,6 +145,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=2) "go",
       Group: (string) "",
       Name: (string) (len=29) "github.com/go-enry/go-enry/v2",
       Version: (string) (len=6) "v2.7.1"
@@ -156,6 +164,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=2) "go",
       Group: (string) "",
       Name: (string) (len=31) "github.com/go-enry/go-oniguruma",
       Version: (string) (len=6) "v1.2.1"
@@ -174,6 +183,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=2) "go",
       Group: (string) "",
       Name: (string) (len=33) "github.com/go-openapi/jsonpointer",
       Version: (string) (len=7) "v0.19.5"
@@ -192,6 +202,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=2) "go",
       Group: (string) "",
       Name: (string) (len=26) "github.com/go-openapi/swag",
       Version: (string) (len=7) "v0.19.5"
@@ -210,6 +221,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=2) "go",
       Group: (string) "",
       Name: (string) (len=25) "github.com/godbus/dbus/v5",
       Version: (string) (len=6) "v5.0.4"
@@ -228,6 +240,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=2) "go",
       Group: (string) "",
       Name: (string) (len=22) "github.com/gorilla/mux",
       Version: (string) (len=6) "v1.8.0"
@@ -246,6 +259,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=2) "go",
       Group: (string) "",
       Name: (string) (len=20) "github.com/kr/pretty",
       Version: (string) (len=6) "v0.1.0"
@@ -264,6 +278,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=2) "go",
       Group: (string) "",
       Name: (string) (len=17) "github.com/kr/pty",
       Version: (string) (len=6) "v1.1.1"
@@ -282,6 +297,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=2) "go",
       Group: (string) "",
       Name: (string) (len=18) "github.com/kr/text",
       Version: (string) (len=6) "v0.1.0"
@@ -300,6 +316,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=2) "go",
       Group: (string) "",
       Name: (string) (len=32) "github.com/magiconair/properties",
       Version: (string) (len=6) "v1.8.5"
@@ -318,6 +335,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=2) "go",
       Group: (string) "",
       Name: (string) (len=26) "github.com/mailru/easyjson",
       Version: (string) (len=34) "v0.0.0-20190614124828-94de47d64c63"
@@ -336,6 +354,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=2) "go",
       Group: (string) "",
       Name: (string) (len=26) "github.com/mailru/easyjson",
       Version: (string) (len=34) "v0.0.0-20190626092158-b2ccc519800e"
@@ -354,6 +373,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=2) "go",
       Group: (string) "",
       Name: (string) (len=21) "github.com/pkg/errors",
       Version: (string) (len=6) "v0.9.1"
@@ -372,6 +392,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=2) "go",
       Group: (string) "",
       Name: (string) (len=29) "github.com/pmezard/go-difflib",
       Version: (string) (len=6) "v1.0.0"
@@ -390,6 +411,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=2) "go",
       Group: (string) "",
       Name: (string) (len=17) "github.com/rs/xid",
       Version: (string) (len=6) "v1.2.1"
@@ -408,6 +430,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=2) "go",
       Group: (string) "",
       Name: (string) (len=21) "github.com/rs/zerolog",
       Version: (string) (len=7) "v1.23.0"
@@ -426,6 +449,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=2) "go",
       Group: (string) "",
       Name: (string) (len=32) "github.com/sabhiram/go-gitignore",
       Version: (string) (len=34) "v0.0.0-20201211210132-54b8a0bf510f"
@@ -444,6 +468,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=2) "go",
       Group: (string) "",
       Name: (string) (len=33) "github.com/smacker/go-tree-sitter",
       Version: (string) (len=34) "v0.0.0-20210922091224-7d35f700adf0"
@@ -462,6 +487,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=2) "go",
       Group: (string) "",
       Name: (string) (len=33) "github.com/smacker/go-tree-sitter",
       Version: (string) (len=34) "v0.0.0-20211116060328-db7fde9b5e82"
@@ -480,6 +506,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=2) "go",
       Group: (string) "",
       Name: (string) (len=24) "github.com/stretchr/objx",
       Version: (string) (len=6) "v0.1.0"
@@ -498,6 +525,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=2) "go",
       Group: (string) "",
       Name: (string) (len=27) "github.com/stretchr/testify",
       Version: (string) (len=6) "v1.3.0"
@@ -516,6 +544,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=2) "go",
       Group: (string) "",
       Name: (string) (len=27) "github.com/stretchr/testify",
       Version: (string) (len=6) "v1.4.0"
@@ -534,6 +563,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=2) "go",
       Group: (string) "",
       Name: (string) (len=27) "github.com/stretchr/testify",
       Version: (string) (len=6) "v1.5.1"
@@ -552,6 +582,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=2) "go",
       Group: (string) "",
       Name: (string) (len=27) "github.com/stretchr/testify",
       Version: (string) (len=6) "v1.6.1"
@@ -570,6 +601,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=2) "go",
       Group: (string) "",
       Name: (string) (len=27) "github.com/stretchr/testify",
       Version: (string) (len=6) "v1.7.0"
@@ -588,6 +620,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=2) "go",
       Group: (string) "",
       Name: (string) (len=24) "github.com/yuin/goldmark",
       Version: (string) (len=6) "v1.2.1"
@@ -606,6 +639,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=2) "go",
       Group: (string) "",
       Name: (string) (len=19) "golang.org/x/crypto",
       Version: (string) (len=34) "v0.0.0-20190308221718-c2843e01d9a2"
@@ -624,6 +658,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=2) "go",
       Group: (string) "",
       Name: (string) (len=19) "golang.org/x/crypto",
       Version: (string) (len=34) "v0.0.0-20191011191535-87dc89f01550"
@@ -642,6 +677,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=2) "go",
       Group: (string) "",
       Name: (string) (len=19) "golang.org/x/crypto",
       Version: (string) (len=34) "v0.0.0-20200622213623-75b288015ac9"
@@ -660,6 +696,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=2) "go",
       Group: (string) "",
       Name: (string) (len=16) "golang.org/x/mod",
       Version: (string) (len=6) "v0.3.0"
@@ -678,6 +715,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=2) "go",
       Group: (string) "",
       Name: (string) (len=16) "golang.org/x/mod",
       Version: (string) (len=6) "v0.4.2"
@@ -696,6 +734,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=2) "go",
       Group: (string) "",
       Name: (string) (len=16) "golang.org/x/net",
       Version: (string) (len=34) "v0.0.0-20190404232315-eb5bcb51f2a3"
@@ -714,6 +753,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=2) "go",
       Group: (string) "",
       Name: (string) (len=16) "golang.org/x/net",
       Version: (string) (len=34) "v0.0.0-20190620200207-3b0461eec859"
@@ -732,6 +772,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=2) "go",
       Group: (string) "",
       Name: (string) (len=16) "golang.org/x/net",
       Version: (string) (len=34) "v0.0.0-20201021035429-f5854403a974"
@@ -750,6 +791,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=2) "go",
       Group: (string) "",
       Name: (string) (len=16) "golang.org/x/net",
       Version: (string) (len=34) "v0.0.0-20210614182718-04defd469f4e"
@@ -768,6 +810,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=2) "go",
       Group: (string) "",
       Name: (string) (len=17) "golang.org/x/sync",
       Version: (string) (len=34) "v0.0.0-20190423024810-112230192c58"
@@ -786,6 +829,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=2) "go",
       Group: (string) "",
       Name: (string) (len=17) "golang.org/x/sync",
       Version: (string) (len=34) "v0.0.0-20201020160332-67f06af15bc9"
@@ -804,6 +848,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=2) "go",
       Group: (string) "",
       Name: (string) (len=16) "golang.org/x/sys",
       Version: (string) (len=34) "v0.0.0-20190215142949-d0b11bdaac8a"
@@ -822,6 +867,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=2) "go",
       Group: (string) "",
       Name: (string) (len=16) "golang.org/x/sys",
       Version: (string) (len=34) "v0.0.0-20190412213103-97732733099d"
@@ -840,6 +886,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=2) "go",
       Group: (string) "",
       Name: (string) (len=16) "golang.org/x/sys",
       Version: (string) (len=34) "v0.0.0-20200930185726-fdedc70b468f"
@@ -858,6 +905,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=2) "go",
       Group: (string) "",
       Name: (string) (len=16) "golang.org/x/sys",
       Version: (string) (len=34) "v0.0.0-20201119102817-f84b799fce68"
@@ -876,6 +924,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=2) "go",
       Group: (string) "",
       Name: (string) (len=16) "golang.org/x/sys",
       Version: (string) (len=34) "v0.0.0-20210119212857-b64e53b001e4"
@@ -894,6 +943,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=2) "go",
       Group: (string) "",
       Name: (string) (len=16) "golang.org/x/sys",
       Version: (string) (len=34) "v0.0.0-20210423082822-04245dca01da"
@@ -912,6 +962,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=2) "go",
       Group: (string) "",
       Name: (string) (len=17) "golang.org/x/term",
       Version: (string) (len=34) "v0.0.0-20201126162022-7de9c90e9dd1"
@@ -930,6 +981,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=2) "go",
       Group: (string) "",
       Name: (string) (len=17) "golang.org/x/text",
       Version: (string) (len=6) "v0.3.0"
@@ -948,6 +1000,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=2) "go",
       Group: (string) "",
       Name: (string) (len=17) "golang.org/x/text",
       Version: (string) (len=6) "v0.3.3"
@@ -966,6 +1019,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=2) "go",
       Group: (string) "",
       Name: (string) (len=17) "golang.org/x/text",
       Version: (string) (len=6) "v0.3.6"
@@ -984,6 +1038,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=2) "go",
       Group: (string) "",
       Name: (string) (len=18) "golang.org/x/tools",
       Version: (string) (len=34) "v0.0.0-20180917221912-90fa682c2a6e"
@@ -1002,6 +1057,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=2) "go",
       Group: (string) "",
       Name: (string) (len=18) "golang.org/x/tools",
       Version: (string) (len=34) "v0.0.0-20191119224855-298f0cb1881e"
@@ -1020,6 +1076,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=2) "go",
       Group: (string) "",
       Name: (string) (len=18) "golang.org/x/tools",
       Version: (string) (len=6) "v0.1.0"
@@ -1038,6 +1095,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=2) "go",
       Group: (string) "",
       Name: (string) (len=20) "golang.org/x/xerrors",
       Version: (string) (len=34) "v0.0.0-20190717185122-a985d3407aa7"
@@ -1056,6 +1114,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=2) "go",
       Group: (string) "",
       Name: (string) (len=20) "golang.org/x/xerrors",
       Version: (string) (len=34) "v0.0.0-20191011141410-1b5146add898"
@@ -1074,6 +1133,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=2) "go",
       Group: (string) "",
       Name: (string) (len=20) "golang.org/x/xerrors",
       Version: (string) (len=34) "v0.0.0-20200804184101-5ec99f83aff1"
@@ -1092,6 +1152,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=2) "go",
       Group: (string) "",
       Name: (string) (len=17) "gopkg.in/check.v1",
       Version: (string) (len=34) "v0.0.0-20161208181325-20d25e280405"
@@ -1110,6 +1171,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=2) "go",
       Group: (string) "",
       Name: (string) (len=17) "gopkg.in/check.v1",
       Version: (string) (len=34) "v1.0.0-20180628173108-788fd7840127"
@@ -1128,6 +1190,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=2) "go",
       Group: (string) "",
       Name: (string) (len=16) "gopkg.in/yaml.v2",
       Version: (string) (len=6) "v2.2.2"
@@ -1146,6 +1209,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=2) "go",
       Group: (string) "",
       Name: (string) (len=16) "gopkg.in/yaml.v2",
       Version: (string) (len=6) "v2.2.8"
@@ -1164,6 +1228,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=2) "go",
       Group: (string) "",
       Name: (string) (len=16) "gopkg.in/yaml.v2",
       Version: (string) (len=6) "v2.3.0"
@@ -1182,6 +1247,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=2) "go",
       Group: (string) "",
       Name: (string) (len=16) "gopkg.in/yaml.v2",
       Version: (string) (len=6) "v2.4.0"
@@ -1200,6 +1266,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=2) "go",
       Group: (string) "",
       Name: (string) (len=16) "gopkg.in/yaml.v3",
       Version: (string) (len=34) "v3.0.0-20200313102051-9f266ea9e77c"
@@ -1218,6 +1285,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=2) "go",
       Group: (string) "",
       Name: (string) (len=16) "gopkg.in/yaml.v3",
       Version: (string) (len=34) "v3.0.0-20210107192922-496545a6307b"

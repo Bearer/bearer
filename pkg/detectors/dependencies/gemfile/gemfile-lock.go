@@ -44,6 +44,7 @@ func Discover(file *file.FileInfo) (report *depsbase.DiscoveredDependency) {
 	report = &depsbase.DiscoveredDependency{}
 	report.Provider = "gemfile-lock"
 	report.Language = "Ruby"
+	report.PackageManager = "rubygems"
 
 	fileBytes, err := os.ReadFile(file.AbsolutePath)
 	if err != nil {

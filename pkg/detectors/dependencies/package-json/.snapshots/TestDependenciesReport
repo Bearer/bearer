@@ -12,6 +12,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=3) "npm",
       Group: (string) "",
       Name: (string) (len=26) "@apideck/better-ajv-errors",
       Version: (string) (len=6) "^0.3.1"
@@ -30,6 +31,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=3) "npm",
       Group: (string) "",
       Name: (string) (len=11) "@babel/core",
       Version: (string) (len=7) "^7.11.1"
@@ -48,6 +50,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=3) "npm",
       Group: (string) "",
       Name: (string) (len=17) "@babel/preset-env",
       Version: (string) (len=7) "^7.11.0"
@@ -66,6 +69,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=3) "npm",
       Group: (string) "",
       Name: (string) (len=14) "@babel/runtime",
       Version: (string) (len=7) "^7.11.2"
@@ -84,6 +88,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=3) "npm",
       Group: (string) "",
       Name: (string) (len=20) "@rollup/plugin-babel",
       Version: (string) (len=6) "^5.2.0"
@@ -102,6 +107,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=3) "npm",
       Group: (string) "",
       Name: (string) (len=27) "@rollup/plugin-node-resolve",
       Version: (string) (len=7) "^11.2.1"
@@ -120,6 +126,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=3) "npm",
       Group: (string) "",
       Name: (string) (len=22) "@rollup/plugin-replace",
       Version: (string) (len=6) "^2.4.1"
@@ -138,6 +145,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=3) "npm",
       Group: (string) "",
       Name: (string) (len=36) "@surma/rollup-plugin-off-main-thread",
       Version: (string) (len=6) "^2.2.3"
@@ -156,6 +164,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=3) "npm",
       Group: (string) "",
       Name: (string) (len=3) "ajv",
       Version: (string) (len=6) "^8.6.0"
@@ -174,6 +183,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=3) "npm",
       Group: (string) "",
       Name: (string) (len=11) "common-tags",
       Version: (string) (len=6) "^1.8.0"
@@ -192,6 +202,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=3) "npm",
       Group: (string) "",
       Name: (string) (len=26) "fast-json-stable-stringify",
       Version: (string) (len=6) "^2.1.0"
@@ -210,6 +221,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=3) "npm",
       Group: (string) "",
       Name: (string) (len=8) "fs-extra",
       Version: (string) (len=6) "^9.0.1"
@@ -228,6 +240,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=3) "npm",
       Group: (string) "",
       Name: (string) (len=4) "glob",
       Version: (string) (len=6) "^7.1.6"
@@ -246,6 +259,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=3) "npm",
       Group: (string) "",
       Name: (string) (len=6) "lodash",
       Version: (string) (len=8) "^4.17.20"
@@ -264,6 +278,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=3) "npm",
       Group: (string) "",
       Name: (string) (len=12) "pretty-bytes",
       Version: (string) (len=6) "^5.3.0"
@@ -282,6 +297,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=3) "npm",
       Group: (string) "",
       Name: (string) (len=6) "rollup",
       Version: (string) (len=7) "^2.43.1"
@@ -300,6 +316,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=3) "npm",
       Group: (string) "",
       Name: (string) (len=20) "rollup-plugin-terser",
       Version: (string) (len=6) "^7.0.0"
@@ -318,6 +335,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=3) "npm",
       Group: (string) "",
       Name: (string) (len=10) "source-map",
       Version: (string) (len=13) "^0.8.0-beta.0"
@@ -336,6 +354,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=3) "npm",
       Group: (string) "",
       Name: (string) (len=14) "source-map-url",
       Version: (string) (len=6) "^0.4.0"
@@ -354,6 +373,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=3) "npm",
       Group: (string) "",
       Name: (string) (len=16) "stringify-object",
       Version: (string) (len=6) "^3.3.0"
@@ -372,6 +392,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=3) "npm",
       Group: (string) "",
       Name: (string) (len=14) "strip-comments",
       Version: (string) (len=6) "^2.0.1"
@@ -390,6 +411,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=3) "npm",
       Group: (string) "",
       Name: (string) (len=5) "tempy",
       Version: (string) (len=6) "^0.6.0"
@@ -408,6 +430,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=3) "npm",
       Group: (string) "",
       Name: (string) (len=5) "upath",
       Version: (string) (len=6) "^1.2.0"
@@ -426,6 +449,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=3) "npm",
       Group: (string) "",
       Name: (string) (len=23) "workbox-background-sync",
       Version: (string) (len=5) "6.4.2"
@@ -444,6 +468,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=3) "npm",
       Group: (string) "",
       Name: (string) (len=24) "workbox-broadcast-update",
       Version: (string) (len=5) "6.4.2"
@@ -462,6 +487,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=3) "npm",
       Group: (string) "",
       Name: (string) (len=26) "workbox-cacheable-response",
       Version: (string) (len=5) "6.4.2"
@@ -480,6 +506,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=3) "npm",
       Group: (string) "",
       Name: (string) (len=12) "workbox-core",
       Version: (string) (len=5) "6.4.2"
@@ -498,6 +525,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=3) "npm",
       Group: (string) "",
       Name: (string) (len=18) "workbox-expiration",
       Version: (string) (len=5) "6.4.2"
@@ -516,6 +544,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=3) "npm",
       Group: (string) "",
       Name: (string) (len=24) "workbox-google-analytics",
       Version: (string) (len=5) "6.4.2"
@@ -534,6 +563,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=3) "npm",
       Group: (string) "",
       Name: (string) (len=26) "workbox-navigation-preload",
       Version: (string) (len=5) "6.4.2"
@@ -552,6 +582,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=3) "npm",
       Group: (string) "",
       Name: (string) (len=18) "workbox-precaching",
       Version: (string) (len=5) "6.4.2"
@@ -570,6 +601,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=3) "npm",
       Group: (string) "",
       Name: (string) (len=22) "workbox-range-requests",
       Version: (string) (len=5) "6.4.2"
@@ -588,6 +620,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=3) "npm",
       Group: (string) "",
       Name: (string) (len=15) "workbox-recipes",
       Version: (string) (len=5) "6.4.2"
@@ -606,6 +639,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=3) "npm",
       Group: (string) "",
       Name: (string) (len=15) "workbox-routing",
       Version: (string) (len=5) "6.4.2"
@@ -624,6 +658,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=3) "npm",
       Group: (string) "",
       Name: (string) (len=18) "workbox-strategies",
       Version: (string) (len=5) "6.4.2"
@@ -642,6 +677,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=3) "npm",
       Group: (string) "",
       Name: (string) (len=15) "workbox-streams",
       Version: (string) (len=5) "6.4.2"
@@ -660,6 +696,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=3) "npm",
       Group: (string) "",
       Name: (string) (len=10) "workbox-sw",
       Version: (string) (len=5) "6.4.2"
@@ -678,6 +715,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=3) "npm",
       Group: (string) "",
       Name: (string) (len=14) "workbox-window",
       Version: (string) (len=5) "6.4.2"

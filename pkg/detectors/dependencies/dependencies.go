@@ -98,9 +98,10 @@ func discoverDependency(report report.Report, file *file.FileInfo, discover func
 		columnNumber := int(dep.Column)
 		lineNumber := int(dep.Line)
 		report.AddDependency(detectors.Type(result.Provider), dependencies.Dependency{
-			Group:   dep.Group,
-			Name:    dep.Name,
-			Version: dep.Version,
+			Group:          dep.Group,
+			Name:           dep.Name,
+			Version:        dep.Version,
+			PackageManager: result.PackageManager,
 		}, source.Source{
 			Language:     file.Language,
 			LanguageType: file.LanguageTypeString(),
