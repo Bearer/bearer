@@ -12,6 +12,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=18) "androidx.appcompat",
       Name: (string) (len=9) "appcompat",
       Version: (string) (len=5) "1.0.2"
@@ -30,6 +31,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=5) "maven",
       Group: (string) (len=25) "androidx.constraintlayout",
       Name: (string) (len=16) "constraintlayout",
       Version: (string) (len=5) "1.1.3"

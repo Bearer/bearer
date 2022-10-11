@@ -17,6 +17,7 @@ func Discover(f *file.FileInfo) (report *depsbase.DiscoveredDependency) {
 	report = &depsbase.DiscoveredDependency{}
 	report.Provider = "requirements.txt"
 	report.Language = "Python"
+	report.PackageManager = "pypi"
 
 	fileBytes, err := os.ReadFile(f.AbsolutePath)
 	if err != nil {

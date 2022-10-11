@@ -81,6 +81,7 @@ func Discover(f *file.FileInfo) (report *depsbase.DiscoveredDependency) {
 	report = &depsbase.DiscoveredDependency{}
 	report.Provider = "ivy"
 	report.Language = "Java"
+	report.PackageManager = "maven"
 
 	bytes, err := os.ReadFile(f.AbsolutePath)
 	if err != nil {

@@ -35,6 +35,7 @@ func Discover(f *file.FileInfo) (report *depsbase.DiscoveredDependency) {
 	report = &depsbase.DiscoveredDependency{}
 	report.Provider = "mvnplugin"
 	report.Language = "Java"
+	report.PackageManager = "maven"
 	tree, err := parser.ParseFile(f, f.Path, language)
 	if err != nil {
 		log.Error().Msgf("%s: there was an error while parsing the file: %s", report.Provider, err.Error())

@@ -81,6 +81,7 @@ func Discover(file *file.FileInfo) (report *depsbase.DiscoveredDependency) {
 	report = &depsbase.DiscoveredDependency{}
 	report.Provider = "paket-dependencies"
 	report.Language = "C#"
+	report.PackageManager = "nuget"
 
 	result := document{}
 
