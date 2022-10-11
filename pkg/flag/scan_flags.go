@@ -5,6 +5,12 @@ import (
 )
 
 var (
+	SkipConfigFlag = Flag{
+		Name:       "skip",
+		ConfigName: "scan.skip",
+		Value:      "",
+		Usage:      "specify the path to file containg patterns of files to skip when scanning (in .gitignore fashion)",
+	}
 	SkipDirsFlag = Flag{
 		Name:       "skip-dirs",
 		ConfigName: "scan.skip-dirs",
@@ -38,14 +44,16 @@ var (
 )
 
 type ScanFlagGroup struct {
-	SkipDirs  *Flag
-	SkipFiles *Flag
+	SkipConfigFlag *Flag
+	SkipDirs       *Flag
+	SkipFiles      *Flag
 	// SecurityChecks *Flag
 	FilePatterns *Flag
 }
 
 type ScanOptions struct {
 	Target         string
+	SkipConfig     string
 	SkipDirs       []string
 	SkipFiles      []string
 	SecurityChecks []string
@@ -54,8 +62,9 @@ type ScanOptions struct {
 
 func NewScanFlagGroup() *ScanFlagGroup {
 	return &ScanFlagGroup{
-		SkipDirs:  &SkipDirsFlag,
-		SkipFiles: &SkipFilesFlag,
+		SkipConfigFlag: &SkipConfigFlag,
+		SkipDirs:       &SkipDirsFlag,
+		SkipFiles:      &SkipFilesFlag,
 		// SecurityChecks: &SecurityChecksFlag,
 		FilePatterns: &FilePatternsFlag,
 	}
@@ -66,7 +75,7 @@ func (f *ScanFlagGroup) Name() string {
 }
 
 func (f *ScanFlagGroup) Flags() []*Flag {
-	return []*Flag{f.SkipDirs, f.SkipFiles, f.FilePatterns}
+	return []*Flag{f.SkipConfigFlag, f.SkipDirs, f.SkipFiles, f.FilePatterns}
 }
 
 func (f *ScanFlagGroup) ToOptions(args []string) (ScanOptions, error) {
@@ -80,9 +89,10 @@ func (f *ScanFlagGroup) ToOptions(args []string) (ScanOptions, error) {
 	// }
 
 	return ScanOptions{
-		Target:    target,
-		SkipDirs:  getStringSlice(f.SkipDirs),
-		SkipFiles: getStringSlice(f.SkipFiles),
+		Target:     target,
+		SkipConfig: getString(f.SkipConfigFlag),
+		SkipDirs:   getStringSlice(f.SkipDirs),
+		SkipFiles:  getStringSlice(f.SkipFiles),
 		// SecurityChecks: securityChecks,
 		FilePatterns: getStringSlice(f.FilePatterns),
 	}, nil

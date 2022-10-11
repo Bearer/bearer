@@ -43,14 +43,5 @@ func Scan(rootDir string, FilesToScan []string, blamer blamer.Blamer, outputPath
 		return err
 	}
 
-	fileInfo, err := file.Stat()
-	if err != nil {
-		return err
-	}
-
-	if fileInfo.Size() == 0 {
-		rep.AddFillerLine()
-	}
-
 	return nil
 }
