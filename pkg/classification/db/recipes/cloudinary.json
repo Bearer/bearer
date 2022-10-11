@@ -1,0 +1,1 @@
+{"metadata":{"version":"1.0"},"name":"Cloudinary","type":"external_service","urls":[],"packages":[{"name":"cloudinary","group":null,"package_manager":"rubygems"},{"name":"cloudinary","group":null,"package_manager":"npm"}]}

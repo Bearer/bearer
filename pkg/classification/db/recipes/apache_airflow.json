@@ -1,0 +1,1 @@
+{"metadata":{"version":"1.0"},"name":"Apache Airflow","type":"internal_service","urls":[],"packages":[{"name":"airflow[celery]","group":null,"package_manager":"pypi"}]}

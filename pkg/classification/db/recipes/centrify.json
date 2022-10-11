@@ -1,0 +1,1 @@
+{"metadata":{"version":"1.0"},"name":"Centrify","type":"external_service","urls":[],"packages":[{"name":"github.com/centrify/cloud-golang-sdk","group":null,"package_manager":"go"}]}

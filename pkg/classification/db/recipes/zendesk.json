@@ -1,0 +1,1 @@
+{"metadata":{"version":"1.0"},"name":"Zendesk","type":"external_service","urls":[],"packages":[{"name":"zendesk/zendesk_api_client_php","group":null,"package_manager":"packagist"},{"name":"zendesk_api","group":null,"package_manager":"rubygems"},{"name":"node-zendesk","group":null,"package_manager":"npm"},{"name":"Zenpy","group":null,"package_manager":"pypi"}]}

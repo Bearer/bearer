@@ -1,0 +1,1 @@
+{"metadata":{"version":"1.0"},"name":"Scaleway Cloud APIs","type":"external_service","urls":[],"packages":[{"name":"github.com/scaleway/scaleway-sdk-go","group":null,"package_manager":"go"},{"name":"github.com/nicolai86/scaleway-sdk","group":null,"package_manager":"go"},{"name":"scaleway","group":null,"package_manager":"npm"}]}

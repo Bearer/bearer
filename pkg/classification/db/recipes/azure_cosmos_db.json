@@ -1,0 +1,1 @@
+{"metadata":{"version":"1.0"},"name":"Azure Cosmos DB","type":"data_store","urls":[],"packages":[{"name":"Microsoft.Azure.DocumentDB.Core","group":"","package_manager":"nuget"}]}

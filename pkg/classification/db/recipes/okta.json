@@ -1,0 +1,1 @@
+{"metadata":{"version":"1.0"},"name":"Okta","type":"external_service","urls":[],"packages":[{"name":"github.com/chrismalek/oktasdk-go","group":null,"package_manager":"go"},{"name":"github.com/okta/okta-sdk-golang","group":null,"package_manager":"go"}]}

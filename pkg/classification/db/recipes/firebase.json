@@ -1,0 +1,1 @@
+{"metadata":{"version":"1.0"},"name":"Firebase","type":"data_store","urls":[],"packages":[{"name":"firebase-core","group":null,"package_manager":"npm"},{"name":"@react-native-firebase/messaging","group":null,"package_manager":"npm"},{"name":"@react-native-firebase/app","group":null,"package_manager":"npm"}]}

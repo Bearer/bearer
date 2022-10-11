@@ -1,0 +1,1 @@
+{"metadata":{"version":"1.0"},"name":"Twilio","type":"external_service","urls":[],"packages":[{"name":"twilio/sdk","group":null,"package_manager":"packagist"},{"name":"twilio","group":null,"package_manager":"pypi"},{"name":"twilio-node","group":null,"package_manager":"npm"},{"name":"twilio-ruby","group":null,"package_manager":"rubygems"}]}
