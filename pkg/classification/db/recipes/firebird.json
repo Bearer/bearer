@@ -1,0 +1,1 @@
+{"metadata":{"version":"1.0"},"name":"Firebird","type":"data_store","urls":[],"packages":[{"name":"github.com/nakagami/firebirdsql","group":null,"package_manager":"go"}]}

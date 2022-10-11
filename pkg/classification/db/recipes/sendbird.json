@@ -1,0 +1,1 @@
+{"metadata":{"version":"1.0"},"name":"SendBird","type":"external_service","urls":[],"packages":[{"name":"sendbird","group":"","package_manager":"npm"}]}

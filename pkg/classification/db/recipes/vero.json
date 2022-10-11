@@ -1,0 +1,1 @@
+{"metadata":{"version":"1.0"},"name":"Vero","type":"external_service","urls":[],"packages":[{"name":"docplanner/vero-php","group":"","package_manager":"packagist"},{"name":"getvero/vero-php","group":"","package_manager":"packagist"}]}

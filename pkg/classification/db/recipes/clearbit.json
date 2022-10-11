@@ -1,0 +1,1 @@
+{"metadata":{"version":"1.0"},"name":"Clearbit","type":"external_service","urls":[],"packages":[{"name":"clearbit","group":null,"package_manager":"pypi"},{"name":"clearbit","group":null,"package_manager":"npm"},{"name":"clearbit","group":null,"package_manager":"rubygems"},{"name":"github.com/clearbit/clearbit-go","group":null,"package_manager":"go"}]}

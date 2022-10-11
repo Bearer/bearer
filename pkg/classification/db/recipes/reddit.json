@@ -1,0 +1,1 @@
+{"metadata":{"version":"1.0"},"name":"Reddit","type":"external_service","urls":[],"packages":[{"name":"github.com/caarlos0/go-reddit/v3","group":null,"package_manager":"go"}]}

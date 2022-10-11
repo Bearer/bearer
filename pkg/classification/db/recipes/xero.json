@@ -1,0 +1,1 @@
+{"metadata":{"version":"1.0"},"name":"Xero","type":"external_service","urls":[],"packages":[{"name":"xeroapi/xero-php-oauth2","group":null,"package_manager":"packagist"},{"name":"xero-python","group":null,"package_manager":"pypi"},{"name":"xero-node","group":null,"package_manager":"npm"},{"name":"xero-ruby","group":null,"package_manager":"rubygems"}]}

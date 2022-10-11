@@ -1,0 +1,1 @@
+{"metadata":{"version":"1.0"},"name":"Vonage","type":"external_service","urls":[],"packages":[{"name":"nexmo/client-core","group":"","package_manager":"packagist"},{"name":"nexmo/client","group":"","package_manager":"packagist"},{"name":"@opentok/client","group":null,"package_manager":"npm"}]}

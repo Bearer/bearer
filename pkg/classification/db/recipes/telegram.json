@@ -1,0 +1,1 @@
+{"metadata":{"version":"1.0"},"name":"Telegram","type":"external_service","urls":[],"packages":[{"name":"python-telegram-bot","group":null,"package_manager":"pypi"},{"name":"github.com/go-telegram-bot-api/telegram-bot-api","group":null,"package_manager":"go"}]}

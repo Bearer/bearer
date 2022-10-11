@@ -1,0 +1,1 @@
+{"metadata":{"version":"1.0"},"name":"Atlassian Cloud","type":"external_service","urls":[],"packages":[{"name":"github.com/andygrunwald/go-jira","group":null,"package_manager":"go"},{"name":"atlassian-jwt","group":null,"package_manager":"rubygems"}]}
