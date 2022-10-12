@@ -1,0 +1,26 @@
+before:
+  hooks:
+    - go mod tidy
+    - go generate ./...
+builds:
+  - id: "linux-amd"
+    main: ./cmd/curio
+    binary: curio
+    env:
+      - CGO_ENABLED=1
+    goos:
+      - linux
+    goarch:
+      - 386
+      - amd64
+archives:
+checksum:
+  name_template: "checksums.txt"
+snapshot:
+  name_template: "{{ incpatch .Version }}-next"
+changelog:
+  sort: asc
+  filters:
+    exclude:
+      - "^docs:"
+      - "^test:"
