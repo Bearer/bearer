@@ -20,7 +20,36 @@ type testCase struct {
 func TestInterface(t *testing.T) {
 	tests := []testCase{
 		{
-			Name: "simple path",
+			Name: "when there is a matching recipe",
+			Input: report.Detection{
+				Value: reportinterfaces.Interface{
+					Type: reportinterfaces.TypeURL,
+					Value: &values.Value{
+						Parts: []values.Part{
+							&values.String{
+								Type:  values.PartTypeString,
+								Value: "https://",
+							},
+							&values.String{
+								Type:  values.PartTypeString,
+								Value: "api.stripe.com",
+							},
+						},
+					},
+				},
+			},
+			Want: &interfaces.Classification{
+				URL:         "https://api.stripe.com",
+				RecipeName:  "Stripe",
+				RecipeMatch: true,
+				Decision: interfaces.ClassificationDecision{
+					State:  interfaces.Valid,
+					Reason: "recipe_match",
+				},
+			},
+		},
+		{
+			Name: "when there is a matching recipe with a wildcard",
 			Input: report.Detection{
 				Value: reportinterfaces.Interface{
 					Type: reportinterfaces.TypeURL,
@@ -32,18 +61,19 @@ func TestInterface(t *testing.T) {
 							},
 							&values.String{
 								Type:  values.PartTypeString,
-								Value: "api.stripe.com",
+								Value: "*.stripe.com",
 							},
 						},
 					},
 				},
 			},
 			Want: &interfaces.Classification{
+				URL:         "http://*.stripe.com",
 				RecipeName:  "Stripe",
 				RecipeMatch: true,
 				Decision: interfaces.ClassificationDecision{
-					State:  interfaces.Valid,
-					Reason: "asdf",
+					State:  interfaces.Potential,
+					Reason: "recipe_match_with_wildcard",
 				},
 			},
 		},
@@ -66,7 +96,7 @@ func TestInterface(t *testing.T) {
 					},
 				},
 			},
-			Want: nil,
+			Want: &interfaces.Classification{},
 		},
 	}
 
@@ -74,8 +104,6 @@ func TestInterface(t *testing.T) {
 
 	for _, testCase := range tests {
 		t.Run(testCase.Name, func(t *testing.T) {
-			t.Skip("interfaces not implemented")
-
 			output, err := classifier.Classify(testCase.Input)
 			if err != nil {
 				t.Errorf("classifier returned error %s", err)
@@ -88,6 +116,7 @@ func TestInterface(t *testing.T) {
 
 type recipeMatchTestCase struct {
 	Name         string
+	RecipeName   string
 	DetectionURL string
 	RecipeURLs   []string
 	Want         *interfaces.RecipeURLMatch
@@ -98,11 +127,13 @@ func TestFindMatchingRecipeUrl(t *testing.T) {
 		{
 			Name:         "when multiple recipes match",
 			DetectionURL: "https://api.eu-west.example.com",
+			RecipeName:   "Example API",
 			RecipeURLs: []string{
 				"https://api.*.example.com",
 				"https://api.eu-west.example.com",
 			},
 			Want: &interfaces.RecipeURLMatch{
+				RecipeName:       "Example API",
 				RecipeURL:        "https://api.eu-west.example.com",
 				DetectionURLPart: "https://api.eu-west.example.com",
 			},
@@ -110,6 +141,7 @@ func TestFindMatchingRecipeUrl(t *testing.T) {
 		{
 			Name:         "when no recipes match",
 			DetectionURL: "http://no-match.example.com",
+			RecipeName:   "Example API",
 			RecipeURLs: []string{
 				"https://api.*.example.com",
 				"https://api.eu-west.example.com",
@@ -119,11 +151,13 @@ func TestFindMatchingRecipeUrl(t *testing.T) {
 		{
 			Name:         "when multiple recipes with the same url length match and one has a wildcard",
 			DetectionURL: "https://api.1.example.com",
+			RecipeName:   "Example API",
 			RecipeURLs: []string{
 				"https://api.1.example.com",
 				"https://api.*.example.com",
 			},
 			Want: &interfaces.RecipeURLMatch{
+				RecipeName:       "Example API",
 				RecipeURL:        "https://api.1.example.com",
 				DetectionURLPart: "https://api.1.example.com",
 			},
@@ -135,6 +169,7 @@ func TestFindMatchingRecipeUrl(t *testing.T) {
 			classifier := interfaces.New(interfaces.Config{
 				Recipes: []db.Recipe{
 					{
+						Name: testCase.RecipeName,
 						URLS: testCase.RecipeURLs,
 					},
 				},

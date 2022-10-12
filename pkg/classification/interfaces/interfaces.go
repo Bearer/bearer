@@ -5,6 +5,7 @@ import (
 
 	"github.com/bearer/curio/pkg/classification/db"
 	"github.com/bearer/curio/pkg/report"
+	"github.com/bearer/curio/pkg/report/interfaces"
 	"github.com/bearer/curio/pkg/util/url_matcher"
 )
 
@@ -27,6 +28,7 @@ type ClassificationDecision struct {
 }
 
 type Classification struct {
+	URL         string
 	RecipeMatch bool
 	RecipeName  string
 	Decision    ClassificationDecision
@@ -43,6 +45,7 @@ type Config struct {
 type RecipeURLMatch struct {
 	DetectionURLPart string
 	RecipeURL        string
+	RecipeName       string
 }
 
 func New(config Config) *Classifier {
@@ -58,7 +61,45 @@ func NewDefault() *Classifier {
 }
 
 func (classifier *Classifier) Classify(data report.Detection) (*ClassifiedInterface, error) {
-	return nil, nil
+	var classifiedInterface *ClassifiedInterface
+	var classificationDecision ClassificationDecision
+
+	// detected url, with unknown parts replaced with * wildcards
+	value := data.Value.(interfaces.Interface).Value.ToString()
+	recipeMatch, err := classifier.FindMatchingRecipeUrl(value)
+	if err != nil {
+		return classifiedInterface, err
+	}
+
+	if recipeMatch != nil {
+		if strings.Contains(recipeMatch.DetectionURLPart, "*") {
+			classificationDecision = ClassificationDecision{
+				State:  Potential,
+				Reason: "recipe_match_with_wildcard",
+			}
+		} else {
+			classificationDecision = ClassificationDecision{
+				State:  Valid,
+				Reason: "recipe_match",
+			}
+		}
+
+		return &ClassifiedInterface{
+			Detection: &data,
+			Classification: &Classification{
+				URL:         recipeMatch.DetectionURLPart,
+				RecipeMatch: true,
+				RecipeName:  recipeMatch.RecipeName,
+				Decision:    classificationDecision,
+			},
+		}, nil
+	}
+
+	// todo: handle other URL cases (internal, invalid subdomains, etc)
+	return &ClassifiedInterface{
+		Detection:      &data,
+		Classification: &Classification{},
+	}, nil
 }
 
 func (classifier *Classifier) FindMatchingRecipeUrl(detectionURL string) (*RecipeURLMatch, error) {
@@ -92,6 +133,7 @@ func (classifier *Classifier) FindMatchingRecipeUrl(detectionURL string) (*Recip
 			recipeURLMatch = &RecipeURLMatch{
 				DetectionURLPart: match,
 				RecipeURL:        recipeURL,
+				RecipeName:       recipe.Name,
 			}
 		}
 	}
