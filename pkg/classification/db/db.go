@@ -49,8 +49,6 @@ func Default() []Recipe {
 			continue
 		}
 
-		fmt.Printf("%+v\n", recipe)
-
 		recipes = append(recipes, *recipe)
 	}
 
