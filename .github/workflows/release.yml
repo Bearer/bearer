@@ -6,6 +6,8 @@ on:
 
 permissions:
   contents: read
+  packages: write
+
 jobs:
   linux-amd64-release:
     name: release-linux
@@ -27,6 +29,8 @@ jobs:
           distribution: goreleaser
           version: latest
           args: release -f ./goreleaser/linux.yaml
+         env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   linux-arm64-release:
     name: release-macos
@@ -46,3 +50,5 @@ jobs:
           distribution: goreleaser
           version: latest
           args: release -f ./goreleaser/mac.yaml
+         env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
