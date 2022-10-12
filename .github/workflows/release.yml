@@ -96,8 +96,8 @@ jobs:
           cat ./linux/curio*checksums.txt >> checksums.txt
           rm ./darwin/curio*checksums.txt
           rm ./linux/curio*checksums.txt
-          rm -R -- ./darwin/*/
-          rm -R -- ./linux/*/
+          rm -R -- darwin/*/*
+          rm -R -- linux/*/*
       - run: ls -LR ./curio-build
       - name: Release
         uses: goreleaser/goreleaser-action@v3
