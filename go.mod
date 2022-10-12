@@ -36,6 +36,7 @@ require (
 	github.com/rivo/uniseg v0.2.0 // indirect
 	github.com/ssoroka/slice v0.0.0-20220402005549-78f0cea3df8b // indirect
 	github.com/struCoder/pidusage v0.2.1 // indirect
+	github.com/weppos/publicsuffix-go v0.20.0 // indirect
 	golang.org/x/sync v0.0.0-20220722155255-886fb9371eb4 // indirect
 	gopkg.in/check.v1 v1.0.0-20201130134442-10cb98267c6c // indirect
 )
