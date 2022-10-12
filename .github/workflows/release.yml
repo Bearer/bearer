@@ -10,8 +10,8 @@ permissions:
   issues: write
 
 jobs:
-  linux-amd64-release:
-    name: release-linux
+  build-linux:
+    name: build-linux
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -30,13 +30,18 @@ jobs:
         with:
           distribution: goreleaser
           version: latest
-          args: release -f ./goreleaser/linux.yaml
+          args: release --skip-publish -f ./goreleaser/linux.yaml
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Upload
+        uses: actions/upload-artifact@v3
+        with:
+          name: curio-linux
+          path: dist/curio*
 
-  linux-arm64-release:
-    name: release-macos
-    runs-on: macos-latest
+  build-darwin:
+    name: build-darwin
+    runs-on: darwin-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -52,6 +57,44 @@ jobs:
         with:
           distribution: goreleaser
           version: latest
-          args: release -f ./goreleaser/mac.yaml
+          args: release --skip-publish -f ./goreleaser/darwin.yaml
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Upload
+        uses: actions/upload-artifact@v3
+        with:
+          name: curio-darwin
+          path: dist/curio*
+
+  publish:
+    needs: [build-darwin, build-linux]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Make directories
+        run: |
+          mkdir -p ./curio-build/linux
+          mkdir -p ./curio-build/darwin
+      - name: Download linux binaries
+        uses: actions/download-artifact@v3
+        with:
+          name: curio-linux
+          path: ./curio-build/linux
+      - name: Download darwin binaries
+        uses: actions/download-artifact@v3
+        with:
+          name: curio-darwin
+          path: ./curio-build/darwin
+      - name: Merge checksum file
+        run: |
+          cd ./curio-build
+          cat ./darwin/curio*checksums.txt >> checksums.txt
+          cat ./linux/curio*checksums.txt >> checksums.txt
+          rm ./darwin/curio*checksums.txt
+          rm ./linux/curio*checksums.txt
+      - name: Release
+        uses: goreleaser/goreleaser-action@v3
+        with:
+          args: release --config ./goreleaser/release.yaml
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
