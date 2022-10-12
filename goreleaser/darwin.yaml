@@ -3,7 +3,8 @@ before:
     - go mod tidy
     - go generate ./...
 builds:
-  - main: ./cmd/curio
+  - id: "darwin"
+    main: ./cmd/curio
     binary: curio
     env:
       - CGO_ENABLED=1
@@ -12,7 +13,6 @@ builds:
     goarch:
       - arm64
       - amd64
-      - 386
 snapshot:
   name_template: "{{ incpatch .Version }}-next"
 changelog:
