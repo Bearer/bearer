@@ -3,7 +3,7 @@ before:
     - go mod tidy
     - go generate ./...
 builds:
-  - id: "linux-amd"
+  - id: "linux"
     main: ./cmd/curio
     binary: curio
     env:
@@ -13,9 +13,6 @@ builds:
     goarch:
       - 386
       - amd64
-archives:
-checksum:
-  name_template: "checksums.txt"
 snapshot:
   name_template: "{{ incpatch .Version }}-next"
 changelog:
