@@ -13,9 +13,6 @@ builds:
     goarch:
       - 386
       - amd64
-archives:
-checksum:
-  name_template: "curio{{ incpatch .Version }}checksums.txt"
 snapshot:
   name_template: "{{ incpatch .Version }}-next"
 changelog:
