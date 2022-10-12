@@ -89,7 +89,7 @@ func NewProcessingServerCommand() *cobra.Command {
 		Short: "start scan processing server",
 		Args:  cobra.NoArgs,
 		RunE: func(cmd *cobra.Command, args []string) error {
-			log.Debug().Msgf("started scann processing")
+			log.Debug().Msgf("started scan processing")
 			if err := flags.Bind(cmd); err != nil {
 				return fmt.Errorf("flag bind error: %w", err)
 			}
