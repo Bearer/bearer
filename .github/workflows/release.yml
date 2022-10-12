@@ -29,7 +29,7 @@ jobs:
           distribution: goreleaser
           version: latest
           args: release -f ./goreleaser/linux.yaml
-         env:
+        env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   linux-arm64-release:
@@ -50,5 +50,5 @@ jobs:
           distribution: goreleaser
           version: latest
           args: release -f ./goreleaser/mac.yaml
-         env:
+        env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
