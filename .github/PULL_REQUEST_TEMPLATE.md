@@ -6,11 +6,11 @@
 -->
 <!-- Closes some existing issue
 - Close #AAA
-<!-- Refrences some existing PR
+<!-- References some existing PR
 - #CCC
 -->
 
 ## Checklist
-- [ ] I've added test coverage that shows my fix or feature works as expected
+- [ ] I've added test coverage that shows my fix or feature works as expected.
 - [ ] I've updated or added documentation if required.
-- [ ] I've included usage information in the descripiton if cli behaviour was updated or added.
+- [ ] I've included usage information in the description if CLI behavior was updated or added.
