@@ -88,6 +88,7 @@ jobs:
         with:
           name: curio-darwin
           path: ./curio-build/darwin
+      - run: ls -LR ./curio-build
       - name: Merge checksum file
         run: |
           cd ./curio-build
@@ -101,3 +102,4 @@ jobs:
           args: release --config ./goreleaser/release.yaml
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - run: ls -LR ./dist
