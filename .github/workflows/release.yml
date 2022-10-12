@@ -1,0 +1,48 @@
+name: release
+on:
+  push:
+    tags:
+      - "*"
+
+permissions:
+  contents: read
+jobs:
+  linux-amd64-release:
+    name: release-linux
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Set up Go
+        uses: actions/setup-go@v3
+        with:
+          go-version: 1.18
+      - name: Install dependencies
+        run: sudo apt-get update && sudo apt-get install -y gcc-multilib g++-multilib
+      - name: Run GoReleaser
+        uses: goreleaser/goreleaser-action@v3
+        with:
+          distribution: goreleaser
+          version: latest
+          args: release -f ./goreleaser/linux.yaml
+
+  linux-arm64-release:
+    name: release-macos
+    runs-on: macos-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Set up Go
+        uses: actions/setup-go@v3
+        with:
+          go-version: 1.18
+      - name: Run GoReleaser
+        uses: goreleaser/goreleaser-action@v3
+        with:
+          distribution: goreleaser
+          version: latest
+          args: release -f ./goreleaser/mac.yaml
