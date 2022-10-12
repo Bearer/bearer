@@ -41,7 +41,7 @@ jobs:
 
   build-darwin:
     name: build-darwin
-    runs-on: darwin-latest
+    runs-on: macos-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v3
