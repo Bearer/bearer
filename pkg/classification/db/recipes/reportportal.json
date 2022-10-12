@@ -1,0 +1,1 @@
+{"metadata":{"version":"1.0"},"name":"ReportPortal","type":"external_service","urls":[],"packages":[{"name":"@reportportal/client-javascript","group":null,"package_manager":"npm"}]}

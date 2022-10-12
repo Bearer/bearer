@@ -1,0 +1,1 @@
+{"metadata":{"version":"1.0"},"name":"Ambassador","type":"external_service","urls":[],"packages":[{"name":"github.com/datawire/ambassador","group":null,"package_manager":"go"}]}

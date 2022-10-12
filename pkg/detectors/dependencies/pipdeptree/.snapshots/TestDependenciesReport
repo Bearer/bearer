@@ -12,6 +12,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=4) "pypi",
       Group: (string) "",
       Name: (string) (len=8) "docutils",
       Version: (string) (len=4) "0.11"
@@ -30,6 +31,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=4) "pypi",
       Group: (string) "",
       Name: (string) (len=6) "django",
       Version: (string) (len=6) "1.4.12"
@@ -48,6 +50,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=4) "pypi",
       Group: (string) "",
       Name: (string) (len=8) "markdown",
       Version: (string) (len=3) "2.4"
@@ -66,6 +69,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=4) "pypi",
       Group: (string) "",
       Name: (string) (len=19) "django-registration",
       Version: (string) (len=3) "0.8"
@@ -84,6 +88,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=4) "pypi",
       Group: (string) "",
       Name: (string) (len=4) "nose",
       Version: (string) (len=5) "1.3.7"
@@ -102,6 +107,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=4) "pypi",
       Group: (string) "",
       Name: (string) (len=6) "django",
       Version: (string) (len=6) "1.4.12"
@@ -120,6 +126,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=4) "pypi",
       Group: (string) "",
       Name: (string) (len=11) "django-nose",
       Version: (string) (len=3) "1.2"
@@ -138,6 +145,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=4) "pypi",
       Group: (string) "",
       Name: (string) (len=8) "coverage",
       Version: (string) (len=5) "4.4.2"
@@ -156,6 +164,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=4) "pypi",
       Group: (string) "",
       Name: (string) (len=4) "nose",
       Version: (string) (len=5) "1.3.7"
@@ -174,6 +183,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=4) "pypi",
       Group: (string) "",
       Name: (string) (len=3) "six",
       Version: (string) (len=6) "1.11.0"
@@ -192,6 +202,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=4) "pypi",
       Group: (string) "",
       Name: (string) (len=12) "webencodings",
       Version: (string) (len=5) "0.5.1"
@@ -210,6 +221,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=4) "pypi",
       Group: (string) "",
       Name: (string) (len=8) "html5lib",
       Version: (string) (len=5) "1.0.1"
@@ -228,6 +240,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=4) "pypi",
       Group: (string) "",
       Name: (string) (len=3) "pip",
       Version: (string) (len=5) "9.0.1"
@@ -246,6 +259,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=4) "pypi",
       Group: (string) "",
       Name: (string) (len=10) "pipdeptree",
       Version: (string) (len=6) "0.10.1"
@@ -264,6 +278,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=4) "pypi",
       Group: (string) "",
       Name: (string) (len=3) "six",
       Version: (string) (len=6) "1.11.0"
@@ -282,6 +297,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=4) "pypi",
       Group: (string) "",
       Name: (string) (len=3) "six",
       Version: (string) (len=6) "1.11.0"
@@ -300,6 +316,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=4) "pypi",
       Group: (string) "",
       Name: (string) (len=8) "html5lib",
       Version: (string) (len=5) "1.0.1"
@@ -318,6 +335,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=4) "pypi",
       Group: (string) "",
       Name: (string) (len=6) "bleach",
       Version: (string) (len=3) "1.4"
@@ -336,6 +354,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=4) "pypi",
       Group: (string) "",
       Name: (string) (len=11) "smartypants",
       Version: (string) (len=5) "1.8.3"
@@ -354,6 +373,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=4) "pypi",
       Group: (string) "",
       Name: (string) (len=10) "setuptools",
       Version: (string) (len=6) "38.2.4"
@@ -372,6 +392,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=4) "pypi",
       Group: (string) "",
       Name: (string) (len=5) "wheel",
       Version: (string) (len=6) "0.30.0"
@@ -390,6 +411,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=4) "pypi",
       Group: (string) "",
       Name: (string) (len=8) "sqlparse",
       Version: (string) (len=5) "0.2.4"
@@ -408,6 +430,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=4) "pypi",
       Group: (string) "",
       Name: (string) (len=10) "virtualenv",
       Version: (string) (len=6) "15.1.0"
@@ -426,6 +449,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=4) "pypi",
       Group: (string) "",
       Name: (string) (len=5) "south",
       Version: (string) (len=5) "0.8.4"
@@ -444,6 +468,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=4) "pypi",
       Group: (string) "",
       Name: (string) (len=12) "webencodings",
       Version: (string) (len=5) "0.5.1"
@@ -462,6 +487,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=4) "pypi",
       Group: (string) "",
       Name: (string) (len=8) "psycopg2",
       Version: (string) (len=7) "2.7.3.2"
@@ -480,6 +506,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=4) "pypi",
       Group: (string) "",
       Name: (string) (len=3) "pip",
       Version: (string) (len=5) "9.0.1"
@@ -498,6 +525,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=4) "pypi",
       Group: (string) "",
       Name: (string) (len=6) "django",
       Version: (string) (len=6) "1.4.12"
@@ -516,6 +544,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=4) "pypi",
       Group: (string) "",
       Name: (string) (len=8) "sqlparse",
       Version: (string) (len=5) "0.2.4"
@@ -534,6 +563,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=4) "pypi",
       Group: (string) "",
       Name: (string) (len=20) "django-debug-toolbar",
       Version: (string) (len=4) "0.11"
@@ -552,6 +582,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=4) "pypi",
       Group: (string) "",
       Name: (string) (len=6) "django",
       Version: (string) (len=6) "1.4.12"
@@ -570,6 +601,7 @@
       Text: (*string)(<nil>)
     },
     Value: (dependencies.Dependency) {
+      PackageManager: (string) (len=4) "pypi",
       Group: (string) "",
       Name: (string) (len=13) "django-secure",
       Version: (string) (len=3) "1.0"

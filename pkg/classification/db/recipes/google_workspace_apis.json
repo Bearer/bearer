@@ -1,0 +1,1 @@
+{"metadata":{"version":"1.0"},"name":"Google Workspace APIs","type":"external_service","urls":[],"packages":[{"name":"omniauth-google-oauth2","group":null,"package_manager":"rubygems"}]}

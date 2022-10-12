@@ -1,0 +1,1 @@
+{"metadata":{"version":"1.0"},"name":"Adobe Campaign (Neolane)","type":"external_service","urls":[],"packages":[{"name":"Neolane","group":null,"package_manager":"nuget"}]}

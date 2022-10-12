@@ -1,0 +1,1 @@
+{"metadata":{"version":"1.0"},"name":"Mixpanel","type":"external_service","urls":[],"packages":[{"name":"react-mixpanel","group":null,"package_manager":"npm"},{"name":"github.com/dukex/mixpanel","group":null,"package_manager":"go"}]}

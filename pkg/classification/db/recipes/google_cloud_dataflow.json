@@ -1,0 +1,1 @@
+{"metadata":{"version":"1.0"},"name":"Google Cloud Dataflow","type":"internal_service","urls":[],"packages":[{"name":"google-cloud-dataflow-java-sdk-all","group":"com.google.cloud.dataflow","package_manager":"maven"}]}
