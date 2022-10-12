@@ -1,2 +1,5 @@
-dist/
+#dist folder
+dist
 
+# build folder
+curio-build
