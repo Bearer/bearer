@@ -15,7 +15,7 @@ builds:
       - 386
 archives:
 checksum:
-  name_template: "checksums.txt"
+  name_template: "curio{{ incpatch .Version }}checksums.txt"
 snapshot:
   name_template: "{{ incpatch .Version }}-next"
 changelog:
