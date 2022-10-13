@@ -11,28 +11,8 @@ import (
 const prefixPattern = "(?P<match>\\A(?:[^:]+://)?(?:[^/]+\\.)?"
 const suffixPattern = "(?:/|\\z)"
 
-type ComparableUrls struct {
-	DetectionURL string
-	RecipeURL    string
-}
-
-func Match(urls ComparableUrls) (string, error) {
-	parsedURL, err := url.Parse(urls.RecipeURL)
-	if err != nil {
-		return "", err
-	}
-
-	parsedDomain, err := publicsuffix.ParseFromListWithOptions(
-		publicsuffix.DefaultList,
-		parsedURL.Host,
-		&publicsuffix.FindOptions{IgnorePrivate: true, DefaultRule: nil},
-	)
-	if err != nil {
-		return "", err
-	}
-
-	matcher, _ := regexp.Compile(prefixPattern + domainPattern(parsedDomain) + pathPattern(parsedURL) + ")" + suffixPattern)
-	match := matcher.FindStringSubmatch(urls.DetectionURL)
+func Match(url string, matcher *regexp.Regexp) (string, error) {
+	match := matcher.FindStringSubmatch(url)
 	if match != nil {
 		for i, name := range matcher.SubexpNames() {
 			if name == "match" {
@@ -41,6 +21,24 @@ func Match(urls ComparableUrls) (string, error) {
 		}
 	}
 	return "", nil
+}
+
+func PrepareRegexpMatcher(myURL string) (*regexp.Regexp, error) {
+	parsedURL, err := url.Parse(myURL)
+	if err != nil {
+		return nil, err
+	}
+
+	parsedDomain, err := publicsuffix.ParseFromListWithOptions(
+		publicsuffix.DefaultList,
+		parsedURL.Host,
+		&publicsuffix.FindOptions{IgnorePrivate: true, DefaultRule: nil},
+	)
+	if err != nil {
+		return nil, err
+	}
+
+	return regexp.Compile(prefixPattern + domainPattern(parsedDomain) + pathPattern(parsedURL) + ")" + suffixPattern)
 }
 
 func domainPattern(parsedDomain *publicsuffix.DomainName) string {

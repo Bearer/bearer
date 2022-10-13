@@ -200,11 +200,10 @@ func TestMatch(t *testing.T) {
 				t.Skip("interfaces not implemented")
 			}
 
+			regexpMatcher, _ := url.PrepareRegexpMatcher(testCase.RecipeURL)
 			output, err := url.Match(
-				url.ComparableUrls{
-					RecipeURL:    testCase.RecipeURL,
-					DetectionURL: testCase.DetectionURL,
-				},
+				testCase.DetectionURL,
+				regexpMatcher,
 			)
 			if err != nil {
 				t.Errorf("UrlMatcher returned error %s", err)

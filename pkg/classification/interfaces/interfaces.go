@@ -2,6 +2,7 @@ package interfaces
 
 import (
 	"errors"
+	"regexp"
 	"strings"
 
 	"github.com/bearer/curio/pkg/classification/db"
@@ -36,11 +37,22 @@ type Classification struct {
 }
 
 type Classifier struct {
-	config Config
+	Recipes []Recipe
 }
 
 type Config struct {
 	Recipes []db.Recipe
+}
+
+type Recipe struct {
+	Name string
+	Type string
+	URLS []RecipeURL
+}
+
+type RecipeURL struct {
+	URL           string
+	RegexpMatcher *regexp.Regexp
 }
 
 type RecipeURLMatch struct {
@@ -50,21 +62,38 @@ type RecipeURLMatch struct {
 }
 
 func New(config Config) *Classifier {
-	return &Classifier{config}
+	var preparedRecipes []Recipe
+	for _, recipe := range config.Recipes {
+		preparedRecipe := Recipe{
+			Name: recipe.Name,
+			Type: recipe.Type,
+		}
+		for _, recipeURL := range recipe.URLS {
+			regexpMatcher, err := url.PrepareRegexpMatcher(recipeURL)
+			if err != nil {
+				panic(err) // todo: how to handle error in New()?
+			}
+
+			preparedRecipeURL := RecipeURL{
+				URL:           recipeURL,
+				RegexpMatcher: regexpMatcher,
+			}
+			preparedRecipe.URLS = append(preparedRecipe.URLS, preparedRecipeURL)
+		}
+		preparedRecipes = append(preparedRecipes, preparedRecipe)
+	}
+
+	return &Classifier{Recipes: preparedRecipes}
 }
 
 func NewDefault() *Classifier {
-	return &Classifier{
-		config: Config{
-			Recipes: db.Default(),
-		},
-	}
+	return New(Config{Recipes: db.Default()})
 }
 
 func (classifier *Classifier) Classify(data report.Detection) (*ClassifiedInterface, error) {
 	detectedInterface, ok := data.Value.(interfaces.Interface)
 	if !ok {
-		return nil, errors.New("detectiosn is not an interface")
+		return nil, errors.New("detection is not an interface")
 	}
 
 	// detected url, with unknown parts replaced with * wildcards
@@ -110,14 +139,9 @@ func (classifier *Classifier) FindMatchingRecipeUrl(detectionURL string) (*Recip
 	var recipeURLMatch *RecipeURLMatch
 
 	matchSize := 0
-	for _, recipe := range classifier.config.Recipes {
+	for _, recipe := range classifier.Recipes {
 		for _, recipeURL := range recipe.URLS {
-			match, err := url.Match(
-				url.ComparableUrls{
-					DetectionURL: detectionURL,
-					RecipeURL:    recipeURL,
-				},
-			)
+			match, err := url.Match(detectionURL, recipeURL.RegexpMatcher)
 			if err != nil {
 				return nil, err
 			}
@@ -127,7 +151,7 @@ func (classifier *Classifier) FindMatchingRecipeUrl(detectionURL string) (*Recip
 				continue
 			}
 
-			candidateSize := len(strings.ReplaceAll(recipeURL, "*", ""))
+			candidateSize := len(strings.ReplaceAll(recipeURL.URL, "*", ""))
 			if candidateSize <= matchSize {
 				// we have a more accurate match already; move to next recipe URL
 				continue
@@ -136,7 +160,7 @@ func (classifier *Classifier) FindMatchingRecipeUrl(detectionURL string) (*Recip
 			matchSize = candidateSize
 			recipeURLMatch = &RecipeURLMatch{
 				DetectionURLPart: match,
-				RecipeURL:        recipeURL,
+				RecipeURL:        recipeURL.URL,
 				RecipeName:       recipe.Name,
 			}
 		}
