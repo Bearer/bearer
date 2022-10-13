@@ -1,1 +1,1 @@
-{"metadata":{"version":"1.0"},"name":"Izberg Marketplace","type":"external_service","urls":[],"packages":[]}
+{"metadata":{"version":"1.0"},"name":"Izberg Marketplace","type":"external_service","urls":["https://api.izberg.me"],"packages":[]}

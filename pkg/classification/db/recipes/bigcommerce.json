@@ -1,1 +1,1 @@
-{"metadata":{"version":"1.0"},"name":"BigCommerce","type":"external_service","urls":[],"packages":[]}
+{"metadata":{"version":"1.0"},"name":"BigCommerce","type":"external_service","urls":["https://api.bigcommerce.com/stores/*/v2","https://api.bigcommerce.com/stores/*/v3","https://mybigcommerce.com/api"],"packages":[]}

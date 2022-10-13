@@ -1,1 +1,1 @@
-{"metadata":{"version":"1.0"},"name":"Debounce","type":"external_service","urls":[],"packages":[]}
+{"metadata":{"version":"1.0"},"name":"Debounce","type":"external_service","urls":["https://api.debounce.io"],"packages":[]}

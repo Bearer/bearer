@@ -1,1 +1,1 @@
-{"metadata":{"version":"1.0"},"name":"Sage","type":"external_service","urls":[],"packages":[]}
+{"metadata":{"version":"1.0"},"name":"Sage","type":"external_service","urls":["https://banking.dev-fabric.sage.com/provider","https://banking.fabric.sage.com/provider","https://sage200.sage.es/api/sales","https://lohnabrechnung.sage.com/api","https://api.accounting.sage.com","https://api.intacct.com"],"packages":[]}

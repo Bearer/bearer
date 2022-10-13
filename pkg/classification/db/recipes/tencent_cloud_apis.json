@@ -1,1 +1,1 @@
-{"metadata":{"version":"1.0"},"name":"Tencent Cloud APIs","type":"external_service","urls":[],"packages":[{"name":"github.com/tencentcloud/tencentcloud-sdk-go","group":null,"package_manager":"go"}]}
+{"metadata":{"version":"1.0"},"name":"Tencent Cloud APIs","type":"external_service","urls":["https://tencentcloudapi.com","https://*.tencentcloudapi.com"],"packages":[{"name":"github.com/tencentcloud/tencentcloud-sdk-go","group":null,"package_manager":"go"}]}

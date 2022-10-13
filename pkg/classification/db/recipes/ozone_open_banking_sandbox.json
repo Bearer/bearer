@@ -1,1 +1,1 @@
-{"metadata":{"version":"1.0"},"name":"Ozone Open Banking Sandbox","type":"external_service","urls":[],"packages":[]}
+{"metadata":{"version":"1.0"},"name":"Ozone Open Banking Sandbox","type":"external_service","urls":["https://ob19-auth1.o3bank.co.uk","https://ob19-rs1.o3bank.co.uk","https://ob19-auth1-ui.o3bank.co.uk"],"packages":[]}

@@ -1,1 +1,1 @@
-{"metadata":{"version":"1.0"},"name":"HMRC (GOV.UK)","type":"external_service","urls":[],"packages":[]}
+{"metadata":{"version":"1.0"},"name":"HMRC (GOV.UK)","type":"external_service","urls":["https://api.service.hmrc.gov.uk","https://test-api.service.hmrc.gov.uk","https://transaction-engine.tax.service.gov.uk","https://test-transaction-engine.tax.service.gov.uk"],"packages":[]}

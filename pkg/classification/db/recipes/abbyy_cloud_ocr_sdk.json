@@ -1,7 +1,1 @@
-{
-  "metadata": { "version": "1.0" },
-  "name": "ABBYY Cloud OCR SDK",
-  "type": "external_service",
-  "urls": [],
-  "packages": []
-}
+{"metadata":{"version":"1.0"},"name":"ABBYY Cloud OCR SDK","type":"external_service","urls":["https://ocrsdk.com","https://cloud-westus.ocrsdk.com","https://cloud-eu.ocrsdk.com","https://cloud.ocrsdk.com"],"packages":[]}

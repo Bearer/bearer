@@ -1,1 +1,1 @@
-{"metadata":{"version":"1.0"},"name":"Braze","type":"external_service","urls":[],"packages":[]}
+{"metadata":{"version":"1.0"},"name":"Braze","type":"external_service","urls":["https://sdk.*.braze.eu","https://sdk.*.braze.com","https://rest.*.braze.eu","https://rest.*.braze.com"],"packages":[]}
