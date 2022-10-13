@@ -22,7 +22,11 @@ func UrlMatcher(urls ComparableUrls) (string, error) {
 		return "", err
 	}
 
-	parsedDomain, err := publicsuffix.Parse(parsedURL.Host)
+	parsedDomain, err := publicsuffix.ParseFromListWithOptions(
+		publicsuffix.DefaultList,
+		parsedURL.Host,
+		&publicsuffix.FindOptions{IgnorePrivate: true, DefaultRule: nil},
+	)
 	if err != nil {
 		return "", err
 	}

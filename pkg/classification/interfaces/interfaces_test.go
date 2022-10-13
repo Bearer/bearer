@@ -78,6 +78,36 @@ func TestInterface(t *testing.T) {
 			},
 		},
 		{
+			Name: "when there is a recipe with a path",
+			Input: report.Detection{
+				Value: reportinterfaces.Interface{
+					Type: reportinterfaces.TypeURL,
+					Value: &values.Value{
+						Parts: []values.Part{
+							&values.String{
+								Type:  values.PartTypeString,
+								Value: "googleapis.com",
+							},
+							&values.String{
+								Type:  values.PartTypeString,
+								Value: "/auth/spreadsheets/",
+							},
+						},
+					},
+				},
+			},
+			Want: &interfaces.Classification{
+				// todo: we should expect https:// here
+				URL:         "googleapis.com/auth/spreadsheets",
+				RecipeName:  "Google Spreadsheets",
+				RecipeMatch: true,
+				Decision: interfaces.ClassificationDecision{
+					State:  interfaces.Valid,
+					Reason: "recipe_match",
+				},
+			},
+		},
+		{
 			Name: "simple path - no match",
 			Input: report.Detection{
 				Value: reportinterfaces.Interface{
