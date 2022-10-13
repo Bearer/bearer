@@ -5,24 +5,24 @@ import (
 	"strings"
 
 	"github.com/bearer/curio/pkg/commands/process/settings"
-	"github.com/denormal/go-gitignore"
+	"github.com/monochromegane/go-gitignore"
 )
 
 type FileIgnore struct {
-	ignorer    gitignore.GitIgnore
+	ignorer    gitignore.IgnoreMatcher
 	hasIgnorer bool
 
 	config settings.Config
 }
 
-func New(config settings.Config) (*FileIgnore, error) {
-	var ignorer gitignore.GitIgnore
+func New(projectPath string, config settings.Config) (*FileIgnore, error) {
+	var ignorer gitignore.IgnoreMatcher
 	var err error
 
 	hasIgnorer := config.Scan.SkipConfig != ""
 
 	if hasIgnorer {
-		ignorer, err = gitignore.NewFromFile(config.Scan.SkipConfig)
+		ignorer, err = gitignore.NewGitIgnore(config.Scan.SkipConfig, ".")
 		if err != nil {
 			return nil, err
 		}
@@ -40,7 +40,8 @@ func (fileignore *FileIgnore) Ignore(projectPath string, filePath string, d fs.D
 	relativePath := strings.TrimPrefix(filePath, projectPath)
 
 	if fileignore.hasIgnorer {
-		if fileignore.ignorer.Ignore(relativePath) {
+		trimmedPath := strings.TrimPrefix(relativePath, "/")
+		if fileignore.ignorer.Match(trimmedPath, false) {
 			return true
 		}
 	}

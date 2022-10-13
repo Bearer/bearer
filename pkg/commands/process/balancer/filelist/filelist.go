@@ -16,7 +16,7 @@ import (
 func Discover(projectPath string, config settings.Config) ([]work.File, error) {
 	var files []work.File
 
-	ignore, err := fileignore.New(config)
+	ignore, err := fileignore.New(projectPath, config)
 	if err != nil {
 		return nil, err
 	}
