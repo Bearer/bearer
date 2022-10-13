@@ -64,7 +64,7 @@ func (detector *detector) ProcessFile(file *file.FileInfo, dir *file.Path, repor
 		Report:           report,
 		DetectorType:     detectors.DetectorJava,
 		AcceptExpression: acceptExpression,
-		PathAllowed:      true,
+		PathAllowed:      false,
 	}); err != nil {
 		return false, err
 	}
