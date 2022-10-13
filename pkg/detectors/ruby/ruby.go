@@ -80,7 +80,7 @@ func (detector *detector) ProcessFile(file *file.FileInfo, dir *file.Path, repor
 		Report:           report,
 		AcceptExpression: acceptExpression,
 		DetectorType:     detectors.DetectorRuby,
-		PathAllowed:      true,
+		PathAllowed:      false,
 	}); err != nil {
 		return false, err
 	}
