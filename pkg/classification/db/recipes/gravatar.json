@@ -1,1 +1,1 @@
-{"metadata":{"version":"1.0"},"name":"Gravatar","type":"external_service","urls":[],"packages":[{"name":"gravatar","group":null,"package_manager":"npm"}]}
+{"metadata":{"version":"1.0"},"name":"Gravatar","type":"external_service","urls":["https://gravatar.com","https://secure.gravatar.com/xmlrpc"],"packages":[{"name":"gravatar","group":null,"package_manager":"npm"}]}

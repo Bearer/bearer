@@ -1,1 +1,1 @@
-{"metadata":{"version":"1.0"},"name":"Adyen","type":"external_service","urls":[],"packages":[]}
+{"metadata":{"version":"1.0"},"name":"Adyen","type":"external_service","urls":["https://live-us.adyen.com","https://live-au.adyen.com","https://live.adyen.com","https://test.adyen.com","https://live.adyenpayments.com","https://pal-test.adyen.com","https://checkout-test.adyen.com"],"packages":[]}

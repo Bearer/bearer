@@ -1,1 +1,1 @@
-{"metadata":{"version":"1.0"},"name":"Square","type":"external_service","urls":[],"packages":[]}
+{"metadata":{"version":"1.0"},"name":"Square","type":"external_service","urls":["https://connect.squareupsandbox.com","https://connect.squareup.com"],"packages":[]}

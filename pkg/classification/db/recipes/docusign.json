@@ -1,1 +1,1 @@
-{"metadata":{"version":"1.0"},"name":"Docusign","type":"external_service","urls":[],"packages":[]}
+{"metadata":{"version":"1.0"},"name":"Docusign","type":"external_service","urls":["https://account.docusign.com","https://docusign.net/restapi"],"packages":[]}

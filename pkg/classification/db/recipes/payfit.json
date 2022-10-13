@@ -1,1 +1,1 @@
-{"metadata":{"version":"1.0"},"name":"Payfit","type":"external_service","urls":[],"packages":[]}
+{"metadata":{"version":"1.0"},"name":"Payfit","type":"external_service","urls":["https://partner-api.payfit.com","https://manager-api.payfit.com","https://atlas-api.payfit.com","https://api.payfit.tech","https://api.payfit.io"],"packages":[]}

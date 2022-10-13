@@ -1,1 +1,1 @@
-{"metadata":{"version":"1.0"},"name":"Freshworks","type":"external_service","urls":[],"packages":[]}
+{"metadata":{"version":"1.0"},"name":"Freshworks","type":"external_service","urls":["https://freshcaller.com/api","https://freshteam.com/api","https://api.freshchat.com","https://myfreshworks.com/crm/sales/api","https://freshservice.com/api/","https://freshdesk.com/api"],"packages":[]}

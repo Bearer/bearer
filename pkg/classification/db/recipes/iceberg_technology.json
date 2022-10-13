@@ -1,1 +1,1 @@
-{"metadata":{"version":"1.0"},"name":"Iceberg Technology","type":"external_service","urls":[],"packages":[]}
+{"metadata":{"version":"1.0"},"name":"Iceberg Technology","type":"external_service","urls":["https://tracking.iceberg.com","https://api.sandbox.iceberg.technology","https://api.iceberg.technology","https://api.iceberg.com"],"packages":[]}

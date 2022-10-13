@@ -1,1 +1,1 @@
-{"metadata":{"version":"1.0"},"name":"MaxMind","type":"external_service","urls":[],"packages":[]}
+{"metadata":{"version":"1.0"},"name":"MaxMind","type":"external_service","urls":["https://geoip-js.com/js/apis/","https://geoip.maxmind.com/geoip","https://minfraud.maxmind.com/minfraud"],"packages":[]}

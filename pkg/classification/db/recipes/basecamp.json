@@ -1,1 +1,1 @@
-{"metadata":{"version":"1.0"},"name":"Basecamp","type":"external_service","urls":[],"packages":[{"name":"tinder","group":null,"package_manager":"rubygems"}]}
+{"metadata":{"version":"1.0"},"name":"Basecamp","type":"external_service","urls":["https://basecamp.com/*/api/"],"packages":[{"name":"tinder","group":null,"package_manager":"rubygems"}]}

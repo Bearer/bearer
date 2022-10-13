@@ -1,1 +1,1 @@
-{"metadata":{"version":"1.0"},"name":"Usersnap","type":"external_service","urls":[],"packages":[]}
+{"metadata":{"version":"1.0"},"name":"Usersnap","type":"external_service","urls":["https://platform.usersnap.com","https://widget.usersnap.com"],"packages":[]}

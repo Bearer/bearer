@@ -1,1 +1,1 @@
-{"metadata":{"version":"1.0"},"name":"Galileo","type":"external_service","urls":[],"packages":[]}
+{"metadata":{"version":"1.0"},"name":"Galileo","type":"external_service","urls":["https://api.gpsrv.com","https://sandbox-api.gpsrv.com"],"packages":[]}

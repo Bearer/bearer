@@ -1,1 +1,1 @@
-{"metadata":{"version":"1.0"},"name":"OVH Cloud APIs","type":"external_service","urls":[],"packages":[{"name":"github.com/ovh/go-ovh","group":null,"package_manager":"go"},{"name":"ovh","group":null,"package_manager":"npm"}]}
+{"metadata":{"version":"1.0"},"name":"OVH Cloud APIs","type":"external_service","urls":["https://api.ovh.com"],"packages":[{"name":"github.com/ovh/go-ovh","group":null,"package_manager":"go"},{"name":"ovh","group":null,"package_manager":"npm"}]}
