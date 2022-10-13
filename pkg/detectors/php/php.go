@@ -92,7 +92,7 @@ func (detector *detector) ProcessFile(file *file.FileInfo, dir *file.Path, repor
 		Report:           report,
 		AcceptExpression: acceptExpression,
 		DetectorType:     detectors.DetectorPHP,
-		PathAllowed:      true,
+		PathAllowed:      false,
 		ContextResolver:  contextResolver,
 	})
 

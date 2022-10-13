@@ -99,7 +99,7 @@ func processTree(tree *parser.Tree, report report.Report) (bool, error) {
 		Report:           report,
 		AcceptExpression: acceptExpression,
 		DetectorType:     detectors.DetectorPython,
-		PathAllowed:      true,
+		PathAllowed:      false,
 	}); err != nil {
 		return false, err
 	}
