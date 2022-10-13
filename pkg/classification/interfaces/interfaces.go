@@ -98,8 +98,10 @@ func (classifier *Classifier) Classify(data report.Detection) (*ClassifiedInterf
 		return nil, errors.New("detection is not an interface")
 	}
 
-	// detected url, with unknown parts replaced with * wildcards
-	value := detectedInterface.Value.ToString()
+	value, err := url.PrepareURLValue(detectedInterface.Value.ToString())
+	if err != nil {
+		return nil, err
+	}
 	recipeMatch, err := classifier.FindMatchingRecipeUrl(value)
 	if err != nil {
 		return nil, err
