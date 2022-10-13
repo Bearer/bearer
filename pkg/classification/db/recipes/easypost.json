@@ -1,1 +1,1 @@
-{"metadata":{"version":"1.0"},"name":"EasyPost","type":"external_service","urls":[],"packages":[]}
+{"metadata":{"version":"1.0"},"name":"EasyPost","type":"external_service","urls":["https://api.easypost.com"],"packages":[]}

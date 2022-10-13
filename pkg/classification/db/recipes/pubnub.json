@@ -1,1 +1,1 @@
-{"metadata":{"version":"1.0"},"name":"PubNub","type":"external_service","urls":[],"packages":[{"name":"pubnub","group":null,"package_manager":"npm"}]}
+{"metadata":{"version":"1.0"},"name":"PubNub","type":"external_service","urls":["https://ps.pndsn.com"],"packages":[{"name":"pubnub","group":null,"package_manager":"npm"}]}

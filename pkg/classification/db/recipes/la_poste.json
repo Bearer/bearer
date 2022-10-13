@@ -1,1 +1,1 @@
-{"metadata":{"version":"1.0"},"name":"La Poste","type":"external_service","urls":[],"packages":[]}
+{"metadata":{"version":"1.0"},"name":"La Poste","type":"external_service","urls":["https://ws.colissimo.fr","https://api.laposte.fr"],"packages":[]}

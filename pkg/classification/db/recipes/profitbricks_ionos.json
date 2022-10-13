@@ -1,1 +1,1 @@
-{"metadata":{"version":"1.0"},"name":"Profitbricks (IONOS)","type":"external_service","urls":[],"packages":[]}
+{"metadata":{"version":"1.0"},"name":"Profitbricks (IONOS)","type":"external_service","urls":["https://api.ionos.com","https://api.profitbricks.com"],"packages":[]}

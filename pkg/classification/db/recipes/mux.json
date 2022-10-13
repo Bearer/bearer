@@ -1,1 +1,1 @@
-{"metadata":{"version":"1.0"},"name":"MUX","type":"external_service","urls":[],"packages":[]}
+{"metadata":{"version":"1.0"},"name":"MUX","type":"external_service","urls":["https://image.mux.com","https://stream.mux.com","https://api.mux.com/data","https://api.mux.com/video"],"packages":[]}

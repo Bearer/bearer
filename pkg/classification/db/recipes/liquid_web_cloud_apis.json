@@ -1,1 +1,1 @@
-{"metadata":{"version":"1.0"},"name":"Liquid Web Cloud APIs","type":"external_service","urls":[],"packages":[{"name":"github.com/liquidweb/go-lwApi","group":null,"package_manager":"go"},{"name":"github.com/liquidweb/liquidweb-go","group":null,"package_manager":"go"}]}
+{"metadata":{"version":"1.0"},"name":"Liquid Web Cloud APIs","type":"external_service","urls":["https://api.stormondemand.com"],"packages":[{"name":"github.com/liquidweb/go-lwApi","group":null,"package_manager":"go"},{"name":"github.com/liquidweb/liquidweb-go","group":null,"package_manager":"go"}]}

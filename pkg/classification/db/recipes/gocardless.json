@@ -1,1 +1,1 @@
-{"metadata":{"version":"1.0"},"name":"GoCardless","type":"external_service","urls":[],"packages":[]}
+{"metadata":{"version":"1.0"},"name":"GoCardless","type":"external_service","urls":["https://pay-sandbox.gocardless.com/js/","https://api-sandbox.gocardless.com","https://api.gocardless.com","https://connect.gocardless.com","https://connect-sandbox.gocardless.com"],"packages":[]}

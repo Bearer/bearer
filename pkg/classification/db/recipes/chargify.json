@@ -1,1 +1,1 @@
-{"metadata":{"version":"1.0"},"name":"Chargify","type":"external_service","urls":[],"packages":[]}
+{"metadata":{"version":"1.0"},"name":"Chargify","type":"external_service","urls":["https://js.chargify.com"],"packages":[]}

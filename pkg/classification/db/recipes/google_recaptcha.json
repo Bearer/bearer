@@ -1,1 +1,1 @@
-{"metadata":{"version":"1.0"},"name":"Google reCAPTCHA ","type":"external_service","urls":[],"packages":[{"name":"recaptcha-v3","group":"","package_manager":"npm"},{"name":"recaptcha","group":null,"package_manager":"rubygems"}]}
+{"metadata":{"version":"1.0"},"name":"Google reCAPTCHA ","type":"external_service","urls":["https://*.google.com/recaptcha/*"],"packages":[{"name":"recaptcha-v3","group":"","package_manager":"npm"},{"name":"recaptcha","group":null,"package_manager":"rubygems"}]}

@@ -1,1 +1,1 @@
-{"metadata":{"version":"1.0"},"name":"Checkout.com","type":"external_service","urls":[],"packages":[]}
+{"metadata":{"version":"1.0"},"name":"Checkout.com","type":"external_service","urls":["https://api.sandbox.checkout.com","https://api.checkout.com"],"packages":[]}

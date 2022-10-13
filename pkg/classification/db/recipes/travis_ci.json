@@ -1,1 +1,1 @@
-{"metadata":{"version":"1.0"},"name":"Travis CI","type":"external_service","urls":[],"packages":[]}
+{"metadata":{"version":"1.0"},"name":"Travis CI","type":"external_service","urls":["https://api.travis-ci.org"],"packages":[]}

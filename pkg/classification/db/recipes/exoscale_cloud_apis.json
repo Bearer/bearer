@@ -1,1 +1,1 @@
-{"metadata":{"version":"1.0"},"name":"Exoscale Cloud APIs","type":"external_service","urls":[],"packages":[{"name":"github.com/exoscale/egoscale","group":null,"package_manager":"go"}]}
+{"metadata":{"version":"1.0"},"name":"Exoscale Cloud APIs","type":"external_service","urls":["https://api.runstatus.com","https://sos-*.exo.io","https://api.exoscale.com","https://api-ch-gva-2.exoscale.com"],"packages":[{"name":"github.com/exoscale/egoscale","group":null,"package_manager":"go"}]}

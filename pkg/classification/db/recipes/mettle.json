@@ -1,1 +1,1 @@
-{"metadata":{"version":"1.0"},"name":"Mettle","type":"external_service","urls":[],"packages":[]}
+{"metadata":{"version":"1.0"},"name":"Mettle","type":"external_service","urls":["https://api.openbanking.stg-mettle.co.uk","https://auth.openbanking.prd-mettle.co.uk","https://api.openbanking.prd-mettle.co.uk"],"packages":[]}

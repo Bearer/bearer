@@ -1,1 +1,1 @@
-{"metadata":{"version":"1.0"},"name":"Geckoboard","type":"external_service","urls":[],"packages":[{"name":"geckoboard-ruby","group":null,"package_manager":"rubygems"}]}
+{"metadata":{"version":"1.0"},"name":"Geckoboard","type":"external_service","urls":["https://api.geckoboard.com"],"packages":[{"name":"geckoboard-ruby","group":null,"package_manager":"rubygems"}]}

@@ -1,1 +1,1 @@
-{"metadata":{"version":"1.0"},"name":"Mondial Relay","type":"external_service","urls":[],"packages":[]}
+{"metadata":{"version":"1.0"},"name":"Mondial Relay","type":"external_service","urls":["https://api.mondialrelay.com"],"packages":[]}
