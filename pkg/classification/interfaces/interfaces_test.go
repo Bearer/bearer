@@ -130,7 +130,10 @@ func TestInterface(t *testing.T) {
 		},
 	}
 
-	classifier := interfaces.NewDefault()
+	classifier, err := interfaces.NewDefault()
+	if err != nil {
+		t.Errorf("Error initializing interface %s", err)
+	}
 
 	for _, testCase := range tests {
 		t.Run(testCase.Name, func(t *testing.T) {
@@ -196,7 +199,7 @@ func TestFindMatchingRecipeUrl(t *testing.T) {
 
 	for _, testCase := range tests {
 		t.Run(testCase.Name, func(t *testing.T) {
-			classifier := interfaces.New(interfaces.Config{
+			classifier, err := interfaces.New(interfaces.Config{
 				Recipes: []db.Recipe{
 					{
 						Name: testCase.RecipeName,
@@ -204,6 +207,10 @@ func TestFindMatchingRecipeUrl(t *testing.T) {
 					},
 				},
 			})
+
+			if err != nil {
+				t.Errorf("Error initializing interface %s", err)
+			}
 
 			output, err := classifier.FindMatchingRecipeUrl(
 				testCase.DetectionURL,

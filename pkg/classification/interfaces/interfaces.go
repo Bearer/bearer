@@ -61,7 +61,9 @@ type RecipeURLMatch struct {
 	RecipeName       string
 }
 
-func New(config Config) *Classifier {
+var ErrInvalidRecipes = errors.New("invalid interface recipe")
+
+func New(config Config) (*Classifier, error) {
 	var preparedRecipes []Recipe
 	for _, recipe := range config.Recipes {
 		preparedRecipe := Recipe{
@@ -71,7 +73,7 @@ func New(config Config) *Classifier {
 		for _, recipeURL := range recipe.URLS {
 			regexpMatcher, err := url.PrepareRegexpMatcher(recipeURL)
 			if err != nil {
-				panic(err) // todo: how to handle error in New()?
+				return nil, ErrInvalidRecipes
 			}
 
 			preparedRecipeURL := RecipeURL{
@@ -83,10 +85,10 @@ func New(config Config) *Classifier {
 		preparedRecipes = append(preparedRecipes, preparedRecipe)
 	}
 
-	return &Classifier{Recipes: preparedRecipes}
+	return &Classifier{Recipes: preparedRecipes}, nil
 }
 
-func NewDefault() *Classifier {
+func NewDefault() (*Classifier, error) {
 	return New(Config{Recipes: db.Default()})
 }
 
