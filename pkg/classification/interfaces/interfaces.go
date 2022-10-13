@@ -1,12 +1,13 @@
 package interfaces
 
 import (
+	"errors"
 	"strings"
 
 	"github.com/bearer/curio/pkg/classification/db"
 	"github.com/bearer/curio/pkg/report"
 	"github.com/bearer/curio/pkg/report/interfaces"
-	"github.com/bearer/curio/pkg/util/url_matcher"
+	"github.com/bearer/curio/pkg/util/url"
 )
 
 const (
@@ -61,38 +62,41 @@ func NewDefault() *Classifier {
 }
 
 func (classifier *Classifier) Classify(data report.Detection) (*ClassifiedInterface, error) {
-	var classifiedInterface *ClassifiedInterface
-	var classificationDecision ClassificationDecision
+	detectedInterface, ok := data.Value.(interfaces.Interface)
+	if !ok {
+		return nil, errors.New("detectiosn is not an interface")
+	}
 
 	// detected url, with unknown parts replaced with * wildcards
-	value := data.Value.(interfaces.Interface).Value.ToString()
+	value := detectedInterface.Value.ToString()
 	recipeMatch, err := classifier.FindMatchingRecipeUrl(value)
 	if err != nil {
-		return classifiedInterface, err
+		return nil, err
 	}
 
 	if recipeMatch != nil {
-		if strings.Contains(recipeMatch.DetectionURLPart, "*") {
-			classificationDecision = ClassificationDecision{
-				State:  Potential,
-				Reason: "recipe_match_with_wildcard",
-			}
-		} else {
-			classificationDecision = ClassificationDecision{
-				State:  Valid,
-				Reason: "recipe_match",
-			}
-		}
-
-		return &ClassifiedInterface{
+		classifiedInterface := &ClassifiedInterface{
 			Detection: &data,
 			Classification: &Classification{
 				URL:         recipeMatch.DetectionURLPart,
 				RecipeMatch: true,
 				RecipeName:  recipeMatch.RecipeName,
-				Decision:    classificationDecision,
 			},
-		}, nil
+		}
+
+		if strings.Contains(recipeMatch.DetectionURLPart, "*") {
+			classifiedInterface.Classification.Decision = ClassificationDecision{
+				State:  Potential,
+				Reason: "recipe_match_with_wildcard",
+			}
+			return classifiedInterface, nil
+		}
+
+		classifiedInterface.Classification.Decision = ClassificationDecision{
+			State:  Valid,
+			Reason: "recipe_match",
+		}
+		return classifiedInterface, nil
 	}
 
 	// todo: handle other URL cases (internal, invalid subdomains, etc)
@@ -108,14 +112,14 @@ func (classifier *Classifier) FindMatchingRecipeUrl(detectionURL string) (*Recip
 	matchSize := 0
 	for _, recipe := range classifier.config.Recipes {
 		for _, recipeURL := range recipe.URLS {
-			match, err := url_matcher.UrlMatcher(
-				url_matcher.ComparableUrls{
+			match, err := url.Match(
+				url.ComparableUrls{
 					DetectionURL: detectionURL,
 					RecipeURL:    recipeURL,
 				},
 			)
 			if err != nil {
-				return recipeURLMatch, err
+				return nil, err
 			}
 
 			if match == "" {

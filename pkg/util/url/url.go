@@ -1,4 +1,4 @@
-package url_matcher
+package url
 
 import (
 	"net/url"
@@ -16,7 +16,7 @@ type ComparableUrls struct {
 	RecipeURL    string
 }
 
-func UrlMatcher(urls ComparableUrls) (string, error) {
+func Match(urls ComparableUrls) (string, error) {
 	parsedURL, err := url.Parse(urls.RecipeURL)
 	if err != nil {
 		return "", err

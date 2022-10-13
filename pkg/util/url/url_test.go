@@ -1,13 +1,13 @@
-package url_matcher_test
+package url_test
 
 import (
 	"testing"
 
-	"github.com/bearer/curio/pkg/util/url_matcher"
+	"github.com/bearer/curio/pkg/util/url"
 	"github.com/stretchr/testify/assert"
 )
 
-type urlMatcherTestCase struct {
+type MatchTestCase struct {
 	Name         string
 	DetectionURL string
 	RecipeURL    string
@@ -15,8 +15,8 @@ type urlMatcherTestCase struct {
 	Skip         bool
 }
 
-func TestUrlMatcher(t *testing.T) {
-	tests := []urlMatcherTestCase{
+func TestMatch(t *testing.T) {
+	tests := []MatchTestCase{
 		{
 			Name:         "when the urls are just domains and match exactly",
 			RecipeURL:    "https://api.bearer.com",
@@ -200,8 +200,8 @@ func TestUrlMatcher(t *testing.T) {
 				t.Skip("interfaces not implemented")
 			}
 
-			output, err := url_matcher.UrlMatcher(
-				url_matcher.ComparableUrls{
+			output, err := url.Match(
+				url.ComparableUrls{
 					RecipeURL:    testCase.RecipeURL,
 					DetectionURL: testCase.DetectionURL,
 				},
