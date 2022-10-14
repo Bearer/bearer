@@ -1,6 +1,7 @@
 package fileignore
 
 import (
+	"bytes"
 	"io/fs"
 	"strings"
 
@@ -9,51 +10,46 @@ import (
 )
 
 type FileIgnore struct {
-	ignorer    gitignore.IgnoreMatcher
-	hasIgnorer bool
+	ignorer gitignore.IgnoreMatcher
 
 	config settings.Config
 }
 
-func New(projectPath string, config settings.Config) (*FileIgnore, error) {
-	var ignorer gitignore.IgnoreMatcher
-	var err error
-
-	hasIgnorer := config.Scan.SkipConfig != ""
-
-	if hasIgnorer {
-		ignorer, err = gitignore.NewGitIgnore(config.Scan.SkipConfig, ".")
-		if err != nil {
-			return nil, err
-		}
-	}
-
+func New(projectPath string, config settings.Config) *FileIgnore {
 	return &FileIgnore{
-		ignorer:    ignorer,
-		hasIgnorer: hasIgnorer,
+		ignorer: ignorerFromStrings(config.Scan.Skip),
 
 		config: config,
-	}, nil
+	}
 }
 
 func (fileignore *FileIgnore) Ignore(projectPath string, filePath string, d fs.DirEntry) bool {
 	relativePath := strings.TrimPrefix(filePath, projectPath)
-
-	if fileignore.hasIgnorer {
-		trimmedPath := strings.TrimPrefix(relativePath, "/")
-		if fileignore.ignorer.Match(trimmedPath, false) {
-			return true
-		}
-	}
+	trimmedPath := strings.TrimPrefix(relativePath, "/")
 
 	fileInfo, err := d.Info()
 	if err != nil {
 		return true
 	}
 
-	if fileInfo.Size() > int64(fileignore.config.Worker.FileSizeMaximum) {
+	if fileignore.ignorer.Match(trimmedPath, fileInfo.IsDir()) {
 		return true
 	}
 
+	if !fileInfo.IsDir() {
+		if fileInfo.Size() > int64(fileignore.config.Worker.FileSizeMaximum) {
+			return true
+		}
+	}
+
 	return false
+}
+
+func ignorerFromStrings(paths []string) gitignore.IgnoreMatcher {
+	buffer := bytes.NewBuffer([]byte{})
+	for _, path := range paths {
+		buffer.Write([]byte(path + "\n"))
+	}
+
+	return gitignore.NewGitIgnoreFromReader(".", buffer)
 }

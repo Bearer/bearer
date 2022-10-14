@@ -158,6 +158,7 @@ func Run(ctx context.Context, opts flag.Options, targetKind TargetKind) (err err
 	}
 
 	if opts.Format == flag.FormatJSON {
+		log.Debug().Msgf("outputting json")
 		err := output.ReportJSON(report)
 		if err != nil {
 			log.Error().Msgf("error generating report %e", err)

@@ -16,16 +16,17 @@ import (
 func Discover(projectPath string, config settings.Config) ([]work.File, error) {
 	var files []work.File
 
-	ignore, err := fileignore.New(projectPath, config)
-	if err != nil {
-		return nil, err
-	}
+	ignore := fileignore.New(projectPath, config)
 
-	err = filepath.WalkDir(projectPath, func(filePath string, d fs.DirEntry, err error) error {
+	err := filepath.WalkDir(projectPath, func(filePath string, d fs.DirEntry, err error) error {
 		if err != nil {
 			return err
 		}
 		if d.IsDir() {
+			if ignore.Ignore(projectPath, filePath, d) {
+				return filepath.SkipDir
+			}
+
 			return nil
 		}
 

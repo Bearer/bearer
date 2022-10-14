@@ -44,12 +44,12 @@ func TestFileList(t *testing.T) {
 			},
 		},
 		{
-			Name: "Find files - skip - happy path",
+			Name: "Find files - skip - files - happy path",
 			Input: input{
-				projectPath: filepath.Join("testdata", "happy_path", "skip", "target"),
+				projectPath: filepath.Join("testdata", "happy_path", "skip"),
 				config: settings.Config{
 					Scan: flag.ScanOptions{
-						SkipConfig: filepath.Join("testdata", "happy_path", "skip", ".skip"),
+						Skip: []string{"users/admin.go"},
 					},
 					Worker: flag.WorkerOptions{
 						FileSizeMaximum:           100000,
@@ -65,12 +65,12 @@ func TestFileList(t *testing.T) {
 			},
 		},
 		{
-			Name: "Find files - skip - error in config",
+			Name: "Find files - skip - dir - happy path",
 			Input: input{
-				projectPath: filepath.Join("testdata", "happy_path", "skip", "target"),
+				projectPath: filepath.Join("testdata", "happy_path", "skip"),
 				config: settings.Config{
 					Scan: flag.ScanOptions{
-						SkipConfig: filepath.Join("testdata", "happy_path", "skip", ".filedoesnotexist"),
+						Skip: []string{"users"},
 					},
 					Worker: flag.WorkerOptions{
 						FileSizeMaximum:           100000,
@@ -78,7 +78,7 @@ func TestFileList(t *testing.T) {
 					},
 				},
 			},
-			WantError: true,
+			Want: nil,
 		},
 	}
 

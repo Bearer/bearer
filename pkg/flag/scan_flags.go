@@ -5,23 +5,11 @@ import (
 )
 
 var (
-	SkipConfigFlag = Flag{
+	SkipFlag = Flag{
 		Name:       "skip",
 		ConfigName: "scan.skip",
-		Value:      "",
-		Usage:      "specify the path to file containg patterns of files to skip when scanning (in .gitignore fashion)",
-	}
-	SkipDirsFlag = Flag{
-		Name:       "skip-dirs",
-		ConfigName: "scan.skip-dirs",
 		Value:      []string{},
-		Usage:      "specify the directories where the traversal is skipped",
-	}
-	SkipFilesFlag = Flag{
-		Name:       "skip-files",
-		ConfigName: "scan.skip-files",
-		Value:      []string{},
-		Usage:      "specify the file paths to skip traversal",
+		Usage:      "specify the comma separated files and directories to skip (supports * syntax), eg. --skip users/*.go,users/admin.sql",
 	}
 	OfflineScanFlag = Flag{
 		Name:       "offline-scan",
@@ -44,27 +32,21 @@ var (
 )
 
 type ScanFlagGroup struct {
-	SkipConfigFlag *Flag
-	SkipDirs       *Flag
-	SkipFiles      *Flag
+	SkipFlag *Flag
 	// SecurityChecks *Flag
 	FilePatterns *Flag
 }
 
 type ScanOptions struct {
 	Target         string
-	SkipConfig     string
-	SkipDirs       []string
-	SkipFiles      []string
+	Skip           []string
 	SecurityChecks []string
 	FilePatterns   []string
 }
 
 func NewScanFlagGroup() *ScanFlagGroup {
 	return &ScanFlagGroup{
-		SkipConfigFlag: &SkipConfigFlag,
-		SkipDirs:       &SkipDirsFlag,
-		SkipFiles:      &SkipFilesFlag,
+		SkipFlag: &SkipFlag,
 		// SecurityChecks: &SecurityChecksFlag,
 		FilePatterns: &FilePatternsFlag,
 	}
@@ -75,7 +57,7 @@ func (f *ScanFlagGroup) Name() string {
 }
 
 func (f *ScanFlagGroup) Flags() []*Flag {
-	return []*Flag{f.SkipConfigFlag, f.SkipDirs, f.SkipFiles, f.FilePatterns}
+	return []*Flag{f.SkipFlag, f.FilePatterns}
 }
 
 func (f *ScanFlagGroup) ToOptions(args []string) (ScanOptions, error) {
@@ -89,10 +71,8 @@ func (f *ScanFlagGroup) ToOptions(args []string) (ScanOptions, error) {
 	// }
 
 	return ScanOptions{
-		Target:     target,
-		SkipConfig: getString(f.SkipConfigFlag),
-		SkipDirs:   getStringSlice(f.SkipDirs),
-		SkipFiles:  getStringSlice(f.SkipFiles),
+		Target: target,
+		Skip:   getStringSlice(f.SkipFlag),
 		// SecurityChecks: securityChecks,
 		FilePatterns: getStringSlice(f.FilePatterns),
 	}, nil

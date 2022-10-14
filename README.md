@@ -36,7 +36,7 @@ Scan a single file:
 
 ### Scan Flags:
 
-- `--skip` string specify the path to file containg patterns of files to skip when scanning (in .gitignore fashion)
+- `--skip` specify the comma separated files and directories to skip (supports \* syntax), eg. --skip users/\*.go,users/admin.sql
 
 ### Worker Flags:
 

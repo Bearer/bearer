@@ -273,9 +273,7 @@ func NewRepositoryCommand(globalFlags *flag.GlobalFlagGroup) *cobra.Command {
 func NewConfigCommand(globalFlags *flag.GlobalFlagGroup) *cobra.Command {
 
 	scanFlags := &flag.ScanFlagGroup{
-		// Enable only '--skip-dirs' and '--skip-files' and disable other flags
-		SkipDirs:     &flag.SkipDirsFlag,
-		SkipFiles:    &flag.SkipFilesFlag,
+		SkipFlag:     &flag.SkipFlag,
 		FilePatterns: &flag.FilePatternsFlag,
 	}
 
