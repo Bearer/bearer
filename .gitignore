@@ -3,3 +3,5 @@ dist
 
 # build folder
 curio-build
+
+.DS_Store

@@ -110,6 +110,20 @@ func (value *Value) Pattern() string {
 	return strings.Join(patterns, "")
 }
 
+func (value *Value) ToString() string {
+	result := ""
+	for _, part := range value.Parts {
+		stringPart, ok := part.(*String)
+		if ok {
+			result += stringPart.Value
+		} else {
+			result += "*"
+		}
+	}
+
+	return result
+}
+
 func (value *Value) Append(other *Value) {
 	for _, part := range other.Parts {
 		if stringPart, ok := part.(*String); ok {
