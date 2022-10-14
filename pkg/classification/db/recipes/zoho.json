@@ -1,1 +1,1 @@
-{"metadata":{"version":"1.0"},"name":"Zoho","type":"external_service","urls":[],"packages":[]}
+{"metadata":{"version":"1.0"},"name":"Zoho","type":"external_service","urls":["https://*.zoho.eu/api/","https://accounts.zoho.eu","https://zohoapis.com","https://analyticsapi.zoho.com.cn","https://zoho.eu/restapi","https://zoho.com/pulse/api/","https://recruit.zoho.com/recruit/private/xml","https://analyticsapi.zoho.com.au","https://analyticsapi.zoho.in","https://analyticsapi.zoho.eu","https://analyticsapi.zoho.com","https://zoho.com/api"],"packages":[]}

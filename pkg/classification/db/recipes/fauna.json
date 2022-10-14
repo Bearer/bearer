@@ -1,1 +1,1 @@
-{"metadata":{"version":"1.0"},"name":"Fauna","type":"external_service","urls":[],"packages":[{"name":"faunadb","group":null,"package_manager":"npm"}]}
+{"metadata":{"version":"1.0"},"name":"Fauna","type":"external_service","urls":["https://graphql.fauna-preview.com","https://graphql.fauna.com","https://graphql.eu.fauna.com","https://graphql.us.fauna.com"],"packages":[{"name":"faunadb","group":null,"package_manager":"npm"}]}

@@ -1,0 +1,102 @@
+name: release
+on:
+  push:
+    tags:
+      - "*"
+
+permissions:
+  contents: write
+  packages: write
+
+jobs:
+  build-linux:
+    name: build-linux
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - run: git fetch --force --tags
+      - name: Set up Go
+        uses: actions/setup-go@v3
+        with:
+          go-version: 1.18
+      - name: Install dependencies
+        run: sudo apt-get update && sudo apt-get install -y gcc-multilib g++-multilib
+      - name: Run GoReleaser
+        uses: goreleaser/goreleaser-action@v3
+        with:
+          distribution: goreleaser
+          version: latest
+          args: release --skip-publish -f ./goreleaser/linux.yaml
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Upload
+        uses: actions/upload-artifact@v3
+        with:
+          name: curio-linux
+          path: dist/curio*
+
+  build-darwin:
+    name: build-darwin
+    runs-on: macos-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - run: git fetch --force --tags
+      - name: Set up Go
+        uses: actions/setup-go@v3
+        with:
+          go-version: 1.18
+      - name: Run GoReleaser
+        uses: goreleaser/goreleaser-action@v3
+        with:
+          distribution: goreleaser
+          version: latest
+          args: release --skip-publish -f ./goreleaser/darwin.yaml
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Upload
+        uses: actions/upload-artifact@v3
+        with:
+          name: curio-darwin
+          path: dist/curio*
+
+  publish:
+    needs: [build-darwin, build-linux]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - run: git fetch --force --tags
+      - name: Make directories
+        run: |
+          mkdir -p ./curio-build/linux
+          mkdir -p ./curio-build/darwin
+      - name: Download linux binaries
+        uses: actions/download-artifact@v3
+        with:
+          name: curio-linux
+          path: ./curio-build/linux
+      - name: Download darwin binaries
+        uses: actions/download-artifact@v3
+        with:
+          name: curio-darwin
+          path: ./curio-build/darwin
+      - name: Merge checksum file
+        run: |
+          cd ./curio-build
+          cat ./darwin/curio*checksums.txt >> checksums.txt
+          cat ./linux/curio*checksums.txt >> checksums.txt
+          rm ./darwin/curio*checksums.txt
+          rm ./linux/curio*checksums.txt
+      - name: Release
+        uses: goreleaser/goreleaser-action@v3
+        with:
+          args: release --config ./goreleaser/release.yaml
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

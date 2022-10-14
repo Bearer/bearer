@@ -1,1 +1,1 @@
-{"metadata":{"version":"1.0"},"name":"Rollbar","type":"external_service","urls":[],"packages":[{"name":"rollbar","group":null,"package_manager":"npm"}]}
+{"metadata":{"version":"1.0"},"name":"Rollbar","type":"external_service","urls":["https://api.rollbar.com"],"packages":[{"name":"rollbar","group":null,"package_manager":"npm"}]}

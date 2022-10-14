@@ -1,1 +1,1 @@
-{"metadata":{"version":"1.0"},"name":"Google Spreadsheets","type":"external_service","urls":[],"packages":[{"name":"df2gspread","group":null,"package_manager":"pypi"}]}
+{"metadata":{"version":"1.0"},"name":"Google Spreadsheets","type":"external_service","urls":["https://googleapis.com/auth/spreadsheets/","https://docs.google.com/spreadsheets/","https://spreadsheets.google.com/"],"packages":[{"name":"df2gspread","group":null,"package_manager":"pypi"}]}

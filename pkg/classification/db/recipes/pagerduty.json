@@ -1,1 +1,1 @@
-{"metadata":{"version":"1.0"},"name":"PagerDuty","type":"external_service","urls":[],"packages":[{"name":"github.com/heimweh/go-pagerduty","group":null,"package_manager":"go"},{"name":"pagerduty","group":null,"package_manager":"rubygems"}]}
+{"metadata":{"version":"1.0"},"name":"PagerDuty","type":"external_service","urls":["https://api.pagerduty.com"],"packages":[{"name":"github.com/heimweh/go-pagerduty","group":null,"package_manager":"go"},{"name":"pagerduty","group":null,"package_manager":"rubygems"}]}

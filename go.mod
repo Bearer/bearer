@@ -14,6 +14,7 @@ require (
 	github.com/ssoroka/slice v0.0.0-20220402005549-78f0cea3df8b
 	github.com/stretchr/testify v1.8.0
 	github.com/struCoder/pidusage v0.2.1
+	github.com/weppos/publicsuffix-go v0.20.0
 	github.com/wlredeye/jsonlines v0.0.0-20160904163743-36b5e1bd13d0
 	github.com/zricethezav/gitleaks/v8 v8.13.0
 	golang.org/x/mod v0.6.0-dev.0.20220419223038-86c51ed26bb4

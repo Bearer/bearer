@@ -100,7 +100,7 @@ func (detector *detector) processTree(tree *parser.Tree, report report.Report) (
 		Report:           report,
 		AcceptExpression: acceptExpression,
 		DetectorType:     detectors.DetectorJavascript,
-		PathAllowed:      true,
+		PathAllowed:      false,
 	}); err != nil {
 		return false, err
 	}

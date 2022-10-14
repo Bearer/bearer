@@ -1,1 +1,1 @@
-{"metadata":{"version":"1.0"},"name":"Monday","type":"external_service","urls":[],"packages":[]}
+{"metadata":{"version":"1.0"},"name":"Monday","type":"external_service","urls":["https://api.monday.com"],"packages":[]}

@@ -1,1 +1,1 @@
-{"metadata":{"version":"1.0"},"name":"Front","type":"external_service","urls":[],"packages":[]}
+{"metadata":{"version":"1.0"},"name":"Front","type":"external_service","urls":["https://webhook.frontapp.com","https://api2.frontapp.com","https://chat-assets.frontapp.com/"],"packages":[]}

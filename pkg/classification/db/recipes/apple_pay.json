@@ -1,1 +1,1 @@
-{"metadata":{"version":"1.0"},"name":"Apple Pay","type":"external_service","urls":[],"packages":[]}
+{"metadata":{"version":"1.0"},"name":"Apple Pay","type":"external_service","urls":["https://apple-pay-gateway-cert.apple.com","https://apple-pay-gateway.apple.com"],"packages":[]}

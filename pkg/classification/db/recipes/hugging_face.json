@@ -1,1 +1,1 @@
-{"metadata":{"version":"1.0"},"name":"Hugging Face","type":"external_service","urls":[],"packages":[]}
+{"metadata":{"version":"1.0"},"name":"Hugging Face","type":"external_service","urls":["https://cdn-datasets.huggingface.co","https://cdn.huggingface.co","https://huggingface.co"],"packages":[]}

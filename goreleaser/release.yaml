@@ -1,0 +1,22 @@
+builds:
+  - skip: true
+changelog:
+  sort: asc
+  filters:
+    exclude:
+      - "^docs:"
+      - "^test:"
+release:
+  draft: false
+  mode: append
+  extra_files:
+    - glob: ./curio-build/**/*
+    - glob: ./curio-build/checksums.txt
+  name_template: "Release {{.Tag}}"
+  header: |
+    # What's Changed
+    ## 🚀 Features
+    ## 🎄 Enhancements
+    ## 🎠 Community
+    ## New Contributors
+    ## Code Diff

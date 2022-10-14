@@ -1,1 +1,1 @@
-{"metadata":{"version":"1.0"},"name":"Oney","type":"external_service","urls":[],"packages":[]}
+{"metadata":{"version":"1.0"},"name":"Oney","type":"external_service","urls":["https://api.oney.io","https://api-staging.oney.io"],"packages":[]}

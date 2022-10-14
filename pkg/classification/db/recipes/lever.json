@@ -1,1 +1,1 @@
-{"metadata":{"version":"1.0"},"name":"Lever","type":"external_service","urls":[],"packages":[]}
+{"metadata":{"version":"1.0"},"name":"Lever","type":"external_service","urls":["https://jobs.lever.co","https://api.lever.co"],"packages":[]}

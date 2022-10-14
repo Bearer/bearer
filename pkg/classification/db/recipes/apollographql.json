@@ -1,1 +1,1 @@
-{"metadata":{"version":"1.0"},"name":"Apollographql","type":"external_service","urls":[],"packages":[]}
+{"metadata":{"version":"1.0"},"name":"Apollographql","type":"external_service","urls":["https://usage-reporting.api.apollographql.com","https://studio.apollographql.com","https://schema-reporting.api.apollographql.com"],"packages":[]}

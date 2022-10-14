@@ -1,1 +1,1 @@
-{"metadata":{"version":"1.0"},"name":"PayU","type":"external_service","urls":[],"packages":[{"name":"openpayu/openpayu","group":"","package_manager":"packagist"},{"name":"payu/alu-client","group":"","package_manager":"packagist"}]}
+{"metadata":{"version":"1.0"},"name":"PayU","type":"external_service","urls":["https://secure.payu.com"],"packages":[{"name":"openpayu/openpayu","group":"","package_manager":"packagist"},{"name":"payu/alu-client","group":"","package_manager":"packagist"}]}
