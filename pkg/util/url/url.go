@@ -1,6 +1,7 @@
 package url
 
 import (
+	"errors"
 	"net/url"
 	"regexp"
 	"strings"
@@ -10,6 +11,9 @@ import (
 
 const prefixPattern = "(?P<match>\\A(?:[^:]+://)?(?:[^/]+\\.)?"
 const suffixPattern = "(?:/|\\z)"
+
+var regexpReplaceMatcher = regexp.MustCompile(`<\w+>`)
+var regexpVariableMatcher = regexp.MustCompile(`\A[*\/.-:]+\z`)
 
 func Match(url string, matcher *regexp.Regexp) (string, error) {
 	match := matcher.FindStringSubmatch(url)
@@ -39,6 +43,28 @@ func PrepareRegexpMatcher(myURL string) (*regexp.Regexp, error) {
 	}
 
 	return regexp.Compile(prefixPattern + domainPattern(parsedDomain) + pathPattern(parsedURL) + ")" + suffixPattern)
+}
+
+func PrepareURLValue(myURL string) (string, error) {
+	if regexpVariableMatcher.MatchString(myURL) {
+		return "", errors.New("URL is only made of variables")
+	}
+
+	var preparedURL string
+	// replace placeholders with wildcard *
+	preparedURL = strings.ReplaceAll(myURL, `%d`, "*")
+	preparedURL = strings.ReplaceAll(preparedURL, `%s`, "*")
+	preparedURL = regexpReplaceMatcher.ReplaceAllString(preparedURL, "*")
+
+	// ensure scheme is present
+	if strings.HasPrefix(preparedURL, "http://") || strings.HasPrefix(preparedURL, "https://") {
+		return preparedURL, nil
+	}
+	if strings.Contains(preparedURL, ".") {
+		preparedURL = "https://" + preparedURL
+	}
+
+	return preparedURL, nil
 }
 
 func domainPattern(parsedDomain *publicsuffix.DomainName) string {

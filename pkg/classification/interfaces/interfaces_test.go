@@ -97,8 +97,7 @@ func TestInterface(t *testing.T) {
 				},
 			},
 			Want: &interfaces.Classification{
-				// todo: we should expect https:// here
-				URL:         "googleapis.com/auth/spreadsheets",
+				URL:         "https://googleapis.com/auth/spreadsheets",
 				RecipeName:  "Google Spreadsheets",
 				RecipeMatch: true,
 				Decision: interfaces.ClassificationDecision{
