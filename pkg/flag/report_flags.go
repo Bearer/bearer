@@ -26,8 +26,8 @@ var (
 type Severity int
 
 var (
-	FormatJSON      = "json"
-	FormatJSONLines = "jsonlines"
+	FormatJSON = "json"
+	// FormatJSONLines = "jsonlines"
 )
 
 var (
@@ -35,8 +35,8 @@ var (
 		Name:       "format",
 		ConfigName: "format",
 		Shorthand:  "f",
-		Value:      FormatJSONLines,
-		Usage:      "format (table, json, jsonline)",
+		Value:      FormatJSON,
+		Usage:      "format (json)",
 	}
 	// ReportFormatFlag = Flag{
 	// 	Name:       "report",
