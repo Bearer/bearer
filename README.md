@@ -55,7 +55,7 @@ Scan a single file:
 curio scan ./curio-ci-test/Pipfile.lock
 ```
 
-## Scan Command Fags
+## Scan Command Flags
 
 ### Report Flags
 
