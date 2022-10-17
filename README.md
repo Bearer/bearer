@@ -5,7 +5,7 @@
   </a>
 
   <hr/>
-  
+
   [![GitHub Release][release-img]][release]
   [![Test][test-img]][test]
   [![GitHub All Releases][github-all-releases-img]][release]
@@ -13,32 +13,59 @@
 
 # Curio
 
+## Quick Start
+
+### Binary
+
+Download the archive file for your operating system/architecture from [here](https://github.com/Bearer/curio/releases/latest/). Unpack the archive, and put the binary somewhere in your $PATH (on UNIX-y systems, /usr/local/bin or the like). Make sure it has execution bits turned on:
+
+```bash
+chmod +x ./curio
+```
+
+### Install Script
+
+:warning: **Not working till public** :warning:
+
+This script downloads Curio binary based on your OS and architecture.
+
+```bash
+curl -sfL https://raw.githubusercontent.com/Bearer/curio/main/contrib/install.sh | sh
+```
+
+*Defaults to `./bin` as a bin directory and to the latest releases*
+
+If you need to customize the options, use the following to pass parameters:
+
+```bash
+curl -sfL https://raw.githubusercontent.com/Bearer/curio/main/contrib/install.sh | sh -s -- -b /usr/local/bin
+```
+
 ## Example usage
 
 Scan a project:
 
 ```bash
-  $ curio scan /path/to/your_project
+curio scan /path/to/your_project
 ```
 
 Scan a single file:
 
 ```bash
-
-  $ curio scan ./curio-ci-test/Pipfile.lock
+curio scan ./curio-ci-test/Pipfile.lock
 ```
 
-## Scan command flags:
+## Scan Command Fags
 
-### Report Flags:
+### Report Flags
 
-- `-f`, `--format` format (table, json, jsonline) (default "jsonlines")
+- `-f`, `--format` format (json) (default "json")
 
-### Scan Flags:
+### Scan Flags
 
 - `--skip` string specify the path to file containg patterns of files to skip when scanning (in .gitignore fashion)
 
-### Worker Flags:
+### Worker Flags
 
 - `--file-size-max` ignore files with file size larger than this config (default 25000000)
 - `--files-to-batch` number of files to batch to worker (default 1)
