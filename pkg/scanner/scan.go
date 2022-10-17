@@ -6,7 +6,7 @@ import (
 	"os"
 
 	"github.com/bearer/curio/pkg/detectors"
-	"github.com/bearer/curio/pkg/report"
+	"github.com/bearer/curio/pkg/report/writer"
 	"github.com/bearer/curio/pkg/types"
 	"github.com/bearer/curio/pkg/util/blamer"
 )
@@ -34,7 +34,7 @@ func Scan(rootDir string, FilesToScan []string, blamer blamer.Blamer, outputPath
 	}
 	defer file.Close()
 
-	rep := report.JsonLinesReport{
+	rep := writer.JSONLines{
 		Blamer: blamer,
 		File:   file,
 	}
