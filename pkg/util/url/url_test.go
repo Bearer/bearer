@@ -1,6 +1,7 @@
 package url_test
 
 import (
+	"errors"
 	"testing"
 
 	"github.com/bearer/curio/pkg/util/url"
@@ -210,6 +211,75 @@ func TestMatch(t *testing.T) {
 			}
 
 			assert.Equal(t, testCase.Want, output)
+		})
+	}
+}
+
+func TestPrepareURLValue(t *testing.T) {
+	tests := []struct {
+		Name, Input string
+		Want        string
+	}{
+		{
+			Name:  "No change",
+			Input: "http://my.example.com",
+			Want:  "http://my.example.com",
+		},
+		{
+			Name:  "Missing scheme",
+			Input: "my.example.com",
+			Want:  "https://my.example.com",
+		},
+		{
+			Name:  `Wildcard replacement of %d`,
+			Input: `my.%d.example.com`,
+			Want:  "https://my.*.example.com",
+		},
+		{
+			Name:  `Wildcard replacement of %s`,
+			Input: `my.%s.example.com`,
+			Want:  "https://my.*.example.com",
+		},
+		{
+			Name:  "Wildcard replacement of <>",
+			Input: "my.<variable>.example.com",
+			Want:  "https://my.*.example.com",
+		},
+	}
+
+	for _, testCase := range tests {
+		t.Run(testCase.Name, func(t *testing.T) {
+			output, err := url.PrepareURLValue(testCase.Input)
+			if err != nil {
+
+				if !assert.Equal(t, err.Error(), testCase.Want) {
+					t.Errorf("PrepareURLValue returned unexpected error %s", err)
+				}
+			}
+
+			assert.Equal(t, testCase.Want, output)
+		})
+	}
+
+	errorTestCases := []struct {
+		Name, Input string
+		Want        error
+	}{
+		{
+			Name:  "Variables only",
+			Input: "**",
+			Want:  errors.New("URL is only made of variables"),
+		},
+	}
+
+	for _, errorTestCase := range errorTestCases {
+		t.Run(errorTestCase.Name, func(t *testing.T) {
+			output, err := url.PrepareURLValue(errorTestCase.Input)
+			if err == nil {
+				t.Errorf("PreparedURLValue returned unexpected result %s", output)
+			}
+
+			assert.Equal(t, errorTestCase.Want, err)
 		})
 	}
 }
