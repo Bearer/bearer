@@ -52,13 +52,12 @@ func SetOut(out io.Writer) {
 
 // NewApp is the factory method to return Curio CLI
 func NewApp(version string) *cobra.Command {
-	globalFlags := flag.NewGlobalFlagGroup()
-	rootCmd := NewRootCommand(version, globalFlags)
+	rootCmd := NewRootCommand()
 	rootCmd.AddCommand(
 		NewProcessingServerCommand(),
-		NewScanCommand(globalFlags),
-		NewConfigCommand(globalFlags),
-		NewVersionCommand(globalFlags),
+		NewScanCommand(),
+		NewConfigCommand(),
+		NewVersionCommand(),
 	)
 
 	return rootCmd
@@ -113,8 +112,7 @@ func NewProcessingServerCommand() *cobra.Command {
 	return cmd
 }
 
-func NewRootCommand(version string, globalFlags *flag.GlobalFlagGroup) *cobra.Command {
-	var versionFormat string
+func NewRootCommand() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "curio [global flags] command [flags] target",
 		Short: "Unified data security scanner",
@@ -126,58 +124,16 @@ func NewRootCommand(version string, globalFlags *flag.GlobalFlagGroup) *cobra.Co
 		},
 		Args: cobra.NoArgs,
 		PersistentPreRunE: func(cmd *cobra.Command, args []string) error {
-			cmd.SetOut(outputWriter)
-
-			// Set the Curio version here so that we can override version printer.
-			cmd.Version = version
-
-			// viper.BindPFlag cannot be called in init().
-			// cf. https://github.com/spf13/cobra/issues/875
-			//     https://github.com/spf13/viper/issues/233
-			if err := globalFlags.Bind(cmd.Root()); err != nil {
-				return xerrors.Errorf("flag bind error: %w", err)
-			}
-
-			// The config path is needed for config initialization.
-			// It needs to be obtained before ToOptions().
-			configPath := viper.GetString(flag.ConfigFileFlag.ConfigName)
-
-			// Configure environment variables and config file
-			// It cannot be called in init() because it must be called after viper.BindPFlags.
-			if err := initConfig(configPath); err != nil {
-				return err
-			}
-
-			// globalOptions := globalFlags.ToOptions()
-
-			// Initialize logger
-			// if err := log.InitLogger(globalOptions.Debug, globalOptions.Quiet); err != nil {
-			// 	return err
-			// }
-
 			return nil
 		},
 		RunE: func(cmd *cobra.Command, args []string) error {
-			globalOptions := globalFlags.ToOptions()
-			if globalOptions.ShowVersion {
-				// Customize version output
-				showVersion(versionFormat, version, outputWriter)
-			} else {
-				return cmd.Help()
-			}
 			return nil
 		},
 	}
-
-	// Add version format flag, only json is supported
-	cmd.Flags().StringVarP(&versionFormat, flag.FormatFlag.Name, flag.FormatFlag.Shorthand, "", "version format (json)")
-
-	globalFlags.AddFlags(cmd)
-
 	return cmd
 }
 
-func NewScanCommand(globalFlags *flag.GlobalFlagGroup) *cobra.Command {
+func NewScanCommand() *cobra.Command {
 	// reportFlagGroup := flag.NewReportFlagGroup()
 	// reportFlagGroup.ReportFormat = nil // TODO: support --report summary
 
@@ -207,7 +163,7 @@ func NewScanCommand(globalFlags *flag.GlobalFlagGroup) *cobra.Command {
 			if err := flags.Bind(cmd); err != nil {
 				return xerrors.Errorf("flag bind error: %w", err)
 			}
-			options, err := flags.ToOptions(cmd.Version, args, globalFlags, outputWriter)
+			options, err := flags.ToOptions(cmd.Version, args, outputWriter)
 			if err != nil {
 				return xerrors.Errorf("flag error: %w", err)
 			}
@@ -229,48 +185,7 @@ func NewScanCommand(globalFlags *flag.GlobalFlagGroup) *cobra.Command {
 	return cmd
 }
 
-func NewRepositoryCommand(globalFlags *flag.GlobalFlagGroup) *cobra.Command {
-	// reportFlagGroup := flag.NewReportFlagGroup()
-	// reportFlagGroup.ReportFormat = nil // TODO: support --report summary
-
-	repoFlags := &flag.Flags{
-		ScanFlagGroup: flag.NewScanFlagGroup(),
-		RepoFlagGroup: flag.NewRepoFlagGroup(),
-	}
-
-	cmd := &cobra.Command{
-		Use:     "repository [flags] REPO_URL",
-		Aliases: []string{"repo"},
-		Short:   "Scan a remote repository",
-		Example: `  # Scan your remote git repository
-  $ curio repo https://github.com/curio/curio-ci-test`,
-		PreRunE: func(cmd *cobra.Command, args []string) error {
-			if err := repoFlags.Bind(cmd); err != nil {
-				return xerrors.Errorf("flag bind error: %w", err)
-			}
-			return nil
-		},
-		RunE: func(cmd *cobra.Command, args []string) error {
-			if err := repoFlags.Bind(cmd); err != nil {
-				return xerrors.Errorf("flag bind error: %w", err)
-			}
-			options, err := repoFlags.ToOptions(cmd.Version, args, globalFlags, outputWriter)
-			if err != nil {
-				return xerrors.Errorf("flag error: %w", err)
-			}
-			return artifact.Run(cmd.Context(), options, artifact.TargetRepository)
-		},
-		SilenceErrors: true,
-		SilenceUsage:  true,
-	}
-	cmd.SetFlagErrorFunc(flagErrorFunc)
-	repoFlags.AddFlags(cmd)
-	cmd.SetUsageTemplate(fmt.Sprintf(usageTemplate, repoFlags.Usages(cmd)))
-
-	return cmd
-}
-
-func NewConfigCommand(globalFlags *flag.GlobalFlagGroup) *cobra.Command {
+func NewConfigCommand() *cobra.Command {
 
 	scanFlags := &flag.ScanFlagGroup{
 		// Enable only '--skip-dirs' and '--skip-files' and disable other flags
@@ -298,7 +213,7 @@ func NewConfigCommand(globalFlags *flag.GlobalFlagGroup) *cobra.Command {
 			if err := configFlags.Bind(cmd); err != nil {
 				return xerrors.Errorf("flag bind error: %w", err)
 			}
-			options, err := configFlags.ToOptions(cmd.Version, args, globalFlags, outputWriter)
+			options, err := configFlags.ToOptions(cmd.Version, args, outputWriter)
 			if err != nil {
 				return xerrors.Errorf("flag error: %w", err)
 			}
@@ -320,7 +235,7 @@ func NewConfigCommand(globalFlags *flag.GlobalFlagGroup) *cobra.Command {
 	return cmd
 }
 
-func NewVersionCommand(globalFlags *flag.GlobalFlagGroup) *cobra.Command {
+func NewVersionCommand() *cobra.Command {
 	var versionFormat string
 	cmd := &cobra.Command{
 		Use:   "version [flags]",

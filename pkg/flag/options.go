@@ -51,7 +51,6 @@ type Flags struct {
 
 // Options holds all the runtime configuration
 type Options struct {
-	GlobalOptions
 	RepoOptions
 	ReportOptions
 	WorkerOptions
@@ -186,7 +185,9 @@ func (f *Flags) AddFlags(cmd *cobra.Command) {
 		}
 	}
 
-	cmd.Flags().SetNormalizeFunc(flagNameNormalize)
+	cmd.Flags().SetNormalizeFunc(func(f *pflag.FlagSet, name string) pflag.NormalizedName {
+		return pflag.NormalizedName(name)
+	})
 }
 
 func (f *Flags) Usages(cmd *cobra.Command) string {
@@ -226,11 +227,10 @@ func (f *Flags) Bind(cmd *cobra.Command) error {
 }
 
 // nolint: gocyclo
-func (f *Flags) ToOptions(appVersion string, args []string, globalFlags *GlobalFlagGroup, output io.Writer) (Options, error) {
+func (f *Flags) ToOptions(appVersion string, args []string, output io.Writer) (Options, error) {
 	var err error
 	opts := Options{
-		AppVersion:    appVersion,
-		GlobalOptions: globalFlags.ToOptions(),
+		AppVersion: appVersion,
 	}
 
 	if f.RepoFlagGroup != nil {
@@ -253,16 +253,4 @@ func (f *Flags) ToOptions(appVersion string, args []string, globalFlags *GlobalF
 	}
 
 	return opts, nil
-}
-
-func flagNameNormalize(f *pflag.FlagSet, name string) pflag.NormalizedName {
-	switch name {
-	case "policy":
-		name = ConfigPolicyFlag.Name
-	case "data":
-		name = ConfigDataFlag.Name
-	case "namespaces":
-		name = PolicyNamespaceFlag.Name
-	}
-	return pflag.NormalizedName(name)
 }

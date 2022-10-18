@@ -3,11 +3,11 @@ package artifact
 import (
 	"context"
 	"errors"
+	"fmt"
 	"os"
 
 	"github.com/rs/zerolog/log"
 
-	"github.com/spf13/viper"
 	"golang.org/x/xerrors"
 
 	"github.com/bearer/curio/pkg/commands/process/balancer"
@@ -17,7 +17,6 @@ import (
 	"github.com/bearer/curio/pkg/report/output"
 	"github.com/bearer/curio/pkg/util/tmpfile"
 
-	"github.com/bearer/curio/pkg/scanner"
 	"github.com/bearer/curio/pkg/types"
 )
 
@@ -29,9 +28,6 @@ const (
 	TargetRepository TargetKind = "repo"
 )
 
-// InitializeScanner defines the initialize function signature of scanner
-type InitializeScanner func(context.Context, ScannerConfig) (scanner.Scanner, func(), error)
-
 type ScannerConfig struct {
 	Target   string
 	Artifact types.Artifact
@@ -42,8 +38,6 @@ type Runner interface {
 	ScanFilesystem(ctx context.Context, opts flag.Options) (types.Report, error)
 	// ScanRepository scans repository
 	ScanRepository(ctx context.Context, opts flag.Options) (types.Report, error)
-	// Filter filter a report
-	Filter(ctx context.Context, opts flag.Options, report types.Report) (types.Report, error)
 	// Report a writes a report
 	Report(opts flag.Options, report types.Report) error
 	// Close closes runner
@@ -76,18 +70,16 @@ func (r *runner) ScanFilesystem(ctx context.Context, opts flag.Options) (types.R
 }
 
 func (r *runner) scanFS(ctx context.Context, opts flag.Options) (types.Report, error) {
-	var s InitializeScanner
-	// Scan filesystem
 
-	return r.scanArtifact(ctx, opts, s)
+	return r.scanArtifact(ctx, opts)
 }
 
 func (r *runner) ScanRepository(ctx context.Context, opts flag.Options) (types.Report, error) {
 
-	return r.scanArtifact(ctx, opts, repositoryStandaloneScanner)
+	return r.scanArtifact(ctx, opts)
 }
 
-func (r *runner) scanArtifact(ctx context.Context, opts flag.Options, scanner InitializeScanner) (types.Report, error) {
+func (r *runner) scanArtifact(ctx context.Context, opts flag.Options) (types.Report, error) {
 	reportpath := tmpfile.Create(os.TempDir(), ".jsonl")
 
 	balancer := balancer.New(settings.Config{
@@ -116,16 +108,6 @@ func (r *runner) scanArtifact(ctx context.Context, opts flag.Options, scanner In
 	}, nil
 }
 
-func (r *runner) Filter(ctx context.Context, opts flag.Options, report types.Report) (types.Report, error) {
-
-	return report, nil
-}
-
-func (r *runner) Report(opts flag.Options, report types.Report) error {
-
-	return nil
-}
-
 // Run performs artifact scanning
 func Run(ctx context.Context, opts flag.Options, targetKind TargetKind) (err error) {
 	ctx, cancel := context.WithTimeout(ctx, opts.Timeout)
@@ -136,11 +118,6 @@ func Run(ctx context.Context, opts flag.Options, targetKind TargetKind) (err err
 			log.Warn().Msg("Increase --timeout value")
 		}
 	}()
-
-	if opts.GenerateDefaultConfig {
-		log.Info().Msg("Writing the default config to curio-default.yaml...")
-		return viper.SafeWriteConfigAs("curio-default.yaml")
-	}
 
 	r, err := NewRunner(ctx, opts)
 	if err != nil {
@@ -156,18 +133,6 @@ func Run(ctx context.Context, opts flag.Options, targetKind TargetKind) (err err
 		}
 	}
 
-	if opts.Format == flag.FormatJSON {
-		err := output.ReportJSON(report)
-		if err != nil {
-			log.Error().Msgf("error generating report %e", err)
-		}
-	}
-
-	report, err = r.Filter(ctx, opts, report)
-	if err != nil {
-		return xerrors.Errorf("filter error: %w", err)
-	}
-
 	if err = r.Report(opts, report); err != nil {
 		return xerrors.Errorf("report error: %w", err)
 	}
@@ -175,38 +140,14 @@ func Run(ctx context.Context, opts flag.Options, targetKind TargetKind) (err err
 	return nil
 }
 
-func initScannerConfig(opts flag.Options) (ScannerConfig, types.ScanOptions, error) { //nolint:all,unused
-	target := opts.Target
-
-	scanOptions := types.ScanOptions{
-		// SecurityChecks: opts.SecurityChecks,
-		// FilePatterns:   opts.FilePatterns,
+func (r *runner) Report(opts flag.Options, report types.Report) error {
+	if opts.Format == flag.FormatJSON {
+		err := output.ReportJSON(report)
+		if err != nil {
+			return fmt.Errorf("error generating report %w", err)
+		}
 	}
-
-	return ScannerConfig{
-		Target: target,
-	}, scanOptions, nil
-}
-
-func scan(ctx context.Context, opts flag.Options, initializeScanner InitializeScanner) ( //nolint:all,unused
-	types.Report, error) {
-
-	scannerConfig, scanOptions, err := initScannerConfig(opts)
-	if err != nil {
-		return types.Report{}, err
-	}
-
-	s, cleanup, err := initializeScanner(ctx, scannerConfig)
-	if err != nil {
-		return types.Report{}, xerrors.Errorf("unable to initialize a scanner: %w", err)
-	}
-	defer cleanup()
-
-	report, err := s.ScanArtifact(ctx, scanOptions)
-	if err != nil {
-		return types.Report{}, xerrors.Errorf("scan failed: %w", err)
-	}
-	return report, nil
+	return nil
 }
 
 func Exit(opts flag.Options, failedResults bool) {
