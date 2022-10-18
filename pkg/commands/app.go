@@ -2,7 +2,6 @@ package commands
 
 import (
 	"encoding/json"
-	"errors"
 	"fmt"
 	"io"
 	"os"
@@ -10,10 +9,8 @@ import (
 	"github.com/bearer/curio/pkg/commands/artifact"
 	"github.com/bearer/curio/pkg/commands/process/worker"
 	"github.com/bearer/curio/pkg/flag"
-	"github.com/bearer/curio/pkg/types"
 	"github.com/rs/zerolog/log"
 	"github.com/spf13/cobra"
-	"github.com/spf13/viper"
 	"golang.org/x/xerrors"
 )
 
@@ -23,7 +20,7 @@ type VersionInfo struct {
 }
 
 const (
-	usageTemplate = `Usage:{{if .Runnable}}
+	scanTemplate = `Usage:{{if .Runnable}}
   {{.UseLine}}{{end}}{{if .HasAvailableSubCommands}}
   {{.CommandPath}} [command]{{end}}{{if gt (len .Aliases) 0}}
 Aliases:
@@ -31,13 +28,11 @@ Aliases:
 Examples:
 {{.Example}}{{end}}{{if .HasAvailableSubCommands}}
 Available Commands:{{range .Commands}}{{if (or .IsAvailableCommand (eq .Name "help"))}}
-  {{rpad .Name .NamePadding }} {{.Short}}{{end}}{{end}}{{end}}{{if .HasAvailableLocalFlags}}
+  {{rpad .Name .NamePadding }} {{.Short}}{{end}}{{end}}{{end}}
+
+{{if .HasAvailableLocalFlags}}
 %s
-Global Flags:
-{{.InheritedFlags.FlagUsages | trimTrailingWhitespaces}}{{end}}{{if .HasHelpSubCommands}}
-Additional help topics:{{range .Commands}}{{if .IsAdditionalHelpTopicCommand}}
-  {{rpad .CommandPath .CommandPathPadding}} {{.Short}}{{end}}{{end}}{{end}}{{if .HasAvailableSubCommands}}
-Use "{{.CommandPath}} [command] --help" for more information about a command.{{end}}
+{{end}}
 `
 )
 
@@ -61,21 +56,6 @@ func NewApp(version string) *cobra.Command {
 	)
 
 	return rootCmd
-}
-
-func initConfig(configFile string) error {
-	// Read from config
-	viper.SetConfigFile(configFile)
-	viper.SetConfigType("yaml")
-	if err := viper.ReadInConfig(); err != nil {
-		if errors.Is(err, os.ErrNotExist) {
-			// log.Logger.Debugf("config file %q not found", configFile)
-			return nil
-		}
-		return xerrors.Errorf("config file %q loading error: %s", configFile, err)
-	}
-	// log.Logger.Infof("Loaded %s", configFile)
-	return nil
 }
 
 func NewProcessingServerCommand() *cobra.Command {
@@ -113,33 +93,32 @@ func NewProcessingServerCommand() *cobra.Command {
 }
 
 func NewRootCommand() *cobra.Command {
+	usageTemplate := `Curio is a tool for scanning policy breaches
+
+Scan Example:
+	# Scan local repository
+	$ curio scan <repository>
+
+Available Commands:
+	scan              Scan git repository
+	init              Inits default configuration file (curio.yml)
+	config            Scan config files for misconfigurations
+	version           Print the version
+`
+
 	cmd := &cobra.Command{
-		Use:   "curio [global flags] command [flags] target",
-		Short: "Unified data security scanner",
-		Long:  "Scanner for Git repositories",
-		Example: `  # Scan local repository
-  $ curio scan <repository>`,
-		CompletionOptions: cobra.CompletionOptions{
-			DisableDefaultCmd: true,
-		},
 		Args: cobra.NoArgs,
-		PersistentPreRunE: func(cmd *cobra.Command, args []string) error {
-			return nil
-		},
 		RunE: func(cmd *cobra.Command, args []string) error {
-			return nil
+			return cmd.Help()
 		},
 	}
+	cmd.SetUsageTemplate(usageTemplate)
 	return cmd
 }
 
 func NewScanCommand() *cobra.Command {
-	// reportFlagGroup := flag.NewReportFlagGroup()
-	// reportFlagGroup.ReportFormat = nil // TODO: support --report summary
 
 	flags := &flag.Flags{
-		// CacheFlagGroup:  flag.NewCacheFlagGroup(),
-		// ReportFlagGroup: reportFlagGroup,
 		ScanFlagGroup:   flag.NewScanFlagGroup(),
 		WorkerFlagGroup: flag.NewWorkerFlagGroup(),
 		ReportFlagGroup: flag.NewReportFlagGroup(),
@@ -169,7 +148,7 @@ func NewScanCommand() *cobra.Command {
 			}
 
 			if options.Target == "" {
-				return fmt.Errorf("PATH is required")
+				return cmd.Help()
 			}
 
 			return artifact.Run(cmd.Context(), options, artifact.TargetFilesystem)
@@ -178,9 +157,8 @@ func NewScanCommand() *cobra.Command {
 		SilenceUsage:  false,
 	}
 
-	cmd.SetFlagErrorFunc(flagErrorFunc)
 	flags.AddFlags(cmd)
-	cmd.SetUsageTemplate(fmt.Sprintf(usageTemplate, flags.Usages(cmd)))
+	cmd.SetUsageTemplate(fmt.Sprintf(scanTemplate, flags.Usages(cmd)))
 
 	return cmd
 }
@@ -189,9 +167,8 @@ func NewConfigCommand() *cobra.Command {
 
 	scanFlags := &flag.ScanFlagGroup{
 		// Enable only '--skip-dirs' and '--skip-files' and disable other flags
-		SkipDirs:     &flag.SkipDirsFlag,
-		SkipFiles:    &flag.SkipFilesFlag,
-		FilePatterns: &flag.FilePatternsFlag,
+		SkipDirs:  &flag.SkipDirsFlag,
+		SkipFiles: &flag.SkipFilesFlag,
 	}
 
 	configFlags := &flag.Flags{
@@ -218,11 +195,6 @@ func NewConfigCommand() *cobra.Command {
 				return xerrors.Errorf("flag error: %w", err)
 			}
 
-			// Disable OS and language analyzers
-
-			// Scan only for misconfigurations
-			options.SecurityChecks = []string{types.SecurityCheckConfig}
-
 			return artifact.Run(cmd.Context(), options, artifact.TargetFilesystem)
 		},
 		SilenceErrors: true,
@@ -230,7 +202,7 @@ func NewConfigCommand() *cobra.Command {
 	}
 	cmd.SetFlagErrorFunc(flagErrorFunc)
 	configFlags.AddFlags(cmd)
-	cmd.SetUsageTemplate(fmt.Sprintf(usageTemplate, configFlags.Usages(cmd)))
+	cmd.SetUsageTemplate(fmt.Sprintf(scanTemplate, configFlags.Usages(cmd)))
 
 	return cmd
 }

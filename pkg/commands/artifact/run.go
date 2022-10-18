@@ -50,7 +50,6 @@ type runner struct {
 type runnerOption func(*runner)
 
 // NewRunner initializes Runner that provides scanning functionalities.
-// It is possible to return SkipScan and it must be handled by caller.
 func NewRunner(ctx context.Context, cliOptions flag.Options, opts ...runnerOption) (Runner, error) {
 	r := &runner{}
 	for _, opt := range opts {
@@ -141,17 +140,12 @@ func Run(ctx context.Context, opts flag.Options, targetKind TargetKind) (err err
 }
 
 func (r *runner) Report(opts flag.Options, report types.Report) error {
-	if opts.Format == flag.FormatJSON {
+	switch opts.Format {
+	case flag.FormatJSON:
 		err := output.ReportJSON(report)
 		if err != nil {
 			return fmt.Errorf("error generating report %w", err)
 		}
 	}
 	return nil
-}
-
-func Exit(opts flag.Options, failedResults bool) {
-	if opts.ExitCode != 0 && failedResults {
-		os.Exit(opts.ExitCode)
-	}
 }
