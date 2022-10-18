@@ -6,9 +6,10 @@
 
   <hr/>
 
-  [![GitHub Release][release-img]][release]
-  [![Test][test-img]][test]
-  [![GitHub All Releases][github-all-releases-img]][release]
+[![GitHub Release][release-img]][release]
+[![Test][test-img]][test]
+[![GitHub All Releases][github-all-releases-img]][release]
+
 </div>
 
 # Curio
@@ -33,7 +34,7 @@ This script downloads Curio binary based on your OS and architecture.
 curl -sfL https://raw.githubusercontent.com/Bearer/curio/main/contrib/install.sh | sh
 ```
 
-*Defaults to `./bin` as a bin directory and to the latest releases*
+_Defaults to `./bin` as a bin directory and to the latest releases_
 
 If you need to customize the options, use the following to pass parameters:
 
@@ -63,7 +64,7 @@ curio scan ./curio-ci-test/Pipfile.lock
 
 ### Scan Flags
 
-- `--skip` specify the comma separated files and directories to skip (supports \* syntax), eg. --skip users/\*.go,users/admin.sql
+- `--skip-path` specify the comma separated files and directories to skip (supports \* syntax), eg. --skip-path users/\*.go,users/admin.sql
 
 ### Worker Flags
 

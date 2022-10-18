@@ -17,7 +17,7 @@ type FileIgnore struct {
 
 func New(projectPath string, config settings.Config) *FileIgnore {
 	return &FileIgnore{
-		ignorer: ignorerFromStrings(config.Scan.Skip),
+		ignorer: ignorerFromStrings(config.Scan.SkipPath),
 
 		config: config,
 	}

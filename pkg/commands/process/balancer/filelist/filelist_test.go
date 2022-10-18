@@ -49,7 +49,7 @@ func TestFileList(t *testing.T) {
 				projectPath: filepath.Join("testdata", "happy_path", "skip"),
 				config: settings.Config{
 					Scan: flag.ScanOptions{
-						Skip: []string{"users/admin.go"},
+						SkipPath: []string{"users/admin.go"},
 					},
 					Worker: flag.WorkerOptions{
 						FileSizeMaximum:           100000,
@@ -70,7 +70,7 @@ func TestFileList(t *testing.T) {
 				projectPath: filepath.Join("testdata", "happy_path", "skip"),
 				config: settings.Config{
 					Scan: flag.ScanOptions{
-						Skip: []string{"users"},
+						SkipPath: []string{"users"},
 					},
 					Worker: flag.WorkerOptions{
 						FileSizeMaximum:           100000,

@@ -5,9 +5,9 @@ import (
 )
 
 var (
-	SkipFlag = Flag{
-		Name:       "skip",
-		ConfigName: "scan.skip",
+	SkipPathFlag = Flag{
+		Name:       "skip-path",
+		ConfigName: "scan.skip-path",
 		Value:      []string{},
 		Usage:      "specify the comma separated files and directories to skip (supports * syntax), eg. --skip users/*.go,users/admin.sql",
 	}
@@ -32,21 +32,21 @@ var (
 )
 
 type ScanFlagGroup struct {
-	SkipFlag *Flag
+	SkipPathFlag *Flag
 	// SecurityChecks *Flag
 	FilePatterns *Flag
 }
 
 type ScanOptions struct {
 	Target         string
-	Skip           []string
+	SkipPath       []string
 	SecurityChecks []string
 	FilePatterns   []string
 }
 
 func NewScanFlagGroup() *ScanFlagGroup {
 	return &ScanFlagGroup{
-		SkipFlag: &SkipFlag,
+		SkipPathFlag: &SkipPathFlag,
 		// SecurityChecks: &SecurityChecksFlag,
 		FilePatterns: &FilePatternsFlag,
 	}
@@ -57,7 +57,7 @@ func (f *ScanFlagGroup) Name() string {
 }
 
 func (f *ScanFlagGroup) Flags() []*Flag {
-	return []*Flag{f.SkipFlag, f.FilePatterns}
+	return []*Flag{f.SkipPathFlag, f.FilePatterns}
 }
 
 func (f *ScanFlagGroup) ToOptions(args []string) (ScanOptions, error) {
@@ -71,8 +71,8 @@ func (f *ScanFlagGroup) ToOptions(args []string) (ScanOptions, error) {
 	// }
 
 	return ScanOptions{
-		Target: target,
-		Skip:   getStringSlice(f.SkipFlag),
+		Target:   target,
+		SkipPath: getStringSlice(f.SkipPathFlag),
 		// SecurityChecks: securityChecks,
 		FilePatterns: getStringSlice(f.FilePatterns),
 	}, nil

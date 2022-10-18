@@ -273,7 +273,7 @@ func NewRepositoryCommand(globalFlags *flag.GlobalFlagGroup) *cobra.Command {
 func NewConfigCommand(globalFlags *flag.GlobalFlagGroup) *cobra.Command {
 
 	scanFlags := &flag.ScanFlagGroup{
-		SkipFlag:     &flag.SkipFlag,
+		SkipPathFlag: &flag.SkipPathFlag,
 		FilePatterns: &flag.FilePatternsFlag,
 	}
 
