@@ -213,7 +213,7 @@ func NewScanCommand(globalFlags *flag.GlobalFlagGroup) *cobra.Command {
 			}
 
 			if options.Target == "" {
-				return fmt.Errorf("path is required")
+				return fmt.Errorf("PATH is required")
 			}
 
 			return artifact.Run(cmd.Context(), options, artifact.TargetFilesystem)

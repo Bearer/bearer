@@ -5,8 +5,9 @@ import (
 	"fmt"
 	"os"
 
+	classsification "github.com/bearer/curio/pkg/classification"
 	"github.com/bearer/curio/pkg/detectors"
-	"github.com/bearer/curio/pkg/report"
+	"github.com/bearer/curio/pkg/report/writer"
 	"github.com/bearer/curio/pkg/types"
 	"github.com/bearer/curio/pkg/util/blamer"
 )
@@ -34,9 +35,10 @@ func Scan(rootDir string, FilesToScan []string, blamer blamer.Blamer, outputPath
 	}
 	defer file.Close()
 
-	rep := report.JsonLinesReport{
-		Blamer: blamer,
-		File:   file,
+	rep := writer.JSONLines{
+		Blamer:     blamer,
+		Classifier: classsification.NewClassifier(&classsification.Config{}),
+		File:       file,
 	}
 
 	if err := detectors.Extract(rootDir, FilesToScan, &rep); err != nil {

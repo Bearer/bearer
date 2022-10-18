@@ -1,13 +1,17 @@
 package interfaces_test
 
 import (
+	"regexp"
 	"testing"
 
 	"github.com/bearer/curio/pkg/classification/db"
 	"github.com/bearer/curio/pkg/classification/interfaces"
+
 	"github.com/bearer/curio/pkg/report"
+
 	reportinterfaces "github.com/bearer/curio/pkg/report/interfaces"
 	"github.com/bearer/curio/pkg/report/values"
+	"github.com/bearer/curio/pkg/util/url"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -43,8 +47,35 @@ func TestInterface(t *testing.T) {
 				RecipeName:  "Stripe",
 				RecipeMatch: true,
 				Decision: interfaces.ClassificationDecision{
-					State:  interfaces.Valid,
+					State:  url.Valid,
 					Reason: "recipe_match",
+				},
+			},
+		},
+		{
+			Name: "when it matches an internal domain",
+			Input: report.Detection{
+				Value: reportinterfaces.Interface{
+					Type: reportinterfaces.TypeURL,
+					Value: &values.Value{
+						Parts: []values.Part{
+							&values.String{
+								Type:  values.PartTypeString,
+								Value: "https://",
+							},
+							&values.String{
+								Type:  values.PartTypeString,
+								Value: "my.internal.domain.com",
+							},
+						},
+					},
+				},
+			},
+			Want: &interfaces.Classification{
+				URL: "https://my.internal.domain.com",
+				Decision: interfaces.ClassificationDecision{
+					State:  url.Valid,
+					Reason: "internal_domain_and_subdomain",
 				},
 			},
 		},
@@ -72,7 +103,7 @@ func TestInterface(t *testing.T) {
 				RecipeName:  "Stripe",
 				RecipeMatch: true,
 				Decision: interfaces.ClassificationDecision{
-					State:  interfaces.Potential,
+					State:  url.Potential,
 					Reason: "recipe_match_with_wildcard",
 				},
 			},
@@ -101,13 +132,13 @@ func TestInterface(t *testing.T) {
 				RecipeName:  "Google Spreadsheets",
 				RecipeMatch: true,
 				Decision: interfaces.ClassificationDecision{
-					State:  interfaces.Valid,
+					State:  url.Valid,
 					Reason: "recipe_match",
 				},
 			},
 		},
 		{
-			Name: "simple path - no match",
+			Name: "TLD is not allowed",
 			Input: report.Detection{
 				Value: reportinterfaces.Interface{
 					Type: reportinterfaces.TypeURL,
@@ -115,21 +146,61 @@ func TestInterface(t *testing.T) {
 						Parts: []values.Part{
 							&values.String{
 								Type:  values.PartTypeString,
-								Value: "http://",
+								Value: "https://",
 							},
 							&values.String{
 								Type:  values.PartTypeString,
-								Value: "api.example.com",
+								Value: "example.id",
 							},
 						},
 					},
 				},
 			},
-			Want: &interfaces.Classification{},
+			Want: &interfaces.Classification{
+				URL: "https://example.id",
+				Decision: interfaces.ClassificationDecision{
+					State:  url.Invalid,
+					Reason: "tld_error",
+				},
+			},
+		},
+		{
+			Name: "excluded domain",
+			Input: report.Detection{
+				Value: reportinterfaces.Interface{
+					Type: reportinterfaces.TypeURL,
+					Value: &values.Value{
+						Parts: []values.Part{
+							&values.String{
+								Type:  values.PartTypeString,
+								Value: "https://",
+							},
+							&values.String{
+								Type:  values.PartTypeString,
+								Value: "github.com",
+							},
+						},
+					},
+				},
+			},
+			Want: &interfaces.Classification{
+				URL: "https://github.com",
+				Decision: interfaces.ClassificationDecision{
+					State:  url.Invalid,
+					Reason: "excluded_domains_error",
+				},
+			},
 		},
 	}
 
-	classifier, err := interfaces.NewDefault()
+	classifier, err := interfaces.New(
+		interfaces.Config{
+			Recipes: db.Default(),
+			InternalDomainMatchers: []*regexp.Regexp{
+				regexp.MustCompile(`https://my.internal.domain.com`),
+			},
+		},
+	)
 	if err != nil {
 		t.Errorf("Error initializing interface %s", err)
 	}
