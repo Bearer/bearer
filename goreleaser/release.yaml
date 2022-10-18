@@ -7,7 +7,7 @@ changelog:
       - "^docs:"
       - "^test:"
 release:
-  draft: false
+  draft: true
   mode: append
   extra_files:
     - glob: ./curio-build/**/*
