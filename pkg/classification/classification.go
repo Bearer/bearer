@@ -25,6 +25,7 @@ func NewClassifier(config *Config) *Classifier {
 			Recipes: db.Default(),
 		},
 	)
+
 	return &Classifier{
 		config:       *config,
 		Dependencies: dependenciesClassifier,
