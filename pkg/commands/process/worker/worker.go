@@ -13,8 +13,7 @@ import (
 )
 
 func Start(port string) error {
-
-	err := http.ListenAndServe(port, http.HandlerFunc(func(rw http.ResponseWriter, r *http.Request) {
+	err := http.ListenAndServe(`localhost`+port, http.HandlerFunc(func(rw http.ResponseWriter, r *http.Request) {
 		defer r.Body.Close() //golint:all,errcheck
 
 		switch r.URL.Path {
