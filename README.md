@@ -1,10 +1,11 @@
 <div align="center">
 
-  <a href="https://www.bearer.com" rel="nofollow">
-    <img alt="Bearer logo" data-canonical-src="https://www.bearer.com/assets/bearer-logo.svg" src="https://www.bearer.com/assets/bearer-logo.svg" width="250">
-  </a>
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="./docs/assets/img/curio-logo-dark.svg">
+  <img alt="Curio" src="./docs/assets/img/curio-logo-light.svg">
+</picture>
 
-  <hr/>
+<br />
 
 [![GitHub Release][release-img]][release]
 [![Test][test-img]][test]
