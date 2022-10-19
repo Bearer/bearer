@@ -164,10 +164,8 @@ func NewScanCommand() *cobra.Command {
 }
 
 func NewConfigCommand() *cobra.Command {
-
 	scanFlags := &flag.ScanFlagGroup{
 		SkipPathFlag: &flag.SkipPathFlag,
-		FilePatterns: &flag.FilePatternsFlag,
 	}
 
 	configFlags := &flag.Flags{

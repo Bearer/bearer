@@ -7,30 +7,6 @@ var (
 		Value:      []string{},
 		Usage:      "specify the comma separated files and directories to skip (supports * syntax), eg. --skip users/*.go,users/admin.sql",
 	}
-	SkipFilesFlag = Flag{
-		Name:       "skip-files",
-		ConfigName: "scan.skip-files",
-		Value:      []string{},
-		Usage:      "specify the file paths to skip traversal",
-	}
-	OfflineScanFlag = Flag{
-		Name:       "offline-scan",
-		ConfigName: "scan.offline",
-		Value:      false,
-		Usage:      "do not issue API requests to identify dependencies",
-	}
-	SecurityChecksFlag = Flag{
-		Name:       "security-checks",
-		ConfigName: "scan.security-checks",
-		Value:      []string{types.SecurityCheckConfig},
-		Usage:      "comma-separated list of what security issues to detect (vuln,config)",
-	}
-	FilePatternsFlag = Flag{
-		Name:       "file-patterns",
-		ConfigName: "scan.file-patterns",
-		Value:      []string{},
-		Usage:      "specify config file patterns",
-	}
 )
 
 type ScanFlagGroup struct {
@@ -38,8 +14,8 @@ type ScanFlagGroup struct {
 }
 
 type ScanOptions struct {
-	Target         string
-	SkipPath       []string
+	Target   string
+	SkipPath []string
 }
 
 func NewScanFlagGroup() *ScanFlagGroup {
@@ -53,7 +29,7 @@ func (f *ScanFlagGroup) Name() string {
 }
 
 func (f *ScanFlagGroup) Flags() []*Flag {
-	return []*Flag{f.SkipPathFlag, f.FilePatterns}
+	return []*Flag{f.SkipPathFlag}
 }
 
 func (f *ScanFlagGroup) ToOptions(args []string) (ScanOptions, error) {
