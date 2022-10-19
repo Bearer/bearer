@@ -3,17 +3,14 @@ package balancer
 import (
 	"context"
 	"errors"
-	"io/fs"
 	"io/ioutil"
 	"os"
-	"path/filepath"
-	"strings"
-	"time"
 
 	"github.com/google/uuid"
 	"github.com/rs/zerolog/log"
 	"github.com/wlredeye/jsonlines"
 
+	"github.com/bearer/curio/pkg/commands/process/balancer/filelist"
 	"github.com/bearer/curio/pkg/commands/process/repo_info"
 	config "github.com/bearer/curio/pkg/commands/process/settings"
 	workertype "github.com/bearer/curio/pkg/commands/process/worker/work"
@@ -70,44 +67,7 @@ func (worker *Worker) Start() {
 
 	log.Debug().Msgf("worker uuid %s working on repo %s", worker.uuid, worker.task.Definition.Dir)
 
-	addedFiles := 0
-	err = filepath.WalkDir(worker.task.Definition.Dir, func(path string, d fs.DirEntry, err error) error {
-		if err != nil {
-			return err
-		}
-		if d.IsDir() {
-			return nil
-		}
-		file := workertype.File{}
-
-		fileinfo, err := d.Info()
-		if err != nil {
-			return err
-		}
-		filesize := fileinfo.Size()
-
-		if filesize > int64(worker.config.Worker.FileSizeMaximum) {
-			log.Debug().Msgf("skipping file : %s", path)
-			return nil
-		}
-
-		file.Timeout = worker.config.Worker.TimeoutFileMinimum
-		timeoutFileSize := time.Duration(filesize / int64(worker.config.Worker.TimeoutFileSecondPerBytes) * int64(time.Second))
-		if timeoutFileSize > file.Timeout {
-			if timeoutFileSize > worker.config.Worker.TimeoutFileMaximum {
-				file.Timeout = worker.config.Worker.TimeoutFileMaximum
-			} else {
-				file.Timeout = timeoutFileSize
-			}
-		}
-
-		file.FilePath = strings.TrimPrefix(path, worker.task.Definition.Dir)
-
-		addedFiles++
-		worker.FileList = append(worker.FileList, file)
-
-		return nil
-	})
+	worker.FileList, err = filelist.Discover(worker.task.Definition.Dir, worker.config)
 
 	if err != nil {
 		worker.complete(err)

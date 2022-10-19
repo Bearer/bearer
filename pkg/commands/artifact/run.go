@@ -93,6 +93,7 @@ func (r *runner) scanArtifact(ctx context.Context, opts flag.Options, scanner In
 	balancer := balancer.New(settings.Config{
 		Worker:         opts.WorkerOptions,
 		CustomDetector: settings.DefaultCustomDetector(),
+		Scan:           opts.ScanOptions,
 	})
 	task := balancer.ScheduleTask(work.ProcessRequest{
 		Repository: work.Repository{
@@ -157,6 +158,7 @@ func Run(ctx context.Context, opts flag.Options, targetKind TargetKind) (err err
 	}
 
 	if opts.Format == flag.FormatJSON {
+		log.Debug().Msgf("outputting json")
 		err := output.ReportJSON(report)
 		if err != nil {
 			log.Error().Msgf("error generating report %e", err)
