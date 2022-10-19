@@ -1,12 +1,14 @@
 package url
 
 import (
+	"context"
 	"errors"
 	"net"
 	"net/url"
 	"path/filepath"
 	"regexp"
 	"strings"
+	"time"
 
 	"github.com/bearer/curio/pkg/report"
 	"github.com/bearer/curio/pkg/report/detectors"
@@ -19,6 +21,9 @@ const suffixPattern = "(?:/|\\z)"
 // recipe url matching regexp
 var regexpReplaceMatcher = regexp.MustCompile(`<\w+>`)
 var regexpVariableMatcher = regexp.MustCompile(`\A[*\/.-:]+\z`)
+
+// for domain resolution - find anything between * and .
+var regexpDomainSplitMatcher = regexp.MustCompile(`\*\s*(.*?)\s*\.`)
 
 // url validation regexp
 var regexpDependencyFileMatcher = regexp.MustCompile(`Gemfile\.lock|package\.json|yarn\.lock|maven\-dependencies\.json|gemnasium\-maven\-plugin\.json|gradle\-dependencies\.json|Pipfile\.lock|package\-lock\.json|npm\-shrinkwrap\.json|packages\.lock\.json|project\.json|packages\.config|paket\.dependencies|ivy\-report\.xml|composer\.lock|composer\.json|pipdeptree\.json|go\.sum|requirements\.txt|pyproject\.toml|poetry\.lock|pom\.xml|build\.gradle`)
@@ -187,6 +192,23 @@ const (
 type ValidationResult struct {
 	State  ValidationState
 	Reason string
+}
+
+// given a valid URL, is it reachable?
+func IsReachable(myURL string, timeout time.Duration) bool {
+	resolverContext, cancel := context.WithTimeout(context.TODO(), timeout)
+	defer cancel()
+
+	staticDomain := getStaticDomain(myURL)
+	if myURL == staticDomain {
+		return domainResolves(myURL, resolverContext)
+	}
+
+	if isNameserver(myURL, staticDomain, resolverContext) {
+		return true
+	}
+
+	return domainResolves(myURL, resolverContext)
 }
 
 func Match(url string, matcher *regexp.Regexp) (string, error) {
@@ -478,4 +500,63 @@ func isVendored(filename string) bool {
 func isPotentialDetector(detectorType detectors.Type) bool {
 	_, ok := potentialDetectors[string(detectorType)]
 	return ok
+}
+
+func getStaticDomain(myURL string) string {
+	domainSplit := regexpDomainSplitMatcher.Split(myURL, -1)
+	lenDomainSplit := len(domainSplit)
+	if lenDomainSplit <= 1 {
+		// single part, no static domain
+		return myURL
+	}
+
+	return domainSplit[lenDomainSplit-1]
+}
+
+func isNameserver(myURL string, staticDomain string, resolverContext context.Context) bool {
+	_, err := publicsuffix.ParseFromListWithOptions(
+		publicsuffix.DefaultList,
+		staticDomain,
+		&publicsuffix.FindOptions{IgnorePrivate: true, DefaultRule: nil},
+	)
+	if err != nil {
+		// invalid domain
+		return false
+	}
+
+	nameserver, err := resolverLookupNS(resolverContext, staticDomain)
+	if err != nil {
+		// return false even for transient errors
+		return false
+	}
+
+	return len(nameserver) > 0
+}
+
+func domainResolves(myURL string, resolverContext context.Context) bool {
+	// handle any special characters
+	sanitizedURL, err := publicsuffix.ToASCII(myURL)
+	if err != nil {
+		return false
+	}
+
+	names, err := resolverLookUpAddr(resolverContext, sanitizedURL)
+	if err != nil {
+		// return false even for transient errors
+		return false
+	}
+
+	return len(names) > 0
+}
+
+// for unit test mocking
+var resolver = net.Resolver{PreferGo: true}
+var LookUpAddr = resolver.LookupAddr
+var LookUpNS = resolver.LookupNS
+
+func resolverLookUpAddr(ctx context.Context, addr string) ([]string, error) {
+	return LookUpAddr(ctx, addr)
+}
+func resolverLookupNS(ctx context.Context, name string) ([]*net.NS, error) {
+	return LookUpNS(ctx, name)
 }
