@@ -166,9 +166,8 @@ func NewScanCommand() *cobra.Command {
 func NewConfigCommand() *cobra.Command {
 
 	scanFlags := &flag.ScanFlagGroup{
-		// Enable only '--skip-dirs' and '--skip-files' and disable other flags
-		SkipDirs:  &flag.SkipDirsFlag,
-		SkipFiles: &flag.SkipFilesFlag,
+		SkipPathFlag: &flag.SkipPathFlag,
+		FilePatterns: &flag.FilePatternsFlag,
 	}
 
 	configFlags := &flag.Flags{

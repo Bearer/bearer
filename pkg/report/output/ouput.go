@@ -24,6 +24,8 @@ func ReportJSON(report types.Report) error {
 		return fmt.Errorf("failed to decode report: %w", err)
 	}
 
+	log.Printf("got %d detections", len(detections))
+
 	jsonBytes, err := json.MarshalIndent(&detections, "", "\t")
 	if err != nil {
 		return fmt.Errorf("failed to json marshal detections: %w", err)

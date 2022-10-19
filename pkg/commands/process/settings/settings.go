@@ -11,6 +11,7 @@ import (
 
 type Config struct {
 	Worker         flag.WorkerOptions
+	Scan           flag.ScanOptions
 	CustomDetector CustomDetector
 }
 

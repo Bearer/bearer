@@ -84,6 +84,7 @@ func (r *runner) scanArtifact(ctx context.Context, opts flag.Options) (types.Rep
 	balancer := balancer.New(settings.Config{
 		Worker:         opts.WorkerOptions,
 		CustomDetector: settings.DefaultCustomDetector(),
+		Scan:           opts.ScanOptions,
 	})
 	task := balancer.ScheduleTask(work.ProcessRequest{
 		Repository: work.Repository{
