@@ -62,7 +62,7 @@ curl -sfL https://raw.githubusercontent.com/Bearer/curio/main/contrib/install.sh
 
 #### Binary
 
-Download the archive file for your operating system/architecture from [here](https://github.com/Bearer/curio/releases/latest/). Unpack the archive, and put the binary somewhere in your $PATH (on UNIX-y systems, /usr/local/bin or the like). Make sure it has execution bits turned on:
+Download the archive file for your operating system/architecture from [here](https://github.com/Bearer/curio/releases/latest/). Unpack the archive, and put the binary somewhere in your $PATH (on UNIX-y systems, /usr/local/bin or the like). Make sure it has permission to execute:
 
 ```bash
 chmod +x ./curio
