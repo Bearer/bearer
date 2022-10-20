@@ -1,7 +1,9 @@
 package url_test
 
 import (
+	"context"
 	"errors"
+	"net"
 	"testing"
 
 	"github.com/bearer/curio/pkg/report"
@@ -224,10 +226,7 @@ func TestPrepareURLValue(t *testing.T) {
 		t.Run(testCase.Name, func(t *testing.T) {
 			output, err := url.PrepareURLValue(testCase.Input)
 			if err != nil {
-
-				if !assert.Equal(t, err.Error(), testCase.Want) {
-					t.Errorf("PrepareURLValue returned unexpected error %s", err)
-				}
+				t.Errorf("PrepareURLValue returned unexpected error %s", err)
 			}
 
 			assert.Equal(t, testCase.Want, output)
@@ -392,10 +391,7 @@ func TestValidateFormat(t *testing.T) {
 		t.Run(testCase.Name, func(t *testing.T) {
 			output, err := url.ValidateFormat(testCase.URL, testCase.Data)
 			if err != nil {
-
-				if !assert.Equal(t, err.Error(), testCase.Want) {
-					t.Errorf("ValidateFormat returned unexpected error %s", err)
-				}
+				t.Errorf("ValidateFormat returned unexpected error %s", err)
 			}
 
 			assert.Equal(t, testCase.Want, output)
@@ -463,10 +459,7 @@ func TestValidateInternal(t *testing.T) {
 		t.Run(testCase.Name, func(t *testing.T) {
 			output, err := url.ValidateInternal(testCase.URL)
 			if err != nil {
-
-				if !assert.Equal(t, err.Error(), testCase.Want) {
-					t.Errorf("ValidateInternal returned unexpected error %s", err)
-				}
+				t.Errorf("ValidateInternal returned unexpected error %s", err)
 			}
 
 			assert.Equal(t, testCase.Want, output)
@@ -487,15 +480,6 @@ func TestValidate(t *testing.T) {
 				Reason: "tld_error",
 			},
 		},
-		// todo: unreachable domain
-		// {
-		// 	Name:                   "unreachable domain",
-		// 	URL:                    "https://example.id",
-		// 	Want: &url.ValidationResult{
-		// 		State:  url.Invalid,
-		// 		Reason: "domain_not_reachable",
-		// 	},
-		// },
 		{
 			Name: "blacklisted domain",
 			URL:  "https://github.com",
@@ -556,15 +540,36 @@ func TestValidate(t *testing.T) {
 
 	for _, testCase := range tests {
 		t.Run(testCase.Name, func(t *testing.T) {
-			output, err := url.Validate(testCase.URL)
-			if err != nil {
+			domainResolver := url.NewDomainResolverDefault()
+			domainResolver.Enabled = false // disable domain resolution checks to avoid mocking
 
-				if !assert.Equal(t, err.Error(), testCase.Want) {
-					t.Errorf("Validate returned unexpected error %s", err)
-				}
+			output, err := url.Validate(testCase.URL, domainResolver)
+			if err != nil {
+				t.Errorf("Validate returned unexpected error %s", err)
 			}
 
 			assert.Equal(t, testCase.Want, output)
 		})
 	}
+
+	// test domain reachability
+	t.Run("unreachable domain", func(t *testing.T) {
+		domainResolver := url.NewDomainResolverDefault()
+		domainResolver.LookUpAddr = func(ctx context.Context, addr string) ([]string, error) {
+			return []string{}, nil // no DNS address found
+		}
+		domainResolver.LookUpNS = func(ctx context.Context, name string) ([]*net.NS, error) {
+			return []*net.NS{}, nil // no NS found
+		}
+
+		output, err := url.Validate("https://unreachable.com", domainResolver)
+		if err != nil {
+			t.Errorf("Validate returned unexpected error %s", err)
+		}
+
+		assert.Equal(t, &url.ValidationResult{
+			State:  url.Invalid,
+			Reason: "domain_not_reachable",
+		}, output)
+	})
 }

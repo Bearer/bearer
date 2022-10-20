@@ -31,11 +31,13 @@ type Classification struct {
 type Classifier struct {
 	Recipes                []Recipe
 	InternalDomainMatchers []*regexp.Regexp
+	DomainResolver         *url.DomainResolver
 }
 
 type Config struct {
 	Recipes                []db.Recipe
 	InternalDomainMatchers []*regexp.Regexp
+	DomainResolver         *url.DomainResolver
 }
 
 type Recipe struct {
@@ -79,7 +81,11 @@ func New(config Config) (*Classifier, error) {
 		preparedRecipes = append(preparedRecipes, preparedRecipe)
 	}
 
-	return &Classifier{Recipes: preparedRecipes, InternalDomainMatchers: config.InternalDomainMatchers}, nil
+	return &Classifier{
+		Recipes:                preparedRecipes,
+		InternalDomainMatchers: config.InternalDomainMatchers,
+		DomainResolver:         config.DomainResolver,
+	}, nil
 }
 
 func NewDefault() (*Classifier, error) {
@@ -87,6 +93,7 @@ func NewDefault() (*Classifier, error) {
 		Config{
 			Recipes:                db.Default(),
 			InternalDomainMatchers: []*regexp.Regexp{},
+			DomainResolver:         url.NewDomainResolverDefault(),
 		},
 	)
 }
@@ -177,7 +184,7 @@ func (classifier *Classifier) Classify(data report.Detection) (*ClassifiedInterf
 	}
 
 	// URL is not internal & no recipe found : validate URL and return result
-	validityCheck, err := url.Validate(value)
+	validityCheck, err := url.Validate(value, classifier.DomainResolver)
 	if err != nil {
 		return nil, err
 	}

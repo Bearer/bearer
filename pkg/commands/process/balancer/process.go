@@ -44,8 +44,13 @@ func (process *Process) StartProcess(task *workertype.ProcessRequest) error {
 		log.Fatal().Msgf("failed to get current command executable %e", err)
 	}
 
+	args := []string{"processing-worker", "--port=" + port}
+	if process.config.Scan.Debug {
+		args = append(args, "--debug")
+	}
+
 	log.Debug().Msgf("spawning on port %s", port)
-	cmd := exec.Command(currentCommand, "processing-worker", "--port", port)
+	cmd := exec.Command(currentCommand, args...)
 	cmd.Dir, err = os.Getwd()
 	if err != nil {
 		log.Fatal().Err(fmt.Errorf("couldn't determine current working dir %w", err)).Send()

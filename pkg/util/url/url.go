@@ -362,7 +362,7 @@ func ValidateInternal(myURL string) (*ValidationResult, error) {
 	return &ValidationResult, nil
 }
 
-func Validate(myURL string) (*ValidationResult, error) {
+func Validate(myURL string, domainResolver *DomainResolver) (*ValidationResult, error) {
 	ValidationResult := ValidationResult{
 		State:  Invalid,
 		Reason: "uncertain", // default
@@ -387,7 +387,10 @@ func Validate(myURL string) (*ValidationResult, error) {
 		return &ValidationResult, nil
 	}
 
-	// todo: :invalid, :domain_not_reachable
+	if !domainResolver.CanReach(myURL) {
+		ValidationResult.Reason = "domain_not_reachable"
+		return &ValidationResult, nil
+	}
 
 	if domainIsExcluded(parsedURL.Host) {
 		ValidationResult.Reason = "excluded_domains_error"
