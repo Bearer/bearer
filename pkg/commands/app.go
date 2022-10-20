@@ -46,13 +46,13 @@ func SetOut(out io.Writer) {
 }
 
 // NewApp is the factory method to return Curio CLI
-func NewApp(version string) *cobra.Command {
+func NewApp(version string, commitSHA string) *cobra.Command {
 	rootCmd := NewRootCommand()
 	rootCmd.AddCommand(
 		NewProcessingServerCommand(),
 		NewScanCommand(),
 		NewConfigCommand(),
-		NewVersionCommand(version),
+		NewVersionCommand(version, commitSHA),
 	)
 
 	return rootCmd
@@ -214,17 +214,15 @@ func NewConfigCommand() *cobra.Command {
 	return cmd
 }
 
-func NewVersionCommand(version string) *cobra.Command {
+func NewVersionCommand(version string, commitSHA string) *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "version",
 		Short: "Print the version",
 		Args:  cobra.NoArgs,
 		RunE: func(cmd *cobra.Command, args []string) error {
-			output.DefaultLogger().Msgf("curio version: %s", version)
+			output.DefaultLogger().Msgf("curio version: %s\nSHA: %s", version, commitSHA)
 			return nil
 		},
-		SilenceErrors: false,
-		SilenceUsage:  false,
 	}
 	cmd.SetFlagErrorFunc(flagErrorFunc)
 

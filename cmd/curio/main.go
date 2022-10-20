@@ -15,7 +15,7 @@ func main() {
 }
 
 func run() error {
-	app := commands.NewApp(build.Version)
+	app := commands.NewApp(build.Version, build.CommitSHA)
 	if err := app.Execute(); err != nil {
 		return err
 	}
