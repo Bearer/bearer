@@ -5,7 +5,7 @@ var (
 		Name:       "skip-path",
 		ConfigName: "scan.skip-path",
 		Value:      []string{},
-		Usage:      "specify the comma separated files and directories to skip (supports * syntax), eg. --skip users/*.go,users/admin.sql",
+		Usage:      "specify the comma separated files and directories to skip (supports * syntax), eg. --skip-path users/*.go,users/admin.sql",
 	}
 	DebugFlag = Flag{
 		Name:       "debug",
