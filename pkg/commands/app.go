@@ -220,7 +220,7 @@ func NewVersionCommand(version string, commitSHA string) *cobra.Command {
 		Short: "Print the version",
 		Args:  cobra.NoArgs,
 		RunE: func(cmd *cobra.Command, args []string) error {
-			output.DefaultLogger().Msgf("curio version: %s\nSHA: %s", version, commitSHA)
+			output.DefaultLogger().Msgf("curio version: %s\nsha: %s", version, commitSHA)
 			return nil
 		},
 	}
