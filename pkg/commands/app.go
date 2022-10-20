@@ -181,11 +181,12 @@ func NewScanCommand() *cobra.Command {
 
 func NewConfigCommand() *cobra.Command {
 	scanFlags := &flag.ScanFlagGroup{
-		SkipPathFlag: &flag.SkipPathFlag,
+		SkipPathFlag:                &flag.SkipPathFlag,
+		DisableDomainResolutionFlag: &flag.DisableDomainResolutionFlag,
+		DomainResolutionTimeoutFlag: &flag.DomainResolutionTimeoutFlag,
 	}
 
 	configFlags := &flag.Flags{
-
 		ScanFlagGroup: scanFlags,
 	}
 

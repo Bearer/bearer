@@ -35,6 +35,8 @@ curio scan [FLAGS] [PATH]
 
 - `--skip-path` specify the comma separated files and directories to skip (supports \* syntax), eg. --skip-path users/\*.go,users/admin.sql
 - `--debug` enable debug logs
+- `--disable-domain-resolution` skip attempt to resolve detected domains during classification (default false)
+- `--domain-resolution-timeout` set timeout when attempting to resolve detected domains during classification
 
 #### Worker Flags
 
