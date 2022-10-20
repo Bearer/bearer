@@ -10,6 +10,7 @@
 [![GitHub Release][release-img]][release]
 [![Test][test-img]][test]
 [![GitHub All Releases][github-all-releases-img]][release]
+[![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg)](CODE_OF_CONDUCT.md)
 
 </div>
 
@@ -85,29 +86,17 @@ curio scan ./curio-ci-test/Pipfile.lock
 
 Additional options for using and configuring the scan command can be found in the [scan documentation](docs/reference/commands.md#scan);
 
-## Development
+## Contributing
 
-### Installation
+Interested in contributing? We're here for it! For details on how to contribute, setting up your development environment, and our processes, review the [contribution guide](CONTRIBUTING.md).
 
-Install modules:
+## Code of conduct
 
-```bash
-go mod download
-```
+Everyone interacting with this project is expected to follow the guidelines of our [code of conduct](CODE_OF_CONDUCT.md).
 
-### Testing
+## License
 
-Running classification tests:
-
-```bash
-go test ./pkg/classification/... -count=1
-```
-
-Running a single specific test:
-
-```bash
-go test -run ^TestSchema$ ./pkg/classification/schema -count=1
-```
+<!-- TBD -->
 
 ---
 
