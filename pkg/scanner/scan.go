@@ -10,7 +10,7 @@ import (
 	"github.com/bearer/curio/pkg/util/blamer"
 )
 
-func Scan(rootDir string, FilesToScan []string, blamer blamer.Blamer, outputPath string) error {
+func Scan(rootDir string, FilesToScan []string, blamer blamer.Blamer, outputPath string, classifier *classsification.Classifier) error {
 	file, err := os.OpenFile(outputPath, os.O_RDWR|os.O_TRUNC, 0666)
 
 	if err != nil {
@@ -20,7 +20,7 @@ func Scan(rootDir string, FilesToScan []string, blamer blamer.Blamer, outputPath
 
 	rep := writer.JSONLines{
 		Blamer:     blamer,
-		Classifier: classsification.NewClassifier(&classsification.Config{}),
+		Classifier: classifier,
 		File:       file,
 	}
 

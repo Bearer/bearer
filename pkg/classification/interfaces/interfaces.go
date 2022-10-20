@@ -31,11 +31,13 @@ type Classification struct {
 type Classifier struct {
 	Recipes                []Recipe
 	InternalDomainMatchers []*regexp.Regexp
+	DomainResolver         *url.DomainResolver
 }
 
 type Config struct {
 	Recipes                []db.Recipe
 	InternalDomainMatchers []*regexp.Regexp
+	DomainResolver         *url.DomainResolver
 }
 
 type Recipe struct {
@@ -79,7 +81,11 @@ func New(config Config) (*Classifier, error) {
 		preparedRecipes = append(preparedRecipes, preparedRecipe)
 	}
 
-	return &Classifier{Recipes: preparedRecipes, InternalDomainMatchers: config.InternalDomainMatchers}, nil
+	return &Classifier{
+		Recipes:                preparedRecipes,
+		InternalDomainMatchers: config.InternalDomainMatchers,
+		DomainResolver:         config.DomainResolver,
+	}, nil
 }
 
 func NewDefault() (*Classifier, error) {
@@ -87,6 +93,7 @@ func NewDefault() (*Classifier, error) {
 		Config{
 			Recipes:                db.Default(),
 			InternalDomainMatchers: []*regexp.Regexp{},
+			DomainResolver:         url.NewDomainResolverDefault(),
 		},
 	)
 }
@@ -102,6 +109,25 @@ func (classifier *Classifier) Classify(data report.Detection) (*ClassifiedInterf
 		return nil, err
 	}
 
+	// check URL format
+	formatValidityCheck, err := url.ValidateFormat(value, &data)
+	if err != nil {
+		return nil, err
+	}
+	if formatValidityCheck.State == url.Invalid {
+		return &ClassifiedInterface{
+			Detection: &data,
+			Classification: &Classification{
+				URL: value,
+				Decision: ClassificationDecision{
+					State:  formatValidityCheck.State,
+					Reason: formatValidityCheck.Reason,
+				},
+			},
+		}, nil
+	}
+
+	// check if URL is internal
 	var isInternal = false
 	for _, matcher := range classifier.InternalDomainMatchers {
 		if matcher.MatchString(value) {
@@ -110,40 +136,38 @@ func (classifier *Classifier) Classify(data report.Detection) (*ClassifiedInterf
 		}
 	}
 
-	validityCheck, err := url.Validate(value, isInternal, &data)
-	if err != nil {
-		return nil, err
-	}
-
-	classifiedInterface := &ClassifiedInterface{
-		Detection: &data,
-		Classification: &Classification{
-			URL: value,
-			Decision: ClassificationDecision{
-				State:  validityCheck.State,
-				Reason: validityCheck.Reason,
-			},
-		},
-	}
-
-	// recipe match for non-internal URLs only
 	if isInternal {
-		return classifiedInterface, nil
+		internalValidityCheck, err := url.ValidateInternal(value)
+		if err != nil {
+			return nil, err
+		}
+
+		return &ClassifiedInterface{
+			Detection: &data,
+			Classification: &Classification{
+				URL: value,
+				Decision: ClassificationDecision{
+					State:  internalValidityCheck.State,
+					Reason: internalValidityCheck.Reason,
+				},
+			},
+		}, nil
 	}
 
+	// check for matching recipe
 	recipeMatch, err := classifier.FindMatchingRecipeUrl(value)
 	if err != nil {
 		return nil, err
 	}
-
-	// if recipe found, overwrite any existing classification
 	if recipeMatch != nil {
-		classifiedInterface.Classification = &Classification{
-			URL:         recipeMatch.DetectionURLPart,
-			RecipeMatch: true,
-			RecipeName:  recipeMatch.RecipeName,
+		classifiedInterface := &ClassifiedInterface{
+			Detection: &data,
+			Classification: &Classification{
+				URL:         recipeMatch.DetectionURLPart,
+				RecipeMatch: true,
+				RecipeName:  recipeMatch.RecipeName,
+			},
 		}
-
 		if strings.Contains(recipeMatch.DetectionURLPart, "*") {
 			classifiedInterface.Classification.Decision = ClassificationDecision{
 				State:  url.Potential,
@@ -159,7 +183,22 @@ func (classifier *Classifier) Classify(data report.Detection) (*ClassifiedInterf
 		return classifiedInterface, nil
 	}
 
-	return classifiedInterface, nil
+	// URL is not internal & no recipe found : validate URL and return result
+	validityCheck, err := url.Validate(value, classifier.DomainResolver)
+	if err != nil {
+		return nil, err
+	}
+
+	return &ClassifiedInterface{
+		Detection: &data,
+		Classification: &Classification{
+			URL: value,
+			Decision: ClassificationDecision{
+				State:  validityCheck.State,
+				Reason: validityCheck.Reason,
+			},
+		},
+	}, nil
 }
 
 func (classifier *Classifier) FindMatchingRecipeUrl(detectionURL string) (*RecipeURLMatch, error) {

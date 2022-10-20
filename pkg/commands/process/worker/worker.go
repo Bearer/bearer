@@ -6,14 +6,22 @@ import (
 	"net/http"
 	"runtime"
 
+	classsification "github.com/bearer/curio/pkg/classification"
+	config "github.com/bearer/curio/pkg/commands/process/settings"
 	"github.com/bearer/curio/pkg/commands/process/worker/blamer"
 	"github.com/bearer/curio/pkg/commands/process/worker/work"
 	"github.com/bearer/curio/pkg/detectors"
 	"github.com/bearer/curio/pkg/scanner"
 )
 
-func Start(port string) error {
-	err := http.ListenAndServe(`localhost`+port, http.HandlerFunc(func(rw http.ResponseWriter, r *http.Request) {
+func Start(port string, config config.Config) error {
+	classifier := classsification.NewClassifier(&classsification.Config{Config: config})
+	err := detectors.SetupCustomDetector(config.CustomDetector.RulesConfig)
+	if err != nil {
+		return err
+	}
+
+	err = http.ListenAndServe(`localhost`+port, http.HandlerFunc(func(rw http.ResponseWriter, r *http.Request) {
 		defer r.Body.Close() //golint:all,errcheck
 
 		switch r.URL.Path {
@@ -45,7 +53,7 @@ func Start(port string) error {
 				filesList = append(filesList, file.FilePath)
 			}
 
-			response.Error = scanner.Scan(scanRequest.Dir, filesList, blamer, scanRequest.FilePath)
+			response.Error = scanner.Scan(scanRequest.Dir, filesList, blamer, scanRequest.FilePath, classifier)
 
 			json.NewEncoder(rw).Encode(response) //nolint:all,errcheck
 		default:

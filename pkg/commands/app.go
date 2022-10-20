@@ -7,8 +7,10 @@ import (
 	"os"
 
 	"github.com/bearer/curio/pkg/commands/artifact"
+	config "github.com/bearer/curio/pkg/commands/process/settings"
 	"github.com/bearer/curio/pkg/commands/process/worker"
 	"github.com/bearer/curio/pkg/flag"
+	"github.com/bearer/curio/pkg/util/output"
 	"github.com/rs/zerolog/log"
 	"github.com/spf13/cobra"
 	"golang.org/x/xerrors"
@@ -61,26 +63,40 @@ func NewApp(version string) *cobra.Command {
 func NewProcessingServerCommand() *cobra.Command {
 	flags := &flag.Flags{
 		ProcessFlagGroup: flag.NewProcessGroup(),
+		ScanFlagGroup:    flag.NewScanFlagGroup(),
 	}
 
 	cmd := &cobra.Command{
-		Use:   "processing-worker",
+		Use:   "processing-worker [flags] PATH",
 		Short: "start scan processing server",
-		Args:  cobra.NoArgs,
 		RunE: func(cmd *cobra.Command, args []string) error {
 			log.Debug().Msgf("started scan processing")
+
+			var config config.Config
+			if err := json.Unmarshal([]byte(args[0]), &config); err != nil {
+				return err
+			}
+
 			if err := flags.Bind(cmd); err != nil {
 				return fmt.Errorf("flag bind error: %w", err)
 			}
 
-			options, err := flags.ProcessFlagGroup.ToOptions()
+			generalOptions, err := flags.ToOptions(cmd.Version, args, outputWriter)
 			if err != nil {
 				return fmt.Errorf("options binding error: %w", err)
 			}
 
-			log.Debug().Msgf("running scan worker on port `%s`", options.Port)
+			output.Setup(generalOptions)
 
-			return worker.Start(options.Port)
+			processOptions, err := flags.ProcessFlagGroup.ToOptions()
+			if err != nil {
+				return fmt.Errorf("options binding error: %w", err)
+			}
+
+			log.Debug().Msgf("started scan processing")
+			log.Debug().Msgf("running scan worker on port `%s`", processOptions.Port)
+
+			return worker.Start(processOptions.Port, config)
 		},
 		Hidden:        true,
 		SilenceErrors: true,
@@ -146,6 +162,8 @@ func NewScanCommand() *cobra.Command {
 			if err != nil {
 				return xerrors.Errorf("flag error: %w", err)
 			}
+
+			output.Setup(options)
 
 			if options.Target == "" {
 				return cmd.Help()

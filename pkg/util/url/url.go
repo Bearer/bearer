@@ -241,7 +241,7 @@ func PrepareURLValue(myURL string) (string, error) {
 	return preparedURL, nil
 }
 
-func Validate(myURL string, isInternal bool, data *report.Detection) (*ValidationResult, error) {
+func ValidateFormat(myURL string, data *report.Detection) (*ValidationResult, error) {
 	ValidationResult := ValidationResult{
 		State:  Invalid,
 		Reason: "uncertain", // default
@@ -274,6 +274,11 @@ func Validate(myURL string, isInternal bool, data *report.Detection) (*Validatio
 		return &ValidationResult, nil
 	}
 
+	if parsedURL.Host[0:1] == "." {
+		ValidationResult.Reason = "tld_error"
+		return &ValidationResult, nil
+	}
+
 	if net.ParseIP(parsedURL.Host) != nil {
 		ValidationResult.Reason = "ip_address_error"
 		return &ValidationResult, nil
@@ -300,9 +305,19 @@ func Validate(myURL string, isInternal bool, data *report.Detection) (*Validatio
 		return &ValidationResult, nil
 	}
 
-	if parsedURL.Host == "" || parsedURL.Host[0:1] == "." {
-		ValidationResult.Reason = "tld_error"
-		return &ValidationResult, nil
+	ValidationResult.State = Potential
+	return &ValidationResult, nil
+}
+
+func ValidateInternal(myURL string) (*ValidationResult, error) {
+	ValidationResult := ValidationResult{
+		State:  Invalid,
+		Reason: "uncertain", // default
+	}
+
+	parsedURL, err := url.Parse(myURL)
+	if err != nil {
+		return nil, err
 	}
 
 	parsedDomain, err := publicsuffix.ParseFromListWithOptions(
@@ -314,81 +329,106 @@ func Validate(myURL string, isInternal bool, data *report.Detection) (*Validatio
 		return nil, err
 	}
 
-	if !isInternal {
-		if parsedDomain.TLD == "" || isBlocklisted(parsedDomain.TLD) {
-			ValidationResult.Reason = "tld_error"
-			return &ValidationResult, nil
-		}
-
-		// todo: :invalid, :domain_not_reachable
-
-		if domainIsExcluded(parsedURL.Host) {
-			ValidationResult.Reason = "excluded_domains_error"
-			return &ValidationResult, nil
-		}
-	}
-
 	if subdomainIsNotAllowed(parsedDomain.TRD) {
-		if isInternal {
-			ValidationResult.Reason = "internal_domain_subdomain_error"
-		} else {
-			ValidationResult.Reason = "subdomain_error"
-		}
+		ValidationResult.Reason = "internal_domain_subdomain_error"
 		return &ValidationResult, nil
 	}
 
 	if pathError(parsedURL.Path) {
-		if isInternal {
-			ValidationResult.Reason = "internal_domain_errors_in_path"
-		} else {
-			ValidationResult.Reason = "errors_in_path"
-		}
+		ValidationResult.Reason = "internal_domain_errors_in_path"
 		return &ValidationResult, nil
 	}
 
 	if pathContainsAPIorAuth(parsedURL.Path) {
 		ValidationResult.State = Valid
-		if isInternal {
-			ValidationResult.Reason = "internal_domain_path_contains_api_or_auth"
-		} else {
-			ValidationResult.Reason = "path_contains_api_or_auth"
-		}
+		ValidationResult.Reason = "internal_domain_path_contains_api_or_auth"
+
 		return &ValidationResult, nil
 	}
 
-	if isInternal {
-		if parsedDomain.TRD == "" {
-			ValidationResult.Reason = "internal_domain_but_no_subdomain"
-			return &ValidationResult, nil
-		}
-
-		if strings.Contains(parsedURL.Host, "*") {
-			ValidationResult.Reason = "internal_domain_and_subdomain_with_wildcard"
-			ValidationResult.State = Potential
-			return &ValidationResult, nil
-		}
-
-		ValidationResult.Reason = "internal_domain_and_subdomain"
-		ValidationResult.State = Valid
+	if parsedDomain.TRD == "" {
+		ValidationResult.Reason = "internal_domain_but_no_subdomain"
 		return &ValidationResult, nil
-	} else {
-		if parsedDomain.TRD == "" {
+	}
+
+	if strings.Contains(parsedURL.Host, "*") {
+		ValidationResult.State = Potential
+		ValidationResult.Reason = "internal_domain_and_subdomain_with_wildcard"
+		return &ValidationResult, nil
+	}
+
+	ValidationResult.State = Valid
+	ValidationResult.Reason = "internal_domain_and_subdomain"
+	return &ValidationResult, nil
+}
+
+func Validate(myURL string, domainResolver *DomainResolver) (*ValidationResult, error) {
+	ValidationResult := ValidationResult{
+		State:  Invalid,
+		Reason: "uncertain", // default
+	}
+
+	parsedURL, err := url.Parse(myURL)
+	if err != nil {
+		return nil, err
+	}
+
+	parsedDomain, err := publicsuffix.ParseFromListWithOptions(
+		publicsuffix.DefaultList,
+		parsedURL.Host,
+		&publicsuffix.FindOptions{IgnorePrivate: true, DefaultRule: nil},
+	)
+	if err != nil {
+		return nil, err
+	}
+
+	if parsedDomain.TLD == "" || isBlocklisted(parsedDomain.TLD) {
+		ValidationResult.Reason = "tld_error"
+		return &ValidationResult, nil
+	}
+
+	if !domainResolver.CanReach(myURL) {
+		ValidationResult.Reason = "domain_not_reachable"
+		return &ValidationResult, nil
+	}
+
+	if domainIsExcluded(parsedURL.Host) {
+		ValidationResult.Reason = "excluded_domains_error"
+		return &ValidationResult, nil
+	}
+
+	if subdomainIsNotAllowed(parsedDomain.TRD) {
+		ValidationResult.Reason = "subdomain_error"
+		return &ValidationResult, nil
+	}
+
+	if pathError(parsedURL.Path) {
+		ValidationResult.Reason = "errors_in_path"
+		return &ValidationResult, nil
+	}
+
+	if pathContainsAPIorAuth(parsedURL.Path) {
+		ValidationResult.State = Valid
+		ValidationResult.Reason = "path_contains_api_or_auth"
+		return &ValidationResult, nil
+	}
+
+	if parsedDomain.TRD == "" {
+		ValidationResult.State = Potential
+		ValidationResult.Reason = "no_subdomain"
+		return &ValidationResult, nil
+	}
+
+	if strings.Contains(parsedDomain.TRD, "api") {
+		if strings.Contains(parsedURL.Host, "*") {
 			ValidationResult.State = Potential
-			ValidationResult.Reason = "no_subdomain"
+			ValidationResult.Reason = "subdomain_contains_api_with_wildcard"
 			return &ValidationResult, nil
 		}
 
-		if strings.Contains(parsedDomain.TRD, "api") {
-			if strings.Contains(parsedURL.Host, "*") {
-				ValidationResult.State = Potential
-				ValidationResult.Reason = "subdomain_contains_api_with_wildcard"
-				return &ValidationResult, nil
-			}
-
-			ValidationResult.State = Valid
-			ValidationResult.Reason = "subdomain_contains_api"
-			return &ValidationResult, nil
-		}
+		ValidationResult.State = Valid
+		ValidationResult.Reason = "subdomain_contains_api"
+		return &ValidationResult, nil
 	}
 
 	ValidationResult.State = Potential // uncertain
