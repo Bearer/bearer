@@ -66,7 +66,7 @@ curio scan ./curio-ci-test/Pipfile.lock
 ### Scan Flags
 
 - `--skip-path` specify the comma separated files and directories to skip (supports \* syntax), eg. --skip-path users/\*.go,users/admin.sql
-- `--debug` enable debug logs (default 0)
+- `--debug` enable debug logs
 
 ### Worker Flags
 
