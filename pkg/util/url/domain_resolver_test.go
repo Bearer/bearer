@@ -5,13 +5,12 @@ import (
 	"errors"
 	"net"
 	"testing"
-	"time"
 
 	"github.com/bearer/curio/pkg/util/url"
 	"github.com/stretchr/testify/assert"
 )
 
-func TestIsReachable(t *testing.T) {
+func TestCanReach(t *testing.T) {
 	tests := []struct {
 		Name, URL      string
 		MockLookUpAddr func(ctx context.Context, addr string) ([]string, error)
@@ -100,27 +99,25 @@ func TestIsReachable(t *testing.T) {
 		},
 	}
 
-	timeDuration := 3 * time.Second
-
 	for _, testCase := range tests {
 		t.Run(testCase.Name, func(t *testing.T) {
 			// reset mocks
-			reachable := url.NewReachable()
-			reachable.LookUpAddr = func(ctx context.Context, addr string) ([]string, error) {
+			domainResolver := url.NewDomainResolverDefault()
+			domainResolver.LookUpAddr = func(ctx context.Context, addr string) ([]string, error) {
 				return []string{"www.example.co.za"}, nil
 			}
-			reachable.LookUpNS = func(ctx context.Context, name string) ([]*net.NS, error) {
+			domainResolver.LookUpNS = func(ctx context.Context, name string) ([]*net.NS, error) {
 				return []*net.NS{{Host: "example.co.za"}}, nil
 			}
 
 			// update mocks if needed
 			if testCase.MockLookUpAddr != nil {
-				reachable.LookUpAddr = testCase.MockLookUpAddr
+				domainResolver.LookUpAddr = testCase.MockLookUpAddr
 			}
 			if testCase.MockLookUpNS != nil {
-				reachable.LookUpNS = testCase.MockLookUpNS
+				domainResolver.LookUpNS = testCase.MockLookUpNS
 			}
-			output := reachable.CanReach(testCase.URL, timeDuration)
+			output := domainResolver.CanReach(testCase.URL)
 			assert.Equal(t, testCase.Want, output)
 		})
 	}

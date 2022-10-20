@@ -12,37 +12,57 @@ import (
 // for domain resolution - find anything between * and .
 var regexpDomainSplitMatcher = regexp.MustCompile(`\*\s*(.*?)\s*\.`)
 
-type Reachable struct {
+type DomainResolver struct {
+	Enabled    bool
+	Timeout    time.Duration
 	LookUpAddr func(ctx context.Context, addr string) ([]string, error)
 	LookUpNS   func(ctx context.Context, addr string) ([]*net.NS, error)
 }
 
-func NewReachable() *Reachable {
+func NewDomainResolver(enabled bool, timeout time.Duration) *DomainResolver {
 	var resolver = net.Resolver{PreferGo: true}
 
-	return &Reachable{
+	return &DomainResolver{
+		Enabled:    enabled,
+		Timeout:    timeout,
 		LookUpAddr: resolver.LookupAddr,
 		LookUpNS:   resolver.LookupNS,
 	}
 }
 
-func (reachable *Reachable) CanReach(myURL string, timeout time.Duration) bool {
-	resolverContext, cancel := context.WithTimeout(context.TODO(), timeout)
+func NewDomainResolverDefault() *DomainResolver {
+	var resolver = net.Resolver{PreferGo: true}
+
+	return &DomainResolver{
+		Enabled:    true,
+		Timeout:    3 * time.Second,
+		LookUpAddr: resolver.LookupAddr,
+		LookUpNS:   resolver.LookupNS,
+	}
+}
+
+func (domainResolver *DomainResolver) CanReach(myURL string) bool {
+	if domainResolver == nil || !domainResolver.Enabled {
+		// skip disabled check
+		return true
+	}
+
+	resolverContext, cancel := context.WithTimeout(context.TODO(), domainResolver.Timeout)
 	defer cancel()
 
 	staticDomain := getStaticDomain(myURL)
 	if myURL == staticDomain {
-		return reachable.domainResolves(myURL, resolverContext)
+		return domainResolver.domainResolves(myURL, resolverContext)
 	}
 
-	if reachable.isNameserver(myURL, staticDomain, resolverContext) {
+	if domainResolver.isNameserver(myURL, staticDomain, resolverContext) {
 		return true
 	}
 
-	return reachable.domainResolves(myURL, resolverContext)
+	return domainResolver.domainResolves(myURL, resolverContext)
 }
 
-func (reachable *Reachable) isNameserver(myURL string, staticDomain string, resolverContext context.Context) bool {
+func (domainResolver *DomainResolver) isNameserver(myURL string, staticDomain string, resolverContext context.Context) bool {
 	_, err := publicsuffix.ParseFromListWithOptions(
 		publicsuffix.DefaultList,
 		staticDomain,
@@ -53,7 +73,7 @@ func (reachable *Reachable) isNameserver(myURL string, staticDomain string, reso
 		return false
 	}
 
-	nameserver, err := reachable.LookUpNS(resolverContext, staticDomain)
+	nameserver, err := domainResolver.LookUpNS(resolverContext, staticDomain)
 	if err != nil {
 		// return false even for transient errors
 		return false
@@ -62,14 +82,14 @@ func (reachable *Reachable) isNameserver(myURL string, staticDomain string, reso
 	return len(nameserver) > 0
 }
 
-func (reachable *Reachable) domainResolves(myURL string, resolverContext context.Context) bool {
+func (domainResolver *DomainResolver) domainResolves(myURL string, resolverContext context.Context) bool {
 	// handle any special characters
 	sanitizedURL, err := publicsuffix.ToASCII(myURL)
 	if err != nil {
 		return false
 	}
 
-	names, err := reachable.LookUpAddr(resolverContext, sanitizedURL)
+	names, err := domainResolver.LookUpAddr(resolverContext, sanitizedURL)
 	if err != nil {
 		// return false even for transient errors
 		return false
