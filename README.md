@@ -37,11 +37,11 @@ Curio also powers [Bearer](https://www.bearer.com), the developer-first platform
 
 Scan your first project in X minutes or less.
 
-## Installation
+### Installation
 
 Curio is available as a standalone executable binary. The latest release is available on the [releases tab](https://github.com/Bearer/curio/releases/latest), or use one of the methods below.
 
-### Install Script
+#### Install Script
 
 :warning: **Not working till public** :warning:
 
@@ -59,7 +59,7 @@ If you need to customize the options, use the following to pass parameters:
 curl -sfL https://raw.githubusercontent.com/Bearer/curio/main/contrib/install.sh | sh -s -- -b /usr/local/bin
 ```
 
-### Binary
+#### Binary
 
 Download the archive file for your operating system/architecture from [here](https://github.com/Bearer/curio/releases/latest/). Unpack the archive, and put the binary somewhere in your $PATH (on UNIX-y systems, /usr/local/bin or the like). Make sure it has execution bits turned on:
 
