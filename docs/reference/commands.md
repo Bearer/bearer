@@ -5,7 +5,6 @@ title: Commands
 Curio offers a number of commands to use and customize the CLI to your needs.
 
 - [scan](#scan): Scans a repository, project, or file.
-- [config](#config): Checks the config file for misconfigurations.
 
 In addition to flags available for specific commands, the following flags are globally available for all commands:
 
@@ -23,23 +22,31 @@ Scans a repository, project, or file.
 curio scan [FLAGS] [PATH]
 ```
 
-- `PATH` (string) (optional) (default: current working directory)
-  - A path to a directory or file.
-- `FLAGS`
-  - Report flags:
-    - `--format`, `-f` format (json) (default "json")
-  - Scan Flags
-    - `--skip-path` string specify the path to file containing patterns of files to skip when scanning (in .gitignore fashion)
-  - Worker Flags
-    - `--file-size-max` ignore files with file size larger than this config (default 25000000)
-    - `--files-to-batch` number of files to batch to worker (default 1)
-    - `--memory-max` if memory needed to scan a file surpasses this limit, skip the file (default 800000000)
-    - `--timeout` time allowed to complete scan (default 10m0s)
-    - `--timeout-file-max` maximum timeout assigned to scanning file, this config superseeds timeout-second-per-bytes (default 5m0s)
-    - `--timeout-file-min` minimum timeout assigned to scanning file, this config superseeds timeout-second-per-bytes (default 5s)
-    - `--timeout-file-second-per-bytes` number of file size bytes producing a second of timeout assigned to scanning a file (default 10000)
-    - `--timeout-worker-online` maximum time for worker process to come online (default 1m0s)
-    - `--workers` number of processing workers to spawn (default 1)
+`PATH` (string) (optional) (default: current working directory): A path to a directory or file.
+
+### `FLAGS`
+
+#### Report Flags
+
+- `-f`, `--format` format (json) (default "json")
+- `--report` specify the kind of report (detectors) (default "detectors")
+
+#### Scan Flags
+
+- `--skip-path` specify the comma separated files and directories to skip (supports \* syntax), eg. --skip-path users/\*.go,users/admin.sql
+- `--debug` enable debug logs
+
+#### Worker Flags
+
+- `--file-size-max` ignore files with file size larger than this config (default 25000000)
+- `--files-to-batch` number of files to batch to worker (default 1)
+- `--memory-max` if memory needed to scan a file surpasses this limit, skip the file (default 800000000)
+- `--timeout` time allowed to complete scan (default 10m0s)
+- `--timeout-file-max` maximum timeout assigned to scanning file, this config superseeds timeout-second-per-bytes (default 5m0s)
+- `--timeout-file-min` minimum timeout assigned to scanning file, this config superseeds timeout-second-per-bytes (default 5s)
+- `--timeout-file-second-per-bytes` number of file size bytes producing a second of timeout assigned to scanning a file (default 10000)
+- `--timeout-worker-online` maximum time for worker process to come online (default 1m0s)
+- `--workers` number of processing workers to spawn (default 1)
 
 ### Usage
 
@@ -55,15 +62,3 @@ curio scan /path/to/Pipfile.lock
 # Scan the current directory with a custom config file
 curio scan --config /path/to/custom-config.yaml
 ```
-
-## config
-
-Checks the curio configuration file for misconfigurations.
-
-```bash
-curio config [FLAGS] [DIR]
-```
-
-- `DIR`
-- `FLAGS`
-  - TODO
