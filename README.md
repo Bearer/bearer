@@ -61,6 +61,7 @@ curio scan ./curio-ci-test/Pipfile.lock
 ### Report Flags
 
 - `-f`, `--format` format (json) (default "json")
+- `--report` specify the kind of report (detectors) (default "detectors")
 
 ### Scan Flags
 
