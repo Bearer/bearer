@@ -15,8 +15,6 @@ builds:
       - amd64
     ldflags:
       - -X github.com/bearer/curio/cmd/curio/build.Version={{.Version}}
-    env:
-      - VERSION="development"
 snapshot:
   name_template: "{{ incpatch .Version }}-next"
 changelog:
