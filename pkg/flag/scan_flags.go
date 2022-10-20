@@ -21,9 +21,9 @@ type ScanFlagGroup struct {
 }
 
 type ScanOptions struct {
-	Target   string
-	SkipPath []string
-	Debug    bool
+	Target   string   `json:"target"`
+	SkipPath []string `json:"skip_path"`
+	Debug    bool     `json:"debug"`
 }
 
 func NewScanFlagGroup() *ScanFlagGroup {

@@ -10,17 +10,17 @@ import (
 )
 
 type Config struct {
-	Worker         flag.WorkerOptions
-	Scan           flag.ScanOptions
-	CustomDetector CustomDetector
+	Worker         flag.WorkerOptions `json:"worker"`
+	Scan           flag.ScanOptions   `json:"scan"`
+	CustomDetector CustomDetector     `json:"custom_detector"`
 }
 
 type CustomDetector struct {
-	RulesConfig *RulesConfig
+	RulesConfig *RulesConfig `json:"rules_config"`
 }
 
 type RulesConfig struct {
-	Rules map[string]Rule
+	Rules map[string]Rule `json:"rules"`
 }
 
 type Rule struct {
