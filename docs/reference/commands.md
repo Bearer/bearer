@@ -29,7 +29,7 @@ curio scan [FLAGS] [PATH]
   - Report flags:
     - `--format`, `-f` format (json) (default "json")
   - Scan Flags
-    - `--skip` string specify the path to file containing patterns of files to skip when scanning (in .gitignore fashion)
+    - `--skip-path` string specify the path to file containing patterns of files to skip when scanning (in .gitignore fashion)
   - Worker Flags
     - `--file-size-max` ignore files with file size larger than this config (default 25000000)
     - `--files-to-batch` number of files to batch to worker (default 1)
