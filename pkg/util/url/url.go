@@ -387,7 +387,7 @@ func Validate(myURL string, domainResolver *DomainResolver) (*ValidationResult, 
 		return &ValidationResult, nil
 	}
 
-	if !domainResolver.CanReach(myURL) {
+	if !domainResolver.CanReach(parsedDomain.SLD + "." + parsedDomain.TLD) {
 		ValidationResult.Reason = "domain_not_reachable"
 		return &ValidationResult, nil
 	}
