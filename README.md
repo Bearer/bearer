@@ -75,35 +75,15 @@ Run `curio scan` on a project directory:
 curio scan /path/to/your_project
 ```
 
-or a signle a file:
+or a single a file:
 
 ```bash
 curio scan ./curio-ci-test/Pipfile.lock
 ```
 
-## Scan Command Flags
+<!-- TODO: insert sample output or video here -->
 
-### Report Flags
-
-- `-f`, `--format` format (json) (default "json")
-- `--report` specify the kind of report (detectors) (default "detectors")
-
-### Scan Flags
-
-- `--skip-path` specify the comma separated files and directories to skip (supports \* syntax), eg. --skip-path users/\*.go,users/admin.sql
-- `--debug` enable debug logs
-
-### Worker Flags
-
-- `--file-size-max` ignore files with file size larger than this config (default 25000000)
-- `--files-to-batch` number of files to batch to worker (default 1)
-- `--memory-max` if memory needed to scan a file surpasses this limit, skip the file (default 800000000)
-- `--timeout` time allowed to complete scan (default 10m0s)
-- `--timeout-file-max` maximum timeout assigned to scanning file, this config superseeds timeout-second-per-bytes (default 5m0s)
-- `--timeout-file-min` minimum timeout assigned to scanning file, this config superseeds timeout-second-per-bytes (default 5s)
-- `--timeout-file-second-per-bytes` number of file size bytes producing a second of timeout assigned to scanning a file (default 10000)
-- `--timeout-worker-online` maximum time for worker process to come online (default 1m0s)
-- `--workers` number of processing workers to spawn (default 1)
+Additional options for using and configuring the scan command can be found in the [scan documentation](docs/reference/commands.md#scan);
 
 ## Development
 
