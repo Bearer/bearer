@@ -48,13 +48,13 @@ func SetOut(out io.Writer) {
 }
 
 // NewApp is the factory method to return Curio CLI
-func NewApp(version string) *cobra.Command {
+func NewApp(version string, commitSHA string) *cobra.Command {
 	rootCmd := NewRootCommand()
 	rootCmd.AddCommand(
 		NewProcessingServerCommand(),
 		NewScanCommand(),
 		NewConfigCommand(),
-		NewVersionCommand(),
+		NewVersionCommand(version, commitSHA),
 	)
 
 	return rootCmd
@@ -222,39 +222,19 @@ func NewConfigCommand() *cobra.Command {
 	return cmd
 }
 
-func NewVersionCommand() *cobra.Command {
-	var versionFormat string
+func NewVersionCommand(version string, commitSHA string) *cobra.Command {
 	cmd := &cobra.Command{
-		Use:   "version [flags]",
+		Use:   "version",
 		Short: "Print the version",
 		Args:  cobra.NoArgs,
 		RunE: func(cmd *cobra.Command, args []string) error {
-			showVersion(versionFormat, cmd.Version, outputWriter)
-
+			output.DefaultLogger().Msgf("curio version: %s\nsha: %s", version, commitSHA)
 			return nil
 		},
-		SilenceErrors: true,
-		SilenceUsage:  true,
 	}
 	cmd.SetFlagErrorFunc(flagErrorFunc)
 
-	// Add version format flag, only json is supported
-	cmd.Flags().StringVarP(&versionFormat, flag.FormatFlag.Name, flag.FormatFlag.Shorthand, "", "version format (json)")
-
 	return cmd
-}
-
-func showVersion(outputFormat, version string, outputWriter io.Writer) {
-	switch outputFormat {
-	case "json":
-		b, _ := json.Marshal(VersionInfo{
-			Version: version,
-		})
-		fmt.Fprint(outputWriter, string(b))
-	default:
-		output := fmt.Sprintf("Version: %s\n", version)
-		fmt.Fprint(outputWriter, output)
-	}
 }
 
 // show help on using the command when an invalid flag is encountered

@@ -3,11 +3,9 @@ package main
 import (
 	"log"
 
-	"github.com/bearer/curio/pkg/commands"
-)
+	"github.com/bearer/curio/cmd/curio/build"
 
-var (
-	version = "dev"
+	"github.com/bearer/curio/pkg/commands"
 )
 
 func main() {
@@ -17,7 +15,7 @@ func main() {
 }
 
 func run() error {
-	app := commands.NewApp(version)
+	app := commands.NewApp(build.Version, build.CommitSHA)
 	if err := app.Execute(); err != nil {
 		return err
 	}
