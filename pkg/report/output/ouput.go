@@ -3,12 +3,12 @@ package output
 import (
 	"encoding/json"
 	"fmt"
-	"log"
 	"os"
 
 	"github.com/bearer/curio/pkg/types"
+	"github.com/bearer/curio/pkg/util/output"
 
-	// "github.com/rs/zerolog/log"
+	"github.com/rs/zerolog/log"
 	"github.com/wlredeye/jsonlines"
 )
 
@@ -24,13 +24,14 @@ func ReportJSON(report types.Report) error {
 		return fmt.Errorf("failed to decode report: %w", err)
 	}
 
-	log.Printf("got %d detections", len(detections))
+	log.Debug().Msgf("got %d detections", len(detections))
 
 	jsonBytes, err := json.MarshalIndent(&detections, "", "\t")
 	if err != nil {
 		return fmt.Errorf("failed to json marshal detections: %w", err)
 	}
 
-	log.Print(string(jsonBytes))
+	output.DefaultLogger().Msg(string(jsonBytes))
+
 	return nil
 }
