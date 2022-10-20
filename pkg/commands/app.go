@@ -1,7 +1,6 @@
 package commands
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 	"os"
@@ -52,7 +51,7 @@ func NewApp(version string) *cobra.Command {
 		NewProcessingServerCommand(),
 		NewScanCommand(),
 		NewConfigCommand(),
-		NewVersionCommand(),
+		NewVersionCommand(version),
 	)
 
 	return rootCmd
@@ -204,39 +203,21 @@ func NewConfigCommand() *cobra.Command {
 	return cmd
 }
 
-func NewVersionCommand() *cobra.Command {
-	var versionFormat string
+func NewVersionCommand(version string) *cobra.Command {
 	cmd := &cobra.Command{
-		Use:   "version [flags]",
+		Use:   "version",
 		Short: "Print the version",
 		Args:  cobra.NoArgs,
 		RunE: func(cmd *cobra.Command, args []string) error {
-			showVersion(versionFormat, cmd.Version, outputWriter)
-
+			output.DefaultLogger().Msgf("curio version: %s", version)
 			return nil
 		},
-		SilenceErrors: true,
-		SilenceUsage:  true,
+		SilenceErrors: false,
+		SilenceUsage:  false,
 	}
 	cmd.SetFlagErrorFunc(flagErrorFunc)
 
-	// Add version format flag, only json is supported
-	cmd.Flags().StringVarP(&versionFormat, flag.FormatFlag.Name, flag.FormatFlag.Shorthand, "", "version format (json)")
-
 	return cmd
-}
-
-func showVersion(outputFormat, version string, outputWriter io.Writer) {
-	switch outputFormat {
-	case "json":
-		b, _ := json.Marshal(VersionInfo{
-			Version: version,
-		})
-		fmt.Fprint(outputWriter, string(b))
-	default:
-		output := fmt.Sprintf("Version: %s\n", version)
-		fmt.Fprint(outputWriter, output)
-	}
 }
 
 // show help on using the command when an invalid flag is encountered

@@ -13,6 +13,8 @@ builds:
     goarch:
       - arm64
       - amd64
+    ldflags:
+      - -X github.com/bearer/curio/cmd/curio.Version={{.Version}}
 snapshot:
   name_template: "{{ incpatch .Version }}-next"
 changelog:

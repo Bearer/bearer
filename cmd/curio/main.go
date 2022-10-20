@@ -7,7 +7,7 @@ import (
 )
 
 var (
-	version = "dev"
+	Version = "dev"
 )
 
 func main() {
@@ -17,7 +17,7 @@ func main() {
 }
 
 func run() error {
-	app := commands.NewApp(version)
+	app := commands.NewApp(Version)
 	if err := app.Execute(); err != nil {
 		return err
 	}
