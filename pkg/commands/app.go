@@ -70,8 +70,6 @@ func NewProcessingServerCommand() *cobra.Command {
 		Use:   "processing-worker [flags] PATH",
 		Short: "start scan processing server",
 		RunE: func(cmd *cobra.Command, args []string) error {
-			log.Debug().Msgf("started scan processing")
-
 			var config config.Config
 			if err := json.Unmarshal([]byte(args[0]), &config); err != nil {
 				return err
