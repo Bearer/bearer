@@ -3,7 +3,7 @@ package flag
 var (
 	PortFlag = Flag{
 		Name:       "port",
-		ConfigName: "port",
+		ConfigName: "process.port",
 		Shorthand:  "p",
 		Value:      "",
 		Usage:      "server listening on what port",

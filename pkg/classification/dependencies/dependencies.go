@@ -1,6 +1,8 @@
 package dependencies
 
 import (
+	"errors"
+
 	"github.com/bearer/curio/pkg/classification/db"
 	"github.com/bearer/curio/pkg/report"
 	"github.com/bearer/curio/pkg/report/dependencies"
@@ -12,8 +14,8 @@ type ClassifiedDependency struct {
 }
 
 type Classification struct {
-	RecipeMatch bool
-	RecipeName  string
+	RecipeMatch bool   `json:"recipe_match"`
+	RecipeName  string `json:"recipe_name,omitempty"`
 }
 
 type Classifier struct {
@@ -36,11 +38,16 @@ func NewDefault() *Classifier {
 	}
 }
 
-func (classifier *Classifier) Classify(data report.Detection) (ClassifiedDependency, error) {
+func (classifier *Classifier) Classify(data report.Detection) (*ClassifiedDependency, error) {
 	var classification *Classification
+	value, ok := data.Value.(dependencies.Dependency)
+	if !ok {
+		return nil, errors.New("detection is not an dependency")
+	}
+
 	for _, recipe := range classifier.config.Recipes {
 		for _, recipePackage := range recipe.Packages {
-			if isRecipeMatch(recipePackage, data) {
+			if isRecipeMatch(recipePackage, value) {
 				classification = &Classification{
 					RecipeName:  recipe.Name,
 					RecipeMatch: true,
@@ -49,15 +56,13 @@ func (classifier *Classifier) Classify(data report.Detection) (ClassifiedDepende
 		}
 	}
 
-	return ClassifiedDependency{
+	return &ClassifiedDependency{
 		Detection:      &data,
 		Classification: classification,
 	}, nil
 }
 
-func isRecipeMatch(recipePackage db.Package, data report.Detection) bool {
-	value := data.Value.(dependencies.Dependency)
-
+func isRecipeMatch(recipePackage db.Package, value dependencies.Dependency) bool {
 	if isJavaPackage(recipePackage.PackageManager) {
 		return recipePackage.PackageManager == value.PackageManager &&
 			recipePackage.Name == value.Name &&
