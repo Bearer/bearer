@@ -1,4 +1,4 @@
-package classsification
+package classification
 
 import (
 	"regexp"
