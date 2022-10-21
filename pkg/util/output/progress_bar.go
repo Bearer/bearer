@@ -19,7 +19,7 @@ func GetProgressBar(filesLength int, config settings.Config) *progressbar.Progre
 		}),
 		progressbar.OptionShowIts(),
 		progressbar.OptionSetItsString("files"),
-		progressbar.OptionSetDescription("scanning..."),
+		progressbar.OptionSetDescription("Scanning target..."),
 		progressbar.OptionSetTheme(progressbar.Theme{
 			Saucer:        "=",
 			SaucerHead:    ">",
