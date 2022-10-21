@@ -184,6 +184,7 @@ func NewConfigCommand() *cobra.Command {
 		SkipPathFlag:                &flag.SkipPathFlag,
 		DisableDomainResolutionFlag: &flag.DisableDomainResolutionFlag,
 		DomainResolutionTimeoutFlag: &flag.DomainResolutionTimeoutFlag,
+		InternalDomainsFlag:         &flag.InternalDomainsFlag,
 	}
 
 	configFlags := &flag.Flags{
