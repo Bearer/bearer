@@ -16,6 +16,7 @@ import (
 	workertype "github.com/bearer/curio/pkg/commands/process/worker/work"
 	"github.com/bearer/curio/pkg/git"
 	"github.com/bearer/curio/pkg/report"
+	"github.com/bearer/curio/pkg/util/output"
 	"github.com/bearer/curio/pkg/util/tmpfile"
 )
 
@@ -68,11 +69,13 @@ func (worker *Worker) Start() {
 	log.Debug().Msgf("worker uuid %s working on repo %s", worker.uuid, worker.task.Definition.Dir)
 
 	worker.FileList, err = filelist.Discover(worker.task.Definition.Dir, worker.config)
-
 	if err != nil {
 		worker.complete(err)
 		return
 	}
+
+	output.PlainLogger(os.Stderr).Msgf("Target %s", worker.config.Scan.Target)
+	bar := output.GetProgressBar(len(worker.FileList), worker.config)
 
 	reportFile, err := os.Create(worker.task.Definition.FilePath)
 	if err != nil {
@@ -171,6 +174,11 @@ func (worker *Worker) Start() {
 		}
 
 		os.RemoveAll(tmpReportFile)
+
+		err := bar.Add(len(work))
+		if err != nil {
+			log.Error().Msgf("worker %s failed to write progress bar %e", worker.uuid, err)
+		}
 
 		if shouldBreak {
 			err := reportFile.Close()
