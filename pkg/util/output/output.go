@@ -1,6 +1,7 @@
 package output
 
 import (
+	"io"
 	"os"
 
 	"github.com/bearer/curio/pkg/flag"
@@ -8,9 +9,14 @@ import (
 	"github.com/rs/zerolog/log"
 )
 
-func DefaultLogger() *zerolog.Event {
+// DefaultLogger returns default output logger
+func StdOutLogger() *zerolog.Event {
+	return PlainLogger(os.Stdout)
+}
+
+func PlainLogger(out io.Writer) *zerolog.Event {
 	logger := log.Output(zerolog.ConsoleWriter{
-		Out:     os.Stdout,
+		Out:     out,
 		NoColor: true,
 		FormatTimestamp: func(i interface{}) string {
 			return ""

@@ -30,6 +30,7 @@ curio scan [FLAGS] [PATH]
 
 - `-f`, `--format` format (json) (default "json")
 - `--report` specify the kind of report (detectors) (default "detectors")
+- `--output` path where to save report
 
 #### Scan Flags
 
