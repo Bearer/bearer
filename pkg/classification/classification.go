@@ -1,8 +1,6 @@
 package classification
 
 import (
-	"regexp"
-
 	"github.com/bearer/curio/pkg/classification/db"
 	"github.com/bearer/curio/pkg/classification/dependencies"
 	"github.com/bearer/curio/pkg/classification/interfaces"
@@ -26,8 +24,8 @@ type Config struct {
 func NewClassifier(config *Config) (*Classifier, error) {
 	interfacesClassifier, err := interfaces.New(
 		interfaces.Config{
-			Recipes:                db.Default(),
-			InternalDomainMatchers: []*regexp.Regexp{},
+			Recipes:         db.Default(),
+			InternalDomains: config.Config.Scan.InternalDomains,
 			DomainResolver: url.NewDomainResolver(
 				!config.Config.Scan.DisableDomainResolution,
 				config.Config.Scan.DomainResolutionTimeout,
