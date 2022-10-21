@@ -14,7 +14,8 @@ import (
 	"github.com/bearer/curio/pkg/commands/process/settings"
 	"github.com/bearer/curio/pkg/commands/process/worker/work"
 	"github.com/bearer/curio/pkg/flag"
-	"github.com/bearer/curio/pkg/report/output"
+	reportoutput "github.com/bearer/curio/pkg/report/output"
+	outputhandler "github.com/bearer/curio/pkg/util/output"
 	"github.com/bearer/curio/pkg/util/tmpfile"
 
 	"github.com/bearer/curio/pkg/types"
@@ -45,16 +46,21 @@ type Runner interface {
 }
 
 type runner struct {
+	balancer   *balancer.Monitor
+	reportPath string
 }
 
-type runnerOption func(*runner)
-
 // NewRunner initializes Runner that provides scanning functionalities.
-func NewRunner(ctx context.Context, cliOptions flag.Options, opts ...runnerOption) (Runner, error) {
+func NewRunner(ctx context.Context, opts flag.Options) (Runner, error) {
 	r := &runner{}
-	for _, opt := range opts {
-		opt(r)
-	}
+
+	r.balancer = balancer.New(settings.Config{
+		Worker:         opts.WorkerOptions,
+		CustomDetector: settings.DefaultCustomDetector(),
+		Scan:           opts.ScanOptions,
+	})
+
+	r.reportPath = tmpfile.Create(os.TempDir(), ".jsonl")
 
 	return r, nil
 }
@@ -79,20 +85,13 @@ func (r *runner) ScanRepository(ctx context.Context, opts flag.Options) (types.R
 }
 
 func (r *runner) scanArtifact(ctx context.Context, opts flag.Options) (types.Report, error) {
-	reportpath := tmpfile.Create(os.TempDir(), ".jsonl")
-
-	balancer := balancer.New(settings.Config{
-		Worker:         opts.WorkerOptions,
-		CustomDetector: settings.DefaultCustomDetector(),
-		Scan:           opts.ScanOptions,
-	})
-	task := balancer.ScheduleTask(work.ProcessRequest{
+	task := r.balancer.ScheduleTask(work.ProcessRequest{
 		Repository: work.Repository{
 			Dir:               opts.Target,
 			PreviousCommitSHA: "",
 			CommitSHA:         "",
 		},
-		FilePath:             reportpath,
+		FilePath:             r.reportPath,
 		CustomDetectorConfig: nil,
 	})
 	result := <-task.Done
@@ -101,10 +100,10 @@ func (r *runner) scanArtifact(ctx context.Context, opts flag.Options) (types.Rep
 		return types.Report{}, result.Error
 	}
 
-	log.Debug().Msgf("report location: %s", reportpath)
+	log.Debug().Msgf("report location: %s", r.reportPath)
 
 	return types.Report{
-		Path: reportpath,
+		Path: r.reportPath,
 	}, nil
 }
 
@@ -141,9 +140,19 @@ func Run(ctx context.Context, opts flag.Options, targetKind TargetKind) (err err
 }
 
 func (r *runner) Report(opts flag.Options, report types.Report) error {
+	// if output is defined we want to write only to file
+	logger := outputhandler.StdOutLogger()
+	if opts.Output != "" {
+		reportFile, err := os.Create(opts.Output)
+		if err != nil {
+			return fmt.Errorf("error creating output file %w", err)
+		}
+		logger = outputhandler.PlainLogger(reportFile)
+	}
+
 	switch opts.Format {
 	case flag.FormatJSON:
-		err := output.ReportJSON(report)
+		err := reportoutput.ReportJSON(report, logger)
 		if err != nil {
 			return fmt.Errorf("error generating report %w", err)
 		}

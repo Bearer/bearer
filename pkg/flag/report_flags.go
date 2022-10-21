@@ -28,22 +28,31 @@ var (
 		Value:      ReportDetectors,
 		Usage:      "specify the kind of report (detectors)",
 	}
+	OutputFlag = Flag{
+		Name:       "output",
+		ConfigName: "report.output",
+		Value:      "",
+		Usage:      "path where to save report",
+	}
 )
 
 type ReportFlagGroup struct {
 	Format *Flag
 	Report *Flag
+	Output *Flag
 }
 
 type ReportOptions struct {
 	Format string
 	Report string
+	Output string
 }
 
 func NewReportFlagGroup() *ReportFlagGroup {
 	return &ReportFlagGroup{
 		Format: &FormatFlag,
 		Report: &ReportFlag,
+		Output: &OutputFlag,
 	}
 }
 
@@ -52,12 +61,17 @@ func (f *ReportFlagGroup) Name() string {
 }
 
 func (f *ReportFlagGroup) Flags() []*Flag {
-	return []*Flag{f.Format, f.Report}
+	return []*Flag{
+		f.Format,
+		f.Report,
+		f.Output,
+	}
 }
 
 func (f *ReportFlagGroup) ToOptions(out io.Writer) ReportOptions {
 	return ReportOptions{
 		Format: getString(f.Format),
 		Report: getString(f.Report),
+		Output: getString(f.Output),
 	}
 }
