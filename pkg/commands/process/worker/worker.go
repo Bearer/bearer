@@ -15,8 +15,12 @@ import (
 )
 
 func Start(port string, config config.Config) error {
-	classifier := classsification.NewClassifier(&classsification.Config{Config: config})
-	err := detectors.SetupCustomDetector(config.CustomDetector.RulesConfig)
+	classifier, err := classsification.NewClassifier(&classsification.Config{Config: config})
+	if err != nil {
+		return err
+	}
+
+	err = detectors.SetupCustomDetector(config.CustomDetector.RulesConfig)
 	if err != nil {
 		return err
 	}
