@@ -174,7 +174,10 @@ func (worker *Worker) Start() {
 
 		os.RemoveAll(tmpReportFile)
 
-		bar.Add(len(work))
+		err := bar.Add(len(work))
+		if err != nil {
+			log.Error().Msgf("worker %s failed to write progress bar %e", worker.uuid, err)
+		}
 
 		if shouldBreak {
 			err := reportFile.Close()
