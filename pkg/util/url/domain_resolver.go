@@ -41,7 +41,7 @@ func NewDomainResolverDefault() *DomainResolver {
 	}
 }
 
-func (domainResolver *DomainResolver) CanReach(myURL string) bool {
+func (domainResolver *DomainResolver) CanReach(domain string) bool {
 	if domainResolver == nil || !domainResolver.Enabled {
 		// skip disabled check
 		return true
@@ -50,19 +50,19 @@ func (domainResolver *DomainResolver) CanReach(myURL string) bool {
 	resolverContext, cancel := context.WithTimeout(context.TODO(), domainResolver.Timeout)
 	defer cancel()
 
-	staticDomain := getStaticDomain(myURL)
-	if myURL == staticDomain {
-		return domainResolver.domainResolves(myURL, resolverContext)
+	staticDomain := getStaticDomain(domain)
+	if domain == staticDomain {
+		return domainResolver.domainResolves(domain, resolverContext)
 	}
 
-	if domainResolver.isNameserver(myURL, staticDomain, resolverContext) {
+	if domainResolver.isNameserver(domain, staticDomain, resolverContext) {
 		return true
 	}
 
-	return domainResolver.domainResolves(myURL, resolverContext)
+	return domainResolver.domainResolves(domain, resolverContext)
 }
 
-func (domainResolver *DomainResolver) isNameserver(myURL string, staticDomain string, resolverContext context.Context) bool {
+func (domainResolver *DomainResolver) isNameserver(domain string, staticDomain string, resolverContext context.Context) bool {
 	_, err := publicsuffix.ParseFromListWithOptions(
 		publicsuffix.DefaultList,
 		staticDomain,
@@ -82,9 +82,9 @@ func (domainResolver *DomainResolver) isNameserver(myURL string, staticDomain st
 	return len(nameserver) > 0
 }
 
-func (domainResolver *DomainResolver) domainResolves(myURL string, resolverContext context.Context) bool {
+func (domainResolver *DomainResolver) domainResolves(domain string, resolverContext context.Context) bool {
 	// handle any special characters
-	sanitizedURL, err := publicsuffix.ToASCII(myURL)
+	sanitizedURL, err := publicsuffix.ToASCII(domain)
 	if err != nil {
 		return false
 	}
@@ -98,12 +98,12 @@ func (domainResolver *DomainResolver) domainResolves(myURL string, resolverConte
 	return len(names) > 0
 }
 
-func getStaticDomain(myURL string) string {
-	domainSplit := regexpDomainSplitMatcher.Split(myURL, -1)
+func getStaticDomain(domain string) string {
+	domainSplit := regexpDomainSplitMatcher.Split(domain, -1)
 	lenDomainSplit := len(domainSplit)
 	if lenDomainSplit <= 1 {
 		// single part, no static domain
-		return myURL
+		return domain
 	}
 
 	return domainSplit[lenDomainSplit-1]
