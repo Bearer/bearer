@@ -74,7 +74,7 @@ func (worker *Worker) Start() {
 		return
 	}
 
-	bar := output.GetProgressBar(len(worker.FileList))
+	bar := output.GetProgressBar(len(worker.FileList), worker.config)
 
 	reportFile, err := os.Create(worker.task.Definition.FilePath)
 	if err != nil {
