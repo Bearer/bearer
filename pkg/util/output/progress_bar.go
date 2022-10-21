@@ -3,7 +3,6 @@ package output
 import (
 	"os"
 
-	"github.com/rs/zerolog/log"
 	"github.com/schollz/progressbar/v3"
 )
 
@@ -14,11 +13,11 @@ func GetProgressBar(filesLength int) *progressbar.ProgressBar {
 		progressbar.OptionEnableColorCodes(false),
 		progressbar.OptionShowElapsedTimeOnFinish(),
 		progressbar.OptionOnCompletion(func() {
-			log.Info().Msgf("scan completed")
+			PlainLogger(os.Stderr).Msgf("\n")
 		}),
 		progressbar.OptionShowIts(),
 		progressbar.OptionSetItsString("files"),
-		progressbar.OptionSetDescription("Scanning repository..."),
+		progressbar.OptionSetDescription("scanning repository..."),
 		progressbar.OptionSetTheme(progressbar.Theme{
 			Saucer:        "=",
 			SaucerHead:    ">",
