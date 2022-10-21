@@ -84,7 +84,7 @@ curio scan ./curio-ci-test/Pipfile.lock
 
 <!-- TODO: insert sample output or video here -->
 
-Additional options for using and configuring the scan command can be found in the [scan documentation](docs/reference/commands.md#scan);
+Additional options for using and configuring the `scan` command can be found in the [scan documentation](docs/reference/commands.md#scan).
 
 ## Contributing
 
