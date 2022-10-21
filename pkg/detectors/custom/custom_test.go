@@ -36,7 +36,7 @@ var configSQLCreateTable []byte
 var configSQLCreateTrigger []byte
 
 func TestRubyLoggersJSON(t *testing.T) {
-	var rulesConfig settings.RulesConfig
+	var rulesConfig map[string]settings.Rule
 
 	detector := custom.New(&nodeid.IntGenerator{Counter: 0})
 	err := yaml.Unmarshal(configRubyLoggers, &rulesConfig)
@@ -65,7 +65,7 @@ func TestRubyLoggersJSON(t *testing.T) {
 }
 
 func TestRailsEncryptsJSON(t *testing.T) {
-	var rulesConfig settings.RulesConfig
+	var rulesConfig map[string]settings.Rule
 
 	detector := custom.New(&nodeid.IntGenerator{Counter: 0})
 	err := yaml.Unmarshal(configRailsEncrypts, &rulesConfig)
@@ -94,7 +94,7 @@ func TestRailsEncryptsJSON(t *testing.T) {
 }
 
 func TestSQLCreateFunctionJSON(t *testing.T) {
-	var rulesConfig settings.RulesConfig
+	var rulesConfig map[string]settings.Rule
 
 	detector := custom.New(&nodeid.IntGenerator{Counter: 0})
 	err := yaml.Unmarshal(configSQLCreateFunction, &rulesConfig)
@@ -122,7 +122,7 @@ func TestSQLCreateFunctionJSON(t *testing.T) {
 	cupaloy.SnapshotT(t, string(bytes))
 }
 func TestSQLCreateTableJSON(t *testing.T) {
-	var rulesConfig settings.RulesConfig
+	var rulesConfig map[string]settings.Rule
 
 	detector := custom.New(&nodeid.IntGenerator{Counter: 0})
 	err := yaml.Unmarshal(configSQLCreateTable, &rulesConfig)
@@ -151,7 +151,7 @@ func TestSQLCreateTableJSON(t *testing.T) {
 }
 
 func TestSQLCreateTriggerJSON(t *testing.T) {
-	var rulesConfig settings.RulesConfig
+	var rulesConfig map[string]settings.Rule
 
 	detector := custom.New(&nodeid.IntGenerator{Counter: 0})
 	err := yaml.Unmarshal(configSQLCreateTrigger, &rulesConfig)

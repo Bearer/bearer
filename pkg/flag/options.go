@@ -47,6 +47,7 @@ type Flags struct {
 	ProcessFlagGroup *ProcessFlagGroup
 	ScanFlagGroup    *ScanFlagGroup
 	WorkerFlagGroup  *WorkerFlagGroup
+	GeneralFlagGroup *GeneralFlagGroup
 }
 
 // Options holds all the runtime configuration
@@ -55,9 +56,7 @@ type Options struct {
 	ReportOptions
 	WorkerOptions
 	ScanOptions
-
-	// Curio's version, not populated via CLI flags
-	AppVersion string
+	GeneralOptions
 }
 
 func addFlag(cmd *cobra.Command, flag *Flag) {
@@ -114,6 +113,7 @@ func getString(flag *Flag) string {
 	if flag == nil {
 		return ""
 	}
+
 	return viper.GetString(flag.ConfigName)
 }
 
@@ -174,6 +174,9 @@ func (f *Flags) groups() []FlagGroup {
 	if f.ReportFlagGroup != nil {
 		groups = append(groups, f.ReportFlagGroup)
 	}
+	if f.GeneralFlagGroup != nil {
+		groups = append(groups, f.GeneralFlagGroup)
+	}
 
 	return groups
 }
@@ -227,11 +230,9 @@ func (f *Flags) Bind(cmd *cobra.Command) error {
 }
 
 // nolint: gocyclo
-func (f *Flags) ToOptions(appVersion string, args []string, output io.Writer) (Options, error) {
+func (f *Flags) ToOptions(args []string, output io.Writer) (Options, error) {
 	var err error
-	opts := Options{
-		AppVersion: appVersion,
-	}
+	opts := Options{}
 
 	if f.RepoFlagGroup != nil {
 		opts.RepoOptions = f.RepoFlagGroup.ToOptions()
@@ -250,6 +251,10 @@ func (f *Flags) ToOptions(appVersion string, args []string, output io.Writer) (O
 		if err != nil {
 			return Options{}, xerrors.Errorf("scan flag error: %w", err)
 		}
+	}
+
+	if f.GeneralFlagGroup != nil {
+		opts.GeneralOptions = f.GeneralFlagGroup.ToOptions()
 	}
 
 	return opts, nil

@@ -20,7 +20,7 @@ func Start(port string, config config.Config) error {
 		return err
 	}
 
-	err = detectors.SetupCustomDetector(config.CustomDetector.RulesConfig)
+	err = detectors.SetupCustomDetector(config.CustomDetector)
 	if err != nil {
 		return err
 	}
@@ -33,16 +33,7 @@ func Start(port string, config config.Config) error {
 			var scanRequest work.ProcessRequest
 			json.NewDecoder(r.Body).Decode(&scanRequest) //nolint:all,errcheck
 
-			response := &work.ProcessResponse{}
-
-			if scanRequest.CustomDetectorConfig != nil {
-				err := detectors.SetupCustomDetector(scanRequest.CustomDetectorConfig)
-				if err != nil {
-					response.Error = err
-				}
-			}
-
-			json.NewEncoder(rw).Encode(response) //nolint:all,errcheck
+			rw.WriteHeader(http.StatusOK) //nolint:all,errcheck
 		case work.RouteProcess:
 			runtime.GC()
 

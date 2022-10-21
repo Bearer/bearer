@@ -2,8 +2,6 @@ package work
 
 import (
 	"time"
-
-	config "github.com/bearer/curio/pkg/commands/process/settings"
 )
 
 type ProcessResponse struct {
@@ -21,7 +19,6 @@ type ProcessRequest struct {
 	Files                  []File
 	FilePath               string
 	BlameRevisionsFilePath string
-	CustomDetectorConfig   *config.RulesConfig
 }
 
 type File struct {

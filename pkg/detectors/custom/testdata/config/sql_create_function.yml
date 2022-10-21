@@ -1,12 +1,11 @@
-rules:
-  corruptible_function_detector:
-    patterns:
-      - CREATE OR REPLACE FUNCTION $FUNCTION_NAME RETURNS trigger AS $SCRIPT
-    metavars:
-      regex_match:
-        input: $SCRIPT
-        regex: NEW.(\w+)
-        output: 1
-    param_parenting: true
-    languages:
-      - sql
+corruptible_function_detector:
+  patterns:
+    - CREATE OR REPLACE FUNCTION $FUNCTION_NAME RETURNS trigger AS $SCRIPT
+  metavars:
+    regex_match:
+      input: $SCRIPT
+      regex: NEW.(\w+)
+      output: 1
+  param_parenting: true
+  languages:
+    - sql

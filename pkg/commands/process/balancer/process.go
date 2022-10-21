@@ -78,7 +78,7 @@ func (process *Process) StartProcess(task *workertype.ProcessRequest) error {
 
 	err = process.WaitForOnline(task)
 	if err != nil {
-		log.Fatal().Msgf("%s %s failed for worker to become online", process.workeruuid, process.uuid)
+		log.Fatal().Msgf("%s %s failed for worker to become online %w", process.workeruuid, process.uuid, err)
 		return err
 	}
 
@@ -133,12 +133,6 @@ func (process *Process) WaitForOnline(task *workertype.ProcessRequest) error {
 			log.Debug().Msgf("%s spawned after %.2f seconds", process.uuid, time.Since(start).Seconds())
 
 			defer resp.Body.Close()
-
-			var result workertype.ProcessResponse
-			err := json.NewDecoder(resp.Body).Decode(&result)
-			if err != nil {
-				return err
-			}
 
 			return nil
 		}

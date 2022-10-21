@@ -1,17 +1,12 @@
 package commands
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 	"os"
 
 	"github.com/bearer/curio/pkg/commands/artifact"
-	config "github.com/bearer/curio/pkg/commands/process/settings"
-	"github.com/bearer/curio/pkg/commands/process/worker"
 	"github.com/bearer/curio/pkg/flag"
-	"github.com/bearer/curio/pkg/util/output"
-	"github.com/rs/zerolog/log"
 	"github.com/spf13/cobra"
 	"golang.org/x/xerrors"
 )
@@ -60,52 +55,6 @@ func NewApp(version string, commitSHA string) *cobra.Command {
 	return rootCmd
 }
 
-func NewProcessingWorkerCommand() *cobra.Command {
-	flags := &flag.Flags{
-		ProcessFlagGroup: flag.NewProcessGroup(),
-		ScanFlagGroup:    flag.NewScanFlagGroup(),
-	}
-
-	cmd := &cobra.Command{
-		Use:   "processing-worker [flags] PATH",
-		Short: "start scan processing server",
-		RunE: func(cmd *cobra.Command, args []string) error {
-			var config config.Config
-			if err := json.Unmarshal([]byte(args[0]), &config); err != nil {
-				return err
-			}
-
-			if err := flags.Bind(cmd); err != nil {
-				return fmt.Errorf("flag bind error: %w", err)
-			}
-
-			generalOptions, err := flags.ToOptions(cmd.Version, args, outputWriter)
-			if err != nil {
-				return fmt.Errorf("options binding error: %w", err)
-			}
-
-			output.Setup(generalOptions)
-
-			processOptions, err := flags.ProcessFlagGroup.ToOptions()
-			if err != nil {
-				return fmt.Errorf("options binding error: %w", err)
-			}
-
-			log.Debug().Msgf("started scan processing")
-			log.Debug().Msgf("running scan worker on port `%s`", processOptions.Port)
-
-			return worker.Start(processOptions.Port, config)
-		},
-		Hidden:        true,
-		SilenceErrors: true,
-		SilenceUsage:  true,
-	}
-	cmd.SetFlagErrorFunc(flagErrorFunc)
-	flags.AddFlags(cmd)
-
-	return cmd
-}
-
 func NewRootCommand() *cobra.Command {
 	usageTemplate := `Curio is a tool for scanning policy breaches
 
@@ -127,55 +76,6 @@ Available Commands:
 		},
 	}
 	cmd.SetUsageTemplate(usageTemplate)
-	return cmd
-}
-
-func NewScanCommand() *cobra.Command {
-
-	flags := &flag.Flags{
-		ScanFlagGroup:   flag.NewScanFlagGroup(),
-		WorkerFlagGroup: flag.NewWorkerFlagGroup(),
-		ReportFlagGroup: flag.NewReportFlagGroup(),
-	}
-
-	cmd := &cobra.Command{
-		Use:     "scan [flags] PATH",
-		Aliases: []string{"s"},
-		Short:   "Scan git repository",
-		Example: `  # Scan a local project including language-specific files
-  $ curio s /path/to/your_project
-  # Scan a single file
-  $ curio s ./curio-ci-test/Pipfile.lock`,
-		PreRunE: func(cmd *cobra.Command, args []string) error {
-			if err := flags.Bind(cmd); err != nil {
-				return xerrors.Errorf("flag bind error: %w", err)
-			}
-			return nil
-		},
-		RunE: func(cmd *cobra.Command, args []string) error {
-			if err := flags.Bind(cmd); err != nil {
-				return xerrors.Errorf("flag bind error: %w", err)
-			}
-			options, err := flags.ToOptions(cmd.Version, args, outputWriter)
-			if err != nil {
-				return xerrors.Errorf("flag error: %w", err)
-			}
-
-			output.Setup(options)
-
-			if options.Target == "" {
-				return cmd.Help()
-			}
-
-			return artifact.Run(cmd.Context(), options, artifact.TargetFilesystem)
-		},
-		SilenceErrors: false,
-		SilenceUsage:  false,
-	}
-
-	flags.AddFlags(cmd)
-	cmd.SetUsageTemplate(fmt.Sprintf(scanTemplate, flags.Usages(cmd)))
-
 	return cmd
 }
 
@@ -204,7 +104,7 @@ func NewConfigCommand() *cobra.Command {
 			if err := configFlags.Bind(cmd); err != nil {
 				return xerrors.Errorf("flag bind error: %w", err)
 			}
-			options, err := configFlags.ToOptions(cmd.Version, args, outputWriter)
+			options, err := configFlags.ToOptions(args, outputWriter)
 			if err != nil {
 				return xerrors.Errorf("flag error: %w", err)
 			}
@@ -217,21 +117,6 @@ func NewConfigCommand() *cobra.Command {
 	cmd.SetFlagErrorFunc(flagErrorFunc)
 	configFlags.AddFlags(cmd)
 	cmd.SetUsageTemplate(fmt.Sprintf(scanTemplate, configFlags.Usages(cmd)))
-
-	return cmd
-}
-
-func NewVersionCommand(version string, commitSHA string) *cobra.Command {
-	cmd := &cobra.Command{
-		Use:   "version",
-		Short: "Print the version",
-		Args:  cobra.NoArgs,
-		RunE: func(cmd *cobra.Command, args []string) error {
-			output.StdOutLogger().Msgf("curio version: %s\nsha: %s", version, commitSHA)
-			return nil
-		},
-	}
-	cmd.SetFlagErrorFunc(flagErrorFunc)
 
 	return cmd
 }

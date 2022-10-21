@@ -14,6 +14,10 @@ func StdOutLogger() *zerolog.Event {
 	return PlainLogger(os.Stdout)
 }
 
+func StdErrLogger() *zerolog.Event {
+	return PlainLogger(os.Stderr)
+}
+
 func PlainLogger(out io.Writer) *zerolog.Event {
 	logger := log.Output(zerolog.ConsoleWriter{
 		Out:     out,
