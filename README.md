@@ -10,6 +10,7 @@
 [![GitHub Release][release-img]][release]
 [![Test][test-img]][test]
 [![GitHub All Releases][github-all-releases-img]][release]
+[![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg)](CODE_OF_CONDUCT.md)
 
 </div>
 
@@ -37,11 +38,11 @@ Curio also powers [Bearer](https://www.bearer.com), the developer-first platform
 
 Scan your first project in X minutes or less.
 
-## Installation
+### Installation
 
 Curio is available as a standalone executable binary. The latest release is available on the [releases tab](https://github.com/Bearer/curio/releases/latest), or use one of the methods below.
 
-### Install Script
+#### Install Script
 
 :warning: **Not working till public** :warning:
 
@@ -59,9 +60,9 @@ If you need to customize the options, use the following to pass parameters:
 curl -sfL https://raw.githubusercontent.com/Bearer/curio/main/contrib/install.sh | sh -s -- -b /usr/local/bin
 ```
 
-### Binary
+#### Binary
 
-Download the archive file for your operating system/architecture from [here](https://github.com/Bearer/curio/releases/latest/). Unpack the archive, and put the binary somewhere in your $PATH (on UNIX-y systems, /usr/local/bin or the like). Make sure it has execution bits turned on:
+Download the archive file for your operating system/architecture from [here](https://github.com/Bearer/curio/releases/latest/). Unpack the archive, and put the binary somewhere in your $PATH (on UNIX-y systems, /usr/local/bin or the like). Make sure it has permission to execute:
 
 ```bash
 chmod +x ./curio
@@ -83,31 +84,19 @@ curio scan ./curio-ci-test/Pipfile.lock
 
 <!-- TODO: insert sample output or video here -->
 
-Additional options for using and configuring the scan command can be found in the [scan documentation](docs/reference/commands.md#scan);
+Additional options for using and configuring the `scan` command can be found in the [scan documentation](docs/reference/commands.md#scan).
 
-## Development
+## Contributing
 
-### Installation
+Interested in contributing? We're here for it! For details on how to contribute, setting up your development environment, and our processes, review the [contribution guide](CONTRIBUTING.md).
 
-Install modules:
+## Code of conduct
 
-```bash
-go mod download
-```
+Everyone interacting with this project is expected to follow the guidelines of our [code of conduct](CODE_OF_CONDUCT.md).
 
-### Testing
+## License
 
-Running classification tests:
-
-```bash
-go test ./pkg/classification/... -count=1
-```
-
-Running a single specific test:
-
-```bash
-go test -run ^TestSchema$ ./pkg/classification/schema -count=1
-```
+<!-- TBD -->
 
 ---
 
