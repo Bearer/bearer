@@ -21,10 +21,10 @@ jobs:
         uses: mathieudutour/github-tag-action@v6.0
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          tag_prefix: release-v
+          tag_prefix: v
           default_bump: patch
     outputs:
-      tag_name: ${{ steps.tag_version.outputs.new_tag || github.ref }}
+      ref: refs/tags/${{ steps.tag_version.outputs.new_tag || github.ref_name }}
 
   build-linux:
     needs: [tag]
@@ -35,7 +35,7 @@ jobs:
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
-          ref: ${{ needs.tag.outputs.tag_name }}
+          ref: ${{ needs.tag.outputs.ref }}
       - run: git fetch --force --tags
       - name: Set up Go
         uses: actions/setup-go@v3
@@ -66,7 +66,7 @@ jobs:
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
-          ref: ${{ needs.tag.outputs.tag_name }}
+          ref: ${{ needs.tag.outputs.ref }}
       - run: git fetch --force --tags
       - name: Set up Go
         uses: actions/setup-go@v3
@@ -93,7 +93,7 @@ jobs:
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
-          ref: ${{ needs.tag.outputs.tag_name }}
+          ref: ${{ needs.tag.outputs.ref }}
       - run: git fetch --force --tags
       - name: Make directories
         run: |
