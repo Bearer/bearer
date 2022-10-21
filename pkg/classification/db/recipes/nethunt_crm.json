@@ -1,1 +1,7 @@
-{"metadata":{"version":"1.0"},"name":"NetHunt CRM","type":"external_service","urls":["https://nethunt.com/api/v1/zapier"],"packages":[]}
+{
+  "metadata": { "version": "1.0" },
+  "name": "NetHunt CRM",
+  "type": "external_service",
+  "urls": ["https://nethunt.com/api/v1/zapier"],
+  "packages": []
+}

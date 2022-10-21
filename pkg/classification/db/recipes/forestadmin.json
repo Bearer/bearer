@@ -1,1 +1,7 @@
-{"metadata":{"version":"1.0"},"name":"Forestadmin","type":"external_service","urls":["https://api.forestadmin.com"],"packages":[]}
+{
+  "metadata": { "version": "1.0" },
+  "name": "Forestadmin",
+  "type": "external_service",
+  "urls": ["https://api.forestadmin.com"],
+  "packages": []
+}

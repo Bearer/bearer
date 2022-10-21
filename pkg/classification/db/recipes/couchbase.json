@@ -1,1 +1,35 @@
-{"metadata":{"version":"1.0"},"name":"Couchbase","type":"data_store","urls":[],"packages":[{"name":"CouchbaseNetClient","group":null,"package_manager":"nuget"},{"name":"CouchbaseNLogAdapter","group":null,"package_manager":"nuget"},{"name":"gopkg.in/couchbase/gocbcore.v7","group":null,"package_manager":"go"},{"name":"gopkg.in/couchbase/gocb.v1","group":null,"package_manager":"go"},{"name":"couchbase","group":null,"package_manager":"rubygems"},{"name":"github.com/dustin/go-couch","group":null,"package_manager":"go"},{"name":"github.com/go-kivik/couchdb","group":null,"package_manager":"go"}]}
+{
+  "metadata": { "version": "1.0" },
+  "name": "Couchbase",
+  "type": "data_store",
+  "urls": [],
+  "packages": [
+    { "name": "CouchbaseNetClient", "group": null, "package_manager": "nuget" },
+    {
+      "name": "CouchbaseNLogAdapter",
+      "group": null,
+      "package_manager": "nuget"
+    },
+    {
+      "name": "gopkg.in/couchbase/gocbcore.v7",
+      "group": null,
+      "package_manager": "go"
+    },
+    {
+      "name": "gopkg.in/couchbase/gocb.v1",
+      "group": null,
+      "package_manager": "go"
+    },
+    { "name": "couchbase", "group": null, "package_manager": "rubygems" },
+    {
+      "name": "github.com/dustin/go-couch",
+      "group": null,
+      "package_manager": "go"
+    },
+    {
+      "name": "github.com/go-kivik/couchdb",
+      "group": null,
+      "package_manager": "go"
+    }
+  ]
+}

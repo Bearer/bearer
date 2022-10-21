@@ -1,1 +1,17 @@
-{"metadata":{"version":"1.0"},"name":"Intercom","type":"external_service","urls":["https://api.intercom.io","https://widget.intercom.io/widget"],"packages":[{"name":"intercom","group":null,"package_manager":"rubygems"},{"name":"intercom/intercom-php","group":null,"package_manager":"packagist"},{"name":"intercom-client","group":null,"package_manager":"npm"},{"name":"intercom-rails","group":null,"package_manager":"rubygems"},{"name":"python-intercom","group":null,"package_manager":"pypi"}]}
+{
+  "metadata": { "version": "1.0" },
+  "name": "Intercom",
+  "type": "external_service",
+  "urls": ["https://api.intercom.io", "https://widget.intercom.io/widget"],
+  "packages": [
+    { "name": "intercom", "group": null, "package_manager": "rubygems" },
+    {
+      "name": "intercom/intercom-php",
+      "group": null,
+      "package_manager": "packagist"
+    },
+    { "name": "intercom-client", "group": null, "package_manager": "npm" },
+    { "name": "intercom-rails", "group": null, "package_manager": "rubygems" },
+    { "name": "python-intercom", "group": null, "package_manager": "pypi" }
+  ]
+}

@@ -1,1 +1,9 @@
-{"metadata":{"version":"1.0"},"name":"Datadome","type":"external_service","urls":["https://js.datadome.co","https://api.datadome.co"],"packages":[{"name":"DataDome.SystemWeb","group":null,"package_manager":"nuget"}]}
+{
+  "metadata": { "version": "1.0" },
+  "name": "Datadome",
+  "type": "external_service",
+  "urls": ["https://js.datadome.co", "https://api.datadome.co"],
+  "packages": [
+    { "name": "DataDome.SystemWeb", "group": null, "package_manager": "nuget" }
+  ]
+}

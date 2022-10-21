@@ -1,1 +1,23 @@
-{"metadata":{"version":"1.0"},"name":"CockroachDB","type":"data_store","urls":[],"packages":[{"name":"github.com/cockroachdb/cockroach-go","group":null,"package_manager":"go"},{"name":"sqlalchemy-cockroachdb","group":null,"package_manager":"pypi"},{"name":"github.com/cockroachdb/cockroach-go/v2","group":null,"package_manager":"go"}]}
+{
+  "metadata": { "version": "1.0" },
+  "name": "CockroachDB",
+  "type": "data_store",
+  "urls": [],
+  "packages": [
+    {
+      "name": "github.com/cockroachdb/cockroach-go",
+      "group": null,
+      "package_manager": "go"
+    },
+    {
+      "name": "sqlalchemy-cockroachdb",
+      "group": null,
+      "package_manager": "pypi"
+    },
+    {
+      "name": "github.com/cockroachdb/cockroach-go/v2",
+      "group": null,
+      "package_manager": "go"
+    }
+  ]
+}

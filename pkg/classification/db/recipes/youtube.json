@@ -1,1 +1,10 @@
-{"metadata":{"version":"1.0"},"name":"Youtube","type":"external_service","urls":["https://www.googleapis.com/youtube/"],"packages":[{"name":"react-youtube","group":null,"package_manager":"npm"},{"name":"youtube-player","group":null,"package_manager":"npm"}]}
+{
+  "metadata": { "version": "1.0" },
+  "name": "Youtube",
+  "type": "external_service",
+  "urls": ["https://www.googleapis.com/youtube/"],
+  "packages": [
+    { "name": "react-youtube", "group": null, "package_manager": "npm" },
+    { "name": "youtube-player", "group": null, "package_manager": "npm" }
+  ]
+}

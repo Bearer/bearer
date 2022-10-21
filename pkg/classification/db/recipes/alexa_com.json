@@ -1,1 +1,7 @@
-{"metadata":{"version":"1.0"},"name":"alexa.com","type":"external_service","urls":["https://data.alexa.com"],"packages":[]}
+{
+  "metadata": { "version": "1.0" },
+  "name": "alexa.com",
+  "type": "external_service",
+  "urls": ["https://data.alexa.com"],
+  "packages": []
+}

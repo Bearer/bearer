@@ -1,1 +1,7 @@
-{"metadata":{"version":"1.0"},"name":"Societeinfo","type":"external_service","urls":["https://societeinfo.com/app/rest/api/"],"packages":[]}
+{
+  "metadata": { "version": "1.0" },
+  "name": "Societeinfo",
+  "type": "external_service",
+  "urls": ["https://societeinfo.com/app/rest/api/"],
+  "packages": []
+}

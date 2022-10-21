@@ -1,1 +1,43 @@
-{"metadata":{"version":"1.0"},"name":"CloudWatch","type":"external_service","urls":[],"packages":[{"name":"cloudwatch","group":"software.amazon.awssdk","package_manager":"maven"},{"name":"aws-sdk-cloudwatch","group":null,"package_manager":"rubygems"},{"name":"@aws-sdk/client-cloudwatch","group":null,"package_manager":"npm"},{"name":"github.com/aws/aws-sdk-go-v2/service/cloudwatch","group":null,"package_manager":"go"},{"name":"aws-sdk-cloudwatchlogs","group":null,"package_manager":"rubygems"},{"name":"@aws-sdk/client-cloudwatch-logs","group":null,"package_manager":"npm"},{"name":"github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs","group":null,"package_manager":"go"}]}
+{
+  "metadata": { "version": "1.0" },
+  "name": "CloudWatch",
+  "type": "external_service",
+  "urls": [],
+  "packages": [
+    {
+      "name": "cloudwatch",
+      "group": "software.amazon.awssdk",
+      "package_manager": "maven"
+    },
+    {
+      "name": "aws-sdk-cloudwatch",
+      "group": null,
+      "package_manager": "rubygems"
+    },
+    {
+      "name": "@aws-sdk/client-cloudwatch",
+      "group": null,
+      "package_manager": "npm"
+    },
+    {
+      "name": "github.com/aws/aws-sdk-go-v2/service/cloudwatch",
+      "group": null,
+      "package_manager": "go"
+    },
+    {
+      "name": "aws-sdk-cloudwatchlogs",
+      "group": null,
+      "package_manager": "rubygems"
+    },
+    {
+      "name": "@aws-sdk/client-cloudwatch-logs",
+      "group": null,
+      "package_manager": "npm"
+    },
+    {
+      "name": "github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs",
+      "group": null,
+      "package_manager": "go"
+    }
+  ]
+}

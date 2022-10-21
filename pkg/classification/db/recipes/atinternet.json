@@ -1,1 +1,7 @@
-{"metadata":{"version":"1.0"},"name":"Atinternet","type":"external_service","urls":["https://xiti.com","https://api.atinternet.io"],"packages":[]}
+{
+  "metadata": { "version": "1.0" },
+  "name": "Atinternet",
+  "type": "external_service",
+  "urls": ["https://xiti.com", "https://api.atinternet.io"],
+  "packages": []
+}

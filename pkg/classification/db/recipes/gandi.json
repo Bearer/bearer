@@ -1,1 +1,7 @@
-{"metadata":{"version":"1.0"},"name":"Gandi","type":"external_service","urls":["https://rpc.gandi.net","https://api.gandi.net"],"packages":[]}
+{
+  "metadata": { "version": "1.0" },
+  "name": "Gandi",
+  "type": "external_service",
+  "urls": ["https://rpc.gandi.net", "https://api.gandi.net"],
+  "packages": []
+}

@@ -1,1 +1,19 @@
-{"metadata":{"version":"1.0"},"name":"Nuxeo","type":"external_service","urls":[],"packages":[{"name":"NuxeoClient","group":null,"package_manager":"nuget"},{"name":"nuxeo-common","group":"org.nuxeo.common","package_manager":"maven"},{"name":"nuxeo-java-client","group":"org.nuxeo.client","package_manager":"maven"}]}
+{
+  "metadata": { "version": "1.0" },
+  "name": "Nuxeo",
+  "type": "external_service",
+  "urls": [],
+  "packages": [
+    { "name": "NuxeoClient", "group": null, "package_manager": "nuget" },
+    {
+      "name": "nuxeo-common",
+      "group": "org.nuxeo.common",
+      "package_manager": "maven"
+    },
+    {
+      "name": "nuxeo-java-client",
+      "group": "org.nuxeo.client",
+      "package_manager": "maven"
+    }
+  ]
+}

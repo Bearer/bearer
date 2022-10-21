@@ -1,1 +1,7 @@
-{"metadata":{"version":"1.0"},"name":"Gouv.fr Data","type":"external_service","urls":["https://data.gouv.fr/api"],"packages":[]}
+{
+  "metadata": { "version": "1.0" },
+  "name": "Gouv.fr Data",
+  "type": "external_service",
+  "urls": ["https://data.gouv.fr/api"],
+  "packages": []
+}

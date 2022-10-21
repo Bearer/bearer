@@ -1,1 +1,7 @@
-{"metadata":{"version":"1.0"},"name":"ipify.org","type":"external_service","urls":["https://api.ipify.org"],"packages":[]}
+{
+  "metadata": { "version": "1.0" },
+  "name": "ipify.org",
+  "type": "external_service",
+  "urls": ["https://api.ipify.org"],
+  "packages": []
+}

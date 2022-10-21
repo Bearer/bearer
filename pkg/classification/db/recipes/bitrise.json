@@ -1,1 +1,7 @@
-{"metadata":{"version":"1.0"},"name":"Bitrise","type":"external_service","urls":["https://api.bitrise.io"],"packages":[]}
+{
+  "metadata": { "version": "1.0" },
+  "name": "Bitrise",
+  "type": "external_service",
+  "urls": ["https://api.bitrise.io"],
+  "packages": []
+}

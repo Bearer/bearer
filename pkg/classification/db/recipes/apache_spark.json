@@ -1,1 +1,23 @@
-{"metadata":{"version":"1.0"},"name":"Apache Spark","type":"data_store","urls":[],"packages":[{"name":"spark-sql_2.12","group":"org.apache.spark","package_manager":"maven"},{"name":"spark-core","group":"com.sparkjava","package_manager":"maven"},{"name":"spark-sql_2.11","group":"org.apache.spark","package_manager":"maven"}]}
+{
+  "metadata": { "version": "1.0" },
+  "name": "Apache Spark",
+  "type": "data_store",
+  "urls": [],
+  "packages": [
+    {
+      "name": "spark-sql_2.12",
+      "group": "org.apache.spark",
+      "package_manager": "maven"
+    },
+    {
+      "name": "spark-core",
+      "group": "com.sparkjava",
+      "package_manager": "maven"
+    },
+    {
+      "name": "spark-sql_2.11",
+      "group": "org.apache.spark",
+      "package_manager": "maven"
+    }
+  ]
+}

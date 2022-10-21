@@ -1,1 +1,7 @@
-{"metadata":{"version":"1.0"},"name":"Thunes (Limonethik)","type":"external_service","urls":["https://api.limonetikqualif.com","https://api.limonetik.com"],"packages":[]}
+{
+  "metadata": { "version": "1.0" },
+  "name": "Thunes (Limonethik)",
+  "type": "external_service",
+  "urls": ["https://api.limonetikqualif.com", "https://api.limonetik.com"],
+  "packages": []
+}

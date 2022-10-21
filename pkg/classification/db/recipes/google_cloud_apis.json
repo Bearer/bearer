@@ -1,1 +1,135 @@
-{"metadata":{"version":"1.0"},"name":"Google Cloud APIs","type":"external_service","urls":["https://*.googleapis.com"],"packages":[{"name":"Google.Apis","group":null,"package_manager":"nuget"},{"name":"Google.Apis.Auth","group":null,"package_manager":"nuget"},{"name":"Google.Apis.Core","group":null,"package_manager":"nuget"},{"name":"Google.Apis.Oauth2.v2","group":null,"package_manager":"nuget"},{"name":"google-apis-androidpublisher_v3","group":null,"package_manager":"rubygems"},{"name":"google-cloud-core","group":null,"package_manager":"rubygems"},{"name":"google-cloud-env","group":null,"package_manager":"rubygems"},{"name":"google-apis-iamcredentials_v1","group":null,"package_manager":"rubygems"},{"name":"google-apis-playcustomapp_v1","group":null,"package_manager":"rubygems"},{"name":"google-cloud-errors","group":null,"package_manager":"rubygems"},{"name":"google-cloud","group":null,"package_manager":"pypi"},{"name":"google.golang.org/cloud","group":null,"package_manager":"go"},{"name":"google.golang.org/appengine","group":null,"package_manager":"go"},{"name":"@google-cloud/dns","group":null,"package_manager":"npm"},{"name":"gcloud","group":null,"package_manager":"pypi"},{"name":"gcpveepee","group":null,"package_manager":"pypi"},{"name":"google-cloud-translate","group":null,"package_manager":"pypi"},{"name":"google-compute-engine","group":null,"package_manager":"pypi"},{"name":"opencensus-ext-stackdriver","group":null,"package_manager":"pypi"},{"name":"google-cloud-monitoring","group":"com.google.cloud","package_manager":"maven"},{"name":"google-api-services-dataproc","group":"com.google.apis","package_manager":"maven"},{"name":"google-api-services-sqladmin","group":"com.google.apis","package_manager":"maven"},{"name":"google-auth-library-oauth2-http","group":"com.google.auth","package_manager":"maven"},{"name":"google-cloud-logging-logback","group":"com.google.cloud","package_manager":"maven"},{"name":"google-cloud-dataproc","group":null,"package_manager":"pypi"},{"name":"google-cloud-tasks","group":null,"package_manager":"pypi"},{"name":"google-cloud-monitoring","group":null,"package_manager":"pypi"},{"name":"google-cloud-logging","group":null,"package_manager":"pypi"},{"name":"datalab","group":null,"package_manager":"pypi"},{"name":"dialogflow","group":null,"package_manager":"npm"},{"name":"apiai","group":null,"package_manager":"npm"},{"name":"google_cloud","group":null,"package_manager":"pypi"},{"name":"cloud.google.com/go/compute","group":null,"package_manager":"go"},{"name":"cloud.google.com/go/iam","group":null,"package_manager":"go"},{"name":"cloud.google.com/go/monitoring","group":null,"package_manager":"go"}]}
+{
+  "metadata": { "version": "1.0" },
+  "name": "Google Cloud APIs",
+  "type": "external_service",
+  "urls": ["https://*.googleapis.com"],
+  "packages": [
+    { "name": "Google.Apis", "group": null, "package_manager": "nuget" },
+    { "name": "Google.Apis.Auth", "group": null, "package_manager": "nuget" },
+    { "name": "Google.Apis.Core", "group": null, "package_manager": "nuget" },
+    {
+      "name": "Google.Apis.Oauth2.v2",
+      "group": null,
+      "package_manager": "nuget"
+    },
+    {
+      "name": "google-apis-androidpublisher_v3",
+      "group": null,
+      "package_manager": "rubygems"
+    },
+    {
+      "name": "google-cloud-core",
+      "group": null,
+      "package_manager": "rubygems"
+    },
+    {
+      "name": "google-cloud-env",
+      "group": null,
+      "package_manager": "rubygems"
+    },
+    {
+      "name": "google-apis-iamcredentials_v1",
+      "group": null,
+      "package_manager": "rubygems"
+    },
+    {
+      "name": "google-apis-playcustomapp_v1",
+      "group": null,
+      "package_manager": "rubygems"
+    },
+    {
+      "name": "google-cloud-errors",
+      "group": null,
+      "package_manager": "rubygems"
+    },
+    { "name": "google-cloud", "group": null, "package_manager": "pypi" },
+    {
+      "name": "google.golang.org/cloud",
+      "group": null,
+      "package_manager": "go"
+    },
+    {
+      "name": "google.golang.org/appengine",
+      "group": null,
+      "package_manager": "go"
+    },
+    { "name": "@google-cloud/dns", "group": null, "package_manager": "npm" },
+    { "name": "gcloud", "group": null, "package_manager": "pypi" },
+    { "name": "gcpveepee", "group": null, "package_manager": "pypi" },
+    {
+      "name": "google-cloud-translate",
+      "group": null,
+      "package_manager": "pypi"
+    },
+    {
+      "name": "google-compute-engine",
+      "group": null,
+      "package_manager": "pypi"
+    },
+    {
+      "name": "opencensus-ext-stackdriver",
+      "group": null,
+      "package_manager": "pypi"
+    },
+    {
+      "name": "google-cloud-monitoring",
+      "group": "com.google.cloud",
+      "package_manager": "maven"
+    },
+    {
+      "name": "google-api-services-dataproc",
+      "group": "com.google.apis",
+      "package_manager": "maven"
+    },
+    {
+      "name": "google-api-services-sqladmin",
+      "group": "com.google.apis",
+      "package_manager": "maven"
+    },
+    {
+      "name": "google-auth-library-oauth2-http",
+      "group": "com.google.auth",
+      "package_manager": "maven"
+    },
+    {
+      "name": "google-cloud-logging-logback",
+      "group": "com.google.cloud",
+      "package_manager": "maven"
+    },
+    {
+      "name": "google-cloud-dataproc",
+      "group": null,
+      "package_manager": "pypi"
+    },
+    { "name": "google-cloud-tasks", "group": null, "package_manager": "pypi" },
+    {
+      "name": "google-cloud-monitoring",
+      "group": null,
+      "package_manager": "pypi"
+    },
+    {
+      "name": "google-cloud-logging",
+      "group": null,
+      "package_manager": "pypi"
+    },
+    { "name": "datalab", "group": null, "package_manager": "pypi" },
+    { "name": "dialogflow", "group": null, "package_manager": "npm" },
+    { "name": "apiai", "group": null, "package_manager": "npm" },
+    { "name": "google_cloud", "group": null, "package_manager": "pypi" },
+    {
+      "name": "cloud.google.com/go/compute",
+      "group": null,
+      "package_manager": "go"
+    },
+    {
+      "name": "cloud.google.com/go/iam",
+      "group": null,
+      "package_manager": "go"
+    },
+    {
+      "name": "cloud.google.com/go/monitoring",
+      "group": null,
+      "package_manager": "go"
+    }
+  ]
+}

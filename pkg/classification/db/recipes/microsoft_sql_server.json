@@ -1,1 +1,52 @@
-{"metadata":{"version":"1.0"},"name":"Microsoft SQL Server","type":"data_store","urls":[],"packages":[{"name":"tedious","group":null,"package_manager":"npm"},{"name":"mssql","group":null,"package_manager":"npm"},{"name":"System.Data.SqlClient","group":null,"package_manager":"nuget"},{"name":"pymssql","group":null,"package_manager":"pypi"},{"name":"github.com/denisenkom/go-mssqldb","group":null,"package_manager":"go"},{"name":"mssql-jdbc","group":"com.microsoft.sqlserver","package_manager":"maven"},{"name":"python-tds","group":null,"package_manager":"pypi"},{"name":"mssql-django","group":null,"package_manager":"pypi"},{"name":"django-pyodbc","group":null,"package_manager":"pypi"},{"name":"django-pyodbc-azure","group":null,"package_manager":"pypi"},{"name":"django-mssql-backend","group":null,"package_manager":"pypi"},{"name":"jdbc-mssql","group":null,"package_manager":"rubygems"},{"name":"azure_mgmt_sql","group":null,"package_manager":"rubygems"},{"name":"jdbc-mssqlserver","group":null,"package_manager":"rubygems"},{"name":"Microsoft.Data.SqlClient","group":null,"package_manager":"nuget"},{"name":"gorm.io/driver/sqlserver","group":null,"package_manager":"go"}]}
+{
+  "metadata": { "version": "1.0" },
+  "name": "Microsoft SQL Server",
+  "type": "data_store",
+  "urls": [],
+  "packages": [
+    { "name": "tedious", "group": null, "package_manager": "npm" },
+    { "name": "mssql", "group": null, "package_manager": "npm" },
+    {
+      "name": "System.Data.SqlClient",
+      "group": null,
+      "package_manager": "nuget"
+    },
+    { "name": "pymssql", "group": null, "package_manager": "pypi" },
+    {
+      "name": "github.com/denisenkom/go-mssqldb",
+      "group": null,
+      "package_manager": "go"
+    },
+    {
+      "name": "mssql-jdbc",
+      "group": "com.microsoft.sqlserver",
+      "package_manager": "maven"
+    },
+    { "name": "python-tds", "group": null, "package_manager": "pypi" },
+    { "name": "mssql-django", "group": null, "package_manager": "pypi" },
+    { "name": "django-pyodbc", "group": null, "package_manager": "pypi" },
+    { "name": "django-pyodbc-azure", "group": null, "package_manager": "pypi" },
+    {
+      "name": "django-mssql-backend",
+      "group": null,
+      "package_manager": "pypi"
+    },
+    { "name": "jdbc-mssql", "group": null, "package_manager": "rubygems" },
+    { "name": "azure_mgmt_sql", "group": null, "package_manager": "rubygems" },
+    {
+      "name": "jdbc-mssqlserver",
+      "group": null,
+      "package_manager": "rubygems"
+    },
+    {
+      "name": "Microsoft.Data.SqlClient",
+      "group": null,
+      "package_manager": "nuget"
+    },
+    {
+      "name": "gorm.io/driver/sqlserver",
+      "group": null,
+      "package_manager": "go"
+    }
+  ]
+}

@@ -1,1 +1,10 @@
-{"metadata":{"version":"1.0"},"name":"OpenTok","type":"external_service","urls":["https://api.opentok.com","https://static.opentok.com/*/js"],"packages":[{"name":"opentok","group":null,"package_manager":"rubygems"},{"name":"opentok-react-native","group":null,"package_manager":"npm"}]}
+{
+  "metadata": { "version": "1.0" },
+  "name": "OpenTok",
+  "type": "external_service",
+  "urls": ["https://api.opentok.com", "https://static.opentok.com/*/js"],
+  "packages": [
+    { "name": "opentok", "group": null, "package_manager": "rubygems" },
+    { "name": "opentok-react-native", "group": null, "package_manager": "npm" }
+  ]
+}

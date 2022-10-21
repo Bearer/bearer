@@ -1,1 +1,15 @@
-{"metadata":{"version":"1.0"},"name":"Pusher","type":"external_service","urls":["https://api-*.pusher.com","https://api.pusherapp.com","https://js.pusher.com","https://sockjs.pusher.com"],"packages":[{"name":"pusher","group":null,"package_manager":"rubygems"},{"name":"pusher-js","group":null,"package_manager":"npm"}]}
+{
+  "metadata": { "version": "1.0" },
+  "name": "Pusher",
+  "type": "external_service",
+  "urls": [
+    "https://api-*.pusher.com",
+    "https://api.pusherapp.com",
+    "https://js.pusher.com",
+    "https://sockjs.pusher.com"
+  ],
+  "packages": [
+    { "name": "pusher", "group": null, "package_manager": "rubygems" },
+    { "name": "pusher-js", "group": null, "package_manager": "npm" }
+  ]
+}

@@ -1,1 +1,18 @@
-{"metadata":{"version":"1.0"},"name":"Google Analytics","type":"external_service","urls":["https://www.google-analytics.com/analytics.js","https://analyticsreporting.googleapis.com"],"packages":[{"name":"react-ga","group":null,"package_manager":"npm"},{"name":"workbox-google-analytics","group":null,"package_manager":"npm"},{"name":"node-ga","group":null,"package_manager":"npm"}]}
+{
+  "metadata": { "version": "1.0" },
+  "name": "Google Analytics",
+  "type": "external_service",
+  "urls": [
+    "https://www.google-analytics.com/analytics.js",
+    "https://analyticsreporting.googleapis.com"
+  ],
+  "packages": [
+    { "name": "react-ga", "group": null, "package_manager": "npm" },
+    {
+      "name": "workbox-google-analytics",
+      "group": null,
+      "package_manager": "npm"
+    },
+    { "name": "node-ga", "group": null, "package_manager": "npm" }
+  ]
+}

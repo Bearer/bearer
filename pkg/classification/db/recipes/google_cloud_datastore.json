@@ -1,1 +1,19 @@
-{"metadata":{"version":"1.0"},"name":"Google Cloud Datastore","type":"data_store","urls":[],"packages":[{"name":"cloud.google.com/go/datastore","group":null,"package_manager":"go"},{"name":"google-cloud-datastore","group":null,"package_manager":"pypi"},{"name":"googledatastore","group":null,"package_manager":"pypi"}]}
+{
+  "metadata": { "version": "1.0" },
+  "name": "Google Cloud Datastore",
+  "type": "data_store",
+  "urls": [],
+  "packages": [
+    {
+      "name": "cloud.google.com/go/datastore",
+      "group": null,
+      "package_manager": "go"
+    },
+    {
+      "name": "google-cloud-datastore",
+      "group": null,
+      "package_manager": "pypi"
+    },
+    { "name": "googledatastore", "group": null, "package_manager": "pypi" }
+  ]
+}

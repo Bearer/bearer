@@ -1,1 +1,109 @@
-{"metadata":{"version":"1.0"},"name":"Google Service APIs","type":"external_service","urls":["https://apis.google.com"],"packages":[{"name":"google/apiclient","group":null,"package_manager":"packagist"},{"name":"google-api-python-client","group":null,"package_manager":"pypi"},{"name":"googleapis","group":null,"package_manager":"npm"},{"name":"google-api-client","group":null,"package_manager":"rubygems"},{"name":"googleapis/google-api-go-client","group":null,"package_manager":"go"},{"name":"google-apis-drive_v3","group":null,"package_manager":"rubygems"},{"name":"google-apis-sheets_v4","group":null,"package_manager":"rubygems"},{"name":"google-apis-core","group":null,"package_manager":"rubygems"},{"name":"google_drive","group":null,"package_manager":"rubygems"},{"name":"googleauth","group":null,"package_manager":"rubygems"},{"name":"pygsheets","group":null,"package_manager":"pypi"},{"name":"api-common","group":"com.google.api","package_manager":"maven"},{"name":"google-api-services-sheets","group":"com.google.apis","package_manager":"maven"},{"name":"google-api-client","group":"com.google.api-client","package_manager":"maven"},{"name":"google/apiclient-services","group":null,"package_manager":"packagist"},{"name":"google/auth","group":null,"package_manager":"packagist"},{"name":"google-api-core","group":null,"package_manager":"pypi"},{"name":"google-apitools","group":null,"package_manager":"pypi"},{"name":"github.com/gogo/googleapis","group":null,"package_manager":"go"},{"name":"google.golang.org/api","group":null,"package_manager":"go"},{"name":"googleapis-common","group":null,"package_manager":"npm"},{"name":"google-auth-library","group":null,"package_manager":"npm"},{"name":"google/recaptcha","group":null,"package_manager":"packagist"},{"name":"league/oauth2-google","group":null,"package_manager":"packagist"},{"name":"Google.Apis.Calendar.v3","group":"","package_manager":"nuget"},{"name":"znanylekarz/google-bundle","group":"","package_manager":"packagist"},{"name":"Google.Apis.Storage.v1","group":null,"package_manager":"nuget"},{"name":"Google.Api.Gax","group":null,"package_manager":"nuget"},{"name":"Google.Apis.Drive.v3","group":null,"package_manager":"nuget"}]}
+{
+  "metadata": { "version": "1.0" },
+  "name": "Google Service APIs",
+  "type": "external_service",
+  "urls": ["https://apis.google.com"],
+  "packages": [
+    {
+      "name": "google/apiclient",
+      "group": null,
+      "package_manager": "packagist"
+    },
+    {
+      "name": "google-api-python-client",
+      "group": null,
+      "package_manager": "pypi"
+    },
+    { "name": "googleapis", "group": null, "package_manager": "npm" },
+    {
+      "name": "google-api-client",
+      "group": null,
+      "package_manager": "rubygems"
+    },
+    {
+      "name": "googleapis/google-api-go-client",
+      "group": null,
+      "package_manager": "go"
+    },
+    {
+      "name": "google-apis-drive_v3",
+      "group": null,
+      "package_manager": "rubygems"
+    },
+    {
+      "name": "google-apis-sheets_v4",
+      "group": null,
+      "package_manager": "rubygems"
+    },
+    {
+      "name": "google-apis-core",
+      "group": null,
+      "package_manager": "rubygems"
+    },
+    { "name": "google_drive", "group": null, "package_manager": "rubygems" },
+    { "name": "googleauth", "group": null, "package_manager": "rubygems" },
+    { "name": "pygsheets", "group": null, "package_manager": "pypi" },
+    {
+      "name": "api-common",
+      "group": "com.google.api",
+      "package_manager": "maven"
+    },
+    {
+      "name": "google-api-services-sheets",
+      "group": "com.google.apis",
+      "package_manager": "maven"
+    },
+    {
+      "name": "google-api-client",
+      "group": "com.google.api-client",
+      "package_manager": "maven"
+    },
+    {
+      "name": "google/apiclient-services",
+      "group": null,
+      "package_manager": "packagist"
+    },
+    { "name": "google/auth", "group": null, "package_manager": "packagist" },
+    { "name": "google-api-core", "group": null, "package_manager": "pypi" },
+    { "name": "google-apitools", "group": null, "package_manager": "pypi" },
+    {
+      "name": "github.com/gogo/googleapis",
+      "group": null,
+      "package_manager": "go"
+    },
+    { "name": "google.golang.org/api", "group": null, "package_manager": "go" },
+    { "name": "googleapis-common", "group": null, "package_manager": "npm" },
+    { "name": "google-auth-library", "group": null, "package_manager": "npm" },
+    {
+      "name": "google/recaptcha",
+      "group": null,
+      "package_manager": "packagist"
+    },
+    {
+      "name": "league/oauth2-google",
+      "group": null,
+      "package_manager": "packagist"
+    },
+    {
+      "name": "Google.Apis.Calendar.v3",
+      "group": "",
+      "package_manager": "nuget"
+    },
+    {
+      "name": "znanylekarz/google-bundle",
+      "group": "",
+      "package_manager": "packagist"
+    },
+    {
+      "name": "Google.Apis.Storage.v1",
+      "group": null,
+      "package_manager": "nuget"
+    },
+    { "name": "Google.Api.Gax", "group": null, "package_manager": "nuget" },
+    {
+      "name": "Google.Apis.Drive.v3",
+      "group": null,
+      "package_manager": "nuget"
+    }
+  ]
+}

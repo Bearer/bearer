@@ -1,1 +1,28 @@
-{"metadata":{"version":"1.0"},"name":"Stripe","type":"external_service","urls":["https://api.stripe.com", "https://js.stripe.com"],"packages":[{"name":"stripe","group":null,"package_manager":"rubygems"},{"name":"github.com/stripe/stripe-go","group":null,"package_manager":"go"},{"name":"stripe","group":null,"package_manager":"packagist"},{"name":"stripe","group":null,"package_manager":"pypi"},{"name":"stripe","group":null,"package_manager":"npm"},{"name":"react-stripe-elements","group":null,"package_manager":"npm"},{"name":"@stripe/stripe-js","group":null,"package_manager":"npm"},{"name":"@stripe/react-stripe-js","group":null,"package_manager":"npm"}]}
+{
+  "metadata": { "version": "1.0" },
+  "name": "Stripe",
+  "type": "external_service",
+  "urls": ["https://api.stripe.com", "https://js.stripe.com"],
+  "packages": [
+    { "name": "stripe", "group": null, "package_manager": "rubygems" },
+    {
+      "name": "github.com/stripe/stripe-go",
+      "group": null,
+      "package_manager": "go"
+    },
+    { "name": "stripe", "group": null, "package_manager": "packagist" },
+    { "name": "stripe", "group": null, "package_manager": "pypi" },
+    { "name": "stripe", "group": null, "package_manager": "npm" },
+    {
+      "name": "react-stripe-elements",
+      "group": null,
+      "package_manager": "npm"
+    },
+    { "name": "@stripe/stripe-js", "group": null, "package_manager": "npm" },
+    {
+      "name": "@stripe/react-stripe-js",
+      "group": null,
+      "package_manager": "npm"
+    }
+  ]
+}

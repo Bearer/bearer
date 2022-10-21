@@ -1,1 +1,7 @@
-{"metadata":{"version":"1.0"},"name":"Emburse","type":"external_service","urls":["https://api.emburse.com"],"packages":[]}
+{
+  "metadata": { "version": "1.0" },
+  "name": "Emburse",
+  "type": "external_service",
+  "urls": ["https://api.emburse.com"],
+  "packages": []
+}

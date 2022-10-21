@@ -1,1 +1,7 @@
-{"metadata":{"version":"1.0"},"name":"Cookiebot.com","type":"external_service","urls":["https://consent.cookiebot.com/api"],"packages":[]}
+{
+  "metadata": { "version": "1.0" },
+  "name": "Cookiebot.com",
+  "type": "external_service",
+  "urls": ["https://consent.cookiebot.com/api"],
+  "packages": []
+}

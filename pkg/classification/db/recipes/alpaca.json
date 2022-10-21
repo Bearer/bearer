@@ -1,1 +1,7 @@
-{"metadata":{"version":"1.0"},"name":"Alpaca","type":"external_service","urls":["https://api.alpaca.markets"],"packages":[]}
+{
+  "metadata": { "version": "1.0" },
+  "name": "Alpaca",
+  "type": "external_service",
+  "urls": ["https://api.alpaca.markets"],
+  "packages": []
+}

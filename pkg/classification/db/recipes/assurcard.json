@@ -1,1 +1,12 @@
-{"metadata":{"version":"1.0"},"name":"Assurcard","type":"external_service","urls":["https://insurer.soap.assurcard.be","https://insurer.assurcard.be","https://testinsurer.soap.assurcard.be","https://testinsurer.assurcard.be"],"packages":[]}
+{
+  "metadata": { "version": "1.0" },
+  "name": "Assurcard",
+  "type": "external_service",
+  "urls": [
+    "https://insurer.soap.assurcard.be",
+    "https://insurer.assurcard.be",
+    "https://testinsurer.soap.assurcard.be",
+    "https://testinsurer.assurcard.be"
+  ],
+  "packages": []
+}

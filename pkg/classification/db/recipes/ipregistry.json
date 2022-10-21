@@ -1,1 +1,7 @@
-{"metadata":{"version":"1.0"},"name":"Ipregistry","type":"external_service","urls":["https://api.ipregistry.co"],"packages":[]}
+{
+  "metadata": { "version": "1.0" },
+  "name": "Ipregistry",
+  "type": "external_service",
+  "urls": ["https://api.ipregistry.co"],
+  "packages": []
+}

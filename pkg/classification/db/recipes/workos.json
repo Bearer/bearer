@@ -1,1 +1,9 @@
-{"metadata":{"version":"1.0"},"name":"WorkOS","type":"external_service","urls":[],"packages":[{"name":"workos","group":null,"package_manager":"rubygems"}]}
+{
+  "metadata": { "version": "1.0" },
+  "name": "WorkOS",
+  "type": "external_service",
+  "urls": [],
+  "packages": [
+    { "name": "workos", "group": null, "package_manager": "rubygems" }
+  ]
+}

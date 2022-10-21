@@ -1,1 +1,9 @@
-{"metadata":{"version":"1.0"},"name":"Hotjar","type":"external_service","urls":["https://static.hotjar.com"],"packages":[{"name":"react-hotjar","group":null,"package_manager":"npm"}]}
+{
+  "metadata": { "version": "1.0" },
+  "name": "Hotjar",
+  "type": "external_service",
+  "urls": ["https://static.hotjar.com"],
+  "packages": [
+    { "name": "react-hotjar", "group": null, "package_manager": "npm" }
+  ]
+}

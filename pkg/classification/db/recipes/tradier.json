@@ -1,1 +1,11 @@
-{"metadata":{"version":"1.0"},"name":"Tradier","type":"external_service","urls":["https://sandbox.tradier.com","https://stream.tradier.com","https://api.tradier.com"],"packages":[]}
+{
+  "metadata": { "version": "1.0" },
+  "name": "Tradier",
+  "type": "external_service",
+  "urls": [
+    "https://sandbox.tradier.com",
+    "https://stream.tradier.com",
+    "https://api.tradier.com"
+  ],
+  "packages": []
+}

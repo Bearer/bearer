@@ -1,1 +1,21 @@
-{"metadata":{"version":"1.0"},"name":"Bank of APIs (NatWest, RBS)","type":"external_service","urls":["https://natwestpayit.com","https://secure1t.rbs.co.uk","https://feedservice-api.rbs.co.uk","https://uat-feedservice-api.rbs.co.uk","https://api.sandbox.rbs.co.uk","https://api.rbs.co.uk","https://api.cop.natwest.com","https://openapi.natwest.com","https://feedservice-api.natwest.com","https://uat-feedservice-api.natwest.com","https://api.sandbox.natwest.com","https://ob.sandbox.natwest.com","https://api.natwest.com"],"packages":[]}
+{
+  "metadata": { "version": "1.0" },
+  "name": "Bank of APIs (NatWest, RBS)",
+  "type": "external_service",
+  "urls": [
+    "https://natwestpayit.com",
+    "https://secure1t.rbs.co.uk",
+    "https://feedservice-api.rbs.co.uk",
+    "https://uat-feedservice-api.rbs.co.uk",
+    "https://api.sandbox.rbs.co.uk",
+    "https://api.rbs.co.uk",
+    "https://api.cop.natwest.com",
+    "https://openapi.natwest.com",
+    "https://feedservice-api.natwest.com",
+    "https://uat-feedservice-api.natwest.com",
+    "https://api.sandbox.natwest.com",
+    "https://ob.sandbox.natwest.com",
+    "https://api.natwest.com"
+  ],
+  "packages": []
+}

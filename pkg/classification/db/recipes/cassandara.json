@@ -1,1 +1,24 @@
-{"metadata":{"version":"1.0"},"name":"Cassandara","type":"data_store","urls":[],"packages":[{"name":"github.com/gocql/gocql","group":null,"package_manager":"go"},{"name":"github.com/kshvakov/clickhouse","group":null,"package_manager":"go"},{"name":"cassandra-driver-core","group":"com.datastax.cassandra","package_manager":"maven"},{"name":"cassandra-driver","group":null,"package_manager":"npm"}]}
+{
+  "metadata": { "version": "1.0" },
+  "name": "Cassandara",
+  "type": "data_store",
+  "urls": [],
+  "packages": [
+    {
+      "name": "github.com/gocql/gocql",
+      "group": null,
+      "package_manager": "go"
+    },
+    {
+      "name": "github.com/kshvakov/clickhouse",
+      "group": null,
+      "package_manager": "go"
+    },
+    {
+      "name": "cassandra-driver-core",
+      "group": "com.datastax.cassandra",
+      "package_manager": "maven"
+    },
+    { "name": "cassandra-driver", "group": null, "package_manager": "npm" }
+  ]
+}

@@ -1,1 +1,13 @@
-{"metadata":{"version":"1.0"},"name":"Dnsimple","type":"external_service","urls":["https://api.dnsimple.com"],"packages":[{"name":"github.com/dnsimple/dnsimple-go","group":null,"package_manager":"go"}]}
+{
+  "metadata": { "version": "1.0" },
+  "name": "Dnsimple",
+  "type": "external_service",
+  "urls": ["https://api.dnsimple.com"],
+  "packages": [
+    {
+      "name": "github.com/dnsimple/dnsimple-go",
+      "group": null,
+      "package_manager": "go"
+    }
+  ]
+}

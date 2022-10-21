@@ -1,1 +1,99 @@
-{"metadata":{"version":"1.0"},"name":"Google Cloud BigQuery","type":"data_store","urls":[],"packages":[{"name":"google-cloud-bigquery-reservation","group":null,"package_manager":"pypi"},{"name":"cloud.google.com/go/bigquery","group":null,"package_manager":"go"},{"name":"dbt-bigquery","group":null,"package_manager":"pypi"},{"name":"scio-bigquery_2.12","group":"com.spotify","package_manager":"maven"},{"name":"google-cloud-bigquery-storage","group":null,"package_manager":"pypi"},{"name":"scio-bigquery_2.11","group":"com.spotify","package_manager":"maven"},{"name":"Google.Apis.Bigquery.v2","group":null,"package_manager":"nuget"},{"name":"bigquery","group":null,"package_manager":"rubygems"},{"name":"google-cloud-bigquery","group":null,"package_manager":"rubygems"},{"name":"google-apis-bigquery_v2","group":null,"package_manager":"rubygems"},{"name":"bigquery-client","group":null,"package_manager":"rubygems"},{"name":"bigquery-ruby","group":null,"package_manager":"rubygems"},{"name":"google-cloud-bigquery-data_transfer","group":null,"package_manager":"rubygems"},{"name":"@google-cloud/bigquery","group":null,"package_manager":"npm"},{"name":"@google-cloud/bigquery-reservation","group":null,"package_manager":"npm"},{"name":"@google-cloud/bigquery-connection","group":null,"package_manager":"npm"},{"name":"@google-cloud/bigquery-data-transfer","group":null,"package_manager":"npm"},{"name":"@google-cloud/bigquery-storage","group":null,"package_manager":"npm"},{"name":"bigquery-python","group":null,"package_manager":"pypi"},{"name":"google-cloud-bigquery","group":null,"package_manager":"pypi"},{"name":"pybigquery","group":null,"package_manager":"pypi"},{"name":"google-cloud-bigquery","group":"com.google.cloud","package_manager":"maven"},{"name":"google/cloud-bigquery","group":null,"package_manager":"packagist"}]}
+{
+  "metadata": { "version": "1.0" },
+  "name": "Google Cloud BigQuery",
+  "type": "data_store",
+  "urls": [],
+  "packages": [
+    {
+      "name": "google-cloud-bigquery-reservation",
+      "group": null,
+      "package_manager": "pypi"
+    },
+    {
+      "name": "cloud.google.com/go/bigquery",
+      "group": null,
+      "package_manager": "go"
+    },
+    { "name": "dbt-bigquery", "group": null, "package_manager": "pypi" },
+    {
+      "name": "scio-bigquery_2.12",
+      "group": "com.spotify",
+      "package_manager": "maven"
+    },
+    {
+      "name": "google-cloud-bigquery-storage",
+      "group": null,
+      "package_manager": "pypi"
+    },
+    {
+      "name": "scio-bigquery_2.11",
+      "group": "com.spotify",
+      "package_manager": "maven"
+    },
+    {
+      "name": "Google.Apis.Bigquery.v2",
+      "group": null,
+      "package_manager": "nuget"
+    },
+    { "name": "bigquery", "group": null, "package_manager": "rubygems" },
+    {
+      "name": "google-cloud-bigquery",
+      "group": null,
+      "package_manager": "rubygems"
+    },
+    {
+      "name": "google-apis-bigquery_v2",
+      "group": null,
+      "package_manager": "rubygems"
+    },
+    { "name": "bigquery-client", "group": null, "package_manager": "rubygems" },
+    { "name": "bigquery-ruby", "group": null, "package_manager": "rubygems" },
+    {
+      "name": "google-cloud-bigquery-data_transfer",
+      "group": null,
+      "package_manager": "rubygems"
+    },
+    {
+      "name": "@google-cloud/bigquery",
+      "group": null,
+      "package_manager": "npm"
+    },
+    {
+      "name": "@google-cloud/bigquery-reservation",
+      "group": null,
+      "package_manager": "npm"
+    },
+    {
+      "name": "@google-cloud/bigquery-connection",
+      "group": null,
+      "package_manager": "npm"
+    },
+    {
+      "name": "@google-cloud/bigquery-data-transfer",
+      "group": null,
+      "package_manager": "npm"
+    },
+    {
+      "name": "@google-cloud/bigquery-storage",
+      "group": null,
+      "package_manager": "npm"
+    },
+    { "name": "bigquery-python", "group": null, "package_manager": "pypi" },
+    {
+      "name": "google-cloud-bigquery",
+      "group": null,
+      "package_manager": "pypi"
+    },
+    { "name": "pybigquery", "group": null, "package_manager": "pypi" },
+    {
+      "name": "google-cloud-bigquery",
+      "group": "com.google.cloud",
+      "package_manager": "maven"
+    },
+    {
+      "name": "google/cloud-bigquery",
+      "group": null,
+      "package_manager": "packagist"
+    }
+  ]
+}

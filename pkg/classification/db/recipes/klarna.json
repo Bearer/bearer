@@ -1,1 +1,11 @@
-{"metadata":{"version":"1.0"},"name":"Klarna","type":"external_service","urls":["https://api.playground.klarna.com","https://banking.klarna.com","https://api.klarna.com"],"packages":[]}
+{
+  "metadata": { "version": "1.0" },
+  "name": "Klarna",
+  "type": "external_service",
+  "urls": [
+    "https://api.playground.klarna.com",
+    "https://banking.klarna.com",
+    "https://api.klarna.com"
+  ],
+  "packages": []
+}

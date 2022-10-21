@@ -1,1 +1,13 @@
-{"metadata":{"version":"1.0"},"name":"RethinkDB","type":"data_store","urls":[],"packages":[{"name":"rethinkdb-driver","group":"com.rethinkdb","package_manager":"maven"}]}
+{
+  "metadata": { "version": "1.0" },
+  "name": "RethinkDB",
+  "type": "data_store",
+  "urls": [],
+  "packages": [
+    {
+      "name": "rethinkdb-driver",
+      "group": "com.rethinkdb",
+      "package_manager": "maven"
+    }
+  ]
+}

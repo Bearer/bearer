@@ -1,1 +1,7 @@
-{"metadata":{"version":"1.0"},"name":"Marketo","type":"external_service","urls":["https://mktoapi.com/soap","https://mktorest.com/rest"],"packages":[]}
+{
+  "metadata": { "version": "1.0" },
+  "name": "Marketo",
+  "type": "external_service",
+  "urls": ["https://mktoapi.com/soap", "https://mktorest.com/rest"],
+  "packages": []
+}

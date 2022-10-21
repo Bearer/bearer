@@ -1,1 +1,15 @@
-{"metadata":{"version":"1.0"},"name":"Cashplus","type":"external_service","urls":["https://api.ob.cashplus.com","https://sandbox.matls.identity.ob.cashplus.com","https://sandbox.matls.api.ob.cashplus.com","https://sandbox.identity.ob.cashplus.com","https://api.mycashplus.co.uk","https://apisandbox.mycashplus.co.uk","https://cashplus.com"],"packages":[]}
+{
+  "metadata": { "version": "1.0" },
+  "name": "Cashplus",
+  "type": "external_service",
+  "urls": [
+    "https://api.ob.cashplus.com",
+    "https://sandbox.matls.identity.ob.cashplus.com",
+    "https://sandbox.matls.api.ob.cashplus.com",
+    "https://sandbox.identity.ob.cashplus.com",
+    "https://api.mycashplus.co.uk",
+    "https://apisandbox.mycashplus.co.uk",
+    "https://cashplus.com"
+  ],
+  "packages": []
+}

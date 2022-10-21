@@ -1,1 +1,13 @@
-{"metadata":{"version":"1.0"},"name":"Apache HBase","type":"data_store","urls":[],"packages":[{"name":"hbase-client","group":"org.apache.hbase","package_manager":"maven"}]}
+{
+  "metadata": { "version": "1.0" },
+  "name": "Apache HBase",
+  "type": "data_store",
+  "urls": [],
+  "packages": [
+    {
+      "name": "hbase-client",
+      "group": "org.apache.hbase",
+      "package_manager": "maven"
+    }
+  ]
+}

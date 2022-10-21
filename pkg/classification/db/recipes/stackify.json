@@ -1,1 +1,7 @@
-{"metadata":{"version":"1.0"},"name":"Stackify","type":"external_service","urls":["https://api.stackify.net"],"packages":[]}
+{
+  "metadata": { "version": "1.0" },
+  "name": "Stackify",
+  "type": "external_service",
+  "urls": ["https://api.stackify.net"],
+  "packages": []
+}

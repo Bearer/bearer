@@ -1,1 +1,17 @@
-{"metadata":{"version":"1.0"},"name":"Shopify","type":"external_service","urls":["https://myshopify.com/api","https://myshopify.com/admin/api"],"packages":[{"name":"shoplift_python_api","group":null,"package_manager":"pypi"},{"name":"shopify_api","group":null,"package_manager":"rubygems"},{"name":"Shopify-api-node","group":null,"package_manager":"npm"},{"name":"github.com/bold-commerce/go-shopify","group":null,"package_manager":"go"},{"name":"php-shopify","group":null,"package_manager":"packagist"}]}
+{
+  "metadata": { "version": "1.0" },
+  "name": "Shopify",
+  "type": "external_service",
+  "urls": ["https://myshopify.com/api", "https://myshopify.com/admin/api"],
+  "packages": [
+    { "name": "shoplift_python_api", "group": null, "package_manager": "pypi" },
+    { "name": "shopify_api", "group": null, "package_manager": "rubygems" },
+    { "name": "Shopify-api-node", "group": null, "package_manager": "npm" },
+    {
+      "name": "github.com/bold-commerce/go-shopify",
+      "group": null,
+      "package_manager": "go"
+    },
+    { "name": "php-shopify", "group": null, "package_manager": "packagist" }
+  ]
+}
