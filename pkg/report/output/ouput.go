@@ -6,13 +6,13 @@ import (
 	"os"
 
 	"github.com/bearer/curio/pkg/types"
-	"github.com/bearer/curio/pkg/util/output"
 
+	"github.com/rs/zerolog"
 	"github.com/rs/zerolog/log"
 	"github.com/wlredeye/jsonlines"
 )
 
-func ReportJSON(report types.Report) error {
+func ReportJSON(report types.Report, output *zerolog.Event) error {
 	var detections []interface{}
 	f, err := os.Open(report.Path)
 	if err != nil {
@@ -31,7 +31,7 @@ func ReportJSON(report types.Report) error {
 		return fmt.Errorf("failed to json marshal detections: %w", err)
 	}
 
-	output.DefaultLogger().Msg(string(jsonBytes))
+	output.Msg(string(jsonBytes))
 
 	return nil
 }

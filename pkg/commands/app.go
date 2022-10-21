@@ -51,7 +51,7 @@ func SetOut(out io.Writer) {
 func NewApp(version string, commitSHA string) *cobra.Command {
 	rootCmd := NewRootCommand()
 	rootCmd.AddCommand(
-		NewProcessingServerCommand(),
+		NewProcessingWorkerCommand(),
 		NewScanCommand(),
 		NewConfigCommand(),
 		NewVersionCommand(version, commitSHA),
@@ -60,7 +60,7 @@ func NewApp(version string, commitSHA string) *cobra.Command {
 	return rootCmd
 }
 
-func NewProcessingServerCommand() *cobra.Command {
+func NewProcessingWorkerCommand() *cobra.Command {
 	flags := &flag.Flags{
 		ProcessFlagGroup: flag.NewProcessGroup(),
 		ScanFlagGroup:    flag.NewScanFlagGroup(),
@@ -227,7 +227,7 @@ func NewVersionCommand(version string, commitSHA string) *cobra.Command {
 		Short: "Print the version",
 		Args:  cobra.NoArgs,
 		RunE: func(cmd *cobra.Command, args []string) error {
-			output.DefaultLogger().Msgf("curio version: %s\nsha: %s", version, commitSHA)
+			output.StdOutLogger().Msgf("curio version: %s\nsha: %s", version, commitSHA)
 			return nil
 		},
 	}
