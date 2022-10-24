@@ -16,23 +16,6 @@ type VersionInfo struct {
 	Version string `json:",omitempty"`
 }
 
-const (
-	scanTemplate = `Usage:{{if .Runnable}}
-  {{.UseLine}}{{end}}{{if .HasAvailableSubCommands}}
-  {{.CommandPath}} [command]{{end}}{{if gt (len .Aliases) 0}}
-Aliases:
-  {{.NameAndAliases}}{{end}}{{if .HasExample}}
-Examples:
-{{.Example}}{{end}}{{if .HasAvailableSubCommands}}
-Available Commands:{{range .Commands}}{{if (or .IsAvailableCommand (eq .Name "help"))}}
-  {{rpad .Name .NamePadding }} {{.Short}}{{end}}{{end}}{{end}}
-
-{{if .HasAvailableLocalFlags}}
-%s
-{{end}}
-`
-)
-
 var (
 	outputWriter io.Writer = os.Stdout
 )
@@ -47,6 +30,7 @@ func NewApp(version string, commitSHA string) *cobra.Command {
 	rootCmd := NewRootCommand()
 	rootCmd.AddCommand(
 		NewProcessingWorkerCommand(),
+		NewInitCommand(),
 		NewScanCommand(),
 		NewConfigCommand(),
 		NewVersionCommand(version, commitSHA),

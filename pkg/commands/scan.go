@@ -13,14 +13,31 @@ import (
 	"golang.org/x/xerrors"
 )
 
-func NewScanCommand() *cobra.Command {
+const (
+	scanTemplate = `Usage:{{if .Runnable}}
+  {{.UseLine}}{{end}}{{if .HasAvailableSubCommands}}
+  {{.CommandPath}} [command]{{end}}{{if gt (len .Aliases) 0}}
+Aliases:
+  {{.NameAndAliases}}{{end}}{{if .HasExample}}
+Examples:
+{{.Example}}{{end}}{{if .HasAvailableSubCommands}}
+Available Commands:{{range .Commands}}{{if (or .IsAvailableCommand (eq .Name "help"))}}
+  {{rpad .Name .NamePadding }} {{.Short}}{{end}}{{end}}{{end}}
 
-	flags := &flag.Flags{
-		ScanFlagGroup:    flag.NewScanFlagGroup(),
-		WorkerFlagGroup:  flag.NewWorkerFlagGroup(),
-		ReportFlagGroup:  flag.NewReportFlagGroup(),
-		GeneralFlagGroup: flag.NewGeneralFlagGroup(),
-	}
+{{if .HasAvailableLocalFlags}}
+%s
+{{end}}
+`
+)
+
+var scanFlags = &flag.Flags{
+	ScanFlagGroup:    flag.NewScanFlagGroup(),
+	WorkerFlagGroup:  flag.NewWorkerFlagGroup(),
+	ReportFlagGroup:  flag.NewReportFlagGroup(),
+	GeneralFlagGroup: flag.NewGeneralFlagGroup(),
+}
+
+func NewScanCommand() *cobra.Command {
 
 	cmd := &cobra.Command{
 		Use:     "scan [flags] PATH",
@@ -31,23 +48,23 @@ func NewScanCommand() *cobra.Command {
   # Scan a single file
   $ curio s ./curio-ci-test/Pipfile.lock`,
 		PreRunE: func(cmd *cobra.Command, args []string) error {
-			if err := flags.Bind(cmd); err != nil {
+			if err := scanFlags.Bind(cmd); err != nil {
 				return xerrors.Errorf("flag bind error: %w", err)
 			}
 			return nil
 		},
 		RunE: func(cmd *cobra.Command, args []string) error {
-			if err := flags.Bind(cmd); err != nil {
+			if err := scanFlags.Bind(cmd); err != nil {
 				return xerrors.Errorf("flag bind error: %w", err)
 			}
 
 			configPath := viper.GetString(flag.ConfigFileFlag.ConfigName)
 
-			if err := initConfig(configPath); err != nil {
+			if err := readConfig(configPath); err != nil {
 				return err
 			}
 
-			options, err := flags.ToOptions(args, outputWriter)
+			options, err := scanFlags.ToOptions(args, outputWriter)
 			if err != nil {
 				return xerrors.Errorf("flag error: %w", err)
 			}
@@ -64,13 +81,13 @@ func NewScanCommand() *cobra.Command {
 		SilenceUsage:  false,
 	}
 
-	flags.AddFlags(cmd)
-	cmd.SetUsageTemplate(fmt.Sprintf(scanTemplate, flags.Usages(cmd)))
+	scanFlags.AddFlags(cmd)
+	cmd.SetUsageTemplate(fmt.Sprintf(scanTemplate, scanFlags.Usages(cmd)))
 
 	return cmd
 }
 
-func initConfig(configFile string) error {
+func readConfig(configFile string) error {
 	// Read from config
 	viper.SetConfigFile(configFile)
 	viper.SetConfigType("yaml")
@@ -78,8 +95,10 @@ func initConfig(configFile string) error {
 		if errors.Is(err, os.ErrNotExist) {
 			return nil
 		}
+
 		return fmt.Errorf("config file %q loading error: %s", configFile, err)
 	}
+
 	output.StdErrLogger().Msgf("Loaded %s configuration file", configFile)
 
 	return nil

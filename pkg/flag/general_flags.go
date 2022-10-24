@@ -2,10 +2,11 @@ package flag
 
 var (
 	ConfigFileFlag = Flag{
-		Name:       "config-file",
-		ConfigName: "config-file",
-		Value:      "",
-		Usage:      "file from which to load configurations",
+		Name:            "config-file",
+		ConfigName:      "config-file",
+		Value:           "",
+		Usage:           "file from which to load configurations",
+		DisableInConfig: true,
 	}
 )
 

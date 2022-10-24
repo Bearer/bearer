@@ -1,0 +1,15 @@
+corruptible_columns_detector:
+  patterns:
+    - |
+      class $CLASS_NAME < Db1Record
+        include Corruptible
+
+        def corruptible_attributes_by_type
+        {
+          CorruptibleType::$ANYTHING => %i[<$ARGUMENT>],
+        }
+        end
+      end
+  param_parenting: true
+  languages:
+    - ruby

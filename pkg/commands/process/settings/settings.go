@@ -33,9 +33,11 @@ type MetaVar struct {
 //go:embed custom_detector.yml
 var customDetector []byte
 
+var CustomDetectorKey string = "scan.custom_detector"
+
 func FromOptions(opts flag.Options) (Config, error) {
 	rules := DefaultCustomDetector()
-	err := viper.UnmarshalKey("scan.custom_detector", &rules)
+	err := viper.UnmarshalKey(CustomDetectorKey, &rules)
 	if err != nil {
 		return Config{}, err
 	}
