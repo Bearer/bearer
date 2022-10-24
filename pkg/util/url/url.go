@@ -176,13 +176,11 @@ var cloudDetectors = map[string]struct{}{
 	"sql-advanced": {},
 }
 
-type ValidationState int
+type ValidationState string
 
-const (
-	Valid ValidationState = iota + 1
-	Invalid
-	Potential
-)
+var Valid = ValidationState("valid")
+var Invalid = ValidationState("invalid")
+var Potential = ValidationState("potential")
 
 type ValidationResult struct {
 	State  ValidationState
