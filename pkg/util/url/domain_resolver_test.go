@@ -12,10 +12,10 @@ import (
 
 func TestCanReach(t *testing.T) {
 	tests := []struct {
-		Name, Domain   string
-		MockLookUpAddr func(ctx context.Context, addr string) ([]string, error)
-		MockLookUpNS   func(ctx context.Context, name string) ([]*net.NS, error)
-		Want           bool
+		Name, Domain     string
+		MockLookupIPAddr func(ctx context.Context, addr string) ([]net.IPAddr, error)
+		MockLookupNS     func(ctx context.Context, name string) ([]*net.NS, error)
+		Want             bool
 	}{
 		{
 			Name:   "when we have non-ASCII chars",
@@ -25,8 +25,8 @@ func TestCanReach(t *testing.T) {
 		{
 			Name:   "when the domain contains wildcards and the non wildcard part is not a valid TLD",
 			Domain: "_oidc-client-*-partial.tf",
-			MockLookUpAddr: func(ctx context.Context, addr string) ([]string, error) {
-				return []string{}, nil
+			MockLookupIPAddr: func(ctx context.Context, addr string) ([]net.IPAddr, error) {
+				return []net.IPAddr{}, nil
 			},
 			Want: false,
 		},
@@ -38,23 +38,23 @@ func TestCanReach(t *testing.T) {
 		{
 			Name:   "when the domain is static and does not resolve",
 			Domain: "example.co.za",
-			MockLookUpAddr: func(ctx context.Context, addr string) ([]string, error) {
-				return []string{}, nil
+			MockLookupIPAddr: func(ctx context.Context, addr string) ([]net.IPAddr, error) {
+				return []net.IPAddr{}, nil
 			},
 			Want: false,
 		},
 		{
 			Name:   "when the domain is static and the DNS server has an error",
 			Domain: "example.co.za",
-			MockLookUpAddr: func(ctx context.Context, addr string) ([]string, error) {
-				return []string{}, errors.New("just being nervous")
+			MockLookupIPAddr: func(ctx context.Context, addr string) ([]net.IPAddr, error) {
+				return []net.IPAddr{}, errors.New("just being nervous")
 			},
 			Want: false,
 		},
 		{
 			Name:   "when the domain is static it does not lookup the nameserver",
 			Domain: "example.co.za",
-			MockLookUpNS: func(ctx context.Context, name string) ([]*net.NS, error) {
+			MockLookupNS: func(ctx context.Context, name string) ([]*net.NS, error) {
 				panic("we shouldn't reach this")
 			},
 			Want: true,
@@ -62,10 +62,10 @@ func TestCanReach(t *testing.T) {
 		{
 			Name:   "when a wildcard domain does not resolve and its static domain has no nameserver",
 			Domain: "*-test.example.co.uk",
-			MockLookUpAddr: func(ctx context.Context, addr string) ([]string, error) {
-				return []string{}, nil
+			MockLookupIPAddr: func(ctx context.Context, addr string) ([]net.IPAddr, error) {
+				return []net.IPAddr{}, nil
 			},
-			MockLookUpNS: func(ctx context.Context, name string) ([]*net.NS, error) {
+			MockLookupNS: func(ctx context.Context, name string) ([]*net.NS, error) {
 				return []*net.NS{}, nil
 			},
 			Want: false,
@@ -73,7 +73,7 @@ func TestCanReach(t *testing.T) {
 		{
 			Name:   "when a wildcard domain resolves and its static domain has no nameserver",
 			Domain: "*-test.example.co.uk",
-			MockLookUpNS: func(ctx context.Context, name string) ([]*net.NS, error) {
+			MockLookupNS: func(ctx context.Context, name string) ([]*net.NS, error) {
 				return []*net.NS{}, nil
 			},
 			Want: true,
@@ -81,18 +81,18 @@ func TestCanReach(t *testing.T) {
 		{
 			Name:   "when a wildcard domain does not resolve but its static domain has a nameserver",
 			Domain: "*-test.example.co.uk",
-			MockLookUpAddr: func(ctx context.Context, addr string) ([]string, error) {
-				return []string{}, nil
+			MockLookupIPAddr: func(ctx context.Context, addr string) ([]net.IPAddr, error) {
+				return []net.IPAddr{}, nil
 			},
 			Want: true,
 		},
 		{
 			Name:   "when both the DNS and nameserver lookup raises errors for a wildcard domain",
 			Domain: "*-test.example.co.uk",
-			MockLookUpAddr: func(ctx context.Context, addr string) ([]string, error) {
-				return []string{}, errors.New("just being nervous")
+			MockLookupIPAddr: func(ctx context.Context, addr string) ([]net.IPAddr, error) {
+				return []net.IPAddr{}, errors.New("just being nervous")
 			},
-			MockLookUpNS: func(ctx context.Context, name string) ([]*net.NS, error) {
+			MockLookupNS: func(ctx context.Context, name string) ([]*net.NS, error) {
 				return []*net.NS{}, errors.New("just being nervous")
 			},
 			Want: false,
@@ -103,19 +103,19 @@ func TestCanReach(t *testing.T) {
 		t.Run(testCase.Name, func(t *testing.T) {
 			// reset mocks
 			domainResolver := url.NewDomainResolverDefault()
-			domainResolver.LookUpAddr = func(ctx context.Context, addr string) ([]string, error) {
-				return []string{"example.co.za"}, nil
+			domainResolver.LookupIPAddr = func(ctx context.Context, addr string) ([]net.IPAddr, error) {
+				return []net.IPAddr{{IP: []byte{1}}}, nil
 			}
-			domainResolver.LookUpNS = func(ctx context.Context, name string) ([]*net.NS, error) {
+			domainResolver.LookupNS = func(ctx context.Context, name string) ([]*net.NS, error) {
 				return []*net.NS{{Host: "example.co.za"}}, nil
 			}
 
 			// update mocks if needed
-			if testCase.MockLookUpAddr != nil {
-				domainResolver.LookUpAddr = testCase.MockLookUpAddr
+			if testCase.MockLookupIPAddr != nil {
+				domainResolver.LookupIPAddr = testCase.MockLookupIPAddr
 			}
-			if testCase.MockLookUpNS != nil {
-				domainResolver.LookUpNS = testCase.MockLookUpNS
+			if testCase.MockLookupNS != nil {
+				domainResolver.LookupNS = testCase.MockLookupNS
 			}
 			output := domainResolver.CanReach(testCase.Domain)
 			assert.Equal(t, testCase.Want, output)

@@ -13,20 +13,20 @@ import (
 var regexpDomainSplitMatcher = regexp.MustCompile(`\*\s*(.*?)\s*\.`)
 
 type DomainResolver struct {
-	Enabled    bool
-	Timeout    time.Duration
-	LookUpAddr func(ctx context.Context, addr string) ([]string, error)
-	LookUpNS   func(ctx context.Context, addr string) ([]*net.NS, error)
+	Enabled      bool
+	Timeout      time.Duration
+	LookupIPAddr func(ctx context.Context, addr string) ([]net.IPAddr, error)
+	LookupNS     func(ctx context.Context, addr string) ([]*net.NS, error)
 }
 
 func NewDomainResolver(enabled bool, timeout time.Duration) *DomainResolver {
 	var resolver = net.Resolver{PreferGo: true}
 
 	return &DomainResolver{
-		Enabled:    enabled,
-		Timeout:    timeout,
-		LookUpAddr: resolver.LookupAddr,
-		LookUpNS:   resolver.LookupNS,
+		Enabled:      enabled,
+		Timeout:      timeout,
+		LookupNS:     resolver.LookupNS,
+		LookupIPAddr: resolver.LookupIPAddr,
 	}
 }
 
@@ -34,10 +34,10 @@ func NewDomainResolverDefault() *DomainResolver {
 	var resolver = net.Resolver{PreferGo: true}
 
 	return &DomainResolver{
-		Enabled:    true,
-		Timeout:    3 * time.Second,
-		LookUpAddr: resolver.LookupAddr,
-		LookUpNS:   resolver.LookupNS,
+		Enabled:      true,
+		Timeout:      3 * time.Second,
+		LookupNS:     resolver.LookupNS,
+		LookupIPAddr: resolver.LookupIPAddr,
 	}
 }
 
@@ -73,7 +73,7 @@ func (domainResolver *DomainResolver) isNameserver(domain string, staticDomain s
 		return false
 	}
 
-	nameserver, err := domainResolver.LookUpNS(resolverContext, staticDomain)
+	nameserver, err := domainResolver.LookupNS(resolverContext, staticDomain)
 	if err != nil {
 		// return false even for transient errors
 		return false
@@ -89,7 +89,7 @@ func (domainResolver *DomainResolver) domainResolves(domain string, resolverCont
 		return false
 	}
 
-	names, err := domainResolver.LookUpAddr(resolverContext, sanitizedURL)
+	names, err := domainResolver.LookupIPAddr(resolverContext, sanitizedURL)
 	if err != nil {
 		// return false even for transient errors
 		return false
