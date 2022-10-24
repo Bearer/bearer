@@ -21,6 +21,13 @@ var dataTypeClassificationPatternsDir embed.FS
 //go:embed known_person_object_patterns
 var knownPersonObjectPatternsDir embed.FS
 
+type DefaultDB struct {
+	Recipes                        []Recipe
+	DataTypes                      []DataType
+	DataTypeClassificationPatterns []DataTypeClassificationPattern
+	KnownPersonObjectPatterns      []KnownPersonObjectPattern
+}
+
 type Recipe struct {
 	URLS     []string  `json:"urls"`
 	Name     string    `json:"name"`
@@ -67,89 +74,16 @@ type KnownPersonObjectPattern struct {
 	ActAsIdentifier bool   `json:"act_as_identifier"`
 }
 
-func DefaultDataTypes() []DataType {
-	dataTypes := []DataType{}
-
-	files, err := dataTypesDir.ReadDir("data_types")
-	if err != nil {
-		log.Fatalln(err)
+func Default() DefaultDB {
+	return DefaultDB{
+		Recipes:                        defaultRecipes(),
+		DataTypes:                      defaultDataTypes(),
+		DataTypeClassificationPatterns: defaultDataTypeClassificationPatterns(),
+		KnownPersonObjectPatterns:      defaultKnownPersonObjectPatterns(),
 	}
-
-	for _, file := range files {
-		val, err := dataTypesDir.ReadFile("data_types/" + file.Name())
-		if err != nil {
-			fmt.Println(err)
-			continue
-		}
-
-		dataType, err := UnmarshalDataType(val)
-		if err != nil {
-			fmt.Println(err)
-			continue
-		}
-
-		dataTypes = append(dataTypes, *dataType)
-	}
-
-	return dataTypes
 }
 
-func DefaultDataTypeClassificationPatterns() []DataTypeClassificationPattern {
-	dataTypeClassificationPatterns := []DataTypeClassificationPattern{}
-
-	files, err := dataTypeClassificationPatternsDir.ReadDir("data_type_classification_patterns")
-	if err != nil {
-		log.Fatalln(err)
-	}
-
-	for _, file := range files {
-		val, err := dataTypeClassificationPatternsDir.ReadFile("data_type_classification_patterns/" + file.Name())
-		if err != nil {
-			fmt.Println(err)
-			continue
-		}
-
-		dataTypeClassificationPattern, err := UnmarshalDataTypeClassificationPattern(val)
-		if err != nil {
-			log.Fatalf("failed to unmarshal data type classification #%v", dataTypeClassificationPatterns)
-			fmt.Println(err)
-			continue
-		}
-
-		dataTypeClassificationPatterns = append(dataTypeClassificationPatterns, *dataTypeClassificationPattern)
-	}
-
-	return dataTypeClassificationPatterns
-}
-
-func DefaultKnownPersonObjectPatterns() []KnownPersonObjectPattern {
-	knownPersonObjectPatterns := []KnownPersonObjectPattern{}
-
-	files, err := knownPersonObjectPatternsDir.ReadDir("known_person_object_patterns")
-	if err != nil {
-		log.Fatalln(err)
-	}
-
-	for _, file := range files {
-		val, err := knownPersonObjectPatternsDir.ReadFile("known_person_object_patterns/" + file.Name())
-		if err != nil {
-			fmt.Println(err)
-			continue
-		}
-
-		knownPersonObjectPattern, err := UnmarshalKnownPersonObjectPattern(val)
-		if err != nil {
-			fmt.Println(err)
-			continue
-		}
-
-		knownPersonObjectPatterns = append(knownPersonObjectPatterns, *knownPersonObjectPattern)
-	}
-
-	return knownPersonObjectPatterns
-}
-
-func Default() []Recipe {
+func defaultRecipes() []Recipe {
 	recipes := []Recipe{}
 
 	files, err := recipesDir.ReadDir("recipes")
@@ -164,66 +98,99 @@ func Default() []Recipe {
 			continue
 		}
 
-		recipe, err := UnmarshalRecipe(val)
+		var recipe Recipe
+		rawBytes := []byte(val)
+		err = json.Unmarshal(rawBytes, &recipe)
 		if err != nil {
-			fmt.Println(err)
-			continue
+			log.Fatalln(err)
 		}
 
-		recipes = append(recipes, *recipe)
+		recipes = append(recipes, recipe)
 	}
 
 	return recipes
 }
 
-func UnmarshalRecipe(rawBytes []byte) (*Recipe, error) {
-	var db Recipe
+func defaultDataTypes() []DataType {
+	dataTypes := []DataType{}
 
-	err := json.Unmarshal(rawBytes, &db)
-
+	files, err := dataTypesDir.ReadDir("data_types")
 	if err != nil {
-		log.Fatalf("failed to unmarshal db %e", err)
-		return nil, err
+		log.Fatalln(err)
 	}
 
-	return &db, nil
+	for _, file := range files {
+		val, err := dataTypesDir.ReadFile("data_types/" + file.Name())
+		if err != nil {
+			fmt.Println(err)
+			continue
+		}
+
+		var dataType DataType
+		rawBytes := []byte(val)
+		err = json.Unmarshal(rawBytes, &dataType)
+		if err != nil {
+			log.Fatalln(err)
+		}
+
+		dataTypes = append(dataTypes, dataType)
+	}
+
+	return dataTypes
 }
 
-func UnmarshalDataType(rawBytes []byte) (*DataType, error) {
-	var db DataType
+func defaultDataTypeClassificationPatterns() []DataTypeClassificationPattern {
+	dataTypeClassificationPatterns := []DataTypeClassificationPattern{}
 
-	err := json.Unmarshal(rawBytes, &db)
-
+	files, err := dataTypeClassificationPatternsDir.ReadDir("data_type_classification_patterns")
 	if err != nil {
-		log.Fatalf("failed to unmarshal db %e", err)
-		return nil, err
+		log.Fatalln(err)
 	}
 
-	return &db, nil
+	for _, file := range files {
+		val, err := dataTypeClassificationPatternsDir.ReadFile("data_type_classification_patterns/" + file.Name())
+		if err != nil {
+			fmt.Println(err)
+			continue
+		}
+
+		var dataTypeClassificationPattern DataTypeClassificationPattern
+		rawBytes := []byte(val)
+		err = json.Unmarshal(rawBytes, &dataTypeClassificationPattern)
+		if err != nil {
+			log.Fatalln(err)
+		}
+
+		dataTypeClassificationPatterns = append(dataTypeClassificationPatterns, dataTypeClassificationPattern)
+	}
+
+	return dataTypeClassificationPatterns
 }
 
-func UnmarshalDataTypeClassificationPattern(rawBytes []byte) (*DataTypeClassificationPattern, error) {
-	var db DataTypeClassificationPattern
+func defaultKnownPersonObjectPatterns() []KnownPersonObjectPattern {
+	knownPersonObjectPatterns := []KnownPersonObjectPattern{}
 
-	err := json.Unmarshal(rawBytes, &db)
-
+	files, err := knownPersonObjectPatternsDir.ReadDir("known_person_object_patterns")
 	if err != nil {
-		log.Fatalf("failed to unmarshal db %e", err)
-		return nil, err
+		log.Fatalln(err)
 	}
 
-	return &db, nil
-}
+	for _, file := range files {
+		val, err := knownPersonObjectPatternsDir.ReadFile("known_person_object_patterns/" + file.Name())
+		if err != nil {
+			fmt.Println(err)
+			continue
+		}
 
-func UnmarshalKnownPersonObjectPattern(rawBytes []byte) (*KnownPersonObjectPattern, error) {
-	var db KnownPersonObjectPattern
+		var knownPersonObjectPattern KnownPersonObjectPattern
+		rawBytes := []byte(val)
+		err = json.Unmarshal(rawBytes, &knownPersonObjectPattern)
+		if err != nil {
+			log.Fatalln(err)
+		}
 
-	err := json.Unmarshal(rawBytes, &db)
-
-	if err != nil {
-		log.Fatalf("failed to unmarshal db %e", err)
-		return nil, err
+		knownPersonObjectPatterns = append(knownPersonObjectPatterns, knownPersonObjectPattern)
 	}
 
-	return &db, nil
+	return knownPersonObjectPatterns
 }

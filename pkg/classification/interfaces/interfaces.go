@@ -104,7 +104,7 @@ func New(config Config) (*Classifier, error) {
 func NewDefault() (*Classifier, error) {
 	return New(
 		Config{
-			Recipes:         db.Default(),
+			Recipes:         db.Default().Recipes,
 			InternalDomains: []string{},
 			DomainResolver:  url.NewDomainResolverDefault(),
 		},

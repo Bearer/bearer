@@ -24,7 +24,7 @@ type Config struct {
 func NewClassifier(config *Config) (*Classifier, error) {
 	interfacesClassifier, err := interfaces.New(
 		interfaces.Config{
-			Recipes:         db.Default(),
+			Recipes:         db.Default().Recipes,
 			InternalDomains: config.Config.Scan.InternalDomains,
 			DomainResolver: url.NewDomainResolver(
 				!config.Config.Scan.DisableDomainResolution,
@@ -38,7 +38,7 @@ func NewClassifier(config *Config) (*Classifier, error) {
 
 	dependenciesClassifier := dependencies.New(
 		dependencies.Config{
-			Recipes: db.Default(),
+			Recipes: db.Default().Recipes,
 		},
 	)
 
