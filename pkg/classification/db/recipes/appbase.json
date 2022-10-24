@@ -1,1 +1,7 @@
-{"metadata":{"version":"1.0"},"name":"Appbase","type":"external_service","urls":["https://api.appbase.io"],"packages":[]}
+{
+  "metadata": { "version": "1.0" },
+  "name": "Appbase",
+  "type": "external_service",
+  "urls": ["https://api.appbase.io"],
+  "packages": []
+}

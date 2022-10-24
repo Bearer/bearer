@@ -33,7 +33,7 @@ func New(config Config) *Classifier {
 func NewDefault() *Classifier {
 	return &Classifier{
 		config: Config{
-			Recipes: db.Default(),
+			Recipes: db.Default().Recipes,
 		},
 	}
 }

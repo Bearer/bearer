@@ -1,1 +1,7 @@
-{"metadata":{"version":"1.0"},"name":"Fountain","type":"external_service","urls":["https://api.fountain.com"],"packages":[]}
+{
+  "metadata": { "version": "1.0" },
+  "name": "Fountain",
+  "type": "external_service",
+  "urls": ["https://api.fountain.com"],
+  "packages": []
+}

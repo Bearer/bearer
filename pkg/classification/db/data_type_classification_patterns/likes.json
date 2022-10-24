@@ -1,0 +1,14 @@
+{
+  "metadata": { "version": "1.0" },
+  "id": 76,
+  "data_type_uuid": "ce529b86-22cf-4984-b697-175602e7b64c",
+  "exclude_regexp": null,
+  "exclude_types": ["boolean"],
+  "friendly_name": "Likes",
+  "health_context_data_type_uuid": null,
+  "include_regexp": "\\b(likes?|votes?\\s?(up|down|count|comment|image|video|stor(y|ies)?))\\b",
+  "include_types": ["string"],
+  "match_column": true,
+  "match_object": false,
+  "object_type": ["known", "unknown_extended"]
+}

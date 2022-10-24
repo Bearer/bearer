@@ -1,0 +1,14 @@
+{
+  "metadata": { "version": "1.0" },
+  "id": 163,
+  "data_type_uuid": null,
+  "exclude_regexp": null,
+  "exclude_types": ["boolean"],
+  "friendly_name": "BMI",
+  "health_context_data_type_uuid": "c1704474-de02-40f0-8880-ece05fdbe9b5",
+  "include_regexp": "\\bbmi|body\\s?mass\\s?index\\b",
+  "include_types": ["string"],
+  "match_column": true,
+  "match_object": false,
+  "object_type": ["known", "unknown_extended"]
+}

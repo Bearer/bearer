@@ -1,1 +1,9 @@
-{"metadata":{"version":"1.0"},"name":"Databricks","type":"data_store","urls":[],"packages":[{"name":"databricks-cli","group":null,"package_manager":"pypi"}]}
+{
+  "metadata": { "version": "1.0" },
+  "name": "Databricks",
+  "type": "data_store",
+  "urls": [],
+  "packages": [
+    { "name": "databricks-cli", "group": null, "package_manager": "pypi" }
+  ]
+}

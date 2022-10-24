@@ -1,1 +1,7 @@
-{"metadata":{"version":"1.0"},"name":"SAP","type":"external_service","urls":["http://sap.com/xi/*"],"packages":[]}
+{
+  "metadata": { "version": "1.0" },
+  "name": "SAP",
+  "type": "external_service",
+  "urls": ["http://sap.com/xi/*"],
+  "packages": []
+}

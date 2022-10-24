@@ -1,1 +1,13 @@
-{"metadata":{"version":"1.0"},"name":"Yandex.Cloud APIs","type":"external_service","urls":["https://api.cloud.yandex.net"],"packages":[{"name":"github.com/yandex-cloud/go-sdk","group":null,"package_manager":"go"}]}
+{
+  "metadata": { "version": "1.0" },
+  "name": "Yandex.Cloud APIs",
+  "type": "external_service",
+  "urls": ["https://api.cloud.yandex.net"],
+  "packages": [
+    {
+      "name": "github.com/yandex-cloud/go-sdk",
+      "group": null,
+      "package_manager": "go"
+    }
+  ]
+}

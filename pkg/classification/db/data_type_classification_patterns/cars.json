@@ -1,0 +1,14 @@
+{
+  "metadata": { "version": "1.0" },
+  "id": 20,
+  "data_type_uuid": "8c4f7dd0-1cdc-4edf-bc6d-e7846bb2af21",
+  "exclude_regexp": null,
+  "exclude_types": ["boolean"],
+  "friendly_name": "Cars",
+  "health_context_data_type_uuid": null,
+  "include_regexp": "\\bcars?\\b",
+  "include_types": ["string"],
+  "match_column": true,
+  "match_object": false,
+  "object_type": ["known"]
+}

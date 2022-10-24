@@ -1,1 +1,9 @@
-{"metadata":{"version":"1.0"},"name":"Splunk","type":"external_service","urls":["https://*.splunkcloud.com"],"packages":[{"name":"splunk-sdk","group":null,"package_manager":"pypi"}]}
+{
+  "metadata": { "version": "1.0" },
+  "name": "Splunk",
+  "type": "external_service",
+  "urls": ["https://*.splunkcloud.com"],
+  "packages": [
+    { "name": "splunk-sdk", "group": null, "package_manager": "pypi" }
+  ]
+}

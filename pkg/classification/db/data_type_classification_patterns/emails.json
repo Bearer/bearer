@@ -1,0 +1,14 @@
+{
+  "metadata": { "version": "1.0" },
+  "id": 104,
+  "data_type_uuid": "e07133d8-b62b-47ed-abcd-9c9d189b362a",
+  "exclude_regexp": "\\b((notification|config(uration)?|template|enabled|settings?|sent\\s?by|type))\\b",
+  "exclude_types": ["boolean", "date"],
+  "friendly_name": "Emails",
+  "health_context_data_type_uuid": null,
+  "include_regexp": "\\b(emails)|email\\s?(subject|body)\\b",
+  "include_types": ["string", "array", "object"],
+  "match_column": true,
+  "match_object": false,
+  "object_type": ["known", "unknown_extended"]
+}

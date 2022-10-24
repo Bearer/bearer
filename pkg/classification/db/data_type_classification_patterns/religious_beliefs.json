@@ -1,0 +1,14 @@
+{
+  "metadata": { "version": "1.0" },
+  "id": 54,
+  "data_type_uuid": "e40a8d0a-e8ae-4def-8fd5-887392974702",
+  "exclude_regexp": null,
+  "exclude_types": ["boolean"],
+  "friendly_name": "Religious Beliefs",
+  "health_context_data_type_uuid": null,
+  "include_regexp": "\\b(religious.*beliefs?)\\b",
+  "include_types": ["string"],
+  "match_column": true,
+  "match_object": false,
+  "object_type": ["known", "unknown_extended", "unknown"]
+}

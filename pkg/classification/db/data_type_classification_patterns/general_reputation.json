@@ -1,0 +1,14 @@
+{
+  "metadata": { "version": "1.0" },
+  "id": 73,
+  "data_type_uuid": "81df7297-4823-41ea-b0bb-4d56bbd36104",
+  "exclude_regexp": null,
+  "exclude_types": ["boolean"],
+  "friendly_name": "General Reputation",
+  "health_context_data_type_uuid": null,
+  "include_regexp": "\\b(reputation)\\b",
+  "include_types": ["string"],
+  "match_column": true,
+  "match_object": false,
+  "object_type": ["known", "unknown_extended"]
+}

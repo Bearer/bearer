@@ -1,1 +1,46 @@
-{"metadata":{"version":"1.0"},"name":"Sentry","type":"external_service","urls":["https://sentry.io/api"],"packages":[{"name":"sentry-ruby","group":null,"package_manager":"rubygems"},{"name":"sentry-ruby-core","group":null,"package_manager":"rubygems"},{"name":"sentry-raven","group":null,"package_manager":"rubygems"},{"name":"@sentry/browser","group":null,"package_manager":"npm"},{"name":"raven-js","group":null,"package_manager":"npm"},{"name":"@sentry/cli","group":null,"package_manager":"npm"},{"name":"@sentry/node","group":null,"package_manager":"npm"},{"name":"github.com/getsentry/sentry-go","group":null,"package_manager":"go"},{"name":"sentry-logback","group":"io.sentry","package_manager":"maven"},{"name":"sentry-sdk","group":null,"package_manager":"pypi"},{"name":"sentry-sdk[flask]","group":null,"package_manager":"pypi"},{"name":"raven","group":null,"package_manager":"pypi"},{"name":"sentry/sdk","group":null,"package_manager":"packagist"},{"name":"sentry/sentry","group":null,"package_manager":"packagist"},{"name":"sentry/sentry-symfony","group":null,"package_manager":"packagist"},{"name":"winston-sentry","group":null,"package_manager":"npm"},{"name":"sentry-spring-boot-starter","group":"io.sentry","package_manager":"maven"},{"name":"sentry","group":"io.sentry","package_manager":"maven"}]}
+{
+  "metadata": { "version": "1.0" },
+  "name": "Sentry",
+  "type": "external_service",
+  "urls": ["https://sentry.io/api"],
+  "packages": [
+    { "name": "sentry-ruby", "group": null, "package_manager": "rubygems" },
+    {
+      "name": "sentry-ruby-core",
+      "group": null,
+      "package_manager": "rubygems"
+    },
+    { "name": "sentry-raven", "group": null, "package_manager": "rubygems" },
+    { "name": "@sentry/browser", "group": null, "package_manager": "npm" },
+    { "name": "raven-js", "group": null, "package_manager": "npm" },
+    { "name": "@sentry/cli", "group": null, "package_manager": "npm" },
+    { "name": "@sentry/node", "group": null, "package_manager": "npm" },
+    {
+      "name": "github.com/getsentry/sentry-go",
+      "group": null,
+      "package_manager": "go"
+    },
+    {
+      "name": "sentry-logback",
+      "group": "io.sentry",
+      "package_manager": "maven"
+    },
+    { "name": "sentry-sdk", "group": null, "package_manager": "pypi" },
+    { "name": "sentry-sdk[flask]", "group": null, "package_manager": "pypi" },
+    { "name": "raven", "group": null, "package_manager": "pypi" },
+    { "name": "sentry/sdk", "group": null, "package_manager": "packagist" },
+    { "name": "sentry/sentry", "group": null, "package_manager": "packagist" },
+    {
+      "name": "sentry/sentry-symfony",
+      "group": null,
+      "package_manager": "packagist"
+    },
+    { "name": "winston-sentry", "group": null, "package_manager": "npm" },
+    {
+      "name": "sentry-spring-boot-starter",
+      "group": "io.sentry",
+      "package_manager": "maven"
+    },
+    { "name": "sentry", "group": "io.sentry", "package_manager": "maven" }
+  ]
+}

@@ -1,0 +1,7 @@
+{
+  "metadata": { "version": "1.0" },
+  "id": 71,
+  "act_as_identifier": true,
+  "category": "Teacher",
+  "include_regexp": "\\b.*teacher.*\\b"
+}

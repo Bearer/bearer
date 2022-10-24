@@ -1,0 +1,14 @@
+{
+  "metadata": { "version": "1.0" },
+  "id": 190,
+  "data_type_uuid": "8421f13c-0b9a-422b-9080-55b78e7c07cd",
+  "exclude_regexp": "\\b.*id.*\\b",
+  "exclude_types": ["boolean"],
+  "friendly_name": "Physiotherapy",
+  "health_context_data_type_uuid": null,
+  "include_regexp": "\\b.*physiotherapy.*\\b",
+  "include_types": ["string"],
+  "match_column": false,
+  "match_object": true,
+  "object_type": ["known_data"]
+}

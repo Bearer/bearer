@@ -1,1 +1,34 @@
-{"metadata":{"version":"1.0"},"name":"Hubspot","type":"external_service","urls":["https://forms.hubspot.com","https://app.hubspot.com","https://api.hubapi.com"],"packages":[{"name":"hubspot/api-client","group":null,"package_manager":"packagist"},{"name":"hubspot-api-client","group":null,"package_manager":"pypi"},{"name":"@hubspot/api-client","group":null,"package_manager":"npm"},{"name":"hubspot-api-client","group":null,"package_manager":"rubygems"},{"name":"docplanner/hubspot-bundle","group":"","package_manager":"packagist"},{"name":"hubspot/hubspot-php","group":"","package_manager":"packagist"}]}
+{
+  "metadata": { "version": "1.0" },
+  "name": "Hubspot",
+  "type": "external_service",
+  "urls": [
+    "https://forms.hubspot.com",
+    "https://app.hubspot.com",
+    "https://api.hubapi.com"
+  ],
+  "packages": [
+    {
+      "name": "hubspot/api-client",
+      "group": null,
+      "package_manager": "packagist"
+    },
+    { "name": "hubspot-api-client", "group": null, "package_manager": "pypi" },
+    { "name": "@hubspot/api-client", "group": null, "package_manager": "npm" },
+    {
+      "name": "hubspot-api-client",
+      "group": null,
+      "package_manager": "rubygems"
+    },
+    {
+      "name": "docplanner/hubspot-bundle",
+      "group": "",
+      "package_manager": "packagist"
+    },
+    {
+      "name": "hubspot/hubspot-php",
+      "group": "",
+      "package_manager": "packagist"
+    }
+  ]
+}

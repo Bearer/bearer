@@ -1,0 +1,14 @@
+{
+  "metadata": { "version": "1.0" },
+  "id": 31,
+  "data_type_uuid": null,
+  "exclude_regexp": null,
+  "exclude_types": ["boolean", "number"],
+  "friendly_name": "Prescriptions",
+  "health_context_data_type_uuid": "bc91b4fb-3f72-4cae-b57b-ba538e4ff4e3",
+  "include_regexp": "\\Aprescriptions?\\b",
+  "include_types": ["string", "object"],
+  "match_column": true,
+  "match_object": false,
+  "object_type": ["known", "unknown_extended"]
+}

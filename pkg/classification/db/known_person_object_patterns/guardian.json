@@ -1,0 +1,7 @@
+{
+  "metadata": { "version": "1.0" },
+  "id": 30,
+  "act_as_identifier": true,
+  "category": "Guardian",
+  "include_regexp": "\\b.*guardian.*\\b"
+}

@@ -1,1 +1,24 @@
-{"metadata":{"version":"1.0"},"name":"AWS S3 Glacier","type":"data_store","urls":[],"packages":[{"name":"glacier","group":"software.amazon.awssdk","package_manager":"maven"},{"name":"aws-sdk-glacier","group":null,"package_manager":"rubygems"},{"name":"@aws-sdk/client-glacier","group":null,"package_manager":"npm"},{"name":"github.com/aws/aws-sdk-go-v2/service/glacier","group":null,"package_manager":"go"}]}
+{
+  "metadata": { "version": "1.0" },
+  "name": "AWS S3 Glacier",
+  "type": "data_store",
+  "urls": [],
+  "packages": [
+    {
+      "name": "glacier",
+      "group": "software.amazon.awssdk",
+      "package_manager": "maven"
+    },
+    { "name": "aws-sdk-glacier", "group": null, "package_manager": "rubygems" },
+    {
+      "name": "@aws-sdk/client-glacier",
+      "group": null,
+      "package_manager": "npm"
+    },
+    {
+      "name": "github.com/aws/aws-sdk-go-v2/service/glacier",
+      "group": null,
+      "package_manager": "go"
+    }
+  ]
+}

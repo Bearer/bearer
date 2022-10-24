@@ -1,0 +1,14 @@
+{
+  "metadata": { "version": "1.0" },
+  "id": 95,
+  "data_type_uuid": "dc64fe81-1ec3-452f-b2df-f3ba3c99b5dc",
+  "exclude_regexp": null,
+  "exclude_types": ["boolean"],
+  "friendly_name": "Siblings",
+  "health_context_data_type_uuid": null,
+  "include_regexp": "\\b(siblings?)\\b",
+  "include_types": ["string"],
+  "match_column": true,
+  "match_object": false,
+  "object_type": ["known", "unknown_extended"]
+}

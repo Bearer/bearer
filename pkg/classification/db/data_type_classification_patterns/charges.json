@@ -1,0 +1,14 @@
+{
+  "metadata": { "version": "1.0" },
+  "id": 10,
+  "data_type_uuid": "cd714a59-d2f4-4ced-ad20-a9d0a5d92763",
+  "exclude_regexp": null,
+  "exclude_types": ["boolean"],
+  "friendly_name": "Charges",
+  "health_context_data_type_uuid": null,
+  "include_regexp": "\\b(criminal.*charges)\\b",
+  "include_types": ["string"],
+  "match_column": true,
+  "match_object": false,
+  "object_type": ["known", "unknown_extended", "unknown"]
+}

@@ -1,0 +1,7 @@
+{
+  "metadata": { "version": "1.0" },
+  "id": 64,
+  "act_as_identifier": true,
+  "category": "Seller",
+  "include_regexp": "\\b.*seller.*\\b"
+}

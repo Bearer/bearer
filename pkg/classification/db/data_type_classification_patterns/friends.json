@@ -1,0 +1,14 @@
+{
+  "metadata": { "version": "1.0" },
+  "id": 35,
+  "data_type_uuid": "e1a8aa98-9740-4c09-80e2-a189aa3585b3",
+  "exclude_regexp": null,
+  "exclude_types": ["boolean"],
+  "friendly_name": "Friends",
+  "health_context_data_type_uuid": null,
+  "include_regexp": "\\Afriends?\\s?(counts?)?\\b",
+  "include_types": ["string"],
+  "match_column": true,
+  "match_object": false,
+  "object_type": ["known", "unknown_extended", "unknown"]
+}

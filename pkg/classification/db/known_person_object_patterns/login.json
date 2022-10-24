@@ -1,0 +1,8 @@
+{
+  "metadata": { "version": "1.0" },
+  "id": 38,
+  "act_as_identifier": false,
+  "category": "Login",
+  "include_regexp": "\\b.*login.*|.*signin.*|.*credentials.*|.*signup.*\\b",
+  "exclude_regexp": "\\b(request|plugin)\\b"
+}

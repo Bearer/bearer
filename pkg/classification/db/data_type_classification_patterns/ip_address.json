@@ -1,0 +1,14 @@
+{
+  "metadata": { "version": "1.0" },
+  "id": 82,
+  "data_type_uuid": "044bc1f0-dc7b-4b23-80dc-a35d1f491017",
+  "exclude_regexp": null,
+  "exclude_types": ["boolean"],
+  "friendly_name": "IP address",
+  "health_context_data_type_uuid": null,
+  "include_regexp": "\\b(ip\\s?addr(ess)?)\\b",
+  "include_types": ["string"],
+  "match_column": true,
+  "match_object": false,
+  "object_type": ["known", "unknown_extended"]
+}

@@ -1,1 +1,13 @@
-{"metadata":{"version":"1.0"},"name":"Aerospike","type":"data_store","urls":[],"packages":[{"name":"github.com/aerospike/aerospike-client-go","group":null,"package_manager":"go"}]}
+{
+  "metadata": { "version": "1.0" },
+  "name": "Aerospike",
+  "type": "data_store",
+  "urls": [],
+  "packages": [
+    {
+      "name": "github.com/aerospike/aerospike-client-go",
+      "group": null,
+      "package_manager": "go"
+    }
+  ]
+}

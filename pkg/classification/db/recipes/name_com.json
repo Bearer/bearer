@@ -1,1 +1,13 @@
-{"metadata":{"version":"1.0"},"name":"Name.com","type":"external_service","urls":["https://api.name.com"],"packages":[{"name":"github.com/namedotcom/go","group":null,"package_manager":"go"}]}
+{
+  "metadata": { "version": "1.0" },
+  "name": "Name.com",
+  "type": "external_service",
+  "urls": ["https://api.name.com"],
+  "packages": [
+    {
+      "name": "github.com/namedotcom/go",
+      "group": null,
+      "package_manager": "go"
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "metadata": { "version": "1.0" },
+  "id": 122,
+  "data_type_uuid": "f38aab1a-1551-43dc-9a90-59abf2c9f08c",
+  "exclude_regexp": "\\b.*gift|viewed.*\\b",
+  "exclude_types": ["boolean"],
+  "friendly_name": "Creditcard",
+  "health_context_data_type_uuid": null,
+  "include_regexp": "\\b(payment|direct)?(credit|debit)\\s?(card)?\\s?(account)?\\s?(number|holder|cvv|(expir(e|ation)(month|year)?))\\b",
+  "include_types": ["string"],
+  "match_column": true,
+  "match_object": true,
+  "object_type": ["known_data_object", "known"]
+}

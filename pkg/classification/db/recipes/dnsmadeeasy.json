@@ -1,1 +1,10 @@
-{"metadata":{"version":"1.0"},"name":"Dnsmadeeasy","type":"external_service","urls":["https://api.sandbox.dnsmadeeasy.com","https://api.dnsmadeeasy.com"],"packages":[]}
+{
+  "metadata": { "version": "1.0" },
+  "name": "Dnsmadeeasy",
+  "type": "external_service",
+  "urls": [
+    "https://api.sandbox.dnsmadeeasy.com",
+    "https://api.dnsmadeeasy.com"
+  ],
+  "packages": []
+}

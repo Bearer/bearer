@@ -1,1 +1,7 @@
-{"metadata":{"version":"1.0"},"name":"Sendinblue","type":"external_service","urls":["https://api.sendinblue.com"],"packages":[]}
+{
+  "metadata": { "version": "1.0" },
+  "name": "Sendinblue",
+  "type": "external_service",
+  "urls": ["https://api.sendinblue.com"],
+  "packages": []
+}

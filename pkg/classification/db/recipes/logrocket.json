@@ -1,1 +1,7 @@
-{"metadata":{"version":"1.0"},"name":"LogRocket","type":"external_service","urls":["https://cdn.lr-ingest.io"],"packages":[{"name":"logrocket","group":null,"package_manager":"npm"}]}
+{
+  "metadata": { "version": "1.0" },
+  "name": "LogRocket",
+  "type": "external_service",
+  "urls": ["https://cdn.lr-ingest.io"],
+  "packages": [{ "name": "logrocket", "group": null, "package_manager": "npm" }]
+}

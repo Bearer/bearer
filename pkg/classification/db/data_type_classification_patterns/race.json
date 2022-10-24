@@ -1,0 +1,14 @@
+{
+  "metadata": { "version": "1.0" },
+  "id": 106,
+  "data_type_uuid": "e4049ef1-da74-46dc-ac4e-f6b4aa0672ea",
+  "exclude_regexp": null,
+  "exclude_types": ["boolean"],
+  "friendly_name": "Race",
+  "health_context_data_type_uuid": null,
+  "include_regexp": "\\b(race|racial)\\b",
+  "include_types": ["string"],
+  "match_column": true,
+  "match_object": false,
+  "object_type": ["associated"]
+}

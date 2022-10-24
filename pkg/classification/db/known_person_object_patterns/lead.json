@@ -1,0 +1,8 @@
+{
+  "metadata": { "version": "1.0" },
+  "id": 36,
+  "act_as_identifier": true,
+  "category": "Lead",
+  "include_regexp": "\\b.*lead.*\\b",
+  "exclude_regexp": "\\b.*leading.*\\b"
+}

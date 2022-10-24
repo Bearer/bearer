@@ -1,1 +1,7 @@
-{"metadata":{"version":"1.0"},"name":"PandaDoc","type":"external_service","urls":["https://api.pandadoc.com"],"packages":[]}
+{
+  "metadata": { "version": "1.0" },
+  "name": "PandaDoc",
+  "type": "external_service",
+  "urls": ["https://api.pandadoc.com"],
+  "packages": []
+}

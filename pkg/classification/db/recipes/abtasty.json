@@ -1,1 +1,7 @@
-{"metadata":{"version":"1.0"},"name":"ABTasty","type":"external_service","urls":["https://try.abtasty.com"],"packages":[]}
+{
+  "metadata": { "version": "1.0" },
+  "name": "ABTasty",
+  "type": "external_service",
+  "urls": ["https://try.abtasty.com"],
+  "packages": []
+}

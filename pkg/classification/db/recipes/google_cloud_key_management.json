@@ -1,1 +1,18 @@
-{"metadata":{"version":"1.0"},"name":"Google Cloud Key Management","type":"data_store","urls":[],"packages":[{"name":"google-cloud-kms","group":"com.google.cloud","package_manager":"maven"},{"name":"cloud.google.com/go/kms","group":null,"package_manager":"go"}]}
+{
+  "metadata": { "version": "1.0" },
+  "name": "Google Cloud Key Management",
+  "type": "data_store",
+  "urls": [],
+  "packages": [
+    {
+      "name": "google-cloud-kms",
+      "group": "com.google.cloud",
+      "package_manager": "maven"
+    },
+    {
+      "name": "cloud.google.com/go/kms",
+      "group": null,
+      "package_manager": "go"
+    }
+  ]
+}

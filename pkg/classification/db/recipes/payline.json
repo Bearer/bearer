@@ -1,1 +1,7 @@
-{"metadata":{"version":"1.0"},"name":"Payline","type":"external_service","urls":["https://services.payline.com","https://payment.payline.com"],"packages":[]}
+{
+  "metadata": { "version": "1.0" },
+  "name": "Payline",
+  "type": "external_service",
+  "urls": ["https://services.payline.com", "https://payment.payline.com"],
+  "packages": []
+}

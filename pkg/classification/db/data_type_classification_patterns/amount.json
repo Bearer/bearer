@@ -1,0 +1,14 @@
+{
+  "metadata": { "version": "1.0" },
+  "id": 139,
+  "data_type_uuid": "56c60be5-3389-4022-9af8-1ed389cc3d41",
+  "exclude_regexp": null,
+  "exclude_types": ["boolean"],
+  "friendly_name": "Amount",
+  "health_context_data_type_uuid": null,
+  "include_regexp": "\\b.*amount.*\\b",
+  "include_types": ["string"],
+  "match_column": false,
+  "match_object": true,
+  "object_type": ["known_data_object"]
+}

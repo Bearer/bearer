@@ -1,0 +1,7 @@
+{
+  "metadata": { "version": "1.0" },
+  "id": 3,
+  "act_as_identifier": true,
+  "category": "Author",
+  "include_regexp": "\\b(.|_)?author(.|_)?\\b"
+}

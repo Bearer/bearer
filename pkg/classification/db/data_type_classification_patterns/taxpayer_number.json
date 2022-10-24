@@ -1,0 +1,14 @@
+{
+  "metadata": { "version": "1.0" },
+  "id": 39,
+  "data_type_uuid": "25c9ab93-9daa-44bd-bfd4-49afd380d183",
+  "exclude_regexp": null,
+  "exclude_types": ["boolean"],
+  "friendly_name": "Taxpayer Number",
+  "health_context_data_type_uuid": null,
+  "include_regexp": "\\b(unique\\s?tax\\s?number|utr|itin|tin|individual\\s?taxpayer\\s?id(entification)?\\s?number)\\b",
+  "include_types": ["string"],
+  "match_column": true,
+  "match_object": false,
+  "object_type": ["known", "unknown_extended", "unknown"]
+}

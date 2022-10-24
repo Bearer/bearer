@@ -1,1 +1,7 @@
-{"metadata":{"version":"1.0"},"name":"Vercel","type":"external_service","urls":["https://api.vercel.com"],"packages":[]}
+{
+  "metadata": { "version": "1.0" },
+  "name": "Vercel",
+  "type": "external_service",
+  "urls": ["https://api.vercel.com"],
+  "packages": []
+}

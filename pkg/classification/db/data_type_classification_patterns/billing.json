@@ -1,0 +1,14 @@
+{
+  "metadata": { "version": "1.0" },
+  "id": 120,
+  "data_type_uuid": "56c60be5-3389-4022-9af8-1ed389cc3d41",
+  "exclude_regexp": null,
+  "exclude_types": ["boolean"],
+  "friendly_name": "Billing",
+  "health_context_data_type_uuid": "c1704474-de02-40f0-8880-ece05fdbe9b5",
+  "include_regexp": "\\b.*billing.*\\b",
+  "include_types": ["string"],
+  "match_column": false,
+  "match_object": true,
+  "object_type": ["known_data_object"]
+}

@@ -1,0 +1,7 @@
+{
+  "metadata": { "version": "1.0" },
+  "id": 61,
+  "act_as_identifier": true,
+  "category": "Referee",
+  "include_regexp": "\\b.*referee.*\\b"
+}

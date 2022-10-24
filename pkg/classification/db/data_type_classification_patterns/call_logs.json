@@ -1,0 +1,14 @@
+{
+  "metadata": { "version": "1.0" },
+  "id": 58,
+  "data_type_uuid": "89b65c49-6d5e-439f-a7c1-320e080f440c",
+  "exclude_regexp": null,
+  "exclude_types": ["boolean"],
+  "friendly_name": "Call Logs",
+  "health_context_data_type_uuid": null,
+  "include_regexp": "\\b(calls?.*(logs|records?))\\b",
+  "include_types": ["string"],
+  "match_column": true,
+  "match_object": false,
+  "object_type": ["known", "unknown_extended", "unknown"]
+}

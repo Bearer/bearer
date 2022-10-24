@@ -1,0 +1,14 @@
+{
+  "metadata": { "version": "1.0" },
+  "id": 8,
+  "data_type_uuid": "802041a1-e893-42f4-acc2-882a8fa0237e",
+  "exclude_regexp": null,
+  "exclude_types": ["boolean"],
+  "friendly_name": "Credit Capacity",
+  "health_context_data_type_uuid": null,
+  "include_regexp": "\\bcredit.*capacity\\b",
+  "include_types": ["string"],
+  "match_column": true,
+  "match_object": false,
+  "object_type": ["known", "unknown_extended", "unknown"]
+}

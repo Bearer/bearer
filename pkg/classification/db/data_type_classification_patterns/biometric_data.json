@@ -1,0 +1,14 @@
+{
+  "metadata": { "version": "1.0" },
+  "id": 16,
+  "data_type_uuid": "85599b0c-37b6-4855-af54-5789edc27c00",
+  "exclude_regexp": null,
+  "exclude_types": ["boolean"],
+  "friendly_name": "Biometric Data",
+  "health_context_data_type_uuid": null,
+  "include_regexp": "\\b(biometry|biometric(.*data)?)\\b",
+  "include_types": ["string"],
+  "match_column": true,
+  "match_object": false,
+  "object_type": ["known", "unknown_extended", "unknown"]
+}

@@ -1,0 +1,14 @@
+{
+  "metadata": { "version": "1.0" },
+  "id": 66,
+  "data_type_uuid": "bde2d19a-26ad-4cfd-9b5a-a4d1d64fe367",
+  "exclude_regexp": null,
+  "exclude_types": ["boolean"],
+  "friendly_name": "Credit",
+  "health_context_data_type_uuid": null,
+  "include_regexp": "\\bcredit|((total\\s?)?cycles\\s?(remaining)?)\\b",
+  "include_types": ["string"],
+  "match_column": true,
+  "match_object": false,
+  "object_type": ["known", "unknown_extended"]
+}

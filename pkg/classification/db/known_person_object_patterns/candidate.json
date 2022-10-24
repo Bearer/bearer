@@ -1,0 +1,7 @@
+{
+  "metadata": { "version": "1.0" },
+  "id": 13,
+  "act_as_identifier": true,
+  "category": "Candidate",
+  "include_regexp": "\\b.*candidate.*\\b"
+}

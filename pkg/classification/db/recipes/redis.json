@@ -1,1 +1,125 @@
-{"metadata":{"version":"1.0"},"name":"Redis","type":"data_store","urls":[],"packages":[{"name":"redis","group":null,"package_manager":"rubygems"},{"name":"redis","group":null,"package_manager":"pypi"},{"name":"predis/predis","group":null,"package_manager":"packagist"},{"name":"connect-redis","group":null,"package_manager":"npm"},{"name":"github.com/gomodule/redigo","group":null,"package_manager":"go"},{"name":"StackExchange.Redis.StrongName","group":null,"package_manager":"nuget"},{"name":"ServiceStack.Redis","group":null,"package_manager":"nuget"},{"name":"StackExchange.Redis","group":null,"package_manager":"nuget"},{"name":"gopkg.in/redis.v5","group":null,"package_manager":"go"},{"name":"hiredis","group":null,"package_manager":"rubygems"},{"name":"elasticache","group":"software.amazon.awssdk","package_manager":"maven"},{"name":"aws-sdk-elasticache","group":null,"package_manager":"rubygems"},{"name":"@aws-sdk/client-elasticache","group":null,"package_manager":"npm"},{"name":"github.com/aws/aws-sdk-go-v2/service/elasticache","group":null,"package_manager":"go"},{"name":"redis","group":null,"package_manager":"npm"},{"name":"ioredis","group":null,"package_manager":"npm"},{"name":"aredis","group":null,"package_manager":"pypi"},{"name":"django-redis-cache","group":null,"package_manager":"pypi"},{"name":"github.com/mediocregopher/radix","group":null,"package_manager":"go"},{"name":"jredis","group":"org.jredis","package_manager":"maven"},{"name":"github.com/go-redis/redis","group":null,"package_manager":"go"},{"name":"redisson","group":"org.redisson","package_manager":"maven"},{"name":"github.com/gomodule/redigo/redis","group":null,"package_manager":"go"},{"name":"jedis","group":"redis.clients","package_manager":"maven"},{"name":"redis-rb","group":null,"package_manager":"rubygems"},{"name":"github.com/hoisie/redis","group":null,"package_manager":"go"},{"name":"predis","group":null,"package_manager":"packagist"},{"name":"aioredis","group":null,"package_manager":"pypi"},{"name":"async-redis","group":null,"package_manager":"npm"},{"name":"spring-data-redis","group":"org.springframework.data","package_manager":"maven"},{"name":"github.com/alicebob/miniredis/v2","group":null,"package_manager":"go"},{"name":"github.com/alicebob/miniredis","group":null,"package_manager":"go"},{"name":"gopkg.in/redis.v4","group":null,"package_manager":"go"},{"name":"ext-redis","group":null,"package_manager":"packagist"},{"name":"cache/redis-adapter","group":null,"package_manager":"packagist"},{"name":"Microsoft.Extensions.Caching.StackExchangeRedis","group":null,"package_manager":"nuget"},{"name":"github.com/go-redis/cache/v8","group":null,"package_manager":"go"},{"name":"redis-store","group":null,"package_manager":"rubygems"},{"name":"django-redis","group":null,"package_manager":"pypi"},{"name":"github.com/bsm/redislock","group":null,"package_manager":"go"},{"name":"github.com/go-redis/cache","group":null,"package_manager":"go"}]}
+{
+  "metadata": { "version": "1.0" },
+  "name": "Redis",
+  "type": "data_store",
+  "urls": [],
+  "packages": [
+    { "name": "redis", "group": null, "package_manager": "rubygems" },
+    { "name": "redis", "group": null, "package_manager": "pypi" },
+    { "name": "predis/predis", "group": null, "package_manager": "packagist" },
+    { "name": "connect-redis", "group": null, "package_manager": "npm" },
+    {
+      "name": "github.com/gomodule/redigo",
+      "group": null,
+      "package_manager": "go"
+    },
+    {
+      "name": "StackExchange.Redis.StrongName",
+      "group": null,
+      "package_manager": "nuget"
+    },
+    { "name": "ServiceStack.Redis", "group": null, "package_manager": "nuget" },
+    {
+      "name": "StackExchange.Redis",
+      "group": null,
+      "package_manager": "nuget"
+    },
+    { "name": "gopkg.in/redis.v5", "group": null, "package_manager": "go" },
+    { "name": "hiredis", "group": null, "package_manager": "rubygems" },
+    {
+      "name": "elasticache",
+      "group": "software.amazon.awssdk",
+      "package_manager": "maven"
+    },
+    {
+      "name": "aws-sdk-elasticache",
+      "group": null,
+      "package_manager": "rubygems"
+    },
+    {
+      "name": "@aws-sdk/client-elasticache",
+      "group": null,
+      "package_manager": "npm"
+    },
+    {
+      "name": "github.com/aws/aws-sdk-go-v2/service/elasticache",
+      "group": null,
+      "package_manager": "go"
+    },
+    { "name": "redis", "group": null, "package_manager": "npm" },
+    { "name": "ioredis", "group": null, "package_manager": "npm" },
+    { "name": "aredis", "group": null, "package_manager": "pypi" },
+    { "name": "django-redis-cache", "group": null, "package_manager": "pypi" },
+    {
+      "name": "github.com/mediocregopher/radix",
+      "group": null,
+      "package_manager": "go"
+    },
+    { "name": "jredis", "group": "org.jredis", "package_manager": "maven" },
+    {
+      "name": "github.com/go-redis/redis",
+      "group": null,
+      "package_manager": "go"
+    },
+    { "name": "redisson", "group": "org.redisson", "package_manager": "maven" },
+    {
+      "name": "github.com/gomodule/redigo/redis",
+      "group": null,
+      "package_manager": "go"
+    },
+    { "name": "jedis", "group": "redis.clients", "package_manager": "maven" },
+    { "name": "redis-rb", "group": null, "package_manager": "rubygems" },
+    {
+      "name": "github.com/hoisie/redis",
+      "group": null,
+      "package_manager": "go"
+    },
+    { "name": "predis", "group": null, "package_manager": "packagist" },
+    { "name": "aioredis", "group": null, "package_manager": "pypi" },
+    { "name": "async-redis", "group": null, "package_manager": "npm" },
+    {
+      "name": "spring-data-redis",
+      "group": "org.springframework.data",
+      "package_manager": "maven"
+    },
+    {
+      "name": "github.com/alicebob/miniredis/v2",
+      "group": null,
+      "package_manager": "go"
+    },
+    {
+      "name": "github.com/alicebob/miniredis",
+      "group": null,
+      "package_manager": "go"
+    },
+    { "name": "gopkg.in/redis.v4", "group": null, "package_manager": "go" },
+    { "name": "ext-redis", "group": null, "package_manager": "packagist" },
+    {
+      "name": "cache/redis-adapter",
+      "group": null,
+      "package_manager": "packagist"
+    },
+    {
+      "name": "Microsoft.Extensions.Caching.StackExchangeRedis",
+      "group": null,
+      "package_manager": "nuget"
+    },
+    {
+      "name": "github.com/go-redis/cache/v8",
+      "group": null,
+      "package_manager": "go"
+    },
+    { "name": "redis-store", "group": null, "package_manager": "rubygems" },
+    { "name": "django-redis", "group": null, "package_manager": "pypi" },
+    {
+      "name": "github.com/bsm/redislock",
+      "group": null,
+      "package_manager": "go"
+    },
+    {
+      "name": "github.com/go-redis/cache",
+      "group": null,
+      "package_manager": "go"
+    }
+  ]
+}

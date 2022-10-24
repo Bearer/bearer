@@ -1,1 +1,7 @@
-{"metadata":{"version":"1.0"},"name":"DMP","type":"external_service","urls":["https://lps2.dmp.gouv.fr/si-dmp-server/*"],"packages":[]}
+{
+  "metadata": { "version": "1.0" },
+  "name": "DMP",
+  "type": "external_service",
+  "urls": ["https://lps2.dmp.gouv.fr/si-dmp-server/*"],
+  "packages": []
+}

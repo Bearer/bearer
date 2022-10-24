@@ -1,0 +1,14 @@
+{
+  "metadata": { "version": "1.0" },
+  "id": 61,
+  "data_type_uuid": "da48dfad-7322-411b-988d-5bde0d7bc659",
+  "exclude_regexp": null,
+  "exclude_types": ["boolean"],
+  "friendly_name": "Date of birth",
+  "health_context_data_type_uuid": null,
+  "include_regexp": "\\b(date.*of.*birth|birth.*date)\\z",
+  "include_types": ["string", "date"],
+  "match_column": true,
+  "match_object": false,
+  "object_type": ["unknown"]
+}

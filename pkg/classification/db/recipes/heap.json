@@ -1,1 +1,7 @@
-{"metadata":{"version":"1.0"},"name":"Heap","type":"external_service","urls":["https://heapanalytics.com/api","https://cdn.heapanalytics.com/js"],"packages":[]}
+{
+  "metadata": { "version": "1.0" },
+  "name": "Heap",
+  "type": "external_service",
+  "urls": ["https://heapanalytics.com/api", "https://cdn.heapanalytics.com/js"],
+  "packages": []
+}

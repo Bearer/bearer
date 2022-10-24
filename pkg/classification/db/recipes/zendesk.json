@@ -1,1 +1,23 @@
-{"metadata":{"version":"1.0"},"name":"Zendesk","type":"external_service","urls":["https://rtm.zopim.com","https://static.zdassets.com/ekr","https://api.getbase.com","https://chat-api.zopim.com","https://zendesk.com/api","https://zopim.com/api"],"packages":[{"name":"zendesk/zendesk_api_client_php","group":null,"package_manager":"packagist"},{"name":"zendesk_api","group":null,"package_manager":"rubygems"},{"name":"node-zendesk","group":null,"package_manager":"npm"},{"name":"Zenpy","group":null,"package_manager":"pypi"}]}
+{
+  "metadata": { "version": "1.0" },
+  "name": "Zendesk",
+  "type": "external_service",
+  "urls": [
+    "https://rtm.zopim.com",
+    "https://static.zdassets.com/ekr",
+    "https://api.getbase.com",
+    "https://chat-api.zopim.com",
+    "https://zendesk.com/api",
+    "https://zopim.com/api"
+  ],
+  "packages": [
+    {
+      "name": "zendesk/zendesk_api_client_php",
+      "group": null,
+      "package_manager": "packagist"
+    },
+    { "name": "zendesk_api", "group": null, "package_manager": "rubygems" },
+    { "name": "node-zendesk", "group": null, "package_manager": "npm" },
+    { "name": "Zenpy", "group": null, "package_manager": "pypi" }
+  ]
+}

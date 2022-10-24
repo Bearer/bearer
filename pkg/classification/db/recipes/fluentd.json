@@ -1,1 +1,9 @@
-{"metadata":{"version":"1.0"},"name":"Fluentd","type":"internal_service","urls":[],"packages":[{"name":"pino-fluentd","group":null,"package_manager":"npm"}]}
+{
+  "metadata": { "version": "1.0" },
+  "name": "Fluentd",
+  "type": "internal_service",
+  "urls": [],
+  "packages": [
+    { "name": "pino-fluentd", "group": null, "package_manager": "npm" }
+  ]
+}

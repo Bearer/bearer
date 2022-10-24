@@ -1,0 +1,14 @@
+{
+  "metadata": { "version": "1.0" },
+  "id": 86,
+  "data_type_uuid": "380c8cde-ca2e-44ed-82db-2ab1e7c255c7",
+  "exclude_regexp": null,
+  "exclude_types": ["boolean", "number"],
+  "friendly_name": "Firstname",
+  "health_context_data_type_uuid": null,
+  "include_regexp": "\\b(first|middle|given).*names?\\b",
+  "include_types": ["string"],
+  "match_column": true,
+  "match_object": false,
+  "object_type": ["known", "unknown_extended"]
+}

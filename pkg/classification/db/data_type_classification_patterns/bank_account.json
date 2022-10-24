@@ -1,0 +1,14 @@
+{
+  "metadata": { "version": "1.0" },
+  "id": 17,
+  "data_type_uuid": "257e9570-e57c-4d7c-b3de-a893008bfdba",
+  "exclude_regexp": null,
+  "exclude_types": ["boolean"],
+  "friendly_name": "Bank Account",
+  "health_context_data_type_uuid": null,
+  "include_regexp": "\\b(bank|financial|billing).*account(.*number)?\\b",
+  "include_types": ["string"],
+  "match_column": true,
+  "match_object": true,
+  "object_type": ["known", "unknown_extended", "unknown"]
+}

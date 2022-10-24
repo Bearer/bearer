@@ -1,1 +1,7 @@
-{"metadata":{"version":"1.0"},"name":"Sakura","type":"external_service","urls":["https://secure.sakura.ad.jp/cloud/zone/*/api/"],"packages":[]}
+{
+  "metadata": { "version": "1.0" },
+  "name": "Sakura",
+  "type": "external_service",
+  "urls": ["https://secure.sakura.ad.jp/cloud/zone/*/api/"],
+  "packages": []
+}

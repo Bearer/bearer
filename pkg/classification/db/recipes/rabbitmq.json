@@ -1,1 +1,66 @@
-{"metadata":{"version":"1.0"},"name":"RabbitMQ","type":"internal_service","urls":[],"packages":[{"name":"ext-amqp","group":null,"package_manager":"packagist"},{"name":"pack.ag/amqp","group":null,"package_manager":"go"},{"name":"php-amqplib/php-amqplib","group":null,"package_manager":"packagist"},{"name":"pika","group":null,"package_manager":"pypi"},{"name":"swarrot/swarrot","group":null,"package_manager":"packagist"},{"name":"symfony/amqp-messenger","group":null,"package_manager":"packagist"},{"name":"github.com/streadway/amqp","group":null,"package_manager":"go"},{"name":"amqplib","group":null,"package_manager":"npm"},{"name":"php-amqplib/rabbitmq-bundle","group":null,"package_manager":"packagist"},{"name":"amqp","group":null,"package_manager":"npm"},{"name":"@digital-factory/rabbitmq-client","group":null,"package_manager":"npm"},{"name":"RabbitMQ.Client","group":null,"package_manager":"nuget"},{"name":"bunny","group":null,"package_manager":"rubygems"},{"name":"videlalvaro/php-amqplib","group":null,"package_manager":"packagist"},{"name":"manomano/rabbitmq-bundle","group":null,"package_manager":"packagist"},{"name":"github.com/michaelklishin/rabbit-hole","group":null,"package_manager":"go"},{"name":"simple-bus/rabbitmq-bundle-bridge","group":"","package_manager":"packagist"},{"name":"amqp-ts","group":null,"package_manager":"npm"}]}
+{
+  "metadata": { "version": "1.0" },
+  "name": "RabbitMQ",
+  "type": "internal_service",
+  "urls": [],
+  "packages": [
+    { "name": "ext-amqp", "group": null, "package_manager": "packagist" },
+    { "name": "pack.ag/amqp", "group": null, "package_manager": "go" },
+    {
+      "name": "php-amqplib/php-amqplib",
+      "group": null,
+      "package_manager": "packagist"
+    },
+    { "name": "pika", "group": null, "package_manager": "pypi" },
+    {
+      "name": "swarrot/swarrot",
+      "group": null,
+      "package_manager": "packagist"
+    },
+    {
+      "name": "symfony/amqp-messenger",
+      "group": null,
+      "package_manager": "packagist"
+    },
+    {
+      "name": "github.com/streadway/amqp",
+      "group": null,
+      "package_manager": "go"
+    },
+    { "name": "amqplib", "group": null, "package_manager": "npm" },
+    {
+      "name": "php-amqplib/rabbitmq-bundle",
+      "group": null,
+      "package_manager": "packagist"
+    },
+    { "name": "amqp", "group": null, "package_manager": "npm" },
+    {
+      "name": "@digital-factory/rabbitmq-client",
+      "group": null,
+      "package_manager": "npm"
+    },
+    { "name": "RabbitMQ.Client", "group": null, "package_manager": "nuget" },
+    { "name": "bunny", "group": null, "package_manager": "rubygems" },
+    {
+      "name": "videlalvaro/php-amqplib",
+      "group": null,
+      "package_manager": "packagist"
+    },
+    {
+      "name": "manomano/rabbitmq-bundle",
+      "group": null,
+      "package_manager": "packagist"
+    },
+    {
+      "name": "github.com/michaelklishin/rabbit-hole",
+      "group": null,
+      "package_manager": "go"
+    },
+    {
+      "name": "simple-bus/rabbitmq-bundle-bridge",
+      "group": "",
+      "package_manager": "packagist"
+    },
+    { "name": "amqp-ts", "group": null, "package_manager": "npm" }
+  ]
+}

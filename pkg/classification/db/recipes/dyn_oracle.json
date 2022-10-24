@@ -1,1 +1,7 @@
-{"metadata":{"version":"1.0"},"name":"Dyn (Oracle)","type":"external_service","urls":["https://api.dynect.net","https://api-v4.dynect.net"],"packages":[]}
+{
+  "metadata": { "version": "1.0" },
+  "name": "Dyn (Oracle)",
+  "type": "external_service",
+  "urls": ["https://api.dynect.net", "https://api-v4.dynect.net"],
+  "packages": []
+}

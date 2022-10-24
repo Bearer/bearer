@@ -1,0 +1,14 @@
+{
+  "metadata": { "version": "1.0" },
+  "id": 154,
+  "data_type_uuid": null,
+  "exclude_regexp": null,
+  "exclude_types": ["boolean"],
+  "friendly_name": "PHI dates",
+  "health_context_data_type_uuid": "bc91b4fb-3f72-4cae-b57b-ba538e4ff4e3",
+  "include_regexp": "\\b(date\\s?of\\s?(death))|death\\s?date\\b",
+  "include_types": ["string"],
+  "match_column": true,
+  "match_object": false,
+  "object_type": ["known", "unknown_extended"]
+}

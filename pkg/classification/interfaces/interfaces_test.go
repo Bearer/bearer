@@ -194,7 +194,7 @@ func TestInterface(t *testing.T) {
 
 	classifier, err := interfaces.New(
 		interfaces.Config{
-			Recipes:         db.Default(),
+			Recipes:         db.Default().Recipes,
 			InternalDomains: []string{"https://my.internal.domain.com"},
 		},
 	)

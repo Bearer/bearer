@@ -1,0 +1,12 @@
+{
+  "metadata": { "version": "1.0" },
+  "id": 132,
+  "data_type_uuid": "12d44ae0-1df7-4faf-9fb1-b46cc4b4dce9",
+  "friendly_name": "Identification",
+  "health_context_data_type_uuid": null,
+  "include_regexp": "\\b.*identification.*\\b",
+  "include_types": ["string"],
+  "match_column": false,
+  "match_object": true,
+  "object_type": ["known_data_object"]
+}

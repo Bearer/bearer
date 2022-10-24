@@ -1,0 +1,7 @@
+{
+  "metadata": { "version": "1.0" },
+  "id": 74,
+  "act_as_identifier": true,
+  "category": "Volunteer",
+  "include_regexp": "\\b.*volunteer.*\\b"
+}

@@ -1,1 +1,58 @@
-{"metadata":{"version":"1.0"},"name":"Mailchimp","type":"external_service","urls":["https://api.mailchimp.com","https://mandrillapp.com/api"],"packages":[{"name":"mailchimp/marketing","group":null,"package_manager":"packagist"},{"name":"mailchimp/transactional","group":null,"package_manager":"packagist"},{"name":"mailchimp-marketing-python","group":null,"package_manager":"pypi"},{"name":"mailchimp-transactional-python","group":null,"package_manager":"pypi"},{"name":"@mailchimp/mailchimp_marketing","group":null,"package_manager":"npm"},{"name":"@mailchimp/mailchimp_transactional","group":null,"package_manager":"npm"},{"name":"MailchimpMarketing","group":null,"package_manager":"rubygems"},{"name":"MailchimpTransactional","group":null,"package_manager":"rubygems"},{"name":"nickcv/yii2-mandrill","group":null,"package_manager":"packagist"},{"name":"mandrill/mandrill","group":null,"package_manager":"packagist"}]}
+{
+  "metadata": { "version": "1.0" },
+  "name": "Mailchimp",
+  "type": "external_service",
+  "urls": ["https://api.mailchimp.com", "https://mandrillapp.com/api"],
+  "packages": [
+    {
+      "name": "mailchimp/marketing",
+      "group": null,
+      "package_manager": "packagist"
+    },
+    {
+      "name": "mailchimp/transactional",
+      "group": null,
+      "package_manager": "packagist"
+    },
+    {
+      "name": "mailchimp-marketing-python",
+      "group": null,
+      "package_manager": "pypi"
+    },
+    {
+      "name": "mailchimp-transactional-python",
+      "group": null,
+      "package_manager": "pypi"
+    },
+    {
+      "name": "@mailchimp/mailchimp_marketing",
+      "group": null,
+      "package_manager": "npm"
+    },
+    {
+      "name": "@mailchimp/mailchimp_transactional",
+      "group": null,
+      "package_manager": "npm"
+    },
+    {
+      "name": "MailchimpMarketing",
+      "group": null,
+      "package_manager": "rubygems"
+    },
+    {
+      "name": "MailchimpTransactional",
+      "group": null,
+      "package_manager": "rubygems"
+    },
+    {
+      "name": "nickcv/yii2-mandrill",
+      "group": null,
+      "package_manager": "packagist"
+    },
+    {
+      "name": "mandrill/mandrill",
+      "group": null,
+      "package_manager": "packagist"
+    }
+  ]
+}

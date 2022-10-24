@@ -1,0 +1,14 @@
+{
+  "metadata": { "version": "1.0" },
+  "id": 94,
+  "data_type_uuid": "62981af6-2559-45a0-820a-a1dd8729bac0",
+  "exclude_regexp": "\\b.*font|text.*\\b",
+  "exclude_types": ["boolean"],
+  "friendly_name": "Family Structure",
+  "health_context_data_type_uuid": null,
+  "include_regexp": "\\Afamily\\z",
+  "include_types": ["string"],
+  "match_column": true,
+  "match_object": false,
+  "object_type": ["known", "unknown_extended", "unknown"]
+}

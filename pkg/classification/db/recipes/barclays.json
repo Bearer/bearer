@@ -1,1 +1,11 @@
-{"metadata":{"version":"1.0"},"name":"Barclays","type":"external_service","urls":["https://api.barclays.com","https://sandbox-api.barclays.com","https://dataservices.secure.barclays.co.uk"],"packages":[]}
+{
+  "metadata": { "version": "1.0" },
+  "name": "Barclays",
+  "type": "external_service",
+  "urls": [
+    "https://api.barclays.com",
+    "https://sandbox-api.barclays.com",
+    "https://dataservices.secure.barclays.co.uk"
+  ],
+  "packages": []
+}
