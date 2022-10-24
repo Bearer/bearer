@@ -3,7 +3,6 @@ package db
 import (
 	"embed"
 	"encoding/json"
-	"fmt"
 	"log"
 
 	"github.com/google/uuid"
@@ -88,21 +87,20 @@ func defaultRecipes() []Recipe {
 
 	files, err := recipesDir.ReadDir("recipes")
 	if err != nil {
-		log.Fatalln(err)
+		handleError(err)
 	}
 
 	for _, file := range files {
 		val, err := recipesDir.ReadFile("recipes/" + file.Name())
 		if err != nil {
-			fmt.Println(err)
-			continue
+			handleError(err)
 		}
 
 		var recipe Recipe
 		rawBytes := []byte(val)
 		err = json.Unmarshal(rawBytes, &recipe)
 		if err != nil {
-			log.Fatalln(err)
+			handleError(err)
 		}
 
 		recipes = append(recipes, recipe)
@@ -116,21 +114,20 @@ func defaultDataTypes() []DataType {
 
 	files, err := dataTypesDir.ReadDir("data_types")
 	if err != nil {
-		log.Fatalln(err)
+		handleError(err)
 	}
 
 	for _, file := range files {
 		val, err := dataTypesDir.ReadFile("data_types/" + file.Name())
 		if err != nil {
-			fmt.Println(err)
-			continue
+			handleError(err)
 		}
 
 		var dataType DataType
 		rawBytes := []byte(val)
 		err = json.Unmarshal(rawBytes, &dataType)
 		if err != nil {
-			log.Fatalln(err)
+			handleError(err)
 		}
 
 		dataTypes = append(dataTypes, dataType)
@@ -144,21 +141,20 @@ func defaultDataTypeClassificationPatterns() []DataTypeClassificationPattern {
 
 	files, err := dataTypeClassificationPatternsDir.ReadDir("data_type_classification_patterns")
 	if err != nil {
-		log.Fatalln(err)
+		handleError(err)
 	}
 
 	for _, file := range files {
 		val, err := dataTypeClassificationPatternsDir.ReadFile("data_type_classification_patterns/" + file.Name())
 		if err != nil {
-			fmt.Println(err)
-			continue
+			handleError(err)
 		}
 
 		var dataTypeClassificationPattern DataTypeClassificationPattern
 		rawBytes := []byte(val)
 		err = json.Unmarshal(rawBytes, &dataTypeClassificationPattern)
 		if err != nil {
-			log.Fatalln(err)
+			handleError(err)
 		}
 
 		dataTypeClassificationPatterns = append(dataTypeClassificationPatterns, dataTypeClassificationPattern)
@@ -172,25 +168,28 @@ func defaultKnownPersonObjectPatterns() []KnownPersonObjectPattern {
 
 	files, err := knownPersonObjectPatternsDir.ReadDir("known_person_object_patterns")
 	if err != nil {
-		log.Fatalln(err)
+		handleError(err)
 	}
 
 	for _, file := range files {
 		val, err := knownPersonObjectPatternsDir.ReadFile("known_person_object_patterns/" + file.Name())
 		if err != nil {
-			fmt.Println(err)
-			continue
+			handleError(err)
 		}
 
 		var knownPersonObjectPattern KnownPersonObjectPattern
 		rawBytes := []byte(val)
 		err = json.Unmarshal(rawBytes, &knownPersonObjectPattern)
 		if err != nil {
-			log.Fatalln(err)
+			handleError(err)
 		}
 
 		knownPersonObjectPatterns = append(knownPersonObjectPatterns, knownPersonObjectPattern)
 	}
 
 	return knownPersonObjectPatterns
+}
+
+func handleError(err error) {
+	log.Fatalln(err)
 }
