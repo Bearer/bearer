@@ -4,6 +4,11 @@ import (
 	"time"
 )
 
+type StatusResponse struct {
+	ClassifierError     string
+	CustomDetectorError string
+}
+
 type ProcessResponse struct {
 	Error error
 }

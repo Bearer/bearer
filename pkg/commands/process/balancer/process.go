@@ -71,6 +71,7 @@ func (process *Process) StartProcess(task *workertype.ProcessRequest) error {
 	err = cmd.Start()
 	if err != nil {
 		log.Fatal().Err(fmt.Errorf("failed to start process %w", err)).Send()
+		return err
 	}
 
 	go process.monitorMemory(cmd.Process.Pid)
@@ -78,7 +79,7 @@ func (process *Process) StartProcess(task *workertype.ProcessRequest) error {
 
 	err = process.WaitForOnline(task)
 	if err != nil {
-		log.Fatal().Msgf("%s %s failed for worker to become online %w", process.workeruuid, process.uuid, err)
+		log.Fatal().Msgf("Failed to start curio, error with your configuration %e", err)
 		return err
 	}
 
@@ -131,6 +132,18 @@ func (process *Process) WaitForOnline(task *workertype.ProcessRequest) error {
 
 		if resp.StatusCode == http.StatusOK {
 			log.Debug().Msgf("%s spawned after %.2f seconds", process.uuid, time.Since(start).Seconds())
+
+			var result workertype.StatusResponse
+			json.NewDecoder(resp.Body).Decode(&result) //nolint:all,errcheck
+			defer resp.Body.Close()
+
+			if result.CustomDetectorError != "" {
+				return fmt.Errorf("custom detector error: %s", result.CustomDetectorError)
+			}
+
+			if result.ClassifierError != "" {
+				return fmt.Errorf("classifier error: %s", result.ClassifierError)
+			}
 
 			defer resp.Body.Close()
 
