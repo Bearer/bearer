@@ -1,0 +1,7 @@
+{
+  "metadata": { "version": "1.0" },
+  "id": 63,
+  "act_as_identifier": true,
+  "category": "Sender",
+  "include_regexp": "\\b.*sender.*\\b"
+}

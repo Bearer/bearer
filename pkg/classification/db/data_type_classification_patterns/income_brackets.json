@@ -1,0 +1,14 @@
+{
+  "metadata": { "version": "1.0" },
+  "id": 97,
+  "data_type_uuid": "3b9488a8-e1df-4539-8fd5-55031119bf49",
+  "exclude_regexp": null,
+  "exclude_types": ["boolean"],
+  "friendly_name": "Income Brackets",
+  "health_context_data_type_uuid": null,
+  "include_regexp": "\\b(income|salary)\\b",
+  "include_types": ["string"],
+  "match_column": true,
+  "match_object": false,
+  "object_type": ["known", "unknown_extended"]
+}

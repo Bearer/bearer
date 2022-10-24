@@ -1,0 +1,14 @@
+{
+  "metadata": { "version": "1.0" },
+  "id": 112,
+  "data_type_uuid": "c73ae276-b1b1-4b70-b6d5-ed73a83e87ed",
+  "exclude_regexp": null,
+  "exclude_types": ["boolean"],
+  "friendly_name": "Tracking",
+  "health_context_data_type_uuid": null,
+  "include_regexp": "\\b.*tracking.*\\b",
+  "include_types": ["string"],
+  "match_column": false,
+  "match_object": true,
+  "object_type": ["known_data_object"]
+}

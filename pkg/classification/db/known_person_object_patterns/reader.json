@@ -1,0 +1,7 @@
+{
+  "metadata": { "version": "1.0" },
+  "id": 78,
+  "act_as_identifier": true,
+  "category": "Reader",
+  "include_regexp": "\\b.*reader.*\\b"
+}

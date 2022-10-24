@@ -1,0 +1,14 @@
+{
+  "metadata": { "version": "1.0" },
+  "id": 138,
+  "data_type_uuid": "85599b0c-37b6-4855-af54-5789edc27c00",
+  "exclude_regexp": null,
+  "exclude_types": ["boolean"],
+  "friendly_name": "Voice",
+  "health_context_data_type_uuid": null,
+  "include_regexp": "\\b.*voice.*\\b",
+  "include_types": ["string"],
+  "match_column": false,
+  "match_object": true,
+  "object_type": ["known_data_object"]
+}

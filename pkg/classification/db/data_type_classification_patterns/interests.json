@@ -1,0 +1,14 @@
+{
+  "metadata": { "version": "1.0" },
+  "id": 75,
+  "data_type_uuid": "5cb29a25-739a-4a5f-8831-3ac8e25be626",
+  "exclude_regexp": null,
+  "exclude_types": ["boolean"],
+  "friendly_name": "Interests",
+  "health_context_data_type_uuid": null,
+  "include_regexp": "\\b(interests?|followings?)\\b",
+  "include_types": ["string"],
+  "match_column": true,
+  "match_object": false,
+  "object_type": ["known", "unknown_extended"]
+}

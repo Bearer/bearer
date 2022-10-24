@@ -1,0 +1,14 @@
+{
+  "metadata": { "version": "1.0" },
+  "id": 45,
+  "data_type_uuid": "a2c85131-c59a-4e02-a2a4-5bed3f99b748",
+  "exclude_regexp": null,
+  "exclude_types": ["boolean"],
+  "friendly_name": "Job Titles",
+  "health_context_data_type_uuid": null,
+  "include_regexp": "\\b(job.*titles?)\\b",
+  "include_types": ["string"],
+  "match_column": true,
+  "match_object": false,
+  "object_type": ["known", "unknown_extended", "unknown"]
+}

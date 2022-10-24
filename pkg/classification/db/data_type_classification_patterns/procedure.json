@@ -1,0 +1,14 @@
+{
+  "metadata": { "version": "1.0" },
+  "id": 186,
+  "data_type_uuid": "c1704474-de02-40f0-8880-ece05fdbe9b5",
+  "exclude_regexp": null,
+  "exclude_types": ["boolean"],
+  "friendly_name": "Procedure",
+  "health_context_data_type_uuid": null,
+  "include_regexp": "\\b.*procedure.*\\b",
+  "include_types": ["string"],
+  "match_column": true,
+  "match_object": false,
+  "object_type": ["known", "unknown_extended"]
+}

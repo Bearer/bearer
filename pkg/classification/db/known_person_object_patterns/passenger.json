@@ -1,0 +1,7 @@
+{
+  "metadata": { "version": "1.0" },
+  "id": 48,
+  "act_as_identifier": true,
+  "category": "Passenger",
+  "include_regexp": "\\b.*passenger.*\\b"
+}

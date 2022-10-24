@@ -1,0 +1,7 @@
+{
+  "metadata": { "version": "1.0" },
+  "id": 18,
+  "act_as_identifier": true,
+  "category": "Competitor",
+  "include_regexp": "\\b.*competitor.*\\b"
+}

@@ -1,0 +1,14 @@
+{
+  "metadata": { "version": "1.0" },
+  "id": 96,
+  "data_type_uuid": "daf04ffc-589a-4017-9a88-69f8db97a52c",
+  "exclude_regexp": "\\b.*letter|color|model|size|business.*\\b",
+  "exclude_types": ["boolean"],
+  "friendly_name": "Image",
+  "health_context_data_type_uuid": null,
+  "include_regexp": "\\b(avatar(\\s?id)?|(profile)?\\s?pic(ture)?)\\b",
+  "include_types": ["string", "object", "array"],
+  "match_column": true,
+  "match_object": false,
+  "object_type": ["known", "unknown_extended"]
+}

@@ -1,0 +1,14 @@
+{
+  "metadata": { "version": "1.0" },
+  "id": 49,
+  "data_type_uuid": "8423e3a5-8390-4a1d-8485-0b33c4d951c5",
+  "exclude_regexp": null,
+  "exclude_types": ["boolean"],
+  "friendly_name": "Certifications",
+  "health_context_data_type_uuid": null,
+  "include_regexp": "\\b(certifications?)\\b",
+  "include_types": ["string"],
+  "match_column": true,
+  "match_object": false,
+  "object_type": ["known", "unknown_extended", "unknown"]
+}

@@ -1,0 +1,14 @@
+{
+  "metadata": { "version": "1.0" },
+  "id": 131,
+  "data_type_uuid": "b0b856cb-f28f-46b5-a004-b4a02f0cd042",
+  "exclude_regexp": null,
+  "exclude_types": ["boolean"],
+  "friendly_name": "Device",
+  "health_context_data_type_uuid": null,
+  "include_regexp": "\\b.*device.*\\b",
+  "include_types": ["string"],
+  "match_column": false,
+  "match_object": true,
+  "object_type": ["known_data_object"]
+}

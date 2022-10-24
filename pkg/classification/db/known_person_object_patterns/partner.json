@@ -1,0 +1,7 @@
+{
+  "metadata": { "version": "1.0" },
+  "id": 47,
+  "act_as_identifier": true,
+  "category": "Partner",
+  "include_regexp": "\\b.*partner.*\\b"
+}

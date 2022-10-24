@@ -1,0 +1,14 @@
+{
+  "metadata": { "version": "1.0" },
+  "id": 9,
+  "data_type_uuid": "d2c51707-9673-48b4-add6-4a9e6a2cc5f3",
+  "exclude_regexp": null,
+  "exclude_types": ["boolean"],
+  "friendly_name": "Convictions",
+  "health_context_data_type_uuid": null,
+  "include_regexp": "\\bconviction\\b",
+  "include_types": ["string"],
+  "match_column": true,
+  "match_object": false,
+  "object_type": ["known", "unknown_extended", "unknown"]
+}

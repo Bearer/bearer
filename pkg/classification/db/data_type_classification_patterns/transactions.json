@@ -1,0 +1,14 @@
+{
+  "metadata": { "version": "1.0" },
+  "id": 102,
+  "data_type_uuid": "56c60be5-3389-4022-9af8-1ed389cc3d41",
+  "exclude_regexp": "\\b.*type|method|template|error|page|model|authorized|status|id|profile.*\\b",
+  "exclude_types": ["boolean"],
+  "friendly_name": "Transactions",
+  "health_context_data_type_uuid": null,
+  "include_regexp": "\\b((transactions?|charged|next|vat)?\\s?(amount|payments?))|invoices?|receipt|refunds?\\b",
+  "include_types": ["string"],
+  "match_column": true,
+  "match_object": false,
+  "object_type": ["known", "unknown_extended", "known_data_object"]
+}

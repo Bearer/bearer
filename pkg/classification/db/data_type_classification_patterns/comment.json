@@ -1,0 +1,13 @@
+{
+  "metadata": { "version": "1.0" },
+  "id": 198,
+  "data_type_uuid": "8358b541-500f-4321-8ee9-89ce61e9459e",
+  "exclude_types": ["boolean"],
+  "friendly_name": "Comment",
+  "health_context_data_type_uuid": null,
+  "include_regexp": "\\b(customer|personal)\\s?(comment|message)\\b",
+  "include_types": ["string"],
+  "match_column": true,
+  "match_object": false,
+  "object_type": ["known"]
+}

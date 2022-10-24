@@ -1,0 +1,14 @@
+{
+  "metadata": { "version": "1.0" },
+  "id": 53,
+  "data_type_uuid": "07e6e126-655e-4627-bdad-381ef4cbbe6d",
+  "exclude_regexp": null,
+  "exclude_types": ["boolean"],
+  "friendly_name": "Favorite Foods",
+  "health_context_data_type_uuid": null,
+  "include_regexp": "\\b(favorite.*foods?)\\b",
+  "include_types": ["string"],
+  "match_column": true,
+  "match_object": false,
+  "object_type": ["known", "unknown_extended", "unknown"]
+}

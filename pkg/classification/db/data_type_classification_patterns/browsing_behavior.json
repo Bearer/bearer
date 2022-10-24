@@ -1,0 +1,14 @@
+{
+  "metadata": { "version": "1.0" },
+  "id": 57,
+  "data_type_uuid": "c73ae276-b1b1-4b70-b6d5-ed73a83e87ed",
+  "exclude_regexp": null,
+  "exclude_types": ["boolean"],
+  "friendly_name": "Browsing Behavior",
+  "health_context_data_type_uuid": null,
+  "include_regexp": "\\bbrowsing\\s?(behavi(u)?or|history)\\b",
+  "include_types": ["string"],
+  "match_column": true,
+  "match_object": false,
+  "object_type": ["known", "unknown_extended", "unknown"]
+}

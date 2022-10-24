@@ -1,0 +1,14 @@
+{
+  "metadata": { "version": "1.0" },
+  "id": 67,
+  "data_type_uuid": "10fcbeaa-fd17-47ab-9a29-c1f94fadcaa3",
+  "exclude_regexp": null,
+  "exclude_types": ["boolean"],
+  "friendly_name": "Loan Records",
+  "health_context_data_type_uuid": null,
+  "include_regexp": "\\bloans?\\b",
+  "include_types": ["string"],
+  "match_column": true,
+  "match_object": false,
+  "object_type": ["known", "unknown_extended"]
+}

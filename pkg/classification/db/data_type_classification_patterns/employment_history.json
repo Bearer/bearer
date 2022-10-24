@@ -1,0 +1,14 @@
+{
+  "metadata": { "version": "1.0" },
+  "id": 47,
+  "data_type_uuid": "7a784098-430f-41fb-b7cc-687da4a49f4d",
+  "exclude_regexp": null,
+  "exclude_types": ["boolean"],
+  "friendly_name": "Employment History",
+  "health_context_data_type_uuid": null,
+  "include_regexp": "\\b(employment\\s?(history|status))|occupation\\b",
+  "include_types": ["string"],
+  "match_column": true,
+  "match_object": false,
+  "object_type": ["known", "unknown_extended"]
+}

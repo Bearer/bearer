@@ -1,0 +1,14 @@
+{
+  "metadata": { "version": "1.0" },
+  "id": 77,
+  "data_type_uuid": "dfd80ee8-d913-4e36-af2d-66131fec87f6",
+  "exclude_regexp": null,
+  "exclude_types": ["boolean"],
+  "friendly_name": "Dislikes",
+  "health_context_data_type_uuid": null,
+  "include_regexp": "\\b((dis|not)\\s?likes?\\s?(count|comment|image|video|stor(y|ies)?))\\b",
+  "include_types": ["string"],
+  "match_column": true,
+  "match_object": false,
+  "object_type": ["known", "unknown_extended"]
+}

@@ -1,0 +1,7 @@
+{
+  "metadata": { "version": "1.0" },
+  "id": 7,
+  "act_as_identifier": true,
+  "category": "Attendee",
+  "include_regexp": "\\b.*attendee.*\\b"
+}

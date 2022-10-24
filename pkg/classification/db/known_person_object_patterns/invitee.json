@@ -1,0 +1,7 @@
+{
+  "metadata": { "version": "1.0" },
+  "id": 34,
+  "act_as_identifier": false,
+  "category": "Invitee",
+  "include_regexp": "\\b.*invite.*\\b"
+}

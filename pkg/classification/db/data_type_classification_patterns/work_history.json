@@ -1,0 +1,14 @@
+{
+  "metadata": { "version": "1.0" },
+  "id": 46,
+  "data_type_uuid": "3bdc635e-4e4c-4aaa-a58f-c1198d0f45d3",
+  "exclude_regexp": null,
+  "exclude_types": ["boolean"],
+  "friendly_name": "Work History",
+  "health_context_data_type_uuid": null,
+  "include_regexp": "\\b(work\\s?history)\\b",
+  "include_types": ["string"],
+  "match_column": true,
+  "match_object": false,
+  "object_type": ["known", "unknown_extended", "unknown"]
+}

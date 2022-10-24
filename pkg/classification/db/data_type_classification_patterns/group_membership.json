@@ -1,0 +1,14 @@
+{
+  "metadata": { "version": "1.0" },
+  "id": 50,
+  "data_type_uuid": "a4095f69-5a06-404a-aa2c-87a4629cca1a",
+  "exclude_regexp": null,
+  "exclude_types": ["boolean"],
+  "friendly_name": "Group Membership",
+  "health_context_data_type_uuid": null,
+  "include_regexp": "\\bmemberships?\\b",
+  "include_types": ["string"],
+  "match_column": true,
+  "match_object": false,
+  "object_type": ["known", "unknown_extended", "unknown", "known_data_object"]
+}
