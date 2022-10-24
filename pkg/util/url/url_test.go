@@ -555,10 +555,10 @@ func TestValidate(t *testing.T) {
 	// test domain reachability
 	t.Run("unreachable domain", func(t *testing.T) {
 		domainResolver := url.NewDomainResolverDefault()
-		domainResolver.LookUpAddr = func(ctx context.Context, addr string) ([]string, error) {
-			return []string{}, nil // no DNS address found
+		domainResolver.LookupIPAddr = func(ctx context.Context, host string) ([]net.IPAddr, error) {
+			return []net.IPAddr{}, nil // no DNS address found
 		}
-		domainResolver.LookUpNS = func(ctx context.Context, name string) ([]*net.NS, error) {
+		domainResolver.LookupNS = func(ctx context.Context, name string) ([]*net.NS, error) {
 			return []*net.NS{}, nil // no NS found
 		}
 
