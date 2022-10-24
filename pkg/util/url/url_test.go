@@ -9,6 +9,7 @@ import (
 	"github.com/bearer/curio/pkg/report/detections"
 	"github.com/bearer/curio/pkg/report/detectors"
 	"github.com/bearer/curio/pkg/report/source"
+	"github.com/bearer/curio/pkg/util/classify"
 	"github.com/bearer/curio/pkg/util/url"
 	"github.com/stretchr/testify/assert"
 )
@@ -261,7 +262,7 @@ func TestValidateFormat(t *testing.T) {
 		Name string
 		URL  string
 		Data *detections.Detection
-		Want *url.ValidationResult
+		Want *classify.ValidationResult
 	}{
 		{
 			Name: "when a detection is from a potential detector",
@@ -269,8 +270,8 @@ func TestValidateFormat(t *testing.T) {
 			Data: &detections.Detection{
 				DetectorType: detectors.DetectorEnvFile,
 			},
-			Want: &url.ValidationResult{
-				State:  url.Potential,
+			Want: &classify.ValidationResult{
+				State:  classify.Potential,
 				Reason: "potential_detectors",
 			},
 		},
@@ -282,8 +283,8 @@ func TestValidateFormat(t *testing.T) {
 					Filename: "foo/vendor/symfony/symfony/src/Symfony/Component/Validator/Mapping/MemberMetadata.php",
 				},
 			},
-			Want: &url.ValidationResult{
-				State:  url.Invalid,
+			Want: &classify.ValidationResult{
+				State:  classify.Invalid,
 				Reason: "included_in_vendor_folder",
 			},
 		},
@@ -295,8 +296,8 @@ func TestValidateFormat(t *testing.T) {
 					Filename: "rancher-powerdns4/vendor/github.com/prasmussen/gandi-api/client/client.go",
 				},
 			},
-			Want: &url.ValidationResult{
-				State:  url.Invalid,
+			Want: &classify.ValidationResult{
+				State:  classify.Invalid,
 				Reason: "included_in_vendor_folder",
 			},
 		},
@@ -304,8 +305,8 @@ func TestValidateFormat(t *testing.T) {
 			Name: "when there's not data to make a strong decision",
 			URL:  "https://eu.example.com/path/*",
 			Data: &detections.Detection{},
-			Want: &url.ValidationResult{
-				State:  url.Potential,
+			Want: &classify.ValidationResult{
+				State:  classify.Potential,
 				Reason: "uncertain",
 			},
 		},
@@ -313,8 +314,8 @@ func TestValidateFormat(t *testing.T) {
 			Name: "when the URL is blank",
 			URL:  "",
 			Data: &detections.Detection{},
-			Want: &url.ValidationResult{
-				State:  url.Invalid,
+			Want: &classify.ValidationResult{
+				State:  classify.Invalid,
 				Reason: "blank_url",
 			},
 		},
@@ -322,8 +323,8 @@ func TestValidateFormat(t *testing.T) {
 			Name: "when an IP address is given",
 			URL:  "https://127.0.0.1",
 			Data: &detections.Detection{},
-			Want: &url.ValidationResult{
-				State:  url.Invalid,
+			Want: &classify.ValidationResult{
+				State:  classify.Invalid,
 				Reason: "ip_address_error",
 			},
 		},
@@ -335,8 +336,8 @@ func TestValidateFormat(t *testing.T) {
 					Filename: "Gemfile.lock",
 				},
 			},
-			Want: &url.ValidationResult{
-				State:  url.Invalid,
+			Want: &classify.ValidationResult{
+				State:  classify.Invalid,
 				Reason: "dependency_file_error",
 			},
 		},
@@ -349,8 +350,8 @@ func TestValidateFormat(t *testing.T) {
 					LanguageType: "markup",
 				},
 			},
-			Want: &url.ValidationResult{
-				State:  url.Invalid,
+			Want: &classify.ValidationResult{
+				State:  classify.Invalid,
 				Reason: "language_type_error",
 			},
 		},
@@ -362,8 +363,8 @@ func TestValidateFormat(t *testing.T) {
 					Filename: "config/translations/en.js",
 				},
 			},
-			Want: &url.ValidationResult{
-				State:  url.Invalid,
+			Want: &classify.ValidationResult{
+				State:  classify.Invalid,
 				Reason: "filename_error",
 			},
 		},
@@ -371,8 +372,8 @@ func TestValidateFormat(t *testing.T) {
 			Name: "missing TLD",
 			URL:  "https://.",
 			Data: &detections.Detection{},
-			Want: &url.ValidationResult{
-				State:  url.Invalid,
+			Want: &classify.ValidationResult{
+				State:  classify.Invalid,
 				Reason: "tld_error",
 			},
 		},
@@ -380,8 +381,8 @@ func TestValidateFormat(t *testing.T) {
 			Name: "domain is empty",
 			URL:  "/nothing",
 			Data: &detections.Detection{},
-			Want: &url.ValidationResult{
-				State:  url.Invalid,
+			Want: &classify.ValidationResult{
+				State:  classify.Invalid,
 				Reason: "no_host_error",
 			},
 		},
@@ -403,53 +404,53 @@ func TestValidateInternal(t *testing.T) {
 	tests := []struct {
 		Name string
 		URL  string
-		Want *url.ValidationResult
+		Want *classify.ValidationResult
 	}{
 		{
 			Name: "internal domain with restricted subdomain",
 			URL:  "https://cdn.mish-company.com",
-			Want: &url.ValidationResult{
-				State:  url.Invalid,
+			Want: &classify.ValidationResult{
+				State:  classify.Invalid,
 				Reason: "internal_domain_subdomain_error",
 			},
 		},
 		{
 			Name: "internal domain with no subdomain",
 			URL:  "https://mish-company.com",
-			Want: &url.ValidationResult{
-				State:  url.Invalid,
+			Want: &classify.ValidationResult{
+				State:  classify.Invalid,
 				Reason: "internal_domain_but_no_subdomain",
 			},
 		},
 		{
 			Name: "internal domain with invalid chars in path",
 			URL:  "https://eu.mish-company.com/%20",
-			Want: &url.ValidationResult{
-				State:  url.Invalid,
+			Want: &classify.ValidationResult{
+				State:  classify.Invalid,
 				Reason: "internal_domain_errors_in_path",
 			},
 		},
 		{
 			Name: "internal domain with file extension in path",
 			URL:  "https://eu.mish-company.com/photo.jpeg",
-			Want: &url.ValidationResult{
-				State:  url.Invalid,
+			Want: &classify.ValidationResult{
+				State:  classify.Invalid,
 				Reason: "internal_domain_errors_in_path",
 			},
 		},
 		{
 			Name: "internal domain with 'api' in path",
 			URL:  "https://eu.mish-company.com/api/v2/shipment?debug=true",
-			Want: &url.ValidationResult{
-				State:  url.Valid,
+			Want: &classify.ValidationResult{
+				State:  classify.Valid,
 				Reason: "internal_domain_path_contains_api_or_auth",
 			},
 		},
 		{
 			Name: "internal domain with a wildcard",
 			URL:  "https://cdn*.mish-company.com/",
-			Want: &url.ValidationResult{
-				State:  url.Potential,
+			Want: &classify.ValidationResult{
+				State:  classify.Potential,
 				Reason: "internal_domain_and_subdomain_with_wildcard",
 			},
 		},
@@ -470,69 +471,69 @@ func TestValidate(t *testing.T) {
 	tests := []struct {
 		Name string
 		URL  string
-		Want *url.ValidationResult
+		Want *classify.ValidationResult
 	}{
 		{
 			Name: "TLD is not allowed",
 			URL:  "https://example.id",
-			Want: &url.ValidationResult{
-				State:  url.Invalid,
+			Want: &classify.ValidationResult{
+				State:  classify.Invalid,
 				Reason: "tld_error",
 			},
 		},
 		{
 			Name: "blacklisted domain",
 			URL:  "https://github.com",
-			Want: &url.ValidationResult{
-				State:  url.Invalid,
+			Want: &classify.ValidationResult{
+				State:  classify.Invalid,
 				Reason: "excluded_domains_error",
 			},
 		},
 		{
 			Name: "blacklisted subdomain",
 			URL:  "https://wiki.example.com",
-			Want: &url.ValidationResult{
-				State:  url.Invalid,
+			Want: &classify.ValidationResult{
+				State:  classify.Invalid,
 				Reason: "subdomain_error",
 			},
 		},
 		{
 			Name: "path with invalid characters",
 			URL:  "https://eu.example.com/%20",
-			Want: &url.ValidationResult{
-				State:  url.Invalid,
+			Want: &classify.ValidationResult{
+				State:  classify.Invalid,
 				Reason: "errors_in_path",
 			},
 		},
 		{
 			Name: "path contains 'api'",
 			URL:  "https://eu.example.com/api/v2",
-			Want: &url.ValidationResult{
-				State:  url.Valid,
+			Want: &classify.ValidationResult{
+				State:  classify.Valid,
 				Reason: "path_contains_api_or_auth",
 			},
 		},
 		{
 			Name: "subdomain not provided",
 			URL:  "https://example.com",
-			Want: &url.ValidationResult{
-				State:  url.Potential,
+			Want: &classify.ValidationResult{
+				State:  classify.Potential,
 				Reason: "no_subdomain",
 			},
 		},
 		{
 			Name: "subdomain contains 'api'",
 			URL:  "https://api.example.com",
-			Want: &url.ValidationResult{
-				State:  url.Valid,
+			Want: &classify.ValidationResult{
+				State:  classify.Valid,
 				Reason: "subdomain_contains_api",
 			},
 		},
 		{
 			Name: "subdomain contains a wildcard",
 			URL:  "https://api.*.example.com",
-			Want: &url.ValidationResult{
-				State:  url.Potential,
+			Want: &classify.ValidationResult{
+				State:  classify.Potential,
 				Reason: "subdomain_contains_api_with_wildcard",
 			},
 		},
@@ -567,8 +568,8 @@ func TestValidate(t *testing.T) {
 			t.Errorf("Validate returned unexpected error %s", err)
 		}
 
-		assert.Equal(t, &url.ValidationResult{
-			State:  url.Invalid,
+		assert.Equal(t, &classify.ValidationResult{
+			State:  classify.Invalid,
 			Reason: "domain_not_reachable",
 		}, output)
 	})

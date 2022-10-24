@@ -9,7 +9,7 @@ import (
 	"strings"
 
 	"github.com/bearer/curio/pkg/report/detections"
-	"github.com/bearer/curio/pkg/report/detectors"
+	"github.com/bearer/curio/pkg/util/classify"
 	"github.com/weppos/publicsuffix-go/publicsuffix"
 )
 
@@ -166,27 +166,6 @@ var invalidFilenameExtensions = map[string]struct{}{
 	"purs":        {},
 }
 
-var potentialDetectors = map[string]struct{}{
-	"env_file":    {},
-	"yaml_config": {},
-}
-
-var cloudDetectors = map[string]struct{}{
-	"sql-readonly": {},
-	"sql-advanced": {},
-}
-
-type ValidationState string
-
-var Valid = ValidationState("valid")
-var Invalid = ValidationState("invalid")
-var Potential = ValidationState("potential")
-
-type ValidationResult struct {
-	State  ValidationState
-	Reason string
-}
-
 func Match(url string, matcher *regexp.Regexp) (string, error) {
 	match := matcher.FindStringSubmatch(url)
 	if match != nil {
@@ -239,21 +218,20 @@ func PrepareURLValue(myURL string) (string, error) {
 	return preparedURL, nil
 }
 
-func ValidateFormat(myURL string, data *detections.Detection) (*ValidationResult, error) {
-	ValidationResult := ValidationResult{
-		State:  Invalid,
+func ValidateFormat(myURL string, data *detections.Detection) (*classify.ValidationResult, error) {
+	ValidationResult := classify.ValidationResult{
+		State:  classify.Invalid,
 		Reason: "uncertain", // default
 	}
 
-	// todo: to be shared for all classifications
-	if isVendored(data.Source.Filename) {
-		ValidationResult.Reason = "included_in_vendor_folder"
+	if classify.IsVendored(data.Source.Filename) {
+		ValidationResult.Reason = classify.IncludedInVendorFolderReason
 		return &ValidationResult, nil
 	}
 
-	if isPotentialDetector(data.DetectorType) {
-		ValidationResult.State = Potential
-		ValidationResult.Reason = "potential_detectors"
+	if classify.IsPotentialDetector(data.DetectorType) {
+		ValidationResult.State = classify.Potential
+		ValidationResult.Reason = classify.PotentialDetectorReason
 		return &ValidationResult, nil
 	}
 
@@ -303,13 +281,13 @@ func ValidateFormat(myURL string, data *detections.Detection) (*ValidationResult
 		return &ValidationResult, nil
 	}
 
-	ValidationResult.State = Potential
+	ValidationResult.State = classify.Potential
 	return &ValidationResult, nil
 }
 
-func ValidateInternal(myURL string) (*ValidationResult, error) {
-	ValidationResult := ValidationResult{
-		State:  Invalid,
+func ValidateInternal(myURL string) (*classify.ValidationResult, error) {
+	ValidationResult := classify.ValidationResult{
+		State:  classify.Invalid,
 		Reason: "uncertain", // default
 	}
 
@@ -338,7 +316,7 @@ func ValidateInternal(myURL string) (*ValidationResult, error) {
 	}
 
 	if pathContainsAPIorAuth(parsedURL.Path) {
-		ValidationResult.State = Valid
+		ValidationResult.State = classify.Valid
 		ValidationResult.Reason = "internal_domain_path_contains_api_or_auth"
 
 		return &ValidationResult, nil
@@ -350,19 +328,19 @@ func ValidateInternal(myURL string) (*ValidationResult, error) {
 	}
 
 	if strings.Contains(parsedURL.Host, "*") {
-		ValidationResult.State = Potential
+		ValidationResult.State = classify.Potential
 		ValidationResult.Reason = "internal_domain_and_subdomain_with_wildcard"
 		return &ValidationResult, nil
 	}
 
-	ValidationResult.State = Valid
+	ValidationResult.State = classify.Valid
 	ValidationResult.Reason = "internal_domain_and_subdomain"
 	return &ValidationResult, nil
 }
 
-func Validate(myURL string, domainResolver *DomainResolver) (*ValidationResult, error) {
-	ValidationResult := ValidationResult{
-		State:  Invalid,
+func Validate(myURL string, domainResolver *DomainResolver) (*classify.ValidationResult, error) {
+	ValidationResult := classify.ValidationResult{
+		State:  classify.Invalid,
 		Reason: "uncertain", // default
 	}
 
@@ -406,30 +384,30 @@ func Validate(myURL string, domainResolver *DomainResolver) (*ValidationResult, 
 	}
 
 	if pathContainsAPIorAuth(parsedURL.Path) {
-		ValidationResult.State = Valid
+		ValidationResult.State = classify.Valid
 		ValidationResult.Reason = "path_contains_api_or_auth"
 		return &ValidationResult, nil
 	}
 
 	if parsedDomain.TRD == "" {
-		ValidationResult.State = Potential
+		ValidationResult.State = classify.Potential
 		ValidationResult.Reason = "no_subdomain"
 		return &ValidationResult, nil
 	}
 
 	if strings.Contains(parsedDomain.TRD, "api") {
 		if strings.Contains(parsedURL.Host, "*") {
-			ValidationResult.State = Potential
+			ValidationResult.State = classify.Potential
 			ValidationResult.Reason = "subdomain_contains_api_with_wildcard"
 			return &ValidationResult, nil
 		}
 
-		ValidationResult.State = Valid
+		ValidationResult.State = classify.Valid
 		ValidationResult.Reason = "subdomain_contains_api"
 		return &ValidationResult, nil
 	}
 
-	ValidationResult.State = Potential // uncertain
+	ValidationResult.State = classify.Potential // uncertain
 	return &ValidationResult, nil
 }
 
@@ -502,18 +480,4 @@ func pathContainsAPIorAuth(path string) bool {
 	}
 
 	return strings.Contains(path, "api") || strings.Contains(path, "auth")
-}
-
-func isVendored(filename string) bool {
-	_, ok := cloudDetectors[filename]
-	if ok {
-		return false
-	}
-
-	return strings.Contains(filename, "vendor/")
-}
-
-func isPotentialDetector(detectorType detectors.Type) bool {
-	_, ok := potentialDetectors[string(detectorType)]
-	return ok
 }
