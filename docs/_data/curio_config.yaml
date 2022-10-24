@@ -1,0 +1,27 @@
+name: ' config'
+synopsis: Scan config files for misconfigurations
+usage: ' config [flags] DIR'
+options:
+- name: disable-domain-resolution
+  default_value: "false"
+  usage: |
+    do not attempt to resolve detected domains during classification (default false), eg. --disable-domain-resolution=true
+- name: domain-resolution-timeout
+  default_value: 3s
+  usage: |
+    set timeout when attempting to resolve detected domains during classification (default 3 seconds), eg. --domain-resolution-timeout=TODO
+- name: help
+  shorthand: h
+  default_value: "false"
+  usage: help for config
+- name: internal-domains
+  default_value: '[]'
+  usage: |
+    define regular expressions for better classification of private or unreachable domains eg. --internal-domains="/*.my-company.com/,/private.sh/"
+- name: skip-path
+  default_value: '[]'
+  usage: |
+    specify the comma separated files and directories to skip (supports * syntax), eg. --skip-path users/*.go,users/admin.sql
+see_also:
+- ' - '
+aliases: conf

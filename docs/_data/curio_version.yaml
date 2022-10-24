@@ -1,0 +1,11 @@
+name: ' version'
+synopsis: Print the version
+usage: ' version [flags]'
+options:
+- name: help
+  shorthand: h
+  default_value: "false"
+  usage: help for version
+see_also:
+- ' - '
+aliases: 
