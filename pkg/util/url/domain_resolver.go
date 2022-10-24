@@ -15,8 +15,8 @@ var regexpDomainSplitMatcher = regexp.MustCompile(`\*\s*(.*?)\s*\.`)
 type DomainResolver struct {
 	Enabled      bool
 	Timeout      time.Duration
-	LookupIPAddr func(ctx context.Context, addr string) ([]net.IPAddr, error)
-	LookupNS     func(ctx context.Context, addr string) ([]*net.NS, error)
+	LookupIPAddr func(ctx context.Context, host string) ([]net.IPAddr, error)
+	LookupNS     func(ctx context.Context, host string) ([]*net.NS, error)
 }
 
 func NewDomainResolver(enabled bool, timeout time.Duration) *DomainResolver {
@@ -84,12 +84,12 @@ func (domainResolver *DomainResolver) isNameserver(domain string, staticDomain s
 
 func (domainResolver *DomainResolver) domainResolves(domain string, resolverContext context.Context) bool {
 	// handle any special characters
-	sanitizedURL, err := publicsuffix.ToASCII(domain)
+	sanitizedDomain, err := publicsuffix.ToASCII(domain)
 	if err != nil {
 		return false
 	}
 
-	names, err := domainResolver.LookupIPAddr(resolverContext, sanitizedURL)
+	names, err := domainResolver.LookupIPAddr(resolverContext, sanitizedDomain)
 	if err != nil {
 		// return false even for transient errors
 		return false
