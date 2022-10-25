@@ -1,6 +1,6 @@
-([]*report.Detection) (len=16) {
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+([]*detections.Detection) (len=16) {
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=3) "ivy",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -18,8 +18,8 @@
       Version: (string) (len=6) "2.3.15"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=3) "ivy",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -37,8 +37,8 @@
       Version: (string) (len=5) "3.6.2"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=3) "ivy",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -56,8 +56,8 @@
       Version: (string) (len=5) "1.2.2"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=3) "ivy",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -75,8 +75,8 @@
       Version: (string) (len=5) "3.0.9"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=3) "ivy",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -94,8 +94,8 @@
       Version: (string) (len=3) "5.8"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=3) "ivy",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -113,8 +113,8 @@
       Version: (string) (len=5) "2.5.6"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=3) "ivy",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -132,8 +132,8 @@
       Version: (string) (len=3) "1.0"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=3) "ivy",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -151,8 +151,8 @@
       Version: (string) (len=5) "1.5.6"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=3) "ivy",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -170,8 +170,8 @@
       Version: (string) (len=6) "1.2.15"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=3) "ivy",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -189,8 +189,8 @@
       Version: (string) (len=5) "1.5.7"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=3) "ivy",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -208,8 +208,8 @@
       Version: (string) (len=3) "2.4"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=3) "ivy",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -227,8 +227,8 @@
       Version: (string) (len=3) "3.1"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=3) "ivy",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -246,8 +246,8 @@
       Version: (string) (len=3) "1.3"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=3) "ivy",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -265,8 +265,8 @@
       Version: (string) (len=5) "1.1.1"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=3) "ivy",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -284,8 +284,8 @@
       Version: (string) (len=5) "1.7.1"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=3) "ivy",
     CommitSHA: (string) "",
     Source: (source.Source) {

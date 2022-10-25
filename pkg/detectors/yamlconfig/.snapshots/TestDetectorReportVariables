@@ -1,6 +1,6 @@
-([]*report.Detection) (len=11) {
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=9) "interface",
+([]*detections.Detection) (len=11) {
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=9) "interface",
     DetectorType: (detectors.Type) (len=11) "yaml_config",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -31,8 +31,8 @@
       VariableName: (string) (len=33) "http.ms.messenger.google.com.host"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=9) "interface",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=9) "interface",
     DetectorType: (detectors.Type) (len=11) "yaml_config",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -63,8 +63,8 @@
       VariableName: (string) (len=41) "http.ms.shipment-tracking.google.com.host"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=9) "interface",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=9) "interface",
     DetectorType: (detectors.Type) (len=11) "yaml_config",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -95,8 +95,8 @@
       VariableName: (string) (len=36) "http.ms.seller-order.google.com.host"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=9) "interface",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=9) "interface",
     DetectorType: (detectors.Type) (len=11) "yaml_config",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -127,8 +127,8 @@
       VariableName: (string) (len=32) "http.ms.customer.google.com.host"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=9) "interface",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=9) "interface",
     DetectorType: (detectors.Type) (len=11) "yaml_config",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -159,8 +159,8 @@
       VariableName: (string) (len=29) "http.ms.order.google.com.host"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=9) "interface",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=9) "interface",
     DetectorType: (detectors.Type) (len=11) "yaml_config",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -191,8 +191,8 @@
       VariableName: (string) (len=30) "http.ms.seller.google.com.host"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=9) "interface",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=9) "interface",
     DetectorType: (detectors.Type) (len=11) "yaml_config",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -216,8 +216,8 @@
       VariableName: (string) (len=13) "DD_APM_DD_URL"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=9) "interface",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=9) "interface",
     DetectorType: (detectors.Type) (len=11) "yaml_config",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -244,8 +244,8 @@
       VariableName: (string) (len=5) "image"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=9) "interface",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=9) "interface",
     DetectorType: (detectors.Type) (len=11) "yaml_config",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -272,8 +272,8 @@
       VariableName: (string) (len=11) "BASE_DOMAIN"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=9) "interface",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=9) "interface",
     DetectorType: (detectors.Type) (len=11) "yaml_config",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -300,8 +300,8 @@
       VariableName: (string) (len=18) "BEARER_ASSETS_HOST"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=9) "interface",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=9) "interface",
     DetectorType: (detectors.Type) (len=11) "yaml_config",
     CommitSHA: (string) "",
     Source: (source.Source) {

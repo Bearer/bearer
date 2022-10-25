@@ -1,6 +1,6 @@
-([]*report.Detection) (len=6) {
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=9) "interface",
+([]*detections.Detection) (len=6) {
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=9) "interface",
     DetectorType: (detectors.Type) (len=3) "tsx",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -27,8 +27,8 @@
       VariableName: (string) ""
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=9) "interface",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=9) "interface",
     DetectorType: (detectors.Type) (len=3) "tsx",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -55,8 +55,8 @@
       VariableName: (string) ""
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=9) "interface",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=9) "interface",
     DetectorType: (detectors.Type) (len=3) "tsx",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -83,8 +83,8 @@
       VariableName: (string) ""
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=9) "interface",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=9) "interface",
     DetectorType: (detectors.Type) (len=3) "tsx",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -111,8 +111,8 @@
       VariableName: (string) ""
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=9) "interface",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=9) "interface",
     DetectorType: (detectors.Type) (len=3) "tsx",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -154,8 +154,8 @@
       VariableName: (string) ""
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=9) "interface",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=9) "interface",
     DetectorType: (detectors.Type) (len=3) "tsx",
     CommitSHA: (string) "",
     Source: (source.Source) {

@@ -1,6 +1,6 @@
-([]*report.FrameworkDetection) (len=3) {
-  (*report.FrameworkDetection)({
-    Type: (report.DetectionType) (len=9) "framework",
+([]*detections.FrameworkDetection) (len=3) {
+  (*detections.FrameworkDetection)({
+    Type: (detections.DetectionType) (len=9) "framework",
     DetectorType: (detectors.Type) (len=5) "rails",
     FrameworkType: (frameworks.Type) (len=7) "storage",
     CommitSHA: (string) "",
@@ -18,8 +18,8 @@
       Encryption: (string) (len=6) "AES256"
     }
   }),
-  (*report.FrameworkDetection)({
-    Type: (report.DetectionType) (len=9) "framework",
+  (*detections.FrameworkDetection)({
+    Type: (detections.DetectionType) (len=9) "framework",
     DetectorType: (detectors.Type) (len=5) "rails",
     FrameworkType: (frameworks.Type) (len=7) "storage",
     CommitSHA: (string) "",
@@ -37,8 +37,8 @@
       Encryption: (string) ""
     }
   }),
-  (*report.FrameworkDetection)({
-    Type: (report.DetectionType) (len=9) "framework",
+  (*detections.FrameworkDetection)({
+    Type: (detections.DetectionType) (len=9) "framework",
     DetectorType: (detectors.Type) (len=5) "rails",
     FrameworkType: (frameworks.Type) (len=7) "storage",
     CommitSHA: (string) "",

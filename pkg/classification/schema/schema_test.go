@@ -27,12 +27,12 @@ func TestSchema(t *testing.T) {
 				Value: datatype.DataType{
 					Name: "user",
 					Type: reportschema.SimpleTypeObject,
-					Properties: map[string]*datatype.DataTypable{
-						"address": {
+					Properties: map[string]datatype.DataTypable{
+						"address": &datatype.DataType{
 							Type: reportschema.SimpleTypeString,
 							UUID: "2",
 						},
-						"age": {
+						"age": &datatype.DataType{
 							Type: reportschema.SimpleTypeString,
 							UUID: "3",
 						},
@@ -42,22 +42,22 @@ func TestSchema(t *testing.T) {
 			Want: schema.ClassifiedDatatype{
 				DataType: &datatype.DataType{
 					UUID: "1",
+					Properties: map[string]datatype.DataTypable{
+						"address": schema.ClassifiedDatatype{
+							Classification: schema.Classification{
+								Name: "personal data",
+							},
+							DataType: &datatype.DataType{
+								UUID: "2",
+							},
+						},
+						"age": schema.ClassifiedDatatype{
+							Classification: schema.Classification{},
+						},
+					},
 				},
 				Classification: schema.Classification{
 					Name: "personal data",
-				},
-				Properties: map[string]schema.ClassifiedDatatype{
-					"address": {
-						Classification: schema.Classification{
-							Name: "personal data",
-						},
-						DataType: &datatype.DataType{
-							UUID: "2",
-						},
-					},
-					"age": {
-						Classification: schema.Classification{},
-					},
 				},
 			},
 		},

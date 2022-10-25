@@ -1,6 +1,6 @@
-([]*report.Detection) (len=5) {
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=6) "schema",
+([]*detections.Detection) (len=5) {
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=6) "schema",
     DetectorType: (detectors.Type) (len=5) "rails",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -20,8 +20,8 @@
       SimpleFieldType: (string) (len=6) "string"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=6) "schema",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=6) "schema",
     DetectorType: (detectors.Type) (len=5) "rails",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -41,8 +41,8 @@
       SimpleFieldType: (string) (len=6) "string"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=6) "schema",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=6) "schema",
     DetectorType: (detectors.Type) (len=5) "rails",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -62,8 +62,8 @@
       SimpleFieldType: (string) (len=6) "number"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=6) "schema",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=6) "schema",
     DetectorType: (detectors.Type) (len=5) "rails",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -83,8 +83,8 @@
       SimpleFieldType: (string) (len=6) "number"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=6) "schema",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=6) "schema",
     DetectorType: (detectors.Type) (len=5) "rails",
     CommitSHA: (string) "",
     Source: (source.Source) {

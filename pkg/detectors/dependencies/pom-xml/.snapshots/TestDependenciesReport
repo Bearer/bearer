@@ -1,6 +1,6 @@
-([]*report.Detection) (len=332) {
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+([]*detections.Detection) (len=332) {
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -18,8 +18,8 @@
       Version: (string) (len=18) "${project.version}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -37,8 +37,8 @@
       Version: (string) (len=35) "${versionx.ant-contrib.ant-contrib}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -56,8 +56,8 @@
       Version: (string) (len=25) "${versionx.com.amazonaws}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -75,8 +75,8 @@
       Version: (string) (len=25) "${versionx.com.amazonaws}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -94,8 +94,8 @@
       Version: (string) (len=25) "${versionx.com.amazonaws}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -113,8 +113,8 @@
       Version: (string) (len=25) "${versionx.com.amazonaws}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -132,8 +132,8 @@
       Version: (string) (len=28) "${versionx.com.bouncycastle}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -151,8 +151,8 @@
       Version: (string) (len=28) "${versionx.com.bouncycastle}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -170,8 +170,8 @@
       Version: (string) (len=44) "${versionx.com.clearspring.analytics.stream}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -189,8 +189,8 @@
       Version: (string) (len=39) "${versionx.org.apache.maven.maven-core}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -208,8 +208,8 @@
       Version: (string) (len=44) "${versionx.org.codehaus.plexus.plexus-utils}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -227,8 +227,8 @@
       Version: (string) (len=37) "${versionx.com.esotericsoftware.kryo}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -246,8 +246,8 @@
       Version: (string) (len=58) "${versionx.com.fasterxml.jackson.core.jackson-annotations}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -265,8 +265,8 @@
       Version: (string) (len=51) "${versionx.com.fasterxml.jackson.core.jackson-core}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -284,8 +284,8 @@
       Version: (string) (len=55) "${versionx.com.fasterxml.jackson.core.jackson-databind}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -303,8 +303,8 @@
       Version: (string) (len=63) "${versionx.com.fasterxml.jackson.modules.jackson-modules-java8}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -322,8 +322,8 @@
       Version: (string) (len=50) "${versionx.com.github.ben-manes.caffeine.caffeine}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -341,8 +341,8 @@
       Version: (string) (len=21) "${version.blockhound}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -360,8 +360,8 @@
       Version: (string) (len=57) "${versionx.com.google.errorprone.error_prone_annotations}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -379,8 +379,8 @@
       Version: (string) (len=34) "${versionx.com.google.guava.guava}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -398,8 +398,8 @@
       Version: (string) (len=38) "${versionx.com.google.testing.compile}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -417,8 +417,8 @@
       Version: (string) (len=29) "${versionx.com.h2database.h2}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -436,8 +436,8 @@
       Version: (string) (len=23) "${versionx.com.ibm.db2}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -455,8 +455,8 @@
       Version: (string) (len=45) "${versionx.com.microsoft.azure.azure-storage}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -474,8 +474,8 @@
       Version: (string) (len=35) "${versionx.com.microsoft.sqlserver}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -493,8 +493,8 @@
       Version: (string) (len=43) "${versionx.com.puppycrawl.tools.checkstyle}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -512,8 +512,8 @@
       Version: (string) (len=39) "${versionx.com.squareup.okhttp3.ohhttp}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -531,8 +531,8 @@
       Version: (string) (len=39) "${versionx.com.squareup.okhttp3.ohhttp}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -550,8 +550,8 @@
       Version: (string) (len=25) "${versionx.com.sun.tools}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -569,8 +569,8 @@
       Version: (string) (len=44) "${versionx.com.thoughtworks.xstream.xstream}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -588,8 +588,8 @@
       Version: (string) (len=47) "${versionx.org.apache.commons.commons-compress}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -607,8 +607,8 @@
       Version: (string) (len=37) "${versionx.commons-dbcp.commons-dbcp}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -626,8 +626,8 @@
       Version: (string) (len=33) "${versionx.commons-io.commons-io}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -645,8 +645,8 @@
       Version: (string) (len=43) "${versionx.commons-logging.commons-logging}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -664,8 +664,8 @@
       Version: (string) (len=42) "${versionx.de.javakaffee.kryo-serializers}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -683,8 +683,8 @@
       Version: (string) (len=34) "${versionx.gnu.getopt.java-getopt}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -702,8 +702,8 @@
       Version: (string) (len=20) "${version.io.agroal}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -721,8 +721,8 @@
       Version: (string) (len=20) "${version.io.agroal}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -740,8 +740,8 @@
       Version: (string) (len=40) "${versionx.io.fabric8.kubernetes-client}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -759,8 +759,8 @@
       Version: (string) (len=21) "${version.io.mashona}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -778,8 +778,8 @@
       Version: (string) (len=26) "${version.smallrye-config}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -797,8 +797,8 @@
       Version: (string) (len=27) "${version.smallrye-metrics}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -816,8 +816,8 @@
       Version: (string) (len=33) "${versionx.io.netty.netty-buffer}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -835,8 +835,8 @@
       Version: (string) (len=32) "${versionx.io.netty.netty-codec}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -854,8 +854,8 @@
       Version: (string) (len=37) "${versionx.io.netty.netty-codec-http}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -873,8 +873,8 @@
       Version: (string) (len=38) "${versionx.io.netty.netty-codec-http2}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -892,8 +892,8 @@
       Version: (string) (len=33) "${versionx.io.netty.netty-common}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -911,8 +911,8 @@
       Version: (string) (len=34) "${versionx.io.netty.netty-handler}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -930,8 +930,8 @@
       Version: (string) (len=35) "${versionx.io.netty.netty-resolver}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -949,8 +949,8 @@
       Version: (string) (len=36) "${versionx.io.netty.netty-transport}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -968,8 +968,8 @@
       Version: (string) (len=49) "${versionx.io.netty.netty-transport-native-epoll}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -987,8 +987,8 @@
       Version: (string) (len=49) "${versionx.io.netty.netty-transport-native-epoll}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -1006,8 +1006,8 @@
       Version: (string) (len=55) "${versionx.io.netty.netty-transport-native-unix-common}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -1025,8 +1025,8 @@
       Version: (string) (len=53) "${versionx.io.protostuff.protostuff-collectionschema}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -1044,8 +1044,8 @@
       Version: (string) (len=41) "${versionx.io.protostuff.protostuff-core}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -1063,8 +1063,8 @@
       Version: (string) (len=44) "${versionx.io.protostuff.protostuff-runtime}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -1082,8 +1082,8 @@
       Version: (string) (len=53) "${versionx.io.protostuff.protostuff-runtime-registry}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -1101,8 +1101,8 @@
       Version: (string) (len=39) "${versionx.io.reactivex.rxjava3.rxjava}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -1120,8 +1120,8 @@
       Version: (string) (len=30) "${version.jakarta.persistence}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -1139,8 +1139,8 @@
       Version: (string) (len=30) "${version.jakarta.transaction}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -1158,8 +1158,8 @@
       Version: (string) (len=39) "${versionx.javax.activation.activation}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -1177,8 +1177,8 @@
       Version: (string) (len=49) "${versionx.javax.annotation.javax.annotation-api}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -1196,8 +1196,8 @@
       Version: (string) (len=33) "${versionx.javax.cache.cache-api}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -1215,8 +1215,8 @@
       Version: (string) (len=35) "${versionx.javax.cache.cache-tests}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -1234,8 +1234,8 @@
       Version: (string) (len=35) "${versionx.javax.cache.cache-tests}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -1253,8 +1253,8 @@
       Version: (string) (len=57) "${versionx.javax.cache.cdi-weld-annotations-test-harness}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -1272,8 +1272,8 @@
       Version: (string) (len=33) "${version.jakarta.enterprise.cdi}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -1291,8 +1291,8 @@
       Version: (string) (len=37) "${versionx.javax.inject.javax.inject}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -1310,8 +1310,8 @@
       Version: (string) (len=23) "${versionx.junit.junit}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -1329,8 +1329,8 @@
       Version: (string) (len=24) "${versionx.junit.junit5}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -1348,8 +1348,8 @@
       Version: (string) (len=24) "${versionx.junit.junit5}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -1367,8 +1367,8 @@
       Version: (string) (len=24) "${versionx.junit.junit5}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -1386,8 +1386,8 @@
       Version: (string) (len=38) "${versionx.mysql.mysql-connector-java}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -1405,8 +1405,8 @@
       Version: (string) (len=27) "${version.jcip-annotations}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -1424,8 +1424,8 @@
       Version: (string) (len=32) "${versionx.net.spy.spymemcached}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -1443,8 +1443,8 @@
       Version: (string) (len=25) "${versionx.org.aesh.aesh}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -1462,8 +1462,8 @@
       Version: (string) (len=35) "${versionx.org.antlr.antlr-runtime}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -1481,8 +1481,8 @@
       Version: (string) (len=30) "${versionx.org.apache.ant.ant}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -1500,8 +1500,8 @@
       Version: (string) (len=32) "${versionx.org.apache.avro.avro}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -1519,8 +1519,8 @@
       Version: (string) (len=44) "${versionx.org.apache.commons.commons-lang3}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -1538,8 +1538,8 @@
       Version: (string) (len=43) "${versionx.org.apache.commons.commons-math}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -1557,8 +1557,8 @@
       Version: (string) (len=48) "${versionx.org.apache.directory.server.apacheds}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -1576,8 +1576,8 @@
       Version: (string) (len=48) "${versionx.org.apache.directory.server.apacheds}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -1595,8 +1595,8 @@
       Version: (string) (len=32) "${versionx.org.apache.mina.mina}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -1614,8 +1614,8 @@
       Version: (string) (len=63) "${versionx.org.apache.geronimo.components.geronimo-transaction}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -1633,8 +1633,8 @@
       Version: (string) (len=46) "${versionx.org.apache.logging.log4j.log4j-api}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -1652,8 +1652,8 @@
       Version: (string) (len=47) "${versionx.org.apache.logging.log4j.log4j-core}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -1671,8 +1671,8 @@
       Version: (string) (len=53) "${versionx.org.apache.logging.log4j.log4j-slf4j-impl}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -1690,8 +1690,8 @@
       Version: (string) (len=46) "${versionx.org.apache.logging.log4j.log4j-jul}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -1709,8 +1709,8 @@
       Version: (string) (len=53) "${versionx.org.apache.lucene.lucene-analyzers-common}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -1728,8 +1728,8 @@
       Version: (string) (len=41) "${versionx.org.apache.lucene.lucene-core}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -1747,8 +1747,8 @@
       Version: (string) (len=42) "${versionx.org.apache.lucene.lucene-facet}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -1766,8 +1766,8 @@
       Version: (string) (len=45) "${versionx.org.apache.lucene.lucene-grouping}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -1785,8 +1785,8 @@
       Version: (string) (len=41) "${versionx.org.apache.lucene.lucene-join}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -1804,8 +1804,8 @@
       Version: (string) (len=41) "${versionx.org.apache.lucene.lucene-misc}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -1823,8 +1823,8 @@
       Version: (string) (len=48) "${versionx.org.apache.lucene.lucene-queryparser}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -1842,8 +1842,8 @@
       Version: (string) (len=66) "${versionx.org.apache.maven.plugin-tools.maven-plugin-annotations}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -1861,8 +1861,8 @@
       Version: (string) (len=37) "${versionx.org.aspectj.aspectjweaver}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -1880,8 +1880,8 @@
       Version: (string) (len=36) "${versionx.org.assertj.assertj-core}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -1899,8 +1899,8 @@
       Version: (string) (len=27) "${versionx.org.dom4j.dom4j}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -1918,8 +1918,8 @@
       Version: (string) (len=34) "${version.microprofile-config-api}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -1937,8 +1937,8 @@
       Version: (string) (len=35) "${version.microprofile-metrics-api}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -1956,8 +1956,8 @@
       Version: (string) (len=43) "${versionx.org.glassfish.jaxb.jaxb-runtime}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -1975,8 +1975,8 @@
       Version: (string) (len=25) "${version.glassfish.json}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -1994,8 +1994,8 @@
       Version: (string) (len=38) "${versionx.org.hamcrest.hamcrest-core}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -2013,8 +2013,8 @@
       Version: (string) (len=41) "${versionx.org.hamcrest.hamcrest-library}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -2032,8 +2032,8 @@
       Version: (string) (len=40) "${versionx.org.hibernate.hibernate-core}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -2051,8 +2051,8 @@
       Version: (string) (len=64) "${versionx.org.hibernate.search.hibernate-search-backend-lucene}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -2070,8 +2070,8 @@
       Version: (string) (len=66) "${versionx.org.hibernate.search.hibernate-search-mapper-pojo-base}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -2089,8 +2089,8 @@
       Version: (string) (len=66) "${versionx.org.hibernate.search.hibernate-search-mapper-pojo-base}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -2108,8 +2108,8 @@
       Version: (string) (len=43) "${versionx.org.hibernate.hibernate-testing}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -2127,8 +2127,8 @@
       Version: (string) (len=62) "${versionx.org.hibernate.common.hibernate-commons-annotations}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -2146,8 +2146,8 @@
       Version: (string) (len=65) "${versionx.org.hibernate.javax.persistence.hibernate-jpa-2.1-api}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -2165,8 +2165,8 @@
       Version: (string) (len=65) "${versionx.org.hibernate.lucene-jbossmodules.lucene-jbossmodules}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -2184,8 +2184,8 @@
       Version: (string) (len=32) "${version.infinispan.arquillian}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -2203,8 +2203,8 @@
       Version: (string) (len=21) "${version.infinispan}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -2222,8 +2222,8 @@
       Version: (string) (len=21) "${version.infinispan}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -2241,8 +2241,8 @@
       Version: (string) (len=21) "${version.infinispan}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -2260,8 +2260,8 @@
       Version: (string) (len=21) "${version.infinispan}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -2279,8 +2279,8 @@
       Version: (string) (len=21) "${version.infinispan}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -2298,8 +2298,8 @@
       Version: (string) (len=21) "${version.infinispan}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -2317,8 +2317,8 @@
       Version: (string) (len=21) "${version.infinispan}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -2336,8 +2336,8 @@
       Version: (string) (len=21) "${version.infinispan}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -2355,8 +2355,8 @@
       Version: (string) (len=21) "${version.infinispan}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -2374,8 +2374,8 @@
       Version: (string) (len=21) "${version.infinispan}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -2393,8 +2393,8 @@
       Version: (string) (len=21) "${version.infinispan}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -2412,8 +2412,8 @@
       Version: (string) (len=18) "${version.console}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -2431,8 +2431,8 @@
       Version: (string) (len=21) "${version.infinispan}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -2450,8 +2450,8 @@
       Version: (string) (len=21) "${version.infinispan}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -2469,8 +2469,8 @@
       Version: (string) (len=21) "${version.infinispan}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -2488,8 +2488,8 @@
       Version: (string) (len=21) "${version.infinispan}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -2507,8 +2507,8 @@
       Version: (string) (len=21) "${version.infinispan}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -2526,8 +2526,8 @@
       Version: (string) (len=21) "${version.infinispan}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -2545,8 +2545,8 @@
       Version: (string) (len=21) "${version.infinispan}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -2564,8 +2564,8 @@
       Version: (string) (len=21) "${version.infinispan}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -2583,8 +2583,8 @@
       Version: (string) (len=21) "${version.infinispan}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -2602,8 +2602,8 @@
       Version: (string) (len=18) "${project.version}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -2621,8 +2621,8 @@
       Version: (string) (len=21) "${version.infinispan}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -2640,8 +2640,8 @@
       Version: (string) (len=21) "${version.infinispan}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -2659,8 +2659,8 @@
       Version: (string) (len=21) "${version.infinispan}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -2678,8 +2678,8 @@
       Version: (string) (len=21) "${version.infinispan}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -2697,8 +2697,8 @@
       Version: (string) (len=21) "${version.infinispan}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -2716,8 +2716,8 @@
       Version: (string) (len=21) "${version.infinispan}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -2735,8 +2735,8 @@
       Version: (string) (len=21) "${version.infinispan}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -2754,8 +2754,8 @@
       Version: (string) (len=21) "${version.infinispan}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -2773,8 +2773,8 @@
       Version: (string) (len=21) "${version.infinispan}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -2792,8 +2792,8 @@
       Version: (string) (len=21) "${version.infinispan}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -2811,8 +2811,8 @@
       Version: (string) (len=21) "${version.infinispan}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -2830,8 +2830,8 @@
       Version: (string) (len=21) "${version.infinispan}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -2849,8 +2849,8 @@
       Version: (string) (len=21) "${version.infinispan}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -2868,8 +2868,8 @@
       Version: (string) (len=21) "${version.infinispan}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -2887,8 +2887,8 @@
       Version: (string) (len=21) "${version.infinispan}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -2906,8 +2906,8 @@
       Version: (string) (len=21) "${version.infinispan}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -2925,8 +2925,8 @@
       Version: (string) (len=21) "${version.infinispan}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -2944,8 +2944,8 @@
       Version: (string) (len=22) "${version.protostream}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -2963,8 +2963,8 @@
       Version: (string) (len=22) "${version.protostream}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -2982,8 +2982,8 @@
       Version: (string) (len=22) "${version.protostream}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -3001,8 +3001,8 @@
       Version: (string) (len=39) "${versionx.org.jacoco.org.jacoco.agent}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -3020,8 +3020,8 @@
       Version: (string) (len=39) "${versionx.org.jboss.jboss-common-core}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -3039,8 +3039,8 @@
       Version: (string) (len=51) "${versionx.org.jboss.jboss-transaction-spi-jakarta}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -3058,8 +3058,8 @@
       Version: (string) (len=67) "${versionx.org.jboss.arquillian.container.arquillian-weld-embedded}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -3077,8 +3077,8 @@
       Version: (string) (len=65) "${versionx.org.jboss.arquillian.junit.arquillian-junit-container}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -3096,8 +3096,8 @@
       Version: (string) (len=67) "${versionx.org.jboss.arquillian.testng.arquillian-testng-container}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -3115,8 +3115,8 @@
       Version: (string) (len=37) "${versionx.org.jboss.byteman.byteman}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -3134,8 +3134,8 @@
       Version: (string) (len=44) "${versionx.org.jboss.byteman.byteman-bmunit}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -3153,8 +3153,8 @@
       Version: (string) (len=45) "${versionx.org.jboss.byteman.byteman-install}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -3172,8 +3172,8 @@
       Version: (string) (len=44) "${versionx.org.jboss.byteman.byteman-submit}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -3191,8 +3191,8 @@
       Version: (string) (len=43) "${versionx.org.jboss.logging.jboss-logging}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -3210,8 +3210,8 @@
       Version: (string) (len=53) "${versionx.org.jboss.logging.jboss-logging-processor}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -3229,8 +3229,8 @@
       Version: (string) (len=51) "${versionx.org.jboss.marshalling.jboss-marshalling}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -3248,8 +3248,8 @@
       Version: (string) (len=56) "${versionx.org.jboss.marshalling.jboss-marshalling-osgi}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -3267,8 +3267,8 @@
       Version: (string) (len=57) "${versionx.org.jboss.marshalling.jboss-marshalling-river}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -3286,8 +3286,8 @@
       Version: (string) (len=39) "${versionx.org.jboss.naming.jnp-client}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -3305,8 +3305,8 @@
       Version: (string) (len=38) "${versionx.org.jboss.naming.jnpserver}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -3324,8 +3324,8 @@
       Version: (string) (len=47) "${versionx.org.jboss.narayana.jta.narayana-jta}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -3343,8 +3343,8 @@
       Version: (string) (len=45) "${versionx.org.jboss.remoting.jboss-remoting}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -3362,8 +3362,8 @@
       Version: (string) (len=46) "${versionx.org.jboss.remotingjmx.remoting-jmx}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -3381,8 +3381,8 @@
       Version: (string) (len=55) "${versionx.org.jboss.security.jboss-negotiation-extras}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -3400,8 +3400,8 @@
       Version: (string) (len=41) "${versionx.org.jboss.shrinkwrap.depchain}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -3419,8 +3419,8 @@
       Version: (string) (len=79) "${versionx.org.jboss.shrinkwrap.descriptors.shrinkwrap-descriptors-impl-javaee}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -3438,8 +3438,8 @@
       Version: (string) (len=65) "${versionx.org.jboss.shrinkwrap.resolver.shrinkwrap-resolver-api}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -3457,8 +3457,8 @@
       Version: (string) (len=71) "${versionx.org.jboss.shrinkwrap.resolver.shrinkwrap-resolver-api-maven}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -3476,8 +3476,8 @@
       Version: (string) (len=70) "${versionx.org.jboss.shrinkwrap.resolver.shrinkwrap-resolver-depchain}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -3495,8 +3495,8 @@
       Version: (string) (len=72) "${versionx.org.jboss.shrinkwrap.resolver.shrinkwrap-resolver-impl-maven}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -3514,8 +3514,8 @@
       Version: (string) (len=80) "${versionx.org.jboss.shrinkwrap.resolver.shrinkwrap-resolver-impl-maven-archive}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -3533,8 +3533,8 @@
       Version: (string) (len=46) "${versionx.org.jboss.spec.jboss-jakartaee-8.0}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -3552,8 +3552,8 @@
       Version: (string) (len=59) "${versionx.org.jboss.spec.javax.ejb.jboss-ejb-api_3.2_spec}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -3571,8 +3571,8 @@
       Version: (string) (len=59) "${versionx.org.jboss.spec.javax.jms.jboss-jms-api_2.0_spec}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -3590,8 +3590,8 @@
       Version: (string) (len=43) "${versionx.org.jboss.threads.jboss-threads}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -3609,8 +3609,8 @@
       Version: (string) (len=35) "${versionx.org.jboss.weld.weld-api}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -3628,8 +3628,8 @@
       Version: (string) (len=35) "${versionx.org.jboss.weld.weld-api}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -3647,8 +3647,8 @@
       Version: (string) (len=41) "${versionx.org.jboss.weld.weld-core-impl}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -3666,8 +3666,8 @@
       Version: (string) (len=42) "${versionx.org.jboss.weld.se.weld-se-core}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -3685,8 +3685,8 @@
       Version: (string) (len=35) "${versionx.org.jboss.xnio.xnio-api}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -3704,8 +3704,8 @@
       Version: (string) (len=35) "${versionx.org.jboss.xnio.xnio-nio}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -3723,8 +3723,8 @@
       Version: (string) (len=31) "${versionx.org.jgroups.jgroups}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -3742,8 +3742,8 @@
       Version: (string) (len=45) "${versionx.org.jgroups.aws.s3.native-s3-ping}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -3761,8 +3761,8 @@
       Version: (string) (len=43) "${versionx.org.jgroups.azure.jgroups-azure}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -3780,8 +3780,8 @@
       Version: (string) (len=53) "${versionx.org.jgroups.kubernetes.jgroups-kubernetes}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -3799,8 +3799,8 @@
       Version: (string) (len=21) "${versionx.org.jsoup}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -3818,8 +3818,8 @@
       Version: (string) (len=57) "${versionx.org.kohsuke.metainf-services.metainf-services}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -3837,8 +3837,8 @@
       Version: (string) (len=41) "${versionx.org.latencyutils.LatencyUtils}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -3856,8 +3856,8 @@
       Version: (string) (len=28) "${versionx.org.mariadb.jdbc}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -3875,8 +3875,8 @@
       Version: (string) (len=35) "${versionx.com.oracle.ojdbc.ojdbc8}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -3894,8 +3894,8 @@
       Version: (string) (len=36) "${versionx.org.mockito.mockito-core}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -3913,8 +3913,8 @@
       Version: (string) (len=35) "${versionx.org.objectweb.howl.howl}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -3932,8 +3932,8 @@
       Version: (string) (len=36) "${versionx.org.openjdk.jmh.jmh-core}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -3951,8 +3951,8 @@
       Version: (string) (len=52) "${versionx.org.openjdk.jmh.jmh-generator-annprocess}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -3970,8 +3970,8 @@
       Version: (string) (len=31) "${versionx.org.openjdk.nashorn}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -3989,8 +3989,8 @@
       Version: (string) (len=26) "${versionx.org.postgresql}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -4008,8 +4008,8 @@
       Version: (string) (len=48) "${versionx.org.reactivestreams.reactive-streams}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -4027,8 +4027,8 @@
       Version: (string) (len=34) "${versionx.org.rocksdb.rocksdbjni}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -4046,8 +4046,8 @@
       Version: (string) (len=44) "${versionx.org.springframework.spring-beans}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -4065,8 +4065,8 @@
       Version: (string) (len=46) "${versionx.org.springframework.spring-context}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -4084,8 +4084,8 @@
       Version: (string) (len=54) "${versionx.org.springframework.spring-context-support}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -4103,8 +4103,8 @@
       Version: (string) (len=43) "${versionx.org.springframework.spring-core}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -4122,8 +4122,8 @@
       Version: (string) (len=49) "${versionx.org.springframework.spring-expression}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -4141,8 +4141,8 @@
       Version: (string) (len=43) "${versionx.org.springframework.spring-jdbc}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -4160,8 +4160,8 @@
       Version: (string) (len=43) "${versionx.org.springframework.spring-test}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -4179,8 +4179,8 @@
       Version: (string) (len=56) "${versionx.org.springframework.boot.spring-boot-starter}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -4198,8 +4198,8 @@
       Version: (string) (len=63) "${versionx.org.springframework.boot.spring-boot-starter-log4j2}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -4217,8 +4217,8 @@
       Version: (string) (len=65) "${versionx.org.springframework.boot.spring-boot-starter-security}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -4236,8 +4236,8 @@
       Version: (string) (len=61) "${versionx.org.springframework.boot.spring-boot-starter-test}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -4255,8 +4255,8 @@
       Version: (string) (len=60) "${versionx.org.springframework.boot.spring-boot-starter-web}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -4274,8 +4274,8 @@
       Version: (string) (len=72) "${versionx.org.springframework.boot.spring-boot-configuration-processor}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -4293,8 +4293,8 @@
       Version: (string) (len=65) "${versionx.org.springframework.boot.spring-boot-starter-actuator}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -4312,8 +4312,8 @@
       Version: (string) (len=72) "${versionx.org.springframework.boot.spring-boot-autoconfigure-processor}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -4331,8 +4331,8 @@
       Version: (string) (len=54) "${versionx.org.springframework.session.spring-session}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -4350,8 +4350,8 @@
       Version: (string) (len=22) "${versionx.micrometer}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -4369,8 +4369,8 @@
       Version: (string) (len=31) "${versionx.org.opentracing.api}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -4388,8 +4388,8 @@
       Version: (string) (len=31) "${versionx.org.opentracing.api}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -4407,8 +4407,8 @@
       Version: (string) (len=42) "${versionx.io.jaegertracing.jaeger-client}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -4426,8 +4426,8 @@
       Version: (string) (len=42) "${versionx.io.jaegertracing.jaeger-client}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -4445,8 +4445,8 @@
       Version: (string) (len=42) "${versionx.io.jaegertracing.jaeger-client}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -4464,8 +4464,8 @@
       Version: (string) (len=50) "${versionx.io.jaegertracing.jaeger-testcontainers}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -4483,8 +4483,8 @@
       Version: (string) (len=45) "${versionx.org.testcontainers.testcontainers}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -4502,8 +4502,8 @@
       Version: (string) (len=29) "${versionx.org.testng.testng}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -4521,8 +4521,8 @@
       Version: (string) (len=42) "${versionx.org.twdata.maven.mojo-executor}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -4540,8 +4540,8 @@
       Version: (string) (len=30) "${version.org.wildfly.openssl}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -4559,8 +4559,8 @@
       Version: (string) (len=30) "${version.org.wildfly.openssl}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -4578,8 +4578,8 @@
       Version: (string) (len=60) "${versionx.org.wildfly.openssl.wildfly-openssl-linux-x86_64}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -4597,8 +4597,8 @@
       Version: (string) (len=61) "${versionx.org.wildfly.openssl.wildfly-openssl-macosx-x86_64}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -4616,8 +4616,8 @@
       Version: (string) (len=62) "${versionx.org.wildfly.openssl.wildfly-openssl-windows-x86_64}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -4635,8 +4635,8 @@
       Version: (string) (len=71) "${versionx.org.wildfly.arquillian.wildfly-arquillian-container-managed}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -4654,8 +4654,8 @@
       Version: (string) (len=45) "${versionx.org.wildfly.common.wildfly-common}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -4673,8 +4673,8 @@
       Version: (string) (len=58) "${versionx.org.wildfly.core.wildfly-core-testsuite-shared}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -4692,8 +4692,8 @@
       Version: (string) (len=30) "${version.org.wildfly.elytron}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -4711,8 +4711,8 @@
       Version: (string) (len=30) "${version.org.wildfly.elytron}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -4730,8 +4730,8 @@
       Version: (string) (len=30) "${version.org.wildfly.elytron}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -4749,8 +4749,8 @@
       Version: (string) (len=30) "${version.org.wildfly.elytron}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -4768,8 +4768,8 @@
       Version: (string) (len=30) "${version.org.wildfly.elytron}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -4787,8 +4787,8 @@
       Version: (string) (len=30) "${version.org.wildfly.elytron}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -4806,8 +4806,8 @@
       Version: (string) (len=30) "${version.org.wildfly.elytron}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -4825,8 +4825,8 @@
       Version: (string) (len=30) "${version.org.wildfly.elytron}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -4844,8 +4844,8 @@
       Version: (string) (len=30) "${version.org.wildfly.elytron}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -4863,8 +4863,8 @@
       Version: (string) (len=30) "${version.org.wildfly.elytron}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -4882,8 +4882,8 @@
       Version: (string) (len=30) "${version.org.wildfly.elytron}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -4901,8 +4901,8 @@
       Version: (string) (len=30) "${version.org.wildfly.elytron}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -4920,8 +4920,8 @@
       Version: (string) (len=30) "${version.org.wildfly.elytron}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -4939,8 +4939,8 @@
       Version: (string) (len=30) "${version.org.wildfly.elytron}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -4958,8 +4958,8 @@
       Version: (string) (len=30) "${version.org.wildfly.elytron}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -4977,8 +4977,8 @@
       Version: (string) (len=30) "${version.org.wildfly.elytron}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -4996,8 +4996,8 @@
       Version: (string) (len=30) "${version.org.wildfly.elytron}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -5015,8 +5015,8 @@
       Version: (string) (len=30) "${version.org.wildfly.elytron}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -5034,8 +5034,8 @@
       Version: (string) (len=30) "${version.org.wildfly.elytron}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -5053,8 +5053,8 @@
       Version: (string) (len=30) "${version.org.wildfly.elytron}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -5072,8 +5072,8 @@
       Version: (string) (len=30) "${version.org.wildfly.elytron}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -5091,8 +5091,8 @@
       Version: (string) (len=30) "${version.org.wildfly.elytron}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -5110,8 +5110,8 @@
       Version: (string) (len=22) "${versionx.org.xerial}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -5129,8 +5129,8 @@
       Version: (string) (len=30) "${versionx.org.yaml.snakeyaml}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -5148,8 +5148,8 @@
       Version: (string) (len=36) "${versionx.software.amazon.ion.java}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -5167,8 +5167,8 @@
       Version: (string) (len=28) "${versionx.sun.jdk.jconsole}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -5186,8 +5186,8 @@
       Version: (string) ""
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -5205,8 +5205,8 @@
       Version: (string) ""
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -5224,8 +5224,8 @@
       Version: (string) ""
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -5243,8 +5243,8 @@
       Version: (string) ""
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -5262,8 +5262,8 @@
       Version: (string) ""
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -5281,8 +5281,8 @@
       Version: (string) ""
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -5300,8 +5300,8 @@
       Version: (string) ""
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -5319,8 +5319,8 @@
       Version: (string) ""
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -5338,8 +5338,8 @@
       Version: (string) ""
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -5357,8 +5357,8 @@
       Version: (string) ""
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -5376,8 +5376,8 @@
       Version: (string) (len=14) "${version.xom}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -5395,8 +5395,8 @@
       Version: (string) (len=17) "${version.antlr3}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -5414,8 +5414,8 @@
       Version: (string) (len=14) "${version.ant}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -5433,8 +5433,8 @@
       Version: (string) (len=14) "${version.ant}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -5452,8 +5452,8 @@
       Version: (string) (len=17) "${version.groovy}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -5471,8 +5471,8 @@
       Version: (string) (len=31) "${versionx.net.sourceforge.pmd}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -5490,8 +5490,8 @@
       Version: (string) (len=31) "${versionx.net.sourceforge.pmd}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -5509,8 +5509,8 @@
       Version: (string) (len=31) "${versionx.net.sourceforge.pmd}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -5528,8 +5528,8 @@
       Version: (string) (len=31) "${versionx.net.sourceforge.pmd}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -5547,8 +5547,8 @@
       Version: (string) (len=43) "${versionx.com.puppycrawl.tools.checkstyle}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -5566,8 +5566,8 @@
       Version: (string) (len=18) "${project.version}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -5585,8 +5585,8 @@
       Version: (string) ""
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -5604,8 +5604,8 @@
       Version: (string) (len=14) "${version.ant}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -5623,8 +5623,8 @@
       Version: (string) (len=22) "${version.ant-contrib}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -5642,8 +5642,8 @@
       Version: (string) (len=21) "${version.ant-nodeps}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -5661,8 +5661,8 @@
       Version: (string) (len=5) "3.8.1"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -5680,8 +5680,8 @@
       Version: (string) (len=11) "3.6.3.Final"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -5699,8 +5699,8 @@
       Version: (string) (len=8) "3.2.5.ga"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -5718,8 +5718,8 @@
       Version: (string) (len=8) "3.3.2.GA"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -5737,8 +5737,8 @@
       Version: (string) (len=3) "2.0"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -5756,8 +5756,8 @@
       Version: (string) (len=6) "1.0.1B"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -5775,8 +5775,8 @@
       Version: (string) (len=8) "1.0.1.GA"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -5794,8 +5794,8 @@
       Version: (string) (len=6) "5.1.14"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -5813,8 +5813,8 @@
       Version: (string) (len=5) "1.6.1"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -5832,8 +5832,8 @@
       Version: (string) (len=5) "1.6.1"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -5851,8 +5851,8 @@
       Version: (string) (len=5) "1.6.1"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -5870,8 +5870,8 @@
       Version: (string) (len=18) "${mybatis.version}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -5889,8 +5889,8 @@
       Version: (string) (len=25) "${mybatis-spring.version}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -5908,8 +5908,8 @@
       Version: (string) (len=29) "${mybatis-freemarker.version}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -5927,8 +5927,8 @@
       Version: (string) (len=27) "${mybatis-velocity.version}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -5946,8 +5946,8 @@
       Version: (string) (len=28) "${mybatis-thymeleaf.version}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -5965,8 +5965,8 @@
       Version: (string) (len=14) "2.1.4-SNAPSHOT"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -5984,8 +5984,8 @@
       Version: (string) (len=14) "2.1.4-SNAPSHOT"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -6003,8 +6003,8 @@
       Version: (string) (len=14) "2.1.4-SNAPSHOT"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -6022,8 +6022,8 @@
       Version: (string) (len=14) "2.1.4-SNAPSHOT"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -6041,8 +6041,8 @@
       Version: (string) (len=22) "${spring-boot.version}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -6060,8 +6060,8 @@
       Version: (string) (len=22) "${spring-boot.version}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -6079,8 +6079,8 @@
       Version: (string) ""
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -6098,8 +6098,8 @@
       Version: (string) (len=18) "${mybatis.version}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -6117,8 +6117,8 @@
       Version: (string) (len=25) "${mybatis-spring.version}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -6136,8 +6136,8 @@
       Version: (string) (len=29) "${mybatis-freemarker.version}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -6155,8 +6155,8 @@
       Version: (string) (len=27) "${mybatis-velocity.version}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -6174,8 +6174,8 @@
       Version: (string) (len=28) "${mybatis-thymeleaf.version}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -6193,8 +6193,8 @@
       Version: (string) (len=14) "2.1.4-SNAPSHOT"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -6212,8 +6212,8 @@
       Version: (string) (len=14) "2.1.4-SNAPSHOT"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -6231,8 +6231,8 @@
       Version: (string) (len=14) "2.1.4-SNAPSHOT"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -6250,8 +6250,8 @@
       Version: (string) (len=14) "2.1.4-SNAPSHOT"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -6269,8 +6269,8 @@
       Version: (string) (len=22) "${spring-boot.version}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -6288,8 +6288,8 @@
       Version: (string) (len=22) "${spring-boot.version}"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "pom-xml",
     CommitSHA: (string) "",
     Source: (source.Source) {

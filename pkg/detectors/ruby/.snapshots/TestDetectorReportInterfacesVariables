@@ -1,6 +1,6 @@
-([]*report.Detection) (len=4) {
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=9) "interface",
+([]*detections.Detection) (len=4) {
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=9) "interface",
     DetectorType: (detectors.Type) (len=4) "ruby",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -35,8 +35,8 @@
       VariableName: (string) ""
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=9) "interface",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=9) "interface",
     DetectorType: (detectors.Type) (len=4) "ruby",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -71,8 +71,8 @@
       VariableName: (string) ""
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=9) "interface",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=9) "interface",
     DetectorType: (detectors.Type) (len=4) "ruby",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -99,8 +99,8 @@
       VariableName: (string) ""
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=9) "interface",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=9) "interface",
     DetectorType: (detectors.Type) (len=4) "ruby",
     CommitSHA: (string) "",
     Source: (source.Source) {

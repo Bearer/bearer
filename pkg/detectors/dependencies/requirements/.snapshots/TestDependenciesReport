@@ -1,6 +1,6 @@
-([]*report.Detection) (len=4) {
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+([]*detections.Detection) (len=4) {
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=16) "requirements.txt",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -18,8 +18,8 @@
       Version: (string) (len=5) "0.9.5"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=16) "requirements.txt",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -37,8 +37,8 @@
       Version: (string) (len=7) "unknown"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=16) "requirements.txt",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -56,8 +56,8 @@
       Version: (string) (len=5) "0.7.1"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=16) "requirements.txt",
     CommitSHA: (string) "",
     Source: (source.Source) {

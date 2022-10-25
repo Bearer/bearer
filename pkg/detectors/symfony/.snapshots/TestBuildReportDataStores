@@ -1,6 +1,6 @@
-([]*report.FrameworkDetection) (len=4) {
-  (*report.FrameworkDetection)({
-    Type: (report.DetectionType) (len=9) "framework",
+([]*detections.FrameworkDetection) (len=4) {
+  (*detections.FrameworkDetection)({
+    Type: (detections.DetectionType) (len=9) "framework",
     DetectorType: (detectors.Type) (len=7) "symfony",
     FrameworkType: (frameworks.Type) (len=8) "database",
     CommitSHA: (string) "",
@@ -17,8 +17,8 @@
       Driver: (string) (len=9) "pdo_mysql"
     }
   }),
-  (*report.FrameworkDetection)({
-    Type: (report.DetectionType) (len=9) "framework",
+  (*detections.FrameworkDetection)({
+    Type: (detections.DetectionType) (len=9) "framework",
     DetectorType: (detectors.Type) (len=7) "symfony",
     FrameworkType: (frameworks.Type) (len=8) "database",
     CommitSHA: (string) "",
@@ -35,8 +35,8 @@
       Driver: (string) (len=9) "pdo_mysql"
     }
   }),
-  (*report.FrameworkDetection)({
-    Type: (report.DetectionType) (len=9) "framework",
+  (*detections.FrameworkDetection)({
+    Type: (detections.DetectionType) (len=9) "framework",
     DetectorType: (detectors.Type) (len=7) "symfony",
     FrameworkType: (frameworks.Type) (len=8) "database",
     CommitSHA: (string) "",
@@ -53,8 +53,8 @@
       Driver: (string) ""
     }
   }),
-  (*report.FrameworkDetection)({
-    Type: (report.DetectionType) (len=9) "framework",
+  (*detections.FrameworkDetection)({
+    Type: (detections.DetectionType) (len=9) "framework",
     DetectorType: (detectors.Type) (len=7) "symfony",
     FrameworkType: (frameworks.Type) (len=8) "database",
     CommitSHA: (string) "",

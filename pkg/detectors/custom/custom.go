@@ -233,7 +233,7 @@ func (detector *Detector) extractData(captures []parser.Captures, rule config.Co
 			}
 		}
 
-		parserdatatype.NewCompleteExport(report, detectors.DetectorCustom, idGenerator, forExport)
+		parserdatatype.NewCompleteExport(report, detectors.Type(rule.RuleName), idGenerator, forExport)
 	}
 	return nil
 }

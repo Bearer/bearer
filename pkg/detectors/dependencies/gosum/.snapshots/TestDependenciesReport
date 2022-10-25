@@ -1,6 +1,6 @@
-([]*report.Detection) (len=68) {
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+([]*detections.Detection) (len=68) {
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "gosum",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -18,8 +18,8 @@
       Version: (string) (len=6) "v0.3.1"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "gosum",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -37,8 +37,8 @@
       Version: (string) (len=6) "v2.3.0"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "gosum",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -56,8 +56,8 @@
       Version: (string) (len=7) "v22.3.2"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "gosum",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -75,8 +75,8 @@
       Version: (string) (len=6) "v1.1.0"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "gosum",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -94,8 +94,8 @@
       Version: (string) (len=6) "v1.1.1"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "gosum",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -113,8 +113,8 @@
       Version: (string) (len=7) "v0.66.0"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "gosum",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -132,8 +132,8 @@
       Version: (string) (len=6) "v1.0.0"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "gosum",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -151,8 +151,8 @@
       Version: (string) (len=6) "v2.7.1"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "gosum",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -170,8 +170,8 @@
       Version: (string) (len=6) "v1.2.1"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "gosum",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -189,8 +189,8 @@
       Version: (string) (len=7) "v0.19.5"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "gosum",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -208,8 +208,8 @@
       Version: (string) (len=7) "v0.19.5"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "gosum",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -227,8 +227,8 @@
       Version: (string) (len=6) "v5.0.4"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "gosum",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -246,8 +246,8 @@
       Version: (string) (len=6) "v1.8.0"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "gosum",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -265,8 +265,8 @@
       Version: (string) (len=6) "v0.1.0"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "gosum",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -284,8 +284,8 @@
       Version: (string) (len=6) "v1.1.1"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "gosum",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -303,8 +303,8 @@
       Version: (string) (len=6) "v0.1.0"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "gosum",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -322,8 +322,8 @@
       Version: (string) (len=6) "v1.8.5"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "gosum",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -341,8 +341,8 @@
       Version: (string) (len=34) "v0.0.0-20190614124828-94de47d64c63"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "gosum",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -360,8 +360,8 @@
       Version: (string) (len=34) "v0.0.0-20190626092158-b2ccc519800e"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "gosum",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -379,8 +379,8 @@
       Version: (string) (len=6) "v0.9.1"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "gosum",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -398,8 +398,8 @@
       Version: (string) (len=6) "v1.0.0"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "gosum",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -417,8 +417,8 @@
       Version: (string) (len=6) "v1.2.1"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "gosum",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -436,8 +436,8 @@
       Version: (string) (len=7) "v1.23.0"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "gosum",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -455,8 +455,8 @@
       Version: (string) (len=34) "v0.0.0-20201211210132-54b8a0bf510f"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "gosum",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -474,8 +474,8 @@
       Version: (string) (len=34) "v0.0.0-20210922091224-7d35f700adf0"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "gosum",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -493,8 +493,8 @@
       Version: (string) (len=34) "v0.0.0-20211116060328-db7fde9b5e82"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "gosum",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -512,8 +512,8 @@
       Version: (string) (len=6) "v0.1.0"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "gosum",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -531,8 +531,8 @@
       Version: (string) (len=6) "v1.3.0"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "gosum",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -550,8 +550,8 @@
       Version: (string) (len=6) "v1.4.0"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "gosum",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -569,8 +569,8 @@
       Version: (string) (len=6) "v1.5.1"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "gosum",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -588,8 +588,8 @@
       Version: (string) (len=6) "v1.6.1"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "gosum",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -607,8 +607,8 @@
       Version: (string) (len=6) "v1.7.0"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "gosum",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -626,8 +626,8 @@
       Version: (string) (len=6) "v1.2.1"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "gosum",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -645,8 +645,8 @@
       Version: (string) (len=34) "v0.0.0-20190308221718-c2843e01d9a2"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "gosum",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -664,8 +664,8 @@
       Version: (string) (len=34) "v0.0.0-20191011191535-87dc89f01550"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "gosum",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -683,8 +683,8 @@
       Version: (string) (len=34) "v0.0.0-20200622213623-75b288015ac9"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "gosum",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -702,8 +702,8 @@
       Version: (string) (len=6) "v0.3.0"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "gosum",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -721,8 +721,8 @@
       Version: (string) (len=6) "v0.4.2"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "gosum",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -740,8 +740,8 @@
       Version: (string) (len=34) "v0.0.0-20190404232315-eb5bcb51f2a3"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "gosum",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -759,8 +759,8 @@
       Version: (string) (len=34) "v0.0.0-20190620200207-3b0461eec859"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "gosum",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -778,8 +778,8 @@
       Version: (string) (len=34) "v0.0.0-20201021035429-f5854403a974"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "gosum",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -797,8 +797,8 @@
       Version: (string) (len=34) "v0.0.0-20210614182718-04defd469f4e"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "gosum",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -816,8 +816,8 @@
       Version: (string) (len=34) "v0.0.0-20190423024810-112230192c58"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "gosum",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -835,8 +835,8 @@
       Version: (string) (len=34) "v0.0.0-20201020160332-67f06af15bc9"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "gosum",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -854,8 +854,8 @@
       Version: (string) (len=34) "v0.0.0-20190215142949-d0b11bdaac8a"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "gosum",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -873,8 +873,8 @@
       Version: (string) (len=34) "v0.0.0-20190412213103-97732733099d"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "gosum",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -892,8 +892,8 @@
       Version: (string) (len=34) "v0.0.0-20200930185726-fdedc70b468f"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "gosum",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -911,8 +911,8 @@
       Version: (string) (len=34) "v0.0.0-20201119102817-f84b799fce68"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "gosum",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -930,8 +930,8 @@
       Version: (string) (len=34) "v0.0.0-20210119212857-b64e53b001e4"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "gosum",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -949,8 +949,8 @@
       Version: (string) (len=34) "v0.0.0-20210423082822-04245dca01da"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "gosum",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -968,8 +968,8 @@
       Version: (string) (len=34) "v0.0.0-20201126162022-7de9c90e9dd1"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "gosum",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -987,8 +987,8 @@
       Version: (string) (len=6) "v0.3.0"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "gosum",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -1006,8 +1006,8 @@
       Version: (string) (len=6) "v0.3.3"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "gosum",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -1025,8 +1025,8 @@
       Version: (string) (len=6) "v0.3.6"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "gosum",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -1044,8 +1044,8 @@
       Version: (string) (len=34) "v0.0.0-20180917221912-90fa682c2a6e"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "gosum",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -1063,8 +1063,8 @@
       Version: (string) (len=34) "v0.0.0-20191119224855-298f0cb1881e"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "gosum",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -1082,8 +1082,8 @@
       Version: (string) (len=6) "v0.1.0"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "gosum",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -1101,8 +1101,8 @@
       Version: (string) (len=34) "v0.0.0-20190717185122-a985d3407aa7"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "gosum",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -1120,8 +1120,8 @@
       Version: (string) (len=34) "v0.0.0-20191011141410-1b5146add898"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "gosum",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -1139,8 +1139,8 @@
       Version: (string) (len=34) "v0.0.0-20200804184101-5ec99f83aff1"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "gosum",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -1158,8 +1158,8 @@
       Version: (string) (len=34) "v0.0.0-20161208181325-20d25e280405"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "gosum",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -1177,8 +1177,8 @@
       Version: (string) (len=34) "v1.0.0-20180628173108-788fd7840127"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "gosum",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -1196,8 +1196,8 @@
       Version: (string) (len=6) "v2.2.2"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "gosum",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -1215,8 +1215,8 @@
       Version: (string) (len=6) "v2.2.8"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "gosum",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -1234,8 +1234,8 @@
       Version: (string) (len=6) "v2.3.0"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "gosum",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -1253,8 +1253,8 @@
       Version: (string) (len=6) "v2.4.0"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "gosum",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -1272,8 +1272,8 @@
       Version: (string) (len=34) "v3.0.0-20200313102051-9f266ea9e77c"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "gosum",
     CommitSHA: (string) "",
     Source: (source.Source) {

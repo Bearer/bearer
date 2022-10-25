@@ -7,7 +7,6 @@ import (
 
 type ClassifiedDatatype struct {
 	*datatype.DataType
-	Properties     map[string]ClassifiedDatatype
 	Classification Classification `json:"classification"`
 }
 
@@ -37,22 +36,22 @@ func (classifier *Classifier) Classify(data DataTypeDetection) (*ClassifiedDatat
 	return &ClassifiedDatatype{
 		DataType: &datatype.DataType{
 			UUID: "1",
+			Properties: map[string]datatype.DataTypable{
+				"address": ClassifiedDatatype{
+					Classification: Classification{
+						Name: "personal data",
+					},
+					DataType: &datatype.DataType{
+						UUID: "2",
+					},
+				},
+				"age": ClassifiedDatatype{
+					Classification: Classification{},
+				},
+			},
 		},
 		Classification: Classification{
 			Name: "personal data",
-		},
-		Properties: map[string]ClassifiedDatatype{
-			"address": {
-				Classification: Classification{
-					Name: "personal data",
-				},
-				DataType: &datatype.DataType{
-					UUID: "2",
-				},
-			},
-			"age": {
-				Classification: Classification{},
-			},
 		},
 	}, nil
 }

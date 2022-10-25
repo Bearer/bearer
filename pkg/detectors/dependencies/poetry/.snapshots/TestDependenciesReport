@@ -1,6 +1,6 @@
-([]*report.Detection) (len=19) {
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+([]*detections.Detection) (len=19) {
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=6) "poetry",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -18,8 +18,8 @@
       Version: (string) (len=5) "1.3.0"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=6) "poetry",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -37,8 +37,8 @@
       Version: (string) (len=6) "19.1.0"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=6) "poetry",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -56,8 +56,8 @@
       Version: (string) (len=5) "0.4.1"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=6) "poetry",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -75,8 +75,8 @@
       Version: (string) (len=5) "2.2.1"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=6) "poetry",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -94,8 +94,8 @@
       Version: (string) (len=5) "3.8.2"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=6) "poetry",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -113,8 +113,8 @@
       Version: (string) (len=4) "0.23"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=6) "poetry",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -132,8 +132,8 @@
       Version: (string) (len=5) "7.2.0"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=6) "poetry",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -151,8 +151,8 @@
       Version: (string) (len=4) "19.2"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=6) "poetry",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -170,8 +170,8 @@
       Version: (string) (len=6) "0.13.0"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=6) "poetry",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -189,8 +189,8 @@
       Version: (string) (len=5) "1.8.0"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=6) "poetry",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -208,8 +208,8 @@
       Version: (string) (len=5) "2.4.2"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=6) "poetry",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -227,8 +227,8 @@
       Version: (string) (len=5) "4.6.5"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=6) "poetry",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -246,8 +246,8 @@
       Version: (string) (len=6) "2019.2"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=6) "poetry",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -265,8 +265,8 @@
       Version: (string) (len=5) "2.5.2"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=6) "poetry",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -284,8 +284,8 @@
       Version: (string) (len=6) "1.12.0"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=6) "poetry",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -303,8 +303,8 @@
       Version: (string) (len=5) "0.3.0"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=6) "poetry",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -322,8 +322,8 @@
       Version: (string) (len=5) "0.1.7"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=6) "poetry",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -341,8 +341,8 @@
       Version: (string) (len=6) "0.15.2"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=6) "poetry",
     CommitSHA: (string) "",
     Source: (source.Source) {
