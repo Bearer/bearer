@@ -4,6 +4,7 @@ import (
 	"embed"
 	"encoding/json"
 	"log"
+	"regexp"
 
 	"github.com/google/uuid"
 )
@@ -53,24 +54,30 @@ type DataType struct {
 }
 
 type DataTypeClassificationPattern struct {
-	Id                        int       `json:"id"`
-	DataTypeUUID              uuid.UUID `json:"data_type_uuid"`
-	IncludeRegexp             string    `json:"include_regexp,omitempty"`
-	ExcludeRegexp             string    `json:"exclude_regexp,omitempty"`
-	IncludeTypes              []string  `json:"include_types,omitempty"`
-	ExcludeTypes              []string  `json:"exclude_types,omitempty"`
-	FriendlyName              string    `json:"friendly_name"`
-	HealthContextDataTypeUUID string    `json:"health_context_data_type_uuid,omitempty"`
-	MatchColumn               bool      `json:"match_column"`
-	MatchObject               bool      `json:"match_object"`
-	ObjectType                []string  `json:"object_type"`
+	Id                        int                 `json:"id"`
+	DataTypeUUID              uuid.UUID           `json:"data_type_uuid,omitempty"`
+	IncludeRegexp             string              `json:"include_regexp"`
+	IncludeRegexpMatcher      *regexp.Regexp      `json:"include_regexp_matcher"`
+	ExcludeRegexp             string              `json:"exclude_regexp,omitempty"`
+	ExcludeRegexpMatcher      *regexp.Regexp      `json:"exclude_regexp_matcher"`
+	ExcludeTypes              []string            `json:"exclude_types"`
+	ExcludeTypesMapping       map[string]struct{} `json:"exclude_types_mapping"`
+	FriendlyName              string              `json:"friendly_name"`
+	HealthContextDataTypeUUID string              `json:"health_context_data_type_uuid,omitempty"`
+	MatchColumn               bool                `json:"match_column"`
+	MatchObject               bool                `json:"match_object"`
+	ObjectType                []string            `json:"object_type"`
+	ObjectTypeMapping         map[string]struct{} `json:"object_types_mapping"`
 }
 
 type KnownPersonObjectPattern struct {
-	Id              int    `json:"id"`
-	IncludeRegexp   string `json:"include_regexp,omitempty"`
-	Category        string `json:"category"`
-	ActAsIdentifier bool   `json:"act_as_identifier"`
+	Id                   int            `json:"id"`
+	IncludeRegexp        string         `json:"include_regexp"`
+	IncludeRegexpMatcher *regexp.Regexp `json:"include_regexp_matcher"`
+	ExcludeRegexp        string         `json:"exclude_regexp,omitempty"`
+	ExcludeRegexpMatcher *regexp.Regexp `json:"exclude_regexp_matcher"`
+	Category             string         `json:"category"`
+	ActAsIdentifier      bool           `json:"act_as_identifier"`
 }
 
 func Default() DefaultDB {
@@ -157,6 +164,28 @@ func defaultDataTypeClassificationPatterns() []DataTypeClassificationPattern {
 			handleError(err)
 		}
 
+		// compile regexp matchers
+		dataTypeClassificationPattern.IncludeRegexpMatcher, err = regexp.Compile(dataTypeClassificationPattern.IncludeRegexp)
+		if err != nil {
+			handleError(err)
+		}
+		if dataTypeClassificationPattern.ExcludeRegexp != "" {
+			dataTypeClassificationPattern.ExcludeRegexpMatcher, err = regexp.Compile(dataTypeClassificationPattern.ExcludeRegexp)
+			if err != nil {
+				handleError(err)
+			}
+		}
+
+		// add mappings for performant inclusion checks
+		dataTypeClassificationPattern.ExcludeTypesMapping = map[string]struct{}{}
+		for _, excludeType := range dataTypeClassificationPattern.ExcludeTypes {
+			dataTypeClassificationPattern.ExcludeTypesMapping[excludeType] = struct{}{}
+		}
+		dataTypeClassificationPattern.ObjectTypeMapping = map[string]struct{}{}
+		for _, objectType := range dataTypeClassificationPattern.ObjectType {
+			dataTypeClassificationPattern.ObjectTypeMapping[objectType] = struct{}{}
+		}
+
 		dataTypeClassificationPatterns = append(dataTypeClassificationPatterns, dataTypeClassificationPattern)
 	}
 
@@ -182,6 +211,18 @@ func defaultKnownPersonObjectPatterns() []KnownPersonObjectPattern {
 		err = json.Unmarshal(rawBytes, &knownPersonObjectPattern)
 		if err != nil {
 			handleError(err)
+		}
+
+		// compile regexp matchers
+		knownPersonObjectPattern.IncludeRegexpMatcher, err = regexp.Compile(knownPersonObjectPattern.IncludeRegexp)
+		if err != nil {
+			handleError(err)
+		}
+		if knownPersonObjectPattern.ExcludeRegexp != "" {
+			knownPersonObjectPattern.ExcludeRegexpMatcher, err = regexp.Compile(knownPersonObjectPattern.ExcludeRegexp)
+			if err != nil {
+				handleError(err)
+			}
 		}
 
 		knownPersonObjectPatterns = append(knownPersonObjectPatterns, knownPersonObjectPattern)
