@@ -60,7 +60,6 @@ func (monitor *Monitor) Close() {
 }
 
 func (monitor *Monitor) ScheduleTask(scanRequest workertype.ProcessRequest) *Task {
-	scanRequest.CustomDetectorConfig = monitor.config.CustomDetector.RulesConfig
 	task := &Task{
 		Definition: scanRequest,
 		Done:       make(chan *workertype.ProcessResponse, 1),

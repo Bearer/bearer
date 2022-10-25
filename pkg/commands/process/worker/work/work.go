@@ -2,9 +2,12 @@ package work
 
 import (
 	"time"
-
-	config "github.com/bearer/curio/pkg/commands/process/settings"
 )
+
+type StatusResponse struct {
+	ClassifierError     string
+	CustomDetectorError string
+}
 
 type ProcessResponse struct {
 	Error error
@@ -21,7 +24,6 @@ type ProcessRequest struct {
 	Files                  []File
 	FilePath               string
 	BlameRevisionsFilePath string
-	CustomDetectorConfig   *config.RulesConfig
 }
 
 type File struct {

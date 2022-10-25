@@ -74,7 +74,7 @@ func (worker *Worker) Start() {
 		return
 	}
 
-	output.PlainLogger(os.Stderr).Msgf("Target %s", worker.config.Scan.Target)
+	output.StdErrLogger().Msgf("Target %s", worker.config.Scan.Target)
 	bar := output.GetProgressBar(len(worker.FileList), worker.config)
 
 	reportFile, err := os.Create(worker.task.Definition.FilePath)

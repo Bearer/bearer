@@ -15,14 +15,15 @@ import (
 )
 
 func Start(port string, config config.Config) error {
+	response := work.StatusResponse{}
 	classifier, err := classsification.NewClassifier(&classsification.Config{Config: config})
 	if err != nil {
-		return err
+		response.ClassifierError = err.Error()
 	}
 
-	err = detectors.SetupCustomDetector(config.CustomDetector.RulesConfig)
+	err = detectors.SetupCustomDetector(config.CustomDetector)
 	if err != nil {
-		return err
+		response.CustomDetectorError = err.Error()
 	}
 
 	err = http.ListenAndServe(`localhost`+port, http.HandlerFunc(func(rw http.ResponseWriter, r *http.Request) {
@@ -30,18 +31,6 @@ func Start(port string, config config.Config) error {
 
 		switch r.URL.Path {
 		case work.RouteStatus:
-			var scanRequest work.ProcessRequest
-			json.NewDecoder(r.Body).Decode(&scanRequest) //nolint:all,errcheck
-
-			response := &work.ProcessResponse{}
-
-			if scanRequest.CustomDetectorConfig != nil {
-				err := detectors.SetupCustomDetector(scanRequest.CustomDetectorConfig)
-				if err != nil {
-					response.Error = err
-				}
-			}
-
 			json.NewEncoder(rw).Encode(response) //nolint:all,errcheck
 		case work.RouteProcess:
 			runtime.GC()

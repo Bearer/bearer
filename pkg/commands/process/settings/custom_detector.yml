@@ -1,1 +1,6 @@
-rules:
+detect_ruby_logger:
+  patterns:
+    - |
+      log.info(<$ARGUMENT>)
+  languages:
+    - ruby

@@ -54,12 +54,12 @@ type runner struct {
 func NewRunner(ctx context.Context, opts flag.Options) (Runner, error) {
 	r := &runner{}
 
-	r.balancer = balancer.New(settings.Config{
-		Worker:         opts.WorkerOptions,
-		CustomDetector: settings.DefaultCustomDetector(),
-		Scan:           opts.ScanOptions,
-	})
+	scanSettings, err := settings.FromOptions(opts)
+	if err != nil {
+		return r, err
+	}
 
+	r.balancer = balancer.New(scanSettings)
 	r.reportPath = tmpfile.Create(os.TempDir(), ".jsonl")
 
 	return r, nil
@@ -91,8 +91,7 @@ func (r *runner) scanArtifact(ctx context.Context, opts flag.Options) (types.Rep
 			PreviousCommitSHA: "",
 			CommitSHA:         "",
 		},
-		FilePath:             r.reportPath,
-		CustomDetectorConfig: nil,
+		FilePath: r.reportPath,
 	})
 	result := <-task.Done
 

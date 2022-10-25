@@ -5,6 +5,7 @@ import (
 	"path/filepath"
 	"runtime/debug"
 
+	"github.com/bearer/curio/pkg/commands/process/settings"
 	"github.com/bearer/curio/pkg/detectors/beego"
 	"github.com/bearer/curio/pkg/detectors/csharp"
 	"github.com/bearer/curio/pkg/detectors/custom"
@@ -30,7 +31,6 @@ import (
 	"github.com/bearer/curio/pkg/detectors/typescript"
 	"github.com/bearer/curio/pkg/util/file"
 
-	"github.com/bearer/curio/pkg/commands/process/settings"
 	"github.com/bearer/curio/pkg/detectors/spring"
 	"github.com/bearer/curio/pkg/detectors/sql"
 	"github.com/bearer/curio/pkg/detectors/symfony"
@@ -55,9 +55,9 @@ type activeDetector struct {
 
 var customDetector = InitializedDetector{reportdetectors.DetectorCustom, custom.New(&nodeid.UUIDGenerator{})}
 
-func SetupCustomDetector(config *settings.RulesConfig) error {
+func SetupCustomDetector(config map[string]settings.Rule) error {
 	detector := customDetector.Detector.(*custom.Detector)
-	return detector.CompileRules(*config)
+	return detector.CompileRules(config)
 }
 
 func Registrations() []InitializedDetector {

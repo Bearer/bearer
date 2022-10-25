@@ -1,7 +1,7 @@
 [
 	{
 		"type": "custom",
-		"detector_type": "corruptible_function_detector",
+		"detector_type": "create_sql_function_detector",
 		"commit_sha": "",
 		"source": {
 			"filename": "structure.sql",
@@ -22,7 +22,7 @@
 	},
 	{
 		"type": "custom",
-		"detector_type": "corruptible_function_detector",
+		"detector_type": "create_sql_function_detector",
 		"commit_sha": "",
 		"source": {
 			"filename": "structure.sql",
@@ -43,7 +43,7 @@
 	},
 	{
 		"type": "custom",
-		"detector_type": "corruptible_function_detector",
+		"detector_type": "create_sql_function_detector",
 		"commit_sha": "",
 		"source": {
 			"filename": "structure.sql",
@@ -64,7 +64,7 @@
 	},
 	{
 		"type": "custom",
-		"detector_type": "corruptible_function_detector",
+		"detector_type": "create_sql_function_detector",
 		"commit_sha": "",
 		"source": {
 			"filename": "structure.sql",
@@ -85,7 +85,7 @@
 	},
 	{
 		"type": "custom",
-		"detector_type": "corruptible_function_detector",
+		"detector_type": "create_sql_function_detector",
 		"commit_sha": "",
 		"source": {
 			"filename": "structure.sql",
@@ -106,7 +106,7 @@
 	},
 	{
 		"type": "custom",
-		"detector_type": "corruptible_function_detector",
+		"detector_type": "create_sql_function_detector",
 		"commit_sha": "",
 		"source": {
 			"filename": "structure.sql",

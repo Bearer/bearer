@@ -4,6 +4,7 @@ import (
 	_ "embed"
 
 	"github.com/rs/zerolog/log"
+	"github.com/spf13/viper"
 	"gopkg.in/yaml.v2"
 
 	"github.com/bearer/curio/pkg/flag"
@@ -12,15 +13,7 @@ import (
 type Config struct {
 	Worker         flag.WorkerOptions `json:"worker"`
 	Scan           flag.ScanOptions   `json:"scan"`
-	CustomDetector CustomDetector     `json:"custom_detector"`
-}
-
-type CustomDetector struct {
-	RulesConfig *RulesConfig `json:"rules_config"`
-}
-
-type RulesConfig struct {
-	Rules map[string]Rule `json:"rules"`
+	CustomDetector map[string]Rule    `json:"custom_detector"`
 }
 
 type Rule struct {
@@ -40,15 +33,31 @@ type MetaVar struct {
 //go:embed custom_detector.yml
 var customDetector []byte
 
-func DefaultCustomDetector() CustomDetector {
-	var rules RulesConfig
+var CustomDetectorKey string = "scan.custom_detector"
+
+func FromOptions(opts flag.Options) (Config, error) {
+	rules := DefaultCustomDetector()
+	if viper.IsSet(CustomDetectorKey) {
+		err := viper.UnmarshalKey(CustomDetectorKey, &rules)
+		if err != nil {
+			return Config{}, err
+		}
+	}
+
+	return Config{
+		Worker:         opts.WorkerOptions,
+		CustomDetector: rules,
+		Scan:           opts.ScanOptions,
+	}, nil
+}
+
+func DefaultCustomDetector() map[string]Rule {
+	var rules map[string]Rule
 
 	err := yaml.Unmarshal(customDetector, &rules)
 	if err != nil {
 		log.Fatal().Msgf("failed to unmarshal database file %e", err)
 	}
 
-	return CustomDetector{
-		RulesConfig: &rules,
-	}
+	return rules
 }

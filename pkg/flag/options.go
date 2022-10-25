@@ -29,8 +29,8 @@ type Flag struct {
 	// Usage explains how to use the flag.
 	Usage string
 
-	// Persistent represents if the flag is persistent
-	Persistent bool
+	// DisableInConfig represents if flag should be present in config
+	DisableInConfig bool
 
 	// Deprecated represents if the flag is deprecated
 	Deprecated bool
@@ -47,6 +47,7 @@ type Flags struct {
 	ProcessFlagGroup *ProcessFlagGroup
 	ScanFlagGroup    *ScanFlagGroup
 	WorkerFlagGroup  *WorkerFlagGroup
+	GeneralFlagGroup *GeneralFlagGroup
 }
 
 // Options holds all the runtime configuration
@@ -55,21 +56,14 @@ type Options struct {
 	ReportOptions
 	WorkerOptions
 	ScanOptions
-
-	// Curio's version, not populated via CLI flags
-	AppVersion string
+	GeneralOptions
 }
 
 func addFlag(cmd *cobra.Command, flag *Flag) {
 	if flag == nil || flag.Name == "" {
 		return
 	}
-	var flags *pflag.FlagSet
-	if flag.Persistent {
-		flags = cmd.PersistentFlags()
-	} else {
-		flags = cmd.Flags()
-	}
+	flags := cmd.Flags()
 
 	switch v := flag.Value.(type) {
 	case int:
@@ -93,14 +87,9 @@ func bind(cmd *cobra.Command, flag *Flag) error {
 		viper.SetDefault(flag.ConfigName, flag.Value)
 		return nil
 	}
-	if flag.Persistent {
-		if err := viper.BindPFlag(flag.ConfigName, cmd.PersistentFlags().Lookup(flag.Name)); err != nil {
-			return err
-		}
-	} else {
-		if err := viper.BindPFlag(flag.ConfigName, cmd.Flags().Lookup(flag.Name)); err != nil {
-			return err
-		}
+
+	if err := viper.BindPFlag(flag.ConfigName, cmd.Flags().Lookup(flag.Name)); err != nil {
+		return err
 	}
 	// We don't use viper.AutomaticEnv, so we need to add a prefix manually here.
 	if err := viper.BindEnv(flag.ConfigName, strings.ToUpper("curio_"+strings.ReplaceAll(flag.Name, "-", "_"))); err != nil {
@@ -114,6 +103,7 @@ func getString(flag *Flag) string {
 	if flag == nil {
 		return ""
 	}
+
 	return viper.GetString(flag.ConfigName)
 }
 
@@ -174,6 +164,9 @@ func (f *Flags) groups() []FlagGroup {
 	if f.ReportFlagGroup != nil {
 		groups = append(groups, f.ReportFlagGroup)
 	}
+	if f.GeneralFlagGroup != nil {
+		groups = append(groups, f.GeneralFlagGroup)
+	}
 
 	return groups
 }
@@ -213,11 +206,23 @@ func (f *Flags) Usages(cmd *cobra.Command) string {
 }
 
 func (f *Flags) Bind(cmd *cobra.Command) error {
+	return f.bind(cmd, false)
+}
+
+func (f *Flags) BindForConfigInit(cmd *cobra.Command) error {
+	return f.bind(cmd, true)
+}
+
+func (f *Flags) bind(cmd *cobra.Command, supportIgnoreConfig bool) error {
 	for _, group := range f.groups() {
 		if group == nil {
 			continue
 		}
 		for _, flag := range group.Flags() {
+			if supportIgnoreConfig && flag.DisableInConfig {
+				continue
+			}
+
 			if err := bind(cmd, flag); err != nil {
 				return xerrors.Errorf("flag groups: %w", err)
 			}
@@ -227,11 +232,9 @@ func (f *Flags) Bind(cmd *cobra.Command) error {
 }
 
 // nolint: gocyclo
-func (f *Flags) ToOptions(appVersion string, args []string, output io.Writer) (Options, error) {
+func (f *Flags) ToOptions(args []string, output io.Writer) (Options, error) {
 	var err error
-	opts := Options{
-		AppVersion: appVersion,
-	}
+	opts := Options{}
 
 	if f.RepoFlagGroup != nil {
 		opts.RepoOptions = f.RepoFlagGroup.ToOptions()
@@ -250,6 +253,10 @@ func (f *Flags) ToOptions(appVersion string, args []string, output io.Writer) (O
 		if err != nil {
 			return Options{}, xerrors.Errorf("scan flag error: %w", err)
 		}
+	}
+
+	if f.GeneralFlagGroup != nil {
+		opts.GeneralOptions = f.GeneralFlagGroup.ToOptions()
 	}
 
 	return opts, nil
