@@ -2,50 +2,37 @@
   {
     "name": "Jumio",
     "type": "external_service",
-    "urls": [
-      "https://jumio.com/api/",
-      "https://netverify.com/api"
-    ],
+    "urls": ["https://jumio.com/api/", "https://netverify.com/api"],
     "packages": []
   },
   {
     "name": "Fountain",
     "type": "external_service",
-    "urls": [
-      "https://api.fountain.com"
-    ],
+    "urls": ["https://api.fountain.com"],
     "packages": []
   },
   {
     "name": "Ocrolus",
     "type": "external_service",
-    "urls": [
-      "https://api.ocrolus.com"
-    ],
+    "urls": ["https://api.ocrolus.com"],
     "packages": []
   },
   {
     "name": "Cirrus Ci",
     "type": "external_service",
-    "urls": [
-      "https://api.cirrus-ci.com"
-    ],
+    "urls": ["https://api.cirrus-ci.com"],
     "packages": []
   },
   {
     "name": "Appveyor",
     "type": "external_service",
-    "urls": [
-      "https://ci.appveyor.com/api"
-    ],
+    "urls": ["https://ci.appveyor.com/api"],
     "packages": []
   },
   {
     "name": "Amc Theater",
     "type": "external_service",
-    "urls": [
-      "https://api.amctheatres.com"
-    ],
+    "urls": ["https://api.amctheatres.com"],
     "packages": []
   },
   {
@@ -94,17 +81,13 @@
   {
     "name": "Debounce",
     "type": "external_service",
-    "urls": [
-      "https://api.debounce.io"
-    ],
+    "urls": ["https://api.debounce.io"],
     "packages": []
   },
   {
     "name": "Iris Openbooks (FreeAgent)",
     "type": "external_service",
-    "urls": [
-      "https://admin.irisopenbooks.co.uk"
-    ],
+    "urls": ["https://admin.irisopenbooks.co.uk"],
     "packages": []
   },
   {
@@ -142,17 +125,13 @@
   {
     "name": "Gouv.fr Data",
     "type": "external_service",
-    "urls": [
-      "https://data.gouv.fr/api"
-    ],
+    "urls": ["https://data.gouv.fr/api"],
     "packages": []
   },
   {
     "name": "Appbase",
     "type": "external_service",
-    "urls": [
-      "https://api.appbase.io"
-    ],
+    "urls": ["https://api.appbase.io"],
     "packages": []
   },
   {
@@ -168,17 +147,13 @@
   {
     "name": "Nodemailer",
     "type": "external_service",
-    "urls": [
-      "https://api.nodemailer.com"
-    ],
+    "urls": ["https://api.nodemailer.com"],
     "packages": []
   },
   {
     "name": "Jsdelivr",
     "type": "external_service",
-    "urls": [
-      "https://api.jsdelivr.com"
-    ],
+    "urls": ["https://api.jsdelivr.com"],
     "packages": []
   },
   {
@@ -217,25 +192,19 @@
   {
     "name": "Hunter",
     "type": "external_service",
-    "urls": [
-      "https://api.hunter.io"
-    ],
+    "urls": ["https://api.hunter.io"],
     "packages": []
   },
   {
     "name": "Dropcontact",
     "type": "external_service",
-    "urls": [
-      "https://api.dropcontact.io"
-    ],
+    "urls": ["https://api.dropcontact.io"],
     "packages": []
   },
   {
     "name": "Crmgang",
     "type": "external_service",
-    "urls": [
-      "https://api.crmgang.com"
-    ],
+    "urls": ["https://api.crmgang.com"],
     "packages": []
   },
   {
@@ -253,9 +222,7 @@
   {
     "name": "Societeinfo",
     "type": "external_service",
-    "urls": [
-      "https://societeinfo.com/app/rest/api/"
-    ],
+    "urls": ["https://societeinfo.com/app/rest/api/"],
     "packages": []
   },
   {
@@ -281,26 +248,19 @@
   {
     "name": "Seeuletter (MySendingBox)",
     "type": "external_service",
-    "urls": [
-      "https://api.MySendingBox.fr",
-      "https://api.seeuletter.com"
-    ],
+    "urls": ["https://api.MySendingBox.fr", "https://api.seeuletter.com"],
     "packages": []
   },
   {
     "name": "Victorops (Splunk)",
     "type": "external_service",
-    "urls": [
-      "https://api.victorops.com"
-    ],
+    "urls": ["https://api.victorops.com"],
     "packages": []
   },
   {
     "name": "CircleCI",
     "type": "external_service",
-    "urls": [
-      "https://circleci.com/api"
-    ],
+    "urls": ["https://circleci.com/api"],
     "packages": []
   },
   {
@@ -317,9 +277,7 @@
   {
     "name": "Revolut",
     "type": "external_service",
-    "urls": [
-      "https://revolut.com/api/"
-    ],
+    "urls": ["https://revolut.com/api/"],
     "packages": []
   },
   {
@@ -335,67 +293,49 @@
   {
     "name": "Envoy",
     "type": "external_service",
-    "urls": [
-      "https://api.envoy.com"
-    ],
+    "urls": ["https://api.envoy.com"],
     "packages": []
   },
   {
     "name": "LaunchDarkly",
     "type": "external_service",
-    "urls": [
-      "https://app.launchdarkly.com/api/"
-    ],
+    "urls": ["https://app.launchdarkly.com/api/"],
     "packages": []
   },
   {
     "name": "Hellosign",
     "type": "external_service",
-    "urls": [
-      "https://api.hellosign.com"
-    ],
+    "urls": ["https://api.hellosign.com"],
     "packages": []
   },
   {
     "name": "Dyn (Oracle)",
     "type": "external_service",
-    "urls": [
-      "https://api.dynect.net",
-      "https://api-v4.dynect.net"
-    ],
+    "urls": ["https://api.dynect.net", "https://api-v4.dynect.net"],
     "packages": []
   },
   {
     "name": "Sakura",
     "type": "external_service",
-    "urls": [
-      "https://secure.sakura.ad.jp/cloud/zone/*/api/"
-    ],
+    "urls": ["https://secure.sakura.ad.jp/cloud/zone/*/api/"],
     "packages": []
   },
   {
     "name": "Brightbox",
     "type": "external_service",
-    "urls": [
-      "https://api.*.brightbox.com"
-    ],
+    "urls": ["https://api.*.brightbox.com"],
     "packages": []
   },
   {
     "name": "Profitbricks (IONOS)",
     "type": "external_service",
-    "urls": [
-      "https://api.ionos.com",
-      "https://api.profitbricks.com"
-    ],
+    "urls": ["https://api.ionos.com", "https://api.profitbricks.com"],
     "packages": []
   },
   {
     "name": "Cloudflare",
     "type": "external_service",
-    "urls": [
-      "https://api.cloudflare.com"
-    ],
+    "urls": ["https://api.cloudflare.com"],
     "packages": [
       {
         "name": "github.com/cloudflare/cloudflare-go",
@@ -413,17 +353,13 @@
   {
     "name": "Glesys",
     "type": "external_service",
-    "urls": [
-      "https://api.glesys.com"
-    ],
+    "urls": ["https://api.glesys.com"],
     "packages": []
   },
   {
     "name": "Dreamhost",
     "type": "external_service",
-    "urls": [
-      "https://api.dreamhost.com"
-    ],
+    "urls": ["https://api.dreamhost.com"],
     "packages": []
   },
   {
@@ -438,91 +374,67 @@
   {
     "name": "Clodo",
     "type": "external_service",
-    "urls": [
-      "https://api.clodo.ru"
-    ],
+    "urls": ["https://api.clodo.ru"],
     "packages": []
   },
   {
     "name": "Mapbox",
     "type": "external_service",
-    "urls": [
-      "https://api.mapbox.com"
-    ],
+    "urls": ["https://api.mapbox.com"],
     "packages": []
   },
   {
     "name": "Tidelift",
     "type": "external_service",
-    "urls": [
-      "https://api.tidelift.com"
-    ],
+    "urls": ["https://api.tidelift.com"],
     "packages": []
   },
   {
     "name": "Ipregistry",
     "type": "external_service",
-    "urls": [
-      "https://api.ipregistry.co"
-    ],
+    "urls": ["https://api.ipregistry.co"],
     "packages": []
   },
   {
     "name": "IBAN",
     "type": "external_service",
-    "urls": [
-      "https://api.iban.com"
-    ],
+    "urls": ["https://api.iban.com"],
     "packages": []
   },
   {
     "name": "Ipstack",
     "type": "external_service",
-    "urls": [
-      "https://api.ipstack.com"
-    ],
+    "urls": ["https://api.ipstack.com"],
     "packages": []
   },
   {
     "name": "Ipdata",
     "type": "external_service",
-    "urls": [
-      "https://api.ipdata.co"
-    ],
+    "urls": ["https://api.ipdata.co"],
     "packages": []
   },
   {
     "name": "Docusign",
     "type": "external_service",
-    "urls": [
-      "https://account.docusign.com",
-      "https://docusign.net/restapi"
-    ],
+    "urls": ["https://account.docusign.com", "https://docusign.net/restapi"],
     "packages": []
   },
   {
     "name": "Tide",
     "type": "external_service",
-    "urls": [
-      "https://sandbox.tide.co",
-      "https://api.tide.co"
-    ],
+    "urls": ["https://sandbox.tide.co", "https://api.tide.co"],
     "packages": []
   },
   {
     "name": "Forestadmin",
     "type": "external_service",
-    "urls": [
-      "https://api.forestadmin.com"
-    ],
+    "urls": ["https://api.forestadmin.com"],
     "packages": []
   },
   {
     "name": "Postmark",
     "type": "external_service",
-    "urls": [
-      "https://api.postmarkapp.com"
-    ],
+    "urls": ["https://api.postmarkapp.com"],
     "packages": []
   },
   {
@@ -561,9 +473,7 @@
   {
     "name": "Demdex (Adobe)",
     "type": "external_service",
-    "urls": [
-      "https://api.demdex.net"
-    ],
+    "urls": ["https://api.demdex.net"],
     "packages": []
   },
   {
@@ -646,18 +556,13 @@
   {
     "name": "Yodlee",
     "type": "external_service",
-    "urls": [
-      "https://api.yodlee.com"
-    ],
+    "urls": ["https://api.yodlee.com"],
     "packages": []
   },
   {
     "name": "Lever",
     "type": "external_service",
-    "urls": [
-      "https://jobs.lever.co",
-      "https://api.lever.co"
-    ],
+    "urls": ["https://jobs.lever.co", "https://api.lever.co"],
     "packages": []
   },
   {
@@ -673,26 +578,19 @@
   {
     "name": "Vercel",
     "type": "external_service",
-    "urls": [
-      "https://api.vercel.com"
-    ],
+    "urls": ["https://api.vercel.com"],
     "packages": []
   },
   {
     "name": "Drift",
     "type": "external_service",
-    "urls": [
-      "https://js.driftt.com",
-      "https://driftapi.com"
-    ],
+    "urls": ["https://js.driftt.com", "https://driftapi.com"],
     "packages": []
   },
   {
     "name": "Basecamp",
     "type": "external_service",
-    "urls": [
-      "https://basecamp.com/*/api/"
-    ],
+    "urls": ["https://basecamp.com/*/api/"],
     "packages": [
       {
         "name": "tinder",
@@ -714,18 +612,13 @@
   {
     "name": "Scout APM",
     "type": "external_service",
-    "urls": [
-      "https://scoutapm.com/api"
-    ],
+    "urls": ["https://scoutapm.com/api"],
     "packages": []
   },
   {
     "name": "xignite",
     "type": "external_service",
-    "urls": [
-      "https://navs.xignite.com/v1",
-      "https://navs.xignite.com/v2"
-    ],
+    "urls": ["https://navs.xignite.com/v1", "https://navs.xignite.com/v2"],
     "packages": []
   },
   {
@@ -741,34 +634,25 @@
   {
     "name": "Skyscanner",
     "type": "external_service",
-    "urls": [
-      "https://partners.api.skyscanner.net"
-    ],
+    "urls": ["https://partners.api.skyscanner.net"],
     "packages": []
   },
   {
     "name": "Nylas",
     "type": "external_service",
-    "urls": [
-      "https://api.nylas.com"
-    ],
+    "urls": ["https://api.nylas.com"],
     "packages": []
   },
   {
     "name": "Galileo",
     "type": "external_service",
-    "urls": [
-      "https://api.gpsrv.com",
-      "https://sandbox-api.gpsrv.com"
-    ],
+    "urls": ["https://api.gpsrv.com", "https://sandbox-api.gpsrv.com"],
     "packages": []
   },
   {
     "name": "BambooHR",
     "type": "external_service",
-    "urls": [
-      "https://api.bamboohr.com"
-    ],
+    "urls": ["https://api.bamboohr.com"],
     "packages": []
   },
   {
@@ -784,74 +668,55 @@
   {
     "name": "Alpaca",
     "type": "external_service",
-    "urls": [
-      "https://api.alpaca.markets"
-    ],
+    "urls": ["https://api.alpaca.markets"],
     "packages": []
   },
   {
     "name": "Alloy",
     "type": "external_service",
-    "urls": [
-      "https://alloy.co/v1/"
-    ],
+    "urls": ["https://alloy.co/v1/"],
     "packages": []
   },
   {
     "name": "Nightfall",
     "type": "external_service",
-    "urls": [
-      "https://api.nightfall.ai",
-      "https://radar.nightfall.ai/api"
-    ],
+    "urls": ["https://api.nightfall.ai", "https://radar.nightfall.ai/api"],
     "packages": []
   },
   {
     "name": "ComplyAdvantage",
     "type": "external_service",
-    "urls": [
-      "https://api.complyadvantage.com"
-    ],
+    "urls": ["https://api.complyadvantage.com"],
     "packages": []
   },
   {
     "name": "Treezor",
     "type": "external_service",
-    "urls": [
-      "https://treezor.com/v1/"
-    ],
+    "urls": ["https://treezor.com/v1/"],
     "packages": []
   },
   {
     "name": "Statuspage",
     "type": "external_service",
-    "urls": [
-      "https://api.statuspage.io"
-    ],
+    "urls": ["https://api.statuspage.io"],
     "packages": []
   },
   {
     "name": "PandaDoc",
     "type": "external_service",
-    "urls": [
-      "https://api.pandadoc.com"
-    ],
+    "urls": ["https://api.pandadoc.com"],
     "packages": []
   },
   {
     "name": "Small Improvements",
     "type": "external_service",
-    "urls": [
-      "https://small-improvements.com/api"
-    ],
+    "urls": ["https://small-improvements.com/api"],
     "packages": []
   },
   {
     "name": "SatisMeter",
     "type": "external_service",
-    "urls": [
-      "https://app.satismeter.com/api"
-    ],
+    "urls": ["https://app.satismeter.com/api"],
     "packages": []
   },
   {
@@ -866,27 +731,19 @@
   {
     "name": "NativeX (Mobvista)",
     "type": "external_service",
-    "urls": [
-      "https://3s.mobvista.com"
-    ],
+    "urls": ["https://3s.mobvista.com"],
     "packages": []
   },
   {
     "name": "Enboarder",
     "type": "external_service",
-    "urls": [
-      "https://api.*.e1.enboarder.com",
-      "https://enboarder.com/restapi"
-    ],
+    "urls": ["https://api.*.e1.enboarder.com", "https://enboarder.com/restapi"],
     "packages": []
   },
   {
     "name": "Zapier",
     "type": "external_service",
-    "urls": [
-      "https://hooks.zapier.com",
-      "https://api.zapier.com"
-    ],
+    "urls": ["https://hooks.zapier.com", "https://api.zapier.com"],
     "packages": []
   },
   {
@@ -914,42 +771,31 @@
   {
     "name": "Adjust",
     "type": "external_service",
-    "urls": [
-      "https://api.adjust.com"
-    ],
+    "urls": ["https://api.adjust.com"],
     "packages": []
   },
   {
     "name": "Wrike",
     "type": "external_service",
-    "urls": [
-      "https://wrike.com/api"
-    ],
+    "urls": ["https://wrike.com/api"],
     "packages": []
   },
   {
     "name": "Travefy",
     "type": "external_service",
-    "urls": [
-      "https://api.travefy.com"
-    ],
+    "urls": ["https://api.travefy.com"],
     "packages": []
   },
   {
     "name": "Trello",
     "type": "external_service",
-    "urls": [
-      "https://api.trello.com",
-      "https://p.trellocdn.com"
-    ],
+    "urls": ["https://api.trello.com", "https://p.trellocdn.com"],
     "packages": []
   },
   {
     "name": "Stackify",
     "type": "external_service",
-    "urls": [
-      "https://api.stackify.net"
-    ],
+    "urls": ["https://api.stackify.net"],
     "packages": []
   },
   {
@@ -964,9 +810,7 @@
   {
     "name": "Asana",
     "type": "external_service",
-    "urls": [
-      "https://app.asana.com/api"
-    ],
+    "urls": ["https://app.asana.com/api"],
     "packages": [
       {
         "name": "asana",
@@ -991,34 +835,25 @@
   {
     "name": "Rydoo",
     "type": "external_service",
-    "urls": [
-      "https://api.rydoo.com"
-    ],
+    "urls": ["https://api.rydoo.com"],
     "packages": []
   },
   {
     "name": "Raygun",
     "type": "external_service",
-    "urls": [
-      "https://api.raygun.com"
-    ],
+    "urls": ["https://api.raygun.com"],
     "packages": []
   },
   {
     "name": "Pipeliner",
     "type": "external_service",
-    "urls": [
-      "https://pipelinersales.com/api"
-    ],
+    "urls": ["https://pipelinersales.com/api"],
     "packages": []
   },
   {
     "name": "Pipedrive",
     "type": "external_service",
-    "urls": [
-      "https://api.pipedrive.com",
-      "https://pipedrive.com/api"
-    ],
+    "urls": ["https://api.pipedrive.com", "https://pipedrive.com/api"],
     "packages": []
   },
   {
@@ -1035,34 +870,25 @@
   {
     "name": "paylocity",
     "type": "external_service",
-    "urls": [
-      "https://api.paylocity.com/api"
-    ],
+    "urls": ["https://api.paylocity.com/api"],
     "packages": []
   },
   {
     "name": "Nimble",
     "type": "external_service",
-    "urls": [
-      "https://api.nimble.com"
-    ],
+    "urls": ["https://api.nimble.com"],
     "packages": []
   },
   {
     "name": "NetHunt CRM",
     "type": "external_service",
-    "urls": [
-      "https://nethunt.com/api/v1/zapier"
-    ],
+    "urls": ["https://nethunt.com/api/v1/zapier"],
     "packages": []
   },
   {
     "name": "Plaid",
     "type": "external_service",
-    "urls": [
-      "https://production.plaid.com",
-      "https://sandbox.plaid.com"
-    ],
+    "urls": ["https://production.plaid.com", "https://sandbox.plaid.com"],
     "packages": []
   },
   {
@@ -1079,100 +905,73 @@
   {
     "name": "Monday",
     "type": "external_service",
-    "urls": [
-      "https://api.monday.com"
-    ],
+    "urls": ["https://api.monday.com"],
     "packages": []
   },
   {
     "name": "Marketo",
     "type": "external_service",
-    "urls": [
-      "https://mktoapi.com/soap",
-      "https://mktorest.com/rest"
-    ],
+    "urls": ["https://mktoapi.com/soap", "https://mktorest.com/rest"],
     "packages": []
   },
   {
     "name": "Logz.io",
     "type": "external_service",
-    "urls": [
-      "https://api.logz.io",
-      "https://api-*.logz.io"
-    ],
+    "urls": ["https://api.logz.io", "https://api-*.logz.io"],
     "packages": []
   },
   {
     "name": "Instana",
     "type": "external_service",
-    "urls": [
-      "https://instana.io/api"
-    ],
+    "urls": ["https://instana.io/api"],
     "packages": []
   },
   {
     "name": "Honeybadger",
     "type": "external_service",
-    "urls": [
-      "https://api.honeybadger.io",
-      "https://app.honeybadger.io/v2/"
-    ],
+    "urls": ["https://api.honeybadger.io", "https://app.honeybadger.io/v2/"],
     "packages": []
   },
   {
     "name": "Gravity Payments",
     "type": "external_service",
-    "urls": [
-      "https://api.gravitypayments.com"
-    ],
+    "urls": ["https://api.gravitypayments.com"],
     "packages": []
   },
   {
     "name": "Expensify",
     "type": "external_service",
-    "urls": [
-      "https://integrations.expensify.com/Integration-Server"
-    ],
+    "urls": ["https://integrations.expensify.com/Integration-Server"],
     "packages": []
   },
   {
     "name": "Emburse",
     "type": "external_service",
-    "urls": [
-      "https://api.emburse.com"
-    ],
+    "urls": ["https://api.emburse.com"],
     "packages": []
   },
   {
     "name": "EasyPost",
     "type": "external_service",
-    "urls": [
-      "https://api.easypost.com"
-    ],
+    "urls": ["https://api.easypost.com"],
     "packages": []
   },
   {
     "name": "Copper",
     "type": "external_service",
-    "urls": [
-      "https://api.prosperworks.com"
-    ],
+    "urls": ["https://api.prosperworks.com"],
     "packages": []
   },
   {
     "name": "ClickUp",
     "type": "external_service",
-    "urls": [
-      "https://api.clickup.com"
-    ],
+    "urls": ["https://api.clickup.com"],
     "packages": []
   },
   {
     "name": "Chargify",
     "type": "external_service",
-    "urls": [
-      "https://js.chargify.com"
-    ],
+    "urls": ["https://js.chargify.com"],
     "packages": []
   },
   {
@@ -1195,9 +994,7 @@
   {
     "name": "Chargebee",
     "type": "external_service",
-    "urls": [
-      "https://chargebee.com/api"
-    ],
+    "urls": ["https://chargebee.com/api"],
     "packages": []
   },
   {
@@ -1235,10 +1032,7 @@
   {
     "name": "Tanker",
     "type": "external_service",
-    "urls": [
-      "https://fakeauth.tanker.io",
-      "https://api.tanker.io"
-    ],
+    "urls": ["https://fakeauth.tanker.io", "https://api.tanker.io"],
     "packages": [
       {
         "name": "tanker-core",
@@ -1301,17 +1095,13 @@
   {
     "name": "Softlayer (IBM Cloud)",
     "type": "external_service",
-    "urls": [
-      "https://api.softlayer.com"
-    ],
+    "urls": ["https://api.softlayer.com"],
     "packages": []
   },
   {
     "name": "Box",
     "type": "external_service",
-    "urls": [
-      "https://api.box.com"
-    ],
+    "urls": ["https://api.box.com"],
     "packages": [
       {
         "name": "boxsdk",
@@ -1328,27 +1118,19 @@
   {
     "name": "La Poste",
     "type": "external_service",
-    "urls": [
-      "https://ws.colissimo.fr",
-      "https://api.laposte.fr"
-    ],
+    "urls": ["https://ws.colissimo.fr", "https://api.laposte.fr"],
     "packages": []
   },
   {
     "name": "LinkedIn",
     "type": "external_service",
-    "urls": [
-      "https://linkedin.com/oauth",
-      "https://api.linkedin.com"
-    ],
+    "urls": ["https://linkedin.com/oauth", "https://api.linkedin.com"],
     "packages": []
   },
   {
     "name": "Intuit",
     "type": "external_service",
-    "urls": [
-      "https://api.intuit.com"
-    ],
+    "urls": ["https://api.intuit.com"],
     "packages": [
       {
         "name": "quickbooks/v3-php-sdk",
@@ -1396,10 +1178,7 @@
   {
     "name": "Intercom",
     "type": "external_service",
-    "urls": [
-      "https://api.intercom.io",
-      "https://widget.intercom.io/widget"
-    ],
+    "urls": ["https://api.intercom.io", "https://widget.intercom.io/widget"],
     "packages": [
       {
         "name": "intercom",
@@ -1431,10 +1210,7 @@
   {
     "name": "Shopify",
     "type": "external_service",
-    "urls": [
-      "https://myshopify.com/api",
-      "https://myshopify.com/admin/api"
-    ],
+    "urls": ["https://myshopify.com/api", "https://myshopify.com/admin/api"],
     "packages": [
       {
         "name": "shoplift_python_api",
@@ -1466,10 +1242,7 @@
   {
     "name": "Ameli",
     "type": "external_service",
-    "urls": [
-      "https://ameli.fr/api",
-      "https://services-ps.ameli.fr/lps"
-    ],
+    "urls": ["https://ameli.fr/api", "https://services-ps.ameli.fr/lps"],
     "packages": []
   },
   {
@@ -1545,9 +1318,7 @@
   {
     "name": "Xero",
     "type": "external_service",
-    "urls": [
-      "https://api.xero.com"
-    ],
+    "urls": ["https://api.xero.com"],
     "packages": [
       {
         "name": "xeroapi/xero-php-oauth2",
@@ -1574,9 +1345,7 @@
   {
     "name": "Rollbar",
     "type": "external_service",
-    "urls": [
-      "https://api.rollbar.com"
-    ],
+    "urls": ["https://api.rollbar.com"],
     "packages": [
       {
         "name": "rollbar",
@@ -1588,9 +1357,7 @@
   {
     "name": "Heroku",
     "type": "external_service",
-    "urls": [
-      "https://api.heroku.com"
-    ],
+    "urls": ["https://api.heroku.com"],
     "packages": [
       {
         "name": "php-heroku-client/php-heroku-client",
@@ -1622,9 +1389,7 @@
   {
     "name": "Geckoboard",
     "type": "external_service",
-    "urls": [
-      "https://api.geckoboard.com"
-    ],
+    "urls": ["https://api.geckoboard.com"],
     "packages": [
       {
         "name": "geckoboard-ruby",
@@ -1636,34 +1401,25 @@
   {
     "name": "Browserstack",
     "type": "external_service",
-    "urls": [
-      "https://api.browserstack.com"
-    ],
+    "urls": ["https://api.browserstack.com"],
     "packages": []
   },
   {
     "name": "Bintray (JFrog)",
     "type": "external_service",
-    "urls": [
-      "https://api.bintray.com"
-    ],
+    "urls": ["https://api.bintray.com"],
     "packages": []
   },
   {
     "name": "Wordnik",
     "type": "external_service",
-    "urls": [
-      "https://api.wordnik.com"
-    ],
+    "urls": ["https://api.wordnik.com"],
     "packages": []
   },
   {
     "name": "Socket.IO",
     "type": "external_service",
-    "urls": [
-      "https://socket.io/lib/*",
-      "https://*.socket.io"
-    ],
+    "urls": ["https://socket.io/lib/*", "https://*.socket.io"],
     "packages": []
   },
   {
@@ -1703,44 +1459,31 @@
   {
     "name": "Cookiebot.com",
     "type": "external_service",
-    "urls": [
-      "https://consent.cookiebot.com/api"
-    ],
+    "urls": ["https://consent.cookiebot.com/api"],
     "packages": []
   },
   {
     "name": "ProcessOut",
     "type": "external_service",
-    "urls": [
-      "https://api.processout.com"
-    ],
+    "urls": ["https://api.processout.com"],
     "packages": []
   },
   {
     "name": "Checkout.com",
     "type": "external_service",
-    "urls": [
-      "https://api.sandbox.checkout.com",
-      "https://api.checkout.com"
-    ],
+    "urls": ["https://api.sandbox.checkout.com", "https://api.checkout.com"],
     "packages": []
   },
   {
     "name": "ShipBob",
     "type": "external_service",
-    "urls": [
-      "https://api.shipbob.com",
-      "https://sandbox-api.shipbob.com"
-    ],
+    "urls": ["https://api.shipbob.com", "https://sandbox-api.shipbob.com"],
     "packages": []
   },
   {
     "name": "Atlassian Cloud",
     "type": "external_service",
-    "urls": [
-      "https://api.atlassian.com",
-      "https://atlassian.net/rest/api/"
-    ],
+    "urls": ["https://api.atlassian.com", "https://atlassian.net/rest/api/"],
     "packages": [
       {
         "name": "github.com/andygrunwald/go-jira",
@@ -1826,9 +1569,7 @@
   {
     "name": "Discord",
     "type": "external_service",
-    "urls": [
-      "https://discord.com/api"
-    ],
+    "urls": ["https://discord.com/api"],
     "packages": [
       {
         "name": "discordrb",
@@ -1865,9 +1606,7 @@
   {
     "name": "ActiveCampaign",
     "type": "external_service",
-    "urls": [
-      "https://api-us1.com"
-    ],
+    "urls": ["https://api-us1.com"],
     "packages": [
       {
         "name": "activecampaign/api-php",
@@ -1956,9 +1695,7 @@
   {
     "name": "Airtable",
     "type": "external_service",
-    "urls": [
-      "https://api.airtable.com"
-    ],
+    "urls": ["https://api.airtable.com"],
     "packages": [
       {
         "name": "airtable",
@@ -1975,9 +1712,7 @@
   {
     "name": "Sendgrid",
     "type": "external_service",
-    "urls": [
-      "https://api.sendgrid.com"
-    ],
+    "urls": ["https://api.sendgrid.com"],
     "packages": [
       {
         "name": "github.com/sendgrid/sendgrid-go",
@@ -2039,10 +1774,7 @@
   {
     "name": "AWS S3",
     "type": "data_store",
-    "urls": [
-      "https://s3-*.amazonaws.com",
-      "https://s3.*.amazonaws.com"
-    ],
+    "urls": ["https://s3-*.amazonaws.com", "https://s3.*.amazonaws.com"],
     "packages": [
       {
         "name": "aws-sdk-s3",
@@ -2089,10 +1821,7 @@
   {
     "name": "Firebase",
     "type": "external_service",
-    "urls": [
-      "https://fcmdata.googleapis.com",
-      "https://firebaseio.com"
-    ],
+    "urls": ["https://fcmdata.googleapis.com", "https://firebaseio.com"],
     "packages": [
       {
         "name": "@react-native-firebase/analytics",
@@ -2120,9 +1849,7 @@
   {
     "name": "iProov",
     "type": "external_service",
-    "urls": [
-      "https://eu.rp.secure.iproov.me"
-    ],
+    "urls": ["https://eu.rp.secure.iproov.me"],
     "packages": []
   },
   {
@@ -2199,17 +1926,13 @@
   {
     "name": "Travis CI",
     "type": "external_service",
-    "urls": [
-      "https://api.travis-ci.org"
-    ],
+    "urls": ["https://api.travis-ci.org"],
     "packages": []
   },
   {
     "name": "Auth0",
     "type": "external_service",
-    "urls": [
-      "https://auth0.com/api"
-    ],
+    "urls": ["https://auth0.com/api"],
     "packages": [
       {
         "name": "auth0",
@@ -2256,17 +1979,13 @@
   {
     "name": "Izberg Marketplace",
     "type": "external_service",
-    "urls": [
-      "https://api.izberg.me"
-    ],
+    "urls": ["https://api.izberg.me"],
     "packages": []
   },
   {
     "name": "PostHog",
     "type": "external_service",
-    "urls": [
-      "https://app.posthog.com"
-    ],
+    "urls": ["https://app.posthog.com"],
     "packages": [
       {
         "name": "posthog-ruby",
@@ -2308,9 +2027,7 @@
   {
     "name": "Quanta",
     "type": "external_service",
-    "urls": [
-      "https://app.quanta.io/api"
-    ],
+    "urls": ["https://app.quanta.io/api"],
     "packages": []
   },
   {
@@ -2383,10 +2100,7 @@
   {
     "name": "Stripe",
     "type": "external_service",
-    "urls": [
-      "https://api.stripe.com",
-      "https://js.stripe.com"
-    ],
+    "urls": ["https://api.stripe.com", "https://js.stripe.com"],
     "packages": [
       {
         "name": "stripe",
@@ -2460,10 +2174,7 @@
   {
     "name": "Segment",
     "type": "external_service",
-    "urls": [
-      "https://api.segment.io",
-      "https://cdn.segment.com"
-    ],
+    "urls": ["https://api.segment.io", "https://cdn.segment.com"],
     "packages": [
       {
         "name": "analytics-ruby",
@@ -2505,33 +2216,25 @@
   {
     "name": "Uptrends",
     "type": "external_service",
-    "urls": [
-      "https://api.uptrends.com"
-    ],
+    "urls": ["https://api.uptrends.com"],
     "packages": []
   },
   {
     "name": "Zeplin",
     "type": "external_service",
-    "urls": [
-      "https://api.zeplin.dev"
-    ],
+    "urls": ["https://api.zeplin.dev"],
     "packages": []
   },
   {
     "name": "France Billet",
     "type": "external_service",
-    "urls": [
-      "https://billetweb.fr/api"
-    ],
+    "urls": ["https://billetweb.fr/api"],
     "packages": []
   },
   {
     "name": "Mailjet",
     "type": "external_service",
-    "urls": [
-      "https://api.mailjet.com"
-    ],
+    "urls": ["https://api.mailjet.com"],
     "packages": [
       {
         "name": "mailjet",
@@ -2605,10 +2308,7 @@
   {
     "name": "Cloudinary",
     "type": "external_service",
-    "urls": [
-      "https://res.cloudinary.com",
-      "https://api.cloudinary.com"
-    ],
+    "urls": ["https://res.cloudinary.com", "https://api.cloudinary.com"],
     "packages": [
       {
         "name": "cloudinary",
@@ -2656,9 +2356,7 @@
   {
     "name": "alexa.com",
     "type": "external_service",
-    "urls": [
-      "https://data.alexa.com"
-    ],
+    "urls": ["https://data.alexa.com"],
     "packages": []
   },
   {
@@ -2689,9 +2387,7 @@
   {
     "name": "Aquasec",
     "type": "external_service",
-    "urls": [
-      "https://api.aquasec.com"
-    ],
+    "urls": ["https://api.aquasec.com"],
     "packages": []
   },
   {
@@ -2732,17 +2428,13 @@
   {
     "name": "Netlify",
     "type": "external_service",
-    "urls": [
-      "https://api.netlify.com"
-    ],
+    "urls": ["https://api.netlify.com"],
     "packages": []
   },
   {
     "name": "Microsoft Teams",
     "type": "external_service",
-    "urls": [
-      "https://graph.microsoft.com/*/teams"
-    ],
+    "urls": ["https://graph.microsoft.com/*/teams"],
     "packages": [
       {
         "name": "@microsoft-teams-js",
@@ -2759,9 +2451,7 @@
   {
     "name": "userlike.com",
     "type": "external_service",
-    "urls": [
-      "https://api.userlike.com"
-    ],
+    "urls": ["https://api.userlike.com"],
     "packages": []
   },
   {
@@ -2779,9 +2469,7 @@
   {
     "name": "Mondial Relay",
     "type": "external_service",
-    "urls": [
-      "https://api.mondialrelay.com"
-    ],
+    "urls": ["https://api.mondialrelay.com"],
     "packages": []
   },
   {
@@ -2801,18 +2489,13 @@
   {
     "name": "ipify.org",
     "type": "external_service",
-    "urls": [
-      "https://api.ipify.org"
-    ],
+    "urls": ["https://api.ipify.org"],
     "packages": []
   },
   {
     "name": "MangoPay",
     "type": "external_service",
-    "urls": [
-      "https://api.sandbox.mangopay.com",
-      "https://api.mangopay.com"
-    ],
+    "urls": ["https://api.sandbox.mangopay.com", "https://api.mangopay.com"],
     "packages": [
       {
         "name": "github.com/bgruszka/mangopay2-go-sdk",
@@ -2844,9 +2527,7 @@
   {
     "name": "Telegram",
     "type": "external_service",
-    "urls": [
-      "https://api.telegram.org"
-    ],
+    "urls": ["https://api.telegram.org"],
     "packages": [
       {
         "name": "python-telegram-bot",
@@ -2863,18 +2544,13 @@
   {
     "name": "Thunes (Limonethik)",
     "type": "external_service",
-    "urls": [
-      "https://api.limonetikqualif.com",
-      "https://api.limonetik.com"
-    ],
+    "urls": ["https://api.limonetikqualif.com", "https://api.limonetik.com"],
     "packages": []
   },
   {
     "name": "Name.com",
     "type": "external_service",
-    "urls": [
-      "https://api.name.com"
-    ],
+    "urls": ["https://api.name.com"],
     "packages": [
       {
         "name": "github.com/namedotcom/go",
@@ -2886,17 +2562,13 @@
   {
     "name": "Unsplash",
     "type": "external_service",
-    "urls": [
-      "https://api.unsplash.com"
-    ],
+    "urls": ["https://api.unsplash.com"],
     "packages": []
   },
   {
     "name": "Splunk",
     "type": "external_service",
-    "urls": [
-      "https://*.splunkcloud.com"
-    ],
+    "urls": ["https://*.splunkcloud.com"],
     "packages": [
       {
         "name": "splunk-sdk",
@@ -2964,9 +2636,7 @@
   {
     "name": "PagerDuty",
     "type": "external_service",
-    "urls": [
-      "https://api.pagerduty.com"
-    ],
+    "urls": ["https://api.pagerduty.com"],
     "packages": [
       {
         "name": "github.com/heimweh/go-pagerduty",
@@ -2993,26 +2663,19 @@
   {
     "name": "Adotmob",
     "type": "external_service",
-    "urls": [
-      "https://dmp.adotmob.com",
-      "https://tracker.adotmob.com"
-    ],
+    "urls": ["https://dmp.adotmob.com", "https://tracker.adotmob.com"],
     "packages": []
   },
   {
     "name": "Bitrise",
     "type": "external_service",
-    "urls": [
-      "https://api.bitrise.io"
-    ],
+    "urls": ["https://api.bitrise.io"],
     "packages": []
   },
   {
     "name": "SAP Hana",
     "type": "external_service",
-    "urls": [
-      "https://hana.ondemand.com"
-    ],
+    "urls": ["https://hana.ondemand.com"],
     "packages": [
       {
         "name": "github.com/SAP/go-hdb",
@@ -3024,10 +2687,7 @@
   {
     "name": "Datadome",
     "type": "external_service",
-    "urls": [
-      "https://js.datadome.co",
-      "https://api.datadome.co"
-    ],
+    "urls": ["https://js.datadome.co", "https://api.datadome.co"],
     "packages": [
       {
         "name": "DataDome.SystemWeb",
@@ -3051,27 +2711,19 @@
   {
     "name": "Oney",
     "type": "external_service",
-    "urls": [
-      "https://api.oney.io",
-      "https://api-staging.oney.io"
-    ],
+    "urls": ["https://api.oney.io", "https://api-staging.oney.io"],
     "packages": []
   },
   {
     "name": "Lets enhance",
     "type": "external_service",
-    "urls": [
-      "https://api.letsenhance.io"
-    ],
+    "urls": ["https://api.letsenhance.io"],
     "packages": []
   },
   {
     "name": "OpenTok",
     "type": "external_service",
-    "urls": [
-      "https://api.opentok.com",
-      "https://static.opentok.com/*/js"
-    ],
+    "urls": ["https://api.opentok.com", "https://static.opentok.com/*/js"],
     "packages": [
       {
         "name": "opentok",
@@ -3088,9 +2740,7 @@
   {
     "name": "Essendex",
     "type": "external_service",
-    "urls": [
-      "https://api.esendex.com"
-    ],
+    "urls": ["https://api.esendex.com"],
     "packages": [
       {
         "name": "esendex/sdk",
@@ -3122,9 +2772,7 @@
   {
     "name": "OVH Cloud APIs",
     "type": "external_service",
-    "urls": [
-      "https://api.ovh.com"
-    ],
+    "urls": ["https://api.ovh.com"],
     "packages": [
       {
         "name": "github.com/ovh/go-ovh",
@@ -3158,9 +2806,7 @@
   {
     "name": "Liquid Web Cloud APIs",
     "type": "external_service",
-    "urls": [
-      "https://api.stormondemand.com"
-    ],
+    "urls": ["https://api.stormondemand.com"],
     "packages": [
       {
         "name": "github.com/liquidweb/go-lwApi",
@@ -3177,9 +2823,7 @@
   {
     "name": "Porkbun",
     "type": "external_service",
-    "urls": [
-      "https://porkbun.com/api/"
-    ],
+    "urls": ["https://porkbun.com/api/"],
     "packages": [
       {
         "name": "github.com/nrdcg/porkbun",
@@ -3191,9 +2835,7 @@
   {
     "name": "Namesilo",
     "type": "external_service",
-    "urls": [
-      "https://www.namesilo.com/api/"
-    ],
+    "urls": ["https://www.namesilo.com/api/"],
     "packages": [
       {
         "name": "github.com/nrdcg/namesilo",
@@ -3205,9 +2847,7 @@
   {
     "name": "Vonage",
     "type": "external_service",
-    "urls": [
-      "https://api.nexmo.com"
-    ],
+    "urls": ["https://api.nexmo.com"],
     "packages": [
       {
         "name": "nexmo/client-core",
@@ -3258,9 +2898,7 @@
   {
     "name": "OpenWeather",
     "type": "external_service",
-    "urls": [
-      "https://api.openweathermap.org"
-    ],
+    "urls": ["https://api.openweathermap.org"],
     "packages": []
   },
   {
@@ -3550,10 +3188,7 @@
   {
     "name": "Phrase",
     "type": "external_service",
-    "urls": [
-      "https://api.phraseapp.com",
-      "https://api.phrase.com"
-    ],
+    "urls": ["https://api.phraseapp.com", "https://api.phrase.com"],
     "packages": [
       {
         "name": "nediam/phraseapp-bundle",
@@ -3663,9 +3298,7 @@
   {
     "name": "LogRocket",
     "type": "external_service",
-    "urls": [
-      "https://cdn.lr-ingest.io"
-    ],
+    "urls": ["https://cdn.lr-ingest.io"],
     "packages": [
       {
         "name": "logrocket",
@@ -3677,9 +3310,7 @@
   {
     "name": "Yandex.Cloud APIs",
     "type": "external_service",
-    "urls": [
-      "https://api.cloud.yandex.net"
-    ],
+    "urls": ["https://api.cloud.yandex.net"],
     "packages": [
       {
         "name": "github.com/yandex-cloud/go-sdk",
@@ -3703,9 +3334,7 @@
   {
     "name": "ReportPortal",
     "type": "external_service",
-    "urls": [
-      "https://rp.com/api"
-    ],
+    "urls": ["https://rp.com/api"],
     "packages": [
       {
         "name": "@reportportal/client-javascript",
@@ -3729,9 +3358,7 @@
   {
     "name": "PubNub",
     "type": "external_service",
-    "urls": [
-      "https://ps.pndsn.com"
-    ],
+    "urls": ["https://ps.pndsn.com"],
     "packages": [
       {
         "name": "pubnub",
@@ -3791,10 +3418,7 @@
   {
     "name": "Atinternet",
     "type": "external_service",
-    "urls": [
-      "https://xiti.com",
-      "https://api.atinternet.io"
-    ],
+    "urls": ["https://xiti.com", "https://api.atinternet.io"],
     "packages": []
   },
   {
@@ -3834,9 +3458,7 @@
   {
     "name": "Dalenys",
     "type": "external_service",
-    "urls": [
-      "https://*.dalenys.com"
-    ],
+    "urls": ["https://*.dalenys.com"],
     "packages": []
   },
   {
@@ -3935,34 +3557,25 @@
   {
     "name": "SAP",
     "type": "external_service",
-    "urls": [
-      "http://sap.com/xi/*"
-    ],
+    "urls": ["http://sap.com/xi/*"],
     "packages": []
   },
   {
     "name": "Payline",
     "type": "external_service",
-    "urls": [
-      "https://services.payline.com",
-      "https://payment.payline.com"
-    ],
+    "urls": ["https://services.payline.com", "https://payment.payline.com"],
     "packages": []
   },
   {
     "name": "AdRoll",
     "type": "external_service",
-    "urls": [
-      "https://*.adroll.com"
-    ],
+    "urls": ["https://*.adroll.com"],
     "packages": []
   },
   {
     "name": "DMP",
     "type": "external_service",
-    "urls": [
-      "https://lps2.dmp.gouv.fr/si-dmp-server/*"
-    ],
+    "urls": ["https://lps2.dmp.gouv.fr/si-dmp-server/*"],
     "packages": []
   },
   {
@@ -3990,25 +3603,19 @@
   {
     "name": "Adictiz",
     "type": "external_service",
-    "urls": [
-      "https://api.adictiz.com"
-    ],
+    "urls": ["https://api.adictiz.com"],
     "packages": []
   },
   {
     "name": "Solocal Bridge",
     "type": "external_service",
-    "urls": [
-      "https://api.leadformance.com"
-    ],
+    "urls": ["https://api.leadformance.com"],
     "packages": []
   },
   {
     "name": "Runscope",
     "type": "external_service",
-    "urls": [
-      "https://api.runscope.com"
-    ],
+    "urls": ["https://api.runscope.com"],
     "packages": []
   },
   {
@@ -4353,9 +3960,7 @@
   {
     "name": "Jfrog",
     "type": "external_service",
-    "urls": [
-      "https://*.jfrog.io"
-    ],
+    "urls": ["https://*.jfrog.io"],
     "packages": []
   },
   {
@@ -4552,9 +4157,7 @@
   {
     "name": "Mabaya",
     "type": "external_service",
-    "urls": [
-      "https://manage-api.mabaya.com"
-    ],
+    "urls": ["https://manage-api.mabaya.com"],
     "packages": []
   },
   {
@@ -4596,9 +4199,7 @@
   {
     "name": "Gfycat",
     "type": "external_service",
-    "urls": [
-      "https://api.gfycat.com"
-    ],
+    "urls": ["https://api.gfycat.com"],
     "packages": []
   },
   {
@@ -4616,17 +4217,13 @@
   {
     "name": "Selligent",
     "type": "external_service",
-    "urls": [
-      "https://selligent.com/*/organizations"
-    ],
+    "urls": ["https://selligent.com/*/organizations"],
     "packages": []
   },
   {
     "name": "Bambuser",
     "type": "external_service",
-    "urls": [
-      "https://api.bambuser.com"
-    ],
+    "urls": ["https://api.bambuser.com"],
     "packages": []
   },
   {
@@ -4744,10 +4341,7 @@
   {
     "name": "Tencent Cloud APIs",
     "type": "external_service",
-    "urls": [
-      "https://tencentcloudapi.com",
-      "https://*.tencentcloudapi.com"
-    ],
+    "urls": ["https://tencentcloudapi.com", "https://*.tencentcloudapi.com"],
     "packages": [
       {
         "name": "github.com/tencentcloud/tencentcloud-sdk-go",
@@ -4759,9 +4353,7 @@
   {
     "name": "Youtube",
     "type": "external_service",
-    "urls": [
-      "https://www.googleapis.com/youtube/"
-    ],
+    "urls": ["https://www.googleapis.com/youtube/"],
     "packages": [
       {
         "name": "react-youtube",
@@ -4920,10 +4512,7 @@
   {
     "name": "Microsoft Azure APIs",
     "type": "external_service",
-    "urls": [
-      "https://*.chinacloudapi.cn",
-      "https://*.management.azure.com"
-    ],
+    "urls": ["https://*.chinacloudapi.cn", "https://*.management.azure.com"],
     "packages": [
       {
         "name": "azure_graph_rbac",
@@ -5022,34 +4611,25 @@
   {
     "name": "Optimizely",
     "type": "external_service",
-    "urls": [
-      "https://cdn.optimizely.com"
-    ],
+    "urls": ["https://cdn.optimizely.com"],
     "packages": []
   },
   {
     "name": "ABTasty",
     "type": "external_service",
-    "urls": [
-      "https://try.abtasty.com"
-    ],
+    "urls": ["https://try.abtasty.com"],
     "packages": []
   },
   {
     "name": "Usersnap",
     "type": "external_service",
-    "urls": [
-      "https://platform.usersnap.com",
-      "https://widget.usersnap.com"
-    ],
+    "urls": ["https://platform.usersnap.com", "https://widget.usersnap.com"],
     "packages": []
   },
   {
     "name": "SendBird",
     "type": "external_service",
-    "urls": [
-      "https://*.sendbird.com"
-    ],
+    "urls": ["https://*.sendbird.com"],
     "packages": [
       {
         "name": "sendbird",
@@ -5061,9 +4641,7 @@
   {
     "name": "Vero",
     "type": "external_service",
-    "urls": [
-      "https://api.getvero.com"
-    ],
+    "urls": ["https://api.getvero.com"],
     "packages": [
       {
         "name": "docplanner/vero-php",
@@ -5080,9 +4658,7 @@
   {
     "name": "Uploadecare",
     "type": "external_service",
-    "urls": [
-      "https://upload.uploadcare.com"
-    ],
+    "urls": ["https://upload.uploadcare.com"],
     "packages": [
       {
         "name": "uploadcare/uploadcare-php",
@@ -5111,9 +4687,7 @@
   {
     "name": "PayU",
     "type": "external_service",
-    "urls": [
-      "https://secure.payu.com"
-    ],
+    "urls": ["https://secure.payu.com"],
     "packages": [
       {
         "name": "openpayu/openpayu",
@@ -5168,9 +4742,7 @@
   {
     "name": "Rackspace Cloud",
     "type": "external_service",
-    "urls": [
-      "https://api.rackspacecloud.com"
-    ],
+    "urls": ["https://api.rackspacecloud.com"],
     "packages": []
   },
   {
@@ -5188,10 +4760,7 @@
   {
     "name": "Bitly",
     "type": "external_service",
-    "urls": [
-      "https://api.bitly.com",
-      "https://api-ssl.bitly.com"
-    ],
+    "urls": ["https://api.bitly.com", "https://api-ssl.bitly.com"],
     "packages": []
   },
   {
@@ -5221,17 +4790,13 @@
   {
     "name": "Greenhouse",
     "type": "external_service",
-    "urls": [
-      "https://boards-api.greenhouse.io"
-    ],
+    "urls": ["https://boards-api.greenhouse.io"],
     "packages": []
   },
   {
     "name": "Iagility",
     "type": "external_service",
-    "urls": [
-      "https://iagility.smsizer.com/api/*"
-    ],
+    "urls": ["https://iagility.smsizer.com/api/*"],
     "packages": []
   },
   {
@@ -5246,26 +4811,19 @@
   {
     "name": "Edgecast",
     "type": "external_service",
-    "urls": [
-      "https://api.edgecast.com"
-    ],
+    "urls": ["https://api.edgecast.com"],
     "packages": []
   },
   {
     "name": "Dossier pharmaceutique",
     "type": "external_service",
-    "urls": [
-      "http://ws-fac.dossier-pharmaceutique.fr"
-    ],
+    "urls": ["http://ws-fac.dossier-pharmaceutique.fr"],
     "packages": []
   },
   {
     "name": "Dropbox",
     "type": "external_service",
-    "urls": [
-      "https://api.dropboxapi.com",
-      "https://api.dropbox.com"
-    ],
+    "urls": ["https://api.dropboxapi.com", "https://api.dropbox.com"],
     "packages": [
       {
         "name": "dropbox",
@@ -5307,10 +4865,7 @@
   {
     "name": "Mailchimp",
     "type": "external_service",
-    "urls": [
-      "https://api.mailchimp.com",
-      "https://mandrillapp.com/api"
-    ],
+    "urls": ["https://api.mailchimp.com", "https://mandrillapp.com/api"],
     "packages": [
       {
         "name": "mailchimp/marketing",
@@ -5376,9 +4931,7 @@
   {
     "name": "Google reCAPTCHA ",
     "type": "external_service",
-    "urls": [
-      "https://*.google.com/recaptcha/*"
-    ],
+    "urls": ["https://*.google.com/recaptcha/*"],
     "packages": [
       {
         "name": "recaptcha-v3",
@@ -5659,18 +5212,13 @@
   {
     "name": "Gandi",
     "type": "external_service",
-    "urls": [
-      "https://rpc.gandi.net",
-      "https://api.gandi.net"
-    ],
+    "urls": ["https://rpc.gandi.net", "https://api.gandi.net"],
     "packages": []
   },
   {
     "name": "Dnsimple",
     "type": "external_service",
-    "urls": [
-      "https://api.dnsimple.com"
-    ],
+    "urls": ["https://api.dnsimple.com"],
     "packages": [
       {
         "name": "github.com/dnsimple/dnsimple-go",
@@ -5682,9 +5230,7 @@
   {
     "name": "DigitalOcean APIs",
     "type": "external_service",
-    "urls": [
-      "https://api.digitalocean.com"
-    ],
+    "urls": ["https://api.digitalocean.com"],
     "packages": [
       {
         "name": "github.com/digitalocean/godo",
@@ -5696,9 +5242,7 @@
   {
     "name": "Sendinblue",
     "type": "external_service",
-    "urls": [
-      "https://api.sendinblue.com"
-    ],
+    "urls": ["https://api.sendinblue.com"],
     "packages": []
   },
   {
@@ -5726,9 +5270,7 @@
   {
     "name": "WordPress",
     "type": "external_service",
-    "urls": [
-      "https://public-api.wordpress.com"
-    ],
+    "urls": ["https://public-api.wordpress.com"],
     "packages": []
   },
   {
@@ -5771,9 +5313,7 @@
   {
     "name": "Google Service APIs",
     "type": "external_service",
-    "urls": [
-      "https://apis.google.com"
-    ],
+    "urls": ["https://apis.google.com"],
     "packages": [
       {
         "name": "google/apiclient",
@@ -5941,9 +5481,7 @@
   {
     "name": "Hotjar",
     "type": "external_service",
-    "urls": [
-      "https://static.hotjar.com"
-    ],
+    "urls": ["https://static.hotjar.com"],
     "packages": [
       {
         "name": "react-hotjar",
@@ -5955,9 +5493,7 @@
   {
     "name": "Instagram",
     "type": "external_service",
-    "urls": [
-      "https://api.instagram.com"
-    ],
+    "urls": ["https://api.instagram.com"],
     "packages": []
   },
   {
@@ -5985,9 +5521,7 @@
   {
     "name": "Google Cloud APIs",
     "type": "external_service",
-    "urls": [
-      "https://*.googleapis.com"
-    ],
+    "urls": ["https://*.googleapis.com"],
     "packages": [
       {
         "name": "Google.Apis",
@@ -6283,10 +5817,7 @@
   {
     "name": "Amazon AWS APIs",
     "type": "external_service",
-    "urls": [
-      "https://amazonaws.com.cn",
-      "https://amazonaws.com"
-    ],
+    "urls": ["https://amazonaws.com.cn", "https://amazonaws.com"],
     "packages": [
       {
         "name": "github.com/aws/aws-sdk-go-v2",
@@ -6328,9 +5859,7 @@
   {
     "name": "Alibaba Cloud APIs",
     "type": "external_service",
-    "urls": [
-      "https://*.aliyuncs.com"
-    ],
+    "urls": ["https://*.aliyuncs.com"],
     "packages": [
       {
         "name": "github.com/aliyun/alibaba-cloud-sdk-go",
@@ -6357,10 +5886,7 @@
   {
     "name": "Gravatar",
     "type": "external_service",
-    "urls": [
-      "https://gravatar.com",
-      "https://secure.gravatar.com/xmlrpc"
-    ],
+    "urls": ["https://gravatar.com", "https://secure.gravatar.com/xmlrpc"],
     "packages": [
       {
         "name": "gravatar",
@@ -6629,9 +6155,7 @@
   {
     "name": "GitHub",
     "type": "external_service",
-    "urls": [
-      "https://api.github.com"
-    ],
+    "urls": ["https://api.github.com"],
     "packages": [
       {
         "name": "octokit",
@@ -6693,9 +6217,7 @@
   {
     "name": "Sentry",
     "type": "external_service",
-    "urls": [
-      "https://sentry.io/api"
-    ],
+    "urls": ["https://sentry.io/api"],
     "packages": [
       {
         "name": "sentry-ruby",
@@ -7071,9 +6593,7 @@
   {
     "name": "Lightstep",
     "type": "external_service",
-    "urls": [
-      "https://api.lightstep.com"
-    ],
+    "urls": ["https://api.lightstep.com"],
     "packages": [
       {
         "name": "github.com/lightstep/lightstep-tracer-go",
@@ -7129,10 +6649,7 @@
   {
     "name": "Elastic",
     "type": "external_service",
-    "urls": [
-      "https://*.found.io",
-      "https://cloud.es.io"
-    ],
+    "urls": ["https://*.found.io", "https://cloud.es.io"],
     "packages": [
       {
         "name": "elastic-apm-http-client",
@@ -7248,18 +6765,13 @@
   {
     "name": "Adobe Scene7",
     "type": "external_service",
-    "urls": [
-      "https://*.scene7.com"
-    ],
+    "urls": ["https://*.scene7.com"],
     "packages": []
   },
   {
     "name": "Airbrake",
     "type": "external_service",
-    "urls": [
-      "https://airbrake.io/api",
-      "https://api.airbrake.io"
-    ],
+    "urls": ["https://airbrake.io/api", "https://api.airbrake.io"],
     "packages": [
       {
         "name": "airbrake",
@@ -7453,9 +6965,7 @@
   {
     "name": "Gitlab",
     "type": "external_service",
-    "urls": [
-      "https://gitlab.com/api"
-    ],
+    "urls": ["https://gitlab.com/api"],
     "packages": [
       {
         "name": "gitlab",
@@ -7519,9 +7029,7 @@
   {
     "name": "Bitbucket",
     "type": "external_service",
-    "urls": [
-      "https://api.bitbucket.org"
-    ],
+    "urls": ["https://api.bitbucket.org"],
     "packages": [
       {
         "name": "github.com/ktrysmt/go-bitbucket",
@@ -7717,9 +7225,7 @@
   {
     "name": "Google Maps",
     "type": "external_service",
-    "urls": [
-      "https://maps.googleapis.com/maps/api/"
-    ],
+    "urls": ["https://maps.googleapis.com/maps/api/"],
     "packages": [
       {
         "name": "google-map-react",
@@ -7756,10 +7262,7 @@
   {
     "name": "Slack",
     "type": "external_service",
-    "urls": [
-      "https://hooks.slack.com",
-      "https://api.slack.com"
-    ],
+    "urls": ["https://hooks.slack.com", "https://api.slack.com"],
     "packages": [
       {
         "name": "slackclient",

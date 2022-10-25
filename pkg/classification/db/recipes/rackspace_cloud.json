@@ -1,1 +1,7 @@
-{"metadata":{"version":"1.0"},"name":"Rackspace Cloud","type":"external_service","urls":["https://api.rackspacecloud.com"],"packages":[]}
+{
+  "metadata": { "version": "1.0" },
+  "name": "Rackspace Cloud",
+  "type": "external_service",
+  "urls": ["https://api.rackspacecloud.com"],
+  "packages": []
+}

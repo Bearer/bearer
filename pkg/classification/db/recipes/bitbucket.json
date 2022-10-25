@@ -1,1 +1,18 @@
-{"metadata":{"version":"1.0"},"name":"Bitbucket","type":"external_service","urls":["https://api.bitbucket.org"],"packages":[{"name":"github.com/ktrysmt/go-bitbucket","group":null,"package_manager":"go"},{"name":"github.com/gfleury/go-bitbucket-v1","group":null,"package_manager":"go"}]}
+{
+  "metadata": { "version": "1.0" },
+  "name": "Bitbucket",
+  "type": "external_service",
+  "urls": ["https://api.bitbucket.org"],
+  "packages": [
+    {
+      "name": "github.com/ktrysmt/go-bitbucket",
+      "group": null,
+      "package_manager": "go"
+    },
+    {
+      "name": "github.com/gfleury/go-bitbucket-v1",
+      "group": null,
+      "package_manager": "go"
+    }
+  ]
+}

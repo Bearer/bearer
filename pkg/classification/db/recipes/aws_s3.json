@@ -1,1 +1,24 @@
-{"metadata":{"version":"1.0"},"name":"AWS S3","type":"data_store","urls":["https://s3-*.amazonaws.com","https://s3.*.amazonaws.com"],"packages":[{"name":"aws-sdk-s3","group":null,"package_manager":"rubygems"},{"name":"async-aws/s3","group":null,"package_manager":"packagist"},{"name":"s3transfer","group":null,"package_manager":"pypi"},{"name":"@aws-sdk/client-s3","group":null,"package_manager":"npm"},{"name":"github.com/aws/aws-sdk-go-v2/service/s3","group":null,"package_manager":"go"},{"name":"s3","group":"software.amazon.awssdk","package_manager":"maven"},{"name":"s3fs","group":null,"package_manager":"pypi"},{"name":"aws4","group":null,"package_manager":"npm"}]}
+{
+  "metadata": { "version": "1.0" },
+  "name": "AWS S3",
+  "type": "data_store",
+  "urls": ["https://s3-*.amazonaws.com", "https://s3.*.amazonaws.com"],
+  "packages": [
+    { "name": "aws-sdk-s3", "group": null, "package_manager": "rubygems" },
+    { "name": "async-aws/s3", "group": null, "package_manager": "packagist" },
+    { "name": "s3transfer", "group": null, "package_manager": "pypi" },
+    { "name": "@aws-sdk/client-s3", "group": null, "package_manager": "npm" },
+    {
+      "name": "github.com/aws/aws-sdk-go-v2/service/s3",
+      "group": null,
+      "package_manager": "go"
+    },
+    {
+      "name": "s3",
+      "group": "software.amazon.awssdk",
+      "package_manager": "maven"
+    },
+    { "name": "s3fs", "group": null, "package_manager": "pypi" },
+    { "name": "aws4", "group": null, "package_manager": "npm" }
+  ]
+}

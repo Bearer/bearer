@@ -2,6 +2,7 @@ package schema
 
 import (
 	"github.com/bearer/curio/pkg/parser/datatype"
+	"github.com/bearer/curio/pkg/report/detectors"
 )
 
 type ClassifiedDatatype struct {
@@ -25,9 +26,15 @@ func New(config Config) *Classifier {
 	return &Classifier{config: config}
 }
 
-func (classifier *Classifier) Classify(data datatype.DataType) (ClassifiedDatatype, error) {
+type DataTypeDetection struct {
+	Value        datatype.DataType
+	Filename     string
+	DetectorType detectors.Type
+}
+
+func (classifier *Classifier) Classify(data DataTypeDetection) (*ClassifiedDatatype, error) {
 	// todo: implement interface classification (bigbear etc...)
-	return ClassifiedDatatype{
+	return &ClassifiedDatatype{
 		DataType: &datatype.DataType{
 			UUID: "1",
 		},

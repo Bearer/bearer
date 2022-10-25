@@ -1,0 +1,14 @@
+{
+  "metadata": { "version": "1.0" },
+  "id": 3,
+  "data_type_uuid": "31583120-fdb1-4522-9450-487acb6d5656",
+  "exclude_regexp": null,
+  "exclude_types": ["boolean"],
+  "friendly_name": "Age Range",
+  "health_context_data_type_uuid": null,
+  "include_regexp": "\\bage\\b",
+  "include_types": ["string", "object"],
+  "match_column": true,
+  "match_object": false,
+  "object_type": ["known", "unknown_extended"]
+}

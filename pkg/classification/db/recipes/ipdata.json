@@ -1,1 +1,7 @@
-{"metadata":{"version":"1.0"},"name":"Ipdata","type":"external_service","urls":["https://api.ipdata.co"],"packages":[]}
+{
+  "metadata": { "version": "1.0" },
+  "name": "Ipdata",
+  "type": "external_service",
+  "urls": ["https://api.ipdata.co"],
+  "packages": []
+}

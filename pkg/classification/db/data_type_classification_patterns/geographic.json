@@ -1,0 +1,14 @@
+{
+  "metadata": { "version": "1.0" },
+  "id": 101,
+  "data_type_uuid": "a0d99e34-a1e0-4d5a-9614-e8649933542c",
+  "exclude_regexp": "\\b.*id|office.*\\b",
+  "exclude_types": ["boolean"],
+  "friendly_name": "Geographic",
+  "health_context_data_type_uuid": null,
+  "include_regexp": "\\b((geographical|geographic|customer|physical)?\\s?(location|region|coordinate)|longitude|latitude)\\b",
+  "include_types": ["string"],
+  "match_column": true,
+  "match_object": false,
+  "object_type": ["known", "unknown_extended"]
+}

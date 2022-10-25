@@ -1,0 +1,14 @@
+{
+  "metadata": { "version": "1.0" },
+  "id": 183,
+  "data_type_uuid": "d442a6b7-bf22-4cc3-9cff-6be69e8b05c6",
+  "exclude_regexp": null,
+  "exclude_types": ["boolean"],
+  "friendly_name": "Hypertension",
+  "health_context_data_type_uuid": null,
+  "include_regexp": "\\bhypertension\\b",
+  "include_types": ["string"],
+  "match_column": true,
+  "match_object": false,
+  "object_type": ["known", "unknown_extended"]
+}

@@ -1,1 +1,23 @@
-{"metadata":{"version":"1.0"},"name":"Scaleway Cloud APIs","type":"external_service","urls":["https://cp-par1.scaleway.com","https://cp-ams1.scaleway.com","https://api.scaleway.com"],"packages":[{"name":"github.com/scaleway/scaleway-sdk-go","group":null,"package_manager":"go"},{"name":"github.com/nicolai86/scaleway-sdk","group":null,"package_manager":"go"},{"name":"scaleway","group":null,"package_manager":"npm"}]}
+{
+  "metadata": { "version": "1.0" },
+  "name": "Scaleway Cloud APIs",
+  "type": "external_service",
+  "urls": [
+    "https://cp-par1.scaleway.com",
+    "https://cp-ams1.scaleway.com",
+    "https://api.scaleway.com"
+  ],
+  "packages": [
+    {
+      "name": "github.com/scaleway/scaleway-sdk-go",
+      "group": null,
+      "package_manager": "go"
+    },
+    {
+      "name": "github.com/nicolai86/scaleway-sdk",
+      "group": null,
+      "package_manager": "go"
+    },
+    { "name": "scaleway", "group": null, "package_manager": "npm" }
+  ]
+}

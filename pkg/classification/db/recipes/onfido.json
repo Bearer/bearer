@@ -1,1 +1,14 @@
-{"metadata":{"version":"1.0"},"name":"Onfido","type":"external_service","urls":["https://api.eu.onfido.com","https://api.us.onfido.com","https://api.onfido.com"],"packages":[{"name":"onfido","group":null,"package_manager":"rubygems"},{"name":"onfido-sdk-ui","group":null,"package_manager":"npm"}]}
+{
+  "metadata": { "version": "1.0" },
+  "name": "Onfido",
+  "type": "external_service",
+  "urls": [
+    "https://api.eu.onfido.com",
+    "https://api.us.onfido.com",
+    "https://api.onfido.com"
+  ],
+  "packages": [
+    { "name": "onfido", "group": null, "package_manager": "rubygems" },
+    { "name": "onfido-sdk-ui", "group": null, "package_manager": "npm" }
+  ]
+}

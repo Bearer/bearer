@@ -1,1 +1,13 @@
-{"metadata":{"version":"1.0"},"name":"Cloudflare","type":"external_service","urls":["https://api.cloudflare.com"],"packages":[{"name":"github.com/cloudflare/cloudflare-go","group":null,"package_manager":"go"}]}
+{
+  "metadata": { "version": "1.0" },
+  "name": "Cloudflare",
+  "type": "external_service",
+  "urls": ["https://api.cloudflare.com"],
+  "packages": [
+    {
+      "name": "github.com/cloudflare/cloudflare-go",
+      "group": null,
+      "package_manager": "go"
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "metadata": { "version": "1.0" },
+  "id": 48,
+  "data_type_uuid": "f4c90568-ef19-4c52-91b4-e2e7232bf5ed",
+  "exclude_regexp": null,
+  "exclude_types": ["boolean"],
+  "friendly_name": "Salary",
+  "health_context_data_type_uuid": null,
+  "include_regexp": "\\b(salary)\\b",
+  "include_types": ["string"],
+  "match_column": true,
+  "match_object": false,
+  "object_type": ["known", "unknown_extended", "unknown"]
+}

@@ -1,0 +1,14 @@
+{
+  "metadata": { "version": "1.0" },
+  "id": 18,
+  "data_type_uuid": "c897613c-55f4-4df0-a817-e2e4a2b1ec5d",
+  "exclude_regexp": null,
+  "exclude_types": ["boolean"],
+  "friendly_name": "Mother's Maiden Name",
+  "health_context_data_type_uuid": null,
+  "include_regexp": "\\b(mother.*maiden.*name)\\b",
+  "include_types": ["string"],
+  "match_column": true,
+  "match_object": false,
+  "object_type": ["known", "unknown_extended", "unknown"]
+}

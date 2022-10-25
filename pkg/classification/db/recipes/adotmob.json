@@ -1,1 +1,7 @@
-{"metadata":{"version":"1.0"},"name":"Adotmob","type":"external_service","urls":["https://dmp.adotmob.com","https://tracker.adotmob.com"],"packages":[]}
+{
+  "metadata": { "version": "1.0" },
+  "name": "Adotmob",
+  "type": "external_service",
+  "urls": ["https://dmp.adotmob.com", "https://tracker.adotmob.com"],
+  "packages": []
+}

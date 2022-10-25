@@ -1,0 +1,14 @@
+{
+  "metadata": { "version": "1.0" },
+  "id": 27,
+  "data_type_uuid": null,
+  "exclude_regexp": null,
+  "exclude_types": ["boolean"],
+  "friendly_name": "Disabilities",
+  "health_context_data_type_uuid": "e2269060-ab72-42b2-bba2-726ac9fbe18b",
+  "include_regexp": "\\b(disabilit(y|ies))\\b",
+  "include_types": ["string"],
+  "match_column": true,
+  "match_object": false,
+  "object_type": ["known", "unknown_extended", "unknown"]
+}

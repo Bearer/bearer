@@ -1,1 +1,7 @@
-{"metadata":{"version":"1.0"},"name":"Zapier","type":"external_service","urls":["https://hooks.zapier.com","https://api.zapier.com"],"packages":[]}
+{
+  "metadata": { "version": "1.0" },
+  "name": "Zapier",
+  "type": "external_service",
+  "urls": ["https://hooks.zapier.com", "https://api.zapier.com"],
+  "packages": []
+}

@@ -1,0 +1,14 @@
+{
+  "metadata": { "version": "1.0" },
+  "id": 7,
+  "data_type_uuid": "cd599850-9929-40c8-9f75-eb2538e309fb",
+  "exclude_regexp": null,
+  "exclude_types": ["boolean"],
+  "friendly_name": "Credit Records",
+  "health_context_data_type_uuid": null,
+  "include_regexp": "\\b(credit\\s?records?)\\b",
+  "include_types": ["string"],
+  "match_column": true,
+  "match_object": false,
+  "object_type": ["known", "unknown_extended", "unknown"]
+}

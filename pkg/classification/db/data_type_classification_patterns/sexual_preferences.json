@@ -1,0 +1,14 @@
+{
+  "metadata": { "version": "1.0" },
+  "id": 41,
+  "data_type_uuid": "b3d9bbb8-6116-4aef-93ca-682178b5da98",
+  "exclude_regexp": null,
+  "exclude_types": ["boolean"],
+  "friendly_name": "Sexual Preferences",
+  "health_context_data_type_uuid": null,
+  "include_regexp": "\\bsexual\\s?(preferences?|orientation)\\b",
+  "include_types": ["string"],
+  "match_column": true,
+  "match_object": false,
+  "object_type": ["known", "unknown_extended", "unknown"]
+}

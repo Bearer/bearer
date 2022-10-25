@@ -1,1 +1,7 @@
-{"metadata":{"version":"1.0"},"name":"Trafficvance","type":"external_service","urls":["https://api.trafficvance.com","https://apitest.trafficvance.com"],"packages":[]}
+{
+  "metadata": { "version": "1.0" },
+  "name": "Trafficvance",
+  "type": "external_service",
+  "urls": ["https://api.trafficvance.com", "https://apitest.trafficvance.com"],
+  "packages": []
+}

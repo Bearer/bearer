@@ -1,0 +1,8 @@
+{
+  "metadata": { "version": "1.0" },
+  "id": 8,
+  "act_as_identifier": false,
+  "category": "Authentication",
+  "exclude_regexp": "\\b(.|_)?author(.|_)?\\b",
+  "include_regexp": "\\b.*authentication.*|.*oauth.*|.*auth.*\\b"
+}

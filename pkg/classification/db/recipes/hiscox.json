@@ -1,1 +1,12 @@
-{"metadata":{"version":"1.0"},"name":"Hiscox","type":"external_service","urls":["https://quote.hiscox.co.uk","https://hiscoxukpartners.azure-api.net","https://hiscoxclientapi.azurewebsites.net","https://hiscoxukpartners-test.azure-api.net"],"packages":[]}
+{
+  "metadata": { "version": "1.0" },
+  "name": "Hiscox",
+  "type": "external_service",
+  "urls": [
+    "https://quote.hiscox.co.uk",
+    "https://hiscoxukpartners.azure-api.net",
+    "https://hiscoxclientapi.azurewebsites.net",
+    "https://hiscoxukpartners-test.azure-api.net"
+  ],
+  "packages": []
+}

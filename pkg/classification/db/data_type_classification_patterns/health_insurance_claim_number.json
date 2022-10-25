@@ -1,0 +1,14 @@
+{
+  "metadata": { "version": "1.0" },
+  "id": 159,
+  "data_type_uuid": null,
+  "exclude_regexp": null,
+  "exclude_types": ["boolean"],
+  "friendly_name": "Health Insurance Claim Number",
+  "health_context_data_type_uuid": "c1704474-de02-40f0-8880-ece05fdbe9b5",
+  "include_regexp": "\\b(health\\s?insurance\\s?claim\\s?(number|no))|hicn|hic\\s?(no|number)\\b",
+  "include_types": ["string"],
+  "match_column": true,
+  "match_object": false,
+  "object_type": ["known", "unknown_extended"]
+}

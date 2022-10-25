@@ -27,6 +27,12 @@ var (
 		Value:      3 * time.Second,
 		Usage:      "set timeout when attempting to resolve detected domains during classification (default 3 seconds), eg. --domain-resolution-timeout=TODO",
 	}
+	InternalDomainsFlag = Flag{
+		Name:       "internal-domains",
+		ConfigName: "scan.internal-domains",
+		Value:      []string{},
+		Usage:      "define regular expressions for better classification of private or unreachable domains eg. --internal-domains=\"/*.my-company.com/,/private.sh/\"",
+	}
 )
 
 type ScanFlagGroup struct {
@@ -34,6 +40,7 @@ type ScanFlagGroup struct {
 	DebugFlag                   *Flag
 	DisableDomainResolutionFlag *Flag
 	DomainResolutionTimeoutFlag *Flag
+	InternalDomainsFlag         *Flag
 }
 
 type ScanOptions struct {
@@ -42,6 +49,7 @@ type ScanOptions struct {
 	Debug                   bool          `json:"debug"`
 	DisableDomainResolution bool          `json:"disable_domain_resolution"`
 	DomainResolutionTimeout time.Duration `json:"domain_resolution_timeout"`
+	InternalDomains         []string      `json:"internal_domains"`
 }
 
 func NewScanFlagGroup() *ScanFlagGroup {
@@ -50,6 +58,7 @@ func NewScanFlagGroup() *ScanFlagGroup {
 		DebugFlag:                   &DebugFlag,
 		DisableDomainResolutionFlag: &DisableDomainResolutionFlag,
 		DomainResolutionTimeoutFlag: &DomainResolutionTimeoutFlag,
+		InternalDomainsFlag:         &InternalDomainsFlag,
 	}
 }
 
@@ -63,6 +72,7 @@ func (f *ScanFlagGroup) Flags() []*Flag {
 		f.DebugFlag,
 		f.DisableDomainResolutionFlag,
 		f.DomainResolutionTimeoutFlag,
+		f.InternalDomainsFlag,
 	}
 }
 
@@ -77,6 +87,7 @@ func (f *ScanFlagGroup) ToOptions(args []string) (ScanOptions, error) {
 		Debug:                   getBool(f.DebugFlag),
 		DisableDomainResolution: getBool(f.DisableDomainResolutionFlag),
 		DomainResolutionTimeout: getDuration(f.DomainResolutionTimeoutFlag),
+		InternalDomains:         getStringSlice(f.InternalDomainsFlag),
 		Target:                  target,
 	}, nil
 }

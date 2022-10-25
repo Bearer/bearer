@@ -1,0 +1,14 @@
+{
+  "metadata": { "version": "1.0" },
+  "id": 78,
+  "data_type_uuid": "caaaf03c-e684-4ec0-8772-04fbd9fc7397",
+  "exclude_regexp": null,
+  "exclude_types": ["boolean"],
+  "friendly_name": "Attitude",
+  "health_context_data_type_uuid": null,
+  "include_regexp": "\\b(attitude)\\b",
+  "include_types": ["string"],
+  "match_column": true,
+  "match_object": false,
+  "object_type": ["known", "unknown_extended"]
+}

@@ -1,0 +1,14 @@
+{
+  "metadata": { "version": "1.0" },
+  "id": 197,
+  "data_type_uuid": "575d073d-c3e3-4188-8d8c-f9822c9cf89e",
+  "exclude_regexp": "\\b.*id|instructions?|limit|time|fees|name.*\\b",
+  "exclude_types": ["boolean"],
+  "friendly_name": "Purchases",
+  "health_context_data_type_uuid": null,
+  "include_regexp": "\\A(purchase|order|(purchase\\s?order)|tax|shipping|discount|paid)\\s?((sub)?total|shipping|number|vat|returns?)\\b",
+  "include_types": ["string"],
+  "match_column": true,
+  "match_object": false,
+  "object_type": ["known", "unknown_extended"]
+}

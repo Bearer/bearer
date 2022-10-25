@@ -1,1 +1,7 @@
-{"metadata":{"version":"1.0"},"name":"paylocity","type":"external_service","urls":["https://api.paylocity.com/api"],"packages":[]}
+{
+  "metadata": { "version": "1.0" },
+  "name": "paylocity",
+  "type": "external_service",
+  "urls": ["https://api.paylocity.com/api"],
+  "packages": []
+}

@@ -1,1 +1,18 @@
-{"metadata":{"version":"1.0"},"name":"Azure Key Vault","type":"data_store","urls":[],"packages":[{"name":"Microsoft.Azure.KeyVault.Core","group":null,"package_manager":"nuget"},{"name":"azure_mgmt_key_vault","group":null,"package_manager":"rubygems"}]}
+{
+  "metadata": { "version": "1.0" },
+  "name": "Azure Key Vault",
+  "type": "data_store",
+  "urls": [],
+  "packages": [
+    {
+      "name": "Microsoft.Azure.KeyVault.Core",
+      "group": null,
+      "package_manager": "nuget"
+    },
+    {
+      "name": "azure_mgmt_key_vault",
+      "group": null,
+      "package_manager": "rubygems"
+    }
+  ]
+}

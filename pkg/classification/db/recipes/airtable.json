@@ -1,1 +1,14 @@
-{"metadata":{"version":"1.0"},"name":"Airtable","type":"external_service","urls":["https://api.airtable.com"],"packages":[{"name":"airtable","group":null,"package_manager":"npm"},{"name":"github.com/brianloveswords/airtable","group":null,"package_manager":"go"}]}
+{
+  "metadata": { "version": "1.0" },
+  "name": "Airtable",
+  "type": "external_service",
+  "urls": ["https://api.airtable.com"],
+  "packages": [
+    { "name": "airtable", "group": null, "package_manager": "npm" },
+    {
+      "name": "github.com/brianloveswords/airtable",
+      "group": null,
+      "package_manager": "go"
+    }
+  ]
+}

@@ -1,7 +1,6 @@
 package interfaces_test
 
 import (
-	"regexp"
 	"testing"
 
 	"github.com/bearer/curio/pkg/classification/db"
@@ -195,10 +194,8 @@ func TestInterface(t *testing.T) {
 
 	classifier, err := interfaces.New(
 		interfaces.Config{
-			Recipes: db.Default(),
-			InternalDomainMatchers: []*regexp.Regexp{
-				regexp.MustCompile(`https://my.internal.domain.com`),
-			},
+			Recipes:         db.Default().Recipes,
+			InternalDomains: []string{"https://my.internal.domain.com"},
 		},
 	)
 	if err != nil {

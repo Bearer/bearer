@@ -1,1 +1,16 @@
-{"metadata":{"version":"1.0"},"name":"Google Tag Manager","type":"external_service","urls":["https://googletagmanager.com/gtag/js","https://googletagmanager.com/gtm.js"],"packages":[{"name":"play-services-tagmanager","group":"com.google.android.gms","package_manager":"maven"}]}
+{
+  "metadata": { "version": "1.0" },
+  "name": "Google Tag Manager",
+  "type": "external_service",
+  "urls": [
+    "https://googletagmanager.com/gtag/js",
+    "https://googletagmanager.com/gtm.js"
+  ],
+  "packages": [
+    {
+      "name": "play-services-tagmanager",
+      "group": "com.google.android.gms",
+      "package_manager": "maven"
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "metadata": { "version": "1.0" },
+  "id": 63,
+  "data_type_uuid": "c2f07a15-6cc1-451b-b8b4-7598bc0117e8",
+  "exclude_regexp": null,
+  "exclude_types": ["boolean"],
+  "friendly_name": "Spoken Languages",
+  "health_context_data_type_uuid": null,
+  "include_regexp": "\\bspoken\\s?languages?\\b",
+  "include_types": ["string"],
+  "match_column": true,
+  "match_object": false,
+  "object_type": ["unknown"]
+}

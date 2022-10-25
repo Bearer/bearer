@@ -1,0 +1,14 @@
+{
+  "metadata": { "version": "1.0" },
+  "id": 64,
+  "data_type_uuid": "7a7e79a5-dfdb-4d69-9f73-a140b72f932a",
+  "exclude_regexp": null,
+  "exclude_types": ["boolean"],
+  "friendly_name": "Accents",
+  "health_context_data_type_uuid": null,
+  "include_regexp": "\\baccents?\\b",
+  "include_types": ["string"],
+  "match_column": true,
+  "match_object": false,
+  "object_type": ["known", "unknown_extended"]
+}

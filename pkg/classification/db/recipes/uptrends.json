@@ -1,1 +1,7 @@
-{"metadata":{"version":"1.0"},"name":"Uptrends","type":"external_service","urls":["https://api.uptrends.com"],"packages":[]}
+{
+  "metadata": { "version": "1.0" },
+  "name": "Uptrends",
+  "type": "external_service",
+  "urls": ["https://api.uptrends.com"],
+  "packages": []
+}

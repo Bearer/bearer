@@ -1,1 +1,13 @@
-{"metadata":{"version":"1.0"},"name":"ActiveCampaign","type":"external_service","urls":["https://api-us1.com"],"packages":[{"name":"activecampaign/api-php","group":null,"package_manager":"packagist"}]}
+{
+  "metadata": { "version": "1.0" },
+  "name": "ActiveCampaign",
+  "type": "external_service",
+  "urls": ["https://api-us1.com"],
+  "packages": [
+    {
+      "name": "activecampaign/api-php",
+      "group": null,
+      "package_manager": "packagist"
+    }
+  ]
+}

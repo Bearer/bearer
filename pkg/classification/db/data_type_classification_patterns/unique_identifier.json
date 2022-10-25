@@ -1,0 +1,14 @@
+{
+  "metadata": { "version": "1.0" },
+  "id": 143,
+  "data_type_uuid": "12d44ae0-1df7-4faf-9fb1-b46cc4b4dce9",
+  "exclude_regexp": "\\bby\\b",
+  "exclude_types": ["boolean"],
+  "friendly_name": "Unique Identifier",
+  "health_context_data_type_uuid": null,
+  "include_regexp": "\\A(authenticated)?\\s?(user|customer|consumer|account|profile|player|candidate|mentor|captain|winner|patient|doctor|partner|author|practitioner|beneficiary|sender|recipient|purchaser)\\s?(uu)?(id)(entity|entifier)?\\b",
+  "include_types": ["string", "number"],
+  "match_column": true,
+  "match_object": false,
+  "object_type": ["known", "unknown", "unknown_extended"]
+}

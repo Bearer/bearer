@@ -1,1 +1,10 @@
-{"metadata":{"version":"1.0"},"name":"eSante Gouv","type":"external_service","urls":["https://auth.esw.esante.gouv.fr","http://wallet.esw.esante.gouv.fr"],"packages":[]}
+{
+  "metadata": { "version": "1.0" },
+  "name": "eSante Gouv",
+  "type": "external_service",
+  "urls": [
+    "https://auth.esw.esante.gouv.fr",
+    "http://wallet.esw.esante.gouv.fr"
+  ],
+  "packages": []
+}

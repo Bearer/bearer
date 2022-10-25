@@ -1,1 +1,18 @@
-{"metadata":{"version":"1.0"},"name":"MangoPay","type":"external_service","urls":["https://api.sandbox.mangopay.com","https://api.mangopay.com"],"packages":[{"name":"github.com/bgruszka/mangopay2-go-sdk","group":null,"package_manager":"go"},{"name":"github.com/gotsunami/mangopay2-go-sdk","group":null,"package_manager":"go"}]}
+{
+  "metadata": { "version": "1.0" },
+  "name": "MangoPay",
+  "type": "external_service",
+  "urls": ["https://api.sandbox.mangopay.com", "https://api.mangopay.com"],
+  "packages": [
+    {
+      "name": "github.com/bgruszka/mangopay2-go-sdk",
+      "group": null,
+      "package_manager": "go"
+    },
+    {
+      "name": "github.com/gotsunami/mangopay2-go-sdk",
+      "group": null,
+      "package_manager": "go"
+    }
+  ]
+}

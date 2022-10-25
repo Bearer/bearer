@@ -1,1 +1,7 @@
-{"metadata":{"version":"1.0"},"name":"Mabaya","type":"external_service","urls":["https://manage-api.mabaya.com"],"packages":[]}
+{
+  "metadata": { "version": "1.0" },
+  "name": "Mabaya",
+  "type": "external_service",
+  "urls": ["https://manage-api.mabaya.com"],
+  "packages": []
+}

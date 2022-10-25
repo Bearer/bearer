@@ -1,1 +1,25 @@
-{"metadata":{"version":"1.0"},"name":"Heroku","type":"external_service","urls":["https://api.heroku.com"],"packages":[{"name":"php-heroku-client/php-heroku-client","group":null,"package_manager":"packagist"},{"name":"heroku-client","group":null,"package_manager":"npm"},{"name":"platform-api","group":null,"package_manager":"rubygems"},{"name":"github.com/heroku/heroku-go","group":null,"package_manager":"go"},{"name":"github.com/bgentry/heroku-go","group":null,"package_manager":"go"}]}
+{
+  "metadata": { "version": "1.0" },
+  "name": "Heroku",
+  "type": "external_service",
+  "urls": ["https://api.heroku.com"],
+  "packages": [
+    {
+      "name": "php-heroku-client/php-heroku-client",
+      "group": null,
+      "package_manager": "packagist"
+    },
+    { "name": "heroku-client", "group": null, "package_manager": "npm" },
+    { "name": "platform-api", "group": null, "package_manager": "rubygems" },
+    {
+      "name": "github.com/heroku/heroku-go",
+      "group": null,
+      "package_manager": "go"
+    },
+    {
+      "name": "github.com/bgentry/heroku-go",
+      "group": null,
+      "package_manager": "go"
+    }
+  ]
+}

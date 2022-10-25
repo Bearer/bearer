@@ -1,0 +1,7 @@
+{
+  "metadata": { "version": "1.0" },
+  "id": 10,
+  "act_as_identifier": false,
+  "category": "Beneficiar",
+  "include_regexp": "\\b.*beneficiar.*\\b"
+}

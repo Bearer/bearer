@@ -1,1 +1,7 @@
-{"metadata":{"version":"1.0"},"name":"Netlify","type":"external_service","urls":["https://api.netlify.com"],"packages":[]}
+{
+  "metadata": { "version": "1.0" },
+  "name": "Netlify",
+  "type": "external_service",
+  "urls": ["https://api.netlify.com"],
+  "packages": []
+}

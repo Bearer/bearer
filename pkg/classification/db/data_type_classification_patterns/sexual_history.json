@@ -1,0 +1,14 @@
+{
+  "metadata": { "version": "1.0" },
+  "id": 42,
+  "data_type_uuid": "3c5f11d3-e729-4950-a2e3-f0b5efcc044d",
+  "exclude_regexp": null,
+  "exclude_types": ["boolean"],
+  "friendly_name": "Sexual History",
+  "health_context_data_type_uuid": null,
+  "include_regexp": "\\b(sexual.*history)\\b",
+  "include_types": ["string"],
+  "match_column": true,
+  "match_object": false,
+  "object_type": ["known", "unknown_extended", "unknown"]
+}

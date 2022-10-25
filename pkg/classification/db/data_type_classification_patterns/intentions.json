@@ -1,0 +1,14 @@
+{
+  "metadata": { "version": "1.0" },
+  "id": 74,
+  "data_type_uuid": "09ff91af-6f83-48fa-9c74-7c58941e1b56",
+  "exclude_regexp": null,
+  "exclude_types": ["boolean"],
+  "friendly_name": "Intentions",
+  "health_context_data_type_uuid": null,
+  "include_regexp": "\\b(intentions?)\\b",
+  "include_types": ["string"],
+  "match_column": true,
+  "match_object": false,
+  "object_type": ["known", "unknown_extended"]
+}

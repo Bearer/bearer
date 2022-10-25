@@ -1,0 +1,14 @@
+{
+  "metadata": { "version": "1.0" },
+  "id": 44,
+  "data_type_uuid": "c49371af-543c-4700-9420-e049ffc4cf02",
+  "exclude_regexp": null,
+  "exclude_types": ["boolean"],
+  "friendly_name": "Interviews",
+  "health_context_data_type_uuid": null,
+  "include_regexp": "\\binterviews?\\b",
+  "include_types": ["string"],
+  "match_column": true,
+  "match_object": false,
+  "object_type": ["known", "unknown_extended", "unknown"]
+}

@@ -1,1 +1,7 @@
-{"metadata":{"version":"1.0"},"name":"Yodlee","type":"external_service","urls":["https://api.yodlee.com"],"packages":[]}
+{
+  "metadata": { "version": "1.0" },
+  "name": "Yodlee",
+  "type": "external_service",
+  "urls": ["https://api.yodlee.com"],
+  "packages": []
+}

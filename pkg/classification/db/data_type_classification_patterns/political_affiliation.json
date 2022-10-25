@@ -1,0 +1,14 @@
+{
+  "metadata": { "version": "1.0" },
+  "id": 70,
+  "data_type_uuid": "2226b7d3-8669-4c10-932b-c18208b41142",
+  "exclude_regexp": null,
+  "exclude_types": ["boolean"],
+  "friendly_name": "Political Affiliation",
+  "health_context_data_type_uuid": null,
+  "include_regexp": "\\b(political\\s?affiliation)\\b",
+  "include_types": ["string"],
+  "match_column": true,
+  "match_object": false,
+  "object_type": ["known", "unknown_extended"]
+}

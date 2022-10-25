@@ -1,1 +1,7 @@
-{"metadata":{"version":"1.0"},"name":"iProov","type":"external_service","urls":["https://eu.rp.secure.iproov.me"],"packages":[]}
+{
+  "metadata": { "version": "1.0" },
+  "name": "iProov",
+  "type": "external_service",
+  "urls": ["https://eu.rp.secure.iproov.me"],
+  "packages": []
+}

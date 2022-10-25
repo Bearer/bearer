@@ -1,1 +1,7 @@
-{"metadata":{"version":"1.0"},"name":"userlike.com","type":"external_service","urls":["https://api.userlike.com"],"packages":[]}
+{
+  "metadata": { "version": "1.0" },
+  "name": "userlike.com",
+  "type": "external_service",
+  "urls": ["https://api.userlike.com"],
+  "packages": []
+}

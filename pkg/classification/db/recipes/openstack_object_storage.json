@@ -1,1 +1,9 @@
-{"metadata":{"version":"1.0"},"name":"Openstack Object Storage","type":"data_store","urls":[],"packages":[{"name":"github.com/ncw/swift","group":null,"package_manager":"go"}]}
+{
+  "metadata": { "version": "1.0" },
+  "name": "Openstack Object Storage",
+  "type": "data_store",
+  "urls": [],
+  "packages": [
+    { "name": "github.com/ncw/swift", "group": null, "package_manager": "go" }
+  ]
+}

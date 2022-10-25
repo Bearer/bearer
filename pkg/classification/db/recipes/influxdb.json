@@ -1,1 +1,35 @@
-{"metadata":{"version":"1.0"},"name":"InfluxDB","type":"data_store","urls":[],"packages":[{"name":"github.com/influxdata/influxdb1-client","group":null,"package_manager":"go"},{"name":"github.com/influxdata/influxdb","group":null,"package_manager":"go"},{"name":"influx","group":null,"package_manager":"npm"},{"name":"influxdb-java","group":"org.influxdb","package_manager":"maven"},{"name":"influxdb/influxdb-php","group":"","package_manager":"packagist"},{"name":"influxdb-client","group":null,"package_manager":"rubygems"},{"name":"github.com/influxdata/influxdb-client-go/v2","group":null,"package_manager":"go"}]}
+{
+  "metadata": { "version": "1.0" },
+  "name": "InfluxDB",
+  "type": "data_store",
+  "urls": [],
+  "packages": [
+    {
+      "name": "github.com/influxdata/influxdb1-client",
+      "group": null,
+      "package_manager": "go"
+    },
+    {
+      "name": "github.com/influxdata/influxdb",
+      "group": null,
+      "package_manager": "go"
+    },
+    { "name": "influx", "group": null, "package_manager": "npm" },
+    {
+      "name": "influxdb-java",
+      "group": "org.influxdb",
+      "package_manager": "maven"
+    },
+    {
+      "name": "influxdb/influxdb-php",
+      "group": "",
+      "package_manager": "packagist"
+    },
+    { "name": "influxdb-client", "group": null, "package_manager": "rubygems" },
+    {
+      "name": "github.com/influxdata/influxdb-client-go/v2",
+      "group": null,
+      "package_manager": "go"
+    }
+  ]
+}

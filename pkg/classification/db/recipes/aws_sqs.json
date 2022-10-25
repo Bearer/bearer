@@ -1,1 +1,15 @@
-{"metadata":{"version":"1.0"},"name":"AWS SQS","type":"internal_service","urls":[],"packages":[{"name":"sqs-consumer","group":null,"package_manager":"npm"},{"name":"aws-sdk-sqs","group":null,"package_manager":"rubygems"},{"name":"sqs","group":"software.amazon.awssdk","package_manager":"maven"}]}
+{
+  "metadata": { "version": "1.0" },
+  "name": "AWS SQS",
+  "type": "internal_service",
+  "urls": [],
+  "packages": [
+    { "name": "sqs-consumer", "group": null, "package_manager": "npm" },
+    { "name": "aws-sdk-sqs", "group": null, "package_manager": "rubygems" },
+    {
+      "name": "sqs",
+      "group": "software.amazon.awssdk",
+      "package_manager": "maven"
+    }
+  ]
+}

@@ -1,1 +1,57 @@
-{"metadata":{"version":"1.0"},"name":"MySQL","type":"data_store","urls":[],"packages":[{"name":"activerecord-mysql2-adapter","group":null,"package_manager":"rubygems"},{"name":"mysql2","group":null,"package_manager":"rubygems"},{"name":"quarkus-jdbc-mysql","group":"io.quarkus","package_manager":"maven"},{"name":"github.com/ziutek/mymysql","group":null,"package_manager":"go"},{"name":"mysql-connector","group":null,"package_manager":"pypi"},{"name":"gorm.io/driver/mysql","group":null,"package_manager":"go"},{"name":"mysqlclient","group":null,"package_manager":"pypi"},{"name":"MySql.Data","group":null,"package_manager":"nuget"},{"name":"MySql.Data.Entities","group":null,"package_manager":"nuget"},{"name":"mysql","group":null,"package_manager":"pypi"},{"name":"mysql2","group":null,"package_manager":"npm"},{"name":"mysql","group":null,"package_manager":"rubygems"},{"name":"go-sql-driver/mysql","group":null,"package_manager":"go"},{"name":"mysql","group":null,"package_manager":"npm"},{"name":"PyMySQL","group":null,"package_manager":"pypi"},{"name":"mysql-connector-java","group":"mysql","package_manager":"maven"},{"name":"github.com/go-sql-driver/mysql","group":null,"package_manager":"go"},{"name":"pymysql","group":null,"package_manager":"pypi"},{"name":"pyMySQL","group":null,"package_manager":"pypi"},{"name":"mysql-connector-python","group":null,"package_manager":"pypi"},{"name":"ext-mysqli","group":null,"package_manager":"packagist"}]}
+{
+  "metadata": { "version": "1.0" },
+  "name": "MySQL",
+  "type": "data_store",
+  "urls": [],
+  "packages": [
+    {
+      "name": "activerecord-mysql2-adapter",
+      "group": null,
+      "package_manager": "rubygems"
+    },
+    { "name": "mysql2", "group": null, "package_manager": "rubygems" },
+    {
+      "name": "quarkus-jdbc-mysql",
+      "group": "io.quarkus",
+      "package_manager": "maven"
+    },
+    {
+      "name": "github.com/ziutek/mymysql",
+      "group": null,
+      "package_manager": "go"
+    },
+    { "name": "mysql-connector", "group": null, "package_manager": "pypi" },
+    { "name": "gorm.io/driver/mysql", "group": null, "package_manager": "go" },
+    { "name": "mysqlclient", "group": null, "package_manager": "pypi" },
+    { "name": "MySql.Data", "group": null, "package_manager": "nuget" },
+    {
+      "name": "MySql.Data.Entities",
+      "group": null,
+      "package_manager": "nuget"
+    },
+    { "name": "mysql", "group": null, "package_manager": "pypi" },
+    { "name": "mysql2", "group": null, "package_manager": "npm" },
+    { "name": "mysql", "group": null, "package_manager": "rubygems" },
+    { "name": "go-sql-driver/mysql", "group": null, "package_manager": "go" },
+    { "name": "mysql", "group": null, "package_manager": "npm" },
+    { "name": "PyMySQL", "group": null, "package_manager": "pypi" },
+    {
+      "name": "mysql-connector-java",
+      "group": "mysql",
+      "package_manager": "maven"
+    },
+    {
+      "name": "github.com/go-sql-driver/mysql",
+      "group": null,
+      "package_manager": "go"
+    },
+    { "name": "pymysql", "group": null, "package_manager": "pypi" },
+    { "name": "pyMySQL", "group": null, "package_manager": "pypi" },
+    {
+      "name": "mysql-connector-python",
+      "group": null,
+      "package_manager": "pypi"
+    },
+    { "name": "ext-mysqli", "group": null, "package_manager": "packagist" }
+  ]
+}

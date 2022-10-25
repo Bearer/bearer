@@ -1,0 +1,14 @@
+{
+  "metadata": { "version": "1.0" },
+  "id": 33,
+  "data_type_uuid": "577e3c3b-609d-4611-844c-d26598257d85",
+  "exclude_regexp": null,
+  "exclude_types": ["boolean"],
+  "friendly_name": "Divorces",
+  "health_context_data_type_uuid": null,
+  "include_regexp": "\\bdivorce\\b",
+  "include_types": ["string"],
+  "match_column": true,
+  "match_object": false,
+  "object_type": ["known", "unknown_extended", "unknown"]
+}

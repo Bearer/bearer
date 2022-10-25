@@ -1,0 +1,14 @@
+{
+  "metadata": { "version": "1.0" },
+  "id": 32,
+  "data_type_uuid": "f35491a4-c71b-43f1-b053-bd12dc5a0dac",
+  "exclude_regexp": null,
+  "exclude_types": ["boolean"],
+  "friendly_name": "Place of birth",
+  "health_context_data_type_uuid": null,
+  "include_regexp": "\\b(place.*of.*birth)\\b",
+  "include_types": ["object", "string"],
+  "match_column": true,
+  "match_object": false,
+  "object_type": ["known", "unknown_extended", "unknown"]
+}

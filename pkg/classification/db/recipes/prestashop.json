@@ -1,1 +1,11 @@
-{"metadata":{"version":"1.0"},"name":"Prestashop","type":"external_service","urls":["https://api.addons.prestashop.com","https://api-addons.prestashop.com","https://api.prestashop.com"],"packages":[]}
+{
+  "metadata": { "version": "1.0" },
+  "name": "Prestashop",
+  "type": "external_service",
+  "urls": [
+    "https://api.addons.prestashop.com",
+    "https://api-addons.prestashop.com",
+    "https://api.prestashop.com"
+  ],
+  "packages": []
+}

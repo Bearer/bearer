@@ -1,1 +1,12 @@
-{"metadata":{"version":"1.0"},"name":"Payoneer","type":"external_service","urls":["https://login.sandbox.payoneer.com","https://api.sandbox.payoneer.com","https://login.payoneer.com","https://api.payoneer.com"],"packages":[]}
+{
+  "metadata": { "version": "1.0" },
+  "name": "Payoneer",
+  "type": "external_service",
+  "urls": [
+    "https://login.sandbox.payoneer.com",
+    "https://api.sandbox.payoneer.com",
+    "https://login.payoneer.com",
+    "https://api.payoneer.com"
+  ],
+  "packages": []
+}

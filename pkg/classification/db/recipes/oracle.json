@@ -1,1 +1,24 @@
-{"metadata":{"version":"1.0"},"name":"Oracle","type":"data_store","urls":[],"packages":[{"name":"Oracle.ManagedDataAccess","group":null,"package_manager":"nuget"},{"name":"oracledb","group":null,"package_manager":"npm"},{"name":"github.com/oracle/oci-go-sdk","group":null,"package_manager":"go"},{"name":"Oracle.ManagedDataAccess.Core","group":null,"package_manager":"nuget"}]}
+{
+  "metadata": { "version": "1.0" },
+  "name": "Oracle",
+  "type": "data_store",
+  "urls": [],
+  "packages": [
+    {
+      "name": "Oracle.ManagedDataAccess",
+      "group": null,
+      "package_manager": "nuget"
+    },
+    { "name": "oracledb", "group": null, "package_manager": "npm" },
+    {
+      "name": "github.com/oracle/oci-go-sdk",
+      "group": null,
+      "package_manager": "go"
+    },
+    {
+      "name": "Oracle.ManagedDataAccess.Core",
+      "group": null,
+      "package_manager": "nuget"
+    }
+  ]
+}

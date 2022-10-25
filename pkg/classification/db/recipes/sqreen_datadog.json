@@ -1,1 +1,18 @@
-{"metadata":{"version":"1.0"},"name":"Sqreen (Datadog)","type":"external_service","urls":["https://back.sqreen.com","https://ingestion.sqreen.com","https://back.sqreen.io"],"packages":[{"name":"sqreen","group":null,"package_manager":"rubygems"},{"name":"manomano/sqreen-lib","group":null,"package_manager":"packagist"}]}
+{
+  "metadata": { "version": "1.0" },
+  "name": "Sqreen (Datadog)",
+  "type": "external_service",
+  "urls": [
+    "https://back.sqreen.com",
+    "https://ingestion.sqreen.com",
+    "https://back.sqreen.io"
+  ],
+  "packages": [
+    { "name": "sqreen", "group": null, "package_manager": "rubygems" },
+    {
+      "name": "manomano/sqreen-lib",
+      "group": null,
+      "package_manager": "packagist"
+    }
+  ]
+}

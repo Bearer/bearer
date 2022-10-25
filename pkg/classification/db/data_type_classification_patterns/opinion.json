@@ -1,0 +1,14 @@
+{
+  "metadata": { "version": "1.0" },
+  "id": 52,
+  "data_type_uuid": "922bc37c-9c9a-4d79-b3d1-f2e57aaeebfc",
+  "exclude_regexp": null,
+  "exclude_types": ["boolean"],
+  "friendly_name": "Opinion",
+  "health_context_data_type_uuid": null,
+  "include_regexp": "\\b(opinions?)\\b",
+  "include_types": ["string"],
+  "match_column": true,
+  "match_object": false,
+  "object_type": ["known", "unknown_extended", "unknown", "known_data_object"]
+}

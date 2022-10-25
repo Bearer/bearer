@@ -1,1 +1,7 @@
-{"metadata":{"version":"1.0"},"name":"Iris Openbooks (FreeAgent)","type":"external_service","urls":["https://admin.irisopenbooks.co.uk"],"packages":[]}
+{
+  "metadata": { "version": "1.0" },
+  "name": "Iris Openbooks (FreeAgent)",
+  "type": "external_service",
+  "urls": ["https://admin.irisopenbooks.co.uk"],
+  "packages": []
+}

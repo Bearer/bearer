@@ -1,1 +1,18 @@
-{"metadata":{"version":"1.0"},"name":"Unidentified Data Store","type":"data_store","urls":[],"packages":[{"name":"github.com/aliyun/aliyun-tablestore-go-sdk","group":null,"package_manager":"go"},{"name":"//git@git.vpgrp.io/core/dbaas/dbaas-api-sdk-python.git@0.0.3","group":"git+ssh","package_manager":"pypi"}]}
+{
+  "metadata": { "version": "1.0" },
+  "name": "Unidentified Data Store",
+  "type": "data_store",
+  "urls": [],
+  "packages": [
+    {
+      "name": "github.com/aliyun/aliyun-tablestore-go-sdk",
+      "group": null,
+      "package_manager": "go"
+    },
+    {
+      "name": "//git@git.vpgrp.io/core/dbaas/dbaas-api-sdk-python.git@0.0.3",
+      "group": "git+ssh",
+      "package_manager": "pypi"
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "metadata": { "version": "1.0" },
+  "id": 189,
+  "data_type_uuid": "c1704474-de02-40f0-8880-ece05fdbe9b5",
+  "exclude_regexp": null,
+  "exclude_types": ["boolean"],
+  "friendly_name": "Contraception",
+  "health_context_data_type_uuid": null,
+  "include_regexp": "\\b.*contraception.*\\b",
+  "include_types": ["string"],
+  "match_column": false,
+  "match_object": true,
+  "object_type": ["known_data_object"]
+}

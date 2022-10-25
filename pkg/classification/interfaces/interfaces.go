@@ -35,9 +35,9 @@ type Classifier struct {
 }
 
 type Config struct {
-	Recipes                []db.Recipe
-	InternalDomainMatchers []*regexp.Regexp
-	DomainResolver         *url.DomainResolver
+	Recipes         []db.Recipe
+	InternalDomains []string
+	DomainResolver  *url.DomainResolver
 }
 
 type Recipe struct {
@@ -58,8 +58,10 @@ type RecipeURLMatch struct {
 }
 
 var ErrInvalidRecipes = errors.New("invalid interface recipe")
+var ErrInvalidInternalDomainRegexp = errors.New("could not parse internal domains as regexp")
 
 func New(config Config) (*Classifier, error) {
+	// prepare regular expressions for recipes
 	var preparedRecipes []Recipe
 	for _, recipe := range config.Recipes {
 		preparedRecipe := Recipe{
@@ -81,9 +83,20 @@ func New(config Config) (*Classifier, error) {
 		preparedRecipes = append(preparedRecipes, preparedRecipe)
 	}
 
+	// parse internal domains as regular expressions
+	var internalDomainMatchers []*regexp.Regexp
+	for _, internalDomain := range config.InternalDomains {
+		internalDomainMatcher, err := regexp.Compile(internalDomain)
+		if err != nil {
+			return nil, ErrInvalidInternalDomainRegexp
+		}
+
+		internalDomainMatchers = append(internalDomainMatchers, internalDomainMatcher)
+	}
+
 	return &Classifier{
 		Recipes:                preparedRecipes,
-		InternalDomainMatchers: config.InternalDomainMatchers,
+		InternalDomainMatchers: internalDomainMatchers,
 		DomainResolver:         config.DomainResolver,
 	}, nil
 }
@@ -91,9 +104,9 @@ func New(config Config) (*Classifier, error) {
 func NewDefault() (*Classifier, error) {
 	return New(
 		Config{
-			Recipes:                db.Default(),
-			InternalDomainMatchers: []*regexp.Regexp{},
-			DomainResolver:         url.NewDomainResolverDefault(),
+			Recipes:         db.Default().Recipes,
+			InternalDomains: []string{},
+			DomainResolver:  url.NewDomainResolverDefault(),
 		},
 	)
 }

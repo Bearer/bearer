@@ -1,1 +1,11 @@
-{"metadata":{"version":"1.0"},"name":"Customer","type":"external_service","urls":["https://beta-api.customer.io/*/api","https://api.customer.io/v1/","https://track.customer.io/api"],"packages":[]}
+{
+  "metadata": { "version": "1.0" },
+  "name": "Customer",
+  "type": "external_service",
+  "urls": [
+    "https://beta-api.customer.io/*/api",
+    "https://api.customer.io/v1/",
+    "https://track.customer.io/api"
+  ],
+  "packages": []
+}

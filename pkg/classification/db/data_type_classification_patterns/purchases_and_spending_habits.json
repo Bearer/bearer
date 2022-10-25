@@ -1,0 +1,14 @@
+{
+  "metadata": { "version": "1.0" },
+  "id": 98,
+  "data_type_uuid": "2f8f5f70-903c-4528-b716-bf406594a8ff",
+  "exclude_regexp": null,
+  "exclude_types": ["boolean"],
+  "friendly_name": "Purchases and Spending Habits",
+  "health_context_data_type_uuid": null,
+  "include_regexp": "\\b(spendings?|purchases?)\\s?habits?\\b",
+  "include_types": ["string"],
+  "match_column": true,
+  "match_object": false,
+  "object_type": ["known", "unknown_extended"]
+}

@@ -1,0 +1,7 @@
+{
+  "metadata": { "version": "1.0" },
+  "id": 69,
+  "act_as_identifier": true,
+  "category": "Subscriber",
+  "include_regexp": "\\b.*subscriber.*\\b"
+}

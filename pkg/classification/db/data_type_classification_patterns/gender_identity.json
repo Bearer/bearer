@@ -1,0 +1,14 @@
+{
+  "metadata": { "version": "1.0" },
+  "id": 68,
+  "data_type_uuid": "8ca89e87-c06b-410b-8832-bdcd9576e86d",
+  "exclude_regexp": null,
+  "exclude_types": ["boolean"],
+  "friendly_name": "Gender identity",
+  "health_context_data_type_uuid": null,
+  "include_regexp": "\\b(gender.*identity|sex)\\z",
+  "include_types": ["string"],
+  "match_column": true,
+  "match_object": false,
+  "object_type": ["known", "unknown_extended"]
+}

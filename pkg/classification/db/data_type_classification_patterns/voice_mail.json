@@ -1,0 +1,14 @@
+{
+  "metadata": { "version": "1.0" },
+  "id": 23,
+  "data_type_uuid": "1045d17c-7028-4171-854e-99f8b231fa17",
+  "exclude_regexp": null,
+  "exclude_types": ["boolean"],
+  "friendly_name": "Voice Mail",
+  "health_context_data_type_uuid": null,
+  "include_regexp": "\\b(voice.*mail)\\b",
+  "include_types": ["string"],
+  "match_column": true,
+  "match_object": false,
+  "object_type": ["known", "unknown_extended", "unknown"]
+}

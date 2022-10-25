@@ -1,1 +1,20 @@
-{"metadata":{"version":"1.0"},"name":"Snowflake","type":"data_store","urls":[],"packages":[{"name":"dbt-snowflake","group":null,"package_manager":"pypi"},{"name":"snowflake-connector-python","group":null,"package_manager":"pypi"},{"name":"github.com/snowflakedb/gosnowflake","group":null,"package_manager":"go"},{"name":"snowflake-sdk","group":null,"package_manager":"npm"}]}
+{
+  "metadata": { "version": "1.0" },
+  "name": "Snowflake",
+  "type": "data_store",
+  "urls": [],
+  "packages": [
+    { "name": "dbt-snowflake", "group": null, "package_manager": "pypi" },
+    {
+      "name": "snowflake-connector-python",
+      "group": null,
+      "package_manager": "pypi"
+    },
+    {
+      "name": "github.com/snowflakedb/gosnowflake",
+      "group": null,
+      "package_manager": "go"
+    },
+    { "name": "snowflake-sdk", "group": null, "package_manager": "npm" }
+  ]
+}

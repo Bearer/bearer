@@ -1,1 +1,27 @@
-{"metadata":{"version":"1.0"},"name":"Dropbox","type":"external_service","urls":["https://api.dropboxapi.com","https://api.dropbox.com"],"packages":[{"name":"dropbox","group":null,"package_manager":"pypi"},{"name":"dropbox","group":null,"package_manager":"npm"},{"name":"dropbox-php-sdk","group":null,"package_manager":"packagist"},{"name":"dropbox-api","group":null,"package_manager":"packagist"},{"name":"dropbox_api","group":null,"package_manager":"rubygems"},{"name":"activestoragedropbox","group":null,"package_manager":"rubygems"},{"name":"github.com/dropbox/dropbox-sdk-go-unofficial","group":null,"package_manager":"go"}]}
+{
+  "metadata": { "version": "1.0" },
+  "name": "Dropbox",
+  "type": "external_service",
+  "urls": ["https://api.dropboxapi.com", "https://api.dropbox.com"],
+  "packages": [
+    { "name": "dropbox", "group": null, "package_manager": "pypi" },
+    { "name": "dropbox", "group": null, "package_manager": "npm" },
+    {
+      "name": "dropbox-php-sdk",
+      "group": null,
+      "package_manager": "packagist"
+    },
+    { "name": "dropbox-api", "group": null, "package_manager": "packagist" },
+    { "name": "dropbox_api", "group": null, "package_manager": "rubygems" },
+    {
+      "name": "activestoragedropbox",
+      "group": null,
+      "package_manager": "rubygems"
+    },
+    {
+      "name": "github.com/dropbox/dropbox-sdk-go-unofficial",
+      "group": null,
+      "package_manager": "go"
+    }
+  ]
+}
