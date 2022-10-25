@@ -51,3 +51,13 @@ go test -run ^TestSchema$ ./pkg/classification/schema -count=1
 ### Submitting your changes as a pull request
 
 <!-- add guidelines/format for contributions (branch naming, PR templates, etc) -->
+
+### Generating CLI Documentation
+
+From the root of the project run:
+
+```bash
+go run ./scripts/gen-doc-yaml.go
+```
+
+This will auto generate yaml files for any updated CLI arguments.
