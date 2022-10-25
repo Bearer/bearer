@@ -12,12 +12,12 @@ import (
 	"github.com/smacker/go-tree-sitter/ruby"
 )
 
-func (detector *Detector) ExtractArguments(node *parser.Node, idGenerator nodeid.Generator) (map[parser.NodeID]schemadatatype.DataTypable, error) {
+func (detector *Detector) ExtractArguments(node *parser.Node, idGenerator nodeid.Generator) (map[parser.NodeID]*schemadatatype.DataType, error) {
 	if node == nil {
 		return nil, nil
 	}
 
-	joinedDatatypes := make(map[parser.NodeID]schemadatatype.DataTypable)
+	joinedDatatypes := make(map[parser.NodeID]*schemadatatype.DataType)
 
 	// handle classs name
 	if node.Type() == "constant" {

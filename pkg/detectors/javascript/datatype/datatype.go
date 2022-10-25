@@ -5,6 +5,7 @@ import (
 	parserdatatype "github.com/bearer/curio/pkg/parser/datatype"
 	"github.com/bearer/curio/pkg/parser/nodeid"
 	"github.com/bearer/curio/pkg/report"
+	"github.com/bearer/curio/pkg/report/detections"
 	"github.com/bearer/curio/pkg/report/detectors"
 	schemadatatype "github.com/bearer/curio/pkg/report/schema/datatype"
 )
@@ -28,5 +29,5 @@ func Discover(report report.Report, tree *parser.Tree, idGenerator nodeid.Genera
 		}
 	}
 
-	parserdatatype.NewExport(report, detectors.DetectorJavascript, idGenerator, datatypes)
+	report.AddDataType(detections.TypeSchema, detectors.DetectorJavascript, idGenerator, datatypes)
 }

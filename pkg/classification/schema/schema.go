@@ -26,7 +26,7 @@ func New(config Config) *Classifier {
 }
 
 type DataTypeDetection struct {
-	Value        datatype.DataType
+	Value        datatype.DataTypable
 	Filename     string
 	DetectorType detectors.Type
 }

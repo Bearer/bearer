@@ -8,7 +8,7 @@ import (
 )
 
 type Detector interface {
-	ExtractArguments(node *parser.Node, idGenerator nodeid.Generator) (map[parser.NodeID]datatype.DataTypable, error)
+	ExtractArguments(node *parser.Node, idGenerator nodeid.Generator) (map[parser.NodeID]*datatype.DataType, error)
 	CompilePattern(Rule string, idGenerator nodeid.Generator) (config.CompiledRule, error)
 	IsParam(node *parser.Node) (bool, bool, *config.Param)
 }

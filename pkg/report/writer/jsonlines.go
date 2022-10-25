@@ -75,12 +75,12 @@ func (report *JSONLines) AddCreateView(
 	report.AddDetection(detections.TypeCreateView, detectorType, createview.Source, createview)
 }
 
-func (report *JSONLines) AddDatatype(detectorType detectors.Type, idGenerator nodeid.Generator, ignorefirst bool, values map[parser.NodeID]*datatype.DataType) {
+func (report *JSONLines) AddDataType(detectionType detections.DetectionType, detectorType detectors.Type, idGenerator nodeid.Generator, values map[parser.NodeID]*datatype.DataType) {
 	classifiedDatatypes := make(map[parser.NodeID]*classsificationschema.ClassifiedDatatype, 0)
 	for nodeID, target := range values {
 		classified, err := report.Classifier.Schema.Classify(classsificationschema.DataTypeDetection{
-			Value:        *target,
-			Filename:     target.Node.Source(false).Filename,
+			Value:        target,
+			Filename:     target.GetNode().Source(false).Filename,
 			DetectorType: detectorType,
 		})
 		if err != nil {
@@ -90,7 +90,7 @@ func (report *JSONLines) AddDatatype(detectorType detectors.Type, idGenerator no
 		classifiedDatatypes[nodeID] = classified
 	}
 
-	datatype.ExportSchemas(report, detections.TypeSchemaClassified, detectorType, idGenerator, ignorefirst, classifiedDatatypes)
+	datatype.Export(report, detectionType, detectorType, idGenerator, values)
 }
 
 func (report *JSONLines) AddSchema(

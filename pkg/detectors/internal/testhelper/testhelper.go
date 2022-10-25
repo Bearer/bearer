@@ -7,6 +7,8 @@ import (
 	"strings"
 
 	"github.com/bearer/curio/pkg/detectors"
+	"github.com/bearer/curio/pkg/parser"
+	"github.com/bearer/curio/pkg/parser/nodeid"
 
 	createview "github.com/bearer/curio/pkg/report/create_view"
 	"github.com/bearer/curio/pkg/report/dependencies"
@@ -16,6 +18,7 @@ import (
 	"github.com/bearer/curio/pkg/report/interfaces"
 	"github.com/bearer/curio/pkg/report/operations"
 	"github.com/bearer/curio/pkg/report/schema"
+	"github.com/bearer/curio/pkg/report/schema/datatype"
 	"github.com/bearer/curio/pkg/report/secret"
 	"github.com/bearer/curio/pkg/report/source"
 
@@ -113,6 +116,16 @@ func (report *InMemoryReport) AddSchema(
 		Source:       source,
 		Type:         detections.TypeSchema,
 	})
+}
+
+func (report *InMemoryReport) AddDataType(
+	detectionType detections.DetectionType,
+	detectorType reportdetectors.Type,
+	idGenerator nodeid.Generator,
+	values map[parser.NodeID]*datatype.DataType,
+) {
+
+	datatype.Export(report, detectionType, detectorType, idGenerator, values)
 }
 
 func (report *InMemoryReport) AddCreateView(

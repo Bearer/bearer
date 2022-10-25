@@ -11,6 +11,10 @@ import (
 	"github.com/bearer/curio/pkg/report/schema"
 )
 
+type ReportDataType interface {
+	AddDataType(detectionType detections.DetectionType, detectorType detectors.Type, generator nodeid.Generator, values map[parser.NodeID]*DataType)
+}
+
 type DataType struct {
 	Node       *parser.Node
 	Name       string
@@ -74,7 +78,15 @@ type DataTypable interface {
 	GetProperties() map[string]DataTypable
 }
 
-func ExportSchemas[D DataTypable](report detections.ReportDetection, detectionType detections.DetectionType, detectorType detectors.Type, idGenerator nodeid.Generator, ignoreFirst bool, values map[parser.NodeID]D) {
+func Export[D DataTypable](report detections.ReportDetection, detectionType detections.DetectionType, detectorType detectors.Type, idGenerator nodeid.Generator, values map[parser.NodeID]D) {
+	if detectionType == detections.TypeCustom {
+		exportSchemas(report, detectionType, detectorType, idGenerator, false, values)
+		return
+	}
+	exportSchemas(report, detectionType, detectorType, idGenerator, true, values)
+}
+
+func exportSchemas[D DataTypable](report detections.ReportDetection, detectionType detections.DetectionType, detectorType detectors.Type, idGenerator nodeid.Generator, ignoreFirst bool, values map[parser.NodeID]D) {
 	sortedDataTypes := SortParserMap(values)
 
 	parentName := ""

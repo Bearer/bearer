@@ -15,6 +15,7 @@ import (
 	"github.com/bearer/curio/pkg/parser"
 	language "github.com/bearer/curio/pkg/parser/custom"
 	parserdatatype "github.com/bearer/curio/pkg/parser/datatype"
+	"github.com/bearer/curio/pkg/report/detections"
 	schemadatatype "github.com/bearer/curio/pkg/report/schema/datatype"
 	"github.com/bearer/curio/pkg/util/file"
 
@@ -155,11 +156,11 @@ func (detector *Detector) executeRule(rule config.CompiledRule, file *file.FileI
 
 func (detector *Detector) extractData(captures []parser.Captures, rule config.CompiledRule, report report.Report, lang string, idGenerator nodeid.Generator) error {
 	for _, capture := range captures {
-		forExport := make(map[parser.NodeID]schemadatatype.DataTypable)
+		forExport := make(map[parser.NodeID]*schemadatatype.DataType)
 		var parent schemadatatype.DataTypable
 
 		for _, param := range rule.Params {
-			var paramTypes map[parser.NodeID]schemadatatype.DataTypable
+			var paramTypes map[parser.NodeID]*schemadatatype.DataType
 			var err error
 
 			if param.ArgumentsExtract || param.ClassNameExtract {
@@ -233,7 +234,7 @@ func (detector *Detector) extractData(captures []parser.Captures, rule config.Co
 			}
 		}
 
-		parserdatatype.NewCompleteExport(report, detectors.Type(rule.RuleName), idGenerator, forExport)
+		report.AddDataType(detections.TypeCustom, detectors.Type(rule.RuleName), idGenerator, forExport)
 	}
 	return nil
 }
@@ -278,7 +279,7 @@ func filterCaptures(params []config.Param, captures []parser.Captures) (filtered
 	return filtered, err
 }
 
-func (detector *Detector) extractArguments(language string, node *parser.Node, idGenerator nodeid.Generator) (map[parser.NodeID]schemadatatype.DataTypable, error) {
+func (detector *Detector) extractArguments(language string, node *parser.Node, idGenerator nodeid.Generator) (map[parser.NodeID]*schemadatatype.DataType, error) {
 	switch language {
 	case "ruby":
 		return detector.Ruby.ExtractArguments(node, idGenerator)

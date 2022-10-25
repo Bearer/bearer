@@ -12,12 +12,12 @@ import (
 	"github.com/bearer/curio/pkg/parser/interfacedetector"
 	"github.com/bearer/curio/pkg/parser/nodeid"
 	"github.com/bearer/curio/pkg/report"
+	"github.com/bearer/curio/pkg/report/detections"
 	"github.com/bearer/curio/pkg/report/detectors"
 	"github.com/bearer/curio/pkg/report/values"
 	"github.com/bearer/curio/pkg/report/variables"
 	"github.com/bearer/curio/pkg/util/regex"
 
-	parserdatatype "github.com/bearer/curio/pkg/parser/datatype"
 	"github.com/smacker/go-tree-sitter/ruby"
 )
 
@@ -86,8 +86,7 @@ func (detector *detector) ProcessFile(file *file.FileInfo, dir *file.Path, repor
 	}
 
 	datatypes := datatype.Discover(tree, detector.idGenerator)
-
-	parserdatatype.NewExport(report, detectors.DetectorRuby, detector.idGenerator, datatypes)
+	report.AddDataType(detections.TypeSchema, detectors.DetectorRuby, detector.idGenerator, datatypes)
 
 	return true, nil
 }

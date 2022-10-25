@@ -3,7 +3,7 @@ package datatype
 import (
 	"github.com/bearer/curio/pkg/parser"
 	"github.com/bearer/curio/pkg/parser/datatype"
-	parserdatatype "github.com/bearer/curio/pkg/parser/datatype"
+	"github.com/bearer/curio/pkg/report/detections"
 	schemadatatype "github.com/bearer/curio/pkg/report/schema/datatype"
 
 	"github.com/bearer/curio/pkg/parser/nodeid"
@@ -74,7 +74,7 @@ func Discover(report report.Report, tree *parser.Tree, idGenerator nodeid.Genera
 
 	datatype.PruneMap(propertiesDatatypes)
 
-	parserdatatype.NewExport(report, detectors.DetectorPHP, idGenerator, propertiesDatatypes)
+	report.AddDataType(detections.TypeSchema, detectors.DetectorPHP, idGenerator, propertiesDatatypes)
 }
 
 func discoverClassProperties(tree *parser.Tree, datatypes map[parser.NodeID]*schemadatatype.DataType) {

@@ -8,12 +8,12 @@ import (
 	schemadatatype "github.com/bearer/curio/pkg/report/schema/datatype"
 )
 
-func (detector *Detector) ExtractArguments(node *parser.Node, idGenerator nodeid.Generator) (map[parser.NodeID]schemadatatype.DataTypable, error) {
+func (detector *Detector) ExtractArguments(node *parser.Node, idGenerator nodeid.Generator) (map[parser.NodeID]*schemadatatype.DataType, error) {
 	if node == nil {
 		return nil, nil
 	}
 
-	joinedDatatypes := make(map[parser.NodeID]schemadatatype.DataTypable)
+	joinedDatatypes := make(map[parser.NodeID]*schemadatatype.DataType)
 
 	if node.Type() == "identifier" && node.Parent() != nil && node.Parent().Type() == "table_column" {
 		parent := node.Parent()

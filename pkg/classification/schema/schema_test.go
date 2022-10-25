@@ -24,7 +24,7 @@ func TestSchema(t *testing.T) {
 			Input: schema.DataTypeDetection{
 				Filename:     "db/schema.rb",
 				DetectorType: detectors.DetectorRuby,
-				Value: datatype.DataType{
+				Value: &datatype.DataType{
 					Name: "user",
 					Type: reportschema.SimpleTypeObject,
 					Properties: map[string]datatype.DataTypable{
