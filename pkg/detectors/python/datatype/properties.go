@@ -7,6 +7,7 @@ import (
 	parserdatatype "github.com/bearer/curio/pkg/parser/datatype"
 	"github.com/bearer/curio/pkg/parser/nodeid"
 	"github.com/bearer/curio/pkg/report/schema"
+	schemadatatype "github.com/bearer/curio/pkg/report/schema/datatype"
 	"github.com/smacker/go-tree-sitter/python"
 )
 
@@ -23,19 +24,19 @@ var subscriptQuery = parser.QueryMustCompile(python.GetLanguage(),
 		subscript: (string) @param_id
 	  ) @param_parent`)
 
-func addProperties(tree *parser.Tree, helperDatatypes map[parser.NodeID]*parserdatatype.DataType) {
+func addProperties(tree *parser.Tree, helperDatatypes map[parser.NodeID]*schemadatatype.DataType) {
 	// add element references
 	captures := tree.QueryConventional(attributeQuery)
 	for _, capture := range captures {
 		childNode := capture["param_child"]
 		if childNode.Type() == "identifier" {
 			id := childNode.Content()
-			helperDatatypes[childNode.ID()] = &parserdatatype.DataType{
+			helperDatatypes[childNode.ID()] = &schemadatatype.DataType{
 				Node:       childNode,
 				Name:       id,
 				Type:       schema.SimpleTypeUknown,
 				TextType:   "",
-				Properties: make(map[string]*parserdatatype.DataType),
+				Properties: make(map[string]*schemadatatype.DataType),
 				UUID:       "",
 			}
 		}
@@ -43,12 +44,12 @@ func addProperties(tree *parser.Tree, helperDatatypes map[parser.NodeID]*parserd
 		elementNode := capture["param_parent"]
 		idNode := capture["param_id"]
 
-		helperDatatypes[elementNode.ID()] = &parserdatatype.DataType{
+		helperDatatypes[elementNode.ID()] = &schemadatatype.DataType{
 			Node:       idNode,
 			Name:       idNode.Content(),
 			Type:       schema.SimpleTypeUknown,
 			TextType:   "",
-			Properties: make(map[string]*parserdatatype.DataType),
+			Properties: make(map[string]*schemadatatype.DataType),
 			UUID:       "",
 		}
 	}
@@ -59,12 +60,12 @@ func addProperties(tree *parser.Tree, helperDatatypes map[parser.NodeID]*parserd
 		childNode := capture["param_child"]
 		if childNode.Type() == "identifier" {
 			id := childNode.Content()
-			helperDatatypes[childNode.ID()] = &parserdatatype.DataType{
+			helperDatatypes[childNode.ID()] = &schemadatatype.DataType{
 				Node:       childNode,
 				Name:       id,
 				Type:       schema.SimpleTypeUknown,
 				TextType:   "",
-				Properties: make(map[string]*parserdatatype.DataType),
+				Properties: make(map[string]*schemadatatype.DataType),
 				UUID:       "",
 			}
 		}
@@ -74,18 +75,18 @@ func addProperties(tree *parser.Tree, helperDatatypes map[parser.NodeID]*parserd
 		id := strings.Trim(idNode.Content(), "'")
 		id = strings.Trim(id, `"`)
 
-		helperDatatypes[elementNode.ID()] = &parserdatatype.DataType{
+		helperDatatypes[elementNode.ID()] = &schemadatatype.DataType{
 			Node:       idNode,
 			Name:       id,
 			Type:       schema.SimpleTypeUknown,
 			TextType:   "",
-			Properties: make(map[string]*parserdatatype.DataType),
+			Properties: make(map[string]*schemadatatype.DataType),
 			UUID:       "",
 		}
 	}
 }
 
-func linkProperties(tree *parser.Tree, datatypes, helperDatatypes map[parser.NodeID]*parserdatatype.DataType) {
+func linkProperties(tree *parser.Tree, datatypes, helperDatatypes map[parser.NodeID]*schemadatatype.DataType) {
 	for _, helperType := range helperDatatypes {
 		node := helperType.Node
 		parent := node.Parent()
@@ -135,7 +136,7 @@ func linkProperties(tree *parser.Tree, datatypes, helperDatatypes map[parser.Nod
 	}
 }
 
-func scopeAndMergeProperties(propertiesDatatypes, classDataTypes map[parser.NodeID]*parserdatatype.DataType, idGenerator nodeid.Generator) {
+func scopeAndMergeProperties(propertiesDatatypes, classDataTypes map[parser.NodeID]*schemadatatype.DataType, idGenerator nodeid.Generator) {
 	// self with class name
 	for key, datatype := range propertiesDatatypes {
 		if datatype.Name == "self" {

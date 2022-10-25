@@ -8,6 +8,7 @@ import (
 	"github.com/bearer/curio/pkg/report/detectors"
 	"github.com/bearer/curio/pkg/report/frameworks"
 	"github.com/bearer/curio/pkg/report/interfaces"
+	"github.com/bearer/curio/pkg/report/schema/datatype"
 
 	"github.com/bearer/curio/pkg/report/operations"
 	"github.com/bearer/curio/pkg/report/schema"
@@ -32,7 +33,7 @@ var TypeSecretleak DetectionType = "secret_leak"
 var TypeCustom DetectionType = "custom"
 
 type Report interface {
-	SchemaReport
+	datatype.SchemaReport
 	CustomReport
 	AddCreateView(detectorType detectors.Type, createView createview.View)
 	AddOperation(detectorType detectors.Type, operation operations.Operation, source source.Source)
@@ -42,10 +43,6 @@ type Report interface {
 	AddSecretLeak(secret secret.Secret, source source.Source)
 	AddFillerLine()
 	AddError(err error)
-}
-
-type SchemaReport interface {
-	AddSchema(detectorType detectors.Type, schema schema.Schema, source source.Source)
 }
 
 // broker writes those for files that scanner fails to proccess

@@ -1,8 +1,8 @@
 package schema
 
 import (
-	"github.com/bearer/curio/pkg/parser/datatype"
 	"github.com/bearer/curio/pkg/report/detectors"
+	"github.com/bearer/curio/pkg/report/schema/datatype"
 )
 
 type ClassifiedDatatype struct {

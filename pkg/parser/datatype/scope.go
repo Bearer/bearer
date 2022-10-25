@@ -5,22 +5,23 @@ import (
 
 	"github.com/bearer/curio/pkg/parser"
 	"github.com/bearer/curio/pkg/parser/nodeid"
+	"github.com/bearer/curio/pkg/report/schema/datatype"
 )
 
 type Scope struct {
 	NodeId    parser.NodeID
 	Node      *parser.Node
-	DataTypes map[string][]*DataType
+	DataTypes map[string][]*datatype.DataType
 }
 
-func (scope *Scope) toSortedDatatypes() [][]*DataType {
-	var sortedDatatypes [][]*DataType
+func (scope *Scope) toSortedDatatypes() [][]*datatype.DataType {
+	var sortedDatatypes [][]*datatype.DataType
 	for _, datatypes := range scope.DataTypes {
 		sortedDatatypes = append(sortedDatatypes, datatypes)
 	}
 
 	for i, datatypes := range sortedDatatypes {
-		sortedDatatypes[i] = sortSliceDataType(datatypes)
+		sortedDatatypes[i] = datatype.SortSlice(datatypes)
 	}
 
 	sort.Slice(sortedDatatypes, func(i, j int) bool {
@@ -40,15 +41,15 @@ func (scope *Scope) toSortedDatatypes() [][]*DataType {
 	return sortedDatatypes
 }
 
-func ScopeDatatypes(datatypes map[parser.NodeID]*DataType, idGenerator nodeid.Generator, termintingTokens []string) {
+func ScopeDatatypes(datatypes map[parser.NodeID]*datatype.DataType, idGenerator nodeid.Generator, termintingTokens []string) {
 	scopes := make(map[parser.NodeID]*Scope)
 
 	// iterate trough datatypes
-	for _, datatype := range datatypes {
-		scopeNode := datatype.Node.Parent()
+	for _, target := range datatypes {
+		scopeNode := target.Node.Parent()
 
 		if scopeNode == nil {
-			scopeNode = datatype.Node
+			scopeNode = target.Node
 		} else {
 			// find scope terminating parent
 			for {
@@ -80,12 +81,12 @@ func ScopeDatatypes(datatypes map[parser.NodeID]*DataType, idGenerator nodeid.Ge
 			scopes[scopeNode.ID()] = &Scope{
 				NodeId:    scopeNode.ID(),
 				Node:      scopeNode,
-				DataTypes: make(map[string][]*DataType),
+				DataTypes: make(map[string][]*datatype.DataType),
 			}
 		}
 
 		// append same scope same name datatypes
-		scopes[scopeNode.ID()].DataTypes[datatype.Name] = append(scopes[scopeNode.ID()].DataTypes[datatype.Name], datatype)
+		scopes[scopeNode.ID()].DataTypes[target.Name] = append(scopes[scopeNode.ID()].DataTypes[target.Name], target)
 	}
 
 	var sortedScopes []*Scope
@@ -103,18 +104,18 @@ func ScopeDatatypes(datatypes map[parser.NodeID]*DataType, idGenerator nodeid.Ge
 	}
 }
 
-func UnifyUUID(datatypes []*DataType, idGenerator nodeid.Generator) {
+func UnifyUUID(datatypes []*datatype.DataType, idGenerator nodeid.Generator) {
 	datatypeID := idGenerator.GenerateId()
-	for _, datatype := range datatypes {
-		datatype.UUID = datatypeID
+	for _, target := range datatypes {
+		target.UUID = datatypeID
 	}
 
 	propertiesDone := make(map[string]bool)
 
-	for _, datatype := range datatypes {
+	for _, target := range datatypes {
 
 		var propertyNames []string
-		for propertyName := range datatype.Properties {
+		for propertyName := range target.Properties {
 			propertyNames = append(propertyNames, propertyName)
 		}
 
@@ -126,12 +127,12 @@ func UnifyUUID(datatypes []*DataType, idGenerator nodeid.Generator) {
 				continue
 			}
 
-			var datatypesToDo []*DataType
+			var datatypesToDo []*datatype.DataType
 			// fetch all datatypes that have that property name
-			for _, datatype := range datatypes {
-				_, hasProperty := datatype.Properties[propertyName]
+			for _, target := range datatypes {
+				_, hasProperty := target.Properties[propertyName]
 				if hasProperty {
-					datatypesToDo = append(datatypesToDo, datatype.Properties[propertyName])
+					datatypesToDo = append(datatypesToDo, target.Properties[propertyName])
 				}
 			}
 

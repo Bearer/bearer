@@ -4,7 +4,8 @@ import (
 	"strings"
 
 	"github.com/bearer/curio/pkg/parser"
-	parserdatatype "github.com/bearer/curio/pkg/parser/datatype"
+	schemadatatype "github.com/bearer/curio/pkg/report/schema/datatype"
+
 	"github.com/bearer/curio/pkg/report/schema"
 	"github.com/smacker/go-tree-sitter/javascript"
 )
@@ -20,7 +21,7 @@ var nestedObjectsQuery = parser.QueryMustCompile(javascript.GetLanguage(),
 	) @param_pair
 ) @param_object`)
 
-func addObjects(tree *parser.Tree, datatypes map[parser.NodeID]*parserdatatype.DataType) {
+func addObjects(tree *parser.Tree, datatypes map[parser.NodeID]*schemadatatype.DataType) {
 	// add object and properties
 	captures := tree.QueryConventional(objectsQuery)
 	for _, capture := range captures {
@@ -36,26 +37,26 @@ func addObjects(tree *parser.Tree, datatypes map[parser.NodeID]*parserdatatype.D
 
 		// create common object
 		if datatypes[objectNode.ID()] == nil {
-			datatypes[objectNode.ID()] = &parserdatatype.DataType{
+			datatypes[objectNode.ID()] = &schemadatatype.DataType{
 				Node:       objectNode,
 				Name:       "",
 				Type:       schema.SimpleTypeUknown,
 				TextType:   "",
-				Properties: make(map[string]*parserdatatype.DataType),
+				Properties: make(map[string]*schemadatatype.DataType),
 			}
 		}
 
 		// add property
-		datatypes[objectNode.ID()].Properties[propertyName] = &parserdatatype.DataType{
+		datatypes[objectNode.ID()].Properties[propertyName] = &schemadatatype.DataType{
 			Node:       propertyNode,
 			Name:       propertyNode.Content(),
 			Type:       schema.SimpleTypeUknown,
 			TextType:   "",
-			Properties: make(map[string]*parserdatatype.DataType),
+			Properties: make(map[string]*schemadatatype.DataType),
 		}
 	}
 
-	// helperTypes := make(map[parser.NodeID]*parserdatatype.DataType)
+	// helperTypes := make(map[parser.NodeID]*schemadatatype.DataType)
 
 	var keysToDelete []parser.NodeID
 
@@ -220,7 +221,7 @@ func addObjects(tree *parser.Tree, datatypes map[parser.NodeID]*parserdatatype.D
 	}
 }
 
-func objectAssigment(datatype *parserdatatype.DataType, node *parser.Node) bool {
+func objectAssigment(datatype *schemadatatype.DataType, node *parser.Node) bool {
 	left := node.ChildByFieldName("left")
 
 	if left == nil {

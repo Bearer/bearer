@@ -8,9 +8,8 @@ import (
 
 	createtable "github.com/bearer/curio/pkg/detectors/sql/create_table"
 	createview "github.com/bearer/curio/pkg/detectors/sql/create_view"
-
-	parserdatatype "github.com/bearer/curio/pkg/parser/datatype"
 	reporttypes "github.com/bearer/curio/pkg/report"
+	schemadatatype "github.com/bearer/curio/pkg/report/schema/datatype"
 )
 
 type detector struct {
@@ -50,6 +49,6 @@ func (detector *detector) ProcessFile(file *file.FileInfo, dir *file.Path, repor
 	return true, nil
 }
 
-func ExtractArguments(node *parser.Node, idGenerator nodeid.Generator) (map[parser.NodeID]*parserdatatype.DataType, error) {
+func ExtractArguments(node *parser.Node, idGenerator nodeid.Generator) (map[parser.NodeID]*schemadatatype.DataType, error) {
 	return nil, nil
 }

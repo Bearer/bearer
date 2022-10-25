@@ -6,6 +6,7 @@ import (
 	"github.com/bearer/curio/pkg/parser/nodeid"
 	php "github.com/bearer/curio/pkg/parser/sitter/php2"
 	"github.com/bearer/curio/pkg/report/schema"
+	schemadatatype "github.com/bearer/curio/pkg/report/schema/datatype"
 	sitter "github.com/smacker/go-tree-sitter"
 )
 
@@ -19,7 +20,7 @@ var propertiesFunctionsQuery = parser.QueryMustCompile(php.GetLanguage(),
 		object: (_) @param_property
 	)@param_object`)
 
-func addProperties(tree *parser.Tree, helperDatatypes map[parser.NodeID]*parserdatatype.DataType) {
+func addProperties(tree *parser.Tree, helperDatatypes map[parser.NodeID]*schemadatatype.DataType) {
 	// add root propertie
 	var parseQuery = func(query *sitter.Query) {
 		captures := tree.QueryConventional(query)
@@ -27,12 +28,12 @@ func addProperties(tree *parser.Tree, helperDatatypes map[parser.NodeID]*parserd
 			propertyNode := capture["param_property"]
 			if propertyNode.Type() == "variable_name" {
 				id := propertyNode.Child(0).Content()
-				helperDatatypes[propertyNode.ID()] = &parserdatatype.DataType{
+				helperDatatypes[propertyNode.ID()] = &schemadatatype.DataType{
 					Node:       propertyNode,
 					Name:       id,
 					Type:       schema.SimpleTypeUknown,
 					TextType:   "",
-					Properties: make(map[string]*parserdatatype.DataType),
+					Properties: make(map[string]*schemadatatype.DataType),
 					UUID:       "",
 				}
 			}
@@ -48,12 +49,12 @@ func addProperties(tree *parser.Tree, helperDatatypes map[parser.NodeID]*parserd
 
 			id := idNode.Content()
 
-			helperDatatypes[objectNode.ID()] = &parserdatatype.DataType{
+			helperDatatypes[objectNode.ID()] = &schemadatatype.DataType{
 				Node:       objectNode,
 				Name:       id,
 				Type:       schema.SimpleTypeUknown,
 				TextType:   "",
-				Properties: make(map[string]*parserdatatype.DataType),
+				Properties: make(map[string]*schemadatatype.DataType),
 				UUID:       "",
 			}
 		}
@@ -63,7 +64,7 @@ func addProperties(tree *parser.Tree, helperDatatypes map[parser.NodeID]*parserd
 	parseQuery(propertiesFunctionsQuery)
 }
 
-func linkProperties(tree *parser.Tree, datatypes, helperDatatypes map[parser.NodeID]*parserdatatype.DataType) {
+func linkProperties(tree *parser.Tree, datatypes, helperDatatypes map[parser.NodeID]*schemadatatype.DataType) {
 	for _, helperType := range helperDatatypes {
 		node := helperType.Node
 
@@ -90,7 +91,7 @@ func linkProperties(tree *parser.Tree, datatypes, helperDatatypes map[parser.Nod
 	}
 }
 
-func scopeAndMergeProperties(propertiesDatatypes, classDataTypes map[parser.NodeID]*parserdatatype.DataType, idGenerator nodeid.Generator) {
+func scopeAndMergeProperties(propertiesDatatypes, classDataTypes map[parser.NodeID]*schemadatatype.DataType, idGenerator nodeid.Generator) {
 	// replace this with class name
 	for key, datatype := range propertiesDatatypes {
 		if datatype.Name == "this" {

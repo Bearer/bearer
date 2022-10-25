@@ -2,16 +2,17 @@ package datatype
 
 import (
 	"github.com/bearer/curio/pkg/parser"
+	"github.com/bearer/curio/pkg/report/schema/datatype"
 	sitter "github.com/smacker/go-tree-sitter"
 )
 
 type PropertyFinder struct {
-	Map       map[parser.NodeID]*DataType
+	Map       map[parser.NodeID]*datatype.DataType
 	tree      *parser.Tree
 	parseNode func(resolver *PropertyFinder, node *parser.Node)
 }
 
-func NewPropertyFinder(tree *parser.Tree, dataTypeMap map[parser.NodeID]*DataType, parseNode func(resolver *PropertyFinder, node *parser.Node)) *PropertyFinder {
+func NewPropertyFinder(tree *parser.Tree, dataTypeMap map[parser.NodeID]*datatype.DataType, parseNode func(resolver *PropertyFinder, node *parser.Node)) *PropertyFinder {
 	return &PropertyFinder{
 		tree:      tree,
 		Map:       dataTypeMap,
@@ -28,7 +29,7 @@ func (finder *PropertyFinder) Find() {
 }
 
 // ResolveContext gets closest context node belongs to
-func (finder *PropertyFinder) ResolveClosestDataType(node *sitter.Node) *DataType {
+func (finder *PropertyFinder) ResolveClosestDataType(node *sitter.Node) *datatype.DataType {
 	currentNode := node
 	for {
 		if ctx, ok := finder.Map[currentNode]; ok {

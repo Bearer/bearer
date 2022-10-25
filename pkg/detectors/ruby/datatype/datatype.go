@@ -5,9 +5,9 @@ import (
 
 	"github.com/bearer/curio/pkg/parser"
 	"github.com/bearer/curio/pkg/parser/datatype"
-	parserdatatype "github.com/bearer/curio/pkg/parser/datatype"
 	"github.com/bearer/curio/pkg/parser/nodeid"
 	"github.com/bearer/curio/pkg/report/schema"
+	schemadatatype "github.com/bearer/curio/pkg/report/schema/datatype"
 	"github.com/smacker/go-tree-sitter/ruby"
 )
 
@@ -32,19 +32,19 @@ var classFunctionsQuery = parser.QueryMustCompile(ruby.GetLanguage(),
 		)
 	) @param_class`)
 
-func Discover(tree *parser.Tree, idGenerator nodeid.Generator) map[parser.NodeID]*parserdatatype.DataType {
-	classDataTypes := make(map[parser.NodeID]*parserdatatype.DataType)
+func Discover(tree *parser.Tree, idGenerator nodeid.Generator) map[parser.NodeID]*schemadatatype.DataType {
+	classDataTypes := make(map[parser.NodeID]*schemadatatype.DataType)
 	// add classses
 	captures := tree.QueryConventional(classesQuery)
 	for _, capture := range captures {
 		id := capture["param_id"].Content()
 		classNode := capture["param_class"]
-		classDataTypes[classNode.ID()] = &parserdatatype.DataType{
+		classDataTypes[classNode.ID()] = &schemadatatype.DataType{
 			Node:       classNode,
 			Name:       id,
 			Type:       schema.SimpleTypeObject,
 			TextType:   "class",
-			Properties: make(map[string]*parserdatatype.DataType),
+			Properties: make(map[string]*schemadatatype.DataType),
 		}
 	}
 
@@ -53,8 +53,8 @@ func Discover(tree *parser.Tree, idGenerator nodeid.Generator) map[parser.NodeID
 
 	discoverClassAssignment(tree, classDataTypes)
 
-	propertiesDatatypes := make(map[parser.NodeID]*parserdatatype.DataType)
-	helperDatatypes := make(map[parser.NodeID]*parserdatatype.DataType)
+	propertiesDatatypes := make(map[parser.NodeID]*schemadatatype.DataType)
+	helperDatatypes := make(map[parser.NodeID]*schemadatatype.DataType)
 
 	addProperties(tree, helperDatatypes)
 	linkProperties(tree, propertiesDatatypes, helperDatatypes)
@@ -71,7 +71,7 @@ func Discover(tree *parser.Tree, idGenerator nodeid.Generator) map[parser.NodeID
 	return propertiesDatatypes
 }
 
-func discoverClassProperties(tree *parser.Tree, datatypes map[parser.NodeID]*parserdatatype.DataType) {
+func discoverClassProperties(tree *parser.Tree, datatypes map[parser.NodeID]*schemadatatype.DataType) {
 	// add class properties
 	captures := tree.QueryConventional(classPropertiesQuery)
 	for _, capture := range captures {
@@ -84,17 +84,17 @@ func discoverClassProperties(tree *parser.Tree, datatypes map[parser.NodeID]*par
 		propertyNode := capture["param_id"]
 		propertyName := strings.TrimLeft(propertyNode.Content(), ":")
 
-		datatypes[classNode.ID()].Properties[propertyName] = &parserdatatype.DataType{
+		datatypes[classNode.ID()].Properties[propertyName] = &schemadatatype.DataType{
 			Node:       propertyNode,
 			Name:       propertyName,
 			Type:       schema.SimpleTypeUknown,
-			Properties: make(map[string]*parserdatatype.DataType),
+			Properties: make(map[string]*schemadatatype.DataType),
 			TextType:   "",
 		}
 	}
 }
 
-func discoverClassFunctions(tree *parser.Tree, datatypes map[parser.NodeID]*parserdatatype.DataType) {
+func discoverClassFunctions(tree *parser.Tree, datatypes map[parser.NodeID]*schemadatatype.DataType) {
 	captures := tree.QueryConventional(classFunctionsQuery)
 	for _, capture := range captures {
 		classNode := capture["param_class"]
@@ -106,7 +106,7 @@ func discoverClassFunctions(tree *parser.Tree, datatypes map[parser.NodeID]*pars
 		functionNameNode := capture["param_id"]
 		functionName := functionNameNode.Content()
 
-		datatypes[classNode.ID()].Properties[functionName] = &parserdatatype.DataType{
+		datatypes[classNode.ID()].Properties[functionName] = &schemadatatype.DataType{
 			Node:     functionNameNode,
 			Name:     functionName,
 			Type:     schema.SimpleTypeUknown,

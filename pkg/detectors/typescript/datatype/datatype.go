@@ -10,6 +10,8 @@ import (
 	"github.com/bearer/curio/pkg/report"
 	"github.com/bearer/curio/pkg/report/detectors"
 	"github.com/bearer/curio/pkg/report/schema"
+	schemadatatype "github.com/bearer/curio/pkg/report/schema/datatype"
+
 	sitter "github.com/smacker/go-tree-sitter"
 )
 
@@ -24,10 +26,10 @@ func Discover(report report.Report, tree *parser.Tree, language *sitter.Language
 
 	datatype.PruneMap(datatypesFinder.GetValues())
 
-	datatypesFinder.ExportSchemas(report, detectors.DetectorTypescript, idGenerator, true)
+	schemadatatype.ExportSchemas(report, detectors.DetectorTypescript, idGenerator, true, datatypesFinder.GetValues())
 }
 
-func annotateDataTypes(finder *datatype.Finder, node *parser.Node, value *datatype.DataType) bool {
+func annotateDataTypes(finder *datatype.Finder, node *parser.Node, value *schemadatatype.DataType) bool {
 	value.Node = node
 
 	switch node.Type() {

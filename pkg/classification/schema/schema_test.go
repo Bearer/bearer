@@ -5,10 +5,10 @@ import (
 
 	"github.com/bearer/curio/pkg/report/detectors"
 	reportschema "github.com/bearer/curio/pkg/report/schema"
+	"github.com/bearer/curio/pkg/report/schema/datatype"
 	"github.com/stretchr/testify/assert"
 
 	"github.com/bearer/curio/pkg/classification/schema"
-	"github.com/bearer/curio/pkg/parser/datatype"
 )
 
 type testCase struct {

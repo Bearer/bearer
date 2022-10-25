@@ -75,7 +75,6 @@ func (report *JSONLines) AddSchema(
 	schema schema.Schema,
 	source source.Source,
 ) {
-
 	report.addDetection(&reporttypes.Detection{DetectorType: detectorType, Value: schema, Source: source, Type: reporttypes.TypeSchema})
 }
 
