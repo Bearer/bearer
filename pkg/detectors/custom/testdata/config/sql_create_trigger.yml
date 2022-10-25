@@ -1,4 +1,4 @@
-trigger_detector:
+sql_create_trigger_detector:
   patterns:
     - CREATE TRIGGER $ANTYHING BEFORE INSERT OR UPDATE ON $TABLE_NAME FOR EACH ROW EXECUTE PROCEDURE $FUNCTION_NAME;
   param_parenting: true
