@@ -3,6 +3,7 @@ package schema_test
 import (
 	"testing"
 
+	"github.com/bearer/curio/pkg/report/detectors"
 	reportschema "github.com/bearer/curio/pkg/report/schema"
 	"github.com/stretchr/testify/assert"
 
@@ -12,7 +13,7 @@ import (
 
 type testCase struct {
 	Name  string
-	Input datatype.DataType
+	Input schema.DataTypeDetection
 	Want  schema.ClassifiedDatatype
 }
 
@@ -20,21 +21,24 @@ func TestSchema(t *testing.T) {
 	tests := []testCase{
 		{
 			Name: "simple path",
-			Input: datatype.DataType{
-				Name: "user",
-				Type: reportschema.SimpleTypeObject,
-				Properties: map[string]*datatype.DataType{
-					"address": {
-						Type: reportschema.SimpleTypeString,
-						UUID: "2",
+			Input: schema.DataTypeDetection{
+				Filename:     "db/schema.rb",
+				DetectorType: detectors.DetectorRuby,
+				Value: datatype.DataType{
+					Name: "user",
+					Type: reportschema.SimpleTypeObject,
+					Properties: map[string]*datatype.DataType{
+						"address": {
+							Type: reportschema.SimpleTypeString,
+							UUID: "2",
+						},
+						"age": {
+							Type: reportschema.SimpleTypeString,
+							UUID: "3",
+						},
 					},
-					"age": {
-						Type: reportschema.SimpleTypeString,
-						UUID: "3",
-					},
-				},
-				UUID: "1",
-			},
+					UUID: "1",
+				}},
 			Want: schema.ClassifiedDatatype{
 				DataType: &datatype.DataType{
 					UUID: "1",
