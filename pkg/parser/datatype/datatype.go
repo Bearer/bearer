@@ -5,6 +5,7 @@ import (
 
 	"github.com/bearer/curio/pkg/parser"
 	"github.com/bearer/curio/pkg/parser/nodeid"
+	"github.com/bearer/curio/pkg/report/detections"
 	"github.com/bearer/curio/pkg/report/detectors"
 	"github.com/bearer/curio/pkg/report/schema/datatype"
 )
@@ -29,12 +30,12 @@ func NewFinder(tree *parser.Tree, parseNode func(finder *Finder, node *parser.No
 	}
 }
 
-func NewExport(report datatype.SchemaReport, detectorType detectors.Type, idGenerator nodeid.Generator, values map[parser.NodeID]*datatype.DataType) {
-	datatype.ExportSchemas(report, detectorType, idGenerator, true, values)
+func NewExport(report detections.ReportDetection, detectorType detectors.Type, idGenerator nodeid.Generator, values map[parser.NodeID]*datatype.DataType) {
+	datatype.ExportSchemas(report, detections.TypeSchema, detectorType, idGenerator, true, values)
 }
 
-func NewCompleteExport(report datatype.SchemaReport, detectorType detectors.Type, idGenerator nodeid.Generator, values map[parser.NodeID]*datatype.DataType) {
-	datatype.ExportSchemas(report, detectorType, idGenerator, false, values)
+func NewCompleteExport[D datatype.DataTypable](report detections.ReportDetection, detectorType detectors.Type, idGenerator nodeid.Generator, values map[parser.NodeID]D) {
+	datatype.ExportSchemas(report, detections.TypeCustom, detectorType, idGenerator, false, values)
 }
 
 func (finder *Finder) Find() {

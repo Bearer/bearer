@@ -72,7 +72,7 @@ func (report *JSONLines) AddCreateView(
 		field.CommitSHA = report.Blamer.SHAForLine(field.Source.Filename, *field.Source.LineNumber)
 	}
 
-	report.AddDetection(&detections.Detection{DetectorType: detectorType, Value: createview, Source: createview.Source, Type: detections.TypeCreateView})
+	report.AddDetection(detections.TypeCreateView, detectorType, createview.Source, createview)
 }
 
 func (report *JSONLines) AddDatatype(detectorType detectors.Type, idGenerator nodeid.Generator, ignorefirst bool, values map[parser.NodeID]*datatype.DataType) {

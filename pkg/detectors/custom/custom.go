@@ -233,8 +233,7 @@ func (detector *Detector) extractData(captures []parser.Captures, rule config.Co
 			}
 		}
 
-		reportWrapper := WrapReport(report, rule.RuleName)
-		parserdatatype.NewCompleteExport(reportWrapper, detectors.DetectorCustom, idGenerator, forExport)
+		parserdatatype.NewCompleteExport(report, detectors.DetectorCustom, idGenerator, forExport)
 	}
 	return nil
 }
