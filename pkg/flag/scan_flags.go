@@ -31,7 +31,7 @@ var (
 		Name:       "internal-domains",
 		ConfigName: "scan.internal-domains",
 		Value:      []string{},
-		Usage:      "define regular expressions for better classification of private or unreachable domains eg. --internal-domains=\"/*.my-company.com/,/private.sh/\"",
+		Usage:      "define regular expressions for better classification of private or unreachable domains eg. --internal-domains=\"*.my-company.com,private.sh\"",
 	}
 )
 

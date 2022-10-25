@@ -1,6 +1,6 @@
-name: ' scan'
-synopsis: Scan git repository
-usage: ' scan [flags] PATH'
+name: ' init'
+synopsis: writes default config to curio.yml
+usage: ' init [flags]'
 options:
     - name: config-file
       usage: file from which to load configurations
@@ -28,7 +28,7 @@ options:
     - name: help
       shorthand: h
       default_value: "false"
-      usage: help for scan
+      usage: help for init
     - name: internal-domains
       default_value: '[]'
       usage: |
@@ -67,11 +67,6 @@ options:
     - name: workers
       default_value: "1"
       usage: number of processing workers to spawn
-example: |4-
-      # Scan a local project including language-specific files
-      $ curio s /path/to/your_project
-      # Scan a single file
-      $ curio s ./curio-ci-test/Pipfile.lock
 see_also:
     - ' - '
-aliases: s
+aliases: 
