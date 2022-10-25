@@ -5,6 +5,10 @@ import (
 	"log"
 
 	classsification "github.com/bearer/curio/pkg/classification"
+	classsificationschema "github.com/bearer/curio/pkg/classification/schema"
+
+	"github.com/bearer/curio/pkg/parser"
+	"github.com/bearer/curio/pkg/parser/nodeid"
 
 	reporttypes "github.com/bearer/curio/pkg/report"
 	createview "github.com/bearer/curio/pkg/report/create_view"
@@ -14,6 +18,7 @@ import (
 	"github.com/bearer/curio/pkg/report/interfaces"
 	"github.com/bearer/curio/pkg/report/operations"
 	"github.com/bearer/curio/pkg/report/schema"
+	"github.com/bearer/curio/pkg/report/schema/datatype"
 	"github.com/bearer/curio/pkg/report/secret"
 	"github.com/bearer/curio/pkg/report/source"
 
@@ -68,6 +73,24 @@ func (report *JSONLines) AddCreateView(
 	}
 
 	report.addDetection(&reporttypes.Detection{DetectorType: detectorType, Value: createview, Source: createview.Source, Type: reporttypes.TypeCreateView})
+}
+
+func (report *JSONLines) AddDatatype(detectorType detectors.Type, idGenerator nodeid.Generator, ignorefirst bool, values map[parser.NodeID]*datatype.DataType) {
+	var classifiedDatatypes []*classsificationschema.ClassifiedDatatype
+	for _, target := range values {
+		classified, err := report.Classifier.Schema.Classify(classsificationschema.DataTypeDetection{
+			Value:        *target,
+			Filename:     target.Node.Source(false).Filename,
+			DetectorType: detectorType,
+		})
+		if err != nil {
+			report.AddError(err)
+		}
+
+		classifiedDatatypes = append(classifiedDatatypes, classified)
+	}
+
+	datatype.ExportSchemas(report, detectorType, idGenerator, ignorefirst, classifiedDatatypes)
 }
 
 func (report *JSONLines) AddSchema(
@@ -145,15 +168,6 @@ func (report *JSONLines) AddError(err error) {
 func (report *JSONLines) AddFillerLine() {
 	report.Add(&reporttypes.Detection{
 		Type: reporttypes.TypeFiller,
-	})
-}
-
-func (report *JSONLines) AddCustomDetection(ruleName string, source source.Source, value schema.Schema) {
-	report.Add(&reporttypes.CustomDetection{
-		Type:         reporttypes.TypeCustom,
-		DetectorType: detectors.Type(ruleName),
-		Source:       source,
-		Value:        value,
 	})
 }
 

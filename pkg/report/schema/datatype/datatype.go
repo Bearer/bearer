@@ -6,9 +6,9 @@ import (
 
 	"github.com/bearer/curio/pkg/parser"
 	"github.com/bearer/curio/pkg/parser/nodeid"
+	"github.com/bearer/curio/pkg/report/detections"
 	"github.com/bearer/curio/pkg/report/detectors"
 	"github.com/bearer/curio/pkg/report/schema"
-	"github.com/bearer/curio/pkg/report/source"
 )
 
 type DataType struct {
@@ -21,83 +21,117 @@ type DataType struct {
 	UUID       string
 }
 
-type SchemaReport interface {
-	AddSchema(detectorType detectors.Type, schema schema.Schema, source source.Source)
+func (datatype *DataType) GetName() string {
+	return datatype.Name
 }
 
-func ExportSchemas(report SchemaReport, detectorType detectors.Type, idGenerator nodeid.Generator, ignoreFirst bool, values map[parser.NodeID]*DataType) {
+func (datatype *DataType) GetNode() *parser.Node {
+	return datatype.Node
+}
+
+func (datatype *DataType) GetProperties() map[string]*DataType {
+	return datatype.Properties
+}
+
+func (datatype *DataType) GetUUID() string {
+	return datatype.UUID
+}
+
+func (datatype *DataType) GetIsHelper() bool {
+	return datatype.IsHelper
+}
+
+func (datatype *DataType) GetTextType() string {
+	return datatype.TextType
+}
+
+func (datatype *DataType) GetType() string {
+	return datatype.Type
+}
+
+type DataTypable interface {
+	GetUUID() string
+	GetIsHelper() bool
+	GetTextType() string
+	GetType() string
+	GetName() string
+	GetNode() *parser.Node
+	GetProperties() map[string]DataTypable
+}
+
+func ExportSchemas[D DataTypable](report detections.ReportDetection, detectionType detections.DetectionType, detectorType detectors.Type, idGenerator nodeid.Generator, ignoreFirst bool, values map[parser.NodeID]D) {
 	sortedDataTypes := SortParserMap(values)
 
 	parentName := ""
 	parentUUID := idGenerator.GenerateId()
 	for _, value := range sortedDataTypes {
-		dataTypeToSchema(report, detectorType, idGenerator, value, parentName, parentUUID, !ignoreFirst)
+		dataTypeToSchema(report, detectionType, detectorType, idGenerator, value, parentName, parentUUID, !ignoreFirst)
 	}
 }
 
-func dataTypeToSchema(report SchemaReport, detectorType detectors.Type, idGenerator nodeid.Generator, dataType *DataType, parentName string, parentUUID string, shouldExport bool) {
-	if dataType.IsHelper {
+func dataTypeToSchema[D DataTypable](report detections.ReportDetection, detectionType detections.DetectionType, detectorType detectors.Type, idGenerator nodeid.Generator, dataType D, parentName string, parentUUID string, shouldExport bool) {
+	if dataType.GetIsHelper() {
 		return
 	}
 
-	selfUUID := dataType.UUID
-	if dataType.UUID == "" {
+	selfUUID := dataType.GetUUID()
+	if dataType.GetUUID() == "" {
 		selfUUID = idGenerator.GenerateId()
 	}
 
-	selfName := dataType.Name
+	selfName := dataType.GetName()
 
 	if shouldExport {
-		report.AddSchema(detectorType, schema.Schema{
+		report.AddDetection(detectionType, detectorType, dataType.GetNode().Source(false), schema.Schema{
 			ObjectName:      parentName,
 			FieldName:       selfName,
 			ObjectUUID:      parentUUID,
 			FieldUUID:       selfUUID,
-			FieldType:       dataType.TextType,
-			SimpleFieldType: dataType.Type,
-		}, dataType.Node.Source(false))
+			FieldType:       dataType.GetTextType(),
+			SimpleFieldType: dataType.GetType(),
+		})
 	}
 
-	sortedProperties := SortStringMap(dataType.Properties)
+	sortedProperties := SortStringMap(dataType.GetProperties())
 
 	for _, property := range sortedProperties {
-		dataTypeToSchema(report, detectorType, idGenerator, property, selfName, selfUUID, true)
+		dataTypeToSchema(report, detectionType, detectorType, idGenerator, property, selfName, selfUUID, true)
 	}
 }
 
-func SortStringMap(input map[string]*DataType) []*DataType {
-	var sortedDataTypes []*DataType
+func SortStringMap[D DataTypable](input map[string]D) []D {
+	var sortedDataTypes []D
 	for _, value := range input {
 		sortedDataTypes = append(sortedDataTypes, value)
 	}
 	return SortSlice(sortedDataTypes)
 }
 
-func SortParserMap(input map[parser.NodeID]*DataType) []*DataType {
-	var sortedDataTypes []*DataType
+func SortParserMap[D DataTypable](input map[parser.NodeID]D) []D {
+	var sortedDataTypes []D
 	for _, value := range input {
 		sortedDataTypes = append(sortedDataTypes, value)
 	}
 	return SortSlice(sortedDataTypes)
 }
 
-func SortSlice(input []*DataType) []*DataType {
+func SortSlice[D DataTypable](input []D) []D {
 	sort.Slice(input, func(i, j int) bool {
-		lineNumberA := input[i].Node.Source(false).LineNumber
-		lineNumberB := input[j].Node.Source(false).LineNumber
+		lineNumberA := input[i].GetNode().Source(false).LineNumber
+		lineNumberB := input[j].GetNode().Source(false).LineNumber
 
 		if *lineNumberA != *lineNumberB {
 			return *lineNumberA < *lineNumberB
 		}
 
-		columnNumberA := input[i].Node.Source(false).ColumnNumber
-		columnNumberB := input[j].Node.Source(false).ColumnNumber
+		columnNumberA := input[i].GetNode().Source(false).ColumnNumber
+		columnNumberB := input[j].GetNode().Source(false).ColumnNumber
 
 		if *columnNumberA != *columnNumberB {
 			return *columnNumberA < *columnNumberB
 		}
 
-		if strings.Compare(input[i].Name, input[j].Name) == -1 {
+		if strings.Compare(input[i].GetName(), input[j].GetName()) == -1 {
 			return true
 		}
 
