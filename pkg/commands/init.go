@@ -13,7 +13,7 @@ import (
 func NewInitCommand() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "init",
-		Short: "writes default config in curio.yml",
+		Short: "writes default config to curio.yml",
 		RunE: func(cmd *cobra.Command, args []string) error {
 			if err := scanFlags.BindForConfigInit(cmd); err != nil {
 				return fmt.Errorf("flag bind error: %w", err)

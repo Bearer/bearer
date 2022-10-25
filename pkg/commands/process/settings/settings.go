@@ -37,9 +37,11 @@ var CustomDetectorKey string = "scan.custom_detector"
 
 func FromOptions(opts flag.Options) (Config, error) {
 	rules := DefaultCustomDetector()
-	err := viper.UnmarshalKey(CustomDetectorKey, &rules)
-	if err != nil {
-		return Config{}, err
+	if viper.IsSet(CustomDetectorKey) {
+		err := viper.UnmarshalKey(CustomDetectorKey, &rules)
+		if err != nil {
+			return Config{}, err
+		}
 	}
 
 	return Config{

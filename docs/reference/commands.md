@@ -5,6 +5,8 @@ title: Commands
 Curio offers a number of commands to use and customize the CLI to your needs.
 
 - [scan](#scan): Scans a repository, project, or file.
+- [init](#init): Writes default config to curio.yml
+- [version](#version): Print the version
 
 In addition to flags available for specific commands, the following flags are globally available for all commands:
 
@@ -13,6 +15,22 @@ In addition to flags available for specific commands, the following flags are gl
 - `--generate-default-config`: Writes the default config to `curio-default.yaml`.
 - `--quiet`, `-q`: Suppresses progress bar and log output.
 - `--version`, `-v`: Displays the installed version number.
+
+## init
+
+Writes default config to curio.yml
+
+```bash
+    curio init
+```
+
+## version
+
+Print the version
+
+```bash
+    curio version
+```
 
 ## scan
 
@@ -25,6 +43,10 @@ curio scan [FLAGS] [PATH]
 `PATH` (string) (optional) (default: current working directory): A path to a directory or file.
 
 ### `FLAGS`
+
+#### General Flags
+
+- `--config-file` string file from which to load configurations
 
 #### Report Flags
 

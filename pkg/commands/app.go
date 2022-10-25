@@ -48,8 +48,7 @@ Scan Example:
 
 Available Commands:
 	scan              Scan git repository
-	init              Inits default configuration file (curio.yml)
-	config            Scan config files for misconfigurations
+	init              Writes default config to curio.yml
 	version           Print the version
 `
 
