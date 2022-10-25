@@ -1,4 +1,4 @@
-detect_create_table:
+detect_sql_create_table:
   patterns:
     - |
       CREATE TABLE public.$TABLE_NAME (
