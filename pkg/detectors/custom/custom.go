@@ -155,11 +155,11 @@ func (detector *Detector) executeRule(rule config.CompiledRule, file *file.FileI
 
 func (detector *Detector) extractData(captures []parser.Captures, rule config.CompiledRule, report report.Report, lang string, idGenerator nodeid.Generator) error {
 	for _, capture := range captures {
-		forExport := make(map[parser.NodeID]*schemadatatype.DataType)
-		var parent *schemadatatype.DataType
+		forExport := make(map[parser.NodeID]schemadatatype.DataTypable)
+		var parent schemadatatype.DataTypable
 
 		for _, param := range rule.Params {
-			var paramTypes map[parser.NodeID]*schemadatatype.DataType
+			var paramTypes map[parser.NodeID]schemadatatype.DataTypable
 			var err error
 
 			if param.ArgumentsExtract || param.ClassNameExtract {
@@ -172,7 +172,7 @@ func (detector *Detector) extractData(captures []parser.Captures, rule config.Co
 					// join it as children to master param and export it
 					if len(forExport) == 1 {
 						for _, datatype := range paramTypes {
-							parent.Properties[datatype.Name] = datatype
+							parent.GetProperties()[datatype.GetName()] = datatype
 						}
 
 						continue
@@ -216,12 +216,12 @@ func (detector *Detector) extractData(captures []parser.Captures, rule config.Co
 								Node:       matchNode,
 								Name:       string(match),
 								Type:       schema.SimpleTypeUknown,
-								Properties: make(map[string]*schemadatatype.DataType),
+								Properties: make(map[string]schemadatatype.DataTypable),
 							}
 							matchNodeID := matchNode.ID()
 
 							if rule.ParamParenting {
-								parent.Properties[matchType.Name] = matchType
+								parent.GetProperties()[matchType.Name] = matchType
 								continue
 							}
 
@@ -279,7 +279,7 @@ func filterCaptures(params []config.Param, captures []parser.Captures) (filtered
 	return filtered, err
 }
 
-func (detector *Detector) extractArguments(language string, node *parser.Node, idGenerator nodeid.Generator) (map[parser.NodeID]*schemadatatype.DataType, error) {
+func (detector *Detector) extractArguments(language string, node *parser.Node, idGenerator nodeid.Generator) (map[parser.NodeID]schemadatatype.DataTypable, error) {
 	switch language {
 	case "ruby":
 		return detector.Ruby.ExtractArguments(node, idGenerator)

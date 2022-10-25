@@ -46,7 +46,7 @@ func discoverClassAssignment(tree *parser.Tree, datatypes map[parser.NodeID]*sch
 			Name:       id,
 			Type:       schema.SimpleTypeObject,
 			TextType:   "class",
-			Properties: make(map[string]*schemadatatype.DataType),
+			Properties: make(map[string]schemadatatype.DataTypable),
 		}
 	}
 
@@ -71,7 +71,7 @@ func discoverClassAssignmentProperties(tree *parser.Tree, datatypes map[parser.N
 			Node:       propertyNode,
 			Name:       propertyName,
 			Type:       schema.SimpleTypeUknown,
-			Properties: make(map[string]*schemadatatype.DataType),
+			Properties: make(map[string]schemadatatype.DataTypable),
 			TextType:   "",
 		}
 	}

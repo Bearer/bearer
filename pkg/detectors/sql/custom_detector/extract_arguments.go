@@ -27,7 +27,7 @@ func (detector *Detector) ExtractArguments(node *parser.Node, idGenerator nodeid
 			Name:       node.Content(),
 			Type:       simpleType,
 			TextType:   typeIdentifierNode.Content(),
-			Properties: make(map[string]*schemadatatype.DataType),
+			Properties: make(map[string]schemadatatype.DataTypable),
 		}
 
 		joinedDatatypes[datatype.Node.ID()] = datatype
@@ -40,7 +40,7 @@ func (detector *Detector) ExtractArguments(node *parser.Node, idGenerator nodeid
 			Name:       node.Content(),
 			Type:       schema.SimpleTypeObject,
 			TextType:   "",
-			Properties: make(map[string]*schemadatatype.DataType),
+			Properties: make(map[string]schemadatatype.DataTypable),
 		}
 
 		joinedDatatypes[datatype.Node.ID()] = datatype
@@ -55,7 +55,7 @@ func (detector *Detector) ExtractArguments(node *parser.Node, idGenerator nodeid
 			Node:       tableNameNode,
 			Name:       tableNameNode.Content(),
 			Type:       schema.SimpleTypeObject,
-			Properties: make(map[string]*schemadatatype.DataType),
+			Properties: make(map[string]schemadatatype.DataTypable),
 		}
 
 		joinedDatatypes[tableNameDatatype.Node.ID()] = tableNameDatatype

@@ -55,7 +55,7 @@ func discoverStructures(tree *parser.Tree, datatypes map[parser.NodeID]*schemada
 			Node:       receiver,
 			Name:       parentName,
 			Type:       schema.SimpleTypeUknown,
-			Properties: make(map[string]*schemadatatype.DataType),
+			Properties: make(map[string]schemadatatype.DataTypable),
 			TextType:   "",
 		}
 
@@ -81,7 +81,7 @@ func discoverStructures(tree *parser.Tree, datatypes map[parser.NodeID]*schemada
 				Name:       propertyName,
 				Type:       schema.SimpleTypeUknown,
 				TextType:   "",
-				Properties: make(map[string]*schemadatatype.DataType),
+				Properties: make(map[string]schemadatatype.DataTypable),
 			}
 		}
 

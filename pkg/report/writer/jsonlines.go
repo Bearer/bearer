@@ -10,9 +10,9 @@ import (
 	"github.com/bearer/curio/pkg/parser"
 	"github.com/bearer/curio/pkg/parser/nodeid"
 
-	reporttypes "github.com/bearer/curio/pkg/report"
 	createview "github.com/bearer/curio/pkg/report/create_view"
 	"github.com/bearer/curio/pkg/report/dependencies"
+	"github.com/bearer/curio/pkg/report/detections"
 	"github.com/bearer/curio/pkg/report/detectors"
 	"github.com/bearer/curio/pkg/report/frameworks"
 	"github.com/bearer/curio/pkg/report/interfaces"
@@ -37,7 +37,7 @@ func (report *JSONLines) AddInterface(
 	data interfaces.Interface,
 	source source.Source,
 ) {
-	detection := &reporttypes.Detection{DetectorType: detectorType, Value: data, Source: source, Type: reporttypes.TypeInterface}
+	detection := &detections.Detection{DetectorType: detectorType, Value: data, Source: source, Type: detections.TypeInterface}
 	classifiedDetection, err := report.Classifier.Interfaces.Classify(*detection)
 	if err != nil {
 		report.AddError(err)
@@ -48,7 +48,7 @@ func (report *JSONLines) AddInterface(
 		classifiedDetection.CommitSHA = report.Blamer.SHAForLine(classifiedDetection.Source.Filename, *classifiedDetection.Source.LineNumber)
 	}
 
-	classifiedDetection.Type = reporttypes.TypeInterfaceClassified
+	classifiedDetection.Type = detections.TypeInterfaceClassified
 	report.Add(classifiedDetection)
 }
 
@@ -57,7 +57,7 @@ func (report *JSONLines) AddOperation(
 	operation operations.Operation,
 	source source.Source,
 ) {
-	report.addDetection(&reporttypes.Detection{DetectorType: detectorType, Value: operation, Source: source, Type: reporttypes.TypeOperation})
+	report.AddDetection(detections.TypeOperation, detectorType, source, operation)
 }
 
 func (report *JSONLines) AddCreateView(
@@ -72,7 +72,7 @@ func (report *JSONLines) AddCreateView(
 		field.CommitSHA = report.Blamer.SHAForLine(field.Source.Filename, *field.Source.LineNumber)
 	}
 
-	report.addDetection(&reporttypes.Detection{DetectorType: detectorType, Value: createview, Source: createview.Source, Type: reporttypes.TypeCreateView})
+	report.AddDetection(&detections.Detection{DetectorType: detectorType, Value: createview, Source: createview.Source, Type: detections.TypeCreateView})
 }
 
 func (report *JSONLines) AddDatatype(detectorType detectors.Type, idGenerator nodeid.Generator, ignorefirst bool, values map[parser.NodeID]*datatype.DataType) {
@@ -98,17 +98,24 @@ func (report *JSONLines) AddSchema(
 	schema schema.Schema,
 	source source.Source,
 ) {
-	report.addDetection(&reporttypes.Detection{DetectorType: detectorType, Value: schema, Source: source, Type: reporttypes.TypeSchema})
+	report.AddDetection(detections.TypeSchema, detectorType, source, schema)
 }
 
 func (report *JSONLines) AddSecretLeak(
 	secret secret.Secret,
 	source source.Source,
 ) {
-	report.addDetection(&reporttypes.Detection{DetectorType: detectors.DetectorGitleaks, Value: secret, Source: source, Type: reporttypes.TypeSecretleak})
+	report.AddDetection(detections.TypeSecretleak, detectors.DetectorGitleaks, source, secret)
 }
 
-func (report *JSONLines) addDetection(data *reporttypes.Detection) {
+func (report *JSONLines) AddDetection(detectionType detections.DetectionType, detectorType detectors.Type, source source.Source, value interface{}) {
+	data := &detections.Detection{
+		Type:         detectionType,
+		DetectorType: detectorType,
+		Source:       source,
+		Value:        value,
+	}
+
 	if data.Source.LineNumber != nil {
 		data.CommitSHA = report.Blamer.SHAForLine(data.Source.Filename, *data.Source.LineNumber)
 	}
@@ -122,7 +129,7 @@ func (report *JSONLines) AddDependency(
 	source source.Source,
 ) {
 
-	detection := &reporttypes.Detection{DetectorType: detectorType, Value: dependency, Source: source, Type: reporttypes.TypeDependency}
+	detection := &detections.Detection{DetectorType: detectorType, Value: dependency, Source: source, Type: detections.TypeDependency}
 	classifiedDetection, err := report.Classifier.Dependencies.Classify(*detection)
 	if err != nil {
 		report.AddError(err)
@@ -133,7 +140,7 @@ func (report *JSONLines) AddDependency(
 		classifiedDetection.CommitSHA = report.Blamer.SHAForLine(classifiedDetection.Source.Filename, *classifiedDetection.Source.LineNumber)
 	}
 
-	classifiedDetection.Type = reporttypes.TypeDependencyClassified
+	classifiedDetection.Type = detections.TypeDependencyClassified
 	report.Add(classifiedDetection)
 }
 
@@ -148,8 +155,8 @@ func (report *JSONLines) AddFramework(
 		commitSHA = report.Blamer.SHAForLine(source.Filename, *source.LineNumber)
 	}
 
-	report.Add(&reporttypes.FrameworkDetection{
-		Type:          reporttypes.TypeFramework,
+	report.Add(&detections.FrameworkDetection{
+		Type:          detections.TypeFramework,
 		DetectorType:  detectorType,
 		FrameworkType: frameworkType,
 		CommitSHA:     commitSHA,
@@ -159,15 +166,15 @@ func (report *JSONLines) AddFramework(
 }
 
 func (report *JSONLines) AddError(err error) {
-	report.Add(&reporttypes.ErrorDetection{
-		Type:    reporttypes.TypeError,
+	report.Add(&detections.ErrorDetection{
+		Type:    detections.TypeError,
 		Message: err.Error(),
 	})
 }
 
 func (report *JSONLines) AddFillerLine() {
-	report.Add(&reporttypes.Detection{
-		Type: reporttypes.TypeFiller,
+	report.Add(&detections.Detection{
+		Type: detections.TypeFiller,
 	})
 }
 

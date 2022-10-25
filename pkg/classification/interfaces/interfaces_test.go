@@ -6,7 +6,7 @@ import (
 	"github.com/bearer/curio/pkg/classification/db"
 	"github.com/bearer/curio/pkg/classification/interfaces"
 
-	"github.com/bearer/curio/pkg/report"
+	"github.com/bearer/curio/pkg/report/detections"
 
 	reportinterfaces "github.com/bearer/curio/pkg/report/interfaces"
 	"github.com/bearer/curio/pkg/report/values"
@@ -16,7 +16,7 @@ import (
 
 type testCase struct {
 	Name  string
-	Input report.Detection
+	Input detections.Detection
 	Want  *interfaces.Classification
 }
 
@@ -24,7 +24,7 @@ func TestInterface(t *testing.T) {
 	tests := []testCase{
 		{
 			Name: "when there is a matching recipe",
-			Input: report.Detection{
+			Input: detections.Detection{
 				Value: reportinterfaces.Interface{
 					Type: reportinterfaces.TypeURL,
 					Value: &values.Value{
@@ -53,7 +53,7 @@ func TestInterface(t *testing.T) {
 		},
 		{
 			Name: "when it matches an internal domain",
-			Input: report.Detection{
+			Input: detections.Detection{
 				Value: reportinterfaces.Interface{
 					Type: reportinterfaces.TypeURL,
 					Value: &values.Value{
@@ -80,7 +80,7 @@ func TestInterface(t *testing.T) {
 		},
 		{
 			Name: "when there is a matching recipe with a wildcard",
-			Input: report.Detection{
+			Input: detections.Detection{
 				Value: reportinterfaces.Interface{
 					Type: reportinterfaces.TypeURL,
 					Value: &values.Value{
@@ -109,7 +109,7 @@ func TestInterface(t *testing.T) {
 		},
 		{
 			Name: "when there is a recipe with a path",
-			Input: report.Detection{
+			Input: detections.Detection{
 				Value: reportinterfaces.Interface{
 					Type: reportinterfaces.TypeURL,
 					Value: &values.Value{
@@ -138,7 +138,7 @@ func TestInterface(t *testing.T) {
 		},
 		{
 			Name: "TLD is not allowed",
-			Input: report.Detection{
+			Input: detections.Detection{
 				Value: reportinterfaces.Interface{
 					Type: reportinterfaces.TypeURL,
 					Value: &values.Value{
@@ -165,7 +165,7 @@ func TestInterface(t *testing.T) {
 		},
 		{
 			Name: "excluded domain",
-			Input: report.Detection{
+			Input: detections.Detection{
 				Value: reportinterfaces.Interface{
 					Type: reportinterfaces.TypeURL,
 					Value: &values.Value{

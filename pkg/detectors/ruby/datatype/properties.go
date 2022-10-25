@@ -45,7 +45,7 @@ func addProperties(tree *parser.Tree, helperDatatypes map[parser.NodeID]*schemad
 					Name:       id,
 					Type:       schema.SimpleTypeUknown,
 					TextType:   "",
-					Properties: make(map[string]*schemadatatype.DataType),
+					Properties: make(map[string]schemadatatype.DataTypable),
 					UUID:       "",
 				}
 			}
@@ -60,7 +60,7 @@ func addProperties(tree *parser.Tree, helperDatatypes map[parser.NodeID]*schemad
 				Name:       id,
 				Type:       schema.SimpleTypeUknown,
 				TextType:   "",
-				Properties: make(map[string]*schemadatatype.DataType),
+				Properties: make(map[string]schemadatatype.DataTypable),
 				UUID:       "",
 			}
 		}
@@ -80,7 +80,7 @@ func addProperties(tree *parser.Tree, helperDatatypes map[parser.NodeID]*schemad
 				Name:       id,
 				Type:       schema.SimpleTypeUknown,
 				TextType:   "",
-				Properties: make(map[string]*schemadatatype.DataType),
+				Properties: make(map[string]schemadatatype.DataTypable),
 				UUID:       "",
 			}
 		}
@@ -95,7 +95,7 @@ func addProperties(tree *parser.Tree, helperDatatypes map[parser.NodeID]*schemad
 			Name:       id,
 			Type:       schema.SimpleTypeUknown,
 			TextType:   "",
-			Properties: make(map[string]*schemadatatype.DataType),
+			Properties: make(map[string]schemadatatype.DataTypable),
 			UUID:       "",
 		}
 	}
@@ -191,7 +191,7 @@ func scopeAndMergeProperties(propertiesDatatypes, classDataTypes map[parser.Node
 				Node:       datatype.Node,
 				Type:       schema.SimpleTypeUknown,
 				TextType:   "",
-				Properties: make(map[string]*schemadatatype.DataType),
+				Properties: make(map[string]schemadatatype.DataTypable),
 			}
 
 			classDataTypes[datatype.Node.ID()].Properties[datatype.Name] = datatype
@@ -219,7 +219,7 @@ func scopeAndMergeProperties(propertiesDatatypes, classDataTypes map[parser.Node
 				Node:       datatype.Node,
 				Type:       schema.SimpleTypeUknown,
 				TextType:   "",
-				Properties: make(map[string]*schemadatatype.DataType),
+				Properties: make(map[string]schemadatatype.DataTypable),
 			}
 
 			classDataTypes[datatype.Node.ID()].Properties[datatype.Name] = datatype

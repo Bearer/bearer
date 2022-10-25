@@ -17,7 +17,7 @@ type Finder struct {
 
 func NewDataType() datatype.DataType {
 	return datatype.DataType{
-		Properties: make(map[string]*datatype.DataType),
+		Properties: make(map[string]datatype.DataTypable),
 	}
 }
 
@@ -41,7 +41,7 @@ func (finder *Finder) Find() {
 	finder.tree.WalkBottomUp(func(child *parser.Node) error { //nolint:all,errcheck
 
 		value := &datatype.DataType{
-			Properties: make(map[string]*datatype.DataType),
+			Properties: make(map[string]datatype.DataTypable),
 		}
 		found := finder.parseNode(finder, child, value)
 		if found {
@@ -56,17 +56,17 @@ func (finder *Finder) GetValues() map[parser.NodeID]*datatype.DataType {
 	return finder.values
 }
 
-func DeepestSingleChild(datatype *datatype.DataType) (*datatype.DataType, error) {
-	if len(datatype.Properties) > 1 {
+func DeepestSingleChild(datatype datatype.DataTypable) (datatype.DataTypable, error) {
+	if len(datatype.GetProperties()) > 1 {
 		return datatype, errors.New("multiple childs detected")
 	}
 
-	if len(datatype.Properties) == 0 {
+	if len(datatype.GetProperties()) == 0 {
 		return datatype, nil
 	}
 
-	if len(datatype.Properties) == 1 {
-		for _, child := range datatype.Properties {
+	if len(datatype.GetProperties()) == 1 {
+		for _, child := range datatype.GetProperties() {
 			return DeepestSingleChild(child)
 		}
 	}
@@ -74,7 +74,7 @@ func DeepestSingleChild(datatype *datatype.DataType) (*datatype.DataType, error)
 	return nil, errors.New("couldn't determine deepest child")
 }
 
-func PruneMap(datatypes map[parser.NodeID]*datatype.DataType) {
+func PruneMap[D datatype.DataTypable](datatypes map[parser.NodeID]D) {
 	for key, datatype := range datatypes {
 		if Prune(datatype) {
 			delete(datatypes, key)
@@ -82,13 +82,13 @@ func PruneMap(datatypes map[parser.NodeID]*datatype.DataType) {
 	}
 }
 
-func Prune(datatype *datatype.DataType) bool {
-	if len(datatype.Name) < 3 {
+func Prune[D datatype.DataTypable](datatype D) bool {
+	if len(datatype.GetName()) < 3 {
 		return true
 	} else {
-		for propertyKey, property := range datatype.Properties {
+		for propertyKey, property := range datatype.GetProperties() {
 			if Prune(property) {
-				delete(datatype.Properties, propertyKey)
+				datatype.DeleteProperty(propertyKey)
 			}
 		}
 	}

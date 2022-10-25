@@ -7,6 +7,7 @@ import (
 	"github.com/bearer/curio/pkg/report/detectors"
 	"github.com/bearer/curio/pkg/report/frameworks"
 	"github.com/bearer/curio/pkg/report/interfaces"
+	"github.com/bearer/curio/pkg/report/schema"
 
 	"github.com/bearer/curio/pkg/report/operations"
 	"github.com/bearer/curio/pkg/report/secret"
@@ -15,6 +16,7 @@ import (
 
 type Report interface {
 	detections.ReportDetection
+	schema.ReportSchema
 	AddCreateView(detectorType detectors.Type, createView createview.View)
 	AddOperation(detectorType detectors.Type, operation operations.Operation, source source.Source)
 	AddInterface(detectorType detectors.Type, data interfaces.Interface, source source.Source)

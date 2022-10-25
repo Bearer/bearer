@@ -55,7 +55,7 @@ func Discover(report report.Report, tree *parser.Tree, idGenerator nodeid.Genera
 			Name:       name,
 			Type:       schema.SimpleTypeObject,
 			TextType:   "class",
-			Properties: make(map[string]*schemadatatype.DataType),
+			Properties: make(map[string]schemadatatype.DataTypable),
 		}
 	}
 
@@ -92,7 +92,7 @@ func discoverProperties(tree *parser.Tree, datatypes map[parser.NodeID]*schemada
 			Name:       propertyName,
 			Type:       propertyType,
 			TextType:   propertyTextType,
-			Properties: make(map[string]*schemadatatype.DataType),
+			Properties: make(map[string]schemadatatype.DataTypable),
 		}
 	}
 }
@@ -117,7 +117,7 @@ func discoverFunctions(tree *parser.Tree, datatypes map[parser.NodeID]*schemadat
 			Name:       functionName,
 			Type:       schema.SimpleTypeFunction,
 			TextType:   "",
-			Properties: make(map[string]*schemadatatype.DataType),
+			Properties: make(map[string]schemadatatype.DataTypable),
 		}
 	}
 }

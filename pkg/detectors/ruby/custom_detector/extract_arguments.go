@@ -25,7 +25,7 @@ func (detector *Detector) ExtractArguments(node *parser.Node, idGenerator nodeid
 			Node:       node,
 			Name:       node.Content(),
 			Type:       schema.SimpleTypeObject,
-			Properties: make(map[string]*schemadatatype.DataType),
+			Properties: make(map[string]schemadatatype.DataTypable),
 		}
 		joinedDatatypes[datatype.Node.ID()] = datatype
 		return joinedDatatypes, nil
@@ -46,7 +46,7 @@ func (detector *Detector) ExtractArguments(node *parser.Node, idGenerator nodeid
 				Node:       singleArgument,
 				Name:       content,
 				Type:       schema.SimpleTypeUknown,
-				Properties: make(map[string]*schemadatatype.DataType),
+				Properties: make(map[string]schemadatatype.DataTypable),
 			}
 			joinedDatatypes[datatype.Node.ID()] = datatype
 			continue

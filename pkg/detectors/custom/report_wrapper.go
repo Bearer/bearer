@@ -2,6 +2,7 @@ package custom
 
 import (
 	"github.com/bearer/curio/pkg/report"
+	"github.com/bearer/curio/pkg/report/detections"
 	"github.com/bearer/curio/pkg/report/detectors"
 	"github.com/bearer/curio/pkg/report/schema"
 	"github.com/bearer/curio/pkg/report/source"
@@ -20,5 +21,5 @@ func WrapReport(report report.Report, ruleName string) *ReportWrapper {
 }
 
 func (reportWrapper *ReportWrapper) AddSchema(detectorType detectors.Type, schema schema.Schema, source source.Source) {
-	reportWrapper.Report.AddCustomDetection(reportWrapper.RuleName, source, schema)
+	reportWrapper.Report.AddDetection(detections.TypeCustom, detectors.Type(reportWrapper.RuleName), source, schema)
 }

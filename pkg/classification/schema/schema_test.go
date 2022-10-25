@@ -27,7 +27,7 @@ func TestSchema(t *testing.T) {
 				Value: datatype.DataType{
 					Name: "user",
 					Type: reportschema.SimpleTypeObject,
-					Properties: map[string]*datatype.DataType{
+					Properties: map[string]*datatype.DataTypable{
 						"address": {
 							Type: reportschema.SimpleTypeString,
 							UUID: "2",

@@ -16,9 +16,13 @@ type DataType struct {
 	Name       string
 	Type       string
 	TextType   string
-	Properties map[string]*DataType
+	Properties map[string]DataTypable
 	IsHelper   bool // helper dataTypes and their child datatypes don't get exported
 	UUID       string
+}
+
+func (datatype *DataType) SetName(name string) {
+	datatype.Name = name
 }
 
 func (datatype *DataType) GetName() string {
@@ -29,7 +33,7 @@ func (datatype *DataType) GetNode() *parser.Node {
 	return datatype.Node
 }
 
-func (datatype *DataType) GetProperties() map[string]*DataType {
+func (datatype *DataType) GetProperties() map[string]DataTypable {
 	return datatype.Properties
 }
 
@@ -49,12 +53,23 @@ func (datatype *DataType) GetType() string {
 	return datatype.Type
 }
 
+func (datatype *DataType) SetUUID(UUID string) {
+	datatype.UUID = UUID
+}
+
+func (datatype *DataType) DeleteProperty(name string) {
+	delete(datatype.Properties, name)
+}
+
 type DataTypable interface {
+	DeleteProperty(name string)
+	SetUUID(string)
 	GetUUID() string
 	GetIsHelper() bool
 	GetTextType() string
 	GetType() string
 	GetName() string
+	SetName(string)
 	GetNode() *parser.Node
 	GetProperties() map[string]DataTypable
 }

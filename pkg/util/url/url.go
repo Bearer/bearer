@@ -8,7 +8,7 @@ import (
 	"regexp"
 	"strings"
 
-	"github.com/bearer/curio/pkg/report"
+	"github.com/bearer/curio/pkg/report/detections"
 	"github.com/bearer/curio/pkg/report/detectors"
 	"github.com/weppos/publicsuffix-go/publicsuffix"
 )
@@ -239,7 +239,7 @@ func PrepareURLValue(myURL string) (string, error) {
 	return preparedURL, nil
 }
 
-func ValidateFormat(myURL string, data *report.Detection) (*ValidationResult, error) {
+func ValidateFormat(myURL string, data *detections.Detection) (*ValidationResult, error) {
 	ValidationResult := ValidationResult{
 		State:  Invalid,
 		Reason: "uncertain", // default
@@ -475,7 +475,7 @@ func subdomainIsNotAllowed(trd string) bool {
 	return ok
 }
 
-func invalidLanguageType(filenameExtension string, data *report.Detection) bool {
+func invalidLanguageType(filenameExtension string, data *detections.Detection) bool {
 	_, invalidLanguageType := invalidLanguageTypes[data.Source.LanguageType]
 	_, validFilenameExtension := allowedFilenameExtensions[filenameExtension]
 	_, restrictedDetectorType := restrictedDetectorTypes[string(data.DetectorType)]

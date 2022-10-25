@@ -67,7 +67,7 @@ func Discover(report report.Report, tree *parser.Tree, idGenerator nodeid.Genera
 			Name:       id,
 			Type:       schema.SimpleTypeObject,
 			TextType:   "class",
-			Properties: make(map[string]*schemadatatype.DataType),
+			Properties: make(map[string]schemadatatype.DataTypable),
 		}
 	}
 
@@ -194,7 +194,7 @@ func discoverFunctionParameters(tree *parser.Tree, datatypes map[parser.NodeID]*
 			Name:       paramNameNode.Content(),
 			Type:       paramType,
 			TextType:   paramTextType,
-			Properties: make(map[string]*schemadatatype.DataType),
+			Properties: make(map[string]schemadatatype.DataTypable),
 		}
 	}
 }

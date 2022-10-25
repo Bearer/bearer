@@ -42,7 +42,7 @@ func addObjects(tree *parser.Tree, datatypes map[parser.NodeID]*schemadatatype.D
 				Name:       "",
 				Type:       schema.SimpleTypeUknown,
 				TextType:   "",
-				Properties: make(map[string]*schemadatatype.DataType),
+				Properties: make(map[string]schemadatatype.DataTypable),
 			}
 		}
 
@@ -52,7 +52,7 @@ func addObjects(tree *parser.Tree, datatypes map[parser.NodeID]*schemadatatype.D
 			Name:       propertyNode.Content(),
 			Type:       schema.SimpleTypeUknown,
 			TextType:   "",
-			Properties: make(map[string]*schemadatatype.DataType),
+			Properties: make(map[string]schemadatatype.DataTypable),
 		}
 	}
 
@@ -87,7 +87,7 @@ func addObjects(tree *parser.Tree, datatypes map[parser.NodeID]*schemadatatype.D
 		datatypes[objectNode.ID()].Properties[propertyName] = datatypes[propertyValueNode.ID()]
 
 		// update property name
-		datatypes[objectNode.ID()].Properties[propertyName].Name = propertyName
+		datatypes[objectNode.ID()].Properties[propertyName].SetName(propertyName)
 
 		// mark root node key for deletion
 		keysToDelete = append(keysToDelete, propertyValueNode.ID())

@@ -11,11 +11,11 @@ import (
 type Scope struct {
 	NodeId    parser.NodeID
 	Node      *parser.Node
-	DataTypes map[string][]*datatype.DataType
+	DataTypes map[string][]datatype.DataTypable
 }
 
-func (scope *Scope) toSortedDatatypes() [][]*datatype.DataType {
-	var sortedDatatypes [][]*datatype.DataType
+func (scope *Scope) toSortedDatatypes() [][]datatype.DataTypable {
+	var sortedDatatypes [][]datatype.DataTypable
 	for _, datatypes := range scope.DataTypes {
 		sortedDatatypes = append(sortedDatatypes, datatypes)
 	}
@@ -25,15 +25,15 @@ func (scope *Scope) toSortedDatatypes() [][]*datatype.DataType {
 	}
 
 	sort.Slice(sortedDatatypes, func(i, j int) bool {
-		lineNumberA := sortedDatatypes[i][0].Node.Source(false).LineNumber
-		lineNumberB := sortedDatatypes[j][0].Node.Source(false).LineNumber
+		lineNumberA := sortedDatatypes[i][0].GetNode().Source(false).LineNumber
+		lineNumberB := sortedDatatypes[j][0].GetNode().Source(false).LineNumber
 
 		if *lineNumberA != *lineNumberB {
 			return *lineNumberA < *lineNumberB
 		}
 
-		columnNumberA := sortedDatatypes[i][0].Node.Source(false).ColumnNumber
-		columnNumberB := sortedDatatypes[j][0].Node.Source(false).ColumnNumber
+		columnNumberA := sortedDatatypes[i][0].GetNode().Source(false).ColumnNumber
+		columnNumberB := sortedDatatypes[j][0].GetNode().Source(false).ColumnNumber
 
 		return *columnNumberA < *columnNumberB
 	})
@@ -81,7 +81,7 @@ func ScopeDatatypes(datatypes map[parser.NodeID]*datatype.DataType, idGenerator 
 			scopes[scopeNode.ID()] = &Scope{
 				NodeId:    scopeNode.ID(),
 				Node:      scopeNode,
-				DataTypes: make(map[string][]*datatype.DataType),
+				DataTypes: make(map[string][]datatype.DataTypable),
 			}
 		}
 
@@ -104,10 +104,10 @@ func ScopeDatatypes(datatypes map[parser.NodeID]*datatype.DataType, idGenerator 
 	}
 }
 
-func UnifyUUID(datatypes []*datatype.DataType, idGenerator nodeid.Generator) {
+func UnifyUUID(datatypes []datatype.DataTypable, idGenerator nodeid.Generator) {
 	datatypeID := idGenerator.GenerateId()
 	for _, target := range datatypes {
-		target.UUID = datatypeID
+		target.SetUUID(datatypeID)
 	}
 
 	propertiesDone := make(map[string]bool)
@@ -115,7 +115,7 @@ func UnifyUUID(datatypes []*datatype.DataType, idGenerator nodeid.Generator) {
 	for _, target := range datatypes {
 
 		var propertyNames []string
-		for propertyName := range target.Properties {
+		for propertyName := range target.GetProperties() {
 			propertyNames = append(propertyNames, propertyName)
 		}
 
@@ -127,12 +127,12 @@ func UnifyUUID(datatypes []*datatype.DataType, idGenerator nodeid.Generator) {
 				continue
 			}
 
-			var datatypesToDo []*datatype.DataType
+			var datatypesToDo []datatype.DataTypable
 			// fetch all datatypes that have that property name
 			for _, target := range datatypes {
-				_, hasProperty := target.Properties[propertyName]
+				_, hasProperty := target.GetProperties()[propertyName]
 				if hasProperty {
-					datatypesToDo = append(datatypesToDo, target.Properties[propertyName])
+					datatypesToDo = append(datatypesToDo, target.GetProperties()[propertyName])
 				}
 			}
 

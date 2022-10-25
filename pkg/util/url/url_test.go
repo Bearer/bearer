@@ -6,7 +6,7 @@ import (
 	"net"
 	"testing"
 
-	"github.com/bearer/curio/pkg/report"
+	"github.com/bearer/curio/pkg/report/detections"
 	"github.com/bearer/curio/pkg/report/detectors"
 	"github.com/bearer/curio/pkg/report/source"
 	"github.com/bearer/curio/pkg/util/url"
@@ -260,13 +260,13 @@ func TestValidateFormat(t *testing.T) {
 	tests := []struct {
 		Name string
 		URL  string
-		Data *report.Detection
+		Data *detections.Detection
 		Want *url.ValidationResult
 	}{
 		{
 			Name: "when a detection is from a potential detector",
 			URL:  "https://eu.example.com/path/*",
-			Data: &report.Detection{
+			Data: &detections.Detection{
 				DetectorType: detectors.DetectorEnvFile,
 			},
 			Want: &url.ValidationResult{
@@ -277,7 +277,7 @@ func TestValidateFormat(t *testing.T) {
 		{
 			Name: "when a detection is included inside a vendor folder - case 1",
 			URL:  "https://eu.example.com/path/*",
-			Data: &report.Detection{
+			Data: &detections.Detection{
 				Source: source.Source{
 					Filename: "foo/vendor/symfony/symfony/src/Symfony/Component/Validator/Mapping/MemberMetadata.php",
 				},
@@ -290,7 +290,7 @@ func TestValidateFormat(t *testing.T) {
 		{
 			Name: "when a detection is included inside a vendor folder - case 2",
 			URL:  "https://eu.example.com/path/*",
-			Data: &report.Detection{
+			Data: &detections.Detection{
 				Source: source.Source{
 					Filename: "rancher-powerdns4/vendor/github.com/prasmussen/gandi-api/client/client.go",
 				},
@@ -303,7 +303,7 @@ func TestValidateFormat(t *testing.T) {
 		{
 			Name: "when there's not data to make a strong decision",
 			URL:  "https://eu.example.com/path/*",
-			Data: &report.Detection{},
+			Data: &detections.Detection{},
 			Want: &url.ValidationResult{
 				State:  url.Potential,
 				Reason: "uncertain",
@@ -312,7 +312,7 @@ func TestValidateFormat(t *testing.T) {
 		{
 			Name: "when the URL is blank",
 			URL:  "",
-			Data: &report.Detection{},
+			Data: &detections.Detection{},
 			Want: &url.ValidationResult{
 				State:  url.Invalid,
 				Reason: "blank_url",
@@ -321,7 +321,7 @@ func TestValidateFormat(t *testing.T) {
 		{
 			Name: "when an IP address is given",
 			URL:  "https://127.0.0.1",
-			Data: &report.Detection{},
+			Data: &detections.Detection{},
 			Want: &url.ValidationResult{
 				State:  url.Invalid,
 				Reason: "ip_address_error",
@@ -330,7 +330,7 @@ func TestValidateFormat(t *testing.T) {
 		{
 			Name: "when a dependency file is provided",
 			URL:  "https://eu.example.com/path/*",
-			Data: &report.Detection{
+			Data: &detections.Detection{
 				Source: source.Source{
 					Filename: "Gemfile.lock",
 				},
@@ -343,7 +343,7 @@ func TestValidateFormat(t *testing.T) {
 		{
 			Name: "when markup is detected with a simple detector type",
 			URL:  "https://eu.example.com/path/*",
-			Data: &report.Detection{
+			Data: &detections.Detection{
 				DetectorType: detectors.DetectorSimple,
 				Source: source.Source{
 					LanguageType: "markup",
@@ -357,7 +357,7 @@ func TestValidateFormat(t *testing.T) {
 		{
 			Name: "when the filename isn't accepted",
 			URL:  "https://eu.example.com/path/*",
-			Data: &report.Detection{
+			Data: &detections.Detection{
 				Source: source.Source{
 					Filename: "config/translations/en.js",
 				},
@@ -370,7 +370,7 @@ func TestValidateFormat(t *testing.T) {
 		{
 			Name: "missing TLD",
 			URL:  "https://.",
-			Data: &report.Detection{},
+			Data: &detections.Detection{},
 			Want: &url.ValidationResult{
 				State:  url.Invalid,
 				Reason: "tld_error",
@@ -379,7 +379,7 @@ func TestValidateFormat(t *testing.T) {
 		{
 			Name: "domain is empty",
 			URL:  "/nothing",
-			Data: &report.Detection{},
+			Data: &detections.Detection{},
 			Want: &url.ValidationResult{
 				State:  url.Invalid,
 				Reason: "no_host_error",
