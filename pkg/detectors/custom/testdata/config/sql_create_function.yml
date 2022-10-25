@@ -1,4 +1,4 @@
-corruptible_function_detector:
+create_sql_function_detector:
   patterns:
     - CREATE OR REPLACE FUNCTION $FUNCTION_NAME RETURNS trigger AS $SCRIPT
   metavars:
