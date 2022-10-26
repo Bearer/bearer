@@ -40,7 +40,7 @@ func (report *JSONLines) AddInterface(
 	detection := &detections.Detection{DetectorType: detectorType, Value: data, Source: source, Type: detections.TypeInterface}
 	classifiedDetection, err := report.Classifier.Interfaces.Classify(*detection)
 	if err != nil {
-		report.AddError(err)
+		report.AddError(detection.Source.Filename, err)
 		return
 	}
 
@@ -84,7 +84,7 @@ func (report *JSONLines) AddDataType(detectionType detections.DetectionType, det
 			DetectorType: detectorType,
 		})
 		if err != nil {
-			report.AddError(err)
+			report.AddError(target.GetNode().Source(false).Filename, err)
 		}
 
 		classifiedDatatypes[nodeID] = classified
@@ -136,7 +136,7 @@ func (report *JSONLines) AddDependency(
 	detection := &detections.Detection{DetectorType: detectorType, Value: dependency, Source: source, Type: detections.TypeDependency}
 	classifiedDetection, err := report.Classifier.Dependencies.Classify(*detection)
 	if err != nil {
-		report.AddError(err)
+		report.AddError(source.Filename, err)
 		return
 	}
 
@@ -169,10 +169,11 @@ func (report *JSONLines) AddFramework(
 	})
 }
 
-func (report *JSONLines) AddError(err error) {
+func (report *JSONLines) AddError(file string, err error) {
 	report.Add(&detections.ErrorDetection{
 		Type:    detections.TypeError,
 		Message: err.Error(),
+		File:    file,
 	})
 }
 

@@ -41,6 +41,7 @@ type FileFailedDetection struct {
 type ErrorDetection struct {
 	Type    DetectionType `json:"type"`
 	Message string        `json:"message"`
+	File    string        `json:"file"`
 }
 
 type FrameworkDetection struct {
