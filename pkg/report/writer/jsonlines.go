@@ -90,7 +90,11 @@ func (report *JSONLines) AddDataType(detectionType detections.DetectionType, det
 		classifiedDatatypes[nodeID] = classified
 	}
 
-	datatype.Export(report, detectionType, detectorType, idGenerator, values)
+	if detectionType == detections.TypeCustom {
+		datatype.ExportClassified(report, detections.TypeSchemaClassified, detectorType, idGenerator, false, values)
+	} else {
+		datatype.ExportClassified(report, detections.TypeSchemaClassified, detectorType, idGenerator, true, values)
+	}
 }
 
 func (report *JSONLines) AddSchema(

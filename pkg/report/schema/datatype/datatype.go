@@ -78,6 +78,10 @@ type DataTypable interface {
 	GetProperties() map[string]DataTypable
 }
 
+func ExportClassified[D DataTypable](report detections.ReportDetection, detectionType detections.DetectionType, detectorType detectors.Type, idGenerator nodeid.Generator, ignoreFirst bool, values map[parser.NodeID]D) {
+	exportSchemas(report, detectionType, detectorType, idGenerator, ignoreFirst, values)
+}
+
 func Export[D DataTypable](report detections.ReportDetection, detectionType detections.DetectionType, detectorType detectors.Type, idGenerator nodeid.Generator, values map[parser.NodeID]D) {
 	if detectionType == detections.TypeCustom {
 		exportSchemas(report, detectionType, detectorType, idGenerator, false, values)
