@@ -13,7 +13,7 @@ type Classifier struct {
 	config Config
 
 	Interfaces   *interfaces.Classifier
-	Schema       schema.Classifier
+	Schema       *schema.Classifier
 	Dependencies *dependencies.Classifier
 }
 
@@ -36,6 +36,14 @@ func NewClassifier(config *Config) (*Classifier, error) {
 		return nil, err
 	}
 
+	schemaClassifier := schema.New(
+		schema.Config{
+			DataTypes:                      db.Default().DataTypes,
+			DataTypeClassificationPatterns: db.Default().DataTypeClassificationPatterns,
+			KnownPersonObjectPatterns:      db.Default().KnownPersonObjectPatterns,
+		},
+	)
+
 	dependenciesClassifier := dependencies.New(
 		dependencies.Config{
 			Recipes: db.Default().Recipes,
@@ -46,5 +54,6 @@ func NewClassifier(config *Config) (*Classifier, error) {
 		config:       *config,
 		Dependencies: dependenciesClassifier,
 		Interfaces:   interfacesClassifier,
+		Schema:       schemaClassifier,
 	}, nil
 }
