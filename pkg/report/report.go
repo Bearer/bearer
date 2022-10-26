@@ -26,5 +26,5 @@ type Report interface {
 	AddDependency(detectorType detectors.Type, dependency dependencies.Dependency, source source.Source)
 	AddSecretLeak(secret secret.Secret, source source.Source)
 	AddFillerLine()
-	AddError(err error)
+	AddError(filePath string, err error)
 }

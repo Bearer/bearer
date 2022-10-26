@@ -205,10 +205,11 @@ func (report *InMemoryReport) AddSecretLeak(
 	})
 }
 
-func (report *InMemoryReport) AddError(err error) {
+func (report *InMemoryReport) AddError(filePath string, err error) {
 	report.Errors = append(report.Errors, &detections.ErrorDetection{
 		Type:    detections.TypeError,
 		Message: err.Error(),
+		File:    filePath,
 	})
 }
 
