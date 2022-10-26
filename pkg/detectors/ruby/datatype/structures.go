@@ -2,8 +2,8 @@ package datatype
 
 import (
 	"github.com/bearer/curio/pkg/parser"
-	parserdatatype "github.com/bearer/curio/pkg/parser/datatype"
 	"github.com/bearer/curio/pkg/report/schema"
+	schemadatatype "github.com/bearer/curio/pkg/report/schema/datatype"
 	"github.com/smacker/go-tree-sitter/ruby"
 )
 
@@ -16,7 +16,7 @@ var structuresQuery = parser.QueryMustCompile(ruby.GetLanguage(),
 		arguments: (argument_list) @param_arguments
 	  ) @param_call`)
 
-func discoverStructures(tree *parser.Tree, datatypes map[parser.NodeID]*parserdatatype.DataType) {
+func discoverStructures(tree *parser.Tree, datatypes map[parser.NodeID]*schemadatatype.DataType) {
 	// add class properties
 	captures := tree.QueryConventional(structuresQuery)
 	for _, capture := range captures {
@@ -51,11 +51,11 @@ func discoverStructures(tree *parser.Tree, datatypes map[parser.NodeID]*parserda
 			parentName = receiver.Content()
 		}
 
-		parent := &parserdatatype.DataType{
+		parent := &schemadatatype.DataType{
 			Node:       receiver,
 			Name:       parentName,
 			Type:       schema.SimpleTypeUknown,
-			Properties: make(map[string]*parserdatatype.DataType),
+			Properties: make(map[string]schemadatatype.DataTypable),
 			TextType:   "",
 		}
 
@@ -76,12 +76,12 @@ func discoverStructures(tree *parser.Tree, datatypes map[parser.NodeID]*parserda
 
 			propertyName := key.Content()
 
-			parent.Properties[propertyName] = &parserdatatype.DataType{
+			parent.Properties[propertyName] = &schemadatatype.DataType{
 				Node:       key,
 				Name:       propertyName,
 				Type:       schema.SimpleTypeUknown,
 				TextType:   "",
-				Properties: make(map[string]*parserdatatype.DataType),
+				Properties: make(map[string]schemadatatype.DataTypable),
 			}
 		}
 

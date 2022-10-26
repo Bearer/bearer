@@ -1,6 +1,6 @@
-([]*report.Detection) (len=107) {
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+([]*detections.Detection) (len=107) {
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -18,8 +18,8 @@
       Version: (string) (len=5) "3.3.3"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -37,8 +37,8 @@
       Version: (string) (len=7) "3.4.231"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -56,8 +56,8 @@
       Version: (string) (len=6) "0.19.2"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -75,8 +75,8 @@
       Version: (string) (len=7) "0.1.331"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -94,8 +94,8 @@
       Version: (string) (len=7) "0.1.331"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -113,8 +113,8 @@
       Version: (string) (len=12) "1.1.0-beta.3"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -132,8 +132,8 @@
       Version: (string) (len=6) "1.20.0"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -151,8 +151,8 @@
       Version: (string) (len=7) "1.0.253"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -170,8 +170,8 @@
       Version: (string) (len=7) "1.0.253"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -189,8 +189,8 @@
       Version: (string) (len=7) "1.0.253"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -208,8 +208,8 @@
       Version: (string) (len=5) "1.5.0"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -227,8 +227,8 @@
       Version: (string) (len=12) "1.0.0-beta.5"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -246,8 +246,8 @@
       Version: (string) (len=12) "1.0.0-beta.3"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -265,8 +265,8 @@
       Version: (string) (len=5) "8.1.0"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -284,8 +284,8 @@
       Version: (string) (len=5) "1.1.1"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -303,8 +303,8 @@
       Version: (string) (len=5) "6.0.0"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -322,8 +322,8 @@
       Version: (string) (len=5) "6.0.0"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -341,8 +341,8 @@
       Version: (string) (len=5) "6.0.0"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -360,8 +360,8 @@
       Version: (string) (len=5) "6.0.0"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -379,8 +379,8 @@
       Version: (string) (len=5) "6.0.0"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -398,8 +398,8 @@
       Version: (string) (len=5) "2.0.0"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -417,8 +417,8 @@
       Version: (string) (len=5) "2.0.0"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -436,8 +436,8 @@
       Version: (string) (len=5) "6.0.0"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -455,8 +455,8 @@
       Version: (string) (len=5) "6.0.0"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -474,8 +474,8 @@
       Version: (string) (len=5) "6.0.0"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -493,8 +493,8 @@
       Version: (string) (len=5) "2.0.0"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -512,8 +512,8 @@
       Version: (string) (len=5) "2.0.0"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -531,8 +531,8 @@
       Version: (string) (len=5) "2.0.0"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -550,8 +550,8 @@
       Version: (string) (len=5) "2.0.0"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -569,8 +569,8 @@
       Version: (string) (len=5) "6.0.0"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -588,8 +588,8 @@
       Version: (string) (len=6) "4.30.1"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -607,8 +607,8 @@
       Version: (string) (len=6) "2.18.4"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -626,8 +626,8 @@
       Version: (string) (len=5) "5.0.0"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -645,8 +645,8 @@
       Version: (string) (len=5) "1.1.0"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -664,8 +664,8 @@
       Version: (string) (len=7) "16.7.56"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -683,8 +683,8 @@
       Version: (string) (len=7) "16.7.56"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -702,8 +702,8 @@
       Version: (string) (len=7) "15.5.31"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -721,8 +721,8 @@
       Version: (string) (len=5) "4.3.0"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -740,8 +740,8 @@
       Version: (string) (len=5) "4.6.0"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -759,8 +759,8 @@
       Version: (string) (len=6) "2.6.81"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -778,8 +778,8 @@
       Version: (string) (len=6) "13.0.1"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -797,8 +797,8 @@
       Version: (string) (len=6) "0.19.2"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -816,8 +816,8 @@
       Version: (string) (len=6) "0.19.2"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -835,8 +835,8 @@
       Version: (string) (len=6) "0.19.2"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -854,8 +854,8 @@
       Version: (string) (len=6) "0.19.2"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -873,8 +873,8 @@
       Version: (string) (len=5) "6.0.0"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -892,8 +892,8 @@
       Version: (string) (len=5) "4.6.0"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -911,8 +911,8 @@
       Version: (string) (len=5) "4.3.0"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -930,8 +930,8 @@
       Version: (string) (len=5) "4.3.0"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -949,8 +949,8 @@
       Version: (string) (len=7) "13.2.47"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -968,8 +968,8 @@
       Version: (string) (len=5) "5.0.0"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -987,8 +987,8 @@
       Version: (string) (len=5) "4.7.3"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -1006,8 +1006,8 @@
       Version: (string) (len=5) "4.5.4"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -1025,8 +1025,8 @@
       Version: (string) (len=5) "1.0.2"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -1044,8 +1044,8 @@
       Version: (string) (len=5) "4.3.0"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -1063,8 +1063,8 @@
       Version: (string) (len=5) "4.5.0"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -1082,8 +1082,8 @@
       Version: (string) (len=5) "4.4.1"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -1101,8 +1101,8 @@
       Version: (string) (len=5) "4.3.0"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -1120,8 +1120,8 @@
       Version: (string) (len=5) "4.7.0"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -1139,8 +1139,8 @@
       Version: (string) (len=5) "4.3.0"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -1158,8 +1158,8 @@
       Version: (string) (len=5) "4.3.0"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -1177,8 +1177,8 @@
       Version: (string) (len=5) "4.3.0"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -1196,8 +1196,8 @@
       Version: (string) (len=5) "6.0.0"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -1215,8 +1215,8 @@
       Version: (string) (len=5) "5.0.0"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -1234,8 +1234,8 @@
       Version: (string) (len=5) "4.5.0"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -1253,8 +1253,8 @@
       Version: (string) (len=5) "5.0.0"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -1272,8 +1272,8 @@
       Version: (string) (len=5) "4.3.0"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -1291,8 +1291,8 @@
       Version: (string) (len=5) "6.0.0"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -1310,8 +1310,8 @@
       Version: (string) (len=5) "6.0.0"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -1329,8 +1329,8 @@
       Version: (string) (len=5) "4.7.1"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -1348,8 +1348,8 @@
       Version: (string) (len=5) "4.3.0"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -1367,8 +1367,8 @@
       Version: (string) (len=5) "4.5.4"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -1386,8 +1386,8 @@
       Version: (string) (len=5) "4.3.0"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -1405,8 +1405,8 @@
       Version: (string) (len=5) "4.3.0"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -1424,8 +1424,8 @@
       Version: (string) (len=5) "4.3.0"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -1443,8 +1443,8 @@
       Version: (string) (len=5) "4.3.0"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -1462,8 +1462,8 @@
       Version: (string) (len=5) "4.3.0"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -1481,8 +1481,8 @@
       Version: (string) (len=5) "4.3.0"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -1500,8 +1500,8 @@
       Version: (string) (len=5) "4.3.0"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -1519,8 +1519,8 @@
       Version: (string) (len=5) "4.3.0"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -1538,8 +1538,8 @@
       Version: (string) (len=5) "4.3.0"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -1557,8 +1557,8 @@
       Version: (string) (len=5) "4.3.0"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -1576,8 +1576,8 @@
       Version: (string) (len=5) "4.3.0"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -1595,8 +1595,8 @@
       Version: (string) (len=5) "4.3.0"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -1614,8 +1614,8 @@
       Version: (string) (len=5) "4.3.0"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -1633,8 +1633,8 @@
       Version: (string) (len=5) "4.3.0"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -1652,8 +1652,8 @@
       Version: (string) (len=5) "4.3.0"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -1671,8 +1671,8 @@
       Version: (string) (len=5) "4.3.0"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -1690,8 +1690,8 @@
       Version: (string) (len=5) "4.3.0"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -1709,8 +1709,8 @@
       Version: (string) (len=5) "2.0.0"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -1728,8 +1728,8 @@
       Version: (string) (len=5) "5.0.2"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -1747,8 +1747,8 @@
       Version: (string) (len=6) "1.19.0"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -1766,8 +1766,8 @@
       Version: (string) (len=5) "4.6.0"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -1785,8 +1785,8 @@
       Version: (string) (len=5) "1.0.0"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -1804,8 +1804,8 @@
       Version: (string) (len=5) "4.7.2"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -1823,8 +1823,8 @@
       Version: (string) (len=6) "11.0.2"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -1842,8 +1842,8 @@
       Version: (string) (len=5) "2.0.0"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -1861,8 +1861,8 @@
       Version: (string) (len=5) "2.0.0"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -1880,8 +1880,8 @@
       Version: (string) (len=5) "2.0.0"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -1899,8 +1899,8 @@
       Version: (string) (len=6) "4.30.0"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -1918,8 +1918,8 @@
       Version: (string) (len=5) "4.5.3"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -1937,8 +1937,8 @@
       Version: (string) (len=5) "1.1.0"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -1956,8 +1956,8 @@
       Version: (string) (len=5) "4.6.0"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -1975,8 +1975,8 @@
       Version: (string) (len=5) "4.6.0"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -1994,8 +1994,8 @@
       Version: (string) (len=5) "4.7.2"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -2013,8 +2013,8 @@
       Version: (string) (len=5) "4.7.1"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=5) "nuget",
     CommitSHA: (string) "",
     Source: (source.Source) {

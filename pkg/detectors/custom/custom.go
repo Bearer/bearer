@@ -15,6 +15,8 @@ import (
 	"github.com/bearer/curio/pkg/parser"
 	language "github.com/bearer/curio/pkg/parser/custom"
 	parserdatatype "github.com/bearer/curio/pkg/parser/datatype"
+	"github.com/bearer/curio/pkg/report/detections"
+	schemadatatype "github.com/bearer/curio/pkg/report/schema/datatype"
 	"github.com/bearer/curio/pkg/util/file"
 
 	"github.com/bearer/curio/pkg/parser/nodeid"
@@ -154,11 +156,11 @@ func (detector *Detector) executeRule(rule config.CompiledRule, file *file.FileI
 
 func (detector *Detector) extractData(captures []parser.Captures, rule config.CompiledRule, report report.Report, lang string, idGenerator nodeid.Generator) error {
 	for _, capture := range captures {
-		forExport := make(map[parser.NodeID]*parserdatatype.DataType)
-		var parent *parserdatatype.DataType
+		forExport := make(map[parser.NodeID]*schemadatatype.DataType)
+		var parent schemadatatype.DataTypable
 
 		for _, param := range rule.Params {
-			var paramTypes map[parser.NodeID]*parserdatatype.DataType
+			var paramTypes map[parser.NodeID]*schemadatatype.DataType
 			var err error
 
 			if param.ArgumentsExtract || param.ClassNameExtract {
@@ -171,7 +173,7 @@ func (detector *Detector) extractData(captures []parser.Captures, rule config.Co
 					// join it as children to master param and export it
 					if len(forExport) == 1 {
 						for _, datatype := range paramTypes {
-							parent.Properties[datatype.Name] = datatype
+							parent.GetProperties()[datatype.GetName()] = datatype
 						}
 
 						continue
@@ -211,16 +213,16 @@ func (detector *Detector) extractData(captures []parser.Captures, rule config.Co
 						for _, subgroupMatch := range matches {
 							match := subgroupMatch[metavar.Output]
 
-							matchType := &parserdatatype.DataType{
+							matchType := &schemadatatype.DataType{
 								Node:       matchNode,
 								Name:       string(match),
 								Type:       schema.SimpleTypeUknown,
-								Properties: make(map[string]*parserdatatype.DataType),
+								Properties: make(map[string]schemadatatype.DataTypable),
 							}
 							matchNodeID := matchNode.ID()
 
 							if rule.ParamParenting {
-								parent.Properties[matchType.Name] = matchType
+								parent.GetProperties()[matchType.Name] = matchType
 								continue
 							}
 
@@ -232,8 +234,7 @@ func (detector *Detector) extractData(captures []parser.Captures, rule config.Co
 			}
 		}
 
-		reportWrapper := WrapReport(report, rule.RuleName)
-		parserdatatype.NewCompleteExport(reportWrapper, detectors.DetectorCustom, idGenerator, forExport)
+		report.AddDataType(detections.TypeCustom, detectors.Type(rule.RuleName), idGenerator, forExport)
 	}
 	return nil
 }
@@ -278,7 +279,7 @@ func filterCaptures(params []config.Param, captures []parser.Captures) (filtered
 	return filtered, err
 }
 
-func (detector *Detector) extractArguments(language string, node *parser.Node, idGenerator nodeid.Generator) (map[parser.NodeID]*parserdatatype.DataType, error) {
+func (detector *Detector) extractArguments(language string, node *parser.Node, idGenerator nodeid.Generator) (map[parser.NodeID]*schemadatatype.DataType, error) {
 	switch language {
 	case "ruby":
 		return detector.Ruby.ExtractArguments(node, idGenerator)

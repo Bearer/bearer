@@ -3,6 +3,8 @@ package datatype
 import (
 	"github.com/bearer/curio/pkg/parser"
 	parserdatatype "github.com/bearer/curio/pkg/parser/datatype"
+	schemadatatype "github.com/bearer/curio/pkg/report/schema/datatype"
+
 	"github.com/bearer/curio/pkg/parser/nodeid"
 	"github.com/bearer/curio/pkg/report/schema"
 	"github.com/smacker/go-tree-sitter/javascript"
@@ -23,18 +25,18 @@ var rootThisPropertiesQuery = parser.QueryMustCompile(javascript.GetLanguage(),
 	object: (this) @param_property
 )`)
 
-func addProperties(tree *parser.Tree, helperDatatypes map[parser.NodeID]*parserdatatype.DataType) {
+func addProperties(tree *parser.Tree, helperDatatypes map[parser.NodeID]*schemadatatype.DataType) {
 	// add root propertie
 	captures := tree.QueryConventional(rootPropertiesQuery)
 	for _, capture := range captures {
 		rootPropertyNode := capture["param_property"]
 		id := capture["param_property"].Content()
-		helperDatatypes[rootPropertyNode.ID()] = &parserdatatype.DataType{
+		helperDatatypes[rootPropertyNode.ID()] = &schemadatatype.DataType{
 			Node:       rootPropertyNode,
 			Name:       id,
 			Type:       schema.SimpleTypeUknown,
 			TextType:   "",
-			Properties: make(map[string]*parserdatatype.DataType),
+			Properties: make(map[string]schemadatatype.DataTypable),
 			UUID:       "",
 		}
 	}
@@ -44,12 +46,12 @@ func addProperties(tree *parser.Tree, helperDatatypes map[parser.NodeID]*parserd
 	for _, capture := range captures {
 		rootPropertyNode := capture["param_property"]
 		id := capture["param_property"].Content()
-		helperDatatypes[rootPropertyNode.ID()] = &parserdatatype.DataType{
+		helperDatatypes[rootPropertyNode.ID()] = &schemadatatype.DataType{
 			Node:       rootPropertyNode,
 			Name:       id,
 			Type:       schema.SimpleTypeUknown,
 			TextType:   "",
-			Properties: make(map[string]*parserdatatype.DataType),
+			Properties: make(map[string]schemadatatype.DataTypable),
 			UUID:       "",
 		}
 	}
@@ -60,18 +62,18 @@ func addProperties(tree *parser.Tree, helperDatatypes map[parser.NodeID]*parserd
 		objectNode := capture["param_object"]
 		propertyNode := capture["param_property"]
 		id := capture["param_property"].Content()
-		helperDatatypes[objectNode.ID()] = &parserdatatype.DataType{
+		helperDatatypes[objectNode.ID()] = &schemadatatype.DataType{
 			Node:       propertyNode,
 			Name:       id,
 			Type:       schema.SimpleTypeUknown,
 			TextType:   "",
-			Properties: make(map[string]*parserdatatype.DataType),
+			Properties: make(map[string]schemadatatype.DataTypable),
 			UUID:       "",
 		}
 	}
 }
 
-func linkProperties(tree *parser.Tree, datatypes, helperDatatypes map[parser.NodeID]*parserdatatype.DataType) {
+func linkProperties(tree *parser.Tree, datatypes, helperDatatypes map[parser.NodeID]*schemadatatype.DataType) {
 	for _, helperType := range helperDatatypes {
 		node := helperType.Node
 		// add root node
@@ -106,7 +108,7 @@ func linkProperties(tree *parser.Tree, datatypes, helperDatatypes map[parser.Nod
 	}
 }
 
-func scopeProperties(datatypes map[parser.NodeID]*parserdatatype.DataType, idGenerator nodeid.Generator) {
+func scopeProperties(datatypes map[parser.NodeID]*schemadatatype.DataType, idGenerator nodeid.Generator) {
 	terminatorKeywords := []string{"program", "function", "arrow_function", "method_definition"}
 	// pull all scope terminator nodes
 	parserdatatype.ScopeDatatypes(datatypes, idGenerator, terminatorKeywords)

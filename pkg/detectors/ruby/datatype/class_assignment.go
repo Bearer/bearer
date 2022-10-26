@@ -4,8 +4,8 @@ import (
 	"strings"
 
 	"github.com/bearer/curio/pkg/parser"
-	parserdatatype "github.com/bearer/curio/pkg/parser/datatype"
 	"github.com/bearer/curio/pkg/report/schema"
+	schemadatatype "github.com/bearer/curio/pkg/report/schema/datatype"
 	"github.com/smacker/go-tree-sitter/ruby"
 )
 
@@ -36,17 +36,17 @@ var classAssignmentFunctionsQuery = parser.QueryMustCompile(ruby.GetLanguage(),
 		)
 	) @param_class`)
 
-func discoverClassAssignment(tree *parser.Tree, datatypes map[parser.NodeID]*parserdatatype.DataType) {
+func discoverClassAssignment(tree *parser.Tree, datatypes map[parser.NodeID]*schemadatatype.DataType) {
 	captures := tree.QueryConventional(classAssignmentQuery)
 	for _, capture := range captures {
 		id := capture["param_id"].Content()
 		classNode := capture["param_class"]
-		datatypes[classNode.ID()] = &parserdatatype.DataType{
+		datatypes[classNode.ID()] = &schemadatatype.DataType{
 			Node:       classNode,
 			Name:       id,
 			Type:       schema.SimpleTypeObject,
 			TextType:   "class",
-			Properties: make(map[string]*parserdatatype.DataType),
+			Properties: make(map[string]schemadatatype.DataTypable),
 		}
 	}
 
@@ -54,7 +54,7 @@ func discoverClassAssignment(tree *parser.Tree, datatypes map[parser.NodeID]*par
 	discoverClassAssignmentFunctions(tree, datatypes)
 }
 
-func discoverClassAssignmentProperties(tree *parser.Tree, datatypes map[parser.NodeID]*parserdatatype.DataType) {
+func discoverClassAssignmentProperties(tree *parser.Tree, datatypes map[parser.NodeID]*schemadatatype.DataType) {
 	// add class assigment properties
 	captures := tree.QueryConventional(classAssignmentPropertiesQuery)
 	for _, capture := range captures {
@@ -67,17 +67,17 @@ func discoverClassAssignmentProperties(tree *parser.Tree, datatypes map[parser.N
 		propertyNode := capture["param_id"]
 		propertyName := strings.TrimLeft(propertyNode.Content(), ":")
 
-		datatypes[classNode.ID()].Properties[propertyName] = &parserdatatype.DataType{
+		datatypes[classNode.ID()].Properties[propertyName] = &schemadatatype.DataType{
 			Node:       propertyNode,
 			Name:       propertyName,
 			Type:       schema.SimpleTypeUknown,
-			Properties: make(map[string]*parserdatatype.DataType),
+			Properties: make(map[string]schemadatatype.DataTypable),
 			TextType:   "",
 		}
 	}
 }
 
-func discoverClassAssignmentFunctions(tree *parser.Tree, datatypes map[parser.NodeID]*parserdatatype.DataType) {
+func discoverClassAssignmentFunctions(tree *parser.Tree, datatypes map[parser.NodeID]*schemadatatype.DataType) {
 	captures := tree.QueryConventional(classAssignmentFunctionsQuery)
 	for _, capture := range captures {
 		classNode := capture["param_class"]
@@ -89,7 +89,7 @@ func discoverClassAssignmentFunctions(tree *parser.Tree, datatypes map[parser.No
 		functionNameNode := capture["param_id"]
 		functionName := functionNameNode.Content()
 
-		datatypes[classNode.ID()].Properties[functionName] = &parserdatatype.DataType{
+		datatypes[classNode.ID()].Properties[functionName] = &schemadatatype.DataType{
 			Node:     functionNameNode,
 			Name:     functionName,
 			Type:     schema.SimpleTypeUknown,

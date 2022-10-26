@@ -1,6 +1,6 @@
-([]*report.FrameworkDetection) (len=4) {
-  (*report.FrameworkDetection)({
-    Type: (report.DetectionType) (len=9) "framework",
+([]*detections.FrameworkDetection) (len=4) {
+  (*detections.FrameworkDetection)({
+    Type: (detections.DetectionType) (len=9) "framework",
     DetectorType: (detectors.Type) (len=10) "typescript",
     FrameworkType: (frameworks.Type) (len=13) "knex_function",
     CommitSHA: (string) "",
@@ -16,8 +16,8 @@
       DataType: (string) (len=4) "User"
     }
   }),
-  (*report.FrameworkDetection)({
-    Type: (report.DetectionType) (len=9) "framework",
+  (*detections.FrameworkDetection)({
+    Type: (detections.DetectionType) (len=9) "framework",
     DetectorType: (detectors.Type) (len=10) "typescript",
     FrameworkType: (frameworks.Type) (len=13) "knex_function",
     CommitSHA: (string) "",
@@ -33,8 +33,8 @@
       DataType: (string) (len=4) "User"
     }
   }),
-  (*report.FrameworkDetection)({
-    Type: (report.DetectionType) (len=9) "framework",
+  (*detections.FrameworkDetection)({
+    Type: (detections.DetectionType) (len=9) "framework",
     DetectorType: (detectors.Type) (len=10) "typescript",
     FrameworkType: (frameworks.Type) (len=11) "knex_schema",
     CommitSHA: (string) "",
@@ -51,8 +51,8 @@
       PropertyName: (string) (len=5) "users"
     }
   }),
-  (*report.FrameworkDetection)({
-    Type: (report.DetectionType) (len=9) "framework",
+  (*detections.FrameworkDetection)({
+    Type: (detections.DetectionType) (len=9) "framework",
     DetectorType: (detectors.Type) (len=10) "typescript",
     FrameworkType: (frameworks.Type) (len=11) "knex_schema",
     CommitSHA: (string) "",

@@ -15,7 +15,7 @@ import (
 	config "github.com/bearer/curio/pkg/commands/process/settings"
 	workertype "github.com/bearer/curio/pkg/commands/process/worker/work"
 	"github.com/bearer/curio/pkg/git"
-	"github.com/bearer/curio/pkg/report"
+	"github.com/bearer/curio/pkg/report/detections"
 	"github.com/bearer/curio/pkg/util/output"
 	"github.com/bearer/curio/pkg/util/tmpfile"
 )
@@ -276,7 +276,7 @@ func (worker *Worker) getCommitListAndWriteForBlame() (commitList []git.CommitIn
 }
 
 func (worker *Worker) logError(reportFile *os.File, work []workertype.File, response *workertype.ProcessResponse) {
-	var errorsToAdd []report.FileFailedDetection
+	var errorsToAdd []detections.FileFailedDetection
 	for _, file := range work {
 		fileInfo, err := os.Stat(worker.task.Definition.Dir + "/" + file.FilePath)
 		if err != nil {
@@ -284,8 +284,8 @@ func (worker *Worker) logError(reportFile *os.File, work []workertype.File, resp
 			continue
 		}
 
-		errorsToAdd = append(errorsToAdd, report.FileFailedDetection{
-			Type:     report.TypeFileFailed,
+		errorsToAdd = append(errorsToAdd, detections.FileFailedDetection{
+			Type:     detections.TypeFileFailed,
 			File:     file.FilePath,
 			FileSize: int(fileInfo.Size()),
 			Timeout:  file.Timeout,

@@ -6,13 +6,13 @@ import (
 	"strings"
 
 	"github.com/bearer/curio/pkg/classification/db"
-	"github.com/bearer/curio/pkg/report"
+	"github.com/bearer/curio/pkg/report/detections"
 	"github.com/bearer/curio/pkg/report/interfaces"
 	"github.com/bearer/curio/pkg/util/url"
 )
 
 type ClassifiedInterface struct {
-	*report.Detection
+	*detections.Detection
 	Classification *Classification `json:"classification"`
 }
 
@@ -111,7 +111,7 @@ func NewDefault() (*Classifier, error) {
 	)
 }
 
-func (classifier *Classifier) Classify(data report.Detection) (*ClassifiedInterface, error) {
+func (classifier *Classifier) Classify(data detections.Detection) (*ClassifiedInterface, error) {
 	detectedInterface, ok := data.Value.(interfaces.Interface)
 	if !ok {
 		return nil, errors.New("detection is not an interface")

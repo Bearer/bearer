@@ -1,6 +1,6 @@
-([]*report.Detection) (len=4) {
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+([]*detections.Detection) (len=4) {
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "piplock",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -18,8 +18,8 @@
       Version: (string) (len=7) "==1.4.0"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "piplock",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -37,8 +37,8 @@
       Version: (string) (len=8) "==21.2.0"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "piplock",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -56,8 +56,8 @@
       Version: (string) (len=8) "==0.7.12"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=7) "piplock",
     CommitSHA: (string) "",
     Source: (source.Source) {

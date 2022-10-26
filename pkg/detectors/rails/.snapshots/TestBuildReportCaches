@@ -1,6 +1,6 @@
-([]*report.FrameworkDetection) (len=5) {
-  (*report.FrameworkDetection)({
-    Type: (report.DetectionType) (len=9) "framework",
+([]*detections.FrameworkDetection) (len=5) {
+  (*detections.FrameworkDetection)({
+    Type: (detections.DetectionType) (len=9) "framework",
     DetectorType: (detectors.Type) (len=5) "rails",
     FrameworkType: (frameworks.Type) (len=5) "cache",
     CommitSHA: (string) "",
@@ -16,8 +16,8 @@
       Type: (string) (len=12) "memory_store"
     }
   }),
-  (*report.FrameworkDetection)({
-    Type: (report.DetectionType) (len=9) "framework",
+  (*detections.FrameworkDetection)({
+    Type: (detections.DetectionType) (len=9) "framework",
     DetectorType: (detectors.Type) (len=5) "rails",
     FrameworkType: (frameworks.Type) (len=5) "cache",
     CommitSHA: (string) "",
@@ -33,8 +33,8 @@
       Type: (string) (len=10) "file_store"
     }
   }),
-  (*report.FrameworkDetection)({
-    Type: (report.DetectionType) (len=9) "framework",
+  (*detections.FrameworkDetection)({
+    Type: (detections.DetectionType) (len=9) "framework",
     DetectorType: (detectors.Type) (len=5) "rails",
     FrameworkType: (frameworks.Type) (len=5) "cache",
     CommitSHA: (string) "",
@@ -50,8 +50,8 @@
       Type: (string) (len=15) "mem_cache_store"
     }
   }),
-  (*report.FrameworkDetection)({
-    Type: (report.DetectionType) (len=9) "framework",
+  (*detections.FrameworkDetection)({
+    Type: (detections.DetectionType) (len=9) "framework",
     DetectorType: (detectors.Type) (len=5) "rails",
     FrameworkType: (frameworks.Type) (len=5) "cache",
     CommitSHA: (string) "",
@@ -67,8 +67,8 @@
       Type: (string) (len=17) "redis_cache_store"
     }
   }),
-  (*report.FrameworkDetection)({
-    Type: (report.DetectionType) (len=9) "framework",
+  (*detections.FrameworkDetection)({
+    Type: (detections.DetectionType) (len=9) "framework",
     DetectorType: (detectors.Type) (len=5) "rails",
     FrameworkType: (frameworks.Type) (len=5) "cache",
     CommitSHA: (string) "",

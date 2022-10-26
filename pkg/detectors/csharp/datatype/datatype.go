@@ -5,11 +5,12 @@ import (
 
 	"github.com/bearer/curio/pkg/parser"
 	"github.com/bearer/curio/pkg/parser/datatype"
-	parserdatatype "github.com/bearer/curio/pkg/parser/datatype"
 	"github.com/bearer/curio/pkg/parser/nodeid"
 	"github.com/bearer/curio/pkg/report"
+	"github.com/bearer/curio/pkg/report/detections"
 	"github.com/bearer/curio/pkg/report/detectors"
 	"github.com/bearer/curio/pkg/report/schema"
+	schemadatatype "github.com/bearer/curio/pkg/report/schema/datatype"
 	"github.com/smacker/go-tree-sitter/csharp"
 )
 
@@ -54,19 +55,19 @@ var functionParamatersQuery = parser.QueryMustCompile(csharp.GetLanguage(), `(pa
 ) @param_parameter`)
 
 func Discover(report report.Report, tree *parser.Tree, idGenerator nodeid.Generator) {
-	datatypes := make(map[parser.NodeID]*parserdatatype.DataType)
+	datatypes := make(map[parser.NodeID]*schemadatatype.DataType)
 
 	// add classses
 	captures := tree.QueryConventional(classesQuery)
 	for _, capture := range captures {
 		id := capture["param_id"].Content()
 		classNode := capture["param_class"]
-		datatypes[classNode.ID()] = &parserdatatype.DataType{
+		datatypes[classNode.ID()] = &schemadatatype.DataType{
 			Node:       classNode,
 			Name:       id,
 			Type:       schema.SimpleTypeObject,
 			TextType:   "class",
-			Properties: make(map[string]*parserdatatype.DataType),
+			Properties: make(map[string]schemadatatype.DataTypable),
 		}
 	}
 
@@ -77,11 +78,10 @@ func Discover(report report.Report, tree *parser.Tree, idGenerator nodeid.Genera
 
 	datatype.PruneMap(datatypes)
 
-	parserdatatype.NewExport(report, detectors.DetectorCSharp, idGenerator, datatypes)
-
+	report.AddDataType(detections.TypeSchema, detectors.DetectorCSharp, idGenerator, datatypes)
 }
 
-func discoverProperties(tree *parser.Tree, datatypes map[parser.NodeID]*parserdatatype.DataType) {
+func discoverProperties(tree *parser.Tree, datatypes map[parser.NodeID]*schemadatatype.DataType) {
 	// add class properties
 	captures := tree.QueryConventional(classPropertiesQuery)
 	for _, capture := range captures {
@@ -103,7 +103,7 @@ func discoverProperties(tree *parser.Tree, datatypes map[parser.NodeID]*parserda
 			propertyTextType = propertyTypeNode.Content()
 		}
 
-		datatypes[classNode.ID()].Properties[propertyName] = &parserdatatype.DataType{
+		datatypes[classNode.ID()].Properties[propertyName] = &schemadatatype.DataType{
 			Node:     property,
 			Name:     propertyName,
 			Type:     propertyType,
@@ -112,7 +112,7 @@ func discoverProperties(tree *parser.Tree, datatypes map[parser.NodeID]*parserda
 	}
 }
 
-func discoverGetSetProperties(tree *parser.Tree, datatypes map[parser.NodeID]*parserdatatype.DataType) {
+func discoverGetSetProperties(tree *parser.Tree, datatypes map[parser.NodeID]*schemadatatype.DataType) {
 	// add class properties
 	captures := tree.QueryConventional(classGetSetPropertiesQuery)
 	for _, capture := range captures {
@@ -134,7 +134,7 @@ func discoverGetSetProperties(tree *parser.Tree, datatypes map[parser.NodeID]*pa
 			propertyTextType = propertyTypeNode.Content()
 		}
 
-		datatypes[classNode.ID()].Properties[propertyName] = &parserdatatype.DataType{
+		datatypes[classNode.ID()].Properties[propertyName] = &schemadatatype.DataType{
 			Node:     property,
 			Name:     propertyName,
 			Type:     propertyType,
@@ -143,7 +143,7 @@ func discoverGetSetProperties(tree *parser.Tree, datatypes map[parser.NodeID]*pa
 	}
 }
 
-func discoverFunctions(tree *parser.Tree, datatypes map[parser.NodeID]*parserdatatype.DataType) {
+func discoverFunctions(tree *parser.Tree, datatypes map[parser.NodeID]*schemadatatype.DataType) {
 	captures := tree.QueryConventional(classFunctionsQuery)
 	for _, capture := range captures {
 		classNode := capture["param_class"]
@@ -165,7 +165,7 @@ func discoverFunctions(tree *parser.Tree, datatypes map[parser.NodeID]*parserdat
 			functionTextType = functionTypeNode.Content()
 		}
 
-		datatypes[classNode.ID()].Properties[functionName] = &parserdatatype.DataType{
+		datatypes[classNode.ID()].Properties[functionName] = &schemadatatype.DataType{
 			Node:     functionNameNode,
 			Name:     functionName,
 			Type:     functionType,
@@ -174,7 +174,7 @@ func discoverFunctions(tree *parser.Tree, datatypes map[parser.NodeID]*parserdat
 	}
 }
 
-func discoverFunctionParameters(tree *parser.Tree, datatypes map[parser.NodeID]*parserdatatype.DataType) {
+func discoverFunctionParameters(tree *parser.Tree, datatypes map[parser.NodeID]*schemadatatype.DataType) {
 	captures := tree.QueryConventional(functionParamatersQuery)
 	for _, capture := range captures {
 		paramNameNode := capture["param_name"]
@@ -188,12 +188,12 @@ func discoverFunctionParameters(tree *parser.Tree, datatypes map[parser.NodeID]*
 			paramType = standardizeDataType(paramTypeNode, paramTypeNode.Content())
 		}
 
-		datatypes[paramNode.ID()] = &parserdatatype.DataType{
+		datatypes[paramNode.ID()] = &schemadatatype.DataType{
 			Node:       paramNode,
 			Name:       paramNameNode.Content(),
 			Type:       paramType,
 			TextType:   paramTextType,
-			Properties: make(map[string]*parserdatatype.DataType),
+			Properties: make(map[string]schemadatatype.DataTypable),
 		}
 	}
 }

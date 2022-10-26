@@ -4,12 +4,12 @@ import (
 	"errors"
 
 	"github.com/bearer/curio/pkg/classification/db"
-	"github.com/bearer/curio/pkg/report"
 	"github.com/bearer/curio/pkg/report/dependencies"
+	"github.com/bearer/curio/pkg/report/detections"
 )
 
 type ClassifiedDependency struct {
-	*report.Detection
+	*detections.Detection
 	Classification *Classification `json:"classification"`
 }
 
@@ -38,7 +38,7 @@ func NewDefault() *Classifier {
 	}
 }
 
-func (classifier *Classifier) Classify(data report.Detection) (*ClassifiedDependency, error) {
+func (classifier *Classifier) Classify(data detections.Detection) (*ClassifiedDependency, error) {
 	var classification *Classification
 	value, ok := data.Value.(dependencies.Dependency)
 	if !ok {

@@ -1,6 +1,6 @@
-([]*report.Detection) (len=2) {
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+([]*detections.Detection) (len=2) {
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=14) "package-config",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -18,8 +18,8 @@
       Version: (string) (len=5) "1.0.0"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=10) "dependency",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=10) "dependency",
     DetectorType: (detectors.Type) (len=14) "package-config",
     CommitSHA: (string) "",
     Source: (source.Source) {

@@ -4,15 +4,15 @@ import (
 	"testing"
 
 	"github.com/bearer/curio/pkg/classification/dependencies"
-	"github.com/bearer/curio/pkg/report"
 	reportdependencies "github.com/bearer/curio/pkg/report/dependencies"
+	"github.com/bearer/curio/pkg/report/detections"
 
 	"github.com/stretchr/testify/assert"
 )
 
 type testCase struct {
 	Name  string
-	Input report.Detection
+	Input detections.Detection
 	Want  *dependencies.Classification
 }
 
@@ -20,14 +20,14 @@ func TestDependencies(t *testing.T) {
 	tests := []testCase{
 		{
 			Name: "Dependency match",
-			Input: report.Detection{
+			Input: detections.Detection{
 				Value: reportdependencies.Dependency{
 					Group:          "",
 					Name:           "stripe",
 					Version:        "v1.1.1",
 					PackageManager: "rubygems",
 				},
-				Type: report.TypeDependency,
+				Type: detections.TypeDependency,
 			},
 			Want: &dependencies.Classification{
 				RecipeMatch: true,
@@ -36,14 +36,14 @@ func TestDependencies(t *testing.T) {
 		},
 		{
 			Name: "Dependency match with group (Java case)",
-			Input: report.Detection{
+			Input: detections.Detection{
 				Value: reportdependencies.Dependency{
 					Group:          "org.postgresql",
 					Name:           "postgresql",
 					Version:        "v2.1.1",
 					PackageManager: "maven",
 				},
-				Type: report.TypeDependency,
+				Type: detections.TypeDependency,
 			},
 			Want: &dependencies.Classification{
 				RecipeMatch: true,
@@ -52,14 +52,14 @@ func TestDependencies(t *testing.T) {
 		},
 		{
 			Name: "No dependency match",
-			Input: report.Detection{
+			Input: detections.Detection{
 				Value: reportdependencies.Dependency{
 					Group:          "",
 					Name:           "my-non-matching-dependency",
 					Version:        "v2.1.1",
 					PackageManager: "rubygems",
 				},
-				Type: report.TypeDependency,
+				Type: detections.TypeDependency,
 			},
 			Want: nil,
 		},

@@ -1,13 +1,12 @@
 package schema
 
 import (
-	"github.com/bearer/curio/pkg/parser/datatype"
 	"github.com/bearer/curio/pkg/report/detectors"
+	"github.com/bearer/curio/pkg/report/schema/datatype"
 )
 
 type ClassifiedDatatype struct {
 	*datatype.DataType
-	Properties     map[string]ClassifiedDatatype
 	Classification Classification `json:"classification"`
 }
 
@@ -27,7 +26,7 @@ func New(config Config) *Classifier {
 }
 
 type DataTypeDetection struct {
-	Value        datatype.DataType
+	Value        datatype.DataTypable
 	Filename     string
 	DetectorType detectors.Type
 }
@@ -37,22 +36,22 @@ func (classifier *Classifier) Classify(data DataTypeDetection) (*ClassifiedDatat
 	return &ClassifiedDatatype{
 		DataType: &datatype.DataType{
 			UUID: "1",
+			Properties: map[string]datatype.DataTypable{
+				"address": ClassifiedDatatype{
+					Classification: Classification{
+						Name: "personal data",
+					},
+					DataType: &datatype.DataType{
+						UUID: "2",
+					},
+				},
+				"age": ClassifiedDatatype{
+					Classification: Classification{},
+				},
+			},
 		},
 		Classification: Classification{
 			Name: "personal data",
-		},
-		Properties: map[string]ClassifiedDatatype{
-			"address": {
-				Classification: Classification{
-					Name: "personal data",
-				},
-				DataType: &datatype.DataType{
-					UUID: "2",
-				},
-			},
-			"age": {
-				Classification: Classification{},
-			},
 		},
 	}, nil
 }

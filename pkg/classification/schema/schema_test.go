@@ -5,10 +5,10 @@ import (
 
 	"github.com/bearer/curio/pkg/report/detectors"
 	reportschema "github.com/bearer/curio/pkg/report/schema"
+	"github.com/bearer/curio/pkg/report/schema/datatype"
 	"github.com/stretchr/testify/assert"
 
 	"github.com/bearer/curio/pkg/classification/schema"
-	"github.com/bearer/curio/pkg/parser/datatype"
 )
 
 type testCase struct {
@@ -24,15 +24,15 @@ func TestSchema(t *testing.T) {
 			Input: schema.DataTypeDetection{
 				Filename:     "db/schema.rb",
 				DetectorType: detectors.DetectorRuby,
-				Value: datatype.DataType{
+				Value: &datatype.DataType{
 					Name: "user",
 					Type: reportschema.SimpleTypeObject,
-					Properties: map[string]*datatype.DataType{
-						"address": {
+					Properties: map[string]datatype.DataTypable{
+						"address": &datatype.DataType{
 							Type: reportschema.SimpleTypeString,
 							UUID: "2",
 						},
-						"age": {
+						"age": &datatype.DataType{
 							Type: reportschema.SimpleTypeString,
 							UUID: "3",
 						},
@@ -42,22 +42,22 @@ func TestSchema(t *testing.T) {
 			Want: schema.ClassifiedDatatype{
 				DataType: &datatype.DataType{
 					UUID: "1",
+					Properties: map[string]datatype.DataTypable{
+						"address": schema.ClassifiedDatatype{
+							Classification: schema.Classification{
+								Name: "personal data",
+							},
+							DataType: &datatype.DataType{
+								UUID: "2",
+							},
+						},
+						"age": schema.ClassifiedDatatype{
+							Classification: schema.Classification{},
+						},
+					},
 				},
 				Classification: schema.Classification{
 					Name: "personal data",
-				},
-				Properties: map[string]schema.ClassifiedDatatype{
-					"address": {
-						Classification: schema.Classification{
-							Name: "personal data",
-						},
-						DataType: &datatype.DataType{
-							UUID: "2",
-						},
-					},
-					"age": {
-						Classification: schema.Classification{},
-					},
 				},
 			},
 		},

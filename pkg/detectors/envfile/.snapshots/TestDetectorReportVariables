@@ -1,6 +1,6 @@
-([]*report.Detection) (len=2) {
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=9) "interface",
+([]*detections.Detection) (len=2) {
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=9) "interface",
     DetectorType: (detectors.Type) (len=8) "env_file",
     CommitSHA: (string) "",
     Source: (source.Source) {
@@ -24,8 +24,8 @@
       VariableName: (string) (len=17) "AGENT_REPORT_HOST"
     }
   }),
-  (*report.Detection)({
-    Type: (report.DetectionType) (len=9) "interface",
+  (*detections.Detection)({
+    Type: (detections.DetectionType) (len=9) "interface",
     DetectorType: (detectors.Type) (len=8) "env_file",
     CommitSHA: (string) "",
     Source: (source.Source) {

@@ -3,17 +3,17 @@ package customdetector
 import (
 	"github.com/bearer/curio/pkg/detectors/sql/util"
 	"github.com/bearer/curio/pkg/parser"
-	parserdatatype "github.com/bearer/curio/pkg/parser/datatype"
 	"github.com/bearer/curio/pkg/parser/nodeid"
 	"github.com/bearer/curio/pkg/report/schema"
+	schemadatatype "github.com/bearer/curio/pkg/report/schema/datatype"
 )
 
-func (detector *Detector) ExtractArguments(node *parser.Node, idGenerator nodeid.Generator) (map[parser.NodeID]*parserdatatype.DataType, error) {
+func (detector *Detector) ExtractArguments(node *parser.Node, idGenerator nodeid.Generator) (map[parser.NodeID]*schemadatatype.DataType, error) {
 	if node == nil {
 		return nil, nil
 	}
 
-	joinedDatatypes := make(map[parser.NodeID]*parserdatatype.DataType)
+	joinedDatatypes := make(map[parser.NodeID]*schemadatatype.DataType)
 
 	if node.Type() == "identifier" && node.Parent() != nil && node.Parent().Type() == "table_column" {
 		parent := node.Parent()
@@ -22,12 +22,12 @@ func (detector *Detector) ExtractArguments(node *parser.Node, idGenerator nodeid
 
 		simpleType := util.ConvertToSimpleType(typeIdentifierNode.Content())
 
-		datatype := &parserdatatype.DataType{
+		datatype := &schemadatatype.DataType{
 			Node:       node,
 			Name:       node.Content(),
 			Type:       simpleType,
 			TextType:   typeIdentifierNode.Content(),
-			Properties: make(map[string]*parserdatatype.DataType),
+			Properties: make(map[string]schemadatatype.DataTypable),
 		}
 
 		joinedDatatypes[datatype.Node.ID()] = datatype
@@ -35,12 +35,12 @@ func (detector *Detector) ExtractArguments(node *parser.Node, idGenerator nodeid
 	}
 
 	if node.Type() == "identifier" && node.Parent() != nil && node.Parent().Type() == "create_function_statement" {
-		datatype := &parserdatatype.DataType{
+		datatype := &schemadatatype.DataType{
 			Node:       node,
 			Name:       node.Content(),
 			Type:       schema.SimpleTypeObject,
 			TextType:   "",
-			Properties: make(map[string]*parserdatatype.DataType),
+			Properties: make(map[string]schemadatatype.DataTypable),
 		}
 
 		joinedDatatypes[datatype.Node.ID()] = datatype
@@ -51,11 +51,11 @@ func (detector *Detector) ExtractArguments(node *parser.Node, idGenerator nodeid
 	if node.Type() == "identifier" {
 		tableNameNode := node
 
-		tableNameDatatype := &parserdatatype.DataType{
+		tableNameDatatype := &schemadatatype.DataType{
 			Node:       tableNameNode,
 			Name:       tableNameNode.Content(),
 			Type:       schema.SimpleTypeObject,
-			Properties: make(map[string]*parserdatatype.DataType),
+			Properties: make(map[string]schemadatatype.DataTypable),
 		}
 
 		joinedDatatypes[tableNameDatatype.Node.ID()] = tableNameDatatype

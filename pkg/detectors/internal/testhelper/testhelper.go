@@ -7,16 +7,18 @@ import (
 	"strings"
 
 	"github.com/bearer/curio/pkg/detectors"
-	"github.com/bearer/curio/pkg/report"
+	"github.com/bearer/curio/pkg/parser"
+	"github.com/bearer/curio/pkg/parser/nodeid"
 
-	reporttypes "github.com/bearer/curio/pkg/report"
 	createview "github.com/bearer/curio/pkg/report/create_view"
 	"github.com/bearer/curio/pkg/report/dependencies"
+	"github.com/bearer/curio/pkg/report/detections"
 	reportdetectors "github.com/bearer/curio/pkg/report/detectors"
 	"github.com/bearer/curio/pkg/report/frameworks"
 	"github.com/bearer/curio/pkg/report/interfaces"
 	"github.com/bearer/curio/pkg/report/operations"
 	"github.com/bearer/curio/pkg/report/schema"
+	"github.com/bearer/curio/pkg/report/schema/datatype"
 	"github.com/bearer/curio/pkg/report/secret"
 	"github.com/bearer/curio/pkg/report/source"
 
@@ -74,49 +76,32 @@ func RegistrationFor(detectorType reportdetectors.Type) []detectors.InitializedD
 }
 
 type InMemoryReport struct {
-	CustomDetections []*reporttypes.CustomDetection
-	Detections       []*reporttypes.Detection
-	Dependencies     []*reporttypes.Detection
-	Frameworks       []*reporttypes.FrameworkDetection
-	Errors           []*reporttypes.ErrorDetection
-	SecretLeaks      []*reporttypes.Detection
-	CreateView       []*reporttypes.Detection
+	CustomDetections []detections.Detection
+	Detections       []*detections.Detection
+	Dependencies     []*detections.Detection
+	Frameworks       []*detections.FrameworkDetection
+	Errors           []*detections.ErrorDetection
+	SecretLeaks      []*detections.Detection
+	CreateView       []*detections.Detection
 }
 
-func (report *InMemoryReport) AddInterface(
+func (report *InMemoryReport) AddDetection(
+	detectionType detections.DetectionType,
 	detectorType reportdetectors.Type,
-	data interfaces.Interface,
 	source source.Source,
+	value interface{},
 ) {
-	report.Detections = append(report.Detections, &reporttypes.Detection{
+	detection := &detections.Detection{
+		Type:         detectionType,
 		DetectorType: detectorType,
-		Value:        data,
-		Source:       source,
-		Type:         reporttypes.TypeInterface,
-	})
-}
-
-func (inMemReport *InMemoryReport) AddCustomDetection(ruleName string, source source.Source, value schema.Schema) {
-	data := &report.CustomDetection{
-		Type:         report.TypeCustom,
-		DetectorType: reportdetectors.Type(ruleName),
 		Source:       source,
 		Value:        value,
 	}
-	inMemReport.CustomDetections = append(inMemReport.CustomDetections, data)
-}
-
-func (report *InMemoryReport) AddOperation(
-	detectorType reportdetectors.Type,
-	operation operations.Operation,
-	source source.Source,
-) {
-	report.Detections = append(report.Detections, &reporttypes.Detection{
-		DetectorType: detectorType,
-		Value:        operation,
-		Source:       source,
-		Type:         reporttypes.TypeOperation,
-	})
+	if detectionType == detections.TypeCustom {
+		report.CustomDetections = append(report.CustomDetections, *detection)
+	} else {
+		report.Detections = append(report.Detections, detection)
+	}
 }
 
 func (report *InMemoryReport) AddSchema(
@@ -125,12 +110,22 @@ func (report *InMemoryReport) AddSchema(
 	source source.Source,
 ) {
 
-	report.Detections = append(report.Detections, &reporttypes.Detection{
+	report.Detections = append(report.Detections, &detections.Detection{
 		DetectorType: detectorType,
 		Value:        schema,
 		Source:       source,
-		Type:         reporttypes.TypeSchema,
+		Type:         detections.TypeSchema,
 	})
+}
+
+func (report *InMemoryReport) AddDataType(
+	detectionType detections.DetectionType,
+	detectorType reportdetectors.Type,
+	idGenerator nodeid.Generator,
+	values map[parser.NodeID]*datatype.DataType,
+) {
+
+	datatype.Export(report, detectionType, detectorType, idGenerator, values)
 }
 
 func (report *InMemoryReport) AddCreateView(
@@ -138,34 +133,38 @@ func (report *InMemoryReport) AddCreateView(
 	createview createview.View,
 ) {
 
-	report.CreateView = append(report.CreateView, &reporttypes.Detection{
+	report.CreateView = append(report.CreateView, &detections.Detection{
 		DetectorType: detectorType,
 		Value:        createview,
 		Source:       createview.Source,
-		Type:         reporttypes.TypeCreateView,
+		Type:         detections.TypeCreateView,
 	})
 }
 
-func (report *InMemoryReport) AddSecretLeak(
-	secret secret.Secret,
-	source source.Source,
-) {
-
-	report.SecretLeaks = append(report.SecretLeaks, &reporttypes.Detection{
-		DetectorType: reportdetectors.DetectorGitleaks,
-		Value:        secret,
-		Source:       source,
-		Type:         reporttypes.TypeSecretleak,
-	})
-}
-
-func (report *InMemoryReport) AddDependency(
+func (report *InMemoryReport) AddOperation(
 	detectorType reportdetectors.Type,
-	dependency dependencies.Dependency,
+	operation operations.Operation,
 	source source.Source,
 ) {
+	report.Detections = append(report.Detections, &detections.Detection{
+		DetectorType: detectorType,
+		Value:        operation,
+		Source:       source,
+		Type:         detections.TypeOperation,
+	})
+}
 
-	report.Dependencies = append(report.Dependencies, &reporttypes.Detection{DetectorType: detectorType, Value: dependency, Source: source, Type: reporttypes.TypeDependency})
+func (report *InMemoryReport) AddInterface(
+	detectorType reportdetectors.Type,
+	data interfaces.Interface,
+	source source.Source,
+) {
+	report.Detections = append(report.Detections, &detections.Detection{
+		DetectorType: detectorType,
+		Value:        data,
+		Source:       source,
+		Type:         detections.TypeInterface,
+	})
 }
 
 func (report *InMemoryReport) AddFramework(
@@ -175,8 +174,8 @@ func (report *InMemoryReport) AddFramework(
 	source source.Source,
 ) {
 
-	report.Frameworks = append(report.Frameworks, &reporttypes.FrameworkDetection{
-		Type:          reporttypes.TypeFramework,
+	report.Frameworks = append(report.Frameworks, &detections.FrameworkDetection{
+		Type:          detections.TypeFramework,
 		DetectorType:  detectorType,
 		FrameworkType: frameworkType,
 		Source:        source,
@@ -184,9 +183,31 @@ func (report *InMemoryReport) AddFramework(
 	})
 }
 
+func (report *InMemoryReport) AddDependency(
+	detectorType reportdetectors.Type,
+	dependency dependencies.Dependency,
+	source source.Source,
+) {
+
+	report.Dependencies = append(report.Dependencies, &detections.Detection{DetectorType: detectorType, Value: dependency, Source: source, Type: detections.TypeDependency})
+}
+
+func (report *InMemoryReport) AddSecretLeak(
+	secret secret.Secret,
+	source source.Source,
+) {
+
+	report.SecretLeaks = append(report.SecretLeaks, &detections.Detection{
+		DetectorType: reportdetectors.DetectorGitleaks,
+		Value:        secret,
+		Source:       source,
+		Type:         detections.TypeSecretleak,
+	})
+}
+
 func (report *InMemoryReport) AddError(err error) {
-	report.Errors = append(report.Errors, &reporttypes.ErrorDetection{
-		Type:    reporttypes.TypeError,
+	report.Errors = append(report.Errors, &detections.ErrorDetection{
+		Type:    detections.TypeError,
 		Message: err.Error(),
 	})
 }

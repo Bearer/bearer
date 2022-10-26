@@ -1,6 +1,6 @@
-([]*report.FrameworkDetection) (len=3) {
-  (*report.FrameworkDetection)({
-    Type: (report.DetectionType) (len=9) "framework",
+([]*detections.FrameworkDetection) (len=3) {
+  (*detections.FrameworkDetection)({
+    Type: (detections.DetectionType) (len=9) "framework",
     DetectorType: (detectors.Type) (len=6) "dotnet",
     FrameworkType: (frameworks.Type) (len=8) "database",
     CommitSHA: (string) "",
@@ -17,8 +17,8 @@
       TypeName: (string) (len=17) "UtilizadorContext"
     }
   }),
-  (*report.FrameworkDetection)({
-    Type: (report.DetectionType) (len=9) "framework",
+  (*detections.FrameworkDetection)({
+    Type: (detections.DetectionType) (len=9) "framework",
     DetectorType: (detectors.Type) (len=6) "dotnet",
     FrameworkType: (frameworks.Type) (len=8) "database",
     CommitSHA: (string) "",
@@ -35,8 +35,8 @@
       TypeName: (string) (len=16) "CategoriaContext"
     }
   }),
-  (*report.FrameworkDetection)({
-    Type: (report.DetectionType) (len=9) "framework",
+  (*detections.FrameworkDetection)({
+    Type: (detections.DetectionType) (len=9) "framework",
     DetectorType: (detectors.Type) (len=6) "dotnet",
     FrameworkType: (frameworks.Type) (len=8) "database",
     CommitSHA: (string) "",
