@@ -5,8 +5,10 @@ import (
 	"encoding/json"
 	"log"
 	"regexp"
+	"strings"
 
 	"github.com/google/uuid"
+	"github.com/tangzero/inflector"
 )
 
 //go:embed recipes
@@ -55,7 +57,7 @@ type DataType struct {
 
 type DataTypeClassificationPattern struct {
 	Id                        int                 `json:"id"`
-	DataTypeUUID              uuid.UUID           `json:"data_type_uuid,omitempty"`
+	DataTypeUUID              *uuid.UUID          `json:"data_type_uuid,omitempty"`
 	IncludeRegexp             string              `json:"include_regexp"`
 	IncludeRegexpMatcher      *regexp.Regexp      `json:"include_regexp_matcher"`
 	ExcludeRegexp             string              `json:"exclude_regexp,omitempty"`
@@ -71,13 +73,14 @@ type DataTypeClassificationPattern struct {
 }
 
 type KnownPersonObjectPattern struct {
-	Id                   int            `json:"id"`
-	IncludeRegexp        string         `json:"include_regexp"`
-	IncludeRegexpMatcher *regexp.Regexp `json:"include_regexp_matcher"`
-	ExcludeRegexp        string         `json:"exclude_regexp,omitempty"`
-	ExcludeRegexpMatcher *regexp.Regexp `json:"exclude_regexp_matcher"`
-	Category             string         `json:"category"`
-	ActAsIdentifier      bool           `json:"act_as_identifier"`
+	Id                      int            `json:"id"`
+	IncludeRegexp           string         `json:"include_regexp"`
+	IncludeRegexpMatcher    *regexp.Regexp `json:"include_regexp_matcher"`
+	ExcludeRegexp           string         `json:"exclude_regexp,omitempty"`
+	ExcludeRegexpMatcher    *regexp.Regexp `json:"exclude_regexp_matcher"`
+	Category                string         `json:"category"`
+	ActAsIdentifier         bool           `json:"act_as_identifier"`
+	IdentifierRegexpMatcher *regexp.Regexp `json:"identifier_regexp_matcher"`
 }
 
 func Default() DefaultDB {
@@ -220,6 +223,16 @@ func defaultKnownPersonObjectPatterns() []KnownPersonObjectPattern {
 		}
 		if knownPersonObjectPattern.ExcludeRegexp != "" {
 			knownPersonObjectPattern.ExcludeRegexpMatcher, err = regexp.Compile(knownPersonObjectPattern.ExcludeRegexp)
+			if err != nil {
+				handleError(err)
+			}
+		}
+		if knownPersonObjectPattern.ActAsIdentifier {
+			category := strings.ToLower(knownPersonObjectPattern.Category)
+			pluralCategory := inflector.Pluralize(category)
+
+			knownPersonObjectPattern.IdentifierRegexpMatcher, err = regexp.Compile("(?i)^[\\S]*(" + category + "|" + pluralCategory + ")\\s?(uu)?id")
+
 			if err != nil {
 				handleError(err)
 			}

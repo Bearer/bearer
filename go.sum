@@ -240,6 +240,8 @@ github.com/struCoder/pidusage v0.2.1 h1:dFiEgUDkubeIj0XA1NpQ6+8LQmKrLi7NiIQl86E6
 github.com/struCoder/pidusage v0.2.1/go.mod h1:bewtP2KUA1TBUyza5+/PCpSQ6sc/H6jJbIKAzqW86BA=
 github.com/subosito/gotenv v1.4.1 h1:jyEFiXpy21Wm81FBN71l9VoMMV8H8jG+qIK3GCpY6Qs=
 github.com/subosito/gotenv v1.4.1/go.mod h1:ayKnFf/c6rvx/2iiLrJUk1e6plDbT3edrFNGqEflhK0=
+github.com/tangzero/inflector v1.0.0 h1:933dvPwRUUOAl98hyeeXuzFix3HwDt5j+45lleu8oh0=
+github.com/tangzero/inflector v1.0.0/go.mod h1:OknKjAyDPCDzcWt0yOh2I7hqTukEdyyApcX3/KOhuXc=
 github.com/weppos/publicsuffix-go v0.12.0/go.mod h1:z3LCPQ38eedDQSwmsSRW4Y7t2L8Ln16JPQ02lHAdn5k=
 github.com/weppos/publicsuffix-go v0.20.0 h1:59ypvSUbW3Dunc6zVm+v+MmXf2Q6cGiNDkxgRIzEnaA=
 github.com/weppos/publicsuffix-go v0.20.0/go.mod h1:5ZC/Uv3fIEUE0eP6o9+Yg4+5+W8V0/BieMi05feGXVA=
