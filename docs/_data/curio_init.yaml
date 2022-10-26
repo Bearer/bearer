@@ -1,0 +1,72 @@
+name: ' init'
+synopsis: writes default config to curio.yml
+usage: ' init [flags]'
+options:
+    - name: config-file
+      usage: file from which to load configurations
+    - name: debug
+      default_value: "false"
+      usage: enable debug logs
+    - name: disable-domain-resolution
+      default_value: "false"
+      usage: |
+        do not attempt to resolve detected domains during classification (default false), eg. --disable-domain-resolution=true
+    - name: domain-resolution-timeout
+      default_value: 3s
+      usage: |
+        set timeout when attempting to resolve detected domains during classification (default 3 seconds), eg. --domain-resolution-timeout=TODO
+    - name: file-size-max
+      default_value: "25000000"
+      usage: ignore files with file size larger than this config
+    - name: files-to-batch
+      default_value: "1"
+      usage: number of files to batch to worker
+    - name: format
+      shorthand: f
+      default_value: json
+      usage: format (json)
+    - name: help
+      shorthand: h
+      default_value: "false"
+      usage: help for init
+    - name: internal-domains
+      default_value: '[]'
+      usage: |
+        define regular expressions for better classification of private or unreachable domains eg. --internal-domains="*.my-company.com,private.sh"
+    - name: memory-max
+      default_value: "800000000"
+      usage: |
+        if memory needed to scan a file surpasses this limit, skip the file
+    - name: output
+      usage: path where to save report
+    - name: report
+      default_value: detectors
+      usage: specify the kind of report (detectors)
+    - name: skip-path
+      default_value: '[]'
+      usage: |
+        specify the comma separated files and directories to skip (supports * syntax), eg. --skip-path users/*.go,users/admin.sql
+    - name: timeout
+      default_value: 10m0s
+      usage: time allowed to complete scan
+    - name: timeout-file-max
+      default_value: 5m0s
+      usage: |
+        maximum timeout assigned to scanning file, this config superseeds timeout-second-per-bytes
+    - name: timeout-file-min
+      default_value: 5s
+      usage: |
+        minimum timeout assigned to scanning file, this config superseeds timeout-second-per-bytes
+    - name: timeout-file-second-per-bytes
+      default_value: "10000"
+      usage: |
+        number of file size bytes producing a second of timeout assigned to scanning a file
+    - name: timeout-worker-online
+      default_value: 1m0s
+      usage: maximum time for worker process to come online
+    - name: workers
+      default_value: "1"
+      usage: number of processing workers to spawn
+see_also:
+    - ' - '
+aliases: 

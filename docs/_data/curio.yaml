@@ -1,0 +1,13 @@
+name: ""
+usage: ' [flags]'
+options:
+    - name: help
+      shorthand: h
+      default_value: "false"
+      usage: help for this command
+see_also:
+    - ' config - Scan config files for misconfigurations'
+    - ' init - writes default config to curio.yml'
+    - ' scan - Scan git repository'
+    - ' version - Print the version'
+aliases: 
