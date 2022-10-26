@@ -1,6 +1,7 @@
 package createtable
 
 import (
+	"fmt"
 	"io/ioutil"
 	"os"
 	"regexp"
@@ -104,7 +105,7 @@ func Detect(file *file.FileInfo, report reporttypes.Report, idGenerator nodeid.G
 		})
 
 		if err != nil {
-			report.AddError(err)
+			report.AddError(file.RelativePath, fmt.Errorf("create table error: %s", err))
 		}
 
 		lineOffset = lineOffset + strings.Count(chunk, "\n")
