@@ -1,9 +1,7 @@
 package commands
 
 import (
-	"errors"
 	"fmt"
-	"os"
 
 	"github.com/bearer/curio/pkg/commands/artifact"
 	"github.com/bearer/curio/pkg/flag"
@@ -88,11 +86,10 @@ func NewScanCommand() *cobra.Command {
 }
 
 func readConfig(configFile string) error {
-	// Read from config
 	viper.SetConfigFile(configFile)
 	viper.SetConfigType("yaml")
 	if err := viper.ReadInConfig(); err != nil {
-		if errors.Is(err, os.ErrNotExist) {
+		if _, ok := err.(viper.ConfigFileNotFoundError); ok {
 			return nil
 		}
 
