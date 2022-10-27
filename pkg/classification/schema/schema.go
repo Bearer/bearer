@@ -28,6 +28,10 @@ var objectStopWords = map[string]struct{}{
 	"filter":      {},
 	"memberships": {},
 }
+var propertyStopWords = map[string]struct{}{
+	"on click":      {},
+	"disable click": {},
+}
 var databaseDetectorTypes = map[string]struct{}{
 	"sql":   {},
 	"rails": {},
@@ -101,15 +105,12 @@ func (classifier *Classifier) Classify(data DataTypeDetection) (*ClassifiedDatat
 		}
 	}
 
-	// stop_word
 	if objectStopWordDetected(normalizedObjectName) {
 		classifiedDataType.Classification.Decision = classify.ClassificationDecision{
 			State:  classify.Invalid,
 			Reason: "stop_word",
 		}
 	}
-
-	// todo: do we need these checks too? app/services/detection_engine/classify_detections/classify_schema_object_detection.rb
 
 	if classifiedDataType.Classification.Decision.State == classify.Invalid {
 		// schema object did not pass initial checks
@@ -123,6 +124,8 @@ func (classifier *Classifier) Classify(data DataTypeDetection) (*ClassifiedDatat
 		return classifiedDataType, nil
 	}
 
+	var isJSDetection = data.DetectorType == detectors.DetectorJavascript || data.DetectorType == detectors.DetectorTypescript
+
 	if classifier.isKnownPersonObject(normalizedObjectName) {
 		hasKnownObjectProperties := false
 		hasKnownDBIdentifierProperties := false
@@ -131,6 +134,21 @@ func (classifier *Classifier) Classify(data DataTypeDetection) (*ClassifiedDatat
 		for _, property := range detectedDataType.Properties {
 			propertyDataType := extractDataType(property)
 			normalizedPropertyName := normalize_key.Normalize(propertyDataType.Name)
+
+			if isJSDetection && propertyStopWordDetected(normalizedPropertyName) {
+				detectedDataType.Properties[propertyDataType.Name] = ClassifiedDatatype{
+					DataType: propertyDataType,
+					Classification: Classification{
+						Name: normalizedPropertyName,
+						Decision: classify.ClassificationDecision{
+							State:  classify.Invalid,
+							Reason: "stop_word",
+						},
+					},
+				}
+
+				continue
+			}
 
 			if classifier.isKnownObjectPattern(normalizedPropertyName, propertyDataType.Type) {
 				hasKnownObjectProperties = true
@@ -163,8 +181,6 @@ func (classifier *Classifier) Classify(data DataTypeDetection) (*ClassifiedDatat
 
 				continue
 			}
-
-			// todo: check for field stop word?
 
 			detectedDataType.Properties[propertyDataType.Name] = ClassifiedDatatype{
 				DataType: propertyDataType,
@@ -286,6 +302,11 @@ func isExpectedIdentifierDataTypeId(id int) bool {
 
 func objectStopWordDetected(name string) bool {
 	_, ok := objectStopWords[name]
+	return ok
+}
+
+func propertyStopWordDetected(name string) bool {
+	_, ok := propertyStopWords[name]
 	return ok
 }
 
