@@ -1,6 +1,7 @@
 package openapi
 
 import (
+	"bytes"
 	"encoding/json"
 	"io/ioutil"
 
@@ -73,6 +74,10 @@ func getFileType(file *file.FileInfo) (detectors.OpenAPIFileType, error) {
 
 	var version version
 	if ext == ".json" {
+		if isArray(input) { // fallback to json|yaml detector
+			return "", nil
+		}
+
 		err := json.Unmarshal(input, &version)
 		if err != nil {
 			return detectors.OpenAPIFileType(""), err
@@ -108,4 +113,8 @@ func getFileType(file *file.FileInfo) (detectors.OpenAPIFileType, error) {
 		return detectors.OpenApi2YAMLFile, nil
 	}
 
+}
+
+func isArray(input []byte) bool {
+	return bytes.HasPrefix(bytes.TrimSpace(input), []byte("["))
 }
