@@ -1,0 +1,14 @@
+{
+  "metadata": { "version": "1.0" },
+  "id": 4,
+  "data_type_uuid": "5a80a938-6fb2-4d9a-9c47-8d377e036506",
+  "exclude_regexp": "\\b(.*email|(zip.*file)|ip|domain|cart|id|mac|submit|viewed|list|dialog|voice.*)\\b",
+  "exclude_types": ["boolean"],
+  "friendly_name": "Physical Address",
+  "health_context_data_type_uuid": null,
+  "include_regexp": "\\b(city|street|address|region|province)|((billing|shipping).*address)|((zip\\s?postal)|(zip|postal)\\s?code)\\b",
+  "include_types": ["string", "object"],
+  "match_column": true,
+  "match_object": false,
+  "object_type": ["known", "unknown_extended"]
+}

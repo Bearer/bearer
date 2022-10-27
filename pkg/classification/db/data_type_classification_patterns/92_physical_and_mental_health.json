@@ -1,0 +1,14 @@
+{
+  "metadata": { "version": "1.0" },
+  "id": 92,
+  "data_type_uuid": "8421f13c-0b9a-422b-9080-55b78e7c07cd",
+  "exclude_regexp": null,
+  "exclude_types": ["boolean"],
+  "friendly_name": "Physical and mental health",
+  "health_context_data_type_uuid": null,
+  "include_regexp": "\\b(physical|mental)\\s?health\\b",
+  "include_types": ["object", "string"],
+  "match_column": true,
+  "match_object": false,
+  "object_type": ["unknown"]
+}
