@@ -2,6 +2,7 @@ package dotnet
 
 import (
 	"io/ioutil"
+	"os"
 	"path/filepath"
 
 	"github.com/bearer/curio/pkg/detectors/types"
@@ -80,14 +81,19 @@ func (detector *detector) ProcessFile(file *file.FileInfo, dir *file.Path, repor
 }
 
 func isProject(path string) (bool, error) {
-	fileInfos, err := ioutil.ReadDir(path)
+	handleDir, err := isDir(path)
 	if err != nil {
 		return false, err
 	}
 
-	for _, file := range fileInfos {
-		if filepath.Ext(file.Name()) == fileProjectExt {
-			testMatch, errMatch := filepath.Match("*Test*", file.Name())
+	if handleDir {
+		fileInfos, err := ioutil.ReadDir(path)
+		if err != nil {
+			return false, err
+		}
+
+		for _, file := range fileInfos {
+			testMatch, errMatch := matchFilepath(file.Name())
 			if errMatch != nil {
 				return false, errMatch
 			}
@@ -98,5 +104,36 @@ func isProject(path string) (bool, error) {
 		}
 	}
 
+	// we have a file and not a directory
+	fileInfo, err := os.Stat(path)
+	if err != nil {
+		return false, err
+	}
+
+	testMatch, errMatch := matchFilepath(fileInfo.Name())
+	if errMatch != nil {
+		return false, errMatch
+	}
+	if !testMatch {
+		return true, nil
+	}
+
 	return false, nil
+}
+
+func matchFilepath(filename string) (bool, error) {
+	if filepath.Ext(filename) == fileProjectExt {
+		return filepath.Match("*Test*", filename)
+	}
+
+	return false, nil
+}
+
+func isDir(path string) (bool, error) {
+	fileInfo, err := os.Stat(path)
+	if err != nil {
+		return false, err
+	}
+
+	return fileInfo.IsDir(), nil
 }
