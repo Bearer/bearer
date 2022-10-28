@@ -8,6 +8,7 @@ import (
 	"github.com/bearer/curio/pkg/classification/db"
 	"github.com/bearer/curio/pkg/report/detections"
 	"github.com/bearer/curio/pkg/report/interfaces"
+	"github.com/bearer/curio/pkg/util/classify"
 	"github.com/bearer/curio/pkg/util/url"
 )
 
@@ -16,16 +17,11 @@ type ClassifiedInterface struct {
 	Classification *Classification `json:"classification"`
 }
 
-type ClassificationDecision struct {
-	State  url.ValidationState `json:"state"`
-	Reason string              `json:"reason"`
-}
-
 type Classification struct {
-	URL         string                 `json:"url"`
-	RecipeMatch bool                   `json:"recipe_match"`
-	RecipeName  string                 `json:"recipe_name,omitempty"`
-	Decision    ClassificationDecision `json:"decision"`
+	URL         string                          `json:"url"`
+	RecipeMatch bool                            `json:"recipe_match"`
+	RecipeName  string                          `json:"recipe_name,omitempty"`
+	Decision    classify.ClassificationDecision `json:"decision"`
 }
 
 type Classifier struct {
@@ -127,12 +123,12 @@ func (classifier *Classifier) Classify(data detections.Detection) (*ClassifiedIn
 	if err != nil {
 		return nil, err
 	}
-	if formatValidityCheck.State == url.Invalid {
+	if formatValidityCheck.State == classify.Invalid {
 		return &ClassifiedInterface{
 			Detection: &data,
 			Classification: &Classification{
 				URL: value,
-				Decision: ClassificationDecision{
+				Decision: classify.ClassificationDecision{
 					State:  formatValidityCheck.State,
 					Reason: formatValidityCheck.Reason,
 				},
@@ -159,7 +155,7 @@ func (classifier *Classifier) Classify(data detections.Detection) (*ClassifiedIn
 			Detection: &data,
 			Classification: &Classification{
 				URL: value,
-				Decision: ClassificationDecision{
+				Decision: classify.ClassificationDecision{
 					State:  internalValidityCheck.State,
 					Reason: internalValidityCheck.Reason,
 				},
@@ -182,15 +178,15 @@ func (classifier *Classifier) Classify(data detections.Detection) (*ClassifiedIn
 			},
 		}
 		if strings.Contains(recipeMatch.DetectionURLPart, "*") {
-			classifiedInterface.Classification.Decision = ClassificationDecision{
-				State:  url.Potential,
+			classifiedInterface.Classification.Decision = classify.ClassificationDecision{
+				State:  classify.Potential,
 				Reason: "recipe_match_with_wildcard",
 			}
 			return classifiedInterface, nil
 		}
 
-		classifiedInterface.Classification.Decision = ClassificationDecision{
-			State:  url.Valid,
+		classifiedInterface.Classification.Decision = classify.ClassificationDecision{
+			State:  classify.Valid,
 			Reason: "recipe_match",
 		}
 		return classifiedInterface, nil
@@ -206,7 +202,7 @@ func (classifier *Classifier) Classify(data detections.Detection) (*ClassifiedIn
 		Detection: &data,
 		Classification: &Classification{
 			URL: value,
-			Decision: ClassificationDecision{
+			Decision: classify.ClassificationDecision{
 				State:  validityCheck.State,
 				Reason: validityCheck.Reason,
 			},

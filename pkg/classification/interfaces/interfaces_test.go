@@ -10,7 +10,7 @@ import (
 
 	reportinterfaces "github.com/bearer/curio/pkg/report/interfaces"
 	"github.com/bearer/curio/pkg/report/values"
-	"github.com/bearer/curio/pkg/util/url"
+	"github.com/bearer/curio/pkg/util/classify"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -45,8 +45,8 @@ func TestInterface(t *testing.T) {
 				URL:         "https://api.stripe.com",
 				RecipeName:  "Stripe",
 				RecipeMatch: true,
-				Decision: interfaces.ClassificationDecision{
-					State:  url.Valid,
+				Decision: classify.ClassificationDecision{
+					State:  classify.Valid,
 					Reason: "recipe_match",
 				},
 			},
@@ -72,8 +72,8 @@ func TestInterface(t *testing.T) {
 			},
 			Want: &interfaces.Classification{
 				URL: "https://my.internal.domain.com",
-				Decision: interfaces.ClassificationDecision{
-					State:  url.Valid,
+				Decision: classify.ClassificationDecision{
+					State:  classify.Valid,
 					Reason: "internal_domain_and_subdomain",
 				},
 			},
@@ -101,8 +101,8 @@ func TestInterface(t *testing.T) {
 				URL:         "http://*.stripe.com",
 				RecipeName:  "Stripe",
 				RecipeMatch: true,
-				Decision: interfaces.ClassificationDecision{
-					State:  url.Potential,
+				Decision: classify.ClassificationDecision{
+					State:  classify.Potential,
 					Reason: "recipe_match_with_wildcard",
 				},
 			},
@@ -130,8 +130,8 @@ func TestInterface(t *testing.T) {
 				URL:         "https://googleapis.com/auth/spreadsheets",
 				RecipeName:  "Google Spreadsheets",
 				RecipeMatch: true,
-				Decision: interfaces.ClassificationDecision{
-					State:  url.Valid,
+				Decision: classify.ClassificationDecision{
+					State:  classify.Valid,
 					Reason: "recipe_match",
 				},
 			},
@@ -157,8 +157,8 @@ func TestInterface(t *testing.T) {
 			},
 			Want: &interfaces.Classification{
 				URL: "https://example.id",
-				Decision: interfaces.ClassificationDecision{
-					State:  url.Invalid,
+				Decision: classify.ClassificationDecision{
+					State:  classify.Invalid,
 					Reason: "tld_error",
 				},
 			},
@@ -184,8 +184,8 @@ func TestInterface(t *testing.T) {
 			},
 			Want: &interfaces.Classification{
 				URL: "https://github.com",
-				Decision: interfaces.ClassificationDecision{
-					State:  url.Invalid,
+				Decision: classify.ClassificationDecision{
+					State:  classify.Invalid,
 					Reason: "excluded_domains_error",
 				},
 			},

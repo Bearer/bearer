@@ -1,0 +1,14 @@
+{
+  "metadata": { "version": "1.0" },
+  "id": 83,
+  "data_type_uuid": "84eb0f89-05f7-47a3-a8fb-67cc40e603c6",
+  "exclude_regexp": null,
+  "exclude_types": ["boolean"],
+  "friendly_name": "Mac address",
+  "health_context_data_type_uuid": null,
+  "include_regexp": "\\b(mac\\s?addr(ess)?)\\b",
+  "include_types": ["string"],
+  "match_column": true,
+  "match_object": false,
+  "object_type": ["known", "unknown_extended"]
+}
