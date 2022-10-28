@@ -59,6 +59,12 @@ var (
 		Value:      800 * 1000 * 1000, // 800 MB
 		Usage:      "if memory needed to scan a file surpasses this limit, skip the file",
 	}
+	ExistingWorkerFlag = Flag{
+		Name:       "existing-worker",
+		ConfigName: "worker.existing-worker",
+		Value:      "",
+		Usage:      "URL of an existing worker",
+	}
 )
 
 type WorkerFlagGroup struct {
@@ -71,6 +77,7 @@ type WorkerFlagGroup struct {
 	FileSizeMaximum           *Flag
 	FilesToBatch              *Flag
 	MemoryMaximum             *Flag
+	ExistingWorker            *Flag
 }
 
 // GlobalOptions defines flags and other configuration parameters for all the subcommands
@@ -84,6 +91,7 @@ type WorkerOptions struct {
 	FileSizeMaximum           int           `json:"file_size_maximum"`
 	FilesToBatch              int           `json:"files_to_batch"`
 	MemoryMaximum             int           `json:"memory_maximum"`
+	ExistingWorker            string        `json:"existing_worker"`
 }
 
 func NewWorkerFlagGroup() *WorkerFlagGroup {
@@ -97,6 +105,7 @@ func NewWorkerFlagGroup() *WorkerFlagGroup {
 		FileSizeMaximum:           &FileSizeMaximumFlag,
 		FilesToBatch:              &FilesToBatchFlag,
 		MemoryMaximum:             &MemoryMaximumFlag,
+		ExistingWorker:            &ExistingWorkerFlag,
 	}
 }
 
@@ -115,6 +124,7 @@ func (f *WorkerFlagGroup) Flags() []*Flag {
 		f.FileSizeMaximum,
 		f.FilesToBatch,
 		f.MemoryMaximum,
+		f.ExistingWorker,
 	}
 }
 
@@ -129,5 +139,6 @@ func (f *WorkerFlagGroup) ToOptions() WorkerOptions {
 		FilesToBatch:              getInt(f.FilesToBatch),
 		FileSizeMaximum:           getInt(f.FileSizeMaximum),
 		MemoryMaximum:             getInt(f.MemoryMaximum),
+		ExistingWorker:            getString(f.ExistingWorker),
 	}
 }

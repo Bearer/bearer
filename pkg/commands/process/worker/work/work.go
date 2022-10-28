@@ -33,4 +33,3 @@ type File struct {
 
 var RouteStatus = "/status"
 var RouteProcess = "/process"
-var RouteCustomDetector = "/custom_detector"
