@@ -14,7 +14,7 @@ func Scan(rootDir string, FilesToScan []string, blamer blamer.Blamer, outputPath
 	file, err := os.OpenFile(outputPath, os.O_RDWR|os.O_TRUNC, 0666)
 
 	if err != nil {
-		return fmt.Errorf("fail opening ouput file %w", err)
+		return fmt.Errorf("fail opening output file %w", err)
 	}
 	defer file.Close()
 
