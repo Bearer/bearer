@@ -90,6 +90,6 @@ func standardizeOperationType(input string) (output string) {
 	return operations.TypeOther
 }
 
-func standardizeOperationPath(input string) (ouput string) {
+func standardizeOperationPath(input string) (output string) {
 	return regexpPathVariable.ReplaceAllString(input, "*")
 }
