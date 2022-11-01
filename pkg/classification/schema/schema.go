@@ -45,11 +45,9 @@ type DataTypeDetection struct {
 }
 
 func (classifier *Classifier) Classify(data DataTypeDetection) (*ClassifiedDatatype, error) {
-	dataTypeable := data.Value
-	normalizedObjectName := normalize_key.Normalize(dataTypeable.GetName())
-	objectProperties := dataTypeable.GetProperties()
+	normalizedObjectName := normalize_key.Normalize(data.Value.GetName())
 	classifiedDataType := &ClassifiedDatatype{
-		DataTypable:    dataTypeable,
+		DataTypable:    data.Value,
 		Classification: Classification{Name: normalizedObjectName},
 	}
 
@@ -78,109 +76,121 @@ func (classifier *Classifier) Classify(data DataTypeDetection) (*ClassifiedDatat
 		// schema object did not pass initial checks
 		// mark all first level children as invalid
 
-		// todo: handle children that are themselves schema objects
+		objectProperties := classifiedDataType.DataTypable.GetProperties()
 		for _, property := range objectProperties {
+			// todo: handle children that are themselves schema objects
 			objectProperties[property.GetName()] = classifyAsInvalid(property)
 		}
 
+		classifiedDataType.DataTypable.SetProperties(objectProperties)
 		return classifiedDataType, nil
 	}
 
-	var isJSDetection = data.DetectorType == detectors.DetectorJavascript || data.DetectorType == detectors.DetectorTypescript
-
 	matchedKnownPersonObject := classifier.matchKnownPersonObjectPatterns(normalizedObjectName, false)
 	if matchedKnownPersonObject != nil {
-		// add data type to object
-		classifiedDataType.Classification.DataType = matchedKnownPersonObject.DataType
+		return classifier.classifyKnownObject(
+			classifiedDataType,
+			matchedKnownPersonObject,
+			data)
+	}
 
-		hasKnownObjectProperties := false
-		hasKnownDBIdentifierProperties := false
+	return classifiedDataType, nil
+}
 
-		// todo: handle children that are themselves schema objects
-		for _, property := range objectProperties {
-			normalizedPropertyName := normalize_key.Normalize(property.GetName())
+func (classifier *Classifier) classifyKnownObject(classifiedDataType *ClassifiedDatatype, matchedKnownPersonObject *db.KnownPersonObjectPattern, data DataTypeDetection) (*ClassifiedDatatype, error) {
+	isJSDetection := data.DetectorType == detectors.DetectorJavascript || data.DetectorType == detectors.DetectorTypescript
+	objectProperties := classifiedDataType.DataTypable.GetProperties()
 
-			if isJSDetection && classify.PropertyStopWordDetected(normalizedPropertyName) {
-				objectProperties[property.GetName()] = ClassifiedDatatype{
-					DataTypable: property,
-					Classification: Classification{
-						Name: normalizedPropertyName,
-						Decision: classify.ClassificationDecision{
-							State:  classify.Invalid,
-							Reason: "stop_word",
-						},
-					},
-				}
+	// add data type to object
+	classifiedDataType.Classification.DataType = matchedKnownPersonObject.DataType
 
-				continue
-			}
+	hasKnownObjectProperties := false
+	hasKnownDBIdentifierProperties := false
 
-			matchedKnownObject := classifier.matchKnownObjectPatterns(normalizedPropertyName, property.GetType())
-			if matchedKnownObject != nil {
-				hasKnownObjectProperties = true
-				objectProperties[property.GetName()] = ClassifiedDatatype{
-					DataTypable: property,
-					Classification: Classification{
-						Name:     normalizedPropertyName,
-						DataType: matchedKnownObject.DataType, // todo: check for health context
-						Decision: classify.ClassificationDecision{
-							State:  classify.Valid,
-							Reason: "known_classification_pattern",
-						},
-					},
-				}
+	// todo: handle children that are themselves schema objects
+	for _, property := range objectProperties {
+		normalizedPropertyName := normalize_key.Normalize(property.GetName())
 
-				continue
-			}
-
-			matchedKnownIdentifier := classifier.matchKnownPersonObjectPatterns(normalizedPropertyName, true)
-			if matchedKnownIdentifier != nil {
-				hasKnownDBIdentifierProperties = true
-				objectProperties[property.GetName()] = ClassifiedDatatype{
-					DataTypable: property,
-					Classification: Classification{
-						Name:     normalizedPropertyName,
-						DataType: matchedKnownIdentifier.DataType, // always "Unique Identifier"
-						Decision: classify.ClassificationDecision{
-							State:  classify.Valid,
-							Reason: "known_database_identifier",
-						},
-					},
-				}
-
-				continue
-			}
-
+		if isJSDetection && classify.PropertyStopWordDetected(normalizedPropertyName) {
 			objectProperties[property.GetName()] = ClassifiedDatatype{
 				DataTypable: property,
 				Classification: Classification{
 					Name: normalizedPropertyName,
 					Decision: classify.ClassificationDecision{
 						State:  classify.Invalid,
-						Reason: "invalid_property",
+						Reason: "stop_word",
 					},
 				},
 			}
+
+			continue
 		}
 
-		if hasKnownObjectProperties || hasKnownDBIdentifierProperties {
-			classifiedDataType.Classification.Decision = classify.ClassificationDecision{
-				State:  classify.Valid,
-				Reason: "valid_object_with_valid_properties",
+		matchedKnownObject := classifier.matchKnownObjectPatterns(normalizedPropertyName, property.GetType())
+		if matchedKnownObject != nil {
+			hasKnownObjectProperties = true
+			objectProperties[property.GetName()] = ClassifiedDatatype{
+				DataTypable: property,
+				Classification: Classification{
+					Name:     normalizedPropertyName,
+					DataType: matchedKnownObject.DataType, // todo: check for health context
+					Decision: classify.ClassificationDecision{
+						State:  classify.Valid,
+						Reason: "known_classification_pattern",
+					},
+				},
 			}
-			return classifiedDataType, nil
+
+			continue
 		}
 
-		objectState := classify.Invalid
-		if classify.IsDatabase(data.DetectorType) {
-			objectState = classify.Potential
+		matchedKnownIdentifier := classifier.matchKnownPersonObjectPatterns(normalizedPropertyName, true)
+		if matchedKnownIdentifier != nil {
+			hasKnownDBIdentifierProperties = true
+			objectProperties[property.GetName()] = ClassifiedDatatype{
+				DataTypable: property,
+				Classification: Classification{
+					Name:     normalizedPropertyName,
+					DataType: matchedKnownIdentifier.DataType, // always "Unique Identifier"
+					Decision: classify.ClassificationDecision{
+						State:  classify.Valid,
+						Reason: "known_database_identifier",
+					},
+				},
+			}
+
+			continue
 		}
+
+		objectProperties[property.GetName()] = ClassifiedDatatype{
+			DataTypable: property,
+			Classification: Classification{
+				Name: normalizedPropertyName,
+				Decision: classify.ClassificationDecision{
+					State:  classify.Invalid,
+					Reason: "invalid_property",
+				},
+			},
+		}
+	}
+
+	classifiedDataType.DataTypable.SetProperties(objectProperties)
+
+	if hasKnownObjectProperties || hasKnownDBIdentifierProperties {
 		classifiedDataType.Classification.Decision = classify.ClassificationDecision{
-			State:  objectState,
-			Reason: "valid_object_with_invalid_properties",
+			State:  classify.Valid,
+			Reason: "valid_object_with_valid_properties",
 		}
-
 		return classifiedDataType, nil
+	}
+
+	objectState := classify.Invalid
+	if classify.IsDatabase(data.DetectorType) {
+		objectState = classify.Potential
+	}
+	classifiedDataType.Classification.Decision = classify.ClassificationDecision{
+		State:  objectState,
+		Reason: "valid_object_with_invalid_properties",
 	}
 
 	return classifiedDataType, nil
