@@ -2,7 +2,6 @@
 	{
 		"type": "custom",
 		"detector_type": "detect_sql_create_table",
-		"commit_sha": "",
 		"source": {
 			"filename": "structure.sql",
 			"language": "SQL",
@@ -23,7 +22,6 @@
 	{
 		"type": "custom",
 		"detector_type": "detect_sql_create_table",
-		"commit_sha": "",
 		"source": {
 			"filename": "structure.sql",
 			"language": "SQL",
@@ -44,7 +42,6 @@
 	{
 		"type": "custom",
 		"detector_type": "detect_sql_create_table",
-		"commit_sha": "",
 		"source": {
 			"filename": "structure.sql",
 			"language": "SQL",
@@ -65,7 +62,6 @@
 	{
 		"type": "custom",
 		"detector_type": "detect_sql_create_table",
-		"commit_sha": "",
 		"source": {
 			"filename": "structure.sql",
 			"language": "SQL",
@@ -86,7 +82,6 @@
 	{
 		"type": "custom",
 		"detector_type": "detect_sql_create_table",
-		"commit_sha": "",
 		"source": {
 			"filename": "structure.sql",
 			"language": "SQL",
@@ -107,7 +102,6 @@
 	{
 		"type": "custom",
 		"detector_type": "detect_sql_create_table",
-		"commit_sha": "",
 		"source": {
 			"filename": "structure.sql",
 			"language": "SQL",
@@ -128,7 +122,6 @@
 	{
 		"type": "custom",
 		"detector_type": "detect_sql_create_table",
-		"commit_sha": "",
 		"source": {
 			"filename": "structure.sql",
 			"language": "SQL",
@@ -149,7 +142,6 @@
 	{
 		"type": "custom",
 		"detector_type": "detect_sql_create_table",
-		"commit_sha": "",
 		"source": {
 			"filename": "structure.sql",
 			"language": "SQL",
@@ -170,7 +162,6 @@
 	{
 		"type": "custom",
 		"detector_type": "detect_sql_create_table",
-		"commit_sha": "",
 		"source": {
 			"filename": "structure.sql",
 			"language": "SQL",
@@ -191,7 +182,6 @@
 	{
 		"type": "custom",
 		"detector_type": "detect_sql_create_table",
-		"commit_sha": "",
 		"source": {
 			"filename": "structure.sql",
 			"language": "SQL",
@@ -212,7 +202,6 @@
 	{
 		"type": "custom",
 		"detector_type": "detect_sql_create_table",
-		"commit_sha": "",
 		"source": {
 			"filename": "structure.sql",
 			"language": "SQL",
@@ -233,7 +222,6 @@
 	{
 		"type": "custom",
 		"detector_type": "detect_sql_create_table",
-		"commit_sha": "",
 		"source": {
 			"filename": "structure.sql",
 			"language": "SQL",

@@ -2,7 +2,6 @@
  {
   "type": "custom",
   "detector_type": "sql_create_trigger_detector",
-  "commit_sha": "",
   "source": {
    "filename": "trigger.sql",
    "language": "SQL",
@@ -23,7 +22,6 @@
  {
   "type": "custom",
   "detector_type": "sql_create_trigger_detector",
-  "commit_sha": "",
   "source": {
    "filename": "trigger.sql",
    "language": "SQL",
