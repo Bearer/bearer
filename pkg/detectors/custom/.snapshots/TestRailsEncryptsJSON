@@ -2,7 +2,6 @@
 	{
 		"type": "custom",
 		"detector_type": "detect_rails_encrypts",
-		"commit_sha": "",
 		"source": {
 			"filename": "class.rb",
 			"language": "Ruby",
@@ -23,7 +22,6 @@
 	{
 		"type": "custom",
 		"detector_type": "detect_rails_encrypts",
-		"commit_sha": "",
 		"source": {
 			"filename": "class.rb",
 			"language": "Ruby",

@@ -2,7 +2,6 @@
 	{
 		"type": "custom",
 		"detector_type": "detect_rails_logger",
-		"commit_sha": "",
 		"source": {
 			"filename": "log.rb",
 			"language": "Ruby",
@@ -23,7 +22,6 @@
 	{
 		"type": "custom",
 		"detector_type": "detect_rails_logger",
-		"commit_sha": "",
 		"source": {
 			"filename": "log.rb",
 			"language": "Ruby",
@@ -44,7 +42,6 @@
 	{
 		"type": "custom",
 		"detector_type": "detect_ruby_logger",
-		"commit_sha": "",
 		"source": {
 			"filename": "",
 			"language": "",
@@ -65,7 +62,6 @@
 	{
 		"type": "custom",
 		"detector_type": "detect_ruby_logger",
-		"commit_sha": "",
 		"source": {
 			"filename": "",
 			"language": "",
@@ -86,7 +82,6 @@
 	{
 		"type": "custom",
 		"detector_type": "detect_ruby_logger",
-		"commit_sha": "",
 		"source": {
 			"filename": "",
 			"language": "",
@@ -107,7 +102,6 @@
 	{
 		"type": "custom",
 		"detector_type": "detect_ruby_logger",
-		"commit_sha": "",
 		"source": {
 			"filename": "",
 			"language": "",
@@ -128,7 +122,6 @@
 	{
 		"type": "custom",
 		"detector_type": "detect_ruby_logger",
-		"commit_sha": "",
 		"source": {
 			"filename": "",
 			"language": "",
@@ -149,7 +142,6 @@
 	{
 		"type": "custom",
 		"detector_type": "detect_ruby_logger",
-		"commit_sha": "",
 		"source": {
 			"filename": "",
 			"language": "",
@@ -170,7 +162,6 @@
 	{
 		"type": "custom",
 		"detector_type": "detect_ruby_logger",
-		"commit_sha": "",
 		"source": {
 			"filename": "",
 			"language": "",
@@ -191,7 +182,6 @@
 	{
 		"type": "custom",
 		"detector_type": "detect_ruby_logger",
-		"commit_sha": "",
 		"source": {
 			"filename": "",
 			"language": "",
@@ -212,7 +202,6 @@
 	{
 		"type": "custom",
 		"detector_type": "detect_ruby_logger",
-		"commit_sha": "",
 		"source": {
 			"filename": "log.rb",
 			"language": "Ruby",
@@ -233,7 +222,6 @@
 	{
 		"type": "custom",
 		"detector_type": "detect_ruby_logger",
-		"commit_sha": "",
 		"source": {
 			"filename": "log.rb",
 			"language": "Ruby",
@@ -254,7 +242,6 @@
 	{
 		"type": "custom",
 		"detector_type": "detect_ruby_logger",
-		"commit_sha": "",
 		"source": {
 			"filename": "",
 			"language": "",
@@ -275,7 +262,6 @@
 	{
 		"type": "custom",
 		"detector_type": "detect_ruby_logger",
-		"commit_sha": "",
 		"source": {
 			"filename": "",
 			"language": "",
@@ -296,7 +282,6 @@
 	{
 		"type": "custom",
 		"detector_type": "detect_ruby_logger",
-		"commit_sha": "",
 		"source": {
 			"filename": "",
 			"language": "",
@@ -317,7 +302,6 @@
 	{
 		"type": "custom",
 		"detector_type": "detect_ruby_logger",
-		"commit_sha": "",
 		"source": {
 			"filename": "",
 			"language": "",
@@ -338,7 +322,6 @@
 	{
 		"type": "custom",
 		"detector_type": "detect_ruby_logger",
-		"commit_sha": "",
 		"source": {
 			"filename": "",
 			"language": "",
@@ -359,7 +342,6 @@
 	{
 		"type": "custom",
 		"detector_type": "detect_ruby_logger",
-		"commit_sha": "",
 		"source": {
 			"filename": "",
 			"language": "",

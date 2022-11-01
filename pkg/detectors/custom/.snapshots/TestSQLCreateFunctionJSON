@@ -2,7 +2,6 @@
 	{
 		"type": "custom",
 		"detector_type": "create_sql_function_detector",
-		"commit_sha": "",
 		"source": {
 			"filename": "structure.sql",
 			"language": "PLpgSQL",
@@ -23,7 +22,6 @@
 	{
 		"type": "custom",
 		"detector_type": "create_sql_function_detector",
-		"commit_sha": "",
 		"source": {
 			"filename": "structure.sql",
 			"language": "PLpgSQL",
@@ -44,7 +42,6 @@
 	{
 		"type": "custom",
 		"detector_type": "create_sql_function_detector",
-		"commit_sha": "",
 		"source": {
 			"filename": "structure.sql",
 			"language": "PLpgSQL",
@@ -65,7 +62,6 @@
 	{
 		"type": "custom",
 		"detector_type": "create_sql_function_detector",
-		"commit_sha": "",
 		"source": {
 			"filename": "structure.sql",
 			"language": "PLpgSQL",
@@ -86,7 +82,6 @@
 	{
 		"type": "custom",
 		"detector_type": "create_sql_function_detector",
-		"commit_sha": "",
 		"source": {
 			"filename": "structure.sql",
 			"language": "PLpgSQL",
@@ -107,7 +102,6 @@
 	{
 		"type": "custom",
 		"detector_type": "create_sql_function_detector",
-		"commit_sha": "",
 		"source": {
 			"filename": "structure.sql",
 			"language": "PLpgSQL",

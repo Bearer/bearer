@@ -2,7 +2,6 @@
 	{
 		"type": "create_view",
 		"detector_type": "sql",
-		"commit_sha": "",
 		"source": {
 			"filename": "structure.sql",
 			"language": "SQL",
@@ -123,7 +122,6 @@
 	{
 		"type": "create_view",
 		"detector_type": "sql",
-		"commit_sha": "",
 		"source": {
 			"filename": "structure.sql",
 			"language": "SQL",
@@ -244,7 +242,6 @@
 	{
 		"type": "create_view",
 		"detector_type": "sql",
-		"commit_sha": "",
 		"source": {
 			"filename": "structure.sql",
 			"language": "SQL",
@@ -418,7 +415,6 @@
 	{
 		"type": "create_view",
 		"detector_type": "sql",
-		"commit_sha": "",
 		"source": {
 			"filename": "structure.sql",
 			"language": "SQL",
@@ -539,7 +535,6 @@
 	{
 		"type": "create_view",
 		"detector_type": "sql",
-		"commit_sha": "",
 		"source": {
 			"filename": "structure.sql",
 			"language": "SQL",
@@ -727,7 +722,6 @@
 	{
 		"type": "create_view",
 		"detector_type": "sql",
-		"commit_sha": "",
 		"source": {
 			"filename": "structure.sql",
 			"language": "SQL",
