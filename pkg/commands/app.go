@@ -2,8 +2,6 @@ package commands
 
 import (
 	"fmt"
-	"io"
-	"os"
 
 	"github.com/bearer/curio/pkg/commands/artifact"
 	"github.com/bearer/curio/pkg/flag"
@@ -14,15 +12,6 @@ import (
 // VersionInfo holds the curio version
 type VersionInfo struct {
 	Version string `json:",omitempty"`
-}
-
-var (
-	outputWriter io.Writer = os.Stdout
-)
-
-// SetOut overrides the destination for messages
-func SetOut(out io.Writer) {
-	outputWriter = out
 }
 
 // NewApp is the factory method to return Curio CLI
@@ -89,7 +78,7 @@ func NewConfigCommand() *cobra.Command {
 			if err := configFlags.Bind(cmd); err != nil {
 				return xerrors.Errorf("flag bind error: %w", err)
 			}
-			options, err := configFlags.ToOptions(args, outputWriter)
+			options, err := configFlags.ToOptions(args, cmd.OutOrStdout())
 			if err != nil {
 				return xerrors.Errorf("flag error: %w", err)
 			}

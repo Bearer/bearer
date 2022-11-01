@@ -19,7 +19,7 @@ func NewInitCommand() *cobra.Command {
 				return fmt.Errorf("flag bind error: %w", err)
 			}
 
-			options, err := scanFlags.ToOptions(args, outputWriter)
+			options, err := scanFlags.ToOptions(args, cmd.OutOrStdout())
 			if err != nil {
 				return xerrors.Errorf("flag error: %w", err)
 			}

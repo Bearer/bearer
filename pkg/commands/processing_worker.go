@@ -24,7 +24,7 @@ func NewProcessingWorkerCommand() *cobra.Command {
 				return fmt.Errorf("flag bind error: %w", err)
 			}
 
-			generalOptions, err := flags.ToOptions(args, outputWriter)
+			generalOptions, err := flags.ToOptions(args, cmd.OutOrStdout())
 			if err != nil {
 				return fmt.Errorf("options binding error: %w", err)
 			}
