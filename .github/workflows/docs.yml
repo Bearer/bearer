@@ -17,11 +17,13 @@ concurrency:
 jobs:
   # Build job
   build:
+    defaults:
+      run:
+        working-directory: docs
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      - run: "cd docs"
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
