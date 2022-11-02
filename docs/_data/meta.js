@@ -1,3 +1,3 @@
 module.exports = {
-  sourcePath: "https://github.com/bearer/curio/docs",
+  sourcePath: "https://github.com/bearer/curio",
 };
