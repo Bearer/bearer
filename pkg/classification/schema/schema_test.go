@@ -14,11 +14,43 @@ import (
 )
 
 func TestSchemaObjectClassification(t *testing.T) {
+	knownObjectDataType := db.DataType{
+		DataCategoryName: "Unique Identifier",
+		DefaultCategory:  "Identification",
+		Id:               86,
+		UUID:             "12d44ae0-1df7-4faf-9fb1-b46cc4b4dce9",
+	}
 	tests := []struct {
 		Name  string
 		Input schema.DataTypeDetection
 		Want  schema.Classification
 	}{
+		{
+			Name: "from vendors folder",
+			Input: schema.DataTypeDetection{
+				Filename:     "vendor/vendor.rb",
+				DetectorType: detectors.DetectorRuby,
+				Value: &datatype.DataType{
+					Name: "User",
+					UUID: "1",
+					Type: reportschema.SimpleTypeObject,
+					Properties: map[string]datatype.DataTypable{
+						"sku_name": &datatype.DataType{
+							Name: "sku_name",
+							Type: reportschema.SimpleTypeString,
+							UUID: "3",
+						},
+					},
+				},
+			},
+			Want: schema.Classification{
+				Name: "user",
+				Decision: classify.ClassificationDecision{
+					State:  classify.Invalid,
+					Reason: "included_in_vendor_folder",
+				},
+			},
+		},
 		{
 			Name: "known object with no valid properties",
 			Input: schema.DataTypeDetection{
@@ -78,7 +110,8 @@ func TestSchemaObjectClassification(t *testing.T) {
 				},
 			},
 			Want: schema.Classification{
-				Name: "user",
+				Name:     "user",
+				DataType: knownObjectDataType,
 				Decision: classify.ClassificationDecision{
 					State:  classify.Invalid,
 					Reason: "valid_object_with_invalid_properties",
@@ -109,7 +142,8 @@ func TestSchemaObjectClassification(t *testing.T) {
 				},
 			},
 			Want: schema.Classification{
-				Name: "user",
+				Name:     "user",
+				DataType: knownObjectDataType,
 				Decision: classify.ClassificationDecision{
 					State:  classify.Valid,
 					Reason: "valid_object_with_valid_properties",
@@ -145,7 +179,8 @@ func TestSchemaObjectClassification(t *testing.T) {
 				},
 			},
 			Want: schema.Classification{
-				Name: "seller fiscal information",
+				Name:     "seller fiscal information",
+				DataType: knownObjectDataType,
 				Decision: classify.ClassificationDecision{
 					State:  classify.Valid,
 					Reason: "valid_object_with_valid_properties",
@@ -186,7 +221,8 @@ func TestSchemaObjectClassification(t *testing.T) {
 				},
 			},
 			Want: schema.Classification{
-				Name: "seller fiscal information",
+				Name:     "seller fiscal information",
+				DataType: knownObjectDataType,
 				Decision: classify.ClassificationDecision{
 					State:  classify.Invalid,
 					Reason: "valid_object_with_invalid_properties",
@@ -212,7 +248,8 @@ func TestSchemaObjectClassification(t *testing.T) {
 				},
 			},
 			Want: schema.Classification{
-				Name: "applicant",
+				Name:     "applicant",
+				DataType: knownObjectDataType,
 				Decision: classify.ClassificationDecision{
 					State:  classify.Valid,
 					Reason: "valid_object_with_valid_properties",
@@ -238,7 +275,8 @@ func TestSchemaObjectClassification(t *testing.T) {
 				},
 			},
 			Want: schema.Classification{
-				Name: "bank accounts",
+				Name:     "bank accounts",
+				DataType: knownObjectDataType,
 				Decision: classify.ClassificationDecision{
 					State:  classify.Valid,
 					Reason: "valid_object_with_valid_properties",
@@ -264,7 +302,8 @@ func TestSchemaObjectClassification(t *testing.T) {
 				},
 			},
 			Want: schema.Classification{
-				Name: "bank accounts",
+				Name:     "bank accounts",
+				DataType: knownObjectDataType,
 				Decision: classify.ClassificationDecision{
 					State:  classify.Invalid,
 					Reason: "valid_object_with_invalid_properties",
@@ -290,7 +329,8 @@ func TestSchemaObjectClassification(t *testing.T) {
 				},
 			},
 			Want: schema.Classification{
-				Name: "patients",
+				Name:     "patients",
+				DataType: knownObjectDataType,
 				Decision: classify.ClassificationDecision{
 					State:  classify.Invalid,
 					Reason: "valid_object_with_invalid_properties",
@@ -316,7 +356,8 @@ func TestSchemaObjectClassification(t *testing.T) {
 				},
 			},
 			Want: schema.Classification{
-				Name: "accounts",
+				Name:     "accounts",
+				DataType: knownObjectDataType,
 				Decision: classify.ClassificationDecision{
 					State:  classify.Valid,
 					Reason: "valid_object_with_valid_properties",
@@ -342,7 +383,8 @@ func TestSchemaObjectClassification(t *testing.T) {
 				},
 			},
 			Want: schema.Classification{
-				Name: "accounts",
+				Name:     "accounts",
+				DataType: knownObjectDataType,
 				Decision: classify.ClassificationDecision{
 					State:  classify.Invalid,
 					Reason: "valid_object_with_invalid_properties",
@@ -368,7 +410,8 @@ func TestSchemaObjectClassification(t *testing.T) {
 				},
 			},
 			Want: schema.Classification{
-				Name: "accounts",
+				Name:     "accounts",
+				DataType: knownObjectDataType,
 				Decision: classify.ClassificationDecision{
 					State:  classify.Invalid,
 					Reason: "valid_object_with_invalid_properties",
@@ -394,7 +437,8 @@ func TestSchemaObjectClassification(t *testing.T) {
 				},
 			},
 			Want: schema.Classification{
-				Name: "accounts",
+				Name:     "accounts",
+				DataType: knownObjectDataType,
 				Decision: classify.ClassificationDecision{
 					State:  classify.Potential,
 					Reason: "valid_object_with_invalid_properties",

@@ -7,7 +7,6 @@ import (
 	"regexp"
 	"strings"
 
-	"github.com/google/uuid"
 	"github.com/tangzero/inflector"
 )
 
@@ -49,15 +48,16 @@ var RecipeTypeDataStore = RecipeType("data_store")
 var RecipeTypeService = RecipeType("service")
 
 type DataType struct {
-	DataCategoryName string    `json:"data_category_name"`
-	DefaultCategory  string    `json:"default_category"`
-	Id               int       `json:"id"`
-	UUID             uuid.UUID `json:"uuid"`
+	DataCategoryName string `json:"data_category_name"`
+	DefaultCategory  string `json:"default_category"`
+	Id               int    `json:"id"`
+	UUID             string `json:"uuid"`
 }
 
 type DataTypeClassificationPattern struct {
 	Id                        int                 `json:"id"`
-	DataTypeUUID              *uuid.UUID          `json:"data_type_uuid,omitempty"`
+	DataTypeUUID              string              `json:"data_type_uuid,omitempty"`
+	DataType                  DataType            `json:"data_type"`
 	IncludeRegexp             string              `json:"include_regexp"`
 	IncludeRegexpMatcher      *regexp.Regexp      `json:"include_regexp_matcher"`
 	ExcludeRegexp             string              `json:"exclude_regexp,omitempty"`
@@ -66,6 +66,7 @@ type DataTypeClassificationPattern struct {
 	ExcludeTypesMapping       map[string]struct{} `json:"exclude_types_mapping"`
 	FriendlyName              string              `json:"friendly_name"`
 	HealthContextDataTypeUUID string              `json:"health_context_data_type_uuid,omitempty"`
+	HealthContextDataType     DataType            `json:"health_context_data_type"`
 	MatchColumn               bool                `json:"match_column"`
 	MatchObject               bool                `json:"match_object"`
 	ObjectType                []string            `json:"object_type"`
@@ -74,6 +75,7 @@ type DataTypeClassificationPattern struct {
 
 type KnownPersonObjectPattern struct {
 	Id                      int            `json:"id"`
+	DataType                DataType       `json:"data_type"`
 	IncludeRegexp           string         `json:"include_regexp"`
 	IncludeRegexpMatcher    *regexp.Regexp `json:"include_regexp_matcher"`
 	ExcludeRegexp           string         `json:"exclude_regexp,omitempty"`
@@ -84,11 +86,12 @@ type KnownPersonObjectPattern struct {
 }
 
 func Default() DefaultDB {
+	dataTypes := defaultDataTypes()
 	return DefaultDB{
 		Recipes:                        defaultRecipes(),
-		DataTypes:                      defaultDataTypes(),
-		DataTypeClassificationPatterns: defaultDataTypeClassificationPatterns(),
-		KnownPersonObjectPatterns:      defaultKnownPersonObjectPatterns(),
+		DataTypes:                      dataTypes,
+		DataTypeClassificationPatterns: defaultDataTypeClassificationPatterns(dataTypes),
+		KnownPersonObjectPatterns:      defaultKnownPersonObjectPatterns(dataTypes),
 	}
 }
 
@@ -146,7 +149,7 @@ func defaultDataTypes() []DataType {
 	return dataTypes
 }
 
-func defaultDataTypeClassificationPatterns() []DataTypeClassificationPattern {
+func defaultDataTypeClassificationPatterns(dataTypes []DataType) []DataTypeClassificationPattern {
 	dataTypeClassificationPatterns := []DataTypeClassificationPattern{}
 
 	files, err := dataTypeClassificationPatternsDir.ReadDir("data_type_classification_patterns")
@@ -167,6 +170,20 @@ func defaultDataTypeClassificationPatterns() []DataTypeClassificationPattern {
 			handleError(err)
 		}
 
+		// add data type and health context data type
+		for _, dataType := range dataTypes {
+			if dataType.UUID == dataTypeClassificationPattern.DataTypeUUID {
+				dataTypeClassificationPattern.DataType = dataType
+				break
+			}
+		}
+
+		for _, dataType := range dataTypes {
+			if dataType.UUID == dataTypeClassificationPattern.HealthContextDataTypeUUID {
+				dataTypeClassificationPattern.HealthContextDataType = dataType
+				break
+			}
+		}
 		// compile regexp matchers
 		dataTypeClassificationPattern.IncludeRegexpMatcher, err = regexp.Compile(dataTypeClassificationPattern.IncludeRegexp)
 		if err != nil {
@@ -195,9 +212,20 @@ func defaultDataTypeClassificationPatterns() []DataTypeClassificationPattern {
 	return dataTypeClassificationPatterns
 }
 
-func defaultKnownPersonObjectPatterns() []KnownPersonObjectPattern {
+func defaultKnownPersonObjectPatterns(dataTypes []DataType) []KnownPersonObjectPattern {
 	knownPersonObjectPatterns := []KnownPersonObjectPattern{}
 
+	// "Identification" > "Unique Identifier" data type
+	// Applies to all known person object patterns e.g.
+	// "profile", "user", "supplier", etc
+	uniqueIdentifierDataTypeUUID := "12d44ae0-1df7-4faf-9fb1-b46cc4b4dce9"
+	var uniqueIdentifierDataType DataType
+	for _, dataType := range dataTypes {
+		if dataType.UUID == uniqueIdentifierDataTypeUUID {
+			uniqueIdentifierDataType = dataType
+			break
+		}
+	}
 	files, err := knownPersonObjectPatternsDir.ReadDir("known_person_object_patterns")
 	if err != nil {
 		handleError(err)
@@ -215,6 +243,9 @@ func defaultKnownPersonObjectPatterns() []KnownPersonObjectPattern {
 		if err != nil {
 			handleError(err)
 		}
+
+		// add data type UUID and data type
+		knownPersonObjectPattern.DataType = uniqueIdentifierDataType
 
 		// compile regexp matchers
 		knownPersonObjectPattern.IncludeRegexpMatcher, err = regexp.Compile(knownPersonObjectPattern.IncludeRegexp)
