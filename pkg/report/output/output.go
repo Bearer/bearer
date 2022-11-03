@@ -13,17 +13,20 @@ import (
 	"github.com/wlredeye/jsonlines"
 )
 
-func ReportJSON(report types.Report, output *zerolog.Event) error {
+func ReportJSON(report types.Report, output *zerolog.Event, options flag.Options) error {
 	var ouputDetections any
 	var err error
 
-	if report.Type == flag.ReportDetectors {
+	if options.Report == flag.ReportDetectors {
 		ouputDetections, err = GetDetectorsOutput(report)
 		if err != nil {
 			return err
 		}
-	} else if report.Type == flag.ReportDataFlow {
+	} else if options.Report == flag.ReportDataFlow {
 		ouputDetections, err = GetDataFlowOutput(report)
+		if err != nil {
+			return err
+		}
 	}
 
 	jsonBytes, err := json.MarshalIndent(&ouputDetections, "", "\t")

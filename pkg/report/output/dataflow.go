@@ -13,7 +13,7 @@ import (
 
 type DataFlow struct {
 	Datatypes []Datatype `json:"data_types"`
-	Risks     []Datatype `json:"data_type"`
+	Risks     []Datatype `json:"risks"`
 }
 
 type Datatype struct {
@@ -32,6 +32,8 @@ type Location struct {
 	LineNumber int    `json:"line_number"`
 }
 
+var dataflowDetections []detections.DetectionType = []detections.DetectionType{detections.TypeSchema, detections.TypeCustom, detections.TypeSchemaClassified}
+
 func GetDataFlowOutput(report types.Report) (*DataFlow, error) {
 	holder := dataFlowHolder{
 		datatypes: make(map[string]*datatypeHolder),
@@ -49,7 +51,13 @@ func GetDataFlowOutput(report types.Report) (*DataFlow, error) {
 		}
 
 		detectionType, ok := detection["type"].(string)
-		isDataflow := detections.DetectionType(detectionType) == detections.TypeSchema
+
+		isDataflow := false
+		for _, allowedDetection := range dataflowDetections {
+			if detections.DetectionType(detectionType) == allowedDetection {
+				isDataflow = true
+			}
+		}
 
 		if !ok || !isDataflow {
 			continue
@@ -66,12 +74,9 @@ func GetDataFlowOutput(report types.Report) (*DataFlow, error) {
 			return nil, err
 		}
 
-		switch detections.DetectionType(castedDetection.Type) {
-		case detections.TypeSchema:
-			err := holder.addSchema(castedDetection)
-			if err != nil {
-				return nil, err
-			}
+		err = holder.addSchema(castedDetection)
+		if err != nil {
+			return nil, err
 		}
 	}
 
@@ -145,9 +150,6 @@ func (holder *dataFlowHolder) addSchema(detection detections.Detection) error {
 
 	if value.FieldName != "" {
 		holder.addDatatype(value.FieldName, string(detection.DetectorType), detection.Source.Filename, *detection.Source.LineNumber)
-	}
-	if value.ObjectName != "" {
-		holder.addDatatype(value.ObjectName, string(detection.DetectorType), detection.Source.Filename, *detection.Source.LineNumber)
 	}
 
 	return nil
