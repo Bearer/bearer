@@ -3,6 +3,8 @@ package maputil
 import (
 	"reflect"
 	"sort"
+
+	"golang.org/x/exp/constraints"
 )
 
 func SortedStringKeys(mapValue interface{}) []string {
@@ -16,4 +18,20 @@ func SortedStringKeys(mapValue interface{}) []string {
 	sort.Strings(keys)
 
 	return keys
+}
+
+func ToSortedSlice[mapKey constraints.Ordered, T any](input map[mapKey]T) []T {
+	keys := make([]mapKey, 0)
+	for key, _ := range input {
+		keys = append(keys, key)
+	}
+
+	sort.Slice(keys, func(i, j int) bool { return keys[i] < keys[j] })
+
+	data := make([]T, 0)
+	for _, key := range keys {
+		data = append(data, input[key])
+	}
+
+	return data
 }
