@@ -18,6 +18,10 @@ type ClassifiedDatatype struct {
 	Classification Classification `json:"classification"`
 }
 
+func (datatype ClassifiedDatatype) GetClassification() interface{} {
+	return datatype.Classification
+}
+
 type Classification struct {
 	Name     string                          `json:"name"`
 	DataType db.DataType                     `json:"data_type,omitempty"`

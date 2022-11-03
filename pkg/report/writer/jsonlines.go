@@ -3,7 +3,8 @@ package writer
 import (
 	"fmt"
 	"io"
-	"log"
+
+	"github.com/rs/zerolog/log"
 
 	classsification "github.com/bearer/curio/pkg/classification"
 	classsificationschema "github.com/bearer/curio/pkg/classification/schema"
@@ -89,9 +90,9 @@ func (report *JSONLines) AddDataType(detectionType detections.DetectionType, det
 	}
 
 	if detectionType == detections.TypeCustom {
-		datatype.ExportClassified(report, detections.TypeSchemaClassified, detectorType, idGenerator, false, values)
+		datatype.ExportClassified(report, detections.TypeSchemaClassified, detectorType, idGenerator, false, classifiedDatatypes)
 	} else {
-		datatype.ExportClassified(report, detections.TypeSchemaClassified, detectorType, idGenerator, true, values)
+		datatype.ExportClassified(report, detections.TypeSchemaClassified, detectorType, idGenerator, true, classifiedDatatypes)
 	}
 }
 

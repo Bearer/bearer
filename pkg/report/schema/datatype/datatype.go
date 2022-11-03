@@ -26,6 +26,10 @@ type DataType struct {
 	UUID       string
 }
 
+func (datatype *DataType) GetClassification() interface{} {
+	return nil
+}
+
 func (datatype *DataType) SetName(name string) {
 	datatype.Name = name
 }
@@ -76,6 +80,7 @@ func (datatype *DataType) DeleteProperty(name string) {
 
 type DataTypable interface {
 	DeleteProperty(name string)
+	GetClassification() interface{}
 	SetUUID(string)
 	GetUUID() string
 	GetIsHelper() bool
@@ -124,14 +129,17 @@ func dataTypeToSchema[D DataTypable](report detections.ReportDetection, detectio
 	selfName := dataType.GetName()
 
 	if shouldExport {
-		report.AddDetection(detectionType, detectorType, dataType.GetNode().Source(false), schema.Schema{
-			ObjectName:      parentName,
-			FieldName:       selfName,
-			ObjectUUID:      parentUUID,
-			FieldUUID:       selfUUID,
-			FieldType:       dataType.GetTextType(),
-			SimpleFieldType: dataType.GetType(),
-		})
+		report.AddDetection(detectionType, detectorType, dataType.GetNode().Source(false),
+			schema.Schema{
+				ObjectName:      parentName,
+				FieldName:       selfName,
+				ObjectUUID:      parentUUID,
+				FieldUUID:       selfUUID,
+				FieldType:       dataType.GetTextType(),
+				SimpleFieldType: dataType.GetType(),
+				Classification:  dataType.GetClassification(),
+			},
+		)
 	}
 
 	sortedProperties := SortStringMap(dataType.GetProperties())

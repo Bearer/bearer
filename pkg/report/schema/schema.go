@@ -17,12 +17,13 @@ const (
 )
 
 type Schema struct {
-	ObjectName      string `json:"object_name"`
-	ObjectUUID      string `json:"object_uuid"`
-	FieldName       string `json:"field_name"`
-	FieldUUID       string `json:"field_uuid"`
-	FieldType       string `json:"field_type"`
-	SimpleFieldType string `json:"field_type_simple"`
+	ObjectName      string      `json:"object_name"`
+	ObjectUUID      string      `json:"object_uuid"`
+	FieldName       string      `json:"field_name"`
+	FieldUUID       string      `json:"field_uuid"`
+	FieldType       string      `json:"field_type"`
+	SimpleFieldType string      `json:"field_type_simple"`
+	Classification  interface{} `json:"classification"`
 }
 
 type ReportSchema interface {
