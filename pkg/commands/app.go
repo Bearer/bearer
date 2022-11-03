@@ -68,6 +68,7 @@ func NewConfigCommand() *cobra.Command {
 		DisableDomainResolutionFlag: &flag.DisableDomainResolutionFlag,
 		DomainResolutionTimeoutFlag: &flag.DomainResolutionTimeoutFlag,
 		InternalDomainsFlag:         &flag.InternalDomainsFlag,
+		ContextFlag:                 &flag.ContextFlag,
 	}
 
 	configFlags := &flag.Flags{
