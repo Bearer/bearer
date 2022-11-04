@@ -51,7 +51,7 @@ curio scan [FLAGS] [PATH]
 #### Report Flags
 
 - `-f`, `--format` format (json) (default "json")
-- `--report` specify the kind of report (detectors) (default "detectors")
+- `--report` specify the kind of report (detectors|dataflow) (default "detectors")
 - `--output` path where to save report
 
 #### Scan Flags
@@ -60,7 +60,7 @@ curio scan [FLAGS] [PATH]
 - `--debug` enable debug logs
 - `--disable-domain-resolution` skip attempt to resolve detected domains during classification (default false)
 - `--domain-resolution-timeout` set timeout when attempting to resolve detected domains during classification
-- `--internal-domains` define regular expressions for better classification of private or unreachable domains eg. --internal-domains="*.my-company.com,private.sh"
+- `--internal-domains` define regular expressions for better classification of private or unreachable domains eg. --internal-domains="\*.my-company.com,private.sh"
 
 #### Worker Flags
 
