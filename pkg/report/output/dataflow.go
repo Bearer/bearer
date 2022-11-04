@@ -9,7 +9,6 @@ import (
 	"github.com/bearer/curio/pkg/report/schema"
 	"github.com/bearer/curio/pkg/types"
 	"github.com/bearer/curio/pkg/util/maputil"
-	"github.com/rs/zerolog/log"
 )
 
 type DataFlow struct {
@@ -104,7 +103,6 @@ type fileHolder struct {
 func (holder *dataFlowHolder) toDataFlow() *DataFlow {
 	data := &DataFlow{}
 
-	log.Debug().Msgf("datatypes are %#v", holder.datatypes)
 	datatypes := maputil.ToSortedSlice(holder.datatypes)
 
 	for _, datatype := range datatypes {
