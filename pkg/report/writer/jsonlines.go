@@ -3,8 +3,7 @@ package writer
 import (
 	"fmt"
 	"io"
-
-	"github.com/rs/zerolog/log"
+	"log"
 
 	classsification "github.com/bearer/curio/pkg/classification"
 	classsificationschema "github.com/bearer/curio/pkg/classification/schema"
