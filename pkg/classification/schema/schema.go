@@ -387,7 +387,7 @@ func (classifier *Classifier) healthContext() bool {
 }
 
 func (classifier *Classifier) datatypeFromPattern(pattern *db.DataTypeClassificationPattern) db.DataType {
-	if classifier.healthContext() {
+	if classifier.healthContext() && pattern.HealthContextDataTypeUUID != "" {
 		return pattern.HealthContextDataType
 	}
 
