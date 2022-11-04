@@ -1,0 +1,59 @@
+---
+title: Commands
+layout: layouts/doc.njk
+---
+
+{% set items = [curio_scan, curio_config] %}
+<h1>Commands</h1>
+
+<p>Curio offers a number of commands to use and customize the CLI to your needs.</p>
+<ul>
+  {% for item in items %}
+    <li>
+      <a href="#{{ item.name | trim}}">{{ item.name | trim}}</a>: {{item.synopsis}}
+    </li>
+  {% endfor %}
+</ul>
+
+{% for item in items %}
+  <h2 id="{{ item.name | trim | e}}">{{ item.name | trim | escape }}</h2>
+
+  <p>{{item.synopsis}}</p>
+
+  <pre><code class="lang-bash">curio {{item.usage | trim}}</code></pre>
+
+  <h3 id="{{item.name | trim}}-flags">Flags</h3>
+  <table class="table-auto">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Default Value</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for option in item.options -%}
+        <tr>
+          <td>
+            {% if option.shorthand %}
+              <code>-{{option.shorthand}}</code>, {% endif %}
+            <code>--{{option.name}}</code>
+          </td>
+          <td>{{option.usage}}</td>
+          <td>{{option.default_value}}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  {% if item.example %}
+    <h3 id="{{item.name | trim}}-usage">Usage</h3>
+    <pre><code class="lang-bash">{{item.example}}</code></pre>
+  {% endif %}
+  {% if item.aliases %}
+    <h3 id="{{item.name | trim}}-aliases">Aliases</h3>
+    <p>In addition to the primary <code>{{ item.name | trim }}</code> command, you can also use <code>{{ item.aliases | trim}}</code> in place of it.
+    </p>
+  {% endif %}
+
+{% endfor %}

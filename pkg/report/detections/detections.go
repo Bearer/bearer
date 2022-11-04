@@ -48,7 +48,7 @@ type FrameworkDetection struct {
 	Type          DetectionType   `json:"type"`
 	DetectorType  detectors.Type  `json:"detector_type"`
 	FrameworkType frameworks.Type `json:"framework_detection_type"`
-	CommitSHA     string          `json:"commit_sha"`
+	CommitSHA     string          `json:"commit_sha,omitempty"`
 	Source        source.Source   `json:"source"`
 	Value         interface{}     `json:"value"`
 }
@@ -56,7 +56,7 @@ type FrameworkDetection struct {
 type Detection struct {
 	Type         DetectionType  `json:"type"`
 	DetectorType detectors.Type `json:"detector_type"`
-	CommitSHA    string         `json:"commit_sha"`
+	CommitSHA    string         `json:"commit_sha,omitempty"`
 	Source       source.Source  `json:"source"`
 	Value        interface{}    `json:"value"`
 }

@@ -40,3 +40,9 @@ func TestDetectorV2yaml(t *testing.T) {
 
 	cupaloy.SnapshotT(t, report.Detections)
 }
+
+func TestOtherjson(t *testing.T) {
+	report := testhelper.Extract(t, filepath.Join("testdata", "arrayjson"), registrations, detectorType)
+
+	cupaloy.SnapshotT(t, report.Detections)
+}

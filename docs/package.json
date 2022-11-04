@@ -1,0 +1,24 @@
+{
+  "name": "curio-docs-poc",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "eleventy --serve & npx tailwindcss -i _src/styles/tailwind.css -c _src/styles/tailwind.config.js -o _site/style.css --watch",
+    "debug": "DEBUG=Eleventy* eleventy --serve & npx tailwindcss -i _src/styles/tailwind.css -c _src/styles/tailwind.config.js -o _site/style.css --watch",
+    "build": "ELEVENTY_PRODUCTION=true eleventy && NODE_ENV=production npx tailwindcss -i _src/styles/tailwind.css -c _src/styles/tailwind.config.js -o _site/style.css --minify"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@11ty/eleventy": "^2.0.0-canary.16",
+    "@11ty/eleventy-plugin-syntaxhighlight": "^4.1.0",
+    "@tailwindcss/typography": "^0.5.7",
+    "js-yaml": "^4.1.0",
+    "markdown-it": "^13.0.1",
+    "markdown-it-emoji": "^2.0.2",
+    "tailwindcss": "^3.1.8"
+  }
+}

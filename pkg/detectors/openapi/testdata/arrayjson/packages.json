@@ -1,0 +1,14 @@
+[
+  {
+    "name": "actioncable",
+    "package_type": "rubygems",
+    "fallback_state": "reviewed",
+    "fallback_detected_data_store_technology": null
+  },
+  {
+    "name": "actionmailbox",
+    "package_type": "rubygems",
+    "fallback_state": "reviewed",
+    "fallback_detected_data_store_technology": null
+  }
+]

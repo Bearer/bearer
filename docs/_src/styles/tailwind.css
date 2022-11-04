@@ -1,0 +1,56 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  /* Custom Grid Elements */
+
+  .docs-grid {
+    display: grid;
+    grid-template-areas: "side doc";
+  }
+
+  /* Buttons */
+  .btn {
+    @apply py-4 px-6 font-bold rounded-full;
+  }
+
+  .btn-primary {
+    @apply btn bg-gradient-to-b from-main-300 to-main-400 text-neutral-100;
+  }
+
+  .btn-ghost {
+    @apply btn dark:text-neutral-100 text-black border-solid border-2 border-black dark:border-neutral-100;
+  }
+
+  .btn-fancy {
+    @apply btn border-solid border-2;
+    border-color: transparent;
+    background-image: linear-gradient(
+        theme("colors.white"),
+        theme("colors.white")
+      ),
+      linear-gradient(
+        to bottom,
+        theme("colors.main.300"),
+        theme("colors.main.400")
+      );
+    background-clip: padding-box, border-box;
+    background-origin: padding-box, border-box;
+  }
+  .btn-fancy-dark {
+    background-image: linear-gradient(
+        theme("colors.black"),
+        theme("colors.black")
+      ),
+      linear-gradient(
+        to bottom,
+        theme("colors.main.300"),
+        theme("colors.main.400")
+      );
+  }
+
+  /* Layout grid */
+
+
+}

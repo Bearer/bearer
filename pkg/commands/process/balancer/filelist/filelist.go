@@ -2,6 +2,7 @@ package filelist
 
 import (
 	"io/fs"
+	"os"
 	"path/filepath"
 	"strings"
 
@@ -15,6 +16,19 @@ import (
 // Discover searches directory for files to scan, skipping the ones specified by skip config and assigning timeout speficfied by timeout config
 func Discover(projectPath string, config settings.Config) ([]work.File, error) {
 	var files []work.File
+
+	haveDir, statErr := isDir(projectPath)
+	if statErr != nil {
+		return files, statErr
+	}
+
+	if haveDir {
+		projectPath = strings.TrimPrefix(projectPath, "./")
+		projectPath = strings.TrimSuffix(projectPath, "/")
+		if projectPath != "." {
+			projectPath += "/"
+		}
+	}
 
 	ignore := fileignore.New(projectPath, config)
 
@@ -31,6 +45,7 @@ func Discover(projectPath string, config settings.Config) ([]work.File, error) {
 		}
 
 		relativePath := strings.TrimPrefix(filePath, projectPath)
+		relativePath = "/" + relativePath
 
 		if ignore.Ignore(projectPath, filePath, d) {
 			log.Debug().Msgf("skipping file due to file skip rules: %s", relativePath)
@@ -49,4 +64,13 @@ func Discover(projectPath string, config settings.Config) ([]work.File, error) {
 	})
 
 	return files, err
+}
+
+func isDir(path string) (bool, error) {
+	fileInfo, err := os.Stat(path)
+	if err != nil {
+		return false, err
+	}
+
+	return fileInfo.IsDir(), nil
 }

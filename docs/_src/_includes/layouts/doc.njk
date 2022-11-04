@@ -1,0 +1,46 @@
+---
+layout: layouts/base.njk
+---
+
+<main class="max-w-7xl sm:flex gap-8 mx-auto text-black dark:text-neutral-100 px-4 relative">
+	<div class="self-start sticky top-[6.75rem] min-w-fit">
+		<ul>
+			{# <li>
+				<a class="" href="/docs">Get Started</a>
+			</li> #}
+			<li>
+				<a href="" class="font-bold text-lg border-b-2 border-solid border-main">Tutorials</a>
+				<ul class="pl-4">
+					<li>
+						<a href="/quickstart">Quickstart</a>
+					</li>
+					<li>Create a policy</li>
+				</ul>
+			</li>
+			<li>
+				<a href="" class="font-bold text-lg border-b-2 border-solid border-main">Explanations</a>
+				<ul class="pl-4">
+					<li>Detection</li>
+					<li>Classification</li>
+					<li>Policies</li>
+				</ul>
+			</li>
+			<li>
+				<a href="" class="font-bold text-lg border-b-2 border-solid border-main">How-to</a>
+			</li>
+			<li>
+				<a href="" class="font-bold text-lg border-b-2 border-solid border-main">Reference</a>
+				<ul class="pl-4">
+					<li>
+						<a href="/reference/commands" class="">Commands</a>
+					</li>
+				</ul>
+			</li>
+		</ul>
+	</div>
+	<article class="prose dark:prose-invert pl-8">
+		{{ content | safe }}
+		<hr/>
+		<a class="" href="{{meta.sourcePath}}/blob/main/docs/{{ page.inputPath }}">Edit this page on GitHub</a>
+	</article>
+</main>

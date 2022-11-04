@@ -41,6 +41,10 @@ func (datatype *DataType) GetProperties() map[string]DataTypable {
 	return datatype.Properties
 }
 
+func (datatype *DataType) SetProperties(properties map[string]DataTypable) {
+	datatype.Properties = properties
+}
+
 func (datatype *DataType) GetUUID() string {
 	return datatype.UUID
 }
@@ -76,6 +80,7 @@ type DataTypable interface {
 	SetName(string)
 	GetNode() *parser.Node
 	GetProperties() map[string]DataTypable
+	SetProperties(map[string]DataTypable)
 }
 
 func ExportClassified[D DataTypable](report detections.ReportDetection, detectionType detections.DetectionType, detectorType detectors.Type, idGenerator nodeid.Generator, ignoreFirst bool, values map[parser.NodeID]D) {
