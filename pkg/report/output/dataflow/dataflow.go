@@ -7,18 +7,21 @@ import (
 
 	"github.com/bearer/curio/pkg/report/detections"
 	"github.com/bearer/curio/pkg/report/output/dataflow/datatypes"
+	"github.com/bearer/curio/pkg/report/output/dataflow/risks"
+
 	"github.com/bearer/curio/pkg/report/output/dataflow/types"
 )
 
 type DataFlow struct {
-	Datatypes []types.Datatype `json:"data_types,omitempty"`
-	Risks     []types.Datatype `json:"risks,omitempty"`
+	Datatypes []types.Datatype     `json:"data_types,omitempty"`
+	Risks     []types.RiskDetector `json:"risks,omitempty"`
 }
 
-var allowedDetections []detections.DetectionType = []detections.DetectionType{detections.TypeSchema, detections.TypeCustom, detections.TypeSchemaClassified}
+var allowedDetections []detections.DetectionType = []detections.DetectionType{detections.TypeSchema, detections.TypeSchemaClassified, detections.TypeCustom, detections.TypeCustomClassified}
 
 func GetOuput(input []interface{}) (*DataFlow, error) {
 	dataTypesHolder := datatypes.New()
+	risksHolder := risks.New()
 
 	for _, detection := range input {
 		detection, ok := detection.(map[string]interface{})
@@ -26,16 +29,21 @@ func GetOuput(input []interface{}) (*DataFlow, error) {
 			return nil, fmt.Errorf("found detection in report which is not object")
 		}
 
-		detectionType, ok := detection["type"].(string)
+		detectionTypeS, ok := detection["type"].(string)
+		if !ok {
+			continue
+		}
+
+		detectionType := detections.DetectionType(detectionTypeS)
 
 		isDataflow := false
 		for _, allowedDetection := range allowedDetections {
-			if detections.DetectionType(detectionType) == allowedDetection {
+			if (detectionType) == allowedDetection {
 				isDataflow = true
 			}
 		}
 
-		if !ok || !isDataflow {
+		if !isDataflow {
 			continue
 		}
 
@@ -50,14 +58,25 @@ func GetOuput(input []interface{}) (*DataFlow, error) {
 			return nil, err
 		}
 
-		err = dataTypesHolder.AddSchema(castedDetection)
-		if err != nil {
-			return nil, err
+		if detectionType == detections.TypeSchema || detectionType == (detections.TypeSchemaClassified) {
+			err = dataTypesHolder.AddSchema(castedDetection)
+			if err != nil {
+				return nil, err
+			}
 		}
+
+		if detectionType == detections.TypeCustom || detectionType == (detections.TypeCustomClassified) {
+			err := risksHolder.AddSchema(castedDetection)
+			if err != nil {
+				return nil, err
+			}
+		}
+
 	}
 
 	dataflow := &DataFlow{
 		Datatypes: dataTypesHolder.ToDataFlow(),
+		Risks:     risksHolder.ToDataFlow(),
 	}
 
 	return dataflow, nil
