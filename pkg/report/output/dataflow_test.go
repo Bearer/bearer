@@ -145,9 +145,14 @@ func TestDataflow(t *testing.T) {
 			file, err := os.CreateTemp("", "*test.jsonlines")
 			if err != nil {
 				t.Fatalf("failed to create tmp file for report %s", err)
+				return
 			}
 			defer os.Remove(file.Name())
-			file.Write([]byte(test.FileContent))
+			_, err = file.Write([]byte(test.FileContent))
+			if err != nil {
+				t.Fatalf("failed to write to tmp file %s", err)
+				return
+			}
 			file.Close()
 
 			dataflow, err := output.GetDataFlowOutput(types.Report{

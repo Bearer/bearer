@@ -22,7 +22,7 @@ func SortedStringKeys(mapValue interface{}) []string {
 
 func ToSortedSlice[mapKey constraints.Ordered, T any](input map[mapKey]T) []T {
 	keys := make([]mapKey, 0)
-	for key, _ := range input {
+	for key := range input {
 		keys = append(keys, key)
 	}
 
