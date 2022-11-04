@@ -22,7 +22,7 @@ type Datatype struct {
 }
 
 type Detector struct {
-	Name      string     `json:"data_types"`
+	Name      string     `json:"name"`
 	Stored    bool       `json:"stored"`
 	Locations []Location `json:"locations"`
 }
