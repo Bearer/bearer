@@ -1,15 +1,17 @@
-package dataflow_test
+package output_test
 
 import (
 	"os"
 	"testing"
 
+	"github.com/bearer/curio/pkg/report/output"
 	"github.com/bearer/curio/pkg/report/output/dataflow"
-	"github.com/bearer/curio/pkg/types"
+	"github.com/bearer/curio/pkg/report/output/dataflow/types"
+	globaltypes "github.com/bearer/curio/pkg/types"
 	"github.com/stretchr/testify/assert"
 )
 
-func TestDataType(t *testing.T) {
+func TestDataflowDataType(t *testing.T) {
 	testCases := []struct {
 		Name        string
 		FileContent string
@@ -19,14 +21,14 @@ func TestDataType(t *testing.T) {
 			Name:        "single detection",
 			FileContent: `{"type": "schema", "detector_type":"ruby", "source": {"filename": "./users.rb", "line_number": 25}, "value": {"field_name": "User"}}`,
 			Want: &dataflow.DataFlow{
-				Datatypes: []dataflow.Datatype{
+				Datatypes: []types.Datatype{
 					{
 						Name: "User",
-						Detectors: []dataflow.Detector{
+						Detectors: []types.DatatypeDetector{
 							{
 								Name:   "ruby",
 								Stored: true,
-								Locations: []dataflow.Location{
+								Locations: []types.DatatypeLocation{
 									{Filename: "./users.rb", LineNumber: 25},
 								},
 							},
@@ -40,14 +42,14 @@ func TestDataType(t *testing.T) {
 			FileContent: `{"type": "schema", "detector_type":"ruby", "source": {"filename": "./users.rb", "line_number": 25}, "value": {"field_name": "User"}}
 {"type": "schema", "detector_type":"ruby", "source": {"filename": "./users.rb", "line_number": 25}, "value": {"field_name": "User"}}`,
 			Want: &dataflow.DataFlow{
-				Datatypes: []dataflow.Datatype{
+				Datatypes: []types.Datatype{
 					{
 						Name: "User",
-						Detectors: []dataflow.Detector{
+						Detectors: []types.DatatypeDetector{
 							{
 								Name:   "ruby",
 								Stored: true,
-								Locations: []dataflow.Location{
+								Locations: []types.DatatypeLocation{
 									{Filename: "./users.rb", LineNumber: 25},
 								},
 							},
@@ -61,14 +63,14 @@ func TestDataType(t *testing.T) {
 			FileContent: `{"type": "schema", "detector_type":"ruby", "source": {"filename": "./users.rb", "line_number": 25}, "value": {"field_name": "User"}}
 {"user": true }`,
 			Want: &dataflow.DataFlow{
-				Datatypes: []dataflow.Datatype{
+				Datatypes: []types.Datatype{
 					{
 						Name: "User",
-						Detectors: []dataflow.Detector{
+						Detectors: []types.DatatypeDetector{
 							{
 								Name:   "ruby",
 								Stored: true,
-								Locations: []dataflow.Location{
+								Locations: []types.DatatypeLocation{
 									{Filename: "./users.rb", LineNumber: 25},
 								},
 							},
@@ -82,21 +84,21 @@ func TestDataType(t *testing.T) {
 			FileContent: `{"type": "schema", "detector_type":"ruby", "source": {"filename": "./users.rb", "line_number": 25}, "value": {"field_name": "User"}}
 			{"type": "schema", "detector_type":"csharp", "source": {"filename": "./users.cs", "line_number": 12}, "value": {"field_name": "User"}}`,
 			Want: &dataflow.DataFlow{
-				Datatypes: []dataflow.Datatype{
+				Datatypes: []types.Datatype{
 					{
 						Name: "User",
-						Detectors: []dataflow.Detector{
+						Detectors: []types.DatatypeDetector{
 							{
 								Name:   "csharp",
 								Stored: true,
-								Locations: []dataflow.Location{
+								Locations: []types.DatatypeLocation{
 									{Filename: "./users.cs", LineNumber: 12},
 								},
 							},
 							{
 								Name:   "ruby",
 								Stored: true,
-								Locations: []dataflow.Location{
+								Locations: []types.DatatypeLocation{
 									{Filename: "./users.rb", LineNumber: 25},
 								},
 							},
@@ -110,14 +112,14 @@ func TestDataType(t *testing.T) {
 			FileContent: `{"type": "schema", "detector_type":"ruby", "source": {"filename": "./users.rb", "line_number": 25}, "value": {"field_name": "User"}}
 			{"type": "schema", "detector_type":"csharp", "source": {"filename": "./users.cs", "line_number": 12}, "value": {"field_name": "Address"}}`,
 			Want: &dataflow.DataFlow{
-				Datatypes: []dataflow.Datatype{
+				Datatypes: []types.Datatype{
 					{
 						Name: "Address",
-						Detectors: []dataflow.Detector{
+						Detectors: []types.DatatypeDetector{
 							{
 								Name:   "csharp",
 								Stored: true,
-								Locations: []dataflow.Location{
+								Locations: []types.DatatypeLocation{
 									{Filename: "./users.cs", LineNumber: 12},
 								},
 							},
@@ -125,11 +127,11 @@ func TestDataType(t *testing.T) {
 					},
 					{
 						Name: "User",
-						Detectors: []dataflow.Detector{
+						Detectors: []types.DatatypeDetector{
 							{
 								Name:   "ruby",
 								Stored: true,
-								Locations: []dataflow.Location{
+								Locations: []types.DatatypeLocation{
 									{Filename: "./users.rb", LineNumber: 25},
 								},
 							},
@@ -155,11 +157,18 @@ func TestDataType(t *testing.T) {
 			}
 			file.Close()
 
-			dataflow, err := dataflow.GetDataFlowOutput(types.Report{
+			detections, err := output.GetDetectorsOutput(globaltypes.Report{
 				Path: file.Name(),
 			})
 			if err != nil {
-				t.Fatal(err)
+				t.Fatalf("failed to get detectors output %s", err)
+				return
+			}
+
+			dataflow, err := dataflow.GetOuput(detections)
+			if err != nil {
+				t.Fatalf("failed to get detectors output %s", err)
+				return
 			}
 
 			assert.Equal(t, test.Want, dataflow)

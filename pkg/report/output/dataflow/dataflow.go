@@ -6,35 +6,19 @@ import (
 	"fmt"
 
 	"github.com/bearer/curio/pkg/report/detections"
+	"github.com/bearer/curio/pkg/report/output/dataflow/datatypes"
+	"github.com/bearer/curio/pkg/report/output/dataflow/types"
 )
 
 type DataFlow struct {
-	Datatypes []Datatype `json:"data_types,omitempty"`
-	Risks     []Datatype `json:"risks,omitempty"`
-}
-
-type Datatype struct {
-	Name      string     `json:"name"`
-	Detectors []Detector `json:"detectors"`
-}
-
-type Detector struct {
-	Name      string     `json:"name"`
-	Stored    bool       `json:"stored"`
-	Locations []Location `json:"locations"`
-}
-
-type Location struct {
-	Filename   string `json:"filename"`
-	LineNumber int    `json:"line_number"`
+	Datatypes []types.Datatype `json:"data_types,omitempty"`
+	Risks     []types.Datatype `json:"risks,omitempty"`
 }
 
 var allowedDetections []detections.DetectionType = []detections.DetectionType{detections.TypeSchema, detections.TypeCustom, detections.TypeSchemaClassified}
 
 func GetOuput(input []interface{}) (*DataFlow, error) {
-	holder := dataFlowHolder{
-		datatypes: make(map[string]*datatypeHolder),
-	}
+	dataTypesHolder := datatypes.New()
 
 	for _, detection := range input {
 		detection, ok := detection.(map[string]interface{})
@@ -66,15 +50,15 @@ func GetOuput(input []interface{}) (*DataFlow, error) {
 			return nil, err
 		}
 
-		err = holder.addSchema(castedDetection)
+		err = dataTypesHolder.AddSchema(castedDetection)
 		if err != nil {
 			return nil, err
 		}
 	}
 
-	return holder.toDataFlow(), nil
-}
+	dataflow := &DataFlow{
+		Datatypes: dataTypesHolder.ToDataFlow(),
+	}
 
-type dataFlowHolder struct {
-	datatypes map[string]*datatypeHolder // group datatypeHolders by name
+	return dataflow, nil
 }

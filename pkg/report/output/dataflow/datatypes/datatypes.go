@@ -5,10 +5,16 @@ import (
 	"encoding/json"
 	"fmt"
 
+	"github.com/bearer/curio/pkg/report/output/dataflow/types"
+
 	"github.com/bearer/curio/pkg/report/detections"
 	"github.com/bearer/curio/pkg/report/schema"
 	"github.com/bearer/curio/pkg/util/maputil"
 )
+
+type Holder struct {
+	datatypes map[string]datatypeHolder // group datatypeHolders by name
+}
 
 type datatypeHolder struct {
 	name      string
@@ -23,43 +29,13 @@ type fileHolder struct {
 	lineNumbers map[int]int // group occurences by line number
 }
 
-func (holder *dataFlowHolder) toDataFlow() *DataFlow {
-	data := &DataFlow{}
-
-	datatypes := maputil.ToSortedSlice(holder.datatypes)
-
-	for _, datatype := range datatypes {
-		constructedDatatype := Datatype{
-			Name: datatype.name,
-		}
-
-		detectors := maputil.ToSortedSlice(datatype.detectors)
-
-		for _, detectorHolder := range detectors {
-			constructedDetector := Detector{
-				Name:      detectorHolder.name,
-				Stored:    true,
-				Locations: make([]Location, 0),
-			}
-
-			for _, fileHolder := range maputil.ToSortedSlice(detectorHolder.files) {
-				for _, lineNumber := range maputil.ToSortedSlice(fileHolder.lineNumbers) {
-					constructedDetector.Locations = append(constructedDetector.Locations, Location{
-						Filename:   fileHolder.name,
-						LineNumber: lineNumber,
-					})
-				}
-			}
-			constructedDatatype.Detectors = append(constructedDatatype.Detectors, constructedDetector)
-		}
-
-		data.Datatypes = append(data.Datatypes, constructedDatatype)
+func New() *Holder {
+	return &Holder{
+		datatypes: make(map[string]datatypeHolder),
 	}
-
-	return data
 }
 
-func (holder *dataFlowHolder) addSchema(detection detections.Detection) error {
+func (holder *Holder) AddSchema(detection detections.Detection) error {
 	var value schema.Schema
 	buf := bytes.NewBuffer(nil)
 	err := json.NewEncoder(buf).Encode(detection.Value)
@@ -79,10 +55,10 @@ func (holder *dataFlowHolder) addSchema(detection detections.Detection) error {
 }
 
 // addDatatype adds datatype to hash list and at the same time blocks duplicates
-func (holder *dataFlowHolder) addDatatype(datatypeName string, detectorName string, fileName string, lineNumber int) {
+func (holder *Holder) addDatatype(datatypeName string, detectorName string, fileName string, lineNumber int) {
 	// create datatype entry if it doesn't exist
 	if _, exists := holder.datatypes[datatypeName]; !exists {
-		holder.datatypes[datatypeName] = &datatypeHolder{
+		holder.datatypes[datatypeName] = datatypeHolder{
 			name:      datatypeName,
 			detectors: make(map[string]*detectorHolder),
 		}
@@ -117,4 +93,40 @@ func (holder *dataFlowHolder) addDatatype(datatypeName string, detectorName stri
 
 	file.lineNumbers[lineNumber] = lineNumber
 
+}
+
+func (holder *Holder) ToDataFlow() []types.Datatype {
+	data := make([]types.Datatype, 0)
+
+	datatypes := maputil.ToSortedSlice(holder.datatypes)
+
+	for _, datatype := range datatypes {
+		constructedDatatype := types.Datatype{
+			Name: datatype.name,
+		}
+
+		detectors := maputil.ToSortedSlice(datatype.detectors)
+
+		for _, detectorHolder := range detectors {
+			constructedDetector := types.DatatypeDetector{
+				Name:      detectorHolder.name,
+				Stored:    true,
+				Locations: make([]types.DatatypeLocation, 0),
+			}
+
+			for _, fileHolder := range maputil.ToSortedSlice(detectorHolder.files) {
+				for _, lineNumber := range maputil.ToSortedSlice(fileHolder.lineNumbers) {
+					constructedDetector.Locations = append(constructedDetector.Locations, types.DatatypeLocation{
+						Filename:   fileHolder.name,
+						LineNumber: lineNumber,
+					})
+				}
+			}
+			constructedDatatype.Detectors = append(constructedDatatype.Detectors, constructedDetector)
+		}
+
+		data = append(data, constructedDatatype)
+	}
+
+	return data
 }
