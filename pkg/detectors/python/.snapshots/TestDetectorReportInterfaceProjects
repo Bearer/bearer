@@ -17,7 +17,8 @@
       FieldName: (string) (len=7) "environ",
       FieldUUID: (string) (len=1) "5",
       FieldType: (string) "",
-      SimpleFieldType: (string) (len=7) "unknown"
+      SimpleFieldType: (string) (len=7) "unknown",
+      Classification: (interface {}) <nil>
     }
   }),
   (*detections.Detection)({
@@ -38,7 +39,8 @@
       FieldName: (string) (len=3) "get",
       FieldUUID: (string) (len=1) "6",
       FieldType: (string) "",
-      SimpleFieldType: (string) (len=7) "unknown"
+      SimpleFieldType: (string) (len=7) "unknown",
+      Classification: (interface {}) <nil>
     }
   }),
   (*detections.Detection)({
@@ -59,7 +61,8 @@
       FieldName: (string) (len=3) "pop",
       FieldUUID: (string) (len=1) "8",
       FieldType: (string) "",
-      SimpleFieldType: (string) (len=7) "unknown"
+      SimpleFieldType: (string) (len=7) "unknown",
+      Classification: (interface {}) <nil>
     }
   }),
   (*detections.Detection)({
@@ -164,7 +167,8 @@
       FieldName: (string) (len=17) "ignore.domain.com",
       FieldUUID: (string) (len=2) "11",
       FieldType: (string) "",
-      SimpleFieldType: (string) (len=7) "unknown"
+      SimpleFieldType: (string) (len=7) "unknown",
+      Classification: (interface {}) <nil>
     }
   }),
   (*detections.Detection)({
@@ -185,7 +189,8 @@
       FieldName: (string) (len=4) "task",
       FieldUUID: (string) (len=2) "13",
       FieldType: (string) "",
-      SimpleFieldType: (string) (len=7) "unknown"
+      SimpleFieldType: (string) (len=7) "unknown",
+      Classification: (interface {}) <nil>
     }
   }),
   (*detections.Detection)({
@@ -206,7 +211,8 @@
       FieldName: (string) (len=7) "backend",
       FieldUUID: (string) (len=2) "15",
       FieldType: (string) "",
-      SimpleFieldType: (string) (len=7) "unknown"
+      SimpleFieldType: (string) (len=7) "unknown",
+      Classification: (interface {}) <nil>
     }
   }),
   (*detections.Detection)({
@@ -227,7 +233,8 @@
       FieldName: (string) (len=7) "cleanup",
       FieldUUID: (string) (len=2) "16",
       FieldType: (string) "",
-      SimpleFieldType: (string) (len=7) "unknown"
+      SimpleFieldType: (string) (len=7) "unknown",
+      Classification: (interface {}) <nil>
     }
   }),
   (*detections.Detection)({

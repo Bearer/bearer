@@ -16,7 +16,8 @@
 			"field_name": "address",
 			"field_uuid": "2",
 			"field_type": "",
-			"field_type_simple": "unknown"
+			"field_type_simple": "unknown",
+			"classification": null
 		}
 	},
 	{
@@ -36,7 +37,8 @@
 			"field_name": "address2",
 			"field_uuid": "4",
 			"field_type": "",
-			"field_type_simple": "unknown"
+			"field_type_simple": "unknown",
+			"classification": null
 		}
 	},
 	{
@@ -56,7 +58,8 @@
 			"field_name": "user",
 			"field_uuid": "5",
 			"field_type": "",
-			"field_type_simple": "unknown"
+			"field_type_simple": "unknown",
+			"classification": null
 		}
 	},
 	{
@@ -76,7 +79,8 @@
 			"field_name": "email",
 			"field_uuid": "6",
 			"field_type": "",
-			"field_type_simple": "unknown"
+			"field_type_simple": "unknown",
+			"classification": null
 		}
 	},
 	{
@@ -96,7 +100,8 @@
 			"field_name": "user",
 			"field_uuid": "8",
 			"field_type": "",
-			"field_type_simple": "unknown"
+			"field_type_simple": "unknown",
+			"classification": null
 		}
 	},
 	{
@@ -116,7 +121,8 @@
 			"field_name": "email",
 			"field_uuid": "9",
 			"field_type": "",
-			"field_type_simple": "unknown"
+			"field_type_simple": "unknown",
+			"classification": null
 		}
 	},
 	{
@@ -136,7 +142,8 @@
 			"field_name": "user",
 			"field_uuid": "11",
 			"field_type": "",
-			"field_type_simple": "unknown"
+			"field_type_simple": "unknown",
+			"classification": null
 		}
 	},
 	{
@@ -156,7 +163,8 @@
 			"field_name": "contact",
 			"field_uuid": "12",
 			"field_type": "",
-			"field_type_simple": "unknown"
+			"field_type_simple": "unknown",
+			"classification": null
 		}
 	},
 	{
@@ -176,7 +184,8 @@
 			"field_name": "email",
 			"field_uuid": "13",
 			"field_type": "",
-			"field_type_simple": "unknown"
+			"field_type_simple": "unknown",
+			"classification": null
 		}
 	},
 	{
@@ -196,7 +205,8 @@
 			"field_name": "address",
 			"field_uuid": "14",
 			"field_type": "",
-			"field_type_simple": "unknown"
+			"field_type_simple": "unknown",
+			"classification": null
 		}
 	},
 	{
@@ -216,7 +226,8 @@
 			"field_name": "user",
 			"field_uuid": "17",
 			"field_type": "",
-			"field_type_simple": "unknown"
+			"field_type_simple": "unknown",
+			"classification": null
 		}
 	},
 	{
@@ -236,7 +247,8 @@
 			"field_name": "email",
 			"field_uuid": "18",
 			"field_type": "",
-			"field_type_simple": "unknown"
+			"field_type_simple": "unknown",
+			"classification": null
 		}
 	},
 	{
@@ -256,7 +268,8 @@
 			"field_name": "user",
 			"field_uuid": "19",
 			"field_type": "",
-			"field_type_simple": "unknown"
+			"field_type_simple": "unknown",
+			"classification": null
 		}
 	},
 	{
@@ -276,7 +289,8 @@
 			"field_name": "email",
 			"field_uuid": "20",
 			"field_type": "",
-			"field_type_simple": "unknown"
+			"field_type_simple": "unknown",
+			"classification": null
 		}
 	},
 	{
@@ -296,7 +310,8 @@
 			"field_name": "user",
 			"field_uuid": "22",
 			"field_type": "",
-			"field_type_simple": "unknown"
+			"field_type_simple": "unknown",
+			"classification": null
 		}
 	},
 	{
@@ -316,7 +331,8 @@
 			"field_name": "name",
 			"field_uuid": "23",
 			"field_type": "",
-			"field_type_simple": "unknown"
+			"field_type_simple": "unknown",
+			"classification": null
 		}
 	},
 	{
@@ -336,7 +352,8 @@
 			"field_name": "user",
 			"field_uuid": "22",
 			"field_type": "",
-			"field_type_simple": "unknown"
+			"field_type_simple": "unknown",
+			"classification": null
 		}
 	},
 	{
@@ -356,7 +373,8 @@
 			"field_name": "email",
 			"field_uuid": "24",
 			"field_type": "",
-			"field_type_simple": "unknown"
+			"field_type_simple": "unknown",
+			"classification": null
 		}
 	}
 ]
