@@ -111,7 +111,7 @@ func TestSchemaObjectClassification(t *testing.T) {
 			},
 			Want: schema.Classification{
 				Name:     "user",
-				DataType: knownObjectDataType,
+				DataType: &knownObjectDataType,
 				Decision: classify.ClassificationDecision{
 					State:  classify.Invalid,
 					Reason: "valid_object_with_invalid_properties",
@@ -143,7 +143,7 @@ func TestSchemaObjectClassification(t *testing.T) {
 			},
 			Want: schema.Classification{
 				Name:     "user",
-				DataType: knownObjectDataType,
+				DataType: &knownObjectDataType,
 				Decision: classify.ClassificationDecision{
 					State:  classify.Valid,
 					Reason: "valid_object_with_valid_properties",
@@ -180,7 +180,7 @@ func TestSchemaObjectClassification(t *testing.T) {
 			},
 			Want: schema.Classification{
 				Name:     "seller fiscal information",
-				DataType: knownObjectDataType,
+				DataType: &knownObjectDataType,
 				Decision: classify.ClassificationDecision{
 					State:  classify.Valid,
 					Reason: "valid_object_with_valid_properties",
@@ -222,7 +222,7 @@ func TestSchemaObjectClassification(t *testing.T) {
 			},
 			Want: schema.Classification{
 				Name:     "seller fiscal information",
-				DataType: knownObjectDataType,
+				DataType: &knownObjectDataType,
 				Decision: classify.ClassificationDecision{
 					State:  classify.Invalid,
 					Reason: "valid_object_with_invalid_properties",
@@ -249,7 +249,7 @@ func TestSchemaObjectClassification(t *testing.T) {
 			},
 			Want: schema.Classification{
 				Name:     "applicant",
-				DataType: knownObjectDataType,
+				DataType: &knownObjectDataType,
 				Decision: classify.ClassificationDecision{
 					State:  classify.Valid,
 					Reason: "valid_object_with_valid_properties",
@@ -276,7 +276,7 @@ func TestSchemaObjectClassification(t *testing.T) {
 			},
 			Want: schema.Classification{
 				Name:     "bank accounts",
-				DataType: knownObjectDataType,
+				DataType: &knownObjectDataType,
 				Decision: classify.ClassificationDecision{
 					State:  classify.Valid,
 					Reason: "valid_object_with_valid_properties",
@@ -303,7 +303,7 @@ func TestSchemaObjectClassification(t *testing.T) {
 			},
 			Want: schema.Classification{
 				Name:     "bank accounts",
-				DataType: knownObjectDataType,
+				DataType: &knownObjectDataType,
 				Decision: classify.ClassificationDecision{
 					State:  classify.Invalid,
 					Reason: "valid_object_with_invalid_properties",
@@ -330,7 +330,7 @@ func TestSchemaObjectClassification(t *testing.T) {
 			},
 			Want: schema.Classification{
 				Name:     "patients",
-				DataType: knownObjectDataType,
+				DataType: &knownObjectDataType,
 				Decision: classify.ClassificationDecision{
 					State:  classify.Invalid,
 					Reason: "valid_object_with_invalid_properties",
@@ -357,7 +357,7 @@ func TestSchemaObjectClassification(t *testing.T) {
 			},
 			Want: schema.Classification{
 				Name:     "accounts",
-				DataType: knownObjectDataType,
+				DataType: &knownObjectDataType,
 				Decision: classify.ClassificationDecision{
 					State:  classify.Valid,
 					Reason: "valid_object_with_valid_properties",
@@ -384,7 +384,7 @@ func TestSchemaObjectClassification(t *testing.T) {
 			},
 			Want: schema.Classification{
 				Name:     "accounts",
-				DataType: knownObjectDataType,
+				DataType: &knownObjectDataType,
 				Decision: classify.ClassificationDecision{
 					State:  classify.Invalid,
 					Reason: "valid_object_with_invalid_properties",
@@ -411,7 +411,7 @@ func TestSchemaObjectClassification(t *testing.T) {
 			},
 			Want: schema.Classification{
 				Name:     "accounts",
-				DataType: knownObjectDataType,
+				DataType: &knownObjectDataType,
 				Decision: classify.ClassificationDecision{
 					State:  classify.Invalid,
 					Reason: "valid_object_with_invalid_properties",
@@ -438,7 +438,7 @@ func TestSchemaObjectClassification(t *testing.T) {
 			},
 			Want: schema.Classification{
 				Name:     "accounts",
-				DataType: knownObjectDataType,
+				DataType: &knownObjectDataType,
 				Decision: classify.ClassificationDecision{
 					State:  classify.Potential,
 					Reason: "valid_object_with_invalid_properties",

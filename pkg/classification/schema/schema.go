@@ -24,7 +24,7 @@ func (datatype ClassifiedDatatype) GetClassification() interface{} {
 
 type Classification struct {
 	Name     string                          `json:"name"`
-	DataType db.DataType                     `json:"data_type,omitempty"`
+	DataType *db.DataType                    `json:"data_type,omitempty"`
 	Decision classify.ClassificationDecision `json:"decision"`
 }
 
@@ -75,7 +75,7 @@ func (classifier *Classifier) Classify(data DataTypeDetection) *ClassifiedDataty
 	matchedKnownPersonObject := classifier.matchKnownPersonObjectPatterns(data.Value.GetNormalizedName(), false)
 	if matchedKnownPersonObject != nil {
 		// add data type to object
-		classifiedDatatype.Classification.DataType = matchedKnownPersonObject.DataType
+		classifiedDatatype.Classification.DataType = &matchedKnownPersonObject.DataType
 		return classifier.classifyKnownObject(classifiedDatatype, data.DetectorType)
 	}
 
@@ -422,7 +422,7 @@ func classifyAsValid(D datatype.DataTypable, datatype db.DataType, reason string
 		DataTypable: D,
 		Classification: Classification{
 			Name:     D.GetNormalizedName(),
-			DataType: datatype,
+			DataType: &datatype,
 			Decision: classify.ClassificationDecision{
 				State:  classify.Valid,
 				Reason: reason,
