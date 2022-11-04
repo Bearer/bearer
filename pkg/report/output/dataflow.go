@@ -12,8 +12,8 @@ import (
 )
 
 type DataFlow struct {
-	Datatypes []Datatype `json:"data_types"`
-	Risks     []Datatype `json:"risks"`
+	Datatypes []Datatype `json:"data_types,omitempty"`
+	Risks     []Datatype `json:"risks,omitempty"`
 }
 
 type Datatype struct {
