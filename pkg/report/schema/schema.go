@@ -18,9 +18,9 @@ const (
 
 type Schema struct {
 	ObjectName      string      `json:"object_name"`
-	ObjectUUID      string      `json:"object_uuid"`
+	ObjectUUID      string      `json:"-"`
 	FieldName       string      `json:"field_name"`
-	FieldUUID       string      `json:"field_uuid"`
+	FieldUUID       string      `json:"-"`
 	FieldType       string      `json:"field_type"`
 	SimpleFieldType string      `json:"field_type_simple"`
 	Classification  interface{} `json:"classification"`

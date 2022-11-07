@@ -12,9 +12,7 @@
 		},
 		"value": {
 			"object_name": "",
-			"object_uuid": "1",
 			"field_name": "address",
-			"field_uuid": "2",
 			"field_type": "",
 			"field_type_simple": "unknown",
 			"classification": null
@@ -33,9 +31,7 @@
 		},
 		"value": {
 			"object_name": "",
-			"object_uuid": "3",
 			"field_name": "address2",
-			"field_uuid": "4",
 			"field_type": "",
 			"field_type_simple": "unknown",
 			"classification": null
@@ -54,9 +50,7 @@
 		},
 		"value": {
 			"object_name": "",
-			"object_uuid": "7",
 			"field_name": "user",
-			"field_uuid": "5",
 			"field_type": "",
 			"field_type_simple": "unknown",
 			"classification": null
@@ -75,9 +69,7 @@
 		},
 		"value": {
 			"object_name": "user",
-			"object_uuid": "5",
 			"field_name": "email",
-			"field_uuid": "6",
 			"field_type": "",
 			"field_type_simple": "unknown",
 			"classification": null
@@ -96,9 +88,7 @@
 		},
 		"value": {
 			"object_name": "",
-			"object_uuid": "10",
 			"field_name": "user",
-			"field_uuid": "8",
 			"field_type": "",
 			"field_type_simple": "unknown",
 			"classification": null
@@ -117,9 +107,7 @@
 		},
 		"value": {
 			"object_name": "user",
-			"object_uuid": "8",
 			"field_name": "email",
-			"field_uuid": "9",
 			"field_type": "",
 			"field_type_simple": "unknown",
 			"classification": null
@@ -138,9 +126,7 @@
 		},
 		"value": {
 			"object_name": "",
-			"object_uuid": "15",
 			"field_name": "user",
-			"field_uuid": "11",
 			"field_type": "",
 			"field_type_simple": "unknown",
 			"classification": null
@@ -159,9 +145,7 @@
 		},
 		"value": {
 			"object_name": "user",
-			"object_uuid": "11",
 			"field_name": "contact",
-			"field_uuid": "12",
 			"field_type": "",
 			"field_type_simple": "unknown",
 			"classification": null
@@ -180,9 +164,7 @@
 		},
 		"value": {
 			"object_name": "contact",
-			"object_uuid": "12",
 			"field_name": "email",
-			"field_uuid": "13",
 			"field_type": "",
 			"field_type_simple": "unknown",
 			"classification": null
@@ -201,9 +183,7 @@
 		},
 		"value": {
 			"object_name": "email",
-			"object_uuid": "13",
 			"field_name": "address",
-			"field_uuid": "14",
 			"field_type": "",
 			"field_type_simple": "unknown",
 			"classification": null
@@ -222,9 +202,7 @@
 		},
 		"value": {
 			"object_name": "",
-			"object_uuid": "16",
 			"field_name": "user",
-			"field_uuid": "17",
 			"field_type": "",
 			"field_type_simple": "unknown",
 			"classification": null
@@ -243,9 +221,7 @@
 		},
 		"value": {
 			"object_name": "",
-			"object_uuid": "16",
 			"field_name": "email",
-			"field_uuid": "18",
 			"field_type": "",
 			"field_type_simple": "unknown",
 			"classification": null
@@ -264,9 +240,7 @@
 		},
 		"value": {
 			"object_name": "",
-			"object_uuid": "21",
 			"field_name": "user",
-			"field_uuid": "19",
 			"field_type": "",
 			"field_type_simple": "unknown",
 			"classification": null
@@ -285,9 +259,7 @@
 		},
 		"value": {
 			"object_name": "user",
-			"object_uuid": "19",
 			"field_name": "email",
-			"field_uuid": "20",
 			"field_type": "",
 			"field_type_simple": "unknown",
 			"classification": null
@@ -306,9 +278,7 @@
 		},
 		"value": {
 			"object_name": "",
-			"object_uuid": "25",
 			"field_name": "user",
-			"field_uuid": "22",
 			"field_type": "",
 			"field_type_simple": "unknown",
 			"classification": null
@@ -327,9 +297,7 @@
 		},
 		"value": {
 			"object_name": "user",
-			"object_uuid": "22",
 			"field_name": "name",
-			"field_uuid": "23",
 			"field_type": "",
 			"field_type_simple": "unknown",
 			"classification": null
@@ -348,9 +316,7 @@
 		},
 		"value": {
 			"object_name": "",
-			"object_uuid": "25",
 			"field_name": "user",
-			"field_uuid": "22",
 			"field_type": "",
 			"field_type_simple": "unknown",
 			"classification": null
@@ -369,9 +335,7 @@
 		},
 		"value": {
 			"object_name": "user",
-			"object_uuid": "22",
 			"field_name": "email",
-			"field_uuid": "24",
 			"field_type": "",
 			"field_type_simple": "unknown",
 			"classification": null
