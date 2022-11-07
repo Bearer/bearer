@@ -47,7 +47,7 @@ func GetOuput(input []interface{}) (*DataFlow, error) {
 			continue
 		}
 
-		var castedDetection detections.Detection
+		var castDetection detections.Detection
 		buf := bytes.NewBuffer(nil)
 		err := json.NewEncoder(buf).Encode(detection)
 		if err != nil {
