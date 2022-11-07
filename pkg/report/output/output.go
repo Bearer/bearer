@@ -5,6 +5,8 @@ import (
 	"fmt"
 	"os"
 
+	"github.com/bearer/curio/pkg/flag"
+	"github.com/bearer/curio/pkg/report/output/dataflow"
 	"github.com/bearer/curio/pkg/types"
 
 	"github.com/rs/zerolog"
