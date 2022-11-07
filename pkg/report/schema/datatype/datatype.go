@@ -9,6 +9,7 @@ import (
 	"github.com/bearer/curio/pkg/report/detections"
 	"github.com/bearer/curio/pkg/report/detectors"
 	"github.com/bearer/curio/pkg/report/schema"
+	"github.com/bearer/curio/pkg/util/normalize_key"
 )
 
 type ReportDataType interface {
@@ -25,12 +26,20 @@ type DataType struct {
 	UUID       string
 }
 
+func (datatype *DataType) GetClassification() interface{} {
+	return nil
+}
+
 func (datatype *DataType) SetName(name string) {
 	datatype.Name = name
 }
 
 func (datatype *DataType) GetName() string {
 	return datatype.Name
+}
+
+func (datatype *DataType) GetNormalizedName() string {
+	return normalize_key.Normalize(datatype.Name)
 }
 
 func (datatype *DataType) GetNode() *parser.Node {
@@ -41,8 +50,8 @@ func (datatype *DataType) GetProperties() map[string]DataTypable {
 	return datatype.Properties
 }
 
-func (datatype *DataType) SetProperties(properties map[string]DataTypable) {
-	datatype.Properties = properties
+func (datatype *DataType) SetProperty(key string, property DataTypable) {
+	datatype.Properties[key] = property
 }
 
 func (datatype *DataType) GetUUID() string {
@@ -71,16 +80,18 @@ func (datatype *DataType) DeleteProperty(name string) {
 
 type DataTypable interface {
 	DeleteProperty(name string)
+	GetClassification() interface{}
 	SetUUID(string)
 	GetUUID() string
 	GetIsHelper() bool
 	GetTextType() string
 	GetType() string
 	GetName() string
+	GetNormalizedName() string
 	SetName(string)
 	GetNode() *parser.Node
 	GetProperties() map[string]DataTypable
-	SetProperties(map[string]DataTypable)
+	SetProperty(string, DataTypable)
 }
 
 func ExportClassified[D DataTypable](report detections.ReportDetection, detectionType detections.DetectionType, detectorType detectors.Type, idGenerator nodeid.Generator, ignoreFirst bool, values map[parser.NodeID]D) {
@@ -118,14 +129,17 @@ func dataTypeToSchema[D DataTypable](report detections.ReportDetection, detectio
 	selfName := dataType.GetName()
 
 	if shouldExport {
-		report.AddDetection(detectionType, detectorType, dataType.GetNode().Source(false), schema.Schema{
-			ObjectName:      parentName,
-			FieldName:       selfName,
-			ObjectUUID:      parentUUID,
-			FieldUUID:       selfUUID,
-			FieldType:       dataType.GetTextType(),
-			SimpleFieldType: dataType.GetType(),
-		})
+		report.AddDetection(detectionType, detectorType, dataType.GetNode().Source(false),
+			schema.Schema{
+				ObjectName:      parentName,
+				FieldName:       selfName,
+				ObjectUUID:      parentUUID,
+				FieldUUID:       selfUUID,
+				FieldType:       dataType.GetTextType(),
+				SimpleFieldType: dataType.GetType(),
+				Classification:  dataType.GetClassification(),
+			},
+		)
 	}
 
 	sortedProperties := SortStringMap(dataType.GetProperties())

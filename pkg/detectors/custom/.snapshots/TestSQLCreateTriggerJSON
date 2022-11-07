@@ -16,7 +16,8 @@
    "field_name": "accounts",
    "field_uuid": "2",
    "field_type": "",
-   "field_type_simple": "object"
+   "field_type_simple": "object",
+   "classification": null
   }
  },
  {
@@ -36,7 +37,8 @@
    "field_name": "anon_account",
    "field_uuid": "3",
    "field_type": "",
-   "field_type_simple": "object"
+   "field_type_simple": "object",
+   "classification": null
   }
  }
 ]

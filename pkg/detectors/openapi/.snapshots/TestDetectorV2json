@@ -86,7 +86,8 @@
       FieldName: (string) (len=3) "id1",
       FieldUUID: (string) (len=4) "7483",
       FieldType: (string) (len=7) "integer",
-      SimpleFieldType: (string) (len=6) "number"
+      SimpleFieldType: (string) (len=6) "number",
+      Classification: (interface {}) <nil>
     }
   }),
   (*detections.Detection)({
@@ -107,7 +108,8 @@
       FieldName: (string) (len=3) "id2",
       FieldUUID: (string) (len=4) "7502",
       FieldType: (string) (len=6) "string",
-      SimpleFieldType: (string) (len=6) "string"
+      SimpleFieldType: (string) (len=6) "string",
+      Classification: (interface {}) <nil>
     }
   }),
   (*detections.Detection)({
@@ -128,7 +130,8 @@
       FieldName: (string) (len=5) "petId",
       FieldUUID: (string) (len=4) "7607",
       FieldType: (string) (len=6) "string",
-      SimpleFieldType: (string) (len=6) "string"
+      SimpleFieldType: (string) (len=6) "string",
+      Classification: (interface {}) <nil>
     }
   }),
   (*detections.Detection)({
@@ -149,7 +152,8 @@
       FieldName: (string) (len=4) "name",
       FieldUUID: (string) (len=4) "7678",
       FieldType: (string) (len=6) "string",
-      SimpleFieldType: (string) (len=6) "string"
+      SimpleFieldType: (string) (len=6) "string",
+      Classification: (interface {}) <nil>
     }
   }),
   (*detections.Detection)({
@@ -170,7 +174,8 @@
       FieldName: (string) (len=2) "id",
       FieldUUID: (string) (len=4) "7684",
       FieldType: (string) "",
-      SimpleFieldType: (string) (len=6) "object"
+      SimpleFieldType: (string) (len=6) "object",
+      Classification: (interface {}) <nil>
     }
   }),
   (*detections.Detection)({
@@ -191,7 +196,8 @@
       FieldName: (string) (len=3) "id1",
       FieldUUID: (string) (len=4) "7686",
       FieldType: (string) (len=6) "string",
-      SimpleFieldType: (string) (len=6) "string"
+      SimpleFieldType: (string) (len=6) "string",
+      Classification: (interface {}) <nil>
     }
   }),
   (*detections.Detection)({
@@ -212,7 +218,8 @@
       FieldName: (string) (len=3) "id2",
       FieldUUID: (string) (len=4) "7692",
       FieldType: (string) (len=6) "string",
-      SimpleFieldType: (string) (len=6) "string"
+      SimpleFieldType: (string) (len=6) "string",
+      Classification: (interface {}) <nil>
     }
   }),
   (*detections.Detection)({
@@ -233,7 +240,8 @@
       FieldName: (string) (len=4) "code",
       FieldUUID: (string) (len=4) "7713",
       FieldType: (string) (len=7) "integer",
-      SimpleFieldType: (string) (len=6) "number"
+      SimpleFieldType: (string) (len=6) "number",
+      Classification: (interface {}) <nil>
     }
   }),
   (*detections.Detection)({
@@ -254,7 +262,8 @@
       FieldName: (string) (len=7) "message",
       FieldUUID: (string) (len=4) "7722",
       FieldType: (string) (len=6) "string",
-      SimpleFieldType: (string) (len=6) "string"
+      SimpleFieldType: (string) (len=6) "string",
+      Classification: (interface {}) <nil>
     }
   })
 }

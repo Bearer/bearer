@@ -16,7 +16,8 @@
 			"field_name": "users",
 			"field_uuid": "2",
 			"field_type": "",
-			"field_type_simple": "object"
+			"field_type_simple": "object",
+			"classification": null
 		}
 	},
 	{
@@ -36,7 +37,8 @@
 			"field_name": "id",
 			"field_uuid": "3",
 			"field_type": "bigint",
-			"field_type_simple": "number"
+			"field_type_simple": "number",
+			"classification": null
 		}
 	},
 	{
@@ -56,7 +58,8 @@
 			"field_name": "users",
 			"field_uuid": "5",
 			"field_type": "",
-			"field_type_simple": "object"
+			"field_type_simple": "object",
+			"classification": null
 		}
 	},
 	{
@@ -76,7 +79,8 @@
 			"field_name": "class_id",
 			"field_uuid": "6",
 			"field_type": "bigint",
-			"field_type_simple": "number"
+			"field_type_simple": "number",
+			"classification": null
 		}
 	},
 	{
@@ -96,7 +100,8 @@
 			"field_name": "users",
 			"field_uuid": "8",
 			"field_type": "",
-			"field_type_simple": "object"
+			"field_type_simple": "object",
+			"classification": null
 		}
 	},
 	{
@@ -116,7 +121,8 @@
 			"field_name": "type",
 			"field_uuid": "9",
 			"field_type": "character",
-			"field_type_simple": "string"
+			"field_type_simple": "string",
+			"classification": null
 		}
 	},
 	{
@@ -136,7 +142,8 @@
 			"field_name": "users",
 			"field_uuid": "11",
 			"field_type": "",
-			"field_type_simple": "object"
+			"field_type_simple": "object",
+			"classification": null
 		}
 	},
 	{
@@ -156,7 +163,8 @@
 			"field_name": "metadata",
 			"field_uuid": "12",
 			"field_type": "json",
-			"field_type_simple": "object"
+			"field_type_simple": "object",
+			"classification": null
 		}
 	},
 	{
@@ -176,7 +184,8 @@
 			"field_name": "users",
 			"field_uuid": "14",
 			"field_type": "",
-			"field_type_simple": "object"
+			"field_type_simple": "object",
+			"classification": null
 		}
 	},
 	{
@@ -196,7 +205,8 @@
 			"field_name": "created_at",
 			"field_uuid": "15",
 			"field_type": "timestamp",
-			"field_type_simple": "date"
+			"field_type_simple": "date",
+			"classification": null
 		}
 	},
 	{
@@ -216,7 +226,8 @@
 			"field_name": "users",
 			"field_uuid": "17",
 			"field_type": "",
-			"field_type_simple": "object"
+			"field_type_simple": "object",
+			"classification": null
 		}
 	},
 	{
@@ -236,7 +247,8 @@
 			"field_name": "updated_at",
 			"field_uuid": "18",
 			"field_type": "timestamp",
-			"field_type_simple": "date"
+			"field_type_simple": "date",
+			"classification": null
 		}
 	}
 ]
