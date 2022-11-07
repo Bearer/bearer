@@ -45,9 +45,9 @@
 		"type": "custom",
 		"detector_type": "detect_ruby_logger",
 		"source": {
-			"filename": "",
-			"language": "",
-			"language_type": "",
+			"filename": "log.rb",
+			"language": "Ruby",
+			"language_type": "programming",
 			"line_number": 3,
 			"column_number": 1,
 			"text": null
@@ -66,9 +66,9 @@
 		"type": "custom",
 		"detector_type": "detect_ruby_logger",
 		"source": {
-			"filename": "",
-			"language": "",
-			"language_type": "",
+			"filename": "log.rb",
+			"language": "Ruby",
+			"language_type": "programming",
 			"line_number": 3,
 			"column_number": 6,
 			"text": null
@@ -87,9 +87,9 @@
 		"type": "custom",
 		"detector_type": "detect_ruby_logger",
 		"source": {
-			"filename": "",
-			"language": "",
-			"language_type": "",
+			"filename": "log.rb",
+			"language": "Ruby",
+			"language_type": "programming",
 			"line_number": 4,
 			"column_number": 1,
 			"text": null
@@ -108,9 +108,9 @@
 		"type": "custom",
 		"detector_type": "detect_ruby_logger",
 		"source": {
-			"filename": "",
-			"language": "",
-			"language_type": "",
+			"filename": "log.rb",
+			"language": "Ruby",
+			"language_type": "programming",
 			"line_number": 4,
 			"column_number": 6,
 			"text": null
@@ -129,9 +129,9 @@
 		"type": "custom",
 		"detector_type": "detect_ruby_logger",
 		"source": {
-			"filename": "",
-			"language": "",
-			"language_type": "",
+			"filename": "log.rb",
+			"language": "Ruby",
+			"language_type": "programming",
 			"line_number": 5,
 			"column_number": 1,
 			"text": null
@@ -150,9 +150,9 @@
 		"type": "custom",
 		"detector_type": "detect_ruby_logger",
 		"source": {
-			"filename": "",
-			"language": "",
-			"language_type": "",
+			"filename": "log.rb",
+			"language": "Ruby",
+			"language_type": "programming",
 			"line_number": 5,
 			"column_number": 6,
 			"text": null
@@ -171,9 +171,9 @@
 		"type": "custom",
 		"detector_type": "detect_ruby_logger",
 		"source": {
-			"filename": "",
-			"language": "",
-			"language_type": "",
+			"filename": "log.rb",
+			"language": "Ruby",
+			"language_type": "programming",
 			"line_number": 5,
 			"column_number": 14,
 			"text": null
@@ -192,9 +192,9 @@
 		"type": "custom",
 		"detector_type": "detect_ruby_logger",
 		"source": {
-			"filename": "",
-			"language": "",
-			"language_type": "",
+			"filename": "log.rb",
+			"language": "Ruby",
+			"language_type": "programming",
 			"line_number": 5,
 			"column_number": 20,
 			"text": null
@@ -255,9 +255,9 @@
 		"type": "custom",
 		"detector_type": "detect_ruby_logger",
 		"source": {
-			"filename": "",
-			"language": "",
-			"language_type": "",
+			"filename": "log.rb",
+			"language": "Ruby",
+			"language_type": "programming",
 			"line_number": 7,
 			"column_number": 20,
 			"text": null
@@ -276,9 +276,9 @@
 		"type": "custom",
 		"detector_type": "detect_ruby_logger",
 		"source": {
-			"filename": "",
-			"language": "",
-			"language_type": "",
+			"filename": "log.rb",
+			"language": "Ruby",
+			"language_type": "programming",
 			"line_number": 7,
 			"column_number": 25,
 			"text": null
@@ -297,9 +297,9 @@
 		"type": "custom",
 		"detector_type": "detect_ruby_logger",
 		"source": {
-			"filename": "",
-			"language": "",
-			"language_type": "",
+			"filename": "log.rb",
+			"language": "Ruby",
+			"language_type": "programming",
 			"line_number": 8,
 			"column_number": 19,
 			"text": null
@@ -318,9 +318,9 @@
 		"type": "custom",
 		"detector_type": "detect_ruby_logger",
 		"source": {
-			"filename": "",
-			"language": "",
-			"language_type": "",
+			"filename": "log.rb",
+			"language": "Ruby",
+			"language_type": "programming",
 			"line_number": 8,
 			"column_number": 24,
 			"text": null
@@ -339,9 +339,9 @@
 		"type": "custom",
 		"detector_type": "detect_ruby_logger",
 		"source": {
-			"filename": "",
-			"language": "",
-			"language_type": "",
+			"filename": "log.rb",
+			"language": "Ruby",
+			"language_type": "programming",
 			"line_number": 8,
 			"column_number": 50,
 			"text": null
@@ -360,9 +360,9 @@
 		"type": "custom",
 		"detector_type": "detect_ruby_logger",
 		"source": {
-			"filename": "",
-			"language": "",
-			"language_type": "",
+			"filename": "log.rb",
+			"language": "Ruby",
+			"language_type": "programming",
 			"line_number": 8,
 			"column_number": 55,
 			"text": null
