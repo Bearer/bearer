@@ -17,7 +17,8 @@
       FieldName: (string) (len=4) "name",
       FieldUUID: (string) (len=1) "3",
       FieldType: (string) "",
-      SimpleFieldType: (string) (len=7) "unknown"
+      SimpleFieldType: (string) (len=7) "unknown",
+      Classification: (interface {}) <nil>
     }
   }),
   (*detections.Detection)({
@@ -38,7 +39,8 @@
       FieldName: (string) (len=10) "initialize",
       FieldUUID: (string) (len=1) "2",
       FieldType: (string) "",
-      SimpleFieldType: (string) (len=7) "unknown"
+      SimpleFieldType: (string) (len=7) "unknown",
+      Classification: (interface {}) <nil>
     }
   }),
   (*detections.Detection)({
@@ -59,7 +61,8 @@
       FieldName: (string) (len=4) "name",
       FieldUUID: (string) (len=1) "3",
       FieldType: (string) "",
-      SimpleFieldType: (string) (len=7) "unknown"
+      SimpleFieldType: (string) (len=7) "unknown",
+      Classification: (interface {}) <nil>
     }
   }),
   (*detections.Detection)({
@@ -80,7 +83,8 @@
       FieldName: (string) (len=7) "surname",
       FieldUUID: (string) (len=1) "4",
       FieldType: (string) "",
-      SimpleFieldType: (string) (len=7) "unknown"
+      SimpleFieldType: (string) (len=7) "unknown",
+      Classification: (interface {}) <nil>
     }
   }),
   (*detections.Detection)({
@@ -101,7 +105,8 @@
       FieldName: (string) (len=4) "city",
       FieldUUID: (string) (len=2) "10",
       FieldType: (string) "",
-      SimpleFieldType: (string) (len=7) "unknown"
+      SimpleFieldType: (string) (len=7) "unknown",
+      Classification: (interface {}) <nil>
     }
   }),
   (*detections.Detection)({
@@ -122,7 +127,8 @@
       FieldName: (string) (len=6) "number",
       FieldUUID: (string) (len=2) "11",
       FieldType: (string) "",
-      SimpleFieldType: (string) (len=7) "unknown"
+      SimpleFieldType: (string) (len=7) "unknown",
+      Classification: (interface {}) <nil>
     }
   }),
   (*detections.Detection)({
@@ -143,7 +149,8 @@
       FieldName: (string) (len=4) "city",
       FieldUUID: (string) (len=2) "10",
       FieldType: (string) "",
-      SimpleFieldType: (string) (len=7) "unknown"
+      SimpleFieldType: (string) (len=7) "unknown",
+      Classification: (interface {}) <nil>
     }
   }),
   (*detections.Detection)({
@@ -164,7 +171,8 @@
       FieldName: (string) (len=6) "number",
       FieldUUID: (string) (len=2) "11",
       FieldType: (string) "",
-      SimpleFieldType: (string) (len=7) "unknown"
+      SimpleFieldType: (string) (len=7) "unknown",
+      Classification: (interface {}) <nil>
     }
   }),
   (*detections.Detection)({
@@ -185,7 +193,8 @@
       FieldName: (string) (len=4) "city",
       FieldUUID: (string) (len=2) "10",
       FieldType: (string) "",
-      SimpleFieldType: (string) (len=7) "unknown"
+      SimpleFieldType: (string) (len=7) "unknown",
+      Classification: (interface {}) <nil>
     }
   }),
   (*detections.Detection)({
@@ -206,7 +215,8 @@
       FieldName: (string) (len=6) "number",
       FieldUUID: (string) (len=2) "11",
       FieldType: (string) "",
-      SimpleFieldType: (string) (len=7) "unknown"
+      SimpleFieldType: (string) (len=7) "unknown",
+      Classification: (interface {}) <nil>
     }
   }),
   (*detections.Detection)({
@@ -227,7 +237,8 @@
       FieldName: (string) (len=4) "city",
       FieldUUID: (string) (len=2) "10",
       FieldType: (string) "",
-      SimpleFieldType: (string) (len=7) "unknown"
+      SimpleFieldType: (string) (len=7) "unknown",
+      Classification: (interface {}) <nil>
     }
   }),
   (*detections.Detection)({
@@ -248,7 +259,8 @@
       FieldName: (string) (len=6) "number",
       FieldUUID: (string) (len=2) "11",
       FieldType: (string) "",
-      SimpleFieldType: (string) (len=7) "unknown"
+      SimpleFieldType: (string) (len=7) "unknown",
+      Classification: (interface {}) <nil>
     }
   }),
   (*detections.Detection)({
@@ -269,7 +281,8 @@
       FieldName: (string) (len=4) "city",
       FieldUUID: (string) (len=2) "10",
       FieldType: (string) "",
-      SimpleFieldType: (string) (len=7) "unknown"
+      SimpleFieldType: (string) (len=7) "unknown",
+      Classification: (interface {}) <nil>
     }
   }),
   (*detections.Detection)({
@@ -290,7 +303,8 @@
       FieldName: (string) (len=4) "test",
       FieldUUID: (string) (len=2) "12",
       FieldType: (string) "",
-      SimpleFieldType: (string) (len=7) "unknown"
+      SimpleFieldType: (string) (len=7) "unknown",
+      Classification: (interface {}) <nil>
     }
   }),
   (*detections.Detection)({
@@ -311,7 +325,8 @@
       FieldName: (string) (len=6) "number",
       FieldUUID: (string) (len=2) "13",
       FieldType: (string) "",
-      SimpleFieldType: (string) (len=7) "unknown"
+      SimpleFieldType: (string) (len=7) "unknown",
+      Classification: (interface {}) <nil>
     }
   }),
   (*detections.Detection)({
@@ -332,7 +347,8 @@
       FieldName: (string) (len=4) "test",
       FieldUUID: (string) (len=2) "14",
       FieldType: (string) "",
-      SimpleFieldType: (string) (len=7) "unknown"
+      SimpleFieldType: (string) (len=7) "unknown",
+      Classification: (interface {}) <nil>
     }
   }),
   (*detections.Detection)({
@@ -353,7 +369,8 @@
       FieldName: (string) (len=4) "city",
       FieldUUID: (string) (len=2) "10",
       FieldType: (string) "",
-      SimpleFieldType: (string) (len=7) "unknown"
+      SimpleFieldType: (string) (len=7) "unknown",
+      Classification: (interface {}) <nil>
     }
   }),
   (*detections.Detection)({
@@ -374,7 +391,8 @@
       FieldName: (string) (len=4) "test",
       FieldUUID: (string) (len=2) "12",
       FieldType: (string) "",
-      SimpleFieldType: (string) (len=7) "unknown"
+      SimpleFieldType: (string) (len=7) "unknown",
+      Classification: (interface {}) <nil>
     }
   }),
   (*detections.Detection)({
@@ -395,7 +413,8 @@
       FieldName: (string) (len=6) "number",
       FieldUUID: (string) (len=2) "13",
       FieldType: (string) "",
-      SimpleFieldType: (string) (len=7) "unknown"
+      SimpleFieldType: (string) (len=7) "unknown",
+      Classification: (interface {}) <nil>
     }
   }),
   (*detections.Detection)({
@@ -416,7 +435,8 @@
       FieldName: (string) (len=4) "test",
       FieldUUID: (string) (len=2) "14",
       FieldType: (string) "",
-      SimpleFieldType: (string) (len=7) "unknown"
+      SimpleFieldType: (string) (len=7) "unknown",
+      Classification: (interface {}) <nil>
     }
   }),
   (*detections.Detection)({
@@ -437,7 +457,8 @@
       FieldName: (string) (len=4) "city",
       FieldUUID: (string) (len=2) "10",
       FieldType: (string) "",
-      SimpleFieldType: (string) (len=7) "unknown"
+      SimpleFieldType: (string) (len=7) "unknown",
+      Classification: (interface {}) <nil>
     }
   }),
   (*detections.Detection)({
@@ -458,7 +479,8 @@
       FieldName: (string) (len=4) "test",
       FieldUUID: (string) (len=2) "12",
       FieldType: (string) "",
-      SimpleFieldType: (string) (len=7) "unknown"
+      SimpleFieldType: (string) (len=7) "unknown",
+      Classification: (interface {}) <nil>
     }
   }),
   (*detections.Detection)({
@@ -479,7 +501,8 @@
       FieldName: (string) (len=4) "test",
       FieldUUID: (string) (len=2) "17",
       FieldType: (string) "",
-      SimpleFieldType: (string) (len=7) "unknown"
+      SimpleFieldType: (string) (len=7) "unknown",
+      Classification: (interface {}) <nil>
     }
   }),
   (*detections.Detection)({
@@ -500,7 +523,8 @@
       FieldName: (string) (len=4) "city",
       FieldUUID: (string) (len=2) "10",
       FieldType: (string) "",
-      SimpleFieldType: (string) (len=7) "unknown"
+      SimpleFieldType: (string) (len=7) "unknown",
+      Classification: (interface {}) <nil>
     }
   }),
   (*detections.Detection)({
@@ -521,7 +545,8 @@
       FieldName: (string) (len=4) "test",
       FieldUUID: (string) (len=2) "12",
       FieldType: (string) "",
-      SimpleFieldType: (string) (len=7) "unknown"
+      SimpleFieldType: (string) (len=7) "unknown",
+      Classification: (interface {}) <nil>
     }
   }),
   (*detections.Detection)({
@@ -542,7 +567,8 @@
       FieldName: (string) (len=4) "test",
       FieldUUID: (string) (len=2) "17",
       FieldType: (string) "",
-      SimpleFieldType: (string) (len=7) "unknown"
+      SimpleFieldType: (string) (len=7) "unknown",
+      Classification: (interface {}) <nil>
     }
   }),
   (*detections.Detection)({
@@ -563,7 +589,8 @@
       FieldName: (string) (len=4) "test",
       FieldUUID: (string) (len=2) "15",
       FieldType: (string) "",
-      SimpleFieldType: (string) (len=7) "unknown"
+      SimpleFieldType: (string) (len=7) "unknown",
+      Classification: (interface {}) <nil>
     }
   }),
   (*detections.Detection)({
@@ -584,7 +611,8 @@
       FieldName: (string) (len=7) "address",
       FieldUUID: (string) (len=2) "19",
       FieldType: (string) "",
-      SimpleFieldType: (string) (len=7) "unknown"
+      SimpleFieldType: (string) (len=7) "unknown",
+      Classification: (interface {}) <nil>
     }
   }),
   (*detections.Detection)({
@@ -605,7 +633,8 @@
       FieldName: (string) (len=4) "city",
       FieldUUID: (string) (len=2) "21",
       FieldType: (string) "",
-      SimpleFieldType: (string) (len=7) "unknown"
+      SimpleFieldType: (string) (len=7) "unknown",
+      Classification: (interface {}) <nil>
     }
   }),
   (*detections.Detection)({
@@ -626,7 +655,8 @@
       FieldName: (string) (len=7) "address",
       FieldUUID: (string) (len=2) "22",
       FieldType: (string) "",
-      SimpleFieldType: (string) (len=7) "unknown"
+      SimpleFieldType: (string) (len=7) "unknown",
+      Classification: (interface {}) <nil>
     }
   }),
   (*detections.Detection)({
@@ -647,7 +677,8 @@
       FieldName: (string) (len=4) "city",
       FieldUUID: (string) (len=2) "10",
       FieldType: (string) "",
-      SimpleFieldType: (string) (len=7) "unknown"
+      SimpleFieldType: (string) (len=7) "unknown",
+      Classification: (interface {}) <nil>
     }
   }),
   (*detections.Detection)({
@@ -668,7 +699,8 @@
       FieldName: (string) (len=4) "test",
       FieldUUID: (string) (len=2) "12",
       FieldType: (string) "",
-      SimpleFieldType: (string) (len=7) "unknown"
+      SimpleFieldType: (string) (len=7) "unknown",
+      Classification: (interface {}) <nil>
     }
   }),
   (*detections.Detection)({
@@ -689,7 +721,8 @@
       FieldName: (string) (len=4) "test",
       FieldUUID: (string) (len=2) "17",
       FieldType: (string) "",
-      SimpleFieldType: (string) (len=7) "unknown"
+      SimpleFieldType: (string) (len=7) "unknown",
+      Classification: (interface {}) <nil>
     }
   }),
   (*detections.Detection)({
@@ -710,7 +743,8 @@
       FieldName: (string) (len=3) "foo",
       FieldUUID: (string) (len=2) "26",
       FieldType: (string) "",
-      SimpleFieldType: (string) (len=7) "unknown"
+      SimpleFieldType: (string) (len=7) "unknown",
+      Classification: (interface {}) <nil>
     }
   }),
   (*detections.Detection)({
@@ -731,7 +765,8 @@
       FieldName: (string) (len=3) "bar",
       FieldUUID: (string) (len=2) "25",
       FieldType: (string) "",
-      SimpleFieldType: (string) (len=7) "unknown"
+      SimpleFieldType: (string) (len=7) "unknown",
+      Classification: (interface {}) <nil>
     }
   }),
   (*detections.Detection)({
@@ -752,7 +787,8 @@
       FieldName: (string) (len=3) "foo",
       FieldUUID: (string) (len=2) "26",
       FieldType: (string) "",
-      SimpleFieldType: (string) (len=7) "unknown"
+      SimpleFieldType: (string) (len=7) "unknown",
+      Classification: (interface {}) <nil>
     }
   }),
   (*detections.Detection)({
@@ -773,7 +809,8 @@
       FieldName: (string) (len=3) "bar",
       FieldUUID: (string) (len=2) "25",
       FieldType: (string) "",
-      SimpleFieldType: (string) (len=7) "unknown"
+      SimpleFieldType: (string) (len=7) "unknown",
+      Classification: (interface {}) <nil>
     }
   }),
   (*detections.Detection)({
@@ -794,7 +831,8 @@
       FieldName: (string) (len=4) "name",
       FieldUUID: (string) (len=1) "7",
       FieldType: (string) "",
-      SimpleFieldType: (string) (len=7) "unknown"
+      SimpleFieldType: (string) (len=7) "unknown",
+      Classification: (interface {}) <nil>
     }
   }),
   (*detections.Detection)({
@@ -815,7 +853,8 @@
       FieldName: (string) (len=10) "initialize",
       FieldUUID: (string) (len=1) "6",
       FieldType: (string) "",
-      SimpleFieldType: (string) (len=7) "unknown"
+      SimpleFieldType: (string) (len=7) "unknown",
+      Classification: (interface {}) <nil>
     }
   }),
   (*detections.Detection)({
@@ -836,7 +875,8 @@
       FieldName: (string) (len=4) "name",
       FieldUUID: (string) (len=1) "7",
       FieldType: (string) "",
-      SimpleFieldType: (string) (len=7) "unknown"
+      SimpleFieldType: (string) (len=7) "unknown",
+      Classification: (interface {}) <nil>
     }
   }),
   (*detections.Detection)({
@@ -857,7 +897,8 @@
       FieldName: (string) (len=7) "surname",
       FieldUUID: (string) (len=1) "8",
       FieldType: (string) "",
-      SimpleFieldType: (string) (len=7) "unknown"
+      SimpleFieldType: (string) (len=7) "unknown",
+      Classification: (interface {}) <nil>
     }
   })
 }

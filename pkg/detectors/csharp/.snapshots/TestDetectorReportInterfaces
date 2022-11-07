@@ -17,7 +17,8 @@
       FieldName: (string) (len=4) "main",
       FieldUUID: (string) (len=1) "3",
       FieldType: (string) (len=4) "void",
-      SimpleFieldType: (string) (len=7) "unknown"
+      SimpleFieldType: (string) (len=7) "unknown",
+      Classification: (interface {}) <nil>
     }
   }),
   (*detections.Detection)({
@@ -94,7 +95,8 @@
       FieldName: (string) (len=4) "Name",
       FieldUUID: (string) (len=1) "6",
       FieldType: (string) (len=6) "string",
-      SimpleFieldType: (string) (len=6) "string"
+      SimpleFieldType: (string) (len=6) "string",
+      Classification: (interface {}) <nil>
     }
   }),
   (*detections.Detection)({
@@ -115,7 +117,8 @@
       FieldName: (string) (len=3) "Get",
       FieldUUID: (string) (len=1) "7",
       FieldType: (string) (len=4) "void",
-      SimpleFieldType: (string) (len=7) "unknown"
+      SimpleFieldType: (string) (len=7) "unknown",
+      Classification: (interface {}) <nil>
     }
   }),
   (*detections.Detection)({
@@ -136,7 +139,8 @@
       FieldName: (string) (len=9) "Something",
       FieldUUID: (string) (len=1) "8",
       FieldType: (string) (len=4) "void",
-      SimpleFieldType: (string) (len=7) "unknown"
+      SimpleFieldType: (string) (len=7) "unknown",
+      Classification: (interface {}) <nil>
     }
   }),
   (*detections.Detection)({

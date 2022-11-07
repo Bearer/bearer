@@ -54,6 +54,14 @@ type DataType struct {
 	UUID             string `json:"uuid"`
 }
 
+type ObjectType string
+
+var KnownObject ObjectType = "known"
+var ExtendedUnknownObject ObjectType = "unknown_extended"
+var UnknownObject ObjectType = "unknown"
+var AssociatedObject ObjectType = "associated"
+var KnownDataObject ObjectType = "known_data_object"
+
 type DataTypeClassificationPattern struct {
 	Id                        int                 `json:"id"`
 	DataTypeUUID              string              `json:"data_type_uuid,omitempty"`

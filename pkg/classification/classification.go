@@ -41,6 +41,7 @@ func NewClassifier(config *Config) (*Classifier, error) {
 			DataTypes:                      db.Default().DataTypes,
 			DataTypeClassificationPatterns: db.Default().DataTypeClassificationPatterns,
 			KnownPersonObjectPatterns:      db.Default().KnownPersonObjectPatterns,
+			Context:                        config.Config.Scan.Context,
 		},
 	)
 

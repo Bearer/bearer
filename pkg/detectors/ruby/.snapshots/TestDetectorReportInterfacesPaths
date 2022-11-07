@@ -78,7 +78,8 @@
       FieldName: (string) (len=3) "foo",
       FieldUUID: (string) (len=1) "9",
       FieldType: (string) "",
-      SimpleFieldType: (string) (len=7) "unknown"
+      SimpleFieldType: (string) (len=7) "unknown",
+      Classification: (interface {}) <nil>
     }
   }),
   (*detections.Detection)({
@@ -99,7 +100,8 @@
       FieldName: (string) (len=4) "to_i",
       FieldUUID: (string) (len=2) "22",
       FieldType: (string) "",
-      SimpleFieldType: (string) (len=7) "unknown"
+      SimpleFieldType: (string) (len=7) "unknown",
+      Classification: (interface {}) <nil>
     }
   }),
   (*detections.Detection)({
@@ -120,7 +122,8 @@
       FieldName: (string) (len=9) "object_id",
       FieldUUID: (string) (len=2) "25",
       FieldType: (string) "",
-      SimpleFieldType: (string) (len=7) "unknown"
+      SimpleFieldType: (string) (len=7) "unknown",
+      Classification: (interface {}) <nil>
     }
   }),
   (*detections.Detection)({
@@ -141,7 +144,8 @@
       FieldName: (string) (len=9) "formatter",
       FieldUUID: (string) (len=2) "27",
       FieldType: (string) "",
-      SimpleFieldType: (string) (len=7) "unknown"
+      SimpleFieldType: (string) (len=7) "unknown",
+      Classification: (interface {}) <nil>
     }
   }),
   (*detections.Detection)({
@@ -162,7 +166,8 @@
       FieldName: (string) (len=8) "strftime",
       FieldUUID: (string) (len=2) "29",
       FieldType: (string) "",
-      SimpleFieldType: (string) (len=7) "unknown"
+      SimpleFieldType: (string) (len=7) "unknown",
+      Classification: (interface {}) <nil>
     }
   })
 }
