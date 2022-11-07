@@ -4,7 +4,6 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
-	"sort"
 
 	"github.com/bearer/curio/pkg/report/output/dataflow/types"
 
@@ -23,11 +22,11 @@ type detectorHolder struct {
 }
 type datatypeHolder struct {
 	name  string
-	files []*fileHolder // group files by filename
+	files map[string]*fileHolder // group files by filename
 }
 type fileHolder struct {
 	name       string
-	lineNumber int
+	lineNumber map[int]int
 }
 
 func New() *Holder {
@@ -66,18 +65,24 @@ func (holder *Holder) addDatatype(ruleName string, datatypeName string, fileName
 	}
 
 	detector := holder.detectors[ruleName]
-	// create detector entry if it doesn't exist
+	// create datatype entry if it doesn't exist
 	if _, exists := detector.datatypes[datatypeName]; !exists {
 		detector.datatypes[datatypeName] = &datatypeHolder{
 			name:  datatypeName,
-			files: make([]*fileHolder, 0),
+			files: make(map[string]*fileHolder),
 		}
 	}
 
-	detector.datatypes[datatypeName].files = append(detector.datatypes[datatypeName].files, &fileHolder{
-		name:       fileName,
-		lineNumber: lineNumber,
-	})
+	datatype := detector.datatypes[datatypeName]
+	// create file entry if it doesn't exist
+	if _, exists := datatype.files[fileName]; !exists {
+		datatype.files[fileName] = &fileHolder{
+			name:       fileName,
+			lineNumber: make(map[int]int),
+		}
+	}
+
+	datatype.files[fileName].lineNumber[lineNumber] = lineNumber
 
 }
 
@@ -100,22 +105,16 @@ func (holder *Holder) ToDataFlow() []types.RiskDetector {
 				Locations: make([]types.RiskLocation, 0),
 			}
 
-			// sort by name asc and then by line number asc
-			sort.Slice(datatype.files, func(i, j int) bool {
-				a := datatype.files[i]
-				b := datatype.files[j]
+			files := maputil.ToSortedSlice(datatype.files)
+			for _, file := range files {
 
-				if a.name < b.name {
-					return true
+				lineNumbers := maputil.ToSortedSlice(file.lineNumber)
+				for _, lineNumber := range lineNumbers {
+					constructedDatatype.Locations = append(constructedDatatype.Locations, types.RiskLocation{
+						Filename:   file.name,
+						LineNumber: lineNumber,
+					})
 				}
-
-				return a.lineNumber < b.lineNumber
-			})
-			for _, file := range datatype.files {
-				constructedDatatype.Locations = append(constructedDatatype.Locations, types.RiskLocation{
-					Filename:   file.name,
-					LineNumber: file.lineNumber,
-				})
 			}
 			constructedDetector.DataTypes = append(constructedDetector.DataTypes, constructedDatatype)
 		}
