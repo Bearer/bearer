@@ -49,25 +49,15 @@ func (classifier *Classifier) Classify(data detections.Detection) (*ClassifiedDe
 
 	if classify.IsVendored(data.Source.Filename) {
 		return &ClassifiedDependency{
-			Detection: &data,
-			Classification: &Classification{
-				Decision: classify.ClassificationDecision{
-					State:  classify.Invalid,
-					Reason: classify.IncludedInVendorFolderReason,
-				},
-			},
+			Detection:      &data,
+			Classification: classification,
 		}, nil
 	}
 
 	if classify.IsPotentialDetector(data.DetectorType) {
 		return &ClassifiedDependency{
-			Detection: &data,
-			Classification: &Classification{
-				Decision: classify.ClassificationDecision{
-					State:  classify.Invalid,
-					Reason: classify.PotentialDetectorReason,
-				},
-			},
+			Detection:      &data,
+			Classification: classification,
 		}, nil
 	}
 

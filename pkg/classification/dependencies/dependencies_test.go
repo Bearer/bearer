@@ -87,12 +87,7 @@ func TestDependencies(t *testing.T) {
 				},
 				Type: detections.TypeDependency,
 			},
-			Want: &dependencies.Classification{
-				Decision: classify.ClassificationDecision{
-					State:  classify.Invalid,
-					Reason: classify.IncludedInVendorFolderReason,
-				},
-			},
+			Want: nil,
 		},
 	}
 
