@@ -17,7 +17,8 @@
       FieldName: (string) (len=4) "name",
       FieldUUID: (string) (len=1) "3",
       FieldType: (string) (len=4) "User",
-      SimpleFieldType: (string) (len=6) "object"
+      SimpleFieldType: (string) (len=6) "object",
+      Classification: (interface {}) <nil>
     }
   }),
   (*detections.Detection)({
@@ -38,7 +39,8 @@
       FieldName: (string) (len=7) "address",
       FieldUUID: (string) (len=1) "4",
       FieldType: (string) (len=6) "string",
-      SimpleFieldType: (string) (len=6) "string"
+      SimpleFieldType: (string) (len=6) "string",
+      Classification: (interface {}) <nil>
     }
   }),
   (*detections.Detection)({
@@ -59,7 +61,8 @@
       FieldName: (string) (len=6) "orders",
       FieldUUID: (string) (len=1) "5",
       FieldType: (string) (len=11) "List<Order>",
-      SimpleFieldType: (string) (len=6) "object"
+      SimpleFieldType: (string) (len=6) "object",
+      Classification: (interface {}) <nil>
     }
   }),
   (*detections.Detection)({
@@ -80,7 +83,8 @@
       FieldName: (string) (len=14) "ConsumerKeyKey",
       FieldUUID: (string) (len=1) "6",
       FieldType: (string) (len=6) "string",
-      SimpleFieldType: (string) (len=6) "string"
+      SimpleFieldType: (string) (len=6) "string",
+      Classification: (interface {}) <nil>
     }
   }),
   (*detections.Detection)({
@@ -101,7 +105,8 @@
       FieldName: (string) (len=3) "Age",
       FieldUUID: (string) (len=1) "7",
       FieldType: (string) (len=3) "int",
-      SimpleFieldType: (string) (len=6) "number"
+      SimpleFieldType: (string) (len=6) "number",
+      Classification: (interface {}) <nil>
     }
   }),
   (*detections.Detection)({
@@ -122,7 +127,8 @@
       FieldName: (string) (len=4) "test",
       FieldUUID: (string) (len=1) "8",
       FieldType: (string) (len=4) "void",
-      SimpleFieldType: (string) (len=7) "unknown"
+      SimpleFieldType: (string) (len=7) "unknown",
+      Classification: (interface {}) <nil>
     }
   }),
   (*detections.Detection)({
@@ -143,7 +149,8 @@
       FieldName: (string) (len=11) "dosomething",
       FieldUUID: (string) (len=1) "9",
       FieldType: (string) (len=6) "string",
-      SimpleFieldType: (string) (len=6) "string"
+      SimpleFieldType: (string) (len=6) "string",
+      Classification: (interface {}) <nil>
     }
   })
 }

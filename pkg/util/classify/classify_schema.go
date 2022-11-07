@@ -39,6 +39,10 @@ func IsDatabase(detectorType detectors.Type) bool {
 	return ok
 }
 
+func IsJSDetection(detectorType detectors.Type) bool {
+	return detectorType == detectors.DetectorJavascript || detectorType == detectors.DetectorTypescript
+}
+
 func ObjectStopWordDetected(name string) bool {
 	_, ok := objectStopWords[name]
 	return ok

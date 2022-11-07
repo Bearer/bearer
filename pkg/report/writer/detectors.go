@@ -79,22 +79,19 @@ func (report *Detectors) AddCreateView(
 func (report *Detectors) AddDataType(detectionType detections.DetectionType, detectorType detectors.Type, idGenerator nodeid.Generator, values map[parser.NodeID]*datatype.DataType) {
 	classifiedDatatypes := make(map[parser.NodeID]*classsificationschema.ClassifiedDatatype, 0)
 	for nodeID, target := range values {
-		classified, err := report.Classifier.Schema.Classify(classsificationschema.DataTypeDetection{
+		classified := report.Classifier.Schema.Classify(classsificationschema.DataTypeDetection{
 			Value:        target,
 			Filename:     target.GetNode().Source(false).Filename,
 			DetectorType: detectorType,
 		})
-		if err != nil {
-			report.AddError(target.GetNode().Source(false).Filename, fmt.Errorf("classification datatypes error: %s", err))
-		}
 
 		classifiedDatatypes[nodeID] = classified
 	}
 
 	if detectionType == detections.TypeCustom {
-		datatype.ExportClassified(report, detections.TypeCustomClassified, detectorType, idGenerator, false, values)
+		datatype.ExportClassified(report, detections.TypeSchemaClassified, detectorType, idGenerator, false, classifiedDatatypes)
 	} else {
-		datatype.ExportClassified(report, detections.TypeSchemaClassified, detectorType, idGenerator, true, values)
+		datatype.ExportClassified(report, detections.TypeSchemaClassified, detectorType, idGenerator, true, classifiedDatatypes)
 	}
 }
 

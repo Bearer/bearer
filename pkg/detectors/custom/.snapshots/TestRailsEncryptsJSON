@@ -16,7 +16,8 @@
 			"field_name": "User",
 			"field_uuid": "2",
 			"field_type": "",
-			"field_type_simple": "object"
+			"field_type_simple": "object",
+			"classification": null
 		}
 	},
 	{
@@ -36,7 +37,8 @@
 			"field_name": "email",
 			"field_uuid": "3",
 			"field_type": "",
-			"field_type_simple": "unknown"
+			"field_type_simple": "unknown",
+			"classification": null
 		}
 	}
 ]
