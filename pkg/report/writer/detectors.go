@@ -27,13 +27,13 @@ import (
 	"github.com/wlredeye/jsonlines"
 )
 
-type JSONLines struct {
+type Detectors struct {
 	Blamer     blamer.Blamer
 	Classifier *classsification.Classifier
 	File       io.Writer
 }
 
-func (report *JSONLines) AddInterface(
+func (report *Detectors) AddInterface(
 	detectorType detectors.Type,
 	data interfaces.Interface,
 	source source.Source,
@@ -53,7 +53,7 @@ func (report *JSONLines) AddInterface(
 	report.Add(classifiedDetection)
 }
 
-func (report *JSONLines) AddOperation(
+func (report *Detectors) AddOperation(
 	detectorType detectors.Type,
 	operation operations.Operation,
 	source source.Source,
@@ -61,7 +61,7 @@ func (report *JSONLines) AddOperation(
 	report.AddDetection(detections.TypeOperation, detectorType, source, operation)
 }
 
-func (report *JSONLines) AddCreateView(
+func (report *Detectors) AddCreateView(
 	detectorType detectors.Type,
 	createview createview.View,
 ) {
@@ -76,7 +76,7 @@ func (report *JSONLines) AddCreateView(
 	report.AddDetection(detections.TypeCreateView, detectorType, createview.Source, createview)
 }
 
-func (report *JSONLines) AddDataType(detectionType detections.DetectionType, detectorType detectors.Type, idGenerator nodeid.Generator, values map[parser.NodeID]*datatype.DataType) {
+func (report *Detectors) AddDataType(detectionType detections.DetectionType, detectorType detectors.Type, idGenerator nodeid.Generator, values map[parser.NodeID]*datatype.DataType) {
 	classifiedDatatypes := make(map[parser.NodeID]*classsificationschema.ClassifiedDatatype, 0)
 	for nodeID, target := range values {
 		classified := report.Classifier.Schema.Classify(classsificationschema.DataTypeDetection{
@@ -95,7 +95,7 @@ func (report *JSONLines) AddDataType(detectionType detections.DetectionType, det
 	}
 }
 
-func (report *JSONLines) AddSchema(
+func (report *Detectors) AddSchema(
 	detectorType detectors.Type,
 	schema schema.Schema,
 	source source.Source,
@@ -103,14 +103,14 @@ func (report *JSONLines) AddSchema(
 	report.AddDetection(detections.TypeSchema, detectorType, source, schema)
 }
 
-func (report *JSONLines) AddSecretLeak(
+func (report *Detectors) AddSecretLeak(
 	secret secret.Secret,
 	source source.Source,
 ) {
 	report.AddDetection(detections.TypeSecretleak, detectors.DetectorGitleaks, source, secret)
 }
 
-func (report *JSONLines) AddDetection(detectionType detections.DetectionType, detectorType detectors.Type, source source.Source, value interface{}) {
+func (report *Detectors) AddDetection(detectionType detections.DetectionType, detectorType detectors.Type, source source.Source, value interface{}) {
 	data := &detections.Detection{
 		Type:         detectionType,
 		DetectorType: detectorType,
@@ -125,7 +125,7 @@ func (report *JSONLines) AddDetection(detectionType detections.DetectionType, de
 	report.Add(data)
 }
 
-func (report *JSONLines) AddDependency(
+func (report *Detectors) AddDependency(
 	detectorType detectors.Type,
 	dependency dependencies.Dependency,
 	source source.Source,
@@ -146,7 +146,7 @@ func (report *JSONLines) AddDependency(
 	report.Add(classifiedDetection)
 }
 
-func (report *JSONLines) AddFramework(
+func (report *Detectors) AddFramework(
 	detectorType detectors.Type,
 	frameworkType frameworks.Type,
 	data interface{},
@@ -167,7 +167,7 @@ func (report *JSONLines) AddFramework(
 	})
 }
 
-func (report *JSONLines) AddError(filePath string, err error) {
+func (report *Detectors) AddError(filePath string, err error) {
 	report.Add(&detections.ErrorDetection{
 		Type:    detections.TypeError,
 		Message: err.Error(),
@@ -175,13 +175,13 @@ func (report *JSONLines) AddError(filePath string, err error) {
 	})
 }
 
-func (report *JSONLines) AddFillerLine() {
+func (report *Detectors) AddFillerLine() {
 	report.Add(&detections.Detection{
 		Type: detections.TypeFiller,
 	})
 }
 
-func (report *JSONLines) Add(data interface{}) {
+func (report *Detectors) Add(data interface{}) {
 	detectionsToAdd := []interface{}{data}
 
 	err := jsonlines.Encode(report.File, &detectionsToAdd)

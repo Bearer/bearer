@@ -151,7 +151,7 @@ func (r *runner) Report(opts flag.Options, report types.Report) error {
 
 	switch opts.Format {
 	case flag.FormatJSON:
-		err := reportoutput.ReportJSON(report, logger)
+		err := reportoutput.ReportJSON(report, logger, opts)
 		if err != nil {
 			return fmt.Errorf("error generating report %w", err)
 		}

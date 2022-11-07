@@ -28,3 +28,7 @@ type Report interface {
 	AddFillerLine()
 	AddError(filePath string, err error)
 }
+
+type ReportOutput interface {
+	Output(filePath string, outputType string)
+}

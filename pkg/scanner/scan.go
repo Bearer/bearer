@@ -18,7 +18,7 @@ func Scan(rootDir string, FilesToScan []string, blamer blamer.Blamer, outputPath
 	}
 	defer file.Close()
 
-	rep := writer.JSONLines{
+	rep := writer.Detectors{
 		Blamer:     blamer,
 		Classifier: classifier,
 		File:       file,
