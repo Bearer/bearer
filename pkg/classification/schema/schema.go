@@ -3,6 +3,7 @@ package schema
 import (
 	"regexp"
 
+	"github.com/bearer/curio/pkg/flag"
 	"github.com/bearer/curio/pkg/report/schema/datatype"
 
 	"github.com/bearer/curio/pkg/classification/db"
@@ -36,6 +37,7 @@ type Config struct {
 	DataTypes                      []db.DataType
 	DataTypeClassificationPatterns []db.DataTypeClassificationPattern
 	KnownPersonObjectPatterns      []db.KnownPersonObjectPattern
+	Context                        flag.Context
 }
 
 func New(config Config) *Classifier {
@@ -142,7 +144,7 @@ func (classifier *Classifier) matchObjectPatterns(name string, simpleType string
 		if _, correctType := pattern.ObjectTypeMapping[string(objectType)]; !correctType {
 			continue
 		}
-		if pattern.DataTypeUUID == "" {
+		if !classifier.healthContext() && pattern.DataTypeUUID == "" {
 			continue
 		}
 		if !pattern.IncludeRegexpMatcher.MatchString(name) {
@@ -215,7 +217,7 @@ func (classifier *Classifier) classifyKnownObject(classifiedDatatype *Classified
 			validProperties = true
 			classifiedDatatype.DataTypable.SetProperty(
 				property.GetName(),
-				classifyAsValid(property, matchedKnownObject.DataType, "known_classification_pattern"),
+				classifyAsValid(property, classifier.datatypeFromPattern(matchedKnownObject), "known_classification_pattern"),
 			)
 
 			continue
@@ -274,7 +276,7 @@ func (classifier *Classifier) classifyObjectWithUnknownProperties(classifiedData
 		if unknownObject != nil {
 			classifiedDatatype.DataTypable.SetProperty(
 				property.GetName(),
-				classifyAsValid(property, unknownObject.DataType, "valid_unknown_pattern"),
+				classifyAsValid(property, classifier.datatypeFromPattern(unknownObject), "valid_unknown_pattern"),
 			)
 
 			continue
@@ -285,7 +287,7 @@ func (classifier *Classifier) classifyObjectWithUnknownProperties(classifiedData
 		if extendedUnknownObject != nil {
 			classifiedDatatype.DataTypable.SetProperty(
 				property.GetName(),
-				classifyAsValid(property, extendedUnknownObject.DataType, "valid_extended_pattern"),
+				classifyAsValid(property, classifier.datatypeFromPattern(extendedUnknownObject), "valid_extended_pattern"),
 			)
 
 			continue
@@ -332,7 +334,7 @@ func (classifier *Classifier) classifyObjectWithIdentifierProperties(classifiedD
 			associatedObjectProperties = true
 			classifiedDatatype.DataTypable.SetProperty(
 				property.GetName(),
-				classifyAsValid(property, matchedAssociatedObjectPattern.DataType, "valid_associated_object_pattern"),
+				classifyAsValid(property, classifier.datatypeFromPattern(matchedAssociatedObjectPattern), "valid_associated_object_pattern"),
 			)
 
 			continue
@@ -379,6 +381,18 @@ func (classifier *Classifier) classifySchemaObject(classifiedDatatype *Classifie
 		Reason: "unknown_data_object",
 	}
 	return classifiedDatatype
+}
+
+func (classifier *Classifier) healthContext() bool {
+	return classifier.config.Context == "health"
+}
+
+func (classifier *Classifier) datatypeFromPattern(pattern *db.DataTypeClassificationPattern) db.DataType {
+	if classifier.healthContext() && pattern.HealthContextDataTypeUUID != "" {
+		return pattern.HealthContextDataType
+	}
+
+	return pattern.DataType
 }
 
 func identifiersOnly(classifiedDatatype *ClassifiedDatatype) bool {

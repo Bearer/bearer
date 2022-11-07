@@ -1,6 +1,15 @@
 package flag
 
-import "time"
+import (
+	"strings"
+	"time"
+)
+
+type Context string
+
+const (
+	Health Context = "health"
+)
 
 var (
 	SkipPathFlag = Flag{
@@ -33,6 +42,12 @@ var (
 		Value:      []string{},
 		Usage:      "define regular expressions for better classification of private or unreachable domains eg. --internal-domains=\"*.my-company.com,private.sh\"",
 	}
+	ContextFlag = Flag{
+		Name:       "context",
+		ConfigName: "scan.context",
+		Value:      "",
+		Usage:      "expand context of schema classification e.g. --context=health to include data types particular to health",
+	}
 )
 
 type ScanFlagGroup struct {
@@ -41,6 +56,7 @@ type ScanFlagGroup struct {
 	DisableDomainResolutionFlag *Flag
 	DomainResolutionTimeoutFlag *Flag
 	InternalDomainsFlag         *Flag
+	ContextFlag                 *Flag
 }
 
 type ScanOptions struct {
@@ -50,6 +66,7 @@ type ScanOptions struct {
 	DisableDomainResolution bool          `json:"disable_domain_resolution"`
 	DomainResolutionTimeout time.Duration `json:"domain_resolution_timeout"`
 	InternalDomains         []string      `json:"internal_domains"`
+	Context                 Context       `json:"context"`
 }
 
 func NewScanFlagGroup() *ScanFlagGroup {
@@ -59,6 +76,7 @@ func NewScanFlagGroup() *ScanFlagGroup {
 		DisableDomainResolutionFlag: &DisableDomainResolutionFlag,
 		DomainResolutionTimeoutFlag: &DomainResolutionTimeoutFlag,
 		InternalDomainsFlag:         &InternalDomainsFlag,
+		ContextFlag:                 &ContextFlag,
 	}
 }
 
@@ -73,6 +91,7 @@ func (f *ScanFlagGroup) Flags() []*Flag {
 		f.DisableDomainResolutionFlag,
 		f.DomainResolutionTimeoutFlag,
 		f.InternalDomainsFlag,
+		f.ContextFlag,
 	}
 }
 
@@ -88,6 +107,16 @@ func (f *ScanFlagGroup) ToOptions(args []string) (ScanOptions, error) {
 		DisableDomainResolution: getBool(f.DisableDomainResolutionFlag),
 		DomainResolutionTimeout: getDuration(f.DomainResolutionTimeoutFlag),
 		InternalDomains:         getStringSlice(f.InternalDomainsFlag),
+		Context:                 getContext(f.ContextFlag),
 		Target:                  target,
 	}, nil
+}
+
+func getContext(flag *Flag) Context {
+	if flag == nil {
+		return ""
+	}
+
+	flagStr := strings.ToLower(getString(flag))
+	return Context(flagStr)
 }
