@@ -89,7 +89,7 @@ func (report *Detectors) AddDataType(detectionType detections.DetectionType, det
 	}
 
 	if detectionType == detections.TypeCustom {
-		datatype.ExportClassified(report, detections.TypeSchemaClassified, detectorType, idGenerator, false, classifiedDatatypes)
+		datatype.ExportClassified(report, detections.TypeCustomClassified, detectorType, idGenerator, false, classifiedDatatypes)
 	} else {
 		datatype.ExportClassified(report, detections.TypeSchemaClassified, detectorType, idGenerator, true, classifiedDatatypes)
 	}
