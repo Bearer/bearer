@@ -3,6 +3,7 @@ package schema
 import (
 	"regexp"
 
+	"github.com/bearer/curio/pkg/flag"
 	"github.com/bearer/curio/pkg/report/schema/datatype"
 
 	"github.com/bearer/curio/pkg/classification/db"
@@ -36,7 +37,7 @@ type Config struct {
 	DataTypes                      []db.DataType
 	DataTypeClassificationPatterns []db.DataTypeClassificationPattern
 	KnownPersonObjectPatterns      []db.KnownPersonObjectPattern
-	Context                        string
+	Context                        flag.Context
 }
 
 func New(config Config) *Classifier {

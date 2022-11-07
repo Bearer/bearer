@@ -10,12 +10,6 @@ import (
 	"github.com/bearer/curio/pkg/util/blamer"
 )
 
-type Context string
-
-const (
-	Health Context = "health"
-)
-
 func Scan(rootDir string, FilesToScan []string, blamer blamer.Blamer, outputPath string, classifier *classsification.Classifier) error {
 	file, err := os.OpenFile(outputPath, os.O_RDWR|os.O_TRUNC, 0666)
 
