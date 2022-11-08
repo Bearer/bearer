@@ -67,7 +67,7 @@ func NewScanCommand() *cobra.Command {
 				return xerrors.Errorf("flag error: %w", err)
 			}
 
-			output.Setup(options)
+			output.Setup(cmd, options)
 
 			if options.Target == "" {
 				return cmd.Help()
