@@ -1,10 +1,8 @@
 package commands
 
 import (
-	"encoding/json"
 	"fmt"
 
-	config "github.com/bearer/curio/pkg/commands/process/settings"
 	"github.com/bearer/curio/pkg/commands/process/worker"
 	"github.com/bearer/curio/pkg/flag"
 	"github.com/bearer/curio/pkg/util/output"
@@ -22,11 +20,6 @@ func NewProcessingWorkerCommand() *cobra.Command {
 		Use:   "processing-worker [flags] PATH",
 		Short: "start scan processing server",
 		RunE: func(cmd *cobra.Command, args []string) error {
-			var config config.Config
-			if err := json.Unmarshal([]byte(args[0]), &config); err != nil {
-				return err
-			}
-
 			if err := flags.Bind(cmd); err != nil {
 				return fmt.Errorf("flag bind error: %w", err)
 			}
@@ -46,7 +39,7 @@ func NewProcessingWorkerCommand() *cobra.Command {
 			log.Debug().Msgf("started scan processing")
 			log.Debug().Msgf("running scan worker on port `%s`", processOptions.Port)
 
-			return worker.Start(processOptions.Port, config)
+			return worker.Start(processOptions.Port)
 		},
 		Hidden:        true,
 		SilenceErrors: true,

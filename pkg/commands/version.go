@@ -1,7 +1,6 @@
 package commands
 
 import (
-	"github.com/bearer/curio/pkg/util/output"
 	"github.com/spf13/cobra"
 )
 
@@ -11,7 +10,7 @@ func NewVersionCommand(version string, commitSHA string) *cobra.Command {
 		Short: "Print the version",
 		Args:  cobra.NoArgs,
 		RunE: func(cmd *cobra.Command, args []string) error {
-			output.StdOutLogger().Msgf("curio version: %s\nsha: %s", version, commitSHA)
+			cmd.Printf("curio version: %s\nsha: %s\n", version, commitSHA)
 			return nil
 		},
 	}

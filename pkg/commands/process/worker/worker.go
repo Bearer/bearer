@@ -6,6 +6,7 @@ import (
 	"net/http"
 	"runtime"
 
+	"github.com/bearer/curio/pkg/classification"
 	classsification "github.com/bearer/curio/pkg/classification"
 	config "github.com/bearer/curio/pkg/commands/process/settings"
 	"github.com/bearer/curio/pkg/commands/process/worker/blamer"
@@ -14,23 +15,30 @@ import (
 	"github.com/bearer/curio/pkg/scanner"
 )
 
-func Start(port string, config config.Config) error {
-	response := work.StatusResponse{}
-	classifier, err := classsification.NewClassifier(&classsification.Config{Config: config})
-	if err != nil {
-		response.ClassifierError = err.Error()
-	}
+func Start(port string) error {
+	var classifier *classification.Classifier
 
-	err = detectors.SetupCustomDetector(config.CustomDetector)
-	if err != nil {
-		response.CustomDetectorError = err.Error()
-	}
-
-	err = http.ListenAndServe(`localhost`+port, http.HandlerFunc(func(rw http.ResponseWriter, r *http.Request) {
+	err := http.ListenAndServe(`localhost`+port, http.HandlerFunc(func(rw http.ResponseWriter, r *http.Request) {
 		defer r.Body.Close() //golint:all,errcheck
+
+		response := work.StatusResponse{}
 
 		switch r.URL.Path {
 		case work.RouteStatus:
+			var config config.Config
+			var err error
+			json.NewDecoder(r.Body).Decode(&config) //nolint:all,errcheck
+
+			classifier, err = classsification.NewClassifier(&classsification.Config{Config: config})
+			if err != nil {
+				response.ClassifierError = err.Error()
+			}
+
+			err = detectors.SetupCustomDetector(config.CustomDetector)
+			if err != nil {
+				response.CustomDetectorError = err.Error()
+			}
+
 			json.NewEncoder(rw).Encode(response) //nolint:all,errcheck
 		case work.RouteProcess:
 			runtime.GC()

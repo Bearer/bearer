@@ -4,6 +4,7 @@ import (
 	"context"
 	"errors"
 	"io/ioutil"
+	"net/http"
 	"os"
 
 	"github.com/google/uuid"
@@ -33,7 +34,9 @@ type Worker struct {
 	chunkDone      chan *workertype.ProcessResponse
 	processErrored chan *workertype.ProcessResponse
 
-	port int
+	workerURL        string
+	isExternalWorker bool
+	port             int
 
 	task *Task
 
@@ -229,13 +232,15 @@ func (worker *Worker) SpawnProcess(task *workertype.ProcessRequest) error {
 		kill:           cntxCancel,
 		chunkDone:      worker.chunkDone,
 		processErrored: worker.processErrored,
-		port:           worker.port,
 		task:           worker.task,
+		workerUrl:      worker.workerURL,
 
 		config: worker.config,
 
 		uuid:       uuid.NewString(),
 		workeruuid: worker.uuid,
+
+		client: http.DefaultClient,
 	}
 
 	return worker.process.StartProcess(task)

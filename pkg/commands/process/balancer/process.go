@@ -25,7 +25,10 @@ type Process struct {
 	chunkDone      chan *workertype.ProcessResponse
 	processErrored chan *workertype.ProcessResponse
 
-	port int
+	workerUrl string
+
+	isExternalWorker bool
+	port             int
 
 	workeruuid string
 	uuid       string
@@ -37,23 +40,26 @@ type Process struct {
 }
 
 func (process *Process) StartProcess(task *workertype.ProcessRequest) error {
-	port := ":" + strconv.Itoa(process.port)
 	var err error
 	currentCommand, err := os.Executable()
 	if err != nil {
 		log.Fatal().Msgf("failed to get current command executable %e", err)
 	}
 
-	marshalledConfig, err := json.Marshal(&process.config)
-	if err != nil {
-		log.Fatal().Err(fmt.Errorf("couldn't marshal config %w", err)).Send()
+	if process.isExternalWorker {
+		err = process.WaitForOnline(task)
+		return fmt.Errorf("error with using external worker: %s", err)
 	}
-	args := []string{"processing-worker", "--port=" + port, string(marshalledConfig)}
+
+	args := []string{"processing-worker", "--port=" + strconv.Itoa(process.port)}
 	if process.config.Scan.Debug {
 		args = append(args, "--debug")
 	}
 
-	log.Debug().Msgf("spawning on port %s", port)
+	log.Debug().Msgf("spawning worker on port %d", process.port)
+
+	url := "http://localhost:" + strconv.Itoa(process.port) + workertype.RouteStatus
+	log.Debug().Msgf("URL: %s", url)
 
 	cmd := exec.Command(currentCommand, args...)
 	cmd.Dir, err = os.Getwd()
@@ -96,6 +102,7 @@ func (process *Process) StartProcess(task *workertype.ProcessRequest) error {
 }
 
 func (process *Process) WaitForOnline(task *workertype.ProcessRequest) error {
+	log.Debug().Msgf("In WaitForOnline")
 	start := time.Now()
 	killTime := time.Now().Add(process.config.Worker.Timeout)
 
@@ -115,9 +122,12 @@ func (process *Process) WaitForOnline(task *workertype.ProcessRequest) error {
 			return ErrorProcessNotSpawned
 		}
 
-		url := "http://localhost:" + strconv.Itoa(process.port) + workertype.RouteStatus
+		marshalledConfig, err := json.Marshal(process.config)
+		if err != nil {
+			log.Fatal().Err(fmt.Errorf("couldn't marshal config %w", err)).Send()
+		}
 
-		req, err := http.NewRequestWithContext(process.context, http.MethodPost, url, bytes.NewBuffer(nil))
+		req, err := http.NewRequestWithContext(process.context, http.MethodPost, process.workerUrl+workertype.RouteStatus, bytes.NewBuffer(marshalledConfig))
 		if err != nil {
 			log.Debug().Msgf("%s %s failed to build status online request %e", process.uuid, process.workeruuid, err)
 			continue
@@ -145,6 +155,8 @@ func (process *Process) WaitForOnline(task *workertype.ProcessRequest) error {
 				return fmt.Errorf("classifier error: %s", result.ClassifierError)
 			}
 
+			log.Debug().Msgf("worker is online")
+
 			defer resp.Body.Close()
 
 			return nil
@@ -162,8 +174,7 @@ func (process *Process) doTask(task *Task) {
 			return
 		}
 
-		url := "http://localhost:" + strconv.Itoa(process.port) + workertype.RouteProcess
-		req, err := http.NewRequestWithContext(process.context, http.MethodPost, url, bytes.NewBuffer(taskBytes))
+		req, err := http.NewRequestWithContext(process.context, http.MethodPost, process.workerUrl+workertype.RouteProcess, bytes.NewBuffer(taskBytes))
 		if err != nil {
 			log.Debug().Msgf("%s %s failed to build process request %e", process.uuid, process.workeruuid, err)
 			return

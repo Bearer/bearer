@@ -1,0 +1,13 @@
+Curio is a tool for scanning policy breaches
+
+Scan Example:
+	# Scan local repository
+	$ curio scan <repository>
+
+Available Commands:
+	scan              Scan git repository
+	init              Writes default config to curio.yml
+	version           Print the version
+
+--
+

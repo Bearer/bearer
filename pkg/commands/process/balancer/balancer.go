@@ -5,6 +5,7 @@ import (
 	"errors"
 	"fmt"
 	"net"
+	"strconv"
 
 	"github.com/google/uuid"
 	"github.com/rs/zerolog/log"
@@ -116,13 +117,14 @@ func (monitor *Monitor) monitor() {
 func (monitor *Monitor) spawnWorker(task *Task) *Worker {
 	log.Debug().Msgf("balancer spawning worker")
 	ctx, ctxCancel := context.WithCancel(context.Background())
+
 	worker := &Worker{
 		context: ctx,
 		kill:    ctxCancel,
 
 		taskComplete: monitor.taskComplete,
 
-		port: GetFreePort(),
+		workerURL: "",
 
 		chunkDone:      make(chan *workertype.ProcessResponse, 1),
 		processErrored: make(chan *workertype.ProcessResponse, 1),
@@ -130,6 +132,14 @@ func (monitor *Monitor) spawnWorker(task *Task) *Worker {
 		uuid: uuid.NewString(),
 
 		config: monitor.config,
+	}
+
+	if monitor.config.Worker.ExistingWorker != "" {
+		worker.isExternalWorker = true
+		worker.workerURL = monitor.config.Worker.ExistingWorker
+	} else {
+		worker.port = GetFreePort()
+		worker.workerURL = "http://localhost:" + strconv.Itoa(worker.port)
 	}
 
 	task.worker = worker
