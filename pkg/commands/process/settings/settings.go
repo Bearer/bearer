@@ -13,6 +13,7 @@ import (
 type Config struct {
 	Worker         flag.WorkerOptions `json:"worker"`
 	Scan           flag.ScanOptions   `json:"scan"`
+	Report         flag.ReportOptions `json:"report"`
 	CustomDetector map[string]Rule    `json:"custom_detector"`
 }
 
@@ -22,6 +23,7 @@ type Rule struct {
 	Patterns       []string
 	ParamParenting bool `yaml:"param_parenting"`
 	Metavars       map[string]MetaVar
+	Stored         bool
 }
 
 type MetaVar struct {
@@ -48,6 +50,7 @@ func FromOptions(opts flag.Options) (Config, error) {
 		Worker:         opts.WorkerOptions,
 		CustomDetector: rules,
 		Scan:           opts.ScanOptions,
+		Report:         opts.ReportOptions,
 	}, nil
 }
 

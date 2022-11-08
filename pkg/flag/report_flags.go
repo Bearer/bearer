@@ -26,7 +26,7 @@ var (
 		Name:       "report",
 		ConfigName: "report.report",
 		Value:      ReportDetectors,
-		Usage:      "specify the kind of report (detectors)",
+		Usage:      "specify the kind of report (detectors, dataflow)",
 	}
 	OutputFlag = Flag{
 		Name:       "output",

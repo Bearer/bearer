@@ -1,19 +1,18 @@
 package risks
 
 import (
-	"bytes"
-	"encoding/json"
-	"fmt"
-
+	"github.com/bearer/curio/pkg/commands/process/settings"
+	"github.com/bearer/curio/pkg/report/output/dataflow/detectiondecoder"
 	"github.com/bearer/curio/pkg/report/output/dataflow/types"
 
 	"github.com/bearer/curio/pkg/report/detections"
-	"github.com/bearer/curio/pkg/report/schema"
+	"github.com/bearer/curio/pkg/util/classify"
 	"github.com/bearer/curio/pkg/util/maputil"
 )
 
 type Holder struct {
 	detectors map[string]detectorHolder // group datatypeHolders by name
+	config    settings.Config
 }
 
 type detectorHolder struct {
@@ -29,26 +28,21 @@ type fileHolder struct {
 	lineNumber map[int]int
 }
 
-func New() *Holder {
+func New(config settings.Config) *Holder {
 	return &Holder{
 		detectors: make(map[string]detectorHolder),
+		config:    config,
 	}
 }
 
 func (holder *Holder) AddSchema(detection detections.Detection) error {
-	var value schema.Schema
-	buf := bytes.NewBuffer(nil)
-	err := json.NewEncoder(buf).Encode(detection.Value)
+	classification, err := detectiondecoder.GetClassification(detection)
 	if err != nil {
-		return fmt.Errorf("expect detection to have value of type schema %#v", detection.Value)
-	}
-	err = json.NewDecoder(buf).Decode(&value)
-	if err != nil {
-		return fmt.Errorf("expect detection to have value of type schema %#v", detection.Value)
+		return nil
 	}
 
-	if value.FieldName != "" {
-		holder.addDatatype(string(detection.DetectorType), value.FieldName, detection.Source.Filename, *detection.Source.LineNumber)
+	if classification.Decision.State == classify.Valid {
+		holder.addDatatype(string(detection.DetectorType), classification.DataType.DataCategoryName, detection.Source.Filename, *detection.Source.LineNumber)
 	}
 
 	return nil
@@ -100,8 +94,15 @@ func (holder *Holder) ToDataFlow() []types.RiskDetector {
 		datatypes := maputil.ToSortedSlice(detector.datatypes)
 
 		for _, datatype := range datatypes {
+
+			stored := false
+			if customDetector, isCustomDetector := holder.config.CustomDetector[detector.id]; isCustomDetector {
+				stored = customDetector.Stored
+			}
+
 			constructedDatatype := types.RiskDatatype{
 				Name:      datatype.name,
+				Stored:    stored,
 				Locations: make([]types.RiskLocation, 0),
 			}
 

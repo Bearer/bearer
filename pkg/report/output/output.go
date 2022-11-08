@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"os"
 
+	"github.com/bearer/curio/pkg/commands/process/settings"
 	"github.com/bearer/curio/pkg/flag"
 	"github.com/bearer/curio/pkg/report/output/dataflow"
 	"github.com/bearer/curio/pkg/types"
@@ -14,22 +15,22 @@ import (
 	"github.com/wlredeye/jsonlines"
 )
 
-func ReportJSON(report types.Report, output *zerolog.Event, options flag.Options) error {
+func ReportJSON(report types.Report, output *zerolog.Event, config settings.Config) error {
 	var ouputDetections any
 	var err error
 
-	if options.Report == flag.ReportDetectors {
+	if config.Report.Report == flag.ReportDetectors {
 		ouputDetections, err = GetDetectorsOutput(report)
 		if err != nil {
 			return err
 		}
-	} else if options.Report == flag.ReportDataFlow {
+	} else if config.Report.Report == flag.ReportDataFlow {
 		detections, err := GetDetectorsOutput(report)
 		if err != nil {
 			return err
 		}
 
-		ouputDetections, err = dataflow.GetOuput(detections)
+		ouputDetections, err = dataflow.GetOuput(detections, config)
 		if err != nil {
 			return err
 		}
