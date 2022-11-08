@@ -130,6 +130,7 @@ func (detector *Detector) executeRule(rule config.CompiledRule, file *file.FileI
 		}
 
 		sitterLang := getLanguage(lang)
+
 		tree, err := parser.ParseFile(file, file.Path, sitterLang)
 		if err != nil {
 			return err
@@ -144,7 +145,7 @@ func (detector *Detector) executeRule(rule config.CompiledRule, file *file.FileI
 			return err
 		}
 
-		err = detector.extractData(filteredCaptures, rule, report, lang, idGenerator)
+		err = detector.extractData(filteredCaptures, rule, report, lang, idGenerator, file, file.Path)
 		if err != nil {
 			return err
 		}
@@ -154,7 +155,7 @@ func (detector *Detector) executeRule(rule config.CompiledRule, file *file.FileI
 	return nil
 }
 
-func (detector *Detector) extractData(captures []parser.Captures, rule config.CompiledRule, report report.Report, lang string, idGenerator nodeid.Generator) error {
+func (detector *Detector) extractData(captures []parser.Captures, rule config.CompiledRule, report report.Report, lang string, idGenerator nodeid.Generator, fileinfo *file.FileInfo, filePath *file.Path) error {
 	for _, capture := range captures {
 		forExport := make(map[parser.NodeID]*schemadatatype.DataType)
 		var parent schemadatatype.DataTypable
@@ -164,7 +165,7 @@ func (detector *Detector) extractData(captures []parser.Captures, rule config.Co
 			var err error
 
 			if param.ArgumentsExtract || param.ClassNameExtract {
-				paramTypes, err = detector.extractArguments(lang, capture[param.BuildFullName()], idGenerator)
+				paramTypes, err = detector.extractArguments(lang, capture[param.BuildFullName()], idGenerator, fileinfo, filePath)
 				if err != nil {
 					return err
 				}
@@ -279,12 +280,12 @@ func filterCaptures(params []config.Param, captures []parser.Captures) (filtered
 	return filtered, err
 }
 
-func (detector *Detector) extractArguments(language string, node *parser.Node, idGenerator nodeid.Generator) (map[parser.NodeID]*schemadatatype.DataType, error) {
+func (detector *Detector) extractArguments(language string, node *parser.Node, idGenerator nodeid.Generator, fileinfo *file.FileInfo, filepath *file.Path) (map[parser.NodeID]*schemadatatype.DataType, error) {
 	switch language {
 	case "ruby":
-		return detector.Ruby.ExtractArguments(node, idGenerator)
+		return detector.Ruby.ExtractArguments(node, idGenerator, fileinfo, filepath)
 	case "sql":
-		return detector.Sql.ExtractArguments(node, idGenerator)
+		return detector.Sql.ExtractArguments(node, idGenerator, fileinfo, filepath)
 	}
 	return nil, errors.New("unsupported language")
 }

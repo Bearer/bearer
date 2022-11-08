@@ -6,6 +6,7 @@ import (
 	"os"
 
 	"github.com/bearer/curio/pkg/flag"
+	"github.com/bearer/curio/pkg/report/output/dataflow"
 	"github.com/bearer/curio/pkg/types"
 
 	"github.com/rs/zerolog"
@@ -23,7 +24,12 @@ func ReportJSON(report types.Report, output *zerolog.Event, options flag.Options
 			return err
 		}
 	} else if options.Report == flag.ReportDataFlow {
-		ouputDetections, err = GetDataFlowOutput(report)
+		detections, err := GetDetectorsOutput(report)
+		if err != nil {
+			return err
+		}
+
+		ouputDetections, err = dataflow.GetOuput(detections)
 		if err != nil {
 			return err
 		}

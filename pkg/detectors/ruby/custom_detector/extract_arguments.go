@@ -12,7 +12,7 @@ import (
 	"github.com/smacker/go-tree-sitter/ruby"
 )
 
-func (detector *Detector) ExtractArguments(node *parser.Node, idGenerator nodeid.Generator) (map[parser.NodeID]*schemadatatype.DataType, error) {
+func (detector *Detector) ExtractArguments(node *parser.Node, idGenerator nodeid.Generator, fileinfo *file.FileInfo, filepath *file.Path) (map[parser.NodeID]*schemadatatype.DataType, error) {
 	if node == nil {
 		return nil, nil
 	}
@@ -53,7 +53,7 @@ func (detector *Detector) ExtractArguments(node *parser.Node, idGenerator nodeid
 		}
 
 		content := singleArgument.Content()
-		tree, err := parser.ParseBytes(&file.FileInfo{}, &file.Path{}, []byte(content), ruby.GetLanguage(), singleArgument.LineNumber()-1)
+		tree, err := parser.ParseBytes(fileinfo, filepath, []byte(content), ruby.GetLanguage(), singleArgument.LineNumber()-1)
 		if err != nil {
 			return nil, err
 		}

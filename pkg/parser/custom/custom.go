@@ -5,10 +5,11 @@ import (
 	"github.com/bearer/curio/pkg/parser"
 	"github.com/bearer/curio/pkg/parser/nodeid"
 	"github.com/bearer/curio/pkg/report/schema/datatype"
+	"github.com/bearer/curio/pkg/util/file"
 )
 
 type Detector interface {
-	ExtractArguments(node *parser.Node, idGenerator nodeid.Generator) (map[parser.NodeID]*datatype.DataType, error)
+	ExtractArguments(node *parser.Node, idGenerator nodeid.Generator, fileinfo *file.FileInfo, filepath *file.Path) (map[parser.NodeID]*datatype.DataType, error)
 	CompilePattern(Rule string, idGenerator nodeid.Generator) (config.CompiledRule, error)
 	IsParam(node *parser.Node) (bool, bool, *config.Param)
 }
