@@ -53,20 +53,20 @@ func GetOuput(input []interface{}) (*DataFlow, error) {
 		if err != nil {
 			return nil, err
 		}
-		err = json.NewDecoder(buf).Decode(&castedDetection)
+		err = json.NewDecoder(buf).Decode(&castDetection)
 		if err != nil {
 			return nil, err
 		}
 
 		if detectionType == detections.TypeSchema || detectionType == (detections.TypeSchemaClassified) {
-			err = dataTypesHolder.AddSchema(castedDetection)
+			err = dataTypesHolder.AddSchema(castDetection)
 			if err != nil {
 				return nil, err
 			}
 		}
 
 		if detectionType == detections.TypeCustom || detectionType == (detections.TypeCustomClassified) {
-			err := risksHolder.AddSchema(castedDetection)
+			err := risksHolder.AddSchema(castDetection)
 			if err != nil {
 				return nil, err
 			}
