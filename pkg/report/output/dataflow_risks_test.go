@@ -4,6 +4,7 @@ import (
 	"os"
 	"testing"
 
+	"github.com/bearer/curio/pkg/commands/process/settings"
 	"github.com/bearer/curio/pkg/report/output"
 	"github.com/bearer/curio/pkg/report/output/dataflow"
 	"github.com/bearer/curio/pkg/report/output/dataflow/types"
@@ -12,20 +13,30 @@ import (
 )
 
 func TestDataflowRisks(t *testing.T) {
+	config := settings.Config{
+		CustomDetector: map[string]settings.Rule{
+			"ruby_leak": {
+				Stored: true,
+			},
+		},
+	}
 	testCases := []struct {
 		Name        string
+		Config      settings.Config
 		FileContent string
 		Want        []types.RiskDetector
 	}{
 		{
 			Name:        "single detection",
-			FileContent: `{"type": "custom_classified", "detector_type":"logger_leak", "source": {"filename": "./users.rb", "line_number": 25}, "value": {"field_name": "User"}}`,
+			Config:      config,
+			FileContent: `{"type": "custom_classified", "detector_type":"rails_leak", "source": {"filename": "./users.rb", "line_number": 25}, "value": {"field_name": "User_name", "classification": {"data_type": {"data_category_name": "Username"} ,"decision":{"state": "valid"}}}}`,
 			Want: []types.RiskDetector{
 				{
-					DetectorID: "logger_leak",
+					DetectorID: "rails_leak",
 					DataTypes: []types.RiskDatatype{
 						{
-							Name: "User",
+							Name:   "Username",
+							Stored: false,
 							Locations: []types.RiskLocation{
 								{Filename: "./users.rb", LineNumber: 25},
 							},
@@ -35,15 +46,17 @@ func TestDataflowRisks(t *testing.T) {
 			},
 		},
 		{
-			Name: "single detection - duplicates",
-			FileContent: `{"type": "custom_classified", "detector_type":"logger_leak", "source": {"filename": "./users.rb", "line_number": 25}, "value": {"field_name": "User"}}
-{"type": "custom_classified", "detector_type":"logger_leak", "source": {"filename": "./users.rb", "line_number": 25}, "value": {"field_name": "User"}}`,
+			Name:   "single detection - duplicates",
+			Config: config,
+			FileContent: `{"type": "custom_classified", "detector_type":"rails_leak", "source": {"filename": "./users.rb", "line_number": 25}, "value": {"field_name": "User_name", "classification": {"data_type": {"data_category_name": "Username"} ,"decision":{"state": "valid"}}}}
+{"type": "custom_classified", "detector_type":"rails_leak", "source": {"filename": "./users.rb", "line_number": 25}, "value": {"field_name": "User_name", "classification": {"data_type": {"data_category_name": "Username"} ,"decision":{"state": "valid"}}}}`,
 			Want: []types.RiskDetector{
 				{
-					DetectorID: "logger_leak",
+					DetectorID: "rails_leak",
 					DataTypes: []types.RiskDatatype{
 						{
-							Name: "User",
+							Name:   "Username",
+							Stored: false,
 							Locations: []types.RiskLocation{
 								{Filename: "./users.rb", LineNumber: 25},
 							},
@@ -53,15 +66,36 @@ func TestDataflowRisks(t *testing.T) {
 			},
 		},
 		{
-			Name: "single detection - multiple occurences",
-			FileContent: `{"type": "custom_classified", "detector_type":"logger_leak", "source": {"filename": "./users.rb", "line_number": 25}, "value": {"field_name": "User"}}
-{"type": "custom_classified", "detector_type":"logger_leak", "source": {"filename": "./users.rb", "line_number": 2}, "value": {"field_name": "User"}}`,
+			Name:        "single detection - stored",
+			Config:      config,
+			FileContent: `{"type": "custom_classified", "detector_type":"ruby_leak", "source": {"filename": "./users.rb", "line_number": 25}, "value": {"field_name": "User_name", "classification": {"data_type": {"data_category_name": "Username"} ,"decision":{"state": "valid"}}}}`,
 			Want: []types.RiskDetector{
 				{
-					DetectorID: "logger_leak",
+					DetectorID: "ruby_leak",
 					DataTypes: []types.RiskDatatype{
 						{
-							Name: "User",
+							Name:   "Username",
+							Stored: true,
+							Locations: []types.RiskLocation{
+								{Filename: "./users.rb", LineNumber: 25},
+							},
+						},
+					},
+				},
+			},
+		},
+		{
+			Name:   "single detection - multiple occurences - deterministic output",
+			Config: config,
+			FileContent: `{"type": "custom_classified", "detector_type":"rails_leak", "source": {"filename": "./users.rb", "line_number": 25}, "value": {"field_name": "User_name", "classification": {"data_type": {"data_category_name": "Username"} ,"decision":{"state": "valid"}}}}
+			{"type": "custom_classified", "detector_type":"rails_leak", "source": {"filename": "./users.rb", "line_number": 2}, "value": {"field_name": "User_name", "classification": {"data_type": {"data_category_name": "Username"} ,"decision":{"state": "valid"}}}}`,
+			Want: []types.RiskDetector{
+				{
+					DetectorID: "rails_leak",
+					DataTypes: []types.RiskDatatype{
+						{
+							Name:   "Username",
+							Stored: false,
 							Locations: []types.RiskLocation{
 								{Filename: "./users.rb", LineNumber: 2},
 								{Filename: "./users.rb", LineNumber: 25},
@@ -72,21 +106,22 @@ func TestDataflowRisks(t *testing.T) {
 			},
 		},
 		{
-			Name: "multiple detections - same detector",
-			FileContent: `{"type": "custom_classified", "detector_type":"logger_leak", "source": {"filename": "./users.rb", "line_number": 25}, "value": {"field_name": "User"}}
-{"type": "custom_classified", "detector_type":"logger_leak", "source": {"filename": "./address.rb", "line_number": 2}, "value": {"field_name": "Address"}}`,
+			Name:   "multiple detections - same detector - deterministic output",
+			Config: config,
+			FileContent: `{"type": "custom_classified", "detector_type":"rails_leak", "source": {"filename": "./users.rb", "line_number": 25}, "value": {"field_name": "User_name", "classification": {"data_type": {"data_category_name": "Username"} ,"decision":{"state": "valid"}}}}
+{"type": "custom_classified", "detector_type":"rails_leak", "source": {"filename": "./address.rb", "line_number": 2}, "value": {"field_name": "User_name", "classification": {"data_type": {"data_category_name": "Physical Address"} ,"decision":{"state": "valid"}}}}`,
 			Want: []types.RiskDetector{
 				{
-					DetectorID: "logger_leak",
+					DetectorID: "rails_leak",
 					DataTypes: []types.RiskDatatype{
 						{
-							Name: "Address",
+							Name: "Physical Address",
 							Locations: []types.RiskLocation{
 								{Filename: "./address.rb", LineNumber: 2},
 							},
 						},
 						{
-							Name: "User",
+							Name: "Username",
 							Locations: []types.RiskLocation{
 								{Filename: "./users.rb", LineNumber: 25},
 							},
@@ -120,7 +155,7 @@ func TestDataflowRisks(t *testing.T) {
 				return
 			}
 
-			dataflow, err := dataflow.GetOuput(detections)
+			dataflow, err := dataflow.GetOuput(detections, test.Config)
 			if err != nil {
 				t.Fatalf("failed to get detectors output %s", err)
 				return

@@ -7,7 +7,6 @@ type Datatype struct {
 
 type DatatypeDetector struct {
 	Name      string             `json:"name"`
-	Stored    bool               `json:"stored"`
 	Locations []DatatypeLocation `json:"locations"`
 }
 

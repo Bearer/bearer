@@ -1,14 +1,11 @@
 package datatypes
 
 import (
-	"bytes"
-	"encoding/json"
-	"fmt"
-
+	"github.com/bearer/curio/pkg/report/output/dataflow/detectiondecoder"
 	"github.com/bearer/curio/pkg/report/output/dataflow/types"
 
 	"github.com/bearer/curio/pkg/report/detections"
-	"github.com/bearer/curio/pkg/report/schema"
+	"github.com/bearer/curio/pkg/util/classify"
 	"github.com/bearer/curio/pkg/util/maputil"
 )
 
@@ -36,19 +33,13 @@ func New() *Holder {
 }
 
 func (holder *Holder) AddSchema(detection detections.Detection) error {
-	var value schema.Schema
-	buf := bytes.NewBuffer(nil)
-	err := json.NewEncoder(buf).Encode(detection.Value)
+	classification, err := detectiondecoder.GetClassification(detection)
 	if err != nil {
-		return fmt.Errorf("expect detection to have value of type schema %#v", detection.Value)
-	}
-	err = json.NewDecoder(buf).Decode(&value)
-	if err != nil {
-		return fmt.Errorf("expect detection to have value of type schema %#v", detection.Value)
+		return err
 	}
 
-	if value.FieldName != "" {
-		holder.addDatatype(value.FieldName, string(detection.DetectorType), detection.Source.Filename, *detection.Source.LineNumber)
+	if classification.Decision.State == classify.Valid {
+		holder.addDatatype(classification.DataType.DataCategoryName, string(detection.DetectorType), detection.Source.Filename, *detection.Source.LineNumber)
 	}
 
 	return nil
@@ -110,7 +101,6 @@ func (holder *Holder) ToDataFlow() []types.Datatype {
 		for _, detectorHolder := range detectors {
 			constructedDetector := types.DatatypeDetector{
 				Name:      detectorHolder.name,
-				Stored:    true,
 				Locations: make([]types.DatatypeLocation, 0),
 			}
 

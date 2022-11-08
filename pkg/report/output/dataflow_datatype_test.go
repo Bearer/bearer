@@ -4,6 +4,7 @@ import (
 	"os"
 	"testing"
 
+	"github.com/bearer/curio/pkg/commands/process/settings"
 	"github.com/bearer/curio/pkg/report/output"
 	"github.com/bearer/curio/pkg/report/output/dataflow"
 	"github.com/bearer/curio/pkg/report/output/dataflow/types"
@@ -12,21 +13,30 @@ import (
 )
 
 func TestDataflowDataType(t *testing.T) {
+	config := settings.Config{
+		CustomDetector: map[string]settings.Rule{
+			"logger_leak": {
+				Stored: true,
+			},
+		},
+	}
+
 	testCases := []struct {
 		Name        string
 		FileContent string
+		Config      settings.Config
 		Want        []types.Datatype
 	}{
 		{
 			Name:        "single detection",
-			FileContent: `{"type": "schema", "detector_type":"ruby", "source": {"filename": "./users.rb", "line_number": 25}, "value": {"field_name": "User"}}`,
+			Config:      config,
+			FileContent: `{"type": "schema_classified", "detector_type":"ruby", "source": {"filename": "./users.rb", "line_number": 25}, "value": {"field_name": "User_name", "classification": {"data_type": {"data_category_name": "Username"} ,"decision":{"state": "valid"}}}}`,
 			Want: []types.Datatype{
 				{
-					Name: "User",
+					Name: "Username",
 					Detectors: []types.DatatypeDetector{
 						{
-							Name:   "ruby",
-							Stored: true,
+							Name: "ruby",
 							Locations: []types.DatatypeLocation{
 								{Filename: "./users.rb", LineNumber: 25},
 							},
@@ -36,16 +46,16 @@ func TestDataflowDataType(t *testing.T) {
 			},
 		},
 		{
-			Name: "single detection - duplicates",
-			FileContent: `{"type": "schema", "detector_type":"ruby", "source": {"filename": "./users.rb", "line_number": 25}, "value": {"field_name": "User"}}
-{"type": "schema", "detector_type":"ruby", "source": {"filename": "./users.rb", "line_number": 25}, "value": {"field_name": "User"}}`,
+			Name:   "single detection - duplicates",
+			Config: config,
+			FileContent: `{"type": "schema_classified", "detector_type":"ruby", "source": {"filename": "./users.rb", "line_number": 25}, "value": {"field_name": "User_name", "classification": {"data_type": {"data_category_name": "Username"} ,"decision":{"state": "valid"}}}}
+{"type": "schema_classified", "detector_type":"ruby", "source": {"filename": "./users.rb", "line_number": 25}, "value": {"field_name": "User_name", "classification": {"data_type": {"data_category_name": "Username"} ,"decision":{"state": "valid"}}}}`,
 			Want: []types.Datatype{
 				{
-					Name: "User",
+					Name: "Username",
 					Detectors: []types.DatatypeDetector{
 						{
-							Name:   "ruby",
-							Stored: true,
+							Name: "ruby",
 							Locations: []types.DatatypeLocation{
 								{Filename: "./users.rb", LineNumber: 25},
 							},
@@ -55,16 +65,16 @@ func TestDataflowDataType(t *testing.T) {
 			},
 		},
 		{
-			Name: "single detection - with wierd data in report",
-			FileContent: `{"type": "schema", "detector_type":"ruby", "source": {"filename": "./users.rb", "line_number": 25}, "value": {"field_name": "User"}}
+			Name:   "single detection - with wierd data in report",
+			Config: config,
+			FileContent: `{"type": "schema_classified", "detector_type":"ruby", "source": {"filename": "./users.rb", "line_number": 25}, "value": {"field_name": "User_name", "classification": {"data_type": {"data_category_name": "Username"} ,"decision":{"state": "valid"}}}}
 {"user": true }`,
 			Want: []types.Datatype{
 				{
-					Name: "User",
+					Name: "Username",
 					Detectors: []types.DatatypeDetector{
 						{
-							Name:   "ruby",
-							Stored: true,
+							Name: "ruby",
 							Locations: []types.DatatypeLocation{
 								{Filename: "./users.rb", LineNumber: 25},
 							},
@@ -74,23 +84,22 @@ func TestDataflowDataType(t *testing.T) {
 			},
 		},
 		{
-			Name: "multiple detections - with same object name - deterministic output",
-			FileContent: `{"type": "schema", "detector_type":"ruby", "source": {"filename": "./users.rb", "line_number": 25}, "value": {"field_name": "User"}}
-			{"type": "schema", "detector_type":"csharp", "source": {"filename": "./users.cs", "line_number": 12}, "value": {"field_name": "User"}}`,
+			Name:   "multiple detections - with same object name - deterministic output",
+			Config: config,
+			FileContent: `{"type": "schema_classified", "detector_type":"ruby", "source": {"filename": "./users.rb", "line_number": 25}, "value": {"field_name": "User_name", "classification": {"data_type": {"data_category_name": "Username"} ,"decision":{"state": "valid"}}}}
+{"type": "schema_classified", "detector_type":"csharp", "source": {"filename": "./users.cs", "line_number": 12}, "value": {"field_name": "User_name", "classification": {"data_type": {"data_category_name": "Username"} ,"decision":{"state": "valid"}}}}`,
 			Want: []types.Datatype{
 				{
-					Name: "User",
+					Name: "Username",
 					Detectors: []types.DatatypeDetector{
 						{
-							Name:   "csharp",
-							Stored: true,
+							Name: "csharp",
 							Locations: []types.DatatypeLocation{
 								{Filename: "./users.cs", LineNumber: 12},
 							},
 						},
 						{
-							Name:   "ruby",
-							Stored: true,
+							Name: "ruby",
 							Locations: []types.DatatypeLocation{
 								{Filename: "./users.rb", LineNumber: 25},
 							},
@@ -100,16 +109,16 @@ func TestDataflowDataType(t *testing.T) {
 			},
 		},
 		{
-			Name: "multiple detections - with different names",
-			FileContent: `{"type": "schema", "detector_type":"ruby", "source": {"filename": "./users.rb", "line_number": 25}, "value": {"field_name": "User"}}
-			{"type": "schema", "detector_type":"csharp", "source": {"filename": "./users.cs", "line_number": 12}, "value": {"field_name": "Address"}}`,
+			Name:   "multiple detections - with different names - deterministic output",
+			Config: config,
+			FileContent: `{"type": "schema_classified", "detector_type":"ruby", "source": {"filename": "./users.rb", "line_number": 25}, "value": {"field_name": "User_name", "classification": {"data_type": {"data_category_name": "Username"} ,"decision":{"state": "valid"}}}}
+{"type": "schema_classified", "detector_type":"csharp", "source": {"filename": "./users.cs", "line_number": 12}, "value": {"field_name": "address", "classification": {"data_type": {"data_category_name": "Physical Address"} ,"decision":{"state": "valid"}}}}`,
 			Want: []types.Datatype{
 				{
-					Name: "Address",
+					Name: "Physical Address",
 					Detectors: []types.DatatypeDetector{
 						{
-							Name:   "csharp",
-							Stored: true,
+							Name: "csharp",
 							Locations: []types.DatatypeLocation{
 								{Filename: "./users.cs", LineNumber: 12},
 							},
@@ -117,11 +126,10 @@ func TestDataflowDataType(t *testing.T) {
 					},
 				},
 				{
-					Name: "User",
+					Name: "Username",
 					Detectors: []types.DatatypeDetector{
 						{
-							Name:   "ruby",
-							Stored: true,
+							Name: "ruby",
 							Locations: []types.DatatypeLocation{
 								{Filename: "./users.rb", LineNumber: 25},
 							},
@@ -155,7 +163,7 @@ func TestDataflowDataType(t *testing.T) {
 				return
 			}
 
-			dataflow, err := dataflow.GetOuput(detections)
+			dataflow, err := dataflow.GetOuput(detections, test.Config)
 			if err != nil {
 				t.Fatalf("failed to get detectors output %s", err)
 				return

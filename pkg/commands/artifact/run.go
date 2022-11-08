@@ -40,7 +40,7 @@ type Runner interface {
 	// ScanRepository scans repository
 	ScanRepository(ctx context.Context, opts flag.Options) (types.Report, error)
 	// Report a writes a report
-	Report(opts flag.Options, report types.Report) error
+	Report(scanSettings settings.Config, report types.Report) error
 	// Close closes runner
 	Close(ctx context.Context) error
 }
@@ -51,18 +51,13 @@ type runner struct {
 }
 
 // NewRunner initializes Runner that provides scanning functionalities.
-func NewRunner(ctx context.Context, opts flag.Options) (Runner, error) {
+func NewRunner(ctx context.Context, scanSettings settings.Config) Runner {
 	r := &runner{}
-
-	scanSettings, err := settings.FromOptions(opts)
-	if err != nil {
-		return r, err
-	}
 
 	r.balancer = balancer.New(scanSettings)
 	r.reportPath = tmpfile.Create(os.TempDir(), ".jsonl")
 
-	return r, nil
+	return r
 }
 
 // Close closes everything
@@ -117,10 +112,12 @@ func Run(ctx context.Context, opts flag.Options, targetKind TargetKind) (err err
 		}
 	}()
 
-	r, err := NewRunner(ctx, opts)
+	scanSettings, err := settings.FromOptions(opts)
 	if err != nil {
-		return xerrors.Errorf("init error: %w", err)
+		return err
 	}
+
+	r := NewRunner(ctx, scanSettings)
 	defer r.Close(ctx)
 
 	var report types.Report
@@ -131,27 +128,27 @@ func Run(ctx context.Context, opts flag.Options, targetKind TargetKind) (err err
 		}
 	}
 
-	if err = r.Report(opts, report); err != nil {
+	if err = r.Report(scanSettings, report); err != nil {
 		return xerrors.Errorf("report error: %w", err)
 	}
 
 	return nil
 }
 
-func (r *runner) Report(opts flag.Options, report types.Report) error {
+func (r *runner) Report(config settings.Config, report types.Report) error {
 	// if output is defined we want to write only to file
 	logger := outputhandler.StdOutLogger()
-	if opts.Output != "" {
-		reportFile, err := os.Create(opts.Output)
+	if config.Report.Output != "" {
+		reportFile, err := os.Create(config.Report.Output)
 		if err != nil {
 			return fmt.Errorf("error creating output file %w", err)
 		}
 		logger = outputhandler.PlainLogger(reportFile)
 	}
 
-	switch opts.Format {
+	switch config.Report.Format {
 	case flag.FormatJSON:
-		err := reportoutput.ReportJSON(report, logger, opts)
+		err := reportoutput.ReportJSON(report, logger, config)
 		if err != nil {
 			return fmt.Errorf("error generating report %w", err)
 		}

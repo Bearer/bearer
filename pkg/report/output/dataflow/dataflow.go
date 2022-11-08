@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"fmt"
 
+	"github.com/bearer/curio/pkg/commands/process/settings"
 	"github.com/bearer/curio/pkg/report/detections"
 	"github.com/bearer/curio/pkg/report/output/dataflow/datatypes"
 	"github.com/bearer/curio/pkg/report/output/dataflow/risks"
@@ -19,9 +20,9 @@ type DataFlow struct {
 
 var allowedDetections []detections.DetectionType = []detections.DetectionType{detections.TypeSchema, detections.TypeSchemaClassified, detections.TypeCustom, detections.TypeCustomClassified}
 
-func GetOuput(input []interface{}) (*DataFlow, error) {
+func GetOuput(input []interface{}, config settings.Config) (*DataFlow, error) {
 	dataTypesHolder := datatypes.New()
-	risksHolder := risks.New()
+	risksHolder := risks.New(config)
 
 	for _, detection := range input {
 		detection, ok := detection.(map[string]interface{})

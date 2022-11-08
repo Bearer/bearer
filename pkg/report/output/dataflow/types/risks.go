@@ -7,6 +7,7 @@ type RiskDetector struct {
 
 type RiskDatatype struct {
 	Name      string         `json:"name"`
+	Stored    bool           `json:"stored"`
 	Locations []RiskLocation `json:"locations"`
 }
 
