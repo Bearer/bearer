@@ -78,7 +78,7 @@ func NewConfigCommand() *cobra.Command {
 			if err := configFlags.Bind(cmd); err != nil {
 				return xerrors.Errorf("flag bind error: %w", err)
 			}
-			options, err := configFlags.ToOptions(args, cmd.OutOrStdout())
+			options, err := configFlags.ToOptions(args)
 			if err != nil {
 				return xerrors.Errorf("flag error: %w", err)
 			}

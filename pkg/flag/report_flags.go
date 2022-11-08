@@ -1,7 +1,6 @@
 package flag
 
 import (
-	"io"
 )
 
 type Severity int
@@ -68,7 +67,7 @@ func (f *ReportFlagGroup) Flags() []*Flag {
 	}
 }
 
-func (f *ReportFlagGroup) ToOptions(out io.Writer) ReportOptions {
+func (f *ReportFlagGroup) ToOptions() ReportOptions {
 	return ReportOptions{
 		Format: getString(f.Format),
 		Report: getString(f.Report),

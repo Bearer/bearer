@@ -2,7 +2,6 @@ package flag
 
 import (
 	"fmt"
-	"io"
 	"strings"
 	"time"
 
@@ -232,7 +231,7 @@ func (f *Flags) bind(cmd *cobra.Command, supportIgnoreConfig bool) error {
 }
 
 // nolint: gocyclo
-func (f *Flags) ToOptions(args []string, output io.Writer) (Options, error) {
+func (f *Flags) ToOptions(args []string) (Options, error) {
 	var err error
 	opts := Options{}
 
@@ -241,7 +240,7 @@ func (f *Flags) ToOptions(args []string, output io.Writer) (Options, error) {
 	}
 
 	if f.ReportFlagGroup != nil {
-		opts.ReportOptions = f.ReportFlagGroup.ToOptions(output)
+		opts.ReportOptions = f.ReportFlagGroup.ToOptions()
 	}
 
 	if f.WorkerFlagGroup != nil {
