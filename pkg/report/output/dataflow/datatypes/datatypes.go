@@ -33,7 +33,7 @@ func New() *Holder {
 }
 
 func (holder *Holder) AddSchema(detection detections.Detection) error {
-	classification, err := detectiondecoder.GetClassification(detection)
+	classification, err := detectiondecoder.GetSchemaClassification(detection)
 	if err != nil {
 		return err
 	}
