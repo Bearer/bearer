@@ -46,18 +46,8 @@ func executeApp(arguments []string, port int) (string, error) {
 		panic(err)
 	}
 
-	stdout := os.Stdout
-	os.Stdout = stdoutWriter
-	defer func() {
-		os.Stdout = stdout
-	}()
-
-	stderr := os.Stderr
-	os.Stderr = stderrWriter
-	defer func() {
-		os.Stderr = stderr
-	}()
-
+	app.SetOut(stdoutWriter)
+	app.SetErr(stderrWriter)
 	app.SetArgs(arguments)
 
 	if err := app.Execute(); err != nil {
