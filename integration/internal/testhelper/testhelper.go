@@ -19,6 +19,7 @@ type TestCase struct {
 	Name          string
 	Arguments     []string
 	ShouldSucceed bool
+	RunInTempDir  bool
 }
 
 func NewTestCase(name string, arguments []string) *TestCase {
@@ -104,7 +105,40 @@ func RunTests(t *testing.T, tests []TestCase) {
 
 	for _, test := range tests {
 		t.Run(test.Name, func(t *testing.T) {
+			var originalDir string
+			var err error
+
+			if test.RunInTempDir {
+				originalDir, err = os.Getwd()
+				if err != nil {
+					t.Fatal(err)
+				}
+
+				tempDir, err := os.MkdirTemp("", "curio-integration-test")
+				if err != nil {
+					t.Fatal(err)
+				}
+
+				t.Cleanup(func() {
+					if err := os.Chdir(originalDir); err != nil {
+						t.Fatal(err)
+					}
+
+					os.RemoveAll(tempDir)
+				})
+
+				if err := os.Chdir(tempDir); err != nil {
+					t.Fatal(err)
+				}
+			}
+
 			combinedOutput, err := executeApp(test.Arguments, port)
+
+			if test.RunInTempDir {
+				if err := os.Chdir(originalDir); err != nil {
+					t.Fatal(err)
+				}
+			}
 
 			cupaloy.SnapshotT(t, combinedOutput)
 
