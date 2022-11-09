@@ -2,7 +2,7 @@
 layout: layouts/base.njk
 ---
 
-<main class="max-w-7xl sm:flex gap-8 mx-auto text-black dark:text-neutral-100 px-4 relative">
+<main class="max-w-6xl sm:flex gap-10 mx-auto text-black dark:text-neutral-100 px-4 relative">
 	<nav class="self-start sticky top-[6.75rem] min-w-fit">
 		<ul>
 			{# <li>
@@ -39,7 +39,7 @@ layout: layouts/base.njk
 			</li>
 		</ul>
 	</nav>
-	<article class="prose dark:prose-invert pl-8">
+	<article class="prose dark:prose-invert max-w-5xl pl-8">
 		{{ content | safe }}
 	</article>
 	<aside class="self-start sticky top-[6.75rem] min-w-fit text-sm">
@@ -57,3 +57,4 @@ layout: layouts/base.njk
 		</ul>
 	</aside>
 </main>
+<footer class="p-4 mt-4 text-center">Placeholder Footer</footer>
