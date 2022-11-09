@@ -235,6 +235,7 @@ func (worker *Worker) SpawnProcess(task *workertype.ProcessRequest) error {
 		task:           worker.task,
 		workerUrl:      worker.workerURL,
 
+		port:   worker.port,
 		config: worker.config,
 
 		uuid:       uuid.NewString(),
