@@ -36,9 +36,9 @@ func New(config settings.Config) *Holder {
 }
 
 func (holder *Holder) AddSchema(detection detections.Detection) error {
-	classification, err := detectiondecoder.GetClassification(detection)
+	classification, err := detectiondecoder.GetSchemaClassification(detection)
 	if err != nil {
-		return nil
+		return err
 	}
 
 	if classification.Decision.State == classify.Valid {
@@ -48,7 +48,7 @@ func (holder *Holder) AddSchema(detection detections.Detection) error {
 	return nil
 }
 
-// addDatatype adds datatype to hash list and at the same time blocks duplicates
+// addDatatype adds detector to hash list and at the same time blocks duplicates
 func (holder *Holder) addDatatype(ruleName string, datatypeName string, fileName string, lineNumber int) {
 	// create detector entry if it doesn't exist
 	if _, exists := holder.detectors[ruleName]; !exists {

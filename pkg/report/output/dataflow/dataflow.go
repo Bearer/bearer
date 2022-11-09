@@ -7,6 +7,7 @@ import (
 
 	"github.com/bearer/curio/pkg/commands/process/settings"
 	"github.com/bearer/curio/pkg/report/detections"
+	"github.com/bearer/curio/pkg/report/output/dataflow/components"
 	"github.com/bearer/curio/pkg/report/output/dataflow/datatypes"
 	"github.com/bearer/curio/pkg/report/output/dataflow/risks"
 
@@ -14,23 +15,25 @@ import (
 )
 
 type DataFlow struct {
-	Datatypes []types.Datatype     `json:"data_types,omitempty"`
-	Risks     []types.RiskDetector `json:"risks,omitempty"`
+	Datatypes  []types.Datatype     `json:"data_types,omitempty"`
+	Risks      []types.RiskDetector `json:"risks,omitempty"`
+	Components []types.Component    `json:"components"`
 }
 
-var allowedDetections []detections.DetectionType = []detections.DetectionType{detections.TypeSchema, detections.TypeSchemaClassified, detections.TypeCustom, detections.TypeCustomClassified}
+var allowedDetections []detections.DetectionType = []detections.DetectionType{detections.TypeSchemaClassified, detections.TypeCustomClassified, detections.TypeDependencyClassified, detections.TypeInterfaceClassified}
 
 func GetOuput(input []interface{}, config settings.Config) (*DataFlow, error) {
 	dataTypesHolder := datatypes.New()
 	risksHolder := risks.New(config)
+	componentsHolder := components.New()
 
 	for _, detection := range input {
-		detection, ok := detection.(map[string]interface{})
+		detectionMap, ok := detection.(map[string]interface{})
 		if !ok {
 			return nil, fmt.Errorf("found detection in report which is not object")
 		}
 
-		detectionTypeS, ok := detection["type"].(string)
+		detectionTypeS, ok := detectionMap["type"].(string)
 		if !ok {
 			continue
 		}
@@ -59,15 +62,24 @@ func GetOuput(input []interface{}, config settings.Config) (*DataFlow, error) {
 			return nil, err
 		}
 
-		if detectionType == detections.TypeSchema || detectionType == (detections.TypeSchemaClassified) {
+		switch detectionType {
+		case detections.TypeSchemaClassified:
 			err = dataTypesHolder.AddSchema(castDetection)
 			if err != nil {
 				return nil, err
 			}
-		}
-
-		if detectionType == detections.TypeCustom || detectionType == (detections.TypeCustomClassified) {
+		case detections.TypeCustomClassified:
 			err := risksHolder.AddSchema(castDetection)
+			if err != nil {
+				return nil, err
+			}
+		case detections.TypeDependencyClassified:
+			err := componentsHolder.AddDependency(detection)
+			if err != nil {
+				return nil, err
+			}
+		case detections.TypeInterfaceClassified:
+			err := componentsHolder.AddInterface(detection)
 			if err != nil {
 				return nil, err
 			}
@@ -76,8 +88,9 @@ func GetOuput(input []interface{}, config settings.Config) (*DataFlow, error) {
 	}
 
 	dataflow := &DataFlow{
-		Datatypes: dataTypesHolder.ToDataFlow(),
-		Risks:     risksHolder.ToDataFlow(),
+		Datatypes:  dataTypesHolder.ToDataFlow(),
+		Risks:      risksHolder.ToDataFlow(),
+		Components: componentsHolder.ToDataFlow(),
 	}
 
 	return dataflow, nil
