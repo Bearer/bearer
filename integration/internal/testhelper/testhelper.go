@@ -23,8 +23,8 @@ type TestCase struct {
 
 func NewTestCase(name string, arguments []string) *TestCase {
 	return &TestCase{
-		Name: name,
-		Arguments: arguments,
+		Name:          name,
+		Arguments:     arguments,
 		ShouldSucceed: true,
 	}
 }
@@ -77,7 +77,7 @@ func executeApp(arguments []string, port int) (string, error) {
 func startWorker(port int) error {
 	app := commands.NewApp(build.Version, build.CommitSHA)
 
-	arguments := []string{"processing-worker", "--port=:" + strconv.Itoa(port), "--debug"}
+	arguments := []string{"processing-worker", "--port=" + strconv.Itoa(port), "--debug"}
 
 	app.SetArgs(arguments)
 
