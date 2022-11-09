@@ -5,9 +5,11 @@ layout: layouts/doc.njk
 {# Welcome :wave:. The content of this page is automatically generated based on Curio's CLI help files. #}
 
 {% set items = [curio_scan, curio_init] %}
-<h1>Commands</h1>
+{% renderTemplate "md" %}
+# Commands
 
-<p>Curio offers a number of commands to use and customize the CLI to your needs.</p>
+Curio offers a number of commands to use and customize the CLI to your needs.
+{% endrenderTemplate %}
 <ul>
   {% for item in items %}
     <li>
@@ -59,9 +61,14 @@ layout: layouts/doc.njk
 
 {% endfor %}
 
-<h2 id="global-flags">Global flags</h2>
-<p>Use these flags to get more information about the <code class="inline-block bg-main-100 p-1 rounded-md leading-none font-mono m-0">curio</code> CLI.</p>
-<h3 class="inline-block bg-main-100 p-1 rounded-md leading-none font-mono m-0" id="flags-version">--version</h3>
-<p>Prints the installed Curio version number.</p>
-<h3 class="inline-block bg-main-100 p-1 rounded-md leading-none font-mono m-0" id="flags-version">--help</h3>
-<p>Prints the in-app help information for Curio.</p>
+{% renderTemplate "md" %}
+## Global Flags
+
+Use these flags to get more information about the `curio` CLI.
+
+### `--version`
+Prints the version number of Curio.
+
+### `--help`
+Prints the in-app help information for Curio.
+{% endrenderTemplate %}

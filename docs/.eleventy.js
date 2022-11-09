@@ -1,5 +1,8 @@
 const syntaxHighlight = require("@11ty/eleventy-plugin-syntaxhighlight");
-const { EleventyHtmlBasePlugin } = require("@11ty/eleventy");
+const {
+  EleventyHtmlBasePlugin,
+  EleventyRenderPlugin,
+} = require("@11ty/eleventy");
 const yaml = require("js-yaml");
 const markdownIt = require("markdown-it");
 const markdownItEmoji = require("markdown-it-emoji");
@@ -21,6 +24,9 @@ const pathPrefix = (module.exports = function (eleventyConfig) {
   eleventyConfig.addWatchTarget("./_src/styles/tailwind.css");
   eleventyConfig.addPassthroughCopy("assets/img");
   eleventyConfig.addPassthroughCopy("assets/fonts");
+  eleventyConfig.addPassthroughCopy({
+    "./_src/styles/prism-theme.css": "./prism-theme.css",
+  });
   eleventyConfig.addPassthroughCopy({ "./_tmp/style.css": "./style.css" });
   eleventyConfig.addDataExtension("yaml", (contents) => yaml.load(contents));
   eleventyConfig.addShortcode("version", function () {
@@ -31,6 +37,7 @@ const pathPrefix = (module.exports = function (eleventyConfig) {
     baseHref: process.env.ELEVENTY_PRODUCTION ? "/curio/" : "/",
   });
 
+  eleventyConfig.addPlugin(EleventyRenderPlugin);
   eleventyConfig.addPlugin(syntaxHighlight);
   eleventyConfig.addPlugin(pluginTOC, {
     wrapper: "nav",
