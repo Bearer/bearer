@@ -3,7 +3,18 @@ const { EleventyHtmlBasePlugin } = require("@11ty/eleventy");
 const yaml = require("js-yaml");
 const markdownIt = require("markdown-it");
 const markdownItEmoji = require("markdown-it-emoji");
+const markdownItAnchor = require("markdown-it-anchor");
+const pluginTOC = require("eleventy-plugin-toc");
 const now = String(Date.now());
+
+const mdSetup = markdownIt({ html: true })
+  .use(markdownItEmoji)
+  .use(markdownItAnchor);
+
+mdSetup.renderer.rules.code_inline = (tokens, idx, { langPrefix = "" }) => {
+  const token = tokens[idx];
+  return `<code class="code-inline ${langPrefix}">${token.content}</code>`;
+};
 
 const pathPrefix = (module.exports = function (eleventyConfig) {
   eleventyConfig.addWatchTarget("./_src/styles/tailwind.config.js");
@@ -15,15 +26,15 @@ const pathPrefix = (module.exports = function (eleventyConfig) {
   eleventyConfig.addShortcode("version", function () {
     return now;
   });
-
+  eleventyConfig.setLibrary("md", mdSetup);
   eleventyConfig.addPlugin(EleventyHtmlBasePlugin, {
     baseHref: process.env.ELEVENTY_PRODUCTION ? "/curio/" : "/",
   });
+
   eleventyConfig.addPlugin(syntaxHighlight);
-  eleventyConfig.setLibrary(
-    "md",
-    markdownIt({ html: true }).use(markdownItEmoji)
-  );
+  eleventyConfig.addPlugin(pluginTOC, {
+    wrapper: "nav",
+  });
 
   return {
     dir: {
