@@ -46,6 +46,12 @@ func TestDataflowRisks(t *testing.T) {
 			},
 		},
 		{
+			Name:        "single detection - no classification",
+			Config:      config,
+			FileContent: `{"type": "custom_classified", "detector_type":"rails_leak", "source": {"filename": "./users.rb", "line_number": 25}, "value": {"field_name": "User_name"}}`,
+			Want:        []types.RiskDetector{},
+		},
+		{
 			Name:   "single detection - duplicates",
 			Config: config,
 			FileContent: `{"type": "custom_classified", "detector_type":"rails_leak", "source": {"filename": "./users.rb", "line_number": 25}, "value": {"field_name": "User_name", "classification": {"data_type": {"data_category_name": "Username"} ,"decision":{"state": "valid"}}}}

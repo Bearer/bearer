@@ -39,6 +39,10 @@ func (holder *Holder) AddInterface(detection interface{}) error {
 		return err
 	}
 
+	if value.Classification == nil {
+		return nil
+	}
+
 	if value.Classification.Decision.State == classify.Valid {
 		holder.addComponent(strings.ToLower(value.Classification.RecipeName), string(value.DetectorType), value.Source.Filename, *value.Source.LineNumber)
 	}
@@ -50,6 +54,10 @@ func (holder *Holder) AddDependency(detection interface{}) error {
 	value, err := detectiondecoder.GetClassifiedDependency(detection)
 	if err != nil {
 		return err
+	}
+
+	if value.Classification == nil {
+		return nil
 	}
 
 	if value.Classification.Decision.State == classify.Valid {

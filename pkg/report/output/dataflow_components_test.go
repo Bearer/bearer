@@ -35,6 +35,11 @@ func TestDataflowComponents(t *testing.T) {
 			},
 		},
 		{
+			Name: "single detection - dependency - no classification",
+			FileContent: `{	"detector_type": "gemfile-lock", "type": "dependency_classified", "source": {"filename": "Gemfile.lock", "line_number": 258}}`,
+			Want: []types.Component{},
+		},
+		{
 			Name: "single detection - interface",
 			FileContent: `{	"detector_type": "ruby", "type": "interface_classified", "source": {"filename": "billing.rb", "line_number": 2}, "classification": { "Decision": { "state": "valid" }, "recipe_name": "Stripe"}}`,
 			Want: []types.Component{
@@ -49,6 +54,11 @@ func TestDataflowComponents(t *testing.T) {
 					},
 				},
 			},
+		},
+		{
+			Name: "single detection - interface - no classification",
+			FileContent: `{	"detector_type": "ruby", "type": "interface_classified", "source": {"filename": "billing.rb", "line_number": 2}}`,
+			Want: []types.Component{},
 		},
 		{
 			Name: "single detection - duplicates",
