@@ -1,0 +1,1362 @@
+[
+  {
+    "name": "xms_mirid",
+    "filename": "app/domain/authentication/authn_azure/authentication_request.rb",
+    "detector_type": "Ruby",
+    "properties": [
+      {
+        "name": "subscriptions",
+        "type": "unknown"
+      },
+      {
+        "name": "auth_token",
+        "type": "unknown"
+      },
+      {
+        "name": "username",
+        "type": "unknown",
+        "data_type_info": "Username",
+        "state": "valid",
+        "reason": "valid_extended_pattern",
+        "false_positive": false
+      },
+      {
+        "name": "providers",
+        "type": "unknown"
+      }
+    ],
+    "state": "valid"
+  },
+  {
+    "name": "year",
+    "filename": "lib/facebook_data_analyzer/analyzeables/friends.rb",
+    "detector_type": "Ruby",
+    "properties": [
+      {
+        "name": "friends",
+        "type": "unknown",
+        "data_type_info": "Friends",
+        "state": "valid",
+        "reason": "valid_extended_pattern",
+        "false_positive": false
+      },
+      {
+        "name": "acquaintances",
+        "type": "unknown",
+        "data_type_info": "Acquaintances",
+        "state": "valid",
+        "reason": "valid_extended_pattern",
+        "false_positive": false
+      }
+    ],
+    "state": "valid"
+  },
+  {
+    "name": "where",
+    "filename": "decidim-meetings/app/models/decidim/meetings/agenda_item.rb",
+    "detector_type": "Ruby",
+    "properties": [
+      {
+        "name": "agenda",
+        "type": "unknown"
+      },
+      {
+        "name": "customerid",
+        "type": "unknown",
+        "data_type_info": "Customer",
+        "state": "valid",
+        "reason": "known_database_identifier",
+        "false_positive": false
+      }
+    ],
+    "state": "invalid"
+  },
+  {
+    "name": "xml",
+    "filename": "lib/active_merchant/billing/gateways/authorize_net.rb",
+    "detector_type": "Ruby",
+    "properties": [
+      {
+        "name": "transactionRequest",
+        "type": "unknown"
+      },
+      {
+        "name": "transactionType",
+        "type": "unknown"
+      },
+      {
+        "name": "amount",
+        "type": "unknown",
+        "data_type_info": "Transactions",
+        "state": "valid",
+        "reason": "valid_extended_pattern",
+        "false_positive": false
+      },
+      {
+        "name": "refTransId",
+        "type": "unknown"
+      },
+      {
+        "name": "transaction",
+        "type": "unknown"
+      },
+      {
+        "name": "send",
+        "type": "unknown"
+      },
+      {
+        "name": "profileTransPriorAuthCapture",
+        "type": "unknown"
+      },
+      {
+        "name": "transId",
+        "type": "unknown"
+      },
+      {
+        "name": "profileTransRefund",
+        "type": "unknown"
+      },
+      {
+        "name": "creditCardNumber",
+        "type": "unknown",
+        "data_type_info": "Credit Card Number",
+        "state": "valid",
+        "reason": "valid_extended_pattern",
+        "false_positive": false
+      },
+      {
+        "name": "payment",
+        "type": "unknown",
+        "data_type_info": "Transactions",
+        "state": "valid",
+        "reason": "valid_extended_pattern",
+        "false_positive": false
+      },
+      {
+        "name": "bankAccount",
+        "type": "unknown",
+        "data_type_info": "Bank Account",
+        "state": "valid",
+        "reason": "valid_extended_pattern",
+        "false_positive": false
+      },
+      {
+        "name": "accountType",
+        "type": "unknown"
+      },
+      {
+        "name": "routingNumber",
+        "type": "unknown"
+      },
+      {
+        "name": "accountNumber",
+        "type": "unknown"
+      },
+      {
+        "name": "nameOnAccount",
+        "type": "unknown",
+        "data_type_info": "Fullname",
+        "state": "valid",
+        "reason": "valid_extended_pattern",
+        "false_positive": false
+      },
+      {
+        "name": "creditCard",
+        "type": "unknown",
+        "data_type_info": "Credit Card Number",
+        "state": "valid",
+        "reason": "valid_extended_pattern",
+        "false_positive": false
+      },
+      {
+        "name": "expirationDate",
+        "type": "unknown"
+      },
+      {
+        "name": "profileTransVoid",
+        "type": "unknown"
+      },
+      {
+        "name": "natioanlCardId",
+        "type": "unknown"
+      },
+      {
+        "name": "transactionSettings",
+        "type": "unknown"
+      },
+      {
+        "name": "salary",
+        "type": "unknown",
+        "data_type_info": "Salary",
+        "state": "valid",
+        "reason": "valid_extended_pattern",
+        "false_positive": false
+      },
+      {
+        "name": "settingName",
+        "type": "unknown"
+      },
+      {
+        "name": "settingValue",
+        "type": "unknown"
+      },
+      {
+        "name": "gender",
+        "type": "unknown",
+        "data_type_info": "Gender",
+        "state": "valid",
+        "reason": "valid_extended_pattern",
+        "false_positive": false
+      },
+      {
+        "name": "setting",
+        "type": "unknown"
+      },
+      {
+        "name": "loanRecords",
+        "type": "unknown",
+        "data_type_info": "Loan Records",
+        "state": "valid",
+        "reason": "valid_extended_pattern",
+        "false_positive": false
+      },
+      {
+        "name": "insurance",
+        "type": "unknown",
+        "data_type_info": "Insurance",
+        "state": "valid",
+        "reason": "valid_extended_pattern",
+        "false_positive": false
+      },
+      {
+        "name": "userFields",
+        "type": "unknown"
+      },
+      {
+        "name": "payStub",
+        "type": "unknown"
+      },
+      {
+        "name": "name",
+        "type": "unknown",
+        "data_type_info": "Fullname",
+        "state": "valid",
+        "reason": "valid_extended_pattern",
+        "false_positive": false
+      },
+      {
+        "name": "passportNumber",
+        "type": "unknown",
+        "data_type_info": "Passport Number",
+        "state": "valid",
+        "reason": "valid_extended_pattern",
+        "false_positive": false
+      },
+      {
+        "name": "userField",
+        "type": "unknown"
+      },
+      {
+        "name": "value",
+        "type": "unknown"
+      },
+      {
+        "name": "cardNumber",
+        "type": "unknown"
+      },
+      {
+        "name": "cardCode",
+        "type": "unknown"
+      },
+      {
+        "name": "cryptogram",
+        "type": "unknown"
+      },
+      {
+        "name": "trackData",
+        "type": "unknown"
+      },
+      {
+        "name": "public_send",
+        "type": "unknown"
+      },
+      {
+        "name": "customerProfileId",
+        "type": "unknown"
+      },
+      {
+        "name": "customerPaymentProfileId",
+        "type": "unknown"
+      },
+      {
+        "name": "opaqueData",
+        "type": "unknown"
+      },
+      {
+        "name": "dataDescriptor",
+        "type": "unknown"
+      },
+      {
+        "name": "dataValue",
+        "type": "unknown"
+      },
+      {
+        "name": "retail",
+        "type": "unknown"
+      },
+      {
+        "name": "spendingHabits",
+        "type": "unknown",
+        "data_type_info": "Purchases and Spending Habits",
+        "state": "valid",
+        "reason": "valid_extended_pattern",
+        "false_positive": false
+      },
+      {
+        "name": "deviceId",
+        "type": "unknown",
+        "data_type_info": "Device identifier",
+        "state": "valid",
+        "reason": "valid_extended_pattern",
+        "false_positive": false
+      },
+      {
+        "name": "signature",
+        "type": "unknown"
+      },
+      {
+        "name": "marketType",
+        "type": "unknown"
+      },
+      {
+        "name": "bankName",
+        "type": "unknown"
+      },
+      {
+        "name": "checkNumber",
+        "type": "unknown"
+      },
+      {
+        "name": "customer",
+        "type": "unknown"
+      },
+      {
+        "name": "id",
+        "type": "unknown"
+      },
+      {
+        "name": "email",
+        "type": "unknown",
+        "data_type_info": "Email Address",
+        "state": "valid",
+        "reason": "valid_extended_pattern",
+        "false_positive": false
+      },
+      {
+        "name": "customerIP",
+        "type": "unknown"
+      },
+      {
+        "name": "cardholderAuthentication",
+        "type": "unknown",
+        "data_type_info": "Fullname",
+        "state": "valid",
+        "reason": "valid_extended_pattern",
+        "false_positive": false
+      },
+      {
+        "name": "authenticationIndicator",
+        "type": "unknown"
+      },
+      {
+        "name": "cardholderAuthenticationValue",
+        "type": "unknown",
+        "data_type_info": "Fullname",
+        "state": "valid",
+        "reason": "valid_extended_pattern",
+        "false_positive": false
+      },
+      {
+        "name": "billTo",
+        "type": "unknown"
+      },
+      {
+        "name": "firstName",
+        "type": "unknown",
+        "data_type_info": "Firstname",
+        "state": "valid",
+        "reason": "valid_extended_pattern",
+        "false_positive": false
+      },
+      {
+        "name": "lastName",
+        "type": "unknown",
+        "data_type_info": "Lastname",
+        "state": "valid",
+        "reason": "valid_extended_pattern",
+        "false_positive": false
+      },
+      {
+        "name": "company",
+        "type": "unknown"
+      },
+      {
+        "name": "address",
+        "type": "unknown",
+        "data_type_info": "Physical Address",
+        "state": "valid",
+        "reason": "valid_extended_pattern",
+        "false_positive": false
+      },
+      {
+        "name": "city",
+        "type": "unknown",
+        "data_type_info": "Physical Address",
+        "state": "valid",
+        "reason": "valid_extended_pattern",
+        "false_positive": false
+      },
+      {
+        "name": "state",
+        "type": "unknown"
+      },
+      {
+        "name": "zip",
+        "type": "unknown"
+      },
+      {
+        "name": "country",
+        "type": "unknown",
+        "data_type_info": "Country",
+        "state": "valid",
+        "reason": "valid_extended_pattern",
+        "false_positive": false
+      },
+      {
+        "name": "phoneNumber",
+        "type": "unknown",
+        "data_type_info": "Telephone Number",
+        "state": "valid",
+        "reason": "valid_extended_pattern",
+        "false_positive": false
+      },
+      {
+        "name": "faxNumber",
+        "type": "unknown"
+      },
+      {
+        "name": "ssn",
+        "type": "unknown",
+        "data_type_info": "Social Security Number",
+        "state": "valid",
+        "reason": "valid_extended_pattern",
+        "false_positive": false
+      },
+      {
+        "name": "refId",
+        "type": "unknown"
+      },
+      {
+        "name": "order",
+        "type": "unknown"
+      },
+      {
+        "name": "invoiceNumber",
+        "type": "unknown",
+        "data_type_info": "Transactions",
+        "state": "valid",
+        "reason": "valid_extended_pattern",
+        "false_positive": false
+      },
+      {
+        "name": "description",
+        "type": "unknown"
+      },
+      {
+        "name": "purchaseOrderNumber",
+        "type": "unknown",
+        "data_type_info": "Purchases",
+        "state": "valid",
+        "reason": "valid_extended_pattern",
+        "false_positive": false
+      },
+      {
+        "name": "summaryCommodityCode",
+        "type": "unknown"
+      },
+      {
+        "name": "lineItems",
+        "type": "unknown"
+      },
+      {
+        "name": "lineItem",
+        "type": "unknown"
+      },
+      {
+        "name": "individualTaxpayerId",
+        "type": "unknown"
+      },
+      {
+        "name": "duty",
+        "type": "unknown"
+      },
+      {
+        "name": "shipping",
+        "type": "unknown"
+      },
+      {
+        "name": "taxExempt",
+        "type": "unknown"
+      },
+      {
+        "name": "poNumber",
+        "type": "unknown"
+      },
+      {
+        "name": "extraOptions",
+        "type": "unknown"
+      },
+      {
+        "name": "processingOptions",
+        "type": "unknown"
+      },
+      {
+        "name": "isFirstRecurringPayment",
+        "type": "unknown",
+        "data_type_info": "Transactions",
+        "state": "valid",
+        "reason": "valid_extended_pattern",
+        "false_positive": false
+      },
+      {
+        "name": "isFirstSubsequentAuth",
+        "type": "unknown"
+      },
+      {
+        "name": "isStoredCredentials",
+        "type": "unknown"
+      },
+      {
+        "name": "isSubsequentAuth",
+        "type": "unknown"
+      },
+      {
+        "name": "subsequentAuthInformation",
+        "type": "unknown"
+      },
+      {
+        "name": "reason",
+        "type": "unknown"
+      },
+      {
+        "name": "originalNetworkTransId",
+        "type": "unknown"
+      },
+      {
+        "name": "paymentProfile",
+        "type": "unknown"
+      },
+      {
+        "name": "creditRecords",
+        "type": "unknown",
+        "data_type_info": "Credit Records",
+        "state": "valid",
+        "reason": "valid_extended_pattern",
+        "false_positive": false
+      },
+      {
+        "name": "profile",
+        "type": "unknown"
+      },
+      {
+        "name": "merchantId",
+        "type": "unknown"
+      },
+      {
+        "name": "emails",
+        "type": "unknown",
+        "data_type_info": "Email Address",
+        "state": "valid",
+        "reason": "valid_extended_pattern",
+        "false_positive": false
+      },
+      {
+        "name": "paymentProfiles",
+        "type": "unknown"
+      },
+      {
+        "name": "customerType",
+        "type": "unknown"
+      },
+      {
+        "name": "creditCapacity",
+        "type": "unknown",
+        "data_type_info": "Credit Capacity",
+        "state": "valid",
+        "reason": "valid_extended_pattern",
+        "false_positive": false
+      },
+      {
+        "name": "merchantAuthentication",
+        "type": "unknown"
+      },
+      {
+        "name": "transactions",
+        "type": "unknown"
+      },
+      {
+        "name": "socialstatus",
+        "type": "unknown",
+        "data_type_info": "Social Status",
+        "state": "valid",
+        "reason": "valid_extended_pattern",
+        "false_positive": false
+      },
+      {
+        "name": "user",
+        "type": "unknown"
+      },
+      {
+        "name": "followings",
+        "type": "unknown",
+        "data_type_info": "Interests",
+        "state": "valid",
+        "reason": "valid_extended_pattern",
+        "false_positive": false
+      },
+      {
+        "name": "religiousbelief",
+        "type": "unknown",
+        "data_type_info": "Religious Beliefs",
+        "state": "valid",
+        "reason": "valid_extended_pattern",
+        "false_positive": false
+      },
+      {
+        "name": "userSince",
+        "type": "unknown"
+      },
+      {
+        "name": "birthday",
+        "type": "unknown",
+        "data_type_info": "Date of birth",
+        "state": "valid",
+        "reason": "valid_extended_pattern",
+        "false_positive": false
+      },
+      {
+        "name": "organization",
+        "type": "unknown"
+      },
+      {
+        "name": "replies",
+        "type": "unknown",
+        "data_type_info": "Replies",
+        "state": "valid",
+        "reason": "valid_extended_pattern",
+        "false_positive": false
+      },
+      {
+        "name": "deviceType",
+        "type": "unknown"
+      },
+      {
+        "name": "credit",
+        "type": "unknown",
+        "data_type_info": "Credit",
+        "state": "valid",
+        "reason": "valid_extended_pattern",
+        "false_positive": false
+      },
+      {
+        "name": "creditRecord",
+        "type": "unknown",
+        "data_type_info": "Credit Records",
+        "state": "valid",
+        "reason": "valid_extended_pattern",
+        "false_positive": false
+      },
+      {
+        "name": "reputation",
+        "type": "unknown"
+      },
+      {
+        "name": "healthProvider",
+        "type": "unknown"
+      },
+      {
+        "name": "jobTitles",
+        "type": "unknown",
+        "data_type_info": "Job Titles",
+        "state": "valid",
+        "reason": "valid_extended_pattern",
+        "false_positive": false
+      },
+      {
+        "name": "tax",
+        "type": "unknown"
+      },
+      {
+        "name": "merchantCustomerId",
+        "type": "unknown"
+      },
+      {
+        "name": "transactionKey",
+        "type": "unknown"
+      },
+      {
+        "name": "instruct!",
+        "type": "unknown"
+      },
+      {
+        "name": "employees",
+        "type": "unknown"
+      },
+      {
+        "name": "taxpayerIdNumber",
+        "type": "unknown",
+        "data_type_info": "ID Number",
+        "state": "valid",
+        "reason": "valid_extended_pattern",
+        "false_positive": false
+      },
+      {
+        "name": "response",
+        "type": "unknown"
+      },
+      {
+        "name": "voiceMail",
+        "type": "unknown",
+        "data_type_info": "Voice Mail",
+        "state": "valid",
+        "reason": "valid_extended_pattern",
+        "false_positive": false
+      },
+      {
+        "name": "recordings",
+        "type": "unknown"
+      },
+      {
+        "name": "recording",
+        "type": "unknown"
+      },
+      {
+        "name": "recordID",
+        "type": "unknown"
+      },
+      {
+        "name": "meetingID",
+        "type": "unknown"
+      },
+      {
+        "name": "internalMeetingID",
+        "type": "unknown"
+      },
+      {
+        "name": "avatar",
+        "type": "unknown",
+        "data_type_info": "Image",
+        "state": "valid",
+        "reason": "valid_extended_pattern",
+        "false_positive": false
+      },
+      {
+        "name": "clickTracking",
+        "type": "unknown",
+        "data_type_info": "Links clicked",
+        "state": "valid",
+        "reason": "valid_extended_pattern",
+        "false_positive": false
+      },
+      {
+        "name": "phoneRecording",
+        "type": "unknown",
+        "data_type_info": "Telephone Number",
+        "state": "valid",
+        "reason": "valid_extended_pattern",
+        "false_positive": false
+      },
+      {
+        "name": "startTime",
+        "type": "unknown"
+      },
+      {
+        "name": "endTime",
+        "type": "unknown"
+      },
+      {
+        "name": "participants",
+        "type": "unknown"
+      }
+    ],
+    "state": "valid"
+  },
+  {
+    "name": "xmltt",
+    "filename": "lib/active_merchant/billing/gateways/authorize_net.rb",
+    "detector_type": "Ruby",
+    "properties": [
+      {
+        "name": "cardNumber",
+        "type": "unknown"
+      }
+    ]
+  },
+  {
+    "name": "zip",
+    "filename": "modules/exploits/osx/browser/osx_gatekeeper_bypass.rb",
+    "detector_type": "Ruby",
+    "properties": [
+      {
+        "name": "browser_fingerprint",
+        "type": "unknown",
+        "data_type_info": "Browser Fingerprint",
+        "state": "valid",
+        "reason": "valid_extended_pattern",
+        "false_positive": false
+      },
+      {
+        "name": "add_file",
+        "type": "unknown"
+      },
+      {
+        "name": "browsing_history",
+        "type": "unknown",
+        "data_type_info": "Browsing Behavior",
+        "state": "valid",
+        "reason": "valid_extended_pattern",
+        "false_positive": false
+      },
+      {
+        "name": "tracking",
+        "type": "unknown"
+      },
+      {
+        "name": "browsing behavoir",
+        "type": "unknown"
+      }
+    ],
+    "state": "valid"
+  },
+  {
+    "name": "yearsend",
+    "filename": "app/models/translation.rb",
+    "detector_type": "Ruby",
+    "properties": [
+      {
+        "name": "language",
+        "type": "unknown",
+        "data_type_info": "Spoken Languages",
+        "state": "valid",
+        "reason": "valid_extended_pattern",
+        "false_positive": false
+      },
+      {
+        "name": "accent",
+        "type": "unknown",
+        "data_type_info": "Accents",
+        "state": "valid",
+        "reason": "valid_extended_pattern",
+        "false_positive": false
+      },
+      {
+        "name": "username",
+        "type": "unknown",
+        "data_type_info": "Username",
+        "state": "valid",
+        "reason": "valid_extended_pattern",
+        "false_positive": false
+      },
+      {
+        "name": "to_s",
+        "type": "unknown"
+      }
+    ],
+    "state": "valid"
+  },
+  {
+    "name": "version",
+    "filename": "lib/twilio-ruby/rest/api/v2010/account/sip/domain/auth_types/auth_calls_mapping/auth_calls_credential_list_mapping.rb",
+    "detector_type": "Ruby",
+    "properties": [
+      {
+        "name": "create",
+        "type": "unknown"
+      },
+      {
+        "name": "read_limits",
+        "type": "unknown"
+      },
+      {
+        "name": "stream",
+        "type": "unknown"
+      },
+      {
+        "name": "page",
+        "type": "unknown"
+      },
+      {
+        "name": "domain",
+        "type": "unknown"
+      },
+      {
+        "name": "fetch",
+        "type": "unknown"
+      },
+      {
+        "name": "delete",
+        "type": "unknown"
+      },
+      {
+        "name": "id_number",
+        "type": "unknown",
+        "data_type_info": "ID Number",
+        "state": "valid",
+        "reason": "valid_extended_pattern",
+        "false_positive": false
+      },
+      {
+        "name": "genderidentity",
+        "type": "unknown",
+        "data_type_info": "Gender identity",
+        "state": "valid",
+        "reason": "valid_extended_pattern",
+        "false_positive": false
+      },
+      {
+        "name": "birthdate",
+        "type": "unknown",
+        "data_type_info": "Date of birth",
+        "state": "valid",
+        "reason": "valid_extended_pattern",
+        "false_positive": false
+      },
+      {
+        "name": "image",
+        "type": "unknown"
+      },
+      {
+        "name": "country",
+        "type": "unknown",
+        "data_type_info": "Country",
+        "state": "valid",
+        "reason": "valid_extended_pattern",
+        "false_positive": false
+      },
+      {
+        "name": "callername",
+        "type": "unknown"
+      },
+      {
+        "name": "ip_address",
+        "type": "unknown",
+        "data_type_info": "IP address",
+        "state": "valid",
+        "reason": "valid_extended_pattern",
+        "false_positive": false
+      },
+      {
+        "name": "calllogs",
+        "type": "unknown",
+        "data_type_info": "Call Logs",
+        "state": "valid",
+        "reason": "valid_extended_pattern",
+        "false_positive": false
+      }
+    ],
+    "state": "valid"
+  },
+  {
+    "name": "zone",
+    "filename": "app/workers/check_birthday.rb",
+    "detector_type": "Ruby",
+    "properties": [
+      {
+        "name": "birtdate",
+        "type": "unknown"
+      },
+      {
+        "name": "birthplace",
+        "type": "unknown"
+      },
+      {
+        "name": "reply",
+        "type": "unknown",
+        "data_type_info": "Replies",
+        "state": "valid",
+        "reason": "valid_extended_pattern",
+        "false_positive": false
+      },
+      {
+        "name": "nickname",
+        "type": "unknown"
+      },
+      {
+        "name": "studentNumber",
+        "type": "unknown",
+        "data_type_info": "Student Number",
+        "state": "valid",
+        "reason": "valid_extended_pattern",
+        "false_positive": false
+      },
+      {
+        "name": "lastName",
+        "type": "unknown",
+        "data_type_info": "Lastname",
+        "state": "valid",
+        "reason": "valid_extended_pattern",
+        "false_positive": false
+      }
+    ],
+    "state": "valid"
+  },
+  {
+    "name": "user",
+    "filename": "app/models/poll/voter.rb",
+    "detector_type": "Ruby",
+    "properties": [
+      {
+        "name": "blank?",
+        "type": "unknown"
+      },
+      {
+        "name": "gender",
+        "type": "unknown",
+        "data_type_info": "Gender",
+        "state": "valid",
+        "reason": "known_pattern",
+        "false_positive": false
+      },
+      {
+        "name": "age",
+        "type": "unknown",
+        "data_type_info": "Age Range",
+        "state": "valid",
+        "reason": "known_pattern",
+        "false_positive": false
+      },
+      {
+        "name": "geozone",
+        "type": "unknown"
+      },
+      {
+        "name": "document_type",
+        "type": "unknown"
+      },
+      {
+        "name": "document_number",
+        "type": "unknown"
+      },
+      {
+        "name": "username",
+        "type": "unknown",
+        "data_type_info": "Username",
+        "state": "valid",
+        "reason": "known_pattern",
+        "false_positive": false
+      },
+      {
+        "name": "interests",
+        "type": "unknown",
+        "data_type_info": "Interests",
+        "state": "valid",
+        "reason": "known_pattern",
+        "false_positive": false
+      },
+      {
+        "name": "extended_data",
+        "type": "unknown"
+      }
+    ],
+    "state": "valid"
+  },
+  {
+    "name": "family_tree",
+    "filename": "lib/graphviz/family_tree/couple.rb",
+    "detector_type": "Ruby",
+    "properties": [
+      {
+        "name": "family",
+        "type": "unknown",
+        "data_type_info": "Family Structure",
+        "state": "valid",
+        "reason": "valid_extended_pattern",
+        "false_positive": false
+      },
+      {
+        "name": "siblings",
+        "type": "unknown",
+        "data_type_info": "Siblings",
+        "state": "valid",
+        "reason": "valid_extended_pattern",
+        "false_positive": false
+      },
+      {
+        "name": "size",
+        "type": "unknown"
+      },
+      {
+        "name": "each",
+        "type": "unknown"
+      }
+    ],
+    "state": "valid"
+  },
+  {
+    "name": "zoneables",
+    "filename": "app/models/spree/zone.rb",
+    "detector_type": "Ruby",
+    "properties": [
+      {
+        "name": "collect",
+        "type": "unknown"
+      },
+      {
+        "name": "sustomername",
+        "type": "unknown"
+      },
+      {
+        "name": "favoritefood",
+        "type": "unknown",
+        "data_type_info": "Favorite Foods",
+        "state": "valid",
+        "reason": "valid_extended_pattern",
+        "false_positive": false
+      },
+      {
+        "name": "any?",
+        "type": "unknown"
+      },
+      {
+        "name": "exclude?",
+        "type": "unknown"
+      }
+    ],
+    "state": "valid"
+  },
+  {
+    "name": "val",
+    "filename": "lib/job_interview/fizz_buzz.rb",
+    "detector_type": "Ruby",
+    "properties": [
+      {
+        "name": "interview",
+        "type": "unknown",
+        "data_type_info": "Interviews",
+        "state": "valid",
+        "reason": "valid_extended_pattern",
+        "false_positive": false
+      }
+    ],
+    "state": "valid"
+  },
+  {
+    "name": "work_record",
+    "filename": "app/models/record.rb",
+    "detector_type": "Ruby",
+    "properties": [
+      {
+        "name": "rating_overall_state",
+        "type": "unknown"
+      },
+      {
+        "name": "body",
+        "type": "unknown"
+      },
+      {
+        "name": "modified_at",
+        "type": "unknown"
+      },
+      {
+        "name": "likescount",
+        "type": "unknown"
+      },
+      {
+        "name": "userid",
+        "type": "unknown",
+        "data_type_info": "User",
+        "state": "valid",
+        "reason": "known_database_identifier",
+        "false_positive": false
+      },
+      {
+        "name": "username",
+        "type": "unknown",
+        "data_type_info": "Username",
+        "state": "valid",
+        "reason": "valid_extended_pattern",
+        "false_positive": false
+      }
+    ],
+    "state": "valid"
+  },
+  {
+    "name": "click",
+    "filename": "lib/loghouse_query/click.rb",
+    "detector_type": "Ruby",
+    "properties": [
+      {
+        "name": "customerid",
+        "type": "unknown",
+        "data_type_info": "Customer",
+        "state": "valid",
+        "reason": "known_database_identifier",
+        "false_positive": false
+      },
+      {
+        "name": "now",
+        "type": "unknown"
+      }
+    ],
+    "data_type_info": "Click",
+    "state": "valid",
+    "reason": "known_data_object",
+    "false_positive": false
+  },
+  {
+    "name": "invoice",
+    "filename": "lib/reporting/reports/xero_invoices/base.rb",
+    "detector_type": "Ruby",
+    "properties": [
+      {
+        "name": "customerid",
+        "type": "unknown",
+        "data_type_info": "Customer",
+        "state": "valid",
+        "reason": "known_database_identifier",
+        "false_positive": false
+      },
+      {
+        "name": "today",
+        "type": "unknown"
+      }
+    ],
+    "data_type_info": "Invoice",
+    "state": "valid",
+    "reason": "known_data_object",
+    "false_positive": false
+  },
+  {
+    "name": "order",
+    "filename": "core/lib/spree/testing_support/order_walkthrough.rb",
+    "detector_type": "Ruby",
+    "properties": [
+      {
+        "name": "purchaserid",
+        "type": "unknown"
+      },
+      {
+        "name": "id",
+        "type": "unknown"
+      }
+    ]
+  },
+  {
+    "name": "payments",
+    "filename": "app/services/stripe_service/api/payments.rb",
+    "detector_type": "Ruby",
+    "properties": [
+      {
+        "name": "clientid",
+        "type": "unknown",
+        "data_type_info": "Client",
+        "state": "valid",
+        "reason": "known_database_identifier",
+        "false_positive": false
+      },
+      {
+        "name": "at",
+        "type": "unknown"
+      }
+    ],
+    "data_type_info": "Payment",
+    "state": "valid",
+    "reason": "known_data_object",
+    "false_positive": false
+  },
+  {
+    "name": "purchase_order",
+    "filename": "app/models/receive_purchase_order.rb",
+    "detector_type": "Ruby",
+    "properties": [
+      {
+        "name": "purchaserid",
+        "type": "unknown"
+      },
+      {
+        "name": "now",
+        "type": "unknown"
+      }
+    ]
+  },
+  {
+    "name": "rating_overall",
+    "filename": "app/components/label_groups/work_record_rating_label_group_component.rb",
+    "detector_type": "Ruby",
+    "properties": [
+      {
+        "name": "workerid",
+        "type": "unknown"
+      },
+      {
+        "name": "rating_overall_state",
+        "type": "unknown"
+      },
+      {
+        "name": "rating_animation_state",
+        "type": "unknown"
+      },
+      {
+        "name": "rating_character_state",
+        "type": "unknown"
+      }
+    ]
+  },
+  {
+    "name": "delete_review",
+    "filename": "app/graphql/beta/mutations/delete_review.rb",
+    "detector_type": "Ruby",
+    "properties": [
+      {
+        "name": "record",
+        "type": "unknown"
+      },
+      {
+        "name": "accountid",
+        "type": "unknown"
+      }
+    ]
+  },
+  {
+    "name": "Candidate",
+    "filename": "app/models/signature.rb",
+    "detector_type": "Ruby",
+    "properties": [
+      {
+        "name": "signature",
+        "type": "unknown",
+        "data_type_info": "Signature",
+        "state": "valid",
+        "reason": "known_pattern",
+        "false_positive": false
+      },
+      {
+        "name": "lastname",
+        "type": "unknown",
+        "data_type_info": "Lastname",
+        "state": "valid",
+        "reason": "known_pattern",
+        "false_positive": false
+      },
+      {
+        "name": "candidateid",
+        "type": "unknown",
+        "data_type_info": "Candidate",
+        "state": "valid",
+        "reason": "valid_object_and_db_identifier",
+        "false_positive": false
+      }
+    ],
+    "state": "valid"
+  }
+]

@@ -217,7 +217,7 @@ func (classifier *Classifier) classifyKnownObject(classifiedDatatype *Classified
 			validProperties = true
 			classifiedDatatype.DataTypable.SetProperty(
 				property.GetName(),
-				classifyAsValid(property, classifier.datatypeFromPattern(matchedKnownObject), "known_classification_pattern"),
+				classifyAsValid(property, classifier.datatypeFromPattern(matchedKnownObject), "known_pattern"),
 			)
 
 			continue
