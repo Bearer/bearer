@@ -9,6 +9,7 @@ import (
 	"github.com/bearer/curio/pkg/flag"
 	"github.com/bearer/curio/pkg/report/output/dataflow"
 	"github.com/bearer/curio/pkg/types"
+	"gopkg.in/yaml.v3"
 
 	"github.com/rs/zerolog"
 	"github.com/rs/zerolog/log"
@@ -16,27 +17,12 @@ import (
 )
 
 func ReportJSON(report types.Report, output *zerolog.Event, config settings.Config) error {
-	var ouputDetections any
-	var err error
-
-	if config.Report.Report == flag.ReportDetectors {
-		ouputDetections, err = GetDetectorsOutput(report)
-		if err != nil {
-			return err
-		}
-	} else if config.Report.Report == flag.ReportDataFlow {
-		detections, err := GetDetectorsOutput(report)
-		if err != nil {
-			return err
-		}
-
-		ouputDetections, err = dataflow.GetOuput(detections, config)
-		if err != nil {
-			return err
-		}
+	ouputDetections, err := getReportOutput(report, config)
+	if err != nil {
+		return err
 	}
 
-	jsonBytes, err := json.MarshalIndent(&ouputDetections, "", "\t")
+	jsonBytes, err := json.Marshal(&ouputDetections)
 	if err != nil {
 		return fmt.Errorf("failed to json marshal detections: %w", err)
 	}
@@ -44,6 +30,46 @@ func ReportJSON(report types.Report, output *zerolog.Event, config settings.Conf
 	output.Msg(string(jsonBytes))
 
 	return nil
+}
+
+func ReportYAML(report types.Report, output *zerolog.Event, config settings.Config) error {
+	ouputDetections, err := getReportOutput(report, config)
+	if err != nil {
+		return err
+	}
+
+	jsonBytes, err := yaml.Marshal(&ouputDetections)
+	if err != nil {
+		return fmt.Errorf("failed to json marshal detections: %w", err)
+	}
+
+	output.Msg(string(jsonBytes))
+
+	return nil
+}
+
+func getReportOutput(report types.Report, config settings.Config) (any, error) {
+	var ouputDetections any
+	var err error
+
+	if config.Report.Report == flag.ReportDetectors {
+		ouputDetections, err = GetDetectorsOutput(report)
+		if err != nil {
+			return nil, err
+		}
+	} else if config.Report.Report == flag.ReportDataFlow {
+		detections, err := GetDetectorsOutput(report)
+		if err != nil {
+			return nil, err
+		}
+
+		ouputDetections, err = dataflow.GetOuput(detections, config)
+		if err != nil {
+			return nil, err
+		}
+	}
+
+	return ouputDetections, nil
 }
 
 func GetDetectorsOutput(report types.Report) ([]interface{}, error) {

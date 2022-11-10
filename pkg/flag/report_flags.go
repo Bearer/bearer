@@ -1,13 +1,10 @@
 package flag
 
-import (
-)
-
 type Severity int
 
 var (
-	FormatJSON      = "json"
-	FormatJSONLines = "jsonlines"
+	FormatJSON = "json"
+	FormatYAML = "yaml"
 
 	ReportDetectors = "detectors"
 	ReportDataFlow  = "dataflow"
@@ -19,7 +16,7 @@ var (
 		ConfigName: "report.format",
 		Shorthand:  "f",
 		Value:      FormatJSON,
-		Usage:      "format (json)",
+		Usage:      "format (json, yaml)",
 	}
 	ReportFlag = Flag{
 		Name:       "report",

@@ -152,6 +152,11 @@ func (r *runner) Report(config settings.Config, report types.Report) error {
 		if err != nil {
 			return fmt.Errorf("error generating report %w", err)
 		}
+	case flag.FormatYAML:
+		err := reportoutput.ReportYAML(report, logger, config)
+		if err != nil {
+			return fmt.Errorf("error generating report %w", err)
+		}
 	}
 	return nil
 }
