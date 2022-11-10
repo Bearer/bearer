@@ -6,8 +6,9 @@ import (
 )
 
 func GetProgressBar(filesLength int, config settings.Config) *progressbar.ProgressBar {
+	hideProgress := config.Scan.Quiet || config.Scan.Debug
 	return progressbar.NewOptions(filesLength,
-		progressbar.OptionSetVisibility(!config.Scan.Debug),
+		progressbar.OptionSetVisibility(!hideProgress),
 		progressbar.OptionSetWriter(errorWriter),
 		progressbar.OptionShowCount(),
 		progressbar.OptionEnableColorCodes(false),
