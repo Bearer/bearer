@@ -16,7 +16,7 @@ var (
 		ConfigName: "report.format",
 		Shorthand:  "f",
 		Value:      FormatJSON,
-		Usage:      "format (json)",
+		Usage:      "format (json, yaml)",
 	}
 	ReportFlag = Flag{
 		Name:       "report",
