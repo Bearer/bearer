@@ -20,6 +20,7 @@ type TestCase struct {
 	Arguments     []string
 	ShouldSucceed bool
 	RunInTempDir  bool
+	OutputPath    string
 }
 
 func NewTestCase(name string, arguments []string) *TestCase {
@@ -133,6 +134,14 @@ func RunTests(t *testing.T, tests []TestCase) {
 			}
 
 			combinedOutput, err := executeApp(test.Arguments, port)
+
+			if test.OutputPath != "" {
+				fileContent, err := os.ReadFile(test.OutputPath)
+				if err != nil {
+					t.Fatalf("Failed to read file %s: %s", test.OutputPath, err)
+				}
+				combinedOutput = string(fileContent)
+			}
 
 			if test.RunInTempDir {
 				if err := os.Chdir(originalDir); err != nil {
