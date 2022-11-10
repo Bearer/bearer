@@ -34,7 +34,7 @@ func executeApp(arguments []string, port int) (string, error) {
 	app := commands.NewApp(build.Version, build.CommitSHA)
 
 	if arguments[0] == "scan" {
-		arguments = append(arguments, "--existing-worker=http://localhost:"+strconv.Itoa(port))
+		arguments = append(arguments, "--existing-worker=http://localhost:"+strconv.Itoa(port), "--quiet")
 	}
 
 	stdoutReader, stdoutWriter, err := os.Pipe()
