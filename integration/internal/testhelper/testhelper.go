@@ -21,6 +21,7 @@ type TestCase struct {
 	ShouldSucceed bool
 	RunInTempDir  bool
 	OutputPath    string
+	StartWorker   bool
 }
 
 func NewTestCase(name string, arguments []string) *TestCase {
@@ -92,17 +93,29 @@ func startWorker(port int) error {
 }
 
 func RunTests(t *testing.T, tests []TestCase) {
-	port := balancer.GetFreePort()
-	go func() {
-		err := startWorker(port)
-		if err != nil {
-			log.Fatal().Msgf("failed to start worker: %s", err)
-		}
-	}()
+	var port int
 
-	// this needs to be here since otherwise viper is getting written twice concurrently from 2 gorutines
-	// we need to find a way to let main program know viper has finished loading config
-	time.Sleep(1 * time.Second)
+	shouldStartWorker := false
+	for _, test := range tests {
+		if test.StartWorker {
+			shouldStartWorker = true
+			break
+		}
+	}
+
+	if shouldStartWorker {
+		port = balancer.GetFreePort()
+		go func() {
+			err := startWorker(port)
+			if err != nil {
+				log.Fatal().Msgf("failed to start worker: %s", err)
+			}
+		}()
+
+		// this needs to be here since otherwise viper is getting written twice concurrently from 2 gorutines
+		// we need to find a way to let main program know viper has finished loading config
+		time.Sleep(1 * time.Second)
+	}
 
 	for _, test := range tests {
 		t.Run(test.Name, func(t *testing.T) {
