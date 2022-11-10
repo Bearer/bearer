@@ -48,6 +48,12 @@ var (
 		Value:      "",
 		Usage:      "expand context of schema classification e.g. --context=health to include data types particular to health",
 	}
+	QuietFlag = Flag{
+		Name:       "quiet",
+		ConfigName: "scan.quiet",
+		Value:      false,
+		Usage:      "suppress non-essential messages",
+	}
 )
 
 type ScanFlagGroup struct {
@@ -57,6 +63,7 @@ type ScanFlagGroup struct {
 	DomainResolutionTimeoutFlag *Flag
 	InternalDomainsFlag         *Flag
 	ContextFlag                 *Flag
+	QuietFlag                   *Flag
 }
 
 type ScanOptions struct {
@@ -67,6 +74,7 @@ type ScanOptions struct {
 	DomainResolutionTimeout time.Duration `json:"domain_resolution_timeout"`
 	InternalDomains         []string      `json:"internal_domains"`
 	Context                 Context       `json:"context"`
+	Quiet                   bool          `json:"quiet"`
 }
 
 func NewScanFlagGroup() *ScanFlagGroup {
@@ -77,6 +85,7 @@ func NewScanFlagGroup() *ScanFlagGroup {
 		DomainResolutionTimeoutFlag: &DomainResolutionTimeoutFlag,
 		InternalDomainsFlag:         &InternalDomainsFlag,
 		ContextFlag:                 &ContextFlag,
+		QuietFlag:                   &QuietFlag,
 	}
 }
 
@@ -92,6 +101,7 @@ func (f *ScanFlagGroup) Flags() []*Flag {
 		f.DomainResolutionTimeoutFlag,
 		f.InternalDomainsFlag,
 		f.ContextFlag,
+		f.QuietFlag,
 	}
 }
 
@@ -108,6 +118,7 @@ func (f *ScanFlagGroup) ToOptions(args []string) (ScanOptions, error) {
 		DomainResolutionTimeout: getDuration(f.DomainResolutionTimeoutFlag),
 		InternalDomains:         getStringSlice(f.InternalDomainsFlag),
 		Context:                 getContext(f.ContextFlag),
+		Quiet:                   getBool(f.QuietFlag),
 		Target:                  target,
 	}, nil
 }
