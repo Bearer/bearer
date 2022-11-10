@@ -16,28 +16,29 @@ import (
 )
 
 type TestCase struct {
-	Name          string
-	Arguments     []string
-	ShouldSucceed bool
+	name          string
+	arguments     []string
+	shouldSucceed bool
+	options       TestCaseOptions
+}
+
+type TestCaseOptions struct {
 	RunInTempDir  bool
 	OutputPath    string
 	StartWorker   bool
 }
 
-func NewTestCase(name string, arguments []string) *TestCase {
+func NewTestCase(name string, arguments []string, options TestCaseOptions) *TestCase {
 	return &TestCase{
-		Name:          name,
-		Arguments:     arguments,
-		ShouldSucceed: true,
+		name:          name,
+		arguments:     arguments,
+		shouldSucceed: true,
+		options:       options,
 	}
 }
 
-func executeApp(arguments []string, port int) (string, error) {
+func executeApp(arguments []string) (string, error) {
 	app := commands.NewApp(build.Version, build.CommitSHA)
-
-	if arguments[0] == "scan" {
-		arguments = append(arguments, "--existing-worker=http://localhost:"+strconv.Itoa(port), "--quiet")
-	}
 
 	stdoutReader, stdoutWriter, err := os.Pipe()
 	if err != nil {
@@ -97,7 +98,7 @@ func RunTests(t *testing.T, tests []TestCase) {
 
 	shouldStartWorker := false
 	for _, test := range tests {
-		if test.StartWorker {
+		if test.options.StartWorker {
 			shouldStartWorker = true
 			break
 		}
@@ -118,11 +119,11 @@ func RunTests(t *testing.T, tests []TestCase) {
 	}
 
 	for _, test := range tests {
-		t.Run(test.Name, func(t *testing.T) {
+		t.Run(test.name, func(t *testing.T) {
 			var originalDir string
 			var err error
 
-			if test.RunInTempDir {
+			if test.options.RunInTempDir {
 				originalDir, err = os.Getwd()
 				if err != nil {
 					t.Fatal(err)
@@ -146,17 +147,22 @@ func RunTests(t *testing.T, tests []TestCase) {
 				}
 			}
 
-			combinedOutput, err := executeApp(test.Arguments, port)
+			arguments := test.arguments
+			if port != 0 {
+				arguments = append(arguments, "--existing-worker=http://localhost:"+strconv.Itoa(port), "--quiet")
+			}
 
-			if test.OutputPath != "" {
-				fileContent, err := os.ReadFile(test.OutputPath)
+			combinedOutput, err := executeApp(arguments)
+
+			if test.options.OutputPath != "" {
+				fileContent, err := os.ReadFile(test.options.OutputPath)
 				if err != nil {
-					t.Fatalf("Failed to read file %s: %s", test.OutputPath, err)
+					t.Fatalf("Failed to read file %s: %s", test.options.OutputPath, err)
 				}
 				combinedOutput = string(fileContent)
 			}
 
-			if test.RunInTempDir {
+			if test.options.RunInTempDir {
 				if err := os.Chdir(originalDir); err != nil {
 					t.Fatal(err)
 				}
@@ -165,10 +171,10 @@ func RunTests(t *testing.T, tests []TestCase) {
 			cupaloy.SnapshotT(t, combinedOutput)
 
 			if err != nil {
-				if test.ShouldSucceed {
+				if test.shouldSucceed {
 					t.Errorf("Expected application to succeed, but it failed: %s", err)
 				}
-			} else if !test.ShouldSucceed {
+			} else if !test.shouldSucceed {
 				t.Error("Expected application to fail, but it did not")
 			}
 		})

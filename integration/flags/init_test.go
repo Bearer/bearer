@@ -7,11 +7,11 @@ import (
 )
 
 func TestInitCommand(t *testing.T) {
-	outputPath := "curio.yml"
-
-	testCase := testhelper.NewTestCase("init", []string{"init"})
-	testCase.OutputPath = outputPath
-	testCase.RunInTempDir = true
+	options := testhelper.TestCaseOptions{
+		RunInTempDir: true,
+		OutputPath:   "curio.yml",
+	}
+	testCase := testhelper.NewTestCase("init", []string{"init"}, options)
 
 	tests := []testhelper.TestCase{*testCase}
 
