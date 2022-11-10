@@ -8,7 +8,7 @@ import (
 func GetProgressBar(filesLength int, config settings.Config) *progressbar.ProgressBar {
 	return progressbar.NewOptions(filesLength,
 		progressbar.OptionSetVisibility(!config.Scan.Debug),
-		progressbar.OptionSetWriter(outputWriter),
+		progressbar.OptionSetWriter(errorWriter),
 		progressbar.OptionShowCount(),
 		progressbar.OptionEnableColorCodes(false),
 		progressbar.OptionShowElapsedTimeOnFinish(),
