@@ -8,6 +8,7 @@ import (
 	"github.com/bearer/curio/pkg/commands/process/settings"
 	"github.com/bearer/curio/pkg/flag"
 	"github.com/bearer/curio/pkg/report/output/dataflow"
+	"github.com/bearer/curio/pkg/report/output/policies"
 	"github.com/bearer/curio/pkg/types"
 	"gopkg.in/yaml.v3"
 
@@ -63,10 +64,32 @@ func getReportOutput(report types.Report, config settings.Config) (any, error) {
 			return nil, err
 		}
 
-		ouputDetections, err = dataflow.GetOuput(detections, config)
+		// ouputDetections, err = dataflow.GetOuput(detections, config)
+		output, err := policies.GetDataflow(detections)
 		if err != nil {
 			return nil, err
 		}
+
+		return output, nil
+
+	} else if config.Report.Report == flag.ReportPolicies {
+		detections, err := GetDetectorsOutput(report)
+		if err != nil {
+			return nil, err
+		}
+
+		policiesData, err := dataflow.GetOuput(detections, config)
+		if err != nil {
+			return nil, err
+		}
+
+		data, err := policies.GetPolicies(policiesData)
+		if err != nil {
+			return nil, err
+		}
+
+		return data, err
+		// log.Debug().Msgf("%s", data)
 	}
 
 	return ouputDetections, nil

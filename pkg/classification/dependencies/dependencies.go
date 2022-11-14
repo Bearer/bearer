@@ -15,9 +15,9 @@ type ClassifiedDependency struct {
 }
 
 type Classification struct {
-	RecipeMatch bool   `json:"recipe_match"`
-	RecipeName  string `json:"recipe_name,omitempty"`
-	Decision    classify.ClassificationDecision
+	RecipeMatch bool                            `json:"recipe_match"`
+	RecipeName  string                          `json:"recipe_name,omitempty"`
+	Decision    classify.ClassificationDecision `json:"descision"`
 }
 
 type Classifier struct {

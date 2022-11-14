@@ -8,6 +8,7 @@ var (
 
 	ReportDetectors = "detectors"
 	ReportDataFlow  = "dataflow"
+	ReportPolicies  = "policies"
 )
 
 var (
