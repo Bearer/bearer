@@ -8,6 +8,7 @@ var (
 
 	ReportDetectors = "detectors"
 	ReportDataFlow  = "dataflow"
+	ReportStats     = "stats"
 )
 
 var (
@@ -22,7 +23,7 @@ var (
 		Name:       "report",
 		ConfigName: "report.report",
 		Value:      ReportDetectors,
-		Usage:      "specify the kind of report (detectors, dataflow)",
+		Usage:      "specify the kind of report (detectors, dataflow, stats)",
 	}
 	OutputFlag = Flag{
 		Name:       "output",

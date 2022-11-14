@@ -1,13 +1,13 @@
-package output_test
+package components_test
 
 import (
 	"os"
 	"testing"
 
 	"github.com/bearer/curio/pkg/commands/process/settings"
-	"github.com/bearer/curio/pkg/report/output"
 	"github.com/bearer/curio/pkg/report/output/dataflow"
 	"github.com/bearer/curio/pkg/report/output/dataflow/types"
+	"github.com/bearer/curio/pkg/report/output/detectors"
 	globaltypes "github.com/bearer/curio/pkg/types"
 	"github.com/stretchr/testify/assert"
 )
@@ -116,7 +116,7 @@ func TestDataflowComponents(t *testing.T) {
 			}
 			file.Close()
 
-			detections, err := output.GetDetectorsOutput(globaltypes.Report{
+			detections, err := detectors.GetOutput(globaltypes.Report{
 				Path: file.Name(),
 			})
 			if err != nil {
@@ -124,7 +124,7 @@ func TestDataflowComponents(t *testing.T) {
 				return
 			}
 
-			dataflow, err := dataflow.GetOuput(detections, settings.Config{})
+			dataflow, err := dataflow.GetOutput(detections, settings.Config{})
 			if err != nil {
 				t.Fatalf("failed to get detectors output %s", err)
 				return
