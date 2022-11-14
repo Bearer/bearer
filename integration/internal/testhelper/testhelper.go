@@ -13,6 +13,7 @@ import (
 	"github.com/bearer/curio/pkg/commands/process/balancer"
 	"github.com/bradleyjkemp/cupaloy"
 	"github.com/rs/zerolog/log"
+	"github.com/spf13/viper"
 )
 
 type TestCase struct {
@@ -120,6 +121,10 @@ func RunTests(t *testing.T, tests []TestCase) {
 
 	for _, test := range tests {
 		t.Run(test.name, func(t *testing.T) {
+			t.Cleanup(func() {
+				viper.Reset()
+			})
+
 			var originalDir string
 			var err error
 
