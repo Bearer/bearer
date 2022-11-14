@@ -63,6 +63,9 @@ func (classifier *Classifier) Classify(data DataTypeDetection) *ClassifiedDataty
 	if classify.ObjectStopWordDetected(data.Value.GetNormalizedName()) {
 		classifiedDatatype = classifyObjectAsInvalid(data.Value, "stop_word")
 	}
+	if data.Value.GetName() == "" {
+		classifiedDatatype = classifyObjectAsInvalid(data.Value, "blank_object_name")
+	}
 
 	if classifiedDatatype != nil && classifiedDatatype.Classification.Decision.State == classify.Invalid {
 		return classifiedDatatype
