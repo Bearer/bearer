@@ -2,7 +2,7 @@
   "metadata": { "version": "1.0" },
   "id": 2,
   "data_type_uuid": "22e24c62-82d3-4b72-827c-e261533331bd",
-  "exclude_regexp": "\\b(.*notification|config(uration)?|template|enabled|accept|label|token|reminder|subject|body|handover|sent.by|settings?|id|voicemail.*)\\b",
+  "exclude_regexp": "\\b(.*notification|config(uration)?|template|enabled|accept|label|token|reminder|subject|body|handover|sent.by|settings?|id|voicemail.*|required)\\b",
   "exclude_types": ["boolean", "date", "bool"],
   "friendly_name": "Email Address",
   "health_context_data_type_uuid": null,

@@ -1,7 +1,5 @@
 {
-  "metadata": {
-    "version": "1.0"
-  },
+  "metadata": { "version": "1.0" },
   "id": 60,
   "data_type_uuid": "da48dfad-7322-411b-988d-5bde0d7bc659",
   "exclude_regexp": null,
