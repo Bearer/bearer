@@ -31,7 +31,7 @@ JSON.parse(data_type_classification_patterns_file).each do |pattern|
   # remove spaces in object type
   pattern["object_type"] = pattern["object_type"].map { |object_type| object_type.downcase.gsub(" ", "_") }
 
-  filename = "pkg/classification/db/data_type_classification_patterns/#{pattern["friendly_name"].downcase.gsub(/\s+/, "_").gsub("/", "_")}.json"
+  filename = "pkg/classification/db/data_type_classification_patterns/#{pattern["id"]}_#{pattern["friendly_name"].downcase.gsub(/\s+/, "_").gsub("/", "_")}.json"
   File.open(filename, "w") do |new_file|
     new_file << {metadata: {version: "1.0"}}.merge(pattern).to_json
   end
