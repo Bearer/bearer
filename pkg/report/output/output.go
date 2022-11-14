@@ -64,13 +64,13 @@ func getReportOutput(report types.Report, config settings.Config) (any, error) {
 			return nil, err
 		}
 
-		// ouputDetections, err = dataflow.GetOuput(detections, config)
-		output, err := policies.GetDataflow(detections)
+		ouputDetections, err = dataflow.GetOuput(detections, config)
+		// output, err := policies.GetDataflow(detections)
 		if err != nil {
 			return nil, err
 		}
 
-		return output, nil
+		return ouputDetections, nil
 
 	} else if config.Report.Report == flag.ReportPolicies {
 		detections, err := GetDetectorsOutput(report)
@@ -83,7 +83,7 @@ func getReportOutput(report types.Report, config settings.Config) (any, error) {
 			return nil, err
 		}
 
-		data, err := policies.GetPolicies(policiesData)
+		data, err := policies.GetPolicies(policiesData, config)
 		if err != nil {
 			return nil, err
 		}
@@ -92,7 +92,7 @@ func getReportOutput(report types.Report, config settings.Config) (any, error) {
 		// log.Debug().Msgf("%s", data)
 	}
 
-	return ouputDetections, nil
+	return nil, nil
 }
 
 func GetDetectorsOutput(report types.Report) ([]interface{}, error) {
