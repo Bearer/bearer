@@ -15,6 +15,7 @@ func TestMetadataFlags(t *testing.T) {
 		*newMetadataTest("help", []string{"help"}),
 		*newMetadataTest("version", []string{"version"}),
 		*newMetadataTest("scan-help", []string{"scan", "--help"}),
+		*newMetadataTest("help-scan", []string{"help", "scan"}),
 	}
 
 	testhelper.RunTests(t, tests)
