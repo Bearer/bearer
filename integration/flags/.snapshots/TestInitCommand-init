@@ -11,7 +11,7 @@ scan:
                 - ruby
             patterns:
                 - |
-                  log.info(<$ARGUMENT>)
+                  logger.info(<$ARGUMENT>)
             param_parenting: false
             metavars: {}
             stored: false
