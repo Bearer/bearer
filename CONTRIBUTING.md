@@ -36,6 +36,12 @@ go mod download
 
 ### Testing
 
+Run all tests:
+
+``` shell
+go test ./...
+```
+
 Running classification tests:
 
 ```bash
@@ -47,6 +53,22 @@ Running a single specific test:
 ```bash
 go test -run ^TestSchema$ ./pkg/classification/schema -count=1
 ```
+
+#### Integration testing
+
+These tests work by running an instance of the Curio application, with a
+specified set of arguments, and then capturing the standard output and standard
+error streams. The captured output is compared against a snapshot of the
+expected output, using the [cupaloy](https://github.com/bradleyjkemp/cupaloy)
+library.
+
+The standard pattern is to create test case(s) using the
+`testhelper.NewTestCase` factory function, and then pass these into the
+`testhelper.RunTests` function for execution.
+
+Integration tests are grouped within the top-level
+[`integration`](/integration) subdirectory; see the existing tests for examples
+to follow when adding a new test.
 
 ### Submitting your changes as a pull request
 

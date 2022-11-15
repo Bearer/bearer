@@ -4,29 +4,25 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"os"
 
 	"github.com/bearer/curio/pkg/commands/process/settings"
 	"github.com/bearer/curio/pkg/flag"
 	"github.com/bearer/curio/pkg/report/output/dataflow"
-	"github.com/bearer/curio/pkg/report/output/policies"
 	"github.com/bearer/curio/pkg/types"
 	"gopkg.in/yaml.v3"
 
 	"github.com/rs/zerolog"
-	"github.com/rs/zerolog/log"
-	"github.com/wlredeye/jsonlines"
 )
 
 var ErrUndefinedFormat = errors.New("undefined output format")
 
 func ReportJSON(report types.Report, output *zerolog.Event, config settings.Config) error {
-	ouputDetections, err := getReportOutput(report, config)
+	outputDetections, err := getReportOutput(report, config)
 	if err != nil {
 		return err
 	}
 
-	jsonBytes, err := json.Marshal(&ouputDetections)
+	jsonBytes, err := json.Marshal(&outputDetections)
 	if err != nil {
 		return fmt.Errorf("failed to json marshal detections: %w", err)
 	}
@@ -73,25 +69,32 @@ func getReportOutput(report types.Report, config settings.Config) (any, error) {
 		if err != nil {
 			return nil, err
 		}
+	} else if config.Report.Report == flag.ReportStats {
+		lineOfCodeOutput, err := stats.GoclocDetectorOutput(config.Scan.Target)
+		if err != nil {
+			return nil, err
+		}
 
 		return policies.GetPolicies(policiesData, config)
 	}
 
+		detectorsOutput, err := detectors.GetOutput(report)
+		if err != nil {
+			return nil, err
+		}
 	return nil, ErrUndefinedFormat
 }
 
-func GetDetectorsOutput(report types.Report) ([]interface{}, error) {
-	var detections []interface{}
-	f, err := os.Open(report.Path)
-	if err != nil {
-		return nil, fmt.Errorf("failed to open report: %w", err)
+		dataflowOutput, err := dataflow.GetOutput(detectorsOutput, config)
+		if err != nil {
+			return nil, err
+		}
+
+		output, err = stats.GetOutput(lineOfCodeOutput, dataflowOutput, config)
+		if err != nil {
+			return nil, err
+		}
 	}
 
-	err = jsonlines.Decode(f, &detections)
-	if err != nil {
-		return nil, fmt.Errorf("failed to decode report: %w", err)
-	}
-	log.Debug().Msgf("got %d detections", len(detections))
-
-	return detections, nil
+	return output, nil
 }

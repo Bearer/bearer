@@ -22,7 +22,7 @@ type DataFlow struct {
 
 var allowedDetections []detections.DetectionType = []detections.DetectionType{detections.TypeSchemaClassified, detections.TypeCustomClassified, detections.TypeDependencyClassified, detections.TypeInterfaceClassified}
 
-func GetOuput(input []interface{}, config settings.Config) (*DataFlow, error) {
+func GetOutput(input []interface{}, config settings.Config) (*DataFlow, error) {
 	dataTypesHolder := datatypes.New()
 	risksHolder := risks.New(config)
 	componentsHolder := components.New()

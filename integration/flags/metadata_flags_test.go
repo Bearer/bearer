@@ -6,10 +6,16 @@ import (
 	"github.com/bearer/curio/integration/internal/testhelper"
 )
 
+func newMetadataTest(name string, arguments []string) *testhelper.TestCase {
+	return testhelper.NewTestCase(name, arguments, testhelper.TestCaseOptions{})
+}
+
 func TestMetadataFlags(t *testing.T) {
 	tests := []testhelper.TestCase{
-		*testhelper.NewTestCase("help", []string{"help"}),
-		*testhelper.NewTestCase("version", []string{"version"}),
+		*newMetadataTest("help", []string{"help"}),
+		*newMetadataTest("version", []string{"version"}),
+		*newMetadataTest("scan-help", []string{"scan", "--help"}),
+		*newMetadataTest("help-scan", []string{"help", "scan"}),
 	}
 
 	testhelper.RunTests(t, tests)

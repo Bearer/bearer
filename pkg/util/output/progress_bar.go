@@ -14,7 +14,7 @@ func GetProgressBar(filesLength int, config settings.Config) *progressbar.Progre
 		progressbar.OptionEnableColorCodes(false),
 		progressbar.OptionShowElapsedTimeOnFinish(),
 		progressbar.OptionOnCompletion(func() {
-			StdErrLogger().Msgf("\n")
+			errorWriter.Write([]byte("\n")) //nolint:all,errcheck
 		}),
 		progressbar.OptionShowIts(),
 		progressbar.OptionSetItsString("files"),

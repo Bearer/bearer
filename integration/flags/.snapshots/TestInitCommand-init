@@ -1,0 +1,35 @@
+report:
+    format: json
+    output: ""
+    report: detectors
+scan:
+    context: ""
+    custom_detector:
+        detect_ruby_logger:
+            disabled: false
+            languages:
+                - ruby
+            patterns:
+                - |
+                  log.info(<$ARGUMENT>)
+            param_parenting: false
+            metavars: {}
+            stored: false
+    debug: false
+    disable-domain-resolution: false
+    domain-resolution-timeout: 3s
+    internal-domains: []
+    quiet: false
+    skip-path: []
+worker:
+    existing-worker: ""
+    file-size-max: 25000000
+    files-to-batch: 1
+    memory-max: 800000000
+    timeout: 10m0s
+    timeout-file-max: 5m0s
+    timeout-file-min: 5s
+    timeout-file-second-per-bytes: 10000
+    timeout-worker-online: 1m0s
+    workers: 1
+
