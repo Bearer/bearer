@@ -5,36 +5,12 @@ import (
 
 	"github.com/bearer/curio/pkg/classification/db"
 	"github.com/bearer/curio/pkg/classification/schema"
-	"github.com/bearer/curio/pkg/classification/schema/internal/testhelper"
 	"github.com/bearer/curio/pkg/report/detectors"
 	reportschema "github.com/bearer/curio/pkg/report/schema"
 	"github.com/bearer/curio/pkg/report/schema/datatype"
 	"github.com/bearer/curio/pkg/util/classify"
-	"github.com/bradleyjkemp/cupaloy"
 	"github.com/stretchr/testify/assert"
 )
-
-func TestRuby(t *testing.T) {
-	classifier := schema.New(
-		schema.Config{
-			DataTypes:                      db.Default().DataTypes,
-			DataTypeClassificationPatterns: db.Default().DataTypeClassificationPatterns,
-			KnownPersonObjectPatterns:      db.Default().KnownPersonObjectPatterns,
-		},
-	)
-	output := testhelper.ExtractExpectedOutput(t, "ruby", classifier)
-
-	snapshot := struct {
-		KPI            testhelper.KPI
-		ExpectedResult []testhelper.ClassificationResult
-		Result         []testhelper.ClassificationResult
-	}{
-		KPI:            output.KPI,
-		ExpectedResult: output.ExpectedClassifications,
-		Result:         output.ValidClassifications,
-	}
-	cupaloy.SnapshotT(t, snapshot)
-}
 
 func TestSchemaObjectClassification(t *testing.T) {
 	knownObjectDataType := db.DataType{
