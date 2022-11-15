@@ -9,7 +9,7 @@ import (
 	"github.com/rs/zerolog/log"
 )
 
-func GetPolicies(dataflow *dataflow.DataFlow, config settings.Config) ([]rego.Vars, error) {
+func GetOutput(dataflow *dataflow.DataFlow, config settings.Config) ([]rego.Vars, error) {
 	ctx := context.TODO()
 
 	var result []rego.Vars
