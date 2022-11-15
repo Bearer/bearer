@@ -296,6 +296,17 @@ func (classifier *Classifier) classifyObjectWithUnknownProperties(classifiedData
 			continue
 		}
 
+		// check identifier patterns
+		matchedKnownIdentifier := classifier.matchKnownPersonObjectPatterns(property.GetNormalizedName(), true)
+		if matchedKnownIdentifier != nil {
+			classifiedDatatype.DataTypable.SetProperty(
+				property.GetName(),
+				classifyAsValid(property, matchedKnownIdentifier.DataType, "known_database_identifier"),
+			)
+
+			continue
+		}
+
 		classifiedDatatype.DataTypable.SetProperty(
 			property.GetName(),
 			classifyAsInvalid(property, "invalid_property"),
