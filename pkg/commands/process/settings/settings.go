@@ -94,8 +94,6 @@ func FromOptions(opts flag.Options) (Config, error) {
 		}
 	}
 
-	// | warning | logger leaks | Logger leaks detected | location1, location2
-
 	config := Config{
 		Worker:         opts.WorkerOptions,
 		CustomDetector: rules,
