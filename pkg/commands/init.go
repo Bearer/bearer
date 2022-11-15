@@ -4,7 +4,6 @@ import (
 	"fmt"
 
 	"github.com/bearer/curio/pkg/commands/process/settings"
-	"github.com/bearer/curio/pkg/util/output"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 	"golang.org/x/xerrors"
@@ -35,7 +34,7 @@ func NewInitCommand() *cobra.Command {
 				return err
 			}
 
-			output.StdErrLogger().Msgf("created: curio.yml (default configuration file)")
+			cmd.PrintErrln("created: curio.yml (default configuration file)")
 			return nil
 		},
 	}
