@@ -70,7 +70,7 @@ func getReportOutput(report types.Report, config settings.Config) (any, error) {
 			return nil, err
 		}
 
-		return ouputDetections, nil
+		return outputDetections, nil
 
 	} else if config.Report.Report == flag.ReportPolicies {
 		detections, err := GetDetectorsOutput(report)
