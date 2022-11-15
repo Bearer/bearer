@@ -24,13 +24,13 @@ type TestCase struct {
 }
 
 type TestCaseOptions struct {
-	RunInTempDir  bool
-	OutputPath    string
-	StartWorker   bool
+	RunInTempDir bool
+	OutputPath   string
+	StartWorker  bool
 }
 
-func NewTestCase(name string, arguments []string, options TestCaseOptions) *TestCase {
-	return &TestCase{
+func NewTestCase(name string, arguments []string, options TestCaseOptions) TestCase {
+	return TestCase{
 		name:          name,
 		arguments:     arguments,
 		shouldSucceed: true,

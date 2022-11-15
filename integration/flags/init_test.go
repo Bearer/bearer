@@ -13,7 +13,7 @@ func TestInitCommand(t *testing.T) {
 	}
 	testCase := testhelper.NewTestCase("init", []string{"init"}, options)
 
-	tests := []testhelper.TestCase{*testCase}
+	tests := []testhelper.TestCase{testCase}
 
 	testhelper.RunTests(t, tests)
 }
