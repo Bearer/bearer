@@ -2,6 +2,7 @@ package output
 
 import (
 	"encoding/json"
+	"errors"
 	"fmt"
 	"os"
 
@@ -16,6 +17,8 @@ import (
 	"github.com/rs/zerolog/log"
 	"github.com/wlredeye/jsonlines"
 )
+
+var ErrUndefinedFormat = errors.New("undefined output format")
 
 func ReportJSON(report types.Report, output *zerolog.Event, config settings.Config) error {
 	ouputDetections, err := getReportOutput(report, config)
@@ -50,27 +53,15 @@ func ReportYAML(report types.Report, output *zerolog.Event, config settings.Conf
 }
 
 func getReportOutput(report types.Report, config settings.Config) (any, error) {
-	var ouputDetections any
-	var err error
-
 	if config.Report.Report == flag.ReportDetectors {
-		ouputDetections, err = GetDetectorsOutput(report)
-		if err != nil {
-			return nil, err
-		}
+		return GetDetectorsOutput(report)
 	} else if config.Report.Report == flag.ReportDataFlow {
 		detections, err := GetDetectorsOutput(report)
 		if err != nil {
 			return nil, err
 		}
 
-		ouputDetections, err = dataflow.GetOuput(detections, config)
-		// output, err := policies.GetDataflow(detections)
-		if err != nil {
-			return nil, err
-		}
-
-		return outputDetections, nil
+		return dataflow.GetOuput(detections, config)
 
 	} else if config.Report.Report == flag.ReportPolicies {
 		detections, err := GetDetectorsOutput(report)
@@ -83,16 +74,10 @@ func getReportOutput(report types.Report, config settings.Config) (any, error) {
 			return nil, err
 		}
 
-		data, err := policies.GetPolicies(policiesData, config)
-		if err != nil {
-			return nil, err
-		}
-
-		return data, err
-		// log.Debug().Msgf("%s", data)
+		return policies.GetPolicies(policiesData, config)
 	}
 
-	return nil, nil
+	return nil, ErrUndefinedFormat
 }
 
 func GetDetectorsOutput(report types.Report) ([]interface{}, error) {
