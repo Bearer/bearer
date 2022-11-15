@@ -18,7 +18,7 @@ type KPI struct {
 	ValidDetectionsCount               int
 	ValidObjectDetectionsCount         int
 	ValidFieldDetectionsCount          int
-	ExpectedValidDetectionsCount       int
+	ExpectedValidDetectionsCount       int // TODO: remove expected counts from KPIs
 	ExpectedValidObjectDetectionsCount int
 	ExpectedValidFieldDetectionsCount  int
 	ExpectedTruePositivesCount         int
@@ -170,7 +170,6 @@ func ExtractExpectedOutput(
 		}
 
 		classifiedProperties := map[string]ClassificationResult{}
-
 		// sort properties to ensure consistency for snapshot
 		fields := classification.DataTypable.GetProperties()
 		for _, key := range sortKeys(fields) {
