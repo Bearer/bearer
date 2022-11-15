@@ -7,6 +7,7 @@ import (
 
 	classification "github.com/bearer/curio/pkg/classification"
 	classificationschema "github.com/bearer/curio/pkg/classification/schema"
+	zerolog "github.com/rs/zerolog/log"
 
 	"github.com/bearer/curio/pkg/parser"
 	"github.com/bearer/curio/pkg/parser/nodeid"
@@ -41,7 +42,7 @@ func (report *Detectors) AddInterface(
 	detection := &detections.Detection{DetectorType: detectorType, Value: data, Source: source, Type: detections.TypeInterface}
 	classifiedDetection, err := report.Classifier.Interfaces.Classify(*detection)
 	if err != nil {
-		report.AddError(detection.Source.Filename, fmt.Errorf("classification interfaces error: %s", err))
+		zerolog.Debug().Msgf("classification interfaces error from %s: %s", detection.Source.Filename, err)
 		return
 	}
 
