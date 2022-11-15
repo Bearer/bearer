@@ -678,7 +678,11 @@
       },
       {
         "name": "reputation",
-        "type": "unknown"
+        "type": "unknown",
+        "data_type_info": "Reputation",
+        "state": "valid",
+        "reason": "valid_extended_pattern",
+        "false_positive": false
       },
       {
         "name": "healthProvider",
