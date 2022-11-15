@@ -1,7 +1,7 @@
 logger_leaks:
   message: "Logger leaks detected"
   level: "warning"
-  query: "warning = data.bearer.logger_leaks.warning"
+  query: "level = data.bearer.logger_leaks.level; locations = data.bearer.logger_leaks.locations"
   modules:
     - path: policies/logger_leaks.rego
       name: bearer.logger_leaks
