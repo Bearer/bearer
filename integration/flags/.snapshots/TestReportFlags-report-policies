@@ -1,0 +1,8 @@
+- level: warning
+  locations:
+    - filename: users.rb
+      line_number: "1"
+
+
+--
+

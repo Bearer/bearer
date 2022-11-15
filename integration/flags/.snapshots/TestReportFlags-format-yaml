@@ -58,7 +58,7 @@
     object_name: something
 - detector_type: ruby
   source:
-    column_number: 5
+    column_number: 8
     filename: main.rb
     language: Ruby
     language_type: programming
@@ -70,10 +70,10 @@
     field_name: info
     field_type: ""
     field_type_simple: unknown
-    object_name: log
+    object_name: logger
 - detector_type: ruby
   source:
-    column_number: 26
+    column_number: 29
     filename: main.rb
     language: Ruby
     language_type: programming
@@ -92,7 +92,7 @@
     object_name: user
 - detector_type: ruby
   source:
-    column_number: 36
+    column_number: 39
     filename: main.rb
     language: Ruby
     language_type: programming

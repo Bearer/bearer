@@ -35,7 +35,7 @@ Worker Flags
 Report Flags
   -f, --format string   format (json, yaml) (default "json")
       --output string   path where to save report
-      --report string   specify the kind of report (detectors, dataflow, stats) (default "detectors")
+      --report string   specify the kind of report (detectors, dataflow, policies, stats) (default "detectors")
 
 General Flags
       --config-file string   file from which to load configurations
