@@ -28,7 +28,7 @@ type KPI struct {
 type ClassificationResult struct {
 	Name       string
 	Decision   classify.ClassificationDecision
-	Properties []ClassificationResult
+	Properties map[string]ClassificationResult
 }
 
 type Output struct {
@@ -40,7 +40,6 @@ type Output struct {
 type InputProperties struct {
 	Name          string `json:"name"`
 	Type          string `json:"type"`
-	DataTypeName  string `json:"data_type_info"`
 	State         string `json:"state"`
 	Reason        string `json:"reason"`
 	FalsePositive bool   `json:"false_positive"`
@@ -51,7 +50,6 @@ type Input struct {
 	Filename      string            `json:"filename"`
 	DetectorType  string            `json:"detector_type"`
 	Properties    []InputProperties `json:"properties"`
-	DataTypeName  string            `json:"data_type_info"`
 	State         string            `json:"state"`
 	Reason        string            `json:"reason"`
 	FalsePositive bool              `json:"false_positive"`
@@ -95,7 +93,7 @@ func ExtractExpectedOutput(
 			},
 		}
 
-		expectedProperties := []ClassificationResult{}
+		expectedProperties := map[string]ClassificationResult{}
 		detectionProperties := map[string]datatype.DataTypable{}
 		for _, inputItemProperty := range inputItem.Properties {
 			result.KPI.DetectionsCount += 1
@@ -109,21 +107,21 @@ func ExtractExpectedOutput(
 					result.KPI.ExpectedTruePositivesCount += 1
 				}
 
-				expectedProperties = append(expectedProperties, ClassificationResult{
+				expectedProperties[inputItemProperty.Name] = ClassificationResult{
 					Name: inputItemProperty.Name,
 					Decision: classify.ClassificationDecision{
 						State:  classify.Valid,
 						Reason: inputItemProperty.Reason,
 					},
-				})
+				}
 			} else {
-				expectedProperties = append(expectedProperties, ClassificationResult{
+				expectedProperties[inputItemProperty.Name] = ClassificationResult{
 					Name: inputItemProperty.Name,
 					Decision: classify.ClassificationDecision{
 						State:  classify.Invalid,
 						Reason: inputItemProperty.Reason,
 					},
-				})
+				}
 			}
 
 			detectionProperties[inputItemProperty.Name] = &datatype.DataType{
@@ -171,7 +169,7 @@ func ExtractExpectedOutput(
 			},
 		}
 
-		classifiedProperties := []ClassificationResult{}
+		classifiedProperties := map[string]ClassificationResult{}
 
 		// sort properties to ensure consistency for snapshot
 		fields := classification.DataTypable.GetProperties()
@@ -184,13 +182,13 @@ func ExtractExpectedOutput(
 				result.KPI.ValidFieldDetectionsCount += 1
 			}
 
-			classifiedProperties = append(classifiedProperties, ClassificationResult{
+			classifiedProperties[field.GetName()] = ClassificationResult{
 				Name: field.GetName(),
 				Decision: classify.ClassificationDecision{
 					State:  fieldClassification.Decision.State,
 					Reason: fieldClassification.Decision.Reason,
 				},
-			})
+			}
 		}
 
 		classificationResult.Properties = classifiedProperties
