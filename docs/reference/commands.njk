@@ -2,11 +2,14 @@
 title: Commands
 layout: layouts/doc.njk
 ---
+{# Welcome :wave:. The content of this page is automatically generated based on Curio's CLI help files. #}
 
-{% set items = [curio_scan, curio_config] %}
-<h1>Commands</h1>
+{% set items = [curio_scan, curio_init] %}
+{% renderTemplate "md" %}
+# Commands
 
-<p>Curio offers a number of commands to use and customize the CLI to your needs.</p>
+Curio offers a number of commands to use and customize the CLI to your needs.
+{% endrenderTemplate %}
 <ul>
   {% for item in items %}
     <li>
@@ -16,11 +19,11 @@ layout: layouts/doc.njk
 </ul>
 
 {% for item in items %}
-  <h2 id="{{ item.name | trim | e}}">{{ item.name | trim | escape }}</h2>
+  <h2 class="inline-block text-neutral-100 bg-main-400 p-1 rounded-md leading-none font-mono" id="{{ item.name | trim | e}}">curio {{ item.name | trim | escape }}</h2>
 
   <p>{{item.synopsis}}</p>
 
-  <pre><code class="lang-bash">curio {{item.usage | trim}}</code></pre>
+  <pre class="language-bash"><code class="language-bash">curio {{item.usage | trim}}</code></pre>
 
   <h3 id="{{item.name | trim}}-flags">Flags</h3>
   <table class="table-auto">
@@ -36,8 +39,8 @@ layout: layouts/doc.njk
         <tr>
           <td>
             {% if option.shorthand %}
-              <code>-{{option.shorthand}}</code>, {% endif %}
-            <code>--{{option.name}}</code>
+              <code class="">-{{option.shorthand}}</code>, {% endif %}
+            <code class="">--{{option.name}}</code>
           </td>
           <td>{{option.usage}}</td>
           <td>{{option.default_value}}</td>
@@ -48,7 +51,7 @@ layout: layouts/doc.njk
 
   {% if item.example %}
     <h3 id="{{item.name | trim}}-usage">Usage</h3>
-    <pre><code class="lang-bash">{{item.example}}</code></pre>
+    <pre class="language-bash"><code class="language-bash">{{item.example}}</code></pre>
   {% endif %}
   {% if item.aliases %}
     <h3 id="{{item.name | trim}}-aliases">Aliases</h3>
@@ -57,3 +60,15 @@ layout: layouts/doc.njk
   {% endif %}
 
 {% endfor %}
+
+{% renderTemplate "md" %}
+## Global Flags
+
+Use these flags to get more information about the `curio` CLI.
+
+### `--version`
+Prints the version number of Curio.
+
+### `--help`
+Prints the in-app help information for Curio.
+{% endrenderTemplate %}

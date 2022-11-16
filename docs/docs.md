@@ -1,6 +1,7 @@
 ---
 title: Documentation
 layout: "layouts/doc"
+permalink: "/"
 ---
 
 # Curio
@@ -9,7 +10,7 @@ Welcome to the Curio documentation. Curio is a static code analysis tool (SAST) 
 
 ## Getting started
 
-New to Curio? Check out the [quickstart](/quickstart) to scan your first project. Ready to dive in? Check the [command reference](reference/commands) to configure Curio to your needs.
+New to Curio? Check out the [quickstart](/quickstart/) to scan your first project. Ready to dive in? Check the [command reference](/reference/commands/) to configure Curio to your needs.
 
 
 ## Explanations
