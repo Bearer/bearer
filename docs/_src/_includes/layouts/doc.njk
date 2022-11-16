@@ -2,12 +2,9 @@
 layout: layouts/base.njk
 ---
 
-<main class="max-w-6xl sm:flex gap-10 mx-auto text-black dark:text-neutral-100 px-4 relative">
-	<nav class="self-start sticky top-[6.75rem] min-w-fit">
+<main class="max-w-6xl mx-auto sm:flex lg:justify-between text-black dark:text-neutral-100 px-8 relative">
+	<nav class="self-start sticky top-[6.75rem] w-52 mr-8">
 		<ul>
-			{# <li>
-				<a class="" href="/docs">Get Started</a>
-			</li> #}
 			<li class="mb-4">
 				<h2 class="font-bold text-md">Start Here</h2>
 				<ul class="">
@@ -39,22 +36,24 @@ layout: layouts/base.njk
 			</li>
 		</ul>
 	</nav>
-	<article class="prose dark:prose-invert max-w-5xl pl-8">
-		{{ content | safe }}
+	<article class="flex gap-8 w-full">
+		<div class="prose dark:prose-invert mx-auto min-w-0 max-w-80ch">
+			{{ content | safe }}
+		</div>
+		<aside class="self-start dark:text-neutral-200 hidden lg:block lg:sticky top-[6.75rem] min-w-fit text-sm border-solid border-2 p-4 border-neutral-200 dark:border-neutral-500 rounded-md w-52">
+			<h2 class="font-bold text-md">On this page</h2>
+			<a href="#" class="hover:underline">Overview</a>
+			{{ content | toc | safe }}
+			<h2 class="mt-2 font-bold text-md">Contribute</h2>
+			<ul>
+				<li>
+					<a class="hover:underline" href="{{meta.sourcePath}}/blob/main/docs/{{ page.inputPath }}">Edit this page</a>
+				</li>
+				<li>
+					<a href="https://github.com/Bearer/curio/issues/new/choose" class="hover:underline">Leave feedback</a>
+				</li>
+			</ul>
+		</aside>
 	</article>
-	<aside class="self-start sticky top-[6.75rem] min-w-fit text-sm">
-		<h2 class="font-bold text-md">On this page</h2>
-		<a href="#" class="hover:underline">Overview</a>
-		{{ content | toc | safe }}
-		<h2 class="mt-2 font-bold text-md">Contribute</h2>
-		<ul>
-			<li>
-				<a class="hover:underline" href="{{meta.sourcePath}}/blob/main/docs/{{ page.inputPath }}">Edit this page</a>
-			</li>
-			<li>
-				<a href="" class="hover:underline">Leave feedback</a>
-			</li>
-		</ul>
-	</aside>
 </main>
 <footer class="p-4 mt-4 text-center">Placeholder Footer</footer>

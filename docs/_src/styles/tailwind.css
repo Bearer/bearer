@@ -56,11 +56,18 @@
       );
   }
   /* code blocks */
-
+  code {
+  }
   .code-inline {
-    @apply inline-block bg-main-100 p-1 rounded-md leading-none font-mono m-0;
+    @apply inline-block bg-main-100 p-1 rounded-md leading-none font-mono m-0 dark:bg-main-400;
   }
   /* ToC */
+
+  .toc {
+    @apply leading-normal;
+    max-height: calc(100vh-6.75rem);
+    overflow-y: scroll;
+  }
   .toc ol li ol {
     @apply pl-4;
   }

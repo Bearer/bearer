@@ -1,6 +1,6 @@
 ---
-layout: layouts/doc.njk
 title: Quick Start
+layout: layouts/doc.njk
 ---
 
 # Quick Start

@@ -19,11 +19,11 @@ Curio offers a number of commands to use and customize the CLI to your needs.
 </ul>
 
 {% for item in items %}
-  <h2 class="inline-block bg-main-100 p-1 rounded-md leading-none font-mono" id="{{ item.name | trim | e}}">curio {{ item.name | trim | escape }}</h2>
+  <h2 class="inline-block text-neutral-100 bg-main-400 p-1 rounded-md leading-none font-mono" id="{{ item.name | trim | e}}">curio {{ item.name | trim | escape }}</h2>
 
   <p>{{item.synopsis}}</p>
 
-  <pre><code class="lang-bash">curio {{item.usage | trim}}</code></pre>
+  <pre class="language-bash"><code class="language-bash">curio {{item.usage | trim}}</code></pre>
 
   <h3 id="{{item.name | trim}}-flags">Flags</h3>
   <table class="table-auto">
@@ -51,7 +51,7 @@ Curio offers a number of commands to use and customize the CLI to your needs.
 
   {% if item.example %}
     <h3 id="{{item.name | trim}}-usage">Usage</h3>
-    <pre><code class="lang-bash">{{item.example}}</code></pre>
+    <pre class="language-bash"><code class="language-bash">{{item.example}}</code></pre>
   {% endif %}
   {% if item.aliases %}
     <h3 id="{{item.name | trim}}-aliases">Aliases</h3>

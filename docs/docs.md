@@ -1,6 +1,7 @@
 ---
 title: Documentation
 layout: "layouts/doc"
+permalink: "/"
 ---
 
 # Curio

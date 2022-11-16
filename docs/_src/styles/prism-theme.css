@@ -12,7 +12,7 @@
 */
 pre[class*="language-"],
 code[class*="language-"] {
-  color: #230a49;
+  color: #F5F5F5;
   font-size: 13px;
   text-shadow: none;
   font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
@@ -47,13 +47,13 @@ pre[class*="language-"] {
   padding: 1em;
   margin: .5em 0;
   overflow: auto;
-  background: #f1e9fd;
+  background: #6E20E6;
 }
 :not(pre) > code[class*="language-"] {
   padding: .1em .3em;
   border-radius: .3em;
-  color: #230a49;
-  background: #f1e9fd;
+  color: #F5F5F5;
+  background: #6E20E6;
 }
 /*********************************************************
 * Tokens
@@ -93,7 +93,7 @@ pre[class*="language-"] {
 .language-css .token.string,
 .style .token.string {
   color: #a67f59;
-  background: #ffffff;
+  background: transparent;
 }
 .token.atrule,
 .token.attr-value,
@@ -101,7 +101,7 @@ pre[class*="language-"] {
   color: #0077aa;
 }
 .token.function {
-  color: #dd4a68;
+  color: #D4BCF8;
 }
 .token.regex,
 .token.important,
