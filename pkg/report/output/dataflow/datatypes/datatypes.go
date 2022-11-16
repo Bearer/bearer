@@ -17,10 +17,12 @@ type datatypeHolder struct {
 	name      string
 	detectors map[string]*detectorHolder // group detectors by detectorName
 }
+
 type detectorHolder struct {
 	name  string
 	files map[string]*fileHolder // group files by filename
 }
+
 type fileHolder struct {
 	name        string
 	lineNumbers map[int]int // group occurences by line number
