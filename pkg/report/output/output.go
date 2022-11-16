@@ -2,7 +2,6 @@ package output
 
 import (
 	"encoding/json"
-	"errors"
 	"fmt"
 
 	"github.com/bearer/curio/pkg/commands/process/settings"
@@ -16,8 +15,6 @@ import (
 
 	"github.com/rs/zerolog"
 )
-
-var ErrUndefinedFormat = errors.New("undefined output format")
 
 func ReportJSON(report types.Report, output *zerolog.Event, config settings.Config) error {
 	outputDetections, err := getReportOutput(report, config)
@@ -60,7 +57,7 @@ func getReportOutput(report types.Report, config settings.Config) (any, error) {
 			return nil, err
 		}
 
-		return dataflow.GetOutput(detections, config)
+		return policies.GetDataflowOutput(detections, config)
 
 	} else if config.Report.Report == flag.ReportPolicies {
 		detections, err := detectors.GetOutput(report)
@@ -93,5 +90,5 @@ func getReportOutput(report types.Report, config settings.Config) (any, error) {
 		return stats.GetOutput(lineOfCodeOutput, dataflowOutput, config)
 	}
 
-	return nil, ErrUndefinedFormat
+	return nil, fmt.Errorf(`--report flag "%s" is not supported`, config.Report.Report)
 }

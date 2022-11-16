@@ -40,3 +40,35 @@ func GetOutput(dataflow *dataflow.DataFlow, config settings.Config) ([]rego.Vars
 	// Create a prepared query that can be evaluated.
 	return result, nil
 }
+
+func GetDataflowOutput(dataflow []interface{}, config settings.Config) ([]rego.Vars, error) {
+	ctx := context.TODO()
+
+	var result []rego.Vars
+
+	for _, policy := range config.Policies {
+		options := []func(r *rego.Rego){rego.Query(policy.Query)}
+		for _, module := range policy.Modules {
+			options = append(options, rego.Module(module.Name, module.Content))
+		}
+
+		r := rego.New(options...)
+		query, err := r.PrepareForEval(ctx)
+		if err != nil {
+			return nil, err
+		}
+
+		// Create a prepared query that can be evaluated.
+		rs, err := query.Eval(ctx, rego.EvalInput(dataflow))
+		if err != nil {
+			return nil, err
+		}
+
+		log.Debug().Msgf("result %#v", rs)
+
+		result = append(result, rs[0].Bindings)
+	}
+
+	// Create a prepared query that can be evaluated.
+	return result, nil
+}
