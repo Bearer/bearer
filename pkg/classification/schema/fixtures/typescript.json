@@ -1,0 +1,218 @@
+[
+  {
+    "name": "user",
+    "filename": "services/api/src/loggers/userActivityLogger.ts",
+    "detector_type": "TypeScript",
+    "properties": [
+      {
+        "name": "id",
+        "type": "number"
+      },
+      {
+        "name": "access_token",
+        "type": "unknown",
+        "data_type_info": "Access Token",
+        "state": "valid",
+        "reason": "known_pattern",
+        "false_positive": false
+      },
+      {
+        "name": "jti",
+        "type": "string"
+      },
+      {
+        "name": "sub",
+        "type": "string"
+      },
+      {
+        "name": "username",
+        "type": "string",
+        "data_type_info": "Username",
+        "state": "valid",
+        "reason": "known_pattern",
+        "false_positive": false
+      },
+      {
+        "name": "email",
+        "type": "string",
+        "data_type_info": "Email Address",
+        "state": "valid",
+        "reason": "known_pattern",
+        "false_positive": false
+      },
+      {
+        "name": "email_verified",
+        "type": "string",
+        "data_type_info": "Email Address",
+        "state": "valid",
+        "reason": "known_pattern",
+        "false_positive": false
+      },
+      {
+        "name": "group",
+        "type": "string"
+      },
+      {
+        "name": "finger_print",
+        "type": "string",
+        "data_type_info": "Browser Fingerprint",
+        "state": "valid",
+        "reason": "known_pattern",
+        "false_positive": false
+      },
+      {
+        "name": "device_id",
+        "type": "string",
+        "data_type_info": "Device identifier",
+        "state": "valid",
+        "reason": "known_pattern",
+        "false_positive": false
+      },
+      {
+        "name": "iss",
+        "type": "string"
+      },
+      {
+        "name": "typ",
+        "type": "string"
+      },
+      {
+        "name": "auth_time",
+        "type": "string"
+      },
+      {
+        "name": "scope",
+        "type": "string"
+      },
+      {
+        "name": "emails",
+        "type": "string",
+        "data_type_info": "Email Address",
+        "state": "valid",
+        "reason": "known_pattern",
+        "false_positive": false
+      },
+      {
+        "name": "accessed",
+        "type": "unknown"
+      },
+      {
+        "name": "realm_access",
+        "type": "unknown"
+      },
+      {
+        "name": "Acquaintances",
+        "type": "number",
+        "data_type_info": "Acquaintances",
+        "state": "valid",
+        "reason": "known_pattern",
+        "false_positive": false
+      },
+      {
+        "name": "Username",
+        "type": "number",
+        "data_type_info": "Username",
+        "state": "valid",
+        "reason": "known_pattern",
+        "false_positive": false
+      },
+      {
+        "name": "Friends",
+        "type": "number",
+        "data_type_info": "Friends",
+        "state": "valid",
+        "reason": "known_pattern",
+        "false_positive": false
+      },
+      {
+        "name": "roles",
+        "type": "object"
+      },
+      {
+        "name": "debitCardNumber",
+        "type": "number",
+        "data_type_info": "Credit Card Number",
+        "state": "valid",
+        "reason": "known_pattern",
+        "false_positive": false
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "data_type_info": "Fullname",
+        "state": "valid",
+        "reason": "known_pattern",
+        "false_positive": false
+      },
+      {
+        "name": "bankAccount",
+        "type": "object",
+        "data_type_info": "Bank Account",
+        "state": "valid",
+        "reason": "known_pattern",
+        "false_positive": false
+      },
+      {
+        "name": "type",
+        "type": "unknown"
+      },
+      {
+        "name": "creditCapacity",
+        "type": "unknown",
+        "data_type_info": "Credit Capacity",
+        "state": "valid",
+        "reason": "known_pattern",
+        "false_positive": false
+      },
+      {
+        "name": "biometry",
+        "type": "number",
+        "data_type_info": "Biometric Data",
+        "state": "valid",
+        "reason": "known_pattern",
+        "false_positive": false
+      },
+      {
+        "name": "creditRecords",
+        "type": "string",
+        "data_type_info": "Credit Records",
+        "state": "valid",
+        "reason": "known_pattern",
+        "false_positive": false
+      },
+      {
+        "name": "description",
+        "type": "string"
+      },
+      {
+        "name": "concerns",
+        "type": "string"
+      },
+      {
+        "name": "stack",
+        "type": "string"
+      },
+      {
+        "name": "passportNumber",
+        "type": "string",
+        "data_type_info": "Passport Number",
+        "state": "valid",
+        "reason": "known_pattern",
+        "false_positive": false
+      },
+      {
+        "name": "userWallet",
+        "type": "string"
+      },
+      {
+        "name": "userSignature",
+        "type": "unknown",
+        "data_type_info": "Signature",
+        "state": "valid",
+        "reason": "known_pattern",
+        "false_positive": false
+      }
+    ],
+    "state": "valid"
+  }
+]

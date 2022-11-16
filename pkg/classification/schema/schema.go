@@ -63,6 +63,9 @@ func (classifier *Classifier) Classify(data DataTypeDetection) *ClassifiedDataty
 	if classify.ObjectStopWordDetected(data.Value.GetNormalizedName()) {
 		classifiedDatatype = classifyObjectAsInvalid(data.Value, "stop_word")
 	}
+	if data.Value.GetName() == "" {
+		classifiedDatatype = classifyObjectAsInvalid(data.Value, "blank_object_name")
+	}
 
 	if classifiedDatatype != nil && classifiedDatatype.Classification.Decision.State == classify.Invalid {
 		return classifiedDatatype
@@ -217,7 +220,7 @@ func (classifier *Classifier) classifyKnownObject(classifiedDatatype *Classified
 			validProperties = true
 			classifiedDatatype.DataTypable.SetProperty(
 				property.GetName(),
-				classifyAsValid(property, classifier.datatypeFromPattern(matchedKnownObject), "known_classification_pattern"),
+				classifyAsValid(property, classifier.datatypeFromPattern(matchedKnownObject), "known_pattern"),
 			)
 
 			continue
@@ -288,6 +291,17 @@ func (classifier *Classifier) classifyObjectWithUnknownProperties(classifiedData
 			classifiedDatatype.DataTypable.SetProperty(
 				property.GetName(),
 				classifyAsValid(property, classifier.datatypeFromPattern(extendedUnknownObject), "valid_extended_pattern"),
+			)
+
+			continue
+		}
+
+		// check identifier patterns
+		matchedKnownIdentifier := classifier.matchKnownPersonObjectPatterns(property.GetNormalizedName(), true)
+		if matchedKnownIdentifier != nil {
+			classifiedDatatype.DataTypable.SetProperty(
+				property.GetName(),
+				classifyAsValid(property, matchedKnownIdentifier.DataType, "known_database_identifier"),
 			)
 
 			continue
