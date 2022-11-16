@@ -72,6 +72,7 @@ func (classifier *Classifier) Classify(data detections.Detection) (*ClassifiedDe
 						Reason: "recipe_match",
 					},
 				}
+				break
 			}
 		}
 	}
