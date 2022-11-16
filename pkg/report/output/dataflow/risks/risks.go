@@ -20,8 +20,9 @@ type detectorHolder struct {
 	datatypes map[string]*datatypeHolder // group detectors by detectorName
 }
 type datatypeHolder struct {
-	name  string
-	files map[string]*fileHolder // group files by filename
+	name     string
+	category string
+	files    map[string]*fileHolder // group files by filename
 }
 type fileHolder struct {
 	name       string
@@ -42,14 +43,14 @@ func (holder *Holder) AddSchema(detection detections.Detection) error {
 	}
 
 	if classification.Decision.State == classify.Valid {
-		holder.addDatatype(string(detection.DetectorType), classification.DataType.DataCategoryName, detection.Source.Filename, *detection.Source.LineNumber)
+		holder.addDatatype(string(detection.DetectorType), classification.DataType.DataCategoryName, classification.DataType.DefaultCategory, detection.Source.Filename, *detection.Source.LineNumber)
 	}
 
 	return nil
 }
 
 // addDatatype adds detector to hash list and at the same time blocks duplicates
-func (holder *Holder) addDatatype(ruleName string, datatypeName string, fileName string, lineNumber int) {
+func (holder *Holder) addDatatype(ruleName string, datatypeName string, datatypeCategory string, fileName string, lineNumber int) {
 	// create detector entry if it doesn't exist
 	if _, exists := holder.detectors[ruleName]; !exists {
 		holder.detectors[ruleName] = detectorHolder{
@@ -62,8 +63,9 @@ func (holder *Holder) addDatatype(ruleName string, datatypeName string, fileName
 	// create datatype entry if it doesn't exist
 	if _, exists := detector.datatypes[datatypeName]; !exists {
 		detector.datatypes[datatypeName] = &datatypeHolder{
-			name:  datatypeName,
-			files: make(map[string]*fileHolder),
+			name:     datatypeName,
+			category: datatypeCategory,
+			files:    make(map[string]*fileHolder),
 		}
 	}
 
@@ -102,6 +104,7 @@ func (holder *Holder) ToDataFlow() []types.RiskDetector {
 
 			constructedDatatype := types.RiskDatatype{
 				Name:      datatype.name,
+				Category:  datatype.category,
 				Stored:    stored,
 				Locations: make([]types.RiskLocation, 0),
 			}
