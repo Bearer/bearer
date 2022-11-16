@@ -19,7 +19,7 @@ mdSetup.renderer.rules.code_inline = (tokens, idx, { langPrefix = "" }) => {
   return `<code class="code-inline ${langPrefix}">${token.content}</code>`;
 };
 
-const pathPrefix = (module.exports = function (eleventyConfig) {
+module.exports = function (eleventyConfig) {
   eleventyConfig.addWatchTarget("./_src/styles/tailwind.config.js");
   eleventyConfig.addWatchTarget("./_src/styles/tailwind.css");
   eleventyConfig.addPassthroughCopy("assets/img");
@@ -49,4 +49,4 @@ const pathPrefix = (module.exports = function (eleventyConfig) {
       output: "_site",
     },
   };
-});
+};
