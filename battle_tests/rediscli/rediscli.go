@@ -46,18 +46,28 @@ func GetDocument() (string, error) {
 	return cmd.Result()
 }
 
-func Init() {
+func Init() error {
 	if !config.Runtime.Redis.Init {
-		return
+		return nil
 	}
 
 	key := build.Version + "_work_assigned"
 	cmd := cli.Set(key, 0, 0)
-	cmd.Result()
+	_, err := cmd.Result()
+
+	if err != nil {
+		return err
+	}
 
 	key = build.Version + "_workers_online"
 	cmd = cli.Set(key, 0, 0)
-	cmd.Result()
+	_, err = cmd.Result()
+
+	if err != nil {
+		return err
+	}
+
+	return nil
 }
 
 func PickUpWork() (int, error) {

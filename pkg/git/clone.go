@@ -3,7 +3,6 @@ package git
 import (
 	"errors"
 	"fmt"
-	"io/ioutil"
 	"net/url"
 	"os"
 	"time"
@@ -13,7 +12,7 @@ import (
 )
 
 func CloneAndGetTree(token string, url *url.URL, branchName string) (*Tree, error) {
-	tempDir, err := ioutil.TempDir("", "tree")
+	tempDir, err := os.MkdirTemp("", "tree")
 	if err != nil {
 		return nil, fmt.Errorf("failed to create temp dir: %s", err)
 	}

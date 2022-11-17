@@ -2,7 +2,6 @@ package scan
 
 import (
 	"fmt"
-	"io/ioutil"
 	"os"
 	"os/exec"
 	"time"
@@ -30,7 +29,7 @@ func NewScan(repositoryUrl string) *Scanner {
 
 func (scanner *Scanner) Start() (outputBytes []byte, startTime *time.Time, err error) {
 	// create temp directory
-	scanner.TempDir, err = ioutil.TempDir(config.Runtime.EFSLocation, "broker_battle_test*")
+	scanner.TempDir, err = os.MkdirTemp(config.Runtime.EFSLocation, "broker_battle_test*")
 	if err != nil {
 		return nil, nil, fmt.Errorf("failed to create temp directory repository %w", err)
 	}

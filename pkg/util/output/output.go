@@ -12,7 +12,7 @@ import (
 
 var (
 	outputWriter io.Writer = os.Stdout
-	errorWriter io.Writer = os.Stderr
+	errorWriter  io.Writer = os.Stderr
 )
 
 // DefaultLogger returns default output logger

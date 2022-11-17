@@ -19,7 +19,11 @@ import (
 func main() {
 	config.Load()
 	rediscli.Setup()
-	rediscli.Init() // To Remove when running battle tests
+	err := rediscli.Init()
+
+	if err != nil {
+		log.Debug().Msgf("failed to init redis")
+	}
 
 	log.Printf("running version %s and hash %s", build.Version, build.CommitSHA)
 

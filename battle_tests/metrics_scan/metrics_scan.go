@@ -76,6 +76,11 @@ func ScanRepository(repositoryUrl string, reportingChan chan *MetricsReport) {
 	}
 
 	output, startTime, err := scanner.Start()
+
+	if err != nil {
+		return
+	}
+
 	metrics.RepoSizeKB = math.Round(float64(scanner.FSSize) / 1024)
 
 	endTime := time.Now()
@@ -83,7 +88,11 @@ func ScanRepository(repositoryUrl string, reportingChan chan *MetricsReport) {
 	metrics.Time = float64(timeDuration)
 
 	var reportData ScanReport
-	json.Unmarshal(output, &reportData)
+	err = json.Unmarshal(output, &reportData)
+
+	if err != nil {
+		return
+	}
 
 	metrics.NumberOfDataTypes = float64(reportData.NumberOfDataTypes)
 	metrics.NumberOfLineOfCode = float64(reportData.NumberOfLines)

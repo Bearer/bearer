@@ -50,7 +50,12 @@ func DoWork(ctx context.Context, items []repodb.Item, docID string, sheetClient 
 				continue
 			}
 			if repoCounter > len(items) {
-				WorkerOffline(docID, sheetClient)
+				err := WorkerOffline(docID, sheetClient)
+
+				if err != nil {
+					log.Error().Msgf("error when setting worker offline %e", err)
+				}
+
 				selfDone()
 				return
 			}
@@ -65,7 +70,12 @@ func DoWork(ctx context.Context, items []repodb.Item, docID string, sheetClient 
 
 			select {
 			case <-ctx.Done():
-				WorkerOffline(docID, sheetClient)
+				err := WorkerOffline(docID, sheetClient)
+
+				if err != nil {
+					log.Error().Msgf("error when setting worker offline %e", err)
+				}
+
 				return
 			case metrics := <-metricsReport:
 				sheetClient.InsertMetricsMustPass(docID, metrics)

@@ -3,7 +3,6 @@ package git
 import (
 	"errors"
 	"fmt"
-	"io/ioutil"
 	"os"
 	"os/exec"
 	"path/filepath"
@@ -21,7 +20,7 @@ func CloneLatest(targetDir string, url string) (string, error) {
 		return "", errors.New(fmt.Sprint("clone failed: ", err, "\n-- git output --\n", string(output), "-- end git output --"))
 	}
 
-	files, err := ioutil.ReadDir(targetDir)
+	files, err := os.ReadDir(targetDir)
 	if err != nil {
 		return "", err
 	}
