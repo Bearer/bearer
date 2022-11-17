@@ -13,7 +13,6 @@ RUN go build -a -o dist/battle_tests ./battle_tests/battle_tests.go
 FROM alpine
 
 COPY --from=builder /app/dist/ /app/
-COPY /app/dist/curio /app/
 
 RUN apk update && apk upgrade && apk add --no-cache git libgcc libstdc++
 
