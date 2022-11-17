@@ -152,19 +152,20 @@ func (report *Detectors) AddFramework(
 	data interface{},
 	source source.Source,
 ) {
-	var commitSHA string
-	if source.LineNumber != nil {
-		commitSHA = report.Blamer.SHAForLine(source.Filename, *source.LineNumber)
+	detection := &detections.Detection{DetectorType: detectorType, Value: data, Source: source, Type: detections.TypeFramework}
+	classifiedDetection, err := report.Classifier.Frameworks.Classify(*detection)
+	if err != nil {
+		report.AddError(source.Filename, fmt.Errorf("classification frameworks error: %s", err))
+		return
 	}
 
-	report.Add(&detections.FrameworkDetection{
-		Type:          detections.TypeFramework,
-		DetectorType:  detectorType,
-		FrameworkType: frameworkType,
-		CommitSHA:     commitSHA,
-		Source:        source,
-		Value:         data,
-	})
+	if classifiedDetection.Source.LineNumber != nil {
+		classifiedDetection.CommitSHA = report.Blamer.SHAForLine(classifiedDetection.Source.Filename, *classifiedDetection.Source.LineNumber)
+	}
+
+	// @todo FIXME: Do we need to do anything with the `frameworkType`?
+	classifiedDetection.Type = detections.TypeFrameworkClassified
+	report.Add(classifiedDetection)
 }
 
 func (report *Detectors) AddError(filePath string, err error) {
