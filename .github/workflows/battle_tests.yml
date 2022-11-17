@@ -1,4 +1,4 @@
-name: battle_tests
+name: Battle Tests
 on:
   push:
     branches:
@@ -14,10 +14,16 @@ jobs:
     name: build
     runs-on: ubuntu-latest
     steps:
-      - name: Set up Go
-        uses: actions/setup-go@v2
+      - name: Checkout
+        uses: actions/checkout@v3
         with:
-          go-version: ^1.18
+          fetch-depth: 0
+          ref: ${{ needs.tag.outputs.ref }}
+
+      - name: Set up Go
+        uses: actions/setup-go@v3
+        with:
+          go-version: 1.18
 
       - name: Get dependencies
         run: |
