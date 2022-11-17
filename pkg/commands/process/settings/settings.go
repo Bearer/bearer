@@ -21,9 +21,10 @@ type Config struct {
 
 type policyLevel string
 
-var LevelMedium = "medium"
-var LevelWarning = "warning"
 var LevelCritical = "critical"
+var LevelHigh = "high"
+var LevelMedium = "medium"
+var LevelLow = "low"
 
 type Policy struct {
 	Query   string
