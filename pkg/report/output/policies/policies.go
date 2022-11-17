@@ -3,11 +3,17 @@ package policies
 import (
 	"context"
 
+	"github.com/bearer/curio/pkg/classification/db"
 	"github.com/bearer/curio/pkg/commands/process/settings"
 	"github.com/bearer/curio/pkg/report/output/dataflow"
 	"github.com/open-policy-agent/opa/rego"
 	"github.com/rs/zerolog/log"
 )
+
+type PolicyInput struct {
+	Dataflow       *dataflow.DataFlow `json:"dataflow"`
+	DataCategories []db.DataCategory  `json:"data_categories"`
+}
 
 func GetOutput(dataflow *dataflow.DataFlow, config settings.Config) ([]rego.Vars, error) {
 	ctx := context.TODO()
@@ -27,7 +33,15 @@ func GetOutput(dataflow *dataflow.DataFlow, config settings.Config) ([]rego.Vars
 		}
 
 		// Create a prepared query that can be evaluated.
-		rs, err := query.Eval(ctx, rego.EvalInput(dataflow))
+		rs, err := query.Eval(
+			ctx,
+			rego.EvalInput(
+				PolicyInput{
+					Dataflow:       dataflow,
+					DataCategories: db.Default().DataCategories,
+				},
+			),
+		)
 		if err != nil {
 			return nil, err
 		}
