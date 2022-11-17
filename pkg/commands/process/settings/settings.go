@@ -29,6 +29,7 @@ var LevelLow = "low"
 type Policy struct {
 	Query       string
 	Name        string
+	Id          string
 	Description string
 	Modules     []*PolicyModule
 	Level       policyLevel

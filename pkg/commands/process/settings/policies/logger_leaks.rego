@@ -2,13 +2,9 @@ package bearer.logger_leaks
 
 import future.keywords
 
-policy_id := "detect_ruby_logger"
-policy_name := input.name
-policy_description := input.description
-
 locations[item] {
     some detector in input.dataflow.risks
-    detector.detector_id == policy_id
+    detector.detector_id == input.policy_id
 
     data_type = detector.data_types[_]
 
@@ -17,6 +13,9 @@ locations[item] {
 
     location = data_type.locations[_]
     item := {
+        "policy_description": input.policy_description,
+        "policy_id": input.policy_id,
+        "policy_name": input.policy_name,
         "data_type": data_type.name,
         "severity": category.severity,
         "filename": location.filename,

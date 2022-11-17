@@ -11,10 +11,11 @@ import (
 )
 
 type PolicyInput struct {
-	Name           string             `json:"name"`
-	Description    string             `json:"description"`
-	Dataflow       *dataflow.DataFlow `json:"dataflow"`
-	DataCategories []db.DataCategory  `json:"data_categories"`
+	PolicyName        string             `json:"policy_name"`
+	PolicyId          string             `json:"policy_id"`
+	PolicyDescription string             `json:"policy_description"`
+	Dataflow          *dataflow.DataFlow `json:"dataflow"`
+	DataCategories    []db.DataCategory  `json:"data_categories"`
 }
 
 func GetOutput(dataflow *dataflow.DataFlow, config settings.Config) ([]rego.Vars, error) {
@@ -39,10 +40,11 @@ func GetOutput(dataflow *dataflow.DataFlow, config settings.Config) ([]rego.Vars
 			ctx,
 			rego.EvalInput(
 				PolicyInput{
-					Name:           policy.Name,
-					Description:    policy.Description,
-					Dataflow:       dataflow,
-					DataCategories: db.Default().DataCategories,
+					PolicyName:        policy.Name,
+					PolicyDescription: policy.Description,
+					PolicyId:          policy.Id,
+					Dataflow:          dataflow,
+					DataCategories:    db.Default().DataCategories,
 				},
 			),
 		)

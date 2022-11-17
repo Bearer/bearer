@@ -1,11 +1,9 @@
 logger_leaks:
   description: "Logger leaks detected"
   name: "Logger leaks"
+  id: "detect_ruby_logger"
   query: |
     locations = data.bearer.logger_leaks.locations
-    policy_id = data.bearer.logger_leaks.policy_id
-    policy_name = data.bearer.logger_leaks.policy_name
-    policy_description = data.bearer.logger_leaks.policy_description
   modules:
     - path: policies/logger_leaks.rego
       name: bearer.logger_leaks
