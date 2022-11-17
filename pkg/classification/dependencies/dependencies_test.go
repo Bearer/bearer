@@ -12,14 +12,12 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-type testCase struct {
-	Name  string
-	Input detections.Detection
-	Want  *dependencies.Classification
-}
-
 func TestDependencies(t *testing.T) {
-	tests := []testCase{
+	tests := []struct{
+		Name  string
+		Input detections.Detection
+		Want  *dependencies.Classification
+	}{
 		{
 			Name: "Dependency match",
 			Input: detections.Detection{
