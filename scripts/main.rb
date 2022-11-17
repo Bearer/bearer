@@ -1,4 +1,5 @@
 require "json"
+require "securerandom"
 
 # move recipes into separate JSON files
 recipes_file = File.read("scripts/recipes.json")
@@ -9,6 +10,22 @@ JSON.parse(recipes_file).each do |recipe|
     new_file << {metadata: {version: "1.0"}}.merge(recipe).to_json
   end
 end
+
+# move data_category into separate JSON files (and add UUID)
+# NOTE: running this will re-create UUIDs for the data categories
+# data_category = File.read("scripts/data_categories.json")
+# JSON.parse(temp).each do |data_cat|
+#   puts "processing #{data_cat["name"]}..."
+#   filename = "pkg/classification/db/data_categories/#{data_cat["name"].downcase.gsub(" ", "_")}.json"
+#   File.open(filename, "w") do |new_file|
+#     new_file << {
+#       metadata: {
+#         version: "1.0"
+#       },
+#       uuid: SecureRandom.uuid
+#     }.merge(data_cat).to_json
+#   end
+# end
 
 # YAML to JSON conversion:
 #   ruby -ryaml -rjson -e "puts YAML.load_file('path-to-your-file.yml').to_json"

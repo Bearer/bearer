@@ -16,6 +16,9 @@ var recipesDir embed.FS
 //go:embed data_types
 var dataTypesDir embed.FS
 
+//go:embed data_categories
+var dataCategoriesDir embed.FS
+
 //go:embed data_type_classification_patterns
 var dataTypeClassificationPatternsDir embed.FS
 
@@ -25,6 +28,7 @@ var knownPersonObjectPatternsDir embed.FS
 type DefaultDB struct {
 	Recipes                        []Recipe
 	DataTypes                      []DataType
+	DataCategories                 []DataCategory
 	DataTypeClassificationPatterns []DataTypeClassificationPattern
 	KnownPersonObjectPatterns      []KnownPersonObjectPattern
 }
@@ -52,6 +56,12 @@ type DataType struct {
 	DefaultCategory  string `json:"default_category"`
 	Id               int    `json:"id"`
 	UUID             string `json:"uuid"`
+}
+
+type DataCategory struct {
+	Name     string `json:"name"`
+	Severity string `json:"severity"`
+	UUID     string `json:"uuid"`
 }
 
 type ObjectType string
@@ -98,6 +108,7 @@ func Default() DefaultDB {
 	return DefaultDB{
 		Recipes:                        defaultRecipes(),
 		DataTypes:                      dataTypes,
+		DataCategories:                 defaultDataCategories(),
 		DataTypeClassificationPatterns: defaultDataTypeClassificationPatterns(dataTypes),
 		KnownPersonObjectPatterns:      defaultKnownPersonObjectPatterns(dataTypes),
 	}
@@ -128,6 +139,33 @@ func defaultRecipes() []Recipe {
 	}
 
 	return recipes
+}
+
+func defaultDataCategories() []DataCategory {
+	dataCategories := []DataCategory{}
+
+	files, err := dataCategoriesDir.ReadDir("data_categories")
+	if err != nil {
+		handleError(err)
+	}
+
+	for _, file := range files {
+		val, err := dataCategoriesDir.ReadFile("data_categories/" + file.Name())
+		if err != nil {
+			handleError(err)
+		}
+
+		var dataCategory DataCategory
+		rawBytes := []byte(val)
+		err = json.Unmarshal(rawBytes, &dataCategory)
+		if err != nil {
+			handleError(err)
+		}
+
+		dataCategories = append(dataCategories, dataCategory)
+	}
+
+	return dataCategories
 }
 
 func defaultDataTypes() []DataType {

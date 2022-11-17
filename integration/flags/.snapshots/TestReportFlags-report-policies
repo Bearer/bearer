@@ -1,7 +1,18 @@
-- level: warning
-  locations:
-    - filename: users.rb
+- result:
+    - data_type: Physical Address
+      filename: users.rb
       line_number: "1"
+      policy_description: Logger leaks detected
+      policy_id: detect_ruby_logger
+      policy_name: Logger leaks
+      severity: high
+    - data_type: Unique Identifier
+      filename: users.rb
+      line_number: "1"
+      policy_description: Logger leaks detected
+      policy_id: detect_ruby_logger
+      policy_name: Logger leaks
+      severity: critical
 
 
 --
