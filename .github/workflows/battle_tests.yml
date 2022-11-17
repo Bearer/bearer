@@ -57,26 +57,25 @@ jobs:
           context: .
           file: battle_tests/Dockerfile
           tags: bearersh/battle-test:latest
-          # build-args: |
-          #   BROKER_COMMIT_SHA=${{ github.sha }}
-          #   BROKER_VERSION=${{ github.ref_name }}
 
-      # - name: Configure AWS credentials
-      #   uses: aws-actions/configure-aws-credentials@v1
-      #   with:
-      #     aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-      #     aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-      #     role-to-assume: ${{ secrets.AWS_ROLE_TO_ASSUME }}
-      #     role-session-name: github-action-battle-test
-      #     aws-region: eu-west-1
-      #     role-skip-session-tagging: true
-      #     role-duration-seconds: 3600
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          role-to-assume: ${{ secrets.AWS_ROLE_TO_ASSUME }}
+          role-session-name: github-action-battle-test
+          aws-region: eu-west-1
+          role-skip-session-tagging: true
+          role-duration-seconds: 3600
 
-      # - name: Run task
-      #   uses: ./.github/actions/run-task
-      #   env:
-      #     CLUSTER: ${{ secrets.CLUSTER }}
-      #     TASK_DEFINITION: ${{ secrets.TASK_DEFINITION }}
-      #     SUBNET: ${{ secrets.SUBNET }}
-      #     SECURITY_GROUP: ${{ secrets.SECURITY_GROUP }}
-      #     CONCURRENT_TASKS: 5
+      - name: Run task
+        run: |
+          chmod +x ./.github/actions/run-task/entrypoint.sh
+          ./.github/actions/run-task/entrypoint.sh
+        env:
+          CLUSTER: ${{ secrets.CLUSTER }}
+          TASK_DEFINITION: ${{ secrets.TASK_DEFINITION }}
+          SUBNET: ${{ secrets.SUBNET }}
+          SECURITY_GROUP: ${{ secrets.SECURITY_GROUP }}
+          CONCURRENT_TASKS: 5
