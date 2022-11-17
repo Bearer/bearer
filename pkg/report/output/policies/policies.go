@@ -52,7 +52,9 @@ func GetOutput(dataflow *dataflow.DataFlow, config settings.Config) ([]rego.Vars
 
 		log.Debug().Msgf("result %#v", rs)
 
-		result = append(result, rs[0].Bindings)
+		if len(rs) > 0 {
+			result = append(result, rs[0].Bindings)
+		}
 	}
 
 	// Create a prepared query that can be evaluated.
