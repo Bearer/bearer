@@ -14,9 +14,10 @@ import (
 
 func TestDependencies(t *testing.T) {
 	tests := []struct{
-		Name  string
-		Input detections.Detection
-		Want  *dependencies.Classification
+		Name          string
+		Input         detections.Detection
+		Want          *dependencies.Classification
+		ShouldSucceed bool
 	}{
 		{
 			Name: "Dependency match",
@@ -37,6 +38,7 @@ func TestDependencies(t *testing.T) {
 					Reason: "recipe_match",
 				},
 			},
+			ShouldSucceed: true,
 		},
 		{
 			Name: "Dependency match with group (Java case)",
@@ -57,6 +59,7 @@ func TestDependencies(t *testing.T) {
 					Reason: "recipe_match",
 				},
 			},
+			ShouldSucceed: true,
 		},
 		{
 			Name: "No dependency match",
@@ -70,9 +73,10 @@ func TestDependencies(t *testing.T) {
 				Type: detections.TypeDependency,
 			},
 			Want: nil,
+			ShouldSucceed: true,
 		},
 		{
-			Name: "Invalid detection",
+			Name: "Vendored detection",
 			Input: detections.Detection{
 				Source: source.Source{
 					Filename: "vendor/vendor.js",
@@ -86,6 +90,16 @@ func TestDependencies(t *testing.T) {
 				Type: detections.TypeDependency,
 			},
 			Want: nil,
+			ShouldSucceed: true,
+		},
+		{
+			Name: "Non-dependency detection",
+			Input: detections.Detection{
+				Value: 12345,
+				Type: detections.TypeDependency,
+			},
+			Want: nil,
+			ShouldSucceed: false,
 		},
 	}
 
@@ -94,7 +108,7 @@ func TestDependencies(t *testing.T) {
 	for _, testCase := range tests {
 		t.Run(testCase.Name, func(t *testing.T) {
 			output, err := classifier.Classify(testCase.Input)
-			if err != nil {
+			if err != nil && testCase.ShouldSucceed {
 				t.Errorf("classifier returned error %s", err)
 			}
 
