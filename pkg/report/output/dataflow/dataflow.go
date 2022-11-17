@@ -81,11 +81,7 @@ func GetOutput(input []interface{}, config settings.Config) (*DataFlow, error) {
 			if err != nil {
 				return nil, err
 			}
-
-			err = json.NewDecoder(buffer).Decode(&risk)
-			if err != nil {
-				return nil, err
-			}
+			json.NewDecoder(buffer).Decode(&risk)
 
 			risksHolder.AddComputedRisk(risk)
 		case detections.TypeDependencyClassified:

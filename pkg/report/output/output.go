@@ -6,12 +6,15 @@ import (
 
 	"github.com/bearer/curio/pkg/commands/process/settings"
 	"github.com/bearer/curio/pkg/flag"
+	"github.com/bearer/curio/pkg/report/detections"
 	"github.com/bearer/curio/pkg/report/output/dataflow"
 
+	dataflowtypes "github.com/bearer/curio/pkg/report/output/dataflow/types"
 	"github.com/bearer/curio/pkg/report/output/detectors"
 	"github.com/bearer/curio/pkg/report/output/policies"
 	"github.com/bearer/curio/pkg/report/output/stats"
 	"github.com/bearer/curio/pkg/types"
+
 	"github.com/bearer/curio/pkg/util/rego"
 	"gopkg.in/yaml.v3"
 
@@ -51,18 +54,19 @@ func ReportYAML(report types.Report, output *zerolog.Event, config settings.Conf
 }
 
 func getReportOutput(report types.Report, config settings.Config) (any, error) {
-	if config.Report.Report == flag.ReportDetectors {
+	switch config.Report.Report {
+	case flag.ReportDetectors:
 		return detectors.GetOutput(report)
-	} else if config.Report.Report == flag.ReportDataFlow {
+	case flag.ReportDataFlow:
 		return getDataflow(report, config)
-	} else if config.Report.Report == flag.ReportPolicies {
+	case flag.ReportPolicies:
 		dataflow, err := getDataflow(report, config)
 		if err != nil {
 			return nil, err
 		}
 
 		return policies.GetOutput(dataflow, config)
-	} else if config.Report.Report == flag.ReportStats {
+	case flag.ReportStats:
 		lineOfCodeOutput, err := stats.GoclocDetectorOutput(config.Scan.Target)
 		if err != nil {
 			return nil, err
@@ -96,13 +100,25 @@ func getDataflow(report types.Report, config settings.Config) (*dataflow.DataFlo
 			return nil, err
 		}
 
-		processedDetections, ok := result["detections"].([]interface{})
+		resultRisks, ok := result["risks"].([]interface{})
 		if !ok {
 			return nil, fmt.Errorf("expected to get slice from preprocessor but got %#v instead", result["detections"])
 		}
 
-		reportedDetections = append(reportedDetections, processedDetections...)
+		for _, risk := range resultRisks {
+			value := make(map[string]interface{})
+			value["type"] = string(detections.TypeComputedDataflowRisk)
+			value["value"] = risk
+
+			reportedDetections = append(reportedDetections, value)
+		}
+
 	}
 
 	return dataflow.GetOutput(reportedDetections, config)
+}
+
+type RiskDetection struct {
+	Type  string                     `json:"type"`
+	Value dataflowtypes.RiskDetector `json:"value"`
 }

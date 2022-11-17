@@ -3,6 +3,8 @@ package bearer.encryption_fails
 import future.keywords
 
 
+detectorID := "missing_encrypted_property"
+
 rubyEncrypted[location] {
     some detection in input
     detection.detector_type == "detect_encrypted_ruby_class_properties"
@@ -28,7 +30,25 @@ sqlTablesEncrypted[location] {
     location = detection
 }
 
-nonEncryptedSQL[detection] {
+sqlTablesEncrypted[location] {
+    some detection in sqlTables
+    startswith(detection.value.field_name, "tanker_encrypted")
+    location = detection
+}
+
+risks[risk] {
     some detection in sqlTables
     not detection in sqlTablesEncrypted
+    
+    risk = {
+        "detector_id": detectorID,
+        "data_types": [{
+            "name": detection.value.classification.name,
+            "stored": true,
+            "locations": [{
+                "filename": detection.source.filename,
+                "line_number": detection.source.line_number
+            }]
+        }]
+    }
 }
