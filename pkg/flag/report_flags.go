@@ -18,19 +18,19 @@ var (
 		ConfigName: "report.format",
 		Shorthand:  "f",
 		Value:      FormatJSON,
-		Usage:      "format (json, yaml)",
+		Usage:      "Specify report format (json, yaml)",
 	}
 	ReportFlag = Flag{
 		Name:       "report",
 		ConfigName: "report.report",
 		Value:      ReportDetectors,
-		Usage:      "specify the kind of report (detectors, dataflow, policies, stats)",
+		Usage:      "Specify the kind of report (detectors, dataflow, policies, stats)",
 	}
 	OutputFlag = Flag{
 		Name:       "output",
 		ConfigName: "report.output",
 		Value:      "",
-		Usage:      "path where to save report",
+		Usage:      "Specify output path for report",
 	}
 )
 

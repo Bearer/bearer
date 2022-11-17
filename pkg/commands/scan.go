@@ -39,13 +39,13 @@ var scanFlags = &flag.Flags{
 func NewScanCommand() *cobra.Command {
 
 	cmd := &cobra.Command{
-		Use:     "scan [flags] PATH",
+		Use:     "scan [flags] <path>",
 		Aliases: []string{"s"},
-		Short:   "Scan git repository",
-		Example: `  # Scan a local project including language-specific files
-  $ curio s /path/to/your_project
+		Short:   "Scan a directory or file",
+		Example: `  # Scan a local project, including language-specific files
+  $ curio scan /path/to/your_project
   # Scan a single file
-  $ curio s ./curio-ci-test/Pipfile.lock`,
+  $ curio scan ./curio-ci-test/Pipfile.lock`,
 		PreRunE: func(cmd *cobra.Command, args []string) error {
 			if err := scanFlags.Bind(cmd); err != nil {
 				return xerrors.Errorf("flag bind error: %w", err)
