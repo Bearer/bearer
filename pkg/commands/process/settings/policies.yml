@@ -1,6 +1,6 @@
 logger_leaks:
-  message: "Logger leaks detected"
-  level: "warning"
+  description: "Logger leaks detected"
+  name: "Logger leaks"
   query: |
     locations = data.bearer.logger_leaks.locations
     policy_id = data.bearer.logger_leaks.policy_id

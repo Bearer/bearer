@@ -3,8 +3,8 @@ package bearer.logger_leaks
 import future.keywords
 
 policy_id := "detect_ruby_logger"
-policy_name := "Logger leak"
-policy_description := "Logger leak"
+policy_name := input.name
+policy_description := input.description
 
 locations[item] {
     some detector in input.dataflow.risks
@@ -17,7 +17,6 @@ locations[item] {
 
     location = data_type.locations[_]
     item := {
-        "policy": policy_name,
         "data_type": data_type.name,
         "severity": category.severity,
         "filename": location.filename,

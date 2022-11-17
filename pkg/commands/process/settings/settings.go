@@ -27,10 +27,11 @@ var LevelMedium = "medium"
 var LevelLow = "low"
 
 type Policy struct {
-	Query   string
-	Message string
-	Modules []*PolicyModule
-	Level   policyLevel
+	Query       string
+	Name        string
+	Description string
+	Modules     []*PolicyModule
+	Level       policyLevel
 }
 
 type PolicyModule struct {

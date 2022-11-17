@@ -11,6 +11,8 @@ import (
 )
 
 type PolicyInput struct {
+	Name           string             `json:"name"`
+	Description    string             `json:"description"`
 	Dataflow       *dataflow.DataFlow `json:"dataflow"`
 	DataCategories []db.DataCategory  `json:"data_categories"`
 }
@@ -37,6 +39,8 @@ func GetOutput(dataflow *dataflow.DataFlow, config settings.Config) ([]rego.Vars
 			ctx,
 			rego.EvalInput(
 				PolicyInput{
+					Name:           policy.Name,
+					Description:    policy.Description,
 					Dataflow:       dataflow,
 					DataCategories: db.Default().DataCategories,
 				},
