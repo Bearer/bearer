@@ -3,7 +3,7 @@ logger_leaks:
   name: "Logger leaks"
   id: "detect_ruby_logger"
   query: |
-    locations = data.bearer.logger_leaks.locations
+    result = data.bearer.logger_leaks.result
   modules:
     - path: policies/logger_leaks.rego
       name: bearer.logger_leaks

@@ -2,7 +2,7 @@ package bearer.logger_leaks
 
 import future.keywords
 
-locations[item] {
+result[item] {
     some detector in input.dataflow.risks
     detector.detector_id == input.policy_id
 

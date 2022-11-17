@@ -1,4 +1,4 @@
-- locations:
+- result:
     - data_type: Physical Address
       filename: users.rb
       line_number: "1"
