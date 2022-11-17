@@ -1,5 +1,8 @@
 name: battle_tests
 on:
+  push:
+    branches:
+      - AMA-3210/backport-battle-test
   workflow_dispatch:
 
 permissions:
