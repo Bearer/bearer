@@ -100,6 +100,8 @@ func (report *Detectors) AddSchema(
 	schema schema.Schema,
 	source source.Source,
 ) {
+	// @todo FIXME: Add classification here
+
 	report.AddDetection(detections.TypeSchema, detectorType, source, schema)
 }
 
