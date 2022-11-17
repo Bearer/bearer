@@ -25,6 +25,7 @@ var TypeFileFailed DetectionType = "file_error"
 var TypeSecretleak DetectionType = "secret_leak"
 var TypeCustom DetectionType = "custom"
 var TypeCustomClassified DetectionType = "custom_classified"
+var TypeComputedDataflowRisk DetectionType = "computed_dataflow_risk"
 
 type ReportDetection interface {
 	AddDetection(detectionType DetectionType, detectorType detectors.Type, source source.Source, value interface{})

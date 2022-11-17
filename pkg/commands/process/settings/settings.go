@@ -9,14 +9,16 @@ import (
 	"gopkg.in/yaml.v2"
 
 	"github.com/bearer/curio/pkg/flag"
+	"github.com/bearer/curio/pkg/util/rego"
 )
 
 type Config struct {
-	Worker         flag.WorkerOptions `json:"worker"`
-	Scan           flag.ScanOptions   `json:"scan"`
-	Report         flag.ReportOptions `json:"report"`
-	CustomDetector map[string]Rule    `json:"custom_detector"`
-	Policies       map[string]*Policy `json:"policies"`
+	Worker         flag.WorkerOptions     `json:"worker"`
+	Scan           flag.ScanOptions       `json:"scan"`
+	Report         flag.ReportOptions     `json:"report"`
+	CustomDetector map[string]Rule        `json:"custom_detector"`
+	Processors     map[string]*Processors `json:"processors"`
+	Policies       map[string]*Policy     `json:"policies"`
 }
 
 type policyLevel string
@@ -25,10 +27,17 @@ var LevelMedium = "medium"
 var LevelWarning = "warning"
 var LevelCritical = "critical"
 
+type Processors struct {
+	Modules Modules
+	Query   string
+}
+
+type Modules []*PolicyModule
+
 type Policy struct {
 	Query   string
 	Message string
-	Modules []*PolicyModule
+	Modules Modules
 	Level   policyLevel
 }
 
@@ -36,6 +45,16 @@ type PolicyModule struct {
 	Path    string
 	Name    string
 	Content string
+}
+
+func (modules Modules) ToRegoModules() (output []rego.Module) {
+	for _, module := range modules {
+		output = append(output, rego.Module{
+			Name:    module.Name,
+			Content: module.Content,
+		})
+	}
+	return
 }
 
 type Rule struct {
@@ -59,11 +78,18 @@ var customDetector []byte
 //go:embed policies.yml
 var defaultPolicies []byte
 
+//go:embed processors.yml
+var defaultProcessors []byte
+
 //go:embed policies/*
 var policiesFs embed.FS
 
+//go:embed processors/*
+var processorsFs embed.FS
+
 var CustomDetectorKey string = "scan.custom_detector"
 var PoliciesKey string = "scan.policies"
+var ProcessorsKey string = "scan.processors"
 
 func FromOptions(opts flag.Options) (Config, error) {
 	rules := DefaultCustomDetector()
@@ -74,9 +100,17 @@ func FromOptions(opts flag.Options) (Config, error) {
 		}
 	}
 
+	processors := DefaultProcessors()
+	if viper.IsSet(ProcessorsKey) {
+		err := viper.UnmarshalKey(ProcessorsKey, &processors)
+		if err != nil {
+			return Config{}, err
+		}
+	}
+
 	policies := DefaultPolicies()
 	if viper.IsSet(PoliciesKey) {
-		err := viper.UnmarshalKey(PoliciesKey, &rules)
+		err := viper.UnmarshalKey(PoliciesKey, &policies)
 		if err != nil {
 			return Config{}, err
 		}
@@ -94,12 +128,25 @@ func FromOptions(opts flag.Options) (Config, error) {
 		}
 	}
 
+	for _, processor := range processors {
+		for _, module := range processor.Modules {
+			if module.Path != "" {
+				content, err := processorsFs.ReadFile(module.Path)
+				if err != nil {
+					return Config{}, err
+				}
+				module.Content = string(content)
+			}
+		}
+	}
+
 	config := Config{
 		Worker:         opts.WorkerOptions,
 		CustomDetector: rules,
 		Scan:           opts.ScanOptions,
 		Report:         opts.ReportOptions,
 		Policies:       policies,
+		Processors:     processors,
 	}
 
 	return config, nil
@@ -125,4 +172,15 @@ func DefaultPolicies() map[string]*Policy {
 	}
 
 	return policies
+}
+
+func DefaultProcessors() map[string]*Processors {
+	var processors map[string]*Processors
+
+	err := yaml.Unmarshal(defaultProcessors, &processors)
+	if err != nil {
+		log.Fatal().Msgf("failed to unmarshal database file %e", err)
+	}
+
+	return processors
 }

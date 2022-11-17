@@ -20,7 +20,7 @@ type DataFlow struct {
 	Components []types.Component    `json:"components"`
 }
 
-var allowedDetections []detections.DetectionType = []detections.DetectionType{detections.TypeSchemaClassified, detections.TypeCustomClassified, detections.TypeDependencyClassified, detections.TypeInterfaceClassified}
+var allowedDetections []detections.DetectionType = []detections.DetectionType{detections.TypeSchemaClassified, detections.TypeCustomClassified, detections.TypeDependencyClassified, detections.TypeInterfaceClassified, detections.TypeComputedDataflowRisk}
 
 func GetOutput(input []interface{}, config settings.Config) (*DataFlow, error) {
 	dataTypesHolder := datatypes.New()
@@ -73,6 +73,21 @@ func GetOutput(input []interface{}, config settings.Config) (*DataFlow, error) {
 			if err != nil {
 				return nil, err
 			}
+		case detections.TypeComputedDataflowRisk:
+			var risk types.RiskDetector
+
+			buffer := bytes.NewBuffer(nil)
+			err := json.NewEncoder(buffer).Encode(castDetection.Value)
+			if err != nil {
+				return nil, err
+			}
+
+			err = json.NewDecoder(buffer).Decode(&risk)
+			if err != nil {
+				return nil, err
+			}
+
+			risksHolder.AddComputedRisk(risk)
 		case detections.TypeDependencyClassified:
 			err := componentsHolder.AddDependency(detection)
 			if err != nil {

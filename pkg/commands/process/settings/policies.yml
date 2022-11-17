@@ -7,11 +7,3 @@ logger_leaks:
   modules:
     - path: policies/logger_leaks.rego
       name: bearer.logger_leaks
-encryption_detections:
-  message: "encryption fails detected"
-  level: "warning"
-  query: |
-    nonEncrypted = data.bearer.encryption_fails.nonEncryptedSQL
-  modules:
-    - path: policies/encryption_fails.rego
-      name: bearer.encryption_fails

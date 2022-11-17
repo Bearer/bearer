@@ -7,10 +7,12 @@ import (
 	"github.com/bearer/curio/pkg/commands/process/settings"
 	"github.com/bearer/curio/pkg/flag"
 	"github.com/bearer/curio/pkg/report/output/dataflow"
+
 	"github.com/bearer/curio/pkg/report/output/detectors"
 	"github.com/bearer/curio/pkg/report/output/policies"
 	"github.com/bearer/curio/pkg/report/output/stats"
 	"github.com/bearer/curio/pkg/types"
+	"github.com/bearer/curio/pkg/util/rego"
 	"gopkg.in/yaml.v3"
 
 	"github.com/rs/zerolog"
@@ -52,20 +54,9 @@ func getReportOutput(report types.Report, config settings.Config) (any, error) {
 	if config.Report.Report == flag.ReportDetectors {
 		return detectors.GetOutput(report)
 	} else if config.Report.Report == flag.ReportDataFlow {
-		detections, err := detectors.GetOutput(report)
-		if err != nil {
-			return nil, err
-		}
-
-		return policies.GetDataflowOutput(detections, config)
-
+		return getDataflow(report, config)
 	} else if config.Report.Report == flag.ReportPolicies {
-		detections, err := detectors.GetOutput(report)
-		if err != nil {
-			return nil, err
-		}
-
-		dataflow, err := dataflow.GetOutput(detections, config)
+		dataflow, err := getDataflow(report, config)
 		if err != nil {
 			return nil, err
 		}
@@ -91,4 +82,27 @@ func getReportOutput(report types.Report, config settings.Config) (any, error) {
 	}
 
 	return nil, fmt.Errorf(`--report flag "%s" is not supported`, config.Report.Report)
+}
+
+func getDataflow(report types.Report, config settings.Config) (*dataflow.DataFlow, error) {
+	reportedDetections, err := detectors.GetOutput(report)
+	if err != nil {
+		return nil, err
+	}
+
+	for _, processor := range config.Processors {
+		result, err := rego.RunQuery(processor.Query, reportedDetections, processor.Modules.ToRegoModules())
+		if err != nil {
+			return nil, err
+		}
+
+		processedDetections, ok := result["detections"].([]interface{})
+		if !ok {
+			return nil, fmt.Errorf("expected to get slice from preprocessor but got %#v instead", result["detections"])
+		}
+
+		reportedDetections = append(reportedDetections, processedDetections...)
+	}
+
+	return dataflow.GetOutput(reportedDetections, config)
 }
