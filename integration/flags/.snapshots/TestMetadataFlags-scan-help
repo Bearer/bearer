@@ -1,24 +1,24 @@
-Scan git repository
+Scan a directory or file
 
 Usage:
-   scan [flags] PATH
+   scan [flags] <path>
 Aliases:
   scan, s
 Examples:
-  # Scan a local project including language-specific files
-  $ curio s /path/to/your_project
+  # Scan a local project, including language-specific files
+  $ curio scan /path/to/your_project
   # Scan a single file
-  $ curio s ./curio-ci-test/Pipfile.lock
+  $ curio scan ./curio-ci-test/Pipfile.lock
 
 
 Scan Flags
-      --context string                       expand context of schema classification e.g. --context=health to include data types particular to health
-      --debug                                enable debug logs
-      --disable-domain-resolution            do not attempt to resolve detected domains during classification (default false), eg. --disable-domain-resolution=true
-      --domain-resolution-timeout duration   set timeout when attempting to resolve detected domains during classification (default 3 seconds), eg. --domain-resolution-timeout=TODO (default 3s)
-      --internal-domains strings             define regular expressions for better classification of private or unreachable domains eg. --internal-domains="*.my-company.com,private.sh"
-      --quiet                                suppress non-essential messages
-      --skip-path strings                    specify the comma separated files and directories to skip (supports * syntax), eg. --skip-path users/*.go,users/admin.sql
+      --context --context=health to include data types particular to health   Expand context of schema classification e.g. --context=health to include data types particular to health
+      --debug                                                                 Enable debug logs
+      --disable-domain-resolution --disable-domain-resolution=true            Do not attempt to resolve detected domains during classification (default false), e.g. --disable-domain-resolution=true
+      --domain-resolution-timeout --domain-resolution-timeout=TODO            Set timeout when attempting to resolve detected domains during classification (default 3 seconds), e.g. --domain-resolution-timeout=TODO (default 3s)
+      --internal-domains --internal-domains="*.my-company.com,private.sh"     Define regular expressions for better classification of private or unreachable domains e.g. --internal-domains="*.my-company.com,private.sh"
+      --quiet                                                                 Suppress non-essential messages
+      --skip-path strings                                                     Specify the comma separated files and directories to skip. Supports * syntax, e.g. --skip-path users/*.go,users/admin.sql
 
 Policy Flags
       --only-policy strings   specify the comma separated ids of the policies you would like to run. Skips all other policies.
@@ -37,12 +37,12 @@ Worker Flags
       --workers int                         number of processing workers to spawn (default 1)
 
 Report Flags
-  -f, --format string   format (json, yaml) (default "json")
-      --output string   path where to save report
-      --report string   specify the kind of report (detectors, dataflow, policies, stats) (default "detectors")
+  -f, --format string   Specify report format (json, yaml) (default "json")
+      --output string   Specify output path for report
+      --report string   Specify the kind of report (detectors, dataflow, policies, stats) (default "detectors")
 
 General Flags
-      --config-file string   file from which to load configurations
+      --config-file string   Load configuration from the defined path
 
 
 --
