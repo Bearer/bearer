@@ -21,17 +21,25 @@ func GetDocumentID(sheetClient *sheet.GoogleSheets) (documentID string, err erro
 	}
 
 	if workerCount == 1 {
+		log.Debug().Msgf("workerCount is 1... creating document %s in %s", build.Version, config.Runtime.Drive.ParentFolderId)
 		doc := sheetClient.CreateDocument(build.Version, config.Runtime.Drive.ParentFolderId)
+
+		log.Debug().Msgf("doc %s", doc.ID)
 		err = rediscli.SetDocument(doc.ID)
+
 		if err != nil {
+			log.Error().Msgf("setting DocID in redis failed %s", err.Error())
 			return
 		}
+
 		return doc.ID, err
 	}
 
 	for {
 		documentID, err = rediscli.GetDocument()
+
 		if err != nil || documentID == "" {
+			log.Debug().Msgf("document couldn't be found... retrying")
 			time.Sleep(100 * time.Millisecond)
 			continue
 		}
@@ -46,6 +54,7 @@ func DoWork(ctx context.Context, items []repodb.Item, docID string, sheetClient 
 		for {
 			repoCounter, err := rediscli.PickUpWork()
 			if err != nil {
+				log.Error().Msgf("repoCounter failed %s", err.Error())
 				time.Sleep(100 * time.Millisecond)
 				continue
 			}

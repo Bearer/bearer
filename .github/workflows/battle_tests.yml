@@ -36,6 +36,7 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Retrieve latest Linux Artifact
+        id: latest_artifact
         uses: dsaltares/fetch-gh-release-asset@1.1.0
         with:
           repo: "Bearer/curio"
@@ -57,6 +58,9 @@ jobs:
           context: .
           file: battle_tests/Dockerfile
           tags: bearersh/battle-test:latest
+          build-args: |
+            CURIO_VERSION=${{ steps.latest_artifact.outputs.version }}
+            BATTLE_TEST_SHA=${{ github.sha }}
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1

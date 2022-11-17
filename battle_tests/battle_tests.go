@@ -16,6 +16,10 @@ import (
 	"github.com/bearer/curio/cmd/curio/build"
 )
 
+type CurioVersion struct {
+	Version string
+}
+
 func main() {
 	config.Load()
 	rediscli.Setup()
@@ -25,7 +29,7 @@ func main() {
 		log.Debug().Msgf("failed to init redis")
 	}
 
-	log.Printf("running version %s and hash %s", build.Version, build.CommitSHA)
+	log.Printf("version %s", build.Version)
 
 	shutdown := make(chan os.Signal, 1)
 	signal.Notify(shutdown, os.Interrupt)
@@ -41,6 +45,8 @@ func main() {
 		log.Err(err).Send()
 		return
 	}
+
+	log.Debug().Msgf("DocID is %s", docID)
 
 	workerCtx := sync.DoWork(programCtx, db, docID, sheetClient)
 

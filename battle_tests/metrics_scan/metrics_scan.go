@@ -3,11 +3,11 @@ package metricsscan
 import (
 	"encoding/json"
 	"fmt"
-	"log"
 	"math"
 	"time"
 
 	"github.com/bearer/curio/battle_tests/scan"
+	"github.com/rs/zerolog/log"
 )
 
 type DataType struct {
@@ -40,7 +40,7 @@ func FakeScanRepository(repositoryUrl string, reportingChan chan *MetricsReport)
 		Memory: 0,
 	}
 
-	log.Printf("processing repository %s", repositoryUrl)
+	log.Debug().Msgf("processing fake repository %s", repositoryUrl)
 
 	reportData := &ScanReport{
 		NumberOfLines:     12,
@@ -66,7 +66,7 @@ func ScanRepository(repositoryUrl string, reportingChan chan *MetricsReport) {
 		Memory: 0,
 	}
 
-	log.Printf("processing repository %s", repositoryUrl)
+	log.Debug().Msgf("processing repository %s", repositoryUrl)
 
 	scanner := scan.NewScan(repositoryUrl)
 	scanCrashedHandler := func(err error) {

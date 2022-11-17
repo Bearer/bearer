@@ -30,11 +30,12 @@ type TypeRedis struct {
 }
 
 type TypeRuntime struct {
-	MaxAttempt  int
-	Sheets      TypeGoogleSheets
-	Drive       TypeGoogleDrive
-	Redis       TypeRedis
-	EFSLocation string
+	MaxAttempt          int
+	Sheets              TypeGoogleSheets
+	Drive               TypeGoogleDrive
+	Redis               TypeRedis
+	EFSLocation         string
+	CurioExecutablePath string
 }
 
 var Runtime = TypeRuntime{}
@@ -60,14 +61,14 @@ func Load() {
 		log.Fatal().Err(fmt.Errorf("unable to parse google app `%s` to config: %e", appConfigS, err)).Send()
 	}
 
+	Runtime.CurioExecutablePath = getEnv("CURIO_EXECUTABLE_PATH", "/app/curio")
+
 	maxAttempt, err := strconv.Atoi(getEnv("GOOGLE_MAX_ATTEMPT", ""))
-	log.Debug().Msgf("maxAttempt %d", maxAttempt)
 	if err != nil {
 		Runtime.MaxAttempt = -1
 	} else {
 		Runtime.MaxAttempt = maxAttempt
 	}
-	log.Debug().Msgf("maxAttempt %d", Runtime.MaxAttempt)
 
 	Runtime.Sheets = TypeGoogleSheets{
 		UserToken: userToken,

@@ -4,3 +4,4 @@ export GOOGLE_SHEETS_USER=''
 export GOOGLE_APP=''
 export REDIS_INIT="true"
 export GOOGLE_MAX_ATTEMPT="5"
+export CURIO_EXECUTABLE_PATH="./curio"
