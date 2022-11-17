@@ -4,8 +4,6 @@ RUN mkdir /app
 ADD . /app/
 WORKDIR /app
 
-ADD .gitconfig /root/
-
 RUN apk update && apk upgrade && apk add --no-cache build-base git
 
 RUN go build -a -o dist/battle_tests ./battle_tests/battle_tests.go
