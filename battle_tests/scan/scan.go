@@ -46,9 +46,9 @@ func (scanner *Scanner) Start() (outputBytes []byte, startTime *time.Time, err e
 	// calculate repository size
 	scanner.FSSize, err = fs.DirSize(scanner.TempDir)
 	if err != nil {
-		return nil, nil, fmt.Errorf("couldn't determine size of repository %e", err)
+		return nil, nil, fmt.Errorf("couldn't determine size of repository %s", err.Error())
 	}
-	log.Debug().Msgf("FS Size is %s", scanner.FSSize)
+	log.Debug().Msgf("FSSize is %d", scanner.FSSize)
 
 	// create file for report
 	scanner.ReportFilePath = tmpfile.Create(config.Runtime.EFSLocation, ".json")
@@ -67,7 +67,7 @@ func (scanner *Scanner) Start() (outputBytes []byte, startTime *time.Time, err e
 	).Output()
 
 	if err != nil {
-		log.Error().Msgf("Error with cmd %e", err.Error())
+		log.Error().Msgf("Error with cmd %s", err.Error())
 	}
 
 	return output, &processStartedAt, err
