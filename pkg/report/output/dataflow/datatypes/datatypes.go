@@ -41,7 +41,7 @@ func (holder *Holder) AddSchema(detection detections.Detection) error {
 	}
 
 	if classification.Decision.State == classify.Valid {
-		holder.addDatatype(classification.DataType.DataCategoryName, string(detection.DetectorType), detection.Source.Filename, *detection.Source.LineNumber)
+		holder.addDatatype(classification.DataType.Name, string(detection.DetectorType), detection.Source.Filename, *detection.Source.LineNumber)
 	}
 
 	return nil

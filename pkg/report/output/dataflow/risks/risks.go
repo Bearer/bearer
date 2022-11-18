@@ -1,6 +1,7 @@
 package risks
 
 import (
+	"github.com/bearer/curio/pkg/classification/db"
 	"github.com/bearer/curio/pkg/commands/process/settings"
 	"github.com/bearer/curio/pkg/report/output/dataflow/detectiondecoder"
 	"github.com/bearer/curio/pkg/report/output/dataflow/types"
@@ -20,9 +21,10 @@ type detectorHolder struct {
 	datatypes map[string]*datatypeHolder // group detectors by detectorName
 }
 type datatypeHolder struct {
-	name     string
-	category string
-	files    map[string]*fileHolder // group files by filename
+	name         string
+	uuid         string
+	categoryUUID string
+	files        map[string]*fileHolder // group files by filename
 }
 type fileHolder struct {
 	name       string
@@ -43,14 +45,14 @@ func (holder *Holder) AddSchema(detection detections.Detection) error {
 	}
 
 	if classification.Decision.State == classify.Valid {
-		holder.addDatatype(string(detection.DetectorType), classification.DataType.DataCategoryName, classification.DataType.DefaultCategory, detection.Source.Filename, *detection.Source.LineNumber)
+		holder.addDatatype(string(detection.DetectorType), classification.DataType, detection.Source.Filename, *detection.Source.LineNumber)
 	}
 
 	return nil
 }
 
 // addDatatype adds detector to hash list and at the same time blocks duplicates
-func (holder *Holder) addDatatype(ruleName string, datatypeName string, datatypeCategory string, fileName string, lineNumber int) {
+func (holder *Holder) addDatatype(ruleName string, datatype *db.DataType, fileName string, lineNumber int) {
 	// create detector entry if it doesn't exist
 	if _, exists := holder.detectors[ruleName]; !exists {
 		holder.detectors[ruleName] = detectorHolder{
@@ -61,24 +63,25 @@ func (holder *Holder) addDatatype(ruleName string, datatypeName string, datatype
 
 	detector := holder.detectors[ruleName]
 	// create datatype entry if it doesn't exist
-	if _, exists := detector.datatypes[datatypeName]; !exists {
-		detector.datatypes[datatypeName] = &datatypeHolder{
-			name:     datatypeName,
-			category: datatypeCategory,
-			files:    make(map[string]*fileHolder),
+	if _, exists := detector.datatypes[datatype.Name]; !exists {
+		detector.datatypes[datatype.Name] = &datatypeHolder{
+			name:         datatype.Name,
+			uuid:         datatype.UUID,
+			categoryUUID: datatype.CategoryUUID,
+			files:        make(map[string]*fileHolder),
 		}
 	}
 
-	datatype := detector.datatypes[datatypeName]
+	detectorDatatype := detector.datatypes[datatype.Name]
 	// create file entry if it doesn't exist
-	if _, exists := datatype.files[fileName]; !exists {
-		datatype.files[fileName] = &fileHolder{
+	if _, exists := detectorDatatype.files[fileName]; !exists {
+		detectorDatatype.files[fileName] = &fileHolder{
 			name:       fileName,
 			lineNumber: make(map[int]int),
 		}
 	}
 
-	datatype.files[fileName].lineNumber[lineNumber] = lineNumber
+	detectorDatatype.files[fileName].lineNumber[lineNumber] = lineNumber
 
 }
 
@@ -103,10 +106,11 @@ func (holder *Holder) ToDataFlow() []types.RiskDetector {
 			}
 
 			constructedDatatype := types.RiskDatatype{
-				Name:      datatype.name,
-				Category:  datatype.category,
-				Stored:    stored,
-				Locations: make([]types.RiskLocation, 0),
+				Name:         datatype.name,
+				UUID:         datatype.uuid,
+				CategoryUUID: datatype.categoryUUID,
+				Stored:       stored,
+				Locations:    make([]types.RiskLocation, 0),
 			}
 
 			files := maputil.ToSortedSlice(datatype.files)
