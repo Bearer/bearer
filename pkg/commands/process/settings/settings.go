@@ -85,7 +85,19 @@ func FromOptions(opts flag.Options) (Config, error) {
 		}
 	}
 
-	for _, policy := range policies {
+	for key := range policies {
+		policy := policies[key]
+
+		if len(opts.PolicyOptions.OnlyPolicy) > 0 && !opts.PolicyOptions.OnlyPolicy[policy.Id] {
+			delete(policies, key)
+			continue
+		}
+
+		if opts.PolicyOptions.SkipPolicy[policy.Id] {
+			delete(policies, key)
+			continue
+		}
+
 		for _, module := range policy.Modules {
 			if module.Path != "" {
 				content, err := policiesFs.ReadFile(module.Path)

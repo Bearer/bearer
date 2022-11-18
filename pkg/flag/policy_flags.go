@@ -21,8 +21,8 @@ type PolicyFlagGroup struct {
 }
 
 type PolicyOptions struct {
-	SkipPolicy []string `json:"skip_policy"`
-	OnlyPolicy []string `json:"only_policy"`
+	SkipPolicy map[string]bool `json:"skip_policy"`
+	OnlyPolicy map[string]bool `json:"only_policy"`
 }
 
 func NewPolicyFlagGroup() *PolicyFlagGroup {
@@ -45,7 +45,18 @@ func (f *PolicyFlagGroup) Flags() []*Flag {
 
 func (f *PolicyFlagGroup) ToOptions(args []string) PolicyOptions {
 	return PolicyOptions{
-		SkipPolicy: getStringSlice(f.SkipPolicyFlag),
-		OnlyPolicy: getStringSlice(f.OnlyPolicyFlag),
+		SkipPolicy: argsToMap(f.SkipPolicyFlag),
+		OnlyPolicy: argsToMap(f.OnlyPolicyFlag),
 	}
+}
+
+func argsToMap(flag *Flag) map[string]bool {
+	strSlice := getStringSlice(flag)
+
+	result := make(map[string]bool)
+	for _, str := range strSlice {
+		result[str] = true
+	}
+
+	return result
 }
