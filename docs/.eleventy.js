@@ -34,7 +34,7 @@ module.exports = function (eleventyConfig) {
   });
   eleventyConfig.setLibrary("md", mdSetup);
   eleventyConfig.addPlugin(EleventyHtmlBasePlugin, {
-    baseHref: process.env.ELEVENTY_PRODUCTION ? "/curio/" : "/",
+    baseHref: "/",
   });
 
   eleventyConfig.addPlugin(EleventyRenderPlugin);
