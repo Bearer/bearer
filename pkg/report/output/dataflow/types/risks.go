@@ -7,8 +7,8 @@ type RiskDetector struct {
 
 type RiskDatatype struct {
 	Name         string         `json:"name"`
-	UUID         string         `json:"uuid"`
-	CategoryUUID string         `json:"category_uuid"`
+	UUID         string         `json:"uuid,omitempty"`
+	CategoryUUID string         `json:"category_uuid,omitempty"`
 	Stored       bool           `json:"stored"`
 	Locations    []RiskLocation `json:"locations"`
 }

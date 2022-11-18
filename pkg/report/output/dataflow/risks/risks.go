@@ -12,8 +12,9 @@ import (
 )
 
 type Holder struct {
-	detectors map[string]detectorHolder // group datatypeHolders by name
-	config    settings.Config
+	detectors  map[string]detectorHolder // group datatypeHolders by name
+	config     settings.Config
+	isInternal bool
 }
 
 type detectorHolder struct {
@@ -31,10 +32,11 @@ type fileHolder struct {
 	lineNumber map[int]int
 }
 
-func New(config settings.Config) *Holder {
+func New(config settings.Config, isInternal bool) *Holder {
 	return &Holder{
-		detectors: make(map[string]detectorHolder),
-		config:    config,
+		detectors:  make(map[string]detectorHolder),
+		config:     config,
+		isInternal: isInternal,
 	}
 }
 
@@ -64,11 +66,18 @@ func (holder *Holder) addDatatype(ruleName string, datatype *db.DataType, fileNa
 	detector := holder.detectors[ruleName]
 	// create datatype entry if it doesn't exist
 	if _, exists := detector.datatypes[datatype.Name]; !exists {
-		detector.datatypes[datatype.Name] = &datatypeHolder{
-			name:         datatype.Name,
-			uuid:         datatype.UUID,
-			categoryUUID: datatype.CategoryUUID,
-			files:        make(map[string]*fileHolder),
+		if holder.isInternal {
+			detector.datatypes[datatype.Name] = &datatypeHolder{
+				name:         datatype.Name,
+				uuid:         datatype.UUID,
+				categoryUUID: datatype.CategoryUUID,
+				files:        make(map[string]*fileHolder),
+			}
+		} else {
+			detector.datatypes[datatype.Name] = &datatypeHolder{
+				name:  datatype.Name,
+				files: make(map[string]*fileHolder),
+			}
 		}
 	}
 
