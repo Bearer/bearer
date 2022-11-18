@@ -10,9 +10,8 @@
   value:
     classification:
         data_type:
-            data_category_name: Unique Identifier
-            default_category: Identification
-            id: 86
+            category_uuid: 14124881-6b92-4fc5-8005-ea7c1c09592e
+            name: Unique Identifier
             uuid: 12d44ae0-1df7-4faf-9fb1-b46cc4b4dce9
         decision:
             reason: valid_object_with_invalid_properties
