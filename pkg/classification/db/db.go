@@ -52,16 +52,15 @@ var RecipeTypeDataStore = RecipeType("data_store")
 var RecipeTypeService = RecipeType("service")
 
 type DataType struct {
-	DataCategoryName string `json:"data_category_name"`
-	DefaultCategory  string `json:"default_category"`
-	Id               int    `json:"id"`
-	UUID             string `json:"uuid"`
+	Name         string `json:"name"`
+	UUID         string `json:"uuid"`
+	CategoryUUID string `json:"category_uuid"`
 }
 
 type DataCategory struct {
 	Name     string `json:"name"`
-	Severity string `json:"severity"`
 	UUID     string `json:"uuid"`
+	Severity string `json:"severity"`
 }
 
 type ObjectType string
