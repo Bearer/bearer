@@ -7,7 +7,6 @@ import (
 	"runtime"
 
 	"github.com/bearer/curio/pkg/classification"
-	classsification "github.com/bearer/curio/pkg/classification"
 	config "github.com/bearer/curio/pkg/commands/process/settings"
 	"github.com/bearer/curio/pkg/commands/process/worker/blamer"
 	"github.com/bearer/curio/pkg/commands/process/worker/work"
@@ -29,7 +28,7 @@ func Start(port string) error {
 			var err error
 			json.NewDecoder(r.Body).Decode(&config) //nolint:all,errcheck
 
-			classifier, err = classsification.NewClassifier(&classsification.Config{Config: config})
+			classifier, err = classification.NewClassifier(&classification.Config{Config: config})
 			if err != nil {
 				response.ClassifierError = err.Error()
 			}

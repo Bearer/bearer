@@ -5,8 +5,8 @@ import (
 	"io"
 	"log"
 
-	classsification "github.com/bearer/curio/pkg/classification"
-	classsificationschema "github.com/bearer/curio/pkg/classification/schema"
+	classification "github.com/bearer/curio/pkg/classification"
+	classificationschema "github.com/bearer/curio/pkg/classification/schema"
 
 	"github.com/bearer/curio/pkg/parser"
 	"github.com/bearer/curio/pkg/parser/nodeid"
@@ -29,7 +29,7 @@ import (
 
 type Detectors struct {
 	Blamer     blamer.Blamer
-	Classifier *classsification.Classifier
+	Classifier *classification.Classifier
 	File       io.Writer
 }
 
@@ -77,9 +77,9 @@ func (report *Detectors) AddCreateView(
 }
 
 func (report *Detectors) AddDataType(detectionType detections.DetectionType, detectorType detectors.Type, idGenerator nodeid.Generator, values map[parser.NodeID]*datatype.DataType) {
-	classifiedDatatypes := make(map[parser.NodeID]*classsificationschema.ClassifiedDatatype, 0)
+	classifiedDatatypes := make(map[parser.NodeID]*classificationschema.ClassifiedDatatype, 0)
 	for nodeID, target := range values {
-		classified := report.Classifier.Schema.Classify(classsificationschema.DataTypeDetection{
+		classified := report.Classifier.Schema.Classify(classificationschema.DataTypeDetection{
 			Value:        target,
 			Filename:     target.GetNode().Source(false).Filename,
 			DetectorType: detectorType,
