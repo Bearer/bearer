@@ -1,8 +1,6 @@
 {
-  "metadata": {
-    "version": "1.0"
-  },
-  "uuid": "12f0efe5-ee25-4688-b111-4b8b120fcd96",
+  "metadata": { "version": "1.0" },
   "name": "Authenticating",
-  "severity": "critical"
+  "severity": "critical",
+  "uuid": "dd88aee5-9d40-4ad2-8983-0c791ddec47c"
 }

@@ -1,6 +1,6 @@
 {
   "metadata": { "version": "1.0" },
-  "uuid": "9555eb1f-f18d-47aa-b081-7513258fe039",
   "name": "Physical Characteristic",
-  "severity": "high"
+  "severity": "high",
+  "uuid": "94007e1e-57d8-43e8-90f2-246236dc5dde"
 }
