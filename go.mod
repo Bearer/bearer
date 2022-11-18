@@ -7,6 +7,8 @@ require (
 	github.com/ghodss/yaml v1.0.0
 	github.com/go-enry/go-enry/v2 v2.8.2
 	github.com/google/uuid v1.3.0
+	github.com/hhatto/gocloc v0.4.3
+	github.com/jessevdk/go-flags v1.5.0
 	github.com/monochromegane/go-gitignore v0.0.0-20200626010858-205db1a8cc00
 	github.com/open-policy-agent/opa v0.46.1
 	github.com/rs/zerolog v1.28.0
@@ -21,7 +23,7 @@ require (
 	github.com/wlredeye/jsonlines v0.0.0-20160904163743-36b5e1bd13d0
 	github.com/zricethezav/gitleaks/v8 v8.13.0
 	golang.org/x/exp v0.0.0-20221031165847-c99f073a8326
-	golang.org/x/mod v0.6.0
+	golang.org/x/mod v0.7.0
 	golang.org/x/net v0.0.0-20221004154528-8021a29435af
 )
 
@@ -36,9 +38,7 @@ require (
 	github.com/go-enry/go-oniguruma v1.2.1 // indirect
 	github.com/gobwas/glob v0.2.3 // indirect
 	github.com/h2non/filetype v1.1.3 // indirect
-	github.com/hhatto/gocloc v0.4.3 // indirect
 	github.com/inconshreveable/mousetrap v1.0.1 // indirect
-	github.com/jessevdk/go-flags v1.5.0 // indirect
 	github.com/lucasb-eyer/go-colorful v1.2.0 // indirect
 	github.com/mattn/go-colorable v0.1.12 // indirect
 	github.com/mattn/go-isatty v0.0.16 // indirect
