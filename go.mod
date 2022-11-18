@@ -5,7 +5,7 @@ go 1.18
 require (
 	github.com/bradleyjkemp/cupaloy v2.3.0+incompatible
 	github.com/ghodss/yaml v1.0.0
-	github.com/go-enry/go-enry/v2 v2.8.2
+	github.com/go-enry/go-enry/v2 v2.8.3
 	github.com/google/uuid v1.3.0
 	github.com/hhatto/gocloc v0.4.3
 	github.com/jessevdk/go-flags v1.5.0
