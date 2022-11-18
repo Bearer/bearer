@@ -3,7 +3,7 @@ package openapi
 import (
 	"bytes"
 	"encoding/json"
-	"io/ioutil"
+	"os"
 
 	"github.com/bearer/curio/pkg/detectors/openapi/v2json"
 	"github.com/bearer/curio/pkg/parser/nodeid"
@@ -67,7 +67,7 @@ func getFileType(file *file.FileInfo) (detectors.OpenAPIFileType, error) {
 		return "", nil
 	}
 
-	input, err := ioutil.ReadFile(file.AbsolutePath)
+	input, err := os.ReadFile(file.AbsolutePath)
 	if err != nil {
 		return "", err
 	}

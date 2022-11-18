@@ -1,0 +1,7 @@
+export BATTLE_TEST_REDIS_ADDRESS=localhost:6379
+export GOOGLE_DRIVE_PARENT_FOLDER_ID=""
+export GOOGLE_SHEETS_USER=''
+export GOOGLE_APP=''
+export REDIS_INIT="true"
+export GOOGLE_MAX_ATTEMPT="5"
+export CURIO_EXECUTABLE_PATH="./curio"
