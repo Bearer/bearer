@@ -1,7 +1,6 @@
 {
   "metadata": { "version": "1.0" },
-  "data_category_name": "Political Affiliation",
-  "default_category": "Public Life",
-  "id": 71,
-  "uuid": "2226b7d3-8669-4c10-932b-c18208b41142"
+  "name": "Political Affiliation",
+  "uuid": "2226b7d3-8669-4c10-932b-c18208b41142",
+  "category_uuid": "e354099e-b80c-47b5-a86c-8d936b520387"
 }

@@ -1,7 +1,6 @@
 {
   "metadata": { "version": "1.0" },
-  "data_category_name": "Prescriptions",
-  "default_category": "Medical and Health",
-  "id": 44,
-  "uuid": "bc91b4fb-3f72-4cae-b57b-ba538e4ff4e3"
+  "name": "Prescriptions",
+  "uuid": "bc91b4fb-3f72-4cae-b57b-ba538e4ff4e3",
+  "category_uuid": "7b1d36e7-46f9-4664-85a2-44fb15fbefd1"
 }

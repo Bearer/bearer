@@ -1,7 +1,6 @@
 {
   "metadata": { "version": "1.0" },
-  "data_category_name": "Age Range",
-  "default_category": "Demographic",
-  "id": 22,
-  "uuid": "31583120-fdb1-4522-9450-487acb6d5656"
+  "name": "Age Range",
+  "uuid": "31583120-fdb1-4522-9450-487acb6d5656",
+  "category_uuid": "c3119d43-0562-48ac-9a8e-7217aa8686b8"
 }

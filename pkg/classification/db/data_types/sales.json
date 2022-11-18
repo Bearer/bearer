@@ -1,7 +1,6 @@
 {
   "metadata": { "version": "1.0" },
-  "data_category_name": "Sales",
-  "default_category": "Transactional",
-  "id": 118,
-  "uuid": "388017f2-bfb7-43f7-9109-43d21de6dfa3"
+  "name": "Sales",
+  "uuid": "388017f2-bfb7-43f7-9109-43d21de6dfa3",
+  "category_uuid": "deda0a0f-029c-44ee-9cac-9f059866723e"
 }

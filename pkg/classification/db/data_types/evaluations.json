@@ -1,7 +1,6 @@
 {
   "metadata": { "version": "1.0" },
-  "data_category_name": "Evaluations",
-  "default_category": "Professional Information",
-  "id": 111,
-  "uuid": "af7ecf82-ea6e-488b-b1a9-dccbc89436b5"
+  "name": "Evaluations",
+  "uuid": "af7ecf82-ea6e-488b-b1a9-dccbc89436b5",
+  "category_uuid": "ef613213-a222-4c01-ae38-c3043b68f738"
 }

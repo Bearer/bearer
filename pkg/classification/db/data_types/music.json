@@ -1,7 +1,6 @@
 {
   "metadata": { "version": "1.0" },
-  "data_category_name": "Music",
-  "default_category": "Preference",
-  "id": 109,
-  "uuid": "e999b9a0-e5d2-4722-89d9-7fa299cb216d"
+  "name": "Music",
+  "uuid": "e999b9a0-e5d2-4722-89d9-7fa299cb216d",
+  "category_uuid": "bc536e1e-e0d1-4b88-96d2-a2eaad1620d4"
 }

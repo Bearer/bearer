@@ -1,7 +1,6 @@
 {
   "metadata": { "version": "1.0" },
-  "data_category_name": "Hair Color",
-  "default_category": "Physical Characteristic",
-  "id": 104,
-  "uuid": "3fa463e0-ad8b-4513-a3d6-c62b69670802"
+  "name": "Hair Color",
+  "uuid": "3fa463e0-ad8b-4513-a3d6-c62b69670802",
+  "category_uuid": "94007e1e-57d8-43e8-90f2-246236dc5dde"
 }

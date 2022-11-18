@@ -1,7 +1,6 @@
 {
   "metadata": { "version": "1.0" },
-  "data_category_name": "School attended",
-  "default_category": "Professional Information",
-  "id": 92,
-  "uuid": "334e8c19-8302-4ba0-8490-0cedfca7bd02"
+  "name": "School attended",
+  "uuid": "334e8c19-8302-4ba0-8490-0cedfca7bd02",
+  "category_uuid": "ef613213-a222-4c01-ae38-c3043b68f738"
 }

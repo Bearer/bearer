@@ -1,7 +1,6 @@
 {
   "metadata": { "version": "1.0" },
-  "data_category_name": "Connections",
-  "default_category": "Social Network",
-  "id": 115,
-  "uuid": "200e7ee4-b68f-4709-b01e-c7f62e49c905"
+  "name": "Connections",
+  "uuid": "200e7ee4-b68f-4709-b01e-c7f62e49c905",
+  "category_uuid": "68631dba-5696-4cc0-b6a8-0175ca99a7a2"
 }

@@ -1,7 +1,6 @@
 {
   "metadata": { "version": "1.0" },
-  "data_category_name": "Credit Card Number",
-  "default_category": "Financial Accounts",
-  "id": 33,
-  "uuid": "f38aab1a-1551-43dc-9a90-59abf2c9f08c"
+  "name": "Credit Card Number",
+  "uuid": "f38aab1a-1551-43dc-9a90-59abf2c9f08c",
+  "category_uuid": "7a794bd6-a6d1-429d-91a2-377acce9e9db"
 }

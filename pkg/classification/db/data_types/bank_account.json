@@ -1,7 +1,6 @@
 {
   "metadata": { "version": "1.0" },
-  "data_category_name": "Bank Account",
-  "default_category": "Financial Accounts",
-  "id": 34,
-  "uuid": "257e9570-e57c-4d7c-b3de-a893008bfdba"
+  "name": "Bank Account",
+  "uuid": "257e9570-e57c-4d7c-b3de-a893008bfdba",
+  "category_uuid": "7a794bd6-a6d1-429d-91a2-377acce9e9db"
 }

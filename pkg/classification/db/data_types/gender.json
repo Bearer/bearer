@@ -1,7 +1,6 @@
 {
   "metadata": { "version": "1.0" },
-  "data_category_name": "Gender",
-  "default_category": "Physical Characteristic",
-  "id": 70,
-  "uuid": "2c842862-1f33-4080-9c1c-50498d4d5c27"
+  "name": "Gender",
+  "uuid": "2c842862-1f33-4080-9c1c-50498d4d5c27",
+  "category_uuid": "94007e1e-57d8-43e8-90f2-246236dc5dde"
 }

@@ -1,7 +1,6 @@
 {
   "metadata": { "version": "1.0" },
-  "data_category_name": "Spoken Languages",
-  "default_category": "Ethnicity",
-  "id": 26,
-  "uuid": "c2f07a15-6cc1-451b-b8b4-7598bc0117e8"
+  "name": "Spoken Languages",
+  "uuid": "c2f07a15-6cc1-451b-b8b4-7598bc0117e8",
+  "category_uuid": "35b94efa-9b67-49b2-abb9-29b6a759a030"
 }
