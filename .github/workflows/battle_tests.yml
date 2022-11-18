@@ -1,8 +1,5 @@
 name: Battle Tests
 on:
-  push:
-    branches:
-      - AMA-3210/backport-battle-test
   workflow_dispatch:
 
 permissions:
@@ -40,13 +37,14 @@ jobs:
         uses: dsaltares/fetch-gh-release-asset@1.1.0
         with:
           repo: "Bearer/curio"
-          # version: defaults to latest
-          version: "tags/v0.5.0"
-          file: "curio_0.5.0_linux_amd64.tar.gz"
+          # version: "tags/v0.5.0"
+          # file: "curio_0.5.0_linux_amd64.tar.gz"
+          regex: true
+          file: "curio_.*_linux_amd64\\.tar\\.gz"
 
       - name: Extract artifact
         run: |
-          tar -xzvf curio_0.5.0_linux_amd64.tar.gz
+          tar -xzvf curio_*_linux_amd64.tar.gz
           ls -ltr
           mkdir dist
           cp curio dist/

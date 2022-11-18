@@ -4,12 +4,12 @@ import (
 	"context"
 	"time"
 
+	"github.com/bearer/curio/battle_tests/build"
 	"github.com/bearer/curio/battle_tests/config"
 	repodb "github.com/bearer/curio/battle_tests/db"
 	metricsscan "github.com/bearer/curio/battle_tests/metrics_scan"
 	"github.com/bearer/curio/battle_tests/rediscli"
 	"github.com/bearer/curio/battle_tests/sheet"
-	"github.com/bearer/curio/cmd/curio/build"
 	"github.com/rs/zerolog/log"
 )
 
@@ -21,8 +21,8 @@ func GetDocumentID(sheetClient *sheet.GoogleSheets) (documentID string, err erro
 	}
 
 	if workerCount == 1 {
-		log.Debug().Msgf("workerCount is 1... creating document %s in %s", build.Version, config.Runtime.Drive.ParentFolderId)
-		doc := sheetClient.CreateDocument(build.Version, config.Runtime.Drive.ParentFolderId)
+		log.Debug().Msgf("workerCount is 1... creating document %s in %s", build.CurioVersion, config.Runtime.Drive.ParentFolderId)
+		doc := sheetClient.CreateDocument(build.CurioVersion, config.Runtime.Drive.ParentFolderId)
 
 		log.Debug().Msgf("doc %s", doc.ID)
 		err = rediscli.SetDocument(doc.ID)

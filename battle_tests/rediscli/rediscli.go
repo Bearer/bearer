@@ -3,8 +3,8 @@ package rediscli
 import (
 	"errors"
 
+	"github.com/bearer/curio/battle_tests/build"
 	"github.com/bearer/curio/battle_tests/config"
-	"github.com/bearer/curio/cmd/curio/build"
 	"github.com/go-redis/redis"
 )
 
@@ -19,19 +19,19 @@ func Setup() {
 }
 
 func WorkerOnline() (int64, error) {
-	key := build.Version + "_workers_online_" + build.CommitSHA
+	key := build.CurioVersion + "_workers_online_" + build.BattleTestSHA
 	cmd := cli.Incr(key)
 	return cmd.Result()
 }
 
 func WorkerOffline() (int64, error) {
-	key := build.Version + "_workers_online_" + build.CommitSHA
+	key := build.CurioVersion + "_workers_online_" + build.BattleTestSHA
 	cmd := cli.Decr(key)
 	return cmd.Result()
 }
 
 func SetDocument(documentID string) error {
-	key := build.Version + "_sheet_document_" + build.CommitSHA
+	key := build.CurioVersion + "_sheet_document_" + build.BattleTestSHA
 	cmd := cli.Set(key, documentID, 0)
 	result, err := cmd.Result()
 	if result != "OK" {
@@ -41,7 +41,7 @@ func SetDocument(documentID string) error {
 }
 
 func GetDocument() (string, error) {
-	key := build.Version + "_sheet_document_" + build.CommitSHA
+	key := build.CurioVersion + "_sheet_document_" + build.BattleTestSHA
 	cmd := cli.Get(key)
 	return cmd.Result()
 }
@@ -51,7 +51,7 @@ func Init() error {
 		return nil
 	}
 
-	key := build.Version + "_work_assigned_" + build.CommitSHA
+	key := build.CurioVersion + "_work_assigned_" + build.BattleTestSHA
 	cmd := cli.Set(key, 0, 0)
 	_, err := cmd.Result()
 
@@ -59,7 +59,7 @@ func Init() error {
 		return err
 	}
 
-	key = build.Version + "_workers_online_" + build.CommitSHA
+	key = build.CurioVersion + "_workers_online_" + build.BattleTestSHA
 	cmd = cli.Set(key, 0, 0)
 	_, err = cmd.Result()
 
@@ -71,7 +71,7 @@ func Init() error {
 }
 
 func PickUpWork() (int, error) {
-	key := build.Version + "_work_assigned_" + build.CommitSHA
+	key := build.CurioVersion + "_work_assigned_" + build.BattleTestSHA
 	cmd := cli.Incr(key)
 	counter, err := cmd.Result()
 	return int(counter), err

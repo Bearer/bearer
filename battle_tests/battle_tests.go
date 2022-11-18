@@ -8,12 +8,12 @@ import (
 	"os/signal"
 	"syscall"
 
+	"github.com/bearer/curio/battle_tests/build"
 	"github.com/bearer/curio/battle_tests/config"
 	"github.com/bearer/curio/battle_tests/db"
 	"github.com/bearer/curio/battle_tests/rediscli"
 	"github.com/bearer/curio/battle_tests/sheet"
 	"github.com/bearer/curio/battle_tests/sync"
-	"github.com/bearer/curio/cmd/curio/build"
 )
 
 type CurioVersion struct {
@@ -29,7 +29,8 @@ func main() {
 		log.Debug().Msgf("failed to init redis")
 	}
 
-	log.Printf("version %s", build.Version)
+	log.Debug().Msgf("curio version %s", build.CurioVersion)
+	log.Debug().Msgf("battle tests SHA %s", build.BattleTestSHA)
 
 	shutdown := make(chan os.Signal, 1)
 	signal.Notify(shutdown, os.Interrupt)
