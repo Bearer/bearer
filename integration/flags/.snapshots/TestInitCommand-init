@@ -1,3 +1,6 @@
+policy:
+    only-policy: []
+    skip-policy: []
 report:
     format: json
     output: ""

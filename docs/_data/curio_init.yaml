@@ -46,6 +46,14 @@ options:
       default_value: '[]'
       usage: |
         specify the comma separated files and directories to skip (supports * syntax), eg. --skip-path users/*.go,users/admin.sql
+    - name: skip-policy
+      default_value: '[]'
+      usage: |
+        specify the comma separated ids of the policies you would like to skip. Runs all other policies.
+    - name: only-policy
+      default_value: '[]'
+      usage: |
+        specify the comma separated ids of the policies you would like to run. Skips all other policies.
     - name: timeout
       default_value: 10m0s
       usage: time allowed to complete scan
@@ -69,4 +77,4 @@ options:
       usage: number of processing workers to spawn
 see_also:
     - ' - '
-aliases: 
+aliases:

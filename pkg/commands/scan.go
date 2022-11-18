@@ -30,6 +30,7 @@ Available Commands:{{range .Commands}}{{if (or .IsAvailableCommand (eq .Name "he
 
 var scanFlags = &flag.Flags{
 	ScanFlagGroup:    flag.NewScanFlagGroup(),
+	PolicyFlagGroup:  flag.NewPolicyFlagGroup(),
 	WorkerFlagGroup:  flag.NewWorkerFlagGroup(),
 	ReportFlagGroup:  flag.NewReportFlagGroup(),
 	GeneralFlagGroup: flag.NewGeneralFlagGroup(),

@@ -20,6 +20,10 @@ Scan Flags
       --quiet                                suppress non-essential messages
       --skip-path strings                    specify the comma separated files and directories to skip (supports * syntax), eg. --skip-path users/*.go,users/admin.sql
 
+Policy Flags
+      --only-policy strings   specify the comma separated ids of the policies you would like to run. Skips all other policies.
+      --skip-policy strings   specify the comma separated ids of the policies you would like to skip. Runs all other policies.
+
 Worker Flags
       --existing-worker string              URL of an existing worker
       --file-size-max int                   ignore files with file size larger than this config (default 25000000)
