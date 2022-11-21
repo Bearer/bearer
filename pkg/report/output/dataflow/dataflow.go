@@ -6,6 +6,7 @@ import (
 	"fmt"
 
 	"github.com/bearer/curio/pkg/commands/process/settings"
+	"github.com/bearer/curio/pkg/report/customdetectors"
 	"github.com/bearer/curio/pkg/report/detections"
 	"github.com/bearer/curio/pkg/report/output/dataflow/components"
 	"github.com/bearer/curio/pkg/report/output/dataflow/datatypes"
@@ -69,10 +70,22 @@ func GetOutput(input []interface{}, config settings.Config) (*DataFlow, error) {
 				return nil, err
 			}
 		case detections.TypeCustomClassified:
-			err := risksHolder.AddSchema(castDetection)
-			if err != nil {
-				return nil, err
+			ruleName := string(castDetection.DetectorType)
+			customDetector := config.CustomDetector[ruleName]
+
+			switch customDetector.Type {
+			case customdetectors.TypeRisk:
+				err := risksHolder.AddSchema(castDetection)
+				if err != nil {
+					return nil, err
+				}
+			case customdetectors.TypeDatatype:
+				err := dataTypesHolder.AddSchema(castDetection)
+				if err != nil {
+					return nil, err
+				}
 			}
+
 		case detections.TypeComputedDataflowRisk:
 			var risk types.RiskDetector
 

@@ -6,13 +6,13 @@ detect_ruby_logger:
   languages:
     - ruby
 detect_encrypted_ruby_class_properties:
+  type: "data_type"
   patterns:
     - |
       class $CLASS_NAME < ApplicationRecord
         encrypts <$ARGUMENT>
       end
   param_parenting: true
-  type: "data_type"
   languages:
     - ruby
 detect_sql_create_public_table:
