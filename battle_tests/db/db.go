@@ -13,15 +13,13 @@ import (
 var githubDir embed.FS
 
 type Category struct {
-	Items []Item `json:"items"`
+	Language string `json:"Language"`
+	Items    []Item `json:"items"`
 }
 
 type Item struct {
 	FullName string `json:"full_name"`
-}
-
-func (item Item) URL() string {
-	return fmt.Sprintf("https://github.com/%s", item.FullName)
+	HtmlUrl  string `json:"html_url"`
 }
 
 func UnmarshalRaw() []Item {
