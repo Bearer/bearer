@@ -8,6 +8,8 @@ type CompiledRule struct {
 	Params         []Param
 	Metavars       map[string]settings.MetaVar
 	ParamParenting bool
+	Singularize    bool
+	Lowercase      bool
 	Languages      []string
 }
 

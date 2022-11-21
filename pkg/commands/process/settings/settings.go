@@ -62,6 +62,8 @@ type Rule struct {
 	Languages      []string
 	Patterns       []string
 	ParamParenting bool `yaml:"param_parenting"`
+	Singularilize  bool
+	Lowercase      bool
 	Metavars       map[string]MetaVar
 	Stored         bool
 }
