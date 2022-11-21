@@ -166,7 +166,6 @@ func (report *Detectors) AddFramework(
 		classifiedDetection.CommitSHA = report.Blamer.SHAForLine(classifiedDetection.Source.Filename, *classifiedDetection.Source.LineNumber)
 	}
 
-	// @todo FIXME: Do we need to do anything with the `frameworkType`?
 	classifiedDetection.Type = detections.TypeFrameworkClassified
 	report.Add(classifiedDetection)
 }
