@@ -44,7 +44,10 @@ func (classifier *Classifier) Classify(data detections.Detection) (*ClassifiedDe
 	var classification *Classification
 	value, ok := data.Value.(dependencies.Dependency)
 	if !ok {
-		return nil, errors.New("detection is not an dependency")
+		return &ClassifiedDependency{
+			Detection:      &data,
+			Classification: classification,
+		}, errors.New("detection is not an dependency")
 	}
 
 	if classify.IsVendored(data.Source.Filename) {
@@ -72,6 +75,7 @@ func (classifier *Classifier) Classify(data detections.Detection) (*ClassifiedDe
 						Reason: "recipe_match",
 					},
 				}
+				break
 			}
 		}
 	}

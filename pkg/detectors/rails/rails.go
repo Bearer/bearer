@@ -110,7 +110,7 @@ func extractDatabases(file *file.FileInfo, report report.Report) error {
 	}
 
 	if database != nil {
-		report.AddFramework(detectors.DetectorRails, rails.TypeDatabase, database, *source)
+		report.AddFramework(detectors.DetectorRails, rails.TypeDatabase, *database, *source)
 	}
 
 	productionConfig := make(map[string]yaml.Node)
@@ -126,7 +126,7 @@ func extractDatabases(file *file.FileInfo, report report.Report) error {
 				return err
 			}
 			if database != nil {
-				report.AddFramework(detectors.DetectorRails, rails.TypeDatabase, database, *source)
+				report.AddFramework(detectors.DetectorRails, rails.TypeDatabase, *database, *source)
 			}
 		}
 	}

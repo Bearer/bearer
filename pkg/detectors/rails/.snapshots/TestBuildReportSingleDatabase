@@ -12,9 +12,9 @@
       ColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
-    Value: (*rails.Database)({
+    Value: (rails.Database) {
       Name: (string) "",
       Adapter: (string) (len=10) "postgresql"
-    })
+    }
   })
 }
