@@ -71,7 +71,14 @@ func GetOutput(input []interface{}, config settings.Config) (*DataFlow, error) {
 			}
 		case detections.TypeCustomClassified:
 			ruleName := string(castDetection.DetectorType)
-			customDetector := config.CustomDetector[ruleName]
+			customDetector, ok := config.CustomDetector[ruleName]
+			if !ok {
+				return nil, fmt.Errorf("there is a custom detector in report that is not in the config %s", ruleName)
+			}
+
+			if customDetector.Verifier {
+				continue
+			}
 
 			switch customDetector.Type {
 			case customdetectors.TypeRisk:
