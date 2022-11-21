@@ -9,7 +9,7 @@ result[item] {
     data_type = detector.data_types[_]
 
     some category in input.data_categories
-    category.name == data_type.category
+    category.uuid == data_type.category_uuid
 
     location = data_type.locations[_]
     item := {

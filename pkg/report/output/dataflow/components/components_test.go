@@ -124,7 +124,7 @@ func TestDataflowComponents(t *testing.T) {
 				return
 			}
 
-			dataflow, err := dataflow.GetOutput(detections, settings.Config{})
+			dataflow, err := dataflow.GetOutput(detections, settings.Config{}, false)
 			if err != nil {
 				t.Fatalf("failed to get detectors output %s", err)
 				return

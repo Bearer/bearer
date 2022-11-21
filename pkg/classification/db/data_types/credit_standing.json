@@ -1,7 +1,6 @@
 {
   "metadata": { "version": "1.0" },
-  "data_category_name": "Credit Standing",
-  "default_category": "Credit History",
-  "id": 17,
-  "uuid": "5ea382aa-c8c2-4045-90e8-1757478676be"
+  "name": "Credit Standing",
+  "uuid": "5ea382aa-c8c2-4045-90e8-1757478676be",
+  "category_uuid": "4eda81b6-1314-47e2-bc4e-59d6024be4f4"
 }

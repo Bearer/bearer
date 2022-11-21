@@ -1,7 +1,6 @@
 {
   "metadata": { "version": "1.0" },
-  "data_category_name": "Accents",
-  "default_category": "Ethnicity",
-  "id": 31,
-  "uuid": "7a7e79a5-dfdb-4d69-9f73-a140b72f932a"
+  "name": "Accents",
+  "uuid": "7a7e79a5-dfdb-4d69-9f73-a140b72f932a",
+  "category_uuid": "35b94efa-9b67-49b2-abb9-29b6a759a030"
 }

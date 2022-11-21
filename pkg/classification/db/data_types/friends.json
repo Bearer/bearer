@@ -1,7 +1,6 @@
 {
   "metadata": { "version": "1.0" },
-  "data_category_name": "Friends",
-  "default_category": "Social Network",
-  "id": 47,
-  "uuid": "e1a8aa98-9740-4c09-80e2-a189aa3585b3"
+  "name": "Friends",
+  "uuid": "e1a8aa98-9740-4c09-80e2-a189aa3585b3",
+  "category_uuid": "68631dba-5696-4cc0-b6a8-0175ca99a7a2"
 }

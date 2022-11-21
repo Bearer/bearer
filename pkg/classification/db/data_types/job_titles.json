@@ -1,7 +1,6 @@
 {
   "metadata": { "version": "1.0" },
-  "data_category_name": "Job Titles",
-  "default_category": "Professional Information",
-  "id": 53,
-  "uuid": "a2c85131-c59a-4e02-a2a4-5bed3f99b748"
+  "name": "Job Titles",
+  "uuid": "a2c85131-c59a-4e02-a2a4-5bed3f99b748",
+  "category_uuid": "ef613213-a222-4c01-ae38-c3043b68f738"
 }

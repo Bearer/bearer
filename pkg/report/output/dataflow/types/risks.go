@@ -6,10 +6,11 @@ type RiskDetector struct {
 }
 
 type RiskDatatype struct {
-	Name      string         `json:"name"`
-	Category  string         `json:"category"`
-	Stored    bool           `json:"stored"`
-	Locations []RiskLocation `json:"locations"`
+	Name         string         `json:"name"`
+	UUID         string         `json:"uuid,omitempty"`
+	CategoryUUID string         `json:"category_uuid,omitempty"`
+	Stored       bool           `json:"stored"`
+	Locations    []RiskLocation `json:"locations"`
 }
 
 type RiskLocation struct {

@@ -1,6 +1,6 @@
 {
   "metadata": { "version": "1.0" },
-  "uuid": "5e116e08-9d86-4b78-b2af-b345e82e1e9b",
   "name": "Computer Device",
-  "severity": "medium"
+  "severity": "medium",
+  "uuid": "b5a3b0fd-dd5c-420d-91ce-dd2dddc8cc38"
 }

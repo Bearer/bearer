@@ -60,7 +60,7 @@ func getReportOutput(report types.Report, config settings.Config) (any, error) {
 			return nil, err
 		}
 
-		return dataflow.GetOutput(detections, config)
+		return dataflow.GetOutput(detections, config, false)
 
 	} else if config.Report.Report == flag.ReportPolicies {
 		detections, err := detectors.GetOutput(report)
@@ -68,7 +68,7 @@ func getReportOutput(report types.Report, config settings.Config) (any, error) {
 			return nil, err
 		}
 
-		dataflow, err := dataflow.GetOutput(detections, config)
+		dataflow, err := dataflow.GetOutput(detections, config, true)
 		if err != nil {
 			return nil, err
 		}
@@ -85,7 +85,7 @@ func getReportOutput(report types.Report, config settings.Config) (any, error) {
 			return nil, err
 		}
 
-		dataflowOutput, err := dataflow.GetOutput(detectorsOutput, config)
+		dataflowOutput, err := dataflow.GetOutput(detectorsOutput, config, true)
 		if err != nil {
 			return nil, err
 		}

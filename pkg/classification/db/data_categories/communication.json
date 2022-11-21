@@ -1,6 +1,6 @@
 {
   "metadata": { "version": "1.0" },
-  "uuid": "b089d17c-9fcb-45f3-8b14-f2dc9eac26a6",
   "name": "Communication",
-  "severity": "high"
+  "severity": "high",
+  "uuid": "79a36d6e-c5ca-4f61-ba53-0d7ad42cbe5a"
 }

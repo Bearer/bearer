@@ -14,10 +14,9 @@ import (
 
 func TestSchemaObjectClassification(t *testing.T) {
 	knownObjectDataType := db.DataType{
-		DataCategoryName: "Unique Identifier",
-		DefaultCategory:  "Identification",
-		Id:               86,
-		UUID:             "12d44ae0-1df7-4faf-9fb1-b46cc4b4dce9",
+		Name:         "Unique Identifier",
+		CategoryUUID: "14124881-6b92-4fc5-8005-ea7c1c09592e",
+		UUID:         "12d44ae0-1df7-4faf-9fb1-b46cc4b4dce9",
 	}
 	tests := []struct {
 		Name  string

@@ -1,6 +1,6 @@
 {
   "metadata": { "version": "1.0" },
-  "uuid": "75b53b6a-2257-4be7-b3b1-1f4b0367e3f7",
   "name": "Location",
-  "severity": "high"
+  "severity": "high",
+  "uuid": "c6622b62-bc22-4c0c-a2e4-5fc97d99e11a"
 }

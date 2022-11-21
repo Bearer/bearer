@@ -1,6 +1,6 @@
 {
   "metadata": { "version": "1.0" },
-  "uuid": "f72d3ea0-d7a2-4279-8686-59da3780c211",
   "name": "Identification",
-  "severity": "critical"
+  "severity": "critical",
+  "uuid": "14124881-6b92-4fc5-8005-ea7c1c09592e"
 }

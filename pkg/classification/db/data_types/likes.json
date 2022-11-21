@@ -1,7 +1,6 @@
 {
   "metadata": { "version": "1.0" },
-  "data_category_name": "Likes",
-  "default_category": "Preference",
-  "id": 77,
-  "uuid": "ce529b86-22cf-4984-b697-175602e7b64c"
+  "name": "Likes",
+  "uuid": "ce529b86-22cf-4984-b697-175602e7b64c",
+  "category_uuid": "bc536e1e-e0d1-4b88-96d2-a2eaad1620d4"
 }

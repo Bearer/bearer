@@ -1,7 +1,6 @@
 {
   "metadata": { "version": "1.0" },
-  "data_category_name": "Attitude",
-  "default_category": "Identification",
-  "id": 79,
-  "uuid": "caaaf03c-e684-4ec0-8772-04fbd9fc7397"
+  "name": "Attitude",
+  "uuid": "caaaf03c-e684-4ec0-8772-04fbd9fc7397",
+  "category_uuid": "14124881-6b92-4fc5-8005-ea7c1c09592e"
 }

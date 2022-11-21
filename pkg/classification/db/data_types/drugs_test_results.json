@@ -1,7 +1,6 @@
 {
   "metadata": { "version": "1.0" },
-  "data_category_name": "Drugs test results",
-  "default_category": "Medical and Health",
-  "id": 41,
-  "uuid": "d790d130-e459-468e-ab98-153059e065c7"
+  "name": "Drugs test results",
+  "uuid": "d790d130-e459-468e-ab98-153059e065c7",
+  "category_uuid": "7b1d36e7-46f9-4664-85a2-44fb15fbefd1"
 }

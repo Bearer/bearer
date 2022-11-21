@@ -1,6 +1,6 @@
 {
   "metadata": { "version": "1.0" },
-  "uuid": "6fac9d01-6831-47ea-a4e1-94f62e963e45",
   "name": "Preference",
-  "severity": "medium"
+  "severity": "medium",
+  "uuid": "bc536e1e-e0d1-4b88-96d2-a2eaad1620d4"
 }

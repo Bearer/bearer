@@ -116,7 +116,7 @@ func (client *GoogleSheets) CreateDocument(tagName string, parentFolderId string
 		for index := range data_types {
 			headerCells = append(headerCells, &sheets.CellData{
 				UserEnteredValue: &sheets.ExtendedValue{
-					StringValue: &data_types[index].DataCategoryName,
+					StringValue: &data_types[index].Name,
 				},
 			})
 		}
@@ -253,10 +253,10 @@ func (client *GoogleSheets) InsertMetrics(documentID string, metrics *metricssca
 
 	empty_value := float64(0)
 	for _, data_type := range db.Default().DataTypes {
-		if _, exists := holder[data_type.DataCategoryName]; exists {
+		if _, exists := holder[data_type.Name]; exists {
 			values = append(values, &sheets.CellData{
 				UserEnteredValue: &sheets.ExtendedValue{
-					NumberValue: holder[data_type.DataCategoryName].occurrences,
+					NumberValue: holder[data_type.Name].occurrences,
 				},
 			})
 		} else {

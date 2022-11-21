@@ -1,7 +1,6 @@
 {
   "metadata": { "version": "1.0" },
-  "data_category_name": "General Reputation",
-  "default_category": "Public Life",
-  "id": 74,
-  "uuid": "81df7297-4823-41ea-b0bb-4d56bbd36104"
+  "name": "General Reputation",
+  "uuid": "81df7297-4823-41ea-b0bb-4d56bbd36104",
+  "category_uuid": "e354099e-b80c-47b5-a86c-8d936b520387"
 }

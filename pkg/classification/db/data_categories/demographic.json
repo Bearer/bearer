@@ -1,6 +1,6 @@
 {
   "metadata": { "version": "1.0" },
-  "uuid": "57880e92-e6f8-48a9-9b05-e3ebc4dbe919",
   "name": "Demographic",
-  "severity": "medium"
+  "severity": "medium",
+  "uuid": "c3119d43-0562-48ac-9a8e-7217aa8686b8"
 }

@@ -1,7 +1,6 @@
 {
   "metadata": { "version": "1.0" },
-  "data_category_name": "Telephone Recordings",
-  "default_category": "Communication",
-  "id": 5,
-  "uuid": "400ec4ad-6861-450e-822d-23544125c3cf"
+  "name": "Telephone Recordings",
+  "uuid": "400ec4ad-6861-450e-822d-23544125c3cf",
+  "category_uuid": "79a36d6e-c5ca-4f61-ba53-0d7ad42cbe5a"
 }

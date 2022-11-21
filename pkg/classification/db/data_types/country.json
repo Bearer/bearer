@@ -1,7 +1,6 @@
 {
   "metadata": { "version": "1.0" },
-  "data_category_name": "Country",
-  "default_category": "Location",
-  "id": 32,
-  "uuid": "070e6670-c3d6-42e4-8007-af8eae2647f5"
+  "name": "Country",
+  "uuid": "070e6670-c3d6-42e4-8007-af8eae2647f5",
+  "category_uuid": "c6622b62-bc22-4c0c-a2e4-5fc97d99e11a"
 }

@@ -1,7 +1,6 @@
 {
   "metadata": { "version": "1.0" },
-  "data_category_name": "Interviews",
-  "default_category": "Professional Information",
-  "id": 52,
-  "uuid": "c49371af-543c-4700-9420-e049ffc4cf02"
+  "name": "Interviews",
+  "uuid": "c49371af-543c-4700-9420-e049ffc4cf02",
+  "category_uuid": "ef613213-a222-4c01-ae38-c3043b68f738"
 }

@@ -1,7 +1,6 @@
 {
   "metadata": { "version": "1.0" },
-  "data_category_name": "Passport Number",
-  "default_category": "Identification",
-  "id": 35,
-  "uuid": "318d53ae-8b46-490e-9a44-1bc597205197"
+  "name": "Passport Number",
+  "uuid": "318d53ae-8b46-490e-9a44-1bc597205197",
+  "category_uuid": "14124881-6b92-4fc5-8005-ea7c1c09592e"
 }

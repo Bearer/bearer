@@ -1,6 +1,6 @@
 {
   "metadata": { "version": "1.0" },
-  "uuid": "b1740ff1-64c1-453e-ba80-91d238b0692e",
   "name": "Financial Accounts",
-  "severity": "high"
+  "severity": "high",
+  "uuid": "7a794bd6-a6d1-429d-91a2-377acce9e9db"
 }

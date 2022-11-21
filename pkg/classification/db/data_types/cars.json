@@ -1,7 +1,6 @@
 {
   "metadata": { "version": "1.0" },
-  "data_category_name": "Cars",
-  "default_category": "Personal Ownership",
-  "id": 36,
-  "uuid": "8c4f7dd0-1cdc-4edf-bc6d-e7846bb2af21"
+  "name": "Cars",
+  "uuid": "8c4f7dd0-1cdc-4edf-bc6d-e7846bb2af21",
+  "category_uuid": "ebaa9c6a-8fbf-4e45-85e1-40799dfac414"
 }

@@ -1,7 +1,6 @@
 {
   "metadata": { "version": "1.0" },
-  "data_category_name": "Credit Capacity",
-  "default_category": "Credit History",
-  "id": 18,
-  "uuid": "802041a1-e893-42f4-acc2-882a8fa0237e"
+  "name": "Credit Capacity",
+  "uuid": "802041a1-e893-42f4-acc2-882a8fa0237e",
+  "category_uuid": "4eda81b6-1314-47e2-bc4e-59d6024be4f4"
 }

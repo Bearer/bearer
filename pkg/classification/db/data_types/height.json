@@ -1,7 +1,6 @@
 {
   "metadata": { "version": "1.0" },
-  "data_category_name": "Height",
-  "default_category": "Physical Characteristic",
-  "id": 101,
-  "uuid": "9e8dd1d2-2254-4129-a7c7-55acaea5e5ab"
+  "name": "Height",
+  "uuid": "9e8dd1d2-2254-4129-a7c7-55acaea5e5ab",
+  "category_uuid": "94007e1e-57d8-43e8-90f2-246236dc5dde"
 }

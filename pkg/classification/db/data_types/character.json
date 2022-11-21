@@ -1,7 +1,6 @@
 {
   "metadata": { "version": "1.0" },
-  "data_category_name": "Character",
-  "default_category": "Public Life",
-  "id": 113,
-  "uuid": "d0bd93bb-b5f8-4024-8107-db162cefb09a"
+  "name": "Character",
+  "uuid": "d0bd93bb-b5f8-4024-8107-db162cefb09a",
+  "category_uuid": "e354099e-b80c-47b5-a86c-8d936b520387"
 }

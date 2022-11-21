@@ -1,7 +1,6 @@
 {
   "metadata": { "version": "1.0" },
-  "data_category_name": "Convictions",
-  "default_category": "Criminal Records",
-  "id": 19,
-  "uuid": "d2c51707-9673-48b4-add6-4a9e6a2cc5f3"
+  "name": "Convictions",
+  "uuid": "d2c51707-9673-48b4-add6-4a9e6a2cc5f3",
+  "category_uuid": "5ab40519-89e8-4e4e-b2ef-2dabc13b352a"
 }

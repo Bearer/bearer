@@ -1,7 +1,6 @@
 {
   "metadata": { "version": "1.0" },
-  "data_category_name": "Disciplinary Actions",
-  "default_category": "Professional Information",
-  "id": 51,
-  "uuid": "7bdba961-47c0-4818-91e1-e2af21bcf582"
+  "name": "Disciplinary Actions",
+  "uuid": "7bdba961-47c0-4818-91e1-e2af21bcf582",
+  "category_uuid": "ef613213-a222-4c01-ae38-c3043b68f738"
 }

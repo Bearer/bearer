@@ -1,7 +1,6 @@
 {
   "metadata": { "version": "1.0" },
-  "data_category_name": "Relationships",
-  "default_category": "Family",
-  "id": 122,
-  "uuid": "430a927b-d762-48dd-9e04-0f897c3776a2"
+  "name": "Relationships",
+  "uuid": "430a927b-d762-48dd-9e04-0f897c3776a2",
+  "category_uuid": "e4d1e39a-6380-4da0-9596-642777f1b76d"
 }
