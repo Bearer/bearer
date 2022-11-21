@@ -4,7 +4,7 @@ usage: ' config [flags] DIR'
 options:
     - name: context
       usage: |
-        Expand context of schema classification e.g. `--context=health to include data types particular to health`
+        Expand context of schema classification e.g. `--context=health` to include data types particular to health
     - name: disable-domain-resolution
       default_value: "false"
       usage: |
@@ -12,7 +12,7 @@ options:
     - name: domain-resolution-timeout
       default_value: 3s
       usage: |
-        Set timeout when attempting to resolve detected domains during classification (default 3 seconds), e.g. `--domain-resolution-timeout=TODO`
+        Set timeout when attempting to resolve detected domains during classification (default 3 seconds), e.g. `--domain-resolution-timeout=3s`
     - name: help
       shorthand: h
       default_value: "false"
@@ -24,7 +24,7 @@ options:
     - name: skip-path
       default_value: '[]'
       usage: |
-        Specify the comma separated files and directories to skip. Supports * syntax, e.g. --skip-path users/*.go,users/admin.sql
+        Specify the comma separated files and directories to skip. Supports * syntax, e.g. `--skip-path users/*.go,users/admin.sql`
 see_also:
     - ' - '
 aliases: conf
