@@ -52,7 +52,7 @@ Learn More:
 	APIs. You can run Curio locally or as part of your CI/CD pipeline.
 	
 	For more examples, tutorials, and to learn more about the project 
-	visit https://bearer.github.io/curio
+	visit https://curio.sh
 `
 
 	cmd := &cobra.Command{
