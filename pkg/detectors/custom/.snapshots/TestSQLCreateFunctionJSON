@@ -7,25 +7,6 @@
 			"language": "PLpgSQL",
 			"language_type": "programming",
 			"line_number": 1,
-			"column_number": 28,
-			"text": null
-		},
-		"value": {
-			"object_name": "",
-			"field_name": "anon_account",
-			"field_type": "",
-			"field_type_simple": "object",
-			"classification": null
-		}
-	},
-	{
-		"type": "custom",
-		"detector_type": "create_sql_function_detector",
-		"source": {
-			"filename": "structure.sql",
-			"language": "PLpgSQL",
-			"language_type": "programming",
-			"line_number": 1,
 			"column_number": 64,
 			"text": null
 		},

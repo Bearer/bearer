@@ -94,25 +94,25 @@ type DataTypable interface {
 	SetProperty(string, DataTypable)
 }
 
-func ExportClassified[D DataTypable](report detections.ReportDetection, detectionType detections.DetectionType, detectorType detectors.Type, idGenerator nodeid.Generator, ignoreFirst bool, values map[parser.NodeID]D) {
-	exportSchemas(report, detectionType, detectorType, idGenerator, ignoreFirst, values)
+func ExportClassified[D DataTypable](report detections.ReportDetection, detectionType detections.DetectionType, detectorType detectors.Type, idGenerator nodeid.Generator, values map[parser.NodeID]D) {
+	exportSchemas(report, detectionType, detectorType, idGenerator, values)
 }
 
 func Export[D DataTypable](report detections.ReportDetection, detectionType detections.DetectionType, detectorType detectors.Type, idGenerator nodeid.Generator, values map[parser.NodeID]D) {
 	if detectionType == detections.TypeCustom {
-		exportSchemas(report, detectionType, detectorType, idGenerator, false, values)
+		exportSchemas(report, detectionType, detectorType, idGenerator, values)
 		return
 	}
-	exportSchemas(report, detectionType, detectorType, idGenerator, true, values)
+	exportSchemas(report, detectionType, detectorType, idGenerator, values)
 }
 
-func exportSchemas[D DataTypable](report detections.ReportDetection, detectionType detections.DetectionType, detectorType detectors.Type, idGenerator nodeid.Generator, ignoreFirst bool, values map[parser.NodeID]D) {
+func exportSchemas[D DataTypable](report detections.ReportDetection, detectionType detections.DetectionType, detectorType detectors.Type, idGenerator nodeid.Generator, values map[parser.NodeID]D) {
 	sortedDataTypes := SortParserMap(values)
 
 	parentName := ""
 	parentUUID := idGenerator.GenerateId()
 	for _, value := range sortedDataTypes {
-		dataTypeToSchema(report, detectionType, detectorType, idGenerator, value, parentName, parentUUID, !ignoreFirst)
+		dataTypeToSchema(report, detectionType, detectorType, idGenerator, value, parentName, parentUUID, false)
 	}
 }
 

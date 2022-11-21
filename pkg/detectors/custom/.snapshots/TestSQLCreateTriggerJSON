@@ -7,25 +7,6 @@
    "language": "SQL",
    "language_type": "data",
    "line_number": 1,
-   "column_number": 65,
-   "text": null
-  },
-  "value": {
-   "object_name": "",
-   "field_name": "accounts",
-   "field_type": "",
-   "field_type_simple": "object",
-   "classification": null
-  }
- },
- {
-  "type": "custom",
-  "detector_type": "sql_create_trigger_detector",
-  "source": {
-   "filename": "trigger.sql",
-   "language": "SQL",
-   "language_type": "data",
-   "line_number": 1,
    "column_number": 105,
    "text": null
   },
