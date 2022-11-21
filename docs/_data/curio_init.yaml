@@ -6,18 +6,18 @@ options:
       usage: Load configuration from the defined path
     - name: context
       usage: |
-        Expand context of schema classification e.g. `--context=health` to include data types particular to health
+        Expand context of schema classification e.g., --context=health, to include data types particular to health
     - name: debug
       default_value: "false"
       usage: Enable debug logs
     - name: disable-domain-resolution
       default_value: "false"
       usage: |
-        Do not attempt to resolve detected domains during classification (default false), e.g. `--disable-domain-resolution=true`
+        Do not attempt to resolve detected domains during classification (default false), e.g. --disable-domain-resolution=true
     - name: domain-resolution-timeout
       default_value: 3s
       usage: |
-        Set timeout when attempting to resolve detected domains during classification (default 3 seconds), e.g. `--domain-resolution-timeout=3s`
+        Set timeout when attempting to resolve detected domains during classification (default 3 seconds), e.g. --domain-resolution-timeout=3s
     - name: existing-worker
       usage: URL of an existing worker
     - name: file-size-max
@@ -37,7 +37,7 @@ options:
     - name: internal-domains
       default_value: '[]'
       usage: |
-        Define regular expressions for better classification of private or unreachable domains e.g. `--internal-domains="*.my-company.com,private.sh"`
+        Define regular expressions for better classification of private or unreachable domains e.g. --internal-domains="*.my-company.com,private.sh"
     - name: memory-max
       default_value: "800000000"
       usage: |
@@ -58,7 +58,7 @@ options:
     - name: skip-path
       default_value: '[]'
       usage: |
-        Specify the comma separated files and directories to skip. Supports * syntax, e.g. `--skip-path users/*.go,users/admin.sql`
+        Specify the comma separated files and directories to skip. Supports * syntax, e.g. --skip-path users/*.go,users/admin.sql
     - name: skip-policy
       default_value: '[]'
       usage: |

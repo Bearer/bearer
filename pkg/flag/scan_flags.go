@@ -16,7 +16,7 @@ var (
 		Name:       "skip-path",
 		ConfigName: "scan.skip-path",
 		Value:      []string{},
-		Usage:      "Specify the comma separated files and directories to skip. Supports * syntax, e.g. `--skip-path users/*.go,users/admin.sql`",
+		Usage:      "Specify the comma separated files and directories to skip. Supports * syntax, e.g. --skip-path users/*.go,users/admin.sql",
 	}
 	DebugFlag = Flag{
 		Name:       "debug",
@@ -28,25 +28,25 @@ var (
 		Name:       "disable-domain-resolution",
 		ConfigName: "scan.disable-domain-resolution",
 		Value:      false,
-		Usage:      "Do not attempt to resolve detected domains during classification (default false), e.g. `--disable-domain-resolution=true`",
+		Usage:      "Do not attempt to resolve detected domains during classification (default false), e.g. --disable-domain-resolution=true",
 	}
 	DomainResolutionTimeoutFlag = Flag{
 		Name:       "domain-resolution-timeout",
 		ConfigName: "scan.domain-resolution-timeout",
 		Value:      3 * time.Second,
-		Usage:      "Set timeout when attempting to resolve detected domains during classification (default 3 seconds), e.g. `--domain-resolution-timeout=3s`",
+		Usage:      "Set timeout when attempting to resolve detected domains during classification (default 3 seconds), e.g. --domain-resolution-timeout=3s",
 	}
 	InternalDomainsFlag = Flag{
 		Name:       "internal-domains",
 		ConfigName: "scan.internal-domains",
 		Value:      []string{},
-		Usage:      "Define regular expressions for better classification of private or unreachable domains e.g. `--internal-domains=\"*.my-company.com,private.sh\"`",
+		Usage:      "Define regular expressions for better classification of private or unreachable domains e.g. --internal-domains=\"*.my-company.com,private.sh\"",
 	}
 	ContextFlag = Flag{
 		Name:       "context",
 		ConfigName: "scan.context",
 		Value:      "",
-		Usage:      "Expand context of schema classification e.g. `--context=health` to include data types particular to health",
+		Usage:      "Expand context of schema classification e.g., --context=health, to include data types particular to health",
 	}
 	QuietFlag = Flag{
 		Name:       "quiet",
