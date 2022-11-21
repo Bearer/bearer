@@ -1,4 +1,5 @@
 detect_ruby_logger:
+  type: "risk"
   patterns:
     - |
       logger.info(<$ARGUMENT>)
@@ -11,18 +12,16 @@ detect_encrypted_ruby_class_properties:
         encrypts <$ARGUMENT>
       end
   param_parenting: true
-  singularize: true
-  lowercase: true
+  type: "data_type"
   languages:
     - ruby
 detect_sql_create_public_table:
+  type: "data_type"
   patterns:
     - |
       CREATE TABLE public.$TABLE_NAME (
         <$COLUMN>
       )
   param_parenting: true
-  singularize: true
-  lowercase: true
   languages:
     - sql
