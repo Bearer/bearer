@@ -72,8 +72,8 @@ func DoWork(ctx context.Context, items []repodb.Item, docID string, sheetClient 
 
 			metricsReport := make(chan *metricsscan.MetricsReport, 1)
 
-			log.Debug().Msgf("picked up work for %s", repository.URL())
-			metricsscan.ScanRepository(repository.URL(), metricsReport)
+			log.Debug().Msgf("picked up work for %s", repository.FullName)
+			metricsscan.ScanRepository(repository.HtmlUrl, metricsReport)
 			// Uncomment this line if you want to fake the process
 			// metricsscan.FakeScanRepository(repository.URL(), metricsReport)
 

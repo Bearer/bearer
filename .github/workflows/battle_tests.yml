@@ -1,6 +1,16 @@
 name: Battle Tests
 on:
   workflow_dispatch:
+    inputs:
+      concurrent_number:
+        description: "Concurrent number of workers"
+        required: true
+        default: "5"
+        type: choice
+        options:
+          - 5
+          - 25
+          - 100
 
 permissions:
   contents: write
@@ -80,4 +90,4 @@ jobs:
           TASK_DEFINITION: ${{ secrets.TASK_DEFINITION }}
           SUBNET: ${{ secrets.SUBNET }}
           SECURITY_GROUP: ${{ secrets.SECURITY_GROUP }}
-          CONCURRENT_TASKS: 5
+          CONCURRENT_TASKS: ${{ inputs.concurrent_number }}
