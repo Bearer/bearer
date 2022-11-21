@@ -32,7 +32,7 @@ Curio detections, classifications and policies are fully customizable.
 
 Curio also powers [Bearer](https://www.bearer.com), the developer-first platform to proactively find and fix data security risks and vulnerabilities across your development lifecycle
 
-[Read the docs](/docs/) to learn more and get started.
+[Read the docs](https://curio.sh) to learn more and get started.
 
 ## Getting started
 
@@ -84,7 +84,7 @@ curio scan ./curio-ci-test/Pipfile.lock
 
 <!-- TODO: insert sample output or video here -->
 
-Additional options for using and configuring the `scan` command can be found in the [scan documentation](docs/reference/commands.md#scan).
+Additional options for using and configuring the `scan` command can be found in the [scan documentation](https://curio.sh/reference/commands/#scan).
 
 ## Contributing
 
@@ -96,7 +96,7 @@ Everyone interacting with this project is expected to follow the guidelines of o
 
 ## License
 
-<!-- TBD -->
+Curio code is licensed under the terms of the [Elastic License 2.0](LICENSE.txt) (ELv2).
 
 ---
 
