@@ -35,6 +35,7 @@ func TestFrameworks(t *testing.T) {
 			Want: &frameworks.Classification{
 				RecipeMatch: true,
 				RecipeName:  "Redis",
+				RecipeUUID:  "62c20409-c1bf-4be9-a859-6fe6be7b11e3",
 				Decision: classify.ClassificationDecision{
 					State:  classify.Valid,
 					Reason: "recipe_match",
@@ -59,6 +60,7 @@ func TestFrameworks(t *testing.T) {
 			Want: &frameworks.Classification{
 				RecipeMatch: true,
 				RecipeName:  "PostgreSQL",
+				RecipeUUID:  "428ff7dd-22ea-4e80-8755-84c70cf460db",
 				Decision: classify.ClassificationDecision{
 					State:  classify.Valid,
 					Reason: "recipe_match",
@@ -84,6 +86,7 @@ func TestFrameworks(t *testing.T) {
 			Want: &frameworks.Classification{
 				RecipeMatch: true,
 				RecipeName:  "AWS S3",
+				RecipeUUID:  "4e5a3a3a-47cd-4b0e-b0a6-fa30a0a62499",
 				Decision: classify.ClassificationDecision{
 					State:  classify.Valid,
 					Reason: "recipe_match",

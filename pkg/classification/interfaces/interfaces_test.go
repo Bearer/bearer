@@ -44,6 +44,7 @@ func TestInterface(t *testing.T) {
 			Want: &interfaces.Classification{
 				URL:         "https://api.stripe.com",
 				RecipeName:  "Stripe",
+				RecipeUUID:  "c24b836a-d035-49dc-808f-1912f16f690d",
 				RecipeMatch: true,
 				Decision: classify.ClassificationDecision{
 					State:  classify.Valid,
@@ -100,6 +101,7 @@ func TestInterface(t *testing.T) {
 			Want: &interfaces.Classification{
 				URL:         "http://*.stripe.com",
 				RecipeName:  "Stripe",
+				RecipeUUID:  "c24b836a-d035-49dc-808f-1912f16f690d",
 				RecipeMatch: true,
 				Decision: classify.ClassificationDecision{
 					State:  classify.Potential,
@@ -129,6 +131,7 @@ func TestInterface(t *testing.T) {
 			Want: &interfaces.Classification{
 				URL:         "https://googleapis.com/auth/spreadsheets",
 				RecipeName:  "Google Spreadsheets",
+				RecipeUUID:  "ebe2e05e-bc56-4204-9329-d9b8d3cf1837",
 				RecipeMatch: true,
 				Decision: classify.ClassificationDecision{
 					State:  classify.Valid,
@@ -217,6 +220,7 @@ func TestInterface(t *testing.T) {
 type recipeMatchTestCase struct {
 	Name         string
 	RecipeName   string
+	RecipeUUID   string
 	DetectionURL string
 	RecipeURLs   []string
 	Want         *interfaces.RecipeURLMatch
@@ -228,12 +232,14 @@ func TestFindMatchingRecipeUrl(t *testing.T) {
 			Name:         "when multiple recipes match",
 			DetectionURL: "https://api.eu-west.example.com",
 			RecipeName:   "Example API",
+			RecipeUUID:   "c9e1ddc3-3a66-424b-87aa-8efa831e7018",
 			RecipeURLs: []string{
 				"https://api.*.example.com",
 				"https://api.eu-west.example.com",
 			},
 			Want: &interfaces.RecipeURLMatch{
 				RecipeName:       "Example API",
+				RecipeUUID:       "c9e1ddc3-3a66-424b-87aa-8efa831e7018",
 				RecipeURL:        "https://api.eu-west.example.com",
 				DetectionURLPart: "https://api.eu-west.example.com",
 			},
@@ -242,6 +248,7 @@ func TestFindMatchingRecipeUrl(t *testing.T) {
 			Name:         "when no recipes match",
 			DetectionURL: "http://no-match.example.com",
 			RecipeName:   "Example API",
+			RecipeUUID:   "7491d557-7f4a-40df-ad10-f20d28c8dc9b",
 			RecipeURLs: []string{
 				"https://api.*.example.com",
 				"https://api.eu-west.example.com",
@@ -252,12 +259,14 @@ func TestFindMatchingRecipeUrl(t *testing.T) {
 			Name:         "when multiple recipes with the same url length match and one has a wildcard",
 			DetectionURL: "https://api.1.example.com",
 			RecipeName:   "Example API",
+			RecipeUUID:   "9114c888-b5b4-415b-9988-542279a6d79a",
 			RecipeURLs: []string{
 				"https://api.1.example.com",
 				"https://api.*.example.com",
 			},
 			Want: &interfaces.RecipeURLMatch{
 				RecipeName:       "Example API",
+				RecipeUUID:       "9114c888-b5b4-415b-9988-542279a6d79a",
 				RecipeURL:        "https://api.1.example.com",
 				DetectionURLPart: "https://api.1.example.com",
 			},
@@ -269,6 +278,7 @@ func TestFindMatchingRecipeUrl(t *testing.T) {
 			classifier, err := interfaces.New(interfaces.Config{
 				Recipes: []db.Recipe{
 					{
+						UUID: testCase.RecipeUUID,
 						Name: testCase.RecipeName,
 						URLS: testCase.RecipeURLs,
 					},
