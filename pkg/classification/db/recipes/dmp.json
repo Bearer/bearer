@@ -2,6 +2,9 @@
   "metadata": { "version": "1.0" },
   "name": "DMP",
   "type": "external_service",
-  "urls": ["https://lps2.dmp.gouv.fr/si-dmp-server/*"],
-  "packages": []
+  "urls": [
+    "https://lps2.dmp.gouv.fr/si-dmp-server/*"
+  ],
+  "packages": [],
+  "uuid": "f819829d-6608-440a-8f54-7273e5eb5d16"
 }

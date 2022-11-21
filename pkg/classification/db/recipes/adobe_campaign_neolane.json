@@ -3,5 +3,12 @@
   "name": "Adobe Campaign (Neolane)",
   "type": "external_service",
   "urls": [],
-  "packages": [{ "name": "Neolane", "group": null, "package_manager": "nuget" }]
+  "packages": [
+    {
+      "name": "Neolane",
+      "group": null,
+      "package_manager": "nuget"
+    }
+  ],
+  "uuid": "d3b1bf1b-f2b0-497a-85e2-9627fc0eedc1"
 }

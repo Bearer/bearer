@@ -2,6 +2,9 @@
   "metadata": { "version": "1.0" },
   "name": "Bitrise",
   "type": "external_service",
-  "urls": ["https://api.bitrise.io"],
-  "packages": []
+  "urls": [
+    "https://api.bitrise.io"
+  ],
+  "packages": [],
+  "uuid": "cea8c6bb-2804-484d-98fe-2d8cc39057de"
 }

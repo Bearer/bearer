@@ -4,20 +4,36 @@
   "type": "data_store",
   "urls": [],
   "packages": [
-    { "name": "pg", "group": null, "package_manager": "rubygems" },
-    { "name": "pg", "group": null, "package_manager": "npm" },
+    {
+      "name": "pg",
+      "group": null,
+      "package_manager": "rubygems"
+    },
+    {
+      "name": "pg",
+      "group": null,
+      "package_manager": "npm"
+    },
     {
       "name": "github.com/jackc/pgconn",
       "group": null,
       "package_manager": "go"
     },
-    { "name": "github.com/lib/pq", "group": null, "package_manager": "go" },
+    {
+      "name": "github.com/lib/pq",
+      "group": null,
+      "package_manager": "go"
+    },
     {
       "name": "quarkus-jdbc-postgresql",
       "group": "io.quarkus",
       "package_manager": "maven"
     },
-    { "name": "dbt-postgres", "group": null, "package_manager": "pypi" },
+    {
+      "name": "dbt-postgres",
+      "group": null,
+      "package_manager": "pypi"
+    },
     {
       "name": "postgres-socket-factory",
       "group": "com.google.cloud.sql",
@@ -28,12 +44,36 @@
       "group": null,
       "package_manager": "go"
     },
-    { "name": "connect-pg-simple", "group": null, "package_manager": "npm" },
-    { "name": "ext-pgsql", "group": null, "package_manager": "packagist" },
-    { "name": "NpgSql", "group": null, "package_manager": "nuget" },
-    { "name": "PyGreSQL", "group": null, "package_manager": "pypi" },
-    { "name": "postgres", "group": null, "package_manager": "npm" },
-    { "name": "ts-postgres", "group": null, "package_manager": "npm" },
+    {
+      "name": "connect-pg-simple",
+      "group": null,
+      "package_manager": "npm"
+    },
+    {
+      "name": "ext-pgsql",
+      "group": null,
+      "package_manager": "packagist"
+    },
+    {
+      "name": "NpgSql",
+      "group": null,
+      "package_manager": "nuget"
+    },
+    {
+      "name": "PyGreSQL",
+      "group": null,
+      "package_manager": "pypi"
+    },
+    {
+      "name": "postgres",
+      "group": null,
+      "package_manager": "npm"
+    },
+    {
+      "name": "ts-postgres",
+      "group": null,
+      "package_manager": "npm"
+    },
     {
       "name": "postgresql",
       "group": "org.postgresql",
@@ -44,15 +84,36 @@
       "group": "org.postgresql",
       "package_manager": "maven"
     },
-    { "name": "Npgsql", "group": null, "package_manager": "nuget" },
-    { "name": "psycopg2", "group": null, "package_manager": "pypi" },
-    { "name": "github.com/go-pg/pg", "group": null, "package_manager": "go" },
+    {
+      "name": "Npgsql",
+      "group": null,
+      "package_manager": "nuget"
+    },
+    {
+      "name": "psycopg2",
+      "group": null,
+      "package_manager": "pypi"
+    },
+    {
+      "name": "github.com/go-pg/pg",
+      "group": null,
+      "package_manager": "go"
+    },
     {
       "name": "gopkg.in/src-d/go-kallax.v1",
       "group": null,
       "package_manager": "go"
     },
-    { "name": "pgdb", "group": null, "package_manager": "pypi" },
-    { "name": "pg", "group": null, "package_manager": "pypi" }
-  ]
+    {
+      "name": "pgdb",
+      "group": null,
+      "package_manager": "pypi"
+    },
+    {
+      "name": "pg",
+      "group": null,
+      "package_manager": "pypi"
+    }
+  ],
+  "uuid": "428ff7dd-22ea-4e80-8755-84c70cf460db"
 }

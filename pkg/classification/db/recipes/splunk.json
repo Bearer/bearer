@@ -2,8 +2,15 @@
   "metadata": { "version": "1.0" },
   "name": "Splunk",
   "type": "external_service",
-  "urls": ["https://*.splunkcloud.com"],
+  "urls": [
+    "https://*.splunkcloud.com"
+  ],
   "packages": [
-    { "name": "splunk-sdk", "group": null, "package_manager": "pypi" }
-  ]
+    {
+      "name": "splunk-sdk",
+      "group": null,
+      "package_manager": "pypi"
+    }
+  ],
+  "uuid": "b3361c33-b5c1-4504-9d37-7eca52286780"
 }

@@ -39,11 +39,16 @@
       "group": "com.spotify",
       "package_manager": "maven"
     },
-    { "name": "apache-beam", "group": null, "package_manager": "pypi" },
+    {
+      "name": "apache-beam",
+      "group": null,
+      "package_manager": "pypi"
+    },
     {
       "name": "scio-core_2.11",
       "group": "com.spotify",
       "package_manager": "maven"
     }
-  ]
+  ],
+  "uuid": "868baac0-35f1-432d-bfde-e9416a987c4d"
 }

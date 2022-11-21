@@ -2,10 +2,21 @@
   "metadata": { "version": "1.0" },
   "name": "Airbrake",
   "type": "external_service",
-  "urls": ["https://airbrake.io/api", "https://api.airbrake.io"],
+  "urls": [
+    "https://airbrake.io/api",
+    "https://api.airbrake.io"
+  ],
   "packages": [
-    { "name": "airbrake", "group": null, "package_manager": "rubygems" },
-    { "name": "airbrake-ruby", "group": null, "package_manager": "rubygems" },
+    {
+      "name": "airbrake",
+      "group": null,
+      "package_manager": "rubygems"
+    },
+    {
+      "name": "airbrake-ruby",
+      "group": null,
+      "package_manager": "rubygems"
+    },
     {
       "name": "gopkg.in/gemnasium/logrus-airbrake-hook.v2",
       "group": null,
@@ -16,6 +27,11 @@
       "group": null,
       "package_manager": "go"
     },
-    { "name": "airbrake-js", "group": null, "package_manager": "npm" }
-  ]
+    {
+      "name": "airbrake-js",
+      "group": null,
+      "package_manager": "npm"
+    }
+  ],
+  "uuid": "d5a2adb3-de91-40a8-bf34-3421527183b8"
 }

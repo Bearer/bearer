@@ -4,6 +4,11 @@
   "type": "data_store",
   "urls": [],
   "packages": [
-    { "name": "databricks-cli", "group": null, "package_manager": "pypi" }
-  ]
+    {
+      "name": "databricks-cli",
+      "group": null,
+      "package_manager": "pypi"
+    }
+  ],
+  "uuid": "12b94e84-ba8a-4dca-83d6-8b778f2f0177"
 }

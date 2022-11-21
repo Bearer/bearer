@@ -2,13 +2,20 @@
   "metadata": { "version": "1.0" },
   "name": "Vero",
   "type": "external_service",
-  "urls": ["https://api.getvero.com"],
+  "urls": [
+    "https://api.getvero.com"
+  ],
   "packages": [
     {
       "name": "docplanner/vero-php",
       "group": "",
       "package_manager": "packagist"
     },
-    { "name": "getvero/vero-php", "group": "", "package_manager": "packagist" }
-  ]
+    {
+      "name": "getvero/vero-php",
+      "group": "",
+      "package_manager": "packagist"
+    }
+  ],
+  "uuid": "ef05ce19-3e74-4988-b9c8-b511940fdf36"
 }

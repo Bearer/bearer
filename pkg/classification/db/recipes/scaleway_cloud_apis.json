@@ -18,6 +18,11 @@
       "group": null,
       "package_manager": "go"
     },
-    { "name": "scaleway", "group": null, "package_manager": "npm" }
-  ]
+    {
+      "name": "scaleway",
+      "group": null,
+      "package_manager": "npm"
+    }
+  ],
+  "uuid": "ea84ccdb-fc58-49a9-abdb-3dc98dd8d55b"
 }

@@ -7,5 +7,6 @@
     "https://api.customer.io/v1/",
     "https://track.customer.io/api"
   ],
-  "packages": []
+  "packages": [],
+  "uuid": "864f73ed-4f27-4587-8c5c-d10fc28c6ad2"
 }

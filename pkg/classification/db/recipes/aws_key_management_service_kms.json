@@ -9,8 +9,16 @@
       "group": "software.amazon.awssdk",
       "package_manager": "maven"
     },
-    { "name": "aws-sdk-kms", "group": null, "package_manager": "rubygems" },
-    { "name": "@aws-sdk/client-kms", "group": null, "package_manager": "npm" },
+    {
+      "name": "aws-sdk-kms",
+      "group": null,
+      "package_manager": "rubygems"
+    },
+    {
+      "name": "@aws-sdk/client-kms",
+      "group": null,
+      "package_manager": "npm"
+    },
     {
       "name": "github.com/aws/aws-sdk-go-v2/service/kms",
       "group": null,
@@ -21,5 +29,6 @@
       "group": "com.amazonaws",
       "package_manager": "maven"
     }
-  ]
+  ],
+  "uuid": "e163685a-bf96-4dd4-a1db-0ccdaf1dbc3e"
 }

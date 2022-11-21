@@ -2,28 +2,71 @@
   "metadata": { "version": "1.0" },
   "name": "Slack",
   "type": "external_service",
-  "urls": ["https://hooks.slack.com", "https://api.slack.com"],
+  "urls": [
+    "https://hooks.slack.com",
+    "https://api.slack.com"
+  ],
   "packages": [
-    { "name": "slackclient", "group": null, "package_manager": "pypi" },
-    { "name": "slack", "group": null, "package_manager": "npm" },
+    {
+      "name": "slackclient",
+      "group": null,
+      "package_manager": "pypi"
+    },
+    {
+      "name": "slack",
+      "group": null,
+      "package_manager": "npm"
+    },
     {
       "name": "github.com/slack-go/slack",
       "group": null,
       "package_manager": "go"
     },
-    { "name": "slack-notifier", "group": null, "package_manager": "rubygems" },
+    {
+      "name": "slack-notifier",
+      "group": null,
+      "package_manager": "rubygems"
+    },
     {
       "name": "slack-ruby-client",
       "group": null,
       "package_manager": "rubygems"
     },
-    { "name": "slack_hook", "group": null, "package_manager": "rubygems" },
-    { "name": "node-slackr", "group": null, "package_manager": "npm" },
-    { "name": "node-slack-upload", "group": null, "package_manager": "npm" },
-    { "name": "@slack/client", "group": null, "package_manager": "npm" },
-    { "name": "@slack/web-api", "group": null, "package_manager": "npm" },
-    { "name": "slackbots", "group": null, "package_manager": "npm" },
-    { "name": "@slack/webhook", "group": null, "package_manager": "npm" },
+    {
+      "name": "slack_hook",
+      "group": null,
+      "package_manager": "rubygems"
+    },
+    {
+      "name": "node-slackr",
+      "group": null,
+      "package_manager": "npm"
+    },
+    {
+      "name": "node-slack-upload",
+      "group": null,
+      "package_manager": "npm"
+    },
+    {
+      "name": "@slack/client",
+      "group": null,
+      "package_manager": "npm"
+    },
+    {
+      "name": "@slack/web-api",
+      "group": null,
+      "package_manager": "npm"
+    },
+    {
+      "name": "slackbots",
+      "group": null,
+      "package_manager": "npm"
+    },
+    {
+      "name": "@slack/webhook",
+      "group": null,
+      "package_manager": "npm"
+    },
     {
       "name": "github.com/nlopes/slack",
       "group": null,
@@ -39,21 +82,46 @@
       "group": null,
       "package_manager": "packagist"
     },
-    { "name": "maknz/slack", "group": null, "package_manager": "packagist" },
-    { "name": "slackeventsapi", "group": null, "package_manager": "pypi" },
-    { "name": "slacker", "group": null, "package_manager": "pypi" },
-    { "name": "slack", "group": null, "package_manager": "pypi" },
-    { "name": "slack-webhook", "group": null, "package_manager": "pypi" },
+    {
+      "name": "maknz/slack",
+      "group": null,
+      "package_manager": "packagist"
+    },
+    {
+      "name": "slackeventsapi",
+      "group": null,
+      "package_manager": "pypi"
+    },
+    {
+      "name": "slacker",
+      "group": null,
+      "package_manager": "pypi"
+    },
+    {
+      "name": "slack",
+      "group": null,
+      "package_manager": "pypi"
+    },
+    {
+      "name": "slack-webhook",
+      "group": null,
+      "package_manager": "pypi"
+    },
     {
       "name": "laravel/slack-notification-channel",
       "group": null,
       "package_manager": "packagist"
     },
-    { "name": "slack-sdk", "group": null, "package_manager": "pypi" },
+    {
+      "name": "slack-sdk",
+      "group": null,
+      "package_manager": "pypi"
+    },
     {
       "name": "slack-api-client",
       "group": "com.slack.api",
       "package_manager": "maven"
     }
-  ]
+  ],
+  "uuid": "5fc66268-993c-49a3-9031-41dda2e8aff9"
 }

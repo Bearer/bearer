@@ -7,12 +7,21 @@
     "https://analyticsreporting.googleapis.com"
   ],
   "packages": [
-    { "name": "react-ga", "group": null, "package_manager": "npm" },
+    {
+      "name": "react-ga",
+      "group": null,
+      "package_manager": "npm"
+    },
     {
       "name": "workbox-google-analytics",
       "group": null,
       "package_manager": "npm"
     },
-    { "name": "node-ga", "group": null, "package_manager": "npm" }
-  ]
+    {
+      "name": "node-ga",
+      "group": null,
+      "package_manager": "npm"
+    }
+  ],
+  "uuid": "ecf4694f-3271-4894-a54e-e72b0a16a8f0"
 }

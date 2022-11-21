@@ -4,18 +4,31 @@
   "type": "data_store",
   "urls": [],
   "packages": [
-    { "name": "node-vault-client", "group": null, "package_manager": "npm" },
+    {
+      "name": "node-vault-client",
+      "group": null,
+      "package_manager": "npm"
+    },
     {
       "name": "github.com/hashicorp/vault",
       "group": null,
       "package_manager": "go"
     },
-    { "name": "node-vault", "group": null, "package_manager": "npm" },
+    {
+      "name": "node-vault",
+      "group": null,
+      "package_manager": "npm"
+    },
     {
       "name": "github.com/hashicorp/vault/api/auth/aws",
       "group": null,
       "package_manager": "go"
     },
-    { "name": "vault-auth-aws", "group": null, "package_manager": "npm" }
-  ]
+    {
+      "name": "vault-auth-aws",
+      "group": null,
+      "package_manager": "npm"
+    }
+  ],
+  "uuid": "a5a1840d-e6cc-4757-b1eb-0682844b2226"
 }

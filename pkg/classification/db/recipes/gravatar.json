@@ -2,6 +2,16 @@
   "metadata": { "version": "1.0" },
   "name": "Gravatar",
   "type": "external_service",
-  "urls": ["https://gravatar.com", "https://secure.gravatar.com/xmlrpc"],
-  "packages": [{ "name": "gravatar", "group": null, "package_manager": "npm" }]
+  "urls": [
+    "https://gravatar.com",
+    "https://secure.gravatar.com/xmlrpc"
+  ],
+  "packages": [
+    {
+      "name": "gravatar",
+      "group": null,
+      "package_manager": "npm"
+    }
+  ],
+  "uuid": "4bcb5ed3-ecbe-43dd-890a-926291c96c11"
 }

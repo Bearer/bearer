@@ -2,6 +2,10 @@
   "metadata": { "version": "1.0" },
   "name": "Atinternet",
   "type": "external_service",
-  "urls": ["https://xiti.com", "https://api.atinternet.io"],
-  "packages": []
+  "urls": [
+    "https://xiti.com",
+    "https://api.atinternet.io"
+  ],
+  "packages": [],
+  "uuid": "e014169c-3f2a-42bf-9dcb-c0236bb99d5b"
 }

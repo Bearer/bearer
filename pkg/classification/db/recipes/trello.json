@@ -2,6 +2,10 @@
   "metadata": { "version": "1.0" },
   "name": "Trello",
   "type": "external_service",
-  "urls": ["https://api.trello.com", "https://p.trellocdn.com"],
-  "packages": []
+  "urls": [
+    "https://api.trello.com",
+    "https://p.trellocdn.com"
+  ],
+  "packages": [],
+  "uuid": "73fb1fcf-06a9-4f9e-9640-38b5e2c8f033"
 }

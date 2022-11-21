@@ -2,6 +2,9 @@
   "metadata": { "version": "1.0" },
   "name": "Copper",
   "type": "external_service",
-  "urls": ["https://api.prosperworks.com"],
-  "packages": []
+  "urls": [
+    "https://api.prosperworks.com"
+  ],
+  "packages": [],
+  "uuid": "8b0a84b7-a7de-4477-a52a-7d54da796e1b"
 }

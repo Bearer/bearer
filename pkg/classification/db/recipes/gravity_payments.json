@@ -2,6 +2,9 @@
   "metadata": { "version": "1.0" },
   "name": "Gravity Payments",
   "type": "external_service",
-  "urls": ["https://api.gravitypayments.com"],
-  "packages": []
+  "urls": [
+    "https://api.gravitypayments.com"
+  ],
+  "packages": [],
+  "uuid": "c37c083c-8ef7-4a68-9931-157334510182"
 }

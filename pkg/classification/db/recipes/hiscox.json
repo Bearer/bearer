@@ -8,5 +8,6 @@
     "https://hiscoxclientapi.azurewebsites.net",
     "https://hiscoxukpartners-test.azure-api.net"
   ],
-  "packages": []
+  "packages": [],
+  "uuid": "3f72ee9d-db86-40ff-8e81-acac848b0073"
 }

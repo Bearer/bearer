@@ -2,13 +2,20 @@
   "metadata": { "version": "1.0" },
   "name": "PagerDuty",
   "type": "external_service",
-  "urls": ["https://api.pagerduty.com"],
+  "urls": [
+    "https://api.pagerduty.com"
+  ],
   "packages": [
     {
       "name": "github.com/heimweh/go-pagerduty",
       "group": null,
       "package_manager": "go"
     },
-    { "name": "pagerduty", "group": null, "package_manager": "rubygems" }
-  ]
+    {
+      "name": "pagerduty",
+      "group": null,
+      "package_manager": "rubygems"
+    }
+  ],
+  "uuid": "125900d0-de02-4839-baf2-eeac1a94fd96"
 }

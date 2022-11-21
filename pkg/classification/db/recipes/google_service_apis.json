@@ -2,7 +2,9 @@
   "metadata": { "version": "1.0" },
   "name": "Google Service APIs",
   "type": "external_service",
-  "urls": ["https://apis.google.com"],
+  "urls": [
+    "https://apis.google.com"
+  ],
   "packages": [
     {
       "name": "google/apiclient",
@@ -14,7 +16,11 @@
       "group": null,
       "package_manager": "pypi"
     },
-    { "name": "googleapis", "group": null, "package_manager": "npm" },
+    {
+      "name": "googleapis",
+      "group": null,
+      "package_manager": "npm"
+    },
     {
       "name": "google-api-client",
       "group": null,
@@ -40,9 +46,21 @@
       "group": null,
       "package_manager": "rubygems"
     },
-    { "name": "google_drive", "group": null, "package_manager": "rubygems" },
-    { "name": "googleauth", "group": null, "package_manager": "rubygems" },
-    { "name": "pygsheets", "group": null, "package_manager": "pypi" },
+    {
+      "name": "google_drive",
+      "group": null,
+      "package_manager": "rubygems"
+    },
+    {
+      "name": "googleauth",
+      "group": null,
+      "package_manager": "rubygems"
+    },
+    {
+      "name": "pygsheets",
+      "group": null,
+      "package_manager": "pypi"
+    },
     {
       "name": "api-common",
       "group": "com.google.api",
@@ -63,17 +81,41 @@
       "group": null,
       "package_manager": "packagist"
     },
-    { "name": "google/auth", "group": null, "package_manager": "packagist" },
-    { "name": "google-api-core", "group": null, "package_manager": "pypi" },
-    { "name": "google-apitools", "group": null, "package_manager": "pypi" },
+    {
+      "name": "google/auth",
+      "group": null,
+      "package_manager": "packagist"
+    },
+    {
+      "name": "google-api-core",
+      "group": null,
+      "package_manager": "pypi"
+    },
+    {
+      "name": "google-apitools",
+      "group": null,
+      "package_manager": "pypi"
+    },
     {
       "name": "github.com/gogo/googleapis",
       "group": null,
       "package_manager": "go"
     },
-    { "name": "google.golang.org/api", "group": null, "package_manager": "go" },
-    { "name": "googleapis-common", "group": null, "package_manager": "npm" },
-    { "name": "google-auth-library", "group": null, "package_manager": "npm" },
+    {
+      "name": "google.golang.org/api",
+      "group": null,
+      "package_manager": "go"
+    },
+    {
+      "name": "googleapis-common",
+      "group": null,
+      "package_manager": "npm"
+    },
+    {
+      "name": "google-auth-library",
+      "group": null,
+      "package_manager": "npm"
+    },
     {
       "name": "google/recaptcha",
       "group": null,
@@ -99,11 +141,16 @@
       "group": null,
       "package_manager": "nuget"
     },
-    { "name": "Google.Api.Gax", "group": null, "package_manager": "nuget" },
+    {
+      "name": "Google.Api.Gax",
+      "group": null,
+      "package_manager": "nuget"
+    },
     {
       "name": "Google.Apis.Drive.v3",
       "group": null,
       "package_manager": "nuget"
     }
-  ]
+  ],
+  "uuid": "602f6d0b-b28e-4c6d-bf72-0a75e3d47bc1"
 }

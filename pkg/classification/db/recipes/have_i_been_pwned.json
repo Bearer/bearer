@@ -2,6 +2,10 @@
   "metadata": { "version": "1.0" },
   "name": "Have I been pwned?",
   "type": "external_service",
-  "urls": ["https://api.pwnedpasswords.com", "https://haveibeenpwned.com/api"],
-  "packages": []
+  "urls": [
+    "https://api.pwnedpasswords.com",
+    "https://haveibeenpwned.com/api"
+  ],
+  "packages": [],
+  "uuid": "572eb51d-8e7e-415e-8a56-d5fd87bc8121"
 }

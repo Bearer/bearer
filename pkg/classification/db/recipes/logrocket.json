@@ -2,6 +2,15 @@
   "metadata": { "version": "1.0" },
   "name": "LogRocket",
   "type": "external_service",
-  "urls": ["https://cdn.lr-ingest.io"],
-  "packages": [{ "name": "logrocket", "group": null, "package_manager": "npm" }]
+  "urls": [
+    "https://cdn.lr-ingest.io"
+  ],
+  "packages": [
+    {
+      "name": "logrocket",
+      "group": null,
+      "package_manager": "npm"
+    }
+  ],
+  "uuid": "ac3f9271-1212-436b-85c3-c01a52b71a19"
 }

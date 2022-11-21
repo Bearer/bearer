@@ -13,5 +13,6 @@
     "https://api.music.apple.com",
     "https://api.storekit-sandbox.itunes.apple.com"
   ],
-  "packages": []
+  "packages": [],
+  "uuid": "e61910ab-fb33-4b55-948e-6ffe189c230c"
 }

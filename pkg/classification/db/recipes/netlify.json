@@ -2,6 +2,9 @@
   "metadata": { "version": "1.0" },
   "name": "Netlify",
   "type": "external_service",
-  "urls": ["https://api.netlify.com"],
-  "packages": []
+  "urls": [
+    "https://api.netlify.com"
+  ],
+  "packages": [],
+  "uuid": "64e2a73d-81eb-407b-a6ef-a02dfb13fefb"
 }

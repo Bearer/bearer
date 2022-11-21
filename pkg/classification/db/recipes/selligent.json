@@ -2,6 +2,9 @@
   "metadata": { "version": "1.0" },
   "name": "Selligent",
   "type": "external_service",
-  "urls": ["https://selligent.com/*/organizations"],
-  "packages": []
+  "urls": [
+    "https://selligent.com/*/organizations"
+  ],
+  "packages": [],
+  "uuid": "9898b1cd-e47a-4416-a03e-51debb41d624"
 }

@@ -2,6 +2,9 @@
   "metadata": { "version": "1.0" },
   "name": "Nodemailer",
   "type": "external_service",
-  "urls": ["https://api.nodemailer.com"],
-  "packages": []
+  "urls": [
+    "https://api.nodemailer.com"
+  ],
+  "packages": [],
+  "uuid": "930bdbcc-d4b4-4fdc-a09a-d7ce61e296b2"
 }

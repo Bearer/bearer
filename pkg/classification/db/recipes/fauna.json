@@ -8,5 +8,12 @@
     "https://graphql.eu.fauna.com",
     "https://graphql.us.fauna.com"
   ],
-  "packages": [{ "name": "faunadb", "group": null, "package_manager": "npm" }]
+  "packages": [
+    {
+      "name": "faunadb",
+      "group": null,
+      "package_manager": "npm"
+    }
+  ],
+  "uuid": "95a0c7d4-d3ad-497d-a3ba-3c3d8a5bf89a"
 }

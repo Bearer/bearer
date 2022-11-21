@@ -2,7 +2,10 @@
   "metadata": { "version": "1.0" },
   "name": "Mailchimp",
   "type": "external_service",
-  "urls": ["https://api.mailchimp.com", "https://mandrillapp.com/api"],
+  "urls": [
+    "https://api.mailchimp.com",
+    "https://mandrillapp.com/api"
+  ],
   "packages": [
     {
       "name": "mailchimp/marketing",
@@ -54,5 +57,6 @@
       "group": null,
       "package_manager": "packagist"
     }
-  ]
+  ],
+  "uuid": "6bf43020-4354-4044-818e-610e8e691d1a"
 }

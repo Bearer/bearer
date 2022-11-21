@@ -2,7 +2,9 @@
   "metadata": { "version": "1.0" },
   "name": "Sendgrid",
   "type": "external_service",
-  "urls": ["https://api.sendgrid.com"],
+  "urls": [
+    "https://api.sendgrid.com"
+  ],
   "packages": [
     {
       "name": "github.com/sendgrid/sendgrid-go",
@@ -14,10 +16,26 @@
       "group": null,
       "package_manager": "packagist"
     },
-    { "name": "sendgrid", "group": null, "package_manager": "pypi" },
-    { "name": "sendgrid-ruby", "group": null, "package_manager": "rubygems" },
-    { "name": "@sendgrid/mail", "group": null, "package_manager": "npm" },
-    { "name": "@sendgrid/client", "group": null, "package_manager": "npm" },
+    {
+      "name": "sendgrid",
+      "group": null,
+      "package_manager": "pypi"
+    },
+    {
+      "name": "sendgrid-ruby",
+      "group": null,
+      "package_manager": "rubygems"
+    },
+    {
+      "name": "@sendgrid/mail",
+      "group": null,
+      "package_manager": "npm"
+    },
+    {
+      "name": "@sendgrid/client",
+      "group": null,
+      "package_manager": "npm"
+    },
     {
       "name": "@sendgrid/inbound-mail-parser",
       "group": null,
@@ -28,12 +46,21 @@
       "group": null,
       "package_manager": "npm"
     },
-    { "name": "@sendgrid/helpers", "group": null, "package_manager": "npm" },
+    {
+      "name": "@sendgrid/helpers",
+      "group": null,
+      "package_manager": "npm"
+    },
     {
       "name": "@sendgrid/eventwebhook",
       "group": null,
       "package_manager": "npm"
     },
-    { "name": "sendgrid/sendgrid", "group": "", "package_manager": "packagist" }
-  ]
+    {
+      "name": "sendgrid/sendgrid",
+      "group": "",
+      "package_manager": "packagist"
+    }
+  ],
+  "uuid": "6d201c8d-31cb-4f37-b2e1-aa9941d14ca8"
 }

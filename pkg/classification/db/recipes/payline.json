@@ -2,6 +2,10 @@
   "metadata": { "version": "1.0" },
   "name": "Payline",
   "type": "external_service",
-  "urls": ["https://services.payline.com", "https://payment.payline.com"],
-  "packages": []
+  "urls": [
+    "https://services.payline.com",
+    "https://payment.payline.com"
+  ],
+  "packages": [],
+  "uuid": "5c8af3d9-ea59-4723-8246-69cedda69082"
 }

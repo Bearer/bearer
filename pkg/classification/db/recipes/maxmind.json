@@ -7,5 +7,6 @@
     "https://geoip.maxmind.com/geoip",
     "https://minfraud.maxmind.com/minfraud"
   ],
-  "packages": []
+  "packages": [],
+  "uuid": "3086a2a6-0606-4544-a7d8-0417e54116ef"
 }

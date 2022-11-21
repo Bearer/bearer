@@ -2,8 +2,15 @@
   "metadata": { "version": "1.0" },
   "name": "Asana",
   "type": "external_service",
-  "urls": ["https://app.asana.com/api"],
+  "urls": [
+    "https://app.asana.com/api"
+  ],
   "packages": [
-    { "name": "asana", "group": null, "package_manager": "rubygems" }
-  ]
+    {
+      "name": "asana",
+      "group": null,
+      "package_manager": "rubygems"
+    }
+  ],
+  "uuid": "d818d702-67d9-43b8-bc61-095055fd7055"
 }

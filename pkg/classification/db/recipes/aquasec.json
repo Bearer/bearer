@@ -2,6 +2,9 @@
   "metadata": { "version": "1.0" },
   "name": "Aquasec",
   "type": "external_service",
-  "urls": ["https://api.aquasec.com"],
-  "packages": []
+  "urls": [
+    "https://api.aquasec.com"
+  ],
+  "packages": [],
+  "uuid": "42b63325-c431-44b0-8b2b-b48e68bf26fb"
 }

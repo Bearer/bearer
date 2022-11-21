@@ -2,6 +2,9 @@
   "metadata": { "version": "1.0" },
   "name": "Runscope",
   "type": "external_service",
-  "urls": ["https://api.runscope.com"],
-  "packages": []
+  "urls": [
+    "https://api.runscope.com"
+  ],
+  "packages": [],
+  "uuid": "7127982b-2e46-4376-bd4e-20ad5c5b0d51"
 }

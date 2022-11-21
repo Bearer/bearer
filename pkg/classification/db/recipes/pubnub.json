@@ -2,6 +2,15 @@
   "metadata": { "version": "1.0" },
   "name": "PubNub",
   "type": "external_service",
-  "urls": ["https://ps.pndsn.com"],
-  "packages": [{ "name": "pubnub", "group": null, "package_manager": "npm" }]
+  "urls": [
+    "https://ps.pndsn.com"
+  ],
+  "packages": [
+    {
+      "name": "pubnub",
+      "group": null,
+      "package_manager": "npm"
+    }
+  ],
+  "uuid": "a9440c17-f18c-4396-a81e-dc8299fec32f"
 }

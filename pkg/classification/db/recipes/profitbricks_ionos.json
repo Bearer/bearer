@@ -2,6 +2,10 @@
   "metadata": { "version": "1.0" },
   "name": "Profitbricks (IONOS)",
   "type": "external_service",
-  "urls": ["https://api.ionos.com", "https://api.profitbricks.com"],
-  "packages": []
+  "urls": [
+    "https://api.ionos.com",
+    "https://api.profitbricks.com"
+  ],
+  "packages": [],
+  "uuid": "f3657c46-ff24-4233-8778-9c59159d4299"
 }

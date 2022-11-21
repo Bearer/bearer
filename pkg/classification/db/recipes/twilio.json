@@ -12,9 +12,26 @@
     "https://video.twilio.com"
   ],
   "packages": [
-    { "name": "twilio/sdk", "group": null, "package_manager": "packagist" },
-    { "name": "twilio", "group": null, "package_manager": "pypi" },
-    { "name": "twilio-node", "group": null, "package_manager": "npm" },
-    { "name": "twilio-ruby", "group": null, "package_manager": "rubygems" }
-  ]
+    {
+      "name": "twilio/sdk",
+      "group": null,
+      "package_manager": "packagist"
+    },
+    {
+      "name": "twilio",
+      "group": null,
+      "package_manager": "pypi"
+    },
+    {
+      "name": "twilio-node",
+      "group": null,
+      "package_manager": "npm"
+    },
+    {
+      "name": "twilio-ruby",
+      "group": null,
+      "package_manager": "rubygems"
+    }
+  ],
+  "uuid": "233c67d0-98a3-48ae-8a3e-451b1da7e192"
 }

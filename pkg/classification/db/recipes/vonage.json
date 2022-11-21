@@ -2,14 +2,25 @@
   "metadata": { "version": "1.0" },
   "name": "Vonage",
   "type": "external_service",
-  "urls": ["https://api.nexmo.com"],
+  "urls": [
+    "https://api.nexmo.com"
+  ],
   "packages": [
     {
       "name": "nexmo/client-core",
       "group": "",
       "package_manager": "packagist"
     },
-    { "name": "nexmo/client", "group": "", "package_manager": "packagist" },
-    { "name": "@opentok/client", "group": null, "package_manager": "npm" }
-  ]
+    {
+      "name": "nexmo/client",
+      "group": "",
+      "package_manager": "packagist"
+    },
+    {
+      "name": "@opentok/client",
+      "group": null,
+      "package_manager": "npm"
+    }
+  ],
+  "uuid": "6b2278e4-0386-406b-babc-61cb3c0cbd0a"
 }

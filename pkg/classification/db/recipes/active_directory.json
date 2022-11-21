@@ -4,6 +4,11 @@
   "type": "data_store",
   "urls": [],
   "packages": [
-    { "name": "activedirectory", "group": null, "package_manager": "npm" }
-  ]
+    {
+      "name": "activedirectory",
+      "group": null,
+      "package_manager": "npm"
+    }
+  ],
+  "uuid": "5da94a12-9635-409b-a7ae-7e9a892578bd"
 }

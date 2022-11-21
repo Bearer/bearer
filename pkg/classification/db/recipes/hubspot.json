@@ -13,8 +13,16 @@
       "group": null,
       "package_manager": "packagist"
     },
-    { "name": "hubspot-api-client", "group": null, "package_manager": "pypi" },
-    { "name": "@hubspot/api-client", "group": null, "package_manager": "npm" },
+    {
+      "name": "hubspot-api-client",
+      "group": null,
+      "package_manager": "pypi"
+    },
+    {
+      "name": "@hubspot/api-client",
+      "group": null,
+      "package_manager": "npm"
+    },
     {
       "name": "hubspot-api-client",
       "group": null,
@@ -30,5 +38,6 @@
       "group": "",
       "package_manager": "packagist"
     }
-  ]
+  ],
+  "uuid": "49450731-7f88-4a6a-8b7c-f396f8915258"
 }

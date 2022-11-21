@@ -2,6 +2,10 @@
   "metadata": { "version": "1.0" },
   "name": "ShipBob",
   "type": "external_service",
-  "urls": ["https://api.shipbob.com", "https://sandbox-api.shipbob.com"],
-  "packages": []
+  "urls": [
+    "https://api.shipbob.com",
+    "https://sandbox-api.shipbob.com"
+  ],
+  "packages": [],
+  "uuid": "ee20160e-7a15-478f-ab37-cabc3b677b8e"
 }

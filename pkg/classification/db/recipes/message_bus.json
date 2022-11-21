@@ -9,7 +9,11 @@
       "group": "org.apache.activemq",
       "package_manager": "maven"
     },
-    { "name": "amqp", "group": null, "package_manager": "pypi" },
+    {
+      "name": "amqp",
+      "group": null,
+      "package_manager": "pypi"
+    },
     {
       "name": "enqueue/amqp-lib",
       "group": null,
@@ -50,5 +54,6 @@
       "group": "",
       "package_manager": "packagist"
     }
-  ]
+  ],
+  "uuid": "30becb85-cb58-4f4f-bbc4-d9111385a95c"
 }

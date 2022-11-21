@@ -2,9 +2,20 @@
   "metadata": { "version": "1.0" },
   "name": "Youtube",
   "type": "external_service",
-  "urls": ["https://www.googleapis.com/youtube/"],
+  "urls": [
+    "https://www.googleapis.com/youtube/"
+  ],
   "packages": [
-    { "name": "react-youtube", "group": null, "package_manager": "npm" },
-    { "name": "youtube-player", "group": null, "package_manager": "npm" }
-  ]
+    {
+      "name": "react-youtube",
+      "group": null,
+      "package_manager": "npm"
+    },
+    {
+      "name": "youtube-player",
+      "group": null,
+      "package_manager": "npm"
+    }
+  ],
+  "uuid": "954c823b-9629-4bdc-a1a4-db69b1bac85e"
 }

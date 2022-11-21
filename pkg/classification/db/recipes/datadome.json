@@ -2,8 +2,16 @@
   "metadata": { "version": "1.0" },
   "name": "Datadome",
   "type": "external_service",
-  "urls": ["https://js.datadome.co", "https://api.datadome.co"],
+  "urls": [
+    "https://js.datadome.co",
+    "https://api.datadome.co"
+  ],
   "packages": [
-    { "name": "DataDome.SystemWeb", "group": null, "package_manager": "nuget" }
-  ]
+    {
+      "name": "DataDome.SystemWeb",
+      "group": null,
+      "package_manager": "nuget"
+    }
+  ],
+  "uuid": "07ecbb23-0fbf-4d0d-a656-2799baac40fe"
 }

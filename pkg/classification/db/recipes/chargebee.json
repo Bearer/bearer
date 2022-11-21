@@ -2,6 +2,9 @@
   "metadata": { "version": "1.0" },
   "name": "Chargebee",
   "type": "external_service",
-  "urls": ["https://chargebee.com/api"],
-  "packages": []
+  "urls": [
+    "https://chargebee.com/api"
+  ],
+  "packages": [],
+  "uuid": "b4365c78-819e-4901-a9e7-b5e716593def"
 }

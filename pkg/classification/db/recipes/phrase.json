@@ -2,7 +2,10 @@
   "metadata": { "version": "1.0" },
   "name": "Phrase",
   "type": "external_service",
-  "urls": ["https://api.phraseapp.com", "https://api.phrase.com"],
+  "urls": [
+    "https://api.phraseapp.com",
+    "https://api.phrase.com"
+  ],
   "packages": [
     {
       "name": "nediam/phraseapp-bundle",
@@ -14,6 +17,11 @@
       "group": "",
       "package_manager": "packagist"
     },
-    { "name": "phrase-js", "group": null, "package_manager": "npm" }
-  ]
+    {
+      "name": "phrase-js",
+      "group": null,
+      "package_manager": "npm"
+    }
+  ],
+  "uuid": "f790753a-776f-4dea-96e1-2f62afb65f91"
 }

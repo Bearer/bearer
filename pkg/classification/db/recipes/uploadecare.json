@@ -2,12 +2,15 @@
   "metadata": { "version": "1.0" },
   "name": "Uploadecare",
   "type": "external_service",
-  "urls": ["https://upload.uploadcare.com"],
+  "urls": [
+    "https://upload.uploadcare.com"
+  ],
   "packages": [
     {
       "name": "uploadcare/uploadcare-php",
       "group": "",
       "package_manager": "packagist"
     }
-  ]
+  ],
+  "uuid": "60a85fef-01d4-4b7f-a028-90fb2a5987da"
 }

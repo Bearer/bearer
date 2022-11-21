@@ -2,15 +2,30 @@
   "metadata": { "version": "1.0" },
   "name": "Intuit",
   "type": "external_service",
-  "urls": ["https://api.intuit.com"],
+  "urls": [
+    "https://api.intuit.com"
+  ],
   "packages": [
     {
       "name": "quickbooks/v3-php-sdk",
       "group": null,
       "package_manager": "packagist"
     },
-    { "name": "intuit-oauth", "group": null, "package_manager": "pypi" },
-    { "name": "intuit-oauth", "group": null, "package_manager": "npm" },
-    { "name": "intuit-oauth", "group": null, "package_manager": "rubygems" }
-  ]
+    {
+      "name": "intuit-oauth",
+      "group": null,
+      "package_manager": "pypi"
+    },
+    {
+      "name": "intuit-oauth",
+      "group": null,
+      "package_manager": "npm"
+    },
+    {
+      "name": "intuit-oauth",
+      "group": null,
+      "package_manager": "rubygems"
+    }
+  ],
+  "uuid": "20f6f8a1-ec4c-4a39-9c41-9824c94d9656"
 }

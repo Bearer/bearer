@@ -2,6 +2,10 @@
   "metadata": { "version": "1.0" },
   "name": "Gandi",
   "type": "external_service",
-  "urls": ["https://rpc.gandi.net", "https://api.gandi.net"],
-  "packages": []
+  "urls": [
+    "https://rpc.gandi.net",
+    "https://api.gandi.net"
+  ],
+  "packages": [],
+  "uuid": "b2808b65-bc4d-4837-b587-5b8c38208953"
 }

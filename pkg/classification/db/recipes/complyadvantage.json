@@ -2,6 +2,9 @@
   "metadata": { "version": "1.0" },
   "name": "ComplyAdvantage",
   "type": "external_service",
-  "urls": ["https://api.complyadvantage.com"],
-  "packages": []
+  "urls": [
+    "https://api.complyadvantage.com"
+  ],
+  "packages": [],
+  "uuid": "a11ff385-4eae-42d7-af88-fd8b8e3e0efb"
 }

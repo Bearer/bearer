@@ -2,6 +2,9 @@
   "metadata": { "version": "1.0" },
   "name": "Ocrolus",
   "type": "external_service",
-  "urls": ["https://api.ocrolus.com"],
-  "packages": []
+  "urls": [
+    "https://api.ocrolus.com"
+  ],
+  "packages": [],
+  "uuid": "7d3a8bd1-2110-407e-a35a-d5c0ed5e5c39"
 }

@@ -2,6 +2,9 @@
   "metadata": { "version": "1.0" },
   "name": "Iagility",
   "type": "external_service",
-  "urls": ["https://iagility.smsizer.com/api/*"],
-  "packages": []
+  "urls": [
+    "https://iagility.smsizer.com/api/*"
+  ],
+  "packages": [],
+  "uuid": "936de652-fcd4-42b6-ba02-7eb1e22865aa"
 }

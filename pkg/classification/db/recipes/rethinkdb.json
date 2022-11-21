@@ -9,5 +9,6 @@
       "group": "com.rethinkdb",
       "package_manager": "maven"
     }
-  ]
+  ],
+  "uuid": "1031f084-8063-4605-b0c6-a9993aa073d6"
 }

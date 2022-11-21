@@ -2,9 +2,20 @@
   "metadata": { "version": "1.0" },
   "name": "OVH Cloud APIs",
   "type": "external_service",
-  "urls": ["https://api.ovh.com"],
+  "urls": [
+    "https://api.ovh.com"
+  ],
   "packages": [
-    { "name": "github.com/ovh/go-ovh", "group": null, "package_manager": "go" },
-    { "name": "ovh", "group": null, "package_manager": "npm" }
-  ]
+    {
+      "name": "github.com/ovh/go-ovh",
+      "group": null,
+      "package_manager": "go"
+    },
+    {
+      "name": "ovh",
+      "group": null,
+      "package_manager": "npm"
+    }
+  ],
+  "uuid": "6f1734c6-7eab-410a-a858-781e79439e4f"
 }
