@@ -16,7 +16,7 @@ var (
 		Name:       "skip-path",
 		ConfigName: "scan.skip-path",
 		Value:      []string{},
-		Usage:      "Specify the comma separated files and directories to skip. Supports * syntax, e.g. --skip-path users/*.go,users/admin.sql",
+		Usage:      "Specify the comma separated files and directories to skip. Supports * syntax, e.g. `--skip-path users/*.go,users/admin.sql`",
 	}
 	DebugFlag = Flag{
 		Name:       "debug",
@@ -34,7 +34,7 @@ var (
 		Name:       "domain-resolution-timeout",
 		ConfigName: "scan.domain-resolution-timeout",
 		Value:      3 * time.Second,
-		Usage:      "Set timeout when attempting to resolve detected domains during classification (default 3 seconds), e.g. `--domain-resolution-timeout=TODO`",
+		Usage:      "Set timeout when attempting to resolve detected domains during classification (default 3 seconds), e.g. `--domain-resolution-timeout=3s`",
 	}
 	InternalDomainsFlag = Flag{
 		Name:       "internal-domains",
@@ -46,7 +46,7 @@ var (
 		Name:       "context",
 		ConfigName: "scan.context",
 		Value:      "",
-		Usage:      "Expand context of schema classification e.g. `--context=health to include data types particular to health`",
+		Usage:      "Expand context of schema classification e.g. `--context=health` to include data types particular to health",
 	}
 	QuietFlag = Flag{
 		Name:       "quiet",
