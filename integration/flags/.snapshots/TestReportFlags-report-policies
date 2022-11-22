@@ -1,11 +1,11 @@
 - result:
-    - category: Contact
+    - category_group: Personal data
       filename: users.rb
       line_number: "1"
       policy_description: Logger leaks detected
       policy_id: detect_ruby_logger
       policy_name: Logger leaks
-      severity: medium
+      severity: high
 
 
 --

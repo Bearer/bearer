@@ -1,14 +1,8 @@
 {
-  "groups": [
-    {
-      "name": "Personal data",
-      "uuid": "e1d3135b-3c0f-4b55-abce-19f27a26cbb3"
-    },
-    {
-      "name": "Sensitive data",
-      "uuid": "f6a0c071-5908-4420-bac2-bba28d41223e"
-    }
-  ],
+  "groups": {
+    "e1d3135b-3c0f-4b55-abce-19f27a26cbb3": "Personal data",
+    "f6a0c071-5908-4420-bac2-bba28d41223e": "Sensitive data"
+  },
   "category_mapping": {
     "dd88aee5-9d40-4ad2-8983-0c791ddec47c": {
       "name": "Authenticating",

@@ -65,15 +65,11 @@ type DataCategory struct {
 	Name      string `json:"name" yaml:"name"`
 	UUID      string `json:"uuid,omitempty" yaml:"uuid,omitempty"`
 	GroupUUID string `json:"group_uuid,omitempty" yaml:"group_uuid,omitempty"`
-}
-
-type CategoryGroup struct {
-	Name string `json:"name" yaml:"name"`
-	UUID string `json:"uuid" yaml:"uuid"`
+	GroupName string `json:"group_name,omitempty" yaml:"group_name,omitempty"`
 }
 
 type DataCategoryGrouping struct {
-	Groups          []CategoryGroup         `json:"groups"`
+	Groups          map[string]string       `json:"groups"`
 	CategoryMapping map[string]DataCategory `json:"category_mapping"`
 }
 
@@ -187,7 +183,9 @@ func defaultDataCategories() []DataCategory {
 			handleError(err)
 		}
 
-		dataCategory.GroupUUID = dataCategoryGrouping.CategoryMapping[dataCategory.UUID].GroupUUID
+		categoryFromMapping := dataCategoryGrouping.CategoryMapping[dataCategory.UUID]
+		dataCategory.GroupUUID = categoryFromMapping.GroupUUID
+		dataCategory.GroupName = dataCategoryGrouping.Groups[categoryFromMapping.GroupUUID]
 
 		dataCategories = append(dataCategories, dataCategory)
 	}
