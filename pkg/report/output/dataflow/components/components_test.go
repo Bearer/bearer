@@ -19,11 +19,11 @@ func TestDataflowComponents(t *testing.T) {
 		Want        []types.Component
 	}{
 		{
-			Name: "single detection - dependency",
-			FileContent: `{	"detector_type": "gemfile-lock", "type": "dependency_classified", "source": {"filename": "Gemfile.lock", "line_number": 258}, "classification": { "Decision": { "state": "valid" }, "recipe_name": "stripe"}}`,
+			Name:        "single detection - dependency",
+			FileContent: `{	"detector_type": "gemfile-lock", "type": "dependency_classified", "source": {"filename": "Gemfile.lock", "line_number": 258}, "classification": { "Decision": { "state": "valid" }, "recipe_name": "Stripe", "recipe_match": true}}`,
 			Want: []types.Component{
 				{
-					Name: "stripe",
+					Name: "Stripe",
 					Locations: []types.ComponentLocation{
 						{
 							Detector:   "gemfile-lock",
@@ -35,16 +35,16 @@ func TestDataflowComponents(t *testing.T) {
 			},
 		},
 		{
-			Name: "single detection - dependency - no classification",
+			Name:        "single detection - dependency - no classification",
 			FileContent: `{	"detector_type": "gemfile-lock", "type": "dependency_classified", "source": {"filename": "Gemfile.lock", "line_number": 258}}`,
-			Want: []types.Component{},
+			Want:        []types.Component{},
 		},
 		{
-			Name: "single detection - interface",
-			FileContent: `{	"detector_type": "ruby", "type": "interface_classified", "source": {"filename": "billing.rb", "line_number": 2}, "classification": { "Decision": { "state": "valid" }, "recipe_name": "Stripe"}}`,
+			Name:        "single detection - interface",
+			FileContent: `{	"detector_type": "ruby", "type": "interface_classified", "source": {"filename": "billing.rb", "line_number": 2}, "classification": { "Decision": { "state": "valid" }, "recipe_name": "Stripe", "recipe_match": true}}`,
 			Want: []types.Component{
 				{
-					Name: "stripe",
+					Name: "Stripe",
 					Locations: []types.ComponentLocation{
 						{
 							Detector:   "ruby",
@@ -56,17 +56,17 @@ func TestDataflowComponents(t *testing.T) {
 			},
 		},
 		{
-			Name: "single detection - interface - no classification",
+			Name:        "single detection - interface - no classification",
 			FileContent: `{	"detector_type": "ruby", "type": "interface_classified", "source": {"filename": "billing.rb", "line_number": 2}}`,
-			Want: []types.Component{},
+			Want:        []types.Component{},
 		},
 		{
 			Name: "single detection - duplicates",
-			FileContent: `{	"detector_type": "ruby", "type": "interface_classified", "source": {"filename": "billing.rb", "line_number": 2}, "classification": { "Decision": { "state": "valid" }, "recipe_name": "Stripe"}}
-{ "detector_type": "ruby", "type": "interface_classified", "source": {"filename": "billing.rb", "line_number": 2}, "classification": { "Decision": { "state": "valid" }, "recipe_name": "Stripe"}}`,
+			FileContent: `{	"detector_type": "ruby", "type": "interface_classified", "source": {"filename": "billing.rb", "line_number": 2}, "classification": { "Decision": { "state": "valid" }, "recipe_name": "Stripe", "recipe_match": true}}
+{ "detector_type": "ruby", "type": "interface_classified", "source": {"filename": "billing.rb", "line_number": 2}, "classification": { "Decision": { "state": "valid" }, "recipe_name": "Stripe", "recipe_match": true}}`,
 			Want: []types.Component{
 				{
-					Name: "stripe",
+					Name: "Stripe",
 					Locations: []types.ComponentLocation{
 						{
 							Detector:   "ruby",
@@ -79,11 +79,11 @@ func TestDataflowComponents(t *testing.T) {
 		},
 		{
 			Name: "multiple detections - deterministic output",
-			FileContent: `{	"detector_type": "ruby", "type": "interface_classified", "source": {"filename": "billing.rb", "line_number": 2}, "classification": { "Decision": { "state": "valid" }, "recipe_name": "Stripe"}}
-{"detector_type": "gemfile-lock", "type": "dependency_classified", "source": {"filename": "Gemfile.lock", "line_number": 258}, "classification": { "Decision": { "state": "valid" }, "recipe_name": "stripe"}}`,
+			FileContent: `{	"detector_type": "ruby", "type": "interface_classified", "source": {"filename": "billing.rb", "line_number": 2}, "classification": { "Decision": { "state": "valid" }, "recipe_name": "Stripe", "recipe_match": true}}
+{"detector_type": "gemfile-lock", "type": "dependency_classified", "source": {"filename": "Gemfile.lock", "line_number": 258}, "classification": { "Decision": { "state": "valid" }, "recipe_name": "Stripe", "recipe_match": true}}`,
 			Want: []types.Component{
 				{
-					Name: "stripe",
+					Name: "Stripe",
 					Locations: []types.ComponentLocation{
 						{
 							Detector:   "gemfile-lock",

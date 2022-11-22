@@ -1,8 +1,6 @@
 package components
 
 import (
-	"strings"
-
 	"github.com/bearer/curio/pkg/report/output/dataflow/detectiondecoder"
 	"github.com/bearer/curio/pkg/report/output/dataflow/types"
 
@@ -68,7 +66,12 @@ func (holder *Holder) AddDependency(detection interface{}) error {
 	}
 
 	if value.Classification.Decision.State == classify.Valid {
-		holder.addComponent(strings.ToLower(value.Classification.RecipeName), string(value.DetectorType), value.Source.Filename, *value.Source.LineNumber)
+		holder.addComponent(
+			value.Classification.RecipeName,
+			string(value.DetectorType),
+			value.Source.Filename,
+			*value.Source.LineNumber,
+		)
 	}
 
 	return nil
