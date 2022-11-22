@@ -29,16 +29,30 @@ func NewApp(version string, commitSHA string) *cobra.Command {
 }
 
 func NewRootCommand() *cobra.Command {
-	usageTemplate := `Curio is a tool for scanning policy breaches
+	usageTemplate := `Curio - discover sensitive data flows and security risks.
 
-Scan Example:
-	# Scan local repository
-	$ curio scan <repository>
+Usage: curio <command> [flags]
 
 Available Commands:
-	scan              Scan git repository
-	init              Writes default config to curio.yml
+	scan              Scan a directory or file
+	init              Write the default config to curio.yml
 	version           Print the version
+
+Examples:
+	# Scan local directory or file
+	$ curio scan <path>
+
+	# Scan current directory and output the data flow to a file
+	$ curio scan --report dataflow --output <output-path> .
+
+Learn More:
+	Curio scans your source code to discover sensitive data flows 
+	and data security risks in your codebase. This includes detecting
+	PHI, PII, and PD usage in data stores, internal APIs, and external
+	APIs. You can run Curio locally or as part of your CI/CD pipeline.
+	
+	For more examples, tutorials, and to learn more about the project 
+	visit https://curio.sh
 `
 
 	cmd := &cobra.Command{

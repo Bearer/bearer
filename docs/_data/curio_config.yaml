@@ -2,14 +2,17 @@ name: ' config'
 synopsis: Scan config files for misconfigurations
 usage: ' config [flags] DIR'
 options:
+    - name: context
+      usage: |
+        Expand context of schema classification e.g., --context=health, to include data types particular to health
     - name: disable-domain-resolution
       default_value: "false"
       usage: |
-        do not attempt to resolve detected domains during classification (default false), eg. --disable-domain-resolution=true
+        Do not attempt to resolve detected domains during classification (default false), e.g. --disable-domain-resolution=true
     - name: domain-resolution-timeout
       default_value: 3s
       usage: |
-        set timeout when attempting to resolve detected domains during classification (default 3 seconds), eg. --domain-resolution-timeout=TODO
+        Set timeout when attempting to resolve detected domains during classification (default 3 seconds), e.g. --domain-resolution-timeout=3s
     - name: help
       shorthand: h
       default_value: "false"
@@ -17,11 +20,11 @@ options:
     - name: internal-domains
       default_value: '[]'
       usage: |
-        define regular expressions for better classification of private or unreachable domains eg. --internal-domains="*.my-company.com,private.sh"
+        Define regular expressions for better classification of private or unreachable domains e.g. --internal-domains="*.my-company.com,private.sh"
     - name: skip-path
       default_value: '[]'
       usage: |
-        specify the comma separated files and directories to skip (supports * syntax), eg. --skip-path users/*.go,users/admin.sql
+        Specify the comma separated files and directories to skip. Supports * syntax, e.g. --skip-path users/*.go,users/admin.sql
 see_also:
     - ' - '
 aliases: conf

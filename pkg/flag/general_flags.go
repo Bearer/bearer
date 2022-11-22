@@ -5,7 +5,7 @@ var (
 		Name:            "config-file",
 		ConfigName:      "config-file",
 		Value:           "",
-		Usage:           "file from which to load configurations",
+		Usage:           "Load configuration from the defined path",
 		DisableInConfig: true,
 	}
 )
