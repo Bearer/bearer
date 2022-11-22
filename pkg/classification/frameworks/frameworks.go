@@ -97,5 +97,5 @@ func (classifier *Classifier) Classify(data detections.Detection) (*ClassifiedFr
 }
 
 func isRecipeMatch(recipe db.Recipe, technologyKey string) bool {
-	return recipe.Name == technologyKey
+	return recipe.UUID == technologyKey
 }
