@@ -56,9 +56,9 @@ func getReportOutput(report types.Report, config settings.Config) (any, error) {
 	case flag.ReportDetectors:
 		return detectors.GetOutput(report)
 	case flag.ReportDataFlow:
-		return getDataflow(report, config)
+		return getDataflow(report, config, false)
 	case flag.ReportPolicies:
-		dataflow, err := getDataflow(report, config)
+		dataflow, err := getDataflow(report, config, true)
 		if err != nil {
 			return nil, err
 		}
@@ -86,13 +86,13 @@ func getReportOutput(report types.Report, config settings.Config) (any, error) {
 	return nil, fmt.Errorf(`--report flag "%s" is not supported`, config.Report.Report)
 }
 
-func getDataflow(report types.Report, config settings.Config) (*dataflow.DataFlow, error) {
+func getDataflow(report types.Report, config settings.Config, isInternal bool) (*dataflow.DataFlow, error) {
 	reportedDetections, err := detectors.GetOutput(report)
 	if err != nil {
 		return nil, err
 	}
 
-	return dataflow.GetOutput(reportedDetections, config)
+	return dataflow.GetOutput(reportedDetections, config, isInternal)
 }
 
 type RiskDetection struct {

@@ -47,7 +47,7 @@ func (holder *Holder) AddSchema(detection detections.Detection, extras *extraFie
 	}
 
 	if classification.Decision.State == classify.Valid {
-		holder.addDatatype(classification.DataType.Name, string(detection.DetectorType), detection.Source.Filename, *detection.Source.LineNumber)
+		holder.addDatatype(classification.DataType.Name, string(detection.DetectorType), detection.Source.Filename, *detection.Source.LineNumber, extras)
 	}
 
 	return nil

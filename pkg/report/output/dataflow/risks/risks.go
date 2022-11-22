@@ -53,14 +53,6 @@ func (holder *Holder) AddSchema(detection detections.Detection) error {
 	return nil
 }
 
-func (holder *Holder) AddComputedRisk(risk types.RiskDetector) {
-	for _, datatype := range risk.DataTypes {
-		for _, location := range datatype.Locations {
-			holder.addDatatype(string(risk.DetectorID), datatype.Name, location.Filename, location.LineNumber)
-		}
-	}
-}
-
 // addDatatype adds detector to hash list and at the same time blocks duplicates
 func (holder *Holder) addDatatype(ruleName string, datatype *db.DataType, fileName string, lineNumber int) {
 	// create detector entry if it doesn't exist

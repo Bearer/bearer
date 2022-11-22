@@ -98,17 +98,6 @@ func GetOutput(input []interface{}, config settings.Config, isInternal bool) (*D
 				}
 			}
 
-		case detections.TypeComputedDataflowRisk:
-			var risk types.RiskDetector
-
-			buffer := bytes.NewBuffer(nil)
-			err := json.NewEncoder(buffer).Encode(castDetection.Value)
-			if err != nil {
-				return nil, err
-			}
-			json.NewDecoder(buffer).Decode(&risk)
-
-			risksHolder.AddComputedRisk(risk)
 		case detections.TypeDependencyClassified:
 			err := componentsHolder.AddDependency(detection)
 			if err != nil {
