@@ -11,14 +11,14 @@ import (
 )
 
 type DataType struct {
-	Name        string  `json:"name"`
-	Occurrences float64 `json:"occurrences"`
+	Name        string  `json:"name" yaml:"name"`
+	Occurrences float64 `json:"occurrences" yaml:"occurrences"`
 }
 
 type ScanReport struct {
-	NumberOfLines     int        `json:"number_of_lines"`
-	NumberOfDataTypes int        `json:"number_of_data_types"`
-	DataTypes         []DataType `json:"data_types"`
+	NumberOfLines     int        `json:"number_of_lines" yaml:"number_of_lines"`
+	NumberOfDataTypes int        `json:"number_of_data_types" yaml:"number_of_data_types"`
+	DataTypes         []DataType `json:"data_types" yaml:"data_types"`
 }
 
 type MetricsReport struct {

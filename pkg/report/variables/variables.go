@@ -21,13 +21,13 @@ const (
 )
 
 type Identifier struct {
-	Type Type   `json:"type"`
-	Name string `json:"name"`
+	Type Type   `json:"type" yaml:"type"`
+	Name string `json:"name" yaml:"name"`
 }
 
 type Variable struct {
-	Name       string      `json:"string"`
-	Complexity Complexity  `json:"complexity"`
-	DataType   DataType    `json:"datatype"`
-	Data       interface{} `json:"data"`
+	Name       string      `json:"string" yaml:"string"`
+	Complexity Complexity  `json:"complexity" yaml:"complexity"`
+	DataType   DataType    `json:"datatype" yaml:"datatype"`
+	Data       interface{} `json:"data" yaml:"data"`
 }

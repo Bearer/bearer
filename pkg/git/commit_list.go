@@ -12,9 +12,9 @@ var coAuthorValidPattern = regexp.MustCompile(`<.*>`)
 
 type CommitInfo struct {
 	CommitIdentifier
-	Committer string   `json:"committer"`
-	Author    string   `json:"author"`
-	CoAuthors []string `json:"co_authors"`
+	Committer string   `json:"committer" yaml:"committer"`
+	Author    string   `json:"author" yaml:"author"`
+	CoAuthors []string `json:"co_authors" yaml:"co_authors"`
 }
 
 func GetCommitList(rootDir, firstCommitSHA, lastCommitSHA string) ([]CommitInfo, error) {

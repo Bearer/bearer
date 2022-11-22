@@ -33,32 +33,32 @@ type ReportDetection interface {
 
 // broker writes those for files that scanner fails to proccess
 type FileFailedDetection struct {
-	Type     DetectionType `json:"type"`
-	File     string        `json:"file"`
-	FileSize int           `json:"file_size"`
-	Timeout  time.Duration `json:"timeout_duration"`
-	Error    string        `json:"error"`
+	Type     DetectionType `json:"type" yaml:"type"`
+	File     string        `json:"file" yaml:"file"`
+	FileSize int           `json:"file_size" yaml:"file_size"`
+	Timeout  time.Duration `json:"timeout_duration" yaml:"timeout_duration"`
+	Error    string        `json:"error" yaml:"error"`
 }
 
 type ErrorDetection struct {
-	Type    DetectionType `json:"type"`
-	Message string        `json:"message"`
-	File    string        `json:"file"`
+	Type    DetectionType `json:"type" yaml:"type"`
+	Message string        `json:"message" yaml:"message"`
+	File    string        `json:"file" yaml:"file"`
 }
 
 type FrameworkDetection struct {
-	Type          DetectionType   `json:"type"`
-	DetectorType  detectors.Type  `json:"detector_type"`
-	FrameworkType frameworks.Type `json:"framework_detection_type"`
-	CommitSHA     string          `json:"commit_sha,omitempty"`
-	Source        source.Source   `json:"source"`
-	Value         interface{}     `json:"value"`
+	Type          DetectionType   `json:"type" yaml:"type"`
+	DetectorType  detectors.Type  `json:"detector_type" yaml:"detector_type"`
+	FrameworkType frameworks.Type `json:"framework_detection_type" yaml:"framework_detection_type"`
+	CommitSHA     string          `json:"commit_sha,omitempty" yaml:"commit_sha,omitempty"`
+	Source        source.Source   `json:"source" yaml:"source"`
+	Value         interface{}     `json:"value" yaml:"value"`
 }
 
 type Detection struct {
-	Type         DetectionType  `json:"type"`
-	DetectorType detectors.Type `json:"detector_type"`
-	CommitSHA    string         `json:"commit_sha,omitempty"`
-	Source       source.Source  `json:"source"`
-	Value        interface{}    `json:"value"`
+	Type         DetectionType  `json:"type" yaml:"type"`
+	DetectorType detectors.Type `json:"detector_type" yaml:"detector_type"`
+	CommitSHA    string         `json:"commit_sha,omitempty" yaml:"commit_sha,omitempty"`
+	Source       source.Source  `json:"source" yaml:"source"`
+	Value        interface{}    `json:"value" yaml:"value"`
 }

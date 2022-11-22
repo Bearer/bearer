@@ -9,14 +9,14 @@ const (
 )
 
 type Operation struct {
-	Path string `json:"path"`
-	Type string `json:"type"`
-	Urls []Url  `json:"url"`
+	Path string `json:"path" yaml:"path"`
+	Type string `json:"type" yaml:"type"`
+	Urls []Url  `json:"url" yaml:"url"`
 }
 
 type Url struct {
-	Url       string     `json:"url"`
-	Variables []Variable `json:"variables"`
+	Url       string     `json:"url" yaml:"url"`
+	Variables []Variable `json:"variables" yaml:"variables"`
 }
 
 type Variable struct {

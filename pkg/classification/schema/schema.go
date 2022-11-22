@@ -16,7 +16,7 @@ var regexpTimestampsMatcher = regexp.MustCompile(`\A(created|updated)\sat\z`)
 
 type ClassifiedDatatype struct {
 	datatype.DataTypable
-	Classification Classification `json:"classification"`
+	Classification Classification `json:"classification" yaml:"classification"`
 }
 
 func (datatype ClassifiedDatatype) GetClassification() interface{} {
@@ -24,9 +24,9 @@ func (datatype ClassifiedDatatype) GetClassification() interface{} {
 }
 
 type Classification struct {
-	Name     string                          `json:"name"`
+	Name     string                          `json:"name" yaml:"name"`
 	DataType *db.DataType                    `json:"data_type,omitempty"`
-	Decision classify.ClassificationDecision `json:"decision"`
+	Decision classify.ClassificationDecision `json:"decision" yaml:"decision"`
 }
 
 type Classifier struct {

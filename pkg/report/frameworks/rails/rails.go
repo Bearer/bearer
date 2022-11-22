@@ -11,18 +11,18 @@ const TypeDatabase frameworks.Type = "database"
 const TypeStorage frameworks.Type = "storage"
 
 type Cache struct {
-	Type string `json:"type"`
+	Type string `json:"type" yaml:"type"`
 }
 
 type Database struct {
-	Name    string `json:"name"`
-	Adapter string `json:"adapter"`
+	Name    string `json:"name" yaml:"name"`
+	Adapter string `json:"adapter" yaml:"adapter"`
 }
 
 type Storage struct {
-	Name       string `json:"name"`
-	Service    string `json:"service"`
-	Encryption string `json:"encryption"`
+	Name       string `json:"name" yaml:"name"`
+	Service    string `json:"service" yaml:"service"`
+	Encryption string `json:"encryption" yaml:"encryption"`
 }
 
 func (value *Cache) GetTechnologyKey() string {

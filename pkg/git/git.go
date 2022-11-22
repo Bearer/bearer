@@ -35,8 +35,8 @@ var (
 )
 
 type CommitIdentifier struct {
-	SHA       string    `json:"sha"`
-	Timestamp time.Time `json:"timestamp"`
+	SHA       string    `json:"sha" yaml:"sha"`
+	Timestamp time.Time `json:"timestamp" yaml:"timestamp"`
 }
 
 func urlWithCredentials(originalURL *url.URL, token string) *url.URL {

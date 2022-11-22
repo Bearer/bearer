@@ -9,8 +9,8 @@ const LanguageRuby string = "ruby"
 
 // Dependency is a dependency that keeps the name and version
 type Dependency struct {
-	PackageManager string `json:"package_manager"`
-	Group          string `json:"group"`
-	Name           string `json:"name"`
-	Version        string `json:"version"`
+	PackageManager string `json:"package_manager" yaml:"package_manager"`
+	Group          string `json:"group" yaml:"group"`
+	Name           string `json:"name" yaml:"name"`
+	Version        string `json:"version" yaml:"version"`
 }

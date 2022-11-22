@@ -11,13 +11,13 @@ import (
 )
 
 type renamedFileReport struct {
-	Type  string            `json:"type"`
-	Files []git.RenamedFile `json:"files"`
+	Type  string            `json:"type" yaml:"type"`
+	Files []git.RenamedFile `json:"files" yaml:"files"`
 }
 
 type commitInfoReport struct {
-	Type    string           `json:"type"`
-	Commits []git.CommitInfo `json:"commits"`
+	Type    string           `json:"type" yaml:"type"`
+	Commits []git.CommitInfo `json:"commits" yaml:"commits"`
 }
 
 func ReportRepositoryInfo(reportWriter io.Writer, repository work.Repository, commitList []git.CommitInfo) error {

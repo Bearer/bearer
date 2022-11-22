@@ -9,7 +9,7 @@ import (
 )
 
 type Value struct {
-	Parts []Part `json:"parts"`
+	Parts []Part `json:"parts" yaml:"parts"`
 }
 
 type Part interface {
@@ -28,18 +28,18 @@ const (
 )
 
 type String struct {
-	Type  PartType `json:"type"`
-	Value string   `json:"value"`
+	Type  PartType `json:"type" yaml:"type"`
+	Value string   `json:"value" yaml:"value"`
 }
 
 type VariableReference struct {
-	Type       PartType             `json:"type"`
-	Identifier variables.Identifier `json:"identifier"`
+	Type       PartType             `json:"type" yaml:"type"`
+	Identifier variables.Identifier `json:"identifier" yaml:"identifier"`
 }
 
 type Unknown struct {
-	Type  PartType `json:"type"`
-	Parts []Part   `json:"parts"`
+	Type  PartType `json:"type" yaml:"type"`
+	Parts []Part   `json:"parts" yaml:"parts"`
 }
 
 func New() *Value {

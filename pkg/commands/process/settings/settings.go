@@ -12,11 +12,11 @@ import (
 )
 
 type Config struct {
-	Worker         flag.WorkerOptions `json:"worker"`
-	Scan           flag.ScanOptions   `json:"scan"`
-	Report         flag.ReportOptions `json:"report"`
-	CustomDetector map[string]Rule    `json:"custom_detector"`
-	Policies       map[string]*Policy `json:"policies"`
+	Worker         flag.WorkerOptions `json:"worker" yaml:"worker"`
+	Scan           flag.ScanOptions   `json:"scan" yaml:"scan"`
+	Report         flag.ReportOptions `json:"report" yaml:"report"`
+	CustomDetector map[string]Rule    `json:"custom_detector" yaml:"custom_detector"`
+	Policies       map[string]*Policy `json:"policies" yaml:"policies"`
 }
 
 type policyLevel string

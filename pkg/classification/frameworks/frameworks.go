@@ -11,14 +11,14 @@ import (
 
 type ClassifiedFramework struct {
 	*detections.Detection
-	Classification *Classification `json:"classification"`
+	Classification *Classification `json:"classification" yaml:"classification"`
 }
 
 type Classification struct {
-	RecipeMatch bool   `json:"recipe_match"`
-	RecipeName  string `json:"recipe_name,omitempty"`
-	RecipeUUID  string `json:"recipe_uuid,omitempty"`
-	Decision    classify.ClassificationDecision `json:"decision"`
+	RecipeMatch bool                            `json:"recipe_match" yaml:"recipe_match"`
+	RecipeName  string                          `json:"recipe_name,omitempty"`
+	RecipeUUID  string                          `json:"recipe_uuid,omitempty"`
+	Decision    classify.ClassificationDecision `json:"decision" yaml:"decision"`
 }
 
 type Classifier struct {

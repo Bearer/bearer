@@ -1,13 +1,13 @@
 package types
 
 type Component struct {
-	Name      string              `json:"name"`
+	Name      string              `json:"name" yaml:"name"`
 	UUID      string              `json:"uuid,omitempty" yaml:"uuid,omitempty"`
-	Locations []ComponentLocation `json:"locations"`
+	Locations []ComponentLocation `json:"locations" yaml:"locations"`
 }
 
 type ComponentLocation struct {
-	Detector   string `json:"detector"`
-	Filename   string `json:"filename"`
-	LineNumber int    `json:"line_number"`
+	Detector   string `json:"detector" yaml:"detector"`
+	Filename   string `json:"filename" yaml:"filename"`
+	LineNumber int    `json:"line_number" yaml:"line_number"`
 }
