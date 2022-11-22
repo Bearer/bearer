@@ -25,7 +25,7 @@ type Storage struct {
 	Encryption string `json:"encryption" yaml:"encryption"`
 }
 
-func (value *Cache) GetTechnologyKey() string {
+func (value Cache) GetTechnologyKey() string {
 	switch value.Type {
 	case "memory_store", "null_store":
 		// Ignored cache types
@@ -41,7 +41,7 @@ func (value *Cache) GetTechnologyKey() string {
 	}
 }
 
-func (value *Database) GetTechnologyKey() string {
+func (value Database) GetTechnologyKey() string {
 	switch strings.ToLower(value.Adapter) {
 	case "mysql2", "jdbcmysql":
 		return "MySQL"
@@ -54,7 +54,7 @@ func (value *Database) GetTechnologyKey() string {
 	}
 }
 
-func (value *Storage) GetTechnologyKey() string {
+func (value Storage) GetTechnologyKey() string {
 	if strings.Contains(value.Name, "test") {
 		// Ignored storage types
 		return ""

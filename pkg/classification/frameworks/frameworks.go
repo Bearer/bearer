@@ -5,9 +5,12 @@ import (
 
 	"github.com/bearer/curio/pkg/classification/db"
 	"github.com/bearer/curio/pkg/report/detections"
-	"github.com/bearer/curio/pkg/report/frameworks/rails"
 	"github.com/bearer/curio/pkg/util/classify"
 )
+
+type classifiableFramework interface{
+	GetTechnologyKey() string
+}
 
 type ClassifiedFramework struct {
 	*detections.Detection
@@ -59,19 +62,16 @@ func (classifier *Classifier) Classify(data detections.Detection) (*ClassifiedFr
 	}
 
 	var technologyKey string
-	switch value := data.Value.(type) {
-	case rails.Cache:
-		technologyKey = value.GetTechnologyKey()
-	case rails.Database:
-		technologyKey = value.GetTechnologyKey()
-	case rails.Storage:
-		technologyKey = value.GetTechnologyKey()
-	default:
+
+	value, ok := data.Value.(classifiableFramework)
+	if !ok {
 		return &ClassifiedFramework{
 			Detection:      &data,
 			Classification: classification,
 		}, errors.New("detection is not for a framework")
 	}
+
+	technologyKey = value.GetTechnologyKey()
 
 	if technologyKey != "" {
 		for _, recipe := range classifier.config.Recipes {
