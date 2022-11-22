@@ -14,7 +14,11 @@
       "group": null,
       "package_manager": "go"
     },
-    { "name": "dbt-bigquery", "group": null, "package_manager": "pypi" },
+    {
+      "name": "dbt-bigquery",
+      "group": null,
+      "package_manager": "pypi"
+    },
     {
       "name": "scio-bigquery_2.12",
       "group": "com.spotify",
@@ -35,7 +39,11 @@
       "group": null,
       "package_manager": "nuget"
     },
-    { "name": "bigquery", "group": null, "package_manager": "rubygems" },
+    {
+      "name": "bigquery",
+      "group": null,
+      "package_manager": "rubygems"
+    },
     {
       "name": "google-cloud-bigquery",
       "group": null,
@@ -46,8 +54,16 @@
       "group": null,
       "package_manager": "rubygems"
     },
-    { "name": "bigquery-client", "group": null, "package_manager": "rubygems" },
-    { "name": "bigquery-ruby", "group": null, "package_manager": "rubygems" },
+    {
+      "name": "bigquery-client",
+      "group": null,
+      "package_manager": "rubygems"
+    },
+    {
+      "name": "bigquery-ruby",
+      "group": null,
+      "package_manager": "rubygems"
+    },
     {
       "name": "google-cloud-bigquery-data_transfer",
       "group": null,
@@ -78,13 +94,21 @@
       "group": null,
       "package_manager": "npm"
     },
-    { "name": "bigquery-python", "group": null, "package_manager": "pypi" },
+    {
+      "name": "bigquery-python",
+      "group": null,
+      "package_manager": "pypi"
+    },
     {
       "name": "google-cloud-bigquery",
       "group": null,
       "package_manager": "pypi"
     },
-    { "name": "pybigquery", "group": null, "package_manager": "pypi" },
+    {
+      "name": "pybigquery",
+      "group": null,
+      "package_manager": "pypi"
+    },
     {
       "name": "google-cloud-bigquery",
       "group": "com.google.cloud",
@@ -95,5 +119,6 @@
       "group": null,
       "package_manager": "packagist"
     }
-  ]
+  ],
+  "uuid": "2c6da556-2622-471b-80cd-0ecefa73db61"
 }

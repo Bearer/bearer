@@ -2,9 +2,20 @@
   "metadata": { "version": "1.0" },
   "name": "Google reCAPTCHA ",
   "type": "external_service",
-  "urls": ["https://*.google.com/recaptcha/*"],
+  "urls": [
+    "https://*.google.com/recaptcha/*"
+  ],
   "packages": [
-    { "name": "recaptcha-v3", "group": "", "package_manager": "npm" },
-    { "name": "recaptcha", "group": null, "package_manager": "rubygems" }
-  ]
+    {
+      "name": "recaptcha-v3",
+      "group": "",
+      "package_manager": "npm"
+    },
+    {
+      "name": "recaptcha",
+      "group": null,
+      "package_manager": "rubygems"
+    }
+  ],
+  "uuid": "a0a4e3ff-0efa-437f-88a1-dde415eb3790"
 }

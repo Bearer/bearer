@@ -2,6 +2,9 @@
   "metadata": { "version": "1.0" },
   "name": "PandaDoc",
   "type": "external_service",
-  "urls": ["https://api.pandadoc.com"],
-  "packages": []
+  "urls": [
+    "https://api.pandadoc.com"
+  ],
+  "packages": [],
+  "uuid": "214c3327-fa63-4f1d-b6d8-24128e776137"
 }

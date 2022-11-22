@@ -2,6 +2,9 @@
   "metadata": { "version": "1.0" },
   "name": "Softlayer (IBM Cloud)",
   "type": "external_service",
-  "urls": ["https://api.softlayer.com"],
-  "packages": []
+  "urls": [
+    "https://api.softlayer.com"
+  ],
+  "packages": [],
+  "uuid": "96ae0b8c-5b9a-475f-af34-6504ef64b686"
 }

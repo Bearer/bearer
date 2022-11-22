@@ -2,6 +2,9 @@
   "metadata": { "version": "1.0" },
   "name": "Adobe Scene7",
   "type": "external_service",
-  "urls": ["https://*.scene7.com"],
-  "packages": []
+  "urls": [
+    "https://*.scene7.com"
+  ],
+  "packages": [],
+  "uuid": "e465626b-e35a-4aa4-bb9b-bb9270fbbc47"
 }

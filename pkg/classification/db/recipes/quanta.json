@@ -2,6 +2,9 @@
   "metadata": { "version": "1.0" },
   "name": "Quanta",
   "type": "external_service",
-  "urls": ["https://app.quanta.io/api"],
-  "packages": []
+  "urls": [
+    "https://app.quanta.io/api"
+  ],
+  "packages": [],
+  "uuid": "43ff6978-7db9-4155-854a-d9106df82333"
 }

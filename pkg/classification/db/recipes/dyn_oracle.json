@@ -2,6 +2,10 @@
   "metadata": { "version": "1.0" },
   "name": "Dyn (Oracle)",
   "type": "external_service",
-  "urls": ["https://api.dynect.net", "https://api-v4.dynect.net"],
-  "packages": []
+  "urls": [
+    "https://api.dynect.net",
+    "https://api-v4.dynect.net"
+  ],
+  "packages": [],
+  "uuid": "4d70c5f4-087a-478d-8983-00cf5e9cfb98"
 }

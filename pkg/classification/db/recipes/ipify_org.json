@@ -2,6 +2,9 @@
   "metadata": { "version": "1.0" },
   "name": "ipify.org",
   "type": "external_service",
-  "urls": ["https://api.ipify.org"],
-  "packages": []
+  "urls": [
+    "https://api.ipify.org"
+  ],
+  "packages": [],
+  "uuid": "278a12e1-2e88-4a4e-80d3-f8c4f1048e3c"
 }

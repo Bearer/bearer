@@ -2,19 +2,50 @@
   "metadata": { "version": "1.0" },
   "name": "Auth0",
   "type": "external_service",
-  "urls": ["https://auth0.com/api"],
+  "urls": [
+    "https://auth0.com/api"
+  ],
   "packages": [
-    { "name": "auth0", "group": null, "package_manager": "rubygems" },
+    {
+      "name": "auth0",
+      "group": null,
+      "package_manager": "rubygems"
+    },
     {
       "name": "github.com/go-auth0/auth0",
       "group": null,
       "package_manager": "go"
     },
-    { "name": "auth0-php", "group": null, "package_manager": "packagist" },
-    { "name": "auth0-python", "group": null, "package_manager": "pypi" },
-    { "name": "auth0-lock", "group": null, "package_manager": "npm" },
-    { "name": "auth0", "group": null, "package_manager": "npm" },
-    { "name": "auth0-js", "group": null, "package_manager": "npm" },
-    { "name": "omniauth-auth0", "group": null, "package_manager": "rubygems" }
-  ]
+    {
+      "name": "auth0-php",
+      "group": null,
+      "package_manager": "packagist"
+    },
+    {
+      "name": "auth0-python",
+      "group": null,
+      "package_manager": "pypi"
+    },
+    {
+      "name": "auth0-lock",
+      "group": null,
+      "package_manager": "npm"
+    },
+    {
+      "name": "auth0",
+      "group": null,
+      "package_manager": "npm"
+    },
+    {
+      "name": "auth0-js",
+      "group": null,
+      "package_manager": "npm"
+    },
+    {
+      "name": "omniauth-auth0",
+      "group": null,
+      "package_manager": "rubygems"
+    }
+  ],
+  "uuid": "2a8392d5-7013-41ab-833d-64fd2cffcba6"
 }

@@ -9,5 +9,6 @@
       "group": "org.apache.hbase",
       "package_manager": "maven"
     }
-  ]
+  ],
+  "uuid": "ee048325-9ebe-4306-9f48-c300e27af849"
 }

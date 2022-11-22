@@ -2,6 +2,9 @@
   "metadata": { "version": "1.0" },
   "name": "Expensify",
   "type": "external_service",
-  "urls": ["https://integrations.expensify.com/Integration-Server"],
-  "packages": []
+  "urls": [
+    "https://integrations.expensify.com/Integration-Server"
+  ],
+  "packages": [],
+  "uuid": "ef9c9488-0c59-419f-98db-45bddfd692b5"
 }

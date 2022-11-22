@@ -8,13 +8,26 @@
     "https://salesforce.com/services/data"
   ],
   "packages": [
-    { "name": "simple-salesforce", "group": null, "package_manager": "pypi" },
-    { "name": "jsforce", "group": null, "package_manager": "npm" },
+    {
+      "name": "simple-salesforce",
+      "group": null,
+      "package_manager": "pypi"
+    },
+    {
+      "name": "jsforce",
+      "group": null,
+      "package_manager": "npm"
+    },
     {
       "name": "github.com/nimajalali/go-force",
       "group": null,
       "package_manager": "go"
     },
-    { "name": "restforce", "group": null, "package_manager": "rubygems" }
-  ]
+    {
+      "name": "restforce",
+      "group": null,
+      "package_manager": "rubygems"
+    }
+  ],
+  "uuid": "7421be70-674e-4647-a10d-bd8ba963f7cb"
 }

@@ -2,12 +2,31 @@
   "metadata": { "version": "1.0" },
   "name": "AWS S3",
   "type": "data_store",
-  "urls": ["https://s3-*.amazonaws.com", "https://s3.*.amazonaws.com"],
+  "urls": [
+    "https://s3-*.amazonaws.com",
+    "https://s3.*.amazonaws.com"
+  ],
   "packages": [
-    { "name": "aws-sdk-s3", "group": null, "package_manager": "rubygems" },
-    { "name": "async-aws/s3", "group": null, "package_manager": "packagist" },
-    { "name": "s3transfer", "group": null, "package_manager": "pypi" },
-    { "name": "@aws-sdk/client-s3", "group": null, "package_manager": "npm" },
+    {
+      "name": "aws-sdk-s3",
+      "group": null,
+      "package_manager": "rubygems"
+    },
+    {
+      "name": "async-aws/s3",
+      "group": null,
+      "package_manager": "packagist"
+    },
+    {
+      "name": "s3transfer",
+      "group": null,
+      "package_manager": "pypi"
+    },
+    {
+      "name": "@aws-sdk/client-s3",
+      "group": null,
+      "package_manager": "npm"
+    },
     {
       "name": "github.com/aws/aws-sdk-go-v2/service/s3",
       "group": null,
@@ -18,7 +37,16 @@
       "group": "software.amazon.awssdk",
       "package_manager": "maven"
     },
-    { "name": "s3fs", "group": null, "package_manager": "pypi" },
-    { "name": "aws4", "group": null, "package_manager": "npm" }
-  ]
+    {
+      "name": "s3fs",
+      "group": null,
+      "package_manager": "pypi"
+    },
+    {
+      "name": "aws4",
+      "group": null,
+      "package_manager": "npm"
+    }
+  ],
+  "uuid": "4e5a3a3a-47cd-4b0e-b0a6-fa30a0a62499"
 }

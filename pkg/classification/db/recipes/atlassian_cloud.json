@@ -13,6 +13,11 @@
       "group": null,
       "package_manager": "go"
     },
-    { "name": "atlassian-jwt", "group": null, "package_manager": "rubygems" }
-  ]
+    {
+      "name": "atlassian-jwt",
+      "group": null,
+      "package_manager": "rubygems"
+    }
+  ],
+  "uuid": "3ba7ec95-6936-49ed-b4d7-eafffb5233b9"
 }

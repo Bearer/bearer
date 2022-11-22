@@ -20,12 +20,12 @@ type DataFlow struct {
 	Components []types.Component    `json:"components"`
 }
 
-var allowedDetections []detections.DetectionType = []detections.DetectionType{detections.TypeSchemaClassified, detections.TypeCustomClassified, detections.TypeDependencyClassified, detections.TypeInterfaceClassified}
+var allowedDetections []detections.DetectionType = []detections.DetectionType{detections.TypeSchemaClassified, detections.TypeCustomClassified, detections.TypeDependencyClassified, detections.TypeInterfaceClassified, detections.TypeFrameworkClassified}
 
 func GetOutput(input []interface{}, config settings.Config, isInternal bool) (*DataFlow, error) {
 	dataTypesHolder := datatypes.New()
 	risksHolder := risks.New(config, isInternal)
-	componentsHolder := components.New()
+	componentsHolder := components.New(isInternal)
 
 	for _, detection := range input {
 		detectionMap, ok := detection.(map[string]interface{})
@@ -83,8 +83,12 @@ func GetOutput(input []interface{}, config settings.Config, isInternal bool) (*D
 			if err != nil {
 				return nil, err
 			}
+		case detections.TypeFrameworkClassified:
+			err := componentsHolder.AddFramework(detection)
+			if err != nil {
+				return nil, err
+			}
 		}
-
 	}
 
 	dataflow := &DataFlow{

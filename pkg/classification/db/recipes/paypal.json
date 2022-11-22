@@ -29,9 +29,21 @@
       "group": null,
       "package_manager": "npm"
     },
-    { "name": "@paypal/payouts-sdk", "group": null, "package_manager": "npm" },
-    { "name": "paypalcheckoutsdk", "group": null, "package_manager": "pypi" },
-    { "name": "paypalpayoutssdk", "group": null, "package_manager": "pypi" },
+    {
+      "name": "@paypal/payouts-sdk",
+      "group": null,
+      "package_manager": "npm"
+    },
+    {
+      "name": "paypalcheckoutsdk",
+      "group": null,
+      "package_manager": "pypi"
+    },
+    {
+      "name": "paypalpayoutssdk",
+      "group": null,
+      "package_manager": "pypi"
+    },
     {
       "name": "PayPalCheckoutSdk",
       "group": null,
@@ -47,5 +59,6 @@
       "group": null,
       "package_manager": "npm"
     }
-  ]
+  ],
+  "uuid": "3e73327b-3b0b-4927-a782-954b4b832252"
 }

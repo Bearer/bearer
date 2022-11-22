@@ -2,10 +2,20 @@
   "metadata": { "version": "1.0" },
   "name": "Gitlab",
   "type": "external_service",
-  "urls": ["https://gitlab.com/api"],
+  "urls": [
+    "https://gitlab.com/api"
+  ],
   "packages": [
-    { "name": "gitlab", "group": null, "package_manager": "rubygems" },
-    { "name": "gitlab", "group": null, "package_manager": "npm" },
+    {
+      "name": "gitlab",
+      "group": null,
+      "package_manager": "rubygems"
+    },
+    {
+      "name": "gitlab",
+      "group": null,
+      "package_manager": "npm"
+    },
     {
       "name": "github.com/xanzy/go-gitlab",
       "group": null,
@@ -16,12 +26,21 @@
       "group": "org.gitlab4j",
       "package_manager": "maven"
     },
-    { "name": "python-gitlab", "group": null, "package_manager": "pypi" },
-    { "name": "gitlab", "group": null, "package_manager": "pypi" },
+    {
+      "name": "python-gitlab",
+      "group": null,
+      "package_manager": "pypi"
+    },
+    {
+      "name": "gitlab",
+      "group": null,
+      "package_manager": "pypi"
+    },
     {
       "name": "m4tthumphrey/php-gitlab-api",
       "group": null,
       "package_manager": "packagist"
     }
-  ]
+  ],
+  "uuid": "326d233c-f513-4310-ad7f-2a96a3a7a2dc"
 }

@@ -14,20 +14,36 @@
       "group": null,
       "package_manager": "go"
     },
-    { "name": "chewy", "group": null, "package_manager": "rubygems" },
+    {
+      "name": "chewy",
+      "group": null,
+      "package_manager": "rubygems"
+    },
     {
       "name": "ruflin/elastica",
       "group": null,
       "package_manager": "packagist"
     },
-    { "name": "Elasticsearch.Net", "group": null, "package_manager": "nuget" },
+    {
+      "name": "Elasticsearch.Net",
+      "group": null,
+      "package_manager": "nuget"
+    },
     {
       "name": "log4net.ElasticSearch",
       "group": null,
       "package_manager": "nuget"
     },
-    { "name": "elasticsearch_dsl", "group": null, "package_manager": "pypi" },
-    { "name": "elasticsearch-dsl", "group": null, "package_manager": "pypi" },
+    {
+      "name": "elasticsearch_dsl",
+      "group": null,
+      "package_manager": "pypi"
+    },
+    {
+      "name": "elasticsearch-dsl",
+      "group": null,
+      "package_manager": "pypi"
+    },
     {
       "name": "@digital-factory/elk-client",
       "group": null,
@@ -38,15 +54,31 @@
       "group": "org.elasticsearch",
       "package_manager": "maven"
     },
-    { "name": "elasticsearch", "group": null, "package_manager": "pypi" },
-    { "name": "elasticsearch", "group": null, "package_manager": "packagist" },
+    {
+      "name": "elasticsearch",
+      "group": null,
+      "package_manager": "pypi"
+    },
+    {
+      "name": "elasticsearch",
+      "group": null,
+      "package_manager": "packagist"
+    },
     {
       "name": "github.com/olivere/elastic",
       "group": null,
       "package_manager": "go"
     },
-    { "name": "elasticsearch", "group": null, "package_manager": "npm" },
-    { "name": "searchkick", "group": null, "package_manager": "rubygems" },
+    {
+      "name": "elasticsearch",
+      "group": null,
+      "package_manager": "npm"
+    },
+    {
+      "name": "searchkick",
+      "group": null,
+      "package_manager": "rubygems"
+    },
     {
       "name": "spring-data-elasticsearch",
       "group": "org.springframework.data",
@@ -82,13 +114,21 @@
       "group": null,
       "package_manager": "packagist"
     },
-    { "name": "pyelasticsearch", "group": null, "package_manager": "pypi" },
+    {
+      "name": "pyelasticsearch",
+      "group": null,
+      "package_manager": "pypi"
+    },
     {
       "name": "bboss-elasticsearch-rest-jdbc",
       "group": "com.bbossgroups.plugins",
       "package_manager": "maven"
     },
-    { "name": "elasticsearchclient", "group": null, "package_manager": "npm" },
+    {
+      "name": "elasticsearchclient",
+      "group": null,
+      "package_manager": "npm"
+    },
     {
       "name": "elasticsearch-transport",
       "group": null,
@@ -99,7 +139,11 @@
       "group": null,
       "package_manager": "rubygems"
     },
-    { "name": "elasticsearch", "group": null, "package_manager": "rubygems" },
+    {
+      "name": "elasticsearch",
+      "group": null,
+      "package_manager": "rubygems"
+    },
     {
       "name": "friendsofsymfony/elastica-bundle",
       "group": "",
@@ -115,5 +159,6 @@
       "group": null,
       "package_manager": "go"
     }
-  ]
+  ],
+  "uuid": "911eed55-46f6-4324-ab55-ca11acfe562e"
 }

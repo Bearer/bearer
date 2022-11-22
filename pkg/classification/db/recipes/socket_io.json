@@ -2,6 +2,10 @@
   "metadata": { "version": "1.0" },
   "name": "Socket.IO",
   "type": "external_service",
-  "urls": ["https://socket.io/lib/*", "https://*.socket.io"],
-  "packages": []
+  "urls": [
+    "https://socket.io/lib/*",
+    "https://*.socket.io"
+  ],
+  "packages": [],
+  "uuid": "f3426905-709b-4b1e-95ba-65e4654c722c"
 }

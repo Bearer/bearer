@@ -2,6 +2,9 @@
   "metadata": { "version": "1.0" },
   "name": "Demdex (Adobe)",
   "type": "external_service",
-  "urls": ["https://api.demdex.net"],
-  "packages": []
+  "urls": [
+    "https://api.demdex.net"
+  ],
+  "packages": [],
+  "uuid": "e779c7a6-b3e6-44d9-abd6-46f681c6cb58"
 }

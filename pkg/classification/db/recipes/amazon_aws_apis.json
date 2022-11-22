@@ -2,7 +2,10 @@
   "metadata": { "version": "1.0" },
   "name": "Amazon AWS APIs",
   "type": "external_service",
-  "urls": ["https://amazonaws.com.cn", "https://amazonaws.com"],
+  "urls": [
+    "https://amazonaws.com.cn",
+    "https://amazonaws.com"
+  ],
   "packages": [
     {
       "name": "github.com/aws/aws-sdk-go-v2",
@@ -19,13 +22,26 @@
       "group": "com.amazonaws",
       "package_manager": "maven"
     },
-    { "name": "aiobotocore", "group": null, "package_manager": "pypi" },
-    { "name": "awswrangler", "group": null, "package_manager": "pypi" },
-    { "name": "AWSSDK", "group": null, "package_manager": "nuget" },
+    {
+      "name": "aiobotocore",
+      "group": null,
+      "package_manager": "pypi"
+    },
+    {
+      "name": "awswrangler",
+      "group": null,
+      "package_manager": "pypi"
+    },
+    {
+      "name": "AWSSDK",
+      "group": null,
+      "package_manager": "nuget"
+    },
     {
       "name": "github.com/aws/aws-sdk-go-v2/service/secretsmanager",
       "group": null,
       "package_manager": "go"
     }
-  ]
+  ],
+  "uuid": "1fc214b7-854e-42fb-8824-b6c22187938f"
 }

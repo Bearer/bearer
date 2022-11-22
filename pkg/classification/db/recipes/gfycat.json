@@ -2,6 +2,9 @@
   "metadata": { "version": "1.0" },
   "name": "Gfycat",
   "type": "external_service",
-  "urls": ["https://api.gfycat.com"],
-  "packages": []
+  "urls": [
+    "https://api.gfycat.com"
+  ],
+  "packages": [],
+  "uuid": "1c5d6b67-85f4-41a3-b6b9-5c2dff414af2"
 }

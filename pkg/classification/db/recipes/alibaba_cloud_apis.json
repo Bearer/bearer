@@ -2,7 +2,9 @@
   "metadata": { "version": "1.0" },
   "name": "Alibaba Cloud APIs",
   "type": "external_service",
-  "urls": ["https://*.aliyuncs.com"],
+  "urls": [
+    "https://*.aliyuncs.com"
+  ],
   "packages": [
     {
       "name": "github.com/aliyun/alibaba-cloud-sdk-go",
@@ -24,5 +26,6 @@
       "group": null,
       "package_manager": "go"
     }
-  ]
+  ],
+  "uuid": "4e6fddd2-34c7-46b7-83c4-e53b638a4acf"
 }

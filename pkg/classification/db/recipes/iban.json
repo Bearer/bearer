@@ -2,6 +2,9 @@
   "metadata": { "version": "1.0" },
   "name": "IBAN",
   "type": "external_service",
-  "urls": ["https://api.iban.com"],
-  "packages": []
+  "urls": [
+    "https://api.iban.com"
+  ],
+  "packages": [],
+  "uuid": "69857cae-a5cf-4ac3-ad02-c495ed69e70b"
 }

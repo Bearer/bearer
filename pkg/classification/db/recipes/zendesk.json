@@ -16,8 +16,21 @@
       "group": null,
       "package_manager": "packagist"
     },
-    { "name": "zendesk_api", "group": null, "package_manager": "rubygems" },
-    { "name": "node-zendesk", "group": null, "package_manager": "npm" },
-    { "name": "Zenpy", "group": null, "package_manager": "pypi" }
-  ]
+    {
+      "name": "zendesk_api",
+      "group": null,
+      "package_manager": "rubygems"
+    },
+    {
+      "name": "node-zendesk",
+      "group": null,
+      "package_manager": "npm"
+    },
+    {
+      "name": "Zenpy",
+      "group": null,
+      "package_manager": "pypi"
+    }
+  ],
+  "uuid": "31e94b1b-3a27-4d8c-a28f-ffa27c9d5c51"
 }

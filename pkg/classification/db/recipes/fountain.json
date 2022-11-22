@@ -2,6 +2,9 @@
   "metadata": { "version": "1.0" },
   "name": "Fountain",
   "type": "external_service",
-  "urls": ["https://api.fountain.com"],
-  "packages": []
+  "urls": [
+    "https://api.fountain.com"
+  ],
+  "packages": [],
+  "uuid": "c0fba763-19cc-496c-819c-3bad20c8a0e3"
 }

@@ -14,12 +14,21 @@
       "group": "com.google.cloud",
       "package_manager": "maven"
     },
-    { "name": "@google-cloud/pubsub", "group": null, "package_manager": "npm" },
-    { "name": "google-cloud-pubsub", "group": null, "package_manager": "pypi" },
+    {
+      "name": "@google-cloud/pubsub",
+      "group": null,
+      "package_manager": "npm"
+    },
+    {
+      "name": "google-cloud-pubsub",
+      "group": null,
+      "package_manager": "pypi"
+    },
     {
       "name": "google-apis-pubsub_v1",
       "group": null,
       "package_manager": "rubygems"
     }
-  ]
+  ],
+  "uuid": "4f9955fb-23b7-4f3e-ab5f-134afa22940b"
 }

@@ -2,6 +2,9 @@
   "metadata": { "version": "1.0" },
   "name": "Jsdelivr",
   "type": "external_service",
-  "urls": ["https://api.jsdelivr.com"],
-  "packages": []
+  "urls": [
+    "https://api.jsdelivr.com"
+  ],
+  "packages": [],
+  "uuid": "e94a329c-96da-4906-925e-077db0ca28cc"
 }

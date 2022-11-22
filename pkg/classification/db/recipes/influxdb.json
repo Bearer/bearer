@@ -14,7 +14,11 @@
       "group": null,
       "package_manager": "go"
     },
-    { "name": "influx", "group": null, "package_manager": "npm" },
+    {
+      "name": "influx",
+      "group": null,
+      "package_manager": "npm"
+    },
     {
       "name": "influxdb-java",
       "group": "org.influxdb",
@@ -25,11 +29,16 @@
       "group": "",
       "package_manager": "packagist"
     },
-    { "name": "influxdb-client", "group": null, "package_manager": "rubygems" },
+    {
+      "name": "influxdb-client",
+      "group": null,
+      "package_manager": "rubygems"
+    },
     {
       "name": "github.com/influxdata/influxdb-client-go/v2",
       "group": null,
       "package_manager": "go"
     }
-  ]
+  ],
+  "uuid": "f7ede608-54d5-4345-a2ba-60a4bc70189f"
 }

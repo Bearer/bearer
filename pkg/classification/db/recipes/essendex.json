@@ -2,8 +2,15 @@
   "metadata": { "version": "1.0" },
   "name": "Essendex",
   "type": "external_service",
-  "urls": ["https://api.esendex.com"],
+  "urls": [
+    "https://api.esendex.com"
+  ],
   "packages": [
-    { "name": "esendex/sdk", "group": null, "package_manager": "packagist" }
-  ]
+    {
+      "name": "esendex/sdk",
+      "group": null,
+      "package_manager": "packagist"
+    }
+  ],
+  "uuid": "3b6eb622-d245-4f9c-9004-5df4534bf0e6"
 }

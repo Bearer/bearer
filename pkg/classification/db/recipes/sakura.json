@@ -2,6 +2,9 @@
   "metadata": { "version": "1.0" },
   "name": "Sakura",
   "type": "external_service",
-  "urls": ["https://secure.sakura.ad.jp/cloud/zone/*/api/"],
-  "packages": []
+  "urls": [
+    "https://secure.sakura.ad.jp/cloud/zone/*/api/"
+  ],
+  "packages": [],
+  "uuid": "d399dbe8-d083-4e0f-8853-c575f3aab673"
 }

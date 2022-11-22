@@ -2,6 +2,9 @@
   "metadata": { "version": "1.0" },
   "name": "Vercel",
   "type": "external_service",
-  "urls": ["https://api.vercel.com"],
-  "packages": []
+  "urls": [
+    "https://api.vercel.com"
+  ],
+  "packages": [],
+  "uuid": "4a6ec484-003a-454e-8e39-a618c24c6d58"
 }

@@ -2,6 +2,10 @@
   "metadata": { "version": "1.0" },
   "name": "Thunes (Limonethik)",
   "type": "external_service",
-  "urls": ["https://api.limonetikqualif.com", "https://api.limonetik.com"],
-  "packages": []
+  "urls": [
+    "https://api.limonetikqualif.com",
+    "https://api.limonetik.com"
+  ],
+  "packages": [],
+  "uuid": "2c919d7f-b58f-4d8b-9b5f-951fbeab5e0c"
 }

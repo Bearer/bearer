@@ -2,6 +2,9 @@
   "metadata": { "version": "1.0" },
   "name": "Ipstack",
   "type": "external_service",
-  "urls": ["https://api.ipstack.com"],
-  "packages": []
+  "urls": [
+    "https://api.ipstack.com"
+  ],
+  "packages": [],
+  "uuid": "a0254047-0200-4b6c-b4ea-d2efb27d2b7b"
 }

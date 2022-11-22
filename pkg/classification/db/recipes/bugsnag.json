@@ -9,7 +9,11 @@
     "https://notify.bugsnag.com"
   ],
   "packages": [
-    { "name": "bugsnag", "group": null, "package_manager": "rubygems" },
+    {
+      "name": "bugsnag",
+      "group": null,
+      "package_manager": "rubygems"
+    },
     {
       "name": "github.com/Shopify/logrus-bugsnag",
       "group": null,
@@ -20,5 +24,6 @@
       "group": null,
       "package_manager": "go"
     }
-  ]
+  ],
+  "uuid": "7ee828de-b2de-4b7e-a93a-f1a084ca59d1"
 }

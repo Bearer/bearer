@@ -2,6 +2,10 @@
   "metadata": { "version": "1.0" },
   "name": "Plaid",
   "type": "external_service",
-  "urls": ["https://production.plaid.com", "https://sandbox.plaid.com"],
-  "packages": []
+  "urls": [
+    "https://production.plaid.com",
+    "https://sandbox.plaid.com"
+  ],
+  "packages": [],
+  "uuid": "d52feb7f-c121-4228-8f1e-48f35dc61feb"
 }

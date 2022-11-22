@@ -2,6 +2,9 @@
   "metadata": { "version": "1.0" },
   "name": "Stackify",
   "type": "external_service",
-  "urls": ["https://api.stackify.net"],
-  "packages": []
+  "urls": [
+    "https://api.stackify.net"
+  ],
+  "packages": [],
+  "uuid": "76bb8a32-b4e3-4d6c-97e3-a54d1a3ab8af"
 }

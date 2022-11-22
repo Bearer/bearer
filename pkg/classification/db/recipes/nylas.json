@@ -2,6 +2,9 @@
   "metadata": { "version": "1.0" },
   "name": "Nylas",
   "type": "external_service",
-  "urls": ["https://api.nylas.com"],
-  "packages": []
+  "urls": [
+    "https://api.nylas.com"
+  ],
+  "packages": [],
+  "uuid": "0adcdf60-21c0-4d1f-9703-723e4ade37e7"
 }

@@ -2,6 +2,10 @@
   "metadata": { "version": "1.0" },
   "name": "Pipedrive",
   "type": "external_service",
-  "urls": ["https://api.pipedrive.com", "https://pipedrive.com/api"],
-  "packages": []
+  "urls": [
+    "https://api.pipedrive.com",
+    "https://pipedrive.com/api"
+  ],
+  "packages": [],
+  "uuid": "5858620b-a97e-421b-99d3-7487dd48662f"
 }

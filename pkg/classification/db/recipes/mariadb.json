@@ -4,7 +4,11 @@
   "type": "data_store",
   "urls": [],
   "packages": [
-    { "name": "mariadb", "group": null, "package_manager": "npm" },
+    {
+      "name": "mariadb",
+      "group": null,
+      "package_manager": "npm"
+    },
     {
       "name": "mariadb-connector-python",
       "group": null,
@@ -25,6 +29,11 @@
       "group": null,
       "package_manager": "npm"
     },
-    { "name": "db-mariadb", "group": null, "package_manager": "rubygems" }
-  ]
+    {
+      "name": "db-mariadb",
+      "group": null,
+      "package_manager": "rubygems"
+    }
+  ],
+  "uuid": "873dde6f-ddd3-4689-b818-7877392c1aea"
 }

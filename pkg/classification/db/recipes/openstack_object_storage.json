@@ -4,6 +4,11 @@
   "type": "data_store",
   "urls": [],
   "packages": [
-    { "name": "github.com/ncw/swift", "group": null, "package_manager": "go" }
-  ]
+    {
+      "name": "github.com/ncw/swift",
+      "group": null,
+      "package_manager": "go"
+    }
+  ],
+  "uuid": "35038191-e5ea-4a4b-b316-eaee40e13c5a"
 }

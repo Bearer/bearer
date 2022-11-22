@@ -2,6 +2,9 @@
   "metadata": { "version": "1.0" },
   "name": "Instagram",
   "type": "external_service",
-  "urls": ["https://api.instagram.com"],
-  "packages": []
+  "urls": [
+    "https://api.instagram.com"
+  ],
+  "packages": [],
+  "uuid": "5761d35a-0af9-42d7-94c2-f70a602482d1"
 }

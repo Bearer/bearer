@@ -38,6 +38,7 @@ type Recipe struct {
 	Name     string    `json:"name"`
 	Type     string    `json:"type"`
 	Packages []Package `json:"packages"`
+	UUID     string    `json:"uuid"`
 }
 
 type Package struct {

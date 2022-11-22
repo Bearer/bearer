@@ -2,22 +2,45 @@
   "metadata": { "version": "1.0" },
   "name": "PostHog",
   "type": "external_service",
-  "urls": ["https://app.posthog.com"],
+  "urls": [
+    "https://app.posthog.com"
+  ],
   "packages": [
-    { "name": "posthog-ruby", "group": null, "package_manager": "rubygems" },
-    { "name": "posthog", "group": null, "package_manager": "pypi" },
+    {
+      "name": "posthog-ruby",
+      "group": null,
+      "package_manager": "rubygems"
+    },
+    {
+      "name": "posthog",
+      "group": null,
+      "package_manager": "pypi"
+    },
     {
       "name": "posthog/posthog-php",
       "group": null,
       "package_manager": "packagist"
     },
-    { "name": "posthog-node", "group": null, "package_manager": "npm" },
+    {
+      "name": "posthog-node",
+      "group": null,
+      "package_manager": "npm"
+    },
     {
       "name": "github.com/posthog/posthog-go",
       "group": null,
       "package_manager": "go"
     },
-    { "name": "posthog-react-native", "group": null, "package_manager": "npm" },
-    { "name": "posthog-js", "group": null, "package_manager": "npm" }
-  ]
+    {
+      "name": "posthog-react-native",
+      "group": null,
+      "package_manager": "npm"
+    },
+    {
+      "name": "posthog-js",
+      "group": null,
+      "package_manager": "npm"
+    }
+  ],
+  "uuid": "db798605-ffc1-4d03-8b89-4698e9e1b83e"
 }

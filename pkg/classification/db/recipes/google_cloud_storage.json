@@ -54,6 +54,11 @@
       "group": null,
       "package_manager": "nuget"
     },
-    { "name": "google-cloud-cpp", "group": null, "package_manager": "nuget" }
-  ]
+    {
+      "name": "google-cloud-cpp",
+      "group": null,
+      "package_manager": "nuget"
+    }
+  ],
+  "uuid": "3a154582-174f-4ef7-90a2-f654435c23cb"
 }

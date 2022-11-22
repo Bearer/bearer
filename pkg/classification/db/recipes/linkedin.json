@@ -2,6 +2,10 @@
   "metadata": { "version": "1.0" },
   "name": "LinkedIn",
   "type": "external_service",
-  "urls": ["https://linkedin.com/oauth", "https://api.linkedin.com"],
-  "packages": []
+  "urls": [
+    "https://linkedin.com/oauth",
+    "https://api.linkedin.com"
+  ],
+  "packages": [],
+  "uuid": "0e1c1075-16c0-467e-9e71-65d83f3157bb"
 }

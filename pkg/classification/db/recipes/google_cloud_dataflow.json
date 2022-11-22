@@ -9,5 +9,6 @@
       "group": "com.google.cloud.dataflow",
       "package_manager": "maven"
     }
-  ]
+  ],
+  "uuid": "bb5382df-97ab-48a6-915d-c6fa0c4db5ee"
 }

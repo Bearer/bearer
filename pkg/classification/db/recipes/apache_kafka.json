@@ -69,8 +69,16 @@
       "group": null,
       "package_manager": "go"
     },
-    { "name": "kafkajs", "group": null, "package_manager": "npm" },
-    { "name": "kafka-node", "group": null, "package_manager": "npm" },
+    {
+      "name": "kafkajs",
+      "group": null,
+      "package_manager": "npm"
+    },
+    {
+      "name": "kafka-node",
+      "group": null,
+      "package_manager": "npm"
+    },
     {
       "name": "github.com/confluentinc/confluent-kafka-go-dev",
       "group": null,
@@ -91,11 +99,31 @@
       "group": "org.apache.kafka",
       "package_manager": "maven"
     },
-    { "name": "aws-sdk-kafka", "group": null, "package_manager": "rubygems" },
-    { "name": "Confluent.Kafka", "group": null, "package_manager": "nuget" },
-    { "name": "Kafka.Basic", "group": null, "package_manager": "nuget" },
-    { "name": "KafkaNet", "group": null, "package_manager": "nuget" },
-    { "name": "confluent_kafka", "group": null, "package_manager": "pypi" },
+    {
+      "name": "aws-sdk-kafka",
+      "group": null,
+      "package_manager": "rubygems"
+    },
+    {
+      "name": "Confluent.Kafka",
+      "group": null,
+      "package_manager": "nuget"
+    },
+    {
+      "name": "Kafka.Basic",
+      "group": null,
+      "package_manager": "nuget"
+    },
+    {
+      "name": "KafkaNet",
+      "group": null,
+      "package_manager": "nuget"
+    },
+    {
+      "name": "confluent_kafka",
+      "group": null,
+      "package_manager": "pypi"
+    },
     {
       "name": "camel-kafka-2.20.1",
       "group": "org.talend.libraries",
@@ -116,20 +144,41 @@
       "group": "org.apache.kafka",
       "package_manager": "maven"
     },
-    { "name": "kafka-node-avro", "group": null, "package_manager": "npm" },
-    { "name": "kafka-tools", "group": null, "package_manager": "pypi" },
-    { "name": "aiokafka", "group": null, "package_manager": "pypi" },
+    {
+      "name": "kafka-node-avro",
+      "group": null,
+      "package_manager": "npm"
+    },
+    {
+      "name": "kafka-tools",
+      "group": null,
+      "package_manager": "pypi"
+    },
+    {
+      "name": "aiokafka",
+      "group": null,
+      "package_manager": "pypi"
+    },
     {
       "name": "kafka-schema-serializer",
       "group": "io.confluent",
       "package_manager": "maven"
     },
-    { "name": "confluent-kafka", "group": null, "package_manager": "pypi" },
+    {
+      "name": "confluent-kafka",
+      "group": null,
+      "package_manager": "pypi"
+    },
     {
       "name": "kafka-net-net40-net45-netstandard13",
       "group": null,
       "package_manager": "nuget"
     },
-    { "name": "Kafka.Basic", "group": null, "package_manager": "maven" }
-  ]
+    {
+      "name": "Kafka.Basic",
+      "group": null,
+      "package_manager": "maven"
+    }
+  ],
+  "uuid": "749d874f-c6ad-478a-b7b2-bd28f48da6ad"
 }

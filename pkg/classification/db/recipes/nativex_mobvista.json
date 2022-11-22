@@ -2,6 +2,9 @@
   "metadata": { "version": "1.0" },
   "name": "NativeX (Mobvista)",
   "type": "external_service",
-  "urls": ["https://3s.mobvista.com"],
-  "packages": []
+  "urls": [
+    "https://3s.mobvista.com"
+  ],
+  "packages": [],
+  "uuid": "11503f35-8d4a-47db-ac98-be3b1b014ca6"
 }

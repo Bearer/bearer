@@ -2,6 +2,10 @@
   "metadata": { "version": "1.0" },
   "name": "Lever",
   "type": "external_service",
-  "urls": ["https://jobs.lever.co", "https://api.lever.co"],
-  "packages": []
+  "urls": [
+    "https://jobs.lever.co",
+    "https://api.lever.co"
+  ],
+  "packages": [],
+  "uuid": "214b8d02-5a10-48a8-8d5b-1c780ecf2fb8"
 }

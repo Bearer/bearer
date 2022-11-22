@@ -2,6 +2,9 @@
   "metadata": { "version": "1.0" },
   "name": "Zeplin",
   "type": "external_service",
-  "urls": ["https://api.zeplin.dev"],
-  "packages": []
+  "urls": [
+    "https://api.zeplin.dev"
+  ],
+  "packages": [],
+  "uuid": "573522e8-819b-4818-b9fa-5bdd9ed94183"
 }

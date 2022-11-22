@@ -14,7 +14,16 @@
       "group": "ru.yandex.clickhouse",
       "package_manager": "maven"
     },
-    { "name": "clickhouse-pool", "group": null, "package_manager": "pypi" },
-    { "name": "clickhouse-driver", "group": null, "package_manager": "pypi" }
-  ]
+    {
+      "name": "clickhouse-pool",
+      "group": null,
+      "package_manager": "pypi"
+    },
+    {
+      "name": "clickhouse-driver",
+      "group": null,
+      "package_manager": "pypi"
+    }
+  ],
+  "uuid": "c7181945-dcfc-4af2-86d9-4c66d2cfedcd"
 }

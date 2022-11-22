@@ -2,13 +2,20 @@
   "metadata": { "version": "1.0" },
   "name": "Airtable",
   "type": "external_service",
-  "urls": ["https://api.airtable.com"],
+  "urls": [
+    "https://api.airtable.com"
+  ],
   "packages": [
-    { "name": "airtable", "group": null, "package_manager": "npm" },
+    {
+      "name": "airtable",
+      "group": null,
+      "package_manager": "npm"
+    },
     {
       "name": "github.com/brianloveswords/airtable",
       "group": null,
       "package_manager": "go"
     }
-  ]
+  ],
+  "uuid": "a7357734-41c7-4497-af13-32336335f2db"
 }

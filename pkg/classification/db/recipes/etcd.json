@@ -9,12 +9,21 @@
       "group": null,
       "package_manager": "go"
     },
-    { "name": "go.etcd.io/etcd", "group": null, "package_manager": "go" },
+    {
+      "name": "go.etcd.io/etcd",
+      "group": null,
+      "package_manager": "go"
+    },
     {
       "name": "github.com/coreos/go-etcd",
       "group": null,
       "package_manager": "go"
     },
-    { "name": "python-etcd", "group": null, "package_manager": "pypi" }
-  ]
+    {
+      "name": "python-etcd",
+      "group": null,
+      "package_manager": "pypi"
+    }
+  ],
+  "uuid": "198d458d-c732-4a22-8399-3e2213ef2371"
 }

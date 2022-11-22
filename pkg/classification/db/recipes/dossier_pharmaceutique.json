@@ -2,6 +2,9 @@
   "metadata": { "version": "1.0" },
   "name": "Dossier pharmaceutique",
   "type": "external_service",
-  "urls": ["http://ws-fac.dossier-pharmaceutique.fr"],
-  "packages": []
+  "urls": [
+    "http://ws-fac.dossier-pharmaceutique.fr"
+  ],
+  "packages": [],
+  "uuid": "6b35773c-fd76-440f-bc84-03b23e26bde4"
 }

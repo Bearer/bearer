@@ -2,6 +2,9 @@
   "metadata": { "version": "1.0" },
   "name": "Mapbox",
   "type": "external_service",
-  "urls": ["https://api.mapbox.com"],
-  "packages": []
+  "urls": [
+    "https://api.mapbox.com"
+  ],
+  "packages": [],
+  "uuid": "a868d872-5ae1-4107-b24d-d3481839f141"
 }

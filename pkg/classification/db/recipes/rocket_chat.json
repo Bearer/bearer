@@ -4,6 +4,11 @@
   "type": "external_service",
   "urls": [],
   "packages": [
-    { "name": "rocketchat-API", "group": null, "package_manager": "pypi" }
-  ]
+    {
+      "name": "rocketchat-API",
+      "group": null,
+      "package_manager": "pypi"
+    }
+  ],
+  "uuid": "e4639bd9-8042-49ad-82a1-e7e3ec695ba8"
 }

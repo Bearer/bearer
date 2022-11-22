@@ -2,6 +2,9 @@
   "metadata": { "version": "1.0" },
   "name": "Dalenys",
   "type": "external_service",
-  "urls": ["https://*.dalenys.com"],
-  "packages": []
+  "urls": [
+    "https://*.dalenys.com"
+  ],
+  "packages": [],
+  "uuid": "fe876ee8-2abb-4fe7-a5f9-1c5ad5cd0de2"
 }

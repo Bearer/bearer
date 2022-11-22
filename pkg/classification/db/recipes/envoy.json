@@ -2,6 +2,9 @@
   "metadata": { "version": "1.0" },
   "name": "Envoy",
   "type": "external_service",
-  "urls": ["https://api.envoy.com"],
-  "packages": []
+  "urls": [
+    "https://api.envoy.com"
+  ],
+  "packages": [],
+  "uuid": "64bcc7c1-ce82-4fee-b676-7cbc1a0981d0"
 }

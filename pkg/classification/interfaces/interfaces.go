@@ -21,6 +21,7 @@ type Classification struct {
 	URL         string                          `json:"url"`
 	RecipeMatch bool                            `json:"recipe_match"`
 	RecipeName  string                          `json:"recipe_name,omitempty"`
+	RecipeUUID  string                          `json:"recipe_uuid,omitempty"`
 	Decision    classify.ClassificationDecision `json:"decision"`
 }
 
@@ -37,6 +38,7 @@ type Config struct {
 }
 
 type Recipe struct {
+	UUID string
 	Name string
 	Type string
 	URLS []RecipeURL
@@ -50,6 +52,7 @@ type RecipeURL struct {
 type RecipeURLMatch struct {
 	DetectionURLPart string
 	RecipeURL        string
+	RecipeUUID       string
 	RecipeName       string
 }
 
@@ -69,6 +72,7 @@ func New(config Config) (*Classifier, error) {
 	var preparedRecipes []Recipe
 	for _, recipe := range config.Recipes {
 		preparedRecipe := Recipe{
+			UUID: recipe.UUID,
 			Name: recipe.Name,
 			Type: recipe.Type,
 		}
@@ -182,6 +186,7 @@ func (classifier *Classifier) Classify(data detections.Detection) (*ClassifiedIn
 			Classification: &Classification{
 				URL:         recipeMatch.DetectionURLPart,
 				RecipeMatch: true,
+				RecipeUUID:  recipeMatch.RecipeUUID,
 				RecipeName:  recipeMatch.RecipeName,
 			},
 		}
@@ -244,6 +249,7 @@ func (classifier *Classifier) FindMatchingRecipeUrl(detectionURL string) (*Recip
 			recipeURLMatch = &RecipeURLMatch{
 				DetectionURLPart: match,
 				RecipeURL:        recipeURL.URL,
+				RecipeUUID:       recipe.UUID,
 				RecipeName:       recipe.Name,
 			}
 		}

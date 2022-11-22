@@ -2,6 +2,9 @@
   "metadata": { "version": "1.0" },
   "name": "Dropcontact",
   "type": "external_service",
-  "urls": ["https://api.dropcontact.io"],
-  "packages": []
+  "urls": [
+    "https://api.dropcontact.io"
+  ],
+  "packages": [],
+  "uuid": "faaaec71-40e5-4b72-8624-b0e903d70d07"
 }

@@ -2,6 +2,9 @@
   "metadata": { "version": "1.0" },
   "name": "Rackspace Cloud",
   "type": "external_service",
-  "urls": ["https://api.rackspacecloud.com"],
-  "packages": []
+  "urls": [
+    "https://api.rackspacecloud.com"
+  ],
+  "packages": [],
+  "uuid": "1e740268-ca7b-414a-b257-52b9dccd819a"
 }

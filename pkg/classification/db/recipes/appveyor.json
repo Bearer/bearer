@@ -2,6 +2,9 @@
   "metadata": { "version": "1.0" },
   "name": "Appveyor",
   "type": "external_service",
-  "urls": ["https://ci.appveyor.com/api"],
-  "packages": []
+  "urls": [
+    "https://ci.appveyor.com/api"
+  ],
+  "packages": [],
+  "uuid": "7bf38449-7638-4f73-896d-ff46954b0e80"
 }

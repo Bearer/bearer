@@ -17,6 +17,7 @@ type ClassifiedFramework struct {
 type Classification struct {
 	RecipeMatch bool   `json:"recipe_match"`
 	RecipeName  string `json:"recipe_name,omitempty"`
+	RecipeUUID  string `json:"recipe_uuid,omitempty"`
 	Decision    classify.ClassificationDecision `json:"decision"`
 }
 
@@ -76,6 +77,7 @@ func (classifier *Classifier) Classify(data detections.Detection) (*ClassifiedFr
 		for _, recipe := range classifier.config.Recipes {
 			if isRecipeMatch(recipe, technologyKey) {
 				classification = &Classification{
+					RecipeUUID:  recipe.UUID,
 					RecipeName:  recipe.Name,
 					RecipeMatch: true,
 					Decision: classify.ClassificationDecision{

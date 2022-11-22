@@ -7,5 +7,6 @@
     "https://sandbox-api.barclays.com",
     "https://dataservices.secure.barclays.co.uk"
   ],
-  "packages": []
+  "packages": [],
+  "uuid": "2680e873-0e32-4df1-9bc9-9e4ed41205c1"
 }

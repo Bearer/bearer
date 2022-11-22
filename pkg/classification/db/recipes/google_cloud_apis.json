@@ -2,11 +2,25 @@
   "metadata": { "version": "1.0" },
   "name": "Google Cloud APIs",
   "type": "external_service",
-  "urls": ["https://*.googleapis.com"],
+  "urls": [
+    "https://*.googleapis.com"
+  ],
   "packages": [
-    { "name": "Google.Apis", "group": null, "package_manager": "nuget" },
-    { "name": "Google.Apis.Auth", "group": null, "package_manager": "nuget" },
-    { "name": "Google.Apis.Core", "group": null, "package_manager": "nuget" },
+    {
+      "name": "Google.Apis",
+      "group": null,
+      "package_manager": "nuget"
+    },
+    {
+      "name": "Google.Apis.Auth",
+      "group": null,
+      "package_manager": "nuget"
+    },
+    {
+      "name": "Google.Apis.Core",
+      "group": null,
+      "package_manager": "nuget"
+    },
     {
       "name": "Google.Apis.Oauth2.v2",
       "group": null,
@@ -42,7 +56,11 @@
       "group": null,
       "package_manager": "rubygems"
     },
-    { "name": "google-cloud", "group": null, "package_manager": "pypi" },
+    {
+      "name": "google-cloud",
+      "group": null,
+      "package_manager": "pypi"
+    },
     {
       "name": "google.golang.org/cloud",
       "group": null,
@@ -53,9 +71,21 @@
       "group": null,
       "package_manager": "go"
     },
-    { "name": "@google-cloud/dns", "group": null, "package_manager": "npm" },
-    { "name": "gcloud", "group": null, "package_manager": "pypi" },
-    { "name": "gcpveepee", "group": null, "package_manager": "pypi" },
+    {
+      "name": "@google-cloud/dns",
+      "group": null,
+      "package_manager": "npm"
+    },
+    {
+      "name": "gcloud",
+      "group": null,
+      "package_manager": "pypi"
+    },
+    {
+      "name": "gcpveepee",
+      "group": null,
+      "package_manager": "pypi"
+    },
     {
       "name": "google-cloud-translate",
       "group": null,
@@ -101,7 +131,11 @@
       "group": null,
       "package_manager": "pypi"
     },
-    { "name": "google-cloud-tasks", "group": null, "package_manager": "pypi" },
+    {
+      "name": "google-cloud-tasks",
+      "group": null,
+      "package_manager": "pypi"
+    },
     {
       "name": "google-cloud-monitoring",
       "group": null,
@@ -112,10 +146,26 @@
       "group": null,
       "package_manager": "pypi"
     },
-    { "name": "datalab", "group": null, "package_manager": "pypi" },
-    { "name": "dialogflow", "group": null, "package_manager": "npm" },
-    { "name": "apiai", "group": null, "package_manager": "npm" },
-    { "name": "google_cloud", "group": null, "package_manager": "pypi" },
+    {
+      "name": "datalab",
+      "group": null,
+      "package_manager": "pypi"
+    },
+    {
+      "name": "dialogflow",
+      "group": null,
+      "package_manager": "npm"
+    },
+    {
+      "name": "apiai",
+      "group": null,
+      "package_manager": "npm"
+    },
+    {
+      "name": "google_cloud",
+      "group": null,
+      "package_manager": "pypi"
+    },
     {
       "name": "cloud.google.com/go/compute",
       "group": null,
@@ -131,5 +181,6 @@
       "group": null,
       "package_manager": "go"
     }
-  ]
+  ],
+  "uuid": "fdeb2b0f-fdc8-49f9-871a-c7d5d384abdd"
 }

@@ -2,6 +2,9 @@
   "metadata": { "version": "1.0" },
   "name": "Monday",
   "type": "external_service",
-  "urls": ["https://api.monday.com"],
-  "packages": []
+  "urls": [
+    "https://api.monday.com"
+  ],
+  "packages": [],
+  "uuid": "242a391c-5c7d-4ba4-9d7f-3089eb0f76ed"
 }

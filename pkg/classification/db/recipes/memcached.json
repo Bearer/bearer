@@ -4,12 +4,36 @@
   "type": "data_store",
   "urls": [],
   "packages": [
-    { "name": "memcache-client", "group": null, "package_manager": "rubygems" },
-    { "name": "memcache", "group": null, "package_manager": "rubygems" },
-    { "name": "python-memcached", "group": null, "package_manager": "pypi" },
-    { "name": "pymemcache", "group": null, "package_manager": "pypi" },
-    { "name": "memcached", "group": null, "package_manager": "npm" },
-    { "name": "memcache-client", "group": null, "package_manager": "npm" },
+    {
+      "name": "memcache-client",
+      "group": null,
+      "package_manager": "rubygems"
+    },
+    {
+      "name": "memcache",
+      "group": null,
+      "package_manager": "rubygems"
+    },
+    {
+      "name": "python-memcached",
+      "group": null,
+      "package_manager": "pypi"
+    },
+    {
+      "name": "pymemcache",
+      "group": null,
+      "package_manager": "pypi"
+    },
+    {
+      "name": "memcached",
+      "group": null,
+      "package_manager": "npm"
+    },
+    {
+      "name": "memcache-client",
+      "group": null,
+      "package_manager": "npm"
+    },
     {
       "name": "github.com/bradfitz/gomemcache/memcache",
       "group": null,
@@ -20,12 +44,21 @@
       "group": null,
       "package_manager": "go"
     },
-    { "name": "libmc", "group": null, "package_manager": "nuget" },
-    { "name": "dalli", "group": null, "package_manager": "rubygems" },
+    {
+      "name": "libmc",
+      "group": null,
+      "package_manager": "nuget"
+    },
+    {
+      "name": "dalli",
+      "group": null,
+      "package_manager": "rubygems"
+    },
     {
       "name": "github.com/bradfitz/gomemcache",
       "group": null,
       "package_manager": "go"
     }
-  ]
+  ],
+  "uuid": "42908ccc-4f0f-419e-9ba0-f25121fd15b7"
 }
