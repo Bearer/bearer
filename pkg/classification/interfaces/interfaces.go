@@ -56,6 +56,14 @@ type RecipeURLMatch struct {
 var ErrInvalidRecipes = errors.New("invalid interface recipe")
 var ErrInvalidInternalDomainRegexp = errors.New("could not parse internal domains as regexp")
 
+func (classification *Classification) Name() string {
+	if classification.RecipeMatch {
+		return classification.RecipeName
+	} else {
+		return classification.URL
+	}
+}
+
 func New(config Config) (*Classifier, error) {
 	// prepare regular expressions for recipes
 	var preparedRecipes []Recipe

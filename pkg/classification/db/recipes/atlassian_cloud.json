@@ -2,7 +2,11 @@
   "metadata": { "version": "1.0" },
   "name": "Atlassian Cloud",
   "type": "external_service",
-  "urls": ["https://api.atlassian.com", "https://atlassian.net/rest/api/"],
+  "urls": [
+    "https://api.atlassian.com",
+    "https://atlassian.net/rest/api/",
+    "https://auth.atlassian.com"
+  ],
   "packages": [
     {
       "name": "github.com/andygrunwald/go-jira",
