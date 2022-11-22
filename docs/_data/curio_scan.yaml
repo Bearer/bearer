@@ -87,8 +87,6 @@ options:
 example: |4-
       # Scan a local project, including language-specific files
       $ curio scan /path/to/your_project
-      # Scan a single file
-      $ curio scan ./curio-ci-test/Pipfile.lock
 see_also:
     - ' - '
 aliases: s
