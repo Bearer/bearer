@@ -7,6 +7,7 @@ detect_ruby_logger:
     - ruby
 detect_encrypted_ruby_class_properties:
   type: "data_type"
+  verifier: true
   patterns:
     - |
       class $CLASS_NAME < ApplicationRecord
@@ -25,3 +26,16 @@ detect_sql_create_public_table:
   param_parenting: true
   languages:
     - sql
+  processors:
+    - query: |
+        verified_by = data.bearer.encrypted_tanker.verifiedBy
+        encrypted = data.bearer.encrypted_tanker.encrypted
+      modules:
+        - path: processors/encrypted_tanker.rego
+          name: bearer.encrypted_tanker
+    - query: |
+        verified_by = data.bearer.encrypted_verified.verifiedBy
+        encrypted = data.bearer.encrypted_verified.encrypted
+      modules:
+        - path: processors/encrypted_verified.rego
+          name: bearer.encrypted_verified

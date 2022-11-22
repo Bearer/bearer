@@ -6,7 +6,6 @@ import (
 
 	"github.com/bearer/curio/pkg/commands/process/settings"
 	"github.com/bearer/curio/pkg/flag"
-	"github.com/bearer/curio/pkg/report/detections"
 	"github.com/bearer/curio/pkg/report/output/dataflow"
 
 	dataflowtypes "github.com/bearer/curio/pkg/report/output/dataflow/types"
@@ -15,7 +14,6 @@ import (
 	"github.com/bearer/curio/pkg/report/output/stats"
 	"github.com/bearer/curio/pkg/types"
 
-	"github.com/bearer/curio/pkg/util/rego"
 	"gopkg.in/yaml.v3"
 
 	"github.com/rs/zerolog"
@@ -92,27 +90,6 @@ func getDataflow(report types.Report, config settings.Config) (*dataflow.DataFlo
 	reportedDetections, err := detectors.GetOutput(report)
 	if err != nil {
 		return nil, err
-	}
-
-	for _, processor := range config.Processors {
-		result, err := rego.RunQuery(processor.Query, reportedDetections, processor.Modules.ToRegoModules())
-		if err != nil {
-			return nil, err
-		}
-
-		resultRisks, ok := result["risks"].([]interface{})
-		if !ok {
-			return nil, fmt.Errorf("expected to get slice from preprocessor but got %#v instead", result["detections"])
-		}
-
-		for _, risk := range resultRisks {
-			value := make(map[string]interface{})
-			value["type"] = string(detections.TypeComputedDataflowRisk)
-			value["value"] = risk
-
-			reportedDetections = append(reportedDetections, value)
-		}
-
 	}
 
 	return dataflow.GetOutput(reportedDetections, config)

@@ -65,7 +65,7 @@ func GetOutput(input []interface{}, config settings.Config) (*DataFlow, error) {
 
 		switch detectionType {
 		case detections.TypeSchemaClassified:
-			err = dataTypesHolder.AddSchema(castDetection)
+			err = dataTypesHolder.AddSchema(castDetection, nil)
 			if err != nil {
 				return nil, err
 			}
@@ -87,7 +87,12 @@ func GetOutput(input []interface{}, config settings.Config) (*DataFlow, error) {
 					return nil, err
 				}
 			case customdetectors.TypeDatatype:
-				err := dataTypesHolder.AddSchema(castDetection)
+				extras, err := datatypes.GetExtras(customDetector, input, detection)
+				if err != nil {
+					return nil, err
+				}
+
+				err = dataTypesHolder.AddSchema(castDetection, extras)
 				if err != nil {
 					return nil, err
 				}
