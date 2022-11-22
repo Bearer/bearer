@@ -4,10 +4,26 @@
   "type": "data_store",
   "urls": [],
   "packages": [
-    { "name": "redis", "group": null, "package_manager": "rubygems" },
-    { "name": "redis", "group": null, "package_manager": "pypi" },
-    { "name": "predis/predis", "group": null, "package_manager": "packagist" },
-    { "name": "connect-redis", "group": null, "package_manager": "npm" },
+    {
+      "name": "redis",
+      "group": null,
+      "package_manager": "rubygems"
+    },
+    {
+      "name": "redis",
+      "group": null,
+      "package_manager": "pypi"
+    },
+    {
+      "name": "predis/predis",
+      "group": null,
+      "package_manager": "packagist"
+    },
+    {
+      "name": "connect-redis",
+      "group": null,
+      "package_manager": "npm"
+    },
     {
       "name": "github.com/gomodule/redigo",
       "group": null,
@@ -18,14 +34,26 @@
       "group": null,
       "package_manager": "nuget"
     },
-    { "name": "ServiceStack.Redis", "group": null, "package_manager": "nuget" },
+    {
+      "name": "ServiceStack.Redis",
+      "group": null,
+      "package_manager": "nuget"
+    },
     {
       "name": "StackExchange.Redis",
       "group": null,
       "package_manager": "nuget"
     },
-    { "name": "gopkg.in/redis.v5", "group": null, "package_manager": "go" },
-    { "name": "hiredis", "group": null, "package_manager": "rubygems" },
+    {
+      "name": "gopkg.in/redis.v5",
+      "group": null,
+      "package_manager": "go"
+    },
+    {
+      "name": "hiredis",
+      "group": null,
+      "package_manager": "rubygems"
+    },
     {
       "name": "elasticache",
       "group": "software.amazon.awssdk",
@@ -46,37 +74,81 @@
       "group": null,
       "package_manager": "go"
     },
-    { "name": "redis", "group": null, "package_manager": "npm" },
-    { "name": "ioredis", "group": null, "package_manager": "npm" },
-    { "name": "aredis", "group": null, "package_manager": "pypi" },
-    { "name": "django-redis-cache", "group": null, "package_manager": "pypi" },
+    {
+      "name": "redis",
+      "group": null,
+      "package_manager": "npm"
+    },
+    {
+      "name": "ioredis",
+      "group": null,
+      "package_manager": "npm"
+    },
+    {
+      "name": "aredis",
+      "group": null,
+      "package_manager": "pypi"
+    },
+    {
+      "name": "django-redis-cache",
+      "group": null,
+      "package_manager": "pypi"
+    },
     {
       "name": "github.com/mediocregopher/radix",
       "group": null,
       "package_manager": "go"
     },
-    { "name": "jredis", "group": "org.jredis", "package_manager": "maven" },
+    {
+      "name": "jredis",
+      "group": "org.jredis",
+      "package_manager": "maven"
+    },
     {
       "name": "github.com/go-redis/redis",
       "group": null,
       "package_manager": "go"
     },
-    { "name": "redisson", "group": "org.redisson", "package_manager": "maven" },
+    {
+      "name": "redisson",
+      "group": "org.redisson",
+      "package_manager": "maven"
+    },
     {
       "name": "github.com/gomodule/redigo/redis",
       "group": null,
       "package_manager": "go"
     },
-    { "name": "jedis", "group": "redis.clients", "package_manager": "maven" },
-    { "name": "redis-rb", "group": null, "package_manager": "rubygems" },
+    {
+      "name": "jedis",
+      "group": "redis.clients",
+      "package_manager": "maven"
+    },
+    {
+      "name": "redis-rb",
+      "group": null,
+      "package_manager": "rubygems"
+    },
     {
       "name": "github.com/hoisie/redis",
       "group": null,
       "package_manager": "go"
     },
-    { "name": "predis", "group": null, "package_manager": "packagist" },
-    { "name": "aioredis", "group": null, "package_manager": "pypi" },
-    { "name": "async-redis", "group": null, "package_manager": "npm" },
+    {
+      "name": "predis",
+      "group": null,
+      "package_manager": "packagist"
+    },
+    {
+      "name": "aioredis",
+      "group": null,
+      "package_manager": "pypi"
+    },
+    {
+      "name": "async-redis",
+      "group": null,
+      "package_manager": "npm"
+    },
     {
       "name": "spring-data-redis",
       "group": "org.springframework.data",
@@ -92,8 +164,16 @@
       "group": null,
       "package_manager": "go"
     },
-    { "name": "gopkg.in/redis.v4", "group": null, "package_manager": "go" },
-    { "name": "ext-redis", "group": null, "package_manager": "packagist" },
+    {
+      "name": "gopkg.in/redis.v4",
+      "group": null,
+      "package_manager": "go"
+    },
+    {
+      "name": "ext-redis",
+      "group": null,
+      "package_manager": "packagist"
+    },
     {
       "name": "cache/redis-adapter",
       "group": null,
@@ -109,8 +189,16 @@
       "group": null,
       "package_manager": "go"
     },
-    { "name": "redis-store", "group": null, "package_manager": "rubygems" },
-    { "name": "django-redis", "group": null, "package_manager": "pypi" },
+    {
+      "name": "redis-store",
+      "group": null,
+      "package_manager": "rubygems"
+    },
+    {
+      "name": "django-redis",
+      "group": null,
+      "package_manager": "pypi"
+    },
     {
       "name": "github.com/bsm/redislock",
       "group": null,
@@ -121,5 +209,6 @@
       "group": null,
       "package_manager": "go"
     }
-  ]
+  ],
+  "uuid": "62c20409-c1bf-4be9-a859-6fe6be7b11e3"
 }

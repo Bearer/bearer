@@ -2,6 +2,9 @@
   "metadata": { "version": "1.0" },
   "name": "Optimizely",
   "type": "external_service",
-  "urls": ["https://cdn.optimizely.com"],
-  "packages": []
+  "urls": [
+    "https://cdn.optimizely.com"
+  ],
+  "packages": [],
+  "uuid": "344c5c72-e7c0-46e7-b970-d3002504da09"
 }

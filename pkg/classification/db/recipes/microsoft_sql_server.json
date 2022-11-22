@@ -4,14 +4,26 @@
   "type": "data_store",
   "urls": [],
   "packages": [
-    { "name": "tedious", "group": null, "package_manager": "npm" },
-    { "name": "mssql", "group": null, "package_manager": "npm" },
+    {
+      "name": "tedious",
+      "group": null,
+      "package_manager": "npm"
+    },
+    {
+      "name": "mssql",
+      "group": null,
+      "package_manager": "npm"
+    },
     {
       "name": "System.Data.SqlClient",
       "group": null,
       "package_manager": "nuget"
     },
-    { "name": "pymssql", "group": null, "package_manager": "pypi" },
+    {
+      "name": "pymssql",
+      "group": null,
+      "package_manager": "pypi"
+    },
     {
       "name": "github.com/denisenkom/go-mssqldb",
       "group": null,
@@ -22,17 +34,41 @@
       "group": "com.microsoft.sqlserver",
       "package_manager": "maven"
     },
-    { "name": "python-tds", "group": null, "package_manager": "pypi" },
-    { "name": "mssql-django", "group": null, "package_manager": "pypi" },
-    { "name": "django-pyodbc", "group": null, "package_manager": "pypi" },
-    { "name": "django-pyodbc-azure", "group": null, "package_manager": "pypi" },
+    {
+      "name": "python-tds",
+      "group": null,
+      "package_manager": "pypi"
+    },
+    {
+      "name": "mssql-django",
+      "group": null,
+      "package_manager": "pypi"
+    },
+    {
+      "name": "django-pyodbc",
+      "group": null,
+      "package_manager": "pypi"
+    },
+    {
+      "name": "django-pyodbc-azure",
+      "group": null,
+      "package_manager": "pypi"
+    },
     {
       "name": "django-mssql-backend",
       "group": null,
       "package_manager": "pypi"
     },
-    { "name": "jdbc-mssql", "group": null, "package_manager": "rubygems" },
-    { "name": "azure_mgmt_sql", "group": null, "package_manager": "rubygems" },
+    {
+      "name": "jdbc-mssql",
+      "group": null,
+      "package_manager": "rubygems"
+    },
+    {
+      "name": "azure_mgmt_sql",
+      "group": null,
+      "package_manager": "rubygems"
+    },
     {
       "name": "jdbc-mssqlserver",
       "group": null,
@@ -48,5 +84,6 @@
       "group": null,
       "package_manager": "go"
     }
-  ]
+  ],
+  "uuid": "e4db4505-b837-4b76-9184-c3cec3b5e522"
 }

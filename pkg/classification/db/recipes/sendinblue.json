@@ -2,6 +2,9 @@
   "metadata": { "version": "1.0" },
   "name": "Sendinblue",
   "type": "external_service",
-  "urls": ["https://api.sendinblue.com"],
-  "packages": []
+  "urls": [
+    "https://api.sendinblue.com"
+  ],
+  "packages": [],
+  "uuid": "8b97bd5a-bb15-4eea-afc9-bd1687b96fd6"
 }

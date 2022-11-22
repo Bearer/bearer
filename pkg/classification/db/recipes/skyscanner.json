@@ -2,6 +2,9 @@
   "metadata": { "version": "1.0" },
   "name": "Skyscanner",
   "type": "external_service",
-  "urls": ["https://partners.api.skyscanner.net"],
-  "packages": []
+  "urls": [
+    "https://partners.api.skyscanner.net"
+  ],
+  "packages": [],
+  "uuid": "df5811cf-3e2f-409c-b5d2-a0b576756c12"
 }

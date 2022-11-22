@@ -9,7 +9,11 @@
       "group": null,
       "package_manager": "rubygems"
     },
-    { "name": "azure-storage-blob", "group": null, "package_manager": "pypi" },
+    {
+      "name": "azure-storage-blob",
+      "group": null,
+      "package_manager": "pypi"
+    },
     {
       "name": "azure-storage-common",
       "group": null,
@@ -20,9 +24,21 @@
       "group": null,
       "package_manager": "nuget"
     },
-    { "name": "azure-storage", "group": null, "package_manager": "rubygems" },
-    { "name": "azure-storage", "group": null, "package_manager": "pypi" },
-    { "name": "azure-storage", "group": null, "package_manager": "npm" },
+    {
+      "name": "azure-storage",
+      "group": null,
+      "package_manager": "rubygems"
+    },
+    {
+      "name": "azure-storage",
+      "group": null,
+      "package_manager": "pypi"
+    },
+    {
+      "name": "azure-storage",
+      "group": null,
+      "package_manager": "npm"
+    },
     {
       "name": "github.com/Azure/azure-storage-blob-go",
       "group": null,
@@ -68,6 +84,11 @@
       "group": "com.microsoft.azure",
       "package_manager": "maven"
     },
-    { "name": "azure-storage-cpp", "group": null, "package_manager": "nuget" }
-  ]
+    {
+      "name": "azure-storage-cpp",
+      "group": null,
+      "package_manager": "nuget"
+    }
+  ],
+  "uuid": "f0f43ee7-7f6b-4572-aaa0-6b207146912b"
 }

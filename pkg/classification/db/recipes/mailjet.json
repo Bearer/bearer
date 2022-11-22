@@ -2,8 +2,15 @@
   "metadata": { "version": "1.0" },
   "name": "Mailjet",
   "type": "external_service",
-  "urls": ["https://api.mailjet.com"],
+  "urls": [
+    "https://api.mailjet.com"
+  ],
   "packages": [
-    { "name": "mailjet", "group": null, "package_manager": "rubygems" }
-  ]
+    {
+      "name": "mailjet",
+      "group": null,
+      "package_manager": "rubygems"
+    }
+  ],
+  "uuid": "80ff09d3-78a2-4d5a-a843-f68c460ce289"
 }

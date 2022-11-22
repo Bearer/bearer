@@ -2,6 +2,9 @@
   "metadata": { "version": "1.0" },
   "name": "Iris Openbooks (FreeAgent)",
   "type": "external_service",
-  "urls": ["https://admin.irisopenbooks.co.uk"],
-  "packages": []
+  "urls": [
+    "https://admin.irisopenbooks.co.uk"
+  ],
+  "packages": [],
+  "uuid": "78d064d7-8535-4644-9174-366ce48b3348"
 }

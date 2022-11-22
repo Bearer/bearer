@@ -1,7 +1,6 @@
 {
   "metadata": { "version": "1.0" },
-  "data_category_name": "Thoughts",
-  "default_category": "Knowledge and Belief",
-  "id": 95,
-  "uuid": "874d5d2d-7cdc-42c6-b6b6-64d15b538660"
+  "name": "Thoughts",
+  "uuid": "874d5d2d-7cdc-42c6-b6b6-64d15b538660",
+  "category_uuid": "623a4f94-0e23-411e-9bb3-481602f1757d"
 }

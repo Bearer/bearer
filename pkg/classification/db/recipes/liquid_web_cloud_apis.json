@@ -2,7 +2,9 @@
   "metadata": { "version": "1.0" },
   "name": "Liquid Web Cloud APIs",
   "type": "external_service",
-  "urls": ["https://api.stormondemand.com"],
+  "urls": [
+    "https://api.stormondemand.com"
+  ],
   "packages": [
     {
       "name": "github.com/liquidweb/go-lwApi",
@@ -14,5 +16,6 @@
       "group": null,
       "package_manager": "go"
     }
-  ]
+  ],
+  "uuid": "b2884f53-1cc9-4de7-a2ee-c6e1cb54c37c"
 }

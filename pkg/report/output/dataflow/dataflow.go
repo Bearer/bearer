@@ -16,17 +16,17 @@ import (
 )
 
 type DataFlow struct {
-	Datatypes  []types.Datatype     `json:"data_types,omitempty"`
-	Risks      []types.RiskDetector `json:"risks,omitempty"`
-	Components []types.Component    `json:"components"`
+	Datatypes  []types.Datatype     `json:"data_types,omitempty" yaml:"data_types,omitempty"`
+	Risks      []types.RiskDetector `json:"risks,omitempty" yaml:"risks,omitempty"`
+	Components []types.Component    `json:"components" yaml:"components"`
 }
 
-var allowedDetections []detections.DetectionType = []detections.DetectionType{detections.TypeSchemaClassified, detections.TypeCustomClassified, detections.TypeDependencyClassified, detections.TypeInterfaceClassified, detections.TypeComputedDataflowRisk}
+var allowedDetections []detections.DetectionType = []detections.DetectionType{detections.TypeSchemaClassified, detections.TypeCustomClassified, detections.TypeDependencyClassified, detections.TypeInterfaceClassified, detections.TypeFrameworkClassified}
 
-func GetOutput(input []interface{}, config settings.Config) (*DataFlow, error) {
+func GetOutput(input []interface{}, config settings.Config, isInternal bool) (*DataFlow, error) {
 	dataTypesHolder := datatypes.New()
-	risksHolder := risks.New(config)
-	componentsHolder := components.New()
+	risksHolder := risks.New(config, isInternal)
+	componentsHolder := components.New(isInternal)
 
 	for _, detection := range input {
 		detectionMap, ok := detection.(map[string]interface{})
@@ -119,8 +119,12 @@ func GetOutput(input []interface{}, config settings.Config) (*DataFlow, error) {
 			if err != nil {
 				return nil, err
 			}
+		case detections.TypeFrameworkClassified:
+			err := componentsHolder.AddFramework(detection)
+			if err != nil {
+				return nil, err
+			}
 		}
-
 	}
 
 	dataflow := &DataFlow{

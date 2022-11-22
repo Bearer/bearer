@@ -9,7 +9,16 @@
     "https://sockjs.pusher.com"
   ],
   "packages": [
-    { "name": "pusher", "group": null, "package_manager": "rubygems" },
-    { "name": "pusher-js", "group": null, "package_manager": "npm" }
-  ]
+    {
+      "name": "pusher",
+      "group": null,
+      "package_manager": "rubygems"
+    },
+    {
+      "name": "pusher-js",
+      "group": null,
+      "package_manager": "npm"
+    }
+  ],
+  "uuid": "6fcd1852-0c4b-412e-891c-2328867ffeee"
 }

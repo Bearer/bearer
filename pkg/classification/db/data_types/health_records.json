@@ -1,7 +1,6 @@
 {
   "metadata": { "version": "1.0" },
-  "data_category_name": "Health Records",
-  "default_category": "Medical and Health",
-  "id": 39,
-  "uuid": "c1704474-de02-40f0-8880-ece05fdbe9b5"
+  "name": "Health Records",
+  "uuid": "c1704474-de02-40f0-8880-ece05fdbe9b5",
+  "category_uuid": "7b1d36e7-46f9-4664-85a2-44fb15fbefd1"
 }

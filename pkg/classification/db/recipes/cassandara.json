@@ -19,6 +19,11 @@
       "group": "com.datastax.cassandra",
       "package_manager": "maven"
     },
-    { "name": "cassandra-driver", "group": null, "package_manager": "npm" }
-  ]
+    {
+      "name": "cassandra-driver",
+      "group": null,
+      "package_manager": "npm"
+    }
+  ],
+  "uuid": "71c72ffc-c462-4b2d-97eb-129114801114"
 }

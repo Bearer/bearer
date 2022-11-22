@@ -2,6 +2,9 @@
   "metadata": { "version": "1.0" },
   "name": "Alpaca",
   "type": "external_service",
-  "urls": ["https://api.alpaca.markets"],
-  "packages": []
+  "urls": [
+    "https://api.alpaca.markets"
+  ],
+  "packages": [],
+  "uuid": "f4392c0c-1c58-48e5-a7a6-fefe11483274"
 }

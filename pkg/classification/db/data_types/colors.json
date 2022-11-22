@@ -1,7 +1,6 @@
 {
   "metadata": { "version": "1.0" },
-  "data_category_name": "Colors",
-  "default_category": "Preference",
-  "id": 108,
-  "uuid": "c7caf3ba-b75b-4f32-a49c-f5710d639c27"
+  "name": "Colors",
+  "uuid": "c7caf3ba-b75b-4f32-a49c-f5710d639c27",
+  "category_uuid": "bc536e1e-e0d1-4b88-96d2-a2eaad1620d4"
 }

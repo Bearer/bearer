@@ -2,12 +2,15 @@
   "metadata": { "version": "1.0" },
   "name": "Lightstep",
   "type": "external_service",
-  "urls": ["https://api.lightstep.com"],
+  "urls": [
+    "https://api.lightstep.com"
+  ],
   "packages": [
     {
       "name": "github.com/lightstep/lightstep-tracer-go",
       "group": null,
       "package_manager": "go"
     }
-  ]
+  ],
+  "uuid": "b24a08aa-ea78-4ea7-bab0-dfff529d1e6e"
 }

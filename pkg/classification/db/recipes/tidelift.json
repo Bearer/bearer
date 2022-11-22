@@ -2,6 +2,9 @@
   "metadata": { "version": "1.0" },
   "name": "Tidelift",
   "type": "external_service",
-  "urls": ["https://api.tidelift.com"],
-  "packages": []
+  "urls": [
+    "https://api.tidelift.com"
+  ],
+  "packages": [],
+  "uuid": "fef02420-1023-4c27-a274-fb1cd8f077a9"
 }

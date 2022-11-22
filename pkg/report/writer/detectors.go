@@ -5,8 +5,9 @@ import (
 	"io"
 	"log"
 
-	classsification "github.com/bearer/curio/pkg/classification"
-	classsificationschema "github.com/bearer/curio/pkg/classification/schema"
+	classification "github.com/bearer/curio/pkg/classification"
+	classificationschema "github.com/bearer/curio/pkg/classification/schema"
+	zerolog "github.com/rs/zerolog/log"
 
 	"github.com/bearer/curio/pkg/parser"
 	"github.com/bearer/curio/pkg/parser/nodeid"
@@ -29,7 +30,7 @@ import (
 
 type Detectors struct {
 	Blamer     blamer.Blamer
-	Classifier *classsification.Classifier
+	Classifier *classification.Classifier
 	File       io.Writer
 }
 
@@ -41,7 +42,7 @@ func (report *Detectors) AddInterface(
 	detection := &detections.Detection{DetectorType: detectorType, Value: data, Source: source, Type: detections.TypeInterface}
 	classifiedDetection, err := report.Classifier.Interfaces.Classify(*detection)
 	if err != nil {
-		report.AddError(detection.Source.Filename, fmt.Errorf("classification interfaces error: %s", err))
+		zerolog.Debug().Msgf("classification interfaces error from %s: %s", detection.Source.Filename, err)
 		return
 	}
 
@@ -77,9 +78,9 @@ func (report *Detectors) AddCreateView(
 }
 
 func (report *Detectors) AddDataType(detectionType detections.DetectionType, detectorType detectors.Type, idGenerator nodeid.Generator, values map[parser.NodeID]*datatype.DataType) {
-	classifiedDatatypes := make(map[parser.NodeID]*classsificationschema.ClassifiedDatatype, 0)
+	classifiedDatatypes := make(map[parser.NodeID]*classificationschema.ClassifiedDatatype, 0)
 	for nodeID, target := range values {
-		classified := report.Classifier.Schema.Classify(classsificationschema.DataTypeDetection{
+		classified := report.Classifier.Schema.Classify(classificationschema.DataTypeDetection{
 			Value:        target,
 			Filename:     target.GetNode().Source(false).Filename,
 			DetectorType: detectorType,
@@ -89,9 +90,9 @@ func (report *Detectors) AddDataType(detectionType detections.DetectionType, det
 	}
 
 	if detectionType == detections.TypeCustom {
-		datatype.ExportClassified(report, detections.TypeCustomClassified, detectorType, idGenerator, false, classifiedDatatypes)
+		datatype.ExportClassified(report, detections.TypeCustomClassified, detectorType, idGenerator, classifiedDatatypes)
 	} else {
-		datatype.ExportClassified(report, detections.TypeSchemaClassified, detectorType, idGenerator, true, classifiedDatatypes)
+		datatype.ExportClassified(report, detections.TypeSchemaClassified, detectorType, idGenerator, classifiedDatatypes)
 	}
 }
 
@@ -100,6 +101,8 @@ func (report *Detectors) AddSchema(
 	schema schema.Schema,
 	source source.Source,
 ) {
+	// @todo FIXME: Add classification here
+
 	report.AddDetection(detections.TypeSchema, detectorType, source, schema)
 }
 
@@ -152,19 +155,19 @@ func (report *Detectors) AddFramework(
 	data interface{},
 	source source.Source,
 ) {
-	var commitSHA string
-	if source.LineNumber != nil {
-		commitSHA = report.Blamer.SHAForLine(source.Filename, *source.LineNumber)
+	detection := &detections.Detection{DetectorType: detectorType, Value: data, Source: source, Type: detections.TypeFramework}
+	classifiedDetection, err := report.Classifier.Frameworks.Classify(*detection)
+	if err != nil {
+		report.AddError(source.Filename, fmt.Errorf("classification frameworks error: %s", err))
+		return
 	}
 
-	report.Add(&detections.FrameworkDetection{
-		Type:          detections.TypeFramework,
-		DetectorType:  detectorType,
-		FrameworkType: frameworkType,
-		CommitSHA:     commitSHA,
-		Source:        source,
-		Value:         data,
-	})
+	if classifiedDetection.Source.LineNumber != nil {
+		classifiedDetection.CommitSHA = report.Blamer.SHAForLine(classifiedDetection.Source.Filename, *classifiedDetection.Source.LineNumber)
+	}
+
+	classifiedDetection.Type = detections.TypeFrameworkClassified
+	report.Add(classifiedDetection)
 }
 
 func (report *Detectors) AddError(filePath string, err error) {

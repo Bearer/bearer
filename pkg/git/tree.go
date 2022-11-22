@@ -14,13 +14,13 @@ import (
 const blankID = "0000000000000000000000000000000000000000"
 
 type Tree struct {
-	Commit CommitIdentifier `json:"commit"`
-	Files  []TreeFile       `json:"files"`
+	Commit CommitIdentifier `json:"commit" yaml:"commit"`
+	Files  []TreeFile       `json:"files" yaml:"files"`
 }
 
 type TreeFile struct {
-	Filename string `json:"filename"`
-	SHA      string `json:"sha"`
+	Filename string `json:"filename" yaml:"filename"`
+	SHA      string `json:"sha" yaml:"sha"`
 }
 
 func GetTree(rootDir string) (*Tree, error) {

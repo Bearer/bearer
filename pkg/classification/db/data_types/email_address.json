@@ -1,7 +1,6 @@
 {
   "metadata": { "version": "1.0" },
-  "data_category_name": "Email Address",
-  "default_category": "Contact",
-  "id": 12,
-  "uuid": "22e24c62-82d3-4b72-827c-e261533331bd"
+  "name": "Email Address",
+  "uuid": "22e24c62-82d3-4b72-827c-e261533331bd",
+  "category_uuid": "cef587dd-76db-430b-9e18-7b031e1a193b"
 }

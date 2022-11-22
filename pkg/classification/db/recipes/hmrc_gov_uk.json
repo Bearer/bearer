@@ -8,5 +8,6 @@
     "https://transaction-engine.tax.service.gov.uk",
     "https://test-transaction-engine.tax.service.gov.uk"
   ],
-  "packages": []
+  "packages": [],
+  "uuid": "051b0da2-e8f7-4af7-aa17-800961bff5e8"
 }

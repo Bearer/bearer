@@ -38,21 +38,21 @@ type Output struct {
 }
 
 type InputProperties struct {
-	Name          string `json:"name"`
-	Type          string `json:"type"`
-	State         string `json:"state"`
-	Reason        string `json:"reason"`
-	FalsePositive bool   `json:"false_positive"`
+	Name          string `json:"name" yaml:"name"`
+	Type          string `json:"type" yaml:"type"`
+	State         string `json:"state" yaml:"state"`
+	Reason        string `json:"reason" yaml:"reason"`
+	FalsePositive bool   `json:"false_positive" yaml:"false_positive"`
 }
 
 type Input struct {
-	Name          string            `json:"name"`
-	Filename      string            `json:"filename"`
-	DetectorType  string            `json:"detector_type"`
-	Properties    []InputProperties `json:"properties"`
-	State         string            `json:"state"`
-	Reason        string            `json:"reason"`
-	FalsePositive bool              `json:"false_positive"`
+	Name          string            `json:"name" yaml:"name"`
+	Filename      string            `json:"filename" yaml:"filename"`
+	DetectorType  string            `json:"detector_type" yaml:"detector_type"`
+	Properties    []InputProperties `json:"properties" yaml:"properties"`
+	State         string            `json:"state" yaml:"state"`
+	Reason        string            `json:"reason" yaml:"reason"`
+	FalsePositive bool              `json:"false_positive" yaml:"false_positive"`
 }
 
 func ExtractExpectedOutput(

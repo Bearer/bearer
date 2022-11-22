@@ -1,7 +1,6 @@
 {
   "metadata": { "version": "1.0" },
-  "data_category_name": "Social Status",
-  "default_category": "Public Life",
-  "id": 114,
-  "uuid": "42358827-7433-4711-9fd7-73fe1c2f7639"
+  "name": "Social Status",
+  "uuid": "42358827-7433-4711-9fd7-73fe1c2f7639",
+  "category_uuid": "e354099e-b80c-47b5-a86c-8d936b520387"
 }

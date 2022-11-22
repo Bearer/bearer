@@ -2,6 +2,15 @@
   "metadata": { "version": "1.0" },
   "name": "SendBird",
   "type": "external_service",
-  "urls": ["https://*.sendbird.com"],
-  "packages": [{ "name": "sendbird", "group": "", "package_manager": "npm" }]
+  "urls": [
+    "https://*.sendbird.com"
+  ],
+  "packages": [
+    {
+      "name": "sendbird",
+      "group": "",
+      "package_manager": "npm"
+    }
+  ],
+  "uuid": "c3a41875-e9c6-47d4-8690-777bd5e93c50"
 }

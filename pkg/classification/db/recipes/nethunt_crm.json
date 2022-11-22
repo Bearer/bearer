@@ -2,6 +2,9 @@
   "metadata": { "version": "1.0" },
   "name": "NetHunt CRM",
   "type": "external_service",
-  "urls": ["https://nethunt.com/api/v1/zapier"],
-  "packages": []
+  "urls": [
+    "https://nethunt.com/api/v1/zapier"
+  ],
+  "packages": [],
+  "uuid": "ed6216a4-0081-466e-a291-0db8109ded00"
 }

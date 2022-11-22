@@ -2,14 +2,21 @@
   "metadata": { "version": "1.0" },
   "name": "Elastic",
   "type": "external_service",
-  "urls": ["https://*.found.io", "https://cloud.es.io"],
+  "urls": [
+    "https://*.found.io",
+    "https://cloud.es.io"
+  ],
   "packages": [
     {
       "name": "elastic-apm-http-client",
       "group": null,
       "package_manager": "npm"
     },
-    { "name": "go.elastic.co/apm", "group": null, "package_manager": "go" },
+    {
+      "name": "go.elastic.co/apm",
+      "group": null,
+      "package_manager": "go"
+    },
     {
       "name": "apm-agent-attach",
       "group": "co.elastic.apm",
@@ -25,9 +32,21 @@
       "group": null,
       "package_manager": "go"
     },
-    { "name": "elastic-apm", "group": null, "package_manager": "rubygems" },
-    { "name": "@elastic/apm-rum-vue", "group": null, "package_manager": "npm" },
-    { "name": "elastic-apm-nest", "group": null, "package_manager": "npm" },
+    {
+      "name": "elastic-apm",
+      "group": null,
+      "package_manager": "rubygems"
+    },
+    {
+      "name": "@elastic/apm-rum-vue",
+      "group": null,
+      "package_manager": "npm"
+    },
+    {
+      "name": "elastic-apm-nest",
+      "group": null,
+      "package_manager": "npm"
+    },
     {
       "name": "@elastic/apm-rum-angular",
       "group": null,
@@ -38,6 +57,11 @@
       "group": null,
       "package_manager": "npm"
     },
-    { "name": "elastic-apm", "group": null, "package_manager": "pypi" }
-  ]
+    {
+      "name": "elastic-apm",
+      "group": null,
+      "package_manager": "pypi"
+    }
+  ],
+  "uuid": "e56e4e80-adab-4afb-915a-f1760b8f9631"
 }

@@ -2,12 +2,16 @@
   "metadata": { "version": "1.0" },
   "name": "Tencent Cloud APIs",
   "type": "external_service",
-  "urls": ["https://tencentcloudapi.com", "https://*.tencentcloudapi.com"],
+  "urls": [
+    "https://tencentcloudapi.com",
+    "https://*.tencentcloudapi.com"
+  ],
   "packages": [
     {
       "name": "github.com/tencentcloud/tencentcloud-sdk-go",
       "group": null,
       "package_manager": "go"
     }
-  ]
+  ],
+  "uuid": "42f08474-cc6e-4bc4-b9d4-28b611b21fa2"
 }

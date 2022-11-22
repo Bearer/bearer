@@ -1,20 +1,25 @@
 name: ' scan'
-synopsis: Scan git repository
-usage: ' scan [flags] PATH'
+synopsis: Scan a directory or file
+usage: ' scan [flags] <path>'
 options:
     - name: config-file
-      usage: file from which to load configurations
+      usage: Load configuration from the defined path
+    - name: context
+      usage: |
+        Expand context of schema classification e.g., --context=health, to include data types particular to health
     - name: debug
       default_value: "false"
-      usage: enable debug logs
+      usage: Enable debug logs
     - name: disable-domain-resolution
       default_value: "false"
       usage: |
-        do not attempt to resolve detected domains during classification (default false), eg. --disable-domain-resolution=true
+        Do not attempt to resolve detected domains during classification (default false), e.g. --disable-domain-resolution=true
     - name: domain-resolution-timeout
       default_value: 3s
       usage: |
-        set timeout when attempting to resolve detected domains during classification (default 3 seconds), eg. --domain-resolution-timeout=TODO
+        Set timeout when attempting to resolve detected domains during classification (default 3 seconds), e.g. --domain-resolution-timeout=3s
+    - name: existing-worker
+      usage: URL of an existing worker
     - name: file-size-max
       default_value: "25000000"
       usage: ignore files with file size larger than this config
@@ -24,7 +29,7 @@ options:
     - name: format
       shorthand: f
       default_value: json
-      usage: format (json)
+      usage: Specify report format (json, yaml)
     - name: help
       shorthand: h
       default_value: "false"
@@ -32,20 +37,32 @@ options:
     - name: internal-domains
       default_value: '[]'
       usage: |
-        define regular expressions for better classification of private or unreachable domains eg. --internal-domains="*.my-company.com,private.sh"
+        Define regular expressions for better classification of private or unreachable domains e.g. --internal-domains="*.my-company.com,private.sh"
     - name: memory-max
       default_value: "800000000"
       usage: |
         if memory needed to scan a file surpasses this limit, skip the file
+    - name: only-policy
+      default_value: '[]'
+      usage: |
+        specify the comma separated ids of the policies you would like to run. Skips all other policies.
     - name: output
-      usage: path where to save report
+      usage: Specify output path for report
+    - name: quiet
+      default_value: "false"
+      usage: Suppress non-essential messages
     - name: report
       default_value: detectors
-      usage: specify the kind of report (detectors)
+      usage: |
+        Specify the kind of report (detectors, dataflow, policies, stats)
     - name: skip-path
       default_value: '[]'
       usage: |
-        specify the comma separated files and directories to skip (supports * syntax), eg. --skip-path users/*.go,users/admin.sql
+        Specify the comma separated files and directories to skip. Supports * syntax, e.g. --skip-path users/*.go,users/admin.sql
+    - name: skip-policy
+      default_value: '[]'
+      usage: |
+        specify the comma separated ids of the policies you would like to skip. Runs all other policies.
     - name: timeout
       default_value: 10m0s
       usage: time allowed to complete scan
@@ -68,10 +85,8 @@ options:
       default_value: "1"
       usage: number of processing workers to spawn
 example: |4-
-      # Scan a local project including language-specific files
-      $ curio s /path/to/your_project
-      # Scan a single file
-      $ curio s ./curio-ci-test/Pipfile.lock
+      # Scan a local project, including language-specific files
+      $ curio scan /path/to/your_project
 see_also:
     - ' - '
 aliases: s

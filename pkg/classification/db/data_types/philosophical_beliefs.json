@@ -1,7 +1,6 @@
 {
   "metadata": { "version": "1.0" },
-  "data_category_name": "Philosophical beliefs",
-  "default_category": "Knowledge and Belief",
-  "id": 63,
-  "uuid": "7389307b-e885-4236-91d5-eb92d23acf8e"
+  "name": "Philosophical beliefs",
+  "uuid": "7389307b-e885-4236-91d5-eb92d23acf8e",
+  "category_uuid": "623a4f94-0e23-411e-9bb3-481602f1757d"
 }

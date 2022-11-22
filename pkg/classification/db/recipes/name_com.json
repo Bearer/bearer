@@ -2,12 +2,15 @@
   "metadata": { "version": "1.0" },
   "name": "Name.com",
   "type": "external_service",
-  "urls": ["https://api.name.com"],
+  "urls": [
+    "https://api.name.com"
+  ],
   "packages": [
     {
       "name": "github.com/namedotcom/go",
       "group": null,
       "package_manager": "go"
     }
-  ]
+  ],
+  "uuid": "d1d21271-c8c5-4775-9d98-20796be029de"
 }

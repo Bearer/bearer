@@ -2,6 +2,9 @@
   "metadata": { "version": "1.0" },
   "name": "Hunter",
   "type": "external_service",
-  "urls": ["https://api.hunter.io"],
-  "packages": []
+  "urls": [
+    "https://api.hunter.io"
+  ],
+  "packages": [],
+  "uuid": "cf67436e-1b9f-441f-9dc8-dc2a5b8fe7da"
 }

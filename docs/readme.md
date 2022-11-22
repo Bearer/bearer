@@ -1,6 +1,6 @@
 # Curio Documentation
 
-Welcome to the Curio docs. To view the full documentation, visit the official docs site [LINK COMING SOON]().
+Welcome to the Curio docs. To view the full documentation, visit the [official docs site](https://bearer.github.io/curio).
 
 ## Contributing
 

@@ -12,10 +12,10 @@
       ColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
-    Value: (*rails.Database)({
+    Value: (rails.Database) {
       Name: (string) (len=7) "primary",
       Adapter: (string) (len=5) "mysql"
-    })
+    }
   }),
   (*detections.FrameworkDetection)({
     Type: (detections.DetectionType) (len=9) "framework",
@@ -30,9 +30,9 @@
       ColumnNumber: (*int)(<nil>),
       Text: (*string)(<nil>)
     },
-    Value: (*rails.Database)({
+    Value: (rails.Database) {
       Name: (string) (len=15) "primary_replica",
       Adapter: (string) (len=5) "mysql"
-    })
+    }
   })
 }

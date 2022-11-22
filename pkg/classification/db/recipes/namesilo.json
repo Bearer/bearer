@@ -2,12 +2,15 @@
   "metadata": { "version": "1.0" },
   "name": "Namesilo",
   "type": "external_service",
-  "urls": ["https://www.namesilo.com/api/"],
+  "urls": [
+    "https://www.namesilo.com/api/"
+  ],
   "packages": [
     {
       "name": "github.com/nrdcg/namesilo",
       "group": null,
       "package_manager": "go"
     }
-  ]
+  ],
+  "uuid": "c55afa49-8f97-4208-aa0a-eb4fdad16a6f"
 }

@@ -2,6 +2,9 @@
   "metadata": { "version": "1.0" },
   "name": "Pipeliner",
   "type": "external_service",
-  "urls": ["https://pipelinersales.com/api"],
-  "packages": []
+  "urls": [
+    "https://pipelinersales.com/api"
+  ],
+  "packages": [],
+  "uuid": "520c97de-1548-4d39-adef-3314ffc2eb67"
 }

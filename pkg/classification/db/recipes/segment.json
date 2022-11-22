@@ -2,17 +2,36 @@
   "metadata": { "version": "1.0" },
   "name": "Segment",
   "type": "external_service",
-  "urls": ["https://api.segment.io", "https://cdn.segment.com"],
+  "urls": [
+    "https://api.segment.io",
+    "https://cdn.segment.com"
+  ],
   "packages": [
-    { "name": "analytics-ruby", "group": null, "package_manager": "rubygems" },
+    {
+      "name": "analytics-ruby",
+      "group": null,
+      "package_manager": "rubygems"
+    },
     {
       "name": "segmentio/analytics-php",
       "group": null,
       "package_manager": "packagist"
     },
-    { "name": "analytics-python", "group": null, "package_manager": "pypi" },
-    { "name": "analytics-node", "group": null, "package_manager": "npm" },
-    { "name": "analytics-php", "group": null, "package_manager": "packagist" },
+    {
+      "name": "analytics-python",
+      "group": null,
+      "package_manager": "pypi"
+    },
+    {
+      "name": "analytics-node",
+      "group": null,
+      "package_manager": "npm"
+    },
+    {
+      "name": "analytics-php",
+      "group": null,
+      "package_manager": "packagist"
+    },
     {
       "name": "github.com/segmentio/analytics-go",
       "group": null,
@@ -23,5 +42,6 @@
       "group": "com.segment.analytics.java",
       "package_manager": "maven"
     }
-  ]
+  ],
+  "uuid": "16a3cb75-167c-484b-a5cb-7545b5f65ca1"
 }

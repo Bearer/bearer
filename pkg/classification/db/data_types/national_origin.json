@@ -1,7 +1,6 @@
 {
   "metadata": { "version": "1.0" },
-  "data_category_name": "National origin",
-  "default_category": "Ethnicity",
-  "id": 29,
-  "uuid": "f35491a4-c71b-43f1-b053-bd12dc5a0dac"
+  "name": "National origin",
+  "uuid": "f35491a4-c71b-43f1-b053-bd12dc5a0dac",
+  "category_uuid": "35b94efa-9b67-49b2-abb9-29b6a759a030"
 }

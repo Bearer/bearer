@@ -1,7 +1,6 @@
 {
   "metadata": { "version": "1.0" },
-  "data_category_name": "ID Number",
-  "default_category": "Identification",
-  "id": 80,
-  "uuid": "25c9ab93-9daa-44bd-bfd4-49afd380d183"
+  "name": "ID Number",
+  "uuid": "25c9ab93-9daa-44bd-bfd4-49afd380d183",
+  "category_uuid": "14124881-6b92-4fc5-8005-ea7c1c09592e"
 }

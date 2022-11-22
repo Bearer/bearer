@@ -2,12 +2,15 @@
   "metadata": { "version": "1.0" },
   "name": "Porkbun",
   "type": "external_service",
-  "urls": ["https://porkbun.com/api/"],
+  "urls": [
+    "https://porkbun.com/api/"
+  ],
   "packages": [
     {
       "name": "github.com/nrdcg/porkbun",
       "group": null,
       "package_manager": "go"
     }
-  ]
+  ],
+  "uuid": "e28200a6-ed39-425c-a7db-a63915e46b1d"
 }

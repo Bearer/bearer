@@ -1,7 +1,6 @@
 {
   "metadata": { "version": "1.0" },
-  "data_category_name": "Apartments",
-  "default_category": "Personal Ownership",
-  "id": 99,
-  "uuid": "f51fd59b-6457-449f-ae2c-9b4de44a2c3b"
+  "name": "Apartments",
+  "uuid": "f51fd59b-6457-449f-ae2c-9b4de44a2c3b",
+  "category_uuid": "ebaa9c6a-8fbf-4e45-85e1-40799dfac414"
 }

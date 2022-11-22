@@ -4,19 +4,56 @@
   "type": "data_store",
   "urls": [],
   "packages": [
-    { "name": "sqlite3", "group": null, "package_manager": "npm" },
+    {
+      "name": "sqlite3",
+      "group": null,
+      "package_manager": "npm"
+    },
     {
       "name": "github.com/mattn/go-sqlite3",
       "group": null,
       "package_manager": "go"
     },
-    { "name": "sqlite", "group": null, "package_manager": "npm" },
-    { "name": "aiosqlite", "group": null, "package_manager": "pypi" },
-    { "name": "jdbc-sqlite3", "group": null, "package_manager": "rubygems" },
-    { "name": "sqlite3", "group": null, "package_manager": "rubygems" },
-    { "name": "do_sqlite3", "group": null, "package_manager": "rubygems" },
-    { "name": "System.Data.SQLite", "group": null, "package_manager": "nuget" },
-    { "name": "sqlite3-ruby", "group": null, "package_manager": "rubygems" },
-    { "name": "gorm.io/driver/sqlite", "group": null, "package_manager": "go" }
-  ]
+    {
+      "name": "sqlite",
+      "group": null,
+      "package_manager": "npm"
+    },
+    {
+      "name": "aiosqlite",
+      "group": null,
+      "package_manager": "pypi"
+    },
+    {
+      "name": "jdbc-sqlite3",
+      "group": null,
+      "package_manager": "rubygems"
+    },
+    {
+      "name": "sqlite3",
+      "group": null,
+      "package_manager": "rubygems"
+    },
+    {
+      "name": "do_sqlite3",
+      "group": null,
+      "package_manager": "rubygems"
+    },
+    {
+      "name": "System.Data.SQLite",
+      "group": null,
+      "package_manager": "nuget"
+    },
+    {
+      "name": "sqlite3-ruby",
+      "group": null,
+      "package_manager": "rubygems"
+    },
+    {
+      "name": "gorm.io/driver/sqlite",
+      "group": null,
+      "package_manager": "go"
+    }
+  ],
+  "uuid": "aa706b3c-0f6d-4a7b-a7a5-71ee0c5b6c00"
 }

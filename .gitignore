@@ -5,3 +5,8 @@ dist
 curio-build
 
 .DS_Store
+
+# curio binaries
+curio
+
+temp/

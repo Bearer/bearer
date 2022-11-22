@@ -2,6 +2,10 @@
   "metadata": { "version": "1.0" },
   "name": "Honeybadger",
   "type": "external_service",
-  "urls": ["https://api.honeybadger.io", "https://app.honeybadger.io/v2/"],
-  "packages": []
+  "urls": [
+    "https://api.honeybadger.io",
+    "https://app.honeybadger.io/v2/"
+  ],
+  "packages": [],
+  "uuid": "a5ac3dba-19ea-426c-9184-88d7153d5cc5"
 }

@@ -4,7 +4,11 @@
   "type": "data_store",
   "urls": [],
   "packages": [
-    { "name": "CouchbaseNetClient", "group": null, "package_manager": "nuget" },
+    {
+      "name": "CouchbaseNetClient",
+      "group": null,
+      "package_manager": "nuget"
+    },
     {
       "name": "CouchbaseNLogAdapter",
       "group": null,
@@ -20,7 +24,11 @@
       "group": null,
       "package_manager": "go"
     },
-    { "name": "couchbase", "group": null, "package_manager": "rubygems" },
+    {
+      "name": "couchbase",
+      "group": null,
+      "package_manager": "rubygems"
+    },
     {
       "name": "github.com/dustin/go-couch",
       "group": null,
@@ -31,5 +39,6 @@
       "group": null,
       "package_manager": "go"
     }
-  ]
+  ],
+  "uuid": "1b152f28-a00f-4bb4-bbd1-6281fec8272b"
 }

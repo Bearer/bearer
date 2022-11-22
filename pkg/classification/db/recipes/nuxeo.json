@@ -4,7 +4,11 @@
   "type": "external_service",
   "urls": [],
   "packages": [
-    { "name": "NuxeoClient", "group": null, "package_manager": "nuget" },
+    {
+      "name": "NuxeoClient",
+      "group": null,
+      "package_manager": "nuget"
+    },
     {
       "name": "nuxeo-common",
       "group": "org.nuxeo.common",
@@ -15,5 +19,6 @@
       "group": "org.nuxeo.client",
       "package_manager": "maven"
     }
-  ]
+  ],
+  "uuid": "8a7016a6-dc0c-4559-ae0c-4cae38ea063d"
 }

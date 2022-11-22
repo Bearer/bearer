@@ -13,26 +13,29 @@ import (
 )
 
 type Config struct {
-	Worker         flag.WorkerOptions `json:"worker"`
-	Scan           flag.ScanOptions   `json:"scan"`
-	Report         flag.ReportOptions `json:"report"`
-	CustomDetector map[string]Rule    `json:"custom_detector"`
-	Policies       map[string]*Policy `json:"policies"`
+	Worker         flag.WorkerOptions `json:"worker" yaml:"worker"`
+	Scan           flag.ScanOptions   `json:"scan" yaml:"scan"`
+	Report         flag.ReportOptions `json:"report" yaml:"report"`
+	CustomDetector map[string]Rule    `json:"custom_detector" yaml:"custom_detector"`
+	Policies       map[string]*Policy `json:"policies" yaml:"policies"`
 }
 
 type policyLevel string
 
-var LevelMedium = "medium"
-var LevelWarning = "warning"
 var LevelCritical = "critical"
+var LevelHigh = "high"
+var LevelMedium = "medium"
+var LevelLow = "low"
 
 type Modules []*PolicyModule
 
 type Policy struct {
-	Query   string
-	Message string
+	Query       string
+	Id          string
+	Name        string
+	Description string
+	Level       policyLevel
 	Modules Modules
-	Level   policyLevel
 }
 
 type PolicyModule struct {
@@ -124,7 +127,19 @@ func FromOptions(opts flag.Options) (Config, error) {
 		}
 	}
 
-	for _, policy := range policies {
+	for key := range policies {
+		policy := policies[key]
+
+		if len(opts.PolicyOptions.OnlyPolicy) > 0 && !opts.PolicyOptions.OnlyPolicy[policy.Id] {
+			delete(policies, key)
+			continue
+		}
+
+		if opts.PolicyOptions.SkipPolicy[policy.Id] {
+			delete(policies, key)
+			continue
+		}
+
 		for _, module := range policy.Modules {
 			if module.Path != "" {
 				content, err := policiesFs.ReadFile(module.Path)

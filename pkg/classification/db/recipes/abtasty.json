@@ -2,6 +2,9 @@
   "metadata": { "version": "1.0" },
   "name": "ABTasty",
   "type": "external_service",
-  "urls": ["https://try.abtasty.com"],
-  "packages": []
+  "urls": [
+    "https://try.abtasty.com"
+  ],
+  "packages": [],
+  "uuid": "fc6dd834-feb7-4c23-8c02-9239e0b0fea2"
 }

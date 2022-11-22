@@ -82,16 +82,16 @@ type WorkerFlagGroup struct {
 
 // GlobalOptions defines flags and other configuration parameters for all the subcommands
 type WorkerOptions struct {
-	Workers                   int           `json:"workers"`
-	Timeout                   time.Duration `json:"timeout"`
-	TimeoutFileMinimum        time.Duration `json:"timeout_file_minimum"`
-	TimeoutFileMaximum        time.Duration `json:"timeout_file_maximum"`
-	TimeoutFileSecondPerBytes int           `json:"timeout_file_second_per_bytes"`
-	TimeoutWorkerOnline       time.Duration `json:"timeout_worker_online"`
-	FileSizeMaximum           int           `json:"file_size_maximum"`
-	FilesToBatch              int           `json:"files_to_batch"`
-	MemoryMaximum             int           `json:"memory_maximum"`
-	ExistingWorker            string        `json:"existing_worker"`
+	Workers                   int           `json:"workers" yaml:"workers"`
+	Timeout                   time.Duration `json:"timeout" yaml:"timeout"`
+	TimeoutFileMinimum        time.Duration `json:"timeout_file_minimum" yaml:"timeout_file_minimum"`
+	TimeoutFileMaximum        time.Duration `json:"timeout_file_maximum" yaml:"timeout_file_maximum"`
+	TimeoutFileSecondPerBytes int           `json:"timeout_file_second_per_bytes" yaml:"timeout_file_second_per_bytes"`
+	TimeoutWorkerOnline       time.Duration `json:"timeout_worker_online" yaml:"timeout_worker_online"`
+	FileSizeMaximum           int           `json:"file_size_maximum" yaml:"file_size_maximum"`
+	FilesToBatch              int           `json:"files_to_batch" yaml:"files_to_batch"`
+	MemoryMaximum             int           `json:"memory_maximum" yaml:"memory_maximum"`
+	ExistingWorker            string        `json:"existing_worker" yaml:"existing_worker"`
 }
 
 func NewWorkerFlagGroup() *WorkerFlagGroup {

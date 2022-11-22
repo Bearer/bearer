@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  html {
+    scroll-padding-top:6.75rem;
+  }
+}
+
 @layer components {
   /* Custom Grid Elements */
 
@@ -49,8 +55,25 @@
         theme("colors.main.400")
       );
   }
+  /* code blocks */
+  code {
+  }
+  .code-inline {
+    @apply inline-block bg-main-100 p-1 rounded-md leading-none font-mono m-0 dark:bg-main-400;
+  }
+  /* ToC */
 
-  /* Layout grid */
+  .toc {
+    @apply leading-normal;
+    max-height: calc(100vh-6.75rem);
+    overflow-y: scroll;
+  }
+  .toc ol li ol {
+    @apply pl-4;
+  }
 
+  .toc a:hover {
+    @apply underline;
+  }
 
 }

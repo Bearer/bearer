@@ -1,7 +1,6 @@
 {
   "metadata": { "version": "1.0" },
-  "data_category_name": "Sexual History",
-  "default_category": "Sexual",
-  "id": 50,
-  "uuid": "3c5f11d3-e729-4950-a2e3-f0b5efcc044d"
+  "name": "Sexual History",
+  "uuid": "3c5f11d3-e729-4950-a2e3-f0b5efcc044d",
+  "category_uuid": "1d4000a7-93ec-4dd5-9f3b-0f2ff7026a0c"
 }

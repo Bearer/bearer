@@ -4,7 +4,11 @@
   "type": "data_store",
   "urls": [],
   "packages": [
-    { "name": "firebase-core", "group": null, "package_manager": "npm" },
+    {
+      "name": "firebase-core",
+      "group": null,
+      "package_manager": "npm"
+    },
     {
       "name": "@react-native-firebase/messaging",
       "group": null,
@@ -15,5 +19,6 @@
       "group": null,
       "package_manager": "npm"
     }
-  ]
+  ],
+  "uuid": "8fdcb3b8-89eb-4f85-bdfc-460823d1d108"
 }

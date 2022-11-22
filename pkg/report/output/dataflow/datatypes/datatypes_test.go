@@ -30,7 +30,7 @@ func TestDataflowDataType(t *testing.T) {
 		{
 			Name:        "single detection",
 			Config:      config,
-			FileContent: `{"type": "schema_classified", "detector_type":"ruby", "source": {"filename": "./users.rb", "line_number": 25}, "value": {"field_name": "User_name", "classification": {"data_type": {"data_category_name": "Username"} ,"decision":{"state": "valid"}}}}`,
+			FileContent: `{"type": "schema_classified", "detector_type":"ruby", "source": {"filename": "./users.rb", "line_number": 25}, "value": {"field_name": "User_name", "classification": {"data_type": {"name": "Username"} ,"decision":{"state": "valid"}}}}`,
 			Want: []types.Datatype{
 				{
 					Name: "Username",
@@ -54,8 +54,8 @@ func TestDataflowDataType(t *testing.T) {
 		{
 			Name:   "single detection - duplicates",
 			Config: config,
-			FileContent: `{"type": "schema_classified", "detector_type":"ruby", "source": {"filename": "./users.rb", "line_number": 25}, "value": {"field_name": "User_name", "classification": {"data_type": {"data_category_name": "Username"} ,"decision":{"state": "valid"}}}}
-{"type": "schema_classified", "detector_type":"ruby", "source": {"filename": "./users.rb", "line_number": 25}, "value": {"field_name": "User_name", "classification": {"data_type": {"data_category_name": "Username"} ,"decision":{"state": "valid"}}}}`,
+			FileContent: `{"type": "schema_classified", "detector_type":"ruby", "source": {"filename": "./users.rb", "line_number": 25}, "value": {"field_name": "User_name", "classification": {"data_type": {"name": "Username"} ,"decision":{"state": "valid"}}}}
+{"type": "schema_classified", "detector_type":"ruby", "source": {"filename": "./users.rb", "line_number": 25}, "value": {"field_name": "User_name", "classification": {"data_type": {"name": "Username"} ,"decision":{"state": "valid"}}}}`,
 			Want: []types.Datatype{
 				{
 					Name: "Username",
@@ -73,7 +73,7 @@ func TestDataflowDataType(t *testing.T) {
 		{
 			Name:   "single detection - with wierd data in report",
 			Config: config,
-			FileContent: `{"type": "schema_classified", "detector_type":"ruby", "source": {"filename": "./users.rb", "line_number": 25}, "value": {"field_name": "User_name", "classification": {"data_type": {"data_category_name": "Username"} ,"decision":{"state": "valid"}}}}
+			FileContent: `{"type": "schema_classified", "detector_type":"ruby", "source": {"filename": "./users.rb", "line_number": 25}, "value": {"field_name": "User_name", "classification": {"data_type": {"name": "Username"} ,"decision":{"state": "valid"}}}}
 {"user": true }`,
 			Want: []types.Datatype{
 				{
@@ -92,8 +92,8 @@ func TestDataflowDataType(t *testing.T) {
 		{
 			Name:   "multiple detections - with same object name - deterministic output",
 			Config: config,
-			FileContent: `{"type": "schema_classified", "detector_type":"ruby", "source": {"filename": "./users.rb", "line_number": 25}, "value": {"field_name": "User_name", "classification": {"data_type": {"data_category_name": "Username"} ,"decision":{"state": "valid"}}}}
-{"type": "schema_classified", "detector_type":"csharp", "source": {"filename": "./users.cs", "line_number": 12}, "value": {"field_name": "User_name", "classification": {"data_type": {"data_category_name": "Username"} ,"decision":{"state": "valid"}}}}`,
+			FileContent: `{"type": "schema_classified", "detector_type":"ruby", "source": {"filename": "./users.rb", "line_number": 25}, "value": {"field_name": "User_name", "classification": {"data_type": {"name": "Username"} ,"decision":{"state": "valid"}}}}
+{"type": "schema_classified", "detector_type":"csharp", "source": {"filename": "./users.cs", "line_number": 12}, "value": {"field_name": "User_name", "classification": {"data_type": {"name": "Username"} ,"decision":{"state": "valid"}}}}`,
 			Want: []types.Datatype{
 				{
 					Name: "Username",
@@ -117,8 +117,8 @@ func TestDataflowDataType(t *testing.T) {
 		{
 			Name:   "multiple detections - with different names - deterministic output",
 			Config: config,
-			FileContent: `{"type": "schema_classified", "detector_type":"ruby", "source": {"filename": "./users.rb", "line_number": 25}, "value": {"field_name": "User_name", "classification": {"data_type": {"data_category_name": "Username"} ,"decision":{"state": "valid"}}}}
-{"type": "schema_classified", "detector_type":"csharp", "source": {"filename": "./users.cs", "line_number": 12}, "value": {"field_name": "address", "classification": {"data_type": {"data_category_name": "Physical Address"} ,"decision":{"state": "valid"}}}}`,
+			FileContent: `{"type": "schema_classified", "detector_type":"ruby", "source": {"filename": "./users.rb", "line_number": 25}, "value": {"field_name": "User_name", "classification": {"data_type": {"name": "Username"} ,"decision":{"state": "valid"}}}}
+{"type": "schema_classified", "detector_type":"csharp", "source": {"filename": "./users.cs", "line_number": 12}, "value": {"field_name": "address", "classification": {"data_type": {"name": "Physical Address"} ,"decision":{"state": "valid"}}}}`,
 			Want: []types.Datatype{
 				{
 					Name: "Physical Address",
@@ -169,7 +169,7 @@ func TestDataflowDataType(t *testing.T) {
 				return
 			}
 
-			dataflow, err := dataflow.GetOutput(detections, test.Config)
+			dataflow, err := dataflow.GetOutput(detections, test.Config, false)
 			if err != nil {
 				t.Fatalf("failed to get detectors output %s", err)
 				return

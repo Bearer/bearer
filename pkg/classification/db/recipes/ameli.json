@@ -2,6 +2,10 @@
   "metadata": { "version": "1.0" },
   "name": "Ameli",
   "type": "external_service",
-  "urls": ["https://ameli.fr/api", "https://services-ps.ameli.fr/lps"],
-  "packages": []
+  "urls": [
+    "https://ameli.fr/api",
+    "https://services-ps.ameli.fr/lps"
+  ],
+  "packages": [],
+  "uuid": "0767b306-3ee8-426a-b63a-44355add6f27"
 }

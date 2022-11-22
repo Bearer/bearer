@@ -11,13 +11,14 @@ import (
 
 type ClassifiedDependency struct {
 	*detections.Detection
-	Classification *Classification `json:"classification"`
+	Classification *Classification `json:"classification" yaml:"classification"`
 }
 
 type Classification struct {
-	RecipeMatch bool                            `json:"recipe_match"`
+	RecipeMatch bool                            `json:"recipe_match" yaml:"recipe_match"`
+	RecipeUUID  string                          `json:"recipe_uuid,omitempty"`
 	RecipeName  string                          `json:"recipe_name,omitempty"`
-	Decision    classify.ClassificationDecision `json:"decision"`
+	Decision    classify.ClassificationDecision `json:"decision" yaml:"decision"`
 }
 
 type Classifier struct {
@@ -44,7 +45,10 @@ func (classifier *Classifier) Classify(data detections.Detection) (*ClassifiedDe
 	var classification *Classification
 	value, ok := data.Value.(dependencies.Dependency)
 	if !ok {
-		return nil, errors.New("detection is not an dependency")
+		return &ClassifiedDependency{
+			Detection:      &data,
+			Classification: classification,
+		}, errors.New("detection is not an dependency")
 	}
 
 	if classify.IsVendored(data.Source.Filename) {
@@ -65,6 +69,7 @@ func (classifier *Classifier) Classify(data detections.Detection) (*ClassifiedDe
 		for _, recipePackage := range recipe.Packages {
 			if isRecipeMatch(recipePackage, value) {
 				classification = &Classification{
+					RecipeUUID:  recipe.UUID,
 					RecipeName:  recipe.Name,
 					RecipeMatch: true,
 					Decision: classify.ClassificationDecision{
@@ -72,6 +77,7 @@ func (classifier *Classifier) Classify(data detections.Detection) (*ClassifiedDe
 						Reason: "recipe_match",
 					},
 				}
+				break
 			}
 		}
 	}

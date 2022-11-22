@@ -2,6 +2,9 @@
   "metadata": { "version": "1.0" },
   "name": "WordPress",
   "type": "external_service",
-  "urls": ["https://public-api.wordpress.com"],
-  "packages": []
+  "urls": [
+    "https://public-api.wordpress.com"
+  ],
+  "packages": [],
+  "uuid": "9a9de396-0dd5-4621-ab94-e1407e281311"
 }

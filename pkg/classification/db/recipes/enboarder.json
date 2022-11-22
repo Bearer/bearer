@@ -2,6 +2,10 @@
   "metadata": { "version": "1.0" },
   "name": "Enboarder",
   "type": "external_service",
-  "urls": ["https://api.*.e1.enboarder.com", "https://enboarder.com/restapi"],
-  "packages": []
+  "urls": [
+    "https://api.*.e1.enboarder.com",
+    "https://enboarder.com/restapi"
+  ],
+  "packages": [],
+  "uuid": "80344ac3-1e35-4c1b-90bd-4b4c39498a7c"
 }

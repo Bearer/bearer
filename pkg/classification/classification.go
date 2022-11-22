@@ -3,6 +3,7 @@ package classification
 import (
 	"github.com/bearer/curio/pkg/classification/db"
 	"github.com/bearer/curio/pkg/classification/dependencies"
+	"github.com/bearer/curio/pkg/classification/frameworks"
 	"github.com/bearer/curio/pkg/classification/interfaces"
 	"github.com/bearer/curio/pkg/classification/schema"
 	config "github.com/bearer/curio/pkg/commands/process/settings"
@@ -15,6 +16,7 @@ type Classifier struct {
 	Interfaces   *interfaces.Classifier
 	Schema       *schema.Classifier
 	Dependencies *dependencies.Classifier
+	Frameworks   *frameworks.Classifier
 }
 
 type Config struct {
@@ -51,10 +53,17 @@ func NewClassifier(config *Config) (*Classifier, error) {
 		},
 	)
 
+	frameworksClassifier := frameworks.New(
+		frameworks.Config{
+			Recipes: db.Default().Recipes,
+		},
+	)
+
 	return &Classifier{
 		config:       *config,
 		Dependencies: dependenciesClassifier,
 		Interfaces:   interfacesClassifier,
 		Schema:       schemaClassifier,
+		Frameworks:   frameworksClassifier,
 	}, nil
 }

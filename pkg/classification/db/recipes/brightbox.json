@@ -2,6 +2,9 @@
   "metadata": { "version": "1.0" },
   "name": "Brightbox",
   "type": "external_service",
-  "urls": ["https://api.*.brightbox.com"],
-  "packages": []
+  "urls": [
+    "https://api.*.brightbox.com"
+  ],
+  "packages": [],
+  "uuid": "d00a92c8-bc14-4e40-baab-55751bafeaf8"
 }

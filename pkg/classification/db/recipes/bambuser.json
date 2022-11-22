@@ -2,6 +2,9 @@
   "metadata": { "version": "1.0" },
   "name": "Bambuser",
   "type": "external_service",
-  "urls": ["https://api.bambuser.com"],
-  "packages": []
+  "urls": [
+    "https://api.bambuser.com"
+  ],
+  "packages": [],
+  "uuid": "6fe6417f-583b-47e1-9702-9e52487af977"
 }

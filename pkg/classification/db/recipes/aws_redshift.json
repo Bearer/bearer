@@ -4,7 +4,11 @@
   "type": "data_store",
   "urls": [],
   "packages": [
-    { "name": "dbt-redshift", "group": null, "package_manager": "pypi" },
+    {
+      "name": "dbt-redshift",
+      "group": null,
+      "package_manager": "pypi"
+    },
     {
       "name": "redshift",
       "group": "software.amazon.awssdk",
@@ -25,5 +29,6 @@
       "group": null,
       "package_manager": "go"
     }
-  ]
+  ],
+  "uuid": "3a49be11-d8a7-4f63-ba4d-542320f3c580"
 }

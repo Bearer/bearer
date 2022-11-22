@@ -2,6 +2,10 @@
   "metadata": { "version": "1.0" },
   "name": "Trafficvance",
   "type": "external_service",
-  "urls": ["https://api.trafficvance.com", "https://apitest.trafficvance.com"],
-  "packages": []
+  "urls": [
+    "https://api.trafficvance.com",
+    "https://apitest.trafficvance.com"
+  ],
+  "packages": [],
+  "uuid": "040baff1-17e7-4071-b206-a470e35591bf"
 }

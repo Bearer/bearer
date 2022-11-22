@@ -8,12 +8,21 @@
     "https://googleads.googleapis.com"
   ],
   "packages": [
-    { "name": "google-ads", "group": null, "package_manager": "pypi" },
-    { "name": "googleads", "group": null, "package_manager": "pypi" },
+    {
+      "name": "google-ads",
+      "group": null,
+      "package_manager": "pypi"
+    },
+    {
+      "name": "googleads",
+      "group": null,
+      "package_manager": "pypi"
+    },
     {
       "name": "play-services-ads-identifier",
       "group": "com.google.android.gms",
       "package_manager": "maven"
     }
-  ]
+  ],
+  "uuid": "4af91aef-2c9f-4643-b1a7-d24865520b5c"
 }

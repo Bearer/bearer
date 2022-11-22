@@ -2,6 +2,10 @@
   "metadata": { "version": "1.0" },
   "name": "Docusign",
   "type": "external_service",
-  "urls": ["https://account.docusign.com", "https://docusign.net/restapi"],
-  "packages": []
+  "urls": [
+    "https://account.docusign.com",
+    "https://docusign.net/restapi"
+  ],
+  "packages": [],
+  "uuid": "eba0f4bc-3e35-46af-a0a7-fbce5a41ca5b"
 }

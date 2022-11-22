@@ -2,15 +2,25 @@
   "metadata": { "version": "1.0" },
   "name": "Heroku",
   "type": "external_service",
-  "urls": ["https://api.heroku.com"],
+  "urls": [
+    "https://api.heroku.com"
+  ],
   "packages": [
     {
       "name": "php-heroku-client/php-heroku-client",
       "group": null,
       "package_manager": "packagist"
     },
-    { "name": "heroku-client", "group": null, "package_manager": "npm" },
-    { "name": "platform-api", "group": null, "package_manager": "rubygems" },
+    {
+      "name": "heroku-client",
+      "group": null,
+      "package_manager": "npm"
+    },
+    {
+      "name": "platform-api",
+      "group": null,
+      "package_manager": "rubygems"
+    },
     {
       "name": "github.com/heroku/heroku-go",
       "group": null,
@@ -21,5 +31,6 @@
       "group": null,
       "package_manager": "go"
     }
-  ]
+  ],
+  "uuid": "6cabd765-14ac-428b-b8ee-98b91e385a08"
 }

@@ -2,6 +2,10 @@
   "metadata": { "version": "1.0" },
   "name": "Drift",
   "type": "external_service",
-  "urls": ["https://js.driftt.com", "https://driftapi.com"],
-  "packages": []
+  "urls": [
+    "https://js.driftt.com",
+    "https://driftapi.com"
+  ],
+  "packages": [],
+  "uuid": "a256be05-3a8f-4fe7-9b53-3b4a29e018e7"
 }

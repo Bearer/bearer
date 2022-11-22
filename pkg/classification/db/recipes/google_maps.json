@@ -2,16 +2,30 @@
   "metadata": { "version": "1.0" },
   "name": "Google Maps",
   "type": "external_service",
-  "urls": ["https://maps.googleapis.com/maps/api/"],
+  "urls": [
+    "https://maps.googleapis.com/maps/api/"
+  ],
   "packages": [
-    { "name": "google-map-react", "group": null, "package_manager": "npm" },
-    { "name": "react-google-maps", "group": null, "package_manager": "npm" },
+    {
+      "name": "google-map-react",
+      "group": null,
+      "package_manager": "npm"
+    },
+    {
+      "name": "react-google-maps",
+      "group": null,
+      "package_manager": "npm"
+    },
     {
       "name": "Google.Api.Maps.Service",
       "group": null,
       "package_manager": "nuget"
     },
-    { "name": "vue2-google-maps", "group": null, "package_manager": "npm" },
+    {
+      "name": "vue2-google-maps",
+      "group": null,
+      "package_manager": "npm"
+    },
     {
       "name": "googlemaps.github.io/maps",
       "group": null,
@@ -22,5 +36,6 @@
       "group": null,
       "package_manager": "npm"
     }
-  ]
+  ],
+  "uuid": "2cd538ec-0763-42ab-9c6c-444f1285aa52"
 }

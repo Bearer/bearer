@@ -9,8 +9,16 @@
     "https://logs.datadoghq.com"
   ],
   "packages": [
-    { "name": "dogstatsd-ruby", "group": null, "package_manager": "rubygems" },
-    { "name": "ddtrace", "group": null, "package_manager": "rubygems" },
+    {
+      "name": "dogstatsd-ruby",
+      "group": null,
+      "package_manager": "rubygems"
+    },
+    {
+      "name": "ddtrace",
+      "group": null,
+      "package_manager": "rubygems"
+    },
     {
       "name": "datadog/php-datadogstatsd",
       "group": null,
@@ -26,8 +34,16 @@
       "group": null,
       "package_manager": "go"
     },
-    { "name": "dogapi", "group": null, "package_manager": "rubygems" },
-    { "name": "datadog", "group": null, "package_manager": "pypi" },
+    {
+      "name": "dogapi",
+      "group": null,
+      "package_manager": "rubygems"
+    },
+    {
+      "name": "datadog",
+      "group": null,
+      "package_manager": "pypi"
+    },
     {
       "name": "github.com/DataDog/datadog-lambda-go",
       "group": null,
@@ -48,8 +64,16 @@
       "group": null,
       "package_manager": "npm"
     },
-    { "name": "datadog-api-client", "group": null, "package_manager": "pypi" },
-    { "name": "@datadog/datadog-ci", "group": null, "package_manager": "npm" },
+    {
+      "name": "datadog-api-client",
+      "group": null,
+      "package_manager": "pypi"
+    },
+    {
+      "name": "@datadog/datadog-ci",
+      "group": null,
+      "package_manager": "npm"
+    },
     {
       "name": "github.com/DataDog/datadog-api-client-go",
       "group": null,
@@ -60,5 +84,6 @@
       "group": null,
       "package_manager": "go"
     }
-  ]
+  ],
+  "uuid": "1fc5f10d-490f-48b9-b901-e0813804c781"
 }

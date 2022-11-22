@@ -2,6 +2,10 @@
   "metadata": { "version": "1.0" },
   "name": "Oney",
   "type": "external_service",
-  "urls": ["https://api.oney.io", "https://api-staging.oney.io"],
-  "packages": []
+  "urls": [
+    "https://api.oney.io",
+    "https://api-staging.oney.io"
+  ],
+  "packages": [],
+  "uuid": "481bec69-5726-4015-a3e4-ff9b299250fa"
 }

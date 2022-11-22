@@ -1,7 +1,6 @@
 {
   "metadata": { "version": "1.0" },
-  "data_category_name": "Geographic",
-  "default_category": "Demographic",
-  "id": 25,
-  "uuid": "a0d99e34-a1e0-4d5a-9614-e8649933542c"
+  "name": "Geographic",
+  "uuid": "a0d99e34-a1e0-4d5a-9614-e8649933542c",
+  "category_uuid": "c3119d43-0562-48ac-9a8e-7217aa8686b8"
 }

@@ -2,6 +2,9 @@
   "metadata": { "version": "1.0" },
   "name": "Mondial Relay",
   "type": "external_service",
-  "urls": ["https://api.mondialrelay.com"],
-  "packages": []
+  "urls": [
+    "https://api.mondialrelay.com"
+  ],
+  "packages": [],
+  "uuid": "1d9c00f2-7eb2-44fb-9dcd-0d50bec584ec"
 }

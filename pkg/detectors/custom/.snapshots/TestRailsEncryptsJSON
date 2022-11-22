@@ -6,25 +6,6 @@
 			"filename": "class.rb",
 			"language": "Ruby",
 			"language_type": "programming",
-			"line_number": 2,
-			"column_number": 7,
-			"text": null
-		},
-		"value": {
-			"object_name": "",
-			"field_name": "User",
-			"field_type": "",
-			"field_type_simple": "object",
-			"classification": null
-		}
-	},
-	{
-		"type": "custom",
-		"detector_type": "detect_rails_encrypts",
-		"source": {
-			"filename": "class.rb",
-			"language": "Ruby",
-			"language_type": "programming",
 			"line_number": 3,
 			"column_number": 14,
 			"text": null

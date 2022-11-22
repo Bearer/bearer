@@ -1,7 +1,6 @@
 {
   "metadata": { "version": "1.0" },
-  "data_category_name": "Group Membership",
-  "default_category": "Social Network",
-  "id": 58,
-  "uuid": "a4095f69-5a06-404a-aa2c-87a4629cca1a"
+  "name": "Group Membership",
+  "uuid": "a4095f69-5a06-404a-aa2c-87a4629cca1a",
+  "category_uuid": "68631dba-5696-4cc0-b6a8-0175ca99a7a2"
 }

@@ -17,10 +17,12 @@ type datatypeHolder struct {
 	name      string
 	detectors map[string]*detectorHolder // group detectors by detectorName
 }
+
 type detectorHolder struct {
 	name  string
 	files map[string]*fileHolder // group files by filename
 }
+
 type fileHolder struct {
 	name        string
 	lineNumbers map[int]*lineNumberHolder // group occurences by line number
@@ -45,7 +47,7 @@ func (holder *Holder) AddSchema(detection detections.Detection, extras *extraFie
 	}
 
 	if classification.Decision.State == classify.Valid {
-		holder.addDatatype(classification.DataType.DataCategoryName, string(detection.DetectorType), detection.Source.Filename, *detection.Source.LineNumber, extras)
+		holder.addDatatype(classification.DataType.Name, string(detection.DetectorType), detection.Source.Filename, *detection.Source.LineNumber)
 	}
 
 	return nil

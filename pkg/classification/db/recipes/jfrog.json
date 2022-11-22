@@ -2,6 +2,9 @@
   "metadata": { "version": "1.0" },
   "name": "Jfrog",
   "type": "external_service",
-  "urls": ["https://*.jfrog.io"],
-  "packages": []
+  "urls": [
+    "https://*.jfrog.io"
+  ],
+  "packages": [],
+  "uuid": "6b0cea07-d1c1-4573-9200-599f167898eb"
 }

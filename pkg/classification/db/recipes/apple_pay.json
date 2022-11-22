@@ -6,5 +6,6 @@
     "https://apple-pay-gateway-cert.apple.com",
     "https://apple-pay-gateway.apple.com"
   ],
-  "packages": []
+  "packages": [],
+  "uuid": "3907b935-0197-4fb0-a836-e6fbb597fd9d"
 }

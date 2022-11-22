@@ -2,6 +2,9 @@
   "metadata": { "version": "1.0" },
   "name": "Adictiz",
   "type": "external_service",
-  "urls": ["https://api.adictiz.com"],
-  "packages": []
+  "urls": [
+    "https://api.adictiz.com"
+  ],
+  "packages": [],
+  "uuid": "8ac17d90-1489-4d6b-98be-a2a8ac167616"
 }

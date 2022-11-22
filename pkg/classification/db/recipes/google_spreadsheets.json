@@ -8,6 +8,11 @@
     "https://spreadsheets.google.com/"
   ],
   "packages": [
-    { "name": "df2gspread", "group": null, "package_manager": "pypi" }
-  ]
+    {
+      "name": "df2gspread",
+      "group": null,
+      "package_manager": "pypi"
+    }
+  ],
+  "uuid": "ebe2e05e-bc56-4204-9329-d9b8d3cf1837"
 }

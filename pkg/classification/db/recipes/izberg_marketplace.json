@@ -2,6 +2,9 @@
   "metadata": { "version": "1.0" },
   "name": "Izberg Marketplace",
   "type": "external_service",
-  "urls": ["https://api.izberg.me"],
-  "packages": []
+  "urls": [
+    "https://api.izberg.me"
+  ],
+  "packages": [],
+  "uuid": "d20e6b2f-a27c-4abb-9fd4-75565424c964"
 }

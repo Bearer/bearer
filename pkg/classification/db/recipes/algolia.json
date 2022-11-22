@@ -16,16 +16,36 @@
       "group": null,
       "package_manager": "go"
     },
-    { "name": "SearchClient", "group": null, "package_manager": "packagist" },
-    { "name": "algoliasearch", "group": null, "package_manager": "pypi" },
-    { "name": "algoliasearch", "group": null, "package_manager": "rubygems" },
-    { "name": "algoliasearch", "group": null, "package_manager": "npm" },
+    {
+      "name": "SearchClient",
+      "group": null,
+      "package_manager": "packagist"
+    },
+    {
+      "name": "algoliasearch",
+      "group": null,
+      "package_manager": "pypi"
+    },
+    {
+      "name": "algoliasearch",
+      "group": null,
+      "package_manager": "rubygems"
+    },
+    {
+      "name": "algoliasearch",
+      "group": null,
+      "package_manager": "npm"
+    },
     {
       "name": "github.com/algolia/algoliasearch-client-go/v3",
       "group": null,
       "package_manager": "go"
     },
-    { "name": "algoliasearchasync", "group": null, "package_manager": "pypi" },
+    {
+      "name": "algoliasearchasync",
+      "group": null,
+      "package_manager": "pypi"
+    },
     {
       "name": "algolia/algoliasearch-client-php",
       "group": null,
@@ -36,11 +56,16 @@
       "group": null,
       "package_manager": "npm"
     },
-    { "name": "@algolia/transporter", "group": "", "package_manager": "npm" },
+    {
+      "name": "@algolia/transporter",
+      "group": "",
+      "package_manager": "npm"
+    },
     {
       "name": "@algolia/client-search",
       "group": null,
       "package_manager": "npm"
     }
-  ]
+  ],
+  "uuid": "c1176caf-170c-48e8-807e-acb537ff4aec"
 }

@@ -1,7 +1,6 @@
 {
   "metadata": { "version": "1.0" },
-  "data_category_name": "Knowledge",
-  "default_category": "Knowledge and Belief",
-  "id": 96,
-  "uuid": "969ac76a-190c-4d66-9788-f4e19279dd73"
+  "name": "Knowledge",
+  "uuid": "969ac76a-190c-4d66-9788-f4e19279dd73",
+  "category_uuid": "623a4f94-0e23-411e-9bb3-481602f1757d"
 }

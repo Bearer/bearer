@@ -2,6 +2,9 @@
   "metadata": { "version": "1.0" },
   "name": "Chargify",
   "type": "external_service",
-  "urls": ["https://js.chargify.com"],
-  "packages": []
+  "urls": [
+    "https://js.chargify.com"
+  ],
+  "packages": [],
+  "uuid": "fefd1ff1-dd3a-49dc-a8d7-5e9e58f29061"
 }

@@ -1,7 +1,6 @@
 {
   "metadata": { "version": "1.0" },
-  "data_category_name": "PIN",
-  "default_category": "Authenticating",
-  "id": 2,
-  "uuid": "c897613c-55f4-4df0-a817-e4e4a2b1ec5c"
+  "name": "PIN",
+  "uuid": "c897613c-55f4-4df0-a817-e4e4a2b1ec5c",
+  "category_uuid": "dd88aee5-9d40-4ad2-8983-0c791ddec47c"
 }

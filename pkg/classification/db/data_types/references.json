@@ -1,7 +1,6 @@
 {
   "metadata": { "version": "1.0" },
-  "data_category_name": "References",
-  "default_category": "Professional Information",
-  "id": 112,
-  "uuid": "fa81a072-3603-4e05-98e2-a5c954d86793"
+  "name": "References",
+  "uuid": "fa81a072-3603-4e05-98e2-a5c954d86793",
+  "category_uuid": "ef613213-a222-4c01-ae38-c3043b68f738"
 }

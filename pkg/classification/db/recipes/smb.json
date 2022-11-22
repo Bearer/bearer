@@ -3,5 +3,12 @@
   "name": "SMB",
   "type": "data_store",
   "urls": [],
-  "packages": [{ "name": "pysmb", "group": null, "package_manager": "pypi" }]
+  "packages": [
+    {
+      "name": "pysmb",
+      "group": null,
+      "package_manager": "pypi"
+    }
+  ],
+  "uuid": "ce16223c-41ac-4fc7-b12d-e68b4e7755b6"
 }

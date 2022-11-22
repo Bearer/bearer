@@ -4,14 +4,26 @@
   "type": "internal_service",
   "urls": [],
   "packages": [
-    { "name": "ext-amqp", "group": null, "package_manager": "packagist" },
-    { "name": "pack.ag/amqp", "group": null, "package_manager": "go" },
+    {
+      "name": "ext-amqp",
+      "group": null,
+      "package_manager": "packagist"
+    },
+    {
+      "name": "pack.ag/amqp",
+      "group": null,
+      "package_manager": "go"
+    },
     {
       "name": "php-amqplib/php-amqplib",
       "group": null,
       "package_manager": "packagist"
     },
-    { "name": "pika", "group": null, "package_manager": "pypi" },
+    {
+      "name": "pika",
+      "group": null,
+      "package_manager": "pypi"
+    },
     {
       "name": "swarrot/swarrot",
       "group": null,
@@ -27,20 +39,36 @@
       "group": null,
       "package_manager": "go"
     },
-    { "name": "amqplib", "group": null, "package_manager": "npm" },
+    {
+      "name": "amqplib",
+      "group": null,
+      "package_manager": "npm"
+    },
     {
       "name": "php-amqplib/rabbitmq-bundle",
       "group": null,
       "package_manager": "packagist"
     },
-    { "name": "amqp", "group": null, "package_manager": "npm" },
+    {
+      "name": "amqp",
+      "group": null,
+      "package_manager": "npm"
+    },
     {
       "name": "@digital-factory/rabbitmq-client",
       "group": null,
       "package_manager": "npm"
     },
-    { "name": "RabbitMQ.Client", "group": null, "package_manager": "nuget" },
-    { "name": "bunny", "group": null, "package_manager": "rubygems" },
+    {
+      "name": "RabbitMQ.Client",
+      "group": null,
+      "package_manager": "nuget"
+    },
+    {
+      "name": "bunny",
+      "group": null,
+      "package_manager": "rubygems"
+    },
     {
       "name": "videlalvaro/php-amqplib",
       "group": null,
@@ -61,6 +89,11 @@
       "group": "",
       "package_manager": "packagist"
     },
-    { "name": "amqp-ts", "group": null, "package_manager": "npm" }
-  ]
+    {
+      "name": "amqp-ts",
+      "group": null,
+      "package_manager": "npm"
+    }
+  ],
+  "uuid": "b4771fe2-a6e5-486a-b0e1-2e50a611f98b"
 }

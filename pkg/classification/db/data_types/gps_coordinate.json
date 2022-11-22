@@ -1,7 +1,6 @@
 {
   "metadata": { "version": "1.0" },
-  "data_category_name": "GPS Coordinate",
-  "default_category": "Location",
-  "id": 93,
-  "uuid": "ddf23f9f-c412-4a75-b090-df976f0ec16e"
+  "name": "GPS Coordinate",
+  "uuid": "ddf23f9f-c412-4a75-b090-df976f0ec16e",
+  "category_uuid": "c6622b62-bc22-4c0c-a2e4-5fc97d99e11a"
 }

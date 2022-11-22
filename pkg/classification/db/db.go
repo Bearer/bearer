@@ -16,6 +16,9 @@ var recipesDir embed.FS
 //go:embed data_types
 var dataTypesDir embed.FS
 
+//go:embed data_categories
+var dataCategoriesDir embed.FS
+
 //go:embed data_type_classification_patterns
 var dataTypeClassificationPatternsDir embed.FS
 
@@ -25,21 +28,23 @@ var knownPersonObjectPatternsDir embed.FS
 type DefaultDB struct {
 	Recipes                        []Recipe
 	DataTypes                      []DataType
+	DataCategories                 []DataCategory
 	DataTypeClassificationPatterns []DataTypeClassificationPattern
 	KnownPersonObjectPatterns      []KnownPersonObjectPattern
 }
 
 type Recipe struct {
-	URLS     []string  `json:"urls"`
-	Name     string    `json:"name"`
-	Type     string    `json:"type"`
-	Packages []Package `json:"packages"`
+	URLS     []string  `json:"urls" yaml:"urls"`
+	Name     string    `json:"name" yaml:"name"`
+	Type     string    `json:"type" yaml:"type"`
+	Packages []Package `json:"packages" yaml:"packages"`
+	UUID     string    `json:"uuid" yaml:"uuid"`
 }
 
 type Package struct {
-	Name           string `json:"name"`
-	PackageManager string `json:"package_manager"`
-	Group          string `json:"group"`
+	Name           string `json:"name" yaml:"name"`
+	PackageManager string `json:"package_manager" yaml:"package_manager"`
+	Group          string `json:"group" yaml:"group"`
 }
 
 type RecipeType string
@@ -48,10 +53,15 @@ var RecipeTypeDataStore = RecipeType("data_store")
 var RecipeTypeService = RecipeType("service")
 
 type DataType struct {
-	DataCategoryName string `json:"data_category_name"`
-	DefaultCategory  string `json:"default_category"`
-	Id               int    `json:"id"`
-	UUID             string `json:"uuid"`
+	Name         string `json:"name" yaml:"name"`
+	UUID         string `json:"uuid" yaml:"uuid"`
+	CategoryUUID string `json:"category_uuid" yaml:"category_uuid"`
+}
+
+type DataCategory struct {
+	Name     string `json:"name" yaml:"name"`
+	UUID     string `json:"uuid" yaml:"uuid"`
+	Severity string `json:"severity" yaml:"severity"`
 }
 
 type ObjectType string
@@ -63,34 +73,34 @@ var AssociatedObject ObjectType = "associated"
 var KnownDataObject ObjectType = "known_data_object"
 
 type DataTypeClassificationPattern struct {
-	Id                        int                 `json:"id"`
+	Id                        int                 `json:"id" yaml:"id"`
 	DataTypeUUID              string              `json:"data_type_uuid,omitempty"`
-	DataType                  DataType            `json:"data_type"`
-	IncludeRegexp             string              `json:"include_regexp"`
-	IncludeRegexpMatcher      *regexp.Regexp      `json:"include_regexp_matcher"`
+	DataType                  DataType            `json:"data_type" yaml:"data_type"`
+	IncludeRegexp             string              `json:"include_regexp" yaml:"include_regexp"`
+	IncludeRegexpMatcher      *regexp.Regexp      `json:"include_regexp_matcher" yaml:"include_regexp_matcher"`
 	ExcludeRegexp             string              `json:"exclude_regexp,omitempty"`
-	ExcludeRegexpMatcher      *regexp.Regexp      `json:"exclude_regexp_matcher"`
-	ExcludeTypes              []string            `json:"exclude_types"`
-	ExcludeTypesMapping       map[string]struct{} `json:"exclude_types_mapping"`
-	FriendlyName              string              `json:"friendly_name"`
+	ExcludeRegexpMatcher      *regexp.Regexp      `json:"exclude_regexp_matcher" yaml:"exclude_regexp_matcher"`
+	ExcludeTypes              []string            `json:"exclude_types" yaml:"exclude_types"`
+	ExcludeTypesMapping       map[string]struct{} `json:"exclude_types_mapping" yaml:"exclude_types_mapping"`
+	FriendlyName              string              `json:"friendly_name" yaml:"friendly_name"`
 	HealthContextDataTypeUUID string              `json:"health_context_data_type_uuid,omitempty"`
-	HealthContextDataType     DataType            `json:"health_context_data_type"`
-	MatchColumn               bool                `json:"match_column"`
-	MatchObject               bool                `json:"match_object"`
-	ObjectType                []string            `json:"object_type"`
-	ObjectTypeMapping         map[string]struct{} `json:"object_types_mapping"`
+	HealthContextDataType     DataType            `json:"health_context_data_type" yaml:"health_context_data_type"`
+	MatchColumn               bool                `json:"match_column" yaml:"match_column"`
+	MatchObject               bool                `json:"match_object" yaml:"match_object"`
+	ObjectType                []string            `json:"object_type" yaml:"object_type"`
+	ObjectTypeMapping         map[string]struct{} `json:"object_types_mapping" yaml:"object_types_mapping"`
 }
 
 type KnownPersonObjectPattern struct {
-	Id                      int            `json:"id"`
-	DataType                DataType       `json:"data_type"`
-	IncludeRegexp           string         `json:"include_regexp"`
-	IncludeRegexpMatcher    *regexp.Regexp `json:"include_regexp_matcher"`
+	Id                      int            `json:"id" yaml:"id"`
+	DataType                DataType       `json:"data_type" yaml:"data_type"`
+	IncludeRegexp           string         `json:"include_regexp" yaml:"include_regexp"`
+	IncludeRegexpMatcher    *regexp.Regexp `json:"include_regexp_matcher" yaml:"include_regexp_matcher"`
 	ExcludeRegexp           string         `json:"exclude_regexp,omitempty"`
-	ExcludeRegexpMatcher    *regexp.Regexp `json:"exclude_regexp_matcher"`
-	Category                string         `json:"category"`
-	ActAsIdentifier         bool           `json:"act_as_identifier"`
-	IdentifierRegexpMatcher *regexp.Regexp `json:"identifier_regexp_matcher"`
+	ExcludeRegexpMatcher    *regexp.Regexp `json:"exclude_regexp_matcher" yaml:"exclude_regexp_matcher"`
+	Category                string         `json:"category" yaml:"category"`
+	ActAsIdentifier         bool           `json:"act_as_identifier" yaml:"act_as_identifier"`
+	IdentifierRegexpMatcher *regexp.Regexp `json:"identifier_regexp_matcher" yaml:"identifier_regexp_matcher"`
 }
 
 func Default() DefaultDB {
@@ -98,6 +108,7 @@ func Default() DefaultDB {
 	return DefaultDB{
 		Recipes:                        defaultRecipes(),
 		DataTypes:                      dataTypes,
+		DataCategories:                 defaultDataCategories(),
 		DataTypeClassificationPatterns: defaultDataTypeClassificationPatterns(dataTypes),
 		KnownPersonObjectPatterns:      defaultKnownPersonObjectPatterns(dataTypes),
 	}
@@ -128,6 +139,33 @@ func defaultRecipes() []Recipe {
 	}
 
 	return recipes
+}
+
+func defaultDataCategories() []DataCategory {
+	dataCategories := []DataCategory{}
+
+	files, err := dataCategoriesDir.ReadDir("data_categories")
+	if err != nil {
+		handleError(err)
+	}
+
+	for _, file := range files {
+		val, err := dataCategoriesDir.ReadFile("data_categories/" + file.Name())
+		if err != nil {
+			handleError(err)
+		}
+
+		var dataCategory DataCategory
+		rawBytes := []byte(val)
+		err = json.Unmarshal(rawBytes, &dataCategory)
+		if err != nil {
+			handleError(err)
+		}
+
+		dataCategories = append(dataCategories, dataCategory)
+	}
+
+	return dataCategories
 }
 
 func defaultDataTypes() []DataType {

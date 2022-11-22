@@ -75,7 +75,7 @@ func getReportOutput(report types.Report, config settings.Config) (any, error) {
 			return nil, err
 		}
 
-		dataflowOutput, err := dataflow.GetOutput(detectorsOutput, config)
+		dataflowOutput, err := dataflow.GetOutput(detectorsOutput, config, true)
 		if err != nil {
 			return nil, err
 		}

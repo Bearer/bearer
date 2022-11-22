@@ -12,14 +12,13 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-type testCase struct {
-	Name  string
-	Input detections.Detection
-	Want  *dependencies.Classification
-}
-
 func TestDependencies(t *testing.T) {
-	tests := []testCase{
+	tests := []struct{
+		Name          string
+		Input         detections.Detection
+		Want          *dependencies.Classification
+		ShouldSucceed bool
+	}{
 		{
 			Name: "Dependency match",
 			Input: detections.Detection{
@@ -34,11 +33,13 @@ func TestDependencies(t *testing.T) {
 			Want: &dependencies.Classification{
 				RecipeMatch: true,
 				RecipeName:  "Stripe",
+				RecipeUUID:  "c24b836a-d035-49dc-808f-1912f16f690d",
 				Decision: classify.ClassificationDecision{
 					State:  classify.Valid,
 					Reason: "recipe_match",
 				},
 			},
+			ShouldSucceed: true,
 		},
 		{
 			Name: "Dependency match with group (Java case)",
@@ -54,11 +55,13 @@ func TestDependencies(t *testing.T) {
 			Want: &dependencies.Classification{
 				RecipeMatch: true,
 				RecipeName:  "PostgreSQL",
+				RecipeUUID:  "428ff7dd-22ea-4e80-8755-84c70cf460db",
 				Decision: classify.ClassificationDecision{
 					State:  classify.Valid,
 					Reason: "recipe_match",
 				},
 			},
+			ShouldSucceed: true,
 		},
 		{
 			Name: "No dependency match",
@@ -72,9 +75,10 @@ func TestDependencies(t *testing.T) {
 				Type: detections.TypeDependency,
 			},
 			Want: nil,
+			ShouldSucceed: true,
 		},
 		{
-			Name: "Invalid detection",
+			Name: "Vendored detection",
 			Input: detections.Detection{
 				Source: source.Source{
 					Filename: "vendor/vendor.js",
@@ -88,6 +92,16 @@ func TestDependencies(t *testing.T) {
 				Type: detections.TypeDependency,
 			},
 			Want: nil,
+			ShouldSucceed: true,
+		},
+		{
+			Name: "Non-dependency detection",
+			Input: detections.Detection{
+				Value: 12345,
+				Type: detections.TypeDependency,
+			},
+			Want: nil,
+			ShouldSucceed: false,
 		},
 	}
 
@@ -96,7 +110,7 @@ func TestDependencies(t *testing.T) {
 	for _, testCase := range tests {
 		t.Run(testCase.Name, func(t *testing.T) {
 			output, err := classifier.Classify(testCase.Input)
-			if err != nil {
+			if err != nil && testCase.ShouldSucceed {
 				t.Errorf("classifier returned error %s", err)
 			}
 

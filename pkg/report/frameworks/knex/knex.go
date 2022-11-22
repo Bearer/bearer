@@ -6,10 +6,10 @@ const TypeFunction frameworks.Type = "knex_function"
 const TypeSchema frameworks.Type = "knex_schema"
 
 type Function struct {
-	DataType string `json:"data_type"`
+	DataType string `json:"data_type" yaml:"data_type"`
 }
 
 type Schema struct {
-	DataType     string `json:"data_type"`
-	PropertyName string `json:"property_name"`
+	DataType     string `json:"data_type" yaml:"data_type"`
+	PropertyName string `json:"property_name" yaml:"property_name"`
 }

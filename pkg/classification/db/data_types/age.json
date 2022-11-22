@@ -1,7 +1,6 @@
 {
   "metadata": { "version": "1.0" },
-  "data_category_name": "Age",
-  "default_category": "Physical Characteristic",
-  "id": 103,
-  "uuid": "6e579541-a36a-4af7-a0e5-a3b32112ba3a"
+  "name": "Age",
+  "uuid": "6e579541-a36a-4af7-a0e5-a3b32112ba3a",
+  "category_uuid": "94007e1e-57d8-43e8-90f2-246236dc5dde"
 }

@@ -2,6 +2,9 @@
   "metadata": { "version": "1.0" },
   "name": "Treezor",
   "type": "external_service",
-  "urls": ["https://treezor.com/v1/"],
-  "packages": []
+  "urls": [
+    "https://treezor.com/v1/"
+  ],
+  "packages": [],
+  "uuid": "e561983c-ca8c-4ce5-9214-dde0eb401002"
 }

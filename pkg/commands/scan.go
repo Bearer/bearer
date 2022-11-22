@@ -30,6 +30,7 @@ Available Commands:{{range .Commands}}{{if (or .IsAvailableCommand (eq .Name "he
 
 var scanFlags = &flag.Flags{
 	ScanFlagGroup:    flag.NewScanFlagGroup(),
+	PolicyFlagGroup:  flag.NewPolicyFlagGroup(),
 	WorkerFlagGroup:  flag.NewWorkerFlagGroup(),
 	ReportFlagGroup:  flag.NewReportFlagGroup(),
 	GeneralFlagGroup: flag.NewGeneralFlagGroup(),
@@ -38,13 +39,11 @@ var scanFlags = &flag.Flags{
 func NewScanCommand() *cobra.Command {
 
 	cmd := &cobra.Command{
-		Use:     "scan [flags] PATH",
+		Use:     "scan [flags] <path>",
 		Aliases: []string{"s"},
-		Short:   "Scan git repository",
-		Example: `  # Scan a local project including language-specific files
-  $ curio s /path/to/your_project
-  # Scan a single file
-  $ curio s ./curio-ci-test/Pipfile.lock`,
+		Short:   "Scan a directory or file",
+		Example: `  # Scan a local project, including language-specific files
+  $ curio scan /path/to/your_project`,
 		PreRunE: func(cmd *cobra.Command, args []string) error {
 			if err := scanFlags.Bind(cmd); err != nil {
 				return xerrors.Errorf("flag bind error: %w", err)
@@ -65,6 +64,10 @@ func NewScanCommand() *cobra.Command {
 			options, err := scanFlags.ToOptions(args)
 			if err != nil {
 				return xerrors.Errorf("flag error: %w", err)
+			}
+
+			if !options.Quiet {
+				output.StdErrLogger().Msgf("Loaded %s configuration file", configPath)
 			}
 
 			output.Setup(cmd, options)
@@ -95,8 +98,6 @@ func readConfig(configFile string) error {
 
 		return fmt.Errorf("config file %q loading error: %s", configFile, err)
 	}
-
-	output.StdErrLogger().Msgf("Loaded %s configuration file", configFile)
 
 	return nil
 }

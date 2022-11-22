@@ -2,6 +2,9 @@
   "metadata": { "version": "1.0" },
   "name": "Clodo",
   "type": "external_service",
-  "urls": ["https://api.clodo.ru"],
-  "packages": []
+  "urls": [
+    "https://api.clodo.ru"
+  ],
+  "packages": [],
+  "uuid": "192ba856-8107-4b3b-8612-7e436e6f6ddf"
 }

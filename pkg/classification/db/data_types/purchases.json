@@ -1,7 +1,6 @@
 {
   "metadata": { "version": "1.0" },
-  "data_category_name": "Purchases",
-  "default_category": "Transactional",
-  "id": 117,
-  "uuid": "575d073d-c3e3-4188-8d8c-f9822c9cf89e"
+  "name": "Purchases",
+  "uuid": "575d073d-c3e3-4188-8d8c-f9822c9cf89e",
+  "category_uuid": "deda0a0f-029c-44ee-9cac-9f059866723e"
 }

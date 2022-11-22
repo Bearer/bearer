@@ -3,7 +3,7 @@ package yamlconfig
 import (
 	"context"
 	"fmt"
-	"io/ioutil"
+	"os"
 	"regexp"
 	"strings"
 
@@ -58,7 +58,7 @@ func (detector *detector) ProcessFile(file *file.FileInfo, dir *file.Path, repor
 		return false, nil
 	}
 
-	bytes, err := ioutil.ReadFile(file.AbsolutePath)
+	bytes, err := os.ReadFile(file.AbsolutePath)
 
 	if err != nil {
 		return false, err

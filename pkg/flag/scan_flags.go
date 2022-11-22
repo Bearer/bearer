@@ -16,43 +16,43 @@ var (
 		Name:       "skip-path",
 		ConfigName: "scan.skip-path",
 		Value:      []string{},
-		Usage:      "specify the comma separated files and directories to skip (supports * syntax), eg. --skip-path users/*.go,users/admin.sql",
+		Usage:      "Specify the comma separated files and directories to skip. Supports * syntax, e.g. --skip-path users/*.go,users/admin.sql",
 	}
 	DebugFlag = Flag{
 		Name:       "debug",
 		ConfigName: "scan.debug",
 		Value:      false,
-		Usage:      "enable debug logs",
+		Usage:      "Enable debug logs",
 	}
 	DisableDomainResolutionFlag = Flag{
 		Name:       "disable-domain-resolution",
 		ConfigName: "scan.disable-domain-resolution",
 		Value:      false,
-		Usage:      "do not attempt to resolve detected domains during classification (default false), eg. --disable-domain-resolution=true",
+		Usage:      "Do not attempt to resolve detected domains during classification (default false), e.g. --disable-domain-resolution=true",
 	}
 	DomainResolutionTimeoutFlag = Flag{
 		Name:       "domain-resolution-timeout",
 		ConfigName: "scan.domain-resolution-timeout",
 		Value:      3 * time.Second,
-		Usage:      "set timeout when attempting to resolve detected domains during classification (default 3 seconds), eg. --domain-resolution-timeout=TODO",
+		Usage:      "Set timeout when attempting to resolve detected domains during classification (default 3 seconds), e.g. --domain-resolution-timeout=3s",
 	}
 	InternalDomainsFlag = Flag{
 		Name:       "internal-domains",
 		ConfigName: "scan.internal-domains",
 		Value:      []string{},
-		Usage:      "define regular expressions for better classification of private or unreachable domains eg. --internal-domains=\"*.my-company.com,private.sh\"",
+		Usage:      "Define regular expressions for better classification of private or unreachable domains e.g. --internal-domains=\"*.my-company.com,private.sh\"",
 	}
 	ContextFlag = Flag{
 		Name:       "context",
 		ConfigName: "scan.context",
 		Value:      "",
-		Usage:      "expand context of schema classification e.g. --context=health to include data types particular to health",
+		Usage:      "Expand context of schema classification e.g., --context=health, to include data types particular to health",
 	}
 	QuietFlag = Flag{
 		Name:       "quiet",
 		ConfigName: "scan.quiet",
 		Value:      false,
-		Usage:      "suppress non-essential messages",
+		Usage:      "Suppress non-essential messages",
 	}
 )
 
@@ -67,14 +67,14 @@ type ScanFlagGroup struct {
 }
 
 type ScanOptions struct {
-	Target                  string        `json:"target"`
-	SkipPath                []string      `json:"skip_path"`
-	Debug                   bool          `json:"debug"`
-	DisableDomainResolution bool          `json:"disable_domain_resolution"`
-	DomainResolutionTimeout time.Duration `json:"domain_resolution_timeout"`
-	InternalDomains         []string      `json:"internal_domains"`
-	Context                 Context       `json:"context"`
-	Quiet                   bool          `json:"quiet"`
+	Target                  string        `json:"target" yaml:"target"`
+	SkipPath                []string      `json:"skip_path" yaml:"skip_path"`
+	Debug                   bool          `json:"debug" yaml:"debug"`
+	DisableDomainResolution bool          `json:"disable_domain_resolution" yaml:"disable_domain_resolution"`
+	DomainResolutionTimeout time.Duration `json:"domain_resolution_timeout" yaml:"domain_resolution_timeout"`
+	InternalDomains         []string      `json:"internal_domains" yaml:"internal_domains"`
+	Context                 Context       `json:"context" yaml:"context"`
+	Quiet                   bool          `json:"quiet" yaml:"quiet"`
 }
 
 func NewScanFlagGroup() *ScanFlagGroup {

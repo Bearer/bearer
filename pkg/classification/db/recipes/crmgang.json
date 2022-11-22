@@ -2,6 +2,9 @@
   "metadata": { "version": "1.0" },
   "name": "Crmgang",
   "type": "external_service",
-  "urls": ["https://api.crmgang.com"],
-  "packages": []
+  "urls": [
+    "https://api.crmgang.com"
+  ],
+  "packages": [],
+  "uuid": "0068ae26-d24e-464d-87f2-03b55a58d678"
 }

@@ -1,7 +1,6 @@
 {
   "metadata": { "version": "1.0" },
-  "data_category_name": "Room Number",
-  "default_category": "Location",
-  "id": 97,
-  "uuid": "9cb92b18-f583-4d42-bf9f-ea52998e55f9"
+  "name": "Room Number",
+  "uuid": "9cb92b18-f583-4d42-bf9f-ea52998e55f9",
+  "category_uuid": "c6622b62-bc22-4c0c-a2e4-5fc97d99e11a"
 }

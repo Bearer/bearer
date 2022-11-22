@@ -2,6 +2,9 @@
   "metadata": { "version": "1.0" },
   "name": "EasyPost",
   "type": "external_service",
-  "urls": ["https://api.easypost.com"],
-  "packages": []
+  "urls": [
+    "https://api.easypost.com"
+  ],
+  "packages": [],
+  "uuid": "69b0b60c-23ae-4955-8094-9ced959ffa29"
 }

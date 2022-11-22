@@ -8,5 +8,6 @@
     "https://rest.*.braze.eu",
     "https://rest.*.braze.com"
   ],
-  "packages": []
+  "packages": [],
+  "uuid": "8590b330-fd42-438b-a016-383260360844"
 }

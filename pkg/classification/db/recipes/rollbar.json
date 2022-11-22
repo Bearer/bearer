@@ -2,6 +2,15 @@
   "metadata": { "version": "1.0" },
   "name": "Rollbar",
   "type": "external_service",
-  "urls": ["https://api.rollbar.com"],
-  "packages": [{ "name": "rollbar", "group": null, "package_manager": "npm" }]
+  "urls": [
+    "https://api.rollbar.com"
+  ],
+  "packages": [
+    {
+      "name": "rollbar",
+      "group": null,
+      "package_manager": "npm"
+    }
+  ],
+  "uuid": "2e0c0423-bc91-46c6-8f29-68a276b3f8f0"
 }

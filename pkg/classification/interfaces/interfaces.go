@@ -14,14 +14,15 @@ import (
 
 type ClassifiedInterface struct {
 	*detections.Detection
-	Classification *Classification `json:"classification"`
+	Classification *Classification `json:"classification" yaml:"classification"`
 }
 
 type Classification struct {
-	URL         string                          `json:"url"`
-	RecipeMatch bool                            `json:"recipe_match"`
+	URL         string                          `json:"url" yaml:"url"`
+	RecipeMatch bool                            `json:"recipe_match" yaml:"recipe_match"`
 	RecipeName  string                          `json:"recipe_name,omitempty"`
-	Decision    classify.ClassificationDecision `json:"decision"`
+	RecipeUUID  string                          `json:"recipe_uuid,omitempty"`
+	Decision    classify.ClassificationDecision `json:"decision" yaml:"decision"`
 }
 
 type Classifier struct {
@@ -37,6 +38,7 @@ type Config struct {
 }
 
 type Recipe struct {
+	UUID string
 	Name string
 	Type string
 	URLS []RecipeURL
@@ -50,17 +52,27 @@ type RecipeURL struct {
 type RecipeURLMatch struct {
 	DetectionURLPart string
 	RecipeURL        string
+	RecipeUUID       string
 	RecipeName       string
 }
 
 var ErrInvalidRecipes = errors.New("invalid interface recipe")
 var ErrInvalidInternalDomainRegexp = errors.New("could not parse internal domains as regexp")
 
+func (classification *Classification) Name() string {
+	if classification.RecipeMatch {
+		return classification.RecipeName
+	} else {
+		return classification.URL
+	}
+}
+
 func New(config Config) (*Classifier, error) {
 	// prepare regular expressions for recipes
 	var preparedRecipes []Recipe
 	for _, recipe := range config.Recipes {
 		preparedRecipe := Recipe{
+			UUID: recipe.UUID,
 			Name: recipe.Name,
 			Type: recipe.Type,
 		}
@@ -174,6 +186,7 @@ func (classifier *Classifier) Classify(data detections.Detection) (*ClassifiedIn
 			Classification: &Classification{
 				URL:         recipeMatch.DetectionURLPart,
 				RecipeMatch: true,
+				RecipeUUID:  recipeMatch.RecipeUUID,
 				RecipeName:  recipeMatch.RecipeName,
 			},
 		}
@@ -236,6 +249,7 @@ func (classifier *Classifier) FindMatchingRecipeUrl(detectionURL string) (*Recip
 			recipeURLMatch = &RecipeURLMatch{
 				DetectionURLPart: match,
 				RecipeURL:        recipeURL.URL,
+				RecipeUUID:       recipe.UUID,
 				RecipeName:       recipe.Name,
 			}
 		}

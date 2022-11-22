@@ -13,13 +13,26 @@
     "https://person.clearbit.com"
   ],
   "packages": [
-    { "name": "clearbit", "group": null, "package_manager": "pypi" },
-    { "name": "clearbit", "group": null, "package_manager": "npm" },
-    { "name": "clearbit", "group": null, "package_manager": "rubygems" },
+    {
+      "name": "clearbit",
+      "group": null,
+      "package_manager": "pypi"
+    },
+    {
+      "name": "clearbit",
+      "group": null,
+      "package_manager": "npm"
+    },
+    {
+      "name": "clearbit",
+      "group": null,
+      "package_manager": "rubygems"
+    },
     {
       "name": "github.com/clearbit/clearbit-go",
       "group": null,
       "package_manager": "go"
     }
-  ]
+  ],
+  "uuid": "d18fea8d-8ccc-49cc-8e7c-af05e30bdce9"
 }

@@ -2,6 +2,10 @@
   "metadata": { "version": "1.0" },
   "name": "Nightfall",
   "type": "external_service",
-  "urls": ["https://api.nightfall.ai", "https://radar.nightfall.ai/api"],
-  "packages": []
+  "urls": [
+    "https://api.nightfall.ai",
+    "https://radar.nightfall.ai/api"
+  ],
+  "packages": [],
+  "uuid": "0a4ad1f9-a542-41ce-a722-d559af93bb5b"
 }

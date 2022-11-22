@@ -2,6 +2,9 @@
   "metadata": { "version": "1.0" },
   "name": "CircleCI",
   "type": "external_service",
-  "urls": ["https://circleci.com/api"],
-  "packages": []
+  "urls": [
+    "https://circleci.com/api"
+  ],
+  "packages": [],
+  "uuid": "48075eda-bdf2-4e43-b8fb-ecd173e20766"
 }

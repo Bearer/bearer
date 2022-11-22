@@ -5,7 +5,7 @@ var (
 		Name:            "config-file",
 		ConfigName:      "config-file",
 		Value:           "",
-		Usage:           "file from which to load configurations",
+		Usage:           "Load configuration from the defined path",
 		DisableInConfig: true,
 	}
 )
@@ -16,7 +16,7 @@ type GeneralFlagGroup struct {
 
 // GlobalOptions defines flags and other configuration parameters for all the subcommands
 type GeneralOptions struct {
-	ConfigFile string `json:"config_file"`
+	ConfigFile string `json:"config_file" yaml:"config_file"`
 }
 
 func NewGeneralFlagGroup() *GeneralFlagGroup {

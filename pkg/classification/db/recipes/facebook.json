@@ -9,16 +9,41 @@
     "https://connect.facebook.net"
   ],
   "packages": [
-    { "name": "koala", "group": null, "package_manager": "rubygems" },
-    { "name": "facebook-sdk", "group": null, "package_manager": "pypi" },
-    { "name": "Django-facebook", "group": null, "package_manager": "pypi" },
-    { "name": "facebook-node-sdk", "group": null, "package_manager": "npm" },
-    { "name": "php-graph-sdk", "group": null, "package_manager": "packagist" },
-    { "name": "Facebook", "group": null, "package_manager": "nuget" },
+    {
+      "name": "koala",
+      "group": null,
+      "package_manager": "rubygems"
+    },
+    {
+      "name": "facebook-sdk",
+      "group": null,
+      "package_manager": "pypi"
+    },
+    {
+      "name": "Django-facebook",
+      "group": null,
+      "package_manager": "pypi"
+    },
+    {
+      "name": "facebook-node-sdk",
+      "group": null,
+      "package_manager": "npm"
+    },
+    {
+      "name": "php-graph-sdk",
+      "group": null,
+      "package_manager": "packagist"
+    },
+    {
+      "name": "Facebook",
+      "group": null,
+      "package_manager": "nuget"
+    },
     {
       "name": "facebook/graph-sdk",
       "group": "",
       "package_manager": "packagist"
     }
-  ]
+  ],
+  "uuid": "50fd14cc-91e0-443a-95fa-fed159da5380"
 }
