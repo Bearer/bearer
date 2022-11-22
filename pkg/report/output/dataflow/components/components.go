@@ -70,6 +70,23 @@ func (holder *Holder) AddDependency(detection interface{}) error {
 	return nil
 }
 
+func (holder *Holder) AddFramework(detection interface{}) error {
+	value, err := detectiondecoder.GetClassifiedFramework(detection)
+	if err != nil {
+		return err
+	}
+
+	if value.Classification == nil {
+		return nil
+	}
+
+	if value.Classification.Decision.State == classify.Valid {
+		holder.addComponent(strings.ToLower(value.Classification.RecipeName), value.Classification.RecipeUUID, string(value.DetectorType), value.Source.Filename, *value.Source.LineNumber)
+	}
+
+	return nil
+}
+
 // addComponent adds component to hash list and at the same time blocks duplicates
 func (holder *Holder) addComponent(componentName string, componentUUID string, detectorName string, fileName string, lineNumber int) {
 	// create component entry if it doesn't exist

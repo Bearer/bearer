@@ -13,11 +13,11 @@ func GetClassifiedDependency(detection interface{}) (dependenciesclassification.
 	buf := bytes.NewBuffer(nil)
 	err := json.NewEncoder(buf).Encode(detection)
 	if err != nil {
-		return dependenciesclassification.ClassifiedDependency{}, fmt.Errorf("expect detection to have value of type schema %#v", detection)
+		return dependenciesclassification.ClassifiedDependency{}, fmt.Errorf("expect detection to have value of type dependency %#v", detection)
 	}
 	err = json.NewDecoder(buf).Decode(&value)
 	if err != nil {
-		return dependenciesclassification.ClassifiedDependency{}, fmt.Errorf("expect detection to have value of type schema %#v", detection)
+		return dependenciesclassification.ClassifiedDependency{}, fmt.Errorf("expect detection to have value of type dependency %#v", detection)
 	}
 
 	return value, nil
