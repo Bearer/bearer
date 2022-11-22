@@ -20,7 +20,7 @@ result[item] {
         "policy_name": input.policy_name,
         "policy_description": input.policy_description,
         "severity": "critical",
-        "data_type": data_type.name,
+        "category": category.name,
         "filename": location.filename,
         "line_number": location.line_number
     }
@@ -42,7 +42,7 @@ result[item] {
         "policy_name": input.policy_name,
         "policy_description": input.policy_description,
         "severity": "medium",
-        "data_type": data_type.name,
+        "category": category.name,
         "filename": location.filename,
         "line_number": location.line_number
     }
