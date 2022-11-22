@@ -2,8 +2,15 @@
   "metadata": { "version": "1.0" },
   "name": "Geckoboard",
   "type": "external_service",
-  "urls": ["https://api.geckoboard.com"],
+  "urls": [
+    "https://api.geckoboard.com"
+  ],
   "packages": [
-    { "name": "geckoboard-ruby", "group": null, "package_manager": "rubygems" }
-  ]
+    {
+      "name": "geckoboard-ruby",
+      "group": null,
+      "package_manager": "rubygems"
+    }
+  ],
+  "uuid": "de694e95-87ce-4164-99c4-0bb854282a26"
 }

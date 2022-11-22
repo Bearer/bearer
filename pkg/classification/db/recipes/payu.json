@@ -2,13 +2,20 @@
   "metadata": { "version": "1.0" },
   "name": "PayU",
   "type": "external_service",
-  "urls": ["https://secure.payu.com"],
+  "urls": [
+    "https://secure.payu.com"
+  ],
   "packages": [
     {
       "name": "openpayu/openpayu",
       "group": "",
       "package_manager": "packagist"
     },
-    { "name": "payu/alu-client", "group": "", "package_manager": "packagist" }
-  ]
+    {
+      "name": "payu/alu-client",
+      "group": "",
+      "package_manager": "packagist"
+    }
+  ],
+  "uuid": "a3274cd2-23b0-474a-86f8-e658f9d87ae3"
 }

@@ -4,6 +4,11 @@
   "type": "internal_service",
   "urls": [],
   "packages": [
-    { "name": "pino-fluentd", "group": null, "package_manager": "npm" }
-  ]
+    {
+      "name": "pino-fluentd",
+      "group": null,
+      "package_manager": "npm"
+    }
+  ],
+  "uuid": "b4620736-5d38-49f8-b6f1-b334ec93cfe0"
 }

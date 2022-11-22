@@ -4,8 +4,16 @@
   "type": "data_store",
   "urls": [],
   "packages": [
-    { "name": "pysftp", "group": null, "package_manager": "pypi" },
-    { "name": "ftp", "group": null, "package_manager": "npm" },
+    {
+      "name": "pysftp",
+      "group": null,
+      "package_manager": "pypi"
+    },
+    {
+      "name": "ftp",
+      "group": null,
+      "package_manager": "npm"
+    },
     {
       "name": "yii2mod/yii2-ftp",
       "group": null,
@@ -21,11 +29,16 @@
       "group": null,
       "package_manager": "nuget"
     },
-    { "name": "FlagFtp", "group": null, "package_manager": "nuget" },
+    {
+      "name": "FlagFtp",
+      "group": null,
+      "package_manager": "nuget"
+    },
     {
       "name": "nicolab/php-ftp-client",
       "group": null,
       "package_manager": "packagist"
     }
-  ]
+  ],
+  "uuid": "811b84ce-faae-4980-85d1-177f270ac4a1"
 }

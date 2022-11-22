@@ -2,6 +2,9 @@
   "metadata": { "version": "1.0" },
   "name": "Revolut",
   "type": "external_service",
-  "urls": ["https://revolut.com/api/"],
-  "packages": []
+  "urls": [
+    "https://revolut.com/api/"
+  ],
+  "packages": [],
+  "uuid": "4ab6b4b6-c936-4be1-a8ed-4d77a4381ea3"
 }

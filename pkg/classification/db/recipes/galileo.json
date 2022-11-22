@@ -2,6 +2,10 @@
   "metadata": { "version": "1.0" },
   "name": "Galileo",
   "type": "external_service",
-  "urls": ["https://api.gpsrv.com", "https://sandbox-api.gpsrv.com"],
-  "packages": []
+  "urls": [
+    "https://api.gpsrv.com",
+    "https://sandbox-api.gpsrv.com"
+  ],
+  "packages": [],
+  "uuid": "5b77c78b-62ad-4a63-85f6-44dd9f126379"
 }

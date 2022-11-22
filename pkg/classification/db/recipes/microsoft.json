@@ -2,6 +2,10 @@
   "metadata": { "version": "1.0" },
   "name": "Microsoft",
   "type": "external_service",
-  "urls": ["https://login.microsoftonline.com", "https://graph.microsoft.com"],
-  "packages": []
+  "urls": [
+    "https://login.microsoftonline.com",
+    "https://graph.microsoft.com"
+  ],
+  "packages": [],
+  "uuid": "5ff99297-f4af-47cf-9004-36fdb84c78e6"
 }

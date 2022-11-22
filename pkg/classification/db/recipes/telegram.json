@@ -2,13 +2,20 @@
   "metadata": { "version": "1.0" },
   "name": "Telegram",
   "type": "external_service",
-  "urls": ["https://api.telegram.org"],
+  "urls": [
+    "https://api.telegram.org"
+  ],
   "packages": [
-    { "name": "python-telegram-bot", "group": null, "package_manager": "pypi" },
+    {
+      "name": "python-telegram-bot",
+      "group": null,
+      "package_manager": "pypi"
+    },
     {
       "name": "github.com/go-telegram-bot-api/telegram-bot-api",
       "group": null,
       "package_manager": "go"
     }
-  ]
+  ],
+  "uuid": "a4c8692f-db6d-4631-bf15-0cf96509237d"
 }

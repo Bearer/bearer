@@ -2,6 +2,10 @@
   "metadata": { "version": "1.0" },
   "name": "Marketo",
   "type": "external_service",
-  "urls": ["https://mktoapi.com/soap", "https://mktorest.com/rest"],
-  "packages": []
+  "urls": [
+    "https://mktoapi.com/soap",
+    "https://mktorest.com/rest"
+  ],
+  "packages": [],
+  "uuid": "05879227-1116-4be9-9e1a-c665dc41958d"
 }

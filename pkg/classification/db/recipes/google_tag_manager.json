@@ -12,5 +12,6 @@
       "group": "com.google.android.gms",
       "package_manager": "maven"
     }
-  ]
+  ],
+  "uuid": "ed26c7c7-436b-450e-bfda-9c553fe81de6"
 }

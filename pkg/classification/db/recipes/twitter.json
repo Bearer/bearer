@@ -14,17 +14,26 @@
       "group": null,
       "package_manager": "pypi"
     },
-    { "name": "twitter-autohook", "group": null, "package_manager": "npm" },
+    {
+      "name": "twitter-autohook",
+      "group": null,
+      "package_manager": "npm"
+    },
     {
       "name": "search-tweets-ruby",
       "group": null,
       "package_manager": "rubygems"
     },
-    { "name": "twitter", "group": null, "package_manager": "rubygems" },
+    {
+      "name": "twitter",
+      "group": null,
+      "package_manager": "rubygems"
+    },
     {
       "name": "github.com/dghubble/go-twitter",
       "group": null,
       "package_manager": "go"
     }
-  ]
+  ],
+  "uuid": "09155a1d-adec-4839-bebe-2da267fd670c"
 }

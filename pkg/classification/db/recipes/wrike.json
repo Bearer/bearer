@@ -2,6 +2,9 @@
   "metadata": { "version": "1.0" },
   "name": "Wrike",
   "type": "external_service",
-  "urls": ["https://wrike.com/api"],
-  "packages": []
+  "urls": [
+    "https://wrike.com/api"
+  ],
+  "packages": [],
+  "uuid": "41704ba0-b6c2-447b-b440-44f5d37d9fa3"
 }

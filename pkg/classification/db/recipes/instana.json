@@ -2,6 +2,9 @@
   "metadata": { "version": "1.0" },
   "name": "Instana",
   "type": "external_service",
-  "urls": ["https://instana.io/api"],
-  "packages": []
+  "urls": [
+    "https://instana.io/api"
+  ],
+  "packages": [],
+  "uuid": "4b05bba6-d8ff-45fc-9378-6ed180304689"
 }

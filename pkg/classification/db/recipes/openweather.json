@@ -2,6 +2,9 @@
   "metadata": { "version": "1.0" },
   "name": "OpenWeather",
   "type": "external_service",
-  "urls": ["https://api.openweathermap.org"],
-  "packages": []
+  "urls": [
+    "https://api.openweathermap.org"
+  ],
+  "packages": [],
+  "uuid": "f9d149a2-c519-48b9-a634-7ed1bdd9081e"
 }

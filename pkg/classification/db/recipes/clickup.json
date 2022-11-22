@@ -2,6 +2,9 @@
   "metadata": { "version": "1.0" },
   "name": "ClickUp",
   "type": "external_service",
-  "urls": ["https://api.clickup.com"],
-  "packages": []
+  "urls": [
+    "https://api.clickup.com"
+  ],
+  "packages": [],
+  "uuid": "7d0cde63-1e4c-46d5-95c9-158690730341"
 }

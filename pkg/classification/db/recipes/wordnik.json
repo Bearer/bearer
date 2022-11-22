@@ -2,6 +2,9 @@
   "metadata": { "version": "1.0" },
   "name": "Wordnik",
   "type": "external_service",
-  "urls": ["https://api.wordnik.com"],
-  "packages": []
+  "urls": [
+    "https://api.wordnik.com"
+  ],
+  "packages": [],
+  "uuid": "c275cc5e-6b11-4956-9eb2-80d5947818d8"
 }

@@ -2,6 +2,9 @@
   "metadata": { "version": "1.0" },
   "name": "Societeinfo",
   "type": "external_service",
-  "urls": ["https://societeinfo.com/app/rest/api/"],
-  "packages": []
+  "urls": [
+    "https://societeinfo.com/app/rest/api/"
+  ],
+  "packages": [],
+  "uuid": "7896a387-f2b8-4f29-885e-b6fdb99a4b7e"
 }

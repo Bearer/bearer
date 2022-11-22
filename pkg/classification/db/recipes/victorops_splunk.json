@@ -2,6 +2,9 @@
   "metadata": { "version": "1.0" },
   "name": "Victorops (Splunk)",
   "type": "external_service",
-  "urls": ["https://api.victorops.com"],
-  "packages": []
+  "urls": [
+    "https://api.victorops.com"
+  ],
+  "packages": [],
+  "uuid": "b469e77d-3d17-4d7a-a438-e10a62f8b1fb"
 }

@@ -2,6 +2,7 @@ package types
 
 type Component struct {
 	Name      string
+	UUID      string              `json:"uuid,omitempty" yaml:"uuid,omitempty"`
 	Locations []ComponentLocation
 }
 

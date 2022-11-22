@@ -2,6 +2,9 @@
   "metadata": { "version": "1.0" },
   "name": "ProcessOut",
   "type": "external_service",
-  "urls": ["https://api.processout.com"],
-  "packages": []
+  "urls": [
+    "https://api.processout.com"
+  ],
+  "packages": [],
+  "uuid": "d00782c8-9772-4ee3-8fcf-1a1b9fdb527f"
 }

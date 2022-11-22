@@ -9,7 +9,11 @@
       "group": "software.amazon.awssdk",
       "package_manager": "maven"
     },
-    { "name": "aws-sdk-glacier", "group": null, "package_manager": "rubygems" },
+    {
+      "name": "aws-sdk-glacier",
+      "group": null,
+      "package_manager": "rubygems"
+    },
     {
       "name": "@aws-sdk/client-glacier",
       "group": null,
@@ -20,5 +24,6 @@
       "group": null,
       "package_manager": "go"
     }
-  ]
+  ],
+  "uuid": "31c32157-d398-4dd9-98be-9ec28a8103c2"
 }

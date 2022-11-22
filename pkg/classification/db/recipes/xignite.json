@@ -2,6 +2,10 @@
   "metadata": { "version": "1.0" },
   "name": "xignite",
   "type": "external_service",
-  "urls": ["https://navs.xignite.com/v1", "https://navs.xignite.com/v2"],
-  "packages": []
+  "urls": [
+    "https://navs.xignite.com/v1",
+    "https://navs.xignite.com/v2"
+  ],
+  "packages": [],
+  "uuid": "6b7489e2-e876-4e7f-ae72-8539b19df114"
 }

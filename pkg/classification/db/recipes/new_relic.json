@@ -14,7 +14,11 @@
     "https://metric-api.newrelic.com"
   ],
   "packages": [
-    { "name": "newrelic_rpm", "group": null, "package_manager": "rubygems" },
+    {
+      "name": "newrelic_rpm",
+      "group": null,
+      "package_manager": "rubygems"
+    },
     {
       "name": "github.com/yvasiyarov/gorelic",
       "group": null,
@@ -25,11 +29,16 @@
       "group": null,
       "package_manager": "packagist"
     },
-    { "name": "newrelic", "group": null, "package_manager": "npm" },
+    {
+      "name": "newrelic",
+      "group": null,
+      "package_manager": "npm"
+    },
     {
       "name": "newrelic-api",
       "group": "com.newrelic.agent.java",
       "package_manager": "maven"
     }
-  ]
+  ],
+  "uuid": "895291fe-f457-4326-8113-c0cf1426084b"
 }

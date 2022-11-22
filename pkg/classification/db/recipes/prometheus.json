@@ -4,22 +4,46 @@
   "type": "data_store",
   "urls": [],
   "packages": [
-    { "name": "prometheus-client", "group": null, "package_manager": "pypi" },
-    { "name": "prom-client", "group": null, "package_manager": "npm" },
+    {
+      "name": "prometheus-client",
+      "group": null,
+      "package_manager": "pypi"
+    },
+    {
+      "name": "prom-client",
+      "group": null,
+      "package_manager": "npm"
+    },
     {
       "name": "prometheus-flask-exporter",
       "group": null,
       "package_manager": "pypi"
     },
-    { "name": "prometheus_client", "group": null, "package_manager": "pypi" },
-    { "name": "prometheus-client", "group": null, "package_manager": "npm" },
+    {
+      "name": "prometheus_client",
+      "group": null,
+      "package_manager": "pypi"
+    },
+    {
+      "name": "prometheus-client",
+      "group": null,
+      "package_manager": "npm"
+    },
     {
       "name": "prometheus_flask_exporter",
       "group": null,
       "package_manager": "pypi"
     },
-    { "name": "prometheus-net", "group": null, "package_manager": "nuget" },
-    { "name": "PrometheusNet.Owin", "group": null, "package_manager": "nuget" },
+    {
+      "name": "prometheus-net",
+      "group": null,
+      "package_manager": "nuget"
+    },
+    {
+      "name": "PrometheusNet.Owin",
+      "group": null,
+      "package_manager": "nuget"
+    },
     {
       "name": "prometheus_exporter",
       "group": null,
@@ -40,5 +64,6 @@
       "group": "io.prometheus.jmx",
       "package_manager": "maven"
     }
-  ]
+  ],
+  "uuid": "c43a3f1c-42c9-416a-91ab-a9a410dac9dc"
 }

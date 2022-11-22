@@ -2,6 +2,10 @@
   "metadata": { "version": "1.0" },
   "name": "Checkout.com",
   "type": "external_service",
-  "urls": ["https://api.sandbox.checkout.com", "https://api.checkout.com"],
-  "packages": []
+  "urls": [
+    "https://api.sandbox.checkout.com",
+    "https://api.checkout.com"
+  ],
+  "packages": [],
+  "uuid": "968ed200-35c8-42cc-a37e-d2b586750522"
 }

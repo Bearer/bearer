@@ -12,10 +12,12 @@ import (
 
 type Holder struct {
 	components map[string]*component // group components by name
+	isInternal bool
 }
 
 type component struct {
 	name      string
+	uuid      string
 	detectors map[string]*detector // group detectors by detectorName
 }
 type detector struct {
@@ -27,9 +29,10 @@ type fileHolder struct {
 	lineNumbers map[int]int //group lines by linenumber
 }
 
-func New() *Holder {
+func New(isInternal bool) *Holder {
 	return &Holder{
 		components: make(map[string]*component),
+		isInternal: isInternal,
 	}
 }
 
@@ -44,7 +47,7 @@ func (holder *Holder) AddInterface(detection interface{}) error {
 	}
 
 	if value.Classification.Decision.State == classify.Valid {
-		holder.addComponent(strings.ToLower(value.Classification.RecipeName), string(value.DetectorType), value.Source.Filename, *value.Source.LineNumber)
+		holder.addComponent(strings.ToLower(value.Classification.RecipeName), value.Classification.RecipeUUID, string(value.DetectorType), value.Source.Filename, *value.Source.LineNumber)
 	}
 
 	return nil
@@ -61,23 +64,28 @@ func (holder *Holder) AddDependency(detection interface{}) error {
 	}
 
 	if value.Classification.Decision.State == classify.Valid {
-		holder.addComponent(strings.ToLower(value.Classification.RecipeName), string(value.DetectorType), value.Source.Filename, *value.Source.LineNumber)
+		holder.addComponent(strings.ToLower(value.Classification.RecipeName), value.Classification.RecipeUUID, string(value.DetectorType), value.Source.Filename, *value.Source.LineNumber)
 	}
 
 	return nil
 }
 
 // addComponent adds component to hash list and at the same time blocks duplicates
-func (holder *Holder) addComponent(componentName string, detectorName string, fileName string, lineNumber int) {
+func (holder *Holder) addComponent(componentName string, componentUUID string, detectorName string, fileName string, lineNumber int) {
 	// create component entry if it doesn't exist
-	if _, exists := holder.components[componentName]; !exists {
-		holder.components[componentName] = &component{
+	if _, exists := holder.components[componentUUID]; !exists {
+		var uuid string
+		if holder.isInternal {
+			uuid = componentUUID
+		}
+		holder.components[componentUUID] = &component{
 			name:      componentName,
+			uuid:      uuid,
 			detectors: make(map[string]*detector),
 		}
 	}
 
-	targetComponent := holder.components[componentName]
+	targetComponent := holder.components[componentUUID]
 	// create detector entry if it doesn't exist
 	if _, exists := targetComponent.detectors[detectorName]; !exists {
 		targetComponent.detectors[detectorName] = &detector{
@@ -107,6 +115,7 @@ func (holder *Holder) ToDataFlow() []types.Component {
 	for _, targetComponent := range availableComponents {
 		constructedComponent := types.Component{
 			Name:      targetComponent.name,
+			UUID:      targetComponent.uuid,
 			Locations: make([]types.ComponentLocation, 0),
 		}
 

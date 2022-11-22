@@ -2,6 +2,9 @@
   "metadata": { "version": "1.0" },
   "name": "Ipdata",
   "type": "external_service",
-  "urls": ["https://api.ipdata.co"],
-  "packages": []
+  "urls": [
+    "https://api.ipdata.co"
+  ],
+  "packages": [],
+  "uuid": "b23eadc7-629b-444e-aa03-b547c59761be"
 }

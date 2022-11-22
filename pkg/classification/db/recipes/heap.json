@@ -2,6 +2,10 @@
   "metadata": { "version": "1.0" },
   "name": "Heap",
   "type": "external_service",
-  "urls": ["https://heapanalytics.com/api", "https://cdn.heapanalytics.com/js"],
-  "packages": []
+  "urls": [
+    "https://heapanalytics.com/api",
+    "https://cdn.heapanalytics.com/js"
+  ],
+  "packages": [],
+  "uuid": "ed1d7ebc-e584-4b8e-9c2e-cdd53564308c"
 }

@@ -2,6 +2,10 @@
   "metadata": { "version": "1.0" },
   "name": "Seeuletter (MySendingBox)",
   "type": "external_service",
-  "urls": ["https://api.MySendingBox.fr", "https://api.seeuletter.com"],
-  "packages": []
+  "urls": [
+    "https://api.MySendingBox.fr",
+    "https://api.seeuletter.com"
+  ],
+  "packages": [],
+  "uuid": "54bbc748-7370-4199-a0b0-9e820395c690"
 }

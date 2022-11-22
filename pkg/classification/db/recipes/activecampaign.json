@@ -2,12 +2,15 @@
   "metadata": { "version": "1.0" },
   "name": "ActiveCampaign",
   "type": "external_service",
-  "urls": ["https://api-us1.com"],
+  "urls": [
+    "https://api-us1.com"
+  ],
   "packages": [
     {
       "name": "activecampaign/api-php",
       "group": null,
       "package_manager": "packagist"
     }
-  ]
+  ],
+  "uuid": "afaa1456-989f-4672-b4a5-976f1316fc9e"
 }

@@ -2,6 +2,9 @@
   "metadata": { "version": "1.0" },
   "name": "Gouv.fr Data",
   "type": "external_service",
-  "urls": ["https://data.gouv.fr/api"],
-  "packages": []
+  "urls": [
+    "https://data.gouv.fr/api"
+  ],
+  "packages": [],
+  "uuid": "42e4e730-37a9-4bf3-b89e-1abbb930b2db"
 }

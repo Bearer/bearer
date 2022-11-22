@@ -2,6 +2,9 @@
   "metadata": { "version": "1.0" },
   "name": "Emburse",
   "type": "external_service",
-  "urls": ["https://api.emburse.com"],
-  "packages": []
+  "urls": [
+    "https://api.emburse.com"
+  ],
+  "packages": [],
+  "uuid": "aa5dceaa-c507-46a8-8151-eef566492dc2"
 }

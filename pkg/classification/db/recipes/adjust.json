@@ -2,6 +2,9 @@
   "metadata": { "version": "1.0" },
   "name": "Adjust",
   "type": "external_service",
-  "urls": ["https://api.adjust.com"],
-  "packages": []
+  "urls": [
+    "https://api.adjust.com"
+  ],
+  "packages": [],
+  "uuid": "1545189b-bfbb-4233-9baa-f734fc04a78b"
 }

@@ -3,5 +3,6 @@
   "name": "IBM Db2",
   "type": "data_store",
   "urls": [],
-  "packages": []
+  "packages": [],
+  "uuid": "b9bbbbb8-cb8b-4ffb-997f-e0d1e9050a96"
 }

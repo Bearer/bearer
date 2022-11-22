@@ -2,6 +2,9 @@
   "metadata": { "version": "1.0" },
   "name": "Ipregistry",
   "type": "external_service",
-  "urls": ["https://api.ipregistry.co"],
-  "packages": []
+  "urls": [
+    "https://api.ipregistry.co"
+  ],
+  "packages": [],
+  "uuid": "c2e582e5-c799-4f92-a670-2402f661354c"
 }

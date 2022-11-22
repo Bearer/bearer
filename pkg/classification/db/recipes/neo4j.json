@@ -4,8 +4,16 @@
   "type": "data_store",
   "urls": [],
   "packages": [
-    { "name": "neo4j-core", "group": null, "package_manager": "rubygems" },
-    { "name": "neo4j", "group": null, "package_manager": "pypi" },
+    {
+      "name": "neo4j-core",
+      "group": null,
+      "package_manager": "rubygems"
+    },
+    {
+      "name": "neo4j",
+      "group": null,
+      "package_manager": "pypi"
+    },
     {
       "name": "neo4j-java-driver",
       "group": "org.neo4j.driver",
@@ -16,17 +24,26 @@
       "group": null,
       "package_manager": "go"
     },
-    { "name": "neo4j-driver", "group": null, "package_manager": "npm" },
+    {
+      "name": "neo4j-driver",
+      "group": null,
+      "package_manager": "npm"
+    },
     {
       "name": "neo4j-php-client",
       "group": null,
       "package_manager": "packagist"
     },
-    { "name": "bolt", "group": null, "package_manager": "packagist" },
+    {
+      "name": "bolt",
+      "group": null,
+      "package_manager": "packagist"
+    },
     {
       "name": "neo4j-ruby-driver",
       "group": null,
       "package_manager": "rubygems"
     }
-  ]
+  ],
+  "uuid": "27f59acd-c638-4681-acfb-3aa64c862c28"
 }

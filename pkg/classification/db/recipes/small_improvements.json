@@ -2,6 +2,9 @@
   "metadata": { "version": "1.0" },
   "name": "Small Improvements",
   "type": "external_service",
-  "urls": ["https://small-improvements.com/api"],
-  "packages": []
+  "urls": [
+    "https://small-improvements.com/api"
+  ],
+  "packages": [],
+  "uuid": "08192ed4-3bc8-4a19-aff8-34dc9bf988f1"
 }

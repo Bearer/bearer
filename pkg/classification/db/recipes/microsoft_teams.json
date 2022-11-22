@@ -2,13 +2,20 @@
   "metadata": { "version": "1.0" },
   "name": "Microsoft Teams",
   "type": "external_service",
-  "urls": ["https://graph.microsoft.com/*/teams"],
+  "urls": [
+    "https://graph.microsoft.com/*/teams"
+  ],
   "packages": [
-    { "name": "@microsoft-teams-js", "group": null, "package_manager": "npm" },
+    {
+      "name": "@microsoft-teams-js",
+      "group": null,
+      "package_manager": "npm"
+    },
     {
       "name": "microsoft/microsoft-graph",
       "group": null,
       "package_manager": "packagist"
     }
-  ]
+  ],
+  "uuid": "6cecbba3-e157-4401-85fc-4b31e7cad609"
 }

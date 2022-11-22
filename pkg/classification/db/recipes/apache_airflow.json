@@ -4,6 +4,11 @@
   "type": "internal_service",
   "urls": [],
   "packages": [
-    { "name": "airflow[celery]", "group": null, "package_manager": "pypi" }
-  ]
+    {
+      "name": "airflow[celery]",
+      "group": null,
+      "package_manager": "pypi"
+    }
+  ],
+  "uuid": "b7bcad55-c748-49fc-abcb-6b0dc9881787"
 }

@@ -2,6 +2,9 @@
   "metadata": { "version": "1.0" },
   "name": "Unsplash",
   "type": "external_service",
-  "urls": ["https://api.unsplash.com"],
-  "packages": []
+  "urls": [
+    "https://api.unsplash.com"
+  ],
+  "packages": [],
+  "uuid": "41750ede-d0b6-4f81-a90b-9b16511227dc"
 }

@@ -2,15 +2,30 @@
   "metadata": { "version": "1.0" },
   "name": "Xero",
   "type": "external_service",
-  "urls": ["https://api.xero.com"],
+  "urls": [
+    "https://api.xero.com"
+  ],
   "packages": [
     {
       "name": "xeroapi/xero-php-oauth2",
       "group": null,
       "package_manager": "packagist"
     },
-    { "name": "xero-python", "group": null, "package_manager": "pypi" },
-    { "name": "xero-node", "group": null, "package_manager": "npm" },
-    { "name": "xero-ruby", "group": null, "package_manager": "rubygems" }
-  ]
+    {
+      "name": "xero-python",
+      "group": null,
+      "package_manager": "pypi"
+    },
+    {
+      "name": "xero-node",
+      "group": null,
+      "package_manager": "npm"
+    },
+    {
+      "name": "xero-ruby",
+      "group": null,
+      "package_manager": "rubygems"
+    }
+  ],
+  "uuid": "18d6a9d6-032e-4a88-8b81-3f7aef3d2507"
 }

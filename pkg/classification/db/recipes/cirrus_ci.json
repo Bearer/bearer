@@ -2,6 +2,9 @@
   "metadata": { "version": "1.0" },
   "name": "Cirrus Ci",
   "type": "external_service",
-  "urls": ["https://api.cirrus-ci.com"],
-  "packages": []
+  "urls": [
+    "https://api.cirrus-ci.com"
+  ],
+  "packages": [],
+  "uuid": "b334f203-7f53-40be-8787-3eeb285d30c8"
 }

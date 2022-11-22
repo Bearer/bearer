@@ -4,11 +4,16 @@
   "type": "internal_service",
   "urls": [],
   "packages": [
-    { "name": "aws-sdk-kinesis", "group": null, "package_manager": "rubygems" },
+    {
+      "name": "aws-sdk-kinesis",
+      "group": null,
+      "package_manager": "rubygems"
+    },
     {
       "name": "aws-kinesisanalytics-runtime",
       "group": "com.amazonaws",
       "package_manager": "maven"
     }
-  ]
+  ],
+  "uuid": "8feff8fb-432e-4213-b5dd-9358ebcfb5b5"
 }

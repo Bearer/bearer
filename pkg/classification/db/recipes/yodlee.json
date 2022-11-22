@@ -2,6 +2,9 @@
   "metadata": { "version": "1.0" },
   "name": "Yodlee",
   "type": "external_service",
-  "urls": ["https://api.yodlee.com"],
-  "packages": []
+  "urls": [
+    "https://api.yodlee.com"
+  ],
+  "packages": [],
+  "uuid": "729a0131-af07-409f-8535-2e09ad02289f"
 }

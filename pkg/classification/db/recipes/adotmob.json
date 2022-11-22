@@ -2,6 +2,10 @@
   "metadata": { "version": "1.0" },
   "name": "Adotmob",
   "type": "external_service",
-  "urls": ["https://dmp.adotmob.com", "https://tracker.adotmob.com"],
-  "packages": []
+  "urls": [
+    "https://dmp.adotmob.com",
+    "https://tracker.adotmob.com"
+  ],
+  "packages": [],
+  "uuid": "af99b1dc-ba20-40a4-a2b0-ffdbdb52be16"
 }

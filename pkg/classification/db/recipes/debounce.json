@@ -2,6 +2,9 @@
   "metadata": { "version": "1.0" },
   "name": "Debounce",
   "type": "external_service",
-  "urls": ["https://api.debounce.io"],
-  "packages": []
+  "urls": [
+    "https://api.debounce.io"
+  ],
+  "packages": [],
+  "uuid": "e9b89ac7-f8f4-410a-9f27-aaffc49ced6d"
 }

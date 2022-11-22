@@ -9,7 +9,11 @@
       "group": null,
       "package_manager": "go"
     },
-    { "name": "go.etcd.io/bbolt", "group": null, "package_manager": "go" },
+    {
+      "name": "go.etcd.io/bbolt",
+      "group": null,
+      "package_manager": "go"
+    },
     {
       "name": "github.com/boltdb/bolt",
       "group": null,
@@ -25,5 +29,6 @@
       "group": null,
       "package_manager": "go"
     }
-  ]
+  ],
+  "uuid": "2ae64d6a-36cf-4fd2-982e-31b248605f6a"
 }

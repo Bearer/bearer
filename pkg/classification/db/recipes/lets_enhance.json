@@ -2,6 +2,9 @@
   "metadata": { "version": "1.0" },
   "name": "Lets enhance",
   "type": "external_service",
-  "urls": ["https://api.letsenhance.io"],
-  "packages": []
+  "urls": [
+    "https://api.letsenhance.io"
+  ],
+  "packages": [],
+  "uuid": "ee7951bb-f3ae-4143-a273-8ccaba3a0f49"
 }

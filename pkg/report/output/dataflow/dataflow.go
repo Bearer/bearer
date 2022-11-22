@@ -25,7 +25,7 @@ var allowedDetections []detections.DetectionType = []detections.DetectionType{de
 func GetOutput(input []interface{}, config settings.Config, isInternal bool) (*DataFlow, error) {
 	dataTypesHolder := datatypes.New()
 	risksHolder := risks.New(config, isInternal)
-	componentsHolder := components.New()
+	componentsHolder := components.New(isInternal)
 
 	for _, detection := range input {
 		detectionMap, ok := detection.(map[string]interface{})
