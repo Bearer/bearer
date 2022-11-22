@@ -12,7 +12,7 @@ const (
 )
 
 type Interface struct {
-	Type         Type          `json:"type"`
-	Value        *values.Value `json:"value"`
-	VariableName string        `json:"variable_name,omitempty"`
+	Type         Type          `json:"type" yaml:"type"`
+	Value        *values.Value `json:"value" yaml:"value"`
+	VariableName string        `json:"variable_name,omitempty" yaml:"variable_name,omitempty"`
 }

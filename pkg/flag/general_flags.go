@@ -16,7 +16,7 @@ type GeneralFlagGroup struct {
 
 // GlobalOptions defines flags and other configuration parameters for all the subcommands
 type GeneralOptions struct {
-	ConfigFile string `json:"config_file"`
+	ConfigFile string `json:"config_file" yaml:"config_file"`
 }
 
 func NewGeneralFlagGroup() *GeneralFlagGroup {

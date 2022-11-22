@@ -13,13 +13,13 @@ import (
 var githubDir embed.FS
 
 type Category struct {
-	Language string `json:"Language"`
-	Items    []Item `json:"items"`
+	Language string `json:"language" yaml:"language"`
+	Items    []Item `json:"items" yaml:"items"`
 }
 
 type Item struct {
-	FullName string `json:"full_name"`
-	HtmlUrl  string `json:"html_url"`
+	FullName string `json:"full_name" yaml:"full_name"`
+	HtmlUrl  string `json:"html_url" yaml:"html_url"`
 }
 
 func UnmarshalRaw() []Item {

@@ -6,12 +6,12 @@ import (
 
 // Source represents a part of a source file that is referenced in the scan report.
 type Source struct {
-	Filename     string  `json:"filename"`
-	Language     string  `json:"language"`
-	LanguageType string  `json:"language_type"`
-	LineNumber   *int    `json:"line_number"`
-	ColumnNumber *int    `json:"column_number"`
-	Text         *string `json:"text"`
+	Filename     string  `json:"filename" yaml:"filename"`
+	Language     string  `json:"language" yaml:"language"`
+	LanguageType string  `json:"language_type" yaml:"language_type"`
+	LineNumber   *int    `json:"line_number" yaml:"line_number"`
+	ColumnNumber *int    `json:"column_number" yaml:"column_number"`
+	Text         *string `json:"text" yaml:"text"`
 }
 
 func New(fileInfo *file.FileInfo, file *file.Path, lineNumber, columnNumber int, text string) Source {

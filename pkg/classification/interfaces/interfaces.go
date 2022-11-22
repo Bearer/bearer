@@ -14,15 +14,15 @@ import (
 
 type ClassifiedInterface struct {
 	*detections.Detection
-	Classification *Classification `json:"classification"`
+	Classification *Classification `json:"classification" yaml:"classification"`
 }
 
 type Classification struct {
-	URL         string                          `json:"url"`
-	RecipeMatch bool                            `json:"recipe_match"`
+	URL         string                          `json:"url" yaml:"url"`
+	RecipeMatch bool                            `json:"recipe_match" yaml:"recipe_match"`
 	RecipeName  string                          `json:"recipe_name,omitempty"`
 	RecipeUUID  string                          `json:"recipe_uuid,omitempty"`
-	Decision    classify.ClassificationDecision `json:"decision"`
+	Decision    classify.ClassificationDecision `json:"decision" yaml:"decision"`
 }
 
 type Classifier struct {

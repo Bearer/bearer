@@ -11,14 +11,14 @@ import (
 
 type ClassifiedDependency struct {
 	*detections.Detection
-	Classification *Classification `json:"classification"`
+	Classification *Classification `json:"classification" yaml:"classification"`
 }
 
 type Classification struct {
-	RecipeMatch bool                            `json:"recipe_match"`
+	RecipeMatch bool                            `json:"recipe_match" yaml:"recipe_match"`
 	RecipeUUID  string                          `json:"recipe_uuid,omitempty"`
 	RecipeName  string                          `json:"recipe_name,omitempty"`
-	Decision    classify.ClassificationDecision `json:"decision"`
+	Decision    classify.ClassificationDecision `json:"decision" yaml:"decision"`
 }
 
 type Classifier struct {

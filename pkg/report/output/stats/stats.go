@@ -7,14 +7,14 @@ import (
 )
 
 type DataType struct {
-	Name        string `json:"name"`
-	Occurrences int    `json:"occurrences"`
+	Name        string `json:"name" yaml:"name"`
+	Occurrences int    `json:"occurrences" yaml:"occurrences"`
 }
 
 type Stats struct {
-	NumberOfLines     int32      `json:"number_of_lines"`
-	NumberOfDataTypes int        `json:"number_of_data_types"`
-	DataTypes         []DataType `json:"data_types"`
+	NumberOfLines     int32      `json:"number_of_lines" yaml:"number_of_lines"`
+	NumberOfDataTypes int        `json:"number_of_data_types" yaml:"number_of_data_types"`
+	DataTypes         []DataType `json:"data_types" yaml:"data_types"`
 }
 
 func GetOutput(inputgocloc *gocloc.Result, inputDataflow *dataflow.DataFlow, config settings.Config) (*Stats, error) {

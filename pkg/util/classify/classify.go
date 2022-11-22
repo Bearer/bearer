@@ -20,8 +20,8 @@ type ValidationResult struct {
 }
 
 type ClassificationDecision struct {
-	State  ValidationState `json:"state"`
-	Reason string          `json:"reason"`
+	State  ValidationState `json:"state" yaml:"state"`
+	Reason string          `json:"reason" yaml:"reason"`
 }
 
 var potentialDetectors = map[string]struct{}{

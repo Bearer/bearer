@@ -7,8 +7,8 @@ import (
 )
 
 type RenamedFile struct {
-	PreviousFilename string `json:"previous_filename"`
-	NewFilename      string `json:"new_filename"`
+	PreviousFilename string `json:"previous_filename" yaml:"previous_filename"`
+	NewFilename      string `json:"new_filename" yaml:"new_filename"`
 }
 
 func GetRenames(rootDir, firstCommitSHA, lastCommitSHA string) ([]RenamedFile, error) {

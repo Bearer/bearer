@@ -11,11 +11,11 @@ import (
 )
 
 type PolicyInput struct {
-	PolicyName        string             `json:"policy_name"`
-	PolicyId          string             `json:"policy_id"`
-	PolicyDescription string             `json:"policy_description"`
-	Dataflow          *dataflow.DataFlow `json:"dataflow"`
-	DataCategories    []db.DataCategory  `json:"data_categories"`
+	PolicyName        string             `json:"policy_name" yaml:"policy_name"`
+	PolicyId          string             `json:"policy_id" yaml:"policy_id"`
+	PolicyDescription string             `json:"policy_description" yaml:"policy_description"`
+	Dataflow          *dataflow.DataFlow `json:"dataflow" yaml:"dataflow"`
+	DataCategories    []db.DataCategory  `json:"data_categories" yaml:"data_categories"`
 }
 
 func GetOutput(dataflow *dataflow.DataFlow, config settings.Config) ([]rego.Vars, error) {

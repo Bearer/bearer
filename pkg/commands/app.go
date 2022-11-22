@@ -11,7 +11,7 @@ import (
 
 // VersionInfo holds the curio version
 type VersionInfo struct {
-	Version string `json:",omitempty"`
+	Version string `json:",omitempty" yaml:",omitempty"`
 }
 
 // NewApp is the factory method to return Curio CLI

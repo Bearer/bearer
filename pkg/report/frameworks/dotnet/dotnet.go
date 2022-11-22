@@ -7,6 +7,6 @@ import (
 const TypeDatabase frameworks.Type = "database"
 
 type DBContext struct {
-	UseDbMethodName string `json:"use_db_method_name"`
-	TypeName        string `json:"type_name"`
+	UseDbMethodName string `json:"use_db_method_name" yaml:"use_db_method_name"`
+	TypeName        string `json:"type_name" yaml:"type_name"`
 }
