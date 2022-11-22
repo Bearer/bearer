@@ -1,8 +1,6 @@
 package components
 
 import (
-	"strings"
-
 	"github.com/bearer/curio/pkg/report/output/dataflow/detectiondecoder"
 	"github.com/bearer/curio/pkg/report/output/dataflow/types"
 
@@ -20,10 +18,12 @@ type component struct {
 	uuid      string
 	detectors map[string]*detector // group detectors by detectorName
 }
+
 type detector struct {
 	name  string
 	files map[string]*fileHolder // group files by filename
 }
+
 type fileHolder struct {
 	name        string
 	lineNumbers map[int]int //group lines by linenumber
@@ -47,7 +47,13 @@ func (holder *Holder) AddInterface(detection interface{}) error {
 	}
 
 	if value.Classification.Decision.State == classify.Valid {
-		holder.addComponent(strings.ToLower(value.Classification.RecipeName), value.Classification.RecipeUUID, string(value.DetectorType), value.Source.Filename, *value.Source.LineNumber)
+		holder.addComponent(
+			value.Classification.Name(),
+			value.Classification.RecipeUUID,
+			string(value.DetectorType),
+			value.Source.Filename,
+			*value.Source.LineNumber,
+		)
 	}
 
 	return nil
@@ -64,7 +70,13 @@ func (holder *Holder) AddDependency(detection interface{}) error {
 	}
 
 	if value.Classification.Decision.State == classify.Valid {
-		holder.addComponent(strings.ToLower(value.Classification.RecipeName), value.Classification.RecipeUUID, string(value.DetectorType), value.Source.Filename, *value.Source.LineNumber)
+		holder.addComponent(
+			value.Classification.RecipeName,
+			value.Classification.RecipeUUID,
+			string(value.DetectorType),
+			value.Source.Filename,
+			*value.Source.LineNumber,
+		)
 	}
 
 	return nil
@@ -81,7 +93,13 @@ func (holder *Holder) AddFramework(detection interface{}) error {
 	}
 
 	if value.Classification.Decision.State == classify.Valid {
-		holder.addComponent(strings.ToLower(value.Classification.RecipeName), value.Classification.RecipeUUID, string(value.DetectorType), value.Source.Filename, *value.Source.LineNumber)
+		holder.addComponent(
+			value.Classification.RecipeName,
+			value.Classification.RecipeUUID,
+			string(value.DetectorType),
+			value.Source.Filename,
+			*value.Source.LineNumber,
+		)
 	}
 
 	return nil

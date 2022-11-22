@@ -89,7 +89,6 @@ func GetOutput(input []interface{}, config settings.Config, isInternal bool) (*D
 				return nil, err
 			}
 		}
-
 	}
 
 	dataflow := &DataFlow{

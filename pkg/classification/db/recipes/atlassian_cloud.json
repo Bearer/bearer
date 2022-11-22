@@ -4,7 +4,8 @@
   "type": "external_service",
   "urls": [
     "https://api.atlassian.com",
-    "https://atlassian.net/rest/api/"
+    "https://atlassian.net/rest/api/",
+    "https://auth.atlassian.com"
   ],
   "packages": [
     {
