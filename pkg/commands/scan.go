@@ -68,6 +68,10 @@ func NewScanCommand() *cobra.Command {
 				return xerrors.Errorf("flag error: %w", err)
 			}
 
+			if !options.Quiet {
+				output.StdErrLogger().Msgf("Loaded %s configuration file", configPath)
+			}
+
 			output.Setup(cmd, options)
 
 			if options.Target == "" {
@@ -96,8 +100,6 @@ func readConfig(configFile string) error {
 
 		return fmt.Errorf("config file %q loading error: %s", configFile, err)
 	}
-
-	output.StdErrLogger().Msgf("Loaded %s configuration file", configFile)
 
 	return nil
 }
