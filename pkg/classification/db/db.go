@@ -59,9 +59,8 @@ type DataType struct {
 }
 
 type DataCategory struct {
-	Name     string `json:"name" yaml:"name"`
-	UUID     string `json:"uuid" yaml:"uuid"`
-	Severity string `json:"severity" yaml:"severity"`
+	Name string `json:"name" yaml:"name"`
+	UUID string `json:"uuid" yaml:"uuid"`
 }
 
 type ObjectType string

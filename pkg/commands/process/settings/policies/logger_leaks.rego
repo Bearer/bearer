@@ -17,7 +17,6 @@ result[item] {
         "policy_id": input.policy_id,
         "policy_name": input.policy_name,
         "data_type": data_type.name,
-        "severity": category.severity,
         "filename": location.filename,
         "line_number": location.line_number
     }
