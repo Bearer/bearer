@@ -19,7 +19,7 @@ type Config struct {
 	Policies       map[string]*Policy `json:"policies" yaml:"policies"`
 }
 
-type policyLevel string
+type PolicyLevel string
 
 var LevelCritical = "critical"
 var LevelHigh = "high"
@@ -32,7 +32,7 @@ type Policy struct {
 	Id          string
 	Description string
 	Modules     []*PolicyModule
-	Level       policyLevel
+	Level       PolicyLevel
 }
 
 type PolicyModule struct {
