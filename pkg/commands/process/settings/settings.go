@@ -34,7 +34,7 @@ type Policy struct {
 	Id          string
 	Name        string
 	Description string
-	Level       policyLevel
+	Level       PolicyLevel
 	Modules     Modules
 }
 
