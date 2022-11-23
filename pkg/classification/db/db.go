@@ -25,6 +25,9 @@ var dataTypeClassificationPatternsDir embed.FS
 //go:embed known_person_object_patterns
 var knownPersonObjectPatternsDir embed.FS
 
+//go:embed category_grouping.json
+var categoryGroupingFile embed.FS
+
 type DefaultDB struct {
 	Recipes                        []Recipe
 	DataTypes                      []DataType
@@ -59,9 +62,15 @@ type DataType struct {
 }
 
 type DataCategory struct {
-	Name     string `json:"name" yaml:"name"`
-	UUID     string `json:"uuid" yaml:"uuid"`
-	Severity string `json:"severity" yaml:"severity"`
+	Name      string `json:"name" yaml:"name"`
+	UUID      string `json:"uuid,omitempty" yaml:"uuid,omitempty"`
+	GroupUUID string `json:"group_uuid,omitempty" yaml:"group_uuid,omitempty"`
+	GroupName string `json:"group_name,omitempty" yaml:"group_name,omitempty"`
+}
+
+type DataCategoryGrouping struct {
+	Groups          map[string]string       `json:"groups"`
+	CategoryMapping map[string]DataCategory `json:"category_mapping"`
 }
 
 type ObjectType string
@@ -144,6 +153,18 @@ func defaultRecipes() []Recipe {
 func defaultDataCategories() []DataCategory {
 	dataCategories := []DataCategory{}
 
+	categoryGroupingJson, err := categoryGroupingFile.ReadFile("category_grouping.json")
+	if err != nil {
+		handleError(err)
+	}
+
+	var dataCategoryGrouping DataCategoryGrouping
+	rawBytes := []byte(categoryGroupingJson)
+	err = json.Unmarshal(rawBytes, &dataCategoryGrouping)
+	if err != nil {
+		handleError(err)
+	}
+
 	files, err := dataCategoriesDir.ReadDir("data_categories")
 	if err != nil {
 		handleError(err)
@@ -161,6 +182,10 @@ func defaultDataCategories() []DataCategory {
 		if err != nil {
 			handleError(err)
 		}
+
+		categoryFromMapping := dataCategoryGrouping.CategoryMapping[dataCategory.UUID]
+		dataCategory.GroupUUID = categoryFromMapping.GroupUUID
+		dataCategory.GroupName = dataCategoryGrouping.Groups[categoryFromMapping.GroupUUID]
 
 		dataCategories = append(dataCategories, dataCategory)
 	}

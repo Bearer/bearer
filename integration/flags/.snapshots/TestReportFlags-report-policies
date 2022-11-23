@@ -1,5 +1,5 @@
 - result:
-    - data_type: Physical Address
+    - category_group: Personal data
       filename: users.rb
       line_number: "1"
       policy_description: Logger leaks detected
