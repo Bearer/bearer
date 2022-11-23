@@ -78,7 +78,7 @@ func Discover(report report.Report, tree *parser.Tree, idGenerator nodeid.Genera
 
 	datatype.PruneMap(datatypes)
 
-	report.AddDataType(detections.TypeSchema, detectors.DetectorCSharp, idGenerator, datatypes)
+	report.AddDataType(detections.TypeSchema, detectors.DetectorCSharp, idGenerator, datatypes, nil)
 }
 
 func discoverProperties(tree *parser.Tree, datatypes map[parser.NodeID]*schemadatatype.DataType) {

@@ -13,7 +13,7 @@ import (
 )
 
 type ReportDataType interface {
-	AddDataType(detectionType detections.DetectionType, detectorType detectors.Type, generator nodeid.Generator, values map[parser.NodeID]*DataType)
+	AddDataType(detectionType detections.DetectionType, detectorType detectors.Type, generator nodeid.Generator, values map[parser.NodeID]*DataType, parent *parser.Node)
 }
 
 type DataType struct {
@@ -70,6 +70,18 @@ func (datatype *DataType) GetType() string {
 	return datatype.Type
 }
 
+func (datatype *DataType) GetParent() *parser.Node {
+	return datatype.Node.Parent().Parent().Parent()
+}
+
+func (datatype *DataType) GetParentStartLine() int {
+	return datatype.GetParent().LineNumber()
+}
+
+func (datatype *DataType) GetParentContent() string {
+	return datatype.GetParent().Content()
+}
+
 func (datatype *DataType) SetUUID(UUID string) {
 	datatype.UUID = UUID
 }
@@ -92,31 +104,34 @@ type DataTypable interface {
 	GetNode() *parser.Node
 	GetProperties() map[string]DataTypable
 	SetProperty(string, DataTypable)
+	GetParent() *parser.Node
+	GetParentStartLine() int
+	GetParentContent() string
 }
 
-func ExportClassified[D DataTypable](report detections.ReportDetection, detectionType detections.DetectionType, detectorType detectors.Type, idGenerator nodeid.Generator, values map[parser.NodeID]D) {
-	exportSchemas(report, detectionType, detectorType, idGenerator, values)
+func ExportClassified[D DataTypable](report detections.ReportDetection, detectionType detections.DetectionType, detectorType detectors.Type, idGenerator nodeid.Generator, values map[parser.NodeID]D, parent *parser.Node) {
+	exportSchemas(report, detectionType, detectorType, idGenerator, values, parent)
 }
 
 func Export[D DataTypable](report detections.ReportDetection, detectionType detections.DetectionType, detectorType detectors.Type, idGenerator nodeid.Generator, values map[parser.NodeID]D) {
 	if detectionType == detections.TypeCustom {
-		exportSchemas(report, detectionType, detectorType, idGenerator, values)
+		exportSchemas(report, detectionType, detectorType, idGenerator, values, nil)
 		return
 	}
-	exportSchemas(report, detectionType, detectorType, idGenerator, values)
+	exportSchemas(report, detectionType, detectorType, idGenerator, values, nil)
 }
 
-func exportSchemas[D DataTypable](report detections.ReportDetection, detectionType detections.DetectionType, detectorType detectors.Type, idGenerator nodeid.Generator, values map[parser.NodeID]D) {
+func exportSchemas[D DataTypable](report detections.ReportDetection, detectionType detections.DetectionType, detectorType detectors.Type, idGenerator nodeid.Generator, values map[parser.NodeID]D, parent *parser.Node) {
 	sortedDataTypes := SortParserMap(values)
 
 	parentName := ""
 	parentUUID := idGenerator.GenerateId()
 	for _, value := range sortedDataTypes {
-		dataTypeToSchema(report, detectionType, detectorType, idGenerator, value, parentName, parentUUID, false)
+		dataTypeToSchema(report, detectionType, detectorType, idGenerator, value, parentName, parentUUID, false, parent)
 	}
 }
 
-func dataTypeToSchema[D DataTypable](report detections.ReportDetection, detectionType detections.DetectionType, detectorType detectors.Type, idGenerator nodeid.Generator, dataType D, parentName string, parentUUID string, shouldExport bool) {
+func dataTypeToSchema[D DataTypable](report detections.ReportDetection, detectionType detections.DetectionType, detectorType detectors.Type, idGenerator nodeid.Generator, dataType D, parentName string, parentUUID string, shouldExport bool, parent *parser.Node) {
 	if dataType.GetIsHelper() {
 		return
 	}
@@ -129,23 +144,39 @@ func dataTypeToSchema[D DataTypable](report detections.ReportDetection, detectio
 	selfName := dataType.GetName()
 
 	if shouldExport {
-		report.AddDetection(detectionType, detectorType, dataType.GetNode().Source(false),
-			schema.Schema{
-				ObjectName:      parentName,
-				FieldName:       selfName,
-				ObjectUUID:      parentUUID,
-				FieldUUID:       selfUUID,
-				FieldType:       dataType.GetTextType(),
-				SimpleFieldType: dataType.GetType(),
-				Classification:  dataType.GetClassification(),
-			},
-		)
+		if dataType.GetParent() != nil {
+			report.AddDetection(detectionType, detectorType, dataType.GetNode().Source(false),
+				schema.Schema{
+					ObjectName:      parentName,
+					FieldName:       selfName,
+					ObjectUUID:      parentUUID,
+					FieldUUID:       selfUUID,
+					FieldType:       dataType.GetTextType(),
+					SimpleFieldType: dataType.GetType(),
+					Classification:  dataType.GetClassification(),
+					ParentStartLine: dataType.GetParentStartLine(),
+					ParentContent:   dataType.GetParentContent(),
+				},
+			)
+		} else {
+			report.AddDetection(detectionType, detectorType, dataType.GetNode().Source(false),
+				schema.Schema{
+					ObjectName:      parentName,
+					FieldName:       selfName,
+					ObjectUUID:      parentUUID,
+					FieldUUID:       selfUUID,
+					FieldType:       dataType.GetTextType(),
+					SimpleFieldType: dataType.GetType(),
+					Classification:  dataType.GetClassification(),
+				},
+			)
+		}
 	}
 
 	sortedProperties := SortStringMap(dataType.GetProperties())
 
 	for _, property := range sortedProperties {
-		dataTypeToSchema(report, detectionType, detectorType, idGenerator, property, selfName, selfUUID, true)
+		dataTypeToSchema(report, detectionType, detectorType, idGenerator, property, selfName, selfUUID, true, nil)
 	}
 }
 

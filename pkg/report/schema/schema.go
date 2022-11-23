@@ -23,7 +23,9 @@ type Schema struct {
 	FieldUUID       string      `json:"-" yaml:"-"`
 	FieldType       string      `json:"field_type" yaml:"field_type"`
 	SimpleFieldType string      `json:"field_type_simple" yaml:"field_type_simple"`
-	Classification  interface{} `json:"classification" yaml:"classification"`
+	Classification  interface{} `json:"classification,omitempty" yaml:"classification"`
+	ParentStartLine int         `json:"parent_start_line,omitempty"`
+	ParentContent   string      `json:"parent_content,omitempty"`
 }
 
 type ReportSchema interface {

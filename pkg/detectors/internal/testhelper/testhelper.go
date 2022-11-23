@@ -53,10 +53,10 @@ func Extract(
 		t.Errorf("report has errored %e", err)
 	}
 
-	err = detectors.ExtractWithDetectors(path, files, &report, registrations)
-	if len(report.Errors) > 0 {
-		t.Errorf("report has some errors %#v", report.Errors)
-	}
+	// err = detectors.ExtractWithDetectors(path, files, &report, registrations)
+	// if len(report.Errors) > 0 {
+	// 	t.Errorf("report has some errors %#v", report.Errors)
+	// }
 
 	if !assert.Nil(t, err) {
 		t.Errorf("report has errored %e", err)

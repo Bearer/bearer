@@ -29,5 +29,5 @@ func Discover(report report.Report, tree *parser.Tree, idGenerator nodeid.Genera
 		}
 	}
 
-	report.AddDataType(detections.TypeSchema, detectors.DetectorJavascript, idGenerator, datatypes)
+	report.AddDataType(detections.TypeSchema, detectors.DetectorJavascript, idGenerator, datatypes, nil)
 }

@@ -20,7 +20,7 @@ var classesQuery = parser.QueryMustCompile(php.GetLanguage(),
 
 var classPropertiesQuery = parser.QueryMustCompile(php.GetLanguage(),
 	`(class_declaration
-		body: 
+		body:
 		(declaration_list
 			(property_declaration
 				(property_element
@@ -74,7 +74,7 @@ func Discover(report report.Report, tree *parser.Tree, idGenerator nodeid.Genera
 
 	datatype.PruneMap(propertiesDatatypes)
 
-	report.AddDataType(detections.TypeSchema, detectors.DetectorPHP, idGenerator, propertiesDatatypes)
+	report.AddDataType(detections.TypeSchema, detectors.DetectorPHP, idGenerator, propertiesDatatypes, nil)
 }
 
 func discoverClassProperties(tree *parser.Tree, datatypes map[parser.NodeID]*schemadatatype.DataType) {
