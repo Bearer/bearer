@@ -74,8 +74,8 @@ func (detector *Detector) CompileRules(rulesConfig map[string]settings.Rule) err
 				compiledRule.RuleName = ruleName
 				compiledRule.Metavars = rule.Metavars
 				compiledRule.ParamParenting = rule.ParamParenting
-				compiledRule.Lowercase = rule.Lowercase
-				compiledRule.Singularize = rule.Singularilize
+				compiledRule.RootLowercase = rule.RootLowercase
+				compiledRule.RootSingularize = rule.RootSingularize
 				compiledRules = append(compiledRules, compiledRule)
 			}
 		}
@@ -240,20 +240,23 @@ func (detector *Detector) extractData(captures []parser.Captures, rule config.Co
 			}
 		}
 
+		detector.applyDatatypeTransformations(rule, forExport)
+
 		report.AddDataType(detections.TypeCustom, detectors.Type(rule.RuleName), idGenerator, forExport)
 	}
 	return nil
 }
 
-func (detector *Detector) ConvertDatatype(rule config.CompiledRule, datatype *schemadatatype.DataType) *schemadatatype.DataType {
-	if rule.Singularize {
-		datatype.Name = detector.pluralize.Singular(datatype.Name)
-	}
+func (detector *Detector) applyDatatypeTransformations(rule config.CompiledRule, datatypes map[parser.NodeID]*schemadatatype.DataType) {
+	for _, datatype := range datatypes {
+		if rule.RootSingularize {
+			datatype.Name = detector.pluralize.Singular(datatype.Name)
+		}
 
-	if rule.Lowercase {
-		datatype.Name = strings.ToLower(datatype.Name)
+		if rule.RootLowercase {
+			datatype.Name = strings.ToLower(datatype.Name)
+		}
 	}
-	return datatype
 }
 
 func filterCaptures(params []config.Param, captures []parser.Captures) (filtered []parser.Captures, err error) {

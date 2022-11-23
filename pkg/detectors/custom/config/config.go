@@ -3,14 +3,14 @@ package config
 import "github.com/bearer/curio/pkg/commands/process/settings"
 
 type CompiledRule struct {
-	RuleName       string
-	Tree           string
-	Params         []Param
-	Metavars       map[string]settings.MetaVar
-	ParamParenting bool
-	Singularize    bool
-	Lowercase      bool
-	Languages      []string
+	RuleName        string
+	Tree            string
+	Params          []Param
+	Metavars        map[string]settings.MetaVar
+	ParamParenting  bool
+	RootSingularize bool
+	RootLowercase   bool
+	Languages       []string
 }
 
 type Param struct {

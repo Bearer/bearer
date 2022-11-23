@@ -13,6 +13,8 @@ detect_encrypted_ruby_class_properties:
         encrypts <$ARGUMENT>
       end
   param_parenting: true
+  root_signularize: true
+  root_lowercase: true
   languages:
     - ruby
 detect_sql_create_public_table:
@@ -23,6 +25,8 @@ detect_sql_create_public_table:
         <$COLUMN>
       )
   param_parenting: true
+  root_signularize: true
+  root_lowercase: true
   languages:
     - sql
   processors:
