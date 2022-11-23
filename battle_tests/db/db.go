@@ -6,6 +6,7 @@ import (
 	"encoding/json"
 	"fmt"
 
+	"github.com/bearer/curio/battle_tests/build"
 	"github.com/rs/zerolog/log"
 )
 
@@ -31,6 +32,9 @@ func UnmarshalRaw() []Item {
 	}
 
 	for _, file := range files {
+		if build.Language != "all" && file.Name() != build.Language {
+			continue
+		}
 		val, err := githubDir.ReadFile("github/" + file.Name())
 		if err != nil {
 			log.Fatal().Err(fmt.Errorf("unable to open file %e", err)).Send()

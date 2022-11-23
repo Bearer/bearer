@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"time"
 
+	"github.com/bearer/curio/battle_tests/build"
 	"github.com/bearer/curio/battle_tests/config"
 	battletests "github.com/bearer/curio/battle_tests/config"
 	metricsscan "github.com/bearer/curio/battle_tests/metrics_scan"
@@ -63,7 +64,7 @@ func (client *GoogleSheets) CreateDocument(tagName string, parentFolderId string
 		counter++
 		req := client.sheet.Spreadsheets.Create(&sheets.Spreadsheet{
 			Properties: &sheets.SpreadsheetProperties{
-				Title: "Battle Report - " + tagName,
+				Title: "Battle Report - " + tagName + " - " + build.Language + " (" + build.Attempt + ")",
 			},
 			Sheets: []*sheets.Sheet{
 				{
