@@ -76,11 +76,9 @@ func GetOutput(input []interface{}, config settings.Config, isInternal bool) (*D
 				return nil, fmt.Errorf("there is a custom detector in report that is not in the config %s", ruleName)
 			}
 
-			if customDetector.Verifier {
-				continue
-			}
-
 			switch customDetector.Type {
+			case customdetectors.TypeVerfifier:
+				continue
 			case customdetectors.TypeRisk:
 				err := risksHolder.AddSchema(castDetection)
 				if err != nil {

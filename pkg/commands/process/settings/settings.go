@@ -35,7 +35,7 @@ type Policy struct {
 	Name        string
 	Description string
 	Level       policyLevel
-	Modules Modules
+	Modules     Modules
 }
 
 type PolicyModule struct {
@@ -57,7 +57,6 @@ func (modules Modules) ToRegoModules() (output []rego.Module) {
 type Rule struct {
 	Disabled       bool
 	Type           string
-	Verifier       bool
 	Languages      []string
 	Patterns       []string
 	ParamParenting bool `yaml:"param_parenting"`

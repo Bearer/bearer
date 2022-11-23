@@ -6,8 +6,7 @@ detect_ruby_logger:
   languages:
     - ruby
 detect_encrypted_ruby_class_properties:
-  type: "data_type"
-  verifier: true
+  type: "verifier"
   patterns:
     - |
       class $CLASS_NAME < ApplicationRecord
