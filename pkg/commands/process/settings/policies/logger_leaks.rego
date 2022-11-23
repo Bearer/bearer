@@ -17,7 +17,7 @@ high[item] {
 
     location = data_type.locations[_]
     item := {
-        "category": category.name,
+        "category_group": category.group_name,
         "filename": location.filename
     }
 }
@@ -34,7 +34,7 @@ critical[item] {
 
     location = data_type.locations[_]
     item := {
-        "category": category.name,
+        "category_group": category.group_name,
         "filename": location.filename
     }
 }

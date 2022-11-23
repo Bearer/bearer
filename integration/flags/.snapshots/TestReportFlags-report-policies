@@ -1,9 +1,8 @@
 critical:
-    - policyname: Logger leaks
-      policydescription: Logger leaks detected
-      linenumber: ""
+    - policy_name: Logger leaks
+      policy_description: Logger leaks detected
       filename: users.rb
-      category: Contact
+      category_group: Personal data
 
 
 --

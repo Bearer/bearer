@@ -146,8 +146,18 @@ func (r *runner) Report(config settings.Config, report types.Report) error {
 		logger = outputhandler.PlainLogger(reportFile)
 	}
 
+	if config.Report.Report == flag.ReportPolicies && config.Report.Format == "" {
+		// for polict report, default report format is NOT JSON
+		err := reportoutput.ReportPolicies(report, logger, config)
+		if err != nil {
+			return fmt.Errorf("error generating report %w", err)
+		}
+		return nil
+	}
+
 	switch config.Report.Format {
-	case flag.FormatJSON:
+	case "", flag.FormatJSON:
+		// default report format for is JSON
 		err := reportoutput.ReportJSON(report, logger, config)
 		if err != nil {
 			return fmt.Errorf("error generating report %w", err)
