@@ -12,6 +12,35 @@ on:
           - 25
           - 100
 
+      language:
+        description: "Language you want to process"
+        required: true
+        default: "all"
+        type: choice
+        options:
+          - "all"
+          - "javascript"
+          - "typescript"
+          - "ruby"
+          - "php"
+          - "c_sharp"
+          - "go"
+          - "python"
+          - "java"
+          - "crm"
+
+      attempt:
+        description: "Attempt (if you need to re-trigger for the same curio version)"
+        required: true
+        default: "1"
+        type: string
+
+      curio_version:
+        description: "Version of curio to pick up (`tags/<tag_name>`, `<release_id>` or `latest`)"
+        default: "latest"
+        required: true
+        type: string
+
 permissions:
   contents: write
   packages: write
@@ -47,6 +76,7 @@ jobs:
         uses: dsaltares/fetch-gh-release-asset@1.1.0
         with:
           repo: "Bearer/curio"
+          version: ${{ input.curio_version }}
           # version: "tags/v0.5.0"
           # file: "curio_0.5.0_linux_amd64.tar.gz"
           regex: true
@@ -69,6 +99,8 @@ jobs:
           build-args: |
             CURIO_VERSION=${{ steps.latest_artifact.outputs.version }}
             BATTLE_TEST_SHA=${{ github.sha }}
+            ATTEMPT=${{ input.attempt }}
+            LANGUAGE=${{ input.language }}
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1

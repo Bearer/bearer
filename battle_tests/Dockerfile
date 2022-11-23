@@ -10,7 +10,7 @@ WORKDIR /app
 
 # RUN apk update && apk upgrade && apk add --no-cache build-base git
 
-RUN go build -ldflags="-X 'github.com/bearer/curio/battle_tests/build.CurioVersion=${CURIO_VERSION}' -X 'github.com/bearer/curio/battle_tests/build.BattleTestSHA=${BATTLE_TEST_SHA}'" \
+RUN go build -ldflags="-X 'github.com/bearer/curio/battle_tests/build.CurioVersion=${CURIO_VERSION}' -X 'github.com/bearer/curio/battle_tests/build.BattleTestSHA=${BATTLE_TEST_SHA}' -X 'github.com/bearer/curio/battle_tests/build.Attempt=${ATTEMPT}' -X 'github.com/bearer/curio/battle_tests/build.Language=${Language}'" \
   -a -o dist/battle_tests ./battle_tests/battle_tests.go
 
 # FROM alpine

@@ -6,6 +6,7 @@ import (
 	"encoding/json"
 	"fmt"
 
+	"github.com/bearer/curio/battle_tests/build"
 	"github.com/rs/zerolog/log"
 )
 
@@ -22,8 +23,14 @@ type Item struct {
 	HtmlUrl  string `json:"html_url" yaml:"html_url"`
 }
 
-func UnmarshalRaw() []Item {
-	items := []Item{}
+type ItemWithLanguage struct {
+	FullName string `json:"full_name" yaml:"full_name"`
+	HtmlUrl  string `json:"html_url" yaml:"html_url"`
+	Language string `json:"language" yaml:"language"`
+}
+
+func UnmarshalRaw() []ItemWithLanguage {
+	items := []ItemWithLanguage{}
 
 	files, err := githubDir.ReadDir("github")
 	if err != nil {
@@ -31,6 +38,10 @@ func UnmarshalRaw() []Item {
 	}
 
 	for _, file := range files {
+		if build.Language != "all" && file.Name() != build.Language {
+			continue
+		}
+
 		val, err := githubDir.ReadFile("github/" + file.Name())
 		if err != nil {
 			log.Fatal().Err(fmt.Errorf("unable to open file %e", err)).Send()
@@ -43,19 +54,16 @@ func UnmarshalRaw() []Item {
 			log.Fatal().Err(fmt.Errorf("unable to unmarshal %e", err)).Send()
 		}
 
-		items = append(items, category.Items...)
+		for _, item := range category.Items {
+			newItem := ItemWithLanguage{
+				HtmlUrl:  item.HtmlUrl,
+				FullName: item.FullName,
+				Language: category.Language,
+			}
+
+			items = append(items, newItem)
+		}
 	}
 
 	return items
-}
-
-func Unmarshal(rawBytes []byte) Category {
-	var category Category
-
-	err := json.Unmarshal(rawBytes, &category)
-	if err != nil {
-		log.Fatal().Err(fmt.Errorf("failed to unmarshal category file %e", err)).Send()
-	}
-
-	return category
 }
