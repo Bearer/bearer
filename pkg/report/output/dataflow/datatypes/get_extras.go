@@ -73,7 +73,10 @@ func getVerifiedBy(result rego.Vars) ([]types.DatatypeVerifiedBy, error) {
 		if err != nil {
 			return nil, err
 		}
-		json.Unmarshal(bytes, &verifiedBy)
+		err = json.Unmarshal(bytes, &verifiedBy)
+		if err != nil {
+			return nil, err
+		}
 
 		return verifiedBy, nil
 	}
