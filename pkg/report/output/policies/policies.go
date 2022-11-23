@@ -18,9 +18,9 @@ type PolicyInput struct {
 }
 
 type PolicyOutput struct {
-	LineNumber string `json:"line_number,omitempty"`
-	Filename   string `json:"filename,omitempty"`
-	Category   string `json:"category,omitempty"`
+	LineNumber    string `json:"line_number,omitempty"`
+	Filename      string `json:"filename,omitempty"`
+	CategoryGroup string `json:"category_group,omitempty"`
 }
 
 type PolicyResult struct {
@@ -28,7 +28,7 @@ type PolicyResult struct {
 	PolicyDescription string `json:"policy_description"`
 	LineNumber        string `json:"line_number,omitempty"`
 	Filename          string `json:"filename,omitempty"`
-	Category          string `json:"category,omitempty"`
+	CategoryGroup     string `json:"category_group,omitempty"`
 }
 
 func GetOutput(dataflow *dataflow.DataFlow, config settings.Config) (map[string][]PolicyResult, error) {
@@ -89,7 +89,7 @@ func GetOutput(dataflow *dataflow.DataFlow, config settings.Config) (map[string]
 						PolicyName:        policy.Name,
 						PolicyDescription: policy.Description,
 						Filename:          policyOutput.Filename,
-						Category:          policyOutput.Category,
+						CategoryGroup:     policyOutput.CategoryGroup,
 					}
 
 					result[severity] = append(result[severity], policyResult)
