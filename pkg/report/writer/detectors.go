@@ -27,10 +27,25 @@ import (
 	"github.com/wlredeye/jsonlines"
 )
 
+type StoredSchema struct {
+	Value        schema.Schema
+	Source       *source.Source
+}
+
+type StoredSchemaNodes = map[*parser.Node]*StoredSchema
+
+type SchemaGroup struct {
+	Node         *parser.Node
+	ParentSchema StoredSchema
+	DetectorType detectors.Type
+	Schemas      StoredSchemaNodes
+}
+
 type Detectors struct {
-	Blamer     blamer.Blamer
-	Classifier *classification.Classifier
-	File       io.Writer
+	Blamer        blamer.Blamer
+	Classifier    *classification.Classifier
+	File          io.Writer
+	StoredSchemas SchemaGroup
 }
 
 func (report *Detectors) AddInterface(
