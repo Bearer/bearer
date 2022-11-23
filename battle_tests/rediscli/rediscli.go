@@ -19,19 +19,19 @@ func Setup() {
 }
 
 func WorkerOnline() (int64, error) {
-	key := build.CurioVersion + "_workers_online_" + build.Language + build.Attempt
+	key := build.CurioVersion + "_workers_online_" + build.Attempt
 	cmd := cli.Incr(key)
 	return cmd.Result()
 }
 
 func WorkerOffline() (int64, error) {
-	key := build.CurioVersion + "_workers_online_" + build.Language + build.Attempt
+	key := build.CurioVersion + "_workers_online_" + build.Attempt
 	cmd := cli.Decr(key)
 	return cmd.Result()
 }
 
 func SetDocument(documentID string) error {
-	key := build.CurioVersion + "_sheet_document_" + build.Language + build.Attempt
+	key := build.CurioVersion + "_sheet_document_" + build.Attempt
 	cmd := cli.Set(key, documentID, 0)
 	result, err := cmd.Result()
 	if result != "OK" {
@@ -41,7 +41,7 @@ func SetDocument(documentID string) error {
 }
 
 func GetDocument() (string, error) {
-	key := build.CurioVersion + "_sheet_document_" + build.Language + build.Attempt
+	key := build.CurioVersion + "_sheet_document_" + build.Attempt
 	cmd := cli.Get(key)
 	return cmd.Result()
 }
@@ -51,7 +51,7 @@ func Init() error {
 		return nil
 	}
 
-	key := build.CurioVersion + "_work_assigned_" + build.Language + build.Attempt
+	key := build.CurioVersion + "_work_assigned_" + build.Attempt
 	cmd := cli.Set(key, 0, 0)
 	_, err := cmd.Result()
 
@@ -59,7 +59,7 @@ func Init() error {
 		return err
 	}
 
-	key = build.CurioVersion + "_workers_online_" + build.Language + build.Attempt
+	key = build.CurioVersion + "_workers_online_" + build.Attempt
 	cmd = cli.Set(key, 0, 0)
 	_, err = cmd.Result()
 
@@ -71,7 +71,7 @@ func Init() error {
 }
 
 func PickUpWork() (int, error) {
-	key := build.CurioVersion + "_work_assigned_" + build.Language + build.Attempt
+	key := build.CurioVersion + "_work_assigned_" + build.Attempt
 	cmd := cli.Incr(key)
 	counter, err := cmd.Result()
 	return int(counter), err

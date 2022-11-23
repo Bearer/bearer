@@ -25,6 +25,7 @@ type MetricsReport struct {
 	URL        string  // full url
 	RepoSizeKB float64 // repository size in KB
 	Time       float64 // time it took in Seconds
+	Language   string
 	Memory     float64 // maximum memory used in MB
 
 	// Start of statistics report
@@ -60,10 +61,11 @@ func FakeScanRepository(repositoryUrl string, reportingChan chan *MetricsReport)
 	reportingChan <- metrics
 }
 
-func ScanRepository(repositoryUrl string, reportingChan chan *MetricsReport) {
+func ScanRepository(repositoryUrl string, language string, reportingChan chan *MetricsReport) {
 	metrics := &MetricsReport{
-		URL:    repositoryUrl,
-		Memory: 0,
+		URL:      repositoryUrl,
+		Memory:   0,
+		Language: language,
 	}
 
 	log.Debug().Msgf("processing repository %s", repositoryUrl)

@@ -64,7 +64,7 @@ func (client *GoogleSheets) CreateDocument(tagName string, parentFolderId string
 		counter++
 		req := client.sheet.Spreadsheets.Create(&sheets.Spreadsheet{
 			Properties: &sheets.SpreadsheetProperties{
-				Title: "Battle Report - " + tagName + " - " + build.Language + " (" + build.Attempt + ")",
+				Title: "Battle Report - " + tagName + " - (" + build.Attempt + ")",
 			},
 			Sheets: []*sheets.Sheet{
 				{
@@ -99,6 +99,7 @@ func (client *GoogleSheets) CreateDocument(tagName string, parentFolderId string
 			"Repo URL",
 			"Repo Size (KB)",
 			"Scan timing (seconds)",
+			"Language",
 			"Memory consumption",
 			"Number of Data Types",
 			"Number of Line of Code",
@@ -223,6 +224,11 @@ func (client *GoogleSheets) InsertMetrics(documentID string, metrics *metricssca
 		{
 			UserEnteredValue: &sheets.ExtendedValue{
 				NumberValue: &metrics.Time,
+			},
+		},
+		{
+			UserEnteredValue: &sheets.ExtendedValue{
+				StringValue: &metrics.Language,
 			},
 		},
 		{
