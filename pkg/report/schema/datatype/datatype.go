@@ -122,7 +122,7 @@ func dataTypeToSchema[D DataTypable](report detections.ReportDetection, detectio
 	}
 
 	selfUUID := dataType.GetUUID()
-	if dataType.GetUUID() == "" {
+	if selfUUID == "" {
 		selfUUID = idGenerator.GenerateId()
 	}
 
