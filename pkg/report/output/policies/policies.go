@@ -18,17 +18,17 @@ type PolicyInput struct {
 }
 
 type PolicyOutput struct {
-	LineNumber    string `json:"line_number,omitempty"`
-	Filename      string `json:"filename,omitempty"`
-	CategoryGroup string `json:"category_group,omitempty"`
+	LineNumber    string `json:"line_number,omitempty" yaml:"line_number,omitempty"`
+	Filename      string `json:"filename,omitempty" yaml:"filename,omitempty"`
+	CategoryGroup string `json:"category_group,omitempty" yaml:"category_group,omitempty"`
 }
 
 type PolicyResult struct {
-	PolicyName        string `json:"policy_name"`
-	PolicyDescription string `json:"policy_description"`
-	LineNumber        string `json:"line_number,omitempty"`
-	Filename          string `json:"filename,omitempty"`
-	CategoryGroup     string `json:"category_group,omitempty"`
+	PolicyName        string `json:"policy_name" yaml:"policy_name"`
+	PolicyDescription string `json:"policy_description" yaml:"policy_description"`
+	LineNumber        string `json:"line_number,omitempty" yaml:"line_number,omitempty"`
+	Filename          string `json:"filename,omitempty" yaml:"filename,omitempty"`
+	CategoryGroup     string `json:"category_group,omitempty" yaml:"category_group,omitempty"`
 }
 
 func GetOutput(dataflow *dataflow.DataFlow, config settings.Config) (map[string][]PolicyResult, error) {
