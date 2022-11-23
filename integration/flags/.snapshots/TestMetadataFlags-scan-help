@@ -35,7 +35,7 @@ Worker Flags
       --workers int                         number of processing workers to spawn (default 1)
 
 Report Flags
-  -f, --format string   Specify report format (json, yaml) (default "json")
+  -f, --format string   Specify report format (json, yaml)
       --output string   Specify output path for report
       --report string   Specify the kind of report (detectors, dataflow, policies, stats) (default "detectors")
 

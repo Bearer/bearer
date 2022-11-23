@@ -2,7 +2,7 @@ policy:
     only-policy: []
     skip-policy: []
 report:
-    format: json
+    format: ""
     output: ""
     report: detectors
 scan:

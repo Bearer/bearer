@@ -1,6 +1,8 @@
 package policies
 
 import (
+	"context"
+
 	"github.com/bearer/curio/pkg/classification/db"
 	"github.com/bearer/curio/pkg/commands/process/settings"
 	"github.com/bearer/curio/pkg/util/rego"
@@ -10,14 +12,31 @@ import (
 )
 
 type PolicyInput struct {
-	PolicyName        string             `json:"policy_name" yaml:"policy_name"`
-	PolicyId          string             `json:"policy_id" yaml:"policy_id"`
-	PolicyDescription string             `json:"policy_description" yaml:"policy_description"`
-	Dataflow          *dataflow.DataFlow `json:"dataflow" yaml:"dataflow"`
-	DataCategories    []db.DataCategory  `json:"data_categories" yaml:"data_categories"`
+	PolicyId       string             `json:"policy_id" yaml:"policy_id"`
+	Dataflow       *dataflow.DataFlow `json:"dataflow" yaml:"dataflow"`
+	DataCategories []db.DataCategory  `json:"data_categories" yaml:"data_categories"`
 }
 
-func GetOutput(dataflow *dataflow.DataFlow, config settings.Config) (output []regolib.Vars, err error) {
+type PolicyOutput struct {
+	LineNumber    string `json:"line_number,omitempty" yaml:"line_number,omitempty"`
+	Filename      string `json:"filename,omitempty" yaml:"filename,omitempty"`
+	CategoryGroup string `json:"category_group,omitempty" yaml:"category_group,omitempty"`
+}
+
+type PolicyResult struct {
+	PolicyName        string `json:"policy_name" yaml:"policy_name"`
+	PolicyDescription string `json:"policy_description" yaml:"policy_description"`
+	LineNumber        string `json:"line_number,omitempty" yaml:"line_number,omitempty"`
+	Filename          string `json:"filename,omitempty" yaml:"filename,omitempty"`
+	CategoryGroup     string `json:"category_group,omitempty" yaml:"category_group,omitempty"`
+}
+
+func GetOutput(dataflow *dataflow.DataFlow, config settings.Config) (map[string][]PolicyResult, error) {
+	ctx := context.TODO()
+
+	// policy results grouped by severity (critical, high, ...)
+	result := make(map[string][]PolicyResult)
+
 	for _, policy := range config.Policies {
 		result, err := rego.RunQuery(policy.Query,
 			PolicyInput{
@@ -32,8 +51,54 @@ func GetOutput(dataflow *dataflow.DataFlow, config settings.Config) (output []re
 			return nil, err
 		}
 
-		output = append(output, result)
+		// Create a prepared query that can be evaluated.
+		rs, err := query.Eval(
+			ctx,
+			rego.EvalInput(
+				PolicyInput{
+					PolicyId:       policy.Id,
+					Dataflow:       dataflow,
+					DataCategories: db.Default().DataCategories,
+				},
+			),
+		)
+		if err != nil {
+			return nil, err
+		}
+
+		log.Debug().Msgf("result %#v", rs)
+
+		if len(rs) > 0 {
+			jsonRes, err := json.Marshal(rs[0].Bindings)
+			if err != nil {
+				return nil, err
+			}
+
+			var policyGrouping map[string][]PolicyOutput
+			err = json.Unmarshal(jsonRes, &policyGrouping)
+			if err != nil {
+				return nil, err
+			}
+
+			for _, severity := range []string{
+				settings.LevelCritical,
+				settings.LevelHigh,
+				settings.LevelMedium,
+				settings.LevelLow,
+			} {
+				for _, policyOutput := range policyGrouping[severity] {
+					policyResult := PolicyResult{
+						PolicyName:        policy.Name,
+						PolicyDescription: policy.Description,
+						Filename:          policyOutput.Filename,
+						CategoryGroup:     policyOutput.CategoryGroup,
+					}
+
+					result[severity] = append(result[severity], policyResult)
+				}
+			}
+		}
 	}
 
-	return output, nil
+	return result, nil
 }

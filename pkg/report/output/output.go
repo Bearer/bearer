@@ -3,7 +3,9 @@ package output
 import (
 	"encoding/json"
 	"fmt"
+	"strings"
 
+	"github.com/TwiN/go-color"
 	"github.com/bearer/curio/pkg/commands/process/settings"
 	"github.com/bearer/curio/pkg/flag"
 	"github.com/bearer/curio/pkg/report/output/dataflow"
@@ -18,6 +20,8 @@ import (
 
 	"github.com/rs/zerolog"
 )
+
+var ErrUndefinedFormat = errors.New("undefined output format")
 
 func ReportJSON(report types.Report, output *zerolog.Event, config settings.Config) error {
 	outputDetections, err := getReportOutput(report, config)
@@ -86,6 +90,32 @@ func getReportOutput(report types.Report, config settings.Config) (any, error) {
 	return nil, fmt.Errorf(`--report flag "%s" is not supported`, config.Report.Report)
 }
 
+func getPolicyReportOutput(report types.Report, config settings.Config) (map[string][]policies.PolicyResult, error) {
+	detections, err := detectors.GetOutput(report)
+	if err != nil {
+		return nil, err
+	}
+
+	dataflow, err := dataflow.GetOutput(detections, config, true)
+	if err != nil {
+		return nil, err
+	}
+
+	return policies.GetOutput(dataflow, config)
+}
+
+func writePolicyBreachToOutput(outputStr *strings.Builder, policyBreach policies.PolicyResult, policySeverity string, displayColor string) {
+	outputStr.WriteString("\n")
+	outputStr.WriteString("\n")
+	outputStr.WriteString(color.With(displayColor, strings.ToUpper(policySeverity)) + ": ")
+	outputStr.WriteString(policyBreach.PolicyName + " policy breach with " + policyBreach.CategoryGroup + "\n")
+	outputStr.WriteString(policyBreach.PolicyDescription + "\n")
+	outputStr.WriteString("Filename: " + policyBreach.Filename)
+	outputStr.WriteString("\n")
+	outputStr.WriteString("\n")
+	outputStr.WriteString("===============================")
+}
+
 func getDataflow(report types.Report, config settings.Config, isInternal bool) (*dataflow.DataFlow, error) {
 	reportedDetections, err := detectors.GetOutput(report)
 	if err != nil {
@@ -94,7 +124,6 @@ func getDataflow(report types.Report, config settings.Config, isInternal bool) (
 
 	return dataflow.GetOutput(reportedDetections, config, isInternal)
 }
-
 type RiskDetection struct {
 	Type  string                     `json:"type"`
 	Value dataflowtypes.RiskDetector `json:"value"`
