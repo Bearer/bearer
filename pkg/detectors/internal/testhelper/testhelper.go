@@ -22,6 +22,7 @@ import (
 	"github.com/bearer/curio/pkg/report/source"
 
 	"github.com/stretchr/testify/assert"
+	zerolog "github.com/rs/zerolog/log"
 )
 
 func Extract(
@@ -82,6 +83,7 @@ type InMemoryReport struct {
 	Errors           []*detections.ErrorDetection
 	SecretLeaks      []*detections.Detection
 	CreateView       []*detections.Detection
+	SchemaGroupDetectorType reportdetectors.Type
 }
 
 func (report *InMemoryReport) AddDetection(
@@ -108,6 +110,8 @@ func (report *InMemoryReport) AddSchema(
 	schema schema.Schema,
 	source source.Source,
 ) {
+	// @todo FIXME: Remove this once all call sites are migrated to new schema group begin/add/end API
+	zerolog.Warn().Msg("call to deprecated AddSchema method")
 
 	report.Detections = append(report.Detections, &detections.Detection{
 		DetectorType: detectorType,
@@ -115,6 +119,27 @@ func (report *InMemoryReport) AddSchema(
 		Source:       source,
 		Type:         detections.TypeSchema,
 	})
+}
+
+func (report *InMemoryReport) SchemaGroupBegin(detectorType reportdetectors.Type, node *parser.Node, schema schema.Schema, source *source.Source) {
+	report.SchemaGroupDetectorType = detectorType
+}
+
+func (report *InMemoryReport) SchemaGroupIsOpen() bool {
+	return report.SchemaGroupDetectorType != ""
+}
+
+func (report *InMemoryReport) SchemaGroupAddItem(node *parser.Node, schema schema.Schema, source *source.Source) {
+	report.Detections = append(report.Detections, &detections.Detection{
+		DetectorType: report.SchemaGroupDetectorType,
+		Value:        schema,
+		Source:       *source,
+		Type:         detections.TypeSchema,
+	})
+}
+
+func (report *InMemoryReport) SchemaGroupEnd(idGenerator nodeid.Generator) {
+	report.SchemaGroupDetectorType = ""
 }
 
 func (report *InMemoryReport) AddDataType(
