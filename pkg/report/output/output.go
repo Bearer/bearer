@@ -4,7 +4,9 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"strings"
 
+	"github.com/TwiN/go-color"
 	"github.com/bearer/curio/pkg/commands/process/settings"
 	"github.com/bearer/curio/pkg/flag"
 	"github.com/bearer/curio/pkg/report/output/dataflow"
@@ -18,6 +20,36 @@ import (
 )
 
 var ErrUndefinedFormat = errors.New("undefined output format")
+
+func ReportPolicies(report types.Report, output *zerolog.Event, config settings.Config) error {
+	outputPolicies, err := getPolicyReportOutput(report, config)
+	if err != nil {
+		return err
+	}
+
+	outputStr := &strings.Builder{}
+	outputStr.WriteString("===============================")
+
+	for _, policyBreach := range outputPolicies[settings.LevelCritical] {
+		writePolicyBreachToOutput(outputStr, policyBreach, settings.LevelCritical, color.Red)
+	}
+
+	for _, policyBreach := range outputPolicies[settings.LevelHigh] {
+		writePolicyBreachToOutput(outputStr, policyBreach, settings.LevelHigh, color.Yellow)
+	}
+
+	for _, policyBreach := range outputPolicies[settings.LevelMedium] {
+		writePolicyBreachToOutput(outputStr, policyBreach, settings.LevelMedium, color.Cyan)
+	}
+
+	for _, policyBreach := range outputPolicies[settings.LevelLow] {
+		writePolicyBreachToOutput(outputStr, policyBreach, settings.LevelLow, color.Blue)
+	}
+
+	output.Msg(outputStr.String())
+
+	return nil
+}
 
 func ReportJSON(report types.Report, output *zerolog.Event, config settings.Config) error {
 	outputDetections, err := getReportOutput(report, config)
@@ -63,17 +95,7 @@ func getReportOutput(report types.Report, config settings.Config) (any, error) {
 		return dataflow.GetOutput(detections, config, false)
 
 	} else if config.Report.Report == flag.ReportPolicies {
-		detections, err := detectors.GetOutput(report)
-		if err != nil {
-			return nil, err
-		}
-
-		dataflow, err := dataflow.GetOutput(detections, config, true)
-		if err != nil {
-			return nil, err
-		}
-
-		return policies.GetOutput(dataflow, config)
+		return getPolicyReportOutput(report, config)
 	} else if config.Report.Report == flag.ReportStats {
 		lineOfCodeOutput, err := stats.GoclocDetectorOutput(config.Scan.Target)
 		if err != nil {
@@ -94,4 +116,30 @@ func getReportOutput(report types.Report, config settings.Config) (any, error) {
 	}
 
 	return nil, ErrUndefinedFormat
+}
+
+func getPolicyReportOutput(report types.Report, config settings.Config) (map[string][]policies.PolicyResult, error) {
+	detections, err := detectors.GetOutput(report)
+	if err != nil {
+		return nil, err
+	}
+
+	dataflow, err := dataflow.GetOutput(detections, config, true)
+	if err != nil {
+		return nil, err
+	}
+
+	return policies.GetOutput(dataflow, config)
+}
+
+func writePolicyBreachToOutput(outputStr *strings.Builder, policyBreach policies.PolicyResult, policySeverity string, displayColor string) {
+	outputStr.WriteString("\n")
+	outputStr.WriteString("\n")
+	outputStr.WriteString(color.With(displayColor, strings.ToUpper(policySeverity)) + ": ")
+	outputStr.WriteString(policyBreach.PolicyName + " policy breach with " + policyBreach.Category + " category\n")
+	outputStr.WriteString(policyBreach.PolicyDescription + "\n")
+	outputStr.WriteString("Filename: " + policyBreach.Filename)
+	outputStr.WriteString("\n")
+	outputStr.WriteString("\n")
+	outputStr.WriteString("===============================")
 }
