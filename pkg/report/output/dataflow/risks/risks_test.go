@@ -5,6 +5,7 @@ import (
 	"testing"
 
 	"github.com/bearer/curio/pkg/commands/process/settings"
+	"github.com/bearer/curio/pkg/report/customdetectors"
 	"github.com/bearer/curio/pkg/report/output/dataflow"
 	"github.com/bearer/curio/pkg/report/output/dataflow/types"
 	"github.com/bearer/curio/pkg/report/output/detectors"
@@ -15,8 +16,13 @@ import (
 func TestDataflowRisks(t *testing.T) {
 	config := settings.Config{
 		CustomDetector: map[string]settings.Rule{
+			"detect_ruby_logger": {
+				Stored: false,
+				Type:   customdetectors.TypeRisk,
+			},
 			"ruby_leak": {
 				Stored: true,
+				Type:   customdetectors.TypeRisk,
 			},
 		},
 	}
@@ -29,10 +35,10 @@ func TestDataflowRisks(t *testing.T) {
 		{
 			Name:        "single detection",
 			Config:      config,
-			FileContent: `{"type": "custom_classified", "detector_type":"rails_leak", "source": {"filename": "./users.rb", "line_number": 25}, "value": {"field_name": "User_name", "classification": {"data_type": {"name": "Username", "uuid": "123", "category_uuid": "456"} ,"decision":{"state": "valid"}}}}`,
+			FileContent: `{"type": "custom_classified", "detector_type":"detect_ruby_logger", "source": {"filename": "./users.rb", "line_number": 25}, "value": {"field_name": "User_name", "classification": {"data_type": {"name": "Username", "uuid": "123", "category_uuid": "456"} ,"decision":{"state": "valid"}}}}`,
 			Want: []types.RiskDetector{
 				{
-					DetectorID: "rails_leak",
+					DetectorID: "detect_ruby_logger",
 					DataTypes: []types.RiskDatatype{
 						{
 							Name:   "Username",
@@ -48,17 +54,17 @@ func TestDataflowRisks(t *testing.T) {
 		{
 			Name:        "single detection - no classification",
 			Config:      config,
-			FileContent: `{"type": "custom_classified", "detector_type":"rails_leak", "source": {"filename": "./users.rb", "line_number": 25}, "value": {"field_name": "User_name"}}`,
+			FileContent: `{"type": "custom_classified", "detector_type":"detect_ruby_logger", "source": {"filename": "./users.rb", "line_number": 25}, "value": {"field_name": "User_name"}}`,
 			Want:        []types.RiskDetector{},
 		},
 		{
 			Name:   "single detection - duplicates",
 			Config: config,
-			FileContent: `{"type": "custom_classified", "detector_type":"rails_leak", "source": {"filename": "./users.rb", "line_number": 25}, "value": {"field_name": "User_name", "classification": {"data_type": {"name": "Username", "uuid": "123", "category_uuid": "456"} ,"decision":{"state": "valid"}}}}
-{"type": "custom_classified", "detector_type":"rails_leak", "source": {"filename": "./users.rb", "line_number": 25}, "value": {"field_name": "User_name", "classification": {"data_type": {"name": "Username", "uuid": "123", "category_uuid": "456"} ,"decision":{"state": "valid"}}}}`,
+			FileContent: `{"type": "custom_classified", "detector_type":"detect_ruby_logger", "source": {"filename": "./users.rb", "line_number": 25}, "value": {"field_name": "User_name", "classification": {"data_type": {"name": "Username", "uuid": "123", "category_uuid": "456"} ,"decision":{"state": "valid"}}}}
+		{"type": "custom_classified", "detector_type":"detect_ruby_logger", "source": {"filename": "./users.rb", "line_number": 25}, "value": {"field_name": "User_name", "classification": {"data_type": {"name": "Username", "uuid": "123", "category_uuid": "456"} ,"decision":{"state": "valid"}}}}`,
 			Want: []types.RiskDetector{
 				{
-					DetectorID: "rails_leak",
+					DetectorID: "detect_ruby_logger",
 					DataTypes: []types.RiskDatatype{
 						{
 							Name:   "Username",
@@ -93,11 +99,11 @@ func TestDataflowRisks(t *testing.T) {
 		{
 			Name:   "single detection - multiple occurences - deterministic output",
 			Config: config,
-			FileContent: `{"type": "custom_classified", "detector_type":"rails_leak", "source": {"filename": "./users.rb", "line_number": 25}, "value": {"field_name": "User_name", "classification": {"data_type": {"name": "Username", "uuid": "123", "category_uuid": "456"} ,"decision":{"state": "valid"}}}}
-			{"type": "custom_classified", "detector_type":"rails_leak", "source": {"filename": "./users.rb", "line_number": 2}, "value": {"field_name": "User_name", "classification": {"data_type": {"name": "Username", "uuid": "123", "category_uuid": "456"} ,"decision":{"state": "valid"}}}}`,
+			FileContent: `{"type": "custom_classified", "detector_type":"detect_ruby_logger", "source": {"filename": "./users.rb", "line_number": 25}, "value": {"field_name": "User_name", "classification": {"data_type": {"name": "Username", "uuid": "123", "category_uuid": "456"} ,"decision":{"state": "valid"}}}}
+					{"type": "custom_classified", "detector_type":"detect_ruby_logger", "source": {"filename": "./users.rb", "line_number": 2}, "value": {"field_name": "User_name", "classification": {"data_type": {"name": "Username", "uuid": "123", "category_uuid": "456"} ,"decision":{"state": "valid"}}}}`,
 			Want: []types.RiskDetector{
 				{
-					DetectorID: "rails_leak",
+					DetectorID: "detect_ruby_logger",
 					DataTypes: []types.RiskDatatype{
 						{
 							Name:   "Username",
@@ -114,20 +120,22 @@ func TestDataflowRisks(t *testing.T) {
 		{
 			Name:   "multiple detections - same detector - deterministic output",
 			Config: config,
-			FileContent: `{"type": "custom_classified", "detector_type":"rails_leak", "source": {"filename": "./users.rb", "line_number": 25}, "value": {"field_name": "User_name", "classification": {"data_type": {"name": "Username", "uuid": "123", "category_uuid": "456"} ,"decision":{"state": "valid"}}}}
-{"type": "custom_classified", "detector_type":"rails_leak", "source": {"filename": "./address.rb", "line_number": 2}, "value": {"field_name": "User_name", "classification": {"data_type": {"name": "Physical Address", "uuid": "123", "category_uuid": "456"} ,"decision":{"state": "valid"}}}}`,
+			FileContent: `{"type": "custom_classified", "detector_type":"detect_ruby_logger", "source": {"filename": "./users.rb", "line_number": 25}, "value": {"field_name": "User_name", "classification": {"data_type": {"name": "Username", "uuid": "123", "category_uuid": "456"} ,"decision":{"state": "valid"}}}}
+		{"type": "custom_classified", "detector_type":"detect_ruby_logger", "source": {"filename": "./address.rb", "line_number": 2}, "value": {"field_name": "User_name", "classification": {"data_type": {"name": "Physical Address", "uuid": "123", "category_uuid": "456"} ,"decision":{"state": "valid"}}}}`,
 			Want: []types.RiskDetector{
 				{
-					DetectorID: "rails_leak",
+					DetectorID: "detect_ruby_logger",
 					DataTypes: []types.RiskDatatype{
 						{
-							Name: "Physical Address",
+							Name:   "Physical Address",
+							Stored: false,
 							Locations: []types.RiskLocation{
 								{Filename: "./address.rb", LineNumber: 2},
 							},
 						},
 						{
-							Name: "Username",
+							Name:   "Username",
+							Stored: false,
 							Locations: []types.RiskLocation{
 								{Filename: "./users.rb", LineNumber: 25},
 							},

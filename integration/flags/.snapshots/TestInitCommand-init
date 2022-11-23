@@ -8,14 +8,112 @@ report:
 scan:
     context: ""
     custom_detector:
+        detect_encrypted_ruby_class_properties:
+            disabled: false
+            type: verifier
+            languages:
+                - ruby
+            patterns:
+                - |
+                  class $CLASS_NAME < ApplicationRecord
+                    encrypts <$ARGUMENT>
+                  end
+            param_parenting: true
+            processors: []
+            singularilize: false
+            lowercase: false
+            metavars: {}
+            stored: false
         detect_ruby_logger:
             disabled: false
+            type: risk
             languages:
                 - ruby
             patterns:
                 - |
                   logger.info(<$ARGUMENT>)
             param_parenting: false
+            processors: []
+            singularilize: false
+            lowercase: false
+            metavars: {}
+            stored: false
+        detect_sql_create_public_table:
+            disabled: false
+            type: data_type
+            languages:
+                - sql
+            patterns:
+                - |
+                  CREATE TABLE public.$TABLE_NAME (
+                    <$COLUMN>
+                  )
+            param_parenting: true
+            processors:
+                - query: |
+                    verified_by = data.bearer.encrypted_tanker.verifiedBy
+                    encrypted = data.bearer.encrypted_tanker.encrypted
+                  modules:
+                    - name: bearer.encrypted_tanker
+                      content: |-
+                        package bearer.encrypted_tanker
+
+                        import future.keywords
+
+
+                        default encrypted := false
+
+                        encrypted = true {
+                            startswith(lower(input.target.value.field_name),  "tanker_encrypted")
+                        }
+
+                        verifiedBy := [
+                            {
+                                "detector": "tanker_encrypted",
+                            }
+                        ]
+                - query: |
+                    verified_by = data.bearer.encrypted_verified.verifiedBy
+                    encrypted = data.bearer.encrypted_verified.encrypted
+                  modules:
+                    - name: bearer.encrypted_verified
+                      content: |-
+                        package bearer.encrypted_verified
+
+                        import future.keywords
+
+
+                        default encrypted := false
+
+
+                        rubyEncrypted[location] {
+                            some detection in input.all_detections
+                            detection.detector_type == "detect_encrypted_ruby_class_properties"
+                            detection.value.classification.decision.state == "valid"
+                            location = detection
+                        }
+
+                        encrypted = true {
+                            some detection in rubyEncrypted
+                            detection.value.object_name == input.target.value.object_name
+                            detection.value.field_name == input.target.value.field_name
+                            input.target.value.field_name != ""
+                            input.target.value.object_name != ""
+                        }
+
+                        verifiedBy[verification] {
+                            some detection in rubyEncrypted
+                            detection.value.object_name == input.target.value.object_name
+                            detection.value.field_name == input.target.value.field_name
+
+                            verification = {
+                                "detector": "detect_encrypted_ruby_class_properties",
+                                "filename": detection.source.filename,
+                                "line_number": detection.source.line_number
+                            }
+                        }
+            singularilize: false
+            lowercase: false
             metavars: {}
             stored: false
     debug: false
