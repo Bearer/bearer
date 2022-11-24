@@ -35,8 +35,8 @@ scan:
                   end
             param_parenting: true
             processors: []
-            root_singularize: true
-            root_lowercase: true
+            root_singularize: false
+            root_lowercase: false
             metavars: {}
             stored: false
         detect_ruby_logger:
@@ -105,7 +105,7 @@ scan:
                                 "line_number": detection.source.line_number
                             }
                         }
-            root_singularize: false
+            root_singularize: true
             root_lowercase: true
             metavars: {}
             stored: false
