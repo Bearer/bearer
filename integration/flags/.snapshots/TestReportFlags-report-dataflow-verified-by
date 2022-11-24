@@ -20,9 +20,6 @@ data_types:
           locations:
             - filename: schema.sql
               line_number: 6
-              encrypted: true
-              verified_by:
-                - detector: tanker_encrypted
     - name: Email Address
       detectors:
         - name: detect_sql_create_public_table
