@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"time"
 
+	"github.com/bearer/curio/battle_tests/build"
 	"github.com/bearer/curio/battle_tests/config"
 	battletests "github.com/bearer/curio/battle_tests/config"
 	metricsscan "github.com/bearer/curio/battle_tests/metrics_scan"
@@ -63,7 +64,7 @@ func (client *GoogleSheets) CreateDocument(tagName string, parentFolderId string
 		counter++
 		req := client.sheet.Spreadsheets.Create(&sheets.Spreadsheet{
 			Properties: &sheets.SpreadsheetProperties{
-				Title: "Battle Report - " + tagName,
+				Title: "Battle Report - " + tagName + " - (" + build.Attempt + ")",
 			},
 			Sheets: []*sheets.Sheet{
 				{
@@ -98,6 +99,7 @@ func (client *GoogleSheets) CreateDocument(tagName string, parentFolderId string
 			"Repo URL",
 			"Repo Size (KB)",
 			"Scan timing (seconds)",
+			"Language",
 			"Memory consumption",
 			"Number of Data Types",
 			"Number of Line of Code",
@@ -222,6 +224,11 @@ func (client *GoogleSheets) InsertMetrics(documentID string, metrics *metricssca
 		{
 			UserEnteredValue: &sheets.ExtendedValue{
 				NumberValue: &metrics.Time,
+			},
+		},
+		{
+			UserEnteredValue: &sheets.ExtendedValue{
+				StringValue: &metrics.Language,
 			},
 		},
 		{
