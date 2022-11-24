@@ -9,7 +9,7 @@ encrypted = true {
     startswith(lower(input.target.value.field_name),  "tanker_encrypted")
 }
 
-verifiedBy := [
+verified_by := [
     {
         "detector": "tanker_encrypted",
     }
