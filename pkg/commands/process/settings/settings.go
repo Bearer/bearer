@@ -62,7 +62,7 @@ type Rule struct {
 	ParamParenting bool `yaml:"param_parenting"`
 	Processors     []Processor
 
-	RootSingularize bool `yaml:"root_signularize"`
+	RootSingularize bool `yaml:"root_singularize"`
 	RootLowercase   bool `yaml:"root_lowercase"`
 
 	Metavars map[string]MetaVar
