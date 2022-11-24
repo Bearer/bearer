@@ -6,7 +6,6 @@ import (
 	"github.com/bearer/curio/pkg/classification/db"
 	"github.com/bearer/curio/pkg/commands/process/settings"
 	"github.com/bearer/curio/pkg/util/rego"
-	"github.com/rs/zerolog/log"
 
 	"github.com/bearer/curio/pkg/report/output/dataflow"
 )
@@ -52,8 +51,6 @@ func GetOutput(dataflow *dataflow.DataFlow, config settings.Config) (map[string]
 		if err != nil {
 			return nil, err
 		}
-
-		log.Debug().Msgf("result %#v", rs)
 
 		if len(rs) > 0 {
 			jsonRes, err := json.Marshal(rs)
