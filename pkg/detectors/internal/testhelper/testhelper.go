@@ -16,7 +16,6 @@ import (
 	reportdetectors "github.com/bearer/curio/pkg/report/detectors"
 	"github.com/bearer/curio/pkg/report/frameworks"
 	"github.com/bearer/curio/pkg/report/interfaces"
-	"github.com/bearer/curio/pkg/report/operations"
 	"github.com/bearer/curio/pkg/report/schema"
 	"github.com/bearer/curio/pkg/report/schema/datatype"
 	"github.com/bearer/curio/pkg/report/secret"
@@ -139,19 +138,6 @@ func (report *InMemoryReport) AddCreateView(
 		Value:        createview,
 		Source:       createview.Source,
 		Type:         detections.TypeCreateView,
-	})
-}
-
-func (report *InMemoryReport) AddOperation(
-	detectorType reportdetectors.Type,
-	operation operations.Operation,
-	source source.Source,
-) {
-	report.Detections = append(report.Detections, &detections.Detection{
-		DetectorType: detectorType,
-		Value:        operation,
-		Source:       source,
-		Type:         detections.TypeOperation,
 	})
 }
 
