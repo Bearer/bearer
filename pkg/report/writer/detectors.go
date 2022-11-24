@@ -107,8 +107,8 @@ func (report *Detectors) AddSchema(
 	schema schema.Schema,
 	source source.Source,
 ) {
-	// @todo FIXME: Add classification here
-
+	// @todo FIXME: Remove this once all call sites are migrated to new schema group begin/add/end API
+	zerolog.Warn().Msg("call to deprecated AddSchema method")
 	report.AddDetection(detections.TypeSchema, detectorType, source, schema)
 }
 
