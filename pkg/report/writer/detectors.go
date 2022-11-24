@@ -18,7 +18,6 @@ import (
 	"github.com/bearer/curio/pkg/report/detectors"
 	"github.com/bearer/curio/pkg/report/frameworks"
 	"github.com/bearer/curio/pkg/report/interfaces"
-	"github.com/bearer/curio/pkg/report/operations"
 	"github.com/bearer/curio/pkg/report/schema"
 	"github.com/bearer/curio/pkg/report/schema/datatype"
 	"github.com/bearer/curio/pkg/report/secret"
@@ -52,14 +51,6 @@ func (report *Detectors) AddInterface(
 
 	classifiedDetection.Type = detections.TypeInterfaceClassified
 	report.Add(classifiedDetection)
-}
-
-func (report *Detectors) AddOperation(
-	detectorType detectors.Type,
-	operation operations.Operation,
-	source source.Source,
-) {
-	report.AddDetection(detections.TypeOperation, detectorType, source, operation)
 }
 
 func (report *Detectors) AddCreateView(

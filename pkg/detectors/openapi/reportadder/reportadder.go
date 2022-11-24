@@ -9,7 +9,6 @@ import (
 	reporttypes "github.com/bearer/curio/pkg/report"
 	"github.com/bearer/curio/pkg/report/detectors"
 	"github.com/bearer/curio/pkg/report/operations"
-	"github.com/bearer/curio/pkg/report/operations/operationshelper"
 	"github.com/bearer/curio/pkg/report/schema"
 	"github.com/bearer/curio/pkg/report/schema/schemahelper"
 	"github.com/bearer/curio/pkg/util/file"
@@ -52,28 +51,6 @@ func convertSchema(value string) string {
 		return schema.SimpleTypeBool
 	default:
 		return schema.SimpleTypeObject
-	}
-}
-
-func AddOperations(file *file.FileInfo, report reporttypes.Report, foundValues map[parser.Node]*operationshelper.Operation, servers []operations.Url) {
-	// we need sorted schemas so our reports are consistent and repeatable
-	var sortedOperations []*operationshelper.Operation
-	for _, operation := range foundValues {
-		sortedOperations = append(sortedOperations, operation)
-	}
-	sort.Slice(sortedOperations, func(i, j int) bool {
-		lineNumberA := sortedOperations[i].Source.LineNumber
-		lineNumberB := sortedOperations[j].Source.LineNumber
-		return *lineNumberA < *lineNumberB
-	})
-
-	for _, operation := range sortedOperations {
-		operation.Source.Language = file.Language
-		operation.Source.LanguageType = file.LanguageTypeString()
-		operation.Value.Path = standardizeOperationPath(stringutil.StripQuotes(operation.Value.Path))
-		operation.Value.Type = standardizeOperationType(stringutil.StripQuotes(operation.Value.Type))
-		operation.Value.Urls = servers
-		report.AddOperation(detectors.DetectorOpenAPI, operation.Value, operation.Source)
 	}
 }
 
