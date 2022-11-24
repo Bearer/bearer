@@ -8,7 +8,7 @@
       Language: (string) (len=4) "Ruby",
       LanguageType: (string) (len=11) "programming",
       LineNumber: (*int)(20),
-      ColumnNumber: (*int)(7),
+      ColumnNumber: (*int)(14),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -31,7 +31,7 @@
       Language: (string) (len=4) "Ruby",
       LanguageType: (string) (len=11) "programming",
       LineNumber: (*int)(21),
-      ColumnNumber: (*int)(7),
+      ColumnNumber: (*int)(14),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -54,7 +54,7 @@
       Language: (string) (len=4) "Ruby",
       LanguageType: (string) (len=11) "programming",
       LineNumber: (*int)(22),
-      ColumnNumber: (*int)(7),
+      ColumnNumber: (*int)(14),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -77,7 +77,7 @@
       Language: (string) (len=4) "Ruby",
       LanguageType: (string) (len=11) "programming",
       LineNumber: (*int)(23),
-      ColumnNumber: (*int)(7),
+      ColumnNumber: (*int)(14),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
@@ -100,7 +100,7 @@
       Language: (string) (len=4) "Ruby",
       LanguageType: (string) (len=11) "programming",
       LineNumber: (*int)(24),
-      ColumnNumber: (*int)(7),
+      ColumnNumber: (*int)(16),
       Text: (*string)(<nil>)
     },
     Value: (schema.Schema) {
