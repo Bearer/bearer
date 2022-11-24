@@ -86,7 +86,7 @@ func (detector *detector) ProcessFile(file *file.FileInfo, dir *file.Path, repor
 	}
 
 	datatypes := datatype.Discover(tree, detector.idGenerator)
-	report.AddDataType(detections.TypeSchema, detectors.DetectorRuby, detector.idGenerator, datatypes)
+	report.AddDataType(detections.TypeSchema, detectors.DetectorRuby, detector.idGenerator, datatypes, nil)
 
 	return true, nil
 }

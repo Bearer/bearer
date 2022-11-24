@@ -170,6 +170,7 @@ func (detector *Detector) extractData(captures []parser.Captures, rule config.Co
 			var err error
 
 			if param.ArgumentsExtract || param.ClassNameExtract {
+				// @ToDo: This is where we need to define the parent that will get sent as parent
 				paramTypes, err = detector.extractArguments(lang, capture[param.BuildFullName()], idGenerator, fileinfo, filePath)
 				if err != nil {
 					return err
@@ -204,7 +205,6 @@ func (detector *Detector) extractData(captures []parser.Captures, rule config.Co
 				for datatypeID, datatype := range paramTypes {
 					forExport[datatypeID] = datatype
 				}
-
 			}
 
 			if param.StringExtract {
@@ -233,7 +233,6 @@ func (detector *Detector) extractData(captures []parser.Captures, rule config.Co
 							}
 
 							forExport[matchNodeID] = matchType
-
 						}
 					}
 				}
@@ -241,9 +240,15 @@ func (detector *Detector) extractData(captures []parser.Captures, rule config.Co
 		}
 
 		detector.applyDatatypeTransformations(rule, forExport)
-
-		report.AddDataType(detections.TypeCustom, detectors.Type(rule.RuleName), idGenerator, forExport)
+		report.AddDataType(
+			detections.TypeCustom,
+			detectors.Type(rule.RuleName),
+			idGenerator,
+			forExport,
+			capture["rule"],
+		)
 	}
+
 	return nil
 }
 

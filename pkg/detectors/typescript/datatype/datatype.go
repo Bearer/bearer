@@ -27,7 +27,7 @@ func Discover(report report.Report, tree *parser.Tree, language *sitter.Language
 
 	datatype.PruneMap(datatypesFinder.GetValues())
 
-	report.AddDataType(detections.TypeSchema, detectors.DetectorTypescript, idGenerator, datatypesFinder.GetValues())
+	report.AddDataType(detections.TypeSchema, detectors.DetectorTypescript, idGenerator, datatypesFinder.GetValues(), nil)
 }
 
 func annotateDataTypes(finder *datatype.Finder, node *parser.Node, value *schemadatatype.DataType) bool {

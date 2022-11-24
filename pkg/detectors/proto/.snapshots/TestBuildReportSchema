@@ -18,7 +18,8 @@
       FieldUUID: (string) (len=1) "2",
       FieldType: (string) (len=15) "MemberAddresses",
       SimpleFieldType: (string) (len=6) "object",
-      Classification: (interface {}) <nil>
+      Classification: (interface {}) <nil>,
+      Parent: (*schema.Parent)(<nil>)
     }
   }),
   (*detections.Detection)({
@@ -40,7 +41,8 @@
       FieldUUID: (string) (len=1) "4",
       FieldType: (string) (len=6) "Member",
       SimpleFieldType: (string) (len=6) "object",
-      Classification: (interface {}) <nil>
+      Classification: (interface {}) <nil>,
+      Parent: (*schema.Parent)(<nil>)
     }
   }),
   (*detections.Detection)({
@@ -62,7 +64,8 @@
       FieldUUID: (string) (len=1) "6",
       FieldType: (string) (len=4) "bool",
       SimpleFieldType: (string) (len=7) "boolean",
-      Classification: (interface {}) <nil>
+      Classification: (interface {}) <nil>,
+      Parent: (*schema.Parent)(<nil>)
     }
   }),
   (*detections.Detection)({
@@ -84,7 +87,8 @@
       FieldUUID: (string) (len=1) "8",
       FieldType: (string) (len=6) "string",
       SimpleFieldType: (string) (len=6) "string",
-      Classification: (interface {}) <nil>
+      Classification: (interface {}) <nil>,
+      Parent: (*schema.Parent)(<nil>)
     }
   }),
   (*detections.Detection)({
@@ -106,7 +110,8 @@
       FieldUUID: (string) (len=1) "9",
       FieldType: (string) (len=6) "string",
       SimpleFieldType: (string) (len=6) "string",
-      Classification: (interface {}) <nil>
+      Classification: (interface {}) <nil>,
+      Parent: (*schema.Parent)(<nil>)
     }
   }),
   (*detections.Detection)({
@@ -128,7 +133,8 @@
       FieldUUID: (string) (len=2) "11",
       FieldType: (string) (len=5) "int32",
       SimpleFieldType: (string) (len=6) "number",
-      Classification: (interface {}) <nil>
+      Classification: (interface {}) <nil>,
+      Parent: (*schema.Parent)(<nil>)
     }
   }),
   (*detections.Detection)({
@@ -150,7 +156,8 @@
       FieldUUID: (string) (len=2) "12",
       FieldType: (string) (len=6) "string",
       SimpleFieldType: (string) (len=6) "string",
-      Classification: (interface {}) <nil>
+      Classification: (interface {}) <nil>,
+      Parent: (*schema.Parent)(<nil>)
     }
   }),
   (*detections.Detection)({
@@ -172,7 +179,8 @@
       FieldUUID: (string) (len=2) "14",
       FieldType: (string) (len=6) "string",
       SimpleFieldType: (string) (len=6) "string",
-      Classification: (interface {}) <nil>
+      Classification: (interface {}) <nil>,
+      Parent: (*schema.Parent)(<nil>)
     }
   }),
   (*detections.Detection)({
@@ -194,7 +202,8 @@
       FieldUUID: (string) (len=2) "15",
       FieldType: (string) (len=25) "google.protobuf.Timestamp",
       SimpleFieldType: (string) (len=6) "object",
-      Classification: (interface {}) <nil>
+      Classification: (interface {}) <nil>,
+      Parent: (*schema.Parent)(<nil>)
     }
   }),
   (*detections.Detection)({
@@ -216,7 +225,8 @@
       FieldUUID: (string) (len=2) "16",
       FieldType: (string) (len=25) "google.protobuf.Timestamp",
       SimpleFieldType: (string) (len=6) "object",
-      Classification: (interface {}) <nil>
+      Classification: (interface {}) <nil>,
+      Parent: (*schema.Parent)(<nil>)
     }
   }),
   (*detections.Detection)({
@@ -238,7 +248,8 @@
       FieldUUID: (string) (len=2) "18",
       FieldType: (string) (len=6) "string",
       SimpleFieldType: (string) (len=6) "string",
-      Classification: (interface {}) <nil>
+      Classification: (interface {}) <nil>,
+      Parent: (*schema.Parent)(<nil>)
     }
   }),
   (*detections.Detection)({
@@ -260,7 +271,8 @@
       FieldUUID: (string) (len=2) "20",
       FieldType: (string) (len=6) "string",
       SimpleFieldType: (string) (len=6) "string",
-      Classification: (interface {}) <nil>
+      Classification: (interface {}) <nil>,
+      Parent: (*schema.Parent)(<nil>)
     }
   }),
   (*detections.Detection)({
@@ -282,7 +294,8 @@
       FieldUUID: (string) (len=2) "21",
       FieldType: (string) (len=6) "string",
       SimpleFieldType: (string) (len=6) "string",
-      Classification: (interface {}) <nil>
+      Classification: (interface {}) <nil>,
+      Parent: (*schema.Parent)(<nil>)
     }
   }),
   (*detections.Detection)({
@@ -304,7 +317,8 @@
       FieldUUID: (string) (len=2) "22",
       FieldType: (string) (len=6) "string",
       SimpleFieldType: (string) (len=6) "string",
-      Classification: (interface {}) <nil>
+      Classification: (interface {}) <nil>,
+      Parent: (*schema.Parent)(<nil>)
     }
   }),
   (*detections.Detection)({
@@ -326,7 +340,8 @@
       FieldUUID: (string) (len=2) "23",
       FieldType: (string) (len=6) "string",
       SimpleFieldType: (string) (len=6) "string",
-      Classification: (interface {}) <nil>
+      Classification: (interface {}) <nil>,
+      Parent: (*schema.Parent)(<nil>)
     }
   }),
   (*detections.Detection)({
@@ -348,7 +363,8 @@
       FieldUUID: (string) (len=2) "24",
       FieldType: (string) (len=6) "string",
       SimpleFieldType: (string) (len=6) "string",
-      Classification: (interface {}) <nil>
+      Classification: (interface {}) <nil>,
+      Parent: (*schema.Parent)(<nil>)
     }
   }),
   (*detections.Detection)({
@@ -370,7 +386,8 @@
       FieldUUID: (string) (len=2) "25",
       FieldType: (string) (len=25) "google.protobuf.Timestamp",
       SimpleFieldType: (string) (len=6) "object",
-      Classification: (interface {}) <nil>
+      Classification: (interface {}) <nil>,
+      Parent: (*schema.Parent)(<nil>)
     }
   }),
   (*detections.Detection)({
@@ -392,7 +409,8 @@
       FieldUUID: (string) (len=2) "26",
       FieldType: (string) (len=25) "google.protobuf.Timestamp",
       SimpleFieldType: (string) (len=6) "object",
-      Classification: (interface {}) <nil>
+      Classification: (interface {}) <nil>,
+      Parent: (*schema.Parent)(<nil>)
     }
   }),
   (*detections.Detection)({
@@ -414,7 +432,8 @@
       FieldUUID: (string) (len=2) "27",
       FieldType: (string) (len=6) "string",
       SimpleFieldType: (string) (len=6) "string",
-      Classification: (interface {}) <nil>
+      Classification: (interface {}) <nil>,
+      Parent: (*schema.Parent)(<nil>)
     }
   }),
   (*detections.Detection)({
@@ -436,7 +455,8 @@
       FieldUUID: (string) (len=2) "28",
       FieldType: (string) (len=6) "string",
       SimpleFieldType: (string) (len=6) "string",
-      Classification: (interface {}) <nil>
+      Classification: (interface {}) <nil>,
+      Parent: (*schema.Parent)(<nil>)
     }
   }),
   (*detections.Detection)({
@@ -458,7 +478,8 @@
       FieldUUID: (string) (len=2) "29",
       FieldType: (string) (len=25) "google.protobuf.Timestamp",
       SimpleFieldType: (string) (len=6) "object",
-      Classification: (interface {}) <nil>
+      Classification: (interface {}) <nil>,
+      Parent: (*schema.Parent)(<nil>)
     }
   }),
   (*detections.Detection)({
@@ -480,7 +501,8 @@
       FieldUUID: (string) (len=2) "30",
       FieldType: (string) (len=6) "string",
       SimpleFieldType: (string) (len=6) "string",
-      Classification: (interface {}) <nil>
+      Classification: (interface {}) <nil>,
+      Parent: (*schema.Parent)(<nil>)
     }
   }),
   (*detections.Detection)({
@@ -502,7 +524,8 @@
       FieldUUID: (string) (len=2) "31",
       FieldType: (string) (len=6) "string",
       SimpleFieldType: (string) (len=6) "string",
-      Classification: (interface {}) <nil>
+      Classification: (interface {}) <nil>,
+      Parent: (*schema.Parent)(<nil>)
     }
   }),
   (*detections.Detection)({
@@ -524,7 +547,8 @@
       FieldUUID: (string) (len=2) "32",
       FieldType: (string) (len=11) "MemberPhone",
       SimpleFieldType: (string) (len=6) "object",
-      Classification: (interface {}) <nil>
+      Classification: (interface {}) <nil>,
+      Parent: (*schema.Parent)(<nil>)
     }
   }),
   (*detections.Detection)({
@@ -546,7 +570,8 @@
       FieldUUID: (string) (len=2) "33",
       FieldType: (string) (len=13) "SocialAccount",
       SimpleFieldType: (string) (len=6) "object",
-      Classification: (interface {}) <nil>
+      Classification: (interface {}) <nil>,
+      Parent: (*schema.Parent)(<nil>)
     }
   }),
   (*detections.Detection)({
@@ -568,7 +593,8 @@
       FieldUUID: (string) (len=2) "34",
       FieldType: (string) (len=14) "LoyaltyProgram",
       SimpleFieldType: (string) (len=6) "object",
-      Classification: (interface {}) <nil>
+      Classification: (interface {}) <nil>,
+      Parent: (*schema.Parent)(<nil>)
     }
   }),
   (*detections.Detection)({
@@ -590,7 +616,8 @@
       FieldUUID: (string) (len=2) "35",
       FieldType: (string) (len=13) "MarketingItem",
       SimpleFieldType: (string) (len=6) "object",
-      Classification: (interface {}) <nil>
+      Classification: (interface {}) <nil>,
+      Parent: (*schema.Parent)(<nil>)
     }
   }),
   (*detections.Detection)({
@@ -612,7 +639,8 @@
       FieldUUID: (string) (len=2) "36",
       FieldType: (string) (len=6) "string",
       SimpleFieldType: (string) (len=6) "string",
-      Classification: (interface {}) <nil>
+      Classification: (interface {}) <nil>,
+      Parent: (*schema.Parent)(<nil>)
     }
   }),
   (*detections.Detection)({
@@ -634,7 +662,8 @@
       FieldUUID: (string) (len=2) "37",
       FieldType: (string) (len=6) "string",
       SimpleFieldType: (string) (len=6) "string",
-      Classification: (interface {}) <nil>
+      Classification: (interface {}) <nil>,
+      Parent: (*schema.Parent)(<nil>)
     }
   }),
   (*detections.Detection)({
@@ -656,7 +685,8 @@
       FieldUUID: (string) (len=2) "38",
       FieldType: (string) (len=6) "string",
       SimpleFieldType: (string) (len=6) "string",
-      Classification: (interface {}) <nil>
+      Classification: (interface {}) <nil>,
+      Parent: (*schema.Parent)(<nil>)
     }
   }),
   (*detections.Detection)({
@@ -678,7 +708,8 @@
       FieldUUID: (string) (len=2) "39",
       FieldType: (string) (len=4) "bool",
       SimpleFieldType: (string) (len=7) "boolean",
-      Classification: (interface {}) <nil>
+      Classification: (interface {}) <nil>,
+      Parent: (*schema.Parent)(<nil>)
     }
   }),
   (*detections.Detection)({
@@ -700,7 +731,8 @@
       FieldUUID: (string) (len=2) "40",
       FieldType: (string) (len=6) "string",
       SimpleFieldType: (string) (len=6) "string",
-      Classification: (interface {}) <nil>
+      Classification: (interface {}) <nil>,
+      Parent: (*schema.Parent)(<nil>)
     }
   }),
   (*detections.Detection)({
@@ -722,7 +754,8 @@
       FieldUUID: (string) (len=2) "41",
       FieldType: (string) (len=4) "bool",
       SimpleFieldType: (string) (len=7) "boolean",
-      Classification: (interface {}) <nil>
+      Classification: (interface {}) <nil>,
+      Parent: (*schema.Parent)(<nil>)
     }
   }),
   (*detections.Detection)({
@@ -744,7 +777,8 @@
       FieldUUID: (string) (len=2) "43",
       FieldType: (string) (len=6) "string",
       SimpleFieldType: (string) (len=6) "string",
-      Classification: (interface {}) <nil>
+      Classification: (interface {}) <nil>,
+      Parent: (*schema.Parent)(<nil>)
     }
   }),
   (*detections.Detection)({
@@ -766,7 +800,8 @@
       FieldUUID: (string) (len=2) "44",
       FieldType: (string) (len=7) "Address",
       SimpleFieldType: (string) (len=6) "object",
-      Classification: (interface {}) <nil>
+      Classification: (interface {}) <nil>,
+      Parent: (*schema.Parent)(<nil>)
     }
   }),
   (*detections.Detection)({
@@ -788,7 +823,8 @@
       FieldUUID: (string) (len=2) "46",
       FieldType: (string) (len=6) "string",
       SimpleFieldType: (string) (len=6) "string",
-      Classification: (interface {}) <nil>
+      Classification: (interface {}) <nil>,
+      Parent: (*schema.Parent)(<nil>)
     }
   }),
   (*detections.Detection)({
@@ -810,7 +846,8 @@
       FieldUUID: (string) (len=2) "47",
       FieldType: (string) (len=6) "string",
       SimpleFieldType: (string) (len=6) "string",
-      Classification: (interface {}) <nil>
+      Classification: (interface {}) <nil>,
+      Parent: (*schema.Parent)(<nil>)
     }
   }),
   (*detections.Detection)({
@@ -832,7 +869,8 @@
       FieldUUID: (string) (len=2) "48",
       FieldType: (string) (len=6) "string",
       SimpleFieldType: (string) (len=6) "string",
-      Classification: (interface {}) <nil>
+      Classification: (interface {}) <nil>,
+      Parent: (*schema.Parent)(<nil>)
     }
   }),
   (*detections.Detection)({
@@ -854,7 +892,8 @@
       FieldUUID: (string) (len=2) "49",
       FieldType: (string) (len=6) "string",
       SimpleFieldType: (string) (len=6) "string",
-      Classification: (interface {}) <nil>
+      Classification: (interface {}) <nil>,
+      Parent: (*schema.Parent)(<nil>)
     }
   }),
   (*detections.Detection)({
@@ -876,7 +915,8 @@
       FieldUUID: (string) (len=2) "50",
       FieldType: (string) (len=6) "string",
       SimpleFieldType: (string) (len=6) "string",
-      Classification: (interface {}) <nil>
+      Classification: (interface {}) <nil>,
+      Parent: (*schema.Parent)(<nil>)
     }
   }),
   (*detections.Detection)({
@@ -898,7 +938,8 @@
       FieldUUID: (string) (len=2) "51",
       FieldType: (string) (len=6) "string",
       SimpleFieldType: (string) (len=6) "string",
-      Classification: (interface {}) <nil>
+      Classification: (interface {}) <nil>,
+      Parent: (*schema.Parent)(<nil>)
     }
   }),
   (*detections.Detection)({
@@ -920,7 +961,8 @@
       FieldUUID: (string) (len=2) "52",
       FieldType: (string) (len=25) "google.protobuf.Timestamp",
       SimpleFieldType: (string) (len=6) "object",
-      Classification: (interface {}) <nil>
+      Classification: (interface {}) <nil>,
+      Parent: (*schema.Parent)(<nil>)
     }
   }),
   (*detections.Detection)({
@@ -942,7 +984,8 @@
       FieldUUID: (string) (len=2) "53",
       FieldType: (string) (len=4) "bool",
       SimpleFieldType: (string) (len=7) "boolean",
-      Classification: (interface {}) <nil>
+      Classification: (interface {}) <nil>,
+      Parent: (*schema.Parent)(<nil>)
     }
   }),
   (*detections.Detection)({
@@ -964,7 +1007,8 @@
       FieldUUID: (string) (len=2) "54",
       FieldType: (string) (len=6) "string",
       SimpleFieldType: (string) (len=6) "string",
-      Classification: (interface {}) <nil>
+      Classification: (interface {}) <nil>,
+      Parent: (*schema.Parent)(<nil>)
     }
   })
 }

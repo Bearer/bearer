@@ -123,6 +123,7 @@ func (report *InMemoryReport) AddDataType(
 	detectorType reportdetectors.Type,
 	idGenerator nodeid.Generator,
 	values map[parser.NodeID]*datatype.DataType,
+	parent *parser.Node,
 ) {
 
 	datatype.Export(report, detectionType, detectorType, idGenerator, values)
