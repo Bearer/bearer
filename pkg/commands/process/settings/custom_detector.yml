@@ -27,12 +27,6 @@ detect_sql_create_public_table:
     - sql
   processors:
     - query: |
-        verified_by = data.bearer.encrypted_tanker.verified_by
-        encrypted = data.bearer.encrypted_tanker.encrypted
-      modules:
-        - path: processors/encrypted_tanker.rego
-          name: bearer.encrypted_tanker
-    - query: |
         verified_by = data.bearer.encrypted_verified.verified_by
         encrypted = data.bearer.encrypted_verified.encrypted
       modules:
