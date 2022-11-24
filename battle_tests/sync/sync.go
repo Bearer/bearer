@@ -48,7 +48,7 @@ func GetDocumentID(sheetClient *sheet.GoogleSheets) (documentID string, err erro
 	}
 }
 
-func DoWork(ctx context.Context, items []repodb.Item, docID string, sheetClient *sheet.GoogleSheets) context.Context {
+func DoWork(ctx context.Context, items []repodb.ItemWithLanguage, docID string, sheetClient *sheet.GoogleSheets) context.Context {
 	selfContext, selfDone := context.WithCancel(ctx)
 	go func() {
 		for {
@@ -73,7 +73,7 @@ func DoWork(ctx context.Context, items []repodb.Item, docID string, sheetClient 
 			metricsReport := make(chan *metricsscan.MetricsReport, 1)
 
 			log.Debug().Msgf("picked up work for %s", repository.FullName)
-			metricsscan.ScanRepository(repository.HtmlUrl, metricsReport)
+			metricsscan.ScanRepository(repository.HtmlUrl, repository.Language, metricsReport)
 			// Uncomment this line if you want to fake the process
 			// metricsscan.FakeScanRepository(repository.URL(), metricsReport)
 
