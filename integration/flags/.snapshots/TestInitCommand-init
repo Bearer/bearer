@@ -20,8 +20,23 @@ scan:
                   end
             param_parenting: true
             processors: []
-            singularilize: false
-            lowercase: false
+            root_singularize: true
+            root_lowercase: true
+            metavars: {}
+            stored: false
+        detect_ruby_classes:
+            disabled: false
+            type: verifier
+            languages:
+                - ruby
+            patterns:
+                - |
+                  class $CLASS_NAME
+                  end
+            param_parenting: true
+            processors: []
+            root_singularize: true
+            root_lowercase: true
             metavars: {}
             stored: false
         detect_ruby_logger:
@@ -34,8 +49,8 @@ scan:
                   logger.info(<$ARGUMENT>)
             param_parenting: false
             processors: []
-            singularilize: false
-            lowercase: false
+            root_singularize: false
+            root_lowercase: false
             metavars: {}
             stored: false
         detect_sql_create_public_table:
@@ -90,8 +105,8 @@ scan:
                                 "line_number": detection.source.line_number
                             }
                         }
-            singularilize: false
-            lowercase: false
+            root_singularize: false
+            root_lowercase: true
             metavars: {}
             stored: false
     debug: false
