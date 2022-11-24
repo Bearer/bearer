@@ -18,7 +18,10 @@ high[item] {
     location = data_type.locations[_]
     item := {
         "category_group": category.group_name,
-        "filename": location.filename
+        "filename": location.filename,
+        "line_number": location.line_number,
+        "parent_line_number": data_type.parent.line_number,
+        "parent_content": data_type.parent.content
     }
 }
 
@@ -35,6 +38,9 @@ critical[item] {
     location = data_type.locations[_]
     item := {
         "category_group": category.group_name,
-        "filename": location.filename
+        "filename": location.filename,
+        "line_number": location.line_number,
+        "parent_line_number": data_type.parent.line_number,
+        "parent_content": data_type.parent.content
     }
 }

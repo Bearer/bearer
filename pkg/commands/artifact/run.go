@@ -113,6 +113,8 @@ func Run(ctx context.Context, opts flag.Options, targetKind TargetKind) (err err
 	}()
 
 	scanSettings, err := settings.FromOptions(opts)
+	scanSettings.Target = opts.Target
+
 	if err != nil {
 		return err
 	}
@@ -147,7 +149,7 @@ func (r *runner) Report(config settings.Config, report types.Report) error {
 	}
 
 	if config.Report.Report == flag.ReportPolicies && config.Report.Format == "" {
-		// for polict report, default report format is NOT JSON
+		// for policy report, default report format is NOT JSON
 		err := reportoutput.ReportPolicies(report, logger, config)
 		if err != nil {
 			return fmt.Errorf("error generating report %w", err)

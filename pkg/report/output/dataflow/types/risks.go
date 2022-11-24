@@ -1,5 +1,7 @@
 package types
 
+import "github.com/bearer/curio/pkg/report/schema"
+
 type RiskDetector struct {
 	DetectorID string         `json:"detector_id" yaml:"detector_id"`
 	DataTypes  []RiskDatatype `json:"data_types" yaml:"data_types"`
@@ -11,6 +13,7 @@ type RiskDatatype struct {
 	CategoryUUID string         `json:"category_uuid,omitempty" yaml:"category_uuid,omitempty"`
 	Stored       bool           `json:"stored" yaml:"stored"`
 	Locations    []RiskLocation `json:"locations" yaml:"locations"`
+	Parent       *schema.Parent `json:"parent" yaml:"parent"`
 }
 
 type RiskLocation struct {

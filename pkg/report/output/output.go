@@ -134,18 +134,6 @@ func getPolicyReportOutput(report types.Report, config settings.Config) (map[str
 	return policies.GetOutput(dataflow, config)
 }
 
-func writePolicyBreachToOutput(outputStr *strings.Builder, policyBreach policies.PolicyResult, policySeverity string, displayColor string) {
-	outputStr.WriteString("\n")
-	outputStr.WriteString("\n")
-	outputStr.WriteString(color.With(displayColor, strings.ToUpper(policySeverity)) + ": ")
-	outputStr.WriteString(policyBreach.PolicyName + ", policy breached with " + policyBreach.CategoryGroup + "\n")
-	outputStr.WriteString(policyBreach.PolicyDescription + "\n")
-	outputStr.WriteString("Filename: " + policyBreach.Filename)
-	outputStr.WriteString("\n")
-	outputStr.WriteString("\n")
-	outputStr.WriteString("===============================")
-}
-
 func getDataflow(report types.Report, config settings.Config, isInternal bool) (*dataflow.DataFlow, error) {
 	reportedDetections, err := detectors.GetOutput(report)
 	if err != nil {
@@ -153,4 +141,35 @@ func getDataflow(report types.Report, config settings.Config, isInternal bool) (
 	}
 
 	return dataflow.GetOutput(reportedDetections, config, isInternal)
+}
+
+func writePolicyBreachToOutput(outputStr *strings.Builder, policyBreach policies.PolicyResult, policySeverity string, displayColor string) {
+	outputStr.WriteString("\n")
+	outputStr.WriteString("\n")
+	outputStr.WriteString(color.With(displayColor, strings.ToUpper(policySeverity)) + ": ")
+	outputStr.WriteString(policyBreach.PolicyName + ", policy breached with " + policyBreach.CategoryGroup + "\n")
+	outputStr.WriteString(policyBreach.PolicyDescription + "\n")
+	outputStr.WriteString("\n")
+	outputStr.WriteString("File: " + policyBreach.Filename + "\n")
+	outputStr.WriteString("\n")
+	outputStr.WriteString(highlightCodeExtract(policyBreach.LineNumber, policyBreach.ParentLineNumber, policyBreach.ParentContent))
+	outputStr.WriteString("\n")
+	outputStr.WriteString("\n")
+	outputStr.WriteString("===============================")
+}
+
+func highlightCodeExtract(lineNumber int, extractStartLineNumber int, extract string) string {
+	result := ""
+	targetIndex := lineNumber - extractStartLineNumber
+	for index, line := range strings.Split(extract, "\n") {
+		result += fmt.Sprint(extractStartLineNumber+index) + " "
+
+		if index == targetIndex {
+			result += color.With(color.Red, line) + "\n"
+		} else {
+			result += line + "\n"
+		}
+	}
+
+	return result
 }
