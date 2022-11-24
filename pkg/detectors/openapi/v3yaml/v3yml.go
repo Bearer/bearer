@@ -1,8 +1,6 @@
 package v3yaml
 
 import (
-	"log"
-
 	"github.com/bearer/curio/pkg/detectors/openapi/queries"
 	"github.com/bearer/curio/pkg/detectors/openapi/reportadder"
 	yamlparser "github.com/bearer/curio/pkg/detectors/openapi/yaml"
@@ -68,10 +66,6 @@ func ProcessFile(idGenerator nodeid.Generator, file *file.FileInfo, report repor
 		return false, err
 	}
 
-	Urls := queries.FindUrls(file)
-	log.Printf("%#v", Urls)
-
-	reportadder.AddOperations(file, report, foundPaths, Urls)
 	reportadder.AddSchema(file, report, foundSchemas)
 
 	return true, err
