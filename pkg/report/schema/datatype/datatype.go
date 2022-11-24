@@ -70,18 +70,6 @@ func (datatype *DataType) GetType() string {
 	return datatype.Type
 }
 
-func (datatype *DataType) GetParent() *parser.Node {
-	return datatype.Node.Parent().Parent().Parent()
-}
-
-func (datatype *DataType) GetParentStartLine() int {
-	return datatype.GetParent().LineNumber()
-}
-
-func (datatype *DataType) GetParentContent() string {
-	return datatype.GetParent().Content()
-}
-
 func (datatype *DataType) SetUUID(UUID string) {
 	datatype.UUID = UUID
 }
@@ -104,9 +92,6 @@ type DataTypable interface {
 	GetNode() *parser.Node
 	GetProperties() map[string]DataTypable
 	SetProperty(string, DataTypable)
-	GetParent() *parser.Node
-	GetParentStartLine() int
-	GetParentContent() string
 }
 
 func ExportClassified[D DataTypable](report detections.ReportDetection, detectionType detections.DetectionType, detectorType detectors.Type, idGenerator nodeid.Generator, values map[parser.NodeID]D, parent *parser.Node) {
@@ -144,39 +129,32 @@ func dataTypeToSchema[D DataTypable](report detections.ReportDetection, detectio
 	selfName := dataType.GetName()
 
 	if shouldExport {
-		if dataType.GetParent() != nil {
-			report.AddDetection(detectionType, detectorType, dataType.GetNode().Source(false),
-				schema.Schema{
-					ObjectName:      parentName,
-					FieldName:       selfName,
-					ObjectUUID:      parentUUID,
-					FieldUUID:       selfUUID,
-					FieldType:       dataType.GetTextType(),
-					SimpleFieldType: dataType.GetType(),
-					Classification:  dataType.GetClassification(),
-					ParentStartLine: dataType.GetParentStartLine(),
-					ParentContent:   dataType.GetParentContent(),
-				},
-			)
-		} else {
-			report.AddDetection(detectionType, detectorType, dataType.GetNode().Source(false),
-				schema.Schema{
-					ObjectName:      parentName,
-					FieldName:       selfName,
-					ObjectUUID:      parentUUID,
-					FieldUUID:       selfUUID,
-					FieldType:       dataType.GetTextType(),
-					SimpleFieldType: dataType.GetType(),
-					Classification:  dataType.GetClassification(),
-				},
-			)
+		var parentSchema *schema.Parent
+
+		if parent != nil {
+			parentSchema = &schema.Parent{
+				Content:    parent.Content(),
+				LineNumber: parent.LineNumber(),
+			}
 		}
+		report.AddDetection(detectionType, detectorType, dataType.GetNode().Source(false),
+			schema.Schema{
+				ObjectName:      parentName,
+				FieldName:       selfName,
+				ObjectUUID:      parentUUID,
+				FieldUUID:       selfUUID,
+				FieldType:       dataType.GetTextType(),
+				SimpleFieldType: dataType.GetType(),
+				Classification:  dataType.GetClassification(),
+				Parent:          parentSchema,
+			},
+		)
 	}
 
 	sortedProperties := SortStringMap(dataType.GetProperties())
 
 	for _, property := range sortedProperties {
-		dataTypeToSchema(report, detectionType, detectorType, idGenerator, property, selfName, selfUUID, true, nil)
+		dataTypeToSchema(report, detectionType, detectorType, idGenerator, property, selfName, selfUUID, true, parent)
 	}
 }
 
