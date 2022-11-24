@@ -6,6 +6,7 @@ import (
 	"fmt"
 
 	"github.com/bearer/curio/pkg/commands/process/settings"
+	"github.com/bearer/curio/pkg/report/customdetectors"
 	"github.com/bearer/curio/pkg/report/detections"
 	"github.com/bearer/curio/pkg/report/output/dataflow/components"
 	"github.com/bearer/curio/pkg/report/output/dataflow/datatypes"
@@ -64,15 +65,37 @@ func GetOutput(input []interface{}, config settings.Config, isInternal bool) (*D
 
 		switch detectionType {
 		case detections.TypeSchemaClassified:
-			err = dataTypesHolder.AddSchema(castDetection)
+			err = dataTypesHolder.AddSchema(castDetection, nil)
 			if err != nil {
 				return nil, err
 			}
 		case detections.TypeCustomClassified:
-			err := risksHolder.AddSchema(castDetection)
-			if err != nil {
-				return nil, err
+			ruleName := string(castDetection.DetectorType)
+			customDetector, ok := config.CustomDetector[ruleName]
+			if !ok {
+				return nil, fmt.Errorf("there is a custom detector in report that is not in the config %s", ruleName)
 			}
+
+			switch customDetector.Type {
+			case customdetectors.TypeVerfifier:
+				continue
+			case customdetectors.TypeRisk:
+				err := risksHolder.AddSchema(castDetection)
+				if err != nil {
+					return nil, err
+				}
+			case customdetectors.TypeDatatype:
+				extras, err := datatypes.GetExtras(customDetector, input, detection)
+				if err != nil {
+					return nil, err
+				}
+
+				err = dataTypesHolder.AddSchema(castDetection, extras)
+				if err != nil {
+					return nil, err
+				}
+			}
+
 		case detections.TypeDependencyClassified:
 			err := componentsHolder.AddDependency(detection)
 			if err != nil {

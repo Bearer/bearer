@@ -9,6 +9,7 @@ import (
 	"gopkg.in/yaml.v2"
 
 	"github.com/bearer/curio/pkg/flag"
+	"github.com/bearer/curio/pkg/util/rego"
 )
 
 type Config struct {
@@ -26,28 +27,51 @@ var LevelHigh = "high"
 var LevelMedium = "medium"
 var LevelLow = "low"
 
+type Modules []*PolicyModule
+
 type Policy struct {
 	Query       string
-	Name        string
 	Id          string
+	Name        string
 	Description string
-	Modules     []*PolicyModule
 	Level       PolicyLevel
+	Modules     Modules
 }
 
 type PolicyModule struct {
-	Path    string
+	Path    string `yaml:"path,omitempty"`
 	Name    string
 	Content string
 }
 
+func (modules Modules) ToRegoModules() (output []rego.Module) {
+	for _, module := range modules {
+		output = append(output, rego.Module{
+			Name:    module.Name,
+			Content: module.Content,
+		})
+	}
+	return
+}
+
 type Rule struct {
 	Disabled       bool
+	Type           string
 	Languages      []string
 	Patterns       []string
 	ParamParenting bool `yaml:"param_parenting"`
-	Metavars       map[string]MetaVar
-	Stored         bool
+	Processors     []Processor
+
+	RootSingularize bool `yaml:"root_singularize"`
+	RootLowercase   bool `yaml:"root_lowercase"`
+
+	Metavars map[string]MetaVar
+	Stored   bool
+}
+
+type Processor struct {
+	Query   string
+	Modules Modules
 }
 
 type MetaVar struct {
@@ -65,6 +89,9 @@ var defaultPolicies []byte
 //go:embed policies/*
 var policiesFs embed.FS
 
+//go:embed processors/*
+var processorsFs embed.FS
+
 var CustomDetectorKey string = "scan.custom_detector"
 var PoliciesKey string = "scan.policies"
 
@@ -77,9 +104,24 @@ func FromOptions(opts flag.Options) (Config, error) {
 		}
 	}
 
+	for _, customDetector := range rules {
+		for _, processor := range customDetector.Processors {
+			for _, module := range processor.Modules {
+				if module.Path != "" {
+					content, err := processorsFs.ReadFile(module.Path)
+					if err != nil {
+						return Config{}, err
+					}
+					module.Content = string(content)
+					module.Path = ""
+				}
+			}
+		}
+	}
+
 	policies := DefaultPolicies()
 	if viper.IsSet(PoliciesKey) {
-		err := viper.UnmarshalKey(PoliciesKey, &rules)
+		err := viper.UnmarshalKey(PoliciesKey, &policies)
 		if err != nil {
 			return Config{}, err
 		}

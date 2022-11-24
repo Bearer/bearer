@@ -18,6 +18,7 @@ import (
 	"github.com/bearer/curio/pkg/report/detections"
 	schemadatatype "github.com/bearer/curio/pkg/report/schema/datatype"
 	"github.com/bearer/curio/pkg/util/file"
+	pluralize "github.com/gertd/go-pluralize"
 
 	"github.com/bearer/curio/pkg/parser/nodeid"
 	"github.com/bearer/curio/pkg/parser/sitter/sql"
@@ -33,6 +34,7 @@ type Detector struct {
 	idGenerator      nodeid.Generator
 	paramIdGenerator nodeid.Generator
 	compiledRules    []config.CompiledRule
+	pluralize        *pluralize.Client
 
 	Ruby language.Detector
 	Sql  language.Detector
@@ -46,6 +48,7 @@ func New(idGenerator nodeid.Generator) types.Detector {
 
 	detector.Ruby = &rubydetector.Detector{}
 	detector.Sql = &sqldetector.Detector{}
+	detector.pluralize = pluralize.NewClient()
 
 	return detector
 }
@@ -71,6 +74,8 @@ func (detector *Detector) CompileRules(rulesConfig map[string]settings.Rule) err
 				compiledRule.RuleName = ruleName
 				compiledRule.Metavars = rule.Metavars
 				compiledRule.ParamParenting = rule.ParamParenting
+				compiledRule.RootLowercase = rule.RootLowercase
+				compiledRule.RootSingularize = rule.RootSingularize
 				compiledRules = append(compiledRules, compiledRule)
 			}
 		}
@@ -234,6 +239,7 @@ func (detector *Detector) extractData(captures []parser.Captures, rule config.Co
 			}
 		}
 
+		detector.applyDatatypeTransformations(rule, forExport)
 		report.AddDataType(
 			detections.TypeCustom,
 			detectors.Type(rule.RuleName),
@@ -244,6 +250,18 @@ func (detector *Detector) extractData(captures []parser.Captures, rule config.Co
 	}
 
 	return nil
+}
+
+func (detector *Detector) applyDatatypeTransformations(rule config.CompiledRule, datatypes map[parser.NodeID]*schemadatatype.DataType) {
+	for _, datatype := range datatypes {
+		if rule.RootSingularize {
+			datatype.Name = detector.pluralize.Singular(datatype.Name)
+		}
+
+		if rule.RootLowercase {
+			datatype.Name = strings.ToLower(datatype.Name)
+		}
+	}
 }
 
 func filterCaptures(params []config.Param, captures []parser.Captures) (filtered []parser.Captures, err error) {

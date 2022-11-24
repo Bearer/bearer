@@ -1,14 +1,13 @@
 package policies
 
 import (
-	"context"
 	"encoding/json"
 
 	"github.com/bearer/curio/pkg/classification/db"
 	"github.com/bearer/curio/pkg/commands/process/settings"
+	"github.com/bearer/curio/pkg/util/rego"
+
 	"github.com/bearer/curio/pkg/report/output/dataflow"
-	"github.com/open-policy-agent/opa/rego"
-	"github.com/rs/zerolog/log"
 )
 
 type PolicyInput struct {
@@ -32,42 +31,29 @@ type PolicyResult struct {
 }
 
 func GetOutput(dataflow *dataflow.DataFlow, config settings.Config) (map[string][]PolicyResult, error) {
-	ctx := context.TODO()
-
 	// policy results grouped by severity (critical, high, ...)
 	result := make(map[string][]PolicyResult)
 
 	for _, policy := range config.Policies {
-		options := []func(r *rego.Rego){rego.Query(policy.Query)}
-		for _, module := range policy.Modules {
-			options = append(options, rego.Module(module.Name, module.Content))
-		}
-
-		r := rego.New(options...)
-		query, err := r.PrepareForEval(ctx)
-		if err != nil {
-			return nil, err
-		}
 
 		// Create a prepared query that can be evaluated.
-		rs, err := query.Eval(
-			ctx,
-			rego.EvalInput(
-				PolicyInput{
-					PolicyId:       policy.Id,
-					Dataflow:       dataflow,
-					DataCategories: db.Default().DataCategories,
-				},
-			),
-		)
+		rs, err := rego.RunQuery(policy.Query,
+			PolicyInput{
+				PolicyId:       policy.Id,
+				Dataflow:       dataflow,
+				DataCategories: db.Default().DataCategories,
+			},
+			policy.Modules.ToRegoModules())
 		if err != nil {
 			return nil, err
 		}
 
-		log.Debug().Msgf("result %#v", rs)
+		if err != nil {
+			return nil, err
+		}
 
 		if len(rs) > 0 {
-			jsonRes, err := json.Marshal(rs[0].Bindings)
+			jsonRes, err := json.Marshal(rs)
 			if err != nil {
 				return nil, err
 			}

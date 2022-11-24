@@ -25,7 +25,13 @@ type detectorHolder struct {
 
 type fileHolder struct {
 	name        string
-	lineNumbers map[int]int // group occurences by line number
+	lineNumbers map[int]*lineNumberHolder // group occurences by line number
+}
+
+type lineNumberHolder struct {
+	lineNumber int
+	encrypted  *bool
+	verifiedBy []types.DatatypeVerifiedBy
 }
 
 func New() *Holder {
@@ -34,21 +40,21 @@ func New() *Holder {
 	}
 }
 
-func (holder *Holder) AddSchema(detection detections.Detection) error {
+func (holder *Holder) AddSchema(detection detections.Detection, extras *extraFields) error {
 	classification, err := detectiondecoder.GetSchemaClassification(detection)
 	if err != nil {
 		return err
 	}
 
 	if classification.Decision.State == classify.Valid {
-		holder.addDatatype(classification.DataType.Name, string(detection.DetectorType), detection.Source.Filename, *detection.Source.LineNumber)
+		holder.addDatatype(classification.DataType.Name, string(detection.DetectorType), detection.Source.Filename, *detection.Source.LineNumber, extras)
 	}
 
 	return nil
 }
 
 // addDatatype adds datatype to hash list and at the same time blocks duplicates
-func (holder *Holder) addDatatype(datatypeName string, detectorName string, fileName string, lineNumber int) {
+func (holder *Holder) addDatatype(datatypeName string, detectorName string, fileName string, lineNumber int, extras *extraFields) {
 	// create datatype entry if it doesn't exist
 	if _, exists := holder.datatypes[datatypeName]; !exists {
 		holder.datatypes[datatypeName] = datatypeHolder{
@@ -71,21 +77,25 @@ func (holder *Holder) addDatatype(datatypeName string, detectorName string, file
 	if _, exists := detector.files[fileName]; !exists {
 		detector.files[fileName] = &fileHolder{
 			name:        fileName,
-			lineNumbers: make(map[int]int),
+			lineNumbers: make(map[int]*lineNumberHolder),
 		}
 	}
 
 	file := datatype.detectors[detectorName].files[fileName]
 	// create line number entry if it doesn't exist
-	if _, exists := detector.files[fileName]; !exists {
-		detector.files[fileName] = &fileHolder{
-			name:        fileName,
-			lineNumbers: make(map[int]int),
+
+	if _, exists := file.lineNumbers[lineNumber]; !exists {
+		file.lineNumbers[lineNumber] = &lineNumberHolder{
+			lineNumber: lineNumber,
 		}
 	}
 
-	file.lineNumbers[lineNumber] = lineNumber
+	lineEntry := file.lineNumbers[lineNumber]
 
+	if extras != nil {
+		lineEntry.encrypted = extras.encrypted
+		lineEntry.verifiedBy = extras.verifiedBy
+	}
 }
 
 func (holder *Holder) ToDataFlow() []types.Datatype {
@@ -108,10 +118,13 @@ func (holder *Holder) ToDataFlow() []types.Datatype {
 
 			for _, fileHolder := range maputil.ToSortedSlice(detectorHolder.files) {
 				for _, lineNumber := range maputil.ToSortedSlice(fileHolder.lineNumbers) {
-					constructedDetector.Locations = append(constructedDetector.Locations, types.DatatypeLocation{
+					location := types.DatatypeLocation{
 						Filename:   fileHolder.name,
-						LineNumber: lineNumber,
-					})
+						LineNumber: lineNumber.lineNumber,
+						Encrypted:  lineNumber.encrypted,
+						VerifiedBy: lineNumber.verifiedBy,
+					}
+					constructedDetector.Locations = append(constructedDetector.Locations, location)
 				}
 			}
 			constructedDatatype.Detectors = append(constructedDatatype.Detectors, constructedDetector)

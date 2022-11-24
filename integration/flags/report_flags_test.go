@@ -33,6 +33,7 @@ func TestReportFlags(t *testing.T) {
 		newScanTest("format-yaml", []string{"--format=yaml"}, ""),
 		newScanTest("report-detectors", []string{"--report=detectors"}, ""),
 		newScanTest("report-dataflow", []string{"--report=dataflow"}, ""),
+		newScanProject("report-dataflow-verified-by", []string{"--report=dataflow", "--format=yaml"}, "", "verified_by"),
 		newScanProject("report-policies", []string{"--report=policies", "--format=yaml"}, "", "policies"),
 		newScanTest("output", []string{"--output=" + outputPath}, outputPath),
 		newScanTest("health-context", []string{"--context=health"}, ""),

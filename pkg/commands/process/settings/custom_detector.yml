@@ -1,6 +1,38 @@
 detect_ruby_logger:
+  type: "risk"
   patterns:
     - |
       logger.info(<$ARGUMENT>)
   languages:
     - ruby
+detect_encrypted_ruby_class_properties:
+  type: "verifier"
+  patterns:
+    - |
+      class $CLASS_NAME < ApplicationRecord
+        encrypts <$ARGUMENT>
+      end
+  param_parenting: true
+  root_singularize: true
+  root_lowercase: true
+  languages:
+    - ruby
+detect_sql_create_public_table:
+  type: "data_type"
+  patterns:
+    - |
+      CREATE TABLE public.$TABLE_NAME (
+        <$COLUMN>
+      )
+  param_parenting: true
+  root_singularize: true
+  root_lowercase: true
+  languages:
+    - sql
+  processors:
+    - query: |
+        verified_by = data.bearer.encrypted_verified.verified_by
+        encrypted = data.bearer.encrypted_verified.encrypted
+      modules:
+        - path: processors/encrypted_verified.rego
+          name: bearer.encrypted_verified
