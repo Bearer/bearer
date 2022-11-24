@@ -17,6 +17,9 @@
     field_type: ""
     field_type_simple: unknown
     object_name: user
+    parent:
+        content: logger.info('testing', user.something.something3)
+        line_number: 1
 - detector_type: detect_ruby_logger
   source:
     column_number: 16
@@ -27,11 +30,13 @@
     text: null
   type: custom_classified
   value:
-    classification: null
     field_name: something3
     field_type: ""
     field_type_simple: unknown
     object_name: something
+    parent:
+        content: logger.info('testing', user.something.something3)
+        line_number: 1
 - detector_type: ruby
   source:
     column_number: 8
@@ -42,7 +47,6 @@
     text: null
   type: schema_classified
   value:
-    classification: null
     field_name: info
     field_type: ""
     field_type_simple: unknown
@@ -76,7 +80,6 @@
     text: null
   type: schema_classified
   value:
-    classification: null
     field_name: something3
     field_type: ""
     field_type_simple: unknown
@@ -91,7 +94,6 @@
     text: null
   type: schema_classified
   value:
-    classification: null
     field_name: info
     field_type: ""
     field_type_simple: unknown
@@ -125,7 +127,6 @@
     text: null
   type: schema_classified
   value:
-    classification: null
     field_name: something3
     field_type: ""
     field_type_simple: unknown

@@ -18,7 +18,6 @@ import (
 	"github.com/bearer/curio/pkg/report/detections"
 	schemadatatype "github.com/bearer/curio/pkg/report/schema/datatype"
 	"github.com/bearer/curio/pkg/util/file"
-	"github.com/rs/zerolog/log"
 
 	"github.com/bearer/curio/pkg/parser/nodeid"
 	"github.com/bearer/curio/pkg/parser/sitter/sql"
@@ -72,7 +71,6 @@ func (detector *Detector) CompileRules(rulesConfig map[string]settings.Rule) err
 				compiledRule.RuleName = ruleName
 				compiledRule.Metavars = rule.Metavars
 				compiledRule.ParamParenting = rule.ParamParenting
-				log.Error().Msgf("compiledRule: %#v", compiledRule)
 				compiledRules = append(compiledRules, compiledRule)
 			}
 		}
