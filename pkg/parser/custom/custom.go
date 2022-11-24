@@ -51,31 +51,8 @@ func GenerateTreeSitterQuery(node *parser.Node, idGenerator nodeid.Generator, ru
 	for i := 0; i < node.ChildCount(); i++ {
 		child := node.Child(i)
 
-		// this approach fails for complicated queries such as Rails.log.info($ARGUMENTS)
-		// startString := node.Sitter().String()
-		// // remove our params as they don't exist in tree
-		// trimStart := string(regexpTreeSitterParams.ReplaceAll([]byte(rule.Tree), []byte("")))
-		// endMatch := node.Child(i).Sitter().String()
-
-		// // remove start string
-		// cutset := strings.TrimPrefix(startString, trimStart)
-		// endPosition := strings.Index(cutset, endMatch)
-
-		// if endPosition > 0 {
-		// 	fieldName := strings.Trim(cutset[0:endPosition], " ")
-		// 	if fieldName != "" {
-		// 		rule.Tree += " " + fieldName
-		// 	}
-		// }
-
-		// latest library version 7621c203ae43fe58c0fc4d18e4dcf3caa1985888 supports this but it is buggy so its of no use
-		// childFieldName := node.FieldNameForChild(i)
-		// if childFieldName != "" {
-		// 	rule.Tree += " " + childFieldName + ": "
-		// }
-
 		GenerateTreeSitterQuery(child, idGenerator, rule, detector)
 	}
 
-	rule.Tree += ")"
+	rule.Tree += ") @rule"
 }

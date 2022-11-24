@@ -18,7 +18,8 @@
       FieldUUID: (string) (len=1) "3",
       FieldType: (string) (len=6) "Client",
       SimpleFieldType: (string) (len=6) "object",
-      Classification: (interface {}) <nil>
+      Classification: (interface {}) <nil>,
+      Parent: (*schema.Parent)(<nil>)
     }
   }),
   (*detections.Detection)({

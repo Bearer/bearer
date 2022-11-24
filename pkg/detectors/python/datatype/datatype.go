@@ -21,7 +21,7 @@ var classPropertiesQuery = parser.QueryMustCompile(python.GetLanguage(),
 	`(class_definition
 		body: (block
 			(expression_statement) @param_element
-		) 
+		)
 	  ) @param_class`)
 
 var classFunctionsQuery = parser.QueryMustCompile(python.GetLanguage(),
@@ -31,7 +31,7 @@ var classFunctionsQuery = parser.QueryMustCompile(python.GetLanguage(),
 			(function_definition
 			  name: (identifier) @param_id
 		  ) @param_element
-		) 
+		)
 	  ) @param_class`)
 
 func Discover(report report.Report, tree *parser.Tree, idGenerator nodeid.Generator) {
@@ -67,7 +67,7 @@ func Discover(report report.Report, tree *parser.Tree, idGenerator nodeid.Genera
 
 	datatype.PruneMap(propertiesDatatypes)
 
-	report.AddDataType(detections.TypeSchema, detectors.DetectorPython, idGenerator, propertiesDatatypes)
+	report.AddDataType(detections.TypeSchema, detectors.DetectorPython, idGenerator, propertiesDatatypes, nil)
 }
 
 func discoverClassProperties(tree *parser.Tree, datatypes map[parser.NodeID]*schemadatatype.DataType) {

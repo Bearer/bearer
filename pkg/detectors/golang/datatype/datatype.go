@@ -39,7 +39,7 @@ var methodsQuery = parser.QueryMustCompile(
 	`(method_declaration
 		receiver: (parameter_list
 			(parameter_declaration) @param_struct
-		) 
+		)
 		name: (field_identifier) @param_method_name
 	)`)
 
@@ -88,7 +88,7 @@ func Discover(report report.Report, tree *parser.Tree, idGenerator nodeid.Genera
 
 	datatype.PruneMap(datatypes)
 
-	report.AddDataType(detections.TypeSchema, detectors.DetectorGo, idGenerator, datatypes)
+	report.AddDataType(detections.TypeSchema, detectors.DetectorGo, idGenerator, datatypes, nil)
 }
 
 func discoverProperties(tree *parser.Tree, datatypes map[parser.NodeID]*schemadatatype.DataType) {

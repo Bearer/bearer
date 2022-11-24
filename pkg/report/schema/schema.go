@@ -23,7 +23,14 @@ type Schema struct {
 	FieldUUID       string      `json:"-" yaml:"-"`
 	FieldType       string      `json:"field_type" yaml:"field_type"`
 	SimpleFieldType string      `json:"field_type_simple" yaml:"field_type_simple"`
-	Classification  interface{} `json:"classification" yaml:"classification"`
+	Classification  interface{} `json:"classification,omitempty" yaml:"classification,omitempty"`
+	Parent          *Parent     `json:"parent,omitempty" yaml:"parent,omitempty"`
+}
+
+type Parent struct {
+	// This is the starting line number, the very beginning of what's used by the custom detection
+	LineNumber int    `json:"line_number,omitempty" yaml:"line_number,omitempty"`
+	Content    string `json:"content,omitempty" yaml:"content,omitempty"`
 }
 
 type ReportSchema interface {

@@ -13,7 +13,7 @@ import (
 )
 
 type ReportDataType interface {
-	AddDataType(detectionType detections.DetectionType, detectorType detectors.Type, generator nodeid.Generator, values map[parser.NodeID]*DataType)
+	AddDataType(detectionType detections.DetectionType, detectorType detectors.Type, generator nodeid.Generator, values map[parser.NodeID]*DataType, parent *parser.Node)
 }
 
 type DataType struct {
@@ -94,29 +94,29 @@ type DataTypable interface {
 	SetProperty(string, DataTypable)
 }
 
-func ExportClassified[D DataTypable](report detections.ReportDetection, detectionType detections.DetectionType, detectorType detectors.Type, idGenerator nodeid.Generator, values map[parser.NodeID]D) {
-	exportSchemas(report, detectionType, detectorType, idGenerator, values)
+func ExportClassified[D DataTypable](report detections.ReportDetection, detectionType detections.DetectionType, detectorType detectors.Type, idGenerator nodeid.Generator, values map[parser.NodeID]D, parent *parser.Node) {
+	exportSchemas(report, detectionType, detectorType, idGenerator, values, parent)
 }
 
 func Export[D DataTypable](report detections.ReportDetection, detectionType detections.DetectionType, detectorType detectors.Type, idGenerator nodeid.Generator, values map[parser.NodeID]D) {
 	if detectionType == detections.TypeCustom {
-		exportSchemas(report, detectionType, detectorType, idGenerator, values)
+		exportSchemas(report, detectionType, detectorType, idGenerator, values, nil)
 		return
 	}
-	exportSchemas(report, detectionType, detectorType, idGenerator, values)
+	exportSchemas(report, detectionType, detectorType, idGenerator, values, nil)
 }
 
-func exportSchemas[D DataTypable](report detections.ReportDetection, detectionType detections.DetectionType, detectorType detectors.Type, idGenerator nodeid.Generator, values map[parser.NodeID]D) {
+func exportSchemas[D DataTypable](report detections.ReportDetection, detectionType detections.DetectionType, detectorType detectors.Type, idGenerator nodeid.Generator, values map[parser.NodeID]D, parent *parser.Node) {
 	sortedDataTypes := SortParserMap(values)
 
 	parentName := ""
 	parentUUID := idGenerator.GenerateId()
 	for _, value := range sortedDataTypes {
-		dataTypeToSchema(report, detectionType, detectorType, idGenerator, value, parentName, parentUUID, false)
+		dataTypeToSchema(report, detectionType, detectorType, idGenerator, value, parentName, parentUUID, false, parent)
 	}
 }
 
-func dataTypeToSchema[D DataTypable](report detections.ReportDetection, detectionType detections.DetectionType, detectorType detectors.Type, idGenerator nodeid.Generator, dataType D, parentName string, parentUUID string, shouldExport bool) {
+func dataTypeToSchema[D DataTypable](report detections.ReportDetection, detectionType detections.DetectionType, detectorType detectors.Type, idGenerator nodeid.Generator, dataType D, parentName string, parentUUID string, shouldExport bool, parent *parser.Node) {
 	if dataType.GetIsHelper() {
 		return
 	}
@@ -129,6 +129,14 @@ func dataTypeToSchema[D DataTypable](report detections.ReportDetection, detectio
 	selfName := dataType.GetName()
 
 	if shouldExport {
+		var parentSchema *schema.Parent
+
+		if parent != nil {
+			parentSchema = &schema.Parent{
+				Content:    parent.Content(),
+				LineNumber: parent.LineNumber(),
+			}
+		}
 		report.AddDetection(detectionType, detectorType, dataType.GetNode().Source(false),
 			schema.Schema{
 				ObjectName:      parentName,
@@ -138,6 +146,7 @@ func dataTypeToSchema[D DataTypable](report detections.ReportDetection, detectio
 				FieldType:       dataType.GetTextType(),
 				SimpleFieldType: dataType.GetType(),
 				Classification:  dataType.GetClassification(),
+				Parent:          parentSchema,
 			},
 		)
 	}
@@ -145,7 +154,7 @@ func dataTypeToSchema[D DataTypable](report detections.ReportDetection, detectio
 	sortedProperties := SortStringMap(dataType.GetProperties())
 
 	for _, property := range sortedProperties {
-		dataTypeToSchema(report, detectionType, detectorType, idGenerator, property, selfName, selfUUID, true)
+		dataTypeToSchema(report, detectionType, detectorType, idGenerator, property, selfName, selfUUID, true, parent)
 	}
 }
 

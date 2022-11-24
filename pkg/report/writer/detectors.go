@@ -77,7 +77,7 @@ func (report *Detectors) AddCreateView(
 	report.AddDetection(detections.TypeCreateView, detectorType, createview.Source, createview)
 }
 
-func (report *Detectors) AddDataType(detectionType detections.DetectionType, detectorType detectors.Type, idGenerator nodeid.Generator, values map[parser.NodeID]*datatype.DataType) {
+func (report *Detectors) AddDataType(detectionType detections.DetectionType, detectorType detectors.Type, idGenerator nodeid.Generator, values map[parser.NodeID]*datatype.DataType, parent *parser.Node) {
 	classifiedDatatypes := make(map[parser.NodeID]*classificationschema.ClassifiedDatatype, 0)
 	for nodeID, target := range values {
 		classified := report.Classifier.Schema.Classify(classificationschema.DataTypeDetection{
@@ -90,9 +90,9 @@ func (report *Detectors) AddDataType(detectionType detections.DetectionType, det
 	}
 
 	if detectionType == detections.TypeCustom {
-		datatype.ExportClassified(report, detections.TypeCustomClassified, detectorType, idGenerator, classifiedDatatypes)
+		datatype.ExportClassified(report, detections.TypeCustomClassified, detectorType, idGenerator, classifiedDatatypes, parent)
 	} else {
-		datatype.ExportClassified(report, detections.TypeSchemaClassified, detectorType, idGenerator, classifiedDatatypes)
+		datatype.ExportClassified(report, detections.TypeSchemaClassified, detectorType, idGenerator, classifiedDatatypes, nil)
 	}
 }
 

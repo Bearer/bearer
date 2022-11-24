@@ -87,7 +87,8 @@
       FieldUUID: (string) (len=4) "7483",
       FieldType: (string) (len=7) "integer",
       SimpleFieldType: (string) (len=6) "number",
-      Classification: (interface {}) <nil>
+      Classification: (interface {}) <nil>,
+      Parent: (*schema.Parent)(<nil>)
     }
   }),
   (*detections.Detection)({
@@ -109,7 +110,8 @@
       FieldUUID: (string) (len=4) "7502",
       FieldType: (string) (len=6) "string",
       SimpleFieldType: (string) (len=6) "string",
-      Classification: (interface {}) <nil>
+      Classification: (interface {}) <nil>,
+      Parent: (*schema.Parent)(<nil>)
     }
   }),
   (*detections.Detection)({
@@ -131,7 +133,8 @@
       FieldUUID: (string) (len=4) "7607",
       FieldType: (string) (len=6) "string",
       SimpleFieldType: (string) (len=6) "string",
-      Classification: (interface {}) <nil>
+      Classification: (interface {}) <nil>,
+      Parent: (*schema.Parent)(<nil>)
     }
   }),
   (*detections.Detection)({
@@ -153,7 +156,8 @@
       FieldUUID: (string) (len=4) "7678",
       FieldType: (string) (len=6) "string",
       SimpleFieldType: (string) (len=6) "string",
-      Classification: (interface {}) <nil>
+      Classification: (interface {}) <nil>,
+      Parent: (*schema.Parent)(<nil>)
     }
   }),
   (*detections.Detection)({
@@ -175,7 +179,8 @@
       FieldUUID: (string) (len=4) "7684",
       FieldType: (string) "",
       SimpleFieldType: (string) (len=6) "object",
-      Classification: (interface {}) <nil>
+      Classification: (interface {}) <nil>,
+      Parent: (*schema.Parent)(<nil>)
     }
   }),
   (*detections.Detection)({
@@ -197,7 +202,8 @@
       FieldUUID: (string) (len=4) "7686",
       FieldType: (string) (len=6) "string",
       SimpleFieldType: (string) (len=6) "string",
-      Classification: (interface {}) <nil>
+      Classification: (interface {}) <nil>,
+      Parent: (*schema.Parent)(<nil>)
     }
   }),
   (*detections.Detection)({
@@ -219,7 +225,8 @@
       FieldUUID: (string) (len=4) "7692",
       FieldType: (string) (len=6) "string",
       SimpleFieldType: (string) (len=6) "string",
-      Classification: (interface {}) <nil>
+      Classification: (interface {}) <nil>,
+      Parent: (*schema.Parent)(<nil>)
     }
   }),
   (*detections.Detection)({
@@ -241,7 +248,8 @@
       FieldUUID: (string) (len=4) "7713",
       FieldType: (string) (len=7) "integer",
       SimpleFieldType: (string) (len=6) "number",
-      Classification: (interface {}) <nil>
+      Classification: (interface {}) <nil>,
+      Parent: (*schema.Parent)(<nil>)
     }
   }),
   (*detections.Detection)({
@@ -263,7 +271,8 @@
       FieldUUID: (string) (len=4) "7722",
       FieldType: (string) (len=6) "string",
       SimpleFieldType: (string) (len=6) "string",
-      Classification: (interface {}) <nil>
+      Classification: (interface {}) <nil>,
+      Parent: (*schema.Parent)(<nil>)
     }
   })
 }
