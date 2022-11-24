@@ -28,6 +28,7 @@ type Schema struct {
 }
 
 type Parent struct {
+	// This is the starting line number, the very beginning of what's used by the custom detection
 	LineNumber int    `json:"line_number,omitempty" yaml:"line_number,omitempty"`
 	Content    string `json:"content,omitempty" yaml:"content,omitempty"`
 }
