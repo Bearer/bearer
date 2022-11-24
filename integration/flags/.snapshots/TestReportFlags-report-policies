@@ -1,5 +1,5 @@
 critical:
-    - policy_name: Logger leaks
+    - policy_name: Logger leaking
       policy_description: Logger leaks detected
       filename: users.rb
       category_group: Personal data
