@@ -5,15 +5,6 @@ detect_ruby_logger:
       logger.info(<$ARGUMENT>)
   languages:
     - ruby
-detect_ruby_classes:
-  type: "verifier"
-  patterns:
-    - |
-      class $CLASS_NAME
-      end
-  param_parenting: true
-  languages:
-    - ruby
 detect_encrypted_ruby_class_properties:
   type: "verifier"
   patterns:

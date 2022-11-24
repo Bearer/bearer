@@ -24,21 +24,6 @@ scan:
             root_lowercase: true
             metavars: {}
             stored: false
-        detect_ruby_classes:
-            disabled: false
-            type: verifier
-            languages:
-                - ruby
-            patterns:
-                - |
-                  class $CLASS_NAME
-                  end
-            param_parenting: true
-            processors: []
-            root_singularize: false
-            root_lowercase: false
-            metavars: {}
-            stored: false
         detect_ruby_logger:
             disabled: false
             type: risk
