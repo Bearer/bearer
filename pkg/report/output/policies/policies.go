@@ -5,9 +5,7 @@ import (
 
 	"github.com/bearer/curio/pkg/classification/db"
 	"github.com/bearer/curio/pkg/commands/process/settings"
-	"github.com/bearer/curio/pkg/util/output"
 	"github.com/bearer/curio/pkg/util/rego"
-	"github.com/rs/zerolog/log"
 
 	"github.com/bearer/curio/pkg/report/output/dataflow"
 )
@@ -37,19 +35,6 @@ func GetOutput(dataflow *dataflow.DataFlow, config settings.Config) (map[string]
 	result := make(map[string][]PolicyResult)
 
 	for _, policy := range config.Policies {
-		input := PolicyInput{
-			PolicyId:       policy.Id,
-			Dataflow:       dataflow,
-			DataCategories: db.Default().DataCategories,
-		}
-
-		log.Debug().Msgf("running policy")
-		bytes, _ := json.Marshal(input)
-		log.Debug().Msgf("")
-		output.StdOutLogger().Msgf("%s", string(bytes))
-		log.Debug().Msgf("")
-		log.Debug().Msgf("input is %#v", input)
-		log.Debug().Msgf("dataflow is: %#v", input.Dataflow)
 		// Create a prepared query that can be evaluated.
 		rs, err := rego.RunQuery(policy.Query,
 			PolicyInput{
