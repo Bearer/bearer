@@ -4,6 +4,7 @@ import (
 	"github.com/bearer/curio/pkg/classification/db"
 	"github.com/bearer/curio/pkg/report/output/dataflow/detectiondecoder"
 	"github.com/bearer/curio/pkg/report/output/dataflow/types"
+	"github.com/bearer/curio/pkg/report/schema"
 
 	"github.com/bearer/curio/pkg/report/detections"
 	"github.com/bearer/curio/pkg/util/classify"
@@ -19,6 +20,7 @@ type datatypeHolder struct {
 	name         string
 	uuid         string
 	categoryUUID string
+	parent       *schema.Parent
 	detectors    map[string]*detectorHolder // group detectors by detectorName
 }
 
@@ -57,14 +59,14 @@ func (holder *Holder) AddSchema(detection detections.Detection, extras *extraFie
 	}
 
 	if classification.Decision.State == classify.Valid {
-		holder.addDatatype(classification.DataType, string(detection.DetectorType), detection.Source.Filename, *detection.Source.LineNumber, extras)
+		holder.addDatatype(classification.DataType, string(detection.DetectorType), detection.Source.Filename, *detection.Source.LineNumber, extras, schema.Parent)
 	}
 
 	return nil
 }
 
 // addDatatype adds datatype to hash list and at the same time blocks duplicates
-func (holder *Holder) addDatatype(classification *db.DataType, detectorName string, fileName string, lineNumber int, extras *extraFields) {
+func (holder *Holder) addDatatype(classification *db.DataType, detectorName string, fileName string, lineNumber int, extras *extraFields, parent *schema.Parent) {
 	// create datatype entry if it doesn't exist
 	if _, exists := holder.datatypes[classification.Name]; !exists {
 		datatype := datatypeHolder{
@@ -75,6 +77,7 @@ func (holder *Holder) addDatatype(classification *db.DataType, detectorName stri
 		if holder.isInternal {
 			datatype.categoryUUID = classification.CategoryUUID
 			datatype.uuid = classification.UUID
+			datatype.parent = parent
 		}
 
 		holder.datatypes[classification.Name] = datatype
@@ -133,6 +136,7 @@ func (holder *Holder) ToDataFlow() []types.Datatype {
 			constructedDetector := types.DatatypeDetector{
 				Name:      detectorHolder.name,
 				Locations: make([]types.DatatypeLocation, 0),
+				Parent:    datatype.parent,
 			}
 
 			for _, fileHolder := range maputil.ToSortedSlice(detectorHolder.files) {

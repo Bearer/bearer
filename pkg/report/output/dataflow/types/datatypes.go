@@ -1,5 +1,7 @@
 package types
 
+import "github.com/bearer/curio/pkg/report/schema"
+
 type Datatype struct {
 	UUID         string             `json:"uuid,omitempty" yaml:"uuid,omitempty"`
 	CategoryUUID string             `json:"category_uuid,omitempty" yaml:"category_uuid,omitempty"`
@@ -10,6 +12,7 @@ type Datatype struct {
 type DatatypeDetector struct {
 	Name      string             `json:"name" yaml:"name"`
 	Locations []DatatypeLocation `json:"locations" yaml:"locations"`
+	Parent    *schema.Parent     `json:"parent" yaml:"parent"`
 }
 
 type DatatypeLocation struct {
