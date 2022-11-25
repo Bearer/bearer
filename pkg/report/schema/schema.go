@@ -36,9 +36,6 @@ type Parent struct {
 }
 
 type ReportSchema interface {
-	// @todo FIXME: Deprecated, to be removed
-	AddSchema(detectorType detectors.Type, schema Schema, source source.Source)
-
 	SchemaGroupBegin(detectorType detectors.Type, node *parser.Node, schema Schema, source *source.Source)
 	SchemaGroupIsOpen() bool
 	SchemaGroupAddItem(node *parser.Node, schema Schema, source *source.Source)

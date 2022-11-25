@@ -102,16 +102,6 @@ func (report *Detectors) AddDataType(detectionType detections.DetectionType, det
 	}
 }
 
-func (report *Detectors) AddSchema(
-	detectorType detectors.Type,
-	schema schema.Schema,
-	source source.Source,
-) {
-	// @todo FIXME: Remove this once all call sites are migrated to new schema group begin/add/end API
-	zerolog.Warn().Msg("call to deprecated AddSchema method")
-	report.AddDetection(detections.TypeSchema, detectorType, source, schema)
-}
-
 func (report *Detectors) SchemaGroupBegin(detectorType detectors.Type, node *parser.Node, schema schema.Schema, source *source.Source) {
 	if report.SchemaGroupIsOpen() {
 		zerolog.Warn().Msg("schema group already open")

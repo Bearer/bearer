@@ -22,7 +22,6 @@ import (
 	"github.com/bearer/curio/pkg/report/source"
 
 	"github.com/stretchr/testify/assert"
-	zerolog "github.com/rs/zerolog/log"
 )
 
 func Extract(
@@ -103,22 +102,6 @@ func (report *InMemoryReport) AddDetection(
 	} else {
 		report.Detections = append(report.Detections, detection)
 	}
-}
-
-func (report *InMemoryReport) AddSchema(
-	detectorType reportdetectors.Type,
-	schema schema.Schema,
-	source source.Source,
-) {
-	// @todo FIXME: Remove this once all call sites are migrated to new schema group begin/add/end API
-	zerolog.Warn().Msg("call to deprecated AddSchema method")
-
-	report.Detections = append(report.Detections, &detections.Detection{
-		DetectorType: detectorType,
-		Value:        schema,
-		Source:       source,
-		Type:         detections.TypeSchema,
-	})
 }
 
 func (report *InMemoryReport) SchemaGroupBegin(detectorType reportdetectors.Type, node *parser.Node, schema schema.Schema, source *source.Source) {
