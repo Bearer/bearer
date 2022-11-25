@@ -67,7 +67,7 @@ func (detector *detector) ExtractFromSchema(
 
 	uuidHolder := parserschema.NewUUIDHolder()
 
-	return tree.Query(graphqlSchemaQuery, func(captures parser.Captures) error {
+	err = tree.Query(graphqlSchemaQuery, func(captures parser.Captures) error {
 		objectNode := captures["object_name"]
 		objectName := stripQuotes(objectNode.Content())
 		fieldType := stripQuotes(captures["field_type"].Content())
@@ -78,20 +78,37 @@ func (detector *detector) ExtractFromSchema(
 		objectUUID := uuidHolder.Assign(objectNode.ID(), detector.idGenerator)
 		fieldUUID := uuidHolder.Assign(fieldNode.ID(), detector.idGenerator)
 
-		report.AddSchema(detectors.DetectorGraphQL,
-			schema.Schema{
-				ObjectName:      objectName,
-				ObjectUUID:      objectUUID,
-				FieldName:       fieldName,
-				FieldType:       fieldType,
-				FieldUUID:       fieldUUID,
-				SimpleFieldType: convertType(fieldType),
-			},
-			fieldNode.Source(true),
+		currentSchema := schema.Schema{
+			ObjectName:      objectName,
+			ObjectUUID:      objectUUID,
+			FieldName:       fieldName,
+			FieldType:       fieldType,
+			FieldUUID:       fieldUUID,
+			SimpleFieldType: convertType(fieldType),
+		}
+
+		if !report.SchemaGroupIsOpen() {
+			source := objectNode.Source(true)
+			report.SchemaGroupBegin(
+				detectors.DetectorGraphQL,
+				objectNode,
+				currentSchema,
+				&source,
+			)
+		}
+		source := fieldNode.Source(true)
+		report.SchemaGroupAddItem(
+			fieldNode,
+			currentSchema,
+			&source,
 		)
 
 		return nil
 	})
+
+	report.SchemaGroupEnd(detector.idGenerator)
+
+	return err
 }
 
 func stripQuotes(value string) string {
