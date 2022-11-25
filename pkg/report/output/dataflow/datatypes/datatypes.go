@@ -1,6 +1,7 @@
 package datatypes
 
 import (
+	"github.com/bearer/curio/pkg/classification/db"
 	"github.com/bearer/curio/pkg/report/output/dataflow/detectiondecoder"
 	"github.com/bearer/curio/pkg/report/output/dataflow/types"
 
@@ -10,12 +11,15 @@ import (
 )
 
 type Holder struct {
-	datatypes map[string]datatypeHolder // group datatypeHolders by name
+	datatypes  map[string]datatypeHolder // group datatypeHolders by name
+	isInternal bool
 }
 
 type datatypeHolder struct {
-	name      string
-	detectors map[string]*detectorHolder // group detectors by detectorName
+	name         string
+	uuid         string
+	categoryUUID string
+	detectors    map[string]*detectorHolder // group detectors by detectorName
 }
 
 type detectorHolder struct {
@@ -34,9 +38,10 @@ type lineNumberHolder struct {
 	verifiedBy []types.DatatypeVerifiedBy
 }
 
-func New() *Holder {
+func New(isInternal bool) *Holder {
 	return &Holder{
-		datatypes: make(map[string]datatypeHolder),
+		datatypes:  make(map[string]datatypeHolder),
+		isInternal: isInternal,
 	}
 }
 
@@ -47,23 +52,30 @@ func (holder *Holder) AddSchema(detection detections.Detection, extras *extraFie
 	}
 
 	if classification.Decision.State == classify.Valid {
-		holder.addDatatype(classification.DataType.Name, string(detection.DetectorType), detection.Source.Filename, *detection.Source.LineNumber, extras)
+		holder.addDatatype(classification.DataType, string(detection.DetectorType), detection.Source.Filename, *detection.Source.LineNumber, extras)
 	}
 
 	return nil
 }
 
 // addDatatype adds datatype to hash list and at the same time blocks duplicates
-func (holder *Holder) addDatatype(datatypeName string, detectorName string, fileName string, lineNumber int, extras *extraFields) {
+func (holder *Holder) addDatatype(classification *db.DataType, detectorName string, fileName string, lineNumber int, extras *extraFields) {
 	// create datatype entry if it doesn't exist
-	if _, exists := holder.datatypes[datatypeName]; !exists {
-		holder.datatypes[datatypeName] = datatypeHolder{
-			name:      datatypeName,
+	if _, exists := holder.datatypes[classification.Name]; !exists {
+		datatype := datatypeHolder{
+			name:      classification.Name,
 			detectors: make(map[string]*detectorHolder),
 		}
+
+		if holder.isInternal {
+			datatype.categoryUUID = classification.CategoryUUID
+			datatype.uuid = classification.UUID
+		}
+
+		holder.datatypes[classification.Name] = datatype
 	}
 
-	datatype := holder.datatypes[datatypeName]
+	datatype := holder.datatypes[classification.Name]
 	// create detector entry if it doesn't exist
 	if _, exists := datatype.detectors[detectorName]; !exists {
 		datatype.detectors[detectorName] = &detectorHolder{
@@ -105,7 +117,9 @@ func (holder *Holder) ToDataFlow() []types.Datatype {
 
 	for _, datatype := range datatypes {
 		constructedDatatype := types.Datatype{
-			Name: datatype.name,
+			Name:         datatype.name,
+			UUID:         datatype.uuid,
+			CategoryUUID: datatype.categoryUUID,
 		}
 
 		detectors := maputil.ToSortedSlice(datatype.detectors)

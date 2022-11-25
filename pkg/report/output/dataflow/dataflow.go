@@ -24,7 +24,7 @@ type DataFlow struct {
 var allowedDetections []detections.DetectionType = []detections.DetectionType{detections.TypeSchemaClassified, detections.TypeCustomClassified, detections.TypeDependencyClassified, detections.TypeInterfaceClassified, detections.TypeFrameworkClassified}
 
 func GetOutput(input []interface{}, config settings.Config, isInternal bool) (*DataFlow, error) {
-	dataTypesHolder := datatypes.New()
+	dataTypesHolder := datatypes.New(isInternal)
 	risksHolder := risks.New(config, isInternal)
 	componentsHolder := components.New(isInternal)
 

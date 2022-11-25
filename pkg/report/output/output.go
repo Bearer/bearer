@@ -138,7 +138,7 @@ func writePolicyBreachToOutput(outputStr *strings.Builder, policyBreach policies
 	outputStr.WriteString("\n")
 	outputStr.WriteString("\n")
 	outputStr.WriteString(color.With(displayColor, strings.ToUpper(policySeverity)) + ": ")
-	outputStr.WriteString(policyBreach.PolicyName + " policy breach with " + policyBreach.CategoryGroup + "\n")
+	outputStr.WriteString(policyBreach.PolicyName + ", policy breached with " + policyBreach.CategoryGroup + "\n")
 	outputStr.WriteString(policyBreach.PolicyDescription + "\n")
 	outputStr.WriteString("Filename: " + policyBreach.Filename)
 	outputStr.WriteString("\n")

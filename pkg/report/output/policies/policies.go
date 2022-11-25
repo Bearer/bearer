@@ -35,7 +35,6 @@ func GetOutput(dataflow *dataflow.DataFlow, config settings.Config) (map[string]
 	result := make(map[string][]PolicyResult)
 
 	for _, policy := range config.Policies {
-
 		// Create a prepared query that can be evaluated.
 		rs, err := rego.RunQuery(policy.Query,
 			PolicyInput{
@@ -44,10 +43,6 @@ func GetOutput(dataflow *dataflow.DataFlow, config settings.Config) (map[string]
 				DataCategories: db.Default().DataCategories,
 			},
 			policy.Modules.ToRegoModules())
-		if err != nil {
-			return nil, err
-		}
-
 		if err != nil {
 			return nil, err
 		}

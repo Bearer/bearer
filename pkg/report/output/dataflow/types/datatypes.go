@@ -1,9 +1,10 @@
 package types
 
 type Datatype struct {
-	UUID      string             `json:"uuid,omitempty" yaml:"uuid,omitempty"`
-	Name      string             `json:"name" yaml:"name"`
-	Detectors []DatatypeDetector `json:"detectors" yaml:"detectors"`
+	UUID         string             `json:"uuid,omitempty" yaml:"uuid,omitempty"`
+	CategoryUUID string             `json:"category_uuid,omitempty" yaml:"category_uuid,omitempty"`
+	Name         string             `json:"name" yaml:"name"`
+	Detectors    []DatatypeDetector `json:"detectors" yaml:"detectors"`
 }
 
 type DatatypeDetector struct {

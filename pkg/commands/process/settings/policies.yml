@@ -1,6 +1,6 @@
 logger_leaks:
   description: "Logger leaks detected"
-  name: "Logger leaks"
+  name: "Logger leaking"
   id: "detect_ruby_logger"
   query: |
     critical = data.bearer.logger_leaks.critical
@@ -8,3 +8,13 @@ logger_leaks:
   modules:
     - path: policies/logger_leaks.rego
       name: bearer.logger_leaks
+application_level_encryption_missing:
+  description: "Application level encryption missing"
+  name: "Application level encryption missing"
+  id: "detect_sql_create_public_table"
+  query: |
+    critical = data.bearer.application_level_encryption.critical
+    high = data.bearer.application_level_encryption.high
+  modules:
+    - path: policies/application_level_encryption.rego
+      name: bearer.application_level_encryption
