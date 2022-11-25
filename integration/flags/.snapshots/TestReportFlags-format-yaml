@@ -76,6 +76,100 @@
     parent:
         content: logger.info('testing', user.something.something3)
         line_number: 1
+- detector_type: ruby
+  source:
+    column_number: 8
+    filename: main.rb
+    language: Ruby
+    language_type: programming
+    line_number: 1
+    text: null
+  type: schema_classified
+  value:
+    field_name: info
+    field_type: ""
+    field_type_simple: unknown
+    object_name: logger
+- detector_type: ruby
+  source:
+    column_number: 29
+    filename: main.rb
+    language: Ruby
+    language_type: programming
+    line_number: 1
+    text: null
+  type: schema_classified
+  value:
+    classification:
+        decision:
+            reason: invalid_property
+            state: invalid
+        name: something
+    field_name: something
+    field_type: ""
+    field_type_simple: unknown
+    object_name: user
+- detector_type: ruby
+  source:
+    column_number: 39
+    filename: main.rb
+    language: Ruby
+    language_type: programming
+    line_number: 1
+    text: null
+  type: schema_classified
+  value:
+    field_name: something3
+    field_type: ""
+    field_type_simple: unknown
+    object_name: something
+- detector_type: ruby
+  source:
+    column_number: 14
+    filename: main.rb
+    language: Ruby
+    language_type: programming
+    line_number: 3
+    text: null
+  type: schema_classified
+  value:
+    field_name: info
+    field_type: ""
+    field_type_simple: unknown
+    object_name: logger
+- detector_type: ruby
+  source:
+    column_number: 24
+    filename: main.rb
+    language: Ruby
+    language_type: programming
+    line_number: 3
+    text: null
+  type: schema_classified
+  value:
+    classification:
+        decision:
+            reason: invalid_property
+            state: invalid
+        name: something
+    field_name: something
+    field_type: ""
+    field_type_simple: unknown
+    object_name: user
+- detector_type: ruby
+  source:
+    column_number: 34
+    filename: main.rb
+    language: Ruby
+    language_type: programming
+    line_number: 3
+    text: null
+  type: schema_classified
+  value:
+    field_name: something3
+    field_type: ""
+    field_type_simple: unknown
+    object_name: something
 
 
 --

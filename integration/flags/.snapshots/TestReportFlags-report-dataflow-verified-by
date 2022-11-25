@@ -10,6 +10,10 @@ data_types:
                 - detector: detect_encrypted_ruby_class_properties
                   filename: user.rb
                   line_number: 2
+        - name: ruby
+          locations:
+            - filename: user.rb
+              line_number: 2
     - name: Date of birth
       detectors:
         - name: detect_sql_create_public_table
@@ -27,6 +31,10 @@ data_types:
                 - detector: detect_encrypted_ruby_class_properties
                   filename: user.rb
                   line_number: 2
+        - name: ruby
+          locations:
+            - filename: user.rb
+              line_number: 2
     - name: Firstname
       detectors:
         - name: detect_sql_create_public_table
@@ -50,6 +58,10 @@ data_types:
                 - detector: detect_encrypted_ruby_class_properties
                   filename: user.rb
                   line_number: 2
+        - name: ruby
+          locations:
+            - filename: user.rb
+              line_number: 2
 components: []
 
 
