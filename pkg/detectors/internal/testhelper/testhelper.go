@@ -150,7 +150,7 @@ func (report *InMemoryReport) AddDataType(
 	parent *parser.Node,
 ) {
 
-	datatype.Export(report, detectionType, detectorType, idGenerator, values)
+	datatype.ExportClassified(report, detectionType, detectorType, idGenerator, values, nil)
 }
 
 func (report *InMemoryReport) AddCreateView(
