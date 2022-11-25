@@ -40,7 +40,7 @@ type Runner interface {
 	// ScanRepository scans repository
 	ScanRepository(ctx context.Context, opts flag.Options) (types.Report, error)
 	// Report a writes a report
-	Report(scanSettings settings.Config, report types.Report) error
+	Report(scanSettings settings.Config, report types.Report) (bool, error)
 	// Close closes runner
 	Close(ctx context.Context) error
 }
@@ -130,31 +130,38 @@ func Run(ctx context.Context, opts flag.Options, targetKind TargetKind) (err err
 		}
 	}
 
-	if err = r.Report(scanSettings, report); err != nil {
+	reportPassed, err := r.Report(scanSettings, report)
+	if err != nil {
 		return xerrors.Errorf("report error: %w", err)
+	}
+
+	if reportPassed {
+		os.Exit(0)
+	} else {
+		os.Exit(1)
 	}
 
 	return nil
 }
 
-func (r *runner) Report(config settings.Config, report types.Report) error {
+func (r *runner) Report(config settings.Config, report types.Report) (bool, error) {
 	// if output is defined we want to write only to file
 	logger := outputhandler.StdOutLogger()
 	if config.Report.Output != "" {
 		reportFile, err := os.Create(config.Report.Output)
 		if err != nil {
-			return fmt.Errorf("error creating output file %w", err)
+			return false, fmt.Errorf("error creating output file %w", err)
 		}
 		logger = outputhandler.PlainLogger(reportFile)
 	}
 
 	if config.Report.Report == flag.ReportPolicies && config.Report.Format == "" {
 		// for policy report, default report format is NOT JSON
-		err := reportoutput.ReportPolicies(report, logger, config)
+		reportPassed, err := reportoutput.ReportPolicies(report, logger, config)
 		if err != nil {
-			return fmt.Errorf("error generating report %w", err)
+			return false, fmt.Errorf("error generating report %w", err)
 		}
-		return nil
+		return reportPassed, nil
 	}
 
 	switch config.Report.Format {
@@ -162,13 +169,13 @@ func (r *runner) Report(config settings.Config, report types.Report) error {
 		// default report format for is JSON
 		err := reportoutput.ReportJSON(report, logger, config)
 		if err != nil {
-			return fmt.Errorf("error generating report %w", err)
+			return false, fmt.Errorf("error generating report %w", err)
 		}
 	case flag.FormatYAML:
 		err := reportoutput.ReportYAML(report, logger, config)
 		if err != nil {
-			return fmt.Errorf("error generating report %w", err)
+			return false, fmt.Errorf("error generating report %w", err)
 		}
 	}
-	return nil
+	return true, nil
 }
