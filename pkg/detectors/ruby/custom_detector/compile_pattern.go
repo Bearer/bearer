@@ -8,7 +8,6 @@ import (
 	"github.com/bearer/curio/pkg/parser/custom"
 	"github.com/bearer/curio/pkg/parser/nodeid"
 	"github.com/bearer/curio/pkg/util/file"
-	"github.com/rs/zerolog/log"
 )
 
 var classNameRegex = regexp.MustCompile(`\$CLASS_NAME`)
@@ -36,7 +35,6 @@ func (detector *Detector) CompilePattern(Rule string, idGenerator nodeid.Generat
 	}
 
 	custom.GenerateTreeSitterQuery(tree.RootNode().Child(0), idGenerator, rule, detector, false)
-	log.Error().Msgf("rule => %s", rule.Tree)
 
 	return *rule, nil
 }

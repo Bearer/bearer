@@ -108,16 +108,24 @@ scan:
             root_lowercase: true
             metavars: {}
             stored: false
-        ruby_csv_file_detection:
+        ruby_file_detection:
             disabled: false
             type: risk
             languages:
                 - ruby
             patterns:
                 - |
+                  CSV.open(...) { <$DATA_TYPE> }
+                - |
                   CSV.open(...) do
                     <$DATA_TYPE>
                   end
+                - |
+                  File.open(...) do
+                    <$DATA_TYPE>
+                  end
+                - |
+                  File.open(...) { <$DATA_TYPE> }
             param_parenting: true
             processors: []
             root_singularize: false
