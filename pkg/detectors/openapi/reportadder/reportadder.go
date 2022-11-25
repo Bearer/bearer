@@ -6,6 +6,7 @@ import (
 	"strings"
 
 	"github.com/bearer/curio/pkg/parser"
+	"github.com/bearer/curio/pkg/parser/nodeid"
 	reporttypes "github.com/bearer/curio/pkg/report"
 	"github.com/bearer/curio/pkg/report/detectors"
 	"github.com/bearer/curio/pkg/report/operations"
@@ -17,26 +18,64 @@ import (
 
 var regexpPathVariable = regexp.MustCompile(`\{.+\}`)
 
-func AddSchema(file *file.FileInfo, report reporttypes.Report, foundValues map[parser.Node]*schemahelper.Schema) {
+type SortableSchema struct {
+	Key parser.Node
+	Value *schemahelper.Schema
+}
+type SortableSchemaList []SortableSchema
+func (s SortableSchemaList) Len() int {
+	return len(s)
+}
+func (s SortableSchemaList) Swap(i, j int) {
+	s[i], s[j] = s[j], s[i]
+}
+func (s SortableSchemaList) Less(i, j int) bool {
+	lineNumberA := s[i].Value.Source.LineNumber
+	lineNumberB := s[j].Value.Source.LineNumber
+	return *lineNumberA < *lineNumberB
+}
+
+func AddSchema(file *file.FileInfo, report reporttypes.Report, foundValues map[parser.Node]*schemahelper.Schema, idGenerator nodeid.Generator) {
 	// we need sorted schemas so our reports are consistent and repeatable
-	var sortedSchemas []*schemahelper.Schema
-	for _, schema := range foundValues {
-		sortedSchemas = append(sortedSchemas, schema)
+	sortedSchemas := make(SortableSchemaList, len(foundValues))
+	i := 0
+	for k, v := range(foundValues) {
+		sortedSchemas[i] = SortableSchema{Key: k, Value: v}
+		i++
 	}
-	sort.Slice(sortedSchemas, func(i, j int) bool {
-		lineNumberA := sortedSchemas[i].Source.LineNumber
-		lineNumberB := sortedSchemas[j].Source.LineNumber
-		return *lineNumberA < *lineNumberB
-	})
-	for _, schema := range sortedSchemas {
+	sort.Sort(sortedSchemas)
+
+	for _, sortableSchema := range sortedSchemas {
+		node := sortableSchema.Key
+		schema := sortableSchema.Value
+
 		schema.Source.Language = file.Language
 		schema.Source.LanguageType = file.LanguageTypeString()
 		schema.Value.FieldName = stringutil.StripQuotes(schema.Value.FieldName)
 		schema.Value.FieldType = stringutil.StripQuotes(schema.Value.FieldType)
 		schema.Value.ObjectName = stringutil.StripQuotes(schema.Value.ObjectName)
 		schema.Value.SimpleFieldType = convertSchema(schema.Value.FieldType)
-		report.AddSchema(detectors.DetectorOpenAPI, schema.Value, schema.Source)
+
+		if !report.SchemaGroupIsOpen() {
+			// @todo FIXME: Transition to new API
+			var objectNode *parser.Node
+			report.SchemaGroupBegin(
+				detectors.DetectorOpenAPI,
+				objectNode,
+				schema.Value,
+				&schema.Source,
+			)
+		}
+
+		fieldNode := node
+		report.SchemaGroupAddItem(
+			&fieldNode,
+			schema.Value,
+			&schema.Source,
+		)
 	}
+
+	report.SchemaGroupEnd(idGenerator)
 }
 
 func convertSchema(value string) string {
