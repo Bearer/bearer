@@ -59,11 +59,53 @@ func (detector *Detector) ExtractArguments(node *parser.Node, idGenerator nodeid
 		}
 
 		singleArgumentDatatypes := datatype.Discover(tree, idGenerator)
+		allDatatypes := datatype.Discover(node.Tree(), idGenerator)
 
 		for nodeID, target := range singleArgumentDatatypes {
 			joinedDatatypes[nodeID] = target
 		}
+
 	}
 
 	return joinedDatatypes, nil
+}
+
+func variableReconciliation(singleArgumentDatatypes map[parser.NodeID]*schemadatatype.DataType, allDataTypes map[parser.NodeID]*schemadatatype.DataType) map[parser.NodeID]*schemadatatype.DataType {
+	result := make(map[parser.NodeID]*schemadatatype.DataType)
+
+	for nodeID, argumentDatatype := range singleArgumentDatatypes {
+		currentNode := argumentDatatype.Node
+		for {
+			parent := currentNode.Parent()
+			if parent == nil {
+				break
+			}
+
+			isTerminating := false
+
+			for _, terminator := range datatype.ScopeTerminators {
+				if parent.Type() == terminator {
+					isTerminating = true
+					break
+				}
+			}
+
+			if !isTerminating {
+				continue
+			}
+
+			for globalNodeID, globalDatatype := range allDataTypes {
+				// not in the same scope
+				if globalNodeID != parent.ID() {
+					continue
+				}
+				// in the same scope but it doesn't interest us
+				if globalDatatype.Name != argumentDatatype.Name {
+
+				}
+				// merge properties of argumentDatatype and globalDatatype
+			}
+		}
+
+	}
 }

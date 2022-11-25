@@ -32,6 +32,8 @@ var callsQuery = parser.QueryMustCompile(ruby.GetLanguage(),
 		method: (identifier) @param_id
 	) @param_parent`)
 
+var ScopeTerminators = []string{"program", "method", "block", "lambda", "singleton_method"}
+
 func addProperties(tree *parser.Tree, helperDatatypes map[parser.NodeID]*schemadatatype.DataType) {
 	// add element references
 	var doElementsQuery = func(query *sitter.Query) {
@@ -231,8 +233,6 @@ func scopeAndMergeProperties(propertiesDatatypes, classDataTypes map[parser.Node
 	terminatorKeywords := []string{"program"}
 	parserdatatype.ScopeDatatypes(classDataTypes, idGenerator, terminatorKeywords)
 
-	// // scoped data
-	terminatorKeywords = []string{"program", "method", "block", "lambda", "singleton_method"}
 	// pull all scope terminator nodes
-	parserdatatype.ScopeDatatypes(propertiesDatatypes, idGenerator, terminatorKeywords)
+	parserdatatype.ScopeDatatypes(propertiesDatatypes, idGenerator, ScopeTerminators)
 }
