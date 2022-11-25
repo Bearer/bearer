@@ -1,4 +1,4 @@
-{"components":[]}
+{"data_types":[{"name":"Email Address","detectors":[{"name":"detect_ruby_logger","locations":[{"filename":"main.rb","line_number":1}]},{"name":"ruby","locations":[{"filename":"main.rb","line_number":1}]}]}],"risks":[{"detector_id":"detect_ruby_logger","data_types":[{"name":"Email Address","stored":false,"locations":[{"filename":"main.rb","line_number":1}]}]}],"components":[]}
 
 --
 

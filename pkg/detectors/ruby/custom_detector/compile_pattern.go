@@ -15,8 +15,6 @@ var argumentsRegex = regexp.MustCompile(`<\$ARGUMENT>`)
 var dataTypeRegex = regexp.MustCompile(`<\$DATA_TYPE>`)
 var ellipsisRegex = regexp.MustCompile(`\.\.\.`)
 
-// var blockRegex = regexp.MustCompile(`\$BLOCK`)
-
 func (detector *Detector) CompilePattern(Rule string, idGenerator nodeid.Generator) (config.CompiledRule, error) {
 	reworkedRule := classNameRegex.ReplaceAll([]byte(Rule), []byte("Var_Class_Name"+idGenerator.GenerateId()))
 	reworkedRule = argumentsRegex.ReplaceAll([]byte(reworkedRule), []byte("Var_Arguments"+idGenerator.GenerateId()))
