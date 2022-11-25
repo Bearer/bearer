@@ -38,7 +38,7 @@ func ReportPolicies(report types.Report, output *zerolog.Event, config settings.
 
 	reportStr := &strings.Builder{}
 	reportStr.WriteString("\n\nPolicy Report\n")
-	reportStr.WriteString("\n=============\n")
+	reportStr.WriteString("\n=====================================")
 
 	writePolicyListToString(reportStr, config.Policies)
 
@@ -214,6 +214,8 @@ func writeSummaryToString(
 	if len(breachedPolicies[settings.LevelLow]) > 0 {
 		reportStr.WriteString(" (" + strings.Join(maps.Keys(breachedPolicies[settings.LevelLow]), ", ") + ")")
 	}
+
+	reportStr.WriteString("\n\n")
 }
 
 func writePolicyBreachToString(reportStr *strings.Builder, policyBreach policies.PolicyResult, policySeverity string) {
