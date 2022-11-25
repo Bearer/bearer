@@ -9,6 +9,7 @@ import (
 	"github.com/bearer/curio/pkg/commands/process/settings"
 	"github.com/bearer/curio/pkg/flag"
 	"github.com/bearer/curio/pkg/report/output/dataflow"
+	"golang.org/x/exp/maps"
 
 	"github.com/bearer/curio/pkg/report/output/detectors"
 	"github.com/bearer/curio/pkg/report/output/policies"
@@ -30,31 +31,39 @@ var severityColorFns = map[string]func(x ...interface{}) string{
 }
 
 func ReportPolicies(report types.Report, output *zerolog.Event, config settings.Config) error {
-	outputPolicies, err := getPolicyReportOutput(report, config)
+	policyResults, err := getPolicyReportOutput(report, config)
 	if err != nil {
 		return err
 	}
 
-	outputStr := &strings.Builder{}
-	outputStr.WriteString("===============================")
+	reportStr := &strings.Builder{}
+	reportStr.WriteString("\n\nPolicy Report\n")
+	reportStr.WriteString("\n=============\n")
 
-	for _, policyBreach := range outputPolicies[settings.LevelCritical] {
-		writePolicyBreachToOutput(outputStr, policyBreach, settings.LevelCritical)
+	writePolicyListToString(reportStr, config.Policies)
+
+	breachedPolicies := map[string]map[string]bool{
+		settings.LevelCritical: make(map[string]bool),
+		settings.LevelHigh:     make(map[string]bool),
+		settings.LevelMedium:   make(map[string]bool),
+		settings.LevelLow:      make(map[string]bool),
 	}
 
-	for _, policyBreach := range outputPolicies[settings.LevelHigh] {
-		writePolicyBreachToOutput(outputStr, policyBreach, settings.LevelHigh)
+	for _, policyLevel := range []string{
+		settings.LevelCritical,
+		settings.LevelHigh,
+		settings.LevelMedium,
+		settings.LevelLow,
+	} {
+		for _, policyBreach := range policyResults[policyLevel] {
+			breachedPolicies[policyLevel][policyBreach.PolicyName] = true
+			writePolicyBreachToString(reportStr, policyBreach, policyLevel)
+		}
 	}
 
-	for _, policyBreach := range outputPolicies[settings.LevelMedium] {
-		writePolicyBreachToOutput(outputStr, policyBreach, settings.LevelMedium)
-	}
+	writeSummaryToString(reportStr, policyResults, len(config.Policies), breachedPolicies)
 
-	for _, policyBreach := range outputPolicies[settings.LevelLow] {
-		writePolicyBreachToOutput(outputStr, policyBreach, settings.LevelLow)
-	}
-
-	output.Msg(outputStr.String())
+	output.Msg(reportStr.String())
 
 	return nil
 }
@@ -149,17 +158,73 @@ func getDataflow(report types.Report, config settings.Config, isInternal bool) (
 	return dataflow.GetOutput(reportedDetections, config, isInternal)
 }
 
-func writePolicyBreachToOutput(outputStr *strings.Builder, policyBreach policies.PolicyResult, policySeverity string) {
-	outputStr.WriteString("\n\n")
-	outputStr.WriteString(formatSeverity(policySeverity))
-	outputStr.WriteString(policyBreach.PolicyName + " policy breach with " + policyBreach.CategoryGroup + "\n")
-	outputStr.WriteString(color.HiBlackString(policyBreach.PolicyDescription + "\n"))
-	outputStr.WriteString("\n")
-	outputStr.WriteString(color.HiBlueString("File: " + underline(policyBreach.Filename+":"+fmt.Sprint(policyBreach.LineNumber)) + "\n"))
-	outputStr.WriteString("\n")
-	outputStr.WriteString(highlightCodeExtract(policyBreach.LineNumber, policyBreach.ParentLineNumber, policyBreach.ParentContent))
-	outputStr.WriteString("\n\n")
-	outputStr.WriteString("=====================================")
+func writePolicyListToString(reportStr *strings.Builder, policies map[string]*settings.Policy) {
+	// list policies that were run
+	reportStr.WriteString("\nPolicy list: \n\n")
+	for key := range policies {
+		policy := policies[key]
+		reportStr.WriteString(color.HiBlackString("- " + policy.Name + "\n"))
+	}
+}
+
+func writeSummaryToString(
+	reportStr *strings.Builder,
+	policyResults map[string][]policies.PolicyResult,
+	policyCount int, breachedPolicies map[string]map[string]bool,
+) {
+	reportStr.WriteString("\n=====================================")
+
+	// give summary including counts
+	if len(policyResults) == 0 {
+		reportStr.WriteString("\n\n")
+		reportStr.WriteString(color.HiGreenString("SUCCESS\n\n"))
+		reportStr.WriteString(fmt.Sprint(policyCount) + " policies were run and no breaches were detected.\n\n")
+		return
+	}
+
+	criticalCount := len(policyResults[settings.LevelCritical])
+	highCount := len(policyResults[settings.LevelHigh])
+	mediumCount := len(policyResults[settings.LevelMedium])
+	lowCount := len(policyResults[settings.LevelLow])
+
+	totalCount := criticalCount + highCount + mediumCount + lowCount
+
+	reportStr.WriteString("\n\n")
+	reportStr.WriteString(color.RedString("Policy breaches detected\n\n"))
+	reportStr.WriteString(fmt.Sprint(policyCount) + " policies were run ")
+	reportStr.WriteString("and " + fmt.Sprint(totalCount) + " breaches were detected.\n\n")
+
+	// critical count
+	reportStr.WriteString(formatSeverity(settings.LevelCritical) + fmt.Sprint(criticalCount))
+	if len(breachedPolicies[settings.LevelCritical]) > 0 {
+		reportStr.WriteString(" (" + strings.Join(maps.Keys(breachedPolicies[settings.LevelCritical]), ", ") + ")")
+	}
+	// high count
+	reportStr.WriteString("\n" + formatSeverity(settings.LevelHigh) + fmt.Sprint(highCount))
+	if len(breachedPolicies[settings.LevelHigh]) > 0 {
+		reportStr.WriteString(" (" + strings.Join(maps.Keys(breachedPolicies[settings.LevelHigh]), ", ") + ")")
+	}
+	// medium count
+	reportStr.WriteString("\n" + formatSeverity(settings.LevelMedium) + fmt.Sprint(mediumCount))
+	if len(breachedPolicies[settings.LevelMedium]) > 0 {
+		reportStr.WriteString(" (" + strings.Join(maps.Keys(breachedPolicies[settings.LevelMedium]), ", ") + ")")
+	}
+	// low count
+	reportStr.WriteString("\n" + formatSeverity(settings.LevelLow) + fmt.Sprint(lowCount))
+	if len(breachedPolicies[settings.LevelLow]) > 0 {
+		reportStr.WriteString(" (" + strings.Join(maps.Keys(breachedPolicies[settings.LevelLow]), ", ") + ")")
+	}
+}
+
+func writePolicyBreachToString(reportStr *strings.Builder, policyBreach policies.PolicyResult, policySeverity string) {
+	reportStr.WriteString("\n\n")
+	reportStr.WriteString(formatSeverity(policySeverity))
+	reportStr.WriteString(policyBreach.PolicyName + " policy breach with " + policyBreach.CategoryGroup + "\n")
+	reportStr.WriteString(color.HiBlackString(policyBreach.PolicyDescription + "\n"))
+	reportStr.WriteString("\n")
+	reportStr.WriteString(color.HiBlueString("File: " + underline(policyBreach.Filename+":"+fmt.Sprint(policyBreach.LineNumber)) + "\n"))
+	reportStr.WriteString("\n")
+	reportStr.WriteString(highlightCodeExtract(policyBreach.LineNumber, policyBreach.ParentLineNumber, policyBreach.ParentContent))
 }
 
 func formatSeverity(policySeverity string) string {
