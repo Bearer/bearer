@@ -8,16 +8,21 @@ import (
 	"github.com/bearer/curio/pkg/parser/custom"
 	"github.com/bearer/curio/pkg/parser/nodeid"
 	"github.com/bearer/curio/pkg/util/file"
+	"github.com/rs/zerolog/log"
 )
 
 var classNameRegex = regexp.MustCompile(`\$CLASS_NAME`)
 var argumentsRegex = regexp.MustCompile(`<\$ARGUMENT>`)
-var anythingRegex = regexp.MustCompile(`\$ANYTHING`)
+var dataTypeRegex = regexp.MustCompile(`<\$DATA_TYPE>`)
+var ellipsisRegex = regexp.MustCompile(`\.\.\.`)
+
+// var blockRegex = regexp.MustCompile(`\$BLOCK`)
 
 func (detector *Detector) CompilePattern(Rule string, idGenerator nodeid.Generator) (config.CompiledRule, error) {
 	reworkedRule := classNameRegex.ReplaceAll([]byte(Rule), []byte("Var_Class_Name"+idGenerator.GenerateId()))
 	reworkedRule = argumentsRegex.ReplaceAll([]byte(reworkedRule), []byte("Var_Arguments"+idGenerator.GenerateId()))
-	reworkedRule = anythingRegex.ReplaceAll([]byte(reworkedRule), []byte("Var_Anything"+idGenerator.GenerateId()))
+	reworkedRule = ellipsisRegex.ReplaceAll([]byte(reworkedRule), []byte("Var_Ellipsis"+idGenerator.GenerateId()))
+	reworkedRule = dataTypeRegex.ReplaceAll([]byte(reworkedRule), []byte("Var_DataTypes"+idGenerator.GenerateId()))
 
 	tree, err := parser.ParseBytes(&file.FileInfo{}, &file.Path{}, []byte(reworkedRule), language, 0)
 	if err != nil {
@@ -30,7 +35,8 @@ func (detector *Detector) CompilePattern(Rule string, idGenerator nodeid.Generat
 		Params:    make([]config.Param, 0),
 	}
 
-	custom.GenerateTreeSitterQuery(tree.RootNode().Child(0), idGenerator, rule, detector)
+	custom.GenerateTreeSitterQuery(tree.RootNode().Child(0), idGenerator, rule, detector, false)
+	log.Error().Msgf("rule => %s", rule.Tree)
 
 	return *rule, nil
 }

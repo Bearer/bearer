@@ -29,13 +29,13 @@ import (
 	"github.com/bearer/curio/pkg/detectors/simple"
 	"github.com/bearer/curio/pkg/detectors/tsx"
 	"github.com/bearer/curio/pkg/detectors/typescript"
+	"github.com/bearer/curio/pkg/detectors/yamlconfig"
 	"github.com/bearer/curio/pkg/util/file"
 
 	"github.com/bearer/curio/pkg/detectors/spring"
 	"github.com/bearer/curio/pkg/detectors/sql"
 	"github.com/bearer/curio/pkg/detectors/symfony"
 	"github.com/bearer/curio/pkg/detectors/types"
-	"github.com/bearer/curio/pkg/detectors/yamlconfig"
 	"github.com/bearer/curio/pkg/parser/nodeid"
 	"github.com/rs/zerolog/log"
 

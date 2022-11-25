@@ -24,8 +24,7 @@ func (detector *Detector) IsParam(node *parser.Node) (isTerminating bool, should
 			return
 		}
 
-		// allow arbitrary termination
-		if strings.Index(node.Content(), "Var_Anything") == 0 {
+		if strings.Index(node.Content(), "Var_Ellipsis") == 0 {
 			shouldIgnore = true
 			return
 		}
@@ -34,6 +33,15 @@ func (detector *Detector) IsParam(node *parser.Node) (isTerminating bool, should
 		param = &config.Param{
 			StringMatch: node.Content(),
 		}
+		isTerminating = true
+		return
+	}
+
+	if strings.Index(node.Child(0).Content(), "Var_DataTypes") == 0 {
+		param = &config.Param{
+			ArgumentsExtract: true,
+		}
+
 		isTerminating = true
 		return
 	}
