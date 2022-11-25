@@ -84,6 +84,16 @@ func GetOutput(input []interface{}, config settings.Config, isInternal bool) (*D
 				if err != nil {
 					return nil, err
 				}
+
+				extras, err := datatypes.GetExtras(customDetector, input, detection)
+				if err != nil {
+					return nil, err
+				}
+
+				err = dataTypesHolder.AddSchema(castDetection, extras)
+				if err != nil {
+					return nil, err
+				}
 			case customdetectors.TypeDatatype:
 				extras, err := datatypes.GetExtras(customDetector, input, detection)
 				if err != nil {

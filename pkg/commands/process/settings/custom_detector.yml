@@ -1,3 +1,30 @@
+ruby_file_detection:
+  type: "risk"
+  languages:
+    - ruby
+  patterns:
+    - |
+      CSV.open(...) { <$DATA_TYPE> }
+    - |
+      CSV.open(...) do
+        <$DATA_TYPE>
+      end
+    - |
+      File.open(...) do
+        <$DATA_TYPE>
+      end
+    - |
+      File.open(...) { <$DATA_TYPE> }
+  param_parenting: true
+  metavars: {}
+  stored: false
+detect_rails_logger:
+  type: "risk"
+  patterns:
+    - |
+      Rails.logger.info(<$ARGUMENT>)
+  languages:
+    - ruby
 detect_ruby_logger:
   type: "risk"
   patterns:
