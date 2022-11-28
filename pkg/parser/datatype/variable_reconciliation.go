@@ -8,7 +8,18 @@ import (
 func VariableReconciliation(singleArgumentDatatypes map[parser.NodeID]*datatype.DataType, allDataTypes map[parser.NodeID]*datatype.DataType, scopeTerminators []string) {
 	for _, argumentDatatype := range singleArgumentDatatypes {
 		currentNode := argumentDatatype.Node
+		isFirst := true
 		for {
+			if isFirst {
+				isFirst = false
+			} else {
+				currentNode = currentNode.Parent()
+			}
+
+			if currentNode == nil {
+				break
+			}
+
 			isTerminating := false
 
 			for _, terminator := range scopeTerminators {
@@ -23,12 +34,13 @@ func VariableReconciliation(singleArgumentDatatypes map[parser.NodeID]*datatype.
 			}
 
 			for globalNodeID, globalDatatype := range allDataTypes {
-				// not in the same scope
-				if globalNodeID != currentNode.ID() {
-					continue
-				}
 				// in the same scope but it doesn't interest us
 				if globalDatatype.Name != argumentDatatype.Name {
+					continue
+				}
+
+				// not in the same scope
+				if globalNodeID != currentNode.ID() {
 					continue
 				}
 
@@ -36,10 +48,6 @@ func VariableReconciliation(singleArgumentDatatypes map[parser.NodeID]*datatype.
 				MergeDatatypesByPropertyNames(argumentDatatype, globalDatatype)
 			}
 
-			currentNode = currentNode.Parent()
-			if currentNode == nil {
-				break
-			}
 		}
 	}
 }
