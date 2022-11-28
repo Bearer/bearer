@@ -141,5 +141,9 @@ func getFullFilename(path string, filename string) string {
 		return path
 	}
 
+	if path == "" {
+		return filename
+	}
+
 	return path + "/" + filename
 }
