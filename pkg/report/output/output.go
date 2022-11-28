@@ -20,10 +20,10 @@ import (
 
 var ErrUndefinedFormat = errors.New("undefined output format")
 
-func ReportPolicies(report types.Report, output *zerolog.Event, config settings.Config) error {
+func ReportPolicies(report types.Report, output *zerolog.Event, config settings.Config) (bool, error) {
 	policyResults, err := getPolicyReportOutput(report, config)
 	if err != nil {
-		return err
+		return false, err
 	}
 
 	outputToFile := config.Report.Output != ""
@@ -31,7 +31,7 @@ func ReportPolicies(report types.Report, output *zerolog.Event, config settings.
 
 	output.Msg(reportStr.String())
 
-	return nil
+	return len(policyResults) == 0, nil
 }
 
 func ReportJSON(report types.Report, output *zerolog.Event, config settings.Config) error {
