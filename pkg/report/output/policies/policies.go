@@ -85,7 +85,7 @@ func GetOutput(dataflow *dataflow.DataFlow, config settings.Config) (map[string]
 					policyResult := PolicyResult{
 						PolicyName:        policy.Name,
 						PolicyDescription: policy.Description,
-						Filename:          getFullFilename(config.Target, policyOutput.Filename),
+						Filename:          policyOutput.Filename,
 						LineNumber:        policyOutput.LineNumber,
 						CategoryGroup:     policyOutput.CategoryGroup,
 						ParentLineNumber:  policyOutput.ParentLineNumber,
@@ -137,14 +137,6 @@ func BuildReportString(policyResults map[string][]PolicyResult, policies map[str
 	color.NoColor = initialColorSetting
 
 	return reportStr
-}
-
-func getFullFilename(path string, filename string) string {
-	if filename == "." {
-		return path
-	}
-
-	return path + filename
 }
 
 func writePolicyListToString(reportStr *strings.Builder, policies map[string]*settings.Policy) {

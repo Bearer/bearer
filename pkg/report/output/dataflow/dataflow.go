@@ -63,6 +63,9 @@ func GetOutput(input []interface{}, config settings.Config, isInternal bool) (*D
 			return nil, err
 		}
 
+		// add full path to filename
+		castDetection.Source.Filename = getFullFilename(config.Target, castDetection.Source.Filename)
+
 		switch detectionType {
 		case detections.TypeSchemaClassified:
 			err = dataTypesHolder.AddSchema(castDetection, nil)
@@ -131,4 +134,12 @@ func GetOutput(input []interface{}, config settings.Config, isInternal bool) (*D
 	}
 
 	return dataflow, nil
+}
+
+func getFullFilename(path string, filename string) string {
+	if filename == "." {
+		return path
+	}
+
+	return path + "/" + filename
 }
