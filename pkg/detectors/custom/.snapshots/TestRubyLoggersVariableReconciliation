@@ -6,8 +6,62 @@
 			"filename": "loggers.rb",
 			"language": "Ruby",
 			"language_type": "programming",
-			"line_number": 4,
+			"line_number": 5,
 			"column_number": 10,
+			"text": null
+		},
+		"value": {
+			"object_name": "user",
+			"field_name": "race",
+			"field_type": "",
+			"field_type_simple": "unknown"
+		}
+	},
+	{
+		"type": "custom",
+		"detector_type": "detect_ruby_logger",
+		"source": {
+			"filename": "loggers.rb",
+			"language": "Ruby",
+			"language_type": "programming",
+			"line_number": 21,
+			"column_number": 13,
+			"text": null
+		},
+		"value": {
+			"object_name": "user",
+			"field_name": "first_name",
+			"field_type": "",
+			"field_type_simple": "unknown"
+		}
+	},
+	{
+		"type": "custom",
+		"detector_type": "detect_ruby_logger",
+		"source": {
+			"filename": "loggers.rb",
+			"language": "Ruby",
+			"language_type": "programming",
+			"line_number": 22,
+			"column_number": 13,
+			"text": null
+		},
+		"value": {
+			"object_name": "user",
+			"field_name": "last_name",
+			"field_type": "",
+			"field_type_simple": "unknown"
+		}
+	},
+	{
+		"type": "custom",
+		"detector_type": "detect_ruby_logger",
+		"source": {
+			"filename": "loggers.rb",
+			"language": "Ruby",
+			"language_type": "programming",
+			"line_number": 23,
+			"column_number": 13,
 			"text": null
 		},
 		"value": {
@@ -24,31 +78,13 @@
 			"filename": "loggers.rb",
 			"language": "Ruby",
 			"language_type": "programming",
-			"line_number": 4,
-			"column_number": 18,
-			"text": null
-		},
-		"value": {
-			"object_name": "address",
-			"field_name": "zip",
-			"field_type": "",
-			"field_type_simple": "unknown"
-		}
-	},
-	{
-		"type": "custom",
-		"detector_type": "detect_ruby_logger",
-		"source": {
-			"filename": "loggers.rb",
-			"language": "Ruby",
-			"language_type": "programming",
-			"line_number": 5,
-			"column_number": 10,
+			"line_number": 24,
+			"column_number": 13,
 			"text": null
 		},
 		"value": {
 			"object_name": "user",
-			"field_name": "first_name",
+			"field_name": "phone_number",
 			"field_type": "",
 			"field_type_simple": "unknown"
 		}
@@ -67,6 +103,24 @@
 		"value": {
 			"object_name": "user",
 			"field_name": "email",
+			"field_type": "",
+			"field_type_simple": "unknown"
+		}
+	},
+	{
+		"type": "custom",
+		"detector_type": "detect_ruby_logger",
+		"source": {
+			"filename": "loggers.rb",
+			"language": "Ruby",
+			"language_type": "programming",
+			"line_number": 4,
+			"column_number": 16,
+			"text": null
+		},
+		"value": {
+			"object_name": "email",
+			"field_name": "username",
 			"field_type": "",
 			"field_type_simple": "unknown"
 		}
