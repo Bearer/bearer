@@ -32,6 +32,12 @@ func (detector *Detector) ExtractArguments(node *parser.Node, idGenerator nodeid
 		return joinedDatatypes, nil
 	}
 
+	if node.ChildCount() == 0 {
+		return joinedDatatypes, nil
+	}
+
+	allDatatypes := datatype.Discover(node.Tree().RootNode(), idGenerator)
+
 	for i := 0; i < node.ChildCount(); i++ {
 		singleArgument := node.Child(i)
 
@@ -54,8 +60,6 @@ func (detector *Detector) ExtractArguments(node *parser.Node, idGenerator nodeid
 		}
 
 		singleArgumentDatatypes := datatype.Discover(singleArgument, idGenerator)
-		allDatatypes := datatype.Discover(node.Tree().RootNode(), idGenerator)
-
 		parserdatatype.VariableReconciliation(singleArgumentDatatypes, allDatatypes, datatype.ScopeTerminators)
 
 		for nodeID, target := range singleArgumentDatatypes {

@@ -64,6 +64,35 @@ func TestRubyLoggersJSON(t *testing.T) {
 	cupaloy.SnapshotT(t, string(bytes))
 }
 
+func TestRubyLoggersVariableReconciliation(t *testing.T) {
+	var rulesConfig map[string]settings.Rule
+
+	detector := custom.New(&nodeid.IntGenerator{Counter: 0})
+	err := yaml.Unmarshal(configRubyLoggers, &rulesConfig)
+	if err != nil {
+		t.Fatal(err)
+		return
+	}
+	customDetector := detector.(*custom.Detector)
+	err = customDetector.CompileRules(rulesConfig)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	var registrations = []detectors.InitializedDetector{{
+		Type:     detectorType,
+		Detector: detector}}
+	detectorReport := testhelper.Extract(t, filepath.Join("testdata", "ruby", "variable_reconciliation"), registrations, detectorType)
+
+	bytes, err := json.MarshalIndent(detectorReport.CustomDetections, "", "\t")
+
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	cupaloy.SnapshotT(t, string(bytes))
+}
+
 func TestRailsEncryptsJSON(t *testing.T) {
 	var rulesConfig map[string]settings.Rule
 

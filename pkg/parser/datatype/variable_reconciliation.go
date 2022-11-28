@@ -2,10 +2,13 @@ package datatype
 
 import (
 	"github.com/bearer/curio/pkg/parser"
+	"github.com/bearer/curio/pkg/parser/nodeid"
 	"github.com/bearer/curio/pkg/report/schema/datatype"
 )
 
 func VariableReconciliation(singleArgumentDatatypes map[parser.NodeID]*datatype.DataType, allDataTypes map[parser.NodeID]*datatype.DataType, scopeTerminators []string) {
+	scopedDatatypes := ScopeDatatypes(allDataTypes, &nodeid.IntGenerator{}, scopeTerminators)
+
 	for _, argumentDatatype := range singleArgumentDatatypes {
 		currentNode := argumentDatatype.Node
 		isFirst := true
@@ -33,21 +36,26 @@ func VariableReconciliation(singleArgumentDatatypes map[parser.NodeID]*datatype.
 				continue
 			}
 
-			for globalNodeID, globalDatatype := range allDataTypes {
-				// in the same scope but it doesn't interest us
-				if globalDatatype.Name != argumentDatatype.Name {
-					continue
-				}
+			for scopeID, scope := range scopedDatatypes {
 
 				// not in the same scope
-				if globalNodeID != currentNode.ID() {
+				if scopeID != currentNode.ID() {
+
 					continue
 				}
 
-				// merge properties of argumentDatatype and globalDatatype
-				MergeDatatypesByPropertyNames(argumentDatatype, globalDatatype)
-			}
+				for datatypeName, datatypeOccurences := range scope.DataTypes {
+					// in the same scope but it doesn't interest us because they are different datatypes
+					if datatypeName != argumentDatatype.Name {
+						continue
+					}
 
+					for _, scopedDatatype := range datatypeOccurences {
+						// merge properties of argumentDatatype and globalDatatype
+						MergeDatatypesByPropertyNames(argumentDatatype, scopedDatatype)
+					}
+				}
+			}
 		}
 	}
 }
