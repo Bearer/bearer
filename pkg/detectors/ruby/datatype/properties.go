@@ -104,7 +104,7 @@ func addProperties(node *parser.Node, helperDatatypes map[parser.NodeID]*schemad
 		}
 	}
 
-	captures = tree.QueryConventional(hashQuery)
+	captures = node.QueryConventional(hashQuery)
 	for _, capture := range captures {
 		hashNode := capture["param_arguments"]
 
