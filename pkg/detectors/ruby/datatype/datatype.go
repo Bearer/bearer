@@ -32,10 +32,10 @@ var classFunctionsQuery = parser.QueryMustCompile(ruby.GetLanguage(),
 		)
 	) @param_class`)
 
-func Discover(tree *parser.Tree, idGenerator nodeid.Generator) map[parser.NodeID]*schemadatatype.DataType {
+func Discover(node *parser.Node, idGenerator nodeid.Generator) map[parser.NodeID]*schemadatatype.DataType {
 	classDataTypes := make(map[parser.NodeID]*schemadatatype.DataType)
 	// add classses
-	captures := tree.QueryConventional(classesQuery)
+	captures := node.QueryConventional(classesQuery)
 	for _, capture := range captures {
 		id := capture["param_id"].Content()
 		classNode := capture["param_class"]
@@ -48,17 +48,17 @@ func Discover(tree *parser.Tree, idGenerator nodeid.Generator) map[parser.NodeID
 		}
 	}
 
-	discoverClassProperties(tree, classDataTypes)
-	discoverClassFunctions(tree, classDataTypes)
+	discoverClassProperties(node, classDataTypes)
+	discoverClassFunctions(node, classDataTypes)
 
-	discoverClassAssignment(tree, classDataTypes)
+	discoverClassAssignment(node, classDataTypes)
 
 	propertiesDatatypes := make(map[parser.NodeID]*schemadatatype.DataType)
 	helperDatatypes := make(map[parser.NodeID]*schemadatatype.DataType)
 
-	addProperties(tree, helperDatatypes)
-	linkProperties(tree, propertiesDatatypes, helperDatatypes)
-	discoverStructures(tree, propertiesDatatypes)
+	addProperties(node, helperDatatypes)
+	linkProperties(node, propertiesDatatypes, helperDatatypes)
+	discoverStructures(node, propertiesDatatypes)
 	scopeAndMergeProperties(propertiesDatatypes, classDataTypes, idGenerator)
 
 	// merge properties and classes
@@ -71,9 +71,9 @@ func Discover(tree *parser.Tree, idGenerator nodeid.Generator) map[parser.NodeID
 	return propertiesDatatypes
 }
 
-func discoverClassProperties(tree *parser.Tree, datatypes map[parser.NodeID]*schemadatatype.DataType) {
+func discoverClassProperties(node *parser.Node, datatypes map[parser.NodeID]*schemadatatype.DataType) {
 	// add class properties
-	captures := tree.QueryConventional(classPropertiesQuery)
+	captures := node.QueryConventional(classPropertiesQuery)
 	for _, capture := range captures {
 		classNode := capture["param_class"]
 		if datatypes[classNode.ID()] == nil {
@@ -94,8 +94,8 @@ func discoverClassProperties(tree *parser.Tree, datatypes map[parser.NodeID]*sch
 	}
 }
 
-func discoverClassFunctions(tree *parser.Tree, datatypes map[parser.NodeID]*schemadatatype.DataType) {
-	captures := tree.QueryConventional(classFunctionsQuery)
+func discoverClassFunctions(node *parser.Node, datatypes map[parser.NodeID]*schemadatatype.DataType) {
+	captures := node.QueryConventional(classFunctionsQuery)
 	for _, capture := range captures {
 		classNode := capture["param_class"]
 		if datatypes[classNode.ID()] == nil {

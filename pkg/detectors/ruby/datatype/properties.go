@@ -34,10 +34,10 @@ var callsQuery = parser.QueryMustCompile(ruby.GetLanguage(),
 
 var ScopeTerminators = []string{"program", "method", "block", "lambda", "singleton_method"}
 
-func addProperties(tree *parser.Tree, helperDatatypes map[parser.NodeID]*schemadatatype.DataType) {
+func addProperties(node *parser.Node, helperDatatypes map[parser.NodeID]*schemadatatype.DataType) {
 	// add element references
 	var doElementsQuery = func(query *sitter.Query) {
-		captures := tree.QueryConventional(query)
+		captures := node.QueryConventional(query)
 		for _, capture := range captures {
 			objectNode := capture["param_object"]
 			if objectNode.Type() == "identifier" || objectNode.Type() == "instance_variable" {
@@ -72,7 +72,7 @@ func addProperties(tree *parser.Tree, helperDatatypes map[parser.NodeID]*schemad
 	doElementsQuery(elementSimpleSymbolQuery)
 
 	// add calls
-	captures := tree.QueryConventional(callsQuery)
+	captures := node.QueryConventional(callsQuery)
 	for _, capture := range captures {
 		receiverNode := capture["param_receiver"]
 		if receiverNode.Type() == "identifier" || receiverNode.Type() == "instance_variable" {
@@ -103,7 +103,7 @@ func addProperties(tree *parser.Tree, helperDatatypes map[parser.NodeID]*schemad
 	}
 }
 
-func linkProperties(tree *parser.Tree, datatypes, helperDatatypes map[parser.NodeID]*schemadatatype.DataType) {
+func linkProperties(rootNode *parser.Node, datatypes, helperDatatypes map[parser.NodeID]*schemadatatype.DataType) {
 	for _, helperType := range helperDatatypes {
 		node := helperType.Node
 		parent := node.Parent()

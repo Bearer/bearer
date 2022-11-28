@@ -11,7 +11,6 @@ import (
 
 	schemadatatype "github.com/bearer/curio/pkg/report/schema/datatype"
 	"github.com/bearer/curio/pkg/util/file"
-	"github.com/smacker/go-tree-sitter/ruby"
 )
 
 func (detector *Detector) ExtractArguments(node *parser.Node, idGenerator nodeid.Generator, fileinfo *file.FileInfo, filepath *file.Path) (map[parser.NodeID]*schemadatatype.DataType, error) {
@@ -54,14 +53,8 @@ func (detector *Detector) ExtractArguments(node *parser.Node, idGenerator nodeid
 			continue
 		}
 
-		content := singleArgument.Content()
-		tree, err := parser.ParseBytes(fileinfo, filepath, []byte(content), ruby.GetLanguage(), singleArgument.LineNumber()-1)
-		if err != nil {
-			return nil, err
-		}
-
-		singleArgumentDatatypes := datatype.Discover(tree, idGenerator)
-		allDatatypes := datatype.Discover(node.Tree(), idGenerator)
+		singleArgumentDatatypes := datatype.Discover(singleArgument, idGenerator)
+		allDatatypes := datatype.Discover(node.Tree().RootNode(), idGenerator)
 
 		parserdatatype.VariableReconciliation(singleArgumentDatatypes, allDatatypes, datatype.ScopeTerminators)
 

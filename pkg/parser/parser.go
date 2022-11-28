@@ -439,6 +439,34 @@ func (node *Node) Query(query *sitter.Query, onMatch func(captures Captures) err
 	return nil
 }
 
+func (node *Node) QueryConventional(query *sitter.Query) []Captures {
+	filteredCaptures := []Captures{}
+	captures := node.QueryMustPass(query)
+
+	for _, capture := range captures {
+		passesFilter := true
+		for i := 0; i < int(query.CaptureCount()); i++ {
+			name := query.CaptureNameForId(uint32(i))
+			if strings.HasPrefix(name, "helper_") {
+				wantMatch := strings.TrimPrefix(name, "helper_")
+				content := stringutil.StripQuotes(capture[name].Content())
+				if content != wantMatch {
+					passesFilter = false
+					break
+				}
+			}
+		}
+
+		if !passesFilter {
+			continue
+		}
+
+		filteredCaptures = append(filteredCaptures, capture)
+	}
+
+	return filteredCaptures
+}
+
 func (node *Node) QueryMustPass(query *sitter.Query) (captures []Captures) {
 	var returningCaptures []Captures
 	onMatch := func(captures Captures) error {
