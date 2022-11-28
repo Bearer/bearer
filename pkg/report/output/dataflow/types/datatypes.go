@@ -12,7 +12,7 @@ type Datatype struct {
 type DatatypeDetector struct {
 	Name      string             `json:"name" yaml:"name"`
 	Locations []DatatypeLocation `json:"locations" yaml:"locations"`
-	Parent    *schema.Parent     `json:"parent" yaml:"parent"`
+	Parent    *schema.Parent     `json:"parent,omitempty" yaml:"parent,omitempty"`
 }
 
 type DatatypeLocation struct {
