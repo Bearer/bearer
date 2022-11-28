@@ -78,6 +78,10 @@ func (datatype *DataType) DeleteProperty(name string) {
 	delete(datatype.Properties, name)
 }
 
+func (datatype *DataType) CreateProperties() {
+	datatype.Properties = make(map[string]DataTypable)
+}
+
 type DataTypable interface {
 	DeleteProperty(name string)
 	GetClassification() interface{}
@@ -92,6 +96,7 @@ type DataTypable interface {
 	GetNode() *parser.Node
 	GetProperties() map[string]DataTypable
 	SetProperty(string, DataTypable)
+	CreateProperties()
 }
 
 func ExportClassified[D DataTypable](report detections.ReportDetection, detectionType detections.DetectionType, detectorType detectors.Type, idGenerator nodeid.Generator, values map[parser.NodeID]D, parent *parser.Node) {

@@ -241,8 +241,7 @@ func (detector *Detector) extractData(captures []parser.Captures, rule config.Co
 
 		detector.applyDatatypeTransformations(rule, forExport)
 
-		detector.
-			report.AddDataType(
+		report.AddDataType(
 			detections.TypeCustom,
 			detectors.Type(rule.RuleName),
 			idGenerator,
