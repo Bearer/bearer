@@ -132,6 +132,22 @@ scan:
             root_lowercase: false
             metavars: {}
             stored: false
+        ruby_http_detection:
+            disabled: false
+            type: risk
+            languages:
+                - ruby
+            patterns:
+                - |
+                  URI.encode_www_form(<$DATA_TYPE>)
+                - |
+                  Net::HTTP.post_form(<$DATA_TYPE>)
+            param_parenting: false
+            processors: []
+            root_singularize: false
+            root_lowercase: false
+            metavars: {}
+            stored: false
     debug: false
     disable-domain-resolution: false
     domain-resolution-timeout: 3s
