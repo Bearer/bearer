@@ -13,7 +13,7 @@ type RiskDatatype struct {
 	CategoryUUID string         `json:"category_uuid,omitempty" yaml:"category_uuid,omitempty"`
 	Stored       bool           `json:"stored" yaml:"stored"`
 	Locations    []RiskLocation `json:"locations" yaml:"locations"`
-	Parent       *schema.Parent `json:"parent" yaml:"parent"`
+	Parent       *schema.Parent `json:"parent,omitempty" yaml:"parent,omitempty"`
 }
 
 type RiskLocation struct {
