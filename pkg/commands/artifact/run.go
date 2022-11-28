@@ -135,10 +135,8 @@ func Run(ctx context.Context, opts flag.Options, targetKind TargetKind) (err err
 		return xerrors.Errorf("report error: %w", err)
 	}
 
-	if reportPassed {
-		os.Exit(0)
-	} else {
-		os.Exit(1)
+	if !reportPassed {
+		defer os.Exit(1)
 	}
 
 	return nil
