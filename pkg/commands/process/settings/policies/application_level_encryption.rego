@@ -20,6 +20,10 @@ high[item] {
     item = {
         "category_group":  category.group_name,
         "filename": location.filename,
+        "line_number": location.line_number,
+        "parent_line_number": detector.parent.line_number,
+        "parent_content": detector.parent.content
+
     }
 }
 
@@ -38,5 +42,8 @@ critical[item] {
     item = {
         "category_group":  category.group_name,
         "filename": location.filename,
+        "line_number": location.line_number,
+        "parent_line_number": detector.parent.line_number,
+        "parent_content": detector.parent.content
     }
 }
