@@ -17,17 +17,21 @@ type PolicyInput struct {
 }
 
 type PolicyOutput struct {
-	LineNumber    string `json:"line_number,omitempty" yaml:"line_number,omitempty"`
-	Filename      string `json:"filename,omitempty" yaml:"filename,omitempty"`
-	CategoryGroup string `json:"category_group,omitempty" yaml:"category_group,omitempty"`
+	ParentLineNumber int    `json:"parent_line_number,omitempty" yaml:"parent_line_number,omitempty"`
+	ParentContent    string `json:"parent_content,omitempty" yaml:"parent_content,omitempty"`
+	LineNumber       int    `json:"line_number,omitempty" yaml:"line_number,omitempty"`
+	Filename         string `json:"filename,omitempty" yaml:"filename,omitempty"`
+	CategoryGroup    string `json:"category_group,omitempty" yaml:"category_group,omitempty"`
 }
 
 type PolicyResult struct {
 	PolicyName        string `json:"policy_name" yaml:"policy_name"`
 	PolicyDescription string `json:"policy_description" yaml:"policy_description"`
-	LineNumber        string `json:"line_number,omitempty" yaml:"line_number,omitempty"`
+	LineNumber        int    `json:"line_number,omitempty" yaml:"line_number,omitempty"`
 	Filename          string `json:"filename,omitempty" yaml:"filename,omitempty"`
 	CategoryGroup     string `json:"category_group,omitempty" yaml:"category_group,omitempty"`
+	ParentLineNumber  int    `json:"parent_line_number,omitempty" yaml:"parent_line_number,omitempty"`
+	ParentContent     string `json:"parent_content,omitempty" yaml:"parent_content,omitempty"`
 }
 
 func GetOutput(dataflow *dataflow.DataFlow, config settings.Config) (map[string][]PolicyResult, error) {
@@ -69,8 +73,11 @@ func GetOutput(dataflow *dataflow.DataFlow, config settings.Config) (map[string]
 					policyResult := PolicyResult{
 						PolicyName:        policy.Name,
 						PolicyDescription: policy.Description,
-						Filename:          policyOutput.Filename,
+						Filename:          getFullFilename(config.Target, policyOutput.Filename),
+						LineNumber:        policyOutput.LineNumber,
 						CategoryGroup:     policyOutput.CategoryGroup,
+						ParentLineNumber:  policyOutput.ParentLineNumber,
+						ParentContent:     policyOutput.ParentContent,
 					}
 
 					result[severity] = append(result[severity], policyResult)
@@ -80,4 +87,12 @@ func GetOutput(dataflow *dataflow.DataFlow, config settings.Config) (map[string]
 	}
 
 	return result, nil
+}
+
+func getFullFilename(path string, filename string) string {
+	if filename == "." {
+		return path
+	}
+
+	return path + filename
 }

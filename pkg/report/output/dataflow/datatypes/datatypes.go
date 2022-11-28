@@ -46,7 +46,12 @@ func New(isInternal bool) *Holder {
 }
 
 func (holder *Holder) AddSchema(detection detections.Detection, extras *extraFields) error {
-	classification, err := detectiondecoder.GetSchemaClassification(detection)
+	schema, err := detectiondecoder.GetSchema(detection)
+	if err != nil {
+		return err
+	}
+
+	classification, err := detectiondecoder.GetSchemaClassification(schema, detection)
 	if err != nil {
 		return err
 	}
