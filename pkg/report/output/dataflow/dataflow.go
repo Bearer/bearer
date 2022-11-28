@@ -63,6 +63,9 @@ func GetOutput(input []interface{}, config settings.Config, isInternal bool) (*D
 			return nil, err
 		}
 
+		// add full path to filename
+		castDetection.Source.Filename = getFullFilename(config.Target, castDetection.Source.Filename)
+
 		switch detectionType {
 		case detections.TypeSchemaClassified:
 			err = dataTypesHolder.AddSchema(castDetection, nil)
@@ -81,6 +84,16 @@ func GetOutput(input []interface{}, config settings.Config, isInternal bool) (*D
 				continue
 			case customdetectors.TypeRisk:
 				err := risksHolder.AddSchema(castDetection)
+				if err != nil {
+					return nil, err
+				}
+
+				extras, err := datatypes.GetExtras(customDetector, input, detection)
+				if err != nil {
+					return nil, err
+				}
+
+				err = dataTypesHolder.AddSchema(castDetection, extras)
 				if err != nil {
 					return nil, err
 				}
@@ -121,4 +134,16 @@ func GetOutput(input []interface{}, config settings.Config, isInternal bool) (*D
 	}
 
 	return dataflow, nil
+}
+
+func getFullFilename(path string, filename string) string {
+	if filename == "." {
+		return path
+	}
+
+	if path == "" {
+		return filename
+	}
+
+	return path + "/" + filename
 }

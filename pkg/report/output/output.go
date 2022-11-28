@@ -4,9 +4,7 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"strings"
 
-	"github.com/TwiN/go-color"
 	"github.com/bearer/curio/pkg/commands/process/settings"
 	"github.com/bearer/curio/pkg/flag"
 	"github.com/bearer/curio/pkg/report/output/dataflow"
@@ -15,7 +13,6 @@ import (
 	"github.com/bearer/curio/pkg/report/output/policies"
 	"github.com/bearer/curio/pkg/report/output/stats"
 	"github.com/bearer/curio/pkg/types"
-
 	"gopkg.in/yaml.v3"
 
 	"github.com/rs/zerolog"
@@ -23,34 +20,18 @@ import (
 
 var ErrUndefinedFormat = errors.New("undefined output format")
 
-func ReportPolicies(report types.Report, output *zerolog.Event, config settings.Config) error {
-	outputPolicies, err := getPolicyReportOutput(report, config)
+func ReportPolicies(report types.Report, output *zerolog.Event, config settings.Config) (bool, error) {
+	policyResults, err := getPolicyReportOutput(report, config)
 	if err != nil {
-		return err
+		return false, err
 	}
 
-	outputStr := &strings.Builder{}
-	outputStr.WriteString("===============================")
+	outputToFile := config.Report.Output != ""
+	reportStr := policies.BuildReportString(policyResults, config.Policies, outputToFile)
 
-	for _, policyBreach := range outputPolicies[settings.LevelCritical] {
-		writePolicyBreachToOutput(outputStr, policyBreach, settings.LevelCritical, color.Red)
-	}
+	output.Msg(reportStr.String())
 
-	for _, policyBreach := range outputPolicies[settings.LevelHigh] {
-		writePolicyBreachToOutput(outputStr, policyBreach, settings.LevelHigh, color.Yellow)
-	}
-
-	for _, policyBreach := range outputPolicies[settings.LevelMedium] {
-		writePolicyBreachToOutput(outputStr, policyBreach, settings.LevelMedium, color.Cyan)
-	}
-
-	for _, policyBreach := range outputPolicies[settings.LevelLow] {
-		writePolicyBreachToOutput(outputStr, policyBreach, settings.LevelLow, color.Blue)
-	}
-
-	output.Msg(outputStr.String())
-
-	return nil
+	return len(policyResults) == 0, nil
 }
 
 func ReportJSON(report types.Report, output *zerolog.Event, config settings.Config) error {
@@ -132,18 +113,6 @@ func getPolicyReportOutput(report types.Report, config settings.Config) (map[str
 	}
 
 	return policies.GetOutput(dataflow, config)
-}
-
-func writePolicyBreachToOutput(outputStr *strings.Builder, policyBreach policies.PolicyResult, policySeverity string, displayColor string) {
-	outputStr.WriteString("\n")
-	outputStr.WriteString("\n")
-	outputStr.WriteString(color.With(displayColor, strings.ToUpper(policySeverity)) + ": ")
-	outputStr.WriteString(policyBreach.PolicyName + ", policy breached with " + policyBreach.CategoryGroup + "\n")
-	outputStr.WriteString(policyBreach.PolicyDescription + "\n")
-	outputStr.WriteString("Filename: " + policyBreach.Filename)
-	outputStr.WriteString("\n")
-	outputStr.WriteString("\n")
-	outputStr.WriteString("===============================")
 }
 
 func getDataflow(report types.Report, config settings.Config, isInternal bool) (*dataflow.DataFlow, error) {

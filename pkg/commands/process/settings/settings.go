@@ -18,6 +18,7 @@ type Config struct {
 	Report         flag.ReportOptions `json:"report" yaml:"report"`
 	CustomDetector map[string]Rule    `json:"custom_detector" yaml:"custom_detector"`
 	Policies       map[string]*Policy `json:"policies" yaml:"policies"`
+	Target         string             `json:"target" yaml:"target"`
 }
 
 type PolicyLevel string

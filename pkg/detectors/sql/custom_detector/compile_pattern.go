@@ -34,7 +34,7 @@ func (detector *Detector) CompilePattern(rule string, idGenerator nodeid.Generat
 		Params:    make([]config.Param, 0),
 	}
 
-	custom.GenerateTreeSitterQuery(tree.RootNode().Child(0), idGenerator, compiledRule, detector)
+	custom.GenerateTreeSitterQuery(tree.RootNode().Child(0), idGenerator, compiledRule, detector, false)
 
 	return *compiledRule, nil
 }

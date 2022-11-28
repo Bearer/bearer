@@ -33,6 +33,8 @@ var callsQuery = parser.QueryMustCompile(ruby.GetLanguage(),
 	) @param_parent`)
 
 var ScopeTerminators = []string{"program", "method", "block", "lambda", "singleton_method"}
+var hashQuery = parser.QueryMustCompile(ruby.GetLanguage(),
+	`(hash) @param_arguments`)
 
 func addProperties(node *parser.Node, helperDatatypes map[parser.NodeID]*schemadatatype.DataType) {
 	// add element references
@@ -45,7 +47,7 @@ func addProperties(node *parser.Node, helperDatatypes map[parser.NodeID]*schemad
 				helperDatatypes[objectNode.ID()] = &schemadatatype.DataType{
 					Node:       objectNode,
 					Name:       id,
-					Type:       schema.SimpleTypeUknown,
+					Type:       schema.SimpleTypeUnknown,
 					TextType:   "",
 					Properties: make(map[string]schemadatatype.DataTypable),
 					UUID:       "",
@@ -60,7 +62,7 @@ func addProperties(node *parser.Node, helperDatatypes map[parser.NodeID]*schemad
 			helperDatatypes[elementNode.ID()] = &schemadatatype.DataType{
 				Node:       idNode,
 				Name:       id,
-				Type:       schema.SimpleTypeUknown,
+				Type:       schema.SimpleTypeUnknown,
 				TextType:   "",
 				Properties: make(map[string]schemadatatype.DataTypable),
 				UUID:       "",
@@ -80,7 +82,7 @@ func addProperties(node *parser.Node, helperDatatypes map[parser.NodeID]*schemad
 			helperDatatypes[receiverNode.ID()] = &schemadatatype.DataType{
 				Node:       receiverNode,
 				Name:       id,
-				Type:       schema.SimpleTypeUknown,
+				Type:       schema.SimpleTypeUnknown,
 				TextType:   "",
 				Properties: make(map[string]schemadatatype.DataTypable),
 				UUID:       "",
@@ -95,10 +97,109 @@ func addProperties(node *parser.Node, helperDatatypes map[parser.NodeID]*schemad
 		helperDatatypes[elementNode.ID()] = &schemadatatype.DataType{
 			Node:       idNode,
 			Name:       id,
-			Type:       schema.SimpleTypeUknown,
+			Type:       schema.SimpleTypeUnknown,
 			TextType:   "",
 			Properties: make(map[string]schemadatatype.DataTypable),
 			UUID:       "",
+		}
+	}
+
+	captures = tree.QueryConventional(hashQuery)
+	for _, capture := range captures {
+		hashNode := capture["param_arguments"]
+
+		parentNode := hashNode.Parent()
+
+		if parentNode.Type() == "assignment" {
+			leftNode := parentNode.ChildByFieldName("left")
+
+			if leftNode.Type() == "identifier" || leftNode.Type() == "instance_variable" {
+				id := strings.TrimLeft(leftNode.Content(), "@")
+				helperDatatypes[parentNode.ID()] = &schemadatatype.DataType{
+					Node:       parentNode,
+					Name:       id,
+					Type:       schema.SimpleTypeUnknown,
+					TextType:   "",
+					Properties: make(map[string]schemadatatype.DataTypable),
+					UUID:       "",
+				}
+
+				// add child properties
+				for i := 0; i < hashNode.ChildCount(); i++ {
+					pair := hashNode.Child(i)
+
+					if pair.Type() != "pair" {
+						continue
+					}
+
+					key := pair.ChildByFieldName("key")
+					if key.Type() != "hash_key_symbol" {
+						continue
+					}
+
+					propertyName := key.Content()
+
+					helperDatatypes[parentNode.ID()].Properties[propertyName] = &schemadatatype.DataType{
+						Node:       key,
+						Name:       propertyName,
+						Type:       schema.SimpleTypeUnknown,
+						TextType:   "",
+						Properties: make(map[string]schemadatatype.DataTypable),
+					}
+				}
+			}
+		} else if parentNode.Type() == "argument_list" || parentNode.Type() == "program" {
+			// add child properties
+			for i := 0; i < hashNode.ChildCount(); i++ {
+				pair := hashNode.Child(i)
+
+				if pair.Type() != "pair" {
+					continue
+				}
+
+				key := pair.ChildByFieldName("key")
+				if key.Type() != "hash_key_symbol" {
+					continue
+				}
+
+				value := pair.ChildByFieldName("value")
+				if value.Type() != "hash" {
+					continue
+				}
+
+				helperDatatypes[key.ID()] = &schemadatatype.DataType{
+					Node:       key,
+					Name:       key.Content(),
+					Type:       schema.SimpleTypeUnknown,
+					TextType:   "",
+					Properties: make(map[string]schemadatatype.DataTypable),
+					UUID:       "",
+				}
+
+				for j := 0; j < value.ChildCount(); j++ {
+					childPair := value.Child(j)
+
+					if childPair.Type() != "pair" {
+						continue
+					}
+
+					childKey := childPair.ChildByFieldName("key")
+					if key.Type() != "hash_key_symbol" {
+						continue
+					}
+
+					propertyName := childKey.Content()
+
+					helperDatatypes[key.ID()].Properties[propertyName] = &schemadatatype.DataType{
+						Node:       childKey,
+						Name:       propertyName,
+						Type:       schema.SimpleTypeUnknown,
+						TextType:   "",
+						Properties: make(map[string]schemadatatype.DataTypable),
+					}
+				}
+
+			}
 		}
 	}
 }
@@ -191,7 +292,7 @@ func scopeAndMergeProperties(propertiesDatatypes, classDataTypes map[parser.Node
 			classDataTypes[datatype.Node.ID()] = &schemadatatype.DataType{
 				Name:       nameNode.Content(),
 				Node:       datatype.Node,
-				Type:       schema.SimpleTypeUknown,
+				Type:       schema.SimpleTypeUnknown,
 				TextType:   "",
 				Properties: make(map[string]schemadatatype.DataTypable),
 			}
@@ -219,7 +320,7 @@ func scopeAndMergeProperties(propertiesDatatypes, classDataTypes map[parser.Node
 			classDataTypes[datatype.Node.ID()] = &schemadatatype.DataType{
 				Name:       className,
 				Node:       datatype.Node,
-				Type:       schema.SimpleTypeUknown,
+				Type:       schema.SimpleTypeUnknown,
 				TextType:   "",
 				Properties: make(map[string]schemadatatype.DataTypable),
 			}

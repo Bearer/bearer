@@ -24,6 +24,20 @@ scan:
             root_lowercase: true
             metavars: {}
             stored: false
+        detect_rails_logger:
+            disabled: false
+            type: risk
+            languages:
+                - ruby
+            patterns:
+                - |
+                  Rails.logger.info(<$ARGUMENT>)
+            param_parenting: false
+            processors: []
+            root_singularize: false
+            root_lowercase: false
+            metavars: {}
+            stored: false
         detect_ruby_logger:
             disabled: false
             type: risk
@@ -92,6 +106,46 @@ scan:
                         }
             root_singularize: true
             root_lowercase: true
+            metavars: {}
+            stored: false
+        ruby_file_detection:
+            disabled: false
+            type: risk
+            languages:
+                - ruby
+            patterns:
+                - |
+                  CSV.open(...) { <$DATA_TYPE> }
+                - |
+                  CSV.open(...) do
+                    <$DATA_TYPE>
+                  end
+                - |
+                  File.open(...) do
+                    <$DATA_TYPE>
+                  end
+                - |
+                  File.open(...) { <$DATA_TYPE> }
+            param_parenting: true
+            processors: []
+            root_singularize: false
+            root_lowercase: false
+            metavars: {}
+            stored: false
+        ruby_http_detection:
+            disabled: false
+            type: risk
+            languages:
+                - ruby
+            patterns:
+                - |
+                  URI.encode_www_form(<$DATA_TYPE>)
+                - |
+                  Net::HTTP.post_form(<$DATA_TYPE>)
+            param_parenting: false
+            processors: []
+            root_singularize: false
+            root_lowercase: false
             metavars: {}
             stored: false
     debug: false

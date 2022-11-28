@@ -14,7 +14,7 @@ type Detector interface {
 	IsParam(node *parser.Node) (bool, bool, *config.Param)
 }
 
-func GenerateTreeSitterQuery(node *parser.Node, idGenerator nodeid.Generator, rule *config.CompiledRule, detector Detector) {
+func GenerateTreeSitterQuery(node *parser.Node, idGenerator nodeid.Generator, rule *config.CompiledRule, detector Detector, isChild bool) {
 	if node.Type() == "ERROR" {
 		return
 	}
@@ -51,8 +51,12 @@ func GenerateTreeSitterQuery(node *parser.Node, idGenerator nodeid.Generator, ru
 	for i := 0; i < node.ChildCount(); i++ {
 		child := node.Child(i)
 
-		GenerateTreeSitterQuery(child, idGenerator, rule, detector)
+		GenerateTreeSitterQuery(child, idGenerator, rule, detector, true)
 	}
 
-	rule.Tree += ") @rule"
+	rule.Tree += ")"
+
+	if !isChild {
+		rule.Tree += " @rule"
+	}
 }

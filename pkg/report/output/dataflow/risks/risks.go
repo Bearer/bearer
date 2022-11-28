@@ -5,6 +5,7 @@ import (
 	"github.com/bearer/curio/pkg/commands/process/settings"
 	"github.com/bearer/curio/pkg/report/output/dataflow/detectiondecoder"
 	"github.com/bearer/curio/pkg/report/output/dataflow/types"
+	"github.com/bearer/curio/pkg/report/schema"
 
 	"github.com/bearer/curio/pkg/report/detections"
 	"github.com/bearer/curio/pkg/util/classify"
@@ -25,6 +26,7 @@ type datatypeHolder struct {
 	name         string
 	uuid         string
 	categoryUUID string
+	parent       *schema.Parent
 	files        map[string]*fileHolder // group files by filename
 }
 type fileHolder struct {
@@ -41,20 +43,25 @@ func New(config settings.Config, isInternal bool) *Holder {
 }
 
 func (holder *Holder) AddSchema(detection detections.Detection) error {
-	classification, err := detectiondecoder.GetSchemaClassification(detection)
+	schema, err := detectiondecoder.GetSchema(detection)
+	if err != nil {
+		return err
+	}
+
+	classification, err := detectiondecoder.GetSchemaClassification(schema, detection)
 	if err != nil {
 		return err
 	}
 
 	if classification.Decision.State == classify.Valid {
-		holder.addDatatype(string(detection.DetectorType), classification.DataType, detection.Source.Filename, *detection.Source.LineNumber)
+		holder.addDatatype(string(detection.DetectorType), classification.DataType, detection.Source.Filename, *detection.Source.LineNumber, schema.Parent)
 	}
 
 	return nil
 }
 
 // addDatatype adds detector to hash list and at the same time blocks duplicates
-func (holder *Holder) addDatatype(ruleName string, datatype *db.DataType, fileName string, lineNumber int) {
+func (holder *Holder) addDatatype(ruleName string, datatype *db.DataType, fileName string, lineNumber int, parent *schema.Parent) {
 	// create detector entry if it doesn't exist
 	if _, exists := holder.detectors[ruleName]; !exists {
 		holder.detectors[ruleName] = detectorHolder{
@@ -71,6 +78,7 @@ func (holder *Holder) addDatatype(ruleName string, datatype *db.DataType, fileNa
 				name:         datatype.Name,
 				uuid:         datatype.UUID,
 				categoryUUID: datatype.CategoryUUID,
+				parent:       parent,
 				files:        make(map[string]*fileHolder),
 			}
 		} else {
@@ -118,6 +126,7 @@ func (holder *Holder) ToDataFlow() []types.RiskDetector {
 				Name:         datatype.name,
 				UUID:         datatype.uuid,
 				CategoryUUID: datatype.categoryUUID,
+				Parent:       datatype.parent,
 				Stored:       stored,
 				Locations:    make([]types.RiskLocation, 0),
 			}

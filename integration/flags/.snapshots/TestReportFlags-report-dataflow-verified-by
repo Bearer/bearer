@@ -3,7 +3,7 @@ data_types:
       detectors:
         - name: detect_sql_create_public_table
           locations:
-            - filename: schema.sql
+            - filename: testdata/verified_by/schema.sql
               line_number: 8
               encrypted: true
               verified_by:
@@ -12,19 +12,19 @@ data_types:
                   line_number: 2
         - name: ruby
           locations:
-            - filename: user.rb
+            - filename: testdata/verified_by/user.rb
               line_number: 2
     - name: Date of birth
       detectors:
         - name: detect_sql_create_public_table
           locations:
-            - filename: schema.sql
+            - filename: testdata/verified_by/schema.sql
               line_number: 6
     - name: Email Address
       detectors:
         - name: detect_sql_create_public_table
           locations:
-            - filename: schema.sql
+            - filename: testdata/verified_by/schema.sql
               line_number: 5
               encrypted: true
               verified_by:
@@ -33,25 +33,25 @@ data_types:
                   line_number: 2
         - name: ruby
           locations:
-            - filename: user.rb
+            - filename: testdata/verified_by/user.rb
               line_number: 2
     - name: Firstname
       detectors:
         - name: detect_sql_create_public_table
           locations:
-            - filename: schema.sql
+            - filename: testdata/verified_by/schema.sql
               line_number: 3
     - name: Lastname
       detectors:
         - name: detect_sql_create_public_table
           locations:
-            - filename: schema.sql
+            - filename: testdata/verified_by/schema.sql
               line_number: 4
     - name: Physical Address
       detectors:
         - name: detect_sql_create_public_table
           locations:
-            - filename: schema.sql
+            - filename: testdata/verified_by/schema.sql
               line_number: 7
               encrypted: true
               verified_by:
@@ -60,7 +60,7 @@ data_types:
                   line_number: 2
         - name: ruby
           locations:
-            - filename: user.rb
+            - filename: testdata/verified_by/user.rb
               line_number: 2
 components: []
 
