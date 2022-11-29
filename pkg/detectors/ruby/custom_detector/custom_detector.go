@@ -14,6 +14,15 @@ type Detector struct {
 }
 
 func (detector *Detector) IsParam(node *parser.Node) (isTerminating bool, shouldIgnore bool, param *config.Param) {
+	if strings.Index(node.Content(), "Var_Anything") == 0 {
+		param = &config.Param{
+			ArgumentsExtract: true,
+		}
+
+		isTerminating = true
+		return
+	}
+
 	if node.Type() == "constant" || node.Type() == "identifier" {
 		// get class names
 		if strings.Index(node.Content(), "Var_Class_Name") == 0 {
