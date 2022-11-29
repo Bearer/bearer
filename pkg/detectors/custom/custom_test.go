@@ -90,6 +90,7 @@ func TestRubyLoggersVariableReconciliation(t *testing.T) {
 		t.Fatal(err)
 	}
 
+	// keep in mind variable reconciliation detections repeat for each logger detection
 	cupaloy.SnapshotT(t, string(bytes))
 }
 

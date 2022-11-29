@@ -24,7 +24,6 @@ def saveUser(user)
             phone_number: "555-1234-123",
         }
         
-        # custom detector ignores, it ignores this ones as they don't have any properties tied to them
         logger.info("User info:", user)
         logger.info("Employee info:", employee)
         Rails.logger.info("User info:", user)

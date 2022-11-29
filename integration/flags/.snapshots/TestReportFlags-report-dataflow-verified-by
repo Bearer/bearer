@@ -5,6 +5,11 @@ data_types:
           locations:
             - filename: testdata/verified_by/schema.sql
               line_number: 8
+              encrypted: true
+              verified_by:
+                - detector: detect_encrypted_ruby_class_properties
+                  filename: user.rb
+                  line_number: 2
         - name: ruby
           locations:
             - filename: testdata/verified_by/user.rb
@@ -21,6 +26,11 @@ data_types:
           locations:
             - filename: testdata/verified_by/schema.sql
               line_number: 5
+              encrypted: true
+              verified_by:
+                - detector: detect_encrypted_ruby_class_properties
+                  filename: user.rb
+                  line_number: 2
         - name: ruby
           locations:
             - filename: testdata/verified_by/user.rb
@@ -43,6 +53,11 @@ data_types:
           locations:
             - filename: testdata/verified_by/schema.sql
               line_number: 7
+              encrypted: true
+              verified_by:
+                - detector: detect_encrypted_ruby_class_properties
+                  filename: user.rb
+                  line_number: 2
         - name: ruby
           locations:
             - filename: testdata/verified_by/user.rb
