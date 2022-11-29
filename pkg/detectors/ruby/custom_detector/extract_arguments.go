@@ -5,14 +5,27 @@ import (
 
 	"github.com/bearer/curio/pkg/detectors/ruby/datatype"
 	"github.com/bearer/curio/pkg/parser"
+	parserdatatype "github.com/bearer/curio/pkg/parser/datatype"
 	"github.com/bearer/curio/pkg/parser/nodeid"
 	"github.com/bearer/curio/pkg/report/schema"
+
 	schemadatatype "github.com/bearer/curio/pkg/report/schema/datatype"
-	"github.com/bearer/curio/pkg/util/file"
-	"github.com/smacker/go-tree-sitter/ruby"
 )
 
-func (detector *Detector) ExtractArguments(node *parser.Node, idGenerator nodeid.Generator, fileinfo *file.FileInfo, filepath *file.Path) (map[parser.NodeID]*schemadatatype.DataType, error) {
+func (detector *Detector) ExtractArguments(node *parser.Node, idGenerator nodeid.Generator, variableReconciliation *parserdatatype.ReconciliationRequest) (map[parser.NodeID]*schemadatatype.DataType, error) {
+	extractedDatatypes, err := detector.extractArguments(node, idGenerator)
+	if err != nil {
+		return nil, err
+	}
+
+	if variableReconciliation != nil {
+		parserdatatype.VariableReconciliation(extractedDatatypes, variableReconciliation)
+	}
+
+	return extractedDatatypes, nil
+}
+
+func (detector *Detector) extractArguments(node *parser.Node, idGenerator nodeid.Generator) (map[parser.NodeID]*schemadatatype.DataType, error) {
 	if node == nil {
 		return nil, nil
 	}
@@ -50,18 +63,16 @@ func (detector *Detector) ExtractArguments(node *parser.Node, idGenerator nodeid
 			joinedDatatypes[datatype.Node.ID()] = datatype
 			continue
 		}
+	}
 
-		content := singleArgument.Content()
-		tree, err := parser.ParseBytes(fileinfo, filepath, []byte(content), ruby.GetLanguage(), singleArgument.LineNumber()-1)
-		if err != nil {
-			return nil, err
+	complexDatatypes := datatype.Discover(node, idGenerator)
+	for nodeID, target := range complexDatatypes {
+		_, exists := joinedDatatypes[nodeID]
+		if exists {
+			continue
 		}
 
-		singleArgumentDatatypes := datatype.Discover(tree, idGenerator)
-
-		for nodeID, target := range singleArgumentDatatypes {
-			joinedDatatypes[nodeID] = target
-		}
+		joinedDatatypes[nodeID] = target
 	}
 
 	return joinedDatatypes, nil

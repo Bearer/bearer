@@ -10,6 +10,7 @@ import (
 	"github.com/bearer/curio/pkg/commands/process/settings"
 	"github.com/bearer/curio/pkg/detectors/custom/config"
 	rubydetector "github.com/bearer/curio/pkg/detectors/ruby/custom_detector"
+	rubydatatype "github.com/bearer/curio/pkg/detectors/ruby/datatype"
 	sqldetector "github.com/bearer/curio/pkg/detectors/sql/custom_detector"
 	"github.com/bearer/curio/pkg/detectors/types"
 	"github.com/bearer/curio/pkg/parser"
@@ -74,6 +75,11 @@ func (detector *Detector) CompileRules(rulesConfig map[string]settings.Rule) err
 				compiledRule.RuleName = ruleName
 				compiledRule.Metavars = rule.Metavars
 				compiledRule.ParamParenting = rule.ParamParenting
+				if rule.ParamParenting {
+					compiledRule.VariableReconciliation = false
+				} else {
+					compiledRule.VariableReconciliation = true
+				}
 				compiledRule.RootLowercase = rule.RootLowercase
 				compiledRule.RootSingularize = rule.RootSingularize
 				compiledRules = append(compiledRules, compiledRule)
@@ -150,7 +156,15 @@ func (detector *Detector) executeRule(rule config.CompiledRule, file *file.FileI
 			return err
 		}
 
-		err = detector.extractData(filteredCaptures, rule, report, lang, idGenerator, file, file.Path)
+		var variableReconciliation *parserdatatype.ReconciliationRequest
+		if rule.VariableReconciliation {
+			variableReconciliation, err = detector.buildReconciliationRequest(lang, tree)
+			if err != nil {
+				return err
+			}
+		}
+
+		err = detector.extractData(filteredCaptures, rule, report, lang, idGenerator, variableReconciliation)
 		if err != nil {
 			return err
 		}
@@ -160,7 +174,7 @@ func (detector *Detector) executeRule(rule config.CompiledRule, file *file.FileI
 	return nil
 }
 
-func (detector *Detector) extractData(captures []parser.Captures, rule config.CompiledRule, report report.Report, lang string, idGenerator nodeid.Generator, fileinfo *file.FileInfo, filePath *file.Path) error {
+func (detector *Detector) extractData(captures []parser.Captures, rule config.CompiledRule, report report.Report, lang string, idGenerator nodeid.Generator, variableReconciliation *parserdatatype.ReconciliationRequest) error {
 	for _, capture := range captures {
 		forExport := make(map[parser.NodeID]*schemadatatype.DataType)
 		var parent schemadatatype.DataTypable
@@ -170,7 +184,7 @@ func (detector *Detector) extractData(captures []parser.Captures, rule config.Co
 			var err error
 
 			if param.ArgumentsExtract || param.ClassNameExtract {
-				paramTypes, err = detector.extractArguments(lang, capture[param.BuildFullName()], idGenerator, fileinfo, filePath)
+				paramTypes, err = detector.extractArguments(lang, capture[param.BuildFullName()], idGenerator, variableReconciliation)
 				if err != nil {
 					return err
 				}
@@ -239,6 +253,7 @@ func (detector *Detector) extractData(captures []parser.Captures, rule config.Co
 		}
 
 		detector.applyDatatypeTransformations(rule, forExport)
+
 		report.AddDataType(
 			detections.TypeCustom,
 			detectors.Type(rule.RuleName),
@@ -303,12 +318,27 @@ func filterCaptures(params []config.Param, captures []parser.Captures) (filtered
 	return filtered, err
 }
 
-func (detector *Detector) extractArguments(language string, node *parser.Node, idGenerator nodeid.Generator, fileinfo *file.FileInfo, filepath *file.Path) (map[parser.NodeID]*schemadatatype.DataType, error) {
+func (detector *Detector) extractArguments(language string, node *parser.Node, idGenerator nodeid.Generator, variableReconciliation *parserdatatype.ReconciliationRequest) (map[parser.NodeID]*schemadatatype.DataType, error) {
 	switch language {
 	case "ruby":
-		return detector.Ruby.ExtractArguments(node, idGenerator, fileinfo, filepath)
+		return detector.Ruby.ExtractArguments(node, idGenerator, variableReconciliation)
 	case "sql":
-		return detector.Sql.ExtractArguments(node, idGenerator, fileinfo, filepath)
+		return detector.Sql.ExtractArguments(node, idGenerator, variableReconciliation)
+	}
+	return nil, errors.New("unsupported language")
+}
+
+func (detector *Detector) buildReconciliationRequest(language string, tree *parser.Tree) (*parserdatatype.ReconciliationRequest, error) {
+	switch language {
+	case "ruby":
+		allDatatypes := rubydatatype.Discover(tree.RootNode(), detector.idGenerator)
+		scopedDatatypes := parserdatatype.ScopeDatatypes(allDatatypes, detector.idGenerator, rubydatatype.ScopeTerminators)
+		return &parserdatatype.ReconciliationRequest{
+			ScopedDatatypes:  scopedDatatypes,
+			ScopeTerminators: rubydatatype.ScopeTerminators,
+		}, nil
+	case "sql":
+		return nil, nil
 	}
 	return nil, errors.New("unsupported language")
 }

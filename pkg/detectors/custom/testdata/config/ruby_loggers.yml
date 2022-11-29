@@ -1,7 +1,7 @@
 detect_ruby_logger:
   patterns:
     - |
-      log.info(<$ARGUMENT>)
+      logger.info(<$ARGUMENT>)
   languages:
     - ruby
 detect_rails_logger:

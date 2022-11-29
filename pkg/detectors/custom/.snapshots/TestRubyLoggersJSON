@@ -7,25 +7,7 @@
 			"language": "Ruby",
 			"language_type": "programming",
 			"line_number": 3,
-			"column_number": 6,
-			"text": null
-		},
-		"value": {
-			"object_name": "user",
-			"field_name": "email",
-			"field_type": "",
-			"field_type_simple": "unknown"
-		}
-	},
-	{
-		"type": "custom",
-		"detector_type": "detect_ruby_logger",
-		"source": {
-			"filename": "log.rb",
-			"language": "Ruby",
-			"language_type": "programming",
-			"line_number": 4,
-			"column_number": 6,
+			"column_number": 38,
 			"text": null
 		},
 		"value": {
@@ -43,7 +25,7 @@
 			"language": "Ruby",
 			"language_type": "programming",
 			"line_number": 5,
-			"column_number": 6,
+			"column_number": 35,
 			"text": null
 		},
 		"value": {
@@ -61,7 +43,7 @@
 			"language": "Ruby",
 			"language_type": "programming",
 			"line_number": 5,
-			"column_number": 14,
+			"column_number": 43,
 			"text": null
 		},
 		"value": {
@@ -79,7 +61,349 @@
 			"language": "Ruby",
 			"language_type": "programming",
 			"line_number": 5,
-			"column_number": 20,
+			"column_number": 49,
+			"text": null
+		},
+		"value": {
+			"object_name": "email",
+			"field_name": "address",
+			"field_type": "",
+			"field_type_simple": "unknown"
+		}
+	},
+	{
+		"type": "custom",
+		"detector_type": "detect_ruby_logger",
+		"source": {
+			"filename": "log.rb",
+			"language": "Ruby",
+			"language_type": "programming",
+			"line_number": 8,
+			"column_number": 36,
+			"text": null
+		},
+		"value": {
+			"object_name": "user",
+			"field_name": "name",
+			"field_type": "",
+			"field_type_simple": "unknown"
+		}
+	},
+	{
+		"type": "custom",
+		"detector_type": "detect_ruby_logger",
+		"source": {
+			"filename": "log.rb",
+			"language": "Ruby",
+			"language_type": "programming",
+			"line_number": 4,
+			"column_number": 35,
+			"text": null
+		},
+		"value": {
+			"object_name": "user",
+			"field_name": "email",
+			"field_type": "",
+			"field_type_simple": "unknown"
+		}
+	},
+	{
+		"type": "custom",
+		"detector_type": "detect_ruby_logger",
+		"source": {
+			"filename": "log.rb",
+			"language": "Ruby",
+			"language_type": "programming",
+			"line_number": 5,
+			"column_number": 35,
+			"text": null
+		},
+		"value": {
+			"object_name": "user",
+			"field_name": "contact",
+			"field_type": "",
+			"field_type_simple": "unknown"
+		}
+	},
+	{
+		"type": "custom",
+		"detector_type": "detect_ruby_logger",
+		"source": {
+			"filename": "log.rb",
+			"language": "Ruby",
+			"language_type": "programming",
+			"line_number": 5,
+			"column_number": 43,
+			"text": null
+		},
+		"value": {
+			"object_name": "contact",
+			"field_name": "email",
+			"field_type": "",
+			"field_type_simple": "unknown"
+		}
+	},
+	{
+		"type": "custom",
+		"detector_type": "detect_ruby_logger",
+		"source": {
+			"filename": "log.rb",
+			"language": "Ruby",
+			"language_type": "programming",
+			"line_number": 5,
+			"column_number": 49,
+			"text": null
+		},
+		"value": {
+			"object_name": "email",
+			"field_name": "address",
+			"field_type": "",
+			"field_type_simple": "unknown"
+		}
+	},
+	{
+		"type": "custom",
+		"detector_type": "detect_ruby_logger",
+		"source": {
+			"filename": "log.rb",
+			"language": "Ruby",
+			"language_type": "programming",
+			"line_number": 8,
+			"column_number": 36,
+			"text": null
+		},
+		"value": {
+			"object_name": "user",
+			"field_name": "name",
+			"field_type": "",
+			"field_type_simple": "unknown"
+		}
+	},
+	{
+		"type": "custom",
+		"detector_type": "detect_ruby_logger",
+		"source": {
+			"filename": "log.rb",
+			"language": "Ruby",
+			"language_type": "programming",
+			"line_number": 3,
+			"column_number": 38,
+			"text": null
+		},
+		"value": {
+			"object_name": "user",
+			"field_name": "email",
+			"field_type": "",
+			"field_type_simple": "unknown"
+		}
+	},
+	{
+		"type": "custom",
+		"detector_type": "detect_ruby_logger",
+		"source": {
+			"filename": "log.rb",
+			"language": "Ruby",
+			"language_type": "programming",
+			"line_number": 5,
+			"column_number": 35,
+			"text": null
+		},
+		"value": {
+			"object_name": "user",
+			"field_name": "contact",
+			"field_type": "",
+			"field_type_simple": "unknown"
+		}
+	},
+	{
+		"type": "custom",
+		"detector_type": "detect_ruby_logger",
+		"source": {
+			"filename": "log.rb",
+			"language": "Ruby",
+			"language_type": "programming",
+			"line_number": 5,
+			"column_number": 43,
+			"text": null
+		},
+		"value": {
+			"object_name": "contact",
+			"field_name": "email",
+			"field_type": "",
+			"field_type_simple": "unknown"
+		}
+	},
+	{
+		"type": "custom",
+		"detector_type": "detect_ruby_logger",
+		"source": {
+			"filename": "log.rb",
+			"language": "Ruby",
+			"language_type": "programming",
+			"line_number": 5,
+			"column_number": 49,
+			"text": null
+		},
+		"value": {
+			"object_name": "email",
+			"field_name": "address",
+			"field_type": "",
+			"field_type_simple": "unknown"
+		}
+	},
+	{
+		"type": "custom",
+		"detector_type": "detect_ruby_logger",
+		"source": {
+			"filename": "log.rb",
+			"language": "Ruby",
+			"language_type": "programming",
+			"line_number": 8,
+			"column_number": 36,
+			"text": null
+		},
+		"value": {
+			"object_name": "user",
+			"field_name": "name",
+			"field_type": "",
+			"field_type_simple": "unknown"
+		}
+	},
+	{
+		"type": "custom",
+		"detector_type": "detect_ruby_logger",
+		"source": {
+			"filename": "log.rb",
+			"language": "Ruby",
+			"language_type": "programming",
+			"line_number": 3,
+			"column_number": 38,
+			"text": null
+		},
+		"value": {
+			"object_name": "user",
+			"field_name": "email",
+			"field_type": "",
+			"field_type_simple": "unknown"
+		}
+	},
+	{
+		"type": "custom",
+		"detector_type": "detect_ruby_logger",
+		"source": {
+			"filename": "log.rb",
+			"language": "Ruby",
+			"language_type": "programming",
+			"line_number": 5,
+			"column_number": 35,
+			"text": null
+		},
+		"value": {
+			"object_name": "user",
+			"field_name": "contact",
+			"field_type": "",
+			"field_type_simple": "unknown"
+		}
+	},
+	{
+		"type": "custom",
+		"detector_type": "detect_ruby_logger",
+		"source": {
+			"filename": "log.rb",
+			"language": "Ruby",
+			"language_type": "programming",
+			"line_number": 5,
+			"column_number": 43,
+			"text": null
+		},
+		"value": {
+			"object_name": "contact",
+			"field_name": "email",
+			"field_type": "",
+			"field_type_simple": "unknown"
+		}
+	},
+	{
+		"type": "custom",
+		"detector_type": "detect_ruby_logger",
+		"source": {
+			"filename": "log.rb",
+			"language": "Ruby",
+			"language_type": "programming",
+			"line_number": 5,
+			"column_number": 49,
+			"text": null
+		},
+		"value": {
+			"object_name": "email",
+			"field_name": "address",
+			"field_type": "",
+			"field_type_simple": "unknown"
+		}
+	},
+	{
+		"type": "custom",
+		"detector_type": "detect_ruby_logger",
+		"source": {
+			"filename": "log.rb",
+			"language": "Ruby",
+			"language_type": "programming",
+			"line_number": 8,
+			"column_number": 36,
+			"text": null
+		},
+		"value": {
+			"object_name": "user",
+			"field_name": "name",
+			"field_type": "",
+			"field_type_simple": "unknown"
+		}
+	},
+	{
+		"type": "custom",
+		"detector_type": "detect_ruby_logger",
+		"source": {
+			"filename": "log.rb",
+			"language": "Ruby",
+			"language_type": "programming",
+			"line_number": 5,
+			"column_number": 35,
+			"text": null
+		},
+		"value": {
+			"object_name": "user",
+			"field_name": "contact",
+			"field_type": "",
+			"field_type_simple": "unknown"
+		}
+	},
+	{
+		"type": "custom",
+		"detector_type": "detect_ruby_logger",
+		"source": {
+			"filename": "log.rb",
+			"language": "Ruby",
+			"language_type": "programming",
+			"line_number": 5,
+			"column_number": 43,
+			"text": null
+		},
+		"value": {
+			"object_name": "contact",
+			"field_name": "email",
+			"field_type": "",
+			"field_type_simple": "unknown"
+		}
+	},
+	{
+		"type": "custom",
+		"detector_type": "detect_ruby_logger",
+		"source": {
+			"filename": "log.rb",
+			"language": "Ruby",
+			"language_type": "programming",
+			"line_number": 5,
+			"column_number": 49,
 			"text": null
 		},
 		"value": {
@@ -97,7 +421,7 @@
 			"language": "Ruby",
 			"language_type": "programming",
 			"line_number": 7,
-			"column_number": 25,
+			"column_number": 37,
 			"text": null
 		},
 		"value": {
@@ -115,7 +439,169 @@
 			"language": "Ruby",
 			"language_type": "programming",
 			"line_number": 8,
-			"column_number": 24,
+			"column_number": 36,
+			"text": null
+		},
+		"value": {
+			"object_name": "user",
+			"field_name": "name",
+			"field_type": "",
+			"field_type_simple": "unknown"
+		}
+	},
+	{
+		"type": "custom",
+		"detector_type": "detect_ruby_logger",
+		"source": {
+			"filename": "log.rb",
+			"language": "Ruby",
+			"language_type": "programming",
+			"line_number": 3,
+			"column_number": 38,
+			"text": null
+		},
+		"value": {
+			"object_name": "user",
+			"field_name": "email",
+			"field_type": "",
+			"field_type_simple": "unknown"
+		}
+	},
+	{
+		"type": "custom",
+		"detector_type": "detect_ruby_logger",
+		"source": {
+			"filename": "log.rb",
+			"language": "Ruby",
+			"language_type": "programming",
+			"line_number": 5,
+			"column_number": 35,
+			"text": null
+		},
+		"value": {
+			"object_name": "user",
+			"field_name": "contact",
+			"field_type": "",
+			"field_type_simple": "unknown"
+		}
+	},
+	{
+		"type": "custom",
+		"detector_type": "detect_ruby_logger",
+		"source": {
+			"filename": "log.rb",
+			"language": "Ruby",
+			"language_type": "programming",
+			"line_number": 5,
+			"column_number": 43,
+			"text": null
+		},
+		"value": {
+			"object_name": "contact",
+			"field_name": "email",
+			"field_type": "",
+			"field_type_simple": "unknown"
+		}
+	},
+	{
+		"type": "custom",
+		"detector_type": "detect_ruby_logger",
+		"source": {
+			"filename": "log.rb",
+			"language": "Ruby",
+			"language_type": "programming",
+			"line_number": 5,
+			"column_number": 49,
+			"text": null
+		},
+		"value": {
+			"object_name": "email",
+			"field_name": "address",
+			"field_type": "",
+			"field_type_simple": "unknown"
+		}
+	},
+	{
+		"type": "custom",
+		"detector_type": "detect_ruby_logger",
+		"source": {
+			"filename": "log.rb",
+			"language": "Ruby",
+			"language_type": "programming",
+			"line_number": 8,
+			"column_number": 36,
+			"text": null
+		},
+		"value": {
+			"object_name": "user",
+			"field_name": "name",
+			"field_type": "",
+			"field_type_simple": "unknown"
+		}
+	},
+	{
+		"type": "custom",
+		"detector_type": "detect_ruby_logger",
+		"source": {
+			"filename": "log.rb",
+			"language": "Ruby",
+			"language_type": "programming",
+			"line_number": 5,
+			"column_number": 35,
+			"text": null
+		},
+		"value": {
+			"object_name": "user",
+			"field_name": "contact",
+			"field_type": "",
+			"field_type_simple": "unknown"
+		}
+	},
+	{
+		"type": "custom",
+		"detector_type": "detect_ruby_logger",
+		"source": {
+			"filename": "log.rb",
+			"language": "Ruby",
+			"language_type": "programming",
+			"line_number": 5,
+			"column_number": 43,
+			"text": null
+		},
+		"value": {
+			"object_name": "contact",
+			"field_name": "email",
+			"field_type": "",
+			"field_type_simple": "unknown"
+		}
+	},
+	{
+		"type": "custom",
+		"detector_type": "detect_ruby_logger",
+		"source": {
+			"filename": "log.rb",
+			"language": "Ruby",
+			"language_type": "programming",
+			"line_number": 5,
+			"column_number": 49,
+			"text": null
+		},
+		"value": {
+			"object_name": "email",
+			"field_name": "address",
+			"field_type": "",
+			"field_type_simple": "unknown"
+		}
+	},
+	{
+		"type": "custom",
+		"detector_type": "detect_ruby_logger",
+		"source": {
+			"filename": "log.rb",
+			"language": "Ruby",
+			"language_type": "programming",
+			"line_number": 8,
+			"column_number": 36,
 			"text": null
 		},
 		"value": {
@@ -133,7 +619,7 @@
 			"language": "Ruby",
 			"language_type": "programming",
 			"line_number": 8,
-			"column_number": 55,
+			"column_number": 67,
 			"text": null
 		},
 		"value": {

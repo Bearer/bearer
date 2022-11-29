@@ -36,8 +36,8 @@ var classAssignmentFunctionsQuery = parser.QueryMustCompile(ruby.GetLanguage(),
 		)
 	) @param_class`)
 
-func discoverClassAssignment(tree *parser.Tree, datatypes map[parser.NodeID]*schemadatatype.DataType) {
-	captures := tree.QueryConventional(classAssignmentQuery)
+func discoverClassAssignment(node *parser.Node, datatypes map[parser.NodeID]*schemadatatype.DataType) {
+	captures := node.QueryConventional(classAssignmentQuery)
 	for _, capture := range captures {
 		id := capture["param_id"].Content()
 		classNode := capture["param_class"]
@@ -50,13 +50,13 @@ func discoverClassAssignment(tree *parser.Tree, datatypes map[parser.NodeID]*sch
 		}
 	}
 
-	discoverClassAssignmentProperties(tree, datatypes)
-	discoverClassAssignmentFunctions(tree, datatypes)
+	discoverClassAssignmentProperties(node, datatypes)
+	discoverClassAssignmentFunctions(node, datatypes)
 }
 
-func discoverClassAssignmentProperties(tree *parser.Tree, datatypes map[parser.NodeID]*schemadatatype.DataType) {
+func discoverClassAssignmentProperties(node *parser.Node, datatypes map[parser.NodeID]*schemadatatype.DataType) {
 	// add class assigment properties
-	captures := tree.QueryConventional(classAssignmentPropertiesQuery)
+	captures := node.QueryConventional(classAssignmentPropertiesQuery)
 	for _, capture := range captures {
 		classNode := capture["param_class"]
 		if datatypes[classNode.ID()] == nil {
@@ -77,8 +77,8 @@ func discoverClassAssignmentProperties(tree *parser.Tree, datatypes map[parser.N
 	}
 }
 
-func discoverClassAssignmentFunctions(tree *parser.Tree, datatypes map[parser.NodeID]*schemadatatype.DataType) {
-	captures := tree.QueryConventional(classAssignmentFunctionsQuery)
+func discoverClassAssignmentFunctions(node *parser.Node, datatypes map[parser.NodeID]*schemadatatype.DataType) {
+	captures := node.QueryConventional(classAssignmentFunctionsQuery)
 	for _, capture := range captures {
 		classNode := capture["param_class"]
 		if datatypes[classNode.ID()] == nil {

@@ -1,6 +1,6 @@
 - detector_type: detect_ruby_logger
   source:
-    column_number: 6
+    column_number: 31
     filename: main.rb
     language: Ruby
     language_type: programming

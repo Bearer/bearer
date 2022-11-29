@@ -32,24 +32,15 @@ var callsQuery = parser.QueryMustCompile(ruby.GetLanguage(),
 		method: (identifier) @param_id
 	) @param_parent`)
 
-//	user = {
-//		first_name: "John",
-//		last_name: "Doe",
-//		address: {
-//			city: "Paris",
-//			zip_code: "75010"
-//		}
-//	}
-//
-// or
-// uri.query = URI.encode_www_form({ user: { first_name: "John", last_name: "Doe" } })
 var hashQuery = parser.QueryMustCompile(ruby.GetLanguage(),
 	`(hash) @param_arguments`)
 
-func addProperties(tree *parser.Tree, helperDatatypes map[parser.NodeID]*schemadatatype.DataType) {
+var ScopeTerminators = []string{"program", "method", "block", "lambda", "singleton_method"}
+
+func addProperties(node *parser.Node, helperDatatypes map[parser.NodeID]*schemadatatype.DataType) {
 	// add element references
 	var doElementsQuery = func(query *sitter.Query) {
-		captures := tree.QueryConventional(query)
+		captures := node.QueryConventional(query)
 		for _, capture := range captures {
 			objectNode := capture["param_object"]
 			if objectNode.Type() == "identifier" || objectNode.Type() == "instance_variable" {
@@ -84,7 +75,7 @@ func addProperties(tree *parser.Tree, helperDatatypes map[parser.NodeID]*schemad
 	doElementsQuery(elementSimpleSymbolQuery)
 
 	// add calls
-	captures := tree.QueryConventional(callsQuery)
+	captures := node.QueryConventional(callsQuery)
 	for _, capture := range captures {
 		receiverNode := capture["param_receiver"]
 		if receiverNode.Type() == "identifier" || receiverNode.Type() == "instance_variable" {
@@ -114,7 +105,7 @@ func addProperties(tree *parser.Tree, helperDatatypes map[parser.NodeID]*schemad
 		}
 	}
 
-	captures = tree.QueryConventional(hashQuery)
+	captures = node.QueryConventional(hashQuery)
 	for _, capture := range captures {
 		hashNode := capture["param_arguments"]
 
@@ -214,7 +205,7 @@ func addProperties(tree *parser.Tree, helperDatatypes map[parser.NodeID]*schemad
 	}
 }
 
-func linkProperties(tree *parser.Tree, datatypes, helperDatatypes map[parser.NodeID]*schemadatatype.DataType) {
+func linkProperties(rootNode *parser.Node, datatypes, helperDatatypes map[parser.NodeID]*schemadatatype.DataType) {
 	for _, helperType := range helperDatatypes {
 		node := helperType.Node
 		parent := node.Parent()
@@ -344,8 +335,6 @@ func scopeAndMergeProperties(propertiesDatatypes, classDataTypes map[parser.Node
 	terminatorKeywords := []string{"program"}
 	parserdatatype.ScopeDatatypes(classDataTypes, idGenerator, terminatorKeywords)
 
-	// // scoped data
-	terminatorKeywords = []string{"program", "method", "block", "lambda", "singleton_method"}
 	// pull all scope terminator nodes
-	parserdatatype.ScopeDatatypes(propertiesDatatypes, idGenerator, terminatorKeywords)
+	parserdatatype.ScopeDatatypes(propertiesDatatypes, idGenerator, ScopeTerminators)
 }

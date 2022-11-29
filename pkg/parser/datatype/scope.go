@@ -41,7 +41,7 @@ func (scope *Scope) toSortedDatatypes() [][]datatype.DataTypable {
 	return sortedDatatypes
 }
 
-func ScopeDatatypes(datatypes map[parser.NodeID]*datatype.DataType, idGenerator nodeid.Generator, termintingTokens []string) {
+func ScopeDatatypes(datatypes map[parser.NodeID]*datatype.DataType, idGenerator nodeid.Generator, termintingTokens []string) map[parser.NodeID]*Scope {
 	scopes := make(map[parser.NodeID]*Scope)
 
 	// iterate trough datatypes
@@ -102,6 +102,8 @@ func ScopeDatatypes(datatypes map[parser.NodeID]*datatype.DataType, idGenerator 
 			UnifyUUID(datatypes, idGenerator)
 		}
 	}
+
+	return scopes
 }
 
 func UnifyUUID(datatypes []datatype.DataTypable, idGenerator nodeid.Generator) {

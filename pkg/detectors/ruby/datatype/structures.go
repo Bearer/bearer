@@ -17,9 +17,9 @@ var structuresQuery = parser.QueryMustCompile(ruby.GetLanguage(), `
 ) @param_call
 `)
 
-func discoverStructures(tree *parser.Tree, datatypes map[parser.NodeID]*schemadatatype.DataType) {
+func discoverStructures(node *parser.Node, datatypes map[parser.NodeID]*schemadatatype.DataType) {
 	// add class properties
-	captures := tree.QueryConventional(structuresQuery)
+	captures := node.QueryConventional(structuresQuery)
 	for _, capture := range captures {
 		methodNode := capture["method_id"]
 		methodID := methodNode.Content()
