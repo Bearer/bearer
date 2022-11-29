@@ -24,11 +24,6 @@ func (detector *Detector) IsParam(node *parser.Node) (isTerminating bool, should
 			return
 		}
 
-		if strings.Index(node.Content(), "Var_Ellipsis") == 0 {
-			shouldIgnore = true
-			return
-		}
-
 		// get simple string identifiers
 		param = &config.Param{
 			StringMatch: node.Content(),

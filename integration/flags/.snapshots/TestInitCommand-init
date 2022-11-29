@@ -115,17 +115,17 @@ scan:
                 - ruby
             patterns:
                 - |
-                  CSV.open(...) { <$DATA_TYPE> }
+                  CSV.open { <$DATA_TYPE> }
                 - |
-                  CSV.open(...) do
+                  CSV.open do
                     <$DATA_TYPE>
                   end
                 - |
-                  File.open(...) do
+                  File.open do
                     <$DATA_TYPE>
                   end
                 - |
-                  File.open(...) { <$DATA_TYPE> }
+                  File.open { <$DATA_TYPE> }
             param_parenting: true
             processors: []
             root_singularize: false
