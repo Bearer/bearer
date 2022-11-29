@@ -1,59 +1,42 @@
 ---
 layout: layouts/base.njk
 ---
-
-<main class="max-w-6xl mx-auto sm:flex lg:justify-between text-black dark:text-neutral-100 px-8 relative">
-	<nav class="self-start sticky top-[6.75rem] w-52 mr-8">
+{% set currentUrl = page.url %}
+<main class="max-w-6xl mx-auto sm:grid grid-cols-5 text-black dark:text-neutral-100 px-8 relative gap-4">
+	<nav class="self-start sticky top-[6.75rem] col-span-1">
 		<ul>
-			<li class="mb-4">
-				<h2 class="font-bold text-md">Start Here</h2>
-				<ul class="">
-					<li>
-						<a href="/quickstart">Quickstart</a>
-					</li>
-					<li>Create a policy</li>
-				</ul>
-
-			</li>
-			<li class="mb-4">
-				<h2 class="font-bold text-md">Explanations</h2>
-				<ul class="">
-					<li>Detection</li>
-					<li>Classification</li>
-					<li>Policies</li>
-				</ul>
-			</li>
-			{# <li class="mb-4">
-				<h2 class="font-bold text-md inline">How-to</h2>
-			</li> #}
-			<li class="mb-4">
-				<h2 class="font-bold text-md">Reference</h2>
-				<ul class="">
-					<li>
-						<a href="/reference/commands" class="">Commands</a>
-					</li>
-				</ul>
-			</li>
+			{% for heading in nav %}
+				<li class="mb-4">
+					<h2 class="font-bold text-md">{{heading.name}}</h2>
+					<ul class="">
+						{% for item in heading.items %}
+							<li>
+								<a class="hover:underline" {% if currentUrl === item.url %}aria-current="page" {% endif %} href="{{item.url}}">{{item.name}}</a>
+							</li>
+						{% endfor %}
+					</ul>
+				</li>
+			{% endfor %}
 		</ul>
 	</nav>
-	<article class="flex gap-8 w-full">
-		<div class="prose dark:prose-invert mx-auto min-w-0 max-w-80ch">
-			{{ content | safe }}
-		</div>
-		<aside class="self-start dark:text-neutral-200 hidden lg:block lg:sticky top-[6.75rem] min-w-fit text-sm border-solid border-2 p-4 border-neutral-200 dark:border-neutral-500 rounded-md w-52">
-			<h2 class="font-bold text-md">On this page</h2>
-			<a href="#" class="hover:underline">Overview</a>
-			{{ content | toc | safe }}
-			<h2 class="mt-2 font-bold text-md">Contribute</h2>
-			<ul>
-				<li>
-					<a class="hover:underline" href="{{meta.sourcePath}}/blob/main/docs/{{ page.inputPath }}">Edit this page</a>
-				</li>
-				<li>
-					<a href="https://github.com/Bearer/curio/issues/new/choose" class="hover:underline">Leave feedback</a>
-				</li>
-			</ul>
-		</aside>
+	<article class="prose prose-lg dark:prose-invert max-w-none col-span-3">
+		{{ content | safe }}
 	</article>
+	<aside class="self-start col-span-1 dark:text-neutral-200 hidden lg:block lg:sticky top-[6.75rem] text-sm border-solid border-2 p-4 border-neutral-200 dark:border-neutral-500 rounded-md">
+		<h2 class="font-bold text-md">On this page</h2>
+		<a href="#" class="hover:underline">Overview</a>
+		{{ content | toc | safe }}
+		<h2 class="mt-2 font-bold text-md">Contribute</h2>
+		<ul>
+			<li>
+				<a class="hover:underline" href="{{meta.sourcePath}}/blob/main/docs/{{ page.inputPath }}">Edit this page</a>
+			</li>
+			<li>
+				<a href="https://github.com/Bearer/curio/issues/new/choose" class="hover:underline">Leave feedback</a>
+			</li>
+		</ul>
+	</aside>
 </main>
-<footer class="p-4 mt-4 text-center">Placeholder Footer</footer>
+<footer class="p-4 mt-4 text-center">
+	<nav></nav>
+</footer>

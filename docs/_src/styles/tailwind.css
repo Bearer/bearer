@@ -9,6 +9,13 @@
 }
 
 @layer components {
+
+  /* Layout */
+  .content {
+    width: calc(100%-13rem);
+  }
+
+
   /* Custom Grid Elements */
 
   .docs-grid {
@@ -18,12 +25,13 @@
 
   /* Buttons */
   .btn {
-    @apply py-4 px-6 font-bold rounded-full;
+    @apply py-2 px-4  rounded-full;
   }
 
   .btn-primary {
     @apply btn bg-gradient-to-b from-main-300 to-main-400 text-neutral-100;
   }
+
 
   .btn-ghost {
     @apply btn dark:text-neutral-100 text-black border-solid border-2 border-black dark:border-neutral-100;
@@ -46,8 +54,8 @@
   }
   .btn-fancy-dark {
     background-image: linear-gradient(
-        theme("colors.black"),
-        theme("colors.black")
+        theme("colors.neutral.600"),
+        theme("colors.neutral.600")
       ),
       linear-gradient(
         to bottom,
@@ -55,11 +63,17 @@
         theme("colors.main.400")
       );
   }
+
+  .btn-fancy:hover, .btn-fancy-dark:hover {
+    @apply btn-primary;
+  }
+
   /* code blocks */
   code {
+    max-width: 100%;
   }
   .code-inline {
-    @apply inline-block bg-main-100 p-1 rounded-md leading-none font-mono m-0 dark:bg-main-400;
+    @apply inline-block bg-code p-1 rounded-md leading-none font-mono m-0;
   }
   /* ToC */
 
@@ -74,6 +88,11 @@
 
   .toc a:hover {
     @apply underline;
+  }
+
+  /* active page nav */
+  [aria-current='page'] {
+    @apply text-main dark:text-main-300 font-semibold;
   }
 
 }
