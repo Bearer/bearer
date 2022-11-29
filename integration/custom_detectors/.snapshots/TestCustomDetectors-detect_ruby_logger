@@ -1,0 +1,39 @@
+data_types:
+    - name: Email Address
+      detectors:
+        - name: detect_ruby_logger
+          locations:
+            - filename: testdata/ruby/detect_ruby_logger.rb
+              line_number: 3
+        - name: ruby
+          locations:
+            - filename: testdata/ruby/detect_ruby_logger.rb
+              line_number: 3
+    - name: Physical Address
+      detectors:
+        - name: detect_ruby_logger
+          locations:
+            - filename: testdata/ruby/detect_ruby_logger.rb
+              line_number: 4
+        - name: ruby
+          locations:
+            - filename: testdata/ruby/detect_ruby_logger.rb
+              line_number: 4
+risks:
+    - detector_id: detect_ruby_logger
+      data_types:
+        - name: Email Address
+          stored: false
+          locations:
+            - filename: testdata/ruby/detect_ruby_logger.rb
+              line_number: 3
+        - name: Physical Address
+          stored: false
+          locations:
+            - filename: testdata/ruby/detect_ruby_logger.rb
+              line_number: 4
+components: []
+
+
+--
+
