@@ -2,13 +2,16 @@ package datatype
 
 import (
 	"github.com/bearer/curio/pkg/parser"
-	"github.com/bearer/curio/pkg/parser/nodeid"
 	"github.com/bearer/curio/pkg/report/schema/datatype"
 )
 
-func VariableReconciliation(singleArgumentDatatypes map[parser.NodeID]*datatype.DataType, allDataTypes map[parser.NodeID]*datatype.DataType, scopeTerminators []string) {
-	scopedDatatypes := ScopeDatatypes(allDataTypes, &nodeid.IntGenerator{}, scopeTerminators)
+type ReconciliationRequest struct {
+	ScopedDatatypes  map[parser.NodeID]*Scope
+	ScopeTerminators []string
+	Skip             bool
+}
 
+func VariableReconciliation(singleArgumentDatatypes map[parser.NodeID]*datatype.DataType, request *ReconciliationRequest) {
 	for _, argumentDatatype := range singleArgumentDatatypes {
 		currentNode := argumentDatatype.Node
 		isFirst := true
@@ -25,7 +28,7 @@ func VariableReconciliation(singleArgumentDatatypes map[parser.NodeID]*datatype.
 
 			isTerminating := false
 
-			for _, terminator := range scopeTerminators {
+			for _, terminator := range request.ScopeTerminators {
 				if currentNode.Type() == terminator {
 					isTerminating = true
 					break
@@ -36,7 +39,7 @@ func VariableReconciliation(singleArgumentDatatypes map[parser.NodeID]*datatype.
 				continue
 			}
 
-			for scopeID, scope := range scopedDatatypes {
+			for scopeID, scope := range request.ScopedDatatypes {
 
 				// not in the same scope
 				if scopeID != currentNode.ID() {

@@ -12,15 +12,14 @@ import (
 	schemadatatype "github.com/bearer/curio/pkg/report/schema/datatype"
 )
 
-func (detector *Detector) ExtractArguments(node *parser.Node, idGenerator nodeid.Generator, variableReconciliation bool) (map[parser.NodeID]*schemadatatype.DataType, error) {
+func (detector *Detector) ExtractArguments(node *parser.Node, idGenerator nodeid.Generator, variableReconciliation *parserdatatype.ReconciliationRequest) (map[parser.NodeID]*schemadatatype.DataType, error) {
 	extractedDatatypes, err := detector.extractArguments(node, idGenerator)
 	if err != nil {
 		return nil, err
 	}
 
-	if variableReconciliation {
-		allDatatypes := datatype.Discover(node.Tree().RootNode(), idGenerator)
-		parserdatatype.VariableReconciliation(extractedDatatypes, allDatatypes, datatype.ScopeTerminators)
+	if variableReconciliation != nil {
+		parserdatatype.VariableReconciliation(extractedDatatypes, variableReconciliation)
 	}
 
 	return extractedDatatypes, nil
