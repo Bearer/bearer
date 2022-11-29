@@ -1,0 +1,30 @@
+data_types:
+    - name: Email Address
+      detectors:
+        - name: detect_rails_session
+          locations:
+            - filename: testdata/ruby/detect_rails_session.rb
+              line_number: 2
+        - name: ruby
+          locations:
+            - filename: testdata/ruby/detect_rails_session.rb
+              line_number: 2
+    - name: Username
+      detectors:
+        - name: ruby
+          locations:
+            - filename: testdata/ruby/detect_rails_session.rb
+              line_number: 1
+risks:
+    - detector_id: detect_rails_session
+      data_types:
+        - name: Email Address
+          stored: false
+          locations:
+            - filename: testdata/ruby/detect_rails_session.rb
+              line_number: 2
+components: []
+
+
+--
+

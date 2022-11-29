@@ -18,6 +18,7 @@ func TestCustomDetectors(t *testing.T) {
 	tests := []testhelper.TestCase{
 		newScanTest("ruby", "detect_ruby_logger", "detect_ruby_logger.rb"),
 		newScanTest("ruby", "ruby_file_detection", "ruby_file_detection.rb"),
+		newScanTest("ruby", "detect_rails_session", "detect_rails_session.rb"),
 	}
 
 	testhelper.RunTests(t, tests)
