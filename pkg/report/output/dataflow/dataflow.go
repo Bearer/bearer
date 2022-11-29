@@ -4,12 +4,14 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
+	"strings"
 
 	"github.com/bearer/curio/pkg/commands/process/settings"
 	"github.com/bearer/curio/pkg/report/customdetectors"
 	"github.com/bearer/curio/pkg/report/detections"
 	"github.com/bearer/curio/pkg/report/output/dataflow/components"
 	"github.com/bearer/curio/pkg/report/output/dataflow/datatypes"
+	"github.com/bearer/curio/pkg/report/output/dataflow/detectiondecoder"
 	"github.com/bearer/curio/pkg/report/output/dataflow/risks"
 
 	"github.com/bearer/curio/pkg/report/output/dataflow/types"
@@ -64,7 +66,8 @@ func GetOutput(input []interface{}, config settings.Config, isInternal bool) (*D
 		}
 
 		// add full path to filename
-		castDetection.Source.Filename = getFullFilename(config.Target, castDetection.Source.Filename)
+		fullFilename := getFullFilename(config.Target, castDetection.Source.Filename)
+		castDetection.Source.Filename = fullFilename
 
 		switch detectionType {
 		case detections.TypeSchemaClassified:
@@ -110,17 +113,35 @@ func GetOutput(input []interface{}, config settings.Config, isInternal bool) (*D
 			}
 
 		case detections.TypeDependencyClassified:
-			err := componentsHolder.AddDependency(detection)
+			classifiedDetection, err := detectiondecoder.GetClassifiedDependency(detection)
+			if err != nil {
+				return nil, err
+			}
+
+			classifiedDetection.Source.Filename = fullFilename
+			err = componentsHolder.AddDependency(classifiedDetection)
 			if err != nil {
 				return nil, err
 			}
 		case detections.TypeInterfaceClassified:
-			err := componentsHolder.AddInterface(detection)
+			classifiedDetection, err := detectiondecoder.GetClassifiedInterface(detection)
+			if err != nil {
+				return nil, err
+			}
+
+			classifiedDetection.Source.Filename = fullFilename
+			err = componentsHolder.AddInterface(classifiedDetection)
 			if err != nil {
 				return nil, err
 			}
 		case detections.TypeFrameworkClassified:
-			err := componentsHolder.AddFramework(detection)
+			classifiedDetection, err := detectiondecoder.GetClassifiedFramework(detection)
+			if err != nil {
+				return nil, err
+			}
+
+			classifiedDetection.Source.Filename = fullFilename
+			err = componentsHolder.AddFramework(classifiedDetection)
 			if err != nil {
 				return nil, err
 			}
@@ -137,11 +158,14 @@ func GetOutput(input []interface{}, config settings.Config, isInternal bool) (*D
 }
 
 func getFullFilename(path string, filename string) string {
+	path = strings.TrimSuffix(path, "/")
+	filename = strings.TrimPrefix(filename, "/")
+
 	if filename == "." {
 		return path
 	}
 
-	if path == "" {
+	if path == "" || path == "." {
 		return filename
 	}
 

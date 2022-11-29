@@ -1,9 +1,11 @@
 package components
 
 import (
-	"github.com/bearer/curio/pkg/report/output/dataflow/detectiondecoder"
 	"github.com/bearer/curio/pkg/report/output/dataflow/types"
 
+	dependenciesclassification "github.com/bearer/curio/pkg/classification/dependencies"
+	frameworkclassification "github.com/bearer/curio/pkg/classification/frameworks"
+	interfaceclassification "github.com/bearer/curio/pkg/classification/interfaces"
 	"github.com/bearer/curio/pkg/util/classify"
 	"github.com/bearer/curio/pkg/util/maputil"
 )
@@ -36,69 +38,54 @@ func New(isInternal bool) *Holder {
 	}
 }
 
-func (holder *Holder) AddInterface(detection interface{}) error {
-	value, err := detectiondecoder.GetClassifiedInterface(detection)
-	if err != nil {
-		return err
-	}
-
-	if value.Classification == nil {
+func (holder *Holder) AddInterface(classifiedDetection interfaceclassification.ClassifiedInterface) error {
+	if classifiedDetection.Classification == nil {
 		return nil
 	}
 
-	if value.Classification.Decision.State == classify.Valid {
+	if classifiedDetection.Classification.Decision.State == classify.Valid {
 		holder.addComponent(
-			value.Classification.Name(),
-			value.Classification.RecipeUUID,
-			string(value.DetectorType),
-			value.Source.Filename,
-			*value.Source.LineNumber,
+			classifiedDetection.Classification.Name(),
+			classifiedDetection.Classification.RecipeUUID,
+			string(classifiedDetection.DetectorType),
+			classifiedDetection.Source.Filename,
+			*classifiedDetection.Source.LineNumber,
 		)
 	}
 
 	return nil
 }
 
-func (holder *Holder) AddDependency(detection interface{}) error {
-	value, err := detectiondecoder.GetClassifiedDependency(detection)
-	if err != nil {
-		return err
-	}
-
-	if value.Classification == nil {
+func (holder *Holder) AddDependency(classifiedDetection dependenciesclassification.ClassifiedDependency) error {
+	if classifiedDetection.Classification == nil {
 		return nil
 	}
 
-	if value.Classification.Decision.State == classify.Valid {
+	if classifiedDetection.Classification.Decision.State == classify.Valid {
 		holder.addComponent(
-			value.Classification.RecipeName,
-			value.Classification.RecipeUUID,
-			string(value.DetectorType),
-			value.Source.Filename,
-			*value.Source.LineNumber,
+			classifiedDetection.Classification.RecipeName,
+			classifiedDetection.Classification.RecipeUUID,
+			string(classifiedDetection.DetectorType),
+			classifiedDetection.Source.Filename,
+			*classifiedDetection.Source.LineNumber,
 		)
 	}
 
 	return nil
 }
 
-func (holder *Holder) AddFramework(detection interface{}) error {
-	value, err := detectiondecoder.GetClassifiedFramework(detection)
-	if err != nil {
-		return err
-	}
-
-	if value.Classification == nil {
+func (holder *Holder) AddFramework(classifiedDetection frameworkclassification.ClassifiedFramework) error {
+	if classifiedDetection.Classification == nil {
 		return nil
 	}
 
-	if value.Classification.Decision.State == classify.Valid {
+	if classifiedDetection.Classification.Decision.State == classify.Valid {
 		holder.addComponent(
-			value.Classification.RecipeName,
-			value.Classification.RecipeUUID,
-			string(value.DetectorType),
-			value.Source.Filename,
-			*value.Source.LineNumber,
+			classifiedDetection.Classification.RecipeName,
+			classifiedDetection.Classification.RecipeUUID,
+			string(classifiedDetection.DetectorType),
+			classifiedDetection.Source.Filename,
+			*classifiedDetection.Source.LineNumber,
 		)
 	}
 

@@ -69,7 +69,7 @@ func (detector *detector) ExtractFromSchema(
 
 	uuidHolder := parserschema.NewUUIDHolder()
 
-	return tree.Query(protoSchemaQuery, func(captures parser.Captures) error {
+	err = tree.Query(protoSchemaQuery, func(captures parser.Captures) error {
 		objectNode := captures["object_name"]
 		objectName := stripQuotes(objectNode.Content())
 
@@ -81,21 +81,37 @@ func (detector *detector) ExtractFromSchema(
 		objectUUID := uuidHolder.Assign(objectNode.ID(), detector.idGenerator)
 		fieldUUID := uuidHolder.Assign(fieldNode.ID(), detector.idGenerator)
 
-		report.AddSchema(
-			detectors.DetectorProto,
-			schema.Schema{
-				ObjectName:      objectName,
-				ObjectUUID:      objectUUID,
-				FieldName:       fieldName,
-				FieldUUID:       fieldUUID,
-				FieldType:       columnType,
-				SimpleFieldType: convertToSimpleType(columnType),
-			},
-			fieldNode.Source(true),
+		currentSchema := schema.Schema{
+			ObjectName:      objectName,
+			ObjectUUID:      objectUUID,
+			FieldName:       fieldName,
+			FieldUUID:       fieldUUID,
+			FieldType:       columnType,
+			SimpleFieldType: convertToSimpleType(columnType),
+		}
+
+		if !report.SchemaGroupIsOpen() {
+			source := objectNode.Source(true)
+			report.SchemaGroupBegin(
+				detectors.DetectorProto,
+				objectNode,
+				currentSchema,
+				&source,
+			)
+		}
+		source := fieldNode.Source(true)
+		report.SchemaGroupAddItem(
+			fieldNode,
+			currentSchema,
+			&source,
 		)
 
 		return nil
 	})
+
+	report.SchemaGroupEnd(detector.idGenerator)
+
+	return err
 }
 
 func stripQuotes(value string) string {

@@ -103,14 +103,6 @@ func ExportClassified[D DataTypable](report detections.ReportDetection, detectio
 	exportSchemas(report, detectionType, detectorType, idGenerator, values, parent)
 }
 
-func Export[D DataTypable](report detections.ReportDetection, detectionType detections.DetectionType, detectorType detectors.Type, idGenerator nodeid.Generator, values map[parser.NodeID]D) {
-	if detectionType == detections.TypeCustom {
-		exportSchemas(report, detectionType, detectorType, idGenerator, values, nil)
-		return
-	}
-	exportSchemas(report, detectionType, detectorType, idGenerator, values, nil)
-}
-
 func exportSchemas[D DataTypable](report detections.ReportDetection, detectionType detections.DetectionType, detectorType detectors.Type, idGenerator nodeid.Generator, values map[parser.NodeID]D, parent *parser.Node) {
 	sortedDataTypes := SortParserMap(values)
 
@@ -127,7 +119,7 @@ func dataTypeToSchema[D DataTypable](report detections.ReportDetection, detectio
 	}
 
 	selfUUID := dataType.GetUUID()
-	if dataType.GetUUID() == "" {
+	if selfUUID == "" {
 		selfUUID = idGenerator.GenerateId()
 	}
 

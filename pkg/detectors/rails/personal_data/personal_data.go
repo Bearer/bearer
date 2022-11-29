@@ -45,27 +45,47 @@ func ExtractFromDatabaseSchema(
 
 	uuidHolder := parserschema.NewUUIDHolder()
 
-	return tree.Query(rubyDatabaseSchemaQuery, func(captures parser.Captures) error {
+	err = tree.Query(rubyDatabaseSchemaQuery, func(captures parser.Captures) error {
 		tableNode := captures["table_name"]
 		tableName := stripQuotes(tableNode.Content())
-		columnName := stripQuotes(captures["column_name"].Content())
+		columnNode := captures["column_name"]
+		columnName := stripQuotes(columnNode.Content())
 		columnTypeNode := captures["type"]
 		columnType := columnTypeNode.Content()
 
 		objectUUID := uuidHolder.Assign(tableNode.ID(), idGenerator)
 		fieldUUID := uuidHolder.Assign(columnTypeNode.ID(), idGenerator)
 
-		report.AddSchema(detectors.DetectorRails, schema.Schema{
+		currentSchema := schema.Schema{
 			ObjectName:      tableName,
 			ObjectUUID:      objectUUID,
 			FieldName:       columnName,
 			FieldUUID:       fieldUUID,
 			FieldType:       columnType,
 			SimpleFieldType: convertToSimpleType(columnType),
-		}, columnTypeNode.Source(false))
+		}
+		if !report.SchemaGroupIsOpen() {
+			source := tableNode.Source(false)
+			report.SchemaGroupBegin(
+				detectors.DetectorRails,
+				tableNode,
+				currentSchema,
+				&source,
+			)
+		}
+		source := columnNode.Source(false)
+		report.SchemaGroupAddItem(
+			columnNode,
+			currentSchema,
+			&source,
+		)
 
 		return nil
 	})
+
+	report.SchemaGroupEnd(idGenerator)
+
+	return err
 }
 
 func stripQuotes(value string) string {
