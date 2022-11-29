@@ -16,10 +16,11 @@ func newScanTest(language, name, filename string) testhelper.TestCase {
 
 func TestCustomDetectors(t *testing.T) {
 	tests := []testhelper.TestCase{
+		newScanTest("ruby", "detect_rails_jwt", "detect_rails_jwt.rb"),
+		newScanTest("ruby", "detect_rails_session", "detect_rails_session.rb"),
 		newScanTest("ruby", "detect_ruby_logger", "detect_ruby_logger.rb"),
 		newScanTest("ruby", "ruby_file_detection", "ruby_file_detection.rb"),
-		newScanTest("ruby", "detect_rails_session", "detect_rails_session.rb"),
-		newScanTest("ruby", "detect_rails_jwt", "detect_rails_jwt.rb"),
+		newScanTest("ruby", "ruby_http_detection", "ruby_http_detection.rb"),
 	}
 
 	testhelper.RunTests(t, tests)
