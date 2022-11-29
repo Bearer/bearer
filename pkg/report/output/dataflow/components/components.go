@@ -36,7 +36,7 @@ func New(isInternal bool) *Holder {
 	}
 }
 
-func (holder *Holder) AddInterface(detection interface{}) error {
+func (holder *Holder) AddInterface(detection interface{}, fullFilename string) error {
 	value, err := detectiondecoder.GetClassifiedInterface(detection)
 	if err != nil {
 		return err
@@ -51,7 +51,7 @@ func (holder *Holder) AddInterface(detection interface{}) error {
 			value.Classification.Name(),
 			value.Classification.RecipeUUID,
 			string(value.DetectorType),
-			value.Source.Filename,
+			fullFilename,
 			*value.Source.LineNumber,
 		)
 	}
@@ -59,7 +59,7 @@ func (holder *Holder) AddInterface(detection interface{}) error {
 	return nil
 }
 
-func (holder *Holder) AddDependency(detection interface{}) error {
+func (holder *Holder) AddDependency(detection interface{}, fullFilename string) error {
 	value, err := detectiondecoder.GetClassifiedDependency(detection)
 	if err != nil {
 		return err
@@ -74,7 +74,7 @@ func (holder *Holder) AddDependency(detection interface{}) error {
 			value.Classification.RecipeName,
 			value.Classification.RecipeUUID,
 			string(value.DetectorType),
-			value.Source.Filename,
+			fullFilename,
 			*value.Source.LineNumber,
 		)
 	}
@@ -82,7 +82,7 @@ func (holder *Holder) AddDependency(detection interface{}) error {
 	return nil
 }
 
-func (holder *Holder) AddFramework(detection interface{}) error {
+func (holder *Holder) AddFramework(detection interface{}, fullFilename string) error {
 	value, err := detectiondecoder.GetClassifiedFramework(detection)
 	if err != nil {
 		return err
@@ -97,7 +97,7 @@ func (holder *Holder) AddFramework(detection interface{}) error {
 			value.Classification.RecipeName,
 			value.Classification.RecipeUUID,
 			string(value.DetectorType),
-			value.Source.Filename,
+			fullFilename,
 			*value.Source.LineNumber,
 		)
 	}

@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
+	"strings"
 
 	"github.com/bearer/curio/pkg/commands/process/settings"
 	"github.com/bearer/curio/pkg/report/customdetectors"
@@ -64,7 +65,8 @@ func GetOutput(input []interface{}, config settings.Config, isInternal bool) (*D
 		}
 
 		// add full path to filename
-		castDetection.Source.Filename = getFullFilename(config.Target, castDetection.Source.Filename)
+		fullFilename := getFullFilename(config.Target, castDetection.Source.Filename)
+		castDetection.Source.Filename = fullFilename
 
 		switch detectionType {
 		case detections.TypeSchemaClassified:
@@ -110,17 +112,17 @@ func GetOutput(input []interface{}, config settings.Config, isInternal bool) (*D
 			}
 
 		case detections.TypeDependencyClassified:
-			err := componentsHolder.AddDependency(detection)
+			err := componentsHolder.AddDependency(detection, fullFilename)
 			if err != nil {
 				return nil, err
 			}
 		case detections.TypeInterfaceClassified:
-			err := componentsHolder.AddInterface(detection)
+			err := componentsHolder.AddInterface(detection, fullFilename)
 			if err != nil {
 				return nil, err
 			}
 		case detections.TypeFrameworkClassified:
-			err := componentsHolder.AddFramework(detection)
+			err := componentsHolder.AddFramework(detection, fullFilename)
 			if err != nil {
 				return nil, err
 			}
@@ -137,11 +139,14 @@ func GetOutput(input []interface{}, config settings.Config, isInternal bool) (*D
 }
 
 func getFullFilename(path string, filename string) string {
+	path = strings.TrimSuffix(path, "/")
+	filename = strings.TrimPrefix(filename, "/")
+
 	if filename == "." {
 		return path
 	}
 
-	if path == "" {
+	if path == "" || path == "." {
 		return filename
 	}
 
