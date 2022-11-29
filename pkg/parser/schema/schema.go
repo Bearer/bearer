@@ -2,9 +2,6 @@ package schema
 
 import (
 	"github.com/bearer/curio/pkg/parser"
-	"github.com/bearer/curio/pkg/report"
-	"github.com/bearer/curio/pkg/report/detectors"
-	"github.com/bearer/curio/pkg/report/schema"
 	"github.com/bearer/curio/pkg/report/values"
 	"github.com/bearer/curio/pkg/report/variables"
 	sitter "github.com/smacker/go-tree-sitter"
@@ -70,32 +67,4 @@ func (finder *Finder) NonTerminatingValues(root *parser.Node) []*Variable {
 		variables = append(variables, childValue.Variables...)
 	}
 	return variables
-}
-
-func (finder *Finder) ReportSchemas(detectorType detectors.Type, output report.Report) {
-	finder.tree.WalkBottomUp(func(node *parser.Node) error { //nolint:all,errcheck
-		value := finder.values[node.ID()]
-
-		if !value.Terminating {
-			return nil
-		}
-
-		var previousVariable *Variable
-		for _, variable := range value.Variables {
-
-			if previousVariable != nil {
-				output.AddSchema(detectorType,
-					schema.Schema{
-						ObjectName: string(*previousVariable),
-						FieldName:  string(*variable),
-					},
-					node.Source(true),
-				)
-			}
-
-			previousVariable = variable
-		}
-
-		return nil
-	})
 }

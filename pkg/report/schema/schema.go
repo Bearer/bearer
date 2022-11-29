@@ -1,6 +1,8 @@
 package schema
 
 import (
+	"github.com/bearer/curio/pkg/parser"
+	"github.com/bearer/curio/pkg/parser/nodeid"
 	"github.com/bearer/curio/pkg/report/detectors"
 	"github.com/bearer/curio/pkg/report/source"
 )
@@ -34,5 +36,8 @@ type Parent struct {
 }
 
 type ReportSchema interface {
-	AddSchema(detectorType detectors.Type, schema Schema, source source.Source)
+	SchemaGroupBegin(detectorType detectors.Type, node *parser.Node, schema Schema, source *source.Source)
+	SchemaGroupIsOpen() bool
+	SchemaGroupAddItem(node *parser.Node, schema Schema, source *source.Source)
+	SchemaGroupEnd(idGenerator nodeid.Generator)
 }

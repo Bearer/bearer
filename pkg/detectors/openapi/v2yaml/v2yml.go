@@ -68,7 +68,7 @@ func ProcessFile(idGenerator nodeid.Generator, file *file.FileInfo, report repor
 		return false, err
 	}
 
-	reportadder.AddSchema(file, report, foundValues)
+	reportadder.AddSchema(file, report, foundValues, idGenerator)
 
 	return true, err
 }

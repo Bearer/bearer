@@ -89,20 +89,34 @@ func Detect(file *file.FileInfo, report reporttypes.Report, idGenerator nodeid.G
 			objectUUID := uuidHolder.Assign(tableNode.ID(), idGenerator)
 			fieldUUID := uuidHolder.Assign(columnNode.ID(), idGenerator)
 
-			report.AddSchema(detectors.DetectorSQL,
-				schema.Schema{
-					ObjectName:      tableName,
-					ObjectUUID:      objectUUID,
-					FieldName:       columnName,
-					FieldUUID:       fieldUUID,
-					FieldType:       columnType,
-					SimpleFieldType: util.ConvertToSimpleType(columnType),
-				},
-				columnNode.Source(true),
+			currentSchema := schema.Schema{
+				ObjectName:      tableName,
+				ObjectUUID:      objectUUID,
+				FieldName:       columnName,
+				FieldUUID:       fieldUUID,
+				FieldType:       columnType,
+				SimpleFieldType: util.ConvertToSimpleType(columnType),
+			}
+			if !report.SchemaGroupIsOpen() {
+				source := tableNode.Source(true)
+				report.SchemaGroupBegin(
+					detectors.DetectorSQL,
+					tableNode,
+					currentSchema,
+					&source,
+				)
+			}
+			source := columnNode.Source(true)
+			report.SchemaGroupAddItem(
+				columnNode,
+				currentSchema,
+				&source,
 			)
 
 			return nil
 		})
+
+		report.SchemaGroupEnd(idGenerator)
 
 		if err != nil {
 			report.AddError(file.RelativePath, fmt.Errorf("create table error: %s", err))

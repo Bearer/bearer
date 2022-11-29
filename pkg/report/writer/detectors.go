@@ -27,10 +27,25 @@ import (
 	"github.com/wlredeye/jsonlines"
 )
 
+type StoredSchema struct {
+	Value        schema.Schema
+	Source       *source.Source
+}
+
+type StoredSchemaNodes = map[*parser.Node]*StoredSchema
+
+type SchemaGroup struct {
+	Node         *parser.Node
+	ParentSchema StoredSchema
+	DetectorType detectors.Type
+	Schemas      StoredSchemaNodes
+}
+
 type Detectors struct {
-	Blamer     blamer.Blamer
-	Classifier *classification.Classifier
-	File       io.Writer
+	Blamer        blamer.Blamer
+	Classifier    *classification.Classifier
+	File          io.Writer
+	StoredSchemas SchemaGroup
 }
 
 func (report *Detectors) AddInterface(
@@ -87,14 +102,81 @@ func (report *Detectors) AddDataType(detectionType detections.DetectionType, det
 	}
 }
 
-func (report *Detectors) AddSchema(
-	detectorType detectors.Type,
-	schema schema.Schema,
-	source source.Source,
-) {
-	// @todo FIXME: Add classification here
+func (report *Detectors) SchemaGroupBegin(detectorType detectors.Type, node *parser.Node, schema schema.Schema, source *source.Source) {
+	if report.SchemaGroupIsOpen() {
+		zerolog.Warn().Msg("schema group already open")
+	}
+	report.StoredSchemas = SchemaGroup{
+		Node: node,
+		ParentSchema: StoredSchema{
+			Value: schema,
+			Source: source,
+		},
+		DetectorType: detectorType,
+		Schemas: make(StoredSchemaNodes),
+	}
+}
 
-	report.AddDetection(detections.TypeSchema, detectorType, source, schema)
+func (report *Detectors) SchemaGroupIsOpen() bool {
+	return report.StoredSchemas.DetectorType != ""
+}
+
+func (report *Detectors) SchemaGroupAddItem(node *parser.Node, schema schema.Schema, source *source.Source) {
+	report.StoredSchemas.Schemas[node] = &StoredSchema{Value: schema, Source: source}
+}
+
+func (report *Detectors) SchemaGroupEnd(idGenerator nodeid.Generator) {
+	// Build child data types
+	childDataTypes := map[string]datatype.DataTypable{}
+	for node, storedSchema := range report.StoredSchemas.Schemas {
+		schema := storedSchema.Value
+
+		childName := schema.FieldName
+		childDataTypes[childName] = &datatype.DataType{
+			Node: node,
+			Name: childName,
+			Type: schema.SimpleFieldType,
+			TextType: schema.FieldType,
+			Properties: map[string]datatype.DataTypable{},
+			UUID: schema.FieldUUID,
+		}
+	}
+
+	// Build parent data type
+	parentDataType := &datatype.DataType{
+		Node: report.StoredSchemas.Node,
+		Name: report.StoredSchemas.ParentSchema.Value.ObjectName,
+		Type: "",
+		TextType: "",
+		Properties: childDataTypes,
+		UUID: report.StoredSchemas.ParentSchema.Value.ObjectUUID,
+	}
+
+	classifiedDatatypes := make(map[parser.NodeID]*classificationschema.ClassifiedDatatype, 0)
+
+	// Classify child data types
+	for node, storedSchema := range report.StoredSchemas.Schemas {
+		source := storedSchema.Source
+		schema := storedSchema.Value
+
+		childName := schema.FieldName
+		value := childDataTypes[childName]
+		detection := classificationschema.DataTypeDetection{DetectorType: report.StoredSchemas.DetectorType, Value: value, Filename: source.Filename}
+		classifiedDatatype := report.Classifier.Schema.Classify(detection)
+
+		classifiedDatatypes[node.ID()] = classifiedDatatype
+	}
+
+	// Classify parent data type
+	parentDetection := classificationschema.DataTypeDetection{DetectorType: report.StoredSchemas.DetectorType, Value: parentDataType, Filename: report.StoredSchemas.ParentSchema.Source.Filename}
+	classifiedParentDatatype := report.Classifier.Schema.Classify(parentDetection)
+	classifiedDatatypes[report.StoredSchemas.Node.ID()] = classifiedParentDatatype
+
+	// Export classified data types
+	datatype.ExportClassified(report, detections.TypeSchemaClassified, report.StoredSchemas.DetectorType, idGenerator, classifiedDatatypes, report.StoredSchemas.Node)
+
+	// Clear the map of stored schema detection information
+	report.StoredSchemas = SchemaGroup{}
 }
 
 func (report *Detectors) AddSecretLeak(

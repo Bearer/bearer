@@ -82,6 +82,7 @@ type InMemoryReport struct {
 	Errors           []*detections.ErrorDetection
 	SecretLeaks      []*detections.Detection
 	CreateView       []*detections.Detection
+	SchemaGroupDetectorType reportdetectors.Type
 }
 
 func (report *InMemoryReport) AddDetection(
@@ -103,18 +104,25 @@ func (report *InMemoryReport) AddDetection(
 	}
 }
 
-func (report *InMemoryReport) AddSchema(
-	detectorType reportdetectors.Type,
-	schema schema.Schema,
-	source source.Source,
-) {
+func (report *InMemoryReport) SchemaGroupBegin(detectorType reportdetectors.Type, node *parser.Node, schema schema.Schema, source *source.Source) {
+	report.SchemaGroupDetectorType = detectorType
+}
 
+func (report *InMemoryReport) SchemaGroupIsOpen() bool {
+	return report.SchemaGroupDetectorType != ""
+}
+
+func (report *InMemoryReport) SchemaGroupAddItem(node *parser.Node, schema schema.Schema, source *source.Source) {
 	report.Detections = append(report.Detections, &detections.Detection{
-		DetectorType: detectorType,
+		DetectorType: report.SchemaGroupDetectorType,
 		Value:        schema,
-		Source:       source,
+		Source:       *source,
 		Type:         detections.TypeSchema,
 	})
+}
+
+func (report *InMemoryReport) SchemaGroupEnd(idGenerator nodeid.Generator) {
+	report.SchemaGroupDetectorType = ""
 }
 
 func (report *InMemoryReport) AddDataType(
@@ -125,7 +133,7 @@ func (report *InMemoryReport) AddDataType(
 	parent *parser.Node,
 ) {
 
-	datatype.Export(report, detectionType, detectorType, idGenerator, values)
+	datatype.ExportClassified(report, detectionType, detectorType, idGenerator, values, nil)
 }
 
 func (report *InMemoryReport) AddCreateView(
