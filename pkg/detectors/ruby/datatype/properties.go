@@ -32,9 +32,10 @@ var callsQuery = parser.QueryMustCompile(ruby.GetLanguage(),
 		method: (identifier) @param_id
 	) @param_parent`)
 
-var ScopeTerminators = []string{"program", "method", "block", "lambda", "singleton_method"}
 var hashQuery = parser.QueryMustCompile(ruby.GetLanguage(),
 	`(hash) @param_arguments`)
+
+var ScopeTerminators = []string{"program", "method", "block", "lambda", "singleton_method"}
 
 func addProperties(node *parser.Node, helperDatatypes map[parser.NodeID]*schemadatatype.DataType) {
 	// add element references

@@ -5,10 +5,9 @@ import (
 
 	"github.com/bearer/curio/pkg/detectors/ruby/datatype"
 	"github.com/bearer/curio/pkg/parser"
+	parserdatatype "github.com/bearer/curio/pkg/parser/datatype"
 	"github.com/bearer/curio/pkg/parser/nodeid"
 	"github.com/bearer/curio/pkg/report/schema"
-
-	parserdatatype "github.com/bearer/curio/pkg/parser/datatype"
 
 	schemadatatype "github.com/bearer/curio/pkg/report/schema/datatype"
 	"github.com/bearer/curio/pkg/util/file"
@@ -64,13 +63,11 @@ func (detector *Detector) extractArguments(node *parser.Node, idGenerator nodeid
 			joinedDatatypes[datatype.Node.ID()] = datatype
 			continue
 		}
+	}
 
-		singleArgumentDatatypes := datatype.Discover(singleArgument, idGenerator)
-
-		for nodeID, target := range singleArgumentDatatypes {
-			joinedDatatypes[nodeID] = target
-		}
-
+	complexDatatypes := datatype.Discover(node, idGenerator)
+	for nodeID, target := range complexDatatypes {
+		joinedDatatypes[nodeID] = target
 	}
 
 	return joinedDatatypes, nil
