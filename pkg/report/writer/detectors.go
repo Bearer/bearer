@@ -173,7 +173,7 @@ func (report *Detectors) SchemaGroupEnd(idGenerator nodeid.Generator) {
 	classifiedDatatypes[report.StoredSchemas.Node.ID()] = classifiedParentDatatype
 
 	// Export classified data types
-	datatype.ExportClassified(report, detections.TypeSchemaClassified, report.StoredSchemas.DetectorType, idGenerator, classifiedDatatypes, nil)
+	datatype.ExportClassified(report, detections.TypeSchemaClassified, report.StoredSchemas.DetectorType, idGenerator, classifiedDatatypes, report.StoredSchemas.Node)
 
 	// Clear the map of stored schema detection information
 	report.StoredSchemas = SchemaGroup{}
