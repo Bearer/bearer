@@ -135,6 +135,13 @@ detect_rails_jwt:
       JWT.encode(<$ARGUMENT>)
   languages:
     - ruby
+detect_rails_cookies:
+  type: "risk"
+  patterns:
+    - |
+      cookies[...] = $ANYTHING
+  languages:
+    - ruby
 ssl_certificate_verification_disabled:
   type: "risk"
   patterns:

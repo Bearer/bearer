@@ -1,0 +1,35 @@
+data_types:
+    - name: Fullname
+      detectors:
+        - name: detect_rails_cookies
+          locations:
+            - filename: testdata/ruby/detect_rails_cookies.rb
+              line_number: 2
+        - name: ruby
+          locations:
+            - filename: testdata/ruby/detect_rails_cookies.rb
+              line_number: 2
+    - name: Username
+      detectors:
+        - name: ruby
+          locations:
+            - filename: testdata/ruby/detect_rails_cookies.rb
+              line_number: 2
+            - filename: testdata/ruby/detect_rails_cookies.rb
+              line_number: 4
+risks:
+    - detector_id: detect_rails_cookies
+      data_types:
+        - name: Fullname
+          stored: false
+          locations:
+            - filename: testdata/ruby/detect_rails_cookies.rb
+              line_number: 2
+          parent:
+            line_number: 2
+            content: cookies[:user_name] = user.name
+components: []
+
+
+--
+
