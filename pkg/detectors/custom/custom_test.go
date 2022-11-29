@@ -23,6 +23,9 @@ const detectorType = detectortypes.DetectorCustom
 //go:embed testdata/config/ruby_loggers.yml
 var configRubyLoggers []byte
 
+//go:embed testdata/config/rails_sessions.yml
+var configRailsSessions []byte
+
 //go:embed testdata/config/rails_encrypts.yml
 var configRailsEncrypts []byte
 
@@ -34,6 +37,35 @@ var configSQLCreateTable []byte
 
 //go:embed testdata/config/sql_create_trigger.yml
 var configSQLCreateTrigger []byte
+
+func TestRailsSessionsJSON(t *testing.T) {
+	var rulesConfig map[string]settings.Rule
+
+	detector := custom.New(&nodeid.IntGenerator{Counter: 0})
+	err := yaml.Unmarshal(configRailsSessions, &rulesConfig)
+	if err != nil {
+		t.Fatal(err)
+		return
+	}
+	customDetector := detector.(*custom.Detector)
+	err = customDetector.CompileRules(rulesConfig)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	var registrations = []detectors.InitializedDetector{{
+		Type:     detectorType,
+		Detector: detector}}
+	detectorReport := testhelper.Extract(t, filepath.Join("testdata", "ruby", "sessions"), registrations, detectorType)
+
+	bytes, err := json.MarshalIndent(detectorReport.CustomDetections, "", "\t")
+
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	cupaloy.SnapshotT(t, string(bytes))
+}
 
 func TestRubyLoggersJSON(t *testing.T) {
 	var rulesConfig map[string]settings.Rule

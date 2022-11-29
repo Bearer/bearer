@@ -1,4 +1,4 @@
-package bearer.logger_leaks
+package bearer.leakage
 
 import future.keywords
 

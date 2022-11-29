@@ -46,6 +46,13 @@ detect_ruby_logger:
       logger.info(<$ARGUMENT>)
   languages:
     - ruby
+detect_rails_session:
+  type: "risk"
+  patterns:
+    - |
+      session[...] = $ANYTHING
+  languages:
+    - ruby
 detect_encrypted_ruby_class_properties:
   type: "verifier"
   patterns:
