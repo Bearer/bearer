@@ -1,0 +1,84 @@
+data_types:
+    - name: Email Address
+      detectors:
+        - name: ruby
+          locations:
+            - filename: testdata/ruby/ruby_file_detection.rb
+              line_number: 5
+            - filename: testdata/ruby/ruby_file_detection.rb
+              line_number: 12
+            - filename: testdata/ruby/ruby_file_detection.rb
+              line_number: 16
+        - name: ruby_file_detection
+          locations:
+            - filename: testdata/ruby/ruby_file_detection.rb
+              line_number: 5
+            - filename: testdata/ruby/ruby_file_detection.rb
+              line_number: 12
+            - filename: testdata/ruby/ruby_file_detection.rb
+              line_number: 16
+    - name: Emails
+      detectors:
+        - name: ruby
+          locations:
+            - filename: testdata/ruby/ruby_file_detection.rb
+              line_number: 14
+    - name: Firstname
+      detectors:
+        - name: ruby
+          locations:
+            - filename: testdata/ruby/ruby_file_detection.rb
+              line_number: 6
+            - filename: testdata/ruby/ruby_file_detection.rb
+              line_number: 16
+        - name: ruby_file_detection
+          locations:
+            - filename: testdata/ruby/ruby_file_detection.rb
+              line_number: 6
+            - filename: testdata/ruby/ruby_file_detection.rb
+              line_number: 16
+    - name: Lastname
+      detectors:
+        - name: ruby
+          locations:
+            - filename: testdata/ruby/ruby_file_detection.rb
+              line_number: 7
+            - filename: testdata/ruby/ruby_file_detection.rb
+              line_number: 16
+        - name: ruby_file_detection
+          locations:
+            - filename: testdata/ruby/ruby_file_detection.rb
+              line_number: 7
+            - filename: testdata/ruby/ruby_file_detection.rb
+              line_number: 16
+risks:
+    - detector_id: ruby_file_detection
+      data_types:
+        - name: Email Address
+          stored: false
+          locations:
+            - filename: testdata/ruby/ruby_file_detection.rb
+              line_number: 5
+            - filename: testdata/ruby/ruby_file_detection.rb
+              line_number: 12
+            - filename: testdata/ruby/ruby_file_detection.rb
+              line_number: 16
+        - name: Firstname
+          stored: false
+          locations:
+            - filename: testdata/ruby/ruby_file_detection.rb
+              line_number: 6
+            - filename: testdata/ruby/ruby_file_detection.rb
+              line_number: 16
+        - name: Lastname
+          stored: false
+          locations:
+            - filename: testdata/ruby/ruby_file_detection.rb
+              line_number: 7
+            - filename: testdata/ruby/ruby_file_detection.rb
+              line_number: 16
+components: []
+
+
+--
+
