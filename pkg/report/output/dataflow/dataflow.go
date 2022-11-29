@@ -11,6 +11,7 @@ import (
 	"github.com/bearer/curio/pkg/report/detections"
 	"github.com/bearer/curio/pkg/report/output/dataflow/components"
 	"github.com/bearer/curio/pkg/report/output/dataflow/datatypes"
+	"github.com/bearer/curio/pkg/report/output/dataflow/detectiondecoder"
 	"github.com/bearer/curio/pkg/report/output/dataflow/risks"
 
 	"github.com/bearer/curio/pkg/report/output/dataflow/types"
@@ -112,17 +113,35 @@ func GetOutput(input []interface{}, config settings.Config, isInternal bool) (*D
 			}
 
 		case detections.TypeDependencyClassified:
-			err := componentsHolder.AddDependency(detection, fullFilename)
+			classifiedDetection, err := detectiondecoder.GetClassifiedDependency(detection)
+			if err != nil {
+				return nil, err
+			}
+
+			classifiedDetection.Source.Filename = fullFilename
+			err = componentsHolder.AddDependency(classifiedDetection)
 			if err != nil {
 				return nil, err
 			}
 		case detections.TypeInterfaceClassified:
-			err := componentsHolder.AddInterface(detection, fullFilename)
+			classifiedDetection, err := detectiondecoder.GetClassifiedInterface(detection)
+			if err != nil {
+				return nil, err
+			}
+
+			classifiedDetection.Source.Filename = fullFilename
+			err = componentsHolder.AddInterface(classifiedDetection)
 			if err != nil {
 				return nil, err
 			}
 		case detections.TypeFrameworkClassified:
-			err := componentsHolder.AddFramework(detection, fullFilename)
+			classifiedDetection, err := detectiondecoder.GetClassifiedFramework(detection)
+			if err != nil {
+				return nil, err
+			}
+
+			classifiedDetection.Source.Filename = fullFilename
+			err = componentsHolder.AddFramework(classifiedDetection)
 			if err != nil {
 				return nil, err
 			}
