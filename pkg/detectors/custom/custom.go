@@ -74,6 +74,11 @@ func (detector *Detector) CompileRules(rulesConfig map[string]settings.Rule) err
 				compiledRule.RuleName = ruleName
 				compiledRule.Metavars = rule.Metavars
 				compiledRule.ParamParenting = rule.ParamParenting
+				if rule.ParamParenting {
+					compiledRule.VariableReconciliation = false
+				} else {
+					compiledRule.VariableReconciliation = true
+				}
 				compiledRule.RootLowercase = rule.RootLowercase
 				compiledRule.RootSingularize = rule.RootSingularize
 				compiledRules = append(compiledRules, compiledRule)
@@ -170,7 +175,7 @@ func (detector *Detector) extractData(captures []parser.Captures, rule config.Co
 			var err error
 
 			if param.ArgumentsExtract || param.ClassNameExtract {
-				paramTypes, err = detector.extractArguments(lang, capture[param.BuildFullName()], idGenerator, fileinfo, filePath)
+				paramTypes, err = detector.extractArguments(lang, capture[param.BuildFullName()], idGenerator, rule.VariableReconciliation)
 				if err != nil {
 					return err
 				}
@@ -304,12 +309,12 @@ func filterCaptures(params []config.Param, captures []parser.Captures) (filtered
 	return filtered, err
 }
 
-func (detector *Detector) extractArguments(language string, node *parser.Node, idGenerator nodeid.Generator, fileinfo *file.FileInfo, filepath *file.Path) (map[parser.NodeID]*schemadatatype.DataType, error) {
+func (detector *Detector) extractArguments(language string, node *parser.Node, idGenerator nodeid.Generator, variableReconciliation bool) (map[parser.NodeID]*schemadatatype.DataType, error) {
 	switch language {
 	case "ruby":
-		return detector.Ruby.ExtractArguments(node, idGenerator, fileinfo, filepath)
+		return detector.Ruby.ExtractArguments(node, idGenerator, variableReconciliation)
 	case "sql":
-		return detector.Sql.ExtractArguments(node, idGenerator, fileinfo, filepath)
+		return detector.Sql.ExtractArguments(node, idGenerator, variableReconciliation)
 	}
 	return nil, errors.New("unsupported language")
 }

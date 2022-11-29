@@ -10,22 +10,23 @@ import (
 	"github.com/bearer/curio/pkg/report/schema"
 
 	schemadatatype "github.com/bearer/curio/pkg/report/schema/datatype"
-	"github.com/bearer/curio/pkg/util/file"
 )
 
-func (detector *Detector) ExtractArguments(node *parser.Node, idGenerator nodeid.Generator, fileinfo *file.FileInfo, filepath *file.Path) (map[parser.NodeID]*schemadatatype.DataType, error) {
-	extractedDatatypes, err := detector.extractArguments(node, idGenerator, fileinfo, filepath)
+func (detector *Detector) ExtractArguments(node *parser.Node, idGenerator nodeid.Generator, variableReconciliation bool) (map[parser.NodeID]*schemadatatype.DataType, error) {
+	extractedDatatypes, err := detector.extractArguments(node, idGenerator)
 	if err != nil {
 		return nil, err
 	}
 
-	allDatatypes := datatype.Discover(node.Tree().RootNode(), idGenerator)
-	parserdatatype.VariableReconciliation(extractedDatatypes, allDatatypes, datatype.ScopeTerminators)
+	if variableReconciliation {
+		allDatatypes := datatype.Discover(node.Tree().RootNode(), idGenerator)
+		parserdatatype.VariableReconciliation(extractedDatatypes, allDatatypes, datatype.ScopeTerminators)
+	}
 
 	return extractedDatatypes, nil
 }
 
-func (detector *Detector) extractArguments(node *parser.Node, idGenerator nodeid.Generator, fileinfo *file.FileInfo, filepath *file.Path) (map[parser.NodeID]*schemadatatype.DataType, error) {
+func (detector *Detector) extractArguments(node *parser.Node, idGenerator nodeid.Generator) (map[parser.NodeID]*schemadatatype.DataType, error) {
 	if node == nil {
 		return nil, nil
 	}
@@ -67,6 +68,11 @@ func (detector *Detector) extractArguments(node *parser.Node, idGenerator nodeid
 
 	complexDatatypes := datatype.Discover(node, idGenerator)
 	for nodeID, target := range complexDatatypes {
+		_, exists := joinedDatatypes[nodeID]
+		if exists {
+			continue
+		}
+
 		joinedDatatypes[nodeID] = target
 	}
 
