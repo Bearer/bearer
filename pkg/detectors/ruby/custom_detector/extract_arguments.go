@@ -44,29 +44,25 @@ func (detector *Detector) extractArguments(node *parser.Node, idGenerator nodeid
 		return joinedDatatypes, nil
 	}
 
-	if node.Type() == "argument_list" {
-		for i := 0; i < node.ChildCount(); i++ {
-			singleArgument := node.Child(i)
+	for i := 0; i < node.ChildCount(); i++ {
+		singleArgument := node.Child(i)
 
-			if singleArgument.Type() == "identifier" || singleArgument.Type() == "simple_symbol" || singleArgument.Type() == "bare_symbol" {
-				content := singleArgument.Content()
+		if singleArgument.Type() == "identifier" || singleArgument.Type() == "simple_symbol" || singleArgument.Type() == "bare_symbol" {
+			content := singleArgument.Content()
 
-				if singleArgument.Type() == "simple_symbol" {
-					content = strings.TrimLeft(content, ":")
-				}
-
-				datatype := &schemadatatype.DataType{
-					Node:       singleArgument,
-					Name:       content,
-					Type:       schema.SimpleTypeUnknown,
-					Properties: make(map[string]schemadatatype.DataTypable),
-				}
-				joinedDatatypes[datatype.Node.ID()] = datatype
-				continue
+			if singleArgument.Type() == "simple_symbol" {
+				content = strings.TrimLeft(content, ":")
 			}
-		}
 
-		// return joinedDatatypes, nil
+			datatype := &schemadatatype.DataType{
+				Node:       singleArgument,
+				Name:       content,
+				Type:       schema.SimpleTypeUnknown,
+				Properties: make(map[string]schemadatatype.DataTypable),
+			}
+			joinedDatatypes[datatype.Node.ID()] = datatype
+			continue
+		}
 	}
 
 	complexDatatypes := datatype.Discover(node, idGenerator)
