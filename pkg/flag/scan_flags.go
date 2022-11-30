@@ -67,14 +67,14 @@ type ScanFlagGroup struct {
 }
 
 type ScanOptions struct {
-	Target                  string        `json:"target" yaml:"target"`
-	SkipPath                []string      `json:"skip_path" yaml:"skip_path"`
-	Debug                   bool          `json:"debug" yaml:"debug"`
-	DisableDomainResolution bool          `json:"disable_domain_resolution" yaml:"disable_domain_resolution"`
-	DomainResolutionTimeout time.Duration `json:"domain_resolution_timeout" yaml:"domain_resolution_timeout"`
-	InternalDomains         []string      `json:"internal_domains" yaml:"internal_domains"`
-	Context                 Context       `json:"context" yaml:"context"`
-	Quiet                   bool          `json:"quiet" yaml:"quiet"`
+	Target                  string        `mapstructure:"target" json:"target" yaml:"target"`
+	SkipPath                []string      `mapstructure:"skip_path" json:"skip_path" yaml:"skip_path"`
+	Debug                   bool          `mapstructure:"debug" json:"debug" yaml:"debug"`
+	DisableDomainResolution bool          `mapstructure:"disable_domain_resolution" json:"disable_domain_resolution" yaml:"disable_domain_resolution"`
+	DomainResolutionTimeout time.Duration `mapstructure:"domain_resolution_timeout" json:"domain_resolution_timeout" yaml:"domain_resolution_timeout"`
+	InternalDomains         []string      `mapstructure:"internal_domains" json:"internal_domains" yaml:"internal_domains"`
+	Context                 Context       `mapstructure:"context" json:"context" yaml:"context"`
+	Quiet                   bool          `mapstructure:"quiet" json:"quiet" yaml:"quiet"`
 }
 
 func NewScanFlagGroup() *ScanFlagGroup {

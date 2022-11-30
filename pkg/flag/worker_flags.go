@@ -82,16 +82,16 @@ type WorkerFlagGroup struct {
 
 // GlobalOptions defines flags and other configuration parameters for all the subcommands
 type WorkerOptions struct {
-	Workers                   int           `json:"workers" yaml:"workers"`
-	Timeout                   time.Duration `json:"timeout" yaml:"timeout"`
-	TimeoutFileMinimum        time.Duration `json:"timeout_file_minimum" yaml:"timeout_file_minimum"`
-	TimeoutFileMaximum        time.Duration `json:"timeout_file_maximum" yaml:"timeout_file_maximum"`
-	TimeoutFileSecondPerBytes int           `json:"timeout_file_second_per_bytes" yaml:"timeout_file_second_per_bytes"`
-	TimeoutWorkerOnline       time.Duration `json:"timeout_worker_online" yaml:"timeout_worker_online"`
-	FileSizeMaximum           int           `json:"file_size_maximum" yaml:"file_size_maximum"`
-	FilesToBatch              int           `json:"files_to_batch" yaml:"files_to_batch"`
-	MemoryMaximum             int           `json:"memory_maximum" yaml:"memory_maximum"`
-	ExistingWorker            string        `json:"existing_worker" yaml:"existing_worker"`
+	Workers                   int           `mapstructure:"workers" json:"workers" yaml:"workers"`
+	Timeout                   time.Duration `mapstructure:"timeout" json:"timeout" yaml:"timeout"`
+	TimeoutFileMinimum        time.Duration `mapstructure:"timeout_file_minimum" json:"timeout_file_minimum" yaml:"timeout_file_minimum"`
+	TimeoutFileMaximum        time.Duration `mapstructure:"timeout_file_maximum"  json:"timeout_file_maximum" yaml:"timeout_file_maximum"`
+	TimeoutFileSecondPerBytes int           `mapstructure:"timeout_file_second_per_bytes" json:"timeout_file_second_per_bytes" yaml:"timeout_file_second_per_bytes"`
+	TimeoutWorkerOnline       time.Duration `mapstructure:"timeout_worker_online" json:"timeout_worker_online" yaml:"timeout_worker_online"`
+	FileSizeMaximum           int           `mapstructure:"file_size_maximum" json:"file_size_maximum" yaml:"file_size_maximum"`
+	FilesToBatch              int           `mapstructure:"files_to_batch" json:"files_to_batch" yaml:"files_to_batch"`
+	MemoryMaximum             int           `mapstructure:"memory_maximum" json:"memory_maximum" yaml:"memory_maximum"`
+	ExistingWorker            string        `mapstructure:"existing_worker" json:"existing_worker" yaml:"existing_worker"`
 }
 
 func NewWorkerFlagGroup() *WorkerFlagGroup {

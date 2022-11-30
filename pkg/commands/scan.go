@@ -89,8 +89,8 @@ func NewScanCommand() *cobra.Command {
 }
 
 func readConfig(configFile string) error {
-	viper.SetConfigFile(configFile)
 	viper.SetConfigType("yaml")
+	viper.SetConfigFile(configFile)
 	if err := viper.ReadInConfig(); err != nil {
 		if _, ok := err.(viper.ConfigFileNotFoundError); ok {
 			return nil

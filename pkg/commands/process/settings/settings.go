@@ -16,7 +16,7 @@ type Config struct {
 	Worker         flag.WorkerOptions `json:"worker" yaml:"worker"`
 	Scan           flag.ScanOptions   `json:"scan" yaml:"scan"`
 	Report         flag.ReportOptions `json:"report" yaml:"report"`
-	CustomDetector map[string]Rule    `json:"custom_detector" yaml:"custom_detector"`
+	CustomDetector map[string]Rule    `mapstructure:"custom_detector" json:"custom_detector" yaml:"custom_detector"`
 	Policies       map[string]*Policy `json:"policies" yaml:"policies"`
 	Target         string             `json:"target" yaml:"target"`
 }
@@ -31,18 +31,18 @@ var LevelLow = "low"
 type Modules []*PolicyModule
 
 type Policy struct {
-	Query       string
-	Id          string
-	Name        string
-	Description string
-	Level       PolicyLevel
-	Modules     Modules
+	Query       string      `mapstructure:"query" json:"query" yaml:"query"`
+	Id          string      `mapstructure:"id" json:"id" yaml:"id"`
+	Name        string      `mapstructure:"name" json:"name" yaml:"name"`
+	Description string      `mapstructure:"description" json:"description" yaml:"description"`
+	Level       PolicyLevel `mapstructure:"level" json:"level" yaml:"level"`
+	Modules     Modules     `mapstructure:"modules" json:"modules" yaml:"modules"`
 }
 
 type PolicyModule struct {
-	Path    string `yaml:"path,omitempty"`
-	Name    string
-	Content string
+	Path    string `mapstructure:"path" json:"path,omitempty" yaml:"path,omitempty"`
+	Name    string `mapstructure:"name" json:"name" yaml:"name"`
+	Content string `mapstructure:"content" json:"content" yaml:"content"`
 }
 
 func (modules Modules) ToRegoModules() (output []rego.Module) {
@@ -56,29 +56,29 @@ func (modules Modules) ToRegoModules() (output []rego.Module) {
 }
 
 type Rule struct {
-	Disabled       bool
-	Type           string
-	Languages      []string
-	Patterns       []string
-	ParamParenting bool `yaml:"param_parenting"`
-	Processors     []Processor
+	Disabled       bool        `mapstructure:"disabled" json:"disabled" yaml:"disabled"`
+	Type           string      `mapstructure:"type" json:"type" yaml:"type"`
+	Languages      []string    `mapstructure:"languages" json:"languages" yaml:"languages"`
+	Patterns       []string    `mapstructure:"patterns" json:"patterns" yaml:"patterns"`
+	ParamParenting bool        `mapstructure:"param_parenting" json:"param_parenting" yaml:"param_parenting"`
+	Processors     []Processor `mapstructure:"processors" json:"processors" yaml:"processors"`
 
-	RootSingularize bool `yaml:"root_singularize"`
-	RootLowercase   bool `yaml:"root_lowercase"`
+	RootSingularize bool `mapstructure:"root_singularize" yaml:"root_singularize" `
+	RootLowercase   bool `mapstructure:"root_lowercase" yaml:"root_lowercase"`
 
-	Metavars map[string]MetaVar
-	Stored   bool
+	Metavars map[string]MetaVar `mapstructure:"metavars" json:"metavars" yaml:"metavars"`
+	Stored   bool               `mapstructure:"stored" json:"stored" yaml:"stored"`
 }
 
 type Processor struct {
-	Query   string
-	Modules Modules
+	Query   string  `mapstructure:"query" json:"query" yaml:"query"`
+	Modules Modules `mapstructure:"modules" json:"modules" yaml:"modules"`
 }
 
 type MetaVar struct {
-	Input  string
-	Output int
-	Regex  string
+	Input  string `mapstructure:"input" json:"input" yaml:"input"`
+	Output int    `mapstructure:"output" json:"output" yaml:"output"`
+	Regex  string `mapstructure:"regex" json:"regex" yaml:"regex"`
 }
 
 //go:embed custom_detector.yml
@@ -107,6 +107,9 @@ func FromOptions(opts flag.Options) (Config, error) {
 	} else {
 		rules = DefaultCustomDetector()
 	}
+
+	log.Debug().Msgf("Got %s number of rules", len(rules))
+	log.Debug().Msgf("rules are  %#v", rules)
 
 	for _, customDetector := range rules {
 		for _, processor := range customDetector.Processors {
