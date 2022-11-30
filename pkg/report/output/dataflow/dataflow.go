@@ -19,11 +19,11 @@ import (
 
 type DataFlow struct {
 	Datatypes  []types.Datatype     `json:"data_types,omitempty" yaml:"data_types,omitempty"`
-	Risks      []types.RiskDetector `json:"risks,omitempty" yaml:"risks,omitempty"`
+	Risks      []interface{}        `json:"risks,omitempty" yaml:"risks,omitempty"`
 	Components []types.Component    `json:"components" yaml:"components"`
 }
 
-var allowedDetections []detections.DetectionType = []detections.DetectionType{detections.TypeSchemaClassified, detections.TypeCustomClassified, detections.TypeDependencyClassified, detections.TypeInterfaceClassified, detections.TypeFrameworkClassified}
+var allowedDetections []detections.DetectionType = []detections.DetectionType{detections.TypeSchemaClassified, detections.TypeCustomClassified, detections.TypeDependencyClassified, detections.TypeInterfaceClassified, detections.TypeFrameworkClassified, detections.TypeCustomRisk}
 
 func GetOutput(input []interface{}, config settings.Config, isInternal bool) (*DataFlow, error) {
 	dataTypesHolder := datatypes.New(isInternal)
@@ -75,6 +75,8 @@ func GetOutput(input []interface{}, config settings.Config, isInternal bool) (*D
 			if err != nil {
 				return nil, err
 			}
+		case detections.TypeCustomRisk:
+			risksHolder.AddRiskPresence(castDetection)
 		case detections.TypeCustomClassified:
 			ruleName := string(castDetection.DetectorType)
 			customDetector, ok := config.CustomDetector[ruleName]

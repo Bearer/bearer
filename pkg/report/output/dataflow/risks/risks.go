@@ -16,6 +16,7 @@ type Holder struct {
 	detectors  map[string]detectorHolder // group datatypeHolders by name
 	config     settings.Config
 	isInternal bool
+	presentRisks map[string]*types.RiskDetection
 }
 
 type detectorHolder struct {
@@ -39,7 +40,26 @@ func New(config settings.Config, isInternal bool) *Holder {
 		detectors:  make(map[string]detectorHolder),
 		config:     config,
 		isInternal: isInternal,
+		presentRisks: make(map[string]*types.RiskDetection),
 	}
+}
+
+func (holder *Holder) AddRiskPresence(detection detections.Detection) {
+	// create entry if it doesn't exist
+	ruleName := string(detection.DetectorType)
+	if _, exists := holder.presentRisks[ruleName]; !exists {
+		holder.presentRisks[ruleName] = &types.RiskDetection{
+			DetectorID: ruleName,
+		}
+	}
+
+	holder.presentRisks[ruleName].Locations = append(holder.presentRisks[ruleName].Locations, types.RiskDetectionLocation{
+		RiskLocation: &types.RiskLocation{
+			Filename: detection.Source.Filename,
+			LineNumber: *detection.Source.LineNumber,
+		},
+		Content: *detection.Source.Text,
+	})
 }
 
 func (holder *Holder) AddSchema(detection detections.Detection) error {
@@ -103,8 +123,8 @@ func (holder *Holder) addDatatype(ruleName string, datatype *db.DataType, fileNa
 
 }
 
-func (holder *Holder) ToDataFlow() []types.RiskDetector {
-	data := make([]types.RiskDetector, 0)
+func (holder *Holder) ToDataFlow() []interface{} {
+	data := make([]interface{}, 0)
 
 	detectors := maputil.ToSortedSlice(holder.detectors)
 
@@ -147,6 +167,10 @@ func (holder *Holder) ToDataFlow() []types.RiskDetector {
 		}
 
 		data = append(data, constructedDetector)
+	}
+
+	for _, presentRisk := range holder.presentRisks {
+		data = append(data, presentRisk)
 	}
 
 	return data

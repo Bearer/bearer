@@ -30,14 +30,14 @@ func TestDataflowRisks(t *testing.T) {
 		Name        string
 		Config      settings.Config
 		FileContent string
-		Want        []types.RiskDetector
+		Want        []interface {}
 	}{
 		{
 			Name:        "single detection",
 			Config:      config,
 			FileContent: `{"type": "custom_classified", "detector_type":"detect_ruby_logger", "source": {"filename": "./users.rb", "line_number": 25}, "value": {"field_name": "User_name", "classification": {"data_type": {"name": "Username", "uuid": "123", "category_uuid": "456"} ,"decision":{"state": "valid"}}}}`,
-			Want: []types.RiskDetector{
-				{
+			Want: []interface {}{
+				types.RiskDetector{
 					DetectorID: "detect_ruby_logger",
 					DataTypes: []types.RiskDatatype{
 						{
@@ -55,15 +55,15 @@ func TestDataflowRisks(t *testing.T) {
 			Name:        "single detection - no classification",
 			Config:      config,
 			FileContent: `{"type": "custom_classified", "detector_type":"detect_ruby_logger", "source": {"filename": "./users.rb", "line_number": 25}, "value": {"field_name": "User_name"}}`,
-			Want:        []types.RiskDetector{},
+			Want:        []interface {}{},
 		},
 		{
 			Name:   "single detection - duplicates",
 			Config: config,
 			FileContent: `{"type": "custom_classified", "detector_type":"detect_ruby_logger", "source": {"filename": "./users.rb", "line_number": 25}, "value": {"field_name": "User_name", "classification": {"data_type": {"name": "Username", "uuid": "123", "category_uuid": "456"} ,"decision":{"state": "valid"}}}}
 		{"type": "custom_classified", "detector_type":"detect_ruby_logger", "source": {"filename": "./users.rb", "line_number": 25}, "value": {"field_name": "User_name", "classification": {"data_type": {"name": "Username", "uuid": "123", "category_uuid": "456"} ,"decision":{"state": "valid"}}}}`,
-			Want: []types.RiskDetector{
-				{
+			Want: []interface {}{
+				types.RiskDetector{
 					DetectorID: "detect_ruby_logger",
 					DataTypes: []types.RiskDatatype{
 						{
@@ -81,8 +81,8 @@ func TestDataflowRisks(t *testing.T) {
 			Name:        "single detection - stored",
 			Config:      config,
 			FileContent: `{"type": "custom_classified", "detector_type":"ruby_leak", "source": {"filename": "./users.rb", "line_number": 25}, "value": {"field_name": "User_name", "classification": {"data_type": {"name": "Username", "uuid": "123", "category_uuid": "456"} ,"decision":{"state": "valid"}}}}`,
-			Want: []types.RiskDetector{
-				{
+			Want: []interface {}{
+				types.RiskDetector{
 					DetectorID: "ruby_leak",
 					DataTypes: []types.RiskDatatype{
 						{
@@ -101,8 +101,8 @@ func TestDataflowRisks(t *testing.T) {
 			Config: config,
 			FileContent: `{"type": "custom_classified", "detector_type":"detect_ruby_logger", "source": {"filename": "./users.rb", "line_number": 25}, "value": {"field_name": "User_name", "classification": {"data_type": {"name": "Username", "uuid": "123", "category_uuid": "456"} ,"decision":{"state": "valid"}}}}
 					{"type": "custom_classified", "detector_type":"detect_ruby_logger", "source": {"filename": "./users.rb", "line_number": 2}, "value": {"field_name": "User_name", "classification": {"data_type": {"name": "Username", "uuid": "123", "category_uuid": "456"} ,"decision":{"state": "valid"}}}}`,
-			Want: []types.RiskDetector{
-				{
+			Want: []interface {}{
+				types.RiskDetector{
 					DetectorID: "detect_ruby_logger",
 					DataTypes: []types.RiskDatatype{
 						{
@@ -122,8 +122,8 @@ func TestDataflowRisks(t *testing.T) {
 			Config: config,
 			FileContent: `{"type": "custom_classified", "detector_type":"detect_ruby_logger", "source": {"filename": "./users.rb", "line_number": 25}, "value": {"field_name": "User_name", "classification": {"data_type": {"name": "Username", "uuid": "123", "category_uuid": "456"} ,"decision":{"state": "valid"}}}}
 		{"type": "custom_classified", "detector_type":"detect_ruby_logger", "source": {"filename": "./address.rb", "line_number": 2}, "value": {"field_name": "User_name", "classification": {"data_type": {"name": "Physical Address", "uuid": "123", "category_uuid": "456"} ,"decision":{"state": "valid"}}}}`,
-			Want: []types.RiskDetector{
-				{
+			Want: []interface {}{
+				types.RiskDetector{
 					DetectorID: "detect_ruby_logger",
 					DataTypes: []types.RiskDatatype{
 						{

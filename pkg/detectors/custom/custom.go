@@ -161,7 +161,9 @@ func (detector *Detector) executeRule(rule config.CompiledRule, file *file.FileI
 
 		if rule.DetectPresence {
 			for _, capture := range filteredCaptures {
-				report.AddDetection(detections.TypeCustomRisk, detectors.Type(rule.RuleName), capture["rule"].Source(false), nil)
+				content := capture["rule"].Source(false)
+				content.Text = &rule.Pattern
+				report.AddDetection(detections.TypeCustomRisk, detectors.Type(rule.RuleName), content, nil)
 			}
 			continue
 		}
