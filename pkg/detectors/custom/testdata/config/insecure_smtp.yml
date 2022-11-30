@@ -1,0 +1,18 @@
+detect_rails_insecure_smtp:
+  type: "risk"
+  patterns:
+    - |
+      Rails.application.configure do
+        config.action_mailer.smtp_settings = {
+          openssl_verify_mode: OpenSSL::SSL::VERIFY_NONE
+        }
+      end
+    - |
+      Rails.application.configure do
+        config.action_mailer.smtp_settings = {
+          openssl_verify_mode: "none"
+        }
+      end
+  languages:
+    - ruby
+  detect_presence: true

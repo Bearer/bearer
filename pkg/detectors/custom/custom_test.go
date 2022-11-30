@@ -38,6 +38,9 @@ var configSQLCreateTable []byte
 //go:embed testdata/config/sql_create_trigger.yml
 var configSQLCreateTrigger []byte
 
+//go:embed testdata/config/insecure_smtp.yml
+var configInsecureSMTP []byte
+
 func TestRailsSessionsJSON(t *testing.T) {
 	var rulesConfig map[string]settings.Rule
 
@@ -231,6 +234,35 @@ func TestSQLCreateTriggerJSON(t *testing.T) {
 		Type:     detectorType,
 		Detector: detector}}
 	detectorReport := testhelper.Extract(t, filepath.Join("testdata", "sql", "create_trigger"), registrations, detectorType)
+
+	bytes, err := json.MarshalIndent(detectorReport.CustomDetections, "", " ")
+
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	cupaloy.SnapshotT(t, string(bytes))
+}
+
+func TestInsecureSMTPJSON(t *testing.T) {
+	var rulesConfig map[string]settings.Rule
+
+	detector := custom.New(&nodeid.IntGenerator{Counter: 0})
+	err := yaml.Unmarshal(configInsecureSMTP, &rulesConfig)
+	if err != nil {
+		t.Fatal(err)
+		return
+	}
+	customDetector := detector.(*custom.Detector)
+	err = customDetector.CompileRules(rulesConfig)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	var registrations = []detectors.InitializedDetector{{
+		Type:     detectorType,
+		Detector: detector}}
+	detectorReport := testhelper.Extract(t, filepath.Join("testdata", "ruby", "insecure_smtp"), registrations, detectorType)
 
 	bytes, err := json.MarshalIndent(detectorReport.CustomDetections, "", " ")
 
