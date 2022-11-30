@@ -27,6 +27,23 @@ scan:
             stored: false
             detect_presence: false
             omit_parent: false
+        detect_rails_cookies:
+            disabled: false
+            type: risk
+            languages:
+                - ruby
+            param_parenting: false
+            processors: []
+            patterns:
+                - pattern: |
+                    cookies[...] = $ANYTHING
+                  filters: []
+            root_singularize: false
+            root_lowercase: false
+            metavars: {}
+            stored: false
+            detect_presence: false
+            omit_parent: false
         detect_rails_insecure_communication:
             disabled: false
             type: risk
@@ -493,6 +510,40 @@ scan:
                             "line_number": location.line_number,
                             "parent_line_number": detector.parent.line_number,
                             "parent_content": detector.parent.content
+                        }
+                    }
+        cookie_leaks:
+            query: |
+                critical = data.bearer.leakage.critical
+                high = data.bearer.leakage.high
+            id: detect_rails_cookies
+            name: Cookie leaking
+            description: Cookie leaks detected
+            level: ""
+            modules:
+                - path: policies/leakage.rego
+                  name: bearer.leakage
+                  content: |
+                    package bearer.leakage
+
+                    import data.bearer.common
+
+                    import future.keywords
+
+                    policy_breach contains item if {
+                        some detector in input.dataflow.risks
+                        detector.detector_id == input.policy_id
+
+                        data_type = detector.data_types[_]
+
+                        location = data_type.locations[_]
+                        item := {
+                            "category_groups": data.bearer.common.groups_for_datatype(data_type),
+                            "severity": data.bearer.common.severity_of_datatype(data_type),
+                            "filename": location.filename,
+                            "line_number": location.line_number,
+                            "parent_line_number": location.parent.line_number,
+                            "parent_content": location.parent.content
                         }
                     }
         http_get_parameters:
