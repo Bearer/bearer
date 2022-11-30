@@ -146,6 +146,7 @@ func (detector *Detector) executeRule(rule config.CompiledRule, file *file.FileI
 		if err != nil {
 			return err
 		}
+		defer tree.Close()
 
 		query := parser.QueryMustCompile(sitterLang, rule.Tree)
 
@@ -168,8 +169,6 @@ func (detector *Detector) executeRule(rule config.CompiledRule, file *file.FileI
 		if err != nil {
 			return err
 		}
-
-		tree.Close()
 	}
 	return nil
 }
