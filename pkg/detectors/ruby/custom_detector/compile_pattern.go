@@ -13,11 +13,13 @@ import (
 var classNameRegex = regexp.MustCompile(`\$CLASS_NAME`)
 var argumentsRegex = regexp.MustCompile(`<\$ARGUMENT>`)
 var dataTypeRegex = regexp.MustCompile(`<\$DATA_TYPE>`)
+var anythingRegex = regexp.MustCompile(`\$ANYTHING`)
 
 func (detector *Detector) CompilePattern(Rule string, idGenerator nodeid.Generator) (config.CompiledRule, error) {
 	reworkedRule := classNameRegex.ReplaceAll([]byte(Rule), []byte("Var_Class_Name"+idGenerator.GenerateId()))
 	reworkedRule = argumentsRegex.ReplaceAll([]byte(reworkedRule), []byte("Var_Arguments"+idGenerator.GenerateId()))
 	reworkedRule = dataTypeRegex.ReplaceAll([]byte(reworkedRule), []byte("Var_DataTypes"+idGenerator.GenerateId()))
+	reworkedRule = anythingRegex.ReplaceAll([]byte(reworkedRule), []byte("Var_Anything"+idGenerator.GenerateId()))
 
 	tree, err := parser.ParseBytes(&file.FileInfo{}, &file.Path{}, []byte(reworkedRule), language, 0)
 	if err != nil {

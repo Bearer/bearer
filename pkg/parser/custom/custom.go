@@ -32,7 +32,12 @@ func GenerateTreeSitterQuery(node *parser.Node, idGenerator nodeid.Generator, ru
 		rule.Tree += " "
 	}
 	rule.Tree += "("
-	rule.Tree += node.Type() + ""
+
+	if param != nil && param.MatchAnything {
+		rule.Tree += "_"
+	} else {
+		rule.Tree += node.Type() + ""
+	}
 
 	assignedID := ""
 

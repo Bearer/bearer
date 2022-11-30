@@ -41,6 +41,9 @@ func (detector *Detector) IsParam(node *parser.Node) (isTerminating bool, should
 		}
 
 		if strings.Index(node.Content(), "Var_Anything") == 0 {
+			param = &config.Param{
+				MatchAnything: true,
+			}
 			shouldIgnore = true
 			return
 		}

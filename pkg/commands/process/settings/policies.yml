@@ -3,11 +3,21 @@ logger_leaks:
   name: "Logger leaking"
   id: "detect_ruby_logger"
   query: |
-    critical = data.bearer.logger_leaks.critical
-    high = data.bearer.logger_leaks.high
+    critical = data.bearer.leakage.critical
+    high = data.bearer.leakage.high
   modules:
-    - path: policies/logger_leaks.rego
-      name: bearer.logger_leaks
+    - path: policies/leakage.rego
+      name: bearer.leakage
+session_leaks:
+  description: "Session leaks detected"
+  name: "Session leaking"
+  id: "detect_rails_session"
+  query: |
+    critical = data.bearer.leakage.critical
+    high = data.bearer.leakage.high
+  modules:
+    - path: policies/leakage.rego
+      name: bearer.leakage
 application_level_encryption_missing:
   description: "Application level encryption missing"
   name: "Application level encryption missing"
