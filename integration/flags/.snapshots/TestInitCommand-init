@@ -38,20 +38,6 @@ scan:
             root_lowercase: false
             metavars: {}
             stored: false
-        detect_rails_logger:
-            disabled: false
-            type: risk
-            languages:
-                - ruby
-            patterns:
-                - |
-                  Rails.logger.info(<$ARGUMENT>)
-            param_parenting: false
-            processors: []
-            root_singularize: false
-            root_lowercase: false
-            metavars: {}
-            stored: false
         detect_rails_session:
             disabled: false
             type: risk
@@ -74,6 +60,8 @@ scan:
             patterns:
                 - |
                   logger.info(<$ARGUMENT>)
+                - |
+                  Rails.logger.info(<$ARGUMENT>)
             param_parenting: false
             processors: []
             root_singularize: false
