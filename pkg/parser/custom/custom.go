@@ -12,7 +12,6 @@ type Detector interface {
 	ExtractArguments(node *parser.Node, idGenerator nodeid.Generator, variableReconciliation *parserdatatype.ReconciliationRequest) (map[parser.NodeID]*datatype.DataType, error)
 	CompilePattern(Rule string, idGenerator nodeid.Generator) (config.CompiledRule, error)
 	IsParam(node *parser.Node) (bool, bool, *config.Param)
-	IsMatchAnything(node *parser.Node) bool
 }
 
 func GenerateTreeSitterQuery(node *parser.Node, idGenerator nodeid.Generator, rule *config.CompiledRule, detector Detector, isChild bool) {
@@ -34,8 +33,7 @@ func GenerateTreeSitterQuery(node *parser.Node, idGenerator nodeid.Generator, ru
 	}
 	rule.Tree += "("
 
-	isMatchAnything := detector.IsMatchAnything(node)
-	if isMatchAnything {
+	if param != nil && param.MatchAnything {
 		rule.Tree += "_"
 	} else {
 		rule.Tree += node.Type() + ""

@@ -22,6 +22,7 @@ type Param struct {
 	StringExtract    bool   `yaml:"string_extract"`
 	ArgumentsExtract bool   `yaml:"arguments_extract"`
 	ClassNameExtract bool   `yaml:"class_name_extract"`
+	MatchAnything    bool   `yaml:"match_anything"`
 }
 
 func (param *Param) BuildFullName() string {
