@@ -13,6 +13,7 @@ type CompiledRule struct {
 	VariableReconciliation bool
 	Languages              []string
 	DetectPresence         bool
+	Pattern                string
 }
 
 type Param struct {
