@@ -127,13 +127,13 @@ Curio currently fully supports Ruby, while JavaScript/TypeScript support is comi
 | Go | ✅ | Coming later |
 | Python | ✅ | Coming later |
 
-### **What is sensitive data?**
+### What is sensitive data?
 
 Out of the box, Curio supports 120+ data types, ranging from Personal Data (PD), to Personal Identifiable Information (PII), Protected Health Information (PHI), and Financial Data. Please refer to the data types documentation for the complete list of supported data types and how the classification works.
 
 You can also add new data types, change the overall taxonomy, or update the classifiers to support custom use-cases (guide coming soon).
 
-### **When to use Curio?**
+### When to use Curio?
 
 As we often say, security shouldn’t be an afterthought. Curio is Open Source to allow any company, of any size, to start a more secure journey and protect their customer's data in the best way possible. Today is a good day to start!
 
