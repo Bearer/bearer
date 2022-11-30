@@ -12,6 +12,7 @@ type CompiledRule struct {
 	RootLowercase          bool
 	VariableReconciliation bool
 	Languages              []string
+	DetectPresence         bool
 }
 
 type Param struct {

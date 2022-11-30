@@ -82,6 +82,7 @@ func (detector *Detector) CompileRules(rulesConfig map[string]settings.Rule) err
 				}
 				compiledRule.RootLowercase = rule.RootLowercase
 				compiledRule.RootSingularize = rule.RootSingularize
+				compiledRule.DetectPresence = rule.DetectPresence
 				compiledRules = append(compiledRules, compiledRule)
 			}
 		}
@@ -155,6 +156,13 @@ func (detector *Detector) executeRule(rule config.CompiledRule, file *file.FileI
 		filteredCaptures, err := filterCaptures(rule.Params, captures)
 		if err != nil {
 			return err
+		}
+
+		if rule.DetectPresence {
+			for _, capture := range filteredCaptures {
+				report.AddDetection(detections.TypeCustomRisk, detectors.Type(rule.RuleName), capture["rule"].Source(false), nil)
+			}
+			continue
 		}
 
 		var variableReconciliation *parserdatatype.ReconciliationRequest
