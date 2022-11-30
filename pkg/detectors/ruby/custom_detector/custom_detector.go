@@ -24,7 +24,7 @@ func (detector *Detector) IsParam(node *parser.Node) (isTerminating bool, should
 		return
 	}
 
-	if node.Type() == "constant" || node.Type() == "identifier" {
+	if node.Type() == "constant" || node.Type() == "identifier" || node.Type() == "string_content" {
 		// get class names
 		if strings.Index(node.Content(), "Var_Class_Name") == 0 {
 			param = &config.Param{
