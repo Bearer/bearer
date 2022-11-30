@@ -40,9 +40,6 @@ SUCCESS
 
 ```
 
-Curio is a static code analysis tool (SAST) dedicated to data security. It scans your source code to discover sensitive data flows (PHI, PII, PD as well as Data stores, internal and external APIs) and data security risks (leaks, missing encryption, third-party sharing, etc).
-You can use Curio as a CLI or add it to your CI/CD pipeline.
-
 Curio helps developers and security teams to:
 
 - Protect their application from leaking sensitive data (*loggers, cookies, third-parties, etc*.)
@@ -109,15 +106,15 @@ Additional options for using and configuring the `scan` command can be found in 
 
 ### What can I do with Curio?
 
-The number one thing you can do with Curio is protect sensitive data processed by your applications from being exposed by identifying risks. Add Curio to your CI/CD and catch data breach and data leak risks early. This is the **Policy feature.**
+The number one thing you can do with Curio is protect sensitive data processed by your applications from being exposed by identifying associated risks. Add Curio to your CI/CD and catch data breach and data leak risks early. This is the **Policy feature.**
 
-Curio also helps your Compliance & Privacy team assess sensitive data flows processed through your applications, allowing them to comply with the growing number of data regulations across the World (*GDPR, CCPA, CPRA, LGPD, PIPA, HIPAA, etc.*). This is the **Data Report feature**.
+Curio also helps your Compliance & Privacy team assess sensitive data flows processed through your applications, allowing them to comply with the growing number of data regulations across the World (*GDPR, CCPA, CPRA, LGPD, PIPA, HIPAA, etc.*). This is the **Data Flow Report**.
 
 ### Supported Language
 
-Curio currently fully supports Ruby, while JavaScript/TypeScript support is coming soon. Additional languages listed below are supported only for the Data Report features for now.
+Curio currently fully supports Ruby, while JavaScript/TypeScript support is coming soon. Additional languages listed below are supported only for the Data Flow Report features for now.
 
-| Languages | Data Report | Policy |
+| Languages | Data Flow Report | Policy |
 | --- | --- | --- |
 | Ruby | ✅ | ✅ |
 | JavaScript / TS | ✅ | Coming soon |
@@ -126,6 +123,15 @@ Curio currently fully supports Ruby, while JavaScript/TypeScript support is comi
 | C# | ✅ | Coming later |
 | Go | ✅ | Coming later |
 | Python | ✅ | Coming later |
+
+In addition, Curio also supports these common structured data file formats:
+
+| Format | Support |
+| --- | --- |
+| SQL | ✅ |
+| OpenAPI | ✅ |
+| GraphQL | ✅ |
+| Protobuf | ✅ |
 
 ### What is sensitive data?
 
@@ -143,13 +149,13 @@ Curio is used by developers and app sec engineers, and has been built as part of
 Bearer with some of the best tech companies in the world to help them protect highly sensitive data.
 
 
-What if you don't process sensitive data? Well, that's pretty rare these days. Even if you discover no usage after a one-time scan, Curio is a great addition to your CI tooling to ensure sensitive data processing isn't introduced into your codebase.
+What if you don't process sensitive data? Well, that's pretty rare these days. Even if you discover no usage after a one-time scan, Curio is a great addition to your CI tooling to ensure sensitive data processing isn't introduced into your codebase without your knowledge.
 
 ### How is it different from X solution?
 
 Static code analysis tools for security are not new and many great solutions exist including Snyk Code, CodeQL, Semgrep, SonarQube, Brakeman, etc.
 
-Curio is different as it emphasizes that the most asset we need to protect today is sensitive data, not “systems.” At the same time, it’s built with the knowledge that developers are not security experts and can’t dedicate more time to fix a growing number of security issues without a clear prioritization and understanding of the impact.
+Curio is different as it emphasizes that the most important asset we need to protect today is sensitive data, not “systems.” At the same time, it’s built with the knowledge that developers are not security experts and can’t dedicate more time to fix a growing number of security issues without a clear prioritization and understanding of the impact.
 
 By putting the **focus on sensitive data first**, Curio is able to trigger security risks and vulnerabilities that are by design top priority, with much less noise.
 
