@@ -191,7 +191,39 @@ scan:
             metavars: {}
             stored: false
             detect_presence: false
-        ruby_http_detection:
+        ruby_http_get_detection:
+            disabled: false
+            type: risk
+            languages:
+                - ruby
+            patterns:
+                - pattern: |
+                    URI.encode_www_form(<$DATA_TYPE>)
+                  filters: []
+                - pattern: |
+                    URI(<$DATA_TYPE>)
+                  filters: []
+                - pattern: |
+                    $CLIENT.get(<$DATA_TYPE>)
+                  filters:
+                    - variable: CLIENT
+                      values:
+                        - Curl
+                        - Excon
+                        - Faraday
+                        - HTTP
+                        - HTTParty
+                        - HTTPX
+                        - RestClient
+                        - Typhoeus
+            param_parenting: false
+            processors: []
+            root_singularize: false
+            root_lowercase: false
+            metavars: {}
+            stored: false
+            detect_presence: false
+        ruby_http_post_detection:
             disabled: false
             type: risk
             languages:
@@ -204,10 +236,7 @@ scan:
                     Net::HTTP.post_form(<$DATA_TYPE>)
                   filters: []
                 - pattern: |
-                    URI(<$DATA_TYPE>)
-                  filters: []
-                - pattern: |
-                    $CLIENT.$METHOD(<$DATA_TYPE>)
+                    $CLIENT.post(<$DATA_TYPE>)
                   filters:
                     - variable: CLIENT
                       values:
@@ -219,10 +248,6 @@ scan:
                         - HTTPX
                         - RestClient
                         - Typhoeus
-                    - variable: METHOD
-                      values:
-                        - post
-                        - get
             param_parenting: false
             processors: []
             root_singularize: false
