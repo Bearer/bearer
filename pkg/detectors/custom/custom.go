@@ -85,7 +85,8 @@ func (detector *Detector) CompileRules(rulesConfig map[string]settings.Rule) err
 				compiledRule.RootLowercase = rule.RootLowercase
 				compiledRule.RootSingularize = rule.RootSingularize
 				compiledRule.DetectPresence = rule.DetectPresence
-				compiledRule.Pattern = pattern
+				compiledRule.Pattern = rulePattern.Pattern
+				compiledRule.Filters = rulePattern.Filters
 				compiledRules = append(compiledRules, compiledRule)
 			}
 		}

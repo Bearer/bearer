@@ -39,7 +39,6 @@ func (detector *Detector) CompilePattern(
 	rule := &config.CompiledRule{
 		Languages: []string{"ruby"},
 		Params:    make([]config.Param, 0),
-		Filters:   rulePattern.Filters,
 	}
 
 	custom.GenerateTreeSitterQuery(tree.RootNode().Child(0), idGenerator, rule, detector, false)
