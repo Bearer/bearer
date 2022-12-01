@@ -68,6 +68,7 @@ type Rule struct {
 
 	Metavars map[string]MetaVar
 	Stored   bool
+	DetectPresence bool `yaml:"detect_presence"`
 }
 
 type Processor struct {

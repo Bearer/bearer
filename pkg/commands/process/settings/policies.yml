@@ -38,3 +38,12 @@ application_level_encryption_missing:
   modules:
     - path: policies/application_level_encryption.rego
       name: bearer.application_level_encryption
+insecure_smtp_processing_sensitive_data:
+  description: "Communication with insecure SMTP in an application processing sensitive data"
+  name: "Insecure SMTP"
+  id: "detect_rails_insecure_smtp"
+  query: |
+    medium = data.bearer.insecure_smtp.medium
+  modules:
+    - path: policies/insecure_smtp.rego
+      name: bearer.insecure_smtp

@@ -24,6 +24,32 @@ scan:
             root_lowercase: true
             metavars: {}
             stored: false
+            detect_presence: false
+        detect_rails_insecure_smtp:
+            disabled: false
+            type: risk
+            languages:
+                - ruby
+            patterns:
+                - |
+                  Rails.application.configure do
+                    config.action_mailer.smtp_settings = {
+                      openssl_verify_mode: OpenSSL::SSL::VERIFY_NONE
+                    }
+                  end
+                - |
+                  Rails.application.configure do
+                    config.action_mailer.smtp_settings = {
+                      openssl_verify_mode: "none"
+                    }
+                  end
+            param_parenting: false
+            processors: []
+            root_singularize: false
+            root_lowercase: false
+            metavars: {}
+            stored: false
+            detect_presence: true
         detect_rails_jwt:
             disabled: false
             type: risk
@@ -38,6 +64,7 @@ scan:
             root_lowercase: false
             metavars: {}
             stored: false
+            detect_presence: false
         detect_rails_session:
             disabled: false
             type: risk
@@ -52,6 +79,7 @@ scan:
             root_lowercase: false
             metavars: {}
             stored: false
+            detect_presence: false
         detect_ruby_logger:
             disabled: false
             type: risk
@@ -68,6 +96,7 @@ scan:
             root_lowercase: false
             metavars: {}
             stored: false
+            detect_presence: false
         detect_sql_create_public_table:
             disabled: false
             type: data_type
@@ -124,6 +153,7 @@ scan:
             root_lowercase: true
             metavars: {}
             stored: false
+            detect_presence: false
         ruby_file_detection:
             disabled: false
             type: risk
@@ -148,6 +178,7 @@ scan:
             root_lowercase: false
             metavars: {}
             stored: false
+            detect_presence: false
         ruby_http_detection:
             disabled: false
             type: risk
@@ -164,6 +195,7 @@ scan:
             root_lowercase: false
             metavars: {}
             stored: false
+            detect_presence: false
     debug: false
     disable-domain-resolution: false
     domain-resolution-timeout: 3s
