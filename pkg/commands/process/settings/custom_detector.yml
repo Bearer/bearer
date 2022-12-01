@@ -1,4 +1,27 @@
-ruby_http_detection:
+ruby_http_get_detection:
+  type: "risk"
+  languages:
+    - ruby
+  patterns:
+    - |
+      URI.encode_www_form(<$DATA_TYPE>)
+    - |
+      URI(<$DATA_TYPE>)
+    - pattern: |
+        $CLIENT.get(<$DATA_TYPE>)
+      filters:
+        - variable: CLIENT
+          values:
+            - Curl
+            - Excon
+            - Faraday
+            - HTTP
+            - HTTParty
+            - HTTPX
+            - RestClient
+            - Typhoeus
+  stored: false
+ruby_http_post_detection:
   type: "risk"
   languages:
     - ruby
@@ -7,10 +30,19 @@ ruby_http_detection:
       URI.encode_www_form(<$DATA_TYPE>)
     - |
       Net::HTTP.post_form(<$DATA_TYPE>)
-    # - |
-    #   $HTTP_CLIENT.$METHOD(<$DATA_TYPE>)
-  param_parenting: false
-  metavars: {}
+    - pattern: |
+        $CLIENT.post(<$DATA_TYPE>)
+      filters:
+        - variable: CLIENT
+          values:
+            - Curl
+            - Excon
+            - Faraday
+            - HTTP
+            - HTTParty
+            - HTTPX
+            - RestClient
+            - Typhoeus
   stored: false
 ruby_file_detection:
   type: "risk"
