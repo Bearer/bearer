@@ -1,0 +1,16 @@
+---
+title: Policies
+layout: layouts/doc.njk
+---
+{% renderTemplate "liquid,md" %}
+# Policies
+
+Polices are ways to enforce data security best practices across your codebase. Curio's policy report allows you to quickly identify policy violations in your code.
+
+Curio includes the following policies by default.
+{% endrenderTemplate %}
+
+{% for key, group in policies %}
+  <h2 id="{{group.name}}">{{group.name}}</h2>
+  <p>{{group.description}}</p>
+{% endfor %}
