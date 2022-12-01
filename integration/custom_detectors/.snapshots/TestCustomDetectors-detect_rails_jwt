@@ -27,17 +27,11 @@ risks:
           locations:
             - filename: testdata/ruby/detect_rails_jwt.rb
               line_number: 12
-          parent:
-            line_number: 10
-            content: JWT.encode user.address, nil, "none"
         - name: Physical Address
           stored: false
           locations:
             - filename: testdata/ruby/detect_rails_jwt.rb
               line_number: 10
-          parent:
-            line_number: 10
-            content: JWT.encode user.address, nil, "none"
 components: []
 
 
