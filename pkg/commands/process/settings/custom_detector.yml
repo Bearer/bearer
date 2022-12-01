@@ -32,18 +32,13 @@ ruby_file_detection:
   param_parenting: true
   metavars: {}
   stored: false
-detect_rails_logger:
-  type: "risk"
-  patterns:
-    - |
-      Rails.logger.info(<$ARGUMENT>)
-  languages:
-    - ruby
 detect_ruby_logger:
   type: "risk"
   patterns:
     - |
       logger.info(<$ARGUMENT>)
+    - |
+      Rails.logger.info(<$ARGUMENT>)
   languages:
     - ruby
 detect_rails_session:
