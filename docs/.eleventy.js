@@ -22,11 +22,13 @@ mdSetup.renderer.rules.code_inline = (tokens, idx, { langPrefix = "" }) => {
 module.exports = function (eleventyConfig) {
   eleventyConfig.addWatchTarget("./_src/styles/tailwind.config.js");
   eleventyConfig.addWatchTarget("./_src/styles/tailwind.css");
+  eleventyConfig.addWatchTarget("./_src/js/*.js");
   eleventyConfig.addPassthroughCopy("assets/img");
   eleventyConfig.addPassthroughCopy("assets/fonts");
   eleventyConfig.addPassthroughCopy({
     "./_src/styles/prism-theme.css": "./prism-theme.css",
   });
+  eleventyConfig.addPassthroughCopy({ "./_src/js/app.js": "./app.js" });
   eleventyConfig.addPassthroughCopy({ "./_tmp/style.css": "./style.css" });
   eleventyConfig.addDataExtension("yaml", (contents) => yaml.load(contents));
   eleventyConfig.addShortcode("version", function () {

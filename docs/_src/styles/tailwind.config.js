@@ -1,13 +1,16 @@
 module.exports = {
   content: ["_site/**/*.html"],
   safelist: [],
+  darkMode: "class",
   theme: {
     colors: {
       transparent: "transparent",
       current: "currentColor",
       black: "#0C0C0C",
       white: "#FFFFFF",
+      code: "hsl(243,27%,35%)",
       neutral: {
+        600: "hsl(243,27%,17%)",
         500: "#3A3A3A",
         400: "#969696",
         300: "#C4C4C4",
@@ -22,6 +25,7 @@ module.exports = {
         DEFAULT: "#6E20E6",
         500: "#42138A",
         600: "#230A49",
+        700: "#1F0F38",
       },
     },
     extend: {
@@ -29,6 +33,13 @@ module.exports = {
         DEFAULT: {
           css: {
             "--tw-prose-body": theme("colors.black"),
+            a: {
+              color: theme("colors.main.400"),
+              textDecoration: "none",
+              "&:hover": {
+                textDecoration: "underline",
+              },
+            },
             p: {},
             "code::before": {
               content: "normal",
@@ -37,11 +48,16 @@ module.exports = {
               content: "normal",
             },
           },
-          invert: {
-            css: {
-              "--tw-prose-invert-body": theme("colors.neutral.200"),
-              // "--tw-prose-invert-headings": theme("colors.neutral.200"),
-              p: {},
+        },
+        invert: {
+          css: {
+            p: {},
+            a: {
+              color: theme("colors.main.300"),
+              textDecoration: "none",
+              "&:hover": {
+                textDecoration: "underline",
+              },
             },
           },
         },

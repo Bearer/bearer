@@ -47,13 +47,13 @@ pre[class*="language-"] {
   padding: 1em;
   margin: .5em 0;
   overflow: auto;
-  background: #6E20E6;
+  background: hsl(243, 27%, 35%);
 }
 :not(pre) > code[class*="language-"] {
   padding: .1em .3em;
   border-radius: .3em;
   color: #F5F5F5;
-  background: #6E20E6;
+  background: hsl(243, 27%, 35%);
 }
 /*********************************************************
 * Tokens

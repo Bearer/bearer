@@ -18,6 +18,16 @@ session_leaks:
   modules:
     - path: policies/leakage.rego
       name: bearer.leakage
+jwt_leaks:
+  description: "JWT leaks detected"
+  name: "JWT leaking"
+  id: "detect_rails_jwt"
+  query: |
+    critical = data.bearer.leakage.critical
+    high = data.bearer.leakage.high
+  modules:
+    - path: policies/leakage.rego
+      name: bearer.leakage
 application_level_encryption_missing:
   description: "Application level encryption missing"
   name: "Application level encryption missing"
