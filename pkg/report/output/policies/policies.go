@@ -88,8 +88,8 @@ func GetOutput(dataflow *dataflow.DataFlow, config settings.Config) (map[string]
 						Filename:          policyOutput.Filename,
 						LineNumber:        policyOutput.LineNumber,
 						CategoryGroup:     policyOutput.CategoryGroup,
-						ParentLineNumber:  policyOutput.ParentLineNumber,
-						ParentContent:     policyOutput.ParentContent,
+						// ParentLineNumber:  policyOutput.ParentLineNumber,
+						// ParentContent:     policyOutput.ParentContent,
 					}
 
 					result[severity] = append(result[severity], policyResult)

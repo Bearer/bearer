@@ -83,9 +83,9 @@ func (holder *Holder) addDatatype(ruleName string, datatype *db.DataType, fileNa
 			}
 		} else {
 			detector.datatypes[datatype.Name] = &datatypeHolder{
-				name:   datatype.Name,
-				files:  make(map[string]*fileHolder),
-				parent: parent,
+				name:  datatype.Name,
+				files: make(map[string]*fileHolder),
+				// parent: parent,
 			}
 		}
 	}
