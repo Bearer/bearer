@@ -20,3 +20,13 @@ type RiskLocation struct {
 	Filename   string `json:"filename" yaml:"filename"`
 	LineNumber int    `json:"line_number" yaml:"line_number"`
 }
+
+type RiskDetectionLocation struct {
+	*RiskLocation
+	Content string `json:"content" yaml:"content"`
+}
+
+type RiskDetection struct {
+	DetectorID string         `json:"detector_id" yaml:"detector_id"`
+	Locations  []RiskDetectionLocation `json:"locations" yaml:"locations"`
+}

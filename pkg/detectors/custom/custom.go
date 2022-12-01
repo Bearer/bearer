@@ -82,6 +82,8 @@ func (detector *Detector) CompileRules(rulesConfig map[string]settings.Rule) err
 				}
 				compiledRule.RootLowercase = rule.RootLowercase
 				compiledRule.RootSingularize = rule.RootSingularize
+				compiledRule.DetectPresence = rule.DetectPresence
+				compiledRule.Pattern = pattern
 				compiledRules = append(compiledRules, compiledRule)
 			}
 		}
@@ -146,6 +148,7 @@ func (detector *Detector) executeRule(rule config.CompiledRule, file *file.FileI
 		if err != nil {
 			return err
 		}
+		defer tree.Close()
 
 		query := parser.QueryMustCompile(sitterLang, rule.Tree)
 
@@ -154,6 +157,15 @@ func (detector *Detector) executeRule(rule config.CompiledRule, file *file.FileI
 		filteredCaptures, err := filterCaptures(rule.Params, captures)
 		if err != nil {
 			return err
+		}
+
+		if rule.DetectPresence {
+			for _, capture := range filteredCaptures {
+				content := capture["rule"].Source(false)
+				content.Text = &rule.Pattern
+				report.AddDetection(detections.TypeCustomRisk, detectors.Type(rule.RuleName), content, nil)
+			}
+			continue
 		}
 
 		var variableReconciliation *parserdatatype.ReconciliationRequest
@@ -168,8 +180,6 @@ func (detector *Detector) executeRule(rule config.CompiledRule, file *file.FileI
 		if err != nil {
 			return err
 		}
-
-		tree.Close()
 	}
 	return nil
 }

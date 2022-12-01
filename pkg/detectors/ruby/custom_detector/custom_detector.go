@@ -24,7 +24,7 @@ func (detector *Detector) IsParam(node *parser.Node) (isTerminating bool, should
 		return
 	}
 
-	if node.Type() == "constant" || node.Type() == "identifier" {
+	if node.Type() == "constant" || node.Type() == "identifier" || node.Type() == "string_content" {
 		// get class names
 		if strings.Index(node.Content(), "Var_Class_Name") == 0 {
 			param = &config.Param{
@@ -42,6 +42,10 @@ func (detector *Detector) IsParam(node *parser.Node) (isTerminating bool, should
 		return
 	}
 
+	if node.Child(0) == nil {
+		return false, false, nil
+	}
+
 	if strings.Index(node.Child(0).Content(), "Var_DataTypes") == 0 {
 		param = &config.Param{
 			ArgumentsExtract: true,
@@ -51,7 +55,7 @@ func (detector *Detector) IsParam(node *parser.Node) (isTerminating bool, should
 		return
 	}
 
-	if node.Type() == "symbol_array" && node.Child(0) != nil && node.Child(0).Type() == "bare_symbol" && strings.Index(node.Child(0).Content(), "Var_Arguments") == 0 {
+	if node.Type() == "symbol_array" && node.Child(0).Type() == "bare_symbol" && strings.Index(node.Child(0).Content(), "Var_Arguments") == 0 {
 		param = &config.Param{
 			ArgumentsExtract: true,
 		}

@@ -68,6 +68,7 @@ type Rule struct {
 
 	Metavars map[string]MetaVar `mapstructure:"metavars" json:"metavars" yaml:"metavars"`
 	Stored   bool               `mapstructure:"stored" json:"stored" yaml:"stored"`
+	DetectPresence bool `yaml:"detect_presence"`
 }
 
 type Processor struct {

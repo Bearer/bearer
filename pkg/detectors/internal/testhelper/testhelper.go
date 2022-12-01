@@ -97,7 +97,7 @@ func (report *InMemoryReport) AddDetection(
 		Source:       source,
 		Value:        value,
 	}
-	if detectionType == detections.TypeCustom {
+	if detectionType == detections.TypeCustom || detectionType == detections.TypeCustomRisk {
 		report.CustomDetections = append(report.CustomDetections, *detection)
 	} else {
 		report.Detections = append(report.Detections, detection)
