@@ -28,12 +28,12 @@ type datatypeHolder struct {
 	name         string
 	uuid         string
 	categoryUUID string
-	files        map[string]*fileHolder // group files by filename
+	files        map[string]map[int]*fileHolder // group files by filename
 }
 
 type fileHolder struct {
 	name       string
-	lineNumber map[int]int
+	lineNumber int
 	parent     *schema.Parent
 }
 
@@ -100,13 +100,12 @@ func (holder *Holder) addDatatype(ruleName string, datatype *db.DataType, fileNa
 				name:         datatype.Name,
 				uuid:         datatype.UUID,
 				categoryUUID: datatype.CategoryUUID,
-				files:        make(map[string]*fileHolder),
+				files:        make(map[string]map[int]*fileHolder),
 			}
 		} else {
 			detector.datatypes[datatype.Name] = &datatypeHolder{
 				name:  datatype.Name,
-				files: make(map[string]*fileHolder),
-				// parent: parent,
+				files: make(map[string]map[int]*fileHolder),
 			}
 		}
 	}
@@ -114,15 +113,14 @@ func (holder *Holder) addDatatype(ruleName string, datatype *db.DataType, fileNa
 	detectorDatatype := detector.datatypes[datatype.Name]
 	// create file entry if it doesn't exist
 	if _, exists := detectorDatatype.files[fileName]; !exists {
-		detectorDatatype.files[fileName] = &fileHolder{
-			name:       fileName,
-			lineNumber: make(map[int]int),
-			parent:     parent,
-		}
+		detectorDatatype.files[fileName] = make(map[int]*fileHolder, 0)
 	}
 
-	detectorDatatype.files[fileName].lineNumber[lineNumber] = lineNumber
-
+	detectorDatatype.files[fileName][lineNumber] = &fileHolder{
+		name:       fileName,
+		lineNumber: lineNumber,
+		parent:     parent,
+	}
 }
 
 func (holder *Holder) ToDataFlow() []interface{} {
@@ -154,14 +152,13 @@ func (holder *Holder) ToDataFlow() []interface{} {
 			}
 
 			files := maputil.ToSortedSlice(datatype.files)
-			for _, file := range files {
-
-				lineNumbers := maputil.ToSortedSlice(file.lineNumber)
-				for _, lineNumber := range lineNumbers {
+			for _, locations := range files {
+				sortedLocations := maputil.ToSortedSlice(locations)
+				for _, location := range sortedLocations {
 					constructedDatatype.Locations = append(constructedDatatype.Locations, types.RiskLocation{
-						Filename:   file.name,
-						LineNumber: lineNumber,
-						Parent:     file.parent,
+						Filename:   location.name,
+						LineNumber: location.lineNumber,
+						Parent:     location.parent,
 					})
 				}
 			}
