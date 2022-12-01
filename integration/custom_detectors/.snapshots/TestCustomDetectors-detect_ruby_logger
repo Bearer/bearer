@@ -1,20 +1,12 @@
 data_types:
     - name: Email Address
       detectors:
-        - name: detect_ruby_logger
-          locations:
-            - filename: testdata/ruby/detect_ruby_logger.rb
-              line_number: 3
         - name: ruby
           locations:
             - filename: testdata/ruby/detect_ruby_logger.rb
               line_number: 3
     - name: Physical Address
       detectors:
-        - name: detect_ruby_logger
-          locations:
-            - filename: testdata/ruby/detect_ruby_logger.rb
-              line_number: 4
         - name: ruby
           locations:
             - filename: testdata/ruby/detect_ruby_logger.rb
@@ -27,11 +19,27 @@ risks:
           locations:
             - filename: testdata/ruby/detect_ruby_logger.rb
               line_number: 3
+              parent:
+                line_number: 1
+                content: |-
+                    logger.info(
+                      "user info are:",
+                      user.email,
+                      user.address
+                    )
         - name: Physical Address
           stored: false
           locations:
             - filename: testdata/ruby/detect_ruby_logger.rb
               line_number: 4
+              parent:
+                line_number: 1
+                content: |-
+                    logger.info(
+                      "user info are:",
+                      user.email,
+                      user.address
+                    )
 components: []
 
 

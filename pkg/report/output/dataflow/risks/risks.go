@@ -13,9 +13,9 @@ import (
 )
 
 type Holder struct {
-	detectors  map[string]detectorHolder // group datatypeHolders by name
-	config     settings.Config
-	isInternal bool
+	detectors    map[string]detectorHolder // group datatypeHolders by name
+	config       settings.Config
+	isInternal   bool
 	presentRisks map[string]*types.RiskDetection
 }
 
@@ -23,23 +23,25 @@ type detectorHolder struct {
 	id        string
 	datatypes map[string]*datatypeHolder // group detectors by detectorName
 }
+
 type datatypeHolder struct {
 	name         string
 	uuid         string
 	categoryUUID string
-	parent       *schema.Parent
 	files        map[string]*fileHolder // group files by filename
 }
+
 type fileHolder struct {
 	name       string
 	lineNumber map[int]int
+	parent     *schema.Parent
 }
 
 func New(config settings.Config, isInternal bool) *Holder {
 	return &Holder{
-		detectors:  make(map[string]detectorHolder),
-		config:     config,
-		isInternal: isInternal,
+		detectors:    make(map[string]detectorHolder),
+		config:       config,
+		isInternal:   isInternal,
 		presentRisks: make(map[string]*types.RiskDetection),
 	}
 }
@@ -55,7 +57,7 @@ func (holder *Holder) AddRiskPresence(detection detections.Detection) {
 
 	holder.presentRisks[ruleName].Locations = append(holder.presentRisks[ruleName].Locations, types.RiskDetectionLocation{
 		RiskLocation: &types.RiskLocation{
-			Filename: detection.Source.Filename,
+			Filename:   detection.Source.Filename,
 			LineNumber: *detection.Source.LineNumber,
 		},
 		Content: *detection.Source.Text,
@@ -98,7 +100,6 @@ func (holder *Holder) addDatatype(ruleName string, datatype *db.DataType, fileNa
 				name:         datatype.Name,
 				uuid:         datatype.UUID,
 				categoryUUID: datatype.CategoryUUID,
-				parent:       parent,
 				files:        make(map[string]*fileHolder),
 			}
 		} else {
@@ -116,6 +117,7 @@ func (holder *Holder) addDatatype(ruleName string, datatype *db.DataType, fileNa
 		detectorDatatype.files[fileName] = &fileHolder{
 			name:       fileName,
 			lineNumber: make(map[int]int),
+			parent:     parent,
 		}
 	}
 
@@ -147,7 +149,6 @@ func (holder *Holder) ToDataFlow() []interface{} {
 				Name:         datatype.name,
 				UUID:         datatype.uuid,
 				CategoryUUID: datatype.categoryUUID,
-				Parent:       datatype.parent,
 				Stored:       stored,
 				Locations:    make([]types.RiskLocation, 0),
 			}
@@ -160,6 +161,7 @@ func (holder *Holder) ToDataFlow() []interface{} {
 					constructedDatatype.Locations = append(constructedDatatype.Locations, types.RiskLocation{
 						Filename:   file.name,
 						LineNumber: lineNumber,
+						Parent:     file.parent,
 					})
 				}
 			}
