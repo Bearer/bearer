@@ -135,7 +135,7 @@ In addition, Curio also supports these common structured data file formats:
 
 ### What is sensitive data?
 
-Out of the box, Curio supports 120+ data types, ranging from Personal Data (PD), to Personal Identifiable Information (PII), Protected Health Information (PHI), and Financial Data. Please refer to the data types documentation for the complete list of supported data types and how the classification works.
+Out of the box, Curio supports 120+ data types, ranging from Personal Data (PD), to Personal Identifiable Information (PII), Protected Health Information (PHI), and Financial Data. Please refer to the [data types documentation](https://curio.sh/reference/datatypes/) for the complete list of supported data types and how the classification works.
 
 You can also add new data types, change the overall taxonomy, or update the classifiers to support custom use-cases (guide coming soon).
 
