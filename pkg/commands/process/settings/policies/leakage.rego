@@ -20,8 +20,8 @@ high[item] {
         "category_group": category.group_name,
         "filename": location.filename,
         "line_number": location.line_number,
-        "parent_line_number": data_type.parent.line_number,
-        "parent_content": data_type.parent.content
+        "parent_line_number": location.parent.line_number,
+        "parent_content": location.parent.content
     }
 }
 
@@ -40,7 +40,7 @@ critical[item] {
         "category_group": category.group_name,
         "filename": location.filename,
         "line_number": location.line_number,
-        "parent_line_number": data_type.parent.line_number,
-        "parent_content": data_type.parent.content
+        "parent_line_number": location.parent.line_number,
+        "parent_content": location.parent.content
     }
 }

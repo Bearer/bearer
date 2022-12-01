@@ -9,14 +9,6 @@ data_types:
               line_number: 12
             - filename: testdata/ruby/ruby_file_detection.rb
               line_number: 16
-        - name: ruby_file_detection
-          locations:
-            - filename: testdata/ruby/ruby_file_detection.rb
-              line_number: 5
-            - filename: testdata/ruby/ruby_file_detection.rb
-              line_number: 12
-            - filename: testdata/ruby/ruby_file_detection.rb
-              line_number: 16
     - name: Emails
       detectors:
         - name: ruby
@@ -31,21 +23,9 @@ data_types:
               line_number: 6
             - filename: testdata/ruby/ruby_file_detection.rb
               line_number: 16
-        - name: ruby_file_detection
-          locations:
-            - filename: testdata/ruby/ruby_file_detection.rb
-              line_number: 6
-            - filename: testdata/ruby/ruby_file_detection.rb
-              line_number: 16
     - name: Lastname
       detectors:
         - name: ruby
-          locations:
-            - filename: testdata/ruby/ruby_file_detection.rb
-              line_number: 7
-            - filename: testdata/ruby/ruby_file_detection.rb
-              line_number: 16
-        - name: ruby_file_detection
           locations:
             - filename: testdata/ruby/ruby_file_detection.rb
               line_number: 7
@@ -59,24 +39,90 @@ risks:
           locations:
             - filename: testdata/ruby/ruby_file_detection.rb
               line_number: 5
+              parent:
+                line_number: 1
+                content: |-
+                    CSV.open("path/to/user.csv", "wb") do |csv|
+                      csv << ["email", "first_name", "last_name"]
+                    	users.each do |user|
+                    		csv << [
+                    			user.email,
+                    			user.first_name,
+                    			user.last_name
+                    		]
+                    	end
+                    end
             - filename: testdata/ruby/ruby_file_detection.rb
               line_number: 12
+              parent:
+                line_number: 12
+                content: 'File.open("users.log", "w") { |f| f.write "#{Time.now} - User #{user.email} logged in\n" }'
             - filename: testdata/ruby/ruby_file_detection.rb
               line_number: 16
+              parent:
+                line_number: 14
+                content: |-
+                    File.open(user.emails, "users.csv", "w") do |f|
+                    	users.each do |user|
+                    		f.write "#{user.email},#{user.first_name},#{user.last_name}"
+                    	end
+                    end
         - name: Firstname
           stored: false
           locations:
             - filename: testdata/ruby/ruby_file_detection.rb
               line_number: 6
+              parent:
+                line_number: 1
+                content: |-
+                    CSV.open("path/to/user.csv", "wb") do |csv|
+                      csv << ["email", "first_name", "last_name"]
+                    	users.each do |user|
+                    		csv << [
+                    			user.email,
+                    			user.first_name,
+                    			user.last_name
+                    		]
+                    	end
+                    end
             - filename: testdata/ruby/ruby_file_detection.rb
               line_number: 16
+              parent:
+                line_number: 14
+                content: |-
+                    File.open(user.emails, "users.csv", "w") do |f|
+                    	users.each do |user|
+                    		f.write "#{user.email},#{user.first_name},#{user.last_name}"
+                    	end
+                    end
         - name: Lastname
           stored: false
           locations:
             - filename: testdata/ruby/ruby_file_detection.rb
               line_number: 7
+              parent:
+                line_number: 1
+                content: |-
+                    CSV.open("path/to/user.csv", "wb") do |csv|
+                      csv << ["email", "first_name", "last_name"]
+                    	users.each do |user|
+                    		csv << [
+                    			user.email,
+                    			user.first_name,
+                    			user.last_name
+                    		]
+                    	end
+                    end
             - filename: testdata/ruby/ruby_file_detection.rb
               line_number: 16
+              parent:
+                line_number: 14
+                content: |-
+                    File.open(user.emails, "users.csv", "w") do |f|
+                    	users.each do |user|
+                    		f.write "#{user.email},#{user.first_name},#{user.last_name}"
+                    	end
+                    end
 components: []
 
 

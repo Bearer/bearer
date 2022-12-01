@@ -13,12 +13,12 @@ type RiskDatatype struct {
 	CategoryUUID string         `json:"category_uuid,omitempty" yaml:"category_uuid,omitempty"`
 	Stored       bool           `json:"stored" yaml:"stored"`
 	Locations    []RiskLocation `json:"locations" yaml:"locations"`
-	Parent       *schema.Parent `json:"parent,omitempty" yaml:"parent,omitempty"`
 }
 
 type RiskLocation struct {
-	Filename   string `json:"filename" yaml:"filename"`
-	LineNumber int    `json:"line_number" yaml:"line_number"`
+	Filename   string         `json:"filename" yaml:"filename"`
+	LineNumber int            `json:"line_number" yaml:"line_number"`
+	Parent     *schema.Parent `json:"parent,omitempty" yaml:"parent,omitempty"`
 }
 
 type RiskDetectionLocation struct {
