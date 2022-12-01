@@ -9,11 +9,14 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge"/>
     <meta name='robots' content='noindex,nofollow'/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, viewport-fit=cover"/>
+    <link rel="icon" href="/assets/img/favicon.ico"/>
+    <link rel="icon" href="/assets/img/favicon.svg"/>
     <link rel="stylesheet" href="/style.css?v={% version %}"/>
     <link rel="stylesheet" href="/prism-theme.css"/>
   </head>
-  <body class="bg-white dark:bg-black">
+  <body class="bg-white dark:bg-neutral-600">
     {% include "nav.njk" %}
     {{ content | safe }}
   </body>
+  <script src="/app.js"></script>
 </html>

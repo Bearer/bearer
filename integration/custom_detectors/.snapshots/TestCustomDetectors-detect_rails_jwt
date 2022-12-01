@@ -1,0 +1,45 @@
+data_types:
+    - name: Email Address
+      detectors:
+        - name: detect_rails_jwt
+          locations:
+            - filename: testdata/ruby/detect_rails_jwt.rb
+              line_number: 12
+        - name: ruby
+          locations:
+            - filename: testdata/ruby/detect_rails_jwt.rb
+              line_number: 12
+    - name: Physical Address
+      detectors:
+        - name: detect_rails_jwt
+          locations:
+            - filename: testdata/ruby/detect_rails_jwt.rb
+              line_number: 10
+        - name: ruby
+          locations:
+            - filename: testdata/ruby/detect_rails_jwt.rb
+              line_number: 10
+risks:
+    - detector_id: detect_rails_jwt
+      data_types:
+        - name: Email Address
+          stored: false
+          locations:
+            - filename: testdata/ruby/detect_rails_jwt.rb
+              line_number: 12
+          parent:
+            line_number: 10
+            content: JWT.encode user.address, nil, "none"
+        - name: Physical Address
+          stored: false
+          locations:
+            - filename: testdata/ruby/detect_rails_jwt.rb
+              line_number: 10
+          parent:
+            line_number: 10
+            content: JWT.encode user.address, nil, "none"
+components: []
+
+
+--
+
