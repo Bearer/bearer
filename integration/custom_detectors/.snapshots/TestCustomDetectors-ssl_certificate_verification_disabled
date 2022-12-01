@@ -1,0 +1,20 @@
+data_types:
+    - name: Gender identity
+      detectors:
+        - name: ruby
+          locations:
+            - filename: testdata/ruby/ssl_certificate_verification_disabled.rb
+              line_number: 1
+risks:
+    - detector_id: ssl_certificate_verification_disabled
+      locations:
+        - risklocation:
+            filename: testdata/ruby/ssl_certificate_verification_disabled.rb
+            line_number: 4
+          content: |
+            http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+components: []
+
+
+--
+
