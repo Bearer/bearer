@@ -1,7 +1,6 @@
 ## URI
 
-uri = URI("http://my.api.com/users/search?first_name=#{user.first_name}")
-uri.query = URI.encode_www_form({ user: { first_name: "John", last_name: "Doe" } })
+uri = URI("http://my.api.com/users/search?ethnic_origin=#{user.ethnic_origin}")
 
 uri = URI('http://my.api.com/users/search')
 user_1 = { first_name: "John", last_name: "Doe" }
