@@ -99,7 +99,6 @@ var PoliciesKey string = "scan.policies"
 func FromOptions(opts flag.Options) (Config, error) {
 	var rules map[string]Rule
 	if viper.IsSet(CustomDetectorKey) {
-		log.Debug().Msgf("loading from key....")
 		err := viper.UnmarshalKey(CustomDetectorKey, &rules)
 		if err != nil {
 			return Config{}, err
@@ -107,9 +106,6 @@ func FromOptions(opts flag.Options) (Config, error) {
 	} else {
 		rules = DefaultCustomDetector()
 	}
-
-	log.Debug().Msgf("Got %s number of rules", len(rules))
-	log.Debug().Msgf("rules are  %#v", rules)
 
 	for _, customDetector := range rules {
 		for _, processor := range customDetector.Processors {
