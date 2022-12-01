@@ -16,6 +16,9 @@ module.exports = [
   // },
   {
     name: "Reference",
-    items: [{ name: "Commands", url: "/reference/commands/" }],
+    items: [
+      { name: "Commands", url: "/reference/commands/" },
+      { name: "Data Types", url: "/reference/datatypes/" },
+    ],
   },
 ];
