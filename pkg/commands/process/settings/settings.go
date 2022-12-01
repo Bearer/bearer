@@ -66,9 +66,9 @@ type Rule struct {
 	RootSingularize bool `mapstructure:"root_singularize" yaml:"root_singularize" `
 	RootLowercase   bool `mapstructure:"root_lowercase" yaml:"root_lowercase"`
 
-	Metavars map[string]MetaVar `mapstructure:"metavars" json:"metavars" yaml:"metavars"`
-	Stored   bool               `mapstructure:"stored" json:"stored" yaml:"stored"`
-	DetectPresence bool `yaml:"detect_presence"`
+	Metavars       map[string]MetaVar `mapstructure:"metavars" json:"metavars" yaml:"metavars"`
+	Stored         bool               `mapstructure:"stored" json:"stored" yaml:"stored"`
+	DetectPresence bool               `mapstructure:"detect_presence" json:"detect_presence" yaml:"detect_presence"`
 }
 
 type Processor struct {
