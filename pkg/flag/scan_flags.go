@@ -68,11 +68,11 @@ type ScanFlagGroup struct {
 
 type ScanOptions struct {
 	Target                  string        `mapstructure:"target" json:"target" yaml:"target"`
-	SkipPath                []string      `mapstructure:"skip_path" json:"skip_path" yaml:"skip_path"`
+	SkipPath                []string      `mapstructure:"skip-path" json:"skip-path" yaml:"skip-path"`
 	Debug                   bool          `mapstructure:"debug" json:"debug" yaml:"debug"`
-	DisableDomainResolution bool          `mapstructure:"disable_domain_resolution" json:"disable_domain_resolution" yaml:"disable_domain_resolution"`
-	DomainResolutionTimeout time.Duration `mapstructure:"domain_resolution_timeout" json:"domain_resolution_timeout" yaml:"domain_resolution_timeout"`
-	InternalDomains         []string      `mapstructure:"internal_domains" json:"internal_domains" yaml:"internal_domains"`
+	DisableDomainResolution bool          `mapstructure:"disable-domain-resolution" json:"disable-domain-resolution" yaml:"disable-domain-resolution"`
+	DomainResolutionTimeout time.Duration `mapstructure:"domain-resolution-timeout" json:"domain-resolution-timeout" yaml:"domain-resolution-timeout"`
+	InternalDomains         []string      `mapstructure:"internal-domains" json:"internal-domains" yaml:"internal-domains"`
 	Context                 Context       `mapstructure:"context" json:"context" yaml:"context"`
 	Quiet                   bool          `mapstructure:"quiet" json:"quiet" yaml:"quiet"`
 }

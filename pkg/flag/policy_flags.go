@@ -21,8 +21,8 @@ type PolicyFlagGroup struct {
 }
 
 type PolicyOptions struct {
-	SkipPolicy map[string]bool `json:"skip_policy" yaml:"skip_policy"`
-	OnlyPolicy map[string]bool `json:"only_policy" yaml:"only_policy"`
+	SkipPolicy map[string]bool `mapstructure:"skip-policy" json:"skip-policy" yaml:"skip-policy"`
+	OnlyPolicy map[string]bool `mapstructure:"only-policy" json:"only-policy" yaml:"only-policy"`
 }
 
 func NewPolicyFlagGroup() *PolicyFlagGroup {
