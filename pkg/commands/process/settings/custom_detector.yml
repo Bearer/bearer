@@ -53,6 +53,13 @@ detect_rails_session:
       session[...] = $ANYTHING
   languages:
     - ruby
+detect_rails_jwt:
+  type: "risk"
+  patterns:
+    - |
+      JWT.encode(<$ARGUMENT>)
+  languages:
+    - ruby
 detect_encrypted_ruby_class_properties:
   type: "verifier"
   patterns:
