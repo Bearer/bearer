@@ -1,11 +1,21 @@
 data_types:
-    - name: Fullname
+    - name: Email Address
       detectors:
         - name: ruby
           locations:
             - filename: testdata/ruby/detect_rails_cookies.rb
-              line_number: 2
-    - name: Username
+              line_number: 3
+            - filename: testdata/ruby/detect_rails_cookies.rb
+              line_number: 6
+    - name: Firstname
+      detectors:
+        - name: ruby
+          locations:
+            - filename: testdata/ruby/detect_rails_cookies.rb
+              line_number: 5
+            - filename: testdata/ruby/detect_rails_cookies.rb
+              line_number: 8
+    - name: Fullname
       detectors:
         - name: ruby
           locations:
@@ -13,9 +23,35 @@ data_types:
               line_number: 2
             - filename: testdata/ruby/detect_rails_cookies.rb
               line_number: 4
+            - filename: testdata/ruby/detect_rails_cookies.rb
+              line_number: 7
+    - name: Username
+      detectors:
+        - name: ruby
+          locations:
+            - filename: testdata/ruby/detect_rails_cookies.rb
+              line_number: 2
+            - filename: testdata/ruby/detect_rails_cookies.rb
+              line_number: 11
 risks:
     - detector_id: detect_rails_cookies
       data_types:
+        - name: Email Address
+          stored: false
+          locations:
+            - filename: testdata/ruby/detect_rails_cookies.rb
+              line_number: 3
+              parent:
+                line_number: 3
+                content: cookies.signed[:user_email] = current_user.email
+        - name: Firstname
+          stored: false
+          locations:
+            - filename: testdata/ruby/detect_rails_cookies.rb
+              line_number: 5
+              parent:
+                line_number: 3
+                content: cookies.signed[:user_email] = current_user.email
         - name: Fullname
           stored: false
           locations:
@@ -24,6 +60,11 @@ risks:
               parent:
                 line_number: 2
                 content: cookies[:user_name] = user.name
+            - filename: testdata/ruby/detect_rails_cookies.rb
+              line_number: 4
+              parent:
+                line_number: 7
+                content: cookies.permanent.encrypted[:full_name] = customer.name
 components: []
 
 

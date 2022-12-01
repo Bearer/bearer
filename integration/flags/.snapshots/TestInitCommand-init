@@ -38,6 +38,53 @@ scan:
                 - pattern: |
                     cookies[...] = $ANYTHING
                   filters: []
+                - pattern: |
+                    cookies.signed[...] = $ANYTHING
+                  filters: []
+                - pattern: |
+                    cookies.permanent[...] = $ANYTHING
+                  filters: []
+                - pattern: |
+                    cookies.encrypted[...] = $ANYTHING
+                  filters: []
+                - pattern: |
+                    cookies.signed.permanent[...] = $ANYTHING
+                  filters: []
+                - pattern: |
+                    cookies.signed.encrypted[...] = $ANYTHING
+                  filters: []
+                - pattern: |
+                    cookies.signed.encrypted.permanent[...] = $ANYTHING
+                  filters: []
+                - pattern: |
+                    cookies.signed.permanent.encrypted[...] = $ANYTHING
+                  filters: []
+                - pattern: |
+                    cookies.permanent.signed[...] = $ANYTHING
+                  filters: []
+                - pattern: |
+                    cookies.permanent.encrypted[...] = $ANYTHING
+                  filters: []
+                - pattern: |
+                    cookies.permanent.signed.encrypted[...] = $ANYTHING
+                  filters: []
+                - pattern: |
+                    cookies.permanent.encrypted.signed[...] = $ANYTHING
+                  filters: []
+                - pattern: |
+                    cookies.encrypted.permanent[...] = $ANYTHING
+                  filters: []
+                - pattern: |
+                    cookies.encrypted.signed[...] = $ANYTHING
+                  filters: []
+                - pattern: |
+                    cookies.encrypted.signed.permanent[...] = $ANYTHING
+                  filters: []
+                - pattern: |
+                    cookies.encrypted.permanent.signed[...] = $ANYTHING
+                  filters: []
+            param_parenting: false
+            processors: []
             root_singularize: false
             root_lowercase: false
             metavars: {}
