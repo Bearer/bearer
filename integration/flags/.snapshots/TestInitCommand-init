@@ -213,6 +213,92 @@ scan:
                 - path: policies/application_level_encryption.rego
                   name: bearer.application_level_encryption
                   content: "package bearer.application_level_encryption\n\nimport future.keywords\n\nsensitive_data_group_uuid := \"f6a0c071-5908-4420-bac2-bba28d41223e\"\npersonal_data_group_uuid := \"e1d3135b-3c0f-4b55-abce-19f27a26cbb3\"\n\nhigh[item] {\n    some datatype in input.dataflow.data_types    \n    some detector in datatype.detectors\n    detector.name == input.policy_id\n    \n    some location in detector.locations\n    not location.encrypted\n\n    some category in input.data_categories\n    category.uuid == datatype.category_uuid\n    category.group_uuid == sensitive_data_group_uuid\n\n    item = {\n        \"category_group\":  category.group_name,\n        \"filename\": location.filename,\n        \"line_number\": location.line_number,\n        \"parent_line_number\": detector.parent.line_number,\n        \"parent_content\": detector.parent.content\n\n    }\n}\n\ncritical[item] {\n    some datatype in input.dataflow.data_types    \n    some detector in datatype.detectors\n    detector.name == input.policy_id\n    \n    some location in detector.locations\n    not location.encrypted\n\n    some category in input.data_categories\n    category.uuid == datatype.category_uuid\n    category.group_uuid == personal_data_group_uuid\n\n    item = {\n        \"category_group\":  category.group_name,\n        \"filename\": location.filename,\n        \"line_number\": location.line_number,\n        \"parent_line_number\": detector.parent.line_number,\n        \"parent_content\": detector.parent.content\n    }\n}"
+        insecure_smtp_processing_sensitive_data:
+            query: |
+                medium = data.bearer.insecure_smtp.medium
+            id: detect_rails_insecure_smtp
+            name: Insecure SMTP
+            description: Communication with insecure SMTP in an application processing sensitive data
+            level: ""
+            modules:
+                - path: policies/insecure_smtp.rego
+                  name: bearer.insecure_smtp
+                  content: |
+                    package bearer.insecure_smtp
+
+                    import future.keywords
+
+                    medium[item] {
+                        some detector in input.dataflow.risks
+                        detector.detector_id == input.policy_id
+
+                        location = detector.locations[_]
+                        item := {
+                            "category_group": "Insecure communication",
+                            "filename": location.filename,
+                            "line_number": location.line_number,
+                            "parent_line_number": location.line_number,
+                            "parent_content": location.content
+                        }
+                    }
+        jwt_leaks:
+            query: |
+                critical = data.bearer.leakage.critical
+                high = data.bearer.leakage.high
+            id: detect_rails_jwt
+            name: JWT leaking
+            description: JWT leaks detected
+            level: ""
+            modules:
+                - path: policies/leakage.rego
+                  name: bearer.leakage
+                  content: |
+                    package bearer.leakage
+
+                    import future.keywords
+
+                    sensitive_data_group_uuid := "f6a0c071-5908-4420-bac2-bba28d41223e"
+                    personal_data_group_uuid := "e1d3135b-3c0f-4b55-abce-19f27a26cbb3"
+
+                    high[item] {
+                        some detector in input.dataflow.risks
+                        detector.detector_id == input.policy_id
+
+                        data_type = detector.data_types[_]
+
+                        some category in input.data_categories
+                        category.uuid == data_type.category_uuid
+                        category.group_uuid == sensitive_data_group_uuid
+
+                        location = data_type.locations[_]
+                        item := {
+                            "category_group": category.group_name,
+                            "filename": location.filename,
+                            "line_number": location.line_number,
+                            "parent_line_number": data_type.parent.line_number,
+                            "parent_content": data_type.parent.content
+                        }
+                    }
+
+                    critical[item] {
+                        some detector in input.dataflow.risks
+                        detector.detector_id == input.policy_id
+
+                        data_type = detector.data_types[_]
+
+                        some category in input.data_categories
+                        category.uuid == data_type.category_uuid
+                        category.group_uuid == personal_data_group_uuid
+
+                        location = data_type.locations[_]
+                        item := {
+                            "category_group": category.group_name,
+                            "filename": location.filename,
+                            "line_number": location.line_number,
+                            "parent_line_number": data_type.parent.line_number,
+                            "parent_content": data_type.parent.content
+                        }
+                    }
         logger_leaks:
             query: |
                 critical = data.bearer.leakage.critical
