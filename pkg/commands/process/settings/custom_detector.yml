@@ -91,7 +91,7 @@ ssl_certificate_verification_disabled:
   type: "risk"
   patterns:
     - |
-      http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+      $_.verify_mode = OpenSSL::SSL::VERIFY_NONE
   languages:
     - ruby
   detect_presence: true
