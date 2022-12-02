@@ -13,14 +13,14 @@ scan:
             type: verifier
             languages:
                 - ruby
+            param_parenting: true
+            processors: []
             patterns:
                 - pattern: |
                     class $CLASS_NAME < ApplicationRecord
                       encrypts <$ARGUMENT>
                     end
                   filters: []
-            param_parenting: true
-            processors: []
             root_singularize: true
             root_lowercase: true
             metavars: {}
@@ -31,6 +31,8 @@ scan:
             type: risk
             languages:
                 - ruby
+            param_parenting: false
+            processors: []
             patterns:
                 - pattern: |
                     Rails.application.configure do
@@ -46,8 +48,6 @@ scan:
                       }
                     end
                   filters: []
-            param_parenting: false
-            processors: []
             root_singularize: false
             root_lowercase: false
             metavars: {}
@@ -58,12 +58,12 @@ scan:
             type: risk
             languages:
                 - ruby
+            param_parenting: false
+            processors: []
             patterns:
                 - pattern: |
                     JWT.encode(<$ARGUMENT>)
                   filters: []
-            param_parenting: false
-            processors: []
             root_singularize: false
             root_lowercase: false
             metavars: {}
@@ -74,12 +74,12 @@ scan:
             type: risk
             languages:
                 - ruby
+            param_parenting: false
+            processors: []
             patterns:
                 - pattern: |
                     session[...] = $ANYTHING
                   filters: []
-            param_parenting: false
-            processors: []
             root_singularize: false
             root_lowercase: false
             metavars: {}
@@ -90,6 +90,8 @@ scan:
             type: risk
             languages:
                 - ruby
+            param_parenting: false
+            processors: []
             patterns:
                 - pattern: |
                     logger.info(<$ARGUMENT>)
@@ -97,8 +99,6 @@ scan:
                 - pattern: |
                     Rails.logger.info(<$ARGUMENT>)
                   filters: []
-            param_parenting: false
-            processors: []
             root_singularize: false
             root_lowercase: false
             metavars: {}
@@ -109,12 +109,6 @@ scan:
             type: data_type
             languages:
                 - sql
-            patterns:
-                - pattern: |
-                    CREATE TABLE public.$TABLE_NAME (
-                      <$COLUMN>
-                    )
-                  filters: []
             param_parenting: true
             processors:
                 - query: |
@@ -157,6 +151,12 @@ scan:
                                 "line_number": detection.source.line_number
                             }
                         }
+            patterns:
+                - pattern: |
+                    CREATE TABLE public.$TABLE_NAME (
+                      <$COLUMN>
+                    )
+                  filters: []
             root_singularize: true
             root_lowercase: true
             metavars: {}
@@ -167,6 +167,8 @@ scan:
             type: risk
             languages:
                 - ruby
+            param_parenting: true
+            processors: []
             patterns:
                 - pattern: |
                     CSV.open { <$DATA_TYPE> }
@@ -184,8 +186,6 @@ scan:
                 - pattern: |
                     File.open { <$DATA_TYPE> }
                   filters: []
-            param_parenting: true
-            processors: []
             root_singularize: false
             root_lowercase: false
             metavars: {}
@@ -196,6 +196,8 @@ scan:
             type: risk
             languages:
                 - ruby
+            param_parenting: false
+            processors: []
             patterns:
                 - pattern: |
                     URI.encode_www_form(<$DATA_TYPE>)
@@ -216,8 +218,6 @@ scan:
                         - HTTPX
                         - RestClient
                         - Typhoeus
-            param_parenting: false
-            processors: []
             root_singularize: false
             root_lowercase: false
             metavars: {}
@@ -228,6 +228,8 @@ scan:
             type: risk
             languages:
                 - ruby
+            param_parenting: false
+            processors: []
             patterns:
                 - pattern: |
                     URI.encode_www_form(<$DATA_TYPE>)
@@ -248,8 +250,6 @@ scan:
                         - HTTPX
                         - RestClient
                         - Typhoeus
-            param_parenting: false
-            processors: []
             root_singularize: false
             root_lowercase: false
             metavars: {}
@@ -272,6 +272,52 @@ scan:
                 - path: policies/application_level_encryption.rego
                   name: bearer.application_level_encryption
                   content: "package bearer.application_level_encryption\n\nimport future.keywords\n\nsensitive_data_group_uuid := \"f6a0c071-5908-4420-bac2-bba28d41223e\"\npersonal_data_group_uuid := \"e1d3135b-3c0f-4b55-abce-19f27a26cbb3\"\n\nhigh[item] {\n    some datatype in input.dataflow.data_types    \n    some detector in datatype.detectors\n    detector.name == input.policy_id\n    \n    some location in detector.locations\n    not location.encrypted\n\n    some category in input.data_categories\n    category.uuid == datatype.category_uuid\n    category.group_uuid == sensitive_data_group_uuid\n\n    item = {\n        \"category_group\":  category.group_name,\n        \"filename\": location.filename,\n        \"line_number\": location.line_number,\n        \"parent_line_number\": detector.parent.line_number,\n        \"parent_content\": detector.parent.content\n\n    }\n}\n\ncritical[item] {\n    some datatype in input.dataflow.data_types    \n    some detector in datatype.detectors\n    detector.name == input.policy_id\n    \n    some location in detector.locations\n    not location.encrypted\n\n    some category in input.data_categories\n    category.uuid == datatype.category_uuid\n    category.group_uuid == personal_data_group_uuid\n\n    item = {\n        \"category_group\":  category.group_name,\n        \"filename\": location.filename,\n        \"line_number\": location.line_number,\n        \"parent_line_number\": detector.parent.line_number,\n        \"parent_content\": detector.parent.content\n    }\n}"
+        http_get_parameters:
+            query: |
+                critical = data.bearer.http_get_parameters.critical
+                high = data.bearer.http_get_parameters.high
+            id: ruby_http_get_detection
+            name: HTTP GET parameters
+            description: Sending data as HTTP GET parameters
+            level: ""
+            modules:
+                - path: policies/http_get_parameters.rego
+                  name: bearer.http_get_parameters
+                  content: |
+                    package bearer.http_get_parameters
+
+                    import future.keywords
+
+                    sensitive_data_group_uuid := "f6a0c071-5908-4420-bac2-bba28d41223e"
+                    personal_data_group_uuid := "e1d3135b-3c0f-4b55-abce-19f27a26cbb3"
+
+                    item_in_data_category contains [category_group_uuid, item] if {
+                        some detector in input.dataflow.risks
+                        detector.detector_id == input.policy_id
+
+                        data_type = detector.data_types[_]
+
+                        some category in input.data_categories
+                        category.uuid == data_type.category_uuid
+                        category_group_uuid := category.group_uuid
+
+                        location = data_type.locations[_]
+                        item := {
+                            "category_group": category.group_name,
+                            "filename": location.filename,
+                            "line_number": location.line_number,
+                            "parent_line_number": data_type.parent.line_number,
+                            "parent_content": data_type.parent.content
+                        }
+                    }
+
+                    high[item] {
+                        item_in_data_category[[sensitive_data_group_uuid, item]]
+                    }
+
+                    critical[item] {
+                        item_in_data_category[[personal_data_group_uuid, item]]
+                    }
         insecure_smtp_processing_sensitive_data:
             query: |
                 medium = data.bearer.insecure_smtp.medium
@@ -334,8 +380,8 @@ scan:
                             "category_group": category.group_name,
                             "filename": location.filename,
                             "line_number": location.line_number,
-                            "parent_line_number": data_type.parent.line_number,
-                            "parent_content": data_type.parent.content
+                            "parent_line_number": location.parent.line_number,
+                            "parent_content": location.parent.content
                         }
                     }
 
@@ -354,8 +400,8 @@ scan:
                             "category_group": category.group_name,
                             "filename": location.filename,
                             "line_number": location.line_number,
-                            "parent_line_number": data_type.parent.line_number,
-                            "parent_content": data_type.parent.content
+                            "parent_line_number": location.parent.line_number,
+                            "parent_content": location.parent.content
                         }
                     }
         logger_leaks:
@@ -392,8 +438,8 @@ scan:
                             "category_group": category.group_name,
                             "filename": location.filename,
                             "line_number": location.line_number,
-                            "parent_line_number": data_type.parent.line_number,
-                            "parent_content": data_type.parent.content
+                            "parent_line_number": location.parent.line_number,
+                            "parent_content": location.parent.content
                         }
                     }
 
@@ -412,8 +458,8 @@ scan:
                             "category_group": category.group_name,
                             "filename": location.filename,
                             "line_number": location.line_number,
-                            "parent_line_number": data_type.parent.line_number,
-                            "parent_content": data_type.parent.content
+                            "parent_line_number": location.parent.line_number,
+                            "parent_content": location.parent.content
                         }
                     }
         session_leaks:
@@ -450,8 +496,8 @@ scan:
                             "category_group": category.group_name,
                             "filename": location.filename,
                             "line_number": location.line_number,
-                            "parent_line_number": data_type.parent.line_number,
-                            "parent_content": data_type.parent.content
+                            "parent_line_number": location.parent.line_number,
+                            "parent_content": location.parent.content
                         }
                     }
 
@@ -470,8 +516,8 @@ scan:
                             "category_group": category.group_name,
                             "filename": location.filename,
                             "line_number": location.line_number,
-                            "parent_line_number": data_type.parent.line_number,
-                            "parent_content": data_type.parent.content
+                            "parent_line_number": location.parent.line_number,
+                            "parent_content": location.parent.content
                         }
                     }
     quiet: false
