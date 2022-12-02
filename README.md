@@ -50,7 +50,7 @@ Curio is Open Source ([*see license*](#license)), and is built to be fully custo
 
 Curio also powers [Bearer](https://www.bearer.com), the developer-first platform to proactively find and fix data security risks and vulnerabilities across your development lifecycle
 
-## Getting started
+## :rocket: Getting started
 
 Scan your first project in X minutes or less.
 
@@ -102,7 +102,7 @@ curio scan ./curio-ci-test/Pipfile.lock
 
 Additional options for using and configuring the `scan` command can be found in the [scan documentation](https://curio.sh/reference/commands/#scan).
 
-## FAQs
+## :question: FAQs
 
 ### What can I do with Curio?
 
@@ -161,7 +161,7 @@ By putting the **focus on sensitive data first**, Curio is able to trigger secur
 
 The spirit of Curio is the less (alerts) is more (security) philosophy.
 
-## Get in touch
+## :raised_hand: Get in touch
 
 Thanks for using Curio. Still have questions?
 
@@ -171,19 +171,19 @@ Thanks for using Curio. Still have questions?
 - Found a security issue? Check out our [Security Policy](https://github.com/Bearer/curio/security/policy) for reporting details.
 - Find out more at [Bearer.com](https://www.bearer.com)
 
-## Contributing
+## :handshake: Contributing
 
 Interested in contributing? We're here for it! For details on how to contribute, setting up your development environment, and our processes, review the [contribution guide](CONTRIBUTING.md).
 
-## Code of conduct
+## :rotating_light: Code of conduct
 
 Everyone interacting with this project is expected to follow the guidelines of our [code of conduct](CODE_OF_CONDUCT.md).
 
-## Security
+## :shield: Security
 
 To report a vulnerability or suspected vulnerability, [see our security policy](https://github.com/Bearer/curio/security/policy). For any questions, concerns or other security matters, feel free to [open an issue](https://github.com/Bearer/curio/issues/new/choose) or join the [Discord Community][discord].
 
-## License
+## :mortar_board: License
 
 Curio code is licensed under the terms of the [Elastic License 2.0](LICENSE.txt) (ELv2), which means you can use it freely inside your organization to protect your applications without any commercial requirements.
 
