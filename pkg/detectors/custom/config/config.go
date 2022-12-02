@@ -1,10 +1,14 @@
 package config
 
-import "github.com/bearer/curio/pkg/commands/process/settings"
+import (
+	"github.com/bearer/curio/pkg/commands/process/settings"
+	sitter "github.com/smacker/go-tree-sitter"
+)
 
 type CompiledRule struct {
 	RuleName               string
 	Tree                   string
+	Query                  *sitter.Query
 	Params                 []Param
 	Metavars               map[string]settings.MetaVar
 	Filters                []settings.PatternFilter
@@ -12,7 +16,7 @@ type CompiledRule struct {
 	RootSingularize        bool
 	RootLowercase          bool
 	VariableReconciliation bool
-	Languages              []string
+	Language               string
 	DetectPresence         bool
 	Pattern                string
 }

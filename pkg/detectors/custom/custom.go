@@ -34,10 +34,10 @@ import (
 )
 
 type Detector struct {
-	idGenerator      nodeid.Generator
-	paramIdGenerator nodeid.Generator
-	compiledRules    []config.CompiledRule
-	pluralize        *pluralize.Client
+	idGenerator        nodeid.Generator
+	paramIdGenerator   nodeid.Generator
+	rulesGroupedByLang map[string][]config.CompiledRule
+	pluralize          *pluralize.Client
 
 	Ruby language.Detector
 	Sql  language.Detector
@@ -61,7 +61,7 @@ func (detector *Detector) AcceptDir(dir *file.Path) (bool, error) {
 }
 
 func (detector *Detector) CompileRules(rulesConfig map[string]settings.Rule) error {
-	compiledRules := make([]config.CompiledRule, 0)
+	detector.rulesGroupedByLang = make(map[string][]config.CompiledRule)
 
 	for ruleName, rule := range rulesConfig {
 		if rule.Disabled {
@@ -73,6 +73,9 @@ func (detector *Detector) CompileRules(rulesConfig map[string]settings.Rule) err
 				if err != nil {
 					return err
 				}
+
+				compiledRule.Query = parser.QueryMustCompile(getLanguage(lang), compiledRule.Tree)
+				compiledRule.Language = lang
 
 				compiledRule.RuleName = ruleName
 				compiledRule.Metavars = rule.Metavars
@@ -87,26 +90,50 @@ func (detector *Detector) CompileRules(rulesConfig map[string]settings.Rule) err
 				compiledRule.DetectPresence = rule.DetectPresence
 				compiledRule.Pattern = rulePattern.Pattern
 				compiledRule.Filters = rulePattern.Filters
-				compiledRules = append(compiledRules, compiledRule)
+
+				detector.rulesGroupedByLang[lang] = append(detector.rulesGroupedByLang[lang], compiledRule)
 			}
 		}
 	}
 
-	sort.Slice(compiledRules, func(i, j int) bool {
-		return strings.Compare(compiledRules[i].RuleName, compiledRules[j].RuleName) == -1
-	})
-
-	detector.compiledRules = compiledRules
+	for _, rules := range detector.rulesGroupedByLang {
+		sort.Slice(rules, func(i, j int) bool {
+			return strings.Compare(rules[i].RuleName, rules[j].RuleName) == -1
+		})
+	}
 
 	return nil
 }
 
 func (detector *Detector) ProcessFile(file *file.FileInfo, dir *file.Path, report report.Report) (bool, error) {
-	for _, rule := range detector.compiledRules {
-		err := detector.executeRule(rule, file, report, detector.idGenerator)
+	for lang, rules := range detector.rulesGroupedByLang {
+		if !languageMatchesFile(file, lang) {
+			continue
+		}
+
+		sitterLang := getLanguage(lang)
+		tree, err := parser.ParseFile(file, file.Path, sitterLang)
 		if err != nil {
 			return false, err
 		}
+
+		var variableReconciliation *parserdatatype.ReconciliationRequest
+
+		for _, rule := range rules {
+			if rule.VariableReconciliation && variableReconciliation == nil {
+				variableReconciliation, err = detector.buildReconciliationRequest(rule.Language, tree)
+				if err != nil {
+					return false, err
+				}
+			}
+
+			err := detector.executeRule(rule, tree, report, detector.idGenerator, variableReconciliation)
+			if err != nil {
+				return false, err
+			}
+		}
+
+		tree.Close()
 	}
 
 	return false, nil
@@ -163,54 +190,26 @@ func languageMatchesFile(file *file.FileInfo, ruleLanguage string) bool {
 	return false
 }
 
-func (detector *Detector) executeRule(rule config.CompiledRule, file *file.FileInfo, report report.Report, idGenerator nodeid.Generator) error {
-	for _, lang := range rule.Languages {
-		if !languageMatchesFile(file, lang) {
-			continue
+func (detector *Detector) executeRule(rule config.CompiledRule, tree *parser.Tree, report report.Report, idGenerator nodeid.Generator, variableReconciliation *parserdatatype.ReconciliationRequest) error {
+	captures := tree.QueryMustPass(rule.Query)
+
+	filteredCaptures, err := filterCaptures(rule.Params, captures)
+	if err != nil {
+		return err
+	}
+
+	if rule.DetectPresence {
+		for _, capture := range filteredCaptures {
+			content := capture["rule"].Source(false)
+			content.Text = &rule.Pattern
+			report.AddDetection(detections.TypeCustomRisk, detectors.Type(rule.RuleName), content, nil)
 		}
+		return nil
+	}
 
-		sitterLang := getLanguage(lang)
-
-		tree, err := parser.ParseFile(file, file.Path, sitterLang)
-		if err != nil {
-			return err
-		}
-		defer tree.Close()
-
-		query := parser.QueryMustCompile(sitterLang, rule.Tree)
-
-		captures := tree.QueryConventional(query)
-
-		filteredCaptures, err := filterCaptures(rule.Params, captures)
-		if err != nil {
-			return err
-		}
-
-		if rule.DetectPresence {
-			for _, capture := range filteredCaptures {
-				content := capture["rule"].Source(false)
-				content.Text = &rule.Pattern
-				parent := capture["rule"].Parent().Source(true)
-				report.AddDetection(detections.TypeCustomRisk, detectors.Type(rule.RuleName), content, schema.Parent{
-					LineNumber: *parent.LineNumber,
-					Content:    *parent.Text,
-				})
-			}
-			continue
-		}
-
-		var variableReconciliation *parserdatatype.ReconciliationRequest
-		if rule.VariableReconciliation {
-			variableReconciliation, err = detector.buildReconciliationRequest(lang, tree)
-			if err != nil {
-				return err
-			}
-		}
-
-		err = detector.extractData(filteredCaptures, rule, report, lang, idGenerator, variableReconciliation)
-		if err != nil {
-			return err
-		}
+	err = detector.extractData(filteredCaptures, rule, report, rule.Language, idGenerator, variableReconciliation)
+	if err != nil {
+		return err
 	}
 	return nil
 }

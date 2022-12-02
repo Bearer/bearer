@@ -20,7 +20,7 @@ var (
 	TimeoutFileMinimumFlag = Flag{
 		Name:       "timeout-file-min",
 		ConfigName: "worker.timeout-file-min",
-		Value:      5 * time.Second,
+		Value:      30 * time.Second,
 		Usage:      "minimum timeout assigned to scanning file, this config superseeds timeout-second-per-bytes",
 	}
 	TimeoutFileMaximumFlag = Flag{
