@@ -1,6 +1,9 @@
 package risks
 
 import (
+	"bytes"
+	"encoding/json"
+
 	"github.com/bearer/curio/pkg/classification/db"
 	"github.com/bearer/curio/pkg/commands/process/settings"
 	"github.com/bearer/curio/pkg/report/output/dataflow/detectiondecoder"
@@ -55,12 +58,20 @@ func (holder *Holder) AddRiskPresence(detection detections.Detection) {
 		}
 	}
 
+	riskLocation := &types.RiskLocation{
+		Filename:   detection.Source.Filename,
+		LineNumber: *detection.Source.LineNumber,
+	}
+
+	// add parent information if possible
+	parent := extractCustomRiskParent(detection.Value)
+	if parent != nil {
+		riskLocation.Parent = parent
+	}
+
 	holder.presentRisks[ruleName].Locations = append(holder.presentRisks[ruleName].Locations, types.RiskDetectionLocation{
-		RiskLocation: &types.RiskLocation{
-			Filename:   detection.Source.Filename,
-			LineNumber: *detection.Source.LineNumber,
-		},
-		Content: *detection.Source.Text,
+		RiskLocation: riskLocation,
+		Content:      *detection.Source.Text,
 	})
 }
 
@@ -173,4 +184,20 @@ func (holder *Holder) ToDataFlow() []interface{} {
 	}
 
 	return data
+}
+
+func extractCustomRiskParent(value interface{}) *schema.Parent {
+	var parent schema.Parent
+	buf := bytes.NewBuffer(nil)
+	err := json.NewEncoder(buf).Encode(value)
+	if err != nil {
+		return nil
+	}
+
+	err = json.NewDecoder(buf).Decode(&parent)
+	if err != nil {
+		return nil
+	}
+
+	return &parent
 }

@@ -190,7 +190,11 @@ func (detector *Detector) executeRule(rule config.CompiledRule, file *file.FileI
 			for _, capture := range filteredCaptures {
 				content := capture["rule"].Source(false)
 				content.Text = &rule.Pattern
-				report.AddDetection(detections.TypeCustomRisk, detectors.Type(rule.RuleName), content, nil)
+				parent := capture["rule"].Parent().Source(true)
+				report.AddDetection(detections.TypeCustomRisk, detectors.Type(rule.RuleName), content, schema.Parent{
+					LineNumber: *parent.LineNumber,
+					Content:    *parent.Text,
+				})
 			}
 			continue
 		}

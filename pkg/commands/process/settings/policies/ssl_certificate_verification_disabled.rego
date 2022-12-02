@@ -19,7 +19,7 @@ medium[item] {
     "category_group": category.group_name,
     "filename": location.filename,
     "line_number": location.line_number,
-    "parent_line_number": 2,
-    "parent_content": "FIXME"
+    "parent_line_number": location.parent.line_number,
+    "parent_content": location.parent.content
   }
 }
