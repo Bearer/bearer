@@ -8,11 +8,9 @@
   ) {
     document.documentElement.classList.add("dark");
     localStorage.theme = "dark";
-    themeToggleButton.innerHTML = "🌙";
   } else {
     document.documentElement.classList.remove("dark");
     localStorage.theme = "light";
-    themeToggleButton.innerHTML = "☀️";
   }
 
   themeToggleButton.addEventListener("click", () => {
@@ -21,11 +19,9 @@
 
   function toggleTheme() {
     if ("theme" in localStorage && localStorage.theme === "dark") {
-      themeToggleButton.innerHTML = "☀️";
       localStorage.theme = "light";
       document.documentElement.classList.remove("dark");
     } else {
-      themeToggleButton.innerHTML = "🌙";
       localStorage.theme = "dark";
       document.documentElement.classList.add("dark");
     }

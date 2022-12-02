@@ -95,4 +95,18 @@
     @apply text-main dark:text-main-300 font-semibold;
   }
 
+
+  .light-icon {
+    display: inline-block;
+  }
+  .dark .light-icon {
+    display:none;
+  }
+  .dark-icon {
+    display:none;
+  }
+  .dark .dark-icon {
+    display: inline-block;
+  }
+
 }

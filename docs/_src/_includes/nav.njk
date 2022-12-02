@@ -3,19 +3,22 @@
 		<a href="/" title="Return to the homepage">
 			{% include 'logo.njk' %}
 		</a>
-		<ul class='flex gap-6 items-center text-black dark:text-neutral-100'>
+		<ul class='flex gap-6 items-center text-black dark:text-neutral-100 '>
 			<li class="">
 				<a class="hover:text-main dark:hover:text-main-300" href="https://discord.gg/eaHZBJUXRF" class="">
-					Community Discord
+					{% include 'icon-discord.njk' %}
 				</a>
 			</li>
 			<li class="">
 				<a class="hover:text-main dark:hover:text-main-300" href="https://github.com/bearer/curio" class="">
-					GitHub
+					{% include 'icon-github.njk' %}
 				</a>
 			</li>
 			<li>
-				<button id="dark-light-toggle">☀️</button>
+				<button class="hover:text-main dark:hover:text-main-300" id="dark-light-toggle">
+					{% include 'icon-sun.njk' %}
+					{% include 'icon-moon.njk' %}
+				</button>
 			</li>
 			<li>
 				<a href="/quickstart" class="btn-fancy dark:btn-fancy-dark dark:text-neutral-100 text-black block">
