@@ -41,9 +41,9 @@ type ReportFlagGroup struct {
 }
 
 type ReportOptions struct {
-	Format string
-	Report string
-	Output string
+	Format string `mapstructure:"format" json:"format" yaml:"format"`
+	Report string `mapstructure:"report" json:"report" yaml:"report"`
+	Output string `mapstructure:"output" json:"output" yaml:"output"`
 }
 
 func NewReportFlagGroup() *ReportFlagGroup {

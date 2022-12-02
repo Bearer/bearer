@@ -28,9 +28,9 @@ type RepoFlagGroup struct {
 }
 
 type RepoOptions struct {
-	RepoBranch string
-	RepoCommit string
-	RepoTag    string
+	RepoBranch string `mapstructure:"branch" json:"branch" yaml:"branch"`
+	RepoCommit string `mapstructure:"commit" json:"commit" yaml:"commit"`
+	RepoTag    string `mapstructure:"tag" json:"tag" yaml:"tag"`
 }
 
 func NewRepoFlagGroup() *RepoFlagGroup {

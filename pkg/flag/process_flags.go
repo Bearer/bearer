@@ -15,7 +15,7 @@ type ProcessFlagGroup struct {
 }
 
 type ProcessOptions struct {
-	Port string
+	Port string `mapstructure:"port" json:"port" yaml:"port"`
 }
 
 func NewProcessGroup() *ProcessFlagGroup {

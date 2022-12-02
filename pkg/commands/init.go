@@ -27,6 +27,7 @@ func NewInitCommand() *cobra.Command {
 				return err
 			}
 			viper.Set(settings.CustomDetectorKey, globalSettings.CustomDetector)
+			viper.Set(settings.PoliciesKey, globalSettings.Policies)
 
 			viper.SetConfigFile("./curio.yml")
 			err = viper.WriteConfig()
