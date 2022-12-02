@@ -66,12 +66,12 @@ type RulePattern struct {
 }
 
 type Rule struct {
-	Disabled       bool        `mapstructure:"disabled" json:"disabled" yaml:"disabled"`
-	Type           string      `mapstructure:"type" json:"type" yaml:"type"`
-	Languages      []string    `mapstructure:"languages" json:"languages" yaml:"languages"`
-	ParamParenting bool        `mapstructure:"param_parenting" json:"param_parenting" yaml:"param_parenting"`
-	Processors     []Processor `mapstructure:"processors" json:"processors" yaml:"processors"`
-	Patterns       []RulePattern
+	Disabled       bool          `mapstructure:"disabled" json:"disabled" yaml:"disabled"`
+	Type           string        `mapstructure:"type" json:"type" yaml:"type"`
+	Languages      []string      `mapstructure:"languages" json:"languages" yaml:"languages"`
+	ParamParenting bool          `mapstructure:"param_parenting" json:"param_parenting" yaml:"param_parenting"`
+	Processors     []Processor   `mapstructure:"processors" json:"processors" yaml:"processors"`
+	Patterns       []RulePattern `mapstructure:"patterns" json:"patterns" yaml:"patterns"`
 
 	RootSingularize bool `mapstructure:"root_singularize" yaml:"root_singularize" `
 	RootLowercase   bool `mapstructure:"root_lowercase" yaml:"root_lowercase"`
