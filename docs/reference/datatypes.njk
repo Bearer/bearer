@@ -2,6 +2,8 @@
 title: Data Types
 layout: layouts/doc.njk
 ---
+{# This content of this page is generated. To edit individual types or category text,
+edit the files located at https://github.com/Bearer/curio/tree/main/pkg/classification/db #}
 {% renderTemplate "liquid,md",
 datatypes %}
 # Supported Data Types
@@ -11,9 +13,9 @@ The following is a catagorized list of the supported data types.
 {% endrenderTemplate %}
 
 {% for key, group in datatypes.output %}
-  <h2 id="{{group.name}}">{{group.name}}</h2>
+  <h2 id="{{group.name | slugify}}">{{group.name}}</h2>
   {% for key, cat in group.categories %}
-    <h3 id="{{cat.name}}">{{cat.name}}</h3>
+    <h3 id="{{cat.name | slugify}}">{{cat.name}}</h3>
     <ul>
       {% for item in cat.types %}
         <li>{{item.name}}</li>

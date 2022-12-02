@@ -2,6 +2,8 @@
 title: Policies
 layout: layouts/doc.njk
 ---
+{# This content of this page is generated. To edit individual policy titles or descriptions, 
+edit https://github.com/Bearer/curio/blob/main/pkg/commands/process/settings/policies.yml #}
 {% renderTemplate "liquid,md" %}
 # Policies
 
@@ -11,6 +13,6 @@ Curio includes the following policies by default.
 {% endrenderTemplate %}
 
 {% for key, group in policies %}
-  <h2 id="{{group.name}}">{{group.name}}</h2>
+  <h2 id="{{group.name | slugify}}">{{group.name}}</h2>
   <p>{{group.description}}</p>
 {% endfor %}
