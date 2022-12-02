@@ -144,3 +144,13 @@ detect_rails_insecure_smtp:
   languages:
     - ruby
   detect_presence: true
+detect_rails_insecure_communication:
+  type: "risk"
+  patterns:
+    - |
+      Rails.application.configure do
+        config.force_ssl = false
+      end
+  languages:
+    - ruby
+  detect_presence: true

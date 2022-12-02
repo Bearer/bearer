@@ -26,6 +26,24 @@ scan:
             metavars: {}
             stored: false
             detect_presence: false
+        detect_rails_insecure_communication:
+            disabled: false
+            type: risk
+            languages:
+                - ruby
+            patterns:
+                - pattern: |
+                    Rails.application.configure do
+                      config.force_ssl = false
+                    end
+                  filters: []
+            param_parenting: false
+            processors: []
+            root_singularize: false
+            root_lowercase: false
+            metavars: {}
+            stored: false
+            detect_presence: true
         detect_rails_insecure_smtp:
             disabled: false
             type: risk
