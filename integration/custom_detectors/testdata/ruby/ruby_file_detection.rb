@@ -9,10 +9,10 @@ CSV.open("path/to/user.csv", "wb") do |csv|
 	end
 end
 
-File.open("users.log", "w") { |f| f.write "#{Time.now} - User #{user.email} logged in\n" }
+File.open("users.log", "w") { |f| f.write "#{Time.now} - User #{user_2.email} logged in\n" }
 
-File.open(user.emails, "users.csv", "w") do |f|
-	users.each do |user|
-		f.write "#{user.email},#{user.first_name},#{user.last_name}"
+File.open(user_3.emails, "users.csv", "w") do |f|
+	users.each do |user_4|
+		f.write "#{user_4.email},#{user_4.first_name},#{user_4.last_name}"
 	end
 end
