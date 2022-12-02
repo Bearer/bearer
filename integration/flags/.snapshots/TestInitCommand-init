@@ -255,6 +255,22 @@ scan:
             metavars: {}
             stored: false
             detect_presence: false
+        ssl_certificate_verification_disabled:
+            disabled: false
+            type: risk
+            languages:
+                - ruby
+            patterns:
+                - pattern: |
+                    $_.verify_mode = OpenSSL::SSL::VERIFY_NONE
+                  filters: []
+            param_parenting: false
+            processors: []
+            root_singularize: false
+            root_lowercase: false
+            metavars: {}
+            stored: false
+            detect_presence: true
     debug: false
     disable-domain-resolution: false
     domain-resolution-timeout: 3s

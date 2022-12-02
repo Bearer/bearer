@@ -87,6 +87,14 @@ detect_rails_jwt:
       JWT.encode(<$ARGUMENT>)
   languages:
     - ruby
+ssl_certificate_verification_disabled:
+  type: "risk"
+  patterns:
+    - |
+      $_.verify_mode = OpenSSL::SSL::VERIFY_NONE
+  languages:
+    - ruby
+  detect_presence: true
 detect_encrypted_ruby_class_properties:
   type: "verifier"
   patterns:

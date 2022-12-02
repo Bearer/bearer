@@ -28,6 +28,15 @@ jwt_leaks:
   modules:
     - path: policies/leakage.rego
       name: bearer.leakage
+ssl_certificate_verification_disabled:
+  description: "SSL certificate verification disabled in an application processing sensitive data"
+  name: "SSL certificate verification disabled"
+  id: "ssl_certificate_verification_disabled"
+  query: |
+    medium = data.bearer.ssl_certificate_verification_disabled.medium
+  modules:
+    - path: policies/ssl_certificate_verification_disabled.rego
+      name: bearer.ssl_certificate_verification_disabled
 application_level_encryption_missing:
   description: "Application level encryption missing"
   name: "Application level encryption missing"
