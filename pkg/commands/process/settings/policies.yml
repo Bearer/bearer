@@ -66,3 +66,12 @@ http_get_parameters:
   modules:
     - path: policies/http_get_parameters.rego
       name: bearer.http_get_parameters
+insecure_communication_processing_sensitive_data:
+  description: "Insecure communication in an application processing sensitive data"
+  name: "Insecure communication"
+  id: "detect_rails_insecure_communication"
+  query: |
+    medium = data.bearer.insecure_communication.medium
+  modules:
+    - path: policies/insecure_communication.rego
+      name: bearer.insecure_communication

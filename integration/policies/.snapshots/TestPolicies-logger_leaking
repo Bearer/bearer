@@ -1,0 +1,12 @@
+critical:
+    - policy_name: Logger leaking
+      policy_description: Logger leaks detected
+      line_number: 1
+      filename: testdata/ruby/logger_leaking.rb
+      category_group: Personal data
+      parent_line_number: 1
+      parent_content: logger.info(user.address)
+
+
+--
+

@@ -1,4 +1,4 @@
-package bearer.insecure_smtp
+package bearer.insecure_communication
 
 import future.keywords
 
@@ -15,10 +15,10 @@ medium[item] {
 
     location = detector.locations[_]
     item := {
-        "category_group": data_category.group_name,
-        "filename": location.filename,
-        "line_number": location.line_number,
-        "parent_line_number": location.parent.line_number,
-        "parent_content": location.parent.content
+      "category_group": data_category.group_name,
+      "filename": location.filename,
+      "line_number": location.line_number,
+      "parent_line_number": location.parent.line_number,
+      "parent_content": location.parent.content
     }
 }

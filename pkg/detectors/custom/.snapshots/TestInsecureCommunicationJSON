@@ -1,0 +1,18 @@
+[
+ {
+  "type": "custom_risk",
+  "detector_type": "detect_rails_insecure_communication",
+  "source": {
+   "filename": "config.rb",
+   "language": "Ruby",
+   "language_type": "programming",
+   "line_number": 3,
+   "column_number": 1,
+   "text": "Rails.application.configure do\n  config.force_ssl = false\nend\n"
+  },
+  "value": {
+   "line_number": 1,
+   "content": "# Insecure communication\n## Detected\nRails.application.configure do\n  config.force_ssl = false\nend\n\n## Not Detected\nRails.application.configure do\n  config.force_ssl = true\nend\n\nRails.application.configure do\n  # config.force_ssl = false\nend"
+  }
+ }
+]
