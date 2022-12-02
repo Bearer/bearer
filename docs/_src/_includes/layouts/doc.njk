@@ -8,7 +8,7 @@ layout: layouts/base.njk
 			{% for heading in nav %}
 				<li class="mb-4">
 					<h2 class="font-bold text-md">{{heading.name}}</h2>
-					<ul class="">
+					<ul class="ml-2">
 						{% for item in heading.items %}
 							<li>
 								<a class="hover:underline" {% if currentUrl === item.url %}aria-current="page" {% endif %} href="{{item.url}}">{{item.name}}</a>

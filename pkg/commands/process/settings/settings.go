@@ -55,13 +55,23 @@ func (modules Modules) ToRegoModules() (output []rego.Module) {
 	return
 }
 
+type PatternFilter struct {
+	Variable string
+	Values   []string
+}
+
+type RulePattern struct {
+	Pattern string
+	Filters []PatternFilter
+}
+
 type Rule struct {
 	Disabled       bool        `mapstructure:"disabled" json:"disabled" yaml:"disabled"`
 	Type           string      `mapstructure:"type" json:"type" yaml:"type"`
 	Languages      []string    `mapstructure:"languages" json:"languages" yaml:"languages"`
-	Patterns       []string    `mapstructure:"patterns" json:"patterns" yaml:"patterns"`
 	ParamParenting bool        `mapstructure:"param_parenting" json:"param_parenting" yaml:"param_parenting"`
 	Processors     []Processor `mapstructure:"processors" json:"processors" yaml:"processors"`
+	Patterns       []RulePattern
 
 	RootSingularize bool `mapstructure:"root_singularize" yaml:"root_singularize" `
 	RootLowercase   bool `mapstructure:"root_lowercase" yaml:"root_lowercase"`
@@ -166,6 +176,19 @@ func FromOptions(opts flag.Options) (Config, error) {
 	}
 
 	return config, nil
+}
+
+func (rulePattern *RulePattern) UnmarshalYAML(unmarshal func(interface{}) error) error {
+	// Try to parse as a string
+	var pattern string
+	if err := unmarshal(&pattern); err == nil {
+		rulePattern.Pattern = pattern
+		return nil
+	}
+
+	// Wasn't a string so it must be the structured format
+	type rawRulePattern RulePattern
+	return unmarshal((*rawRulePattern)(rulePattern))
 }
 
 func DefaultCustomDetector() map[string]Rule {

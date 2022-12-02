@@ -1,0 +1,16 @@
+critical:
+    - policy_name: HTTP GET parameters
+      policy_description: Sending data as HTTP GET parameters
+      line_number: 4
+      filename: testdata/ruby/http_get_parameters.rb
+      category_group: Personal data
+high:
+    - policy_name: HTTP GET parameters
+      policy_description: Sending data as HTTP GET parameters
+      line_number: 1
+      filename: testdata/ruby/http_get_parameters.rb
+      category_group: Sensitive data
+
+
+--
+

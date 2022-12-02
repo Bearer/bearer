@@ -1,0 +1,23 @@
+---
+title: Data Types
+layout: layouts/doc.njk
+---
+{% renderTemplate "liquid,md",
+datatypes %}
+# Supported Data Types
+Curio supports {{counts.types}} data types including Personal Data (PD), Personally Identifiable Information (PII), Protected Health Information (PHI), and Financial Data. 
+
+The following is a catagorized list of the supported data types.
+{% endrenderTemplate %}
+
+{% for key, group in datatypes.output %}
+  <h2 id="{{group.name}}">{{group.name}}</h2>
+  {% for key, cat in group.categories %}
+    <h3 id="{{cat.name}}">{{cat.name}}</h3>
+    <ul>
+      {% for item in cat.types %}
+        <li>{{item.name}}</li>
+      {% endfor %}
+    </ul>
+  {% endfor %}
+{% endfor %}

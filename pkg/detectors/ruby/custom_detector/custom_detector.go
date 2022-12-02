@@ -14,7 +14,9 @@ type Detector struct {
 }
 
 func (detector *Detector) IsParam(node *parser.Node) (isTerminating bool, shouldIgnore bool, param *config.Param) {
-	if strings.Index(node.Content(), "Var_Anything") == 0 {
+	nodeContent := node.Content()
+
+	if strings.Index(nodeContent, "Var_Anything") == 0 {
 		param = &config.Param{
 			ArgumentsExtract: true,
 			MatchAnything:    true,
@@ -26,7 +28,7 @@ func (detector *Detector) IsParam(node *parser.Node) (isTerminating bool, should
 
 	if node.Type() == "constant" || node.Type() == "identifier" || node.Type() == "string_content" {
 		// get class names
-		if strings.Index(node.Content(), "Var_Class_Name") == 0 {
+		if strings.Index(nodeContent, "Var_Class_Name") == 0 {
 			param = &config.Param{
 				ClassNameExtract: true,
 			}
@@ -34,9 +36,18 @@ func (detector *Detector) IsParam(node *parser.Node) (isTerminating bool, should
 			return
 		}
 
+		if strings.Index(nodeContent, "var_Variable_") == 0 {
+			param = &config.Param{
+				PatternName:   nodeContent[13:],
+				MatchAnything: true,
+			}
+			isTerminating = true
+			return
+		}
+
 		// get simple string identifiers
 		param = &config.Param{
-			StringMatch: node.Content(),
+			StringMatch: nodeContent,
 		}
 		isTerminating = true
 		return
@@ -46,7 +57,7 @@ func (detector *Detector) IsParam(node *parser.Node) (isTerminating bool, should
 		return false, false, nil
 	}
 
-	if strings.Index(node.Child(0).Content(), "Var_DataTypes") == 0 {
+	if node.Child(0) != nil && strings.Index(node.Child(0).Content(), "Var_DataTypes") == 0 {
 		param = &config.Param{
 			ArgumentsExtract: true,
 		}
@@ -58,6 +69,7 @@ func (detector *Detector) IsParam(node *parser.Node) (isTerminating bool, should
 	if node.Type() == "symbol_array" && node.Child(0).Type() == "bare_symbol" && strings.Index(node.Child(0).Content(), "Var_Arguments") == 0 {
 		param = &config.Param{
 			ArgumentsExtract: true,
+			// StringExtract:    true,
 		}
 		isTerminating = true
 		return

@@ -13,9 +13,9 @@ import (
 )
 
 type Holder struct {
-	detectors  map[string]detectorHolder // group datatypeHolders by name
-	config     settings.Config
-	isInternal bool
+	detectors    map[string]detectorHolder // group datatypeHolders by name
+	config       settings.Config
+	isInternal   bool
 	presentRisks map[string]*types.RiskDetection
 }
 
@@ -23,23 +23,25 @@ type detectorHolder struct {
 	id        string
 	datatypes map[string]*datatypeHolder // group detectors by detectorName
 }
+
 type datatypeHolder struct {
 	name         string
 	uuid         string
 	categoryUUID string
-	parent       *schema.Parent
-	files        map[string]*fileHolder // group files by filename
+	files        map[string]map[int]*fileHolder // group files by filename
 }
+
 type fileHolder struct {
 	name       string
-	lineNumber map[int]int
+	lineNumber int
+	parent     *schema.Parent
 }
 
 func New(config settings.Config, isInternal bool) *Holder {
 	return &Holder{
-		detectors:  make(map[string]detectorHolder),
-		config:     config,
-		isInternal: isInternal,
+		detectors:    make(map[string]detectorHolder),
+		config:       config,
+		isInternal:   isInternal,
 		presentRisks: make(map[string]*types.RiskDetection),
 	}
 }
@@ -55,7 +57,7 @@ func (holder *Holder) AddRiskPresence(detection detections.Detection) {
 
 	holder.presentRisks[ruleName].Locations = append(holder.presentRisks[ruleName].Locations, types.RiskDetectionLocation{
 		RiskLocation: &types.RiskLocation{
-			Filename: detection.Source.Filename,
+			Filename:   detection.Source.Filename,
 			LineNumber: *detection.Source.LineNumber,
 		},
 		Content: *detection.Source.Text,
@@ -98,14 +100,12 @@ func (holder *Holder) addDatatype(ruleName string, datatype *db.DataType, fileNa
 				name:         datatype.Name,
 				uuid:         datatype.UUID,
 				categoryUUID: datatype.CategoryUUID,
-				parent:       parent,
-				files:        make(map[string]*fileHolder),
+				files:        make(map[string]map[int]*fileHolder),
 			}
 		} else {
 			detector.datatypes[datatype.Name] = &datatypeHolder{
 				name:  datatype.Name,
-				files: make(map[string]*fileHolder),
-				// parent: parent,
+				files: make(map[string]map[int]*fileHolder),
 			}
 		}
 	}
@@ -113,14 +113,14 @@ func (holder *Holder) addDatatype(ruleName string, datatype *db.DataType, fileNa
 	detectorDatatype := detector.datatypes[datatype.Name]
 	// create file entry if it doesn't exist
 	if _, exists := detectorDatatype.files[fileName]; !exists {
-		detectorDatatype.files[fileName] = &fileHolder{
-			name:       fileName,
-			lineNumber: make(map[int]int),
-		}
+		detectorDatatype.files[fileName] = make(map[int]*fileHolder, 0)
 	}
 
-	detectorDatatype.files[fileName].lineNumber[lineNumber] = lineNumber
-
+	detectorDatatype.files[fileName][lineNumber] = &fileHolder{
+		name:       fileName,
+		lineNumber: lineNumber,
+		parent:     parent,
+	}
 }
 
 func (holder *Holder) ToDataFlow() []interface{} {
@@ -147,19 +147,18 @@ func (holder *Holder) ToDataFlow() []interface{} {
 				Name:         datatype.name,
 				UUID:         datatype.uuid,
 				CategoryUUID: datatype.categoryUUID,
-				Parent:       datatype.parent,
 				Stored:       stored,
 				Locations:    make([]types.RiskLocation, 0),
 			}
 
 			files := maputil.ToSortedSlice(datatype.files)
-			for _, file := range files {
-
-				lineNumbers := maputil.ToSortedSlice(file.lineNumber)
-				for _, lineNumber := range lineNumbers {
+			for _, locations := range files {
+				sortedLocations := maputil.ToSortedSlice(locations)
+				for _, location := range sortedLocations {
 					constructedDatatype.Locations = append(constructedDatatype.Locations, types.RiskLocation{
-						Filename:   file.name,
-						LineNumber: lineNumber,
+						Filename:   location.name,
+						LineNumber: location.lineNumber,
+						Parent:     location.parent,
 					})
 				}
 			}

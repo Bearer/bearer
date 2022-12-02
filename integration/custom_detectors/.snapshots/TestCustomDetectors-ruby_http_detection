@@ -1,0 +1,196 @@
+data_types:
+    - name: Ethnic Origin
+      detectors:
+        - name: ruby
+          locations:
+            - filename: testdata/ruby/ruby_http_detection.rb
+              line_number: 3
+    - name: Firstname
+      detectors:
+        - name: ruby
+          locations:
+            - filename: testdata/ruby/ruby_http_detection.rb
+              line_number: 6
+            - filename: testdata/ruby/ruby_http_detection.rb
+              line_number: 12
+            - filename: testdata/ruby/ruby_http_detection.rb
+              line_number: 18
+            - filename: testdata/ruby/ruby_http_detection.rb
+              line_number: 19
+            - filename: testdata/ruby/ruby_http_detection.rb
+              line_number: 21
+            - filename: testdata/ruby/ruby_http_detection.rb
+              line_number: 24
+            - filename: testdata/ruby/ruby_http_detection.rb
+              line_number: 29
+            - filename: testdata/ruby/ruby_http_detection.rb
+              line_number: 39
+            - filename: testdata/ruby/ruby_http_detection.rb
+              line_number: 44
+            - filename: testdata/ruby/ruby_http_detection.rb
+              line_number: 61
+            - filename: testdata/ruby/ruby_http_detection.rb
+              line_number: 70
+            - filename: testdata/ruby/ruby_http_detection.rb
+              line_number: 77
+            - filename: testdata/ruby/ruby_http_detection.rb
+              line_number: 94
+    - name: Lastname
+      detectors:
+        - name: ruby
+          locations:
+            - filename: testdata/ruby/ruby_http_detection.rb
+              line_number: 6
+            - filename: testdata/ruby/ruby_http_detection.rb
+              line_number: 12
+            - filename: testdata/ruby/ruby_http_detection.rb
+              line_number: 18
+            - filename: testdata/ruby/ruby_http_detection.rb
+              line_number: 21
+            - filename: testdata/ruby/ruby_http_detection.rb
+              line_number: 24
+            - filename: testdata/ruby/ruby_http_detection.rb
+              line_number: 29
+risks:
+    - detector_id: ruby_http_get_detection
+      data_types:
+        - name: Ethnic Origin
+          stored: false
+          locations:
+            - filename: testdata/ruby/ruby_http_detection.rb
+              line_number: 3
+              parent:
+                line_number: 94
+                content: HTTPX.get("http://my.api.com/users/search?first_name=#{user.first_name}")
+        - name: Firstname
+          stored: false
+          locations:
+            - filename: testdata/ruby/ruby_http_detection.rb
+              line_number: 6
+              parent:
+                line_number: 7
+                content: URI.encode_www_form(user_1)
+            - filename: testdata/ruby/ruby_http_detection.rb
+              line_number: 12
+              parent:
+                line_number: 3
+                content: URI("http://my.api.com/users/search?ethnic_origin=#{user.ethnic_origin}")
+            - filename: testdata/ruby/ruby_http_detection.rb
+              line_number: 19
+              parent:
+                line_number: 19
+                content: Curl.get("http://my.api.com/users/search?first_name=#{user_2.first_name}")
+            - filename: testdata/ruby/ruby_http_detection.rb
+              line_number: 39
+              parent:
+                line_number: 39
+                content: Typhoeus.get("http://my.api.com/users/search?first_name=#{user_2.first_name}")
+            - filename: testdata/ruby/ruby_http_detection.rb
+              line_number: 44
+              parent:
+                line_number: 44
+                content: HTTParty.get("http://my.api.com/users/search?first_name=#{user_2.first_name}")
+            - filename: testdata/ruby/ruby_http_detection.rb
+              line_number: 61
+              parent:
+                line_number: 61
+                content: HTTP.get("http://my.api.com/users/search?first_name=#{user_2.first_name}")
+            - filename: testdata/ruby/ruby_http_detection.rb
+              line_number: 70
+              parent:
+                line_number: 70
+                content: Excon.get("http://my.api.com/users/search?first_name=#{user_2.first_name}")
+            - filename: testdata/ruby/ruby_http_detection.rb
+              line_number: 77
+              parent:
+                line_number: 77
+                content: Faraday.get("http://my.api.com/users/search?first_name=#{user.first_name}")
+            - filename: testdata/ruby/ruby_http_detection.rb
+              line_number: 94
+              parent:
+                line_number: 94
+                content: HTTPX.get("http://my.api.com/users/search?first_name=#{user.first_name}")
+        - name: Lastname
+          stored: false
+          locations:
+            - filename: testdata/ruby/ruby_http_detection.rb
+              line_number: 6
+              parent:
+                line_number: 7
+                content: URI.encode_www_form(user_1)
+            - filename: testdata/ruby/ruby_http_detection.rb
+              line_number: 12
+              parent:
+                line_number: 94
+                content: HTTPX.get("http://my.api.com/users/search?first_name=#{user.first_name}")
+    - detector_id: ruby_http_post_detection
+      data_types:
+        - name: Ethnic Origin
+          stored: false
+          locations:
+            - filename: testdata/ruby/ruby_http_detection.rb
+              line_number: 3
+              parent:
+                line_number: 29
+                content: 'RestClient.post("http://my.api.com/users/create", { user: { first_name: "John", last_name: "Doe" } })'
+        - name: Firstname
+          stored: false
+          locations:
+            - filename: testdata/ruby/ruby_http_detection.rb
+              line_number: 6
+              parent:
+                line_number: 7
+                content: URI.encode_www_form(user_1)
+            - filename: testdata/ruby/ruby_http_detection.rb
+              line_number: 12
+              parent:
+                line_number: 12
+                content: 'Net::HTTP.post_form(uri, { user: { first_name: "John", last_name: "Doe" } })'
+            - filename: testdata/ruby/ruby_http_detection.rb
+              line_number: 21
+              parent:
+                line_number: 22
+                content: Curl.post("http://my.api.com/users/create", user_3)
+            - filename: testdata/ruby/ruby_http_detection.rb
+              line_number: 24
+              parent:
+                line_number: 24
+                content: 'Curl.post("http://my.api.com/users/create", { user: { first_name: "John", last_name: "Doe" } })'
+            - filename: testdata/ruby/ruby_http_detection.rb
+              line_number: 29
+              parent:
+                line_number: 29
+                content: 'RestClient.post("http://my.api.com/users/create", { user: { first_name: "John", last_name: "Doe" } })'
+        - name: Lastname
+          stored: false
+          locations:
+            - filename: testdata/ruby/ruby_http_detection.rb
+              line_number: 6
+              parent:
+                line_number: 7
+                content: URI.encode_www_form(user_1)
+            - filename: testdata/ruby/ruby_http_detection.rb
+              line_number: 12
+              parent:
+                line_number: 12
+                content: 'Net::HTTP.post_form(uri, { user: { first_name: "John", last_name: "Doe" } })'
+            - filename: testdata/ruby/ruby_http_detection.rb
+              line_number: 21
+              parent:
+                line_number: 22
+                content: Curl.post("http://my.api.com/users/create", user_3)
+            - filename: testdata/ruby/ruby_http_detection.rb
+              line_number: 24
+              parent:
+                line_number: 24
+                content: 'Curl.post("http://my.api.com/users/create", { user: { first_name: "John", last_name: "Doe" } })'
+            - filename: testdata/ruby/ruby_http_detection.rb
+              line_number: 29
+              parent:
+                line_number: 29
+                content: 'RestClient.post("http://my.api.com/users/create", { user: { first_name: "John", last_name: "Doe" } })'
+components: []
+
+
+--
+

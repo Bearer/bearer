@@ -7,6 +7,7 @@ type CompiledRule struct {
 	Tree                   string
 	Params                 []Param
 	Metavars               map[string]settings.MetaVar
+	Filters                []settings.PatternFilter
 	ParamParenting         bool
 	RootSingularize        bool
 	RootLowercase          bool
@@ -14,6 +15,16 @@ type CompiledRule struct {
 	Languages              []string
 	DetectPresence         bool
 	Pattern                string
+}
+
+func (rule *CompiledRule) GetParamByPatternName(name string) *Param {
+	for _, param := range rule.Params {
+		if param.PatternName == name {
+			return &param
+		}
+	}
+
+	return nil
 }
 
 type Param struct {
