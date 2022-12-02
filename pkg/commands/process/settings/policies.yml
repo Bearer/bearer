@@ -75,3 +75,12 @@ insecure_communication_processing_sensitive_data:
   modules:
     - path: policies/insecure_communication.rego
       name: bearer.insecure_communication
+insecure_ftp_processing_sensitive_data:
+  description: "Communication with insecure FTP in an application processing sensitive data"
+  name: "Insecure FTP"
+  id: "detect_rails_insecure_ftp"
+  query: |
+    medium = data.bearer.insecure_ftp.medium
+  modules:
+    - path: policies/insecure_ftp.rego
+      name: bearer.insecure_ftp

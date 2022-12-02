@@ -44,6 +44,9 @@ var configInsecureSMTP []byte
 //go:embed testdata/config/insecure_communication.yml
 var configInsecureCommunication []byte
 
+//go:embed testdata/config/insecure_ftp.yml
+var configInsecureFTP []byte
+
 func TestRailsSessionsJSON(t *testing.T) {
 	var rulesConfig map[string]settings.Rule
 
@@ -295,6 +298,35 @@ func TestInsecureCommunicationJSON(t *testing.T) {
 		Type:     detectorType,
 		Detector: detector}}
 	detectorReport := testhelper.Extract(t, filepath.Join("testdata", "ruby", "insecure_communication"), registrations, detectorType)
+
+	bytes, err := json.MarshalIndent(detectorReport.CustomDetections, "", " ")
+
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	cupaloy.SnapshotT(t, string(bytes))
+}
+
+func TestInsecureFTPJSON(t *testing.T) {
+	var rulesConfig map[string]settings.Rule
+
+	detector := custom.New(&nodeid.IntGenerator{Counter: 0})
+	err := yaml.Unmarshal(configInsecureFTP, &rulesConfig)
+	if err != nil {
+		t.Fatal(err)
+		return
+	}
+	customDetector := detector.(*custom.Detector)
+	err = customDetector.CompileRules(rulesConfig)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	var registrations = []detectors.InitializedDetector{{
+		Type:     detectorType,
+		Detector: detector}}
+	detectorReport := testhelper.Extract(t, filepath.Join("testdata", "ruby", "insecure_ftp"), registrations, detectorType)
 
 	bytes, err := json.MarshalIndent(detectorReport.CustomDetections, "", " ")
 
