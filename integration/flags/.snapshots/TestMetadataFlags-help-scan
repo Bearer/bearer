@@ -12,7 +12,7 @@ Examples:
 Scan Flags
       --context string                       Expand context of schema classification e.g., --context=health, to include data types particular to health
       --debug                                Enable debug logs
-      --disable-domain-resolution            Do not attempt to resolve detected domains during classification (default false), e.g. --disable-domain-resolution=true
+      --disable-domain-resolution            Do not attempt to resolve detected domains during classification (default false), e.g. --disable-domain-resolution=true (default true)
       --domain-resolution-timeout duration   Set timeout when attempting to resolve detected domains during classification (default 3 seconds), e.g. --domain-resolution-timeout=3s (default 3s)
       --internal-domains strings             Define regular expressions for better classification of private or unreachable domains e.g. --internal-domains="*.my-company.com,private.sh"
       --quiet                                Suppress non-essential messages
@@ -24,11 +24,11 @@ Policy Flags
 
 Worker Flags
       --existing-worker string              URL of an existing worker
-      --file-size-max int                   ignore files with file size larger than this config (default 25000000)
+      --file-size-max int                   ignore files with file size larger than this config (default 100000)
       --files-to-batch int                  number of files to batch to worker (default 1)
       --memory-max int                      if memory needed to scan a file surpasses this limit, skip the file (default 800000000)
       --timeout duration                    time allowed to complete scan (default 10m0s)
-      --timeout-file-max duration           maximum timeout assigned to scanning file, this config superseeds timeout-second-per-bytes (default 5m0s)
+      --timeout-file-max duration           maximum timeout assigned to scanning file, this config superseeds timeout-second-per-bytes (default 30s)
       --timeout-file-min duration           minimum timeout assigned to scanning file, this config superseeds timeout-second-per-bytes (default 5s)
       --timeout-file-second-per-bytes int   number of file size bytes producing a second of timeout assigned to scanning a file (default 10000)
       --timeout-worker-online duration      maximum time for worker process to come online (default 1m0s)

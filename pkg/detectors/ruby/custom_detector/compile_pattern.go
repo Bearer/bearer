@@ -37,8 +37,7 @@ func (detector *Detector) CompilePattern(
 	defer tree.Close()
 
 	rule := &config.CompiledRule{
-		Languages: []string{"ruby"},
-		Params:    make([]config.Param, 0),
+		Params: make([]config.Param, 0),
 	}
 
 	custom.GenerateTreeSitterQuery(tree.RootNode().Child(0), idGenerator, rule, detector, false)

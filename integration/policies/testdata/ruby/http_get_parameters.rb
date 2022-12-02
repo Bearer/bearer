@@ -1,4 +1,4 @@
-uri = URI("http://my.api.com/users/search?ethnic_origin=#{user.ethnic_origin}")
+uri = URI("http://my.api.com/users/search?ethnic_origin=#{user_1.ethnic_origin}")
 
 uri = URI('http://my.api.com/users/search')
 user = { first_name: "John", last_name: "Doe" }

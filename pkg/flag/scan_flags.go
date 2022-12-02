@@ -27,7 +27,7 @@ var (
 	DisableDomainResolutionFlag = Flag{
 		Name:       "disable-domain-resolution",
 		ConfigName: "scan.disable-domain-resolution",
-		Value:      false,
+		Value:      true,
 		Usage:      "Do not attempt to resolve detected domains during classification (default false), e.g. --disable-domain-resolution=true",
 	}
 	DomainResolutionTimeoutFlag = Flag{

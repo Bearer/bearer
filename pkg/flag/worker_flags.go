@@ -26,7 +26,7 @@ var (
 	TimeoutFileMaximumFlag = Flag{
 		Name:       "timeout-file-max",
 		ConfigName: "worker.timeout-file-max",
-		Value:      300 * time.Second, // 5 mins
+		Value:      30 * time.Second,
 		Usage:      "maximum timeout assigned to scanning file, this config superseeds timeout-second-per-bytes",
 	}
 	TimeoutFileSecondPerBytesFlag = Flag{
@@ -44,7 +44,7 @@ var (
 	FileSizeMaximumFlag = Flag{
 		Name:       "file-size-max",
 		ConfigName: "worker.file-size-max",
-		Value:      25 * 1000 * 1000, // 25 MB
+		Value:      100 * 1000, // 100 KB
 		Usage:      "ignore files with file size larger than this config",
 	}
 	FilesToBatchFlag = Flag{

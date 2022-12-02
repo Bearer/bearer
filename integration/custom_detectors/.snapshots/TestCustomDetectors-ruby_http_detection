@@ -60,8 +60,8 @@ risks:
             - filename: testdata/ruby/ruby_http_detection.rb
               line_number: 3
               parent:
-                line_number: 94
-                content: HTTPX.get("http://my.api.com/users/search?first_name=#{user.first_name}")
+                line_number: 7
+                content: URI.encode_www_form(user_1)
         - name: Firstname
           stored: false
           locations:
@@ -71,11 +71,6 @@ risks:
                 line_number: 7
                 content: URI.encode_www_form(user_1)
             - filename: testdata/ruby/ruby_http_detection.rb
-              line_number: 12
-              parent:
-                line_number: 3
-                content: URI("http://my.api.com/users/search?ethnic_origin=#{user.ethnic_origin}")
-            - filename: testdata/ruby/ruby_http_detection.rb
               line_number: 19
               parent:
                 line_number: 19
@@ -84,7 +79,7 @@ risks:
               line_number: 39
               parent:
                 line_number: 39
-                content: Typhoeus.get("http://my.api.com/users/search?first_name=#{user_2.first_name}")
+                content: Typhoeus.get("http://my.api.com/users/search?first_name=#{user_9.first_name}")
             - filename: testdata/ruby/ruby_http_detection.rb
               line_number: 44
               parent:
@@ -104,12 +99,12 @@ risks:
               line_number: 77
               parent:
                 line_number: 77
-                content: Faraday.get("http://my.api.com/users/search?first_name=#{user.first_name}")
+                content: Faraday.get("http://my.api.com/users/search?first_name=#{user_2.first_name}")
             - filename: testdata/ruby/ruby_http_detection.rb
               line_number: 94
               parent:
                 line_number: 94
-                content: HTTPX.get("http://my.api.com/users/search?first_name=#{user.first_name}")
+                content: HTTPX.get("http://my.api.com/users/search?first_name=#{user_2.first_name}")
         - name: Lastname
           stored: false
           locations:
@@ -122,7 +117,7 @@ risks:
               line_number: 12
               parent:
                 line_number: 94
-                content: HTTPX.get("http://my.api.com/users/search?first_name=#{user.first_name}")
+                content: HTTPX.get("http://my.api.com/users/search?first_name=#{user_2.first_name}")
     - detector_id: ruby_http_post_detection
       data_types:
         - name: Ethnic Origin
@@ -131,8 +126,8 @@ risks:
             - filename: testdata/ruby/ruby_http_detection.rb
               line_number: 3
               parent:
-                line_number: 29
-                content: 'RestClient.post("http://my.api.com/users/create", { user: { first_name: "John", last_name: "Doe" } })'
+                line_number: 7
+                content: URI.encode_www_form(user_1)
         - name: Firstname
           stored: false
           locations:
@@ -145,22 +140,22 @@ risks:
               line_number: 12
               parent:
                 line_number: 12
-                content: 'Net::HTTP.post_form(uri, { user: { first_name: "John", last_name: "Doe" } })'
+                content: 'Net::HTTP.post_form(uri, { user_2: { first_name: "John", last_name: "Doe" } })'
             - filename: testdata/ruby/ruby_http_detection.rb
               line_number: 21
               parent:
                 line_number: 22
-                content: Curl.post("http://my.api.com/users/create", user_3)
+                content: Curl.post("http://my.api.com/users/create", user_4)
             - filename: testdata/ruby/ruby_http_detection.rb
               line_number: 24
               parent:
                 line_number: 24
-                content: 'Curl.post("http://my.api.com/users/create", { user: { first_name: "John", last_name: "Doe" } })'
+                content: 'Curl.post("http://my.api.com/users/create", { user_5: { first_name: "John", last_name: "Doe" } })'
             - filename: testdata/ruby/ruby_http_detection.rb
               line_number: 29
               parent:
                 line_number: 29
-                content: 'RestClient.post("http://my.api.com/users/create", { user: { first_name: "John", last_name: "Doe" } })'
+                content: 'RestClient.post("http://my.api.com/users/create", { user_6: { first_name: "John", last_name: "Doe" } })'
         - name: Lastname
           stored: false
           locations:
@@ -173,22 +168,22 @@ risks:
               line_number: 12
               parent:
                 line_number: 12
-                content: 'Net::HTTP.post_form(uri, { user: { first_name: "John", last_name: "Doe" } })'
+                content: 'Net::HTTP.post_form(uri, { user_2: { first_name: "John", last_name: "Doe" } })'
             - filename: testdata/ruby/ruby_http_detection.rb
               line_number: 21
               parent:
                 line_number: 22
-                content: Curl.post("http://my.api.com/users/create", user_3)
+                content: Curl.post("http://my.api.com/users/create", user_4)
             - filename: testdata/ruby/ruby_http_detection.rb
               line_number: 24
               parent:
                 line_number: 24
-                content: 'Curl.post("http://my.api.com/users/create", { user: { first_name: "John", last_name: "Doe" } })'
+                content: 'Curl.post("http://my.api.com/users/create", { user_5: { first_name: "John", last_name: "Doe" } })'
             - filename: testdata/ruby/ruby_http_detection.rb
               line_number: 29
               parent:
                 line_number: 29
-                content: 'RestClient.post("http://my.api.com/users/create", { user: { first_name: "John", last_name: "Doe" } })'
+                content: 'RestClient.post("http://my.api.com/users/create", { user_6: { first_name: "John", last_name: "Doe" } })'
 components: []
 
 
