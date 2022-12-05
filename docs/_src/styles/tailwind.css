@@ -4,17 +4,15 @@
 
 @layer base {
   html {
-    scroll-padding-top:6.75rem;
+    scroll-padding-top: 6.75rem;
   }
 }
 
 @layer components {
-
   /* Layout */
   .content {
     width: calc(100%-13rem);
   }
-
 
   /* Custom Grid Elements */
 
@@ -31,7 +29,6 @@
   .btn-primary {
     @apply btn bg-gradient-to-b from-main-300 to-main-400 text-neutral-100;
   }
-
 
   .btn-ghost {
     @apply btn dark:text-neutral-100 text-black border-solid border-2 border-black dark:border-neutral-100;
@@ -64,7 +61,8 @@
       );
   }
 
-  .btn-fancy:hover, .btn-fancy-dark:hover {
+  .btn-fancy:hover,
+  .btn-fancy-dark:hover {
     @apply btn-primary;
   }
 
@@ -91,22 +89,26 @@
   }
 
   /* active page nav */
-  [aria-current='page'] {
+  [aria-current="page"] {
     @apply text-main dark:text-main-300 font-semibold;
   }
-
 
   .light-icon {
     display: inline-block;
   }
   .dark .light-icon {
-    display:none;
+    display: none;
   }
   .dark-icon {
-    display:none;
+    display: none;
   }
   .dark .dark-icon {
     display: inline-block;
   }
+}
 
+@layer utilities {
+  .open {
+    display: block;
+  }
 }

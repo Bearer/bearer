@@ -26,4 +26,17 @@
       document.documentElement.classList.add("dark");
     }
   }
+
+  // mobile nav open/close
+  const navButton = document.getElementById("toggle-nav");
+
+  navButton.addEventListener("click", () => {
+    document.querySelector("#doc-nav").classList.toggle("open");
+  });
+
+  // toc open/close mobile
+  const toggleToc = document.getElementById("js-toggle-toc");
+  toggleToc.addEventListener("click", () => {
+    document.querySelector("#toc-container").classList.toggle("open");
+  });
 })();

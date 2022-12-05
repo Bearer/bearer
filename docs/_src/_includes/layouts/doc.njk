@@ -2,8 +2,8 @@
 layout: layouts/base.njk
 ---
 {% set currentUrl = page.url %}
-<main class="max-w-6xl mx-auto sm:grid grid-cols-5 text-black dark:text-neutral-100 px-8 relative gap-4">
-	<nav class="self-start sticky top-[6.75rem] col-span-1">
+<main class="max-w-6xl mx-auto flex flex-col sm:grid grid-cols-5 text-black dark:text-neutral-100 px-8 relative gap-4">
+	<nav class="hidden sm:block self-start sticky top-[5.75rem] col-span-1  bg-white dark:bg-neutral-600 z-10 pb-4" id="doc-nav" >
 		<ul>
 			{% for heading in nav %}
 				<li class="mb-4">
@@ -19,23 +19,30 @@ layout: layouts/base.njk
 			{% endfor %}
 		</ul>
 	</nav>
-	<article class="prose prose-lg dark:prose-invert max-w-none col-span-3">
-		{{ content | safe }}
-	</article>
-	<aside class="self-start col-span-1 dark:text-neutral-200 hidden lg:block lg:sticky top-[6.75rem] text-sm border-solid border-2 p-4 border-neutral-200 dark:border-neutral-500 rounded-md">
-		<h2 class="font-bold text-md">On this page</h2>
-		<a href="#" class="hover:underline">Overview</a>
-		{{ content | toc | safe }}
-		<h2 class="mt-2 font-bold text-md">Contribute</h2>
-		<ul>
-			<li>
-				<a class="hover:underline" href="{{meta.sourcePath}}/blob/main/docs/{{ page.inputPath }}">Edit this page</a>
-			</li>
-			<li>
-				<a href="https://github.com/Bearer/curio/issues/new/choose" class="hover:underline">Leave feedback</a>
-			</li>
-		</ul>
-	</aside>
+	<div class="grid col-span-4 gap-4 grid-cols-4">
+
+		<article class="order-last md:order-first prose prose-lg dark:prose-invert max-w-none col-span-4 md:col-span-3">
+			{{ content | safe }}
+		</article>
+		<aside class="self-start col-span-4 md:col-span-1 dark:text-neutral-200 md:block md:sticky top-[5.75rem] text-sm border-solid border-2 p-4 border-neutral-200 dark:border-neutral-500 rounded-md">
+			<h2 class="font-bold text-md">On this page <button id="js-toggle-toc">Open</button>
+			</h2>
+			<div id="toc-container" class="reveal hidden md:block">
+
+				<a href="#" class="hover:underline">Overview</a>
+				{{ content | toc | safe }}
+				<h2 class="mt-2 font-bold text-md">Contribute</h2>
+				<ul>
+					<li>
+						<a class="hover:underline" href="{{meta.sourcePath}}/blob/main/docs/{{ page.inputPath }}">Edit this page</a>
+					</li>
+					<li>
+						<a href="https://github.com/Bearer/curio/issues/new/choose" class="hover:underline">Leave feedback</a>
+					</li>
+				</ul>
+			</div>
+		</aside>
+	</div>
 </main>
 <footer class="p-4 mt-4 text-center">
 	<nav></nav>
