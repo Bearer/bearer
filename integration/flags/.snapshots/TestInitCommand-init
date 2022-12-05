@@ -31,14 +31,14 @@ scan:
             type: risk
             languages:
                 - ruby
+            param_parenting: false
+            processors: []
             patterns:
                 - pattern: |
                     Rails.application.configure do
                       config.force_ssl = false
                     end
                   filters: []
-            param_parenting: false
-            processors: []
             root_singularize: false
             root_lowercase: false
             metavars: {}
@@ -278,12 +278,12 @@ scan:
             type: risk
             languages:
                 - ruby
+            param_parenting: false
+            processors: []
             patterns:
                 - pattern: |
                     $_.verify_mode = OpenSSL::SSL::VERIFY_NONE
                   filters: []
-            param_parenting: false
-            processors: []
             root_singularize: false
             root_lowercase: false
             metavars: {}
@@ -340,8 +340,8 @@ scan:
                             "category_group": category.group_name,
                             "filename": location.filename,
                             "line_number": location.line_number,
-                            "parent_line_number": data_type.parent.line_number,
-                            "parent_content": data_type.parent.content
+                            "parent_line_number": location.parent.line_number,
+                            "parent_content": location.parent.content
                         }
                     }
 
@@ -351,6 +351,41 @@ scan:
 
                     critical[item] {
                         item_in_data_category[[personal_data_group_uuid, item]]
+                    }
+        insecure_communication_processing_sensitive_data:
+            query: |
+                medium = data.bearer.insecure_communication.medium
+            id: detect_rails_insecure_communication
+            name: Insecure communication
+            description: Insecure communication in an application processing sensitive data
+            level: ""
+            modules:
+                - path: policies/insecure_communication.rego
+                  name: bearer.insecure_communication
+                  content: |
+                    package bearer.insecure_communication
+
+                    import future.keywords
+
+                    sensitive_data_group_uuid := "f6a0c071-5908-4420-bac2-bba28d41223e"
+
+                    medium[item] {
+                        some data_type in input.dataflow.data_types
+                        some data_category in input.data_categories
+                        data_category.uuid == data_type.category_uuid
+                        data_category.group_uuid == sensitive_data_group_uuid
+
+                        some detector in input.dataflow.risks
+                        detector.detector_id == input.policy_id
+
+                        location = detector.locations[_]
+                        item := {
+                          "category_group": data_category.group_name,
+                          "filename": location.filename,
+                          "line_number": location.line_number,
+                          "parent_line_number": location.parent.line_number,
+                          "parent_content": location.parent.content
+                        }
                     }
         insecure_smtp_processing_sensitive_data:
             query: |
@@ -367,17 +402,24 @@ scan:
 
                     import future.keywords
 
+                    sensitive_data_group_uuid := "f6a0c071-5908-4420-bac2-bba28d41223e"
+
                     medium[item] {
+                        some data_type in input.dataflow.data_types
+                        some data_category in input.data_categories
+                        data_category.uuid == data_type.category_uuid
+                        data_category.group_uuid == sensitive_data_group_uuid
+
                         some detector in input.dataflow.risks
                         detector.detector_id == input.policy_id
 
                         location = detector.locations[_]
                         item := {
-                            "category_group": "Insecure communication",
+                            "category_group": data_category.group_name,
                             "filename": location.filename,
                             "line_number": location.line_number,
-                            "parent_line_number": location.line_number,
-                            "parent_content": location.content
+                            "parent_line_number": location.parent.line_number,
+                            "parent_content": location.parent.content
                         }
                     }
         jwt_leaks:
@@ -553,6 +595,42 @@ scan:
                             "parent_line_number": location.parent.line_number,
                             "parent_content": location.parent.content
                         }
+                    }
+        ssl_certificate_verification_disabled:
+            query: |
+                medium = data.bearer.ssl_certificate_verification_disabled.medium
+            id: ssl_certificate_verification_disabled
+            name: SSL certificate verification disabled
+            description: SSL certificate verification disabled in an application processing sensitive data
+            level: ""
+            modules:
+                - path: policies/ssl_certificate_verification_disabled.rego
+                  name: bearer.ssl_certificate_verification_disabled
+                  content: |
+                    package bearer.ssl_certificate_verification_disabled
+
+                    import future.keywords
+
+                    sensitive_data_group_uuid := "f6a0c071-5908-4420-bac2-bba28d41223e"
+
+                    medium[item] {
+                      some data_type in input.dataflow.data_types
+
+                      some category in input.data_categories
+                      category.uuid == data_type.category_uuid
+                      category.group_uuid == sensitive_data_group_uuid
+
+                      some detector in input.dataflow.risks
+                      detector.detector_id == input.policy_id
+                      location = detector.locations[_]
+
+                      item = {
+                        "category_group": category.group_name,
+                        "filename": location.filename,
+                        "line_number": location.line_number,
+                        "parent_line_number": location.parent.line_number,
+                        "parent_content": location.parent.content
+                      }
                     }
     quiet: false
     skip-path: []
