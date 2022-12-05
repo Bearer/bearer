@@ -148,6 +148,34 @@ scan:
             stored: false
             detect_presence: false
             omit_parent: false
+        detect_ruby_third_party_data_send:
+            disabled: false
+            type: risk
+            languages:
+                - ruby
+            param_parenting: false
+            processors: []
+            patterns:
+                - pattern: |
+                    Sentry::Breadcrumb.new(<$ARGUMENT>)
+                  filters: []
+                - pattern: |
+                    Sentry.init do |config|
+                      config.before_breadcrumb = lambda do |breadcrumb, hint|
+                        breadcrumb.message = $ANYTHING
+                        breadcrumb
+                      end
+                    end
+                  filters: []
+                - pattern: |
+                    Sentry.set_user(<$ARGUMENT>)
+                  filters: []
+            root_singularize: false
+            root_lowercase: false
+            metavars: {}
+            stored: false
+            detect_presence: false
+            omit_parent: false
         detect_sql_create_public_table:
             disabled: false
             type: data_type
@@ -1042,6 +1070,79 @@ scan:
                   name: bearer.leakage
                   content: |
                     package bearer.leakage
+
+                    import data.bearer.common
+
+                    import future.keywords
+
+                    policy_breach contains item if {
+                        some detector in input.dataflow.risks
+                        detector.detector_id == input.policy_id
+
+                        data_type = detector.data_types[_]
+
+                        location = data_type.locations[_]
+                        item := {
+                            "category_groups": data.bearer.common.groups_for_datatype(data_type),
+                            "severity": data.bearer.common.severity_of_datatype(data_type),
+                            "filename": location.filename,
+                            "line_number": location.line_number,
+                            "parent_line_number": location.parent.line_number,
+                            "parent_content": location.parent.content
+                        }
+                    }
+        sending_data_in_category_to_third_party:
+            query: |
+                policy_breach = data.bearer.third_party_data_category.policy_breach
+            id: detect_ruby_third_party_data_send
+            name: Third-party data category exposure
+            description: Sending data in category to third party
+            level: ""
+            modules:
+                - path: policies/common.rego
+                  name: bearer.common
+                  content: |
+                    package bearer.common
+
+                    import future.keywords
+
+                    sensitive_data_group_uuid := "f6a0c071-5908-4420-bac2-bba28d41223e"
+                    personal_data_group_uuid := "e1d3135b-3c0f-4b55-abce-19f27a26cbb3"
+
+                    severity_of_datatype(data_type) := "critical" if {
+                        some category in input.data_categories
+                        category.uuid == data_type.category_uuid
+
+                        some group in category.groups
+                        group.uuid == sensitive_data_group_uuid
+                    }
+
+                    severity_of_datatype(data_type) := "high" if {
+                        some category in input.data_categories
+                        category.uuid == data_type.category_uuid
+
+                        some group in category.groups
+                        group.uuid == personal_data_group_uuid
+
+                        every group_1 in category.groups {
+                            group_1.uuid != sensitive_data_group_uuid
+                        }
+                    }
+
+                    groups_for_datatype(data_type) := x if {
+                        some category in input.data_categories
+                        category.uuid == data_type.category_uuid
+
+                        x := {name | name := category.groups[_].name}
+                    }
+
+                    groups_for_datatypes(data_types) := groups if {
+                        groups := {name | name := groups_for_datatype(data_types[_])[_]}
+                    }
+                - path: policies/third_party_data_category.rego
+                  name: bearer.third_party_data_category
+                  content: |
+                    package bearer.third_party_data_category
 
                     import data.bearer.common
 
