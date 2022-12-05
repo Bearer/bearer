@@ -15,6 +15,8 @@ data_types:
               line_number: 5
             - filename: testdata/ruby/detect_rails_cookies.rb
               line_number: 8
+            - filename: testdata/ruby/detect_rails_cookies.rb
+              line_number: 11
     - name: Fullname
       detectors:
         - name: ruby
@@ -25,6 +27,12 @@ data_types:
               line_number: 4
             - filename: testdata/ruby/detect_rails_cookies.rb
               line_number: 7
+    - name: Lastname
+      detectors:
+        - name: ruby
+          locations:
+            - filename: testdata/ruby/detect_rails_cookies.rb
+              line_number: 12
     - name: Username
       detectors:
         - name: ruby
@@ -32,7 +40,7 @@ data_types:
             - filename: testdata/ruby/detect_rails_cookies.rb
               line_number: 2
             - filename: testdata/ruby/detect_rails_cookies.rb
-              line_number: 11
+              line_number: 17
 risks:
     - detector_id: detect_rails_cookies
       data_types:
@@ -42,29 +50,37 @@ risks:
             - filename: testdata/ruby/detect_rails_cookies.rb
               line_number: 3
               parent:
-                line_number: 3
-                content: cookies.signed[:user_email] = current_user.email
+                line_number: 8
+                content: cookies.signed.permanent[:first_name] = user.first_name
         - name: Firstname
           stored: false
           locations:
             - filename: testdata/ruby/detect_rails_cookies.rb
               line_number: 5
               parent:
-                line_number: 3
-                content: cookies.signed[:user_email] = current_user.email
+                line_number: 8
+                content: cookies.signed.permanent[:first_name] = user.first_name
+            - filename: testdata/ruby/detect_rails_cookies.rb
+              line_number: 11
+              parent:
+                line_number: 14
+                content: 'cookies[:login] = { value: user_1.to_json, expires: 1.hour, secure: true }'
         - name: Fullname
           stored: false
           locations:
             - filename: testdata/ruby/detect_rails_cookies.rb
               line_number: 2
               parent:
-                line_number: 2
-                content: cookies[:user_name] = user.name
+                line_number: 8
+                content: cookies.signed.permanent[:first_name] = user.first_name
+        - name: Lastname
+          stored: false
+          locations:
             - filename: testdata/ruby/detect_rails_cookies.rb
-              line_number: 4
+              line_number: 12
               parent:
-                line_number: 7
-                content: cookies.permanent.encrypted[:full_name] = customer.name
+                line_number: 14
+                content: 'cookies[:login] = { value: user_1.to_json, expires: 1.hour, secure: true }'
 components: []
 
 
