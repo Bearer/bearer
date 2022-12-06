@@ -4,6 +4,7 @@ high:
       line_number: 1
       filename: testdata/policies/users.rb
       category_groups:
+        - PHI
         - PII
       parent_line_number: 1
       parent_content: logger.info(user.address)
