@@ -50,16 +50,16 @@ risks:
             - filename: testdata/ruby/detect_rails_cookies.rb
               line_number: 3
               parent:
-                line_number: 8
-                content: cookies.signed.permanent[:first_name] = user.first_name
+                line_number: 4
+                content: cookies.encrypted[:full_name] = user.name
         - name: Firstname
           stored: false
           locations:
             - filename: testdata/ruby/detect_rails_cookies.rb
               line_number: 5
               parent:
-                line_number: 8
-                content: cookies.signed.permanent[:first_name] = user.first_name
+                line_number: 4
+                content: cookies.encrypted[:full_name] = user.name
             - filename: testdata/ruby/detect_rails_cookies.rb
               line_number: 11
               parent:
@@ -71,8 +71,8 @@ risks:
             - filename: testdata/ruby/detect_rails_cookies.rb
               line_number: 2
               parent:
-                line_number: 8
-                content: cookies.signed.permanent[:first_name] = user.first_name
+                line_number: 4
+                content: cookies.encrypted[:full_name] = user.name
         - name: Lastname
           stored: false
           locations:

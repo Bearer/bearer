@@ -36,9 +36,10 @@ cookie_leaks:
   name: "Cookie leaking"
   id: "detect_rails_cookies"
   query: |
-    critical = data.bearer.leakage.critical
-    high = data.bearer.leakage.high
+    policy_breach = data.bearer.leakage.policy_breach
   modules:
+    - path: policies/common.rego
+      name: bearer.common
     - path: policies/leakage.rego
       name: bearer.leakage
 ssl_certificate_verification_disabled:
