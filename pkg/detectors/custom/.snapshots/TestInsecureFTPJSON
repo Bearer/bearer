@@ -8,11 +8,27 @@
    "language_type": "programming",
    "line_number": 5,
    "column_number": 7,
-   "text": "Net::FTP::new()\n"
+   "text": "Net::FTP.new()\n"
   },
   "value": {
    "line_number": 5,
-   "content": "Net::FTP::new(\"ftp.ruby-lang.org\")"
+   "content": "Net::FTP.new(\"ftp.ruby-lang.org\")"
+  }
+ },
+ {
+  "type": "custom_risk",
+  "detector_type": "detect_rails_insecure_ftp",
+  "source": {
+   "filename": "config.rb",
+   "language": "Ruby",
+   "language_type": "programming",
+   "line_number": 12,
+   "column_number": 1,
+   "text": "Net::FTP.open()\n"
+  },
+  "value": {
+   "line_number": 12,
+   "content": "Net::FTP.open('example.com') do |ftp|\n  ftp.login\n  files = ftp.chdir('pub/lang/ruby/contrib')\n  files = ftp.list('n*')\n  ftp.getbinaryfile('nif.rb-0.91.gz', 'nif.gz', 1024)\nend"
   }
  }
 ]
