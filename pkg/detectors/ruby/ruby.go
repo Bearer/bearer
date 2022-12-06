@@ -71,7 +71,7 @@ func (detector *detector) ProcessFile(file *file.FileInfo, dir *file.Path, repor
 	}
 	defer tree.Close()
 
-	if err := annotate(tree); err != nil {
+	if err := Annotate(tree); err != nil {
 		return false, err
 	}
 
@@ -91,7 +91,7 @@ func (detector *detector) ProcessFile(file *file.FileInfo, dir *file.Path, repor
 	return true, nil
 }
 
-func annotate(tree *parser.Tree) error {
+func Annotate(tree *parser.Tree) error {
 	if err := annotateEnvironmentVariables(tree); err != nil {
 		return err
 	}

@@ -19,6 +19,7 @@ type CompiledRule struct {
 	Language               string
 	DetectPresence         bool
 	Pattern                string
+	OmitParent             bool
 }
 
 func (rule *CompiledRule) GetParamByPatternName(name string) *Param {
@@ -40,6 +41,7 @@ type Param struct {
 	ArgumentsExtract bool   `yaml:"arguments_extract"`
 	ClassNameExtract bool   `yaml:"class_name_extract"`
 	MatchAnything    bool   `yaml:"match_anything"`
+	MatchInsecureUrl bool   `yaml:"match_insecure_url"`
 }
 
 func (param *Param) BuildFullName() string {

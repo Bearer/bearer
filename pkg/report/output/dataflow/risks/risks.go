@@ -187,6 +187,10 @@ func (holder *Holder) ToDataFlow() []interface{} {
 }
 
 func extractCustomRiskParent(value interface{}) *schema.Parent {
+	if value == nil {
+		return nil
+	}
+
 	var parent schema.Parent
 	buf := bytes.NewBuffer(nil)
 	err := json.NewEncoder(buf).Encode(value)

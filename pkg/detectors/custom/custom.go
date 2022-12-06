@@ -33,6 +33,8 @@ import (
 	"github.com/smacker/go-tree-sitter/ruby"
 )
 
+var insecureUrlPattern = regexp.MustCompile(`^http[^s]`)
+
 type Detector struct {
 	idGenerator        nodeid.Generator
 	paramIdGenerator   nodeid.Generator
@@ -90,6 +92,7 @@ func (detector *Detector) CompileRules(rulesConfig map[string]settings.Rule) err
 				compiledRule.DetectPresence = rule.DetectPresence
 				compiledRule.Pattern = rulePattern.Pattern
 				compiledRule.Filters = rulePattern.Filters
+				compiledRule.OmitParent = rule.OmitParent
 
 				detector.rulesGroupedByLang[lang] = append(detector.rulesGroupedByLang[lang], compiledRule)
 			}
@@ -117,6 +120,15 @@ func (detector *Detector) ProcessFile(file *file.FileInfo, dir *file.Path, repor
 			return false, err
 		}
 
+		langDetector, err := detector.forLanguage(lang)
+		if err != nil {
+			return false, err
+		}
+
+		if err := langDetector.Annotate(tree); err != nil {
+			return false, err
+		}
+
 		var variableReconciliation *parserdatatype.ReconciliationRequest
 
 		for _, rule := range rules {
@@ -139,23 +151,28 @@ func (detector *Detector) ProcessFile(file *file.FileInfo, dir *file.Path, repor
 	return false, nil
 }
 
+func (detector *Detector) forLanguage(lang string) (language.Detector, error) {
+	switch lang {
+	case "ruby":
+		return detector.Ruby, nil
+	case "sql":
+		return detector.Sql, nil
+	default:
+		return nil, fmt.Errorf("unsupported language %s", lang)
+	}
+}
+
 func (detector *Detector) compileRule(
 	rulePattern settings.RulePattern,
 	lang string,
 	idGenerator nodeid.Generator,
 ) (config.CompiledRule, error) {
-	var rule config.CompiledRule
-	var err error
-
-	switch lang {
-	case "ruby":
-		rule, err = detector.Ruby.CompilePattern(rulePattern, detector.paramIdGenerator)
-	case "sql":
-		rule, err = detector.Sql.CompilePattern(rulePattern, detector.paramIdGenerator)
-	default:
-		return config.CompiledRule{}, errors.New("unsupported language")
+	langDetector, err := detector.forLanguage(lang)
+	if err != nil {
+		return config.CompiledRule{}, err
 	}
 
+	rule, err := langDetector.CompilePattern(rulePattern, detector.paramIdGenerator)
 	if err != nil {
 		return config.CompiledRule{}, err
 	}
@@ -198,19 +215,6 @@ func (detector *Detector) executeRule(rule config.CompiledRule, tree *parser.Tre
 		return err
 	}
 
-	if rule.DetectPresence {
-		for _, capture := range filteredCaptures {
-			content := capture["rule"].Source(false)
-			content.Text = &rule.Pattern
-			parent := capture["rule"].Parent().Source(true)
-			report.AddDetection(detections.TypeCustomRisk, detectors.Type(rule.RuleName), content, schema.Parent{
-				LineNumber: *parent.LineNumber,
-				Content:    *parent.Text,
-			})
-		}
-		return nil
-	}
-
 	err = detector.extractData(filteredCaptures, rule, report, rule.Language, idGenerator, variableReconciliation)
 	if err != nil {
 		return err
@@ -227,9 +231,25 @@ func (detector *Detector) extractData(captures []parser.Captures, rule config.Co
 			continue
 		}
 
+		reject := false
+
 		for _, param := range rule.Params {
 			var paramTypes map[parser.NodeID]*schemadatatype.DataType
 			var err error
+
+			if param.MatchInsecureUrl {
+				matchNode := capture[param.BuildFullName()]
+				value := matchNode.Value()
+
+				if value != nil && !insecureUrlPattern.MatchString(value.ToString()) {
+					reject = true
+					break
+				}
+			}
+
+			if rule.DetectPresence {
+				continue
+			}
 
 			if param.ArgumentsExtract || param.ClassNameExtract {
 				paramTypes, err = detector.extractArguments(lang, capture[param.BuildFullName()], idGenerator, variableReconciliation)
@@ -298,6 +318,27 @@ func (detector *Detector) extractData(captures []parser.Captures, rule config.Co
 					}
 				}
 			}
+		}
+
+		if reject {
+			continue
+		}
+
+		if rule.DetectPresence {
+			content := capture["rule"].Source(false)
+			content.Text = &rule.Pattern
+
+			var parent *schema.Parent
+			if !rule.OmitParent {
+				parentSource := capture["rule"].Source(true)
+				parent = &schema.Parent{
+					LineNumber: *parentSource.LineNumber,
+					Content:    *parentSource.Text,
+				}
+			}
+			report.AddDetection(detections.TypeCustomRisk, detectors.Type(rule.RuleName), content, parent)
+
+			continue
 		}
 
 		detector.applyDatatypeTransformations(rule, forExport)

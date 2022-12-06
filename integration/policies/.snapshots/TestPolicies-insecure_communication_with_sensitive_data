@@ -1,32 +1,4 @@
-medium:
-    - policy_name: Insecure communication
-      policy_description: Insecure communication in an application processing sensitive data
-      line_number: 8
-      filename: testdata/ruby/insecure_communication/with_sensitive_data.rb
-      category_groups:
-        - PII
-        - Sensitive data
-      parent_line_number: 1
-      parent_content: |-
-        # Insecure communication
-
-        class User
-          attr_reader :name, :email, :password, :ethnicity
-        end
-
-        # Should match
-        Rails.application.configure do
-          config.force_ssl = false
-        end
-
-        # Should not match
-        Rails.application.configure do
-          config.force_ssl = true
-        end
-
-        Rails.application.configure do
-          # config.force_ssl = false
-        end
+{}
 
 
 --

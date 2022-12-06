@@ -13,6 +13,7 @@ type Detector interface {
 	ExtractArguments(node *parser.Node, idGenerator nodeid.Generator, variableReconciliation *parserdatatype.ReconciliationRequest) (map[parser.NodeID]*datatype.DataType, error)
 	CompilePattern(rulePattern settings.RulePattern, idGenerator nodeid.Generator) (config.CompiledRule, error)
 	IsParam(node *parser.Node) (bool, bool, *config.Param)
+	Annotate(tree *parser.Tree) error
 }
 
 func GenerateTreeSitterQuery(node *parser.Node, idGenerator nodeid.Generator, rule *config.CompiledRule, detector Detector, isChild bool) {

@@ -8,3 +8,4 @@ detect_rails_insecure_communication:
   languages:
     - ruby
   detect_presence: true
+  omit_parent: true

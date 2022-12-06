@@ -10,10 +10,7 @@
    "column_number": 1,
    "text": "Rails.application.configure do\n  config.action_mailer.smtp_settings = {\n    openssl_verify_mode: OpenSSL::SSL::VERIFY_NONE\n  }\nend\n"
   },
-  "value": {
-   "line_number": 1,
-   "content": "# Insecure SMTP\n## Detected\nRails.application.configure do\n  config.action_mailer.smtp_settings = {\n    openssl_verify_mode: OpenSSL::SSL::VERIFY_NONE\n  }\nend\n\nRails.application.configure do\n  config.action_mailer.smtp_settings = {\n    openssl_verify_mode: \"none\"\n  }\nend\n\n## Not Detected\nRails.application.configure do\n  config.action_mailer.smtp_settings = {\n    openssl_verify_mode: OpenSSL::SSL::VERIFY_PEER\n  }\nend\n\nRails.application.configure do\n  config.action_mailer.smtp_settings = {\n    openssl_verify_mode: \"peer\"\n  }\nend"
-  }
+  "value": null
  },
  {
   "type": "custom_risk",
@@ -26,9 +23,6 @@
    "column_number": 1,
    "text": "Rails.application.configure do\n  config.action_mailer.smtp_settings = {\n    openssl_verify_mode: \"none\"\n  }\nend\n"
   },
-  "value": {
-   "line_number": 1,
-   "content": "# Insecure SMTP\n## Detected\nRails.application.configure do\n  config.action_mailer.smtp_settings = {\n    openssl_verify_mode: OpenSSL::SSL::VERIFY_NONE\n  }\nend\n\nRails.application.configure do\n  config.action_mailer.smtp_settings = {\n    openssl_verify_mode: \"none\"\n  }\nend\n\n## Not Detected\nRails.application.configure do\n  config.action_mailer.smtp_settings = {\n    openssl_verify_mode: OpenSSL::SSL::VERIFY_PEER\n  }\nend\n\nRails.application.configure do\n  config.action_mailer.smtp_settings = {\n    openssl_verify_mode: \"peer\"\n  }\nend"
-  }
+  "value": null
  }
 ]

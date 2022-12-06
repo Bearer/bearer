@@ -26,6 +26,7 @@ scan:
             metavars: {}
             stored: false
             detect_presence: false
+            omit_parent: false
         detect_rails_insecure_communication:
             disabled: false
             type: risk
@@ -44,6 +45,7 @@ scan:
             metavars: {}
             stored: false
             detect_presence: true
+            omit_parent: true
         detect_rails_insecure_ftp:
             disabled: false
             type: risk
@@ -53,13 +55,14 @@ scan:
             processors: []
             patterns:
                 - pattern: |
-                    Net::FTP::new
+                    Net::FTP::new()
                   filters: []
             root_singularize: false
             root_lowercase: false
             metavars: {}
             stored: false
             detect_presence: true
+            omit_parent: false
         detect_rails_insecure_smtp:
             disabled: false
             type: risk
@@ -87,6 +90,7 @@ scan:
             metavars: {}
             stored: false
             detect_presence: true
+            omit_parent: true
         detect_rails_jwt:
             disabled: false
             type: risk
@@ -103,6 +107,7 @@ scan:
             metavars: {}
             stored: false
             detect_presence: false
+            omit_parent: false
         detect_rails_session:
             disabled: false
             type: risk
@@ -119,6 +124,7 @@ scan:
             metavars: {}
             stored: false
             detect_presence: false
+            omit_parent: false
         detect_ruby_logger:
             disabled: false
             type: risk
@@ -138,6 +144,7 @@ scan:
             metavars: {}
             stored: false
             detect_presence: false
+            omit_parent: false
         detect_sql_create_public_table:
             disabled: false
             type: data_type
@@ -196,6 +203,7 @@ scan:
             metavars: {}
             stored: false
             detect_presence: false
+            omit_parent: false
         ruby_file_detection:
             disabled: false
             type: risk
@@ -225,6 +233,7 @@ scan:
             metavars: {}
             stored: false
             detect_presence: false
+            omit_parent: false
         ruby_http_get_detection:
             disabled: false
             type: risk
@@ -257,6 +266,37 @@ scan:
             metavars: {}
             stored: false
             detect_presence: false
+            omit_parent: false
+        ruby_http_get_insecure:
+            disabled: false
+            type: risk
+            languages:
+                - ruby
+            param_parenting: false
+            processors: []
+            patterns:
+                - pattern: |
+                    URI(<$INSECURE_URL>)
+                  filters: []
+                - pattern: |
+                    $CLIENT.get(<$INSECURE_URL>)
+                  filters:
+                    - variable: CLIENT
+                      values:
+                        - Curl
+                        - Excon
+                        - Faraday
+                        - HTTP
+                        - HTTParty
+                        - HTTPX
+                        - RestClient
+                        - Typhoeus
+            root_singularize: false
+            root_lowercase: false
+            metavars: {}
+            stored: false
+            detect_presence: true
+            omit_parent: false
         ruby_http_post_detection:
             disabled: false
             type: risk
@@ -289,6 +329,7 @@ scan:
             metavars: {}
             stored: false
             detect_presence: false
+            omit_parent: false
         ssl_certificate_verification_disabled:
             disabled: false
             type: risk
@@ -305,6 +346,7 @@ scan:
             metavars: {}
             stored: false
             detect_presence: true
+            omit_parent: false
     debug: false
     disable-domain-resolution: true
     domain-resolution-timeout: 3s
@@ -610,6 +652,84 @@ scan:
 
                         some detector in input.dataflow.risks
                         detector.detector_id == input.policy_id
+
+                        location = detector.locations[_]
+                        item := {
+                            "category_groups": data.bearer.common.groups_for_datatype(data_type),
+                            "severity": "medium",
+                            "filename": location.filename,
+                            "line_number": location.line_number,
+                            "parent_line_number": location.parent.line_number,
+                            "parent_content": location.parent.content
+                        }
+                    }
+        insecure_http_get:
+            query: |
+                policy_breach = data.bearer.insecure_http_get.policy_breach
+            id: insecure_http_get
+            name: Insecure HTTP GET
+            description: Communicating with insecure HTTP GET in an application processing sensitive data
+            level: ""
+            modules:
+                - path: policies/common.rego
+                  name: bearer.common
+                  content: |-
+                    package bearer.common
+
+                    import future.keywords
+
+                    sensitive_data_group_uuid := "f6a0c071-5908-4420-bac2-bba28d41223e"
+                    personal_data_group_uuid := "e1d3135b-3c0f-4b55-abce-19f27a26cbb3"
+
+                    has_sensitive_data(data_type) := true if {
+                        some category in input.data_categories
+                        category.uuid == data_type.category_uuid
+
+                        some group in category.groups
+                        group.uuid == sensitive_data_group_uuid
+                    }
+
+                    severity_of_datatype(data_type) := "critical" if {
+                        some category in input.data_categories
+                        category.uuid == data_type.category_uuid
+
+                        some group in category.groups
+                        group.uuid == sensitive_data_group_uuid
+                    }
+
+                    severity_of_datatype(data_type) := "high" if {
+                        some category in input.data_categories
+                        category.uuid == data_type.category_uuid
+
+                        some group in category.groups
+                        group.uuid == personal_data_group_uuid
+
+                        every group_1 in category.groups {
+                            group_1.uuid != sensitive_data_group_uuid
+                        }
+                    }
+
+                    groups_for_datatype(data_type) := x if {
+                        some category in input.data_categories
+                        category.uuid == data_type.category_uuid
+
+                        x := {name | name := category.groups[_].name}
+                    }
+                - path: policies/insecure_http_get.rego
+                  name: bearer.insecure_http_get
+                  content: |
+                    package bearer.insecure_http_get
+
+                    import data.bearer.common
+
+                    import future.keywords
+
+                    policy_breach[item] {
+                        some data_type in input.dataflow.data_types
+                        data.bearer.common.has_sensitive_data(data_type)
+
+                        some detector in input.dataflow.risks
+                        detector.detector_id == "ruby_http_get_insecure"
 
                         location = detector.locations[_]
                         item := {

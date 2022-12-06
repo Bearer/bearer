@@ -22,11 +22,11 @@ type RiskLocation struct {
 }
 
 type RiskDetectionLocation struct {
-	*RiskLocation
-	Content string `json:"content" yaml:"content"`
+	*RiskLocation `json:",inline" yaml:",inline"`
+	Content       string `json:"content" yaml:"content"`
 }
 
 type RiskDetection struct {
-	DetectorID string         `json:"detector_id" yaml:"detector_id"`
+	DetectorID string                  `json:"detector_id" yaml:"detector_id"`
 	Locations  []RiskDetectionLocation `json:"locations" yaml:"locations"`
 }
