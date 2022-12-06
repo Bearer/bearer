@@ -3,7 +3,7 @@ layout: layouts/base.njk
 ---
 {% set currentUrl = page.url %}
 <main class="max-w-6xl mx-auto flex flex-col sm:grid grid-cols-5 text-black dark:text-neutral-100 px-8 relative gap-4">
-	<nav class="hidden sm:block self-start sticky top-[5.75rem] col-span-1  bg-white dark:bg-neutral-600 z-10 pb-4" id="doc-nav" >
+	<nav class="hidden sm:block self-start sticky self-stretch top-[5.75rem] col-span-1  bg-white dark:bg-neutral-600 z-10 pb-4" id="doc-nav" >
 		<ul>
 			{% for heading in nav %}
 				<li class="mb-4">
@@ -11,7 +11,7 @@ layout: layouts/base.njk
 					<ul class="ml-2">
 						{% for item in heading.items %}
 							<li>
-								<a class="hover:underline" {% if currentUrl === item.url %}aria-current="page" {% endif %} href="{{item.url}}">{{item.name}}</a>
+								<a class="hover:underline block" {% if currentUrl === item.url %}aria-current="page" {% endif %} href="{{item.url}}">{{item.name}}</a>
 							</li>
 						{% endfor %}
 					</ul>
@@ -24,10 +24,15 @@ layout: layouts/base.njk
 		<article class="order-last md:order-first prose prose-lg dark:prose-invert max-w-none col-span-4 md:col-span-3">
 			{{ content | safe }}
 		</article>
-		<aside class="self-start col-span-4 md:col-span-1 dark:text-neutral-200 md:block md:sticky top-[5.75rem] text-sm border-solid border-2 p-4 border-neutral-200 dark:border-neutral-500 rounded-md">
-			<h2 class="font-bold text-md">On this page <button id="js-toggle-toc">Open</button>
-			</h2>
-			<div id="toc-container" class="reveal hidden md:block">
+		<aside class="self-start col-span-3 sm:col-span-2 md:col-span-1 dark:text-neutral-200 md:block md:sticky top-[5.75rem] text-sm border-solid border-2 border-neutral-200 dark:border-neutral-500 rounded-md">
+			<div class="flex justify-between relative p-4">
+				<h2 class="font-bold text-md">On this page</h2>
+				<button id="js-toggle-toc" class="md:hidden absolute top-0 left-0 right-0 bottom-0 text-right flex justify-end items-center pr-3">
+					<span class="sr-only">Toggle menu</span>
+					<div class="">{% include 'icon-chevron.njk'%}</div>
+				</button>
+			</div>
+			<div id="toc-container" class="hidden md:block px-4 pb-4">
 
 				<a href="#" class="hover:underline">Overview</a>
 				{{ content | toc | safe }}

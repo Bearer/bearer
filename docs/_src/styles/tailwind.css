@@ -108,7 +108,24 @@
 }
 
 @layer utilities {
-  .open {
-    display: block;
+}
+
+.open {
+  display: block;
+}
+
+@media (max-width: 639px) {
+  #doc-nav.open {
+    @apply text-2xl;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    @apply px-8;
+    overflow-y: scroll;
   }
+}
+
+.flip {
+  transform: rotate(180deg);
 }

@@ -38,5 +38,6 @@
   const toggleToc = document.getElementById("js-toggle-toc");
   toggleToc.addEventListener("click", () => {
     document.querySelector("#toc-container").classList.toggle("open");
+    toggleToc.querySelector("div").classList.toggle("flip");
   });
 })();
