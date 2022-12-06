@@ -1,0 +1,18 @@
+[
+ {
+  "type": "custom_risk",
+  "detector_type": "detect_rails_insecure_ftp",
+  "source": {
+   "filename": "config.rb",
+   "language": "Ruby",
+   "language_type": "programming",
+   "line_number": 5,
+   "column_number": 7,
+   "text": "Net::FTP::new\n"
+  },
+  "value": {
+   "line_number": 5,
+   "content": "Net::FTP::new(\"ftp.ruby-lang.org\")"
+  }
+ }
+]

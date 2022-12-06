@@ -1,0 +1,8 @@
+detect_rails_insecure_ftp:
+  type: "risk"
+  patterns:
+    - |
+      Net::FTP::new
+  languages:
+    - ruby
+  detect_presence: true
