@@ -91,7 +91,9 @@ insecure_ftp_processing_sensitive_data:
   name: "Insecure FTP"
   id: "detect_rails_insecure_ftp"
   query: |
-    medium = data.bearer.insecure_ftp.medium
+    policy_breach = data.bearer.insecure_ftp.policy_breach
   modules:
+    - path: policies/common.rego
+      name: bearer.common
     - path: policies/insecure_ftp.rego
       name: bearer.insecure_ftp
