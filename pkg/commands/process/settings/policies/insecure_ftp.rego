@@ -4,7 +4,7 @@ import data.bearer.common
 
 import future.keywords
 
-policy_breach[item] {
+policy_breach contains item if {
     some data_type in input.dataflow.data_types
     data.bearer.common.has_sensitive_data(data_type)
 
@@ -13,7 +13,7 @@ policy_breach[item] {
 
     location = detector.locations[_]
     item := {
-        "category_groups": data.bearer.common.groups_for_datatype(data_type),
+        "category_groups": data.bearer.common.groups_for_datatypes(input.dataflow.data_types),
         "severity": "medium",
         "filename": location.filename,
         "line_number": location.line_number,

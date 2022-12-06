@@ -4,7 +4,9 @@ import (
 	"strings"
 
 	"github.com/bearer/curio/pkg/detectors/custom/config"
+	rubydetector "github.com/bearer/curio/pkg/detectors/ruby"
 	"github.com/bearer/curio/pkg/parser"
+
 	"github.com/smacker/go-tree-sitter/ruby"
 )
 
@@ -20,6 +22,16 @@ func (detector *Detector) IsParam(node *parser.Node) (isTerminating bool, should
 		param = &config.Param{
 			ArgumentsExtract: true,
 			MatchAnything:    true,
+		}
+
+		isTerminating = true
+		return
+	}
+
+	if strings.Index(nodeContent, "var_InsecureUrl") == 0 {
+		param = &config.Param{
+			MatchAnything:    true,
+			MatchInsecureUrl: true,
 		}
 
 		isTerminating = true
@@ -84,4 +96,8 @@ func (detector *Detector) IsParam(node *parser.Node) (isTerminating bool, should
 	}
 
 	return false, false, nil
+}
+
+func (detector *Detector) Annotate(tree *parser.Tree) error {
+	return rubydetector.Annotate(tree)
 }

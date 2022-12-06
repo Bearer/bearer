@@ -16,3 +16,4 @@ detect_rails_insecure_smtp:
   languages:
     - ruby
   detect_presence: true
+  omit_parent: true

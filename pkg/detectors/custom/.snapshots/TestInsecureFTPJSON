@@ -8,7 +8,7 @@
    "language_type": "programming",
    "line_number": 5,
    "column_number": 7,
-   "text": "Net::FTP::new\n"
+   "text": "Net::FTP::new()\n"
   },
   "value": {
    "line_number": 5,
