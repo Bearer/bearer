@@ -2,6 +2,15 @@
 
 Thanks for your interest in contributing. This guide will help you get started.
 
+- [Basics](#basics)
+- [Development](#development)
+  - [Installing Curio](#installing-curio)
+  - [Running Curio locally from source](#running-curio-locally-from-source)
+- [Testing](#testing)
+  - [Integration testing](#integration-testing)
+- [Generating CLI Documentation](#generating-cli-documentation)
+- [Submitting your changes as a pull request](#submitting-your-changes-as-a-pull-request)
+
 ## Basics
 
 If you've discovered a bug or thing you have and aren't sure how to fix it, [open an issue](https://github.com/Bearer/curio/issues/new/choose) with details on how to recreate the problem.
@@ -32,8 +41,7 @@ Next, navigate into the curio project in your terminal, and install the required
 go mod download
 ```
 
-<!-- TODO: Add details on building, running, etc from source. -->
-## Running Curio locally from source
+### Running Curio locally from source
 
 To run Curio from source use the following command from the curio directory:
 
