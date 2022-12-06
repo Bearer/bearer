@@ -62,15 +62,25 @@ type DataType struct {
 }
 
 type DataCategory struct {
-	Name      string `json:"name" yaml:"name"`
-	UUID      string `json:"uuid,omitempty" yaml:"uuid,omitempty"`
-	GroupUUID string `json:"group_uuid,omitempty" yaml:"group_uuid,omitempty"`
-	GroupName string `json:"group_name,omitempty" yaml:"group_name,omitempty"`
+	Name   string                       `json:"name" yaml:"name"`
+	UUID   string                       `json:"uuid" yaml:"uuid"`
+	Groups map[string]DataCategoryGroup `json:"groups" yaml:"groups"`
+}
+
+type DataCategoryGroup struct {
+	Name string `json:"name" yaml:"name"`
+	UUID string `json:"uuid,omitempty" yaml:"uuid,omitempty"`
 }
 
 type DataCategoryGrouping struct {
-	Groups          map[string]string       `json:"groups"`
-	CategoryMapping map[string]DataCategory `json:"category_mapping"`
+	Groups map[string]struct {
+		Name        string   `json:"name" yaml:"name"`
+		ParentUUIDs []string `json:"parent_uuids,omitempty" yaml:"parent_uuids,omitempty"`
+	} `json:"groups"`
+	CategoryMapping map[string]struct {
+		Name       string   `json:"name" yaml:"name"`
+		GroupUUIDs []string `json:"group_uuids" yaml:"group_uuids"`
+	} `json:"category_mapping"`
 }
 
 type ObjectType string
@@ -183,9 +193,23 @@ func defaultDataCategories() []DataCategory {
 			handleError(err)
 		}
 
+		// Add all category groups
+		dataCategory.Groups = make(map[string]DataCategoryGroup)
 		categoryFromMapping := dataCategoryGrouping.CategoryMapping[dataCategory.UUID]
-		dataCategory.GroupUUID = categoryFromMapping.GroupUUID
-		dataCategory.GroupName = dataCategoryGrouping.Groups[categoryFromMapping.GroupUUID]
+		for _, groupUUID := range categoryFromMapping.GroupUUIDs {
+			group := dataCategoryGrouping.Groups[groupUUID]
+			dataCategory.Groups[groupUUID] = DataCategoryGroup{
+				Name: group.Name,
+				UUID: groupUUID,
+			}
+			// add parent group if present
+			for _, parentUUID := range group.ParentUUIDs {
+				dataCategory.Groups[parentUUID] = DataCategoryGroup{
+					Name: group.Name,
+					UUID: parentUUID,
+				}
+			}
+		}
 
 		dataCategories = append(dataCategories, dataCategory)
 	}

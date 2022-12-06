@@ -29,21 +29,22 @@ type PolicyInput struct {
 }
 
 type PolicyOutput struct {
-	ParentLineNumber int    `json:"parent_line_number,omitempty" yaml:"parent_line_number,omitempty"`
-	ParentContent    string `json:"parent_content,omitempty" yaml:"parent_content,omitempty"`
-	LineNumber       int    `json:"line_number,omitempty" yaml:"line_number,omitempty"`
-	Filename         string `json:"filename,omitempty" yaml:"filename,omitempty"`
-	CategoryGroup    string `json:"category_group,omitempty" yaml:"category_group,omitempty"`
+	ParentLineNumber int      `json:"parent_line_number,omitempty" yaml:"parent_line_number,omitempty"`
+	ParentContent    string   `json:"parent_content,omitempty" yaml:"parent_content,omitempty"`
+	LineNumber       int      `json:"line_number,omitempty" yaml:"line_number,omitempty"`
+	Filename         string   `json:"filename,omitempty" yaml:"filename,omitempty"`
+	CategoryGroup    []string `json:"category_group,omitempty" yaml:"category_group,omitempty"`
+	Severity         string   `json:"severity,omitempty" yaml:"severity,omitempty"`
 }
 
 type PolicyResult struct {
-	PolicyName        string `json:"policy_name" yaml:"policy_name"`
-	PolicyDescription string `json:"policy_description" yaml:"policy_description"`
-	LineNumber        int    `json:"line_number,omitempty" yaml:"line_number,omitempty"`
-	Filename          string `json:"filename,omitempty" yaml:"filename,omitempty"`
-	CategoryGroup     string `json:"category_group,omitempty" yaml:"category_group,omitempty"`
-	ParentLineNumber  int    `json:"parent_line_number,omitempty" yaml:"parent_line_number,omitempty"`
-	ParentContent     string `json:"parent_content,omitempty" yaml:"parent_content,omitempty"`
+	PolicyName        string   `json:"policy_name" yaml:"policy_name"`
+	PolicyDescription string   `json:"policy_description" yaml:"policy_description"`
+	LineNumber        int      `json:"line_number,omitempty" yaml:"line_number,omitempty"`
+	Filename          string   `json:"filename,omitempty" yaml:"filename,omitempty"`
+	CategoryGroup     []string `json:"category_group,omitempty" yaml:"category_group,omitempty"`
+	ParentLineNumber  int      `json:"parent_line_number,omitempty" yaml:"parent_line_number,omitempty"`
+	ParentContent     string   `json:"parent_content,omitempty" yaml:"parent_content,omitempty"`
 }
 
 func GetOutput(dataflow *dataflow.DataFlow, config settings.Config) (map[string][]PolicyResult, error) {
@@ -69,31 +70,24 @@ func GetOutput(dataflow *dataflow.DataFlow, config settings.Config) (map[string]
 				return nil, err
 			}
 
-			var policyGrouping map[string][]PolicyOutput
-			err = json.Unmarshal(jsonRes, &policyGrouping)
+			var policyResults map[string][]PolicyOutput
+			err = json.Unmarshal(jsonRes, &policyResults)
 			if err != nil {
 				return nil, err
 			}
 
-			for _, severity := range []string{
-				settings.LevelCritical,
-				settings.LevelHigh,
-				settings.LevelMedium,
-				settings.LevelLow,
-			} {
-				for _, policyOutput := range policyGrouping[severity] {
-					policyResult := PolicyResult{
-						PolicyName:        policy.Name,
-						PolicyDescription: policy.Description,
-						Filename:          policyOutput.Filename,
-						LineNumber:        policyOutput.LineNumber,
-						CategoryGroup:     policyOutput.CategoryGroup,
-						ParentLineNumber:  policyOutput.ParentLineNumber,
-						ParentContent:     policyOutput.ParentContent,
-					}
-
-					result[severity] = append(result[severity], policyResult)
+			for _, policyOutput := range policyResults["policy_breach"] {
+				policyResult := PolicyResult{
+					PolicyName:        policy.Name,
+					PolicyDescription: policy.Description,
+					Filename:          policyOutput.Filename,
+					LineNumber:        policyOutput.LineNumber,
+					CategoryGroup:     policyOutput.CategoryGroup,
+					ParentLineNumber:  policyOutput.ParentLineNumber,
+					ParentContent:     policyOutput.ParentContent,
 				}
+
+				result[policyOutput.Severity] = append(result[policyOutput.Severity], policyResult)
 			}
 		}
 	}
@@ -202,7 +196,7 @@ func writeSummaryToString(
 func writePolicyBreachToString(reportStr *strings.Builder, policyBreach PolicyResult, policySeverity string) {
 	reportStr.WriteString("\n\n")
 	reportStr.WriteString(formatSeverity(policySeverity))
-	reportStr.WriteString(policyBreach.PolicyName + " policy breach with " + policyBreach.CategoryGroup + "\n")
+	reportStr.WriteString(policyBreach.PolicyName + " policy breach with " + strings.Join(policyBreach.CategoryGroup, ", ") + "\n")
 	reportStr.WriteString(color.HiBlackString(policyBreach.PolicyDescription + "\n"))
 	reportStr.WriteString("\n")
 	reportStr.WriteString(color.HiBlueString("File: " + underline(policyBreach.Filename+":"+fmt.Sprint(policyBreach.LineNumber)) + "\n"))

@@ -1,9 +1,10 @@
-critical:
+high:
     - policy_name: Logger leaking
       policy_description: Logger leaks detected
       line_number: 1
       filename: testdata/policies/users.rb
-      category_group: Personal data
+      category_group:
+        - PII
       parent_line_number: 1
       parent_content: logger.info(user.address)
 
