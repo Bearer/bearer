@@ -312,6 +312,85 @@ risks:
             content: HTTPX.get("http://my.api.com/users/1")
           content: |
             $CLIENT.get(<$INSECURE_URL>)
+    - detector_id: ruby_http_post_insecure
+      locations:
+        - filename: testdata/ruby/ruby_http_detection.rb
+          line_number: 24
+          parent:
+            line_number: 24
+            content: Curl.post("http://my.api.com/users/create", user_4)
+          content: |
+            $CLIENT.post(<$INSECURE_URL>)
+        - filename: testdata/ruby/ruby_http_detection.rb
+          line_number: 26
+          parent:
+            line_number: 26
+            content: 'Curl.post("http://my.api.com/users/create", { user_5: { first_name: "John", last_name: "Doe" } })'
+          content: |
+            $CLIENT.post(<$INSECURE_URL>)
+        - filename: testdata/ruby/ruby_http_detection.rb
+          line_number: 35
+          parent:
+            line_number: 35
+            content: 'RestClient.post("http://my.api.com/users/create", { user_6: { first_name: "John", last_name: "Doe" } })'
+          content: |
+            $CLIENT.post(<$INSECURE_URL>)
+        - filename: testdata/ruby/ruby_http_detection.rb
+          line_number: 41
+          parent:
+            line_number: 41
+            content: Typhoeus.post("http://my.api.com/users/create", options)
+          content: |
+            $CLIENT.post(<$INSECURE_URL>)
+        - filename: testdata/ruby/ruby_http_detection.rb
+          line_number: 43
+          parent:
+            line_number: 43
+            content: 'Typhoeus.post("http://my.api.com/users/create", { body: { user_8: { first_name: "John", last_name: "Doe" } } })'
+          content: |
+            $CLIENT.post(<$INSECURE_URL>)
+        - filename: testdata/ruby/ruby_http_detection.rb
+          line_number: 64
+          parent:
+            line_number: 64
+            content: HTTParty.post("http://my.api.com/users/create", params)
+          content: |
+            $CLIENT.post(<$INSECURE_URL>)
+        - filename: testdata/ruby/ruby_http_detection.rb
+          line_number: 66
+          parent:
+            line_number: 66
+            content: 'HTTParty.post("http://my.api.com/users/create", { body: { user: { first_name: "John", last_name: "Doe" } } })'
+          content: |
+            $CLIENT.post(<$INSECURE_URL>)
+        - filename: testdata/ruby/ruby_http_detection.rb
+          line_number: 75
+          parent:
+            line_number: 75
+            content: 'HTTP.post("http://my.api.com/users/create", form: { user_9: { first_name: "John", last_name: "Doe" } })'
+          content: |
+            $CLIENT.post(<$INSECURE_URL>)
+        - filename: testdata/ruby/ruby_http_detection.rb
+          line_number: 84
+          parent:
+            line_number: 84
+            content: 'Excon.post("http://my.api.com/users/create", body: { user_10: { first_name: "John", last_name: "Doe" } })'
+          content: |
+            $CLIENT.post(<$INSECURE_URL>)
+        - filename: testdata/ruby/ruby_http_detection.rb
+          line_number: 97
+          parent:
+            line_number: 97
+            content: Faraday.post("http://my.api.com/users/create", encoded_params)
+          content: |
+            $CLIENT.post(<$INSECURE_URL>)
+        - filename: testdata/ruby/ruby_http_detection.rb
+          line_number: 106
+          parent:
+            line_number: 106
+            content: 'HTTPX.post("http://my.api.com/users/create", json: { user_12: { first_name: "John", last_name: "Doe" } })'
+          content: |
+            $CLIENT.post(<$INSECURE_URL>)
 components: []
 
 
