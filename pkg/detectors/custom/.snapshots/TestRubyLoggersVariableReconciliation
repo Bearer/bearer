@@ -232,5 +232,23 @@
 			"field_type": "",
 			"field_type_simple": "unknown"
 		}
+	},
+	{
+		"type": "custom",
+		"detector_type": "detect_ruby_logger",
+		"source": {
+			"filename": "loggers.rb",
+			"language": "Ruby",
+			"language_type": "programming",
+			"line_number": 37,
+			"column_number": 47,
+			"text": null
+		},
+		"value": {
+			"object_name": "student",
+			"field_name": "email",
+			"field_type": "",
+			"field_type_simple": "unknown"
+		}
 	}
 ]

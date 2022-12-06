@@ -34,6 +34,7 @@ def saveUser(user)
         # custom detector matches
         logger.info("User email:", user)
         logger.info("Admin domain:", admin.email)
+        logger.info("student email:", student.email)
     end
 
     # we ignore adjecent scopes
