@@ -33,7 +33,7 @@ type PolicyOutput struct {
 	ParentContent    string   `json:"parent_content,omitempty" yaml:"parent_content,omitempty"`
 	LineNumber       int      `json:"line_number,omitempty" yaml:"line_number,omitempty"`
 	Filename         string   `json:"filename,omitempty" yaml:"filename,omitempty"`
-	CategoryGroup    []string `json:"category_group,omitempty" yaml:"category_group,omitempty"`
+	CategoryGroups   []string `json:"category_groups,omitempty" yaml:"category_groups,omitempty"`
 	Severity         string   `json:"severity,omitempty" yaml:"severity,omitempty"`
 }
 
@@ -42,7 +42,7 @@ type PolicyResult struct {
 	PolicyDescription string   `json:"policy_description" yaml:"policy_description"`
 	LineNumber        int      `json:"line_number,omitempty" yaml:"line_number,omitempty"`
 	Filename          string   `json:"filename,omitempty" yaml:"filename,omitempty"`
-	CategoryGroup     []string `json:"category_group,omitempty" yaml:"category_group,omitempty"`
+	CategoryGroups    []string `json:"category_groups,omitempty" yaml:"category_groups,omitempty"`
 	ParentLineNumber  int      `json:"parent_line_number,omitempty" yaml:"parent_line_number,omitempty"`
 	ParentContent     string   `json:"parent_content,omitempty" yaml:"parent_content,omitempty"`
 }
@@ -82,7 +82,7 @@ func GetOutput(dataflow *dataflow.DataFlow, config settings.Config) (map[string]
 					PolicyDescription: policy.Description,
 					Filename:          policyOutput.Filename,
 					LineNumber:        policyOutput.LineNumber,
-					CategoryGroup:     policyOutput.CategoryGroup,
+					CategoryGroups:    policyOutput.CategoryGroups,
 					ParentLineNumber:  policyOutput.ParentLineNumber,
 					ParentContent:     policyOutput.ParentContent,
 				}
@@ -196,7 +196,7 @@ func writeSummaryToString(
 func writePolicyBreachToString(reportStr *strings.Builder, policyBreach PolicyResult, policySeverity string) {
 	reportStr.WriteString("\n\n")
 	reportStr.WriteString(formatSeverity(policySeverity))
-	reportStr.WriteString(policyBreach.PolicyName + " policy breach with " + strings.Join(policyBreach.CategoryGroup, ", ") + "\n")
+	reportStr.WriteString(policyBreach.PolicyName + " policy breach with " + strings.Join(policyBreach.CategoryGroups, ", ") + "\n")
 	reportStr.WriteString(color.HiBlackString(policyBreach.PolicyDescription + "\n"))
 	reportStr.WriteString("\n")
 	reportStr.WriteString(color.HiBlueString("File: " + underline(policyBreach.Filename+":"+fmt.Sprint(policyBreach.LineNumber)) + "\n"))

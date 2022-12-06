@@ -3,7 +3,7 @@ critical:
       policy_description: Sending data as HTTP GET parameters
       line_number: 1
       filename: testdata/ruby/http_get_parameters.rb
-      category_group:
+      category_groups:
         - PII
         - Sensitive data
       parent_line_number: 1
@@ -13,7 +13,7 @@ high:
       policy_description: Sending data as HTTP GET parameters
       line_number: 4
       filename: testdata/ruby/http_get_parameters.rb
-      category_group:
+      category_groups:
         - PII
       parent_line_number: 5
       parent_content: URI.encode_www_form(user)
