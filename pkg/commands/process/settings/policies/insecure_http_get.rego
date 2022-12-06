@@ -4,7 +4,7 @@ import data.bearer.common
 
 import future.keywords
 
-policy_breach[item] {
+policy_breach contains item if {
     some data_type in input.dataflow.data_types
     data.bearer.common.has_sensitive_data(data_type)
 
