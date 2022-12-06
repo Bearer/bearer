@@ -55,7 +55,10 @@ scan:
             processors: []
             patterns:
                 - pattern: |
-                    Net::FTP::new()
+                    Net::FTP.new()
+                  filters: []
+                - pattern: |
+                    Net::FTP.open()
                   filters: []
             root_singularize: false
             root_lowercase: false
