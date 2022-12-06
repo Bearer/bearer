@@ -3,6 +3,7 @@ package risks
 import (
 	"bytes"
 	"encoding/json"
+	"sort"
 
 	"github.com/bearer/curio/pkg/classification/db"
 	"github.com/bearer/curio/pkg/commands/process/settings"
@@ -179,7 +180,9 @@ func (holder *Holder) ToDataFlow() []interface{} {
 		data = append(data, constructedDetector)
 	}
 
-	for _, presentRisk := range holder.presentRisks {
+	sortedRisks := maputil.ToSortedSlice(holder.presentRisks)
+	for _, presentRisk := range sortedRisks {
+		sortLocations(presentRisk)
 		data = append(data, presentRisk)
 	}
 
@@ -204,4 +207,49 @@ func extractCustomRiskParent(value interface{}) *schema.Parent {
 	}
 
 	return &parent
+}
+
+func sortLocations(risk *types.RiskDetection) {
+	sort.Slice(risk.Locations, func(i, j int) bool {
+		locationA := risk.Locations[i]
+		locationB := risk.Locations[j]
+
+		if locationA.Filename < locationB.Filename {
+			return true
+		}
+		if locationA.Filename > locationB.Filename {
+			return false
+		}
+
+		if locationA.LineNumber < locationB.LineNumber {
+			return true
+		}
+		if locationA.LineNumber > locationB.LineNumber {
+			return false
+		}
+
+		if locationA.Parent == nil && locationB.Parent != nil {
+			return true
+		}
+		if locationA.Parent != nil && locationB.Parent == nil {
+			return false
+		}
+		if locationA.Parent != nil {
+			if locationA.Parent.LineNumber < locationB.Parent.LineNumber {
+				return true
+			}
+			if locationA.Parent.LineNumber > locationB.Parent.LineNumber {
+				return false
+			}
+
+			if locationA.Parent.Content < locationB.Parent.Content {
+				return true
+			}
+			if locationA.Parent.Content > locationB.Parent.Content {
+				return false
+			}
+		}
+
+		return locationA.Content < locationB.Content
+	})
 }
