@@ -6,6 +6,7 @@ medium:
       category_groups:
         - PHI
         - PII
+      omit_parent: true
 
 
 --

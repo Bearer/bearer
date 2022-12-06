@@ -608,7 +608,8 @@ scan:
                           "category_groups": data.bearer.common.groups_for_datatypes(input.dataflow.data_types),
                           "severity": "medium",
                           "filename": location.filename,
-                          "line_number": location.line_number
+                          "line_number": location.line_number,
+                          "omit_parent": true
                         }
                     }
         insecure_ftp_processing_sensitive_data:
@@ -911,7 +912,9 @@ scan:
                         item := {
                             "category_groups": data.bearer.common.groups_for_datatypes(input.dataflow.data_types),
                             "severity": "medium",
-                            "line_number": location.line_number
+                            "filename": location.filename,
+                            "line_number": location.line_number,
+                            "omit_parent": true
                         }
                     }
         jwt_leaks:
