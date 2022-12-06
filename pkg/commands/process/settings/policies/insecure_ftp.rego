@@ -13,7 +13,7 @@ policy_breach[item] {
 
     location = detector.locations[_]
     item := {
-        "category_group": data.bearer.common.groups_for_datatype(data_type),
+        "category_groups": data.bearer.common.groups_for_datatype(data_type),
         "severity": "medium",
         "filename": location.filename,
         "line_number": location.line_number,

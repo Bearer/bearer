@@ -12,7 +12,7 @@ policy_breach contains item if {
 
     location = data_type.locations[_]
     item := {
-        "category_group": data.bearer.common.groups_for_datatype(data_type),
+        "category_groups": data.bearer.common.groups_for_datatype(data_type),
         "severity": data.bearer.common.severity_of_datatype(data_type),
         "filename": location.filename,
         "line_number": location.line_number,

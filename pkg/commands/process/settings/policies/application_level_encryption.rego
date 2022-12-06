@@ -13,7 +13,7 @@ policy_breach contains item if {
     not location.encrypted
 
     item := {
-        "category_group": data.bearer.common.groups_for_datatype(datatype),
+        "category_groups": data.bearer.common.groups_for_datatype(datatype),
         "severity": data.bearer.common.severity_of_datatype(datatype),
         "filename": location.filename,
         "line_number": location.line_number,

@@ -3,7 +3,7 @@ high:
       policy_description: Logger leaks detected
       line_number: 1
       filename: testdata/policies/users.rb
-      category_group:
+      category_groups:
         - PII
       parent_line_number: 1
       parent_content: logger.info(user.address)
