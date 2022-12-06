@@ -37,7 +37,8 @@
     "79a36d6e-c5ca-4f61-ba53-0d7ad42cbe5a": {
       "name": "Communication",
       "group_uuids": [
-        "172d90e3-cb9a-46b6-90e5-dd7169c3af54"
+        "172d90e3-cb9a-46b6-90e5-dd7169c3af54",
+        "247fa503-115b-490a-96e5-bcd357bd5686"
       ]
     },
     "b5a3b0fd-dd5c-420d-91ce-dd2dddc8cc38": {
@@ -49,7 +50,8 @@
     "cef587dd-76db-430b-9e18-7b031e1a193b": {
       "name": "Contact",
       "group_uuids": [
-        "172d90e3-cb9a-46b6-90e5-dd7169c3af54"
+        "172d90e3-cb9a-46b6-90e5-dd7169c3af54",
+        "247fa503-115b-490a-96e5-bcd357bd5686"
       ]
     },
     "4eda81b6-1314-47e2-bc4e-59d6024be4f4": {
@@ -93,7 +95,8 @@
     "14124881-6b92-4fc5-8005-ea7c1c09592e": {
       "name": "Identification",
       "group_uuids": [
-        "172d90e3-cb9a-46b6-90e5-dd7169c3af54"
+        "172d90e3-cb9a-46b6-90e5-dd7169c3af54",
+        "247fa503-115b-490a-96e5-bcd357bd5686"
       ]
     },
     "c6622b62-bc22-4c0c-a2e4-5fc97d99e11a": {
