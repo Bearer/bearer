@@ -1,10 +1,14 @@
 
 def saveUser(user)
     # we add this properties as they are in parent scope
-    user.email.username
-    user.race
+    user.email.username = "anon123"
+    user.sex = "male"
+    user.race.secondary = "hispanic"
+    admin.email.username = "admin123"
+    admin.isSuperUser = true
 
     def logUser
+        # not supported as we dont support hashes variable reconciliation
         address = {
             zip_code: "75000",
             address: "1 rue du Marché",
@@ -17,19 +21,19 @@ def saveUser(user)
 
         # we add this properties as they are in the same scope
         user = {
-            email: "user@example.com",
             first_name: "John",
             last_name: "Doe",
             address: address,
             phone_number: "555-1234-123",
         }
-        
-        logger.info("User info:", user)
-        logger.info("Employee info:", employee)
-        Rails.logger.info("User info:", user)
+
+        user.race.primary = "caucasian"
+        admin.email.domain = "domain.com"
+
 
         # custom detector matches
-        logger.info("User email:", user.email.domain)
+        logger.info("User email:", user)
+        logger.info("Admin domain:", admin.email)
     end
 
     # we ignore adjecent scopes
