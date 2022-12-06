@@ -13,10 +13,8 @@ policy_breach contains item if {
 
     location = detector.locations[_]
     item := {
-        "category_groups": data.bearer.common.groups_for_datatype(data_type),
+        "category_groups": data.bearer.common.groups_for_datatypes(input.dataflow.data_types),
         "severity": "medium",
-        "line_number": location.line_number,
-        "parent_line_number": location.parent.line_number,
-        "parent_content": location.parent.content
+        "line_number": location.line_number
     }
 }

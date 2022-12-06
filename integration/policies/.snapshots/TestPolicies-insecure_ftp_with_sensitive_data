@@ -4,6 +4,7 @@ medium:
       line_number: 10
       filename: testdata/ruby/insecure_ftp/with_sensitive_data.rb
       category_groups:
+        - PHI
         - PII
         - Sensitive data
       parent_line_number: 10

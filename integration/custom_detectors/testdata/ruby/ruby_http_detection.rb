@@ -108,3 +108,5 @@ HTTPX.post("http://my.api.com/users/create", json: { user_12: { first_name: "Joh
 HTTPX.get("http://my.api.com/users/search?first_name=#{user_2.first_name}")
 
 HTTPX.get("https://my.api.com/users/search?first_name=#{user_2.first_name}")
+
+HTTPX.get("http://my.api.com/users/1")
