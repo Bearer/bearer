@@ -15,7 +15,7 @@ The following is a catagorized list of the supported data types.
 {% for key, group in datatypes.output %}
   <h2 id="{{group.name | slugify}}">{{group.name}}</h2>
   {% for key, cat in group.categories %}
-    <h3 id="{{cat.name | slugify}}">{{cat.name}}</h3>
+    <h3 id="{{group.name | slugify}}-{{cat.name | slugify}}">{{cat.name}}</h3>
     <ul>
       {% for item in cat.types %}
         <li>{{item.name}}</li>

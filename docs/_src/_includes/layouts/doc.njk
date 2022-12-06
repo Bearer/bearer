@@ -20,11 +20,10 @@ layout: layouts/base.njk
 		</ul>
 	</nav>
 	<div class="grid col-span-4 gap-4 grid-cols-4">
-
 		<article class="order-last md:order-first prose prose-lg dark:prose-invert max-w-none col-span-4 md:col-span-3">
 			{{ content | safe }}
 		</article>
-		<aside class="self-start col-span-3 sm:col-span-2 md:col-span-1 dark:text-neutral-200 md:block md:sticky top-[5.75rem] text-sm border-solid border-2 border-neutral-200 dark:border-neutral-500 rounded-md">
+		<aside class="self-start col-span-3 sm:col-span-2 md:col-span-1 md:max-h-[80vh] overflow-y-scroll dark:text-neutral-200 md:block md:sticky top-[5.75rem] text-sm border-solid border-2 border-neutral-200 dark:border-neutral-500 rounded-md">
 			<div class="flex justify-between relative p-4">
 				<h2 class="font-bold text-md">On this page</h2>
 				<button id="js-toggle-toc" class="md:hidden absolute top-0 left-0 right-0 bottom-0 text-right flex justify-end items-center pr-3">
