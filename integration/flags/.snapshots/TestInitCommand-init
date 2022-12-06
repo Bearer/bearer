@@ -216,6 +216,14 @@ scan:
             processors: []
             patterns:
                 - pattern: |
+                    CSV.generate do
+                      <$DATA_TYPE>
+                    end
+                  filters: []
+                - pattern: |
+                    CSV.generate { <$DATA_TYPE> }
+                  filters: []
+                - pattern: |
                     CSV.open { <$DATA_TYPE> }
                   filters: []
                 - pattern: |
