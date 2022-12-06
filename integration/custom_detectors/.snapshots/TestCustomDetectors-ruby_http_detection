@@ -243,6 +243,13 @@ risks:
     - detector_id: ruby_http_get_insecure
       locations:
         - filename: testdata/ruby/ruby_http_detection.rb
+          line_number: 3
+          parent:
+            line_number: 3
+            content: URI("http://my.api.com/users/search?ethnic_origin=#{user_1.ethnic_origin}")
+          content: |
+            URI(<$INSECURE_URL>)
+        - filename: testdata/ruby/ruby_http_detection.rb
           line_number: 19
           parent:
             line_number: 19
@@ -299,12 +306,12 @@ risks:
           content: |
             $CLIENT.get(<$INSECURE_URL>)
         - filename: testdata/ruby/ruby_http_detection.rb
-          line_number: 3
+          line_number: 112
           parent:
-            line_number: 3
-            content: URI("http://my.api.com/users/search?ethnic_origin=#{user_1.ethnic_origin}")
+            line_number: 112
+            content: HTTPX.get("http://my.api.com/users/1")
           content: |
-            URI(<$INSECURE_URL>)
+            $CLIENT.get(<$INSECURE_URL>)
 components: []
 
 

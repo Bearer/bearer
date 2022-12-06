@@ -362,7 +362,7 @@ scan:
             modules:
                 - path: policies/common.rego
                   name: bearer.common
-                  content: |-
+                  content: |
                     package bearer.common
 
                     import future.keywords
@@ -403,6 +403,10 @@ scan:
                         category.uuid == data_type.category_uuid
 
                         x := {name | name := category.groups[_].name}
+                    }
+
+                    groups_for_datatypes(data_types) := groups if {
+                        groups := {name | name := groups_for_datatype(data_types[_])[_]}
                     }
                 - path: policies/application_level_encryption.rego
                   name: bearer.application_level_encryption
@@ -440,7 +444,7 @@ scan:
             modules:
                 - path: policies/common.rego
                   name: bearer.common
-                  content: |-
+                  content: |
                     package bearer.common
 
                     import future.keywords
@@ -481,6 +485,10 @@ scan:
                         category.uuid == data_type.category_uuid
 
                         x := {name | name := category.groups[_].name}
+                    }
+
+                    groups_for_datatypes(data_types) := groups if {
+                        groups := {name | name := groups_for_datatype(data_types[_])[_]}
                     }
                 - path: policies/http_get_parameters.rego
                   name: bearer.http_get_parameters
@@ -517,7 +525,7 @@ scan:
             modules:
                 - path: policies/common.rego
                   name: bearer.common
-                  content: |-
+                  content: |
                     package bearer.common
 
                     import future.keywords
@@ -558,6 +566,10 @@ scan:
                         category.uuid == data_type.category_uuid
 
                         x := {name | name := category.groups[_].name}
+                    }
+
+                    groups_for_datatypes(data_types) := groups if {
+                        groups := {name | name := groups_for_datatype(data_types[_])[_]}
                     }
                 - path: policies/insecure_communication.rego
                   name: bearer.insecure_communication
@@ -577,12 +589,10 @@ scan:
 
                         location = detector.locations[_]
                         item := {
-                          "category_groups": data.bearer.common.groups_for_datatype(data_type),
+                          "category_groups": data.bearer.common.groups_for_datatypes(input.dataflow.data_types),
                           "severity": "medium",
                           "filename": location.filename,
-                          "line_number": location.line_number,
-                          "parent_line_number": location.parent.line_number,
-                          "parent_content": location.parent.content
+                          "line_number": location.line_number
                         }
                     }
         insecure_ftp_processing_sensitive_data:
@@ -595,7 +605,7 @@ scan:
             modules:
                 - path: policies/common.rego
                   name: bearer.common
-                  content: |-
+                  content: |
                     package bearer.common
 
                     import future.keywords
@@ -637,6 +647,10 @@ scan:
 
                         x := {name | name := category.groups[_].name}
                     }
+
+                    groups_for_datatypes(data_types) := groups if {
+                        groups := {name | name := groups_for_datatype(data_types[_])[_]}
+                    }
                 - path: policies/insecure_ftp.rego
                   name: bearer.insecure_ftp
                   content: |
@@ -646,7 +660,7 @@ scan:
 
                     import future.keywords
 
-                    policy_breach[item] {
+                    policy_breach contains item if {
                         some data_type in input.dataflow.data_types
                         data.bearer.common.has_sensitive_data(data_type)
 
@@ -655,7 +669,7 @@ scan:
 
                         location = detector.locations[_]
                         item := {
-                            "category_groups": data.bearer.common.groups_for_datatype(data_type),
+                            "category_groups": data.bearer.common.groups_for_datatypes(input.dataflow.data_types),
                             "severity": "medium",
                             "filename": location.filename,
                             "line_number": location.line_number,
@@ -673,7 +687,7 @@ scan:
             modules:
                 - path: policies/common.rego
                   name: bearer.common
-                  content: |-
+                  content: |
                     package bearer.common
 
                     import future.keywords
@@ -715,6 +729,10 @@ scan:
 
                         x := {name | name := category.groups[_].name}
                     }
+
+                    groups_for_datatypes(data_types) := groups if {
+                        groups := {name | name := groups_for_datatype(data_types[_])[_]}
+                    }
                 - path: policies/insecure_http_get.rego
                   name: bearer.insecure_http_get
                   content: |
@@ -724,7 +742,7 @@ scan:
 
                     import future.keywords
 
-                    policy_breach[item] {
+                    policy_breach contains item if {
                         some data_type in input.dataflow.data_types
                         data.bearer.common.has_sensitive_data(data_type)
 
@@ -733,7 +751,7 @@ scan:
 
                         location = detector.locations[_]
                         item := {
-                            "category_groups": data.bearer.common.groups_for_datatype(data_type),
+                            "category_groups": data.bearer.common.groups_for_datatypes(input.dataflow.data_types),
                             "severity": "medium",
                             "filename": location.filename,
                             "line_number": location.line_number,
@@ -751,7 +769,7 @@ scan:
             modules:
                 - path: policies/common.rego
                   name: bearer.common
-                  content: |-
+                  content: |
                     package bearer.common
 
                     import future.keywords
@@ -792,6 +810,10 @@ scan:
                         category.uuid == data_type.category_uuid
 
                         x := {name | name := category.groups[_].name}
+                    }
+
+                    groups_for_datatypes(data_types) := groups if {
+                        groups := {name | name := groups_for_datatype(data_types[_])[_]}
                     }
                 - path: policies/insecure_smtp.rego
                   name: bearer.insecure_smtp
@@ -811,11 +833,9 @@ scan:
 
                         location = detector.locations[_]
                         item := {
-                            "category_groups": data.bearer.common.groups_for_datatype(data_type),
+                            "category_groups": data.bearer.common.groups_for_datatypes(input.dataflow.data_types),
                             "severity": "medium",
-                            "line_number": location.line_number,
-                            "parent_line_number": location.parent.line_number,
-                            "parent_content": location.parent.content
+                            "line_number": location.line_number
                         }
                     }
         jwt_leaks:
@@ -828,7 +848,7 @@ scan:
             modules:
                 - path: policies/common.rego
                   name: bearer.common
-                  content: |-
+                  content: |
                     package bearer.common
 
                     import future.keywords
@@ -869,6 +889,10 @@ scan:
                         category.uuid == data_type.category_uuid
 
                         x := {name | name := category.groups[_].name}
+                    }
+
+                    groups_for_datatypes(data_types) := groups if {
+                        groups := {name | name := groups_for_datatype(data_types[_])[_]}
                     }
                 - path: policies/leakage.rego
                   name: bearer.leakage
@@ -905,7 +929,7 @@ scan:
             modules:
                 - path: policies/common.rego
                   name: bearer.common
-                  content: |-
+                  content: |
                     package bearer.common
 
                     import future.keywords
@@ -946,6 +970,10 @@ scan:
                         category.uuid == data_type.category_uuid
 
                         x := {name | name := category.groups[_].name}
+                    }
+
+                    groups_for_datatypes(data_types) := groups if {
+                        groups := {name | name := groups_for_datatype(data_types[_])[_]}
                     }
                 - path: policies/leakage.rego
                   name: bearer.leakage
@@ -982,7 +1010,7 @@ scan:
             modules:
                 - path: policies/common.rego
                   name: bearer.common
-                  content: |-
+                  content: |
                     package bearer.common
 
                     import future.keywords
@@ -1023,6 +1051,10 @@ scan:
                         category.uuid == data_type.category_uuid
 
                         x := {name | name := category.groups[_].name}
+                    }
+
+                    groups_for_datatypes(data_types) := groups if {
+                        groups := {name | name := groups_for_datatype(data_types[_])[_]}
                     }
                 - path: policies/leakage.rego
                   name: bearer.leakage
@@ -1059,7 +1091,7 @@ scan:
             modules:
                 - path: policies/common.rego
                   name: bearer.common
-                  content: |-
+                  content: |
                     package bearer.common
 
                     import future.keywords
@@ -1100,6 +1132,10 @@ scan:
                         category.uuid == data_type.category_uuid
 
                         x := {name | name := category.groups[_].name}
+                    }
+
+                    groups_for_datatypes(data_types) := groups if {
+                        groups := {name | name := groups_for_datatype(data_types[_])[_]}
                     }
                 - path: policies/ssl_certificate_verification_disabled.rego
                   name: bearer.ssl_certificate_verification_disabled
