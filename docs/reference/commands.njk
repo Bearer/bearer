@@ -2,9 +2,11 @@
 title: Commands
 layout: layouts/doc.njk
 ---
-{# Welcome :wave:. The content of this page is automatically generated based on Curio's CLI help files. #}
+{# Welcome :wave:. The content of this page is automatically generated based on Curio's CLI help files.
+They can be found here: https://github.com/Bearer/curio/tree/main/pkg/commands
+ #}
 
-{% set items = [curio_scan, curio_init] %}
+{% set items = [curio_scan, curio_init, curio_config] %}
 {% renderTemplate "md" %}
 # Commands
 
@@ -58,17 +60,4 @@ Curio offers a number of commands to use and customize the CLI to your needs.
     <p>In addition to the primary <code>{{ item.name | trim }}</code> command, you can also use <code>{{ item.aliases | trim}}</code> in place of it.
     </p>
   {% endif %}
-
 {% endfor %}
-
-{% renderTemplate "md" %}
-## Global Flags
-
-Use these flags to get more information about the `curio` CLI.
-
-### `--version`
-Prints the version number of Curio.
-
-### `--help`
-Prints the in-app help information for Curio.
-{% endrenderTemplate %}

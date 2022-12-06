@@ -8,11 +8,9 @@
   ) {
     document.documentElement.classList.add("dark");
     localStorage.theme = "dark";
-    themeToggleButton.innerHTML = "🌙";
   } else {
     document.documentElement.classList.remove("dark");
     localStorage.theme = "light";
-    themeToggleButton.innerHTML = "☀️";
   }
 
   themeToggleButton.addEventListener("click", () => {
@@ -21,13 +19,25 @@
 
   function toggleTheme() {
     if ("theme" in localStorage && localStorage.theme === "dark") {
-      themeToggleButton.innerHTML = "☀️";
       localStorage.theme = "light";
       document.documentElement.classList.remove("dark");
     } else {
-      themeToggleButton.innerHTML = "🌙";
       localStorage.theme = "dark";
       document.documentElement.classList.add("dark");
     }
   }
+
+  // mobile nav open/close
+  const navButton = document.getElementById("toggle-nav");
+
+  navButton.addEventListener("click", () => {
+    document.querySelector("#doc-nav").classList.toggle("open");
+  });
+
+  // toc open/close mobile
+  const toggleToc = document.getElementById("js-toggle-toc");
+  toggleToc.addEventListener("click", () => {
+    document.querySelector("#toc-container").classList.toggle("open");
+    toggleToc.querySelector("div").classList.toggle("flip");
+  });
 })();

@@ -1,26 +1,32 @@
-<header class='py-4 mb-4 sm:px-0 bg-white dark:bg-neutral-600 sm:sticky sm:top-0 z-50 '>
+<header class='py-4 sm:px-0 bg-white dark:bg-neutral-600 sticky top-0 z-50 '>
 	<nav class='max-w-6xl mx-auto px-8 flex justify-between'>
 		<a href="/" title="Return to the homepage">
 			{% include 'logo.njk' %}
 		</a>
-		<ul class='flex gap-6 items-center text-black dark:text-neutral-100'>
-			<li class="">
+		<ul class='flex gap-4 items-center text-black dark:text-neutral-100'>
+			<li class="hidden sm:block">
 				<a class="hover:text-main dark:hover:text-main-300" href="https://discord.gg/eaHZBJUXRF" class="">
-					Community Discord
+					{% include 'icon-discord.njk' %}
+				</a>
+			</li>
+			<li class="hidden sm:block">
+				<a class="hover:text-main dark:hover:text-main-300" href="https://github.com/bearer/curio" class="">
+					{% include 'icon-github.njk' %}
 				</a>
 			</li>
 			<li class="">
-				<a class="hover:text-main dark:hover:text-main-300" href="https://github.com/bearer/curio" class="">
-					GitHub
-				</a>
+				<button class="hover:text-main dark:hover:text-main-300" id="dark-light-toggle">
+					{% include 'icon-sun.njk' %}
+					{% include 'icon-moon.njk' %}
+				</button>
 			</li>
-			<li>
-				<button id="dark-light-toggle">☀️</button>
-			</li>
-			<li>
+			<li class="hidden sm:block">
 				<a href="/quickstart" class="btn-fancy dark:btn-fancy-dark dark:text-neutral-100 text-black block">
           Get Started
 				</a>
+			</li>
+			<li class="flex sm:hidden">
+				<button class=""hover:text-main dark:hover:text-main-300m" id="toggle-nav">{% include 'icon-menu.njk' %}</button>
 			</li>
 		</ul>
 	</nav>
