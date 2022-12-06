@@ -97,3 +97,14 @@ insecure_ftp_processing_sensitive_data:
       name: bearer.common
     - path: policies/insecure_ftp.rego
       name: bearer.insecure_ftp
+insecure_http_get:
+  description: "Communicating with insecure HTTP GET in an application processing sensitive data"
+  name: "Insecure HTTP GET"
+  id: insecure_http_get
+  query: |
+    policy_breach = data.bearer.insecure_http_get.policy_breach
+  modules:
+    - path: policies/common.rego
+      name: bearer.common
+    - path: policies/insecure_http_get.rego
+      name: bearer.insecure_http_get

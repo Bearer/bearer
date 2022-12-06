@@ -23,4 +23,6 @@ Coming soon...
 
 ## Reference
 
-- [Commands](/reference/commands)
+- [Commands](/reference/commands/)
+- [Supported Data Types](/reference/datatypes/)
+- [Built-in Policies](/reference/policies/)

@@ -44,6 +44,27 @@ ruby_http_post_detection:
             - RestClient
             - Typhoeus
   stored: false
+ruby_http_get_insecure:
+  type: "risk"
+  languages:
+    - ruby
+  patterns:
+    - |
+      URI(<$INSECURE_URL>)
+    - pattern: |
+        $CLIENT.get(<$INSECURE_URL>)
+      filters:
+        - variable: CLIENT
+          values:
+            - Curl
+            - Excon
+            - Faraday
+            - HTTP
+            - HTTParty
+            - HTTPX
+            - RestClient
+            - Typhoeus
+  detect_presence: true
 ruby_file_detection:
   type: "risk"
   languages:
@@ -144,6 +165,7 @@ detect_rails_insecure_smtp:
   languages:
     - ruby
   detect_presence: true
+  omit_parent: true
 detect_rails_insecure_communication:
   type: "risk"
   patterns:
@@ -154,11 +176,14 @@ detect_rails_insecure_communication:
   languages:
     - ruby
   detect_presence: true
+  omit_parent: true
 detect_rails_insecure_ftp:
   type: "risk"
   patterns:
     - |
-      Net::FTP::new
+      Net::FTP.new()
+    - |
+      Net::FTP.open()
   languages:
     - ruby
   detect_presence: true

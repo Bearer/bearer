@@ -14,6 +14,7 @@ import (
 var classNameRegex = regexp.MustCompile(`\$CLASS_NAME`)
 var argumentsRegex = regexp.MustCompile(`<\$ARGUMENT>`)
 var dataTypeRegex = regexp.MustCompile(`<\$DATA_TYPE>`)
+var insecureUrlRegex = regexp.MustCompile(`<\$INSECURE_URL>`)
 var anythingRegex = regexp.MustCompile(`\$ANYTHING`)
 var variableRegex = regexp.MustCompile(`\$([A-Z_]+)`)
 
@@ -27,6 +28,7 @@ func (detector *Detector) CompilePattern(
 	)
 	reworkedRule = argumentsRegex.ReplaceAllString(reworkedRule, "Var_Arguments"+idGenerator.GenerateId())
 	reworkedRule = dataTypeRegex.ReplaceAllString(reworkedRule, "Var_DataTypes"+idGenerator.GenerateId())
+	reworkedRule = insecureUrlRegex.ReplaceAllString(reworkedRule, "var_InsecureUrl"+idGenerator.GenerateId())
 	reworkedRule = anythingRegex.ReplaceAllString(reworkedRule, "Var_Anything"+idGenerator.GenerateId())
 	reworkedRule = variableRegex.ReplaceAllString(reworkedRule, "var_Variable_$1")
 

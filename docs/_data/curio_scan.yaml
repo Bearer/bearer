@@ -28,7 +28,6 @@ options:
       usage: number of files to batch to worker
     - name: format
       shorthand: f
-      default_value: json
       usage: Specify report format (json, yaml)
     - name: help
       shorthand: h

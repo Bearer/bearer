@@ -30,7 +30,8 @@ func newPolicyTest(name string, testFiles []string) testhelper.TestCase {
 func TestPolicies(t *testing.T) {
 	tests := []testhelper.TestCase{
 		newPolicyTest("logger_leaking", []string{"ruby/logger_leaking.rb"}),
-		newPolicyTest("http_get_parameters", []string{"ruby/http_get_parameters.rb"}),
+		newPolicyTest("http_with_sensitive_data", []string{"ruby/http/with_sensitive_data.rb"}),
+		newPolicyTest("http_without_sensitive_data", []string{"ruby/http/without_sensitive_data.rb"}),
 		newPolicyTest("insecure_smtp_with_sensitive_data", []string{"ruby/insecure_smtp/with_sensitive_data.rb"}),
 		newPolicyTest("insecure_smtp_without_sensitive_data", []string{"ruby/insecure_smtp/without_sensitive_data.rb"}),
 		newPolicyTest("insecure_communication_with_sensitive_data", []string{"ruby/insecure_communication/with_sensitive_data.rb"}),

@@ -3,80 +3,16 @@ medium:
       policy_description: Communication with insecure SMTP in an application processing sensitive data
       line_number: 8
       category_groups:
+        - PHI
         - PII
         - Sensitive data
-      parent_line_number: 1
-      parent_content: |-
-        # Insecure SMTP
-
-        class User
-          attr_reader :name, :email, :password, :ethnicity
-        end
-
-        ## Detected
-        Rails.application.configure do
-          config.action_mailer.smtp_settings = {
-            openssl_verify_mode: OpenSSL::SSL::VERIFY_NONE
-          }
-        end
-
-        Rails.application.configure do
-          config.action_mailer.smtp_settings = {
-            openssl_verify_mode: "none"
-          }
-        end
-
-        ## Not Detected
-        Rails.application.configure do
-          config.action_mailer.smtp_settings = {
-            openssl_verify_mode: OpenSSL::SSL::VERIFY_PEER
-          }
-        end
-
-        Rails.application.configure do
-          config.action_mailer.smtp_settings = {
-            openssl_verify_mode: "peer"
-          }
-        end
     - policy_name: Insecure SMTP
       policy_description: Communication with insecure SMTP in an application processing sensitive data
       line_number: 14
       category_groups:
+        - PHI
         - PII
         - Sensitive data
-      parent_line_number: 1
-      parent_content: |-
-        # Insecure SMTP
-
-        class User
-          attr_reader :name, :email, :password, :ethnicity
-        end
-
-        ## Detected
-        Rails.application.configure do
-          config.action_mailer.smtp_settings = {
-            openssl_verify_mode: OpenSSL::SSL::VERIFY_NONE
-          }
-        end
-
-        Rails.application.configure do
-          config.action_mailer.smtp_settings = {
-            openssl_verify_mode: "none"
-          }
-        end
-
-        ## Not Detected
-        Rails.application.configure do
-          config.action_mailer.smtp_settings = {
-            openssl_verify_mode: OpenSSL::SSL::VERIFY_PEER
-          }
-        end
-
-        Rails.application.configure do
-          config.action_mailer.smtp_settings = {
-            openssl_verify_mode: "peer"
-          }
-        end
 
 
 --

@@ -8,19 +8,11 @@ data_types:
 risks:
     - detector_id: ssl_certificate_verification_disabled
       locations:
-        - risklocation:
-            filename: testdata/ruby/ssl_certificate_verification_disabled.rb
+        - filename: testdata/ruby/ssl_certificate_verification_disabled.rb
+          line_number: 4
+          parent:
             line_number: 4
-            parent:
-                line_number: 1
-                content: |-
-                    user.gender_identity # processing sensitive data
-
-                    # Detected
-                    http.verify_mode = OpenSSL::SSL::VERIFY_NONE
-
-                    # Not detected
-                    http.verify_mode = OpenSSL::SSL::VERIFY_PEER
+            content: http.verify_mode = OpenSSL::SSL::VERIFY_NONE
           content: |
             $_.verify_mode = OpenSSL::SSL::VERIFY_NONE
 components: []

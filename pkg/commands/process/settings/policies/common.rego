@@ -39,3 +39,7 @@ groups_for_datatype(data_type) := x if {
 
     x := {name | name := category.groups[_].name}
 }
+
+groups_for_datatypes(data_types) := groups if {
+    groups := {name | name := groups_for_datatype(data_types[_])[_]}
+}

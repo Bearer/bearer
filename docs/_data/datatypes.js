@@ -30,16 +30,33 @@ function sortData(typesFile, catsFile, groupsFile) {
 
   // setup groups
   for (const key in groupsFile.groups) {
-    output[key] = { uuid: key, name: groupsFile.groups[key], categories: {} };
+    outputResult = {
+      uuid: key,
+      name: groupsFile.groups[key].name,
+      categories: {}
+    };
+
+    parentGroups = []
+    for (const parentKey of groupsFile.groups[key].parent_uuids) {
+      parentGroups += groupsFile.groups[parentKey]
+    }
+    if (parentGroups.length > 0) {
+      outputResult.parentGroups = parentGroups
+    }
+
+    output[key] = outputResult
   }
 
   // add categories to each group
   for (const key in groupsFile.category_mapping) {
-    output[groupsFile.category_mapping[key].group_uuid].categories[key] = {
-      types: [],
-      uuid: key,
-      ...groupsFile.category_mapping[key],
-    };
+    for (const groupUUID of groupsFile.category_mapping[key].group_uuids) {
+      console.log(groupUUID)
+      output[groupUUID].categories[key] = {
+        types: [],
+        uuid: key,
+        ...groupsFile.category_mapping[key],
+      };
+    }
   }
 
   // add types to each category

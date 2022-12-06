@@ -44,3 +44,7 @@ func (detector *Detector) CompilePattern(
 
 	return *compiledRule, nil
 }
+
+func (detector *Detector) Annotate(tree *parser.Tree) error {
+	return nil
+}
