@@ -2,8 +2,9 @@ medium:
     - policy_name: Insecure SMTP
       policy_description: Communication with insecure SMTP in an application processing sensitive data
       line_number: 8
-      filename: testdata/ruby/insecure_smtp/with_sensitive_data.rb
-      category_group: Sensitive data
+      category_group:
+        - PII
+        - Sensitive data
       parent_line_number: 1
       parent_content: |-
         # Insecure SMTP
@@ -40,8 +41,9 @@ medium:
     - policy_name: Insecure SMTP
       policy_description: Communication with insecure SMTP in an application processing sensitive data
       line_number: 14
-      filename: testdata/ruby/insecure_smtp/with_sensitive_data.rb
-      category_group: Sensitive data
+      category_group:
+        - PII
+        - Sensitive data
       parent_line_number: 1
       parent_content: |-
         # Insecure SMTP

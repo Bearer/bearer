@@ -1,19 +1,22 @@
 critical:
     - policy_name: HTTP GET parameters
       policy_description: Sending data as HTTP GET parameters
-      line_number: 4
+      line_number: 1
       filename: testdata/ruby/http_get_parameters.rb
-      category_group: Personal data
-      parent_line_number: 5
-      parent_content: URI.encode_www_form(user)
+      category_group:
+        - PII
+        - Sensitive data
+      parent_line_number: 1
+      parent_content: URI("http://my.api.com/users/search?ethnic_origin=#{user_1.ethnic_origin}")
 high:
     - policy_name: HTTP GET parameters
       policy_description: Sending data as HTTP GET parameters
-      line_number: 1
+      line_number: 4
       filename: testdata/ruby/http_get_parameters.rb
-      category_group: Sensitive data
-      parent_line_number: 1
-      parent_content: URI("http://my.api.com/users/search?ethnic_origin=#{user_1.ethnic_origin}")
+      category_group:
+        - PII
+      parent_line_number: 5
+      parent_content: URI.encode_www_form(user)
 
 
 --
