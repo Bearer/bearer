@@ -6,7 +6,7 @@ medium:
       category_groups:
         - PHI
         - PII
-        - Sensitive data
+        - Sensitive personal data
       parent_line_number: 10
       parent_content: Net::FTP.new("ftp.ruby-lang.org")
     - policy_name: Insecure FTP
@@ -16,7 +16,7 @@ medium:
       category_groups:
         - PHI
         - PII
-        - Sensitive data
+        - Sensitive personal data
       parent_line_number: 17
       parent_content: |-
         Net::FTP.open('example.com') do |ftp|

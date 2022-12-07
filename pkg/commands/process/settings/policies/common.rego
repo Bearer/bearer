@@ -5,14 +5,6 @@ import future.keywords
 sensitive_data_group_uuid := "f6a0c071-5908-4420-bac2-bba28d41223e"
 personal_data_group_uuid := "e1d3135b-3c0f-4b55-abce-19f27a26cbb3"
 
-has_sensitive_data(data_type) := true if {
-    some category in input.data_categories
-    category.uuid == data_type.category_uuid
-
-    some group in category.groups
-    group.uuid == sensitive_data_group_uuid
-}
-
 severity_of_datatype(data_type) := "critical" if {
     some category in input.data_categories
     category.uuid == data_type.category_uuid
