@@ -241,6 +241,15 @@ detect_rails_insecure_ftp:
   languages:
     - ruby
   detect_presence: true
+detect_rails_insecure_ftp_data:
+  type: "risk"
+  patterns:
+    - |
+      Net::FTP.open do
+        $ANYTHING
+      end
+  languages:
+    - ruby
 detect_ruby_third_party_data_send:
   type: "risk"
   patterns:
