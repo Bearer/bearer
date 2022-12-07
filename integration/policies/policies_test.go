@@ -34,6 +34,7 @@ func TestPolicies(t *testing.T) {
 		newPolicyTest("insecure_smtp", []string{"ruby/insecure_smtp.rb"}),
 		newPolicyTest("insecure_communication", []string{"ruby/insecure_communication.rb"}),
 		newPolicyTest("insecure_ftp", []string{"ruby/insecure_ftp.rb"}),
+		newPolicyTest("sending_data_in_category_to_third_party", []string{"ruby/sending_data_in_category_to_third_party.rb"}),
 	}
 
 	testhelper.RunTests(t, tests)
