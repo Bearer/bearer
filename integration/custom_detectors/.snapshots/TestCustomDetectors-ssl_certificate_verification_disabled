@@ -15,6 +15,17 @@ risks:
             content: http.verify_mode = OpenSSL::SSL::VERIFY_NONE
           content: |
             $_.verify_mode = OpenSSL::SSL::VERIFY_NONE
+        - filename: testdata/ruby/ssl_certificate_verification_disabled.rb
+          line_number: 7
+          parent:
+            line_number: 7
+            content: |-
+                Net::HTTP.start(uri.host, uri.port, :use_ssl => true, :verify_mode => OpenSSL::SSL::VERIFY_NONE) do |http|
+                  Net::HTTP::Get.new uri
+                end
+          content: |
+            Net::HTTP.start($_, $_, $_, :verify_mode => OpenSSL::SSL::VERIFY_NONE) do
+            end
 components: []
 
 

@@ -163,6 +163,9 @@ ssl_certificate_verification_disabled:
   type: "risk"
   patterns:
     - |
+      Net::HTTP.start($_, $_, $_, :verify_mode => OpenSSL::SSL::VERIFY_NONE) do
+      end
+    - |
       $_.verify_mode = OpenSSL::SSL::VERIFY_NONE
   languages:
     - ruby
