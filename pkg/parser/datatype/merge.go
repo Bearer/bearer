@@ -33,7 +33,9 @@ func MergeDatatypesByPropertyNames(source datatype.DataTypable, enrichment datat
 	}
 }
 
-// CloneDeepestProperties deep clones source and iterates trough various leveles of same name source and enrichement properties adding enrichment properties to the edge of source only when source edge doesn't have any properties
+// CloneDeepestProperties deep clones source and iterates trough various levels 
+// of same name source and enrichement properties adding enrichment properties 
+// to the edge of source only when source edge doesn't have any properties
 func CloneDeepestProperties(source datatype.DataTypable, enrichment datatype.DataTypable) datatype.DataTypable {
 	clonedSource := source.Clone()
 
