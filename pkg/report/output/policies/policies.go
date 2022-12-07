@@ -35,6 +35,7 @@ type PolicyOutput struct {
 	Filename         string   `json:"filename,omitempty" yaml:"filename,omitempty"`
 	CategoryGroups   []string `json:"category_groups,omitempty" yaml:"category_groups,omitempty"`
 	Severity         string   `json:"severity,omitempty" yaml:"severity,omitempty"`
+	OmitParent       bool     `json:"omit_parent" yaml:"omit_parent"`
 }
 
 type PolicyResult struct {
@@ -45,6 +46,7 @@ type PolicyResult struct {
 	CategoryGroups    []string `json:"category_groups,omitempty" yaml:"category_groups,omitempty"`
 	ParentLineNumber  int      `json:"parent_line_number,omitempty" yaml:"parent_line_number,omitempty"`
 	ParentContent     string   `json:"parent_content,omitempty" yaml:"parent_content,omitempty"`
+	OmitParent        bool     `json:"omit_parent" yaml:"omit_parent"`
 }
 
 func GetOutput(dataflow *dataflow.DataFlow, config settings.Config) (map[string][]PolicyResult, error) {
@@ -83,6 +85,7 @@ func GetOutput(dataflow *dataflow.DataFlow, config settings.Config) (map[string]
 					Filename:          policyOutput.Filename,
 					LineNumber:        policyOutput.LineNumber,
 					CategoryGroups:    policyOutput.CategoryGroups,
+					OmitParent:        policyOutput.OmitParent,
 					ParentLineNumber:  policyOutput.ParentLineNumber,
 					ParentContent:     policyOutput.ParentContent,
 				}
@@ -200,8 +203,10 @@ func writePolicyBreachToString(reportStr *strings.Builder, policyBreach PolicyRe
 	reportStr.WriteString(color.HiBlackString(policyBreach.PolicyDescription + "\n"))
 	reportStr.WriteString("\n")
 	reportStr.WriteString(color.HiBlueString("File: " + underline(policyBreach.Filename+":"+fmt.Sprint(policyBreach.LineNumber)) + "\n"))
-	reportStr.WriteString("\n")
-	reportStr.WriteString(highlightCodeExtract(policyBreach.LineNumber, policyBreach.ParentLineNumber, policyBreach.ParentContent))
+	if !policyBreach.OmitParent {
+		reportStr.WriteString("\n")
+		reportStr.WriteString(highlightCodeExtract(policyBreach.LineNumber, policyBreach.ParentLineNumber, policyBreach.ParentContent))
+	}
 }
 
 func formatSeverity(policySeverity string) string {

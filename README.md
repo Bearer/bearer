@@ -19,7 +19,7 @@
 
 Curio is a static code analysis tool (SAST) that scans your source code to discover security risks and vulnerabilities that put your sensitive data at risk (PHI, PD, PII, Financial data).
 
-[Explore the docs](https://curio.sh) - [Getting Started](#getting-started) - [FAQ](#faqs) - [Report Bug](https://github.com/Bearer/curio/issues/new/choose) - [Discord Community][discord]
+[Explore the docs](https://curio.sh) - [Getting Started](#rocket-getting-started) - [FAQ](#question-faqs) - [Report Bug](https://github.com/Bearer/curio/issues/new/choose) - [Discord Community][discord]
 
 ```
 Scanning target... 100% [===============] (7481/7481, 22 files/s) [5m44s]
@@ -46,7 +46,7 @@ Curio helps developers and security teams to:
 - Protect their application from having their sensitive data breached (*missing encryption, insecure communication, SQL injection, etc.*)
 - Monitor sensitive data flows across every component (*Data stores, internal and external APIs*)
 
-Curio is Open Source ([*see license*](#license)), and is built to be fully customizable, from creating your own policies, to adding custom code detectors up to enriching our data classifiers.
+Curio is Open Source ([*see license*](#mortar_board-license)), and is built to be fully customizable, from creating your own policies, to adding custom code detectors up to enriching our data classifiers.
 
 Curio also powers [Bearer](https://www.bearer.com), the developer-first platform to proactively find and fix data security risks and vulnerabilities across your development lifecycle
 

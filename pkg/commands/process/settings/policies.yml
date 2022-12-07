@@ -108,3 +108,25 @@ insecure_http_get:
       name: bearer.common
     - path: policies/insecure_http_get.rego
       name: bearer.insecure_http_get
+insecure_http_with_data_category:
+  description: "Communicating Data Category with insecure HTTP"
+  name: "Insecure HTTP with Data Category"
+  id: insecure_http_with_data_category
+  query: |
+    policy_breach = data.bearer.insecure_http_with_data_category.policy_breach
+  modules:
+    - path: policies/common.rego
+      name: bearer.common
+    - path: policies/insecure_http_with_data_category.rego
+      name: bearer.insecure_http_with_data_category
+sending_data_in_category_to_third_party:
+  description: "Sending data in category to third party"
+  name: "Third-party data category exposure"
+  id: "detect_ruby_third_party_data_send"
+  query: |
+    policy_breach = data.bearer.third_party_data_category.policy_breach
+  modules:
+    - path: policies/common.rego
+      name: bearer.common
+    - path: policies/third_party_data_category.rego
+      name: bearer.third_party_data_category

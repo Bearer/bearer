@@ -6,7 +6,12 @@ medium:
       category_groups:
         - PHI
         - PII
+<<<<<<< HEAD
+        - Sensitive personal data
+=======
         - Sensitive data
+      omit_parent: true
+>>>>>>> f93966b (chore: update snapshots)
 
 
 --

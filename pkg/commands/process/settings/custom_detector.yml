@@ -65,11 +65,38 @@ ruby_http_get_insecure:
             - RestClient
             - Typhoeus
   detect_presence: true
+ruby_http_post_insecure:
+  type: "risk"
+  languages:
+    - ruby
+  patterns:
+    - |
+      Net::HTTP.post_form(<$INSECURE_URL>)
+    - pattern: |
+        $CLIENT.post(<$INSECURE_URL>)
+      filters:
+        - variable: CLIENT
+          values:
+            - Curl
+            - Excon
+            - Faraday
+            - HTTP
+            - HTTParty
+            - HTTPX
+            - RestClient
+            - Typhoeus
+  detect_presence: true
 ruby_file_detection:
   type: "risk"
   languages:
     - ruby
   patterns:
+    - |
+      CSV.generate do
+        <$DATA_TYPE>
+      end
+    - |
+      CSV.generate { <$DATA_TYPE> }
     - |
       CSV.open { <$DATA_TYPE> }
     - |
@@ -187,3 +214,19 @@ detect_rails_insecure_ftp:
   languages:
     - ruby
   detect_presence: true
+detect_ruby_third_party_data_send:
+  type: "risk"
+  patterns:
+    - |
+      Sentry::Breadcrumb.new(<$ARGUMENT>)
+    - |
+      Sentry.init do |config|
+        config.before_breadcrumb = lambda do |breadcrumb, hint|
+          breadcrumb.message = $ANYTHING
+          breadcrumb
+        end
+      end
+    - |
+      Sentry.set_user(<$ARGUMENT>)
+  languages:
+    - ruby
