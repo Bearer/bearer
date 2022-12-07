@@ -15,6 +15,7 @@ policy_breach contains item if {
       "category_groups": data.bearer.common.groups_for_datatypes(input.dataflow.data_types),
       "severity": "medium",
       "filename": location.filename,
-      "line_number": location.line_number
+      "line_number": location.line_number,
+      "omit_parent": true
     }
 }
