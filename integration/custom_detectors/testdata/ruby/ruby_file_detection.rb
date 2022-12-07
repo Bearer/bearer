@@ -16,3 +16,14 @@ File.open(user_3.emails, "users.csv", "w") do |f|
 		f.write "#{user_4.email},#{user_4.first_name},#{user_4.last_name}"
 	end
 end
+
+csv_string = CSV.generate do |csv|
+	csv << ["email", "first_name", "last_name"]
+	users.each do |user|
+		csv << [
+			user.email,
+			user.first_name,
+			user.last_name
+		]
+	end
+end

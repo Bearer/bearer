@@ -92,6 +92,12 @@ ruby_file_detection:
     - ruby
   patterns:
     - |
+      CSV.generate do
+        <$DATA_TYPE>
+      end
+    - |
+      CSV.generate { <$DATA_TYPE> }
+    - |
       CSV.open { <$DATA_TYPE> }
     - |
       CSV.open do
