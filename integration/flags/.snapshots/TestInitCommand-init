@@ -438,6 +438,10 @@ scan:
             processors: []
             patterns:
                 - pattern: |
+                    Net::HTTP.start($_, $_, $_, :verify_mode => OpenSSL::SSL::VERIFY_NONE) do
+                    end
+                  filters: []
+                - pattern: |
                     $_.verify_mode = OpenSSL::SSL::VERIFY_NONE
                   filters: []
             root_singularize: false
