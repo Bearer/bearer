@@ -19,11 +19,11 @@ end
 
 csv_string = CSV.generate do |csv|
 	csv << ["email", "first_name", "last_name"]
-	users.each do |user|
+	users.each do |user_5|
 		csv << [
-			user.email,
-			user.first_name,
-			user.last_name
+			user_5.email,
+			user_5.first_name,
+			user_5.last_name
 		]
 	end
 end

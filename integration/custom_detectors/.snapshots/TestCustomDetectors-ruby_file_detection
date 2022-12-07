@@ -59,11 +59,6 @@ risks:
                     	end
                     end
             - filename: testdata/ruby/ruby_file_detection.rb
-              line_number: 12
-              parent:
-                line_number: 12
-                content: 'File.open("users.log", "w") { |f| f.write "#{Time.now} - User #{user_2.email} logged in\n" }'
-            - filename: testdata/ruby/ruby_file_detection.rb
               line_number: 16
               parent:
                 line_number: 14
@@ -80,11 +75,11 @@ risks:
                 content: |-
                     CSV.generate do |csv|
                     	csv << ["email", "first_name", "last_name"]
-                    	users.each do |user|
+                    	users.each do |user_5|
                     		csv << [
-                    			user.email,
-                    			user.first_name,
-                    			user.last_name
+                    			user_5.email,
+                    			user_5.first_name,
+                    			user_5.last_name
                     		]
                     	end
                     end
@@ -123,11 +118,11 @@ risks:
                 content: |-
                     CSV.generate do |csv|
                     	csv << ["email", "first_name", "last_name"]
-                    	users.each do |user|
+                    	users.each do |user_5|
                     		csv << [
-                    			user.email,
-                    			user.first_name,
-                    			user.last_name
+                    			user_5.email,
+                    			user_5.first_name,
+                    			user_5.last_name
                     		]
                     	end
                     end
@@ -166,11 +161,11 @@ risks:
                 content: |-
                     CSV.generate do |csv|
                     	csv << ["email", "first_name", "last_name"]
-                    	users.each do |user|
+                    	users.each do |user_5|
                     		csv << [
-                    			user.email,
-                    			user.first_name,
-                    			user.last_name
+                    			user_5.email,
+                    			user_5.first_name,
+                    			user_5.last_name
                     		]
                     	end
                     end

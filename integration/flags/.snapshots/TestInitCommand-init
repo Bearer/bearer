@@ -281,29 +281,22 @@ scan:
             processors: []
             patterns:
                 - pattern: |
+                    CSV.generate { <$DATA_TYPE> }
+                  filters: []
+                - pattern: |
                     CSV.generate do
                       <$DATA_TYPE>
                     end
                   filters: []
                 - pattern: |
-                    CSV.generate { <$DATA_TYPE> }
-                  filters: []
-                - pattern: |
-                    CSV.open { <$DATA_TYPE> }
-                  filters: []
-                - pattern: |
-                    CSV.open do
+                    $LIBRARY.open do
                       <$DATA_TYPE>
                     end
-                  filters: []
-                - pattern: |
-                    File.open do
-                      <$DATA_TYPE>
-                    end
-                  filters: []
-                - pattern: |
-                    File.open { <$DATA_TYPE> }
-                  filters: []
+                  filters:
+                    - variable: LIBRARY
+                      values:
+                        - CSV
+                        - File
             root_singularize: false
             root_lowercase: false
             metavars: {}
