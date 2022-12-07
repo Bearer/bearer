@@ -31,6 +31,17 @@ jwt_leaks:
       name: bearer.common
     - path: policies/leakage.rego
       name: bearer.leakage
+cookie_leaks:
+  description: "Cookie leaks detected"
+  name: "Cookie leaking"
+  id: "detect_rails_cookies"
+  query: |
+    policy_breach = data.bearer.leakage.policy_breach
+  modules:
+    - path: policies/common.rego
+      name: bearer.common
+    - path: policies/leakage.rego
+      name: bearer.leakage
 ssl_certificate_verification_disabled:
   description: "SSL certificate verification disabled in an application processing sensitive data"
   name: "SSL certificate verification disabled"

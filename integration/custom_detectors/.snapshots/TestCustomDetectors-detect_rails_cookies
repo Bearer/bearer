@@ -1,0 +1,71 @@
+data_types:
+    - name: Email Address
+      detectors:
+        - name: ruby
+          locations:
+            - filename: testdata/ruby/detect_rails_cookies.rb
+              line_number: 2
+    - name: Firstname
+      detectors:
+        - name: ruby
+          locations:
+            - filename: testdata/ruby/detect_rails_cookies.rb
+              line_number: 5
+    - name: Lastname
+      detectors:
+        - name: ruby
+          locations:
+            - filename: testdata/ruby/detect_rails_cookies.rb
+              line_number: 6
+    - name: Physical Address
+      detectors:
+        - name: ruby
+          locations:
+            - filename: testdata/ruby/detect_rails_cookies.rb
+              line_number: 3
+    - name: Username
+      detectors:
+        - name: ruby
+          locations:
+            - filename: testdata/ruby/detect_rails_cookies.rb
+              line_number: 12
+risks:
+    - detector_id: detect_rails_cookies
+      data_types:
+        - name: Email Address
+          stored: false
+          locations:
+            - filename: testdata/ruby/detect_rails_cookies.rb
+              line_number: 2
+              parent:
+                line_number: 2
+                content: cookies.signed[:info] = user.email
+        - name: Firstname
+          stored: false
+          locations:
+            - filename: testdata/ruby/detect_rails_cookies.rb
+              line_number: 5
+              parent:
+                line_number: 8
+                content: 'cookies[:login] = { value: user_1.to_json, expires: 1.hour, secure: true }'
+        - name: Lastname
+          stored: false
+          locations:
+            - filename: testdata/ruby/detect_rails_cookies.rb
+              line_number: 6
+              parent:
+                line_number: 8
+                content: 'cookies[:login] = { value: user_1.to_json, expires: 1.hour, secure: true }'
+        - name: Physical Address
+          stored: false
+          locations:
+            - filename: testdata/ruby/detect_rails_cookies.rb
+              line_number: 3
+              parent:
+                line_number: 2
+                content: cookies.signed[:info] = user.email
+components: []
+
+
+--
+
