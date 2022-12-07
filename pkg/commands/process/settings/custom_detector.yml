@@ -135,6 +135,33 @@ detect_rails_jwt:
       JWT.encode(<$ARGUMENT>)
   languages:
     - ruby
+detect_rails_cookies:
+  type: "risk"
+  patterns:
+    - |
+      cookies[...] = $ANYTHING
+    - pattern: |
+        cookies.$METHOD_CHAIN[...] = $ANYTHING
+      filters:
+        - variable: METHOD_CHAIN
+          values:
+            - permanent
+            - encrypted
+            - signed
+            - permanent.encrypted
+            - permanent.signed
+            - permanent.encrypted.signed
+            - permanent.signed.encrypted
+            - encrypted.permanent
+            - encrypted.signed
+            - encrypted.permanent.signed
+            - encrypted.signed.permanent
+            - signed.encrypted
+            - signed.permanent
+            - signed.permanent.encrypted
+            - signed.encrypted.permanent
+  languages:
+    - ruby
 ssl_certificate_verification_disabled:
   type: "risk"
   patterns:
