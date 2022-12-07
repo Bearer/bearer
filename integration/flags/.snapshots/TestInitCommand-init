@@ -39,50 +39,25 @@ scan:
                     cookies[...] = $ANYTHING
                   filters: []
                 - pattern: |
-                    cookies.signed[...] = $ANYTHING
-                  filters: []
-                - pattern: |
-                    cookies.permanent[...] = $ANYTHING
-                  filters: []
-                - pattern: |
-                    cookies.encrypted[...] = $ANYTHING
-                  filters: []
-                - pattern: |
-                    cookies.signed.permanent[...] = $ANYTHING
-                  filters: []
-                - pattern: |
-                    cookies.signed.encrypted[...] = $ANYTHING
-                  filters: []
-                - pattern: |
-                    cookies.signed.encrypted.permanent[...] = $ANYTHING
-                  filters: []
-                - pattern: |
-                    cookies.signed.permanent.encrypted[...] = $ANYTHING
-                  filters: []
-                - pattern: |
-                    cookies.permanent.signed[...] = $ANYTHING
-                  filters: []
-                - pattern: |
-                    cookies.permanent.encrypted[...] = $ANYTHING
-                  filters: []
-                - pattern: |
-                    cookies.permanent.signed.encrypted[...] = $ANYTHING
-                  filters: []
-                - pattern: |
-                    cookies.permanent.encrypted.signed[...] = $ANYTHING
-                  filters: []
-                - pattern: |
-                    cookies.encrypted.permanent[...] = $ANYTHING
-                  filters: []
-                - pattern: |
-                    cookies.encrypted.signed[...] = $ANYTHING
-                  filters: []
-                - pattern: |
-                    cookies.encrypted.signed.permanent[...] = $ANYTHING
-                  filters: []
-                - pattern: |
-                    cookies.encrypted.permanent.signed[...] = $ANYTHING
-                  filters: []
+                    cookies.$METHOD_CHAIN[...] = $ANYTHING
+                  filters:
+                    - variable: METHOD_CHAIN
+                      values:
+                        - permanent
+                        - encrypted
+                        - signed
+                        - permanent.encrypted
+                        - permanent.signed
+                        - permanent.encrypted.signed
+                        - permanent.signed.encrypted
+                        - encrypted.permanent
+                        - encrypted.signed
+                        - encrypted.permanent.signed
+                        - encrypted.signed.permanent
+                        - signed.encrypted
+                        - signed.permanent
+                        - signed.permanent.encrypted
+                        - signed.encrypted.permanent
             root_singularize: false
             root_lowercase: false
             metavars: {}
@@ -567,21 +542,13 @@ scan:
             modules:
                 - path: policies/common.rego
                   name: bearer.common
-                  content: |-
+                  content: |
                     package bearer.common
 
                     import future.keywords
 
                     sensitive_data_group_uuid := "f6a0c071-5908-4420-bac2-bba28d41223e"
                     personal_data_group_uuid := "e1d3135b-3c0f-4b55-abce-19f27a26cbb3"
-
-                    has_sensitive_data(data_type) := true if {
-                        some category in input.data_categories
-                        category.uuid == data_type.category_uuid
-
-                        some group in category.groups
-                        group.uuid == sensitive_data_group_uuid
-                    }
 
                     severity_of_datatype(data_type) := "critical" if {
                         some category in input.data_categories
@@ -608,6 +575,10 @@ scan:
                         category.uuid == data_type.category_uuid
 
                         x := {name | name := category.groups[_].name}
+                    }
+
+                    groups_for_datatypes(data_types) := groups if {
+                        groups := {name | name := groups_for_datatype(data_types[_])[_]}
                     }
                 - path: policies/leakage.rego
                   name: bearer.leakage

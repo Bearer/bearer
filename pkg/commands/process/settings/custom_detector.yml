@@ -140,36 +140,26 @@ detect_rails_cookies:
   patterns:
     - |
       cookies[...] = $ANYTHING
-    - |
-      cookies.signed[...] = $ANYTHING
-    - |
-      cookies.permanent[...] = $ANYTHING
-    - |
-      cookies.encrypted[...] = $ANYTHING
-    - |
-      cookies.signed.permanent[...] = $ANYTHING
-    - |
-      cookies.signed.encrypted[...] = $ANYTHING
-    - |
-      cookies.signed.encrypted.permanent[...] = $ANYTHING
-    - |
-      cookies.signed.permanent.encrypted[...] = $ANYTHING
-    - |
-      cookies.permanent.signed[...] = $ANYTHING
-    - |
-      cookies.permanent.encrypted[...] = $ANYTHING
-    - |
-      cookies.permanent.signed.encrypted[...] = $ANYTHING
-    - |
-      cookies.permanent.encrypted.signed[...] = $ANYTHING
-    - |
-      cookies.encrypted.permanent[...] = $ANYTHING
-    - |
-      cookies.encrypted.signed[...] = $ANYTHING
-    - |
-      cookies.encrypted.signed.permanent[...] = $ANYTHING
-    - |
-      cookies.encrypted.permanent.signed[...] = $ANYTHING
+    - pattern: |
+        cookies.$METHOD_CHAIN[...] = $ANYTHING
+      filters:
+        - variable: METHOD_CHAIN
+          values:
+            - permanent
+            - encrypted
+            - signed
+            - permanent.encrypted
+            - permanent.signed
+            - permanent.encrypted.signed
+            - permanent.signed.encrypted
+            - encrypted.permanent
+            - encrypted.signed
+            - encrypted.permanent.signed
+            - encrypted.signed.permanent
+            - signed.encrypted
+            - signed.permanent
+            - signed.permanent.encrypted
+            - signed.encrypted.permanent
   languages:
     - ruby
 ssl_certificate_verification_disabled:
