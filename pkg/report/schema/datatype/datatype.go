@@ -10,6 +10,7 @@ import (
 	"github.com/bearer/curio/pkg/report/detectors"
 	"github.com/bearer/curio/pkg/report/schema"
 	"github.com/bearer/curio/pkg/util/normalize_key"
+	pluralize "github.com/gertd/go-pluralize"
 )
 
 type ReportDataType interface {
@@ -153,6 +154,8 @@ func dataTypeToSchema[D DataTypable](report detections.ReportDetection, detectio
 				LineNumber: parent.LineNumber(),
 			}
 		}
+		pluralizer := pluralize.NewClient()
+		transformedObjectName := pluralizer.Singular(strings.ToLower(parentName))
 		report.AddDetection(detectionType, detectorType, dataType.GetNode().Source(false),
 			schema.Schema{
 				ObjectName:      parentName,
@@ -163,6 +166,7 @@ func dataTypeToSchema[D DataTypable](report detections.ReportDetection, detectio
 				SimpleFieldType: dataType.GetType(),
 				Classification:  dataType.GetClassification(),
 				Parent:          parentSchema,
+				TransformedObjectName: transformedObjectName,
 			},
 		)
 	}

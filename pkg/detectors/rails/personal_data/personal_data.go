@@ -12,6 +12,7 @@ import (
 	"github.com/bearer/curio/pkg/report/detectors"
 	"github.com/bearer/curio/pkg/report/schema"
 	"github.com/bearer/curio/pkg/util/file"
+	pluralize "github.com/gertd/go-pluralize"
 )
 
 var (
@@ -43,6 +44,7 @@ func ExtractFromDatabaseSchema(
 	}
 	defer tree.Close()
 
+	pluralizer := pluralize.NewClient()
 	uuidHolder := parserschema.NewUUIDHolder()
 
 	err = tree.Query(rubyDatabaseSchemaQuery, func(captures parser.Captures) error {
@@ -56,6 +58,7 @@ func ExtractFromDatabaseSchema(
 		objectUUID := uuidHolder.Assign(tableNode.ID(), idGenerator)
 		fieldUUID := uuidHolder.Assign(columnTypeNode.ID(), idGenerator)
 
+		transformedObjectName := pluralizer.Singular(strings.ToLower(tableName))
 		currentSchema := schema.Schema{
 			ObjectName:      tableName,
 			ObjectUUID:      objectUUID,

@@ -27,6 +27,7 @@ type Schema struct {
 	SimpleFieldType string      `json:"field_type_simple" yaml:"field_type_simple"`
 	Classification  interface{} `json:"classification,omitempty" yaml:"classification,omitempty"`
 	Parent          *Parent     `json:"parent,omitempty" yaml:"parent,omitempty"`
+	TransformedObjectName string `json:"transformed_object_name,omitempty" yaml:"transformed_object_name,omitempty"`
 }
 
 type Parent struct {
