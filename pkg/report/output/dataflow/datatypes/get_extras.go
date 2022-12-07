@@ -19,6 +19,80 @@ type extraFields struct {
 	verifiedBy []types.DatatypeVerifiedBy
 }
 
+func GetRailsExtras(input []interface{}, detection interface{}) (*extraFields, error) {
+	extras := &extraFields{}
+
+	processorContent := `
+package bearer.rails_encrypted_verified
+
+import future.keywords
+
+default encrypted := false
+
+ruby_encrypted[location] {
+		some detection in input.all_detections
+		detection.detector_type == "detect_encrypted_ruby_class_properties"
+		detection.value.classification.decision.state == "valid"
+		location = detection
+}
+
+encrypted = true {
+		some detection in ruby_encrypted
+		detection.value.transformed_object_name == input.target.value.transformed_object_name
+		detection.value.field_name == input.target.value.field_name
+		input.target.value.field_name != ""
+		input.target.value.object_name != ""
+}
+
+verified_by[verification] {
+		some detection in ruby_encrypted
+		detection.value.transformed_object_name == input.target.value.transformed_object_name
+		detection.value.field_name == input.target.value.field_name
+
+		verification = {
+				"detector": "detect_encrypted_ruby_class_properties",
+				"filename": detection.source.filename,
+				"line_number": detection.source.line_number
+		}
+}
+`
+
+	query := `
+verified_by = data.bearer.rails_encrypted_verified.verified_by
+encrypted = data.bearer.rails_encrypted_verified.encrypted
+`
+
+	module := regohelper.Module{
+		Name: "bearer.rails_encrypted_verified",
+		Content: processorContent,
+	}
+
+	result, err := regohelper.RunQuery(query, processorInput{
+		AllDetections: input,
+		Target:        detection,
+	}, []regohelper.Module{module})
+	if err != nil {
+		return nil, err
+	}
+
+	encrypted := getEncryptedField(result)
+
+	if encrypted {
+		extras.encrypted = &encrypted
+
+		verified, err := getVerifiedBy(result)
+		if err != nil {
+			return nil, err
+		}
+
+		if verified != nil {
+			extras.verifiedBy = append(extras.verifiedBy, verified...)
+		}
+	}
+
+	return extras, nil
+}
+
 func GetExtras(customDetector settings.Rule, input []interface{}, detection interface{}) (*extraFields, error) {
 	extras := &extraFields{}
 
