@@ -15,7 +15,7 @@ var (
 		Name:       "timeout",
 		ConfigName: "worker.timeout",
 		Value:      10 * time.Minute,
-		Usage:      "The max time alloted to complete the scan.",
+		Usage:      "The maximum time alloted to complete the scan.",
 	}
 	TimeoutFileMinimumFlag = Flag{
 		Name:       "timeout-file-min",
@@ -45,25 +45,25 @@ var (
 		Name:       "file-size-max",
 		ConfigName: "worker.file-size-max",
 		Value:      100 * 1000, // 100 KB
-		Usage:      "Ignore files with a file size larger than this setting.",
+		Usage:      "Ignore files larger than the specified value.",
 	}
 	FilesToBatchFlag = Flag{
 		Name:       "files-to-batch",
 		ConfigName: "worker.files-to-batch",
 		Value:      1,
-		Usage:      "Define the number of files to batch per worker.",
+		Usage:      "Specify the number of files to batch per worker.",
 	}
 	MemoryMaximumFlag = Flag{
 		Name:       "memory-max",
 		ConfigName: "worker.memory-max",
 		Value:      800 * 1000 * 1000, // 800 MB
-		Usage:      "If the memory needed to scan a file surpasses this limit, skip the file.",
+		Usage:      "If the memory needed to scan a file surpasses the specified limit, skip the file.",
 	}
 	ExistingWorkerFlag = Flag{
 		Name:       "existing-worker",
 		ConfigName: "worker.existing-worker",
 		Value:      "",
-		Usage:      "Set the URL of an existing worker.",
+		Usage:      "Specify the URL of an existing worker.",
 	}
 )
 

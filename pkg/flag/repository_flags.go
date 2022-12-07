@@ -5,19 +5,19 @@ var (
 		Name:       "branch",
 		ConfigName: "repository.branch",
 		Value:      "",
-		Usage:      "Pass the branch name to be scanned.",
+		Usage:      "Specify the branch name to be scanned.",
 	}
 	FetchCommitFlag = Flag{
 		Name:       "commit",
 		ConfigName: "repository.commit",
 		Value:      "",
-		Usage:      "Pass the commit hash to be scanned.",
+		Usage:      "Specify the commit hash to be scanned.",
 	}
 	FetchTagFlag = Flag{
 		Name:       "tag",
 		ConfigName: "repository.tag",
 		Value:      "",
-		Usage:      "Pass the tag name to be scanned.",
+		Usage:      "Specify the tag name to be scanned.",
 	}
 )
 

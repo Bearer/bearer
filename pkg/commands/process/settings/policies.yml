@@ -65,7 +65,7 @@ application_level_encryption_missing:
     - path: policies/application_level_encryption.rego
       name: bearer.application_level_encryption
 insecure_smtp_processing_sensitive_data:
-  description: "Communication with insecure SMTP in an application processing sensitive data. Verify that SMTP settings use OpenSSL or equivalent."
+  description: "Communication using insecure SMTP in an application processing sensitive data. Verify that SMTP settings use OpenSSL or equivalent."
   name: "Insecure SMTP"
   id: "detect_rails_insecure_smtp"
   query: |
@@ -120,7 +120,7 @@ insecure_ftp_with_data_category:
     - path: policies/insecure_ftp_with_data_category.rego
       name: bearer.insecure_ftp_with_data_category
 insecure_http_get:
-  description: "Communicating with insecure HTTP GET in an application processing sensitive data. Ensure all HTTP communication occurs over HTTPS."
+  description: "Communicating using insecure HTTP GET in an application processing sensitive data. Ensure all HTTP communication occurs over HTTPS."
   name: "Insecure HTTP GET"
   id: insecure_http_get
   query: |
@@ -131,7 +131,7 @@ insecure_http_get:
     - path: policies/insecure_http_get.rego
       name: bearer.insecure_http_get
 insecure_http_with_data_category:
-  description: "Communicating Data Category with insecure HTTP. Ensure all HTTP communication occurs over HTTPS."
+  description: "Communicating Data Category using insecure HTTP. Ensure all HTTP communication occurs over HTTPS."
   name: "Insecure HTTP with Data Category"
   id: insecure_http_with_data_category
   query: |
