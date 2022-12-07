@@ -63,11 +63,12 @@ func ExtractFromDatabaseSchema(
 			FieldUUID:       fieldUUID,
 			FieldType:       columnType,
 			SimpleFieldType: convertToSimpleType(columnType),
+			TransformedObjectName: transformedObjectName,
 		}
 		if !report.SchemaGroupIsOpen() {
 			source := tableNode.Source(false)
 			report.SchemaGroupBegin(
-				detectors.DetectorRails,
+				detectors.DetectorSchemaRb,
 				tableNode,
 				currentSchema,
 				&source,
