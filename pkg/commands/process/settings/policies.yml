@@ -108,6 +108,17 @@ insecure_ftp_processing_sensitive_data:
       name: bearer.common
     - path: policies/insecure_ftp.rego
       name: bearer.insecure_ftp
+insecure_ftp_with_data_category:
+  description: "Communicating Data Category with an insecure FTP server. Only connect to FTP securely."
+  name: "Insecure FTP with Data Category"
+  id: insecure_ftp_with_data_category
+  query: |
+    policy_breach = data.bearer.insecure_ftp_with_data_category.policy_breach
+  modules:
+    - path: policies/common.rego
+      name: bearer.common
+    - path: policies/insecure_ftp_with_data_category.rego
+      name: bearer.insecure_ftp_with_data_category
 insecure_http_get:
   description: "Communicating with insecure HTTP GET in an application processing sensitive data"
   name: "Insecure HTTP GET"

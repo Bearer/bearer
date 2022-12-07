@@ -1,3 +1,25 @@
+critical:
+    - policy_name: Insecure FTP with Data Category
+      policy_description: Communicating Data Category with an insecure FTP server. Only connect to FTP securely.
+      line_number: 27
+      filename: testdata/ruby/insecure_ftp.rb
+      category_groups:
+        - PII
+        - Sensitive personal data
+      parent_line_number: 24
+      parent_content: |-
+        Net::FTP.open("ftp.site.com") do |ftp|
+          file = Tempfile.new("user_data")
+          begin
+            file << { user: { ethnicity: "martian" } }.to_json
+            file.close
+
+            ftp.puttextfile(file.path, "/users/123.json")
+          ensure
+            file.close!
+          end
+        end
+      omit_parent: false
 medium:
     - policy_name: Insecure FTP
       policy_description: Communication with insecure FTP in an application processing sensitive data
@@ -6,6 +28,7 @@ medium:
       category_groups:
         - PHI
         - PII
+        - Sensitive personal data
       parent_line_number: 10
       parent_content: Net::FTP.new("ftp.ruby-lang.org")
       omit_parent: false
@@ -16,6 +39,7 @@ medium:
       category_groups:
         - PHI
         - PII
+        - Sensitive personal data
       parent_line_number: 17
       parent_content: |-
         Net::FTP.open('example.com') do |ftp|
@@ -23,6 +47,28 @@ medium:
           files = ftp.chdir('pub/lang/ruby/contrib')
           files = ftp.list('n*')
           ftp.getbinaryfile('nif.rb-0.91.gz', 'nif.gz', 1024)
+        end
+      omit_parent: false
+    - policy_name: Insecure FTP
+      policy_description: Communication with insecure FTP in an application processing sensitive data
+      line_number: 24
+      filename: testdata/ruby/insecure_ftp.rb
+      category_groups:
+        - PHI
+        - PII
+        - Sensitive personal data
+      parent_line_number: 24
+      parent_content: |-
+        Net::FTP.open("ftp.site.com") do |ftp|
+          file = Tempfile.new("user_data")
+          begin
+            file << { user: { ethnicity: "martian" } }.to_json
+            file.close
+
+            ftp.puttextfile(file.path, "/users/123.json")
+          ensure
+            file.close!
+          end
         end
       omit_parent: false
 

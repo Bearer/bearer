@@ -149,7 +149,7 @@ func addProperties(node *parser.Node, helperDatatypes map[parser.NodeID]*schemad
 					}
 				}
 			}
-		} else if parentNode.Type() == "argument_list" || parentNode.Type() == "program" {
+		} else {
 			// add child properties
 			for i := 0; i < hashNode.ChildCount(); i++ {
 				pair := hashNode.Child(i)
@@ -199,7 +199,6 @@ func addProperties(node *parser.Node, helperDatatypes map[parser.NodeID]*schemad
 						Properties: make(map[string]schemadatatype.DataTypable),
 					}
 				}
-
 			}
 		}
 	}
