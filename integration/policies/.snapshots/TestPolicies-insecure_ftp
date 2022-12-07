@@ -2,16 +2,17 @@ medium:
     - policy_name: Insecure FTP
       policy_description: Communication with insecure FTP in an application processing sensitive data
       line_number: 10
-      filename: testdata/ruby/insecure_ftp/without_sensitive_data.rb
+      filename: testdata/ruby/insecure_ftp.rb
       category_groups:
         - PHI
         - PII
       parent_line_number: 10
       parent_content: Net::FTP.new("ftp.ruby-lang.org")
+      omit_parent: false
     - policy_name: Insecure FTP
       policy_description: Communication with insecure FTP in an application processing sensitive data
       line_number: 17
-      filename: testdata/ruby/insecure_ftp/without_sensitive_data.rb
+      filename: testdata/ruby/insecure_ftp.rb
       category_groups:
         - PHI
         - PII
@@ -23,6 +24,7 @@ medium:
           files = ftp.list('n*')
           ftp.getbinaryfile('nif.rb-0.91.gz', 'nif.gz', 1024)
         end
+      omit_parent: false
 
 
 --

@@ -148,6 +148,34 @@ scan:
             stored: false
             detect_presence: false
             omit_parent: false
+        detect_ruby_third_party_data_send:
+            disabled: false
+            type: risk
+            languages:
+                - ruby
+            param_parenting: false
+            processors: []
+            patterns:
+                - pattern: |
+                    Sentry::Breadcrumb.new(<$ARGUMENT>)
+                  filters: []
+                - pattern: |
+                    Sentry.init do |config|
+                      config.before_breadcrumb = lambda do |breadcrumb, hint|
+                        breadcrumb.message = $ANYTHING
+                        breadcrumb
+                      end
+                    end
+                  filters: []
+                - pattern: |
+                    Sentry.set_user(<$ARGUMENT>)
+                  filters: []
+            root_singularize: false
+            root_lowercase: false
+            metavars: {}
+            stored: false
+            detect_presence: false
+            omit_parent: false
         detect_sql_create_public_table:
             disabled: false
             type: data_type
@@ -215,6 +243,14 @@ scan:
             param_parenting: true
             processors: []
             patterns:
+                - pattern: |
+                    CSV.generate do
+                      <$DATA_TYPE>
+                    end
+                  filters: []
+                - pattern: |
+                    CSV.generate { <$DATA_TYPE> }
+                  filters: []
                 - pattern: |
                     CSV.open { <$DATA_TYPE> }
                   filters: []
@@ -333,6 +369,36 @@ scan:
             stored: false
             detect_presence: false
             omit_parent: false
+        ruby_http_post_insecure:
+            disabled: false
+            type: risk
+            languages:
+                - ruby
+            param_parenting: false
+            processors: []
+            patterns:
+                - pattern: |
+                    Net::HTTP.post_form(<$INSECURE_URL>)
+                  filters: []
+                - pattern: |
+                    $CLIENT.post(<$INSECURE_URL>)
+                  filters:
+                    - variable: CLIENT
+                      values:
+                        - Curl
+                        - Excon
+                        - Faraday
+                        - HTTP
+                        - HTTParty
+                        - HTTPX
+                        - RestClient
+                        - Typhoeus
+            root_singularize: false
+            root_lowercase: false
+            metavars: {}
+            stored: false
+            detect_presence: true
+            omit_parent: false
         ssl_certificate_verification_disabled:
             disabled: false
             type: risk
@@ -372,14 +438,6 @@ scan:
 
                     sensitive_data_group_uuid := "f6a0c071-5908-4420-bac2-bba28d41223e"
                     personal_data_group_uuid := "e1d3135b-3c0f-4b55-abce-19f27a26cbb3"
-
-                    has_sensitive_data(data_type) := true if {
-                        some category in input.data_categories
-                        category.uuid == data_type.category_uuid
-
-                        some group in category.groups
-                        group.uuid == sensitive_data_group_uuid
-                    }
 
                     severity_of_datatype(data_type) := "critical" if {
                         some category in input.data_categories
@@ -455,14 +513,6 @@ scan:
                     sensitive_data_group_uuid := "f6a0c071-5908-4420-bac2-bba28d41223e"
                     personal_data_group_uuid := "e1d3135b-3c0f-4b55-abce-19f27a26cbb3"
 
-                    has_sensitive_data(data_type) := true if {
-                        some category in input.data_categories
-                        category.uuid == data_type.category_uuid
-
-                        some group in category.groups
-                        group.uuid == sensitive_data_group_uuid
-                    }
-
                     severity_of_datatype(data_type) := "critical" if {
                         some category in input.data_categories
                         category.uuid == data_type.category_uuid
@@ -536,14 +586,6 @@ scan:
                     sensitive_data_group_uuid := "f6a0c071-5908-4420-bac2-bba28d41223e"
                     personal_data_group_uuid := "e1d3135b-3c0f-4b55-abce-19f27a26cbb3"
 
-                    has_sensitive_data(data_type) := true if {
-                        some category in input.data_categories
-                        category.uuid == data_type.category_uuid
-
-                        some group in category.groups
-                        group.uuid == sensitive_data_group_uuid
-                    }
-
                     severity_of_datatype(data_type) := "critical" if {
                         some category in input.data_categories
                         category.uuid == data_type.category_uuid
@@ -585,7 +627,6 @@ scan:
 
                     policy_breach contains item if {
                         some data_type in input.dataflow.data_types
-                        data.bearer.common.has_sensitive_data(data_type)
 
                         some detector in input.dataflow.risks
                         detector.detector_id == input.policy_id
@@ -595,7 +636,8 @@ scan:
                           "category_groups": data.bearer.common.groups_for_datatypes(input.dataflow.data_types),
                           "severity": "medium",
                           "filename": location.filename,
-                          "line_number": location.line_number
+                          "line_number": location.line_number,
+                          "omit_parent": true
                         }
                     }
         insecure_ftp_processing_sensitive_data:
@@ -615,14 +657,6 @@ scan:
 
                     sensitive_data_group_uuid := "f6a0c071-5908-4420-bac2-bba28d41223e"
                     personal_data_group_uuid := "e1d3135b-3c0f-4b55-abce-19f27a26cbb3"
-
-                    has_sensitive_data(data_type) := true if {
-                        some category in input.data_categories
-                        category.uuid == data_type.category_uuid
-
-                        some group in category.groups
-                        group.uuid == sensitive_data_group_uuid
-                    }
 
                     severity_of_datatype(data_type) := "critical" if {
                         some category in input.data_categories
@@ -665,7 +699,6 @@ scan:
 
                     policy_breach contains item if {
                         some data_type in input.dataflow.data_types
-                        data.bearer.common.has_sensitive_data(data_type)
 
                         some detector in input.dataflow.risks
                         detector.detector_id == input.policy_id
@@ -697,14 +730,6 @@ scan:
 
                     sensitive_data_group_uuid := "f6a0c071-5908-4420-bac2-bba28d41223e"
                     personal_data_group_uuid := "e1d3135b-3c0f-4b55-abce-19f27a26cbb3"
-
-                    has_sensitive_data(data_type) := true if {
-                        some category in input.data_categories
-                        category.uuid == data_type.category_uuid
-
-                        some group in category.groups
-                        group.uuid == sensitive_data_group_uuid
-                    }
 
                     severity_of_datatype(data_type) := "critical" if {
                         some category in input.data_categories
@@ -747,7 +772,6 @@ scan:
 
                     policy_breach contains item if {
                         some data_type in input.dataflow.data_types
-                        data.bearer.common.has_sensitive_data(data_type)
 
                         some detector in input.dataflow.risks
                         detector.detector_id == "ruby_http_get_insecure"
@@ -761,6 +785,93 @@ scan:
                             "parent_line_number": location.parent.line_number,
                             "parent_content": location.parent.content
                         }
+                    }
+        insecure_http_with_data_category:
+            query: |
+                policy_breach = data.bearer.insecure_http_with_data_category.policy_breach
+            id: insecure_http_with_data_category
+            name: Insecure HTTP with Data Category
+            description: Communicating Data Category with insecure HTTP
+            level: ""
+            modules:
+                - path: policies/common.rego
+                  name: bearer.common
+                  content: |
+                    package bearer.common
+
+                    import future.keywords
+
+                    sensitive_data_group_uuid := "f6a0c071-5908-4420-bac2-bba28d41223e"
+                    personal_data_group_uuid := "e1d3135b-3c0f-4b55-abce-19f27a26cbb3"
+
+                    severity_of_datatype(data_type) := "critical" if {
+                        some category in input.data_categories
+                        category.uuid == data_type.category_uuid
+
+                        some group in category.groups
+                        group.uuid == sensitive_data_group_uuid
+                    }
+
+                    severity_of_datatype(data_type) := "high" if {
+                        some category in input.data_categories
+                        category.uuid == data_type.category_uuid
+
+                        some group in category.groups
+                        group.uuid == personal_data_group_uuid
+
+                        every group_1 in category.groups {
+                            group_1.uuid != sensitive_data_group_uuid
+                        }
+                    }
+
+                    groups_for_datatype(data_type) := x if {
+                        some category in input.data_categories
+                        category.uuid == data_type.category_uuid
+
+                        x := {name | name := category.groups[_].name}
+                    }
+
+                    groups_for_datatypes(data_types) := groups if {
+                        groups := {name | name := groups_for_datatype(data_types[_])[_]}
+                    }
+                - path: policies/insecure_http_with_data_category.rego
+                  name: bearer.insecure_http_with_data_category
+                  content: |
+                    package bearer.insecure_http_with_data_category
+
+                    import data.bearer.common
+
+                    import future.keywords
+
+                    insecure_http_with_data contains [data_detector_id, insecure_detector_id, item] if {
+                        some data_risk in input.dataflow.risks
+                        data_detector_id := data_risk.detector_id
+
+                        data_type = data_risk.data_types[_]
+                        data_location = data_type.locations[_]
+
+                        some insecure_risk in input.dataflow.risks
+                        insecure_detector_id := insecure_risk.detector_id
+                        some insecure_location in insecure_risk.locations
+                        data_location.filename == insecure_location.filename
+                        data_location.parent.line_number == insecure_location.parent.line_number
+
+                        item := {
+                            "category_groups": data.bearer.common.groups_for_datatype(data_type),
+                            "severity": data.bearer.common.severity_of_datatype(data_type),
+                            "filename": data_location.filename,
+                            "line_number": data_location.line_number,
+                            "parent_line_number": data_location.parent.line_number,
+                            "parent_content": data_location.parent.content
+                        }
+                    }
+
+                    policy_breach contains item if {
+                      insecure_http_with_data[["ruby_http_get_detection", "ruby_http_get_insecure", item]]
+                    }
+
+                    policy_breach contains item if {
+                      insecure_http_with_data[["ruby_http_post_detection", "ruby_http_post_insecure", item]]
                     }
         insecure_smtp_processing_sensitive_data:
             query: |
@@ -779,14 +890,6 @@ scan:
 
                     sensitive_data_group_uuid := "f6a0c071-5908-4420-bac2-bba28d41223e"
                     personal_data_group_uuid := "e1d3135b-3c0f-4b55-abce-19f27a26cbb3"
-
-                    has_sensitive_data(data_type) := true if {
-                        some category in input.data_categories
-                        category.uuid == data_type.category_uuid
-
-                        some group in category.groups
-                        group.uuid == sensitive_data_group_uuid
-                    }
 
                     severity_of_datatype(data_type) := "critical" if {
                         some category in input.data_categories
@@ -829,7 +932,6 @@ scan:
 
                     policy_breach contains item if {
                         some data_type in input.dataflow.data_types
-                        data.bearer.common.has_sensitive_data(data_type)
 
                         some detector in input.dataflow.risks
                         detector.detector_id == input.policy_id
@@ -838,7 +940,9 @@ scan:
                         item := {
                             "category_groups": data.bearer.common.groups_for_datatypes(input.dataflow.data_types),
                             "severity": "medium",
-                            "line_number": location.line_number
+                            "filename": location.filename,
+                            "line_number": location.line_number,
+                            "omit_parent": true
                         }
                     }
         jwt_leaks:
@@ -858,14 +962,6 @@ scan:
 
                     sensitive_data_group_uuid := "f6a0c071-5908-4420-bac2-bba28d41223e"
                     personal_data_group_uuid := "e1d3135b-3c0f-4b55-abce-19f27a26cbb3"
-
-                    has_sensitive_data(data_type) := true if {
-                        some category in input.data_categories
-                        category.uuid == data_type.category_uuid
-
-                        some group in category.groups
-                        group.uuid == sensitive_data_group_uuid
-                    }
 
                     severity_of_datatype(data_type) := "critical" if {
                         some category in input.data_categories
@@ -940,14 +1036,6 @@ scan:
                     sensitive_data_group_uuid := "f6a0c071-5908-4420-bac2-bba28d41223e"
                     personal_data_group_uuid := "e1d3135b-3c0f-4b55-abce-19f27a26cbb3"
 
-                    has_sensitive_data(data_type) := true if {
-                        some category in input.data_categories
-                        category.uuid == data_type.category_uuid
-
-                        some group in category.groups
-                        group.uuid == sensitive_data_group_uuid
-                    }
-
                     severity_of_datatype(data_type) := "critical" if {
                         some category in input.data_categories
                         category.uuid == data_type.category_uuid
@@ -1003,6 +1091,79 @@ scan:
                             "parent_content": location.parent.content
                         }
                     }
+        sending_data_in_category_to_third_party:
+            query: |
+                policy_breach = data.bearer.third_party_data_category.policy_breach
+            id: detect_ruby_third_party_data_send
+            name: Third-party data category exposure
+            description: Sending data in category to third party
+            level: ""
+            modules:
+                - path: policies/common.rego
+                  name: bearer.common
+                  content: |
+                    package bearer.common
+
+                    import future.keywords
+
+                    sensitive_data_group_uuid := "f6a0c071-5908-4420-bac2-bba28d41223e"
+                    personal_data_group_uuid := "e1d3135b-3c0f-4b55-abce-19f27a26cbb3"
+
+                    severity_of_datatype(data_type) := "critical" if {
+                        some category in input.data_categories
+                        category.uuid == data_type.category_uuid
+
+                        some group in category.groups
+                        group.uuid == sensitive_data_group_uuid
+                    }
+
+                    severity_of_datatype(data_type) := "high" if {
+                        some category in input.data_categories
+                        category.uuid == data_type.category_uuid
+
+                        some group in category.groups
+                        group.uuid == personal_data_group_uuid
+
+                        every group_1 in category.groups {
+                            group_1.uuid != sensitive_data_group_uuid
+                        }
+                    }
+
+                    groups_for_datatype(data_type) := x if {
+                        some category in input.data_categories
+                        category.uuid == data_type.category_uuid
+
+                        x := {name | name := category.groups[_].name}
+                    }
+
+                    groups_for_datatypes(data_types) := groups if {
+                        groups := {name | name := groups_for_datatype(data_types[_])[_]}
+                    }
+                - path: policies/third_party_data_category.rego
+                  name: bearer.third_party_data_category
+                  content: |
+                    package bearer.third_party_data_category
+
+                    import data.bearer.common
+
+                    import future.keywords
+
+                    policy_breach contains item if {
+                        some detector in input.dataflow.risks
+                        detector.detector_id == input.policy_id
+
+                        data_type = detector.data_types[_]
+
+                        location = data_type.locations[_]
+                        item := {
+                            "category_groups": data.bearer.common.groups_for_datatype(data_type),
+                            "severity": data.bearer.common.severity_of_datatype(data_type),
+                            "filename": location.filename,
+                            "line_number": location.line_number,
+                            "parent_line_number": location.parent.line_number,
+                            "parent_content": location.parent.content
+                        }
+                    }
         session_leaks:
             query: |
                 policy_breach = data.bearer.leakage.policy_breach
@@ -1020,14 +1181,6 @@ scan:
 
                     sensitive_data_group_uuid := "f6a0c071-5908-4420-bac2-bba28d41223e"
                     personal_data_group_uuid := "e1d3135b-3c0f-4b55-abce-19f27a26cbb3"
-
-                    has_sensitive_data(data_type) := true if {
-                        some category in input.data_categories
-                        category.uuid == data_type.category_uuid
-
-                        some group in category.groups
-                        group.uuid == sensitive_data_group_uuid
-                    }
 
                     severity_of_datatype(data_type) := "critical" if {
                         some category in input.data_categories
@@ -1102,14 +1255,6 @@ scan:
                     sensitive_data_group_uuid := "f6a0c071-5908-4420-bac2-bba28d41223e"
                     personal_data_group_uuid := "e1d3135b-3c0f-4b55-abce-19f27a26cbb3"
 
-                    has_sensitive_data(data_type) := true if {
-                        some category in input.data_categories
-                        category.uuid == data_type.category_uuid
-
-                        some group in category.groups
-                        group.uuid == sensitive_data_group_uuid
-                    }
-
                     severity_of_datatype(data_type) := "critical" if {
                         some category in input.data_categories
                         category.uuid == data_type.category_uuid
@@ -1151,7 +1296,6 @@ scan:
 
                     policy_breach contains item if {
                       some data_type in input.dataflow.data_types
-                      data.bearer.common.has_sensitive_data(data_type)
 
                       some detector in input.dataflow.risks
                       detector.detector_id == input.policy_id

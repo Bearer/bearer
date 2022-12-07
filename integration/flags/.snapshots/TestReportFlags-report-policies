@@ -8,6 +8,7 @@ high:
         - PII
       parent_line_number: 1
       parent_content: logger.info(user.address)
+      omit_parent: false
 
 
 --

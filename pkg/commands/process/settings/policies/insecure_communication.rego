@@ -6,7 +6,6 @@ import future.keywords
 
 policy_breach contains item if {
     some data_type in input.dataflow.data_types
-    data.bearer.common.has_sensitive_data(data_type)
 
     some detector in input.dataflow.risks
     detector.detector_id == input.policy_id
@@ -16,6 +15,7 @@ policy_breach contains item if {
       "category_groups": data.bearer.common.groups_for_datatypes(input.dataflow.data_types),
       "severity": "medium",
       "filename": location.filename,
-      "line_number": location.line_number
+      "line_number": location.line_number,
+      "omit_parent": true
     }
 }

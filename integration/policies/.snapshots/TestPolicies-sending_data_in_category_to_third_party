@@ -1,0 +1,46 @@
+high:
+    - policy_name: Third-party data category exposure
+      policy_description: Sending data in category to third party
+      line_number: 12
+      filename: testdata/ruby/sending_data_in_category_to_third_party.rb
+      category_groups:
+        - PHI
+        - PII
+      parent_line_number: 10
+      parent_content: |-
+        Sentry::Breadcrumb.new(
+          category: "auth",
+          message: "Authenticated user #{user.email}",
+          level: "info"
+        )
+      omit_parent: false
+    - policy_name: Third-party data category exposure
+      policy_description: Sending data in category to third party
+      line_number: 18
+      filename: testdata/ruby/sending_data_in_category_to_third_party.rb
+      category_groups:
+        - PHI
+        - PII
+      parent_line_number: 16
+      parent_content: |-
+        Sentry.init do |config|
+          config.before_breadcrumb = lambda do |breadcrumb, hint|
+            breadcrumb.message = "Authenticated user #{current_user.email}"
+            breadcrumb
+          end
+        end
+      omit_parent: false
+    - policy_name: Third-party data category exposure
+      policy_description: Sending data in category to third party
+      line_number: 24
+      filename: testdata/ruby/sending_data_in_category_to_third_party.rb
+      category_groups:
+        - PHI
+        - PII
+      parent_line_number: 24
+      parent_content: 'Sentry.set_user(email: user.email)'
+      omit_parent: false
+
+
+--
+

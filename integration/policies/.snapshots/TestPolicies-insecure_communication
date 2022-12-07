@@ -2,10 +2,11 @@ medium:
     - policy_name: Insecure communication
       policy_description: Insecure communication in an application processing sensitive data
       line_number: 8
-      filename: testdata/ruby/insecure_communication/without_sensitive_data.rb
+      filename: testdata/ruby/insecure_communication.rb
       category_groups:
         - PHI
         - PII
+      omit_parent: true
 
 
 --
