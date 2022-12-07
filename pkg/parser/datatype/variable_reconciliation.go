@@ -15,6 +15,8 @@ func VariableReconciliation(singleArgumentDatatypes map[parser.NodeID]*datatype.
 	for _, argumentDatatype := range singleArgumentDatatypes {
 		currentNode := argumentDatatype.Node
 		isFirst := true
+
+		var toReconciliate []datatype.DataTypable
 		for {
 			if isFirst {
 				isFirst = false
@@ -55,10 +57,15 @@ func VariableReconciliation(singleArgumentDatatypes map[parser.NodeID]*datatype.
 
 					for _, scopedDatatype := range datatypeOccurences {
 						// merge properties of argumentDatatype and globalDatatype
-						MergeDatatypesByPropertyNames(argumentDatatype, scopedDatatype)
+						propertiesToMerge := CloneDeepestProperties(argumentDatatype, scopedDatatype)
+						toReconciliate = append(toReconciliate, propertiesToMerge)
 					}
 				}
 			}
+		}
+
+		for _, toReconcilate := range toReconciliate {
+			MergeDatatypesByPropertyNames(argumentDatatype, toReconcilate)
 		}
 	}
 }

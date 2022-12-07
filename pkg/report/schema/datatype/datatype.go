@@ -82,6 +82,24 @@ func (datatype *DataType) CreateProperties() {
 	datatype.Properties = make(map[string]DataTypable)
 }
 
+func (datatype *DataType) Clone() DataTypable {
+	cloned := &DataType{
+		Node:       datatype.Node,
+		Name:       datatype.Name,
+		Type:       datatype.Type,
+		TextType:   datatype.TextType,
+		Properties: make(map[string]DataTypable),
+		IsHelper:   datatype.IsHelper,
+		UUID:       datatype.UUID,
+	}
+
+	for nodeID, child := range datatype.Properties {
+		cloned.Properties[nodeID] = child.Clone()
+	}
+
+	return cloned
+}
+
 type DataTypable interface {
 	DeleteProperty(name string)
 	GetClassification() interface{}
@@ -95,6 +113,7 @@ type DataTypable interface {
 	SetName(string)
 	GetNode() *parser.Node
 	GetProperties() map[string]DataTypable
+	Clone() DataTypable
 	SetProperty(string, DataTypable)
 	CreateProperties()
 }

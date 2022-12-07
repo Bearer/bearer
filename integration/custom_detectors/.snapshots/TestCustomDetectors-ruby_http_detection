@@ -169,11 +169,6 @@ risks:
               parent:
                 line_number: 7
                 content: URI.encode_www_form(user_1)
-            - filename: testdata/ruby/ruby_http_detection.rb
-              line_number: 12
-              parent:
-                line_number: 110
-                content: HTTPX.get("https://my.api.com/users/search?first_name=#{user_2.first_name}")
     - detector_id: ruby_http_post_detection
       data_types:
         - name: Ethnic Origin

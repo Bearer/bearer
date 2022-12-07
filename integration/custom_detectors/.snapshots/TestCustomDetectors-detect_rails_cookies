@@ -40,22 +40,6 @@ risks:
               parent:
                 line_number: 2
                 content: cookies.signed[:info] = user.email
-        - name: Firstname
-          stored: false
-          locations:
-            - filename: testdata/ruby/detect_rails_cookies.rb
-              line_number: 5
-              parent:
-                line_number: 8
-                content: 'cookies[:login] = { value: user_1.to_json, expires: 1.hour, secure: true }'
-        - name: Lastname
-          stored: false
-          locations:
-            - filename: testdata/ruby/detect_rails_cookies.rb
-              line_number: 6
-              parent:
-                line_number: 8
-                content: 'cookies[:login] = { value: user_1.to_json, expires: 1.hour, secure: true }'
         - name: Physical Address
           stored: false
           locations:
