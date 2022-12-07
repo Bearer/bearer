@@ -1,32 +1,23 @@
 critical:
-    - policy_name: HTTP GET parameters
-      policy_description: Sending data as HTTP GET parameters
-      line_number: 1
-      filename: testdata/ruby/http/with_sensitive_data.rb
-      category_groups:
-        - PII
-        - Sensitive data
-      parent_line_number: 1
-      parent_content: URI("http://my.api.com/users/search?ethnic_origin=#{user_1.ethnic_origin}")
     - policy_name: Insecure HTTP with Data Category
       policy_description: Communicating Data Category with insecure HTTP
       line_number: 1
       filename: testdata/ruby/http/with_sensitive_data.rb
       category_groups:
         - PII
-        - Sensitive data
+        - Sensitive personal data
+      parent_line_number: 1
+      parent_content: URI("http://my.api.com/users/search?ethnic_origin=#{user_1.ethnic_origin}")
+    - policy_name: HTTP GET parameters
+      policy_description: Sending data as HTTP GET parameters
+      line_number: 1
+      filename: testdata/ruby/http/with_sensitive_data.rb
+      category_groups:
+        - PII
+        - Sensitive personal data
       parent_line_number: 1
       parent_content: URI("http://my.api.com/users/search?ethnic_origin=#{user_1.ethnic_origin}")
 high:
-    - policy_name: HTTP GET parameters
-      policy_description: Sending data as HTTP GET parameters
-      line_number: 4
-      filename: testdata/ruby/http/with_sensitive_data.rb
-      category_groups:
-        - PHI
-        - PII
-      parent_line_number: 5
-      parent_content: URI.encode_www_form(user)
     - policy_name: Insecure HTTP with Data Category
       policy_description: Communicating Data Category with insecure HTTP
       line_number: 11
@@ -36,6 +27,15 @@ high:
         - PII
       parent_line_number: 11
       parent_content: 'Net::HTTP.post_form(''http://my.api.com/users/search'', { user: { first_name: "John", last_name: "Doe" } })'
+    - policy_name: HTTP GET parameters
+      policy_description: Sending data as HTTP GET parameters
+      line_number: 4
+      filename: testdata/ruby/http/with_sensitive_data.rb
+      category_groups:
+        - PHI
+        - PII
+      parent_line_number: 5
+      parent_content: URI.encode_www_form(user)
 medium:
     - policy_name: Insecure HTTP GET
       policy_description: Communicating with insecure HTTP GET in an application processing sensitive data
@@ -44,7 +44,7 @@ medium:
       category_groups:
         - PHI
         - PII
-        - Sensitive data
+        - Sensitive personal data
       parent_line_number: 1
       parent_content: URI("http://my.api.com/users/search?ethnic_origin=#{user_1.ethnic_origin}")
     - policy_name: Insecure HTTP GET
@@ -54,7 +54,7 @@ medium:
       category_groups:
         - PHI
         - PII
-        - Sensitive data
+        - Sensitive personal data
       parent_line_number: 3
       parent_content: URI('http://my.api.com/users/search')
 
