@@ -92,23 +92,20 @@ ruby_file_detection:
     - ruby
   patterns:
     - |
+      CSV.generate { <$DATA_TYPE> }
+    - |
       CSV.generate do
         <$DATA_TYPE>
       end
-    - |
-      CSV.generate { <$DATA_TYPE> }
-    - |
-      CSV.open { <$DATA_TYPE> }
-    - |
-      CSV.open do
-        <$DATA_TYPE>
-      end
-    - |
-      File.open do
-        <$DATA_TYPE>
-      end
-    - |
-      File.open { <$DATA_TYPE> }
+    - pattern: |
+        $LIBRARY.open do
+          <$DATA_TYPE>
+        end
+      filters:
+        - variable: LIBRARY
+          values:
+            - CSV
+            - File
   param_parenting: true
   metavars: {}
   stored: false

@@ -46,10 +46,10 @@ risks:
             - filename: testdata/ruby/ruby_file_detection.rb
               line_number: 5
               parent:
-                line_number: 20
+                line_number: 1
                 content: |-
-                    CSV.generate do |csv|
-                    	csv << ["email", "first_name", "last_name"]
+                    CSV.open("path/to/user.csv", "wb") do |csv|
+                      csv << ["email", "first_name", "last_name"]
                     	users.each do |user|
                     		csv << [
                     			user.email,
@@ -58,11 +58,6 @@ risks:
                     		]
                     	end
                     end
-            - filename: testdata/ruby/ruby_file_detection.rb
-              line_number: 12
-              parent:
-                line_number: 12
-                content: 'File.open("users.log", "w") { |f| f.write "#{Time.now} - User #{user_2.email} logged in\n" }'
             - filename: testdata/ruby/ruby_file_detection.rb
               line_number: 16
               parent:
@@ -80,11 +75,11 @@ risks:
                 content: |-
                     CSV.generate do |csv|
                     	csv << ["email", "first_name", "last_name"]
-                    	users.each do |user|
+                    	users.each do |user_5|
                     		csv << [
-                    			user.email,
-                    			user.first_name,
-                    			user.last_name
+                    			user_5.email,
+                    			user_5.first_name,
+                    			user_5.last_name
                     		]
                     	end
                     end
@@ -94,10 +89,10 @@ risks:
             - filename: testdata/ruby/ruby_file_detection.rb
               line_number: 6
               parent:
-                line_number: 20
+                line_number: 1
                 content: |-
-                    CSV.generate do |csv|
-                    	csv << ["email", "first_name", "last_name"]
+                    CSV.open("path/to/user.csv", "wb") do |csv|
+                      csv << ["email", "first_name", "last_name"]
                     	users.each do |user|
                     		csv << [
                     			user.email,
@@ -123,11 +118,11 @@ risks:
                 content: |-
                     CSV.generate do |csv|
                     	csv << ["email", "first_name", "last_name"]
-                    	users.each do |user|
+                    	users.each do |user_5|
                     		csv << [
-                    			user.email,
-                    			user.first_name,
-                    			user.last_name
+                    			user_5.email,
+                    			user_5.first_name,
+                    			user_5.last_name
                     		]
                     	end
                     end
@@ -137,10 +132,10 @@ risks:
             - filename: testdata/ruby/ruby_file_detection.rb
               line_number: 7
               parent:
-                line_number: 20
+                line_number: 1
                 content: |-
-                    CSV.generate do |csv|
-                    	csv << ["email", "first_name", "last_name"]
+                    CSV.open("path/to/user.csv", "wb") do |csv|
+                      csv << ["email", "first_name", "last_name"]
                     	users.each do |user|
                     		csv << [
                     			user.email,
@@ -166,11 +161,11 @@ risks:
                 content: |-
                     CSV.generate do |csv|
                     	csv << ["email", "first_name", "last_name"]
-                    	users.each do |user|
+                    	users.each do |user_5|
                     		csv << [
-                    			user.email,
-                    			user.first_name,
-                    			user.last_name
+                    			user_5.email,
+                    			user_5.first_name,
+                    			user_5.last_name
                     		]
                     	end
                     end
