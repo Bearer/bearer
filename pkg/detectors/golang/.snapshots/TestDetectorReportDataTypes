@@ -20,7 +20,7 @@
       SimpleFieldType: (string) (len=6) "string",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) (len=4) "user"
+      TransformedObjectName: (string) ""
     }
   }),
   (*detections.Detection)({
@@ -44,7 +44,7 @@
       SimpleFieldType: (string) (len=6) "object",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) (len=4) "user"
+      TransformedObjectName: (string) ""
     }
   }),
   (*detections.Detection)({
@@ -68,7 +68,7 @@
       SimpleFieldType: (string) (len=8) "function",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) (len=4) "user"
+      TransformedObjectName: (string) ""
     }
   }),
   (*detections.Detection)({
@@ -92,7 +92,7 @@
       SimpleFieldType: (string) (len=8) "function",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) (len=4) "user"
+      TransformedObjectName: (string) ""
     }
   }),
   (*detections.Detection)({
@@ -116,7 +116,7 @@
       SimpleFieldType: (string) (len=8) "function",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) (len=4) "user"
+      TransformedObjectName: (string) ""
     }
   }),
   (*detections.Detection)({
@@ -140,7 +140,7 @@
       SimpleFieldType: (string) (len=6) "string",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) (len=6) "person"
+      TransformedObjectName: (string) ""
     }
   }),
   (*detections.Detection)({
@@ -164,7 +164,7 @@
       SimpleFieldType: (string) (len=6) "number",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) (len=8) "bodystat"
+      TransformedObjectName: (string) ""
     }
   }),
   (*detections.Detection)({
@@ -188,7 +188,7 @@
       SimpleFieldType: (string) (len=6) "number",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) (len=8) "bodystat"
+      TransformedObjectName: (string) ""
     }
   })
 }

@@ -14,8 +14,7 @@
 			"object_name": "users",
 			"field_name": "id",
 			"field_type": "bigint",
-			"field_type_simple": "number",
-			"transformed_object_name": "user"
+			"field_type_simple": "number"
 		}
 	},
 	{
@@ -33,8 +32,7 @@
 			"object_name": "users",
 			"field_name": "class_id",
 			"field_type": "bigint",
-			"field_type_simple": "number",
-			"transformed_object_name": "user"
+			"field_type_simple": "number"
 		}
 	},
 	{
@@ -52,8 +50,7 @@
 			"object_name": "users",
 			"field_name": "type",
 			"field_type": "character",
-			"field_type_simple": "string",
-			"transformed_object_name": "user"
+			"field_type_simple": "string"
 		}
 	},
 	{
@@ -71,8 +68,7 @@
 			"object_name": "users",
 			"field_name": "metadata",
 			"field_type": "json",
-			"field_type_simple": "object",
-			"transformed_object_name": "user"
+			"field_type_simple": "object"
 		}
 	},
 	{
@@ -90,8 +86,7 @@
 			"object_name": "users",
 			"field_name": "created_at",
 			"field_type": "timestamp",
-			"field_type_simple": "date",
-			"transformed_object_name": "user"
+			"field_type_simple": "date"
 		}
 	},
 	{
@@ -109,8 +104,7 @@
 			"object_name": "users",
 			"field_name": "updated_at",
 			"field_type": "timestamp",
-			"field_type_simple": "date",
-			"transformed_object_name": "user"
+			"field_type_simple": "date"
 		}
 	}
 ]

@@ -24,7 +24,6 @@
     parent:
         content: logger.info("user info", user.email)
         line_number: 1
-    transformed_object_name: user
 - detector_type: ruby
   source:
     column_number: 8
@@ -39,7 +38,6 @@
     field_type: ""
     field_type_simple: unknown
     object_name: logger
-    transformed_object_name: logger
 - detector_type: ruby
   source:
     column_number: 31
@@ -63,7 +61,6 @@
     field_type: ""
     field_type_simple: unknown
     object_name: user
-    transformed_object_name: user
 
 
 --

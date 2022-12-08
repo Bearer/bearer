@@ -20,7 +20,7 @@
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) (len=3) "env"
+      TransformedObjectName: (string) ""
     }
   }),
   (*detections.Detection)({
@@ -100,7 +100,7 @@
       SimpleFieldType: (string) (len=6) "string",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) (len=10) "csharptest"
+      TransformedObjectName: (string) ""
     }
   }),
   (*detections.Detection)({
@@ -124,7 +124,7 @@
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) (len=10) "csharptest"
+      TransformedObjectName: (string) ""
     }
   }),
   (*detections.Detection)({
@@ -148,7 +148,7 @@
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) (len=10) "csharptest"
+      TransformedObjectName: (string) ""
     }
   }),
   (*detections.Detection)({

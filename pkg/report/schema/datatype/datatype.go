@@ -154,8 +154,11 @@ func dataTypeToSchema[D DataTypable](report detections.ReportDetection, detectio
 				LineNumber: parent.LineNumber(),
 			}
 		}
-		pluralizer := pluralize.NewClient()
-		transformedObjectName := pluralizer.Singular(strings.ToLower(parentName))
+		transformedObjectName := ""
+		if detectionType == detections.DetectionType(detectors.DetectorSchemaRb) {
+			pluralizer := pluralize.NewClient()
+			transformedObjectName = pluralizer.Singular(strings.ToLower(parentName))
+		}
 		report.AddDetection(detectionType, detectorType, dataType.GetNode().Source(false),
 			schema.Schema{
 				ObjectName:      parentName,

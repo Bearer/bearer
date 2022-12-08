@@ -20,7 +20,7 @@
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) (len=4) "fred"
+      TransformedObjectName: (string) ""
     }
   }),
   (*detections.Detection)({
@@ -44,7 +44,7 @@
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) (len=7) "environ"
+      TransformedObjectName: (string) ""
     }
   }),
   (*detections.Detection)({
@@ -68,7 +68,7 @@
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) (len=7) "environ"
+      TransformedObjectName: (string) ""
     }
   }),
   (*detections.Detection)({
@@ -176,7 +176,7 @@
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) (len=6) "config"
+      TransformedObjectName: (string) ""
     }
   }),
   (*detections.Detection)({
@@ -200,7 +200,7 @@
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) (len=3) "app"
+      TransformedObjectName: (string) ""
     }
   }),
   (*detections.Detection)({
@@ -224,7 +224,7 @@
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) (len=3) "app"
+      TransformedObjectName: (string) ""
     }
   }),
   (*detections.Detection)({
@@ -248,7 +248,7 @@
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) (len=7) "backend"
+      TransformedObjectName: (string) ""
     }
   }),
   (*detections.Detection)({

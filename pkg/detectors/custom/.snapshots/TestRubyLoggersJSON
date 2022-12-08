@@ -14,8 +14,7 @@
 			"object_name": "user",
 			"field_name": "email",
 			"field_type": "",
-			"field_type_simple": "unknown",
-			"transformed_object_name": "user"
+			"field_type_simple": "unknown"
 		}
 	},
 	{
@@ -33,8 +32,7 @@
 			"object_name": "user",
 			"field_name": "email",
 			"field_type": "",
-			"field_type_simple": "unknown",
-			"transformed_object_name": "user"
+			"field_type_simple": "unknown"
 		}
 	},
 	{
@@ -52,8 +50,7 @@
 			"object_name": "user",
 			"field_name": "contact",
 			"field_type": "",
-			"field_type_simple": "unknown",
-			"transformed_object_name": "user"
+			"field_type_simple": "unknown"
 		}
 	},
 	{
@@ -71,8 +68,7 @@
 			"object_name": "contact",
 			"field_name": "email",
 			"field_type": "",
-			"field_type_simple": "unknown",
-			"transformed_object_name": "contact"
+			"field_type_simple": "unknown"
 		}
 	},
 	{
@@ -90,8 +86,7 @@
 			"object_name": "email",
 			"field_name": "address",
 			"field_type": "",
-			"field_type_simple": "unknown",
-			"transformed_object_name": "email"
+			"field_type_simple": "unknown"
 		}
 	},
 	{
@@ -109,8 +104,7 @@
 			"object_name": "user",
 			"field_name": "email",
 			"field_type": "",
-			"field_type_simple": "unknown",
-			"transformed_object_name": "user"
+			"field_type_simple": "unknown"
 		}
 	},
 	{
@@ -128,8 +122,7 @@
 			"object_name": "user",
 			"field_name": "contact",
 			"field_type": "",
-			"field_type_simple": "unknown",
-			"transformed_object_name": "user"
+			"field_type_simple": "unknown"
 		}
 	},
 	{
@@ -147,8 +140,7 @@
 			"object_name": "contact",
 			"field_name": "email",
 			"field_type": "",
-			"field_type_simple": "unknown",
-			"transformed_object_name": "contact"
+			"field_type_simple": "unknown"
 		}
 	},
 	{
@@ -166,8 +158,7 @@
 			"object_name": "email",
 			"field_name": "address",
 			"field_type": "",
-			"field_type_simple": "unknown",
-			"transformed_object_name": "email"
+			"field_type_simple": "unknown"
 		}
 	},
 	{
@@ -185,8 +176,7 @@
 			"object_name": "user",
 			"field_name": "name",
 			"field_type": "",
-			"field_type_simple": "unknown",
-			"transformed_object_name": "user"
+			"field_type_simple": "unknown"
 		}
 	},
 	{
@@ -204,8 +194,7 @@
 			"object_name": "user",
 			"field_name": "email",
 			"field_type": "",
-			"field_type_simple": "unknown",
-			"transformed_object_name": "user"
+			"field_type_simple": "unknown"
 		}
 	},
 	{
@@ -223,8 +212,7 @@
 			"object_name": "user",
 			"field_name": "name",
 			"field_type": "",
-			"field_type_simple": "unknown",
-			"transformed_object_name": "user"
+			"field_type_simple": "unknown"
 		}
 	},
 	{
@@ -242,8 +230,7 @@
 			"object_name": "user",
 			"field_name": "email",
 			"field_type": "",
-			"field_type_simple": "unknown",
-			"transformed_object_name": "user"
+			"field_type_simple": "unknown"
 		}
 	}
 ]

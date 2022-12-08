@@ -81,7 +81,7 @@
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) (len=8) "platform"
+      TransformedObjectName: (string) ""
     }
   }),
   (*detections.Detection)({
@@ -105,7 +105,7 @@
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) (len=3) "now"
+      TransformedObjectName: (string) ""
     }
   }),
   (*detections.Detection)({
@@ -129,7 +129,7 @@
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) (len=7) "current"
+      TransformedObjectName: (string) ""
     }
   }),
   (*detections.Detection)({
@@ -153,7 +153,7 @@
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) (len=6) "logger"
+      TransformedObjectName: (string) ""
     }
   }),
   (*detections.Detection)({
@@ -177,7 +177,7 @@
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) (len=8) "datetime"
+      TransformedObjectName: (string) ""
     }
   })
 }

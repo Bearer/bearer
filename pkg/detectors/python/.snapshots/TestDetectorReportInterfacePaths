@@ -20,7 +20,7 @@
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) (len=3) "app"
+      TransformedObjectName: (string) ""
     }
   }),
   (*detections.Detection)({
@@ -44,7 +44,7 @@
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) (len=15) "delivery_client"
+      TransformedObjectName: (string) ""
     }
   }),
   (*detections.Detection)({
@@ -68,7 +68,7 @@
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) (len=7) "message"
+      TransformedObjectName: (string) ""
     }
   }),
   (*detections.Detection)({
@@ -92,7 +92,7 @@
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) (len=3) "app"
+      TransformedObjectName: (string) ""
     }
   }),
   (*detections.Detection)({
@@ -116,7 +116,7 @@
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) (len=15) "delivery_client"
+      TransformedObjectName: (string) ""
     }
   }),
   (*detections.Detection)({
@@ -140,7 +140,7 @@
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) (len=3) "app"
+      TransformedObjectName: (string) ""
     }
   }),
   (*detections.Detection)({
@@ -164,7 +164,7 @@
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) (len=8) "delivery"
+      TransformedObjectName: (string) ""
     }
   }),
   (*detections.Detection)({
@@ -188,7 +188,7 @@
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) (len=3) "app"
+      TransformedObjectName: (string) ""
     }
   }),
   (*detections.Detection)({
@@ -212,7 +212,7 @@
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) (len=15) "delivery_client"
+      TransformedObjectName: (string) ""
     }
   }),
   (*detections.Detection)({
@@ -236,7 +236,7 @@
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) (len=3) "app"
+      TransformedObjectName: (string) ""
     }
   }),
   (*detections.Detection)({
@@ -260,7 +260,7 @@
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) (len=8) "platform"
+      TransformedObjectName: (string) ""
     }
   }),
   (*detections.Detection)({
@@ -284,7 +284,7 @@
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) (len=8) "delivery"
+      TransformedObjectName: (string) ""
     }
   }),
   (*detections.Detection)({
@@ -308,7 +308,7 @@
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) (len=3) "app"
+      TransformedObjectName: (string) ""
     }
   }),
   (*detections.Detection)({
@@ -332,7 +332,7 @@
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) (len=15) "delivery_client"
+      TransformedObjectName: (string) ""
     }
   }),
   (*detections.Detection)({
@@ -356,7 +356,7 @@
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) (len=3) "env"
+      TransformedObjectName: (string) ""
     }
   }),
   (*detections.Detection)({
@@ -380,7 +380,7 @@
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) (len=3) "env"
+      TransformedObjectName: (string) ""
     }
   }),
   (*detections.Detection)({
@@ -404,7 +404,7 @@
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) (len=8) "delivery"
+      TransformedObjectName: (string) ""
     }
   }),
   (*detections.Detection)({
@@ -428,7 +428,7 @@
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) (len=3) "app"
+      TransformedObjectName: (string) ""
     }
   }),
   (*detections.Detection)({
@@ -452,7 +452,7 @@
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) (len=15) "delivery_client"
+      TransformedObjectName: (string) ""
     }
   }),
   (*detections.Detection)({
@@ -476,7 +476,7 @@
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) (len=3) "app"
+      TransformedObjectName: (string) ""
     }
   }),
   (*detections.Detection)({
@@ -500,7 +500,7 @@
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) (len=8) "delivery"
+      TransformedObjectName: (string) ""
     }
   })
 }
