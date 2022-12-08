@@ -40,14 +40,6 @@ risks:
               parent:
                 line_number: 2
                 content: cookies.signed[:info] = user.email
-        - name: Physical Address
-          stored: false
-          locations:
-            - filename: testdata/ruby/detect_rails_cookies.rb
-              line_number: 3
-              parent:
-                line_number: 2
-                content: cookies.signed[:info] = user.email
 components: []
 
 
