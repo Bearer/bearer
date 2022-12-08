@@ -2,6 +2,8 @@ package datatypes
 
 import (
 	"github.com/bearer/curio/pkg/classification/db"
+	"github.com/bearer/curio/pkg/commands/process/settings"
+	"github.com/bearer/curio/pkg/report/detectors"
 	"github.com/bearer/curio/pkg/report/output/dataflow/detectiondecoder"
 	"github.com/bearer/curio/pkg/report/output/dataflow/types"
 	"github.com/bearer/curio/pkg/report/schema"
@@ -13,6 +15,7 @@ import (
 
 type Holder struct {
 	datatypes  map[string]datatypeHolder // group datatypeHolders by name
+	config       settings.Config
 	isInternal bool
 }
 
@@ -38,11 +41,13 @@ type lineNumberHolder struct {
 	lineNumber int
 	encrypted  *bool
 	verifiedBy []types.DatatypeVerifiedBy
+	stored     *bool
 }
 
-func New(isInternal bool) *Holder {
+func New(config settings.Config, isInternal bool) *Holder {
 	return &Holder{
 		datatypes:  make(map[string]datatypeHolder),
+		config: config,
 		isInternal: isInternal,
 	}
 }
@@ -116,6 +121,16 @@ func (holder *Holder) addDatatype(classification *db.DataType, detectorName stri
 		lineEntry.encrypted = extras.encrypted
 		lineEntry.verifiedBy = extras.verifiedBy
 	}
+
+	if detectorName == string(detectors.DetectorSchemaRb) {
+		storedFlag := true
+		lineEntry.stored = &storedFlag
+	} else if customDetector, isCustomDetector := holder.config.CustomDetector[detectorName]; isCustomDetector {
+		if customDetector.Stored {
+			storedFlag := true
+			lineEntry.stored = &storedFlag
+		}
+	}
 }
 
 func (holder *Holder) ToDataFlow() []types.Datatype {
@@ -146,6 +161,7 @@ func (holder *Holder) ToDataFlow() []types.Datatype {
 						LineNumber: lineNumber.lineNumber,
 						Encrypted:  lineNumber.encrypted,
 						VerifiedBy: lineNumber.verifiedBy,
+						Stored:     lineNumber.stored,
 					}
 					constructedDetector.Locations = append(constructedDetector.Locations, location)
 				}

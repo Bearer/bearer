@@ -20,6 +20,7 @@ type DatatypeLocation struct {
 	LineNumber int                  `json:"line_number" yaml:"line_number"`
 	Encrypted  *bool                `json:"encrypted,omitempty" yaml:"encrypted,omitempty"`
 	VerifiedBy []DatatypeVerifiedBy `json:"verified_by,omitempty" yaml:"verified_by,omitempty"`
+	Stored      *bool               `json:"stored,omitempty" yaml:"stored,omitempty"`
 }
 
 type DatatypeVerifiedBy struct {

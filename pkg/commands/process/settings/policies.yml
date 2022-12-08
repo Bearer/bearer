@@ -56,7 +56,7 @@ ssl_certificate_verification_disabled:
 application_level_encryption_missing:
   description: "Application level encryption missing"
   name: "Application level encryption missing"
-  id: "detect_sql_create_public_table"
+  id: "application_level_encryption_missing"
   query: |
     policy_breach = data.bearer.application_level_encryption.policy_breach
   modules:
