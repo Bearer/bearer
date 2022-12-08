@@ -8,6 +8,7 @@ import (
 	"github.com/bearer/curio/pkg/parser/nodeid"
 	"github.com/bearer/curio/pkg/report/schema"
 	schemadatatype "github.com/bearer/curio/pkg/report/schema/datatype"
+	"github.com/bearer/curio/pkg/util/stringutil"
 	sitter "github.com/smacker/go-tree-sitter"
 	"github.com/smacker/go-tree-sitter/ruby"
 )
@@ -134,11 +135,8 @@ func addProperties(node *parser.Node, helperDatatypes map[parser.NodeID]*schemad
 					}
 
 					key := pair.ChildByFieldName("key")
-					if key.Type() != "hash_key_symbol" {
-						continue
-					}
 
-					propertyName := key.Content()
+					propertyName := stringutil.StripQuotes(key.Content())
 
 					helperDatatypes[parentNode.ID()].Properties[propertyName] = &schemadatatype.DataType{
 						Node:       key,
