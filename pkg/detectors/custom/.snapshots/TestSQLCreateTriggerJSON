@@ -14,7 +14,8 @@
 			"object_name": "accounts",
 			"field_name": "anon_account",
 			"field_type": "",
-			"field_type_simple": "object"
+			"field_type_simple": "object",
+			"transformed_object_name": "account"
 		}
 	}
 ]

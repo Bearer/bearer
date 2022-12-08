@@ -288,7 +288,7 @@ scan:
             root_singularize: true
             root_lowercase: true
             metavars: {}
-            stored: false
+            stored: true
             detect_presence: false
             omit_parent: false
         ruby_file_detection:
@@ -477,7 +477,7 @@ scan:
         application_level_encryption_missing:
             query: |
                 policy_breach = data.bearer.application_level_encryption.policy_breach
-            id: detect_sql_create_public_table
+            id: application_level_encryption_missing
             name: Application level encryption missing
             description: Application level encryption missing
             level: ""
@@ -532,11 +532,11 @@ scan:
                     import future.keywords
 
                     policy_breach contains item if {
-                        some datatype in input.dataflow.data_types
-                        some detector in datatype.detectors
-                        detector.name == input.policy_id
+                        datatype = input.dataflow.data_types[_]
+                        detector = datatype.detectors[_]
+                        location = detector.locations[_]
 
-                        some location in detector.locations
+                        location.stored
                         not location.encrypted
 
                         item := {

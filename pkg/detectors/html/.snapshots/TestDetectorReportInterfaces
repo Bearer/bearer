@@ -19,7 +19,8 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>)
+      Parent: (*schema.Parent)(<nil>),
+      TransformedObjectName: (string) (len=8) "response"
     }
   }),
   (*detections.Detection)({
@@ -42,7 +43,8 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>)
+      Parent: (*schema.Parent)(<nil>),
+      TransformedObjectName: (string) (len=7) "console"
     }
   }),
   (*detections.Detection)({
@@ -90,7 +92,8 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>)
+      Parent: (*schema.Parent)(<nil>),
+      TransformedObjectName: (string) (len=8) "document"
     }
   }),
   (*detections.Detection)({
@@ -113,7 +116,8 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>)
+      Parent: (*schema.Parent)(<nil>),
+      TransformedObjectName: (string) (len=6) "option"
     }
   }),
   (*detections.Detection)({
@@ -136,7 +140,8 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>)
+      Parent: (*schema.Parent)(<nil>),
+      TransformedObjectName: (string) (len=6) "detail"
     }
   }),
   (*detections.Detection)({
@@ -159,7 +164,8 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>)
+      Parent: (*schema.Parent)(<nil>),
+      TransformedObjectName: (string) (len=5) "kimai"
     }
   }),
   (*detections.Detection)({
@@ -182,7 +188,8 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>)
+      Parent: (*schema.Parent)(<nil>),
+      TransformedObjectName: (string) (len=3) "app"
     }
   }),
   (*detections.Detection)({
@@ -205,7 +212,8 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>)
+      Parent: (*schema.Parent)(<nil>),
+      TransformedObjectName: (string) (len=7) "session"
     }
   }),
   (*detections.Detection)({
@@ -228,7 +236,8 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>)
+      Parent: (*schema.Parent)(<nil>),
+      TransformedObjectName: (string) (len=8) "flashbag"
     }
   }),
   (*detections.Detection)({
@@ -251,7 +260,8 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>)
+      Parent: (*schema.Parent)(<nil>),
+      TransformedObjectName: (string) (len=5) "alert"
     }
   }),
   (*detections.Detection)({
@@ -274,7 +284,8 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>)
+      Parent: (*schema.Parent)(<nil>),
+      TransformedObjectName: (string) (len=5) "alert"
     }
   }),
   (*detections.Detection)({
@@ -297,7 +308,8 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>)
+      Parent: (*schema.Parent)(<nil>),
+      TransformedObjectName: (string) (len=6) "window"
     }
   }),
   (*detections.Detection)({
@@ -320,7 +332,8 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>)
+      Parent: (*schema.Parent)(<nil>),
+      TransformedObjectName: (string) (len=3) "app"
     }
   }),
   (*detections.Detection)({
@@ -343,7 +356,8 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>)
+      Parent: (*schema.Parent)(<nil>),
+      TransformedObjectName: (string) (len=4) "user"
     }
   }),
   (*detections.Detection)({
@@ -366,7 +380,8 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>)
+      Parent: (*schema.Parent)(<nil>),
+      TransformedObjectName: (string) (len=4) "user"
     }
   }),
   (*detections.Detection)({
@@ -389,7 +404,8 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>)
+      Parent: (*schema.Parent)(<nil>),
+      TransformedObjectName: (string) (len=3) "app"
     }
   }),
   (*detections.Detection)({
@@ -412,7 +428,8 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>)
+      Parent: (*schema.Parent)(<nil>),
+      TransformedObjectName: (string) (len=4) "user"
     }
   }),
   (*detections.Detection)({
@@ -435,7 +452,8 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>)
+      Parent: (*schema.Parent)(<nil>),
+      TransformedObjectName: (string) (len=6) "window"
     }
   }),
   (*detections.Detection)({
@@ -458,7 +476,8 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>)
+      Parent: (*schema.Parent)(<nil>),
+      TransformedObjectName: (string) (len=6) "loader"
     }
   }),
   (*detections.Detection)({
@@ -481,7 +500,8 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>)
+      Parent: (*schema.Parent)(<nil>),
+      TransformedObjectName: (string) (len=6) "window"
     }
   }),
   (*detections.Detection)({
@@ -504,7 +524,8 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>)
+      Parent: (*schema.Parent)(<nil>),
+      TransformedObjectName: (string) (len=6) "window"
     }
   }),
   (*detections.Detection)({
@@ -527,7 +548,8 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>)
+      Parent: (*schema.Parent)(<nil>),
+      TransformedObjectName: (string) (len=9) "datalayer"
     }
   }),
   (*detections.Detection)({
@@ -550,7 +572,8 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>)
+      Parent: (*schema.Parent)(<nil>),
+      TransformedObjectName: (string) (len=4) "user"
     }
   }),
   (*detections.Detection)({
@@ -573,7 +596,8 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>)
+      Parent: (*schema.Parent)(<nil>),
+      TransformedObjectName: (string) (len=4) "gtag"
     }
   }),
   (*detections.Detection)({

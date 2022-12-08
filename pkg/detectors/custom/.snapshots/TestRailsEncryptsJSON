@@ -14,7 +14,8 @@
 			"object_name": "User",
 			"field_name": "email",
 			"field_type": "",
-			"field_type_simple": "unknown"
+			"field_type_simple": "unknown",
+			"transformed_object_name": "user"
 		}
 	}
 ]

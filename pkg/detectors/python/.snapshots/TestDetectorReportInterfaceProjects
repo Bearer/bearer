@@ -19,7 +19,8 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>)
+      Parent: (*schema.Parent)(<nil>),
+      TransformedObjectName: (string) (len=4) "fred"
     }
   }),
   (*detections.Detection)({
@@ -42,7 +43,8 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>)
+      Parent: (*schema.Parent)(<nil>),
+      TransformedObjectName: (string) (len=7) "environ"
     }
   }),
   (*detections.Detection)({
@@ -65,7 +67,8 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>)
+      Parent: (*schema.Parent)(<nil>),
+      TransformedObjectName: (string) (len=7) "environ"
     }
   }),
   (*detections.Detection)({
@@ -172,7 +175,8 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>)
+      Parent: (*schema.Parent)(<nil>),
+      TransformedObjectName: (string) (len=6) "config"
     }
   }),
   (*detections.Detection)({
@@ -195,7 +199,8 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>)
+      Parent: (*schema.Parent)(<nil>),
+      TransformedObjectName: (string) (len=3) "app"
     }
   }),
   (*detections.Detection)({
@@ -218,7 +223,8 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>)
+      Parent: (*schema.Parent)(<nil>),
+      TransformedObjectName: (string) (len=3) "app"
     }
   }),
   (*detections.Detection)({
@@ -241,7 +247,8 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>)
+      Parent: (*schema.Parent)(<nil>),
+      TransformedObjectName: (string) (len=7) "backend"
     }
   }),
   (*detections.Detection)({

@@ -19,7 +19,8 @@
       FieldType: (string) (len=6) "Client",
       SimpleFieldType: (string) (len=6) "object",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>)
+      Parent: (*schema.Parent)(<nil>),
+      TransformedObjectName: (string) (len=8) "customer"
     }
   }),
   (*detections.Detection)({

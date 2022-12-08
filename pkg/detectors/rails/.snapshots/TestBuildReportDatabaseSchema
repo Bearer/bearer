@@ -1,7 +1,7 @@
 ([]*detections.Detection) (len=5) {
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=6) "schema",
-    DetectorType: (detectors.Type) (len=5) "rails",
+    DetectorType: (detectors.Type) (len=9) "schema_rb",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "db/schema.rb",
@@ -19,12 +19,13 @@
       FieldType: (string) (len=6) "string",
       SimpleFieldType: (string) (len=6) "string",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>)
+      Parent: (*schema.Parent)(<nil>),
+      TransformedObjectName: (string) (len=25) "active_storage_attachment"
     }
   }),
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=6) "schema",
-    DetectorType: (detectors.Type) (len=5) "rails",
+    DetectorType: (detectors.Type) (len=9) "schema_rb",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "db/schema.rb",
@@ -42,12 +43,13 @@
       FieldType: (string) (len=6) "string",
       SimpleFieldType: (string) (len=6) "string",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>)
+      Parent: (*schema.Parent)(<nil>),
+      TransformedObjectName: (string) (len=25) "active_storage_attachment"
     }
   }),
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=6) "schema",
-    DetectorType: (detectors.Type) (len=5) "rails",
+    DetectorType: (detectors.Type) (len=9) "schema_rb",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "db/schema.rb",
@@ -65,12 +67,13 @@
       FieldType: (string) (len=6) "bigint",
       SimpleFieldType: (string) (len=6) "number",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>)
+      Parent: (*schema.Parent)(<nil>),
+      TransformedObjectName: (string) (len=25) "active_storage_attachment"
     }
   }),
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=6) "schema",
-    DetectorType: (detectors.Type) (len=5) "rails",
+    DetectorType: (detectors.Type) (len=9) "schema_rb",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "db/schema.rb",
@@ -88,12 +91,13 @@
       FieldType: (string) (len=6) "bigint",
       SimpleFieldType: (string) (len=6) "number",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>)
+      Parent: (*schema.Parent)(<nil>),
+      TransformedObjectName: (string) (len=25) "active_storage_attachment"
     }
   }),
   (*detections.Detection)({
     Type: (detections.DetectionType) (len=6) "schema",
-    DetectorType: (detectors.Type) (len=5) "rails",
+    DetectorType: (detectors.Type) (len=9) "schema_rb",
     CommitSHA: (string) "",
     Source: (source.Source) {
       Filename: (string) (len=12) "db/schema.rb",
@@ -111,7 +115,8 @@
       FieldType: (string) (len=8) "datetime",
       SimpleFieldType: (string) (len=4) "date",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>)
+      Parent: (*schema.Parent)(<nil>),
+      TransformedObjectName: (string) (len=25) "active_storage_attachment"
     }
   })
 }

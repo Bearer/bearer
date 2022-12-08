@@ -10,6 +10,7 @@ data_types:
                 - detector: detect_encrypted_ruby_class_properties
                   filename: user.rb
                   line_number: 2
+              stored: true
         - name: ruby
           locations:
             - filename: testdata/verified_by/user.rb
@@ -20,6 +21,7 @@ data_types:
           locations:
             - filename: testdata/verified_by/schema.sql
               line_number: 6
+              stored: true
     - name: Email Address
       detectors:
         - name: detect_sql_create_public_table
@@ -31,6 +33,7 @@ data_types:
                 - detector: detect_encrypted_ruby_class_properties
                   filename: user.rb
                   line_number: 2
+              stored: true
         - name: ruby
           locations:
             - filename: testdata/verified_by/user.rb
@@ -41,12 +44,14 @@ data_types:
           locations:
             - filename: testdata/verified_by/schema.sql
               line_number: 3
+              stored: true
     - name: Lastname
       detectors:
         - name: detect_sql_create_public_table
           locations:
             - filename: testdata/verified_by/schema.sql
               line_number: 4
+              stored: true
     - name: Physical Address
       detectors:
         - name: detect_sql_create_public_table
@@ -58,6 +63,7 @@ data_types:
                 - detector: detect_encrypted_ruby_class_properties
                   filename: user.rb
                   line_number: 2
+              stored: true
         - name: ruby
           locations:
             - filename: testdata/verified_by/user.rb
