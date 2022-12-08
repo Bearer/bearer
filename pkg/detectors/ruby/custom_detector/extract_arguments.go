@@ -34,7 +34,7 @@ func (detector *Detector) extractArguments(node *parser.Node, idGenerator nodeid
 	joinedDatatypes := make(map[parser.NodeID]*schemadatatype.DataType)
 
 	// handle class name
-	if node.Type() == "constant" {
+	if node.Type() == "constant" || node.Type() == "identifier" || node.Type() == "simple_symbol" || node.Type() == "bare_symbol" {
 		datatype := &schemadatatype.DataType{
 			Node:       node,
 			Name:       node.Content(),
