@@ -8,7 +8,6 @@ import (
 	parserdatatype "github.com/bearer/curio/pkg/parser/datatype"
 	"github.com/bearer/curio/pkg/parser/nodeid"
 	"github.com/bearer/curio/pkg/report/schema"
-	"github.com/rs/zerolog/log"
 
 	schemadatatype "github.com/bearer/curio/pkg/report/schema/datatype"
 )
@@ -91,8 +90,6 @@ func (detector *Detector) extractArguments(node *parser.Node, idGenerator nodeid
 			joinedDatatypes[nodeID] = target
 		}
 	}
-
-	log.Debug().Msgf("%s %s", node.Type(), node.Content())
 
 	return joinedDatatypes, nil
 }

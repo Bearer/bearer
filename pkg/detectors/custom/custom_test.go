@@ -50,8 +50,23 @@ var configInsecureFTP []byte
 //go:embed testdata/config/ruby_third_party_data_send.yml
 var configRubyThirdPartyDataSend []byte
 
-func TestRailsSessionsJSON(t *testing.T) {
-	result := runTest(configRailsSessions, filepath.Join("testdata", "ruby", "sessions"), t)
+func TestRailsSessionsCallJSON(t *testing.T) {
+	result := runTest(configRailsSessions, filepath.Join("testdata", "ruby", "sessions", "call"), t)
+	cupaloy.SnapshotT(t, result)
+}
+
+func TestRailsSessionsIdentifierJSON(t *testing.T) {
+	result := runTest(configRailsSessions, filepath.Join("testdata", "ruby", "sessions", "identifier"), t)
+	cupaloy.SnapshotT(t, result)
+}
+
+func TestRailSessionHashJSON(t *testing.T) {
+	result := runTest(configRailsSessions, filepath.Join("testdata", "ruby", "sessions", "hash"), t)
+	cupaloy.SnapshotT(t, result)
+}
+
+func TestRailSessionHashAssigmentJSON(t *testing.T) {
+	result := runTest(configRailsSessions, filepath.Join("testdata", "ruby", "sessions", "hash_assigment"), t)
 	cupaloy.SnapshotT(t, result)
 }
 

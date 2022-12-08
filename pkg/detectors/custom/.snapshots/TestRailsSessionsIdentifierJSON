@@ -1,0 +1,38 @@
+[
+	{
+		"type": "custom",
+		"detector_type": "detect_rails_session",
+		"source": {
+			"filename": "session.rb",
+			"language": "Ruby",
+			"language_type": "programming",
+			"line_number": 5,
+			"column_number": 6,
+			"text": null
+		},
+		"value": {
+			"object_name": "user",
+			"field_name": "email",
+			"field_type": "",
+			"field_type_simple": "unknown"
+		}
+	},
+	{
+		"type": "custom",
+		"detector_type": "detect_rails_session",
+		"source": {
+			"filename": "session.rb",
+			"language": "Ruby",
+			"language_type": "programming",
+			"line_number": 5,
+			"column_number": 12,
+			"text": null
+		},
+		"value": {
+			"object_name": "email",
+			"field_name": "domain",
+			"field_type": "",
+			"field_type_simple": "unknown"
+		}
+	}
+]
