@@ -1,28 +1,28 @@
 [
- {
-  "type": "custom_risk",
-  "detector_type": "detect_rails_insecure_smtp",
-  "source": {
-   "filename": "config.rb",
-   "language": "Ruby",
-   "language_type": "programming",
-   "line_number": 3,
-   "column_number": 1,
-   "text": "Rails.application.configure do\n  config.action_mailer.smtp_settings = {\n    openssl_verify_mode: OpenSSL::SSL::VERIFY_NONE\n  }\nend\n"
-  },
-  "value": null
- },
- {
-  "type": "custom_risk",
-  "detector_type": "detect_rails_insecure_smtp",
-  "source": {
-   "filename": "config.rb",
-   "language": "Ruby",
-   "language_type": "programming",
-   "line_number": 9,
-   "column_number": 1,
-   "text": "Rails.application.configure do\n  config.action_mailer.smtp_settings = {\n    openssl_verify_mode: \"none\"\n  }\nend\n"
-  },
-  "value": null
- }
+	{
+		"type": "custom_risk",
+		"detector_type": "detect_rails_insecure_smtp",
+		"source": {
+			"filename": "config.rb",
+			"language": "Ruby",
+			"language_type": "programming",
+			"line_number": 3,
+			"column_number": 1,
+			"text": "Rails.application.configure do\n  config.action_mailer.smtp_settings = {\n    openssl_verify_mode: OpenSSL::SSL::VERIFY_NONE\n  }\nend\n"
+		},
+		"value": null
+	},
+	{
+		"type": "custom_risk",
+		"detector_type": "detect_rails_insecure_smtp",
+		"source": {
+			"filename": "config.rb",
+			"language": "Ruby",
+			"language_type": "programming",
+			"line_number": 9,
+			"column_number": 1,
+			"text": "Rails.application.configure do\n  config.action_mailer.smtp_settings = {\n    openssl_verify_mode: \"none\"\n  }\nend\n"
+		},
+		"value": null
+	}
 ]
