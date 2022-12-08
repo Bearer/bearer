@@ -64,6 +64,7 @@ func AddSchema(file *file.FileInfo, report reporttypes.Report, foundValues map[p
 				objectNode,
 				schema.Value,
 				&schema.Source,
+				nil,
 			)
 		}
 

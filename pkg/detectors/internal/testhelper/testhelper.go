@@ -104,7 +104,7 @@ func (report *InMemoryReport) AddDetection(
 	}
 }
 
-func (report *InMemoryReport) SchemaGroupBegin(detectorType reportdetectors.Type, node *parser.Node, schema schema.Schema, source *source.Source) {
+func (report *InMemoryReport) SchemaGroupBegin(detectorType reportdetectors.Type, node *parser.Node, schema schema.Schema, source *source.Source, parent *parser.Node) {
 	report.SchemaGroupDetectorType = detectorType
 }
 

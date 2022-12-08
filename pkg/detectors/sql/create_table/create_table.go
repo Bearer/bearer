@@ -104,6 +104,7 @@ func Detect(file *file.FileInfo, report reporttypes.Report, idGenerator nodeid.G
 					tableNode,
 					currentSchema,
 					&source,
+					nil,
 				)
 			}
 			source := columnNode.Source(true)

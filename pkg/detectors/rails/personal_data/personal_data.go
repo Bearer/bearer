@@ -29,7 +29,7 @@ var (
 					method: (_) @type
 					arguments: (argument_list . (string) @column_name))
 				(#eq @receiver @block_param))
-			(#eq @table_method "create_table"))
+			(#eq @table_method "create_table")) @rule
 	`)
 )
 
@@ -54,6 +54,7 @@ func ExtractFromDatabaseSchema(
 		columnName := stripQuotes(columnNode.Content())
 		columnTypeNode := captures["type"]
 		columnType := columnTypeNode.Content()
+		ruleNode := captures["rule"]
 
 		objectUUID := uuidHolder.Assign(tableNode.ID(), idGenerator)
 		fieldUUID := uuidHolder.Assign(columnTypeNode.ID(), idGenerator)
@@ -75,6 +76,7 @@ func ExtractFromDatabaseSchema(
 				tableNode,
 				currentSchema,
 				&source,
+				ruleNode,
 			)
 		}
 		source := columnNode.Source(false)
