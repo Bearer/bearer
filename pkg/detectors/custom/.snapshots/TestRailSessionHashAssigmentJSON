@@ -1,0 +1,74 @@
+[
+	{
+		"type": "custom",
+		"detector_type": "detect_rails_session",
+		"source": {
+			"filename": "session.rb",
+			"language": "Ruby",
+			"language_type": "programming",
+			"line_number": 4,
+			"column_number": 9,
+			"text": null
+		},
+		"value": {
+			"object_name": "user",
+			"field_name": "first_name",
+			"field_type": "",
+			"field_type_simple": "unknown"
+		}
+	},
+	{
+		"type": "custom",
+		"detector_type": "detect_rails_session",
+		"source": {
+			"filename": "session.rb",
+			"language": "Ruby",
+			"language_type": "programming",
+			"line_number": 4,
+			"column_number": 29,
+			"text": null
+		},
+		"value": {
+			"object_name": "user",
+			"field_name": "last_name",
+			"field_type": "",
+			"field_type_simple": "unknown"
+		}
+	},
+	{
+		"type": "custom",
+		"detector_type": "detect_rails_session",
+		"source": {
+			"filename": "session.rb",
+			"language": "Ruby",
+			"language_type": "programming",
+			"line_number": 9,
+			"column_number": 10,
+			"text": null
+		},
+		"value": {
+			"object_name": "admin",
+			"field_name": "first_name",
+			"field_type": "",
+			"field_type_simple": "unknown"
+		}
+	},
+	{
+		"type": "custom",
+		"detector_type": "detect_rails_session",
+		"source": {
+			"filename": "session.rb",
+			"language": "Ruby",
+			"language_type": "programming",
+			"line_number": 9,
+			"column_number": 32,
+			"text": null
+		},
+		"value": {
+			"object_name": "admin",
+			"field_name": "last_name",
+			"field_type": "",
+			"field_type_simple": "unknown"
+		}
+	}
+]

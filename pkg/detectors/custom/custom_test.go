@@ -50,304 +50,82 @@ var configInsecureFTP []byte
 //go:embed testdata/config/ruby_third_party_data_send.yml
 var configRubyThirdPartyDataSend []byte
 
-func TestRailsSessionsJSON(t *testing.T) {
-	var rulesConfig map[string]settings.Rule
+func TestRailsSessionsCallJSON(t *testing.T) {
+	result := runTest(configRailsSessions, filepath.Join("testdata", "ruby", "sessions", "call"), t)
+	cupaloy.SnapshotT(t, result)
+}
 
-	detector := custom.New(&nodeid.IntGenerator{Counter: 0})
-	err := yaml.Unmarshal(configRailsSessions, &rulesConfig)
-	if err != nil {
-		t.Fatal(err)
-		return
-	}
-	customDetector := detector.(*custom.Detector)
-	err = customDetector.CompileRules(rulesConfig)
-	if err != nil {
-		t.Fatal(err)
-	}
+func TestRailsSessionsIdentifierJSON(t *testing.T) {
+	result := runTest(configRailsSessions, filepath.Join("testdata", "ruby", "sessions", "identifier"), t)
+	cupaloy.SnapshotT(t, result)
+}
 
-	var registrations = []detectors.InitializedDetector{{
-		Type:     detectorType,
-		Detector: detector}}
-	detectorReport := testhelper.Extract(t, filepath.Join("testdata", "ruby", "sessions"), registrations, detectorType)
+func TestRailSessionHashJSON(t *testing.T) {
+	result := runTest(configRailsSessions, filepath.Join("testdata", "ruby", "sessions", "hash"), t)
+	cupaloy.SnapshotT(t, result)
+}
 
-	bytes, err := json.MarshalIndent(detectorReport.CustomDetections, "", "\t")
-
-	if err != nil {
-		t.Fatal(err)
-	}
-
-	cupaloy.SnapshotT(t, string(bytes))
+func TestRailSessionHashAssigmentJSON(t *testing.T) {
+	result := runTest(configRailsSessions, filepath.Join("testdata", "ruby", "sessions", "hash_assigment"), t)
+	cupaloy.SnapshotT(t, result)
 }
 
 func TestRubyLoggersJSON(t *testing.T) {
-	var rulesConfig map[string]settings.Rule
-
-	detector := custom.New(&nodeid.IntGenerator{Counter: 0})
-	err := yaml.Unmarshal(configRubyLoggers, &rulesConfig)
-	if err != nil {
-		t.Fatal(err)
-		return
-	}
-	customDetector := detector.(*custom.Detector)
-	err = customDetector.CompileRules(rulesConfig)
-	if err != nil {
-		t.Fatal(err)
-	}
-
-	var registrations = []detectors.InitializedDetector{{
-		Type:     detectorType,
-		Detector: detector}}
-	detectorReport := testhelper.Extract(t, filepath.Join("testdata", "ruby", "loggers"), registrations, detectorType)
-
-	bytes, err := json.MarshalIndent(detectorReport.CustomDetections, "", "\t")
-
-	if err != nil {
-		t.Fatal(err)
-	}
-
-	cupaloy.SnapshotT(t, string(bytes))
+	result := runTest(configRubyLoggers, filepath.Join("testdata", "ruby", "loggers"), t)
+	cupaloy.SnapshotT(t, result)
 }
 
 func TestRubyLoggersVariableReconciliation(t *testing.T) {
-	var rulesConfig map[string]settings.Rule
-
-	detector := custom.New(&nodeid.IntGenerator{Counter: 0})
-	err := yaml.Unmarshal(configRubyLoggers, &rulesConfig)
-	if err != nil {
-		t.Fatal(err)
-		return
-	}
-	customDetector := detector.(*custom.Detector)
-	err = customDetector.CompileRules(rulesConfig)
-	if err != nil {
-		t.Fatal(err)
-	}
-
-	var registrations = []detectors.InitializedDetector{{
-		Type:     detectorType,
-		Detector: detector}}
-	detectorReport := testhelper.Extract(t, filepath.Join("testdata", "ruby", "variable_reconciliation"), registrations, detectorType)
-
-	bytes, err := json.MarshalIndent(detectorReport.CustomDetections, "", "\t")
-
-	if err != nil {
-		t.Fatal(err)
-	}
-
-	// keep in mind variable reconciliation detections repeat for each logger detection
-	cupaloy.SnapshotT(t, string(bytes))
+	result := runTest(configRubyLoggers, filepath.Join("testdata", "ruby", "variable_reconciliation"), t)
+	cupaloy.SnapshotT(t, result)
 }
 
 func TestRailsEncryptsJSON(t *testing.T) {
-	var rulesConfig map[string]settings.Rule
-
-	detector := custom.New(&nodeid.IntGenerator{Counter: 0})
-	err := yaml.Unmarshal(configRailsEncrypts, &rulesConfig)
-	if err != nil {
-		t.Fatal(err)
-		return
-	}
-	customDetector := detector.(*custom.Detector)
-	err = customDetector.CompileRules(rulesConfig)
-	if err != nil {
-		t.Fatal(err)
-	}
-
-	var registrations = []detectors.InitializedDetector{{
-		Type:     detectorType,
-		Detector: detector}}
-	detectorReport := testhelper.Extract(t, filepath.Join("testdata", "ruby", "class", "encrypts"), registrations, detectorType)
-
-	bytes, err := json.MarshalIndent(detectorReport.CustomDetections, "", "\t")
-
-	if err != nil {
-		t.Fatal(err)
-	}
-
-	cupaloy.SnapshotT(t, string(bytes))
+	result := runTest(configRailsEncrypts, filepath.Join("testdata", "ruby", "class", "encrypts"), t)
+	cupaloy.SnapshotT(t, result)
 }
 
 func TestSQLCreateFunctionJSON(t *testing.T) {
-	var rulesConfig map[string]settings.Rule
-
-	detector := custom.New(&nodeid.IntGenerator{Counter: 0})
-	err := yaml.Unmarshal(configSQLCreateFunction, &rulesConfig)
-	if err != nil {
-		t.Fatal(err)
-		return
-	}
-	customDetector := detector.(*custom.Detector)
-	err = customDetector.CompileRules(rulesConfig)
-	if err != nil {
-		t.Fatal(err)
-	}
-
-	var registrations = []detectors.InitializedDetector{{
-		Type:     detectorType,
-		Detector: detector}}
-	detectorReport := testhelper.Extract(t, filepath.Join("testdata", "sql", "create_function"), registrations, detectorType)
-
-	bytes, err := json.MarshalIndent(detectorReport.CustomDetections, "", "\t")
-
-	if err != nil {
-		t.Fatal(err)
-	}
-
-	cupaloy.SnapshotT(t, string(bytes))
+	result := runTest(configSQLCreateFunction, filepath.Join("testdata", "sql", "create_function"), t)
+	cupaloy.SnapshotT(t, result)
 }
 func TestSQLCreateTableJSON(t *testing.T) {
-	var rulesConfig map[string]settings.Rule
-
-	detector := custom.New(&nodeid.IntGenerator{Counter: 0})
-	err := yaml.Unmarshal(configSQLCreateTable, &rulesConfig)
-	if err != nil {
-		t.Fatal(err)
-		return
-	}
-	customDetector := detector.(*custom.Detector)
-	err = customDetector.CompileRules(rulesConfig)
-	if err != nil {
-		t.Fatal(err)
-	}
-
-	var registrations = []detectors.InitializedDetector{{
-		Type:     detectorType,
-		Detector: detector}}
-	detectorReport := testhelper.Extract(t, filepath.Join("testdata", "sql", "create_table"), registrations, detectorType)
-
-	bytes, err := json.MarshalIndent(detectorReport.CustomDetections, "", "\t")
-
-	if err != nil {
-		t.Fatal(err)
-	}
-
-	cupaloy.SnapshotT(t, string(bytes))
+	result := runTest(configSQLCreateTable, filepath.Join("testdata", "sql", "create_table"), t)
+	cupaloy.SnapshotT(t, result)
 }
 
 func TestSQLCreateTriggerJSON(t *testing.T) {
-	var rulesConfig map[string]settings.Rule
-
-	detector := custom.New(&nodeid.IntGenerator{Counter: 0})
-	err := yaml.Unmarshal(configSQLCreateTrigger, &rulesConfig)
-	if err != nil {
-		t.Fatal(err)
-		return
-	}
-	customDetector := detector.(*custom.Detector)
-	err = customDetector.CompileRules(rulesConfig)
-	if err != nil {
-		t.Fatal(err)
-	}
-
-	var registrations = []detectors.InitializedDetector{{
-		Type:     detectorType,
-		Detector: detector}}
-	detectorReport := testhelper.Extract(t, filepath.Join("testdata", "sql", "create_trigger"), registrations, detectorType)
-
-	bytes, err := json.MarshalIndent(detectorReport.CustomDetections, "", " ")
-
-	if err != nil {
-		t.Fatal(err)
-	}
-
-	cupaloy.SnapshotT(t, string(bytes))
+	result := runTest(configSQLCreateTrigger, filepath.Join("testdata", "sql", "create_trigger"), t)
+	cupaloy.SnapshotT(t, result)
 }
 
 func TestInsecureSMTPJSON(t *testing.T) {
-	var rulesConfig map[string]settings.Rule
-
-	detector := custom.New(&nodeid.IntGenerator{Counter: 0})
-	err := yaml.Unmarshal(configInsecureSMTP, &rulesConfig)
-	if err != nil {
-		t.Fatal(err)
-		return
-	}
-	customDetector := detector.(*custom.Detector)
-	err = customDetector.CompileRules(rulesConfig)
-	if err != nil {
-		t.Fatal(err)
-	}
-
-	var registrations = []detectors.InitializedDetector{{
-		Type:     detectorType,
-		Detector: detector}}
-	detectorReport := testhelper.Extract(t, filepath.Join("testdata", "ruby", "insecure_smtp"), registrations, detectorType)
-
-	bytes, err := json.MarshalIndent(detectorReport.CustomDetections, "", " ")
-
-	if err != nil {
-		t.Fatal(err)
-	}
-
-	cupaloy.SnapshotT(t, string(bytes))
+	result := runTest(configInsecureSMTP, filepath.Join("testdata", "ruby", "insecure_smtp"), t)
+	cupaloy.SnapshotT(t, result)
 }
 
 func TestInsecureCommunicationJSON(t *testing.T) {
-	var rulesConfig map[string]settings.Rule
-
-	detector := custom.New(&nodeid.IntGenerator{Counter: 0})
-	err := yaml.Unmarshal(configInsecureCommunication, &rulesConfig)
-	if err != nil {
-		t.Fatal(err)
-		return
-	}
-	customDetector := detector.(*custom.Detector)
-	err = customDetector.CompileRules(rulesConfig)
-	if err != nil {
-		t.Fatal(err)
-	}
-
-	var registrations = []detectors.InitializedDetector{{
-		Type:     detectorType,
-		Detector: detector}}
-	detectorReport := testhelper.Extract(t, filepath.Join("testdata", "ruby", "insecure_communication"), registrations, detectorType)
-
-	bytes, err := json.MarshalIndent(detectorReport.CustomDetections, "", " ")
-
-	if err != nil {
-		t.Fatal(err)
-	}
-
-	cupaloy.SnapshotT(t, string(bytes))
+	result := runTest(configInsecureCommunication, filepath.Join("testdata", "ruby", "insecure_communication"), t)
+	cupaloy.SnapshotT(t, result)
 }
 
 func TestInsecureFTPJSON(t *testing.T) {
-	var rulesConfig map[string]settings.Rule
-
-	detector := custom.New(&nodeid.IntGenerator{Counter: 0})
-	err := yaml.Unmarshal(configInsecureFTP, &rulesConfig)
-	if err != nil {
-		t.Fatal(err)
-		return
-	}
-	customDetector := detector.(*custom.Detector)
-	err = customDetector.CompileRules(rulesConfig)
-	if err != nil {
-		t.Fatal(err)
-	}
-
-	var registrations = []detectors.InitializedDetector{{
-		Type:     detectorType,
-		Detector: detector}}
-	detectorReport := testhelper.Extract(t, filepath.Join("testdata", "ruby", "insecure_ftp"), registrations, detectorType)
-
-	bytes, err := json.MarshalIndent(detectorReport.CustomDetections, "", " ")
-
-	if err != nil {
-		t.Fatal(err)
-	}
-
-	cupaloy.SnapshotT(t, string(bytes))
+	result := runTest(configInsecureFTP, filepath.Join("testdata", "ruby", "insecure_ftp"), t)
+	cupaloy.SnapshotT(t, result)
 }
 
 func TestRubyThirdPartyDataSendJSON(t *testing.T) {
+	result := runTest(configRubyThirdPartyDataSend, filepath.Join("testdata", "ruby", "third_party_data_send"), t)
+	cupaloy.SnapshotT(t, result)
+}
+
+func runTest(config []byte, path string, t *testing.T) string {
 	var rulesConfig map[string]settings.Rule
 
 	detector := custom.New(&nodeid.IntGenerator{Counter: 0})
-	err := yaml.Unmarshal(configRubyThirdPartyDataSend, &rulesConfig)
+	err := yaml.Unmarshal(config, &rulesConfig)
 	if err != nil {
 		t.Fatal(err)
-		return
 	}
 	customDetector := detector.(*custom.Detector)
 	err = customDetector.CompileRules(rulesConfig)
@@ -358,13 +136,12 @@ func TestRubyThirdPartyDataSendJSON(t *testing.T) {
 	var registrations = []detectors.InitializedDetector{{
 		Type:     detectorType,
 		Detector: detector}}
-	detectorReport := testhelper.Extract(t, filepath.Join("testdata", "ruby", "third_party_data_send"), registrations, detectorType)
+	detectorReport := testhelper.Extract(t, path, registrations, detectorType)
 
-	bytes, err := json.MarshalIndent(detectorReport.CustomDetections, "", " ")
-
+	bytes, err := json.MarshalIndent(detectorReport.CustomDetections, "", "\t")
 	if err != nil {
 		t.Fatal(err)
 	}
 
-	cupaloy.SnapshotT(t, string(bytes))
+	return string(bytes)
 }
