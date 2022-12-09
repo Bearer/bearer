@@ -24,13 +24,13 @@ var (
 		Name:       "report",
 		ConfigName: "report.report",
 		Value:      ReportDetectors,
-		Usage:      "Specify the kind of report (detectors, dataflow, policies, stats)",
+		Usage:      "Specify the type of report (detectors, dataflow, policies, stats).",
 	}
 	OutputFlag = Flag{
 		Name:       "output",
 		ConfigName: "report.output",
 		Value:      "",
-		Usage:      "Specify output path for report",
+		Usage:      "Specify the output path for the report.",
 	}
 )
 

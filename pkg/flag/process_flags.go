@@ -6,7 +6,7 @@ var (
 		ConfigName: "process.port",
 		Shorthand:  "p",
 		Value:      "",
-		Usage:      "server listening on what port",
+		Usage:      "Set the server's listening port.",
 	}
 )
 

@@ -1,5 +1,5 @@
 logger_leaks:
-  description: "Logger leaks detected"
+  description: "Logger leaks detected. Avoid passing sensitive data to loggers."
   name: "Logger leaking"
   id: "detect_ruby_logger"
   query: |
@@ -10,7 +10,7 @@ logger_leaks:
     - path: policies/leakage.rego
       name: bearer.leakage
 session_leaks:
-  description: "Session leaks detected"
+  description: "Session leaks detected. Avoid storing sensitive data in the session."
   name: "Session leaking"
   id: "detect_rails_session"
   query: |
@@ -21,7 +21,7 @@ session_leaks:
     - path: policies/leakage.rego
       name: bearer.leakage
 jwt_leaks:
-  description: "JWT leaks detected"
+  description: "JWT leaks detected. Avoid storing sensitive data in JWTs."
   name: "JWT leaking"
   id: "detect_rails_jwt"
   query: |
@@ -32,7 +32,7 @@ jwt_leaks:
     - path: policies/leakage.rego
       name: bearer.leakage
 cookie_leaks:
-  description: "Cookie leaks detected"
+  description: "Cookie leaks detected. Avoid storing sensitive data in cookies."
   name: "Cookie leaking"
   id: "detect_rails_cookies"
   query: |
@@ -43,7 +43,7 @@ cookie_leaks:
     - path: policies/leakage.rego
       name: bearer.leakage
 ssl_certificate_verification_disabled:
-  description: "SSL certificate verification disabled in an application processing sensitive data"
+  description: "SSL certificate verification is disabled in an application processing sensitive data. Enable SSL certificate verification."
   name: "SSL certificate verification disabled"
   id: "ssl_certificate_verification_disabled"
   query: |
@@ -54,7 +54,7 @@ ssl_certificate_verification_disabled:
     - path: policies/ssl_certificate_verification_disabled.rego
       name: bearer.ssl_certificate_verification_disabled
 application_level_encryption_missing:
-  description: "Application level encryption missing"
+  description: "Application level encryption missing. Enable application level encryption to reduce the risk of leaking sensitive data."
   name: "Application level encryption missing"
   id: "application_level_encryption_missing"
   query: |
@@ -65,7 +65,7 @@ application_level_encryption_missing:
     - path: policies/application_level_encryption.rego
       name: bearer.application_level_encryption
 insecure_smtp_processing_sensitive_data:
-  description: "Communication with insecure SMTP in an application processing sensitive data"
+  description: "Communication using insecure SMTP in an application processing sensitive data. Verify that SMTP settings use OpenSSL or equivalent."
   name: "Insecure SMTP"
   id: "detect_rails_insecure_smtp"
   query: |
@@ -76,7 +76,7 @@ insecure_smtp_processing_sensitive_data:
     - path: policies/insecure_smtp.rego
       name: bearer.insecure_smtp
 http_get_parameters:
-  description: "Sending data as HTTP GET parameters"
+  description: "Sending data as HTTP GET parameters. Avoid sending sensitive data as parameters in GET requests."
   name: "HTTP GET parameters"
   id: "ruby_http_get_detection"
   query: |
@@ -87,7 +87,7 @@ http_get_parameters:
     - path: policies/http_get_parameters.rego
       name: bearer.http_get_parameters
 insecure_communication_processing_sensitive_data:
-  description: "Insecure communication in an application processing sensitive data"
+  description: "Insecure communication in an application processing sensitive data. Ensure communication occurs over SSL."
   name: "Insecure communication"
   id: "detect_rails_insecure_communication"
   query: |
@@ -98,7 +98,7 @@ insecure_communication_processing_sensitive_data:
     - path: policies/insecure_communication.rego
       name: bearer.insecure_communication
 insecure_ftp_processing_sensitive_data:
-  description: "Communication with insecure FTP in an application processing sensitive data"
+  description: "Communication with an insecure FTP server in an application processing sensitive data. Only connect to FTP securely."
   name: "Insecure FTP"
   id: "detect_rails_insecure_ftp"
   query: |
@@ -120,7 +120,7 @@ insecure_ftp_with_data_category:
     - path: policies/insecure_ftp_with_data_category.rego
       name: bearer.insecure_ftp_with_data_category
 insecure_http_get:
-  description: "Communicating with insecure HTTP GET in an application processing sensitive data"
+  description: "Communicating using insecure HTTP GET in an application processing sensitive data. Ensure all HTTP communication occurs over HTTPS."
   name: "Insecure HTTP GET"
   id: insecure_http_get
   query: |
@@ -131,7 +131,7 @@ insecure_http_get:
     - path: policies/insecure_http_get.rego
       name: bearer.insecure_http_get
 insecure_http_with_data_category:
-  description: "Communicating Data Category with insecure HTTP"
+  description: "Communicating Data Category using insecure HTTP. Ensure all HTTP communication occurs over HTTPS."
   name: "Insecure HTTP with Data Category"
   id: insecure_http_with_data_category
   query: |
@@ -142,7 +142,7 @@ insecure_http_with_data_category:
     - path: policies/insecure_http_with_data_category.rego
       name: bearer.insecure_http_with_data_category
 sending_data_in_category_to_third_party:
-  description: "Sending data in category to third party"
+  description: "Sending data in category to third party. Ensure data sent to third party is intended and secured."
   name: "Third-party data category exposure"
   id: "detect_ruby_third_party_data_send"
   query: |

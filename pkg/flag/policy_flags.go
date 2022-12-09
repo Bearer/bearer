@@ -5,13 +5,13 @@ var (
 		Name:       "skip-policy",
 		ConfigName: "policy.skip-policy",
 		Value:      []string{},
-		Usage:      "specify the comma separated ids of the policies you would like to skip. Runs all other policies.",
+		Usage:      "Specify the comma-separated ids of the policies you would like to skip. Runs all other policies.",
 	}
 	OnlyPolicyFlag = Flag{
 		Name:       "only-policy",
 		ConfigName: "policy.only-policy",
 		Value:      []string{},
-		Usage:      "specify the comma separated ids of the policies you would like to run. Skips all other policies.",
+		Usage:      "Specify the comma-separated ids of the policies you would like to run. Skips all other policies.",
 	}
 )
 
