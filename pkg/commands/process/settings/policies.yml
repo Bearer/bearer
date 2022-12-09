@@ -32,7 +32,7 @@ jwt_leaks:
     - path: policies/leakage.rego
       name: bearer.leakage
 cookie_leaks:
-  description: "Cookie leaks detected"
+  description: "Cookie leaks detected. Avoid storing sensitive data in cookies."
   name: "Cookie leaking"
   id: "detect_rails_cookies"
   query: |
@@ -142,7 +142,7 @@ insecure_http_with_data_category:
     - path: policies/insecure_http_with_data_category.rego
       name: bearer.insecure_http_with_data_category
 sending_data_in_category_to_third_party:
-  description: "Sending data in category to third party"
+  description: "Sending data in category to third party. Ensure data sent to third party is intended and secured."
   name: "Third-party data category exposure"
   id: "detect_ruby_third_party_data_send"
   query: |
