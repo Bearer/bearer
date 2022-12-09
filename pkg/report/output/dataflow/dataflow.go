@@ -7,6 +7,7 @@ import (
 	"strings"
 
 	"github.com/bearer/curio/pkg/commands/process/settings"
+	reportdetectors "github.com/bearer/curio/pkg/report/detectors"
 	"github.com/bearer/curio/pkg/report/customdetectors"
 	"github.com/bearer/curio/pkg/report/detections"
 	"github.com/bearer/curio/pkg/report/output/dataflow/components"
@@ -26,7 +27,7 @@ type DataFlow struct {
 var allowedDetections []detections.DetectionType = []detections.DetectionType{detections.TypeSchemaClassified, detections.TypeCustomClassified, detections.TypeDependencyClassified, detections.TypeInterfaceClassified, detections.TypeFrameworkClassified, detections.TypeCustomRisk}
 
 func GetOutput(input []interface{}, config settings.Config, isInternal bool) (*DataFlow, error) {
-	dataTypesHolder := datatypes.New(isInternal)
+	dataTypesHolder := datatypes.New(config, isInternal)
 	risksHolder := risks.New(config, isInternal)
 	componentsHolder := components.New(isInternal)
 
@@ -71,9 +72,21 @@ func GetOutput(input []interface{}, config settings.Config, isInternal bool) (*D
 
 		switch detectionType {
 		case detections.TypeSchemaClassified:
-			err = dataTypesHolder.AddSchema(castDetection, nil)
-			if err != nil {
-				return nil, err
+			if castDetection.DetectorType == reportdetectors.DetectorSchemaRb {
+				extras, err := datatypes.GetRailsExtras(input, detection)
+				if err != nil {
+					return nil, err
+				}
+
+				err = dataTypesHolder.AddSchema(castDetection, extras)
+				if err != nil {
+					return nil, err
+				}
+			} else {
+				err = dataTypesHolder.AddSchema(castDetection, nil)
+				if err != nil {
+					return nil, err
+				}
 			}
 		case detections.TypeCustomRisk:
 			risksHolder.AddRiskPresence(castDetection)

@@ -19,7 +19,8 @@
       FieldType: (string) "",
       SimpleFieldType: (string) (len=8) "function",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>)
+      Parent: (*schema.Parent)(<nil>),
+      TransformedObjectName: (string) ""
     }
   }),
   (*detections.Detection)({

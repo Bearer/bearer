@@ -30,4 +30,5 @@ const (
 	DetectorIPYNB        Type = "ipynb"
 	DetectorGitleaks     Type = "gitleaks"
 	DetectorCustom       Type = "custom"
+	DetectorSchemaRb     Type = "schema_rb"
 )

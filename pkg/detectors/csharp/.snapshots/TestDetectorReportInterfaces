@@ -19,7 +19,8 @@
       FieldType: (string) (len=4) "void",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>)
+      Parent: (*schema.Parent)(<nil>),
+      TransformedObjectName: (string) ""
     }
   }),
   (*detections.Detection)({
@@ -98,7 +99,8 @@
       FieldType: (string) (len=6) "string",
       SimpleFieldType: (string) (len=6) "string",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>)
+      Parent: (*schema.Parent)(<nil>),
+      TransformedObjectName: (string) ""
     }
   }),
   (*detections.Detection)({
@@ -121,7 +123,8 @@
       FieldType: (string) (len=4) "void",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>)
+      Parent: (*schema.Parent)(<nil>),
+      TransformedObjectName: (string) ""
     }
   }),
   (*detections.Detection)({
@@ -144,7 +147,8 @@
       FieldType: (string) (len=4) "void",
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>)
+      Parent: (*schema.Parent)(<nil>),
+      TransformedObjectName: (string) ""
     }
   }),
   (*detections.Detection)({

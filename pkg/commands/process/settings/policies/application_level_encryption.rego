@@ -5,11 +5,11 @@ import data.bearer.common
 import future.keywords
 
 policy_breach contains item if {
-    some datatype in input.dataflow.data_types
-    some detector in datatype.detectors
-    detector.name == input.policy_id
+    datatype = input.dataflow.data_types[_]
+    detector = datatype.detectors[_]
+    location = detector.locations[_]
 
-    some location in detector.locations
+    location.stored
     not location.encrypted
 
     item := {

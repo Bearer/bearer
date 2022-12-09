@@ -30,6 +30,7 @@ import (
 type StoredSchema struct {
 	Value        schema.Schema
 	Source       *source.Source
+	Parent       *parser.Node
 }
 
 type StoredSchemaNodes = map[*parser.Node]*StoredSchema
@@ -102,7 +103,7 @@ func (report *Detectors) AddDataType(detectionType detections.DetectionType, det
 	}
 }
 
-func (report *Detectors) SchemaGroupBegin(detectorType detectors.Type, node *parser.Node, schema schema.Schema, source *source.Source) {
+func (report *Detectors) SchemaGroupBegin(detectorType detectors.Type, node *parser.Node, schema schema.Schema, source *source.Source, parent *parser.Node) {
 	if report.SchemaGroupIsOpen() {
 		zerolog.Warn().Msg("schema group already open")
 	}
@@ -111,6 +112,7 @@ func (report *Detectors) SchemaGroupBegin(detectorType detectors.Type, node *par
 		ParentSchema: StoredSchema{
 			Value: schema,
 			Source: source,
+			Parent: parent,
 		},
 		DetectorType: detectorType,
 		Schemas: make(StoredSchemaNodes),
@@ -122,7 +124,7 @@ func (report *Detectors) SchemaGroupIsOpen() bool {
 }
 
 func (report *Detectors) SchemaGroupAddItem(node *parser.Node, schema schema.Schema, source *source.Source) {
-	report.StoredSchemas.Schemas[node] = &StoredSchema{Value: schema, Source: source}
+	report.StoredSchemas.Schemas[node] = &StoredSchema{Value: schema, Source: source, Parent: report.StoredSchemas.ParentSchema.Parent}
 }
 
 func (report *Detectors) SchemaGroupEnd(idGenerator nodeid.Generator) {
@@ -173,7 +175,7 @@ func (report *Detectors) SchemaGroupEnd(idGenerator nodeid.Generator) {
 	classifiedDatatypes[report.StoredSchemas.Node.ID()] = classifiedParentDatatype
 
 	// Export classified data types
-	datatype.ExportClassified(report, detections.TypeSchemaClassified, report.StoredSchemas.DetectorType, idGenerator, classifiedDatatypes, report.StoredSchemas.Node)
+	datatype.ExportClassified(report, detections.TypeSchemaClassified, report.StoredSchemas.DetectorType, idGenerator, classifiedDatatypes, report.StoredSchemas.ParentSchema.Parent)
 
 	// Clear the map of stored schema detection information
 	report.StoredSchemas = SchemaGroup{}

@@ -12,6 +12,7 @@ import (
 	"github.com/bearer/curio/pkg/report/detectors"
 	"github.com/bearer/curio/pkg/report/schema"
 	"github.com/bearer/curio/pkg/util/file"
+	pluralize "github.com/gertd/go-pluralize"
 )
 
 var (
@@ -28,7 +29,7 @@ var (
 					method: (_) @type
 					arguments: (argument_list . (string) @column_name))
 				(#eq @receiver @block_param))
-			(#eq @table_method "create_table"))
+			(#eq @table_method "create_table")) @rule
 	`)
 )
 
@@ -43,6 +44,7 @@ func ExtractFromDatabaseSchema(
 	}
 	defer tree.Close()
 
+	pluralizer := pluralize.NewClient()
 	uuidHolder := parserschema.NewUUIDHolder()
 
 	err = tree.Query(rubyDatabaseSchemaQuery, func(captures parser.Captures) error {
@@ -52,10 +54,12 @@ func ExtractFromDatabaseSchema(
 		columnName := stripQuotes(columnNode.Content())
 		columnTypeNode := captures["type"]
 		columnType := columnTypeNode.Content()
+		ruleNode := captures["rule"]
 
 		objectUUID := uuidHolder.Assign(tableNode.ID(), idGenerator)
 		fieldUUID := uuidHolder.Assign(columnTypeNode.ID(), idGenerator)
 
+		transformedObjectName := pluralizer.Singular(strings.ToLower(tableName))
 		currentSchema := schema.Schema{
 			ObjectName:      tableName,
 			ObjectUUID:      objectUUID,
@@ -63,14 +67,16 @@ func ExtractFromDatabaseSchema(
 			FieldUUID:       fieldUUID,
 			FieldType:       columnType,
 			SimpleFieldType: convertToSimpleType(columnType),
+			TransformedObjectName: transformedObjectName,
 		}
 		if !report.SchemaGroupIsOpen() {
 			source := tableNode.Source(false)
 			report.SchemaGroupBegin(
-				detectors.DetectorRails,
+				detectors.DetectorSchemaRb,
 				tableNode,
 				currentSchema,
 				&source,
+				ruleNode,
 			)
 		}
 		source := columnNode.Source(false)

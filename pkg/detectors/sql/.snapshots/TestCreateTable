@@ -19,7 +19,8 @@
       FieldType: (string) (len=6) "bigint",
       SimpleFieldType: (string) (len=6) "number",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>)
+      Parent: (*schema.Parent)(<nil>),
+      TransformedObjectName: (string) ""
     }
   }),
   (*detections.Detection)({
@@ -42,7 +43,8 @@
       FieldType: (string) (len=6) "bigint",
       SimpleFieldType: (string) (len=6) "number",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>)
+      Parent: (*schema.Parent)(<nil>),
+      TransformedObjectName: (string) ""
     }
   }),
   (*detections.Detection)({
@@ -65,7 +67,8 @@
       FieldType: (string) (len=17) "character varying",
       SimpleFieldType: (string) (len=6) "string",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>)
+      Parent: (*schema.Parent)(<nil>),
+      TransformedObjectName: (string) ""
     }
   }),
   (*detections.Detection)({
@@ -88,7 +91,8 @@
       FieldType: (string) (len=4) "json",
       SimpleFieldType: (string) (len=6) "object",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>)
+      Parent: (*schema.Parent)(<nil>),
+      TransformedObjectName: (string) ""
     }
   }),
   (*detections.Detection)({
@@ -111,7 +115,8 @@
       FieldType: (string) (len=27) "timestamp without time zone",
       SimpleFieldType: (string) (len=4) "date",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>)
+      Parent: (*schema.Parent)(<nil>),
+      TransformedObjectName: (string) ""
     }
   }),
   (*detections.Detection)({
@@ -134,7 +139,8 @@
       FieldType: (string) (len=27) "timestamp without time zone",
       SimpleFieldType: (string) (len=4) "date",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>)
+      Parent: (*schema.Parent)(<nil>),
+      TransformedObjectName: (string) ""
     }
   }),
   (*detections.Detection)({
@@ -157,7 +163,8 @@
       FieldType: (string) (len=6) "bigint",
       SimpleFieldType: (string) (len=6) "number",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>)
+      Parent: (*schema.Parent)(<nil>),
+      TransformedObjectName: (string) ""
     }
   }),
   (*detections.Detection)({
@@ -180,7 +187,8 @@
       FieldType: (string) (len=17) "character varying",
       SimpleFieldType: (string) (len=6) "string",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>)
+      Parent: (*schema.Parent)(<nil>),
+      TransformedObjectName: (string) ""
     }
   }),
   (*detections.Detection)({
@@ -203,7 +211,8 @@
       FieldType: (string) (len=17) "character varying",
       SimpleFieldType: (string) (len=6) "string",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>)
+      Parent: (*schema.Parent)(<nil>),
+      TransformedObjectName: (string) ""
     }
   }),
   (*detections.Detection)({
@@ -226,7 +235,8 @@
       FieldType: (string) (len=27) "public.business_impact_enum",
       SimpleFieldType: (string) (len=6) "object",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>)
+      Parent: (*schema.Parent)(<nil>),
+      TransformedObjectName: (string) ""
     }
   }),
   (*detections.Detection)({
@@ -249,7 +259,8 @@
       FieldType: (string) (len=22) "public.api_status_enum",
       SimpleFieldType: (string) (len=6) "object",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>)
+      Parent: (*schema.Parent)(<nil>),
+      TransformedObjectName: (string) ""
     }
   }),
   (*detections.Detection)({
@@ -272,7 +283,8 @@
       FieldType: (string) (len=17) "character varying",
       SimpleFieldType: (string) (len=6) "string",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>)
+      Parent: (*schema.Parent)(<nil>),
+      TransformedObjectName: (string) ""
     }
   }),
   (*detections.Detection)({
@@ -295,7 +307,8 @@
       FieldType: (string) (len=7) "integer",
       SimpleFieldType: (string) (len=6) "number",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>)
+      Parent: (*schema.Parent)(<nil>),
+      TransformedObjectName: (string) ""
     }
   }),
   (*detections.Detection)({
@@ -318,7 +331,8 @@
       FieldType: (string) (len=17) "character varying",
       SimpleFieldType: (string) (len=6) "string",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>)
+      Parent: (*schema.Parent)(<nil>),
+      TransformedObjectName: (string) ""
     }
   }),
   (*detections.Detection)({
@@ -341,7 +355,8 @@
       FieldType: (string) (len=6) "bigint",
       SimpleFieldType: (string) (len=6) "number",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>)
+      Parent: (*schema.Parent)(<nil>),
+      TransformedObjectName: (string) ""
     }
   }),
   (*detections.Detection)({
@@ -364,7 +379,8 @@
       FieldType: (string) (len=7) "integer",
       SimpleFieldType: (string) (len=6) "number",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>)
+      Parent: (*schema.Parent)(<nil>),
+      TransformedObjectName: (string) ""
     }
   }),
   (*detections.Detection)({
@@ -387,7 +403,8 @@
       FieldType: (string) (len=7) "integer",
       SimpleFieldType: (string) (len=6) "number",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>)
+      Parent: (*schema.Parent)(<nil>),
+      TransformedObjectName: (string) ""
     }
   }),
   (*detections.Detection)({
@@ -410,7 +427,8 @@
       FieldType: (string) (len=4) "text",
       SimpleFieldType: (string) (len=6) "object",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>)
+      Parent: (*schema.Parent)(<nil>),
+      TransformedObjectName: (string) ""
     }
   }),
   (*detections.Detection)({
@@ -433,7 +451,8 @@
       FieldType: (string) (len=30) "timestamp(6) without time zone",
       SimpleFieldType: (string) (len=4) "date",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>)
+      Parent: (*schema.Parent)(<nil>),
+      TransformedObjectName: (string) ""
     }
   }),
   (*detections.Detection)({
@@ -456,7 +475,8 @@
       FieldType: (string) (len=30) "timestamp(6) without time zone",
       SimpleFieldType: (string) (len=4) "date",
       Classification: (interface {}) <nil>,
-      Parent: (*schema.Parent)(<nil>)
+      Parent: (*schema.Parent)(<nil>),
+      TransformedObjectName: (string) ""
     }
   })
 }

@@ -97,6 +97,7 @@ func (detector *detector) ExtractFromSchema(
 				objectNode,
 				currentSchema,
 				&source,
+				nil,
 			)
 		}
 		source := fieldNode.Source(true)
