@@ -11,6 +11,7 @@ import (
 	"github.com/bearer/curio/pkg/report/detections"
 	"github.com/bearer/curio/pkg/util/classify"
 	"github.com/bearer/curio/pkg/util/maputil"
+	"github.com/bearer/curio/pkg/util/output"
 )
 
 type Holder struct {
@@ -134,6 +135,7 @@ func (holder *Holder) addDatatype(classification *db.DataType, detectorName stri
 }
 
 func (holder *Holder) ToDataFlow() []types.Datatype {
+	output.StdErrLogger().Msgf("Processing Dataflow")
 	data := make([]types.Datatype, 0)
 
 	datatypes := maputil.ToSortedSlice(holder.datatypes)
@@ -171,6 +173,7 @@ func (holder *Holder) ToDataFlow() []types.Datatype {
 
 		data = append(data, constructedDatatype)
 	}
+	output.StdErrLogger().Msgf("Finished processing Dataflow")
 
 	return data
 }

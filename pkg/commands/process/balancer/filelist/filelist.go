@@ -36,6 +36,7 @@ func Discover(projectPath string, config settings.Config) ([]work.File, error) {
 		if err != nil {
 			return err
 		}
+
 		if d.IsDir() {
 			if ignore.Ignore(projectPath, filePath, d) {
 				return filepath.SkipDir
