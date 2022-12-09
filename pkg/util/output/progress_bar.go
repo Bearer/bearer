@@ -11,6 +11,7 @@ func GetProgressBar(filesLength int, config settings.Config) *progressbar.Progre
 		progressbar.OptionSetVisibility(!hideProgress),
 		progressbar.OptionSetWriter(errorWriter),
 		progressbar.OptionShowCount(),
+		progressbar.OptionSetWidth(15),
 		progressbar.OptionEnableColorCodes(false),
 		progressbar.OptionShowElapsedTimeOnFinish(),
 		progressbar.OptionOnCompletion(func() {
@@ -18,7 +19,7 @@ func GetProgressBar(filesLength int, config settings.Config) *progressbar.Progre
 		}),
 		progressbar.OptionShowIts(),
 		progressbar.OptionSetItsString("files"),
-		progressbar.OptionSetDescription("Scanning target..."),
+		progressbar.OptionSetDescription(" └"),
 		progressbar.OptionSetTheme(progressbar.Theme{
 			Saucer:        "=",
 			SaucerHead:    ">",
