@@ -22,21 +22,34 @@ Curio is a static code analysis tool (SAST) that scans your source code to disco
 [Explore the docs](https://curio.sh) - [Getting Started](#rocket-getting-started) - [FAQ](#question-faqs) - [Report Bug](https://github.com/Bearer/curio/issues/new/choose) - [Discord Community][discord]
 
 ```
-Scanning target... 100% [===============] (7481/7481, 22 files/s) [5m44s]
+Scanning target ./example-project
+ └ 100% [===============] (3305/3305, 115 files/s) [28s]
 
 Policy Report
 
 =====================================
 Policy list:
 
+- JWT leaking
+- Insecure communication
+- Insecure HTTP with Data Category
 - Logger leaking
+- Cookie leaking
+- Insecure SMTP
+- HTTP GET parameters
+- Insecure FTP with Data Category
+- Session leaking
+- Insecure FTP
+- Third-party data category exposure
+- SSL certificate verification disabled
 - Application level encryption missing
+- Insecure HTTP GET
 
 =====================================
 
 SUCCESS
 
-2 policies were run and no breaches were detected.
+14 policies were run and no breaches were detected.
 
 ```
 
