@@ -19,28 +19,28 @@ Scan Flags
       --skip-path strings                    Specify the comma separated files and directories to skip. Supports * syntax, e.g. --skip-path users/*.go,users/admin.sql
 
 Policy Flags
-      --only-policy strings   specify the comma separated ids of the policies you would like to run. Skips all other policies.
-      --skip-policy strings   specify the comma separated ids of the policies you would like to skip. Runs all other policies.
+      --only-policy strings   Specify the comma-separated ids of the policies you would like to run. Skips all other policies.
+      --skip-policy strings   Specify the comma-separated ids of the policies you would like to skip. Runs all other policies.
 
 Worker Flags
-      --existing-worker string              URL of an existing worker
-      --file-size-max int                   ignore files with file size larger than this config (default 100000)
-      --files-to-batch int                  number of files to batch to worker (default 1)
-      --memory-max int                      if memory needed to scan a file surpasses this limit, skip the file (default 800000000)
-      --timeout duration                    time allowed to complete scan (default 10m0s)
-      --timeout-file-max duration           maximum timeout assigned to scanning file, this config superseeds timeout-second-per-bytes (default 30s)
-      --timeout-file-min duration           minimum timeout assigned to scanning file, this config superseeds timeout-second-per-bytes (default 5s)
+      --existing-worker string              Specify the URL of an existing worker.
+      --file-size-max int                   Ignore files larger than the specified value. (default 100000)
+      --files-to-batch int                  Specify the number of files to batch per worker. (default 1)
+      --memory-max int                      If the memory needed to scan a file surpasses the specified limit, skip the file. (default 800000000)
+      --timeout duration                    The maximum time alloted to complete the scan. (default 10m0s)
+      --timeout-file-max duration           Maximum timeout assigned for scanning each file. This config superseeds timeout-second-per-bytes. (default 30s)
+      --timeout-file-min duration           Minimum timeout assigned for scanning each file. This config superseeds timeout-second-per-bytes. (default 5s)
       --timeout-file-second-per-bytes int   number of file size bytes producing a second of timeout assigned to scanning a file (default 10000)
-      --timeout-worker-online duration      maximum time for worker process to come online (default 1m0s)
-      --workers int                         number of processing workers to spawn (default 1)
+      --timeout-worker-online duration      Maximum time to wait for a worker process to come online. (default 1m0s)
+      --workers int                         The number of processing workers to spawn. (default 1)
 
 Report Flags
   -f, --format string   Specify report format (json, yaml)
-      --output string   Specify output path for report
-      --report string   Specify the kind of report (detectors, dataflow, policies, stats) (default "detectors")
+      --output string   Specify the output path for the report.
+      --report string   Specify the type of report (detectors, dataflow, policies, stats). (default "detectors")
 
 General Flags
-      --config-file string   Load configuration from the defined path
+      --config-file string   Load configuration from the specified path.
 
 
 --
