@@ -2,87 +2,10 @@ name: ' init'
 synopsis: Generates a default config to `curio.yml`
 usage: ' init [flags]'
 options:
-    - name: config-file
-      usage: Load configuration from the specified path.
-    - name: context
-      usage: |
-        Expand context of schema classification e.g., --context=health, to include data types particular to health
-    - name: debug
-      default_value: "false"
-      usage: Enable debug logs
-    - name: disable-domain-resolution
-      default_value: "true"
-      usage: |
-        Do not attempt to resolve detected domains during classification (default false), e.g. --disable-domain-resolution=true
-    - name: domain-resolution-timeout
-      default_value: 3s
-      usage: |
-        Set timeout when attempting to resolve detected domains during classification (default 3 seconds), e.g. --domain-resolution-timeout=3s
-    - name: existing-worker
-      usage: Specify the URL of an existing worker.
-    - name: file-size-max
-      default_value: "100000"
-      usage: Ignore files larger than the specified value.
-    - name: files-to-batch
-      default_value: "1"
-      usage: Specify the number of files to batch per worker.
-    - name: format
-      shorthand: f
-      usage: Specify report format (json, yaml)
     - name: help
       shorthand: h
       default_value: "false"
       usage: help for init
-    - name: internal-domains
-      default_value: '[]'
-      usage: |
-        Define regular expressions for better classification of private or unreachable domains e.g. --internal-domains="*.my-company.com,private.sh"
-    - name: memory-max
-      default_value: "800000000"
-      usage: |
-        If the memory needed to scan a file surpasses the specified limit, skip the file.
-    - name: only-policy
-      default_value: '[]'
-      usage: |
-        Specify the comma-separated ids of the policies you would like to run. Skips all other policies.
-    - name: output
-      usage: Specify the output path for the report.
-    - name: quiet
-      default_value: "false"
-      usage: Suppress non-essential messages
-    - name: report
-      default_value: policies
-      usage: |
-        Specify the type of report (detectors, dataflow, policies, stats).
-    - name: skip-path
-      default_value: '[]'
-      usage: |
-        Specify the comma separated files and directories to skip. Supports * syntax, e.g. --skip-path users/*.go,users/admin.sql
-    - name: skip-policy
-      default_value: '[]'
-      usage: |
-        Specify the comma-separated ids of the policies you would like to skip. Runs all other policies.
-    - name: timeout
-      default_value: 10m0s
-      usage: The maximum time alloted to complete the scan.
-    - name: timeout-file-max
-      default_value: 30s
-      usage: |
-        Maximum timeout assigned for scanning each file. This config superseeds timeout-second-per-bytes.
-    - name: timeout-file-min
-      default_value: 5s
-      usage: |
-        Minimum timeout assigned for scanning each file. This config superseeds timeout-second-per-bytes.
-    - name: timeout-file-second-per-bytes
-      default_value: "10000"
-      usage: |
-        number of file size bytes producing a second of timeout assigned to scanning a file
-    - name: timeout-worker-online
-      default_value: 1m0s
-      usage: Maximum time to wait for a worker process to come online.
-    - name: workers
-      default_value: "1"
-      usage: The number of processing workers to spawn.
 see_also:
     - ' - '
 aliases: 

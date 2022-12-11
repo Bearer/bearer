@@ -1,5 +1,4 @@
 name: ""
-usage: ' [flags]'
 options:
     - name: help
       shorthand: h

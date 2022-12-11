@@ -57,9 +57,6 @@ Learn More:
 
 	cmd := &cobra.Command{
 		Args: cobra.NoArgs,
-		RunE: func(cmd *cobra.Command, args []string) error {
-			return cmd.Help()
-		},
 	}
 	cmd.SetUsageTemplate(usageTemplate)
 	return cmd
