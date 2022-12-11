@@ -14,7 +14,8 @@ func NewInitCommand() *cobra.Command {
 		Use:   "init",
 		Short: "Generates a default config to `curio.yml`",
 		RunE: func(cmd *cobra.Command, args []string) error {
-			if err := scanFlags.BindForConfigInit(cmd); err != nil {
+
+			if err := scanFlags.BindForConfigInit(NewScanCommand()); err != nil {
 				return fmt.Errorf("flag bind error: %w", err)
 			}
 
@@ -39,8 +40,10 @@ func NewInitCommand() *cobra.Command {
 			return nil
 		},
 	}
+
 	cmd.SetUsageFunc(func(cmd *cobra.Command) error {
 		return nil
 	})
+
 	return cmd
 }
