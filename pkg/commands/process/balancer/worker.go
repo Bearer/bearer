@@ -78,7 +78,7 @@ func (worker *Worker) Start() {
 	}
 
 	if !worker.config.Scan.Quiet {
-		output.StdErrLogger().Msgf("Target %s", worker.config.Scan.Target)
+		output.StdErrLogger().Msgf("Scanning target %s", worker.config.Scan.Target)
 	}
 	bar := output.GetProgressBar(len(worker.FileList), worker.config)
 
