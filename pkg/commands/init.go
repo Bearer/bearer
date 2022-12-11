@@ -39,8 +39,8 @@ func NewInitCommand() *cobra.Command {
 			return nil
 		},
 	}
-
-	scanFlags.AddFlags(cmd)
-
+	cmd.SetUsageFunc(func(cmd *cobra.Command) error {
+		return nil
+	})
 	return cmd
 }
