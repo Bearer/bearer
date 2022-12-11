@@ -29,16 +29,16 @@ func TestReportFlags(t *testing.T) {
 	})
 
 	tests := []testhelper.TestCase{
-		newScanTest("format-json", []string{"--format=json"}, ""),
-		newScanTest("format-yaml", []string{"--format=yaml"}, ""),
+		newScanTest("format-json", []string{"--report=detectors", "--format=json"}, ""),
+		newScanTest("format-yaml", []string{"--report=detectors", "--format=yaml"}, ""),
 		newScanTest("report-detectors", []string{"--report=detectors"}, ""),
 		newScanTest("report-dataflow", []string{"--report=dataflow"}, ""),
 		newScanProject("report-dataflow-verified-by", []string{"--report=dataflow", "--format=yaml"}, "", "verified_by"),
 		newScanProject("report-policies", []string{"--report=policies", "--format=yaml"}, "", "policies"),
-		newScanTest("output", []string{"--output=" + outputPath}, outputPath),
-		newScanTest("health-context", []string{"--context=health"}, ""),
-		newScanTest("domain-resolution-disabled", []string{"--disable-domain-resolution=true"}, ""),
-		newScanTest("skipped-paths", []string{"--skip-path=\"users/*.go,users/admin.sql\""}, ""),
+		newScanTest("output", []string{"--report=detectors", "--output=" + outputPath}, outputPath),
+		newScanTest("health-context", []string{"--report=detectors", "--context=health"}, ""),
+		newScanTest("domain-resolution-disabled", []string{"--report=detectors", "--disable-domain-resolution=true"}, ""),
+		newScanTest("skipped-paths", []string{"--report=detectors", "--skip-path=\"users/*.go,users/admin.sql\""}, ""),
 	}
 
 	testhelper.RunTests(t, tests)
