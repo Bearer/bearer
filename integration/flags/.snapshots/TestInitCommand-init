@@ -479,7 +479,7 @@ scan:
                 policy_breach = data.bearer.application_level_encryption.policy_breach
             id: application_level_encryption_missing
             name: Application level encryption missing
-            description: Application level encryption missing
+            description: Application level encryption missing. Enable application level encryption to reduce the risk of leaking sensitive data.
             level: ""
             modules:
                 - path: policies/common.rego
@@ -553,7 +553,7 @@ scan:
                 policy_breach = data.bearer.leakage.policy_breach
             id: detect_rails_cookies
             name: Cookie leaking
-            description: Cookie leaks detected
+            description: Cookie leaks detected. Avoid storing sensitive data in cookies.
             level: ""
             modules:
                 - path: policies/common.rego
@@ -626,7 +626,7 @@ scan:
                 policy_breach = data.bearer.http_get_parameters.policy_breach
             id: ruby_http_get_detection
             name: HTTP GET parameters
-            description: Sending data as HTTP GET parameters
+            description: Sending data as HTTP GET parameters. Avoid sending sensitive data as parameters in GET requests.
             level: ""
             modules:
                 - path: policies/common.rego
@@ -699,7 +699,7 @@ scan:
                 policy_breach = data.bearer.insecure_communication.policy_breach
             id: detect_rails_insecure_communication
             name: Insecure communication
-            description: Insecure communication in an application processing sensitive data
+            description: Insecure communication in an application processing sensitive data. Ensure communication occurs over SSL.
             level: ""
             modules:
                 - path: policies/common.rego
@@ -771,7 +771,7 @@ scan:
                 policy_breach = data.bearer.insecure_ftp.policy_breach
             id: detect_rails_insecure_ftp
             name: Insecure FTP
-            description: Communication with insecure FTP in an application processing sensitive data
+            description: Communication with an insecure FTP server in an application processing sensitive data. Only connect to FTP securely.
             level: ""
             modules:
                 - path: policies/common.rego
@@ -917,7 +917,7 @@ scan:
                 policy_breach = data.bearer.insecure_http_get.policy_breach
             id: insecure_http_get
             name: Insecure HTTP GET
-            description: Communicating with insecure HTTP GET in an application processing sensitive data
+            description: Communicating using insecure HTTP GET in an application processing sensitive data. Ensure all HTTP communication occurs over HTTPS.
             level: ""
             modules:
                 - path: policies/common.rego
@@ -990,7 +990,7 @@ scan:
                 policy_breach = data.bearer.insecure_http_with_data_category.policy_breach
             id: insecure_http_with_data_category
             name: Insecure HTTP with Data Category
-            description: Communicating Data Category with insecure HTTP
+            description: Communicating Data Category using insecure HTTP. Ensure all HTTP communication occurs over HTTPS.
             level: ""
             modules:
                 - path: policies/common.rego
@@ -1077,7 +1077,7 @@ scan:
                 policy_breach = data.bearer.insecure_smtp.policy_breach
             id: detect_rails_insecure_smtp
             name: Insecure SMTP
-            description: Communication with insecure SMTP in an application processing sensitive data
+            description: Communication using insecure SMTP in an application processing sensitive data. Verify that SMTP settings use OpenSSL or equivalent.
             level: ""
             modules:
                 - path: policies/common.rego
@@ -1149,7 +1149,7 @@ scan:
                 policy_breach = data.bearer.leakage.policy_breach
             id: detect_rails_jwt
             name: JWT leaking
-            description: JWT leaks detected
+            description: JWT leaks detected. Avoid storing sensitive data in JWTs.
             level: ""
             modules:
                 - path: policies/common.rego
@@ -1222,7 +1222,7 @@ scan:
                 policy_breach = data.bearer.leakage.policy_breach
             id: detect_ruby_logger
             name: Logger leaking
-            description: Logger leaks detected
+            description: Logger leaks detected. Avoid passing sensitive data to loggers.
             level: ""
             modules:
                 - path: policies/common.rego
@@ -1295,7 +1295,7 @@ scan:
                 policy_breach = data.bearer.third_party_data_category.policy_breach
             id: detect_ruby_third_party_data_send
             name: Third-party data category exposure
-            description: Sending data in category to third party
+            description: Sending data in category to third party. Ensure data sent to third party is intended and secured.
             level: ""
             modules:
                 - path: policies/common.rego
@@ -1368,7 +1368,7 @@ scan:
                 policy_breach = data.bearer.leakage.policy_breach
             id: detect_rails_session
             name: Session leaking
-            description: Session leaks detected
+            description: Session leaks detected. Avoid storing sensitive data in the session.
             level: ""
             modules:
                 - path: policies/common.rego
@@ -1441,7 +1441,7 @@ scan:
                 policy_breach = data.bearer.ssl_certificate_verification_disabled.policy_breach
             id: ssl_certificate_verification_disabled
             name: SSL certificate verification disabled
-            description: SSL certificate verification disabled in an application processing sensitive data
+            description: SSL certificate verification is disabled in an application processing sensitive data. Enable SSL certificate verification.
             level: ""
             modules:
                 - path: policies/common.rego

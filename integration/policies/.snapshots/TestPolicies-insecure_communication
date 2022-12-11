@@ -1,6 +1,6 @@
 medium:
     - policy_name: Insecure communication
-      policy_description: Insecure communication in an application processing sensitive data
+      policy_description: Insecure communication in an application processing sensitive data. Ensure communication occurs over SSL.
       line_number: 8
       filename: testdata/ruby/insecure_communication.rb
       category_groups:
