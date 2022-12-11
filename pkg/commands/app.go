@@ -21,7 +21,6 @@ func NewApp(version string, commitSHA string) *cobra.Command {
 		NewProcessingWorkerCommand(),
 		NewInitCommand(),
 		NewScanCommand(),
-		NewConfigCommand(),
 		NewVersionCommand(version, commitSHA),
 	)
 
