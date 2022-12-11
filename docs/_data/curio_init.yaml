@@ -3,7 +3,7 @@ synopsis: Generates a default config to `curio.yml`
 usage: ' init [flags]'
 options:
     - name: config-file
-      usage: Load configuration from the defined path
+      usage: Load configuration from the specified path.
     - name: context
       usage: |
         Expand context of schema classification e.g., --context=health, to include data types particular to health
@@ -11,7 +11,7 @@ options:
       default_value: "false"
       usage: Enable debug logs
     - name: disable-domain-resolution
-      default_value: "false"
+      default_value: "true"
       usage: |
         Do not attempt to resolve detected domains during classification (default false), e.g. --disable-domain-resolution=true
     - name: domain-resolution-timeout
@@ -19,13 +19,13 @@ options:
       usage: |
         Set timeout when attempting to resolve detected domains during classification (default 3 seconds), e.g. --domain-resolution-timeout=3s
     - name: existing-worker
-      usage: URL of an existing worker
+      usage: Specify the URL of an existing worker.
     - name: file-size-max
-      default_value: "25000000"
-      usage: ignore files with file size larger than this config
+      default_value: "100000"
+      usage: Ignore files larger than the specified value.
     - name: files-to-batch
       default_value: "1"
-      usage: number of files to batch to worker
+      usage: Specify the number of files to batch per worker.
     - name: format
       shorthand: f
       usage: Specify report format (json, yaml)
@@ -40,20 +40,20 @@ options:
     - name: memory-max
       default_value: "800000000"
       usage: |
-        if memory needed to scan a file surpasses this limit, skip the file
+        If the memory needed to scan a file surpasses the specified limit, skip the file.
     - name: only-policy
       default_value: '[]'
       usage: |
-        specify the comma separated ids of the policies you would like to run. Skips all other policies.
+        Specify the comma-separated ids of the policies you would like to run. Skips all other policies.
     - name: output
-      usage: Specify output path for report
+      usage: Specify the output path for the report.
     - name: quiet
       default_value: "false"
       usage: Suppress non-essential messages
     - name: report
-      default_value: detectors
+      default_value: policies
       usage: |
-        Specify the kind of report (detectors, dataflow, policies, stats)
+        Specify the type of report (detectors, dataflow, policies, stats).
     - name: skip-path
       default_value: '[]'
       usage: |
@@ -61,28 +61,28 @@ options:
     - name: skip-policy
       default_value: '[]'
       usage: |
-        specify the comma separated ids of the policies you would like to skip. Runs all other policies.
+        Specify the comma-separated ids of the policies you would like to skip. Runs all other policies.
     - name: timeout
       default_value: 10m0s
-      usage: time allowed to complete scan
+      usage: The maximum time alloted to complete the scan.
     - name: timeout-file-max
-      default_value: 5m0s
+      default_value: 30s
       usage: |
-        maximum timeout assigned to scanning file, this config superseeds timeout-second-per-bytes
+        Maximum timeout assigned for scanning each file. This config superseeds timeout-second-per-bytes.
     - name: timeout-file-min
       default_value: 5s
       usage: |
-        minimum timeout assigned to scanning file, this config superseeds timeout-second-per-bytes
+        Minimum timeout assigned for scanning each file. This config superseeds timeout-second-per-bytes.
     - name: timeout-file-second-per-bytes
       default_value: "10000"
       usage: |
         number of file size bytes producing a second of timeout assigned to scanning a file
     - name: timeout-worker-online
       default_value: 1m0s
-      usage: maximum time for worker process to come online
+      usage: Maximum time to wait for a worker process to come online.
     - name: workers
       default_value: "1"
-      usage: number of processing workers to spawn
+      usage: The number of processing workers to spawn.
 see_also:
     - ' - '
 aliases: 

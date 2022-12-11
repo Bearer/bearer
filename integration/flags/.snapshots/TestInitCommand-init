@@ -4,7 +4,7 @@ policy:
 report:
     format: ""
     output: ""
-    report: detectors
+    report: policies
 scan:
     context: ""
     custom_detector:
