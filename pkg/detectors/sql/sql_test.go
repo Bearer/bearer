@@ -16,15 +16,6 @@ import (
 
 var detectorType = detectortypes.DetectorGraphQL
 
-func TestCreateTable(t *testing.T) {
-	var (
-		registrations = []detectors.InitializedDetector{{Type: detectorType, Detector: sql.New(&nodeid.IntGenerator{Counter: 0})}}
-	)
-	detectorReport := testhelper.Extract(t, filepath.Join("testdata", "create_table"), registrations, detectorType)
-
-	cupaloy.SnapshotT(t, detectorReport.Detections)
-}
-
 func TestCreateView(t *testing.T) {
 	var (
 		registrations = []detectors.InitializedDetector{{Type: detectorType, Detector: sql.New(&nodeid.IntGenerator{Counter: 0})}}
