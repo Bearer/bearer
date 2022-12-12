@@ -17,7 +17,7 @@
 
 # Curio: The data-first security scanner that finds risks and vulnerabilities in your code to protect sensitive data
 
-Curio is a static code analysis tool (SAST) that scans your source code to discover security risks and vulnerabilities that put your sensitive data at risk (PHI, PD, PII, Financial data).
+Curio is a static code analysis tool (SAST) that scans your source code to discover security risks and vulnerabilities that put your sensitive data at risk (PHI, PD, PII).
 
 [Explore the docs](https://curio.sh) - [Getting Started](#rocket-getting-started) - [FAQ](#question-faqs) - [Report Bug](https://github.com/Bearer/curio/issues/new/choose) - [Discord Community][discord]
 
