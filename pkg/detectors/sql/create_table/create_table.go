@@ -97,6 +97,11 @@ func Detect(file *file.FileInfo, report reporttypes.Report, idGenerator nodeid.G
 				FieldType:       columnType,
 				SimpleFieldType: util.ConvertToSimpleType(columnType),
 			}
+
+			if report.SchemaGroupShouldClose(tableName) {
+				report.SchemaGroupEnd(idGenerator)
+			}
+
 			if !report.SchemaGroupIsOpen() {
 				source := tableNode.Source(true)
 				report.SchemaGroupBegin(
