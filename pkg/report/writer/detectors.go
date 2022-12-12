@@ -28,9 +28,9 @@ import (
 )
 
 type StoredSchema struct {
-	Value        schema.Schema
-	Source       *source.Source
-	Parent       *parser.Node
+	Value  schema.Schema
+	Source *source.Source
+	Parent *parser.Node
 }
 
 type StoredSchemaNodes = map[*parser.Node]*StoredSchema
@@ -110,12 +110,12 @@ func (report *Detectors) SchemaGroupBegin(detectorType detectors.Type, node *par
 	report.StoredSchemas = &SchemaGroup{
 		Node: node,
 		ParentSchema: StoredSchema{
-			Value: schema,
+			Value:  schema,
 			Source: source,
 			Parent: parent,
 		},
 		DetectorType: detectorType,
-		Schemas: make(StoredSchemaNodes),
+		Schemas:      make(StoredSchemaNodes),
 	}
 }
 
@@ -142,23 +142,23 @@ func (report *Detectors) SchemaGroupEnd(idGenerator nodeid.Generator) {
 
 		childName := schema.FieldName
 		childDataTypes[childName] = &datatype.DataType{
-			Node: node,
-			Name: childName,
-			Type: schema.SimpleFieldType,
-			TextType: schema.FieldType,
+			Node:       node,
+			Name:       childName,
+			Type:       schema.SimpleFieldType,
+			TextType:   schema.FieldType,
 			Properties: map[string]datatype.DataTypable{},
-			UUID: schema.FieldUUID,
+			UUID:       schema.FieldUUID,
 		}
 	}
 
 	// Build parent data type
 	parentDataType := &datatype.DataType{
-		Node: report.StoredSchemas.Node,
-		Name: report.StoredSchemas.ParentSchema.Value.ObjectName,
-		Type: "",
-		TextType: "",
+		Node:       report.StoredSchemas.Node,
+		Name:       report.StoredSchemas.ParentSchema.Value.ObjectName,
+		Type:       "",
+		TextType:   "",
 		Properties: childDataTypes,
-		UUID: report.StoredSchemas.ParentSchema.Value.ObjectUUID,
+		UUID:       report.StoredSchemas.ParentSchema.Value.ObjectUUID,
 	}
 
 	classifiedDatatypes := make(map[parser.NodeID]*classificationschema.ClassifiedDatatype, 0)
@@ -197,6 +197,7 @@ func (report *Detectors) AddSecretLeak(
 
 func (report *Detectors) AddDetection(detectionType detections.DetectionType, detectorType detectors.Type, source source.Source, value interface{}) {
 	data := &detections.Detection{
+		// ID:           uuid.NewString(),
 		Type:         detectionType,
 		DetectorType: detectorType,
 		Source:       source,

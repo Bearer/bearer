@@ -213,3 +213,12 @@ func DefaultPolicies() map[string]*Policy {
 
 	return policies
 }
+
+func EncryptedVerifiedRegoModuleText() (string, error) {
+	data, err := processorsFs.ReadFile("processors/encrypted_verified.rego")
+	if err != nil {
+		return "", err
+	}
+
+	return string(data), nil
+}

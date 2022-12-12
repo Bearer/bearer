@@ -9,12 +9,12 @@ import (
 	"github.com/bearer/curio/pkg/commands/process/settings"
 	"github.com/bearer/curio/pkg/report/customdetectors"
 	"github.com/bearer/curio/pkg/report/detections"
+	reportdetectors "github.com/bearer/curio/pkg/report/detectors"
 	"github.com/bearer/curio/pkg/report/output/dataflow/components"
 	"github.com/bearer/curio/pkg/report/output/dataflow/datatypes"
 	"github.com/bearer/curio/pkg/report/output/dataflow/detectiondecoder"
 	"github.com/bearer/curio/pkg/report/output/dataflow/risks"
 	"github.com/bearer/curio/pkg/util/output"
-	"github.com/rs/zerolog/log"
 
 	"github.com/bearer/curio/pkg/report/output/dataflow/types"
 )
@@ -35,6 +35,10 @@ func GetOutput(input []interface{}, config settings.Config, isInternal bool) (*D
 	bar := output.GetProgressBar(len(input), settings.Config{})
 
 	extras, err := datatypes.NewExtras(config.CustomDetector, input)
+	if err != nil {
+		return nil, err
+	}
+	railsExtras, err := datatypes.NewRailsExtras(input)
 	if err != nil {
 		return nil, err
 	}
@@ -79,25 +83,22 @@ func GetOutput(input []interface{}, config settings.Config, isInternal bool) (*D
 		castDetection.Source.Filename = fullFilename
 
 		switch detectionType {
-		// case detections.TypeSchemaClassified:
-		// if castDetection.DetectorType == reportdetectors.DetectorSchemaRb {
-		// 	extras, err := datatypes.GetRailsExtras(input, detection)
-		// 	if err != nil {
-		// 		return nil, err
-		// 	}
+		case detections.TypeSchemaClassified:
+			if castDetection.DetectorType == reportdetectors.DetectorSchemaRb {
+				detectionExtras := railsExtras.Get(detection)
 
-		// 	err = dataTypesHolder.AddSchema(castDetection, extras)
-		// 	if err != nil {
-		// 		return nil, err
-		// 	}
-		// } else {
-		// 	err = dataTypesHolder.AddSchema(castDetection, nil)
-		// 	if err != nil {
-		// 		return nil, err
-		// 	}
-		// }
-		// case detections.TypeCustomRisk:
-		// 	risksHolder.AddRiskPresence(castDetection)
+				err = dataTypesHolder.AddSchema(castDetection, detectionExtras)
+				if err != nil {
+					return nil, err
+				}
+			} else {
+				err = dataTypesHolder.AddSchema(castDetection, nil)
+				if err != nil {
+					return nil, err
+				}
+			}
+		case detections.TypeCustomRisk:
+			risksHolder.AddRiskPresence(castDetection)
 		case detections.TypeCustomClassified:
 			ruleName := string(castDetection.DetectorType)
 			customDetector, ok := config.CustomDetector[ruleName]
@@ -108,13 +109,12 @@ func GetOutput(input []interface{}, config settings.Config, isInternal bool) (*D
 			switch customDetector.Type {
 			case customdetectors.TypeVerfifier:
 				continue
-			// case customdetectors.TypeRisk:
-			// 	err := risksHolder.AddSchema(castDetection)
-			// 	if err != nil {
-			// 		return nil, err
-			// 	}
+			case customdetectors.TypeRisk:
+				err := risksHolder.AddSchema(castDetection)
+				if err != nil {
+					return nil, err
+				}
 			case customdetectors.TypeDatatype:
-				log.Error().Msgf("%#v", customDetector.Processors)
 				detectionExtras := extras.Get(ruleName, detection)
 
 				err = dataTypesHolder.AddSchema(castDetection, detectionExtras)

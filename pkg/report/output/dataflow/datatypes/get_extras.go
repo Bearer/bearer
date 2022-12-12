@@ -1,13 +1,15 @@
 package datatypes
 
 import (
+	_ "embed"
 	"encoding/json"
+	"errors"
 	"fmt"
-	"reflect"
 
 	"github.com/bearer/curio/pkg/commands/process/settings"
 	"github.com/bearer/curio/pkg/report/customdetectors"
 	"github.com/bearer/curio/pkg/report/detections"
+	"github.com/bearer/curio/pkg/report/detectors"
 	"github.com/bearer/curio/pkg/report/output/dataflow/types"
 	regohelper "github.com/bearer/curio/pkg/util/rego"
 	"github.com/open-policy-agent/opa/rego"
@@ -23,159 +25,172 @@ type extraFields struct {
 	verifiedBy []types.DatatypeVerifiedBy
 }
 
-// func GetRailsExtras(input []interface{}, detection interface{}) (*extraFields, error) {
-// 	extras := &extraFields{}
+type railsExtrasObj struct {
+	data map[string]*extraFields
+}
 
-// 	processorContent := `
-// package bearer.rails_encrypted_verified
-
-// import future.keywords
-
-// default encrypted := false
-
-// ruby_encrypted[location] {
-// 		some detection in input.all_detections
-// 		detection.detector_type == "detect_encrypted_ruby_class_properties"
-// 		detection.value.classification.decision.state == "valid"
-// 		location = detection
-// }
-
-// encrypted = true {
-// 		some detection in ruby_encrypted
-// 		detection.value.transformed_object_name == input.target.value.transformed_object_name
-// 		detection.value.field_name == input.target.value.field_name
-// 		input.target.value.field_name != ""
-// 		input.target.value.object_name != ""
-// }
-
-// verified_by[verification] {
-// 		some detection in ruby_encrypted
-// 		detection.value.transformed_object_name == input.target.value.transformed_object_name
-// 		detection.value.field_name == input.target.value.field_name
-
-// 		verification = {
-// 				"detector": "detect_encrypted_ruby_class_properties",
-// 				"filename": detection.source.filename,
-// 				"line_number": detection.source.line_number
-// 		}
-// }
-// `
-
-// 	query := `
-// verified_by = data.bearer.rails_encrypted_verified.verified_by
-// encrypted = data.bearer.rails_encrypted_verified.encrypted
-// `
-
-// 	module := regohelper.Module{
-// 		Name:    "bearer.rails_encrypted_verified",
-// 		Content: processorContent,
-// 	}
-
-// 	result, err := regohelper.RunQuery(query, processorInput{
-// 		AllDetections: input,
-// 		Target:        detection,
-// 	}, []regohelper.Module{module})
-// 	if err != nil {
-// 		return nil, err
-// 	}
-
-// 	encrypted := getEncryptedField(result)
-
-// 	if encrypted {
-// 		extras.encrypted = &encrypted
-
-// 		verified, err := getVerifiedBy(result)
-// 		if err != nil {
-// 			return nil, err
-// 		}
-
-// 		if verified != nil {
-// 			extras.verifiedBy = append(extras.verifiedBy, verified...)
-// 		}
-// 	}
-
-// 	return extras, nil
-// }
-
-// func GetExtras(customDetector settings.Rule, input []interface{}, detection interface{}) (*extraFields, error) {
-// 	extras := &extraFields{}
-
-// 	for _, processor := range customDetector.Processors {
-// 		result, err := regohelper.RunQuery(processor.Query, processorInput{
-// 			AllDetections: input,
-// 			Target:        detection,
-// 		}, processor.Modules.ToRegoModules())
-// 		if err != nil {
-// 			return nil, err
-// 		}
-
-// 		encrypted := getEncryptedField(result)
-
-// 		if encrypted {
-// 			extras.encrypted = &encrypted
-
-// 			verified, err := getVerifiedBy(result)
-// 			if err != nil {
-// 				return nil, err
-// 			}
-
-// 			if verified != nil {
-// 				extras.verifiedBy = append(extras.verifiedBy, verified...)
-// 			}
-// 		}
-// 	}
-
-// 	return extras, nil
-// }
-
-func getEncryptedField(result rego.Vars, detection interface{}) bool {
-	rawEncryptedFields, hasEncrypted := result["encrypted"]
-
-	if !hasEncrypted {
-		return false
+func NewRailsExtras(detections []interface{}) (*railsExtrasObj, error) {
+	targetDetections, err := getRailsTargetDetections(detections)
+	if err != nil {
+		return nil, err
 	}
 
-	encryptedFields, ok := rawEncryptedFields.(map[interface{}]interface{})
+	module, err := settings.EncryptedVerifiedRegoModuleText()
+	if err != nil {
+		return nil, err
+	}
+
+	data, err := runExtrasQuery(
+		`
+			verified_by = data.bearer.rails_encrypted_verified.verified_by
+			encrypted = data.bearer.rails_encrypted_verified.encrypted
+		`,
+		[]regohelper.Module{{
+			Name:    "bearer.rails_encrypted_verified",
+			Content: module,
+		}},
+		detections,
+		targetDetections,
+	)
+	if err != nil {
+		return nil, err
+	}
+
+	return &railsExtrasObj{data: data}, nil
+}
+
+func getRailsTargetDetections(allDetections []interface{}) ([]interface{}, error) {
+	var result []interface{}
+
+	for _, detection := range allDetections {
+		detectionMap, ok := detection.(map[string]interface{})
+		if !ok {
+			return nil, fmt.Errorf("found detection in report which is not object")
+		}
+
+		detectionType, ok := detectionMap["type"].(string)
+		if !ok {
+			continue
+		}
+
+		if detections.DetectionType(detectionType) != detections.TypeSchemaClassified {
+			continue
+		}
+
+		detectorType, ok := detectionMap["detector_type"].(string)
+		if !ok {
+			continue
+		}
+
+		if detectors.Type(detectorType) != detectors.DetectorSchemaRb {
+			continue
+		}
+
+		result = append(result, detection)
+	}
+
+	return result, nil
+}
+
+func (extras *railsExtrasObj) Get(detection interface{}) *extraFields {
+	detectionMap := detection.(map[string]interface{})
+	detectionID := detectionMap["id"].(string)
+
+	return extras.data[detectionID]
+}
+
+func getEncryptedField(result rego.Vars, detection interface{}) (bool, error) {
+	rawEncryptedFields, ok := result["encrypted"]
 	if !ok {
-		return false
+		return false, errors.New("no 'encrypted' value in output")
 	}
 
-	encryptedField, hasEncryptedField := encryptedFields[detection]
+	encryptedFields, ok := rawEncryptedFields.([]interface{})
+	if !ok {
+		return false, errors.New("invalid type for 'encrypted' value")
+	}
 
-	if hasEncryptedField {
-		encrypted, ok := encryptedField.(bool)
+	detectionMap := detection.(map[string]interface{})
+	detectionID := detectionMap["id"].(string)
 
-		if ok && encrypted {
-			return true
+	for _, rawResultDetection := range encryptedFields {
+		resultDetection, ok := rawResultDetection.(map[string]interface{})
+		if !ok {
+			return false, errors.New("invalid type for 'encrypted' detection")
+		}
+
+		rawResultDetectionID, ok := resultDetection["id"]
+		if !ok {
+			return false, errors.New("missing id for 'encrypted' detection")
+		}
+
+		resultDetectionID, ok := rawResultDetectionID.(string)
+		if !ok {
+			return false, errors.New("invalid type for 'encrypted' detection id")
+		}
+
+		if resultDetectionID == detectionID {
+			return true, nil
 		}
 	}
 
-	return false
+	return false, nil
 }
 
 func getVerifiedBy(result rego.Vars, detection interface{}) ([]types.DatatypeVerifiedBy, error) {
-	rawVerifiedByFields, hasVerifiedBy := result["verified_by"]
-
-	if !hasVerifiedBy {
-		return nil, nil
-	}
-
-	verifiedByFields, ok := rawVerifiedByFields.(map[interface{}]interface{})
+	rawVerifiedBy, ok := result["verified_by"]
 	if !ok {
-		return nil, nil
+		return nil, errors.New("no 'verified_by' value in output")
 	}
 
-	verifiedByField, hasVerifiedByField := verifiedByFields[detection]
+	verifiedBy, ok := rawVerifiedBy.([]interface{})
+	if !ok {
+		return nil, errors.New("invalid type for 'verified_by' value")
+	}
 
-	if hasVerifiedByField {
+	detectionMap := detection.(map[string]interface{})
+	detectionID := detectionMap["id"].(string)
+
+	for _, rawItem := range verifiedBy {
+		item, ok := rawItem.([]interface{})
+		if !ok {
+			return nil, errors.New("invalid type for 'verified_by' item")
+		}
+
+		if len(item) != 2 {
+			return nil, errors.New("invalid length for 'verified_by' item")
+		}
+
+		rawItemDetection := item[0]
+		rawItemVerifiedBy := item[1]
+
+		itemDetection, ok := rawItemDetection.(map[string]interface{})
+		if !ok {
+			return nil, errors.New("invalid type for 'verified_by' item detection")
+		}
+
+		rawItemDetectionID, ok := itemDetection["id"]
+		if !ok {
+			return nil, errors.New("missing id for 'verified_by' item detection")
+		}
+
+		itemDetectionID, ok := rawItemDetectionID.(string)
+		if !ok {
+			return nil, errors.New("invalid type for 'verified_by' item detection id")
+		}
+
+		if itemDetectionID != detectionID {
+			continue
+		}
+
 		var verifiedBy []types.DatatypeVerifiedBy
-		bytes, err := json.Marshal(verifiedByField)
+		bytes, err := json.Marshal(rawItemVerifiedBy)
 		if err != nil {
-			return nil, err
+			return nil, fmt.Errorf("failed to serialize 'verified_by' item: %s", err)
 		}
 		err = json.Unmarshal(bytes, &verifiedBy)
 		if err != nil {
-			return nil, err
+			return nil, fmt.Errorf("invalid format for 'verified_by' item: %s", err)
 		}
 
 		return verifiedBy, nil
@@ -185,12 +200,7 @@ func getVerifiedBy(result rego.Vars, detection interface{}) ([]types.DatatypeVer
 }
 
 type extrasObj struct {
-	data map[string][]extrasResult
-}
-
-type extrasResult struct {
-	detection interface{}
-	extras    *extraFields
+	data map[string]map[string]*extraFields
 }
 
 func NewExtras(customRules map[string]settings.Rule, detections []interface{}) (*extrasObj, error) {
@@ -199,7 +209,7 @@ func NewExtras(customRules map[string]settings.Rule, detections []interface{}) (
 		return nil, err
 	}
 
-	data := make(map[string][]extrasResult)
+	data := make(map[string]map[string]*extraFields)
 
 	for ruleName, rule := range customRules {
 		if rule.Type != customdetectors.TypeDatatype {
@@ -212,39 +222,63 @@ func NewExtras(customRules map[string]settings.Rule, detections []interface{}) (
 
 		processor := rule.Processors[0]
 
-		result, err := regohelper.RunQuery(processor.Query, processorInput{
-			AllDetections:    detections,
-			TargetDetections: targetDetections,
-		}, processor.Modules.ToRegoModules())
+		ruleData, err := runExtrasQuery(
+			processor.Query,
+			processor.Modules.ToRegoModules(),
+			detections,
+			targetDetections,
+		)
 		if err != nil {
 			return nil, err
 		}
 
-		for _, detection := range targetDetections {
-			extras := &extraFields{}
-			encrypted := getEncryptedField(result, detection)
-
-			if encrypted {
-				extras.encrypted = &encrypted
-
-				verified, err := getVerifiedBy(result, detection)
-				if err != nil {
-					return nil, err
-				}
-
-				if verified != nil {
-					extras.verifiedBy = append(extras.verifiedBy, verified...)
-				}
-			}
-
-			data[ruleName] = append(data[ruleName], extrasResult{
-				detection: detection,
-				extras:    extras,
-			})
-		}
+		data[ruleName] = ruleData
 	}
 
 	return &extrasObj{data: data}, nil
+}
+
+func runExtrasQuery(
+	query string,
+	modules []regohelper.Module,
+	detections, targetDetections []interface{},
+) (map[string]*extraFields, error) {
+	data := make(map[string]*extraFields)
+
+	result, err := regohelper.RunQuery(query, processorInput{
+		AllDetections:    detections,
+		TargetDetections: targetDetections,
+	}, modules)
+	if err != nil {
+		return nil, err
+	}
+
+	for _, detection := range targetDetections {
+		extras := &extraFields{}
+		encrypted, err := getEncryptedField(result, detection)
+		if err != nil {
+			return nil, err
+		}
+
+		if encrypted {
+			extras.encrypted = &encrypted
+
+			verified, err := getVerifiedBy(result, detection)
+			if err != nil {
+				return nil, err
+			}
+
+			if verified != nil {
+				extras.verifiedBy = append(extras.verifiedBy, verified...)
+			}
+		}
+
+		detectionMap := detection.(map[string]interface{})
+		detectionID := detectionMap["id"].(string)
+		data[detectionID] = extras
+	}
+
+	return data, nil
 }
 
 func getTargetDetections(allDetections []interface{}) ([]interface{}, error) {
@@ -273,16 +307,13 @@ func getTargetDetections(allDetections []interface{}) ([]interface{}, error) {
 }
 
 func (extras *extrasObj) Get(ruleName string, detection interface{}) *extraFields {
+	detectionMap := detection.(map[string]interface{})
+	detectionID := detectionMap["id"].(string)
+
 	ruleExtras, ok := extras.data[ruleName]
 	if !ok {
 		return nil
 	}
 
-	for _, result := range ruleExtras {
-		if reflect.DeepEqual(result.detection, detection) {
-			return result.extras
-		}
-	}
-
-	return nil
+	return ruleExtras[detectionID]
 }

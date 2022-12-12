@@ -56,6 +56,7 @@ type FrameworkDetection struct {
 }
 
 type Detection struct {
+	// ID           string         `json:"id,omitempty" yaml:"id,omitempty"`
 	Type         DetectionType  `json:"type" yaml:"type"`
 	DetectorType detectors.Type `json:"detector_type" yaml:"detector_type"`
 	CommitSHA    string         `json:"commit_sha,omitempty" yaml:"commit_sha,omitempty"`
