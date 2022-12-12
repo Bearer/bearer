@@ -29,6 +29,9 @@ module.exports = {
       },
     },
     extend: {
+      spacing: {
+        "heading-offset": "7rem",
+      },
       typography: (theme) => ({
         DEFAULT: {
           css: {
