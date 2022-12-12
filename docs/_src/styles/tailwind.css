@@ -77,7 +77,8 @@
 
   .toc {
     @apply leading-normal;
-    max-height: calc(100vh-6.75rem);
+    overscroll-behavior: auto;
+    scrollbar-width: none;
     overflow-y: scroll;
   }
   .toc ol li ol {
@@ -87,10 +88,23 @@
   .toc a:hover {
     @apply underline;
   }
+  .toc li a {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    display: block;
+  }
 
   /* active page nav */
   [aria-current="page"] {
     @apply text-main dark:text-main-300 font-semibold;
+  }
+
+  .start-self {
+    align-self: start;
+  }
+  .revert {
+    display: revert;
   }
 
   .light-icon {
@@ -121,6 +135,7 @@
     left: 0;
     right: 0;
     bottom: 0;
+    top: 5.75rem;
     @apply px-8;
     overflow-y: scroll;
   }
