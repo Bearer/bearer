@@ -6,7 +6,6 @@ import (
 	"github.com/bearer/curio/pkg/parser/nodeid"
 	"github.com/bearer/curio/pkg/util/file"
 
-	createtable "github.com/bearer/curio/pkg/detectors/sql/create_table"
 	createview "github.com/bearer/curio/pkg/detectors/sql/create_view"
 	reporttypes "github.com/bearer/curio/pkg/report"
 	schemadatatype "github.com/bearer/curio/pkg/report/schema/datatype"
@@ -36,12 +35,7 @@ func (detector *detector) ProcessFile(file *file.FileInfo, dir *file.Path, repor
 		return false, nil
 	}
 
-	err := createtable.Detect(file, report, detector.idGenerator)
-	if err != nil {
-		return true, err
-	}
-
-	err = createview.Detect(file, report, detector.idGenerator)
+	err := createview.Detect(file, report, detector.idGenerator)
 	if err != nil {
 		return true, err
 	}
