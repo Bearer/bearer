@@ -59,7 +59,7 @@ func GetOutput(dataflow *dataflow.DataFlow, config settings.Config) (map[string]
 			PolicyInput{
 				PolicyId:       policy.Id,
 				Dataflow:       dataflow,
-				DataCategories: db.Default().DataCategories,
+				DataCategories: db.DefaultWithContext(config.Scan.Context).DataCategories,
 			},
 			policy.Modules.ToRegoModules())
 		if err != nil {

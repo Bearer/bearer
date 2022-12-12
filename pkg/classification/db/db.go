@@ -7,8 +7,11 @@ import (
 	"regexp"
 	"strings"
 
+	"github.com/bearer/curio/pkg/flag"
 	"github.com/tangzero/inflector"
 )
+
+var PHIDataCategoryGroupUUID = "247fa503-115b-490a-96e5-bcd357bd5686"
 
 //go:embed recipes
 var recipesDir embed.FS
@@ -123,11 +126,19 @@ type KnownPersonObjectPattern struct {
 }
 
 func Default() DefaultDB {
+	return defaultDB("")
+}
+
+func DefaultWithContext(context flag.Context) DefaultDB {
+	return defaultDB(context)
+}
+
+func defaultDB(context flag.Context) DefaultDB {
 	dataTypes := defaultDataTypes()
 	return DefaultDB{
 		Recipes:                        defaultRecipes(),
 		DataTypes:                      dataTypes,
-		DataCategories:                 defaultDataCategories(),
+		DataCategories:                 defaultDataCategories(context),
 		DataTypeClassificationPatterns: defaultDataTypeClassificationPatterns(dataTypes),
 		KnownPersonObjectPatterns:      defaultKnownPersonObjectPatterns(dataTypes),
 	}
@@ -160,7 +171,12 @@ func defaultRecipes() []Recipe {
 	return recipes
 }
 
-func defaultDataCategories() []DataCategory {
+func defaultDataCategories(context flag.Context) []DataCategory {
+	skipHealthContext := true
+	if context == flag.Health {
+		skipHealthContext = false
+	}
+
 	dataCategories := []DataCategory{}
 
 	categoryGroupingJson, err := categoryGroupingFile.ReadFile("category_grouping.json")
@@ -197,6 +213,9 @@ func defaultDataCategories() []DataCategory {
 		dataCategory.Groups = make(map[string]DataCategoryGroup)
 		categoryFromMapping := dataCategoryGrouping.CategoryMapping[dataCategory.UUID]
 		for _, groupUUID := range categoryFromMapping.GroupUUIDs {
+			if skipHealthContext && groupUUID == PHIDataCategoryGroupUUID {
+				continue // skip health context
+			}
 			group := dataCategoryGrouping.Groups[groupUUID]
 			dataCategory.Groups[groupUUID] = DataCategoryGroup{
 				Name: group.Name,
