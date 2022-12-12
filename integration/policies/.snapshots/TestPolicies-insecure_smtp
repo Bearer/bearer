@@ -4,7 +4,6 @@ medium:
       line_number: 8
       filename: testdata/ruby/insecure_smtp.rb
       category_groups:
-        - PHI
         - PII
       omit_parent: true
     - policy_name: Insecure SMTP
@@ -12,7 +11,6 @@ medium:
       line_number: 14
       filename: testdata/ruby/insecure_smtp.rb
       category_groups:
-        - PHI
         - PII
       omit_parent: true
 
