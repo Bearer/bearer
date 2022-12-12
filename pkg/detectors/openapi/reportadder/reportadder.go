@@ -49,19 +49,23 @@ func AddSchema(file *file.FileInfo, report reporttypes.Report, foundValues map[p
 		node := sortableSchema.Key
 		schema := sortableSchema.Value
 
+		objectName := stringutil.StripQuotes(schema.Value.ObjectName)
+
 		schema.Source.Language = file.Language
 		schema.Source.LanguageType = file.LanguageTypeString()
 		schema.Value.FieldName = stringutil.StripQuotes(schema.Value.FieldName)
 		schema.Value.FieldType = stringutil.StripQuotes(schema.Value.FieldType)
-		schema.Value.ObjectName = stringutil.StripQuotes(schema.Value.ObjectName)
+		schema.Value.ObjectName = objectName
 		schema.Value.SimpleFieldType = convertSchema(schema.Value.FieldType)
 
+		if report.SchemaGroupShouldClose(objectName) {
+			report.SchemaGroupEnd(idGenerator)
+		}
+
 		if !report.SchemaGroupIsOpen() {
-			// @todo FIXME: Transition to new API
-			var objectNode *parser.Node
 			report.SchemaGroupBegin(
 				detectors.DetectorOpenAPI,
-				objectNode,
+				nil,
 				schema.Value,
 				&schema.Source,
 				nil,

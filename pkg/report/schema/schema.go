@@ -39,6 +39,7 @@ type Parent struct {
 type ReportSchema interface {
 	SchemaGroupBegin(detectorType detectors.Type, node *parser.Node, schema Schema, source *source.Source, parent *parser.Node)
 	SchemaGroupIsOpen() bool
+	SchemaGroupShouldClose(tableName string) bool
 	SchemaGroupAddItem(node *parser.Node, schema Schema, source *source.Source)
 	SchemaGroupEnd(idGenerator nodeid.Generator)
 }

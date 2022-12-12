@@ -90,6 +90,10 @@ func (detector *detector) ExtractFromSchema(
 			SimpleFieldType: convertToSimpleType(columnType),
 		}
 
+		if report.SchemaGroupShouldClose(objectName) {
+			report.SchemaGroupEnd(detector.idGenerator)
+		}
+
 		if !report.SchemaGroupIsOpen() {
 			source := objectNode.Source(true)
 			report.SchemaGroupBegin(

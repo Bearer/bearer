@@ -1,6 +1,8 @@
 package types
 
-import "github.com/bearer/curio/pkg/report/schema"
+import (
+	"github.com/bearer/curio/pkg/report/schema"
+)
 
 type Datatype struct {
 	UUID         string             `json:"uuid,omitempty" yaml:"uuid,omitempty"`
@@ -20,7 +22,8 @@ type DatatypeLocation struct {
 	LineNumber int                  `json:"line_number" yaml:"line_number"`
 	Encrypted  *bool                `json:"encrypted,omitempty" yaml:"encrypted,omitempty"`
 	VerifiedBy []DatatypeVerifiedBy `json:"verified_by,omitempty" yaml:"verified_by,omitempty"`
-	Stored      *bool               `json:"stored,omitempty" yaml:"stored,omitempty"`
+	Stored     *bool                `json:"stored,omitempty" yaml:"stored,omitempty"`
+	Parent     *schema.Parent       `json:"parent,omitempty" yaml:"parent,omitempty"`
 }
 
 type DatatypeVerifiedBy struct {

@@ -17,7 +17,7 @@ policy_breach contains item if {
         "severity": data.bearer.common.severity_of_datatype(datatype),
         "filename": location.filename,
         "line_number": location.line_number,
-        "parent_line_number": detector.parent.line_number,
-        "parent_content": detector.parent.content
+        "parent_line_number": location.parent.line_number,
+        "parent_content": location.parent.content
     }
 }

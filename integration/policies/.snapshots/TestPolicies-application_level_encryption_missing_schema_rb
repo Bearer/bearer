@@ -1,6 +1,23 @@
 high:
     - policy_name: Application level encryption missing
       policy_description: Application level encryption missing. Enable application level encryption to reduce the risk of leaking sensitive data.
+      line_number: 3
+      filename: testdata/ruby/application_level_encryption_missing/schema_rb/db/schema.rb
+      category_groups:
+        - PHI
+        - PII
+      parent_line_number: 2
+      parent_content: |-
+        create_table "users", force: :cascade do |t|
+            t.string "email", null: false
+            t.string "name"
+            t.string "encrypted_password", null: false
+            t.datetime "created_at", null: false
+            t.datetime "updated_at", null: false
+          end
+      omit_parent: false
+    - policy_name: Application level encryption missing
+      policy_description: Application level encryption missing. Enable application level encryption to reduce the risk of leaking sensitive data.
       line_number: 4
       filename: testdata/ruby/application_level_encryption_missing/schema_rb/db/schema.rb
       category_groups:

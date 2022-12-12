@@ -4,6 +4,8 @@ import (
 	_ "embed"
 	"errors"
 	"fmt"
+	"io/ioutil"
+	"os"
 	"regexp"
 	"sort"
 	"strings"
@@ -34,6 +36,8 @@ import (
 )
 
 var insecureUrlPattern = regexp.MustCompile(`^http[^s]`)
+var createTableRegexp = regexp.MustCompile(`(?i)(create table)`)
+var sqlLanguage = sql.GetLanguage()
 
 type Detector struct {
 	idGenerator        nodeid.Generator
@@ -114,38 +118,79 @@ func (detector *Detector) ProcessFile(file *file.FileInfo, dir *file.Path, repor
 			continue
 		}
 
-		sitterLang := getLanguage(lang)
-		tree, err := parser.ParseFile(file, file.Path, sitterLang)
-		if err != nil {
-			return false, err
-		}
+		switch lang {
+		case "sql":
+			f, err := os.Open(file.Path.AbsolutePath)
+			if err != nil {
+				return false, err
+			}
+			fileBytes, err := ioutil.ReadAll(f)
+			if err != nil {
+				return false, err
+			}
+			defer f.Close()
+			// our sql tree sitter parser tends to error sometimes mid file causing us to partially parse file
+			// with this hack we increase our parsing percentage
+			chunks := createTableRegexp.Split(string(fileBytes), -1)
 
-		langDetector, err := detector.forLanguage(lang)
-		if err != nil {
-			return false, err
-		}
+			lineOffset := 0
+			for i, chunk := range chunks {
+				chunkBytes := []byte(chunk)
+				if i != 0 {
+					chunkBytes = []byte("CREATE TABLE" + chunk)
+				}
 
-		if err := langDetector.Annotate(tree); err != nil {
-			return false, err
-		}
+				tree, err := parser.ParseBytes(file, file.Path, chunkBytes, sqlLanguage, lineOffset)
+				if err != nil {
+					return false, err
+				}
+				defer tree.Close()
 
-		var variableReconciliation *parserdatatype.ReconciliationRequest
+				for _, rule := range rules {
+					err := detector.executeRule(rule, tree, report, detector.idGenerator, nil)
+					if err != nil {
+						return false, err
+					}
+				}
 
-		for _, rule := range rules {
-			if rule.VariableReconciliation && variableReconciliation == nil {
-				variableReconciliation, err = detector.buildReconciliationRequest(rule.Language, tree)
+				lineOffset = lineOffset + strings.Count(chunk, "\n")
+			}
+
+			return true, nil
+		case "ruby":
+			sitterLang := getLanguage(lang)
+			tree, err := parser.ParseFile(file, file.Path, sitterLang)
+			if err != nil {
+				return false, err
+			}
+
+			langDetector, err := detector.forLanguage(lang)
+			if err != nil {
+				return false, err
+			}
+
+			if err := langDetector.Annotate(tree); err != nil {
+				return false, err
+			}
+
+			var variableReconciliation *parserdatatype.ReconciliationRequest
+
+			for _, rule := range rules {
+				if rule.VariableReconciliation && variableReconciliation == nil {
+					variableReconciliation, err = detector.buildReconciliationRequest(rule.Language, tree)
+					if err != nil {
+						return false, err
+					}
+				}
+
+				err := detector.executeRule(rule, tree, report, detector.idGenerator, variableReconciliation)
 				if err != nil {
 					return false, err
 				}
 			}
 
-			err := detector.executeRule(rule, tree, report, detector.idGenerator, variableReconciliation)
-			if err != nil {
-				return false, err
-			}
+			tree.Close()
 		}
-
-		tree.Close()
 	}
 
 	return false, nil

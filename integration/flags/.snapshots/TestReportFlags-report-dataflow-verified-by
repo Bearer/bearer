@@ -11,6 +11,18 @@ data_types:
                   filename: user.rb
                   line_number: 2
               stored: true
+              parent:
+                line_number: 1
+                content: |-
+                    CREATE TABLE public.Users (
+                      id bigint NOT NULL,
+                      first_name character varying NOT NULL,
+                      last_name character varying NOT NULL,
+                      email character varying NOT NULL,
+                      tanker_encrypted_date_of_birth character varying NOT NULL,
+                      city character varying NOT NULL,
+                      country character varying NOT NULL,
+                    )
         - name: ruby
           locations:
             - filename: testdata/verified_by/user.rb
@@ -22,6 +34,18 @@ data_types:
             - filename: testdata/verified_by/schema.sql
               line_number: 6
               stored: true
+              parent:
+                line_number: 1
+                content: |-
+                    CREATE TABLE public.Users (
+                      id bigint NOT NULL,
+                      first_name character varying NOT NULL,
+                      last_name character varying NOT NULL,
+                      email character varying NOT NULL,
+                      tanker_encrypted_date_of_birth character varying NOT NULL,
+                      city character varying NOT NULL,
+                      country character varying NOT NULL,
+                    )
     - name: Email Address
       detectors:
         - name: detect_sql_create_public_table
@@ -34,6 +58,18 @@ data_types:
                   filename: user.rb
                   line_number: 2
               stored: true
+              parent:
+                line_number: 1
+                content: |-
+                    CREATE TABLE public.Users (
+                      id bigint NOT NULL,
+                      first_name character varying NOT NULL,
+                      last_name character varying NOT NULL,
+                      email character varying NOT NULL,
+                      tanker_encrypted_date_of_birth character varying NOT NULL,
+                      city character varying NOT NULL,
+                      country character varying NOT NULL,
+                    )
         - name: ruby
           locations:
             - filename: testdata/verified_by/user.rb
@@ -45,6 +81,18 @@ data_types:
             - filename: testdata/verified_by/schema.sql
               line_number: 3
               stored: true
+              parent:
+                line_number: 1
+                content: |-
+                    CREATE TABLE public.Users (
+                      id bigint NOT NULL,
+                      first_name character varying NOT NULL,
+                      last_name character varying NOT NULL,
+                      email character varying NOT NULL,
+                      tanker_encrypted_date_of_birth character varying NOT NULL,
+                      city character varying NOT NULL,
+                      country character varying NOT NULL,
+                    )
     - name: Lastname
       detectors:
         - name: detect_sql_create_public_table
@@ -52,6 +100,18 @@ data_types:
             - filename: testdata/verified_by/schema.sql
               line_number: 4
               stored: true
+              parent:
+                line_number: 1
+                content: |-
+                    CREATE TABLE public.Users (
+                      id bigint NOT NULL,
+                      first_name character varying NOT NULL,
+                      last_name character varying NOT NULL,
+                      email character varying NOT NULL,
+                      tanker_encrypted_date_of_birth character varying NOT NULL,
+                      city character varying NOT NULL,
+                      country character varying NOT NULL,
+                    )
     - name: Physical Address
       detectors:
         - name: detect_sql_create_public_table
@@ -64,6 +124,18 @@ data_types:
                   filename: user.rb
                   line_number: 2
               stored: true
+              parent:
+                line_number: 1
+                content: |-
+                    CREATE TABLE public.Users (
+                      id bigint NOT NULL,
+                      first_name character varying NOT NULL,
+                      last_name character varying NOT NULL,
+                      email character varying NOT NULL,
+                      tanker_encrypted_date_of_birth character varying NOT NULL,
+                      city character varying NOT NULL,
+                      country character varying NOT NULL,
+                    )
         - name: ruby
           locations:
             - filename: testdata/verified_by/user.rb
