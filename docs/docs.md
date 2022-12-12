@@ -15,7 +15,8 @@ New to Curio? Check out the [quickstart](/quickstart/) to scan your first projec
 
 ## Explanations
 
-Coming soon...
+- [How Curio discovers and classifies data](/explanations/discovery-and-classification/)
+- [Curio's report types](/explanations/reports/)
 
 ## How-to
 

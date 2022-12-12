@@ -6,14 +6,19 @@ module.exports = [
       // { name: "Create a policy", url: "/create-a-policy/" },
     ],
   },
-  // {
-  //   name: "Explanations",
-  //   items: [
-  //     { name: "Detection", url: "/explanations/detection/" },
-  //     { name: "Classification", url: "/explanations/classification/" },
-  //     { name: "Policies", url: "/explanations/policies/" },
-  //   ],
-  // },
+  {
+    name: "Explanations",
+    items: [
+      {
+        name: "Discovery & Classification",
+        url: "/explanations/discovery-and-classification/",
+      },
+      {
+        name: "Report types",
+        url: "/explanations/reports/",
+      },
+    ],
+  },
   {
     name: "Reference",
     items: [
