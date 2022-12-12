@@ -99,7 +99,7 @@ chmod +x ./curio
 
 ### Scan your project
 
-The easiest way to try out Curio is with our example project, [Bear Publishing](https://github.com/Bearer/bear-publishing). It simulates a realistic ruby application with common data security flaws. Clone or download it to a convenient location to get started. Alternately, you can use your own application. Check the [supported languages](#supported-language) to see if your stack supports a policy report.
+The easiest way to try out Curio is with our example project, [Bear Publishing](https://github.com/Bearer/bear-publishing). It simulates a realistic Ruby application with common data security flaws. Clone or download it to a convenient location to get started. Alternately, you can use your own application. Check the [supported languages](#supported-language) to see if your stack supports a policy report.
 
 *You won't need to run the sample project. Curio scan the codebase without running the application.* 
 
@@ -121,7 +121,7 @@ The policy report is an easily digestible view of the data security problems det
 - Each detected breach, containing the file location and lines that triggered the policy breach.
 - A summary of the report with the stats for passing and failing policies.
 
-The Bear Publishing example application will trigger policy breaches and output a full report. Here's a section of the output:
+The [Bear Publishing](https://github.com/Bearer/bear-publishing) example application will trigger policy breaches and output a full report. Here's a section of the output:
 
 ```text
 
