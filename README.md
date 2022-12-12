@@ -111,7 +111,7 @@ curio scan /path/to/bear-publishing
 
 A progress bar will display the status of the scan.
 
-Once the scan is complete, Curio will output a policy report with details on any policy breaches, as well as where in the codebase the infraction happened.
+Once the scan is complete, Curio will output a policy report with details of any policy breaches, as well as where in the codebase the infractions happened.
 
 ### Analyze the report
 
