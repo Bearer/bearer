@@ -14,7 +14,8 @@ func NewVersionCommand(version string, commitSHA string) *cobra.Command {
 			return nil
 		},
 	}
-	cmd.SetFlagErrorFunc(flagErrorFunc)
-
+	cmd.SetUsageFunc(func(cmd *cobra.Command) error {
+		return nil
+	})
 	return cmd
 }

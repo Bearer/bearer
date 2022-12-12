@@ -1,12 +1,10 @@
 name: ""
-usage: ' [flags]'
 options:
     - name: help
       shorthand: h
       default_value: "false"
       usage: help for this command
 see_also:
-    - ' config - Scan config files for misconfigurations'
     - ' init - Generates a default config to `curio.yml`'
     - ' scan - Scan a directory or file'
     - ' version - Print the version'
