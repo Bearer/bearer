@@ -2,8 +2,9 @@ high:
     - policy_name: Logger leaking
       policy_description: Logger leaks detected. Avoid passing sensitive data to loggers.
       line_number: 1
-      filename: testdata/policies/users.rb
+      filename: testdata/ruby/logger_leaking.rb
       category_groups:
+        - PHI
         - PII
       parent_line_number: 1
       parent_content: logger.info(user.address)

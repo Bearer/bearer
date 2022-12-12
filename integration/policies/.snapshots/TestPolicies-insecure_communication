@@ -4,7 +4,6 @@ medium:
       line_number: 8
       filename: testdata/ruby/insecure_communication.rb
       category_groups:
-        - PHI
         - PII
       omit_parent: true
 

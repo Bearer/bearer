@@ -26,7 +26,6 @@ medium:
       line_number: 10
       filename: testdata/ruby/insecure_ftp.rb
       category_groups:
-        - PHI
         - PII
         - Sensitive personal data
       parent_line_number: 10
@@ -37,7 +36,6 @@ medium:
       line_number: 17
       filename: testdata/ruby/insecure_ftp.rb
       category_groups:
-        - PHI
         - PII
         - Sensitive personal data
       parent_line_number: 17
@@ -54,7 +52,6 @@ medium:
       line_number: 24
       filename: testdata/ruby/insecure_ftp.rb
       category_groups:
-        - PHI
         - PII
         - Sensitive personal data
       parent_line_number: 24
