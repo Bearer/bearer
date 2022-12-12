@@ -240,6 +240,33 @@ scan:
                     RC4.new(...).encrypt(<$DATA_TYPE>)
                   filters: []
                 - pattern: |
+                    OpenSSL::PKey::RSA.new($_, <$DATA_TYPE>)
+                  filters: []
+                - pattern: |
+                    OpenSSL::PKey::RSA.new(...).$METHOD(<$DATA_TYPE>)
+                  filters:
+                    - variable: METHOD
+                      values:
+                        - private_decrypt
+                        - private_encrypt
+                        - public_decrypt
+                        - public_encrypt
+                - pattern: |
+                    OpenSSL::PKey::DSA.new($_, <$DATA_TYPE>)
+                  filters: []
+                - pattern: |
+                    OpenSSL::PKey::$LIBRARY.new(...).$METHOD($_, <$DATA_TYPE>)
+                  filters:
+                    - variable: $LIBRARY
+                      values:
+                        - DSA
+                        - RSA
+                    - variable: METHOD
+                      values:
+                        - export
+                        - to_pem
+                        - to_s
+                - pattern: |
                     Crypt::Blowfish.new(...).encrypt_pair
                   filters: []
                 - pattern: |

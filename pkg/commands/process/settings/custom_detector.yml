@@ -272,6 +272,31 @@ detect_ruby_weak_encryption:
     - |
       RC4.new(...).encrypt(<$DATA_TYPE>)
     - |
+      OpenSSL::PKey::RSA.new($_, <$DATA_TYPE>)
+    - pattern: |
+        OpenSSL::PKey::RSA.new(...).$METHOD(<$DATA_TYPE>)
+      filters:
+        - variable: METHOD
+          values:
+            - private_decrypt
+            - private_encrypt
+            - public_decrypt
+            - public_encrypt
+    - |
+      OpenSSL::PKey::DSA.new($_, <$DATA_TYPE>)
+    - pattern: |
+        OpenSSL::PKey::$LIBRARY.new(...).$METHOD($_, <$DATA_TYPE>)
+      filters:
+        - variable: $LIBRARY
+          values:
+            - DSA
+            - RSA
+        - variable: METHOD
+          values:
+            - export
+            - to_pem
+            - to_s
+    - |
       Crypt::Blowfish.new(...).encrypt_pair
     - pattern: |
         Crypt::Blowfish.new(...).$METHOD(<$DATA_TYPE>)
