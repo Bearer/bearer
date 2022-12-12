@@ -69,6 +69,11 @@ func ExtractFromDatabaseSchema(
 			SimpleFieldType: convertToSimpleType(columnType),
 			TransformedObjectName: transformedObjectName,
 		}
+
+		if report.SchemaGroupShouldClose(tableName) {
+			report.SchemaGroupEnd(idGenerator)
+		}
+
 		if !report.SchemaGroupIsOpen() {
 			source := tableNode.Source(false)
 			report.SchemaGroupBegin(

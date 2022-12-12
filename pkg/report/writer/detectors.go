@@ -46,7 +46,7 @@ type Detectors struct {
 	Blamer        blamer.Blamer
 	Classifier    *classification.Classifier
 	File          io.Writer
-	StoredSchemas SchemaGroup
+	StoredSchemas *SchemaGroup
 }
 
 func (report *Detectors) AddInterface(
@@ -107,7 +107,7 @@ func (report *Detectors) SchemaGroupBegin(detectorType detectors.Type, node *par
 	if report.SchemaGroupIsOpen() {
 		zerolog.Warn().Msg("schema group already open")
 	}
-	report.StoredSchemas = SchemaGroup{
+	report.StoredSchemas = &SchemaGroup{
 		Node: node,
 		ParentSchema: StoredSchema{
 			Value: schema,
@@ -120,7 +120,14 @@ func (report *Detectors) SchemaGroupBegin(detectorType detectors.Type, node *par
 }
 
 func (report *Detectors) SchemaGroupIsOpen() bool {
-	return report.StoredSchemas.DetectorType != ""
+	return report.StoredSchemas != nil
+}
+
+func (report *Detectors) SchemaGroupShouldClose(tableName string) bool {
+	if report.StoredSchemas == nil {
+		return false
+	}
+	return tableName != report.StoredSchemas.ParentSchema.Value.ObjectName
 }
 
 func (report *Detectors) SchemaGroupAddItem(node *parser.Node, schema schema.Schema, source *source.Source) {
@@ -178,7 +185,7 @@ func (report *Detectors) SchemaGroupEnd(idGenerator nodeid.Generator) {
 	datatype.ExportClassified(report, detections.TypeSchemaClassified, report.StoredSchemas.DetectorType, idGenerator, classifiedDatatypes, report.StoredSchemas.ParentSchema.Parent)
 
 	// Clear the map of stored schema detection information
-	report.StoredSchemas = SchemaGroup{}
+	report.StoredSchemas = nil
 }
 
 func (report *Detectors) AddSecretLeak(

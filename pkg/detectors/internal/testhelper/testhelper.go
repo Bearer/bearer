@@ -83,6 +83,7 @@ type InMemoryReport struct {
 	SecretLeaks      []*detections.Detection
 	CreateView       []*detections.Detection
 	SchemaGroupDetectorType reportdetectors.Type
+	SchemaGroupObjectName   string
 }
 
 func (report *InMemoryReport) AddDetection(
@@ -106,10 +107,15 @@ func (report *InMemoryReport) AddDetection(
 
 func (report *InMemoryReport) SchemaGroupBegin(detectorType reportdetectors.Type, node *parser.Node, schema schema.Schema, source *source.Source, parent *parser.Node) {
 	report.SchemaGroupDetectorType = detectorType
+	report.SchemaGroupObjectName = schema.ObjectName
 }
 
 func (report *InMemoryReport) SchemaGroupIsOpen() bool {
 	return report.SchemaGroupDetectorType != ""
+}
+
+func (report *InMemoryReport) SchemaGroupShouldClose(tableName string) bool {
+	return tableName != report.SchemaGroupObjectName
 }
 
 func (report *InMemoryReport) SchemaGroupAddItem(node *parser.Node, schema schema.Schema, source *source.Source) {
@@ -123,6 +129,7 @@ func (report *InMemoryReport) SchemaGroupAddItem(node *parser.Node, schema schem
 
 func (report *InMemoryReport) SchemaGroupEnd(idGenerator nodeid.Generator) {
 	report.SchemaGroupDetectorType = ""
+	report.SchemaGroupObjectName = ""
 }
 
 func (report *InMemoryReport) AddDataType(

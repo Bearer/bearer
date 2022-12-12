@@ -15,7 +15,7 @@ import (
 
 type Holder struct {
 	datatypes  map[string]datatypeHolder // group datatypeHolders by name
-	config       settings.Config
+	config     settings.Config
 	isInternal bool
 }
 
@@ -34,7 +34,7 @@ type detectorHolder struct {
 
 type fileHolder struct {
 	name        string
-	lineNumbers map[int]*lineNumberHolder // group occurences by line number
+	lineNumbers map[int]*lineNumberHolder
 }
 
 type lineNumberHolder struct {
@@ -42,12 +42,13 @@ type lineNumberHolder struct {
 	encrypted  *bool
 	verifiedBy []types.DatatypeVerifiedBy
 	stored     *bool
+	parent     *schema.Parent
 }
 
 func New(config settings.Config, isInternal bool) *Holder {
 	return &Holder{
 		datatypes:  make(map[string]datatypeHolder),
-		config: config,
+		config:     config,
 		isInternal: isInternal,
 	}
 }
@@ -82,7 +83,6 @@ func (holder *Holder) addDatatype(classification *db.DataType, detectorName stri
 		if holder.isInternal {
 			datatype.categoryUUID = classification.CategoryUUID
 			datatype.uuid = classification.UUID
-			datatype.parent = parent
 		}
 
 		holder.datatypes[classification.Name] = datatype
@@ -108,10 +108,10 @@ func (holder *Holder) addDatatype(classification *db.DataType, detectorName stri
 
 	file := datatype.detectors[detectorName].files[fileName]
 	// create line number entry if it doesn't exist
-
 	if _, exists := file.lineNumbers[lineNumber]; !exists {
 		file.lineNumbers[lineNumber] = &lineNumberHolder{
 			lineNumber: lineNumber,
+			parent:     parent,
 		}
 	}
 
@@ -151,7 +151,6 @@ func (holder *Holder) ToDataFlow() []types.Datatype {
 			constructedDetector := types.DatatypeDetector{
 				Name:      detectorHolder.name,
 				Locations: make([]types.DatatypeLocation, 0),
-				Parent:    datatype.parent,
 			}
 
 			for _, fileHolder := range maputil.ToSortedSlice(detectorHolder.files) {
@@ -162,6 +161,7 @@ func (holder *Holder) ToDataFlow() []types.Datatype {
 						Encrypted:  lineNumber.encrypted,
 						VerifiedBy: lineNumber.verifiedBy,
 						Stored:     lineNumber.stored,
+						Parent:     lineNumber.parent,
 					}
 					constructedDetector.Locations = append(constructedDetector.Locations, location)
 				}
