@@ -184,11 +184,11 @@ func newExtrasObj(
 
 	data, err := runExtrasQuery(
 		`
-			verified_by = data.bearer.rails_encrypted_verified.verified_by
-			encrypted = data.bearer.rails_encrypted_verified.encrypted
+			verified_by = data.bearer.encrypted_verified.verified_by
+			encrypted = data.bearer.encrypted_verified.encrypted
 		`,
 		[]regohelper.Module{{
-			Name:    "bearer.rails_encrypted_verified",
+			Name:    "bearer.encrypted_verified",
 			Content: module,
 		}},
 		detections,

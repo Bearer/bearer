@@ -3,6 +3,7 @@ package policies
 import (
 	"encoding/json"
 	"fmt"
+	"sort"
 	"strings"
 
 	"github.com/bearer/curio/pkg/classification/db"
@@ -56,8 +57,14 @@ func GetOutput(dataflow *dataflow.DataFlow, config settings.Config) (map[string]
 	// policy results grouped by severity (critical, high, ...)
 	result := make(map[string][]PolicyResult)
 
-	for _, policy := range config.Policies {
+	// Ensure a deterministic order
+	keys := maps.Keys(config.Policies)
+	sort.Strings(keys)
+
+	for _, key := range keys {
+		policy := config.Policies[key]
 		output.StdErrLogger().Msgf("Processing policy %s", policy.Name)
+
 		// Create a prepared query that can be evaluated.
 		rs, err := rego.RunQuery(policy.Query,
 			PolicyInput{
