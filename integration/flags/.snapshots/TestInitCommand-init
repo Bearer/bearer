@@ -82,7 +82,7 @@ scan:
             metavars: {}
             stored: false
             detect_presence: true
-            omit_parent: true
+            omit_parent: false
         detect_rails_insecure_ftp:
             disabled: false
             type: risk
@@ -149,7 +149,7 @@ scan:
             metavars: {}
             stored: false
             detect_presence: true
-            omit_parent: true
+            omit_parent: false
         detect_rails_jwt:
             disabled: false
             type: risk
@@ -768,7 +768,9 @@ scan:
                           "severity": "medium",
                           "filename": location.filename,
                           "line_number": location.line_number,
-                          "omit_parent": true
+                          "omit_parent": true,
+                          "parent_line_number": location.parent.line_number,
+                          "parent_content": location.parent.content,
                         }
                     }
         insecure_ftp_processing_sensitive_data:
@@ -1146,7 +1148,9 @@ scan:
                             "severity": "medium",
                             "filename": location.filename,
                             "line_number": location.line_number,
-                            "omit_parent": true
+                            "omit_parent": true,
+                            "parent_line_number": location.parent.line_number,
+                            "parent_content": location.parent.content,
                         }
                     }
         jwt_leaks:
