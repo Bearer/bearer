@@ -13,10 +13,26 @@ type Node struct {
 
 type NodeID *sitter.Node
 
-var TerminateWalk = errors.New("terminate walk")
+var ErrTerminateWalk = errors.New("terminate walk")
 
 func (node *Node) ID() NodeID {
 	return node.sitterNode
+}
+
+func (node *Node) Equal(other *Node) bool {
+	if other == nil {
+		return false
+	}
+
+	return node.sitterNode.Equal(other.sitterNode)
+}
+
+func (node *Node) Type() string {
+	return node.sitterNode.Type()
+}
+
+func (node *Node) Content() string {
+	return node.sitterNode.Content(node.tree.input)
 }
 
 func (node *Node) Walk(visit func(*Node) error) error {
@@ -26,7 +42,7 @@ func (node *Node) Walk(visit func(*Node) error) error {
 	for {
 		if cursor.CurrentNode().IsNamed() {
 			if err := visit(node.tree.wrap(cursor.CurrentNode())); err != nil {
-				if err == TerminateWalk {
+				if err == ErrTerminateWalk {
 					return nil
 				}
 

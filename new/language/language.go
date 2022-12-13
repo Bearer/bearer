@@ -37,6 +37,6 @@ func (language *Language) Parse(input string) (*parser.Tree, error) {
 	return parser.Parse(language.sitterLanguage, input)
 }
 
-func (language *Language) Compile(input string) (*parser.Tree, error) {
-	return parser.Parse(language.sitterLanguage, input)
+func (language *Language) CompileQuery(input string) (*parser.Query, error) {
+	return parser.CompileQuery(language.sitterLanguage, input)
 }
