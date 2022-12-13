@@ -152,3 +152,14 @@ sending_data_in_category_to_third_party:
       name: bearer.common
     - path: policies/third_party_data_category.rego
       name: bearer.third_party_data_category
+password_length:
+  description: "Minimum password length violation detected. Make sure your passwords have sufficient length."
+  name: "Password length"
+  id: "ruby_password_length"
+  query: |
+    policy_breach = data.bearer.password_length.policy_breach
+  modules:
+    - path: policies/common.rego
+      name: bearer.common
+    - path: policies/password_length.rego
+      name: bearer.password_length
