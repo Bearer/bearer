@@ -4,7 +4,7 @@ import data.bearer.common
 
 import future.keywords
 
-policy_breach contains item if {
+policy_failure contains item if {
     some risk in input.dataflow.risks
     risk.detector_id == "detect_rails_insecure_ftp_data"
 

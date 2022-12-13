@@ -189,18 +189,15 @@ detect_sql_create_public_table:
       CREATE TABLE public.$TABLE_NAME (
         <$COLUMN>
       )
+    - |
+      CREATE TABLE $TABLE_NAME (
+        <$COLUMN>
+      )
   param_parenting: true
   root_singularize: true
   root_lowercase: true
   languages:
     - sql
-  processors:
-    - query: |
-        verified_by = data.bearer.encrypted_verified.verified_by
-        encrypted = data.bearer.encrypted_verified.encrypted
-      modules:
-        - path: processors/encrypted_verified.rego
-          name: bearer.encrypted_verified
   stored: true
 detect_rails_insecure_smtp:
   type: "risk"
@@ -220,7 +217,6 @@ detect_rails_insecure_smtp:
   languages:
     - ruby
   detect_presence: true
-  omit_parent: true
 detect_rails_insecure_communication:
   type: "risk"
   patterns:
@@ -231,7 +227,6 @@ detect_rails_insecure_communication:
   languages:
     - ruby
   detect_presence: true
-  omit_parent: true
 detect_rails_insecure_ftp:
   type: "risk"
   patterns:

@@ -24,7 +24,7 @@ Policy Flags
 
 Worker Flags
       --existing-worker string              Specify the URL of an existing worker.
-      --file-size-max int                   Ignore files larger than the specified value. (default 100000)
+      --file-size-max int                   Ignore files larger than the specified value. (default 2000000)
       --files-to-batch int                  Specify the number of files to batch per worker. (default 1)
       --memory-max int                      If the memory needed to scan a file surpasses the specified limit, skip the file. (default 800000000)
       --timeout duration                    The maximum time alloted to complete the scan. (default 10m0s)

@@ -8,6 +8,7 @@ import (
 	"github.com/bearer/curio/pkg/commands/process/settings"
 	"github.com/bearer/curio/pkg/flag"
 	"github.com/bearer/curio/pkg/report/output/dataflow"
+	"github.com/google/uuid"
 
 	"github.com/bearer/curio/pkg/report/output/detectors"
 	"github.com/bearer/curio/pkg/report/output/policies"
@@ -119,6 +120,10 @@ func getDataflow(report types.Report, config settings.Config, isInternal bool) (
 	reportedDetections, err := detectors.GetOutput(report)
 	if err != nil {
 		return nil, err
+	}
+
+	for _, detection := range reportedDetections {
+		detection.(map[string]interface{})["id"] = uuid.NewString()
 	}
 
 	return dataflow.GetOutput(reportedDetections, config, isInternal)

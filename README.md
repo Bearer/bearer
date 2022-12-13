@@ -56,7 +56,7 @@ SUCCESS
 Curio helps developers and security teams to:
 
 - Protect their application from leaking sensitive data (*loggers, cookies, third-parties, etc*.)
-- Protect their application from having their sensitive data breached (*missing encryption, insecure communication, SQL injection, etc.*)
+- Protect their application from having their sensitive data failed (*missing encryption, insecure communication, SQL injection, etc.*)
 - Monitor sensitive data flows across every component (*Data stores, internal and external APIs*)
 
 Curio is Open Source ([*see license*](#mortar_board-license)), and is built to be fully customizable, from creating your own policies, to adding custom code detectors up to enriching our data classifiers.
@@ -142,7 +142,7 @@ File: /bear-publishing/db/schema.rb:22
 
 =====================================
 
-Policy failure detected
+Policy failures detected
 
 14 policies were run and 12 failures were detected.
 

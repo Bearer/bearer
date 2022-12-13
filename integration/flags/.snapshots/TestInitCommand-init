@@ -14,7 +14,6 @@ scan:
             languages:
                 - ruby
             param_parenting: true
-            processors: []
             patterns:
                 - pattern: |
                     class $CLASS_NAME < ApplicationRecord
@@ -33,7 +32,6 @@ scan:
             languages:
                 - ruby
             param_parenting: false
-            processors: []
             patterns:
                 - pattern: |
                     cookies[...] = $ANYTHING
@@ -70,7 +68,6 @@ scan:
             languages:
                 - ruby
             param_parenting: false
-            processors: []
             patterns:
                 - pattern: |
                     Rails.application.configure do
@@ -82,14 +79,13 @@ scan:
             metavars: {}
             stored: false
             detect_presence: true
-            omit_parent: true
+            omit_parent: false
         detect_rails_insecure_ftp:
             disabled: false
             type: risk
             languages:
                 - ruby
             param_parenting: false
-            processors: []
             patterns:
                 - pattern: |
                     Net::FTP.new()
@@ -109,7 +105,6 @@ scan:
             languages:
                 - ruby
             param_parenting: false
-            processors: []
             patterns:
                 - pattern: |
                     Net::FTP.open do
@@ -128,7 +123,6 @@ scan:
             languages:
                 - ruby
             param_parenting: false
-            processors: []
             patterns:
                 - pattern: |
                     Rails.application.configure do
@@ -149,14 +143,13 @@ scan:
             metavars: {}
             stored: false
             detect_presence: true
-            omit_parent: true
+            omit_parent: false
         detect_rails_jwt:
             disabled: false
             type: risk
             languages:
                 - ruby
             param_parenting: false
-            processors: []
             patterns:
                 - pattern: |
                     JWT.encode(<$ARGUMENT>)
@@ -173,7 +166,6 @@ scan:
             languages:
                 - ruby
             param_parenting: false
-            processors: []
             patterns:
                 - pattern: |
                     session[...] = $ANYTHING
@@ -190,7 +182,6 @@ scan:
             languages:
                 - ruby
             param_parenting: false
-            processors: []
             patterns:
                 - pattern: |
                     logger.info(<$ARGUMENT>)
@@ -210,7 +201,6 @@ scan:
             languages:
                 - ruby
             param_parenting: false
-            processors: []
             patterns:
                 - pattern: |
                     Sentry::Breadcrumb.new(<$ARGUMENT>)
@@ -238,50 +228,14 @@ scan:
             languages:
                 - sql
             param_parenting: true
-            processors:
-                - query: |
-                    verified_by = data.bearer.encrypted_verified.verified_by
-                    encrypted = data.bearer.encrypted_verified.encrypted
-                  modules:
-                    - name: bearer.encrypted_verified
-                      content: |-
-                        package bearer.encrypted_verified
-
-                        import future.keywords
-
-
-                        default encrypted := false
-
-
-                        ruby_encrypted[location] {
-                            some detection in input.all_detections
-                            detection.detector_type == "detect_encrypted_ruby_class_properties"
-                            detection.value.classification.decision.state == "valid"
-                            location = detection
-                        }
-
-                        encrypted = true {
-                            some detection in ruby_encrypted
-                            detection.value.object_name == input.target.value.object_name
-                            detection.value.field_name == input.target.value.field_name
-                            input.target.value.field_name != ""
-                            input.target.value.object_name != ""
-                        }
-
-                        verified_by[verification] {
-                            some detection in ruby_encrypted
-                            detection.value.object_name == input.target.value.object_name
-                            detection.value.field_name == input.target.value.field_name
-
-                            verification = {
-                                "detector": "detect_encrypted_ruby_class_properties",
-                                "filename": detection.source.filename,
-                                "line_number": detection.source.line_number
-                            }
-                        }
             patterns:
                 - pattern: |
                     CREATE TABLE public.$TABLE_NAME (
+                      <$COLUMN>
+                    )
+                  filters: []
+                - pattern: |
+                    CREATE TABLE $TABLE_NAME (
                       <$COLUMN>
                     )
                   filters: []
@@ -297,7 +251,6 @@ scan:
             languages:
                 - ruby
             param_parenting: true
-            processors: []
             patterns:
                 - pattern: |
                     CSV.generate { <$DATA_TYPE> }
@@ -328,7 +281,6 @@ scan:
             languages:
                 - ruby
             param_parenting: false
-            processors: []
             patterns:
                 - pattern: |
                     URI.encode_www_form(<$DATA_TYPE>)
@@ -361,7 +313,6 @@ scan:
             languages:
                 - ruby
             param_parenting: false
-            processors: []
             patterns:
                 - pattern: |
                     URI(<$INSECURE_URL>)
@@ -391,7 +342,6 @@ scan:
             languages:
                 - ruby
             param_parenting: false
-            processors: []
             patterns:
                 - pattern: |
                     URI.encode_www_form(<$DATA_TYPE>)
@@ -424,7 +374,6 @@ scan:
             languages:
                 - ruby
             param_parenting: false
-            processors: []
             patterns:
                 - pattern: |
                     Net::HTTP.post_form(<$INSECURE_URL>)
@@ -454,7 +403,6 @@ scan:
             languages:
                 - ruby
             param_parenting: false
-            processors: []
             patterns:
                 - pattern: |
                     Net::HTTP.start($_, $_, $_, :verify_mode => OpenSSL::SSL::VERIFY_NONE) do
@@ -476,7 +424,7 @@ scan:
     policies:
         application_level_encryption_missing:
             query: |
-                policy_breach = data.bearer.application_level_encryption.policy_breach
+                policy_failure = data.bearer.application_level_encryption.policy_failure
             id: application_level_encryption_missing
             name: Application level encryption missing
             description: Application level encryption missing. Enable application level encryption to reduce the risk of leaking sensitive data.
@@ -531,7 +479,7 @@ scan:
 
                     import future.keywords
 
-                    policy_breach contains item if {
+                    policy_failure contains item if {
                         datatype = input.dataflow.data_types[_]
                         detector = datatype.detectors[_]
                         location = detector.locations[_]
@@ -550,7 +498,7 @@ scan:
                     }
         cookie_leaks:
             query: |
-                policy_breach = data.bearer.leakage.policy_breach
+                policy_failure = data.bearer.leakage.policy_failure
             id: detect_rails_cookies
             name: Cookie leaking
             description: Cookie leaks detected. Avoid storing sensitive data in cookies.
@@ -605,7 +553,7 @@ scan:
 
                     import future.keywords
 
-                    policy_breach contains item if {
+                    policy_failure contains item if {
                         some detector in input.dataflow.risks
                         detector.detector_id == input.policy_id
 
@@ -623,7 +571,7 @@ scan:
                     }
         http_get_parameters:
             query: |
-                policy_breach = data.bearer.http_get_parameters.policy_breach
+                policy_failure = data.bearer.http_get_parameters.policy_failure
             id: ruby_http_get_detection
             name: HTTP GET parameters
             description: Sending data as HTTP GET parameters. Avoid sending sensitive data as parameters in GET requests.
@@ -678,7 +626,7 @@ scan:
 
                     import future.keywords
 
-                    policy_breach contains item if {
+                    policy_failure contains item if {
                         some detector in input.dataflow.risks
                         detector.detector_id == input.policy_id
 
@@ -696,7 +644,7 @@ scan:
                     }
         insecure_communication_processing_sensitive_data:
             query: |
-                policy_breach = data.bearer.insecure_communication.policy_breach
+                policy_failure = data.bearer.insecure_communication.policy_failure
             id: detect_rails_insecure_communication
             name: Insecure communication
             description: Insecure communication in an application processing sensitive data. Ensure communication occurs over SSL.
@@ -751,7 +699,7 @@ scan:
 
                     import future.keywords
 
-                    policy_breach contains item if {
+                    policy_failure contains item if {
                         some data_type in input.dataflow.data_types
 
                         some detector in input.dataflow.risks
@@ -763,12 +711,14 @@ scan:
                           "severity": "medium",
                           "filename": location.filename,
                           "line_number": location.line_number,
-                          "omit_parent": true
+                          "omit_parent": true,
+                          "parent_line_number": location.parent.line_number,
+                          "parent_content": location.parent.content,
                         }
                     }
         insecure_ftp_processing_sensitive_data:
             query: |
-                policy_breach = data.bearer.insecure_ftp.policy_breach
+                policy_failure = data.bearer.insecure_ftp.policy_failure
             id: detect_rails_insecure_ftp
             name: Insecure FTP
             description: Communication with an insecure FTP server in an application processing sensitive data. Only connect to FTP securely.
@@ -823,7 +773,7 @@ scan:
 
                     import future.keywords
 
-                    policy_breach contains item if {
+                    policy_failure contains item if {
                         some data_type in input.dataflow.data_types
 
                         some detector in input.dataflow.risks
@@ -841,7 +791,7 @@ scan:
                     }
         insecure_ftp_with_data_category:
             query: |
-                policy_breach = data.bearer.insecure_ftp_with_data_category.policy_breach
+                policy_failure = data.bearer.insecure_ftp_with_data_category.policy_failure
             id: insecure_ftp_with_data_category
             name: Insecure FTP with Data Category
             description: Communicating Data Category with an insecure FTP server. Only connect to FTP securely.
@@ -896,7 +846,7 @@ scan:
 
                     import future.keywords
 
-                    policy_breach contains item if {
+                    policy_failure contains item if {
                         some risk in input.dataflow.risks
                         risk.detector_id == "detect_rails_insecure_ftp_data"
 
@@ -914,7 +864,7 @@ scan:
                     }
         insecure_http_get:
             query: |
-                policy_breach = data.bearer.insecure_http_get.policy_breach
+                policy_failure = data.bearer.insecure_http_get.policy_failure
             id: insecure_http_get
             name: Insecure HTTP GET
             description: Communicating using insecure HTTP GET in an application processing sensitive data. Ensure all HTTP communication occurs over HTTPS.
@@ -969,7 +919,7 @@ scan:
 
                     import future.keywords
 
-                    policy_breach contains item if {
+                    policy_failure contains item if {
                         some data_type in input.dataflow.data_types
 
                         some detector in input.dataflow.risks
@@ -987,7 +937,7 @@ scan:
                     }
         insecure_http_with_data_category:
             query: |
-                policy_breach = data.bearer.insecure_http_with_data_category.policy_breach
+                policy_failure = data.bearer.insecure_http_with_data_category.policy_failure
             id: insecure_http_with_data_category
             name: Insecure HTTP with Data Category
             description: Communicating Data Category using insecure HTTP. Ensure all HTTP communication occurs over HTTPS.
@@ -1065,16 +1015,16 @@ scan:
                         }
                     }
 
-                    policy_breach contains item if {
+                    policy_failure contains item if {
                       insecure_http_with_data[["ruby_http_get_detection", "ruby_http_get_insecure", item]]
                     }
 
-                    policy_breach contains item if {
+                    policy_failure contains item if {
                       insecure_http_with_data[["ruby_http_post_detection", "ruby_http_post_insecure", item]]
                     }
         insecure_smtp_processing_sensitive_data:
             query: |
-                policy_breach = data.bearer.insecure_smtp.policy_breach
+                policy_failure = data.bearer.insecure_smtp.policy_failure
             id: detect_rails_insecure_smtp
             name: Insecure SMTP
             description: Communication using insecure SMTP in an application processing sensitive data. Verify that SMTP settings use OpenSSL or equivalent.
@@ -1129,7 +1079,7 @@ scan:
 
                     import future.keywords
 
-                    policy_breach contains item if {
+                    policy_failure contains item if {
                         some data_type in input.dataflow.data_types
 
                         some detector in input.dataflow.risks
@@ -1141,12 +1091,14 @@ scan:
                             "severity": "medium",
                             "filename": location.filename,
                             "line_number": location.line_number,
-                            "omit_parent": true
+                            "omit_parent": true,
+                            "parent_line_number": location.parent.line_number,
+                            "parent_content": location.parent.content,
                         }
                     }
         jwt_leaks:
             query: |
-                policy_breach = data.bearer.leakage.policy_breach
+                policy_failure = data.bearer.leakage.policy_failure
             id: detect_rails_jwt
             name: JWT leaking
             description: JWT leaks detected. Avoid storing sensitive data in JWTs.
@@ -1201,7 +1153,7 @@ scan:
 
                     import future.keywords
 
-                    policy_breach contains item if {
+                    policy_failure contains item if {
                         some detector in input.dataflow.risks
                         detector.detector_id == input.policy_id
 
@@ -1219,7 +1171,7 @@ scan:
                     }
         logger_leaks:
             query: |
-                policy_breach = data.bearer.leakage.policy_breach
+                policy_failure = data.bearer.leakage.policy_failure
             id: detect_ruby_logger
             name: Logger leaking
             description: Logger leaks detected. Avoid passing sensitive data to loggers.
@@ -1274,7 +1226,7 @@ scan:
 
                     import future.keywords
 
-                    policy_breach contains item if {
+                    policy_failure contains item if {
                         some detector in input.dataflow.risks
                         detector.detector_id == input.policy_id
 
@@ -1292,7 +1244,7 @@ scan:
                     }
         sending_data_in_category_to_third_party:
             query: |
-                policy_breach = data.bearer.third_party_data_category.policy_breach
+                policy_failure = data.bearer.third_party_data_category.policy_failure
             id: detect_ruby_third_party_data_send
             name: Third-party data category exposure
             description: Sending data in category to third party. Ensure data sent to third party is intended and secured.
@@ -1347,7 +1299,7 @@ scan:
 
                     import future.keywords
 
-                    policy_breach contains item if {
+                    policy_failure contains item if {
                         some detector in input.dataflow.risks
                         detector.detector_id == input.policy_id
 
@@ -1365,7 +1317,7 @@ scan:
                     }
         session_leaks:
             query: |
-                policy_breach = data.bearer.leakage.policy_breach
+                policy_failure = data.bearer.leakage.policy_failure
             id: detect_rails_session
             name: Session leaking
             description: Session leaks detected. Avoid storing sensitive data in the session.
@@ -1420,7 +1372,7 @@ scan:
 
                     import future.keywords
 
-                    policy_breach contains item if {
+                    policy_failure contains item if {
                         some detector in input.dataflow.risks
                         detector.detector_id == input.policy_id
 
@@ -1438,7 +1390,7 @@ scan:
                     }
         ssl_certificate_verification_disabled:
             query: |
-                policy_breach = data.bearer.ssl_certificate_verification_disabled.policy_breach
+                policy_failure = data.bearer.ssl_certificate_verification_disabled.policy_failure
             id: ssl_certificate_verification_disabled
             name: SSL certificate verification disabled
             description: SSL certificate verification is disabled in an application processing sensitive data. Enable SSL certificate verification.
@@ -1493,7 +1445,7 @@ scan:
 
                     import future.keywords
 
-                    policy_breach contains item if {
+                    policy_failure contains item if {
                       some data_type in input.dataflow.data_types
 
                       some detector in input.dataflow.risks
@@ -1513,7 +1465,7 @@ scan:
     skip-path: []
 worker:
     existing-worker: ""
-    file-size-max: 100000
+    file-size-max: 2000000
     files-to-batch: 1
     memory-max: 800000000
     timeout: 10m0s

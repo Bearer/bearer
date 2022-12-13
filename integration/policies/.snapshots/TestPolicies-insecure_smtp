@@ -5,6 +5,13 @@ medium:
       filename: testdata/ruby/insecure_smtp.rb
       category_groups:
         - PII
+      parent_line_number: 8
+      parent_content: |-
+        Rails.application.configure do
+          config.action_mailer.smtp_settings = {
+            openssl_verify_mode: OpenSSL::SSL::VERIFY_NONE
+          }
+        end
       omit_parent: true
     - policy_name: Insecure SMTP
       policy_description: Communication using insecure SMTP in an application processing sensitive data. Verify that SMTP settings use OpenSSL or equivalent.
@@ -12,8 +19,49 @@ medium:
       filename: testdata/ruby/insecure_smtp.rb
       category_groups:
         - PII
+      parent_line_number: 14
+      parent_content: |-
+        Rails.application.configure do
+          config.action_mailer.smtp_settings = {
+            openssl_verify_mode: "none"
+          }
+        end
       omit_parent: true
 
 
 --
+Processing Detectors
+Finished processing Detectors
+Processing Dataflow
+Finished processing Dataflow
+Processing Policies
+Processing policy Application level encryption missing
+Finished processing policy Application level encryption missing
+Processing policy Cookie leaking
+Finished processing policy Cookie leaking
+Processing policy HTTP GET parameters
+Finished processing policy HTTP GET parameters
+Processing policy Insecure communication
+Finished processing policy Insecure communication
+Processing policy Insecure FTP
+Finished processing policy Insecure FTP
+Processing policy Insecure FTP with Data Category
+Finished processing policy Insecure FTP with Data Category
+Processing policy Insecure HTTP GET
+Finished processing policy Insecure HTTP GET
+Processing policy Insecure HTTP with Data Category
+Finished processing policy Insecure HTTP with Data Category
+Processing policy Insecure SMTP
+Finished processing policy Insecure SMTP
+Processing policy JWT leaking
+Finished processing policy JWT leaking
+Processing policy Logger leaking
+Finished processing policy Logger leaking
+Processing policy Third-party data category exposure
+Finished processing policy Third-party data category exposure
+Processing policy Session leaking
+Finished processing policy Session leaking
+Processing policy SSL certificate verification disabled
+Finished processing policy SSL certificate verification disabled
+Finished processing policies
 

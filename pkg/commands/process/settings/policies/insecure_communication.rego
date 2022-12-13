@@ -4,7 +4,7 @@ import data.bearer.common
 
 import future.keywords
 
-policy_breach contains item if {
+policy_failure contains item if {
     some data_type in input.dataflow.data_types
 
     some detector in input.dataflow.risks
@@ -16,6 +16,8 @@ policy_breach contains item if {
       "severity": "medium",
       "filename": location.filename,
       "line_number": location.line_number,
-      "omit_parent": true
+      "omit_parent": true,
+      "parent_line_number": location.parent.line_number,
+      "parent_content": location.parent.content,
     }
 }
