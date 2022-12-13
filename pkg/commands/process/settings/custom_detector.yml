@@ -224,7 +224,6 @@ detect_rails_insecure_smtp:
   languages:
     - ruby
   detect_presence: true
-  omit_parent: true
 detect_rails_insecure_communication:
   type: "risk"
   patterns:
@@ -235,7 +234,6 @@ detect_rails_insecure_communication:
   languages:
     - ruby
   detect_presence: true
-  omit_parent: true
 detect_rails_insecure_ftp:
   type: "risk"
   patterns:
