@@ -3,11 +3,13 @@ package policies
 import (
 	"encoding/json"
 	"fmt"
+	"sort"
 	"strings"
 
 	"github.com/bearer/curio/pkg/classification/db"
 	"github.com/bearer/curio/pkg/commands/process/settings"
 	"github.com/bearer/curio/pkg/util/file"
+	"github.com/bearer/curio/pkg/util/output"
 	"github.com/bearer/curio/pkg/util/rego"
 	"github.com/fatih/color"
 	"golang.org/x/exp/maps"
@@ -51,10 +53,18 @@ type PolicyResult struct {
 }
 
 func GetOutput(dataflow *dataflow.DataFlow, config settings.Config) (map[string][]PolicyResult, error) {
+	output.StdErrLogger().Msgf("Processing Policies")
 	// policy results grouped by severity (critical, high, ...)
 	result := make(map[string][]PolicyResult)
 
-	for _, policy := range config.Policies {
+	// Ensure a deterministic order
+	keys := maps.Keys(config.Policies)
+	sort.Strings(keys)
+
+	for _, key := range keys {
+		policy := config.Policies[key]
+		output.StdErrLogger().Msgf("Processing policy %s", policy.Name)
+
 		// Create a prepared query that can be evaluated.
 		rs, err := rego.RunQuery(policy.Query,
 			PolicyInput{
@@ -94,8 +104,11 @@ func GetOutput(dataflow *dataflow.DataFlow, config settings.Config) (map[string]
 				result[policyOutput.Severity] = append(result[policyOutput.Severity], policyResult)
 			}
 		}
+
+		output.StdErrLogger().Msgf("Finished processing policy %s", policy.Name)
 	}
 
+	output.StdErrLogger().Msgf("Finished processing policies")
 	return result, nil
 }
 
