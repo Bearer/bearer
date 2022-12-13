@@ -8,7 +8,7 @@ import future.keywords
 password_uuid := "02bb0d3a-2c8c-4842-be1c-c057f0dccd63"
 
 # openssl pkey rsa encryption
-policy_breach contains item if {
+policy_failure contains item if {
     some detector in input.dataflow.risks
     detector.detector_id in ["ruby_openssl_pkey_rsa_method_call", "ruby_openssl_pkey_method_call"]
 
@@ -29,7 +29,7 @@ policy_breach contains item if {
 }
 
 # openssl pkey dsa encryption
-policy_breach contains item if {
+policy_failure contains item if {
     some detector in input.dataflow.risks
     detector.detector_id in ["ruby_openssl_pkey_dsa_method_call", "ruby_openssl_pkey_method_call"]
 
@@ -50,7 +50,7 @@ policy_breach contains item if {
 }
 
 # blowfish encryption
-policy_breach contains item if {
+policy_failure contains item if {
     some detector in input.dataflow.risks
     detector.detector_id == "ruby_blowfish_method_call"
 
@@ -71,7 +71,7 @@ policy_breach contains item if {
 }
 
 # rc4 encryption
-policy_breach contains item if {
+policy_failure contains item if {
     some detector in input.dataflow.risks
     detector.detector_id == "encrypt_method_call"
 
@@ -91,7 +91,7 @@ policy_breach contains item if {
     }
 }
 
-policy_breach contains item if {
+policy_failure contains item if {
     some detector in input.dataflow.risks
     detector.detector_id == input.policy_id
 

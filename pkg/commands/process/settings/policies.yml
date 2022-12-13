@@ -157,7 +157,7 @@ weak_password_encryption:
   name: "Weak password encryption"
   id: "detect_ruby_weak_encryption"
   query: |
-    policy_breach = data.bearer.weak_password_encryption.policy_breach
+    policy_failure = data.bearer.weak_password_encryption.policy_failure
   modules:
     - path: policies/common.rego
       name: bearer.common

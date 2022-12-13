@@ -228,7 +228,6 @@ scan:
             languages:
                 - ruby
             param_parenting: false
-            processors: []
             patterns:
                 - pattern: |
                     Digest::SHA1.hexidigest(<$DATA_TYPE>)
@@ -280,7 +279,6 @@ scan:
             languages:
                 - ruby
             param_parenting: false
-            processors: []
             patterns:
                 - pattern: |
                     $_.$METHOD(<$DATA_TYPE>)
@@ -302,7 +300,6 @@ scan:
             languages:
                 - ruby
             param_parenting: false
-            processors: []
             patterns:
                 - pattern: |
                     $_ = Crypt::Blowfish.new(...)
@@ -319,7 +316,6 @@ scan:
             languages:
                 - ruby
             param_parenting: false
-            processors: []
             patterns:
                 - pattern: |
                     $_ = OpenSSL::PKey::DSA.new()
@@ -336,7 +332,6 @@ scan:
             languages:
                 - ruby
             param_parenting: false
-            processors: []
             patterns:
                 - pattern: |
                     $_ = OpenSSL::PKey::RSA.new()
@@ -353,7 +348,6 @@ scan:
             languages:
                 - ruby
             param_parenting: false
-            processors: []
             patterns:
                 - pattern: |
                     $_ = RC4.new()
@@ -370,7 +364,6 @@ scan:
             languages:
                 - ruby
             param_parenting: false
-            processors: []
             patterns:
                 - pattern: |
                     $_.$METHOD(<$DATA_TYPE>)
@@ -544,7 +537,6 @@ scan:
             languages:
                 - ruby
             param_parenting: false
-            processors: []
             patterns:
                 - pattern: |
                     $_.$METHOD(<$DATA_TYPE>)
@@ -566,7 +558,6 @@ scan:
             languages:
                 - ruby
             param_parenting: false
-            processors: []
             patterns:
                 - pattern: |
                     $_.$METHOD(<$DATA_TYPE>)
@@ -1649,7 +1640,7 @@ scan:
                     }
         weak_password_encryption:
             query: |
-                policy_breach = data.bearer.weak_password_encryption.policy_breach
+                policy_failure = data.bearer.weak_password_encryption.policy_failure
             id: detect_ruby_weak_encryption
             name: Weak password encryption
             description: Weak encryption or hashing library used to encrypt password. Use a stronger algorithm.
@@ -1750,7 +1741,7 @@ scan:
                     password_uuid := "02bb0d3a-2c8c-4842-be1c-c057f0dccd63"
 
                     # openssl pkey rsa encryption
-                    policy_breach contains item if {
+                    policy_failure contains item if {
                         some detector in input.dataflow.risks
                         detector.detector_id in ["ruby_openssl_pkey_rsa_method_call", "ruby_openssl_pkey_method_call"]
 
@@ -1771,7 +1762,7 @@ scan:
                     }
 
                     # openssl pkey dsa encryption
-                    policy_breach contains item if {
+                    policy_failure contains item if {
                         some detector in input.dataflow.risks
                         detector.detector_id in ["ruby_openssl_pkey_dsa_method_call", "ruby_openssl_pkey_method_call"]
 
@@ -1792,7 +1783,7 @@ scan:
                     }
 
                     # blowfish encryption
-                    policy_breach contains item if {
+                    policy_failure contains item if {
                         some detector in input.dataflow.risks
                         detector.detector_id == "ruby_blowfish_method_call"
 
@@ -1813,7 +1804,7 @@ scan:
                     }
 
                     # rc4 encryption
-                    policy_breach contains item if {
+                    policy_failure contains item if {
                         some detector in input.dataflow.risks
                         detector.detector_id == "encrypt_method_call"
 
@@ -1833,7 +1824,7 @@ scan:
                         }
                     }
 
-                    policy_breach contains item if {
+                    policy_failure contains item if {
                         some detector in input.dataflow.risks
                         detector.detector_id == input.policy_id
 
