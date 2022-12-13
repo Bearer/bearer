@@ -15,7 +15,6 @@ OpenSSL::PKey::RSA.new(2048).to_pem(cipher, customer.password)
 rc4_encrypt = RC4.new("asdf")
 rc4_encrypt.encrypt!(customer.password)
 
-
 Digest::SHA1.hexidigest(user.email)
 Digest::MD5.hexdigest(user.first_name)
 RC4.new("insecure").encrypt(user.address)

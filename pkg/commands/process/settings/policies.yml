@@ -161,5 +161,7 @@ weak_password_encryption:
   modules:
     - path: policies/common.rego
       name: bearer.common
+    - path: policies/encryption_common.rego
+      name: bearer.encryption_common
     - path: policies/weak_password_encryption.rego
       name: bearer.weak_password_encryption

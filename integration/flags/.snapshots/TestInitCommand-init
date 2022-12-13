@@ -237,46 +237,14 @@ scan:
                     Digest::MD5.hexdigest(<$DATA_TYPE>)
                   filters: []
                 - pattern: |
-                    RC4.new(...).encrypt(<$DATA_TYPE>)
-                  filters: []
-                - pattern: |
-                    OpenSSL::PKey::RSA.new($_, <$DATA_TYPE>)
-                  filters: []
-                - pattern: |
-                    OpenSSL::PKey::RSA.new(...).$METHOD(<$DATA_TYPE>)
+                    OpenSSL::PKey::$LIBRARY.new($_, <$DATA_TYPE>)
                   filters:
-                    - variable: METHOD
-                      values:
-                        - private_decrypt
-                        - private_encrypt
-                        - public_decrypt
-                        - public_encrypt
-                - pattern: |
-                    OpenSSL::PKey::DSA.new($_, <$DATA_TYPE>)
-                  filters: []
-                - pattern: |
-                    OpenSSL::PKey::$LIBRARY.new(...).$METHOD($_, <$DATA_TYPE>)
-                  filters:
-                    - variable: $LIBRARY
+                    - variable: LIBRARY
+                      values: []
+                    - variable: ""
                       values:
                         - DSA
                         - RSA
-                    - variable: METHOD
-                      values:
-                        - export
-                        - to_pem
-                        - to_s
-                - pattern: |
-                    Crypt::Blowfish.new(...).encrypt_pair
-                  filters: []
-                - pattern: |
-                    Crypt::Blowfish.new(...).$METHOD(<$DATA_TYPE>)
-                  filters:
-                    - variable: METHOD
-                      values:
-                        - encrypt_pair
-                        - encrypt_string
-                        - encrypt_block
             root_singularize: false
             root_lowercase: false
             metavars: {}
@@ -304,6 +272,118 @@ scan:
             root_lowercase: true
             metavars: {}
             stored: true
+            detect_presence: false
+            omit_parent: false
+        encrypt_method_call:
+            disabled: false
+            type: risk
+            languages:
+                - ruby
+            param_parenting: false
+            processors: []
+            patterns:
+                - pattern: |
+                    $_.$METHOD(<$DATA_TYPE>)
+                  filters:
+                    - variable: METHOD
+                      values:
+                        - encrypt
+                        - encrypt!
+                        - decrypt
+            root_singularize: false
+            root_lowercase: false
+            metavars: {}
+            stored: false
+            detect_presence: false
+            omit_parent: false
+        initialize_ruby_blowfish_encryption:
+            disabled: false
+            type: risk
+            languages:
+                - ruby
+            param_parenting: false
+            processors: []
+            patterns:
+                - pattern: |
+                    $_ = Crypt::Blowfish.new(...)
+                  filters: []
+            root_singularize: false
+            root_lowercase: false
+            metavars: {}
+            stored: false
+            detect_presence: true
+            omit_parent: false
+        initialize_ruby_openssl_pkey_dsa_encryption:
+            disabled: false
+            type: risk
+            languages:
+                - ruby
+            param_parenting: false
+            processors: []
+            patterns:
+                - pattern: |
+                    $_ = OpenSSL::PKey::DSA.new()
+                  filters: []
+            root_singularize: false
+            root_lowercase: false
+            metavars: {}
+            stored: false
+            detect_presence: true
+            omit_parent: false
+        initialize_ruby_openssl_pkey_rsa_encryption:
+            disabled: false
+            type: risk
+            languages:
+                - ruby
+            param_parenting: false
+            processors: []
+            patterns:
+                - pattern: |
+                    $_ = OpenSSL::PKey::RSA.new()
+                  filters: []
+            root_singularize: false
+            root_lowercase: false
+            metavars: {}
+            stored: false
+            detect_presence: true
+            omit_parent: false
+        initialize_ruby_rc4_encryption:
+            disabled: false
+            type: risk
+            languages:
+                - ruby
+            param_parenting: false
+            processors: []
+            patterns:
+                - pattern: |
+                    $_ = RC4.new()
+                  filters: []
+            root_singularize: false
+            root_lowercase: false
+            metavars: {}
+            stored: false
+            detect_presence: true
+            omit_parent: false
+        ruby_blowfish_method_call:
+            disabled: false
+            type: risk
+            languages:
+                - ruby
+            param_parenting: false
+            processors: []
+            patterns:
+                - pattern: |
+                    $_.$METHOD(<$DATA_TYPE>)
+                  filters:
+                    - variable: METHOD
+                      values:
+                        - encrypt_pair
+                        - encrypt_string
+                        - encrypt_block
+            root_singularize: false
+            root_lowercase: false
+            metavars: {}
+            stored: false
             detect_presence: false
             omit_parent: false
         ruby_file_detection:
@@ -457,6 +537,51 @@ scan:
             metavars: {}
             stored: false
             detect_presence: true
+            omit_parent: false
+        ruby_openssl_pkey_method_call:
+            disabled: false
+            type: risk
+            languages:
+                - ruby
+            param_parenting: false
+            processors: []
+            patterns:
+                - pattern: |
+                    $_.$METHOD(<$DATA_TYPE>)
+                  filters:
+                    - variable: METHOD
+                      values:
+                        - export
+                        - to_pem
+                        - to_s
+            root_singularize: false
+            root_lowercase: false
+            metavars: {}
+            stored: false
+            detect_presence: false
+            omit_parent: false
+        ruby_openssl_pkey_rsa_method_call:
+            disabled: false
+            type: risk
+            languages:
+                - ruby
+            param_parenting: false
+            processors: []
+            patterns:
+                - pattern: |
+                    $_.$METHOD(<$DATA_TYPE>)
+                  filters:
+                    - variable: METHOD
+                      values:
+                        - private_decrypt
+                        - private_encrypt
+                        - public_decrypt
+                        - public_encrypt
+            root_singularize: false
+            root_lowercase: false
+            metavars: {}
+            stored: false
+            detect_presence: false
             omit_parent: false
         ssl_certificate_verification_disabled:
             disabled: false
@@ -1570,16 +1695,143 @@ scan:
                     groups_for_datatypes(data_types) := groups if {
                         groups := {name | name := groups_for_datatype(data_types[_])[_]}
                     }
+                - path: policies/encryption_common.rego
+                  name: bearer.encryption_common
+                  content: |-
+                    package bearer.encryption_common
+
+                    import future.keywords
+
+                    rc4_files contains item if {
+                      some detector in input.dataflow.risks
+                      detector.detector_id == "initialize_ruby_rc4_encryption"
+
+                      location = detector.locations[_]
+
+                      item := location.filename
+                    }
+
+                    blowfish_files contains item if {
+                      some detector in input.dataflow.risks
+                      detector.detector_id == "initialize_ruby_blowfish_encryption"
+
+                      location = detector.locations[_]
+
+                      item := location.filename
+                    }
+
+                    openssl_pkey_rsa_files contains item if {
+                      some detector in input.dataflow.risks
+                      detector.detector_id == "initialize_ruby_openssl_pkey_rsa_encryption"
+
+                      location = detector.locations[_]
+
+                      item := location.filename
+                    }
+
+                    openssl_pkey_dsa_files contains item if {
+                      some detector in input.dataflow.risks
+                      detector.detector_id == "initialize_ruby_openssl_pkey_dsa_encryption"
+
+                      location = detector.locations[_]
+
+                      item := location.filename
+                    }
                 - path: policies/weak_password_encryption.rego
                   name: bearer.weak_password_encryption
                   content: |
                     package bearer.weak_password_encryption
 
                     import data.bearer.common
+                    import data.bearer.encryption_common
 
                     import future.keywords
 
                     password_uuid := "02bb0d3a-2c8c-4842-be1c-c057f0dccd63"
+
+                    # openssl pkey rsa encryption
+                    policy_breach contains item if {
+                        some detector in input.dataflow.risks
+                        detector.detector_id in ["ruby_openssl_pkey_rsa_method_call", "ruby_openssl_pkey_method_call"]
+
+                        data_type = detector.data_types[_]
+                        data_type.uuid == password_uuid
+
+                        location = data_type.locations[_]
+                        location.filename in data.bearer.encryption_common.openssl_pkey_rsa_files
+
+                        item := {
+                            "category_groups": data.bearer.common.groups_for_datatype(data_type),
+                            "severity": data.bearer.common.severity_of_datatype(data_type),
+                            "filename": location.filename,
+                            "line_number": location.line_number,
+                            "parent_line_number": location.parent.line_number,
+                            "parent_content": location.parent.content
+                        }
+                    }
+
+                    # openssl pkey dsa encryption
+                    policy_breach contains item if {
+                        some detector in input.dataflow.risks
+                        detector.detector_id in ["ruby_openssl_pkey_dsa_method_call", "ruby_openssl_pkey_method_call"]
+
+                        data_type = detector.data_types[_]
+                        data_type.uuid == password_uuid
+
+                        location = data_type.locations[_]
+                        location.filename in data.bearer.encryption_common.openssl_pkey_dsa_files
+
+                        item := {
+                            "category_groups": data.bearer.common.groups_for_datatype(data_type),
+                            "severity": data.bearer.common.severity_of_datatype(data_type),
+                            "filename": location.filename,
+                            "line_number": location.line_number,
+                            "parent_line_number": location.parent.line_number,
+                            "parent_content": location.parent.content
+                        }
+                    }
+
+                    # blowfish encryption
+                    policy_breach contains item if {
+                        some detector in input.dataflow.risks
+                        detector.detector_id == "ruby_blowfish_method_call"
+
+                        data_type = detector.data_types[_]
+                        data_type.uuid == password_uuid
+
+                        location = data_type.locations[_]
+                        location.filename in data.bearer.encryption_common.blowfish_files
+
+                        item := {
+                            "category_groups": data.bearer.common.groups_for_datatype(data_type),
+                            "severity": data.bearer.common.severity_of_datatype(data_type),
+                            "filename": location.filename,
+                            "line_number": location.line_number,
+                            "parent_line_number": location.parent.line_number,
+                            "parent_content": location.parent.content
+                        }
+                    }
+
+                    # rc4 encryption
+                    policy_breach contains item if {
+                        some detector in input.dataflow.risks
+                        detector.detector_id == "encrypt_method_call"
+
+                        data_type = detector.data_types[_]
+                        data_type.uuid == password_uuid
+
+                        location = data_type.locations[_]
+                        location.filename in data.bearer.encryption_common.rc4_files
+
+                        item := {
+                            "category_groups": data.bearer.common.groups_for_datatype(data_type),
+                            "severity": data.bearer.common.severity_of_datatype(data_type),
+                            "filename": location.filename,
+                            "line_number": location.line_number,
+                            "parent_line_number": location.parent.line_number,
+                            "parent_content": location.parent.content
+                        }
+                    }
 
                     policy_breach contains item if {
                         some detector in input.dataflow.risks
