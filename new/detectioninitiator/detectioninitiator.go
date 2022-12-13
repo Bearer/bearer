@@ -75,7 +75,7 @@ func (initiator *detectionInitiator) TreeHasDetection(rootNode *parser.Node, det
 		}
 
 		if hasDetection {
-			return parser.TerminateWalk
+			return parser.ErrTerminateWalk
 		}
 
 		return nil
