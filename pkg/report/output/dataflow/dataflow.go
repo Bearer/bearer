@@ -14,6 +14,7 @@ import (
 	"github.com/bearer/curio/pkg/report/output/dataflow/datatypes"
 	"github.com/bearer/curio/pkg/report/output/dataflow/detectiondecoder"
 	"github.com/bearer/curio/pkg/report/output/dataflow/risks"
+	"github.com/bearer/curio/pkg/util/output"
 
 	"github.com/bearer/curio/pkg/report/output/dataflow/types"
 )
@@ -155,12 +156,14 @@ func GetOutput(input []interface{}, config settings.Config, isInternal bool) (*D
 		}
 	}
 
+	if !config.Scan.Quiet {
+		output.StdErrLogger().Msgf("Generating dataflow")
+	}
 	dataflow := &DataFlow{
 		Datatypes:  dataTypesHolder.ToDataFlow(),
 		Risks:      risksHolder.ToDataFlow(),
 		Components: componentsHolder.ToDataFlow(),
 	}
-
 	return dataflow, nil
 }
 
