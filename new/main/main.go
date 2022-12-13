@@ -5,9 +5,11 @@ import (
 	"log"
 
 	"github.com/bearer/curio/new/builtin/detectors/ruby/objects"
+	"github.com/bearer/curio/new/builtin/detectors/ruby/properties"
 	"github.com/bearer/curio/new/detectionexecutor"
 	"github.com/bearer/curio/new/detectioninitiator"
 	"github.com/bearer/curio/new/language"
+	"gopkg.in/yaml.v2"
 )
 
 func main() {
@@ -24,7 +26,20 @@ func run() error {
 
 	executor := detectionexecutor.New(lang)
 
-	err = executor.RegisterDetector(objects.New(lang))
+	propertiesDetector, err := properties.New(lang)
+	if err != nil {
+		return fmt.Errorf("failed to create properties detector: %s", err)
+	}
+	err = executor.RegisterDetector(propertiesDetector)
+	if err != nil {
+		return fmt.Errorf("failed to register properties detector: %s", err)
+	}
+
+	objectsDetector, err := objects.New(lang)
+	if err != nil {
+		return fmt.Errorf("failed to create objects detector: %s", err)
+	}
+	err = executor.RegisterDetector(objectsDetector)
 	if err != nil {
 		return fmt.Errorf("failed to register objects detector: %s", err)
 	}
@@ -50,6 +65,7 @@ end
 	if err != nil {
 		return err
 	}
+	defer tree.Close()
 
 	initiator := detectioninitiator.New(executor, tree)
 
@@ -58,7 +74,8 @@ end
 		return fmt.Errorf("failed to detect objects: %s", err)
 	}
 
-	log.Printf("GOT %#v\n", detections)
+	detectionsYAML, _ := yaml.Marshal(detections)
+	log.Printf("GOT:\n%s\n", detectionsYAML)
 
 	return nil
 }
