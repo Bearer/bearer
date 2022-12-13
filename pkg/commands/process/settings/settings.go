@@ -73,7 +73,6 @@ type Rule struct {
 	Type           string        `mapstructure:"type" json:"type" yaml:"type"`
 	Languages      []string      `mapstructure:"languages" json:"languages" yaml:"languages"`
 	ParamParenting bool          `mapstructure:"param_parenting" json:"param_parenting" yaml:"param_parenting"`
-	Processors     []Processor   `mapstructure:"processors" json:"processors" yaml:"processors"`
 	Patterns       []RulePattern `mapstructure:"patterns" json:"patterns" yaml:"patterns"`
 
 	RootSingularize bool `mapstructure:"root_singularize" yaml:"root_singularize" `
@@ -120,21 +119,6 @@ func FromOptions(opts flag.Options) (Config, error) {
 		}
 	} else {
 		rules = DefaultCustomDetector()
-	}
-
-	for _, customDetector := range rules {
-		for _, processor := range customDetector.Processors {
-			for _, module := range processor.Modules {
-				if module.Path != "" {
-					content, err := processorsFs.ReadFile(module.Path)
-					if err != nil {
-						return Config{}, err
-					}
-					module.Content = string(content)
-					module.Path = ""
-				}
-			}
-		}
 	}
 
 	var policies map[string]*Policy
@@ -215,4 +199,13 @@ func DefaultPolicies() map[string]*Policy {
 	}
 
 	return policies
+}
+
+func EncryptedVerifiedRegoModuleText() (string, error) {
+	data, err := processorsFs.ReadFile("processors/encrypted_verified.rego")
+	if err != nil {
+		return "", err
+	}
+
+	return string(data), nil
 }

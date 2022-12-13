@@ -11,6 +11,7 @@ import (
 	"github.com/bearer/curio/pkg/report/detections"
 	"github.com/bearer/curio/pkg/util/classify"
 	"github.com/bearer/curio/pkg/util/maputil"
+	"github.com/bearer/curio/pkg/util/output"
 )
 
 type Holder struct {
@@ -53,7 +54,7 @@ func New(config settings.Config, isInternal bool) *Holder {
 	}
 }
 
-func (holder *Holder) AddSchema(detection detections.Detection, extras *extraFields) error {
+func (holder *Holder) AddSchema(detection detections.Detection, extras *ExtraFields) error {
 	schema, err := detectiondecoder.GetSchema(detection)
 	if err != nil {
 		return err
@@ -72,7 +73,7 @@ func (holder *Holder) AddSchema(detection detections.Detection, extras *extraFie
 }
 
 // addDatatype adds datatype to hash list and at the same time blocks duplicates
-func (holder *Holder) addDatatype(classification *db.DataType, detectorName string, fileName string, lineNumber int, extras *extraFields, parent *schema.Parent) {
+func (holder *Holder) addDatatype(classification *db.DataType, detectorName string, fileName string, lineNumber int, extras *ExtraFields, parent *schema.Parent) {
 	// create datatype entry if it doesn't exist
 	if _, exists := holder.datatypes[classification.Name]; !exists {
 		datatype := datatypeHolder{
@@ -134,6 +135,7 @@ func (holder *Holder) addDatatype(classification *db.DataType, detectorName stri
 }
 
 func (holder *Holder) ToDataFlow() []types.Datatype {
+	output.StdErrLogger().Msgf("Processing Dataflow")
 	data := make([]types.Datatype, 0)
 
 	datatypes := maputil.ToSortedSlice(holder.datatypes)
@@ -171,6 +173,7 @@ func (holder *Holder) ToDataFlow() []types.Datatype {
 
 		data = append(data, constructedDatatype)
 	}
+	output.StdErrLogger().Msgf("Finished processing Dataflow")
 
 	return data
 }

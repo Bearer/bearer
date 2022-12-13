@@ -27,10 +27,10 @@ insecure_http_with_data contains [data_detector_id, insecure_detector_id, item] 
     }
 }
 
-policy_breach contains item if {
+policy_failure contains item if {
   insecure_http_with_data[["ruby_http_get_detection", "ruby_http_get_insecure", item]]
 }
 
-policy_breach contains item if {
+policy_failure contains item if {
   insecure_http_with_data[["ruby_http_post_detection", "ruby_http_post_insecure", item]]
 }

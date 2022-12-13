@@ -41,6 +41,7 @@ func TestPolicies(t *testing.T) {
 		newPolicyTest("sending_data_in_category_to_third_party", []string{"ruby/sending_data_in_category_to_third_party.rb"}, false),
 		newPolicyTest("application_level_encryption_missing_structure_sql", []string{"ruby/application_level_encryption_missing/structure_sql"}, false),
 		newPolicyTest("application_level_encryption_missing_schema_rb", []string{"ruby/application_level_encryption_missing/schema_rb"}, false),
+		newPolicyTest("ruby_weak_password_encryption", []string{"ruby/weak_password_encryption.rb"}, false),
 	}
 
 	testhelper.RunTests(t, tests)

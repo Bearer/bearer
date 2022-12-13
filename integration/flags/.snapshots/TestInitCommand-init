@@ -14,7 +14,6 @@ scan:
             languages:
                 - ruby
             param_parenting: true
-            processors: []
             patterns:
                 - pattern: |
                     class $CLASS_NAME < ApplicationRecord
@@ -33,7 +32,6 @@ scan:
             languages:
                 - ruby
             param_parenting: false
-            processors: []
             patterns:
                 - pattern: |
                     cookies[...] = $ANYTHING
@@ -73,7 +71,6 @@ scan:
             languages:
                 - ruby
             param_parenting: false
-            processors: []
             patterns:
                 - pattern: |
                     Rails.application.configure do
@@ -85,14 +82,13 @@ scan:
             metavars: {}
             stored: false
             detect_presence: true
-            omit_parent: true
+            omit_parent: false
         detect_rails_insecure_ftp:
             disabled: false
             type: risk
             languages:
                 - ruby
             param_parenting: false
-            processors: []
             patterns:
                 - pattern: |
                     Net::FTP.new()
@@ -112,7 +108,6 @@ scan:
             languages:
                 - ruby
             param_parenting: false
-            processors: []
             patterns:
                 - pattern: |
                     Net::FTP.open do
@@ -131,7 +126,6 @@ scan:
             languages:
                 - ruby
             param_parenting: false
-            processors: []
             patterns:
                 - pattern: |
                     Rails.application.configure do
@@ -152,14 +146,13 @@ scan:
             metavars: {}
             stored: false
             detect_presence: true
-            omit_parent: true
+            omit_parent: false
         detect_rails_jwt:
             disabled: false
             type: risk
             languages:
                 - ruby
             param_parenting: false
-            processors: []
             patterns:
                 - pattern: |
                     JWT.encode(<$ARGUMENT>)
@@ -176,7 +169,6 @@ scan:
             languages:
                 - ruby
             param_parenting: false
-            processors: []
             patterns:
                 - pattern: |
                     session[...] = $ANYTHING
@@ -193,7 +185,6 @@ scan:
             languages:
                 - ruby
             param_parenting: false
-            processors: []
             patterns:
                 - pattern: |
                     logger.info(<$ARGUMENT>)
@@ -213,7 +204,6 @@ scan:
             languages:
                 - ruby
             param_parenting: false
-            processors: []
             patterns:
                 - pattern: |
                     Sentry::Breadcrumb.new(<$ARGUMENT>)
@@ -235,56 +225,48 @@ scan:
             stored: false
             detect_presence: false
             omit_parent: false
+        detect_ruby_weak_encryption:
+            disabled: false
+            type: risk
+            languages:
+                - ruby
+            param_parenting: false
+            patterns:
+                - pattern: |
+                    Digest::SHA1.hexidigest(<$DATA_TYPE>)
+                  filters: []
+                - pattern: |
+                    Digest::MD5.hexdigest(<$DATA_TYPE>)
+                  filters: []
+                - pattern: |
+                    OpenSSL::PKey::$LIBRARY.new($_, <$DATA_TYPE>)
+                  filters:
+                    - variable: LIBRARY
+                      values: []
+                    - variable: ""
+                      values:
+                        - DSA
+                        - RSA
+            root_singularize: false
+            root_lowercase: false
+            metavars: {}
+            stored: false
+            detect_presence: false
+            omit_parent: false
         detect_sql_create_public_table:
             disabled: false
             type: data_type
             languages:
                 - sql
             param_parenting: true
-            processors:
-                - query: |
-                    verified_by = data.bearer.encrypted_verified.verified_by
-                    encrypted = data.bearer.encrypted_verified.encrypted
-                  modules:
-                    - name: bearer.encrypted_verified
-                      content: |-
-                        package bearer.encrypted_verified
-
-                        import future.keywords
-
-
-                        default encrypted := false
-
-
-                        ruby_encrypted[location] {
-                            some detection in input.all_detections
-                            detection.detector_type == "detect_encrypted_ruby_class_properties"
-                            detection.value.classification.decision.state == "valid"
-                            location = detection
-                        }
-
-                        encrypted = true {
-                            some detection in ruby_encrypted
-                            detection.value.object_name == input.target.value.object_name
-                            detection.value.field_name == input.target.value.field_name
-                            input.target.value.field_name != ""
-                            input.target.value.object_name != ""
-                        }
-
-                        verified_by[verification] {
-                            some detection in ruby_encrypted
-                            detection.value.object_name == input.target.value.object_name
-                            detection.value.field_name == input.target.value.field_name
-
-                            verification = {
-                                "detector": "detect_encrypted_ruby_class_properties",
-                                "filename": detection.source.filename,
-                                "line_number": detection.source.line_number
-                            }
-                        }
             patterns:
                 - pattern: |
                     CREATE TABLE public.$TABLE_NAME (
+                      <$COLUMN>
+                    )
+                  filters: []
+                - pattern: |
+                    CREATE TABLE $TABLE_NAME (
                       <$COLUMN>
                     )
                   filters: []
@@ -294,13 +276,118 @@ scan:
             stored: true
             detect_presence: false
             omit_parent: false
+        encrypt_method_call:
+            disabled: false
+            type: risk
+            languages:
+                - ruby
+            param_parenting: false
+            patterns:
+                - pattern: |
+                    $_.$METHOD(<$DATA_TYPE>)
+                  filters:
+                    - variable: METHOD
+                      values:
+                        - encrypt
+                        - encrypt!
+                        - decrypt
+            root_singularize: false
+            root_lowercase: false
+            metavars: {}
+            stored: false
+            detect_presence: false
+            omit_parent: false
+        initialize_ruby_blowfish_encryption:
+            disabled: false
+            type: risk
+            languages:
+                - ruby
+            param_parenting: false
+            patterns:
+                - pattern: |
+                    $_ = Crypt::Blowfish.new(...)
+                  filters: []
+            root_singularize: false
+            root_lowercase: false
+            metavars: {}
+            stored: false
+            detect_presence: true
+            omit_parent: false
+        initialize_ruby_openssl_pkey_dsa_encryption:
+            disabled: false
+            type: risk
+            languages:
+                - ruby
+            param_parenting: false
+            patterns:
+                - pattern: |
+                    $_ = OpenSSL::PKey::DSA.new()
+                  filters: []
+            root_singularize: false
+            root_lowercase: false
+            metavars: {}
+            stored: false
+            detect_presence: true
+            omit_parent: false
+        initialize_ruby_openssl_pkey_rsa_encryption:
+            disabled: false
+            type: risk
+            languages:
+                - ruby
+            param_parenting: false
+            patterns:
+                - pattern: |
+                    $_ = OpenSSL::PKey::RSA.new()
+                  filters: []
+            root_singularize: false
+            root_lowercase: false
+            metavars: {}
+            stored: false
+            detect_presence: true
+            omit_parent: false
+        initialize_ruby_rc4_encryption:
+            disabled: false
+            type: risk
+            languages:
+                - ruby
+            param_parenting: false
+            patterns:
+                - pattern: |
+                    $_ = RC4.new()
+                  filters: []
+            root_singularize: false
+            root_lowercase: false
+            metavars: {}
+            stored: false
+            detect_presence: true
+            omit_parent: false
+        ruby_blowfish_method_call:
+            disabled: false
+            type: risk
+            languages:
+                - ruby
+            param_parenting: false
+            patterns:
+                - pattern: |
+                    $_.$METHOD(<$DATA_TYPE>)
+                  filters:
+                    - variable: METHOD
+                      values:
+                        - encrypt_pair
+                        - encrypt_string
+                        - encrypt_block
+            root_singularize: false
+            root_lowercase: false
+            metavars: {}
+            stored: false
+            detect_presence: false
+            omit_parent: false
         ruby_file_detection:
             disabled: false
             type: risk
             languages:
                 - ruby
             param_parenting: true
-            processors: []
             patterns:
                 - pattern: |
                     CSV.generate { <$DATA_TYPE> }
@@ -334,7 +421,6 @@ scan:
             languages:
                 - ruby
             param_parenting: false
-            processors: []
             patterns:
                 - pattern: |
                     URI.encode_www_form(<$DATA_TYPE>)
@@ -370,7 +456,6 @@ scan:
             languages:
                 - ruby
             param_parenting: false
-            processors: []
             patterns:
                 - pattern: |
                     URI(<$INSECURE_URL>)
@@ -403,7 +488,6 @@ scan:
             languages:
                 - ruby
             param_parenting: false
-            processors: []
             patterns:
                 - pattern: |
                     URI.encode_www_form(<$DATA_TYPE>)
@@ -439,7 +523,6 @@ scan:
             languages:
                 - ruby
             param_parenting: false
-            processors: []
             patterns:
                 - pattern: |
                     Net::HTTP.post_form(<$INSECURE_URL>)
@@ -515,13 +598,55 @@ scan:
             stored: false
             detect_presence: true
             omit_parent: false
+        ruby_openssl_pkey_method_call:
+            disabled: false
+            type: risk
+            languages:
+                - ruby
+            param_parenting: false
+            patterns:
+                - pattern: |
+                    $_.$METHOD(<$DATA_TYPE>)
+                  filters:
+                    - variable: METHOD
+                      values:
+                        - export
+                        - to_pem
+                        - to_s
+            root_singularize: false
+            root_lowercase: false
+            metavars: {}
+            stored: false
+            detect_presence: false
+            omit_parent: false
+        ruby_openssl_pkey_rsa_method_call:
+            disabled: false
+            type: risk
+            languages:
+                - ruby
+            param_parenting: false
+            patterns:
+                - pattern: |
+                    $_.$METHOD(<$DATA_TYPE>)
+                  filters:
+                    - variable: METHOD
+                      values:
+                        - private_decrypt
+                        - private_encrypt
+                        - public_decrypt
+                        - public_encrypt
+            root_singularize: false
+            root_lowercase: false
+            metavars: {}
+            stored: false
+            detect_presence: false
+            omit_parent: false
         ssl_certificate_verification_disabled:
             disabled: false
             type: risk
             languages:
                 - ruby
             param_parenting: false
-            processors: []
             patterns:
                 - pattern: |
                     Net::HTTP.start($_, $_, $_, :verify_mode => OpenSSL::SSL::VERIFY_NONE) do
@@ -543,7 +668,7 @@ scan:
     policies:
         application_level_encryption_missing:
             query: |
-                policy_breach = data.bearer.application_level_encryption.policy_breach
+                policy_failure = data.bearer.application_level_encryption.policy_failure
             id: application_level_encryption_missing
             name: Application level encryption missing
             description: Application level encryption missing. Enable application level encryption to reduce the risk of leaking sensitive data.
@@ -598,7 +723,7 @@ scan:
 
                     import future.keywords
 
-                    policy_breach contains item if {
+                    policy_failure contains item if {
                         datatype = input.dataflow.data_types[_]
                         detector = datatype.detectors[_]
                         location = detector.locations[_]
@@ -617,7 +742,7 @@ scan:
                     }
         cookie_leaks:
             query: |
-                policy_breach = data.bearer.leakage.policy_breach
+                policy_failure = data.bearer.leakage.policy_failure
             id: detect_rails_cookies
             name: Cookie leaking
             description: Cookie leaks detected. Avoid storing sensitive data in cookies.
@@ -672,7 +797,7 @@ scan:
 
                     import future.keywords
 
-                    policy_breach contains item if {
+                    policy_failure contains item if {
                         some detector in input.dataflow.risks
                         detector.detector_id == input.policy_id
 
@@ -690,7 +815,7 @@ scan:
                     }
         http_get_parameters:
             query: |
-                policy_breach = data.bearer.http_get_parameters.policy_breach
+                policy_failure = data.bearer.http_get_parameters.policy_failure
             id: ruby_http_get_detection
             name: HTTP GET parameters
             description: Sending data as HTTP GET parameters. Avoid sending sensitive data as parameters in GET requests.
@@ -745,7 +870,7 @@ scan:
 
                     import future.keywords
 
-                    policy_breach contains item if {
+                    policy_failure contains item if {
                         some detector in input.dataflow.risks
                         detector.detector_id == input.policy_id
 
@@ -763,7 +888,7 @@ scan:
                     }
         insecure_communication_processing_sensitive_data:
             query: |
-                policy_breach = data.bearer.insecure_communication.policy_breach
+                policy_failure = data.bearer.insecure_communication.policy_failure
             id: detect_rails_insecure_communication
             name: Insecure communication
             description: Insecure communication in an application processing sensitive data. Ensure communication occurs over SSL.
@@ -818,7 +943,7 @@ scan:
 
                     import future.keywords
 
-                    policy_breach contains item if {
+                    policy_failure contains item if {
                         some data_type in input.dataflow.data_types
 
                         some detector in input.dataflow.risks
@@ -830,12 +955,14 @@ scan:
                           "severity": "medium",
                           "filename": location.filename,
                           "line_number": location.line_number,
-                          "omit_parent": true
+                          "omit_parent": true,
+                          "parent_line_number": location.parent.line_number,
+                          "parent_content": location.parent.content,
                         }
                     }
         insecure_ftp_processing_sensitive_data:
             query: |
-                policy_breach = data.bearer.insecure_ftp.policy_breach
+                policy_failure = data.bearer.insecure_ftp.policy_failure
             id: detect_rails_insecure_ftp
             name: Insecure FTP
             description: Communication with an insecure FTP server in an application processing sensitive data. Only connect to FTP securely.
@@ -890,7 +1017,7 @@ scan:
 
                     import future.keywords
 
-                    policy_breach contains item if {
+                    policy_failure contains item if {
                         some data_type in input.dataflow.data_types
 
                         some detector in input.dataflow.risks
@@ -908,7 +1035,7 @@ scan:
                     }
         insecure_ftp_with_data_category:
             query: |
-                policy_breach = data.bearer.insecure_ftp_with_data_category.policy_breach
+                policy_failure = data.bearer.insecure_ftp_with_data_category.policy_failure
             id: insecure_ftp_with_data_category
             name: Insecure FTP with Data Category
             description: Communicating Data Category with an insecure FTP server. Only connect to FTP securely.
@@ -963,7 +1090,7 @@ scan:
 
                     import future.keywords
 
-                    policy_breach contains item if {
+                    policy_failure contains item if {
                         some risk in input.dataflow.risks
                         risk.detector_id == "detect_rails_insecure_ftp_data"
 
@@ -981,7 +1108,7 @@ scan:
                     }
         insecure_http_get:
             query: |
-                policy_breach = data.bearer.insecure_http_get.policy_breach
+                policy_failure = data.bearer.insecure_http_get.policy_failure
             id: insecure_http_get
             name: Insecure HTTP GET
             description: Communicating using insecure HTTP GET in an application processing sensitive data. Ensure all HTTP communication occurs over HTTPS.
@@ -1036,7 +1163,7 @@ scan:
 
                     import future.keywords
 
-                    policy_breach contains item if {
+                    policy_failure contains item if {
                         some data_type in input.dataflow.data_types
 
                         some detector in input.dataflow.risks
@@ -1054,7 +1181,7 @@ scan:
                     }
         insecure_http_with_data_category:
             query: |
-                policy_breach = data.bearer.insecure_http_with_data_category.policy_breach
+                policy_failure = data.bearer.insecure_http_with_data_category.policy_failure
             id: insecure_http_with_data_category
             name: Insecure HTTP with Data Category
             description: Communicating Data Category using insecure HTTP. Ensure all HTTP communication occurs over HTTPS.
@@ -1132,16 +1259,16 @@ scan:
                         }
                     }
 
-                    policy_breach contains item if {
+                    policy_failure contains item if {
                       insecure_http_with_data[["ruby_http_get_detection", "ruby_http_get_insecure", item]]
                     }
 
-                    policy_breach contains item if {
+                    policy_failure contains item if {
                       insecure_http_with_data[["ruby_http_post_detection", "ruby_http_post_insecure", item]]
                     }
         insecure_smtp_processing_sensitive_data:
             query: |
-                policy_breach = data.bearer.insecure_smtp.policy_breach
+                policy_failure = data.bearer.insecure_smtp.policy_failure
             id: detect_rails_insecure_smtp
             name: Insecure SMTP
             description: Communication using insecure SMTP in an application processing sensitive data. Verify that SMTP settings use OpenSSL or equivalent.
@@ -1196,7 +1323,7 @@ scan:
 
                     import future.keywords
 
-                    policy_breach contains item if {
+                    policy_failure contains item if {
                         some data_type in input.dataflow.data_types
 
                         some detector in input.dataflow.risks
@@ -1208,12 +1335,14 @@ scan:
                             "severity": "medium",
                             "filename": location.filename,
                             "line_number": location.line_number,
-                            "omit_parent": true
+                            "omit_parent": true,
+                            "parent_line_number": location.parent.line_number,
+                            "parent_content": location.parent.content,
                         }
                     }
         jwt_leaks:
             query: |
-                policy_breach = data.bearer.leakage.policy_breach
+                policy_failure = data.bearer.leakage.policy_failure
             id: detect_rails_jwt
             name: JWT leaking
             description: JWT leaks detected. Avoid storing sensitive data in JWTs.
@@ -1268,7 +1397,7 @@ scan:
 
                     import future.keywords
 
-                    policy_breach contains item if {
+                    policy_failure contains item if {
                         some detector in input.dataflow.risks
                         detector.detector_id == input.policy_id
 
@@ -1286,7 +1415,7 @@ scan:
                     }
         logger_leaks:
             query: |
-                policy_breach = data.bearer.leakage.policy_breach
+                policy_failure = data.bearer.leakage.policy_failure
             id: detect_ruby_logger
             name: Logger leaking
             description: Logger leaks detected. Avoid passing sensitive data to loggers.
@@ -1341,7 +1470,7 @@ scan:
 
                     import future.keywords
 
-                    policy_breach contains item if {
+                    policy_failure contains item if {
                         some detector in input.dataflow.risks
                         detector.detector_id == input.policy_id
 
@@ -1431,7 +1560,7 @@ scan:
                     }
         sending_data_in_category_to_third_party:
             query: |
-                policy_breach = data.bearer.third_party_data_category.policy_breach
+                policy_failure = data.bearer.third_party_data_category.policy_failure
             id: detect_ruby_third_party_data_send
             name: Third-party data category exposure
             description: Sending data in category to third party. Ensure data sent to third party is intended and secured.
@@ -1486,7 +1615,7 @@ scan:
 
                     import future.keywords
 
-                    policy_breach contains item if {
+                    policy_failure contains item if {
                         some detector in input.dataflow.risks
                         detector.detector_id == input.policy_id
 
@@ -1504,7 +1633,7 @@ scan:
                     }
         session_leaks:
             query: |
-                policy_breach = data.bearer.leakage.policy_breach
+                policy_failure = data.bearer.leakage.policy_failure
             id: detect_rails_session
             name: Session leaking
             description: Session leaks detected. Avoid storing sensitive data in the session.
@@ -1559,7 +1688,7 @@ scan:
 
                     import future.keywords
 
-                    policy_breach contains item if {
+                    policy_failure contains item if {
                         some detector in input.dataflow.risks
                         detector.detector_id == input.policy_id
 
@@ -1577,7 +1706,7 @@ scan:
                     }
         ssl_certificate_verification_disabled:
             query: |
-                policy_breach = data.bearer.ssl_certificate_verification_disabled.policy_breach
+                policy_failure = data.bearer.ssl_certificate_verification_disabled.policy_failure
             id: ssl_certificate_verification_disabled
             name: SSL certificate verification disabled
             description: SSL certificate verification is disabled in an application processing sensitive data. Enable SSL certificate verification.
@@ -1632,7 +1761,7 @@ scan:
 
                     import future.keywords
 
-                    policy_breach contains item if {
+                    policy_failure contains item if {
                       some data_type in input.dataflow.data_types
 
                       some detector in input.dataflow.risks
@@ -1648,11 +1777,214 @@ scan:
                         "parent_content": location.parent.content
                       }
                     }
+        weak_password_encryption:
+            query: |
+                policy_failure = data.bearer.weak_password_encryption.policy_failure
+            id: detect_ruby_weak_encryption
+            name: Weak password encryption
+            description: Weak encryption or hashing library used to encrypt password. Use a stronger algorithm.
+            level: ""
+            modules:
+                - path: policies/common.rego
+                  name: bearer.common
+                  content: |
+                    package bearer.common
+
+                    import future.keywords
+
+                    sensitive_data_group_uuid := "f6a0c071-5908-4420-bac2-bba28d41223e"
+                    personal_data_group_uuid := "e1d3135b-3c0f-4b55-abce-19f27a26cbb3"
+
+                    severity_of_datatype(data_type) := "critical" if {
+                        some category in input.data_categories
+                        category.uuid == data_type.category_uuid
+
+                        some group in category.groups
+                        group.uuid == sensitive_data_group_uuid
+                    }
+
+                    severity_of_datatype(data_type) := "high" if {
+                        some category in input.data_categories
+                        category.uuid == data_type.category_uuid
+
+                        some group in category.groups
+                        group.uuid == personal_data_group_uuid
+
+                        every group_1 in category.groups {
+                            group_1.uuid != sensitive_data_group_uuid
+                        }
+                    }
+
+                    groups_for_datatype(data_type) := x if {
+                        some category in input.data_categories
+                        category.uuid == data_type.category_uuid
+
+                        x := {name | name := category.groups[_].name}
+                    }
+
+                    groups_for_datatypes(data_types) := groups if {
+                        groups := {name | name := groups_for_datatype(data_types[_])[_]}
+                    }
+                - path: policies/encryption_common.rego
+                  name: bearer.encryption_common
+                  content: |-
+                    package bearer.encryption_common
+
+                    import future.keywords
+
+                    rc4_files contains item if {
+                      some detector in input.dataflow.risks
+                      detector.detector_id == "initialize_ruby_rc4_encryption"
+
+                      location = detector.locations[_]
+
+                      item := location.filename
+                    }
+
+                    blowfish_files contains item if {
+                      some detector in input.dataflow.risks
+                      detector.detector_id == "initialize_ruby_blowfish_encryption"
+
+                      location = detector.locations[_]
+
+                      item := location.filename
+                    }
+
+                    openssl_pkey_rsa_files contains item if {
+                      some detector in input.dataflow.risks
+                      detector.detector_id == "initialize_ruby_openssl_pkey_rsa_encryption"
+
+                      location = detector.locations[_]
+
+                      item := location.filename
+                    }
+
+                    openssl_pkey_dsa_files contains item if {
+                      some detector in input.dataflow.risks
+                      detector.detector_id == "initialize_ruby_openssl_pkey_dsa_encryption"
+
+                      location = detector.locations[_]
+
+                      item := location.filename
+                    }
+                - path: policies/weak_password_encryption.rego
+                  name: bearer.weak_password_encryption
+                  content: |
+                    package bearer.weak_password_encryption
+
+                    import data.bearer.common
+                    import data.bearer.encryption_common
+
+                    import future.keywords
+
+                    password_uuid := "02bb0d3a-2c8c-4842-be1c-c057f0dccd63"
+
+                    # openssl pkey rsa encryption
+                    policy_failure contains item if {
+                        some detector in input.dataflow.risks
+                        detector.detector_id in ["ruby_openssl_pkey_rsa_method_call", "ruby_openssl_pkey_method_call"]
+
+                        data_type = detector.data_types[_]
+                        data_type.uuid == password_uuid
+
+                        location = data_type.locations[_]
+                        location.filename in data.bearer.encryption_common.openssl_pkey_rsa_files
+
+                        item := {
+                            "category_groups": data.bearer.common.groups_for_datatype(data_type),
+                            "severity": data.bearer.common.severity_of_datatype(data_type),
+                            "filename": location.filename,
+                            "line_number": location.line_number,
+                            "parent_line_number": location.parent.line_number,
+                            "parent_content": location.parent.content
+                        }
+                    }
+
+                    # openssl pkey dsa encryption
+                    policy_failure contains item if {
+                        some detector in input.dataflow.risks
+                        detector.detector_id in ["ruby_openssl_pkey_dsa_method_call", "ruby_openssl_pkey_method_call"]
+
+                        data_type = detector.data_types[_]
+                        data_type.uuid == password_uuid
+
+                        location = data_type.locations[_]
+                        location.filename in data.bearer.encryption_common.openssl_pkey_dsa_files
+
+                        item := {
+                            "category_groups": data.bearer.common.groups_for_datatype(data_type),
+                            "severity": data.bearer.common.severity_of_datatype(data_type),
+                            "filename": location.filename,
+                            "line_number": location.line_number,
+                            "parent_line_number": location.parent.line_number,
+                            "parent_content": location.parent.content
+                        }
+                    }
+
+                    # blowfish encryption
+                    policy_failure contains item if {
+                        some detector in input.dataflow.risks
+                        detector.detector_id == "ruby_blowfish_method_call"
+
+                        data_type = detector.data_types[_]
+                        data_type.uuid == password_uuid
+
+                        location = data_type.locations[_]
+                        location.filename in data.bearer.encryption_common.blowfish_files
+
+                        item := {
+                            "category_groups": data.bearer.common.groups_for_datatype(data_type),
+                            "severity": data.bearer.common.severity_of_datatype(data_type),
+                            "filename": location.filename,
+                            "line_number": location.line_number,
+                            "parent_line_number": location.parent.line_number,
+                            "parent_content": location.parent.content
+                        }
+                    }
+
+                    # rc4 encryption
+                    policy_failure contains item if {
+                        some detector in input.dataflow.risks
+                        detector.detector_id == "encrypt_method_call"
+
+                        data_type = detector.data_types[_]
+                        data_type.uuid == password_uuid
+
+                        location = data_type.locations[_]
+                        location.filename in data.bearer.encryption_common.rc4_files
+
+                        item := {
+                            "category_groups": data.bearer.common.groups_for_datatype(data_type),
+                            "severity": data.bearer.common.severity_of_datatype(data_type),
+                            "filename": location.filename,
+                            "line_number": location.line_number,
+                            "parent_line_number": location.parent.line_number,
+                            "parent_content": location.parent.content
+                        }
+                    }
+
+                    policy_failure contains item if {
+                        some detector in input.dataflow.risks
+                        detector.detector_id == input.policy_id
+
+                        data_type = detector.data_types[_]
+                        data_type.uuid == password_uuid
+
+                        location = data_type.locations[_]
+                        item := {
+                            "category_groups": data.bearer.common.groups_for_datatype(data_type),
+                            "severity": data.bearer.common.severity_of_datatype(data_type),
+                            "filename": location.filename,
+                            "line_number": location.line_number,
+                            "parent_line_number": location.parent.line_number,
+                            "parent_content": location.parent.content
+                        }
+                    }
     quiet: false
     skip-path: []
 worker:
     existing-worker: ""
-    file-size-max: 100000
+    file-size-max: 2000000
     files-to-batch: 1
     memory-max: 800000000
     timeout: 10m0s

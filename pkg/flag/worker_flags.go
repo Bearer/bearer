@@ -44,7 +44,7 @@ var (
 	FileSizeMaximumFlag = Flag{
 		Name:       "file-size-max",
 		ConfigName: "worker.file-size-max",
-		Value:      100 * 1000, // 100 KB
+		Value:      2 * 1000 * 1000, // 2MB
 		Usage:      "Ignore files larger than the specified value.",
 	}
 	FilesToBatchFlag = Flag{

@@ -17,7 +17,7 @@
 
 # Curio: The data-first security scanner that finds risks and vulnerabilities in your code to protect sensitive data
 
-Curio is a static code analysis tool (SAST) that scans your source code to discover security risks and vulnerabilities that put your sensitive data at risk (PHI, PD, PII, Financial data).
+Curio is a static code analysis tool (SAST) that scans your source code to discover security risks and vulnerabilities that put your sensitive data at risk (PHI, PD, PII).
 
 [Explore the docs](https://curio.sh) - [Getting Started](#rocket-getting-started) - [FAQ](#question-faqs) - [Report Bug](https://github.com/Bearer/curio/issues/new/choose) - [Discord Community][discord]
 
@@ -49,14 +49,14 @@ Policy list:
 
 SUCCESS
 
-14 policies were run and no breaches were detected.
+14 policies were run and no failures were detected.
 
 ```
 
 Curio helps developers and security teams to:
 
 - Protect their application from leaking sensitive data (*loggers, cookies, third-parties, etc*.)
-- Protect their application from having their sensitive data breached (*missing encryption, insecure communication, SQL injection, etc.*)
+- Protect their application from having their sensitive data failed (*missing encryption, insecure communication, SQL injection, etc.*)
 - Monitor sensitive data flows across every component (*Data stores, internal and external APIs*)
 
 Curio is Open Source ([*see license*](#mortar_board-license)), and is built to be fully customizable, from creating your own policies, to adding custom code detectors up to enriching our data classifiers.
@@ -99,33 +99,37 @@ chmod +x ./curio
 
 ### Scan your project
 
-The easiest way to try out Curio is with our example project, [Bear Publishing](https://github.com/Bearer/bear-publishing). It simulates a realistic Ruby application with common data security flaws. Clone or download it to a convenient location to get started. Alternately, you can use your own application. Check the [supported languages](#supported-language) to see if your stack supports a policy report.
+The easiest way to try out Curio is with our example project, [Bear Publishing](https://github.com/Bearer/bear-publishing). It simulates a realistic Ruby application with common data security flaws. Clone or download it to a convenient location to get started.  
 
-*You won't need to run the sample project. Curio scan the codebase without running the application.* 
+```bash
+git clone https://github.com/Bearer/bear-publishing.git
+```
+
+*Alternatively, you can use your own application. Check the [supported languages](#supported-language) to see if your stack supports a policy report.*
 
 Now, run the scan command with `curio scan` on the project directory:
 
 ```bash
-curio scan /path/to/bear-publishing
+curio scan bear-publishing
 ```
 
 A progress bar will display the status of the scan.
 
-Once the scan is complete, Curio will output a policy report with details of any policy breaches, as well as where in the codebase the infractions happened.
+Once the scan is complete, Curio will output a policy report with details of any policy failures, as well as where in the codebase the infractions happened.
 
 ### Analyze the report
 
 The policy report is an easily digestible view of the data security problems detected by Curio. A report is made up of:
 
 - The list of [policies](https://curio.sh/reference/policies/) run against your code.
-- Each detected breach, containing the file location and lines that triggered the policy breach.
+- Each detected failure, containing the file location and lines that triggered the policy failure.
 - A summary of the report with the stats for passing and failing policies.
 
-The [Bear Publishing](https://github.com/Bearer/bear-publishing) example application will trigger policy breaches and output a full report. Here's a section of the output:
+The [Bear Publishing](https://github.com/Bearer/bear-publishing) example application will trigger policy failures and output a full report. Here's a section of the output:
 
 ```text
 
-HIGH: Application level encryption missing policy breach with PHI, PII
+HIGH: Application level encryption missing policy failure with PHI, PII
 Application level encryption missing. Enable application level encryption to reduce the risk of leaking sensitive data.
 
 File: /bear-publishing/db/schema.rb:22
@@ -138,12 +142,13 @@ File: /bear-publishing/db/schema.rb:22
 
 =====================================
 
-Policy breaches detected
+Policy failures detected
 
-14 policies were run and 12 breaches were detected.
+14 policies were run and 12 failures were detected.
 
 CRITICAL: 0
-HIGH: 10 (Application level encryption missing, Insecure HTTP with Data Category, JWT leaking, Logger leaking, Cookie leaking, Third-party data category exposure)
+HIGH: 10 (Application level encryption missing, Insecure HTTP with Data Category,
+          JWT leaking, Logger leaking, Cookie leaking, Third-party data category exposure)
 MEDIUM: 2 (Insecure SMTP, Insecure FTP)
 LOW: 0
 ```

@@ -8,6 +8,7 @@ import (
 	"github.com/bearer/curio/pkg/commands/process/settings"
 	"github.com/bearer/curio/pkg/flag"
 	"github.com/bearer/curio/pkg/report/output/dataflow"
+	"github.com/google/uuid"
 
 	"github.com/bearer/curio/pkg/report/output/detectors"
 	"github.com/bearer/curio/pkg/report/output/policies"
@@ -73,24 +74,14 @@ func getReportOutput(report types.Report, config settings.Config) (any, error) {
 	case flag.ReportDataFlow:
 		return getDataflow(report, config, false)
 	case flag.ReportPolicies:
-		dataflow, err := getDataflow(report, config, true)
-		if err != nil {
-			return nil, err
-		}
-
-		return policies.GetOutput(dataflow, config)
+		return getPolicyReportOutput(report, config)
 	case flag.ReportStats:
 		lineOfCodeOutput, err := stats.GoclocDetectorOutput(config.Scan.Target)
 		if err != nil {
 			return nil, err
 		}
 
-		detectorsOutput, err := detectors.GetOutput(report)
-		if err != nil {
-			return nil, err
-		}
-
-		dataflowOutput, err := dataflow.GetOutput(detectorsOutput, config, true)
+		dataflowOutput, err := getDataflow(report, config, true)
 		if err != nil {
 			return nil, err
 		}
@@ -102,12 +93,7 @@ func getReportOutput(report types.Report, config settings.Config) (any, error) {
 }
 
 func getPolicyReportOutput(report types.Report, config settings.Config) (map[string][]policies.PolicyResult, error) {
-	detections, err := detectors.GetOutput(report)
-	if err != nil {
-		return nil, err
-	}
-
-	dataflow, err := dataflow.GetOutput(detections, config, true)
+	dataflow, err := getDataflow(report, config, true)
 	if err != nil {
 		return nil, err
 	}
@@ -119,6 +105,10 @@ func getDataflow(report types.Report, config settings.Config, isInternal bool) (
 	reportedDetections, err := detectors.GetOutput(report)
 	if err != nil {
 		return nil, err
+	}
+
+	for _, detection := range reportedDetections {
+		detection.(map[string]interface{})["id"] = uuid.NewString()
 	}
 
 	return dataflow.GetOutput(reportedDetections, config, isInternal)

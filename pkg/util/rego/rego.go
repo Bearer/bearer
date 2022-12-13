@@ -33,7 +33,7 @@ func RunQuery(query string, input interface{}, modules []Module) (rego.Vars, err
 	}
 
 	if len(rs) != 1 {
-		return nil, fmt.Errorf("expected single result from query got %d results %#v", len(rs), rs)
+		return nil, fmt.Errorf("expected single result from query got %d results %#v:\n%s", len(rs), rs, query)
 	}
 
 	return rs[0].Bindings, nil

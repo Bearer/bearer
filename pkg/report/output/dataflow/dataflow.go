@@ -7,9 +7,9 @@ import (
 	"strings"
 
 	"github.com/bearer/curio/pkg/commands/process/settings"
-	reportdetectors "github.com/bearer/curio/pkg/report/detectors"
 	"github.com/bearer/curio/pkg/report/customdetectors"
 	"github.com/bearer/curio/pkg/report/detections"
+	reportdetectors "github.com/bearer/curio/pkg/report/detectors"
 	"github.com/bearer/curio/pkg/report/output/dataflow/components"
 	"github.com/bearer/curio/pkg/report/output/dataflow/datatypes"
 	"github.com/bearer/curio/pkg/report/output/dataflow/detectiondecoder"
@@ -19,9 +19,9 @@ import (
 )
 
 type DataFlow struct {
-	Datatypes  []types.Datatype     `json:"data_types,omitempty" yaml:"data_types,omitempty"`
-	Risks      []interface{}        `json:"risks,omitempty" yaml:"risks,omitempty"`
-	Components []types.Component    `json:"components" yaml:"components"`
+	Datatypes  []types.Datatype  `json:"data_types,omitempty" yaml:"data_types,omitempty"`
+	Risks      []interface{}     `json:"risks,omitempty" yaml:"risks,omitempty"`
+	Components []types.Component `json:"components" yaml:"components"`
 }
 
 var allowedDetections []detections.DetectionType = []detections.DetectionType{detections.TypeSchemaClassified, detections.TypeCustomClassified, detections.TypeDependencyClassified, detections.TypeInterfaceClassified, detections.TypeFrameworkClassified, detections.TypeCustomRisk}
@@ -30,6 +30,15 @@ func GetOutput(input []interface{}, config settings.Config, isInternal bool) (*D
 	dataTypesHolder := datatypes.New(config, isInternal)
 	risksHolder := risks.New(config, isInternal)
 	componentsHolder := components.New(isInternal)
+
+	extras, err := datatypes.NewExtras(input)
+	if err != nil {
+		return nil, err
+	}
+	railsExtras, err := datatypes.NewRailsExtras(input)
+	if err != nil {
+		return nil, err
+	}
 
 	for _, detection := range input {
 		detectionMap, ok := detection.(map[string]interface{})
@@ -72,21 +81,14 @@ func GetOutput(input []interface{}, config settings.Config, isInternal bool) (*D
 
 		switch detectionType {
 		case detections.TypeSchemaClassified:
+			var detectionExtras *datatypes.ExtraFields
 			if castDetection.DetectorType == reportdetectors.DetectorSchemaRb {
-				extras, err := datatypes.GetRailsExtras(input, detection)
-				if err != nil {
-					return nil, err
-				}
+				detectionExtras = railsExtras.Get(detection)
+			}
 
-				err = dataTypesHolder.AddSchema(castDetection, extras)
-				if err != nil {
-					return nil, err
-				}
-			} else {
-				err = dataTypesHolder.AddSchema(castDetection, nil)
-				if err != nil {
-					return nil, err
-				}
+			err = dataTypesHolder.AddSchema(castDetection, detectionExtras)
+			if err != nil {
+				return nil, err
 			}
 		case detections.TypeCustomRisk:
 			risksHolder.AddRiskPresence(castDetection)
@@ -106,12 +108,12 @@ func GetOutput(input []interface{}, config settings.Config, isInternal bool) (*D
 					return nil, err
 				}
 			case customdetectors.TypeDatatype:
-				extras, err := datatypes.GetExtras(customDetector, input, detection)
-				if err != nil {
-					return nil, err
+				var detectionExtras *datatypes.ExtraFields
+				if castDetection.DetectorType == "detect_sql_create_public_table" {
+					detectionExtras = extras.Get(detection)
 				}
 
-				err = dataTypesHolder.AddSchema(castDetection, extras)
+				err = dataTypesHolder.AddSchema(castDetection, detectionExtras)
 				if err != nil {
 					return nil, err
 				}

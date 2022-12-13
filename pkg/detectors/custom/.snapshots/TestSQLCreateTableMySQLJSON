@@ -1,0 +1,92 @@
+[
+	{
+		"type": "custom",
+		"detector_type": "detect_sql_create_table",
+		"source": {
+			"filename": "structure.sql",
+			"language": "SQL",
+			"language_type": "data",
+			"line_number": 3,
+			"column_number": 8,
+			"text": null
+		},
+		"value": {
+			"object_name": "users",
+			"field_name": "id",
+			"field_type": "integer",
+			"field_type_simple": "number"
+		}
+	},
+	{
+		"type": "custom",
+		"detector_type": "detect_sql_create_table",
+		"source": {
+			"filename": "structure.sql",
+			"language": "SQL",
+			"language_type": "data",
+			"line_number": 4,
+			"column_number": 8,
+			"text": null
+		},
+		"value": {
+			"object_name": "users",
+			"field_name": "class_id",
+			"field_type": "integer",
+			"field_type_simple": "number"
+		}
+	},
+	{
+		"type": "custom",
+		"detector_type": "detect_sql_create_table",
+		"source": {
+			"filename": "structure.sql",
+			"language": "SQL",
+			"language_type": "data",
+			"line_number": 5,
+			"column_number": 8,
+			"text": null
+		},
+		"value": {
+			"object_name": "users",
+			"field_name": "type",
+			"field_type": "char",
+			"field_type_simple": "string"
+		}
+	},
+	{
+		"type": "custom",
+		"detector_type": "detect_sql_create_table",
+		"source": {
+			"filename": "structure.sql",
+			"language": "SQL",
+			"language_type": "data",
+			"line_number": 6,
+			"column_number": 8,
+			"text": null
+		},
+		"value": {
+			"object_name": "users",
+			"field_name": "created_at",
+			"field_type": "timestamp",
+			"field_type_simple": "date"
+		}
+	},
+	{
+		"type": "custom",
+		"detector_type": "detect_sql_create_table",
+		"source": {
+			"filename": "structure.sql",
+			"language": "SQL",
+			"language_type": "data",
+			"line_number": 7,
+			"column_number": 8,
+			"text": null
+		},
+		"value": {
+			"object_name": "users",
+			"field_name": "updated_at",
+			"field_type": "timestamp",
+			"field_type_simple": "date"
+		}
+	}
+]

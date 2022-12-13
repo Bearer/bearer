@@ -1,9 +1,12 @@
+project_name: curio
+
 before:
   hooks:
     - go mod tidy
     - go generate ./...
+
 builds:
-  - id: "darwin"
+  - id: curio-macos-build
     main: ./cmd/curio
     binary: curio
     env:
@@ -11,14 +14,45 @@ builds:
     goos:
       - darwin
     goarch:
-      - arm64
       - amd64
+      - arm64
     ldflags:
       - -s -w
       - -X "github.com/bearer/curio/cmd/curio/build.Version={{.Version}}"
       - -X "github.com/bearer/curio/cmd/curio/build.CommitSHA={{.Commit}}"
+    hooks:
+      post:
+        - |
+          sh -c '
+          fn=dist/curio-macos-build_{{.Target}}/gon.hcl
+          cat >"$fn" <<EOF
+          source = ["dist/curio-macos-build_{{.Target}}/{{.Name}}"]
+
+          bundle_id = "com.bearer.curio"
+
+          apple_id {
+            password = "@env:AC_PASSWORD"
+          }
+
+          sign {
+            application_identity = "Developer ID Application: Bearer Inc (5T2VP4YAG8)"
+          }
+
+          zip {
+            output_path = "curio_{{.Target}}.zip"
+          }
+          EOF
+          '
+        - "gon -log-level=debug 'dist/curio-macos-build_{{.Target}}/gon.hcl'"
+
 snapshot:
   name_template: "{{ incpatch .Version }}-next"
+
+archives:
+  - id: macos-archive
+    builds:
+      - curio-macos-build
+
 changelog:
   sort: asc
   filters:

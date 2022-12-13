@@ -7,11 +7,11 @@ layout: layouts/doc.njk
 
 Discover data security risks and vulnerabilities in only a few minutes. In this guide you will install Curio, run a scan on a local project, and view the results of a policy report. Let's get started!
 
-### Installation
+## Installation
 
 Curio is available as a standalone executable binary. The latest release is available on the [releases tab](https://github.com/Bearer/curio/releases/latest), or use one of the methods below.
 
-#### Install Script
+### Install Script
 
 :warning: **Not working until public**: Use the [Binary](#binary) instructions in the next section :warning:
 
@@ -29,7 +29,7 @@ If you need to customize the options, use the following to pass parameters:
 curl -sfL https://raw.githubusercontent.com/Bearer/curio/main/contrib/install.sh | sh -s -- -b /usr/local/bin
 ```
 
-#### Binary
+### Binary
 
 Download the archive file for your operating system/architecture from [here](https://github.com/Bearer/curio/releases/latest/). Unpack the archive, and put the binary somewhere in your $PATH (on UNIX-y systems, /usr/local/bin or the like). Make sure it has permission to execute:
 
@@ -37,35 +37,37 @@ Download the archive file for your operating system/architecture from [here](htt
 chmod +x ./curio
 ```
 
-### Scan your project
+## Scan your project
 
-The easiest way to try out Curio is with our example project, [Bear Publishing](https://github.com/Bearer/bear-publishing). It simulates a realistic Ruby application with common data security flaws. Clone or download it to a convenient location to get started. Alternately, you can use your own application.
-
-*You won't need to run the sample project. Curio scan the codebase without running the application.*
-
-Now, run a scan with `curio scan` on the project directory:
+The easiest way to try out Curio is with our example project, [Bear Publishing](https://github.com/Bearer/bear-publishing). It simulates a realistic Ruby application with common data security flaws. Clone or download it to a convenient location to get started.  
 
 ```bash
-curio scan /path/to/bear-publishing
+git clone https://github.com/Bearer/bear-publishing.git
+```
+
+Now, run the scan command with `curio scan` on the project directory:
+
+```bash
+curio scan bear-publishing
 ```
 
 A progress bar will display the status of the scan.
 
-Once the scan is complete, Curio will output a policy report with details of any policy breaches, as well as where in the codebase the infractions happened.
+Once the scan is complete, Curio will output a policy report with details of any policy failures, as well as where in the codebase the infractions happened.
 
-### Analyze the report
+## Analyze the report
 
 The policy report is an easily digestible view of the data security problems detected by Curio. A report is made up of:
 
 - The list of [policies](/reference/policies/) run against your code.
-- Each detected breach, containing the file location and lines that triggered the policy breach.
+- Each detected failure, containing the file location and lines that triggered the policy failure.
 - A summary of the report with the stats for passing and failing policies.
 
-The [Bear Publishing](https://github.com/Bearer/bear-publishing) example application will trigger policy breaches and output a full report. Here's a section of the output containing a breach snippet and the final summary:
+The [Bear Publishing](https://github.com/Bearer/bear-publishing) example application will trigger policy failures and output a full report. Here's a section of the output containing a failure snippet and the final summary:
 
 ```text
 
-HIGH: Application level encryption missing policy breach with PHI, PII
+HIGH: Application level encryption missing policy failure with PHI, PII
 Application level encryption missing. Enable application level encryption to reduce the risk of leaking sensitive data.
 
 File: /bear-publishing/db/schema.rb:22
@@ -78,12 +80,13 @@ File: /bear-publishing/db/schema.rb:22
 
 =====================================
 
-Policy breaches detected
+Policy failures detected
 
-14 policies were run and 12 breaches were detected.
+14 policies were run and 12 failures were detected.
 
 CRITICAL: 0
-HIGH: 10 (Application level encryption missing, Insecure HTTP with Data Category, JWT leaking, Logger leaking, Cookie leaking, Third-party data category exposure)
+HIGH: 10 (Application level encryption missing, Insecure HTTP with Data Category,
+          JWT leaking, Logger leaking, Cookie leaking, Third-party data category exposure)
 MEDIUM: 2 (Insecure SMTP, Insecure FTP)
 LOW: 0
 ```

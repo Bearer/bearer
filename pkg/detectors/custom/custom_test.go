@@ -38,6 +38,9 @@ var configSQLCreateFunction []byte
 //go:embed testdata/config/sql_create_table.yml
 var configSQLCreateTable []byte
 
+//go:embed testdata/config/sql_create_table_mysql.yml
+var configSQLCreateTableMySQL []byte
+
 //go:embed testdata/config/sql_create_trigger.yml
 var configSQLCreateTrigger []byte
 
@@ -109,6 +112,10 @@ func TestSQLCreateFunctionJSON(t *testing.T) {
 }
 func TestSQLCreateTableJSON(t *testing.T) {
 	result := runTest(configSQLCreateTable, filepath.Join("testdata", "sql", "create_table"), t)
+	cupaloy.SnapshotT(t, result)
+}
+func TestSQLCreateTableMySQLJSON(t *testing.T) {
+	result := runTest(configSQLCreateTableMySQL, filepath.Join("testdata", "sql", "create_table_mysql"), t)
 	cupaloy.SnapshotT(t, result)
 }
 

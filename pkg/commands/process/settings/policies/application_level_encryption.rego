@@ -4,7 +4,7 @@ import data.bearer.common
 
 import future.keywords
 
-policy_breach contains item if {
+policy_failure contains item if {
     datatype = input.dataflow.data_types[_]
     detector = datatype.detectors[_]
     location = detector.locations[_]

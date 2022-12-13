@@ -1,6 +1,7 @@
 package file
 
 import (
+	"bufio"
 	"io"
 	"os"
 	"path/filepath"
@@ -302,4 +303,27 @@ func EnsureFileExists(filePath string) *os.File {
 	}
 
 	return file
+}
+
+func ReadFileSingleLine(filePath string, lineNumber int) (string, error) {
+	file, err := os.Open(filePath)
+	if err != nil {
+		return "", err
+	}
+	defer file.Close()
+
+	scanner := bufio.NewScanner(file)
+	lineCounter := 1
+	for scanner.Scan() {
+		if lineCounter == lineNumber {
+			return scanner.Text(), nil
+		}
+		lineCounter++
+	}
+
+	if err := scanner.Err(); err != nil {
+		return "", err
+	}
+
+	return "", nil
 }

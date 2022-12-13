@@ -10,7 +10,7 @@ module.exports = {
       white: "#FFFFFF",
       code: "hsl(243,27%,35%)",
       neutral: {
-        600: "hsl(243,27%,17%)",
+        600: "hsl(222, 47%, 11%)",
         500: "#3A3A3A",
         400: "#969696",
         300: "#C4C4C4",
@@ -29,6 +29,9 @@ module.exports = {
       },
     },
     extend: {
+      spacing: {
+        "heading-offset": "7rem",
+      },
       typography: (theme) => ({
         DEFAULT: {
           css: {
