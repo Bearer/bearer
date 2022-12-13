@@ -243,10 +243,16 @@ scan:
                   filters:
                     - variable: LIBRARY
                       values: []
+                      minimum: null
+                      Maximum: null
+                      match_violation: false
                     - variable: ""
                       values:
                         - DSA
                         - RSA
+                      minimum: null
+                      Maximum: null
+                      match_violation: false
             root_singularize: false
             root_lowercase: false
             metavars: {}
@@ -291,6 +297,9 @@ scan:
                         - encrypt
                         - encrypt!
                         - decrypt
+                      minimum: null
+                      Maximum: null
+                      match_violation: false
             root_singularize: false
             root_lowercase: false
             metavars: {}
@@ -376,6 +385,9 @@ scan:
                         - encrypt_pair
                         - encrypt_string
                         - encrypt_block
+                      minimum: null
+                      Maximum: null
+                      match_violation: false
             root_singularize: false
             root_lowercase: false
             metavars: {}
@@ -549,13 +561,61 @@ scan:
             stored: false
             detect_presence: true
             omit_parent: false
+        ruby_openssl_pkey_method_call:
+            disabled: false
+            type: risk
+            languages:
+                - ruby
+            param_parenting: false
+            patterns:
+                - pattern: |
+                    $_.$METHOD(<$DATA_TYPE>)
+                  filters:
+                    - variable: METHOD
+                      values:
+                        - export
+                        - to_pem
+                        - to_s
+                      minimum: null
+                      Maximum: null
+                      match_violation: false
+            root_singularize: false
+            root_lowercase: false
+            metavars: {}
+            stored: false
+            detect_presence: false
+            omit_parent: false
+        ruby_openssl_pkey_rsa_method_call:
+            disabled: false
+            type: risk
+            languages:
+                - ruby
+            param_parenting: false
+            patterns:
+                - pattern: |
+                    $_.$METHOD(<$DATA_TYPE>)
+                  filters:
+                    - variable: METHOD
+                      values:
+                        - private_decrypt
+                        - private_encrypt
+                        - public_decrypt
+                        - public_encrypt
+                      minimum: null
+                      Maximum: null
+                      match_violation: false
+            root_singularize: false
+            root_lowercase: false
+            metavars: {}
+            stored: false
+            detect_presence: false
+            omit_parent: false
         ruby_password_length:
             disabled: false
             type: risk
             languages:
                 - ruby
             param_parenting: false
-            processors: []
             patterns:
                 - pattern: |
                     class $ANYTHING < ApplicationRecord
@@ -597,49 +657,6 @@ scan:
             metavars: {}
             stored: false
             detect_presence: true
-            omit_parent: false
-        ruby_openssl_pkey_method_call:
-            disabled: false
-            type: risk
-            languages:
-                - ruby
-            param_parenting: false
-            patterns:
-                - pattern: |
-                    $_.$METHOD(<$DATA_TYPE>)
-                  filters:
-                    - variable: METHOD
-                      values:
-                        - export
-                        - to_pem
-                        - to_s
-            root_singularize: false
-            root_lowercase: false
-            metavars: {}
-            stored: false
-            detect_presence: false
-            omit_parent: false
-        ruby_openssl_pkey_rsa_method_call:
-            disabled: false
-            type: risk
-            languages:
-                - ruby
-            param_parenting: false
-            patterns:
-                - pattern: |
-                    $_.$METHOD(<$DATA_TYPE>)
-                  filters:
-                    - variable: METHOD
-                      values:
-                        - private_decrypt
-                        - private_encrypt
-                        - public_decrypt
-                        - public_encrypt
-            root_singularize: false
-            root_lowercase: false
-            metavars: {}
-            stored: false
-            detect_presence: false
             omit_parent: false
         ssl_certificate_verification_disabled:
             disabled: false
