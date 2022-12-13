@@ -217,6 +217,7 @@ detect_rails_insecure_smtp:
   languages:
     - ruby
   detect_presence: true
+  omit_parent: true
 detect_rails_insecure_communication:
   type: "risk"
   patterns:
@@ -227,6 +228,7 @@ detect_rails_insecure_communication:
   languages:
     - ruby
   detect_presence: true
+  omit_parent: true
 detect_rails_insecure_ftp:
   type: "risk"
   patterns:
@@ -274,8 +276,8 @@ detect_ruby_weak_encryption:
       filters:
         - variable: LIBRARY
         - values:
-          - DSA
-          - RSA
+            - DSA
+            - RSA
   languages:
     - "ruby"
 initialize_ruby_rc4_encryption:
@@ -318,9 +320,9 @@ encrypt_method_call:
       filters:
         - variable: METHOD
           values:
-          - encrypt
-          - encrypt!
-          - decrypt
+            - encrypt
+            - encrypt!
+            - decrypt
   languages:
     - "ruby"
 ruby_openssl_pkey_method_call:
@@ -344,10 +346,10 @@ ruby_openssl_pkey_rsa_method_call:
       filters:
         - variable: METHOD
           values:
-          - private_decrypt
-          - private_encrypt
-          - public_decrypt
-          - public_encrypt
+            - private_decrypt
+            - private_encrypt
+            - public_decrypt
+            - public_encrypt
   languages:
     - "ruby"
 ruby_blowfish_method_call:
@@ -358,8 +360,8 @@ ruby_blowfish_method_call:
       filters:
         - variable: METHOD
           values:
-          - encrypt_pair
-          - encrypt_string
-          - encrypt_block
+            - encrypt_pair
+            - encrypt_string
+            - encrypt_block
   languages:
     - "ruby"

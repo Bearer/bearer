@@ -219,7 +219,7 @@ func writePolicyFailureToString(reportStr *strings.Builder, policyFailure Policy
 	reportStr.WriteString(color.HiBlueString("File: " + underline(policyFailure.Filename+":"+fmt.Sprint(policyFailure.LineNumber)) + "\n"))
 
 	reportStr.WriteString("\n")
-	reportStr.WriteString(highlightCodeExtract(policyFailure.Filename, policyFailure.LineNumber, policyFailure.ParentLineNumber, policyFailure.ParentContent, policyFailure.OmitParent))
+	reportStr.WriteString(highlightCodeExtract(policyFailure.Filename, policyFailure.LineNumber, policyFailure.ParentLineNumber, policyFailure.ParentContent))
 }
 
 func formatSeverity(policySeverity string) string {
@@ -230,7 +230,7 @@ func formatSeverity(policySeverity string) string {
 	return severityColorFn(strings.ToUpper(policySeverity + ": "))
 }
 
-func highlightCodeExtract(fileName string, lineNumber int, extractStartLineNumber int, extract string, singleLine bool) string {
+func highlightCodeExtract(fileName string, lineNumber int, extractStartLineNumber int, extract string) string {
 	result := ""
 	targetIndex := lineNumber - extractStartLineNumber
 	for index, line := range strings.Split(extract, "\n") {
@@ -241,13 +241,11 @@ func highlightCodeExtract(fileName string, lineNumber int, extractStartLineNumbe
 				break
 			}
 		}
+
 		if index == targetIndex {
 			result += color.MagentaString(" " + fmt.Sprint(extractStartLineNumber+index) + " ")
 			result += color.MagentaString(line) + "\n"
-			if singleLine {
-				break
-			}
-		} else if !singleLine {
+		} else {
 			result += " " + fmt.Sprint(extractStartLineNumber+index) + " "
 			result += line + "\n"
 		}
