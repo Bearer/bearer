@@ -79,18 +79,19 @@ func NewRunner(ctx context.Context, scanSettings settings.Config) Runner {
 		} else {
 			err := os.Remove(path)
 			if err != nil {
-				log.Debug().Msgf("couldn't remove report path %s, %s", path, err.Error())
+				log.Error().Msgf("couldn't remove report path %s, %s", path, err.Error())
 			}
 		}
 	}
 
 	log.Debug().Msgf("creating report %s", path)
-	reportPath, err := os.Create(path)
+	pathCreated, err := os.Create(path)
 
 	if err != nil {
-		log.Debug().Msgf("failed to create path %s, %s", path, err.Error())
+		log.Error().Msgf("failed to create path %s, %s, %#v", path, err.Error(), pathCreated)
 	}
-	log.Debug().Msgf("successfully created reportPath %s", reportPath.Name())
+
+	log.Debug().Msgf("successfully created reportPath %s", path)
 
 	return r
 }

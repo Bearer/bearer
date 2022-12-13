@@ -4,7 +4,7 @@ import (
 	_ "embed"
 	"errors"
 	"fmt"
-	"io/ioutil"
+	"io"
 	"os"
 	"regexp"
 	"sort"
@@ -126,7 +126,7 @@ func (detector *Detector) ProcessFile(file *file.FileInfo, dir *file.Path, repor
 			if err != nil {
 				return false, err
 			}
-			fileBytes, err := ioutil.ReadAll(f)
+			fileBytes, err := io.ReadAll(f)
 			if err != nil {
 				return false, err
 			}
