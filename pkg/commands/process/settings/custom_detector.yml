@@ -262,3 +262,104 @@ detect_ruby_third_party_data_send:
       Sentry.set_user(<$ARGUMENT>)
   languages:
     - ruby
+detect_ruby_weak_encryption:
+  type: "risk"
+  patterns:
+    - |
+      Digest::SHA1.hexidigest(<$DATA_TYPE>)
+    - |
+      Digest::MD5.hexdigest(<$DATA_TYPE>)
+    - pattern: |
+        OpenSSL::PKey::$LIBRARY.new($_, <$DATA_TYPE>)
+      filters:
+        - variable: LIBRARY
+        - values:
+          - DSA
+          - RSA
+  languages:
+    - "ruby"
+initialize_ruby_rc4_encryption:
+  type: "risk"
+  patterns:
+    - |
+      $_ = RC4.new()
+  languages:
+    - "ruby"
+  detect_presence: true
+initialize_ruby_openssl_pkey_dsa_encryption:
+  type: "risk"
+  patterns:
+    - |
+      $_ = OpenSSL::PKey::DSA.new()
+  languages:
+    - "ruby"
+  detect_presence: true
+initialize_ruby_openssl_pkey_rsa_encryption:
+  type: "risk"
+  patterns:
+    - |
+      $_ = OpenSSL::PKey::RSA.new()
+  languages:
+    - "ruby"
+  detect_presence: true
+initialize_ruby_blowfish_encryption:
+  type: "risk"
+  patterns:
+    - |
+      $_ = Crypt::Blowfish.new(...)
+  languages:
+    - "ruby"
+  detect_presence: true
+encrypt_method_call:
+  type: "risk"
+  patterns:
+    - pattern: |
+        $_.$METHOD(<$DATA_TYPE>)
+      filters:
+        - variable: METHOD
+          values:
+          - encrypt
+          - encrypt!
+          - decrypt
+  languages:
+    - "ruby"
+ruby_openssl_pkey_method_call:
+  type: "risk"
+  patterns:
+    - pattern: |
+        $_.$METHOD(<$DATA_TYPE>)
+      filters:
+        - variable: METHOD
+          values:
+            - export
+            - to_pem
+            - to_s
+  languages:
+    - "ruby"
+ruby_openssl_pkey_rsa_method_call:
+  type: "risk"
+  patterns:
+    - pattern: |
+        $_.$METHOD(<$DATA_TYPE>)
+      filters:
+        - variable: METHOD
+          values:
+          - private_decrypt
+          - private_encrypt
+          - public_decrypt
+          - public_encrypt
+  languages:
+    - "ruby"
+ruby_blowfish_method_call:
+  type: "risk"
+  patterns:
+    - pattern: |
+        $_.$METHOD(<$DATA_TYPE>)
+      filters:
+        - variable: METHOD
+          values:
+          - encrypt_pair
+          - encrypt_string
+          - encrypt_block
+  languages:
+    - "ruby"

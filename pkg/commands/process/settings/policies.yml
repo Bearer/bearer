@@ -152,3 +152,16 @@ sending_data_in_category_to_third_party:
       name: bearer.common
     - path: policies/third_party_data_category.rego
       name: bearer.third_party_data_category
+weak_password_encryption:
+  description: "Weak encryption or hashing library used to encrypt password. Use a stronger algorithm."
+  name: "Weak password encryption"
+  id: "detect_ruby_weak_encryption"
+  query: |
+    policy_failure = data.bearer.weak_password_encryption.policy_failure
+  modules:
+    - path: policies/common.rego
+      name: bearer.common
+    - path: policies/encryption_common.rego
+      name: bearer.encryption_common
+    - path: policies/weak_password_encryption.rego
+      name: bearer.weak_password_encryption
