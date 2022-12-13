@@ -198,13 +198,6 @@ detect_sql_create_public_table:
   root_lowercase: true
   languages:
     - sql
-  processors:
-    - query: |
-        verified_by = data.bearer.encrypted_verified.verified_by
-        encrypted = data.bearer.encrypted_verified.encrypted
-      modules:
-        - path: processors/encrypted_verified.rego
-          name: bearer.encrypted_verified
   stored: true
 detect_rails_insecure_smtp:
   type: "risk"

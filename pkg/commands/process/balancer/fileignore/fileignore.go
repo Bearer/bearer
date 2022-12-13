@@ -37,18 +37,18 @@ func (fileignore *FileIgnore) Ignore(projectPath string, filePath string, d fs.D
 
 	symlink, _ := isSymlink(projectPath + relativePath)
 	if symlink {
-		log.Error().Msgf("symlink check: %s %s", projectPath, relativePath)
+		log.Debug().Msgf("skipping symlink: %s %s", projectPath, relativePath)
 		return true
 	}
 
 	if fileignore.ignorer.Match(trimmedPath, fileInfo.IsDir()) {
-		log.Error().Msgf("Match err: %s %s", projectPath, relativePath)
+		log.Error().Msgf("file ignore match err: %s %s", projectPath, relativePath)
 		return true
 	}
 
 	if !fileInfo.IsDir() {
 		if fileInfo.Size() > int64(fileignore.config.Worker.FileSizeMaximum) {
-			log.Error().Msgf("Size: %s %s", projectPath, relativePath)
+			log.Debug().Msgf("skipping file due to size: %s %s", projectPath, relativePath)
 			return true
 		}
 	}

@@ -14,7 +14,6 @@ import (
 	"github.com/bearer/curio/pkg/report/output/dataflow/datatypes"
 	"github.com/bearer/curio/pkg/report/output/dataflow/detectiondecoder"
 	"github.com/bearer/curio/pkg/report/output/dataflow/risks"
-	"github.com/bearer/curio/pkg/util/output"
 
 	"github.com/bearer/curio/pkg/report/output/dataflow/types"
 )
@@ -32,9 +31,7 @@ func GetOutput(input []interface{}, config settings.Config, isInternal bool) (*D
 	risksHolder := risks.New(config, isInternal)
 	componentsHolder := components.New(isInternal)
 
-	bar := output.GetProgressBar(len(input), settings.Config{})
-
-	extras, err := datatypes.NewExtras(config.CustomDetector, input)
+	extras, err := datatypes.NewExtras(input)
 	if err != nil {
 		return nil, err
 	}
@@ -84,18 +81,14 @@ func GetOutput(input []interface{}, config settings.Config, isInternal bool) (*D
 
 		switch detectionType {
 		case detections.TypeSchemaClassified:
+			var detectionExtras *datatypes.ExtraFields
 			if castDetection.DetectorType == reportdetectors.DetectorSchemaRb {
-				detectionExtras := railsExtras.Get(detection)
+				detectionExtras = railsExtras.Get(detection)
+			}
 
-				err = dataTypesHolder.AddSchema(castDetection, detectionExtras)
-				if err != nil {
-					return nil, err
-				}
-			} else {
-				err = dataTypesHolder.AddSchema(castDetection, nil)
-				if err != nil {
-					return nil, err
-				}
+			err = dataTypesHolder.AddSchema(castDetection, detectionExtras)
+			if err != nil {
+				return nil, err
 			}
 		case detections.TypeCustomRisk:
 			risksHolder.AddRiskPresence(castDetection)
@@ -115,7 +108,10 @@ func GetOutput(input []interface{}, config settings.Config, isInternal bool) (*D
 					return nil, err
 				}
 			case customdetectors.TypeDatatype:
-				detectionExtras := extras.Get(ruleName, detection)
+				var detectionExtras *datatypes.ExtraFields
+				if castDetection.DetectorType == "detect_sql_create_public_table" {
+					detectionExtras = extras.Get(detection)
+				}
 
 				err = dataTypesHolder.AddSchema(castDetection, detectionExtras)
 				if err != nil {
@@ -157,11 +153,7 @@ func GetOutput(input []interface{}, config settings.Config, isInternal bool) (*D
 				return nil, err
 			}
 		}
-
-		bar.Add(1)
 	}
-
-	bar.Finish()
 
 	dataflow := &DataFlow{
 		Datatypes:  dataTypesHolder.ToDataFlow(),

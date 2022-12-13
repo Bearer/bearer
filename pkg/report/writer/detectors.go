@@ -197,7 +197,6 @@ func (report *Detectors) AddSecretLeak(
 
 func (report *Detectors) AddDetection(detectionType detections.DetectionType, detectorType detectors.Type, source source.Source, value interface{}) {
 	data := &detections.Detection{
-		// ID:           uuid.NewString(),
 		Type:         detectionType,
 		DetectorType: detectorType,
 		Source:       source,

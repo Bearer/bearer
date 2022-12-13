@@ -1,13 +1,11 @@
 package datatypes
 
 import (
-	_ "embed"
 	"encoding/json"
 	"errors"
 	"fmt"
 
 	"github.com/bearer/curio/pkg/commands/process/settings"
-	"github.com/bearer/curio/pkg/report/customdetectors"
 	"github.com/bearer/curio/pkg/report/detections"
 	"github.com/bearer/curio/pkg/report/detectors"
 	"github.com/bearer/curio/pkg/report/output/dataflow/types"
@@ -20,43 +18,9 @@ type processorInput struct {
 	TargetDetections []interface{} `json:"target_detections"`
 }
 
-type extraFields struct {
+type ExtraFields struct {
 	encrypted  *bool
 	verifiedBy []types.DatatypeVerifiedBy
-}
-
-type railsExtrasObj struct {
-	data map[string]*extraFields
-}
-
-func NewRailsExtras(detections []interface{}) (*railsExtrasObj, error) {
-	targetDetections, err := getRailsTargetDetections(detections)
-	if err != nil {
-		return nil, err
-	}
-
-	module, err := settings.EncryptedVerifiedRegoModuleText()
-	if err != nil {
-		return nil, err
-	}
-
-	data, err := runExtrasQuery(
-		`
-			verified_by = data.bearer.rails_encrypted_verified.verified_by
-			encrypted = data.bearer.rails_encrypted_verified.encrypted
-		`,
-		[]regohelper.Module{{
-			Name:    "bearer.rails_encrypted_verified",
-			Content: module,
-		}},
-		detections,
-		targetDetections,
-	)
-	if err != nil {
-		return nil, err
-	}
-
-	return &railsExtrasObj{data: data}, nil
 }
 
 func getRailsTargetDetections(allDetections []interface{}) ([]interface{}, error) {
@@ -90,13 +54,6 @@ func getRailsTargetDetections(allDetections []interface{}) ([]interface{}, error
 	}
 
 	return result, nil
-}
-
-func (extras *railsExtrasObj) Get(detection interface{}) *extraFields {
-	detectionMap := detection.(map[string]interface{})
-	detectionID := detectionMap["id"].(string)
-
-	return extras.data[detectionID]
 }
 
 func getEncryptedField(result rego.Vars, detection interface{}) (bool, error) {
@@ -200,39 +157,45 @@ func getVerifiedBy(result rego.Vars, detection interface{}) ([]types.DatatypeVer
 }
 
 type extrasObj struct {
-	data map[string]map[string]*extraFields
+	data map[string]*ExtraFields
 }
 
-func NewExtras(customRules map[string]settings.Rule, detections []interface{}) (*extrasObj, error) {
-	targetDetections, err := getTargetDetections(detections)
+func NewRailsExtras(detections []interface{}) (*extrasObj, error) {
+	return newExtrasObj(detections, getRailsTargetDetections)
+}
+
+func NewExtras(detections []interface{}) (*extrasObj, error) {
+	return newExtrasObj(detections, getTargetDetections)
+}
+
+func newExtrasObj(
+	detections []interface{},
+	targetDetectionsFunc func(detections []interface{}) ([]interface{}, error),
+) (*extrasObj, error) {
+	targetDetections, err := targetDetectionsFunc(detections)
 	if err != nil {
 		return nil, err
 	}
 
-	data := make(map[string]map[string]*extraFields)
+	module, err := settings.EncryptedVerifiedRegoModuleText()
+	if err != nil {
+		return nil, err
+	}
 
-	for ruleName, rule := range customRules {
-		if rule.Type != customdetectors.TypeDatatype {
-			continue
-		}
-
-		if len(rule.Processors) == 0 {
-			continue
-		}
-
-		processor := rule.Processors[0]
-
-		ruleData, err := runExtrasQuery(
-			processor.Query,
-			processor.Modules.ToRegoModules(),
-			detections,
-			targetDetections,
-		)
-		if err != nil {
-			return nil, err
-		}
-
-		data[ruleName] = ruleData
+	data, err := runExtrasQuery(
+		`
+			verified_by = data.bearer.rails_encrypted_verified.verified_by
+			encrypted = data.bearer.rails_encrypted_verified.encrypted
+		`,
+		[]regohelper.Module{{
+			Name:    "bearer.rails_encrypted_verified",
+			Content: module,
+		}},
+		detections,
+		targetDetections,
+	)
+	if err != nil {
+		return nil, err
 	}
 
 	return &extrasObj{data: data}, nil
@@ -242,8 +205,8 @@ func runExtrasQuery(
 	query string,
 	modules []regohelper.Module,
 	detections, targetDetections []interface{},
-) (map[string]*extraFields, error) {
-	data := make(map[string]*extraFields)
+) (map[string]*ExtraFields, error) {
+	data := make(map[string]*ExtraFields)
 
 	result, err := regohelper.RunQuery(query, processorInput{
 		AllDetections:    detections,
@@ -254,7 +217,7 @@ func runExtrasQuery(
 	}
 
 	for _, detection := range targetDetections {
-		extras := &extraFields{}
+		extras := &ExtraFields{}
 		encrypted, err := getEncryptedField(result, detection)
 		if err != nil {
 			return nil, err
@@ -306,14 +269,9 @@ func getTargetDetections(allDetections []interface{}) ([]interface{}, error) {
 	return result, nil
 }
 
-func (extras *extrasObj) Get(ruleName string, detection interface{}) *extraFields {
+func (extras *extrasObj) Get(detection interface{}) *ExtraFields {
 	detectionMap := detection.(map[string]interface{})
 	detectionID := detectionMap["id"].(string)
 
-	ruleExtras, ok := extras.data[ruleName]
-	if !ok {
-		return nil
-	}
-
-	return ruleExtras[detectionID]
+	return extras.data[detectionID]
 }

@@ -54,7 +54,7 @@ func New(config settings.Config, isInternal bool) *Holder {
 	}
 }
 
-func (holder *Holder) AddSchema(detection detections.Detection, extras *extraFields) error {
+func (holder *Holder) AddSchema(detection detections.Detection, extras *ExtraFields) error {
 	schema, err := detectiondecoder.GetSchema(detection)
 	if err != nil {
 		return err
@@ -73,7 +73,7 @@ func (holder *Holder) AddSchema(detection detections.Detection, extras *extraFie
 }
 
 // addDatatype adds datatype to hash list and at the same time blocks duplicates
-func (holder *Holder) addDatatype(classification *db.DataType, detectorName string, fileName string, lineNumber int, extras *extraFields, parent *schema.Parent) {
+func (holder *Holder) addDatatype(classification *db.DataType, detectorName string, fileName string, lineNumber int, extras *ExtraFields, parent *schema.Parent) {
 	// create datatype entry if it doesn't exist
 	if _, exists := holder.datatypes[classification.Name]; !exists {
 		datatype := datatypeHolder{
