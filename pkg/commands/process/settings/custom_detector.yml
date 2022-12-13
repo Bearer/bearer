@@ -189,6 +189,10 @@ detect_sql_create_public_table:
       CREATE TABLE public.$TABLE_NAME (
         <$COLUMN>
       )
+    - |
+      CREATE TABLE $TABLE_NAME (
+        <$COLUMN>
+      )
   param_parenting: true
   root_singularize: true
   root_lowercase: true

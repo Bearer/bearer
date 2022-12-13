@@ -285,6 +285,11 @@ scan:
                       <$COLUMN>
                     )
                   filters: []
+                - pattern: |
+                    CREATE TABLE $TABLE_NAME (
+                      <$COLUMN>
+                    )
+                  filters: []
             root_singularize: true
             root_lowercase: true
             metavars: {}
