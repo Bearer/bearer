@@ -99,14 +99,18 @@ chmod +x ./curio
 
 ### Scan your project
 
-The easiest way to try out Curio is with our example project, [Bear Publishing](https://github.com/Bearer/bear-publishing). It simulates a realistic Ruby application with common data security flaws. Clone or download it to a convenient location to get started. Alternately, you can use your own application. Check the [supported languages](#supported-language) to see if your stack supports a policy report.
+The easiest way to try out Curio is with our example project, [Bear Publishing](https://github.com/Bearer/bear-publishing). It simulates a realistic Ruby application with common data security flaws. Clone or download it to a convenient location to get started.  
 
-*You won't need to run the sample project. Curio scans the codebase without running the application.*
+```bash
+git clone https://github.com/Bearer/bear-publishing.git
+```
+
+*Alternatively, you can use your own application. Check the [supported languages](#supported-language) to see if your stack supports a policy report.*
 
 Now, run the scan command with `curio scan` on the project directory:
 
 ```bash
-curio scan /path/to/bear-publishing
+curio scan bear-publishing
 ```
 
 A progress bar will display the status of the scan.
@@ -143,7 +147,8 @@ Policy failures detected
 14 policies were run and 12 failures were detected.
 
 CRITICAL: 0
-HIGH: 10 (Application level encryption missing, Insecure HTTP with Data Category, JWT leaking, Logger leaking, Cookie leaking, Third-party data category exposure)
+HIGH: 10 (Application level encryption missing, Insecure HTTP with Data Category,
+          JWT leaking, Logger leaking, Cookie leaking, Third-party data category exposure)
 MEDIUM: 2 (Insecure SMTP, Insecure FTP)
 LOW: 0
 ```
