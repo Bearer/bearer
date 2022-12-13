@@ -466,6 +466,55 @@ scan:
             stored: false
             detect_presence: true
             omit_parent: false
+        ruby_password_length:
+            disabled: false
+            type: risk
+            languages:
+                - ruby
+            param_parenting: false
+            processors: []
+            patterns:
+                - pattern: |
+                    class $ANYTHING < ApplicationRecord
+                      validates :password, length: { minimum: $LENGTH }
+                    end
+                  filters:
+                    - variable: LENGTH
+                      values: []
+                      minimum: 8
+                      Maximum: null
+                      match_violation: true
+                - pattern: |
+                    class $ANYTHING < ApplicationRecord
+                      device password_length: $MIN_LENGTH..$MAX_LENGTH
+                    end
+                  filters:
+                    - variable: MAX_LENGTH
+                      values: []
+                      minimum: 35
+                      Maximum: null
+                      match_violation: true
+                    - variable: MIN_LENGTH
+                      values: []
+                      minimum: 8
+                      Maximum: null
+                      match_violation: true
+                - pattern: |
+                    Device.setup do |config|
+                      config.password_length = $LENGTH
+                    end
+                  filters:
+                    - variable: LENGTH
+                      values: []
+                      minimum: 8
+                      Maximum: null
+                      match_violation: true
+            root_singularize: false
+            root_lowercase: false
+            metavars: {}
+            stored: false
+            detect_presence: true
+            omit_parent: false
         ssl_certificate_verification_disabled:
             disabled: false
             type: risk
@@ -1306,6 +1355,78 @@ scan:
                             "line_number": location.line_number,
                             "parent_line_number": location.parent.line_number,
                             "parent_content": location.parent.content
+                        }
+                    }
+        password_length:
+            query: |
+                policy_breach = data.bearer.password_length.policy_breach
+            id: ruby_password_length
+            name: Password length
+            description: Minimum password length violation detected. Make sure your passwords have sufficient length.
+            level: ""
+            modules:
+                - path: policies/common.rego
+                  name: bearer.common
+                  content: |
+                    package bearer.common
+
+                    import future.keywords
+
+                    sensitive_data_group_uuid := "f6a0c071-5908-4420-bac2-bba28d41223e"
+                    personal_data_group_uuid := "e1d3135b-3c0f-4b55-abce-19f27a26cbb3"
+
+                    severity_of_datatype(data_type) := "critical" if {
+                        some category in input.data_categories
+                        category.uuid == data_type.category_uuid
+
+                        some group in category.groups
+                        group.uuid == sensitive_data_group_uuid
+                    }
+
+                    severity_of_datatype(data_type) := "high" if {
+                        some category in input.data_categories
+                        category.uuid == data_type.category_uuid
+
+                        some group in category.groups
+                        group.uuid == personal_data_group_uuid
+
+                        every group_1 in category.groups {
+                            group_1.uuid != sensitive_data_group_uuid
+                        }
+                    }
+
+                    groups_for_datatype(data_type) := x if {
+                        some category in input.data_categories
+                        category.uuid == data_type.category_uuid
+
+                        x := {name | name := category.groups[_].name}
+                    }
+
+                    groups_for_datatypes(data_types) := groups if {
+                        groups := {name | name := groups_for_datatype(data_types[_])[_]}
+                    }
+                - path: policies/password_length.rego
+                  name: bearer.password_length
+                  content: |
+                    package bearer.password_length
+
+                    import data.bearer.common
+
+                    import future.keywords
+
+                    policy_breach contains item if {
+                        some data_type in input.dataflow.data_types
+
+                        some detector in input.dataflow.risks
+                        detector.detector_id == input.policy_id
+
+                        location = detector.locations[_]
+                        item := {
+                            "category_groups": data.bearer.common.groups_for_datatypes(input.dataflow.data_types),
+                            "severity": "medium",
+                            "filename": location.filename,
+                            "line_number": location.line_number,
+                            "omit_parent": true
                         }
                     }
         sending_data_in_category_to_third_party:

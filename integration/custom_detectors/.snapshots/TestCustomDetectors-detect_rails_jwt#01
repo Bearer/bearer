@@ -1,0 +1,30 @@
+data_types:
+    - name: Passwords
+      detectors:
+        - name: ruby
+          locations:
+            - filename: testdata/ruby/detect_password_length.rb
+              line_number: 4
+            - filename: testdata/ruby/detect_password_length.rb
+              line_number: 10
+risks:
+    - detector_id: ruby_password_length
+      locations:
+        - filename: testdata/ruby/detect_password_length.rb
+          line_number: 2
+          parent:
+            line_number: 2
+            content: |-
+                class User < ApplicationRecord
+                    has_secure_password
+                    validates :password, length: { minimum: 6 }
+                end
+          content: |
+            class $ANYTHING < ApplicationRecord
+              validates :password, length: { minimum: $LENGTH }
+            end
+components: []
+
+
+--
+

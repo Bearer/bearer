@@ -24,6 +24,7 @@ func TestCustomDetectors(t *testing.T) {
 		newScanTest("ruby", "ruby_file_detection", "ruby_file_detection.rb"),
 		newScanTest("ruby", "ssl_certificate_verification_disabled", "ssl_certificate_verification_disabled.rb"),
 		newScanTest("ruby", "ruby_http_detection", "ruby_http_detection.rb"),
+		newScanTest("ruby", "detect_rails_jwt", "detect_password_length.rb"),
 	}
 
 	testhelper.RunTests(t, tests)
