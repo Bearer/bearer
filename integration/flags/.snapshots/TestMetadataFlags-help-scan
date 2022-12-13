@@ -9,6 +9,15 @@ Examples:
   $ curio scan /path/to/your_project
 
 
+Report Flags
+  -f, --format string   Specify report format (json, yaml)
+      --output string   Specify the output path for the report.
+      --report string   Specify the type of report (detectors, dataflow, policies, stats). (default "policies")
+
+Policy Flags
+      --only-policy strings   Specify the comma-separated ids of the policies you would like to run. Skips all other policies.
+      --skip-policy strings   Specify the comma-separated ids of the policies you would like to skip. Runs all other policies.
+
 Scan Flags
       --context string                       Expand context of schema classification e.g., --context=health, to include data types particular to health
       --debug                                Enable debug logs
@@ -18,9 +27,8 @@ Scan Flags
       --quiet                                Suppress non-essential messages
       --skip-path strings                    Specify the comma separated files and directories to skip. Supports * syntax, e.g. --skip-path users/*.go,users/admin.sql
 
-Policy Flags
-      --only-policy strings   Specify the comma-separated ids of the policies you would like to run. Skips all other policies.
-      --skip-policy strings   Specify the comma-separated ids of the policies you would like to skip. Runs all other policies.
+General Flags
+      --config-file string   Load configuration from the specified path.
 
 Worker Flags
       --existing-worker string              Specify the URL of an existing worker.
@@ -33,14 +41,6 @@ Worker Flags
       --timeout-file-second-per-bytes int   number of file size bytes producing a second of timeout assigned to scanning a file (default 10000)
       --timeout-worker-online duration      Maximum time to wait for a worker process to come online. (default 1m0s)
       --workers int                         The number of processing workers to spawn. (default 1)
-
-Report Flags
-  -f, --format string   Specify report format (json, yaml)
-      --output string   Specify the output path for the report.
-      --report string   Specify the type of report (detectors, dataflow, policies, stats). (default "policies")
-
-General Flags
-      --config-file string   Load configuration from the specified path.
 
 
 --
