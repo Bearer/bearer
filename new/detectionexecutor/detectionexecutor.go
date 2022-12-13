@@ -21,7 +21,12 @@ type detectionExecutor struct {
 }
 
 func New(lang *language.Language) types.DetectionExecutor {
-	return &detectionExecutor{lang: lang}
+	detectors := make(map[string]detector.Detector)
+
+	return &detectionExecutor{
+		lang:      lang,
+		detectors: detectors,
+	}
 }
 
 func (executor *detectionExecutor) RegisterDetector(detector detector.Detector) error {
