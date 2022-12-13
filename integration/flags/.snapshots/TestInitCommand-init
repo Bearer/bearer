@@ -58,6 +58,9 @@ scan:
                         - signed.permanent
                         - signed.permanent.encrypted
                         - signed.encrypted.permanent
+                      minimum: null
+                      Maximum: null
+                      match_violation: false
             root_singularize: false
             root_lowercase: false
             metavars: {}
@@ -316,6 +319,9 @@ scan:
                       values:
                         - CSV
                         - File
+                      minimum: null
+                      Maximum: null
+                      match_violation: false
             root_singularize: false
             root_lowercase: false
             metavars: {}
@@ -349,6 +355,9 @@ scan:
                         - HTTPX
                         - RestClient
                         - Typhoeus
+                      minimum: null
+                      Maximum: null
+                      match_violation: false
             root_singularize: false
             root_lowercase: false
             metavars: {}
@@ -379,6 +388,9 @@ scan:
                         - HTTPX
                         - RestClient
                         - Typhoeus
+                      minimum: null
+                      Maximum: null
+                      match_violation: false
             root_singularize: false
             root_lowercase: false
             metavars: {}
@@ -412,6 +424,9 @@ scan:
                         - HTTPX
                         - RestClient
                         - Typhoeus
+                      minimum: null
+                      Maximum: null
+                      match_violation: false
             root_singularize: false
             root_lowercase: false
             metavars: {}
@@ -442,6 +457,9 @@ scan:
                         - HTTPX
                         - RestClient
                         - Typhoeus
+                      minimum: null
+                      Maximum: null
+                      match_violation: false
             root_singularize: false
             root_lowercase: false
             metavars: {}

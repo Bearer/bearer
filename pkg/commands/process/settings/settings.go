@@ -56,13 +56,16 @@ func (modules Modules) ToRegoModules() (output []rego.Module) {
 }
 
 type PatternFilter struct {
-	Variable string
-	Values   []string
+	Variable       string   `mapstructure:"variable" json:"variable" yaml:"variable"`
+	Values         []string `mapstructure:"values" json:"values" yaml:"values"`
+	Minimum        *int     `mapstructure:"minimum" json:"minimum" yaml:"minimum"`
+	Maximum        *int     `mapstructure:"Maximum" json:"Maximum" yaml:"Maximum"`
+	MatchViolation bool     `mapstructure:"match_violation" json:"match_violation" yaml:"match_violation"`
 }
 
 type RulePattern struct {
-	Pattern string
-	Filters []PatternFilter
+	Pattern string          `mapstructure:"pattern" json:"pattern" yaml:"pattern"`
+	Filters []PatternFilter `mapstructure:"filters" json:"filters" yaml:"filters"`
 }
 
 type Rule struct {
