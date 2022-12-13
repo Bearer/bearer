@@ -6,13 +6,13 @@ medium:
       category_groups:
         - PII
       parent_line_number: 8
-      parent_content: |-
+      parent_content: |
         Rails.application.configure do
           config.action_mailer.smtp_settings = {
             openssl_verify_mode: OpenSSL::SSL::VERIFY_NONE
           }
         end
-      omit_parent: true
+      omit_parent: false
     - policy_name: Insecure SMTP
       policy_description: Communication using insecure SMTP in an application processing sensitive data. Verify that SMTP settings use OpenSSL or equivalent.
       line_number: 14
@@ -20,13 +20,13 @@ medium:
       category_groups:
         - PII
       parent_line_number: 14
-      parent_content: |-
+      parent_content: |
         Rails.application.configure do
           config.action_mailer.smtp_settings = {
             openssl_verify_mode: "none"
           }
         end
-      omit_parent: true
+      omit_parent: false
 
 
 --

@@ -16,8 +16,7 @@ policy_failure contains item if {
         "severity": "medium",
         "filename": location.filename,
         "line_number": location.line_number,
-        "omit_parent": true,
         "parent_line_number": location.parent.line_number,
-        "parent_content": location.parent.content,
+        "parent_content": location.content,
     }
 }
