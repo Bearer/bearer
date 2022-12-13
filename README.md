@@ -142,7 +142,7 @@ File: /bear-publishing/db/schema.rb:22
 
 =====================================
 
-Policy failures detected
+Policy failure detected
 
 14 policies were run and 12 failures were detected.
 
