@@ -38,17 +38,16 @@ Available Commands:
 	version           Print the version
 
 Examples:
-	# Scan local directory or file
+	# Scan local directory or file and output a policy report
 	$ curio scan <path>
 
 	# Scan current directory and output the data flow to a file
 	$ curio scan --report dataflow --output <output-path> .
 
 Learn More:
-	Curio scans your source code to discover sensitive data flows 
-	and data security risks in your codebase. This includes detecting
-	PHI, PII, and PD usage in data stores, internal APIs, and external
-	APIs. You can run Curio locally or as part of your CI/CD pipeline.
+	Curio is a static code analysis tool (SAST) that scans your source code to
+	discover security risks and vulnerabilities that put your sensitive data 
+	at risk (PHI, PD, PII).
 	
 	For more examples, tutorials, and to learn more about the project 
 	visit https://curio.sh
