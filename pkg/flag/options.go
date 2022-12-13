@@ -150,26 +150,26 @@ func getDuration(flag *Flag) time.Duration {
 func (f *Flags) groups() []FlagGroup {
 	var groups []FlagGroup
 	// This order affects the usage message, so they are sorted by frequency of use.
-	if f.ScanFlagGroup != nil {
-		groups = append(groups, f.ScanFlagGroup)
-	}
-	if f.ProcessFlagGroup != nil {
-		groups = append(groups, f.ProcessFlagGroup)
+	if f.ReportFlagGroup != nil {
+		groups = append(groups, f.ReportFlagGroup)
 	}
 	if f.PolicyFlagGroup != nil {
 		groups = append(groups, f.PolicyFlagGroup)
 	}
-	if f.RepoFlagGroup != nil {
-		groups = append(groups, f.RepoFlagGroup)
+	if f.ScanFlagGroup != nil {
+		groups = append(groups, f.ScanFlagGroup)
+	}
+	if f.GeneralFlagGroup != nil {
+		groups = append(groups, f.GeneralFlagGroup)
 	}
 	if f.WorkerFlagGroup != nil {
 		groups = append(groups, f.WorkerFlagGroup)
 	}
-	if f.ReportFlagGroup != nil {
-		groups = append(groups, f.ReportFlagGroup)
+	if f.ProcessFlagGroup != nil {
+		groups = append(groups, f.ProcessFlagGroup)
 	}
-	if f.GeneralFlagGroup != nil {
-		groups = append(groups, f.GeneralFlagGroup)
+	if f.RepoFlagGroup != nil {
+		groups = append(groups, f.RepoFlagGroup)
 	}
 
 	return groups
