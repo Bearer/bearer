@@ -4,7 +4,7 @@ import data.bearer.common
 
 import future.keywords
 
-policy_breach contains item if {
+policy_failure contains item if {
     some detector in input.dataflow.risks
     detector.detector_id == input.policy_id
 

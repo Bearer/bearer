@@ -3,7 +3,7 @@ logger_leaks:
   name: "Logger leaking"
   id: "detect_ruby_logger"
   query: |
-    policy_breach = data.bearer.leakage.policy_breach
+    policy_failure = data.bearer.leakage.policy_failure
   modules:
     - path: policies/common.rego
       name: bearer.common
@@ -14,7 +14,7 @@ session_leaks:
   name: "Session leaking"
   id: "detect_rails_session"
   query: |
-    policy_breach = data.bearer.leakage.policy_breach
+    policy_failure = data.bearer.leakage.policy_failure
   modules:
     - path: policies/common.rego
       name: bearer.common
@@ -25,7 +25,7 @@ jwt_leaks:
   name: "JWT leaking"
   id: "detect_rails_jwt"
   query: |
-    policy_breach = data.bearer.leakage.policy_breach
+    policy_failure = data.bearer.leakage.policy_failure
   modules:
     - path: policies/common.rego
       name: bearer.common
@@ -36,7 +36,7 @@ cookie_leaks:
   name: "Cookie leaking"
   id: "detect_rails_cookies"
   query: |
-    policy_breach = data.bearer.leakage.policy_breach
+    policy_failure = data.bearer.leakage.policy_failure
   modules:
     - path: policies/common.rego
       name: bearer.common
@@ -47,7 +47,7 @@ ssl_certificate_verification_disabled:
   name: "SSL certificate verification disabled"
   id: "ssl_certificate_verification_disabled"
   query: |
-    policy_breach = data.bearer.ssl_certificate_verification_disabled.policy_breach
+    policy_failure = data.bearer.ssl_certificate_verification_disabled.policy_failure
   modules:
     - path: policies/common.rego
       name: bearer.common
@@ -58,7 +58,7 @@ application_level_encryption_missing:
   name: "Application level encryption missing"
   id: "application_level_encryption_missing"
   query: |
-    policy_breach = data.bearer.application_level_encryption.policy_breach
+    policy_failure = data.bearer.application_level_encryption.policy_failure
   modules:
     - path: policies/common.rego
       name: bearer.common
@@ -69,7 +69,7 @@ insecure_smtp_processing_sensitive_data:
   name: "Insecure SMTP"
   id: "detect_rails_insecure_smtp"
   query: |
-    policy_breach = data.bearer.insecure_smtp.policy_breach
+    policy_failure = data.bearer.insecure_smtp.policy_failure
   modules:
     - path: policies/common.rego
       name: bearer.common
@@ -80,7 +80,7 @@ http_get_parameters:
   name: "HTTP GET parameters"
   id: "ruby_http_get_detection"
   query: |
-    policy_breach = data.bearer.http_get_parameters.policy_breach
+    policy_failure = data.bearer.http_get_parameters.policy_failure
   modules:
     - path: policies/common.rego
       name: bearer.common
@@ -91,7 +91,7 @@ insecure_communication_processing_sensitive_data:
   name: "Insecure communication"
   id: "detect_rails_insecure_communication"
   query: |
-    policy_breach = data.bearer.insecure_communication.policy_breach
+    policy_failure = data.bearer.insecure_communication.policy_failure
   modules:
     - path: policies/common.rego
       name: bearer.common
@@ -102,7 +102,7 @@ insecure_ftp_processing_sensitive_data:
   name: "Insecure FTP"
   id: "detect_rails_insecure_ftp"
   query: |
-    policy_breach = data.bearer.insecure_ftp.policy_breach
+    policy_failure = data.bearer.insecure_ftp.policy_failure
   modules:
     - path: policies/common.rego
       name: bearer.common
@@ -113,7 +113,7 @@ insecure_ftp_with_data_category:
   name: "Insecure FTP with Data Category"
   id: insecure_ftp_with_data_category
   query: |
-    policy_breach = data.bearer.insecure_ftp_with_data_category.policy_breach
+    policy_failure = data.bearer.insecure_ftp_with_data_category.policy_failure
   modules:
     - path: policies/common.rego
       name: bearer.common
@@ -124,7 +124,7 @@ insecure_http_get:
   name: "Insecure HTTP GET"
   id: insecure_http_get
   query: |
-    policy_breach = data.bearer.insecure_http_get.policy_breach
+    policy_failure = data.bearer.insecure_http_get.policy_failure
   modules:
     - path: policies/common.rego
       name: bearer.common
@@ -135,7 +135,7 @@ insecure_http_with_data_category:
   name: "Insecure HTTP with Data Category"
   id: insecure_http_with_data_category
   query: |
-    policy_breach = data.bearer.insecure_http_with_data_category.policy_breach
+    policy_failure = data.bearer.insecure_http_with_data_category.policy_failure
   modules:
     - path: policies/common.rego
       name: bearer.common
@@ -146,7 +146,7 @@ sending_data_in_category_to_third_party:
   name: "Third-party data category exposure"
   id: "detect_ruby_third_party_data_send"
   query: |
-    policy_breach = data.bearer.third_party_data_category.policy_breach
+    policy_failure = data.bearer.third_party_data_category.policy_failure
   modules:
     - path: policies/common.rego
       name: bearer.common
