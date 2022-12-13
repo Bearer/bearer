@@ -41,6 +41,8 @@ Processing policy JWT leaking
 Finished processing policy JWT leaking
 Processing policy Logger leaking
 Finished processing policy Logger leaking
+Processing policy Password length
+Finished processing policy Password length
 Processing policy Third-party data category exposure
 Finished processing policy Third-party data category exposure
 Processing policy Session leaking
