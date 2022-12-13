@@ -15,7 +15,7 @@ For each violation, the policy report includes the affected file and, when possi
 
 ```txt
 ...
-CRITICAL: JWT leaking policy breach with Personal data
+CRITICAL: JWT leaking policy failure with Personal data
 JWT leaks detected. Avoid storing sensitive data in JWTs.
 
 File: lib/jwt.rb:6
@@ -34,9 +34,9 @@ File: lib/jwt.rb:6
 
 =====================================
 
-Policy breaches detected
+Policy failures detected
 
-14 policies were run and 6 breaches were detected.
+14 policies were run and 6 failures were detected.
 
 CRITICAL: 0
 HIGH: 4 (Insecure HTTP with Data Category, Logger leaking, JWT leaking, Cookie leaking)
