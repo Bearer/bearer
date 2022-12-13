@@ -7,6 +7,7 @@ import (
 
 	"github.com/bearer/curio/pkg/classification/db"
 	"github.com/bearer/curio/pkg/commands/process/settings"
+	"github.com/bearer/curio/pkg/util/file"
 	"github.com/bearer/curio/pkg/util/rego"
 	"github.com/fatih/color"
 	"golang.org/x/exp/maps"
@@ -203,10 +204,9 @@ func writePolicyBreachToString(reportStr *strings.Builder, policyBreach PolicyRe
 	reportStr.WriteString(color.HiBlackString(policyBreach.PolicyDescription + "\n"))
 	reportStr.WriteString("\n")
 	reportStr.WriteString(color.HiBlueString("File: " + underline(policyBreach.Filename+":"+fmt.Sprint(policyBreach.LineNumber)) + "\n"))
-	if !policyBreach.OmitParent {
-		reportStr.WriteString("\n")
-		reportStr.WriteString(highlightCodeExtract(policyBreach.LineNumber, policyBreach.ParentLineNumber, policyBreach.ParentContent))
-	}
+
+	reportStr.WriteString("\n")
+	reportStr.WriteString(highlightCodeExtract(policyBreach.Filename, policyBreach.LineNumber, policyBreach.ParentLineNumber, policyBreach.ParentContent, policyBreach.OmitParent))
 }
 
 func formatSeverity(policySeverity string) string {
@@ -217,14 +217,24 @@ func formatSeverity(policySeverity string) string {
 	return severityColorFn(strings.ToUpper(policySeverity + ": "))
 }
 
-func highlightCodeExtract(lineNumber int, extractStartLineNumber int, extract string) string {
+func highlightCodeExtract(fileName string, lineNumber int, extractStartLineNumber int, extract string, singleLine bool) string {
 	result := ""
 	targetIndex := lineNumber - extractStartLineNumber
 	for index, line := range strings.Split(extract, "\n") {
+		if index == 0 {
+			var err error
+			line, err = file.ReadFileSingleLine(fileName, extractStartLineNumber)
+			if err != nil {
+				break
+			}
+		}
 		if index == targetIndex {
 			result += color.MagentaString(" " + fmt.Sprint(extractStartLineNumber+index) + " ")
 			result += color.MagentaString(line) + "\n"
-		} else {
+			if singleLine {
+				break
+			}
+		} else if !singleLine {
 			result += " " + fmt.Sprint(extractStartLineNumber+index) + " "
 			result += line + "\n"
 		}
