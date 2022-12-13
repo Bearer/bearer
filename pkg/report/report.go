@@ -23,7 +23,6 @@ type Report interface {
 	AddFramework(detectorType detectors.Type, frameworkType frameworks.Type, data interface{}, source source.Source)
 	AddDependency(detectorType detectors.Type, dependency dependencies.Dependency, source source.Source)
 	AddSecretLeak(secret secret.Secret, source source.Source)
-	AddFillerLine()
 	AddError(filePath string, err error)
 }
 
