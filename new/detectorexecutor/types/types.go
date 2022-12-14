@@ -1,4 +1,4 @@
-package detector
+package types
 
 import (
 	detectiontypes "github.com/bearer/curio/new/detection/types"
@@ -6,8 +6,10 @@ import (
 	treeevaluatortypes "github.com/bearer/curio/new/treeevaluator/types"
 )
 
-type Detector interface {
-	Name() string
-	DetectAt(node *language.Node, evaluator treeevaluatortypes.Evaluator) (*detectiontypes.Detection, error)
-	Close()
+type Executor interface {
+	DetectAt(
+		node *language.Node,
+		detectorType string,
+		evaluator treeevaluatortypes.Evaluator,
+	) (*detectiontypes.Detection, error)
 }

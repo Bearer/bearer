@@ -4,10 +4,10 @@ import (
 	"fmt"
 
 	detectiontypes "github.com/bearer/curio/new/detection/types"
-	initiatortypes "github.com/bearer/curio/new/detectioninitiator/types"
 	"github.com/bearer/curio/new/detector"
 	"github.com/bearer/curio/new/language"
-	"github.com/bearer/curio/new/parser"
+	languagetypes "github.com/bearer/curio/new/language/types"
+	treeevaluatortypes "github.com/bearer/curio/new/treeevaluator/types"
 )
 
 type Data struct {
@@ -15,10 +15,10 @@ type Data struct {
 }
 
 type objectsDetector struct {
-	pairQuery *parser.Query
+	pairQuery *language.Query
 }
 
-func New(lang *language.Language) (detector.Detector, error) {
+func New(lang languagetypes.Language) (detector.Detector, error) {
 	pairQuery, err := lang.CompileQuery(`(hash (pair) @pair) @root`)
 	if err != nil {
 		return nil, fmt.Errorf("error compiling pair query: %s", err)
@@ -32,8 +32,8 @@ func (detector *objectsDetector) Name() string {
 }
 
 func (detector *objectsDetector) DetectAt(
-	node *parser.Node,
-	initiator initiatortypes.TreeDetectionInitiator,
+	node *language.Node,
+	evaluator treeevaluatortypes.Evaluator,
 ) (*detectiontypes.Detection, error) {
 	results, err := detector.pairQuery.MatchAt(node)
 	if err != nil {
@@ -46,7 +46,7 @@ func (detector *objectsDetector) DetectAt(
 
 	var properties []detectiontypes.Detection
 	for _, result := range results {
-		property, err := initiator.NodeDetection(result["pair"], "properties")
+		property, err := evaluator.NodeDetection(result["pair"], "properties")
 		if err != nil {
 			return nil, err
 		}
@@ -60,4 +60,8 @@ func (detector *objectsDetector) DetectAt(
 		MatchNode: node,
 		Data:      Data{Properties: properties},
 	}, nil
+}
+
+func (detector *objectsDetector) Close() {
+	detector.pairQuery.Close()
 }

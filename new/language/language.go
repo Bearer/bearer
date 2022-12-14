@@ -1,42 +1,39 @@
 package language
 
 import (
-	"fmt"
+	"context"
 
 	sitter "github.com/smacker/go-tree-sitter"
-	"github.com/smacker/go-tree-sitter/ruby"
-
-	"github.com/bearer/curio/new/parser"
 )
 
-type Language struct {
-	sitterLanguage *sitter.Language
+type Base struct {
+	SitterLanguage *sitter.Language
 }
 
-func Get(name string) (*Language, error) {
-	sitterLanguage, err := getSitterLanguage(name)
+func (lang *Base) Parse(input string) (*Tree, error) {
+	inputBytes := []byte(input)
+
+	parser := sitter.NewParser()
+	defer parser.Close()
+
+	parser.SetLanguage(lang.SitterLanguage)
+
+	sitterTree, err := parser.ParseCtx(context.Background(), nil, inputBytes)
 	if err != nil {
 		return nil, err
 	}
 
-	return &Language{
-		sitterLanguage: sitterLanguage,
+	return &Tree{
+		input:      inputBytes,
+		sitterTree: sitterTree,
 	}, nil
 }
 
-func getSitterLanguage(name string) (*sitter.Language, error) {
-	switch name {
-	case "ruby":
-		return ruby.GetLanguage(), nil
-	default:
-		return nil, fmt.Errorf("unsupported language '%s'", name)
+func (lang *Base) CompileQuery(input string) (*Query, error) {
+	sitterQuery, err := sitter.NewQuery([]byte(input), lang.SitterLanguage)
+	if err != nil {
+		return nil, err
 	}
-}
 
-func (language *Language) Parse(input string) (*parser.Tree, error) {
-	return parser.Parse(language.sitterLanguage, input)
-}
-
-func (language *Language) CompileQuery(input string) (*parser.Query, error) {
-	return parser.CompileQuery(language.sitterLanguage, input)
+	return &Query{sitterQuery: sitterQuery}, nil
 }
