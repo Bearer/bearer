@@ -57,7 +57,7 @@ scan:
                         - signed.permanent.encrypted
                         - signed.encrypted.permanent
                       minimum: null
-                      Maximum: null
+                      maximum: null
                       match_violation: false
             root_singularize: false
             root_lowercase: false
@@ -244,14 +244,14 @@ scan:
                     - variable: LIBRARY
                       values: []
                       minimum: null
-                      Maximum: null
+                      maximum: null
                       match_violation: false
                     - variable: ""
                       values:
                         - DSA
                         - RSA
                       minimum: null
-                      Maximum: null
+                      maximum: null
                       match_violation: false
             root_singularize: false
             root_lowercase: false
@@ -298,7 +298,7 @@ scan:
                         - encrypt!
                         - decrypt
                       minimum: null
-                      Maximum: null
+                      maximum: null
                       match_violation: false
             root_singularize: false
             root_lowercase: false
@@ -386,7 +386,7 @@ scan:
                         - encrypt_string
                         - encrypt_block
                       minimum: null
-                      Maximum: null
+                      maximum: null
                       match_violation: false
             root_singularize: false
             root_lowercase: false
@@ -419,7 +419,7 @@ scan:
                         - CSV
                         - File
                       minimum: null
-                      Maximum: null
+                      maximum: null
                       match_violation: false
             root_singularize: false
             root_lowercase: false
@@ -454,7 +454,7 @@ scan:
                         - RestClient
                         - Typhoeus
                       minimum: null
-                      Maximum: null
+                      maximum: null
                       match_violation: false
             root_singularize: false
             root_lowercase: false
@@ -486,7 +486,7 @@ scan:
                         - RestClient
                         - Typhoeus
                       minimum: null
-                      Maximum: null
+                      maximum: null
                       match_violation: false
             root_singularize: false
             root_lowercase: false
@@ -521,7 +521,7 @@ scan:
                         - RestClient
                         - Typhoeus
                       minimum: null
-                      Maximum: null
+                      maximum: null
                       match_violation: false
             root_singularize: false
             root_lowercase: false
@@ -553,7 +553,7 @@ scan:
                         - RestClient
                         - Typhoeus
                       minimum: null
-                      Maximum: null
+                      maximum: null
                       match_violation: false
             root_singularize: false
             root_lowercase: false
@@ -577,7 +577,7 @@ scan:
                         - to_pem
                         - to_s
                       minimum: null
-                      Maximum: null
+                      maximum: null
                       match_violation: false
             root_singularize: false
             root_lowercase: false
@@ -602,7 +602,7 @@ scan:
                         - public_decrypt
                         - public_encrypt
                       minimum: null
-                      Maximum: null
+                      maximum: null
                       match_violation: false
             root_singularize: false
             root_lowercase: false
@@ -625,7 +625,7 @@ scan:
                     - variable: LENGTH
                       values: []
                       minimum: 8
-                      Maximum: null
+                      maximum: null
                       match_violation: true
                 - pattern: |
                     class $ANYTHING < ApplicationRecord
@@ -635,12 +635,12 @@ scan:
                     - variable: MAX_LENGTH
                       values: []
                       minimum: 35
-                      Maximum: null
+                      maximum: null
                       match_violation: true
                     - variable: MIN_LENGTH
                       values: []
                       minimum: 8
-                      Maximum: null
+                      maximum: null
                       match_violation: true
                 - pattern: |
                     Device.setup do |config|
@@ -650,7 +650,7 @@ scan:
                     - variable: LENGTH
                       values: []
                       minimum: 8
-                      Maximum: null
+                      maximum: null
                       match_violation: true
             root_singularize: false
             root_lowercase: false
