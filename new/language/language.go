@@ -8,13 +8,13 @@ import (
 
 type Base struct {
 	sitterLanguage *sitter.Language
-	unifiedNodes   map[NodeID][]*Node
+	analyzeFlow    func(rootNode *Node)
 }
 
-func New(sitterLanguage *sitter.Language) Base {
+func New(sitterLanguage *sitter.Language, analyzeFlow func(rootNode *Node)) Base {
 	return Base{
 		sitterLanguage: sitterLanguage,
-		unifiedNodes:   make(map[NodeID][]*Node),
+		analyzeFlow:    analyzeFlow,
 	}
 }
 
@@ -31,10 +31,15 @@ func (lang *Base) Parse(input string) (*Tree, error) {
 		return nil, err
 	}
 
-	return &Tree{
-		input:      inputBytes,
-		sitterTree: sitterTree,
-	}, nil
+	tree := &Tree{
+		input:        inputBytes,
+		sitterTree:   sitterTree,
+		unifiedNodes: make(map[NodeID][]*Node),
+	}
+
+	lang.analyzeFlow(tree.RootNode())
+
+	return tree, nil
 }
 
 func (lang *Base) CompileQuery(input string) (*Query, error) {
@@ -44,25 +49,4 @@ func (lang *Base) CompileQuery(input string) (*Query, error) {
 	}
 
 	return &Query{sitterQuery: sitterQuery}, nil
-}
-
-func (lang *Base) UnifyNodes(laterNode *Node, earlierNode *Node) {
-	if laterNode.Equal(earlierNode) {
-		return
-	}
-
-	existingUnifiedNodes := lang.unifiedNodes[laterNode.ID()]
-
-	for _, other := range existingUnifiedNodes {
-		if other.Equal(earlierNode) {
-			// already unified
-			return
-		}
-	}
-
-	lang.unifiedNodes[laterNode.ID()] = append(existingUnifiedNodes, earlierNode)
-}
-
-func (lang *Base) UnifiedNodesFor(node *Node) []*Node {
-	return lang.unifiedNodes[node.ID()]
 }
