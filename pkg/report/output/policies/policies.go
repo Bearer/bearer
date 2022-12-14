@@ -43,6 +43,7 @@ type PolicyOutput struct {
 
 type PolicyResult struct {
 	PolicyName        string   `json:"policy_name" yaml:"policy_name"`
+	PolicyDisplayId   string   `json:"policy_display_id" yaml:"policy_display_id"`
 	PolicyDescription string   `json:"policy_description" yaml:"policy_description"`
 	LineNumber        int      `json:"line_number,omitempty" yaml:"line_number,omitempty"`
 	Filename          string   `json:"filename,omitempty" yaml:"filename,omitempty"`
@@ -100,6 +101,7 @@ func GetOutput(dataflow *dataflow.DataFlow, config settings.Config) (map[string]
 				policyResult := PolicyResult{
 					PolicyName:        policy.Name,
 					PolicyDescription: policy.Description,
+					PolicyDisplayId:   policy.DisplayId,
 					Filename:          policyOutput.Filename,
 					LineNumber:        policyOutput.LineNumber,
 					CategoryGroups:    policyOutput.CategoryGroups,
@@ -142,7 +144,7 @@ func BuildReportString(policyResults map[string][]PolicyResult, policies map[str
 		settings.LevelLow,
 	} {
 		for _, policyFailure := range policyResults[policyLevel] {
-			policyFailures[policyLevel][policyFailure.PolicyName] = true
+			policyFailures[policyLevel][policyFailure.PolicyDisplayId] = true
 			writePolicyFailureToString(reportStr, policyFailure, policyLevel)
 		}
 	}
@@ -157,10 +159,14 @@ func BuildReportString(policyResults map[string][]PolicyResult, policies map[str
 func writePolicyListToString(reportStr *strings.Builder, policies map[string]*settings.Policy) {
 	// list policies that were run
 	reportStr.WriteString("\nPolicy list: \n\n")
+	policyList := []string{}
 	for key := range policies {
 		policy := policies[key]
-		reportStr.WriteString(color.HiBlackString("- " + policy.Name + "\n"))
+		policyList = append(policyList, color.HiBlackString("- "+policy.DisplayId+" "+policy.Name+"\n"))
 	}
+
+	sort.Strings(policyList)
+	reportStr.WriteString(strings.Join(policyList, ""))
 }
 
 func writeSummaryToString(
@@ -193,22 +199,30 @@ func writeSummaryToString(
 	// critical count
 	reportStr.WriteString(formatSeverity(settings.LevelCritical) + fmt.Sprint(criticalCount))
 	if len(policyFailures[settings.LevelCritical]) > 0 {
-		reportStr.WriteString(" (" + strings.Join(maps.Keys(policyFailures[settings.LevelCritical]), ", ") + ")")
+		policyIds := maps.Keys(policyFailures[settings.LevelCritical])
+		sort.Strings(policyIds)
+		reportStr.WriteString(" (" + strings.Join(policyIds, ", ") + ")")
 	}
 	// high count
 	reportStr.WriteString("\n" + formatSeverity(settings.LevelHigh) + fmt.Sprint(highCount))
 	if len(policyFailures[settings.LevelHigh]) > 0 {
-		reportStr.WriteString(" (" + strings.Join(maps.Keys(policyFailures[settings.LevelHigh]), ", ") + ")")
+		policyIds := maps.Keys(policyFailures[settings.LevelHigh])
+		sort.Strings(policyIds)
+		reportStr.WriteString(" (" + strings.Join(policyIds, ", ") + ")")
 	}
 	// medium count
 	reportStr.WriteString("\n" + formatSeverity(settings.LevelMedium) + fmt.Sprint(mediumCount))
 	if len(policyFailures[settings.LevelMedium]) > 0 {
-		reportStr.WriteString(" (" + strings.Join(maps.Keys(policyFailures[settings.LevelMedium]), ", ") + ")")
+		policyIds := maps.Keys(policyFailures[settings.LevelMedium])
+		sort.Strings(policyIds)
+		reportStr.WriteString(" (" + strings.Join(policyIds, ", ") + ")")
 	}
 	// low count
 	reportStr.WriteString("\n" + formatSeverity(settings.LevelLow) + fmt.Sprint(lowCount))
 	if len(policyFailures[settings.LevelLow]) > 0 {
-		reportStr.WriteString(" (" + strings.Join(maps.Keys(policyFailures[settings.LevelLow]), ", ") + ")")
+		policyIds := maps.Keys(policyFailures[settings.LevelLow])
+		sort.Strings(policyIds)
+		reportStr.WriteString(" (" + strings.Join(policyIds, ", ") + ")")
 	}
 
 	reportStr.WriteString("\n\n")
