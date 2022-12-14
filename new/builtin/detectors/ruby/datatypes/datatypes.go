@@ -45,8 +45,9 @@ func (detector *datatypesDetector) DetectAt(
 			propertyData := property.Data.(properties.Data)
 			if propertyData.Name == "first_name" {
 				result = append(result, &detectiontypes.Detection{
-					MatchNode: property.MatchNode,
-					Data:      Data{Name: "Person Name"},
+					ContextNode: node,
+					MatchNode:   property.MatchNode,
+					Data:        Data{Name: "Person Name"},
 				})
 			}
 		}
