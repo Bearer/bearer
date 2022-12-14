@@ -33,6 +33,7 @@ type Modules []*PolicyModule
 type Policy struct {
 	Query       string      `mapstructure:"query" json:"query" yaml:"query"`
 	Id          string      `mapstructure:"id" json:"id" yaml:"id"`
+	DisplayId   string      `mapstructure:"display_id" json:"display_id" yaml:"display_id"`
 	Name        string      `mapstructure:"name" json:"name" yaml:"name"`
 	Description string      `mapstructure:"description" json:"description" yaml:"description"`
 	Level       PolicyLevel `mapstructure:"level" json:"level" yaml:"level"`

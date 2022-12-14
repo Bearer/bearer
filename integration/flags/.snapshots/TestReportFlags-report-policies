@@ -1,5 +1,6 @@
 high:
-    - policy_name: Logger leaking
+    - policy_name: Do not send sensitive data to loggers.
+      policy_display_id: CR-001
       policy_description: Logger leaks detected. Avoid passing sensitive data to loggers.
       line_number: 1
       filename: testdata/policies/users.rb
