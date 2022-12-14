@@ -13,7 +13,7 @@ policy_failure contains item if {
     detector.detector_id in ["ruby_openssl_pkey_rsa_method_call", "ruby_openssl_pkey_method_call"]
 
     data_type = detector.data_types[_]
-    data_type.uuid != password_uuid
+    data_type.uuid != data.bearer.encryption_common.password_uuid
 
     location = data_type.locations[_]
     location.filename in data.bearer.encryption_common.openssl_pkey_rsa_files
@@ -34,7 +34,7 @@ policy_failure contains item if {
     detector.detector_id in ["ruby_openssl_pkey_dsa_method_call", "ruby_openssl_pkey_method_call"]
 
     data_type = detector.data_types[_]
-    data_type.uuid != password_uuid
+    data_type.uuid != data.bearer.encryption_common.password_uuid
 
     location = data_type.locations[_]
     location.filename in data.bearer.encryption_common.openssl_pkey_dsa_files
@@ -55,7 +55,7 @@ policy_failure contains item if {
     detector.detector_id == "ruby_blowfish_method_call"
 
     data_type = detector.data_types[_]
-    data_type.uuid != password_uuid
+    data_type.uuid != data.bearer.encryption_common.password_uuid
 
     location = data_type.locations[_]
     location.filename in data.bearer.encryption_common.blowfish_files
@@ -76,7 +76,7 @@ policy_failure contains item if {
     detector.detector_id == "encrypt_method_call"
 
     data_type = detector.data_types[_]
-    data_type.uuid != password_uuid
+    data_type.uuid != data.bearer.encryption_common.password_uuid
 
     location = data_type.locations[_]
     location.filename in data.bearer.encryption_common.rc4_files
@@ -121,7 +121,7 @@ policy_failure contains item if {
 
     # NOT password data type
     data_type = detector.data_types[_]
-    data_type.uuid != password_uuid
+    data_type.uuid != data.bearer.encryption_common.password_uuid
 
     location = data_type.locations[_]
 
