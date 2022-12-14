@@ -163,7 +163,7 @@ func TestDataflowDataType(t *testing.T) {
 
 			detections, err := detectors.GetOutput(globaltypes.Report{
 				Path: file.Name(),
-			})
+			}, test.Config)
 			if err != nil {
 				t.Fatalf("failed to get detectors output %s", err)
 				return

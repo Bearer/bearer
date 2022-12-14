@@ -5,7 +5,7 @@ import (
 	"github.com/schollz/progressbar/v3"
 )
 
-func GetProgressBar(filesLength int, config settings.Config) *progressbar.ProgressBar {
+func GetProgressBar(filesLength int, config settings.Config, display_type string) *progressbar.ProgressBar {
 	hideProgress := config.Scan.Quiet || config.Scan.Debug
 	return progressbar.NewOptions(filesLength,
 		progressbar.OptionSetVisibility(!hideProgress),
@@ -18,7 +18,7 @@ func GetProgressBar(filesLength int, config settings.Config) *progressbar.Progre
 			errorWriter.Write([]byte("\n")) //nolint:all,errcheck
 		}),
 		progressbar.OptionShowIts(),
-		progressbar.OptionSetItsString("files"),
+		progressbar.OptionSetItsString(display_type),
 		progressbar.OptionSetDescription(" └"),
 		progressbar.OptionSetTheme(progressbar.Theme{
 			Saucer:        "=",
