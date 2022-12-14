@@ -1517,6 +1517,7 @@ scan:
             query: |
                 policy_breach = data.bearer.password_length.policy_breach
             id: ruby_password_length
+            display_id: ""
             name: Password length
             description: Minimum password length violation detected. Make sure your passwords have sufficient length.
             level: ""
