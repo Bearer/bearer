@@ -1,5 +1,5 @@
 critical:
-    - policy_name: Insecure FTP with Data Category
+    - policy_name: Only communicate with secure FTP connections in applications processing sensitive data.
       policy_display_id: CR-008
       policy_description: Communicating Data Category with an insecure FTP server. Only connect to FTP securely.
       line_number: 27
@@ -22,7 +22,7 @@ critical:
         end
       omit_parent: false
 medium:
-    - policy_name: Insecure FTP
+    - policy_name: Only send sensitive data to FTP connections securely.
       policy_display_id: CR-009
       policy_description: Communication with an insecure FTP server in an application processing sensitive data. Only connect to FTP securely.
       line_number: 10
@@ -33,7 +33,7 @@ medium:
       parent_line_number: 10
       parent_content: Net::FTP.new("ftp.ruby-lang.org")
       omit_parent: false
-    - policy_name: Insecure FTP
+    - policy_name: Only send sensitive data to FTP connections securely.
       policy_display_id: CR-009
       policy_description: Communication with an insecure FTP server in an application processing sensitive data. Only connect to FTP securely.
       line_number: 17
@@ -50,7 +50,7 @@ medium:
           ftp.getbinaryfile('nif.rb-0.91.gz', 'nif.gz', 1024)
         end
       omit_parent: false
-    - policy_name: Insecure FTP
+    - policy_name: Only send sensitive data to FTP connections securely.
       policy_display_id: CR-009
       policy_description: Communication with an insecure FTP server in an application processing sensitive data. Only connect to FTP securely.
       line_number: 24

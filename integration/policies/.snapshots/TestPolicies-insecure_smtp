@@ -1,5 +1,5 @@
 medium:
-    - policy_name: Insecure SMTP
+    - policy_name: Only communicate with secure SMTP connections in applications processing sensitive data.
       policy_display_id: CR-010
       policy_description: Communication using insecure SMTP in an application processing sensitive data. Verify that SMTP settings use OpenSSL or equivalent.
       line_number: 8
@@ -14,7 +14,7 @@ medium:
           }
         end
       omit_parent: false
-    - policy_name: Insecure SMTP
+    - policy_name: Only communicate with secure SMTP connections in applications processing sensitive data.
       policy_display_id: CR-010
       policy_description: Communication using insecure SMTP in an application processing sensitive data. Verify that SMTP settings use OpenSSL or equivalent.
       line_number: 14
