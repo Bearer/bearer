@@ -1517,8 +1517,8 @@ scan:
             query: |
                 policy_breach = data.bearer.password_length.policy_breach
             id: ruby_password_length
-            display_id: ""
-            name: Password length
+            display_id: CR-019
+            name: Enforce stronger password requirements in applications processing sensitive data.
             description: Minimum password length violation detected. Make sure your passwords have sufficient length.
             level: ""
             modules:
@@ -1808,6 +1808,255 @@ scan:
                         "parent_content": location.parent.content
                       }
                     }
+        weak_encryption_library:
+            query: |
+                policy_failure = data.bearer.weak_encryption_library.policy_failure
+            id: detect_ruby_weak_encryption_library
+            display_id: CR-024
+            name: Avoid weak encryption library.
+            description: Weak encryption or hashing library detected. Consider using a different library.
+            level: ""
+            modules:
+                - path: policies/common.rego
+                  name: bearer.common
+                  content: |
+                    package bearer.common
+
+                    import future.keywords
+
+                    sensitive_data_group_uuid := "f6a0c071-5908-4420-bac2-bba28d41223e"
+                    personal_data_group_uuid := "e1d3135b-3c0f-4b55-abce-19f27a26cbb3"
+
+                    severity_of_datatype(data_type) := "critical" if {
+                        some category in input.data_categories
+                        category.uuid == data_type.category_uuid
+
+                        some group in category.groups
+                        group.uuid == sensitive_data_group_uuid
+                    }
+
+                    severity_of_datatype(data_type) := "high" if {
+                        some category in input.data_categories
+                        category.uuid == data_type.category_uuid
+
+                        some group in category.groups
+                        group.uuid == personal_data_group_uuid
+
+                        every group_1 in category.groups {
+                            group_1.uuid != sensitive_data_group_uuid
+                        }
+                    }
+
+                    groups_for_datatype(data_type) := x if {
+                        some category in input.data_categories
+                        category.uuid == data_type.category_uuid
+
+                        x := {name | name := category.groups[_].name}
+                    }
+
+                    groups_for_datatypes(data_types) := groups if {
+                        groups := {name | name := groups_for_datatype(data_types[_])[_]}
+                    }
+                - path: policies/encryption_common.rego
+                  name: bearer.encryption_common
+                  content: |-
+                    package bearer.encryption_common
+
+                    import future.keywords
+
+                    password_uuid := "02bb0d3a-2c8c-4842-be1c-c057f0dccd63"
+
+                    files_with_password_encryption_calls contains item if {
+                      some detector in input.dataflow.risks
+                      detector.detector_id in [
+                        "ruby_openssl_pkey_rsa_method_call",
+                        "ruby_openssl_pkey_method_call",
+                        "ruby_blowfish_method_call",
+                        "encrypt_method_call"
+                      ]
+
+                      data_type = detector.data_types[_]
+                      data_type.uuid == password_uuid
+
+                      location = detector.locations[_]
+
+                      item := location.filename
+                    }
+
+                    rc4_files contains item if {
+                      some detector in input.dataflow.risks
+                      detector.detector_id == "initialize_ruby_rc4_encryption"
+
+                      location = detector.locations[_]
+
+                      item := location.filename
+                    }
+
+                    blowfish_files contains item if {
+                      some detector in input.dataflow.risks
+                      detector.detector_id == "initialize_ruby_blowfish_encryption"
+
+                      location = detector.locations[_]
+
+                      item := location.filename
+                    }
+
+                    openssl_pkey_rsa_files contains item if {
+                      some detector in input.dataflow.risks
+                      detector.detector_id == "initialize_ruby_openssl_pkey_rsa_encryption"
+
+                      location = detector.locations[_]
+
+                      item := location.filename
+                    }
+
+                    openssl_pkey_dsa_files contains item if {
+                      some detector in input.dataflow.risks
+                      detector.detector_id == "initialize_ruby_openssl_pkey_dsa_encryption"
+
+                      location = detector.locations[_]
+
+                      item := location.filename
+                    }
+                - path: policies/weak_encryption_library.rego
+                  name: bearer.weak_encryption_library
+                  content: |
+                    package bearer.weak_encryption_library
+
+                    import data.bearer.common
+                    import data.bearer.encryption_common
+
+                    import future.keywords
+
+                    password_uuid := "02bb0d3a-2c8c-4842-be1c-c057f0dccd63"
+
+                    # openssl pkey rsa encryption
+                    policy_failure contains item if {
+                        some detector in input.dataflow.risks
+                        detector.detector_id in ["ruby_openssl_pkey_rsa_method_call", "ruby_openssl_pkey_method_call"]
+
+                        data_type = detector.data_types[_]
+                        data_type.uuid != data.bearer.encryption_common.password_uuid
+
+                        location = data_type.locations[_]
+                        location.filename in data.bearer.encryption_common.openssl_pkey_rsa_files
+
+                        item := {
+                            "category_groups": data.bearer.common.groups_for_datatype(data_type),
+                            "severity": "low",
+                            "filename": location.filename,
+                            "line_number": location.line_number,
+                            "parent_line_number": location.parent.line_number,
+                            "parent_content": location.parent.content
+                        }
+                    }
+
+                    # openssl pkey dsa encryption
+                    policy_failure contains item if {
+                        some detector in input.dataflow.risks
+                        detector.detector_id in ["ruby_openssl_pkey_dsa_method_call", "ruby_openssl_pkey_method_call"]
+
+                        data_type = detector.data_types[_]
+                        data_type.uuid != data.bearer.encryption_common.password_uuid
+
+                        location = data_type.locations[_]
+                        location.filename in data.bearer.encryption_common.openssl_pkey_dsa_files
+
+                        item := {
+                            "category_groups": data.bearer.common.groups_for_datatype(data_type),
+                            "severity": "low",
+                            "filename": location.filename,
+                            "line_number": location.line_number,
+                            "parent_line_number": location.parent.line_number,
+                            "parent_content": location.parent.content
+                        }
+                    }
+
+                    # blowfish encryption
+                    policy_failure contains item if {
+                        some detector in input.dataflow.risks
+                        detector.detector_id == "ruby_blowfish_method_call"
+
+                        data_type = detector.data_types[_]
+                        data_type.uuid != data.bearer.encryption_common.password_uuid
+
+                        location = data_type.locations[_]
+                        location.filename in data.bearer.encryption_common.blowfish_files
+
+                        item := {
+                            "category_groups": data.bearer.common.groups_for_datatype(data_type),
+                            "severity": "low",
+                            "filename": location.filename,
+                            "line_number": location.line_number,
+                            "parent_line_number": location.parent.line_number,
+                            "parent_content": location.parent.content
+                        }
+                    }
+
+                    # rc4 encryption
+                    policy_failure contains item if {
+                        some detector in input.dataflow.risks
+                        detector.detector_id == "encrypt_method_call"
+
+                        data_type = detector.data_types[_]
+                        data_type.uuid != data.bearer.encryption_common.password_uuid
+
+                        location = data_type.locations[_]
+                        location.filename in data.bearer.encryption_common.rc4_files
+
+                        item := {
+                            "category_groups": data.bearer.common.groups_for_datatype(data_type),
+                            "severity": "low",
+                            "filename": location.filename,
+                            "line_number": location.line_number,
+                            "parent_line_number": location.parent.line_number,
+                            "parent_content": location.parent.content
+                        }
+                    }
+
+                    policy_failure contains item if {
+                        some detector in input.dataflow.risks
+                        detector.detector_id in [
+                          "initialize_ruby_rc4_encryption",
+                          "initialize_ruby_blowfish_encryption",
+                          "initialize_ruby_openssl_pkey_rsa_encryption",
+                          "initialize_ruby_openssl_pkey_dsa_encryption",
+                        ]
+
+                        data_type = detector.data_types[_]
+                        location = data_type.locations[_]
+                        # NOT in a file with an encryption method call
+                        not location in data.bearer.encryption_common.files_with_password_encryption_calls
+
+                        item := {
+                            "category_groups": data.bearer.common.groups_for_datatype(data_type),
+                            "severity": "low",
+                            "filename": location.filename,
+                            "line_number": location.line_number,
+                            "parent_line_number": location.parent.line_number,
+                            "parent_content": location.parent.content
+                        }
+                    }
+
+                    policy_failure contains item if {
+                        some detector in input.dataflow.risks
+                        detector.detector_id == "detect_ruby_weak_encryption"
+
+                        # NOT password data type
+                        data_type = detector.data_types[_]
+                        data_type.uuid != data.bearer.encryption_common.password_uuid
+
+                        location = data_type.locations[_]
+
+                        item := {
+                            "category_groups": data.bearer.common.groups_for_datatype(data_type),
+                            "severity": "low",
+                            "filename": location.filename,
+                            "line_number": location.line_number,
+                            "parent_line_number": location.parent.line_number,
+                            "parent_content": location.parent.content
+                        }
+                    }
         weak_password_encryption:
             query: |
                 policy_failure = data.bearer.weak_password_encryption.policy_failure
@@ -1864,6 +2113,25 @@ scan:
 
                     import future.keywords
 
+                    password_uuid := "02bb0d3a-2c8c-4842-be1c-c057f0dccd63"
+
+                    files_with_password_encryption_calls contains item if {
+                      some detector in input.dataflow.risks
+                      detector.detector_id in [
+                        "ruby_openssl_pkey_rsa_method_call",
+                        "ruby_openssl_pkey_method_call",
+                        "ruby_blowfish_method_call",
+                        "encrypt_method_call"
+                      ]
+
+                      data_type = detector.data_types[_]
+                      data_type.uuid == password_uuid
+
+                      location = detector.locations[_]
+
+                      item := location.filename
+                    }
+
                     rc4_files contains item if {
                       some detector in input.dataflow.risks
                       detector.detector_id == "initialize_ruby_rc4_encryption"
@@ -1909,15 +2177,13 @@ scan:
 
                     import future.keywords
 
-                    password_uuid := "02bb0d3a-2c8c-4842-be1c-c057f0dccd63"
-
                     # openssl pkey rsa encryption
                     policy_failure contains item if {
                         some detector in input.dataflow.risks
                         detector.detector_id in ["ruby_openssl_pkey_rsa_method_call", "ruby_openssl_pkey_method_call"]
 
                         data_type = detector.data_types[_]
-                        data_type.uuid == password_uuid
+                        data_type.uuid == data.bearer.encryption_common.password_uuid
 
                         location = data_type.locations[_]
                         location.filename in data.bearer.encryption_common.openssl_pkey_rsa_files
@@ -1938,7 +2204,7 @@ scan:
                         detector.detector_id in ["ruby_openssl_pkey_dsa_method_call", "ruby_openssl_pkey_method_call"]
 
                         data_type = detector.data_types[_]
-                        data_type.uuid == password_uuid
+                        data_type.uuid == data.bearer.encryption_common.password_uuid
 
                         location = data_type.locations[_]
                         location.filename in data.bearer.encryption_common.openssl_pkey_dsa_files
@@ -1959,7 +2225,7 @@ scan:
                         detector.detector_id == "ruby_blowfish_method_call"
 
                         data_type = detector.data_types[_]
-                        data_type.uuid == password_uuid
+                        data_type.uuid == data.bearer.encryption_common.password_uuid
 
                         location = data_type.locations[_]
                         location.filename in data.bearer.encryption_common.blowfish_files
@@ -1980,7 +2246,7 @@ scan:
                         detector.detector_id == "encrypt_method_call"
 
                         data_type = detector.data_types[_]
-                        data_type.uuid == password_uuid
+                        data_type.uuid == data.bearer.encryption_common.password_uuid
 
                         location = data_type.locations[_]
                         location.filename in data.bearer.encryption_common.rc4_files
@@ -2000,7 +2266,7 @@ scan:
                         detector.detector_id == input.policy_id
 
                         data_type = detector.data_types[_]
-                        data_type.uuid == password_uuid
+                        data_type.uuid == data.bearer.encryption_common.password_uuid
 
                         location = data_type.locations[_]
                         item := {

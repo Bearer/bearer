@@ -26,6 +26,7 @@ func TestCustomDetectors(t *testing.T) {
 		newScanTest("ruby", "ruby_http_detection", "ruby_http_detection.rb"),
 		newScanTest("ruby", "ruby_weak_password_encryption", "weak_password_encryption.rb"),
 		newScanTest("ruby", "detect_password_length", "detect_password_length.rb"),
+		newScanTest("ruby", "ruby_weak_encryption_library", "weak_encryption_library.rb"),
 	}
 
 	testhelper.RunTests(t, tests)
