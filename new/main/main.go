@@ -4,12 +4,14 @@ import (
 	"fmt"
 	"log"
 
+	"gopkg.in/yaml.v2"
+
 	"github.com/bearer/curio/new/builtin/detectors/ruby/objects"
 	"github.com/bearer/curio/new/builtin/detectors/ruby/properties"
-	"github.com/bearer/curio/new/detectionexecutor"
-	"github.com/bearer/curio/new/detectioninitiator"
-	"github.com/bearer/curio/new/language"
-	"gopkg.in/yaml.v2"
+	"github.com/bearer/curio/new/detector"
+	"github.com/bearer/curio/new/detectorexecutor"
+	getlanguage "github.com/bearer/curio/new/language/get"
+	"github.com/bearer/curio/new/treeevaluator"
 )
 
 func main() {
@@ -19,30 +21,27 @@ func main() {
 }
 
 func run() error {
-	lang, err := language.Get("ruby")
+	lang, err := getlanguage.Get("ruby")
 	if err != nil {
 		return fmt.Errorf("failed to lookup language: %s", err)
 	}
-
-	executor := detectionexecutor.New(lang)
 
 	propertiesDetector, err := properties.New(lang)
 	if err != nil {
 		return fmt.Errorf("failed to create properties detector: %s", err)
 	}
-	err = executor.RegisterDetector(propertiesDetector)
-	if err != nil {
-		return fmt.Errorf("failed to register properties detector: %s", err)
-	}
+	defer propertiesDetector.Close()
 
 	objectsDetector, err := objects.New(lang)
 	if err != nil {
 		return fmt.Errorf("failed to create objects detector: %s", err)
 	}
-	err = executor.RegisterDetector(objectsDetector)
-	if err != nil {
-		return fmt.Errorf("failed to register objects detector: %s", err)
-	}
+	defer objectsDetector.Close()
+
+	executor := detectorexecutor.New(lang, []detector.Detector{
+		propertiesDetector,
+		objectsDetector,
+	})
 
 	tree, err := lang.Parse(`
 
@@ -67,9 +66,9 @@ end
 	}
 	defer tree.Close()
 
-	initiator := detectioninitiator.New(executor, tree)
+	evaluator := treeevaluator.New(executor, tree)
 
-	detections, err := initiator.TreeDetections(tree.RootNode(), "objects")
+	detections, err := evaluator.TreeDetections(tree.RootNode(), "objects")
 	if err != nil {
 		return fmt.Errorf("failed to detect objects: %s", err)
 	}
