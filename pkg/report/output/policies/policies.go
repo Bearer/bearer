@@ -158,11 +158,11 @@ func BuildReportString(policyResults map[string][]PolicyResult, policies map[str
 
 func writePolicyListToString(reportStr *strings.Builder, policies map[string]*settings.Policy) {
 	// list policies that were run
-	reportStr.WriteString("\nPolicy list: \n\n")
+	reportStr.WriteString("\nPolicy checks: \n\n")
 	policyList := []string{}
 	for key := range policies {
 		policy := policies[key]
-		policyList = append(policyList, color.HiBlackString("- "+policy.DisplayId+" "+policy.Name+"\n"))
+		policyList = append(policyList, color.HiBlackString("- "+policy.Name+" ["+policy.DisplayId+"]\n"))
 	}
 
 	sort.Strings(policyList)
@@ -192,9 +192,7 @@ func writeSummaryToString(
 	totalCount := criticalCount + highCount + mediumCount + lowCount
 
 	reportStr.WriteString("\n\n")
-	reportStr.WriteString(color.RedString("Policy failures detected\n\n"))
-	reportStr.WriteString(fmt.Sprint(policyCount) + " policies were run ")
-	reportStr.WriteString("and " + fmt.Sprint(totalCount) + " failures were detected.\n\n")
+	reportStr.WriteString(color.RedString(fmt.Sprint(policyCount) + " policies, " + fmt.Sprint(totalCount) + " failures\n\n"))
 
 	// critical count
 	reportStr.WriteString(formatSeverity(settings.LevelCritical) + fmt.Sprint(criticalCount))
@@ -225,14 +223,15 @@ func writeSummaryToString(
 		reportStr.WriteString(" (" + strings.Join(policyIds, ", ") + ")")
 	}
 
-	reportStr.WriteString("\n\n")
+	reportStr.WriteString("\n")
 }
 
 func writePolicyFailureToString(reportStr *strings.Builder, policyFailure PolicyResult, policySeverity string) {
 	reportStr.WriteString("\n\n")
 	reportStr.WriteString(formatSeverity(policySeverity))
-	reportStr.WriteString(policyFailure.PolicyName + "\n\n")
-	reportStr.WriteString(color.HiBlackString("https://curio.sh/reference/policies/" + policyFailure.PolicyDisplayId + "\n"))
+	reportStr.WriteString(policyFailure.PolicyName + " [" + policyFailure.PolicyDisplayId + "]" + "\n")
+	reportStr.WriteString(color.HiBlackString("https://curio.sh/reference/policies\n"))
+	// reportStr.WriteString(color.HiBlackString("https://curio.sh/reference/policies/#" + policyFailure.PolicyDisplayId + "\n"))
 	reportStr.WriteString("\n")
 	reportStr.WriteString(color.HiBlueString("File: " + underline(policyFailure.Filename+":"+fmt.Sprint(policyFailure.LineNumber)) + "\n"))
 
