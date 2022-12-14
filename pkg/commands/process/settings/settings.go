@@ -59,7 +59,7 @@ type PatternFilter struct {
 	Variable       string   `mapstructure:"variable" json:"variable" yaml:"variable"`
 	Values         []string `mapstructure:"values" json:"values" yaml:"values"`
 	Minimum        *int     `mapstructure:"minimum" json:"minimum" yaml:"minimum"`
-	Maximum        *int     `mapstructure:"Maximum" json:"Maximum" yaml:"Maximum"`
+	Maximum        *int     `mapstructure:"maximum" json:"maximum" yaml:"maximum"`
 	MatchViolation bool     `mapstructure:"match_violation" json:"match_violation" yaml:"match_violation"`
 }
 
