@@ -5,7 +5,7 @@ critical:
       filename: testdata/ruby/insecure_ftp.rb
       category_groups:
         - PII
-        - Sensitive personal data
+        - Personal Data (Sensitive)
       parent_line_number: 24
       parent_content: |-
         Net::FTP.open("ftp.site.com") do |ftp|
@@ -27,7 +27,7 @@ medium:
       filename: testdata/ruby/insecure_ftp.rb
       category_groups:
         - PII
-        - Sensitive personal data
+        - Personal Data (Sensitive)
       parent_line_number: 10
       parent_content: Net::FTP.new("ftp.ruby-lang.org")
       omit_parent: false
@@ -37,7 +37,7 @@ medium:
       filename: testdata/ruby/insecure_ftp.rb
       category_groups:
         - PII
-        - Sensitive personal data
+        - Personal Data (Sensitive)
       parent_line_number: 17
       parent_content: |-
         Net::FTP.open('example.com') do |ftp|
@@ -53,7 +53,7 @@ medium:
       filename: testdata/ruby/insecure_ftp.rb
       category_groups:
         - PII
-        - Sensitive personal data
+        - Personal Data (Sensitive)
       parent_line_number: 24
       parent_content: |-
         Net::FTP.open("ftp.site.com") do |ftp|
