@@ -4,18 +4,25 @@ import (
 	detectortypes "github.com/bearer/curio/new/detection/types"
 	detectorexecutortypes "github.com/bearer/curio/new/detectorexecutor/types"
 	"github.com/bearer/curio/new/language"
+	languagetypes "github.com/bearer/curio/new/language/types"
 	"github.com/bearer/curio/new/treeevaluator/types"
 )
 
 type treeEvaluator struct {
+	lang           languagetypes.Language
 	executor       detectorexecutortypes.Executor
-	detectionCache map[language.NodeID]map[string]*detectortypes.Detection
+	detectionCache map[language.NodeID]map[string][]*detectortypes.Detection
 }
 
-func New(executor detectorexecutortypes.Executor, tree *language.Tree) types.Evaluator {
-	detectionCache := make(map[language.NodeID]map[string]*detectortypes.Detection)
+func New(
+	lang languagetypes.Language,
+	executor detectorexecutortypes.Executor,
+	tree *language.Tree,
+) types.Evaluator {
+	detectionCache := make(map[language.NodeID]map[string][]*detectortypes.Detection)
 
 	return &treeEvaluator{
+		lang:           lang,
 		executor:       executor,
 		detectionCache: detectionCache,
 	}
@@ -25,14 +32,12 @@ func (evaluator *treeEvaluator) TreeDetections(rootNode *language.Node, detector
 	var result []*detectortypes.Detection
 
 	if err := rootNode.Walk(func(node *language.Node) error {
-		detection, err := evaluator.NodeDetection(node, detectorType)
+		detections, err := evaluator.NodeDetections(node, detectorType)
 		if err != nil {
 			return err
 		}
 
-		if detection != nil {
-			result = append(result, detection)
-		}
+		result = append(result, detections...)
 
 		return nil
 	}); err != nil {
@@ -42,10 +47,28 @@ func (evaluator *treeEvaluator) TreeDetections(rootNode *language.Node, detector
 	return result, nil
 }
 
-func (evaluator *treeEvaluator) NodeDetection(
+func (evaluator *treeEvaluator) NodeDetections(
 	node *language.Node,
 	detectorType string,
-) (*detectortypes.Detection, error) {
+) ([]*detectortypes.Detection, error) {
+	var detections []*detectortypes.Detection
+
+	for _, unifiedNode := range evaluator.lang.UnifiedNodesFor(node) {
+		unifiedNodeDetections, err := evaluator.nonUnifiedNodeDetections(unifiedNode, detectorType)
+		if err != nil {
+			return nil, err
+		}
+
+		detections = append(detections, unifiedNodeDetections...)
+	}
+
+	return detections, nil
+}
+
+func (evaluator *treeEvaluator) nonUnifiedNodeDetections(
+	node *language.Node,
+	detectorType string,
+) ([]*detectortypes.Detection, error) {
 	nodeDetections, ok := evaluator.detectionCache[node.ID()]
 	if !ok {
 		err := evaluator.detectAtNode(node, detectorType)
@@ -56,8 +79,8 @@ func (evaluator *treeEvaluator) NodeDetection(
 		nodeDetections = evaluator.detectionCache[node.ID()]
 	}
 
-	if detection, ok := nodeDetections[detectorType]; ok {
-		return detection, nil
+	if detections, ok := nodeDetections[detectorType]; ok {
+		return detections, nil
 	}
 
 	evaluator.detectAtNode(node, detectorType)
@@ -87,27 +110,27 @@ func (evaluator *treeEvaluator) TreeHasDetection(rootNode *language.Node, detect
 }
 
 func (evaluator *treeEvaluator) NodeHasDetection(node *language.Node, detectorType string) (bool, error) {
-	detection, err := evaluator.NodeDetection(node, detectorType)
+	detections, err := evaluator.NodeDetections(node, detectorType)
 	if err != nil {
 		return false, err
 	}
 
-	return detection != nil, nil
+	return len(detections) != 0, nil
 }
 
 func (evaluator *treeEvaluator) detectAtNode(node *language.Node, detectorType string) error {
-	detection, err := evaluator.executor.DetectAt(node, detectorType, evaluator)
+	detections, err := evaluator.executor.DetectAt(node, detectorType, evaluator)
 	if err != nil {
 		return err
 	}
 
 	nodeDetections, ok := evaluator.detectionCache[node.ID()]
 	if !ok {
-		nodeDetections = make(map[string]*detectortypes.Detection)
+		nodeDetections = make(map[string][]*detectortypes.Detection)
 		evaluator.detectionCache[node.ID()] = nodeDetections
 	}
 
-	nodeDetections[detectorType] = detection
+	nodeDetections[detectorType] = detections
 
 	return nil
 }

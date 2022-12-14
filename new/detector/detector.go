@@ -8,6 +8,6 @@ import (
 
 type Detector interface {
 	Name() string
-	DetectAt(node *language.Node, evaluator treeevaluatortypes.Evaluator) (*detectiontypes.Detection, error)
+	DetectAt(node *language.Node, evaluator treeevaluatortypes.Evaluator) ([]*detectiontypes.Detection, error)
 	Close()
 }
