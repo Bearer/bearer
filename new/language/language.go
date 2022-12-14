@@ -2,7 +2,6 @@ package language
 
 import (
 	"context"
-	"log"
 
 	sitter "github.com/smacker/go-tree-sitter"
 )
@@ -47,45 +46,23 @@ func (lang *Base) CompileQuery(input string) (*Query, error) {
 	return &Query{sitterQuery: sitterQuery}, nil
 }
 
-func (lang *Base) UnifyNodes(a *Node, b *Node) {
-	aNodes, aExists := lang.unifiedNodes[a.ID()]
-	bNodes, bExists := lang.unifiedNodes[b.ID()]
-
-	if nodesInclude(aNodes, b) {
-		// already unified
+func (lang *Base) UnifyNodes(laterNode *Node, earlierNode *Node) {
+	if laterNode.Equal(earlierNode) {
 		return
 	}
 
-	if !aExists {
-		aNodes = []*Node{a}
-	}
-	if !bExists {
-		bNodes = []*Node{b}
-	}
+	existingUnifiedNodes := lang.unifiedNodes[laterNode.ID()]
 
-	newNodes := append(aNodes, bNodes...)
-
-	for _, node := range newNodes {
-		lang.unifiedNodes[node.ID()] = newNodes
-	}
-}
-
-func nodesInclude(nodes []*Node, node *Node) bool {
-	for _, other := range nodes {
-		if other.Equal(node) {
-			return true
+	for _, other := range existingUnifiedNodes {
+		if other.Equal(earlierNode) {
+			// already unified
+			return
 		}
 	}
 
-	return false
+	lang.unifiedNodes[laterNode.ID()] = append(existingUnifiedNodes, earlierNode)
 }
 
 func (lang *Base) UnifiedNodesFor(node *Node) []*Node {
-	nodes, ok := lang.unifiedNodes[node.ID()]
-	if !ok {
-		return []*Node{node}
-	}
-
-	log.Printf("UNIFYIED: %v\n", nodes)
-	return nodes
+	return lang.unifiedNodes[node.ID()]
 }

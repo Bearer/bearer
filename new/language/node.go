@@ -35,6 +35,10 @@ func (node *Node) Content() string {
 	return node.sitterNode.Content(node.tree.input)
 }
 
+func (node *Node) LineNumber() int {
+	return int(node.sitterNode.StartPoint().Row + 1)
+}
+
 func (node *Node) Parent() *Node {
 	return node.tree.wrap(node.sitterNode.Parent())
 }

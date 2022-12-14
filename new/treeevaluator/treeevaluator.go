@@ -32,12 +32,21 @@ func (evaluator *treeEvaluator) TreeDetections(rootNode *language.Node, detector
 	var result []*detectortypes.Detection
 
 	if err := rootNode.Walk(func(node *language.Node) error {
-		detections, err := evaluator.NodeDetections(node, detectorType)
+		detections, err := evaluator.nonUnifiedNodeDetections(node, detectorType)
 		if err != nil {
 			return err
 		}
 
 		result = append(result, detections...)
+
+		for _, unifiedNode := range evaluator.lang.UnifiedNodesFor(node) {
+			unifiedNodeDetections, err := evaluator.TreeDetections(unifiedNode, detectorType)
+			if err != nil {
+				return err
+			}
+
+			result = append(result, unifiedNodeDetections...)
+		}
 
 		return nil
 	}); err != nil {
@@ -51,7 +60,10 @@ func (evaluator *treeEvaluator) NodeDetections(
 	node *language.Node,
 	detectorType string,
 ) ([]*detectortypes.Detection, error) {
-	var detections []*detectortypes.Detection
+	detections, err := evaluator.nonUnifiedNodeDetections(node, detectorType)
+	if err != nil {
+		return nil, err
+	}
 
 	for _, unifiedNode := range evaluator.lang.UnifiedNodesFor(node) {
 		unifiedNodeDetections, err := evaluator.nonUnifiedNodeDetections(unifiedNode, detectorType)
