@@ -39,7 +39,7 @@ func (evaluator *treeEvaluator) TreeDetections(rootNode *language.Node, detector
 
 		result = append(result, detections...)
 
-		for _, unifiedNode := range evaluator.lang.UnifiedNodesFor(node) {
+		for _, unifiedNode := range node.UnifiedNodes() {
 			unifiedNodeDetections, err := evaluator.TreeDetections(unifiedNode, detectorType)
 			if err != nil {
 				return err
@@ -65,7 +65,7 @@ func (evaluator *treeEvaluator) NodeDetections(
 		return nil, err
 	}
 
-	for _, unifiedNode := range evaluator.lang.UnifiedNodesFor(node) {
+	for _, unifiedNode := range node.UnifiedNodes() {
 		unifiedNodeDetections, err := evaluator.nonUnifiedNodeDetections(unifiedNode, detectorType)
 		if err != nil {
 			return nil, err

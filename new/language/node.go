@@ -78,3 +78,11 @@ func (node *Node) Walk(visit func(node *Node) error) error {
 		}
 	}
 }
+
+func (node *Node) UnifyWith(earlierNode *Node) {
+	node.tree.unifyNodes(node, earlierNode)
+}
+
+func (node *Node) UnifiedNodes() []*Node {
+	return node.tree.unifiedNodesFor(node)
+}
