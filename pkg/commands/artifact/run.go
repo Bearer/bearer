@@ -189,7 +189,7 @@ func (r *runner) Report(config settings.Config, report types.Report) (bool, erro
 		logger = outputhandler.PlainLogger(reportFile)
 	}
 
-	if config.Report.Report == flag.ReportPolicies && config.Report.Format == "" {
+	if config.Report.Report == flag.ReportPolicies && config.Report.Format == flag.FormatEmpty {
 		// for policy report, default report format is NOT JSON
 		reportPassed, err := reportoutput.ReportPolicies(report, logger, config)
 		if err != nil {
@@ -199,7 +199,7 @@ func (r *runner) Report(config settings.Config, report types.Report) (bool, erro
 	}
 
 	switch config.Report.Format {
-	case "", flag.FormatJSON:
+	case flag.FormatEmpty, flag.FormatJSON:
 		// default report format for is JSON
 		err := reportoutput.ReportJSON(report, logger, config)
 		if err != nil {

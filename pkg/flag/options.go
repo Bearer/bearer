@@ -245,7 +245,10 @@ func (f *Flags) ToOptions(args []string) (Options, error) {
 	}
 
 	if f.ReportFlagGroup != nil {
-		opts.ReportOptions = f.ReportFlagGroup.ToOptions()
+		opts.ReportOptions, err = f.ReportFlagGroup.ToOptions()
+		if err != nil {
+			return Options{}, fmt.Errorf("report flags error: %w", err)
+		}
 	}
 
 	if f.PolicyFlagGroup != nil {
@@ -259,7 +262,7 @@ func (f *Flags) ToOptions(args []string) (Options, error) {
 	if f.ScanFlagGroup != nil {
 		opts.ScanOptions, err = f.ScanFlagGroup.ToOptions(args)
 		if err != nil {
-			return Options{}, xerrors.Errorf("scan flag error: %w", err)
+			return Options{}, fmt.Errorf("scan flag error: %w", err)
 		}
 	}
 

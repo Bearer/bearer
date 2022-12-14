@@ -1,6 +1,7 @@
 package flag
 
 import (
+	"errors"
 	"strings"
 	"time"
 )
@@ -9,7 +10,10 @@ type Context string
 
 const (
 	Health Context = "health"
+	Empty  Context = ""
 )
+
+var ErrInvalidContext = errors.New("you've specified invalid context, valid one is health")
 
 var (
 	SkipPathFlag = Flag{
@@ -121,13 +125,20 @@ func (f *ScanFlagGroup) ToOptions(args []string) (ScanOptions, error) {
 		target = args[0]
 	}
 
+	context := getContext(f.ContextFlag)
+	switch context {
+	case Empty, Health:
+	default:
+		return ScanOptions{}, ErrInvalidContext
+	}
+
 	return ScanOptions{
 		SkipPath:                getStringSlice(f.SkipPathFlag),
 		Debug:                   getBool(f.DebugFlag),
 		DisableDomainResolution: getBool(f.DisableDomainResolutionFlag),
 		DomainResolutionTimeout: getDuration(f.DomainResolutionTimeoutFlag),
 		InternalDomains:         getStringSlice(f.InternalDomainsFlag),
-		Context:                 getContext(f.ContextFlag),
+		Context:                 context,
 		Quiet:                   getBool(f.QuietFlag),
 		Force:                   getBool(f.ForceFlag),
 		Target:                  target,

@@ -1,10 +1,15 @@
 package flag
 
+import (
+	"errors"
+)
+
 type Severity int
 
 var (
-	FormatJSON = "json"
-	FormatYAML = "yaml"
+	FormatJSON  = "json"
+	FormatYAML  = "yaml"
+	FormatEmpty = ""
 
 	ReportDetectors = "detectors"
 	ReportDataFlow  = "dataflow"
@@ -12,12 +17,15 @@ var (
 	ReportStats     = "stats"
 )
 
+var ErrInvalidFormat = errors.New("you've specified invalid format, valid ones are json,yaml")
+var ErrInvalidReport = errors.New("you've specified invalid report, valid ones are detectors, dataflow, policies, stats")
+
 var (
 	FormatFlag = Flag{
 		Name:       "format",
 		ConfigName: "report.format",
 		Shorthand:  "f",
-		Value:      "",
+		Value:      FormatEmpty,
 		Usage:      "Specify report format (json, yaml)",
 	}
 	ReportFlag = Flag{
@@ -66,10 +74,29 @@ func (f *ReportFlagGroup) Flags() []*Flag {
 	}
 }
 
-func (f *ReportFlagGroup) ToOptions() ReportOptions {
-	return ReportOptions{
-		Format: getString(f.Format),
-		Report: getString(f.Report),
-		Output: getString(f.Output),
+func (f *ReportFlagGroup) ToOptions() (ReportOptions, error) {
+	format := getString(f.Format)
+	switch format {
+	case FormatYAML:
+	case FormatJSON:
+	case FormatEmpty:
+	default:
+		return ReportOptions{}, ErrInvalidFormat
 	}
+
+	report := getString(f.Report)
+	switch report {
+	case ReportDetectors:
+	case ReportDataFlow:
+	case ReportPolicies:
+	case ReportStats:
+	default:
+		return ReportOptions{}, ErrInvalidReport
+	}
+
+	return ReportOptions{
+		Format: format,
+		Report: report,
+		Output: getString(f.Output),
+	}, nil
 }
