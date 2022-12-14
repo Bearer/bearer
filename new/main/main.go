@@ -9,6 +9,7 @@ import (
 	"github.com/bearer/curio/new/builtin/detectors/ruby/datatypes"
 	"github.com/bearer/curio/new/builtin/detectors/ruby/objects"
 	"github.com/bearer/curio/new/builtin/detectors/ruby/properties"
+	detectiontypes "github.com/bearer/curio/new/detection/types"
 	"github.com/bearer/curio/new/detector"
 	"github.com/bearer/curio/new/detectorexecutor"
 	getlanguage "github.com/bearer/curio/new/language/get"
@@ -58,16 +59,16 @@ func run() error {
 
 class Abc
 	def f
-		user = { first_name: "hello", last_name: "there" }
-		HTTP.post("http://api.com", user)
+		user = { first_name: "hello", last_name: "there" }   # 5
+		HTTP.post("http://api.com", user)                    # 6
 
-		user = { first_name: "hello2", last_name: "there2" }
-		HTTP.post("http://api.com", user)
+		user = { first_name: "hello2", last_name: "there2" } # 8
+		HTTP.post("http://api.com", user)                    # 9
 
-		HTTP.post("http://api.com", { x: user })
+		HTTP.post("http://api.com", { x: user })             # 11
 
-		x = { first_name: "hello3", last_name: "there3" }
-		HTTP.post("http://api.com", { user: x })
+		x = { first_name: "hello3", last_name: "there3" }    # 13
+		HTTP.post("http://api.com", { user: x })             # 14
 	end
 end
 
@@ -84,8 +85,44 @@ end
 		return fmt.Errorf("failed to detect data types: %s", err)
 	}
 
-	detectionsYAML, _ := yaml.Marshal(detections)
+	detectionsYAML, _ := yaml.Marshal(report(detections))
 	log.Printf("GOT:\n%s\n", detectionsYAML)
 
 	return nil
+}
+
+type Location struct {
+	Content    string
+	LineNumber int
+}
+type ReportDetection struct {
+	MatchLocation   Location
+	ContextLocation *Location
+	Data            interface{}
+}
+
+func report(detections []*detectiontypes.Detection) []ReportDetection {
+	result := make([]ReportDetection, len(detections))
+
+	for i, detection := range detections {
+		var contextLocation *Location
+
+		if detection.ContextNode != nil {
+			contextLocation = &Location{
+				Content:    detection.ContextNode.Content(),
+				LineNumber: detection.ContextNode.LineNumber(),
+			}
+		}
+
+		result[i] = ReportDetection{
+			MatchLocation: Location{
+				Content:    detection.MatchNode.Content(),
+				LineNumber: detection.MatchNode.LineNumber(),
+			},
+			Data:            detection.Data,
+			ContextLocation: contextLocation,
+		}
+	}
+
+	return result
 }

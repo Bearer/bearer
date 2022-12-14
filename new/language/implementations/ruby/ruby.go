@@ -1,8 +1,6 @@
 package ruby
 
 import (
-	"log"
-
 	"github.com/smacker/go-tree-sitter/ruby"
 	"github.com/ssoroka/slice"
 
@@ -26,14 +24,14 @@ func (lang *rubyLanguage) Parse(input string) (*language.Tree, error) {
 		return nil, err
 	}
 
-	lang.unification(tree.RootNode())
+	lang.analyzeFlow(tree.RootNode())
 
 	return tree, nil
 }
 
 var variableLookupParents = []string{"pair", "argument_list"}
 
-func (lang *rubyLanguage) unification(rootNode *language.Node) {
+func (lang *rubyLanguage) analyzeFlow(rootNode *language.Node) {
 	scope := make(map[string]*language.Node)
 
 	rootNode.Walk(func(node *language.Node) error {
@@ -45,16 +43,15 @@ func (lang *rubyLanguage) unification(rootNode *language.Node) {
 			right := node.ChildByFieldName("right")
 
 			if left.Type() == "identifier" {
-				scope[left.Content()] = right
+				scope[left.Content()] = node
 
-				lang.UnifyNodes(left, right)
+				lang.UnifyNodes(node, right)
 			}
 		case "identifier":
 			parent := node.Parent()
 			if parent != nil && slice.Contains(variableLookupParents, parent.Type()) {
 				scopedNode := scope[node.Content()]
 				if scopedNode != nil {
-					log.Printf("UNIFYING\n\n%s\n\n%s\n", node.Content(), parent.Content(), scopedNode.Content())
 					lang.UnifyNodes(node, scopedNode)
 				}
 			}
