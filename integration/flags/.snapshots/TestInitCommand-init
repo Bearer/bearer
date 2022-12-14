@@ -603,6 +603,7 @@ scan:
             query: |
                 policy_failure = data.bearer.application_level_encryption.policy_failure
             id: application_level_encryption_missing
+            display_id: CR-021
             name: Application level encryption missing
             description: Application level encryption missing. Enable application level encryption to reduce the risk of leaking sensitive data.
             level: ""
@@ -677,6 +678,7 @@ scan:
             query: |
                 policy_failure = data.bearer.leakage.policy_failure
             id: detect_rails_cookies
+            display_id: CR-002
             name: Cookie leaking
             description: Cookie leaks detected. Avoid storing sensitive data in cookies.
             level: ""
@@ -750,6 +752,7 @@ scan:
             query: |
                 policy_failure = data.bearer.http_get_parameters.policy_failure
             id: ruby_http_get_detection
+            display_id: CR-005
             name: HTTP GET parameters
             description: Sending data as HTTP GET parameters. Avoid sending sensitive data as parameters in GET requests.
             level: ""
@@ -823,6 +826,7 @@ scan:
             query: |
                 policy_failure = data.bearer.insecure_communication.policy_failure
             id: detect_rails_insecure_communication
+            display_id: CR-012
             name: Insecure communication
             description: Insecure communication in an application processing sensitive data. Ensure communication occurs over SSL.
             level: ""
@@ -897,6 +901,7 @@ scan:
             query: |
                 policy_failure = data.bearer.insecure_ftp.policy_failure
             id: detect_rails_insecure_ftp
+            display_id: CR-009
             name: Insecure FTP
             description: Communication with an insecure FTP server in an application processing sensitive data. Only connect to FTP securely.
             level: ""
@@ -970,6 +975,7 @@ scan:
             query: |
                 policy_failure = data.bearer.insecure_ftp_with_data_category.policy_failure
             id: insecure_ftp_with_data_category
+            display_id: CR-008
             name: Insecure FTP with Data Category
             description: Communicating Data Category with an insecure FTP server. Only connect to FTP securely.
             level: ""
@@ -1043,6 +1049,7 @@ scan:
             query: |
                 policy_failure = data.bearer.insecure_http_get.policy_failure
             id: insecure_http_get
+            display_id: CR-013
             name: Insecure HTTP GET
             description: Communicating using insecure HTTP GET in an application processing sensitive data. Ensure all HTTP communication occurs over HTTPS.
             level: ""
@@ -1116,6 +1123,7 @@ scan:
             query: |
                 policy_failure = data.bearer.insecure_http_with_data_category.policy_failure
             id: insecure_http_with_data_category
+            display_id: CR-015
             name: Insecure HTTP with Data Category
             description: Communicating Data Category using insecure HTTP. Ensure all HTTP communication occurs over HTTPS.
             level: ""
@@ -1203,6 +1211,7 @@ scan:
             query: |
                 policy_failure = data.bearer.insecure_smtp.policy_failure
             id: detect_rails_insecure_smtp
+            display_id: CR-010
             name: Insecure SMTP
             description: Communication using insecure SMTP in an application processing sensitive data. Verify that SMTP settings use OpenSSL or equivalent.
             level: ""
@@ -1276,6 +1285,7 @@ scan:
             query: |
                 policy_failure = data.bearer.leakage.policy_failure
             id: detect_rails_jwt
+            display_id: CR-004
             name: JWT leaking
             description: JWT leaks detected. Avoid storing sensitive data in JWTs.
             level: ""
@@ -1349,6 +1359,7 @@ scan:
             query: |
                 policy_failure = data.bearer.leakage.policy_failure
             id: detect_ruby_logger
+            display_id: CR-001
             name: Logger leaking
             description: Logger leaks detected. Avoid passing sensitive data to loggers.
             level: ""
@@ -1422,6 +1433,7 @@ scan:
             query: |
                 policy_failure = data.bearer.third_party_data_category.policy_failure
             id: detect_ruby_third_party_data_send
+            display_id: CR-016
             name: Third-party data category exposure
             description: Sending data in category to third party. Ensure data sent to third party is intended and secured.
             level: ""
@@ -1495,6 +1507,7 @@ scan:
             query: |
                 policy_failure = data.bearer.leakage.policy_failure
             id: detect_rails_session
+            display_id: CR-003
             name: Session leaking
             description: Session leaks detected. Avoid storing sensitive data in the session.
             level: ""
@@ -1568,6 +1581,7 @@ scan:
             query: |
                 policy_failure = data.bearer.ssl_certificate_verification_disabled.policy_failure
             id: ssl_certificate_verification_disabled
+            display_id: CR-011
             name: SSL certificate verification disabled
             description: SSL certificate verification is disabled in an application processing sensitive data. Enable SSL certificate verification.
             level: ""
@@ -1641,6 +1655,7 @@ scan:
             query: |
                 policy_failure = data.bearer.weak_password_encryption.policy_failure
             id: detect_ruby_weak_encryption
+            display_id: CR-023
             name: Weak password encryption
             description: Weak encryption or hashing library used to encrypt password. Use a stronger algorithm.
             level: ""

@@ -1,5 +1,6 @@
 medium:
     - policy_name: Insecure SMTP
+      policy_display_id: CR-010
       policy_description: Communication using insecure SMTP in an application processing sensitive data. Verify that SMTP settings use OpenSSL or equivalent.
       line_number: 8
       filename: testdata/ruby/insecure_smtp.rb
@@ -14,6 +15,7 @@ medium:
         end
       omit_parent: false
     - policy_name: Insecure SMTP
+      policy_display_id: CR-010
       policy_description: Communication using insecure SMTP in an application processing sensitive data. Verify that SMTP settings use OpenSSL or equivalent.
       line_number: 14
       filename: testdata/ruby/insecure_smtp.rb

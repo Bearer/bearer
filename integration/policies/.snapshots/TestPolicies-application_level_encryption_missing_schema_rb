@@ -1,5 +1,6 @@
 high:
     - policy_name: Application level encryption missing
+      policy_display_id: CR-021
       policy_description: Application level encryption missing. Enable application level encryption to reduce the risk of leaking sensitive data.
       line_number: 3
       filename: testdata/ruby/application_level_encryption_missing/schema_rb/db/schema.rb
@@ -16,6 +17,7 @@ high:
           end
       omit_parent: false
     - policy_name: Application level encryption missing
+      policy_display_id: CR-021
       policy_description: Application level encryption missing. Enable application level encryption to reduce the risk of leaking sensitive data.
       line_number: 4
       filename: testdata/ruby/application_level_encryption_missing/schema_rb/db/schema.rb
@@ -32,6 +34,7 @@ high:
           end
       omit_parent: false
     - policy_name: Application level encryption missing
+      policy_display_id: CR-021
       policy_description: Application level encryption missing. Enable application level encryption to reduce the risk of leaking sensitive data.
       line_number: 5
       filename: testdata/ruby/application_level_encryption_missing/schema_rb/db/schema.rb
