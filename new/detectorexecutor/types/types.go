@@ -11,5 +11,5 @@ type Executor interface {
 		node *language.Node,
 		detectorType string,
 		evaluator treeevaluatortypes.Evaluator,
-	) (*detectiontypes.Detection, error)
+	) ([]*detectiontypes.Detection, error)
 }

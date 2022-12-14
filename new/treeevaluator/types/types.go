@@ -7,7 +7,7 @@ import (
 
 type Evaluator interface {
 	TreeDetections(rootNode *language.Node, detectorType string) ([]*detectiontypes.Detection, error)
-	NodeDetection(node *language.Node, detectorType string) (*detectiontypes.Detection, error)
+	NodeDetections(node *language.Node, detectorType string) ([]*detectiontypes.Detection, error)
 	TreeHasDetection(rootNode *language.Node, detectorType string) (bool, error)
 	NodeHasDetection(node *language.Node, detectorType string) (bool, error)
 }

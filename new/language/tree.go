@@ -18,5 +18,9 @@ func (tree *Tree) Close() {
 }
 
 func (tree *Tree) wrap(sitterNode *sitter.Node) *Node {
+	if sitterNode == nil {
+		return nil
+	}
+
 	return &Node{tree: tree, sitterNode: sitterNode}
 }
