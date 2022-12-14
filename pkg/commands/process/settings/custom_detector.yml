@@ -203,21 +203,13 @@ detect_sql_create_public_table:
           name: bearer.encrypted_verified
 detect_rails_insecure_smtp:
   type: "risk"
-
   patterns:
-    - pattern: |
-        Rails.application.configure do
-          config.action_mailer.smtp_settings = {
-            $VERIFY_MODE
-          }
-        end
-      filters:
-        - variable: VERIFY_MODE
-          syntax: |
-            openssl_verify_mode: OpenSSL::SSL::VERIFY_NONE
-          filters: ...
-      match_node: VERIFY_MODE
-
+    - |
+      Rails.application.configure do
+        config.action_mailer.smtp_settings = {
+          openssl_verify_mode: OpenSSL::SSL::VERIFY_NONE
+        }
+      end
     - |
       Rails.application.configure do
         config.action_mailer.smtp_settings = {
