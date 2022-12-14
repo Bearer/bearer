@@ -122,8 +122,6 @@ func RunTests(t *testing.T, tests []TestCase) {
 			if err != nil {
 				if test.ShouldSucceed {
 					t.Errorf("Expected application to succeed, but it failed: %s", err)
-				} else {
-					cupaloy.SnapshotT(t, err)
 				}
 			} else if !test.ShouldSucceed {
 				t.Error("Expected application to fail, but it did not")
