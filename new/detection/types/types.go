@@ -1,11 +1,9 @@
 package types
 
-import (
-	"github.com/bearer/curio/new/parser"
-)
+import "github.com/bearer/curio/new/language"
 
 type Detection struct {
-	MatchNode  *parser.Node
-	ParentNode *parser.Node
+	MatchNode  *language.Node
+	ParentNode *language.Node
 	Data       interface{}
 }
