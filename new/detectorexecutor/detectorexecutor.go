@@ -1,4 +1,4 @@
-package detectionexecutor
+package detectorexecutor
 
 import (
 	"fmt"
@@ -7,44 +7,41 @@ import (
 	"golang.org/x/exp/slices"
 
 	detectiontypes "github.com/bearer/curio/new/detection/types"
-	"github.com/bearer/curio/new/detectionexecutor/types"
-	initiatortypes "github.com/bearer/curio/new/detectioninitiator/types"
 	"github.com/bearer/curio/new/detector"
+	"github.com/bearer/curio/new/detectorexecutor/types"
 	"github.com/bearer/curio/new/language"
-	"github.com/bearer/curio/new/parser"
+	languagetypes "github.com/bearer/curio/new/language/types"
+	treeevaluatortypes "github.com/bearer/curio/new/treeevaluator/types"
 )
 
-type detectionExecutor struct {
-	lang          *language.Language
+type detectorExecutor struct {
+	lang          languagetypes.Language
 	detectorStack []string
 	detectors     map[string]detector.Detector
 }
 
-func New(lang *language.Language) types.DetectionExecutor {
-	detectors := make(map[string]detector.Detector)
+func New(lang languagetypes.Language, detectors []detector.Detector) types.Executor {
 
-	return &detectionExecutor{
+	return &detectorExecutor{
 		lang:      lang,
-		detectors: detectors,
+		detectors: makeDetectorMap(detectors),
 	}
 }
 
-func (executor *detectionExecutor) RegisterDetector(detector detector.Detector) error {
-	name := detector.Name()
+func makeDetectorMap(detectors []detector.Detector) map[string]detector.Detector {
+	result := make(map[string]detector.Detector)
 
-	if _, alreadyRegistered := executor.detectors[name]; alreadyRegistered {
-		return fmt.Errorf("detector '%s' is already registered", name)
+	for _, detector := range detectors {
+		result[detector.Name()] = detector
 	}
 
-	executor.detectors[name] = detector
-
-	return nil
+	return result
 }
 
-func (executor *detectionExecutor) DetectAt(
-	node *parser.Node,
+func (executor *detectorExecutor) DetectAt(
+	node *language.Node,
 	detectorType string,
-	initiator initiatortypes.TreeDetectionInitiator,
+	evaluator treeevaluatortypes.Evaluator,
 ) (*detectiontypes.Detection, error) {
 	detector, ok := executor.detectors[detectorType]
 	if !ok {
@@ -61,7 +58,7 @@ func (executor *detectionExecutor) DetectAt(
 
 	executor.detectorStack = append(executor.detectorStack, detectorType)
 
-	detection, err := detector.DetectAt(node, initiator)
+	detection, err := detector.DetectAt(node, evaluator)
 	if err != nil {
 		return nil, err
 	}
