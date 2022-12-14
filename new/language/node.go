@@ -35,7 +35,15 @@ func (node *Node) Content() string {
 	return node.sitterNode.Content(node.tree.input)
 }
 
-func (node *Node) Walk(visit func(*Node) error) error {
+func (node *Node) Parent() *Node {
+	return node.tree.wrap(node.sitterNode.Parent())
+}
+
+func (node *Node) ChildByFieldName(name string) *Node {
+	return node.tree.wrap(node.sitterNode.ChildByFieldName(name))
+}
+
+func (node *Node) Walk(visit func(node *Node) error) error {
 	cursor := sitter.NewTreeCursor(node.sitterNode)
 	defer cursor.Close()
 

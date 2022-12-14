@@ -6,6 +6,7 @@ import (
 
 	"gopkg.in/yaml.v2"
 
+	"github.com/bearer/curio/new/builtin/detectors/ruby/datatypes"
 	"github.com/bearer/curio/new/builtin/detectors/ruby/objects"
 	"github.com/bearer/curio/new/builtin/detectors/ruby/properties"
 	"github.com/bearer/curio/new/detector"
@@ -38,10 +39,20 @@ func run() error {
 	}
 	defer objectsDetector.Close()
 
-	executor := detectorexecutor.New(lang, []detector.Detector{
+	datatypesDetector, err := datatypes.New(lang)
+	if err != nil {
+		return fmt.Errorf("failed to create datatypes detector: %s", err)
+	}
+	defer datatypesDetector.Close()
+
+	executor, err := detectorexecutor.New(lang, []detector.Detector{
 		propertiesDetector,
 		objectsDetector,
+		datatypesDetector,
 	})
+	if err != nil {
+		return fmt.Errorf("failed to create executor: %s", err)
+	}
 
 	tree, err := lang.Parse(`
 
@@ -66,11 +77,11 @@ end
 	}
 	defer tree.Close()
 
-	evaluator := treeevaluator.New(executor, tree)
+	evaluator := treeevaluator.New(lang, executor, tree)
 
-	detections, err := evaluator.TreeDetections(tree.RootNode(), "objects")
+	detections, err := evaluator.TreeDetections(tree.RootNode(), "datatypes")
 	if err != nil {
-		return fmt.Errorf("failed to detect objects: %s", err)
+		return fmt.Errorf("failed to detect data types: %s", err)
 	}
 
 	detectionsYAML, _ := yaml.Marshal(detections)

@@ -34,19 +34,16 @@ func (detector *propertiesDetector) Name() string {
 func (detector *propertiesDetector) DetectAt(
 	node *language.Node,
 	evaluator treeevaluatortypes.Evaluator,
-) (*detectiontypes.Detection, error) {
-	result, err := detector.pairQuery.MatchAtOnce(node)
-	if err != nil {
+) ([]*detectiontypes.Detection, error) {
+	result, err := detector.pairQuery.MatchOnceAt(node)
+	if result == nil || err != nil {
 		return nil, err
 	}
-	if result == nil {
-		return nil, nil
-	}
 
-	return &detectiontypes.Detection{
+	return []*detectiontypes.Detection{{
 		MatchNode: node,
 		Data:      Data{Name: result["key"].Content()},
-	}, nil
+	}}, nil
 }
 
 func (detector *propertiesDetector) Close() {

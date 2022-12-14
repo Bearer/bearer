@@ -46,7 +46,7 @@ func (query *Query) MatchAt(node *Node) ([]QueryResult, error) {
 	return results, nil
 }
 
-func (query *Query) MatchAtOnce(node *Node) (QueryResult, error) {
+func (query *Query) MatchOnceAt(node *Node) (QueryResult, error) {
 	results, err := query.MatchAt(node)
 	if err != nil {
 		return nil, err
