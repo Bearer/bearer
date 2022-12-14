@@ -116,13 +116,28 @@ func (detector *objectsDetector) nameAssignedObject(
 	for _, object := range objects {
 		objectData := object.Data.(Data)
 
-		detections = append(detections, &detectiontypes.Detection{
-			MatchNode: node,
-			Data: Data{
-				Name:       result["left"].Content(),
-				Properties: objectData.Properties,
-			},
-		})
+		if objectData.Name == "" {
+			detections = append(detections, &detectiontypes.Detection{
+				MatchNode: node,
+				Data: Data{
+					Name:       result["left"].Content(),
+					Properties: objectData.Properties,
+				},
+			})
+		} else {
+			detections = append(detections, &detectiontypes.Detection{
+				MatchNode: node,
+				Data: Data{
+					Name: result["left"].Content(),
+					Properties: []*detectiontypes.Detection{{
+						MatchNode: object.MatchNode,
+						Data: Data{
+							Name: objectData.Name,
+						},
+					}},
+				},
+			})
+		}
 	}
 
 	return detections, nil
@@ -132,7 +147,7 @@ func (detector *objectsDetector) nameParentPairObject(
 	node *language.Node,
 	evaluator treeevaluatortypes.Evaluator,
 ) ([]*detectiontypes.Detection, error) {
-	result, err := detector.assignmentQuery.MatchOnceAt(node)
+	result, err := detector.parentPairQuery.MatchOnceAt(node)
 	if result == nil || err != nil {
 		return nil, err
 	}
