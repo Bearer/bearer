@@ -1,5 +1,6 @@
 high:
-    - policy_name: Application level encryption missing
+    - policy_name: Force application-level encryption when processing sensitive data.
+      policy_display_id: CR-021
       policy_description: Application level encryption missing. Enable application level encryption to reduce the risk of leaking sensitive data.
       line_number: 3
       filename: testdata/ruby/application_level_encryption_missing/structure_sql/db/structure.sql
@@ -16,7 +17,8 @@ high:
           email character varying DEFAULT ''::character varying NOT NULL
         )
       omit_parent: false
-    - policy_name: Application level encryption missing
+    - policy_name: Force application-level encryption when processing sensitive data.
+      policy_display_id: CR-021
       policy_description: Application level encryption missing. Enable application level encryption to reduce the risk of leaking sensitive data.
       line_number: 4
       filename: testdata/ruby/application_level_encryption_missing/structure_sql/db/structure.sql

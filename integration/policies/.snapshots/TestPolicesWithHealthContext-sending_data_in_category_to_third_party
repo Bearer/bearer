@@ -1,5 +1,6 @@
 high:
-    - policy_name: Third-party data category exposure
+    - policy_name: Ensure that no unsecured Third Parties receive sensitive data.
+      policy_display_id: CR-016
       policy_description: Sending data in category to third party. Ensure data sent to third party is intended and secured.
       line_number: 12
       filename: testdata/ruby/sending_data_in_category_to_third_party.rb
@@ -14,7 +15,8 @@ high:
           level: "info"
         )
       omit_parent: false
-    - policy_name: Third-party data category exposure
+    - policy_name: Ensure that no unsecured Third Parties receive sensitive data.
+      policy_display_id: CR-016
       policy_description: Sending data in category to third party. Ensure data sent to third party is intended and secured.
       line_number: 18
       filename: testdata/ruby/sending_data_in_category_to_third_party.rb
@@ -30,7 +32,8 @@ high:
           end
         end
       omit_parent: false
-    - policy_name: Third-party data category exposure
+    - policy_name: Ensure that no unsecured Third Parties receive sensitive data.
+      policy_display_id: CR-016
       policy_description: Sending data in category to third party. Ensure data sent to third party is intended and secured.
       line_number: 24
       filename: testdata/ruby/sending_data_in_category_to_third_party.rb
