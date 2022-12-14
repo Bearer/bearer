@@ -16,54 +16,74 @@ import (
 
 type detectorExecutor struct {
 	lang          languagetypes.Language
-	detectorStack []string
+	detectorStack map[language.NodeID][]string
 	detectors     map[string]detector.Detector
 }
 
-func New(lang languagetypes.Language, detectors []detector.Detector) types.Executor {
+func New(lang languagetypes.Language, detectors []detector.Detector) (types.Executor, error) {
+	detectorMap, err := makeDetectorMap(detectors)
+	if err != nil {
+		return nil, err
+	}
 
 	return &detectorExecutor{
-		lang:      lang,
-		detectors: makeDetectorMap(detectors),
-	}
+		lang:          lang,
+		detectorStack: make(map[language.NodeID][]string),
+		detectors:     detectorMap,
+	}, nil
 }
 
-func makeDetectorMap(detectors []detector.Detector) map[string]detector.Detector {
+func makeDetectorMap(detectors []detector.Detector) (map[string]detector.Detector, error) {
 	result := make(map[string]detector.Detector)
 
 	for _, detector := range detectors {
-		result[detector.Name()] = detector
+		name := detector.Name()
+
+		if _, existing := result[name]; existing {
+			return nil, fmt.Errorf("duplicate detector '%s'", name)
+		}
+
+		result[name] = detector
 	}
 
-	return result
+	return result, nil
 }
 
 func (executor *detectorExecutor) DetectAt(
 	node *language.Node,
 	detectorType string,
 	evaluator treeevaluatortypes.Evaluator,
-) (*detectiontypes.Detection, error) {
+) ([]*detectiontypes.Detection, error) {
 	detector, ok := executor.detectors[detectorType]
 	if !ok {
 		return nil, fmt.Errorf("detector type '%s' not registered", detectorType)
 	}
 
-	if slices.Contains(executor.detectorStack, detectorType) {
+	nodeID := node.ID()
+	executingDetectors := executor.detectorStack[nodeID]
+
+	if slices.Contains(executingDetectors, detectorType) {
 		return nil, fmt.Errorf(
-			"cycle found in detector usage: [%s > %s]",
-			strings.Join(executor.detectorStack, " > "),
+			"cycle found in detector usage: [%s > %s]\nnode type: %s, content:\n%s",
+			strings.Join(executingDetectors, " > "),
 			detectorType,
+			node.Type(),
+			node.Content(),
 		)
 	}
 
-	executor.detectorStack = append(executor.detectorStack, detectorType)
+	executor.detectorStack[nodeID] = append(executor.detectorStack[nodeID], detectorType)
 
-	detection, err := detector.DetectAt(node, evaluator)
+	detections, err := detector.DetectAt(node, evaluator)
 	if err != nil {
 		return nil, err
 	}
 
-	executor.detectorStack = executor.detectorStack[:len(executor.detectorStack)-1]
+	if len(executor.detectorStack[nodeID]) == 1 {
+		delete(executor.detectorStack, nodeID)
+	} else {
+		executor.detectorStack[nodeID] = executor.detectorStack[nodeID][:len(executor.detectorStack[nodeID])-1]
+	}
 
-	return detection, nil
+	return detections, nil
 }
