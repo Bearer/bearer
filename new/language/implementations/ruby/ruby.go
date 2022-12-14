@@ -8,30 +8,19 @@ import (
 	"github.com/bearer/curio/new/language/types"
 )
 
+var variableLookupParents = []string{"pair", "argument_list"}
+
 type rubyLanguage struct {
 	language.Base
 }
 
 func Get() types.Language {
 	return &rubyLanguage{
-		Base: language.New(ruby.GetLanguage()),
+		Base: language.New(ruby.GetLanguage(), analyzeFlow),
 	}
 }
 
-func (lang *rubyLanguage) Parse(input string) (*language.Tree, error) {
-	tree, err := lang.Base.Parse(input)
-	if err != nil {
-		return nil, err
-	}
-
-	lang.analyzeFlow(tree.RootNode())
-
-	return tree, nil
-}
-
-var variableLookupParents = []string{"pair", "argument_list"}
-
-func (lang *rubyLanguage) analyzeFlow(rootNode *language.Node) {
+func analyzeFlow(rootNode *language.Node) {
 	scope := make(map[string]*language.Node)
 
 	rootNode.Walk(func(node *language.Node) error {
@@ -45,14 +34,14 @@ func (lang *rubyLanguage) analyzeFlow(rootNode *language.Node) {
 			if left.Type() == "identifier" {
 				scope[left.Content()] = node
 
-				lang.UnifyNodes(node, right)
+				node.UnifyWith(right)
 			}
 		case "identifier":
 			parent := node.Parent()
 			if parent != nil && slice.Contains(variableLookupParents, parent.Type()) {
 				scopedNode := scope[node.Content()]
 				if scopedNode != nil {
-					lang.UnifyNodes(node, scopedNode)
+					node.UnifyWith(scopedNode)
 				}
 			}
 		}
