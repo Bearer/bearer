@@ -17,7 +17,7 @@ var TestTimeout = 1 * time.Minute
 type TestCase struct {
 	name          string
 	arguments     []string
-	shouldSucceed bool
+	ShouldSucceed bool
 	options       TestCaseOptions
 	displayStdErr bool
 	ignoreForce   bool
@@ -32,7 +32,7 @@ func NewTestCase(name string, arguments []string, options TestCaseOptions) TestC
 	return TestCase{
 		name:          name,
 		arguments:     arguments,
-		shouldSucceed: true,
+		ShouldSucceed: true,
 		options:       options,
 		displayStdErr: options.DisplayStdErr,
 		ignoreForce:   options.IgnoreForce,
@@ -120,10 +120,12 @@ func RunTests(t *testing.T, tests []TestCase) {
 			cupaloy.SnapshotT(t, combinedOutput)
 
 			if err != nil {
-				if test.shouldSucceed {
+				if test.ShouldSucceed {
 					t.Errorf("Expected application to succeed, but it failed: %s", err)
+				} else {
+					cupaloy.SnapshotT(t, err)
 				}
-			} else if !test.shouldSucceed {
+			} else if !test.ShouldSucceed {
 				t.Error("Expected application to fail, but it did not")
 			}
 		})
