@@ -22,6 +22,7 @@ import (
 	parserdatatype "github.com/bearer/curio/pkg/parser/datatype"
 	"github.com/bearer/curio/pkg/report/detections"
 	schemadatatype "github.com/bearer/curio/pkg/report/schema/datatype"
+	"github.com/bearer/curio/pkg/report/source"
 	"github.com/bearer/curio/pkg/util/file"
 	pluralize "github.com/gertd/go-pluralize"
 	"golang.org/x/exp/slices"
@@ -379,13 +380,20 @@ func (detector *Detector) extractData(captures []parser.Captures, rule config.Co
 			content.Text = &rule.Pattern
 
 			var parent *schema.Parent
+			var parentSource source.Source
 			if !rule.OmitParent {
-				parentSource := capture["rule"].Source(true)
+				parentSource = capture["rule"].Source(true)
 				parent = &schema.Parent{
 					LineNumber: *parentSource.LineNumber,
 					Content:    *parentSource.Text,
 				}
+			} else {
+				parentSource = capture["rule"].Source(false)
+				parent = &schema.Parent{
+					LineNumber: *parentSource.LineNumber,
+				}
 			}
+
 			report.AddDetection(detections.TypeCustomRisk, detectors.Type(rule.RuleName), content, parent)
 
 			continue

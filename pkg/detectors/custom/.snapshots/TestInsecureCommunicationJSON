@@ -10,6 +10,8 @@
 			"column_number": 1,
 			"text": "Rails.application.configure do\n  config.force_ssl = false\nend\n"
 		},
-		"value": null
+		"value": {
+			"line_number": 3
+		}
 	}
 ]

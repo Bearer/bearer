@@ -10,7 +10,9 @@
 			"column_number": 1,
 			"text": "Rails.application.configure do\n  config.action_mailer.smtp_settings = {\n    openssl_verify_mode: OpenSSL::SSL::VERIFY_NONE\n  }\nend\n"
 		},
-		"value": null
+		"value": {
+			"line_number": 3
+		}
 	},
 	{
 		"type": "custom_risk",
@@ -23,6 +25,8 @@
 			"column_number": 1,
 			"text": "Rails.application.configure do\n  config.action_mailer.smtp_settings = {\n    openssl_verify_mode: \"none\"\n  }\nend\n"
 		},
-		"value": null
+		"value": {
+			"line_number": 9
+		}
 	}
 ]
