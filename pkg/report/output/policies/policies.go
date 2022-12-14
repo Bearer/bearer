@@ -53,17 +53,24 @@ type PolicyResult struct {
 }
 
 func GetOutput(dataflow *dataflow.DataFlow, config settings.Config) (map[string][]PolicyResult, error) {
-	output.StdErrLogger().Msgf("Processing Policies")
 	// policy results grouped by severity (critical, high, ...)
 	result := make(map[string][]PolicyResult)
 
 	// Ensure a deterministic order
 	keys := maps.Keys(config.Policies)
+	if !config.Scan.Quiet {
+		output.StdErrLogger().Msgf("Evaluating policies")
+	}
+	bar := output.GetProgressBar(len(keys), config, "policies")
 	sort.Strings(keys)
 
 	for _, key := range keys {
+		err := bar.Add(1)
+		if err != nil {
+			output.StdErrLogger().Msgf("Policy %s failed to write progress bar %e", key, err)
+		}
+
 		policy := config.Policies[key]
-		output.StdErrLogger().Msgf("Processing policy %s", policy.Name)
 
 		// Create a prepared query that can be evaluated.
 		rs, err := rego.RunQuery(policy.Query,
@@ -104,11 +111,8 @@ func GetOutput(dataflow *dataflow.DataFlow, config settings.Config) (map[string]
 				result[policyOutput.Severity] = append(result[policyOutput.Severity], policyResult)
 			}
 		}
-
-		output.StdErrLogger().Msgf("Finished processing policy %s", policy.Name)
 	}
 
-	output.StdErrLogger().Msgf("Finished processing policies")
 	return result, nil
 }
 

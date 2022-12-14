@@ -70,7 +70,7 @@ func ReportYAML(report types.Report, output *zerolog.Event, config settings.Conf
 func getReportOutput(report types.Report, config settings.Config) (any, error) {
 	switch config.Report.Report {
 	case flag.ReportDetectors:
-		return detectors.GetOutput(report)
+		return detectors.GetOutput(report, config)
 	case flag.ReportDataFlow:
 		return getDataflow(report, config, false)
 	case flag.ReportPolicies:
@@ -102,7 +102,7 @@ func getPolicyReportOutput(report types.Report, config settings.Config) (map[str
 }
 
 func getDataflow(report types.Report, config settings.Config, isInternal bool) (*dataflow.DataFlow, error) {
-	reportedDetections, err := detectors.GetOutput(report)
+	reportedDetections, err := detectors.GetOutput(report, config)
 	if err != nil {
 		return nil, err
 	}
