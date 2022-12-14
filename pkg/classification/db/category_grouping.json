@@ -1,7 +1,7 @@
 {
   "groups": {
     "e1d3135b-3c0f-4b55-abce-19f27a26cbb3": {
-      "name": "Personal data",
+      "name": "Personal Data",
       "parent_uuids": []
     },
     "247fa503-115b-490a-96e5-bcd357bd5686": {
@@ -17,7 +17,7 @@
       ]
     },
     "f6a0c071-5908-4420-bac2-bba28d41223e": {
-      "name": "Sensitive personal data",
+      "name": "Personal Data (Sensitive)",
       "parent_uuids": []
     }
   },
