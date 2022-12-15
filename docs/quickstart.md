@@ -5,7 +5,7 @@ layout: layouts/doc.njk
 
 # Quick Start
 
-Discover data security risks and vulnerabilities in only a few minutes. In this guide you will install Curio, run a scan on a local project, and view the results of a policy report. Let's get started!
+Discover data security risks and vulnerabilities in only a few minutes. In this guide you will install Curio, run a scan on a local project, and view the results of a [policy report](/explanations/reports/#policy-report). Let's get started!
 
 ## Installation
 
