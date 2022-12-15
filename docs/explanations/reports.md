@@ -44,6 +44,8 @@ MEDIUM: 2 (Insecure SMTP, Insecure FTP)
 LOW: 0
 ```
 
+Policy reports are [currently available](/reference/supported-languages/) for Ruby projects, with Javascript/Typescript coming soon and more languages to follow.
+
 To run your first policy report, run `curio scan` with the `--report policies` flag.
 
 ## Data Flow Report

@@ -25,6 +25,7 @@ module.exports = [
       { name: "Commands", url: "/reference/commands/" },
       { name: "Data Types", url: "/reference/datatypes/" },
       { name: "Policies", url: "/reference/policies/" },
+      { name: "Supported Languages", url: "/reference/supported-languages/" },
     ],
   },
 ];
