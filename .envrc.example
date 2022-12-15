@@ -5,3 +5,4 @@ export GOOGLE_APP=''
 export REDIS_INIT="true"
 export GOOGLE_MAX_ATTEMPT="5"
 export CURIO_EXECUTABLE_PATH="./curio"
+export GITHUB_WORKSPACE="/path/to/curio/project"

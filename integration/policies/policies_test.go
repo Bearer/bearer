@@ -10,7 +10,7 @@ import (
 func newPolicyTest(name string, testFiles []string, healthContext bool) testhelper.TestCase {
 	filenames := []string{}
 	for _, testFile := range testFiles {
-		filenames = append(filenames, filepath.Join("testdata", testFile))
+		filenames = append(filenames, filepath.Join("integration", "policies", "testdata", testFile))
 	}
 
 	arguments := append(
@@ -26,7 +26,7 @@ func newPolicyTest(name string, testFiles []string, healthContext bool) testhelp
 		arguments = append(arguments, "--context=health")
 	}
 
-	options := testhelper.TestCaseOptions{StartWorker: true}
+	options := testhelper.TestCaseOptions{}
 
 	return testhelper.NewTestCase(name, arguments, options)
 }
@@ -62,23 +62,23 @@ func TestPolicyFlags(t *testing.T) {
 			"skip_policy",
 			[]string{
 				"scan",
-				filepath.Join("testdata", "ruby/logger_leaking.rb"),
+				filepath.Join("integration", "policies", "testdata", "ruby/logger_leaking.rb"),
 				"--report=policies",
 				"--format=yaml",
 				"--skip-policy=CR-001",
 			},
-			testhelper.TestCaseOptions{StartWorker: true},
+			testhelper.TestCaseOptions{},
 		),
 		testhelper.NewTestCase(
 			"only_policy",
 			[]string{
 				"scan",
-				filepath.Join("testdata", "ruby/logger_leaking.rb"),
+				filepath.Join("integration", "policies", "testdata", "ruby/logger_leaking.rb"),
 				"--report=policies",
 				"--format=yaml",
 				"--only-policy=CR-001",
 			},
-			testhelper.TestCaseOptions{StartWorker: true},
+			testhelper.TestCaseOptions{},
 		),
 	}
 

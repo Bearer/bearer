@@ -3,99 +3,99 @@ data_types:
       detectors:
         - name: ruby
           locations:
-            - filename: testdata/ruby/ruby_http_detection.rb
+            - filename: integration/custom_detectors/testdata/ruby/ruby_http_detection.rb
               line_number: 3
     - name: Firstname
       detectors:
         - name: ruby
           locations:
-            - filename: testdata/ruby/ruby_http_detection.rb
+            - filename: integration/custom_detectors/testdata/ruby/ruby_http_detection.rb
               line_number: 6
-            - filename: testdata/ruby/ruby_http_detection.rb
+            - filename: integration/custom_detectors/testdata/ruby/ruby_http_detection.rb
               line_number: 12
-            - filename: testdata/ruby/ruby_http_detection.rb
+            - filename: integration/custom_detectors/testdata/ruby/ruby_http_detection.rb
               line_number: 18
-            - filename: testdata/ruby/ruby_http_detection.rb
+            - filename: integration/custom_detectors/testdata/ruby/ruby_http_detection.rb
               line_number: 19
-            - filename: testdata/ruby/ruby_http_detection.rb
+            - filename: integration/custom_detectors/testdata/ruby/ruby_http_detection.rb
               line_number: 21
-            - filename: testdata/ruby/ruby_http_detection.rb
+            - filename: integration/custom_detectors/testdata/ruby/ruby_http_detection.rb
               line_number: 23
-            - filename: testdata/ruby/ruby_http_detection.rb
+            - filename: integration/custom_detectors/testdata/ruby/ruby_http_detection.rb
               line_number: 26
-            - filename: testdata/ruby/ruby_http_detection.rb
+            - filename: integration/custom_detectors/testdata/ruby/ruby_http_detection.rb
               line_number: 31
-            - filename: testdata/ruby/ruby_http_detection.rb
+            - filename: integration/custom_detectors/testdata/ruby/ruby_http_detection.rb
               line_number: 33
-            - filename: testdata/ruby/ruby_http_detection.rb
+            - filename: integration/custom_detectors/testdata/ruby/ruby_http_detection.rb
               line_number: 35
-            - filename: testdata/ruby/ruby_http_detection.rb
+            - filename: integration/custom_detectors/testdata/ruby/ruby_http_detection.rb
               line_number: 40
-            - filename: testdata/ruby/ruby_http_detection.rb
+            - filename: integration/custom_detectors/testdata/ruby/ruby_http_detection.rb
               line_number: 43
-            - filename: testdata/ruby/ruby_http_detection.rb
+            - filename: integration/custom_detectors/testdata/ruby/ruby_http_detection.rb
               line_number: 45
-            - filename: testdata/ruby/ruby_http_detection.rb
+            - filename: integration/custom_detectors/testdata/ruby/ruby_http_detection.rb
               line_number: 47
-            - filename: testdata/ruby/ruby_http_detection.rb
+            - filename: integration/custom_detectors/testdata/ruby/ruby_http_detection.rb
               line_number: 52
-            - filename: testdata/ruby/ruby_http_detection.rb
+            - filename: integration/custom_detectors/testdata/ruby/ruby_http_detection.rb
               line_number: 54
-            - filename: testdata/ruby/ruby_http_detection.rb
+            - filename: integration/custom_detectors/testdata/ruby/ruby_http_detection.rb
               line_number: 59
-            - filename: testdata/ruby/ruby_http_detection.rb
+            - filename: integration/custom_detectors/testdata/ruby/ruby_http_detection.rb
               line_number: 66
-            - filename: testdata/ruby/ruby_http_detection.rb
+            - filename: integration/custom_detectors/testdata/ruby/ruby_http_detection.rb
               line_number: 71
-            - filename: testdata/ruby/ruby_http_detection.rb
+            - filename: integration/custom_detectors/testdata/ruby/ruby_http_detection.rb
               line_number: 73
-            - filename: testdata/ruby/ruby_http_detection.rb
+            - filename: integration/custom_detectors/testdata/ruby/ruby_http_detection.rb
               line_number: 75
-            - filename: testdata/ruby/ruby_http_detection.rb
+            - filename: integration/custom_detectors/testdata/ruby/ruby_http_detection.rb
               line_number: 80
-            - filename: testdata/ruby/ruby_http_detection.rb
+            - filename: integration/custom_detectors/testdata/ruby/ruby_http_detection.rb
               line_number: 82
-            - filename: testdata/ruby/ruby_http_detection.rb
+            - filename: integration/custom_detectors/testdata/ruby/ruby_http_detection.rb
               line_number: 84
-            - filename: testdata/ruby/ruby_http_detection.rb
+            - filename: integration/custom_detectors/testdata/ruby/ruby_http_detection.rb
               line_number: 89
-            - filename: testdata/ruby/ruby_http_detection.rb
+            - filename: integration/custom_detectors/testdata/ruby/ruby_http_detection.rb
               line_number: 91
-            - filename: testdata/ruby/ruby_http_detection.rb
+            - filename: integration/custom_detectors/testdata/ruby/ruby_http_detection.rb
               line_number: 106
-            - filename: testdata/ruby/ruby_http_detection.rb
+            - filename: integration/custom_detectors/testdata/ruby/ruby_http_detection.rb
               line_number: 108
-            - filename: testdata/ruby/ruby_http_detection.rb
+            - filename: integration/custom_detectors/testdata/ruby/ruby_http_detection.rb
               line_number: 110
     - name: Lastname
       detectors:
         - name: ruby
           locations:
-            - filename: testdata/ruby/ruby_http_detection.rb
+            - filename: integration/custom_detectors/testdata/ruby/ruby_http_detection.rb
               line_number: 6
-            - filename: testdata/ruby/ruby_http_detection.rb
+            - filename: integration/custom_detectors/testdata/ruby/ruby_http_detection.rb
               line_number: 12
-            - filename: testdata/ruby/ruby_http_detection.rb
+            - filename: integration/custom_detectors/testdata/ruby/ruby_http_detection.rb
               line_number: 18
-            - filename: testdata/ruby/ruby_http_detection.rb
+            - filename: integration/custom_detectors/testdata/ruby/ruby_http_detection.rb
               line_number: 23
-            - filename: testdata/ruby/ruby_http_detection.rb
+            - filename: integration/custom_detectors/testdata/ruby/ruby_http_detection.rb
               line_number: 26
-            - filename: testdata/ruby/ruby_http_detection.rb
+            - filename: integration/custom_detectors/testdata/ruby/ruby_http_detection.rb
               line_number: 35
-            - filename: testdata/ruby/ruby_http_detection.rb
+            - filename: integration/custom_detectors/testdata/ruby/ruby_http_detection.rb
               line_number: 40
-            - filename: testdata/ruby/ruby_http_detection.rb
+            - filename: integration/custom_detectors/testdata/ruby/ruby_http_detection.rb
               line_number: 43
-            - filename: testdata/ruby/ruby_http_detection.rb
+            - filename: integration/custom_detectors/testdata/ruby/ruby_http_detection.rb
               line_number: 60
-            - filename: testdata/ruby/ruby_http_detection.rb
+            - filename: integration/custom_detectors/testdata/ruby/ruby_http_detection.rb
               line_number: 66
-            - filename: testdata/ruby/ruby_http_detection.rb
+            - filename: integration/custom_detectors/testdata/ruby/ruby_http_detection.rb
               line_number: 75
-            - filename: testdata/ruby/ruby_http_detection.rb
+            - filename: integration/custom_detectors/testdata/ruby/ruby_http_detection.rb
               line_number: 84
-            - filename: testdata/ruby/ruby_http_detection.rb
+            - filename: integration/custom_detectors/testdata/ruby/ruby_http_detection.rb
               line_number: 106
 risks:
     - detector_id: ruby_http_get_detection
@@ -103,7 +103,7 @@ risks:
         - name: Ethnic Origin
           stored: false
           locations:
-            - filename: testdata/ruby/ruby_http_detection.rb
+            - filename: integration/custom_detectors/testdata/ruby/ruby_http_detection.rb
               line_number: 3
               parent:
                 line_number: 7
@@ -111,87 +111,87 @@ risks:
         - name: Firstname
           stored: false
           locations:
-            - filename: testdata/ruby/ruby_http_detection.rb
+            - filename: integration/custom_detectors/testdata/ruby/ruby_http_detection.rb
               line_number: 6
               parent:
                 line_number: 7
                 content: URI.encode_www_form(user_1)
-            - filename: testdata/ruby/ruby_http_detection.rb
+            - filename: integration/custom_detectors/testdata/ruby/ruby_http_detection.rb
               line_number: 19
               parent:
                 line_number: 19
                 content: Curl.get("http://my.api.com/users/search?first_name=#{user_2.first_name}")
-            - filename: testdata/ruby/ruby_http_detection.rb
+            - filename: integration/custom_detectors/testdata/ruby/ruby_http_detection.rb
               line_number: 21
               parent:
                 line_number: 21
                 content: Curl.get("https://my.api.com/users/search?first_name=#{user_2.first_name}")
-            - filename: testdata/ruby/ruby_http_detection.rb
+            - filename: integration/custom_detectors/testdata/ruby/ruby_http_detection.rb
               line_number: 31
               parent:
                 line_number: 31
                 content: RestClient.get("http://my.api.com/users/search?first_name=#{user_2.first_name}")
-            - filename: testdata/ruby/ruby_http_detection.rb
+            - filename: integration/custom_detectors/testdata/ruby/ruby_http_detection.rb
               line_number: 33
               parent:
                 line_number: 33
                 content: RestClient.get("https://my.api.com/users/search?first_name=#{user_2.first_name}")
-            - filename: testdata/ruby/ruby_http_detection.rb
+            - filename: integration/custom_detectors/testdata/ruby/ruby_http_detection.rb
               line_number: 45
               parent:
                 line_number: 45
                 content: Typhoeus.get("http://my.api.com/users/search?first_name=#{user_9.first_name}")
-            - filename: testdata/ruby/ruby_http_detection.rb
+            - filename: integration/custom_detectors/testdata/ruby/ruby_http_detection.rb
               line_number: 47
               parent:
                 line_number: 47
                 content: Typhoeus.get("https://my.api.com/users/search?first_name=#{user_9.first_name}")
-            - filename: testdata/ruby/ruby_http_detection.rb
+            - filename: integration/custom_detectors/testdata/ruby/ruby_http_detection.rb
               line_number: 52
               parent:
                 line_number: 52
                 content: HTTParty.get("http://my.api.com/users/search?first_name=#{user_2.first_name}")
-            - filename: testdata/ruby/ruby_http_detection.rb
+            - filename: integration/custom_detectors/testdata/ruby/ruby_http_detection.rb
               line_number: 54
               parent:
                 line_number: 54
                 content: HTTParty.get("https://my.api.com/users/search?first_name=#{user_2.first_name}")
-            - filename: testdata/ruby/ruby_http_detection.rb
+            - filename: integration/custom_detectors/testdata/ruby/ruby_http_detection.rb
               line_number: 71
               parent:
                 line_number: 71
                 content: HTTP.get("http://my.api.com/users/search?first_name=#{user_2.first_name}")
-            - filename: testdata/ruby/ruby_http_detection.rb
+            - filename: integration/custom_detectors/testdata/ruby/ruby_http_detection.rb
               line_number: 73
               parent:
                 line_number: 73
                 content: 'HTTP.get("https://my.api.com/users/search", params: { user_8: { first_name: "John" } })'
-            - filename: testdata/ruby/ruby_http_detection.rb
+            - filename: integration/custom_detectors/testdata/ruby/ruby_http_detection.rb
               line_number: 80
               parent:
                 line_number: 80
                 content: Excon.get("http://my.api.com/users/search?first_name=#{user_2.first_name}")
-            - filename: testdata/ruby/ruby_http_detection.rb
+            - filename: integration/custom_detectors/testdata/ruby/ruby_http_detection.rb
               line_number: 82
               parent:
                 line_number: 82
                 content: Excon.get("https://my.api.com/users/search?first_name=#{user_2.first_name}")
-            - filename: testdata/ruby/ruby_http_detection.rb
+            - filename: integration/custom_detectors/testdata/ruby/ruby_http_detection.rb
               line_number: 89
               parent:
                 line_number: 89
                 content: Faraday.get("http://my.api.com/users/search?first_name=#{user_2.first_name}")
-            - filename: testdata/ruby/ruby_http_detection.rb
+            - filename: integration/custom_detectors/testdata/ruby/ruby_http_detection.rb
               line_number: 91
               parent:
                 line_number: 91
                 content: Faraday.get("https://my.api.com/users/search?first_name=#{user_2.first_name}")
-            - filename: testdata/ruby/ruby_http_detection.rb
+            - filename: integration/custom_detectors/testdata/ruby/ruby_http_detection.rb
               line_number: 108
               parent:
                 line_number: 108
                 content: HTTPX.get("http://my.api.com/users/search?first_name=#{user_2.first_name}")
-            - filename: testdata/ruby/ruby_http_detection.rb
+            - filename: integration/custom_detectors/testdata/ruby/ruby_http_detection.rb
               line_number: 110
               parent:
                 line_number: 110
@@ -199,7 +199,7 @@ risks:
         - name: Lastname
           stored: false
           locations:
-            - filename: testdata/ruby/ruby_http_detection.rb
+            - filename: integration/custom_detectors/testdata/ruby/ruby_http_detection.rb
               line_number: 6
               parent:
                 line_number: 7
@@ -209,7 +209,7 @@ risks:
         - name: Ethnic Origin
           stored: false
           locations:
-            - filename: testdata/ruby/ruby_http_detection.rb
+            - filename: integration/custom_detectors/testdata/ruby/ruby_http_detection.rb
               line_number: 3
               parent:
                 line_number: 7
@@ -217,52 +217,52 @@ risks:
         - name: Firstname
           stored: false
           locations:
-            - filename: testdata/ruby/ruby_http_detection.rb
+            - filename: integration/custom_detectors/testdata/ruby/ruby_http_detection.rb
               line_number: 6
               parent:
                 line_number: 7
                 content: URI.encode_www_form(user_1)
-            - filename: testdata/ruby/ruby_http_detection.rb
+            - filename: integration/custom_detectors/testdata/ruby/ruby_http_detection.rb
               line_number: 12
               parent:
                 line_number: 12
                 content: 'Net::HTTP.post_form(uri, { user_2: { first_name: "John", last_name: "Doe" } })'
-            - filename: testdata/ruby/ruby_http_detection.rb
+            - filename: integration/custom_detectors/testdata/ruby/ruby_http_detection.rb
               line_number: 23
               parent:
                 line_number: 24
                 content: Curl.post("http://my.api.com/users/create", user_4)
-            - filename: testdata/ruby/ruby_http_detection.rb
+            - filename: integration/custom_detectors/testdata/ruby/ruby_http_detection.rb
               line_number: 26
               parent:
                 line_number: 26
                 content: 'Curl.post("http://my.api.com/users/create", { user_5: { first_name: "John", last_name: "Doe" } })'
-            - filename: testdata/ruby/ruby_http_detection.rb
+            - filename: integration/custom_detectors/testdata/ruby/ruby_http_detection.rb
               line_number: 35
               parent:
                 line_number: 35
                 content: 'RestClient.post("http://my.api.com/users/create", { user_6: { first_name: "John", last_name: "Doe" } })'
-            - filename: testdata/ruby/ruby_http_detection.rb
+            - filename: integration/custom_detectors/testdata/ruby/ruby_http_detection.rb
               line_number: 43
               parent:
                 line_number: 43
                 content: 'Typhoeus.post("http://my.api.com/users/create", { body: { user_8: { first_name: "John", last_name: "Doe" } } })'
-            - filename: testdata/ruby/ruby_http_detection.rb
+            - filename: integration/custom_detectors/testdata/ruby/ruby_http_detection.rb
               line_number: 66
               parent:
                 line_number: 66
                 content: 'HTTParty.post("http://my.api.com/users/create", { body: { user: { first_name: "John", last_name: "Doe" } } })'
-            - filename: testdata/ruby/ruby_http_detection.rb
+            - filename: integration/custom_detectors/testdata/ruby/ruby_http_detection.rb
               line_number: 75
               parent:
                 line_number: 75
                 content: 'HTTP.post("http://my.api.com/users/create", form: { user_9: { first_name: "John", last_name: "Doe" } })'
-            - filename: testdata/ruby/ruby_http_detection.rb
+            - filename: integration/custom_detectors/testdata/ruby/ruby_http_detection.rb
               line_number: 84
               parent:
                 line_number: 84
                 content: 'Excon.post("http://my.api.com/users/create", body: { user_10: { first_name: "John", last_name: "Doe" } })'
-            - filename: testdata/ruby/ruby_http_detection.rb
+            - filename: integration/custom_detectors/testdata/ruby/ruby_http_detection.rb
               line_number: 106
               parent:
                 line_number: 106
@@ -270,122 +270,122 @@ risks:
         - name: Lastname
           stored: false
           locations:
-            - filename: testdata/ruby/ruby_http_detection.rb
+            - filename: integration/custom_detectors/testdata/ruby/ruby_http_detection.rb
               line_number: 6
               parent:
                 line_number: 7
                 content: URI.encode_www_form(user_1)
-            - filename: testdata/ruby/ruby_http_detection.rb
+            - filename: integration/custom_detectors/testdata/ruby/ruby_http_detection.rb
               line_number: 12
               parent:
                 line_number: 12
                 content: 'Net::HTTP.post_form(uri, { user_2: { first_name: "John", last_name: "Doe" } })'
-            - filename: testdata/ruby/ruby_http_detection.rb
+            - filename: integration/custom_detectors/testdata/ruby/ruby_http_detection.rb
               line_number: 23
               parent:
                 line_number: 24
                 content: Curl.post("http://my.api.com/users/create", user_4)
-            - filename: testdata/ruby/ruby_http_detection.rb
+            - filename: integration/custom_detectors/testdata/ruby/ruby_http_detection.rb
               line_number: 26
               parent:
                 line_number: 26
                 content: 'Curl.post("http://my.api.com/users/create", { user_5: { first_name: "John", last_name: "Doe" } })'
-            - filename: testdata/ruby/ruby_http_detection.rb
+            - filename: integration/custom_detectors/testdata/ruby/ruby_http_detection.rb
               line_number: 35
               parent:
                 line_number: 35
                 content: 'RestClient.post("http://my.api.com/users/create", { user_6: { first_name: "John", last_name: "Doe" } })'
-            - filename: testdata/ruby/ruby_http_detection.rb
+            - filename: integration/custom_detectors/testdata/ruby/ruby_http_detection.rb
               line_number: 43
               parent:
                 line_number: 43
                 content: 'Typhoeus.post("http://my.api.com/users/create", { body: { user_8: { first_name: "John", last_name: "Doe" } } })'
-            - filename: testdata/ruby/ruby_http_detection.rb
+            - filename: integration/custom_detectors/testdata/ruby/ruby_http_detection.rb
               line_number: 66
               parent:
                 line_number: 66
                 content: 'HTTParty.post("http://my.api.com/users/create", { body: { user: { first_name: "John", last_name: "Doe" } } })'
-            - filename: testdata/ruby/ruby_http_detection.rb
+            - filename: integration/custom_detectors/testdata/ruby/ruby_http_detection.rb
               line_number: 75
               parent:
                 line_number: 75
                 content: 'HTTP.post("http://my.api.com/users/create", form: { user_9: { first_name: "John", last_name: "Doe" } })'
-            - filename: testdata/ruby/ruby_http_detection.rb
+            - filename: integration/custom_detectors/testdata/ruby/ruby_http_detection.rb
               line_number: 84
               parent:
                 line_number: 84
                 content: 'Excon.post("http://my.api.com/users/create", body: { user_10: { first_name: "John", last_name: "Doe" } })'
-            - filename: testdata/ruby/ruby_http_detection.rb
+            - filename: integration/custom_detectors/testdata/ruby/ruby_http_detection.rb
               line_number: 106
               parent:
                 line_number: 106
                 content: 'HTTPX.post("http://my.api.com/users/create", json: { user_12: { first_name: "John", last_name: "Doe" } })'
     - detector_id: ruby_http_get_insecure
       locations:
-        - filename: testdata/ruby/ruby_http_detection.rb
+        - filename: integration/custom_detectors/testdata/ruby/ruby_http_detection.rb
           line_number: 3
           parent:
             line_number: 3
             content: URI("http://my.api.com/users/search?ethnic_origin=#{user_1.ethnic_origin}")
           content: |
             URI(<$INSECURE_URL>)
-        - filename: testdata/ruby/ruby_http_detection.rb
+        - filename: integration/custom_detectors/testdata/ruby/ruby_http_detection.rb
           line_number: 19
           parent:
             line_number: 19
             content: Curl.get("http://my.api.com/users/search?first_name=#{user_2.first_name}")
           content: |
             $CLIENT.get(<$INSECURE_URL>)
-        - filename: testdata/ruby/ruby_http_detection.rb
+        - filename: integration/custom_detectors/testdata/ruby/ruby_http_detection.rb
           line_number: 31
           parent:
             line_number: 31
             content: RestClient.get("http://my.api.com/users/search?first_name=#{user_2.first_name}")
           content: |
             $CLIENT.get(<$INSECURE_URL>)
-        - filename: testdata/ruby/ruby_http_detection.rb
+        - filename: integration/custom_detectors/testdata/ruby/ruby_http_detection.rb
           line_number: 45
           parent:
             line_number: 45
             content: Typhoeus.get("http://my.api.com/users/search?first_name=#{user_9.first_name}")
           content: |
             $CLIENT.get(<$INSECURE_URL>)
-        - filename: testdata/ruby/ruby_http_detection.rb
+        - filename: integration/custom_detectors/testdata/ruby/ruby_http_detection.rb
           line_number: 52
           parent:
             line_number: 52
             content: HTTParty.get("http://my.api.com/users/search?first_name=#{user_2.first_name}")
           content: |
             $CLIENT.get(<$INSECURE_URL>)
-        - filename: testdata/ruby/ruby_http_detection.rb
+        - filename: integration/custom_detectors/testdata/ruby/ruby_http_detection.rb
           line_number: 71
           parent:
             line_number: 71
             content: HTTP.get("http://my.api.com/users/search?first_name=#{user_2.first_name}")
           content: |
             $CLIENT.get(<$INSECURE_URL>)
-        - filename: testdata/ruby/ruby_http_detection.rb
+        - filename: integration/custom_detectors/testdata/ruby/ruby_http_detection.rb
           line_number: 80
           parent:
             line_number: 80
             content: Excon.get("http://my.api.com/users/search?first_name=#{user_2.first_name}")
           content: |
             $CLIENT.get(<$INSECURE_URL>)
-        - filename: testdata/ruby/ruby_http_detection.rb
+        - filename: integration/custom_detectors/testdata/ruby/ruby_http_detection.rb
           line_number: 89
           parent:
             line_number: 89
             content: Faraday.get("http://my.api.com/users/search?first_name=#{user_2.first_name}")
           content: |
             $CLIENT.get(<$INSECURE_URL>)
-        - filename: testdata/ruby/ruby_http_detection.rb
+        - filename: integration/custom_detectors/testdata/ruby/ruby_http_detection.rb
           line_number: 108
           parent:
             line_number: 108
             content: HTTPX.get("http://my.api.com/users/search?first_name=#{user_2.first_name}")
           content: |
             $CLIENT.get(<$INSECURE_URL>)
-        - filename: testdata/ruby/ruby_http_detection.rb
+        - filename: integration/custom_detectors/testdata/ruby/ruby_http_detection.rb
           line_number: 112
           parent:
             line_number: 112
@@ -394,77 +394,77 @@ risks:
             $CLIENT.get(<$INSECURE_URL>)
     - detector_id: ruby_http_post_insecure
       locations:
-        - filename: testdata/ruby/ruby_http_detection.rb
+        - filename: integration/custom_detectors/testdata/ruby/ruby_http_detection.rb
           line_number: 24
           parent:
             line_number: 24
             content: Curl.post("http://my.api.com/users/create", user_4)
           content: |
             $CLIENT.post(<$INSECURE_URL>)
-        - filename: testdata/ruby/ruby_http_detection.rb
+        - filename: integration/custom_detectors/testdata/ruby/ruby_http_detection.rb
           line_number: 26
           parent:
             line_number: 26
             content: 'Curl.post("http://my.api.com/users/create", { user_5: { first_name: "John", last_name: "Doe" } })'
           content: |
             $CLIENT.post(<$INSECURE_URL>)
-        - filename: testdata/ruby/ruby_http_detection.rb
+        - filename: integration/custom_detectors/testdata/ruby/ruby_http_detection.rb
           line_number: 35
           parent:
             line_number: 35
             content: 'RestClient.post("http://my.api.com/users/create", { user_6: { first_name: "John", last_name: "Doe" } })'
           content: |
             $CLIENT.post(<$INSECURE_URL>)
-        - filename: testdata/ruby/ruby_http_detection.rb
+        - filename: integration/custom_detectors/testdata/ruby/ruby_http_detection.rb
           line_number: 41
           parent:
             line_number: 41
             content: Typhoeus.post("http://my.api.com/users/create", options)
           content: |
             $CLIENT.post(<$INSECURE_URL>)
-        - filename: testdata/ruby/ruby_http_detection.rb
+        - filename: integration/custom_detectors/testdata/ruby/ruby_http_detection.rb
           line_number: 43
           parent:
             line_number: 43
             content: 'Typhoeus.post("http://my.api.com/users/create", { body: { user_8: { first_name: "John", last_name: "Doe" } } })'
           content: |
             $CLIENT.post(<$INSECURE_URL>)
-        - filename: testdata/ruby/ruby_http_detection.rb
+        - filename: integration/custom_detectors/testdata/ruby/ruby_http_detection.rb
           line_number: 64
           parent:
             line_number: 64
             content: HTTParty.post("http://my.api.com/users/create", params)
           content: |
             $CLIENT.post(<$INSECURE_URL>)
-        - filename: testdata/ruby/ruby_http_detection.rb
+        - filename: integration/custom_detectors/testdata/ruby/ruby_http_detection.rb
           line_number: 66
           parent:
             line_number: 66
             content: 'HTTParty.post("http://my.api.com/users/create", { body: { user: { first_name: "John", last_name: "Doe" } } })'
           content: |
             $CLIENT.post(<$INSECURE_URL>)
-        - filename: testdata/ruby/ruby_http_detection.rb
+        - filename: integration/custom_detectors/testdata/ruby/ruby_http_detection.rb
           line_number: 75
           parent:
             line_number: 75
             content: 'HTTP.post("http://my.api.com/users/create", form: { user_9: { first_name: "John", last_name: "Doe" } })'
           content: |
             $CLIENT.post(<$INSECURE_URL>)
-        - filename: testdata/ruby/ruby_http_detection.rb
+        - filename: integration/custom_detectors/testdata/ruby/ruby_http_detection.rb
           line_number: 84
           parent:
             line_number: 84
             content: 'Excon.post("http://my.api.com/users/create", body: { user_10: { first_name: "John", last_name: "Doe" } })'
           content: |
             $CLIENT.post(<$INSECURE_URL>)
-        - filename: testdata/ruby/ruby_http_detection.rb
+        - filename: integration/custom_detectors/testdata/ruby/ruby_http_detection.rb
           line_number: 97
           parent:
             line_number: 97
             content: Faraday.post("http://my.api.com/users/create", encoded_params)
           content: |
             $CLIENT.post(<$INSECURE_URL>)
-        - filename: testdata/ruby/ruby_http_detection.rb
+        - filename: integration/custom_detectors/testdata/ruby/ruby_http_detection.rb
           line_number: 106
           parent:
             line_number: 106

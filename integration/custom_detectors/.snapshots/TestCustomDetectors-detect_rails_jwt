@@ -3,13 +3,13 @@ data_types:
       detectors:
         - name: ruby
           locations:
-            - filename: testdata/ruby/detect_rails_jwt.rb
+            - filename: integration/custom_detectors/testdata/ruby/detect_rails_jwt.rb
               line_number: 12
     - name: Physical Address
       detectors:
         - name: ruby
           locations:
-            - filename: testdata/ruby/detect_rails_jwt.rb
+            - filename: integration/custom_detectors/testdata/ruby/detect_rails_jwt.rb
               line_number: 10
 risks:
     - detector_id: detect_rails_jwt
@@ -17,7 +17,7 @@ risks:
         - name: Email Address
           stored: false
           locations:
-            - filename: testdata/ruby/detect_rails_jwt.rb
+            - filename: integration/custom_detectors/testdata/ruby/detect_rails_jwt.rb
               line_number: 12
               parent:
                 line_number: 12
@@ -25,7 +25,7 @@ risks:
         - name: Physical Address
           stored: false
           locations:
-            - filename: testdata/ruby/detect_rails_jwt.rb
+            - filename: integration/custom_detectors/testdata/ruby/detect_rails_jwt.rb
               line_number: 10
               parent:
                 line_number: 10

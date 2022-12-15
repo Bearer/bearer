@@ -3,31 +3,31 @@ data_types:
       detectors:
         - name: ruby
           locations:
-            - filename: testdata/ruby/detect_rails_cookies.rb
+            - filename: integration/custom_detectors/testdata/ruby/detect_rails_cookies.rb
               line_number: 2
     - name: Firstname
       detectors:
         - name: ruby
           locations:
-            - filename: testdata/ruby/detect_rails_cookies.rb
+            - filename: integration/custom_detectors/testdata/ruby/detect_rails_cookies.rb
               line_number: 5
     - name: Lastname
       detectors:
         - name: ruby
           locations:
-            - filename: testdata/ruby/detect_rails_cookies.rb
+            - filename: integration/custom_detectors/testdata/ruby/detect_rails_cookies.rb
               line_number: 6
     - name: Physical Address
       detectors:
         - name: ruby
           locations:
-            - filename: testdata/ruby/detect_rails_cookies.rb
+            - filename: integration/custom_detectors/testdata/ruby/detect_rails_cookies.rb
               line_number: 3
     - name: Username
       detectors:
         - name: ruby
           locations:
-            - filename: testdata/ruby/detect_rails_cookies.rb
+            - filename: integration/custom_detectors/testdata/ruby/detect_rails_cookies.rb
               line_number: 12
 risks:
     - detector_id: detect_rails_cookies
@@ -35,7 +35,7 @@ risks:
         - name: Email Address
           stored: false
           locations:
-            - filename: testdata/ruby/detect_rails_cookies.rb
+            - filename: integration/custom_detectors/testdata/ruby/detect_rails_cookies.rb
               line_number: 2
               parent:
                 line_number: 2

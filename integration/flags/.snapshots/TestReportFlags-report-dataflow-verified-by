@@ -3,7 +3,7 @@ data_types:
       detectors:
         - name: detect_sql_create_public_table
           locations:
-            - filename: testdata/verified_by/schema.sql
+            - filename: integration/flags/testdata/verified_by/schema.sql
               line_number: 8
               encrypted: true
               verified_by:
@@ -25,13 +25,13 @@ data_types:
                     )
         - name: ruby
           locations:
-            - filename: testdata/verified_by/user.rb
+            - filename: integration/flags/testdata/verified_by/user.rb
               line_number: 2
     - name: Date of birth
       detectors:
         - name: detect_sql_create_public_table
           locations:
-            - filename: testdata/verified_by/schema.sql
+            - filename: integration/flags/testdata/verified_by/schema.sql
               line_number: 6
               stored: true
               parent:
@@ -50,7 +50,7 @@ data_types:
       detectors:
         - name: detect_sql_create_public_table
           locations:
-            - filename: testdata/verified_by/schema.sql
+            - filename: integration/flags/testdata/verified_by/schema.sql
               line_number: 5
               encrypted: true
               verified_by:
@@ -72,13 +72,13 @@ data_types:
                     )
         - name: ruby
           locations:
-            - filename: testdata/verified_by/user.rb
+            - filename: integration/flags/testdata/verified_by/user.rb
               line_number: 2
     - name: Firstname
       detectors:
         - name: detect_sql_create_public_table
           locations:
-            - filename: testdata/verified_by/schema.sql
+            - filename: integration/flags/testdata/verified_by/schema.sql
               line_number: 3
               stored: true
               parent:
@@ -97,7 +97,7 @@ data_types:
       detectors:
         - name: detect_sql_create_public_table
           locations:
-            - filename: testdata/verified_by/schema.sql
+            - filename: integration/flags/testdata/verified_by/schema.sql
               line_number: 4
               stored: true
               parent:
@@ -116,7 +116,7 @@ data_types:
       detectors:
         - name: detect_sql_create_public_table
           locations:
-            - filename: testdata/verified_by/schema.sql
+            - filename: integration/flags/testdata/verified_by/schema.sql
               line_number: 7
               encrypted: true
               verified_by:
@@ -138,7 +138,7 @@ data_types:
                     )
         - name: ruby
           locations:
-            - filename: testdata/verified_by/user.rb
+            - filename: integration/flags/testdata/verified_by/user.rb
               line_number: 2
 components: []
 

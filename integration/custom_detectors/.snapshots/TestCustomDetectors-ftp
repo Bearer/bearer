@@ -3,13 +3,13 @@ data_types:
       detectors:
         - name: ruby
           locations:
-            - filename: testdata/ruby/ftp.rb
+            - filename: integration/custom_detectors/testdata/ruby/ftp.rb
               line_number: 7
     - name: Ethnic Origin
       detectors:
         - name: ruby
           locations:
-            - filename: testdata/ruby/ftp.rb
+            - filename: integration/custom_detectors/testdata/ruby/ftp.rb
               line_number: 27
 risks:
     - detector_id: detect_rails_insecure_ftp_data
@@ -17,7 +17,7 @@ risks:
         - name: Ethnic Origin
           stored: false
           locations:
-            - filename: testdata/ruby/ftp.rb
+            - filename: integration/custom_detectors/testdata/ruby/ftp.rb
               line_number: 27
               parent:
                 line_number: 24
@@ -35,7 +35,7 @@ risks:
                     end
     - detector_id: detect_rails_insecure_ftp
       locations:
-        - filename: testdata/ruby/ftp.rb
+        - filename: integration/custom_detectors/testdata/ruby/ftp.rb
           line_number: 2
           parent:
             line_number: 2
@@ -45,7 +45,7 @@ risks:
                 end
           content: |
             Net::FTP.open()
-        - filename: testdata/ruby/ftp.rb
+        - filename: integration/custom_detectors/testdata/ruby/ftp.rb
           line_number: 10
           parent:
             line_number: 10
@@ -63,7 +63,7 @@ risks:
                 end
           content: |
             Net::FTP.open()
-        - filename: testdata/ruby/ftp.rb
+        - filename: integration/custom_detectors/testdata/ruby/ftp.rb
           line_number: 24
           parent:
             line_number: 24
