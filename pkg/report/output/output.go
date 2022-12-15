@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"strings"
 
 	"github.com/bearer/curio/pkg/commands/process/settings"
 	"github.com/bearer/curio/pkg/flag"
@@ -16,15 +17,43 @@ import (
 	"github.com/bearer/curio/pkg/types"
 	"gopkg.in/yaml.v3"
 
+	"github.com/hhatto/gocloc"
 	"github.com/rs/zerolog"
+	"github.com/rs/zerolog/log"
 )
 
 var ErrUndefinedFormat = errors.New("undefined output format")
 
-func ReportPolicies(report types.Report, output *zerolog.Event, config settings.Config) (bool, error) {
+func ReportPolicies(report types.Report, output *zerolog.Event, config settings.Config) (reportPassed bool, err error) {
+	reportSupported := false
+	reportPassed = false
+	err = nil
+
+	lineOfCodeOutput, err := stats.GoclocDetectorOutput(config.Scan.Target)
+	if err != nil {
+		return
+	}
+
+	reportSupported, err = anySupportedLanguagesPresent(lineOfCodeOutput , config)
+	if err != nil {
+		return
+	}
+
+	if !reportSupported {
+		placeholderStr, err2 := getPlaceholderOutput(report, config, lineOfCodeOutput)
+		if err2 != nil {
+			err = err2
+			return
+		}
+
+		reportPassed = true
+		output.Msg(placeholderStr.String())
+		return
+	}
+
 	policyResults, err := getPolicyReportOutput(report, config)
 	if err != nil {
-		return false, err
+		return
 	}
 
 	outputToFile := config.Report.Output != ""
@@ -32,7 +61,8 @@ func ReportPolicies(report types.Report, output *zerolog.Event, config settings.
 
 	output.Msg(reportStr.String())
 
-	return len(policyResults) == 0, nil
+	reportPassed = len(policyResults) == 0
+	return
 }
 
 func ReportJSON(report types.Report, output *zerolog.Event, config settings.Config) error {
@@ -76,17 +106,7 @@ func getReportOutput(report types.Report, config settings.Config) (any, error) {
 	case flag.ReportPolicies:
 		return getPolicyReportOutput(report, config)
 	case flag.ReportStats:
-		lineOfCodeOutput, err := stats.GoclocDetectorOutput(config.Scan.Target)
-		if err != nil {
-			return nil, err
-		}
-
-		dataflowOutput, err := getDataflow(report, config, true)
-		if err != nil {
-			return nil, err
-		}
-
-		return stats.GetOutput(lineOfCodeOutput, dataflowOutput, config)
+		return reportStats(report, config)
 	}
 
 	return nil, fmt.Errorf(`--report flag "%s" is not supported`, config.Report.Report)
@@ -112,4 +132,53 @@ func getDataflow(report types.Report, config settings.Config, isInternal bool) (
 	}
 
 	return dataflow.GetOutput(reportedDetections, config, isInternal)
+}
+
+func reportStats(report types.Report, config settings.Config) (*stats.Stats, error) {
+	lineOfCodeOutput, err := stats.GoclocDetectorOutput(config.Scan.Target)
+	if err != nil {
+		return nil, err
+	}
+
+	dataflowOutput, err := getDataflow(report, config, true)
+	if err != nil {
+		return nil, err
+	}
+
+	return stats.GetOutput(lineOfCodeOutput, dataflowOutput, config)
+}
+
+func anySupportedLanguagesPresent(inputgocloc *gocloc.Result, config settings.Config) (bool, error) {
+	ruleLanguages := make(map[string]bool)
+	for _, rule := range config.CustomDetector {
+		for _, language := range rule.Languages {
+			ruleLanguages[language] = true
+		}
+	}
+
+	foundLanguages := make(map[string]bool)
+	for _, language := range inputgocloc.Languages {
+		foundLanguages[strings.ToLower(language.Name)] = true
+	}
+
+	for foundLanguage := range foundLanguages {
+		for ruleLanguage := range ruleLanguages {
+			if foundLanguage == ruleLanguage {
+				log.Debug().Msgf("Found a language for which policies are applicable: %s", foundLanguage)
+				return true, nil
+			}
+		}
+	}
+
+	log.Debug().Msg("No language found for which policies are applicable")
+	return false, nil
+}
+
+func getPlaceholderOutput(report types.Report, config settings.Config, inputgocloc *gocloc.Result) (outputStr *strings.Builder, err error) {
+	dataflowOutput, err := getDataflow(report, config, true)
+	if err != nil {
+		return
+	}
+
+	return stats.GetPlaceholderOutput(inputgocloc, dataflowOutput, config)
 }
