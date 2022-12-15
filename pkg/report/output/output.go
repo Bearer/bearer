@@ -40,9 +40,9 @@ func ReportPolicies(report types.Report, output *zerolog.Event, config settings.
 	}
 
 	if !reportSupported {
-		placeholderStr, err2 := getPlaceholderOutput(report, config, lineOfCodeOutput)
-		if err2 != nil {
-			err = err2
+		var placeholderStr *strings.Builder
+		placeholderStr, err = getPlaceholderOutput(report, config, lineOfCodeOutput)
+		if err != nil {
 			return
 		}
 
