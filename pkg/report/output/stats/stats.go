@@ -7,7 +7,6 @@ import (
 	"github.com/bearer/curio/pkg/classification/db"
 	"github.com/bearer/curio/pkg/commands/process/settings"
 
-	// reportdetectors "github.com/bearer/curio/pkg/report/detectors"
 	"github.com/bearer/curio/pkg/report/output/dataflow"
 	"github.com/bearer/curio/pkg/util/maputil"
 	"github.com/hhatto/gocloc"
