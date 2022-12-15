@@ -13,7 +13,7 @@ Curio includes the following policies by default.
 {% endrenderTemplate %}
 
 {% for policy in policies %}
-  <h2 id="{{policy.display_id | slugify}}">{{policy.display_id}}: {{policy.name}}</h2>
+  <h2 id="{{policy.display_id}}">{{policy.display_id}}: {{policy.name}}</h2>
   <h3>Description</h3>
   <p>{{policy.description}}</p>
   <h3>{{policy.display_id}} configuration files</h3>
