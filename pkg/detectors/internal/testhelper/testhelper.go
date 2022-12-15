@@ -75,13 +75,13 @@ func RegistrationFor(detectorType reportdetectors.Type) []detectors.InitializedD
 }
 
 type InMemoryReport struct {
-	CustomDetections []detections.Detection
-	Detections       []*detections.Detection
-	Dependencies     []*detections.Detection
-	Frameworks       []*detections.FrameworkDetection
-	Errors           []*detections.ErrorDetection
-	SecretLeaks      []*detections.Detection
-	CreateView       []*detections.Detection
+	CustomDetections        []detections.Detection
+	Detections              []*detections.Detection
+	Dependencies            []*detections.Detection
+	Frameworks              []*detections.FrameworkDetection
+	Errors                  []*detections.ErrorDetection
+	SecretLeaks             []*detections.Detection
+	CreateView              []*detections.Detection
 	SchemaGroupDetectorType reportdetectors.Type
 	SchemaGroupObjectName   string
 }
@@ -213,8 +213,4 @@ func (report *InMemoryReport) AddError(filePath string, err error) {
 		Message: err.Error(),
 		File:    filePath,
 	})
-}
-
-func (report *InMemoryReport) AddFillerLine() {
-
 }

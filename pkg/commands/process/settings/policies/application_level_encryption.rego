@@ -6,11 +6,15 @@ import future.keywords
 
 policy_failure contains item if {
     datatype = input.dataflow.data_types[_]
+    datatype.name != "Unique Identifier"
+
     detector = datatype.detectors[_]
     location = detector.locations[_]
 
     location.stored
+
     not location.encrypted
+
 
     item := {
         "category_groups": data.bearer.common.groups_for_datatype(datatype),

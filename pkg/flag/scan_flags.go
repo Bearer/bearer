@@ -54,6 +54,12 @@ var (
 		Value:      false,
 		Usage:      "Suppress non-essential messages",
 	}
+	ForceFlag = Flag{
+		Name:       "force",
+		ConfigName: "scan.force",
+		Value:      false,
+		Usage:      "Disable the cache and runs the detections again",
+	}
 )
 
 type ScanFlagGroup struct {
@@ -64,6 +70,7 @@ type ScanFlagGroup struct {
 	InternalDomainsFlag         *Flag
 	ContextFlag                 *Flag
 	QuietFlag                   *Flag
+	ForceFlag                   *Flag
 }
 
 type ScanOptions struct {
@@ -75,6 +82,7 @@ type ScanOptions struct {
 	InternalDomains         []string      `mapstructure:"internal-domains" json:"internal-domains" yaml:"internal-domains"`
 	Context                 Context       `mapstructure:"context" json:"context" yaml:"context"`
 	Quiet                   bool          `mapstructure:"quiet" json:"quiet" yaml:"quiet"`
+	Force                   bool          `mapstructure:"force" json:"force" yaml:"force"`
 }
 
 func NewScanFlagGroup() *ScanFlagGroup {
@@ -86,6 +94,7 @@ func NewScanFlagGroup() *ScanFlagGroup {
 		InternalDomainsFlag:         &InternalDomainsFlag,
 		ContextFlag:                 &ContextFlag,
 		QuietFlag:                   &QuietFlag,
+		ForceFlag:                   &ForceFlag,
 	}
 }
 
@@ -102,6 +111,7 @@ func (f *ScanFlagGroup) Flags() []*Flag {
 		f.InternalDomainsFlag,
 		f.ContextFlag,
 		f.QuietFlag,
+		f.ForceFlag,
 	}
 }
 
@@ -119,6 +129,7 @@ func (f *ScanFlagGroup) ToOptions(args []string) (ScanOptions, error) {
 		InternalDomains:         getStringSlice(f.InternalDomainsFlag),
 		Context:                 getContext(f.ContextFlag),
 		Quiet:                   getBool(f.QuietFlag),
+		Force:                   getBool(f.ForceFlag),
 		Target:                  target,
 	}, nil
 }

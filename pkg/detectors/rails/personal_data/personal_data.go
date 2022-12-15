@@ -54,6 +54,11 @@ func ExtractFromDatabaseSchema(
 		columnName := stripQuotes(columnNode.Content())
 		columnTypeNode := captures["type"]
 		columnType := columnTypeNode.Content()
+
+		if columnType == "index" {
+			return nil
+		}
+
 		ruleNode := captures["rule"]
 
 		objectUUID := uuidHolder.Assign(tableNode.ID(), idGenerator)
@@ -61,12 +66,12 @@ func ExtractFromDatabaseSchema(
 
 		transformedObjectName := pluralizer.Singular(strings.ToLower(tableName))
 		currentSchema := schema.Schema{
-			ObjectName:      tableName,
-			ObjectUUID:      objectUUID,
-			FieldName:       columnName,
-			FieldUUID:       fieldUUID,
-			FieldType:       columnType,
-			SimpleFieldType: convertToSimpleType(columnType),
+			ObjectName:            tableName,
+			ObjectUUID:            objectUUID,
+			FieldName:             columnName,
+			FieldUUID:             fieldUUID,
+			FieldType:             columnType,
+			SimpleFieldType:       convertToSimpleType(columnType),
 			TransformedObjectName: transformedObjectName,
 		}
 

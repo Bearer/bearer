@@ -5,18 +5,21 @@ import (
 	"errors"
 	"fmt"
 	"os"
+	"os/exec"
+	"strings"
 
+	"github.com/google/uuid"
 	"github.com/rs/zerolog/log"
 
 	"golang.org/x/xerrors"
 
+	"github.com/bearer/curio/cmd/curio/build"
 	"github.com/bearer/curio/pkg/commands/process/balancer"
 	"github.com/bearer/curio/pkg/commands/process/settings"
 	"github.com/bearer/curio/pkg/commands/process/worker/work"
 	"github.com/bearer/curio/pkg/flag"
 	reportoutput "github.com/bearer/curio/pkg/report/output"
 	outputhandler "github.com/bearer/curio/pkg/util/output"
-	"github.com/bearer/curio/pkg/util/tmpfile"
 
 	"github.com/bearer/curio/pkg/types"
 )
@@ -46,8 +49,9 @@ type Runner interface {
 }
 
 type runner struct {
-	balancer   *balancer.Monitor
-	reportPath string
+	balancer       *balancer.Monitor
+	reportPath     string
+	reuseDetection bool
 }
 
 // NewRunner initializes Runner that provides scanning functionalities.
@@ -55,7 +59,39 @@ func NewRunner(ctx context.Context, scanSettings settings.Config) Runner {
 	r := &runner{}
 
 	r.balancer = balancer.New(scanSettings)
-	r.reportPath = tmpfile.Create(os.TempDir(), ".jsonl")
+	cmd := exec.Command("git", "-C", scanSettings.Scan.Target, "rev-parse", "HEAD")
+	sha, err := cmd.Output()
+
+	if err != nil {
+		log.Debug().Msgf("error getting git sha %s", err.Error())
+		sha = []byte(uuid.NewString())
+	}
+
+	path := os.TempDir() + strings.TrimSuffix(string(sha), "\n") + "-" + build.CommitSHA + ".jsonl"
+	r.reportPath = path
+
+	if _, err := os.Stat(path); err == nil {
+		if !scanSettings.Scan.Force {
+			r.reuseDetection = true
+			log.Debug().Msgf("reuse detection for %s", path)
+
+			return r
+		} else {
+			err := os.Remove(path)
+			if err != nil {
+				log.Error().Msgf("couldn't remove report path %s, %s", path, err.Error())
+			}
+		}
+	}
+
+	log.Debug().Msgf("creating report %s", path)
+	pathCreated, err := os.Create(path)
+
+	if err != nil {
+		log.Error().Msgf("failed to create path %s, %s, %#v", path, err.Error(), pathCreated)
+	}
+
+	log.Debug().Msgf("successfully created reportPath %s", path)
 
 	return r
 }
@@ -80,21 +116,21 @@ func (r *runner) ScanRepository(ctx context.Context, opts flag.Options) (types.R
 }
 
 func (r *runner) scanArtifact(ctx context.Context, opts flag.Options) (types.Report, error) {
-	task := r.balancer.ScheduleTask(work.ProcessRequest{
-		Repository: work.Repository{
-			Dir:               opts.Target,
-			PreviousCommitSHA: "",
-			CommitSHA:         "",
-		},
-		FilePath: r.reportPath,
-	})
-	result := <-task.Done
+	if !r.reuseDetection {
+		task := r.balancer.ScheduleTask(work.ProcessRequest{
+			Repository: work.Repository{
+				Dir:               opts.Target,
+				PreviousCommitSHA: "",
+				CommitSHA:         "",
+			},
+			FilePath: r.reportPath,
+		})
+		result := <-task.Done
 
-	if result.Error != nil {
-		return types.Report{}, result.Error
+		if result.Error != nil {
+			return types.Report{}, result.Error
+		}
 	}
-
-	log.Debug().Msgf("report location: %s", r.reportPath)
 
 	return types.Report{
 		Path: r.reportPath,

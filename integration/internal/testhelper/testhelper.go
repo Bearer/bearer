@@ -79,7 +79,9 @@ func RunTests(t *testing.T, tests []TestCase) {
 			arguments := test.arguments
 
 			if !test.displayStdErr {
-				arguments = append(arguments, "--quiet")
+				arguments = append(arguments, "--quiet", "--force")
+			} else {
+				arguments = append(arguments, "--force")
 			}
 
 			combinedOutput, err := executeApp(arguments)

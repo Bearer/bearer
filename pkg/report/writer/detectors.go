@@ -260,12 +260,6 @@ func (report *Detectors) AddError(filePath string, err error) {
 	})
 }
 
-func (report *Detectors) AddFillerLine() {
-	report.Add(&detections.Detection{
-		Type: detections.TypeFiller,
-	})
-}
-
 func (report *Detectors) Add(data interface{}) {
 	detectionsToAdd := []interface{}{data}
 
