@@ -1,7 +1,7 @@
 critical:
-    - policy_name: Only send sensitive data to secure FTP connections.
+    - policy_name: Only send sensitive data using SFTP connections.
       policy_display_id: CR-009
-      policy_description: Files containing sensitive data should only be sent to secure FTP connections. This policy checks if files created using sensitive data are sent to unsecure FTP connections.
+      policy_description: Files containing sensitive data should only be sent via SFTP connections. This policy checks if files created using sensitive data are sent to over SFTP connections.
       line_number: 27
       filename: testdata/ruby/insecure_ftp.rb
       category_groups:
@@ -22,9 +22,9 @@ critical:
         end
       omit_parent: false
 medium:
-    - policy_name: Only communicate with secure FTP connections.
+    - policy_name: Only communicate using SFTP connections.
       policy_display_id: CR-008
-      policy_description: Communication with FTP servers should be done securely in applications that process sensitive data. This policy checks if FTP connections are made securely.
+      policy_description: Communication with FTP servers should be done securely over SFTP in applications that process sensitive data. This policy checks if all FTP connections are made using SFTP.
       line_number: 10
       filename: testdata/ruby/insecure_ftp.rb
       category_groups:
@@ -33,9 +33,9 @@ medium:
       parent_line_number: 10
       parent_content: Net::FTP.new("ftp.ruby-lang.org")
       omit_parent: false
-    - policy_name: Only communicate with secure FTP connections.
+    - policy_name: Only communicate using SFTP connections.
       policy_display_id: CR-008
-      policy_description: Communication with FTP servers should be done securely in applications that process sensitive data. This policy checks if FTP connections are made securely.
+      policy_description: Communication with FTP servers should be done securely over SFTP in applications that process sensitive data. This policy checks if all FTP connections are made using SFTP.
       line_number: 17
       filename: testdata/ruby/insecure_ftp.rb
       category_groups:
@@ -50,9 +50,9 @@ medium:
           ftp.getbinaryfile('nif.rb-0.91.gz', 'nif.gz', 1024)
         end
       omit_parent: false
-    - policy_name: Only communicate with secure FTP connections.
+    - policy_name: Only communicate using SFTP connections.
       policy_display_id: CR-008
-      policy_description: Communication with FTP servers should be done securely in applications that process sensitive data. This policy checks if FTP connections are made securely.
+      policy_description: Communication with FTP servers should be done securely over SFTP in applications that process sensitive data. This policy checks if all FTP connections are made using SFTP.
       line_number: 24
       filename: testdata/ruby/insecure_ftp.rb
       category_groups:

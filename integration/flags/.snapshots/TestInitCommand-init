@@ -689,7 +689,7 @@ scan:
             id: application_level_encryption_missing
             display_id: CR-021
             name: Force application-level encryption when processing sensitive data.
-            description: Application-level encryption reduces that applications processing sensitive data can leak viewable data. This policy checks that sensitive data types in records are encrypted.
+            description: Application-level encryption greatly reduces the risk of a data breach or data leak by making data unreadable. This policy checks if sensitive data types found in records are encrypted.
             level: ""
             modules:
                 - path: policies/common.rego
@@ -838,7 +838,7 @@ scan:
             id: ruby_http_get_detection
             display_id: CR-015
             name: Do not send sensitive data as HTTP GET parameters.
-            description: Sensitive data should never be sent as part of the query string in HTTP get requests. This policy checks if sensitive data types are sent as GET parameters.
+            description: Sensitive data should never be sent as part of the query string in HTTP GET requests. This policy checks if sensitive data types are sent as GET parameters.
             level: ""
             modules:
                 - path: policies/common.rego
@@ -986,8 +986,8 @@ scan:
                 policy_failure = data.bearer.insecure_ftp.policy_failure
             id: detect_rails_insecure_ftp
             display_id: CR-008
-            name: Only communicate with secure FTP connections.
-            description: Communication with FTP servers should be done securely in applications that process sensitive data. This policy checks if FTP connections are made securely.
+            name: Only communicate using SFTP connections.
+            description: Communication with FTP servers should be done securely over SFTP in applications that process sensitive data. This policy checks if all FTP connections are made using SFTP.
             level: ""
             modules:
                 - path: policies/common.rego
@@ -1060,8 +1060,8 @@ scan:
                 policy_failure = data.bearer.insecure_ftp_with_data_category.policy_failure
             id: insecure_ftp_with_data_category
             display_id: CR-009
-            name: Only send sensitive data to secure FTP connections.
-            description: Files containing sensitive data should only be sent to secure FTP connections. This policy checks if files created using sensitive data are sent to unsecure FTP connections.
+            name: Only send sensitive data using SFTP connections.
+            description: Files containing sensitive data should only be sent via SFTP connections. This policy checks if files created using sensitive data are sent to over SFTP connections.
             level: ""
             modules:
                 - path: policies/common.rego
@@ -1134,8 +1134,8 @@ scan:
                 policy_failure = data.bearer.insecure_http_get.policy_failure
             id: insecure_http_get
             display_id: CR-013
-            name: Only communicate with secure HTTP connections.
-            description: Applications processing sensitive data should only connect to secure HTTP connections. This policy checks for unsecured HTTP connections.
+            name: Only communicate using HTTPS connections.
+            description: Applications processing sensitive data should only connect using HTTPS connections. This policy checks that all HTTP connections use HTTPS.
             level: ""
             modules:
                 - path: policies/common.rego
@@ -1209,7 +1209,7 @@ scan:
             id: insecure_http_with_data_category
             display_id: CR-014
             name: Only send sensitive data through HTTPS connections.
-            description: Sensitive data sent through HTTP should only be done securely. This policy checks that any transmissions over HTTP that contain sensitive data do so over HTTPS.
+            description: Sensitive data should only be sent through HTTPS. This policy checks that any transmissions over HTTP that contain sensitive data do so over HTTPS.
             level: ""
             modules:
                 - path: policies/common.rego
@@ -1297,7 +1297,7 @@ scan:
             id: detect_rails_insecure_smtp
             display_id: CR-010
             name: Only communicate with secure SMTP connections.
-            description: Secure connections to SMTP help prevent unauthorized actors from viewing transmitted data. This policy checks if SMTP mailer settings are set to only allow secure connections.
+            description: Secure connections using SMTP help prevent unauthorized actors from viewing transmitted data. This policy checks if SMTP mailer settings are set to only allow secure connections.
             level: ""
             modules:
                 - path: policies/common.rego
@@ -1445,7 +1445,7 @@ scan:
             id: detect_ruby_logger
             display_id: CR-001
             name: Do not send sensitive data to loggers.
-            description: Leaking sensitive data to loggers is a common cause of data breaches. This policy looks for instances of sensitive data sent to loggers.
+            description: Leaking sensitive data to loggers is a common cause of data leaks and can lead to data breaches. This policy looks for instances of sensitive data sent to loggers.
             level: ""
             modules:
                 - path: policies/common.rego
@@ -1519,7 +1519,7 @@ scan:
             id: ruby_password_length
             display_id: CR-019
             name: Enforce stronger password requirements.
-            description: Minimum password length should be enforced any time password creation occurs. This policy checks if configurations and validations made for passwords include a secure minimum length.
+            description: Minimum password length should be enforced any time password creation occurs. This policy checks if configurations and validations made for passwords include a minimum length of 8.
             level: ""
             modules:
                 - path: policies/common.rego
@@ -1666,7 +1666,7 @@ scan:
             id: detect_rails_session
             display_id: CR-003
             name: Do not store sensitive data in session cookies.
-            description: Sensitive data should not be stored in the session. This policy looks for any sensitive data stored within the session cookies.
+            description: Sensitive data should not be stored in session cookies. This policy looks for any sensitive data stored within the session cookies.
             level: ""
             modules:
                 - path: policies/common.rego
