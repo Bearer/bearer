@@ -55,3 +55,32 @@ func TestPolicesWithHealthContext(t *testing.T) {
 
 	testhelper.RunTests(t, tests)
 }
+
+func TestPolicyFlags(t *testing.T) {
+	tests := []testhelper.TestCase{
+		testhelper.NewTestCase(
+			"skip_policy",
+			[]string{
+				"scan",
+				filepath.Join("testdata", "ruby/logger_leaking.rb"),
+				"--report=policies",
+				"--format=yaml",
+				"--skip-policy=CR-001",
+			},
+			testhelper.TestCaseOptions{StartWorker: true},
+		),
+		testhelper.NewTestCase(
+			"only_policy",
+			[]string{
+				"scan",
+				filepath.Join("testdata", "ruby/logger_leaking.rb"),
+				"--report=policies",
+				"--format=yaml",
+				"--only-policy=CR-001",
+			},
+			testhelper.TestCaseOptions{StartWorker: true},
+		),
+	}
+
+	testhelper.RunTests(t, tests)
+}
