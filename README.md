@@ -16,7 +16,6 @@
 
   [![GitHub Release][release-img]][release]
   [![Test][test-img]][test]
-  ![GitHub](https://img.shields.io/github/license/bearer/curio)
   [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg)](CODE_OF_CONDUCT.md)
   [![Discord](https://img.shields.io/discord/1042147477765242973?label=discord)][discord]
 
