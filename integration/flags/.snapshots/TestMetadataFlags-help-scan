@@ -21,10 +21,10 @@ Policy Flags
 Scan Flags
       --context string                       Expand context of schema classification e.g., --context=health, to include data types particular to health
       --debug                                Enable debug logs
-      --disable-domain-resolution            Do not attempt to resolve detected domains during classification (default false), e.g. --disable-domain-resolution=true (default true)
-      --domain-resolution-timeout duration   Set timeout when attempting to resolve detected domains during classification (default 3 seconds), e.g. --domain-resolution-timeout=3s (default 3s)
+      --disable-domain-resolution            Do not attempt to resolve detected domains during classification (default true)
+      --domain-resolution-timeout duration   Set timeout when attempting to resolve detected domains during classification, e.g. --domain-resolution-timeout=3s (default 3s)
       --force                                Disable the cache and runs the detections again
-      --internal-domains strings             Define regular expressions for better classification of private or unreachable domains e.g. --internal-domains="*.my-company.com,private.sh"
+      --internal-domains strings             Define regular expressions for better classification of private or unreachable domains e.g. --internal-domains=".*.my-company.com,private.sh"
       --quiet                                Suppress non-essential messages
       --skip-path strings                    Specify the comma separated files and directories to skip. Supports * syntax, e.g. --skip-path users/*.go,users/admin.sql
 
