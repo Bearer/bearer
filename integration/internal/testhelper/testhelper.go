@@ -15,10 +15,12 @@ type TestCase struct {
 	shouldSucceed bool
 	options       TestCaseOptions
 	displayStdErr bool
+	ignoreForce   bool
 }
 
 type TestCaseOptions struct {
 	DisplayStdErr bool
+	IgnoreForce   bool
 }
 
 func NewTestCase(name string, arguments []string, options TestCaseOptions) TestCase {
@@ -28,6 +30,7 @@ func NewTestCase(name string, arguments []string, options TestCaseOptions) TestC
 		shouldSucceed: true,
 		options:       options,
 		displayStdErr: options.DisplayStdErr,
+		ignoreForce:   options.IgnoreForce,
 	}
 }
 
@@ -79,8 +82,10 @@ func RunTests(t *testing.T, tests []TestCase) {
 			arguments := test.arguments
 
 			if !test.displayStdErr {
-				arguments = append(arguments, "--quiet", "--force")
-			} else {
+				arguments = append(arguments, "--quiet")
+			}
+
+			if !test.ignoreForce {
 				arguments = append(arguments, "--force")
 			}
 

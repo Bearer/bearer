@@ -13,15 +13,15 @@ options:
     - name: disable-domain-resolution
       default_value: "true"
       usage: |
-        Do not attempt to resolve detected domains during classification (default false), e.g. --disable-domain-resolution=true
+        Do not attempt to resolve detected domains during classification
     - name: domain-resolution-timeout
       default_value: 3s
       usage: |
-        Set timeout when attempting to resolve detected domains during classification (default 3 seconds), e.g. --domain-resolution-timeout=3s
+        Set timeout when attempting to resolve detected domains during classification, e.g. --domain-resolution-timeout=3s
     - name: existing-worker
       usage: Specify the URL of an existing worker.
     - name: file-size-max
-      default_value: "100000"
+      default_value: "2000000"
       usage: Ignore files larger than the specified value.
     - name: files-to-batch
       default_value: "1"
@@ -36,7 +36,7 @@ options:
     - name: internal-domains
       default_value: '[]'
       usage: |
-        Define regular expressions for better classification of private or unreachable domains e.g. --internal-domains="*.my-company.com,private.sh"
+        Define regular expressions for better classification of private or unreachable domains e.g. --internal-domains=".*.my-company.com,private.sh"
     - name: memory-max
       default_value: "800000000"
       usage: |
