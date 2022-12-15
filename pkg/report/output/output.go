@@ -161,14 +161,19 @@ func anySupportedLanguagesPresent(inputgocloc *gocloc.Result, config settings.Co
 		foundLanguages[strings.ToLower(language.Name)] = true
 	}
 
-	for foundLanguage := range foundLanguages {
-		for ruleLanguage := range ruleLanguages {
-			if foundLanguage == ruleLanguage {
-				log.Debug().Msgf("Found a language for which policies are applicable: %s", foundLanguage)
-				return true, nil
-			}
-		}
+	_, rubyPresent := foundLanguages["ruby"]
+	if rubyPresent {
+		return true, nil
 	}
+
+	// for foundLanguage := range foundLanguages {
+	//	for ruleLanguage := range ruleLanguages {
+	//		if foundLanguage == ruleLanguage {
+	//			log.Debug().Msgf("Found a language for which policies are applicable: %s", foundLanguage)
+	//			return true, nil
+	//		}
+	//	}
+	// }
 
 	log.Debug().Msg("No language found for which policies are applicable")
 	return false, nil
