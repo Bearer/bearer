@@ -135,12 +135,12 @@ func FromOptions(opts flag.Options) (Config, error) {
 	for key := range policies {
 		policy := policies[key]
 
-		if len(opts.PolicyOptions.OnlyPolicy) > 0 && !opts.PolicyOptions.OnlyPolicy[policy.Id] {
+		if len(opts.PolicyOptions.OnlyPolicy) > 0 && !opts.PolicyOptions.OnlyPolicy[policy.DisplayId] {
 			delete(policies, key)
 			continue
 		}
 
-		if opts.PolicyOptions.SkipPolicy[policy.Id] {
+		if opts.PolicyOptions.SkipPolicy[policy.DisplayId] {
 			delete(policies, key)
 			continue
 		}
