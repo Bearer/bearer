@@ -2,7 +2,7 @@
 layout: layouts/base.njk
 ---
 {% set currentUrl = page.url %}
-<main class="max-w-6xl mx-auto flex flex-col sm:grid grid-cols-5 text-black dark:text-neutral-100 px-8 relative gap-4 pt-4">
+<main class="max-w-7xl mx-auto flex flex-col sm:grid grid-cols-5 text-black dark:text-neutral-100 px-8 relative gap-4 pt-4">
 	<nav class="hidden self-stretch top-heading-offset sm:revert sm:self-start sticky  col-span-1  bg-white dark:bg-neutral-600 z-10 pb-4" id="doc-nav" >
 		<ul>
 			{% for heading in nav %}
@@ -20,7 +20,7 @@ layout: layouts/base.njk
 		</ul>
 	</nav>
 	<div class="grid col-span-4 gap-4 grid-cols-4">
-		<article class="order-last md:order-first prose prose-lg dark:prose-invert max-w-none col-span-4 md:col-span-3">
+		<article class="order-last md:order-first prose prose-lg dark:prose-invert prose-headings:mb-4 prose-headings:mt-8 prose-h1:mt-0 col-span-4 md:col-span-3">
 			{{ content | safe }}
 		</article>
 		<aside class="self-start col-span-3 sm:col-span-2 md:col-span-1 md:max-h-[80vh] md:top-heading-offset overflow-y-scroll dark:text-neutral-200 md:block md:sticky text-sm border-solid border-2 border-neutral-200 dark:border-neutral-500 rounded-md">
