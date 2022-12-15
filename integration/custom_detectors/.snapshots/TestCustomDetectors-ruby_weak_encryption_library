@@ -42,6 +42,22 @@ risks:
               parent:
                 line_number: 3
                 content: Digest::MD5.hexdigest(user.first_name)
+        - name: Gender identity
+          stored: false
+          locations:
+            - filename: testdata/ruby/weak_encryption_library.rb
+              line_number: 6
+              parent:
+                line_number: 6
+                content: Crypt::Blowfish.new("insecure").encrypt_block({ |u| user.gender_identity })
+        - name: Physical Address
+          stored: false
+          locations:
+            - filename: testdata/ruby/weak_encryption_library.rb
+              line_number: 4
+              parent:
+                line_number: 4
+                content: RC4.new("insecure").encrypt(user.address)
     - detector_id: encrypt_method_call
       data_types:
         - name: Physical Address
