@@ -86,16 +86,11 @@ func (holder *Holder) AddDependency(classifiedDetection dependenciesclassificati
 
 	componentType := getComponentType(classifiedDetection.Classification.Decision.Reason)
 
-	componentUUID := classifiedDetection.Classification.RecipeUUID
-	if componentUUID == "" {
-		componentUUID = classifiedDetection.Classification.RecipeName
-	}
-
 	if classifiedDetection.Classification.Decision.State == classify.Valid {
 		holder.addComponent(
 			classifiedDetection.Classification.RecipeName,
 			componentType,
-			componentUUID,
+			classifiedDetection.Classification.RecipeUUID,
 			string(classifiedDetection.DetectorType),
 			classifiedDetection.Source.Filename,
 			*classifiedDetection.Source.LineNumber,
