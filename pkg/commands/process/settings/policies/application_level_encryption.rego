@@ -14,7 +14,7 @@ policy_failure contains item if {
 
     item := {
         "category_groups": data.bearer.common.groups_for_datatype(datatype),
-        "severity": data.bearer.common.severity_of_datatype(datatype),
+        "severity": "low",
         "filename": location.filename,
         "line_number": location.line_number,
         "parent_line_number": location.parent.line_number,
