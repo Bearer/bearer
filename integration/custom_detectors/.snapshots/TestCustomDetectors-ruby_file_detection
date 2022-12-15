@@ -3,39 +3,39 @@ data_types:
       detectors:
         - name: ruby
           locations:
-            - filename: testdata/ruby/ruby_file_detection.rb
+            - filename: integration/custom_detectors/testdata/ruby/ruby_file_detection.rb
               line_number: 5
-            - filename: testdata/ruby/ruby_file_detection.rb
+            - filename: integration/custom_detectors/testdata/ruby/ruby_file_detection.rb
               line_number: 12
-            - filename: testdata/ruby/ruby_file_detection.rb
+            - filename: integration/custom_detectors/testdata/ruby/ruby_file_detection.rb
               line_number: 16
-            - filename: testdata/ruby/ruby_file_detection.rb
+            - filename: integration/custom_detectors/testdata/ruby/ruby_file_detection.rb
               line_number: 24
     - name: Emails
       detectors:
         - name: ruby
           locations:
-            - filename: testdata/ruby/ruby_file_detection.rb
+            - filename: integration/custom_detectors/testdata/ruby/ruby_file_detection.rb
               line_number: 14
     - name: Firstname
       detectors:
         - name: ruby
           locations:
-            - filename: testdata/ruby/ruby_file_detection.rb
+            - filename: integration/custom_detectors/testdata/ruby/ruby_file_detection.rb
               line_number: 6
-            - filename: testdata/ruby/ruby_file_detection.rb
+            - filename: integration/custom_detectors/testdata/ruby/ruby_file_detection.rb
               line_number: 16
-            - filename: testdata/ruby/ruby_file_detection.rb
+            - filename: integration/custom_detectors/testdata/ruby/ruby_file_detection.rb
               line_number: 25
     - name: Lastname
       detectors:
         - name: ruby
           locations:
-            - filename: testdata/ruby/ruby_file_detection.rb
+            - filename: integration/custom_detectors/testdata/ruby/ruby_file_detection.rb
               line_number: 7
-            - filename: testdata/ruby/ruby_file_detection.rb
+            - filename: integration/custom_detectors/testdata/ruby/ruby_file_detection.rb
               line_number: 16
-            - filename: testdata/ruby/ruby_file_detection.rb
+            - filename: integration/custom_detectors/testdata/ruby/ruby_file_detection.rb
               line_number: 26
 risks:
     - detector_id: ruby_file_detection
@@ -43,7 +43,7 @@ risks:
         - name: Email Address
           stored: false
           locations:
-            - filename: testdata/ruby/ruby_file_detection.rb
+            - filename: integration/custom_detectors/testdata/ruby/ruby_file_detection.rb
               line_number: 5
               parent:
                 line_number: 1
@@ -58,7 +58,7 @@ risks:
                     		]
                     	end
                     end
-            - filename: testdata/ruby/ruby_file_detection.rb
+            - filename: integration/custom_detectors/testdata/ruby/ruby_file_detection.rb
               line_number: 16
               parent:
                 line_number: 14
@@ -68,7 +68,7 @@ risks:
                     		f.write "#{user_4.email},#{user_4.first_name},#{user_4.last_name}"
                     	end
                     end
-            - filename: testdata/ruby/ruby_file_detection.rb
+            - filename: integration/custom_detectors/testdata/ruby/ruby_file_detection.rb
               line_number: 24
               parent:
                 line_number: 20
@@ -86,7 +86,7 @@ risks:
         - name: Firstname
           stored: false
           locations:
-            - filename: testdata/ruby/ruby_file_detection.rb
+            - filename: integration/custom_detectors/testdata/ruby/ruby_file_detection.rb
               line_number: 6
               parent:
                 line_number: 1
@@ -101,7 +101,7 @@ risks:
                     		]
                     	end
                     end
-            - filename: testdata/ruby/ruby_file_detection.rb
+            - filename: integration/custom_detectors/testdata/ruby/ruby_file_detection.rb
               line_number: 16
               parent:
                 line_number: 14
@@ -111,7 +111,7 @@ risks:
                     		f.write "#{user_4.email},#{user_4.first_name},#{user_4.last_name}"
                     	end
                     end
-            - filename: testdata/ruby/ruby_file_detection.rb
+            - filename: integration/custom_detectors/testdata/ruby/ruby_file_detection.rb
               line_number: 25
               parent:
                 line_number: 20
@@ -129,7 +129,7 @@ risks:
         - name: Lastname
           stored: false
           locations:
-            - filename: testdata/ruby/ruby_file_detection.rb
+            - filename: integration/custom_detectors/testdata/ruby/ruby_file_detection.rb
               line_number: 7
               parent:
                 line_number: 1
@@ -144,7 +144,7 @@ risks:
                     		]
                     	end
                     end
-            - filename: testdata/ruby/ruby_file_detection.rb
+            - filename: integration/custom_detectors/testdata/ruby/ruby_file_detection.rb
               line_number: 16
               parent:
                 line_number: 14
@@ -154,7 +154,7 @@ risks:
                     		f.write "#{user_4.email},#{user_4.first_name},#{user_4.last_name}"
                     	end
                     end
-            - filename: testdata/ruby/ruby_file_detection.rb
+            - filename: integration/custom_detectors/testdata/ruby/ruby_file_detection.rb
               line_number: 26
               parent:
                 line_number: 20

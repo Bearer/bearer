@@ -3,13 +3,13 @@ data_types:
       detectors:
         - name: ruby
           locations:
-            - filename: testdata/ruby/detect_rails_session.rb
+            - filename: integration/custom_detectors/testdata/ruby/detect_rails_session.rb
               line_number: 2
     - name: Username
       detectors:
         - name: ruby
           locations:
-            - filename: testdata/ruby/detect_rails_session.rb
+            - filename: integration/custom_detectors/testdata/ruby/detect_rails_session.rb
               line_number: 1
 risks:
     - detector_id: detect_rails_session
@@ -17,7 +17,7 @@ risks:
         - name: Email Address
           stored: false
           locations:
-            - filename: testdata/ruby/detect_rails_session.rb
+            - filename: integration/custom_detectors/testdata/ruby/detect_rails_session.rb
               line_number: 2
               parent:
                 line_number: 2

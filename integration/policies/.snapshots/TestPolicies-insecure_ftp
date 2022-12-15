@@ -3,7 +3,7 @@ critical:
       policy_display_id: CR-009
       policy_description: Files containing sensitive data should only be sent via SFTP connections. This policy checks if files created using sensitive data are sent to over SFTP connections.
       line_number: 27
-      filename: testdata/ruby/insecure_ftp.rb
+      filename: integration/policies/testdata/ruby/insecure_ftp.rb
       category_groups:
         - PII
         - Personal Data (Sensitive)
@@ -26,7 +26,7 @@ medium:
       policy_display_id: CR-008
       policy_description: Communication with FTP servers should be done securely over SFTP in applications that process sensitive data. This policy checks if all FTP connections are made using SFTP.
       line_number: 10
-      filename: testdata/ruby/insecure_ftp.rb
+      filename: integration/policies/testdata/ruby/insecure_ftp.rb
       category_groups:
         - PII
         - Personal Data (Sensitive)
@@ -37,7 +37,7 @@ medium:
       policy_display_id: CR-008
       policy_description: Communication with FTP servers should be done securely over SFTP in applications that process sensitive data. This policy checks if all FTP connections are made using SFTP.
       line_number: 17
-      filename: testdata/ruby/insecure_ftp.rb
+      filename: integration/policies/testdata/ruby/insecure_ftp.rb
       category_groups:
         - PII
         - Personal Data (Sensitive)
@@ -54,7 +54,7 @@ medium:
       policy_display_id: CR-008
       policy_description: Communication with FTP servers should be done securely over SFTP in applications that process sensitive data. This policy checks if all FTP connections are made using SFTP.
       line_number: 24
-      filename: testdata/ruby/insecure_ftp.rb
+      filename: integration/policies/testdata/ruby/insecure_ftp.rb
       category_groups:
         - PII
         - Personal Data (Sensitive)

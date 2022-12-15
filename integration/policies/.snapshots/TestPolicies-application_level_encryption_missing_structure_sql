@@ -3,7 +3,7 @@ low:
       policy_display_id: CR-021
       policy_description: Application-level encryption greatly reduces the risk of a data breach or data leak by making data unreadable. This policy checks if sensitive data types found in records are encrypted.
       line_number: 3
-      filename: testdata/ruby/application_level_encryption_missing/structure_sql/db/structure.sql
+      filename: integration/policies/testdata/ruby/application_level_encryption_missing/structure_sql/db/structure.sql
       category_groups:
         - PII
       parent_line_number: 1
@@ -21,7 +21,7 @@ low:
       policy_display_id: CR-021
       policy_description: Application-level encryption greatly reduces the risk of a data breach or data leak by making data unreadable. This policy checks if sensitive data types found in records are encrypted.
       line_number: 4
-      filename: testdata/ruby/application_level_encryption_missing/structure_sql/db/structure.sql
+      filename: integration/policies/testdata/ruby/application_level_encryption_missing/structure_sql/db/structure.sql
       category_groups:
         - PII
       parent_line_number: 1

@@ -1,4 +1,4 @@
-{"data_types":[{"name":"Email Address","detectors":[{"name":"ruby","locations":[{"filename":"testdata/simple/main.rb","line_number":1}]}]}],"risks":[{"detector_id":"detect_ruby_logger","data_types":[{"name":"Email Address","stored":false,"locations":[{"filename":"testdata/simple/main.rb","line_number":1,"parent":{"line_number":1,"content":"logger.info(\"user info\", user.email)"}}]}]}],"components":[]}
+{"data_types":[{"name":"Email Address","detectors":[{"name":"ruby","locations":[{"filename":"integration/flags/testdata/simple/main.rb","line_number":1}]}]}],"risks":[{"detector_id":"detect_ruby_logger","data_types":[{"name":"Email Address","stored":false,"locations":[{"filename":"integration/flags/testdata/simple/main.rb","line_number":1,"parent":{"line_number":1,"content":"logger.info(\"user info\", user.email)"}}]}]}],"components":[]}
 
 --
 

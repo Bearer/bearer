@@ -73,6 +73,7 @@ func (worker *Worker) Start() {
 
 	worker.FileList, err = filelist.Discover(worker.task.Definition.Dir, worker.config)
 	if err != nil {
+		worker.process.kill()
 		worker.complete(err)
 		return
 	}

@@ -3,25 +3,25 @@ data_types:
       detectors:
         - name: ruby
           locations:
-            - filename: testdata/ruby/weak_encryption_library.rb
+            - filename: integration/custom_detectors/testdata/ruby/weak_encryption_library.rb
               line_number: 2
     - name: Firstname
       detectors:
         - name: ruby
           locations:
-            - filename: testdata/ruby/weak_encryption_library.rb
+            - filename: integration/custom_detectors/testdata/ruby/weak_encryption_library.rb
               line_number: 3
     - name: Gender identity
       detectors:
         - name: ruby
           locations:
-            - filename: testdata/ruby/weak_encryption_library.rb
+            - filename: integration/custom_detectors/testdata/ruby/weak_encryption_library.rb
               line_number: 6
     - name: Physical Address
       detectors:
         - name: ruby
           locations:
-            - filename: testdata/ruby/weak_encryption_library.rb
+            - filename: integration/custom_detectors/testdata/ruby/weak_encryption_library.rb
               line_number: 4
 risks:
     - detector_id: detect_ruby_weak_encryption
@@ -29,7 +29,7 @@ risks:
         - name: Email Address
           stored: false
           locations:
-            - filename: testdata/ruby/weak_encryption_library.rb
+            - filename: integration/custom_detectors/testdata/ruby/weak_encryption_library.rb
               line_number: 2
               parent:
                 line_number: 2
@@ -37,7 +37,7 @@ risks:
         - name: Firstname
           stored: false
           locations:
-            - filename: testdata/ruby/weak_encryption_library.rb
+            - filename: integration/custom_detectors/testdata/ruby/weak_encryption_library.rb
               line_number: 3
               parent:
                 line_number: 3
@@ -47,7 +47,7 @@ risks:
         - name: Physical Address
           stored: false
           locations:
-            - filename: testdata/ruby/weak_encryption_library.rb
+            - filename: integration/custom_detectors/testdata/ruby/weak_encryption_library.rb
               line_number: 4
               parent:
                 line_number: 4
@@ -57,7 +57,7 @@ risks:
         - name: Gender identity
           stored: false
           locations:
-            - filename: testdata/ruby/weak_encryption_library.rb
+            - filename: integration/custom_detectors/testdata/ruby/weak_encryption_library.rb
               line_number: 6
               parent:
                 line_number: 6

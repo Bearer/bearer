@@ -8,8 +8,8 @@ import (
 )
 
 func newScanTest(language, name, filename string) testhelper.TestCase {
-	arguments := []string{"scan", filepath.Join("testdata", language, filename), "--report=dataflow", "--format=yaml"}
-	options := testhelper.TestCaseOptions{StartWorker: true}
+	arguments := []string{"scan", filepath.Join("integration", "custom_detectors", "testdata", language, filename), "--report=dataflow", "--format=yaml"}
+	options := testhelper.TestCaseOptions{}
 
 	return testhelper.NewTestCase(name, arguments, options)
 }

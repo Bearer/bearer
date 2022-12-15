@@ -15,12 +15,16 @@ jobs:
   build:
     runs-on: ubuntu-latest
     timeout-minutes: 15
-  
+
     steps:
       - uses: actions/checkout@v3
       - name: Set up Go
         uses: actions/setup-go@v3
         with:
           go-version: 1.18
+      - name: Build binary for integration tests
+        run: go build -a -o ./curio ./cmd/curio/main.go
       - name: Run tests
         run: go test -v ./...
+        env:
+          CURIO_BINARY: true

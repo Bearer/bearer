@@ -7,7 +7,7 @@ import (
 )
 
 func newMetadataTest(name string, arguments []string) testhelper.TestCase {
-	return testhelper.NewTestCase(name, arguments, testhelper.TestCaseOptions{})
+	return testhelper.NewTestCase(name, arguments, testhelper.TestCaseOptions{DisplayStdErr: true})
 }
 
 func TestMetadataFlags(t *testing.T) {

@@ -10,3 +10,6 @@ curio-build
 curio
 
 temp/
+
+
+.envrc
