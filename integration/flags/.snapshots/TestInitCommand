@@ -253,6 +253,62 @@ scan:
                       minimum: null
                       maximum: null
                       match_violation: false
+                - pattern: |
+                    RC4.new(...).encrypt(<$DATA_TYPE>)
+                  filters: []
+                - pattern: |
+                    OpenSSL::PKey::RSA.new($_, <$DATA_TYPE>)
+                  filters: []
+                - pattern: |
+                    OpenSSL::PKey::RSA.new(...).$METHOD(<$DATA_TYPE>)
+                  filters:
+                    - variable: METHOD
+                      values:
+                        - private_decrypt
+                        - private_encrypt
+                        - public_decrypt
+                        - public_encrypt
+                      minimum: null
+                      maximum: null
+                      match_violation: false
+                - pattern: |
+                    OpenSSL::PKey::DSA.new($_, <$DATA_TYPE>)
+                  filters: []
+                - pattern: |
+                    OpenSSL::PKey::$LIBRARY.new(...).$METHOD($_, <$DATA_TYPE>)
+                  filters:
+                    - variable: $LIBRARY
+                      values:
+                        - DSA
+                        - RSA
+                      minimum: null
+                      maximum: null
+                      match_violation: false
+                    - variable: METHOD
+                      values:
+                        - export
+                        - to_pem
+                        - to_s
+                      minimum: null
+                      maximum: null
+                      match_violation: false
+                - pattern: |
+                    Crypt::Blowfish.new(...).encrypt_pair
+                  filters: []
+                - pattern: |
+                    Crypt::Blowfish.new(...).$METHOD(<$DATA_TYPE>)
+                  filters:
+                    - variable: METHOD
+                      values:
+                        - encrypt_pair
+                        - encrypt_string
+                        - encrypt_block
+                        - decrypt_pair
+                        - decrypt_string
+                        - decrypt_block
+                      minimum: null
+                      maximum: null
+                      match_violation: false
             root_singularize: false
             root_lowercase: false
             metavars: {}
@@ -385,6 +441,9 @@ scan:
                         - encrypt_pair
                         - encrypt_string
                         - encrypt_block
+                        - decrypt_pair
+                        - decrypt_string
+                        - decrypt_block
                       minimum: null
                       maximum: null
                       match_violation: false
