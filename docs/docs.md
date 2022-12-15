@@ -20,9 +20,9 @@ Ready to dive in? Curio's [reports](/explanations/reports/) are your path to ana
 - [How Curio discovers and classifies data](/explanations/discovery-and-classification/)
 - [Curio's report types](/explanations/reports/)
 
-## How-to
+<!-- ## How-to
 
-Coming soon...
+Coming soon... -->
 
 ## Reference
 
