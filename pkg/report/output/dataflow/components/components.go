@@ -1,6 +1,8 @@
 package components
 
 import (
+	"strings"
+
 	"github.com/bearer/curio/pkg/report/output/dataflow/types"
 
 	dependenciesclassification "github.com/bearer/curio/pkg/classification/dependencies"
@@ -16,9 +18,10 @@ type Holder struct {
 }
 
 type component struct {
-	name      string
-	uuid      string
-	detectors map[string]*detector // group detectors by detectorName
+	name           string
+	component_type string
+	uuid           string
+	detectors      map[string]*detector // group detectors by detectorName
 }
 
 type detector struct {
@@ -38,15 +41,35 @@ func New(isInternal bool) *Holder {
 	}
 }
 
+func getComponentType(classificationReason string) string {
+	if strings.HasPrefix(classificationReason, "internal_domain_") {
+		return "internal_service"
+	}
+
+	if strings.HasPrefix(classificationReason, "recipe_match") {
+		return "external_service"
+	}
+
+	return ""
+}
+
 func (holder *Holder) AddInterface(classifiedDetection interfaceclassification.ClassifiedInterface) error {
 	if classifiedDetection.Classification == nil {
 		return nil
 	}
 
+	componentType := getComponentType(classifiedDetection.Classification.Decision.Reason)
+
+	componentUUID := classifiedDetection.Classification.RecipeUUID
+	if componentUUID == "" {
+		componentUUID = classifiedDetection.Classification.Name()
+	}
+
 	if classifiedDetection.Classification.Decision.State == classify.Valid {
 		holder.addComponent(
 			classifiedDetection.Classification.Name(),
-			classifiedDetection.Classification.RecipeUUID,
+			componentType,
+			componentUUID,
 			string(classifiedDetection.DetectorType),
 			classifiedDetection.Source.Filename,
 			*classifiedDetection.Source.LineNumber,
@@ -61,9 +84,12 @@ func (holder *Holder) AddDependency(classifiedDetection dependenciesclassificati
 		return nil
 	}
 
+	componentType := getComponentType(classifiedDetection.Classification.Decision.Reason)
+
 	if classifiedDetection.Classification.Decision.State == classify.Valid {
 		holder.addComponent(
 			classifiedDetection.Classification.RecipeName,
+			componentType,
 			classifiedDetection.Classification.RecipeUUID,
 			string(classifiedDetection.DetectorType),
 			classifiedDetection.Source.Filename,
@@ -79,9 +105,12 @@ func (holder *Holder) AddFramework(classifiedDetection frameworkclassification.C
 		return nil
 	}
 
+	componentType := getComponentType(classifiedDetection.Classification.Decision.Reason)
+
 	if classifiedDetection.Classification.Decision.State == classify.Valid {
 		holder.addComponent(
 			classifiedDetection.Classification.RecipeName,
+			componentType,
 			classifiedDetection.Classification.RecipeUUID,
 			string(classifiedDetection.DetectorType),
 			classifiedDetection.Source.Filename,
@@ -93,7 +122,7 @@ func (holder *Holder) AddFramework(classifiedDetection frameworkclassification.C
 }
 
 // addComponent adds component to hash list and at the same time blocks duplicates
-func (holder *Holder) addComponent(componentName string, componentUUID string, detectorName string, fileName string, lineNumber int) {
+func (holder *Holder) addComponent(componentName string, componentType string, componentUUID string, detectorName string, fileName string, lineNumber int) {
 	// create component entry if it doesn't exist
 	if _, exists := holder.components[componentUUID]; !exists {
 		var uuid string
@@ -101,9 +130,10 @@ func (holder *Holder) addComponent(componentName string, componentUUID string, d
 			uuid = componentUUID
 		}
 		holder.components[componentUUID] = &component{
-			name:      componentName,
-			uuid:      uuid,
-			detectors: make(map[string]*detector),
+			name:           componentName,
+			component_type: componentType,
+			uuid:           uuid,
+			detectors:      make(map[string]*detector),
 		}
 	}
 
@@ -137,6 +167,7 @@ func (holder *Holder) ToDataFlow() []types.Component {
 	for _, targetComponent := range availableComponents {
 		constructedComponent := types.Component{
 			Name:      targetComponent.name,
+			Type:      targetComponent.component_type,
 			UUID:      targetComponent.uuid,
 			Locations: make([]types.ComponentLocation, 0),
 		}

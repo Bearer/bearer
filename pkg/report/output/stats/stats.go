@@ -72,8 +72,11 @@ func GetOutput(inputgocloc *gocloc.Result, inputDataflow *dataflow.DataFlow, con
 	numberOfExternalAPIs := 0
 	numberOfInternalAPIs := 0
 	for _, component := range inputDataflow.Components {
-		if strings.HasPrefix(component.Name, "http://") || strings.HasPrefix(component.Name, "https://") {
+		if component.Type == "internal_service" {
 			numberOfInternalAPIs++
+		}
+		if component.Type == "external_service" {
+			numberOfExternalAPIs++
 		}
 
 		// @todo FIXME: Collect statistics for data stores
@@ -168,14 +171,14 @@ Though this doesn’t mean the curious bear comes empty-handed, it found:
 	if statistics.NumberOfExternalAPIs != 0 {
 		outputStr.WriteString(fmt.Sprintf(
 			`
-- %d external API(s).`,
+- %d external service(s).`,
 			statistics.NumberOfExternalAPIs))
 	}
 
 	if statistics.NumberOfInternalAPIs != 0 {
 		outputStr.WriteString(fmt.Sprintf(
 			`
-- %d internal API(s).`,
+- %d internal URL(s).`,
 			statistics.NumberOfInternalAPIs))
 	}
 
