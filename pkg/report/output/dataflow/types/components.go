@@ -2,6 +2,7 @@ package types
 
 type Component struct {
 	Name      string              `json:"name" yaml:"name"`
+	Type      string              `json:"type" yaml:"type"`
 	UUID      string              `json:"uuid,omitempty" yaml:"uuid,omitempty"`
 	Locations []ComponentLocation `json:"locations" yaml:"locations"`
 }
