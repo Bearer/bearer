@@ -12,7 +12,16 @@ Polices are ways to enforce data security best practices across your codebase. C
 Curio includes the following policies by default.
 {% endrenderTemplate %}
 
-{% for key, group in policies %}
-  <h2 id="{{group.name | slugify}}">{{group.name}}</h2>
-  <p>{{group.description}}</p>
+{% for policy in policies %}
+  <h2 id="{{policy.display_id | slugify}}">{{policy.display_id}}: {{policy.name}}</h2>
+  <h3>Description</h3>
+  <p>{{policy.description}}</p>
+  <h3>{{policy.display_id}} configuration files</h3>
+  <ul>
+    {% for item in policy.modules %}
+      <li>
+        <a href="https://github.com/Bearer/curio/tree/main/pkg/commands/process/settings/{{item.path}}">{{item.path}}</a>
+      </li>
+    {% endfor %}
+  </ul>
 {% endfor %}

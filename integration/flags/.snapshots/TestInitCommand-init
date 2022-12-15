@@ -689,7 +689,7 @@ scan:
             id: application_level_encryption_missing
             display_id: CR-021
             name: Force application-level encryption when processing sensitive data.
-            description: Application level encryption missing. Enable application level encryption to reduce the risk of leaking sensitive data.
+            description: Application-level encryption greatly reduces the risk of a data breach or data leak by making data unreadable. This policy checks if sensitive data types found in records are encrypted.
             level: ""
             modules:
                 - path: policies/common.rego
@@ -764,7 +764,7 @@ scan:
             id: detect_rails_cookies
             display_id: CR-002
             name: Do not store sensitive data in cookies.
-            description: Cookie leaks detected. Avoid storing sensitive data in cookies.
+            description: Storing sensitive data in cookies can lead to a data breach. This policy looks for instances where sensitive data is stored in browser cookies.
             level: ""
             modules:
                 - path: policies/common.rego
@@ -836,9 +836,9 @@ scan:
             query: |
                 policy_failure = data.bearer.http_get_parameters.policy_failure
             id: ruby_http_get_detection
-            display_id: CR-005
-            name: Do not store sensitive data in HTML5 storage
-            description: Sending data as HTTP GET parameters. Avoid sending sensitive data as parameters in GET requests.
+            display_id: CR-015
+            name: Do not send sensitive data as HTTP GET parameters.
+            description: Sensitive data should never be sent as part of the query string in HTTP GET requests. This policy checks if sensitive data types are sent as GET parameters.
             level: ""
             modules:
                 - path: policies/common.rego
@@ -911,8 +911,8 @@ scan:
                 policy_failure = data.bearer.insecure_communication.policy_failure
             id: detect_rails_insecure_communication
             display_id: CR-012
-            name: Force HTTPS in applications processing sensitive data.
-            description: Insecure communication in an application processing sensitive data. Ensure communication occurs over SSL.
+            name: Force HTTPS access.
+            description: When applications process sensitive data, they should default to always use SSL when available. This policy checks if force SSL is enabled at the application level.
             level: ""
             modules:
                 - path: policies/common.rego
@@ -985,9 +985,9 @@ scan:
             query: |
                 policy_failure = data.bearer.insecure_ftp.policy_failure
             id: detect_rails_insecure_ftp
-            display_id: CR-009
-            name: Only send sensitive data to FTP connections securely.
-            description: Communication with an insecure FTP server in an application processing sensitive data. Only connect to FTP securely.
+            display_id: CR-008
+            name: Only communicate using SFTP connections.
+            description: Communication with FTP servers should be done securely over SFTP in applications that process sensitive data. This policy checks if all FTP connections are made using SFTP.
             level: ""
             modules:
                 - path: policies/common.rego
@@ -1059,9 +1059,9 @@ scan:
             query: |
                 policy_failure = data.bearer.insecure_ftp_with_data_category.policy_failure
             id: insecure_ftp_with_data_category
-            display_id: CR-008
-            name: Only communicate with secure FTP connections in applications processing sensitive data.
-            description: Communicating Data Category with an insecure FTP server. Only connect to FTP securely.
+            display_id: CR-009
+            name: Only send sensitive data using SFTP connections.
+            description: Files containing sensitive data should only be sent via SFTP connections. This policy checks if files created using sensitive data are sent to over SFTP connections.
             level: ""
             modules:
                 - path: policies/common.rego
@@ -1134,8 +1134,8 @@ scan:
                 policy_failure = data.bearer.insecure_http_get.policy_failure
             id: insecure_http_get
             display_id: CR-013
-            name: Avoid unsecured HTTP connections in applications processing sensitive data.
-            description: Communicating using insecure HTTP GET in an application processing sensitive data. Ensure all HTTP communication occurs over HTTPS.
+            name: Only communicate using HTTPS connections.
+            description: Applications processing sensitive data should only connect using HTTPS connections. This policy checks that all HTTP connections use HTTPS.
             level: ""
             modules:
                 - path: policies/common.rego
@@ -1207,9 +1207,9 @@ scan:
             query: |
                 policy_failure = data.bearer.insecure_http_with_data_category.policy_failure
             id: insecure_http_with_data_category
-            display_id: CR-015
-            name: Do not pass sensitive data as HTTP GET parameters.
-            description: Communicating Data Category using insecure HTTP. Ensure all HTTP communication occurs over HTTPS.
+            display_id: CR-014
+            name: Only send sensitive data through HTTPS connections.
+            description: Sensitive data should only be sent through HTTPS. This policy checks that any transmissions over HTTP that contain sensitive data do so over HTTPS.
             level: ""
             modules:
                 - path: policies/common.rego
@@ -1296,8 +1296,8 @@ scan:
                 policy_failure = data.bearer.insecure_smtp.policy_failure
             id: detect_rails_insecure_smtp
             display_id: CR-010
-            name: Only communicate with secure SMTP connections in applications processing sensitive data.
-            description: Communication using insecure SMTP in an application processing sensitive data. Verify that SMTP settings use OpenSSL or equivalent.
+            name: Only communicate with secure SMTP connections.
+            description: Secure connections using SMTP help prevent unauthorized actors from viewing transmitted data. This policy checks if SMTP mailer settings are set to only allow secure connections.
             level: ""
             modules:
                 - path: policies/common.rego
@@ -1371,7 +1371,7 @@ scan:
             id: detect_rails_jwt
             display_id: CR-004
             name: Do not store sensitive data in JWTs.
-            description: JWT leaks detected. Avoid storing sensitive data in JWTs.
+            description: JWTs are not a secure place to store sensitive data. This policy looks for any sensitive data types saved to a JWT.
             level: ""
             modules:
                 - path: policies/common.rego
@@ -1445,7 +1445,7 @@ scan:
             id: detect_ruby_logger
             display_id: CR-001
             name: Do not send sensitive data to loggers.
-            description: Logger leaks detected. Avoid passing sensitive data to loggers.
+            description: Leaking sensitive data to loggers is a common cause of data leaks and can lead to data breaches. This policy looks for instances of sensitive data sent to loggers.
             level: ""
             modules:
                 - path: policies/common.rego
@@ -1518,8 +1518,8 @@ scan:
                 policy_breach = data.bearer.password_length.policy_breach
             id: ruby_password_length
             display_id: CR-019
-            name: Enforce stronger password requirements in applications processing sensitive data.
-            description: Minimum password length violation detected. Make sure your passwords have sufficient length.
+            name: Enforce stronger password requirements.
+            description: Minimum password length should be enforced any time password creation occurs. This policy checks if configurations and validations made for passwords include a minimum length of 8.
             level: ""
             modules:
                 - path: policies/common.rego
@@ -1591,8 +1591,8 @@ scan:
                 policy_failure = data.bearer.third_party_data_category.policy_failure
             id: detect_ruby_third_party_data_send
             display_id: CR-016
-            name: Ensure that no unsecured Third Parties receive sensitive data.
-            description: Sending data in category to third party. Ensure data sent to third party is intended and secured.
+            name: Do not leak sensitive data to third-party loggers.
+            description: 'Sensitive data should not be sent to third party logging libraries or services. This policy checks if sensitive data types are sent to third party loggers. Currently supports: Sentry. '
             level: ""
             modules:
                 - path: policies/common.rego
@@ -1665,8 +1665,8 @@ scan:
                 policy_failure = data.bearer.leakage.policy_failure
             id: detect_rails_session
             display_id: CR-003
-            name: Do not store sensitive data in the session.
-            description: Session leaks detected. Avoid storing sensitive data in the session.
+            name: Do not store sensitive data in session cookies.
+            description: Sensitive data should not be stored in session cookies. This policy looks for any sensitive data stored within the session cookies.
             level: ""
             modules:
                 - path: policies/common.rego
@@ -1739,8 +1739,8 @@ scan:
                 policy_failure = data.bearer.ssl_certificate_verification_disabled.policy_failure
             id: ssl_certificate_verification_disabled
             display_id: CR-011
-            name: Enable SSL Certificate Verification in applications processing sensitive data.
-            description: SSL certificate verification is disabled in an application processing sensitive data. Enable SSL certificate verification.
+            name: Enable SSL Certificate Verification.
+            description: Applications processing sensitive data should use valid SSL certificates. This policy checks if SSL verification is enabled.
             level: ""
             modules:
                 - path: policies/common.rego
@@ -1814,7 +1814,7 @@ scan:
             id: detect_ruby_weak_encryption_library
             display_id: CR-024
             name: Avoid weak encryption library.
-            description: Weak encryption or hashing library detected. Consider using a different library.
+            description: A weak encryption or hashing library can lead to data breaches and greater security risk. This policy checks for the use of weak encryption and hashing libraries or algorithms.
             level: ""
             modules:
                 - path: policies/common.rego
@@ -2062,8 +2062,8 @@ scan:
                 policy_failure = data.bearer.weak_password_encryption.policy_failure
             id: detect_ruby_weak_encryption
             display_id: CR-023
-            name: Force strong password encryption in applications processing sensitive data.
-            description: Weak encryption or hashing library used to encrypt password. Use a stronger algorithm.
+            name: Force strong password encryption.
+            description: Using a weak encryption or hashing library to encrypt passwords can lead to security breaches and data leaks. This policy checks if weak encryption or hashing libraries are used to encrypt passwords.
             level: ""
             modules:
                 - path: policies/common.rego

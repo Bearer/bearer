@@ -1,7 +1,7 @@
 medium:
-    - policy_name: Only communicate with secure SMTP connections in applications processing sensitive data.
+    - policy_name: Only communicate with secure SMTP connections.
       policy_display_id: CR-010
-      policy_description: Communication using insecure SMTP in an application processing sensitive data. Verify that SMTP settings use OpenSSL or equivalent.
+      policy_description: Secure connections using SMTP help prevent unauthorized actors from viewing transmitted data. This policy checks if SMTP mailer settings are set to only allow secure connections.
       line_number: 8
       filename: testdata/ruby/insecure_smtp.rb
       category_groups:
@@ -14,9 +14,9 @@ medium:
           }
         end
       omit_parent: false
-    - policy_name: Only communicate with secure SMTP connections in applications processing sensitive data.
+    - policy_name: Only communicate with secure SMTP connections.
       policy_display_id: CR-010
-      policy_description: Communication using insecure SMTP in an application processing sensitive data. Verify that SMTP settings use OpenSSL or equivalent.
+      policy_description: Secure connections using SMTP help prevent unauthorized actors from viewing transmitted data. This policy checks if SMTP mailer settings are set to only allow secure connections.
       line_number: 14
       filename: testdata/ruby/insecure_smtp.rb
       category_groups:
