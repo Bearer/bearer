@@ -1,25 +1,29 @@
 <div align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="./docs/assets/img/curio-logo-dark.svg">
+    <img alt="Curio" src="./docs/assets/img/curio-logo-light.svg">
+  </picture>
 
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="./docs/assets/img/curio-logo-dark.svg">
-  <img alt="Curio" src="./docs/assets/img/curio-logo-light.svg">
-</picture>
+  <br />
+  <hr/>
+  Open Source SAST to protect sensitive data in your code.
+  <br />
+  <br />
+  Curio is a static code analysis tool (SAST) that scans your source code to discover security risks and vulnerabilities that put your sensitive data at risk (PHI, PD, PII, Financial data).
+  <br /><br />
 
-<br />
+  [Getting Started](#rocket-getting-started) - [FAQ](#question-faqs) - [Documentation](https://curio.sh) - [Report a Bug](https://github.com/Bearer/curio/issues/new/choose) - [Discord Community][discord]
 
-[![GitHub Release][release-img]][release]
-[![Test][test-img]][test]
-[![GitHub All Releases][github-all-releases-img]][release]
-[![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg)](CODE_OF_CONDUCT.md)
-[![Discord](https://img.shields.io/discord/1042147477765242973?label=discord)][discord]
+  [![GitHub Release][release-img]][release]
+  [![Test][test-img]][test]
+  ![GitHub](https://img.shields.io/github/license/bearer/curio)
+  [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg)](CODE_OF_CONDUCT.md)
+  [![Discord](https://img.shields.io/discord/1042147477765242973?label=discord)][discord]
 
 </div>
 
-# Curio: The data-first security scanner that finds risks and vulnerabilities in your code to protect sensitive data
-
-Curio is a static code analysis tool (SAST) that scans your source code to discover security risks and vulnerabilities that put your sensitive data at risk (PHI, PD, PII).
-
-[Explore the docs](https://curio.sh) - [Getting Started](#rocket-getting-started) - [FAQ](#question-faqs) - [Report Bug](https://github.com/Bearer/curio/issues/new/choose) - [Discord Community][discord]
+## The data-first security scanner to protect sensitive data from leaks and breaches
+<hr/>
 
 ```
 Scanning target ./example-project
@@ -99,7 +103,7 @@ chmod +x ./curio
 
 ### Scan your project
 
-The easiest way to try out Curio is with our example project, [Bear Publishing](https://github.com/Bearer/bear-publishing). It simulates a realistic Ruby application with common data security flaws. Clone or download it to a convenient location to get started.  
+The easiest way to try out Curio is with our example project, [Bear Publishing](https://github.com/Bearer/bear-publishing). It simulates a realistic Ruby application with common data security flaws. Clone or download it to a convenient location to get started.
 
 ```bash
 git clone https://github.com/Bearer/bear-publishing.git

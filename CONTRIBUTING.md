@@ -111,6 +111,6 @@ To Contribute new code, fixes, or doc changes to Curio it is best to by searchin
 
 - If you're unfamiliar with the process, check out GitHub's guide: [Creating a pull request](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request)
 - Use [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) whenever creating a pull request.
-- Sign your commits. As a security focused project, we ask that all contributors sign their commits. Check out GitHub's page on [signing commits](https://docs.github.com/en/authentication/managing-commit-signature-verification/signing-commits) for a complete guide.
+- As a best practice, we ask as much as possible that you sign your commits. Especially, we require our core contributors to sign their commits. Check out GitHub's page on [signing commits](https://docs.github.com/en/authentication/managing-commit-signature-verification/signing-commits) for a complete guide.
 
 When in doubt, don't hesitate to raise an issue or jump into the discord.
