@@ -39,7 +39,10 @@ func executeApp(arguments []string) (string, error) {
 	cmd.Stdout = buffOut
 	cmd.Stderr = buffErr
 
-	cmd.Start()
+	err := cmd.Start()
+	if err != nil {
+		return "", err
+	}
 
 	if err := cmd.Wait(); err != nil {
 		return "", err
