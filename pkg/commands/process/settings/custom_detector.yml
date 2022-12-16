@@ -13,7 +13,7 @@ ruby_password_length:
           match_violation: true
     - pattern: |
         class $ANYTHING < ApplicationRecord
-          device password_length: $MIN_LENGTH..$MAX_LENGTH
+          devise password_length: $MIN_LENGTH..$MAX_LENGTH
         end
       filters:
         - variable: MAX_LENGTH
@@ -23,7 +23,15 @@ ruby_password_length:
           minimum: 8
           match_violation: true
     - pattern: |
-        Device.setup do |config|
+        Devise.setup do |config|
+          config.password_length = $MIN_LENGTH..$MAX_LENGTH
+        end
+      filters:
+        - variable: MIN_LENGTH
+          minimum: 8
+          match_violation: true
+    - pattern: |
+        Devise.setup do |config|
           config.password_length = $LENGTH
         end
       filters:
