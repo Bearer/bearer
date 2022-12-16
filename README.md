@@ -74,6 +74,21 @@ Discover data security risks and vulnerabilities in only a few minutes. In this 
 
 Curio is available as a standalone executable binary. The latest release is available on the [releases tab](https://github.com/Bearer/curio/releases/latest), or use one of the methods below.
 
+#### Homebrew
+
+The easiest way to install curio is to use Homebrew
+
+```bash
+brew install Bearer/curio/curio
+```
+
+Or
+
+```bash
+brew tap Bearer/curio
+brew install curio
+```
+
 #### Install Script
 
 This script downloads the Curio binary automatically based on your OS and architecture.
