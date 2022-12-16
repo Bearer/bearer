@@ -67,7 +67,7 @@ func NewRunner(ctx context.Context, scanSettings settings.Config) Runner {
 		sha = []byte(uuid.NewString())
 	}
 
-	path := os.TempDir() + strings.TrimSuffix(string(sha), "\n") + "-" + build.CommitSHA + ".jsonl"
+	path := os.TempDir() + "/" + strings.TrimSuffix(string(sha), "\n") + "-" + build.CommitSHA + ".jsonl"
 	r.reportPath = path
 
 	if _, err := os.Stat(path); err == nil {
