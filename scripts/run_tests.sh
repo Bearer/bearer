@@ -21,7 +21,8 @@ do_cleanup() {
 trap do_cleanup 1 2 3 6
 
 do_info "Building Curio binary..."
-go build ./cmd/curio || do_error "Failed to build Curio binary"
+go build -a -o ./curio ./cmd/curio/main.go || do_error "Failed to build Curio binary"
+
 [ -f curio ] || do_error "No Curio binary found"
 
 TEST_ARGS=$DEFAULT_TEST_ARGS
