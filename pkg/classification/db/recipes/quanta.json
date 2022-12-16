@@ -6,5 +6,6 @@
     "https://app.quanta.io/api"
   ],
   "packages": [],
-  "uuid": "43ff6978-7db9-4155-854a-d9106df82333"
+  "uuid": "43ff6978-7db9-4155-854a-d9106df82333",
+  "sub_type": "third_party"
 }

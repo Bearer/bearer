@@ -6,5 +6,6 @@
     "https://admin.irisopenbooks.co.uk"
   ],
   "packages": [],
-  "uuid": "78d064d7-8535-4644-9174-366ce48b3348"
+  "uuid": "78d064d7-8535-4644-9174-366ce48b3348",
+  "sub_type": "third_party"
 }

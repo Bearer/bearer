@@ -14,5 +14,6 @@
     "https://api.storekit-sandbox.itunes.apple.com"
   ],
   "packages": [],
-  "uuid": "e61910ab-fb33-4b55-948e-6ffe189c230c"
+  "uuid": "e61910ab-fb33-4b55-948e-6ffe189c230c",
+  "sub_type": "third_party"
 }

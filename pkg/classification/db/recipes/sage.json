@@ -11,5 +11,6 @@
     "https://api.intacct.com"
   ],
   "packages": [],
-  "uuid": "6d4cb879-ea28-49ae-99d6-7d3c84ec07bd"
+  "uuid": "6d4cb879-ea28-49ae-99d6-7d3c84ec07bd",
+  "sub_type": "third_party"
 }

@@ -7,5 +7,6 @@
     "https://rec.edi.b2bi.almerys.com"
   ],
   "packages": [],
-  "uuid": "e4e7cb02-b442-45ed-9dcd-3cbbaff1925f"
+  "uuid": "e4e7cb02-b442-45ed-9dcd-3cbbaff1925f",
+  "sub_type": "third_party"
 }

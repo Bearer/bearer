@@ -6,5 +6,6 @@
     "https://api.zeplin.dev"
   ],
   "packages": [],
-  "uuid": "573522e8-819b-4818-b9fa-5bdd9ed94183"
+  "uuid": "573522e8-819b-4818-b9fa-5bdd9ed94183",
+  "sub_type": "third_party"
 }

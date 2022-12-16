@@ -6,5 +6,6 @@
     "https://api.alpaca.markets"
   ],
   "packages": [],
-  "uuid": "f4392c0c-1c58-48e5-a7a6-fefe11483274"
+  "uuid": "f4392c0c-1c58-48e5-a7a6-fefe11483274",
+  "sub_type": "third_party"
 }

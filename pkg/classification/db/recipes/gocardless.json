@@ -10,5 +10,6 @@
     "https://connect-sandbox.gocardless.com"
   ],
   "packages": [],
-  "uuid": "45d741a5-24f5-4943-9932-91b94d607f0c"
+  "uuid": "45d741a5-24f5-4943-9932-91b94d607f0c",
+  "sub_type": "third_party"
 }

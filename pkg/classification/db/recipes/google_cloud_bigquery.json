@@ -120,5 +120,6 @@
       "package_manager": "packagist"
     }
   ],
-  "uuid": "2c6da556-2622-471b-80cd-0ecefa73db61"
+  "uuid": "2c6da556-2622-471b-80cd-0ecefa73db61",
+  "sub_type": "datalake"
 }

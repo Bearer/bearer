@@ -7,5 +7,6 @@
     "https://navs.xignite.com/v2"
   ],
   "packages": [],
-  "uuid": "6b7489e2-e876-4e7f-ae72-8539b19df114"
+  "uuid": "6b7489e2-e876-4e7f-ae72-8539b19df114",
+  "sub_type": "third_party"
 }

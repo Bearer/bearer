@@ -6,5 +6,6 @@
     "https://alloy.co/v1/"
   ],
   "packages": [],
-  "uuid": "feb9ea94-aabf-4fe8-bde5-a11aea8b4e99"
+  "uuid": "feb9ea94-aabf-4fe8-bde5-a11aea8b4e99",
+  "sub_type": "third_party"
 }

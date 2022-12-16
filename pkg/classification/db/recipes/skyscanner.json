@@ -6,5 +6,6 @@
     "https://partners.api.skyscanner.net"
   ],
   "packages": [],
-  "uuid": "df5811cf-3e2f-409c-b5d2-a0b576756c12"
+  "uuid": "df5811cf-3e2f-409c-b5d2-a0b576756c12",
+  "sub_type": "third_party"
 }

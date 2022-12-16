@@ -22,5 +22,6 @@
       "package_manager": "npm"
     }
   ],
-  "uuid": "6b2278e4-0386-406b-babc-61cb3c0cbd0a"
+  "uuid": "6b2278e4-0386-406b-babc-61cb3c0cbd0a",
+  "sub_type": "third_party"
 }

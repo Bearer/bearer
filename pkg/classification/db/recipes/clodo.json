@@ -6,5 +6,6 @@
     "https://api.clodo.ru"
   ],
   "packages": [],
-  "uuid": "192ba856-8107-4b3b-8612-7e436e6f6ddf"
+  "uuid": "192ba856-8107-4b3b-8612-7e436e6f6ddf",
+  "sub_type": "third_party"
 }

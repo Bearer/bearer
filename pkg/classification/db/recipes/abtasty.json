@@ -6,5 +6,6 @@
     "https://try.abtasty.com"
   ],
   "packages": [],
-  "uuid": "fc6dd834-feb7-4c23-8c02-9239e0b0fea2"
+  "uuid": "fc6dd834-feb7-4c23-8c02-9239e0b0fea2",
+  "sub_type": "third_party"
 }

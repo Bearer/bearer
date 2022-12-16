@@ -6,5 +6,6 @@
     "https://api.adjust.com"
   ],
   "packages": [],
-  "uuid": "1545189b-bfbb-4233-9baa-f734fc04a78b"
+  "uuid": "1545189b-bfbb-4233-9baa-f734fc04a78b",
+  "sub_type": "third_party"
 }

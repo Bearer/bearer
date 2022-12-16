@@ -6,5 +6,6 @@
     "https://api.statuspage.io"
   ],
   "packages": [],
-  "uuid": "e013eb8f-562d-4e04-9b80-f6616e809894"
+  "uuid": "e013eb8f-562d-4e04-9b80-f6616e809894",
+  "sub_type": "third_party"
 }

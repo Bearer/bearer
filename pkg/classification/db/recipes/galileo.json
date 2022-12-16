@@ -7,5 +7,6 @@
     "https://sandbox-api.gpsrv.com"
   ],
   "packages": [],
-  "uuid": "5b77c78b-62ad-4a63-85f6-44dd9f126379"
+  "uuid": "5b77c78b-62ad-4a63-85f6-44dd9f126379",
+  "sub_type": "third_party"
 }

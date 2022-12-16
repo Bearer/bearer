@@ -17,5 +17,6 @@
       "package_manager": "go"
     }
   ],
-  "uuid": "a7357734-41c7-4497-af13-32336335f2db"
+  "uuid": "a7357734-41c7-4497-af13-32336335f2db",
+  "sub_type": "third_party"
 }

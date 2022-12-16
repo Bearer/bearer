@@ -12,5 +12,6 @@
     "https://cashplus.com"
   ],
   "packages": [],
-  "uuid": "68bca703-5a6f-435f-9876-6bd7ff9d0f60"
+  "uuid": "68bca703-5a6f-435f-9876-6bd7ff9d0f60",
+  "sub_type": "third_party"
 }

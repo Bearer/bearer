@@ -6,5 +6,6 @@
     "https://api.hunter.io"
   ],
   "packages": [],
-  "uuid": "cf67436e-1b9f-441f-9dc8-dc2a5b8fe7da"
+  "uuid": "cf67436e-1b9f-441f-9dc8-dc2a5b8fe7da",
+  "sub_type": "third_party"
 }

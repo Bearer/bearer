@@ -6,5 +6,6 @@
     "https://chargebee.com/api"
   ],
   "packages": [],
-  "uuid": "b4365c78-819e-4901-a9e7-b5e716593def"
+  "uuid": "b4365c78-819e-4901-a9e7-b5e716593def",
+  "sub_type": "third_party"
 }

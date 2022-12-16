@@ -97,5 +97,6 @@
       "package_manager": "maven"
     }
   ],
-  "uuid": "f1ed601f-601a-4fd7-9b82-da8fbbe06c62"
+  "uuid": "f1ed601f-601a-4fd7-9b82-da8fbbe06c62",
+  "sub_type": "third_party"
 }

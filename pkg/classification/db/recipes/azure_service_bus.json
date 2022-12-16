@@ -10,5 +10,6 @@
       "package_manager": "go"
     }
   ],
-  "uuid": "235e9ec8-0884-4bfc-8238-f8047b4f8663"
+  "uuid": "235e9ec8-0884-4bfc-8238-f8047b4f8663",
+  "sub_type": "message_bus"
 }

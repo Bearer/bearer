@@ -6,5 +6,6 @@
     "https://api.bitrise.io"
   ],
   "packages": [],
-  "uuid": "cea8c6bb-2804-484d-98fe-2d8cc39057de"
+  "uuid": "cea8c6bb-2804-484d-98fe-2d8cc39057de",
+  "sub_type": "third_party"
 }

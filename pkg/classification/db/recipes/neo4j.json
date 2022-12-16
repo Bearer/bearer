@@ -45,5 +45,6 @@
       "package_manager": "rubygems"
     }
   ],
-  "uuid": "27f59acd-c638-4681-acfb-3aa64c862c28"
+  "uuid": "27f59acd-c638-4681-acfb-3aa64c862c28",
+  "sub_type": "database"
 }

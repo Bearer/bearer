@@ -6,5 +6,6 @@
     "https://secure.sakura.ad.jp/cloud/zone/*/api/"
   ],
   "packages": [],
-  "uuid": "d399dbe8-d083-4e0f-8853-c575f3aab673"
+  "uuid": "d399dbe8-d083-4e0f-8853-c575f3aab673",
+  "sub_type": "third_party"
 }

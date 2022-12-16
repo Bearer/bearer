@@ -12,5 +12,6 @@
     "https://acqsim.test.sips-atos.com"
   ],
   "packages": [],
-  "uuid": "a2e4023c-a098-420b-bcdb-0bb6630cd9bf"
+  "uuid": "a2e4023c-a098-420b-bcdb-0bb6630cd9bf",
+  "sub_type": "third_party"
 }

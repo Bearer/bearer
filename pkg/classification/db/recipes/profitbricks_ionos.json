@@ -7,5 +7,6 @@
     "https://api.profitbricks.com"
   ],
   "packages": [],
-  "uuid": "f3657c46-ff24-4233-8778-9c59159d4299"
+  "uuid": "f3657c46-ff24-4233-8778-9c59159d4299",
+  "sub_type": "third_party"
 }

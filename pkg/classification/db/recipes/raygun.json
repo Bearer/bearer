@@ -6,5 +6,6 @@
     "https://api.raygun.com"
   ],
   "packages": [],
-  "uuid": "bd7d5c19-4d92-49a0-a5cb-3a82bd839f31"
+  "uuid": "bd7d5c19-4d92-49a0-a5cb-3a82bd839f31",
+  "sub_type": "third_party"
 }

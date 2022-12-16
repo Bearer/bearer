@@ -6,5 +6,6 @@
     "https://api.rydoo.com"
   ],
   "packages": [],
-  "uuid": "54d194b5-d3ef-4bc1-bbb5-8c340119aa27"
+  "uuid": "54d194b5-d3ef-4bc1-bbb5-8c340119aa27",
+  "sub_type": "third_party"
 }

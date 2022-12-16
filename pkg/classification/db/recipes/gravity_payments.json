@@ -6,5 +6,6 @@
     "https://api.gravitypayments.com"
   ],
   "packages": [],
-  "uuid": "c37c083c-8ef7-4a68-9931-157334510182"
+  "uuid": "c37c083c-8ef7-4a68-9931-157334510182",
+  "sub_type": "third_party"
 }

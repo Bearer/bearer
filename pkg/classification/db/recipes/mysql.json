@@ -110,5 +110,6 @@
       "package_manager": "packagist"
     }
   ],
-  "uuid": "ffa70264-2b19-445d-a5c9-be82b64fe750"
+  "uuid": "ffa70264-2b19-445d-a5c9-be82b64fe750",
+  "sub_type": "database"
 }

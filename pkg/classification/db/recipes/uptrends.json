@@ -6,5 +6,6 @@
     "https://api.uptrends.com"
   ],
   "packages": [],
-  "uuid": "e7afe6bb-5d0a-4428-ab6f-1ebfad9f6b07"
+  "uuid": "e7afe6bb-5d0a-4428-ab6f-1ebfad9f6b07",
+  "sub_type": "third_party"
 }

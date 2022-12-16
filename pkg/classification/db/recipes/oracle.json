@@ -25,5 +25,6 @@
       "package_manager": "nuget"
     }
   ],
-  "uuid": "80886e2a-ee2c-423d-98bc-0a3d743787b4"
+  "uuid": "80886e2a-ee2c-423d-98bc-0a3d743787b4",
+  "sub_type": "database"
 }

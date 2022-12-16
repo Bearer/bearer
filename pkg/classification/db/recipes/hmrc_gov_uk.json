@@ -9,5 +9,6 @@
     "https://test-transaction-engine.tax.service.gov.uk"
   ],
   "packages": [],
-  "uuid": "051b0da2-e8f7-4af7-aa17-800961bff5e8"
+  "uuid": "051b0da2-e8f7-4af7-aa17-800961bff5e8",
+  "sub_type": "third_party"
 }

@@ -9,5 +9,6 @@
     "https://api.mux.com/video"
   ],
   "packages": [],
-  "uuid": "ebd4ef05-37f9-49a3-8fbf-a26071f7ee13"
+  "uuid": "ebd4ef05-37f9-49a3-8fbf-a26071f7ee13",
+  "sub_type": "third_party"
 }

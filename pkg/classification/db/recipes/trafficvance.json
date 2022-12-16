@@ -7,5 +7,6 @@
     "https://apitest.trafficvance.com"
   ],
   "packages": [],
-  "uuid": "040baff1-17e7-4071-b206-a470e35591bf"
+  "uuid": "040baff1-17e7-4071-b206-a470e35591bf",
+  "sub_type": "third_party"
 }

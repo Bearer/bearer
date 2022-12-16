@@ -48,5 +48,6 @@
       "package_manager": "npm"
     }
   ],
-  "uuid": "c24b836a-d035-49dc-808f-1912f16f690d"
+  "uuid": "c24b836a-d035-49dc-808f-1912f16f690d",
+  "sub_type": "third_party"
 }

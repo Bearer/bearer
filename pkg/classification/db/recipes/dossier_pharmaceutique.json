@@ -6,5 +6,6 @@
     "http://ws-fac.dossier-pharmaceutique.fr"
   ],
   "packages": [],
-  "uuid": "6b35773c-fd76-440f-bc84-03b23e26bde4"
+  "uuid": "6b35773c-fd76-440f-bc84-03b23e26bde4",
+  "sub_type": "third_party"
 }

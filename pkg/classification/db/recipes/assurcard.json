@@ -9,5 +9,6 @@
     "https://testinsurer.assurcard.be"
   ],
   "packages": [],
-  "uuid": "25c4fef8-b90b-47dd-b322-f4ed55fbb9dc"
+  "uuid": "25c4fef8-b90b-47dd-b322-f4ed55fbb9dc",
+  "sub_type": "third_party"
 }

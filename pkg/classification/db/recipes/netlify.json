@@ -6,5 +6,6 @@
     "https://api.netlify.com"
   ],
   "packages": [],
-  "uuid": "64e2a73d-81eb-407b-a6ef-a02dfb13fefb"
+  "uuid": "64e2a73d-81eb-407b-a6ef-a02dfb13fefb",
+  "sub_type": "third_party"
 }

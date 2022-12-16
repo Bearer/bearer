@@ -6,5 +6,6 @@
     "https://api.fountain.com"
   ],
   "packages": [],
-  "uuid": "c0fba763-19cc-496c-819c-3bad20c8a0e3"
+  "uuid": "c0fba763-19cc-496c-819c-3bad20c8a0e3",
+  "sub_type": "third_party"
 }

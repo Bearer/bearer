@@ -6,5 +6,6 @@
     "https://*.adroll.com"
   ],
   "packages": [],
-  "uuid": "524be664-02b3-4da3-9cc6-6a8ff3c53a81"
+  "uuid": "524be664-02b3-4da3-9cc6-6a8ff3c53a81",
+  "sub_type": "third_party"
 }

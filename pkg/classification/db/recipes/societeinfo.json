@@ -6,5 +6,6 @@
     "https://societeinfo.com/app/rest/api/"
   ],
   "packages": [],
-  "uuid": "7896a387-f2b8-4f29-885e-b6fdb99a4b7e"
+  "uuid": "7896a387-f2b8-4f29-885e-b6fdb99a4b7e",
+  "sub_type": "third_party"
 }

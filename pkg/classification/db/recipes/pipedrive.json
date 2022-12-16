@@ -7,5 +7,6 @@
     "https://pipedrive.com/api"
   ],
   "packages": [],
-  "uuid": "5858620b-a97e-421b-99d3-7487dd48662f"
+  "uuid": "5858620b-a97e-421b-99d3-7487dd48662f",
+  "sub_type": "third_party"
 }

@@ -65,5 +65,6 @@
       "package_manager": "maven"
     }
   ],
-  "uuid": "c43a3f1c-42c9-416a-91ab-a9a410dac9dc"
+  "uuid": "c43a3f1c-42c9-416a-91ab-a9a410dac9dc",
+  "sub_type": "database"
 }

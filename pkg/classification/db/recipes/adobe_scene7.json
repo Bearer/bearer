@@ -6,5 +6,6 @@
     "https://*.scene7.com"
   ],
   "packages": [],
-  "uuid": "e465626b-e35a-4aa4-bb9b-bb9270fbbc47"
+  "uuid": "e465626b-e35a-4aa4-bb9b-bb9270fbbc47",
+  "sub_type": "third_party"
 }

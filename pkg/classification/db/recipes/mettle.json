@@ -8,5 +8,6 @@
     "https://api.openbanking.prd-mettle.co.uk"
   ],
   "packages": [],
-  "uuid": "90622b2f-1660-41cf-b697-8ce395c1ffe4"
+  "uuid": "90622b2f-1660-41cf-b697-8ce395c1ffe4",
+  "sub_type": "third_party"
 }

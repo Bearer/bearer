@@ -6,5 +6,6 @@
     "https://api.forestadmin.com"
   ],
   "packages": [],
-  "uuid": "fa8f7ed9-b1c3-40ec-98c8-5c9ac089e1a6"
+  "uuid": "fa8f7ed9-b1c3-40ec-98c8-5c9ac089e1a6",
+  "sub_type": "third_party"
 }

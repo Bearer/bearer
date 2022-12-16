@@ -6,5 +6,6 @@
     "https://api.dropcontact.io"
   ],
   "packages": [],
-  "uuid": "faaaec71-40e5-4b72-8624-b0e903d70d07"
+  "uuid": "faaaec71-40e5-4b72-8624-b0e903d70d07",
+  "sub_type": "third_party"
 }

@@ -6,5 +6,6 @@
     "https://small-improvements.com/api"
   ],
   "packages": [],
-  "uuid": "08192ed4-3bc8-4a19-aff8-34dc9bf988f1"
+  "uuid": "08192ed4-3bc8-4a19-aff8-34dc9bf988f1",
+  "sub_type": "third_party"
 }

@@ -6,5 +6,6 @@
     "https://api.iban.com"
   ],
   "packages": [],
-  "uuid": "69857cae-a5cf-4ac3-ad02-c495ed69e70b"
+  "uuid": "69857cae-a5cf-4ac3-ad02-c495ed69e70b",
+  "sub_type": "third_party"
 }

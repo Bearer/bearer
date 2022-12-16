@@ -6,5 +6,6 @@
     "https://eu.rp.secure.iproov.me"
   ],
   "packages": [],
-  "uuid": "ed87b530-bffb-4838-835c-84240e66507e"
+  "uuid": "ed87b530-bffb-4838-835c-84240e66507e",
+  "sub_type": "third_party"
 }

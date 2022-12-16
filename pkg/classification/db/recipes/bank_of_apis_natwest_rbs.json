@@ -18,5 +18,6 @@
     "https://api.natwest.com"
   ],
   "packages": [],
-  "uuid": "ada271a8-4f20-45c4-9032-8ab97ca770bc"
+  "uuid": "ada271a8-4f20-45c4-9032-8ab97ca770bc",
+  "sub_type": "third_party"
 }

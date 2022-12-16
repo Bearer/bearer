@@ -4,5 +4,6 @@
   "type": "external_service",
   "urls": [],
   "packages": [],
-  "uuid": "d617fbd2-cbbf-4e70-91e3-4a955e8bb171"
+  "uuid": "d617fbd2-cbbf-4e70-91e3-4a955e8bb171",
+  "sub_type": "third_party"
 }

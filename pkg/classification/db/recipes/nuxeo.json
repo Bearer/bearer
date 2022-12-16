@@ -20,5 +20,6 @@
       "package_manager": "maven"
     }
   ],
-  "uuid": "8a7016a6-dc0c-4559-ae0c-4cae38ea063d"
+  "uuid": "8a7016a6-dc0c-4559-ae0c-4cae38ea063d",
+  "sub_type": "third_party"
 }

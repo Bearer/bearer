@@ -7,5 +7,6 @@
     "https://haveibeenpwned.com/api"
   ],
   "packages": [],
-  "uuid": "572eb51d-8e7e-415e-8a56-d5fd87bc8121"
+  "uuid": "572eb51d-8e7e-415e-8a56-d5fd87bc8121",
+  "sub_type": "third_party"
 }

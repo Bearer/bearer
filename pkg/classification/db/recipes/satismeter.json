@@ -6,5 +6,6 @@
     "https://app.satismeter.com/api"
   ],
   "packages": [],
-  "uuid": "a26fecd1-8461-4352-9402-05ac434b579d"
+  "uuid": "a26fecd1-8461-4352-9402-05ac434b579d",
+  "sub_type": "third_party"
 }

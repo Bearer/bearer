@@ -7,5 +7,6 @@
     "https://api.gandi.net"
   ],
   "packages": [],
-  "uuid": "b2808b65-bc4d-4837-b587-5b8c38208953"
+  "uuid": "b2808b65-bc4d-4837-b587-5b8c38208953",
+  "sub_type": "third_party"
 }

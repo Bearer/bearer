@@ -6,5 +6,6 @@
     "https://api.openweathermap.org"
   ],
   "packages": [],
-  "uuid": "f9d149a2-c519-48b9-a634-7ed1bdd9081e"
+  "uuid": "f9d149a2-c519-48b9-a634-7ed1bdd9081e",
+  "sub_type": "third_party"
 }

@@ -6,5 +6,6 @@
     "https://circleci.com/api"
   ],
   "packages": [],
-  "uuid": "48075eda-bdf2-4e43-b8fb-ecd173e20766"
+  "uuid": "48075eda-bdf2-4e43-b8fb-ecd173e20766",
+  "sub_type": "third_party"
 }

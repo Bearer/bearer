@@ -6,5 +6,6 @@
     "https://api.userlike.com"
   ],
   "packages": [],
-  "uuid": "7c3a5f02-43a0-49d0-8438-a269622c0eb7"
+  "uuid": "7c3a5f02-43a0-49d0-8438-a269622c0eb7",
+  "sub_type": "third_party"
 }

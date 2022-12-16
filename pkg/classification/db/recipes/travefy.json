@@ -6,5 +6,6 @@
     "https://api.travefy.com"
   ],
   "packages": [],
-  "uuid": "b91edd7b-fd90-40f9-b94d-24baa3c56d8d"
+  "uuid": "b91edd7b-fd90-40f9-b94d-24baa3c56d8d",
+  "sub_type": "third_party"
 }

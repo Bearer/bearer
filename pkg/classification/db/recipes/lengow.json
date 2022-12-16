@@ -9,5 +9,6 @@
     "https://api.lengow.net"
   ],
   "packages": [],
-  "uuid": "5bbf514a-6036-4282-ae9e-7d92becd7f32"
+  "uuid": "5bbf514a-6036-4282-ae9e-7d92becd7f32",
+  "sub_type": "third_party"
 }

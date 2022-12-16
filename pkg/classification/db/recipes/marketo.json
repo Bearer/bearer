@@ -7,5 +7,6 @@
     "https://mktorest.com/rest"
   ],
   "packages": [],
-  "uuid": "05879227-1116-4be9-9e1a-c665dc41958d"
+  "uuid": "05879227-1116-4be9-9e1a-c665dc41958d",
+  "sub_type": "third_party"
 }

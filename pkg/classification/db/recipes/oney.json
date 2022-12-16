@@ -7,5 +7,6 @@
     "https://api-staging.oney.io"
   ],
   "packages": [],
-  "uuid": "481bec69-5726-4015-a3e4-ff9b299250fa"
+  "uuid": "481bec69-5726-4015-a3e4-ff9b299250fa",
+  "sub_type": "third_party"
 }

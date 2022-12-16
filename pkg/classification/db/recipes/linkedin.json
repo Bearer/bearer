@@ -7,5 +7,6 @@
     "https://api.linkedin.com"
   ],
   "packages": [],
-  "uuid": "0e1c1075-16c0-467e-9e71-65d83f3157bb"
+  "uuid": "0e1c1075-16c0-467e-9e71-65d83f3157bb",
+  "sub_type": "third_party"
 }

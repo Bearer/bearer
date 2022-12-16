@@ -6,5 +6,6 @@
     "https://boards-api.greenhouse.io"
   ],
   "packages": [],
-  "uuid": "a74f179f-60e6-4b51-a4b0-b495df22f0d2"
+  "uuid": "a74f179f-60e6-4b51-a4b0-b495df22f0d2",
+  "sub_type": "third_party"
 }

@@ -7,5 +7,6 @@
     "https://api-ssl.bitly.com"
   ],
   "packages": [],
-  "uuid": "7887766b-8ced-42e2-8812-3a1d397af0fa"
+  "uuid": "7887766b-8ced-42e2-8812-3a1d397af0fa",
+  "sub_type": "third_party"
 }

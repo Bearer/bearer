@@ -7,5 +7,6 @@
     "https://sandbox-api.shipbob.com"
   ],
   "packages": [],
-  "uuid": "ee20160e-7a15-478f-ab37-cabc3b677b8e"
+  "uuid": "ee20160e-7a15-478f-ab37-cabc3b677b8e",
+  "sub_type": "third_party"
 }

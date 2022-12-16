@@ -6,5 +6,6 @@
     "https://api.envoy.com"
   ],
   "packages": [],
-  "uuid": "64bcc7c1-ce82-4fee-b676-7cbc1a0981d0"
+  "uuid": "64bcc7c1-ce82-4fee-b676-7cbc1a0981d0",
+  "sub_type": "third_party"
 }

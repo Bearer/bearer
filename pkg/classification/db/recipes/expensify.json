@@ -6,5 +6,6 @@
     "https://integrations.expensify.com/Integration-Server"
   ],
   "packages": [],
-  "uuid": "ef9c9488-0c59-419f-98db-45bddfd692b5"
+  "uuid": "ef9c9488-0c59-419f-98db-45bddfd692b5",
+  "sub_type": "third_party"
 }

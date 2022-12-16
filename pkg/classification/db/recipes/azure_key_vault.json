@@ -15,5 +15,6 @@
       "package_manager": "rubygems"
     }
   ],
-  "uuid": "96950467-4e02-474f-8e44-3029359075e7"
+  "uuid": "96950467-4e02-474f-8e44-3029359075e7",
+  "sub_type": "database"
 }

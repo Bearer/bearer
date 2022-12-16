@@ -6,5 +6,6 @@
     "https://api.dreamhost.com"
   ],
   "packages": [],
-  "uuid": "78102417-52f7-40c7-99ee-ac84986e5171"
+  "uuid": "78102417-52f7-40c7-99ee-ac84986e5171",
+  "sub_type": "third_party"
 }

@@ -6,5 +6,6 @@
     "https://api.wordnik.com"
   ],
   "packages": [],
-  "uuid": "c275cc5e-6b11-4956-9eb2-80d5947818d8"
+  "uuid": "c275cc5e-6b11-4956-9eb2-80d5947818d8",
+  "sub_type": "third_party"
 }

@@ -7,5 +7,6 @@
     "https://apple-pay-gateway.apple.com"
   ],
   "packages": [],
-  "uuid": "3907b935-0197-4fb0-a836-e6fbb597fd9d"
+  "uuid": "3907b935-0197-4fb0-a836-e6fbb597fd9d",
+  "sub_type": "third_party"
 }

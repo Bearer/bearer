@@ -6,5 +6,6 @@
     "https://api.cirrus-ci.com"
   ],
   "packages": [],
-  "uuid": "b334f203-7f53-40be-8787-3eeb285d30c8"
+  "uuid": "b334f203-7f53-40be-8787-3eeb285d30c8",
+  "sub_type": "third_party"
 }

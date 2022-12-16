@@ -6,5 +6,6 @@
     "https://api.clickup.com"
   ],
   "packages": [],
-  "uuid": "7d0cde63-1e4c-46d5-95c9-158690730341"
+  "uuid": "7d0cde63-1e4c-46d5-95c9-158690730341",
+  "sub_type": "third_party"
 }

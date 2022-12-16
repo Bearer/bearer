@@ -7,5 +7,6 @@
     "https://api.checkout.com"
   ],
   "packages": [],
-  "uuid": "968ed200-35c8-42cc-a37e-d2b586750522"
+  "uuid": "968ed200-35c8-42cc-a37e-d2b586750522",
+  "sub_type": "third_party"
 }

@@ -7,5 +7,6 @@
     "https://api.limonetik.com"
   ],
   "packages": [],
-  "uuid": "2c919d7f-b58f-4d8b-9b5f-951fbeab5e0c"
+  "uuid": "2c919d7f-b58f-4d8b-9b5f-951fbeab5e0c",
+  "sub_type": "third_party"
 }

@@ -7,5 +7,6 @@
     "https://graph.microsoft.com"
   ],
   "packages": [],
-  "uuid": "5ff99297-f4af-47cf-9004-36fdb84c78e6"
+  "uuid": "5ff99297-f4af-47cf-9004-36fdb84c78e6",
+  "sub_type": "third_party"
 }

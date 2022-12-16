@@ -6,5 +6,6 @@
     "https://api.pandadoc.com"
   ],
   "packages": [],
-  "uuid": "214c3327-fa63-4f1d-b6d8-24128e776137"
+  "uuid": "214c3327-fa63-4f1d-b6d8-24128e776137",
+  "sub_type": "third_party"
 }

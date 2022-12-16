@@ -10,5 +10,6 @@
       "package_manager": "npm"
     }
   ],
-  "uuid": "b4620736-5d38-49f8-b6f1-b334ec93cfe0"
+  "uuid": "b4620736-5d38-49f8-b6f1-b334ec93cfe0",
+  "sub_type": "message_bus"
 }

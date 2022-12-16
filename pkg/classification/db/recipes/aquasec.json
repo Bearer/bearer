@@ -6,5 +6,6 @@
     "https://api.aquasec.com"
   ],
   "packages": [],
-  "uuid": "42b63325-c431-44b0-8b2b-b48e68bf26fb"
+  "uuid": "42b63325-c431-44b0-8b2b-b48e68bf26fb",
+  "sub_type": "third_party"
 }

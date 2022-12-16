@@ -6,5 +6,6 @@
     "https://api.nodemailer.com"
   ],
   "packages": [],
-  "uuid": "930bdbcc-d4b4-4fdc-a09a-d7ce61e296b2"
+  "uuid": "930bdbcc-d4b4-4fdc-a09a-d7ce61e296b2",
+  "sub_type": "third_party"
 }

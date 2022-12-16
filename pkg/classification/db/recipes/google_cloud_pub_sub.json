@@ -30,5 +30,6 @@
       "package_manager": "rubygems"
     }
   ],
-  "uuid": "4f9955fb-23b7-4f3e-ab5f-134afa22940b"
+  "uuid": "4f9955fb-23b7-4f3e-ab5f-134afa22940b",
+  "sub_type": "message_bus"
 }

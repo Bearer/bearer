@@ -10,5 +10,6 @@
     "https://preview.contentful.com"
   ],
   "packages": [],
-  "uuid": "d57faf83-4a86-4356-8a9f-6392d645a730"
+  "uuid": "d57faf83-4a86-4356-8a9f-6392d645a730",
+  "sub_type": "third_party"
 }

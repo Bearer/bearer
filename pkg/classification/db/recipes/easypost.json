@@ -6,5 +6,6 @@
     "https://api.easypost.com"
   ],
   "packages": [],
-  "uuid": "69b0b60c-23ae-4955-8094-9ced959ffa29"
+  "uuid": "69b0b60c-23ae-4955-8094-9ced959ffa29",
+  "sub_type": "third_party"
 }

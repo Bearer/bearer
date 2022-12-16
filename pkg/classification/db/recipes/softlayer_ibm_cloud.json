@@ -6,5 +6,6 @@
     "https://api.softlayer.com"
   ],
   "packages": [],
-  "uuid": "96ae0b8c-5b9a-475f-af34-6504ef64b686"
+  "uuid": "96ae0b8c-5b9a-475f-af34-6504ef64b686",
+  "sub_type": "third_party"
 }

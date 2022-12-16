@@ -9,5 +9,6 @@
     "https://api.iceberg.com"
   ],
   "packages": [],
-  "uuid": "dee7e8f0-41ce-4795-97ff-c2c9946f8359"
+  "uuid": "dee7e8f0-41ce-4795-97ff-c2c9946f8359",
+  "sub_type": "third_party"
 }

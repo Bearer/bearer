@@ -45,5 +45,6 @@
       "package_manager": "packagist"
     }
   ],
-  "uuid": "50fd14cc-91e0-443a-95fa-fed159da5380"
+  "uuid": "50fd14cc-91e0-443a-95fa-fed159da5380",
+  "sub_type": "third_party"
 }

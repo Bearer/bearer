@@ -6,5 +6,6 @@
     "https://api.crmgang.com"
   ],
   "packages": [],
-  "uuid": "0068ae26-d24e-464d-87f2-03b55a58d678"
+  "uuid": "0068ae26-d24e-464d-87f2-03b55a58d678",
+  "sub_type": "third_party"
 }

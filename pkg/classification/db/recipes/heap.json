@@ -7,5 +7,6 @@
     "https://cdn.heapanalytics.com/js"
   ],
   "packages": [],
-  "uuid": "ed1d7ebc-e584-4b8e-9c2e-cdd53564308c"
+  "uuid": "ed1d7ebc-e584-4b8e-9c2e-cdd53564308c",
+  "sub_type": "third_party"
 }

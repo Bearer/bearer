@@ -6,5 +6,6 @@
     "https://api.izberg.me"
   ],
   "packages": [],
-  "uuid": "d20e6b2f-a27c-4abb-9fd4-75565424c964"
+  "uuid": "d20e6b2f-a27c-4abb-9fd4-75565424c964",
+  "sub_type": "third_party"
 }

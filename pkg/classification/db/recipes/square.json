@@ -7,5 +7,6 @@
     "https://connect.squareup.com"
   ],
   "packages": [],
-  "uuid": "3350dca9-629e-43fe-aa85-719186d6d32f"
+  "uuid": "3350dca9-629e-43fe-aa85-719186d6d32f",
+  "sub_type": "third_party"
 }

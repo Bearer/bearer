@@ -160,5 +160,6 @@
       "package_manager": "go"
     }
   ],
-  "uuid": "911eed55-46f6-4324-ab55-ca11acfe562e"
+  "uuid": "911eed55-46f6-4324-ab55-ca11acfe562e",
+  "sub_type": "database"
 }
