@@ -13,8 +13,6 @@ Curio is available as a standalone executable binary. The latest release is avai
 
 ### Install Script
 
-:warning: **Not working until public**: Use the [Binary](#binary) instructions in the next section :warning:
-
 This script downloads the Curio binary automatically based on your OS and architecture.
 
 ```bash
