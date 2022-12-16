@@ -15,10 +15,11 @@ type ClassifiedDependency struct {
 }
 
 type Classification struct {
-	RecipeMatch bool                            `json:"recipe_match" yaml:"recipe_match"`
-	RecipeUUID  string                          `json:"recipe_uuid,omitempty"`
-	RecipeName  string                          `json:"recipe_name,omitempty"`
-	Decision    classify.ClassificationDecision `json:"decision" yaml:"decision"`
+	RecipeMatch   bool                            `json:"recipe_match" yaml:"recipe_match"`
+	RecipeUUID    string                          `json:"recipe_uuid,omitempty"`
+	RecipeName    string                          `json:"recipe_name,omitempty"`
+	RecipeSubType string                          `json:"recipe_sub_type,omitempty"`
+	Decision      classify.ClassificationDecision `json:"decision" yaml:"decision"`
 }
 
 type Classifier struct {
@@ -69,8 +70,9 @@ func (classifier *Classifier) Classify(data detections.Detection) (*ClassifiedDe
 		for _, recipePackage := range recipe.Packages {
 			if isRecipeMatch(recipePackage, value) {
 				classification = &Classification{
-					RecipeUUID:  recipe.UUID,
-					RecipeName:  recipe.Name,
+					RecipeUUID:    recipe.UUID,
+					RecipeName:    recipe.Name,
+					RecipeSubType: recipe.SubType,
 					RecipeMatch: true,
 					Decision: classify.ClassificationDecision{
 						State:  classify.Valid,
