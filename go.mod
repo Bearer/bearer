@@ -12,7 +12,7 @@ require (
 	github.com/hhatto/gocloc v0.4.3
 	github.com/jessevdk/go-flags v1.5.0
 	github.com/monochromegane/go-gitignore v0.0.0-20200626010858-205db1a8cc00
-	github.com/open-policy-agent/opa v0.46.1
+	github.com/open-policy-agent/opa v0.47.3
 	github.com/rs/zerolog v1.28.0
 	github.com/sabhiram/go-gitignore v0.0.0-20210923224102-525f6e181f06
 	github.com/schollz/progressbar/v3 v3.12.1
@@ -26,7 +26,7 @@ require (
 	github.com/zricethezav/gitleaks/v8 v8.15.1
 	golang.org/x/exp v0.0.0-20221031165847-c99f073a8326
 	golang.org/x/mod v0.7.0
-	golang.org/x/net v0.2.0
+	golang.org/x/net v0.4.0
 )
 
 require (
@@ -65,7 +65,7 @@ require (
 	github.com/xeipuuv/gojsonreference v0.0.0-20180127040603-bd5ef7bd5415 // indirect
 	github.com/yashtewari/glob-intersection v0.1.0 // indirect
 	golang.org/x/sync v0.1.0 // indirect
-	golang.org/x/term v0.2.0 // indirect
+	golang.org/x/term v0.3.0 // indirect
 )
 
 require (
@@ -94,7 +94,7 @@ require (
 	github.com/spf13/viper v1.14.0
 	github.com/subosito/gotenv v1.4.1 // indirect
 	golang.org/x/oauth2 v0.2.0
-	golang.org/x/sys v0.2.0 // indirect
+	golang.org/x/sys v0.3.0 // indirect
 	golang.org/x/text v0.5.0 // indirect
 	golang.org/x/xerrors v0.0.0-20220907171357-04be3eba64a2
 	google.golang.org/api v0.105.0
