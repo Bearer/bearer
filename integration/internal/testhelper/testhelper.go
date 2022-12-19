@@ -50,7 +50,7 @@ func executeApp(t *testing.T, arguments []string) (string, error) {
 	var err error
 
 	timer := time.NewTimer(TestTimeout)
-	commandFinished := make(chan struct{})
+	commandFinished := make(chan struct{}, 1)
 
 	go func() {
 		err = cmd.Start()
