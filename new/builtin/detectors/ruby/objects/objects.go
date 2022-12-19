@@ -48,7 +48,7 @@ func New(lang languagetypes.Language) (detector.Detector, error) {
 	}, nil
 }
 
-func (detector *objectsDetector) Name() string {
+func (detector *objectsDetector) Type() string {
 	return "objects"
 }
 
@@ -94,7 +94,7 @@ func (detector *objectsDetector) gatherProperties(
 
 	return []*detectiontypes.Detection{{
 		MatchNode: node,
-		Data:      Data{Properties: properties},
+		Data:      map[string]interface{}{"properties": properties},
 	}}, nil
 }
 
@@ -114,25 +114,25 @@ func (detector *objectsDetector) nameAssignedObject(
 
 	var detections []*detectiontypes.Detection
 	for _, object := range objects {
-		objectData := object.Data.(Data)
+		objectData := object.Data
 
-		if objectData.Name == "" {
+		if objectData["name"] == "" {
 			detections = append(detections, &detectiontypes.Detection{
 				MatchNode: node,
-				Data: Data{
-					Name:       result["left"].Content(),
-					Properties: objectData.Properties,
+				Data: map[string]interface{}{
+					"name":       result["left"].Content(),
+					"properties": objectData["properties"],
 				},
 			})
 		} else {
 			detections = append(detections, &detectiontypes.Detection{
 				MatchNode: node,
-				Data: Data{
-					Name: result["left"].Content(),
-					Properties: []*detectiontypes.Detection{{
+				Data: map[string]interface{}{
+					"name": result["left"].Content(),
+					"properties": []*detectiontypes.Detection{{
 						MatchNode: object.MatchNode,
-						Data: Data{
-							Name: objectData.Name,
+						Data: map[string]interface{}{
+							"name": objectData["name"],
 						},
 					}},
 				},
@@ -159,13 +159,13 @@ func (detector *objectsDetector) nameParentPairObject(
 
 	var detections []*detectiontypes.Detection
 	for _, object := range objects {
-		objectData := object.Data.(Data)
+		objectData := object.Data
 
 		detections = append(detections, &detectiontypes.Detection{
 			MatchNode: node,
-			Data: Data{
-				Name:       result["key"].Content(),
-				Properties: objectData.Properties,
+			Data: map[string]interface{}{
+				"name":       result["key"].Content(),
+				"properties": objectData["properties"],
 			},
 		})
 	}

@@ -6,9 +6,11 @@ import (
 
 	"gopkg.in/yaml.v2"
 
-	"github.com/bearer/curio/new/builtin/detectors/ruby/datatypes"
+	"github.com/bearer/curio/new/builtin/detectors/generic/datatypes"
 	"github.com/bearer/curio/new/builtin/detectors/ruby/objects"
 	"github.com/bearer/curio/new/builtin/detectors/ruby/properties"
+	"github.com/bearer/curio/new/builtin/detectors/ruby/rego"
+	"github.com/bearer/curio/new/builtin/detectors/ruby/rego/ffi"
 	detectiontypes "github.com/bearer/curio/new/detection/types"
 	"github.com/bearer/curio/new/detector"
 	"github.com/bearer/curio/new/detectorexecutor"
@@ -46,10 +48,17 @@ func run() error {
 	}
 	defer datatypesDetector.Close()
 
-	executor, err := detectorexecutor.New(lang, []detector.Detector{
+	regoDetector, err := rego.New(lang, "test")
+	if err != nil {
+		return fmt.Errorf("failed to create rego detector: %s", err)
+	}
+	defer regoDetector.Close()
+
+	executor, err := detectorexecutor.New([]detector.Detector{
 		propertiesDetector,
 		objectsDetector,
 		datatypesDetector,
+		regoDetector,
 	})
 	if err != nil {
 		return fmt.Errorf("failed to create executor: %s", err)
@@ -79,8 +88,9 @@ end
 	defer tree.Close()
 
 	evaluator := treeevaluator.New(lang, executor, tree)
+	ffi.SetData(ffi.NewData(evaluator)) // FIXME
 
-	detections, err := evaluator.TreeDetections(tree.RootNode(), "datatypes")
+	detections, err := evaluator.TreeDetections(tree.RootNode(), "test")
 	if err != nil {
 		return fmt.Errorf("failed to detect data types: %s", err)
 	}

@@ -1,8 +1,6 @@
 package datatypes
 
 import (
-	"github.com/bearer/curio/new/builtin/detectors/ruby/objects"
-	"github.com/bearer/curio/new/builtin/detectors/ruby/properties"
 	detectiontypes "github.com/bearer/curio/new/detection/types"
 	"github.com/bearer/curio/new/detector"
 	"github.com/bearer/curio/new/language"
@@ -20,7 +18,7 @@ func New(lang languagetypes.Language) (detector.Detector, error) {
 	return &datatypesDetector{}, nil
 }
 
-func (detector *datatypesDetector) Name() string {
+func (detector *datatypesDetector) Type() string {
 	return "datatypes"
 }
 
@@ -36,18 +34,18 @@ func (detector *datatypesDetector) DetectAt(
 	var result []*detectiontypes.Detection
 
 	for _, object := range objectDetections {
-		data := object.Data.(objects.Data)
-		if data.Name != "user" {
+		data := object.Data
+		if data["name"] != "user" {
 			continue
 		}
 
-		for _, property := range data.Properties {
-			propertyData := property.Data.(properties.Data)
-			if propertyData.Name == "first_name" {
+		for _, property := range data["properties"].([]*detectiontypes.Detection) {
+			propertyData := property.Data
+			if propertyData["name"] == "first_name" {
 				result = append(result, &detectiontypes.Detection{
 					ContextNode: node,
 					MatchNode:   property.MatchNode,
-					Data:        Data{Name: "Person Name"},
+					Data:        map[string]interface{}{"name": "Person Name"},
 				})
 			}
 		}

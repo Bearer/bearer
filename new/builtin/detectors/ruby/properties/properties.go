@@ -27,7 +27,7 @@ func New(lang languagetypes.Language) (detector.Detector, error) {
 	return &propertiesDetector{pairQuery: pairQuery}, nil
 }
 
-func (detector *propertiesDetector) Name() string {
+func (detector *propertiesDetector) Type() string {
 	return "properties"
 }
 
@@ -42,7 +42,7 @@ func (detector *propertiesDetector) DetectAt(
 
 	return []*detectiontypes.Detection{{
 		MatchNode: node,
-		Data:      Data{Name: result["key"].Content()},
+		Data:      map[string]interface{}{"name": result["key"].Content()},
 	}}, nil
 }
 

@@ -10,24 +10,21 @@ import (
 	"github.com/bearer/curio/new/detector"
 	"github.com/bearer/curio/new/detectorexecutor/types"
 	"github.com/bearer/curio/new/language"
-	languagetypes "github.com/bearer/curio/new/language/types"
 	treeevaluatortypes "github.com/bearer/curio/new/treeevaluator/types"
 )
 
 type detectorExecutor struct {
-	lang          languagetypes.Language
 	detectorStack map[language.NodeID][]string
 	detectors     map[string]detector.Detector
 }
 
-func New(lang languagetypes.Language, detectors []detector.Detector) (types.Executor, error) {
+func New(detectors []detector.Detector) (types.Executor, error) {
 	detectorMap, err := makeDetectorMap(detectors)
 	if err != nil {
 		return nil, err
 	}
 
 	return &detectorExecutor{
-		lang:          lang,
 		detectorStack: make(map[language.NodeID][]string),
 		detectors:     detectorMap,
 	}, nil
@@ -37,13 +34,13 @@ func makeDetectorMap(detectors []detector.Detector) (map[string]detector.Detecto
 	result := make(map[string]detector.Detector)
 
 	for _, detector := range detectors {
-		name := detector.Name()
+		detectorType := detector.Type()
 
-		if _, existing := result[name]; existing {
-			return nil, fmt.Errorf("duplicate detector '%s'", name)
+		if _, existing := result[detectorType]; existing {
+			return nil, fmt.Errorf("duplicate detector '%s'", detectorType)
 		}
 
-		result[name] = detector
+		result[detectorType] = detector
 	}
 
 	return result, nil

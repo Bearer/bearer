@@ -7,7 +7,7 @@ import (
 )
 
 type Detector interface {
-	Name() string
+	Type() string
 	DetectAt(node *language.Node, evaluator treeevaluatortypes.Evaluator) ([]*detectiontypes.Detection, error)
 	Close()
 }
