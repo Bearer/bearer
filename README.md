@@ -24,37 +24,8 @@
 ## The data-first security scanner to protect sensitive data from leaks and breaches
 <hr/>
 
-```
-Scanning target ./example-project
- └ 100% [===============] (3305/3305, 115 files/s) [28s]
+https://user-images.githubusercontent.com/1649672/208479520-3476f4d2-2fa2-4f05-abad-5ce4d3f5d3ba.mov
 
-Policy Report
-
-=====================================
-Policy list:
-
-- JWT leaking
-- Insecure communication
-- Insecure HTTP with Data Category
-- Logger leaking
-- Cookie leaking
-- Insecure SMTP
-- HTTP GET parameters
-- Insecure FTP with Data Category
-- Session leaking
-- Insecure FTP
-- Third-party data category exposure
-- SSL certificate verification disabled
-- Application level encryption missing
-- Insecure HTTP GET
-
-=====================================
-
-SUCCESS
-
-14 policies were run and no failures were detected.
-
-```
 
 Curio helps developers and security teams to:
 
