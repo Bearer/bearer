@@ -12,5 +12,6 @@
     "https://checkout-test.adyen.com"
   ],
   "packages": [],
-  "uuid": "d050650e-f863-4ed8-9342-3a54b32335b8"
+  "uuid": "d050650e-f863-4ed8-9342-3a54b32335b8",
+  "sub_type": "third_party"
 }

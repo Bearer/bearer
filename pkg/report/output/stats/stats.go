@@ -20,21 +20,15 @@ type DataType struct {
 	Occurrences  int    `json:"occurrences" yaml:"occurrences"`
 }
 
-type DataStore struct {
-	Name                       string `json:"name" yaml:"name"`
-	NumberOfDataTypes          int `json:"number_of_data_types" yaml:"number_of_data_types"`
-	NumberOfEncryptedDataTypes int `json:"number_of_encrypted_data_types" yaml:"number_of_encrypted_data_types"`
-}
-
 type Stats struct {
-	NumberOfLines        int32            `json:"number_of_lines" yaml:"number_of_lines"`
-	NumberOfDataTypes    int              `json:"number_of_data_types" yaml:"number_of_data_types"`
-	DataTypes            []DataType       `json:"data_types" yaml:"data_types"`
-	DataStores           []DataStore      `json:"-" yaml:"-"`
-	NumberOfExternalAPIs int              `json:"-" yaml:"-"`
-	NumberOfInternalAPIs int              `json:"-" yaml:"-"`
-	Languages            map[string]int32 `json:"-" yaml:"-"`
-	DataGroups           []string         `json:"-" yaml:"-"`
+	NumberOfLines              int32            `json:"number_of_lines" yaml:"number_of_lines"`
+	NumberOfDataTypes          int              `json:"number_of_data_types" yaml:"number_of_data_types"`
+	DataTypes                  []DataType       `json:"data_types" yaml:"data_types"`
+	NumberOfDatabases          int              `json:"-" yaml:"-"`
+	NumberOfExternalAPIs       int              `json:"-" yaml:"-"`
+	NumberOfInternalAPIs       int              `json:"-" yaml:"-"`
+	Languages                  map[string]int32 `json:"-" yaml:"-"`
+	DataGroups                 []string         `json:"-" yaml:"-"`
 }
 
 func GetOutput(inputgocloc *gocloc.Result, inputDataflow *dataflow.DataFlow, config settings.Config) (*Stats, error) {
@@ -68,7 +62,7 @@ func GetOutput(inputgocloc *gocloc.Result, inputDataflow *dataflow.DataFlow, con
 
 	dataGroupNames := getDataGroupNames(config, data_types)
 
-	dataStores := []DataStore{}
+	numberOfDatabases := 0
 	numberOfExternalAPIs := 0
 	numberOfInternalAPIs := 0
 	for _, component := range inputDataflow.Components {
@@ -79,22 +73,9 @@ func GetOutput(inputgocloc *gocloc.Result, inputDataflow *dataflow.DataFlow, con
 			numberOfExternalAPIs++
 		}
 
-		// @todo FIXME: Collect statistics for data stores
-
-		// detectors := []string{}
-		// for _, location := range component.Locations {
-		//	detectors = append(detectors, location.Detector)
-		// }
-
-		// for _, detector := range detectors {
-		//	if detector == string(reportdetectors.DetectorSQL) {
-		//		dataStores = append(dataStores, DataStore{
-		//			Name: "",
-		//			NumberOfDataTypes: 0,
-		//			NumberOfEncryptedDataTypes: 0,
-		//		})
-		//	}
-		// }
+		if component.SubType == "database" {
+			numberOfDatabases++
+		}
 	}
 
 	languages := map[string]int32{}
@@ -103,14 +84,14 @@ func GetOutput(inputgocloc *gocloc.Result, inputDataflow *dataflow.DataFlow, con
 	}
 
 	return &Stats{
-		NumberOfLines:        inputgocloc.Total.Code,
-		NumberOfDataTypes:    numberOfDataTypesFound,
-		DataTypes:            data_types,
-		DataStores:           dataStores,
-		NumberOfExternalAPIs: numberOfExternalAPIs,
-		NumberOfInternalAPIs: numberOfInternalAPIs,
-		Languages:            languages,
-		DataGroups:           dataGroupNames,
+		NumberOfLines:              inputgocloc.Total.Code,
+		NumberOfDataTypes:          numberOfDataTypesFound,
+		DataTypes:                  data_types,
+		NumberOfDatabases:          numberOfDatabases,
+		NumberOfExternalAPIs:       numberOfExternalAPIs,
+		NumberOfInternalAPIs:       numberOfInternalAPIs,
+		Languages:                  languages,
+		DataGroups:                 dataGroupNames,
 	}, nil
 }
 
@@ -152,20 +133,20 @@ Though this doesn’t mean the curious bear comes empty-handed, it found:
 		totalDataTypeOccurrences,
 		strings.Join(statistics.DataGroups, ", ")))
 
-	if len(statistics.DataStores) != 0 {
-		totalDataStoreDataTypes := 0
-		totalDataStoreEncryptedDataTypes := 0
-		for _, dataStore := range statistics.DataStores {
-			totalDataStoreDataTypes += dataStore.NumberOfDataTypes
-			totalDataStoreEncryptedDataTypes += dataStore.NumberOfEncryptedDataTypes
+	if statistics.NumberOfDatabases != 0 {
+		numberOfEncryptedDataTypes := 0
+		for _, dataType := range statistics.DataTypes {
+			if dataType.Encrypted {
+				numberOfEncryptedDataTypes += 1
+			}
 		}
 
 		outputStr.WriteString(fmt.Sprintf(
 			`
 - %d database(s) storing %d data type(s) including %d encrypted data type(s).`,
-			len(statistics.DataStores),
-			totalDataStoreDataTypes,
-			totalDataStoreEncryptedDataTypes))
+			statistics.NumberOfDatabases,
+			statistics.NumberOfDataTypes,
+			numberOfEncryptedDataTypes))
 	}
 
 	if statistics.NumberOfExternalAPIs != 0 {

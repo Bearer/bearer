@@ -6,5 +6,6 @@
     "https://app.launchdarkly.com/api/"
   ],
   "packages": [],
-  "uuid": "37009f8e-21ac-4d83-983b-b3809e7cb319"
+  "uuid": "37009f8e-21ac-4d83-983b-b3809e7cb319",
+  "sub_type": "third_party"
 }

@@ -6,5 +6,6 @@
     "https://api.gfycat.com"
   ],
   "packages": [],
-  "uuid": "1c5d6b67-85f4-41a3-b6b9-5c2dff414af2"
+  "uuid": "1c5d6b67-85f4-41a3-b6b9-5c2dff414af2",
+  "sub_type": "third_party"
 }

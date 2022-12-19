@@ -6,5 +6,6 @@
     "https://api.monday.com"
   ],
   "packages": [],
-  "uuid": "242a391c-5c7d-4ba4-9d7f-3089eb0f76ed"
+  "uuid": "242a391c-5c7d-4ba4-9d7f-3089eb0f76ed",
+  "sub_type": "third_party"
 }

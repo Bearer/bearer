@@ -7,5 +7,6 @@
     "https://sandbox.plaid.com"
   ],
   "packages": [],
-  "uuid": "d52feb7f-c121-4228-8f1e-48f35dc61feb"
+  "uuid": "d52feb7f-c121-4228-8f1e-48f35dc61feb",
+  "sub_type": "third_party"
 }

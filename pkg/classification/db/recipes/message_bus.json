@@ -55,5 +55,6 @@
       "package_manager": "packagist"
     }
   ],
-  "uuid": "30becb85-cb58-4f4f-bbc4-d9111385a95c"
+  "uuid": "30becb85-cb58-4f4f-bbc4-d9111385a95c",
+  "sub_type": "message_bus"
 }

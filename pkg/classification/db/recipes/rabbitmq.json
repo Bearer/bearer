@@ -95,5 +95,6 @@
       "package_manager": "npm"
     }
   ],
-  "uuid": "b4771fe2-a6e5-486a-b0e1-2e50a611f98b"
+  "uuid": "b4771fe2-a6e5-486a-b0e1-2e50a611f98b",
+  "sub_type": "message_bus"
 }

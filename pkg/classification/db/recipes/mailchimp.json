@@ -58,5 +58,6 @@
       "package_manager": "packagist"
     }
   ],
-  "uuid": "6bf43020-4354-4044-818e-610e8e691d1a"
+  "uuid": "6bf43020-4354-4044-818e-610e8e691d1a",
+  "sub_type": "third_party"
 }

@@ -6,5 +6,6 @@
     "https://*.jfrog.io"
   ],
   "packages": [],
-  "uuid": "6b0cea07-d1c1-4573-9200-599f167898eb"
+  "uuid": "6b0cea07-d1c1-4573-9200-599f167898eb",
+  "sub_type": "third_party"
 }

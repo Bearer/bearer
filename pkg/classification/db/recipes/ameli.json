@@ -7,5 +7,6 @@
     "https://services-ps.ameli.fr/lps"
   ],
   "packages": [],
-  "uuid": "0767b306-3ee8-426a-b63a-44355add6f27"
+  "uuid": "0767b306-3ee8-426a-b63a-44355add6f27",
+  "sub_type": "third_party"
 }

@@ -6,5 +6,6 @@
     "https://ci.appveyor.com/api"
   ],
   "packages": [],
-  "uuid": "7bf38449-7638-4f73-896d-ff46954b0e80"
+  "uuid": "7bf38449-7638-4f73-896d-ff46954b0e80",
+  "sub_type": "third_party"
 }

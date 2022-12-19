@@ -6,5 +6,6 @@
     "https://api.runscope.com"
   ],
   "packages": [],
-  "uuid": "7127982b-2e46-4376-bd4e-20ad5c5b0d51"
+  "uuid": "7127982b-2e46-4376-bd4e-20ad5c5b0d51",
+  "sub_type": "third_party"
 }

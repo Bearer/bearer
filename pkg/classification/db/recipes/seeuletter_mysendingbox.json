@@ -7,5 +7,6 @@
     "https://api.seeuletter.com"
   ],
   "packages": [],
-  "uuid": "54bbc748-7370-4199-a0b0-9e820395c690"
+  "uuid": "54bbc748-7370-4199-a0b0-9e820395c690",
+  "sub_type": "third_party"
 }

@@ -6,5 +6,6 @@
     "https://pipelinersales.com/api"
   ],
   "packages": [],
-  "uuid": "520c97de-1548-4d39-adef-3314ffc2eb67"
+  "uuid": "520c97de-1548-4d39-adef-3314ffc2eb67",
+  "sub_type": "third_party"
 }

@@ -6,5 +6,6 @@
     "https://manage-api.mabaya.com"
   ],
   "packages": [],
-  "uuid": "03ee8fbc-5f33-4c6e-b9e0-296b477a3aed"
+  "uuid": "03ee8fbc-5f33-4c6e-b9e0-296b477a3aed",
+  "sub_type": "third_party"
 }

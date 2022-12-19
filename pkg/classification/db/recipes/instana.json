@@ -6,5 +6,6 @@
     "https://instana.io/api"
   ],
   "packages": [],
-  "uuid": "4b05bba6-d8ff-45fc-9378-6ed180304689"
+  "uuid": "4b05bba6-d8ff-45fc-9378-6ed180304689",
+  "sub_type": "third_party"
 }

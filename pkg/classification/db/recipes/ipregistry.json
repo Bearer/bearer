@@ -6,5 +6,6 @@
     "https://api.ipregistry.co"
   ],
   "packages": [],
-  "uuid": "c2e582e5-c799-4f92-a670-2402f661354c"
+  "uuid": "c2e582e5-c799-4f92-a670-2402f661354c",
+  "sub_type": "third_party"
 }

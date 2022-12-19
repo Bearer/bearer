@@ -6,5 +6,6 @@
     "https://api.*.brightbox.com"
   ],
   "packages": [],
-  "uuid": "d00a92c8-bc14-4e40-baab-55751bafeaf8"
+  "uuid": "d00a92c8-bc14-4e40-baab-55751bafeaf8",
+  "sub_type": "third_party"
 }

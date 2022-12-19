@@ -30,5 +30,6 @@
       "package_manager": "maven"
     }
   ],
-  "uuid": "e163685a-bf96-4dd4-a1db-0ccdaf1dbc3e"
+  "uuid": "e163685a-bf96-4dd4-a1db-0ccdaf1dbc3e",
+  "sub_type": "object_storage"
 }

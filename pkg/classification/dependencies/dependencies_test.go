@@ -33,6 +33,7 @@ func TestDependencies(t *testing.T) {
 			Want: &dependencies.Classification{
 				RecipeMatch: true,
 				RecipeName:  "Stripe",
+				RecipeSubType: "third_party",
 				RecipeUUID:  "c24b836a-d035-49dc-808f-1912f16f690d",
 				Decision: classify.ClassificationDecision{
 					State:  classify.Valid,
@@ -55,6 +56,7 @@ func TestDependencies(t *testing.T) {
 			Want: &dependencies.Classification{
 				RecipeMatch: true,
 				RecipeName:  "PostgreSQL",
+				RecipeSubType: "database",
 				RecipeUUID:  "428ff7dd-22ea-4e80-8755-84c70cf460db",
 				Decision: classify.ClassificationDecision{
 					State:  classify.Valid,

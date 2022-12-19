@@ -18,10 +18,11 @@ type Holder struct {
 }
 
 type component struct {
-	name           string
-	component_type string
-	uuid           string
-	detectors      map[string]*detector // group detectors by detectorName
+	name               string
+	component_type     string
+	component_sub_type string
+	uuid               string
+	detectors          map[string]*detector // group detectors by detectorName
 }
 
 type detector struct {
@@ -59,6 +60,7 @@ func (holder *Holder) AddInterface(classifiedDetection interfaceclassification.C
 	}
 
 	componentType := getComponentType(classifiedDetection.Classification.Decision.Reason)
+	componentSubType := classifiedDetection.Classification.RecipeSubType
 
 	componentUUID := classifiedDetection.Classification.RecipeUUID
 	if componentUUID == "" {
@@ -69,6 +71,7 @@ func (holder *Holder) AddInterface(classifiedDetection interfaceclassification.C
 		holder.addComponent(
 			classifiedDetection.Classification.Name(),
 			componentType,
+			componentSubType,
 			componentUUID,
 			string(classifiedDetection.DetectorType),
 			classifiedDetection.Source.Filename,
@@ -85,11 +88,13 @@ func (holder *Holder) AddDependency(classifiedDetection dependenciesclassificati
 	}
 
 	componentType := getComponentType(classifiedDetection.Classification.Decision.Reason)
+	componentSubType := classifiedDetection.Classification.RecipeSubType
 
 	if classifiedDetection.Classification.Decision.State == classify.Valid {
 		holder.addComponent(
 			classifiedDetection.Classification.RecipeName,
 			componentType,
+			componentSubType,
 			classifiedDetection.Classification.RecipeUUID,
 			string(classifiedDetection.DetectorType),
 			classifiedDetection.Source.Filename,
@@ -106,11 +111,13 @@ func (holder *Holder) AddFramework(classifiedDetection frameworkclassification.C
 	}
 
 	componentType := getComponentType(classifiedDetection.Classification.Decision.Reason)
+	componentSubType := classifiedDetection.Classification.RecipeSubType
 
 	if classifiedDetection.Classification.Decision.State == classify.Valid {
 		holder.addComponent(
 			classifiedDetection.Classification.RecipeName,
 			componentType,
+			componentSubType,
 			classifiedDetection.Classification.RecipeUUID,
 			string(classifiedDetection.DetectorType),
 			classifiedDetection.Source.Filename,
@@ -122,7 +129,7 @@ func (holder *Holder) AddFramework(classifiedDetection frameworkclassification.C
 }
 
 // addComponent adds component to hash list and at the same time blocks duplicates
-func (holder *Holder) addComponent(componentName string, componentType string, componentUUID string, detectorName string, fileName string, lineNumber int) {
+func (holder *Holder) addComponent(componentName string, componentType string, componentSubType string, componentUUID string, detectorName string, fileName string, lineNumber int) {
 	// create component entry if it doesn't exist
 	if _, exists := holder.components[componentUUID]; !exists {
 		var uuid string
@@ -130,10 +137,11 @@ func (holder *Holder) addComponent(componentName string, componentType string, c
 			uuid = componentUUID
 		}
 		holder.components[componentUUID] = &component{
-			name:           componentName,
-			component_type: componentType,
-			uuid:           uuid,
-			detectors:      make(map[string]*detector),
+			name:               componentName,
+			component_type:     componentType,
+			component_sub_type: componentSubType,
+			uuid:               uuid,
+			detectors:          make(map[string]*detector),
 		}
 	}
 
@@ -168,6 +176,7 @@ func (holder *Holder) ToDataFlow() []types.Component {
 		constructedComponent := types.Component{
 			Name:      targetComponent.name,
 			Type:      targetComponent.component_type,
+			SubType:   targetComponent.component_sub_type,
 			UUID:      targetComponent.uuid,
 			Locations: make([]types.ComponentLocation, 0),
 		}

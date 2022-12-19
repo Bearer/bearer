@@ -7,5 +7,6 @@
     "https://docusign.net/restapi"
   ],
   "packages": [],
-  "uuid": "eba0f4bc-3e35-46af-a0a7-fbce5a41ca5b"
+  "uuid": "eba0f4bc-3e35-46af-a0a7-fbce5a41ca5b",
+  "sub_type": "third_party"
 }

@@ -6,5 +6,6 @@
     "https://data.gouv.fr/api"
   ],
   "packages": [],
-  "uuid": "42e4e730-37a9-4bf3-b89e-1abbb930b2db"
+  "uuid": "42e4e730-37a9-4bf3-b89e-1abbb930b2db",
+  "sub_type": "third_party"
 }

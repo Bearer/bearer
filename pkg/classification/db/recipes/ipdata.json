@@ -6,5 +6,6 @@
     "https://api.ipdata.co"
   ],
   "packages": [],
-  "uuid": "b23eadc7-629b-444e-aa03-b547c59761be"
+  "uuid": "b23eadc7-629b-444e-aa03-b547c59761be",
+  "sub_type": "third_party"
 }

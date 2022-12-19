@@ -6,5 +6,6 @@
     "https://api.bambuser.com"
   ],
   "packages": [],
-  "uuid": "6fe6417f-583b-47e1-9702-9e52487af977"
+  "uuid": "6fe6417f-583b-47e1-9702-9e52487af977",
+  "sub_type": "third_party"
 }

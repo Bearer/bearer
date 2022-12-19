@@ -6,5 +6,6 @@
     "https://api.nylas.com"
   ],
   "packages": [],
-  "uuid": "0adcdf60-21c0-4d1f-9703-723e4ade37e7"
+  "uuid": "0adcdf60-21c0-4d1f-9703-723e4ade37e7",
+  "sub_type": "third_party"
 }

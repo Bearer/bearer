@@ -6,5 +6,6 @@
     "https://api.hellosign.com"
   ],
   "packages": [],
-  "uuid": "0906c4ab-0df3-48d7-aa83-5cda588d158c"
+  "uuid": "0906c4ab-0df3-48d7-aa83-5cda588d158c",
+  "sub_type": "third_party"
 }

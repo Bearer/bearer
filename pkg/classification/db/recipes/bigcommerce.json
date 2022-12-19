@@ -8,5 +8,6 @@
     "https://mybigcommerce.com/api"
   ],
   "packages": [],
-  "uuid": "361dece7-aeab-419e-8621-3b5894b2ba7f"
+  "uuid": "361dece7-aeab-419e-8621-3b5894b2ba7f",
+  "sub_type": "third_party"
 }

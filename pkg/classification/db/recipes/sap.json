@@ -6,5 +6,6 @@
     "http://sap.com/xi/*"
   ],
   "packages": [],
-  "uuid": "ccbc8234-4cf3-4ee4-9fd6-abce49ef4fe7"
+  "uuid": "ccbc8234-4cf3-4ee4-9fd6-abce49ef4fe7",
+  "sub_type": "third_party"
 }

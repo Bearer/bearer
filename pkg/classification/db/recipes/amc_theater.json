@@ -6,5 +6,6 @@
     "https://api.amctheatres.com"
   ],
   "packages": [],
-  "uuid": "f5175ce6-603c-4393-a64e-2500b11b40b4"
+  "uuid": "f5175ce6-603c-4393-a64e-2500b11b40b4",
+  "sub_type": "third_party"
 }

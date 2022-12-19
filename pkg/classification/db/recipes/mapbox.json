@@ -6,5 +6,6 @@
     "https://api.mapbox.com"
   ],
   "packages": [],
-  "uuid": "a868d872-5ae1-4107-b24d-d3481839f141"
+  "uuid": "a868d872-5ae1-4107-b24d-d3481839f141",
+  "sub_type": "third_party"
 }

@@ -6,5 +6,6 @@
     "https://3s.mobvista.com"
   ],
   "packages": [],
-  "uuid": "11503f35-8d4a-47db-ac98-be3b1b014ca6"
+  "uuid": "11503f35-8d4a-47db-ac98-be3b1b014ca6",
+  "sub_type": "third_party"
 }

@@ -6,5 +6,6 @@
     "https://selligent.com/*/organizations"
   ],
   "packages": [],
-  "uuid": "9898b1cd-e47a-4416-a03e-51debb41d624"
+  "uuid": "9898b1cd-e47a-4416-a03e-51debb41d624",
+  "sub_type": "third_party"
 }

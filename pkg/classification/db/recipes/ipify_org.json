@@ -6,5 +6,6 @@
     "https://api.ipify.org"
   ],
   "packages": [],
-  "uuid": "278a12e1-2e88-4a4e-80d3-f8c4f1048e3c"
+  "uuid": "278a12e1-2e88-4a4e-80d3-f8c4f1048e3c",
+  "sub_type": "third_party"
 }

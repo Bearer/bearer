@@ -6,5 +6,6 @@
     "https://api.glesys.com"
   ],
   "packages": [],
-  "uuid": "eb4120e6-d5a7-4e2d-a352-b5471327679e"
+  "uuid": "eb4120e6-d5a7-4e2d-a352-b5471327679e",
+  "sub_type": "third_party"
 }

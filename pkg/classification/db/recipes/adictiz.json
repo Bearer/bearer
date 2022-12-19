@@ -6,5 +6,6 @@
     "https://api.adictiz.com"
   ],
   "packages": [],
-  "uuid": "8ac17d90-1489-4d6b-98be-a2a8ac167616"
+  "uuid": "8ac17d90-1489-4d6b-98be-a2a8ac167616",
+  "sub_type": "third_party"
 }

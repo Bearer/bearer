@@ -6,5 +6,6 @@
     "https://api.rackspacecloud.com"
   ],
   "packages": [],
-  "uuid": "1e740268-ca7b-414a-b257-52b9dccd819a"
+  "uuid": "1e740268-ca7b-414a-b257-52b9dccd819a",
+  "sub_type": "third_party"
 }

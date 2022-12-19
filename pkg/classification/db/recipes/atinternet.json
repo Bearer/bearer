@@ -7,5 +7,6 @@
     "https://api.atinternet.io"
   ],
   "packages": [],
-  "uuid": "e014169c-3f2a-42bf-9dcb-c0236bb99d5b"
+  "uuid": "e014169c-3f2a-42bf-9dcb-c0236bb99d5b",
+  "sub_type": "third_party"
 }

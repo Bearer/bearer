@@ -7,5 +7,6 @@
     "https://*.socket.io"
   ],
   "packages": [],
-  "uuid": "f3426905-709b-4b1e-95ba-65e4654c722c"
+  "uuid": "f3426905-709b-4b1e-95ba-65e4654c722c",
+  "sub_type": "third_party"
 }

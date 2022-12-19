@@ -6,5 +6,6 @@
     "https://api.bamboohr.com"
   ],
   "packages": [],
-  "uuid": "5fff4ef9-78fd-4119-9549-f638ea042a3a"
+  "uuid": "5fff4ef9-78fd-4119-9549-f638ea042a3a",
+  "sub_type": "third_party"
 }

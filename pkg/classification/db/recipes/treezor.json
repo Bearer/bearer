@@ -6,5 +6,6 @@
     "https://treezor.com/v1/"
   ],
   "packages": [],
-  "uuid": "e561983c-ca8c-4ce5-9214-dde0eb401002"
+  "uuid": "e561983c-ca8c-4ce5-9214-dde0eb401002",
+  "sub_type": "third_party"
 }

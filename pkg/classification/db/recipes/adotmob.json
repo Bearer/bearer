@@ -7,5 +7,6 @@
     "https://tracker.adotmob.com"
   ],
   "packages": [],
-  "uuid": "af99b1dc-ba20-40a4-a2b0-ffdbdb52be16"
+  "uuid": "af99b1dc-ba20-40a4-a2b0-ffdbdb52be16",
+  "sub_type": "third_party"
 }

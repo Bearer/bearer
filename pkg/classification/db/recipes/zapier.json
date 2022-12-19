@@ -7,5 +7,6 @@
     "https://api.zapier.com"
   ],
   "packages": [],
-  "uuid": "f68ddedc-a27f-4947-bf2e-1e6f65f88bc4"
+  "uuid": "f68ddedc-a27f-4947-bf2e-1e6f65f88bc4",
+  "sub_type": "third_party"
 }

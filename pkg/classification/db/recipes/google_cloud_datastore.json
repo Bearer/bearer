@@ -20,5 +20,6 @@
       "package_manager": "pypi"
     }
   ],
-  "uuid": "021606b8-9fef-45a8-b57b-9095dcc96a75"
+  "uuid": "021606b8-9fef-45a8-b57b-9095dcc96a75",
+  "sub_type": "database"
 }

@@ -6,5 +6,6 @@
     "https://api.mondialrelay.com"
   ],
   "packages": [],
-  "uuid": "1d9c00f2-7eb2-44fb-9dcd-0d50bec584ec"
+  "uuid": "1d9c00f2-7eb2-44fb-9dcd-0d50bec584ec",
+  "sub_type": "third_party"
 }

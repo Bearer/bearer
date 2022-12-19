@@ -50,5 +50,6 @@
       "package_manager": "maven"
     }
   ],
-  "uuid": "868baac0-35f1-432d-bfde-e9416a987c4d"
+  "uuid": "868baac0-35f1-432d-bfde-e9416a987c4d",
+  "sub_type": "message_bus"
 }

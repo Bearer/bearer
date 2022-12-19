@@ -7,5 +7,6 @@
     "https://api.dnsmadeeasy.com"
   ],
   "packages": [],
-  "uuid": "8838b6ee-9db4-408b-9ba8-eec5c6c893ec"
+  "uuid": "8838b6ee-9db4-408b-9ba8-eec5c6c893ec",
+  "sub_type": "third_party"
 }

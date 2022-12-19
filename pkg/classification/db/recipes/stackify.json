@@ -6,5 +6,6 @@
     "https://api.stackify.net"
   ],
   "packages": [],
-  "uuid": "76bb8a32-b4e3-4d6c-97e3-a54d1a3ab8af"
+  "uuid": "76bb8a32-b4e3-4d6c-97e3-a54d1a3ab8af",
+  "sub_type": "third_party"
 }

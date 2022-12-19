@@ -6,5 +6,6 @@
     "https://api.letsenhance.io"
   ],
   "packages": [],
-  "uuid": "ee7951bb-f3ae-4143-a273-8ccaba3a0f49"
+  "uuid": "ee7951bb-f3ae-4143-a273-8ccaba3a0f49",
+  "sub_type": "third_party"
 }

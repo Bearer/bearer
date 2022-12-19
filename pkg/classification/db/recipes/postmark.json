@@ -6,5 +6,6 @@
     "https://api.postmarkapp.com"
   ],
   "packages": [],
-  "uuid": "5d62c01f-619e-4249-96cc-c64dd7cbe0aa"
+  "uuid": "5d62c01f-619e-4249-96cc-c64dd7cbe0aa",
+  "sub_type": "third_party"
 }

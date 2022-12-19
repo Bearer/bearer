@@ -4,5 +4,6 @@
   "type": "data_store",
   "urls": [],
   "packages": [],
-  "uuid": "b9bbbbb8-cb8b-4ffb-997f-e0d1e9050a96"
+  "uuid": "b9bbbbb8-cb8b-4ffb-997f-e0d1e9050a96",
+  "sub_type": "database"
 }

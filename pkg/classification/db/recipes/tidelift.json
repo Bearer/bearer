@@ -6,5 +6,6 @@
     "https://api.tidelift.com"
   ],
   "packages": [],
-  "uuid": "fef02420-1023-4c27-a274-fb1cd8f077a9"
+  "uuid": "fef02420-1023-4c27-a274-fb1cd8f077a9",
+  "sub_type": "third_party"
 }

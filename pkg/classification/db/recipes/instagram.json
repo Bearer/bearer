@@ -6,5 +6,6 @@
     "https://api.instagram.com"
   ],
   "packages": [],
-  "uuid": "5761d35a-0af9-42d7-94c2-f70a602482d1"
+  "uuid": "5761d35a-0af9-42d7-94c2-f70a602482d1",
+  "sub_type": "third_party"
 }

@@ -8,5 +8,6 @@
     "https://api.prestashop.com"
   ],
   "packages": [],
-  "uuid": "07dd4bdf-3fa4-4578-9357-57d8be6a1594"
+  "uuid": "07dd4bdf-3fa4-4578-9357-57d8be6a1594",
+  "sub_type": "third_party"
 }

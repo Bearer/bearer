@@ -7,5 +7,6 @@
     "https://driftapi.com"
   ],
   "packages": [],
-  "uuid": "a256be05-3a8f-4fe7-9b53-3b4a29e018e7"
+  "uuid": "a256be05-3a8f-4fe7-9b53-3b4a29e018e7",
+  "sub_type": "third_party"
 }

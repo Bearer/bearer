@@ -12,5 +12,6 @@
       "package_manager": "pypi"
     }
   ],
-  "uuid": "b3361c33-b5c1-4504-9d37-7eca52286780"
+  "uuid": "b3361c33-b5c1-4504-9d37-7eca52286780",
+  "sub_type": "third_party"
 }

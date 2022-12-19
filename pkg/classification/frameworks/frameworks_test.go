@@ -40,6 +40,7 @@ func TestFrameworks(t *testing.T) {
 			Want: &frameworks.Classification{
 				RecipeMatch: true,
 				RecipeName:  "Redis",
+				RecipeSubType: "key_value_cache",
 				RecipeUUID:  "62c20409-c1bf-4be9-a859-6fe6be7b11e3",
 				Decision: classify.ClassificationDecision{
 					State:  classify.Valid,
@@ -65,6 +66,7 @@ func TestFrameworks(t *testing.T) {
 			Want: &frameworks.Classification{
 				RecipeMatch: true,
 				RecipeName:  "PostgreSQL",
+				RecipeSubType: "database",
 				RecipeUUID:  "428ff7dd-22ea-4e80-8755-84c70cf460db",
 				Decision: classify.ClassificationDecision{
 					State:  classify.Valid,
@@ -91,6 +93,7 @@ func TestFrameworks(t *testing.T) {
 			Want: &frameworks.Classification{
 				RecipeMatch: true,
 				RecipeName:  "AWS S3",
+				RecipeSubType: "object_storage",
 				RecipeUUID:  "4e5a3a3a-47cd-4b0e-b0a6-fa30a0a62499",
 				Decision: classify.ClassificationDecision{
 					State:  classify.Valid,
@@ -205,6 +208,7 @@ func TestFrameworks(t *testing.T) {
 			Want: &frameworks.Classification{
 				RecipeMatch: true,
 				RecipeName: "MySQL",
+				RecipeSubType: "database",
 				RecipeUUID: "ffa70264-2b19-445d-a5c9-be82b64fe750",
 				Decision: classify.ClassificationDecision{
 					State:  classify.Valid,
@@ -232,6 +236,7 @@ func TestFrameworks(t *testing.T) {
 			Want: &frameworks.Classification{
 				RecipeMatch: true,
 				RecipeName: "SQLite",
+				RecipeSubType: "database",
 				RecipeUUID: "aa706b3c-0f6d-4a7b-a7a5-71ee0c5b6c00",
 				Decision: classify.ClassificationDecision{
 					State:  classify.Valid,
@@ -257,6 +262,7 @@ func TestFrameworks(t *testing.T) {
 			Want: &frameworks.Classification{
 				RecipeMatch: true,
 				RecipeName: "MySQL",
+				RecipeSubType: "database",
 				RecipeUUID: "ffa70264-2b19-445d-a5c9-be82b64fe750",
 				Decision: classify.ClassificationDecision{
 					State:  classify.Valid,
@@ -281,6 +287,7 @@ func TestFrameworks(t *testing.T) {
 			Want: &frameworks.Classification{
 				RecipeMatch: true,
 				RecipeName: "Microsoft SQL Server",
+				RecipeSubType: "database",
 				RecipeUUID: "e4db4505-b837-4b76-9184-c3cec3b5e522",
 				Decision: classify.ClassificationDecision{
 					State:  classify.Valid,
@@ -305,6 +312,7 @@ func TestFrameworks(t *testing.T) {
 			Want: &frameworks.Classification{
 				RecipeMatch: true,
 				RecipeName: "MySQL",
+				RecipeSubType: "database",
 				RecipeUUID: "ffa70264-2b19-445d-a5c9-be82b64fe750",
 				Decision: classify.ClassificationDecision{
 					State:  classify.Valid,
@@ -330,6 +338,7 @@ func TestFrameworks(t *testing.T) {
 			Want: &frameworks.Classification{
 				RecipeMatch: true,
 				RecipeName: "Oracle",
+				RecipeSubType: "database",
 				RecipeUUID: "80886e2a-ee2c-423d-98bc-0a3d743787b4",
 				Decision: classify.ClassificationDecision{
 					State:  classify.Valid,

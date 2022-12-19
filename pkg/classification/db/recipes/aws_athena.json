@@ -25,5 +25,6 @@
       "package_manager": "go"
     }
   ],
-  "uuid": "475b237b-6837-4d1f-ac9e-2ab80574f40c"
+  "uuid": "475b237b-6837-4d1f-ac9e-2ab80574f40c",
+  "sub_type": "datalake"
 }

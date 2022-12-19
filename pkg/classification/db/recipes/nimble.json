@@ -6,5 +6,6 @@
     "https://api.nimble.com"
   ],
   "packages": [],
-  "uuid": "d8015191-e83d-4c37-bac3-0ac429b7b4d9"
+  "uuid": "d8015191-e83d-4c37-bac3-0ac429b7b4d9",
+  "sub_type": "third_party"
 }

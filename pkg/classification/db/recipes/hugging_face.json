@@ -8,5 +8,6 @@
     "https://huggingface.co"
   ],
   "packages": [],
-  "uuid": "b6d81504-7282-45a1-a8ac-3256622f40db"
+  "uuid": "b6d81504-7282-45a1-a8ac-3256622f40db",
+  "sub_type": "third_party"
 }

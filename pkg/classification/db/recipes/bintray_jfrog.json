@@ -6,5 +6,6 @@
     "https://api.bintray.com"
   ],
   "packages": [],
-  "uuid": "de9b9d2f-30fb-4bd8-a87a-c6d46269026a"
+  "uuid": "de9b9d2f-30fb-4bd8-a87a-c6d46269026a",
+  "sub_type": "third_party"
 }

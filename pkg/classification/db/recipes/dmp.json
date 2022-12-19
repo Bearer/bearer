@@ -6,5 +6,6 @@
     "https://lps2.dmp.gouv.fr/si-dmp-server/*"
   ],
   "packages": [],
-  "uuid": "f819829d-6608-440a-8f54-7273e5eb5d16"
+  "uuid": "f819829d-6608-440a-8f54-7273e5eb5d16",
+  "sub_type": "third_party"
 }

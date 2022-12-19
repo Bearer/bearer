@@ -6,5 +6,6 @@
     "https://iagility.smsizer.com/api/*"
   ],
   "packages": [],
-  "uuid": "936de652-fcd4-42b6-ba02-7eb1e22865aa"
+  "uuid": "936de652-fcd4-42b6-ba02-7eb1e22865aa",
+  "sub_type": "third_party"
 }

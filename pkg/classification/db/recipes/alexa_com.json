@@ -6,5 +6,6 @@
     "https://data.alexa.com"
   ],
   "packages": [],
-  "uuid": "54d4b954-fc9b-4492-b21a-ee37e458b879"
+  "uuid": "54d4b954-fc9b-4492-b21a-ee37e458b879",
+  "sub_type": "third_party"
 }

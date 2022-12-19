@@ -25,5 +25,6 @@
       "package_manager": "npm"
     }
   ],
-  "uuid": "1b018aaf-fa0e-4981-a417-f3bb03bd7a7f"
+  "uuid": "1b018aaf-fa0e-4981-a417-f3bb03bd7a7f",
+  "sub_type": "datalake"
 }

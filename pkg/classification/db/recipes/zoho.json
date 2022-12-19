@@ -17,5 +17,6 @@
     "https://zoho.com/api"
   ],
   "packages": [],
-  "uuid": "238a9eb3-0783-476d-88c5-5a2366034548"
+  "uuid": "238a9eb3-0783-476d-88c5-5a2366034548",
+  "sub_type": "third_party"
 }

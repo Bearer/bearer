@@ -6,5 +6,6 @@
     "https://api.leadformance.com"
   ],
   "packages": [],
-  "uuid": "b892835e-d651-43a5-a7a6-ab05dbf91655"
+  "uuid": "b892835e-d651-43a5-a7a6-ab05dbf91655",
+  "sub_type": "third_party"
 }

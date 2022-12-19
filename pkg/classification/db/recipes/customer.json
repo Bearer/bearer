@@ -8,5 +8,6 @@
     "https://track.customer.io/api"
   ],
   "packages": [],
-  "uuid": "864f73ed-4f27-4587-8c5c-d10fc28c6ad2"
+  "uuid": "864f73ed-4f27-4587-8c5c-d10fc28c6ad2",
+  "sub_type": "third_party"
 }

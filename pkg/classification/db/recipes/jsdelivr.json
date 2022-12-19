@@ -6,5 +6,6 @@
     "https://api.jsdelivr.com"
   ],
   "packages": [],
-  "uuid": "e94a329c-96da-4906-925e-077db0ca28cc"
+  "uuid": "e94a329c-96da-4906-925e-077db0ca28cc",
+  "sub_type": "third_party"
 }

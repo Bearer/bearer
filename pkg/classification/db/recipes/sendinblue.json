@@ -6,5 +6,6 @@
     "https://api.sendinblue.com"
   ],
   "packages": [],
-  "uuid": "8b97bd5a-bb15-4eea-afc9-bd1687b96fd6"
+  "uuid": "8b97bd5a-bb15-4eea-afc9-bd1687b96fd6",
+  "sub_type": "third_party"
 }

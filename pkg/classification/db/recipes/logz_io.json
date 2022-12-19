@@ -7,5 +7,6 @@
     "https://api-*.logz.io"
   ],
   "packages": [],
-  "uuid": "b8240fe0-248c-4685-9d94-84e05e6cc761"
+  "uuid": "b8240fe0-248c-4685-9d94-84e05e6cc761",
+  "sub_type": "third_party"
 }

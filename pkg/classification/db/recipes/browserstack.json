@@ -6,5 +6,6 @@
     "https://api.browserstack.com"
   ],
   "packages": [],
-  "uuid": "bf4bc4fb-2609-42e1-9885-f428f469ef86"
+  "uuid": "bf4bc4fb-2609-42e1-9885-f428f469ef86",
+  "sub_type": "third_party"
 }

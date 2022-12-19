@@ -11,5 +11,6 @@
     "https://freshdesk.com/api"
   ],
   "packages": [],
-  "uuid": "364c8f99-a1fe-4d79-b3ad-edcd8676eec3"
+  "uuid": "364c8f99-a1fe-4d79-b3ad-edcd8676eec3",
+  "sub_type": "third_party"
 }

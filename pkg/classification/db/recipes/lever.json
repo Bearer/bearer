@@ -7,5 +7,6 @@
     "https://api.lever.co"
   ],
   "packages": [],
-  "uuid": "214b8d02-5a10-48a8-8d5b-1c780ecf2fb8"
+  "uuid": "214b8d02-5a10-48a8-8d5b-1c780ecf2fb8",
+  "sub_type": "third_party"
 }

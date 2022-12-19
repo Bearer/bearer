@@ -6,5 +6,6 @@
     "https://js.chargify.com"
   ],
   "packages": [],
-  "uuid": "fefd1ff1-dd3a-49dc-a8d7-5e9e58f29061"
+  "uuid": "fefd1ff1-dd3a-49dc-a8d7-5e9e58f29061",
+  "sub_type": "third_party"
 }

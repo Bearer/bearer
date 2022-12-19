@@ -6,5 +6,6 @@
     "https://revolut.com/api/"
   ],
   "packages": [],
-  "uuid": "4ab6b4b6-c936-4be1-a8ed-4d77a4381ea3"
+  "uuid": "4ab6b4b6-c936-4be1-a8ed-4d77a4381ea3",
+  "sub_type": "third_party"
 }

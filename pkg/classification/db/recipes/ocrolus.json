@@ -6,5 +6,6 @@
     "https://api.ocrolus.com"
   ],
   "packages": [],
-  "uuid": "7d3a8bd1-2110-407e-a35a-d5c0ed5e5c39"
+  "uuid": "7d3a8bd1-2110-407e-a35a-d5c0ed5e5c39",
+  "sub_type": "third_party"
 }

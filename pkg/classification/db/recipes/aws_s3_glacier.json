@@ -25,5 +25,6 @@
       "package_manager": "go"
     }
   ],
-  "uuid": "31c32157-d398-4dd9-98be-9ec28a8103c2"
+  "uuid": "31c32157-d398-4dd9-98be-9ec28a8103c2",
+  "sub_type": "object_storage"
 }

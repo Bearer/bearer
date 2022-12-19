@@ -7,5 +7,6 @@
     "https://netverify.com/api"
   ],
   "packages": [],
-  "uuid": "8315b8ef-bf9e-4292-bb7b-6a55ca6a721b"
+  "uuid": "8315b8ef-bf9e-4292-bb7b-6a55ca6a721b",
+  "sub_type": "third_party"
 }

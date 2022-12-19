@@ -6,5 +6,6 @@
     "https://api.unsplash.com"
   ],
   "packages": [],
-  "uuid": "41750ede-d0b6-4f81-a90b-9b16511227dc"
+  "uuid": "41750ede-d0b6-4f81-a90b-9b16511227dc",
+  "sub_type": "third_party"
 }

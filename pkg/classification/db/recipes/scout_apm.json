@@ -6,5 +6,6 @@
     "https://scoutapm.com/api"
   ],
   "packages": [],
-  "uuid": "42d4d4c4-7a72-4456-bcc5-0902a584e8f2"
+  "uuid": "42d4d4c4-7a72-4456-bcc5-0902a584e8f2",
+  "sub_type": "third_party"
 }

@@ -6,5 +6,6 @@
     "https://cdn.optimizely.com"
   ],
   "packages": [],
-  "uuid": "344c5c72-e7c0-46e7-b970-d3002504da09"
+  "uuid": "344c5c72-e7c0-46e7-b970-d3002504da09",
+  "sub_type": "third_party"
 }

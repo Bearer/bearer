@@ -10,5 +10,6 @@
     "https://api.payfit.io"
   ],
   "packages": [],
-  "uuid": "8a99c328-019d-408a-927e-c9d00b79e34e"
+  "uuid": "8a99c328-019d-408a-927e-c9d00b79e34e",
+  "sub_type": "third_party"
 }

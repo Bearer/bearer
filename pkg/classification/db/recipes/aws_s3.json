@@ -48,5 +48,6 @@
       "package_manager": "npm"
     }
   ],
-  "uuid": "4e5a3a3a-47cd-4b0e-b0a6-fa30a0a62499"
+  "uuid": "4e5a3a3a-47cd-4b0e-b0a6-fa30a0a62499",
+  "sub_type": "object_storage"
 }

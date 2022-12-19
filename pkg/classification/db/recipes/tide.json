@@ -7,5 +7,6 @@
     "https://api.tide.co"
   ],
   "packages": [],
-  "uuid": "ee47a683-eee9-4b2e-be6f-9583f2125c77"
+  "uuid": "ee47a683-eee9-4b2e-be6f-9583f2125c77",
+  "sub_type": "third_party"
 }

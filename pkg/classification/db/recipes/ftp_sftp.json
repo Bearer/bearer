@@ -40,5 +40,6 @@
       "package_manager": "packagist"
     }
   ],
-  "uuid": "811b84ce-faae-4980-85d1-177f270ac4a1"
+  "uuid": "811b84ce-faae-4980-85d1-177f270ac4a1",
+  "sub_type": "shared_folders"
 }

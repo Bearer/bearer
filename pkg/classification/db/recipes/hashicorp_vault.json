@@ -30,5 +30,6 @@
       "package_manager": "npm"
     }
   ],
-  "uuid": "a5a1840d-e6cc-4757-b1eb-0682844b2226"
+  "uuid": "a5a1840d-e6cc-4757-b1eb-0682844b2226",
+  "sub_type": "database"
 }

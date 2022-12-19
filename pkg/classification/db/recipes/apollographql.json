@@ -8,5 +8,6 @@
     "https://schema-reporting.api.apollographql.com"
   ],
   "packages": [],
-  "uuid": "17045718-a5ba-48fb-bd34-ab33c0a62bfa"
+  "uuid": "17045718-a5ba-48fb-bd34-ab33c0a62bfa",
+  "sub_type": "third_party"
 }

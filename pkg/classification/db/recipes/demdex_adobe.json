@@ -6,5 +6,6 @@
     "https://api.demdex.net"
   ],
   "packages": [],
-  "uuid": "e779c7a6-b3e6-44d9-abd6-46f681c6cb58"
+  "uuid": "e779c7a6-b3e6-44d9-abd6-46f681c6cb58",
+  "sub_type": "third_party"
 }

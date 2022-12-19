@@ -6,5 +6,6 @@
     "https://public-api.wordpress.com"
   ],
   "packages": [],
-  "uuid": "9a9de396-0dd5-4621-ab94-e1407e281311"
+  "uuid": "9a9de396-0dd5-4621-ab94-e1407e281311",
+  "sub_type": "third_party"
 }

@@ -7,5 +7,6 @@
     "https://app.honeybadger.io/v2/"
   ],
   "packages": [],
-  "uuid": "a5ac3dba-19ea-426c-9184-88d7153d5cc5"
+  "uuid": "a5ac3dba-19ea-426c-9184-88d7153d5cc5",
+  "sub_type": "third_party"
 }

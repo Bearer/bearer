@@ -90,5 +90,6 @@
       "package_manager": "nuget"
     }
   ],
-  "uuid": "f0f43ee7-7f6b-4572-aaa0-6b207146912b"
+  "uuid": "f0f43ee7-7f6b-4572-aaa0-6b207146912b",
+  "sub_type": "object_storage"
 }

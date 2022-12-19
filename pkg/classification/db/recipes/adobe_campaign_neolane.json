@@ -10,5 +10,6 @@
       "package_manager": "nuget"
     }
   ],
-  "uuid": "d3b1bf1b-f2b0-497a-85e2-9627fc0eedc1"
+  "uuid": "d3b1bf1b-f2b0-497a-85e2-9627fc0eedc1",
+  "sub_type": "third_party"
 }

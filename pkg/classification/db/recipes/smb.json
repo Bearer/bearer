@@ -10,5 +10,6 @@
       "package_manager": "pypi"
     }
   ],
-  "uuid": "ce16223c-41ac-4fc7-b12d-e68b4e7755b6"
+  "uuid": "ce16223c-41ac-4fc7-b12d-e68b4e7755b6",
+  "sub_type": "shared_folders"
 }

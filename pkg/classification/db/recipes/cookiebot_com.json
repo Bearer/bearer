@@ -6,5 +6,6 @@
     "https://consent.cookiebot.com/api"
   ],
   "packages": [],
-  "uuid": "db0eed28-e96d-4d70-be90-395fe2522ef2"
+  "uuid": "db0eed28-e96d-4d70-be90-395fe2522ef2",
+  "sub_type": "third_party"
 }

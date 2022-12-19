@@ -8,5 +8,6 @@
     "https://api.calendly.com"
   ],
   "packages": [],
-  "uuid": "bdce54a8-5070-41de-8556-3f2742fb84ff"
+  "uuid": "bdce54a8-5070-41de-8556-3f2742fb84ff",
+  "sub_type": "third_party"
 }
