@@ -804,7 +804,7 @@ scan:
                     }
                 - path: policies/application_level_encryption.rego
                   name: bearer.application_level_encryption
-                  content: |-
+                  content: |
                     package bearer.application_level_encryption
 
                     import data.bearer.common
@@ -814,6 +814,7 @@ scan:
                     policy_failure contains item if {
                         datatype = input.dataflow.data_types[_]
                         datatype.name != "Unique Identifier"
+                        datatype.name != "Passwords"
 
                         detector = datatype.detectors[_]
                         location = detector.locations[_]
