@@ -2,12 +2,17 @@ package testhelper
 
 import (
 	"bytes"
+	"context"
 	"os"
 	"os/exec"
+	"strings"
 	"testing"
+	"time"
 
 	"github.com/bradleyjkemp/cupaloy"
 )
+
+var TestTimeout = 1 * time.Minute
 
 type TestCase struct {
 	name          string
@@ -34,21 +39,40 @@ func NewTestCase(name string, arguments []string, options TestCaseOptions) TestC
 	}
 }
 
-func executeApp(arguments []string) (string, error) {
-	cmd := CreateCurioCommand(arguments)
+func executeApp(t *testing.T, arguments []string) (string, error) {
+	cmd, cancel := CreateCurioCommand(arguments)
 
 	buffOut := bytes.NewBuffer(nil)
 	buffErr := bytes.NewBuffer(nil)
 	cmd.Stdout = buffOut
 	cmd.Stderr = buffErr
 
-	err := cmd.Start()
-	if err != nil {
-		return "", err
-	}
+	var err error
 
-	if err := cmd.Wait(); err != nil {
-		return "", err
+	timer := time.NewTimer(TestTimeout)
+	commandFinished := make(chan struct{}, 1)
+
+	go func() {
+		err = cmd.Start()
+
+		if err != nil {
+			commandFinished <- struct{}{}
+			return
+		}
+
+		err = cmd.Wait()
+		commandFinished <- struct{}{}
+	}()
+
+	select {
+	case <-timer.C:
+		cancel()
+		t.Fatalf("command failed to complete on time 'curio %s'", strings.Join(arguments, ""))
+	case <-commandFinished:
+		if err != nil {
+			t.Fatalf("command completed with errror %s", err)
+		}
+		cancel()
 	}
 
 	combinedOutput := buffOut.String() + "\n--\n" + buffErr.String()
@@ -56,19 +80,21 @@ func executeApp(arguments []string) (string, error) {
 	return combinedOutput, nil
 }
 
-func CreateCurioCommand(arguments []string) *exec.Cmd {
+func CreateCurioCommand(arguments []string) (*exec.Cmd, context.CancelFunc) {
 	var cmd *exec.Cmd
 
+	ctx, cancel := context.WithCancel(context.Background())
+
 	if os.Getenv("CURIO_BINARY") != "" {
-		cmd = exec.Command("./curio", arguments...)
+		cmd = exec.CommandContext(ctx, "./curio", arguments...)
 	} else {
 		arguments = append([]string{"run", GetCWD() + "/cmd/curio/main.go"}, arguments...)
-		cmd = exec.Command("go", arguments...)
+		cmd = exec.CommandContext(ctx, "go", arguments...)
 	}
 
 	cmd.Dir = os.Getenv("GITHUB_WORKSPACE")
 
-	return cmd
+	return cmd, cancel
 }
 
 func GetCWD() string {
@@ -89,7 +115,7 @@ func RunTests(t *testing.T, tests []TestCase) {
 				arguments = append(arguments, "--force")
 			}
 
-			combinedOutput, err := executeApp(arguments)
+			combinedOutput, err := executeApp(t, arguments)
 
 			cupaloy.SnapshotT(t, combinedOutput)
 

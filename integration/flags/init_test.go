@@ -12,7 +12,7 @@ func TestInitCommand(t *testing.T) {
 	filePath := testhelper.GetCWD() + "/curio.yml"
 	arguments := []string{"init"}
 
-	cmd := testhelper.CreateCurioCommand(arguments)
+	cmd, _ := testhelper.CreateCurioCommand(arguments)
 	output, err := cmd.CombinedOutput()
 	if err != nil {
 		t.Fatalf("failed to run init command err: %s output: %s", err, string(output))
