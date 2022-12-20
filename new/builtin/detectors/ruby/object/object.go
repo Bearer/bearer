@@ -1,11 +1,11 @@
-package objects
+package object
 
 import (
 	"fmt"
 
 	detectiontypes "github.com/bearer/curio/new/detection/types"
 	"github.com/bearer/curio/new/detector"
-	"github.com/bearer/curio/new/language"
+	"github.com/bearer/curio/new/language/tree"
 	languagetypes "github.com/bearer/curio/new/language/types"
 	treeevaluatortypes "github.com/bearer/curio/new/treeevaluator/types"
 )
@@ -15,12 +15,12 @@ type Data struct {
 	Properties []*detectiontypes.Detection
 }
 
-type objectsDetector struct {
+type objectDetector struct {
 	// Gathering properties
-	hashPairQuery *language.Query
+	hashPairQuery *tree.Query
 	// Naming
-	assignmentQuery *language.Query
-	parentPairQuery *language.Query
+	assignmentQuery *tree.Query
+	parentPairQuery *tree.Query
 }
 
 func New(lang languagetypes.Language) (detector.Detector, error) {
@@ -41,19 +41,19 @@ func New(lang languagetypes.Language) (detector.Detector, error) {
 		return nil, fmt.Errorf("error compiling hash pair query: %s", err)
 	}
 
-	return &objectsDetector{
+	return &objectDetector{
 		hashPairQuery:   hashPairQuery,
 		assignmentQuery: assignmentQuery,
 		parentPairQuery: parentPairQuery,
 	}, nil
 }
 
-func (detector *objectsDetector) Name() string {
-	return "objects"
+func (detector *objectDetector) Name() string {
+	return "object"
 }
 
-func (detector *objectsDetector) DetectAt(
-	node *language.Node,
+func (detector *objectDetector) DetectAt(
+	node *tree.Node,
 	evaluator treeevaluatortypes.Evaluator,
 ) ([]*detectiontypes.Detection, error) {
 	detections, err := detector.gatherProperties(node, evaluator)
@@ -69,8 +69,8 @@ func (detector *objectsDetector) DetectAt(
 	return detector.nameParentPairObject(node, evaluator)
 }
 
-func (detector *objectsDetector) gatherProperties(
-	node *language.Node,
+func (detector *objectDetector) gatherProperties(
+	node *tree.Node,
 	evaluator treeevaluatortypes.Evaluator,
 ) ([]*detectiontypes.Detection, error) {
 	results, err := detector.hashPairQuery.MatchAt(node)
@@ -84,7 +84,7 @@ func (detector *objectsDetector) gatherProperties(
 
 	var properties []*detectiontypes.Detection
 	for _, result := range results {
-		nodeProperties, err := evaluator.NodeDetections(result["pair"], "properties")
+		nodeProperties, err := evaluator.NodeDetections(result["pair"], "property")
 		if err != nil {
 			return nil, err
 		}
@@ -98,8 +98,8 @@ func (detector *objectsDetector) gatherProperties(
 	}}, nil
 }
 
-func (detector *objectsDetector) nameAssignedObject(
-	node *language.Node,
+func (detector *objectDetector) nameAssignedObject(
+	node *tree.Node,
 	evaluator treeevaluatortypes.Evaluator,
 ) ([]*detectiontypes.Detection, error) {
 	result, err := detector.assignmentQuery.MatchOnceAt(node)
@@ -107,7 +107,7 @@ func (detector *objectsDetector) nameAssignedObject(
 		return nil, err
 	}
 
-	objects, err := evaluator.NodeDetections(result["right"], "objects")
+	objects, err := evaluator.NodeDetections(result["right"], "object")
 	if err != nil {
 		return nil, err
 	}
@@ -143,8 +143,8 @@ func (detector *objectsDetector) nameAssignedObject(
 	return detections, nil
 }
 
-func (detector *objectsDetector) nameParentPairObject(
-	node *language.Node,
+func (detector *objectDetector) nameParentPairObject(
+	node *tree.Node,
 	evaluator treeevaluatortypes.Evaluator,
 ) ([]*detectiontypes.Detection, error) {
 	result, err := detector.parentPairQuery.MatchOnceAt(node)
@@ -152,7 +152,7 @@ func (detector *objectsDetector) nameParentPairObject(
 		return nil, err
 	}
 
-	objects, err := evaluator.NodeDetections(result["value"], "objects")
+	objects, err := evaluator.NodeDetections(result["value"], "object")
 	if err != nil {
 		return nil, err
 	}
@@ -173,7 +173,7 @@ func (detector *objectsDetector) nameParentPairObject(
 	return detections, nil
 }
 
-func (detector *objectsDetector) Close() {
+func (detector *objectDetector) Close() {
 	detector.hashPairQuery.Close()
 	detector.assignmentQuery.Close()
 	detector.parentPairQuery.Close()

@@ -3,7 +3,7 @@ package treeevaluator
 import (
 	detectortypes "github.com/bearer/curio/new/detection/types"
 	detectorexecutortypes "github.com/bearer/curio/new/detectorexecutor/types"
-	"github.com/bearer/curio/new/language"
+	langtree "github.com/bearer/curio/new/language/tree"
 	languagetypes "github.com/bearer/curio/new/language/types"
 	"github.com/bearer/curio/new/treeevaluator/types"
 )
@@ -11,15 +11,15 @@ import (
 type treeEvaluator struct {
 	lang           languagetypes.Language
 	executor       detectorexecutortypes.Executor
-	detectionCache map[language.NodeID]map[string][]*detectortypes.Detection
+	detectionCache map[langtree.NodeID]map[string][]*detectortypes.Detection
 }
 
 func New(
 	lang languagetypes.Language,
 	executor detectorexecutortypes.Executor,
-	tree *language.Tree,
+	tree *langtree.Tree,
 ) types.Evaluator {
-	detectionCache := make(map[language.NodeID]map[string][]*detectortypes.Detection)
+	detectionCache := make(map[langtree.NodeID]map[string][]*detectortypes.Detection)
 
 	return &treeEvaluator{
 		lang:           lang,
@@ -28,10 +28,10 @@ func New(
 	}
 }
 
-func (evaluator *treeEvaluator) TreeDetections(rootNode *language.Node, detectorType string) ([]*detectortypes.Detection, error) {
+func (evaluator *treeEvaluator) TreeDetections(rootNode *langtree.Node, detectorType string) ([]*detectortypes.Detection, error) {
 	var result []*detectortypes.Detection
 
-	if err := rootNode.Walk(func(node *language.Node) error {
+	if err := rootNode.Walk(func(node *langtree.Node) error {
 		detections, err := evaluator.nonUnifiedNodeDetections(node, detectorType)
 		if err != nil {
 			return err
@@ -57,7 +57,7 @@ func (evaluator *treeEvaluator) TreeDetections(rootNode *language.Node, detector
 }
 
 func (evaluator *treeEvaluator) NodeDetections(
-	node *language.Node,
+	node *langtree.Node,
 	detectorType string,
 ) ([]*detectortypes.Detection, error) {
 	detections, err := evaluator.nonUnifiedNodeDetections(node, detectorType)
@@ -78,7 +78,7 @@ func (evaluator *treeEvaluator) NodeDetections(
 }
 
 func (evaluator *treeEvaluator) nonUnifiedNodeDetections(
-	node *language.Node,
+	node *langtree.Node,
 	detectorType string,
 ) ([]*detectortypes.Detection, error) {
 	nodeDetections, ok := evaluator.detectionCache[node.ID()]
@@ -99,10 +99,10 @@ func (evaluator *treeEvaluator) nonUnifiedNodeDetections(
 	return nodeDetections[detectorType], nil
 }
 
-func (evaluator *treeEvaluator) TreeHasDetection(rootNode *language.Node, detectorType string) (bool, error) {
+func (evaluator *treeEvaluator) TreeHasDetection(rootNode *langtree.Node, detectorType string) (bool, error) {
 	hasDetection := false
 
-	if err := rootNode.Walk(func(node *language.Node) error {
+	if err := rootNode.Walk(func(node *langtree.Node) error {
 		var err error
 		hasDetection, err = evaluator.NodeHasDetection(node, detectorType)
 		if err != nil {
@@ -110,7 +110,7 @@ func (evaluator *treeEvaluator) TreeHasDetection(rootNode *language.Node, detect
 		}
 
 		if hasDetection {
-			return language.ErrTerminateWalk
+			return langtree.ErrTerminateWalk
 		}
 
 		return nil
@@ -121,7 +121,7 @@ func (evaluator *treeEvaluator) TreeHasDetection(rootNode *language.Node, detect
 	return hasDetection, nil
 }
 
-func (evaluator *treeEvaluator) NodeHasDetection(node *language.Node, detectorType string) (bool, error) {
+func (evaluator *treeEvaluator) NodeHasDetection(node *langtree.Node, detectorType string) (bool, error) {
 	detections, err := evaluator.NodeDetections(node, detectorType)
 	if err != nil {
 		return false, err
@@ -130,7 +130,7 @@ func (evaluator *treeEvaluator) NodeHasDetection(node *language.Node, detectorTy
 	return len(detections) != 0, nil
 }
 
-func (evaluator *treeEvaluator) detectAtNode(node *language.Node, detectorType string) error {
+func (evaluator *treeEvaluator) detectAtNode(node *langtree.Node, detectorType string) error {
 	detections, err := evaluator.executor.DetectAt(node, detectorType, evaluator)
 	if err != nil {
 		return err
