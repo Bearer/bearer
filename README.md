@@ -47,7 +47,7 @@ Curio is available as a standalone executable binary. The latest release is avai
 
 #### Homebrew
 
-The easiest way to install curio is to use Homebrew
+The easiest way to install Curio is to use [Homebrew](https://brew.sh/).
 
 ```bash
 brew install Bearer/curio/curio
