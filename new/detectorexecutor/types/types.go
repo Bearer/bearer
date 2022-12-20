@@ -1,9 +1,9 @@
 package types
 
 import (
-	detectiontypes "github.com/bearer/curio/new/detection/types"
 	"github.com/bearer/curio/new/language"
 	treeevaluatortypes "github.com/bearer/curio/new/treeevaluator/types"
+	"github.com/open-policy-agent/opa/ast"
 )
 
 type Executor interface {
@@ -11,5 +11,5 @@ type Executor interface {
 		node *language.Node,
 		detectorType string,
 		evaluator treeevaluatortypes.Evaluator,
-	) ([]*detectiontypes.Detection, error)
+	) (*ast.Array, error)
 }

@@ -6,11 +6,11 @@ import (
 
 	"golang.org/x/exp/slices"
 
-	detectiontypes "github.com/bearer/curio/new/detection/types"
 	"github.com/bearer/curio/new/detector"
 	"github.com/bearer/curio/new/detectorexecutor/types"
 	"github.com/bearer/curio/new/language"
 	treeevaluatortypes "github.com/bearer/curio/new/treeevaluator/types"
+	"github.com/open-policy-agent/opa/ast"
 )
 
 type detectorExecutor struct {
@@ -50,7 +50,7 @@ func (executor *detectorExecutor) DetectAt(
 	node *language.Node,
 	detectorType string,
 	evaluator treeevaluatortypes.Evaluator,
-) ([]*detectiontypes.Detection, error) {
+) (*ast.Array, error) {
 	detector, ok := executor.detectors[detectorType]
 	if !ok {
 		return nil, fmt.Errorf("detector type '%s' not registered", detectorType)

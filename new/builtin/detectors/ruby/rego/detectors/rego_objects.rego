@@ -23,6 +23,20 @@ detections_at contains node := detections if {
 # user = <object>
 assignment_query := curio.language.compile_sitter_query(`(assignment left: (identifier) @left right: (_) @right) @root`)
 
+# name assigned objects ( user = ... )
+detections_at contains node := detections if {
+	result := curio.query.match_once_at(assignment_query, node)
+  result
+
+	objects := curio.evaluator.for_node(result.right, "rego_objects")
+  len(objects) != 0
+
+  detections := [detection |
+    object := objects[_]
+    detection := wrap_assigned_object(node, result, object)
+  ]
+}
+
 wrap_assigned_object(node, result, object) := detection {
   data := object.data
   data.name == ""
@@ -51,20 +65,6 @@ wrap_assigned_object(node, result, object) := detection {
         }
       ]
   }
-}
-
-# name assigned objects ( user = ... )
-detections_at contains node := detections if {
-	result := curio.query.match_once_at(assignment_query, node)
-  result
-
-	objects := curio.evaluator.for_node(result.right, "rego_objects")
-  len(objects) != 0
-
-  detections := [detection |
-    object := objects[_]
-    detection := wrap_assigned_object(node, result, object)
-  ]
 }
 
 

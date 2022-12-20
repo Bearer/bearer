@@ -3,17 +3,18 @@ package rego
 import (
 	"context"
 	"embed"
+	"errors"
 	"fmt"
 	"log"
 	"strings"
 
 	"github.com/bearer/curio/new/builtin/detectors/ruby/rego/ffi"
-	detectiontypes "github.com/bearer/curio/new/detection/types"
 	"github.com/bearer/curio/new/detector"
 	"github.com/bearer/curio/new/language"
-	languagetypes "github.com/bearer/curio/new/language/types"
 	treeevaluatortypes "github.com/bearer/curio/new/treeevaluator/types"
+	"github.com/open-policy-agent/opa/ast"
 	"github.com/open-policy-agent/opa/rego"
+	"github.com/open-policy-agent/opa/topdown"
 )
 
 //go:embed detectors/*
@@ -24,12 +25,13 @@ type Data struct {
 }
 
 type regoDetector struct {
-	detectorType string
-	regoInstance *rego.Rego
-	regoQuery    rego.PreparedEvalQuery
+	evaluationContext *ffi.EvaluationContext
+	detectorType      string
+	regoInstance      *rego.Rego
+	regoQuery         rego.PreparedEvalQuery
 }
 
-func New(lang languagetypes.Language, detectorType string) (detector.Detector, error) {
+func New(evaluationContext *ffi.EvaluationContext, detectorType string) (detector.Detector, error) {
 	filename := "detectors/" + detectorType + ".rego"
 
 	detectorContent, err := detectorsFs.ReadFile(filename)
@@ -38,10 +40,13 @@ func New(lang languagetypes.Language, detectorType string) (detector.Detector, e
 	}
 
 	regoInstance := rego.New(
-		rego.Trace(true),
-		rego.Query("detections = data.curio.detectors."+detectorType+".detect_at"),
+		rego.Query("detections = data.curio.detectors."+detectorType+".detections_at_input"),
 		rego.Module(filename, string(detectorContent)),
-		ffi.EvaluatorNodeDetections(),
+		ffi.EvaluatorDetectionsAt(evaluationContext),
+		ffi.NodeContent(evaluationContext),
+		ffi.LangaugeCompileSitterQuery(evaluationContext),
+		ffi.QueryMatchAt(evaluationContext),
+		ffi.QueryMatchOnceAt(evaluationContext),
 	)
 
 	regoQuery, err := regoInstance.PrepareForEval(context.TODO())
@@ -50,9 +55,10 @@ func New(lang languagetypes.Language, detectorType string) (detector.Detector, e
 	}
 
 	return &regoDetector{
-		detectorType: detectorType,
-		regoInstance: regoInstance,
-		regoQuery:    regoQuery,
+		evaluationContext: evaluationContext,
+		detectorType:      detectorType,
+		regoInstance:      regoInstance,
+		regoQuery:         regoQuery,
 	}, nil
 }
 
@@ -63,23 +69,20 @@ func (detector *regoDetector) Type() string {
 func (detector *regoDetector) DetectAt(
 	node *language.Node,
 	evaluator treeevaluatortypes.Evaluator,
-) ([]*detectiontypes.Detection, error) {
-	ffiData, err := ffi.GetData()
-	if err != nil {
-		return nil, err
-	}
-
-	nodeInput := ffiData.NodeToRegoInput(node)
-
+) (*ast.Array, error) {
 	log.Printf("REGO! detect")
 
-	resultSet, err := detector.regoQuery.Eval(context.TODO(), rego.EvalInput(nodeInput))
+	tracer := topdown.NewBufferTracer()
+	resultSet, err := detector.regoQuery.Eval(
+		context.TODO(),
+		rego.EvalParsedInput(detector.evaluationContext.NodeToRego(node).Value),
+	)
 	if err != nil {
 		return nil, err
 	}
 
 	if len(resultSet) == 0 {
-		return nil, fmt.Errorf("missing rule detect_at in '%s' detector", detector.detectorType)
+		return nil, fmt.Errorf("missing rule detections_at in '%s' detector", detector.detectorType)
 	}
 
 	if len(resultSet) != 1 {
@@ -90,10 +93,20 @@ func (detector *regoDetector) DetectAt(
 	log.Printf("detections: %#v", detections)
 
 	builder := strings.Builder{}
-	rego.PrintTraceWithLocation(&builder, detector.regoInstance)
-	log.Printf("t: %#v", builder.String())
+	topdown.PrettyTraceWithLocation(&builder, *tracer)
+	log.Printf("t: %s", builder.String())
 
-	return nil, nil
+	detectionsValue, err := ast.InterfaceToValue(detections)
+	if err != nil {
+		return nil, err
+	}
+
+	detectionsArray, ok := detectionsValue.(*ast.Array)
+	if !ok {
+		return nil, errors.New("expected array but got other term")
+	}
+
+	return detectionsArray, nil
 }
 
 func (detector *regoDetector) Close() {}

@@ -1,13 +1,13 @@
 package detector
 
 import (
-	detectiontypes "github.com/bearer/curio/new/detection/types"
 	"github.com/bearer/curio/new/language"
 	treeevaluatortypes "github.com/bearer/curio/new/treeevaluator/types"
+	"github.com/open-policy-agent/opa/ast"
 )
 
 type Detector interface {
 	Type() string
-	DetectAt(node *language.Node, evaluator treeevaluatortypes.Evaluator) ([]*detectiontypes.Detection, error)
+	DetectAt(node *language.Node, evaluator treeevaluatortypes.Evaluator) (*ast.Array, error)
 	Close()
 }

@@ -1,80 +1,66 @@
 package ffi
 
 import (
-	"errors"
 	"log"
 
 	"github.com/open-policy-agent/opa/ast"
 	"github.com/open-policy-agent/opa/rego"
 	"github.com/open-policy-agent/opa/types"
 
-	detectiontypes "github.com/bearer/curio/new/detection/types"
 	"github.com/bearer/curio/new/language"
+	languagetypes "github.com/bearer/curio/new/language/types"
 	treeevaluatortypes "github.com/bearer/curio/new/treeevaluator/types"
 )
 
-type Data struct {
-	evaluator treeevaluatortypes.Evaluator
-	nodes     opaqueTypeMap[language.Node]
-}
-
 var (
-	currentData *Data
-
 	opaqueType = types.NewObject([]*types.StaticProperty{
 		{Key: "type", Value: types.S},
 		{Key: "id", Value: types.N},
 	}, nil)
 
-	detectionType = types.NewObject([]*types.StaticProperty{{Key: "node", Value: opaqueType}}, nil)
+	matchType = types.NewObject(nil, types.NewDynamicProperty(types.S, opaqueType))
+
+	detectionType = types.NewObject([]*types.StaticProperty{
+		{Key: "match_node", Value: opaqueType},
+		{Key: "data", Value: types.NewObject(nil, types.NewDynamicProperty(types.S, types.A))},
+	}, nil)
 )
 
-func SetData(data *Data) {
-	currentData = data
+type EvaluationContext struct {
+	evaluator treeevaluatortypes.Evaluator
+	lang      languagetypes.Language
+	nodeMap   opaqueTypeMap[language.Node]
+	queryMap  opaqueTypeMap[language.Query]
 }
 
-func NewData(evaluator treeevaluatortypes.Evaluator) *Data {
-	return &Data{
-		evaluator: evaluator,
-		nodes:     newOpaqueTypeMap[language.Node]("node"),
+func NewEvalContext(lang languagetypes.Language) *EvaluationContext {
+	return &EvaluationContext{
+		lang:     lang,
+		nodeMap:  newOpaqueTypeMap[language.Node]("node"),
+		queryMap: newOpaqueTypeMap[language.Query]("query"),
 	}
 }
 
-func GetData() (*Data, error) {
-	if currentData == nil {
-		return nil, errors.New("ffi data not set")
+func (evalContext *EvaluationContext) NewFile(evaluator treeevaluatortypes.Evaluator) {
+	evalContext.evaluator = evaluator
+	evalContext.nodeMap = newOpaqueTypeMap[language.Node]("node")
+}
+
+func (evalContext *EvaluationContext) NodeToRego(node *language.Node) *ast.Term {
+	return evalContext.nodeMap.CastToRego(node)
+}
+
+func (evalContext *EvaluationContext) Close() {
+	for _, query := range evalContext.queryMap.idToInstance {
+		query.Close()
 	}
-
-	return currentData, nil
 }
 
-func (data *Data) NodeToRegoInput(node *language.Node) interface{} {
-	return data.nodes.CastToRegoInput(node)
-}
-
-func (data *Data) DetectionsToRego(detections []*detectiontypes.Detection) (*ast.Term, error) {
-	detectionTerms := make([]*ast.Term, len(detections))
-
-	for i, detection := range detections {
-		dataValue, err := interfaceToValue(detection.Data)
-		if err != nil {
-			return nil, err
-		}
-
-		detectionTerms[i] = ast.ObjectTerm(
-			ast.Item(ast.StringTerm("match_node"), data.nodes.CastToRego(detection.MatchNode)),
-			ast.Item(ast.StringTerm("context_node"), data.nodes.CastToRego(detection.ContextNode)),
-			ast.Item(ast.StringTerm("data"), ast.NewTerm(dataValue)),
-		)
-	}
-
-	return ast.ArrayTerm(detectionTerms...), nil
-}
-
-func EvaluatorNodeDetections() func(*rego.Rego) {
+// curio.evaluator.detections_at
+func EvaluatorDetectionsAt(evalContext *EvaluationContext) func(*rego.Rego) {
 	return rego.Function2(
 		&rego.Function{
-			Name: "curio.evaluator.node_detections",
+			Name: "curio.evaluator.detections_at",
 			Decl: types.NewFunction(
 				[]types.Type{opaqueType, types.S},
 				types.NewArray([]types.Type{detectionType}, nil),
@@ -82,28 +68,173 @@ func EvaluatorNodeDetections() func(*rego.Rego) {
 			Memoize: true,
 		},
 		func(bctx rego.BuiltinContext, nodeTerm, detectorTypeTerm *ast.Term) (*ast.Term, error) {
-			log.Printf("REGO! start")
-			data, err := GetData()
-			if err != nil {
-				return nil, err
-			}
+			log.Printf("curio.evaluator.detections_at: enter")
 
-			node, err := data.nodes.CastToGo(nodeTerm)
+			node, err := evalContext.nodeMap.CastToGo(nodeTerm)
 			if err != nil {
-				log.Printf("REGO! err: %s", err)
+				log.Printf("curio.evaluator.detections_at: err: %s", err)
 				return nil, err
 			}
 
 			detectorType := string(detectorTypeTerm.Value.(ast.String))
 
-			log.Printf("REGO! detector type: %s\n%s\n", detectorType, node.Content())
+			log.Printf("curio.evaluator.detections_at: detectorType: %s", detectorType)
 
-			detections, err := data.evaluator.NodeDetections(node, detectorType)
+			detections, err := evalContext.evaluator.NodeDetections(node, detectorType)
 			if err != nil {
 				return nil, err
 			}
 
-			return data.DetectionsToRego(detections)
+			log.Printf("curio.evaluator.detections_at: exit")
+
+			return ast.NewTerm(detections), err
 		},
 	)
+}
+
+// curio.node.content
+func NodeContent(evalContext *EvaluationContext) func(*rego.Rego) {
+	return rego.Function1(
+		&rego.Function{
+			Name: "curio.node.content",
+			Decl: types.NewFunction(
+				[]types.Type{opaqueType},
+				types.S,
+			),
+			Memoize: true,
+		},
+		func(bctx rego.BuiltinContext, nodeTerm *ast.Term) (*ast.Term, error) {
+			log.Printf("curio.node.content: enter")
+
+			node, err := evalContext.nodeMap.CastToGo(nodeTerm)
+			if err != nil {
+				log.Printf("curio.node.content: err: %s", err)
+				return nil, err
+			}
+
+			log.Printf("curio.node.content: exit")
+			return ast.StringTerm(node.Content()), nil
+		},
+	)
+}
+
+// curio.language.compile_sitter_query
+func LangaugeCompileSitterQuery(evalContext *EvaluationContext) func(*rego.Rego) {
+	return rego.Function1(
+		&rego.Function{
+			Name: "curio.language.compile_sitter_query",
+			Decl: types.NewFunction(
+				[]types.Type{types.S},
+				opaqueType,
+			),
+			Memoize: true,
+		},
+		func(bctx rego.BuiltinContext, inputTerm *ast.Term) (*ast.Term, error) {
+			log.Printf("curio.language.compile_sitter_query: enter")
+
+			input := string(inputTerm.Value.(ast.String))
+
+			query, err := evalContext.lang.CompileQuery(input)
+			if err != nil {
+				return nil, err
+			}
+
+			log.Printf("curio.language.compile_sitter_query: exit")
+			return evalContext.queryMap.CastToRego(query), nil
+		},
+	)
+}
+
+// curio.query.match_at
+func QueryMatchAt(evalContext *EvaluationContext) func(*rego.Rego) {
+	return rego.Function2(
+		&rego.Function{
+			Name: "curio.query.match_at",
+			Decl: types.NewFunction(
+				[]types.Type{opaqueType, opaqueType},
+				types.NewArray([]types.Type{matchType}, nil),
+			),
+			Memoize: true,
+		},
+		func(bctx rego.BuiltinContext, queryTerm, nodeTerm *ast.Term) (*ast.Term, error) {
+			log.Printf("curio.query.match_at: enter")
+
+			query, err := evalContext.queryMap.CastToGo(queryTerm)
+			if err != nil {
+				log.Printf("curio.query.match_at: err: %s", err)
+				return nil, err
+			}
+
+			node, err := evalContext.nodeMap.CastToGo(nodeTerm)
+			if err != nil {
+				log.Printf("curio.query.match_at: err: %s", err)
+				return nil, err
+			}
+
+			results, err := query.MatchAt(node)
+			if err != nil {
+				log.Printf("curio.query.match_at: err: %s", err)
+				return nil, err
+			}
+
+			resultTerms := make([]*ast.Term, len(results))
+
+			for i, result := range results {
+				resultTerms[i] = translateQueryResult(evalContext, result)
+			}
+
+			log.Printf("curio.query.match_at: exit")
+			return ast.ArrayTerm(resultTerms...), nil
+		},
+	)
+}
+
+// curio.query.match_once_at
+func QueryMatchOnceAt(evalContext *EvaluationContext) func(*rego.Rego) {
+	return rego.Function2(
+		&rego.Function{
+			Name: "curio.query.match_once_at",
+			Decl: types.NewFunction(
+				[]types.Type{opaqueType, opaqueType},
+				matchType,
+			),
+			Memoize: true,
+		},
+		func(bctx rego.BuiltinContext, queryTerm, nodeTerm *ast.Term) (*ast.Term, error) {
+			log.Printf("curio.query.match_once_at: enter")
+
+			query, err := evalContext.queryMap.CastToGo(queryTerm)
+			if err != nil {
+				log.Printf("curio.query.match_once_at: err: %s", err)
+				return nil, err
+			}
+
+			node, err := evalContext.nodeMap.CastToGo(nodeTerm)
+			if err != nil {
+				log.Printf("curio.query.match_once_at: err: %s", err)
+				return nil, err
+			}
+
+			result, err := query.MatchOnceAt(node)
+			if err != nil {
+				log.Printf("curio.query.match_once_at: err: %s", err)
+				return nil, err
+			}
+
+			log.Printf("curio.query.match_once_at: exit")
+			return translateQueryResult(evalContext, result), nil
+		},
+	)
+}
+
+func translateQueryResult(evalContext *EvaluationContext, result language.QueryResult) *ast.Term {
+	resultTerms := make([][2]*ast.Term, len(result))
+	i := 0
+
+	for name, node := range result {
+		resultTerms[i] = ast.Item(ast.StringTerm(name), evalContext.nodeMap.CastToRego(node))
+		i += 1
+	}
+
+	return ast.ObjectTerm(resultTerms...)
 }

@@ -4,11 +4,6 @@ import (
 	"fmt"
 	"log"
 
-	"gopkg.in/yaml.v2"
-
-	"github.com/bearer/curio/new/builtin/detectors/generic/datatypes"
-	"github.com/bearer/curio/new/builtin/detectors/ruby/objects"
-	"github.com/bearer/curio/new/builtin/detectors/ruby/properties"
 	"github.com/bearer/curio/new/builtin/detectors/ruby/rego"
 	"github.com/bearer/curio/new/builtin/detectors/ruby/rego/ffi"
 	detectiontypes "github.com/bearer/curio/new/detection/types"
@@ -16,6 +11,8 @@ import (
 	"github.com/bearer/curio/new/detectorexecutor"
 	getlanguage "github.com/bearer/curio/new/language/get"
 	"github.com/bearer/curio/new/treeevaluator"
+	"github.com/open-policy-agent/opa/ast"
+	"gopkg.in/yaml.v2"
 )
 
 func main() {
@@ -30,35 +27,30 @@ func run() error {
 		return fmt.Errorf("failed to lookup language: %s", err)
 	}
 
-	propertiesDetector, err := properties.New(lang)
+	evaluationContext := ffi.NewEvalContext(lang)
+
+	propertiesDetector, err := rego.New(evaluationContext, "rego_properties")
 	if err != nil {
 		return fmt.Errorf("failed to create properties detector: %s", err)
 	}
 	defer propertiesDetector.Close()
 
-	objectsDetector, err := objects.New(lang)
-	if err != nil {
-		return fmt.Errorf("failed to create objects detector: %s", err)
-	}
-	defer objectsDetector.Close()
+	// objectsDetector, err := rego.New(evaluationContext, "rego_objects")
+	// if err != nil {
+	// 	return fmt.Errorf("failed to create objects detector: %s", err)
+	// }
+	// defer objectsDetector.Close()
 
-	datatypesDetector, err := datatypes.New(lang)
-	if err != nil {
-		return fmt.Errorf("failed to create datatypes detector: %s", err)
-	}
-	defer datatypesDetector.Close()
-
-	regoDetector, err := rego.New(lang, "test")
-	if err != nil {
-		return fmt.Errorf("failed to create rego detector: %s", err)
-	}
-	defer regoDetector.Close()
+	// datatypesDetector, err := datatypes.New(lang)
+	// if err != nil {
+	// 	return fmt.Errorf("failed to create datatypes detector: %s", err)
+	// }
+	// defer datatypesDetector.Close()
 
 	executor, err := detectorexecutor.New([]detector.Detector{
 		propertiesDetector,
-		objectsDetector,
-		datatypesDetector,
-		regoDetector,
+		// objectsDetector,
+		// datatypesDetector,
 	})
 	if err != nil {
 		return fmt.Errorf("failed to create executor: %s", err)
@@ -88,14 +80,18 @@ end
 	defer tree.Close()
 
 	evaluator := treeevaluator.New(lang, executor, tree)
-	ffi.SetData(ffi.NewData(evaluator)) // FIXME
+	evaluationContext.NewFile(evaluator) // FIXME
 
-	detections, err := evaluator.TreeDetections(tree.RootNode(), "test")
+	detections, err := evaluator.TreeDetections(tree.RootNode(), "rego_properties")
 	if err != nil {
 		return fmt.Errorf("failed to detect data types: %s", err)
 	}
 
-	detectionsYAML, _ := yaml.Marshal(report(detections))
+	// detectionsYAML, _ := yaml.Marshal(report(detections))
+
+	de, _ := ast.ValueToInterface(detections, nil)
+	detectionsYAML, _ := yaml.Marshal(de)
+
 	log.Printf("GOT:\n%s\n", detectionsYAML)
 
 	return nil
