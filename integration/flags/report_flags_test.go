@@ -34,9 +34,9 @@ func TestReportFlags(t *testing.T) {
 
 func TestReportFlagsShouldFail(t *testing.T) {
 	tests := []testhelper.TestCase{
-		newScanTest("invalid-report-flag", []string{"--report=testing"}, ""),
-		newScanTest("invalid-format-flag", []string{"--format=testing"}, ""),
-		newScanTest("invalid-context-flag", []string{"--format=testing"}, ""),
+		newScanTest("invalid-report-flag", []string{"--report=testing"}),
+		newScanTest("invalid-format-flag", []string{"--format=testing"}),
+		newScanTest("invalid-context-flag", []string{"--format=testing"}),
 	}
 
 	for i := range tests {

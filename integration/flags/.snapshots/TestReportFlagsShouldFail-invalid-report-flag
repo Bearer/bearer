@@ -1,1 +1,49 @@
 
+--
+Error: flag error: report flags error: invalid report argument; supported values: detectors, dataflow, policies, stats
+Usage:
+   scan [flags] <path>
+Aliases:
+  scan, s
+Examples:
+  # Scan a local project, including language-specific files
+  $ curio scan /path/to/your_project
+
+
+Report Flags
+  -f, --format string   Specify report format (json, yaml)
+      --output string   Specify the output path for the report.
+      --report string   Specify the type of report (detectors, dataflow, policies, stats). (default "policies")
+
+Policy Flags
+      --only-policy strings   Specify the comma-separated ids of the policies you would like to run. Skips all other policies.
+      --skip-policy strings   Specify the comma-separated ids of the policies you would like to skip. Runs all other policies.
+
+Scan Flags
+      --context string                       Expand context of schema classification e.g., --context=health, to include data types particular to health
+      --debug                                Enable debug logs
+      --disable-domain-resolution            Do not attempt to resolve detected domains during classification (default true)
+      --domain-resolution-timeout duration   Set timeout when attempting to resolve detected domains during classification, e.g. --domain-resolution-timeout=3s (default 3s)
+      --force                                Disable the cache and runs the detections again
+      --internal-domains strings             Define regular expressions for better classification of private or unreachable domains e.g. --internal-domains=".*.my-company.com,private.sh"
+      --quiet                                Suppress non-essential messages
+      --skip-path strings                    Specify the comma separated files and directories to skip. Supports * syntax, e.g. --skip-path users/*.go,users/admin.sql
+
+General Flags
+      --config-file string   Load configuration from the specified path.
+
+Worker Flags
+      --existing-worker string              Specify the URL of an existing worker.
+      --file-size-max int                   Ignore files larger than the specified value. (default 2000000)
+      --files-to-batch int                  Specify the number of files to batch per worker. (default 1)
+      --memory-max int                      If the memory needed to scan a file surpasses the specified limit, skip the file. (default 800000000)
+      --timeout duration                    The maximum time alloted to complete the scan. (default 10m0s)
+      --timeout-file-max duration           Maximum timeout assigned for scanning each file. This config superseeds timeout-second-per-bytes. (default 30s)
+      --timeout-file-min duration           Minimum timeout assigned for scanning each file. This config superseeds timeout-second-per-bytes. (default 5s)
+      --timeout-file-second-per-bytes int   number of file size bytes producing a second of timeout assigned to scanning a file (default 10000)
+      --timeout-worker-online duration      Maximum time to wait for a worker process to come online. (default 1m0s)
+      --workers int                         The number of processing workers to spawn. (default 1)
+
+
+flag error: report flags error: invalid report argument; supported values: detectors, dataflow, policies, stats
+

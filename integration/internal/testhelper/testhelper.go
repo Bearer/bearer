@@ -69,15 +69,12 @@ func executeApp(t *testing.T, arguments []string) (string, error) {
 		cancel()
 		t.Fatalf("command failed to complete on time 'curio %s'", strings.Join(arguments, ""))
 	case <-commandFinished:
-		if err != nil {
-			t.Fatalf("command completed with errror %s", err)
-		}
 		cancel()
 	}
 
 	combinedOutput := buffOut.String() + "\n--\n" + buffErr.String()
 
-	return combinedOutput, nil
+	return combinedOutput, err
 }
 
 func CreateCurioCommand(arguments []string) (*exec.Cmd, context.CancelFunc) {
@@ -117,15 +114,15 @@ func RunTests(t *testing.T, tests []TestCase) {
 
 			combinedOutput, err := executeApp(t, arguments)
 
-			cupaloy.SnapshotT(t, combinedOutput)
-
-			if err != nil {
-				if test.ShouldSucceed {
-					t.Errorf("Expected application to succeed, but it failed: %s", err)
-				}
-			} else if !test.ShouldSucceed {
-				t.Error("Expected application to fail, but it did not")
+			if test.ShouldSucceed && err != nil {
+				t.Fatalf("command completed with errror %s", err)
 			}
+
+			if !test.ShouldSucceed && err == nil {
+				t.Fatal("expected command to fail but it succeded instead")
+			}
+
+			cupaloy.SnapshotT(t, combinedOutput)
 		})
 	}
 }
