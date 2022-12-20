@@ -7,6 +7,7 @@ import future.keywords
 policy_failure contains item if {
     datatype = input.dataflow.data_types[_]
     datatype.name != "Unique Identifier"
+    datatype.name != "Passwords"
 
     detector = datatype.detectors[_]
     location = detector.locations[_]

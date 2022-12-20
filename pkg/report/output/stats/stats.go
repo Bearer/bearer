@@ -123,15 +123,28 @@ func GetPlaceholderOutput(inputgocloc *gocloc.Result, inputDataflow *dataflow.Da
 
 	supportURL := "https://curio.sh/explanations/reports/"
 	outputStr.WriteString(fmt.Sprintf(`
-The policy report is not yet available for your stack. Learn more at %s
+The policy report is not yet available for your stack. Learn more at %s`,
+		supportURL))
+
+	anythingFound :=
+		statistics.NumberOfDataTypes != 0 ||
+		statistics.NumberOfDatabases != 0 ||
+		statistics.NumberOfExternalAPIs != 0 ||
+		statistics.NumberOfInternalAPIs != 0
+	if anythingFound {
+		outputStr.WriteString(`
 
 Though this doesn’t mean the curious bear comes empty-handed, it found:
+`)
+	}
 
+	if statistics.NumberOfDataTypes != 0 {
+		outputStr.WriteString(fmt.Sprintf(`
 - %d unique data type(s), representing %d occurrences, including %s.`,
-		supportURL,
-		statistics.NumberOfDataTypes,
-		totalDataTypeOccurrences,
-		strings.Join(statistics.DataGroups, ", ")))
+			statistics.NumberOfDataTypes,
+			totalDataTypeOccurrences,
+			strings.Join(statistics.DataGroups, ", ")))
+	}
 
 	if statistics.NumberOfDatabases != 0 {
 		numberOfEncryptedDataTypes := 0
@@ -141,8 +154,7 @@ Though this doesn’t mean the curious bear comes empty-handed, it found:
 			}
 		}
 
-		outputStr.WriteString(fmt.Sprintf(
-			`
+		outputStr.WriteString(fmt.Sprintf(`
 - %d database(s) storing %d data type(s) including %d encrypted data type(s).`,
 			statistics.NumberOfDatabases,
 			statistics.NumberOfDataTypes,
@@ -150,15 +162,13 @@ Though this doesn’t mean the curious bear comes empty-handed, it found:
 	}
 
 	if statistics.NumberOfExternalAPIs != 0 {
-		outputStr.WriteString(fmt.Sprintf(
-			`
+		outputStr.WriteString(fmt.Sprintf(`
 - %d external service(s).`,
 			statistics.NumberOfExternalAPIs))
 	}
 
 	if statistics.NumberOfInternalAPIs != 0 {
-		outputStr.WriteString(fmt.Sprintf(
-			`
+		outputStr.WriteString(fmt.Sprintf(`
 - %d internal URL(s).`,
 			statistics.NumberOfInternalAPIs))
 	}
