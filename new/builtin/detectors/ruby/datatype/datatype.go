@@ -1,11 +1,11 @@
-package datatypes
+package datatype
 
 import (
-	"github.com/bearer/curio/new/builtin/detectors/ruby/objects"
-	"github.com/bearer/curio/new/builtin/detectors/ruby/properties"
+	objectdetector "github.com/bearer/curio/new/builtin/detectors/ruby/object"
+	propertydetector "github.com/bearer/curio/new/builtin/detectors/ruby/property"
 	detectiontypes "github.com/bearer/curio/new/detection/types"
 	"github.com/bearer/curio/new/detector"
-	"github.com/bearer/curio/new/language"
+	"github.com/bearer/curio/new/language/tree"
 	languagetypes "github.com/bearer/curio/new/language/types"
 	treeevaluatortypes "github.com/bearer/curio/new/treeevaluator/types"
 )
@@ -14,21 +14,21 @@ type Data struct {
 	Name string
 }
 
-type datatypesDetector struct{}
+type datatypeDetector struct{}
 
 func New(lang languagetypes.Language) (detector.Detector, error) {
-	return &datatypesDetector{}, nil
+	return &datatypeDetector{}, nil
 }
 
-func (detector *datatypesDetector) Name() string {
-	return "datatypes"
+func (detector *datatypeDetector) Name() string {
+	return "datatype"
 }
 
-func (detector *datatypesDetector) DetectAt(
-	node *language.Node,
+func (detector *datatypeDetector) DetectAt(
+	node *tree.Node,
 	evaluator treeevaluatortypes.Evaluator,
 ) ([]*detectiontypes.Detection, error) {
-	objectDetections, err := evaluator.NodeDetections(node, "objects")
+	objectDetections, err := evaluator.NodeDetections(node, "object")
 	if err != nil {
 		return nil, err
 	}
@@ -36,13 +36,13 @@ func (detector *datatypesDetector) DetectAt(
 	var result []*detectiontypes.Detection
 
 	for _, object := range objectDetections {
-		data := object.Data.(objects.Data)
+		data := object.Data.(objectdetector.Data)
 		if data.Name != "user" {
 			continue
 		}
 
 		for _, property := range data.Properties {
-			propertyData := property.Data.(properties.Data)
+			propertyData := property.Data.(propertydetector.Data)
 			if propertyData.Name == "first_name" {
 				result = append(result, &detectiontypes.Detection{
 					ContextNode: node,
@@ -56,4 +56,4 @@ func (detector *datatypesDetector) DetectAt(
 	return result, nil
 }
 
-func (detector *datatypesDetector) Close() {}
+func (detector *datatypeDetector) Close() {}

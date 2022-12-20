@@ -1,4 +1,4 @@
-package language
+package tree
 
 import (
 	"errors"
@@ -11,6 +11,15 @@ type Query struct {
 }
 
 type QueryResult map[string]*Node
+
+func CompileQuery(sitterLanguage *sitter.Language, input string) (*Query, error) {
+	sitterQuery, err := sitter.NewQuery([]byte(input), sitterLanguage)
+	if err != nil {
+		return nil, err
+	}
+
+	return &Query{sitterQuery: sitterQuery}, nil
+}
 
 func (query *Query) MatchAt(node *Node) ([]QueryResult, error) {
 	cursor := sitter.NewQueryCursor()
