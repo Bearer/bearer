@@ -9,14 +9,14 @@ import (
 	detectiontypes "github.com/bearer/curio/new/detection/types"
 	"github.com/bearer/curio/new/detector"
 	"github.com/bearer/curio/new/detectorexecutor/types"
-	"github.com/bearer/curio/new/language"
+	"github.com/bearer/curio/new/language/tree"
 	languagetypes "github.com/bearer/curio/new/language/types"
 	treeevaluatortypes "github.com/bearer/curio/new/treeevaluator/types"
 )
 
 type detectorExecutor struct {
 	lang          languagetypes.Language
-	detectorStack map[language.NodeID][]string
+	detectorStack map[tree.NodeID][]string
 	detectors     map[string]detector.Detector
 }
 
@@ -28,7 +28,7 @@ func New(lang languagetypes.Language, detectors []detector.Detector) (types.Exec
 
 	return &detectorExecutor{
 		lang:          lang,
-		detectorStack: make(map[language.NodeID][]string),
+		detectorStack: make(map[tree.NodeID][]string),
 		detectors:     detectorMap,
 	}, nil
 }
@@ -50,7 +50,7 @@ func makeDetectorMap(detectors []detector.Detector) (map[string]detector.Detecto
 }
 
 func (executor *detectorExecutor) DetectAt(
-	node *language.Node,
+	node *tree.Node,
 	detectorType string,
 	evaluator treeevaluatortypes.Evaluator,
 ) ([]*detectiontypes.Detection, error) {

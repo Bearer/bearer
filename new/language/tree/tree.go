@@ -1,6 +1,8 @@
-package language
+package tree
 
 import (
+	"context"
+
 	sitter "github.com/smacker/go-tree-sitter"
 )
 
@@ -8,6 +10,26 @@ type Tree struct {
 	input        []byte
 	sitterTree   *sitter.Tree
 	unifiedNodes map[NodeID][]*Node
+}
+
+func Parse(sitterLanguage *sitter.Language, input string) (*Tree, error) {
+	inputBytes := []byte(input)
+
+	parser := sitter.NewParser()
+	defer parser.Close()
+
+	parser.SetLanguage(sitterLanguage)
+
+	sitterTree, err := parser.ParseCtx(context.Background(), nil, inputBytes)
+	if err != nil {
+		return nil, err
+	}
+
+	return &Tree{
+		input:        inputBytes,
+		sitterTree:   sitterTree,
+		unifiedNodes: make(map[NodeID][]*Node),
+	}, nil
 }
 
 func (tree *Tree) RootNode() *Node {

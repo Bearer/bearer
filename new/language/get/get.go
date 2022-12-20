@@ -3,7 +3,7 @@ package get
 import (
 	"fmt"
 
-	"github.com/bearer/curio/new/language/implementations/ruby"
+	"github.com/bearer/curio/new/language/implementation/ruby"
 	"github.com/bearer/curio/new/language/types"
 )
 
