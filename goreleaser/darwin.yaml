@@ -18,6 +18,7 @@ builds:
       - arm64
     ldflags:
       - -s -w
+      - -extldflags "-static"
       - -X "github.com/bearer/curio/cmd/curio/build.Version={{.Version}}"
       - -X "github.com/bearer/curio/cmd/curio/build.CommitSHA={{.Commit}}"
     hooks:
