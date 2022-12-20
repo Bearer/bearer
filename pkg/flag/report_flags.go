@@ -18,7 +18,7 @@ var (
 )
 
 var ErrInvalidFormat = errors.New("you've specified invalid format, valid ones are json,yaml")
-var ErrInvalidReport = errors.New("you've specified invalid report, valid ones are detectors, dataflow, policies, stats")
+var ErrInvalidReport = errors.New("invalid report argument; supported values: detectors, dataflow, policies, stats")
 
 var (
 	FormatFlag = Flag{
