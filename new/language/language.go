@@ -1,52 +1,51 @@
 package language
 
 import (
-	"context"
-
 	sitter "github.com/smacker/go-tree-sitter"
+
+	"github.com/bearer/curio/new/language/patternquery"
+	patternquerybuilder "github.com/bearer/curio/new/language/patternquery/builder"
+	"github.com/bearer/curio/new/language/tree"
+	"github.com/bearer/curio/new/language/types"
 )
 
 type Base struct {
-	sitterLanguage *sitter.Language
-	analyzeFlow    func(rootNode *Node)
+	sitterLanguage          *sitter.Language
+	analyzeFlow             func(rootNode *tree.Node)
+	extractPatternVariables func(input string) (string, []patternquerybuilder.Variable, error)
 }
 
-func New(sitterLanguage *sitter.Language, analyzeFlow func(rootNode *Node)) Base {
-	return Base{
-		sitterLanguage: sitterLanguage,
-		analyzeFlow:    analyzeFlow,
+func New(
+	sitterLanguage *sitter.Language,
+	analyzeFlow func(rootNode *tree.Node),
+	extractPatternVariables func(input string) (string, []patternquerybuilder.Variable, error),
+) *Base {
+	return &Base{
+		sitterLanguage:          sitterLanguage,
+		analyzeFlow:             analyzeFlow,
+		extractPatternVariables: extractPatternVariables,
 	}
 }
 
-func (lang *Base) Parse(input string) (*Tree, error) {
-	inputBytes := []byte(input)
-
-	parser := sitter.NewParser()
-	defer parser.Close()
-
-	parser.SetLanguage(lang.sitterLanguage)
-
-	sitterTree, err := parser.ParseCtx(context.Background(), nil, inputBytes)
+func (lang *Base) Parse(input string) (*tree.Tree, error) {
+	tree, err := tree.Parse(lang.sitterLanguage, input)
 	if err != nil {
 		return nil, err
-	}
-
-	tree := &Tree{
-		input:        inputBytes,
-		sitterTree:   sitterTree,
-		unifiedNodes: make(map[NodeID][]*Node),
 	}
 
 	lang.analyzeFlow(tree.RootNode())
-
 	return tree, nil
 }
 
-func (lang *Base) CompileQuery(input string) (*Query, error) {
-	sitterQuery, err := sitter.NewQuery([]byte(input), lang.sitterLanguage)
+func (lang *Base) CompileQuery(input string) (*tree.Query, error) {
+	return tree.CompileQuery(lang.sitterLanguage, input)
+}
+
+func (lang *Base) CompilePatternQuery(input string) (types.PatternQuery, error) {
+	inputWithoutVariables, params, err := lang.extractPatternVariables(input)
 	if err != nil {
 		return nil, err
 	}
 
-	return &Query{sitterQuery: sitterQuery}, nil
+	return patternquery.Compile(lang, inputWithoutVariables, params)
 }

@@ -1,4 +1,4 @@
-package language
+package tree
 
 import (
 	"errors"
@@ -39,12 +39,32 @@ func (node *Node) LineNumber() int {
 	return int(node.sitterNode.StartPoint().Row + 1)
 }
 
+func (node *Node) ColumnNumber() int {
+	return int(node.sitterNode.StartPoint().Column + 1)
+}
+
 func (node *Node) Parent() *Node {
 	return node.tree.wrap(node.sitterNode.Parent())
 }
 
+func (node *Node) ChildCount() int {
+	return int(node.sitterNode.ChildCount())
+}
+
+func (node *Node) Child(i int) *Node {
+	return node.tree.wrap(node.sitterNode.Child(i))
+}
+
 func (node *Node) ChildByFieldName(name string) *Node {
 	return node.tree.wrap(node.sitterNode.ChildByFieldName(name))
+}
+
+func (node *Node) IsNamed() bool {
+	return node.sitterNode.IsNamed()
+}
+
+func (node *Node) IsError() bool {
+	return node.sitterNode.IsError()
 }
 
 func (node *Node) Walk(visit func(node *Node) error) error {
