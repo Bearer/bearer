@@ -76,6 +76,8 @@ func NewScanCommand() *cobra.Command {
 				return cmd.Help()
 			}
 
+			cmd.SilenceUsage = true
+
 			return artifact.Run(cmd.Context(), options, artifact.TargetFilesystem)
 		},
 		SilenceErrors: false,

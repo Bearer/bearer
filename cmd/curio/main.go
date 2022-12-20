@@ -1,16 +1,18 @@
 package main
 
 import (
-	"log"
+	"os"
 
 	"github.com/bearer/curio/cmd/curio/build"
 
 	"github.com/bearer/curio/pkg/commands"
+	"github.com/bearer/curio/pkg/util/output"
 )
 
 func main() {
 	if err := run(); err != nil {
-		log.Fatal(err)
+		output.StdErrLogger().Msgf("%s", err)
+		os.Exit(1)
 	}
 }
 

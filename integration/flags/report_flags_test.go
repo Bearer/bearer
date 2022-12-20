@@ -31,3 +31,18 @@ func TestReportFlags(t *testing.T) {
 
 	testhelper.RunTests(t, tests)
 }
+
+func TestReportFlagsShouldFail(t *testing.T) {
+	tests := []testhelper.TestCase{
+		newScanTest("invalid-report-flag", []string{"--report=testing"}),
+		newScanTest("invalid-format-flag", []string{"--format=testing"}),
+		newScanTest("invalid-context-flag", []string{"--format=testing"}),
+	}
+
+	for i := range tests {
+		tests[i].ShouldSucceed = false
+	}
+
+	testhelper.RunTests(t, tests)
+
+}
