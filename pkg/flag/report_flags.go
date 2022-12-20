@@ -17,7 +17,7 @@ var (
 	ReportStats     = "stats"
 )
 
-var ErrInvalidFormat = errors.New("you've specified invalid format, valid ones are json,yaml")
+var ErrInvalidFormat = errors.New("invalid format argument; supported values: json, yaml")
 var ErrInvalidReport = errors.New("invalid report argument; supported values: detectors, dataflow, policies, stats")
 
 var (
