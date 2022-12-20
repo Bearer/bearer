@@ -13,7 +13,7 @@ const (
 	Empty  Context = ""
 )
 
-var ErrInvalidContext = errors.New("you've specified invalid context, valid one is health")
+var ErrInvalidContext = errors.New("invalid context argument; supported values: health")
 
 var (
 	SkipPathFlag = Flag{
