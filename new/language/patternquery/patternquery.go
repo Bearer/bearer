@@ -1,8 +1,6 @@
 package patternquery
 
 import (
-	"log"
-
 	"github.com/bearer/curio/new/language/patternquery/builder"
 	"github.com/bearer/curio/new/language/tree"
 	"github.com/bearer/curio/new/language/types"
@@ -20,8 +18,6 @@ func Compile(lang types.Language, input string, variables []builder.Variable) (*
 	if err != nil {
 		return nil, err
 	}
-
-	log.Printf("translated query from:\n\n%s\n\nto:\n\n%#v\n\n", input, builderResult)
 
 	treeQuery, err := lang.CompileQuery(builderResult.Query)
 	if err != nil {
