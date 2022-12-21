@@ -1,8 +1,6 @@
 package types
 
-import (
-	"github.com/bearer/curio/new/language/tree"
-)
+import "github.com/bearer/curio/new/language/tree"
 
 type PatternQuery interface {
 	MatchAt(node *tree.Node) ([]tree.QueryResult, error)
