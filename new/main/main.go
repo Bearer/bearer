@@ -6,12 +6,12 @@ import (
 
 	"gopkg.in/yaml.v2"
 
-	"github.com/bearer/curio/new/detector/detectorset"
 	"github.com/bearer/curio/new/detector/evaluator"
 	"github.com/bearer/curio/new/detector/implementation/custom"
 	"github.com/bearer/curio/new/detector/implementation/generic/datatype"
 	"github.com/bearer/curio/new/detector/implementation/ruby/object"
 	"github.com/bearer/curio/new/detector/implementation/ruby/property"
+	detectorset "github.com/bearer/curio/new/detector/set"
 	detectortypes "github.com/bearer/curio/new/detector/types"
 	"github.com/bearer/curio/new/language"
 )
