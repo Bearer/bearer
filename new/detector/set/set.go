@@ -1,4 +1,4 @@
-package detectorset
+package set
 
 import (
 	"fmt"
@@ -7,7 +7,7 @@ import (
 	"github.com/bearer/curio/new/language/tree"
 )
 
-type detectorSet struct {
+type set struct {
 	detectors map[string]types.Detector
 }
 
@@ -24,17 +24,17 @@ func New(detectors []types.Detector) (types.DetectorSet, error) {
 		detectorMap[name] = detector
 	}
 
-	return &detectorSet{
+	return &set{
 		detectors: detectorMap,
 	}, nil
 }
 
-func (detectorSet *detectorSet) DetectAt(
+func (set *set) DetectAt(
 	node *tree.Node,
 	detectorType string,
 	evaluator types.Evaluator,
 ) ([]*types.Detection, error) {
-	detector, ok := detectorSet.detectors[detectorType]
+	detector, ok := set.detectors[detectorType]
 	if !ok {
 		return nil, fmt.Errorf("detector type '%s' not registered", detectorType)
 	}
