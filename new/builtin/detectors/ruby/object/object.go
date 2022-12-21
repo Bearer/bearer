@@ -33,12 +33,12 @@ func New(lang languagetypes.Language) (detector.Detector, error) {
 	// user = <object>
 	assignmentQuery, err := lang.CompileQuery(`(assignment left: (identifier) @left right: (_) @right) @root`)
 	if err != nil {
-		return nil, fmt.Errorf("error compiling hash pair query: %s", err)
+		return nil, fmt.Errorf("error compiling assignment query: %s", err)
 	}
 	// { user: <object> }
 	parentPairQuery, err := lang.CompileQuery(`(pair key: (hash_key_symbol) @key value: (_) @value) @root`)
 	if err != nil {
-		return nil, fmt.Errorf("error compiling hash pair query: %s", err)
+		return nil, fmt.Errorf("error compiling parent pair query: %s", err)
 	}
 
 	return &objectDetector{
