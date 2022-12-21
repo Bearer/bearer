@@ -11,6 +11,8 @@ import (
 type Query struct {
 	treeQuery       *tree.Query
 	paramToVariable map[string]string
+	equalParams     [][]string
+	paramToContent  map[string]string
 }
 
 func Compile(lang types.Language, input string, variables []builder.Variable) (*Query, error) {
@@ -26,7 +28,12 @@ func Compile(lang types.Language, input string, variables []builder.Variable) (*
 		return nil, err
 	}
 
-	return &Query{treeQuery: treeQuery, paramToVariable: builderResult.ParamToVariable}, nil
+	return &Query{
+		treeQuery:       treeQuery,
+		paramToVariable: builderResult.ParamToVariable,
+		equalParams:     builderResult.EqualParams,
+		paramToContent:  builderResult.ParamToContent,
+	}, nil
 }
 
 func (query *Query) MatchAt(node *tree.Node) ([]tree.QueryResult, error) {
@@ -35,10 +42,13 @@ func (query *Query) MatchAt(node *tree.Node) ([]tree.QueryResult, error) {
 		return nil, err
 	}
 
-	results := make([]tree.QueryResult, len(treeResults))
+	var results []tree.QueryResult
 
-	for i, treeResult := range treeResults {
-		results[i] = query.translateTreeResult(treeResult)
+	for _, treeResult := range treeResults {
+		result := query.matchAndTranslateTreeResult(treeResult)
+		if result != nil {
+			results = append(results, result)
+		}
 	}
 
 	return results, nil
@@ -50,14 +60,34 @@ func (query *Query) MatchOnceAt(node *tree.Node) (tree.QueryResult, error) {
 		return nil, err
 	}
 
-	return query.translateTreeResult(treeResult), nil
+	return query.matchAndTranslateTreeResult(treeResult), nil
 }
 
 func (query *Query) Close() {
 	query.treeQuery.Close()
 }
 
-func (query *Query) translateTreeResult(treeResult tree.QueryResult) tree.QueryResult {
+func (query *Query) matchAndTranslateTreeResult(treeResult tree.QueryResult) tree.QueryResult {
+	if treeResult == nil {
+		return nil
+	}
+
+	for _, equalParams := range query.equalParams {
+		value := treeResult[equalParams[0]].Content()
+
+		for _, param := range equalParams[1:] {
+			if treeResult[param].Content() != value {
+				return nil
+			}
+		}
+	}
+
+	for param, content := range query.paramToContent {
+		if treeResult[param].Content() != content {
+			return nil
+		}
+	}
+
 	result := make(tree.QueryResult)
 
 	for paramName, node := range treeResult {

@@ -52,21 +52,39 @@ func run() error {
 		"ruby_file_detection",
 		custom.Rule{
 			Pattern: `
-				$<LIBRARY:constant>.open do
-					$<BLOCK_EXPRESSION:_>
+				Sentry.init do |$<CFG>|
+					$<CFG>.before_breadcrumb = lambda do |$<BREADCRUMB>, hint|
+						$<BREADCRUMB>.message = $<MESSAGE:_>
+					end
 				end`,
 			Filters: []custom.Filter{
 				{
-					Variable: "LIBRARY",
-					Values:   []string{"CSV", "File"},
-				},
-				{
-					Variable:         "BLOCK_EXPRESSION",
+					Variable:         "MESSAGE",
 					ContainsDataType: true,
 				},
 			},
 		},
 	)
+	// rubyFileDetector, err := custom.New(
+	// 	lang,
+	// 	"ruby_file_detection",
+	// 	custom.Rule{
+	// 		Pattern: `
+	// 			$<LIBRARY:constant>.open do
+	// 				$<BLOCK_EXPRESSION:_>
+	// 			end`,
+	// 		Filters: []custom.Filter{
+	// 			{
+	// 				Variable: "LIBRARY",
+	// 				Values:   []string{"CSV", "File"},
+	// 			},
+	// 			{
+	// 				Variable:         "BLOCK_EXPRESSION",
+	// 				ContainsDataType: true,
+	// 			},
+	// 		},
+	// 	},
+	// )
 	if err != nil {
 		return fmt.Errorf("failed to create ruby file detector: %s", err)
 	}
@@ -84,25 +102,45 @@ func run() error {
 
 	tree, err := lang.Parse(`
 
-class Abc
-	def f
-		CSV.open("path/to/user.csv", "wb") do |csv|																																	 # 5
-			users.each do |user1|
-				user = { first_name: "" }                                                                                # 7
-				csv << user.values
-			end
-		end
+Sentry.init do |config|
+	config.before_breadcrumb = lambda do |breadcrumb, hint|
+		breadcrumb.message = { user: { first_name: "" } }     # 5
+		bf.message = { user: { first_name: "" } }             # 6
+	end
 
-		Other.open("path/to/user.csv", "wb") do |csv|
-			users.each do |user1|
-				user = { first_name: "" }																															                   # 14
-				csv << user.values
-			end
-		end
+	other.before_breadcrumb = lambda do |breadcrumb, hint|
+		breadcrumb.message = { user: { first_name: "" } }     # 10
+	end
+end
+
+FSentry.init do |config|
+	config.before_breadcrumb = lambda do |breadcrumb, hint|
+		breadcrumb.message = { user: { first_name: "" } }     # 5
 	end
 end
 
 	`)
+	// 	tree, err := lang.Parse(`
+
+	// class Abc
+	// 	def f
+	// 		CSV.open("path/to/user.csv", "wb") do |csv|																																	 # 5
+	// 			users.each do |user1|
+	// 				user = { first_name: "" }                                                                                # 7
+	// 				csv << user.values
+	// 			end
+	// 		end
+
+	// 		Other.open("path/to/user.csv", "wb") do |csv|
+	// 			users.each do |user1|
+	// 				user = { first_name: "" }																															                   # 14
+	// 				csv << user.values
+	// 			end
+	// 		end
+	// 	end
+	// end
+
+	// 	`)
 	// 	tree, err := lang.Parse(`
 
 	// class Abc
