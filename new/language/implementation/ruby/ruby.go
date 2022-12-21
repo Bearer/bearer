@@ -8,7 +8,7 @@ import (
 	"github.com/ssoroka/slice"
 	"golang.org/x/exp/slices"
 
-	"github.com/bearer/curio/new/language"
+	"github.com/bearer/curio/new/language/base"
 	patternquerybuilder "github.com/bearer/curio/new/language/patternquery/builder"
 	"github.com/bearer/curio/new/language/tree"
 	"github.com/bearer/curio/pkg/util/regex"
@@ -22,8 +22,8 @@ var (
 	allowedPatternQueryTypes  = []string{"identifier", "constant", "_"}
 )
 
-func Get() *language.Base {
-	return language.New(ruby.GetLanguage(), analyzeFlow, extractPatternVariables)
+func Get() *base.Language {
+	return base.New(ruby.GetLanguage(), analyzeFlow, extractPatternVariables)
 }
 
 func analyzeFlow(rootNode *tree.Node) {
