@@ -6,15 +6,14 @@ import (
 
 	"gopkg.in/yaml.v2"
 
-	"github.com/bearer/curio/new/builtin/detectors/custom"
-	"github.com/bearer/curio/new/builtin/detectors/ruby/datatype"
-	"github.com/bearer/curio/new/builtin/detectors/ruby/object"
-	"github.com/bearer/curio/new/builtin/detectors/ruby/property"
-	detectiontypes "github.com/bearer/curio/new/detection/types"
-	"github.com/bearer/curio/new/detector"
-	"github.com/bearer/curio/new/detectorexecutor"
+	"github.com/bearer/curio/new/detector/detectorset"
+	"github.com/bearer/curio/new/detector/evaluator"
+	"github.com/bearer/curio/new/detector/implementation/custom"
+	"github.com/bearer/curio/new/detector/implementation/generic/datatype"
+	"github.com/bearer/curio/new/detector/implementation/ruby/object"
+	"github.com/bearer/curio/new/detector/implementation/ruby/property"
+	detectortypes "github.com/bearer/curio/new/detector/types"
 	"github.com/bearer/curio/new/language"
-	"github.com/bearer/curio/new/treeevaluator"
 )
 
 func main() {
@@ -90,14 +89,14 @@ func run() error {
 	}
 	defer rubyFileDetector.Close()
 
-	executor, err := detectorexecutor.New(lang, []detector.Detector{
+	detectorSet, err := detectorset.New([]detectortypes.Detector{
 		propertyDetector,
 		objectDetector,
 		datatypeDetector,
 		rubyFileDetector,
 	})
 	if err != nil {
-		return fmt.Errorf("failed to create executor: %s", err)
+		return fmt.Errorf("failed to create detector set: %s", err)
 	}
 
 	tree, err := lang.Parse(`
@@ -164,9 +163,9 @@ end
 	}
 	defer tree.Close()
 
-	evaluator := treeevaluator.New(lang, executor, tree)
+	evaluator := evaluator.New(lang, detectorSet, tree)
 
-	detections, err := evaluator.TreeDetections(tree.RootNode(), "ruby_file_detection")
+	detections, err := evaluator.ForTree(tree.RootNode(), "ruby_file_detection")
 	if err != nil {
 		return fmt.Errorf("failed to detect: %s", err)
 	}
@@ -187,7 +186,7 @@ type ReportDetection struct {
 	Data            interface{}
 }
 
-func report(detections []*detectiontypes.Detection) []ReportDetection {
+func report(detections []*detectortypes.Detection) []ReportDetection {
 	result := make([]ReportDetection, len(detections))
 
 	for i, detection := range detections {

@@ -3,11 +3,9 @@ package property
 import (
 	"fmt"
 
-	detectiontypes "github.com/bearer/curio/new/detection/types"
-	"github.com/bearer/curio/new/detector"
+	"github.com/bearer/curio/new/detector/types"
 	"github.com/bearer/curio/new/language/tree"
 	languagetypes "github.com/bearer/curio/new/language/types"
-	treeevaluatortypes "github.com/bearer/curio/new/treeevaluator/types"
 )
 
 type Data struct {
@@ -18,7 +16,7 @@ type propertyDetector struct {
 	pairQuery *tree.Query
 }
 
-func New(lang languagetypes.Language) (detector.Detector, error) {
+func New(lang languagetypes.Language) (types.Detector, error) {
 	pairQuery, err := lang.CompileQuery(`(pair key: (hash_key_symbol) @key value: (_) @value) @root`)
 	if err != nil {
 		return nil, fmt.Errorf("error compiling pair query: %s", err)
@@ -33,14 +31,14 @@ func (detector *propertyDetector) Name() string {
 
 func (detector *propertyDetector) DetectAt(
 	node *tree.Node,
-	evaluator treeevaluatortypes.Evaluator,
-) ([]*detectiontypes.Detection, error) {
+	evaluator types.Evaluator,
+) ([]*types.Detection, error) {
 	result, err := detector.pairQuery.MatchOnceAt(node)
 	if result == nil || err != nil {
 		return nil, err
 	}
 
-	return []*detectiontypes.Detection{{
+	return []*types.Detection{{
 		MatchNode: node,
 		Data:      Data{Name: result["key"].Content()},
 	}}, nil
