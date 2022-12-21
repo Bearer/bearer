@@ -18,6 +18,8 @@ type Variable struct {
 type Result struct {
 	Query           string
 	ParamToVariable map[string]string
+	EqualParams     [][]string
+	ParamToContent  map[string]string
 }
 
 type builder struct {
@@ -54,13 +56,15 @@ func (builder *builder) build(rootNode *tree.Node) *Result {
 	builder.write("(")
 	builder.compileNode(rootNode)
 	builder.write(" @root")
-	builder.compileContentMatches()
-	paramToVariable := builder.compileVariableMatches()
 	builder.write(")")
+
+	paramToVariable, equalParams := builder.processVariableToParams()
 
 	return &Result{
 		Query:           builder.stringBuilder.String(),
 		ParamToVariable: paramToVariable,
+		EqualParams:     equalParams,
+		ParamToContent:  builder.paramToContent,
 	}
 }
 
@@ -134,33 +138,19 @@ func (builder *builder) compileNodeWithChildren(node *tree.Node) error {
 	return nil
 }
 
-func (builder *builder) compileContentMatches() {
-	for paramName, content := range builder.paramToContent {
-		builder.write(" (#eq? @")
-		builder.write(paramName)
-		builder.write(` "`)
-		builder.write(escapeQueryString(content))
-		builder.write(`")`)
-	}
-}
-
-func (builder *builder) compileVariableMatches() map[string]string {
+func (builder *builder) processVariableToParams() (map[string]string, [][]string) {
 	paramToVariable := make(map[string]string)
+	var equalParams [][]string
 
 	for variableName, paramNames := range builder.variableToParams {
-		firstParam := paramNames[0]
-		paramToVariable[firstParam] = variableName
-
-		for _, otherParam := range paramNames[1:] {
-			builder.write(" (#eq? @")
-			builder.write(firstParam)
-			builder.write(" @")
-			builder.write(otherParam)
-			builder.write(")")
+		if len(paramNames) > 1 {
+			equalParams = append(equalParams, paramNames)
 		}
+
+		paramToVariable[paramNames[0]] = variableName
 	}
 
-	return paramToVariable
+	return paramToVariable, equalParams
 }
 
 func (builder *builder) getVariableFor(node *tree.Node) *Variable {
