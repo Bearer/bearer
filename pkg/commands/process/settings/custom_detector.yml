@@ -100,8 +100,11 @@ ruby_http_get_insecure:
   languages:
     - ruby
   patterns:
-    - |
-      URI($<URL>)
+    - pattern: |
+        URI($<URL>)
+      filters:
+        - variable: URL
+          detection: insecure_url
     - pattern: |
         $<CLIENT:constant>.get($<URL>)
       filters:
