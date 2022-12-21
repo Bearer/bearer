@@ -3,16 +3,15 @@ package custom
 import (
 	"fmt"
 
-	detectiontypes "github.com/bearer/curio/new/detection/types"
-	"github.com/bearer/curio/new/detector"
+	"golang.org/x/exp/slices"
+
+	"github.com/bearer/curio/new/detector/types"
 	"github.com/bearer/curio/new/language/tree"
 	languagetypes "github.com/bearer/curio/new/language/types"
-	treeevaluatortypes "github.com/bearer/curio/new/treeevaluator/types"
-	"golang.org/x/exp/slices"
 )
 
 type Data struct {
-	Datatypes []*detectiontypes.Detection
+	Datatypes []*types.Detection
 }
 
 type Filter struct {
@@ -32,7 +31,7 @@ type customDetector struct {
 	filters      []Filter
 }
 
-func New(lang languagetypes.Language, detectorType string, rule Rule) (detector.Detector, error) {
+func New(lang languagetypes.Language, detectorType string, rule Rule) (types.Detector, error) {
 	patternQuery, err := lang.CompilePatternQuery(rule.Pattern)
 	if err != nil {
 		return nil, fmt.Errorf("error compiling pattern: %s", err)
@@ -53,14 +52,14 @@ func (detector *customDetector) Name() string {
 
 func (detector *customDetector) DetectAt(
 	node *tree.Node,
-	evaluator treeevaluatortypes.Evaluator,
-) ([]*detectiontypes.Detection, error) {
+	evaluator types.Evaluator,
+) ([]*types.Detection, error) {
 	results, err := detector.patternQuery.MatchAt(node)
 	if err != nil {
 		return nil, err
 	}
 
-	var detections []*detectiontypes.Detection
+	var detections []*types.Detection
 
 	for _, result := range results {
 		filtersMatch, datatypeDetections, err := detector.matchFilters(result, evaluator)
@@ -72,7 +71,7 @@ func (detector *customDetector) DetectAt(
 			continue
 		}
 
-		detections = append(detections, &detectiontypes.Detection{
+		detections = append(detections, &types.Detection{
 			MatchNode: node,
 			Data: Data{
 				Datatypes: datatypeDetections,
@@ -85,9 +84,9 @@ func (detector *customDetector) DetectAt(
 
 func (detector *customDetector) matchFilters(
 	result tree.QueryResult,
-	evaluator treeevaluatortypes.Evaluator,
-) (bool, []*detectiontypes.Detection, error) {
-	var datatypeDetections []*detectiontypes.Detection
+	evaluator types.Evaluator,
+) (bool, []*types.Detection, error) {
+	var datatypeDetections []*types.Detection
 
 	for _, filter := range detector.filters {
 		node, ok := result[filter.Variable]
@@ -101,14 +100,14 @@ func (detector *customDetector) matchFilters(
 		}
 
 		if filter.Detection == "datatype" {
-			filterDetections, err := evaluator.TreeDetections(node, "datatype")
+			filterDetections, err := evaluator.ForTree(node, "datatype")
 			if err != nil {
 				return false, nil, err
 			}
 
 			datatypeDetections = append(datatypeDetections, filterDetections...)
 		} else if filter.Detection != "" {
-			hasDetection, err := evaluator.TreeHasDetection(node, filter.Detection)
+			hasDetection, err := evaluator.TreeHas(node, filter.Detection)
 			if err != nil || !hasDetection {
 				return false, nil, err
 			}

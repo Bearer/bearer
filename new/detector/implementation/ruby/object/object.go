@@ -3,16 +3,14 @@ package object
 import (
 	"fmt"
 
-	detectiontypes "github.com/bearer/curio/new/detection/types"
-	"github.com/bearer/curio/new/detector"
+	"github.com/bearer/curio/new/detector/types"
 	"github.com/bearer/curio/new/language/tree"
 	languagetypes "github.com/bearer/curio/new/language/types"
-	treeevaluatortypes "github.com/bearer/curio/new/treeevaluator/types"
 )
 
 type Data struct {
 	Name       string
-	Properties []*detectiontypes.Detection
+	Properties []*types.Detection
 }
 
 type objectDetector struct {
@@ -23,7 +21,7 @@ type objectDetector struct {
 	parentPairQuery *tree.Query
 }
 
-func New(lang languagetypes.Language) (detector.Detector, error) {
+func New(lang languagetypes.Language) (types.Detector, error) {
 	// { first_name: ..., ... }
 	hashPairQuery, err := lang.CompileQuery(`(hash (pair) @pair) @root`)
 	if err != nil {
@@ -54,8 +52,8 @@ func (detector *objectDetector) Name() string {
 
 func (detector *objectDetector) DetectAt(
 	node *tree.Node,
-	evaluator treeevaluatortypes.Evaluator,
-) ([]*detectiontypes.Detection, error) {
+	evaluator types.Evaluator,
+) ([]*types.Detection, error) {
 	detections, err := detector.gatherProperties(node, evaluator)
 	if len(detections) != 0 || err != nil {
 		return detections, err
@@ -71,8 +69,8 @@ func (detector *objectDetector) DetectAt(
 
 func (detector *objectDetector) gatherProperties(
 	node *tree.Node,
-	evaluator treeevaluatortypes.Evaluator,
-) ([]*detectiontypes.Detection, error) {
+	evaluator types.Evaluator,
+) ([]*types.Detection, error) {
 	results, err := detector.hashPairQuery.MatchAt(node)
 	if err != nil {
 		return nil, err
@@ -82,9 +80,9 @@ func (detector *objectDetector) gatherProperties(
 		return nil, nil
 	}
 
-	var properties []*detectiontypes.Detection
+	var properties []*types.Detection
 	for _, result := range results {
-		nodeProperties, err := evaluator.NodeDetections(result["pair"], "property")
+		nodeProperties, err := evaluator.ForNode(result["pair"], "property")
 		if err != nil {
 			return nil, err
 		}
@@ -92,7 +90,7 @@ func (detector *objectDetector) gatherProperties(
 		properties = append(properties, nodeProperties...)
 	}
 
-	return []*detectiontypes.Detection{{
+	return []*types.Detection{{
 		MatchNode: node,
 		Data:      Data{Properties: properties},
 	}}, nil
@@ -100,36 +98,36 @@ func (detector *objectDetector) gatherProperties(
 
 func (detector *objectDetector) nameAssignedObject(
 	node *tree.Node,
-	evaluator treeevaluatortypes.Evaluator,
-) ([]*detectiontypes.Detection, error) {
+	evaluator types.Evaluator,
+) ([]*types.Detection, error) {
 	result, err := detector.assignmentQuery.MatchOnceAt(node)
 	if result == nil || err != nil {
 		return nil, err
 	}
 
-	objects, err := evaluator.NodeDetections(result["right"], "object")
+	objects, err := evaluator.ForNode(result["right"], "object")
 	if err != nil {
 		return nil, err
 	}
 
-	var detections []*detectiontypes.Detection
+	var detections []*types.Detection
 	for _, object := range objects {
 		objectData := object.Data.(Data)
 
 		if objectData.Name == "" {
-			detections = append(detections, &detectiontypes.Detection{
+			detections = append(detections, &types.Detection{
 				MatchNode: node,
 				Data: Data{
 					Name:       result["left"].Content(),
 					Properties: objectData.Properties,
 				},
 			})
-		} else {
-			detections = append(detections, &detectiontypes.Detection{
+		} else { // FIXME: should we remove this case?
+			detections = append(detections, &types.Detection{
 				MatchNode: node,
 				Data: Data{
 					Name: result["left"].Content(),
-					Properties: []*detectiontypes.Detection{{
+					Properties: []*types.Detection{{
 						MatchNode: object.MatchNode,
 						Data: Data{
 							Name: objectData.Name,
@@ -145,23 +143,23 @@ func (detector *objectDetector) nameAssignedObject(
 
 func (detector *objectDetector) nameParentPairObject(
 	node *tree.Node,
-	evaluator treeevaluatortypes.Evaluator,
-) ([]*detectiontypes.Detection, error) {
+	evaluator types.Evaluator,
+) ([]*types.Detection, error) {
 	result, err := detector.parentPairQuery.MatchOnceAt(node)
 	if result == nil || err != nil {
 		return nil, err
 	}
 
-	objects, err := evaluator.NodeDetections(result["value"], "object")
+	objects, err := evaluator.ForNode(result["value"], "object")
 	if err != nil {
 		return nil, err
 	}
 
-	var detections []*detectiontypes.Detection
+	var detections []*types.Detection
 	for _, object := range objects {
 		objectData := object.Data.(Data)
 
-		detections = append(detections, &detectiontypes.Detection{
+		detections = append(detections, &types.Detection{
 			MatchNode: node,
 			Data: Data{
 				Name:       result["key"].Content(),
