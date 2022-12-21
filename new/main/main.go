@@ -52,15 +52,15 @@ func run() error {
 		"ruby_file_detection",
 		custom.Rule{
 			Pattern: `
-				Sentry.init do |$<CFG>|
-					$<CFG>.before_breadcrumb = lambda do |$<BREADCRUMB>, hint|
-						$<BREADCRUMB>.message = $<MESSAGE:_>
+				Sentry.init do |$<CONFIG:identifier>|
+					$<CONFIG>.before_breadcrumb = lambda do |$<BREADCRUMB:identifier>, hint|
+						$<BREADCRUMB>.message = $<MESSAGE>
 					end
 				end`,
 			Filters: []custom.Filter{
 				{
-					Variable:         "MESSAGE",
-					ContainsDataType: true,
+					Variable:  "MESSAGE",
+					Detection: "datatype",
 				},
 			},
 		},

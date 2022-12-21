@@ -11,14 +11,14 @@ import (
 	"golang.org/x/exp/slices"
 )
 
-// type Data struct {
-// 	Name string
-// }
+type Data struct {
+	Datatypes []*detectiontypes.Detection
+}
 
 type Filter struct {
-	Variable         string
-	Values           []string
-	ContainsDataType bool
+	Variable  string
+	Values    []string
+	Detection string
 }
 
 type Rule struct {
@@ -63,7 +63,7 @@ func (detector *customDetector) DetectAt(
 	var detections []*detectiontypes.Detection
 
 	for _, result := range results {
-		filtersMatch, err := detector.filtersMatch(result, evaluator)
+		filtersMatch, datatypeDetections, err := detector.matchFilters(result, evaluator)
 		if err != nil {
 			return nil, err
 		}
@@ -74,37 +74,48 @@ func (detector *customDetector) DetectAt(
 
 		detections = append(detections, &detectiontypes.Detection{
 			MatchNode: node,
-			// TODO: include data types
+			Data: Data{
+				Datatypes: datatypeDetections,
+			},
 		})
 	}
 
 	return detections, nil
 }
 
-func (detector *customDetector) filtersMatch(
+func (detector *customDetector) matchFilters(
 	result tree.QueryResult,
 	evaluator treeevaluatortypes.Evaluator,
-) (bool, error) {
+) (bool, []*detectiontypes.Detection, error) {
+	var datatypeDetections []*detectiontypes.Detection
+
 	for _, filter := range detector.filters {
 		node, ok := result[filter.Variable]
 		// shouldn't happen if filters are validated against pattern
 		if !ok {
-			return false, nil
+			return false, nil, nil
 		}
 
 		if len(filter.Values) != 0 && !slices.Contains(filter.Values, node.Content()) {
-			return false, nil
+			return false, nil, nil
 		}
 
-		if filter.ContainsDataType {
-			hasDataType, err := evaluator.TreeHasDetection(node, "datatype")
-			if err != nil || !hasDataType {
-				return false, err
+		if filter.Detection == "datatype" {
+			filterDetections, err := evaluator.TreeDetections(node, "datatype")
+			if err != nil {
+				return false, nil, err
+			}
+
+			datatypeDetections = append(datatypeDetections, filterDetections...)
+		} else if filter.Detection != "" {
+			hasDetection, err := evaluator.TreeHasDetection(node, filter.Detection)
+			if err != nil || !hasDetection {
+				return false, nil, err
 			}
 		}
 	}
 
-	return true, nil
+	return true, datatypeDetections, nil
 }
 
 func (detector *customDetector) Close() {

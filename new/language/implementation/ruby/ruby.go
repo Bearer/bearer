@@ -66,7 +66,7 @@ func extractPatternVariables(input string) (string, []patternquerybuilder.Variab
 	replaced, err := regex.ReplaceAllWithSubmatches(patternQueryVariableRegex, input, func(submatches []string) (string, error) {
 		nodeType := submatches[typeIndex]
 		if nodeType == "" {
-			nodeType = "identifier"
+			nodeType = "_"
 		}
 
 		if !slices.Contains(allowedPatternQueryTypes, nodeType) {

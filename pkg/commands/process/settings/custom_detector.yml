@@ -44,13 +44,21 @@ ruby_http_get_detection:
   languages:
     - ruby
   patterns:
-    - |
-      URI.encode_www_form(<$DATA_TYPE>)
-    - |
-      URI(<$DATA_TYPE>)
     - pattern: |
-        $CLIENT.get(<$DATA_TYPE>)
+        URI.encode_www_form($<EXPRESSION>)
+    - filters:
+        - variable: EXPRESSION
+          detection: datatype
+    - pattern: |
+        URI($<URL>)
+    - filters:
+        - variable: URL
+          detection: datatype
+    - pattern: |
+        $<CLIENT:constant>.get($<URL>)
       filters:
+        - variable: URL
+          detection: datatype
         - variable: CLIENT
           values:
             - Curl
@@ -68,12 +76,14 @@ ruby_http_post_detection:
     - ruby
   patterns:
     - |
-      URI.encode_www_form(<$DATA_TYPE>)
+      URI.encode_www_form($<URL>)
     - |
-      Net::HTTP.post_form(<$DATA_TYPE>)
+      Net::HTTP.post_form($<URL>)
     - pattern: |
-        $CLIENT.post(<$DATA_TYPE>)
+        $<CLIENT:constant>.post($<URL>)
       filters:
+        - variable: URL
+          detection: datatype
         - variable: CLIENT
           values:
             - Curl
@@ -91,10 +101,12 @@ ruby_http_get_insecure:
     - ruby
   patterns:
     - |
-      URI(<$INSECURE_URL>)
+      URI($<URL>)
     - pattern: |
-        $CLIENT.get(<$INSECURE_URL>)
+        $<CLIENT:constant>.get($<URL>)
       filters:
+        - variable: URL
+          detection: insecure_url
         - variable: CLIENT
           values:
             - Curl
@@ -105,17 +117,18 @@ ruby_http_get_insecure:
             - HTTPX
             - RestClient
             - Typhoeus
-  detect_presence: true
 ruby_http_post_insecure:
   type: "risk"
   languages:
     - ruby
   patterns:
     - |
-      Net::HTTP.post_form(<$INSECURE_URL>)
+      Net::HTTP.post_form($<URL>)
     - pattern: |
-        $CLIENT.post(<$INSECURE_URL>)
+        $<CLIENT:constant>.post($<URL>)
       filters:
+        - variable: URL
+          detection: insecure_url
         - variable: CLIENT
           values:
             - Curl
@@ -126,60 +139,82 @@ ruby_http_post_insecure:
             - HTTPX
             - RestClient
             - Typhoeus
-  detect_presence: true
 ruby_file_detection:
   type: "risk"
   languages:
     - ruby
   patterns:
-    - |
-      CSV.generate { <$DATA_TYPE> }
-    - |
-      CSV.generate do
-        <$DATA_TYPE>
-      end
     - pattern: |
-        $LIBRARY.open do
-          <$DATA_TYPE>
+        CSV.generate { $<EXPRESSION> }
+      filters:
+        - variable: EXPRESSION
+          detection: datatype
+    - pattern: |
+        CSV.generate do
+          $<EXPRESSION>
+        end
+      filters:
+        - variable: EXPRESSION
+          detection: datatype
+    - pattern: |
+        $<LIBRARY:constant>.open do
+          $<EXPRESSION>
         end
       filters:
         - variable: LIBRARY
           values:
             - CSV
             - File
+        - variable: EXPRESSION
+          detection: datatype
   param_parenting: true
   metavars: {}
   stored: false
 detect_ruby_logger:
   type: "risk"
   patterns:
-    - |
-      logger.info(<$ARGUMENT>)
-    - |
-      Rails.logger.info(<$ARGUMENT>)
+    - pattern: |
+        logger.info($<EXPRESSION>)
+      filters:
+        - variable: EXPRESSION
+          detection: datatype
+    - pattern: |
+        Rails.logger.info($<EXPRESSION>)
+      filters:
+        - variable: EXPRESSION
+          detection: datatype
   languages:
     - ruby
 detect_rails_session:
   type: "risk"
   patterns:
-    - |
-      session[...] = $ANYTHING
+    - pattern: |
+        session[] = $<EXPRESSION>
+      filters:
+        - variable: EXPRESSION
+          detection: datatype
   languages:
     - ruby
 detect_rails_jwt:
   type: "risk"
   patterns:
-    - |
-      JWT.encode(<$ARGUMENT>)
+    - pattern: |
+        JWT.encode($<EXPRESSION>)
+      filters:
+        - variable: EXPRESSION
+          detection: datatype
   languages:
     - ruby
 detect_rails_cookies:
   type: "risk"
   patterns:
-    - |
-      cookies[...] = $ANYTHING
     - pattern: |
-        cookies.$METHOD_CHAIN[...] = $ANYTHING
+        cookies[] = $<EXPRESSION>
+      filters:
+        - variable: EXPRESSION
+          detection: datatype
+    - pattern: |
+        cookies.$<METHOD_CHAIN:identifier|call>[] = $<EXPRESSION>
       filters:
         - variable: METHOD_CHAIN
           values:
@@ -198,26 +233,30 @@ detect_rails_cookies:
             - signed.permanent
             - signed.permanent.encrypted
             - signed.encrypted.permanent
+        - variable: EXPRESSION
+          detection: datatype
   languages:
     - ruby
 ssl_certificate_verification_disabled:
   type: "risk"
   patterns:
     - |
-      Net::HTTP.start($_, $_, $_, :verify_mode => OpenSSL::SSL::VERIFY_NONE) do
+      Net::HTTP.start($<_>, $<_>, $<_>, :verify_mode => OpenSSL::SSL::VERIFY_NONE) do
       end
     - |
-      $_.verify_mode = OpenSSL::SSL::VERIFY_NONE
+      $<_>.verify_mode = OpenSSL::SSL::VERIFY_NONE
   languages:
     - ruby
-  detect_presence: true
 detect_encrypted_ruby_class_properties:
   type: "verifier"
   patterns:
-    - |
-      class $CLASS_NAME < ApplicationRecord
-        encrypts <$ARGUMENT>
-      end
+    - pattern: |
+        class $<CLASS_NAME:constant> < ApplicationRecord
+          encrypts $<ATTRIBUTE>
+        end
+      filters: # TODO: what to do with class name var?
+        - variable: ATTRIBUTE
+          detection: datatype
   param_parenting: true
   root_singularize: true
   root_lowercase: true
@@ -257,7 +296,6 @@ detect_rails_insecure_smtp:
       end
   languages:
     - ruby
-  detect_presence: true
   omit_parent: true
 detect_rails_insecure_communication:
   type: "risk"
@@ -268,7 +306,6 @@ detect_rails_insecure_communication:
       end
   languages:
     - ruby
-  detect_presence: true
   omit_parent: true
 detect_rails_insecure_ftp:
   type: "risk"
@@ -279,32 +316,43 @@ detect_rails_insecure_ftp:
       Net::FTP.open()
   languages:
     - ruby
-  detect_presence: true
 detect_rails_insecure_ftp_data:
   type: "risk"
   patterns:
-    - |
-      Net::FTP.open do
-        $ANYTHING
-      end
+    - pattern: |
+        Net::FTP.open do
+          $<EXPRESSION>
+        end
+      filters:
+        - variable: EXPRESSION
+          detection: datatype
   languages:
     - ruby
 detect_ruby_third_party_data_send:
   type: "risk"
   patterns:
-    - |
-      Sentry::Breadcrumb.new(<$ARGUMENT>)
-    - |
-      Sentry.init do |config|
-        config.before_breadcrumb = lambda do |breadcrumb, hint|
-          breadcrumb.message = $ANYTHING
-          breadcrumb
+    - pattern: |
+        Sentry::Breadcrumb.new($<EXPRESSION>)
+      filters:
+        - variable: EXPRESSION
+          detection: datatype
+    - pattern: |
+        Sentry.init do |$<CONFIG:identifier>|
+          $<CONFIG>.before_breadcrumb = lambda do |$<BREADCRUMB:identifier>, hint|
+            $<BREADCRUMB>.message = $<EXPRESSION>
+          end
         end
-      end
-    - |
-      Sentry.set_user(<$ARGUMENT>)
+      filters:
+        - variable: EXPRESSION
+          detection: datatype
+    - pattern: |
+        Sentry.set_user($<EXPRESSION>)
+      filters:
+        - variable: EXPRESSION
+          detection: datatype
   languages:
     - ruby
+# FIXME: Not converted past this point
 detect_ruby_weak_encryption:
   type: "risk"
   patterns:
