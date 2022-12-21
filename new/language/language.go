@@ -1,51 +1,17 @@
 package language
 
 import (
-	sitter "github.com/smacker/go-tree-sitter"
+	"fmt"
 
-	"github.com/bearer/curio/new/language/patternquery"
-	patternquerybuilder "github.com/bearer/curio/new/language/patternquery/builder"
-	"github.com/bearer/curio/new/language/tree"
+	"github.com/bearer/curio/new/language/implementation/ruby"
 	"github.com/bearer/curio/new/language/types"
 )
 
-type Base struct {
-	sitterLanguage          *sitter.Language
-	analyzeFlow             func(rootNode *tree.Node)
-	extractPatternVariables func(input string) (string, []patternquerybuilder.Variable, error)
-}
-
-func New(
-	sitterLanguage *sitter.Language,
-	analyzeFlow func(rootNode *tree.Node),
-	extractPatternVariables func(input string) (string, []patternquerybuilder.Variable, error),
-) *Base {
-	return &Base{
-		sitterLanguage:          sitterLanguage,
-		analyzeFlow:             analyzeFlow,
-		extractPatternVariables: extractPatternVariables,
+func Get(name string) (types.Language, error) {
+	switch name {
+	case "ruby":
+		return ruby.Get(), nil
+	default:
+		return nil, fmt.Errorf("unsupported language '%s'", name)
 	}
-}
-
-func (lang *Base) Parse(input string) (*tree.Tree, error) {
-	tree, err := tree.Parse(lang.sitterLanguage, input)
-	if err != nil {
-		return nil, err
-	}
-
-	lang.analyzeFlow(tree.RootNode())
-	return tree, nil
-}
-
-func (lang *Base) CompileQuery(input string) (*tree.Query, error) {
-	return tree.CompileQuery(lang.sitterLanguage, input)
-}
-
-func (lang *Base) CompilePatternQuery(input string) (types.PatternQuery, error) {
-	inputWithoutVariables, params, err := lang.extractPatternVariables(input)
-	if err != nil {
-		return nil, err
-	}
-
-	return patternquery.Compile(lang, inputWithoutVariables, params)
 }

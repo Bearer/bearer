@@ -213,7 +213,7 @@ detect_rails_cookies:
       filters:
         - variable: EXPRESSION
           detection: datatype
-    - pattern: |
+    - pattern: | # FIXME: either implement alternation, or have our own types that map to mulitple tree-sitter types
         cookies.$<METHOD_CHAIN:identifier|call>[] = $<EXPRESSION>
       filters:
         - variable: METHOD_CHAIN
@@ -254,7 +254,7 @@ detect_encrypted_ruby_class_properties:
         class $<CLASS_NAME:constant> < ApplicationRecord
           encrypts $<ATTRIBUTE>
         end
-      filters: # TODO: what to do with class name var?
+      filters: # FIXME: what to do with class name var?
         - variable: ATTRIBUTE
           detection: datatype
   param_parenting: true

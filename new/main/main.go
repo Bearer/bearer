@@ -13,7 +13,7 @@ import (
 	detectiontypes "github.com/bearer/curio/new/detection/types"
 	"github.com/bearer/curio/new/detector"
 	"github.com/bearer/curio/new/detectorexecutor"
-	getlanguage "github.com/bearer/curio/new/language/get"
+	"github.com/bearer/curio/new/language"
 	"github.com/bearer/curio/new/treeevaluator"
 )
 
@@ -24,7 +24,7 @@ func main() {
 }
 
 func run() error {
-	lang, err := getlanguage.Get("ruby")
+	lang, err := language.Get("ruby")
 	if err != nil {
 		return fmt.Errorf("failed to lookup language: %s", err)
 	}
