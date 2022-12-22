@@ -7,4 +7,5 @@ release:
   extra_files:
     - glob: ./curio-build/**/*
     - glob: ./curio-build/checksums.txt
+
   name_template: "Release {{.Tag}}"
