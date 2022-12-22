@@ -207,7 +207,6 @@ func DefaultCustomDetector() map[string]Rule {
 		}
 
 		rules[ruleName] = rule
-
 	}
 
 	return rules

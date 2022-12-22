@@ -2,10 +2,14 @@ package artifact
 
 import (
 	"context"
+	"crypto/md5"
+	"encoding/hex"
+	"encoding/json"
 	"errors"
 	"fmt"
 	"os"
 	"os/exec"
+	"sort"
 	"strings"
 
 	"github.com/google/uuid"
@@ -59,15 +63,14 @@ func NewRunner(ctx context.Context, scanSettings settings.Config) Runner {
 	r := &runner{}
 
 	r.balancer = balancer.New(scanSettings)
-	cmd := exec.Command("git", "-C", scanSettings.Scan.Target, "rev-parse", "HEAD")
-	sha, err := cmd.Output()
 
+	scanID, err := buildScanID(scanSettings)
 	if err != nil {
-		log.Debug().Msgf("error getting git sha %s", err.Error())
-		sha = []byte(uuid.NewString())
+		log.Error().Msgf("failed to build scan id for caching %e", err)
 	}
 
-	path := os.TempDir() + "/" + strings.TrimSuffix(string(sha), "\n") + "-" + build.CommitSHA + ".jsonl"
+	path := os.TempDir() + "/curio" + scanID
+
 	r.reportPath = path
 
 	if _, err := os.Stat(path); err == nil {
@@ -84,16 +87,57 @@ func NewRunner(ctx context.Context, scanSettings settings.Config) Runner {
 		}
 	}
 
-	log.Debug().Msgf("creating report %s", path)
 	pathCreated, err := os.Create(path)
 
 	if err != nil {
 		log.Error().Msgf("failed to create path %s, %s, %#v", path, err.Error(), pathCreated)
 	}
 
-	log.Debug().Msgf("successfully created reportPath %s", path)
-
 	return r
+}
+
+// buildScanHash builds a hash based on project and settings that latter on gets used for caching scan detections
+func buildScanID(scanSettings settings.Config) (string, error) {
+	// we want head as project may contain new changes
+	cmd := exec.Command("git", "-C", scanSettings.Scan.Target, "rev-parse", "HEAD")
+	sha, err := cmd.Output()
+
+	if err != nil {
+		log.Debug().Msgf("error getting git sha %s", err.Error())
+		sha = []byte(uuid.NewString())
+	}
+
+	// we want hash of all active custom detector rules and their content
+	detectorsHashBuilder := md5.New()
+	var customDetectorsRuleNames []string
+	for key := range scanSettings.CustomDetector {
+		customDetectorsRuleNames = append(customDetectorsRuleNames, key)
+	}
+	sort.Strings(customDetectorsRuleNames)
+
+	for _, ruleName := range customDetectorsRuleNames {
+		_, err := detectorsHashBuilder.Write([]byte(ruleName))
+		if err != nil {
+			return "", err
+		}
+		detectorContent, err := json.Marshal(scanSettings.CustomDetector[ruleName])
+		if err != nil {
+			return "", err
+		}
+		_, err = detectorsHashBuilder.Write(detectorContent)
+		if err != nil {
+			return "", err
+		}
+	}
+
+	configHash := hex.EncodeToString(detectorsHashBuilder.Sum(nil)[:])
+
+	// we want curio sha as it might change detections
+	curioSHA := build.CommitSHA
+
+	scanID := strings.TrimSuffix(string(sha), "\n") + "-" + curioSHA + "-" + configHash + ".jsonl"
+
+	return scanID, nil
 }
 
 // Close closes everything
