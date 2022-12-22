@@ -1,0 +1,89 @@
+project_name: curio
+
+before:
+  hooks:
+    - go mod tidy
+    - go generate ./...
+
+builds:
+  - id: linux
+    main: ./cmd/curio
+    binary: curio
+    env:
+      - CGO_ENABLED=1
+    goos:
+      - linux
+    goarch:
+      - 386
+      - amd64
+      # - arm64
+    # overrides:
+    #   - goos: linux
+    #     goarch: arm64
+    #     env:
+    #       - CC=aarch64-linux-gnu-gcc
+    #   - goos: linux
+    #     goarch: 386
+    #     env:
+    #       - CC=gcc -m32
+    #   - goos: linux
+    #     goarch: amd64
+    #     env:
+    #       - CC=gcc
+    ldflags:
+      - -s -w
+      - -extldflags "-static"
+      - -X "github.com/bearer/curio/cmd/curio/build.Version={{.Version}}"
+      - -X "github.com/bearer/curio/cmd/curio/build.CommitSHA={{.Commit}}"
+
+release:
+  ids:
+    - none
+
+dockers:
+  - image_templates:
+      - "docker.io/bearer/curio:{{ .Tag }}-amd64"
+      - "docker.io/bearer/curio:{{ .Version }}-amd64"
+      - "docker.io/bearer/curio:latest-amd64"
+      - "ghcr.io/bearer/curio:{{ .Tag }}-amd64"
+      - "ghcr.io/bearer/curio:{{ .Version }}-amd64"
+      - "ghcr.io/bearer/curio:latest-amd64"
+    use: buildx
+    goos: linux
+    goarch: amd64
+    ids:
+      - linux
+    build_flag_templates:
+      - "--label=org.opencontainers.image.title={{ .ProjectName }}"
+      - "--label=org.opencontainers.image.description=A data-first security scanner that finds risks and vulnerabilities in your code so you can protect sensitive data (PHI, PD, PII)."
+      - "--label=org.opencontainers.image.vendor=Bearer"
+      - "--label=org.opencontainers.image.version={{ .Version }}"
+      - "--label=org.opencontainers.image.created={{ .Date }}"
+      - "--label=org.opencontainers.image.source=https://github.com/Bearer/curio"
+      - "--label=org.opencontainers.image.revision={{ .FullCommit }}"
+      - "--label=org.opencontainers.image.url=https://curio.sh"
+      - "--label=org.opencontainers.image.documentation=https://curio.sh"
+      - "--platform=linux/amd64"
+  # - image_templates:
+  #     - "docker.io/bearer/curio:{{ .Tag }}-arm64"
+  #     - "docker.io/bearer/curio:{{ .Version }}-arm64"
+  #     - "docker.io/bearer/curio:latest-arm64"
+  #     - "ghcr.io/bearer/curio:{{ .Tag }}-arm64"
+  #     - "ghcr.io/bearer/curio:{{ .Version }}-arm64"
+  #     - "ghcr.io/bearer/curio:latest-arm64"
+  #   use: buildx
+  #   goos: linux
+  #   goarch: arm64
+  #   ids:
+  #     - curio
+  #   build_flag_templates:
+  #     - "--label=org.opencontainers.image.title={{ .ProjectName }}"
+  #     - "--label=org.opencontainers.image.description=A data-first security scanner that finds risks and vulnerabilities in your code so you can protect sensitive data (PHI, PD, PII)."
+  #     - "--label=org.opencontainers.image.vendor=Bearer"
+  #     - "--label=org.opencontainers.image.version={{ .Version }}"
+  #     - "--label=org.opencontainers.image.created={{ .Date }}"
+  #     - "--label=org.opencontainers.image.source=https://github.com/Bearer/curio"
+  #     - "--label=org.opencontainers.image.revision={{ .FullCommit }}"
+  #     - "--label=org.opencontainers.image.url=https://curio.sh"
+  #     - "--label=org.opencontainers.image.documentation=https://curio.sh"
+  #     - "--platform=linux/arm64"
