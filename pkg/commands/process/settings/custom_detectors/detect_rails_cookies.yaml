@@ -1,0 +1,26 @@
+type: "risk"
+patterns:
+  - |
+    cookies[...] = $ANYTHING
+  - pattern: |
+      cookies.$METHOD_CHAIN[...] = $ANYTHING
+    filters:
+      - variable: METHOD_CHAIN
+        values:
+          - permanent
+          - encrypted
+          - signed
+          - permanent.encrypted
+          - permanent.signed
+          - permanent.encrypted.signed
+          - permanent.signed.encrypted
+          - encrypted.permanent
+          - encrypted.signed
+          - encrypted.permanent.signed
+          - encrypted.signed.permanent
+          - signed.encrypted
+          - signed.permanent
+          - signed.permanent.encrypted
+          - signed.encrypted.permanent
+languages:
+  - ruby

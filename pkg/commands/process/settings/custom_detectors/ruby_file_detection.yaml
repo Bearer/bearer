@@ -1,0 +1,22 @@
+type: "risk"
+languages:
+  - ruby
+patterns:
+  - |
+    CSV.generate { <$DATA_TYPE> }
+  - |
+    CSV.generate do
+      <$DATA_TYPE>
+    end
+  - pattern: |
+      $LIBRARY.open do
+        <$DATA_TYPE>
+      end
+    filters:
+      - variable: LIBRARY
+        values:
+          - CSV
+          - File
+param_parenting: true
+metavars: {}
+stored: false
