@@ -40,7 +40,7 @@ func New(evaluationContext *ffi.EvaluationContext, detectorType string) (detecto
 	}
 
 	regoInstance := rego.New(
-		rego.Query("detections = data.curio.detectors."+detectorType+".detections_at_input"),
+		rego.Query("detections = data.curio.detectors."+detectorType+".detections_at"),
 		rego.Module(filename, string(detectorContent)),
 		ffi.EvaluatorDetectionsAt(evaluationContext),
 		ffi.NodeContent(evaluationContext),

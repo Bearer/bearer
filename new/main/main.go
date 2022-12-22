@@ -35,11 +35,11 @@ func run() error {
 	}
 	defer propertiesDetector.Close()
 
-	// objectsDetector, err := rego.New(evaluationContext, "rego_objects")
-	// if err != nil {
-	// 	return fmt.Errorf("failed to create objects detector: %s", err)
-	// }
-	// defer objectsDetector.Close()
+	objectsDetector, err := rego.New(evaluationContext, "rego_objects")
+	if err != nil {
+		return fmt.Errorf("failed to create objects detector: %s", err)
+	}
+	defer objectsDetector.Close()
 
 	// datatypesDetector, err := datatypes.New(lang)
 	// if err != nil {
@@ -49,7 +49,7 @@ func run() error {
 
 	executor, err := detectorexecutor.New([]detector.Detector{
 		propertiesDetector,
-		// objectsDetector,
+		objectsDetector,
 		// datatypesDetector,
 	})
 	if err != nil {
@@ -82,7 +82,7 @@ end
 	evaluator := treeevaluator.New(lang, executor, tree)
 	evaluationContext.NewFile(evaluator) // FIXME
 
-	detections, err := evaluator.TreeDetections(tree.RootNode(), "rego_properties")
+	detections, err := evaluator.TreeDetections(tree.RootNode(), "rego_objects")
 	if err != nil {
 		return fmt.Errorf("failed to detect data types: %s", err)
 	}
