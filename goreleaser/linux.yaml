@@ -10,13 +10,22 @@ builds:
     main: ./cmd/curio
     binary: curio
     env:
-      - CGO_ENABLED=0
+      - CGO_ENABLED=1
     goos:
       - linux
     goarch:
       - 386
       - amd64
       - arm64
+    overrides:
+      - goos: linux
+        goarch: arm64
+        env:
+          - CC=aarch64-linux-gnu-gec
+      - goos: linux
+        goarch: amd64
+        env:
+          - CC=gcc
     ldflags:
       - -s -w
       - -extldflags "-static"
