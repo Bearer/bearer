@@ -26,8 +26,8 @@ jobs:
       - name: Install dependencies
         run: sudo apt-get update && sudo apt-get install -y gcc-multilib g++-multilib
 
-      - name: Install cross-compiler for linux/arm64
-        run: sudo apt-get -y install gcc-aarch64-linux-gnu
+      # - name: Install cross-compiler for linux/arm64
+      #   run: sudo apt-get -y install gcc-aarch64-linux-gnu
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v1
