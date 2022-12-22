@@ -57,7 +57,7 @@ jobs:
         with:
           distribution: goreleaser
           version: latest
-          args: release -f ./goreleaser/linux.yaml
+          args: release -f ./goreleaser/linux-docker.yaml
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -85,16 +85,9 @@ jobs:
       - name: Publish Homebrew
         uses: goreleaser/goreleaser-action@v4
         with:
-          args: release --config ./goreleaser/darwin.yaml
+          args: release --config ./goreleaser/darwin-brew.yaml
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           HOMEBREW_TAP_GITHUB_TOKEN: ${{ secrets.BEARER_GITHUB_TOKEN }}
           AC_USERNAME: ${{ secrets.AC_USERNAME }}
           AC_PASSWORD: ${{ secrets.AC_PASSWORD }}
-      - name: Publish Docker
-        uses: goreleaser/goreleaser-action@v4
-        with:
-          args: release --config ./goreleaser/linux.yaml
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          HOMEBREW_TAP_GITHUB_TOKEN: ${{ secrets.BEARER_GITHUB_TOKEN }}
