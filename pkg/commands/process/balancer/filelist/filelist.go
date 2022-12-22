@@ -10,6 +10,7 @@ import (
 	"github.com/bearer/curio/pkg/commands/process/balancer/timeout"
 	"github.com/bearer/curio/pkg/commands/process/settings"
 	"github.com/bearer/curio/pkg/commands/process/worker/work"
+	"github.com/bearer/curio/pkg/util/gitutil"
 	"github.com/rs/zerolog/log"
 )
 
@@ -32,7 +33,59 @@ func Discover(projectPath string, config settings.Config) ([]work.File, error) {
 
 	ignore := fileignore.New(projectPath, config)
 
-	err := filepath.WalkDir(projectPath, func(filePath string, d fs.DirEntry, err error) error {
+	pathsFromGit, err := gitutil.DiscoverFromGit(projectPath)
+	if err != nil {
+		log.Error().Msg("Git discovery failed")
+		return nil, err
+	}
+
+	if len(pathsFromGit) != 0 {
+		log.Debug().Msg("Files found from Git")
+
+		for _, pathFromGit := range pathsFromGit {
+			fullPath := projectPath + "/" + pathFromGit
+
+			// Check if the file path itself should be ignored
+			fileInfo, err := os.Stat(fullPath)
+			if err != nil {
+				return nil, err
+			}
+			fileEntry := fs.FileInfoToDirEntry(fileInfo)
+			if ignore.Ignore(projectPath, pathFromGit, fileEntry) {
+				log.Debug().Msgf("Skipping file: %s", pathFromGit)
+				continue
+			}
+
+			// Check if the parent directory should be ignored
+			dirFullPath := filepath.Dir(fullPath)
+			dirInfo, err := os.Stat(dirFullPath)
+			if err != nil {
+				return nil, err
+			}
+			dirEntry := fs.FileInfoToDirEntry(dirInfo)
+			dirRelativePath := filepath.Dir(pathFromGit)
+			if ignore.Ignore(projectPath, dirRelativePath, dirEntry) {
+				log.Debug().Msgf("Skipping parent directory: %s", dirRelativePath)
+				continue
+			}
+
+			relativePath := strings.TrimPrefix(pathFromGit, projectPath)
+			relativePath = "/" + relativePath
+
+			file := work.File{
+				FilePath: relativePath,
+				Timeout:  timeout.Assign(fileEntry, config),
+			}
+
+			files = append(files, file)
+		}
+
+		return files, nil
+	}
+
+	log.Debug().Msg("No files found from Git")
+
+	err = filepath.WalkDir(projectPath, func(filePath string, d fs.DirEntry, err error) error {
 		if err != nil {
 			return err
 		}
