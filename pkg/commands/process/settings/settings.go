@@ -5,7 +5,6 @@ import (
 	_ "embed"
 
 	"github.com/rs/zerolog/log"
-	"github.com/spf13/viper"
 	"gopkg.in/yaml.v2"
 
 	"github.com/bearer/curio/pkg/flag"
@@ -112,24 +111,20 @@ var CustomDetectorKey string = "scan.custom_detector"
 var PoliciesKey string = "scan.policies"
 
 func FromOptions(opts flag.Options) (Config, error) {
-	var rules map[string]Rule
-	if viper.IsSet(CustomDetectorKey) {
-		err := viper.UnmarshalKey(CustomDetectorKey, &rules)
-		if err != nil {
-			return Config{}, err
-		}
-	} else {
-		rules = DefaultCustomDetector()
-	}
+	detectors := DefaultCustomDetector()
 
-	var policies map[string]*Policy
-	if viper.IsSet(PoliciesKey) {
-		err := viper.UnmarshalKey(PoliciesKey, &policies)
-		if err != nil {
-			return Config{}, err
+	policies := DefaultPolicies()
+
+	for key := range detectors {
+		if len(opts.DetectorOptions.OnlyDetector) > 0 && !opts.DetectorOptions.OnlyDetector[key] {
+			delete(detectors, key)
+			continue
 		}
-	} else {
-		policies = DefaultPolicies()
+
+		if opts.DetectorOptions.SkipDetector[key] {
+			delete(detectors, key)
+			continue
+		}
 	}
 
 	for key := range policies {
@@ -158,7 +153,7 @@ func FromOptions(opts flag.Options) (Config, error) {
 
 	config := Config{
 		Worker:         opts.WorkerOptions,
-		CustomDetector: rules,
+		CustomDetector: detectors,
 		Scan:           opts.ScanOptions,
 		Report:         opts.ReportOptions,
 		Policies:       policies,
