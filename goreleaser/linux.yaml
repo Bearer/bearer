@@ -23,6 +23,10 @@ builds:
         env:
           - CC=aarch64-linux-gnu-gcc
       - goos: linux
+        goarch: 386
+        env:
+          - CC=gcc
+      - goos: linux
         goarch: amd64
         env:
           - CC=gcc
