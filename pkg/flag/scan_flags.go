@@ -64,6 +64,18 @@ var (
 		Value:      false,
 		Usage:      "Disable the cache and runs the detections again",
 	}
+	ExternalDetectorDirFlag = Flag{
+		Name:       "external-detector-dir",
+		ConfigName: "scan.external-detector-dir",
+		Value:      []string{},
+		Usage:      "Specify directories paths that contain .yaml files with external custom detectors configuration",
+	}
+	ExternalPolicyDirFlag = Flag{
+		Name:       "external-policy-dir",
+		ConfigName: "scan.external-policy-dir",
+		Value:      []string{},
+		Usage:      "Specify directories paths that contain .rego files with external policies configuration",
+	}
 )
 
 type ScanFlagGroup struct {
@@ -75,6 +87,8 @@ type ScanFlagGroup struct {
 	ContextFlag                 *Flag
 	QuietFlag                   *Flag
 	ForceFlag                   *Flag
+	ExternalDetectorDirFlag     *Flag
+	ExternalPolicyDirFlag       *Flag
 }
 
 type ScanOptions struct {
@@ -87,6 +101,8 @@ type ScanOptions struct {
 	Context                 Context       `mapstructure:"context" json:"context" yaml:"context"`
 	Quiet                   bool          `mapstructure:"quiet" json:"quiet" yaml:"quiet"`
 	Force                   bool          `mapstructure:"force" json:"force" yaml:"force"`
+	ExternalDetectorDir     []string      `mapstructure:"external-detector-dir" json:"external-detector-dir" yaml:"external-detector-dir"`
+	ExternalPolicyDir       []string      `mapstructure:"external-policy-dir" json:"external-policy-dir" yaml:"external-policy-dir"`
 }
 
 func NewScanFlagGroup() *ScanFlagGroup {
@@ -99,6 +115,8 @@ func NewScanFlagGroup() *ScanFlagGroup {
 		ContextFlag:                 &ContextFlag,
 		QuietFlag:                   &QuietFlag,
 		ForceFlag:                   &ForceFlag,
+		ExternalDetectorDirFlag:     &ExternalDetectorDirFlag,
+		ExternalPolicyDirFlag:       &ExternalPolicyDirFlag,
 	}
 }
 
@@ -116,6 +134,8 @@ func (f *ScanFlagGroup) Flags() []*Flag {
 		f.ContextFlag,
 		f.QuietFlag,
 		f.ForceFlag,
+		f.ExternalDetectorDirFlag,
+		f.ExternalPolicyDirFlag,
 	}
 }
 
@@ -142,6 +162,8 @@ func (f *ScanFlagGroup) ToOptions(args []string) (ScanOptions, error) {
 		Quiet:                   getBool(f.QuietFlag),
 		Force:                   getBool(f.ForceFlag),
 		Target:                  target,
+		ExternalDetectorDir:     getStringSlice(f.ExternalDetectorDirFlag),
+		ExternalPolicyDir:       getStringSlice(f.ExternalPolicyDirFlag),
 	}, nil
 }
 
