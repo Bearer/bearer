@@ -25,7 +25,7 @@ builds:
       - goos: linux
         goarch: 386
         env:
-          - CC=gcc
+          - CC=gcc -m32
       - goos: linux
         goarch: amd64
         env:
