@@ -2,7 +2,8 @@ package settings
 
 import (
 	"embed"
-	_ "embed"
+	"path/filepath"
+	"strings"
 
 	"github.com/rs/zerolog/log"
 	"gopkg.in/yaml.v2"
@@ -95,11 +96,11 @@ type MetaVar struct {
 	Regex  string `mapstructure:"regex" json:"regex" yaml:"regex"`
 }
 
-//go:embed custom_detector.yml
-var customDetector []byte
-
 //go:embed policies.yml
 var defaultPolicies []byte
+
+//go:embed custom_detectors/*
+var customDetectorFS embed.FS
 
 //go:embed policies/*
 var policiesFs embed.FS
@@ -176,11 +177,37 @@ func (rulePattern *RulePattern) UnmarshalYAML(unmarshal func(interface{}) error)
 }
 
 func DefaultCustomDetector() map[string]Rule {
-	var rules map[string]Rule
+	customDetectorsDir := "custom_detectors"
+	rules := make(map[string]Rule)
 
-	err := yaml.Unmarshal(customDetector, &rules)
+	dirEntries, err := customDetectorFS.ReadDir(customDetectorsDir)
 	if err != nil {
-		log.Fatal().Msgf("failed to unmarshal database file %e", err)
+		log.Fatal().Msgf("failed to read custom detectors dir %e", err)
+	}
+
+	for _, entry := range dirEntries {
+		fileName := entry.Name()
+
+		ext := filepath.Ext(fileName)
+		ruleName := strings.TrimSuffix(fileName, ext)
+
+		if ext != ".yaml" && ext != ".yml" {
+			continue
+		}
+
+		fileContent, err := customDetectorFS.ReadFile(customDetectorsDir + "/" + fileName)
+		if err != nil {
+			log.Fatal().Msgf("failed to read custom detector file %e", err)
+		}
+
+		var rule Rule
+		err = yaml.Unmarshal(fileContent, &rule)
+		if err != nil {
+			log.Fatal().Msgf("failed to unmarshal database file %e", err)
+		}
+
+		rules[ruleName] = rule
+
 	}
 
 	return rules
