@@ -47,7 +47,6 @@ func DiscoverFromGit(path string) (paths []string, err error) {
 	}
 
 	err = tree.Files().ForEach(func(f *object.File) error {
-		// log.Debug().Msgf("100644 blob %s    %s", f.Hash, f.Name)
 		paths = append(paths, f.Name)
 		return nil
 	})
