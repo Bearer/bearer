@@ -177,25 +177,26 @@ func newExtrasObj(
 		return nil, err
 	}
 
-	module, err := settings.EncryptedVerifiedRegoModuleText()
-	if err != nil {
-		return nil, err
-	}
+	data := make(map[string]*ExtraFields)
 
-	data, err := runExtrasQuery(
-		`
-			verified_by = data.bearer.encrypted_verified.verified_by
-			encrypted = data.bearer.encrypted_verified.encrypted
-		`,
-		[]regohelper.Module{{
-			Name:    "bearer.encrypted_verified",
-			Content: module,
-		}},
-		detections,
-		targetDetections,
-	)
-	if err != nil {
-		return nil, err
+	processorNames := []string{"encrypted_verified", "db_encrypted"}
+	for _, processorName := range processorNames {
+		dataForProcessor, err := runProcessor(processorName, detections, targetDetections)
+		if err != nil {
+			return nil, err
+		}
+		for k, v := range(dataForProcessor) {
+			existingExtraFields, keyPresent := data[k]
+			if keyPresent {
+				// Merge in the new processor data
+				if existingExtraFields.encrypted == nil {
+					data[k].encrypted = v.encrypted
+				}
+				data[k].verifiedBy = append(data[k].verifiedBy, v.verifiedBy...)
+			} else {
+				data[k] = v
+			}
+		}
 	}
 
 	return &extrasObj{data: data}, nil
@@ -274,4 +275,43 @@ func (extras *extrasObj) Get(detection interface{}) *ExtraFields {
 	detectionID := detectionMap["id"].(string)
 
 	return extras.data[detectionID]
+}
+
+func processorModules(processorName string) (modules []regohelper.Module, err error) {
+	moduleText, err := settings.ProcessorRegoModuleText(processorName)
+	if err != nil {
+		return
+	}
+
+	fullModuleName := fmt.Sprintf("bearer.%s", processorName)
+	modules = []regohelper.Module{{
+		Name:    fullModuleName,
+		Content: moduleText,
+	}}
+
+	return
+}
+
+func runProcessor(
+	processorName string,
+	detections []any,
+	targetDetections []any,
+) (data map[string]*ExtraFields, err error) {
+	modules, err := processorModules(processorName)
+	if err != nil {
+		return
+	}
+
+	query := fmt.Sprintf(`
+			verified_by = data.bearer.%s.verified_by
+			encrypted = data.bearer.%s.encrypted
+		`, processorName, processorName)
+	data, err = runExtrasQuery(
+		query,
+		modules,
+		detections,
+		targetDetections,
+	)
+
+	return
 }

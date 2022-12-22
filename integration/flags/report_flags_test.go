@@ -23,6 +23,7 @@ func TestReportFlags(t *testing.T) {
 		newScanTest("report-detectors", []string{"--report=detectors"}),
 		newScanTest("report-dataflow", []string{"--report=dataflow"}),
 		newScanProject("report-dataflow-verified-by", []string{"--report=dataflow", "--format=yaml"}, "verified_by"),
+		newScanProject("report-dataflow-db-encrypted", []string{"--report=dataflow", "--format=yaml"}, "db_encrypted"),
 		newScanProject("report-policies", []string{"--report=policies", "--format=yaml"}, "policies"),
 		newScanTest("health-context", []string{"--report=detectors", "--context=health"}),
 		newScanTest("domain-resolution-disabled", []string{"--report=detectors", "--disable-domain-resolution=true"}),

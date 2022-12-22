@@ -3,6 +3,7 @@ package settings
 import (
 	"embed"
 	_ "embed"
+	"fmt"
 
 	"github.com/rs/zerolog/log"
 	"github.com/spf13/viper"
@@ -202,8 +203,9 @@ func DefaultPolicies() map[string]*Policy {
 	return policies
 }
 
-func EncryptedVerifiedRegoModuleText() (string, error) {
-	data, err := processorsFs.ReadFile("processors/encrypted_verified.rego")
+func ProcessorRegoModuleText(processorName string) (string, error) {
+	processorPath := fmt.Sprintf("processors/%s.rego", processorName)
+	data, err := processorsFs.ReadFile(processorPath)
 	if err != nil {
 		return "", err
 	}
