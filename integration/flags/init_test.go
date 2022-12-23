@@ -1,4 +1,4 @@
-package integration_test
+package flags_test
 
 import (
 	"os"

@@ -115,7 +115,7 @@ func RunTests(t *testing.T, tests []TestCase) {
 			combinedOutput, err := executeApp(t, arguments)
 
 			if test.ShouldSucceed && err != nil {
-				t.Fatalf("command completed with errror %s", err)
+				t.Fatalf("command completed with errror %s %s", err, combinedOutput)
 			}
 
 			if !test.ShouldSucceed && err == nil {
