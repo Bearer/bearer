@@ -97,8 +97,7 @@ func GetOutput(input []interface{}, config settings.Config, isInternal bool) (*D
 			ruleName := string(castDetection.DetectorType)
 			customDetector, ok := config.CustomDetector[ruleName]
 			if !ok {
-				// it is possible to have custom detector not in report in cases when there is a cache of previous scan and a skip detector involved
-				continue
+				return nil, fmt.Errorf("there is a custom detector in report that is not in the config %s", ruleName)
 			}
 
 			switch customDetector.Type {

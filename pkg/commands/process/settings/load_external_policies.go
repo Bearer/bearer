@@ -7,7 +7,6 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/rs/zerolog/log"
 	"gopkg.in/yaml.v3"
 )
 
@@ -52,14 +51,10 @@ func LoadExternalPolicies(directories []string) (map[string]*Policy, error) {
 						return fmt.Errorf("failed to read module at path %s %s", modulePath, err)
 					}
 					module.Content = string(moduleContent)
-
-					log.Debug().Msgf("setting module content %s", string(moduleContent))
 				}
 			}
 
 			policies[policyName] = policy
-
-			log.Debug().Msgf("policy query is %s", policy.Query)
 
 			return nil
 		})

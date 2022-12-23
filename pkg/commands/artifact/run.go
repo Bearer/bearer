@@ -73,6 +73,8 @@ func NewRunner(ctx context.Context, scanSettings settings.Config) Runner {
 
 	r.reportPath = path
 
+	log.Debug().Msgf("creating report %s", path)
+
 	if _, err := os.Stat(path); err == nil {
 		if !scanSettings.Scan.Force {
 			r.reuseDetection = true
@@ -88,6 +90,8 @@ func NewRunner(ctx context.Context, scanSettings settings.Config) Runner {
 	}
 
 	pathCreated, err := os.Create(path)
+
+	log.Debug().Msgf("successfully created reportPath %s", path)
 
 	if err != nil {
 		log.Error().Msgf("failed to create path %s, %s, %#v", path, err.Error(), pathCreated)
