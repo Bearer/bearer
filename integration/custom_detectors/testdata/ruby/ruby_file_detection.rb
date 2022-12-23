@@ -27,3 +27,8 @@ csv_string = CSV.generate do |csv|
 		]
 	end
 end
+
+fd = IO.sysopen("/dev/tty", "w")
+IO.open(fd,"w") do |a|
+  a.puts "Hello, #{user_6.full_name}!"
+end
