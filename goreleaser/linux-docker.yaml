@@ -39,6 +39,9 @@ builds:
 release:
   ids:
     - none
+  skip_upload: true
+  mode: keep-existing
+  name_template: "Release {{.Tag}}"
 
 dockers:
   - image_templates:

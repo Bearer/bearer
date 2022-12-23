@@ -53,6 +53,9 @@ archives:
 release:
   ids:
     - none
+  skip_upload: true
+  mode: keep-existing
+  name_template: "Release {{.Tag}}"
 
 brews:
   - # Name template of the recipe
