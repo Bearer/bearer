@@ -3,7 +3,7 @@ package settings
 import (
 	"fmt"
 	"io/fs"
-	"io/ioutil"
+	"os"
 	"path/filepath"
 	"strings"
 
@@ -31,7 +31,7 @@ func LoadExternalDetectors(directories []string) (map[string]Rule, error) {
 				return nil
 			}
 
-			fileContent, err := ioutil.ReadFile(filePath)
+			fileContent, err := os.ReadFile(filePath)
 			if err != nil {
 				return fmt.Errorf("error reading file: %s %s", filePath, err)
 			}

@@ -3,7 +3,7 @@ package settings
 import (
 	"fmt"
 	"io/fs"
-	"io/ioutil"
+	"os"
 	"path/filepath"
 	"strings"
 
@@ -29,7 +29,7 @@ func LoadExternalPolicies(directories []string) (map[string]*Policy, error) {
 				return nil
 			}
 
-			fileContent, err := ioutil.ReadFile(filePath)
+			fileContent, err := os.ReadFile(filePath)
 			if err != nil {
 				return fmt.Errorf("error reading file: %s %s", filePath, err)
 			}
@@ -46,7 +46,7 @@ func LoadExternalPolicies(directories []string) (map[string]*Policy, error) {
 				if module.Path != "" {
 					dirPath := strings.TrimSuffix(filePath, fileName)
 					modulePath := dirPath + "/" + module.Path
-					moduleContent, err := ioutil.ReadFile(modulePath)
+					moduleContent, err := os.ReadFile(modulePath)
 					if err != nil {
 						return fmt.Errorf("failed to read module at path %s %s", modulePath, err)
 					}
