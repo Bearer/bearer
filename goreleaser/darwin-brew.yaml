@@ -20,30 +20,6 @@ builds:
       - -s -w
       - -X "github.com/bearer/curio/cmd/curio/build.Version={{.Version}}"
       - -X "github.com/bearer/curio/cmd/curio/build.CommitSHA={{.Commit}}"
-    hooks:
-      post:
-        - |
-          sh -c '
-          fn=dist/curio-macos-build_{{.Target}}/gon.hcl
-          cat >"$fn" <<EOF
-          source = ["dist/curio-macos-build_{{.Target}}/{{.Name}}"]
-
-          bundle_id = "com.bearer.curio"
-
-          apple_id {
-            password = "@env:AC_PASSWORD"
-          }
-
-          sign {
-            application_identity = "Developer ID Application: Bearer Inc (5T2VP4YAG8)"
-          }
-
-          zip {
-            output_path = "curio_{{.Target}}.zip"
-          }
-          EOF
-          '
-        - "gon -log-level=debug 'dist/curio-macos-build_{{.Target}}/gon.hcl'"
 
 archives:
   - id: macos-archive
@@ -51,8 +27,6 @@ archives:
       - curio-macos-build
 
 release:
-  ids:
-    - none
   skip_upload: true
   mode: keep-existing
   name_template: "Release {{.Tag}}"
