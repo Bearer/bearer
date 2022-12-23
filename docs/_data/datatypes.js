@@ -1,5 +1,6 @@
 const { readdir, readFile } = require("node:fs/promises");
 const path = require("path");
+const PDID = "e1d3135b-3c0f-4b55-abce-19f27a26cbb3";
 
 async function fetchFile(location) {
   return readFile(location, { encoding: "utf8" }).then((file) =>
@@ -10,7 +11,6 @@ async function fetchFile(location) {
 async function fetchData(dir) {
   try {
     const files = await readdir(dir);
-    console.log(files.length);
     let result = await Promise.all(
       files.map(async (file) => {
         return await fetchFile(path.join(dir, file));
@@ -29,33 +29,33 @@ function sortData(typesFile, catsFile, groupsFile) {
   };
 
   // setup groups
+  // makes output[key] per group where key is UUID of group(PD, pii, etc)
   for (const key in groupsFile.groups) {
     outputResult = {
       uuid: key,
-      name: groupsFile.groups[key].name,
-      categories: {}
+      categories: {},
+      ...groupsFile.groups[key],
     };
-
-    parentGroups = []
-    for (const parentKey of groupsFile.groups[key].parent_uuids) {
-      parentGroups += groupsFile.groups[parentKey]
-    }
-    if (parentGroups.length > 0) {
-      outputResult.parentGroups = parentGroups
-    }
-
-    output[key] = outputResult
+    output[key] = outputResult;
   }
 
   // add categories to each group
   for (const key in groupsFile.category_mapping) {
     for (const groupUUID of groupsFile.category_mapping[key].group_uuids) {
-      console.log(groupUUID)
       output[groupUUID].categories[key] = {
         types: [],
         uuid: key,
         ...groupsFile.category_mapping[key],
       };
+      // if group has personal data as a parent, also add category to parent
+      // note: update logic when needed in future where multiple parents exist
+      if (output[groupUUID].parent_uuids.includes(PDID)) {
+        output[PDID].categories[key] = {
+          types: [],
+          uuid: key,
+          ...groupsFile.category_mapping[key],
+        };
+      }
     }
   }
 
