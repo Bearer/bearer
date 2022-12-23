@@ -2,6 +2,7 @@ package settings
 
 import (
 	"embed"
+	"fmt"
 	"path/filepath"
 	"strings"
 
@@ -128,6 +129,20 @@ func FromOptions(opts flag.Options) (Config, error) {
 		}
 	}
 
+	externalDetectors, err := LoadExternalDetectors(opts.ExternalDetectorDir)
+	if err != nil {
+		return Config{}, fmt.Errorf("failed to load external detectors %w", err)
+	}
+
+	for ruleName, rule := range externalDetectors {
+		_, ok := detectors[ruleName]
+		if ok {
+			return Config{}, fmt.Errorf("tried to overwrite default custom detector %s with external detector", ruleName)
+		}
+
+		detectors[ruleName] = rule
+	}
+
 	for key := range policies {
 		policy := policies[key]
 
@@ -150,6 +165,20 @@ func FromOptions(opts flag.Options) (Config, error) {
 				module.Content = string(content)
 			}
 		}
+	}
+
+	externalPolicies, err := LoadExternalPolicies(opts.ExternalPolicyDir)
+	if err != nil {
+		return Config{}, fmt.Errorf("failed to load external policies %w", err)
+	}
+
+	for policyName, policy := range externalPolicies {
+		_, ok := policies[policyName]
+		if ok {
+			return Config{}, fmt.Errorf("tried to overwrite default policy %s with external detector", policyName)
+		}
+
+		policies[policyName] = policy
 	}
 
 	config := Config{
