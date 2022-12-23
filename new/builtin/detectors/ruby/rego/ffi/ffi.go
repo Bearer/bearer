@@ -127,7 +127,8 @@ func LangaugeCompileSitterQuery(evalContext *EvaluationContext) func(*rego.Rego)
 				[]types.Type{types.S},
 				opaqueType,
 			),
-			Memoize: true,
+			Memoize:          true,
+			Nondeterministic: true,
 		},
 		func(bctx rego.BuiltinContext, inputTerm *ast.Term) (*ast.Term, error) {
 			log.Printf("curio.language.compile_sitter_query: enter")

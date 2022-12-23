@@ -40,7 +40,7 @@ func New(evaluationContext *ffi.EvaluationContext, detectorType string) (detecto
 	}
 
 	regoInstance := rego.New(
-		rego.Query("detections = data.curio.detectors."+detectorType+".detections_at"),
+		rego.Query("data.curio.detectors."+detectorType+".detections_at"),
 		rego.Module(filename, string(detectorContent)),
 		ffi.EvaluatorDetectionsAt(evaluationContext),
 		ffi.NodeContent(evaluationContext),
@@ -49,7 +49,7 @@ func New(evaluationContext *ffi.EvaluationContext, detectorType string) (detecto
 		ffi.QueryMatchOnceAt(evaluationContext),
 	)
 
-	regoQuery, err := regoInstance.PrepareForEval(context.TODO())
+	regoQuery, err := regoInstance.PrepareForEval(context.TODO(), rego.WithPartialEval())
 	if err != nil {
 		return nil, err
 	}
@@ -89,7 +89,10 @@ func (detector *regoDetector) DetectAt(
 		return nil, fmt.Errorf("expected single result from query got %d results %#v", len(resultSet), resultSet)
 	}
 
-	detections := resultSet[0].Bindings["detections"]
+	log.Printf("detection rs: %#v", resultSet[0])
+	log.Printf("detection e: %#v", resultSet[0].Expressions[0])
+	// detections := resultSet[0].Bindings["detections"]
+	detections := resultSet[0].Expressions[0].Value
 	log.Printf("detections: %#v", detections)
 
 	builder := strings.Builder{}

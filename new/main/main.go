@@ -3,6 +3,8 @@ package main
 import (
 	"fmt"
 	"log"
+	"os"
+	"runtime/pprof"
 
 	"github.com/bearer/curio/new/builtin/detectors/ruby/rego"
 	"github.com/bearer/curio/new/builtin/detectors/ruby/rego/ffi"
@@ -78,6 +80,13 @@ end
 		return err
 	}
 	defer tree.Close()
+
+	f, err := os.Create("cpuprof")
+	if err != nil {
+		log.Fatal(err)
+	}
+	pprof.StartCPUProfile(f)
+	defer pprof.StopCPUProfile()
 
 	evaluator := treeevaluator.New(lang, executor, tree)
 	evaluationContext.NewFile(evaluator) // FIXME
