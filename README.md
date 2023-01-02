@@ -133,10 +133,34 @@ curl -sfL https://raw.githubusercontent.com/Bearer/curio/main/contrib/install.sh
 
 ### Binary
 
-Download the archive file for your operating system/architecture from [here](https://github.com/Bearer/curio/releases/latest/). Unpack the archive, and put the binary somewhere in your $PATH (on UNIX-y systems, /usr/local/bin or the like). Make sure it has permission to execute:
+Download the archive file for your operating system/architecture from [here](https://github.com/Bearer/curio/releases/latest/). Unpack the archive, and put the binary somewhere in your $PATH (on UNIX-y systems, /usr/local/bin or the like). Make sure it has permission to execute.
+
+### Docker
+
+Curio is also available as a Docker image on [Docker Hub](https://hub.docker.com/r/bearer/curio) and [ghcr.io](https://github.com/Bearer/curio/pkgs/container/curio).
+
+With docker installed, you can run the following command with the appropriate paths in place of the examples.
 
 ```bash
-chmod +x ./curio
+docker run --rm -v /path/to/repo:/tmp/scan bearer/curio:latest-amd64 scan /tmp/scan
+```
+
+Additionally, you can use docker compose. Add the following to your `docker-compose.yml` file and replace the volumes with the appropriate paths for your project:
+
+```yml
+version: "3"
+services:
+  curio:
+    platform: linux/amd64
+    image: bearer/curio:latest-amd64
+    volumes:
+      - /path/to/repo:/tmp/scan
+```
+
+Then, run the `docker compose run` command to run Curio with any specified flags:
+
+```bash
+docker compose run curio scan /tmp/scan --debug
 ```
 
 ## :question: FAQs
