@@ -55,7 +55,7 @@ Or, if your platform supports it, with [Homebrew](https://brew.sh/) using [Curio
 brew install Bearer/curio/curio
 ```
 
-[Additional insallation options](#gear-additional-installation-options) are available.
+[Additional installation options](#gear-additional-installation-options) are available.
 
 ### Scan your project
 
