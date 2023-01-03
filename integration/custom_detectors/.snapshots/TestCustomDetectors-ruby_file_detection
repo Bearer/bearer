@@ -27,6 +27,12 @@ data_types:
               line_number: 16
             - filename: integration/custom_detectors/testdata/ruby/ruby_file_detection.rb
               line_number: 25
+    - name: Fullname
+      detectors:
+        - name: ruby
+          locations:
+            - filename: integration/custom_detectors/testdata/ruby/ruby_file_detection.rb
+              line_number: 33
     - name: Lastname
       detectors:
         - name: ruby
@@ -125,6 +131,17 @@ risks:
                     			user_5.last_name
                     		]
                     	end
+                    end
+        - name: Fullname
+          stored: false
+          locations:
+            - filename: integration/custom_detectors/testdata/ruby/ruby_file_detection.rb
+              line_number: 33
+              parent:
+                line_number: 32
+                content: |-
+                    IO.open(fd,"w") do |a|
+                      a.puts "Hello, #{user_6.full_name}!"
                     end
         - name: Lastname
           stored: false

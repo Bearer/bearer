@@ -147,6 +147,7 @@ ruby_file_detection:
           values:
             - CSV
             - File
+            - IO
   param_parenting: true
   metavars: {}
   stored: false
