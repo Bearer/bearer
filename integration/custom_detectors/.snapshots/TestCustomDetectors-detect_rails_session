@@ -5,6 +5,12 @@ data_types:
           locations:
             - filename: integration/custom_detectors/testdata/ruby/detect_rails_session.rb
               line_number: 2
+    - name: Unique Identifier
+      detectors:
+        - name: ruby
+          locations:
+            - filename: integration/custom_detectors/testdata/ruby/detect_rails_session.rb
+              line_number: 3
     - name: Username
       detectors:
         - name: ruby
@@ -22,6 +28,14 @@ risks:
               parent:
                 line_number: 2
                 content: session[:current_user] = user.email
+        - name: Unique Identifier
+          stored: false
+          locations:
+            - filename: integration/custom_detectors/testdata/ruby/detect_rails_session.rb
+              line_number: 3
+              parent:
+                line_number: 3
+                content: session[:user_id] = current_user.user_id
 components: []
 
 

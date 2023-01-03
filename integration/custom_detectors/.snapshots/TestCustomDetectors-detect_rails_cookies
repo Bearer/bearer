@@ -25,6 +25,12 @@ data_types:
               line_number: 3
             - filename: integration/custom_detectors/testdata/ruby/detect_rails_cookies.rb
               line_number: 12
+    - name: Unique Identifier
+      detectors:
+        - name: ruby
+          locations:
+            - filename: integration/custom_detectors/testdata/ruby/detect_rails_cookies.rb
+              line_number: 9
     - name: Username
       detectors:
         - name: ruby
@@ -42,6 +48,14 @@ risks:
               parent:
                 line_number: 2
                 content: cookies.signed[:info] = user.email
+        - name: Unique Identifier
+          stored: false
+          locations:
+            - filename: integration/custom_detectors/testdata/ruby/detect_rails_cookies.rb
+              line_number: 9
+              parent:
+                line_number: 9
+                content: cookies.permanent[:user_id] = current_user.user_id
 components: []
 
 
