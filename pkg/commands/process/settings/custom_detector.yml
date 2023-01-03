@@ -216,7 +216,8 @@ detect_rails_cookies:
       filters:
         - variable: DATA_TYPE
           detection: datatype
-    - pattern: | # FIXME: either implement alternation, or have our own types that map to mulitple tree-sitter types
+    - pattern:
+        | # FIXME: either implement alternation, or have our own types that map to mulitple tree-sitter types
         cookies.$<METHOD_CHAIN:identifier|call>[] = $<DATA_TYPE>
       filters:
         - variable: METHOD_CHAIN
