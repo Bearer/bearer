@@ -41,48 +41,21 @@ Curio also powers [Bearer](https://www.bearer.com), the developer-first platfor
 
 Discover data security risks and vulnerabilities in only a few minutes. In this guide you will install Curio, run a scan on a local project, and view the results of a policy report. Let's get started!
 
-### Installation
+### Install Curio
 
-Curio is available as a standalone executable binary. The latest release is available on the [releases tab](https://github.com/Bearer/curio/releases/latest), or use one of the methods below.
-
-#### Homebrew
-
-The easiest way to install Curio is to use [Homebrew](https://brew.sh/).
-
-```bash
-brew install Bearer/curio/curio
-```
-
-Or
-
-```bash
-brew tap Bearer/curio
-brew install curio
-```
-
-#### Install Script
-
-This script downloads the Curio binary automatically based on your OS and architecture.
+The quickest way to install Curio is with the install script. It will auto-select the best build for your architecture. _Defaults installation to `./bin` and to the latest release version_:
 
 ```bash
 curl -sfL https://raw.githubusercontent.com/Bearer/curio/main/contrib/install.sh | sh
 ```
 
-_Defaults to `./bin` as a bin directory and to the latest releases_
-
-If you need to customize the options, use the following to pass parameters:
+Or, if your platform supports it, with [Homebrew](https://brew.sh/) using [Curio's official Homebrew package](https://github.com/Bearer/homebrew-curio):
 
 ```bash
-curl -sfL https://raw.githubusercontent.com/Bearer/curio/main/contrib/install.sh | sh -s -- -b /usr/local/bin
+brew install Bearer/curio/curio
 ```
 
-#### Binary
-
-Download the archive file for your operating system/architecture from [here](https://github.com/Bearer/curio/releases/latest/). Unpack the archive, and put the binary somewhere in your $PATH (on UNIX-y systems, /usr/local/bin or the like). Make sure it has permission to execute:
-
-```bash
-chmod +x ./curio
-```
+[Additional installation options](#gear-additional-installation-options) are available.
 
 ### Scan your project
 
@@ -141,6 +114,54 @@ LOW: 0
 ```
 
 The policy report is just one report type available in Curio. Additional options for using and configuring the `scan` command can be found in the [scan documentation](https://curio.sh/reference/commands/#scan). For additional guides and usage tips, [view the docs](https://curio.sh).
+
+## :gear: Additional installation options
+
+### Configurable install script
+
+The default installation script works well for most use cases, but if you need more control you can customize the options by passing additional parameters.
+
+- `-b`: sets the installation directory (defaults to `./bin`)
+- `-d`: enables debug logging
+- `[tag]`: specifies a tag release (defaults to the latest release)
+
+For example:
+
+```bash
+curl -sfL https://raw.githubusercontent.com/Bearer/curio/main/contrib/install.sh | sh -s -- -b /usr/local/bin
+```
+
+### Binary
+
+Download the archive file for your operating system/architecture from [here](https://github.com/Bearer/curio/releases/latest/). Unpack the archive, and put the binary somewhere in your $PATH (on UNIX-y systems, /usr/local/bin or the like). Make sure it has permission to execute.
+
+### Docker
+
+Curio is also available as a Docker image on [Docker Hub](https://hub.docker.com/r/bearer/curio) and [ghcr.io](https://github.com/Bearer/curio/pkgs/container/curio).
+
+With docker installed, you can run the following command with the appropriate paths in place of the examples.
+
+```bash
+docker run --rm -v /path/to/repo:/tmp/scan bearer/curio:latest-amd64 scan /tmp/scan
+```
+
+Additionally, you can use docker compose. Add the following to your `docker-compose.yml` file and replace the volumes with the appropriate paths for your project:
+
+```yml
+version: "3"
+services:
+  curio:
+    platform: linux/amd64
+    image: bearer/curio:latest-amd64
+    volumes:
+      - /path/to/repo:/tmp/scan
+```
+
+Then, run the `docker compose run` command to run Curio with any specified flags:
+
+```bash
+docker compose run curio scan /tmp/scan --debug
+```
 
 ## :question: FAQs
 
