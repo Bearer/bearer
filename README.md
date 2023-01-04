@@ -214,7 +214,7 @@ What if you don't process sensitive data? Well, that's pretty rare these days. E
 
 ### How is it different from X solution?
 
-Static code analysis tools for security are not new and many great solutions exist including Snyk Code, CodeQL, Semgrep, SonarQube, Brakeman, etc.
+Static code analysis tools for security are not new and many great solutions exist including [Snyk Code](https://snyk.io/product/snyk-code/), [CodeQL](https://codeql.github.com/), [Semgrep](https://semgrep.dev/), [SonarQube](https://www.sonarsource.com/products/sonarqube/), [Brakeman](https://github.com/presidentbeef/brakeman), etc.
 
 Curio is different as it emphasizes that the most important asset we need to protect today is sensitive data, not “systems.” At the same time, it’s built with the knowledge that developers are not security experts and can’t dedicate more time to fix a growing number of security issues without a clear prioritization and understanding of the impact.
 
