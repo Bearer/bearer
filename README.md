@@ -27,7 +27,7 @@
 https://user-images.githubusercontent.com/1649672/208479520-3476f4d2-2fa2-4f05-abad-5ce4d3f5d3ba.mov
 
 
-Curio helps developers and security teams to:
+Curio helps developers and security teams to::
 
 - Protect their application from leaking sensitive data (*loggers, cookies, third-parties, etc*.)
 - Protect their application from having their sensitive data failed (*missing encryption, insecure communication, SQL injection, etc.*)
