@@ -42,6 +42,7 @@ func TestPolicies(t *testing.T) {
 		newPolicyTest("application_level_encryption_missing_structure_sql", []string{"ruby/application_level_encryption_missing/structure_sql"}, false),
 		newPolicyTest("application_level_encryption_missing_schema_rb", []string{"ruby/application_level_encryption_missing/schema_rb"}, false),
 		newPolicyTest("ruby_weak_password_encryption", []string{"ruby/weak_password_encryption.rb"}, false),
+		newPolicyTest("ruby_jwt_leaking", []string{"ruby/jwt_leaking.rb"}, false),
 	}
 
 	testhelper.RunTests(t, tests)
