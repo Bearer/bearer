@@ -41,13 +41,14 @@ type FlagGroup interface {
 }
 
 type Flags struct {
-	RepoFlagGroup    *RepoFlagGroup
-	ReportFlagGroup  *ReportFlagGroup
-	PolicyFlagGroup  *PolicyFlagGroup
-	ProcessFlagGroup *ProcessFlagGroup
-	ScanFlagGroup    *ScanFlagGroup
-	WorkerFlagGroup  *WorkerFlagGroup
-	GeneralFlagGroup *GeneralFlagGroup
+	RepoFlagGroup     *RepoFlagGroup
+	ReportFlagGroup   *ReportFlagGroup
+	PolicyFlagGroup   *PolicyFlagGroup
+	DetectorFlagGroup *DetectorFlagGroup
+	ProcessFlagGroup  *ProcessFlagGroup
+	ScanFlagGroup     *ScanFlagGroup
+	WorkerFlagGroup   *WorkerFlagGroup
+	GeneralFlagGroup  *GeneralFlagGroup
 }
 
 // Options holds all the runtime configuration
@@ -55,6 +56,7 @@ type Options struct {
 	RepoOptions
 	ReportOptions
 	PolicyOptions
+	DetectorOptions
 	WorkerOptions
 	ScanOptions
 	GeneralOptions
@@ -98,6 +100,17 @@ func bind(cmd *cobra.Command, flag *Flag) error {
 	}
 
 	return nil
+}
+
+func argsToMap(flag *Flag) map[string]bool {
+	strSlice := getStringSlice(flag)
+
+	result := make(map[string]bool)
+	for _, str := range strSlice {
+		result[str] = true
+	}
+
+	return result
 }
 
 func getString(flag *Flag) string {
@@ -155,6 +168,9 @@ func (f *Flags) groups() []FlagGroup {
 	}
 	if f.PolicyFlagGroup != nil {
 		groups = append(groups, f.PolicyFlagGroup)
+	}
+	if f.DetectorFlagGroup != nil {
+		groups = append(groups, f.DetectorFlagGroup)
 	}
 	if f.ScanFlagGroup != nil {
 		groups = append(groups, f.ScanFlagGroup)
@@ -253,6 +269,10 @@ func (f *Flags) ToOptions(args []string) (Options, error) {
 
 	if f.PolicyFlagGroup != nil {
 		opts.PolicyOptions = f.PolicyFlagGroup.ToOptions(args)
+	}
+
+	if f.DetectorFlagGroup != nil {
+		opts.DetectorOptions = f.DetectorFlagGroup.ToOptions(args)
 	}
 
 	if f.WorkerFlagGroup != nil {

@@ -49,14 +49,3 @@ func (f *PolicyFlagGroup) ToOptions(args []string) PolicyOptions {
 		OnlyPolicy: argsToMap(f.OnlyPolicyFlag),
 	}
 }
-
-func argsToMap(flag *Flag) map[string]bool {
-	strSlice := getStringSlice(flag)
-
-	result := make(map[string]bool)
-	for _, str := range strSlice {
-		result[str] = true
-	}
-
-	return result
-}

@@ -2,11 +2,11 @@ package settings
 
 import (
 	"embed"
-	_ "embed"
 	"fmt"
+	"path/filepath"
+	"strings"
 
 	"github.com/rs/zerolog/log"
-	"github.com/spf13/viper"
 	"gopkg.in/yaml.v2"
 
 	"github.com/bearer/curio/pkg/flag"
@@ -97,11 +97,11 @@ type MetaVar struct {
 	Regex  string `mapstructure:"regex" json:"regex" yaml:"regex"`
 }
 
-//go:embed custom_detector.yml
-var customDetector []byte
-
 //go:embed policies.yml
 var defaultPolicies []byte
+
+//go:embed custom_detectors/*
+var customDetectorFS embed.FS
 
 //go:embed policies/*
 var policiesFs embed.FS
@@ -113,24 +113,34 @@ var CustomDetectorKey string = "scan.custom_detector"
 var PoliciesKey string = "scan.policies"
 
 func FromOptions(opts flag.Options) (Config, error) {
-	var rules map[string]Rule
-	if viper.IsSet(CustomDetectorKey) {
-		err := viper.UnmarshalKey(CustomDetectorKey, &rules)
-		if err != nil {
-			return Config{}, err
+	detectors := DefaultCustomDetector()
+
+	policies := DefaultPolicies()
+
+	for key := range detectors {
+		if len(opts.DetectorOptions.OnlyDetector) > 0 && !opts.DetectorOptions.OnlyDetector[key] {
+			delete(detectors, key)
+			continue
 		}
-	} else {
-		rules = DefaultCustomDetector()
+
+		if opts.DetectorOptions.SkipDetector[key] {
+			delete(detectors, key)
+			continue
+		}
 	}
 
-	var policies map[string]*Policy
-	if viper.IsSet(PoliciesKey) {
-		err := viper.UnmarshalKey(PoliciesKey, &policies)
-		if err != nil {
-			return Config{}, err
+	externalDetectors, err := LoadExternalDetectors(opts.ExternalDetectorDir)
+	if err != nil {
+		return Config{}, fmt.Errorf("failed to load external detectors %w", err)
+	}
+
+	for ruleName, rule := range externalDetectors {
+		_, ok := detectors[ruleName]
+		if ok {
+			return Config{}, fmt.Errorf("tried to overwrite default custom detector %s with external detector", ruleName)
 		}
-	} else {
-		policies = DefaultPolicies()
+
+		detectors[ruleName] = rule
 	}
 
 	for key := range policies {
@@ -157,9 +167,23 @@ func FromOptions(opts flag.Options) (Config, error) {
 		}
 	}
 
+	externalPolicies, err := LoadExternalPolicies(opts.ExternalPolicyDir)
+	if err != nil {
+		return Config{}, fmt.Errorf("failed to load external policies %w", err)
+	}
+
+	for policyName, policy := range externalPolicies {
+		_, ok := policies[policyName]
+		if ok {
+			return Config{}, fmt.Errorf("tried to overwrite default policy %s with external detector", policyName)
+		}
+
+		policies[policyName] = policy
+	}
+
 	config := Config{
 		Worker:         opts.WorkerOptions,
-		CustomDetector: rules,
+		CustomDetector: detectors,
 		Scan:           opts.ScanOptions,
 		Report:         opts.ReportOptions,
 		Policies:       policies,
@@ -182,11 +206,36 @@ func (rulePattern *RulePattern) UnmarshalYAML(unmarshal func(interface{}) error)
 }
 
 func DefaultCustomDetector() map[string]Rule {
-	var rules map[string]Rule
+	customDetectorsDir := "custom_detectors"
+	rules := make(map[string]Rule)
 
-	err := yaml.Unmarshal(customDetector, &rules)
+	dirEntries, err := customDetectorFS.ReadDir(customDetectorsDir)
 	if err != nil {
-		log.Fatal().Msgf("failed to unmarshal database file %e", err)
+		log.Fatal().Msgf("failed to read custom detectors dir %e", err)
+	}
+
+	for _, entry := range dirEntries {
+		fileName := entry.Name()
+
+		ext := filepath.Ext(fileName)
+		ruleName := strings.TrimSuffix(fileName, ext)
+
+		if ext != ".yaml" && ext != ".yml" {
+			continue
+		}
+
+		fileContent, err := customDetectorFS.ReadFile(customDetectorsDir + "/" + fileName)
+		if err != nil {
+			log.Fatal().Msgf("failed to read custom detector file %e", err)
+		}
+
+		var rule Rule
+		err = yaml.Unmarshal(fileContent, &rule)
+		if err != nil {
+			log.Fatal().Msgf("failed to unmarshal database file %e", err)
+		}
+
+		rules[ruleName] = rule
 	}
 
 	return rules
