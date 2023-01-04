@@ -2,30 +2,37 @@ package ruby
 
 import (
 	"fmt"
+	"os"
 
+	"github.com/bearer/curio/new/detector/evaluator"
 	"github.com/bearer/curio/new/detector/implementation/custom"
 	"github.com/bearer/curio/new/detector/implementation/generic/datatype"
 	"github.com/bearer/curio/new/detector/implementation/ruby/object"
 	"github.com/bearer/curio/new/detector/implementation/ruby/property"
 	detectorset "github.com/bearer/curio/new/detector/set"
+	"github.com/bearer/curio/new/detector/types"
 	detectortypes "github.com/bearer/curio/new/detector/types"
 	languagetypes "github.com/bearer/curio/new/language/types"
 
 	"github.com/bearer/curio/new/language"
+	"github.com/bearer/curio/pkg/commands/process/settings"
 	"github.com/bearer/curio/pkg/util/file"
 )
 
 type Composition struct {
 	detectorsSet detectortypes.DetectorSet
+	lang         languagetypes.Language
 	closers      []func()
 }
 
-func New() (*Composition, error) {
-	composition := &Composition{}
-
+func New(rules map[string]settings.Rule) (types.Composition, error) {
 	lang, err := language.Get("ruby")
 	if err != nil {
 		return nil, fmt.Errorf("failed to lookup language: %s", err)
+	}
+
+	composition := &Composition{
+		lang: lang,
 	}
 
 	staticDetectors := []struct {
@@ -58,31 +65,27 @@ func New() (*Composition, error) {
 		composition.closers = append(composition.closers, detector.Close)
 	}
 
-	rubyFileDetector, err := custom.New(
-		lang,
-		"ruby_file_detection",
-		custom.Rule{
-			Pattern: `
-				Sentry.init do |$<CONFIG:identifier>|
-					$<CONFIG>.before_breadcrumb = lambda do |$<BREADCRUMB:identifier>, hint|
-						$<BREADCRUMB>.message = $<MESSAGE>
-					end
-				end`,
-			Filters: []custom.Filter{
-				{
-					Variable:  "MESSAGE",
-					Detection: "datatype",
-				},
-			},
-		},
-	)
+	// instantiate custom ruby detectors
+	for ruleName, rule := range rules {
+		for i, pattern := range rule.Patterns {
+			// todo: Figure out how to have multiple patterns for same ruleName, or support in dataflow and policies multiple rule_names
 
-	if err != nil {
-		composition.Close()
-		return nil, fmt.Errorf("failed to create ruby file detector: %s", err)
+			customDetector, err := custom.New(
+				lang,
+				fmt.Sprintf("%s_%d", ruleName, i),
+				custom.Rule{
+					Pattern: pattern.Pattern,
+					Filters: pattern.Filters.ToCustomFilters(),
+				},
+			)
+			if err != nil {
+				composition.Close()
+				return nil, fmt.Errorf("failed to create custom detector %s for pattern count %d: %s", ruleName, i, err)
+			}
+			detectors = append(detectors, customDetector)
+			composition.closers = append(composition.closers, customDetector.Close)
+		}
 	}
-	composition.closers = append(composition.closers, rubyFileDetector.Close)
-	detectors = append(detectors, rubyFileDetector)
 
 	detectorSet, err := detectorset.New(detectors)
 	if err != nil {
@@ -100,8 +103,27 @@ func (composition *Composition) Close() {
 	}
 }
 
-func (composition *Composition) ParseFile(file *file.FileInfo) {
+func (composition *Composition) ParseFile(file *file.FileInfo) error {
 	if file.Language != "Ruby" {
-		return
+		return nil
 	}
+
+	fileContent, err := os.ReadFile(file.AbsolutePath)
+	if err != nil {
+		return fmt.Errorf("failed to read file %s", err)
+	}
+
+	tree, err := composition.lang.Parse(string(fileContent))
+	if err != nil {
+		return fmt.Errorf("failed to parse file %s", err)
+	}
+
+	evaluator := evaluator.New(composition.detectorsSet, tree)
+
+	detections, err := evaluator.ForTree(tree.RootNode(), "ruby_file_detection")
+	if err != nil {
+		return fmt.Errorf("failed to detect: %s", err)
+	}
+
+	// todo : do something with detections
 }
