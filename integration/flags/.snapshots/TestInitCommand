@@ -29,5 +29,4 @@ worker:
     timeout-file-min: 5s
     timeout-file-second-per-bytes: 10000
     timeout-worker-online: 1m0s
-    workers: 1
 
