@@ -17,6 +17,7 @@ patterns:
         values:
           - CSV
           - File
+          - IO
 param_parenting: true
 metavars: {}
 stored: false
