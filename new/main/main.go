@@ -163,7 +163,7 @@ end
 	}
 	defer tree.Close()
 
-	evaluator := evaluator.New(lang, detectorSet, tree)
+	evaluator := evaluator.New(detectorSet, tree)
 
 	detections, err := evaluator.ForTree(tree.RootNode(), "ruby_file_detection")
 	if err != nil {
