@@ -23,12 +23,14 @@ data_types:
           locations:
             - filename: integration/custom_detectors/testdata/ruby/detect_rails_cookies.rb
               line_number: 3
+            - filename: integration/custom_detectors/testdata/ruby/detect_rails_cookies.rb
+              line_number: 12
     - name: Username
       detectors:
         - name: ruby
           locations:
             - filename: integration/custom_detectors/testdata/ruby/detect_rails_cookies.rb
-              line_number: 12
+              line_number: 13
 risks:
     - detector_id: detect_rails_cookies
       data_types:
