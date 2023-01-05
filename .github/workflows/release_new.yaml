@@ -1,0 +1,156 @@
+name: Release_New
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - "ci/go-releaser-refactor"
+    tags:
+      - "v*"
+
+permissions:
+  contents: write
+  packages: write
+
+jobs:
+  tag:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Bump version and push tag
+        if: startsWith(github.ref, 'refs/tags') != true
+        id: tag_version
+        uses: mathieudutour/github-tag-action@v6.1
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          tag_prefix: v
+          default_bump: patch
+    outputs:
+      ref: refs/tags/${{ steps.tag_version.outputs.new_tag || github.ref_name }}
+
+  build-linux:
+    needs: [tag]
+    name: build-linux
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          ref: ${{ needs.tag.outputs.ref }}
+      - run: git fetch --force --tags
+      - name: Set up Go
+        uses: actions/setup-go@v3
+        with:
+          go-version: 1.19
+      - name: Install dependencies
+        run: sudo apt-get update && sudo apt-get install -y gcc-multilib g++-multilib
+
+      # - name: Install cross-compiler for linux/arm64
+      #   run: sudo apt-get -y install gcc-aarch64-linux-gnu
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v2
+
+      - name: Set up Docker Buildx
+        id: buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Show available Docker Buildx platforms
+        run: echo ${{ steps.buildx.outputs.platforms }}
+
+      - shell: bash
+        run: |
+          echo "sha_short=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
+      - id: cache
+        uses: actions/cache@v3
+        with:
+          path: dist/linux
+          key: linux-${{ env.sha_short }}
+      - uses: goreleaser/goreleaser-action@v4
+        if: steps.cache.outputs.cache-hit != 'true' # do not run if cache hit
+        name: Run GoReleaser
+        with:
+          distribution: goreleaser-pro
+          version: latest
+          args: release --rm-dist --split -f ./goreleaser/prepare.yaml
+        env:
+          GOOS: linux
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GORELEASER_KEY: ${{ secrets.GORELEASER_KEY }}
+
+  build-darwin:
+    needs: [tag]
+    name: build-darwin
+    runs-on: macos-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          ref: ${{ needs.tag.outputs.ref }}
+      - run: git fetch --force --tags
+      - name: Set up Go
+        uses: actions/setup-go@v3
+        with:
+          go-version: 1.19
+      - name: Setup Gon
+        run: brew install mitchellh/gon/gon
+      - name: Import Code-Signing Certificates
+        uses: Apple-Actions/import-codesign-certs@v1
+        with:
+          # The certificates in a PKCS12 file encoded as a base64 string
+          p12-file-base64: ${{ secrets.APPLE_DEVELOPER_CERTIFICATE_P12_BASE64 }}
+          # The password used to import the PKCS12 file.
+          p12-password: ${{ secrets.APPLE_DEVELOPER_CERTIFICATE_PASSWORD }}
+      - shell: bash
+        run: |
+          echo "sha_short=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
+      - id: cache
+        uses: actions/cache@v3
+        with:
+          path: dist/darwin
+          key: darwin-${{ env.sha_short }}
+      - uses: goreleaser/goreleaser-action@v4
+        if: steps.cache.outputs.cache-hit != 'true' # do not run if cache hit
+        name: Run GoReleaser
+        with:
+          distribution: goreleaser-pro
+          version: latest
+          args: release  --rm-dist --split --debug -f ./goreleaser/prepare.yaml
+        env:
+          GOOS: darwin
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          AC_USERNAME: ${{ secrets.AC_USERNAME }}
+          AC_PASSWORD: ${{ secrets.AC_PASSWORD }}
+          GORELEASER_KEY: ${{ secrets.GORELEASER_KEY }}
+
+  publish:
+    needs: [tag, build-linux, build-darwin]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          ref: ${{ needs.tag.outputs.ref }}
+      - run: git fetch --force --tags
+            # copy the cashes from prepare
+      - shell: bash
+        run: |
+          echo "sha_short=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
+      - uses: actions/cache@v3
+        with:
+          path: dist/linux
+          key: linux-${{ env.sha_short }}
+      - uses: actions/cache@v3
+        with:
+          path: dist/darwin
+          key: darwin-${{ env.sha_short }}
+      - name: Release
+        uses: goreleaser/goreleaser-action@v4
+        with:
+          distribution: goreleaser-pro
+          args: continue --merge -f ./goreleaser/prepare.yaml
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GORELEASER_KEY: ${{ secrets.GORELEASER_KEY }}
