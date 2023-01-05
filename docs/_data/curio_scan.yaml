@@ -26,6 +26,9 @@ options:
     - name: files-to-batch
       default_value: "1"
       usage: Specify the number of files to batch per worker.
+    - name: force
+      default_value: "false"
+      usage: Disable the cache and runs the detections again
     - name: format
       shorthand: f
       usage: Specify report format (json, yaml)
@@ -80,9 +83,6 @@ options:
     - name: timeout-worker-online
       default_value: 1m0s
       usage: Maximum time to wait for a worker process to come online.
-    - name: workers
-      default_value: "1"
-      usage: The number of processing workers to spawn.
 example: |4-
       # Scan a local project, including language-specific files
       $ curio scan /path/to/your_project

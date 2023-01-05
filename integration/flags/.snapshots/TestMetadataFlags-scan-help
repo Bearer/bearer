@@ -47,7 +47,6 @@ Worker Flags
       --timeout-file-min duration           Minimum timeout assigned for scanning each file. This config superseeds timeout-second-per-bytes. (default 5s)
       --timeout-file-second-per-bytes int   number of file size bytes producing a second of timeout assigned to scanning a file (default 10000)
       --timeout-worker-online duration      Maximum time to wait for a worker process to come online. (default 1m0s)
-      --workers int                         The number of processing workers to spawn. (default 1)
 
 
 --
