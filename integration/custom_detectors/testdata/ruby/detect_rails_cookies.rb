@@ -1,6 +1,6 @@
 # Detected
 cookies.signed[:info] = user.email
-cookies.permanent.encrypted[:secret] = user.address
+cookies.permanent.signed[:secret] = user.address
 user_1 = {
   first_name: "John",
 	last_name: "Doe"
@@ -9,6 +9,7 @@ cookies[:login] = { value: user_1.to_json, expires: 1.hour, secure: true }
 
 
 # Not detected
+cookies.permanent.encrypted[:secret] = user.address
 cookies[:user_name] = "david"
 cookies.signed[:user_email] = "mish@bearer.sh"
 cookies.encrypted[:full_name] = "John Doe"
