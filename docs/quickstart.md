@@ -21,6 +21,8 @@ Or, if your platform supports it, with [Homebrew](https://brew.sh/) using [Curio
 brew install Bearer/curio/curio
 ```
 
+If you need more control or another way to install Curio, we offer more [advanced installation options](https://github.com/Bearer/curio#gear-additional-installation-options).
+
 ## Scan your project
 
 The easiest way to try out Curio is with our example project, [Bear Publishing](https://github.com/Bearer/bear-publishing). It simulates a realistic Ruby application with common data security flaws. Clone or download it to a convenient location to get started.  
