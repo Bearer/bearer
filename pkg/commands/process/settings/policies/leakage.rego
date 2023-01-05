@@ -9,6 +9,7 @@ policy_failure contains item if {
     detector.detector_id == input.policy_id
 
     data_type = detector.data_types[_]
+    data_type.name != "Unique Identifier"
 
     location = data_type.locations[_]
     item := {
