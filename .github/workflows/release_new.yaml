@@ -151,7 +151,7 @@ jobs:
         uses: goreleaser/goreleaser-action@v4
         with:
           distribution: goreleaser-pro
-          args: continue --merge -f ./.goreleaser/prepare.yaml
+          args: continue --merge --config ./.goreleaser/prepare.yaml
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GORELEASER_KEY: ${{ secrets.GORELEASER_KEY }}
