@@ -15,6 +15,7 @@ builds:
       - darwin
     goarch:
       - arm64
+      - amd64
     ldflags:
       - -s -w
       - -X "github.com/bearer/curio/cmd/curio/build.Version={{.Version}}"
@@ -23,9 +24,9 @@ builds:
       post:
         - |
           sh -c '
-          fn=darwin_{{.Target}}/gon.hcl
+          fn=dist/darwin/darwin_{{.Target}}/gon.hcl
           cat >"$fn" <<EOF
-          source = ["dist/darwin_{{.Target}}/{{.Name}}"]
+          source = ["dist/darwin/darwin_{{.Target}}/{{.Name}}"]
 
           bundle_id = "com.bearer.curio"
 
@@ -42,7 +43,7 @@ builds:
           }
           EOF
           '
-        - "gon -log-level=debug 'darwin_{{.Target}}/gon.hcl'"
+        - "gon -log-level DEBUG 'dist/darwin/darwin_{{.Target}}/gon.hcl'"
   - id: linux
     main: ./cmd/curio
     binary: curio
@@ -77,7 +78,7 @@ snapshot:
   name_template: "{{ incpatch .Version }}-next"
 
 checksum:
-  name_template: 'checksums.txt'
+  name_template: "checksums.txt"
 
 release:
   draft: true
