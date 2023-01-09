@@ -10,3 +10,24 @@ release:
   header: |
     ## Canary ({{ .Date }})
   mode: append
+
+dockers:
+  - image_templates:
+      - "docker.io/bearer/curio:canary-amd64"
+      - "ghcr.io/bearer/curio:canary-amd64"
+    use: buildx
+    goos: linux
+    goarch: amd64
+    ids:
+      - linux
+    build_flag_templates:
+      - "--label=org.opencontainers.image.title={{ .ProjectName }}"
+      - "--label=org.opencontainers.image.description=A data-first security scanner that finds risks and vulnerabilities in your code so you can protect sensitive data (PHI, PD, PII)."
+      - "--label=org.opencontainers.image.vendor=Bearer"
+      - "--label=org.opencontainers.image.version={{ .Version }}"
+      - "--label=org.opencontainers.image.created={{ .Date }}"
+      - "--label=org.opencontainers.image.source=https://github.com/Bearer/curio"
+      - "--label=org.opencontainers.image.revision={{ .FullCommit }}"
+      - "--label=org.opencontainers.image.url=https://curio.sh"
+      - "--label=org.opencontainers.image.documentation=https://curio.sh"
+      - "--platform=linux/amd64"

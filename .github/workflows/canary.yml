@@ -1,9 +1,6 @@
 name: Canary
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - "ci/go-releaser-refactor"
 
 permissions:
   contents: write
@@ -116,7 +113,7 @@ jobs:
         with:
           distribution: goreleaser-pro
           version: latest
-          args: release --skip-docker --rm-dist --split -f ./.goreleaser/canary.yaml
+          args: release --rm-dist --split -f ./.goreleaser/canary.yaml
         env:
           GOOS: darwin
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -57,19 +57,25 @@ jobs:
       - name: Show available Docker Buildx platforms
         run: echo ${{ steps.buildx.outputs.platforms }}
 
-      - name: Run GoReleaser
-        uses: goreleaser/goreleaser-action@v4
+      - shell: bash
+        run: |
+          echo "sha_short=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
+      - id: cache
+        uses: actions/cache@v3
         with:
-          distribution: goreleaser
+          path: dist/linux
+          key: linux-${{ env.sha_short }}
+      - uses: goreleaser/goreleaser-action@v4
+        if: steps.cache.outputs.cache-hit != 'true' # do not run if cache hit
+        name: Run GoReleaser
+        with:
+          distribution: goreleaser-pro
           version: latest
-          args: release --skip-publish -f ./.goreleaser/linux.yaml
+          args: release --rm-dist --split
         env:
+          GOOS: linux
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: Upload
-        uses: actions/upload-artifact@v3
-        with:
-          name: curio-linux
-          path: dist/curio*
+          GORELEASER_KEY: ${{ secrets.GORELEASER_KEY }}
 
   build-darwin:
     needs: [tag]
@@ -95,23 +101,27 @@ jobs:
           p12-file-base64: ${{ secrets.APPLE_DEVELOPER_CERTIFICATE_P12_BASE64 }}
           # The password used to import the PKCS12 file.
           p12-password: ${{ secrets.APPLE_DEVELOPER_CERTIFICATE_PASSWORD }}
-      - name: Run GoReleaser
-        uses: goreleaser/goreleaser-action@v4
+      - shell: bash
+        run: |
+          echo "sha_short=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
+      - id: cache
+        uses: actions/cache@v3
         with:
-          distribution: goreleaser
+          path: dist/darwin
+          key: darwin-${{ env.sha_short }}
+      - uses: goreleaser/goreleaser-action@v4
+        if: steps.cache.outputs.cache-hit != 'true' # do not run if cache hit
+        name: Run GoReleaser
+        with:
+          distribution: goreleaser-pro
           version: latest
-          args: release --skip-publish -f ./.goreleaser/darwin.yaml
+          args: release  --rm-dist --split
         env:
+          GOOS: darwin
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           AC_USERNAME: ${{ secrets.AC_USERNAME }}
           AC_PASSWORD: ${{ secrets.AC_PASSWORD }}
-      - name: Upload
-        uses: actions/upload-artifact@v3
-        with:
-          name: curio-darwin
-          path: |
-            dist/curio*.tar.gz
-            dist/curio*checksums.txt
+          GORELEASER_KEY: ${{ secrets.GORELEASER_KEY }}
 
   publish:
     needs: [tag, build-linux, build-darwin]
@@ -121,31 +131,26 @@ jobs:
         with:
           fetch-depth: 0
           ref: ${{ needs.tag.outputs.ref }}
-      - run: git fetch --force --tags
-      - name: Make directories
+      - run:
+          git fetch --force --tags
+          # copy the cashes from prepare
+      - shell: bash
         run: |
-          mkdir -p ./curio-build/linux
-          mkdir -p ./curio-build/darwin
-      - name: Download linux binaries
-        uses: actions/download-artifact@v3
+          echo "sha_short=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
+      - uses: actions/cache@v3
         with:
-          name: curio-linux
-          path: ./curio-build/linux
-      - name: Download darwin binaries
-        uses: actions/download-artifact@v3
+          path: dist/linux
+          key: linux-${{ env.sha_short }}
+      - uses: actions/cache@v3
         with:
-          name: curio-darwin
-          path: ./curio-build/darwin
-      - name: Merge checksum file
-        run: |
-          cd ./curio-build
-          cat ./linux/curio*checksums.txt >> checksums.txt
-          cat ./darwin/curio*checksums.txt >> checksums.txt
-          rm ./darwin/curio*checksums.txt
-          rm ./linux/curio*checksums.txt
+          path: dist/darwin
+          key: darwin-${{ env.sha_short }}
       - name: Release
         uses: goreleaser/goreleaser-action@v4
         with:
-          args: release --config ./.goreleaser/release.yaml
+          distribution: goreleaser-pro
+          args: publish --merge
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GORELEASER_KEY: ${{ secrets.GORELEASER_KEY }}
+          HOMEBREW_TAP_GITHUB_TOKEN: ${{ secrets.BEARER_GITHUB_TOKEN }}
