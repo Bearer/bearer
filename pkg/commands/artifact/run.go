@@ -70,21 +70,30 @@ func NewRunner(ctx context.Context, scanSettings settings.Config) Runner {
 	}
 
 	path := os.TempDir() + "/curio" + scanID
+	completedPath := strings.Replace(path, ".jsonl", "-completed.jsonl", 1)
 
 	r.reportPath = path
 
 	log.Debug().Msgf("creating report %s", path)
 
-	if _, err := os.Stat(path); err == nil {
+	if _, err := os.Stat(completedPath); err == nil {
 		if !scanSettings.Scan.Force {
 			r.reuseDetection = true
 			log.Debug().Msgf("reuse detection for %s", path)
+			r.reportPath = completedPath
 
 			return r
 		} else {
-			err := os.Remove(path)
+			if _, err = os.Stat(path); err == nil {
+				err := os.Remove(path)
+				if err != nil {
+					log.Error().Msgf("couldn't remove report path %s, %s", path, err.Error())
+				}
+			}
+
+			err = os.Remove(completedPath)
 			if err != nil {
-				log.Error().Msgf("couldn't remove report path %s, %s", path, err.Error())
+				log.Error().Msgf("couldn't remove completed report path %s, %s", completedPath, err.Error())
 			}
 		}
 	}
@@ -217,6 +226,16 @@ func Run(ctx context.Context, opts flag.Options, targetKind TargetKind) (err err
 	reportPassed, err := r.Report(scanSettings, report)
 	if err != nil {
 		return xerrors.Errorf("report error: %w", err)
+	} else {
+		if !strings.HasSuffix(report.Path, "-completed.jsonl") {
+			newPath := strings.Replace(report.Path, ".jsonl", "-completed.jsonl", 1)
+			log.Debug().Msgf("renaming report %s -> %s", report.Path, newPath)
+			err := os.Rename(report.Path, newPath)
+			if err != nil {
+				return xerrors.Errorf("failed to rename report file %s -> %s: %w", report.Path, newPath, err)
+			}
+			report.Path = newPath
+		}
 	}
 
 	if !reportPassed {
