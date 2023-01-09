@@ -208,7 +208,7 @@ weak_encryption_library:
       name: bearer.weak_encryption_library
 secret_leak:
   description: ""
-  name: "Secret Leak contains %s"
+  name: "Do not leak secrets."
   display_id: "CR-025"
   id: "secret_leak"
   query: |
