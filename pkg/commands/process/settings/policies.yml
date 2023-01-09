@@ -206,3 +206,13 @@ weak_encryption_library:
       name: bearer.encryption_common
     - path: policies/weak_encryption_library.rego
       name: bearer.weak_encryption_library
+secret_leak:
+  description: ""
+  name: "Secret Leak contains %s"
+  display_id: "CR-025"
+  id: "secret_leak"
+  query: |
+    policy_failure = data.bearer.secret_leak.policy_failure
+  modules:
+    - path: policies/secret_leak.rego
+      name: bearer.secret_leak

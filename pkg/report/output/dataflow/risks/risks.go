@@ -7,6 +7,7 @@ import (
 
 	"github.com/bearer/curio/pkg/classification/db"
 	"github.com/bearer/curio/pkg/commands/process/settings"
+	"github.com/bearer/curio/pkg/report/detectors"
 	"github.com/bearer/curio/pkg/report/output/dataflow/detectiondecoder"
 	"github.com/bearer/curio/pkg/report/output/dataflow/types"
 	"github.com/bearer/curio/pkg/report/schema"
@@ -70,10 +71,19 @@ func (holder *Holder) AddRiskPresence(detection detections.Detection) {
 		riskLocation.Parent = parent
 	}
 
-	holder.presentRisks[ruleName].Locations = append(holder.presentRisks[ruleName].Locations, types.RiskDetectionLocation{
-		RiskLocation: riskLocation,
-		Content:      *detection.Source.Text,
-	})
+	if detection.DetectorType == detectors.DetectorGitleaks {
+		value := detection.Value.(map[string]interface{})["description"]
+
+		holder.presentRisks[ruleName].Locations = append(holder.presentRisks[ruleName].Locations, types.RiskDetectionLocation{
+			RiskLocation: riskLocation,
+			Content:      value.(string),
+		})
+	} else {
+		holder.presentRisks[ruleName].Locations = append(holder.presentRisks[ruleName].Locations, types.RiskDetectionLocation{
+			RiskLocation: riskLocation,
+			Content:      *detection.Source.Text,
+		})
+	}
 }
 
 func (holder *Holder) AddSchema(detection detections.Detection) error {
@@ -149,7 +159,6 @@ func (holder *Holder) ToDataFlow() []interface{} {
 		datatypes := maputil.ToSortedSlice(detector.datatypes)
 
 		for _, datatype := range datatypes {
-
 			stored := false
 			if customDetector, isCustomDetector := holder.config.CustomDetector[detector.id]; isCustomDetector {
 				stored = customDetector.Stored

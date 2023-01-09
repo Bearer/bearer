@@ -45,6 +45,7 @@ func TestPolicies(t *testing.T) {
 		newPolicyTest("ruby_jwt_leaking", []string{"ruby/jwt_leaking.rb"}, false),
 		newPolicyTest("ruby_session_leaking", []string{"ruby/session_leaking.rb"}, false),
 		newPolicyTest("ruby_cookies_leaking", []string{"ruby/cookies_leaking.rb"}, false),
+		newPolicyTest("secret_leak", []string{"leaks/aws.js"}, false),
 	}
 
 	testhelper.RunTests(t, tests)

@@ -25,7 +25,15 @@ type DataFlow struct {
 	Components []types.Component `json:"components" yaml:"components"`
 }
 
-var allowedDetections []detections.DetectionType = []detections.DetectionType{detections.TypeSchemaClassified, detections.TypeCustomClassified, detections.TypeDependencyClassified, detections.TypeInterfaceClassified, detections.TypeFrameworkClassified, detections.TypeCustomRisk}
+var allowedDetections []detections.DetectionType = []detections.DetectionType{
+	detections.TypeSchemaClassified,
+	detections.TypeCustomClassified,
+	detections.TypeDependencyClassified,
+	detections.TypeInterfaceClassified,
+	detections.TypeFrameworkClassified,
+	detections.TypeCustomRisk,
+	detections.TypeSecretleak,
+}
 
 func GetOutput(input []interface{}, config settings.Config, isInternal bool) (*DataFlow, error) {
 	dataTypesHolder := datatypes.New(config, isInternal)
@@ -119,6 +127,9 @@ func GetOutput(input []interface{}, config settings.Config, isInternal bool) (*D
 					return nil, err
 				}
 			}
+
+		case detections.TypeSecretleak:
+			risksHolder.AddRiskPresence(castDetection)
 
 		case detections.TypeDependencyClassified:
 			classifiedDetection, err := detectiondecoder.GetClassifiedDependency(detection)
