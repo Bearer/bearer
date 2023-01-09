@@ -6,7 +6,7 @@ before:
     - go generate ./...
 
 builds:
-  - id: curio-macos-build
+  - id: darwin
     main: ./cmd/curio
     binary: curio
     env:
@@ -14,8 +14,8 @@ builds:
     goos:
       - darwin
     goarch:
-      - amd64
       - arm64
+      - amd64
     ldflags:
       - -s -w
       - -X "github.com/bearer/curio/cmd/curio/build.Version={{.Version}}"
@@ -24,9 +24,9 @@ builds:
       post:
         - |
           sh -c '
-          fn=dist/curio-macos-build_{{.Target}}/gon.hcl
+          fn=dist/darwin/darwin_{{.Target}}/gon.hcl
           cat >"$fn" <<EOF
-          source = ["dist/curio-macos-build_{{.Target}}/{{.Name}}"]
+          source = ["dist/darwin/darwin_{{.Target}}/{{.Name}}"]
 
           bundle_id = "com.bearer.curio"
 
@@ -43,15 +43,25 @@ builds:
           }
           EOF
           '
-        - "gon -log-level=debug 'dist/curio-macos-build_{{.Target}}/gon.hcl'"
+        - "gon -log-level DEBUG 'dist/darwin/darwin_{{.Target}}/gon.hcl'"
+  - id: linux
+    main: ./cmd/curio
+    binary: curio
+    env:
+      - CGO_ENABLED=1
+    goos:
+      - linux
+    goarch:
+      - 386
+      - amd64
+    ldflags:
+      - -s -w
+      - -extldflags "-static"
+      - -X "github.com/bearer/curio/cmd/curio/build.Version={{.Version}}"
+      - -X "github.com/bearer/curio/cmd/curio/build.CommitSHA={{.Commit}}"
 
-snapshot:
-  name_template: "{{ incpatch .Version }}-next"
-
-archives:
-  - id: macos-archive
-    builds:
-      - curio-macos-build
+checksum:
+  name_template: "checksums.txt"
 
 changelog:
   sort: asc

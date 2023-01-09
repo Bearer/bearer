@@ -1,0 +1,57 @@
+includes:
+  - from_file:
+      path: ./.goreleaser/common.yaml
+
+snapshot:
+  name_template: "{{ incpatch .Version }}-next"
+
+release:
+  draft: false
+  mode: append
+
+brews:
+  - # Name template of the recipe
+    name: curio
+    folder: Formula
+    install: bin.install "curio"
+    tap:
+      owner: Bearer
+      name: homebrew-curio
+      token: "{{ .Env.HOMEBREW_TAP_GITHUB_TOKEN }}"
+
+    commit_author:
+      name: bearer
+      email: bearer@users.noreply.github.com
+
+    commit_msg_template: "chore: Brew formula update for {{ .ProjectName }} version {{ .Tag }}"
+
+    homepage: "https://curio.sh"
+
+    license: "Elastic License 2.0"
+
+    description: "A data-first security scanner that finds risks and vulnerabilities in your code so you can protect sensitive data (PHI, PD, PII)."
+
+dockers:
+  - image_templates:
+      - "docker.io/bearer/curio:{{ .Tag }}-amd64"
+      - "docker.io/bearer/curio:{{ .Version }}-amd64"
+      - "docker.io/bearer/curio:latest-amd64"
+      - "ghcr.io/bearer/curio:{{ .Tag }}-amd64"
+      - "ghcr.io/bearer/curio:{{ .Version }}-amd64"
+      - "ghcr.io/bearer/curio:latest-amd64"
+    use: buildx
+    goos: linux
+    goarch: amd64
+    ids:
+      - linux
+    build_flag_templates:
+      - "--label=org.opencontainers.image.title={{ .ProjectName }}"
+      - "--label=org.opencontainers.image.description=A data-first security scanner that finds risks and vulnerabilities in your code so you can protect sensitive data (PHI, PD, PII)."
+      - "--label=org.opencontainers.image.vendor=Bearer"
+      - "--label=org.opencontainers.image.version={{ .Version }}"
+      - "--label=org.opencontainers.image.created={{ .Date }}"
+      - "--label=org.opencontainers.image.source=https://github.com/Bearer/curio"
+      - "--label=org.opencontainers.image.revision={{ .FullCommit }}"
+      - "--label=org.opencontainers.image.url=https://curio.sh"
+      - "--label=org.opencontainers.image.documentation=https://curio.sh"
+      - "--platform=linux/amd64"
