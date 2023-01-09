@@ -117,13 +117,40 @@ func FromOptions(opts flag.Options) (Config, error) {
 
 	policies := DefaultPolicies()
 
+	// validate detector options
+	onlyDetector := opts.DetectorOptions.OnlyDetector
+	skipDetector := opts.DetectorOptions.SkipDetector
+
+	validDetectors := make(map[string]bool)
 	for key := range detectors {
-		if len(opts.DetectorOptions.OnlyDetector) > 0 && !opts.DetectorOptions.OnlyDetector[key] {
+		validDetectors[key] = true
+	}
+
+	var invalidDetectors []string
+	for key := range onlyDetector {
+		if !validDetectors[key] {
+			invalidDetectors = append(invalidDetectors, key)
+		}
+	}
+
+	for key := range skipDetector {
+		if !validDetectors[key] {
+			invalidDetectors = append(invalidDetectors, key)
+		}
+	}
+
+	if len(invalidDetectors) > 0 {
+		return Config{}, fmt.Errorf("unknown detectors %s", invalidDetectors)
+	}
+
+	// apply detector options
+	for key := range detectors {
+		if len(onlyDetector) > 0 && !onlyDetector[key] {
 			delete(detectors, key)
 			continue
 		}
 
-		if opts.DetectorOptions.SkipDetector[key] {
+		if skipDetector[key] {
 			delete(detectors, key)
 			continue
 		}
