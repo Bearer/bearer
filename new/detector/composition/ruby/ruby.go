@@ -12,17 +12,22 @@ import (
 	detectorset "github.com/bearer/curio/new/detector/set"
 	"github.com/bearer/curio/new/detector/types"
 	detectortypes "github.com/bearer/curio/new/detector/types"
-	languagetypes "github.com/bearer/curio/new/language/types"
-
 	"github.com/bearer/curio/new/language"
+	languagetypes "github.com/bearer/curio/new/language/types"
 	"github.com/bearer/curio/pkg/commands/process/settings"
+	"github.com/bearer/curio/pkg/report"
+	reportdetections "github.com/bearer/curio/pkg/report/detections"
+	"github.com/bearer/curio/pkg/report/detectors"
+	"github.com/bearer/curio/pkg/report/schema"
+	"github.com/bearer/curio/pkg/report/source"
 	"github.com/bearer/curio/pkg/util/file"
 )
 
 type Composition struct {
-	detectorsSet detectortypes.DetectorSet
-	lang         languagetypes.Language
-	closers      []func()
+	customDetectorTypes []string
+	detectorSet         detectortypes.DetectorSet
+	lang                languagetypes.Language
+	closers             []func()
 }
 
 func New(rules map[string]settings.Rule) (types.Composition, error) {
@@ -70,9 +75,13 @@ func New(rules map[string]settings.Rule) (types.Composition, error) {
 		for i, pattern := range rule.Patterns {
 			// todo: Figure out how to have multiple patterns for same ruleName, or support in dataflow and policies multiple rule_names
 
+			detectorType := fmt.Sprintf("%s_%d", ruleName, i)
+
+			composition.customDetectorTypes = append(composition.customDetectorTypes, detectorType)
+
 			customDetector, err := custom.New(
 				lang,
-				fmt.Sprintf("%s_%d", ruleName, i),
+				detectorType,
 				custom.Rule{
 					Pattern: pattern.Pattern,
 					Filters: pattern.Filters.ToCustomFilters(),
@@ -92,7 +101,7 @@ func New(rules map[string]settings.Rule) (types.Composition, error) {
 		composition.Close()
 		return nil, fmt.Errorf("failed to create detector set: %s", err)
 	}
-	composition.detectorsSet = detectorSet
+	composition.detectorSet = detectorSet
 
 	return composition, nil
 }
@@ -103,22 +112,68 @@ func (composition *Composition) Close() {
 	}
 }
 
-func (composition *Composition) DetectFromFile(file *file.FileInfo) ([]*detectortypes.Detection, error) {
+func (composition *Composition) DetectFromFile(report report.Report, file *file.FileInfo) error {
 	if file.Language != "Ruby" {
-		return nil, nil
+		return nil
 	}
 
 	fileContent, err := os.ReadFile(file.AbsolutePath)
 	if err != nil {
-		return nil, fmt.Errorf("failed to read file %s", err)
+		return fmt.Errorf("failed to read file %s", err)
 	}
 
 	tree, err := composition.lang.Parse(string(fileContent))
 	if err != nil {
-		return nil, fmt.Errorf("failed to parse file %s", err)
+		return fmt.Errorf("failed to parse file %s", err)
 	}
 
-	evaluator := evaluator.New(composition.detectorsSet, tree)
+	evaluator := evaluator.New(composition.detectorSet, tree)
 
-	return evaluator.ForTree(tree.RootNode(), "ruby_file_detection")
+	for _, detectorType := range composition.customDetectorTypes {
+		detections, err := evaluator.ForTree(tree.RootNode(), detectorType)
+		if err != nil {
+			return err
+		}
+
+		for _, detection := range detections {
+			data := detection.Data.(custom.Data)
+
+			if len(data.Datatypes) == 0 {
+				matchSource := source.New(
+					file,
+					file.Path,
+					detection.MatchNode.LineNumber(),
+					detection.MatchNode.ColumnNumber(),
+					"FIXME: rule.Pattern",
+				)
+
+				var content string
+				// if !rule.OmitParent {
+				content = detection.MatchNode.Content()
+				// }
+
+				parent := &schema.Parent{
+					LineNumber: detection.MatchNode.LineNumber(),
+					Content:    content,
+				}
+
+				report.AddDetection(
+					reportdetections.TypeCustomRisk,
+					detectors.Type(detectorType),
+					matchSource,
+					parent,
+				)
+			} else {
+				report.AddDataType(
+					reportdetections.TypeCustom,
+					detectors.Type(detectorType),
+					idGenerator,
+					forExport,
+					detection.MatchNode,
+				)
+			}
+		}
+	}
+
+	return nil
 }

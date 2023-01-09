@@ -2,6 +2,7 @@ package types
 
 import (
 	"github.com/bearer/curio/new/language/tree"
+	"github.com/bearer/curio/pkg/report"
 	"github.com/bearer/curio/pkg/util/file"
 )
 
@@ -33,6 +34,6 @@ type Detector interface {
 }
 
 type Composition interface {
-	DetectFromFile(*file.FileInfo) ([]*Detection, error)
+	DetectFromFile(report report.Report, file *file.FileInfo) error
 	Close()
 }

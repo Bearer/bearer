@@ -6,6 +6,7 @@ import (
 	"github.com/bearer/curio/new/detector/composition/ruby"
 	"github.com/bearer/curio/new/detector/types"
 	"github.com/bearer/curio/pkg/commands/process/settings"
+	"github.com/bearer/curio/pkg/report"
 	"github.com/bearer/curio/pkg/util/file"
 	"github.com/rs/zerolog/log"
 )
@@ -49,16 +50,14 @@ func Setup(config map[string]settings.Rule) (err error) {
 	return err
 }
 
-func Detect(file *file.FileInfo) (err error) {
-	log.Debug().Msgf("calling new detect")
+func Detect(report report.Report, file *file.FileInfo) (err error) {
+	log.Debug().Msg("calling new detect")
 
 	for _, language := range scanner {
-		detections, err := language.composition.DetectFromFile(file)
-		if err != nil {
-			return fmt.Errorf("%s failed to parse file %s:%s ", language.name, file.AbsolutePath, err)
+		if err := language.composition.DetectFromFile(report, file); err != nil {
+			return fmt.Errorf("%s failed to detect in file %s: %s", language.name, file.AbsolutePath, err)
 		}
-
-		log.Debug().Msgf("new detections... %#v", detections)
 	}
+
 	return nil
 }

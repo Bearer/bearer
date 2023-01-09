@@ -167,7 +167,7 @@ func ExtractWithDetectors(
 
 			log.Debug().Msgf("processing file %s", file.AbsolutePath)
 
-			err := scanner.Detect(file)
+			err := scanner.Detect(report, file)
 			if err != nil {
 				log.Debug().Msgf("failed to process file %s for detector: %s", file.RelativePath, err)
 				report.AddError(file.RelativePath, fmt.Errorf("failed to process file for detector : %s", err))
