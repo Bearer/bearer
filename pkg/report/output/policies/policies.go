@@ -236,7 +236,7 @@ func writePolicyFailureToString(reportStr *strings.Builder, policyFailure Policy
 	reportStr.WriteString(color.HiBlackString("https://curio.sh/reference/policies/#" + policyFailure.PolicyDisplayId + "\n"))
 	reportStr.WriteString("\n")
 	if policyFailure.DetailedContext != "" {
-		reportStr.WriteString(color.GreenString("Detected: " + policyFailure.DetailedContext + "\n"))
+		reportStr.WriteString("Detected: " + policyFailure.DetailedContext + "\n")
 	}
 	reportStr.WriteString(color.HiBlueString("File: " + underline(policyFailure.Filename+":"+fmt.Sprint(policyFailure.LineNumber)) + "\n"))
 
