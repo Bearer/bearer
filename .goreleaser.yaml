@@ -1,92 +1,10 @@
-project_name: curio
-
-before:
-  hooks:
-    - go mod tidy
-    - go generate ./...
-
-builds:
-  - id: darwin
-    main: ./cmd/curio
-    binary: curio
-    env:
-      - CGO_ENABLED=1
-    goos:
-      - darwin
-    goarch:
-      - arm64
-      - amd64
-    ldflags:
-      - -s -w
-      - -X "github.com/bearer/curio/cmd/curio/build.Version={{.Version}}"
-      - -X "github.com/bearer/curio/cmd/curio/build.CommitSHA={{.Commit}}"
-    hooks:
-      post:
-        - |
-          sh -c '
-          fn=dist/darwin/darwin_{{.Target}}/gon.hcl
-          cat >"$fn" <<EOF
-          source = ["dist/darwin/darwin_{{.Target}}/{{.Name}}"]
-
-          bundle_id = "com.bearer.curio"
-
-          apple_id {
-            password = "@env:AC_PASSWORD"
-          }
-
-          sign {
-            application_identity = "Developer ID Application: Bearer Inc (5T2VP4YAG8)"
-          }
-
-          zip {
-            output_path = "curio_{{.Target}}.zip"
-          }
-          EOF
-          '
-        - "gon -log-level DEBUG 'dist/darwin/darwin_{{.Target}}/gon.hcl'"
-  - id: linux
-    main: ./cmd/curio
-    binary: curio
-    env:
-      - CGO_ENABLED=1
-    goos:
-      - linux
-    goarch:
-      - 386
-      - amd64
-      # - arm64
-    # overrides:
-    #   - goos: linux
-    #     goarch: arm64
-    #     env:
-    #       - CC=aarch64-linux-gnu-gcc
-    #   - goos: linux
-    #     goarch: 386
-    #     env:
-    #       - CC=gcc -m32
-    #   - goos: linux
-    #     goarch: amd64
-    #     env:
-    #       - CC=gcc
-    ldflags:
-      - -s -w
-      - -extldflags "-static"
-      - -X "github.com/bearer/curio/cmd/curio/build.Version={{.Version}}"
-      - -X "github.com/bearer/curio/cmd/curio/build.CommitSHA={{.Commit}}"
+includes:
+  - from_file:
+      path: ./.goreleaser/common.yaml
 
 snapshot:
   name_template: "{{ incpatch .Version }}-next"
 
-checksum:
-  name_template: "checksums.txt"
-
 release:
   draft: true
   mode: append
-
-changelog:
-  sort: asc
-  filters:
-    exclude:
-      - "^docs:"
-      - "^test:"
