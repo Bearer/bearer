@@ -117,13 +117,40 @@ func FromOptions(opts flag.Options) (Config, error) {
 
 	policies := DefaultPolicies()
 
+	// validate detector options
+	onlyDetector := opts.DetectorOptions.OnlyDetector
+	skipDetector := opts.DetectorOptions.SkipDetector
+
+	validDetectors := make(map[string]bool)
 	for key := range detectors {
-		if len(opts.DetectorOptions.OnlyDetector) > 0 && !opts.DetectorOptions.OnlyDetector[key] {
+		validDetectors[key] = true
+	}
+
+	var invalidDetectors []string
+	for key := range onlyDetector {
+		if !validDetectors[key] {
+			invalidDetectors = append(invalidDetectors, key)
+		}
+	}
+
+	for key := range skipDetector {
+		if !validDetectors[key] {
+			invalidDetectors = append(invalidDetectors, key)
+		}
+	}
+
+	if len(invalidDetectors) > 0 {
+		return Config{}, fmt.Errorf("unknown detectors %s", invalidDetectors)
+	}
+
+	// apply detector options
+	for key := range detectors {
+		if len(onlyDetector) > 0 && !onlyDetector[key] {
 			delete(detectors, key)
 			continue
 		}
 
-		if opts.DetectorOptions.SkipDetector[key] {
+		if skipDetector[key] {
 			delete(detectors, key)
 			continue
 		}
@@ -143,15 +170,43 @@ func FromOptions(opts flag.Options) (Config, error) {
 		detectors[ruleName] = rule
 	}
 
+	// validate policy options
+	onlyPolicy := opts.PolicyOptions.OnlyPolicy
+	skipPolicy := opts.PolicyOptions.SkipPolicy
+
+	policyDisplayIds := make(map[string]bool)
+	for key := range policies {
+		policy := policies[key]
+		policyDisplayIds[policy.DisplayId] = true
+	}
+
+	var invalidPolicyDisplayIds []string
+	for key := range onlyPolicy {
+		if !policyDisplayIds[key] {
+			invalidPolicyDisplayIds = append(invalidPolicyDisplayIds, key)
+		}
+	}
+
+	for key := range skipPolicy {
+		if !policyDisplayIds[key] {
+			invalidPolicyDisplayIds = append(invalidPolicyDisplayIds, key)
+		}
+	}
+
+	if len(invalidPolicyDisplayIds) > 0 {
+		return Config{}, fmt.Errorf("unknown policy ids %s", invalidPolicyDisplayIds)
+	}
+
+	// apply policy options
 	for key := range policies {
 		policy := policies[key]
 
-		if len(opts.PolicyOptions.OnlyPolicy) > 0 && !opts.PolicyOptions.OnlyPolicy[policy.DisplayId] {
+		if len(onlyPolicy) > 0 && !onlyPolicy[policy.DisplayId] {
 			delete(policies, key)
 			continue
 		}
 
-		if opts.PolicyOptions.SkipPolicy[policy.DisplayId] {
+		if skipPolicy[policy.DisplayId] {
 			delete(policies, key)
 			continue
 		}
@@ -167,6 +222,7 @@ func FromOptions(opts flag.Options) (Config, error) {
 		}
 	}
 
+	// apply external policies
 	externalPolicies, err := LoadExternalPolicies(opts.ExternalPolicyDir)
 	if err != nil {
 		return Config{}, fmt.Errorf("failed to load external policies %w", err)
