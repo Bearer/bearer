@@ -207,7 +207,7 @@ weak_encryption_library:
     - path: policies/weak_encryption_library.rego
       name: bearer.weak_encryption_library
 secret_leak:
-  description: ""
+  description: "Hard-coding secrets and keys in a project opens them up to leakage. Do not hard-code secrets in committed code. This policy checks for common secret types such as keys, tokens, and passwords and ensures they aren’t hard-coded."
   name: "Do not leak secrets."
   display_id: "CR-025"
   id: "secret_leak"
