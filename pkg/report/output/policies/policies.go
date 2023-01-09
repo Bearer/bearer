@@ -232,9 +232,7 @@ func writeSummaryToString(
 func writePolicyFailureToString(reportStr *strings.Builder, policyFailure PolicyResult, policySeverity string) {
 	reportStr.WriteString("\n\n")
 	reportStr.WriteString(formatSeverity(policySeverity))
-	policyNameString := policyFailure.PolicyName + " [" + policyFailure.PolicyDisplayId + "]" + "\n"
-	formattedPolicyName := fmt.Sprintf(policyNameString, policyFailure.DetailedContext)
-	reportStr.WriteString(formattedPolicyName)
+	reportStr.WriteString(policyFailure.PolicyName + policyFailure.DetailedContext + " [" + policyFailure.PolicyDisplayId + "]" + "\n")
 	reportStr.WriteString(color.HiBlackString("https://curio.sh/reference/policies/#" + policyFailure.PolicyDisplayId + "\n"))
 	reportStr.WriteString("\n")
 	reportStr.WriteString(color.HiBlueString("File: " + underline(policyFailure.Filename+":"+fmt.Sprint(policyFailure.LineNumber)) + "\n"))
