@@ -39,6 +39,7 @@ type PolicyOutput struct {
 	CategoryGroups   []string `json:"category_groups,omitempty" yaml:"category_groups,omitempty"`
 	Severity         string   `json:"severity,omitempty" yaml:"severity,omitempty"`
 	OmitParent       bool     `json:"omit_parent" yaml:"omit_parent"`
+	DetailedContext  string   `json:"detailed_context,omitempty" yaml:"detailed_context,omitempty"`
 }
 
 type PolicyResult struct {
@@ -51,6 +52,7 @@ type PolicyResult struct {
 	ParentLineNumber  int      `json:"parent_line_number,omitempty" yaml:"parent_line_number,omitempty"`
 	ParentContent     string   `json:"parent_content,omitempty" yaml:"parent_content,omitempty"`
 	OmitParent        bool     `json:"omit_parent" yaml:"omit_parent"`
+	DetailedContext   string   `json:"detailed_context,omitempty" yaml:"detailed_context,omitempty"`
 }
 
 func GetOutput(dataflow *dataflow.DataFlow, config settings.Config) (map[string][]PolicyResult, error) {
@@ -108,6 +110,7 @@ func GetOutput(dataflow *dataflow.DataFlow, config settings.Config) (map[string]
 					OmitParent:        policyOutput.OmitParent,
 					ParentLineNumber:  policyOutput.ParentLineNumber,
 					ParentContent:     policyOutput.ParentContent,
+					DetailedContext:   policyOutput.DetailedContext,
 				}
 
 				result[policyOutput.Severity] = append(result[policyOutput.Severity], policyResult)
@@ -229,7 +232,7 @@ func writeSummaryToString(
 func writePolicyFailureToString(reportStr *strings.Builder, policyFailure PolicyResult, policySeverity string) {
 	reportStr.WriteString("\n\n")
 	reportStr.WriteString(formatSeverity(policySeverity))
-	reportStr.WriteString(policyFailure.PolicyName + " [" + policyFailure.PolicyDisplayId + "]" + "\n")
+	reportStr.WriteString(policyFailure.PolicyName + policyFailure.DetailedContext + " [" + policyFailure.PolicyDisplayId + "]" + "\n")
 	reportStr.WriteString(color.HiBlackString("https://curio.sh/reference/policies/#" + policyFailure.PolicyDisplayId + "\n"))
 	reportStr.WriteString("\n")
 	reportStr.WriteString(color.HiBlueString("File: " + underline(policyFailure.Filename+":"+fmt.Sprint(policyFailure.LineNumber)) + "\n"))

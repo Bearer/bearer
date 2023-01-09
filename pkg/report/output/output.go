@@ -34,7 +34,7 @@ func ReportPolicies(report types.Report, output *zerolog.Event, config settings.
 		return
 	}
 
-	reportSupported, err = anySupportedLanguagesPresent(lineOfCodeOutput , config)
+	reportSupported, err = anySupportedLanguagesPresent(lineOfCodeOutput, config)
 	if err != nil {
 		return
 	}
