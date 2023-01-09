@@ -1,6 +1,8 @@
 package base
 
 import (
+	"fmt"
+
 	sitter "github.com/smacker/go-tree-sitter"
 
 	"github.com/bearer/curio/new/language/patternquery"
@@ -44,7 +46,7 @@ func (lang *Language) CompileQuery(input string) (*tree.Query, error) {
 func (lang *Language) CompilePatternQuery(input string) (types.PatternQuery, error) {
 	inputWithoutVariables, params, err := lang.extractPatternVariables(input)
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("error processing variables: %s", err)
 	}
 
 	return patternquery.Compile(lang, inputWithoutVariables, params)

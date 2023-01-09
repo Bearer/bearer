@@ -7,6 +7,7 @@ import (
 	"github.com/bearer/curio/new/detector/types"
 	"github.com/bearer/curio/pkg/commands/process/settings"
 	"github.com/bearer/curio/pkg/util/file"
+	"github.com/rs/zerolog/log"
 )
 
 type language struct {
@@ -36,7 +37,6 @@ func Setup(config map[string]settings.Rule) (err error) {
 	for _, instantiatior := range toInstantiate {
 		composition, err := instantiatior.constructor(config)
 		if err != nil {
-			composition.Close()
 			return fmt.Errorf("failed to instantiate composition %s:%s", instantiatior.name, err)
 		}
 
@@ -50,11 +50,15 @@ func Setup(config map[string]settings.Rule) (err error) {
 }
 
 func Detect(file *file.FileInfo) (err error) {
+	log.Debug().Msgf("calling new detect")
+
 	for _, language := range scanner {
-		err := language.composition.ParseFile(file)
+		detections, err := language.composition.DetectFromFile(file)
 		if err != nil {
 			return fmt.Errorf("%s failed to parse file %s:%s ", language.name, file.AbsolutePath, err)
 		}
+
+		log.Debug().Msgf("new detections... %#v", detections)
 	}
 	return nil
 }

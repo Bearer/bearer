@@ -7,6 +7,7 @@ import (
 	"github.com/bearer/curio/new/language/tree"
 	"github.com/bearer/curio/new/language/types"
 	"github.com/bearer/curio/pkg/parser/nodeid"
+	"github.com/rs/zerolog/log"
 )
 
 type Variable struct {
@@ -36,6 +37,9 @@ func Build(lang types.Language, input string, variables []Variable) (*Result, er
 		return nil, err
 	}
 	defer tree.Close()
+
+	log.Debug().Msgf("input is: '%s'", input)
+	log.Debug().Msgf("%s", tree.RootNode().Debug())
 
 	if tree.RootNode().ChildCount() != 1 {
 		return nil, fmt.Errorf("expecting 1 node but got %d", tree.RootNode().ChildCount())

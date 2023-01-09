@@ -33,6 +33,6 @@ type Detector interface {
 }
 
 type Composition interface {
-	ParseFile(*file.FileInfo) error
+	DetectFromFile(*file.FileInfo) ([]*Detection, error)
 	Close()
 }

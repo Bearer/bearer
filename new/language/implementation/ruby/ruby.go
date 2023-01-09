@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"regexp"
 
+	"github.com/rs/zerolog/log"
 	"github.com/smacker/go-tree-sitter/ruby"
 	"github.com/ssoroka/slice"
 	"golang.org/x/exp/slices"
@@ -63,6 +64,7 @@ func extractPatternVariables(input string) (string, []patternquerybuilder.Variab
 
 	var params []patternquerybuilder.Variable
 
+	log.Debug().Msgf("before is: %s", input)
 	replaced, err := regex.ReplaceAllWithSubmatches(patternQueryVariableRegex, input, func(submatches []string) (string, error) {
 		nodeType := submatches[typeIndex]
 		if nodeType == "" {
@@ -85,6 +87,8 @@ func extractPatternVariables(input string) (string, []patternquerybuilder.Variab
 
 		return dummyValue, nil
 	})
+	log.Debug().Msgf("after is: %s", replaced)
+
 	if err != nil {
 		return "", nil, err
 	}

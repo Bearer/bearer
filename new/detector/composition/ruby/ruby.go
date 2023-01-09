@@ -103,27 +103,22 @@ func (composition *Composition) Close() {
 	}
 }
 
-func (composition *Composition) ParseFile(file *file.FileInfo) error {
+func (composition *Composition) DetectFromFile(file *file.FileInfo) ([]*detectortypes.Detection, error) {
 	if file.Language != "Ruby" {
-		return nil
+		return nil, nil
 	}
 
 	fileContent, err := os.ReadFile(file.AbsolutePath)
 	if err != nil {
-		return fmt.Errorf("failed to read file %s", err)
+		return nil, fmt.Errorf("failed to read file %s", err)
 	}
 
 	tree, err := composition.lang.Parse(string(fileContent))
 	if err != nil {
-		return fmt.Errorf("failed to parse file %s", err)
+		return nil, fmt.Errorf("failed to parse file %s", err)
 	}
 
 	evaluator := evaluator.New(composition.detectorsSet, tree)
 
-	detections, err := evaluator.ForTree(tree.RootNode(), "ruby_file_detection")
-	if err != nil {
-		return fmt.Errorf("failed to detect: %s", err)
-	}
-
-	// todo : do something with detections
+	return evaluator.ForTree(tree.RootNode(), "ruby_file_detection")
 }
