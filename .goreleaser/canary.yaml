@@ -1,0 +1,12 @@
+includes:
+  - from_file:
+      path: ./.goreleaser/common.yaml
+
+snapshot:
+  name_template: "{{ incpatch .Version }}-canary"
+
+release:
+  draft: true
+  header: |
+    ## Canary ({{ .Date }})
+  mode: append

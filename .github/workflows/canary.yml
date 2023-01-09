@@ -1,11 +1,9 @@
-name: Release_New
+name: Canary
 on:
   workflow_dispatch:
   push:
     branches:
       - "ci/go-releaser-refactor"
-    tags:
-      - "v*"
 
 permissions:
   contents: write
@@ -25,6 +23,7 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           tag_prefix: v
           default_bump: patch
+          append_to_pre_release_tag: "canary"
     outputs:
       ref: refs/tags/${{ steps.tag_version.outputs.new_tag || github.ref_name }}
 
@@ -66,14 +65,14 @@ jobs:
         uses: actions/cache@v3
         with:
           path: dist/linux
-          key: linux-${{ env.sha_short }}
+          key: linux-${{ env.sha_short }}-canary
       - uses: goreleaser/goreleaser-action@v4
         if: steps.cache.outputs.cache-hit != 'true' # do not run if cache hit
         name: Run GoReleaser
         with:
           distribution: goreleaser-pro
           version: latest
-          args: release --rm-dist --split
+          args: release --skip-docker --rm-dist --split -f ./.goreleaser/canary.yaml
         env:
           GOOS: linux
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -110,14 +109,14 @@ jobs:
         uses: actions/cache@v3
         with:
           path: dist/darwin
-          key: darwin-${{ env.sha_short }}
+          key: darwin-${{ env.sha_short }}-canary
       - uses: goreleaser/goreleaser-action@v4
         if: steps.cache.outputs.cache-hit != 'true' # do not run if cache hit
         name: Run GoReleaser
         with:
           distribution: goreleaser-pro
           version: latest
-          args: release  --rm-dist --split
+          args: release --skip-docker --rm-dist --split -f ./.goreleaser/canary.yaml
         env:
           GOOS: darwin
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -126,7 +125,7 @@ jobs:
           GORELEASER_KEY: ${{ secrets.GORELEASER_KEY }}
 
   publish:
-    needs: [tag, build-linux, build-darwin]
+    needs: [tag, build-darwin, build-linux]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -142,11 +141,11 @@ jobs:
       - uses: actions/cache@v3
         with:
           path: dist/linux
-          key: linux-${{ env.sha_short }}
+          key: linux-${{ env.sha_short }}-canary
       - uses: actions/cache@v3
         with:
           path: dist/darwin
-          key: darwin-${{ env.sha_short }}
+          key: darwin-${{ env.sha_short }}-canary
       - name: Release
         uses: goreleaser/goreleaser-action@v4
         with:
