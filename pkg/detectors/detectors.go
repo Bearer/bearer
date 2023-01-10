@@ -5,6 +5,7 @@ import (
 	"path/filepath"
 	"runtime/debug"
 
+	"github.com/bearer/curio/new/scanner"
 	"github.com/bearer/curio/pkg/commands/process/settings"
 	"github.com/bearer/curio/pkg/detectors/beego"
 	"github.com/bearer/curio/pkg/detectors/csharp"
@@ -57,6 +58,7 @@ var customDetector = InitializedDetector{reportdetectors.DetectorCustom, custom.
 
 func SetupCustomDetector(config map[string]settings.Rule) error {
 	detector := customDetector.Detector.(*custom.Detector)
+
 	return detector.CompileRules(config)
 }
 
@@ -135,7 +137,6 @@ func ExtractWithDetectors(
 		func(dir *file.Path) (bool, error) {
 			for _, detector := range allDetectors {
 				active, isActive := activeDetectors[detector]
-
 				if isActive && !isParentedBy(active.AbsolutePath, dir.AbsolutePath) {
 					delete(activeDetectors, detector)
 					isActive = false
@@ -166,6 +167,13 @@ func ExtractWithDetectors(
 			defer recovery()
 
 			log.Debug().Msgf("processing file %s", file.AbsolutePath)
+
+			err := scanner.Detect(report, file)
+			if err != nil {
+				log.Debug().Msgf("failed to process file %s for detector: %s", file.RelativePath, err)
+				report.AddError(file.RelativePath, fmt.Errorf("failed to process file for detector : %s", err))
+			}
+
 			for _, detector := range allDetectors {
 				active, isActive := activeDetectors[detector]
 				if !isActive {

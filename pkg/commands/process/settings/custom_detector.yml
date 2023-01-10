@@ -1,44 +1,43 @@
-ruby_password_length:
-  type: "risk"
-  languages:
-    - ruby
-  patterns:
-    - pattern: |
-        class $<_> < ApplicationRecord
-          validates :password, length: { minimum: $<LENGTH> }
-        end
-      filters:
-        - variable: LENGTH
-          minimum: 8
-          match_violation: true
-    - pattern: |
-        class $<_> < ApplicationRecord
-          devise password_length: $<MIN_LENGTH>..$<MAX_LENGTH>
-        end
-      filters:
-        - variable: MAX_LENGTH
-          minimum: 35
-          match_violation: true
-        - variable: MIN_LENGTH
-          minimum: 8
-          match_violation: true
-    - pattern: |
-        Devise.setup do |config|
-          config.password_length = $<MIN_LENGTH>..$<MAX_LENGTH>
-        end
-      filters:
-        - variable: MIN_LENGTH
-          minimum: 8
-          match_violation: true
-    - pattern: |
-        Devise.setup do |config|
-          config.password_length = $<LENGTH>
-        end
-      filters:
-        - variable: LENGTH
-          minimum: 8
-          match_violation: true
-  detect_presence: true
+# ruby_password_length:
+#   type: "risk"
+#   languages:
+#     - ruby
+#   patterns:
+#     - pattern: |
+#         class $<_> < ApplicationRecord
+#           validates :password, length: { minimum: $<LENGTH> }
+#         end
+#       filters:
+#         - variable: LENGTH
+#           minimum: 8
+#           match_violation: true
+#     - pattern: |
+#         class $<_> < ApplicationRecord
+#           devise password_length: $<MIN_LENGTH>..$<MAX_LENGTH>
+#         end
+#       filters:
+#         - variable: MAX_LENGTH
+#           minimum: 35
+#           match_violation: true
+#         - variable: MIN_LENGTH
+#           minimum: 8
+#           match_violation: true
+#     - pattern: |
+#         Devise.setup do |config|
+#           config.password_length = $<MIN_LENGTH>..$<MAX_LENGTH>
+#         end
+#       filters:
+#         - variable: MIN_LENGTH
+#           minimum: 8
+#           match_violation: true
+#     - pattern: |
+#         Devise.setup do |config|
+#           config.password_length = $<LENGTH>
+#         end
+#       filters:
+#         - variable: LENGTH
+#           minimum: 8
+#           match_violation: true
 ruby_http_get_detection:
   type: "risk"
   languages:
@@ -46,12 +45,12 @@ ruby_http_get_detection:
   patterns:
     - pattern: |
         URI.encode_www_form($<DATA_TYPE>)
-    - filters:
+      filters:
         - variable: DATA_TYPE
           detection: datatype
     - pattern: |
         URI($<DATA_TYPE>)
-    - filters:
+      filters:
         - variable: DATA_TYPE
           detection: datatype
     - pattern: |
@@ -208,38 +207,38 @@ detect_rails_jwt:
           detection: datatype
   languages:
     - ruby
-detect_rails_cookies:
-  type: "risk"
-  patterns:
-    - pattern: |
-        cookies[] = $<DATA_TYPE>
-      filters:
-        - variable: DATA_TYPE
-          detection: datatype
-    - pattern: | # FIXME: either implement alternation, or have our own types that map to mulitple tree-sitter types
-        cookies.$<METHOD_CHAIN:identifier|call>[] = $<DATA_TYPE>
-      filters:
-        - variable: METHOD_CHAIN
-          values:
-            - permanent
-            - encrypted
-            - signed
-            - permanent.encrypted
-            - permanent.signed
-            - permanent.encrypted.signed
-            - permanent.signed.encrypted
-            - encrypted.permanent
-            - encrypted.signed
-            - encrypted.permanent.signed
-            - encrypted.signed.permanent
-            - signed.encrypted
-            - signed.permanent
-            - signed.permanent.encrypted
-            - signed.encrypted.permanent
-        - variable: DATA_TYPE
-          detection: datatype
-  languages:
-    - ruby
+# detect_rails_cookies:
+#   type: "risk"
+#   patterns:
+#     - pattern: |
+#         cookies[] = $<DATA_TYPE>
+#       filters:
+#         - variable: DATA_TYPE
+#           detection: datatype
+#     - pattern: | # FIXME: either implement alternation, or have our own types that map to mulitple tree-sitter types
+#         cookies.$<METHOD_CHAIN:identifier|call>[] = $<DATA_TYPE>
+#       filters:
+#         - variable: METHOD_CHAIN
+#           values:
+#             - permanent
+#             - encrypted
+#             - signed
+#             - permanent.encrypted
+#             - permanent.signed
+#             - permanent.encrypted.signed
+#             - permanent.signed.encrypted
+#             - encrypted.permanent
+#             - encrypted.signed
+#             - encrypted.permanent.signed
+#             - encrypted.signed.permanent
+#             - signed.encrypted
+#             - signed.permanent
+#             - signed.permanent.encrypted
+#             - signed.encrypted.permanent
+#         - variable: DATA_TYPE
+#           detection: datatype
+#   languages:
+#     - ruby
 ssl_certificate_verification_disabled:
   type: "risk"
   patterns:

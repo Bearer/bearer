@@ -4,11 +4,12 @@ import (
 	"fmt"
 	"regexp"
 
+	sitter "github.com/smacker/go-tree-sitter"
 	"github.com/smacker/go-tree-sitter/ruby"
 	"github.com/ssoroka/slice"
 	"golang.org/x/exp/slices"
 
-	"github.com/bearer/curio/new/language/base"
+	"github.com/bearer/curio/new/language/implementation"
 	patternquerybuilder "github.com/bearer/curio/new/language/patternquery/builder"
 	"github.com/bearer/curio/new/language/tree"
 	"github.com/bearer/curio/pkg/util/regex"
@@ -17,16 +18,24 @@ import (
 var (
 	variableLookupParents = []string{"pair", "argument_list"}
 
+	anonymousPatternNodeParentTypes = []string{"binary"}
+
 	// $<name:type> or $<name>
 	patternQueryVariableRegex = regexp.MustCompile(`\$<(?P<name>[^>:]+)(?::(?P<type>[^>]+))?>`)
 	allowedPatternQueryTypes  = []string{"identifier", "constant", "_"}
 )
 
-func Get() *base.Language {
-	return base.New(ruby.GetLanguage(), analyzeFlow, extractPatternVariables)
+type rubyImplementation struct{}
+
+func Get() implementation.Implementation {
+	return &rubyImplementation{}
 }
 
-func analyzeFlow(rootNode *tree.Node) {
+func (implementation *rubyImplementation) SitterLanguage() *sitter.Language {
+	return ruby.GetLanguage()
+}
+
+func (implementation *rubyImplementation) AnalyzeFlow(rootNode *tree.Node) {
 	scope := make(map[string]*tree.Node)
 
 	rootNode.Walk(func(node *tree.Node) error {
@@ -56,7 +65,7 @@ func analyzeFlow(rootNode *tree.Node) {
 	})
 }
 
-func extractPatternVariables(input string) (string, []patternquerybuilder.Variable, error) {
+func (implementation *rubyImplementation) ExtractPatternVariables(input string) (string, []patternquerybuilder.Variable, error) {
 	nameIndex := patternQueryVariableRegex.SubexpIndex("name")
 	typeIndex := patternQueryVariableRegex.SubexpIndex("type")
 	i := 0
@@ -85,6 +94,7 @@ func extractPatternVariables(input string) (string, []patternquerybuilder.Variab
 
 		return dummyValue, nil
 	})
+
 	if err != nil {
 		return "", nil, err
 	}
@@ -99,4 +109,8 @@ func produceDummyValue(i int, nodeType string) string {
 	default:
 		return "CurioVar" + fmt.Sprint(i)
 	}
+}
+
+func (implementation *rubyImplementation) AnonymousPatternNodeParentTypes() []string {
+	return anonymousPatternNodeParentTypes
 }

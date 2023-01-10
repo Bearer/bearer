@@ -1,6 +1,8 @@
 package patternquery
 
 import (
+	"fmt"
+
 	"github.com/bearer/curio/new/language/patternquery/builder"
 	"github.com/bearer/curio/new/language/tree"
 	"github.com/bearer/curio/new/language/types"
@@ -13,15 +15,20 @@ type Query struct {
 	paramToContent  map[string]string
 }
 
-func Compile(lang types.Language, input string, variables []builder.Variable) (*Query, error) {
-	builderResult, err := builder.Build(lang, input, variables)
+func Compile(
+	lang types.Language,
+	anonymousParentTypes []string,
+	input string,
+	variables []builder.Variable,
+) (*Query, error) {
+	builderResult, err := builder.Build(lang, anonymousParentTypes, input, variables)
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("failed to build: %s", err)
 	}
 
 	treeQuery, err := lang.CompileQuery(builderResult.Query)
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("failed to compile: %s", err)
 	}
 
 	return &Query{

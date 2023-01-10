@@ -15,6 +15,10 @@ type NodeID *sitter.Node
 
 var ErrTerminateWalk = errors.New("terminate walk")
 
+func (node *Node) Debug() string {
+	return node.sitterNode.String()
+}
+
 func (node *Node) ID() NodeID {
 	return node.sitterNode
 }
