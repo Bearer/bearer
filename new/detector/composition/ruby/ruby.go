@@ -21,6 +21,7 @@ import (
 	"github.com/bearer/curio/pkg/report/schema"
 	"github.com/bearer/curio/pkg/report/source"
 	"github.com/bearer/curio/pkg/util/file"
+	"github.com/rs/zerolog/log"
 )
 
 type Composition struct {
@@ -164,13 +165,41 @@ func (composition *Composition) DetectFromFile(report report.Report, file *file.
 					parent,
 				)
 			} else {
-				report.AddDataType(
-					reportdetections.TypeCustom,
-					detectors.Type(detectorType),
-					idGenerator,
-					forExport,
-					detection.MatchNode,
-				)
+				log.Debug().Msgf("data is: %#v")
+
+				for _, datatypeDetection := range data.Datatypes {
+					data := datatypeDetection.Data.(datatype.Data)
+
+					report.AddDetection(reportdetections.TypeSchemaClassified, detectors.Type(detectorType), source.New(
+						file,
+						file.Path,
+						datatypeDetection.MatchNode.LineNumber(),
+						datatypeDetection.MatchNode.ColumnNumber(),
+						"FIXME: ???",
+					), schema.Schema{
+						Classification: data.Classification,
+						Parent: &schema.Parent{
+							LineNumber: datatypeDetection.MatchNode.LineNumber(),
+							Content:    datatypeDetection.MatchNode.Content(),
+						},
+					})
+
+					for _, property := range data.Properties {
+						report.AddDetection(reportdetections.TypeSchemaClassified, detectors.Type(detectorType), source.New(
+							file,
+							file.Path,
+							property.Detection.MatchNode.LineNumber(),
+							property.Detection.MatchNode.ColumnNumber(),
+							"FIXME: ???",
+						), schema.Schema{
+							Classification: property.Classification,
+							Parent: &schema.Parent{
+								LineNumber: property.Detection.MatchNode.LineNumber(),
+								Content:    property.Detection.MatchNode.Content(),
+							},
+						})
+					}
+				}
 			}
 		}
 	}
