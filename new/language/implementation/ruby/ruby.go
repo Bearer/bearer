@@ -3,6 +3,7 @@ package ruby
 import (
 	"fmt"
 	"regexp"
+	"strings"
 
 	sitter "github.com/smacker/go-tree-sitter"
 	"github.com/smacker/go-tree-sitter/ruby"
@@ -20,9 +21,9 @@ var (
 
 	anonymousPatternNodeParentTypes = []string{"binary"}
 
-	// $<name:type> or $<name>
-	patternQueryVariableRegex = regexp.MustCompile(`\$<(?P<name>[^>:]+)(?::(?P<type>[^>]+))?>`)
-	allowedPatternQueryTypes  = []string{"identifier", "constant", "_"}
+	// $<name:type> or $<name:type1|type2> or $<name>
+	patternQueryVariableRegex = regexp.MustCompile(`\$<(?P<name>[^>:]+)(?::(?P<types>[^>]+))?>`)
+	allowedPatternQueryTypes  = []string{"identifier", "constant", "_", "call"}
 )
 
 type rubyImplementation struct{}
@@ -67,26 +68,28 @@ func (implementation *rubyImplementation) AnalyzeFlow(rootNode *tree.Node) {
 
 func (implementation *rubyImplementation) ExtractPatternVariables(input string) (string, []patternquerybuilder.Variable, error) {
 	nameIndex := patternQueryVariableRegex.SubexpIndex("name")
-	typeIndex := patternQueryVariableRegex.SubexpIndex("type")
+	typesIndex := patternQueryVariableRegex.SubexpIndex("types")
 	i := 0
 
 	var params []patternquerybuilder.Variable
 
 	replaced, err := regex.ReplaceAllWithSubmatches(patternQueryVariableRegex, input, func(submatches []string) (string, error) {
-		nodeType := submatches[typeIndex]
-		if nodeType == "" {
-			nodeType = "_"
+		nodeTypes := strings.Split(submatches[typesIndex], "|")
+		if nodeTypes[0] == "" {
+			nodeTypes = []string{"_"}
 		}
 
-		if !slices.Contains(allowedPatternQueryTypes, nodeType) {
-			return "", fmt.Errorf("invalid node type '%s' in pattern query", nodeType)
+		for _, nodeType := range nodeTypes {
+			if !slices.Contains(allowedPatternQueryTypes, nodeType) {
+				return "", fmt.Errorf("invalid node type '%s' in pattern query", nodeType)
+			}
 		}
 
-		dummyValue := produceDummyValue(i, nodeType)
+		dummyValue := produceDummyValue(i, nodeTypes[0])
 
 		params = append(params, patternquerybuilder.Variable{
 			Name:       submatches[nameIndex],
-			NodeType:   nodeType,
+			NodeTypes:  nodeTypes,
 			DummyValue: dummyValue,
 		})
 
@@ -104,7 +107,7 @@ func (implementation *rubyImplementation) ExtractPatternVariables(input string) 
 
 func produceDummyValue(i int, nodeType string) string {
 	switch nodeType {
-	case "identifier":
+	case "identifier", "call":
 		return "curioVar" + fmt.Sprint(i)
 	default:
 		return "CurioVar" + fmt.Sprint(i)
