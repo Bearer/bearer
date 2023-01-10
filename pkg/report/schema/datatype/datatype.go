@@ -161,14 +161,14 @@ func dataTypeToSchema[D DataTypable](report detections.ReportDetection, detectio
 		}
 		report.AddDetection(detectionType, detectorType, dataType.GetNode().Source(false),
 			schema.Schema{
-				ObjectName:      parentName,
-				FieldName:       selfName,
-				ObjectUUID:      parentUUID,
-				FieldUUID:       selfUUID,
-				FieldType:       dataType.GetTextType(),
-				SimpleFieldType: dataType.GetType(),
-				Classification:  dataType.GetClassification(),
-				Parent:          parentSchema,
+				ObjectName:            parentName,
+				FieldName:             selfName,
+				ObjectUUID:            parentUUID,
+				FieldUUID:             selfUUID,
+				FieldType:             dataType.GetTextType(),
+				SimpleFieldType:       dataType.GetType(),
+				Classification:        dataType.GetClassification(),
+				Parent:                parentSchema,
 				TransformedObjectName: transformedObjectName,
 			},
 		)

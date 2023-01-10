@@ -76,6 +76,10 @@ func (detector *Detector) CompileRules(rulesConfig map[string]settings.Rule) err
 			continue
 		}
 		for _, lang := range rule.Languages {
+			if lang == "ruby" {
+				continue
+			}
+
 			for _, rulePattern := range rule.Patterns {
 				compiledRule, err := detector.compileRule(rulePattern, lang, detector.paramIdGenerator)
 				if err != nil {

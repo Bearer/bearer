@@ -7,26 +7,22 @@ import (
 	"github.com/bearer/curio/new/detector/types"
 	"github.com/bearer/curio/new/language/tree"
 	langtree "github.com/bearer/curio/new/language/tree"
-	languagetypes "github.com/bearer/curio/new/language/types"
 	"golang.org/x/exp/slices"
 )
 
 type evaluator struct {
-	lang               languagetypes.Language
 	detectorSet        types.DetectorSet
 	detectionCache     map[langtree.NodeID]map[string][]*types.Detection
 	executingDetectors map[langtree.NodeID][]string
 }
 
 func New(
-	lang languagetypes.Language,
 	detectorSet types.DetectorSet,
 	tree *langtree.Tree,
 ) types.Evaluator {
 	detectionCache := make(map[langtree.NodeID]map[string][]*types.Detection)
 
 	return &evaluator{
-		lang:               lang,
 		detectorSet:        detectorSet,
 		detectionCache:     detectionCache,
 		executingDetectors: make(map[langtree.NodeID][]string),
