@@ -40,12 +40,13 @@ type DefaultDB struct {
 }
 
 type Recipe struct {
-	URLS     []string  `json:"urls" yaml:"urls"`
-	Name     string    `json:"name" yaml:"name"`
-	Type     string    `json:"type" yaml:"type"`
-	SubType  string    `json:"sub_type" yaml:"sub_type"`
-	Packages []Package `json:"packages" yaml:"packages"`
-	UUID     string    `json:"uuid" yaml:"uuid"`
+	URLS        []string  `json:"urls" yaml:"urls"`
+	ExcludeURLS []string  `json:"exclude_urls" yaml:"exclude_urls"`
+	Name        string    `json:"name" yaml:"name"`
+	Type        string    `json:"type" yaml:"type"`
+	SubType     string    `json:"sub_type" yaml:"sub_type"`
+	Packages    []Package `json:"packages" yaml:"packages"`
+	UUID        string    `json:"uuid" yaml:"uuid"`
 }
 
 type Package struct {

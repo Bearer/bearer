@@ -42,11 +42,11 @@ func TestInterface(t *testing.T) {
 				},
 			},
 			Want: &interfaces.Classification{
-				URL:         "https://api.stripe.com",
-				RecipeName:  "Stripe",
+				URL:           "https://api.stripe.com",
+				RecipeName:    "Stripe",
 				RecipeSubType: "third_party",
-				RecipeUUID:  "c24b836a-d035-49dc-808f-1912f16f690d",
-				RecipeMatch: true,
+				RecipeUUID:    "c24b836a-d035-49dc-808f-1912f16f690d",
+				RecipeMatch:   true,
 				Decision: classify.ClassificationDecision{
 					State:  classify.Valid,
 					Reason: "recipe_match",
@@ -81,6 +81,33 @@ func TestInterface(t *testing.T) {
 			},
 		},
 		{
+			Name: "when there is a matching recipe with a wildcard but it is part of the exclusion list",
+			Input: detections.Detection{
+				Value: reportinterfaces.Interface{
+					Type: reportinterfaces.TypeURL,
+					Value: &values.Value{
+						Parts: []values.Part{
+							&values.String{
+								Type:  values.PartTypeString,
+								Value: "https://",
+							},
+							&values.String{
+								Type:  values.PartTypeString,
+								Value: "ajax.googleapis.com",
+							},
+						},
+					},
+				},
+			},
+			Want: &interfaces.Classification{
+				URL: "https://ajax.googleapis.com",
+				Decision: classify.ClassificationDecision{
+					State:  classify.Invalid,
+					Reason: "ignored_url_in_recipe",
+				},
+			},
+		},
+		{
 			Name: "when there is a matching recipe with a wildcard",
 			Input: detections.Detection{
 				Value: reportinterfaces.Interface{
@@ -100,11 +127,11 @@ func TestInterface(t *testing.T) {
 				},
 			},
 			Want: &interfaces.Classification{
-				URL:         "http://*.stripe.com",
-				RecipeName:  "Stripe",
+				URL:           "http://*.stripe.com",
+				RecipeName:    "Stripe",
 				RecipeSubType: "third_party",
-				RecipeUUID:  "c24b836a-d035-49dc-808f-1912f16f690d",
-				RecipeMatch: true,
+				RecipeUUID:    "c24b836a-d035-49dc-808f-1912f16f690d",
+				RecipeMatch:   true,
 				Decision: classify.ClassificationDecision{
 					State:  classify.Potential,
 					Reason: "recipe_match_with_wildcard",
@@ -131,11 +158,11 @@ func TestInterface(t *testing.T) {
 				},
 			},
 			Want: &interfaces.Classification{
-				URL:         "https://googleapis.com/auth/spreadsheets",
-				RecipeName:  "Google Spreadsheets",
+				URL:           "https://googleapis.com/auth/spreadsheets",
+				RecipeName:    "Google Spreadsheets",
 				RecipeSubType: "third_party",
-				RecipeUUID:  "ebe2e05e-bc56-4204-9329-d9b8d3cf1837",
-				RecipeMatch: true,
+				RecipeUUID:    "ebe2e05e-bc56-4204-9329-d9b8d3cf1837",
+				RecipeMatch:   true,
 				Decision: classify.ClassificationDecision{
 					State:  classify.Valid,
 					Reason: "recipe_match",
@@ -292,7 +319,7 @@ func TestFindMatchingRecipeUrl(t *testing.T) {
 				t.Errorf("Error initializing interface %s", err)
 			}
 
-			output, err := classifier.FindMatchingRecipeUrl(
+			output, _, err := classifier.FindMatchingRecipeUrl(
 				testCase.DetectionURL,
 			)
 			if err != nil {
