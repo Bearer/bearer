@@ -58,12 +58,19 @@ func (modules Modules) ToRegoModules() (output []rego.Module) {
 }
 
 type PatternFilter struct {
-	Variable       string   `mapstructure:"variable" json:"variable" yaml:"variable"`
-	Detection      string   `mapstructure:"detection" json:"detection" yaml:"detection"`
-	Values         []string `mapstructure:"values" json:"values" yaml:"values"`
-	Minimum        *int     `mapstructure:"minimum" json:"minimum" yaml:"minimum"`
-	Maximum        *int     `mapstructure:"maximum" json:"maximum" yaml:"maximum"`
-	MatchViolation bool     `mapstructure:"match_violation" json:"match_violation" yaml:"match_violation"`
+	Either             []PatternFilter `mapstructure:"either" json:"either" yaml:"either"`
+	Variable           string          `mapstructure:"variable" json:"variable" yaml:"variable"`
+	Detection          string          `mapstructure:"detection" json:"detection" yaml:"detection"`
+	Values             []string        `mapstructure:"values" json:"values" yaml:"values"`
+	LessThan           *int            `mapstructure:"less_than" json:"less_than" yaml:"less_than"`
+	LessThanOrEqual    *int            `mapstructure:"less_than_or_equal" json:"less_than_or_equal" yaml:"less_than_or_equal"`
+	GreaterThan        *int            `mapstructure:"greater_than" json:"greater_than" yaml:"greater_than"`
+	GreaterThanOrEqual *int            `mapstructure:"greater_than_or_equal" json:"greater_than_or_equal" yaml:"greater_than_or_equal"`
+
+	// FIXME: remove when refactor is complete
+	Minimum        *int `mapstructure:"minimum" json:"minimum" yaml:"minimum"`
+	Maximum        *int `mapstructure:"maximum" json:"maximum" yaml:"maximum"`
+	MatchViolation bool `mapstructure:"match_violation" json:"match_violation" yaml:"match_violation"`
 }
 
 type RulePattern struct {
