@@ -4,6 +4,8 @@ import (
 	"fmt"
 	"strings"
 
+	"golang.org/x/exp/slices"
+
 	"github.com/bearer/curio/new/language/tree"
 	"github.com/bearer/curio/new/language/types"
 	"github.com/bearer/curio/pkg/parser/nodeid"
@@ -23,14 +25,20 @@ type Result struct {
 }
 
 type builder struct {
-	stringBuilder    strings.Builder
-	idGenerator      nodeid.Generator
-	variables        []Variable
-	variableToParams map[string][]string
-	paramToContent   map[string]string
+	anonymousParentTypes []string
+	stringBuilder        strings.Builder
+	idGenerator          nodeid.Generator
+	variables            []Variable
+	variableToParams     map[string][]string
+	paramToContent       map[string]string
 }
 
-func Build(lang types.Language, input string, variables []Variable) (*Result, error) {
+func Build(
+	lang types.Language,
+	anonymousParentTypes []string,
+	input string,
+	variables []Variable,
+) (*Result, error) {
 	tree, err := lang.Parse(input)
 	if err != nil {
 		return nil, err
@@ -42,11 +50,12 @@ func Build(lang types.Language, input string, variables []Variable) (*Result, er
 	}
 
 	builder := builder{
-		stringBuilder:    strings.Builder{},
-		idGenerator:      &nodeid.IntGenerator{},
-		variables:        variables,
-		variableToParams: make(map[string][]string),
-		paramToContent:   make(map[string]string),
+		anonymousParentTypes: anonymousParentTypes,
+		stringBuilder:        strings.Builder{},
+		idGenerator:          &nodeid.IntGenerator{},
+		variables:            variables,
+		variableToParams:     make(map[string][]string),
+		paramToContent:       make(map[string]string),
 	}
 
 	return builder.build(tree.RootNode().Child(0)), nil
@@ -81,7 +90,7 @@ func (builder *builder) compileNode(node *tree.Node) error {
 	if variable := builder.getVariableFor(node); variable != nil {
 		builder.compileVariableNode(variable)
 	} else if !node.IsNamed() {
-		builder.compileUnnamedNode(node)
+		builder.compileAnonymousNode(node)
 	} else if node.ChildCount() == 0 {
 		builder.compileLeafNode(node)
 	} else {
@@ -102,8 +111,12 @@ func (builder *builder) compileVariableNode(variable *Variable) {
 	builder.write(paramName)
 }
 
-// Un-named nodes match their content as a literal
-func (builder *builder) compileUnnamedNode(node *tree.Node) {
+// Anonymous nodes match their content as a literal
+func (builder *builder) compileAnonymousNode(node *tree.Node) {
+	if !slices.Contains(builder.anonymousParentTypes, node.Parent().Type()) {
+		return
+	}
+
 	builder.write(`"`)
 	builder.write(escapeQueryString(node.Content()))
 	builder.write(`"`)

@@ -6,6 +6,7 @@ import (
 	"net/http"
 	"runtime"
 
+	customdetector "github.com/bearer/curio/new/scanner"
 	"github.com/bearer/curio/pkg/classification"
 	config "github.com/bearer/curio/pkg/commands/process/settings"
 	"github.com/bearer/curio/pkg/commands/process/worker/blamer"
@@ -34,6 +35,10 @@ func Start(port string) error {
 			}
 
 			err = detectors.SetupCustomDetector(config.CustomDetector)
+			if err != nil {
+				response.CustomDetectorError = err.Error()
+			}
+			err = customdetector.Setup(config.CustomDetector)
 			if err != nil {
 				response.CustomDetectorError = err.Error()
 			}

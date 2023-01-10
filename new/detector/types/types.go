@@ -2,6 +2,8 @@ package types
 
 import (
 	"github.com/bearer/curio/new/language/tree"
+	"github.com/bearer/curio/pkg/report"
+	"github.com/bearer/curio/pkg/util/file"
 )
 
 type Detection struct {
@@ -28,5 +30,10 @@ type DetectorSet interface {
 type Detector interface {
 	Name() string
 	DetectAt(node *tree.Node, evaluator Evaluator) ([]*Detection, error)
+	Close()
+}
+
+type Composition interface {
+	DetectFromFile(report report.Report, file *file.FileInfo) error
 	Close()
 }

@@ -59,6 +59,7 @@ func (modules Modules) ToRegoModules() (output []rego.Module) {
 
 type PatternFilter struct {
 	Variable       string   `mapstructure:"variable" json:"variable" yaml:"variable"`
+	Detection      string   `mapstructure:"detection" json:"detection" yaml:"detection"`
 	Values         []string `mapstructure:"values" json:"values" yaml:"values"`
 	Minimum        *int     `mapstructure:"minimum" json:"minimum" yaml:"minimum"`
 	Maximum        *int     `mapstructure:"maximum" json:"maximum" yaml:"maximum"`
