@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"regexp"
 
-	"github.com/rs/zerolog/log"
 	sitter "github.com/smacker/go-tree-sitter"
 	"github.com/smacker/go-tree-sitter/ruby"
 	"github.com/ssoroka/slice"
@@ -73,7 +72,6 @@ func (implementation *rubyImplementation) ExtractPatternVariables(input string) 
 
 	var params []patternquerybuilder.Variable
 
-	log.Debug().Msgf("before is: %s", input)
 	replaced, err := regex.ReplaceAllWithSubmatches(patternQueryVariableRegex, input, func(submatches []string) (string, error) {
 		nodeType := submatches[typeIndex]
 		if nodeType == "" {
@@ -96,7 +94,6 @@ func (implementation *rubyImplementation) ExtractPatternVariables(input string) 
 
 		return dummyValue, nil
 	})
-	log.Debug().Msgf("after is: %s", replaced)
 
 	if err != nil {
 		return "", nil, err

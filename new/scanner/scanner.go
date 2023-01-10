@@ -8,7 +8,6 @@ import (
 	"github.com/bearer/curio/pkg/commands/process/settings"
 	"github.com/bearer/curio/pkg/report"
 	"github.com/bearer/curio/pkg/util/file"
-	"github.com/rs/zerolog/log"
 )
 
 type language struct {
@@ -51,8 +50,6 @@ func Setup(config map[string]settings.Rule) (err error) {
 }
 
 func Detect(report report.Report, file *file.FileInfo) (err error) {
-	log.Debug().Msg("calling new detect")
-
 	for _, language := range scanner {
 		if err := language.composition.DetectFromFile(report, file); err != nil {
 			return fmt.Errorf("%s failed to detect in file %s: %s", language.name, file.AbsolutePath, err)

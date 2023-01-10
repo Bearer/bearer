@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/rs/zerolog/log"
 	"golang.org/x/exp/slices"
 
 	"github.com/bearer/curio/new/language/tree"
@@ -45,9 +44,6 @@ func Build(
 		return nil, err
 	}
 	defer tree.Close()
-
-	log.Debug().Msgf("input is: '%s'", input)
-	log.Debug().Msgf("%s", tree.RootNode().Debug())
 
 	if tree.RootNode().ChildCount() != 1 {
 		return nil, fmt.Errorf("expecting 1 node but got %d", tree.RootNode().ChildCount())

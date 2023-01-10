@@ -21,7 +21,6 @@ import (
 	"github.com/bearer/curio/pkg/report/schema"
 	"github.com/bearer/curio/pkg/report/source"
 	"github.com/bearer/curio/pkg/util/file"
-	"github.com/rs/zerolog/log"
 )
 
 type Composition struct {
@@ -73,28 +72,19 @@ func New(rules map[string]settings.Rule) (types.Composition, error) {
 
 	// instantiate custom ruby detectors
 	for ruleName, rule := range rules {
-		for i, pattern := range rule.Patterns {
-			// todo: Figure out how to have multiple patterns for same ruleName, or support in dataflow and policies multiple rule_names
+		composition.customDetectorTypes = append(composition.customDetectorTypes, ruleName)
 
-			detectorType := fmt.Sprintf("%s_%d", ruleName, i)
-
-			composition.customDetectorTypes = append(composition.customDetectorTypes, detectorType)
-
-			customDetector, err := custom.New(
-				lang,
-				detectorType,
-				custom.Rule{
-					Pattern: pattern.Pattern,
-					Filters: pattern.Filters.ToCustomFilters(),
-				},
-			)
-			if err != nil {
-				composition.Close()
-				return nil, fmt.Errorf("failed to create custom detector %s for pattern count %d: %s", ruleName, i, err)
-			}
-			detectors = append(detectors, customDetector)
-			composition.closers = append(composition.closers, customDetector.Close)
+		customDetector, err := custom.New(
+			lang,
+			ruleName,
+			rule.Patterns,
+		)
+		if err != nil {
+			composition.Close()
+			return nil, fmt.Errorf("failed to create custom detector %s: %s", ruleName, err)
 		}
+		detectors = append(detectors, customDetector)
+		composition.closers = append(composition.closers, customDetector.Close)
 	}
 
 	detectorSet, err := detectorset.New(detectors)
@@ -164,42 +154,42 @@ func (composition *Composition) DetectFromFile(report report.Report, file *file.
 					matchSource,
 					parent,
 				)
-			} else {
-				log.Debug().Msgf("data is: %#v")
+				continue
+			}
 
-				for _, datatypeDetection := range data.Datatypes {
-					data := datatypeDetection.Data.(datatype.Data)
+			for _, datatypeDetection := range data.Datatypes {
+				data := datatypeDetection.Data.(datatype.Data)
 
+				report.AddDetection(reportdetections.TypeSchemaClassified, detectors.Type(detectorType), source.New(
+					file,
+					file.Path,
+					datatypeDetection.MatchNode.LineNumber(),
+					datatypeDetection.MatchNode.ColumnNumber(),
+					"FIXME: ???",
+				), schema.Schema{
+					Classification: data.Classification,
+					Parent: &schema.Parent{
+						LineNumber: datatypeDetection.MatchNode.LineNumber(),
+						Content:    datatypeDetection.MatchNode.Content(),
+					},
+				})
+
+				for _, property := range data.Properties {
 					report.AddDetection(reportdetections.TypeSchemaClassified, detectors.Type(detectorType), source.New(
 						file,
 						file.Path,
-						datatypeDetection.MatchNode.LineNumber(),
-						datatypeDetection.MatchNode.ColumnNumber(),
+						property.Detection.MatchNode.LineNumber(),
+						property.Detection.MatchNode.ColumnNumber(),
 						"FIXME: ???",
 					), schema.Schema{
-						Classification: data.Classification,
+						Classification: property.Classification,
 						Parent: &schema.Parent{
-							LineNumber: datatypeDetection.MatchNode.LineNumber(),
-							Content:    datatypeDetection.MatchNode.Content(),
+							LineNumber: property.Detection.MatchNode.LineNumber(),
+							Content:    property.Detection.MatchNode.Content(),
 						},
 					})
-
-					for _, property := range data.Properties {
-						report.AddDetection(reportdetections.TypeSchemaClassified, detectors.Type(detectorType), source.New(
-							file,
-							file.Path,
-							property.Detection.MatchNode.LineNumber(),
-							property.Detection.MatchNode.ColumnNumber(),
-							"FIXME: ???",
-						), schema.Schema{
-							Classification: property.Classification,
-							Parent: &schema.Parent{
-								LineNumber: property.Detection.MatchNode.LineNumber(),
-								Content:    property.Detection.MatchNode.Content(),
-							},
-						})
-					}
 				}
+
 			}
 		}
 	}

@@ -58,7 +58,9 @@ var customDetector = InitializedDetector{reportdetectors.DetectorCustom, custom.
 
 func SetupCustomDetector(config map[string]settings.Rule) error {
 	detector := customDetector.Detector.(*custom.Detector)
-	return detector.CompileRules(config)
+	return detector.CompileRules(make(map[string]settings.Rule))
+
+	// return detector.CompileRules(config)
 }
 
 func Registrations() []InitializedDetector {

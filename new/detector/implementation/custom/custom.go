@@ -8,41 +8,41 @@ import (
 	"github.com/bearer/curio/new/detector/types"
 	"github.com/bearer/curio/new/language/tree"
 	languagetypes "github.com/bearer/curio/new/language/types"
+	"github.com/bearer/curio/pkg/commands/process/settings"
 )
 
 type Data struct {
 	Datatypes []*types.Detection
 }
 
-type Filter struct {
-	Variable  string
-	Values    []string
-	Detection string
-}
-
-type Rule struct {
-	Pattern string
-	Filters []Filter
+type Pattern struct {
+	Query   languagetypes.PatternQuery
+	Filters []settings.PatternFilter
 }
 
 type customDetector struct {
 	detectorType string
-	patternQuery languagetypes.PatternQuery
-	filters      []Filter
+	patterns     []Pattern
 }
 
-func New(lang languagetypes.Language, detectorType string, rule Rule) (types.Detector, error) {
-	patternQuery, err := lang.CompilePatternQuery(rule.Pattern)
-	if err != nil {
-		return nil, fmt.Errorf("error compiling pattern: %s", err)
+func New(lang languagetypes.Language, detectorType string, patterns []settings.RulePattern) (types.Detector, error) {
+	var compiledPatterns []Pattern
+	for _, pattern := range patterns {
+		patternQuery, err := lang.CompilePatternQuery(pattern.Pattern)
+		if err != nil {
+			return nil, fmt.Errorf("error compiling pattern: %s", err)
+		}
+		compiledPatterns = append(compiledPatterns, Pattern{
+			Query:   patternQuery,
+			Filters: pattern.Filters,
+		})
+
+		// TODO: validate filters against pattern
+
 	}
-
-	// TODO: validate filters against pattern
-
 	return &customDetector{
 		detectorType: detectorType,
-		patternQuery: patternQuery,
-		filters:      rule.Filters,
+		patterns:     compiledPatterns,
 	}, nil
 }
 
@@ -54,29 +54,30 @@ func (detector *customDetector) DetectAt(
 	node *tree.Node,
 	evaluator types.Evaluator,
 ) ([]*types.Detection, error) {
-	results, err := detector.patternQuery.MatchAt(node)
-	if err != nil {
-		return nil, err
-	}
-
 	var detections []*types.Detection
-
-	for _, result := range results {
-		filtersMatch, datatypeDetections, err := detector.matchFilters(result, evaluator)
+	for _, pattern := range detector.patterns {
+		results, err := pattern.Query.MatchAt(node)
 		if err != nil {
 			return nil, err
 		}
 
-		if !filtersMatch {
-			continue
-		}
+		for _, result := range results {
+			filtersMatch, datatypeDetections, err := detector.matchFilters(result, evaluator, pattern.Filters)
+			if err != nil {
+				return nil, err
+			}
 
-		detections = append(detections, &types.Detection{
-			MatchNode: node,
-			Data: Data{
-				Datatypes: datatypeDetections,
-			},
-		})
+			if !filtersMatch {
+				continue
+			}
+
+			detections = append(detections, &types.Detection{
+				MatchNode: node,
+				Data: Data{
+					Datatypes: datatypeDetections,
+				},
+			})
+		}
 	}
 
 	return detections, nil
@@ -85,10 +86,11 @@ func (detector *customDetector) DetectAt(
 func (detector *customDetector) matchFilters(
 	result tree.QueryResult,
 	evaluator types.Evaluator,
+	filters []settings.PatternFilter,
 ) (bool, []*types.Detection, error) {
 	var datatypeDetections []*types.Detection
 
-	for _, filter := range detector.filters {
+	for _, filter := range filters {
 		node, ok := result[filter.Variable]
 		// shouldn't happen if filters are validated against pattern
 		if !ok {
@@ -118,5 +120,7 @@ func (detector *customDetector) matchFilters(
 }
 
 func (detector *customDetector) Close() {
-	detector.patternQuery.Close()
+	for _, pattern := range detector.patterns {
+		pattern.Query.Close()
+	}
 }

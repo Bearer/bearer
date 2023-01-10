@@ -8,7 +8,6 @@ import (
 	"github.com/spf13/viper"
 	"gopkg.in/yaml.v2"
 
-	"github.com/bearer/curio/new/detector/implementation/custom"
 	"github.com/bearer/curio/pkg/flag"
 	"github.com/bearer/curio/pkg/util/rego"
 )
@@ -57,20 +56,6 @@ func (modules Modules) ToRegoModules() (output []rego.Module) {
 	return
 }
 
-type PatternFilters []PatternFilter
-
-func (filters PatternFilters) ToCustomFilters() (customFilters []custom.Filter) {
-	for _, filter := range filters {
-		customFilters = append(customFilters, custom.Filter{
-			Variable:  filter.Variable,
-			Detection: filter.Detection,
-			Values:    filter.Values,
-		})
-	}
-
-	return customFilters
-}
-
 type PatternFilter struct {
 	Variable  string `mapstructure:"variable" json:"variable" yaml:"variable"`
 	Detection string `mapstructure:"detection" json:"detection" yaml:"detection"`
@@ -82,8 +67,8 @@ type PatternFilter struct {
 }
 
 type RulePattern struct {
-	Pattern string         `mapstructure:"pattern" json:"pattern" yaml:"pattern"`
-	Filters PatternFilters `mapstructure:"filters" json:"filters" yaml:"filters"`
+	Pattern string          `mapstructure:"pattern" json:"pattern" yaml:"pattern"`
+	Filters []PatternFilter `mapstructure:"filters" json:"filters" yaml:"filters"`
 }
 
 type Rule struct {

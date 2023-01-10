@@ -2,7 +2,6 @@ package patternquery
 
 import (
 	"fmt"
-	"log"
 
 	"github.com/bearer/curio/new/language/patternquery/builder"
 	"github.com/bearer/curio/new/language/tree"
@@ -26,8 +25,6 @@ func Compile(
 	if err != nil {
 		return nil, fmt.Errorf("failed to build: %s", err)
 	}
-
-	log.Printf("builder query is: %s", builderResult.Query)
 
 	treeQuery, err := lang.CompileQuery(builderResult.Query)
 	if err != nil {
