@@ -1,51 +1,46 @@
 package base
 
 import (
-	sitter "github.com/smacker/go-tree-sitter"
+	"fmt"
 
+	"github.com/bearer/curio/new/language/implementation"
 	"github.com/bearer/curio/new/language/patternquery"
-	patternquerybuilder "github.com/bearer/curio/new/language/patternquery/builder"
 	"github.com/bearer/curio/new/language/tree"
 	"github.com/bearer/curio/new/language/types"
 )
 
 type Language struct {
-	sitterLanguage          *sitter.Language
-	analyzeFlow             func(rootNode *tree.Node)
-	extractPatternVariables func(input string) (string, []patternquerybuilder.Variable, error)
+	implementation implementation.Implementation
 }
 
-func New(
-	sitterLanguage *sitter.Language,
-	analyzeFlow func(rootNode *tree.Node),
-	extractPatternVariables func(input string) (string, []patternquerybuilder.Variable, error),
-) *Language {
-	return &Language{
-		sitterLanguage:          sitterLanguage,
-		analyzeFlow:             analyzeFlow,
-		extractPatternVariables: extractPatternVariables,
-	}
+func New(implementation implementation.Implementation) *Language {
+	return &Language{implementation: implementation}
 }
 
 func (lang *Language) Parse(input string) (*tree.Tree, error) {
-	tree, err := tree.Parse(lang.sitterLanguage, input)
+	tree, err := tree.Parse(lang.implementation.SitterLanguage(), input)
 	if err != nil {
 		return nil, err
 	}
 
-	lang.analyzeFlow(tree.RootNode())
+	lang.implementation.AnalyzeFlow(tree.RootNode())
 	return tree, nil
 }
 
 func (lang *Language) CompileQuery(input string) (*tree.Query, error) {
-	return tree.CompileQuery(lang.sitterLanguage, input)
+	return tree.CompileQuery(lang.implementation.SitterLanguage(), input)
 }
 
 func (lang *Language) CompilePatternQuery(input string) (types.PatternQuery, error) {
-	inputWithoutVariables, params, err := lang.extractPatternVariables(input)
+	inputWithoutVariables, params, err := lang.implementation.ExtractPatternVariables(input)
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("error processing variables: %s", err)
 	}
 
-	return patternquery.Compile(lang, inputWithoutVariables, params)
+	return patternquery.Compile(
+		lang,
+		lang.implementation.AnonymousPatternNodeParentTypes(),
+		inputWithoutVariables,
+		params,
+	)
 }
