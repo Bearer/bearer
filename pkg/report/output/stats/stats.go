@@ -9,8 +9,8 @@ import (
 
 	"github.com/bearer/curio/pkg/report/output/dataflow"
 	"github.com/bearer/curio/pkg/util/maputil"
-	"github.com/hhatto/gocloc"
 	"github.com/fatih/color"
+	"github.com/hhatto/gocloc"
 )
 
 type DataType struct {
@@ -21,14 +21,14 @@ type DataType struct {
 }
 
 type Stats struct {
-	NumberOfLines              int32            `json:"number_of_lines" yaml:"number_of_lines"`
-	NumberOfDataTypes          int              `json:"number_of_data_types" yaml:"number_of_data_types"`
-	DataTypes                  []DataType       `json:"data_types" yaml:"data_types"`
-	NumberOfDatabases          int              `json:"-" yaml:"-"`
-	NumberOfExternalAPIs       int              `json:"-" yaml:"-"`
-	NumberOfInternalAPIs       int              `json:"-" yaml:"-"`
-	Languages                  map[string]int32 `json:"-" yaml:"-"`
-	DataGroups                 []string         `json:"-" yaml:"-"`
+	NumberOfLines        int32            `json:"number_of_lines" yaml:"number_of_lines"`
+	NumberOfDataTypes    int              `json:"number_of_data_types" yaml:"number_of_data_types"`
+	DataTypes            []DataType       `json:"data_types" yaml:"data_types"`
+	NumberOfDatabases    int              `json:"-" yaml:"-"`
+	NumberOfExternalAPIs int              `json:"-" yaml:"-"`
+	NumberOfInternalAPIs int              `json:"-" yaml:"-"`
+	Languages            map[string]int32 `json:"-" yaml:"-"`
+	DataGroups           []string         `json:"-" yaml:"-"`
 }
 
 func GetOutput(inputgocloc *gocloc.Result, inputDataflow *dataflow.DataFlow, config settings.Config) (*Stats, error) {
@@ -84,14 +84,14 @@ func GetOutput(inputgocloc *gocloc.Result, inputDataflow *dataflow.DataFlow, con
 	}
 
 	return &Stats{
-		NumberOfLines:              inputgocloc.Total.Code,
-		NumberOfDataTypes:          numberOfDataTypesFound,
-		DataTypes:                  data_types,
-		NumberOfDatabases:          numberOfDatabases,
-		NumberOfExternalAPIs:       numberOfExternalAPIs,
-		NumberOfInternalAPIs:       numberOfInternalAPIs,
-		Languages:                  languages,
-		DataGroups:                 dataGroupNames,
+		NumberOfLines:        inputgocloc.Total.Code,
+		NumberOfDataTypes:    numberOfDataTypesFound,
+		DataTypes:            data_types,
+		NumberOfDatabases:    numberOfDatabases,
+		NumberOfExternalAPIs: numberOfExternalAPIs,
+		NumberOfInternalAPIs: numberOfInternalAPIs,
+		Languages:            languages,
+		DataGroups:           dataGroupNames,
 	}, nil
 }
 
@@ -128,9 +128,9 @@ The policy report is not yet available for your stack. Learn more at %s`,
 
 	anythingFound :=
 		statistics.NumberOfDataTypes != 0 ||
-		statistics.NumberOfDatabases != 0 ||
-		statistics.NumberOfExternalAPIs != 0 ||
-		statistics.NumberOfInternalAPIs != 0
+			statistics.NumberOfDatabases != 0 ||
+			statistics.NumberOfExternalAPIs != 0 ||
+			statistics.NumberOfInternalAPIs != 0
 	if anythingFound {
 		outputStr.WriteString(`
 
@@ -173,7 +173,7 @@ Though this doesn’t mean the curious bear comes empty-handed, it found:
 			statistics.NumberOfInternalAPIs))
 	}
 
-	suggestedCommand := color.New(color.Italic).Sprintf("curio scan --report dataflow")
+	suggestedCommand := color.New(color.Italic).Sprintf("curio scan %s --report dataflow", config.Target)
 	outputStr.WriteString(fmt.Sprintf(`
 
 Run the data flow report if you want the full output using: %s`, suggestedCommand))
