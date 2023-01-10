@@ -3,8 +3,6 @@ package custom
 import (
 	"fmt"
 
-	"golang.org/x/exp/slices"
-
 	"github.com/bearer/curio/new/detector/types"
 	"github.com/bearer/curio/new/language/tree"
 	languagetypes "github.com/bearer/curio/new/language/types"
@@ -62,7 +60,7 @@ func (detector *customDetector) DetectAt(
 		}
 
 		for _, result := range results {
-			filtersMatch, datatypeDetections, err := detector.matchFilters(result, evaluator, pattern.Filters)
+			filtersMatch, datatypeDetections, err := matchAndFilter(result, evaluator, pattern.Filters)
 			if err != nil {
 				return nil, err
 			}
@@ -81,42 +79,6 @@ func (detector *customDetector) DetectAt(
 	}
 
 	return detections, nil
-}
-
-func (detector *customDetector) matchFilters(
-	result tree.QueryResult,
-	evaluator types.Evaluator,
-	filters []settings.PatternFilter,
-) (bool, []*types.Detection, error) {
-	var datatypeDetections []*types.Detection
-
-	for _, filter := range filters {
-		node, ok := result[filter.Variable]
-		// shouldn't happen if filters are validated against pattern
-		if !ok {
-			return false, nil, nil
-		}
-
-		if len(filter.Values) != 0 && !slices.Contains(filter.Values, node.Content()) {
-			return false, nil, nil
-		}
-
-		if filter.Detection == "datatype" {
-			filterDetections, err := evaluator.ForTree(node, "datatype")
-			if err != nil {
-				return false, nil, err
-			}
-
-			datatypeDetections = append(datatypeDetections, filterDetections...)
-		} else if filter.Detection != "" {
-			hasDetection, err := evaluator.TreeHas(node, filter.Detection)
-			if err != nil || !hasDetection {
-				return false, nil, err
-			}
-		}
-	}
-
-	return true, datatypeDetections, nil
 }
 
 func (detector *customDetector) Close() {
