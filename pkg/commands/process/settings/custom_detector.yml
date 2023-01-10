@@ -1,44 +1,43 @@
-ruby_password_length:
-  type: "risk"
-  languages:
-    - ruby
-  patterns:
-    - pattern: |
-        class $<_> < ApplicationRecord
-          validates :password, length: { minimum: $<LENGTH> }
-        end
-      filters:
-        - variable: LENGTH
-          minimum: 8
-          match_violation: true
-    - pattern: |
-        class $<_> < ApplicationRecord
-          devise password_length: $<MIN_LENGTH>..$<MAX_LENGTH>
-        end
-      filters:
-        - variable: MAX_LENGTH
-          minimum: 35
-          match_violation: true
-        - variable: MIN_LENGTH
-          minimum: 8
-          match_violation: true
-    - pattern: |
-        Devise.setup do |config|
-          config.password_length = $<MIN_LENGTH>..$<MAX_LENGTH>
-        end
-      filters:
-        - variable: MIN_LENGTH
-          minimum: 8
-          match_violation: true
-    - pattern: |
-        Devise.setup do |config|
-          config.password_length = $<LENGTH>
-        end
-      filters:
-        - variable: LENGTH
-          minimum: 8
-          match_violation: true
-  detect_presence: true
+# ruby_password_length:
+#   type: "risk"
+#   languages:
+#     - ruby
+#   patterns:
+#     - pattern: |
+#         class $<_> < ApplicationRecord
+#           validates :password, length: { minimum: $<LENGTH> }
+#         end
+#       filters:
+#         - variable: LENGTH
+#           minimum: 8
+#           match_violation: true
+#     - pattern: |
+#         class $<_> < ApplicationRecord
+#           devise password_length: $<MIN_LENGTH>..$<MAX_LENGTH>
+#         end
+#       filters:
+#         - variable: MAX_LENGTH
+#           minimum: 35
+#           match_violation: true
+#         - variable: MIN_LENGTH
+#           minimum: 8
+#           match_violation: true
+#     - pattern: |
+#         Devise.setup do |config|
+#           config.password_length = $<MIN_LENGTH>..$<MAX_LENGTH>
+#         end
+#       filters:
+#         - variable: MIN_LENGTH
+#           minimum: 8
+#           match_violation: true
+#     - pattern: |
+#         Devise.setup do |config|
+#           config.password_length = $<LENGTH>
+#         end
+#       filters:
+#         - variable: LENGTH
+#           minimum: 8
+#           match_violation: true
 ruby_http_get_detection:
   type: "risk"
   languages:
@@ -268,23 +267,23 @@ detect_encrypted_ruby_class_properties:
   root_lowercase: true
   languages:
     - ruby
-# detect_sql_create_public_table:
-#   type: "data_type"
-#   patterns:
-#     - |
-#       CREATE TABLE public.$TABLE_NAME (
-#         <$COLUMN>
-#       )
-#     - |
-#       CREATE TABLE $TABLE_NAME (
-#         <$COLUMN>
-#       )
-#   param_parenting: true
-#   root_singularize: true
-#   root_lowercase: true
-#   languages:
-#     - sql
-#   stored: true
+detect_sql_create_public_table:
+  type: "data_type"
+  patterns:
+    - |
+      CREATE TABLE public.$TABLE_NAME (
+        <$COLUMN>
+      )
+    - |
+      CREATE TABLE $TABLE_NAME (
+        <$COLUMN>
+      )
+  param_parenting: true
+  root_singularize: true
+  root_lowercase: true
+  languages:
+    - sql
+  stored: true
 detect_rails_insecure_smtp:
   type: "risk"
   patterns:

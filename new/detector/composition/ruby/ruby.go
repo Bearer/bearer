@@ -21,6 +21,7 @@ import (
 	"github.com/bearer/curio/pkg/report/schema"
 	"github.com/bearer/curio/pkg/report/source"
 	"github.com/bearer/curio/pkg/util/file"
+	"golang.org/x/exp/slices"
 )
 
 type Composition struct {
@@ -72,6 +73,10 @@ func New(rules map[string]settings.Rule) (types.Composition, error) {
 
 	// instantiate custom ruby detectors
 	for ruleName, rule := range rules {
+		if !slices.Contains(rule.Languages, "ruby") {
+			continue
+		}
+
 		composition.customDetectorTypes = append(composition.customDetectorTypes, ruleName)
 
 		customDetector, err := custom.New(

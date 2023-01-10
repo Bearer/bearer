@@ -38,8 +38,8 @@ func New(lang languagetypes.Language, detectorType string, patterns []settings.R
 		})
 
 		// TODO: validate filters against pattern
-
 	}
+
 	return &customDetector{
 		detectorType: detectorType,
 		patterns:     compiledPatterns,
