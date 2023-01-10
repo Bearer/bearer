@@ -60,7 +60,7 @@ func (detector *customDetector) DetectAt(
 		}
 
 		for _, result := range results {
-			filtersMatch, datatypeDetections, err := matchAndFilter(result, evaluator, pattern.Filters)
+			filtersMatch, datatypeDetections, err := matchAllFilters(result, evaluator, pattern.Filters)
 			if err != nil {
 				return nil, err
 			}

@@ -15,8 +15,8 @@ func matchFilter(
 	evaluator types.Evaluator,
 	filter settings.PatternFilter,
 ) (bool, []*types.Detection, error) {
-	if len(filter.Or) != 0 {
-		return matchOrFilter(result, evaluator, filter.Or)
+	if len(filter.Either) != 0 {
+		return matchEitherFilters(result, evaluator, filter.Either)
 	}
 
 	node, ok := result[filter.Variable]
@@ -32,7 +32,7 @@ func matchFilter(
 	return matchContentFilter(filter, node.Content()), nil, nil
 }
 
-func matchAndFilter(
+func matchAllFilters(
 	result tree.QueryResult,
 	evaluator types.Evaluator,
 	filters []settings.PatternFilter,
@@ -51,7 +51,7 @@ func matchAndFilter(
 	return true, datatypeDetections, nil
 }
 
-func matchOrFilter(
+func matchEitherFilters(
 	result tree.QueryResult,
 	evaluator types.Evaluator,
 	filters []settings.PatternFilter,

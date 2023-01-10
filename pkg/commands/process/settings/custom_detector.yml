@@ -15,7 +15,7 @@ ruby_password_length:
           devise password_length: $<MIN_LENGTH>..$<MAX_LENGTH>
         end
       filters:
-        - or:
+        - either:
           - variable: MAX_LENGTH
             less_than: 35
           - variable: MIN_LENGTH

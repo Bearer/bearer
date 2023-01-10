@@ -57,7 +57,7 @@ func (modules Modules) ToRegoModules() (output []rego.Module) {
 }
 
 type PatternFilter struct {
-	Or                 []PatternFilter `mapstructure:"or" json:"or" yaml:"or"`
+	Either             []PatternFilter `mapstructure:"either" json:"either" yaml:"either"`
 	Variable           string          `mapstructure:"variable" json:"variable" yaml:"variable"`
 	Detection          string          `mapstructure:"detection" json:"detection" yaml:"detection"`
 	Values             []string        `mapstructure:"values" json:"values" yaml:"values"`
