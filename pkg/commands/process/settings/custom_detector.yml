@@ -207,38 +207,38 @@ detect_rails_jwt:
           detection: datatype
   languages:
     - ruby
-# detect_rails_cookies:
-#   type: "risk"
-#   patterns:
-#     - pattern: |
-#         cookies[] = $<DATA_TYPE>
-#       filters:
-#         - variable: DATA_TYPE
-#           detection: datatype
-#     - pattern: | # FIXME: either implement alternation, or have our own types that map to mulitple tree-sitter types
-#         cookies.$<METHOD_CHAIN:identifier|call>[] = $<DATA_TYPE>
-#       filters:
-#         - variable: METHOD_CHAIN
-#           values:
-#             - permanent
-#             - encrypted
-#             - signed
-#             - permanent.encrypted
-#             - permanent.signed
-#             - permanent.encrypted.signed
-#             - permanent.signed.encrypted
-#             - encrypted.permanent
-#             - encrypted.signed
-#             - encrypted.permanent.signed
-#             - encrypted.signed.permanent
-#             - signed.encrypted
-#             - signed.permanent
-#             - signed.permanent.encrypted
-#             - signed.encrypted.permanent
-#         - variable: DATA_TYPE
-#           detection: datatype
-#   languages:
-#     - ruby
+detect_rails_cookies:
+  type: "risk"
+  patterns:
+    - pattern: |
+        cookies[] = $<DATA_TYPE>
+      filters:
+        - variable: DATA_TYPE
+          detection: datatype
+    - pattern: |
+        cookies.$<METHOD_CHAIN:identifier|call>[] = $<DATA_TYPE>
+      filters:
+        - variable: METHOD_CHAIN
+          values:
+            - permanent
+            - encrypted
+            - signed
+            - permanent.encrypted
+            - permanent.signed
+            - permanent.encrypted.signed
+            - permanent.signed.encrypted
+            - encrypted.permanent
+            - encrypted.signed
+            - encrypted.permanent.signed
+            - encrypted.signed.permanent
+            - signed.encrypted
+            - signed.permanent
+            - signed.permanent.encrypted
+            - signed.encrypted.permanent
+        - variable: DATA_TYPE
+          detection: datatype
+  languages:
+    - ruby
 ssl_certificate_verification_disabled:
   type: "risk"
   patterns:
