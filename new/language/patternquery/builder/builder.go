@@ -2,6 +2,7 @@ package builder
 
 import (
 	"fmt"
+	"strconv"
 	"strings"
 
 	"golang.org/x/exp/slices"
@@ -12,7 +13,7 @@ import (
 )
 
 type Variable struct {
-	NodeType   string
+	NodeTypes  []string
 	DummyValue string
 	Name       string
 }
@@ -105,9 +106,15 @@ func (builder *builder) compileVariableNode(variable *Variable) {
 	paramName := builder.newParam()
 	builder.variableToParams[variable.Name] = append(builder.variableToParams[variable.Name], paramName)
 
-	builder.write("(")
-	builder.write(variable.NodeType)
-	builder.write(") @")
+	builder.write("[")
+
+	for _, nodeType := range variable.NodeTypes {
+		builder.write("(")
+		builder.write(nodeType)
+		builder.write(")")
+	}
+
+	builder.write("] @")
 	builder.write(paramName)
 }
 
@@ -117,9 +124,7 @@ func (builder *builder) compileAnonymousNode(node *tree.Node) {
 		return
 	}
 
-	builder.write(`"`)
-	builder.write(escapeQueryString(node.Content()))
-	builder.write(`"`)
+	builder.write(strconv.Quote(node.Content()))
 }
 
 // Leaves match their type and content
@@ -182,8 +187,4 @@ func (builder *builder) write(value string) {
 
 func (builder *builder) newParam() string {
 	return "param" + builder.idGenerator.GenerateId()
-}
-
-func escapeQueryString(value string) string {
-	return value // FIXME
 }
