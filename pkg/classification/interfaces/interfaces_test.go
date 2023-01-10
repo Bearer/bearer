@@ -319,7 +319,7 @@ func TestFindMatchingRecipeUrl(t *testing.T) {
 				t.Errorf("Error initializing interface %s", err)
 			}
 
-			output, _, err := classifier.FindMatchingRecipeUrl(
+			output, err := classifier.FindMatchingRecipeUrl(
 				testCase.DetectionURL,
 			)
 			if err != nil {
