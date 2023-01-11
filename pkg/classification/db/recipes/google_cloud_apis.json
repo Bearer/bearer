@@ -2,9 +2,8 @@
   "metadata": { "version": "1.0" },
   "name": "Google Cloud APIs",
   "type": "external_service",
-  "urls": [
-    "https://*.googleapis.com"
-  ],
+  "urls": ["https://*.googleapis.com"],
+  "exclude_urls": ["https://ajax.googleapis.com"],
   "packages": [
     {
       "name": "Google.Apis",

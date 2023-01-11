@@ -39,11 +39,12 @@ type Config struct {
 }
 
 type Recipe struct {
-	UUID    string
-	Name    string
-	Type    string
-	SubType string
-	URLS    []RecipeURL
+	UUID        string
+	Name        string
+	Type        string
+	SubType     string
+	URLS        []RecipeURL
+	ExcludeURLS []RecipeURL
 }
 
 type RecipeURL struct {
@@ -57,6 +58,7 @@ type RecipeURLMatch struct {
 	RecipeUUID       string
 	RecipeName       string
 	RecipeSubType    string
+	ExcludedURL      bool
 }
 
 var ErrInvalidRecipes = errors.New("invalid interface recipe")
@@ -75,9 +77,9 @@ func New(config Config) (*Classifier, error) {
 	var preparedRecipes []Recipe
 	for _, recipe := range config.Recipes {
 		preparedRecipe := Recipe{
-			UUID: recipe.UUID,
-			Name: recipe.Name,
-			Type: recipe.Type,
+			UUID:    recipe.UUID,
+			Name:    recipe.Name,
+			Type:    recipe.Type,
 			SubType: recipe.SubType,
 		}
 		for _, recipeURL := range recipe.URLS {
@@ -92,6 +94,20 @@ func New(config Config) (*Classifier, error) {
 			}
 			preparedRecipe.URLS = append(preparedRecipe.URLS, preparedRecipeURL)
 		}
+
+		for _, excludedRecipeURL := range recipe.ExcludeURLS {
+			regexpMatcher, err := url.PrepareRegexpMatcher(excludedRecipeURL)
+			if err != nil {
+				return nil, ErrInvalidRecipes
+			}
+
+			preparedRecipeURL := RecipeURL{
+				URL:           excludedRecipeURL,
+				RegexpMatcher: regexpMatcher,
+			}
+			preparedRecipe.ExcludeURLS = append(preparedRecipe.ExcludeURLS, preparedRecipeURL)
+		}
+
 		preparedRecipes = append(preparedRecipes, preparedRecipe)
 	}
 
@@ -184,12 +200,26 @@ func (classifier *Classifier) Classify(data detections.Detection) (*ClassifiedIn
 	if err != nil {
 		return nil, err
 	}
+
 	if recipeMatch != nil {
+		if recipeMatch.ExcludedURL {
+			return &ClassifiedInterface{
+				Detection: &data,
+				Classification: &Classification{
+					URL: value,
+					Decision: classify.ClassificationDecision{
+						State:  classify.Invalid,
+						Reason: "ignored_url_in_recipe",
+					},
+				},
+			}, nil
+		}
+
 		classifiedInterface := &ClassifiedInterface{
 			Detection: &data,
 			Classification: &Classification{
-				URL:         recipeMatch.DetectionURLPart,
-				RecipeMatch: true,
+				URL:           recipeMatch.DetectionURLPart,
+				RecipeMatch:   true,
 				RecipeUUID:    recipeMatch.RecipeUUID,
 				RecipeName:    recipeMatch.RecipeName,
 				RecipeSubType: recipeMatch.RecipeSubType,
@@ -233,6 +263,19 @@ func (classifier *Classifier) FindMatchingRecipeUrl(detectionURL string) (*Recip
 
 	matchSize := 0
 	for _, recipe := range classifier.Recipes {
+		for _, recipeURL := range recipe.ExcludeURLS {
+			match, err := url.Match(detectionURL, recipeURL.RegexpMatcher)
+			if err != nil {
+				return nil, err
+			}
+
+			if match != "" {
+				return &RecipeURLMatch{
+					ExcludedURL: true,
+				}, nil
+			}
+		}
+
 		for _, recipeURL := range recipe.URLS {
 			match, err := url.Match(detectionURL, recipeURL.RegexpMatcher)
 			if err != nil {
