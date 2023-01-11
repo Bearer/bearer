@@ -1,4 +1,11 @@
-Curio - discover sensitive data flows and security risks.
+
+  [0;1;35;95m▄▄▄[0m                  [0;37m▀[0m
+[0;35m▄▀[0m   [0;35m▀[0m [0;35m▄[0m   [0;35m▄[0m   [0;37m▄[0m [0;37m▄▄[0m  [0;37m▄▄▄[0m     [0;37m▄▄[0;1;30;90m▄[0m
+[0;35m█[0m      [0;37m█[0m   [0;37m█[0m   [0;37m█▀[0m  [0;37m▀[0m   [0;1;30;90m█[0m    [0;1;30;90m█▀[0m [0;1;30;90m▀█[0m
+[0;37m█[0m      [0;37m█[0m   [0;37m█[0m   [0;1;30;90m█[0m       [0;1;30;90m█[0m    [0;1;30;90m█[0m   [0;1;35;95m█[0m
+ [0;37m▀▄▄▄▀[0m [0;1;30;90m▀▄▄▀█[0m   [0;1;30;90m█[0m     [0;1;30;90m▄▄[0;1;35;95m█▄▄[0m  [0;1;35;95m▀█▄█▀[0m
+
+Discover sensitive data flows and security risks.
 
 Usage: curio <command> [flags]
 
@@ -16,10 +23,10 @@ Examples:
 
 Learn More:
 	Curio is a static code analysis tool (SAST) that scans your source code to
-	discover security risks and vulnerabilities that put your sensitive data 
+	discover security risks and vulnerabilities that put your sensitive data
 	at risk (PHI, PD, PII).
-	
-	For more examples, tutorials, and to learn more about the project 
+
+	For more examples, tutorials, and to learn more about the project
 	visit https://curio.sh
 
 --
