@@ -7,6 +7,7 @@ import (
 	"github.com/bearer/curio/new/detector/evaluator"
 	"github.com/bearer/curio/new/detector/implementation/custom"
 	"github.com/bearer/curio/new/detector/implementation/generic/datatype"
+	"github.com/bearer/curio/new/detector/implementation/generic/insecureurl"
 	"github.com/bearer/curio/new/detector/implementation/ruby/object"
 	"github.com/bearer/curio/new/detector/implementation/ruby/property"
 	stringdetector "github.com/bearer/curio/new/detector/implementation/ruby/string"
@@ -62,6 +63,10 @@ func New(rules map[string]settings.Rule) (types.Composition, error) {
 		{
 			constructor: datatype.New,
 			name:        "datatype detector",
+		},
+		{
+			constructor: insecureurl.New,
+			name:        "insecure url detector",
 		},
 	}
 
