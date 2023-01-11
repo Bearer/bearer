@@ -8,6 +8,7 @@ import (
 	languagetypes "github.com/bearer/curio/new/language/types"
 	"github.com/bearer/curio/pkg/classification/db"
 	"github.com/bearer/curio/pkg/classification/schema"
+	"github.com/bearer/curio/pkg/parser/nodeid"
 	"github.com/bearer/curio/pkg/util/classify"
 )
 
@@ -22,10 +23,15 @@ type Property struct {
 }
 
 type datatypeDetector struct {
+	classifier  *schema.Classifier
+	idGenerator nodeid.Generator
 }
 
-func New(lang languagetypes.Language) (types.Detector, error) {
-	return &datatypeDetector{}, nil
+func New(lang languagetypes.Language, classifier *schema.Classifier, idGenerator nodeid.Generator) (types.Detector, error) {
+	return &datatypeDetector{
+		classifier:  classifier,
+		idGenerator: idGenerator,
+	}, nil
 }
 
 func (detector *datatypeDetector) Name() string {
@@ -44,6 +50,7 @@ func (detector *datatypeDetector) DetectAt(
 	var result []*types.Detection
 
 	for _, object := range objectDetections {
+
 		var properties []Property
 
 		data := object.Data.(objectdetector.Data)

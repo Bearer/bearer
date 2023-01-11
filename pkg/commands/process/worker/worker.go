@@ -38,7 +38,7 @@ func Start(port string) error {
 			if err != nil {
 				response.CustomDetectorError = err.Error()
 			}
-			err = customdetector.Setup(config.CustomDetector)
+			err = customdetector.Setup(&config, classifier)
 			if err != nil {
 				response.CustomDetectorError = err.Error()
 			}
