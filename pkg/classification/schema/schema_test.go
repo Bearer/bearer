@@ -7,7 +7,6 @@ import (
 	"github.com/bearer/curio/pkg/classification/schema"
 	"github.com/bearer/curio/pkg/report/detectors"
 	reportschema "github.com/bearer/curio/pkg/report/schema"
-	"github.com/bearer/curio/pkg/report/schema/datatype"
 	"github.com/bearer/curio/pkg/util/classify"
 	"github.com/stretchr/testify/assert"
 )
@@ -28,15 +27,13 @@ func TestSchemaObjectClassification(t *testing.T) {
 			Input: schema.DataTypeDetection{
 				Filename:     "vendor/vendor.rb",
 				DetectorType: detectors.DetectorRuby,
-				Value: &datatype.DataType{
+				Value: &schema.Detection{
 					Name: "User",
-					UUID: "1",
 					Type: reportschema.SimpleTypeObject,
-					Properties: map[string]datatype.DataTypable{
-						"sku_name": &datatype.DataType{
-							Name: "sku_name",
-							Type: reportschema.SimpleTypeString,
-							UUID: "3",
+					Properties: []*schema.Detection{
+						{
+							Name:       "sku_name",
+							SimpleType: reportschema.SimpleTypeString,
 						},
 					},
 				},
@@ -54,55 +51,44 @@ func TestSchemaObjectClassification(t *testing.T) {
 			Input: schema.DataTypeDetection{
 				Filename:     "db/schema.rb",
 				DetectorType: detectors.DetectorRuby,
-				Value: &datatype.DataType{
+				Value: &schema.Detection{
 					Name: "User",
-					UUID: "1",
 					Type: reportschema.SimpleTypeObject,
-					Properties: map[string]datatype.DataTypable{
-						"First Name": &datatype.DataType{
+					Properties: []*schema.Detection{
+						{
 							Name: "First Name",
 							Type: reportschema.SimpleTypeBool, // wrong type
-							UUID: "2",
 						},
-						"sku_name": &datatype.DataType{
+						{
 							Name: "sku_name",
 							Type: reportschema.SimpleTypeString,
-							UUID: "3",
 						},
-						"strokeOpacity": &datatype.DataType{
+						{
 							Name: "strokeOpacity",
 							Type: reportschema.SimpleTypeString,
-							UUID: "4",
 						},
-						"velocity": &datatype.DataType{
-							Name: "velocity",
+						{Name: "velocity",
 							Type: reportschema.SimpleTypeString,
-							UUID: "5",
 						},
-						"primaryDisplay": &datatype.DataType{
+						{
 							Name: "primaryDisplay",
 							Type: reportschema.SimpleTypeString,
-							UUID: "6",
 						},
-						"requestPassword": &datatype.DataType{
+						{
 							Name: "primaryDisplay",
 							Type: reportschema.SimpleTypeString,
-							UUID: "7",
 						},
-						"resetPassword": &datatype.DataType{
+						{
 							Name: "primaryDisplay",
 							Type: reportschema.SimpleTypeString,
-							UUID: "8",
 						},
-						"resolveAmbiguousRoles": &datatype.DataType{
+						{
 							Name: "primaryDisplay",
 							Type: reportschema.SimpleTypeString,
-							UUID: "9",
 						},
-						"combinePartialBlindedSignatures": &datatype.DataType{
+						{
 							Name: "primaryDisplay",
 							Type: reportschema.SimpleTypeString,
-							UUID: "10",
 						},
 					},
 				},
@@ -121,20 +107,17 @@ func TestSchemaObjectClassification(t *testing.T) {
 			Input: schema.DataTypeDetection{
 				Filename:     "db/schema.rb",
 				DetectorType: detectors.DetectorRuby,
-				Value: &datatype.DataType{
+				Value: &schema.Detection{
 					Name: "User",
-					UUID: "1",
 					Type: reportschema.SimpleTypeObject,
-					Properties: map[string]datatype.DataTypable{
-						"birthdate": &datatype.DataType{
+					Properties: []*schema.Detection{
+						{
 							Name: "birthdate",
 							Type: reportschema.SimpleTypeString,
-							UUID: "2",
 						},
-						"First Name": &datatype.DataType{
+						{
 							Name: "First Name",
 							Type: reportschema.SimpleTypeString,
-							UUID: "3",
 						},
 					},
 				},
@@ -153,25 +136,21 @@ func TestSchemaObjectClassification(t *testing.T) {
 			Input: schema.DataTypeDetection{
 				Filename:     "db/schema.rb",
 				DetectorType: detectors.DetectorRuby,
-				Value: &datatype.DataType{
+				Value: &schema.Detection{
 					Name: "SellerFiscalInformation",
-					UUID: "1",
 					Type: reportschema.SimpleTypeObject,
-					Properties: map[string]datatype.DataTypable{
-						"name": &datatype.DataType{
+					Properties: []*schema.Detection{
+						{
 							Name: "name",
 							Type: reportschema.SimpleTypeString,
-							UUID: "2",
 						},
-						"personName": &datatype.DataType{
+						{
 							Name: "personName",
 							Type: reportschema.SimpleTypeString,
-							UUID: "3",
 						},
-						"_customerName": &datatype.DataType{
+						{
 							Name: "_customerName",
 							Type: reportschema.SimpleTypeString,
-							UUID: "3",
 						},
 					},
 				},
@@ -190,30 +169,25 @@ func TestSchemaObjectClassification(t *testing.T) {
 			Input: schema.DataTypeDetection{
 				Filename:     "db/schema.rb",
 				DetectorType: detectors.DetectorRuby,
-				Value: &datatype.DataType{
+				Value: &schema.Detection{
 					Name: "SellerFiscalInformation",
-					UUID: "1",
 					Type: reportschema.SimpleTypeObject,
-					Properties: map[string]datatype.DataTypable{
-						"erp_name": &datatype.DataType{
+					Properties: []*schema.Detection{
+						{
 							Name: "erp_name",
 							Type: reportschema.SimpleTypeString,
-							UUID: "2",
 						},
-						"brand_name": &datatype.DataType{
+						{
 							Name: "brand_name",
 							Type: reportschema.SimpleTypeString,
-							UUID: "3",
 						},
-						"company_front_name": &datatype.DataType{
+						{
 							Name: "company_front_name",
 							Type: reportschema.SimpleTypeString,
-							UUID: "3",
 						},
-						"_containerName": &datatype.DataType{
+						{
 							Name: "_containerName",
 							Type: reportschema.SimpleTypeString,
-							UUID: "4",
 						},
 					},
 				},
@@ -232,15 +206,13 @@ func TestSchemaObjectClassification(t *testing.T) {
 			Input: schema.DataTypeDetection{
 				Filename:     "db/schema.rb",
 				DetectorType: detectors.DetectorRuby,
-				Value: &datatype.DataType{
+				Value: &schema.Detection{
 					Name: "Applicant",
-					UUID: "1",
 					Type: reportschema.SimpleTypeObject,
-					Properties: map[string]datatype.DataTypable{
-						"user_id": &datatype.DataType{
+					Properties: []*schema.Detection{
+						{
 							Name: "user_id",
 							Type: reportschema.SimpleTypeString,
-							UUID: "2",
 						},
 					},
 				},
@@ -259,15 +231,13 @@ func TestSchemaObjectClassification(t *testing.T) {
 			Input: schema.DataTypeDetection{
 				Filename:     "db/schema.rb",
 				DetectorType: detectors.DetectorRuby,
-				Value: &datatype.DataType{
+				Value: &schema.Detection{
 					Name: "bank_accounts",
-					UUID: "1",
 					Type: reportschema.SimpleTypeObject,
-					Properties: map[string]datatype.DataTypable{
-						"credit_card_number": &datatype.DataType{
+					Properties: []*schema.Detection{
+						{
 							Name: "credit_card_number",
 							Type: reportschema.SimpleTypeString,
-							UUID: "2",
 						},
 					},
 				},
@@ -286,15 +256,13 @@ func TestSchemaObjectClassification(t *testing.T) {
 			Input: schema.DataTypeDetection{
 				Filename:     "db/schema.rb",
 				DetectorType: detectors.DetectorRuby,
-				Value: &datatype.DataType{
+				Value: &schema.Detection{
 					Name: "bank_accounts",
-					UUID: "1",
 					Type: reportschema.SimpleTypeObject,
-					Properties: map[string]datatype.DataTypable{
-						"credit_card_number": &datatype.DataType{
+					Properties: []*schema.Detection{
+						{
 							Name: "credit_card_number",
 							Type: reportschema.SimpleTypeBool,
-							UUID: "2",
 						},
 					},
 				},
@@ -313,15 +281,13 @@ func TestSchemaObjectClassification(t *testing.T) {
 			Input: schema.DataTypeDetection{
 				Filename:     "db/schema.rb",
 				DetectorType: detectors.DetectorRuby,
-				Value: &datatype.DataType{
+				Value: &schema.Detection{
 					Name: "patients",
-					UUID: "1",
 					Type: reportschema.SimpleTypeObject,
-					Properties: map[string]datatype.DataTypable{
-						"place_of_birth_unknown": &datatype.DataType{
+					Properties: []*schema.Detection{
+						{
 							Name: "place_of_birth_unknown",
 							Type: reportschema.SimpleTypeBool,
-							UUID: "2",
 						},
 					},
 				},
@@ -340,15 +306,13 @@ func TestSchemaObjectClassification(t *testing.T) {
 			Input: schema.DataTypeDetection{
 				Filename:     "db/schema.rb",
 				DetectorType: detectors.DetectorRuby,
-				Value: &datatype.DataType{
+				Value: &schema.Detection{
 					Name: "accounts",
-					UUID: "1",
 					Type: reportschema.SimpleTypeObject,
-					Properties: map[string]datatype.DataTypable{
-						"first_name": &datatype.DataType{
+					Properties: []*schema.Detection{
+						{
 							Name: "first_name",
 							Type: reportschema.SimpleTypeString,
-							UUID: "2",
 						},
 					},
 				},
@@ -367,15 +331,13 @@ func TestSchemaObjectClassification(t *testing.T) {
 			Input: schema.DataTypeDetection{
 				Filename:     "db/schema.rb",
 				DetectorType: detectors.DetectorRuby,
-				Value: &datatype.DataType{
+				Value: &schema.Detection{
 					Name: "accounts",
-					UUID: "1",
 					Type: reportschema.SimpleTypeObject,
-					Properties: map[string]datatype.DataTypable{
-						"first_name": &datatype.DataType{
+					Properties: []*schema.Detection{
+						{
 							Name: "first_name",
 							Type: reportschema.SimpleTypeBool,
-							UUID: "2",
 						},
 					},
 				},
@@ -394,15 +356,13 @@ func TestSchemaObjectClassification(t *testing.T) {
 			Input: schema.DataTypeDetection{
 				Filename:     "db/schema.rb",
 				DetectorType: detectors.DetectorRuby,
-				Value: &datatype.DataType{
+				Value: &schema.Detection{
 					Name: "accounts",
-					UUID: "1",
 					Type: reportschema.SimpleTypeObject,
-					Properties: map[string]datatype.DataTypable{
-						"foo": &datatype.DataType{
+					Properties: []*schema.Detection{
+						{
 							Name: "foo",
 							Type: reportschema.SimpleTypeString,
-							UUID: "2",
 						},
 					},
 				},
@@ -421,15 +381,13 @@ func TestSchemaObjectClassification(t *testing.T) {
 			Input: schema.DataTypeDetection{
 				Filename:     "db/schema.rb",
 				DetectorType: detectors.DetectorSQL,
-				Value: &datatype.DataType{
+				Value: &schema.Detection{
 					Name: "accounts",
-					UUID: "1",
 					Type: reportschema.SimpleTypeObject,
-					Properties: map[string]datatype.DataTypable{
-						"bar": &datatype.DataType{
+					Properties: []*schema.Detection{
+						{
 							Name: "bar",
 							Type: reportschema.SimpleTypeString,
-							UUID: "2",
 						},
 					},
 				},
@@ -448,15 +406,13 @@ func TestSchemaObjectClassification(t *testing.T) {
 			Input: schema.DataTypeDetection{
 				Filename:     "application.js",
 				DetectorType: detectors.DetectorJavascript,
-				Value: &datatype.DataType{
+				Value: &schema.Detection{
 					Name: "prop types",
-					UUID: "1",
 					Type: reportschema.SimpleTypeObject,
-					Properties: map[string]datatype.DataTypable{
-						"lastname": &datatype.DataType{
+					Properties: []*schema.Detection{
+						{
 							Name: "lastname",
 							Type: reportschema.SimpleTypeString,
-							UUID: "2",
 						},
 					},
 				},
@@ -474,72 +430,71 @@ func TestSchemaObjectClassification(t *testing.T) {
 			Input: schema.DataTypeDetection{
 				Filename:     "db/structure.sql",
 				DetectorType: detectors.DetectorRails,
-				Value: &datatype.DataType{
+				Value: &schema.Detection{
 					Name: "foo",
-					UUID: "1",
 					Type: reportschema.SimpleTypeObject,
-					Properties: map[string]datatype.DataTypable{
-						"way_name": &datatype.DataType{
+					Properties: []*schema.Detection{
+						{
 							Name: "way_name",
 							Type: reportschema.SimpleTypeString,
 						},
-						"municipality_name": &datatype.DataType{
+						{
 							Name: "municipality_name",
 							Type: reportschema.SimpleTypeString,
 						},
-						"linnworks_account_name": &datatype.DataType{
+						{
 							Name: "linnworks_account_name",
 							Type: reportschema.SimpleTypeString,
 						},
-						"return_company_name": &datatype.DataType{
+						{
 							Name: "return_company_name",
 							Type: reportschema.SimpleTypeString,
 						},
-						"brandName": &datatype.DataType{
+						{
 							Name: "brandName",
 							Type: reportschema.SimpleTypeString,
 						},
-						"fileName": &datatype.DataType{
+						{
 							Name: "fileName",
 							Type: reportschema.SimpleTypeString,
 						},
-						"InvalidNumberOfParams": &datatype.DataType{
+						{
 							Name: "InvalidNumberOfParams",
 							Type: reportschema.SimpleTypeString,
 						},
-						"prescription_template_id": &datatype.DataType{
+						{
 							Name: "prescription_template_id",
 							Type: reportschema.SimpleTypeString,
 						},
-						"last_name_score": &datatype.DataType{
+						{
 							Name: "last_name_score",
 							Type: reportschema.SimpleTypeNumber,
 						},
-						"studentApplicant.id": &datatype.DataType{
+						{
 							Name: "studentApplicant.id",
 							Type: reportschema.SimpleTypeString,
 						},
-						"studentapplicantTest.id": &datatype.DataType{
+						{
 							Name: "studentapplicantTest.id",
 							Type: reportschema.SimpleTypeString,
 						},
-						"return_seller_id": &datatype.DataType{
+						{
 							Name: "return_seller_id",
 							Type: reportschema.SimpleTypeString,
 						},
-						"seller_account_id": &datatype.DataType{
+						{
 							Name: "seller_account_id",
 							Type: reportschema.SimpleTypeString,
 						},
-						"customerReturnId": &datatype.DataType{
+						{
 							Name: "customerReturnId",
 							Type: reportschema.SimpleTypeString,
 						},
-						"lab_test_result_id": &datatype.DataType{
+						{
 							Name: "lab_test_result_id",
 							Type: reportschema.SimpleTypeString,
 						},
-						"master_product_category_updated_by_user_uuid": &datatype.DataType{
+						{
 							Name: "master_product_category_updated_by_user_uuid",
 							Type: reportschema.SimpleTypeString,
 						},
@@ -559,12 +514,11 @@ func TestSchemaObjectClassification(t *testing.T) {
 			Input: schema.DataTypeDetection{
 				Filename:     "db/structure.sql",
 				DetectorType: detectors.DetectorRails,
-				Value: &datatype.DataType{
+				Value: &schema.Detection{
 					Name: "foo",
-					UUID: "1",
 					Type: reportschema.SimpleTypeObject,
-					Properties: map[string]datatype.DataTypable{
-						"applicants_id": &datatype.DataType{
+					Properties: []*schema.Detection{
+						{
 							Name: "applicants_id",
 							Type: reportschema.SimpleTypeString,
 						},
@@ -584,16 +538,15 @@ func TestSchemaObjectClassification(t *testing.T) {
 			Input: schema.DataTypeDetection{
 				Filename:     "db/structure.sql",
 				DetectorType: detectors.DetectorRails,
-				Value: &datatype.DataType{
+				Value: &schema.Detection{
 					Name: "foo",
-					UUID: "1",
 					Type: reportschema.SimpleTypeObject,
-					Properties: map[string]datatype.DataTypable{
-						"applicants_id": &datatype.DataType{
+					Properties: []*schema.Detection{
+						{
 							Name: "applicants_id",
 							Type: reportschema.SimpleTypeString,
 						},
-						"message": &datatype.DataType{
+						{
 							Name: "message",
 							Type: reportschema.SimpleTypeString,
 						},
@@ -613,20 +566,19 @@ func TestSchemaObjectClassification(t *testing.T) {
 			Input: schema.DataTypeDetection{
 				Filename:     "app.js",
 				DetectorType: detectors.DetectorJavascript,
-				Value: &datatype.DataType{
+				Value: &schema.Detection{
 					Name: "ClientConfig",
-					UUID: "1",
 					Type: reportschema.SimpleTypeObject,
-					Properties: map[string]datatype.DataTypable{
-						"service_name": &datatype.DataType{
+					Properties: []*schema.Detection{
+						{
 							Name: "service_name",
 							Type: reportschema.SimpleTypeString,
 						},
-						"instance_name": &datatype.DataType{
+						{
 							Name: "instance_name",
 							Type: reportschema.SimpleTypeString,
 						},
-						"matchLocationFromPhraseSetName": &datatype.DataType{
+						{
 							Name: "matchLocationFromPhraseSetName",
 							Type: reportschema.SimpleTypeString,
 						},
@@ -646,12 +598,11 @@ func TestSchemaObjectClassification(t *testing.T) {
 			Input: schema.DataTypeDetection{
 				Filename:     "application.js",
 				DetectorType: detectors.DetectorJavascript,
-				Value: &datatype.DataType{
+				Value: &schema.Detection{
 					Name: "IProps",
-					UUID: "1",
 					Type: reportschema.SimpleTypeObject,
-					Properties: map[string]datatype.DataTypable{
-						"fontFamily": &datatype.DataType{
+					Properties: []*schema.Detection{
+						{
 							Name: "fontFamily",
 							Type: reportschema.SimpleTypeString,
 						},
@@ -671,12 +622,11 @@ func TestSchemaObjectClassification(t *testing.T) {
 			Input: schema.DataTypeDetection{
 				Filename:     "application.js",
 				DetectorType: detectors.DetectorJavascript,
-				Value: &datatype.DataType{
+				Value: &schema.Detection{
 					Name: "IProps",
-					UUID: "1",
 					Type: reportschema.SimpleTypeObject,
-					Properties: map[string]datatype.DataTypable{
-						"national_identifier": &datatype.DataType{
+					Properties: []*schema.Detection{
+						{
 							Name: "national_identifier",
 							Type: reportschema.SimpleTypeString,
 						},
@@ -696,16 +646,15 @@ func TestSchemaObjectClassification(t *testing.T) {
 			Input: schema.DataTypeDetection{
 				Filename:     "app.js",
 				DetectorType: detectors.DetectorJavascript,
-				Value: &datatype.DataType{
+				Value: &schema.Detection{
 					Name: "kbv_hm_diagnosis_groups",
-					UUID: "1",
 					Type: reportschema.SimpleTypeObject,
-					Properties: map[string]datatype.DataTypable{
-						"max_prescription_amount": &datatype.DataType{
+					Properties: []*schema.Detection{
+						{
 							Name: "max_prescription_amount",
 							Type: reportschema.SimpleTypeString,
 						},
-						"kbv_hma_prescription_requirement_id": &datatype.DataType{
+						{
 							Name: "kbv_hma_prescription_requirement_id",
 							Type: reportschema.SimpleTypeString,
 						},
@@ -725,16 +674,15 @@ func TestSchemaObjectClassification(t *testing.T) {
 			Input: schema.DataTypeDetection{
 				Filename:     "app.js",
 				DetectorType: detectors.DetectorJavascript,
-				Value: &datatype.DataType{
+				Value: &schema.Detection{
 					Name: "MiningPoolShares",
-					UUID: "1",
 					Type: reportschema.SimpleTypeObject,
-					Properties: map[string]datatype.DataTypable{
-						"propertyName": &datatype.DataType{
+					Properties: []*schema.Detection{
+						{
 							Name: "propertyName",
 							Type: reportschema.SimpleTypeString,
 						},
-						"accountName": &datatype.DataType{
+						{
 							Name: "accountName",
 							Type: reportschema.SimpleTypeString,
 						},
@@ -754,16 +702,15 @@ func TestSchemaObjectClassification(t *testing.T) {
 			Input: schema.DataTypeDetection{
 				Filename:     "app.js",
 				DetectorType: detectors.DetectorJavascript,
-				Value: &datatype.DataType{
+				Value: &schema.Detection{
 					Name: "MiningPoolShares",
-					UUID: "1",
 					Type: reportschema.SimpleTypeObject,
-					Properties: map[string]datatype.DataTypable{
-						"full_name": &datatype.DataType{
+					Properties: []*schema.Detection{
+						{
 							Name: "full_name",
 							Type: reportschema.SimpleTypeString,
 						},
-						"_AuthorName": &datatype.DataType{
+						{
 							Name: "_AuthorName",
 							Type: reportschema.SimpleTypeString,
 						},
@@ -783,16 +730,15 @@ func TestSchemaObjectClassification(t *testing.T) {
 			Input: schema.DataTypeDetection{
 				Filename:     "app.js",
 				DetectorType: detectors.DetectorJavascript,
-				Value: &datatype.DataType{
+				Value: &schema.Detection{
 					Name: "Foo",
-					UUID: "1",
 					Type: reportschema.SimpleTypeObject,
-					Properties: map[string]datatype.DataTypable{
-						"person_name": &datatype.DataType{
+					Properties: []*schema.Detection{
+						{
 							Name: "person_name",
 							Type: reportschema.SimpleTypeString,
 						},
-						"fullName": &datatype.DataType{
+						{
 							Name: "fullName",
 							Type: reportschema.SimpleTypeString,
 						},
@@ -812,12 +758,11 @@ func TestSchemaObjectClassification(t *testing.T) {
 			Input: schema.DataTypeDetection{
 				Filename:     "app.js",
 				DetectorType: detectors.DetectorJavascript,
-				Value: &datatype.DataType{
+				Value: &schema.Detection{
 					Name: "Agendas",
-					UUID: "1",
 					Type: reportschema.SimpleTypeObject,
-					Properties: map[string]datatype.DataTypable{
-						"last_email_reminder": &datatype.DataType{
+					Properties: []*schema.Detection{
+						{
 							Name: "last_email_reminder",
 							Type: reportschema.SimpleTypeString,
 						},
@@ -837,12 +782,11 @@ func TestSchemaObjectClassification(t *testing.T) {
 			Input: schema.DataTypeDetection{
 				Filename:     "app.js",
 				DetectorType: detectors.DetectorJavascript,
-				Value: &datatype.DataType{
+				Value: &schema.Detection{
 					Name: "AwsRequestSigning",
-					UUID: "1",
 					Type: reportschema.SimpleTypeObject,
-					Properties: map[string]datatype.DataTypable{
-						"service_name": &datatype.DataType{
+					Properties: []*schema.Detection{
+						{
 							Name: "service_name",
 							Type: reportschema.SimpleTypeString,
 						},
@@ -862,12 +806,11 @@ func TestSchemaObjectClassification(t *testing.T) {
 			Input: schema.DataTypeDetection{
 				Filename:     "app.js",
 				DetectorType: detectors.DetectorJavascript,
-				Value: &datatype.DataType{
+				Value: &schema.Detection{
 					Name: "MetadataCredentialsFromPlugin",
-					UUID: "1",
 					Type: reportschema.SimpleTypeObject,
-					Properties: map[string]datatype.DataTypable{
-						"service_name": &datatype.DataType{
+					Properties: []*schema.Detection{
+						{
 							Name: "service_name",
 							Type: reportschema.SimpleTypeString,
 						},
