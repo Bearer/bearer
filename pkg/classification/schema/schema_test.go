@@ -28,8 +28,8 @@ func TestSchemaObjectClassification(t *testing.T) {
 				Filename:     "vendor/vendor.rb",
 				DetectorType: detectors.DetectorRuby,
 				Value: &schema.Detection{
-					Name: "User",
-					Type: reportschema.SimpleTypeObject,
+					Name:       "User",
+					SimpleType: reportschema.SimpleTypeObject,
 					Properties: []*schema.Detection{
 						{
 							Name:       "sku_name",
@@ -52,43 +52,44 @@ func TestSchemaObjectClassification(t *testing.T) {
 				Filename:     "db/schema.rb",
 				DetectorType: detectors.DetectorRuby,
 				Value: &schema.Detection{
-					Name: "User",
-					Type: reportschema.SimpleTypeObject,
+					Name:       "User",
+					SimpleType: reportschema.SimpleTypeObject,
 					Properties: []*schema.Detection{
 						{
-							Name: "First Name",
-							Type: reportschema.SimpleTypeBool, // wrong type
+							Name:       "First Name",
+							SimpleType: reportschema.SimpleTypeBool, // wrong type
 						},
 						{
-							Name: "sku_name",
-							Type: reportschema.SimpleTypeString,
+							Name:       "sku_name",
+							SimpleType: reportschema.SimpleTypeString,
 						},
 						{
-							Name: "strokeOpacity",
-							Type: reportschema.SimpleTypeString,
-						},
-						{Name: "velocity",
-							Type: reportschema.SimpleTypeString,
+							Name:       "strokeOpacity",
+							SimpleType: reportschema.SimpleTypeString,
 						},
 						{
-							Name: "primaryDisplay",
-							Type: reportschema.SimpleTypeString,
+							Name:       "velocity",
+							SimpleType: reportschema.SimpleTypeString,
 						},
 						{
-							Name: "primaryDisplay",
-							Type: reportschema.SimpleTypeString,
+							Name:       "primaryDisplay",
+							SimpleType: reportschema.SimpleTypeString,
 						},
 						{
-							Name: "primaryDisplay",
-							Type: reportschema.SimpleTypeString,
+							Name:       "primaryDisplay",
+							SimpleType: reportschema.SimpleTypeString,
 						},
 						{
-							Name: "primaryDisplay",
-							Type: reportschema.SimpleTypeString,
+							Name:       "primaryDisplay",
+							SimpleType: reportschema.SimpleTypeString,
 						},
 						{
-							Name: "primaryDisplay",
-							Type: reportschema.SimpleTypeString,
+							Name:       "primaryDisplay",
+							SimpleType: reportschema.SimpleTypeString,
+						},
+						{
+							Name:       "primaryDisplay",
+							SimpleType: reportschema.SimpleTypeString,
 						},
 					},
 				},
@@ -108,16 +109,16 @@ func TestSchemaObjectClassification(t *testing.T) {
 				Filename:     "db/schema.rb",
 				DetectorType: detectors.DetectorRuby,
 				Value: &schema.Detection{
-					Name: "User",
-					Type: reportschema.SimpleTypeObject,
+					Name:       "User",
+					SimpleType: reportschema.SimpleTypeObject,
 					Properties: []*schema.Detection{
 						{
-							Name: "birthdate",
-							Type: reportschema.SimpleTypeString,
+							Name:       "birthdate",
+							SimpleType: reportschema.SimpleTypeString,
 						},
 						{
-							Name: "First Name",
-							Type: reportschema.SimpleTypeString,
+							Name:       "First Name",
+							SimpleType: reportschema.SimpleTypeString,
 						},
 					},
 				},
@@ -137,20 +138,20 @@ func TestSchemaObjectClassification(t *testing.T) {
 				Filename:     "db/schema.rb",
 				DetectorType: detectors.DetectorRuby,
 				Value: &schema.Detection{
-					Name: "SellerFiscalInformation",
-					Type: reportschema.SimpleTypeObject,
+					Name:       "SellerFiscalInformation",
+					SimpleType: reportschema.SimpleTypeObject,
 					Properties: []*schema.Detection{
 						{
-							Name: "name",
-							Type: reportschema.SimpleTypeString,
+							Name:       "name",
+							SimpleType: reportschema.SimpleTypeString,
 						},
 						{
-							Name: "personName",
-							Type: reportschema.SimpleTypeString,
+							Name:       "personName",
+							SimpleType: reportschema.SimpleTypeString,
 						},
 						{
-							Name: "_customerName",
-							Type: reportschema.SimpleTypeString,
+							Name:       "_customerName",
+							SimpleType: reportschema.SimpleTypeString,
 						},
 					},
 				},
@@ -170,24 +171,24 @@ func TestSchemaObjectClassification(t *testing.T) {
 				Filename:     "db/schema.rb",
 				DetectorType: detectors.DetectorRuby,
 				Value: &schema.Detection{
-					Name: "SellerFiscalInformation",
-					Type: reportschema.SimpleTypeObject,
+					Name:       "SellerFiscalInformation",
+					SimpleType: reportschema.SimpleTypeObject,
 					Properties: []*schema.Detection{
 						{
-							Name: "erp_name",
-							Type: reportschema.SimpleTypeString,
+							Name:       "erp_name",
+							SimpleType: reportschema.SimpleTypeString,
 						},
 						{
-							Name: "brand_name",
-							Type: reportschema.SimpleTypeString,
+							Name:       "brand_name",
+							SimpleType: reportschema.SimpleTypeString,
 						},
 						{
-							Name: "company_front_name",
-							Type: reportschema.SimpleTypeString,
+							Name:       "company_front_name",
+							SimpleType: reportschema.SimpleTypeString,
 						},
 						{
-							Name: "_containerName",
-							Type: reportschema.SimpleTypeString,
+							Name:       "_containerName",
+							SimpleType: reportschema.SimpleTypeString,
 						},
 					},
 				},
@@ -207,12 +208,12 @@ func TestSchemaObjectClassification(t *testing.T) {
 				Filename:     "db/schema.rb",
 				DetectorType: detectors.DetectorRuby,
 				Value: &schema.Detection{
-					Name: "Applicant",
-					Type: reportschema.SimpleTypeObject,
+					Name:       "Applicant",
+					SimpleType: reportschema.SimpleTypeObject,
 					Properties: []*schema.Detection{
 						{
-							Name: "user_id",
-							Type: reportschema.SimpleTypeString,
+							Name:       "user_id",
+							SimpleType: reportschema.SimpleTypeString,
 						},
 					},
 				},
@@ -232,12 +233,12 @@ func TestSchemaObjectClassification(t *testing.T) {
 				Filename:     "db/schema.rb",
 				DetectorType: detectors.DetectorRuby,
 				Value: &schema.Detection{
-					Name: "bank_accounts",
-					Type: reportschema.SimpleTypeObject,
+					Name:       "bank_accounts",
+					SimpleType: reportschema.SimpleTypeObject,
 					Properties: []*schema.Detection{
 						{
-							Name: "credit_card_number",
-							Type: reportschema.SimpleTypeString,
+							Name:       "credit_card_number",
+							SimpleType: reportschema.SimpleTypeString,
 						},
 					},
 				},
@@ -257,12 +258,12 @@ func TestSchemaObjectClassification(t *testing.T) {
 				Filename:     "db/schema.rb",
 				DetectorType: detectors.DetectorRuby,
 				Value: &schema.Detection{
-					Name: "bank_accounts",
-					Type: reportschema.SimpleTypeObject,
+					Name:       "bank_accounts",
+					SimpleType: reportschema.SimpleTypeObject,
 					Properties: []*schema.Detection{
 						{
-							Name: "credit_card_number",
-							Type: reportschema.SimpleTypeBool,
+							Name:       "credit_card_number",
+							SimpleType: reportschema.SimpleTypeBool,
 						},
 					},
 				},
@@ -282,12 +283,12 @@ func TestSchemaObjectClassification(t *testing.T) {
 				Filename:     "db/schema.rb",
 				DetectorType: detectors.DetectorRuby,
 				Value: &schema.Detection{
-					Name: "patients",
-					Type: reportschema.SimpleTypeObject,
+					Name:       "patients",
+					SimpleType: reportschema.SimpleTypeObject,
 					Properties: []*schema.Detection{
 						{
-							Name: "place_of_birth_unknown",
-							Type: reportschema.SimpleTypeBool,
+							Name:       "place_of_birth_unknown",
+							SimpleType: reportschema.SimpleTypeBool,
 						},
 					},
 				},
@@ -307,12 +308,12 @@ func TestSchemaObjectClassification(t *testing.T) {
 				Filename:     "db/schema.rb",
 				DetectorType: detectors.DetectorRuby,
 				Value: &schema.Detection{
-					Name: "accounts",
-					Type: reportschema.SimpleTypeObject,
+					Name:       "accounts",
+					SimpleType: reportschema.SimpleTypeObject,
 					Properties: []*schema.Detection{
 						{
-							Name: "first_name",
-							Type: reportschema.SimpleTypeString,
+							Name:       "first_name",
+							SimpleType: reportschema.SimpleTypeString,
 						},
 					},
 				},
@@ -332,12 +333,12 @@ func TestSchemaObjectClassification(t *testing.T) {
 				Filename:     "db/schema.rb",
 				DetectorType: detectors.DetectorRuby,
 				Value: &schema.Detection{
-					Name: "accounts",
-					Type: reportschema.SimpleTypeObject,
+					Name:       "accounts",
+					SimpleType: reportschema.SimpleTypeObject,
 					Properties: []*schema.Detection{
 						{
-							Name: "first_name",
-							Type: reportschema.SimpleTypeBool,
+							Name:       "first_name",
+							SimpleType: reportschema.SimpleTypeBool,
 						},
 					},
 				},
@@ -357,12 +358,12 @@ func TestSchemaObjectClassification(t *testing.T) {
 				Filename:     "db/schema.rb",
 				DetectorType: detectors.DetectorRuby,
 				Value: &schema.Detection{
-					Name: "accounts",
-					Type: reportschema.SimpleTypeObject,
+					Name:       "accounts",
+					SimpleType: reportschema.SimpleTypeObject,
 					Properties: []*schema.Detection{
 						{
-							Name: "foo",
-							Type: reportschema.SimpleTypeString,
+							Name:       "foo",
+							SimpleType: reportschema.SimpleTypeString,
 						},
 					},
 				},
@@ -382,12 +383,12 @@ func TestSchemaObjectClassification(t *testing.T) {
 				Filename:     "db/schema.rb",
 				DetectorType: detectors.DetectorSQL,
 				Value: &schema.Detection{
-					Name: "accounts",
-					Type: reportschema.SimpleTypeObject,
+					Name:       "accounts",
+					SimpleType: reportschema.SimpleTypeObject,
 					Properties: []*schema.Detection{
 						{
-							Name: "bar",
-							Type: reportschema.SimpleTypeString,
+							Name:       "bar",
+							SimpleType: reportschema.SimpleTypeString,
 						},
 					},
 				},
@@ -407,12 +408,12 @@ func TestSchemaObjectClassification(t *testing.T) {
 				Filename:     "application.js",
 				DetectorType: detectors.DetectorJavascript,
 				Value: &schema.Detection{
-					Name: "prop types",
-					Type: reportschema.SimpleTypeObject,
+					Name:       "prop types",
+					SimpleType: reportschema.SimpleTypeObject,
 					Properties: []*schema.Detection{
 						{
-							Name: "lastname",
-							Type: reportschema.SimpleTypeString,
+							Name:       "lastname",
+							SimpleType: reportschema.SimpleTypeString,
 						},
 					},
 				},
@@ -431,72 +432,72 @@ func TestSchemaObjectClassification(t *testing.T) {
 				Filename:     "db/structure.sql",
 				DetectorType: detectors.DetectorRails,
 				Value: &schema.Detection{
-					Name: "foo",
-					Type: reportschema.SimpleTypeObject,
+					Name:       "foo",
+					SimpleType: reportschema.SimpleTypeObject,
 					Properties: []*schema.Detection{
 						{
-							Name: "way_name",
-							Type: reportschema.SimpleTypeString,
+							Name:       "way_name",
+							SimpleType: reportschema.SimpleTypeString,
 						},
 						{
-							Name: "municipality_name",
-							Type: reportschema.SimpleTypeString,
+							Name:       "municipality_name",
+							SimpleType: reportschema.SimpleTypeString,
 						},
 						{
-							Name: "linnworks_account_name",
-							Type: reportschema.SimpleTypeString,
+							Name:       "linnworks_account_name",
+							SimpleType: reportschema.SimpleTypeString,
 						},
 						{
-							Name: "return_company_name",
-							Type: reportschema.SimpleTypeString,
+							Name:       "return_company_name",
+							SimpleType: reportschema.SimpleTypeString,
 						},
 						{
-							Name: "brandName",
-							Type: reportschema.SimpleTypeString,
+							Name:       "brandName",
+							SimpleType: reportschema.SimpleTypeString,
 						},
 						{
-							Name: "fileName",
-							Type: reportschema.SimpleTypeString,
+							Name:       "fileName",
+							SimpleType: reportschema.SimpleTypeString,
 						},
 						{
-							Name: "InvalidNumberOfParams",
-							Type: reportschema.SimpleTypeString,
+							Name:       "InvalidNumberOfParams",
+							SimpleType: reportschema.SimpleTypeString,
 						},
 						{
-							Name: "prescription_template_id",
-							Type: reportschema.SimpleTypeString,
+							Name:       "prescription_template_id",
+							SimpleType: reportschema.SimpleTypeString,
 						},
 						{
-							Name: "last_name_score",
-							Type: reportschema.SimpleTypeNumber,
+							Name:       "last_name_score",
+							SimpleType: reportschema.SimpleTypeNumber,
 						},
 						{
-							Name: "studentApplicant.id",
-							Type: reportschema.SimpleTypeString,
+							Name:       "studentApplicant.id",
+							SimpleType: reportschema.SimpleTypeString,
 						},
 						{
-							Name: "studentapplicantTest.id",
-							Type: reportschema.SimpleTypeString,
+							Name:       "studentapplicantTest.id",
+							SimpleType: reportschema.SimpleTypeString,
 						},
 						{
-							Name: "return_seller_id",
-							Type: reportschema.SimpleTypeString,
+							Name:       "return_seller_id",
+							SimpleType: reportschema.SimpleTypeString,
 						},
 						{
-							Name: "seller_account_id",
-							Type: reportschema.SimpleTypeString,
+							Name:       "seller_account_id",
+							SimpleType: reportschema.SimpleTypeString,
 						},
 						{
-							Name: "customerReturnId",
-							Type: reportschema.SimpleTypeString,
+							Name:       "customerReturnId",
+							SimpleType: reportschema.SimpleTypeString,
 						},
 						{
-							Name: "lab_test_result_id",
-							Type: reportschema.SimpleTypeString,
+							Name:       "lab_test_result_id",
+							SimpleType: reportschema.SimpleTypeString,
 						},
 						{
-							Name: "master_product_category_updated_by_user_uuid",
-							Type: reportschema.SimpleTypeString,
+							Name:       "master_product_category_updated_by_user_uuid",
+							SimpleType: reportschema.SimpleTypeString,
 						},
 					},
 				},
@@ -515,12 +516,12 @@ func TestSchemaObjectClassification(t *testing.T) {
 				Filename:     "db/structure.sql",
 				DetectorType: detectors.DetectorRails,
 				Value: &schema.Detection{
-					Name: "foo",
-					Type: reportschema.SimpleTypeObject,
+					Name:       "foo",
+					SimpleType: reportschema.SimpleTypeObject,
 					Properties: []*schema.Detection{
 						{
-							Name: "applicants_id",
-							Type: reportschema.SimpleTypeString,
+							Name:       "applicants_id",
+							SimpleType: reportschema.SimpleTypeString,
 						},
 					},
 				},
@@ -539,16 +540,16 @@ func TestSchemaObjectClassification(t *testing.T) {
 				Filename:     "db/structure.sql",
 				DetectorType: detectors.DetectorRails,
 				Value: &schema.Detection{
-					Name: "foo",
-					Type: reportschema.SimpleTypeObject,
+					Name:       "foo",
+					SimpleType: reportschema.SimpleTypeObject,
 					Properties: []*schema.Detection{
 						{
-							Name: "applicants_id",
-							Type: reportschema.SimpleTypeString,
+							Name:       "applicants_id",
+							SimpleType: reportschema.SimpleTypeString,
 						},
 						{
-							Name: "message",
-							Type: reportschema.SimpleTypeString,
+							Name:       "message",
+							SimpleType: reportschema.SimpleTypeString,
 						},
 					},
 				},
@@ -567,20 +568,20 @@ func TestSchemaObjectClassification(t *testing.T) {
 				Filename:     "app.js",
 				DetectorType: detectors.DetectorJavascript,
 				Value: &schema.Detection{
-					Name: "ClientConfig",
-					Type: reportschema.SimpleTypeObject,
+					Name:       "ClientConfig",
+					SimpleType: reportschema.SimpleTypeObject,
 					Properties: []*schema.Detection{
 						{
-							Name: "service_name",
-							Type: reportschema.SimpleTypeString,
+							Name:       "service_name",
+							SimpleType: reportschema.SimpleTypeString,
 						},
 						{
-							Name: "instance_name",
-							Type: reportschema.SimpleTypeString,
+							Name:       "instance_name",
+							SimpleType: reportschema.SimpleTypeString,
 						},
 						{
-							Name: "matchLocationFromPhraseSetName",
-							Type: reportschema.SimpleTypeString,
+							Name:       "matchLocationFromPhraseSetName",
+							SimpleType: reportschema.SimpleTypeString,
 						},
 					},
 				},
@@ -599,12 +600,12 @@ func TestSchemaObjectClassification(t *testing.T) {
 				Filename:     "application.js",
 				DetectorType: detectors.DetectorJavascript,
 				Value: &schema.Detection{
-					Name: "IProps",
-					Type: reportschema.SimpleTypeObject,
+					Name:       "IProps",
+					SimpleType: reportschema.SimpleTypeObject,
 					Properties: []*schema.Detection{
 						{
-							Name: "fontFamily",
-							Type: reportschema.SimpleTypeString,
+							Name:       "fontFamily",
+							SimpleType: reportschema.SimpleTypeString,
 						},
 					},
 				},
@@ -623,12 +624,12 @@ func TestSchemaObjectClassification(t *testing.T) {
 				Filename:     "application.js",
 				DetectorType: detectors.DetectorJavascript,
 				Value: &schema.Detection{
-					Name: "IProps",
-					Type: reportschema.SimpleTypeObject,
+					Name:       "IProps",
+					SimpleType: reportschema.SimpleTypeObject,
 					Properties: []*schema.Detection{
 						{
-							Name: "national_identifier",
-							Type: reportschema.SimpleTypeString,
+							Name:       "national_identifier",
+							SimpleType: reportschema.SimpleTypeString,
 						},
 					},
 				},
@@ -647,16 +648,16 @@ func TestSchemaObjectClassification(t *testing.T) {
 				Filename:     "app.js",
 				DetectorType: detectors.DetectorJavascript,
 				Value: &schema.Detection{
-					Name: "kbv_hm_diagnosis_groups",
-					Type: reportschema.SimpleTypeObject,
+					Name:       "kbv_hm_diagnosis_groups",
+					SimpleType: reportschema.SimpleTypeObject,
 					Properties: []*schema.Detection{
 						{
-							Name: "max_prescription_amount",
-							Type: reportschema.SimpleTypeString,
+							Name:       "max_prescription_amount",
+							SimpleType: reportschema.SimpleTypeString,
 						},
 						{
-							Name: "kbv_hma_prescription_requirement_id",
-							Type: reportschema.SimpleTypeString,
+							Name:       "kbv_hma_prescription_requirement_id",
+							SimpleType: reportschema.SimpleTypeString,
 						},
 					},
 				},
@@ -675,16 +676,16 @@ func TestSchemaObjectClassification(t *testing.T) {
 				Filename:     "app.js",
 				DetectorType: detectors.DetectorJavascript,
 				Value: &schema.Detection{
-					Name: "MiningPoolShares",
-					Type: reportschema.SimpleTypeObject,
+					Name:       "MiningPoolShares",
+					SimpleType: reportschema.SimpleTypeObject,
 					Properties: []*schema.Detection{
 						{
-							Name: "propertyName",
-							Type: reportschema.SimpleTypeString,
+							Name:       "propertyName",
+							SimpleType: reportschema.SimpleTypeString,
 						},
 						{
-							Name: "accountName",
-							Type: reportschema.SimpleTypeString,
+							Name:       "accountName",
+							SimpleType: reportschema.SimpleTypeString,
 						},
 					},
 				},
@@ -703,16 +704,16 @@ func TestSchemaObjectClassification(t *testing.T) {
 				Filename:     "app.js",
 				DetectorType: detectors.DetectorJavascript,
 				Value: &schema.Detection{
-					Name: "MiningPoolShares",
-					Type: reportschema.SimpleTypeObject,
+					Name:       "MiningPoolShares",
+					SimpleType: reportschema.SimpleTypeObject,
 					Properties: []*schema.Detection{
 						{
-							Name: "full_name",
-							Type: reportschema.SimpleTypeString,
+							Name:       "full_name",
+							SimpleType: reportschema.SimpleTypeString,
 						},
 						{
-							Name: "_AuthorName",
-							Type: reportschema.SimpleTypeString,
+							Name:       "_AuthorName",
+							SimpleType: reportschema.SimpleTypeString,
 						},
 					},
 				},
@@ -731,16 +732,16 @@ func TestSchemaObjectClassification(t *testing.T) {
 				Filename:     "app.js",
 				DetectorType: detectors.DetectorJavascript,
 				Value: &schema.Detection{
-					Name: "Foo",
-					Type: reportschema.SimpleTypeObject,
+					Name:       "Foo",
+					SimpleType: reportschema.SimpleTypeObject,
 					Properties: []*schema.Detection{
 						{
-							Name: "person_name",
-							Type: reportschema.SimpleTypeString,
+							Name:       "person_name",
+							SimpleType: reportschema.SimpleTypeString,
 						},
 						{
-							Name: "fullName",
-							Type: reportschema.SimpleTypeString,
+							Name:       "fullName",
+							SimpleType: reportschema.SimpleTypeString,
 						},
 					},
 				},
@@ -759,12 +760,12 @@ func TestSchemaObjectClassification(t *testing.T) {
 				Filename:     "app.js",
 				DetectorType: detectors.DetectorJavascript,
 				Value: &schema.Detection{
-					Name: "Agendas",
-					Type: reportschema.SimpleTypeObject,
+					Name:       "Agendas",
+					SimpleType: reportschema.SimpleTypeObject,
 					Properties: []*schema.Detection{
 						{
-							Name: "last_email_reminder",
-							Type: reportschema.SimpleTypeString,
+							Name:       "last_email_reminder",
+							SimpleType: reportschema.SimpleTypeString,
 						},
 					},
 				},
@@ -783,12 +784,12 @@ func TestSchemaObjectClassification(t *testing.T) {
 				Filename:     "app.js",
 				DetectorType: detectors.DetectorJavascript,
 				Value: &schema.Detection{
-					Name: "AwsRequestSigning",
-					Type: reportschema.SimpleTypeObject,
+					Name:       "AwsRequestSigning",
+					SimpleType: reportschema.SimpleTypeObject,
 					Properties: []*schema.Detection{
 						{
-							Name: "service_name",
-							Type: reportschema.SimpleTypeString,
+							Name:       "service_name",
+							SimpleType: reportschema.SimpleTypeString,
 						},
 					},
 				},
@@ -807,12 +808,12 @@ func TestSchemaObjectClassification(t *testing.T) {
 				Filename:     "app.js",
 				DetectorType: detectors.DetectorJavascript,
 				Value: &schema.Detection{
-					Name: "MetadataCredentialsFromPlugin",
-					Type: reportschema.SimpleTypeObject,
+					Name:       "MetadataCredentialsFromPlugin",
+					SimpleType: reportschema.SimpleTypeObject,
 					Properties: []*schema.Detection{
 						{
-							Name: "service_name",
-							Type: reportschema.SimpleTypeString,
+							Name:       "service_name",
+							SimpleType: reportschema.SimpleTypeString,
 						},
 					},
 				},

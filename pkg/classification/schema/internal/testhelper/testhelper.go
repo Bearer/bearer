@@ -1,10 +1,11 @@
 package testhelper
 
 import (
-	"sort"
+	"encoding/json"
+	"io/ioutil"
 
 	"github.com/bearer/curio/pkg/classification/schema"
-	"github.com/bearer/curio/pkg/report/schema/datatype"
+	"github.com/bearer/curio/pkg/report/detectors"
 	"github.com/bearer/curio/pkg/util/classify"
 
 	"github.com/stretchr/testify/assert"
@@ -66,145 +67,131 @@ func ExtractExpectedOutput(
 		ExpectedClassifications: []ClassificationResult{},
 	}
 
-	// val, err := ioutil.ReadFile("././fixtures/" + lang + ".json")
-	// if err != nil {
-	// 	t.Errorf("error opening file %e", err)
-	// }
-
-	// var input []Input
-	// rawBytes := []byte(val)
-	// err = json.Unmarshal(rawBytes, &input)
-	// if err != nil {
-	// 	t.Errorf("error unmarshalling JSON %e", err)
-	// }
-
-	// for _, inputItem := range input {
-	// 	includeResult := false
-	// 	result.KPI.DetectionsCount += 1
-
-	// 	expectedClassification := ClassificationResult{
-	// 		Name: inputItem.Name,
-	// 		Decision: classify.ClassificationDecision{
-	// 			State:  classify.ValidationState(inputItem.State),
-	// 			Reason: inputItem.Reason,
-	// 		},
-	// 	}
-
-	// 	expectedProperties := map[string]ClassificationResult{}
-	// 	detectionProperties := map[string]datatype.DataTypable{}
-	// 	for _, inputItemProperty := range inputItem.Properties {
-	// 		result.KPI.DetectionsCount += 1
-
-	// 		if inputItemProperty.State == "valid" {
-	// 			result.KPI.ExpectedValidDetectionsCount += 1
-	// 			result.KPI.ExpectedValidFieldDetectionsCount += 1
-	// 			if inputItemProperty.FalsePositive {
-	// 				result.KPI.ExpectedFalsePositivesCount += 1
-	// 			} else {
-	// 				result.KPI.ExpectedTruePositivesCount += 1
-	// 			}
-
-	// 			expectedProperties[inputItemProperty.Name] = ClassificationResult{
-	// 				Name: inputItemProperty.Name,
-	// 				Decision: classify.ClassificationDecision{
-	// 					State:  classify.Valid,
-	// 					Reason: inputItemProperty.Reason,
-	// 				},
-	// 			}
-	// 		} else {
-	// 			expectedProperties[inputItemProperty.Name] = ClassificationResult{
-	// 				Name: inputItemProperty.Name,
-	// 				Decision: classify.ClassificationDecision{
-	// 					State:  classify.Invalid,
-	// 					Reason: inputItemProperty.Reason,
-	// 				},
-	// 			}
-	// 		}
-
-	// 		detectionProperties[inputItemProperty.Name] = &datatype.DataType{
-	// 			Name:       inputItemProperty.Name,
-	// 			Type:       inputItemProperty.Type,
-	// 			Properties: map[string]datatype.DataTypable{},
-	// 		}
-	// 	}
-
-	// 	expectedClassification.Properties = expectedProperties
-
-	// 	if inputItem.State == "valid" {
-	// 		result.KPI.ExpectedValidDetectionsCount += 1
-	// 		result.KPI.ExpectedValidObjectDetectionsCount += 1
-	// 		// include as expected classification
-	// 		result.ExpectedClassifications = append(result.ExpectedClassifications, expectedClassification)
-
-	// 		if inputItem.FalsePositive {
-	// 			result.KPI.ExpectedFalsePositivesCount += 1
-	// 		} else {
-	// 			result.KPI.ExpectedTruePositivesCount += 1
-	// 		}
-	// 	}
-
-	// 	detection := schema.DataTypeDetection{
-	// 		Filename:     inputItem.Filename,
-	// 		DetectorType: detectors.Type(inputItem.DetectorType),
-	// 		Value: &datatype.DataType{
-	// 			Name:       inputItem.Name,
-	// 			Properties: detectionProperties,
-	// 		},
-	// 	}
-
-	// 	classification := classifier.Classify(detection)
-
-	// 	if classification.Classification.Decision.State == classify.Valid {
-	// 		includeResult = true
-	// 		result.KPI.ValidObjectDetectionsCount += 1
-	// 	}
-	// 	classificationResult := ClassificationResult{
-	// 		Name: classification.GetName(),
-	// 		Decision: classify.ClassificationDecision{
-	// 			State:  classification.Classification.Decision.State,
-	// 			Reason: classification.Classification.Decision.Reason,
-	// 		},
-	// 	}
-
-	// 	classifiedProperties := map[string]ClassificationResult{}
-	// 	// sort properties to ensure consistency for snapshot
-	// 	fields := classification.DataTypable.GetProperties()
-	// 	for _, key := range sortKeys(fields) {
-	// 		field := fields[key]
-	// 		fieldClassification, _ := field.GetClassification().(schema.Classification)
-	// 		// TODO: casting does not work if classification is empty
-	// 		if fieldClassification.Decision.State == "valid" {
-	// 			includeResult = true
-	// 			result.KPI.ValidFieldDetectionsCount += 1
-	// 		}
-
-	// 		classifiedProperties[field.GetName()] = ClassificationResult{
-	// 			Name: field.GetName(),
-	// 			Decision: classify.ClassificationDecision{
-	// 				State:  fieldClassification.Decision.State,
-	// 				Reason: fieldClassification.Decision.Reason,
-	// 			},
-	// 		}
-	// 	}
-
-	// 	classificationResult.Properties = classifiedProperties
-
-	// 	if includeResult {
-	// 		result.ValidClassifications = append(result.ValidClassifications, classificationResult)
-	// 	}
-	// }
-
-	// result.KPI.ValidDetectionsCount = result.KPI.ValidObjectDetectionsCount + result.KPI.ValidFieldDetectionsCount
-
-	return result
-}
-
-func sortKeys(fields map[string]datatype.DataTypable) []string {
-	keys := make([]string, 0, len(fields))
-	for k := range fields {
-		keys = append(keys, k)
+	val, err := ioutil.ReadFile("././fixtures/" + lang + ".json")
+	if err != nil {
+		t.Errorf("error opening file %e", err)
 	}
 
-	sort.Strings(keys)
-	return keys
+	var input []Input
+	rawBytes := []byte(val)
+	err = json.Unmarshal(rawBytes, &input)
+	if err != nil {
+		t.Errorf("error unmarshalling JSON %e", err)
+	}
+
+	for _, inputItem := range input {
+		includeResult := false
+		result.KPI.DetectionsCount += 1
+
+		expectedClassification := ClassificationResult{
+			Name: inputItem.Name,
+			Decision: classify.ClassificationDecision{
+				State:  classify.ValidationState(inputItem.State),
+				Reason: inputItem.Reason,
+			},
+		}
+
+		expectedProperties := map[string]ClassificationResult{}
+		detectionProperties := []*schema.Detection{}
+		for _, inputItemProperty := range inputItem.Properties {
+			result.KPI.DetectionsCount += 1
+
+			if inputItemProperty.State == "valid" {
+				result.KPI.ExpectedValidDetectionsCount += 1
+				result.KPI.ExpectedValidFieldDetectionsCount += 1
+				if inputItemProperty.FalsePositive {
+					result.KPI.ExpectedFalsePositivesCount += 1
+				} else {
+					result.KPI.ExpectedTruePositivesCount += 1
+				}
+
+				expectedProperties[inputItemProperty.Name] = ClassificationResult{
+					Name: inputItemProperty.Name,
+					Decision: classify.ClassificationDecision{
+						State:  classify.Valid,
+						Reason: inputItemProperty.Reason,
+					},
+				}
+			} else {
+				expectedProperties[inputItemProperty.Name] = ClassificationResult{
+					Name: inputItemProperty.Name,
+					Decision: classify.ClassificationDecision{
+						State:  classify.Invalid,
+						Reason: inputItemProperty.Reason,
+					},
+				}
+			}
+
+			detectionProperties = append(detectionProperties, &schema.Detection{
+				Name:       inputItemProperty.Name,
+				SimpleType: inputItemProperty.Type,
+			})
+		}
+
+		expectedClassification.Properties = expectedProperties
+
+		if inputItem.State == "valid" {
+			result.KPI.ExpectedValidDetectionsCount += 1
+			result.KPI.ExpectedValidObjectDetectionsCount += 1
+			// include as expected classification
+			result.ExpectedClassifications = append(result.ExpectedClassifications, expectedClassification)
+
+			if inputItem.FalsePositive {
+				result.KPI.ExpectedFalsePositivesCount += 1
+			} else {
+				result.KPI.ExpectedTruePositivesCount += 1
+			}
+		}
+
+		detection := schema.DataTypeDetection{
+			Filename:     inputItem.Filename,
+			DetectorType: detectors.Type(inputItem.DetectorType),
+			Value: &schema.Detection{
+				Name:       inputItem.Name,
+				Properties: detectionProperties,
+			},
+		}
+
+		classification := classifier.Classify(detection)
+
+		if classification.Classification.Decision.State == classify.Valid {
+			includeResult = true
+			result.KPI.ValidObjectDetectionsCount += 1
+		}
+		classificationResult := ClassificationResult{
+			Name: classification.Name,
+			Decision: classify.ClassificationDecision{
+				State:  classification.Classification.Decision.State,
+				Reason: classification.Classification.Decision.Reason,
+			},
+		}
+
+		classifiedProperties := map[string]ClassificationResult{}
+		// sort properties to ensure consistency for snapshot
+		for _, fieldClassification := range classification.Properties {
+			// TODO: casting does not work if classification is empty
+			if fieldClassification.Classification.Decision.State == "valid" {
+				includeResult = true
+				result.KPI.ValidFieldDetectionsCount += 1
+			}
+
+			classifiedProperties[fieldClassification.Name] = ClassificationResult{
+				Name: fieldClassification.Name,
+				Decision: classify.ClassificationDecision{
+					State:  fieldClassification.Classification.Decision.State,
+					Reason: fieldClassification.Classification.Decision.Reason,
+				},
+			}
+		}
+
+		classificationResult.Properties = classifiedProperties
+
+		if includeResult {
+			result.ValidClassifications = append(result.ValidClassifications, classificationResult)
+		}
+	}
+
+	result.KPI.ValidDetectionsCount = result.KPI.ValidObjectDetectionsCount + result.KPI.ValidFieldDetectionsCount
+
+	return result
 }

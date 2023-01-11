@@ -47,7 +47,6 @@ func New(config Config) *Classifier {
 
 type Detection struct {
 	Name       string
-	Type       string
 	SimpleType string
 	Properties []*Detection
 }
@@ -81,9 +80,9 @@ func (classifier *Classifier) Classify(data DataTypeDetection) *ClassifiedDataty
 	}
 
 	// schema-specific checks
-	var properties []ClassifiedDatatype
+	var properties []*ClassifiedDatatype
 	for _, v := range data.Value.Properties {
-		properties = append(properties, ClassifiedDatatype{
+		properties = append(properties, &ClassifiedDatatype{
 			Name: v.Name,
 			Classification: Classification{
 				Name: normalize_key.Normalize(v.Name),
@@ -94,6 +93,7 @@ func (classifier *Classifier) Classify(data DataTypeDetection) *ClassifiedDataty
 	classifiedDatatype = &ClassifiedDatatype{
 		Name:           data.Value.Name,
 		Classification: Classification{Name: normalize_key.Normalize(normalizedName)},
+		Properties:     properties,
 	}
 
 	matchedKnownPersonObject := classifier.matchKnownPersonObjectPatterns(normalizedName, false)
@@ -233,18 +233,14 @@ func (classifier *Classifier) classifyKnownObject(classifiedDatatype *Classified
 		matchedKnownObject := classifier.matchObjectPatterns(property.Classification.Name, detection.Properties[i].SimpleType, db.KnownObject)
 		if matchedKnownObject != nil {
 			validProperties = true
-
 			classifiedDatatype.Properties[i] = classifyAsValid(detection.Properties[i], classifier.datatypeFromPattern(matchedKnownObject), "known_pattern")
-
 			continue
 		}
 
 		matchedKnownIdentifier := classifier.matchKnownPersonObjectPatterns(normalize_key.Normalize(property.Name), true)
 		if matchedKnownIdentifier != nil {
 			validProperties = true
-
 			classifiedDatatype.Properties[i] = classifyAsValid(detection.Properties[i], matchedKnownIdentifier.DataType, "known_database_identifier")
-
 			continue
 		}
 
