@@ -8,7 +8,6 @@ import (
 	languagetypes "github.com/bearer/curio/new/language/types"
 	"github.com/bearer/curio/pkg/classification/db"
 	"github.com/bearer/curio/pkg/classification/schema"
-	"github.com/bearer/curio/pkg/parser/nodeid"
 	"github.com/bearer/curio/pkg/util/classify"
 )
 
@@ -23,14 +22,12 @@ type Property struct {
 }
 
 type datatypeDetector struct {
-	classifier  *schema.Classifier
-	idGenerator nodeid.Generator
+	classifier *schema.Classifier
 }
 
-func New(lang languagetypes.Language, classifier *schema.Classifier, idGenerator nodeid.Generator) (types.Detector, error) {
+func New(lang languagetypes.Language, classifier *schema.Classifier) (types.Detector, error) {
 	return &datatypeDetector{
-		classifier:  classifier,
-		idGenerator: idGenerator,
+		classifier: classifier,
 	}, nil
 }
 

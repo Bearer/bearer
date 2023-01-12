@@ -19,18 +19,18 @@ func TestSchemaObjectClassification(t *testing.T) {
 	}
 	tests := []struct {
 		Name  string
-		Input schema.DataTypeDetection
+		Input schema.ClassificationRequest
 		Want  schema.Classification
 	}{
 		{
 			Name: "from vendors folder",
-			Input: schema.DataTypeDetection{
+			Input: schema.ClassificationRequest{
 				Filename:     "vendor/vendor.rb",
 				DetectorType: detectors.DetectorRuby,
-				Value: &schema.Detection{
+				Value: &schema.ClassificationRequestDetection{
 					Name:       "User",
 					SimpleType: reportschema.SimpleTypeObject,
-					Properties: []*schema.Detection{
+					Properties: []*schema.ClassificationRequestDetection{
 						{
 							Name:       "sku_name",
 							SimpleType: reportschema.SimpleTypeString,
@@ -48,13 +48,13 @@ func TestSchemaObjectClassification(t *testing.T) {
 		},
 		{
 			Name: "known object with no valid properties",
-			Input: schema.DataTypeDetection{
+			Input: schema.ClassificationRequest{
 				Filename:     "db/schema.rb",
 				DetectorType: detectors.DetectorRuby,
-				Value: &schema.Detection{
+				Value: &schema.ClassificationRequestDetection{
 					Name:       "User",
 					SimpleType: reportschema.SimpleTypeObject,
-					Properties: []*schema.Detection{
+					Properties: []*schema.ClassificationRequestDetection{
 						{
 							Name:       "First Name",
 							SimpleType: reportschema.SimpleTypeBool, // wrong type
@@ -105,13 +105,13 @@ func TestSchemaObjectClassification(t *testing.T) {
 		},
 		{
 			Name: "known object with valid properties",
-			Input: schema.DataTypeDetection{
+			Input: schema.ClassificationRequest{
 				Filename:     "db/schema.rb",
 				DetectorType: detectors.DetectorRuby,
-				Value: &schema.Detection{
+				Value: &schema.ClassificationRequestDetection{
 					Name:       "User",
 					SimpleType: reportschema.SimpleTypeObject,
-					Properties: []*schema.Detection{
+					Properties: []*schema.ClassificationRequestDetection{
 						{
 							Name:       "birthdate",
 							SimpleType: reportschema.SimpleTypeString,
@@ -134,13 +134,13 @@ func TestSchemaObjectClassification(t *testing.T) {
 		},
 		{
 			Name: "known object is SellerFiscalInformation with valid properties",
-			Input: schema.DataTypeDetection{
+			Input: schema.ClassificationRequest{
 				Filename:     "db/schema.rb",
 				DetectorType: detectors.DetectorRuby,
-				Value: &schema.Detection{
+				Value: &schema.ClassificationRequestDetection{
 					Name:       "SellerFiscalInformation",
 					SimpleType: reportschema.SimpleTypeObject,
-					Properties: []*schema.Detection{
+					Properties: []*schema.ClassificationRequestDetection{
 						{
 							Name:       "name",
 							SimpleType: reportschema.SimpleTypeString,
@@ -167,13 +167,13 @@ func TestSchemaObjectClassification(t *testing.T) {
 		},
 		{
 			Name: "known object is SellerFiscalInformation with no valid properties",
-			Input: schema.DataTypeDetection{
+			Input: schema.ClassificationRequest{
 				Filename:     "db/schema.rb",
 				DetectorType: detectors.DetectorRuby,
-				Value: &schema.Detection{
+				Value: &schema.ClassificationRequestDetection{
 					Name:       "SellerFiscalInformation",
 					SimpleType: reportschema.SimpleTypeObject,
-					Properties: []*schema.Detection{
+					Properties: []*schema.ClassificationRequestDetection{
 						{
 							Name:       "erp_name",
 							SimpleType: reportschema.SimpleTypeString,
@@ -204,13 +204,13 @@ func TestSchemaObjectClassification(t *testing.T) {
 		},
 		{
 			Name: "known object with properties that match a db identifier",
-			Input: schema.DataTypeDetection{
+			Input: schema.ClassificationRequest{
 				Filename:     "db/schema.rb",
 				DetectorType: detectors.DetectorRuby,
-				Value: &schema.Detection{
+				Value: &schema.ClassificationRequestDetection{
 					Name:       "Applicant",
 					SimpleType: reportschema.SimpleTypeObject,
-					Properties: []*schema.Detection{
+					Properties: []*schema.ClassificationRequestDetection{
 						{
 							Name:       "user_id",
 							SimpleType: reportschema.SimpleTypeString,
@@ -229,13 +229,13 @@ func TestSchemaObjectClassification(t *testing.T) {
 		},
 		{
 			Name: "known object with properties that match exclude patterns",
-			Input: schema.DataTypeDetection{
+			Input: schema.ClassificationRequest{
 				Filename:     "db/schema.rb",
 				DetectorType: detectors.DetectorRuby,
-				Value: &schema.Detection{
+				Value: &schema.ClassificationRequestDetection{
 					Name:       "bank_accounts",
 					SimpleType: reportschema.SimpleTypeObject,
-					Properties: []*schema.Detection{
+					Properties: []*schema.ClassificationRequestDetection{
 						{
 							Name:       "credit_card_number",
 							SimpleType: reportschema.SimpleTypeString,
@@ -254,13 +254,13 @@ func TestSchemaObjectClassification(t *testing.T) {
 		},
 		{
 			Name: "known object with properties that match exclude patterns but are the wrong type (bool) - case #1",
-			Input: schema.DataTypeDetection{
+			Input: schema.ClassificationRequest{
 				Filename:     "db/schema.rb",
 				DetectorType: detectors.DetectorRuby,
-				Value: &schema.Detection{
+				Value: &schema.ClassificationRequestDetection{
 					Name:       "bank_accounts",
 					SimpleType: reportschema.SimpleTypeObject,
-					Properties: []*schema.Detection{
+					Properties: []*schema.ClassificationRequestDetection{
 						{
 							Name:       "credit_card_number",
 							SimpleType: reportschema.SimpleTypeBool,
@@ -279,13 +279,13 @@ func TestSchemaObjectClassification(t *testing.T) {
 		},
 		{
 			Name: "known object with properties that match exclude patterns but are the wrong type (bool) - case #2",
-			Input: schema.DataTypeDetection{
+			Input: schema.ClassificationRequest{
 				Filename:     "db/schema.rb",
 				DetectorType: detectors.DetectorRuby,
-				Value: &schema.Detection{
+				Value: &schema.ClassificationRequestDetection{
 					Name:       "patients",
 					SimpleType: reportschema.SimpleTypeObject,
-					Properties: []*schema.Detection{
+					Properties: []*schema.ClassificationRequestDetection{
 						{
 							Name:       "place_of_birth_unknown",
 							SimpleType: reportschema.SimpleTypeBool,
@@ -304,13 +304,13 @@ func TestSchemaObjectClassification(t *testing.T) {
 		},
 		{
 			Name: "known object with properties that do not match exclude patterns",
-			Input: schema.DataTypeDetection{
+			Input: schema.ClassificationRequest{
 				Filename:     "db/schema.rb",
 				DetectorType: detectors.DetectorRuby,
-				Value: &schema.Detection{
+				Value: &schema.ClassificationRequestDetection{
 					Name:       "accounts",
 					SimpleType: reportschema.SimpleTypeObject,
-					Properties: []*schema.Detection{
+					Properties: []*schema.ClassificationRequestDetection{
 						{
 							Name:       "first_name",
 							SimpleType: reportschema.SimpleTypeString,
@@ -329,13 +329,13 @@ func TestSchemaObjectClassification(t *testing.T) {
 		},
 		{
 			Name: "known object with properties that do not match exclude criteria but are the wrong type (bool)",
-			Input: schema.DataTypeDetection{
+			Input: schema.ClassificationRequest{
 				Filename:     "db/schema.rb",
 				DetectorType: detectors.DetectorRuby,
-				Value: &schema.Detection{
+				Value: &schema.ClassificationRequestDetection{
 					Name:       "accounts",
 					SimpleType: reportschema.SimpleTypeObject,
-					Properties: []*schema.Detection{
+					Properties: []*schema.ClassificationRequestDetection{
 						{
 							Name:       "first_name",
 							SimpleType: reportschema.SimpleTypeBool,
@@ -354,13 +354,13 @@ func TestSchemaObjectClassification(t *testing.T) {
 		},
 		{
 			Name: "known object with properties that do not match any patterns",
-			Input: schema.DataTypeDetection{
+			Input: schema.ClassificationRequest{
 				Filename:     "db/schema.rb",
 				DetectorType: detectors.DetectorRuby,
-				Value: &schema.Detection{
+				Value: &schema.ClassificationRequestDetection{
 					Name:       "accounts",
 					SimpleType: reportschema.SimpleTypeObject,
-					Properties: []*schema.Detection{
+					Properties: []*schema.ClassificationRequestDetection{
 						{
 							Name:       "foo",
 							SimpleType: reportschema.SimpleTypeString,
@@ -379,13 +379,13 @@ func TestSchemaObjectClassification(t *testing.T) {
 		},
 		{
 			Name: "Known object - database detection - with invalid properties",
-			Input: schema.DataTypeDetection{
+			Input: schema.ClassificationRequest{
 				Filename:     "db/schema.rb",
 				DetectorType: detectors.DetectorSQL,
-				Value: &schema.Detection{
+				Value: &schema.ClassificationRequestDetection{
 					Name:       "accounts",
 					SimpleType: reportschema.SimpleTypeObject,
-					Properties: []*schema.Detection{
+					Properties: []*schema.ClassificationRequestDetection{
 						{
 							Name:       "bar",
 							SimpleType: reportschema.SimpleTypeString,
@@ -404,13 +404,13 @@ func TestSchemaObjectClassification(t *testing.T) {
 		},
 		{
 			Name: "Unknown object matching stop word",
-			Input: schema.DataTypeDetection{
+			Input: schema.ClassificationRequest{
 				Filename:     "application.js",
 				DetectorType: detectors.DetectorJavascript,
-				Value: &schema.Detection{
+				Value: &schema.ClassificationRequestDetection{
 					Name:       "prop types",
 					SimpleType: reportschema.SimpleTypeObject,
-					Properties: []*schema.Detection{
+					Properties: []*schema.ClassificationRequestDetection{
 						{
 							Name:       "lastname",
 							SimpleType: reportschema.SimpleTypeString,
@@ -428,13 +428,13 @@ func TestSchemaObjectClassification(t *testing.T) {
 		},
 		{
 			Name: "Unknown object with invalid properties",
-			Input: schema.DataTypeDetection{
+			Input: schema.ClassificationRequest{
 				Filename:     "db/structure.sql",
 				DetectorType: detectors.DetectorRails,
-				Value: &schema.Detection{
+				Value: &schema.ClassificationRequestDetection{
 					Name:       "foo",
 					SimpleType: reportschema.SimpleTypeObject,
-					Properties: []*schema.Detection{
+					Properties: []*schema.ClassificationRequestDetection{
 						{
 							Name:       "way_name",
 							SimpleType: reportschema.SimpleTypeString,
@@ -512,13 +512,13 @@ func TestSchemaObjectClassification(t *testing.T) {
 		},
 		{
 			Name: "Unknown object with db identifier but no associated object properties",
-			Input: schema.DataTypeDetection{
+			Input: schema.ClassificationRequest{
 				Filename:     "db/structure.sql",
 				DetectorType: detectors.DetectorRails,
-				Value: &schema.Detection{
+				Value: &schema.ClassificationRequestDetection{
 					Name:       "foo",
 					SimpleType: reportschema.SimpleTypeObject,
-					Properties: []*schema.Detection{
+					Properties: []*schema.ClassificationRequestDetection{
 						{
 							Name:       "applicants_id",
 							SimpleType: reportschema.SimpleTypeString,
@@ -536,13 +536,13 @@ func TestSchemaObjectClassification(t *testing.T) {
 		},
 		{
 			Name: "Unknown object with db identifier and an associated object property",
-			Input: schema.DataTypeDetection{
+			Input: schema.ClassificationRequest{
 				Filename:     "db/structure.sql",
 				DetectorType: detectors.DetectorRails,
-				Value: &schema.Detection{
+				Value: &schema.ClassificationRequestDetection{
 					Name:       "foo",
 					SimpleType: reportschema.SimpleTypeObject,
-					Properties: []*schema.Detection{
+					Properties: []*schema.ClassificationRequestDetection{
 						{
 							Name:       "applicants_id",
 							SimpleType: reportschema.SimpleTypeString,
@@ -564,13 +564,13 @@ func TestSchemaObjectClassification(t *testing.T) {
 		},
 		{
 			Name: "ClientConfig object",
-			Input: schema.DataTypeDetection{
+			Input: schema.ClassificationRequest{
 				Filename:     "app.js",
 				DetectorType: detectors.DetectorJavascript,
-				Value: &schema.Detection{
+				Value: &schema.ClassificationRequestDetection{
 					Name:       "ClientConfig",
 					SimpleType: reportschema.SimpleTypeObject,
-					Properties: []*schema.Detection{
+					Properties: []*schema.ClassificationRequestDetection{
 						{
 							Name:       "service_name",
 							SimpleType: reportschema.SimpleTypeString,
@@ -596,13 +596,13 @@ func TestSchemaObjectClassification(t *testing.T) {
 		},
 		{
 			Name: "IProps object with invalid properties",
-			Input: schema.DataTypeDetection{
+			Input: schema.ClassificationRequest{
 				Filename:     "application.js",
 				DetectorType: detectors.DetectorJavascript,
-				Value: &schema.Detection{
+				Value: &schema.ClassificationRequestDetection{
 					Name:       "IProps",
 					SimpleType: reportschema.SimpleTypeObject,
-					Properties: []*schema.Detection{
+					Properties: []*schema.ClassificationRequestDetection{
 						{
 							Name:       "fontFamily",
 							SimpleType: reportschema.SimpleTypeString,
@@ -620,13 +620,13 @@ func TestSchemaObjectClassification(t *testing.T) {
 		},
 		{
 			Name: "IProps object with valid properties",
-			Input: schema.DataTypeDetection{
+			Input: schema.ClassificationRequest{
 				Filename:     "application.js",
 				DetectorType: detectors.DetectorJavascript,
-				Value: &schema.Detection{
+				Value: &schema.ClassificationRequestDetection{
 					Name:       "IProps",
 					SimpleType: reportschema.SimpleTypeObject,
-					Properties: []*schema.Detection{
+					Properties: []*schema.ClassificationRequestDetection{
 						{
 							Name:       "national_identifier",
 							SimpleType: reportschema.SimpleTypeString,
@@ -644,13 +644,13 @@ func TestSchemaObjectClassification(t *testing.T) {
 		},
 		{
 			Name: "kbv_hm_diagnosis_groups object",
-			Input: schema.DataTypeDetection{
+			Input: schema.ClassificationRequest{
 				Filename:     "app.js",
 				DetectorType: detectors.DetectorJavascript,
-				Value: &schema.Detection{
+				Value: &schema.ClassificationRequestDetection{
 					Name:       "kbv_hm_diagnosis_groups",
 					SimpleType: reportschema.SimpleTypeObject,
-					Properties: []*schema.Detection{
+					Properties: []*schema.ClassificationRequestDetection{
 						{
 							Name:       "max_prescription_amount",
 							SimpleType: reportschema.SimpleTypeString,
@@ -672,13 +672,13 @@ func TestSchemaObjectClassification(t *testing.T) {
 		},
 		{
 			Name: "MiningPoolShares object",
-			Input: schema.DataTypeDetection{
+			Input: schema.ClassificationRequest{
 				Filename:     "app.js",
 				DetectorType: detectors.DetectorJavascript,
-				Value: &schema.Detection{
+				Value: &schema.ClassificationRequestDetection{
 					Name:       "MiningPoolShares",
 					SimpleType: reportschema.SimpleTypeObject,
-					Properties: []*schema.Detection{
+					Properties: []*schema.ClassificationRequestDetection{
 						{
 							Name:       "propertyName",
 							SimpleType: reportschema.SimpleTypeString,
@@ -700,13 +700,13 @@ func TestSchemaObjectClassification(t *testing.T) {
 		},
 		{
 			Name: "MiningPoolShares object",
-			Input: schema.DataTypeDetection{
+			Input: schema.ClassificationRequest{
 				Filename:     "app.js",
 				DetectorType: detectors.DetectorJavascript,
-				Value: &schema.Detection{
+				Value: &schema.ClassificationRequestDetection{
 					Name:       "MiningPoolShares",
 					SimpleType: reportschema.SimpleTypeObject,
-					Properties: []*schema.Detection{
+					Properties: []*schema.ClassificationRequestDetection{
 						{
 							Name:       "full_name",
 							SimpleType: reportschema.SimpleTypeString,
@@ -728,13 +728,13 @@ func TestSchemaObjectClassification(t *testing.T) {
 		},
 		{
 			Name: "With valid extended data properties",
-			Input: schema.DataTypeDetection{
+			Input: schema.ClassificationRequest{
 				Filename:     "app.js",
 				DetectorType: detectors.DetectorJavascript,
-				Value: &schema.Detection{
+				Value: &schema.ClassificationRequestDetection{
 					Name:       "Foo",
 					SimpleType: reportschema.SimpleTypeObject,
-					Properties: []*schema.Detection{
+					Properties: []*schema.ClassificationRequestDetection{
 						{
 							Name:       "person_name",
 							SimpleType: reportschema.SimpleTypeString,
@@ -756,13 +756,13 @@ func TestSchemaObjectClassification(t *testing.T) {
 		},
 		{
 			Name: "With valid extended data properties",
-			Input: schema.DataTypeDetection{
+			Input: schema.ClassificationRequest{
 				Filename:     "app.js",
 				DetectorType: detectors.DetectorJavascript,
-				Value: &schema.Detection{
+				Value: &schema.ClassificationRequestDetection{
 					Name:       "Agendas",
 					SimpleType: reportschema.SimpleTypeObject,
-					Properties: []*schema.Detection{
+					Properties: []*schema.ClassificationRequestDetection{
 						{
 							Name:       "last_email_reminder",
 							SimpleType: reportschema.SimpleTypeString,
@@ -780,13 +780,13 @@ func TestSchemaObjectClassification(t *testing.T) {
 		},
 		{
 			Name: "With invalid object / field combination - AWS case",
-			Input: schema.DataTypeDetection{
+			Input: schema.ClassificationRequest{
 				Filename:     "app.js",
 				DetectorType: detectors.DetectorJavascript,
-				Value: &schema.Detection{
+				Value: &schema.ClassificationRequestDetection{
 					Name:       "AwsRequestSigning",
 					SimpleType: reportschema.SimpleTypeObject,
-					Properties: []*schema.Detection{
+					Properties: []*schema.ClassificationRequestDetection{
 						{
 							Name:       "service_name",
 							SimpleType: reportschema.SimpleTypeString,
@@ -804,13 +804,13 @@ func TestSchemaObjectClassification(t *testing.T) {
 		},
 		{
 			Name: "With invalid object / field combination - MetadataCredentialsFromPlugin case",
-			Input: schema.DataTypeDetection{
+			Input: schema.ClassificationRequest{
 				Filename:     "app.js",
 				DetectorType: detectors.DetectorJavascript,
-				Value: &schema.Detection{
+				Value: &schema.ClassificationRequestDetection{
 					Name:       "MetadataCredentialsFromPlugin",
 					SimpleType: reportschema.SimpleTypeObject,
-					Properties: []*schema.Detection{
+					Properties: []*schema.ClassificationRequestDetection{
 						{
 							Name:       "service_name",
 							SimpleType: reportschema.SimpleTypeString,

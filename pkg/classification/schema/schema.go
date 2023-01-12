@@ -45,19 +45,19 @@ func New(config Config) *Classifier {
 	return &Classifier{config: config}
 }
 
-type Detection struct {
+type ClassificationRequestDetection struct {
 	Name       string
 	SimpleType string
-	Properties []*Detection
+	Properties []*ClassificationRequestDetection
 }
 
-type DataTypeDetection struct {
-	Value        *Detection
+type ClassificationRequest struct {
+	Value        *ClassificationRequestDetection
 	Filename     string
 	DetectorType detectors.Type
 }
 
-func (classifier *Classifier) Classify(data DataTypeDetection) *ClassifiedDatatype {
+func (classifier *Classifier) Classify(data ClassificationRequest) *ClassifiedDatatype {
 	var classifiedDatatype *ClassifiedDatatype
 	var normalizedName = normalize_key.Normalize(data.Value.Name)
 
@@ -128,7 +128,7 @@ func (classifier *Classifier) Classify(data DataTypeDetection) *ClassifiedDataty
 	return classifiedDatatype
 }
 
-func (classifier *Classifier) hasIdentifierProperties(objectProperties []*Detection, isJSDetection bool) bool {
+func (classifier *Classifier) hasIdentifierProperties(objectProperties []*ClassificationRequestDetection, isJSDetection bool) bool {
 	for _, property := range objectProperties {
 		if isJSDetection && classify.PropertyStopWordDetected(normalize_key.Normalize(property.Name)) {
 			continue
@@ -143,7 +143,7 @@ func (classifier *Classifier) hasIdentifierProperties(objectProperties []*Detect
 	return false
 }
 
-func (classifier *Classifier) hasUnknownObjectProperties(objectProperties []*Detection, isJSDetection bool) bool {
+func (classifier *Classifier) hasUnknownObjectProperties(objectProperties []*ClassificationRequestDetection, isJSDetection bool) bool {
 	for _, property := range objectProperties {
 		if isJSDetection && classify.PropertyStopWordDetected(normalize_key.Normalize(property.Name)) {
 			continue
@@ -220,7 +220,7 @@ func (classifier *Classifier) matchKnownPersonObjectPatterns(name string, matchA
 	return matchedPattern
 }
 
-func (classifier *Classifier) classifyKnownObject(classifiedDatatype *ClassifiedDatatype, detection *Detection, detectorType detectors.Type) *ClassifiedDatatype {
+func (classifier *Classifier) classifyKnownObject(classifiedDatatype *ClassifiedDatatype, detection *ClassificationRequestDetection, detectorType detectors.Type) *ClassifiedDatatype {
 	isJSDetection := classify.IsJSDetection(detectorType)
 
 	validProperties := false
@@ -268,7 +268,7 @@ func (classifier *Classifier) classifyKnownObject(classifiedDatatype *Classified
 	return classifiedDatatype
 }
 
-func (classifier *Classifier) classifyObjectWithUnknownProperties(classifiedDatatype *ClassifiedDatatype, detection *Detection, isJSDetection bool) *ClassifiedDatatype {
+func (classifier *Classifier) classifyObjectWithUnknownProperties(classifiedDatatype *ClassifiedDatatype, detection *ClassificationRequestDetection, isJSDetection bool) *ClassifiedDatatype {
 	for i, property := range classifiedDatatype.Properties {
 		if isJSDetection && classify.PropertyStopWordDetected(normalize_key.Normalize(property.Name)) {
 			classifiedDatatype.Properties[i] = classifyAsInvalid(detection.Properties[i], "stop_word")
@@ -307,7 +307,7 @@ func (classifier *Classifier) classifyObjectWithUnknownProperties(classifiedData
 	return classifiedDatatype
 }
 
-func (classifier *Classifier) classifyObjectWithIdentifierProperties(classifiedDatatype *ClassifiedDatatype, detection *Detection, isJSDetection bool) *ClassifiedDatatype {
+func (classifier *Classifier) classifyObjectWithIdentifierProperties(classifiedDatatype *ClassifiedDatatype, detection *ClassificationRequestDetection, isJSDetection bool) *ClassifiedDatatype {
 	associatedObjectProperties := false
 	for i, property := range classifiedDatatype.Properties {
 		if isJSDetection && classify.PropertyStopWordDetected(normalize_key.Normalize(property.Name)) {
@@ -394,7 +394,7 @@ func identifiersOnly(classifiedDatatype *ClassifiedDatatype) bool {
 	return identifiersOnly
 }
 
-func classifyObjectAsInvalid(D *Detection, reason string) *ClassifiedDatatype {
+func classifyObjectAsInvalid(D *ClassificationRequestDetection, reason string) *ClassifiedDatatype {
 	classifiedDatatype := &ClassifiedDatatype{
 		Classification: Classification{
 			Name: normalize_key.Normalize(D.Name),
@@ -413,7 +413,7 @@ func classifyObjectAsInvalid(D *Detection, reason string) *ClassifiedDatatype {
 	return classifiedDatatype
 }
 
-func classifyAsValid(D *Detection, datatype db.DataType, reason string) *ClassifiedDatatype {
+func classifyAsValid(D *ClassificationRequestDetection, datatype db.DataType, reason string) *ClassifiedDatatype {
 	return &ClassifiedDatatype{
 		Name: D.Name,
 		Classification: Classification{
@@ -427,7 +427,7 @@ func classifyAsValid(D *Detection, datatype db.DataType, reason string) *Classif
 	}
 }
 
-func classifyAsInvalid(D *Detection, reason string) *ClassifiedDatatype {
+func classifyAsInvalid(D *ClassificationRequestDetection, reason string) *ClassifiedDatatype {
 	return &ClassifiedDatatype{
 		Name: D.Name,
 		Classification: Classification{

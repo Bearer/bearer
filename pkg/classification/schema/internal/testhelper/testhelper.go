@@ -92,7 +92,7 @@ func ExtractExpectedOutput(
 		}
 
 		expectedProperties := map[string]ClassificationResult{}
-		detectionProperties := []*schema.Detection{}
+		detectionProperties := []*schema.ClassificationRequestDetection{}
 		for _, inputItemProperty := range inputItem.Properties {
 			result.KPI.DetectionsCount += 1
 
@@ -122,7 +122,7 @@ func ExtractExpectedOutput(
 				}
 			}
 
-			detectionProperties = append(detectionProperties, &schema.Detection{
+			detectionProperties = append(detectionProperties, &schema.ClassificationRequestDetection{
 				Name:       inputItemProperty.Name,
 				SimpleType: inputItemProperty.Type,
 			})
@@ -143,10 +143,10 @@ func ExtractExpectedOutput(
 			}
 		}
 
-		detection := schema.DataTypeDetection{
+		detection := schema.ClassificationRequest{
 			Filename:     inputItem.Filename,
 			DetectorType: detectors.Type(inputItem.DetectorType),
-			Value: &schema.Detection{
+			Value: &schema.ClassificationRequestDetection{
 				Name:       inputItem.Name,
 				Properties: detectionProperties,
 			},
