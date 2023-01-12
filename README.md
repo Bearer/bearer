@@ -55,6 +55,30 @@ Or, if your platform supports it, with [Homebrew](https://brew.sh/) using [Curio
 brew install Bearer/curio/curio
 ```
 
+#### Debian/Ubuntu
+
+```shell
+$ sudo apt-get install apt-transport-https
+$ echo deb [trusted=yes] https://apt.fury.io/bearer/ / | sudo tee -a /etc/apt/sources.list.d/fury.list
+$ sudo apt-get update
+$ sudo apt-get install curio
+```
+
+#### RHEL/CentOS
+
+Add repository setting
+
+```shell
+$ sudo vim /etc/yum.repos.d/fury.repo
+[fury]
+name=Gemfury Private Repo
+baseurl=https://yum.fury.io/bearer/
+enabled=1
+gpgcheck=0
+$ sudo yum -y update
+$ sudo yum -y install curio
+```
+
 [Additional installation options](#gear-additional-installation-options) are available.
 
 ### Scan your project
