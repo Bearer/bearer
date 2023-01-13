@@ -59,6 +59,26 @@ func (node *Node) Child(i int) *Node {
 	return node.tree.wrap(node.sitterNode.Child(i))
 }
 
+func (node *Node) AnonymousChild(i int) *Node {
+	n := int(node.sitterNode.ChildCount())
+	k := 0
+
+	for j := 0; j < n; j++ {
+		child := node.sitterNode.Child(j)
+		if child.IsNamed() {
+			continue
+		}
+
+		if k == i {
+			return node.tree.wrap(child)
+		}
+
+		k += 1
+	}
+
+	return nil
+}
+
 func (node *Node) ChildByFieldName(name string) *Node {
 	return node.tree.wrap(node.sitterNode.ChildByFieldName(name))
 }

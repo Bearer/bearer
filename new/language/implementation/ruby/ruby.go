@@ -17,7 +17,7 @@ import (
 )
 
 var (
-	variableLookupParents = []string{"pair", "argument_list"}
+	variableLookupParents = []string{"pair", "argument_list", "interpolation"}
 
 	anonymousPatternNodeParentTypes = []string{"binary"}
 

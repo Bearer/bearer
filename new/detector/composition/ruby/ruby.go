@@ -7,8 +7,10 @@ import (
 	"github.com/bearer/curio/new/detector/evaluator"
 	"github.com/bearer/curio/new/detector/implementation/custom"
 	"github.com/bearer/curio/new/detector/implementation/generic/datatype"
+	"github.com/bearer/curio/new/detector/implementation/generic/insecureurl"
 	"github.com/bearer/curio/new/detector/implementation/ruby/object"
 	"github.com/bearer/curio/new/detector/implementation/ruby/property"
+	stringdetector "github.com/bearer/curio/new/detector/implementation/ruby/string"
 	detectorset "github.com/bearer/curio/new/detector/set"
 	"github.com/bearer/curio/new/detector/types"
 	detectortypes "github.com/bearer/curio/new/detector/types"
@@ -47,12 +49,20 @@ func New(rules map[string]settings.Rule, classifier *classification.Classifier) 
 		name        string
 	}{
 		{
+			constructor: object.New,
+			name:        "object detector",
+		},
+		{
 			constructor: property.New,
 			name:        "property detector",
 		},
 		{
-			constructor: object.New,
-			name:        "object detector",
+			constructor: stringdetector.New,
+			name:        "string detector",
+		},
+		{
+			constructor: insecureurl.New,
+			name:        "insecure url detector",
 		},
 	}
 
@@ -164,6 +174,7 @@ func (composition *Composition) DetectFromFile(report report.Report, file *file.
 					matchSource,
 					parent,
 				)
+
 				continue
 			}
 
@@ -199,7 +210,6 @@ func (composition *Composition) DetectFromFile(report report.Report, file *file.
 						},
 					})
 				}
-
 			}
 		}
 	}

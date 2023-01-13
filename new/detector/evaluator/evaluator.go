@@ -74,7 +74,7 @@ func (evaluator *evaluator) ForNode(
 	}
 
 	for _, unifiedNode := range node.UnifiedNodes() {
-		unifiedNodeDetections, err := evaluator.nonUnifiedNodeDetections(unifiedNode, detectorType)
+		unifiedNodeDetections, err := evaluator.ForNode(unifiedNode, detectorType)
 		if err != nil {
 			return nil, err
 		}
