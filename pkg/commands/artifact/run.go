@@ -163,7 +163,6 @@ func (r *runner) ScanFilesystem(ctx context.Context, opts flag.Options) (types.R
 }
 
 func (r *runner) scanFS(ctx context.Context, opts flag.Options) (types.Report, error) {
-
 	return r.scanArtifact(ctx, opts)
 }
 
