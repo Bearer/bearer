@@ -1,0 +1,174 @@
+[
+  {
+    "id": "detect_ruby_logger",
+    "type": "risk",
+    "trigger": "local",
+    "severity": {
+      "default": "low",
+      "PII": "critical",
+      "PHI": "medium",
+      "PD": "high"
+    },
+    "exclude_data_types": ["Unique Identifier"],
+    "failure_message": "failure message DSW-001",
+    "description": "description DSW-001",
+    "remediation_message": "remediation message DSW-001",
+    "dsw_id": "DSW-001"
+  },
+  {
+    "id": "ssl_certificate_verification_disabled",
+    "type": "risk",
+    "trigger": "global",
+    "severity": {
+      "default": "medium"
+    },
+    "failure_message": "failure message DSW-002",
+    "description": "description DSW-002",
+    "remediation_message": "remediation message DSW-002",
+    "dsw_id": "DSW-002"
+  },
+  {
+    "id": "detect_rails_insecure_smtp",
+    "type": "risk",
+    "trigger": "global",
+    "severity": {
+      "default": "low",
+      "PII": "critical",
+      "PHI": "medium",
+      "PD": "high"
+    },
+    "failure_message": "failure message DSW-003",
+    "description": "description DSW-003",
+    "remediation_message": "remediation message DSW-003",
+    "dsw_id": "DSW-003",
+    "omit_parent_content": true
+  },
+  {
+    "id": "detect_rails_cookies",
+    "type": "risk",
+    "trigger": "local",
+    "severity": {
+      "default": "low",
+      "PII": "critical",
+      "PHI": "medium",
+      "PD": "high"
+    },
+    "failure_message": "failure message DSW-004",
+    "description": "description DSW-004",
+    "remediation_message": "remediation message DSW-004",
+    "dsw_id": "DSW-004"
+  },
+  {
+    "id": "detect_rails_jwt",
+    "type": "risk",
+    "trigger": "local",
+    "severity": {
+      "default": "low",
+      "PII": "critical",
+      "PHI": "medium",
+      "PD": "high"
+    },
+    "failure_message": "failure message DSW-005",
+    "description": "description DSW-005",
+    "remediation_message": "remediation message DSW-005",
+    "dsw_id": "DSW-005"
+  },
+  {
+    "id": "detect_rails_insecure_ftp",
+    "type": "risk",
+    "trigger": "global",
+    "severity": {
+      "default": "low",
+      "PII": "critical",
+      "PHI": "medium",
+      "PD": "high"
+    },
+    "failure_message": "failure message DSW-006",
+    "description": "description DSW-006",
+    "remediation_message": "remediation message DSW-006",
+    "dsw_id": "DSW-006"
+  },
+  {
+    "id": "detect_rails_insecure_ftp",
+    "type": "risk",
+    "trigger": "global",
+    "severity": {
+      "default": "low",
+      "PII": "critical",
+      "PHI": "medium",
+      "PD": "high"
+    },
+    "failure_message": "failure message DSW-007",
+    "description": "description DSW-007",
+    "remediation_message": "remediation message DSW-007",
+    "dsw_id": "DSW-007"
+  },
+  {
+    "id": "detect_rails_insecure_ftp",
+    "type": "risk",
+    "trigger": "global",
+    "severity": {
+      "default": "low",
+      "PII": "critical",
+      "PHI": "medium",
+      "PD": "high"
+    },
+    "failure_message": "failure message DSW-007",
+    "description": "description DSW-007",
+    "remediation_message": "remediation message DSW-007",
+    "dsw_id": "DSW-007"
+  },
+  {
+    "id": "ruby_password_length",
+    "type": "risk",
+    "trigger": "global",
+    "severity": {
+      "default": "high"
+    },
+    "failure_message": "failure message DSW-008",
+    "description": "description DSW-008",
+    "remediation_message": "remediation message DSW-008",
+    "dsw_id": "DSW-008"
+  },
+  {
+    "id": "gitleaks",
+    "type": "risk",
+    "trigger": "global",
+    "severity": {
+      "default": "critical"
+    },
+    "failure_message": "failure message DSW-009",
+    "description": "description DSW-009",
+    "remediation_message": "remediation message DSW-009",
+    "dsw_id": "DSW-009",
+    "omit_parent_context": true
+  },
+  {
+    "id": "detect_rails_insecure_communication",
+    "type": "risk",
+    "trigger": "global",
+    "severity": {
+      "default": "critical"
+    },
+    "failure_message": "failure message DSW-010",
+    "description": "description DSW-010",
+    "remediation_message": "remediation message DSW-010",
+    "dsw_id": "DSW-010",
+    "omit_parent": true
+  },
+  {
+    "id": "ruby_http_get_detection",
+    "type": "risk",
+    "trigger": "local",
+    "severity": {
+      "default": "low",
+      "PII": "critical",
+      "PHI": "medium",
+      "PD": "high"
+    },
+    "failure_message": "failure message DSW-011",
+    "description": "description DSW-011",
+    "remediation_message": "remediation message DSW-011",
+    "dsw_id": "DSW-011"
+  }
+]
