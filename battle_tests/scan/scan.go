@@ -27,7 +27,7 @@ func NewScan(repositoryUrl string) *Scanner {
 	}
 }
 
-func (scanner *Scanner) Start() (outputBytes []byte, startTime *time.Time, err error) {
+func (scanner *Scanner) Start(reportType string) (outputBytes []byte, startTime *time.Time, err error) {
 	// create temp directory
 	log.Debug().Msg("creating temporary folder")
 	scanner.TempDir, err = os.MkdirTemp(config.Runtime.EFSLocation, "broker_battle_test*")
@@ -60,7 +60,7 @@ func (scanner *Scanner) Start() (outputBytes []byte, startTime *time.Time, err e
 	output, err := exec.Command(
 		config.Runtime.CurioExecutablePath,
 		"scan",
-		"--report=stats",
+		fmt.Sprintf("--report=%s", reportType),
 		"--debug",
 		"--format=json",
 		cloneDir,

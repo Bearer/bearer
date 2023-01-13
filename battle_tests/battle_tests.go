@@ -31,6 +31,7 @@ func main() {
 
 	log.Debug().Msgf("curio version %s", build.CurioVersion)
 	log.Debug().Msgf("battle tests SHA %s", build.BattleTestSHA)
+	log.Debug().Msgf("S3 bucket %s", build.S3Bucket)
 
 	shutdown := make(chan os.Signal, 1)
 	signal.Notify(shutdown, os.Interrupt)
