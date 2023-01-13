@@ -48,7 +48,8 @@ func Discover(projectPath string, config settings.Config) ([]work.File, error) {
 			// Check if the file path itself should be ignored
 			fileInfo, err := os.Stat(fullPath)
 			if err != nil {
-				return nil, err
+				log.Debug().Msgf("Skipping directory: %s, %s", fullPath, err.Error())
+				continue
 			}
 			fileEntry := fs.FileInfoToDirEntry(fileInfo)
 			if ignore.Ignore(projectPath, pathFromGit, fileEntry) {
