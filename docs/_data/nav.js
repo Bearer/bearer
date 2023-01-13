@@ -28,4 +28,13 @@ module.exports = [
       { name: "Supported Languages", url: "/reference/supported-languages/" },
     ],
   },
+  {
+    name: "Contributing",
+    items: [
+      { name: "Overview", url: "/contributing/" },
+      { name: "Contribute code", url: "/contributing/code/" },
+      { name: "Contribute documentation", url: "/contributing/docs/" },
+      { name: "Contribute new recipes", url: "/contributing/recipes/" },
+    ],
+  },
 ];
