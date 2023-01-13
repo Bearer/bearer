@@ -63,13 +63,19 @@ jobs:
         with:
           path: dist/linux
           key: linux-${{ env.sha_short }}-canary
+      - name: Login to ghcr.io registry
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ env.GH_USER }}
+          password: ${{ secrets.GITHUB_TOKEN }}
       - uses: goreleaser/goreleaser-action@v4
         if: steps.cache.outputs.cache-hit != 'true' # do not run if cache hit
         name: Run GoReleaser
         with:
           distribution: goreleaser-pro
           version: latest
-          args: release --skip-docker --rm-dist --split -f ./.goreleaser/canary.yaml
+          args: release --rm-dist --split -f ./.goreleaser/canary.yaml
         env:
           GOOS: linux
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
