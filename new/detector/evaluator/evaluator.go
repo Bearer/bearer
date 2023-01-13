@@ -14,19 +14,26 @@ type evaluator struct {
 	detectorSet        types.DetectorSet
 	detectionCache     map[langtree.NodeID]map[string][]*types.Detection
 	executingDetectors map[langtree.NodeID][]string
+	fileName           string
 }
 
 func New(
 	detectorSet types.DetectorSet,
 	tree *langtree.Tree,
+	fileName string,
 ) types.Evaluator {
 	detectionCache := make(map[langtree.NodeID]map[string][]*types.Detection)
 
 	return &evaluator{
+		fileName:           fileName,
 		detectorSet:        detectorSet,
 		detectionCache:     detectionCache,
 		executingDetectors: make(map[langtree.NodeID][]string),
 	}
+}
+
+func (evaluator *evaluator) FileName() string {
+	return evaluator.fileName
 }
 
 func (evaluator *evaluator) ForTree(rootNode *langtree.Node, detectorType string) ([]*types.Detection, error) {

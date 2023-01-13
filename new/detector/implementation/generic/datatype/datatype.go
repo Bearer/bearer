@@ -2,30 +2,46 @@ package datatype
 
 import (
 	objectdetector "github.com/bearer/curio/new/detector/implementation/ruby/object"
-	propertydetector "github.com/bearer/curio/new/detector/implementation/ruby/property"
 	"github.com/bearer/curio/new/detector/types"
 	"github.com/bearer/curio/new/language/tree"
 	languagetypes "github.com/bearer/curio/new/language/types"
-	"github.com/bearer/curio/pkg/classification/db"
-	"github.com/bearer/curio/pkg/classification/schema"
-	"github.com/bearer/curio/pkg/util/classify"
+	classificationschema "github.com/bearer/curio/pkg/classification/schema"
+	"github.com/bearer/curio/pkg/report/detectors"
+	"github.com/bearer/curio/pkg/report/schema"
 )
 
 type Data struct {
-	Classification schema.Classification
+	Name           string
+	Classification classificationschema.Classification
 	Properties     []Property
 }
 
+func (data *Data) toClassifcationRequestDetection() *classificationschema.ClassificationRequestDetection {
+	req := &classificationschema.ClassificationRequestDetection{
+		Name:       data.Name,
+		SimpleType: schema.SimpleTypeUnknown,
+	}
+	for _, property := range data.Properties {
+		req.Properties = append(req.Properties, &classificationschema.ClassificationRequestDetection{
+			Name:       property.Name,
+			SimpleType: schema.SimpleTypeUnknown,
+			Properties: []*classificationschema.ClassificationRequestDetection{},
+		})
+	}
+	return req
+}
+
 type Property struct {
+	Name           string
 	Detection      *types.Detection
-	Classification schema.Classification
+	Classification classificationschema.Classification
 }
 
 type datatypeDetector struct {
-	classifier *schema.Classifier
+	classifier *classificationschema.Classifier
 }
 
-func New(lang languagetypes.Language, classifier *schema.Classifier) (types.Detector, error) {
+func New(lang languagetypes.Language, classifier *classificationschema.Classifier) (types.Detector, error) {
 	return &datatypeDetector{
 		classifier: classifier,
 	}, nil
@@ -53,55 +69,53 @@ func (detector *datatypeDetector) DetectAt(
 		data := object.Data.(objectdetector.Data)
 
 		for _, property := range data.Properties {
-			propertyData := property.Data.(propertydetector.Data)
-			var classification schema.Classification
-			if propertyData.Name == "first_name" && data.Name == "user" {
-				classification = schema.Classification{
-					DataType: &db.DataType{
-						Name:         "Firstname",
-						UUID:         "380c8cde-ca2e-44ed-82db-2ab1e7c255c7",
-						CategoryUUID: "14124881-6b92-4fc5-8005-ea7c1c09592e",
-					},
-					Name: "first_name",
-					Decision: classify.ClassificationDecision{
-						State:  classify.Valid,
-						Reason: "matches piid",
-					},
-				}
-			} else {
-				classification = schema.Classification{
-					DataType: nil,
-					Name:     propertyData.Name,
-					Decision: classify.ClassificationDecision{
-						State:  classify.Invalid,
-						Reason: "coudln't find datatype",
-					},
-				}
+			switch propertyData := property.Data.(type) {
+			case objectdetector.Data:
+				properties = append(properties, Property{
+					Detection: property,
+					Name:      propertyData.Name,
+				})
+			case Data:
+				properties = append(properties, Property{
+					Detection: property,
+					Name:      propertyData.Name,
+				})
 			}
 
-			properties = append(properties, Property{
-				Detection:      property,
-				Classification: classification,
-			})
 		}
+
+		detection := Data{
+			Name:       data.Name,
+			Properties: properties,
+		}
+
+		classificationReqDetection := detection.toClassifcationRequestDetection()
+
+		classification := detector.classifier.Classify(classificationschema.ClassificationRequest{
+			Value:        classificationReqDetection,
+			DetectorType: detectors.DetectorRuby,
+			Filename:     evaluator.FileName(),
+		})
+
+		mergeClassification(&detection, classification)
+
 		result = append(result, &types.Detection{
 			ContextNode: node,
 			MatchNode:   object.MatchNode,
-			Data: Data{
-				Classification: schema.Classification{
-					DataType: nil,
-					Name:     data.Name,
-					Decision: classify.ClassificationDecision{
-						State:  classify.Invalid,
-						Reason: "coudln't find datatype",
-					},
-				},
-				Properties: properties,
-			},
+			Data:        detection,
 		})
+
 	}
 
 	return result, nil
 }
 
 func (detector *datatypeDetector) Close() {}
+
+// NOTE: presumption for mergeClassification is that classification will have all properties that detection has in same order
+func mergeClassification(detection *Data, clasffication *classificationschema.ClassifiedDatatype) {
+	detection.Classification = clasffication.Classification
+	for i := range detection.Properties {
+		detection.Properties[i].Classification = clasffication.Properties[i].Classification
+	}
+}

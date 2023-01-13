@@ -128,7 +128,7 @@ func (composition *Composition) DetectFromFile(report report.Report, file *file.
 		return fmt.Errorf("failed to parse file %s", err)
 	}
 
-	evaluator := evaluator.New(composition.detectorSet, tree)
+	evaluator := evaluator.New(composition.detectorSet, tree, file.FileInfo.Name())
 
 	for _, detectorType := range composition.customDetectorTypes {
 		detections, err := evaluator.ForTree(tree.RootNode(), detectorType)
