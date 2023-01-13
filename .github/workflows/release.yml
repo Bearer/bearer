@@ -9,6 +9,9 @@ permissions:
   contents: write
   packages: write
 
+env:
+  GH_USER: "bearer-bot"
+
 jobs:
   tag:
     runs-on: ubuntu-latest
