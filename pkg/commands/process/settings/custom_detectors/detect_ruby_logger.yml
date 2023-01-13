@@ -4,5 +4,16 @@ patterns:
     logger.info(<$ARGUMENT>)
   - |
     Rails.logger.info(<$ARGUMENT>)
+  - |
+    Sentry::Breadcrumb.new(<$ARGUMENT>)
+  - |
+    Sentry.init do |config|
+      config.before_breadcrumb = lambda do |breadcrumb, hint|
+        breadcrumb.message = $ANYTHING
+        breadcrumb
+      end
+    end
+  - |
+    Sentry.set_user(<$ARGUMENT>)
 languages:
   - ruby

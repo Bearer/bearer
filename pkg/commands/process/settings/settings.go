@@ -20,6 +20,7 @@ type Config struct {
 	CustomDetector map[string]Rule    `mapstructure:"custom_detector" json:"custom_detector" yaml:"custom_detector"`
 	Policies       map[string]*Policy `mapstructure:"policies" json:"policies" yaml:"policies"`
 	Target         string             `mapstructure:"target" json:"target" yaml:"target"`
+	Rules          []*RuleNew         `mapstructure:"rules" json:"rules" yaml:"rules"`
 }
 
 type PolicyLevel string
@@ -32,19 +33,30 @@ var LevelLow = "low"
 type Modules []*PolicyModule
 
 type Policy struct {
-	Query       string      `mapstructure:"query" json:"query" yaml:"query"`
-	Id          string      `mapstructure:"id" json:"id" yaml:"id"`
-	DisplayId   string      `mapstructure:"display_id" json:"display_id" yaml:"display_id"`
-	Name        string      `mapstructure:"name" json:"name" yaml:"name"`
-	Description string      `mapstructure:"description" json:"description" yaml:"description"`
-	Level       PolicyLevel `mapstructure:"level" json:"level" yaml:"level"`
-	Modules     Modules     `mapstructure:"modules" json:"modules" yaml:"modules"`
+	Type    string  `mapstructure:"type" json:"type" yaml:"type"`
+	Query   string  `mapstructure:"query" json:"query" yaml:"query"`
+	Modules Modules `mapstructure:"modules" json:"modules" yaml:"modules"`
 }
 
 type PolicyModule struct {
 	Path    string `mapstructure:"path" json:"path,omitempty" yaml:"path,omitempty"`
 	Name    string `mapstructure:"name" json:"name" yaml:"name"`
 	Content string `mapstructure:"content" json:"content" yaml:"content"`
+}
+
+// TODO: naming? Deprecate Rule / avoid confusion?
+type RuleNew struct {
+	Id                 string            `mapstructure:"id" json:"id,omitempty" yaml:"id,omitempty"`
+	Type               string            `mapstructure:"type" json:"type,omitempty" yaml:"type,omitempty"`          // TODO: use enum value
+	Trigger            string            `mapstructure:"trigger" json:"trigger,omitempty" yaml:"trigger,omitempty"` // TODO: use enum value
+	OmitParent         bool              `mapstructure:"omit_parent" json:"omit_parent,omitempty" yaml:"omit_parent,omitempty"`
+	OmitParentContent  bool              `mapstructure:"omit_parent_content" json:"omit_parent_content,omitempty" yaml:"omit_parent_content,omitempty"`
+	ExcludeDataTypes   []string          `mapstructure:"exclude_data_types" json:"exclude_data_types,omitempty" yaml:"exclude_data_types,omitempty"`
+	Severity           map[string]string `mapstructure:"severity" json:"severity,omitempty" yaml:"severity,omitempty"`
+	Description        string            `mapstructure:"description" json:"description" yaml:"description"`
+	FailureMessage     string            `mapstructure:"failure_message" json:"failure_message" yaml:"failure_message"`
+	RemediationMessage string            `mapstructure:"remediation_message" json:"remediation_messafe" yaml:"remediation_messafe"`
+	DSWID              string            `mapstructure:"dsw_id" json:"dsw_id" yaml:"dsw_id"`
 }
 
 func (modules Modules) ToRegoModules() (output []rego.Module) {
@@ -100,6 +112,9 @@ type MetaVar struct {
 //go:embed policies.yml
 var defaultPolicies []byte
 
+//go:embed rules.json
+var defaultRules []byte
+
 //go:embed custom_detectors/*
 var customDetectorFS embed.FS
 
@@ -116,6 +131,8 @@ func FromOptions(opts flag.Options) (Config, error) {
 	detectors := DefaultCustomDetector()
 
 	policies := DefaultPolicies()
+
+	rulesNew := DefaultRules()
 
 	// validate detector options
 	onlyDetector := opts.DetectorOptions.OnlyDetector
@@ -170,46 +187,46 @@ func FromOptions(opts flag.Options) (Config, error) {
 		detectors[ruleName] = rule
 	}
 
-	// validate policy options
-	onlyPolicy := opts.PolicyOptions.OnlyPolicy
-	skipPolicy := opts.PolicyOptions.SkipPolicy
+	// TODO: validate policy options
+	// onlyPolicy := opts.PolicyOptions.OnlyPolicy
+	// skipPolicy := opts.PolicyOptions.SkipPolicy
 
-	policyDisplayIds := make(map[string]bool)
+	// policyDisplayIds := make(map[string]bool)
+	// for key := range policies {
+	// 	policy := policies[key]
+	// 	policyDisplayIds[policy.DisplayId] = true
+	// }
+
+	// var invalidPolicyDisplayIds []string
+	// for key := range onlyPolicy {
+	// 	if !policyDisplayIds[key] {
+	// 		invalidPolicyDisplayIds = append(invalidPolicyDisplayIds, key)
+	// 	}
+	// }
+
+	// for key := range skipPolicy {
+	// 	if !policyDisplayIds[key] {
+	// 		invalidPolicyDisplayIds = append(invalidPolicyDisplayIds, key)
+	// 	}
+	// }
+
+	// if len(invalidPolicyDisplayIds) > 0 {
+	// 	return Config{}, fmt.Errorf("unknown policy ids %s", invalidPolicyDisplayIds)
+	// }
+
 	for key := range policies {
 		policy := policies[key]
-		policyDisplayIds[policy.DisplayId] = true
-	}
 
-	var invalidPolicyDisplayIds []string
-	for key := range onlyPolicy {
-		if !policyDisplayIds[key] {
-			invalidPolicyDisplayIds = append(invalidPolicyDisplayIds, key)
-		}
-	}
+		// TODO: apply policy options
+		// if len(onlyPolicy) > 0 && !onlyPolicy[policy.DisplayId] {
+		// 	delete(policies, key)
+		// 	continue
+		// }
 
-	for key := range skipPolicy {
-		if !policyDisplayIds[key] {
-			invalidPolicyDisplayIds = append(invalidPolicyDisplayIds, key)
-		}
-	}
-
-	if len(invalidPolicyDisplayIds) > 0 {
-		return Config{}, fmt.Errorf("unknown policy ids %s", invalidPolicyDisplayIds)
-	}
-
-	// apply policy options
-	for key := range policies {
-		policy := policies[key]
-
-		if len(onlyPolicy) > 0 && !onlyPolicy[policy.DisplayId] {
-			delete(policies, key)
-			continue
-		}
-
-		if skipPolicy[policy.DisplayId] {
-			delete(policies, key)
-			continue
-		}
+		// if skipPolicy[policy.DisplayId] {
+		// 	delete(policies, key)
+		// 	continue
+		// }
 
 		for _, module := range policy.Modules {
 			if module.Path != "" {
@@ -243,6 +260,7 @@ func FromOptions(opts flag.Options) (Config, error) {
 		Scan:           opts.ScanOptions,
 		Report:         opts.ReportOptions,
 		Policies:       policies,
+		Rules:          rulesNew,
 	}
 
 	return config, nil
@@ -298,14 +316,31 @@ func DefaultCustomDetector() map[string]Rule {
 }
 
 func DefaultPolicies() map[string]*Policy {
-	var policies map[string]*Policy
+	policies := make(map[string]*Policy)
+	var policy []*Policy
 
-	err := yaml.Unmarshal(defaultPolicies, &policies)
+	err := yaml.Unmarshal(defaultPolicies, &policy)
 	if err != nil {
-		log.Fatal().Msgf("failed to unmarshal database file %e", err)
+		log.Fatal().Msgf("failed to unmarshal policy file %e", err)
+	}
+
+	log.Error().Msgf("policy %#v", policy)
+	for _, policy := range policy {
+		policies[policy.Type] = policy
 	}
 
 	return policies
+}
+
+func DefaultRules() []*RuleNew {
+	rulesNew := []*RuleNew{}
+
+	err := yaml.Unmarshal(defaultRules, &rulesNew)
+	if err != nil {
+		log.Fatal().Msgf("failed to unmarshal rules new file %e", err)
+	}
+
+	return rulesNew
 }
 
 func ProcessorRegoModuleText(processorName string) (string, error) {

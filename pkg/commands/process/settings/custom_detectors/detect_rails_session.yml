@@ -1,6 +1,0 @@
-type: "risk"
-patterns:
-  - |
-    session[...] = $ANYTHING
-languages:
-  - ruby

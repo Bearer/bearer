@@ -2,6 +2,8 @@ type: "risk"
 patterns:
   - |
     cookies[...] = $ANYTHING
+  - |
+    session[...] = $ANYTHING
   - pattern: |
       cookies.$METHOD_CHAIN[...] = $ANYTHING
     filters:
