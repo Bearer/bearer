@@ -13,7 +13,6 @@ severity:
   PII: "critical"
   PHI: "medium"
   PD: "high"
-omit_parent_content: true
 metadata:
   failure_message: "failure message DSW-006"
   description: "description DSW-006"

@@ -20,9 +20,12 @@ patterns:
           - RestClient
           - Typhoeus
 stored: false
-trigger: "global"
+trigger: "local"
 severity:
-  default: "critical"
+  default: "low"
+  PII: "critical"
+  PHI: "medium"
+  PD: "high"
 omit_parent_content: true
 metadata:
   failure_message: "failure message DSW-010"

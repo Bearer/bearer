@@ -24,8 +24,7 @@ policy_failure contains item if {
 		"filename": location.filename,
 		"line_number": location.line_number,
 		"parent_line_number": location.parent.line_number,
-		"parent_content": location.parent.content,
-		"policy_line_id": 12
+		"parent_content": location.parent.content
 	}
 }
 
@@ -44,15 +43,14 @@ policy_failure contains item if {
 		"filename": location.filename,
 		"line_number": location.line_number,
 		"parent_line_number": location.parent.line_number,
-		"parent_content": location.parent.content,
-		"policy_line_id": 12
+		"parent_content": location.parent.content
 	}
 }
 
 policy_failure contains item if {
 	input.rule.trigger == "global"
-	not input.rule.omit_parent == true
-	not input.rule.omit_parent_content == true
+	not input.rule.omit_parent == false
+	not input.rule.omit_parent_content == false
 
 	# FIXME: handle case to use exclude data type with global trigger
 	some data_type in input.dataflow.data_types
@@ -66,8 +64,7 @@ policy_failure contains item if {
 		"filename": location.filename,
 		"line_number": location.line_number,
 		"parent_line_number": location.parent.line_number,
-		"parent_content": location.parent.content,
-		"policy_line_id": 32
+		"parent_content": location.parent.content
 	}
 }
 
@@ -85,8 +82,7 @@ policy_failure contains item if {
 	item := {
 		"category_groups": data.bearer.common.groups_for_datatypes(input.dataflow.data_types),
 		"filename": location.filename,
-		"line_number": location.line_number,
-		"policy_line_id": 53
+		"line_number": location.line_number
 	}
 }
 
@@ -106,63 +102,6 @@ policy_failure contains item if {
 		"filename": location.filename,
 		"line_number": location.line_number,
 		"parent_line_number": location.parent.line_number,
-		"parent_content": location.content,
-		"policy_line_id": 71
-	}
-}
-
-policy_failure contains item if {
-	input.rule.trigger == "global"
-	not input.rule.omit_parent == true
-	not input.rule.omit_parent_content == true
-
-	not input.dataflow.data_types
-
-	some detector in input.dataflow.risks
-	detector.detector_id == input.rule.id
-
-	location = detector.locations[_]
-	item := {
-		"filename": location.filename,
-		"line_number": location.line_number,
-		"parent_line_number": location.parent.line_number,
-		"parent_content": location.parent.content,
-		"policy_line_id": 91
-	}
-}
-
-policy_failure contains item if {
-	input.rule.trigger == "global"
-	input.rule.omit_parent == true
-
-	not input.dataflow.data_types
-
-	some detector in input.dataflow.risks
-	detector.detector_id == input.rule.id
-
-	location = detector.locations[_]
-	item := {
-		"filename": location.filename,
-		"line_number": location.line_number,
-		"policy_line_id": 111
-	}
-}
-
-policy_failure contains item if {
-	input.rule.trigger == "global"
-	input.rule.omit_parent_content == true
-
-	not input.dataflow.data_types
-
-	some detector in input.dataflow.risks
-	detector.detector_id == input.rule.id
-
-	location = detector.locations[_]
-	item := {
-		"filename": location.filename,
-		"line_number": location.line_number,
-		"parent_line_number": location.parent.line_number,
-		"parent_content": location.content,
-		"policy_line_id": 128
+		"parent_content": location.content
 	}
 }
