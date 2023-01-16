@@ -7,11 +7,11 @@
     - path: policies/risk_policy.rego
       name: bearer.risk_policy
 
-# - type: "data_type"
-#   query: |
-#     policy_failure = data.bearer.risk_policy.policy_failure
-#   modules:
-#     - path: policies/common.rego
-#       name: bearer.common
-#     - path: policies/risk_policy.rego
-#       name: bearer.risk_policy
+- type: "data_type"
+  query: |
+    policy_failure = data.bearer.data_type_policy.policy_failure
+  modules:
+    - path: policies/common.rego
+      name: bearer.common
+    - path: policies/data_type_policy.rego
+      name: bearer.data_type_policy

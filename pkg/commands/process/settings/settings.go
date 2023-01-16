@@ -61,9 +61,11 @@ type RuleDefinition struct {
 	RootSingularize bool `mapstructure:"root_singularize" yaml:"root_singularize" `
 	RootLowercase   bool `mapstructure:"root_lowercase" yaml:"root_lowercase"`
 
-	Metavars       map[string]MetaVar `mapstructure:"metavars" json:"metavars" yaml:"metavars"`
-	Stored         bool               `mapstructure:"stored" json:"stored" yaml:"stored"`
-	DetectPresence bool               `mapstructure:"detect_presence" json:"detect_presence" yaml:"detect_presence"`
+	Metavars         map[string]MetaVar `mapstructure:"metavars" json:"metavars" yaml:"metavars"`
+	Stored           bool               `mapstructure:"stored" json:"stored" yaml:"stored"`
+	LinkedDetectors  []string           `mapstructure:"linked_detectors" json:"linked_detectors,omitempty" yaml:"linked_detectors,omitempty"`
+	AutoEncrytPrefix string             `mapstructure:"auto_encrypt_prefix" json:"auto_encrypt_prefix,omitempty" yaml:"auto_encrypt_prefix,omitempty"`
+	DetectPresence   bool               `mapstructure:"detect_presence" json:"detect_presence" yaml:"detect_presence"`
 
 	Trigger           string            `mapstructure:"trigger" json:"trigger" yaml:"trigger"` // TODO: use enum value
 	Severity          map[string]string `mapstructure:"severity" json:"severity,omitempty" yaml:"severity,omitempty"`
@@ -79,6 +81,9 @@ type RuleNew struct {
 	Id                 string            `mapstructure:"id" json:"id,omitempty" yaml:"id,omitempty"`
 	Type               string            `mapstructure:"type" json:"type,omitempty" yaml:"type,omitempty"`          // TODO: use enum value
 	Trigger            string            `mapstructure:"trigger" json:"trigger,omitempty" yaml:"trigger,omitempty"` // TODO: use enum value
+	LinkedDetectors    []string          `mapstructure:"linked_detectors" json:"linked_detectors,omitempty" yaml:"linked_detectors,omitempty"`
+	Stored             bool              `mapstructure:"stored" json:"stored,omitempty" yaml:"stored,omitempty"`
+	AutoEncrytPrefix   string            `mapstructure:"auto_encrypt_prefix" json:"auto_encrypt_prefix,omitempty" yaml:"auto_encrypt_prefix,omitempty"`
 	OmitParent         bool              `mapstructure:"omit_parent" json:"omit_parent,omitempty" yaml:"omit_parent,omitempty"`
 	OmitParentContent  bool              `mapstructure:"omit_parent_content" json:"omit_parent_content,omitempty" yaml:"omit_parent_content,omitempty"`
 	ExcludeDataTypes   []string          `mapstructure:"exclude_data_types" json:"exclude_data_types,omitempty" yaml:"exclude_data_types,omitempty"`
@@ -225,6 +230,9 @@ func DefaultDetectorsAndRules() (detectors map[string]Rule, rules []*RuleNew) {
 					Description:        ruleDefinition.Metadata.Description,
 					FailureMessage:     ruleDefinition.Metadata.FailureMessage,
 					RemediationMessage: ruleDefinition.Metadata.RemediationMessage,
+					Stored:             ruleDefinition.Stored,
+					LinkedDetectors:    ruleDefinition.LinkedDetectors,
+					AutoEncrytPrefix:   ruleDefinition.AutoEncrytPrefix,
 					DSWID:              ruleDefinition.Metadata.DSWID,
 				}
 

@@ -1,0 +1,54 @@
+- data_types:
+  - detector: ruby
+    filename: <path>
+    line_number: 1
+    object_name: users
+    field_name: email
+    data_type: Email Address
+    data_subject: ?? # will be required for privacy report
+  - detector: ruby
+    filename: <path>
+    line_number: 2
+    object_name: users
+    field_name: address
+    data_type: Address
+    data_subject: ?? # will be required for privacy report
+  - detector: schema_rb
+    filename: db/structure.sql
+    line_number: 2
+    object_name: users
+    field_name: address
+    data_type: Address
+    data_subject: ?? # will be required for privacy report
+    stored: true # This detector means it is stored
+
+- verifiers:
+  - detector: rails_encryption
+    filename: app/models/user.rb
+    line_number: 2
+    object_name: users
+    field_name: address
+    # data_type: -> No Data Classification here
+    associated_detectors:
+      - schema_rb
+      - create_table_sql
+
+- risks:
+  - detector: rule_logger_id
+    filename: app/controllers/users.rb
+    line_number: 10
+    object_name: users
+    field_name: address
+    data_type: Address
+    data_subject: ?? # will be required for privacy report
+
+- components:
+  - detector: gemfile-lock
+    filename: Gemfile.lock
+    line_number: 5
+    name: Sentry
+
+
+# ...
+
+reconciliation?

@@ -19,6 +19,8 @@ type RiskLocation struct {
 	Filename   string         `json:"filename" yaml:"filename"`
 	LineNumber int            `json:"line_number" yaml:"line_number"`
 	Parent     *schema.Parent `json:"parent,omitempty" yaml:"parent,omitempty"`
+	FieldName  string         `json:"field_name,omitempty" yaml:"field_name,omitempty"`
+	ObjectName string         `json:"object_name,omitempty" yaml:"object_name,omitempty"`
 }
 
 type RiskDetectionLocation struct {

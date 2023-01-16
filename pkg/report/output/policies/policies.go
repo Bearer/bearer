@@ -12,6 +12,7 @@ import (
 	"github.com/bearer/curio/pkg/util/output"
 	"github.com/bearer/curio/pkg/util/rego"
 	"github.com/fatih/color"
+	"github.com/rs/zerolog/log"
 	"golang.org/x/exp/maps"
 	"golang.org/x/exp/slices"
 
@@ -101,6 +102,9 @@ func GetOutput(dataflow *dataflow.DataFlow, config settings.Config) (map[string]
 			if err != nil {
 				return nil, err
 			}
+
+			log.Error().Msgf("policy: %#v", rule)
+			log.Error().Msgf("output: %#v", policyResults["policy_failure"])
 
 			for _, policyOutput := range policyResults["policy_failure"] {
 				policyResult := PolicyResult{

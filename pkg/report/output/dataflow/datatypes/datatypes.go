@@ -43,6 +43,8 @@ type lineNumberHolder struct {
 	verifiedBy []types.DatatypeVerifiedBy
 	stored     *bool
 	parent     *schema.Parent
+	fieldName  string
+	objectName string
 }
 
 func New(config settings.Config, isInternal bool) *Holder {
@@ -65,14 +67,21 @@ func (holder *Holder) AddSchema(detection detections.Detection, extras *ExtraFie
 	}
 
 	if classification.Decision.State == classify.Valid {
-		holder.addDatatype(classification.DataType, string(detection.DetectorType), detection.Source.Filename, *detection.Source.LineNumber, extras, schema.Parent)
+		holder.addDatatype(
+			classification.DataType,
+			string(detection.DetectorType),
+			detection.Source.Filename,
+			*detection.Source.LineNumber,
+			extras,
+			schema,
+		)
 	}
 
 	return nil
 }
 
 // addDatatype adds datatype to hash list and at the same time blocks duplicates
-func (holder *Holder) addDatatype(classification *db.DataType, detectorName string, fileName string, lineNumber int, extras *ExtraFields, parent *schema.Parent) {
+func (holder *Holder) addDatatype(classification *db.DataType, detectorName string, fileName string, lineNumber int, extras *ExtraFields, schema schema.Schema) {
 	// create datatype entry if it doesn't exist
 	if _, exists := holder.datatypes[classification.Name]; !exists {
 		datatype := datatypeHolder{
@@ -111,7 +120,9 @@ func (holder *Holder) addDatatype(classification *db.DataType, detectorName stri
 	if _, exists := file.lineNumbers[lineNumber]; !exists {
 		file.lineNumbers[lineNumber] = &lineNumberHolder{
 			lineNumber: lineNumber,
-			parent:     parent,
+			fieldName:  schema.FieldName,
+			objectName: schema.ObjectName,
+			parent:     schema.Parent,
 		}
 	}
 
@@ -162,6 +173,8 @@ func (holder *Holder) ToDataFlow() []types.Datatype {
 						VerifiedBy: lineNumber.verifiedBy,
 						Stored:     lineNumber.stored,
 						Parent:     lineNumber.parent,
+						FieldName:  lineNumber.fieldName,
+						ObjectName: lineNumber.objectName,
 					}
 					constructedDetector.Locations = append(constructedDetector.Locations, location)
 				}
