@@ -1,0 +1,34 @@
+type: "risk"
+languages:
+  - ruby
+patterns:
+  - |
+    CSV.generate { <$DATA_TYPE> }
+  - |
+    CSV.generate do
+      <$DATA_TYPE>
+    end
+  - pattern: |
+      $LIBRARY.open do
+        <$DATA_TYPE>
+      end
+    filters:
+      - variable: LIBRARY
+        values:
+          - CSV
+          - File
+          - IO
+param_parenting: true
+metavars: {}
+stored: false
+trigger: "local"
+severity:
+  default: "low"
+  PII: "critical"
+  PHI: "medium"
+  PD: "high"
+metadata:
+  failure_message: "failure message DSW-011"
+  description: "description DSW-011"
+  remediation_message: "remediation message DSW-011"
+  dsw_id: "DSW-011"
