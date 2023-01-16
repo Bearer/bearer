@@ -1,0 +1,31 @@
+type: "risk"
+languages:
+  - ruby
+patterns:
+  - |
+    URI.encode_www_form(<$DATA_TYPE>)
+  - |
+    URI(<$DATA_TYPE>)
+  - pattern: |
+      $CLIENT.get(<$DATA_TYPE>)
+    filters:
+      - variable: CLIENT
+        values:
+          - Curl
+          - Excon
+          - Faraday
+          - HTTP
+          - HTTParty
+          - HTTPX
+          - RestClient
+          - Typhoeus
+stored: false
+trigger: "global"
+severity:
+  default: "critical"
+omit_parent_content: true
+metadata:
+  failure_message: "failure message DSW-010"
+  description: "description DSW-010"
+  remediation_message: "remediation message DSW-010"
+  dsw_id: "DSW-010"

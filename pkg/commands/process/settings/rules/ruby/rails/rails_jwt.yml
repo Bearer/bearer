@@ -1,0 +1,17 @@
+type: "risk"
+patterns:
+  - |
+    JWT.encode(<$ARGUMENT>)
+languages:
+  - ruby
+trigger: "local"
+severity:
+  default: "low"
+  PII: "critical"
+  PHI: "medium"
+  PD: "high"
+metadata:
+  failure_message: "failure message DSW-005"
+  description: "description DSW-005"
+  remediation_message: "remediation message DSW-005"
+  dsw_id: "DSW-005"

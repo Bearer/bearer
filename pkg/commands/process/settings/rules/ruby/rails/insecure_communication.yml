@@ -1,0 +1,19 @@
+type: "risk"
+patterns:
+  - |
+    Rails.application.configure do
+      config.force_ssl = false
+    end
+languages:
+  - ruby
+detect_presence: true
+omit_parent: true
+trigger: "global"
+severity:
+  default: "critical"
+omit_parent_content: true
+metadata:
+  failure_message: "failure message DSW-009"
+  description: "description DSW-009"
+  remediation_message: "remediation message DSW-009"
+  dsw_id: "DSW-009"

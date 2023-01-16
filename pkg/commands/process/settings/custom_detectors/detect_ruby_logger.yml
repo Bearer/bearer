@@ -17,3 +17,17 @@ patterns:
     Sentry.set_user(<$ARGUMENT>)
 languages:
   - ruby
+id: "detect_ruby_logger"
+type: "risk"
+trigger: "local"
+severity:
+  - default: "low"
+  - PII: "critical"
+  - PHI: "medium"
+  - PD: "high"
+exclude_data_types: ["Unique Identifier"]
+metadata:
+  - failure_message: "failure message DSW-001"
+  - description: "description DSW-001"
+  - remediation_message: "remediation message DSW-001"
+  - dsw_id: "DSW-001"

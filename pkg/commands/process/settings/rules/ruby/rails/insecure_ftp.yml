@@ -1,0 +1,21 @@
+type: "risk"
+patterns:
+  - |
+    Net::FTP.new()
+  - |
+    Net::FTP.open()
+languages:
+  - ruby
+detect_presence: true
+trigger: "global"
+severity:
+  default: "low"
+  PII: "critical"
+  PHI: "medium"
+  PD: "high"
+omit_parent_content: true
+metadata:
+  failure_message: "failure message DSW-006"
+  description: "description DSW-006"
+  remediation_message: "remediation message DSW-006"
+  dsw_id: "DSW-006"

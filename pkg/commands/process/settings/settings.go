@@ -44,6 +44,36 @@ type PolicyModule struct {
 	Content string `mapstructure:"content" json:"content" yaml:"content"`
 }
 
+type RuleMetadata struct {
+	Description        string `mapstructure:"description" json:"description" yaml:"description"`
+	FailureMessage     string `mapstructure:"failure_message" json:"failure_message" yaml:"failure_message"`
+	RemediationMessage string `mapstructure:"remediation_message" json:"remediation_messafe" yaml:"remediation_messafe"`
+	DSWID              string `mapstructure:"dsw_id" json:"dsw_id" yaml:"dsw_id"`
+}
+
+type RuleDefinition struct {
+	Disabled       bool          `mapstructure:"disabled" json:"disabled" yaml:"disabled"`
+	Type           string        `mapstructure:"type" json:"type" yaml:"type"`
+	Languages      []string      `mapstructure:"languages" json:"languages" yaml:"languages"`
+	ParamParenting bool          `mapstructure:"param_parenting" json:"param_parenting" yaml:"param_parenting"`
+	Patterns       []RulePattern `mapstructure:"patterns" json:"patterns" yaml:"patterns"`
+
+	RootSingularize bool `mapstructure:"root_singularize" yaml:"root_singularize" `
+	RootLowercase   bool `mapstructure:"root_lowercase" yaml:"root_lowercase"`
+
+	Metavars       map[string]MetaVar `mapstructure:"metavars" json:"metavars" yaml:"metavars"`
+	Stored         bool               `mapstructure:"stored" json:"stored" yaml:"stored"`
+	DetectPresence bool               `mapstructure:"detect_presence" json:"detect_presence" yaml:"detect_presence"`
+
+	Trigger           string            `mapstructure:"trigger" json:"trigger" yaml:"trigger"` // TODO: use enum value
+	Severity          map[string]string `mapstructure:"severity" json:"severity,omitempty" yaml:"severity,omitempty"`
+	ExcludeDataTypes  []string          `mapstructure:"exclude_data_types" json:"exclude_data_types,omitempty" yaml:"exclude_data_types,omitempty"`
+	IncludeDataTypes  []string          `mapstructure:"include_data_types" json:"include_data_types,omitempty" yaml:"include_data_types,omitempty"`
+	OmitParent        bool              `mapstructure:"omit_parent" json:"omit_parent,omitempty" yaml:"omit_parent,omitempty"`
+	OmitParentContent bool              `mapstructure:"omit_parent_content" json:"omit_parent_content,omitempty" yaml:"omit_parent_content,omitempty"`
+	Metadata          RuleMetadata      `mapstructure:"metadata" json:"metadata" yaml:"metadata"`
+}
+
 // TODO: naming? Deprecate Rule / avoid confusion?
 type RuleNew struct {
 	Id                 string            `mapstructure:"id" json:"id,omitempty" yaml:"id,omitempty"`
@@ -112,11 +142,8 @@ type MetaVar struct {
 //go:embed policies.yml
 var defaultPolicies []byte
 
-//go:embed rules.json
-var defaultRules []byte
-
-//go:embed custom_detectors/*
-var customDetectorFS embed.FS
+//go:embed rules/*
+var rulesFs embed.FS
 
 //go:embed policies/*
 var policiesFs embed.FS
@@ -127,51 +154,92 @@ var processorsFs embed.FS
 var CustomDetectorKey string = "scan.custom_detector"
 var PoliciesKey string = "scan.policies"
 
-func FromOptions(opts flag.Options) (Config, error) {
-	detectors := DefaultCustomDetector()
+func DefaultDetectorsAndRules() (detectors map[string]Rule, rules []*RuleNew) {
+	detectors = make(map[string]Rule)
+	rules = []*RuleNew{}
 
+	// loop through rules langs
+	langDirs, err := rulesFs.ReadDir("rules")
+	if err != nil {
+		log.Fatal().Msgf("failed to read rules dir %e", err)
+	}
+
+	for _, langDir := range langDirs {
+		lang := langDir.Name()
+		subLangDirs, err := rulesFs.ReadDir("rules/" + lang)
+		if err != nil {
+			log.Fatal().Msgf("failed to read rules/%s dir %e", lang, err)
+		}
+
+		for _, subLangDir := range subLangDirs {
+			subLang := subLangDir.Name()
+			dirEntries, err := rulesFs.ReadDir("rules/" + lang + "/" + subLang)
+			if err != nil {
+				log.Fatal().Msgf("failed to read rules/%s/%s dir %e", lang, subLang, err)
+			}
+
+			for _, dirEntry := range dirEntries {
+				filename := dirEntry.Name()
+				ext := filepath.Ext(filename)
+				name := strings.TrimSuffix(filename, ext)
+
+				ruleId := lang + "_" + subLang + "_" + name
+
+				if ext != ".yaml" && ext != ".yml" {
+					continue
+				}
+
+				entry, err := rulesFs.ReadFile("rules/" + lang + "/" + subLang + "/" + filename)
+				if err != nil {
+					log.Fatal().Msgf("failed to read rules/%s/%s/%s file %e", lang, subLang, filename, err)
+				}
+
+				var ruleDefinition *RuleDefinition
+				err = yaml.Unmarshal(entry, &ruleDefinition)
+				if err != nil {
+					log.Fatal().Msgf("failed to unmarshal rules/%s/%s/%s %e", lang, subLang, filename, err)
+				}
+
+				rule := Rule{
+					Disabled:        ruleDefinition.Disabled,
+					Type:            ruleDefinition.Type,
+					Languages:       ruleDefinition.Languages,
+					ParamParenting:  ruleDefinition.ParamParenting,
+					Patterns:        ruleDefinition.Patterns,
+					RootSingularize: ruleDefinition.RootSingularize,
+					RootLowercase:   ruleDefinition.RootLowercase,
+					Metavars:        ruleDefinition.Metavars,
+					Stored:          ruleDefinition.Stored,
+					DetectPresence:  ruleDefinition.DetectPresence,
+					OmitParent:      ruleDefinition.OmitParent,
+				}
+
+				newRule := RuleNew{
+					Id:                 ruleId,
+					Type:               ruleDefinition.Type,
+					Trigger:            ruleDefinition.Trigger,
+					OmitParent:         ruleDefinition.OmitParent,
+					OmitParentContent:  ruleDefinition.OmitParentContent,
+					ExcludeDataTypes:   ruleDefinition.ExcludeDataTypes,
+					Severity:           ruleDefinition.Severity,
+					Description:        ruleDefinition.Metadata.Description,
+					FailureMessage:     ruleDefinition.Metadata.FailureMessage,
+					RemediationMessage: ruleDefinition.Metadata.RemediationMessage,
+					DSWID:              ruleDefinition.Metadata.DSWID,
+				}
+
+				detectors[ruleId] = rule
+				rules = append(rules, &newRule)
+			}
+		}
+	}
+	return detectors, rules
+}
+
+func FromOptions(opts flag.Options) (Config, error) {
 	policies := DefaultPolicies()
 
-	rulesNew := DefaultRules()
-
-	// validate detector options
-	onlyDetector := opts.DetectorOptions.OnlyDetector
-	skipDetector := opts.DetectorOptions.SkipDetector
-
-	validDetectors := make(map[string]bool)
-	for key := range detectors {
-		validDetectors[key] = true
-	}
-
-	var invalidDetectors []string
-	for key := range onlyDetector {
-		if !validDetectors[key] {
-			invalidDetectors = append(invalidDetectors, key)
-		}
-	}
-
-	for key := range skipDetector {
-		if !validDetectors[key] {
-			invalidDetectors = append(invalidDetectors, key)
-		}
-	}
-
-	if len(invalidDetectors) > 0 {
-		return Config{}, fmt.Errorf("unknown detectors %s", invalidDetectors)
-	}
-
-	// apply detector options
-	for key := range detectors {
-		if len(onlyDetector) > 0 && !onlyDetector[key] {
-			delete(detectors, key)
-			continue
-		}
-
-		if skipDetector[key] {
-			delete(detectors, key)
-			continue
-		}
-	}
+	detectors, rulesNew := DefaultDetectorsAndRules()
 
 	externalDetectors, err := LoadExternalDetectors(opts.ExternalDetectorDir)
 	if err != nil {
@@ -187,46 +255,8 @@ func FromOptions(opts flag.Options) (Config, error) {
 		detectors[ruleName] = rule
 	}
 
-	// TODO: validate policy options
-	// onlyPolicy := opts.PolicyOptions.OnlyPolicy
-	// skipPolicy := opts.PolicyOptions.SkipPolicy
-
-	// policyDisplayIds := make(map[string]bool)
-	// for key := range policies {
-	// 	policy := policies[key]
-	// 	policyDisplayIds[policy.DisplayId] = true
-	// }
-
-	// var invalidPolicyDisplayIds []string
-	// for key := range onlyPolicy {
-	// 	if !policyDisplayIds[key] {
-	// 		invalidPolicyDisplayIds = append(invalidPolicyDisplayIds, key)
-	// 	}
-	// }
-
-	// for key := range skipPolicy {
-	// 	if !policyDisplayIds[key] {
-	// 		invalidPolicyDisplayIds = append(invalidPolicyDisplayIds, key)
-	// 	}
-	// }
-
-	// if len(invalidPolicyDisplayIds) > 0 {
-	// 	return Config{}, fmt.Errorf("unknown policy ids %s", invalidPolicyDisplayIds)
-	// }
-
 	for key := range policies {
 		policy := policies[key]
-
-		// TODO: apply policy options
-		// if len(onlyPolicy) > 0 && !onlyPolicy[policy.DisplayId] {
-		// 	delete(policies, key)
-		// 	continue
-		// }
-
-		// if skipPolicy[policy.DisplayId] {
-		// 	delete(policies, key)
-		// 	continue
-		// }
 
 		for _, module := range policy.Modules {
 			if module.Path != "" {
@@ -279,41 +309,41 @@ func (rulePattern *RulePattern) UnmarshalYAML(unmarshal func(interface{}) error)
 	return unmarshal((*rawRulePattern)(rulePattern))
 }
 
-func DefaultCustomDetector() map[string]Rule {
-	customDetectorsDir := "custom_detectors"
-	rules := make(map[string]Rule)
+// func DefaultCustomDetector() map[string]Rule {
+// 	customDetectorsDir := "custom_detectors"
+// 	rules := make(map[string]Rule)
 
-	dirEntries, err := customDetectorFS.ReadDir(customDetectorsDir)
-	if err != nil {
-		log.Fatal().Msgf("failed to read custom detectors dir %e", err)
-	}
+// 	dirEntries, err := customDetectorFS.ReadDir(customDetectorsDir)
+// 	if err != nil {
+// 		log.Fatal().Msgf("failed to read custom detectors dir %e", err)
+// 	}
 
-	for _, entry := range dirEntries {
-		fileName := entry.Name()
+// 	for _, entry := range dirEntries {
+// 		fileName := entry.Name()
 
-		ext := filepath.Ext(fileName)
-		ruleName := strings.TrimSuffix(fileName, ext)
+// 		ext := filepath.Ext(fileName)
+// 		ruleName := strings.TrimSuffix(fileName, ext)
 
-		if ext != ".yaml" && ext != ".yml" {
-			continue
-		}
+// 		if ext != ".yaml" && ext != ".yml" {
+// 			continue
+// 		}
 
-		fileContent, err := customDetectorFS.ReadFile(customDetectorsDir + "/" + fileName)
-		if err != nil {
-			log.Fatal().Msgf("failed to read custom detector file %e", err)
-		}
+// 		fileContent, err := customDetectorFS.ReadFile(customDetectorsDir + "/" + fileName)
+// 		if err != nil {
+// 			log.Fatal().Msgf("failed to read custom detector file %e", err)
+// 		}
 
-		var rule Rule
-		err = yaml.Unmarshal(fileContent, &rule)
-		if err != nil {
-			log.Fatal().Msgf("failed to unmarshal database file %e", err)
-		}
+// 		var rule Rule
+// 		err = yaml.Unmarshal(fileContent, &rule)
+// 		if err != nil {
+// 			log.Fatal().Msgf("failed to unmarshal database file %e", err)
+// 		}
 
-		rules[ruleName] = rule
-	}
+// 		rules[ruleName] = rule
+// 	}
 
-	return rules
-}
+// 	return rules
+// }
 
 func DefaultPolicies() map[string]*Policy {
 	policies := make(map[string]*Policy)
@@ -332,16 +362,16 @@ func DefaultPolicies() map[string]*Policy {
 	return policies
 }
 
-func DefaultRules() []*RuleNew {
-	rulesNew := []*RuleNew{}
+// func DefaultRules() []*RuleNew {
+// 	rulesNew := []*RuleNew{}
 
-	err := yaml.Unmarshal(defaultRules, &rulesNew)
-	if err != nil {
-		log.Fatal().Msgf("failed to unmarshal rules new file %e", err)
-	}
+// 	err := yaml.Unmarshal(defaultRules, &rulesNew)
+// 	if err != nil {
+// 		log.Fatal().Msgf("failed to unmarshal rules new file %e", err)
+// 	}
 
-	return rulesNew
-}
+// 	return rulesNew
+// }
 
 func ProcessorRegoModuleText(processorName string) (string, error) {
 	processorPath := fmt.Sprintf("processors/%s.rego", processorName)

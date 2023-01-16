@@ -1,0 +1,28 @@
+type: "risk"
+patterns:
+  - |
+    cookies[...] = $ANYTHING
+  - |
+    session[...] = $ANYTHING
+  - pattern: |
+      cookies.$METHOD_CHAIN[...] = $ANYTHING
+    filters:
+      - variable: METHOD_CHAIN
+        values:
+          - permanent
+          - signed
+          - permanent.signed
+          - signed.permanent
+languages:
+  - ruby
+trigger: "local"
+severity:
+  default: "low"
+  PII: "critical"
+  PHI: "medium"
+  PD: "high"
+metadata:
+  failure_message: "failure message DSW-004"
+  description: "description DSW-004"
+  remediation_message: "remediation message DSW-004"
+  dsw_id: "DSW-004"
