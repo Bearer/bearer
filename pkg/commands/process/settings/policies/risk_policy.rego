@@ -49,8 +49,8 @@ policy_failure contains item if {
 
 policy_failure contains item if {
 	input.rule.trigger == "global"
-	not input.rule.omit_parent == false
-	not input.rule.omit_parent_content == false
+	not input.rule.omit_parent == true
+	not input.rule.omit_parent_content == true
 
 	# FIXME: handle case to use exclude data type with global trigger
 	some data_type in input.dataflow.data_types
@@ -103,5 +103,21 @@ policy_failure contains item if {
 		"line_number": location.line_number,
 		"parent_line_number": location.parent.line_number,
 		"parent_content": location.content
+	}
+}
+
+policy_failure contains item if {
+	input.rule.trigger == "presence"
+	input.rule.omit_parent_content == true
+
+	some detector in input.dataflow.risks
+	detector.detector_id == input.rule.id
+
+	location = detector.locations[_]
+	item := {
+		"filename": location.filename,
+		"parent_line_number": location.line_number,
+		"line_number": location.line_number,
+		"detailed_context": location.content
 	}
 }

@@ -73,6 +73,7 @@ type RuleDefinition struct {
 	IncludeDataTypes  []string          `mapstructure:"include_data_types" json:"include_data_types,omitempty" yaml:"include_data_types,omitempty"`
 	OmitParent        bool              `mapstructure:"omit_parent" json:"omit_parent,omitempty" yaml:"omit_parent,omitempty"`
 	OmitParentContent bool              `mapstructure:"omit_parent_content" json:"omit_parent_content,omitempty" yaml:"omit_parent_content,omitempty"`
+	DetailedContext   bool              `mapstructure:"detailed_context" json:"detailed_context,omitempty" yaml:"detailed_context,omitempty"`
 	Metadata          RuleMetadata      `mapstructure:"metadata" json:"metadata" yaml:"metadata"`
 }
 
@@ -205,18 +206,26 @@ func DefaultDetectorsAndRules() (detectors map[string]Rule, rules []*RuleNew) {
 					log.Fatal().Msgf("failed to unmarshal rules/%s/%s/%s %e", lang, subLang, filename, err)
 				}
 
-				rule := Rule{
-					Disabled:        ruleDefinition.Disabled,
-					Type:            ruleDefinition.Type,
-					Languages:       ruleDefinition.Languages,
-					ParamParenting:  ruleDefinition.ParamParenting,
-					Patterns:        ruleDefinition.Patterns,
-					RootSingularize: ruleDefinition.RootSingularize,
-					RootLowercase:   ruleDefinition.RootLowercase,
-					Metavars:        ruleDefinition.Metavars,
-					Stored:          ruleDefinition.Stored,
-					DetectPresence:  ruleDefinition.DetectPresence,
-					OmitParent:      ruleDefinition.OmitParent,
+				if subLang == "internal" {
+					// overwrite rule id
+					ruleId = name
+				} else {
+					// add custom detector (rule)
+					rule := Rule{
+						Disabled:        ruleDefinition.Disabled,
+						Type:            ruleDefinition.Type,
+						Languages:       ruleDefinition.Languages,
+						ParamParenting:  ruleDefinition.ParamParenting,
+						Patterns:        ruleDefinition.Patterns,
+						RootSingularize: ruleDefinition.RootSingularize,
+						RootLowercase:   ruleDefinition.RootLowercase,
+						Metavars:        ruleDefinition.Metavars,
+						Stored:          ruleDefinition.Stored,
+						DetectPresence:  ruleDefinition.DetectPresence,
+						OmitParent:      ruleDefinition.OmitParent,
+					}
+
+					detectors[ruleId] = rule
 				}
 
 				newRule := RuleNew{
@@ -236,7 +245,6 @@ func DefaultDetectorsAndRules() (detectors map[string]Rule, rules []*RuleNew) {
 					DSWID:              ruleDefinition.Metadata.DSWID,
 				}
 
-				detectors[ruleId] = rule
 				rules = append(rules, &newRule)
 			}
 		}
