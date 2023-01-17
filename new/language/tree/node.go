@@ -39,6 +39,10 @@ func (node *Node) Content() string {
 	return node.sitterNode.Content(node.tree.input)
 }
 
+func (node *Node) StartByte() int {
+	return int(node.sitterNode.StartByte())
+}
+
 func (node *Node) LineNumber() int {
 	return int(node.sitterNode.StartPoint().Row + 1)
 }

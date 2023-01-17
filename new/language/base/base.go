@@ -37,10 +37,16 @@ func (lang *Language) CompilePatternQuery(input string) (types.PatternQuery, err
 		return nil, fmt.Errorf("error processing variables: %s", err)
 	}
 
+	inputWithoutMatchNode, matchNodeOffset, err := lang.implementation.ExtractPatternMatchNode(inputWithoutVariables)
+	if err != nil {
+		return nil, fmt.Errorf("error processing match node: %s", err)
+	}
+
 	return patternquery.Compile(
 		lang,
 		lang.implementation.AnonymousPatternNodeParentTypes(),
-		inputWithoutVariables,
+		inputWithoutMatchNode,
 		params,
+		matchNodeOffset,
 	)
 }

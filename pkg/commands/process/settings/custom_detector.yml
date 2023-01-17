@@ -4,7 +4,7 @@ ruby_password_length:
     - ruby
   patterns:
     - pattern: |
-        class $<_> < ApplicationRecord
+        class $<_:constant> < ApplicationRecord
           validates :password, length: { minimum: $<LENGTH> }
         end
       filters:
@@ -285,28 +285,26 @@ detect_rails_insecure_smtp:
     - |
       Rails.application.configure do
         config.action_mailer.smtp_settings = {
-          openssl_verify_mode: OpenSSL::SSL::VERIFY_NONE
+          $<!>openssl_verify_mode: OpenSSL::SSL::VERIFY_NONE
         }
       end
     - |
       Rails.application.configure do
         config.action_mailer.smtp_settings = {
-          openssl_verify_mode: "none"
+          $<!>openssl_verify_mode: "none"
         }
       end
   languages:
     - ruby
-  omit_parent: true
 detect_rails_insecure_communication:
   type: "risk"
   patterns:
     - |
       Rails.application.configure do
-        config.force_ssl = false
+        $<!>config.force_ssl = false
       end
   languages:
     - ruby
-  omit_parent: true
 detect_rails_insecure_ftp:
   type: "risk"
   patterns:
