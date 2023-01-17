@@ -72,7 +72,7 @@ func GetOutput(dataflow *dataflow.DataFlow, config settings.Config) (map[string]
 	for _, rule := range config.Rules {
 		err := bar.Add(1)
 		if err != nil {
-			output.StdErrLogger().Msgf("Policy %s failed to write progress bar %e", rule, err)
+			output.StdErrLogger().Msgf("Policy %s failed to write progress bar %e", rule.Id, err)
 		}
 
 		policy := config.Policies[rule.Type]
