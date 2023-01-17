@@ -85,15 +85,15 @@ func (report *Detectors) AddCreateView(
 }
 
 func (report *Detectors) AddDataType(detectionType detections.DetectionType, detectorType detectors.Type, idGenerator nodeid.Generator, values map[parser.NodeID]*datatype.DataType, parent *parser.Node) {
-	classifiedDatatypes := make(map[parser.NodeID]*classificationschema.ClassifiedDatatype, 0)
+	classifiedDatatypes := make(map[parser.NodeID]*datatype.ClassifiedDatatype, 0)
 	for nodeID, target := range values {
-		classified := report.Classifier.Schema.Classify(classificationschema.DataTypeDetection{
-			Value:        target,
+		classification := report.Classifier.Schema.Classify(classificationschema.ClassificationRequest{
+			Value:        target.ToClassificationRequestDetection(),
 			Filename:     target.GetNode().Source(false).Filename,
 			DetectorType: detectorType,
 		})
 
-		classifiedDatatypes[nodeID] = classified
+		classifiedDatatypes[nodeID] = datatype.BuildClassifiedDatatype(target, classification)
 	}
 
 	if detectionType == detections.TypeCustom {
@@ -161,7 +161,7 @@ func (report *Detectors) SchemaGroupEnd(idGenerator nodeid.Generator) {
 		UUID:       report.StoredSchemas.ParentSchema.Value.ObjectUUID,
 	}
 
-	classifiedDatatypes := make(map[parser.NodeID]*classificationschema.ClassifiedDatatype, 0)
+	classifiedDatatypes := make(map[parser.NodeID]*datatype.ClassifiedDatatype, 0)
 
 	// Classify child data types
 	for node, storedSchema := range report.StoredSchemas.Schemas {
@@ -169,17 +169,21 @@ func (report *Detectors) SchemaGroupEnd(idGenerator nodeid.Generator) {
 		schema := storedSchema.Value
 
 		childName := schema.FieldName
-		value := childDataTypes[childName]
-		detection := classificationschema.DataTypeDetection{DetectorType: report.StoredSchemas.DetectorType, Value: value, Filename: source.Filename}
-		classifiedDatatype := report.Classifier.Schema.Classify(detection)
+		value, ok := childDataTypes[childName].(*datatype.DataType)
+		if !ok {
+			continue
+		}
 
-		classifiedDatatypes[node.ID()] = classifiedDatatype
+		classificationRequest := classificationschema.ClassificationRequest{DetectorType: report.StoredSchemas.DetectorType, Value: value.ToClassificationRequestDetection(), Filename: source.Filename}
+		classification := report.Classifier.Schema.Classify(classificationRequest)
+
+		classifiedDatatypes[node.ID()] = datatype.BuildClassifiedDatatype(value, classification)
 	}
 
 	// Classify parent data type
-	parentDetection := classificationschema.DataTypeDetection{DetectorType: report.StoredSchemas.DetectorType, Value: parentDataType, Filename: report.StoredSchemas.ParentSchema.Source.Filename}
-	classifiedParentDatatype := report.Classifier.Schema.Classify(parentDetection)
-	classifiedDatatypes[report.StoredSchemas.Node.ID()] = classifiedParentDatatype
+	parentClassificationRequest := classificationschema.ClassificationRequest{DetectorType: report.StoredSchemas.DetectorType, Value: parentDataType.ToClassificationRequestDetection(), Filename: report.StoredSchemas.ParentSchema.Source.Filename}
+	parentClassification := report.Classifier.Schema.Classify(parentClassificationRequest)
+	classifiedDatatypes[report.StoredSchemas.Node.ID()] = datatype.BuildClassifiedDatatype(parentDataType, parentClassification)
 
 	// Export classified data types
 	datatype.ExportClassified(report, detections.TypeSchemaClassified, report.StoredSchemas.DetectorType, idGenerator, classifiedDatatypes, report.StoredSchemas.ParentSchema.Parent)

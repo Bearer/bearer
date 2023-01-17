@@ -5,6 +5,7 @@ import (
 
 	"github.com/bearer/curio/new/detector/composition/ruby"
 	"github.com/bearer/curio/new/detector/types"
+	"github.com/bearer/curio/pkg/classification"
 	"github.com/bearer/curio/pkg/commands/process/settings"
 	"github.com/bearer/curio/pkg/report"
 	"github.com/bearer/curio/pkg/util/file"
@@ -25,9 +26,9 @@ func (scanner scannerType) Close() {
 	}
 }
 
-func Setup(config map[string]settings.Rule) (err error) {
+func Setup(config *settings.Config, classifier *classification.Classifier) (err error) {
 	var toInstantiate = []struct {
-		constructor func(map[string]settings.Rule) (types.Composition, error)
+		constructor func(map[string]settings.Rule, *classification.Classifier) (types.Composition, error)
 		name        string
 	}{{
 		constructor: ruby.New,
@@ -35,7 +36,7 @@ func Setup(config map[string]settings.Rule) (err error) {
 	}}
 
 	for _, instantiatior := range toInstantiate {
-		composition, err := instantiatior.constructor(config)
+		composition, err := instantiatior.constructor(config.CustomDetector, classifier)
 		if err != nil {
 			return fmt.Errorf("failed to instantiate composition %s:%s", instantiatior.name, err)
 		}

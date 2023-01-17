@@ -3,11 +3,9 @@ package testhelper
 import (
 	"encoding/json"
 	"io/ioutil"
-	"sort"
 
 	"github.com/bearer/curio/pkg/classification/schema"
 	"github.com/bearer/curio/pkg/report/detectors"
-	"github.com/bearer/curio/pkg/report/schema/datatype"
 	"github.com/bearer/curio/pkg/util/classify"
 
 	"github.com/stretchr/testify/assert"
@@ -94,7 +92,7 @@ func ExtractExpectedOutput(
 		}
 
 		expectedProperties := map[string]ClassificationResult{}
-		detectionProperties := map[string]datatype.DataTypable{}
+		detectionProperties := []*schema.ClassificationRequestDetection{}
 		for _, inputItemProperty := range inputItem.Properties {
 			result.KPI.DetectionsCount += 1
 
@@ -124,11 +122,10 @@ func ExtractExpectedOutput(
 				}
 			}
 
-			detectionProperties[inputItemProperty.Name] = &datatype.DataType{
+			detectionProperties = append(detectionProperties, &schema.ClassificationRequestDetection{
 				Name:       inputItemProperty.Name,
-				Type:       inputItemProperty.Type,
-				Properties: map[string]datatype.DataTypable{},
-			}
+				SimpleType: inputItemProperty.Type,
+			})
 		}
 
 		expectedClassification.Properties = expectedProperties
@@ -146,10 +143,10 @@ func ExtractExpectedOutput(
 			}
 		}
 
-		detection := schema.DataTypeDetection{
+		detection := schema.ClassificationRequest{
 			Filename:     inputItem.Filename,
 			DetectorType: detectors.Type(inputItem.DetectorType),
-			Value: &datatype.DataType{
+			Value: &schema.ClassificationRequestDetection{
 				Name:       inputItem.Name,
 				Properties: detectionProperties,
 			},
@@ -162,7 +159,7 @@ func ExtractExpectedOutput(
 			result.KPI.ValidObjectDetectionsCount += 1
 		}
 		classificationResult := ClassificationResult{
-			Name: classification.GetName(),
+			Name: classification.Name,
 			Decision: classify.ClassificationDecision{
 				State:  classification.Classification.Decision.State,
 				Reason: classification.Classification.Decision.Reason,
@@ -171,21 +168,18 @@ func ExtractExpectedOutput(
 
 		classifiedProperties := map[string]ClassificationResult{}
 		// sort properties to ensure consistency for snapshot
-		fields := classification.DataTypable.GetProperties()
-		for _, key := range sortKeys(fields) {
-			field := fields[key]
-			fieldClassification, _ := field.GetClassification().(schema.Classification)
+		for _, fieldClassification := range classification.Properties {
 			// TODO: casting does not work if classification is empty
-			if fieldClassification.Decision.State == "valid" {
+			if fieldClassification.Classification.Decision.State == "valid" {
 				includeResult = true
 				result.KPI.ValidFieldDetectionsCount += 1
 			}
 
-			classifiedProperties[field.GetName()] = ClassificationResult{
-				Name: field.GetName(),
+			classifiedProperties[fieldClassification.Name] = ClassificationResult{
+				Name: fieldClassification.Name,
 				Decision: classify.ClassificationDecision{
-					State:  fieldClassification.Decision.State,
-					Reason: fieldClassification.Decision.Reason,
+					State:  fieldClassification.Classification.Decision.State,
+					Reason: fieldClassification.Classification.Decision.Reason,
 				},
 			}
 		}
@@ -200,14 +194,4 @@ func ExtractExpectedOutput(
 	result.KPI.ValidDetectionsCount = result.KPI.ValidObjectDetectionsCount + result.KPI.ValidFieldDetectionsCount
 
 	return result
-}
-
-func sortKeys(fields map[string]datatype.DataTypable) []string {
-	keys := make([]string, 0, len(fields))
-	for k := range fields {
-		keys = append(keys, k)
-	}
-
-	sort.Strings(keys)
-	return keys
 }
