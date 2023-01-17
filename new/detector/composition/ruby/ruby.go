@@ -16,6 +16,7 @@ import (
 	detectortypes "github.com/bearer/curio/new/detector/types"
 	"github.com/bearer/curio/new/language"
 	languagetypes "github.com/bearer/curio/new/language/types"
+	"github.com/bearer/curio/pkg/classification"
 	"github.com/bearer/curio/pkg/commands/process/settings"
 	"github.com/bearer/curio/pkg/report"
 	reportdetections "github.com/bearer/curio/pkg/report/detections"
@@ -33,7 +34,7 @@ type Composition struct {
 	closers             []func()
 }
 
-func New(rules map[string]settings.Rule) (types.Composition, error) {
+func New(rules map[string]settings.Rule, classifier *classification.Classifier) (types.Composition, error) {
 	lang, err := language.Get("ruby")
 	if err != nil {
 		return nil, fmt.Errorf("failed to lookup language: %s", err)
@@ -59,11 +60,6 @@ func New(rules map[string]settings.Rule) (types.Composition, error) {
 			constructor: stringdetector.New,
 			name:        "string detector",
 		},
-		// Generic
-		{
-			constructor: datatype.New,
-			name:        "datatype detector",
-		},
 		{
 			constructor: insecureurl.New,
 			name:        "insecure url detector",
@@ -81,6 +77,14 @@ func New(rules map[string]settings.Rule) (types.Composition, error) {
 		detectors = append(detectors, detector)
 		composition.closers = append(composition.closers, detector.Close)
 	}
+
+	detector, err := datatype.New(lang, classifier.Schema)
+	if err != nil {
+		composition.Close()
+		return nil, fmt.Errorf("failed to create datatype detector: %s", err)
+	}
+	detectors = append(detectors, detector)
+	composition.closers = append(composition.closers, detector.Close)
 
 	// instantiate custom ruby detectors
 	for ruleName, rule := range rules {
@@ -134,7 +138,7 @@ func (composition *Composition) DetectFromFile(report report.Report, file *file.
 		return fmt.Errorf("failed to parse file %s", err)
 	}
 
-	evaluator := evaluator.New(composition.detectorSet, tree)
+	evaluator := evaluator.New(composition.detectorSet, tree, file.FileInfo.Name())
 
 	for _, detectorType := range composition.customDetectorTypes {
 		detections, err := evaluator.ForTree(tree.RootNode(), detectorType)

@@ -17,6 +17,7 @@ type Evaluator interface {
 	ForNode(node *tree.Node, detectorType string) ([]*Detection, error)
 	TreeHas(rootNode *tree.Node, detectorType string) (bool, error)
 	NodeHas(node *tree.Node, detectorType string) (bool, error)
+	FileName() string
 }
 
 type DetectorSet interface {
