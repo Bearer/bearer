@@ -5,143 +5,73 @@ import data.bearer.common
 import future.keywords
 
 contains(arr, elem) if {
-	# arr # ensure array is defined
 	arr[_] = elem
 }
 
-policy_failure contains item if {
+local_failures contains detector if {
 	input.rule.trigger == "local"
-	not input.rule.skip_data_types
-	not input.rule.only_data_types
-
 	some detector in input.dataflow.risks
 	detector.detector_id == input.rule.id
-
-	data_type = detector.data_types[_]
-
-	location = data_type.locations[_]
-	item := {
-		"category_groups": data.bearer.common.groups_for_datatype(data_type),
-		"filename": location.filename,
-		"line_number": location.line_number,
-		"parent_line_number": location.parent.line_number,
-		"parent_content": location.parent.content
-	}
 }
 
-policy_failure contains item if {
-	input.rule.trigger == "local"
-	not input.rule.only_data_types
-
-	some detector in input.dataflow.risks
-	detector.detector_id == input.rule.id
-
-	data_type = detector.data_types[_]
-
-	not contains(input.rule.skip_data_types, data_type.name)
-
-	location = data_type.locations[_]
-	item := {
-		"category_groups": data.bearer.common.groups_for_datatype(data_type),
-		"filename": location.filename,
-		"line_number": location.line_number,
-		"parent_line_number": location.parent.line_number,
-		"parent_content": location.parent.content
-	}
-}
-
-policy_failure contains item if {
-	input.rule.trigger == "local"
-	not input.rule.skip_data_types
-
-	some detector in input.dataflow.risks
-	detector.detector_id == input.rule.id
-
-	data_type = detector.data_types[_]
-
-	contains(input.rule.only_data_types, data_type.name)
-
-	location = data_type.locations[_]
-	item := {
-		"category_groups": data.bearer.common.groups_for_datatype(data_type),
-		"filename": location.filename,
-		"line_number": location.line_number,
-		"parent_line_number": location.parent.line_number,
-		"parent_content": location.parent.content
-	}
-}
-
-policy_failure contains item if {
+global_failures contains detector if {
 	input.rule.trigger == "global"
-	not input.rule.omit_parent == true
-	not input.rule.omit_parent_content == true
-
-	# FIXME: handle case to use exclude data type with global trigger
-	some data_type in input.dataflow.data_types
-
 	some detector in input.dataflow.risks
 	detector.detector_id == input.rule.id
 
-	location = detector.locations[_]
-	item := {
-		"category_groups": data.bearer.common.groups_for_datatypes(input.dataflow.data_types),
-		"filename": location.filename,
-		"line_number": location.line_number,
-		"parent_line_number": location.parent.line_number,
-		"parent_content": location.parent.content
-	}
+	some data_type in data.bearer.common.global_data_types
 }
 
-policy_failure contains item if {
-	input.rule.trigger == "global"
-	input.rule.omit_parent == true
-
-	# FIXME: handle case to use exclude data type with global trigger
-	some data_type in input.dataflow.data_types
-
-	some detector in input.dataflow.risks
-	detector.detector_id == input.rule.id
-
-	location = detector.locations[_]
-	item := {
-		"category_groups": data.bearer.common.groups_for_datatypes(input.dataflow.data_types),
-		"filename": location.filename,
-		"line_number": location.line_number
-	}
-}
-
-policy_failure contains item if {
-	input.rule.trigger == "global"
-	input.rule.omit_parent_content == true
-
-	# FIXME: handle case to use exclude data type with global trigger
-	some data_type in input.dataflow.data_types
-
-	some detector in input.dataflow.risks
-	detector.detector_id == input.rule.id
-
-	location = detector.locations[_]
-	item := {
-		"category_groups": data.bearer.common.groups_for_datatypes(input.dataflow.data_types),
-		"filename": location.filename,
-		"line_number": location.line_number,
-		"parent_line_number": location.parent.line_number,
-		"parent_content": location.content
-	}
-}
-
-policy_failure contains item if {
+presence_failures contains detector if {
 	input.rule.trigger == "presence"
-	input.rule.omit_parent_content == true
-
 	some detector in input.dataflow.risks
+	detector.detector_id == input.rule.id
+}
+
+local_data_types contains data_type if {
+	not input.rule.skip_data_types
+	not input.rule.only_data_types
+
+	some detector in local_failures
+	data_type = detector.data_types[_]
+}
+
+local_data_types contains data_type if {
+	not input.rule.only_data_types
+
+	some detector in local_failures
+	data_type = detector.data_types[_]
+	not contains(input.rule.skip_data_types, data_type.name)
+}
+
+local_data_types contains data_type if {
+	not input.rule.skip_data_types
+
+	some detector in local_failures
+	data_type = detector.data_types[_]
+	contains(input.rule.only_data_types, data_type.name)
+}
+
+# Build policy failures
+
+policy_failure contains item if {
+	some data_type in local_data_types
+
+	location = data_type.locations[_]
+	item := data.bearer.common.build_item(location)
+}
+
+policy_failure contains item if {
+	some detector in global_failures
+
+	location = detector.locations[_]
+	item := data.bearer.common.build_item(location)
+}
+
+policy_failure contains item if {
+	some detector in presence_failures
 	detector.detector_id == input.rule.id
 
 	location = detector.locations[_]
-	item := {
-		"filename": location.filename,
-		"parent_line_number": location.line_number,
-		"line_number": location.line_number,
-		"detailed_context": location.content
-	}
+	item := data.bearer.common.build_item(location)
 }
