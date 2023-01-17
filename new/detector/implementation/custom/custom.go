@@ -10,10 +10,12 @@ import (
 )
 
 type Data struct {
+	Pattern   string
 	Datatypes []*types.Detection
 }
 
 type Pattern struct {
+	Pattern string
 	Query   languagetypes.PatternQuery
 	Filters []settings.PatternFilter
 }
@@ -31,6 +33,7 @@ func New(lang languagetypes.Language, detectorType string, patterns []settings.R
 			return nil, fmt.Errorf("error compiling pattern: %s", err)
 		}
 		compiledPatterns = append(compiledPatterns, Pattern{
+			Pattern: pattern.Pattern,
 			Query:   patternQuery,
 			Filters: pattern.Filters,
 		})
@@ -72,6 +75,7 @@ func (detector *customDetector) DetectAt(
 			detections = append(detections, &types.Detection{
 				MatchNode: node,
 				Data: Data{
+					Pattern:   pattern.Pattern,
 					Datatypes: datatypeDetections,
 				},
 			})
