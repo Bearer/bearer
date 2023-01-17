@@ -166,7 +166,6 @@ ruby_file_detection:
         - variable: DATA_TYPE
           detection: datatype
   param_parenting: true
-  metavars: {}
   stored: false
 detect_ruby_logger:
   type: "risk"
