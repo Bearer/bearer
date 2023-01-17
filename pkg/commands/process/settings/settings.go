@@ -14,13 +14,13 @@ import (
 )
 
 type Config struct {
-	Worker         flag.WorkerOptions `mapstructure:"worker" json:"worker" yaml:"worker"`
-	Scan           flag.ScanOptions   `mapstructure:"scan" json:"scan" yaml:"scan"`
-	Report         flag.ReportOptions `mapstructure:"report" json:"report" yaml:"report"`
-	CustomDetector map[string]Rule    `mapstructure:"custom_detector" json:"custom_detector" yaml:"custom_detector"`
-	Policies       map[string]*Policy `mapstructure:"policies" json:"policies" yaml:"policies"`
-	Target         string             `mapstructure:"target" json:"target" yaml:"target"`
-	Rules          []*RuleNew         `mapstructure:"rules" json:"rules" yaml:"rules"`
+	Worker         flag.WorkerOptions  `mapstructure:"worker" json:"worker" yaml:"worker"`
+	Scan           flag.ScanOptions    `mapstructure:"scan" json:"scan" yaml:"scan"`
+	Report         flag.ReportOptions  `mapstructure:"report" json:"report" yaml:"report"`
+	CustomDetector map[string]Rule     `mapstructure:"custom_detector" json:"custom_detector" yaml:"custom_detector"`
+	Policies       map[string]*Policy  `mapstructure:"policies" json:"policies" yaml:"policies"`
+	Target         string              `mapstructure:"target" json:"target" yaml:"target"`
+	Rules          map[string]*RuleNew `mapstructure:"rules" json:"rules" yaml:"rules"`
 }
 
 type PolicyLevel string
@@ -161,9 +161,135 @@ var processorsFs embed.FS
 var CustomDetectorKey string = "scan.custom_detector"
 var PoliciesKey string = "scan.policies"
 
-func DefaultDetectorsAndRules() (detectors map[string]Rule, rules []*RuleNew) {
+func FromOptions(opts flag.Options) (Config, error) {
+	policies := DefaultPolicies()
+	detectors, rules, dswIds := defaultDetectorsAndRules()
+
+	externalDetectors, err := LoadExternalDetectors(opts.ExternalDetectorDir)
+	if err != nil {
+		return Config{}, fmt.Errorf("failed to load external detectors %w", err)
+	}
+
+	for ruleName, rule := range externalDetectors {
+		_, ok := detectors[ruleName]
+		if ok {
+			return Config{}, fmt.Errorf("tried to overwrite default custom detector %s with external detector", ruleName)
+		}
+
+		detectors[ruleName] = rule
+	}
+
+	for key := range policies {
+		policy := policies[key]
+
+		for _, module := range policy.Modules {
+			if module.Path != "" {
+				content, err := policiesFs.ReadFile(module.Path)
+				if err != nil {
+					return Config{}, err
+				}
+				module.Content = string(content)
+			}
+		}
+	}
+
+	// Policy options
+	onlyPolicy := opts.PolicyOptions.OnlyPolicy
+	skipPolicy := opts.PolicyOptions.SkipPolicy
+
+	// validate policy options - raise error if invalid DSW code given
+	var invalidDswIds []string
+	for key := range onlyPolicy {
+		if !dswIds[key] {
+			invalidDswIds = append(invalidDswIds, key)
+		}
+	}
+
+	for key := range skipPolicy {
+		if !dswIds[key] {
+			invalidDswIds = append(invalidDswIds, key)
+		}
+	}
+
+	if len(invalidDswIds) > 0 {
+		return Config{}, fmt.Errorf("unknown DSW IDs %s", invalidDswIds)
+	}
+
+	// apply policy options
+	for key := range rules {
+		rule := rules[key]
+		if len(onlyPolicy) > 0 && !onlyPolicy[rule.DSWID] {
+			delete(rules, key)
+			continue
+		}
+
+		if skipPolicy[rule.DSWID] {
+			delete(rules, key)
+			continue
+		}
+	}
+
+	// FIXME: apply external policies
+	externalPolicies, err := LoadExternalPolicies(opts.ExternalPolicyDir)
+	if err != nil {
+		return Config{}, fmt.Errorf("failed to load external policies %w", err)
+	}
+
+	for policyName, policy := range externalPolicies {
+		_, ok := policies[policyName]
+		if ok {
+			return Config{}, fmt.Errorf("tried to overwrite default policy %s with external detector", policyName)
+		}
+
+		policies[policyName] = policy
+	}
+
+	config := Config{
+		Worker:         opts.WorkerOptions,
+		CustomDetector: detectors,
+		Scan:           opts.ScanOptions,
+		Report:         opts.ReportOptions,
+		Policies:       policies,
+		Rules:          rules,
+	}
+
+	return config, nil
+}
+
+func (rulePattern *RulePattern) UnmarshalYAML(unmarshal func(interface{}) error) error {
+	// Try to parse as a string
+	var pattern string
+	if err := unmarshal(&pattern); err == nil {
+		rulePattern.Pattern = pattern
+		return nil
+	}
+
+	// Wasn't a string so it must be the structured format
+	type rawRulePattern RulePattern
+	return unmarshal((*rawRulePattern)(rulePattern))
+}
+
+func DefaultPolicies() map[string]*Policy {
+	policies := make(map[string]*Policy)
+	var policy []*Policy
+
+	err := yaml.Unmarshal(defaultPolicies, &policy)
+	if err != nil {
+		log.Fatal().Msgf("failed to unmarshal policy file %e", err)
+	}
+
+	log.Error().Msgf("policy %#v", policy)
+	for _, policy := range policy {
+		policies[policy.Type] = policy
+	}
+
+	return policies
+}
+
+func defaultDetectorsAndRules() (detectors map[string]Rule, rules map[string]*RuleNew, dswIds map[string]bool) {
 	detectors = make(map[string]Rule)
-	rules = []*RuleNew{}
+	rules = make(map[string]*RuleNew)
+	dswIds = make(map[string]bool)
 
 	// loop through rules langs
 	langDirs, err := rulesFs.ReadDir("rules")
@@ -247,149 +373,14 @@ func DefaultDetectorsAndRules() (detectors map[string]Rule, rules []*RuleNew) {
 					DSWID:              ruleDefinition.Metadata.DSWID,
 				}
 
-				rules = append(rules, &newRule)
+				rules[ruleId] = &newRule
+
+				dswIds[ruleDefinition.Metadata.DSWID] = true
 			}
 		}
 	}
-	return detectors, rules
+	return detectors, rules, dswIds
 }
-
-func FromOptions(opts flag.Options) (Config, error) {
-	policies := DefaultPolicies()
-
-	detectors, rulesNew := DefaultDetectorsAndRules()
-
-	externalDetectors, err := LoadExternalDetectors(opts.ExternalDetectorDir)
-	if err != nil {
-		return Config{}, fmt.Errorf("failed to load external detectors %w", err)
-	}
-
-	for ruleName, rule := range externalDetectors {
-		_, ok := detectors[ruleName]
-		if ok {
-			return Config{}, fmt.Errorf("tried to overwrite default custom detector %s with external detector", ruleName)
-		}
-
-		detectors[ruleName] = rule
-	}
-
-	for key := range policies {
-		policy := policies[key]
-
-		for _, module := range policy.Modules {
-			if module.Path != "" {
-				content, err := policiesFs.ReadFile(module.Path)
-				if err != nil {
-					return Config{}, err
-				}
-				module.Content = string(content)
-			}
-		}
-	}
-
-	// apply external policies
-	externalPolicies, err := LoadExternalPolicies(opts.ExternalPolicyDir)
-	if err != nil {
-		return Config{}, fmt.Errorf("failed to load external policies %w", err)
-	}
-
-	for policyName, policy := range externalPolicies {
-		_, ok := policies[policyName]
-		if ok {
-			return Config{}, fmt.Errorf("tried to overwrite default policy %s with external detector", policyName)
-		}
-
-		policies[policyName] = policy
-	}
-
-	config := Config{
-		Worker:         opts.WorkerOptions,
-		CustomDetector: detectors,
-		Scan:           opts.ScanOptions,
-		Report:         opts.ReportOptions,
-		Policies:       policies,
-		Rules:          rulesNew,
-	}
-
-	return config, nil
-}
-
-func (rulePattern *RulePattern) UnmarshalYAML(unmarshal func(interface{}) error) error {
-	// Try to parse as a string
-	var pattern string
-	if err := unmarshal(&pattern); err == nil {
-		rulePattern.Pattern = pattern
-		return nil
-	}
-
-	// Wasn't a string so it must be the structured format
-	type rawRulePattern RulePattern
-	return unmarshal((*rawRulePattern)(rulePattern))
-}
-
-// func DefaultCustomDetector() map[string]Rule {
-// 	customDetectorsDir := "custom_detectors"
-// 	rules := make(map[string]Rule)
-
-// 	dirEntries, err := customDetectorFS.ReadDir(customDetectorsDir)
-// 	if err != nil {
-// 		log.Fatal().Msgf("failed to read custom detectors dir %e", err)
-// 	}
-
-// 	for _, entry := range dirEntries {
-// 		fileName := entry.Name()
-
-// 		ext := filepath.Ext(fileName)
-// 		ruleName := strings.TrimSuffix(fileName, ext)
-
-// 		if ext != ".yaml" && ext != ".yml" {
-// 			continue
-// 		}
-
-// 		fileContent, err := customDetectorFS.ReadFile(customDetectorsDir + "/" + fileName)
-// 		if err != nil {
-// 			log.Fatal().Msgf("failed to read custom detector file %e", err)
-// 		}
-
-// 		var rule Rule
-// 		err = yaml.Unmarshal(fileContent, &rule)
-// 		if err != nil {
-// 			log.Fatal().Msgf("failed to unmarshal database file %e", err)
-// 		}
-
-// 		rules[ruleName] = rule
-// 	}
-
-// 	return rules
-// }
-
-func DefaultPolicies() map[string]*Policy {
-	policies := make(map[string]*Policy)
-	var policy []*Policy
-
-	err := yaml.Unmarshal(defaultPolicies, &policy)
-	if err != nil {
-		log.Fatal().Msgf("failed to unmarshal policy file %e", err)
-	}
-
-	log.Error().Msgf("policy %#v", policy)
-	for _, policy := range policy {
-		policies[policy.Type] = policy
-	}
-
-	return policies
-}
-
-// func DefaultRules() []*RuleNew {
-// 	rulesNew := []*RuleNew{}
-
-// 	err := yaml.Unmarshal(defaultRules, &rulesNew)
-// 	if err != nil {
-// 		log.Fatal().Msgf("failed to unmarshal rules new file %e", err)
-// 	}
-
-// 	return rulesNew
-// }
 
 func ProcessorRegoModuleText(processorName string) (string, error) {
 	processorPath := fmt.Sprintf("processors/%s.rego", processorName)
