@@ -173,12 +173,6 @@ func (detector *objectDetector) getClass(node *tree.Node, evaluator types.Evalua
 			return nil, err
 		}
 		data.Properties = append(data.Properties, detections...)
-
-		detections, err = evaluator.ForNode(node.Child(i), "property")
-		if err != nil {
-			return nil, err
-		}
-		data.Properties = append(data.Properties, detections...)
 	}
 
 	return []*types.Detection{{
