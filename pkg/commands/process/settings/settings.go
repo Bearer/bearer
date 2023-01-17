@@ -69,8 +69,8 @@ type RuleDefinition struct {
 
 	Trigger           string            `mapstructure:"trigger" json:"trigger" yaml:"trigger"` // TODO: use enum value
 	Severity          map[string]string `mapstructure:"severity" json:"severity,omitempty" yaml:"severity,omitempty"`
-	ExcludeDataTypes  []string          `mapstructure:"exclude_data_types" json:"exclude_data_types,omitempty" yaml:"exclude_data_types,omitempty"`
-	IncludeDataTypes  []string          `mapstructure:"include_data_types" json:"include_data_types,omitempty" yaml:"include_data_types,omitempty"`
+	SkipDataTypes     []string          `mapstructure:"skip_data_types" json:"skip_data_types,omitempty" yaml:"skip_data_types,omitempty"`
+	OnlyDataTypes     []string          `mapstructure:"only_data_types" json:"only_data_types,omitempty" yaml:"only_data_types,omitempty"`
 	OmitParent        bool              `mapstructure:"omit_parent" json:"omit_parent,omitempty" yaml:"omit_parent,omitempty"`
 	OmitParentContent bool              `mapstructure:"omit_parent_content" json:"omit_parent_content,omitempty" yaml:"omit_parent_content,omitempty"`
 	DetailedContext   bool              `mapstructure:"detailed_context" json:"detailed_context,omitempty" yaml:"detailed_context,omitempty"`
@@ -87,7 +87,8 @@ type RuleNew struct {
 	AutoEncrytPrefix   string            `mapstructure:"auto_encrypt_prefix" json:"auto_encrypt_prefix,omitempty" yaml:"auto_encrypt_prefix,omitempty"`
 	OmitParent         bool              `mapstructure:"omit_parent" json:"omit_parent,omitempty" yaml:"omit_parent,omitempty"`
 	OmitParentContent  bool              `mapstructure:"omit_parent_content" json:"omit_parent_content,omitempty" yaml:"omit_parent_content,omitempty"`
-	ExcludeDataTypes   []string          `mapstructure:"exclude_data_types" json:"exclude_data_types,omitempty" yaml:"exclude_data_types,omitempty"`
+	SkipDataTypes      []string          `mapstructure:"skip_data_types" json:"skip_data_types,omitempty" yaml:"skip_data_types,omitempty"`
+	OnlyDataTypes      []string          `mapstructure:"only_data_types" json:"only_data_types,omitempty" yaml:"only_data_types,omitempty"`
 	Severity           map[string]string `mapstructure:"severity" json:"severity,omitempty" yaml:"severity,omitempty"`
 	Description        string            `mapstructure:"description" json:"description" yaml:"description"`
 	FailureMessage     string            `mapstructure:"failure_message" json:"failure_message" yaml:"failure_message"`
@@ -234,7 +235,8 @@ func DefaultDetectorsAndRules() (detectors map[string]Rule, rules []*RuleNew) {
 					Trigger:            ruleDefinition.Trigger,
 					OmitParent:         ruleDefinition.OmitParent,
 					OmitParentContent:  ruleDefinition.OmitParentContent,
-					ExcludeDataTypes:   ruleDefinition.ExcludeDataTypes,
+					SkipDataTypes:      ruleDefinition.SkipDataTypes,
+					OnlyDataTypes:      ruleDefinition.OnlyDataTypes,
 					Severity:           ruleDefinition.Severity,
 					Description:        ruleDefinition.Metadata.Description,
 					FailureMessage:     ruleDefinition.Metadata.FailureMessage,

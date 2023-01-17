@@ -19,7 +19,7 @@ severity:
   PII: "critical"
   PHI: "medium"
   PD: "high"
-exclude_data_types:
+skip_data_types:
   - "Unique Identifier"
 metadata:
   failure_message: "failure message DSW-001"
