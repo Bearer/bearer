@@ -155,7 +155,7 @@ func (composition *Composition) DetectFromFile(report report.Report, file *file.
 					file.Path,
 					detection.MatchNode.LineNumber(),
 					detection.MatchNode.ColumnNumber(),
-					"FIXME: rule.Pattern",
+					data.Pattern,
 				)
 
 				var content string
@@ -186,7 +186,7 @@ func (composition *Composition) DetectFromFile(report report.Report, file *file.
 					file.Path,
 					datatypeDetection.MatchNode.LineNumber(),
 					datatypeDetection.MatchNode.ColumnNumber(),
-					"FIXME: ???",
+					"",
 				), schema.Schema{
 					Classification: data.Classification,
 					Parent: &schema.Parent{
@@ -201,7 +201,7 @@ func (composition *Composition) DetectFromFile(report report.Report, file *file.
 						file.Path,
 						property.Detection.MatchNode.LineNumber(),
 						property.Detection.MatchNode.ColumnNumber(),
-						"FIXME: ???",
+						"",
 					), schema.Schema{
 						Classification: property.Classification,
 						Parent: &schema.Parent{
