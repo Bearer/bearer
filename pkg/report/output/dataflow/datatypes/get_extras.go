@@ -96,6 +96,7 @@ func getEncryptedField(result rego.Vars, detection interface{}) (bool, error) {
 
 func getVerifiedBy(result rego.Vars, detection interface{}) ([]types.DatatypeVerifiedBy, error) {
 	rawVerifiedBy, ok := result["verified_by"]
+
 	if !ok {
 		return nil, errors.New("no 'verified_by' value in output")
 	}
@@ -185,7 +186,7 @@ func newExtrasObj(
 		if err != nil {
 			return nil, err
 		}
-		for k, v := range(dataForProcessor) {
+		for k, v := range dataForProcessor {
 			existingExtraFields, keyPresent := data[k]
 			if keyPresent {
 				// Merge in the new processor data
@@ -306,6 +307,7 @@ func runProcessor(
 			verified_by = data.bearer.%s.verified_by
 			encrypted = data.bearer.%s.encrypted
 		`, processorName, processorName)
+
 	data, err = runExtrasQuery(
 		query,
 		modules,

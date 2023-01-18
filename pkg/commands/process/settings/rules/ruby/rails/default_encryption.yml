@@ -1,0 +1,8 @@
+type: "verifier"
+patterns:
+  - |
+    class $CLASS_NAME
+      encrypts <$ARGUMENT>
+    end
+languages:
+  - ruby

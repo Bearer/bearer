@@ -76,6 +76,9 @@ func GetOutput(dataflow *dataflow.DataFlow, config settings.Config) (map[string]
 		}
 
 		policy := config.Policies[rule.Type]
+		if rule.Type == "verifier" {
+			continue
+		}
 
 		// Create a prepared query that can be evaluated.
 		rs, err := rego.RunQuery(policy.Query,

@@ -21,26 +21,46 @@
     data_type: Address
     data_subject: ?? # will be required for privacy report
     stored: true # This detector means it is stored
+  - detector: schema_rb
+    filename: db/structure.sql
+    line_number: 2
+    object_name: users
+    field_name: encrypted_city
+    data_type: Address
+    data_subject: ?? # will be required for privacy report
+    stored: true # This detector means it is stored
+    encrypted: true
 
-- verifiers:
+- encryption_verifiers:
   - detector: rails_encryption
     filename: app/models/user.rb
     line_number: 2
-    object_name: users
+    object_name: User
     field_name: address
     # data_type: -> No Data Classification here
     associated_detectors:
       - schema_rb
       - create_table_sql
 
+-
+
 - risks:
   - detector: rule_logger_id
     filename: app/controllers/users.rb
     line_number: 10
-    object_name: users
-    field_name: address
-    data_type: Address
-    data_subject: ?? # will be required for privacy report
+    data_types:
+      - object_name: users
+        field_name: address
+        data_type: Address
+        data_subject: ?? # will be required for privacy report
+      - object_name: users
+        field_name: email
+        data_type: Email Address
+        data_subject: ?? # will be required for privacy report
+  - detector: gitleaks
+    filename: app/controllers/users.rb
+    line_number: 2
+    description: AWS Access Token
 
 - components:
   - detector: gemfile-lock
@@ -52,3 +72,35 @@
 # ...
 
 reconciliation?
+
+rules:
+  - type: "verifier"
+    languages:
+      - ruby
+    patterns:
+      - |
+        class $CLASS_NAME
+          encrypts <$DATA_TYPE>
+
+  - type: "data_type"
+    languages:
+      - sql
+    patterns:
+      - |
+        CREATE TABLE public.$TABLE_NAME
+          <$DATA_TYPE>
+
+    stored: true
+    auto_encryption_prefix: encrypted_
+ trigger: "missing_encryption"
+ trigger: "local"
+ severity:
+   default: "low"
+   PII: "critical"
+   PHI: "medium"
+   PD: "high"
+ metadata:
+   failure_message: "failure message DSW-011"
+   description: "description DSW-011"
+   remediation_message: "remediation message DSW-011"
+   dsw_id: "DSW-011"

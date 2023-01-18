@@ -118,9 +118,7 @@ func GetOutput(input []interface{}, config settings.Config, isInternal bool) (*D
 				}
 			case customdetectors.TypeDatatype:
 				var detectionExtras *datatypes.ExtraFields
-				if castDetection.DetectorType == "detect_sql_create_public_table" {
-					detectionExtras = extras.Get(detection)
-				}
+				detectionExtras = extras.Get(detection)
 
 				err = dataTypesHolder.AddSchema(castDetection, detectionExtras)
 				if err != nil {
