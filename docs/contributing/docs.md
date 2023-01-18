@@ -1,6 +1,5 @@
 ---
 title: Contributing to documentation
-layout: layouts/doc.njk
 ---
 
 # Contribute to Curio's documentation
