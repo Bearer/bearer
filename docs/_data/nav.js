@@ -26,6 +26,7 @@ module.exports = [
       { name: "Data Types", url: "/reference/datatypes/" },
       { name: "Policies", url: "/reference/policies/" },
       { name: "Supported Languages", url: "/reference/supported-languages/" },
+      { name: "Configuration", url: "/reference/config/" },
     ],
   },
   {
