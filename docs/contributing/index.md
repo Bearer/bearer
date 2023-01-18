@@ -15,7 +15,7 @@ You can contribute in a variety of ways:
 - [Add a new recipe](/contributing/recipes/) to the recipes database to help Curio identify more third-parties.
 - Help others in the [Community Discord](https://discord.gg/eaHZBJUXRF)
 
-All contributions and interactions with the community must adhere to our [contributor code of conduct]().
+All contributions and interactions with the community must adhere to our [contributor code of conduct](https://github.com/Bearer/curio/blob/main/CODE_OF_CONDUCT.md).
 
 ## Best practices
 

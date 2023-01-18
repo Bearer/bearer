@@ -24,9 +24,42 @@ Each recipe consists of a `JSON` file containing the following properties:
 - `urls` (array of strings): URLs used by the service. Curio will use this to aid in finding connections within a codebase. Supports wildcards.
 - `exclude_urls` (array of strings): Any urls that would be caught by the wildcards in the `urls` list that you'd like to explicitly exclude.
 - `packages` (array of objects): Common packages that connect to the service. Each package object should contain:
-  - `name`: The official name of the package used by package manager files to identify it.
-  - `group`: null
-  - `package_manager`: The package manager that manages the package, such as npm, go, etc.
-- `uuid`: A unique identifier to distinguish the recipe from others.
-- `sub_type`: The sub type of the earlier `type` property.
+  - `name` (string): The official name of the package used by package managers.
+  - `group` (string): For Java applications (e.g., `maven`). Set to `null` for other use cases.
+  - `package_manager` (string): The package manager that manages the package, such as npm, go, etc.
+- `uuid`: A unique identifier to distinguish the recipe from others. See below for [generating a new uuid](#generating-a-uuid).
+- `sub_type` (string): The subtype of the earlier `type` property.
+  - `external_service` subtypes: 
+    - `third_party`
+  - `data_store` subtypes:
+    - `database`
+    - `datalake`
+    - `object_storage`
+    - `search_engine`
+    - `key_value_cache`
+    - `flat_file`
+    - `shared_folders`
+  - `internal_service` subtypes:
+    - `message_bus`
 
+If any of the existing properties and available values don't meet the needs of your new recipe, [open a new issue](https://github.com/Bearer/curio/issues/new/choose). You can view the existing recipes [in the GitHub repo](https://github.com/Bearer/curio/tree/main/pkg/classification/db/recipes).
+
+## Generating a UUID
+
+Recipes each contain a universally unique identifier (UUID). To generate one, use the `uuidgen` tool.
+
+On linux:
+
+```bash
+uuidgen
+```
+
+On MacOS, you need to force the output to lowercase:
+
+```bash
+uuidgen | tr "[:upper:]" "[:lower:]"
+```
+
+## Commiting the new recipe
+
+To contribute the new recipe to Curio, refer to the [Contributing Code guide](/contributing/code/).
