@@ -61,11 +61,27 @@ type RuleDefinition struct {
 	RootSingularize bool `mapstructure:"root_singularize" yaml:"root_singularize" `
 	RootLowercase   bool `mapstructure:"root_lowercase" yaml:"root_lowercase"`
 
-	Metavars         map[string]MetaVar `mapstructure:"metavars" json:"metavars" yaml:"metavars"`
-	Stored           bool               `mapstructure:"stored" json:"stored" yaml:"stored"`
-	LinkedDetectors  []string           `mapstructure:"linked_detectors" json:"linked_detectors,omitempty" yaml:"linked_detectors,omitempty"`
-	AutoEncrytPrefix string             `mapstructure:"auto_encrypt_prefix" json:"auto_encrypt_prefix,omitempty" yaml:"auto_encrypt_prefix,omitempty"`
-	DetectPresence   bool               `mapstructure:"detect_presence" json:"detect_presence" yaml:"detect_presence"`
+	Stored           bool     `mapstructure:"stored" json:"stored" yaml:"stored"`
+	LinkedDetectors  []string `mapstructure:"linked_detectors" json:"linked_detectors,omitempty" yaml:"linked_detectors,omitempty"`
+	AutoEncrytPrefix string   `mapstructure:"auto_encrypt_prefix" json:"auto_encrypt_prefix,omitempty" yaml:"auto_encrypt_prefix,omitempty"`
+	DetectPresence   bool     `mapstructure:"detect_presence" json:"detect_presence" yaml:"detect_presence"`
+
+	Auxiliary []struct {
+		Id             string        `mapstructure:"id" json:"id" yaml:"id"`
+		Type           string        `mapstructure:"type" json:"type" yaml:"type"`
+		Languages      []string      `mapstructure:"languages" json:"languages" yaml:"languages"`
+		ParamParenting bool          `mapstructure:"param_parenting" json:"param_parenting" yaml:"param_parenting"`
+		Patterns       []RulePattern `mapstructure:"patterns" json:"patterns" yaml:"patterns"`
+
+		RootSingularize bool `mapstructure:"root_singularize" yaml:"root_singularize" `
+		RootLowercase   bool `mapstructure:"root_lowercase" yaml:"root_lowercase"`
+
+		Stored           bool     `mapstructure:"stored" json:"stored" yaml:"stored"`
+		LinkedDetectors  []string `mapstructure:"linked_detectors" json:"linked_detectors,omitempty" yaml:"linked_detectors,omitempty"`
+		AutoEncrytPrefix string   `mapstructure:"auto_encrypt_prefix" json:"auto_encrypt_prefix,omitempty" yaml:"auto_encrypt_prefix,omitempty"`
+		DetectPresence   bool     `mapstructure:"detect_presence" json:"detect_presence" yaml:"detect_presence"`
+		OmitParent       bool     `mapstructure:"omit_parent" json:"omit_parent,omitempty" yaml:"omit_parent,omitempty"`
+	} `mapstructure:"auxiliary" json:"auxiliary" yaml:"auxiliary"`
 
 	Trigger           string            `mapstructure:"trigger" json:"trigger" yaml:"trigger"` // TODO: use enum value
 	Severity          map[string]string `mapstructure:"severity" json:"severity,omitempty" yaml:"severity,omitempty"`
@@ -345,13 +361,28 @@ func defaultDetectorsAndRules() (detectors map[string]Rule, rules map[string]*Ru
 						Patterns:        ruleDefinition.Patterns,
 						RootSingularize: ruleDefinition.RootSingularize,
 						RootLowercase:   ruleDefinition.RootLowercase,
-						Metavars:        ruleDefinition.Metavars,
 						Stored:          ruleDefinition.Stored,
 						DetectPresence:  ruleDefinition.DetectPresence,
 						OmitParent:      ruleDefinition.OmitParent,
 					}
 
 					detectors[ruleId] = rule
+
+					for _, auxiliaryRuleDefinition := range ruleDefinition.Auxiliary {
+						auxiliaryRule := Rule{
+							Type:            auxiliaryRuleDefinition.Type,
+							Languages:       auxiliaryRuleDefinition.Languages,
+							ParamParenting:  auxiliaryRuleDefinition.ParamParenting,
+							Patterns:        auxiliaryRuleDefinition.Patterns,
+							RootSingularize: auxiliaryRuleDefinition.RootSingularize,
+							RootLowercase:   auxiliaryRuleDefinition.RootLowercase,
+							Stored:          auxiliaryRuleDefinition.Stored,
+							DetectPresence:  auxiliaryRuleDefinition.DetectPresence,
+							OmitParent:      auxiliaryRuleDefinition.OmitParent,
+						}
+
+						detectors[auxiliaryRuleDefinition.Id] = auxiliaryRule
+					}
 				}
 
 				newRule := RuleNew{
@@ -378,6 +409,7 @@ func defaultDetectorsAndRules() (detectors map[string]Rule, rules map[string]*Ru
 			}
 		}
 	}
+
 	return detectors, rules, dswIds
 }
 
