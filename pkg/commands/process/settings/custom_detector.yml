@@ -165,7 +165,6 @@ ruby_file_detection:
             - File
         - variable: DATA_TYPE
           detection: datatype
-  param_parenting: true
   stored: false
 detect_ruby_logger:
   type: "risk"
@@ -251,13 +250,12 @@ detect_encrypted_ruby_class_properties:
   type: "verifier"
   patterns:
     - pattern: |
-        class $<CLASS_NAME:constant> < ApplicationRecord
+        class $<_>
           encrypts $<DATA_TYPE>
         end
-      filters: # FIXME: what to do with class name var?
+      filters:
         - variable: DATA_TYPE
           detection: datatype
-  param_parenting: true
   root_singularize: true
   root_lowercase: true
   languages:
