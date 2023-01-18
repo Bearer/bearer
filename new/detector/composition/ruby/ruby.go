@@ -158,14 +158,9 @@ func (composition *Composition) DetectFromFile(report report.Report, file *file.
 					data.Pattern,
 				)
 
-				var content string
-				// if !rule.OmitParent {
-				content = detection.MatchNode.Content()
-				// }
-
 				parent := &schema.Parent{
 					LineNumber: detection.MatchNode.LineNumber(),
-					Content:    content,
+					Content:    detection.MatchNode.Content(),
 				}
 
 				report.AddDetection(

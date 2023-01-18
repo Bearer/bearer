@@ -11,5 +11,6 @@ type Implementation interface {
 	SitterLanguage() *sitter.Language
 	AnalyzeFlow(rootNode *tree.Node)
 	ExtractPatternVariables(input string) (string, []patternquerybuilder.Variable, error)
+	ExtractPatternMatchNode(input string) (string, int, error)
 	AnonymousPatternNodeParentTypes() []string
 }
