@@ -7,11 +7,12 @@ import (
 
 	"github.com/bearer/curio/new/detector/types"
 	"github.com/bearer/curio/new/language/tree"
+	languagetypes "github.com/bearer/curio/new/language/types"
 	"github.com/bearer/curio/pkg/commands/process/settings"
 )
 
 func matchFilter(
-	result tree.QueryResult,
+	result *languagetypes.PatternQueryResult,
 	evaluator types.Evaluator,
 	filter settings.PatternFilter,
 ) (bool, []*types.Detection, error) {
@@ -19,7 +20,7 @@ func matchFilter(
 		return matchEitherFilters(result, evaluator, filter.Either)
 	}
 
-	node, ok := result[filter.Variable]
+	node, ok := result.Variables[filter.Variable]
 	// shouldn't happen if filters are validated against pattern
 	if !ok {
 		return false, nil, nil
@@ -33,7 +34,7 @@ func matchFilter(
 }
 
 func matchAllFilters(
-	result tree.QueryResult,
+	result *languagetypes.PatternQueryResult,
 	evaluator types.Evaluator,
 	filters []settings.PatternFilter,
 ) (bool, []*types.Detection, error) {
@@ -52,7 +53,7 @@ func matchAllFilters(
 }
 
 func matchEitherFilters(
-	result tree.QueryResult,
+	result *languagetypes.PatternQueryResult,
 	evaluator types.Evaluator,
 	filters []settings.PatternFilter,
 ) (bool, []*types.Detection, error) {
@@ -77,7 +78,7 @@ func matchEitherFilters(
 }
 
 func matchDetectionFilter(
-	result tree.QueryResult,
+	result *languagetypes.PatternQueryResult,
 	evaluator types.Evaluator,
 	node *tree.Node,
 	detectorType string,

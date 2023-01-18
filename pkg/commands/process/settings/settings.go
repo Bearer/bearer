@@ -88,8 +88,10 @@ type Rule struct {
 	RootSingularize bool `mapstructure:"root_singularize" yaml:"root_singularize" `
 	RootLowercase   bool `mapstructure:"root_lowercase" yaml:"root_lowercase"`
 
+	Stored bool `mapstructure:"stored" json:"stored" yaml:"stored"`
+
+	// FIXME: remove after refactor
 	Metavars       map[string]MetaVar `mapstructure:"metavars" json:"metavars" yaml:"metavars"`
-	Stored         bool               `mapstructure:"stored" json:"stored" yaml:"stored"`
 	DetectPresence bool               `mapstructure:"detect_presence" json:"detect_presence" yaml:"detect_presence"`
 	OmitParent     bool               `mapstructure:"omit_parent" json:"omit_parent" yaml:"omit_parent"`
 }

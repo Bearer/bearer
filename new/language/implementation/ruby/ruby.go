@@ -1,6 +1,7 @@
 package ruby
 
 import (
+	"errors"
 	"fmt"
 	"regexp"
 	"strings"
@@ -22,8 +23,10 @@ var (
 	anonymousPatternNodeParentTypes = []string{"binary"}
 
 	// $<name:type> or $<name:type1|type2> or $<name>
-	patternQueryVariableRegex = regexp.MustCompile(`\$<(?P<name>[^>:]+)(?::(?P<types>[^>]+))?>`)
+	patternQueryVariableRegex = regexp.MustCompile(`\$<(?P<name>[^>:!]+)(?::(?P<types>[^>]+))?>`)
 	allowedPatternQueryTypes  = []string{"identifier", "constant", "_", "call"}
+
+	matchNodeRegex = regexp.MustCompile(`\$<!>`)
 )
 
 type rubyImplementation struct{}
@@ -103,6 +106,22 @@ func (implementation *rubyImplementation) ExtractPatternVariables(input string) 
 	}
 
 	return replaced, params, nil
+}
+
+func (implementation *rubyImplementation) ExtractPatternMatchNode(input string) (string, int, error) {
+	inputBytes := []byte(input)
+	matches := matchNodeRegex.FindAllIndex(inputBytes, -1)
+
+	if len(matches) == 0 {
+		return input, 0, nil
+	}
+
+	if len(matches) > 1 {
+		return "", 0, errors.New("pattern must only contain a single match node")
+	}
+
+	match := matches[0]
+	return string(inputBytes[0:match[0]]) + string(inputBytes[match[1]:]), match[0], nil
 }
 
 func produceDummyValue(i int, nodeType string) string {
