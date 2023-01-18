@@ -1,11 +1,11 @@
 type: "verifier"
 patterns:
-  - |
-    class $CLASS_NAME < ApplicationRecord
-      encrypts <$ARGUMENT>
-    end
-param_parenting: true
-root_singularize: true
-root_lowercase: true
+  - pattern: |
+      class $<_>
+        $<!>encrypts $<DATA_TYPE>
+      end
+    filters:
+      - variable: DATA_TYPE
+        detection: datatype
 languages:
   - ruby

@@ -1,6 +1,9 @@
 type: "risk"
 patterns:
-  - |
-    session[...] = $ANYTHING
+  - pattern: |
+      session[] = $<DATA_TYPE>
+    filters:
+      - variable: DATA_TYPE
+        detection: datatype
 languages:
   - ruby
