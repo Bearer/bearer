@@ -61,8 +61,10 @@ type RuleDefinition struct {
 	RootSingularize bool `mapstructure:"root_singularize" yaml:"root_singularize" `
 	RootLowercase   bool `mapstructure:"root_lowercase" yaml:"root_lowercase"`
 
+	SkipPolicy       bool     `mapstructure:"skip_policy" json:"skip_policy" yaml:"skip_policy"`
 	Stored           bool     `mapstructure:"stored" json:"stored" yaml:"stored"`
-	LinkedDetectors  []string `mapstructure:"linked_detectors" json:"linked_detectors,omitempty" yaml:"linked_detectors,omitempty"`
+	Detectors        []string `mapstructure:"detectors" json:"detectors,omitempty" yaml:"detectors,omitempty"`
+	Processors       []string `mapstructure:"processors" json:"processors,omitempty" yaml:"processors,omitempty"`
 	AutoEncrytPrefix string   `mapstructure:"auto_encrypt_prefix" json:"auto_encrypt_prefix,omitempty" yaml:"auto_encrypt_prefix,omitempty"`
 	DetectPresence   bool     `mapstructure:"detect_presence" json:"detect_presence" yaml:"detect_presence"`
 
@@ -77,7 +79,8 @@ type RuleDefinition struct {
 		RootLowercase   bool `mapstructure:"root_lowercase" yaml:"root_lowercase"`
 
 		Stored           bool     `mapstructure:"stored" json:"stored" yaml:"stored"`
-		LinkedDetectors  []string `mapstructure:"linked_detectors" json:"linked_detectors,omitempty" yaml:"linked_detectors,omitempty"`
+		Detectors        []string `mapstructure:"detectors" json:"detectors,omitempty" yaml:"detectors,omitempty"`
+		Processors       []string `mapstructure:"processors" json:"processors,omitempty" yaml:"processors,omitempty"`
 		AutoEncrytPrefix string   `mapstructure:"auto_encrypt_prefix" json:"auto_encrypt_prefix,omitempty" yaml:"auto_encrypt_prefix,omitempty"`
 		DetectPresence   bool     `mapstructure:"detect_presence" json:"detect_presence" yaml:"detect_presence"`
 		OmitParent       bool     `mapstructure:"omit_parent" json:"omit_parent,omitempty" yaml:"omit_parent,omitempty"`
@@ -98,7 +101,8 @@ type RuleNew struct {
 	Id                 string            `mapstructure:"id" json:"id,omitempty" yaml:"id,omitempty"`
 	Type               string            `mapstructure:"type" json:"type,omitempty" yaml:"type,omitempty"`          // TODO: use enum value
 	Trigger            string            `mapstructure:"trigger" json:"trigger,omitempty" yaml:"trigger,omitempty"` // TODO: use enum value
-	LinkedDetectors    []string          `mapstructure:"linked_detectors" json:"linked_detectors,omitempty" yaml:"linked_detectors,omitempty"`
+	Detectors          []string          `mapstructure:"detectors" json:"detectors,omitempty" yaml:"detectors,omitempty"`
+	Processors         []string          `mapstructure:"processors" json:"processors,omitempty" yaml:"processors,omitempty"`
 	Stored             bool              `mapstructure:"stored" json:"stored,omitempty" yaml:"stored,omitempty"`
 	AutoEncrytPrefix   string            `mapstructure:"auto_encrypt_prefix" json:"auto_encrypt_prefix,omitempty" yaml:"auto_encrypt_prefix,omitempty"`
 	OmitParent         bool              `mapstructure:"omit_parent" json:"omit_parent,omitempty" yaml:"omit_parent,omitempty"`
@@ -149,6 +153,7 @@ type Rule struct {
 	Stored         bool               `mapstructure:"stored" json:"stored" yaml:"stored"`
 	DetectPresence bool               `mapstructure:"detect_presence" json:"detect_presence" yaml:"detect_presence"`
 	OmitParent     bool               `mapstructure:"omit_parent" json:"omit_parent" yaml:"omit_parent"`
+	Processors     []string           `mapstructure:"processors" json:"processors,omitempty" yaml:"processors,omitempty"`
 }
 
 type Processor struct {
@@ -353,7 +358,7 @@ func defaultDetectorsAndRules() (detectors map[string]Rule, rules map[string]*Ru
 					ruleId = name
 				} else {
 					// add custom detector (rule)
-					rule := Rule{
+					detector := Rule{
 						Disabled:        ruleDefinition.Disabled,
 						Type:            ruleDefinition.Type,
 						Languages:       ruleDefinition.Languages,
@@ -362,11 +367,12 @@ func defaultDetectorsAndRules() (detectors map[string]Rule, rules map[string]*Ru
 						RootSingularize: ruleDefinition.RootSingularize,
 						RootLowercase:   ruleDefinition.RootLowercase,
 						Stored:          ruleDefinition.Stored,
+						Processors:      ruleDefinition.Processors,
 						DetectPresence:  ruleDefinition.DetectPresence,
 						OmitParent:      ruleDefinition.OmitParent,
 					}
 
-					detectors[ruleId] = rule
+					detectors[ruleId] = detector
 
 					for _, auxiliaryRuleDefinition := range ruleDefinition.Auxiliary {
 						auxiliaryRule := Rule{
@@ -398,7 +404,8 @@ func defaultDetectorsAndRules() (detectors map[string]Rule, rules map[string]*Ru
 					FailureMessage:     ruleDefinition.Metadata.FailureMessage,
 					RemediationMessage: ruleDefinition.Metadata.RemediationMessage,
 					Stored:             ruleDefinition.Stored,
-					LinkedDetectors:    ruleDefinition.LinkedDetectors,
+					Detectors:          ruleDefinition.Detectors,
+					Processors:         ruleDefinition.Processors,
 					AutoEncrytPrefix:   ruleDefinition.AutoEncrytPrefix,
 					DSWID:              ruleDefinition.Metadata.DSWID,
 				}

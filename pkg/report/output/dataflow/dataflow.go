@@ -40,11 +40,11 @@ func GetOutput(input []interface{}, config settings.Config, isInternal bool) (*D
 	risksHolder := risks.New(config, isInternal)
 	componentsHolder := components.New(isInternal)
 
-	extras, err := datatypes.NewExtras(input)
+	extras, err := datatypes.NewExtras(input, config)
 	if err != nil {
 		return nil, err
 	}
-	railsExtras, err := datatypes.NewRailsExtras(input)
+	customExtras, err := datatypes.NewCustomExtras(input, config)
 	if err != nil {
 		return nil, err
 	}
@@ -92,7 +92,7 @@ func GetOutput(input []interface{}, config settings.Config, isInternal bool) (*D
 		case detections.TypeSchemaClassified:
 			var detectionExtras *datatypes.ExtraFields
 			if castDetection.DetectorType == reportdetectors.DetectorSchemaRb {
-				detectionExtras = railsExtras.Get(detection)
+				detectionExtras = customExtras.Get(detection)
 			}
 
 			err = dataTypesHolder.AddSchema(castDetection, detectionExtras)

@@ -23,7 +23,6 @@ type datatypeHolder struct {
 	name         string
 	uuid         string
 	categoryUUID string
-	parent       *schema.Parent
 	detectors    map[string]*detectorHolder // group detectors by detectorName
 }
 

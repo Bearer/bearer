@@ -14,8 +14,9 @@ import (
 )
 
 type processorInput struct {
-	AllDetections    []interface{} `json:"all_detections"`
-	TargetDetections []interface{} `json:"target_detections"`
+	Rule             *settings.RuleNew `json:"rule"`
+	AllDetections    []interface{}     `json:"all_detections"`
+	TargetDetections []interface{}     `json:"target_detections"`
 }
 
 type ExtraFields struct {
@@ -23,7 +24,7 @@ type ExtraFields struct {
 	verifiedBy []types.DatatypeVerifiedBy
 }
 
-func getRailsTargetDetections(allDetections []interface{}) ([]interface{}, error) {
+func getCustomTargetDetections(allDetections []interface{}) ([]interface{}, error) {
 	var result []interface{}
 
 	for _, detection := range allDetections {
@@ -161,17 +162,18 @@ type extrasObj struct {
 	data map[string]*ExtraFields
 }
 
-func NewRailsExtras(detections []interface{}) (*extrasObj, error) {
-	return newExtrasObj(detections, getRailsTargetDetections)
+func NewCustomExtras(detections []interface{}, config settings.Config) (*extrasObj, error) {
+	return newExtrasObj(detections, getCustomTargetDetections, config)
 }
 
-func NewExtras(detections []interface{}) (*extrasObj, error) {
-	return newExtrasObj(detections, getTargetDetections)
+func NewExtras(detections []interface{}, config settings.Config) (*extrasObj, error) {
+	return newExtrasObj(detections, getTargetDetections, config)
 }
 
 func newExtrasObj(
 	detections []interface{},
 	targetDetectionsFunc func(detections []interface{}) ([]interface{}, error),
+	config settings.Config,
 ) (*extrasObj, error) {
 	targetDetections, err := targetDetectionsFunc(detections)
 	if err != nil {
@@ -180,26 +182,33 @@ func newExtrasObj(
 
 	data := make(map[string]*ExtraFields)
 
-	processorNames := []string{"encrypted_verified", "db_encrypted"}
-	for _, processorName := range processorNames {
-		dataForProcessor, err := runProcessor(processorName, detections, targetDetections)
-		if err != nil {
-			return nil, err
-		}
-		for k, v := range dataForProcessor {
-			existingExtraFields, keyPresent := data[k]
-			if keyPresent {
-				// Merge in the new processor data
-				if existingExtraFields.encrypted == nil {
-					data[k].encrypted = v.encrypted
+	for _, rule := range config.Rules {
+		if len(rule.Processors) > 0 {
+			for _, processor := range rule.Processors {
+				dataForProcessor, err := runProcessor(
+					processor,
+					detections,
+					targetDetections,
+					rule,
+				)
+				if err != nil {
+					return nil, err
 				}
-				data[k].verifiedBy = append(data[k].verifiedBy, v.verifiedBy...)
-			} else {
-				data[k] = v
+				for k, v := range dataForProcessor {
+					existingExtraFields, keyPresent := data[k]
+					if keyPresent {
+						// Merge in the new processor data
+						if existingExtraFields.encrypted == nil {
+							data[k].encrypted = v.encrypted
+						}
+						data[k].verifiedBy = append(data[k].verifiedBy, v.verifiedBy...)
+					} else {
+						data[k] = v
+					}
+				}
 			}
 		}
 	}
-
 	return &extrasObj{data: data}, nil
 }
 
@@ -207,10 +216,12 @@ func runExtrasQuery(
 	query string,
 	modules []regohelper.Module,
 	detections, targetDetections []interface{},
+	rule *settings.RuleNew,
 ) (map[string]*ExtraFields, error) {
 	data := make(map[string]*ExtraFields)
 
 	result, err := regohelper.RunQuery(query, processorInput{
+		Rule:             rule,
 		AllDetections:    detections,
 		TargetDetections: targetDetections,
 	}, modules)
@@ -297,6 +308,7 @@ func runProcessor(
 	processorName string,
 	detections []any,
 	targetDetections []any,
+	rule *settings.RuleNew,
 ) (data map[string]*ExtraFields, err error) {
 	modules, err := processorModules(processorName)
 	if err != nil {
@@ -313,6 +325,7 @@ func runProcessor(
 		modules,
 		detections,
 		targetDetections,
+		rule,
 	)
 
 	return

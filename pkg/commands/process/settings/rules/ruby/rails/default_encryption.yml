@@ -1,4 +1,4 @@
-type: "verifier"
+type: verifier
 patterns:
   - |
     class $CLASS_NAME
@@ -6,3 +6,24 @@ patterns:
     end
 languages:
   - ruby
+detectors:
+  - schema_rb
+  - sql_lang_create_table
+processors:
+  - db_encrypted
+  - rails_encrypted
+skip_data_types:
+  - Unique Identifier
+  - Passwords
+auto_encrypt_prefix: encrypted_
+trigger: stored_data_types
+severity:
+  default: "low"
+  PII: "critical"
+  PHI: "medium"
+  PD: "high"
+metadata:
+  failure_message: "failure message DSW-009"
+  description: "description DSW-009"
+  remediation_message: "remediation message DSW-009"
+  dsw_id: "DSW-009"

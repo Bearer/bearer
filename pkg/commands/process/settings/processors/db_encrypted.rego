@@ -5,15 +5,15 @@ import future.keywords
 sql_encrypted contains detection if {
 	detection := input.all_detections[_]
 
-	detection.detector_type in ["schema_rb", "sql_lang_create_table"]
+	detection.detector_type in input.rule.detectors
 	detection.value.classification.decision.state == "valid"
-	startswith(detection.value.normalized_field_name, "encrypted_")
+	startswith(detection.value.normalized_field_name, input.rule.auto_encrypt_prefix)
 }
 
 encrypted contains detection if {
 	detection := input.target_detections[_]
 
-	detection.detector_type in ["schema_rb", "sql_lang_create_table"]
+	detection.detector_type in input.rule.detectors
 
 	detection.value.normalized_field_name != ""
 	detection.value.normalized_object_name != ""
@@ -28,7 +28,7 @@ verified_by contains [detection, verifications] if {
 	detection.value.field_name != ""
 	detection.value.object_name != ""
 
-	detection.detector_type in ["schema_rb", "sql_lang_create_table"]
+	detection.detector_type in input.rule.detectors
 
 	verifications := [verification |
 		encrypted_detection := sql_encrypted[_]

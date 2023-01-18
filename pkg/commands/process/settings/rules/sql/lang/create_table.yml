@@ -1,4 +1,4 @@
-type: "data_type"
+type: data_type
 patterns:
   - |
     CREATE TABLE public.$TABLE_NAME (
@@ -14,16 +14,4 @@ root_lowercase: true
 languages:
   - sql
 stored: true
-linked_detectors:
-  - schema_rb
-severity:
-  default: "low"
-  PII: "critical"
-  PHI: "medium"
-  PD: "high"
-auto_encrypt_prefix: encrypted_
-metadata:
-  failure_message: "failure message DSW-009"
-  description: "description DSW-009"
-  remediation_message: "remediation message DSW-009"
-  dsw_id: "DSW-009"
+skip_policy: true
