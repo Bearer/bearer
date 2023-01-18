@@ -1,7 +1,7 @@
 type: "risk"
 patterns:
   - pattern: |
-      $_.$METHOD(<$DATA_TYPE>)
+      $<_>.$<METHOD>($<DATA_TYPE>)
     filters:
       - variable: METHOD
         values:
@@ -11,5 +11,7 @@ patterns:
           - decrypt_pair
           - decrypt_string
           - decrypt_block
+      - variable: DATA_TYPE
+        detection: datatype
 languages:
   - "ruby"

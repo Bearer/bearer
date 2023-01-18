@@ -127,11 +127,19 @@ func (modules Modules) ToRegoModules() (output []rego.Module) {
 }
 
 type PatternFilter struct {
-	Variable       string   `mapstructure:"variable" json:"variable" yaml:"variable"`
-	Values         []string `mapstructure:"values" json:"values" yaml:"values"`
-	Minimum        *int     `mapstructure:"minimum" json:"minimum" yaml:"minimum"`
-	Maximum        *int     `mapstructure:"maximum" json:"maximum" yaml:"maximum"`
-	MatchViolation bool     `mapstructure:"match_violation" json:"match_violation" yaml:"match_violation"`
+	Either             []PatternFilter `mapstructure:"either" json:"either" yaml:"either"`
+	Variable           string          `mapstructure:"variable" json:"variable" yaml:"variable"`
+	Detection          string          `mapstructure:"detection" json:"detection" yaml:"detection"`
+	Values             []string        `mapstructure:"values" json:"values" yaml:"values"`
+	LessThan           *int            `mapstructure:"less_than" json:"less_than" yaml:"less_than"`
+	LessThanOrEqual    *int            `mapstructure:"less_than_or_equal" json:"less_than_or_equal" yaml:"less_than_or_equal"`
+	GreaterThan        *int            `mapstructure:"greater_than" json:"greater_than" yaml:"greater_than"`
+	GreaterThanOrEqual *int            `mapstructure:"greater_than_or_equal" json:"greater_than_or_equal" yaml:"greater_than_or_equal"`
+
+	// FIXME: remove when refactor is complete
+	Minimum        *int `mapstructure:"minimum" json:"minimum" yaml:"minimum"`
+	Maximum        *int `mapstructure:"maximum" json:"maximum" yaml:"maximum"`
+	MatchViolation bool `mapstructure:"match_violation" json:"match_violation" yaml:"match_violation"`
 }
 
 type RulePattern struct {
@@ -149,8 +157,10 @@ type Rule struct {
 	RootSingularize bool `mapstructure:"root_singularize" yaml:"root_singularize" `
 	RootLowercase   bool `mapstructure:"root_lowercase" yaml:"root_lowercase"`
 
+	Stored bool `mapstructure:"stored" json:"stored" yaml:"stored"`
+
+	// FIXME: remove after refactor
 	Metavars       map[string]MetaVar `mapstructure:"metavars" json:"metavars" yaml:"metavars"`
-	Stored         bool               `mapstructure:"stored" json:"stored" yaml:"stored"`
 	DetectPresence bool               `mapstructure:"detect_presence" json:"detect_presence" yaml:"detect_presence"`
 	OmitParent     bool               `mapstructure:"omit_parent" json:"omit_parent" yaml:"omit_parent"`
 	Processors     []string           `mapstructure:"processors" json:"processors,omitempty" yaml:"processors,omitempty"`

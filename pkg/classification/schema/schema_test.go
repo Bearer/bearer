@@ -7,7 +7,6 @@ import (
 	"github.com/bearer/curio/pkg/classification/schema"
 	"github.com/bearer/curio/pkg/report/detectors"
 	reportschema "github.com/bearer/curio/pkg/report/schema"
-	"github.com/bearer/curio/pkg/report/schema/datatype"
 	"github.com/bearer/curio/pkg/util/classify"
 	"github.com/stretchr/testify/assert"
 )
@@ -20,23 +19,21 @@ func TestSchemaObjectClassification(t *testing.T) {
 	}
 	tests := []struct {
 		Name  string
-		Input schema.DataTypeDetection
+		Input schema.ClassificationRequest
 		Want  schema.Classification
 	}{
 		{
 			Name: "from vendors folder",
-			Input: schema.DataTypeDetection{
+			Input: schema.ClassificationRequest{
 				Filename:     "vendor/vendor.rb",
 				DetectorType: detectors.DetectorRuby,
-				Value: &datatype.DataType{
-					Name: "User",
-					UUID: "1",
-					Type: reportschema.SimpleTypeObject,
-					Properties: map[string]datatype.DataTypable{
-						"sku_name": &datatype.DataType{
-							Name: "sku_name",
-							Type: reportschema.SimpleTypeString,
-							UUID: "3",
+				Value: &schema.ClassificationRequestDetection{
+					Name:       "User",
+					SimpleType: reportschema.SimpleTypeObject,
+					Properties: []*schema.ClassificationRequestDetection{
+						{
+							Name:       "sku_name",
+							SimpleType: reportschema.SimpleTypeString,
 						},
 					},
 				},
@@ -51,58 +48,48 @@ func TestSchemaObjectClassification(t *testing.T) {
 		},
 		{
 			Name: "known object with no valid properties",
-			Input: schema.DataTypeDetection{
+			Input: schema.ClassificationRequest{
 				Filename:     "db/schema.rb",
 				DetectorType: detectors.DetectorRuby,
-				Value: &datatype.DataType{
-					Name: "User",
-					UUID: "1",
-					Type: reportschema.SimpleTypeObject,
-					Properties: map[string]datatype.DataTypable{
-						"First Name": &datatype.DataType{
-							Name: "First Name",
-							Type: reportschema.SimpleTypeBool, // wrong type
-							UUID: "2",
+				Value: &schema.ClassificationRequestDetection{
+					Name:       "User",
+					SimpleType: reportschema.SimpleTypeObject,
+					Properties: []*schema.ClassificationRequestDetection{
+						{
+							Name:       "First Name",
+							SimpleType: reportschema.SimpleTypeBool, // wrong type
 						},
-						"sku_name": &datatype.DataType{
-							Name: "sku_name",
-							Type: reportschema.SimpleTypeString,
-							UUID: "3",
+						{
+							Name:       "sku_name",
+							SimpleType: reportschema.SimpleTypeString,
 						},
-						"strokeOpacity": &datatype.DataType{
-							Name: "strokeOpacity",
-							Type: reportschema.SimpleTypeString,
-							UUID: "4",
+						{
+							Name:       "strokeOpacity",
+							SimpleType: reportschema.SimpleTypeString,
 						},
-						"velocity": &datatype.DataType{
-							Name: "velocity",
-							Type: reportschema.SimpleTypeString,
-							UUID: "5",
+						{
+							Name:       "velocity",
+							SimpleType: reportschema.SimpleTypeString,
 						},
-						"primaryDisplay": &datatype.DataType{
-							Name: "primaryDisplay",
-							Type: reportschema.SimpleTypeString,
-							UUID: "6",
+						{
+							Name:       "primaryDisplay",
+							SimpleType: reportschema.SimpleTypeString,
 						},
-						"requestPassword": &datatype.DataType{
-							Name: "primaryDisplay",
-							Type: reportschema.SimpleTypeString,
-							UUID: "7",
+						{
+							Name:       "primaryDisplay",
+							SimpleType: reportschema.SimpleTypeString,
 						},
-						"resetPassword": &datatype.DataType{
-							Name: "primaryDisplay",
-							Type: reportschema.SimpleTypeString,
-							UUID: "8",
+						{
+							Name:       "primaryDisplay",
+							SimpleType: reportschema.SimpleTypeString,
 						},
-						"resolveAmbiguousRoles": &datatype.DataType{
-							Name: "primaryDisplay",
-							Type: reportschema.SimpleTypeString,
-							UUID: "9",
+						{
+							Name:       "primaryDisplay",
+							SimpleType: reportschema.SimpleTypeString,
 						},
-						"combinePartialBlindedSignatures": &datatype.DataType{
-							Name: "primaryDisplay",
-							Type: reportschema.SimpleTypeString,
-							UUID: "10",
+						{
+							Name:       "primaryDisplay",
+							SimpleType: reportschema.SimpleTypeString,
 						},
 					},
 				},
@@ -118,23 +105,20 @@ func TestSchemaObjectClassification(t *testing.T) {
 		},
 		{
 			Name: "known object with valid properties",
-			Input: schema.DataTypeDetection{
+			Input: schema.ClassificationRequest{
 				Filename:     "db/schema.rb",
 				DetectorType: detectors.DetectorRuby,
-				Value: &datatype.DataType{
-					Name: "User",
-					UUID: "1",
-					Type: reportschema.SimpleTypeObject,
-					Properties: map[string]datatype.DataTypable{
-						"birthdate": &datatype.DataType{
-							Name: "birthdate",
-							Type: reportschema.SimpleTypeString,
-							UUID: "2",
+				Value: &schema.ClassificationRequestDetection{
+					Name:       "User",
+					SimpleType: reportschema.SimpleTypeObject,
+					Properties: []*schema.ClassificationRequestDetection{
+						{
+							Name:       "birthdate",
+							SimpleType: reportschema.SimpleTypeString,
 						},
-						"First Name": &datatype.DataType{
-							Name: "First Name",
-							Type: reportschema.SimpleTypeString,
-							UUID: "3",
+						{
+							Name:       "First Name",
+							SimpleType: reportschema.SimpleTypeString,
 						},
 					},
 				},
@@ -150,28 +134,24 @@ func TestSchemaObjectClassification(t *testing.T) {
 		},
 		{
 			Name: "known object is SellerFiscalInformation with valid properties",
-			Input: schema.DataTypeDetection{
+			Input: schema.ClassificationRequest{
 				Filename:     "db/schema.rb",
 				DetectorType: detectors.DetectorRuby,
-				Value: &datatype.DataType{
-					Name: "SellerFiscalInformation",
-					UUID: "1",
-					Type: reportschema.SimpleTypeObject,
-					Properties: map[string]datatype.DataTypable{
-						"name": &datatype.DataType{
-							Name: "name",
-							Type: reportschema.SimpleTypeString,
-							UUID: "2",
+				Value: &schema.ClassificationRequestDetection{
+					Name:       "SellerFiscalInformation",
+					SimpleType: reportschema.SimpleTypeObject,
+					Properties: []*schema.ClassificationRequestDetection{
+						{
+							Name:       "name",
+							SimpleType: reportschema.SimpleTypeString,
 						},
-						"personName": &datatype.DataType{
-							Name: "personName",
-							Type: reportschema.SimpleTypeString,
-							UUID: "3",
+						{
+							Name:       "personName",
+							SimpleType: reportschema.SimpleTypeString,
 						},
-						"_customerName": &datatype.DataType{
-							Name: "_customerName",
-							Type: reportschema.SimpleTypeString,
-							UUID: "3",
+						{
+							Name:       "_customerName",
+							SimpleType: reportschema.SimpleTypeString,
 						},
 					},
 				},
@@ -187,33 +167,28 @@ func TestSchemaObjectClassification(t *testing.T) {
 		},
 		{
 			Name: "known object is SellerFiscalInformation with no valid properties",
-			Input: schema.DataTypeDetection{
+			Input: schema.ClassificationRequest{
 				Filename:     "db/schema.rb",
 				DetectorType: detectors.DetectorRuby,
-				Value: &datatype.DataType{
-					Name: "SellerFiscalInformation",
-					UUID: "1",
-					Type: reportschema.SimpleTypeObject,
-					Properties: map[string]datatype.DataTypable{
-						"erp_name": &datatype.DataType{
-							Name: "erp_name",
-							Type: reportschema.SimpleTypeString,
-							UUID: "2",
+				Value: &schema.ClassificationRequestDetection{
+					Name:       "SellerFiscalInformation",
+					SimpleType: reportschema.SimpleTypeObject,
+					Properties: []*schema.ClassificationRequestDetection{
+						{
+							Name:       "erp_name",
+							SimpleType: reportschema.SimpleTypeString,
 						},
-						"brand_name": &datatype.DataType{
-							Name: "brand_name",
-							Type: reportschema.SimpleTypeString,
-							UUID: "3",
+						{
+							Name:       "brand_name",
+							SimpleType: reportschema.SimpleTypeString,
 						},
-						"company_front_name": &datatype.DataType{
-							Name: "company_front_name",
-							Type: reportschema.SimpleTypeString,
-							UUID: "3",
+						{
+							Name:       "company_front_name",
+							SimpleType: reportschema.SimpleTypeString,
 						},
-						"_containerName": &datatype.DataType{
-							Name: "_containerName",
-							Type: reportschema.SimpleTypeString,
-							UUID: "4",
+						{
+							Name:       "_containerName",
+							SimpleType: reportschema.SimpleTypeString,
 						},
 					},
 				},
@@ -229,18 +204,16 @@ func TestSchemaObjectClassification(t *testing.T) {
 		},
 		{
 			Name: "known object with properties that match a db identifier",
-			Input: schema.DataTypeDetection{
+			Input: schema.ClassificationRequest{
 				Filename:     "db/schema.rb",
 				DetectorType: detectors.DetectorRuby,
-				Value: &datatype.DataType{
-					Name: "Applicant",
-					UUID: "1",
-					Type: reportschema.SimpleTypeObject,
-					Properties: map[string]datatype.DataTypable{
-						"user_id": &datatype.DataType{
-							Name: "user_id",
-							Type: reportschema.SimpleTypeString,
-							UUID: "2",
+				Value: &schema.ClassificationRequestDetection{
+					Name:       "Applicant",
+					SimpleType: reportschema.SimpleTypeObject,
+					Properties: []*schema.ClassificationRequestDetection{
+						{
+							Name:       "user_id",
+							SimpleType: reportschema.SimpleTypeString,
 						},
 					},
 				},
@@ -256,18 +229,16 @@ func TestSchemaObjectClassification(t *testing.T) {
 		},
 		{
 			Name: "known object with properties that match exclude patterns",
-			Input: schema.DataTypeDetection{
+			Input: schema.ClassificationRequest{
 				Filename:     "db/schema.rb",
 				DetectorType: detectors.DetectorRuby,
-				Value: &datatype.DataType{
-					Name: "bank_accounts",
-					UUID: "1",
-					Type: reportschema.SimpleTypeObject,
-					Properties: map[string]datatype.DataTypable{
-						"credit_card_number": &datatype.DataType{
-							Name: "credit_card_number",
-							Type: reportschema.SimpleTypeString,
-							UUID: "2",
+				Value: &schema.ClassificationRequestDetection{
+					Name:       "bank_accounts",
+					SimpleType: reportschema.SimpleTypeObject,
+					Properties: []*schema.ClassificationRequestDetection{
+						{
+							Name:       "credit_card_number",
+							SimpleType: reportschema.SimpleTypeString,
 						},
 					},
 				},
@@ -283,18 +254,16 @@ func TestSchemaObjectClassification(t *testing.T) {
 		},
 		{
 			Name: "known object with properties that match exclude patterns but are the wrong type (bool) - case #1",
-			Input: schema.DataTypeDetection{
+			Input: schema.ClassificationRequest{
 				Filename:     "db/schema.rb",
 				DetectorType: detectors.DetectorRuby,
-				Value: &datatype.DataType{
-					Name: "bank_accounts",
-					UUID: "1",
-					Type: reportschema.SimpleTypeObject,
-					Properties: map[string]datatype.DataTypable{
-						"credit_card_number": &datatype.DataType{
-							Name: "credit_card_number",
-							Type: reportschema.SimpleTypeBool,
-							UUID: "2",
+				Value: &schema.ClassificationRequestDetection{
+					Name:       "bank_accounts",
+					SimpleType: reportschema.SimpleTypeObject,
+					Properties: []*schema.ClassificationRequestDetection{
+						{
+							Name:       "credit_card_number",
+							SimpleType: reportschema.SimpleTypeBool,
 						},
 					},
 				},
@@ -310,18 +279,16 @@ func TestSchemaObjectClassification(t *testing.T) {
 		},
 		{
 			Name: "known object with properties that match exclude patterns but are the wrong type (bool) - case #2",
-			Input: schema.DataTypeDetection{
+			Input: schema.ClassificationRequest{
 				Filename:     "db/schema.rb",
 				DetectorType: detectors.DetectorRuby,
-				Value: &datatype.DataType{
-					Name: "patients",
-					UUID: "1",
-					Type: reportschema.SimpleTypeObject,
-					Properties: map[string]datatype.DataTypable{
-						"place_of_birth_unknown": &datatype.DataType{
-							Name: "place_of_birth_unknown",
-							Type: reportschema.SimpleTypeBool,
-							UUID: "2",
+				Value: &schema.ClassificationRequestDetection{
+					Name:       "patients",
+					SimpleType: reportschema.SimpleTypeObject,
+					Properties: []*schema.ClassificationRequestDetection{
+						{
+							Name:       "place_of_birth_unknown",
+							SimpleType: reportschema.SimpleTypeBool,
 						},
 					},
 				},
@@ -337,18 +304,16 @@ func TestSchemaObjectClassification(t *testing.T) {
 		},
 		{
 			Name: "known object with properties that do not match exclude patterns",
-			Input: schema.DataTypeDetection{
+			Input: schema.ClassificationRequest{
 				Filename:     "db/schema.rb",
 				DetectorType: detectors.DetectorRuby,
-				Value: &datatype.DataType{
-					Name: "accounts",
-					UUID: "1",
-					Type: reportschema.SimpleTypeObject,
-					Properties: map[string]datatype.DataTypable{
-						"first_name": &datatype.DataType{
-							Name: "first_name",
-							Type: reportschema.SimpleTypeString,
-							UUID: "2",
+				Value: &schema.ClassificationRequestDetection{
+					Name:       "accounts",
+					SimpleType: reportschema.SimpleTypeObject,
+					Properties: []*schema.ClassificationRequestDetection{
+						{
+							Name:       "first_name",
+							SimpleType: reportschema.SimpleTypeString,
 						},
 					},
 				},
@@ -364,18 +329,16 @@ func TestSchemaObjectClassification(t *testing.T) {
 		},
 		{
 			Name: "known object with properties that do not match exclude criteria but are the wrong type (bool)",
-			Input: schema.DataTypeDetection{
+			Input: schema.ClassificationRequest{
 				Filename:     "db/schema.rb",
 				DetectorType: detectors.DetectorRuby,
-				Value: &datatype.DataType{
-					Name: "accounts",
-					UUID: "1",
-					Type: reportschema.SimpleTypeObject,
-					Properties: map[string]datatype.DataTypable{
-						"first_name": &datatype.DataType{
-							Name: "first_name",
-							Type: reportschema.SimpleTypeBool,
-							UUID: "2",
+				Value: &schema.ClassificationRequestDetection{
+					Name:       "accounts",
+					SimpleType: reportschema.SimpleTypeObject,
+					Properties: []*schema.ClassificationRequestDetection{
+						{
+							Name:       "first_name",
+							SimpleType: reportschema.SimpleTypeBool,
 						},
 					},
 				},
@@ -391,18 +354,16 @@ func TestSchemaObjectClassification(t *testing.T) {
 		},
 		{
 			Name: "known object with properties that do not match any patterns",
-			Input: schema.DataTypeDetection{
+			Input: schema.ClassificationRequest{
 				Filename:     "db/schema.rb",
 				DetectorType: detectors.DetectorRuby,
-				Value: &datatype.DataType{
-					Name: "accounts",
-					UUID: "1",
-					Type: reportschema.SimpleTypeObject,
-					Properties: map[string]datatype.DataTypable{
-						"foo": &datatype.DataType{
-							Name: "foo",
-							Type: reportschema.SimpleTypeString,
-							UUID: "2",
+				Value: &schema.ClassificationRequestDetection{
+					Name:       "accounts",
+					SimpleType: reportschema.SimpleTypeObject,
+					Properties: []*schema.ClassificationRequestDetection{
+						{
+							Name:       "foo",
+							SimpleType: reportschema.SimpleTypeString,
 						},
 					},
 				},
@@ -418,18 +379,16 @@ func TestSchemaObjectClassification(t *testing.T) {
 		},
 		{
 			Name: "Known object - database detection - with invalid properties",
-			Input: schema.DataTypeDetection{
+			Input: schema.ClassificationRequest{
 				Filename:     "db/schema.rb",
 				DetectorType: detectors.DetectorSQL,
-				Value: &datatype.DataType{
-					Name: "accounts",
-					UUID: "1",
-					Type: reportschema.SimpleTypeObject,
-					Properties: map[string]datatype.DataTypable{
-						"bar": &datatype.DataType{
-							Name: "bar",
-							Type: reportschema.SimpleTypeString,
-							UUID: "2",
+				Value: &schema.ClassificationRequestDetection{
+					Name:       "accounts",
+					SimpleType: reportschema.SimpleTypeObject,
+					Properties: []*schema.ClassificationRequestDetection{
+						{
+							Name:       "bar",
+							SimpleType: reportschema.SimpleTypeString,
 						},
 					},
 				},
@@ -445,18 +404,16 @@ func TestSchemaObjectClassification(t *testing.T) {
 		},
 		{
 			Name: "Unknown object matching stop word",
-			Input: schema.DataTypeDetection{
+			Input: schema.ClassificationRequest{
 				Filename:     "application.js",
 				DetectorType: detectors.DetectorJavascript,
-				Value: &datatype.DataType{
-					Name: "prop types",
-					UUID: "1",
-					Type: reportschema.SimpleTypeObject,
-					Properties: map[string]datatype.DataTypable{
-						"lastname": &datatype.DataType{
-							Name: "lastname",
-							Type: reportschema.SimpleTypeString,
-							UUID: "2",
+				Value: &schema.ClassificationRequestDetection{
+					Name:       "prop types",
+					SimpleType: reportschema.SimpleTypeObject,
+					Properties: []*schema.ClassificationRequestDetection{
+						{
+							Name:       "lastname",
+							SimpleType: reportschema.SimpleTypeString,
 						},
 					},
 				},
@@ -471,77 +428,76 @@ func TestSchemaObjectClassification(t *testing.T) {
 		},
 		{
 			Name: "Unknown object with invalid properties",
-			Input: schema.DataTypeDetection{
+			Input: schema.ClassificationRequest{
 				Filename:     "db/structure.sql",
 				DetectorType: detectors.DetectorRails,
-				Value: &datatype.DataType{
-					Name: "foo",
-					UUID: "1",
-					Type: reportschema.SimpleTypeObject,
-					Properties: map[string]datatype.DataTypable{
-						"way_name": &datatype.DataType{
-							Name: "way_name",
-							Type: reportschema.SimpleTypeString,
+				Value: &schema.ClassificationRequestDetection{
+					Name:       "foo",
+					SimpleType: reportschema.SimpleTypeObject,
+					Properties: []*schema.ClassificationRequestDetection{
+						{
+							Name:       "way_name",
+							SimpleType: reportschema.SimpleTypeString,
 						},
-						"municipality_name": &datatype.DataType{
-							Name: "municipality_name",
-							Type: reportschema.SimpleTypeString,
+						{
+							Name:       "municipality_name",
+							SimpleType: reportschema.SimpleTypeString,
 						},
-						"linnworks_account_name": &datatype.DataType{
-							Name: "linnworks_account_name",
-							Type: reportschema.SimpleTypeString,
+						{
+							Name:       "linnworks_account_name",
+							SimpleType: reportschema.SimpleTypeString,
 						},
-						"return_company_name": &datatype.DataType{
-							Name: "return_company_name",
-							Type: reportschema.SimpleTypeString,
+						{
+							Name:       "return_company_name",
+							SimpleType: reportschema.SimpleTypeString,
 						},
-						"brandName": &datatype.DataType{
-							Name: "brandName",
-							Type: reportschema.SimpleTypeString,
+						{
+							Name:       "brandName",
+							SimpleType: reportschema.SimpleTypeString,
 						},
-						"fileName": &datatype.DataType{
-							Name: "fileName",
-							Type: reportschema.SimpleTypeString,
+						{
+							Name:       "fileName",
+							SimpleType: reportschema.SimpleTypeString,
 						},
-						"InvalidNumberOfParams": &datatype.DataType{
-							Name: "InvalidNumberOfParams",
-							Type: reportschema.SimpleTypeString,
+						{
+							Name:       "InvalidNumberOfParams",
+							SimpleType: reportschema.SimpleTypeString,
 						},
-						"prescription_template_id": &datatype.DataType{
-							Name: "prescription_template_id",
-							Type: reportschema.SimpleTypeString,
+						{
+							Name:       "prescription_template_id",
+							SimpleType: reportschema.SimpleTypeString,
 						},
-						"last_name_score": &datatype.DataType{
-							Name: "last_name_score",
-							Type: reportschema.SimpleTypeNumber,
+						{
+							Name:       "last_name_score",
+							SimpleType: reportschema.SimpleTypeNumber,
 						},
-						"studentApplicant.id": &datatype.DataType{
-							Name: "studentApplicant.id",
-							Type: reportschema.SimpleTypeString,
+						{
+							Name:       "studentApplicant.id",
+							SimpleType: reportschema.SimpleTypeString,
 						},
-						"studentapplicantTest.id": &datatype.DataType{
-							Name: "studentapplicantTest.id",
-							Type: reportschema.SimpleTypeString,
+						{
+							Name:       "studentapplicantTest.id",
+							SimpleType: reportschema.SimpleTypeString,
 						},
-						"return_seller_id": &datatype.DataType{
-							Name: "return_seller_id",
-							Type: reportschema.SimpleTypeString,
+						{
+							Name:       "return_seller_id",
+							SimpleType: reportschema.SimpleTypeString,
 						},
-						"seller_account_id": &datatype.DataType{
-							Name: "seller_account_id",
-							Type: reportschema.SimpleTypeString,
+						{
+							Name:       "seller_account_id",
+							SimpleType: reportschema.SimpleTypeString,
 						},
-						"customerReturnId": &datatype.DataType{
-							Name: "customerReturnId",
-							Type: reportschema.SimpleTypeString,
+						{
+							Name:       "customerReturnId",
+							SimpleType: reportschema.SimpleTypeString,
 						},
-						"lab_test_result_id": &datatype.DataType{
-							Name: "lab_test_result_id",
-							Type: reportschema.SimpleTypeString,
+						{
+							Name:       "lab_test_result_id",
+							SimpleType: reportschema.SimpleTypeString,
 						},
-						"master_product_category_updated_by_user_uuid": &datatype.DataType{
-							Name: "master_product_category_updated_by_user_uuid",
-							Type: reportschema.SimpleTypeString,
+						{
+							Name:       "master_product_category_updated_by_user_uuid",
+							SimpleType: reportschema.SimpleTypeString,
 						},
 					},
 				},
@@ -556,17 +512,16 @@ func TestSchemaObjectClassification(t *testing.T) {
 		},
 		{
 			Name: "Unknown object with db identifier but no associated object properties",
-			Input: schema.DataTypeDetection{
+			Input: schema.ClassificationRequest{
 				Filename:     "db/structure.sql",
 				DetectorType: detectors.DetectorRails,
-				Value: &datatype.DataType{
-					Name: "foo",
-					UUID: "1",
-					Type: reportschema.SimpleTypeObject,
-					Properties: map[string]datatype.DataTypable{
-						"applicants_id": &datatype.DataType{
-							Name: "applicants_id",
-							Type: reportschema.SimpleTypeString,
+				Value: &schema.ClassificationRequestDetection{
+					Name:       "foo",
+					SimpleType: reportschema.SimpleTypeObject,
+					Properties: []*schema.ClassificationRequestDetection{
+						{
+							Name:       "applicants_id",
+							SimpleType: reportschema.SimpleTypeString,
 						},
 					},
 				},
@@ -581,21 +536,20 @@ func TestSchemaObjectClassification(t *testing.T) {
 		},
 		{
 			Name: "Unknown object with db identifier and an associated object property",
-			Input: schema.DataTypeDetection{
+			Input: schema.ClassificationRequest{
 				Filename:     "db/structure.sql",
 				DetectorType: detectors.DetectorRails,
-				Value: &datatype.DataType{
-					Name: "foo",
-					UUID: "1",
-					Type: reportschema.SimpleTypeObject,
-					Properties: map[string]datatype.DataTypable{
-						"applicants_id": &datatype.DataType{
-							Name: "applicants_id",
-							Type: reportschema.SimpleTypeString,
+				Value: &schema.ClassificationRequestDetection{
+					Name:       "foo",
+					SimpleType: reportschema.SimpleTypeObject,
+					Properties: []*schema.ClassificationRequestDetection{
+						{
+							Name:       "applicants_id",
+							SimpleType: reportschema.SimpleTypeString,
 						},
-						"message": &datatype.DataType{
-							Name: "message",
-							Type: reportschema.SimpleTypeString,
+						{
+							Name:       "message",
+							SimpleType: reportschema.SimpleTypeString,
 						},
 					},
 				},
@@ -610,25 +564,24 @@ func TestSchemaObjectClassification(t *testing.T) {
 		},
 		{
 			Name: "ClientConfig object",
-			Input: schema.DataTypeDetection{
+			Input: schema.ClassificationRequest{
 				Filename:     "app.js",
 				DetectorType: detectors.DetectorJavascript,
-				Value: &datatype.DataType{
-					Name: "ClientConfig",
-					UUID: "1",
-					Type: reportschema.SimpleTypeObject,
-					Properties: map[string]datatype.DataTypable{
-						"service_name": &datatype.DataType{
-							Name: "service_name",
-							Type: reportschema.SimpleTypeString,
+				Value: &schema.ClassificationRequestDetection{
+					Name:       "ClientConfig",
+					SimpleType: reportschema.SimpleTypeObject,
+					Properties: []*schema.ClassificationRequestDetection{
+						{
+							Name:       "service_name",
+							SimpleType: reportschema.SimpleTypeString,
 						},
-						"instance_name": &datatype.DataType{
-							Name: "instance_name",
-							Type: reportschema.SimpleTypeString,
+						{
+							Name:       "instance_name",
+							SimpleType: reportschema.SimpleTypeString,
 						},
-						"matchLocationFromPhraseSetName": &datatype.DataType{
-							Name: "matchLocationFromPhraseSetName",
-							Type: reportschema.SimpleTypeString,
+						{
+							Name:       "matchLocationFromPhraseSetName",
+							SimpleType: reportschema.SimpleTypeString,
 						},
 					},
 				},
@@ -643,17 +596,16 @@ func TestSchemaObjectClassification(t *testing.T) {
 		},
 		{
 			Name: "IProps object with invalid properties",
-			Input: schema.DataTypeDetection{
+			Input: schema.ClassificationRequest{
 				Filename:     "application.js",
 				DetectorType: detectors.DetectorJavascript,
-				Value: &datatype.DataType{
-					Name: "IProps",
-					UUID: "1",
-					Type: reportschema.SimpleTypeObject,
-					Properties: map[string]datatype.DataTypable{
-						"fontFamily": &datatype.DataType{
-							Name: "fontFamily",
-							Type: reportschema.SimpleTypeString,
+				Value: &schema.ClassificationRequestDetection{
+					Name:       "IProps",
+					SimpleType: reportschema.SimpleTypeObject,
+					Properties: []*schema.ClassificationRequestDetection{
+						{
+							Name:       "fontFamily",
+							SimpleType: reportschema.SimpleTypeString,
 						},
 					},
 				},
@@ -668,17 +620,16 @@ func TestSchemaObjectClassification(t *testing.T) {
 		},
 		{
 			Name: "IProps object with valid properties",
-			Input: schema.DataTypeDetection{
+			Input: schema.ClassificationRequest{
 				Filename:     "application.js",
 				DetectorType: detectors.DetectorJavascript,
-				Value: &datatype.DataType{
-					Name: "IProps",
-					UUID: "1",
-					Type: reportschema.SimpleTypeObject,
-					Properties: map[string]datatype.DataTypable{
-						"national_identifier": &datatype.DataType{
-							Name: "national_identifier",
-							Type: reportschema.SimpleTypeString,
+				Value: &schema.ClassificationRequestDetection{
+					Name:       "IProps",
+					SimpleType: reportschema.SimpleTypeObject,
+					Properties: []*schema.ClassificationRequestDetection{
+						{
+							Name:       "national_identifier",
+							SimpleType: reportschema.SimpleTypeString,
 						},
 					},
 				},
@@ -693,21 +644,20 @@ func TestSchemaObjectClassification(t *testing.T) {
 		},
 		{
 			Name: "kbv_hm_diagnosis_groups object",
-			Input: schema.DataTypeDetection{
+			Input: schema.ClassificationRequest{
 				Filename:     "app.js",
 				DetectorType: detectors.DetectorJavascript,
-				Value: &datatype.DataType{
-					Name: "kbv_hm_diagnosis_groups",
-					UUID: "1",
-					Type: reportschema.SimpleTypeObject,
-					Properties: map[string]datatype.DataTypable{
-						"max_prescription_amount": &datatype.DataType{
-							Name: "max_prescription_amount",
-							Type: reportschema.SimpleTypeString,
+				Value: &schema.ClassificationRequestDetection{
+					Name:       "kbv_hm_diagnosis_groups",
+					SimpleType: reportschema.SimpleTypeObject,
+					Properties: []*schema.ClassificationRequestDetection{
+						{
+							Name:       "max_prescription_amount",
+							SimpleType: reportschema.SimpleTypeString,
 						},
-						"kbv_hma_prescription_requirement_id": &datatype.DataType{
-							Name: "kbv_hma_prescription_requirement_id",
-							Type: reportschema.SimpleTypeString,
+						{
+							Name:       "kbv_hma_prescription_requirement_id",
+							SimpleType: reportschema.SimpleTypeString,
 						},
 					},
 				},
@@ -722,21 +672,20 @@ func TestSchemaObjectClassification(t *testing.T) {
 		},
 		{
 			Name: "MiningPoolShares object",
-			Input: schema.DataTypeDetection{
+			Input: schema.ClassificationRequest{
 				Filename:     "app.js",
 				DetectorType: detectors.DetectorJavascript,
-				Value: &datatype.DataType{
-					Name: "MiningPoolShares",
-					UUID: "1",
-					Type: reportschema.SimpleTypeObject,
-					Properties: map[string]datatype.DataTypable{
-						"propertyName": &datatype.DataType{
-							Name: "propertyName",
-							Type: reportschema.SimpleTypeString,
+				Value: &schema.ClassificationRequestDetection{
+					Name:       "MiningPoolShares",
+					SimpleType: reportschema.SimpleTypeObject,
+					Properties: []*schema.ClassificationRequestDetection{
+						{
+							Name:       "propertyName",
+							SimpleType: reportschema.SimpleTypeString,
 						},
-						"accountName": &datatype.DataType{
-							Name: "accountName",
-							Type: reportschema.SimpleTypeString,
+						{
+							Name:       "accountName",
+							SimpleType: reportschema.SimpleTypeString,
 						},
 					},
 				},
@@ -751,21 +700,20 @@ func TestSchemaObjectClassification(t *testing.T) {
 		},
 		{
 			Name: "MiningPoolShares object",
-			Input: schema.DataTypeDetection{
+			Input: schema.ClassificationRequest{
 				Filename:     "app.js",
 				DetectorType: detectors.DetectorJavascript,
-				Value: &datatype.DataType{
-					Name: "MiningPoolShares",
-					UUID: "1",
-					Type: reportschema.SimpleTypeObject,
-					Properties: map[string]datatype.DataTypable{
-						"full_name": &datatype.DataType{
-							Name: "full_name",
-							Type: reportschema.SimpleTypeString,
+				Value: &schema.ClassificationRequestDetection{
+					Name:       "MiningPoolShares",
+					SimpleType: reportschema.SimpleTypeObject,
+					Properties: []*schema.ClassificationRequestDetection{
+						{
+							Name:       "full_name",
+							SimpleType: reportschema.SimpleTypeString,
 						},
-						"_AuthorName": &datatype.DataType{
-							Name: "_AuthorName",
-							Type: reportschema.SimpleTypeString,
+						{
+							Name:       "_AuthorName",
+							SimpleType: reportschema.SimpleTypeString,
 						},
 					},
 				},
@@ -780,21 +728,20 @@ func TestSchemaObjectClassification(t *testing.T) {
 		},
 		{
 			Name: "With valid extended data properties",
-			Input: schema.DataTypeDetection{
+			Input: schema.ClassificationRequest{
 				Filename:     "app.js",
 				DetectorType: detectors.DetectorJavascript,
-				Value: &datatype.DataType{
-					Name: "Foo",
-					UUID: "1",
-					Type: reportschema.SimpleTypeObject,
-					Properties: map[string]datatype.DataTypable{
-						"person_name": &datatype.DataType{
-							Name: "person_name",
-							Type: reportschema.SimpleTypeString,
+				Value: &schema.ClassificationRequestDetection{
+					Name:       "Foo",
+					SimpleType: reportschema.SimpleTypeObject,
+					Properties: []*schema.ClassificationRequestDetection{
+						{
+							Name:       "person_name",
+							SimpleType: reportschema.SimpleTypeString,
 						},
-						"fullName": &datatype.DataType{
-							Name: "fullName",
-							Type: reportschema.SimpleTypeString,
+						{
+							Name:       "fullName",
+							SimpleType: reportschema.SimpleTypeString,
 						},
 					},
 				},
@@ -809,17 +756,16 @@ func TestSchemaObjectClassification(t *testing.T) {
 		},
 		{
 			Name: "With valid extended data properties",
-			Input: schema.DataTypeDetection{
+			Input: schema.ClassificationRequest{
 				Filename:     "app.js",
 				DetectorType: detectors.DetectorJavascript,
-				Value: &datatype.DataType{
-					Name: "Agendas",
-					UUID: "1",
-					Type: reportschema.SimpleTypeObject,
-					Properties: map[string]datatype.DataTypable{
-						"last_email_reminder": &datatype.DataType{
-							Name: "last_email_reminder",
-							Type: reportschema.SimpleTypeString,
+				Value: &schema.ClassificationRequestDetection{
+					Name:       "Agendas",
+					SimpleType: reportschema.SimpleTypeObject,
+					Properties: []*schema.ClassificationRequestDetection{
+						{
+							Name:       "last_email_reminder",
+							SimpleType: reportschema.SimpleTypeString,
 						},
 					},
 				},
@@ -834,17 +780,16 @@ func TestSchemaObjectClassification(t *testing.T) {
 		},
 		{
 			Name: "With invalid object / field combination - AWS case",
-			Input: schema.DataTypeDetection{
+			Input: schema.ClassificationRequest{
 				Filename:     "app.js",
 				DetectorType: detectors.DetectorJavascript,
-				Value: &datatype.DataType{
-					Name: "AwsRequestSigning",
-					UUID: "1",
-					Type: reportschema.SimpleTypeObject,
-					Properties: map[string]datatype.DataTypable{
-						"service_name": &datatype.DataType{
-							Name: "service_name",
-							Type: reportschema.SimpleTypeString,
+				Value: &schema.ClassificationRequestDetection{
+					Name:       "AwsRequestSigning",
+					SimpleType: reportschema.SimpleTypeObject,
+					Properties: []*schema.ClassificationRequestDetection{
+						{
+							Name:       "service_name",
+							SimpleType: reportschema.SimpleTypeString,
 						},
 					},
 				},
@@ -859,17 +804,16 @@ func TestSchemaObjectClassification(t *testing.T) {
 		},
 		{
 			Name: "With invalid object / field combination - MetadataCredentialsFromPlugin case",
-			Input: schema.DataTypeDetection{
+			Input: schema.ClassificationRequest{
 				Filename:     "app.js",
 				DetectorType: detectors.DetectorJavascript,
-				Value: &datatype.DataType{
-					Name: "MetadataCredentialsFromPlugin",
-					UUID: "1",
-					Type: reportschema.SimpleTypeObject,
-					Properties: map[string]datatype.DataTypable{
-						"service_name": &datatype.DataType{
-							Name: "service_name",
-							Type: reportschema.SimpleTypeString,
+				Value: &schema.ClassificationRequestDetection{
+					Name:       "MetadataCredentialsFromPlugin",
+					SimpleType: reportschema.SimpleTypeObject,
+					Properties: []*schema.ClassificationRequestDetection{
+						{
+							Name:       "service_name",
+							SimpleType: reportschema.SimpleTypeString,
 						},
 					},
 				},

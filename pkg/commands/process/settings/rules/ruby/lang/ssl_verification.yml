@@ -1,10 +1,11 @@
 type: "risk"
 patterns:
   - |
-    Net::HTTP.start($_, $_, $_, :verify_mode => OpenSSL::SSL::VERIFY_NONE) do
-    end
+    Net::HTTP.start($<_>, $<_>, $<_>, :verify_mode => OpenSSL::SSL::VERIFY_NONE)
   - |
-    $_.verify_mode = OpenSSL::SSL::VERIFY_NONE
+    Net::HTTP.start($<_>, $<_>, $<_>, verify_mode: OpenSSL::SSL::VERIFY_NONE)
+  - |
+    $<_>.verify_mode = OpenSSL::SSL::VERIFY_NONE
 languages:
   - ruby
 detect_presence: true

@@ -2,15 +2,31 @@ type: "risk"
 languages:
   - ruby
 patterns:
-  - |
-    CSV.generate { <$DATA_TYPE> }
-  - |
-    CSV.generate do
-      <$DATA_TYPE>
-    end
   - pattern: |
-      $LIBRARY.open do
-        <$DATA_TYPE>
+      CSV.generate { $<DATA_TYPE> }
+    filters:
+      - variable: DATA_TYPE
+        detection: datatype
+  - pattern: |
+      CSV.generate do
+        $<DATA_TYPE>
+      end
+    filters:
+      - variable: DATA_TYPE
+        detection: datatype
+  - pattern: |
+      $<LIBRARY>.open { $<DATA_TYPE> }
+    filters:
+      - variable: LIBRARY
+        values:
+          - CSV
+          - File
+          - IO
+      - variable: DATA_TYPE
+        detection: datatype
+  - pattern: |
+      $<LIBRARY>.open do
+        $<DATA_TYPE>
       end
     filters:
       - variable: LIBRARY
@@ -18,9 +34,8 @@ patterns:
           - CSV
           - File
           - IO
-param_parenting: true
-metavars: {}
-stored: false
+      - variable: DATA_TYPE
+        detection: datatype
 trigger: "local"
 severity:
   default: "low"

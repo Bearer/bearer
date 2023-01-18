@@ -1,18 +1,10 @@
 type: "risk"
 patterns:
-  - |
-    cookies[...] = $ANYTHING
-  - |
-    session[...] = $ANYTHING
   - pattern: |
-      cookies.$METHOD_CHAIN[...] = $ANYTHING
+      session[] = $<DATA_TYPE>
     filters:
-      - variable: METHOD_CHAIN
-        values:
-          - permanent
-          - signed
-          - permanent.signed
-          - signed.permanent
+      - variable: DATA_TYPE
+        detection: datatype
 languages:
   - ruby
 trigger: "local"
