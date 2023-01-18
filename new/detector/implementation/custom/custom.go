@@ -73,7 +73,7 @@ func (detector *customDetector) DetectAt(
 			}
 
 			detections = append(detections, &types.Detection{
-				MatchNode: node,
+				MatchNode: result.MatchNode,
 				Data: Data{
 					Pattern:   pattern.Pattern,
 					Datatypes: datatypeDetections,

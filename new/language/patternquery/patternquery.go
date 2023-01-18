@@ -20,15 +20,16 @@ func Compile(
 	anonymousParentTypes []string,
 	input string,
 	variables []builder.Variable,
+	matchNodeOffset int,
 ) (*Query, error) {
-	builderResult, err := builder.Build(lang, anonymousParentTypes, input, variables)
+	builderResult, err := builder.Build(lang, anonymousParentTypes, input, variables, matchNodeOffset)
 	if err != nil {
 		return nil, fmt.Errorf("failed to build: %s", err)
 	}
 
 	treeQuery, err := lang.CompileQuery(builderResult.Query)
 	if err != nil {
-		return nil, fmt.Errorf("failed to compile: %s", err)
+		return nil, fmt.Errorf("failed to compile: %s, %s", err, builderResult.Query)
 	}
 
 	return &Query{
@@ -39,13 +40,13 @@ func Compile(
 	}, nil
 }
 
-func (query *Query) MatchAt(node *tree.Node) ([]tree.QueryResult, error) {
+func (query *Query) MatchAt(node *tree.Node) ([]*types.PatternQueryResult, error) {
 	treeResults, err := query.treeQuery.MatchAt(node)
 	if err != nil {
 		return nil, err
 	}
 
-	var results []tree.QueryResult
+	var results []*types.PatternQueryResult
 
 	for _, treeResult := range treeResults {
 		result := query.matchAndTranslateTreeResult(treeResult)
@@ -57,7 +58,7 @@ func (query *Query) MatchAt(node *tree.Node) ([]tree.QueryResult, error) {
 	return results, nil
 }
 
-func (query *Query) MatchOnceAt(node *tree.Node) (tree.QueryResult, error) {
+func (query *Query) MatchOnceAt(node *tree.Node) (*types.PatternQueryResult, error) {
 	treeResult, err := query.treeQuery.MatchOnceAt(node)
 	if err != nil {
 		return nil, err
@@ -70,7 +71,7 @@ func (query *Query) Close() {
 	query.treeQuery.Close()
 }
 
-func (query *Query) matchAndTranslateTreeResult(treeResult tree.QueryResult) tree.QueryResult {
+func (query *Query) matchAndTranslateTreeResult(treeResult tree.QueryResult) *types.PatternQueryResult {
 	if treeResult == nil {
 		return nil
 	}
@@ -91,11 +92,25 @@ func (query *Query) matchAndTranslateTreeResult(treeResult tree.QueryResult) tre
 		}
 	}
 
-	result := make(tree.QueryResult)
+	variables := make(tree.QueryResult)
 
 	for paramName, node := range treeResult {
-		result[query.paramToVariable[paramName]] = node
+		variables[query.paramToVariable[paramName]] = node
 	}
 
-	return result
+	return &types.PatternQueryResult{
+		MatchNode: getMatchNode(treeResult["match"]),
+		Variables: variables,
+	}
+}
+
+func getMatchNode(node *tree.Node) *tree.Node {
+	for {
+		parent := node.Parent()
+		if parent == nil || parent.StartByte() != node.StartByte() {
+			return node
+		}
+
+		node = parent
+	}
 }

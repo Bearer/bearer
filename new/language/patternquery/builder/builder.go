@@ -32,6 +32,8 @@ type builder struct {
 	variables            []Variable
 	variableToParams     map[string][]string
 	paramToContent       map[string]string
+	matchNodeOffset      int
+	matchNodeFound       bool
 }
 
 func Build(
@@ -39,6 +41,7 @@ func Build(
 	anonymousParentTypes []string,
 	input string,
 	variables []Variable,
+	matchNodeOffset int,
 ) (*Result, error) {
 	tree, err := lang.Parse(input)
 	if err != nil {
@@ -57,9 +60,16 @@ func Build(
 		variables:            variables,
 		variableToParams:     make(map[string][]string),
 		paramToContent:       make(map[string]string),
+		matchNodeOffset:      matchNodeOffset,
 	}
 
-	return builder.build(tree.RootNode().Child(0)), nil
+	result := builder.build(tree.RootNode().Child(0))
+
+	if !builder.matchNodeFound {
+		return nil, fmt.Errorf("match node not found")
+	}
+
+	return result, nil
 }
 
 func (builder *builder) build(rootNode *tree.Node) *Result {
@@ -88,14 +98,24 @@ func (builder *builder) compileNode(node *tree.Node) error {
 		)
 	}
 
+	writeMatch := false
+	if !builder.matchNodeFound && node.StartByte() == builder.matchNodeOffset {
+		builder.matchNodeFound = true
+		writeMatch = true
+	}
+
 	if variable := builder.getVariableFor(node); variable != nil {
 		builder.compileVariableNode(variable)
 	} else if !node.IsNamed() {
 		builder.compileAnonymousNode(node)
 	} else if node.ChildCount() == 0 {
 		builder.compileLeafNode(node)
-	} else {
-		return builder.compileNodeWithChildren(node)
+	} else if err := builder.compileNodeWithChildren(node); err != nil {
+		return err
+	}
+
+	if writeMatch {
+		builder.write(" @match")
 	}
 
 	return nil
