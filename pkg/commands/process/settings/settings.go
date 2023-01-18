@@ -278,7 +278,6 @@ func DefaultPolicies() map[string]*Policy {
 		log.Fatal().Msgf("failed to unmarshal policy file %e", err)
 	}
 
-	log.Error().Msgf("policy %#v", policy)
 	for _, policy := range policy {
 		policies[policy.Type] = policy
 	}

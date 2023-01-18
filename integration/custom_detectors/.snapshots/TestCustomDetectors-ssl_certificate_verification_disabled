@@ -5,8 +5,10 @@ data_types:
           locations:
             - filename: integration/custom_detectors/testdata/ruby/ssl_certificate_verification_disabled.rb
               line_number: 1
+              field_name: gender_identity
+              object_name: user
 risks:
-    - detector_id: ssl_certificate_verification_disabled
+    - detector_id: ruby_lang_ssl_verification
       locations:
         - filename: integration/custom_detectors/testdata/ruby/ssl_certificate_verification_disabled.rb
           line_number: 4

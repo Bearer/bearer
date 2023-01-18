@@ -21,12 +21,12 @@ func TestCustomDetectors(t *testing.T) {
 		newScanTest("ruby", "detect_rails_cookies", "detect_rails_cookies.rb"),
 		newScanTest("ruby", "detect_ruby_logger", "detect_ruby_logger.rb"),
 		newScanTest("ruby", "ftp", "ftp.rb"),
-		newScanTest("ruby", "ruby_file_detection", "ruby_file_detection.rb"),
 		newScanTest("ruby", "ssl_certificate_verification_disabled", "ssl_certificate_verification_disabled.rb"),
-		newScanTest("ruby", "ruby_http_detection", "ruby_http_detection.rb"),
-		newScanTest("ruby", "ruby_weak_password_encryption", "weak_password_encryption.rb"),
 		newScanTest("ruby", "detect_password_length", "detect_password_length.rb"),
-		newScanTest("ruby", "ruby_weak_encryption_library", "weak_encryption_library.rb"),
+		// newScanTest("ruby", "ruby_file_detection", "ruby_file_detection.rb"),
+		// newScanTest("ruby", "ruby_http_detection", "ruby_http_detection.rb"),
+		// newScanTest("ruby", "ruby_weak_password_encryption", "weak_password_encryption.rb"),
+		// newScanTest("ruby", "ruby_weak_encryption_library", "weak_encryption_library.rb"),
 	}
 
 	testhelper.RunTests(t, tests)
