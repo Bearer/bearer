@@ -256,8 +256,6 @@ detect_encrypted_ruby_class_properties:
       filters:
         - variable: DATA_TYPE
           detection: datatype
-  root_singularize: true
-  root_lowercase: true
   languages:
     - ruby
 detect_sql_create_public_table:
