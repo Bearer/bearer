@@ -98,7 +98,7 @@ pre[class*="language-"] {
 .token.atrule,
 .token.attr-value,
 .token.keyword {
-  color: #0077aa;
+  color: #4fc0f0;
 }
 .token.function {
   color: #d4bcf8;
