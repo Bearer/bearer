@@ -17,16 +17,25 @@ Ready to dive in? Curio's [reports](/explanations/reports/) are your path to ana
 
 ## Explanations
 
+Explanations dive into the rational behind Curio and explain some of its heavier concepts.
+
 - [How Curio discovers and classifies data](/explanations/discovery-and-classification/)
 - [Curio's report types](/explanations/reports/)
 
-<!-- ## How-to
-
-Coming soon... -->
-
 ## Reference
+
+Reference documents are where you'll find detailed information about each command, as well as support charges for languages, policies, datatypes, and more.
 
 - [Commands](/reference/commands/)
 - [Supported Data Types](/reference/datatypes/)
 - [Built-in Policies](/reference/policies/)
 - [Supported Languages](/reference/supported-languages/)
+
+## Contributing
+
+We'd love to see the impact you can bring to Curio. Our contributing documentation will help get you started, whether you want to dive deep into the code or simply fix a typo.
+
+- [Get started contributing to Curio](/contributing/)
+- [Set up Curio locally to contribute code](/contributing/code/)
+- [Help improve and apply fixes to the documentation](/contributing/docs/)
+- [Add new recipes to Curio's database](/contributing/recipes/)
