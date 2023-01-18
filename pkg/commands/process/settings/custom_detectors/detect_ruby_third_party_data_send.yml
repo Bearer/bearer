@@ -1,15 +1,23 @@
 type: "risk"
 patterns:
-  - |
-    Sentry::Breadcrumb.new(<$ARGUMENT>)
-  - |
-    Sentry.init do |config|
-      config.before_breadcrumb = lambda do |breadcrumb, hint|
-        breadcrumb.message = $ANYTHING
-        breadcrumb
+  - pattern: |
+      Sentry::Breadcrumb.new($<DATA_TYPE>)
+    filters:
+      - variable: DATA_TYPE
+        detection: datatype
+  - pattern: |
+      Sentry.init do |config|
+        config.before_breadcrumb = lambda do |$<BREADCRUMB:identifier>, $<_:identifier>|
+          $<BREADCRUMB>.message = $<DATA_TYPE>
+        end
       end
-    end
-  - |
-    Sentry.set_user(<$ARGUMENT>)
+    filters:
+      - variable: DATA_TYPE
+        detection: datatype
+  - pattern: |
+      Sentry.set_user($<DATA_TYPE>)
+    filters:
+      - variable: DATA_TYPE
+        detection: datatype
 languages:
   - ruby

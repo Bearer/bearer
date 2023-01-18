@@ -1,24 +1,36 @@
 type: "risk"
 patterns:
-  - |
-    Digest::SHA1.hexidigest(<$DATA_TYPE>)
-  - |
-    Digest::MD5.hexdigest(<$DATA_TYPE>)
   - pattern: |
-      OpenSSL::PKey::$LIBRARY.new($_, <$DATA_TYPE>)
+      Digest::SHA1.hexidigest($<DATA_TYPE>)
+    filters:
+      - variable: DATA_TYPE
+        detection: datatype
+  - pattern: |
+      Digest::MD5.hexdigest($<DATA_TYPE>)
+    filters:
+      - variable: DATA_TYPE
+        detection: datatype
+  - pattern: |
+      OpenSSL::PKey::$<LIBRARY>.new($<_>, $<DATA_TYPE>)
     filters:
       - variable: LIBRARY
       - values:
           - DSA
           - RSA
+      - variable: DATA_TYPE
+        detection: datatype
   - pattern: |
-      RC4.new(...).encrypt(<$DATA_TYPE>)
-    filters: []
+      RC4.new().encrypt($<DATA_TYPE>)
+    filters:
+      - variable: DATA_TYPE
+        detection: datatype
   - pattern: |
-      OpenSSL::PKey::RSA.new($_, <$DATA_TYPE>)
-    filters: []
+      OpenSSL::PKey::RSA.new($<_>, $<DATA_TYPE>)
+    filters:
+      - variable: DATA_TYPE
+        detection: datatype
   - pattern: |
-      OpenSSL::PKey::RSA.new(...).$METHOD(<$DATA_TYPE>)
+      OpenSSL::PKey::RSA.new().$<METHOD>($<DATA_TYPE>)
     filters:
       - variable: METHOD
         values:
@@ -26,13 +38,17 @@ patterns:
           - private_encrypt
           - public_decrypt
           - public_encrypt
+      - variable: DATA_TYPE
+        detection: datatype
   - pattern: |
-      OpenSSL::PKey::DSA.new($_, <$DATA_TYPE>)
-    filters: []
-  - pattern: |
-      OpenSSL::PKey::$LIBRARY.new(...).$METHOD($_, <$DATA_TYPE>)
+      OpenSSL::PKey::DSA.new($<_>, $<DATA_TYPE>)
     filters:
-      - variable: $LIBRARY
+      - variable: DATA_TYPE
+        detection: datatype
+  - pattern: |
+      OpenSSL::PKey::$<LIBRARY>.new().$<METHOD>($<_>, $<DATA_TYPE>)
+    filters:
+      - variable: LIBRARY
         values:
           - DSA
           - RSA
@@ -41,11 +57,10 @@ patterns:
           - export
           - to_pem
           - to_s
+      - variable: DATA_TYPE
+        detection: datatype
   - pattern: |
-      Crypt::Blowfish.new(...).encrypt_pair
-    filters: []
-  - pattern: |
-      Crypt::Blowfish.new(...).$METHOD(<$DATA_TYPE>)
+      Crypt::Blowfish.new().$<METHOD>($<DATA_TYPE>)
     filters:
       - variable: METHOD
         values:
@@ -55,5 +70,7 @@ patterns:
           - decrypt_pair
           - decrypt_string
           - decrypt_block
+      - variable: DATA_TYPE
+        detection: datatype
 languages:
   - "ruby"

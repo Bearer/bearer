@@ -6,4 +6,3 @@ patterns:
     Net::FTP.open()
 languages:
   - ruby
-detect_presence: true

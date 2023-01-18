@@ -2,10 +2,13 @@ type: "risk"
 languages:
   - ruby
 patterns:
-  - |
-    URI(<$INSECURE_URL>)
   - pattern: |
-      $CLIENT.get(<$INSECURE_URL>)
+      URI($<INSECURE_URL>)
+    filters:
+      - variable: INSECURE_URL
+        detection: insecure_url
+  - pattern: |
+      $<CLIENT>.get($<INSECURE_URL>)
     filters:
       - variable: CLIENT
         values:
@@ -17,4 +20,6 @@ patterns:
           - HTTPX
           - RestClient
           - Typhoeus
-detect_presence: true
+    filters:
+      - variable: INSECURE_URL
+        detection: insecure_url

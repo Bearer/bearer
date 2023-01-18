@@ -1,7 +1,6 @@
 type: "risk"
 patterns:
   - |
-    $_ = OpenSSL::PKey::RSA.new()
+    $<_> = OpenSSL::PKey::RSA.new()
 languages:
   - "ruby"
-detect_presence: true

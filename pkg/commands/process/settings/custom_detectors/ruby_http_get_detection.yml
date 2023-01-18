@@ -2,12 +2,18 @@ type: "risk"
 languages:
   - ruby
 patterns:
-  - |
-    URI.encode_www_form(<$DATA_TYPE>)
-  - |
-    URI(<$DATA_TYPE>)
   - pattern: |
-      $CLIENT.get(<$DATA_TYPE>)
+      URI.encode_www_form($<DATA_TYPE>)
+    filters:
+      - variable: DATA_TYPE
+        detection: datatype
+  - pattern: |
+      URI($<DATA_TYPE>)
+    filters:
+      - variable: DATA_TYPE
+        detection: datatype
+  - pattern: |
+      $<CLIENT>.get($<DATA_TYPE>)
     filters:
       - variable: CLIENT
         values:
@@ -19,4 +25,5 @@ patterns:
           - HTTPX
           - RestClient
           - Typhoeus
-stored: false
+      - variable: DATA_TYPE
+        detection: datatype
