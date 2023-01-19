@@ -4,13 +4,12 @@ import (
 	"github.com/bearer/curio/pkg/commands/process/settings"
 	"github.com/bearer/curio/pkg/detectors/custom/config"
 	"github.com/bearer/curio/pkg/parser"
-	parserdatatype "github.com/bearer/curio/pkg/parser/datatype"
 	"github.com/bearer/curio/pkg/parser/nodeid"
 	"github.com/bearer/curio/pkg/report/schema/datatype"
 )
 
 type Detector interface {
-	ExtractArguments(node *parser.Node, idGenerator nodeid.Generator, variableReconciliation *parserdatatype.ReconciliationRequest) (map[parser.NodeID]*datatype.DataType, error)
+	ExtractArguments(node *parser.Node, idGenerator nodeid.Generator) (map[parser.NodeID]*datatype.DataType, error)
 	CompilePattern(rulePattern settings.RulePattern, idGenerator nodeid.Generator) (config.CompiledRule, error)
 	IsParam(node *parser.Node) (bool, bool, *config.Param)
 	Annotate(tree *parser.Tree) error

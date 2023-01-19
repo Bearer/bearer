@@ -3,13 +3,12 @@ package customdetector
 import (
 	"github.com/bearer/curio/pkg/detectors/sql/util"
 	"github.com/bearer/curio/pkg/parser"
-	parserdatatype "github.com/bearer/curio/pkg/parser/datatype"
 	"github.com/bearer/curio/pkg/parser/nodeid"
 	"github.com/bearer/curio/pkg/report/schema"
 	schemadatatype "github.com/bearer/curio/pkg/report/schema/datatype"
 )
 
-func (detector *Detector) ExtractArguments(node *parser.Node, idGenerator nodeid.Generator, variableReconciliation *parserdatatype.ReconciliationRequest) (map[parser.NodeID]*schemadatatype.DataType, error) {
+func (detector *Detector) ExtractArguments(node *parser.Node, idGenerator nodeid.Generator) (map[parser.NodeID]*schemadatatype.DataType, error) {
 	if node == nil {
 		return nil, nil
 	}
