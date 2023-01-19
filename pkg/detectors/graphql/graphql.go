@@ -11,6 +11,7 @@ import (
 	"github.com/bearer/curio/pkg/report/detectors"
 	"github.com/bearer/curio/pkg/report/schema"
 	"github.com/bearer/curio/pkg/util/file"
+	"github.com/gertd/go-pluralize"
 
 	reporttypes "github.com/bearer/curio/pkg/report"
 )
@@ -78,13 +79,21 @@ func (detector *detector) ExtractFromSchema(
 		objectUUID := uuidHolder.Assign(objectNode.ID(), detector.idGenerator)
 		fieldUUID := uuidHolder.Assign(fieldNode.ID(), detector.idGenerator)
 
+		normalizedObjectName := ""
+		normalizedFieldName := ""
+		pluralizer := pluralize.NewClient()
+		normalizedObjectName = pluralizer.Singular(strings.ToLower(objectName))
+		normalizedFieldName = pluralizer.Singular(strings.ToLower(fieldName))
+
 		currentSchema := schema.Schema{
-			ObjectName:      objectName,
-			ObjectUUID:      objectUUID,
-			FieldName:       fieldName,
-			FieldType:       fieldType,
-			FieldUUID:       fieldUUID,
-			SimpleFieldType: convertType(fieldType),
+			ObjectName:           objectName,
+			ObjectUUID:           objectUUID,
+			FieldName:            fieldName,
+			FieldType:            fieldType,
+			FieldUUID:            fieldUUID,
+			SimpleFieldType:      convertType(fieldType),
+			NormalizedObjectName: normalizedObjectName,
+			NormalizedFieldName:  normalizedFieldName,
 		}
 
 		if report.SchemaGroupShouldClose(objectName) {

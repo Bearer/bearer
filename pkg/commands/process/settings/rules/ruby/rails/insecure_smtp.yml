@@ -1,0 +1,27 @@
+type: "risk"
+patterns:
+  - |
+    Rails.application.configure do
+      config.action_mailer.smtp_settings = {
+        $<!>openssl_verify_mode: OpenSSL::SSL::VERIFY_NONE
+      }
+    end
+  - |
+    Rails.application.configure do
+      config.action_mailer.smtp_settings = {
+        $<!>openssl_verify_mode: "none"
+      }
+    end
+languages:
+  - ruby
+trigger: "global"
+severity:
+  default: "low"
+  PII: "critical"
+  PHI: "medium"
+  PD: "high"
+metadata:
+  failure_message: "failure message DSW-003"
+  description: "description DSW-003"
+  remediation_message: "remediation message DSW-003"
+  dsw_id: "DSW-003"

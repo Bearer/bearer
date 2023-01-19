@@ -46,7 +46,8 @@ func (query *Query) MatchAt(node *Node) ([]QueryResult, error) {
 			return nil, errors.New("missing @root capture in tree sitter query")
 		}
 
-		// FIXME
+		// The query could return nodes other than the one we're interested in
+		// Revisit if https://github.com/tree-sitter/tree-sitter/issues/1212 gets implemented
 		if node.Equal(resultRoot) {
 			results = append(results, result)
 		}

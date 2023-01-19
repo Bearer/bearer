@@ -1,0 +1,53 @@
+risks:
+    - detector_id: ruby_rails_insecure_ftp
+      locations:
+        - filename: pkg/commands/process/settings/rules/ruby/rails/insecure_ftp.rb
+          line_number: 10
+          parent:
+            line_number: 10
+            content: Net::FTP.new("ftp.ruby-lang.org")
+          content: |
+            Net::FTP.new()
+        - filename: pkg/commands/process/settings/rules/ruby/rails/insecure_ftp.rb
+          line_number: 10
+          parent:
+            line_number: 10
+            content: Net::FTP.new("ftp.ruby-lang.org")
+          content: |
+            Net::FTP.new()
+        - filename: pkg/commands/process/settings/rules/ruby/rails/insecure_ftp.rb
+          line_number: 17
+          parent:
+            line_number: 17
+            content: |-
+                Net::FTP.open('example.com') do |ftp|
+                  ftp.login
+                  files = ftp.chdir('pub/lang/ruby/contrib')
+                  files = ftp.list('n*')
+                  ftp.getbinaryfile('nif.rb-0.91.gz', 'nif.gz', 1024)
+                end
+          content: |
+            Net::FTP.open()
+        - filename: pkg/commands/process/settings/rules/ruby/rails/insecure_ftp.rb
+          line_number: 24
+          parent:
+            line_number: 24
+            content: |-
+                Net::FTP.open("ftp.site.com") do |ftp|
+                  file = Tempfile.new("user_data")
+                  begin
+                    file << { user: { ethnicity: "martian" } }.to_json
+                    file.close
+
+                    ftp.puttextfile(file.path, "/users/123.json")
+                  ensure
+                    file.close!
+                  end
+                end
+          content: |
+            Net::FTP.open()
+components: []
+
+
+--
+

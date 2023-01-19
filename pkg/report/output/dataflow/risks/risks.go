@@ -40,6 +40,8 @@ type fileHolder struct {
 	name       string
 	lineNumber int
 	parent     *schema.Parent
+	fieldName  string
+	objectName string
 }
 
 func New(config settings.Config, isInternal bool) *Holder {
@@ -98,14 +100,20 @@ func (holder *Holder) AddSchema(detection detections.Detection) error {
 	}
 
 	if classification.Decision.State == classify.Valid {
-		holder.addDatatype(string(detection.DetectorType), classification.DataType, detection.Source.Filename, *detection.Source.LineNumber, schema.Parent)
+		holder.addDatatype(
+			string(detection.DetectorType),
+			classification.DataType,
+			detection.Source.Filename,
+			*detection.Source.LineNumber,
+			schema,
+		)
 	}
 
 	return nil
 }
 
 // addDatatype adds detector to hash list and at the same time blocks duplicates
-func (holder *Holder) addDatatype(ruleName string, datatype *db.DataType, fileName string, lineNumber int, parent *schema.Parent) {
+func (holder *Holder) addDatatype(ruleName string, datatype *db.DataType, fileName string, lineNumber int, schema schema.Schema) {
 	// create detector entry if it doesn't exist
 	if _, exists := holder.detectors[ruleName]; !exists {
 		holder.detectors[ruleName] = detectorHolder{
@@ -141,7 +149,9 @@ func (holder *Holder) addDatatype(ruleName string, datatype *db.DataType, fileNa
 	detectorDatatype.files[fileName][lineNumber] = &fileHolder{
 		name:       fileName,
 		lineNumber: lineNumber,
-		parent:     parent,
+		parent:     schema.Parent,
+		fieldName:  schema.FieldName,
+		objectName: schema.ObjectName,
 	}
 }
 
@@ -180,6 +190,8 @@ func (holder *Holder) ToDataFlow() []interface{} {
 						Filename:   location.name,
 						LineNumber: location.lineNumber,
 						Parent:     location.parent,
+						FieldName:  location.fieldName,
+						ObjectName: location.objectName,
 					})
 				}
 			}

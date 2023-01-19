@@ -6,20 +6,19 @@ import (
 )
 
 type CompiledRule struct {
-	RuleName               string
-	Tree                   string
-	Query                  *sitter.Query
-	Params                 []Param
-	Metavars               map[string]settings.MetaVar
-	Filters                []settings.PatternFilter
-	ParamParenting         bool
-	RootSingularize        bool
-	RootLowercase          bool
-	VariableReconciliation bool
-	Language               string
-	DetectPresence         bool
-	Pattern                string
-	OmitParent             bool
+	RuleName        string
+	Tree            string
+	Query           *sitter.Query
+	Params          []Param
+	Metavars        map[string]settings.MetaVar
+	Filters         []settings.PatternFilter
+	ParamParenting  bool
+	RootSingularize bool
+	RootLowercase   bool
+	Language        string
+	DetectPresence  bool
+	Pattern         string
+	OmitParent      bool
 }
 
 func (rule *CompiledRule) GetParamByPatternName(name string) *Param {

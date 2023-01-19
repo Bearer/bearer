@@ -1,0 +1,30 @@
+risks:
+    - detector_id: ruby_rails_insecure_smtp
+      locations:
+        - filename: pkg/commands/process/settings/rules/ruby/rails/insecure_smtp.rb
+          line_number: 10
+          parent:
+            line_number: 10
+            content: 'openssl_verify_mode: OpenSSL::SSL::VERIFY_NONE'
+          content: |
+            Rails.application.configure do
+              config.action_mailer.smtp_settings = {
+                $<!>openssl_verify_mode: OpenSSL::SSL::VERIFY_NONE
+              }
+            end
+        - filename: pkg/commands/process/settings/rules/ruby/rails/insecure_smtp.rb
+          line_number: 16
+          parent:
+            line_number: 16
+            content: 'openssl_verify_mode: "none"'
+          content: |
+            Rails.application.configure do
+              config.action_mailer.smtp_settings = {
+                $<!>openssl_verify_mode: "none"
+              }
+            end
+components: []
+
+
+--
+
