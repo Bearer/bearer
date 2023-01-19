@@ -39,10 +39,10 @@ func (implementation *rubyImplementation) SitterLanguage() *sitter.Language {
 	return ruby.GetLanguage()
 }
 
-func (implementation *rubyImplementation) AnalyzeFlow(rootNode *tree.Node) {
+func (implementation *rubyImplementation) AnalyzeFlow(rootNode *tree.Node) error {
 	scope := make(map[string]*tree.Node)
 
-	rootNode.Walk(func(node *tree.Node) error {
+	return rootNode.Walk(func(node *tree.Node, visitChildren func() error) error {
 		switch node.Type() {
 		case "method":
 			scope = make(map[string]*tree.Node)
@@ -51,9 +51,12 @@ func (implementation *rubyImplementation) AnalyzeFlow(rootNode *tree.Node) {
 			right := node.ChildByFieldName("right")
 
 			if left.Type() == "identifier" {
-				scope[left.Content()] = node
+				err := visitChildren()
 
+				scope[left.Content()] = node
 				node.UnifyWith(right)
+
+				return err
 			}
 		case "identifier":
 			parent := node.Parent()
@@ -65,7 +68,7 @@ func (implementation *rubyImplementation) AnalyzeFlow(rootNode *tree.Node) {
 			}
 		}
 
-		return nil
+		return visitChildren()
 	})
 }
 
