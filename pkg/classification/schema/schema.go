@@ -17,7 +17,7 @@ var regexpTimestampsMatcher = regexp.MustCompile(`\A(created|updated)\sat\z`)
 type ClassifiedDatatype struct {
 	Name           string
 	Properties     []*ClassifiedDatatype
-	Classification Classification `json:"classification" yaml:"classification"`
+	Classification Classification
 }
 
 func (datatype ClassifiedDatatype) GetClassification() interface{} {
