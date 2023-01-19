@@ -15,6 +15,7 @@ import (
 	"github.com/bearer/curio/new/detector/types"
 	detectortypes "github.com/bearer/curio/new/detector/types"
 	"github.com/bearer/curio/new/language"
+	"github.com/bearer/curio/new/language/tree"
 	languagetypes "github.com/bearer/curio/new/language/types"
 	"github.com/bearer/curio/pkg/classification"
 	"github.com/bearer/curio/pkg/commands/process/settings"
@@ -24,6 +25,7 @@ import (
 	"github.com/bearer/curio/pkg/report/schema"
 	"github.com/bearer/curio/pkg/report/source"
 	"github.com/bearer/curio/pkg/util/file"
+	"github.com/rs/zerolog/log"
 	"golang.org/x/exp/slices"
 )
 
@@ -141,12 +143,63 @@ func (composition *Composition) DetectFromFile(report report.Report, file *file.
 	evaluator := evaluator.New(composition.detectorSet, tree, file.FileInfo.Name())
 
 	composition.extractCustomDetectors(evaluator, tree, file, report)
+	// composition.extractDatatype(evaluator, tree, file, report)
+
+	return nil
+}
+
+func (composition *Composition) extractDatatype(evaluator types.Evaluator, tree *tree.Tree, file *file.FileInfo, report report.Report) error {
+	detections, err := evaluator.ForTree(tree.RootNode(), "datatype")
+	if err != nil {
+		return err
+	}
+
+	log.Debug().Msgf("got %d datatype detections", len(detections))
+
+	for _, detection := range detections {
+		data := detection.Data.(datatype.Data)
+
+		report.AddDetection(reportdetections.TypeSchemaClassified, detectors.Type("datatype:data"), source.New(
+			file,
+			file.Path,
+			detection.MatchNode.LineNumber(),
+			detection.MatchNode.ColumnNumber(),
+			"",
+		), schema.Schema{
+			Classification: data.Classification,
+			Parent: &schema.Parent{
+				LineNumber: detection.MatchNode.LineNumber(),
+				Content:    detection.MatchNode.Content(),
+			},
+			FieldName: data.Properties[0].Name,
+		})
+
+		if len(data.Properties) != 1 {
+			log.Fatal().Msgf("len is %d, %#v", len(data.Properties), data.Properties)
+		}
+
+		// for _, property := range data.Properties {
+		// 	report.AddDetection(reportdetections.TypeSchemaClassified, detectors.Type("datatype:data"), source.New(
+		// 		file,
+		// 		file.Path,
+		// 		property.Detection.MatchNode.LineNumber(),
+		// 		property.Detection.MatchNode.ColumnNumber(),
+		// 		"",
+		// 	), schema.Schema{
+		// 		Classification: property.Classification,
+		// 		Parent: &schema.Parent{
+		// 			LineNumber: property.Detection.MatchNode.LineNumber(),
+		// 			Content:    property.Detection.MatchNode.Content(),
+		// 		},
+		// 	})
+		// }
+	}
 
 	return nil
 }
 
 func (composition *Composition) extractCustomDetectors(evaluator types.Evaluator, tree *tree.Tree, file *file.FileInfo, report report.Report) error {
-	for _, detectorType := range composition.customDetectorTypes {
+	for _, detectorType := range append(composition.customDetectorTypes) {
 		detections, err := evaluator.ForTree(tree.RootNode(), detectorType)
 		if err != nil {
 			return err
@@ -187,7 +240,7 @@ func (composition *Composition) extractCustomDetectors(evaluator types.Evaluator
 					file.Path,
 					datatypeDetection.MatchNode.LineNumber(),
 					datatypeDetection.MatchNode.ColumnNumber(),
-					"",
+					"fixme",
 				), schema.Schema{
 					Classification: data.Classification,
 					Parent: &schema.Parent{
@@ -202,7 +255,7 @@ func (composition *Composition) extractCustomDetectors(evaluator types.Evaluator
 						file.Path,
 						property.Detection.MatchNode.LineNumber(),
 						property.Detection.MatchNode.ColumnNumber(),
-						"",
+						"fixme",
 					), schema.Schema{
 						Classification: property.Classification,
 						Parent: &schema.Parent{

@@ -6,6 +6,7 @@ import (
 	"github.com/bearer/curio/new/detector/types"
 	"github.com/bearer/curio/new/language/tree"
 	languagetypes "github.com/bearer/curio/new/language/types"
+	"github.com/rs/zerolog/log"
 )
 
 type Data struct {
@@ -21,6 +22,8 @@ type objectDetector struct {
 	parentPairQuery *tree.Query
 	// class
 	classNameQuery *tree.Query
+	// properties
+	propertiesQuery *tree.Query
 }
 
 func New(lang languagetypes.Language) (types.Detector, error) {
@@ -48,11 +51,18 @@ func New(lang languagetypes.Language) (types.Detector, error) {
 		return nil, fmt.Errorf("error compiling class name query: %s", err)
 	}
 
+	// user.name
+	propertiesQuery, err := lang.CompileQuery(`(call receiver: (_) @receiver method: (identifier) @method) @root`)
+	if err != nil {
+		return nil, fmt.Errorf("error compiling class name query: %s", err)
+	}
+
 	return &objectDetector{
 		hashPairQuery:   hashPairQuery,
 		assignmentQuery: assignmentQuery,
 		parentPairQuery: parentPairQuery,
 		classNameQuery:  classNameQuery,
+		propertiesQuery: propertiesQuery,
 	}, nil
 }
 
@@ -79,7 +89,96 @@ func (detector *objectDetector) DetectAt(
 		return detections, err
 	}
 
+	detections, err = detector.getProperties(node, evaluator)
+	if len(detections) != 0 || err != nil {
+		return detections, err
+	}
+
 	return detector.nameParentPairObject(node, evaluator)
+}
+
+func (detector *objectDetector) getProperties(
+	node *tree.Node,
+	evaluator types.Evaluator,
+) ([]*types.Detection, error) {
+	results, err := detector.propertiesQuery.MatchAt(node)
+	if err != nil {
+		return nil, err
+	}
+
+	if len(results) == 0 {
+		return nil, nil
+	}
+
+	for _, result := range results {
+
+		if result["receiver"].Type() == "identifier" {
+			log.Debug().Msgf("node contend is %s", node.Content())
+
+			data := &types.Detection{
+				MatchNode:   node,
+				ContextNode: node,
+				Data: Data{
+					Name: result["receiver"].Content(),
+					Properties: []*types.Detection{
+						{
+							MatchNode:   result["method"],
+							ContextNode: result["method"],
+							Data: Data{
+								Name: result["method"].Content(),
+							},
+						},
+					},
+				},
+			}
+			log.Debug().Msgf("adding simple object: %s.%s", result["receiver"].Content(), result["method"].Content())
+
+			return []*types.Detection{data}, nil
+		}
+
+		if result["receiver"].Type() == "call" {
+			log.Debug().Msgf("node contend is %s", node.Content())
+			log.Debug().Msgf("calling properties")
+			properties, err := evaluator.ForNode(result["receiver"], "object")
+			if err != nil {
+				return nil, err
+			}
+
+			childMethodNode := result["receiver"].ChildByFieldName("method")
+
+			log.Debug().Msgf("node contend is %s", node.Content())
+
+			log.Debug().Msgf("adding complex object: %s.%s", childMethodNode.Content(), result["method"].Content())
+
+			for _, detection := range properties {
+				propertyObject := detection.Data.(Data)
+
+				propertyObjectProperty := propertyObject.Properties[0].Data.(Data)
+
+				log.Debug().Msgf("joining detections... object: %s.%s", propertyObject.Name, propertyObjectProperty.Name)
+
+			}
+
+			return append(properties, &types.Detection{
+				MatchNode:   node,
+				ContextNode: node,
+				Data: Data{
+					Name: childMethodNode.Content(),
+					Properties: []*types.Detection{
+						{
+							MatchNode:   result["method"],
+							ContextNode: result["method"],
+							Data: Data{
+								Name: result["method"].Content(),
+							},
+						},
+					},
+				},
+			}), nil
+		}
+	}
+
+	return nil, nil
 }
 
 func (detector *objectDetector) getHash(
