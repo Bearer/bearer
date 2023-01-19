@@ -329,6 +329,12 @@ func defaultDetectorsAndRules() (detectors map[string]Rule, rules map[string]*Ru
 
 	for _, langDir := range langDirs {
 		lang := langDir.Name()
+
+		if filepath.Ext(langDir.Name()) != "" {
+			// not a directory; skip it
+			continue
+		}
+
 		subLangDirs, err := rulesFs.ReadDir("rules/" + lang)
 		if err != nil {
 			log.Fatal().Msgf("failed to read rules/%s dir %e", lang, err)
