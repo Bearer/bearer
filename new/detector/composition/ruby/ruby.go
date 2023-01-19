@@ -3,6 +3,10 @@ package ruby
 import (
 	"fmt"
 	"os"
+	"strings"
+
+	"github.com/gertd/go-pluralize"
+	"golang.org/x/exp/slices"
 
 	"github.com/bearer/curio/new/detector/evaluator"
 	"github.com/bearer/curio/new/detector/implementation/custom"
@@ -12,7 +16,6 @@ import (
 	"github.com/bearer/curio/new/detector/implementation/ruby/property"
 	stringdetector "github.com/bearer/curio/new/detector/implementation/ruby/string"
 	detectorset "github.com/bearer/curio/new/detector/set"
-	"github.com/bearer/curio/new/detector/types"
 	detectortypes "github.com/bearer/curio/new/detector/types"
 	"github.com/bearer/curio/new/language"
 	"github.com/bearer/curio/new/language/tree"
@@ -25,7 +28,6 @@ import (
 	"github.com/bearer/curio/pkg/report/schema"
 	"github.com/bearer/curio/pkg/report/source"
 	"github.com/bearer/curio/pkg/util/file"
-	"golang.org/x/exp/slices"
 )
 
 type Composition struct {
@@ -35,7 +37,7 @@ type Composition struct {
 	closers             []func()
 }
 
-func New(rules map[string]settings.Rule, classifier *classification.Classifier) (types.Composition, error) {
+func New(rules map[string]settings.Rule, classifier *classification.Classifier) (detectortypes.Composition, error) {
 	lang, err := language.Get("ruby")
 	if err != nil {
 		return nil, fmt.Errorf("failed to lookup language: %s", err)
@@ -180,6 +182,8 @@ func (composition *Composition) extractCustomDetectors(evaluator types.Evaluator
 				continue
 			}
 
+			pluralizer := pluralize.NewClient()
+
 			for _, datatypeDetection := range data.Datatypes {
 				data := datatypeDetection.Data.(datatype.Data)
 
@@ -190,7 +194,9 @@ func (composition *Composition) extractCustomDetectors(evaluator types.Evaluator
 					datatypeDetection.MatchNode.ColumnNumber(),
 					"",
 				), schema.Schema{
-					Classification: data.Classification,
+					ObjectName:           data.Name,
+					NormalizedObjectName: pluralizer.Singular(strings.ToLower(data.Name)),
+					Classification:       data.Classification,
 					Parent: &schema.Parent{
 						LineNumber: datatypeDetection.MatchNode.LineNumber(),
 						Content:    datatypeDetection.MatchNode.Content(),
@@ -205,7 +211,11 @@ func (composition *Composition) extractCustomDetectors(evaluator types.Evaluator
 						property.Detection.MatchNode.ColumnNumber(),
 						"",
 					), schema.Schema{
-						Classification: property.Classification,
+						ObjectName:           data.Name,
+						NormalizedObjectName: pluralizer.Singular(strings.ToLower(data.Name)),
+						FieldName:            property.Name,
+						NormalizedFieldName:  pluralizer.Singular(strings.ToLower(property.Name)),
+						Classification:       property.Classification,
 						Parent: &schema.Parent{
 							LineNumber: property.Detection.MatchNode.LineNumber(),
 							Content:    property.Detection.MatchNode.Content(),
