@@ -8,13 +8,10 @@ import (
 	"os"
 	"regexp"
 	"sort"
-	"strconv"
 	"strings"
 
 	"github.com/bearer/curio/pkg/commands/process/settings"
 	"github.com/bearer/curio/pkg/detectors/custom/config"
-	rubydetector "github.com/bearer/curio/pkg/detectors/ruby/custom_detector"
-	rubydatatype "github.com/bearer/curio/pkg/detectors/ruby/datatype"
 	sqldetector "github.com/bearer/curio/pkg/detectors/sql/custom_detector"
 	"github.com/bearer/curio/pkg/detectors/types"
 	"github.com/bearer/curio/pkg/parser"
@@ -33,8 +30,6 @@ import (
 	"github.com/bearer/curio/pkg/report/detectors"
 	"github.com/bearer/curio/pkg/report/schema"
 	sitter "github.com/smacker/go-tree-sitter"
-
-	"github.com/smacker/go-tree-sitter/ruby"
 )
 
 var insecureUrlPattern = regexp.MustCompile(`^http[^s]`)
@@ -47,8 +42,7 @@ type Detector struct {
 	rulesGroupedByLang map[string][]config.CompiledRule
 	pluralize          *pluralize.Client
 
-	Ruby language.Detector
-	Sql  language.Detector
+	Sql language.Detector
 }
 
 func New(idGenerator nodeid.Generator) types.Detector {
@@ -57,7 +51,6 @@ func New(idGenerator nodeid.Generator) types.Detector {
 		paramIdGenerator: &nodeid.IntGenerator{Counter: 1},
 	}
 
-	detector.Ruby = &rubydetector.Detector{}
 	detector.Sql = &sqldetector.Detector{}
 	detector.pluralize = pluralize.NewClient()
 
@@ -76,7 +69,7 @@ func (detector *Detector) CompileRules(rulesConfig map[string]settings.Rule) err
 			continue
 		}
 		for _, lang := range rule.Languages {
-			if lang == "ruby" {
+			if lang != "sql" {
 				continue
 			}
 
@@ -92,11 +85,6 @@ func (detector *Detector) CompileRules(rulesConfig map[string]settings.Rule) err
 				compiledRule.RuleName = ruleName
 				compiledRule.Metavars = rule.Metavars
 				compiledRule.ParamParenting = rule.ParamParenting
-				if rule.ParamParenting {
-					compiledRule.VariableReconciliation = false
-				} else {
-					compiledRule.VariableReconciliation = true
-				}
 				compiledRule.RootLowercase = rule.RootLowercase
 				compiledRule.RootSingularize = rule.RootSingularize
 				compiledRule.DetectPresence = rule.DetectPresence
@@ -153,7 +141,7 @@ func (detector *Detector) ProcessFile(file *file.FileInfo, dir *file.Path, repor
 				defer tree.Close()
 
 				for _, rule := range rules {
-					err := detector.executeRule(rule, tree, report, detector.idGenerator, nil)
+					err := detector.executeRule(rule, tree, report, detector.idGenerator)
 					if err != nil {
 						return false, err
 					}
@@ -179,17 +167,8 @@ func (detector *Detector) ProcessFile(file *file.FileInfo, dir *file.Path, repor
 				return false, err
 			}
 
-			var variableReconciliation *parserdatatype.ReconciliationRequest
-
 			for _, rule := range rules {
-				if rule.VariableReconciliation && variableReconciliation == nil {
-					variableReconciliation, err = detector.buildReconciliationRequest(rule.Language, tree)
-					if err != nil {
-						return false, err
-					}
-				}
-
-				err := detector.executeRule(rule, tree, report, detector.idGenerator, variableReconciliation)
+				err := detector.executeRule(rule, tree, report, detector.idGenerator)
 				if err != nil {
 					return false, err
 				}
@@ -204,8 +183,6 @@ func (detector *Detector) ProcessFile(file *file.FileInfo, dir *file.Path, repor
 
 func (detector *Detector) forLanguage(lang string) (language.Detector, error) {
 	switch lang {
-	case "ruby":
-		return detector.Ruby, nil
 	case "sql":
 		return detector.Sql, nil
 	default:
@@ -242,9 +219,6 @@ func validateRule(rule config.CompiledRule) error {
 }
 
 func languageMatchesFile(file *file.FileInfo, ruleLanguage string) bool {
-	if file.Language == "Ruby" && ruleLanguage == "ruby" {
-		return true
-	}
 	if ruleLanguage == "sql" {
 		if file.Language != "SQL" &&
 			// postgress
@@ -258,7 +232,7 @@ func languageMatchesFile(file *file.FileInfo, ruleLanguage string) bool {
 	return false
 }
 
-func (detector *Detector) executeRule(rule config.CompiledRule, tree *parser.Tree, report report.Report, idGenerator nodeid.Generator, variableReconciliation *parserdatatype.ReconciliationRequest) error {
+func (detector *Detector) executeRule(rule config.CompiledRule, tree *parser.Tree, report report.Report, idGenerator nodeid.Generator) error {
 	captures := tree.QueryMustPass(rule.Query)
 
 	filteredCaptures, err := filterCaptures(rule.Params, captures)
@@ -266,23 +240,19 @@ func (detector *Detector) executeRule(rule config.CompiledRule, tree *parser.Tre
 		return err
 	}
 
-	err = detector.extractData(filteredCaptures, rule, report, rule.Language, idGenerator, variableReconciliation)
+	err = detector.extractData(filteredCaptures, rule, report, rule.Language, idGenerator)
 	if err != nil {
 		return err
 	}
 	return nil
 }
 
-func (detector *Detector) extractData(captures []parser.Captures, rule config.CompiledRule, report report.Report, lang string, idGenerator nodeid.Generator, variableReconciliation *parserdatatype.ReconciliationRequest) error {
+func (detector *Detector) extractData(captures []parser.Captures, rule config.CompiledRule, report report.Report, lang string, idGenerator nodeid.Generator) error {
 	for _, capture := range captures {
 		forExport := make(map[parser.NodeID]*schemadatatype.DataType)
 		var parent schemadatatype.DataTypable
 
 		if filtersMatch := shouldIgnoreCaptures(capture, rule); filtersMatch {
-			continue
-		}
-
-		if filtersMatch := shouldMatchCaptures(capture, rule); !filtersMatch {
 			continue
 		}
 
@@ -307,7 +277,7 @@ func (detector *Detector) extractData(captures []parser.Captures, rule config.Co
 			}
 
 			if param.ArgumentsExtract || param.ClassNameExtract {
-				paramTypes, err = detector.extractArguments(lang, capture[param.BuildFullName()], idGenerator, variableReconciliation)
+				paramTypes, err = detector.extractArguments(lang, capture[param.BuildFullName()], idGenerator)
 				if err != nil {
 					return err
 				}
@@ -417,48 +387,6 @@ func (detector *Detector) extractData(captures []parser.Captures, rule config.Co
 	return nil
 }
 
-func shouldMatchCaptures(captures parser.Captures, rule config.CompiledRule) bool {
-	hasMatchViolationParam := false
-	for _, filter := range rule.Filters {
-		param := rule.GetParamByPatternName(filter.Variable)
-		matchNode := captures[param.BuildFullName()]
-		content := matchNode.Content()
-
-		if !filter.MatchViolation {
-			continue
-		}
-		hasMatchViolationParam = true
-
-		if filter.Minimum != nil {
-			contentCast, err := strconv.Atoi(content)
-			if err != nil {
-				return false
-			}
-
-			if *filter.Minimum > contentCast {
-				return true
-			}
-		}
-
-		if filter.Maximum != nil {
-			contentCast, err := strconv.Atoi(content)
-			if err != nil {
-				return false
-			}
-
-			if *filter.Maximum < contentCast {
-				return true
-			}
-		}
-	}
-
-	if hasMatchViolationParam {
-		return false
-	} else {
-		return true
-	}
-}
-
 func shouldIgnoreCaptures(captures parser.Captures, rule config.CompiledRule) bool {
 	for _, filter := range rule.Filters {
 		param := rule.GetParamByPatternName(filter.Variable)
@@ -527,35 +455,16 @@ func filterCaptures(params []config.Param, captures []parser.Captures) (filtered
 	return filtered, err
 }
 
-func (detector *Detector) extractArguments(language string, node *parser.Node, idGenerator nodeid.Generator, variableReconciliation *parserdatatype.ReconciliationRequest) (map[parser.NodeID]*schemadatatype.DataType, error) {
+func (detector *Detector) extractArguments(language string, node *parser.Node, idGenerator nodeid.Generator) (map[parser.NodeID]*schemadatatype.DataType, error) {
 	switch language {
-	case "ruby":
-		return detector.Ruby.ExtractArguments(node, idGenerator, variableReconciliation)
 	case "sql":
-		return detector.Sql.ExtractArguments(node, idGenerator, variableReconciliation)
-	}
-	return nil, errors.New("unsupported language")
-}
-
-func (detector *Detector) buildReconciliationRequest(language string, tree *parser.Tree) (*parserdatatype.ReconciliationRequest, error) {
-	switch language {
-	case "ruby":
-		allDatatypes := rubydatatype.Discover(tree.RootNode(), detector.idGenerator)
-		scopedDatatypes := parserdatatype.ScopeDatatypes(allDatatypes, detector.idGenerator, rubydatatype.ScopeTerminators)
-		return &parserdatatype.ReconciliationRequest{
-			ScopedDatatypes:  scopedDatatypes,
-			ScopeTerminators: rubydatatype.ScopeTerminators,
-		}, nil
-	case "sql":
-		return nil, nil
+		return detector.Sql.ExtractArguments(node, idGenerator)
 	}
 	return nil, errors.New("unsupported language")
 }
 
 func getLanguage(input string) *sitter.Language {
 	switch input {
-	case "ruby":
-		return ruby.GetLanguage()
 	case "sql":
 		return sql.GetLanguage()
 	}

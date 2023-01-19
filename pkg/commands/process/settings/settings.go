@@ -135,11 +135,6 @@ type PatternFilter struct {
 	LessThanOrEqual    *int            `mapstructure:"less_than_or_equal" json:"less_than_or_equal" yaml:"less_than_or_equal"`
 	GreaterThan        *int            `mapstructure:"greater_than" json:"greater_than" yaml:"greater_than"`
 	GreaterThanOrEqual *int            `mapstructure:"greater_than_or_equal" json:"greater_than_or_equal" yaml:"greater_than_or_equal"`
-
-	// FIXME: remove when refactor is complete
-	Minimum        *int `mapstructure:"minimum" json:"minimum" yaml:"minimum"`
-	Maximum        *int `mapstructure:"maximum" json:"maximum" yaml:"maximum"`
-	MatchViolation bool `mapstructure:"match_violation" json:"match_violation" yaml:"match_violation"`
 }
 
 type RulePattern struct {
@@ -159,11 +154,12 @@ type Rule struct {
 
 	Stored bool `mapstructure:"stored" json:"stored" yaml:"stored"`
 
-	// FIXME: remove after refactor
+	Processors []string `mapstructure:"processors" json:"processors,omitempty" yaml:"processors,omitempty"`
+
+	// FIXME: remove after refactor of sql
 	Metavars       map[string]MetaVar `mapstructure:"metavars" json:"metavars" yaml:"metavars"`
 	DetectPresence bool               `mapstructure:"detect_presence" json:"detect_presence" yaml:"detect_presence"`
 	OmitParent     bool               `mapstructure:"omit_parent" json:"omit_parent" yaml:"omit_parent"`
-	Processors     []string           `mapstructure:"processors" json:"processors,omitempty" yaml:"processors,omitempty"`
 }
 
 type Processor struct {

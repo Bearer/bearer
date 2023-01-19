@@ -122,19 +122,6 @@ func (detector *objectDetector) nameAssignedObject(
 					Properties: objectData.Properties,
 				},
 			})
-		} else { // FIXME: should we remove this case?
-			detections = append(detections, &types.Detection{
-				MatchNode: node,
-				Data: Data{
-					Name: result["left"].Content(),
-					Properties: []*types.Detection{{
-						MatchNode: object.MatchNode,
-						Data: Data{
-							Name: objectData.Name,
-						},
-					}},
-				},
-			})
 		}
 	}
 
