@@ -176,7 +176,7 @@ func (composition *Composition) DetectFromFile(report report.Report, file *file.
 			for _, datatypeDetection := range data.Datatypes {
 				data := datatypeDetection.Data.(datatype.Data)
 
-				report.AddDetection(reportdetections.TypeSchemaClassified, detectors.Type(detectorType), source.New(
+				report.AddDetection(reportdetections.TypeCustomClassified, detectors.Type(detectorType), source.New(
 					file,
 					file.Path,
 					datatypeDetection.MatchNode.LineNumber(),
@@ -191,7 +191,7 @@ func (composition *Composition) DetectFromFile(report report.Report, file *file.
 				})
 
 				for _, property := range data.Properties {
-					report.AddDetection(reportdetections.TypeSchemaClassified, detectors.Type(detectorType), source.New(
+					report.AddDetection(reportdetections.TypeCustomClassified, detectors.Type(detectorType), source.New(
 						file,
 						file.Path,
 						property.Detection.MatchNode.LineNumber(),

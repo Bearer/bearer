@@ -2,6 +2,7 @@ package datatype
 
 import (
 	objectdetector "github.com/bearer/curio/new/detector/implementation/ruby/object"
+	propertydetector "github.com/bearer/curio/new/detector/implementation/ruby/property"
 	"github.com/bearer/curio/new/detector/types"
 	"github.com/bearer/curio/new/language/tree"
 	languagetypes "github.com/bearer/curio/new/language/types"
@@ -63,33 +64,24 @@ func (detector *datatypeDetector) DetectAt(
 	var result []*types.Detection
 
 	for _, object := range objectDetections {
-
 		var properties []Property
 
-		data := object.Data.(objectdetector.Data)
+		objectData := object.Data.(objectdetector.Data)
 
-		for _, property := range data.Properties {
-			switch propertyData := property.Data.(type) {
-			case objectdetector.Data:
-				properties = append(properties, Property{
-					Detection: property,
-					Name:      propertyData.Name,
-				})
-			case Data:
-				properties = append(properties, Property{
-					Detection: property,
-					Name:      propertyData.Name,
-				})
-			}
-
+		for _, property := range objectData.Properties {
+			propertyData := property.Data.(propertydetector.Data)
+			properties = append(properties, Property{
+				Detection: property,
+				Name:      propertyData.Name,
+			})
 		}
 
-		detection := Data{
-			Name:       data.Name,
+		data := Data{
+			Name:       objectData.Name,
 			Properties: properties,
 		}
 
-		classificationReqDetection := detection.toClassifcationRequestDetection()
+		classificationReqDetection := data.toClassifcationRequestDetection()
 
 		classification := detector.classifier.Classify(classificationschema.ClassificationRequest{
 			Value:        classificationReqDetection,
@@ -97,12 +89,12 @@ func (detector *datatypeDetector) DetectAt(
 			Filename:     evaluator.FileName(),
 		})
 
-		mergeClassification(&detection, classification)
+		mergeClassification(&data, classification)
 
 		result = append(result, &types.Detection{
 			ContextNode: node,
 			MatchNode:   object.MatchNode,
-			Data:        detection,
+			Data:        data,
 		})
 
 	}
