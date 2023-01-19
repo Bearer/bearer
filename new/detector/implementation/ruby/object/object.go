@@ -6,7 +6,6 @@ import (
 	"github.com/bearer/curio/new/detector/types"
 	"github.com/bearer/curio/new/language/tree"
 	languagetypes "github.com/bearer/curio/new/language/types"
-	"github.com/rs/zerolog/log"
 )
 
 type Data struct {
@@ -113,68 +112,41 @@ func (detector *objectDetector) getProperties(
 	for _, result := range results {
 
 		if result["receiver"].Type() == "identifier" {
-			log.Debug().Msgf("node contend is %s", node.Content())
-
-			data := &types.Detection{
+			return []*types.Detection{{
 				MatchNode:   node,
 				ContextNode: node,
 				Data: Data{
 					Name: result["receiver"].Content(),
 					Properties: []*types.Detection{
 						{
-							MatchNode:   result["method"],
-							ContextNode: result["method"],
+							MatchNode: result["root"],
 							Data: Data{
 								Name: result["method"].Content(),
 							},
 						},
 					},
 				},
-			}
-			log.Debug().Msgf("adding simple object: %s.%s", result["receiver"].Content(), result["method"].Content())
-
-			return []*types.Detection{data}, nil
+			}}, nil
 		}
 
 		if result["receiver"].Type() == "call" {
-			log.Debug().Msgf("node contend is %s", node.Content())
-			log.Debug().Msgf("calling properties")
-			properties, err := evaluator.ForNode(result["receiver"], "object")
-			if err != nil {
-				return nil, err
-			}
-
 			childMethodNode := result["receiver"].ChildByFieldName("method")
 
-			log.Debug().Msgf("node contend is %s", node.Content())
-
-			log.Debug().Msgf("adding complex object: %s.%s", childMethodNode.Content(), result["method"].Content())
-
-			for _, detection := range properties {
-				propertyObject := detection.Data.(Data)
-
-				propertyObjectProperty := propertyObject.Properties[0].Data.(Data)
-
-				log.Debug().Msgf("joining detections... object: %s.%s", propertyObject.Name, propertyObjectProperty.Name)
-
-			}
-
-			return append(properties, &types.Detection{
+			return []*types.Detection{{
 				MatchNode:   node,
 				ContextNode: node,
 				Data: Data{
 					Name: childMethodNode.Content(),
 					Properties: []*types.Detection{
 						{
-							MatchNode:   result["method"],
-							ContextNode: result["method"],
+							MatchNode: result["root"],
 							Data: Data{
 								Name: result["method"].Content(),
 							},
 						},
 					},
 				},
-			}), nil
+			}}, nil
 		}
 	}
 
