@@ -1,0 +1,32 @@
+type: verifier
+patterns:
+  - pattern: |
+      class $<_>
+        $<!>encrypts $<DATA_TYPE>
+      end
+    filters:
+      - variable: DATA_TYPE
+        detection: datatype
+languages:
+  - ruby
+detectors:
+  - schema_rb # built-in
+  - sql_lang_create_table
+processors:
+  - db_encrypted
+  - rails_encrypted
+skip_data_types:
+  - Unique Identifier
+  - Passwords
+auto_encrypt_prefix: encrypted_
+trigger: stored_data_types
+severity:
+  default: "low"
+  PII: "critical"
+  PHI: "medium"
+  PD: "high"
+metadata:
+  failure_message: "failure message DSW-009"
+  description: "description DSW-009"
+  remediation_message: "remediation message DSW-009"
+  dsw_id: "DSW-009"

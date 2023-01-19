@@ -44,7 +44,7 @@ func TestDataflowRisks(t *testing.T) {
 							Name:   "Username",
 							Stored: false,
 							Locations: []types.RiskLocation{
-								{Filename: "./users.rb", LineNumber: 25},
+								{Filename: "./users.rb", LineNumber: 25, FieldName: "User_name"},
 							},
 						},
 					},
@@ -70,7 +70,7 @@ func TestDataflowRisks(t *testing.T) {
 							Name:   "Username",
 							Stored: false,
 							Locations: []types.RiskLocation{
-								{Filename: "./users.rb", LineNumber: 25},
+								{Filename: "./users.rb", LineNumber: 25, FieldName: "User_name"},
 							},
 						},
 					},
@@ -89,7 +89,7 @@ func TestDataflowRisks(t *testing.T) {
 							Name:   "Username",
 							Stored: true,
 							Locations: []types.RiskLocation{
-								{Filename: "./users.rb", LineNumber: 25},
+								{Filename: "./users.rb", LineNumber: 25, FieldName: "User_name"},
 							},
 						},
 					},
@@ -109,8 +109,8 @@ func TestDataflowRisks(t *testing.T) {
 							Name:   "Username",
 							Stored: false,
 							Locations: []types.RiskLocation{
-								{Filename: "./users.rb", LineNumber: 2},
-								{Filename: "./users.rb", LineNumber: 25},
+								{Filename: "./users.rb", LineNumber: 2, FieldName: "User_name"},
+								{Filename: "./users.rb", LineNumber: 25, FieldName: "User_name"},
 							},
 						},
 					},
@@ -121,7 +121,7 @@ func TestDataflowRisks(t *testing.T) {
 			Name:   "multiple detections - same detector - deterministic output",
 			Config: config,
 			FileContent: `{"id": "1", "type": "custom_classified", "detector_type":"detect_ruby_logger", "source": {"filename": "./users.rb", "line_number": 25}, "value": {"field_name": "User_name", "classification": {"data_type": {"name": "Username", "uuid": "123", "category_uuid": "456"} ,"decision":{"state": "valid"}}}}
-		{"id": "2", "type": "custom_classified", "detector_type":"detect_ruby_logger", "source": {"filename": "./address.rb", "line_number": 2}, "value": {"field_name": "User_name", "classification": {"data_type": {"name": "Physical Address", "uuid": "123", "category_uuid": "456"} ,"decision":{"state": "valid"}}}}`,
+		{"id": "2", "type": "custom_classified", "detector_type":"detect_ruby_logger", "source": {"filename": "./address.rb", "line_number": 2}, "value": {"field_name": "address", "classification": {"data_type": {"name": "Physical Address", "uuid": "123", "category_uuid": "456"} ,"decision":{"state": "valid"}}}}`,
 			Want: []interface{}{
 				types.RiskDetector{
 					DetectorID: "detect_ruby_logger",
@@ -130,14 +130,14 @@ func TestDataflowRisks(t *testing.T) {
 							Name:   "Physical Address",
 							Stored: false,
 							Locations: []types.RiskLocation{
-								{Filename: "./address.rb", LineNumber: 2},
+								{Filename: "./address.rb", LineNumber: 2, FieldName: "address"},
 							},
 						},
 						{
 							Name:   "Username",
 							Stored: false,
 							Locations: []types.RiskLocation{
-								{Filename: "./users.rb", LineNumber: 25},
+								{Filename: "./users.rb", LineNumber: 25, FieldName: "User_name"},
 							},
 						},
 					},

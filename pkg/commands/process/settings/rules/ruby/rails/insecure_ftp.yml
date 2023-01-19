@@ -1,0 +1,26 @@
+type: "risk"
+patterns:
+  - |
+    Net::FTP.new()
+  - |
+    Net::FTP.open()
+  - pattern: |
+      Net::FTP.open do
+        $<DATA_TYPE>
+      end
+    filters:
+      - variable: DATA_TYPE
+        detection: datatype
+languages:
+  - ruby
+trigger: "local"
+severity:
+  default: "low"
+  PII: "critical"
+  PHI: "medium"
+  PD: "high"
+metadata:
+  failure_message: "failure message DSW-006"
+  description: "description DSW-006"
+  remediation_message: "remediation message DSW-006"
+  dsw_id: "DSW-006"

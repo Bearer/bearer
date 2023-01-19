@@ -5,14 +5,18 @@ data_types:
           locations:
             - filename: integration/custom_detectors/testdata/ruby/detect_ruby_logger.rb
               line_number: 3
+              field_name: email
+              object_name: user
     - name: Physical Address
       detectors:
         - name: ruby
           locations:
             - filename: integration/custom_detectors/testdata/ruby/detect_ruby_logger.rb
               line_number: 4
+              field_name: address
+              object_name: user
 risks:
-    - detector_id: detect_ruby_logger
+    - detector_id: ruby_lang_ruby_logger
       data_types:
         - name: Email Address
           stored: false
@@ -27,6 +31,8 @@ risks:
                       user.email,
                       user.address
                     )
+              field_name: email
+              object_name: user
         - name: Physical Address
           stored: false
           locations:
@@ -40,6 +46,8 @@ risks:
                       user.email,
                       user.address
                     )
+              field_name: address
+              object_name: user
 components: []
 
 
