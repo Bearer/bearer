@@ -15,6 +15,7 @@ import (
 	"github.com/bearer/curio/new/detector/types"
 	detectortypes "github.com/bearer/curio/new/detector/types"
 	"github.com/bearer/curio/new/language"
+	"github.com/bearer/curio/new/language/tree"
 	languagetypes "github.com/bearer/curio/new/language/types"
 	"github.com/bearer/curio/pkg/classification"
 	"github.com/bearer/curio/pkg/commands/process/settings"
@@ -140,6 +141,12 @@ func (composition *Composition) DetectFromFile(report report.Report, file *file.
 
 	evaluator := evaluator.New(composition.detectorSet, tree, file.FileInfo.Name())
 
+	composition.extractCustomDetectors(evaluator, tree, file, report)
+
+	return nil
+}
+
+func (composition *Composition) extractCustomDetectors(evaluator types.Evaluator, tree *tree.Tree, file *file.FileInfo, report report.Report) error {
 	for _, detectorType := range composition.customDetectorTypes {
 		detections, err := evaluator.ForTree(tree.RootNode(), detectorType)
 		if err != nil {
