@@ -23,7 +23,10 @@ func (lang *Language) Parse(input string) (*tree.Tree, error) {
 		return nil, err
 	}
 
-	lang.implementation.AnalyzeFlow(tree.RootNode())
+	if err := lang.implementation.AnalyzeFlow(tree.RootNode()); err != nil {
+		return nil, err
+	}
+
 	return tree, nil
 }
 

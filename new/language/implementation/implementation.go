@@ -9,7 +9,7 @@ import (
 
 type Implementation interface {
 	SitterLanguage() *sitter.Language
-	AnalyzeFlow(rootNode *tree.Node)
+	AnalyzeFlow(rootNode *tree.Node) error
 	ExtractPatternVariables(input string) (string, []patternquerybuilder.Variable, error)
 	ExtractPatternMatchNode(input string) (string, int, error)
 	AnonymousPatternNodeParentTypes() []string
