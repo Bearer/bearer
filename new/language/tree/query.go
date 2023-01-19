@@ -26,7 +26,7 @@ func (query *Query) MatchAt(node *Node) ([]QueryResult, error) {
 	defer cursor.Close()
 
 	cursor.SetPointRange(node.sitterNode.StartPoint(), node.sitterNode.EndPoint())
-	cursor.Exec(query.sitterQuery, node.sitterNode)
+	cursor.Exec(query.sitterQuery, node.tree.RootNode().sitterNode)
 
 	var results []QueryResult
 
