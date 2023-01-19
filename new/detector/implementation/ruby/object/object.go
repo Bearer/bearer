@@ -19,6 +19,10 @@ type objectDetector struct {
 	// Naming
 	assignmentQuery *tree.Query
 	parentPairQuery *tree.Query
+	// class
+	classNameQuery *tree.Query
+	// properties
+	propertiesQuery *tree.Query
 }
 
 func New(lang languagetypes.Language) (types.Detector, error) {
@@ -39,10 +43,25 @@ func New(lang languagetypes.Language) (types.Detector, error) {
 		return nil, fmt.Errorf("error compiling parent pair query: %s", err)
 	}
 
+	// class User
+	// end
+	classNameQuery, err := lang.CompileQuery(`(class name: (constant) @name) @root`)
+	if err != nil {
+		return nil, fmt.Errorf("error compiling class name query: %s", err)
+	}
+
+	// user.name
+	propertiesQuery, err := lang.CompileQuery(`(call receiver: (_) @receiver method: (identifier) @method) @root`)
+	if err != nil {
+		return nil, fmt.Errorf("error compiling class name query: %s", err)
+	}
+
 	return &objectDetector{
 		hashPairQuery:   hashPairQuery,
 		assignmentQuery: assignmentQuery,
 		parentPairQuery: parentPairQuery,
+		classNameQuery:  classNameQuery,
+		propertiesQuery: propertiesQuery,
 	}, nil
 }
 
@@ -54,12 +73,22 @@ func (detector *objectDetector) DetectAt(
 	node *tree.Node,
 	evaluator types.Evaluator,
 ) ([]*types.Detection, error) {
-	detections, err := detector.gatherProperties(node, evaluator)
+	detections, err := detector.getHash(node, evaluator)
 	if len(detections) != 0 || err != nil {
 		return detections, err
 	}
 
-	detections, err = detector.nameAssignedObject(node, evaluator)
+	detections, err = detector.getAssigment(node, evaluator)
+	if len(detections) != 0 || err != nil {
+		return detections, err
+	}
+
+	detections, err = detector.getClass(node, evaluator)
+	if len(detections) != 0 || err != nil {
+		return detections, err
+	}
+
+	detections, err = detector.getProperties(node, evaluator)
 	if len(detections) != 0 || err != nil {
 		return detections, err
 	}
@@ -67,7 +96,64 @@ func (detector *objectDetector) DetectAt(
 	return detector.nameParentPairObject(node, evaluator)
 }
 
-func (detector *objectDetector) gatherProperties(
+func (detector *objectDetector) getProperties(
+	node *tree.Node,
+	evaluator types.Evaluator,
+) ([]*types.Detection, error) {
+	results, err := detector.propertiesQuery.MatchAt(node)
+	if err != nil {
+		return nil, err
+	}
+
+	if len(results) == 0 {
+		return nil, nil
+	}
+
+	for _, result := range results {
+
+		if result["receiver"].Type() == "identifier" {
+			return []*types.Detection{{
+				MatchNode:   node,
+				ContextNode: node,
+				Data: Data{
+					Name: result["receiver"].Content(),
+					Properties: []*types.Detection{
+						{
+							MatchNode: result["root"],
+							Data: Data{
+								Name: result["method"].Content(),
+							},
+						},
+					},
+				},
+			}}, nil
+		}
+
+		if result["receiver"].Type() == "call" {
+			childMethodNode := result["receiver"].ChildByFieldName("method")
+
+			return []*types.Detection{{
+				MatchNode:   node,
+				ContextNode: node,
+				Data: Data{
+					Name: childMethodNode.Content(),
+					Properties: []*types.Detection{
+						{
+							MatchNode: result["root"],
+							Data: Data{
+								Name: result["method"].Content(),
+							},
+						},
+					},
+				},
+			}}, nil
+		}
+	}
+
+	return nil, nil
+}
+
+func (detector *objectDetector) getHash(
 	node *tree.Node,
 	evaluator types.Evaluator,
 ) ([]*types.Detection, error) {
@@ -96,7 +182,7 @@ func (detector *objectDetector) gatherProperties(
 	}}, nil
 }
 
-func (detector *objectDetector) nameAssignedObject(
+func (detector *objectDetector) getAssigment(
 	node *tree.Node,
 	evaluator types.Evaluator,
 ) ([]*types.Detection, error) {
@@ -126,6 +212,32 @@ func (detector *objectDetector) nameAssignedObject(
 	}
 
 	return detections, nil
+}
+
+func (detector *objectDetector) getClass(node *tree.Node, evaluator types.Evaluator) ([]*types.Detection, error) {
+	result, err := detector.classNameQuery.MatchOnceAt(node)
+	if result == nil || err != nil {
+		return nil, err
+	}
+
+	data := Data{
+		Name:       result["name"].Content(),
+		Properties: []*types.Detection{},
+	}
+
+	for i := 0; i < node.ChildCount(); i++ {
+		detections, err := evaluator.ForNode(node.Child(i), "property")
+		if err != nil {
+			return nil, err
+		}
+		data.Properties = append(data.Properties, detections...)
+	}
+
+	return []*types.Detection{{
+		MatchNode:   node,
+		ContextNode: node,
+		Data:        data,
+	}}, nil
 }
 
 func (detector *objectDetector) nameParentPairObject(
