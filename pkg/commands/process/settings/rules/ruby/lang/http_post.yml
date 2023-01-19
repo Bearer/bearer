@@ -1,0 +1,41 @@
+type: "risk"
+languages:
+  - ruby
+patterns:
+  - pattern: |
+      URI.encode_www_form($<DATA_TYPE>)
+    filters:
+      - variable: DATA_TYPE
+        detection: datatype
+  - pattern: |
+      Net::HTTP.post_form($<DATA_TYPE>)
+    filters:
+      - variable: DATA_TYPE
+        detection: datatype
+  - pattern: |
+      $<CLIENT>.post($<DATA_TYPE>)
+    filters:
+      - variable: CLIENT
+        values:
+          - Curl
+          - Excon
+          - Faraday
+          - HTTP
+          - HTTParty
+          - HTTPX
+          - RestClient
+          - Typhoeus
+      - variable: DATA_TYPE
+        detection: datatype
+trigger: "local"
+severity:
+  default: "low"
+  PII: "critical"
+  PHI: "medium"
+  PD: "high"
+omit_parent_content: true
+metadata:
+  failure_message: "failure message DSW-010"
+  description: "description DSW-010"
+  remediation_message: "remediation message DSW-010"
+  dsw_id: "DSW-010"

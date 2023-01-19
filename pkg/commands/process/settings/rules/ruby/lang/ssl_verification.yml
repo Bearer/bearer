@@ -8,3 +8,12 @@ patterns:
     $<_>.verify_mode = OpenSSL::SSL::VERIFY_NONE
 languages:
   - ruby
+detect_presence: true
+trigger: "local"
+severity:
+  default: "medium"
+metadata:
+  failure_message: "failure message DSW-002"
+  description: "description DSW-002"
+  remediation_message: "remediation message DSW-002"
+  dsw_id: "DSW-002"

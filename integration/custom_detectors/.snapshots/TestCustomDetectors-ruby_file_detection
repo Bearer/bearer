@@ -44,7 +44,7 @@ data_types:
             - filename: integration/custom_detectors/testdata/ruby/ruby_file_detection.rb
               line_number: 26
 risks:
-    - detector_id: ruby_file_detection
+    - detector_id: ruby_lang_static_file
       data_types:
         - name: Email Address
           stored: false

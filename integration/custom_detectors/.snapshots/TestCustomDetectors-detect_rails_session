@@ -5,20 +5,26 @@ data_types:
           locations:
             - filename: integration/custom_detectors/testdata/ruby/detect_rails_session.rb
               line_number: 2
+              field_name: email
+              object_name: user
     - name: Unique Identifier
       detectors:
         - name: ruby
           locations:
             - filename: integration/custom_detectors/testdata/ruby/detect_rails_session.rb
               line_number: 3
+              field_name: user_id
+              object_name: session
     - name: Username
       detectors:
         - name: ruby
           locations:
             - filename: integration/custom_detectors/testdata/ruby/detect_rails_session.rb
               line_number: 1
+              field_name: user_name
+              object_name: session
 risks:
-    - detector_id: detect_rails_session
+    - detector_id: ruby_lang_ruby_cookies
       data_types:
         - name: Email Address
           stored: false
@@ -28,6 +34,8 @@ risks:
               parent:
                 line_number: 2
                 content: session[:current_user] = user.email
+              field_name: email
+              object_name: user
         - name: Unique Identifier
           stored: false
           locations:
@@ -36,6 +44,8 @@ risks:
               parent:
                 line_number: 3
                 content: session[:user_id] = current_user.user_id
+              field_name: user_id
+              object_name: current_user
 components: []
 
 
