@@ -39,7 +39,7 @@ func (evaluator *evaluator) FileName() string {
 func (evaluator *evaluator) ForTree(rootNode *langtree.Node, detectorType string) ([]*types.Detection, error) {
 	var result []*types.Detection
 
-	if err := rootNode.Walk(func(node *langtree.Node) error {
+	if err := rootNode.Walk(func(node *langtree.Node, visitChildren func() error) error {
 		detections, err := evaluator.nonUnifiedNodeDetections(node, detectorType)
 		if err != nil {
 			return err
@@ -56,7 +56,7 @@ func (evaluator *evaluator) ForTree(rootNode *langtree.Node, detectorType string
 			result = append(result, unifiedNodeDetections...)
 		}
 
-		return nil
+		return visitChildren()
 	}); err != nil {
 		return nil, err
 	}
@@ -110,7 +110,7 @@ func (evaluator *evaluator) nonUnifiedNodeDetections(
 func (evaluator *evaluator) TreeHas(rootNode *langtree.Node, detectorType string) (bool, error) {
 	hasDetection := false
 
-	if err := rootNode.Walk(func(node *langtree.Node) error {
+	if err := rootNode.Walk(func(node *langtree.Node, visitChildren func() error) error {
 		var err error
 		hasDetection, err = evaluator.NodeHas(node, detectorType)
 		if err != nil {
@@ -121,7 +121,7 @@ func (evaluator *evaluator) TreeHas(rootNode *langtree.Node, detectorType string
 			return langtree.ErrTerminateWalk
 		}
 
-		return nil
+		return visitChildren()
 	}); err != nil {
 		return false, err
 	}

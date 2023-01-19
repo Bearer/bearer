@@ -135,6 +135,10 @@ func (report *Detectors) SchemaGroupAddItem(node *parser.Node, schema schema.Sch
 }
 
 func (report *Detectors) SchemaGroupEnd(idGenerator nodeid.Generator) {
+	if !report.SchemaGroupIsOpen() {
+		return
+	}
+
 	// Build child data types
 	childDataTypes := map[string]datatype.DataTypable{}
 	for node, storedSchema := range report.StoredSchemas.Schemas {
