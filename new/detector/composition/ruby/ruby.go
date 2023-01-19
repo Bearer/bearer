@@ -140,6 +140,12 @@ func (composition *Composition) DetectFromFile(report report.Report, file *file.
 
 	evaluator := evaluator.New(composition.detectorSet, tree, file.FileInfo.Name())
 
+	composition.extractCustomDetectors(evaluator, tree, file, report)
+
+	return nil
+}
+
+func (composition *Composition) extractCustomDetectors(evaluator types.Evaluator, tree *tree.Tree, file *file.FileInfo, report report.Report) error {
 	for _, detectorType := range composition.customDetectorTypes {
 		detections, err := evaluator.ForTree(tree.RootNode(), detectorType)
 		if err != nil {
