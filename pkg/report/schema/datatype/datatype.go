@@ -213,22 +213,24 @@ func dataTypeToSchema[D DataTypable](report detections.ReportDetection, detectio
 				LineNumber: parent.LineNumber(),
 			}
 		}
-		transformedObjectName := ""
-		if detectionType == detections.DetectionType(detectors.DetectorSchemaRb) {
-			pluralizer := pluralize.NewClient()
-			transformedObjectName = pluralizer.Singular(strings.ToLower(parentName))
-		}
+		normalizedObjectName := ""
+		normalizedFieldName := ""
+		pluralizer := pluralize.NewClient()
+		normalizedObjectName = pluralizer.Singular(strings.ToLower(parentName))
+		normalizedFieldName = pluralizer.Singular(strings.ToLower(selfName))
+
 		report.AddDetection(detectionType, detectorType, dataType.GetNode().Source(false),
 			schema.Schema{
-				ObjectName:            parentName,
-				FieldName:             selfName,
-				ObjectUUID:            parentUUID,
-				FieldUUID:             selfUUID,
-				FieldType:             dataType.GetTextType(),
-				SimpleFieldType:       dataType.GetType(),
-				Classification:        dataType.GetClassification(),
-				Parent:                parentSchema,
-				TransformedObjectName: transformedObjectName,
+				ObjectName:           parentName,
+				FieldName:            selfName,
+				ObjectUUID:           parentUUID,
+				FieldUUID:            selfUUID,
+				FieldType:            dataType.GetTextType(),
+				SimpleFieldType:      dataType.GetType(),
+				Classification:       dataType.GetClassification(),
+				Parent:               parentSchema,
+				NormalizedObjectName: normalizedObjectName,
+				NormalizedFieldName:  normalizedFieldName,
 			},
 		)
 	}

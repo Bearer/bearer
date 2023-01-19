@@ -403,7 +403,7 @@ func (detector *Detector) extractData(captures []parser.Captures, rule config.Co
 			continue
 		}
 
-		detector.applyDatatypeTransformations(rule, forExport)
+		// detector.applyDatatypeTransformations(rule, forExport)
 
 		report.AddDataType(
 			detections.TypeCustom,
@@ -475,17 +475,17 @@ func shouldIgnoreCaptures(captures parser.Captures, rule config.CompiledRule) bo
 	return false
 }
 
-func (detector *Detector) applyDatatypeTransformations(rule config.CompiledRule, datatypes map[parser.NodeID]*schemadatatype.DataType) {
-	for _, datatype := range datatypes {
-		if rule.RootSingularize {
-			datatype.Name = detector.pluralize.Singular(datatype.Name)
-		}
+// func (detector *Detector) applyDatatypeTransformations(rule config.CompiledRule, datatypes map[parser.NodeID]*schemadatatype.DataType) {
+// 	for _, datatype := range datatypes {
+// 		if rule.RootSingularize {
+// 			datatype.Name = detector.pluralize.Singular(datatype.Name)
+// 		}
 
-		if rule.RootLowercase {
-			datatype.Name = strings.ToLower(datatype.Name)
-		}
-	}
-}
+// 		if rule.RootLowercase {
+// 			datatype.Name = strings.ToLower(datatype.Name)
+// 		}
+// 	}
+// }
 
 func filterCaptures(params []config.Param, captures []parser.Captures) (filtered []parser.Captures, err error) {
 	for _, capture := range captures {

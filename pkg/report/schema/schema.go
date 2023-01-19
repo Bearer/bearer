@@ -19,15 +19,16 @@ const (
 )
 
 type Schema struct {
-	ObjectName      string      `json:"object_name" yaml:"object_name"`
-	ObjectUUID      string      `json:"-" yaml:"-"`
-	FieldName       string      `json:"field_name" yaml:"field_name"`
-	FieldUUID       string      `json:"-" yaml:"-"`
-	FieldType       string      `json:"field_type" yaml:"field_type"`
-	SimpleFieldType string      `json:"field_type_simple" yaml:"field_type_simple"`
-	Classification  interface{} `json:"classification,omitempty" yaml:"classification,omitempty"`
-	Parent          *Parent     `json:"parent,omitempty" yaml:"parent,omitempty"`
-	TransformedObjectName string `json:"transformed_object_name,omitempty" yaml:"transformed_object_name,omitempty"`
+	ObjectName           string      `json:"object_name" yaml:"object_name"`
+	ObjectUUID           string      `json:"-" yaml:"-"`
+	FieldName            string      `json:"field_name" yaml:"field_name"`
+	FieldUUID            string      `json:"-" yaml:"-"`
+	FieldType            string      `json:"field_type" yaml:"field_type"`
+	SimpleFieldType      string      `json:"field_type_simple" yaml:"field_type_simple"`
+	Classification       interface{} `json:"classification,omitempty" yaml:"classification,omitempty"`
+	Parent               *Parent     `json:"parent,omitempty" yaml:"parent,omitempty"`
+	NormalizedObjectName string      `json:"normalized_object_name,omitempty" yaml:"normalized_object_name,omitempty"`
+	NormalizedFieldName  string      `json:"normalized_field_name,omitempty" yaml:"normalized_field_name,omitempty"`
 }
 
 type Parent struct {

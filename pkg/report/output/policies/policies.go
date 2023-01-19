@@ -13,6 +13,7 @@ import (
 	"github.com/bearer/curio/pkg/util/rego"
 	"github.com/fatih/color"
 	"golang.org/x/exp/maps"
+	"golang.org/x/exp/slices"
 
 	"github.com/bearer/curio/pkg/report/output/dataflow"
 )
@@ -27,6 +28,8 @@ var severityColorFns = map[string]func(x ...interface{}) string{
 
 type PolicyInput struct {
 	PolicyId       string             `json:"policy_id" yaml:"policy_id"`
+	RuleId         string             `json:"rule_id" yaml:"rule_id"`
+	Rule           *settings.RuleNew  `json:"rule" yaml:"rule"`
 	Dataflow       *dataflow.DataFlow `json:"dataflow" yaml:"dataflow"`
 	DataCategories []db.DataCategory  `json:"data_categories" yaml:"data_categories"`
 }
@@ -51,7 +54,7 @@ type PolicyResult struct {
 	CategoryGroups    []string `json:"category_groups,omitempty" yaml:"category_groups,omitempty"`
 	ParentLineNumber  int      `json:"parent_line_number,omitempty" yaml:"parent_line_number,omitempty"`
 	ParentContent     string   `json:"parent_content,omitempty" yaml:"parent_content,omitempty"`
-	OmitParent        bool     `json:"omit_parent" yaml:"omit_parent"`
+	OmitParent        bool     `json:"omit_parent,omitempty" yaml:"omit_parent,omitempty"`
 	DetailedContext   string   `json:"detailed_context,omitempty" yaml:"detailed_context,omitempty"`
 }
 
@@ -59,29 +62,33 @@ func GetOutput(dataflow *dataflow.DataFlow, config settings.Config) (map[string]
 	// policy results grouped by severity (critical, high, ...)
 	result := make(map[string][]PolicyResult)
 
-	// Ensure a deterministic order
-	keys := maps.Keys(config.Policies)
 	if !config.Scan.Quiet {
 		output.StdErrLogger().Msgf("Evaluating policies")
 	}
-	bar := output.GetProgressBar(len(keys), config, "policies")
-	sort.Strings(keys)
 
-	for _, key := range keys {
+	bar := output.GetProgressBar(len(config.Rules), config, "policies")
+
+	for _, rule := range config.Rules {
 		err := bar.Add(1)
 		if err != nil {
-			output.StdErrLogger().Msgf("Policy %s failed to write progress bar %e", key, err)
+			output.StdErrLogger().Msgf("Policy %s failed to write progress bar %e", rule.Id, err)
 		}
 
-		policy := config.Policies[key]
+		if rule.Type == "data_type" {
+			continue
+		}
+
+		policy := config.Policies[rule.Type]
 
 		// Create a prepared query that can be evaluated.
 		rs, err := rego.RunQuery(policy.Query,
 			PolicyInput{
-				PolicyId:       policy.Id,
+				RuleId:         rule.Id,
+				Rule:           rule,
 				Dataflow:       dataflow,
 				DataCategories: db.DefaultWithContext(config.Scan.Context).DataCategories,
 			},
+			// TODO: perf question: can we do this once?
 			policy.Modules.ToRegoModules())
 		if err != nil {
 			return nil, err
@@ -101,19 +108,21 @@ func GetOutput(dataflow *dataflow.DataFlow, config settings.Config) (map[string]
 
 			for _, policyOutput := range policyResults["policy_failure"] {
 				policyResult := PolicyResult{
-					PolicyName:        policy.Name,
-					PolicyDescription: policy.Description,
-					PolicyDisplayId:   policy.DisplayId,
+					PolicyName:        rule.FailureMessage,
+					PolicyDescription: rule.Description,
+					PolicyDisplayId:   rule.DSWID,
 					Filename:          policyOutput.Filename,
 					LineNumber:        policyOutput.LineNumber,
 					CategoryGroups:    policyOutput.CategoryGroups,
-					OmitParent:        policyOutput.OmitParent,
+					OmitParent:        rule.OmitParent,
 					ParentLineNumber:  policyOutput.ParentLineNumber,
 					ParentContent:     policyOutput.ParentContent,
 					DetailedContext:   policyOutput.DetailedContext,
 				}
 
-				result[policyOutput.Severity] = append(result[policyOutput.Severity], policyResult)
+				severity := findHighestSeverity(policyOutput.CategoryGroups, rule.Severity)
+
+				result[severity] = append(result[severity], policyResult)
 			}
 		}
 	}
@@ -121,7 +130,7 @@ func GetOutput(dataflow *dataflow.DataFlow, config settings.Config) (map[string]
 	return result, nil
 }
 
-func BuildReportString(policyResults map[string][]PolicyResult, policies map[string]*settings.Policy, withoutColor bool) *strings.Builder {
+func BuildReportString(policyResults map[string][]PolicyResult, policyCount int, withoutColor bool) *strings.Builder {
 	reportStr := &strings.Builder{}
 	reportStr.WriteString("\n\nPolicy Report\n")
 	reportStr.WriteString("\n=====================================")
@@ -130,8 +139,6 @@ func BuildReportString(policyResults map[string][]PolicyResult, policies map[str
 	if withoutColor && !initialColorSetting {
 		color.NoColor = true
 	}
-
-	writePolicyListToString(reportStr, policies)
 
 	policyFailures := map[string]map[string]bool{
 		settings.LevelCritical: make(map[string]bool),
@@ -152,24 +159,34 @@ func BuildReportString(policyResults map[string][]PolicyResult, policies map[str
 		}
 	}
 
-	writeSummaryToString(reportStr, policyResults, len(policies), policyFailures)
+	writeSummaryToString(reportStr, policyResults, policyCount, policyFailures)
 
 	color.NoColor = initialColorSetting
 
 	return reportStr
 }
 
-func writePolicyListToString(reportStr *strings.Builder, policies map[string]*settings.Policy) {
-	// list policies that were run
-	reportStr.WriteString("\nPolicy checks: \n\n")
-	policyList := []string{}
-	for key := range policies {
-		policy := policies[key]
-		policyList = append(policyList, color.HiBlackString("- "+policy.Name+" ["+policy.DisplayId+"]\n"))
+func findHighestSeverity(groups []string, severity map[string]string) string {
+	var severities []string
+	for _, group := range groups {
+		severities = append(severities, severity[group])
 	}
 
-	sort.Strings(policyList)
-	reportStr.WriteString(strings.Join(policyList, ""))
+	if slices.Contains(severities, "critical") {
+		return settings.LevelCritical
+	} else if slices.Contains(severities, "high") {
+		return settings.LevelHigh
+	} else if slices.Contains(severities, "medium") {
+		return settings.LevelMedium
+	} else if slices.Contains(severities, "low") {
+		return settings.LevelLow
+	}
+
+	if len(severity) > 0 {
+		return severity["default"]
+	}
+
+	return settings.LevelLow
 }
 
 func writeSummaryToString(
