@@ -7,21 +7,6 @@ patterns:
         detection: datatype
 languages:
   - ruby
-# auxiliary:
-#   - type: "risk"
-#     id: "asdf"
-#     patterns:
-#       - |
-#         logger.asdf(<$ARGUMENT>)
-#     languages:
-#       - ruby
-#   - type: "risk"
-#     id: "qwerty"
-#     patterns:
-#       - |
-#         logger.qwerty(<$ARGUMENT>)
-#     languages:
-#       - ruby
 trigger: "local"
 severity:
   default: "low"
