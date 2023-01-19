@@ -35,9 +35,7 @@ type ClassifiedDatatype struct {
 }
 
 func (datatype *ClassifiedDatatype) GetClassification() interface{} {
-	classification := *datatype.Classification
-	classification.Properties = nil
-	return classification
+	return (*datatype.Classification).Classification
 }
 
 func (datatype *ClassifiedDatatype) GetProperties() map[string]DataTypable {
