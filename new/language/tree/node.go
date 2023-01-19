@@ -95,36 +95,28 @@ func (node *Node) IsError() bool {
 	return node.sitterNode.IsError()
 }
 
-func (node *Node) Walk(visit func(node *Node) error) error {
-	cursor := sitter.NewTreeCursor(node.sitterNode)
-	defer cursor.Close()
+func (node *Node) Walk(visit func(node *Node, visitChildren func() error) error) error {
+	visitChildren := func() error {
+		for i := 0; i < node.ChildCount(); i += 1 {
+			child := node.Child(i)
+			if !child.IsNamed() {
+				continue
+			}
 
-	for {
-		if cursor.CurrentNode().IsNamed() {
-			if err := visit(node.tree.wrap(cursor.CurrentNode())); err != nil {
-				if err == ErrTerminateWalk {
-					return nil
-				}
-
+			if err := child.Walk(visit); err != nil {
 				return err
 			}
 		}
 
-		if cursor.GoToFirstChild() || cursor.GoToNextSibling() {
-			continue
-		}
-
-		for {
-			if !cursor.GoToParent() {
-				// Reached the root again
-				return nil
-			}
-
-			if cursor.GoToNextSibling() {
-				break
-			}
-		}
+		return nil
 	}
+
+	err := visit(node, visitChildren)
+	if err != nil && err != ErrTerminateWalk {
+		return err
+	}
+
+	return nil
 }
 
 func (node *Node) UnifyWith(earlierNode *Node) {
