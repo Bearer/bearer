@@ -23,14 +23,13 @@ languages:
   - ruby
 trigger: "local"
 severity:
-  default: "low"
+default: "low"
   PII: "critical"
   PHI: "medium"
   PD: "high"
 skip_data_types:
   - "Unique Identifier"
 metadata:
-  failure_message: "failure message DSW-001"
-  description: "description DSW-001"
-  remediation_message: "remediation message DSW-001"
-  dsw_id: "DSW-001"
+  description: "Do not send sensitive data to Sentry."
+  remediation_message: ""
+  dsw_id: "DSR-1"
