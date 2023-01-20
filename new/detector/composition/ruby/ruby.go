@@ -16,6 +16,7 @@ import (
 	"github.com/bearer/curio/new/detector/implementation/ruby/property"
 	stringdetector "github.com/bearer/curio/new/detector/implementation/ruby/string"
 	detectorset "github.com/bearer/curio/new/detector/set"
+	"github.com/bearer/curio/new/detector/types"
 	detectortypes "github.com/bearer/curio/new/detector/types"
 	"github.com/bearer/curio/new/language"
 	"github.com/bearer/curio/new/language/tree"
