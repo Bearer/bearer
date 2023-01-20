@@ -12,15 +12,22 @@ import (
 
 var rulesFs = &rules.Rules
 
-func rulesTest(name, filename string) testhelper.TestCase {
-	arguments := []string{"scan", filepath.Join("pkg", "commands", "process", "settings", "rules", filename), "--report=dataflow", "--format=yaml"}
+func buildTestCase(name, reportType, filename string) testhelper.TestCase {
+	arguments := []string{
+		"scan",
+		filepath.Join("pkg", "commands", "process", "settings", "rules", filename),
+		"--report=" + reportType,
+		"--format=yaml",
+	}
 	options := testhelper.TestCaseOptions{}
 
 	return testhelper.NewTestCase(name, arguments, options)
 }
 
+// test dataflow and policies
 func TestRubyRules(t *testing.T) {
-	tests := []testhelper.TestCase{}
+	policyTests := []testhelper.TestCase{}
+	dataflowTests := []testhelper.TestCase{}
 
 	rubyDirs, err := rulesFs.ReadDir("ruby")
 	if err != nil {
@@ -39,14 +46,21 @@ func TestRubyRules(t *testing.T) {
 			ext := filepath.Ext(filename)
 			name := strings.TrimSuffix(filename, ext)
 
-			if ext == "" || ext == ".yaml" || ext == ".yml" {
-				// it's a YAML-format rule, or something else we don't care about
+			if ext == ".yaml" || ext == ".yml" {
+				// it's a YAML-format rule
 				continue
 			}
 
-			tests = append(tests, rulesTest("ruby_"+subDir+"_"+name, "ruby/"+subDir+"/"+filename))
+			if ext == "" && !strings.HasSuffix(name, "testdata") {
+				// it's a folder we don't care about
+				continue
+			}
+
+			dataflowTests = append(dataflowTests, buildTestCase("dataflow_"+subDir+"_"+name, "dataflow", "ruby/"+subDir+"/"+filename))
+			policyTests = append(policyTests, buildTestCase("policy_"+subDir+"_"+name, "policies", "ruby/"+subDir+"/"+filename))
 		}
 	}
 
-	testhelper.RunTests(t, tests)
+	testhelper.RunTests(t, dataflowTests)
+	testhelper.RunTests(t, policyTests)
 }
