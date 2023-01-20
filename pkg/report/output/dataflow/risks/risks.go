@@ -114,6 +114,12 @@ func (holder *Holder) AddSchema(detection detections.Detection) error {
 
 // addDatatype adds detector to hash list and at the same time blocks duplicates
 func (holder *Holder) addDatatype(ruleName string, datatype *db.DataType, fileName string, lineNumber int, schema schema.Schema) {
+	if datatype == nil {
+		// FIXME: we end up with empty field Name and no datatype with the new code
+		// Might be related to the bug with the Unique Identifier classification
+		return
+	}
+
 	// create detector entry if it doesn't exist
 	if _, exists := holder.detectors[ruleName]; !exists {
 		holder.detectors[ruleName] = detectorHolder{
