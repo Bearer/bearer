@@ -11,7 +11,7 @@ import (
 	"github.com/bearer/curio/pkg/report/schema"
 )
 
-func GetSchemaClassification(schema schema.Schema, detection detections.Detection) (schemaclassification.Classification, error) {
+func GetSchemaClassification(schema schema.Schema) (schemaclassification.Classification, error) {
 	// decode classification
 	var classification schemaclassification.Classification
 	buf := bytes.NewBuffer(nil)
