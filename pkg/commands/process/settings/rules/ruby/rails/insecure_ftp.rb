@@ -1,10 +1,9 @@
-# Insecure FTP
-
+# trigger_condition: application has sensitive data
 class User
   attr_reader :name, :email, :password
 end
 
-## Detected
+# trigger:FTP.new
 require "net/ftp"
 
 ftp = Net::FTP.new("ftp.ruby-lang.org")
@@ -14,6 +13,7 @@ tgz = ftp.list("ruby-*.tar.gz").sort.last
 ftp.getbinaryfile(tgz, tgz)
 ftp.close
 
+# trigger:FTP.open
 Net::FTP.open('example.com') do |ftp|
   ftp.login
   files = ftp.chdir('pub/lang/ruby/contrib')
@@ -21,6 +21,7 @@ Net::FTP.open('example.com') do |ftp|
   ftp.getbinaryfile('nif.rb-0.91.gz', 'nif.gz', 1024)
 end
 
+# trigger:FTP.open with data types
 Net::FTP.open("ftp.site.com") do |ftp|
   file = Tempfile.new("user_data")
   begin
@@ -33,7 +34,7 @@ Net::FTP.open("ftp.site.com") do |ftp|
   end
 end
 
-## Not detected
+# ok:secure FTP
 require "net/sftp"
 
 Net::SFTP.start("localhost", "user") do |sftp|

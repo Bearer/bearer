@@ -1,10 +1,10 @@
-# it should match this since minimum is below needed one
+# trigger:length is less than minimum limit
 class User < ApplicationRecord
   has_secure_password
   validates :password, length: { minimum: 6 }
 end
 
-# it shouldn't match this since minimum is above needed one
+# ok:length is within minimum limit
 class Student < ApplicationRecord
   has_secure_password
   validates :password, length: { minimum: 12 }
