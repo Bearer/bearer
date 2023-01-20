@@ -108,9 +108,8 @@ func GetOutput(dataflow *dataflow.DataFlow, config settings.Config) (map[string]
 
 			for _, policyOutput := range policyResults["policy_failure"] {
 				policyResult := PolicyResult{
-					PolicyName:        rule.FailureMessage,
 					PolicyDescription: rule.Description,
-					PolicyDisplayId:   rule.DSWID,
+					PolicyDisplayId:   rule.DSRID,
 					Filename:          policyOutput.Filename,
 					LineNumber:        policyOutput.LineNumber,
 					CategoryGroups:    policyOutput.CategoryGroups,
