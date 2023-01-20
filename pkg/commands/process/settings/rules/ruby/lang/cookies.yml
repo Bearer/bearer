@@ -4,7 +4,7 @@ patterns:
       cookies[] = $<DATA_TYPE>
     filters:
       - variable: DATA_TYPE
-        detection: data_type
+        detection: datatype
   - pattern: |
       cookies.$<METHOD_CHAIN>[] = $<DATA_TYPE>
     filters:
@@ -15,7 +15,7 @@ patterns:
           - permanent.signed
           - signed.permanent
       - variable: DATA_TYPE
-        detection: data_type
+        detection: datatype
 languages:
   - ruby
 trigger: "local"
