@@ -1,6 +1,7 @@
-user.gender_identity # processing sensitive data
+# trigger_condition: processing sensitive data
+user.gender_identity
 
-# Detected
+# trigger:verification disabled
 http.verify_mode = OpenSSL::SSL::VERIFY_NONE
 
 uri = URI('https://secure.example.com/some_path?query=string')
@@ -8,5 +9,5 @@ Net::HTTP.start(uri.host, uri.port, :use_ssl => true, :verify_mode => OpenSSL::S
   Net::HTTP::Get.new uri
 end
 
-# Not detected
+# ok:verification enabled
 http.verify_mode = OpenSSL::SSL::VERIFY_PEER

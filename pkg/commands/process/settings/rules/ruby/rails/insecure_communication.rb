@@ -1,19 +1,19 @@
-# Insecure communication
-
+# trigger_condition: application has sensitive data
 class User
   attr_reader :name, :email, :password
 end
 
-# Should match
+# trigger:ssl disabled
 Rails.application.configure do
   config.force_ssl = false
 end
 
-# Should not match
+# ok:ssl enabled
 Rails.application.configure do
   config.force_ssl = true
 end
 
+# ok:commented out code
 Rails.application.configure do
   # config.force_ssl = false
 end
