@@ -3,6 +3,7 @@ package object
 import (
 	"github.com/bearer/curio/new/detector/types"
 	"github.com/bearer/curio/new/language/tree"
+	"github.com/bearer/curio/new/detector/implementation/ruby/property"
 )
 
 func (detector *objectDetector) getProperties(
@@ -87,7 +88,7 @@ func (detector *objectDetector) getProperties(
 				Properties: []*types.Detection{
 					{
 						MatchNode: node,
-						Data: Data{
+						Data: property.Data{
 							Name: objectProperty.Content(),
 						},
 					},
