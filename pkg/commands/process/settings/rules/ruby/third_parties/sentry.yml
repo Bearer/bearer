@@ -23,7 +23,7 @@ languages:
   - ruby
 trigger: "local"
 severity:
-default: "low"
+  default: "low"
   PII: "critical"
   PHI: "medium"
   PD: "high"
