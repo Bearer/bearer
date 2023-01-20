@@ -20,7 +20,6 @@ severity:
   PHI: "medium"
   PD: "high"
 metadata:
-  failure_message: "failure message DSW-006"
-  description: "description DSW-006"
-  remediation_message: "remediation message DSW-006"
-  dsw_id: "DSW-006"
+  description: "Only communicate using SFTP connections."
+  remediation_message: ""
+  dsr_id: "DSR-2"

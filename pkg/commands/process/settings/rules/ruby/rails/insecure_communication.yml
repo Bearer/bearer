@@ -12,7 +12,6 @@ severity:
   default: "critical"
 omit_parent_content: true
 metadata:
-  failure_message: "failure message DSW-009"
-  description: "description DSW-009"
-  remediation_message: "remediation message DSW-009"
-  dsw_id: "DSW-009"
+  description: "Force all incoming communication through SSL."
+  remediation_message: ""
+  dsr_id: "DSR-2"
