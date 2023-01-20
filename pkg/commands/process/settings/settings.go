@@ -46,9 +46,8 @@ type PolicyModule struct {
 
 type RuleMetadata struct {
 	Description        string `mapstructure:"description" json:"description" yaml:"description"`
-	FailureMessage     string `mapstructure:"failure_message" json:"failure_message" yaml:"failure_message"`
 	RemediationMessage string `mapstructure:"remediation_message" json:"remediation_messafe" yaml:"remediation_messafe"`
-	DSWID              string `mapstructure:"dsw_id" json:"dsw_id" yaml:"dsw_id"`
+	DSRID              string `mapstructure:"dsr_id" json:"dsr_id" yaml:"dsr_id"`
 }
 
 type RuleDefinition struct {
@@ -111,9 +110,8 @@ type RuleNew struct {
 	OnlyDataTypes      []string          `mapstructure:"only_data_types" json:"only_data_types,omitempty" yaml:"only_data_types,omitempty"`
 	Severity           map[string]string `mapstructure:"severity" json:"severity,omitempty" yaml:"severity,omitempty"`
 	Description        string            `mapstructure:"description" json:"description" yaml:"description"`
-	FailureMessage     string            `mapstructure:"failure_message" json:"failure_message" yaml:"failure_message"`
 	RemediationMessage string            `mapstructure:"remediation_message" json:"remediation_messafe" yaml:"remediation_messafe"`
-	DSWID              string            `mapstructure:"dsw_id" json:"dsw_id" yaml:"dsw_id"`
+	DSRID              string            `mapstructure:"dsr_id" json:"dsr_id" yaml:"dsr_id"`
 }
 
 func (modules Modules) ToRegoModules() (output []rego.Module) {
@@ -190,7 +188,7 @@ var PoliciesKey string = "scan.policies"
 
 func FromOptions(opts flag.Options) (Config, error) {
 	policies := DefaultPolicies()
-	detectors, rules, dswIds := defaultDetectorsAndRules()
+	detectors, rules, dsrIds := defaultDetectorsAndRules()
 
 	externalDetectors, err := LoadExternalDetectors(opts.ExternalDetectorDir)
 	if err != nil {
@@ -225,32 +223,32 @@ func FromOptions(opts flag.Options) (Config, error) {
 	skipPolicy := opts.PolicyOptions.SkipPolicy
 
 	// validate policy options - raise error if invalid DSW code given
-	var invalidDswIds []string
+	var invalidDsrIds []string
 	for key := range onlyPolicy {
-		if !dswIds[key] {
-			invalidDswIds = append(invalidDswIds, key)
+		if !dsrIds[key] {
+			invalidDsrIds = append(invalidDsrIds, key)
 		}
 	}
 
 	for key := range skipPolicy {
-		if !dswIds[key] {
-			invalidDswIds = append(invalidDswIds, key)
+		if !dsrIds[key] {
+			invalidDsrIds = append(invalidDsrIds, key)
 		}
 	}
 
-	if len(invalidDswIds) > 0 {
-		return Config{}, fmt.Errorf("unknown DSW IDs %s", invalidDswIds)
+	if len(invalidDsrIds) > 0 {
+		return Config{}, fmt.Errorf("unknown DSR IDs %s", invalidDsrIds)
 	}
 
 	// apply policy options
 	for key := range rules {
 		rule := rules[key]
-		if len(onlyPolicy) > 0 && !onlyPolicy[rule.DSWID] {
+		if len(onlyPolicy) > 0 && !onlyPolicy[rule.DSRID] {
 			delete(rules, key)
 			continue
 		}
 
-		if skipPolicy[rule.DSWID] {
+		if skipPolicy[rule.DSRID] {
 			delete(rules, key)
 			continue
 		}
@@ -413,18 +411,17 @@ func defaultDetectorsAndRules() (detectors map[string]Rule, rules map[string]*Ru
 					OnlyDataTypes:      ruleDefinition.OnlyDataTypes,
 					Severity:           ruleDefinition.Severity,
 					Description:        ruleDefinition.Metadata.Description,
-					FailureMessage:     ruleDefinition.Metadata.FailureMessage,
 					RemediationMessage: ruleDefinition.Metadata.RemediationMessage,
 					Stored:             ruleDefinition.Stored,
 					Detectors:          ruleDefinition.Detectors,
 					Processors:         ruleDefinition.Processors,
 					AutoEncrytPrefix:   ruleDefinition.AutoEncrytPrefix,
-					DSWID:              ruleDefinition.Metadata.DSWID,
+					DSRID:              ruleDefinition.Metadata.DSRID,
 				}
 
 				rules[ruleId] = &newRule
 
-				dswIds[ruleDefinition.Metadata.DSWID] = true
+				dswIds[ruleDefinition.Metadata.DSRID] = true
 			}
 		}
 	}

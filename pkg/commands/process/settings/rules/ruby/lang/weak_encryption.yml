@@ -30,3 +30,15 @@ patterns:
           - public_encrypt
 languages:
   - "ruby"
+trigger: "local"
+severity:
+  default: "low"
+  PII: "critical"
+  PHI: "medium"
+  PD: "high"
+skip_data_types:
+  - "Unique Identifier"
+metadata:
+  description: "Do not use weak encryption libraries."
+  remediation_message: ""
+  dsr_id: "DSR-7"

@@ -26,7 +26,6 @@ severity:
   PHI: "medium"
   PD: "high"
 metadata:
-  failure_message: "failure message DSW-009"
-  description: "description DSW-009"
-  remediation_message: "remediation message DSW-009"
-  dsw_id: "DSW-009"
+  description: "Force application-level encryption on sensitive data."
+  remediation_message: ""
+  dsr_id: "DSR-10"

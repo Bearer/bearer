@@ -34,7 +34,6 @@ severity:
   PD: "high"
 omit_parent_content: true
 metadata:
-  failure_message: "failure message DSW-013"
-  description: "description DSW-013"
-  remediation_message: "remediation message DSW-013"
-  dsw_id: "DSW-013"
+  description: "Do not send sensitive data through unsecure HTTP calls."
+  remediation_message: ""
+  dsr_id: "DSR-2"

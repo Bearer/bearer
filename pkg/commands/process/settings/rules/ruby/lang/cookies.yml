@@ -27,4 +27,4 @@ severity:
 metadata:
   description: "Do not store sensitive data in cookies."
   remediation_message: ""
-  dsw_id: "DSR-3"
+  dsr_id: "DSR-3"

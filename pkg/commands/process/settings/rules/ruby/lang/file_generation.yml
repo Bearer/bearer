@@ -43,7 +43,6 @@ severity:
   PHI: "medium"
   PD: "high"
 metadata:
-  failure_message: "failure message DSW-011"
-  description: "description DSW-011"
-  remediation_message: "remediation message DSW-011"
-  dsw_id: "DSW-011"
+  description: "Do not write sensitive data to static files."
+  remediation_message: ""
+  dsr_id: "DSR-4"

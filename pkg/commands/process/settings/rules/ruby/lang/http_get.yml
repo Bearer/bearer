@@ -35,7 +35,6 @@ severity:
   PD: "high"
 omit_parent_content: true
 metadata:
-  failure_message: "failure message DSW-010"
-  description: "description DSW-010"
-  remediation_message: "remediation message DSW-010"
-  dsw_id: "DSW-010"
+  description: "Do not send sensitive data as HTTP GET parameters."
+  remediation_message: ""
+  dsr_id: "DSR-2"
