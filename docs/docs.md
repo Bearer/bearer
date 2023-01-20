@@ -14,7 +14,6 @@ New to Curio? Check out the [quickstart](/quickstart/) to scan your first projec
 
 Ready to dive in? Curio's [reports](/explanations/reports/) are your path to analyzing data security risks in your application. Check the [supported languages](/reference/supported-languages/), then view the [command reference](/reference/commands/) to configure Curio to your needs.
 
-
 ## Explanations
 
 Explanations dive into the rational behind Curio and explain some of its heavier concepts.
@@ -30,6 +29,7 @@ Reference documents are where you'll find detailed information about each comman
 - [Supported Data Types](/reference/datatypes/)
 - [Built-in Policies](/reference/policies/)
 - [Supported Languages](/reference/supported-languages/)
+- [Configuration](/reference/config/)
 
 ## Contributing
 
