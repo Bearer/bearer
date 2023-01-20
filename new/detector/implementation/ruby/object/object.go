@@ -22,7 +22,8 @@ type objectDetector struct {
 	// class
 	classNameQuery *tree.Query
 	// properties
-	propertiesQuery *tree.Query
+	callsQuery            *tree.Query
+	elementReferenceQuery *tree.Query
 }
 
 func New(lang languagetypes.Language) (types.Detector, error) {
@@ -51,17 +52,24 @@ func New(lang languagetypes.Language) (types.Detector, error) {
 	}
 
 	// user.name
-	propertiesQuery, err := lang.CompileQuery(`(call receiver: (_) @receiver method: (identifier) @method) @root`)
+	callsQuery, err := lang.CompileQuery(`(call receiver: (_) @receiver method: (identifier) @method) @root`)
 	if err != nil {
-		return nil, fmt.Errorf("error compiling class name query: %s", err)
+		return nil, fmt.Errorf("error compiling call query: %s", err)
+	}
+
+	// user[:name]
+	elementReferenceQuery, err := lang.CompileQuery(`(element_reference object: (_) @object (simple_symbol) @simple_symbol) @root`)
+	if err != nil {
+		return nil, fmt.Errorf("error compiling element reference query %s", err)
 	}
 
 	return &objectDetector{
-		hashPairQuery:   hashPairQuery,
-		assignmentQuery: assignmentQuery,
-		parentPairQuery: parentPairQuery,
-		classNameQuery:  classNameQuery,
-		propertiesQuery: propertiesQuery,
+		hashPairQuery:         hashPairQuery,
+		assignmentQuery:       assignmentQuery,
+		parentPairQuery:       parentPairQuery,
+		classNameQuery:        classNameQuery,
+		callsQuery:            callsQuery,
+		elementReferenceQuery: elementReferenceQuery,
 	}, nil
 }
 
@@ -94,63 +102,6 @@ func (detector *objectDetector) DetectAt(
 	}
 
 	return detector.nameParentPairObject(node, evaluator)
-}
-
-func (detector *objectDetector) getProperties(
-	node *tree.Node,
-	evaluator types.Evaluator,
-) ([]*types.Detection, error) {
-	results, err := detector.propertiesQuery.MatchAt(node)
-	if err != nil {
-		return nil, err
-	}
-
-	if len(results) == 0 {
-		return nil, nil
-	}
-
-	for _, result := range results {
-
-		if result["receiver"].Type() == "identifier" {
-			return []*types.Detection{{
-				MatchNode:   node,
-				ContextNode: node,
-				Data: Data{
-					Name: result["receiver"].Content(),
-					Properties: []*types.Detection{
-						{
-							MatchNode: result["root"],
-							Data: Data{
-								Name: result["method"].Content(),
-							},
-						},
-					},
-				},
-			}}, nil
-		}
-
-		if result["receiver"].Type() == "call" {
-			childMethodNode := result["receiver"].ChildByFieldName("method")
-
-			return []*types.Detection{{
-				MatchNode:   node,
-				ContextNode: node,
-				Data: Data{
-					Name: childMethodNode.Content(),
-					Properties: []*types.Detection{
-						{
-							MatchNode: result["root"],
-							Data: Data{
-								Name: result["method"].Content(),
-							},
-						},
-					},
-				},
-			}}, nil
-		}
-	}
-
-	return nil, nil
 }
 
 func (detector *objectDetector) getHash(
