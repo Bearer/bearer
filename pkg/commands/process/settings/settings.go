@@ -302,7 +302,7 @@ func DefaultPolicies() map[string]*Policy {
 
 	err := yaml.Unmarshal(defaultPolicies, &policy)
 	if err != nil {
-		log.Fatal().Msgf("failed to unmarshal policy file %e", err)
+		log.Fatal().Msgf("failed to unmarshal policy file %s", err)
 	}
 
 	for _, policy := range policy {
@@ -356,13 +356,13 @@ func defaultDetectorsAndRules() (detectors map[string]Rule, rules map[string]*Ru
 
 				entry, err := rulesFs.ReadFile("rules/" + lang + "/" + subLang + "/" + filename)
 				if err != nil {
-					log.Fatal().Msgf("failed to read rules/%s/%s/%s file %e", lang, subLang, filename, err)
+					log.Fatal().Msgf("failed to read rules/%s/%s/%s file %s", lang, subLang, filename, err)
 				}
 
 				var ruleDefinition *RuleDefinition
 				err = yaml.Unmarshal(entry, &ruleDefinition)
 				if err != nil {
-					log.Fatal().Msgf("failed to unmarshal rules/%s/%s/%s %e", lang, subLang, filename, err)
+					log.Fatal().Msgf("failed to unmarshal rules/%s/%s/%s %s", lang, subLang, filename, err)
 				}
 
 				if subLang == "internal" {

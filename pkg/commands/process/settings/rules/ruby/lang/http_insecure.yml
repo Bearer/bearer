@@ -25,10 +25,9 @@ patterns:
           - HTTPX
           - RestClient
           - Typhoeus
-    filters:
       - variable: INSECURE_URL
         detection: insecure_url
- - pattern: |
+  - pattern: |
       $<CLIENT>.post($<INSECURE_URL>)
     filters:
       - variable: CLIENT
@@ -41,7 +40,6 @@ patterns:
           - HTTPX
           - RestClient
           - Typhoeus
-    filters:
       - variable: INSECURE_URL
         detection: insecure_url
 trigger: "local" # FIXME: should trigger without data types i.e. no trigger
@@ -56,5 +54,3 @@ metadata:
   description: "description DSW-013"
   remediation_message: "remediation message DSW-013"
   dsw_id: "DSW-013"
-
-DSW-013 short description
