@@ -35,6 +35,16 @@ var allowedDetections []detections.DetectionType = []detections.DetectionType{
 	detections.TypeSecretleak,
 }
 
+func contains(detections []detections.DetectionType, detection detections.DetectionType) bool {
+	for _, v := range detections {
+		if v == detection {
+			return true
+		}
+	}
+
+	return false
+}
+
 func GetOutput(input []interface{}, config settings.Config, isInternal bool) (*DataFlow, error) {
 	dataTypesHolder := datatypes.New(config, isInternal)
 	risksHolder := risks.New(config, isInternal)
@@ -56,19 +66,14 @@ func GetOutput(input []interface{}, config settings.Config, isInternal bool) (*D
 		}
 
 		detectionTypeS, ok := detectionMap["type"].(string)
+
 		if !ok {
 			continue
 		}
 
 		detectionType := detections.DetectionType(detectionTypeS)
 
-		isDataflow := false
-		for _, allowedDetection := range allowedDetections {
-			if (detectionType) == allowedDetection {
-				isDataflow = true
-			}
-		}
-
+		isDataflow := contains(allowedDetections, detectionType)
 		if !isDataflow {
 			continue
 		}

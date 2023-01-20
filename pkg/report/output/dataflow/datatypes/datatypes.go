@@ -60,7 +60,7 @@ func (holder *Holder) AddSchema(detection detections.Detection, extras *ExtraFie
 		return err
 	}
 
-	classification, err := detectiondecoder.GetSchemaClassification(schema, detection)
+	classification, err := detectiondecoder.GetSchemaClassification(schema)
 	if err != nil {
 		return err
 	}

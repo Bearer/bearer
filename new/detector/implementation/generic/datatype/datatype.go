@@ -105,9 +105,9 @@ func (detector *datatypeDetector) DetectAt(
 func (detector *datatypeDetector) Close() {}
 
 // NOTE: presumption for mergeClassification is that classification will have all properties that detection has in same order
-func mergeClassification(detection *Data, clasffication *classificationschema.ClassifiedDatatype) {
-	detection.Classification = clasffication.Classification
+func mergeClassification(detection *Data, classification *classificationschema.ClassifiedDatatype) {
+	detection.Classification = classification.Classification
 	for i := range detection.Properties {
-		detection.Properties[i].Classification = clasffication.Properties[i].Classification
+		detection.Properties[i].Classification = classification.Properties[i].Classification
 	}
 }
