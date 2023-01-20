@@ -5,7 +5,6 @@ severity:
 detailed_context: true
 omit_parent_content: true
 metadata:
-  failure_message: "failure message DSW-012"
   description: "description DSW-012"
-  remediation_message: "remediation message DSW-012"
-  dsw_id: "DSW-012"
+  remediation_message: ""
+  dsr_id: "DSR-4"

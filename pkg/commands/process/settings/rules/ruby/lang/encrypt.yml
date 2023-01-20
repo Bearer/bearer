@@ -21,7 +21,6 @@ severity:
 skip_data_types:
   - "Unique Identifier"
 metadata:
-  failure_message: "failure message DSW-001"
-  description: "description DSW-001"
-  remediation_message: "remediation message DSW-001"
-  dsw_id: "DSW-001"
+  description: "Do not use weak encryption libraries."
+  remediation_message: ""
+  dsr_id: "DSR-7"

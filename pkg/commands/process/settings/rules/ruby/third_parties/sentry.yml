@@ -32,4 +32,4 @@ skip_data_types:
 metadata:
   description: "Do not send sensitive data to Sentry."
   remediation_message: ""
-  dsw_id: "DSR-1"
+  dsr_id: "DSR-1"
