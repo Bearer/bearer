@@ -1,0 +1,60 @@
+type: "risk"
+languages:
+  - ruby
+patterns:
+  - pattern: |
+      Net::HTTP.post_form($<INSECURE_URL>)
+    filters:
+      - variable: INSECURE_URL
+        detection: insecure_url
+  - pattern: |
+      URI($<INSECURE_URL>)
+    filters:
+      - variable: INSECURE_URL
+        detection: insecure_url
+  - pattern: |
+      $<CLIENT>.get($<INSECURE_URL>)
+    filters:
+      - variable: CLIENT
+        values:
+          - Curl
+          - Excon
+          - Faraday
+          - HTTP
+          - HTTParty
+          - HTTPX
+          - RestClient
+          - Typhoeus
+    filters:
+      - variable: INSECURE_URL
+        detection: insecure_url
+ - pattern: |
+      $<CLIENT>.post($<INSECURE_URL>)
+    filters:
+      - variable: CLIENT
+        values:
+          - Curl
+          - Excon
+          - Faraday
+          - HTTP
+          - HTTParty
+          - HTTPX
+          - RestClient
+          - Typhoeus
+    filters:
+      - variable: INSECURE_URL
+        detection: insecure_url
+trigger: "local" # FIXME: should trigger without data types i.e. no trigger
+severity:
+  default: "low"
+  PII: "critical"
+  PHI: "medium"
+  PD: "high"
+omit_parent_content: true
+metadata:
+  failure_message: "failure message DSW-013"
+  description: "description DSW-013"
+  remediation_message: "remediation message DSW-013"
+  dsw_id: "DSW-013"
+
+DSW-013 short description

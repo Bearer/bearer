@@ -3,12 +3,14 @@ languages:
   - ruby
 patterns:
   - pattern: |
-      URI($<INSECURE_URL>)
+      Net::HTTP.post_form($<INSECURE_URL>, $<DATA_TYPE>)
     filters:
       - variable: INSECURE_URL
         detection: insecure_url
+      - variable: DATA_TYPE
+        detection: datatype
   - pattern: |
-      $<CLIENT>.get($<INSECURE_URL>)
+      $<CLIENT>.post($<INSECURE_URL>, $<DATA_TYPE>)
     filters:
       - variable: CLIENT
         values:
@@ -20,9 +22,10 @@ patterns:
           - HTTPX
           - RestClient
           - Typhoeus
-    filters:
       - variable: INSECURE_URL
         detection: insecure_url
+      - variable: DATA_TYPE
+        detection: datatype
 trigger: "local"
 severity:
   default: "low"
@@ -31,7 +34,7 @@ severity:
   PD: "high"
 omit_parent_content: true
 metadata:
-  failure_message: "failure message DSW-010"
-  description: "description DSW-010"
-  remediation_message: "remediation message DSW-010"
-  dsw_id: "DSW-010"
+  failure_message: "failure message DSW-013"
+  description: "description DSW-013"
+  remediation_message: "remediation message DSW-013"
+  dsw_id: "DSW-013"
