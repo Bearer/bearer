@@ -15,3 +15,4 @@ metadata:
   description: "Force all incoming communication through SSL."
   remediation_message: ""
   dsr_id: "DSR-2"
+  id: "ruby_rails_insecure_communication"

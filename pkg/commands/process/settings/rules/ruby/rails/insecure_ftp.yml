@@ -23,3 +23,4 @@ metadata:
   description: "Only communicate using SFTP connections."
   remediation_message: ""
   dsr_id: "DSR-2"
+  id: "ruby_rails_insecure_ftp"

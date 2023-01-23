@@ -15,3 +15,5 @@ languages:
   - sql
 stored: true
 skip_policy: true
+metadata:
+  id: "sql_lang_create_table"

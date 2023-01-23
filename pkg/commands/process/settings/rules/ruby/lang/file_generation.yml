@@ -46,3 +46,4 @@ metadata:
   description: "Do not write sensitive data to static files."
   remediation_message: ""
   dsr_id: "DSR-4"
+  id: "ruby_lang_file_generation"

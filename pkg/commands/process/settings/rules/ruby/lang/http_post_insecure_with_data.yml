@@ -37,3 +37,4 @@ metadata:
   description: "Do not send sensitive data through unsecure HTTP calls."
   remediation_message: ""
   dsr_id: "DSR-2"
+  id: "ruby_lang_http_post_insecure_with_data"
