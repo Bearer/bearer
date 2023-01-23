@@ -16,6 +16,16 @@ import (
 	"github.com/bearer/curio/pkg/util/regex"
 )
 
+var passThroughMethods = []string{
+	"to_a",
+	"to_array",
+	"to_csv",
+	"to_h",
+	"to_hash",
+	"to_json",
+	"to_s",
+}
+
 var (
 	variableLookupParents = []string{"pair", "argument_list", "interpolation"}
 
@@ -61,7 +71,22 @@ func (implementation *rubyImplementation) AnalyzeFlow(rootNode *tree.Node) error
 			}
 		case "identifier":
 			parent := node.Parent()
-			if parent != nil && slice.Contains(variableLookupParents, parent.Type()) {
+			if parent == nil {
+				break
+			}
+
+			// handle to_json case
+			if parent.Type() == "call" &&
+				slice.Contains(passThroughMethods, node.Content()) &&
+				parent.ChildByFieldName("method").Equal(node) {
+				node.UnifyWith(parent.ChildByFieldName("receiver"))
+
+				break
+			}
+
+			if slice.Contains(variableLookupParents, parent.Type()) || (parent.Type() == "call" &&
+				slice.Contains(passThroughMethods, parent.ChildByFieldName("method").Content()) &&
+				parent.ChildByFieldName("receiver").Equal(node)) {
 				scopedNode := scope[node.Content()]
 				if scopedNode != nil {
 					node.UnifyWith(scopedNode)

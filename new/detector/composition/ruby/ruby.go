@@ -199,8 +199,8 @@ func (composition *Composition) extractCustomDetectors(evaluator types.Evaluator
 					NormalizedObjectName: pluralizer.Singular(strings.ToLower(data.Name)),
 					Classification:       data.Classification,
 					Parent: &schema.Parent{
-						LineNumber: datatypeDetection.MatchNode.LineNumber(),
-						Content:    datatypeDetection.MatchNode.Content(),
+						LineNumber: detection.MatchNode.LineNumber(),
+						Content:    detection.MatchNode.Content(),
 					},
 				})
 
@@ -218,8 +218,8 @@ func (composition *Composition) extractCustomDetectors(evaluator types.Evaluator
 						NormalizedFieldName:  pluralizer.Singular(strings.ToLower(property.Name)),
 						Classification:       property.Classification,
 						Parent: &schema.Parent{
-							LineNumber: property.Detection.MatchNode.LineNumber(),
-							Content:    property.Detection.MatchNode.Content(),
+							LineNumber: detection.MatchNode.LineNumber(),
+							Content:    detection.MatchNode.Content(),
 						},
 					})
 				}
