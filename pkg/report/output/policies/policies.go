@@ -296,7 +296,11 @@ func formatSeverity(policySeverity string) string {
 func highlightCodeExtract(fileName string, lineNumber int, extractStartLineNumber int, extract string) string {
 	result := ""
 	targetIndex := lineNumber - extractStartLineNumber
-	for index, line := range strings.Split(extract, "\n") {
+	beforeOrAfterDetectionLinesAllowed := 3
+	beforeDetection := targetIndex - beforeOrAfterDetectionLinesAllowed
+	afterDetection := targetIndex + beforeOrAfterDetectionLinesAllowed
+	items := strings.Split(extract, "\n")
+	for index, line := range items {
 		if index == 0 {
 			var err error
 			line, err = file.ReadFileSingleLine(fileName, extractStartLineNumber)
@@ -306,13 +310,33 @@ func highlightCodeExtract(fileName string, lineNumber int, extractStartLineNumbe
 		}
 
 		if index == targetIndex {
-			result += color.MagentaString(" " + fmt.Sprint(extractStartLineNumber+index) + " ")
+			result += color.MagentaString(fmt.Sprintf(" %d ", extractStartLineNumber+index))
 			result += color.MagentaString(line) + "\n"
-		} else {
-			result += " " + fmt.Sprint(extractStartLineNumber+index) + " "
-			result += line + "\n"
+		} else if index == 0 || len(items)-1 == index {
+			result += fmt.Sprintf(" %d ", extractStartLineNumber+index)
+			result += fmt.Sprintf("%s\n", line)
+		} else if index >= beforeDetection && index <= afterDetection {
+			if index == beforeDetection {
+				result += fmt.Sprintf("%s\t...\n", strings.Repeat(" ", iterativeDigitsCount(extractStartLineNumber)))
+			}
+			result += fmt.Sprintf(" %d ", extractStartLineNumber+index)
+			result += fmt.Sprintf("%s\n", line)
+
+			if index == afterDetection {
+				result += fmt.Sprintf("%s\t...\n", strings.Repeat(" ", iterativeDigitsCount(extractStartLineNumber)))
+			}
 		}
 	}
 
 	return result
+}
+
+func iterativeDigitsCount(number int) int {
+	count := 0
+	for number != 0 {
+		number /= 10
+		count += 1
+	}
+
+	return count
 }
