@@ -21,6 +21,8 @@ import (
 	"github.com/bearer/curio/pkg/util/tmpfile"
 )
 
+var ErrFileListEmpty = errors.New("we couldn't find any files to scan in specified directory")
+
 type Worker struct {
 	FileList []workertype.File
 
@@ -75,6 +77,12 @@ func (worker *Worker) Start() {
 	if err != nil {
 		worker.process.kill()
 		worker.complete(err)
+		return
+	}
+
+	if len(worker.FileList) == 0 {
+		worker.process.kill()
+		worker.complete(ErrFileListEmpty)
 		return
 	}
 
