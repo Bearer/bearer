@@ -2,7 +2,6 @@ package integration_test
 
 import (
 	"path/filepath"
-	"strings"
 	"testing"
 
 	"github.com/bearer/curio/integration/internal/testhelper"
@@ -26,41 +25,43 @@ func buildTestCase(name, reportType, filename string) testhelper.TestCase {
 
 // test dataflow and policies
 func TestRubyRules(t *testing.T) {
-	policyTests := []testhelper.TestCase{}
-	dataflowTests := []testhelper.TestCase{}
-
 	rubyDirs, err := rulesFs.ReadDir("ruby")
 	if err != nil {
 		log.Error().Msgf("failed to read rules/ruby dir %e", err)
 	}
 
 	for _, rubyDir := range rubyDirs {
-		subDir := rubyDir.Name()
-		dirEntries, err := rulesFs.ReadDir("ruby/" + subDir)
+		rubyDirName := rubyDir.Name() // e.g. lang, rails, third_parties
+		dirEntries, err := rulesFs.ReadDir("ruby/" + rubyDirName)
 		if err != nil {
-			log.Error().Msgf("failed to read rules/ruby/%s dir %e", subDir, err)
+			log.Error().Msgf("failed to read rules/ruby/%s dir %e", rubyDirName, err)
 		}
 
 		for _, dirEntry := range dirEntries {
-			filename := dirEntry.Name()
-			ext := filepath.Ext(filename)
-			name := strings.TrimSuffix(filename, ext)
+			dirEntryName := dirEntry.Name() // e.g. cookies, cookies.yml
+			ext := filepath.Ext(dirEntryName)
 
-			if ext == ".yaml" || ext == ".yml" {
-				// it's a YAML-format rule
-				continue
+			if ext != "" {
+				continue // not a folder
+			}
+			policyTests := []testhelper.TestCase{}
+			dataflowTests := []testhelper.TestCase{}
+
+			testdataDirEntries, err := rulesFs.ReadDir("ruby/" + rubyDirName + "/" + dirEntryName + "/testdata")
+
+			if err != nil {
+				// FIXME: do we want to fail silently here?
+				log.Error().Msgf("failed to read rules/ruby/%s/%s dir %e", rubyDirName, dirEntryName, err)
 			}
 
-			if ext == "" && !strings.HasSuffix(name, "testdata") {
-				// it's a folder we don't care about
-				continue
-			}
+			for _, testdataFile := range testdataDirEntries {
+				name := testdataFile.Name()
 
-			dataflowTests = append(dataflowTests, buildTestCase("dataflow_"+subDir+"_"+name, "dataflow", "ruby/"+subDir+"/"+filename))
-			policyTests = append(policyTests, buildTestCase("policy_"+subDir+"_"+name, "policies", "ruby/"+subDir+"/"+filename))
+				dataflowTests = append(dataflowTests, buildTestCase("dataflow_"+dirEntryName+"_"+name, "dataflow", "ruby/"+rubyDirName+"/"+dirEntryName+"/testdata/"+name))
+				policyTests = append(policyTests, buildTestCase("policy_"+dirEntryName+"_"+name, "policies", "ruby/"+rubyDirName+"/"+dirEntryName+"/testdata/"+name))
+			}
+			testhelper.RunTestsWithSnapshotSubdirectory(t, dataflowTests, "ruby/"+rubyDirName+"/"+dirEntryName+"/.snapshots")
+			testhelper.RunTestsWithSnapshotSubdirectory(t, policyTests, "ruby/"+rubyDirName+"/"+dirEntryName+"/.snapshots")
 		}
 	}
-
-	testhelper.RunTests(t, dataflowTests)
-	testhelper.RunTests(t, policyTests)
 }
