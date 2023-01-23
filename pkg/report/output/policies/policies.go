@@ -131,7 +131,7 @@ func GetOutput(dataflow *dataflow.DataFlow, config settings.Config) (map[string]
 	return result, nil
 }
 
-func BuildReportString(policyResults map[string][]PolicyResult, policyCount int, withoutColor bool) *strings.Builder {
+func BuildReportString(rules map[string]*settings.RuleNew, policyResults map[string][]PolicyResult, withoutColor bool) *strings.Builder {
 	reportStr := &strings.Builder{}
 	reportStr.WriteString("\n\nPolicy Report\n")
 	reportStr.WriteString("\n=====================================")
@@ -140,6 +140,8 @@ func BuildReportString(policyResults map[string][]PolicyResult, policyCount int,
 	if withoutColor && !initialColorSetting {
 		color.NoColor = true
 	}
+
+	writeRuleListToString(reportStr, rules)
 
 	policyFailures := map[string]map[string]bool{
 		settings.LevelCritical: make(map[string]bool),
@@ -160,7 +162,7 @@ func BuildReportString(policyResults map[string][]PolicyResult, policyCount int,
 		}
 	}
 
-	writeSummaryToString(reportStr, policyResults, policyCount, policyFailures)
+	writeSummaryToString(reportStr, policyResults, len(rules), policyFailures)
 
 	color.NoColor = initialColorSetting
 
@@ -188,6 +190,24 @@ func findHighestSeverity(groups []string, severity map[string]string) string {
 	}
 
 	return settings.LevelLow
+}
+
+func writeRuleListToString(
+	reportStr *strings.Builder,
+	rules map[string]*settings.RuleNew) {
+	// list rules that were run
+	reportStr.WriteString("\nPolicy checks: \n\n")
+	ruleList := []string{}
+	for key := range rules {
+		rule := rules[key]
+		if rule.Type == "data_type" {
+			continue
+		}
+		ruleList = append(ruleList, color.HiBlackString("- "+rule.Description+" ["+rule.DSRID+"/"+rule.Id+"]\n"))
+	}
+
+	sort.Strings(ruleList)
+	reportStr.WriteString(strings.Join(ruleList, ""))
 }
 
 func writeSummaryToString(

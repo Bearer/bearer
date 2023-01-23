@@ -57,7 +57,7 @@ func ReportPolicies(report types.Report, output *zerolog.Event, config settings.
 	}
 
 	outputToFile := config.Report.Output != ""
-	reportStr := policies.BuildReportString(policyResults, len(config.Rules), outputToFile)
+	reportStr := policies.BuildReportString(config.Rules, policyResults, outputToFile)
 
 	output.Msg(reportStr.String())
 
