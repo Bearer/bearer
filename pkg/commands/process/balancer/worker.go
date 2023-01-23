@@ -21,7 +21,7 @@ import (
 	"github.com/bearer/curio/pkg/util/tmpfile"
 )
 
-var ErrFileListEmpty = errors.New("we couldn't find any files to scan in specified directory")
+var ErrFileListEmpty = errors.New("We couldn't find any files to scan in the specified directory.")
 
 type Worker struct {
 	FileList []workertype.File
