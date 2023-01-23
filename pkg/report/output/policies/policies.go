@@ -47,6 +47,7 @@ type PolicyOutput struct {
 
 type PolicyResult struct {
 	PolicyName        string   `json:"policy_name" yaml:"policy_name"`
+	PolicyDSRID       string   `json:"policy_dsrid" yaml:"policy_dsrid"`
 	PolicyDisplayId   string   `json:"policy_display_id" yaml:"policy_display_id"`
 	PolicyDescription string   `json:"policy_description" yaml:"policy_description"`
 	LineNumber        int      `json:"line_number,omitempty" yaml:"line_number,omitempty"`
@@ -109,7 +110,8 @@ func GetOutput(dataflow *dataflow.DataFlow, config settings.Config) (map[string]
 			for _, policyOutput := range policyResults["policy_failure"] {
 				policyResult := PolicyResult{
 					PolicyDescription: rule.Description,
-					PolicyDisplayId:   rule.DSRID,
+					PolicyDisplayId:   rule.Id,
+					PolicyDSRID:       rule.DSRID,
 					Filename:          policyOutput.Filename,
 					LineNumber:        policyOutput.LineNumber,
 					CategoryGroups:    policyOutput.CategoryGroups,
@@ -153,7 +155,7 @@ func BuildReportString(policyResults map[string][]PolicyResult, policyCount int,
 		settings.LevelLow,
 	} {
 		for _, policyFailure := range policyResults[policyLevel] {
-			policyFailures[policyLevel][policyFailure.PolicyDisplayId] = true
+			policyFailures[policyLevel][policyFailure.PolicyDSRID] = true
 			writePolicyFailureToString(reportStr, policyFailure, policyLevel)
 		}
 	}
@@ -248,8 +250,9 @@ func writeSummaryToString(
 func writePolicyFailureToString(reportStr *strings.Builder, policyFailure PolicyResult, policySeverity string) {
 	reportStr.WriteString("\n\n")
 	reportStr.WriteString(formatSeverity(policySeverity))
-	reportStr.WriteString(policyFailure.PolicyDescription + " [" + policyFailure.PolicyDisplayId + "]" + "\n")
-	reportStr.WriteString(color.HiBlackString("https://curio.sh/reference/policies/#" + policyFailure.PolicyDisplayId + "\n"))
+	reportStr.WriteString(policyFailure.PolicyDescription + " [" + policyFailure.PolicyDSRID + "]" + "\n")
+	reportStr.WriteString(color.HiBlackString("https://curio.sh/reference/policies/#" + policyFailure.PolicyDSRID + "\n"))
+	reportStr.WriteString(color.HiBlackString("To skip this policy, run --skip-policy=" + policyFailure.PolicyDisplayId + "\n"))
 	reportStr.WriteString("\n")
 	if policyFailure.DetailedContext != "" {
 		reportStr.WriteString("Detected: " + policyFailure.DetailedContext + "\n")
