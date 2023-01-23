@@ -38,3 +38,4 @@ metadata:
   description: "Do not send sensitive data as HTTP GET parameters."
   remediation_message: ""
   dsr_id: "DSR-2"
+  id: "ruby_lang_http_get"

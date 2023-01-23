@@ -24,3 +24,4 @@ metadata:
   description: "Do not use weak encryption libraries."
   remediation_message: ""
   dsr_id: "DSR-7"
+  id: "ruby_lang_encrypt"

@@ -33,3 +33,4 @@ metadata:
   description: "Do not send sensitive data to Sentry."
   remediation_message: ""
   dsr_id: "DSR-1"
+  id: "ruby_third_parties_sentry"

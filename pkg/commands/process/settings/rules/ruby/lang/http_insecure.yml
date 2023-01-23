@@ -53,3 +53,4 @@ metadata:
   description: "Do not perform unsecure HTTP calls."
   remediation_message: ""
   dsr_id: "DSR-2"
+  id: "ruby_lang_http_insecure"

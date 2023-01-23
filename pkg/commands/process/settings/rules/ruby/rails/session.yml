@@ -17,3 +17,4 @@ metadata:
   description: "Do not store sensitive data in session cookies."
   remediation_message: ""
   dsr_id: "DSR-3"
+  id: "ruby_rails_session"

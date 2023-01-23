@@ -48,6 +48,7 @@ type RuleMetadata struct {
 	Description        string `mapstructure:"description" json:"description" yaml:"description"`
 	RemediationMessage string `mapstructure:"remediation_message" json:"remediation_messafe" yaml:"remediation_messafe"`
 	DSRID              string `mapstructure:"dsr_id" json:"dsr_id" yaml:"dsr_id"`
+	ID                 string `mapstructure:"id" json:"id" yaml:"id"`
 }
 
 type RuleDefinition struct {
@@ -188,7 +189,7 @@ var PoliciesKey string = "scan.policies"
 
 func FromOptions(opts flag.Options) (Config, error) {
 	policies := DefaultPolicies()
-	detectors, rules, dsrIds := defaultDetectorsAndRules()
+	detectors, rules := defaultDetectorsAndRules()
 
 	externalDetectors, err := LoadExternalDetectors(opts.ExternalDetectorDir)
 	if err != nil {
@@ -223,32 +224,32 @@ func FromOptions(opts flag.Options) (Config, error) {
 	skipPolicy := opts.PolicyOptions.SkipPolicy
 
 	// validate policy options - raise error if invalid DSW code given
-	var invalidDsrIds []string
+	var invalidRuleIds []string
 	for key := range onlyPolicy {
-		if !dsrIds[key] {
-			invalidDsrIds = append(invalidDsrIds, key)
+		if rules[key] == nil {
+			invalidRuleIds = append(invalidRuleIds, key)
 		}
 	}
 
 	for key := range skipPolicy {
-		if !dsrIds[key] {
-			invalidDsrIds = append(invalidDsrIds, key)
+		if rules[key] == nil {
+			invalidRuleIds = append(invalidRuleIds, key)
 		}
 	}
 
-	if len(invalidDsrIds) > 0 {
-		return Config{}, fmt.Errorf("unknown DSR IDs %s", invalidDsrIds)
+	if len(invalidRuleIds) > 0 {
+		return Config{}, fmt.Errorf("unknown rule IDs %s", invalidRuleIds)
 	}
 
 	// apply policy options
 	for key := range rules {
 		rule := rules[key]
-		if len(onlyPolicy) > 0 && !onlyPolicy[rule.DSRID] {
+		if len(onlyPolicy) > 0 && !onlyPolicy[rule.Id] {
 			delete(rules, key)
 			continue
 		}
 
-		if skipPolicy[rule.DSRID] {
+		if skipPolicy[rule.Id] {
 			delete(rules, key)
 			continue
 		}
@@ -310,10 +311,9 @@ func DefaultPolicies() map[string]*Policy {
 	return policies
 }
 
-func defaultDetectorsAndRules() (detectors map[string]Rule, rules map[string]*RuleNew, dswIds map[string]bool) {
+func defaultDetectorsAndRules() (detectors map[string]Rule, rules map[string]*RuleNew) {
 	detectors = make(map[string]Rule)
 	rules = make(map[string]*RuleNew)
-	dswIds = make(map[string]bool)
 
 	// loop through rules langs
 	langDirs, err := rulesFs.ReadDir("rules")
@@ -344,9 +344,6 @@ func defaultDetectorsAndRules() (detectors map[string]Rule, rules map[string]*Ru
 			for _, dirEntry := range dirEntries {
 				filename := dirEntry.Name()
 				ext := filepath.Ext(filename)
-				name := strings.TrimSuffix(filename, ext)
-
-				ruleId := lang + "_" + subLang + "_" + name
 
 				if ext != ".yaml" && ext != ".yml" {
 					continue
@@ -363,9 +360,10 @@ func defaultDetectorsAndRules() (detectors map[string]Rule, rules map[string]*Ru
 					log.Fatal().Msgf("failed to unmarshal rules/%s/%s/%s %s", lang, subLang, filename, err)
 				}
 
+				ruleId := ruleDefinition.Metadata.ID
 				if subLang == "internal" {
 					// overwrite rule id
-					ruleId = name
+					ruleId = strings.TrimSuffix(filename, ext)
 				} else {
 					// add custom detector (rule)
 					detector := Rule{
@@ -420,13 +418,11 @@ func defaultDetectorsAndRules() (detectors map[string]Rule, rules map[string]*Ru
 				}
 
 				rules[ruleId] = &newRule
-
-				dswIds[ruleDefinition.Metadata.DSRID] = true
 			}
 		}
 	}
 
-	return detectors, rules, dswIds
+	return detectors, rules
 }
 
 func ProcessorRegoModuleText(processorName string) (string, error) {

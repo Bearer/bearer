@@ -19,3 +19,4 @@ metadata:
   description: "Do not send sensitive data to loggers."
   remediation_message: ""
   dsr_id: "DSR-5"
+  id: "ruby_lang_logger"

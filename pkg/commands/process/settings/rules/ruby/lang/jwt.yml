@@ -17,3 +17,4 @@ metadata:
   description: "Do not store sensitive data in JWTs."
   remediation_message: ""
   dsr_id: "DSR-3"
+  id: "ruby_lang_jwt"

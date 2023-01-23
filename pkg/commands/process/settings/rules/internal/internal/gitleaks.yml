@@ -8,3 +8,4 @@ metadata:
   description: "description DSW-012"
   remediation_message: ""
   dsr_id: "DSR-4"
+  id: "internal_gitleaks"
