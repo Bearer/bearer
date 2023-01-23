@@ -46,7 +46,7 @@ LOW: 0
 
 Policy reports are [currently available](/reference/supported-languages/) for Ruby projects, with Javascript/Typescript coming soon and more languages to follow.
 
-To run your first policy report, run `curio scan` with the `--report policies` flag.
+To run your first policy report, run `curio scan .` on your project directory. By default, the policy report is output in a human-readable format, but you can also output it as YAML or JSON by using the `--format yaml` or `--format json` flags.
 
 ## Data Flow Report
 
@@ -117,7 +117,7 @@ If we look at the `db/schema.rb` file mentioned in the report, we can see that e
   end
 ```
 
-To run your first data flow report, run `curio scan` with the `--report dataflow` flag.
+To run your first data flow report, run `curio scan` with the `--report dataflow` flag. By default, the data flow report is output in JSON format. To format as YAML, use the `--format yaml` flag.
 
 ## Stats Report
 
@@ -159,10 +159,10 @@ Scanning target... 100% [========================================] (278/278, 103
 
 This report is useful for putting together ongoing statistics, making a quick check of data processing, or building internal dashboards. For more detailed information, you'll want to run a data flow report.
 
-To run your first policy report, run `curio scan` with the `--report stats` flag.
+To run your first stats report, run `curio scan` with the `--report stats` flag. By default, the stats report is output in JSON format. To format as YAML, use the `--format yaml` flag.
 
 ## Detectors Report
 
 The detectors report type is the most low-level, data-rich type. You’re unlikely to use this report on its own, but it can be useful for building your own tooling based on the data parsed by Curio.
 
-To run your first detectors report, run `curio scan` with the `--report detectors` flag.
+To run your first detectors report, run `curio scan` with the `--report detectors` flag. By default, the detectors report is output in JSON format. To format as YAML, use the `--format yaml` flag.
