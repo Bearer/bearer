@@ -12,7 +12,38 @@ build_item(location) := {
 	"line_number": location.line_number,
 	"detailed_context": location.content
 } if {
+	input.rule.detailed_context == true
+}
+
+build_item(location) := {
+	"filename": location.filename,
+	"line_number": location.line_number,
+	"parent_line_number": location.parent.line_number,
+	"parent_content": location.content
+} if {
 	input.rule.trigger == "presence"
+	input.rule.omit_parent_content == true
+	not input.rule.omit_parent == true
+}
+
+build_item(location) := {
+	"filename": location.filename,
+	"line_number": location.line_number
+} if {
+	input.rule.trigger == "presence"
+	input.rule.omit_parent == true
+}
+
+# parent and parent content not omitted
+build_item(location) := {
+	"filename": location.filename,
+	"line_number": location.line_number,
+	"parent_line_number": location.parent.line_number,
+	"parent_content": location.parent.content
+} if {
+	input.rule.trigger == "presence"
+	not input.rule.omit_parent == true
+	not input.rule.omit_parent_content == true
 }
 
 build_item(location) := {
@@ -22,6 +53,7 @@ build_item(location) := {
 	"parent_line_number": location.parent.line_number,
 	"parent_content": location.content
 } if {
+	input.rule.trigger != "presence"
 	input.rule.omit_parent_content == true
 	not input.rule.omit_parent == true
 }
@@ -31,7 +63,9 @@ build_item(location) := {
 	"filename": location.filename,
 	"line_number": location.line_number
 } if {
+	input.rule.trigger != "presence"
 	input.rule.omit_parent == true
+	not input.rule.detailed_context == true
 }
 
 # parent and parent content not omitted
@@ -42,6 +76,7 @@ build_item(location) := {
 	"parent_line_number": location.parent.line_number,
 	"parent_content": location.parent.content
 } if {
+	input.rule.trigger != "presence"
 	not input.rule.omit_parent == true
 	not input.rule.omit_parent_content == true
 }
