@@ -1,5 +1,1 @@
-logger.info(
-  "user info:",
-  user.email,
-  user.address
-)
+logger.info(user.email)
