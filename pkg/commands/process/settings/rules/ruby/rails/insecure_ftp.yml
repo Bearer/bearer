@@ -4,8 +4,12 @@ patterns:
     Net::FTP.new()
   - |
     Net::FTP.open()
+  - |
+    $<!>Net::FTP.open() do
+      $<_>
+    end
   - pattern: |
-      Net::FTP.open do
+      Net::FTP.open() do
         $<DATA_TYPE>
       end
     filters:
@@ -13,9 +17,9 @@ patterns:
         detection: datatype
 languages:
   - ruby
-trigger: "local"
+trigger: "presence"
 severity:
-  default: "low"
+  default: "low" # FIXME: warning
   PII: "critical"
   PHI: "medium"
   PD: "high"
