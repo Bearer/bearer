@@ -5,9 +5,9 @@ import (
 
 	"github.com/bearer/curio/new/language/implementation"
 	"github.com/bearer/curio/new/language/patternquery/builder"
-	"github.com/bearer/curio/new/language/patternquery/types"
 	"github.com/bearer/curio/new/language/tree"
 	languagetypes "github.com/bearer/curio/new/language/types"
+	"github.com/rs/zerolog/log"
 )
 
 type Query struct {
@@ -21,18 +21,18 @@ func Compile(
 	lang languagetypes.Language,
 	langImplementation implementation.Implementation,
 	input string,
-	variables []types.Variable,
-	matchNodeOffset int,
 ) (*Query, error) {
-	builderResult, err := builder.Build(lang, langImplementation, input, variables, matchNodeOffset)
+	builderResult, err := builder.Build(lang, langImplementation, input)
 	if err != nil {
 		return nil, fmt.Errorf("failed to build: %s", err)
 	}
 
 	treeQuery, err := lang.CompileQuery(builderResult.Query)
 	if err != nil {
-		return nil, fmt.Errorf("failed to compile: %s, %s \n%s", err, builderResult.Query, input)
+		return nil, fmt.Errorf("failed to compile: %s, %s -> %s", err, input, builderResult.Query)
 	}
+
+	log.Debug().Msgf("compiled pattern %s -> %s", input, builderResult.Query)
 
 	return &Query{
 		treeQuery:       treeQuery,

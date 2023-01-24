@@ -11,7 +11,8 @@ type Implementation interface {
 	SitterLanguage() *sitter.Language
 	AnalyzeFlow(rootNode *tree.Node) error
 	ExtractPatternVariables(input string) (string, []patternquerytypes.Variable, error)
-	ExtractPatternMatchNode(input string) (string, int, error)
+	FindPatternMatchNode(input []byte) [][]int
+	FindPatternUnanchoredPoints(input []byte) [][]int
 	AnonymousPatternNodeParentTypes() []string
 	PatternIsAnchored(node *tree.Node) bool
 }

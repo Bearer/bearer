@@ -14,6 +14,12 @@ import (
 	"github.com/bearer/curio/pkg/parser/nodeid"
 )
 
+type InputParams struct {
+	Variables         []types.Variable
+	MatchNodeOffset   int
+	UnanchoredOffsets []int
+}
+
 type Result struct {
 	Query           string
 	ParamToVariable map[string]string
@@ -25,10 +31,9 @@ type builder struct {
 	langImplementation implementation.Implementation
 	stringBuilder      strings.Builder
 	idGenerator        nodeid.Generator
-	variables          []types.Variable
+	inputParams        InputParams
 	variableToParams   map[string][]string
 	paramToContent     map[string]string
-	matchNodeOffset    int
 	matchNodeFound     bool
 }
 
@@ -36,10 +41,13 @@ func Build(
 	lang languagetypes.Language,
 	langImplementation implementation.Implementation,
 	input string,
-	variables []types.Variable,
-	matchNodeOffset int,
 ) (*Result, error) {
-	tree, err := lang.Parse(input)
+	processedInput, inputParams, err := processInput(langImplementation, input)
+	if err != nil {
+		return nil, err
+	}
+
+	tree, err := lang.Parse(processedInput)
 	if err != nil {
 		return nil, err
 	}
@@ -53,10 +61,9 @@ func Build(
 		langImplementation: langImplementation,
 		stringBuilder:      strings.Builder{},
 		idGenerator:        &nodeid.IntGenerator{},
-		variables:          variables,
+		inputParams:        *inputParams,
 		variableToParams:   make(map[string][]string),
 		paramToContent:     make(map[string]string),
-		matchNodeOffset:    matchNodeOffset,
 	}
 
 	result := builder.build(tree.RootNode().Child(0))
@@ -95,14 +102,14 @@ func (builder *builder) compileNode(node *tree.Node, isRoot bool, isLastChild bo
 	}
 
 	writeMatch := false
-	if !builder.matchNodeFound && node.StartByte() == builder.matchNodeOffset {
+	if !builder.matchNodeFound && node.StartByte() == builder.inputParams.MatchNodeOffset {
 		builder.matchNodeFound = true
 		writeMatch = true
 	}
 
 	anchored := !isRoot && node.IsNamed() && builder.langImplementation.PatternIsAnchored(node)
 
-	if anchored {
+	if anchored && !slices.Contains(builder.inputParams.UnanchoredOffsets, node.StartByte()) {
 		builder.write(". ")
 	}
 
@@ -116,7 +123,7 @@ func (builder *builder) compileNode(node *tree.Node, isRoot bool, isLastChild bo
 		return err
 	}
 
-	if anchored && isLastChild {
+	if anchored && isLastChild && !slices.Contains(builder.inputParams.UnanchoredOffsets, node.EndByte()) {
 		builder.write(" .")
 	}
 
@@ -198,7 +205,7 @@ func (builder *builder) processVariableToParams() (map[string]string, [][]string
 }
 
 func (builder *builder) getVariableFor(node *tree.Node) *types.Variable {
-	for _, variable := range builder.variables {
+	for _, variable := range builder.inputParams.Variables {
 		if node.Content() == variable.DummyValue {
 			return &variable
 		}

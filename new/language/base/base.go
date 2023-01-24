@@ -1,8 +1,6 @@
 package base
 
 import (
-	"fmt"
-
 	"github.com/bearer/curio/new/language/implementation"
 	"github.com/bearer/curio/new/language/patternquery"
 	"github.com/bearer/curio/new/language/tree"
@@ -35,21 +33,5 @@ func (lang *Language) CompileQuery(input string) (*tree.Query, error) {
 }
 
 func (lang *Language) CompilePatternQuery(input string) (types.PatternQuery, error) {
-	inputWithoutVariables, params, err := lang.implementation.ExtractPatternVariables(input)
-	if err != nil {
-		return nil, fmt.Errorf("error processing variables: %s", err)
-	}
-
-	inputWithoutMatchNode, matchNodeOffset, err := lang.implementation.ExtractPatternMatchNode(inputWithoutVariables)
-	if err != nil {
-		return nil, fmt.Errorf("error processing match node: %s", err)
-	}
-
-	return patternquery.Compile(
-		lang,
-		lang.implementation,
-		inputWithoutMatchNode,
-		params,
-		matchNodeOffset,
-	)
+	return patternquery.Compile(lang, lang.implementation, input)
 }
