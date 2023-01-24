@@ -23,6 +23,7 @@ import (
 	"github.com/bearer/curio/pkg/commands/process/worker/work"
 	"github.com/bearer/curio/pkg/flag"
 	reportoutput "github.com/bearer/curio/pkg/report/output"
+	"github.com/bearer/curio/pkg/util/output"
 	outputhandler "github.com/bearer/curio/pkg/util/output"
 
 	"github.com/bearer/curio/pkg/types"
@@ -218,6 +219,12 @@ func Run(ctx context.Context, opts flag.Options, targetKind TargetKind) (err err
 	switch targetKind {
 	case TargetFilesystem:
 		if report, err = r.ScanFilesystem(ctx, opts); err != nil {
+			if errors.Is(err, balancer.ErrFileListEmpty) {
+				output.StdOutLogger().Msgf("directory empty: %s", err)
+				os.Exit(0)
+				return
+			}
+
 			return xerrors.Errorf("filesystem scan error: %w", err)
 		}
 	}

@@ -38,12 +38,12 @@ var sensitiveFilesRegex = regexp.MustCompile(`.*(
 	|(ba|z|da)?sh-history|(bash|zsh)rc|(bash-|zsh-)?(profile|aliases)
 	|kdbx?|(agile)?keychain|key(store|ring)
 	|mysql-history|psql-history|pgpass|irb-history
-	|log|pcap|sql(dump)?|gnucash|dump
+	|\.log|pcap|sql(dump)?|gnucash|dump
 	|backup|back|bck|~1
 	|kwallet|tblk|pubxml(\.user)?
 	|Favorites\.plist|configuration\.user\.xpl
 	|proftpdpasswd|robomongo\.json
-	|ventrilo-srv.ini|muttrc|trc|ovpn|dayone|tugboat
+	|ventrilo-srv.ini|muttrc|\.trc|ovpn|dayone|tugboat
   )$`)
 
 func New(idGenerator nodeid.Generator) types.Detector {
