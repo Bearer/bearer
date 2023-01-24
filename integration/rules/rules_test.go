@@ -54,14 +54,18 @@ func TestRubyRules(t *testing.T) {
 				log.Error().Msgf("failed to read rules/ruby/%s/%s dir %e", rubyDirName, dirEntryName, err)
 			}
 
+			rubySubPath := "ruby/" + rubyDirName + "/" + dirEntryName
+
 			for _, testdataFile := range testdataDirEntries {
 				name := testdataFile.Name()
 
-				dataflowTests = append(dataflowTests, buildTestCase("dataflow_"+dirEntryName+"_"+name, "dataflow", "ruby/"+rubyDirName+"/"+dirEntryName+"/testdata/"+name))
-				policyTests = append(policyTests, buildTestCase("policy_"+dirEntryName+"_"+name, "policies", "ruby/"+rubyDirName+"/"+dirEntryName+"/testdata/"+name))
+				dataflowTests = append(dataflowTests, buildTestCase("dataflow_"+dirEntryName+"_"+name, "dataflow", rubySubPath+"/testdata/"+name))
+				policyTests = append(policyTests, buildTestCase("policy_"+dirEntryName+"_"+name, "policies", rubySubPath+"/testdata/"+name))
 			}
-			testhelper.RunTestsWithSnapshotSubdirectory(t, dataflowTests, "ruby/"+rubyDirName+"/"+dirEntryName+"/.snapshots")
-			testhelper.RunTestsWithSnapshotSubdirectory(t, policyTests, "ruby/"+rubyDirName+"/"+dirEntryName+"/.snapshots")
+
+			snapshotDirectory := "../../pkg/commands/process/settings/rules/" + rubySubPath + "/.snapshots"
+			testhelper.RunTestsWithSnapshotSubdirectory(t, dataflowTests, snapshotDirectory)
+			testhelper.RunTestsWithSnapshotSubdirectory(t, policyTests, snapshotDirectory)
 		}
 	}
 }
