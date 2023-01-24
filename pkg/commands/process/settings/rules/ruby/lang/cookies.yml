@@ -34,6 +34,28 @@ severity:
   PD: "high"
 metadata:
   description: "Do not store sensitive data in cookies."
-  remediation_message: ""
+  remediation_message: |
+    ## Description
+
+    Storing sensitive data in cookies can lead to a data breach. This rule looks for instances where sensitive data is stored in browser cookies.
+
+    ## Remediations
+
+    Avoid storing sensitive data in unencrypted cookies messages:
+
+    ```ruby
+    cookies[:user_email] = "john@doe.com"
+    ```
+
+    To ensure cookie data stays safe, use encrypted cookies:
+
+    ```ruby
+    cookies.encrypted[:user_email] = "john@doe.com"
+    ```
+
+    ## Resources
+
+    - Cookie object documentation: [ActionDispatch::Cookies](https://edgeapi.rubyonrails.org/classes/ActionDispatch/Cookies.html)
+    - [Demystifying cookie security in rails 6](https://dev.to/ayushn21/demystifying-cookie-security-in-rails-6-1j2f#:~:text=Rails%20provides%20a%20special%20kind,data%20in%20the%20session%20cookie)
   dsr_id: "DSR-3"
   id: "ruby_lang_cookies"

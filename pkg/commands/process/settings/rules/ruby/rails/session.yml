@@ -17,6 +17,21 @@ skip_data_types:
   - "Unique Identifier"
 metadata:
   description: "Do not store sensitive data in session cookies."
-  remediation_message: ""
+  remediation_message: |
+    ## Description
+
+    Sensitive data should not be stored in session cookies. This policy looks for any sensitive data stored within the session cookies.
+
+    ## Remediations
+    By default, [Rails uses a Cookie based session store](https://guides.rubyonrails.org/security.html#session-storage). This makes it unsafe if you use it to store sensitive data in addition of making invalidating cookies difficult as they are stored on the client.
+
+    To ensure session's data stays safe, ensure to use a database-based session storage, which is easily done though Rails configuration:
+
+    ```ruby
+    Rails.application.config.session_store :active_record_store
+    ```
+
+    ## Resources
+    Coming soon.
   dsr_id: "DSR-3"
   id: "ruby_rails_session"

@@ -23,7 +23,19 @@ severity:
   PHI: "medium"
   PD: "high"
 metadata:
-  description: "Force application-level encryption on sensitive data."
-  remediation_message: ""
+  description: "Force application-level encryption when processing sensitive data."
+  remediation_message: |
+    ## Description
+
+    Application-level encryption greatly reduces the risk of a data breach or data leak by making data unreadable. This rule checks if sensitive data types found in records are encrypted.
+
+    ## Remediations
+
+    Coming soon.
+
+    ## Resources
+
+    Coming soon.
+
   dsr_id: "DSR-10"
   id: "ruby_rails_default_encryption"

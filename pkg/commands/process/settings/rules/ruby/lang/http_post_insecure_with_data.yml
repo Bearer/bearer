@@ -33,7 +33,37 @@ severity:
   PHI: "medium"
   PD: "high"
 metadata:
-  description: "Do not send sensitive data through unsecure HTTP calls."
-  remediation_message: ""
+  description: "Only send sensitive data through HTTPS connections."
+  remediation_message: |
+    ## Description
+
+    Sensitive data should only be sent through HTTPS. This rule checks that any transmissions over HTTP that contain sensitive data do so over HTTPS.
+
+    ## Remediations
+    Avoid sending sensitive data though unsecured  HTTP communication:
+
+    ```ruby
+    HTTParty.post(
+      'http://unsecure-api.com/user',
+      body: {
+        name: user.name,
+        email: user.email,
+        purchase: File.open('/#{user.id}/purchase.xls')
+      }
+    )
+    ```
+
+    Ensure to always connect though HTTPS when sending sensitive data:
+
+    ```ruby
+    HTTParty.post(
+      'https://secure-api.com/user',
+      body: {
+        name: user.name,
+        email: user.email,
+        purchase: File.open('/#{user.id}/purchase.xls')
+      }
+    )
+    ```
   dsr_id: "DSR-2"
   id: "ruby_lang_http_post_insecure_with_data"

@@ -25,6 +25,21 @@ severity:
   PD: "high"
 metadata:
   description: "Only communicate using SFTP connections."
-  remediation_message: ""
+  remediation_message: |
+    ## Description
+
+    Communication with FTP servers should be done securely over SFTP in applications that process sensitive data. This rule checks if all FTP connections are made using SFTP.
+
+    ## Remediations
+
+    To ensure secure FTP connections are made, use the `Net::SFTP` library instead of `Net::FTP`:
+
+    ```ruby
+    require 'net/sftp'
+    Net::SFTP.start('host', 'username', password: ENV['password') do |sftp|
+    	...
+    end
+    ```
+
   dsr_id: "DSR-2"
   id: "ruby_rails_insecure_ftp"

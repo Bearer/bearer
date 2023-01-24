@@ -17,6 +17,14 @@ skip_data_types:
   - "Unique Identifier"
 metadata:
   description: "Do not send sensitive data to loggers."
-  remediation_message: ""
+  remediation_message: |
+    ## Description
+
+    Leaking sensitive data to loggers is a common cause of data leaks and can lead to data breaches. This rule looks for instances of sensitive data sent to rails loggers.
+
+    ## Remediations
+    Coming soon.
+    ## Resources
+    Coming soon.
   dsr_id: "DSR-5"
   id: "ruby_rails_logger"

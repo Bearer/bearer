@@ -34,7 +34,46 @@ severity:
   PHI: "medium"
   PD: "high"
 metadata:
-  description: "Do not send sensitive data in HTTP GET parameters."
-  remediation_message: ""
+  description: "Do not send sensitive data as HTTP GET parameters."
+  remediation_message: |
+    ## Description
+    Sensitive data should never be sent as part of the query string in HTTP GET requests. This rule checks if sensitive data types are sent as GET parameters.
+
+    ## Remediations
+    Avoid sending sensitive data though HTTP GET parameters since those are passed in clear text even while using HTTPS communication:
+
+    ```bash
+    HTTParty.get(
+      'https://secure-api.com/user',
+      {
+        email: user.email
+      }
+    )
+    ```
+
+    Instead, use the HTTP POST method:
+
+    ```ruby
+    HTTParty.post(
+      'https://secure-api.com/user',
+      body: {
+        email: user.email,
+      }
+    )
+    ```
+
+    Or keep using HTTP Get but avoid using sending sensitive data:
+
+    ```ruby
+    HTTParty.GET(
+      'https://secure-api.com/user',
+      {
+        id: user.uuid
+      }
+    )
+    ```
+
+    ## Resources
+    Coming soon
   dsr_id: "DSR-2"
   id: "ruby_lang_http_get_params"

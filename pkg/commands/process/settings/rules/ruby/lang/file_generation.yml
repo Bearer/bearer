@@ -44,6 +44,17 @@ severity:
   PD: "high"
 metadata:
   description: "Do not write sensitive data to static files."
-  remediation_message: ""
+  remediation_message: |
+    ## Description
+
+    TODO
+
+    ## Remediations
+
+    Coming soon.
+
+    ## Resources
+
+    Coming soon.
   dsr_id: "DSR-4"
   id: "ruby_lang_file_generation"

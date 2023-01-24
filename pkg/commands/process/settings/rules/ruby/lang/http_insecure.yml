@@ -46,7 +46,23 @@ trigger: "presence"
 severity:
   default: "low"
 metadata:
-  description: "Do not perform unsecure HTTP calls."
-  remediation_message: ""
+  description: "Only communicate using HTTPS connections."
+  remediation_message: |
+    ## Description
+
+    Applications processing sensitive data should only connect using HTTPS connections. This rule checks that all HTTP connections use HTTPS.
+
+    ## Remediations
+    Avoid using unsecured outgoing HTTP communication, especially in the context of API calls:
+
+    ```bash
+    response = HTTParty.get('http://usecure-api.com')
+    ```
+
+    Ensure to always connect though HTTPS:
+
+    ```ruby
+    response = HTTParty.get('https://secure-api.com')
+    ```
   dsr_id: "DSR-2"
   id: "ruby_lang_http_insecure"

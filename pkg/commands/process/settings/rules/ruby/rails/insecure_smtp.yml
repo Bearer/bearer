@@ -22,6 +22,19 @@ severity:
   PD: "high"
 metadata:
   description: "Only communicate with secure SMTP connections."
-  remediation_message: ""
+  remediation_message: |
+    ## Description
+
+    Secure connections using SMTP help prevent unauthorized actors from viewing transmitted data. This policy checks if SMTP mailer settings are set to only allow secure connections.
+
+    ## Remediations
+    When using the SMTP protocol, make sure to enable SSL encryption in ActionMailer configuration:
+
+    ```ruby
+    config.action_mailer.smtp_settings = {
+    	...
+    	ssl: true
+    }
+    ```
   dsr_id: "DSR-2"
   id: "ruby_rails_insecure_smtp"
