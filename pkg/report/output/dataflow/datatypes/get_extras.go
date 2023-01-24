@@ -14,9 +14,9 @@ import (
 )
 
 type processorInput struct {
-	Rule             *settings.RuleNew `json:"rule"`
-	AllDetections    []interface{}     `json:"all_detections"`
-	TargetDetections []interface{}     `json:"target_detections"`
+	Rule             *settings.Rule `json:"rule"`
+	AllDetections    []interface{}  `json:"all_detections"`
+	TargetDetections []interface{}  `json:"target_detections"`
 }
 
 type ExtraFields struct {
@@ -216,7 +216,7 @@ func runExtrasQuery(
 	query string,
 	modules []regohelper.Module,
 	detections, targetDetections []interface{},
-	rule *settings.RuleNew,
+	rule *settings.Rule,
 ) (map[string]*ExtraFields, error) {
 	data := make(map[string]*ExtraFields)
 
@@ -308,7 +308,7 @@ func runProcessor(
 	processorName string,
 	detections []any,
 	targetDetections []any,
-	rule *settings.RuleNew,
+	rule *settings.Rule,
 ) (data map[string]*ExtraFields, err error) {
 	modules, err := processorModules(processorName)
 	if err != nil {

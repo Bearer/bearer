@@ -176,7 +176,7 @@ func (holder *Holder) ToDataFlow() []interface{} {
 
 		for _, datatype := range datatypes {
 			stored := false
-			if customDetector, isCustomDetector := holder.config.CustomDetector[detector.id]; isCustomDetector {
+			if customDetector, isCustomDetector := holder.config.Rules[detector.id]; isCustomDetector {
 				stored = customDetector.Stored
 			}
 

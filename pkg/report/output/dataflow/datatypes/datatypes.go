@@ -135,7 +135,7 @@ func (holder *Holder) addDatatype(classification *db.DataType, detectorName stri
 	if detectorName == string(detectors.DetectorSchemaRb) {
 		storedFlag := true
 		lineEntry.stored = &storedFlag
-	} else if customDetector, isCustomDetector := holder.config.CustomDetector[detectorName]; isCustomDetector {
+	} else if customDetector, isCustomDetector := holder.config.Rules[detectorName]; isCustomDetector {
 		if customDetector.Stored {
 			storedFlag := true
 			lineEntry.stored = &storedFlag

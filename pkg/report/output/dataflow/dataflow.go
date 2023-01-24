@@ -108,7 +108,7 @@ func GetOutput(input []interface{}, config settings.Config, isInternal bool) (*D
 			risksHolder.AddRiskPresence(castDetection)
 		case detections.TypeCustomClassified:
 			ruleName := string(castDetection.DetectorType)
-			customDetector, ok := config.CustomDetector[ruleName]
+			customDetector, ok := config.Rules[ruleName]
 			if !ok {
 				return nil, fmt.Errorf("there is a custom detector in report that is not in the config %s", ruleName)
 			}

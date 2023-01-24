@@ -14,7 +14,7 @@ import (
 
 func TestDataflowDataType(t *testing.T) {
 	config := settings.Config{
-		CustomDetector: map[string]settings.Rule{
+		Rules: map[string]*settings.Rule{
 			"logger_leak": {
 				Stored: true,
 			},

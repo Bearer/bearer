@@ -1,4 +1,4 @@
-package policies
+package summary
 
 import (
 	"encoding/json"
@@ -29,7 +29,7 @@ var severityColorFns = map[string]func(x ...interface{}) string{
 type PolicyInput struct {
 	PolicyId       string             `json:"policy_id" yaml:"policy_id"`
 	RuleId         string             `json:"rule_id" yaml:"rule_id"`
-	Rule           *settings.RuleNew  `json:"rule" yaml:"rule"`
+	Rule           *settings.Rule     `json:"rule" yaml:"rule"`
 	Dataflow       *dataflow.DataFlow `json:"dataflow" yaml:"dataflow"`
 	DataCategories []db.DataCategory  `json:"data_categories" yaml:"data_categories"`
 }
@@ -64,10 +64,10 @@ func GetOutput(dataflow *dataflow.DataFlow, config settings.Config) (map[string]
 	result := make(map[string][]PolicyResult)
 
 	if !config.Scan.Quiet {
-		output.StdErrLogger().Msgf("Evaluating policies")
+		output.StdErrLogger().Msgf("Evaluating rules")
 	}
 
-	bar := output.GetProgressBar(len(config.Rules), config, "policies")
+	bar := output.GetProgressBar(len(config.Rules), config, "rules")
 
 	for _, rule := range config.Rules {
 		err := bar.Add(1)
@@ -131,9 +131,9 @@ func GetOutput(dataflow *dataflow.DataFlow, config settings.Config) (map[string]
 	return result, nil
 }
 
-func BuildReportString(rules map[string]*settings.RuleNew, policyResults map[string][]PolicyResult, withoutColor bool) *strings.Builder {
+func BuildReportString(rules map[string]*settings.Rule, policyResults map[string][]PolicyResult, withoutColor bool) *strings.Builder {
 	reportStr := &strings.Builder{}
-	reportStr.WriteString("\n\nPolicy Report\n")
+	reportStr.WriteString("\n\nSummary Report\n")
 	reportStr.WriteString("\n=====================================")
 
 	initialColorSetting := color.NoColor
@@ -190,9 +190,9 @@ func findHighestSeverity(groups []string, severity map[string]string) string {
 
 func writeRuleListToString(
 	reportStr *strings.Builder,
-	rules map[string]*settings.RuleNew) {
+	rules map[string]*settings.Rule) {
 	// list rules that were run
-	reportStr.WriteString("\nPolicy checks: \n\n")
+	reportStr.WriteString("\nChecks: \n\n")
 	ruleList := []string{}
 	for key := range rules {
 		rule := rules[key]
@@ -217,7 +217,7 @@ func writeSummaryToString(
 	if len(policyResults) == 0 {
 		reportStr.WriteString("\n\n")
 		reportStr.WriteString(color.HiGreenString("SUCCESS\n\n"))
-		reportStr.WriteString(fmt.Sprint(policyCount) + " policies were run and no failures were detected.\n\n")
+		reportStr.WriteString(fmt.Sprint(policyCount) + " checks were run and no failures were detected.\n\n")
 		return
 	}
 
@@ -229,7 +229,7 @@ func writeSummaryToString(
 	totalCount := criticalCount + highCount + mediumCount + lowCount
 
 	reportStr.WriteString("\n\n")
-	reportStr.WriteString(color.RedString(fmt.Sprint(policyCount) + " policies, " + fmt.Sprint(totalCount) + " failures\n\n"))
+	reportStr.WriteString(color.RedString(fmt.Sprint(policyCount) + " checks, " + fmt.Sprint(totalCount) + " failures\n\n"))
 
 	// critical count
 	reportStr.WriteString(formatSeverity(settings.LevelCritical) + fmt.Sprint(criticalCount))
@@ -267,8 +267,8 @@ func writePolicyFailureToString(reportStr *strings.Builder, policyFailure Policy
 	reportStr.WriteString("\n\n")
 	reportStr.WriteString(formatSeverity(policySeverity))
 	reportStr.WriteString(policyFailure.PolicyDescription + " [" + policyFailure.PolicyDSRID + "]" + "\n")
-	reportStr.WriteString(color.HiBlackString("https://curio.sh/reference/policies/#" + policyFailure.PolicyDSRID + "\n"))
-	reportStr.WriteString(color.HiBlackString("To skip this policy, use the flag --skip-policy=" + policyFailure.PolicyDisplayId + "\n"))
+	reportStr.WriteString(color.HiBlackString("https://curio.sh/reference/rules/#" + policyFailure.PolicyDSRID + "\n"))
+	reportStr.WriteString(color.HiBlackString("To skip this rule, use the flag --skip-rule=" + policyFailure.PolicyDisplayId + "\n"))
 	reportStr.WriteString("\n")
 	if policyFailure.DetailedContext != "" {
 		reportStr.WriteString("Detected: " + policyFailure.DetailedContext + "\n")

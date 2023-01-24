@@ -10,9 +10,11 @@ import (
 	"gopkg.in/yaml.v3"
 )
 
-func LoadExternalPolicies(directories []string) (map[string]*Policy, error) {
-	policies := make(map[string]*Policy)
+func LoadExternalRules(directories []string) (map[string]Rule, error) {
+	rules := make(map[string]Rule)
+
 	for _, dirPath := range directories {
+
 		err := filepath.WalkDir(dirPath, func(filePath string, d fs.DirEntry, errReading error) error {
 			if errReading != nil {
 				return errReading
@@ -34,27 +36,15 @@ func LoadExternalPolicies(directories []string) (map[string]*Policy, error) {
 				return fmt.Errorf("error reading file: %s %s", filePath, err)
 			}
 
-			policyName := strings.TrimSuffix(fileName, ext)
+			ruleName := strings.TrimSuffix(fileName, ext)
 
-			var policy *Policy
-			err = yaml.Unmarshal(fileContent, &policy)
+			var rule Rule
+			err = yaml.Unmarshal(fileContent, &rule)
 			if err != nil {
 				return fmt.Errorf("failed to unmarshal yaml file: %s %s", filePath, err)
 			}
 
-			for _, module := range policy.Modules {
-				if module.Path != "" {
-					dirPath := strings.TrimSuffix(filePath, fileName)
-					modulePath := dirPath + "/" + module.Path
-					moduleContent, err := os.ReadFile(modulePath)
-					if err != nil {
-						return fmt.Errorf("failed to read module at path %s %s", modulePath, err)
-					}
-					module.Content = string(moduleContent)
-				}
-			}
-
-			policies[policyName] = policy
+			rules[ruleName] = rule
 
 			return nil
 		})
@@ -62,11 +52,7 @@ func LoadExternalPolicies(directories []string) (map[string]*Policy, error) {
 		if err != nil {
 			return nil, err
 		}
-
-		if err != nil {
-			return nil, err
-		}
 	}
 
-	return policies, nil
+	return rules, nil
 }

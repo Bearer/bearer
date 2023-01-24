@@ -41,22 +41,20 @@ type FlagGroup interface {
 }
 
 type Flags struct {
-	RepoFlagGroup     *RepoFlagGroup
-	ReportFlagGroup   *ReportFlagGroup
-	PolicyFlagGroup   *PolicyFlagGroup
-	DetectorFlagGroup *DetectorFlagGroup
-	ProcessFlagGroup  *ProcessFlagGroup
-	ScanFlagGroup     *ScanFlagGroup
-	WorkerFlagGroup   *WorkerFlagGroup
-	GeneralFlagGroup  *GeneralFlagGroup
+	RepoFlagGroup    *RepoFlagGroup
+	ReportFlagGroup  *ReportFlagGroup
+	RuleFlagGroup    *RuleFlagGroup
+	ProcessFlagGroup *ProcessFlagGroup
+	ScanFlagGroup    *ScanFlagGroup
+	WorkerFlagGroup  *WorkerFlagGroup
+	GeneralFlagGroup *GeneralFlagGroup
 }
 
 // Options holds all the runtime configuration
 type Options struct {
 	RepoOptions
 	ReportOptions
-	PolicyOptions
-	DetectorOptions
+	RuleOptions
 	WorkerOptions
 	ScanOptions
 	GeneralOptions
@@ -166,11 +164,8 @@ func (f *Flags) groups() []FlagGroup {
 	if f.ReportFlagGroup != nil {
 		groups = append(groups, f.ReportFlagGroup)
 	}
-	if f.PolicyFlagGroup != nil {
-		groups = append(groups, f.PolicyFlagGroup)
-	}
-	if f.DetectorFlagGroup != nil {
-		groups = append(groups, f.DetectorFlagGroup)
+	if f.RuleFlagGroup != nil {
+		groups = append(groups, f.RuleFlagGroup)
 	}
 	if f.ScanFlagGroup != nil {
 		groups = append(groups, f.ScanFlagGroup)
@@ -267,12 +262,8 @@ func (f *Flags) ToOptions(args []string) (Options, error) {
 		}
 	}
 
-	if f.PolicyFlagGroup != nil {
-		opts.PolicyOptions = f.PolicyFlagGroup.ToOptions(args)
-	}
-
-	if f.DetectorFlagGroup != nil {
-		opts.DetectorOptions = f.DetectorFlagGroup.ToOptions(args)
+	if f.RuleFlagGroup != nil {
+		opts.RuleOptions = f.RuleFlagGroup.ToOptions(args)
 	}
 
 	if f.WorkerFlagGroup != nil {
