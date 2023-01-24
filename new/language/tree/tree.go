@@ -11,6 +11,7 @@ type Tree struct {
 	fileName     string
 	sitterTree   *sitter.Tree
 	unifiedNodes map[NodeID][]*Node
+	queryCache   map[int]map[NodeID][]QueryResult
 }
 
 func Parse(sitterLanguage *sitter.Language, input string) (*Tree, error) {
@@ -30,6 +31,7 @@ func Parse(sitterLanguage *sitter.Language, input string) (*Tree, error) {
 		input:        inputBytes,
 		sitterTree:   sitterTree,
 		unifiedNodes: make(map[NodeID][]*Node),
+		queryCache:   make(map[int]map[NodeID][]QueryResult),
 	}, nil
 }
 

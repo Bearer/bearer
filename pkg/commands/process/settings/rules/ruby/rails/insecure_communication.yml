@@ -2,9 +2,8 @@ type: "risk"
 patterns:
   - |
     Rails.application.configure do
-       config.force_ssl = false
-       $<!>config.force_ssl = false
-     end
+      $<!>config.force_ssl = false
+    end
 languages:
   - ruby
 trigger: "global"
