@@ -6,7 +6,6 @@ import (
 
 	"github.com/bearer/curio/integration/internal/testhelper"
 	"github.com/bearer/curio/pkg/commands/process/settings/rules"
-	"github.com/rs/zerolog/log"
 )
 
 var rulesFs = &rules.Rules
@@ -27,14 +26,14 @@ func buildTestCase(name, reportType, filename string) testhelper.TestCase {
 func TestRubyRules(t *testing.T) {
 	rubyDirs, err := rulesFs.ReadDir("ruby")
 	if err != nil {
-		log.Error().Msgf("failed to read rules/ruby dir %e", err)
+		t.Fatalf("failed to read rules/ruby dir %e", err)
 	}
 
 	for _, rubyDir := range rubyDirs {
 		rubyDirName := rubyDir.Name() // e.g. lang, rails, third_parties
 		dirEntries, err := rulesFs.ReadDir("ruby/" + rubyDirName)
 		if err != nil {
-			log.Error().Msgf("failed to read rules/ruby/%s dir %e", rubyDirName, err)
+			t.Fatalf("failed to read rules/ruby/%s dir %e", rubyDirName, err)
 		}
 
 		for _, dirEntry := range dirEntries {
@@ -50,8 +49,7 @@ func TestRubyRules(t *testing.T) {
 			testdataDirEntries, err := rulesFs.ReadDir("ruby/" + rubyDirName + "/" + dirEntryName + "/testdata")
 
 			if err != nil {
-				// FIXME: do we want to fail silently here?
-				log.Error().Msgf("failed to read rules/ruby/%s/%s dir %e", rubyDirName, dirEntryName, err)
+				t.Fatalf("failed to read rules/ruby/%s/%s dir %e", rubyDirName, dirEntryName, err)
 			}
 
 			rubySubPath := "ruby/" + rubyDirName + "/" + dirEntryName
@@ -59,8 +57,8 @@ func TestRubyRules(t *testing.T) {
 			for _, testdataFile := range testdataDirEntries {
 				name := testdataFile.Name()
 
-				dataflowTests = append(dataflowTests, buildTestCase("dataflow_"+dirEntryName+"_"+name, "dataflow", rubySubPath+"/testdata/"+name))
-				policyTests = append(policyTests, buildTestCase("policy_"+dirEntryName+"_"+name, "policies", rubySubPath+"/testdata/"+name))
+				dataflowTests = append(dataflowTests, buildTestCase("dataflow_"+rubyDirName+"_"+dirEntryName+"_"+name, "dataflow", rubySubPath+"/testdata/"+name))
+				policyTests = append(policyTests, buildTestCase("policy_"+rubyDirName+"_"+dirEntryName+"_"+name, "policies", rubySubPath+"/testdata/"+name))
 			}
 
 			snapshotDirectory := "../../pkg/commands/process/settings/rules/" + rubySubPath + "/.snapshots"
