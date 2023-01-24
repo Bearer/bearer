@@ -5,12 +5,15 @@ pagination:
   alias: rule
 permalink: "references/rules/{{ rule.metadata.id | slug }}/"
 layout: layouts/doc.njk
+eleventyComputed:
+  title: "Rule - {{ rule.metadata.description }}"
 ---
 
 <h1>{{rule.metadata.description}}</h1>
 
-{% renderTemplate "liquid, md" %}
+{% renderTemplate 'liquid,md',
+rule.metadata %}
 
-{{ rule.metadata.remediation_message }}
+{{remediation_message}}
 
 {% endrenderTemplate %}
