@@ -185,11 +185,7 @@ func findHighestSeverity(groups []string, severity map[string]string) string {
 		return settings.LevelLow
 	}
 
-	if len(severity) > 0 {
-		return severity["default"]
-	}
-
-	return settings.LevelLow
+	return severity["default"]
 }
 
 func writeRuleListToString(
