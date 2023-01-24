@@ -11,11 +11,11 @@ critical:
       parent_content: |-
         CSV.generate do |csv|
         	csv << ["email", "first_name", "last_name"]
-        	users.each do |user_5|
+        	users.each do |user|
         		csv << [
-        			user_5.email,
-        			user_5.first_name,
-        			user_5.last_name
+        			user.email,
+        			user.first_name,
+        			user.last_name
         		]
         	end
         end
@@ -31,11 +31,11 @@ critical:
       parent_content: |-
         CSV.generate do |csv|
         	csv << ["email", "first_name", "last_name"]
-        	users.each do |user_5|
+        	users.each do |user|
         		csv << [
-        			user_5.email,
-        			user_5.first_name,
-        			user_5.last_name
+        			user.email,
+        			user.first_name,
+        			user.last_name
         		]
         	end
         end
@@ -51,11 +51,11 @@ critical:
       parent_content: |-
         CSV.generate do |csv|
         	csv << ["email", "first_name", "last_name"]
-        	users.each do |user_5|
+        	users.each do |user|
         		csv << [
-        			user_5.email,
-        			user_5.first_name,
-        			user_5.last_name
+        			user.email,
+        			user.first_name,
+        			user.last_name
         		]
         	end
         end

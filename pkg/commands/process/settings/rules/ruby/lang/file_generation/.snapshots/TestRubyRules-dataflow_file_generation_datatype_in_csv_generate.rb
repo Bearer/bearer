@@ -6,7 +6,7 @@ data_types:
             - filename: pkg/commands/process/settings/rules/ruby/lang/file_generation/testdata/datatype_in_csv_generate.rb
               line_number: 5
               field_name: email
-              object_name: user_5
+              object_name: user
     - name: Firstname
       detectors:
         - name: ruby
@@ -14,7 +14,7 @@ data_types:
             - filename: pkg/commands/process/settings/rules/ruby/lang/file_generation/testdata/datatype_in_csv_generate.rb
               line_number: 6
               field_name: first_name
-              object_name: user_5
+              object_name: user
     - name: Lastname
       detectors:
         - name: ruby
@@ -22,7 +22,7 @@ data_types:
             - filename: pkg/commands/process/settings/rules/ruby/lang/file_generation/testdata/datatype_in_csv_generate.rb
               line_number: 7
               field_name: last_name
-              object_name: user_5
+              object_name: user
 risks:
     - detector_id: ruby_lang_file_generation
       data_types:
@@ -36,16 +36,16 @@ risks:
                 content: |-
                     CSV.generate do |csv|
                     	csv << ["email", "first_name", "last_name"]
-                    	users.each do |user_5|
+                    	users.each do |user|
                     		csv << [
-                    			user_5.email,
-                    			user_5.first_name,
-                    			user_5.last_name
+                    			user.email,
+                    			user.first_name,
+                    			user.last_name
                     		]
                     	end
                     end
               field_name: email
-              object_name: user_5
+              object_name: user
         - name: Firstname
           stored: false
           locations:
@@ -56,16 +56,16 @@ risks:
                 content: |-
                     CSV.generate do |csv|
                     	csv << ["email", "first_name", "last_name"]
-                    	users.each do |user_5|
+                    	users.each do |user|
                     		csv << [
-                    			user_5.email,
-                    			user_5.first_name,
-                    			user_5.last_name
+                    			user.email,
+                    			user.first_name,
+                    			user.last_name
                     		]
                     	end
                     end
               field_name: first_name
-              object_name: user_5
+              object_name: user
         - name: Lastname
           stored: false
           locations:
@@ -76,16 +76,16 @@ risks:
                 content: |-
                     CSV.generate do |csv|
                     	csv << ["email", "first_name", "last_name"]
-                    	users.each do |user_5|
+                    	users.each do |user|
                     		csv << [
-                    			user_5.email,
-                    			user_5.first_name,
-                    			user_5.last_name
+                    			user.email,
+                    			user.first_name,
+                    			user.last_name
                     		]
                     	end
                     end
               field_name: last_name
-              object_name: user_5
+              object_name: user
         - name: Unique Identifier
           stored: false
           locations:
@@ -96,15 +96,15 @@ risks:
                 content: |-
                     CSV.generate do |csv|
                     	csv << ["email", "first_name", "last_name"]
-                    	users.each do |user_5|
+                    	users.each do |user|
                     		csv << [
-                    			user_5.email,
-                    			user_5.first_name,
-                    			user_5.last_name
+                    			user.email,
+                    			user.first_name,
+                    			user.last_name
                     		]
                     	end
                     end
-              object_name: user_5
+              object_name: user
             - filename: pkg/commands/process/settings/rules/ruby/lang/file_generation/testdata/datatype_in_csv_generate.rb
               line_number: 6
               parent:
@@ -112,15 +112,15 @@ risks:
                 content: |-
                     CSV.generate do |csv|
                     	csv << ["email", "first_name", "last_name"]
-                    	users.each do |user_5|
+                    	users.each do |user|
                     		csv << [
-                    			user_5.email,
-                    			user_5.first_name,
-                    			user_5.last_name
+                    			user.email,
+                    			user.first_name,
+                    			user.last_name
                     		]
                     	end
                     end
-              object_name: user_5
+              object_name: user
             - filename: pkg/commands/process/settings/rules/ruby/lang/file_generation/testdata/datatype_in_csv_generate.rb
               line_number: 7
               parent:
@@ -128,15 +128,15 @@ risks:
                 content: |-
                     CSV.generate do |csv|
                     	csv << ["email", "first_name", "last_name"]
-                    	users.each do |user_5|
+                    	users.each do |user|
                     		csv << [
-                    			user_5.email,
-                    			user_5.first_name,
-                    			user_5.last_name
+                    			user.email,
+                    			user.first_name,
+                    			user.last_name
                     		]
                     	end
                     end
-              object_name: user_5
+              object_name: user
 components: []
 
 

@@ -10,7 +10,7 @@ critical:
       parent_line_number: 2
       parent_content: |-
         IO.open(fd,"w") do |a|
-          a.puts "Hello, #{user_6.full_name}!"
+          a.puts "Hello, #{user.full_name}!"
         end
 
 

@@ -6,11 +6,11 @@ data_types:
             - filename: pkg/commands/process/settings/rules/ruby/lang/file_generation/testdata/datatype_in_ftp_open.rb
               line_number: 1
               field_name: email
-              object_name: user_2
+              object_name: user
             - filename: pkg/commands/process/settings/rules/ruby/lang/file_generation/testdata/datatype_in_ftp_open.rb
               line_number: 5
               field_name: email
-              object_name: user_4
+              object_name: user
     - name: Emails
       detectors:
         - name: ruby
@@ -18,7 +18,7 @@ data_types:
             - filename: pkg/commands/process/settings/rules/ruby/lang/file_generation/testdata/datatype_in_ftp_open.rb
               line_number: 3
               field_name: emails
-              object_name: user_3
+              object_name: user
     - name: Firstname
       detectors:
         - name: ruby
@@ -26,7 +26,7 @@ data_types:
             - filename: pkg/commands/process/settings/rules/ruby/lang/file_generation/testdata/datatype_in_ftp_open.rb
               line_number: 5
               field_name: first_name
-              object_name: user_4
+              object_name: user
     - name: Lastname
       detectors:
         - name: ruby
@@ -34,7 +34,7 @@ data_types:
             - filename: pkg/commands/process/settings/rules/ruby/lang/file_generation/testdata/datatype_in_ftp_open.rb
               line_number: 5
               field_name: last_name
-              object_name: user_4
+              object_name: user
 risks:
     - detector_id: ruby_lang_file_generation
       data_types:
@@ -45,21 +45,21 @@ risks:
               line_number: 1
               parent:
                 line_number: 1
-                content: 'File.open("users.log", "w") { |f| f.write "#{Time.now} - User #{user_2.email} logged in\n" }'
+                content: 'File.open("users.log", "w") { |f| f.write "#{Time.now} - User #{user.email} logged in\n" }'
               field_name: email
-              object_name: user_2
+              object_name: user
             - filename: pkg/commands/process/settings/rules/ruby/lang/file_generation/testdata/datatype_in_ftp_open.rb
               line_number: 5
               parent:
                 line_number: 3
                 content: |-
-                    File.open(user_3.emails, "users.csv", "w") do |f|
-                    	users.each do |user_4|
-                    		f.write "#{user_4.email},#{user_4.first_name},#{user_4.last_name}"
+                    File.open(user.emails, "users.csv", "w") do |f|
+                    	users.each do |user|
+                    		f.write "#{user.email},#{user.first_name},#{user.last_name}"
                     	end
                     end
               field_name: email
-              object_name: user_4
+              object_name: user
         - name: Firstname
           stored: false
           locations:
@@ -68,13 +68,13 @@ risks:
               parent:
                 line_number: 3
                 content: |-
-                    File.open(user_3.emails, "users.csv", "w") do |f|
-                    	users.each do |user_4|
-                    		f.write "#{user_4.email},#{user_4.first_name},#{user_4.last_name}"
+                    File.open(user.emails, "users.csv", "w") do |f|
+                    	users.each do |user|
+                    		f.write "#{user.email},#{user.first_name},#{user.last_name}"
                     	end
                     end
               field_name: first_name
-              object_name: user_4
+              object_name: user
         - name: Lastname
           stored: false
           locations:
@@ -83,13 +83,13 @@ risks:
               parent:
                 line_number: 3
                 content: |-
-                    File.open(user_3.emails, "users.csv", "w") do |f|
-                    	users.each do |user_4|
-                    		f.write "#{user_4.email},#{user_4.first_name},#{user_4.last_name}"
+                    File.open(user.emails, "users.csv", "w") do |f|
+                    	users.each do |user|
+                    		f.write "#{user.email},#{user.first_name},#{user.last_name}"
                     	end
                     end
               field_name: last_name
-              object_name: user_4
+              object_name: user
         - name: Unique Identifier
           stored: false
           locations:
@@ -97,19 +97,19 @@ risks:
               line_number: 1
               parent:
                 line_number: 1
-                content: 'File.open("users.log", "w") { |f| f.write "#{Time.now} - User #{user_2.email} logged in\n" }'
-              object_name: user_2
+                content: 'File.open("users.log", "w") { |f| f.write "#{Time.now} - User #{user.email} logged in\n" }'
+              object_name: user
             - filename: pkg/commands/process/settings/rules/ruby/lang/file_generation/testdata/datatype_in_ftp_open.rb
               line_number: 5
               parent:
                 line_number: 3
                 content: |-
-                    File.open(user_3.emails, "users.csv", "w") do |f|
-                    	users.each do |user_4|
-                    		f.write "#{user_4.email},#{user_4.first_name},#{user_4.last_name}"
+                    File.open(user.emails, "users.csv", "w") do |f|
+                    	users.each do |user|
+                    		f.write "#{user.email},#{user.first_name},#{user.last_name}"
                     	end
                     end
-              object_name: user_4
+              object_name: user
 components: []
 
 
