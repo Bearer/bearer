@@ -70,7 +70,6 @@ policy_failure contains item if {
 
 policy_failure contains item if {
 	some detector in presence_failures
-	detector.detector_id == input.rule.id
 
 	location = detector.locations[_]
 	item := data.bearer.common.build_item(location)
