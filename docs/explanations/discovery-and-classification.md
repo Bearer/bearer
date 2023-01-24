@@ -109,4 +109,4 @@ Our latest tests of unknown data sets **yield an accuracy of 93%**, or 7% false 
 
 ## You can improve Curio's detection and classification
 
-Curio is extensible. Just as you can add specific policies that work for your own needs, you can also new data types, detectors, and classification patterns. Documentation on how to do so is **coming soon**, but for now, you can [browse the repo](https://github.com/Bearer/curio) to see how these are implemented.
+Curio is extensible. Just as you can add specific rules that work for your own needs, you can also new data types, detectors, and classification patterns. Documentation on how to do so is **coming soon**, but for now, you can [browse the repo](https://github.com/Bearer/curio) to see how these are implemented.
