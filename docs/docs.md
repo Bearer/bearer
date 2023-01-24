@@ -27,7 +27,7 @@ Reference documents are where you'll find detailed information about each comman
 
 - [Commands](/reference/commands/)
 - [Supported Data Types](/reference/datatypes/)
-- [Built-in Policies](/reference/policies/)
+- [Built-in Rules](/reference/rules/)
 - [Supported Languages](/reference/supported-languages/)
 - [Configuration](/reference/config/)
 
