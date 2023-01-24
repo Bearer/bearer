@@ -43,6 +43,10 @@ func (node *Node) StartByte() int {
 	return int(node.sitterNode.StartByte())
 }
 
+func (node *Node) EndByte() int {
+	return int(node.sitterNode.EndByte())
+}
+
 func (node *Node) LineNumber() int {
 	return int(node.sitterNode.StartPoint().Row + 1)
 }
