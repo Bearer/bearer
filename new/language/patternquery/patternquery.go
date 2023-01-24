@@ -3,9 +3,11 @@ package patternquery
 import (
 	"fmt"
 
+	"github.com/bearer/curio/new/language/implementation"
 	"github.com/bearer/curio/new/language/patternquery/builder"
+	"github.com/bearer/curio/new/language/patternquery/types"
 	"github.com/bearer/curio/new/language/tree"
-	"github.com/bearer/curio/new/language/types"
+	languagetypes "github.com/bearer/curio/new/language/types"
 )
 
 type Query struct {
@@ -16,20 +18,20 @@ type Query struct {
 }
 
 func Compile(
-	lang types.Language,
-	anonymousParentTypes []string,
+	lang languagetypes.Language,
+	langImplementation implementation.Implementation,
 	input string,
-	variables []builder.Variable,
+	variables []types.Variable,
 	matchNodeOffset int,
 ) (*Query, error) {
-	builderResult, err := builder.Build(lang, anonymousParentTypes, input, variables, matchNodeOffset)
+	builderResult, err := builder.Build(lang, langImplementation, input, variables, matchNodeOffset)
 	if err != nil {
 		return nil, fmt.Errorf("failed to build: %s", err)
 	}
 
 	treeQuery, err := lang.CompileQuery(builderResult.Query)
 	if err != nil {
-		return nil, fmt.Errorf("failed to compile: %s, %s", err, builderResult.Query)
+		return nil, fmt.Errorf("failed to compile: %s, %s \n%s", err, builderResult.Query, input)
 	}
 
 	return &Query{
@@ -40,13 +42,13 @@ func Compile(
 	}, nil
 }
 
-func (query *Query) MatchAt(node *tree.Node) ([]*types.PatternQueryResult, error) {
+func (query *Query) MatchAt(node *tree.Node) ([]*languagetypes.PatternQueryResult, error) {
 	treeResults, err := query.treeQuery.MatchAt(node)
 	if err != nil {
 		return nil, err
 	}
 
-	var results []*types.PatternQueryResult
+	var results []*languagetypes.PatternQueryResult
 
 	for _, treeResult := range treeResults {
 		result := query.matchAndTranslateTreeResult(treeResult)
@@ -58,7 +60,7 @@ func (query *Query) MatchAt(node *tree.Node) ([]*types.PatternQueryResult, error
 	return results, nil
 }
 
-func (query *Query) MatchOnceAt(node *tree.Node) (*types.PatternQueryResult, error) {
+func (query *Query) MatchOnceAt(node *tree.Node) (*languagetypes.PatternQueryResult, error) {
 	treeResult, err := query.treeQuery.MatchOnceAt(node)
 	if err != nil {
 		return nil, err
@@ -71,7 +73,7 @@ func (query *Query) Close() {
 	query.treeQuery.Close()
 }
 
-func (query *Query) matchAndTranslateTreeResult(treeResult tree.QueryResult) *types.PatternQueryResult {
+func (query *Query) matchAndTranslateTreeResult(treeResult tree.QueryResult) *languagetypes.PatternQueryResult {
 	if treeResult == nil {
 		return nil
 	}
@@ -98,7 +100,7 @@ func (query *Query) matchAndTranslateTreeResult(treeResult tree.QueryResult) *ty
 		variables[query.paramToVariable[paramName]] = node
 	}
 
-	return &types.PatternQueryResult{
+	return &languagetypes.PatternQueryResult{
 		MatchNode: getMatchNode(treeResult["match"]),
 		Variables: variables,
 	}

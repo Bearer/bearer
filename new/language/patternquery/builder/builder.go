@@ -7,16 +7,12 @@ import (
 
 	"golang.org/x/exp/slices"
 
+	"github.com/bearer/curio/new/language/implementation"
+	"github.com/bearer/curio/new/language/patternquery/types"
 	"github.com/bearer/curio/new/language/tree"
-	"github.com/bearer/curio/new/language/types"
+	languagetypes "github.com/bearer/curio/new/language/types"
 	"github.com/bearer/curio/pkg/parser/nodeid"
 )
-
-type Variable struct {
-	NodeTypes  []string
-	DummyValue string
-	Name       string
-}
 
 type Result struct {
 	Query           string
@@ -26,21 +22,21 @@ type Result struct {
 }
 
 type builder struct {
-	anonymousParentTypes []string
-	stringBuilder        strings.Builder
-	idGenerator          nodeid.Generator
-	variables            []Variable
-	variableToParams     map[string][]string
-	paramToContent       map[string]string
-	matchNodeOffset      int
-	matchNodeFound       bool
+	langImplementation implementation.Implementation
+	stringBuilder      strings.Builder
+	idGenerator        nodeid.Generator
+	variables          []types.Variable
+	variableToParams   map[string][]string
+	paramToContent     map[string]string
+	matchNodeOffset    int
+	matchNodeFound     bool
 }
 
 func Build(
-	lang types.Language,
-	anonymousParentTypes []string,
+	lang languagetypes.Language,
+	langImplementation implementation.Implementation,
 	input string,
-	variables []Variable,
+	variables []types.Variable,
 	matchNodeOffset int,
 ) (*Result, error) {
 	tree, err := lang.Parse(input)
@@ -54,13 +50,13 @@ func Build(
 	}
 
 	builder := builder{
-		anonymousParentTypes: anonymousParentTypes,
-		stringBuilder:        strings.Builder{},
-		idGenerator:          &nodeid.IntGenerator{},
-		variables:            variables,
-		variableToParams:     make(map[string][]string),
-		paramToContent:       make(map[string]string),
-		matchNodeOffset:      matchNodeOffset,
+		langImplementation: langImplementation,
+		stringBuilder:      strings.Builder{},
+		idGenerator:        &nodeid.IntGenerator{},
+		variables:          variables,
+		variableToParams:   make(map[string][]string),
+		paramToContent:     make(map[string]string),
+		matchNodeOffset:    matchNodeOffset,
 	}
 
 	result := builder.build(tree.RootNode().Child(0))
@@ -74,7 +70,7 @@ func Build(
 
 func (builder *builder) build(rootNode *tree.Node) *Result {
 	builder.write("(")
-	builder.compileNode(rootNode)
+	builder.compileNode(rootNode, true, false)
 	builder.write(" @root")
 	builder.write(")")
 
@@ -88,7 +84,7 @@ func (builder *builder) build(rootNode *tree.Node) *Result {
 	}
 }
 
-func (builder *builder) compileNode(node *tree.Node) error {
+func (builder *builder) compileNode(node *tree.Node, isRoot bool, isLastChild bool) error {
 	if node.IsError() {
 		return fmt.Errorf(
 			"error parsing pattern at %d:%d: %s",
@@ -104,6 +100,12 @@ func (builder *builder) compileNode(node *tree.Node) error {
 		writeMatch = true
 	}
 
+	anchored := !isRoot && node.IsNamed() && builder.langImplementation.PatternIsAnchored(node)
+
+	if anchored {
+		builder.write(". ")
+	}
+
 	if variable := builder.getVariableFor(node); variable != nil {
 		builder.compileVariableNode(variable)
 	} else if !node.IsNamed() {
@@ -114,6 +116,10 @@ func (builder *builder) compileNode(node *tree.Node) error {
 		return err
 	}
 
+	if anchored && isLastChild {
+		builder.write(" .")
+	}
+
 	if writeMatch {
 		builder.write(" @match")
 	}
@@ -122,7 +128,7 @@ func (builder *builder) compileNode(node *tree.Node) error {
 }
 
 // variable nodes match their type and capture their content
-func (builder *builder) compileVariableNode(variable *Variable) {
+func (builder *builder) compileVariableNode(variable *types.Variable) {
 	paramName := builder.newParam()
 	builder.variableToParams[variable.Name] = append(builder.variableToParams[variable.Name], paramName)
 
@@ -140,7 +146,7 @@ func (builder *builder) compileVariableNode(variable *Variable) {
 
 // Anonymous nodes match their content as a literal
 func (builder *builder) compileAnonymousNode(node *tree.Node) {
-	if !slices.Contains(builder.anonymousParentTypes, node.Parent().Type()) {
+	if !slices.Contains(builder.langImplementation.AnonymousPatternNodeParentTypes(), node.Parent().Type()) {
 		return
 	}
 
@@ -166,7 +172,7 @@ func (builder *builder) compileNodeWithChildren(node *tree.Node) error {
 	for i := 0; i < node.ChildCount(); i++ {
 		builder.write(" ")
 
-		if err := builder.compileNode(node.Child(i)); err != nil {
+		if err := builder.compileNode(node.Child(i), false, i == node.ChildCount()-1); err != nil {
 			return err
 		}
 	}
@@ -191,7 +197,7 @@ func (builder *builder) processVariableToParams() (map[string]string, [][]string
 	return paramToVariable, equalParams
 }
 
-func (builder *builder) getVariableFor(node *tree.Node) *Variable {
+func (builder *builder) getVariableFor(node *tree.Node) *types.Variable {
 	for _, variable := range builder.variables {
 		if node.Content() == variable.DummyValue {
 			return &variable
