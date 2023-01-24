@@ -22,7 +22,7 @@ func Parse(sitterLanguage *sitter.Language, input string) (*Tree, error) {
 
 	parser.SetLanguage(sitterLanguage)
 
-	sitterTree, err := parser.ParseCtx(context.Background(), nil, inputBytes)
+	sitterTree, err := parser.ParseCtx(context.TODO(), nil, inputBytes)
 	if err != nil {
 		return nil, err
 	}
