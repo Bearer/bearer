@@ -9,6 +9,9 @@ patterns:
   - |
     Net::HTTP.start($<...>{ verify_mode: OpenSSL::SSL::VERIFY_NONE })$<...>
   - |
+    Net::HTTP.start($<_>, $<_>, $<_>, verify_mode: OpenSSL::SSL::VERIFY_NONE) do |$<_:identifier>|
+    end
+  - |
     $<_>.verify_mode = OpenSSL::SSL::VERIFY_NONE
 languages:
   - ruby
