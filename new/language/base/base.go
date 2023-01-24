@@ -47,7 +47,7 @@ func (lang *Language) CompilePatternQuery(input string) (types.PatternQuery, err
 
 	return patternquery.Compile(
 		lang,
-		lang.implementation.AnonymousPatternNodeParentTypes(),
+		lang.implementation,
 		inputWithoutMatchNode,
 		params,
 		matchNodeOffset,

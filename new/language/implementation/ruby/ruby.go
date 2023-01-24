@@ -12,7 +12,7 @@ import (
 	"golang.org/x/exp/slices"
 
 	"github.com/bearer/curio/new/language/implementation"
-	patternquerybuilder "github.com/bearer/curio/new/language/patternquery/builder"
+	patternquerytypes "github.com/bearer/curio/new/language/patternquery/types"
 	"github.com/bearer/curio/new/language/tree"
 	"github.com/bearer/curio/pkg/util/regex"
 )
@@ -72,12 +72,12 @@ func (implementation *rubyImplementation) AnalyzeFlow(rootNode *tree.Node) error
 	})
 }
 
-func (implementation *rubyImplementation) ExtractPatternVariables(input string) (string, []patternquerybuilder.Variable, error) {
+func (implementation *rubyImplementation) ExtractPatternVariables(input string) (string, []patternquerytypes.Variable, error) {
 	nameIndex := patternQueryVariableRegex.SubexpIndex("name")
 	typesIndex := patternQueryVariableRegex.SubexpIndex("types")
 	i := 0
 
-	var params []patternquerybuilder.Variable
+	var params []patternquerytypes.Variable
 
 	replaced, err := regex.ReplaceAllWithSubmatches(patternQueryVariableRegex, input, func(submatches []string) (string, error) {
 		nodeTypes := strings.Split(submatches[typesIndex], "|")
@@ -93,7 +93,7 @@ func (implementation *rubyImplementation) ExtractPatternVariables(input string) 
 
 		dummyValue := produceDummyValue(i, nodeTypes[0])
 
-		params = append(params, patternquerybuilder.Variable{
+		params = append(params, patternquerytypes.Variable{
 			Name:       submatches[nameIndex],
 			NodeTypes:  nodeTypes,
 			DummyValue: dummyValue,
@@ -138,4 +138,28 @@ func produceDummyValue(i int, nodeType string) string {
 
 func (implementation *rubyImplementation) AnonymousPatternNodeParentTypes() []string {
 	return anonymousPatternNodeParentTypes
+}
+
+func (implementation *rubyImplementation) PatternIsAnchored(node *tree.Node) bool {
+	parent := node.Parent()
+	if parent == nil {
+		return true
+	}
+
+	// Class body
+	if parent.Type() == "class" && !node.Equal(parent.ChildByFieldName("name")) {
+		return false
+	}
+
+	// Block body
+	if (parent.Type() == "do_block" || parent.Type() == "block") && !node.Equal(parent.ChildByFieldName("parameters")) {
+		return false
+	}
+
+	// Method body
+	if parent.Type() == "method" && !node.Equal(parent.ChildByFieldName("name")) && !node.Equal(parent.ChildByFieldName("parameters")) {
+		return false
+	}
+
+	return true
 }

@@ -6,8 +6,12 @@ import (
 	sitter "github.com/smacker/go-tree-sitter"
 )
 
+var maxQueryID = 0
+
 type Query struct {
 	sitterQuery *sitter.Query
+	id          int
+	input       string
 }
 
 type QueryResult map[string]*Node
@@ -18,17 +22,33 @@ func CompileQuery(sitterLanguage *sitter.Language, input string) (*Query, error)
 		return nil, err
 	}
 
-	return &Query{sitterQuery: sitterQuery}, nil
+	id := maxQueryID
+	maxQueryID += 1
+
+	return &Query{sitterQuery: sitterQuery, id: id, input: input}, nil
 }
 
+// Revisit if https://github.com/tree-sitter/tree-sitter/issues/1212 gets implemented
 func (query *Query) MatchAt(node *Node) ([]QueryResult, error) {
+	if _, inCache := node.tree.queryCache[query.id]; !inCache {
+		results, err := query.resultsFor(node.tree)
+		if err != nil {
+			return nil, err
+		}
+
+		node.tree.queryCache[query.id] = results
+	}
+
+	return node.tree.queryCache[query.id][node.ID()], nil
+}
+
+func (query *Query) resultsFor(tree *Tree) (map[NodeID][]QueryResult, error) {
 	cursor := sitter.NewQueryCursor()
 	defer cursor.Close()
 
-	cursor.SetPointRange(node.sitterNode.StartPoint(), node.sitterNode.EndPoint())
-	cursor.Exec(query.sitterQuery, node.tree.RootNode().sitterNode)
+	cursor.Exec(query.sitterQuery, tree.RootNode().sitterNode)
 
-	var results []QueryResult
+	nodeResults := make(map[NodeID][]QueryResult)
 
 	for {
 		match, found := cursor.NextMatch()
@@ -38,7 +58,7 @@ func (query *Query) MatchAt(node *Node) ([]QueryResult, error) {
 
 		result := make(QueryResult)
 		for _, capture := range match.Captures {
-			result[query.sitterQuery.CaptureNameForId(capture.Index)] = node.tree.wrap(capture.Node)
+			result[query.sitterQuery.CaptureNameForId(capture.Index)] = tree.wrap(capture.Node)
 		}
 
 		resultRoot, rootExists := result["root"]
@@ -46,14 +66,10 @@ func (query *Query) MatchAt(node *Node) ([]QueryResult, error) {
 			return nil, errors.New("missing @root capture in tree sitter query")
 		}
 
-		// The query could return nodes other than the one we're interested in
-		// Revisit if https://github.com/tree-sitter/tree-sitter/issues/1212 gets implemented
-		if node.Equal(resultRoot) {
-			results = append(results, result)
-		}
+		nodeResults[resultRoot.ID()] = append(nodeResults[resultRoot.ID()], result)
 	}
 
-	return results, nil
+	return nodeResults, nil
 }
 
 func (query *Query) MatchOnceAt(node *Node) (QueryResult, error) {

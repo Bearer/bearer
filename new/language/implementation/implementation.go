@@ -3,14 +3,15 @@ package implementation
 import (
 	sitter "github.com/smacker/go-tree-sitter"
 
-	patternquerybuilder "github.com/bearer/curio/new/language/patternquery/builder"
+	patternquerytypes "github.com/bearer/curio/new/language/patternquery/types"
 	"github.com/bearer/curio/new/language/tree"
 )
 
 type Implementation interface {
 	SitterLanguage() *sitter.Language
 	AnalyzeFlow(rootNode *tree.Node) error
-	ExtractPatternVariables(input string) (string, []patternquerybuilder.Variable, error)
+	ExtractPatternVariables(input string) (string, []patternquerytypes.Variable, error)
 	ExtractPatternMatchNode(input string) (string, int, error)
 	AnonymousPatternNodeParentTypes() []string
+	PatternIsAnchored(node *tree.Node) bool
 }
