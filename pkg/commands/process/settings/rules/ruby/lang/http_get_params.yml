@@ -13,7 +13,7 @@ patterns:
       - variable: DATA_TYPE
         detection: datatype
   - pattern: |
-      $<CLIENT>.get($<DATA_TYPE>)
+      $<CLIENT>.get($<...>$<DATA_TYPE>$<...>)
     filters:
       - variable: CLIENT
         values:
@@ -33,9 +33,8 @@ severity:
   PII: "critical"
   PHI: "medium"
   PD: "high"
-omit_parent_content: true
 metadata:
-  description: "Do not send sensitive data as HTTP GET parameters."
+  description: "Do not send sensitive data in HTTP GET parameters."
   remediation_message: ""
   dsr_id: "DSR-2"
-  id: "ruby_lang_http_get"
+  id: "ruby_lang_http_get_params"
