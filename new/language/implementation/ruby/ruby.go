@@ -75,18 +75,8 @@ func (implementation *rubyImplementation) AnalyzeFlow(rootNode *tree.Node) error
 				break
 			}
 
-			// handle to_json case
-			if parent.Type() == "call" &&
-				slice.Contains(passThroughMethods, node.Content()) &&
-				parent.ChildByFieldName("method").Equal(node) {
-				node.UnifyWith(parent.ChildByFieldName("receiver"))
-
-				break
-			}
-
-			if slice.Contains(variableLookupParents, parent.Type()) || (parent.Type() == "call" &&
-				slice.Contains(passThroughMethods, parent.ChildByFieldName("method").Content()) &&
-				parent.ChildByFieldName("receiver").Equal(node)) {
+			if slice.Contains(variableLookupParents, parent.Type()) ||
+				(parent.Type() == "call" && node.Equal(parent.ChildByFieldName("receiver"))) {
 				scopedNode := scope[node.Content()]
 				if scopedNode != nil {
 					node.UnifyWith(scopedNode)
@@ -184,4 +174,12 @@ func (implementation *rubyImplementation) PatternIsAnchored(node *tree.Node) boo
 	}
 
 	return true
+}
+
+func (implementation *rubyImplementation) IsTerminalDetectionNode(node *tree.Node) bool {
+	if node.Type() == "call" {
+		return !slice.Contains(passThroughMethods, node.ChildByFieldName("method").Content())
+	}
+
+	return false
 }
