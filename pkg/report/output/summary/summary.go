@@ -75,7 +75,7 @@ func GetOutput(dataflow *dataflow.DataFlow, config settings.Config) (map[string]
 			output.StdErrLogger().Msgf("Policy %s failed to write progress bar %e", rule.Id, err)
 		}
 
-		if rule.Type == "data_type" {
+		if !rule.PolicyType() {
 			continue
 		}
 
@@ -196,10 +196,10 @@ func writeRuleListToString(
 	ruleList := []string{}
 	for key := range rules {
 		rule := rules[key]
-		if rule.Type == "data_type" {
+		if !rule.PolicyType() {
 			continue
 		}
-		ruleList = append(ruleList, color.HiBlackString("- "+rule.Description+" ["+rule.DSRID+"/"+rule.Id+"]\n"))
+		ruleList = append(ruleList, color.HiBlackString("- "+rule.Description+" - "+key+" ["+rule.DSRID+"/"+rule.Id+"]\n"))
 	}
 
 	sort.Strings(ruleList)
@@ -267,7 +267,7 @@ func writePolicyFailureToString(reportStr *strings.Builder, policyFailure Policy
 	reportStr.WriteString("\n\n")
 	reportStr.WriteString(formatSeverity(policySeverity))
 	reportStr.WriteString(policyFailure.PolicyDescription + " [" + policyFailure.PolicyDSRID + "]" + "\n")
-	reportStr.WriteString(color.HiBlackString("https://curio.sh/reference/rules/#" + policyFailure.PolicyDSRID + "\n"))
+	reportStr.WriteString(color.HiBlackString("https://curio.sh/reference/rules/" + policyFailure.PolicyDisplayId + "\n"))
 	reportStr.WriteString(color.HiBlackString("To skip this rule, use the flag --skip-rule=" + policyFailure.PolicyDisplayId + "\n"))
 	reportStr.WriteString("\n")
 	if policyFailure.DetailedContext != "" {

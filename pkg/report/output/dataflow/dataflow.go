@@ -54,6 +54,7 @@ func GetOutput(input []interface{}, config settings.Config, isInternal bool) (*D
 	if err != nil {
 		return nil, err
 	}
+
 	customExtras, err := datatypes.NewCustomExtras(input, config)
 	if err != nil {
 		return nil, err
@@ -114,7 +115,7 @@ func GetOutput(input []interface{}, config settings.Config, isInternal bool) (*D
 			}
 
 			switch customDetector.Type {
-			case customdetectors.TypeVerfifier:
+			case customdetectors.TypeVerifier:
 				continue
 			case customdetectors.TypeRisk:
 				err := risksHolder.AddSchema(castDetection)

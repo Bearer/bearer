@@ -156,6 +156,14 @@ var policiesFs embed.FS
 //go:embed processors/*
 var processorsFs embed.FS
 
+func (rule *Rule) PolicyType() bool {
+	if rule.Type == "data_type" || rule.Type == "verifier" {
+		return false
+	}
+
+	return true
+}
+
 func FromOptions(opts flag.Options) (Config, error) {
 	policies := DefaultPolicies()
 	rules := defaultRules()
