@@ -1,0 +1,1 @@
+session[:user_name] = "mish bear"

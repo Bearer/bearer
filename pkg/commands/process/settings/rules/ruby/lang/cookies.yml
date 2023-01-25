@@ -6,14 +6,22 @@ patterns:
       - variable: DATA_TYPE
         detection: datatype
   - pattern: |
-      cookies.$<METHOD_CHAIN>[] = $<DATA_TYPE>
+      cookies.$<METHOD>[] = $<DATA_TYPE>
     filters:
-      - variable: METHOD_CHAIN
+      - variable: METHOD
         values:
           - permanent
           - signed
-          - permanent.signed
-          - signed.permanent
+      - variable: DATA_TYPE
+        detection: datatype
+  - pattern: |
+      cookies.permanent.signed[] = $<DATA_TYPE>
+    filters:
+      - variable: DATA_TYPE
+        detection: datatype
+  - pattern: |
+      cookies.signed.permanent[] = $<DATA_TYPE>
+    filters:
       - variable: DATA_TYPE
         detection: datatype
 languages:

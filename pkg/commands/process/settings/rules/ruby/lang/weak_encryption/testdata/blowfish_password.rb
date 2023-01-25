@@ -1,0 +1,1 @@
+Crypt::Blowfish.new("insecure").encrypt_block({ |u| user.password })

@@ -6,9 +6,9 @@ patterns:
     end
 languages:
   - ruby
-trigger: "global"
+trigger: "presence"
 severity:
-  default: "critical"
+  default: "low" # FIXME: warning
 omit_parent_content: true
 metadata:
   description: "Force all incoming communication through SSL."

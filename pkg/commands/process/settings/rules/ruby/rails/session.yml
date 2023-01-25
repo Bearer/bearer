@@ -13,6 +13,8 @@ severity:
   PII: "critical"
   PHI: "medium"
   PD: "high"
+skip_data_types:
+  - "Unique Identifier"
 metadata:
   description: "Do not store sensitive data in session cookies."
   remediation_message: ""

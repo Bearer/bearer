@@ -13,9 +13,9 @@ patterns:
 languages:
   - ruby
 detect_presence: true
-trigger: "local"
+trigger: "presence"
 severity:
-  default: "medium"
+  default: "low" # FIXME: warning
 metadata:
   description: "Do not disable SSL certificate verification."
   remediation_message: ""

@@ -15,4 +15,5 @@ type Implementation interface {
 	FindPatternUnanchoredPoints(input []byte) [][]int
 	AnonymousPatternNodeParentTypes() []string
 	PatternIsAnchored(node *tree.Node) bool
+	IsTerminalDetectionNode(node *tree.Node) bool
 }

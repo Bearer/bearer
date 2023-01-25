@@ -42,13 +42,12 @@ patterns:
           - Typhoeus
       - variable: INSECURE_URL
         detection: insecure_url
-trigger: "local" # FIXME: should trigger without data types i.e. no trigger
+trigger: "presence" # FIXME: should trigger without data types i.e. no trigger
 severity:
   default: "low"
   PII: "critical"
   PHI: "medium"
   PD: "high"
-omit_parent_content: true
 metadata:
   description: "Do not perform unsecure HTTP calls."
   remediation_message: ""

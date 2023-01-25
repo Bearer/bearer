@@ -16,6 +16,16 @@ import (
 	"github.com/bearer/curio/pkg/util/regex"
 )
 
+var passThroughMethods = []string{
+	"to_a",
+	"to_array",
+	"to_csv",
+	"to_h",
+	"to_hash",
+	"to_json",
+	"to_s",
+}
+
 var (
 	variableLookupParents = []string{"pair", "argument_list", "interpolation"}
 
@@ -61,7 +71,12 @@ func (implementation *rubyImplementation) AnalyzeFlow(rootNode *tree.Node) error
 			}
 		case "identifier":
 			parent := node.Parent()
-			if parent != nil && slice.Contains(variableLookupParents, parent.Type()) {
+			if parent == nil {
+				break
+			}
+
+			if slice.Contains(variableLookupParents, parent.Type()) ||
+				(parent.Type() == "call" && node.Equal(parent.ChildByFieldName("receiver"))) {
 				scopedNode := scope[node.Content()]
 				if scopedNode != nil {
 					node.UnifyWith(scopedNode)
@@ -159,4 +174,12 @@ func (implementation *rubyImplementation) PatternIsAnchored(node *tree.Node) boo
 	}
 
 	return true
+}
+
+func (implementation *rubyImplementation) IsTerminalDetectionNode(node *tree.Node) bool {
+	if node.Type() == "call" {
+		return !slice.Contains(passThroughMethods, node.ChildByFieldName("method").Content())
+	}
+
+	return false
 }

@@ -101,6 +101,7 @@ type RuleNew struct {
 	Id                 string            `mapstructure:"id" json:"id,omitempty" yaml:"id,omitempty"`
 	Type               string            `mapstructure:"type" json:"type,omitempty" yaml:"type,omitempty"`          // TODO: use enum value
 	Trigger            string            `mapstructure:"trigger" json:"trigger,omitempty" yaml:"trigger,omitempty"` // TODO: use enum value
+	DetailedContext    bool              `mapstructure:"detailed_context" json:"detailed_context,omitempty" yaml:"detailed_context,omitempty"`
 	Detectors          []string          `mapstructure:"detectors" json:"detectors,omitempty" yaml:"detectors,omitempty"`
 	Processors         []string          `mapstructure:"processors" json:"processors,omitempty" yaml:"processors,omitempty"`
 	Stored             bool              `mapstructure:"stored" json:"stored,omitempty" yaml:"stored,omitempty"`
@@ -403,6 +404,7 @@ func defaultDetectorsAndRules() (detectors map[string]Rule, rules map[string]*Ru
 					Id:                 ruleId,
 					Type:               ruleDefinition.Type,
 					Trigger:            ruleDefinition.Trigger,
+					DetailedContext:    ruleDefinition.DetailedContext,
 					OmitParent:         ruleDefinition.OmitParent,
 					OmitParentContent:  ruleDefinition.OmitParentContent,
 					SkipDataTypes:      ruleDefinition.SkipDataTypes,
