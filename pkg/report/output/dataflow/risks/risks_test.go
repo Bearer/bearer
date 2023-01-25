@@ -15,7 +15,7 @@ import (
 
 func TestDataflowRisks(t *testing.T) {
 	config := settings.Config{
-		CustomDetector: map[string]settings.Rule{
+		Rules: map[string]*settings.Rule{
 			"detect_ruby_logger": {
 				Stored: false,
 				Type:   customdetectors.TypeRisk,

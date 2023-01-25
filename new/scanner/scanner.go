@@ -28,7 +28,7 @@ func (scanner scannerType) Close() {
 
 func Setup(config *settings.Config, classifier *classification.Classifier) (err error) {
 	var toInstantiate = []struct {
-		constructor func(map[string]settings.Rule, *classification.Classifier) (types.Composition, error)
+		constructor func(map[string]*settings.Rule, *classification.Classifier) (types.Composition, error)
 		name        string
 	}{{
 		constructor: ruby.New,
@@ -36,7 +36,7 @@ func Setup(config *settings.Config, classifier *classification.Classifier) (err 
 	}}
 
 	for _, instantiatior := range toInstantiate {
-		composition, err := instantiatior.constructor(config.CustomDetector, classifier)
+		composition, err := instantiatior.constructor(config.Rules, classifier)
 		if err != nil {
 			return fmt.Errorf("failed to instantiate composition %s:%s", instantiatior.name, err)
 		}

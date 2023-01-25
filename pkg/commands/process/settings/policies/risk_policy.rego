@@ -74,3 +74,27 @@ policy_failure contains item if {
 	location = detector.locations[_]
 	item := data.bearer.common.build_item(location)
 }
+
+policy_failure contains item if {
+	input.rule.trigger == "stored_data_types"
+
+	data_type = input.dataflow.data_types[_]
+	not contains(input.rule.skip_data_types, data_type.name)
+
+	some detector in data_type.detectors
+
+	contains(input.rule.detectors, detector.name)
+
+	location = detector.locations[_]
+	count(input.rule.auto_encrypt_prefix) != 0
+
+	not location.encrypted == true
+
+	item := {
+		"category_groups": data.bearer.common.groups_for_datatype(data_type),
+		"filename": location.filename,
+		"line_number": location.line_number,
+		"parent_line_number": location.parent.line_number,
+		"parent_content": location.parent.content,
+	}
+}

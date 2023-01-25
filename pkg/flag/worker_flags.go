@@ -6,9 +6,9 @@ import (
 
 var (
 	WorkersFlag = Flag{
-		ConfigName: "worker.workers",
-		Value:      1,
-		Usage:      "The number of processing workers to spawn.",
+		ConfigName:      "worker.workers",
+		Value:           1,
+		Usage:           "The number of processing workers to spawn.",
 		DisableInConfig: true,
 	}
 	TimeoutFlag = Flag{

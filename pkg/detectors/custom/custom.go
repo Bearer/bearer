@@ -61,7 +61,7 @@ func (detector *Detector) AcceptDir(dir *file.Path) (bool, error) {
 	return true, nil
 }
 
-func (detector *Detector) CompileRules(rulesConfig map[string]settings.Rule) error {
+func (detector *Detector) CompileRules(rulesConfig map[string]*settings.Rule) error {
 	detector.rulesGroupedByLang = make(map[string][]config.CompiledRule)
 
 	for ruleName, rule := range rulesConfig {
@@ -85,12 +85,9 @@ func (detector *Detector) CompileRules(rulesConfig map[string]settings.Rule) err
 				compiledRule.RuleName = ruleName
 				compiledRule.Metavars = rule.Metavars
 				compiledRule.ParamParenting = rule.ParamParenting
-				compiledRule.RootLowercase = rule.RootLowercase
-				compiledRule.RootSingularize = rule.RootSingularize
 				compiledRule.DetectPresence = rule.DetectPresence
 				compiledRule.Pattern = rulePattern.Pattern
 				compiledRule.Filters = rulePattern.Filters
-				compiledRule.OmitParent = rule.OmitParent
 
 				detector.rulesGroupedByLang[lang] = append(detector.rulesGroupedByLang[lang], compiledRule)
 			}

@@ -6,12 +6,3 @@
       name: bearer.common
     - path: policies/risk_policy.rego
       name: bearer.risk_policy
-
-- type: verifier
-  query: |
-    policy_failure = data.bearer.verifier_policy.policy_failure
-  modules:
-    - path: policies/common.rego
-      name: bearer.common
-    - path: policies/verifier_policy.rego
-      name: bearer.verifier_policy

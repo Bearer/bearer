@@ -123,18 +123,18 @@ func buildScanID(scanSettings settings.Config) (string, error) {
 
 	// we want hash of all active custom detector rules and their content
 	detectorsHashBuilder := md5.New()
-	var customDetectorsRuleNames []string
-	for key := range scanSettings.CustomDetector {
-		customDetectorsRuleNames = append(customDetectorsRuleNames, key)
+	var ruleNames []string
+	for key := range scanSettings.Rules {
+		ruleNames = append(ruleNames, key)
 	}
-	sort.Strings(customDetectorsRuleNames)
+	sort.Strings(ruleNames)
 
-	for _, ruleName := range customDetectorsRuleNames {
+	for _, ruleName := range ruleNames {
 		_, err := detectorsHashBuilder.Write([]byte(ruleName))
 		if err != nil {
 			return "", err
 		}
-		detectorContent, err := json.Marshal(scanSettings.CustomDetector[ruleName])
+		detectorContent, err := json.Marshal(scanSettings.Rules[ruleName])
 		if err != nil {
 			return "", err
 		}
@@ -262,9 +262,9 @@ func (r *runner) Report(config settings.Config, report types.Report) (bool, erro
 		logger = outputhandler.PlainLogger(reportFile)
 	}
 
-	if config.Report.Report == flag.ReportPolicies && config.Report.Format == flag.FormatEmpty {
+	if config.Report.Report == flag.ReportSummary && config.Report.Format == flag.FormatEmpty {
 		// for policy report, default report format is NOT JSON
-		reportPassed, err := reportoutput.ReportPolicies(report, logger, config)
+		reportPassed, err := reportoutput.ReportSummary(report, logger, config)
 		if err != nil {
 			return false, fmt.Errorf("error generating report %w", err)
 		}
