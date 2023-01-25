@@ -14,9 +14,9 @@ import (
 )
 
 type processorInput struct {
-	Rule             *settings.RuleNew `json:"rule"`
-	AllDetections    []interface{}     `json:"all_detections"`
-	TargetDetections []interface{}     `json:"target_detections"`
+	Rule             *settings.Rule `json:"rule"`
+	AllDetections    []interface{}  `json:"all_detections"`
+	TargetDetections []interface{}  `json:"target_detections"`
 }
 
 type ExtraFields struct {
@@ -183,28 +183,26 @@ func newExtrasObj(
 	data := make(map[string]*ExtraFields)
 
 	for _, rule := range config.Rules {
-		if len(rule.Processors) > 0 {
-			for _, processor := range rule.Processors {
-				dataForProcessor, err := runProcessor(
-					processor,
-					detections,
-					targetDetections,
-					rule,
-				)
-				if err != nil {
-					return nil, err
-				}
-				for k, v := range dataForProcessor {
-					existingExtraFields, keyPresent := data[k]
-					if keyPresent {
-						// Merge in the new processor data
-						if existingExtraFields.encrypted == nil {
-							data[k].encrypted = v.encrypted
-						}
-						data[k].verifiedBy = append(data[k].verifiedBy, v.verifiedBy...)
-					} else {
-						data[k] = v
+		for _, processor := range rule.Processors {
+			dataForProcessor, err := runProcessor(
+				processor,
+				detections,
+				targetDetections,
+				rule,
+			)
+			if err != nil {
+				return nil, err
+			}
+			for k, v := range dataForProcessor {
+				existingExtraFields, keyPresent := data[k]
+				if keyPresent {
+					// Merge in the new processor data
+					if existingExtraFields.encrypted == nil {
+						data[k].encrypted = v.encrypted
 					}
+					data[k].verifiedBy = append(data[k].verifiedBy, v.verifiedBy...)
+				} else {
+					data[k] = v
 				}
 			}
 		}
@@ -216,7 +214,7 @@ func runExtrasQuery(
 	query string,
 	modules []regohelper.Module,
 	detections, targetDetections []interface{},
-	rule *settings.RuleNew,
+	rule *settings.Rule,
 ) (map[string]*ExtraFields, error) {
 	data := make(map[string]*ExtraFields)
 
@@ -308,7 +306,7 @@ func runProcessor(
 	processorName string,
 	detections []any,
 	targetDetections []any,
-	rule *settings.RuleNew,
+	rule *settings.Rule,
 ) (data map[string]*ExtraFields, err error) {
 	modules, err := processorModules(processorName)
 	if err != nil {

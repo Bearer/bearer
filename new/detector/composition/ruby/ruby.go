@@ -38,7 +38,7 @@ type Composition struct {
 	closers             []func()
 }
 
-func New(rules map[string]settings.Rule, classifier *classification.Classifier) (detectortypes.Composition, error) {
+func New(rules map[string]*settings.Rule, classifier *classification.Classifier) (detectortypes.Composition, error) {
 	lang, err := language.Get("ruby")
 	if err != nil {
 		return nil, fmt.Errorf("failed to lookup language: %s", err)
@@ -105,7 +105,7 @@ func New(rules map[string]settings.Rule, classifier *classification.Classifier) 
 		)
 		if err != nil {
 			composition.Close()
-			return nil, fmt.Errorf("failed to create custom detector %s: %s", ruleName, err)
+			return nil, fmt.Errorf("failed to create rule %s: %s", ruleName, err)
 		}
 		detectors = append(detectors, customDetector)
 		composition.closers = append(composition.closers, customDetector.Close)
@@ -144,7 +144,10 @@ func (composition *Composition) DetectFromFile(report report.Report, file *file.
 
 	evaluator := evaluator.New(composition.lang, composition.detectorSet, tree, file.FileInfo.Name())
 
-	composition.extractCustomDetectors(evaluator, tree, file, report)
+	err = composition.extractCustomDetectors(evaluator, tree, file, report)
+	if err != nil {
+		return fmt.Errorf("failed to extract custom detectors %s", err)
+	}
 
 	return nil
 }

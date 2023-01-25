@@ -14,13 +14,12 @@ import (
 )
 
 type Config struct {
-	Worker         flag.WorkerOptions  `mapstructure:"worker" json:"worker" yaml:"worker"`
-	Scan           flag.ScanOptions    `mapstructure:"scan" json:"scan" yaml:"scan"`
-	Report         flag.ReportOptions  `mapstructure:"report" json:"report" yaml:"report"`
-	CustomDetector map[string]Rule     `mapstructure:"custom_detector" json:"custom_detector" yaml:"custom_detector"`
-	Policies       map[string]*Policy  `mapstructure:"policies" json:"policies" yaml:"policies"`
-	Target         string              `mapstructure:"target" json:"target" yaml:"target"`
-	Rules          map[string]*RuleNew `mapstructure:"rules" json:"rules" yaml:"rules"`
+	Worker   flag.WorkerOptions `mapstructure:"worker" json:"worker" yaml:"worker"`
+	Scan     flag.ScanOptions   `mapstructure:"scan" json:"scan" yaml:"scan"`
+	Report   flag.ReportOptions `mapstructure:"report" json:"report" yaml:"report"`
+	Policies map[string]*Policy `mapstructure:"policies" json:"policies" yaml:"policies"`
+	Target   string             `mapstructure:"target" json:"target" yaml:"target"`
+	Rules    map[string]*Rule   `mapstructure:"rules" json:"rules" yaml:"rules"`
 }
 
 type PolicyLevel string
@@ -52,7 +51,28 @@ type RuleMetadata struct {
 }
 
 type RuleDefinition struct {
-	Disabled       bool          `mapstructure:"disabled" json:"disabled" yaml:"disabled"`
+	Disabled          bool              `mapstructure:"disabled" json:"disabled" yaml:"disabled"`
+	Type              string            `mapstructure:"type" json:"type" yaml:"type"`
+	Languages         []string          `mapstructure:"languages" json:"languages" yaml:"languages"`
+	ParamParenting    bool              `mapstructure:"param_parenting" json:"param_parenting" yaml:"param_parenting"`
+	Patterns          []RulePattern     `mapstructure:"patterns" json:"patterns" yaml:"patterns"`
+	Stored            bool              `mapstructure:"stored" json:"stored" yaml:"stored"`
+	Detectors         []string          `mapstructure:"detectors" json:"detectors,omitempty" yaml:"detectors,omitempty"`
+	Processors        []string          `mapstructure:"processors" json:"processors,omitempty" yaml:"processors,omitempty"`
+	AutoEncrytPrefix  string            `mapstructure:"auto_encrypt_prefix" json:"auto_encrypt_prefix,omitempty" yaml:"auto_encrypt_prefix,omitempty"`
+	DetectPresence    bool              `mapstructure:"detect_presence" json:"detect_presence" yaml:"detect_presence"`
+	Trigger           string            `mapstructure:"trigger" json:"trigger" yaml:"trigger"` // TODO: use enum value
+	Severity          map[string]string `mapstructure:"severity" json:"severity,omitempty" yaml:"severity,omitempty"`
+	SkipDataTypes     []string          `mapstructure:"skip_data_types" json:"skip_data_types,omitempty" yaml:"skip_data_types,omitempty"`
+	OnlyDataTypes     []string          `mapstructure:"only_data_types" json:"only_data_types,omitempty" yaml:"only_data_types,omitempty"`
+	OmitParentContent bool              `mapstructure:"omit_parent_content" json:"omit_parent_content,omitempty" yaml:"omit_parent_content,omitempty"`
+	DetailedContext   bool              `mapstructure:"detailed_context" json:"detailed_context,omitempty" yaml:"detailed_context,omitempty"`
+	Metadata          RuleMetadata      `mapstructure:"metadata" json:"metadata" yaml:"metadata"`
+	Auxiliary         []Auxiliary       `mapstructure:"auxiliary" json:"auxiliary" yaml:"auxiliary"`
+}
+
+type Auxiliary struct {
+	Id             string        `mapstructure:"id" json:"id" yaml:"id"`
 	Type           string        `mapstructure:"type" json:"type" yaml:"type"`
 	Languages      []string      `mapstructure:"languages" json:"languages" yaml:"languages"`
 	ParamParenting bool          `mapstructure:"param_parenting" json:"param_parenting" yaml:"param_parenting"`
@@ -61,43 +81,15 @@ type RuleDefinition struct {
 	RootSingularize bool `mapstructure:"root_singularize" yaml:"root_singularize" `
 	RootLowercase   bool `mapstructure:"root_lowercase" yaml:"root_lowercase"`
 
-	SkipPolicy       bool     `mapstructure:"skip_policy" json:"skip_policy" yaml:"skip_policy"`
 	Stored           bool     `mapstructure:"stored" json:"stored" yaml:"stored"`
 	Detectors        []string `mapstructure:"detectors" json:"detectors,omitempty" yaml:"detectors,omitempty"`
 	Processors       []string `mapstructure:"processors" json:"processors,omitempty" yaml:"processors,omitempty"`
 	AutoEncrytPrefix string   `mapstructure:"auto_encrypt_prefix" json:"auto_encrypt_prefix,omitempty" yaml:"auto_encrypt_prefix,omitempty"`
 	DetectPresence   bool     `mapstructure:"detect_presence" json:"detect_presence" yaml:"detect_presence"`
-
-	Auxiliary []struct {
-		Id             string        `mapstructure:"id" json:"id" yaml:"id"`
-		Type           string        `mapstructure:"type" json:"type" yaml:"type"`
-		Languages      []string      `mapstructure:"languages" json:"languages" yaml:"languages"`
-		ParamParenting bool          `mapstructure:"param_parenting" json:"param_parenting" yaml:"param_parenting"`
-		Patterns       []RulePattern `mapstructure:"patterns" json:"patterns" yaml:"patterns"`
-
-		RootSingularize bool `mapstructure:"root_singularize" yaml:"root_singularize" `
-		RootLowercase   bool `mapstructure:"root_lowercase" yaml:"root_lowercase"`
-
-		Stored           bool     `mapstructure:"stored" json:"stored" yaml:"stored"`
-		Detectors        []string `mapstructure:"detectors" json:"detectors,omitempty" yaml:"detectors,omitempty"`
-		Processors       []string `mapstructure:"processors" json:"processors,omitempty" yaml:"processors,omitempty"`
-		AutoEncrytPrefix string   `mapstructure:"auto_encrypt_prefix" json:"auto_encrypt_prefix,omitempty" yaml:"auto_encrypt_prefix,omitempty"`
-		DetectPresence   bool     `mapstructure:"detect_presence" json:"detect_presence" yaml:"detect_presence"`
-		OmitParent       bool     `mapstructure:"omit_parent" json:"omit_parent,omitempty" yaml:"omit_parent,omitempty"`
-	} `mapstructure:"auxiliary" json:"auxiliary" yaml:"auxiliary"`
-
-	Trigger           string            `mapstructure:"trigger" json:"trigger" yaml:"trigger"` // TODO: use enum value
-	Severity          map[string]string `mapstructure:"severity" json:"severity,omitempty" yaml:"severity,omitempty"`
-	SkipDataTypes     []string          `mapstructure:"skip_data_types" json:"skip_data_types,omitempty" yaml:"skip_data_types,omitempty"`
-	OnlyDataTypes     []string          `mapstructure:"only_data_types" json:"only_data_types,omitempty" yaml:"only_data_types,omitempty"`
-	OmitParent        bool              `mapstructure:"omit_parent" json:"omit_parent,omitempty" yaml:"omit_parent,omitempty"`
-	OmitParentContent bool              `mapstructure:"omit_parent_content" json:"omit_parent_content,omitempty" yaml:"omit_parent_content,omitempty"`
-	DetailedContext   bool              `mapstructure:"detailed_context" json:"detailed_context,omitempty" yaml:"detailed_context,omitempty"`
-	Metadata          RuleMetadata      `mapstructure:"metadata" json:"metadata" yaml:"metadata"`
+	OmitParent       bool     `mapstructure:"omit_parent" json:"omit_parent,omitempty" yaml:"omit_parent,omitempty"`
 }
 
-// TODO: naming? Deprecate Rule / avoid confusion?
-type RuleNew struct {
+type Rule struct {
 	Id                 string            `mapstructure:"id" json:"id,omitempty" yaml:"id,omitempty"`
 	Type               string            `mapstructure:"type" json:"type,omitempty" yaml:"type,omitempty"`          // TODO: use enum value
 	Trigger            string            `mapstructure:"trigger" json:"trigger,omitempty" yaml:"trigger,omitempty"` // TODO: use enum value
@@ -106,7 +98,7 @@ type RuleNew struct {
 	Processors         []string          `mapstructure:"processors" json:"processors,omitempty" yaml:"processors,omitempty"`
 	Stored             bool              `mapstructure:"stored" json:"stored,omitempty" yaml:"stored,omitempty"`
 	AutoEncrytPrefix   string            `mapstructure:"auto_encrypt_prefix" json:"auto_encrypt_prefix,omitempty" yaml:"auto_encrypt_prefix,omitempty"`
-	OmitParent         bool              `mapstructure:"omit_parent" json:"omit_parent,omitempty" yaml:"omit_parent,omitempty"`
+	Auxiliary          []Auxiliary       `mapstructure:"auxiliary" json:"auxiliary" yaml:"auxiliary"`
 	OmitParentContent  bool              `mapstructure:"omit_parent_content" json:"omit_parent_content,omitempty" yaml:"omit_parent_content,omitempty"`
 	SkipDataTypes      []string          `mapstructure:"skip_data_types" json:"skip_data_types,omitempty" yaml:"skip_data_types,omitempty"`
 	OnlyDataTypes      []string          `mapstructure:"only_data_types" json:"only_data_types,omitempty" yaml:"only_data_types,omitempty"`
@@ -114,16 +106,15 @@ type RuleNew struct {
 	Description        string            `mapstructure:"description" json:"description" yaml:"description"`
 	RemediationMessage string            `mapstructure:"remediation_message" json:"remediation_messafe" yaml:"remediation_messafe"`
 	DSRID              string            `mapstructure:"dsr_id" json:"dsr_id" yaml:"dsr_id"`
-}
+	Disabled           bool              `mapstructure:"disabled" json:"disabled" yaml:"disabled"`
+	Languages          []string          `mapstructure:"languages" json:"languages" yaml:"languages"`
+	ParamParenting     bool              `mapstructure:"param_parenting" json:"param_parenting" yaml:"param_parenting"`
+	Patterns           []RulePattern     `mapstructure:"patterns" json:"patterns" yaml:"patterns"`
 
-func (modules Modules) ToRegoModules() (output []rego.Module) {
-	for _, module := range modules {
-		output = append(output, rego.Module{
-			Name:    module.Name,
-			Content: module.Content,
-		})
-	}
-	return
+	// FIXME: remove after refactor of sql
+	Metavars       map[string]MetaVar `mapstructure:"metavars" json:"metavars" yaml:"metavars"`
+	DetectPresence bool               `mapstructure:"detect_presence" json:"detect_presence" yaml:"detect_presence"`
+	OmitParent     bool               `mapstructure:"omit_parent" json:"omit_parent" yaml:"omit_parent"`
 }
 
 type PatternFilter struct {
@@ -140,26 +131,6 @@ type PatternFilter struct {
 type RulePattern struct {
 	Pattern string          `mapstructure:"pattern" json:"pattern" yaml:"pattern"`
 	Filters []PatternFilter `mapstructure:"filters" json:"filters" yaml:"filters"`
-}
-
-type Rule struct {
-	Disabled       bool          `mapstructure:"disabled" json:"disabled" yaml:"disabled"`
-	Type           string        `mapstructure:"type" json:"type" yaml:"type"`
-	Languages      []string      `mapstructure:"languages" json:"languages" yaml:"languages"`
-	ParamParenting bool          `mapstructure:"param_parenting" json:"param_parenting" yaml:"param_parenting"`
-	Patterns       []RulePattern `mapstructure:"patterns" json:"patterns" yaml:"patterns"`
-
-	RootSingularize bool `mapstructure:"root_singularize" yaml:"root_singularize" `
-	RootLowercase   bool `mapstructure:"root_lowercase" yaml:"root_lowercase"`
-
-	Stored bool `mapstructure:"stored" json:"stored" yaml:"stored"`
-
-	Processors []string `mapstructure:"processors" json:"processors,omitempty" yaml:"processors,omitempty"`
-
-	// FIXME: remove after refactor of sql
-	Metavars       map[string]MetaVar `mapstructure:"metavars" json:"metavars" yaml:"metavars"`
-	DetectPresence bool               `mapstructure:"detect_presence" json:"detect_presence" yaml:"detect_presence"`
-	OmitParent     bool               `mapstructure:"omit_parent" json:"omit_parent" yaml:"omit_parent"`
 }
 
 type Processor struct {
@@ -185,25 +156,30 @@ var policiesFs embed.FS
 //go:embed processors/*
 var processorsFs embed.FS
 
-var CustomDetectorKey string = "scan.custom_detector"
-var PoliciesKey string = "scan.policies"
+func (rule *Rule) PolicyType() bool {
+	if rule.Type == "data_type" || rule.Type == "verifier" {
+		return false
+	}
+
+	return true
+}
 
 func FromOptions(opts flag.Options) (Config, error) {
 	policies := DefaultPolicies()
-	detectors, rules := defaultDetectorsAndRules()
+	rules := defaultRules()
 
-	externalDetectors, err := LoadExternalDetectors(opts.ExternalDetectorDir)
+	externalRules, err := LoadExternalRules(opts.ExternalRuleDir)
 	if err != nil {
-		return Config{}, fmt.Errorf("failed to load external detectors %w", err)
+		return Config{}, fmt.Errorf("failed to load external rules %w", err)
 	}
 
-	for ruleName, rule := range externalDetectors {
-		_, ok := detectors[ruleName]
+	for ruleName, rule := range externalRules {
+		_, ok := rules[ruleName]
 		if ok {
-			return Config{}, fmt.Errorf("tried to overwrite default custom detector %s with external detector", ruleName)
+			return Config{}, fmt.Errorf("tried to overwrite default rules %s with external rule", ruleName)
 		}
 
-		detectors[ruleName] = rule
+		rules[ruleName] = &rule
 	}
 
 	for key := range policies {
@@ -220,19 +196,19 @@ func FromOptions(opts flag.Options) (Config, error) {
 		}
 	}
 
-	// Policy options
-	onlyPolicy := opts.PolicyOptions.OnlyPolicy
-	skipPolicy := opts.PolicyOptions.SkipPolicy
+	// Rule options
+	onlyRule := opts.RuleOptions.OnlyRule
+	skipRule := opts.RuleOptions.SkipRule
 
 	// validate policy options - raise error if invalid DSW code given
 	var invalidRuleIds []string
-	for key := range onlyPolicy {
+	for key := range onlyRule {
 		if rules[key] == nil {
 			invalidRuleIds = append(invalidRuleIds, key)
 		}
 	}
 
-	for key := range skipPolicy {
+	for key := range skipRule {
 		if rules[key] == nil {
 			invalidRuleIds = append(invalidRuleIds, key)
 		}
@@ -245,39 +221,23 @@ func FromOptions(opts flag.Options) (Config, error) {
 	// apply policy options
 	for key := range rules {
 		rule := rules[key]
-		if len(onlyPolicy) > 0 && !onlyPolicy[rule.Id] {
+		if len(onlyRule) > 0 && !onlyRule[rule.Id] {
 			delete(rules, key)
 			continue
 		}
 
-		if skipPolicy[rule.Id] {
+		if skipRule[rule.Id] {
 			delete(rules, key)
 			continue
 		}
-	}
-
-	// FIXME: apply external policies
-	externalPolicies, err := LoadExternalPolicies(opts.ExternalPolicyDir)
-	if err != nil {
-		return Config{}, fmt.Errorf("failed to load external policies %w", err)
-	}
-
-	for policyName, policy := range externalPolicies {
-		_, ok := policies[policyName]
-		if ok {
-			return Config{}, fmt.Errorf("tried to overwrite default policy %s with external detector", policyName)
-		}
-
-		policies[policyName] = policy
 	}
 
 	config := Config{
-		Worker:         opts.WorkerOptions,
-		CustomDetector: detectors,
-		Scan:           opts.ScanOptions,
-		Report:         opts.ReportOptions,
-		Policies:       policies,
-		Rules:          rules,
+		Worker:   opts.WorkerOptions,
+		Scan:     opts.ScanOptions,
+		Report:   opts.ReportOptions,
+		Policies: policies,
+		Rules:    rules,
 	}
 
 	return config, nil
@@ -312,9 +272,8 @@ func DefaultPolicies() map[string]*Policy {
 	return policies
 }
 
-func defaultDetectorsAndRules() (detectors map[string]Rule, rules map[string]*RuleNew) {
-	detectors = make(map[string]Rule)
-	rules = make(map[string]*RuleNew)
+func defaultRules() (rules map[string]*Rule) {
+	rules = make(map[string]*Rule)
 
 	// loop through rules langs
 	langDirs, err := rulesFs.ReadDir("rules")
@@ -366,65 +325,50 @@ func defaultDetectorsAndRules() (detectors map[string]Rule, rules map[string]*Ru
 					// overwrite rule id
 					ruleId = strings.TrimSuffix(filename, ext)
 				} else {
-					// add custom detector (rule)
-					detector := Rule{
-						Disabled:        ruleDefinition.Disabled,
-						Type:            ruleDefinition.Type,
-						Languages:       ruleDefinition.Languages,
-						ParamParenting:  ruleDefinition.ParamParenting,
-						Patterns:        ruleDefinition.Patterns,
-						RootSingularize: ruleDefinition.RootSingularize,
-						RootLowercase:   ruleDefinition.RootLowercase,
-						Stored:          ruleDefinition.Stored,
-						Processors:      ruleDefinition.Processors,
-						DetectPresence:  ruleDefinition.DetectPresence,
-						OmitParent:      ruleDefinition.OmitParent,
+					// add rule
+					rule := Rule{
+						Id:                 ruleId,
+						Type:               ruleDefinition.Type,
+						Trigger:            ruleDefinition.Trigger,
+						OmitParentContent:  ruleDefinition.OmitParentContent,
+						SkipDataTypes:      ruleDefinition.SkipDataTypes,
+						OnlyDataTypes:      ruleDefinition.OnlyDataTypes,
+						Severity:           ruleDefinition.Severity,
+						Description:        ruleDefinition.Metadata.Description,
+						RemediationMessage: ruleDefinition.Metadata.RemediationMessage,
+						Stored:             ruleDefinition.Stored,
+						Detectors:          ruleDefinition.Detectors,
+						Processors:         ruleDefinition.Processors,
+						AutoEncrytPrefix:   ruleDefinition.AutoEncrytPrefix,
+						DSRID:              ruleDefinition.Metadata.DSRID,
+						Disabled:           ruleDefinition.Disabled,
+						Languages:          ruleDefinition.Languages,
+						ParamParenting:     ruleDefinition.ParamParenting,
+						Patterns:           ruleDefinition.Patterns,
+						DetectPresence:     ruleDefinition.DetectPresence,
 					}
-
-					detectors[ruleId] = detector
 
 					for _, auxiliaryRuleDefinition := range ruleDefinition.Auxiliary {
-						auxiliaryRule := Rule{
-							Type:            auxiliaryRuleDefinition.Type,
-							Languages:       auxiliaryRuleDefinition.Languages,
-							ParamParenting:  auxiliaryRuleDefinition.ParamParenting,
-							Patterns:        auxiliaryRuleDefinition.Patterns,
-							RootSingularize: auxiliaryRuleDefinition.RootSingularize,
-							RootLowercase:   auxiliaryRuleDefinition.RootLowercase,
-							Stored:          auxiliaryRuleDefinition.Stored,
-							DetectPresence:  auxiliaryRuleDefinition.DetectPresence,
-							OmitParent:      auxiliaryRuleDefinition.OmitParent,
+						auxiliaryRule := &Rule{
+							Type:           auxiliaryRuleDefinition.Type,
+							Languages:      auxiliaryRuleDefinition.Languages,
+							ParamParenting: auxiliaryRuleDefinition.ParamParenting,
+							Patterns:       auxiliaryRuleDefinition.Patterns,
+							Stored:         auxiliaryRuleDefinition.Stored,
+							DetectPresence: auxiliaryRuleDefinition.DetectPresence,
+							OmitParent:     auxiliaryRuleDefinition.OmitParent,
 						}
 
-						detectors[auxiliaryRuleDefinition.Id] = auxiliaryRule
+						rules[auxiliaryRuleDefinition.Id] = auxiliaryRule
 					}
-				}
 
-				newRule := RuleNew{
-					Id:                 ruleId,
-					Type:               ruleDefinition.Type,
-					Trigger:            ruleDefinition.Trigger,
-					DetailedContext:    ruleDefinition.DetailedContext,
-					OmitParent:         ruleDefinition.OmitParent,
-					OmitParentContent:  ruleDefinition.OmitParentContent,
-					SkipDataTypes:      ruleDefinition.SkipDataTypes,
-					OnlyDataTypes:      ruleDefinition.OnlyDataTypes,
-					Severity:           ruleDefinition.Severity,
-					Description:        ruleDefinition.Metadata.Description,
-					RemediationMessage: ruleDefinition.Metadata.RemediationMessage,
-					Stored:             ruleDefinition.Stored,
-					Detectors:          ruleDefinition.Detectors,
-					Processors:         ruleDefinition.Processors,
-					AutoEncrytPrefix:   ruleDefinition.AutoEncrytPrefix,
-					DSRID:              ruleDefinition.Metadata.DSRID,
+					rules[ruleId] = &rule
 				}
-
-				rules[ruleId] = &newRule
 			}
 		}
 	}
 
-	return detectors, rules
+	return rules
 }
 
 func ProcessorRegoModuleText(processorName string) (string, error) {
@@ -435,4 +379,14 @@ func ProcessorRegoModuleText(processorName string) (string, error) {
 	}
 
 	return string(data), nil
+}
+
+func (modules Modules) ToRegoModules() (output []rego.Module) {
+	for _, module := range modules {
+		output = append(output, rego.Module{
+			Name:    module.Name,
+			Content: module.Content,
+		})
+	}
+	return
 }

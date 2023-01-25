@@ -145,7 +145,7 @@ func TestRubyThirdPartyDataSendJSON(t *testing.T) {
 }
 
 func runTest(config []byte, path string, t *testing.T) string {
-	var rulesConfig map[string]settings.Rule
+	var rulesConfig map[string]*settings.Rule
 
 	detector := custom.New(&nodeid.IntGenerator{Counter: 0})
 	err := yaml.Unmarshal(config, &rulesConfig)

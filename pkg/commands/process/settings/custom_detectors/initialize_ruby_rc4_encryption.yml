@@ -1,6 +1,0 @@
-type: "risk"
-patterns:
-  - |
-    $<_> = RC4.new()
-languages:
-  - "ruby"

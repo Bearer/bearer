@@ -85,7 +85,7 @@ func (process *Process) StartProcess(task *workertype.ProcessRequest) error {
 
 	err = process.WaitForOnline(task)
 	if err != nil {
-		log.Fatal().Msgf("Failed to start curio, error with your configuration %e", err)
+		log.Fatal().Msgf("Failed to start curio, error with your configuration %s", err)
 		return err
 	}
 
@@ -94,7 +94,7 @@ func (process *Process) StartProcess(task *workertype.ProcessRequest) error {
 		log.Debug().Msgf("%s %s real process handler done trying to kill process", process.workeruuid, process.uuid)
 		err = cmd.Process.Kill()
 		if err != nil {
-			log.Debug().Msgf("failed killing process %e", err)
+			log.Debug().Msgf("failed killing process %s", err)
 		}
 	}()
 
