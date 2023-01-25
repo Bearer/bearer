@@ -6,7 +6,10 @@ low:
       line_number: 2
       filename: pkg/commands/process/settings/rules/ruby/lang/weak_encryption/testdata/blowfish.rb
       parent_line_number: 2
-      parent_content: blowfish.encrypt_string("hello world")
+      parent_content: |-
+        blowfish.encrypt_block do
+          "hello world"
+        end
 
 
 --
