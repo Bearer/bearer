@@ -17,7 +17,7 @@ risks:
               line_number: 1
               parent:
                 line_number: 1
-                content: 'HTTParty.post("http://my.api.com/users/search", body: { email: user.email })'
+                content: 'HTTParty.post("http://my.api.com/users/search", body: user.email)'
               field_name: email
               object_name: user
         - name: Unique Identifier
@@ -27,7 +27,7 @@ risks:
               line_number: 1
               parent:
                 line_number: 1
-                content: 'HTTParty.post("http://my.api.com/users/search", body: { email: user.email })'
+                content: 'HTTParty.post("http://my.api.com/users/search", body: user.email)'
               object_name: user
     - detector_id: ruby_lang_http_insecure
       locations:
@@ -35,7 +35,7 @@ risks:
           line_number: 1
           parent:
             line_number: 1
-            content: 'HTTParty.post("http://my.api.com/users/search", body: { email: user.email })'
+            content: 'HTTParty.post("http://my.api.com/users/search", body: user.email)'
           content: |
             $<CLIENT>.post($<INSECURE_URL>)
 components: []

@@ -3,14 +3,14 @@ languages:
   - ruby
 patterns:
   - pattern: |
-      Net::HTTP.post_form($<INSECURE_URL>, $<DATA_TYPE>)
+      Net::HTTP.post_form($<INSECURE_URL>, $<...>$<DATA_TYPE>$<...>)
     filters:
       - variable: INSECURE_URL
         detection: insecure_url
       - variable: DATA_TYPE
         detection: datatype
   - pattern: |
-      $<CLIENT>.post($<INSECURE_URL>, $<DATA_TYPE>)
+      $<CLIENT>.post($<INSECURE_URL>, $<...>$<DATA_TYPE>$<...>)
     filters:
       - variable: CLIENT
         values:
@@ -32,7 +32,6 @@ severity:
   PII: "critical"
   PHI: "medium"
   PD: "high"
-omit_parent_content: true
 metadata:
   description: "Do not send sensitive data through unsecure HTTP calls."
   remediation_message: ""
