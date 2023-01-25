@@ -1,2 +1,1 @@
-Digest::SHA1.hexidigest(user.email)
-Digest::SHA1.hexidigest(user.password)
+Digest::SHA1.hexidigest("hello world")

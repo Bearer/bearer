@@ -1,7 +1,11 @@
 type: "risk"
 patterns:
   - pattern: |
-      $<VAR>.$<METHOD>($<DATA_TYPE>)
+      Digest::SHA1.hexidigest()
+  - pattern: |
+      Digest::MD5.hexdigest()
+  - pattern: |
+      $<VAR>.$<METHOD>($<_>)
     filters:
       - variable: VAR
         detection: rc4_init
@@ -10,8 +14,50 @@ patterns:
           - encrypt
           - encrypt!
           - decrypt
-      - variable: DATA_TYPE
-        detection: datatype
+  - pattern: |
+      $<VAR>.$<METHOD>($<_>)
+    filters:
+      - variable: VAR
+        detection: openssl_rsa_init
+      - variable: METHOD
+        values:
+          - private_decrypt
+          - private_encrypt
+          - public_decrypt
+          - public_encrypt
+  - pattern: |
+      $<VAR>.$<METHOD>($<_>)
+    filters:
+      - variable: VAR
+        detection: openssl_rsa_init
+      - variable: METHOD
+        values:
+          - export
+          - to_pem
+          - to_s
+  - pattern: |
+      $<VAR>.$<METHOD>($<_>)
+    filters:
+      - variable: VAR
+        detection: openssl_dsa_init
+      - variable: METHOD
+        values:
+          - export
+          - to_pem
+          - to_s
+  - pattern: |
+      $<VAR>.$<METHOD>($<_>)
+    filters:
+      - variable: VAR
+        detection: blowfish_init
+      - variable: METHOD
+        values:
+          - encrypt_pair
+          - encrypt_string
+          - encrypt_block
+          - decrypt_pair
+          - decrypt_string
+          - decrypt_block
 languages:
   - "ruby"
 auxiliary:
@@ -22,7 +68,28 @@ auxiliary:
         RC4.new()
     languages:
       - "ruby"
-trigger: "local"
+  - id: "openssl_rsa_init"
+    type: "verifier"
+    patterns:
+      - |
+        OpenSSL::PKey::RSA.new()
+    languages:
+      - "ruby"
+  - id: "openssl_dsa_init"
+    type: "verifier"
+    patterns:
+      - |
+        OpenSSL::PKey::DSA.new()
+    languages:
+      - "ruby"
+  - id: "blowfish_init"
+    type: "verifier"
+    patterns:
+      - |
+        Crypt::Blowfish.new()
+    languages:
+      - "ruby"
+trigger: "presence"
 severity:
   default: "low"
   PII: "critical"
