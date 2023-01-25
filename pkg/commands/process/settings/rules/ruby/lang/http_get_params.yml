@@ -1,0 +1,40 @@
+type: "risk"
+languages:
+  - ruby
+patterns:
+  - pattern: |
+      URI.encode_www_form($<DATA_TYPE>)
+    filters:
+      - variable: DATA_TYPE
+        detection: datatype
+  - pattern: |
+      URI($<DATA_TYPE>)
+    filters:
+      - variable: DATA_TYPE
+        detection: datatype
+  - pattern: |
+      $<CLIENT>.get($<...>$<DATA_TYPE>$<...>)
+    filters:
+      - variable: CLIENT
+        values:
+          - Curl
+          - Excon
+          - Faraday
+          - HTTP
+          - HTTParty
+          - HTTPX
+          - RestClient
+          - Typhoeus
+      - variable: DATA_TYPE
+        detection: datatype
+trigger: "local"
+severity:
+  default: "low"
+  PII: "critical"
+  PHI: "medium"
+  PD: "high"
+metadata:
+  description: "Do not send sensitive data in HTTP GET parameters."
+  remediation_message: ""
+  dsr_id: "DSR-2"
+  id: "ruby_lang_http_get_params"

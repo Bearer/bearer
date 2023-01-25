@@ -1,0 +1,1 @@
+http.verify_mode = OpenSSL::SSL::VERIFY_PEER

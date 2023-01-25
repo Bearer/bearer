@@ -51,7 +51,7 @@ func (query *Query) MatchAt(node *tree.Node) ([]*languagetypes.PatternQueryResul
 	var results []*languagetypes.PatternQueryResult
 
 	for _, treeResult := range treeResults {
-		result := query.matchAndTranslateTreeResult(treeResult)
+		result := query.matchAndTranslateTreeResult(treeResult, node)
 		if result != nil {
 			results = append(results, result)
 		}
@@ -66,14 +66,14 @@ func (query *Query) MatchOnceAt(node *tree.Node) (*languagetypes.PatternQueryRes
 		return nil, err
 	}
 
-	return query.matchAndTranslateTreeResult(treeResult), nil
+	return query.matchAndTranslateTreeResult(treeResult, node), nil
 }
 
 func (query *Query) Close() {
 	query.treeQuery.Close()
 }
 
-func (query *Query) matchAndTranslateTreeResult(treeResult tree.QueryResult) *languagetypes.PatternQueryResult {
+func (query *Query) matchAndTranslateTreeResult(treeResult tree.QueryResult, rootNode *tree.Node) *languagetypes.PatternQueryResult {
 	if treeResult == nil {
 		return nil
 	}
@@ -101,15 +101,15 @@ func (query *Query) matchAndTranslateTreeResult(treeResult tree.QueryResult) *la
 	}
 
 	return &languagetypes.PatternQueryResult{
-		MatchNode: getMatchNode(treeResult["match"]),
+		MatchNode: getMatchNode(treeResult["match"], rootNode),
 		Variables: variables,
 	}
 }
 
-func getMatchNode(node *tree.Node) *tree.Node {
+func getMatchNode(node *tree.Node, rootNode *tree.Node) *tree.Node {
 	for {
 		parent := node.Parent()
-		if parent == nil || parent.StartByte() != node.StartByte() {
+		if parent == nil || parent.StartByte() != node.StartByte() || node.Equal(rootNode) {
 			return node
 		}
 

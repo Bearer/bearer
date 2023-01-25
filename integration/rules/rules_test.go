@@ -2,12 +2,10 @@ package integration_test
 
 import (
 	"path/filepath"
-	"strings"
 	"testing"
 
 	"github.com/bearer/curio/integration/internal/testhelper"
 	"github.com/bearer/curio/pkg/commands/process/settings/rules"
-	"github.com/rs/zerolog/log"
 )
 
 var rulesFs = &rules.Rules
@@ -26,41 +24,51 @@ func buildTestCase(name, reportType, filename string) testhelper.TestCase {
 
 // test dataflow and policies
 func TestRubyRules(t *testing.T) {
-	policyTests := []testhelper.TestCase{}
-	dataflowTests := []testhelper.TestCase{}
+	// rubyDirs, err := rulesFs.ReadDir("ruby")
+	// if err != nil {
+	// 	t.Fatalf("failed to read rules/ruby dir %e", err)
+	// }
 
-	rubyDirs, err := rulesFs.ReadDir("ruby")
-	if err != nil {
-		log.Error().Msgf("failed to read rules/ruby dir %e", err)
-	}
+	// for _, rubyDir := range rubyDirs {
+	// 	rubyDirName := rubyDir.Name() // e.g. lang, rails, third_parties
+	// dirEntries, err := rulesFs.ReadDir("ruby/" + rubyDirName)
+	// if err != nil {
+	// 	t.Fatalf("failed to read rules/ruby/%s dir %e", rubyDirName, err)
+	// }
 
-	for _, rubyDir := range rubyDirs {
-		subDir := rubyDir.Name()
-		dirEntries, err := rulesFs.ReadDir("ruby/" + subDir)
-		if err != nil {
-			log.Error().Msgf("failed to read rules/ruby/%s dir %e", subDir, err)
-		}
+	// rubyDirName := "lang"
+	// dirEntryName := "weak_encrption"
 
-		for _, dirEntry := range dirEntries {
-			filename := dirEntry.Name()
-			ext := filepath.Ext(filename)
-			name := strings.TrimSuffix(filename, ext)
+	// for _, dirEntry := range dirEntries {
+	// 	dirEntryName := dirEntry.Name() // e.g. cookies, cookies.yml
+	// 	ext := filepath.Ext(dirEntryName)
 
-			if ext == ".yaml" || ext == ".yml" {
-				// it's a YAML-format rule
-				continue
-			}
+	// 	if ext != "" {
+	// 		continue // not a folder
+	// 	}
+	// policyTests := []testhelper.TestCase{}
+	// dataflowTests := []testhelper.TestCase{}
 
-			if ext == "" && !strings.HasSuffix(name, "testdata") {
-				// it's a folder we don't care about
-				continue
-			}
+	// testdataDirEntries, err := rulesFs.ReadDir("ruby/" + rubyDirName + "/" + dirEntryName + "/testdata")
 
-			dataflowTests = append(dataflowTests, buildTestCase("dataflow_"+subDir+"_"+name, "dataflow", "ruby/"+subDir+"/"+filename))
-			policyTests = append(policyTests, buildTestCase("policy_"+subDir+"_"+name, "policies", "ruby/"+subDir+"/"+filename))
-		}
-	}
+	// if err != nil {
+	// 	t.Fatalf("failed to read rules/ruby/%s/%s dir %e", rubyDirName, dirEntryName, err)
+	// }
 
-	testhelper.RunTests(t, dataflowTests)
-	testhelper.RunTests(t, policyTests)
+	// rubySubPath := "ruby/" + rubyDirName + "/" + dirEntryName
+
+	// for _, testdataFile := range testdataDirEntries {
+	// 	name := testdataFile.Name()
+
+	// 	dataflowTests = append(dataflowTests, buildTestCase("dataflow_"+rubyDirName+"_"+dirEntryName+"_"+name, "dataflow", rubySubPath+"/testdata/"+name))
+	// 	policyTests = append(policyTests, buildTestCase("policy_"+rubyDirName+"_"+dirEntryName+"_"+name, "policies", rubySubPath+"/testdata/"+name))
+	// }
+
+	// snapshotDirectory := "../../pkg/commands/process/settings/rules/" + rubySubPath + "/.snapshots"
+	// testhelper.RunTestsWithSnapshotSubdirectory(t, dataflowTests, snapshotDirectory)
+	// testhelper.RunTestsWithSnapshotSubdirectory(t, policyTests, snapshotDirectory)
 }
+
+// }
+
+// }

@@ -7,10 +7,12 @@ import (
 	"github.com/bearer/curio/new/detector/types"
 	"github.com/bearer/curio/new/language/tree"
 	langtree "github.com/bearer/curio/new/language/tree"
+	languagetypes "github.com/bearer/curio/new/language/types"
 	"golang.org/x/exp/slices"
 )
 
 type evaluator struct {
+	lang               languagetypes.Language
 	detectorSet        types.DetectorSet
 	detectionCache     map[langtree.NodeID]map[string][]*types.Detection
 	executingDetectors map[langtree.NodeID][]string
@@ -18,6 +20,7 @@ type evaluator struct {
 }
 
 func New(
+	lang languagetypes.Language,
 	detectorSet types.DetectorSet,
 	tree *langtree.Tree,
 	fileName string,
@@ -25,6 +28,7 @@ func New(
 	detectionCache := make(map[langtree.NodeID]map[string][]*types.Detection)
 
 	return &evaluator{
+		lang:               lang,
 		fileName:           fileName,
 		detectorSet:        detectorSet,
 		detectionCache:     detectionCache,
@@ -54,6 +58,10 @@ func (evaluator *evaluator) ForTree(rootNode *langtree.Node, detectorType string
 			}
 
 			result = append(result, unifiedNodeDetections...)
+		}
+
+		if evaluator.lang.IsTerminalDetectionNode(node) {
+			return nil
 		}
 
 		return visitChildren()

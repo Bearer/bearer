@@ -185,11 +185,7 @@ func findHighestSeverity(groups []string, severity map[string]string) string {
 		return settings.LevelLow
 	}
 
-	if len(severity) > 0 {
-		return severity["default"]
-	}
-
-	return settings.LevelLow
+	return severity["default"]
 }
 
 func writeRuleListToString(
@@ -272,7 +268,7 @@ func writePolicyFailureToString(reportStr *strings.Builder, policyFailure Policy
 	reportStr.WriteString(formatSeverity(policySeverity))
 	reportStr.WriteString(policyFailure.PolicyDescription + " [" + policyFailure.PolicyDSRID + "]" + "\n")
 	reportStr.WriteString(color.HiBlackString("https://curio.sh/reference/policies/#" + policyFailure.PolicyDSRID + "\n"))
-	reportStr.WriteString(color.HiBlackString("To skip this policy, run --skip-policy=" + policyFailure.PolicyDisplayId + "\n"))
+	reportStr.WriteString(color.HiBlackString("To skip this policy, use the flag --skip-policy=" + policyFailure.PolicyDisplayId + "\n"))
 	reportStr.WriteString("\n")
 	if policyFailure.DetailedContext != "" {
 		reportStr.WriteString("Detected: " + policyFailure.DetailedContext + "\n")

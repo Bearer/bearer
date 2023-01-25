@@ -12,11 +12,19 @@ build_item(location) := {
 	"line_number": location.line_number,
 	"detailed_context": location.content
 } if {
-	input.rule.trigger == "presence"
+	input.rule.detailed_context == true
+}
+
+cat_groups := data.bearer.common.groups_for_datatypes(input.dataflow.data_types) if {
+	some data_type in input.dataflow.data_types
+}
+
+cat_groups := set() if {
+	not input.dataflow.data_types
 }
 
 build_item(location) := {
-	"category_groups": data.bearer.common.groups_for_datatypes(input.dataflow.data_types),
+	"category_groups": cat_groups,
 	"filename": location.filename,
 	"line_number": location.line_number,
 	"parent_line_number": location.parent.line_number,
@@ -27,16 +35,17 @@ build_item(location) := {
 }
 
 build_item(location) := {
-	"category_groups": data.bearer.common.groups_for_datatypes(input.dataflow.data_types),
+	"category_groups": cat_groups,
 	"filename": location.filename,
 	"line_number": location.line_number
 } if {
 	input.rule.omit_parent == true
+	not input.rule.detailed_context == true
 }
 
 # parent and parent content not omitted
 build_item(location) := {
-	"category_groups": data.bearer.common.groups_for_datatypes(input.dataflow.data_types),
+	"category_groups": cat_groups,
 	"filename": location.filename,
 	"line_number": location.line_number,
 	"parent_line_number": location.parent.line_number,
