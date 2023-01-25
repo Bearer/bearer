@@ -1,3 +1,5 @@
 blowfish = Crypt::Blowfish.new("insecure")
-blowfish.encrypt_string("hello world")
+blowfish.encrypt_block do
+  "hello world"
+end
 

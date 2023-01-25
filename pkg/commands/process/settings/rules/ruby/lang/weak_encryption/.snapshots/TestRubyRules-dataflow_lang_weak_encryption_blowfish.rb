@@ -21,9 +21,14 @@ risks:
           line_number: 2
           parent:
             line_number: 2
-            content: blowfish.encrypt_string("hello world")
+            content: |-
+                blowfish.encrypt_block do
+                  "hello world"
+                end
           content: |
-            $<VAR>.$<METHOD>($<_>)
+            $<VAR>.$<METHOD> do
+              $<_>
+            end
 components: []
 
 

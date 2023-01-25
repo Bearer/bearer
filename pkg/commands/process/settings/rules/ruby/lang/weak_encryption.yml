@@ -46,7 +46,7 @@ patterns:
           - to_pem
           - to_s
   - pattern: |
-      $<VAR>.$<METHOD>($<_>)
+      $<VAR>.$<METHOD>()
     filters:
       - variable: VAR
         detection: blowfish_init
@@ -54,9 +54,29 @@ patterns:
         values:
           - encrypt_pair
           - encrypt_string
-          - encrypt_block
           - decrypt_pair
           - decrypt_string
+  - pattern: |
+      $<VAR>.$<METHOD> do
+        $<_>
+      end
+    filters:
+      - variable: VAR
+        detection: blowfish_init
+      - variable: METHOD
+        values:
+          - encrypt_block
+          - decrypt_block
+  - pattern: |
+      $<VAR>.$<METHOD> {
+        $<_>
+      }
+    filters:
+      - variable: VAR
+        detection: blowfish_init
+      - variable: METHOD
+        values:
+          - encrypt_block
           - decrypt_block
 languages:
   - "ruby"
