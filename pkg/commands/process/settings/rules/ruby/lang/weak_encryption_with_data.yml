@@ -100,35 +100,35 @@ patterns:
         detection: datatype
 languages:
   - "ruby"
-# auxiliary:
-#   - id: "rc4_init"
-#     type: "verifier"
-#     patterns:
-#       - |
-#         RC4.new()
-#     languages:
-#       - "ruby"
-#   - id: "openssl_rsa_init"
-#     type: "verifier"
-#     patterns:
-#       - |
-#         OpenSSL::PKey::RSA.new()
-#     languages:
-#       - "ruby"
-#   - id: "openssl_dsa_init"
-#     type: "verifier"
-#     patterns:
-#       - |
-#         OpenSSL::PKey::DSA.new()
-#     languages:
-#       - "ruby"
-#   - id: "blowfish_init"
-#     type: "verifier"
-#     patterns:
-#       - |
-#         Crypt::Blowfish.new()
-#     languages:
-#       - "ruby"
+auxiliary:
+  - id: "rc4_init"
+    type: "verifier"
+    patterns:
+      - |
+        RC4.new()
+    languages:
+      - "ruby"
+  - id: "openssl_rsa_init"
+    type: "verifier"
+    patterns:
+      - |
+        OpenSSL::PKey::RSA.new()
+    languages:
+      - "ruby"
+  - id: "openssl_dsa_init"
+    type: "verifier"
+    patterns:
+      - |
+        OpenSSL::PKey::DSA.new()
+    languages:
+      - "ruby"
+  - id: "blowfish_init"
+    type: "verifier"
+    patterns:
+      - |
+        Crypt::Blowfish.new()
+    languages:
+      - "ruby"
 trigger: "local"
 severity:
   default: "low"
