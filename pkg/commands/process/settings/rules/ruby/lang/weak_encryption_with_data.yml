@@ -1,0 +1,142 @@
+type: "risk"
+patterns:
+  - pattern: |
+      Digest::SHA1.hexidigest($<DATA_TYPE>)
+    filters:
+      - variable: DATA_TYPE
+        detection: datatype
+  - pattern: |
+      Digest::MD5.hexdigest($<DATA_TYPE>)
+    filters:
+      - variable: DATA_TYPE
+        detection: datatype
+  - pattern: |
+      $<VAR>.$<METHOD>($<DATA_TYPE>)
+    filters:
+      - variable: VAR
+        detection: rc4_init
+      - variable: METHOD
+        values:
+          - encrypt
+          - encrypt!
+          - decrypt
+      - variable: DATA_TYPE
+        detection: datatype
+  - pattern: |
+      $<VAR>.$<METHOD>($<DATA_TYPE>)
+    filters:
+      - variable: VAR
+        detection: openssl_rsa_init
+      - variable: METHOD
+        values:
+          - private_decrypt
+          - private_encrypt
+          - public_decrypt
+          - public_encrypt
+      - variable: DATA_TYPE
+        detection: datatype
+  - pattern: |
+      $<VAR>.$<METHOD>($<_>, $<DATA_TYPE>)
+    filters:
+      - variable: VAR
+        detection: openssl_rsa_init
+      - variable: METHOD
+        values:
+          - export
+          - to_pem
+          - to_s
+      - variable: DATA_TYPE
+        detection: datatype
+  - pattern: |
+      $<VAR>.$<METHOD>($<_>, $<DATA_TYPE>)
+    filters:
+      - variable: VAR
+        detection: openssl_dsa_init
+      - variable: METHOD
+        values:
+          - export
+          - to_pem
+          - to_s
+      - variable: DATA_TYPE
+        detection: datatype
+  - pattern: |
+      $<VAR>.$<METHOD>($<_>, $<DATA_TYPE>)
+    filters:
+      - variable: VAR
+        detection: blowfish_init
+      - variable: METHOD
+        values:
+          - encrypt_pair
+          - encrypt_string
+          - decrypt_pair
+          - decrypt_string
+      - variable: DATA_TYPE
+        detection: datatype
+  - pattern: |
+      $<VAR>.$<METHOD> do
+        $<DATA_TYPE>
+      end
+    filters:
+      - variable: VAR
+        detection: blowfish_init
+      - variable: METHOD
+        values:
+          - encrypt_block
+          - decrypt_block
+      - variable: DATA_TYPE
+        detection: datatype
+  - pattern: |
+      $<VAR>.$<METHOD> {
+        $<DATA_TYPE>
+      }
+    filters:
+      - variable: VAR
+        detection: blowfish_init
+      - variable: METHOD
+        values:
+          - encrypt_block
+          - decrypt_block
+      - variable: DATA_TYPE
+        detection: datatype
+languages:
+  - "ruby"
+# auxiliary:
+#   - id: "rc4_init"
+#     type: "verifier"
+#     patterns:
+#       - |
+#         RC4.new()
+#     languages:
+#       - "ruby"
+#   - id: "openssl_rsa_init"
+#     type: "verifier"
+#     patterns:
+#       - |
+#         OpenSSL::PKey::RSA.new()
+#     languages:
+#       - "ruby"
+#   - id: "openssl_dsa_init"
+#     type: "verifier"
+#     patterns:
+#       - |
+#         OpenSSL::PKey::DSA.new()
+#     languages:
+#       - "ruby"
+#   - id: "blowfish_init"
+#     type: "verifier"
+#     patterns:
+#       - |
+#         Crypt::Blowfish.new()
+#     languages:
+#       - "ruby"
+trigger: "local"
+severity:
+  default: "low"
+  PII: "critical"
+  PHI: "medium"
+  PD: "high"
+metadata:
+  description: "Do not use weak encryption libraries to encrypt sensitive data."
+  remediation_message: ""
+  dsr_id: "DSR-7"
+  id: "ruby_lang_weak_encryption_with_data"
