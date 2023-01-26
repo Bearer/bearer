@@ -2,7 +2,7 @@ critical:
     - policy_name: ""
       policy_dsrid: DSR-2
       policy_display_id: ruby_lang_http_get_params
-      policy_description: Do not send sensitive data in HTTP GET parameters.
+      policy_description: Do not send sensitive data as HTTP GET parameters.
       line_number: 1
       filename: pkg/commands/process/settings/rules/ruby/lang/http_get_params/testdata/datatype_in_params.rb
       category_groups:
@@ -13,7 +13,7 @@ critical:
     - policy_name: ""
       policy_dsrid: DSR-2
       policy_display_id: ruby_lang_http_get_params
-      policy_description: Do not send sensitive data in HTTP GET parameters.
+      policy_description: Do not send sensitive data as HTTP GET parameters.
       line_number: 3
       filename: pkg/commands/process/settings/rules/ruby/lang/http_get_params/testdata/datatype_in_params.rb
       category_groups:
