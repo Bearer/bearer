@@ -3,15 +3,6 @@ const { statSync } = require("fs");
 const path = require("path");
 const yaml = require("js-yaml");
 const rulesPath = "../pkg/commands/process/settings/rules/";
-// Target file structure
-// lang
-//  -name
-//  -children [] (ditch this unless needed. Seems unnecessary)
-//    - framework
-//      - name
-//      - children []
-//        - yml file
-//          - metadata
 
 function isDirectory(dir) {
   const result = statSync(dir);
@@ -35,17 +26,10 @@ async function fetchData(location) {
         const subDirs = await readdir(dirPath);
         // ex. looping through rules/ruby [lang, rails]
         subDirs.forEach(async (subDir) => {
-          // const child = {
-          //   name: subDir,
-          //   // children: [],
-          // };
           const subDirPath = path.join(dirPath, subDir);
           if (isDirectory(subDirPath)) {
             const files = await readdir(subDirPath);
             const children = await fetchAllFiles(subDirPath, files);
-            // child.children = [...children];
-            // dirData.children.push(child);
-
             dirData.children.push(...children);
             rules.push(...children);
           }
@@ -74,16 +58,14 @@ async function fetchAllFiles(directory, files) {
 }
 
 async function fetchFile(location) {
-  if (path.extname(location) === ".yml") {
-    return readFile(location, { encoding: "utf8" }).then((file) => {
-      let out = yaml.load(file);
+  return readFile(location, { encoding: "utf8" }).then((file) => {
+    let out = yaml.load(file);
 
-      return {
-        name: path.basename(location, ".yml"),
-        ...out,
-      };
-    });
-  }
+    return {
+      name: path.basename(location, ".yml"),
+      ...out,
+    };
+  });
 }
 
 module.exports = async function () {

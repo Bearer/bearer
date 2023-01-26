@@ -6,15 +6,15 @@ layout: layouts/doc.njk
 {% renderTemplate "liquid,md" %}
 # Rules
 
-Rules are ways to enforce data security best practices across your codebase. Curio's rule report allows you to quickly identify rule violations in your code.
+Rules are ways to enforce data security best practices across your codebase. Curio's summary report allows you to quickly identify rule violations in your code.
 
 Curio includes the following rules by default.
 {% endrenderTemplate %}
 
-{% for language in rules.groupedRules %}
-  <h2 id="{{language.name}}">{{language.name}}</h2>
+{% for language in rules.groupedRules | sort(false, true, 'name') %}
+  <h2 id="{{language.name}}">{{language.name | title}}</h2>
   <ul>
-    {% for child in language.children %}
+    {% for child in language.children | sortById %}
       <li>
         <a href="/references/rules/{{child.metadata.id}}/">{{child.metadata.description}}</a>
       </li>
