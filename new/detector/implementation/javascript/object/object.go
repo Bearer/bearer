@@ -5,6 +5,7 @@ import (
 
 	"github.com/bearer/curio/new/detector/types"
 	"github.com/bearer/curio/new/language/tree"
+	"github.com/rs/zerolog/log"
 
 	generictypes "github.com/bearer/curio/new/detector/implementation/generic/types"
 	languagetypes "github.com/bearer/curio/new/language/types"
@@ -24,10 +25,16 @@ type objectDetector struct {
 }
 
 func New(lang languagetypes.Language) (types.Detector, error) {
+	tree, err := lang.Parse(`{"user": "name"}`)
+	if err != nil {
+		return nil, fmt.Errorf("failed to compile tree %s", err)
+	}
+	log.Debug().Msgf(tree.RootNode().Debug())
+
 	// { first_name: ..., ... }
 	objectPairQuery, err := lang.CompileQuery(`(object (pair) @pair) @root`)
 	if err != nil {
-		return nil, fmt.Errorf("error compiling hash pair query: %s", err)
+		return nil, fmt.Errorf("error compiling object pair query: %s", err)
 	}
 
 	// user = <object>

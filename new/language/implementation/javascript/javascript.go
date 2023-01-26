@@ -7,7 +7,7 @@ import (
 	"strings"
 
 	sitter "github.com/smacker/go-tree-sitter"
-	"github.com/smacker/go-tree-sitter/ruby"
+	"github.com/smacker/go-tree-sitter/javascript"
 	"github.com/ssoroka/slice"
 	"golang.org/x/exp/slices"
 
@@ -29,17 +29,17 @@ var (
 	matchNodeRegex = regexp.MustCompile(`\$<!>`)
 )
 
-type rubyImplementation struct{}
+type javascriptImplementation struct{}
 
 func Get() implementation.Implementation {
-	return &rubyImplementation{}
+	return &javascriptImplementation{}
 }
 
-func (implementation *rubyImplementation) SitterLanguage() *sitter.Language {
-	return ruby.GetLanguage()
+func (implementation *javascriptImplementation) SitterLanguage() *sitter.Language {
+	return javascript.GetLanguage()
 }
 
-func (implementation *rubyImplementation) AnalyzeFlow(rootNode *tree.Node) error {
+func (implementation *javascriptImplementation) AnalyzeFlow(rootNode *tree.Node) error {
 	scope := make(map[string]*tree.Node)
 
 	return rootNode.Walk(func(node *tree.Node, visitChildren func() error) error {
@@ -84,7 +84,7 @@ func (implementation *rubyImplementation) AnalyzeFlow(rootNode *tree.Node) error
 	})
 }
 
-func (implementation *rubyImplementation) ExtractPatternVariables(input string) (string, []patternquerytypes.Variable, error) {
+func (implementation *javascriptImplementation) ExtractPatternVariables(input string) (string, []patternquerytypes.Variable, error) {
 	nameIndex := patternQueryVariableRegex.SubexpIndex("name")
 	typesIndex := patternQueryVariableRegex.SubexpIndex("types")
 	i := 0
@@ -123,7 +123,7 @@ func (implementation *rubyImplementation) ExtractPatternVariables(input string) 
 	return replaced, params, nil
 }
 
-func (implementation *rubyImplementation) ExtractPatternMatchNode(input string) (string, int, error) {
+func (implementation *javascriptImplementation) ExtractPatternMatchNode(input string) (string, int, error) {
 	inputBytes := []byte(input)
 	matches := matchNodeRegex.FindAllIndex(inputBytes, -1)
 
@@ -149,11 +149,11 @@ func produceDummyValue(i int, nodeType string) string {
 	}
 }
 
-func (implementation *rubyImplementation) AnonymousPatternNodeParentTypes() []string {
+func (implementation *javascriptImplementation) AnonymousPatternNodeParentTypes() []string {
 	return []string{}
 }
 
-func (implementation *rubyImplementation) PatternIsAnchored(node *tree.Node) bool {
+func (implementation *javascriptImplementation) PatternIsAnchored(node *tree.Node) bool {
 	parent := node.Parent()
 	if parent == nil {
 		return true
