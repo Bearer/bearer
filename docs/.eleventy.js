@@ -46,6 +46,11 @@ module.exports = function (eleventyConfig) {
     wrapper: "nav",
   });
 
+  eleventyConfig.addFilter("sortById", (arr) => {
+    arr.sort((a, b) => (a.metadata.id > b.metadata.id ? 1 : -1));
+    return arr;
+  });
+
   return {
     dir: {
       includes: "_src/_includes",
