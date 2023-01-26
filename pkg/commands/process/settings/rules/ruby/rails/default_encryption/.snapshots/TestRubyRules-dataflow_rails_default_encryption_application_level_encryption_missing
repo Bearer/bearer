@@ -123,6 +123,27 @@ data_types:
                     )
               field_name: password
               object_name: users
+risks:
+    - detector_id: ruby_rails_default_encryption
+      locations:
+        - filename: pkg/commands/process/settings/rules/ruby/rails/default_encryption/testdata/application_level_encryption_missing/schema_rb/app/models/user.rb
+          line_number: 2
+          parent:
+            line_number: 2
+            content: encrypts :email
+          content: |
+            class $<_>
+              $<!>encrypts($<...>$<ATTRIBUTE>$<...>)
+            end
+        - filename: pkg/commands/process/settings/rules/ruby/rails/default_encryption/testdata/application_level_encryption_missing/structure_sql/app/models/user.rb
+          line_number: 2
+          parent:
+            line_number: 2
+            content: encrypts :email
+          content: |
+            class $<_>
+              $<!>encrypts($<...>$<ATTRIBUTE>$<...>)
+            end
 components: []
 
 

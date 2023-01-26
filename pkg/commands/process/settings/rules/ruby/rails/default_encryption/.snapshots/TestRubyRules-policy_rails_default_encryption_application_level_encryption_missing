@@ -2,7 +2,7 @@ critical:
     - policy_name: ""
       policy_dsrid: DSR-10
       policy_display_id: ruby_rails_default_encryption
-      policy_description: Force application-level encryption on sensitive data.
+      policy_description: Force application-level encryption when processing sensitive data.
       line_number: 3
       filename: pkg/commands/process/settings/rules/ruby/rails/default_encryption/testdata/application_level_encryption_missing/schema_rb/db/schema.rb
       category_groups:
@@ -19,7 +19,7 @@ critical:
     - policy_name: ""
       policy_dsrid: DSR-10
       policy_display_id: ruby_rails_default_encryption
-      policy_description: Force application-level encryption on sensitive data.
+      policy_description: Force application-level encryption when processing sensitive data.
       line_number: 4
       filename: pkg/commands/process/settings/rules/ruby/rails/default_encryption/testdata/application_level_encryption_missing/schema_rb/db/schema.rb
       category_groups:
@@ -36,7 +36,7 @@ critical:
     - policy_name: ""
       policy_dsrid: DSR-10
       policy_display_id: ruby_rails_default_encryption
-      policy_description: Force application-level encryption on sensitive data.
+      policy_description: Force application-level encryption when processing sensitive data.
       line_number: 3
       filename: pkg/commands/process/settings/rules/ruby/rails/default_encryption/testdata/application_level_encryption_missing/structure_sql/db/structure.sql
       category_groups:
@@ -54,7 +54,7 @@ critical:
     - policy_name: ""
       policy_dsrid: DSR-10
       policy_display_id: ruby_rails_default_encryption
-      policy_description: Force application-level encryption on sensitive data.
+      policy_description: Force application-level encryption when processing sensitive data.
       line_number: 7
       filename: pkg/commands/process/settings/rules/ruby/rails/default_encryption/testdata/application_level_encryption_missing/structure_sql/db/structure.sql
       category_groups:
