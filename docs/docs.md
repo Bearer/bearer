@@ -23,11 +23,11 @@ Explanations dive into the rational behind Curio and explain some of its heavier
 
 ## Reference
 
-Reference documents are where you'll find detailed information about each command, as well as support charges for languages, policies, datatypes, and more.
+Reference documents are where you'll find detailed information about each command, as well as support charges for languages, rules, datatypes, and more.
 
-- [Commands](/reference/commands/)
-- [Supported Data Types](/reference/datatypes/)
 - [Built-in Rules](/reference/rules/)
+- [Supported Data Types](/reference/datatypes/)
+- [Commands](/reference/commands/)
 - [Supported Languages](/reference/supported-languages/)
 - [Configuration](/reference/config/)
 

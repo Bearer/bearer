@@ -33,7 +33,7 @@ Curio helps developers and security teams to:
 - Protect their application from having their sensitive data failed (*missing encryption, insecure communication, SQL injection, etc.*)
 - Monitor sensitive data flows across every component (*Data stores, internal and external APIs*)
 
-Curio is Open Source ([*see license*](#mortar_board-license)), and is built to be fully customizable, from creating your own policies, to adding custom code detectors up to enriching our data classifiers.
+Curio is Open Source ([*see license*](#mortar_board-license)), and is built to be fully customizable, from creating your own rules, to adding custom code detectors up to enriching our data classifiers.
 
 Curio also powers [Bearer](https://www.bearer.com), the developer-first platform to proactively find and fix data security risks and vulnerabilities across your development lifecycle
 
@@ -105,9 +105,9 @@ Once the scan is complete, Curio will output a summary report with details of an
 
 The summary report is an easily digestible view of the data security problems detected by Curio. A report is made up of:
 
-- The list of [policies](https://curio.sh/reference/policies/) run against your code.
+- The list of [rules](https://curio.sh/reference/rules/) run against your code.
 - Each detected failure, containing the file location and lines that triggered the rule failure.
-- A summary of the report with the stats for passing and failing policies.
+- A summary of the report with the stats for passing and failing rules.
 
 The [Bear Publishing](https://github.com/Bearer/bear-publishing) example application will trigger rule failures and output a full report. Here's a section of the output:
 
