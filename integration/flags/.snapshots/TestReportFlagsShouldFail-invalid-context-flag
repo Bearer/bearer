@@ -1,6 +1,6 @@
 
 --
-Error: flag error: report flags error: invalid format argument; supported values: json, yaml
+Error: flag error: scan flag error: invalid context argument; supported values: health
 Usage:
    scan [flags] <path>
 Aliases:
@@ -45,5 +45,6 @@ Worker Flags
       --timeout-worker-online duration      Maximum time to wait for a worker process to come online. (default 1m0s)
 
 
-flag error: report flags error: invalid format argument; supported values: json, yaml
+flag error: scan flag error: invalid context argument; supported values: health
+exit status 1
 

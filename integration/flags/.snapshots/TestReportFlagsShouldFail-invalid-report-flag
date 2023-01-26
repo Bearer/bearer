@@ -46,4 +46,5 @@ Worker Flags
 
 
 flag error: report flags error: invalid report argument; supported values: summary, dataflow, stats
+exit status 1
 
