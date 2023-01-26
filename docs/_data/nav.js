@@ -22,9 +22,9 @@ module.exports = [
   {
     name: "Reference",
     items: [
-      { name: "Commands", url: "/reference/commands/" },
-      { name: "Data Types", url: "/reference/datatypes/" },
       { name: "Rules", url: "/reference/rules/" },
+      { name: "Data Types", url: "/reference/datatypes/" },
+      { name: "Commands", url: "/reference/commands/" },
       { name: "Supported Languages", url: "/reference/supported-languages/" },
       { name: "Configuration", url: "/reference/config/" },
     ],
