@@ -17,7 +17,34 @@ trigger: "presence"
 severity:
   default: "low" # FIXME: warning
 metadata:
-  description: "Do not disable SSL certificate verification."
-  remediation_message: ""
+  description: "Enable SSL Certificate Verification."
+  remediation_message: |
+    ## Description
+
+    Applications processing sensitive data should use valid SSL certificates. This rule checks if SSL verification is enabled.
+
+    ## Remediations
+
+    ❌ By default Ruby check for SSL certificate verification but this can be bypassed when setting Open SSL verification mode to `VERIFY_NONE`:
+
+    ```clojure
+    require "net/https"
+    require "uri"
+
+    uri = URI.parse("https://ssl-site.com/")
+    http = Net::HTTP.new(uri.host, uri.port)
+    http.use_ssl = true
+    http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+    ```
+
+    ✅ To ensure that SSL verification always happens, make sure to use the following mode:
+
+    ```bash
+    http.verify_mode = OpenSSL::SSL::VERIFY_PEER
+    ```
+    <!--
+    ## Resources
+    Coming soon.
+    -->
   dsr_id: "DSR-2"
   id: "ruby_lang_ssl_verification"

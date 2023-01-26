@@ -24,22 +24,22 @@ detector:
     # Specify the comma-separated ids of the detectors you would like to skip. 
     # Runs all other detectors.
     skip-detector: []
-# Policy settings
-policy:
-    # Specify the comma-separated ids of the policies you would like to run. 
-    # Skips all other policies.
-    only-policy: []
-    # Specify the comma-separated ids of the policies you would like to skip. 
-    # Runs all other policies.
-    skip-policy: []
+# Rule settings
+rule:
+    # Specify the comma-separated ids of the rules you would like to run. 
+    # Skips all other rules.
+    only-rule: []
+    # Specify the comma-separated ids of the rules you would like to skip. 
+    # Runs all other rules.
+    skip-rule: []
 # Report settings
 report:
     # Specify report format (json, yaml)
     format: ""
     # Specify the output path for the report.
     output: ""
-    # Specify the type of report (detectors, dataflow, policies, stats). 
-    report: policies
+    # Specify the type of report (detectors, dataflow, summary, stats). 
+    report: summary
 # Scan settings
 scan:
     # Expand context of schema classification 
@@ -53,8 +53,8 @@ scan:
     domain-resolution-timeout: 3s
     # Specify directories paths that contain .yaml files with external custom detectors configuration.
     external-detector-dir: []
-    # Specify directories paths that contain .rego files with external policies configuration.
-    external-policy-dir: []
+    # Specify directories paths that contain .rego files with external rules configuration.
+    external-rule-dir: []
     # Disable the cache and runs the detections again every time scan runs.
     force: false
     # Define regular expressions for better classification of private or unreachable domains
