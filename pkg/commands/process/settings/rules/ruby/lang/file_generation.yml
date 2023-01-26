@@ -3,37 +3,51 @@ languages:
   - ruby
 patterns:
   - pattern: |
-      CSV.generate { $<DATA_TYPE> }
+      CSV.generate { |$<CSV_FILE:identifier>| $<CSV_FILE> << $<...>$<DATA_TYPE>$<...> }
     filters:
       - variable: DATA_TYPE
         detection: datatype
   - pattern: |
-      CSV.generate do
-        $<DATA_TYPE>
+      CSV.generate do |$<CSV_FILE:identifier>|
+        $<CSV_FILE> << $<...>$<DATA_TYPE>$<...>
       end
     filters:
       - variable: DATA_TYPE
         detection: datatype
   - pattern: |
-      $<LIBRARY>.open { $<DATA_TYPE> }
+      CSV.open { |$<CSV_FILE:identifier>| $<CSV_FILE> << $<...>$<DATA_TYPE>$<...> }
     filters:
-      - variable: LIBRARY
-        values:
-          - CSV
-          - File
-          - IO
       - variable: DATA_TYPE
         detection: datatype
   - pattern: |
-      $<LIBRARY>.open do
-        $<DATA_TYPE>
+      File.open { |$<FILE:identifier>| $<FILE>.write $<...>$<DATA_TYPE>$<...> }
+    filters:
+      - variable: DATA_TYPE
+        detection: datatype
+  - pattern: |
+      IO.open { |$<IO_FILE:identifier>| $<IO_FILE>.puts $<...>$<DATA_TYPE>$<...> }
+    filters:
+      - variable: DATA_TYPE
+        detection: datatype
+  - pattern: |
+      CSV.open() do |$<CSV_FILE:identifier>|
+        $<CSV_FILE> << $<...>$<DATA_TYPE>$<...>
       end
     filters:
-      - variable: LIBRARY
-        values:
-          - CSV
-          - File
-          - IO
+      - variable: DATA_TYPE
+        detection: datatype
+  - pattern: |
+      File.open() do |$<FILE:identifier>|
+        $<FILE>.write $<...>$<DATA_TYPE>$<...>
+      end
+    filters:
+      - variable: DATA_TYPE
+        detection: datatype
+  - pattern: |
+      IO.open() do |$<IO_FILE:identifier>|
+        $<IO_FILE>.puts $<...>$<DATA_TYPE>$<...>
+      end
+    filters:
       - variable: DATA_TYPE
         detection: datatype
 trigger: "local"
