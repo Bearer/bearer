@@ -24,17 +24,20 @@ metadata:
 
     ## Remediations
 
-    Avoid using sensitive data in logger messages:
+    ❌ Avoid using sensitive data in logger messages:
 
-    ```clojure
-    logger.info 'User is: #{user.email}'
+    ```ruby
+    logger.info('User is: #{user.email}')
     ```
 
-    If you need to identify a user for example, ensure to use their unique identifier instead of their personal identifiable information:
+    ✅ If you need to identify a user, ensure to use their unique identifier instead of their personal identifiable information:
 
-    ```bash
-
-    logger.info 'User is: #{user.uuid}'
+    ```ruby
+    logger.info('User is: #{user.uuid}')
     ```
+    <!--
+    ## Resources
+    Coming soon.
+    -->
   dsr_id: "DSR-5"
   id: "ruby_lang_logger"

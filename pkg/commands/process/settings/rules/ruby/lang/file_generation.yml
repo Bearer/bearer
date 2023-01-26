@@ -47,14 +47,26 @@ metadata:
   remediation_message: |
     ## Description
 
-    TODO
+    It is not uncommon to generate logs, backups, or data exports to static file formats. This rule checks if code exists to write sensitive data to static files.
 
     ## Remediations
 
-    Coming soon.
+    ❌ Avoid code like the following:
 
+    ```ruby
+    File.open("users.log", "w") { |f| f.write "#{Time.now} - User #{user.email} logged in\n" }
+    File.open("users.csv", "w") do |f|
+      users.each do |user|
+        f.write "#{user.email},#{user.first_name},#{user.last_name}"
+      end
+    end
+    ```
+
+    In instances where writing sensitive data is intentional, make sure to document its location according to your internal policies.
+
+    <!--
     ## Resources
-
     Coming soon.
+    -->
   dsr_id: "DSR-4"
   id: "ruby_lang_file_generation"

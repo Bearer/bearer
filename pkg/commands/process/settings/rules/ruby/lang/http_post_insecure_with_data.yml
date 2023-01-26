@@ -40,7 +40,7 @@ metadata:
     Sensitive data should only be sent through HTTPS. This rule checks that any transmissions over HTTP that contain sensitive data do so over HTTPS.
 
     ## Remediations
-    Avoid sending sensitive data though unsecured  HTTP communication:
+    ❌ Avoid sending sensitive data though unsecured  HTTP communication:
 
     ```ruby
     HTTParty.post(
@@ -53,7 +53,7 @@ metadata:
     )
     ```
 
-    Ensure to always connect though HTTPS when sending sensitive data:
+    ✅ Ensure to always connect though HTTPS when sending sensitive data:
 
     ```ruby
     HTTParty.post(
@@ -65,5 +65,9 @@ metadata:
       }
     )
     ```
+    <!--
+    ## Resources
+    Coming soon.
+    -->
   dsr_id: "DSR-2"
   id: "ruby_lang_http_post_insecure_with_data"

@@ -9,13 +9,13 @@ metadata:
   remediation_message: |
     ## Description
 
-    Hard-coding secrets and keys in a project opens them up to leakage. This rule checks for common secret types such as keys, tokens, and passwords and ensures they aren't hard-coded.
+    Hard-coding secrets and keys in a project opens them up to leakage. This rule checks for common secret types such as keys, tokens, and passwords using the popular Gitleaks library and ensures they aren't hard-coded.
 
     ## Remediations
 
     Do not hard-code secrets in committed code. Instead, use environment variables and a secret management system.
 
     ## Resources
-    Coming soon.
+    - [Gitleaks](https://gitleaks.io/)
   dsr_id: "DSR-4"
   id: "internal_gitleaks"

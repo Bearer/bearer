@@ -21,18 +21,23 @@ metadata:
     JWTs are not a secure place to store sensitive data. This rule looks for any sensitive data types saved to a JWT.
 
     ## Remediations
-    Avoid storing sensitive data in JWT:
+
+    ❌ Avoid storing sensitive data in JWT:
 
     ```ruby
     payload = { data: 'data', email: user.email }
     token = JWT.encode payload, hmac_secret, 'HS256'
     ```
 
-    If you need to store user's information, use their unique database identifier instead of personal identifiable information:
+    ✅ If you need to store user's information, use their unique database identifier instead of personal identifiable information:
 
-    ```bash
+    ```ruby
     payload = { data: 'data', user_id: user.uuid }
     token = JWT.encode payload, hmac_secret, 'HS256'
     ```
+    <!--
+    ## Resources
+    Coming soon.
+    -->
   dsr_id: "DSR-3"
   id: "ruby_lang_jwt"

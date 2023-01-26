@@ -41,13 +41,13 @@ metadata:
 
     ## Remediations
 
-    Avoid storing sensitive data in unencrypted cookies messages:
+    ❌ Avoid storing sensitive data in unencrypted cookies messages:
 
     ```ruby
     cookies[:user_email] = "john@doe.com"
     ```
 
-    To ensure cookie data stays safe, use encrypted cookies:
+    ✅ To ensure cookie data stays safe, use encrypted cookies:
 
     ```ruby
     cookies.encrypted[:user_email] = "john@doe.com"

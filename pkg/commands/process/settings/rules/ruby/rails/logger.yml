@@ -19,12 +19,23 @@ metadata:
   description: "Do not send sensitive data to loggers."
   remediation_message: |
     ## Description
-
     Leaking sensitive data to loggers is a common cause of data leaks and can lead to data breaches. This rule looks for instances of sensitive data sent to rails loggers.
 
     ## Remediations
-    Coming soon.
+    ❌ Avoid using sensitive data in logger messages:
+
+    ```ruby
+    Rails.logger.info('User is: #{user.email}')
+    ```
+
+    ✅ If you need to identify a user, ensure to use their unique identifier instead of their personal identifiable information:
+
+    ```ruby
+    Rails.logger.info('User is: #{user.uuid}')
+    ```
+    <!--
     ## Resources
     Coming soon.
+    -->
   dsr_id: "DSR-5"
   id: "ruby_rails_logger"
