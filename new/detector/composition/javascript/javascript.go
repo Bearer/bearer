@@ -92,7 +92,7 @@ func New(rules map[string]settings.Rule, classifier *classification.Classifier) 
 
 	// instantiate custom ruby detectors
 	for ruleName, rule := range rules {
-		if !slices.Contains(rule.Languages, "ruby") {
+		if !slices.Contains(rule.Languages, "javascript") {
 			continue
 		}
 

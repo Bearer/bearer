@@ -3,6 +3,7 @@ package scanner
 import (
 	"fmt"
 
+	"github.com/bearer/curio/new/detector/composition/javascript"
 	"github.com/bearer/curio/new/detector/composition/ruby"
 	"github.com/bearer/curio/new/detector/types"
 	"github.com/bearer/curio/pkg/classification"
@@ -30,10 +31,16 @@ func Setup(config *settings.Config, classifier *classification.Classifier) (err 
 	var toInstantiate = []struct {
 		constructor func(map[string]*settings.Rule, *classification.Classifier) (types.Composition, error)
 		name        string
-	}{{
-		constructor: ruby.New,
-		name:        "ruby",
-	}}
+	}{
+		{
+			constructor: ruby.New,
+			name:        "ruby",
+		},
+		{
+			constructor: javascript.New,
+			name:        "javascript",
+		},
+	}
 
 	for _, instantiatior := range toInstantiate {
 		composition, err := instantiatior.constructor(config.Rules, classifier)
