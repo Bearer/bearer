@@ -98,24 +98,32 @@ func GetCWD() string {
 	return os.Getenv("GITHUB_WORKSPACE")
 }
 
+func RunTestsWithSnapshotSubdirectory(t *testing.T, tests []TestCase, snapshotSubdirectory string) {
+	for _, test := range tests {
+		t.Run(test.name, func(t *testing.T) {
+			combinedOutput, err := executeTest(test, t)
+
+			if test.ShouldSucceed && err != nil {
+				t.Fatalf("command completed with error %s %s", err, combinedOutput)
+			}
+
+			if !test.ShouldSucceed && err == nil {
+				t.Fatal("expected command to fail but it succeded instead")
+			}
+
+			cupaloyCopy := cupaloy.NewDefaultConfig().WithOptions(cupaloy.SnapshotSubdirectory(snapshotSubdirectory))
+			cupaloyCopy.SnapshotT(t, combinedOutput)
+		})
+	}
+}
+
 func RunTests(t *testing.T, tests []TestCase) {
 	for _, test := range tests {
 		t.Run(test.name, func(t *testing.T) {
-
-			arguments := test.arguments
-
-			if !test.displayStdErr {
-				arguments = append(arguments, "--quiet")
-			}
-
-			if !test.ignoreForce {
-				arguments = append(arguments, "--force")
-			}
-
-			combinedOutput, err := executeApp(t, arguments)
+			combinedOutput, err := executeTest(test, t)
 
 			if test.ShouldSucceed && err != nil {
-				t.Fatalf("command completed with errror %s %s", err, combinedOutput)
+				t.Fatalf("command completed with error %s %s", err, combinedOutput)
 			}
 
 			if !test.ShouldSucceed && err == nil {
@@ -125,4 +133,18 @@ func RunTests(t *testing.T, tests []TestCase) {
 			cupaloy.SnapshotT(t, combinedOutput)
 		})
 	}
+}
+
+func executeTest(test TestCase, t *testing.T) (string, error) {
+	arguments := test.arguments
+
+	if !test.displayStdErr {
+		arguments = append(arguments, "--quiet")
+	}
+
+	if !test.ignoreForce {
+		arguments = append(arguments, "--force")
+	}
+
+	return executeApp(t, arguments)
 }

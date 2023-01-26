@@ -14,8 +14,9 @@ import (
 )
 
 type processorInput struct {
-	AllDetections    []interface{} `json:"all_detections"`
-	TargetDetections []interface{} `json:"target_detections"`
+	Rule             *settings.Rule `json:"rule"`
+	AllDetections    []interface{}  `json:"all_detections"`
+	TargetDetections []interface{}  `json:"target_detections"`
 }
 
 type ExtraFields struct {
@@ -23,7 +24,7 @@ type ExtraFields struct {
 	verifiedBy []types.DatatypeVerifiedBy
 }
 
-func getRailsTargetDetections(allDetections []interface{}) ([]interface{}, error) {
+func getCustomTargetDetections(allDetections []interface{}) ([]interface{}, error) {
 	var result []interface{}
 
 	for _, detection := range allDetections {
@@ -96,6 +97,7 @@ func getEncryptedField(result rego.Vars, detection interface{}) (bool, error) {
 
 func getVerifiedBy(result rego.Vars, detection interface{}) ([]types.DatatypeVerifiedBy, error) {
 	rawVerifiedBy, ok := result["verified_by"]
+
 	if !ok {
 		return nil, errors.New("no 'verified_by' value in output")
 	}
@@ -160,17 +162,18 @@ type extrasObj struct {
 	data map[string]*ExtraFields
 }
 
-func NewRailsExtras(detections []interface{}) (*extrasObj, error) {
-	return newExtrasObj(detections, getRailsTargetDetections)
+func NewCustomExtras(detections []interface{}, config settings.Config) (*extrasObj, error) {
+	return newExtrasObj(detections, getCustomTargetDetections, config)
 }
 
-func NewExtras(detections []interface{}) (*extrasObj, error) {
-	return newExtrasObj(detections, getTargetDetections)
+func NewExtras(detections []interface{}, config settings.Config) (*extrasObj, error) {
+	return newExtrasObj(detections, getTargetDetections, config)
 }
 
 func newExtrasObj(
 	detections []interface{},
 	targetDetectionsFunc func(detections []interface{}) ([]interface{}, error),
+	config settings.Config,
 ) (*extrasObj, error) {
 	targetDetections, err := targetDetectionsFunc(detections)
 	if err != nil {
@@ -179,26 +182,31 @@ func newExtrasObj(
 
 	data := make(map[string]*ExtraFields)
 
-	processorNames := []string{"encrypted_verified", "db_encrypted"}
-	for _, processorName := range processorNames {
-		dataForProcessor, err := runProcessor(processorName, detections, targetDetections)
-		if err != nil {
-			return nil, err
-		}
-		for k, v := range(dataForProcessor) {
-			existingExtraFields, keyPresent := data[k]
-			if keyPresent {
-				// Merge in the new processor data
-				if existingExtraFields.encrypted == nil {
-					data[k].encrypted = v.encrypted
+	for _, rule := range config.Rules {
+		for _, processor := range rule.Processors {
+			dataForProcessor, err := runProcessor(
+				processor,
+				detections,
+				targetDetections,
+				rule,
+			)
+			if err != nil {
+				return nil, err
+			}
+			for k, v := range dataForProcessor {
+				existingExtraFields, keyPresent := data[k]
+				if keyPresent {
+					// Merge in the new processor data
+					if existingExtraFields.encrypted == nil {
+						data[k].encrypted = v.encrypted
+					}
+					data[k].verifiedBy = append(data[k].verifiedBy, v.verifiedBy...)
+				} else {
+					data[k] = v
 				}
-				data[k].verifiedBy = append(data[k].verifiedBy, v.verifiedBy...)
-			} else {
-				data[k] = v
 			}
 		}
 	}
-
 	return &extrasObj{data: data}, nil
 }
 
@@ -206,10 +214,12 @@ func runExtrasQuery(
 	query string,
 	modules []regohelper.Module,
 	detections, targetDetections []interface{},
+	rule *settings.Rule,
 ) (map[string]*ExtraFields, error) {
 	data := make(map[string]*ExtraFields)
 
 	result, err := regohelper.RunQuery(query, processorInput{
+		Rule:             rule,
 		AllDetections:    detections,
 		TargetDetections: targetDetections,
 	}, modules)
@@ -296,6 +306,7 @@ func runProcessor(
 	processorName string,
 	detections []any,
 	targetDetections []any,
+	rule *settings.Rule,
 ) (data map[string]*ExtraFields, err error) {
 	modules, err := processorModules(processorName)
 	if err != nil {
@@ -306,11 +317,13 @@ func runProcessor(
 			verified_by = data.bearer.%s.verified_by
 			encrypted = data.bearer.%s.encrypted
 		`, processorName, processorName)
+
 	data, err = runExtrasQuery(
 		query,
 		modules,
 		detections,
 		targetDetections,
+		rule,
 	)
 
 	return

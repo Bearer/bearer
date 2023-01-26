@@ -14,7 +14,6 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
 
     steps:
       - uses: actions/checkout@v3
@@ -25,6 +24,7 @@ jobs:
       - name: Build binary for integration tests
         run: go build -a -o ./curio ./cmd/curio/main.go
       - name: Run tests
-        run: go test -v ./integration/...
+        run: go test -v ./integration/... -p 8
+        timeout-minutes: 10
         env:
           CURIO_BINARY: true

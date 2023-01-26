@@ -20,7 +20,8 @@
       SimpleFieldType: (string) (len=6) "number",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) ""
+      NormalizedObjectName: (string) (len=4) "main",
+      NormalizedFieldName: (string) (len=6) "assign"
     }
   }),
   (*detections.Detection)({
@@ -44,7 +45,8 @@
       SimpleFieldType: (string) (len=6) "number",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) ""
+      NormalizedObjectName: (string) (len=4) "main",
+      NormalizedFieldName: (string) (len=7) "declare"
     }
   }),
   (*detections.Detection)({
@@ -68,7 +70,8 @@
       SimpleFieldType: (string) (len=6) "object",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) ""
+      NormalizedObjectName: (string) (len=4) "main",
+      NormalizedFieldName: (string) (len=8) "imported"
     }
   }),
   (*detections.Detection)({
@@ -92,7 +95,8 @@
       SimpleFieldType: (string) (len=8) "function",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) ""
+      NormalizedObjectName: (string) (len=4) "main",
+      NormalizedFieldName: (string) (len=8) "domethod"
     }
   })
 }

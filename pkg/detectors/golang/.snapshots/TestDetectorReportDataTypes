@@ -20,7 +20,8 @@
       SimpleFieldType: (string) (len=6) "string",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) ""
+      NormalizedObjectName: (string) (len=4) "user",
+      NormalizedFieldName: (string) (len=4) "name"
     }
   }),
   (*detections.Detection)({
@@ -44,7 +45,8 @@
       SimpleFieldType: (string) (len=6) "object",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) ""
+      NormalizedObjectName: (string) (len=4) "user",
+      NormalizedFieldName: (string) (len=6) "person"
     }
   }),
   (*detections.Detection)({
@@ -68,7 +70,8 @@
       SimpleFieldType: (string) (len=8) "function",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) ""
+      NormalizedObjectName: (string) (len=4) "user",
+      NormalizedFieldName: (string) (len=4) "save"
     }
   }),
   (*detections.Detection)({
@@ -92,7 +95,8 @@
       SimpleFieldType: (string) (len=8) "function",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) ""
+      NormalizedObjectName: (string) (len=4) "user",
+      NormalizedFieldName: (string) (len=4) "load"
     }
   }),
   (*detections.Detection)({
@@ -116,7 +120,8 @@
       SimpleFieldType: (string) (len=8) "function",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) ""
+      NormalizedObjectName: (string) (len=4) "user",
+      NormalizedFieldName: (string) (len=5) "store"
     }
   }),
   (*detections.Detection)({
@@ -140,7 +145,8 @@
       SimpleFieldType: (string) (len=6) "string",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) ""
+      NormalizedObjectName: (string) (len=6) "person",
+      NormalizedFieldName: (string) (len=4) "city"
     }
   }),
   (*detections.Detection)({
@@ -164,7 +170,8 @@
       SimpleFieldType: (string) (len=6) "number",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) ""
+      NormalizedObjectName: (string) (len=8) "bodystat",
+      NormalizedFieldName: (string) (len=6) "height"
     }
   }),
   (*detections.Detection)({
@@ -188,7 +195,8 @@
       SimpleFieldType: (string) (len=6) "number",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) ""
+      NormalizedObjectName: (string) (len=8) "bodystat",
+      NormalizedFieldName: (string) (len=5) "width"
     }
   })
 }

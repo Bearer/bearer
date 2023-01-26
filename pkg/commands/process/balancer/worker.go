@@ -3,7 +3,7 @@ package balancer
 import (
 	"context"
 	"errors"
-	"io/ioutil"
+	"io"
 	"net/http"
 	"os"
 
@@ -20,6 +20,8 @@ import (
 	"github.com/bearer/curio/pkg/util/output"
 	"github.com/bearer/curio/pkg/util/tmpfile"
 )
+
+var ErrFileListEmpty = errors.New("We couldn't find any files to scan in the specified directory.")
 
 type Worker struct {
 	FileList []workertype.File
@@ -75,6 +77,12 @@ func (worker *Worker) Start() {
 	if err != nil {
 		worker.process.kill()
 		worker.complete(err)
+		return
+	}
+
+	if len(worker.FileList) == 0 {
+		worker.process.kill()
+		worker.complete(ErrFileListEmpty)
 		return
 	}
 
@@ -167,7 +175,7 @@ func (worker *Worker) Start() {
 				break
 			}
 
-			reportBytes, err := ioutil.ReadAll(f)
+			reportBytes, err := io.ReadAll(f)
 			if err != nil {
 				log.Error().Msgf("worker %s failed to read tmp report chunk file %e", worker.uuid, err)
 				worker.complete(err)

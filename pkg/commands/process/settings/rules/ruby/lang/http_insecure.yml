@@ -1,0 +1,73 @@
+type: "risk"
+languages:
+  - ruby
+patterns:
+  - pattern: |
+      Net::HTTP.post_form($<INSECURE_URL>)
+    filters:
+      - variable: INSECURE_URL
+        detection: insecure_url
+  - pattern: |
+      URI($<INSECURE_URL>)
+    filters:
+      - variable: INSECURE_URL
+        detection: insecure_url
+  - pattern: |
+      $<CLIENT>.get($<INSECURE_URL>)
+    filters:
+      - variable: CLIENT
+        values:
+          - Curl
+          - Excon
+          - Faraday
+          - HTTP
+          - HTTParty
+          - HTTPX
+          - RestClient
+          - Typhoeus
+      - variable: INSECURE_URL
+        detection: insecure_url
+  - pattern: |
+      $<CLIENT>.post($<INSECURE_URL>)
+    filters:
+      - variable: CLIENT
+        values:
+          - Curl
+          - Excon
+          - Faraday
+          - HTTP
+          - HTTParty
+          - HTTPX
+          - RestClient
+          - Typhoeus
+      - variable: INSECURE_URL
+        detection: insecure_url
+trigger: "presence"
+severity:
+  default: "low"
+metadata:
+  description: "Only communicate using HTTPS connections."
+  remediation_message: |
+    ## Description
+
+    Applications processing sensitive data should only connect using HTTPS connections. This rule checks that all HTTP connections use HTTPS.
+
+    ## Remediations
+
+    ❌ Avoid using unsecured outgoing HTTP communication, especially in the context of API calls:
+
+    ```ruby
+    response = HTTParty.get('http://usecure-api.com')
+    ```
+
+    ✅ Ensure to always connect though HTTPS:
+
+    ```ruby
+    response = HTTParty.get('https://secure-api.com')
+    ```
+    <!--
+    ## Resources
+    Coming soon.
+    -->
+  dsr_id: "DSR-2"
+  id: "ruby_lang_http_insecure"

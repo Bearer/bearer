@@ -1,7 +1,7 @@
 package rails
 
 import (
-	"io/ioutil"
+	"os"
 	"path/filepath"
 	"strings"
 
@@ -89,7 +89,7 @@ func (detector *detector) ProcessFile(file *file.FileInfo, dir *file.Path, repor
 }
 
 func extractDatabases(file *file.FileInfo, report report.Report) error {
-	bytes, err := ioutil.ReadFile(file.AbsolutePath)
+	bytes, err := os.ReadFile(file.AbsolutePath)
 	if len(bytes) == 0 || err != nil {
 		return err
 	}
@@ -159,7 +159,7 @@ func getAdapterDatabase(file *file.FileInfo, node yaml.Node, name string) (*rail
 }
 
 func extractStorage(file *file.FileInfo, report report.Report) error {
-	bytes, err := ioutil.ReadFile(file.AbsolutePath)
+	bytes, err := os.ReadFile(file.AbsolutePath)
 	if len(bytes) == 0 || err != nil {
 		return err
 	}

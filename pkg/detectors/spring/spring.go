@@ -3,7 +3,6 @@ package spring
 import (
 	"bytes"
 	"fmt"
-	"io/ioutil"
 	"os"
 	"strings"
 
@@ -162,7 +161,7 @@ func getProperty(driverClass1 Property, driverClass2 Property, url Property) Pro
 }
 
 func extractDataStoresFromYAML(file *file.FileInfo, report report.Report) error {
-	input, err := ioutil.ReadFile(file.AbsolutePath)
+	input, err := os.ReadFile(file.AbsolutePath)
 	if err != nil {
 		return err
 	}

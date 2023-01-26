@@ -24,6 +24,8 @@ type DatatypeLocation struct {
 	VerifiedBy []DatatypeVerifiedBy `json:"verified_by,omitempty" yaml:"verified_by,omitempty"`
 	Stored     *bool                `json:"stored,omitempty" yaml:"stored,omitempty"`
 	Parent     *schema.Parent       `json:"parent,omitempty" yaml:"parent,omitempty"`
+	FieldName  string               `json:"field_name,omitempty" yaml:"field_name,omitempty"`
+	ObjectName string               `json:"object_name,omitempty" yaml:"object_name,omitempty"`
 }
 
 type DatatypeVerifiedBy struct {

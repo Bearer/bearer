@@ -9,10 +9,10 @@ import (
 	"github.com/bearer/curio/pkg/commands/process/settings"
 	"github.com/bearer/curio/pkg/flag"
 	"github.com/bearer/curio/pkg/report/output/dataflow"
+	"github.com/bearer/curio/pkg/report/output/summary"
 	"github.com/google/uuid"
 
 	"github.com/bearer/curio/pkg/report/output/detectors"
-	"github.com/bearer/curio/pkg/report/output/policies"
 	"github.com/bearer/curio/pkg/report/output/stats"
 	"github.com/bearer/curio/pkg/types"
 	"gopkg.in/yaml.v3"
@@ -24,7 +24,7 @@ import (
 
 var ErrUndefinedFormat = errors.New("undefined output format")
 
-func ReportPolicies(report types.Report, output *zerolog.Event, config settings.Config) (reportPassed bool, err error) {
+func ReportSummary(report types.Report, output *zerolog.Event, config settings.Config) (reportPassed bool, err error) {
 	reportSupported := false
 	reportPassed = false
 	err = nil
@@ -51,17 +51,17 @@ func ReportPolicies(report types.Report, output *zerolog.Event, config settings.
 		return
 	}
 
-	policyResults, err := getPolicyReportOutput(report, config)
+	summaryResults, err := getSummaryReportOutput(report, config)
 	if err != nil {
 		return
 	}
 
 	outputToFile := config.Report.Output != ""
-	reportStr := policies.BuildReportString(policyResults, config.Policies, outputToFile)
+	reportStr := summary.BuildReportString(config.Rules, summaryResults, outputToFile)
 
 	output.Msg(reportStr.String())
 
-	reportPassed = len(policyResults) == 0
+	reportPassed = len(summaryResults) == 0
 	return
 }
 
@@ -103,8 +103,8 @@ func getReportOutput(report types.Report, config settings.Config) (any, error) {
 		return detectors.GetOutput(report, config)
 	case flag.ReportDataFlow:
 		return getDataflow(report, config, false)
-	case flag.ReportPolicies:
-		return getPolicyReportOutput(report, config)
+	case flag.ReportSummary:
+		return getSummaryReportOutput(report, config)
 	case flag.ReportStats:
 		return reportStats(report, config)
 	}
@@ -112,13 +112,13 @@ func getReportOutput(report types.Report, config settings.Config) (any, error) {
 	return nil, fmt.Errorf(`--report flag "%s" is not supported`, config.Report.Report)
 }
 
-func getPolicyReportOutput(report types.Report, config settings.Config) (map[string][]policies.PolicyResult, error) {
+func getSummaryReportOutput(report types.Report, config settings.Config) (map[string][]summary.PolicyResult, error) {
 	dataflow, err := getDataflow(report, config, true)
 	if err != nil {
 		return nil, err
 	}
 
-	return policies.GetOutput(dataflow, config)
+	return summary.GetOutput(dataflow, config)
 }
 
 func getDataflow(report types.Report, config settings.Config, isInternal bool) (*dataflow.DataFlow, error) {
@@ -150,7 +150,7 @@ func reportStats(report types.Report, config settings.Config) (*stats.Stats, err
 
 func anySupportedLanguagesPresent(inputgocloc *gocloc.Result, config settings.Config) (bool, error) {
 	ruleLanguages := make(map[string]bool)
-	for _, rule := range config.CustomDetector {
+	for _, rule := range config.Rules {
 		for _, language := range rule.Languages {
 			ruleLanguages[language] = true
 		}
@@ -166,16 +166,7 @@ func anySupportedLanguagesPresent(inputgocloc *gocloc.Result, config settings.Co
 		return true, nil
 	}
 
-	// for foundLanguage := range foundLanguages {
-	//	for ruleLanguage := range ruleLanguages {
-	//		if foundLanguage == ruleLanguage {
-	//			log.Debug().Msgf("Found a language for which policies are applicable: %s", foundLanguage)
-	//			return true, nil
-	//		}
-	//	}
-	// }
-
-	log.Debug().Msg("No language found for which policies are applicable")
+	log.Debug().Msg("No language found for which rules are applicable")
 	return false, nil
 }
 

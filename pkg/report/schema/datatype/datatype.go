@@ -4,6 +4,7 @@ import (
 	"sort"
 	"strings"
 
+	classificationschema "github.com/bearer/curio/pkg/classification/schema"
 	"github.com/bearer/curio/pkg/parser"
 	"github.com/bearer/curio/pkg/parser/nodeid"
 	"github.com/bearer/curio/pkg/report/detections"
@@ -25,6 +26,48 @@ type DataType struct {
 	Properties map[string]DataTypable
 	IsHelper   bool // helper dataTypes and their child datatypes don't get exported
 	UUID       string
+}
+
+type ClassifiedDatatype struct {
+	*DataType
+	Classification *classificationschema.ClassifiedDatatype
+	Properties     map[string]DataTypable
+}
+
+func (datatype *ClassifiedDatatype) GetClassification() interface{} {
+	return (*datatype.Classification).Classification
+}
+
+func (datatype *ClassifiedDatatype) GetProperties() map[string]DataTypable {
+	return datatype.Properties
+}
+
+func BuildClassifiedDatatype(datatype *DataType, classification *classificationschema.ClassifiedDatatype) *ClassifiedDatatype {
+	properties := make(map[string]DataTypable)
+
+	for key, propertyDatatypable := range datatype.Properties {
+		propertyDatatype, ok := propertyDatatypable.(*DataType)
+		if !ok {
+			continue
+		}
+
+		for _, classificationProperty := range classification.Properties {
+			if key == classificationProperty.Name {
+				properties[key] = &ClassifiedDatatype{
+					DataType:       propertyDatatype,
+					Classification: classificationProperty,
+					Properties:     make(map[string]DataTypable),
+				}
+			}
+		}
+	}
+	result := &ClassifiedDatatype{
+		DataType:       datatype,
+		Classification: classification,
+		Properties:     properties,
+	}
+
+	return result
 }
 
 func (datatype *DataType) GetClassification() interface{} {
@@ -101,6 +144,19 @@ func (datatype *DataType) Clone() DataTypable {
 	return cloned
 }
 
+func (datatype *DataType) ToClassificationRequestDetection() *classificationschema.ClassificationRequestDetection {
+	detection := &classificationschema.ClassificationRequestDetection{
+		Name:       datatype.Name,
+		SimpleType: datatype.Type,
+	}
+
+	for _, datatypeProperty := range datatype.Properties {
+		detection.Properties = append(detection.Properties, datatypeProperty.ToClassificationRequestDetection())
+	}
+
+	return detection
+}
+
 type DataTypable interface {
 	DeleteProperty(name string)
 	GetClassification() interface{}
@@ -117,6 +173,7 @@ type DataTypable interface {
 	Clone() DataTypable
 	SetProperty(string, DataTypable)
 	CreateProperties()
+	ToClassificationRequestDetection() *classificationschema.ClassificationRequestDetection
 }
 
 func ExportClassified[D DataTypable](report detections.ReportDetection, detectionType detections.DetectionType, detectorType detectors.Type, idGenerator nodeid.Generator, values map[parser.NodeID]D, parent *parser.Node) {
@@ -154,22 +211,24 @@ func dataTypeToSchema[D DataTypable](report detections.ReportDetection, detectio
 				LineNumber: parent.LineNumber(),
 			}
 		}
-		transformedObjectName := ""
-		if detectionType == detections.DetectionType(detectors.DetectorSchemaRb) {
-			pluralizer := pluralize.NewClient()
-			transformedObjectName = pluralizer.Singular(strings.ToLower(parentName))
-		}
+		normalizedObjectName := ""
+		normalizedFieldName := ""
+		pluralizer := pluralize.NewClient()
+		normalizedObjectName = pluralizer.Singular(strings.ToLower(parentName))
+		normalizedFieldName = pluralizer.Singular(strings.ToLower(selfName))
+
 		report.AddDetection(detectionType, detectorType, dataType.GetNode().Source(false),
 			schema.Schema{
-				ObjectName:      parentName,
-				FieldName:       selfName,
-				ObjectUUID:      parentUUID,
-				FieldUUID:       selfUUID,
-				FieldType:       dataType.GetTextType(),
-				SimpleFieldType: dataType.GetType(),
-				Classification:  dataType.GetClassification(),
-				Parent:          parentSchema,
-				TransformedObjectName: transformedObjectName,
+				ObjectName:           parentName,
+				FieldName:            selfName,
+				ObjectUUID:           parentUUID,
+				FieldUUID:            selfUUID,
+				FieldType:            dataType.GetTextType(),
+				SimpleFieldType:      dataType.GetType(),
+				Classification:       dataType.GetClassification(),
+				Parent:               parentSchema,
+				NormalizedObjectName: normalizedObjectName,
+				NormalizedFieldName:  normalizedFieldName,
 			},
 		)
 	}

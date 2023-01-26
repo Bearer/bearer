@@ -1,7 +1,6 @@
 package dotnet
 
 import (
-	"io/ioutil"
 	"os"
 	"path/filepath"
 
@@ -87,7 +86,7 @@ func isProject(path string) (bool, error) {
 	}
 
 	if handleDir {
-		fileInfos, err := ioutil.ReadDir(path)
+		fileInfos, err := os.ReadDir(path)
 		if err != nil {
 			return false, err
 		}

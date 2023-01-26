@@ -5,7 +5,7 @@ layout: layouts/doc.njk
 
 # Quick Start
 
-Discover data security risks and vulnerabilities in only a few minutes. In this guide you will install Curio, run a scan on a local project, and view the results of a [policy report](/explanations/reports/#policy-report). Let's get started!
+Discover data security risks and vulnerabilities in only a few minutes. In this guide you will install Curio, run a scan on a local project, and view the results of a [summary report](/explanations/reports/#summary-report). Let's get started!
 
 ## Installation
 
@@ -39,21 +39,21 @@ curio scan bear-publishing
 
 A progress bar will display the status of the scan.
 
-Once the scan is complete, Curio will output a policy report with details of any policy failures, as well as where in the codebase the infractions happened.
+Once the scan is complete, Curio will output a summary report with details of any rules failures, as well as where in the codebase the infractions happened.
 
 ## Analyze the report
 
-The policy report is an easily digestible view of the data security problems detected by Curio. A report is made up of:
+The summary report is an easily digestible view of the data security problems detected by Curio. A report is made up of:
 
-- The list of [policies](/reference/policies/) run against your code.
-- Each detected failure, containing the file location and lines that triggered the policy failure.
-- A summary of the report with the stats for passing and failing policies.
+- The list of [rules](/reference/rules/) run against your code.
+- Each detected failure, containing the file location and lines that triggered the rules failure.
+- A summary of the report with the stats for passing and failing rules.
 
-The [Bear Publishing](https://github.com/Bearer/bear-publishing) example application will trigger policy failures and output a full report. Here's a section of the output containing a failure snippet and the final summary:
+The [Bear Publishing](https://github.com/Bearer/bear-publishing) example application will trigger rule failures and output a full report. Here's a section of the output containing a failure snippet and the final summary:
 
 ```text
 
-HIGH: Application level encryption missing policy failure with PHI, PII
+HIGH: Application level encryption missing rule failure with PHI, PII
 Application level encryption missing. Enable application level encryption to reduce the risk of leaking sensitive data.
 
 File: /bear-publishing/db/schema.rb:22
@@ -66,9 +66,9 @@ File: /bear-publishing/db/schema.rb:22
 
 =====================================
 
-Policy failures detected
+Rule failures detected
 
-14 policies were run and 12 failures were detected.
+14 rules were run and 12 failures were detected.
 
 CRITICAL: 0
 HIGH: 10 (Application level encryption missing, Insecure HTTP with Data Category,
@@ -77,4 +77,4 @@ MEDIUM: 2 (Insecure SMTP, Insecure FTP)
 LOW: 0
 ```
 
-The policy report is just one report type available in Curio. Additional options for using and configuring the `scan` command can be found in the [scan documentation](/reference/commands/#scan). For additional guides and usage tips, [view the docs](https://curio.sh).
+The summary report is just one report type available in Curio. Additional options for using and configuring the `scan` command can be found in the [scan documentation](/reference/commands/#scan). For additional guides and usage tips, [view the docs](https://curio.sh).

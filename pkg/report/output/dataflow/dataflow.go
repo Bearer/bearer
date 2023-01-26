@@ -35,16 +35,27 @@ var allowedDetections []detections.DetectionType = []detections.DetectionType{
 	detections.TypeSecretleak,
 }
 
+func contains(detections []detections.DetectionType, detection detections.DetectionType) bool {
+	for _, v := range detections {
+		if v == detection {
+			return true
+		}
+	}
+
+	return false
+}
+
 func GetOutput(input []interface{}, config settings.Config, isInternal bool) (*DataFlow, error) {
 	dataTypesHolder := datatypes.New(config, isInternal)
 	risksHolder := risks.New(config, isInternal)
 	componentsHolder := components.New(isInternal)
 
-	extras, err := datatypes.NewExtras(input)
+	extras, err := datatypes.NewExtras(input, config)
 	if err != nil {
 		return nil, err
 	}
-	railsExtras, err := datatypes.NewRailsExtras(input)
+
+	customExtras, err := datatypes.NewCustomExtras(input, config)
 	if err != nil {
 		return nil, err
 	}
@@ -56,19 +67,14 @@ func GetOutput(input []interface{}, config settings.Config, isInternal bool) (*D
 		}
 
 		detectionTypeS, ok := detectionMap["type"].(string)
+
 		if !ok {
 			continue
 		}
 
 		detectionType := detections.DetectionType(detectionTypeS)
 
-		isDataflow := false
-		for _, allowedDetection := range allowedDetections {
-			if (detectionType) == allowedDetection {
-				isDataflow = true
-			}
-		}
-
+		isDataflow := contains(allowedDetections, detectionType)
 		if !isDataflow {
 			continue
 		}
@@ -92,7 +98,7 @@ func GetOutput(input []interface{}, config settings.Config, isInternal bool) (*D
 		case detections.TypeSchemaClassified:
 			var detectionExtras *datatypes.ExtraFields
 			if castDetection.DetectorType == reportdetectors.DetectorSchemaRb {
-				detectionExtras = railsExtras.Get(detection)
+				detectionExtras = customExtras.Get(detection)
 			}
 
 			err = dataTypesHolder.AddSchema(castDetection, detectionExtras)
@@ -103,13 +109,13 @@ func GetOutput(input []interface{}, config settings.Config, isInternal bool) (*D
 			risksHolder.AddRiskPresence(castDetection)
 		case detections.TypeCustomClassified:
 			ruleName := string(castDetection.DetectorType)
-			customDetector, ok := config.CustomDetector[ruleName]
+			customDetector, ok := config.Rules[ruleName]
 			if !ok {
 				return nil, fmt.Errorf("there is a custom detector in report that is not in the config %s", ruleName)
 			}
 
 			switch customDetector.Type {
-			case customdetectors.TypeVerfifier:
+			case customdetectors.TypeVerifier:
 				continue
 			case customdetectors.TypeRisk:
 				err := risksHolder.AddSchema(castDetection)
@@ -118,9 +124,7 @@ func GetOutput(input []interface{}, config settings.Config, isInternal bool) (*D
 				}
 			case customdetectors.TypeDatatype:
 				var detectionExtras *datatypes.ExtraFields
-				if castDetection.DetectorType == "detect_sql_create_public_table" {
-					detectionExtras = extras.Get(detection)
-				}
+				detectionExtras = extras.Get(detection)
 
 				err = dataTypesHolder.AddSchema(castDetection, detectionExtras)
 				if err != nil {

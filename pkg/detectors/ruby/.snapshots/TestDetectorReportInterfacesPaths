@@ -81,7 +81,8 @@
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) ""
+      NormalizedObjectName: (string) (len=8) "platform",
+      NormalizedFieldName: (string) (len=3) "foo"
     }
   }),
   (*detections.Detection)({
@@ -105,7 +106,8 @@
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) ""
+      NormalizedObjectName: (string) (len=3) "now",
+      NormalizedFieldName: (string) (len=4) "to_i"
     }
   }),
   (*detections.Detection)({
@@ -129,7 +131,8 @@
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) ""
+      NormalizedObjectName: (string) (len=7) "current",
+      NormalizedFieldName: (string) (len=9) "object_id"
     }
   }),
   (*detections.Detection)({
@@ -153,7 +156,8 @@
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) ""
+      NormalizedObjectName: (string) (len=6) "logger",
+      NormalizedFieldName: (string) (len=9) "formatter"
     }
   }),
   (*detections.Detection)({
@@ -177,7 +181,8 @@
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) ""
+      NormalizedObjectName: (string) (len=8) "datetime",
+      NormalizedFieldName: (string) (len=8) "strftime"
     }
   })
 }

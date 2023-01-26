@@ -20,7 +20,8 @@
       SimpleFieldType: (string) (len=6) "string",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) ""
+      NormalizedObjectName: (string) (len=4) "user",
+      NormalizedFieldName: (string) (len=4) "name"
     }
   }),
   (*detections.Detection)({
@@ -44,7 +45,8 @@
       SimpleFieldType: (string) (len=7) "boolean",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) ""
+      NormalizedObjectName: (string) (len=4) "user",
+      NormalizedFieldName: (string) (len=3) "bol"
     }
   }),
   (*detections.Detection)({
@@ -68,7 +70,8 @@
       SimpleFieldType: (string) (len=6) "string",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) ""
+      NormalizedObjectName: (string) (len=4) "user",
+      NormalizedFieldName: (string) (len=8) "lastname"
     }
   }),
   (*detections.Detection)({
@@ -92,7 +95,8 @@
       SimpleFieldType: (string) (len=6) "string",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) ""
+      NormalizedObjectName: (string) (len=8) "testuser",
+      NormalizedFieldName: (string) (len=7) "test_id"
     }
   }),
   (*detections.Detection)({
@@ -116,7 +120,8 @@
       SimpleFieldType: (string) (len=6) "string",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) ""
+      NormalizedObjectName: (string) (len=3) "cat",
+      NormalizedFieldName: (string) (len=5) "breed"
     }
   }),
   (*detections.Detection)({
@@ -140,7 +145,8 @@
       SimpleFieldType: (string) (len=6) "number",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) ""
+      NormalizedObjectName: (string) (len=3) "cat",
+      NormalizedFieldName: (string) (len=11) "yearofbirth"
     }
   }),
   (*detections.Detection)({
@@ -164,7 +170,8 @@
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) ""
+      NormalizedObjectName: (string) (len=7) "complex",
+      NormalizedFieldName: (string) (len=4) "name"
     }
   }),
   (*detections.Detection)({
@@ -188,7 +195,8 @@
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) ""
+      NormalizedObjectName: (string) (len=7) "complex",
+      NormalizedFieldName: (string) (len=7) "surname"
     }
   }),
   (*detections.Detection)({
@@ -212,7 +220,8 @@
       SimpleFieldType: (string) (len=6) "string",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) ""
+      NormalizedObjectName: (string) (len=21) "cloudinaryimageformat",
+      NormalizedFieldName: (string) (len=10) "prettyname"
     }
   }),
   (*detections.Detection)({
@@ -236,7 +245,8 @@
       SimpleFieldType: (string) (len=6) "object",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) ""
+      NormalizedObjectName: (string) (len=21) "cloudinaryimageformat",
+      NormalizedFieldName: (string) (len=8) "roominfo"
     }
   }),
   (*detections.Detection)({
@@ -260,7 +270,8 @@
       SimpleFieldType: (string) (len=6) "number",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) ""
+      NormalizedObjectName: (string) (len=8) "roominfo",
+      NormalizedFieldName: (string) (len=7) "room_id"
     }
   }),
   (*detections.Detection)({
@@ -284,7 +295,8 @@
       SimpleFieldType: (string) (len=6) "number",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) ""
+      NormalizedObjectName: (string) (len=8) "roominfo",
+      NormalizedFieldName: (string) (len=8) "short_id"
     }
   }),
   (*detections.Detection)({
@@ -308,7 +320,8 @@
       SimpleFieldType: (string) (len=6) "object",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) ""
+      NormalizedObjectName: (string) (len=11) "addressable",
+      NormalizedFieldName: (string) (len=7) "address"
     }
   }),
   (*detections.Detection)({
@@ -332,7 +345,8 @@
       SimpleFieldType: (string) (len=6) "object",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) ""
+      NormalizedObjectName: (string) (len=11) "addressable",
+      NormalizedFieldName: (string) (len=8) "address2"
     }
   }),
   (*detections.Detection)({
@@ -356,7 +370,8 @@
       SimpleFieldType: (string) (len=6) "object",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) ""
+      NormalizedObjectName: (string) (len=11) "addressable",
+      NormalizedFieldName: (string) (len=4) "item"
     }
   }),
   (*detections.Detection)({
@@ -380,7 +395,8 @@
       SimpleFieldType: (string) (len=6) "string",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) ""
+      NormalizedObjectName: (string) (len=4) "item",
+      NormalizedFieldName: (string) (len=7) "channel"
     }
   }),
   (*detections.Detection)({
@@ -404,7 +420,8 @@
       SimpleFieldType: (string) (len=6) "object",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) ""
+      NormalizedObjectName: (string) (len=4) "item",
+      NormalizedFieldName: (string) (len=3) "zip"
     }
   }),
   (*detections.Detection)({
@@ -428,7 +445,8 @@
       SimpleFieldType: (string) (len=6) "string",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) ""
+      NormalizedObjectName: (string) (len=3) "zip",
+      NormalizedFieldName: (string) (len=4) "code"
     }
   }),
   (*detections.Detection)({
@@ -452,7 +470,8 @@
       SimpleFieldType: (string) (len=6) "string",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) ""
+      NormalizedObjectName: (string) (len=17) "cloudinaryadapter",
+      NormalizedFieldName: (string) (len=9) "cloudname"
     }
   }),
   (*detections.Detection)({
@@ -476,7 +495,8 @@
       SimpleFieldType: (string) (len=8) "function",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) ""
+      NormalizedObjectName: (string) (len=17) "cloudinaryadapter",
+      NormalizedFieldName: (string) (len=11) "constructor"
     }
   }),
   (*detections.Detection)({
@@ -500,7 +520,8 @@
       SimpleFieldType: (string) (len=8) "function",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) ""
+      NormalizedObjectName: (string) (len=17) "cloudinaryadapter",
+      NormalizedFieldName: (string) (len=4) "save"
     }
   }),
   (*detections.Detection)({
@@ -524,7 +545,8 @@
       SimpleFieldType: (string) (len=6) "string",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) ""
+      NormalizedObjectName: (string) (len=59) "{\n    cloudname,\n    apikey,\n    apisecret,\n    folder,\n  }",
+      NormalizedFieldName: (string) (len=9) "cloudname"
     }
   }),
   (*detections.Detection)({
@@ -548,7 +570,8 @@
       SimpleFieldType: (string) (len=6) "string",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) ""
+      NormalizedObjectName: (string) (len=59) "{\n    cloudname,\n    apikey,\n    apisecret,\n    folder,\n  }",
+      NormalizedFieldName: (string) (len=6) "apikey"
     }
   }),
   (*detections.Detection)({
@@ -572,7 +595,8 @@
       SimpleFieldType: (string) (len=6) "string",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) ""
+      NormalizedObjectName: (string) (len=59) "{\n    cloudname,\n    apikey,\n    apisecret,\n    folder,\n  }",
+      NormalizedFieldName: (string) (len=9) "apisecret"
     }
   }),
   (*detections.Detection)({
@@ -596,7 +620,8 @@
       SimpleFieldType: (string) (len=6) "string",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) ""
+      NormalizedObjectName: (string) (len=59) "{\n    cloudname,\n    apikey,\n    apisecret,\n    folder,\n  }",
+      NormalizedFieldName: (string) (len=6) "folder"
     }
   }),
   (*detections.Detection)({
@@ -620,7 +645,8 @@
       SimpleFieldType: (string) (len=6) "string",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) ""
+      NormalizedObjectName: (string) (len=4) "base",
+      NormalizedFieldName: (string) (len=4) "name"
     }
   }),
   (*detections.Detection)({
@@ -644,7 +670,8 @@
       SimpleFieldType: (string) (len=8) "function",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) ""
+      NormalizedObjectName: (string) (len=4) "base",
+      NormalizedFieldName: (string) (len=11) "constructor"
     }
   }),
   (*detections.Detection)({
@@ -668,7 +695,8 @@
       SimpleFieldType: (string) (len=6) "string",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) ""
+      NormalizedObjectName: (string) (len=7) "derived",
+      NormalizedFieldName: (string) (len=4) "name"
     }
   }),
   (*detections.Detection)({
@@ -692,7 +720,8 @@
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) ""
+      NormalizedObjectName: (string) (len=3) "box",
+      NormalizedFieldName: (string) (len=7) "content"
     }
   }),
   (*detections.Detection)({
@@ -716,7 +745,8 @@
       SimpleFieldType: (string) (len=8) "function",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) ""
+      NormalizedObjectName: (string) (len=3) "box",
+      NormalizedFieldName: (string) (len=11) "constructor"
     }
   }),
   (*detections.Detection)({
@@ -740,7 +770,8 @@
       SimpleFieldType: (string) (len=8) "function",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) ""
+      NormalizedObjectName: (string) (len=3) "box",
+      NormalizedFieldName: (string) (len=4) "save"
     }
   }),
   (*detections.Detection)({
@@ -764,7 +795,8 @@
       SimpleFieldType: (string) (len=6) "object",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) ""
+      NormalizedObjectName: (string) (len=9) "something",
+      NormalizedFieldName: (string) (len=6) "parent"
     }
   }),
   (*detections.Detection)({
@@ -788,7 +820,8 @@
       SimpleFieldType: (string) (len=6) "string",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) ""
+      NormalizedObjectName: (string) (len=6) "parent",
+      NormalizedFieldName: (string) (len=6) "nested"
     }
   }),
   (*detections.Detection)({
@@ -812,7 +845,8 @@
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) ""
+      NormalizedObjectName: (string) (len=12) "eventmanager",
+      NormalizedFieldName: (string) (len=11) "rnonesignal"
     }
   }),
   (*detections.Detection)({
@@ -836,7 +870,8 @@
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) ""
+      NormalizedObjectName: (string) (len=12) "eventmanager",
+      NormalizedFieldName: (string) (len=21) "onesignaleventemitter"
     }
   }),
   (*detections.Detection)({
@@ -860,7 +895,8 @@
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) ""
+      NormalizedObjectName: (string) (len=12) "eventmanager",
+      NormalizedFieldName: (string) (len=15) "eventhandlermap"
     }
   }),
   (*detections.Detection)({
@@ -884,7 +920,8 @@
       SimpleFieldType: (string) (len=6) "object",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) ""
+      NormalizedObjectName: (string) (len=12) "eventmanager",
+      NormalizedFieldName: (string) (len=20) "eventhandlerarraymap"
     }
   }),
   (*detections.Detection)({
@@ -908,7 +945,8 @@
       SimpleFieldType: (string) (len=6) "object",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) ""
+      NormalizedObjectName: (string) (len=12) "eventmanager",
+      NormalizedFieldName: (string) (len=8) "listener"
     }
   }),
   (*detections.Detection)({
@@ -932,7 +970,8 @@
       SimpleFieldType: (string) (len=8) "function",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) ""
+      NormalizedObjectName: (string) (len=12) "eventmanager",
+      NormalizedFieldName: (string) (len=6) "gettag"
     }
   }),
   (*detections.Detection)({
@@ -956,7 +995,8 @@
       SimpleFieldType: (string) (len=8) "function",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) ""
+      NormalizedObjectName: (string) (len=12) "eventmanager",
+      NormalizedFieldName: (string) (len=12) "setsmsnumber"
     }
   })
 }

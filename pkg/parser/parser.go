@@ -4,7 +4,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
-	"io/ioutil"
+	"os"
 	"strings"
 
 	"github.com/rs/zerolog/log"
@@ -59,7 +59,7 @@ func ParseBytes(fileInfo *file.FileInfo, file *file.Path, input []byte, language
 }
 
 func ParseFile(fileInfo *file.FileInfo, file *file.Path, language *sitter.Language) (*Tree, error) {
-	input, err := ioutil.ReadFile(file.AbsolutePath)
+	input, err := os.ReadFile(file.AbsolutePath)
 	if err != nil {
 		return nil, err
 	}
@@ -101,7 +101,8 @@ func (tree *Tree) SetValues(newValues map[*sitter.Node]*values.Value) {
 
 // QueryConventional obides certain convetions and returns results accordingly
 // capture matching helper_{randomString}
-// 		must have content matching {randomString} once quotes are stripped
+//
+//	must have content matching {randomString} once quotes are stripped
 func (tree *Tree) QueryConventional(query *sitter.Query) []Captures {
 	filteredCaptures := []Captures{}
 	captures := tree.wrap(tree.sitter.RootNode()).QueryMustPass(query)

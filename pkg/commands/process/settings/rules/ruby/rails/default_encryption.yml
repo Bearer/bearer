@@ -1,0 +1,39 @@
+type: risk
+patterns:
+  - pattern: |
+      class $<_>
+        $<!>encrypts($<...>$<ATTRIBUTE>$<...>)
+      end
+languages:
+  - ruby
+detectors:
+  - schema_rb # built-in
+  - sql_lang_create_table
+processors:
+  - db_encrypted
+  - rails_encrypted
+skip_data_types:
+  - Unique Identifier
+  - Passwords
+auto_encrypt_prefix: encrypted_
+trigger: stored_data_types
+severity:
+  default: "low"
+  PII: "critical"
+  PHI: "medium"
+  PD: "high"
+metadata:
+  description: "Force application-level encryption when processing sensitive data."
+  remediation_message: |
+    ## Description
+    Application-level encryption greatly reduces the risk of a data breach or data leak by making data unreadable. This rule checks if sensitive data types found in records are encrypted.
+
+    ## Remediations
+    Whenever storing sensitive data to a datastore, make sure to encrypt the entire record, or the field itself.
+
+    <!--
+    ## Resources
+    Coming soon.
+    -->
+  dsr_id: "DSR-10"
+  id: "ruby_rails_default_encryption"

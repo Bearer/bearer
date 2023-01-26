@@ -44,7 +44,6 @@ func ExtractFromDatabaseSchema(
 	}
 	defer tree.Close()
 
-	pluralizer := pluralize.NewClient()
 	uuidHolder := parserschema.NewUUIDHolder()
 
 	err = tree.Query(rubyDatabaseSchemaQuery, func(captures parser.Captures) error {
@@ -64,15 +63,21 @@ func ExtractFromDatabaseSchema(
 		objectUUID := uuidHolder.Assign(tableNode.ID(), idGenerator)
 		fieldUUID := uuidHolder.Assign(columnTypeNode.ID(), idGenerator)
 
-		transformedObjectName := pluralizer.Singular(strings.ToLower(tableName))
+		normalizedObjectName := ""
+		normalizedFieldName := ""
+		pluralizer := pluralize.NewClient()
+		normalizedObjectName = pluralizer.Singular(strings.ToLower(tableName))
+		normalizedFieldName = pluralizer.Singular(strings.ToLower(columnName))
+
 		currentSchema := schema.Schema{
-			ObjectName:            tableName,
-			ObjectUUID:            objectUUID,
-			FieldName:             columnName,
-			FieldUUID:             fieldUUID,
-			FieldType:             columnType,
-			SimpleFieldType:       convertToSimpleType(columnType),
-			TransformedObjectName: transformedObjectName,
+			ObjectName:           tableName,
+			ObjectUUID:           objectUUID,
+			FieldName:            columnName,
+			FieldUUID:            fieldUUID,
+			FieldType:            columnType,
+			SimpleFieldType:      convertToSimpleType(columnType),
+			NormalizedObjectName: normalizedObjectName,
+			NormalizedFieldName:  normalizedFieldName,
 		}
 
 		if report.SchemaGroupShouldClose(tableName) {

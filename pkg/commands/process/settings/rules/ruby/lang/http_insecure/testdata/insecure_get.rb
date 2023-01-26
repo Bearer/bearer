@@ -1,0 +1,1 @@
+Faraday.get("http://api.insecure.com")

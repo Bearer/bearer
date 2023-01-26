@@ -14,12 +14,12 @@ import (
 )
 
 type Config struct {
-	Worker         flag.WorkerOptions `mapstructure:"worker" json:"worker" yaml:"worker"`
-	Scan           flag.ScanOptions   `mapstructure:"scan" json:"scan" yaml:"scan"`
-	Report         flag.ReportOptions `mapstructure:"report" json:"report" yaml:"report"`
-	CustomDetector map[string]Rule    `mapstructure:"custom_detector" json:"custom_detector" yaml:"custom_detector"`
-	Policies       map[string]*Policy `mapstructure:"policies" json:"policies" yaml:"policies"`
-	Target         string             `mapstructure:"target" json:"target" yaml:"target"`
+	Worker   flag.WorkerOptions `mapstructure:"worker" json:"worker" yaml:"worker"`
+	Scan     flag.ScanOptions   `mapstructure:"scan" json:"scan" yaml:"scan"`
+	Report   flag.ReportOptions `mapstructure:"report" json:"report" yaml:"report"`
+	Policies map[string]*Policy `mapstructure:"policies" json:"policies" yaml:"policies"`
+	Target   string             `mapstructure:"target" json:"target" yaml:"target"`
+	Rules    map[string]*Rule   `mapstructure:"rules" json:"rules" yaml:"rules"`
 }
 
 type PolicyLevel string
@@ -32,13 +32,9 @@ var LevelLow = "low"
 type Modules []*PolicyModule
 
 type Policy struct {
-	Query       string      `mapstructure:"query" json:"query" yaml:"query"`
-	Id          string      `mapstructure:"id" json:"id" yaml:"id"`
-	DisplayId   string      `mapstructure:"display_id" json:"display_id" yaml:"display_id"`
-	Name        string      `mapstructure:"name" json:"name" yaml:"name"`
-	Description string      `mapstructure:"description" json:"description" yaml:"description"`
-	Level       PolicyLevel `mapstructure:"level" json:"level" yaml:"level"`
-	Modules     Modules     `mapstructure:"modules" json:"modules" yaml:"modules"`
+	Type    string  `mapstructure:"type" json:"type" yaml:"type"`
+	Query   string  `mapstructure:"query" json:"query" yaml:"query"`
+	Modules Modules `mapstructure:"modules" json:"modules" yaml:"modules"`
 }
 
 type PolicyModule struct {
@@ -47,31 +43,36 @@ type PolicyModule struct {
 	Content string `mapstructure:"content" json:"content" yaml:"content"`
 }
 
-func (modules Modules) ToRegoModules() (output []rego.Module) {
-	for _, module := range modules {
-		output = append(output, rego.Module{
-			Name:    module.Name,
-			Content: module.Content,
-		})
-	}
-	return
+type RuleMetadata struct {
+	Description        string `mapstructure:"description" json:"description" yaml:"description"`
+	RemediationMessage string `mapstructure:"remediation_message" json:"remediation_messafe" yaml:"remediation_messafe"`
+	DSRID              string `mapstructure:"dsr_id" json:"dsr_id" yaml:"dsr_id"`
+	ID                 string `mapstructure:"id" json:"id" yaml:"id"`
 }
 
-type PatternFilter struct {
-	Variable       string   `mapstructure:"variable" json:"variable" yaml:"variable"`
-	Values         []string `mapstructure:"values" json:"values" yaml:"values"`
-	Minimum        *int     `mapstructure:"minimum" json:"minimum" yaml:"minimum"`
-	Maximum        *int     `mapstructure:"maximum" json:"maximum" yaml:"maximum"`
-	MatchViolation bool     `mapstructure:"match_violation" json:"match_violation" yaml:"match_violation"`
+type RuleDefinition struct {
+	Disabled          bool              `mapstructure:"disabled" json:"disabled" yaml:"disabled"`
+	Type              string            `mapstructure:"type" json:"type" yaml:"type"`
+	Languages         []string          `mapstructure:"languages" json:"languages" yaml:"languages"`
+	ParamParenting    bool              `mapstructure:"param_parenting" json:"param_parenting" yaml:"param_parenting"`
+	Patterns          []RulePattern     `mapstructure:"patterns" json:"patterns" yaml:"patterns"`
+	Stored            bool              `mapstructure:"stored" json:"stored" yaml:"stored"`
+	Detectors         []string          `mapstructure:"detectors" json:"detectors,omitempty" yaml:"detectors,omitempty"`
+	Processors        []string          `mapstructure:"processors" json:"processors,omitempty" yaml:"processors,omitempty"`
+	AutoEncrytPrefix  string            `mapstructure:"auto_encrypt_prefix" json:"auto_encrypt_prefix,omitempty" yaml:"auto_encrypt_prefix,omitempty"`
+	DetectPresence    bool              `mapstructure:"detect_presence" json:"detect_presence" yaml:"detect_presence"`
+	Trigger           string            `mapstructure:"trigger" json:"trigger" yaml:"trigger"` // TODO: use enum value
+	Severity          map[string]string `mapstructure:"severity" json:"severity,omitempty" yaml:"severity,omitempty"`
+	SkipDataTypes     []string          `mapstructure:"skip_data_types" json:"skip_data_types,omitempty" yaml:"skip_data_types,omitempty"`
+	OnlyDataTypes     []string          `mapstructure:"only_data_types" json:"only_data_types,omitempty" yaml:"only_data_types,omitempty"`
+	OmitParentContent bool              `mapstructure:"omit_parent_content" json:"omit_parent_content,omitempty" yaml:"omit_parent_content,omitempty"`
+	DetailedContext   bool              `mapstructure:"detailed_context" json:"detailed_context,omitempty" yaml:"detailed_context,omitempty"`
+	Metadata          RuleMetadata      `mapstructure:"metadata" json:"metadata" yaml:"metadata"`
+	Auxiliary         []Auxiliary       `mapstructure:"auxiliary" json:"auxiliary" yaml:"auxiliary"`
 }
 
-type RulePattern struct {
-	Pattern string          `mapstructure:"pattern" json:"pattern" yaml:"pattern"`
-	Filters []PatternFilter `mapstructure:"filters" json:"filters" yaml:"filters"`
-}
-
-type Rule struct {
-	Disabled       bool          `mapstructure:"disabled" json:"disabled" yaml:"disabled"`
+type Auxiliary struct {
+	Id             string        `mapstructure:"id" json:"id" yaml:"id"`
 	Type           string        `mapstructure:"type" json:"type" yaml:"type"`
 	Languages      []string      `mapstructure:"languages" json:"languages" yaml:"languages"`
 	ParamParenting bool          `mapstructure:"param_parenting" json:"param_parenting" yaml:"param_parenting"`
@@ -80,10 +81,56 @@ type Rule struct {
 	RootSingularize bool `mapstructure:"root_singularize" yaml:"root_singularize" `
 	RootLowercase   bool `mapstructure:"root_lowercase" yaml:"root_lowercase"`
 
+	Stored           bool     `mapstructure:"stored" json:"stored" yaml:"stored"`
+	Detectors        []string `mapstructure:"detectors" json:"detectors,omitempty" yaml:"detectors,omitempty"`
+	Processors       []string `mapstructure:"processors" json:"processors,omitempty" yaml:"processors,omitempty"`
+	AutoEncrytPrefix string   `mapstructure:"auto_encrypt_prefix" json:"auto_encrypt_prefix,omitempty" yaml:"auto_encrypt_prefix,omitempty"`
+	DetectPresence   bool     `mapstructure:"detect_presence" json:"detect_presence" yaml:"detect_presence"`
+	OmitParent       bool     `mapstructure:"omit_parent" json:"omit_parent,omitempty" yaml:"omit_parent,omitempty"`
+}
+
+type Rule struct {
+	Id                 string            `mapstructure:"id" json:"id,omitempty" yaml:"id,omitempty"`
+	Type               string            `mapstructure:"type" json:"type,omitempty" yaml:"type,omitempty"`          // TODO: use enum value
+	Trigger            string            `mapstructure:"trigger" json:"trigger,omitempty" yaml:"trigger,omitempty"` // TODO: use enum value
+	DetailedContext    bool              `mapstructure:"detailed_context" json:"detailed_context,omitempty" yaml:"detailed_context,omitempty"`
+	Detectors          []string          `mapstructure:"detectors" json:"detectors,omitempty" yaml:"detectors,omitempty"`
+	Processors         []string          `mapstructure:"processors" json:"processors,omitempty" yaml:"processors,omitempty"`
+	Stored             bool              `mapstructure:"stored" json:"stored,omitempty" yaml:"stored,omitempty"`
+	AutoEncrytPrefix   string            `mapstructure:"auto_encrypt_prefix" json:"auto_encrypt_prefix,omitempty" yaml:"auto_encrypt_prefix,omitempty"`
+	Auxiliary          []Auxiliary       `mapstructure:"auxiliary" json:"auxiliary" yaml:"auxiliary"`
+	OmitParentContent  bool              `mapstructure:"omit_parent_content" json:"omit_parent_content,omitempty" yaml:"omit_parent_content,omitempty"`
+	SkipDataTypes      []string          `mapstructure:"skip_data_types" json:"skip_data_types,omitempty" yaml:"skip_data_types,omitempty"`
+	OnlyDataTypes      []string          `mapstructure:"only_data_types" json:"only_data_types,omitempty" yaml:"only_data_types,omitempty"`
+	Severity           map[string]string `mapstructure:"severity" json:"severity,omitempty" yaml:"severity,omitempty"`
+	Description        string            `mapstructure:"description" json:"description" yaml:"description"`
+	RemediationMessage string            `mapstructure:"remediation_message" json:"remediation_messafe" yaml:"remediation_messafe"`
+	DSRID              string            `mapstructure:"dsr_id" json:"dsr_id" yaml:"dsr_id"`
+	Disabled           bool              `mapstructure:"disabled" json:"disabled" yaml:"disabled"`
+	Languages          []string          `mapstructure:"languages" json:"languages" yaml:"languages"`
+	ParamParenting     bool              `mapstructure:"param_parenting" json:"param_parenting" yaml:"param_parenting"`
+	Patterns           []RulePattern     `mapstructure:"patterns" json:"patterns" yaml:"patterns"`
+
+	// FIXME: remove after refactor of sql
 	Metavars       map[string]MetaVar `mapstructure:"metavars" json:"metavars" yaml:"metavars"`
-	Stored         bool               `mapstructure:"stored" json:"stored" yaml:"stored"`
 	DetectPresence bool               `mapstructure:"detect_presence" json:"detect_presence" yaml:"detect_presence"`
 	OmitParent     bool               `mapstructure:"omit_parent" json:"omit_parent" yaml:"omit_parent"`
+}
+
+type PatternFilter struct {
+	Either             []PatternFilter `mapstructure:"either" json:"either" yaml:"either"`
+	Variable           string          `mapstructure:"variable" json:"variable" yaml:"variable"`
+	Detection          string          `mapstructure:"detection" json:"detection" yaml:"detection"`
+	Values             []string        `mapstructure:"values" json:"values" yaml:"values"`
+	LessThan           *int            `mapstructure:"less_than" json:"less_than" yaml:"less_than"`
+	LessThanOrEqual    *int            `mapstructure:"less_than_or_equal" json:"less_than_or_equal" yaml:"less_than_or_equal"`
+	GreaterThan        *int            `mapstructure:"greater_than" json:"greater_than" yaml:"greater_than"`
+	GreaterThanOrEqual *int            `mapstructure:"greater_than_or_equal" json:"greater_than_or_equal" yaml:"greater_than_or_equal"`
+}
+
+type RulePattern struct {
+	Pattern string          `mapstructure:"pattern" json:"pattern" yaml:"pattern"`
+	Filters []PatternFilter `mapstructure:"filters" json:"filters" yaml:"filters"`
 }
 
 type Processor struct {
@@ -100,8 +147,8 @@ type MetaVar struct {
 //go:embed policies.yml
 var defaultPolicies []byte
 
-//go:embed custom_detectors/*
-var customDetectorFS embed.FS
+//go:embed rules/*
+var rulesFs embed.FS
 
 //go:embed policies/*
 var policiesFs embed.FS
@@ -109,107 +156,34 @@ var policiesFs embed.FS
 //go:embed processors/*
 var processorsFs embed.FS
 
-var CustomDetectorKey string = "scan.custom_detector"
-var PoliciesKey string = "scan.policies"
+func (rule *Rule) PolicyType() bool {
+	if rule.Type == "data_type" || rule.Type == "verifier" {
+		return false
+	}
+
+	return true
+}
 
 func FromOptions(opts flag.Options) (Config, error) {
-	detectors := DefaultCustomDetector()
-
 	policies := DefaultPolicies()
+	rules := defaultRules()
 
-	// validate detector options
-	onlyDetector := opts.DetectorOptions.OnlyDetector
-	skipDetector := opts.DetectorOptions.SkipDetector
-
-	validDetectors := make(map[string]bool)
-	for key := range detectors {
-		validDetectors[key] = true
-	}
-
-	var invalidDetectors []string
-	for key := range onlyDetector {
-		if !validDetectors[key] {
-			invalidDetectors = append(invalidDetectors, key)
-		}
-	}
-
-	for key := range skipDetector {
-		if !validDetectors[key] {
-			invalidDetectors = append(invalidDetectors, key)
-		}
-	}
-
-	if len(invalidDetectors) > 0 {
-		return Config{}, fmt.Errorf("unknown detectors %s", invalidDetectors)
-	}
-
-	// apply detector options
-	for key := range detectors {
-		if len(onlyDetector) > 0 && !onlyDetector[key] {
-			delete(detectors, key)
-			continue
-		}
-
-		if skipDetector[key] {
-			delete(detectors, key)
-			continue
-		}
-	}
-
-	externalDetectors, err := LoadExternalDetectors(opts.ExternalDetectorDir)
+	externalRules, err := LoadExternalRules(opts.ExternalRuleDir)
 	if err != nil {
-		return Config{}, fmt.Errorf("failed to load external detectors %w", err)
+		return Config{}, fmt.Errorf("failed to load external rules %w", err)
 	}
 
-	for ruleName, rule := range externalDetectors {
-		_, ok := detectors[ruleName]
+	for ruleName, rule := range externalRules {
+		_, ok := rules[ruleName]
 		if ok {
-			return Config{}, fmt.Errorf("tried to overwrite default custom detector %s with external detector", ruleName)
+			return Config{}, fmt.Errorf("tried to overwrite default rules %s with external rule", ruleName)
 		}
 
-		detectors[ruleName] = rule
+		rules[ruleName] = &rule
 	}
 
-	// validate policy options
-	onlyPolicy := opts.PolicyOptions.OnlyPolicy
-	skipPolicy := opts.PolicyOptions.SkipPolicy
-
-	policyDisplayIds := make(map[string]bool)
 	for key := range policies {
 		policy := policies[key]
-		policyDisplayIds[policy.DisplayId] = true
-	}
-
-	var invalidPolicyDisplayIds []string
-	for key := range onlyPolicy {
-		if !policyDisplayIds[key] {
-			invalidPolicyDisplayIds = append(invalidPolicyDisplayIds, key)
-		}
-	}
-
-	for key := range skipPolicy {
-		if !policyDisplayIds[key] {
-			invalidPolicyDisplayIds = append(invalidPolicyDisplayIds, key)
-		}
-	}
-
-	if len(invalidPolicyDisplayIds) > 0 {
-		return Config{}, fmt.Errorf("unknown policy ids %s", invalidPolicyDisplayIds)
-	}
-
-	// apply policy options
-	for key := range policies {
-		policy := policies[key]
-
-		if len(onlyPolicy) > 0 && !onlyPolicy[policy.DisplayId] {
-			delete(policies, key)
-			continue
-		}
-
-		if skipPolicy[policy.DisplayId] {
-			delete(policies, key)
-			continue
-		}
 
 		for _, module := range policy.Modules {
 			if module.Path != "" {
@@ -222,27 +196,48 @@ func FromOptions(opts flag.Options) (Config, error) {
 		}
 	}
 
-	// apply external policies
-	externalPolicies, err := LoadExternalPolicies(opts.ExternalPolicyDir)
-	if err != nil {
-		return Config{}, fmt.Errorf("failed to load external policies %w", err)
+	// Rule options
+	onlyRule := opts.RuleOptions.OnlyRule
+	skipRule := opts.RuleOptions.SkipRule
+
+	// validate policy options - raise error if invalid DSW code given
+	var invalidRuleIds []string
+	for key := range onlyRule {
+		if rules[key] == nil {
+			invalidRuleIds = append(invalidRuleIds, key)
+		}
 	}
 
-	for policyName, policy := range externalPolicies {
-		_, ok := policies[policyName]
-		if ok {
-			return Config{}, fmt.Errorf("tried to overwrite default policy %s with external detector", policyName)
+	for key := range skipRule {
+		if rules[key] == nil {
+			invalidRuleIds = append(invalidRuleIds, key)
+		}
+	}
+
+	if len(invalidRuleIds) > 0 {
+		return Config{}, fmt.Errorf("unknown rule IDs %s", invalidRuleIds)
+	}
+
+	// apply policy options
+	for key := range rules {
+		rule := rules[key]
+		if len(onlyRule) > 0 && !onlyRule[rule.Id] {
+			delete(rules, key)
+			continue
 		}
 
-		policies[policyName] = policy
+		if skipRule[rule.Id] {
+			delete(rules, key)
+			continue
+		}
 	}
 
 	config := Config{
-		Worker:         opts.WorkerOptions,
-		CustomDetector: detectors,
-		Scan:           opts.ScanOptions,
-		Report:         opts.ReportOptions,
-		Policies:       policies,
+		Worker:   opts.WorkerOptions,
+		Scan:     opts.ScanOptions,
+		Report:   opts.ReportOptions,
+		Policies: policies,
+		Rules:    rules,
 	}
 
 	return config, nil
@@ -261,51 +256,120 @@ func (rulePattern *RulePattern) UnmarshalYAML(unmarshal func(interface{}) error)
 	return unmarshal((*rawRulePattern)(rulePattern))
 }
 
-func DefaultCustomDetector() map[string]Rule {
-	customDetectorsDir := "custom_detectors"
-	rules := make(map[string]Rule)
-
-	dirEntries, err := customDetectorFS.ReadDir(customDetectorsDir)
-	if err != nil {
-		log.Fatal().Msgf("failed to read custom detectors dir %e", err)
-	}
-
-	for _, entry := range dirEntries {
-		fileName := entry.Name()
-
-		ext := filepath.Ext(fileName)
-		ruleName := strings.TrimSuffix(fileName, ext)
-
-		if ext != ".yaml" && ext != ".yml" {
-			continue
-		}
-
-		fileContent, err := customDetectorFS.ReadFile(customDetectorsDir + "/" + fileName)
-		if err != nil {
-			log.Fatal().Msgf("failed to read custom detector file %e", err)
-		}
-
-		var rule Rule
-		err = yaml.Unmarshal(fileContent, &rule)
-		if err != nil {
-			log.Fatal().Msgf("failed to unmarshal database file %e", err)
-		}
-
-		rules[ruleName] = rule
-	}
-
-	return rules
-}
-
 func DefaultPolicies() map[string]*Policy {
-	var policies map[string]*Policy
+	policies := make(map[string]*Policy)
+	var policy []*Policy
 
-	err := yaml.Unmarshal(defaultPolicies, &policies)
+	err := yaml.Unmarshal(defaultPolicies, &policy)
 	if err != nil {
-		log.Fatal().Msgf("failed to unmarshal database file %e", err)
+		log.Fatal().Msgf("failed to unmarshal policy file %s", err)
+	}
+
+	for _, policy := range policy {
+		policies[policy.Type] = policy
 	}
 
 	return policies
+}
+
+func defaultRules() (rules map[string]*Rule) {
+	rules = make(map[string]*Rule)
+
+	// loop through rules langs
+	langDirs, err := rulesFs.ReadDir("rules")
+	if err != nil {
+		log.Fatal().Msgf("failed to read rules dir %e", err)
+	}
+
+	for _, langDir := range langDirs {
+		lang := langDir.Name()
+
+		if filepath.Ext(langDir.Name()) != "" {
+			// not a directory; skip it
+			continue
+		}
+
+		subLangDirs, err := rulesFs.ReadDir("rules/" + lang)
+		if err != nil {
+			log.Fatal().Msgf("failed to read rules/%s dir %e", lang, err)
+		}
+
+		for _, subLangDir := range subLangDirs {
+			subLang := subLangDir.Name()
+			dirEntries, err := rulesFs.ReadDir("rules/" + lang + "/" + subLang)
+			if err != nil {
+				log.Fatal().Msgf("failed to read rules/%s/%s dir %e", lang, subLang, err)
+			}
+
+			for _, dirEntry := range dirEntries {
+				filename := dirEntry.Name()
+				ext := filepath.Ext(filename)
+
+				if ext != ".yaml" && ext != ".yml" {
+					continue
+				}
+
+				entry, err := rulesFs.ReadFile("rules/" + lang + "/" + subLang + "/" + filename)
+				if err != nil {
+					log.Fatal().Msgf("failed to read rules/%s/%s/%s file %s", lang, subLang, filename, err)
+				}
+
+				var ruleDefinition *RuleDefinition
+				err = yaml.Unmarshal(entry, &ruleDefinition)
+				if err != nil {
+					log.Fatal().Msgf("failed to unmarshal rules/%s/%s/%s %s", lang, subLang, filename, err)
+				}
+
+				var ruleId string
+				var rule Rule
+				if subLang == "internal" {
+					ruleId = strings.TrimSuffix(filename, ext)
+				} else {
+					ruleId = ruleDefinition.Metadata.ID
+				}
+
+				rule = Rule{
+					Id:                 ruleId,
+					Type:               ruleDefinition.Type,
+					Trigger:            ruleDefinition.Trigger,
+					OmitParentContent:  ruleDefinition.OmitParentContent,
+					SkipDataTypes:      ruleDefinition.SkipDataTypes,
+					OnlyDataTypes:      ruleDefinition.OnlyDataTypes,
+					Severity:           ruleDefinition.Severity,
+					Description:        ruleDefinition.Metadata.Description,
+					RemediationMessage: ruleDefinition.Metadata.RemediationMessage,
+					Stored:             ruleDefinition.Stored,
+					Detectors:          ruleDefinition.Detectors,
+					Processors:         ruleDefinition.Processors,
+					AutoEncrytPrefix:   ruleDefinition.AutoEncrytPrefix,
+					DSRID:              ruleDefinition.Metadata.DSRID,
+					Disabled:           ruleDefinition.Disabled,
+					Languages:          ruleDefinition.Languages,
+					ParamParenting:     ruleDefinition.ParamParenting,
+					Patterns:           ruleDefinition.Patterns,
+					DetectPresence:     ruleDefinition.DetectPresence,
+				}
+
+				for _, auxiliaryRuleDefinition := range ruleDefinition.Auxiliary {
+					auxiliaryRule := &Rule{
+						Type:           auxiliaryRuleDefinition.Type,
+						Languages:      auxiliaryRuleDefinition.Languages,
+						ParamParenting: auxiliaryRuleDefinition.ParamParenting,
+						Patterns:       auxiliaryRuleDefinition.Patterns,
+						Stored:         auxiliaryRuleDefinition.Stored,
+						DetectPresence: auxiliaryRuleDefinition.DetectPresence,
+						OmitParent:     auxiliaryRuleDefinition.OmitParent,
+					}
+
+					rules[auxiliaryRuleDefinition.Id] = auxiliaryRule
+				}
+
+				rules[ruleId] = &rule
+			}
+		}
+	}
+
+	return rules
 }
 
 func ProcessorRegoModuleText(processorName string) (string, error) {
@@ -316,4 +380,14 @@ func ProcessorRegoModuleText(processorName string) (string, error) {
 	}
 
 	return string(data), nil
+}
+
+func (modules Modules) ToRegoModules() (output []rego.Module) {
+	for _, module := range modules {
+		output = append(output, rego.Module{
+			Name:    module.Name,
+			Content: module.Content,
+		})
+	}
+	return
 }

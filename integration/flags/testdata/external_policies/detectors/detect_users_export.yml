@@ -1,6 +1,0 @@
-type: "risk"
-patterns:
-  - |
-    users.export(<$ARGUMENT>)
-languages:
-  - ruby

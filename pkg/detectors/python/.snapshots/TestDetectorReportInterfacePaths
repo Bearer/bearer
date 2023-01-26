@@ -20,7 +20,8 @@
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) ""
+      NormalizedObjectName: (string) (len=3) "app",
+      NormalizedFieldName: (string) (len=15) "delivery_client"
     }
   }),
   (*detections.Detection)({
@@ -44,7 +45,8 @@
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) ""
+      NormalizedObjectName: (string) (len=15) "delivery_client",
+      NormalizedFieldName: (string) (len=4) "call"
     }
   }),
   (*detections.Detection)({
@@ -68,7 +70,8 @@
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) ""
+      NormalizedObjectName: (string) (len=7) "message",
+      NormalizedFieldName: (string) (len=5) "error"
     }
   }),
   (*detections.Detection)({
@@ -92,7 +95,8 @@
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) ""
+      NormalizedObjectName: (string) (len=3) "app",
+      NormalizedFieldName: (string) (len=15) "delivery_client"
     }
   }),
   (*detections.Detection)({
@@ -116,7 +120,8 @@
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) ""
+      NormalizedObjectName: (string) (len=15) "delivery_client",
+      NormalizedFieldName: (string) (len=4) "call"
     }
   }),
   (*detections.Detection)({
@@ -140,7 +145,8 @@
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) ""
+      NormalizedObjectName: (string) (len=3) "app",
+      NormalizedFieldName: (string) (len=7) "api_url"
     }
   }),
   (*detections.Detection)({
@@ -164,7 +170,8 @@
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) ""
+      NormalizedObjectName: (string) (len=8) "delivery",
+      NormalizedFieldName: (string) (len=5) "error"
     }
   }),
   (*detections.Detection)({
@@ -188,7 +195,8 @@
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) ""
+      NormalizedObjectName: (string) (len=3) "app",
+      NormalizedFieldName: (string) (len=15) "delivery_client"
     }
   }),
   (*detections.Detection)({
@@ -212,7 +220,8 @@
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) ""
+      NormalizedObjectName: (string) (len=15) "delivery_client",
+      NormalizedFieldName: (string) (len=4) "call"
     }
   }),
   (*detections.Detection)({
@@ -236,7 +245,8 @@
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) ""
+      NormalizedObjectName: (string) (len=3) "app",
+      NormalizedFieldName: (string) (len=7) "api_url"
     }
   }),
   (*detections.Detection)({
@@ -260,7 +270,8 @@
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) ""
+      NormalizedObjectName: (string) (len=8) "platform",
+      NormalizedFieldName: (string) (len=3) "foo"
     }
   }),
   (*detections.Detection)({
@@ -284,7 +295,8 @@
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) ""
+      NormalizedObjectName: (string) (len=8) "delivery",
+      NormalizedFieldName: (string) (len=5) "error"
     }
   }),
   (*detections.Detection)({
@@ -308,7 +320,8 @@
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) ""
+      NormalizedObjectName: (string) (len=3) "app",
+      NormalizedFieldName: (string) (len=15) "delivery_client"
     }
   }),
   (*detections.Detection)({
@@ -332,7 +345,8 @@
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) ""
+      NormalizedObjectName: (string) (len=15) "delivery_client",
+      NormalizedFieldName: (string) (len=4) "call"
     }
   }),
   (*detections.Detection)({
@@ -356,7 +370,8 @@
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) ""
+      NormalizedObjectName: (string) (len=3) "env",
+      NormalizedFieldName: (string) (len=14) "customers_host"
     }
   }),
   (*detections.Detection)({
@@ -380,7 +395,8 @@
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) ""
+      NormalizedObjectName: (string) (len=3) "env",
+      NormalizedFieldName: (string) (len=18) "customer_host_port"
     }
   }),
   (*detections.Detection)({
@@ -404,7 +420,8 @@
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) ""
+      NormalizedObjectName: (string) (len=8) "delivery",
+      NormalizedFieldName: (string) (len=5) "error"
     }
   }),
   (*detections.Detection)({
@@ -428,7 +445,8 @@
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) ""
+      NormalizedObjectName: (string) (len=3) "app",
+      NormalizedFieldName: (string) (len=15) "delivery_client"
     }
   }),
   (*detections.Detection)({
@@ -452,7 +470,8 @@
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) ""
+      NormalizedObjectName: (string) (len=15) "delivery_client",
+      NormalizedFieldName: (string) (len=4) "call"
     }
   }),
   (*detections.Detection)({
@@ -476,7 +495,8 @@
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) ""
+      NormalizedObjectName: (string) (len=3) "app",
+      NormalizedFieldName: (string) (len=6) "apiurl"
     }
   }),
   (*detections.Detection)({
@@ -500,7 +520,8 @@
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) ""
+      NormalizedObjectName: (string) (len=8) "delivery",
+      NormalizedFieldName: (string) (len=5) "error"
     }
   })
 }

@@ -1,0 +1,1 @@
+Digest::MD5.hexdigest("hello world")

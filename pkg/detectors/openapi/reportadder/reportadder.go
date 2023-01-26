@@ -1,28 +1,25 @@
 package reportadder
 
 import (
-	"regexp"
 	"sort"
-	"strings"
 
 	"github.com/bearer/curio/pkg/parser"
 	"github.com/bearer/curio/pkg/parser/nodeid"
 	reporttypes "github.com/bearer/curio/pkg/report"
 	"github.com/bearer/curio/pkg/report/detectors"
-	"github.com/bearer/curio/pkg/report/operations"
 	"github.com/bearer/curio/pkg/report/schema"
 	"github.com/bearer/curio/pkg/report/schema/schemahelper"
 	"github.com/bearer/curio/pkg/util/file"
 	"github.com/bearer/curio/pkg/util/stringutil"
 )
 
-var regexpPathVariable = regexp.MustCompile(`\{.+\}`)
-
 type SortableSchema struct {
-	Key parser.Node
+	Key   parser.Node
 	Value *schemahelper.Schema
 }
+
 type SortableSchemaList []SortableSchema
+
 func (s SortableSchemaList) Len() int {
 	return len(s)
 }
@@ -39,7 +36,7 @@ func AddSchema(file *file.FileInfo, report reporttypes.Report, foundValues map[p
 	// we need sorted schemas so our reports are consistent and repeatable
 	sortedSchemas := make(SortableSchemaList, len(foundValues))
 	i := 0
-	for k, v := range(foundValues) {
+	for k, v := range foundValues {
 		sortedSchemas[i] = SortableSchema{Key: k, Value: v}
 		i++
 	}
@@ -96,21 +93,4 @@ func convertSchema(value string) string {
 	default:
 		return schema.SimpleTypeObject
 	}
-}
-
-func standardizeOperationType(input string) (output string) {
-	input = strings.ToUpper(input)
-	supportedvalues := []string{operations.TypeGet, operations.TypeDelete, operations.TypePost, operations.TypePut}
-
-	for _, v := range supportedvalues {
-		if input == v {
-			return v
-		}
-	}
-
-	return operations.TypeOther
-}
-
-func standardizeOperationPath(input string) (output string) {
-	return regexpPathVariable.ReplaceAllString(input, "*")
 }

@@ -20,7 +20,8 @@
       SimpleFieldType: (string) (len=6) "object",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) ""
+      NormalizedObjectName: (string) (len=8) "delivery",
+      NormalizedFieldName: (string) (len=10) "httpclient"
     }
   }),
   (*detections.Detection)({
@@ -44,7 +45,8 @@
       SimpleFieldType: (string) (len=6) "string",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) ""
+      NormalizedObjectName: (string) (len=8) "delivery",
+      NormalizedFieldName: (string) (len=6) "apiurl"
     }
   }),
   (*detections.Detection)({
@@ -68,7 +70,8 @@
       SimpleFieldType: (string) (len=8) "function",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) ""
+      NormalizedObjectName: (string) (len=8) "delivery",
+      NormalizedFieldName: (string) (len=4) "main"
     }
   }),
   (*detections.Detection)({
@@ -92,7 +95,8 @@
       SimpleFieldType: (string) (len=8) "function",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) ""
+      NormalizedObjectName: (string) (len=8) "delivery",
+      NormalizedFieldName: (string) (len=5) "close"
     }
   }),
   (*detections.Detection)({
@@ -116,7 +120,8 @@
       SimpleFieldType: (string) (len=8) "function",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) ""
+      NormalizedObjectName: (string) (len=8) "delivery",
+      NormalizedFieldName: (string) (len=11) "getonlypath"
     }
   }),
   (*detections.Detection)({
@@ -140,7 +145,8 @@
       SimpleFieldType: (string) (len=8) "function",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) ""
+      NormalizedObjectName: (string) (len=8) "delivery",
+      NormalizedFieldName: (string) (len=22) "getwithurlconcatenated"
     }
   }),
   (*detections.Detection)({
@@ -164,7 +170,8 @@
       SimpleFieldType: (string) (len=8) "function",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) ""
+      NormalizedObjectName: (string) (len=8) "delivery",
+      NormalizedFieldName: (string) (len=21) "getwithurlpassedasarg"
     }
   }),
   (*detections.Detection)({
@@ -188,7 +195,8 @@
       SimpleFieldType: (string) (len=8) "function",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) ""
+      NormalizedObjectName: (string) (len=8) "delivery",
+      NormalizedFieldName: (string) (len=27) "getwithurlfullyinterpolated"
     }
   }),
   (*detections.Detection)({
@@ -212,7 +220,8 @@
       SimpleFieldType: (string) (len=8) "function",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) ""
+      NormalizedObjectName: (string) (len=8) "delivery",
+      NormalizedFieldName: (string) (len=22) "getwithurlinterpolated"
     }
   }),
   (*detections.Detection)({

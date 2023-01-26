@@ -33,13 +33,13 @@ Curio helps developers and security teams to:
 - Protect their application from having their sensitive data failed (*missing encryption, insecure communication, SQL injection, etc.*)
 - Monitor sensitive data flows across every component (*Data stores, internal and external APIs*)
 
-Curio is Open Source ([*see license*](#mortar_board-license)), and is built to be fully customizable, from creating your own policies, to adding custom code detectors up to enriching our data classifiers.
+Curio is Open Source ([*see license*](#mortar_board-license)), and is built to be fully customizable, from creating your own rules, to adding custom code detectors up to enriching our data classifiers.
 
 Curio also powers [Bearer](https://www.bearer.com), the developer-first platform to proactively find and fix data security risks and vulnerabilities across your development lifecycle
 
 ## :rocket: Getting started
 
-Discover data security risks and vulnerabilities in only a few minutes. In this guide you will install Curio, run a scan on a local project, and view the results of a policy report. Let's get started!
+Discover data security risks and vulnerabilities in only a few minutes. In this guide you will install Curio, run a scan on a local project, and view the results of a summary report. Let's get started!
 
 ### Install Curio
 
@@ -89,7 +89,7 @@ The easiest way to try out Curio is with our example project, [Bear Publishing](
 git clone https://github.com/Bearer/bear-publishing.git
 ```
 
-*Alternatively, you can use your own application. Check the [supported languages](#supported-language) to see if your stack supports a policy report.*
+*Alternatively, you can use your own application. Check the [supported languages](#supported-language) to see if your stack supports a summary report.*
 
 Now, run the scan command with `curio scan` on the project directory:
 
@@ -99,21 +99,21 @@ curio scan bear-publishing
 
 A progress bar will display the status of the scan.
 
-Once the scan is complete, Curio will output a policy report with details of any policy failures, as well as where in the codebase the infractions happened.
+Once the scan is complete, Curio will output a summary report with details of any rule failures, as well as where in the codebase the infractions happened.
 
 ### Analyze the report
 
-The policy report is an easily digestible view of the data security problems detected by Curio. A report is made up of:
+The summary report is an easily digestible view of the data security problems detected by Curio. A report is made up of:
 
-- The list of [policies](https://curio.sh/reference/policies/) run against your code.
-- Each detected failure, containing the file location and lines that triggered the policy failure.
-- A summary of the report with the stats for passing and failing policies.
+- The list of [rules](https://curio.sh/reference/rules/) run against your code.
+- Each detected failure, containing the file location and lines that triggered the rule failure.
+- A summary of the report with the stats for passing and failing rules.
 
-The [Bear Publishing](https://github.com/Bearer/bear-publishing) example application will trigger policy failures and output a full report. Here's a section of the output:
+The [Bear Publishing](https://github.com/Bearer/bear-publishing) example application will trigger rule failures and output a full report. Here's a section of the output:
 
 ```text
 
-HIGH: Application level encryption missing policy failure with PHI, PII
+HIGH: Application level encryption missing rule failure with PHI, PII
 Application level encryption missing. Enable application level encryption to reduce the risk of leaking sensitive data.
 
 File: /bear-publishing/db/schema.rb:22
@@ -126,9 +126,9 @@ File: /bear-publishing/db/schema.rb:22
 
 =====================================
 
-Policy failures detected
+Rule failures detected
 
-14 policies were run and 12 failures were detected.
+14 rules were run and 12 failures were detected.
 
 CRITICAL: 0
 HIGH: 10 (Application level encryption missing, Insecure HTTP with Data Category,
@@ -137,7 +137,7 @@ MEDIUM: 2 (Insecure SMTP, Insecure FTP)
 LOW: 0
 ```
 
-The policy report is just one report type available in Curio. Additional options for using and configuring the `scan` command can be found in the [scan documentation](https://curio.sh/reference/commands/#scan). For additional guides and usage tips, [view the docs](https://curio.sh).
+The summary report is just one report type available in Curio. Additional options for using and configuring the `scan` command can be found in the [scan documentation](https://curio.sh/reference/commands/#scan). For additional guides and usage tips, [view the docs](https://curio.sh).
 
 ## :gear: Additional installation options
 
@@ -191,7 +191,7 @@ docker compose run curio scan /tmp/scan --debug
 
 ### What can I do with Curio?
 
-The number one thing you can do with Curio is protect sensitive data processed by your applications from being exposed by identifying associated risks. Add Curio to your CI/CD and catch data breach and data leak risks early. This is the **Policy feature.**
+The number one thing you can do with Curio is protect sensitive data processed by your applications from being exposed by identifying associated risks. Add Curio to your CI/CD and catch data breach and data leak risks early. This is the **Rules feature.**
 
 Curio also helps your Compliance & Privacy team assess sensitive data flows processed through your applications, allowing them to comply with the growing number of data regulations across the World (*GDPR, CCPA, CPRA, LGPD, PIPA, HIPAA, etc.*). This is the **Data Flow Report**.
 
@@ -199,7 +199,7 @@ Curio also helps your Compliance & Privacy team assess sensitive data flows proc
 
 Curio currently fully supports Ruby, while JavaScript/TypeScript support is coming soon. Additional languages listed below are supported only for the Data Flow Report features for now.
 
-| Languages       | Data Flow Report | Policy       |
+| Languages       | Data Flow Report | Rules        |
 | --------------- | ---------------- | ------------ |
 | Ruby            | ✅                | ✅            |
 | JavaScript / TS | ✅                | Coming soon  |

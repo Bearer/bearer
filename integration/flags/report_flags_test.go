@@ -1,33 +1,23 @@
 package flags_test
 
 import (
+	"os"
 	"path/filepath"
 	"testing"
 
 	"github.com/bearer/curio/integration/internal/testhelper"
+	"github.com/bearer/curio/pkg/util/tmpfile"
+	"github.com/bradleyjkemp/cupaloy"
 )
 
 func newScanTest(name string, arguments []string) testhelper.TestCase {
-	return newScanProject(name, arguments, "simple")
-}
-
-func newScanProject(name string, arguments []string, projectpath string) testhelper.TestCase {
-	arguments = append([]string{"scan", filepath.Join("integration", "flags", "testdata", projectpath)}, arguments...)
+	arguments = append([]string{"scan", filepath.Join("integration", "flags", "testdata", "simple")}, arguments...)
 	return testhelper.NewTestCase(name, arguments, testhelper.TestCaseOptions{})
 }
 
 func TestReportFlags(t *testing.T) {
 	tests := []testhelper.TestCase{
-		newScanTest("format-json", []string{"--report=detectors", "--format=json"}),
-		newScanTest("format-yaml", []string{"--report=detectors", "--format=yaml"}),
-		newScanTest("report-detectors", []string{"--report=detectors"}),
 		newScanTest("report-dataflow", []string{"--report=dataflow"}),
-		newScanProject("report-dataflow-verified-by", []string{"--report=dataflow", "--format=yaml"}, "verified_by"),
-		newScanProject("report-dataflow-db-encrypted", []string{"--report=dataflow", "--format=yaml"}, "db_encrypted"),
-		newScanProject("report-policies", []string{"--report=policies", "--format=yaml"}, "policies"),
-		newScanTest("health-context", []string{"--report=detectors", "--context=health"}),
-		newScanTest("domain-resolution-disabled", []string{"--report=detectors", "--disable-domain-resolution=true"}),
-		newScanTest("skipped-paths", []string{"--report=detectors", "--skip-path=\"users/*.go,users/admin.sql\""}),
 	}
 
 	testhelper.RunTests(t, tests)
@@ -37,7 +27,7 @@ func TestReportFlagsShouldFail(t *testing.T) {
 	tests := []testhelper.TestCase{
 		newScanTest("invalid-report-flag", []string{"--report=testing"}),
 		newScanTest("invalid-format-flag", []string{"--format=testing"}),
-		newScanTest("invalid-context-flag", []string{"--format=testing"}),
+		newScanTest("invalid-context-flag", []string{"--context=testing"}),
 	}
 
 	for i := range tests {
@@ -46,4 +36,27 @@ func TestReportFlagsShouldFail(t *testing.T) {
 
 	testhelper.RunTests(t, tests)
 
+}
+
+func TestOuputFlag(t *testing.T) {
+	outputPath := tmpfile.Create("", "test_output.jsonl")
+	defer func() {
+		err := os.Remove(outputPath)
+		if err != nil {
+			t.Fatalf("failed to clean up created output file %s", err)
+		}
+	}()
+
+	tests := []testhelper.TestCase{
+		newScanTest("output", []string{"--report=detectors", "--output=" + outputPath}),
+	}
+
+	testhelper.RunTests(t, tests)
+
+	fileContent, err := os.ReadFile(outputPath)
+	if err != nil {
+		t.Fatalf("failed to read created output file, err: %s", err)
+	}
+
+	cupaloy.SnapshotT(t, string(fileContent))
 }
