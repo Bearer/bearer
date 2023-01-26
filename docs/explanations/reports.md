@@ -7,46 +7,47 @@ layout: layouts/doc.njk
 
 Curio can generate four types of reports about your codebase, all from the same underlying scan.
 
-## Policy Report
+## Summary Report
 
-Policies are the core feature of Curio. The policy report allows you to quickly see data security vulnerabilities in your codebase. The report breaks down policy violations by severity level: Critical, High, Medium, Low. These levels help you prioritize issues and fix the most important vulnerabilities.
+Rules are the core feature of Curio. The summary report allows you to quickly see data security vulnerabilities in your codebase. The report breaks down rule violations by severity level: Critical, High, Medium, Low. These levels help you prioritize issues and fix the most important vulnerabilities. The summary report is Curio's default report type.
 
-For each violation, the policy report includes the affected file and, when possible, the line of code and a snippet of the surrounding code. Here's an excerpt from the policy report run on our [example publishing app](https://github.com/Bearer/bear-publishing):
+For each violation, the summary report includes the affected file and, when possible, the line of code and a snippet of the surrounding code. Here's an excerpt from the summary report run on our [example publishing app](https://github.com/Bearer/bear-publishing):
 
 ```txt
 ...
-CRITICAL: JWT leaking policy failure with Personal data
-JWT leaks detected. Avoid storing sensitive data in JWTs.
+CRITICAL: Do not store sensitive data in JWTs. [DSR-3]
+https://curio.sh/reference/rules/ruby_lang_jwt
+To skip this rule, use the flag --skip-rule=ruby_lang_jwt
 
-File: lib/jwt.rb:6
+File: /bear-publishing/lib/jwt.rb:6
 
- 3 JWT.encode(
+ 3     JWT.encode(
  4       {
  5         id: user.id,
- **6         email: user.email,**
+ 6         email: user.email,
  7         class: user.class,
  8       },
  9       nil,
- 10       'HS256'
+ 	...
  11     )
 
 ...
 
 =====================================
 
-Policy failures detected
+24 checks, 18 failures
 
-14 policies were run and 6 failures were detected.
+CRITICAL: 15 (DSR-1, DSR-10, DSR-2, DSR-3, DSR-5)
+HIGH: 0
+MEDIUM: 0
+LOW: 3 (DSR-2, DSR-7)
 
-CRITICAL: 0
-HIGH: 4 (Insecure HTTP with Data Category, Logger leaking, JWT leaking, Cookie leaking)
-MEDIUM: 2 (Insecure SMTP, Insecure FTP)
-LOW: 0
+exit status 1
 ```
 
-Policy reports are [currently available](/reference/supported-languages/) for Ruby projects, with Javascript/Typescript coming soon and more languages to follow.
+Summary reports are [currently available](/reference/supported-languages/) for Ruby projects, with Javascript/Typescript coming soon and more languages to follow.
 
-To run your first policy report, run `curio scan .` on your project directory. By default, the policy report is output in a human-readable format, but you can also output it as YAML or JSON by using the `--format yaml` or `--format json` flags.
+To run your first summary report, run `curio scan .` on your project directory. By default, the summary report is output in a human-readable format, but you can also output it as YAML or JSON by using the `--format yaml` or `--format json` flags.
 
 ## Data Flow Report
 
