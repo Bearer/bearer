@@ -20,7 +20,8 @@
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) ""
+      NormalizedObjectName: (string) (len=4) "fred",
+      NormalizedFieldName: (string) (len=7) "environ"
     }
   }),
   (*detections.Detection)({
@@ -44,7 +45,8 @@
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) ""
+      NormalizedObjectName: (string) (len=7) "environ",
+      NormalizedFieldName: (string) (len=3) "get"
     }
   }),
   (*detections.Detection)({
@@ -68,7 +70,8 @@
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) ""
+      NormalizedObjectName: (string) (len=7) "environ",
+      NormalizedFieldName: (string) (len=3) "pop"
     }
   }),
   (*detections.Detection)({
@@ -176,7 +179,8 @@
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) ""
+      NormalizedObjectName: (string) (len=6) "config",
+      NormalizedFieldName: (string) (len=17) "ignore.domain.com"
     }
   }),
   (*detections.Detection)({
@@ -200,7 +204,8 @@
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) ""
+      NormalizedObjectName: (string) (len=3) "app",
+      NormalizedFieldName: (string) (len=4) "task"
     }
   }),
   (*detections.Detection)({
@@ -224,7 +229,8 @@
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) ""
+      NormalizedObjectName: (string) (len=3) "app",
+      NormalizedFieldName: (string) (len=7) "backend"
     }
   }),
   (*detections.Detection)({
@@ -248,7 +254,8 @@
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) ""
+      NormalizedObjectName: (string) (len=7) "backend",
+      NormalizedFieldName: (string) (len=7) "cleanup"
     }
   }),
   (*detections.Detection)({

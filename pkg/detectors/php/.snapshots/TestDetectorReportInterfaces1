@@ -20,7 +20,8 @@
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) ""
+      NormalizedObjectName: (string) (len=4) "this",
+      NormalizedFieldName: (string) (len=6) "client"
     }
   }),
   (*detections.Detection)({
@@ -44,7 +45,8 @@
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) ""
+      NormalizedObjectName: (string) (len=6) "client",
+      NormalizedFieldName: (string) (len=7) "request"
     }
   }),
   (*detections.Detection)({
@@ -68,7 +70,8 @@
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) ""
+      NormalizedObjectName: (string) (len=8) "response",
+      NormalizedFieldName: (string) (len=13) "getstatuscode"
     }
   }),
   (*detections.Detection)({
@@ -92,7 +95,8 @@
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) ""
+      NormalizedObjectName: (string) (len=4) "this",
+      NormalizedFieldName: (string) (len=10) "serializer"
     }
   }),
   (*detections.Detection)({
@@ -116,7 +120,8 @@
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) ""
+      NormalizedObjectName: (string) (len=10) "serializer",
+      NormalizedFieldName: (string) (len=11) "deserialize"
     }
   }),
   (*detections.Detection)({
@@ -140,7 +145,8 @@
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) ""
+      NormalizedObjectName: (string) (len=8) "response",
+      NormalizedFieldName: (string) (len=10) "getcontent"
     }
   }),
   (*detections.Detection)({
@@ -164,7 +170,8 @@
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) ""
+      NormalizedObjectName: (string) (len=15) "deliverymessage",
+      NormalizedFieldName: (string) (len=8) "platform"
     }
   }),
   (*detections.Detection)({
@@ -188,7 +195,8 @@
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) ""
+      NormalizedObjectName: (string) (len=4) "this",
+      NormalizedFieldName: (string) (len=6) "client"
     }
   }),
   (*detections.Detection)({
@@ -212,7 +220,8 @@
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) ""
+      NormalizedObjectName: (string) (len=6) "client",
+      NormalizedFieldName: (string) (len=7) "request"
     }
   }),
   (*detections.Detection)({
@@ -236,7 +245,8 @@
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) ""
+      NormalizedObjectName: (string) (len=8) "customer",
+      NormalizedFieldName: (string) (len=3) "foo"
     }
   }),
   (*detections.Detection)({
@@ -260,7 +270,8 @@
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) ""
+      NormalizedObjectName: (string) (len=8) "platform",
+      NormalizedFieldName: (string) (len=3) "bar"
     }
   }),
   (*detections.Detection)({
@@ -284,7 +295,8 @@
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) ""
+      NormalizedObjectName: (string) (len=8) "response",
+      NormalizedFieldName: (string) (len=13) "getstatuscode"
     }
   }),
   (*detections.Detection)({
@@ -308,7 +320,8 @@
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) ""
+      NormalizedObjectName: (string) (len=4) "this",
+      NormalizedFieldName: (string) (len=10) "serializer"
     }
   }),
   (*detections.Detection)({
@@ -332,7 +345,8 @@
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) ""
+      NormalizedObjectName: (string) (len=10) "serializer",
+      NormalizedFieldName: (string) (len=11) "deserialize"
     }
   }),
   (*detections.Detection)({
@@ -356,7 +370,8 @@
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) ""
+      NormalizedObjectName: (string) (len=8) "response",
+      NormalizedFieldName: (string) (len=10) "getcontent"
     }
   }),
   (*detections.Detection)({
@@ -380,7 +395,8 @@
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) ""
+      NormalizedObjectName: (string) (len=15) "deliverymessage",
+      NormalizedFieldName: (string) (len=8) "platform"
     }
   }),
   (*detections.Detection)({
@@ -404,7 +420,8 @@
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) ""
+      NormalizedObjectName: (string) (len=4) "this",
+      NormalizedFieldName: (string) (len=6) "client"
     }
   }),
   (*detections.Detection)({
@@ -428,7 +445,8 @@
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) ""
+      NormalizedObjectName: (string) (len=6) "client",
+      NormalizedFieldName: (string) (len=7) "request"
     }
   }),
   (*detections.Detection)({
@@ -452,7 +470,8 @@
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) ""
+      NormalizedObjectName: (string) (len=8) "response",
+      NormalizedFieldName: (string) (len=13) "getstatuscode"
     }
   }),
   (*detections.Detection)({
@@ -476,7 +495,8 @@
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) ""
+      NormalizedObjectName: (string) (len=4) "this",
+      NormalizedFieldName: (string) (len=10) "serializer"
     }
   }),
   (*detections.Detection)({
@@ -500,7 +520,8 @@
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) ""
+      NormalizedObjectName: (string) (len=10) "serializer",
+      NormalizedFieldName: (string) (len=11) "deserialize"
     }
   }),
   (*detections.Detection)({
@@ -524,7 +545,8 @@
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) ""
+      NormalizedObjectName: (string) (len=8) "response",
+      NormalizedFieldName: (string) (len=10) "getcontent"
     }
   }),
   (*detections.Detection)({
@@ -548,7 +570,8 @@
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) ""
+      NormalizedObjectName: (string) (len=15) "deliverymessage",
+      NormalizedFieldName: (string) (len=8) "platform"
     }
   }),
   (*detections.Detection)({
@@ -572,7 +595,8 @@
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) ""
+      NormalizedObjectName: (string) (len=4) "this",
+      NormalizedFieldName: (string) (len=6) "client"
     }
   }),
   (*detections.Detection)({
@@ -596,7 +620,8 @@
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) ""
+      NormalizedObjectName: (string) (len=6) "client",
+      NormalizedFieldName: (string) (len=7) "request"
     }
   }),
   (*detections.Detection)({
@@ -620,7 +645,8 @@
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) ""
+      NormalizedObjectName: (string) (len=8) "response",
+      NormalizedFieldName: (string) (len=13) "getstatuscode"
     }
   }),
   (*detections.Detection)({
@@ -644,7 +670,8 @@
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) ""
+      NormalizedObjectName: (string) (len=4) "this",
+      NormalizedFieldName: (string) (len=10) "serializer"
     }
   }),
   (*detections.Detection)({
@@ -668,7 +695,8 @@
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) ""
+      NormalizedObjectName: (string) (len=10) "serializer",
+      NormalizedFieldName: (string) (len=11) "deserialize"
     }
   }),
   (*detections.Detection)({
@@ -692,7 +720,8 @@
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) ""
+      NormalizedObjectName: (string) (len=8) "response",
+      NormalizedFieldName: (string) (len=10) "getcontent"
     }
   }),
   (*detections.Detection)({
@@ -716,7 +745,8 @@
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) ""
+      NormalizedObjectName: (string) (len=15) "deliverymessage",
+      NormalizedFieldName: (string) (len=8) "platform"
     }
   }),
   (*detections.Detection)({
@@ -740,7 +770,8 @@
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) ""
+      NormalizedObjectName: (string) (len=4) "this",
+      NormalizedFieldName: (string) (len=6) "client"
     }
   }),
   (*detections.Detection)({
@@ -764,7 +795,8 @@
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) ""
+      NormalizedObjectName: (string) (len=6) "client",
+      NormalizedFieldName: (string) (len=7) "request"
     }
   }),
   (*detections.Detection)({
@@ -788,7 +820,8 @@
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) ""
+      NormalizedObjectName: (string) (len=8) "response",
+      NormalizedFieldName: (string) (len=13) "getstatuscode"
     }
   }),
   (*detections.Detection)({
@@ -812,7 +845,8 @@
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) ""
+      NormalizedObjectName: (string) (len=4) "this",
+      NormalizedFieldName: (string) (len=10) "serializer"
     }
   }),
   (*detections.Detection)({
@@ -836,7 +870,8 @@
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) ""
+      NormalizedObjectName: (string) (len=10) "serializer",
+      NormalizedFieldName: (string) (len=11) "deserialize"
     }
   }),
   (*detections.Detection)({
@@ -860,7 +895,8 @@
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) ""
+      NormalizedObjectName: (string) (len=8) "response",
+      NormalizedFieldName: (string) (len=10) "getcontent"
     }
   }),
   (*detections.Detection)({
@@ -884,7 +920,8 @@
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) ""
+      NormalizedObjectName: (string) (len=15) "deliverymessage",
+      NormalizedFieldName: (string) (len=8) "platform"
     }
   }),
   (*detections.Detection)({

@@ -320,50 +320,51 @@ func defaultRules() (rules map[string]*Rule) {
 					log.Fatal().Msgf("failed to unmarshal rules/%s/%s/%s %s", lang, subLang, filename, err)
 				}
 
-				ruleId := ruleDefinition.Metadata.ID
+				var ruleId string
+				var rule Rule
 				if subLang == "internal" {
-					// overwrite rule id
 					ruleId = strings.TrimSuffix(filename, ext)
 				} else {
-					// add rule
-					rule := Rule{
-						Id:                 ruleId,
-						Type:               ruleDefinition.Type,
-						Trigger:            ruleDefinition.Trigger,
-						OmitParentContent:  ruleDefinition.OmitParentContent,
-						SkipDataTypes:      ruleDefinition.SkipDataTypes,
-						OnlyDataTypes:      ruleDefinition.OnlyDataTypes,
-						Severity:           ruleDefinition.Severity,
-						Description:        ruleDefinition.Metadata.Description,
-						RemediationMessage: ruleDefinition.Metadata.RemediationMessage,
-						Stored:             ruleDefinition.Stored,
-						Detectors:          ruleDefinition.Detectors,
-						Processors:         ruleDefinition.Processors,
-						AutoEncrytPrefix:   ruleDefinition.AutoEncrytPrefix,
-						DSRID:              ruleDefinition.Metadata.DSRID,
-						Disabled:           ruleDefinition.Disabled,
-						Languages:          ruleDefinition.Languages,
-						ParamParenting:     ruleDefinition.ParamParenting,
-						Patterns:           ruleDefinition.Patterns,
-						DetectPresence:     ruleDefinition.DetectPresence,
-					}
-
-					for _, auxiliaryRuleDefinition := range ruleDefinition.Auxiliary {
-						auxiliaryRule := &Rule{
-							Type:           auxiliaryRuleDefinition.Type,
-							Languages:      auxiliaryRuleDefinition.Languages,
-							ParamParenting: auxiliaryRuleDefinition.ParamParenting,
-							Patterns:       auxiliaryRuleDefinition.Patterns,
-							Stored:         auxiliaryRuleDefinition.Stored,
-							DetectPresence: auxiliaryRuleDefinition.DetectPresence,
-							OmitParent:     auxiliaryRuleDefinition.OmitParent,
-						}
-
-						rules[auxiliaryRuleDefinition.Id] = auxiliaryRule
-					}
-
-					rules[ruleId] = &rule
+					ruleId = ruleDefinition.Metadata.ID
 				}
+
+				rule = Rule{
+					Id:                 ruleId,
+					Type:               ruleDefinition.Type,
+					Trigger:            ruleDefinition.Trigger,
+					OmitParentContent:  ruleDefinition.OmitParentContent,
+					SkipDataTypes:      ruleDefinition.SkipDataTypes,
+					OnlyDataTypes:      ruleDefinition.OnlyDataTypes,
+					Severity:           ruleDefinition.Severity,
+					Description:        ruleDefinition.Metadata.Description,
+					RemediationMessage: ruleDefinition.Metadata.RemediationMessage,
+					Stored:             ruleDefinition.Stored,
+					Detectors:          ruleDefinition.Detectors,
+					Processors:         ruleDefinition.Processors,
+					AutoEncrytPrefix:   ruleDefinition.AutoEncrytPrefix,
+					DSRID:              ruleDefinition.Metadata.DSRID,
+					Disabled:           ruleDefinition.Disabled,
+					Languages:          ruleDefinition.Languages,
+					ParamParenting:     ruleDefinition.ParamParenting,
+					Patterns:           ruleDefinition.Patterns,
+					DetectPresence:     ruleDefinition.DetectPresence,
+				}
+
+				for _, auxiliaryRuleDefinition := range ruleDefinition.Auxiliary {
+					auxiliaryRule := &Rule{
+						Type:           auxiliaryRuleDefinition.Type,
+						Languages:      auxiliaryRuleDefinition.Languages,
+						ParamParenting: auxiliaryRuleDefinition.ParamParenting,
+						Patterns:       auxiliaryRuleDefinition.Patterns,
+						Stored:         auxiliaryRuleDefinition.Stored,
+						DetectPresence: auxiliaryRuleDefinition.DetectPresence,
+						OmitParent:     auxiliaryRuleDefinition.OmitParent,
+					}
+
+					rules[auxiliaryRuleDefinition.Id] = auxiliaryRule
+				}
+
+				rules[ruleId] = &rule
 			}
 		}
 	}

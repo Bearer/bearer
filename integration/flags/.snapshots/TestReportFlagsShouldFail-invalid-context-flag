@@ -13,23 +13,18 @@ Examples:
 Report Flags
   -f, --format string   Specify report format (json, yaml)
       --output string   Specify the output path for the report.
-      --report string   Specify the type of report (detectors, dataflow, policies, stats). (default "policies")
+      --report string   Specify the type of report (summary, dataflow, stats). (default "summary")
 
-Policy Flags
-      --only-policy strings   Specify the comma-separated ids of the policies you would like to run. Skips all other policies.
-      --skip-policy strings   Specify the comma-separated ids of the policies you would like to skip. Runs all other policies.
-
-Detector Flags
-      --only-detector strings   Specify the comma-separated ids of the detectors you would like to run. Skips all other detectors.
-      --skip-detector strings   Specify the comma-separated ids of the detectors you would like to skip. Runs all other detectors.
+Rule Flags
+      --only-rule strings   Specify the comma-separated ids of the rules you would like to run. Skips all other rules.
+      --skip-rule strings   Specify the comma-separated ids of the rules you would like to skip. Runs all other rules.
 
 Scan Flags
       --context string                       Expand context of schema classification e.g., --context=health, to include data types particular to health
       --debug                                Enable debug logs
       --disable-domain-resolution            Do not attempt to resolve detected domains during classification (default true)
       --domain-resolution-timeout duration   Set timeout when attempting to resolve detected domains during classification, e.g. --domain-resolution-timeout=3s (default 3s)
-      --external-detector-dir strings        Specify directories paths that contain .yaml files with external custom detectors configuration
-      --external-policy-dir strings          Specify directories paths that contain .rego files with external policies configuration
+      --external-rule-dir strings            Specify directories paths that contain .yaml files with external rules configuration
       --force                                Disable the cache and runs the detections again
       --internal-domains strings             Define regular expressions for better classification of private or unreachable domains e.g. --internal-domains=".*.my-company.com,private.sh"
       --quiet                                Suppress non-essential messages

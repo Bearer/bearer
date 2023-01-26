@@ -3,7 +3,7 @@ package balancer
 import (
 	"context"
 	"errors"
-	"io/ioutil"
+	"io"
 	"net/http"
 	"os"
 
@@ -175,7 +175,7 @@ func (worker *Worker) Start() {
 				break
 			}
 
-			reportBytes, err := ioutil.ReadAll(f)
+			reportBytes, err := io.ReadAll(f)
 			if err != nil {
 				log.Error().Msgf("worker %s failed to read tmp report chunk file %e", worker.uuid, err)
 				worker.complete(err)

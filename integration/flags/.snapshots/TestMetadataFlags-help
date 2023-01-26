@@ -15,7 +15,7 @@ Available Commands:
 	version           Print the version
 
 Examples:
-	# Scan local directory or file and output a policy report
+	# Scan local directory or file and output security risks
 	$ curio scan <path>
 
 	# Scan current directory and output the data flow to a file

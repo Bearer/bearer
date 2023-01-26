@@ -28,7 +28,7 @@ risks:
           line_number: 5
           parent:
             line_number: 5
-            content: OpenSSL::PKey::RSA.new(2048).to_pem(cipher, "hello world")
+            content: OpenSSL::PKey::DSA.new(2048).to_pem(cipher, "hello world")
           content: |
             $<VAR>.$<METHOD>($<_>)
 components: []

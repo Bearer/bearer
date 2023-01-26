@@ -111,7 +111,7 @@ func (evaluator *evaluator) nonUnifiedNodeDetections(
 		return detections, nil
 	}
 
-	evaluator.detectAtNode(node, detectorType)
+	evaluator.detectAtNode(node, detectorType) //nolint:errcheck
 	return nodeDetections[detectorType], nil
 }
 

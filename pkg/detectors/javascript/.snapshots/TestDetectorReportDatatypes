@@ -20,7 +20,8 @@
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) ""
+      NormalizedObjectName: (string) (len=4) "user",
+      NormalizedFieldName: (string) (len=4) "save"
     }
   }),
   (*detections.Detection)({
@@ -44,7 +45,8 @@
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) ""
+      NormalizedObjectName: (string) (len=4) "user",
+      NormalizedFieldName: (string) (len=4) "name"
     }
   }),
   (*detections.Detection)({
@@ -68,7 +70,8 @@
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) ""
+      NormalizedObjectName: (string) (len=4) "user",
+      NormalizedFieldName: (string) (len=4) "name"
     }
   }),
   (*detections.Detection)({
@@ -92,7 +95,8 @@
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) ""
+      NormalizedObjectName: (string) (len=4) "user",
+      NormalizedFieldName: (string) (len=4) "name"
     }
   }),
   (*detections.Detection)({
@@ -116,7 +120,8 @@
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) ""
+      NormalizedObjectName: (string) (len=4) "name",
+      NormalizedFieldName: (string) (len=7) "surname"
     }
   }),
   (*detections.Detection)({
@@ -140,7 +145,8 @@
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) ""
+      NormalizedObjectName: (string) (len=4) "user",
+      NormalizedFieldName: (string) (len=4) "name"
     }
   }),
   (*detections.Detection)({
@@ -164,7 +170,8 @@
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) ""
+      NormalizedObjectName: (string) (len=4) "name",
+      NormalizedFieldName: (string) (len=4) "test"
     }
   }),
   (*detections.Detection)({
@@ -188,7 +195,8 @@
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) ""
+      NormalizedObjectName: (string) (len=4) "test",
+      NormalizedFieldName: (string) (len=7) "surname"
     }
   }),
   (*detections.Detection)({
@@ -212,7 +220,8 @@
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) ""
+      NormalizedObjectName: (string) (len=7) "surname",
+      NormalizedFieldName: (string) (len=4) "save"
     }
   }),
   (*detections.Detection)({
@@ -236,7 +245,8 @@
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) ""
+      NormalizedObjectName: (string) (len=4) "user",
+      NormalizedFieldName: (string) (len=4) "test"
     }
   }),
   (*detections.Detection)({
@@ -260,7 +270,8 @@
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) ""
+      NormalizedObjectName: (string) (len=4) "name",
+      NormalizedFieldName: (string) (len=7) "surname"
     }
   }),
   (*detections.Detection)({
@@ -284,7 +295,8 @@
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) ""
+      NormalizedObjectName: (string) (len=4) "user",
+      NormalizedFieldName: (string) (len=4) "test"
     }
   }),
   (*detections.Detection)({
@@ -308,7 +320,8 @@
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) ""
+      NormalizedObjectName: (string) (len=4) "test",
+      NormalizedFieldName: (string) (len=9) "something"
     }
   }),
   (*detections.Detection)({
@@ -332,7 +345,8 @@
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) ""
+      NormalizedObjectName: (string) (len=4) "todo",
+      NormalizedFieldName: (string) (len=4) "list"
     }
   }),
   (*detections.Detection)({
@@ -356,7 +370,8 @@
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) ""
+      NormalizedObjectName: (string) (len=4) "test",
+      NormalizedFieldName: (string) (len=7) "address"
     }
   }),
   (*detections.Detection)({
@@ -380,7 +395,8 @@
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) ""
+      NormalizedObjectName: (string) (len=7) "address",
+      NormalizedFieldName: (string) (len=4) "city"
     }
   }),
   (*detections.Detection)({
@@ -404,7 +420,8 @@
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) ""
+      NormalizedObjectName: (string) (len=7) "address",
+      NormalizedFieldName: (string) (len=6) "street"
     }
   }),
   (*detections.Detection)({
@@ -428,7 +445,8 @@
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) ""
+      NormalizedObjectName: (string) (len=6) "street",
+      NormalizedFieldName: (string) (len=6) "letter"
     }
   }),
   (*detections.Detection)({
@@ -452,7 +470,8 @@
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) ""
+      NormalizedObjectName: (string) (len=6) "street",
+      NormalizedFieldName: (string) (len=5) "numer"
     }
   }),
   (*detections.Detection)({
@@ -476,7 +495,8 @@
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) ""
+      NormalizedObjectName: (string) (len=4) "path",
+      NormalizedFieldName: (string) (len=4) "join"
     }
   }),
   (*detections.Detection)({
@@ -500,7 +520,8 @@
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) ""
+      NormalizedObjectName: (string) (len=8) "myobject",
+      NormalizedFieldName: (string) (len=6) "method"
     }
   }),
   (*detections.Detection)({
@@ -524,7 +545,8 @@
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) ""
+      NormalizedObjectName: (string) (len=8) "myobject",
+      NormalizedFieldName: (string) (len=7) "method1"
     }
   }),
   (*detections.Detection)({
@@ -548,7 +570,8 @@
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) ""
+      NormalizedObjectName: (string) (len=9) "myobject1",
+      NormalizedFieldName: (string) (len=6) "method"
     }
   }),
   (*detections.Detection)({
@@ -572,7 +595,8 @@
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) ""
+      NormalizedObjectName: (string) (len=9) "myobject1",
+      NormalizedFieldName: (string) (len=7) "method1"
     }
   }),
   (*detections.Detection)({
@@ -596,7 +620,8 @@
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) ""
+      NormalizedObjectName: (string) (len=9) "myobject2",
+      NormalizedFieldName: (string) (len=6) "method"
     }
   }),
   (*detections.Detection)({
@@ -620,7 +645,8 @@
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) ""
+      NormalizedObjectName: (string) (len=9) "myobject2",
+      NormalizedFieldName: (string) (len=7) "method1"
     }
   }),
   (*detections.Detection)({
@@ -644,7 +670,8 @@
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) ""
+      NormalizedObjectName: (string) (len=9) "myobject3",
+      NormalizedFieldName: (string) (len=6) "method"
     }
   }),
   (*detections.Detection)({
@@ -668,7 +695,8 @@
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) ""
+      NormalizedObjectName: (string) (len=9) "myobject3",
+      NormalizedFieldName: (string) (len=7) "method1"
     }
   }),
   (*detections.Detection)({
@@ -692,7 +720,8 @@
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) ""
+      NormalizedObjectName: (string) (len=9) "something",
+      NormalizedFieldName: (string) (len=4) "name"
     }
   }),
   (*detections.Detection)({
@@ -716,7 +745,8 @@
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) ""
+      NormalizedObjectName: (string) (len=4) "test",
+      NormalizedFieldName: (string) (len=4) "name"
     }
   }),
   (*detections.Detection)({
@@ -740,7 +770,8 @@
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) ""
+      NormalizedObjectName: (string) (len=4) "test",
+      NormalizedFieldName: (string) (len=4) "name"
     }
   }),
   (*detections.Detection)({
@@ -764,7 +795,8 @@
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) ""
+      NormalizedObjectName: (string) (len=4) "test",
+      NormalizedFieldName: (string) (len=4) "name"
     }
   }),
   (*detections.Detection)({
@@ -788,7 +820,8 @@
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) ""
+      NormalizedObjectName: (string) (len=4) "test",
+      NormalizedFieldName: (string) (len=4) "name"
     }
   }),
   (*detections.Detection)({
@@ -812,7 +845,8 @@
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) ""
+      NormalizedObjectName: (string) (len=4) "test",
+      NormalizedFieldName: (string) (len=4) "name"
     }
   }),
   (*detections.Detection)({
@@ -836,7 +870,8 @@
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) ""
+      NormalizedObjectName: (string) (len=6) "module",
+      NormalizedFieldName: (string) (len=6) "export"
     }
   }),
   (*detections.Detection)({
@@ -860,7 +895,8 @@
       SimpleFieldType: (string) (len=7) "unknown",
       Classification: (interface {}) <nil>,
       Parent: (*schema.Parent)(<nil>),
-      TransformedObjectName: (string) ""
+      NormalizedObjectName: (string) (len=6) "export",
+      NormalizedFieldName: (string) (len=4) "path"
     }
   })
 }

@@ -77,7 +77,7 @@ func Build(
 
 func (builder *builder) build(rootNode *tree.Node) *Result {
 	builder.write("(")
-	builder.compileNode(rootNode, true, false)
+	builder.compileNode(rootNode, true, false) //nolint:errcheck
 	builder.write(" @root")
 	builder.write(")")
 

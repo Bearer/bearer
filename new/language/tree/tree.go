@@ -8,7 +8,6 @@ import (
 
 type Tree struct {
 	input        []byte
-	fileName     string
 	sitterTree   *sitter.Tree
 	unifiedNodes map[NodeID][]*Node
 	queryCache   map[int]map[NodeID][]QueryResult

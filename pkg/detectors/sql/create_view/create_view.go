@@ -1,7 +1,7 @@
 package createview
 
 import (
-	"io/ioutil"
+	"io"
 	"os"
 	"regexp"
 	"strings"
@@ -22,7 +22,7 @@ var fromTableRegexp = regexp.MustCompile(`(?i)\sfrom\s`)
 
 var language = sql.GetLanguage()
 var viewNameQuery = parser.QueryMustCompile(language, `
-	(create_view_statement 
+	(create_view_statement
 		(dotted_name
 			(identifier) @param_schema_name
 			(identifier) @param_view_name
@@ -60,7 +60,7 @@ func Detect(file *file.FileInfo, report reporttypes.Report, idGenerator nodeid.G
 	if err != nil {
 		return err
 	}
-	fileBytes, err := ioutil.ReadAll(f)
+	fileBytes, err := io.ReadAll(f)
 	if err != nil {
 		return err
 	}

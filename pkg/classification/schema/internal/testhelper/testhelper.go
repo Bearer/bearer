@@ -2,7 +2,7 @@ package testhelper
 
 import (
 	"encoding/json"
-	"io/ioutil"
+	"os"
 
 	"github.com/bearer/curio/pkg/classification/schema"
 	"github.com/bearer/curio/pkg/report/detectors"
@@ -67,7 +67,7 @@ func ExtractExpectedOutput(
 		ExpectedClassifications: []ClassificationResult{},
 	}
 
-	val, err := ioutil.ReadFile("././fixtures/" + lang + ".json")
+	val, err := os.ReadFile("././fixtures/" + lang + ".json")
 	if err != nil {
 		t.Errorf("error opening file %e", err)
 	}

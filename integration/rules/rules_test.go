@@ -1,6 +1,7 @@
 package integration_test
 
 import (
+	"fmt"
 	"path/filepath"
 	"testing"
 
@@ -40,7 +41,7 @@ func TestRubyRules(t *testing.T) {
 			ext := filepath.Ext(dirEntryName)
 
 			if ext != "" {
-				continue // not a folder
+				continue // folder
 			}
 
 			rubySubPath := "ruby/" + rubyDirName + "/" + dirEntryName
@@ -50,18 +51,30 @@ func TestRubyRules(t *testing.T) {
 				t.Fatalf("failed to read rules/ruby/%s/%s dir %e", rubyDirName, dirEntryName, err)
 			}
 
-			policyTests := []testhelper.TestCase{}
+			summaryTests := []testhelper.TestCase{}
 			dataflowTests := []testhelper.TestCase{}
 
 			for _, testdataFile := range testdataDirEntries {
 				name := testdataFile.Name()
 
-				dataflowTests = append(dataflowTests, buildTestCase("dataflow_"+rubyDirName+"_"+dirEntryName+"_"+name, "dataflow", rubySubPath+"/testdata/"+name))
-				policyTests = append(policyTests, buildTestCase("policy_"+rubyDirName+"_"+dirEntryName+"_"+name, "policies", rubySubPath+"/testdata/"+name))
+				dataflowTests = append(dataflowTests,
+					buildTestCase(
+						fmt.Sprintf("dataflow_%s_%s_%s", rubyDirName, dirEntryName, name),
+						"dataflow",
+						fmt.Sprintf("%s/testdata/%s", rubySubPath, name),
+					),
+				)
+				summaryTests = append(summaryTests,
+					buildTestCase(
+						fmt.Sprintf("summary_%s_%s_%s", rubyDirName, dirEntryName, name),
+						"summary",
+						fmt.Sprintf("%s/testdata/%s", rubySubPath, name),
+					),
+				)
 			}
 
 			testhelper.RunTestsWithSnapshotSubdirectory(t, dataflowTests, snapshotDirectory)
-			testhelper.RunTestsWithSnapshotSubdirectory(t, policyTests, snapshotDirectory)
+			testhelper.RunTestsWithSnapshotSubdirectory(t, summaryTests, snapshotDirectory)
 		}
 	}
 }

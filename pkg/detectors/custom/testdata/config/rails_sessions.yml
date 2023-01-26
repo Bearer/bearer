@@ -1,7 +1,0 @@
-detect_rails_session:
-  type: "risk"
-  patterns:
-    - |
-      session[...] = $ANYTHING
-  languages:
-    - ruby
