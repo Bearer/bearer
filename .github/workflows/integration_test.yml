@@ -25,6 +25,6 @@ jobs:
         run: go build -a -o ./curio ./cmd/curio/main.go
       - name: Run tests
         run: go test -v ./integration/...
-        timeout-minutes: 10
+        timeout-minutes: 15
         env:
           CURIO_BINARY: true

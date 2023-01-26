@@ -19,6 +19,7 @@ critical:
         - PII
       parent_line_number: 4
       parent_content: rc4_encrypt.encrypt!(user.password)
+low:
     - policy_name: ""
       policy_dsrid: DSR-7
       policy_display_id: ruby_lang_weak_encryption

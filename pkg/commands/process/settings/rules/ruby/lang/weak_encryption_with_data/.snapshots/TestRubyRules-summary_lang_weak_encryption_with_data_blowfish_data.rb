@@ -12,6 +12,7 @@ critical:
         Crypt::Blowfish.new("insecure").encrypt_block do |user|
           user.password
         end
+low:
     - policy_name: ""
       policy_dsrid: DSR-7
       policy_display_id: ruby_lang_weak_encryption

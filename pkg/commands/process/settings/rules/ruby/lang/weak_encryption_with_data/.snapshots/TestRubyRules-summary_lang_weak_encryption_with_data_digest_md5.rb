@@ -9,6 +9,7 @@ critical:
         - PII
       parent_line_number: 1
       parent_content: Digest::MD5.hexdigest(user.address)
+low:
     - policy_name: ""
       policy_dsrid: DSR-7
       policy_display_id: ruby_lang_weak_encryption_with_data
