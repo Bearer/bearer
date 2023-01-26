@@ -22,53 +22,46 @@ func buildTestCase(name, reportType, filename string) testhelper.TestCase {
 	return testhelper.NewTestCase(name, arguments, options)
 }
 
-// test dataflow and policies
 func TestRubyRules(t *testing.T) {
-	// rubyDirs, err := rulesFs.ReadDir("ruby")
-	// if err != nil {
-	// 	t.Fatalf("failed to read rules/ruby dir %e", err)
-	// }
+	rubyDirs, err := rulesFs.ReadDir("ruby")
+	if err != nil {
+		t.Fatalf("failed to read rules/ruby dir %e", err)
+	}
 
-	// for _, rubyDir := range rubyDirs {
-	// 	rubyDirName := rubyDir.Name() // e.g. lang, rails, third_parties
-	// dirEntries, err := rulesFs.ReadDir("ruby/" + rubyDirName)
-	// if err != nil {
-	// 	t.Fatalf("failed to read rules/ruby/%s dir %e", rubyDirName, err)
-	// }
+	for _, rubyDir := range rubyDirs {
+		rubyDirName := rubyDir.Name() // e.g. lang, rails, third_parties
+		dirEntries, err := rulesFs.ReadDir("ruby/" + rubyDirName)
+		if err != nil {
+			t.Fatalf("failed to read rules/ruby/%s dir %e", rubyDirName, err)
+		}
 
-	// rubyDirName := "lang"
-	// dirEntryName := "weak_encrption"
+		for _, dirEntry := range dirEntries {
+			dirEntryName := dirEntry.Name() // e.g. cookies, cookies.yml
+			ext := filepath.Ext(dirEntryName)
 
-	// for _, dirEntry := range dirEntries {
-	// 	dirEntryName := dirEntry.Name() // e.g. cookies, cookies.yml
-	// 	ext := filepath.Ext(dirEntryName)
+			if ext != "" {
+				continue // not a folder
+			}
 
-	// 	if ext != "" {
-	// 		continue // not a folder
-	// 	}
-	// policyTests := []testhelper.TestCase{}
-	// dataflowTests := []testhelper.TestCase{}
+			rubySubPath := "ruby/" + rubyDirName + "/" + dirEntryName
+			snapshotDirectory := "../../pkg/commands/process/settings/rules/" + rubySubPath + "/.snapshots"
+			testdataDirEntries, err := rulesFs.ReadDir("ruby/" + rubyDirName + "/" + dirEntryName + "/testdata")
+			if err != nil {
+				t.Fatalf("failed to read rules/ruby/%s/%s dir %e", rubyDirName, dirEntryName, err)
+			}
 
-	// testdataDirEntries, err := rulesFs.ReadDir("ruby/" + rubyDirName + "/" + dirEntryName + "/testdata")
+			policyTests := []testhelper.TestCase{}
+			dataflowTests := []testhelper.TestCase{}
 
-	// if err != nil {
-	// 	t.Fatalf("failed to read rules/ruby/%s/%s dir %e", rubyDirName, dirEntryName, err)
-	// }
+			for _, testdataFile := range testdataDirEntries {
+				name := testdataFile.Name()
 
-	// rubySubPath := "ruby/" + rubyDirName + "/" + dirEntryName
+				dataflowTests = append(dataflowTests, buildTestCase("dataflow_"+rubyDirName+"_"+dirEntryName+"_"+name, "dataflow", rubySubPath+"/testdata/"+name))
+				policyTests = append(policyTests, buildTestCase("policy_"+rubyDirName+"_"+dirEntryName+"_"+name, "policies", rubySubPath+"/testdata/"+name))
+			}
 
-	// for _, testdataFile := range testdataDirEntries {
-	// 	name := testdataFile.Name()
-
-	// 	dataflowTests = append(dataflowTests, buildTestCase("dataflow_"+rubyDirName+"_"+dirEntryName+"_"+name, "dataflow", rubySubPath+"/testdata/"+name))
-	// 	policyTests = append(policyTests, buildTestCase("policy_"+rubyDirName+"_"+dirEntryName+"_"+name, "policies", rubySubPath+"/testdata/"+name))
-	// }
-
-	// snapshotDirectory := "../../pkg/commands/process/settings/rules/" + rubySubPath + "/.snapshots"
-	// testhelper.RunTestsWithSnapshotSubdirectory(t, dataflowTests, snapshotDirectory)
-	// testhelper.RunTestsWithSnapshotSubdirectory(t, policyTests, snapshotDirectory)
+			testhelper.RunTestsWithSnapshotSubdirectory(t, dataflowTests, snapshotDirectory)
+			testhelper.RunTestsWithSnapshotSubdirectory(t, policyTests, snapshotDirectory)
+		}
+	}
 }
-
-// }
-
-// }
