@@ -193,7 +193,7 @@ func (composition *Composition) extractCustomDetectors(evaluator detectortypes.E
 					file.Path,
 					datatypeDetection.MatchNode.LineNumber(),
 					datatypeDetection.MatchNode.ColumnNumber(),
-					"",
+					"test",
 				), schema.Schema{
 					ObjectName:           data.Name,
 					NormalizedObjectName: pluralizer.Singular(strings.ToLower(data.Name)),
@@ -210,7 +210,7 @@ func (composition *Composition) extractCustomDetectors(evaluator detectortypes.E
 						file.Path,
 						property.Detection.MatchNode.LineNumber(),
 						property.Detection.MatchNode.ColumnNumber(),
-						"",
+						"test",
 					), schema.Schema{
 						ObjectName:           data.Name,
 						NormalizedObjectName: pluralizer.Singular(strings.ToLower(data.Name)),
