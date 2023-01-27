@@ -1,8 +1,17 @@
 - type: risk
   query: |
     policy_failure = data.bearer.risk_policy.policy_failure
+    local_rule_failure = data.bearer.risk_policy.local_rule_failure
   modules:
     - path: policies/common.rego
       name: bearer.common
     - path: policies/risk_policy.rego
       name: bearer.risk_policy
+- type: inventory_report
+  query: |
+    report_items = data.bearer.inventory_report.report_items
+  modules:
+    - path: policies/common.rego
+      name: bearer.common
+    - path: policies/inventory_report.rego
+      name: bearer.inventory_report
