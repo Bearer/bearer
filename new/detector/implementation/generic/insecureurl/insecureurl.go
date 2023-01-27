@@ -3,9 +3,10 @@ package insecureurl
 import (
 	"regexp"
 
-	stringdetector "github.com/bearer/curio/new/detector/implementation/ruby/string"
 	"github.com/bearer/curio/new/detector/types"
 	"github.com/bearer/curio/new/language/tree"
+
+	generictypes "github.com/bearer/curio/new/detector/implementation/generic/types"
 	languagetypes "github.com/bearer/curio/new/language/types"
 )
 
@@ -31,7 +32,7 @@ func (detector *insecureURLDetector) DetectAt(
 	}
 
 	for _, detection := range detections {
-		value := detection.Data.(stringdetector.Data).Value
+		value := detection.Data.(generictypes.String).Value
 
 		if insecureUrlPattern.MatchString(value) {
 			return []*types.Detection{{MatchNode: node}}, nil

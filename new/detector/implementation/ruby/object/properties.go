@@ -4,6 +4,8 @@ import (
 	"github.com/bearer/curio/new/detector/implementation/ruby/property"
 	"github.com/bearer/curio/new/detector/types"
 	"github.com/bearer/curio/new/language/tree"
+
+	generictypes "github.com/bearer/curio/new/detector/implementation/generic/types"
 )
 
 func (detector *objectDetector) getProperties(
@@ -83,12 +85,12 @@ func (detector *objectDetector) getProperties(
 		return []*types.Detection{{
 			MatchNode:   node,
 			ContextNode: node,
-			Data: Data{
+			Data: generictypes.Object{
 				Name: objectParent.Content(),
 				Properties: []*types.Detection{
 					{
 						MatchNode: node,
-						Data: property.Data{
+						Data: generictypes.Property{
 							Name: objectProperty.Content(),
 						},
 					},

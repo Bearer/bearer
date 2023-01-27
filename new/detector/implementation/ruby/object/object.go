@@ -5,13 +5,10 @@ import (
 
 	"github.com/bearer/curio/new/detector/types"
 	"github.com/bearer/curio/new/language/tree"
+
+	generictypes "github.com/bearer/curio/new/detector/implementation/generic/types"
 	languagetypes "github.com/bearer/curio/new/language/types"
 )
-
-type Data struct {
-	Name       string
-	Properties []*types.Detection
-}
 
 type objectDetector struct {
 	// Gathering properties
@@ -129,7 +126,7 @@ func (detector *objectDetector) getHash(
 
 	return []*types.Detection{{
 		MatchNode: node,
-		Data:      Data{Properties: properties},
+		Data:      generictypes.Object{Properties: properties},
 	}}, nil
 }
 
@@ -149,12 +146,12 @@ func (detector *objectDetector) getAssigment(
 
 	var detections []*types.Detection
 	for _, object := range objects {
-		objectData := object.Data.(Data)
+		objectData := object.Data.(generictypes.Object)
 
 		if objectData.Name == "" {
 			detections = append(detections, &types.Detection{
 				MatchNode: node,
-				Data: Data{
+				Data: generictypes.Object{
 					Name:       result["left"].Content(),
 					Properties: objectData.Properties,
 				},
@@ -171,7 +168,7 @@ func (detector *objectDetector) getClass(node *tree.Node, evaluator types.Evalua
 		return nil, err
 	}
 
-	data := Data{
+	data := generictypes.Object{
 		Name:       result["name"].Content(),
 		Properties: []*types.Detection{},
 	}
@@ -207,11 +204,11 @@ func (detector *objectDetector) nameParentPairObject(
 
 	var detections []*types.Detection
 	for _, object := range objects {
-		objectData := object.Data.(Data)
+		objectData := object.Data.(generictypes.Object)
 
 		detections = append(detections, &types.Detection{
 			MatchNode: node,
-			Data: Data{
+			Data: generictypes.Object{
 				Name:       result["key"].Content(),
 				Properties: objectData.Properties,
 			},
