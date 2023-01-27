@@ -9,6 +9,7 @@ import (
 	"github.com/bearer/curio/pkg/commands/process/settings"
 	"github.com/bearer/curio/pkg/flag"
 	"github.com/bearer/curio/pkg/report/output/dataflow"
+	"github.com/bearer/curio/pkg/report/output/inventory"
 	"github.com/bearer/curio/pkg/report/output/summary"
 	"github.com/google/uuid"
 
@@ -105,11 +106,22 @@ func getReportOutput(report types.Report, config settings.Config) (any, error) {
 		return getDataflow(report, config, false)
 	case flag.ReportSummary:
 		return getSummaryReportOutput(report, config)
+	case flag.ReportPrivacy:
+		return getPrivacyReportOutput(report, config)
 	case flag.ReportStats:
 		return reportStats(report, config)
 	}
 
 	return nil, fmt.Errorf(`--report flag "%s" is not supported`, config.Report.Report)
+}
+
+func getPrivacyReportOutput(report types.Report, config settings.Config) ([]inventory.SubjectInventoryResult, error) {
+	dataflow, err := getDataflow(report, config, true)
+	if err != nil {
+		return nil, err
+	}
+
+	return inventory.GetOutput(dataflow, config)
 }
 
 func getSummaryReportOutput(report types.Report, config settings.Config) (map[string][]summary.PolicyResult, error) {
