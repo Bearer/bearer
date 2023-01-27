@@ -6,7 +6,6 @@ import (
 	"strings"
 
 	"github.com/gertd/go-pluralize"
-	"github.com/rs/zerolog/log"
 	"golang.org/x/exp/slices"
 
 	"github.com/bearer/curio/new/detector/evaluator"
@@ -134,13 +133,10 @@ func (composition *Composition) DetectFromFile(file *file.FileInfo) ([]compositi
 		return nil, nil
 	}
 
-	log.Debug().Msgf("reading file %s", file.AbsolutePath)
 	fileContent, err := os.ReadFile(file.AbsolutePath)
 	if err != nil {
 		return nil, fmt.Errorf("failed to read file %s", err)
 	}
-
-	log.Debug().Msgf("file content is %s", fileContent)
 
 	tree, err := composition.lang.Parse(string(fileContent))
 	if err != nil {
@@ -205,8 +201,8 @@ func (composition *Composition) extractCustomDetectors(evaluator detectortypes.E
 						NormalizedObjectName: pluralizer.Singular(strings.ToLower(data.Name)),
 						Classification:       data.Classification,
 						Parent: &schema.Parent{
-							LineNumber: datatypeDetection.MatchNode.LineNumber(),
-							Content:    datatypeDetection.MatchNode.Content(),
+							LineNumber: detection.MatchNode.LineNumber(),
+							Content:    detection.MatchNode.Content(),
 						},
 					},
 				})
@@ -225,13 +221,13 @@ func (composition *Composition) extractCustomDetectors(evaluator detectortypes.E
 						),
 						Value: schema.Schema{
 							ObjectName:           data.Name,
-							NormalizedObjectName: pluralizer.Singular(strings.ToLower(data.Name)),
+							NormalizedObjectName: pluralizer.Singular(strings.ToLower(property.Name)),
 							FieldName:            property.Name,
 							NormalizedFieldName:  pluralizer.Singular(strings.ToLower(property.Name)),
 							Classification:       property.Classification,
 							Parent: &schema.Parent{
-								LineNumber: property.Detection.MatchNode.LineNumber(),
-								Content:    property.Detection.MatchNode.Content(),
+								LineNumber: detection.MatchNode.LineNumber(),
+								Content:    detection.MatchNode.Content(),
 							},
 						},
 					})

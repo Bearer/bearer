@@ -29,7 +29,7 @@
 			},
 			"parent": {
 				"line_number": 1,
-				"content": "user.name"
+				"content": "logger.info(user.name)"
 			},
 			"normalized_object_name": "user"
 		}
@@ -64,9 +64,9 @@
 			},
 			"parent": {
 				"line_number": 1,
-				"content": "user.name"
+				"content": "logger.info(user.name)"
 			},
-			"normalized_object_name": "user",
+			"normalized_object_name": "name",
 			"normalized_field_name": "name"
 		}
 	}
