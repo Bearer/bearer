@@ -44,6 +44,10 @@ func (evaluator *evaluator) ForTree(rootNode *langtree.Node, detectorType string
 	var result []*types.Detection
 
 	if err := rootNode.Walk(func(node *langtree.Node, visitChildren func() error) error {
+		if !node.Equal(rootNode) && !evaluator.lang.DescendIntoDetectionNode(node) {
+			return nil
+		}
+
 		detections, err := evaluator.nonUnifiedNodeDetections(node, detectorType)
 		if err != nil {
 			return err
@@ -58,10 +62,6 @@ func (evaluator *evaluator) ForTree(rootNode *langtree.Node, detectorType string
 			}
 
 			result = append(result, unifiedNodeDetections...)
-		}
-
-		if evaluator.lang.IsTerminalDetectionNode(node) {
-			return nil
 		}
 
 		return visitChildren()

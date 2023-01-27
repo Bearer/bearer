@@ -181,10 +181,12 @@ func (implementation *rubyImplementation) PatternIsAnchored(node *tree.Node) boo
 	return true
 }
 
-func (implementation *rubyImplementation) IsTerminalDetectionNode(node *tree.Node) bool {
-	if node.Type() == "call" {
-		return !slice.Contains(passThroughMethods, node.ChildByFieldName("method").Content())
+func (implementation *rubyImplementation) DescendIntoDetectionNode(node *tree.Node) bool {
+	parent := node.Parent()
+
+	if parent != nil && parent.Type() == "call" && node.Equal(parent.ChildByFieldName("receiver")) {
+		return slice.Contains(passThroughMethods, parent.ChildByFieldName("method").Content())
 	}
 
-	return false
+	return true
 }
