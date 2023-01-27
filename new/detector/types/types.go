@@ -3,8 +3,6 @@ package types
 import (
 	"github.com/bearer/curio/new/language/tree"
 	"github.com/bearer/curio/pkg/util/file"
-
-	compositiontypes "github.com/bearer/curio/new/detector/composition/types"
 )
 
 type Detection struct {
@@ -33,6 +31,12 @@ type Detector interface {
 	Name() string
 	DetectAt(node *tree.Node, evaluator Evaluator) ([]interface{}, error)
 	Close()
+}
+
+type CompositionDetection struct {
+	RuleName   string
+	File       *file.FileInfo
+	Detections []*Detection
 }
 
 type Composition interface {
