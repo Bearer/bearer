@@ -1,4 +1,12 @@
 data_types:
+    - name: Email Address
+      detectors:
+        - name: ruby
+          locations:
+            - filename: pkg/commands/process/settings/rules/ruby/lang/weak_encryption_with_data/testdata/blowfish_data.rb
+              line_number: 5
+              field_name: email
+              object_name: user
     - name: Passwords
       detectors:
         - name: ruby
@@ -10,6 +18,16 @@ data_types:
 risks:
     - detector_id: ruby_lang_weak_encryption_with_data
       data_types:
+        - name: Email Address
+          stored: false
+          locations:
+            - filename: pkg/commands/process/settings/rules/ruby/lang/weak_encryption_with_data/testdata/blowfish_data.rb
+              line_number: 5
+              parent:
+                line_number: 5
+                content: Crypt::Blowfish.new("your-key").encrypt_string(user.email)
+              field_name: email
+              object_name: user
         - name: Passwords
           stored: false
           locations:
@@ -34,6 +52,12 @@ risks:
                     Crypt::Blowfish.new("insecure").encrypt_block do |user|
                       user.password
                     end
+              object_name: user
+            - filename: pkg/commands/process/settings/rules/ruby/lang/weak_encryption_with_data/testdata/blowfish_data.rb
+              line_number: 5
+              parent:
+                line_number: 5
+                content: Crypt::Blowfish.new("your-key").encrypt_string(user.email)
               object_name: user
     - detector_id: ruby_lang_weak_encryption
       locations:
@@ -61,6 +85,13 @@ risks:
             $<VAR>.$<METHOD> do
               $<_>
             end
+        - filename: pkg/commands/process/settings/rules/ruby/lang/weak_encryption_with_data/testdata/blowfish_data.rb
+          line_number: 5
+          parent:
+            line_number: 5
+            content: Crypt::Blowfish.new("your-key").encrypt_string(user.email)
+          content: |
+            $<VAR>.$<METHOD>()
 components: []
 
 
