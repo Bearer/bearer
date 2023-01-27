@@ -25,12 +25,12 @@ func RunTest(t *testing.T,
 	rulesConfig := make(map[string]*settings.Rule)
 
 	for ruleName, ruleContent := range rules {
-		var parsedRule *settings.Rule
-		err := yaml.Unmarshal(ruleContent, parsedRule)
+		var parsedRule settings.Rule
+		err := yaml.Unmarshal(ruleContent, &parsedRule)
 		if err != nil {
 			t.Fatal(err)
 		}
-		rulesConfig[ruleName] = parsedRule
+		rulesConfig[ruleName] = &parsedRule
 	}
 
 	classifier, err := classification.NewClassifier(&classification.Config{
