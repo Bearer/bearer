@@ -30,6 +30,12 @@ Next, navigate into the curio project in your terminal, and install the required
 go mod download
 ```
 
+Finally we use [direnv](https://direnv.net/) to manage env vars in development you can setup your own by using `.envrc.example` as a base. You're unlikely to need to set anything other than `GITHUB_WORKSPACE` for integration tests so feel free to skip this step or export it manaually using:
+
+```
+export GITHUB_WORKSPACE=`pwd`
+```
+
 ## Running Curio locally from source
 
 To run Curio from source use the following command from the curio directory:
@@ -80,6 +86,8 @@ To update snapshots, set the `UPDATE_SNAPSHOTS` env variable to `true` when runn
 ```bash
 UPDATE_SNAPSHOTS=true go test ./...
 ```
+
+**Note:** you will need to export `GITHUB_WORKSPACE` as the full path to the project so integration tests can run correctly.
 
 ## Generating CLI Documentation
 
