@@ -3,9 +3,7 @@ package ruby
 import (
 	"fmt"
 	"os"
-	"strings"
 
-	"github.com/gertd/go-pluralize"
 	"golang.org/x/exp/slices"
 
 	"github.com/bearer/curio/new/detector/evaluator"
@@ -19,17 +17,12 @@ import (
 
 	"github.com/bearer/curio/pkg/classification"
 	"github.com/bearer/curio/pkg/commands/process/settings"
-	"github.com/bearer/curio/pkg/report/detectors"
-	"github.com/bearer/curio/pkg/report/schema"
-	"github.com/bearer/curio/pkg/report/source"
 	"github.com/bearer/curio/pkg/util/file"
 
-	compositiontypes "github.com/bearer/curio/new/detector/composition/types"
 	stringdetector "github.com/bearer/curio/new/detector/implementation/ruby/string"
 	detectorset "github.com/bearer/curio/new/detector/set"
 	detectortypes "github.com/bearer/curio/new/detector/types"
 	languagetypes "github.com/bearer/curio/new/language/types"
-	reportdetections "github.com/bearer/curio/pkg/report/detections"
 )
 
 type Composition struct {
@@ -128,7 +121,7 @@ func (composition *Composition) Close() {
 	}
 }
 
-func (composition *Composition) DetectFromFile(file *file.FileInfo) ([]compositiontypes.Detection, error) {
+func (composition *Composition) DetectFromFile(file *file.FileInfo) ([]*detectortypes.CompositionDetection, error) {
 	if file.Language != "Ruby" {
 		return nil, nil
 	}
@@ -149,91 +142,20 @@ func (composition *Composition) DetectFromFile(file *file.FileInfo) ([]compositi
 
 }
 
-func (composition *Composition) extractCustomDetectors(evaluator detectortypes.Evaluator, tree *tree.Tree, file *file.FileInfo) ([]compositiontypes.Detection, error) {
-	customDetections := []compositiontypes.Detection{}
-	pluralizer := pluralize.NewClient()
+func (composition *Composition) extractCustomDetectors(evaluator detectortypes.Evaluator, tree *tree.Tree, file *file.FileInfo) ([]*detectortypes.CompositionDetection, error) {
+	customDetections := []*detectortypes.CompositionDetection{}
 
 	for _, detectorType := range composition.customDetectorTypes {
 		detections, err := evaluator.ForTree(tree.RootNode(), detectorType)
-
 		if err != nil {
 			return nil, err
 		}
 
-		for _, detection := range detections {
-			data := detection.Data.(custom.Data)
-
-			if len(data.Datatypes) == 0 {
-				customDetections = append(customDetections, compositiontypes.Detection{
-					CustomDetector: detectors.Type(detectorType),
-					DetectionType:  reportdetections.TypeCustomRisk,
-					Source: source.New(
-						file,
-						file.Path,
-						detection.MatchNode.LineNumber(),
-						detection.MatchNode.ColumnNumber(),
-						data.Pattern,
-					),
-					Value: schema.Parent{
-						LineNumber: detection.MatchNode.LineNumber(),
-						Content:    detection.MatchNode.Content(),
-					},
-				})
-
-				continue
-			}
-
-			for _, datatypeDetection := range data.Datatypes {
-				data := datatypeDetection.Data.(datatype.Data)
-
-				customDetections = append(customDetections, compositiontypes.Detection{
-					CustomDetector: detectors.Type(detectorType),
-					DetectionType:  reportdetections.TypeCustomClassified,
-					Source: source.New(
-						file,
-						file.Path,
-						datatypeDetection.MatchNode.LineNumber(),
-						datatypeDetection.MatchNode.ColumnNumber(),
-						"",
-					),
-					Value: schema.Schema{
-						ObjectName:           data.Name,
-						NormalizedObjectName: pluralizer.Singular(strings.ToLower(data.Name)),
-						Classification:       data.Classification,
-						Parent: &schema.Parent{
-							LineNumber: detection.MatchNode.LineNumber(),
-							Content:    detection.MatchNode.Content(),
-						},
-					},
-				})
-
-				for _, property := range data.Properties {
-
-					customDetections = append(customDetections, compositiontypes.Detection{
-						CustomDetector: detectors.Type(detectorType),
-						DetectionType:  reportdetections.TypeCustomClassified,
-						Source: source.New(
-							file,
-							file.Path,
-							property.Detection.MatchNode.LineNumber(),
-							property.Detection.MatchNode.ColumnNumber(),
-							"",
-						),
-						Value: schema.Schema{
-							ObjectName:           data.Name,
-							NormalizedObjectName: pluralizer.Singular(strings.ToLower(property.Name)),
-							FieldName:            property.Name,
-							NormalizedFieldName:  pluralizer.Singular(strings.ToLower(property.Name)),
-							Classification:       property.Classification,
-							Parent: &schema.Parent{
-								LineNumber: detection.MatchNode.LineNumber(),
-								Content:    detection.MatchNode.Content(),
-							},
-						},
-					})
-				}
-			}
-		}
+		customDetections = append(customDetections, &detectortypes.CompositionDetection{
+			RuleName:   detectorType,
+			File:       file,
+			Detections: detections,
+		})
 	}
 
 	return customDetections, nil

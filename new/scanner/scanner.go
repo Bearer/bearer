@@ -3,6 +3,7 @@ package scanner
 import (
 	"fmt"
 
+	"github.com/bearer/curio/new/detector/composition"
 	"github.com/bearer/curio/new/detector/composition/ruby"
 	"github.com/bearer/curio/new/detector/types"
 	"github.com/bearer/curio/pkg/classification"
@@ -59,9 +60,7 @@ func Detect(report report.Report, file *file.FileInfo) (err error) {
 			return fmt.Errorf("%s failed to detect in file %s: %s", language.name, file.AbsolutePath, err)
 		}
 
-		for _, detection := range detections {
-			report.AddDetection(detection.DetectionType, detection.CustomDetector, detection.Source, detection.Value)
-		}
+		composition.ReportDetections(report, detections)
 	}
 
 	return nil
