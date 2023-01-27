@@ -30,7 +30,7 @@ Next, navigate into the curio project in your terminal, and install the required
 go mod download
 ```
 
-Finally we use [direnv](https://direnv.net/) to manage env vars in development you can setup your own by using `.envrc.example` as a base. You're unlikely to need to set anything other than `GITHUB_WORKSPACE` for integration tests so feel free to skip this step or export it manaually using:
+Finally, we use [direnv](https://direnv.net/) to manage env vars in development. You can set up your own by using `.envrc.example` as a base. You're unlikely to need to set anything other than `GITHUB_WORKSPACE` for integration tests, so feel free to skip this step or export it manually using:
 
 ```
 export GITHUB_WORKSPACE=`pwd`
