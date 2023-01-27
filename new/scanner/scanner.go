@@ -3,6 +3,7 @@ package scanner
 import (
 	"fmt"
 
+	"github.com/bearer/curio/new/detector/composition"
 	"github.com/bearer/curio/new/detector/composition/ruby"
 	"github.com/bearer/curio/new/detector/types"
 	"github.com/bearer/curio/pkg/classification"
@@ -30,10 +31,12 @@ func Setup(config *settings.Config, classifier *classification.Classifier) (err 
 	var toInstantiate = []struct {
 		constructor func(map[string]*settings.Rule, *classification.Classifier) (types.Composition, error)
 		name        string
-	}{{
-		constructor: ruby.New,
-		name:        "ruby",
-	}}
+	}{
+		{
+			constructor: ruby.New,
+			name:        "ruby",
+		},
+	}
 
 	for _, instantiatior := range toInstantiate {
 		composition, err := instantiatior.constructor(config.Rules, classifier)
@@ -52,9 +55,12 @@ func Setup(config *settings.Config, classifier *classification.Classifier) (err 
 
 func Detect(report report.Report, file *file.FileInfo) (err error) {
 	for _, language := range scanner {
-		if err := language.composition.DetectFromFile(report, file); err != nil {
+		detections, err := language.composition.DetectFromFile(file)
+		if err != nil {
 			return fmt.Errorf("%s failed to detect in file %s: %s", language.name, file.AbsolutePath, err)
 		}
+
+		composition.ReportDetections(report, detections)
 	}
 
 	return nil

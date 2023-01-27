@@ -5,12 +5,10 @@ import (
 
 	"github.com/bearer/curio/new/detector/types"
 	"github.com/bearer/curio/new/language/tree"
+
+	generictypes "github.com/bearer/curio/new/detector/implementation/generic/types"
 	languagetypes "github.com/bearer/curio/new/language/types"
 )
-
-type Data struct {
-	Name string
-}
 
 type propertyDetector struct {
 	pairQuery       *tree.Query
@@ -63,7 +61,7 @@ func (detector *propertyDetector) DetectAt(
 		return []*types.Detection{{
 			MatchNode:   node,
 			ContextNode: node,
-			Data:        Data{Name: result["key"].Content()},
+			Data:        generictypes.Property{Name: result["key"].Content()},
 		}}, nil
 	}
 
@@ -76,7 +74,7 @@ func (detector *propertyDetector) DetectAt(
 		return []*types.Detection{{
 			MatchNode:   node,
 			ContextNode: node,
-			Data:        Data{Name: result["name"].Content()},
+			Data:        generictypes.Property{Name: result["name"].Content()},
 		}}, nil
 	}
 
@@ -89,7 +87,7 @@ func (detector *propertyDetector) DetectAt(
 		return []*types.Detection{{
 			MatchNode:   node,
 			ContextNode: node,
-			Data:        Data{Name: result["name"].Content()},
+			Data:        generictypes.Property{Name: result["name"].Content()},
 		}}, nil
 	}
 

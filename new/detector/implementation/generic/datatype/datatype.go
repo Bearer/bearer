@@ -1,14 +1,14 @@
 package datatype
 
 import (
-	objectdetector "github.com/bearer/curio/new/detector/implementation/ruby/object"
-	propertydetector "github.com/bearer/curio/new/detector/implementation/ruby/property"
 	"github.com/bearer/curio/new/detector/types"
 	"github.com/bearer/curio/new/language/tree"
-	languagetypes "github.com/bearer/curio/new/language/types"
-	classificationschema "github.com/bearer/curio/pkg/classification/schema"
 	"github.com/bearer/curio/pkg/report/detectors"
 	"github.com/bearer/curio/pkg/report/schema"
+
+	generictypes "github.com/bearer/curio/new/detector/implementation/generic/types"
+	languagetypes "github.com/bearer/curio/new/language/types"
+	classificationschema "github.com/bearer/curio/pkg/classification/schema"
 )
 
 type Data struct {
@@ -66,10 +66,10 @@ func (detector *datatypeDetector) DetectAt(
 	for _, object := range objectDetections {
 		var properties []Property
 
-		objectData := object.Data.(objectdetector.Data)
+		objectData := object.Data.(generictypes.Object)
 
 		for _, property := range objectData.Properties {
-			propertyData := property.Data.(propertydetector.Data)
+			propertyData := property.Data.(generictypes.Property)
 			properties = append(properties, Property{
 				Detection: property,
 				Name:      propertyData.Name,

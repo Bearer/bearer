@@ -5,12 +5,10 @@ import (
 
 	"github.com/bearer/curio/new/detector/types"
 	"github.com/bearer/curio/new/language/tree"
+
+	generictypes "github.com/bearer/curio/new/detector/implementation/generic/types"
 	languagetypes "github.com/bearer/curio/new/language/types"
 )
-
-type Data struct {
-	Value string
-}
 
 type stringDetector struct{}
 
@@ -30,7 +28,7 @@ func (detector *stringDetector) DetectAt(
 	case "string_content":
 		return []*types.Detection{{
 			MatchNode: node,
-			Data:      Data{Value: node.Content()},
+			Data:      generictypes.String{Value: node.Content()},
 		}}, nil
 	case "interpolation", "string":
 		return concatenateChildren(node, evaluator)
@@ -61,7 +59,7 @@ func concatenateChildren(node *tree.Node, evaluator types.Evaluator) ([]*types.D
 		case 0:
 			value += "*"
 		case 1:
-			value += detections[0].Data.(Data).Value
+			value += detections[0].Data.(generictypes.String).Value
 		default:
 			return nil, fmt.Errorf("expected single string detection but got %d", len(detections))
 		}
@@ -69,7 +67,7 @@ func concatenateChildren(node *tree.Node, evaluator types.Evaluator) ([]*types.D
 
 	return []*types.Detection{{
 		MatchNode: node,
-		Data:      Data{Value: value},
+		Data:      generictypes.String{Value: value},
 	}}, nil
 }
 

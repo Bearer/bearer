@@ -17,7 +17,6 @@ func Discover(report report.Report, tree *parser.Tree, idGenerator nodeid.Genera
 	addProperties(tree, helperDatatypes)
 	linkProperties(tree, datatypes, helperDatatypes)
 	scopeProperties(datatypes, idGenerator)
-
 	addObjects(tree, datatypes)
 
 	parserdatatype.PruneMap(datatypes)
