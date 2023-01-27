@@ -21,8 +21,8 @@ var TrimPath = "testdata/testcases/"
 func RunTest(t *testing.T,
 	rules map[string][]byte,
 	testCasesPath string,
-	compositionInstantiator func(map[string]*settings.Rule, *classification.Classifier) (types.Composition, error)) {
-	rulesConfig := make(map[string]*settings.Rule)
+	compositionInstantiator func(map[string]settings.Rule, *classification.Classifier) (types.Composition, error)) {
+	var rulesConfig map[string]settings.Rule = make(map[string]settings.Rule)
 
 	for ruleName, ruleContent := range rules {
 		var parsedRule settings.Rule
@@ -30,7 +30,7 @@ func RunTest(t *testing.T,
 		if err != nil {
 			t.Fatal(err)
 		}
-		rulesConfig[ruleName] = &parsedRule
+		rulesConfig[ruleName] = parsedRule
 	}
 
 	classifier, err := classification.NewClassifier(&classification.Config{
@@ -52,7 +52,7 @@ func RunTest(t *testing.T,
 	}
 
 	files := []string{}
-	err = filepath.WalkDir(testCasesPath, func(path string, d fs.DirEntry, walkDirErr error) error {
+	filepath.WalkDir(testCasesPath, func(path string, d fs.DirEntry, walkDirErr error) error {
 		if d.IsDir() {
 			return nil
 		}
@@ -60,13 +60,10 @@ func RunTest(t *testing.T,
 		files = append(files, strings.TrimPrefix(path, TrimPath))
 		return nil
 	})
-	if err != nil {
-		t.Fatal(err)
-	}
 
 	fileInfos := []*file.FileInfo{}
 
-	err = file.IterateFilesList(
+	file.IterateFilesList(
 		testCasesPath,
 		files,
 		func(dir *file.Path) (bool, error) {
@@ -77,10 +74,6 @@ func RunTest(t *testing.T,
 			return nil
 		},
 	)
-
-	if err != nil {
-		t.Fatal(err)
-	}
 
 	for _, testCase := range fileInfos {
 		t.Run(testCase.RelativePath, func(t *testing.T) {

@@ -125,10 +125,13 @@ func (composition *Composition) DetectFromFile(file *file.FileInfo) ([]*detector
 		return nil, nil
 	}
 
+	log.Debug().Msgf("reading file %s", file.AbsolutePath)
 	fileContent, err := os.ReadFile(file.AbsolutePath)
 	if err != nil {
 		return nil, fmt.Errorf("failed to read file %s", err)
 	}
+
+	log.Debug().Msgf("file content is %s", fileContent)
 
 	tree, err := composition.lang.Parse(string(fileContent))
 	if err != nil {
