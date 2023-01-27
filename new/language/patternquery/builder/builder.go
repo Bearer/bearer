@@ -102,7 +102,9 @@ func (builder *builder) compileNode(node *tree.Node, isRoot bool, isLastChild bo
 	}
 
 	writeMatch := false
-	if !builder.matchNodeFound && node.StartByte() == builder.inputParams.MatchNodeOffset {
+	if !builder.matchNodeFound &&
+		node.StartByte() == builder.inputParams.MatchNodeOffset &&
+		!slices.Contains(builder.langImplementation.PatternMatchNodeContainerTypes(), node.Type()) {
 		builder.matchNodeFound = true
 		writeMatch = true
 	}
