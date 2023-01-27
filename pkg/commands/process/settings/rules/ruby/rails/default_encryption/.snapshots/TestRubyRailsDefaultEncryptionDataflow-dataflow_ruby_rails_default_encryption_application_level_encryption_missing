@@ -15,6 +15,7 @@ data_types:
           locations:
             - filename: pkg/commands/process/settings/rules/ruby/rails/default_encryption/testdata/application_level_encryption_missing/schema_rb/db/schema.rb
               line_number: 3
+              encrypted: true
               stored: true
               parent:
                 line_number: 2
@@ -32,6 +33,7 @@ data_types:
           locations:
             - filename: pkg/commands/process/settings/rules/ruby/rails/default_encryption/testdata/application_level_encryption_missing/structure_sql/db/structure.sql
               line_number: 7
+              encrypted: true
               stored: true
               parent:
                 line_number: 1
@@ -130,19 +132,19 @@ risks:
           line_number: 2
           parent:
             line_number: 2
-            content: encrypts :email
+            content: :email
           content: |
             class $<_>
-              $<!>encrypts($<...>$<ATTRIBUTE>$<...>)
+              encrypts($<...>$<!>$<ATTRIBUTE>$<...>)
             end
         - filename: pkg/commands/process/settings/rules/ruby/rails/default_encryption/testdata/application_level_encryption_missing/structure_sql/app/models/user.rb
           line_number: 2
           parent:
             line_number: 2
-            content: encrypts :email
+            content: :email
           content: |
             class $<_>
-              $<!>encrypts($<...>$<ATTRIBUTE>$<...>)
+              encrypts($<...>$<!>$<ATTRIBUTE>$<...>)
             end
 components: []
 

@@ -6,7 +6,6 @@ sql_encrypted contains detection if {
 	detection := input.all_detections[_]
 
 	detection.detector_type in input.rule.detectors
-	detection.value.classification.decision.state == "valid"
 	startswith(detection.value.normalized_field_name, input.rule.auto_encrypt_prefix)
 }
 
@@ -20,7 +19,7 @@ encrypted contains detection if {
 
 	some encrypted_detection in sql_encrypted
 	detection.value.normalized_object_name == encrypted_detection.value.normalized_object_name
-	detection.value.normalized_field_name == encrypted_detection.value.normalized_field_name
+	detection.value.field_name == encrypted_detection.value.field_name
 }
 
 verified_by contains [detection, verifications] if {
@@ -33,7 +32,7 @@ verified_by contains [detection, verifications] if {
 	verifications := [verification |
 		encrypted_detection := sql_encrypted[_]
 		detection.value.normalized_object_name == encrypted_detection.value.normalized_object_name
-		detection.value.normalized_field_name == encrypted_detection.value.normalized_field_name
+		detection.value.field_name == encrypted_detection.value.field_name
 
 		verification := {"detector": "db_encrypted"}
 	]

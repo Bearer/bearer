@@ -2,7 +2,7 @@ type: risk
 patterns:
   - pattern: |
       class $<_>
-        $<!>encrypts($<...>$<ATTRIBUTE>$<...>)
+        encrypts($<...>$<!>$<ATTRIBUTE>$<...>)
       end
 languages:
   - ruby
