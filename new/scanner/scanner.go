@@ -3,7 +3,6 @@ package scanner
 import (
 	"fmt"
 
-	"github.com/bearer/curio/new/detector/composition/javascript"
 	"github.com/bearer/curio/new/detector/composition/ruby"
 	"github.com/bearer/curio/new/detector/types"
 	"github.com/bearer/curio/pkg/classification"
@@ -35,10 +34,6 @@ func Setup(config *settings.Config, classifier *classification.Classifier) (err 
 		{
 			constructor: ruby.New,
 			name:        "ruby",
-		},
-		{
-			constructor: javascript.New,
-			name:        "javascript",
 		},
 	}
 
