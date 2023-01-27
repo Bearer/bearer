@@ -21,12 +21,12 @@ var TrimPath = "testdata/testcases/"
 func RunTest(t *testing.T,
 	rules map[string][]byte,
 	testCasesPath string,
-	compositionInstantiator func(map[string]settings.Rule, *classification.Classifier) (types.Composition, error)) {
-	var rulesConfig map[string]settings.Rule = make(map[string]settings.Rule)
+	compositionInstantiator func(map[string]*settings.Rule, *classification.Classifier) (types.Composition, error)) {
+	rulesConfig := make(map[string]*settings.Rule)
 
 	for ruleName, ruleContent := range rules {
-		var parsedRule settings.Rule
-		err := yaml.Unmarshal(ruleContent, &parsedRule)
+		var parsedRule *settings.Rule
+		err := yaml.Unmarshal(ruleContent, parsedRule)
 		if err != nil {
 			t.Fatal(err)
 		}
