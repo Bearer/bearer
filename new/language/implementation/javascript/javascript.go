@@ -153,6 +153,22 @@ func (implementation *javascriptImplementation) AnonymousPatternNodeParentTypes(
 	return []string{}
 }
 
+func (implementation *javascriptImplementation) FindPatternMatchNode(input []byte) [][]int {
+	return nil
+}
+
+func (implementation *javascriptImplementation) FindPatternUnanchoredPoints(input []byte) [][]int {
+	return nil
+}
+
+func (implementation *javascriptImplementation) IsTerminalDetectionNode(node *tree.Node) bool {
+	return false
+}
+
+func (implementation *javascriptImplementation) PatternMatchNodeContainerTypes() []string {
+	return nil
+}
+
 func (implementation *javascriptImplementation) PatternIsAnchored(node *tree.Node) bool {
 	parent := node.Parent()
 	if parent == nil {

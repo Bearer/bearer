@@ -40,7 +40,7 @@ type Composition struct {
 	closers             []func()
 }
 
-func New(rules map[string]settings.Rule, classifier *classification.Classifier) (detectortypes.Composition, error) {
+func New(rules map[string]*settings.Rule, classifier *classification.Classifier) (detectortypes.Composition, error) {
 	lang, err := language.Get("javascript")
 	if err != nil {
 		return nil, fmt.Errorf("failed to lookup language: %s", err)
@@ -144,7 +144,7 @@ func (composition *Composition) DetectFromFile(file *file.FileInfo) ([]compositi
 		return nil, fmt.Errorf("failed to parse file %s", err)
 	}
 
-	evaluator := evaluator.New(composition.detectorSet, tree, file.FileInfo.Name())
+	evaluator := evaluator.New(composition.lang, composition.detectorSet, tree, file.FileInfo.Name())
 
 	return composition.extractCustomDetectors(evaluator, tree, file)
 }
