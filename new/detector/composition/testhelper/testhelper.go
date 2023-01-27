@@ -52,7 +52,7 @@ func RunTest(t *testing.T,
 	}
 
 	files := []string{}
-	filepath.WalkDir(testCasesPath, func(path string, d fs.DirEntry, walkDirErr error) error {
+	err = filepath.WalkDir(testCasesPath, func(path string, d fs.DirEntry, walkDirErr error) error {
 		if d.IsDir() {
 			return nil
 		}
@@ -60,10 +60,13 @@ func RunTest(t *testing.T,
 		files = append(files, strings.TrimPrefix(path, TrimPath))
 		return nil
 	})
+	if err != nil {
+		t.Fatal(err)
+	}
 
 	fileInfos := []*file.FileInfo{}
 
-	file.IterateFilesList(
+	err = file.IterateFilesList(
 		testCasesPath,
 		files,
 		func(dir *file.Path) (bool, error) {
@@ -74,6 +77,10 @@ func RunTest(t *testing.T,
 			return nil
 		},
 	)
+
+	if err != nil {
+		t.Fatal(err)
+	}
 
 	for _, testCase := range fileInfos {
 		t.Run(testCase.RelativePath, func(t *testing.T) {
