@@ -12,7 +12,6 @@ import (
 var consoleLogRule []byte
 
 func TestJavascript(t *testing.T) {
-
 	testhelper.RunTest(t, map[string][]byte{
 		"logger": consoleLogRule,
 	}, "./testdata/testcases", javascript.New)
