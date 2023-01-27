@@ -30,6 +30,7 @@ var (
 	variableLookupParents = []string{"pair", "argument_list", "interpolation"}
 
 	anonymousPatternNodeParentTypes = []string{"binary"}
+	patternMatchNodeContainerTypes  = []string{"argument_list"}
 
 	// $<name:type> or $<name:type1|type2> or $<name>
 	patternQueryVariableRegex = regexp.MustCompile(`\$<(?P<name>[^>:!\.]+)(?::(?P<types>[^>]+))?>`)
@@ -146,6 +147,10 @@ func produceDummyValue(i int, nodeType string) string {
 
 func (implementation *rubyImplementation) AnonymousPatternNodeParentTypes() []string {
 	return anonymousPatternNodeParentTypes
+}
+
+func (implementation *rubyImplementation) PatternMatchNodeContainerTypes() []string {
+	return patternMatchNodeContainerTypes
 }
 
 func (implementation *rubyImplementation) PatternIsAnchored(node *tree.Node) bool {
