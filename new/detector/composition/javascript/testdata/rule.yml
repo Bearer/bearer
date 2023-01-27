@@ -1,0 +1,9 @@
+type: "risk"
+languages:
+  - javascript
+patterns:
+  - pattern: |
+      console.log($<DATA_TYPE>)
+    filters:
+      - variable: DATA_TYPE
+        detection: datatype

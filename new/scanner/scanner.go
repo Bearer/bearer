@@ -59,8 +59,13 @@ func Setup(config *settings.Config, classifier *classification.Classifier) (err 
 
 func Detect(report report.Report, file *file.FileInfo) (err error) {
 	for _, language := range scanner {
-		if err := language.composition.DetectFromFile(report, file); err != nil {
+		detections, err := language.composition.DetectFromFile(file)
+		if err != nil {
 			return fmt.Errorf("%s failed to detect in file %s: %s", language.name, file.AbsolutePath, err)
+		}
+
+		for _, detection := range detections {
+			report.AddDetection(detection.DetectionType, detection.CustomDetector, detection.Source, detection.Value)
 		}
 	}
 
