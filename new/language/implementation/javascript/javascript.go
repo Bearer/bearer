@@ -20,13 +20,16 @@ import (
 var (
 	variableLookupParents = []string{"pair", "arguments", "binary_expression", "template_string"}
 
-	// anonymousPatternNodeParentTypes = []string{"binary"}
+	anonymousPatternNodeParentTypes = []string{}
+	patternMatchNodeContainerTypes  = []string{}
 
 	// $<name:type> or $<name:type1|type2> or $<name>
 	patternQueryVariableRegex = regexp.MustCompile(`\$<(?P<name>[^>:!]+)(?::(?P<types>[^>]+))?>`)
 	allowedPatternQueryTypes  = []string{"identifier", "property_identifier", "_", "member_expression"}
 
 	matchNodeRegex = regexp.MustCompile(`\$<!>`)
+
+	ellipsisRegex = regexp.MustCompile(`\$<\.\.\.>`)
 )
 
 type javascriptImplementation struct{}
@@ -150,26 +153,28 @@ func produceDummyValue(i int, nodeType string) string {
 }
 
 func (implementation *javascriptImplementation) AnonymousPatternNodeParentTypes() []string {
-	return []string{}
+	return anonymousPatternNodeParentTypes
 }
 
 func (implementation *javascriptImplementation) FindPatternMatchNode(input []byte) [][]int {
-	return nil
+	return matchNodeRegex.FindAllIndex(input, -1)
 }
 
 func (implementation *javascriptImplementation) FindPatternUnanchoredPoints(input []byte) [][]int {
-	return nil
+	return ellipsisRegex.FindAllIndex(input, -1)
 }
 
 func (implementation *javascriptImplementation) IsTerminalDetectionNode(node *tree.Node) bool {
+	// FIXME: implement this
 	return false
 }
 
 func (implementation *javascriptImplementation) PatternMatchNodeContainerTypes() []string {
-	return nil
+	return patternMatchNodeContainerTypes
 }
 
 func (implementation *javascriptImplementation) PatternIsAnchored(node *tree.Node) bool {
+	// FIXME: implement this
 	parent := node.Parent()
 	if parent == nil {
 		return true
