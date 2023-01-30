@@ -4,7 +4,7 @@ go 1.18
 
 require (
 	github.com/bradleyjkemp/cupaloy v2.3.0+incompatible
-	github.com/fatih/color v1.14.0
+	github.com/fatih/color v1.14.1
 	github.com/gertd/go-pluralize v0.2.1
 	github.com/ghodss/yaml v1.0.0
 	github.com/go-enry/go-enry/v2 v2.8.3
