@@ -8,15 +8,13 @@ import (
 	"github.com/bearer/curio/new/language/tree"
 	languagetypes "github.com/bearer/curio/new/language/types"
 	"github.com/rs/zerolog/log"
-	"golang.org/x/exp/slices"
 )
 
 type Query struct {
-	langImplementation implementation.Implementation
-	treeQuery          *tree.Query
-	paramToVariable    map[string]string
-	equalParams        [][]string
-	paramToContent     map[string]string
+	treeQuery       *tree.Query
+	paramToVariable map[string]string
+	equalParams     [][]string
+	paramToContent  map[string]string
 }
 
 func Compile(
@@ -37,11 +35,10 @@ func Compile(
 	log.Debug().Msgf("compiled pattern %s -> %s", input, builderResult.Query)
 
 	return &Query{
-		langImplementation: langImplementation,
-		treeQuery:          treeQuery,
-		paramToVariable:    builderResult.ParamToVariable,
-		equalParams:        builderResult.EqualParams,
-		paramToContent:     builderResult.ParamToContent,
+		treeQuery:       treeQuery,
+		paramToVariable: builderResult.ParamToVariable,
+		equalParams:     builderResult.EqualParams,
+		paramToContent:  builderResult.ParamToContent,
 	}, nil
 }
 
@@ -104,21 +101,7 @@ func (query *Query) matchAndTranslateTreeResult(treeResult tree.QueryResult, roo
 	}
 
 	return &languagetypes.PatternQueryResult{
-		MatchNode: query.getMatchNode(treeResult["match"], rootNode),
+		MatchNode: treeResult["match"],
 		Variables: variables,
-	}
-}
-
-func (query *Query) getMatchNode(node *tree.Node, rootNode *tree.Node) *tree.Node {
-	for {
-		parent := node.Parent()
-		if parent == nil ||
-			parent.StartByte() != node.StartByte() ||
-			slices.Contains(query.langImplementation.PatternMatchNodeContainerTypes(), parent.Type()) ||
-			node.Equal(rootNode) {
-			return node
-		}
-
-		node = parent
 	}
 }

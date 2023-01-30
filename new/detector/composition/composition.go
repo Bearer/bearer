@@ -12,83 +12,79 @@ import (
 	"github.com/bearer/curio/pkg/report/detectors"
 	"github.com/bearer/curio/pkg/report/schema"
 	"github.com/bearer/curio/pkg/report/source"
+	"github.com/bearer/curio/pkg/util/file"
 )
 
-func ReportDetections(report reportdetections.ReportDetection, compositionDetections []*detectortypes.CompositionDetection) {
+func ReportDetections(report reportdetections.ReportDetection, file *file.FileInfo, detections []*detectortypes.Detection) {
 	pluralizer := pluralize.NewClient()
 
-	for _, compositionDetection := range compositionDetections {
+	for _, detection := range detections {
+		data := detection.Data.(custom.Data)
 
-		for _, detection := range compositionDetection.Detections {
+		if len(data.Datatypes) == 0 {
+			report.AddDetection(reportdetections.TypeCustomRisk,
+				detectors.Type(detection.DetectorType),
+				source.New(
+					file,
+					file.Path,
+					detection.MatchNode.LineNumber(),
+					detection.MatchNode.ColumnNumber(),
+					data.Pattern,
+				),
+				schema.Parent{
+					LineNumber: detection.MatchNode.LineNumber(),
+					Content:    detection.MatchNode.Content(),
+				})
+		}
 
-			data := detection.Data.(custom.Data)
+		for _, datatypeDetection := range data.Datatypes {
+			datatypeData := datatypeDetection.Data.(datatype.Data)
 
-			if len(data.Datatypes) == 0 {
-				report.AddDetection(reportdetections.TypeCustomRisk,
-					detectors.Type(compositionDetection.RuleName),
-					source.New(
-						compositionDetection.File,
-						compositionDetection.File.Path,
-						detection.MatchNode.LineNumber(),
-						detection.MatchNode.ColumnNumber(),
-						data.Pattern,
-					),
-					schema.Parent{
+			report.AddDetection(
+				reportdetections.TypeCustomClassified,
+				detectors.Type(detection.DetectorType),
+				source.New(
+					file,
+					file.Path,
+					datatypeDetection.MatchNode.LineNumber(),
+					datatypeDetection.MatchNode.ColumnNumber(),
+					"",
+				),
+				schema.Schema{
+					ObjectName:           datatypeData.Name,
+					NormalizedObjectName: pluralizer.Singular(strings.ToLower(datatypeData.Name)),
+					Classification:       datatypeData.Classification,
+					Parent: &schema.Parent{
 						LineNumber: detection.MatchNode.LineNumber(),
 						Content:    detection.MatchNode.Content(),
-					})
-			}
+					},
+				},
+			)
 
-			for _, datatypeDetection := range data.Datatypes {
-				datatypeData := datatypeDetection.Data.(datatype.Data)
+			for _, property := range datatypeData.Properties {
 
 				report.AddDetection(
 					reportdetections.TypeCustomClassified,
-					detectors.Type(compositionDetection.RuleName),
+					detectors.Type(detection.DetectorType),
 					source.New(
-						compositionDetection.File,
-						compositionDetection.File.Path,
-						datatypeDetection.MatchNode.LineNumber(),
-						datatypeDetection.MatchNode.ColumnNumber(),
+						file,
+						file.Path,
+						property.Detection.MatchNode.LineNumber(),
+						property.Detection.MatchNode.ColumnNumber(),
 						"",
 					),
 					schema.Schema{
 						ObjectName:           datatypeData.Name,
-						NormalizedObjectName: pluralizer.Singular(strings.ToLower(datatypeData.Name)),
-						Classification:       datatypeData.Classification,
+						NormalizedObjectName: pluralizer.Singular(strings.ToLower(property.Name)),
+						FieldName:            property.Name,
+						NormalizedFieldName:  pluralizer.Singular(strings.ToLower(property.Name)),
+						Classification:       property.Classification,
 						Parent: &schema.Parent{
 							LineNumber: detection.MatchNode.LineNumber(),
 							Content:    detection.MatchNode.Content(),
 						},
 					},
 				)
-
-				for _, property := range datatypeData.Properties {
-
-					report.AddDetection(
-						reportdetections.TypeCustomClassified,
-						detectors.Type(compositionDetection.RuleName),
-						source.New(
-							compositionDetection.File,
-							compositionDetection.File.Path,
-							property.Detection.MatchNode.LineNumber(),
-							property.Detection.MatchNode.ColumnNumber(),
-							"",
-						),
-						schema.Schema{
-							ObjectName:           datatypeData.Name,
-							NormalizedObjectName: pluralizer.Singular(strings.ToLower(property.Name)),
-							FieldName:            property.Name,
-							NormalizedFieldName:  pluralizer.Singular(strings.ToLower(property.Name)),
-							Classification:       property.Classification,
-							Parent: &schema.Parent{
-								LineNumber: detection.MatchNode.LineNumber(),
-								Content:    detection.MatchNode.Content(),
-							},
-						},
-					)
-
-				}
 			}
 		}
 	}

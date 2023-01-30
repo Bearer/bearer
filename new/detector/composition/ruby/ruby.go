@@ -13,7 +13,6 @@ import (
 	"github.com/bearer/curio/new/detector/implementation/ruby/object"
 	"github.com/bearer/curio/new/detector/implementation/ruby/property"
 	"github.com/bearer/curio/new/language"
-	"github.com/bearer/curio/new/language/tree"
 
 	"github.com/bearer/curio/pkg/classification"
 	"github.com/bearer/curio/pkg/commands/process/settings"
@@ -121,7 +120,7 @@ func (composition *Composition) Close() {
 	}
 }
 
-func (composition *Composition) DetectFromFile(file *file.FileInfo) ([]*detectortypes.CompositionDetection, error) {
+func (composition *Composition) DetectFromFile(file *file.FileInfo) ([]*detectortypes.Detection, error) {
 	if file.Language != "Ruby" {
 		return nil, nil
 	}
@@ -138,25 +137,15 @@ func (composition *Composition) DetectFromFile(file *file.FileInfo) ([]*detector
 
 	evaluator := evaluator.New(composition.lang, composition.detectorSet, tree, file.FileInfo.Name())
 
-	return composition.extractCustomDetectors(evaluator, tree, file)
-
-}
-
-func (composition *Composition) extractCustomDetectors(evaluator detectortypes.Evaluator, tree *tree.Tree, file *file.FileInfo) ([]*detectortypes.CompositionDetection, error) {
-	customDetections := []*detectortypes.CompositionDetection{}
-
+	var result []*detectortypes.Detection
 	for _, detectorType := range composition.customDetectorTypes {
-		detections, err := evaluator.ForTree(tree.RootNode(), detectorType)
+		detections, err := evaluator.ForTree(tree.RootNode(), detectorType, false)
 		if err != nil {
 			return nil, err
 		}
 
-		customDetections = append(customDetections, &detectortypes.CompositionDetection{
-			RuleName:   detectorType,
-			File:       file,
-			Detections: detections,
-		})
+		result = append(result, detections...)
 	}
 
-	return customDetections, nil
+	return result, nil
 }

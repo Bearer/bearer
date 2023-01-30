@@ -6,14 +6,14 @@ import (
 )
 
 type Detection struct {
-	MatchNode   *tree.Node
-	ContextNode *tree.Node
-	Data        interface{}
+	DetectorType string
+	MatchNode    *tree.Node
+	Data         interface{}
 }
 
 type Evaluator interface {
-	ForTree(rootNode *tree.Node, detectorType string) ([]*Detection, error)
-	ForNode(node *tree.Node, detectorType string) ([]*Detection, error)
+	ForTree(rootNode *tree.Node, detectorType string, followFlow bool) ([]*Detection, error)
+	ForNode(node *tree.Node, detectorType string, followFlow bool) ([]*Detection, error)
 	TreeHas(rootNode *tree.Node, detectorType string) (bool, error)
 	NodeHas(node *tree.Node, detectorType string) (bool, error)
 	FileName() string
@@ -29,17 +29,11 @@ type DetectorSet interface {
 
 type Detector interface {
 	Name() string
-	DetectAt(node *tree.Node, evaluator Evaluator) ([]*Detection, error)
+	DetectAt(node *tree.Node, evaluator Evaluator) ([]interface{}, error)
 	Close()
 }
 
-type CompositionDetection struct {
-	RuleName   string
-	File       *file.FileInfo
-	Detections []*Detection
-}
-
 type Composition interface {
-	DetectFromFile(file *file.FileInfo) ([]*CompositionDetection, error)
+	DetectFromFile(file *file.FileInfo) ([]*Detection, error)
 	Close()
 }

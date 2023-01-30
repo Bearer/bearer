@@ -66,7 +66,12 @@ func (query *Query) resultsFor(tree *Tree) (map[NodeID][]QueryResult, error) {
 			return nil, errors.New("missing @root capture in tree sitter query")
 		}
 
-		nodeResults[resultRoot.ID()] = append(nodeResults[resultRoot.ID()], result)
+		matchNode, matchNodeExists := result["match"]
+		if !matchNodeExists {
+			matchNode = resultRoot
+		}
+
+		nodeResults[matchNode.ID()] = append(nodeResults[matchNode.ID()], result)
 	}
 
 	return nodeResults, nil

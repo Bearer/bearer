@@ -25,8 +25,8 @@ func (detector *insecureURLDetector) Name() string {
 func (detector *insecureURLDetector) DetectAt(
 	node *tree.Node,
 	evaluator types.Evaluator,
-) ([]*types.Detection, error) {
-	detections, err := evaluator.ForNode(node, "string")
+) ([]interface{}, error) {
+	detections, err := evaluator.ForNode(node, "string", false)
 	if err != nil {
 		return nil, err
 	}
@@ -35,7 +35,7 @@ func (detector *insecureURLDetector) DetectAt(
 		value := detection.Data.(generictypes.String).Value
 
 		if insecureUrlPattern.MatchString(value) {
-			return []*types.Detection{{MatchNode: node}}, nil
+			return []interface{}{nil}, nil
 		}
 	}
 

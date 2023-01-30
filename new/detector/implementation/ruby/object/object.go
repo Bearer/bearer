@@ -77,7 +77,7 @@ func (detector *objectDetector) Name() string {
 func (detector *objectDetector) DetectAt(
 	node *tree.Node,
 	evaluator types.Evaluator,
-) ([]*types.Detection, error) {
+) ([]interface{}, error) {
 	detections, err := detector.getHash(node, evaluator)
 	if len(detections) != 0 || err != nil {
 		return detections, err
@@ -104,7 +104,7 @@ func (detector *objectDetector) DetectAt(
 func (detector *objectDetector) getHash(
 	node *tree.Node,
 	evaluator types.Evaluator,
-) ([]*types.Detection, error) {
+) ([]interface{}, error) {
 	results, err := detector.hashPairQuery.MatchAt(node)
 	if err != nil {
 		return nil, err
@@ -116,7 +116,7 @@ func (detector *objectDetector) getHash(
 
 	var properties []*types.Detection
 	for _, result := range results {
-		nodeProperties, err := evaluator.ForNode(result["pair"], "property")
+		nodeProperties, err := evaluator.ForNode(result["pair"], "property", false)
 		if err != nil {
 			return nil, err
 		}
@@ -124,45 +124,39 @@ func (detector *objectDetector) getHash(
 		properties = append(properties, nodeProperties...)
 	}
 
-	return []*types.Detection{{
-		MatchNode: node,
-		Data:      generictypes.Object{Properties: properties},
-	}}, nil
+	return []interface{}{generictypes.Object{Properties: properties}}, nil
 }
 
 func (detector *objectDetector) getAssigment(
 	node *tree.Node,
 	evaluator types.Evaluator,
-) ([]*types.Detection, error) {
+) ([]interface{}, error) {
 	result, err := detector.assignmentQuery.MatchOnceAt(node)
 	if result == nil || err != nil {
 		return nil, err
 	}
 
-	objects, err := evaluator.ForNode(result["right"], "object")
+	objects, err := evaluator.ForNode(result["right"], "object", true)
 	if err != nil {
 		return nil, err
 	}
 
-	var detections []*types.Detection
+	var detectionsData []interface{}
 	for _, object := range objects {
 		objectData := object.Data.(generictypes.Object)
 
 		if objectData.Name == "" {
-			detections = append(detections, &types.Detection{
-				MatchNode: node,
-				Data: generictypes.Object{
-					Name:       result["left"].Content(),
-					Properties: objectData.Properties,
-				},
+			detectionsData = append(detectionsData, generictypes.Object{
+				Name:       result["left"].Content(),
+				Properties: objectData.Properties,
 			})
 		}
 	}
 
-	return detections, nil
+	return detectionsData, nil
 }
 
-func (detector *objectDetector) getClass(node *tree.Node, evaluator types.Evaluator) ([]*types.Detection, error) {
+func (detector *objectDetector) getClass(node *tree.Node, evaluator types.Evaluator) ([]interface{}, error) {
 	result, err := detector.classNameQuery.MatchOnceAt(node)
 	if result == nil || err != nil {
 		return nil, err
@@ -174,48 +168,41 @@ func (detector *objectDetector) getClass(node *tree.Node, evaluator types.Evalua
 	}
 
 	for i := 0; i < node.ChildCount(); i++ {
-		detections, err := evaluator.ForNode(node.Child(i), "property")
+		detections, err := evaluator.ForNode(node.Child(i), "property", true)
 		if err != nil {
 			return nil, err
 		}
 		data.Properties = append(data.Properties, detections...)
 	}
 
-	return []*types.Detection{{
-		MatchNode:   node,
-		ContextNode: node,
-		Data:        data,
-	}}, nil
+	return []interface{}{data}, nil
 }
 
 func (detector *objectDetector) nameParentPairObject(
 	node *tree.Node,
 	evaluator types.Evaluator,
-) ([]*types.Detection, error) {
+) ([]interface{}, error) {
 	result, err := detector.parentPairQuery.MatchOnceAt(node)
 	if result == nil || err != nil {
 		return nil, err
 	}
 
-	objects, err := evaluator.ForNode(result["value"], "object")
+	objects, err := evaluator.ForNode(result["value"], "object", true)
 	if err != nil {
 		return nil, err
 	}
 
-	var detections []*types.Detection
+	var detectionsData []interface{}
 	for _, object := range objects {
 		objectData := object.Data.(generictypes.Object)
 
-		detections = append(detections, &types.Detection{
-			MatchNode: node,
-			Data: generictypes.Object{
-				Name:       result["key"].Content(),
-				Properties: objectData.Properties,
-			},
+		detectionsData = append(detectionsData, generictypes.Object{
+			Name:       result["key"].Content(),
+			Properties: objectData.Properties,
 		})
 	}
 
-	return detections, nil
+	return detectionsData, nil
 }
 
 func (detector *objectDetector) Close() {

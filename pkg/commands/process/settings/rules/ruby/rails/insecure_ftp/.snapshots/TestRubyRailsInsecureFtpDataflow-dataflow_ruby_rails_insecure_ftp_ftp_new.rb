@@ -33,13 +33,6 @@ risks:
             content: Net::FTP.new("ftp.ruby-lang.org")
           content: |
             Net::FTP.new()
-        - filename: pkg/commands/process/settings/rules/ruby/rails/insecure_ftp/testdata/ftp_new.rb
-          line_number: 8
-          parent:
-            line_number: 8
-            content: Net::FTP.new("ftp.ruby-lang.org")
-          content: |
-            Net::FTP.new()
 components: []
 
 
