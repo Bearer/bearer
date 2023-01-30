@@ -54,8 +54,9 @@ func (detector *customDetector) Name() string {
 func (detector *customDetector) DetectAt(
 	node *tree.Node,
 	evaluator types.Evaluator,
-) ([]*types.Detection, error) {
-	var detections []*types.Detection
+) ([]interface{}, error) {
+	var detectionsData []interface{}
+
 	for _, pattern := range detector.patterns {
 		results, err := pattern.Query.MatchAt(node)
 		if err != nil {
@@ -72,17 +73,14 @@ func (detector *customDetector) DetectAt(
 				continue
 			}
 
-			detections = append(detections, &types.Detection{
-				MatchNode: node,
-				Data: Data{
-					Pattern:   pattern.Pattern,
-					Datatypes: datatypeDetections,
-				},
+			detectionsData = append(detectionsData, Data{
+				Pattern:   pattern.Pattern,
+				Datatypes: datatypeDetections,
 			})
 		}
 	}
 
-	return detections, nil
+	return detectionsData, nil
 }
 
 func (detector *customDetector) Close() {

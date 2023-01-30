@@ -23,13 +23,10 @@ func (detector *stringDetector) Name() string {
 func (detector *stringDetector) DetectAt(
 	node *tree.Node,
 	evaluator types.Evaluator,
-) ([]*types.Detection, error) {
+) ([]interface{}, error) {
 	switch node.Type() {
 	case "string_content":
-		return []*types.Detection{{
-			MatchNode: node,
-			Data:      generictypes.String{Value: node.Content()},
-		}}, nil
+		return []interface{}{generictypes.String{Value: node.Content()}}, nil
 	case "interpolation", "string":
 		return concatenateChildren(node, evaluator)
 	case "binary":
@@ -41,7 +38,7 @@ func (detector *stringDetector) DetectAt(
 	return nil, nil
 }
 
-func concatenateChildren(node *tree.Node, evaluator types.Evaluator) ([]*types.Detection, error) {
+func concatenateChildren(node *tree.Node, evaluator types.Evaluator) ([]interface{}, error) {
 	value := ""
 
 	for i := 0; i < node.ChildCount(); i += 1 {
@@ -50,7 +47,7 @@ func concatenateChildren(node *tree.Node, evaluator types.Evaluator) ([]*types.D
 			continue
 		}
 
-		detections, err := evaluator.ForNode(child, "string")
+		detections, err := evaluator.ForNode(child, "string", true)
 		if err != nil {
 			return nil, err
 		}
@@ -65,10 +62,7 @@ func concatenateChildren(node *tree.Node, evaluator types.Evaluator) ([]*types.D
 		}
 	}
 
-	return []*types.Detection{{
-		MatchNode: node,
-		Data:      generictypes.String{Value: value},
-	}}, nil
+	return []interface{}{generictypes.String{Value: value}}, nil
 }
 
 func (detector *stringDetector) Close() {}

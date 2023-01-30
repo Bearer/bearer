@@ -60,7 +60,7 @@ func Detect(report report.Report, file *file.FileInfo) (err error) {
 			return fmt.Errorf("%s failed to detect in file %s: %s", language.name, file.AbsolutePath, err)
 		}
 
-		composition.ReportDetections(report, detections)
+		composition.ReportDetections(report, file, detections)
 	}
 
 	return nil

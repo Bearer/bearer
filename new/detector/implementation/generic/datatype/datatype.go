@@ -55,13 +55,13 @@ func (detector *datatypeDetector) Name() string {
 func (detector *datatypeDetector) DetectAt(
 	node *tree.Node,
 	evaluator types.Evaluator,
-) ([]*types.Detection, error) {
-	objectDetections, err := evaluator.ForNode(node, "object")
+) ([]interface{}, error) {
+	objectDetections, err := evaluator.ForNode(node, "object", false)
 	if err != nil {
 		return nil, err
 	}
 
-	var result []*types.Detection
+	var result []interface{}
 
 	for _, object := range objectDetections {
 		var properties []Property
@@ -91,12 +91,7 @@ func (detector *datatypeDetector) DetectAt(
 
 		mergeClassification(&data, classification)
 
-		result = append(result, &types.Detection{
-			ContextNode: node,
-			MatchNode:   object.MatchNode,
-			Data:        data,
-		})
-
+		result = append(result, data)
 	}
 
 	return result, nil

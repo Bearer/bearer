@@ -39,5 +39,19 @@ func (set *set) DetectAt(
 		return nil, fmt.Errorf("detector type '%s' not registered", detectorType)
 	}
 
-	return detector.DetectAt(node, evaluator)
+	detectionsData, err := detector.DetectAt(node, evaluator)
+	if err != nil {
+		return nil, err
+	}
+
+	detections := make([]*types.Detection, len(detectionsData))
+	for i, data := range detectionsData {
+		detections[i] = &types.Detection{
+			DetectorType: detectorType,
+			MatchNode:    node,
+			Data:         data,
+		}
+	}
+
+	return detections, nil
 }

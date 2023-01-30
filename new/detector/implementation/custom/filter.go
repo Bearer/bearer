@@ -84,7 +84,7 @@ func matchDetectionFilter(
 	detectorType string,
 ) (bool, []*types.Detection, error) {
 	if detectorType == "datatype" {
-		detections, err := evaluator.ForTree(node, "datatype")
+		detections, err := evaluator.ForTree(node, "datatype", true)
 
 		return len(detections) != 0, detections, err
 	}

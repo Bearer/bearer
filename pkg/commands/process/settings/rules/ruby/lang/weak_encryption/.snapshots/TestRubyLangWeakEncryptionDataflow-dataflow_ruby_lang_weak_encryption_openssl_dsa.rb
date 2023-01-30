@@ -8,13 +8,6 @@ risks:
             content: OpenSSL::PKey::DSA.new(2048)
           content: |
             OpenSSL::PKey::DSA.new()
-        - filename: pkg/commands/process/settings/rules/ruby/lang/weak_encryption/testdata/openssl_dsa.rb
-          line_number: 2
-          parent:
-            line_number: 2
-            content: OpenSSL::PKey::DSA.new(2048)
-          content: |
-            OpenSSL::PKey::DSA.new()
     - detector_id: ruby_lang_weak_encryption
       locations:
         - filename: pkg/commands/process/settings/rules/ruby/lang/weak_encryption/testdata/openssl_dsa.rb

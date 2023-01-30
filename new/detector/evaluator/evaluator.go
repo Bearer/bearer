@@ -40,7 +40,11 @@ func (evaluator *evaluator) FileName() string {
 	return evaluator.fileName
 }
 
-func (evaluator *evaluator) ForTree(rootNode *langtree.Node, detectorType string) ([]*types.Detection, error) {
+func (evaluator *evaluator) ForTree(
+	rootNode *langtree.Node,
+	detectorType string,
+	followFlow bool,
+) ([]*types.Detection, error) {
 	var result []*types.Detection
 
 	if err := rootNode.Walk(func(node *langtree.Node, visitChildren func() error) error {
@@ -55,13 +59,15 @@ func (evaluator *evaluator) ForTree(rootNode *langtree.Node, detectorType string
 
 		result = append(result, detections...)
 
-		for _, unifiedNode := range node.UnifiedNodes() {
-			unifiedNodeDetections, err := evaluator.ForTree(unifiedNode, detectorType)
-			if err != nil {
-				return err
-			}
+		if followFlow {
+			for _, unifiedNode := range node.UnifiedNodes() {
+				unifiedNodeDetections, err := evaluator.ForTree(unifiedNode, detectorType, true)
+				if err != nil {
+					return err
+				}
 
-			result = append(result, unifiedNodeDetections...)
+				result = append(result, unifiedNodeDetections...)
+			}
 		}
 
 		return visitChildren()
@@ -75,19 +81,22 @@ func (evaluator *evaluator) ForTree(rootNode *langtree.Node, detectorType string
 func (evaluator *evaluator) ForNode(
 	node *langtree.Node,
 	detectorType string,
+	followFlow bool,
 ) ([]*types.Detection, error) {
 	detections, err := evaluator.nonUnifiedNodeDetections(node, detectorType)
 	if err != nil {
 		return nil, err
 	}
 
-	for _, unifiedNode := range node.UnifiedNodes() {
-		unifiedNodeDetections, err := evaluator.ForNode(unifiedNode, detectorType)
-		if err != nil {
-			return nil, err
-		}
+	if followFlow {
+		for _, unifiedNode := range node.UnifiedNodes() {
+			unifiedNodeDetections, err := evaluator.ForNode(unifiedNode, detectorType, true)
+			if err != nil {
+				return nil, err
+			}
 
-		detections = append(detections, unifiedNodeDetections...)
+			detections = append(detections, unifiedNodeDetections...)
+		}
 	}
 
 	return detections, nil
@@ -142,7 +151,7 @@ func (evaluator *evaluator) TreeHas(rootNode *langtree.Node, detectorType string
 }
 
 func (evaluator *evaluator) NodeHas(node *langtree.Node, detectorType string) (bool, error) {
-	detections, err := evaluator.ForNode(node, detectorType)
+	detections, err := evaluator.ForNode(node, detectorType, true)
 	if err != nil {
 		return false, err
 	}
