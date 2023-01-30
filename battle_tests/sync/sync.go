@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"context"
 	"encoding/json"
+	"strings"
 	"time"
 
 	"github.com/bearer/curio/battle_tests/build"
@@ -15,6 +16,7 @@ import (
 	"github.com/rs/zerolog/log"
 
 	"github.com/aws/aws-sdk-go/aws"
+	"github.com/aws/aws-sdk-go/aws/awserr"
 	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/aws/aws-sdk-go/service/s3/s3manager"
 )
@@ -97,7 +99,11 @@ func DoWork(ctx context.Context, items []repodb.ItemWithLanguage, docID string, 
 
 				err := uploadReportToS3(build.S3Bucket, docID, metrics)
 				if err != nil {
-					log.Error().Msgf("failed to upload report to S3 bucket: %e", err)
+					if awsErr, ok := err.(awserr.Error); ok {
+						log.Error().Msgf("Failed to upload file to S3 code:%s message:%s", awsErr.Code(), awsErr.Message())
+					} else {
+						log.Error().Msgf("Failed to upload file to S3: %e", err)
+					}
 				}
 			}
 		}
@@ -137,17 +143,19 @@ func uploadReportToS3(bucketName string, documentID string, metrics *metricsscan
 	}
 
 	reader := bytes.NewReader(data)
-
 	uploader := s3manager.NewUploader(sess)
-	_, err = uploader.Upload(&s3manager.UploadInput{
+	key_filename := strings.Replace(strings.Replace(metrics.URL, "https://", "", 1), "/", "_", -1) + ".json"
+	result, err := uploader.Upload(&s3manager.UploadInput{
 		Bucket: aws.String(bucketName),
-		Key:    aws.String(documentID),
+		Key:    aws.String(documentID + "/" + key_filename),
 		Body:   reader,
 	})
+
 	if err != nil {
-		log.Error().Msgf("Failed to upload file to S3: %e", err)
 		return err
 	}
 
-	return err
+	log.Debug().Msgf("S3 File Uploaded: %s", result.Location)
+
+	return nil
 }

@@ -8,6 +8,7 @@ on:
         default: "5"
         type: choice
         options:
+          - 1
           - 5
           - 25
           - 100
@@ -35,8 +36,15 @@ on:
         default: "1"
         type: string
 
+      curio_release_id:
+        description: "release id"
+        default: ""
+        required: true
+        type: string
+
       curio_version:
-        description: "Version of Curio to use"
+        description: "curio version for report"
+        default: "latest"
         required: true
         type: string
 
@@ -69,19 +77,17 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-
-      - name: Install Curio package
-        id: install_curio_package
+      - uses: robinraju/release-downloader@v1.7
+        id: latest_artifact
+        with:
+          releaseId: ${{ inputs.curio_release_id }}
+          fileName: "*_linux_amd64.tar.gz"
+      - name: Extract artifact
         run: |
-          sudo apt-get install apt-transport-https
-          echo "deb [trusted=yes] https://apt.fury.io/bearer/ /" | sudo tee -a /etc/apt/sources.list.d/fury.list
-          sudo apt-get update
-          sudo apt-get install -y curio=${{ inputs.curio_version }}
-
-      - name: Copy Curio binary
-        run: |
+          tar -xzvf curio_*_linux_amd64.tar.gz
+          ls -ltr
           mkdir dist
-          cp /usr/bin/curio dist/
+          cp curio dist/
 
       - name: Build and push latest
         uses: docker/build-push-action@v3

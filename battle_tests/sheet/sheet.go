@@ -100,7 +100,6 @@ func (client *GoogleSheets) CreateDocument(tagName string, parentFolderId string
 			"Repo Size (KB)",
 			"Scan timing (seconds)",
 			"Language",
-			"Memory consumption",
 			"Number of Data Types",
 			"Number of Line of Code",
 		}
@@ -229,11 +228,6 @@ func (client *GoogleSheets) InsertMetrics(documentID string, metrics *metricssca
 		{
 			UserEnteredValue: &sheets.ExtendedValue{
 				StringValue: &metrics.Language,
-			},
-		},
-		{
-			UserEnteredValue: &sheets.ExtendedValue{
-				NumberValue: &metrics.Memory,
 			},
 		},
 		{

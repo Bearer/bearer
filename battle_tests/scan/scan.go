@@ -55,13 +55,13 @@ func (scanner *Scanner) Start(reportType string) (outputBytes []byte, startTime 
 	log.Debug().Msgf("file for report path %s", scanner.ReportFilePath)
 
 	processStartedAt := time.Now()
-	log.Debug().Msgf("scan process start at %s", processStartedAt)
+	log.Debug().Msgf("scan process (%s) on %s start at %s", reportType, scanner.repositoryUrl, processStartedAt)
 	// process scan
 	output, err := exec.Command(
 		config.Runtime.CurioExecutablePath,
 		"scan",
 		fmt.Sprintf("--report=%s", reportType),
-		"--debug",
+		"--quiet",
 		"--format=json",
 		cloneDir,
 	).Output()

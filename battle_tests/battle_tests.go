@@ -38,6 +38,8 @@ func main() {
 	signal.Notify(shutdown, syscall.SIGTERM)
 
 	db := db.UnmarshalRaw()
+	log.Debug().Msgf("Selected %d repos for test", len(db))
+
 	sheetClient := sheet.New()
 
 	programCtx := context.TODO()
