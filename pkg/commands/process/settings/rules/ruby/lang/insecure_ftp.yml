@@ -44,4 +44,4 @@ metadata:
     ## Resources
     - [net-sftp](https://github.com/net-ssh/net-sftp)
   dsr_id: "DSR-2"
-  id: "ruby_rails_insecure_ftp"
+  id: "ruby_lang_insecure_ftp"
