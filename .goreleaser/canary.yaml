@@ -9,6 +9,7 @@ release:
   draft: true
   header: |
     ## Canary ({{ .Date }})
+    {{ .env.RELEASE_HEADER }}
   mode: append
 
 dockers:

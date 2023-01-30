@@ -1,6 +1,12 @@
 name: Canary
 on:
   workflow_dispatch:
+    inputs:
+      release_header:
+        description: 'Inserted above changelong release notes'
+        default: ''
+        required: false
+        type: string
 
 permissions:
   contents: write
@@ -163,5 +169,6 @@ jobs:
           distribution: goreleaser-pro
           args: publish --merge
         env:
+          RELEASE_HEADER: ${{ inputs.release_header }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GORELEASER_KEY: ${{ secrets.GORELEASER_KEY }}
