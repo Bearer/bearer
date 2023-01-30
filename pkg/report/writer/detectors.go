@@ -167,24 +167,6 @@ func (report *Detectors) SchemaGroupEnd(idGenerator nodeid.Generator) {
 
 	classifiedDatatypes := make(map[parser.NodeID]*datatype.ClassifiedDatatype, 0)
 
-	// Classify child data types
-	for node, storedSchema := range report.StoredSchemas.Schemas {
-		source := storedSchema.Source
-		schema := storedSchema.Value
-
-		childName := schema.FieldName
-		value, ok := childDataTypes[childName].(*datatype.DataType)
-		if !ok {
-			continue
-		}
-
-		classificationRequest := classificationschema.ClassificationRequest{DetectorType: report.StoredSchemas.DetectorType, Value: value.ToClassificationRequestDetection(), Filename: source.Filename}
-		classification := report.Classifier.Schema.Classify(classificationRequest)
-
-		classifiedDatatypes[node.ID()] = datatype.BuildClassifiedDatatype(value, classification)
-	}
-
-	// Classify parent data type
 	parentClassificationRequest := classificationschema.ClassificationRequest{DetectorType: report.StoredSchemas.DetectorType, Value: parentDataType.ToClassificationRequestDetection(), Filename: report.StoredSchemas.ParentSchema.Source.Filename}
 	parentClassification := report.Classifier.Schema.Classify(parentClassificationRequest)
 	classifiedDatatypes[report.StoredSchemas.Node.ID()] = datatype.BuildClassifiedDatatype(parentDataType, parentClassification)
