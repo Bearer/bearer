@@ -2,6 +2,7 @@ package inventory
 
 import (
 	"encoding/json"
+	"strings"
 
 	"github.com/bearer/curio/pkg/classification/db"
 	"github.com/bearer/curio/pkg/commands/process/settings"
@@ -37,11 +38,12 @@ type RuleOutput struct {
 	RuleId         string   `json:"rule_id,omitempty" yaml:"rule_id"`
 }
 
-type RuleFailure struct {
-	CriticalRiskFailureCount int `json:"critical_risk_failure_count" yaml:"critical_risk_failure_count"`
-	HighRiskFailureCount     int `json:"high_risk_failure_count" yaml:"high_risk_failure_count"`
-	MediumRiskFailureCount   int `json:"medium_risk_failure_count" yaml:"medium_risk_failure_count"`
-	LowRiskFailureCount      int `json:"low_risk_failure_count" yaml:"low_risk_failure_count"`
+type RuleFailureSummary struct {
+	CriticalRiskFailureCount int             `json:"critical_risk_failure_count" yaml:"critical_risk_failure_count"`
+	HighRiskFailureCount     int             `json:"high_risk_failure_count" yaml:"high_risk_failure_count"`
+	MediumRiskFailureCount   int             `json:"medium_risk_failure_count" yaml:"medium_risk_failure_count"`
+	LowRiskFailureCount      int             `json:"low_risk_failure_count" yaml:"low_risk_failure_count"`
+	TriggeredRules           map[string]bool `json:"triggered_rules" yaml:"triggered_rules"`
 }
 
 type SubjectInventoryInput struct {
@@ -63,6 +65,7 @@ type SubjectInventoryResult struct {
 	HighRiskFailureCount     int    `json:"high_risk_failure_count" yaml:"high_risk_failure_count"`
 	MediumRiskFailureCount   int    `json:"medium_risk_failure_count" yaml:"medium_risk_failure_count"`
 	LowRiskFailureCount      int    `json:"low_risk_failure_count" yaml:"low_risk_failure_count"`
+	RulesPassedCount         int    `json:"rules_passed_count" yaml:"rules_passed_count"`
 }
 
 func GetOutput(dataflow *dataflow.DataFlow, config settings.Config) ([]SubjectInventoryResult, error) {
@@ -73,9 +76,13 @@ func GetOutput(dataflow *dataflow.DataFlow, config settings.Config) ([]SubjectIn
 	bar := output.GetProgressBar(len(config.Rules), config, "rules")
 
 	result := make(map[string]SubjectInventoryResult)
-	ruleFailures := make(map[string]RuleFailure)
-
+	ruleFailures := make(map[string]RuleFailureSummary)
+	localRuleCount := 0
 	for _, rule := range config.Rules {
+		if rule.Trigger == "local" {
+			localRuleCount += 1
+		}
+
 		err := bar.Add(1)
 		if err != nil {
 			output.StdErrLogger().Msgf("Policy %s failed to write progress bar %e", rule.Id, err)
@@ -113,15 +120,16 @@ func GetOutput(dataflow *dataflow.DataFlow, config settings.Config) ([]SubjectIn
 			}
 
 			for _, ruleOutputFailure := range ruleOutput["local_rule_failure"] {
-				key := ruleOutputFailure.DataSubject + ":" + ruleOutputFailure.DataType
+				key := strings.ToUpper(ruleOutputFailure.DataSubject) + ":" + strings.ToUpper(ruleOutputFailure.DataType)
 				ruleFailure, ok := ruleFailures[key]
 				if !ok {
 					// key not found; create a new failure obj
-					ruleFailure = RuleFailure{
+					ruleFailure = RuleFailureSummary{
 						CriticalRiskFailureCount: 0,
 						HighRiskFailureCount:     0,
 						MediumRiskFailureCount:   0,
 						LowRiskFailureCount:      0,
+						TriggeredRules:           make(map[string]bool),
 					}
 				}
 
@@ -137,6 +145,7 @@ func GetOutput(dataflow *dataflow.DataFlow, config settings.Config) ([]SubjectIn
 					ruleFailure.LowRiskFailureCount += 1
 				}
 
+				ruleFailure.TriggeredRules[ruleOutputFailure.RuleId] = true
 				ruleFailures[key] = ruleFailure
 			}
 		}
@@ -167,7 +176,7 @@ func GetOutput(dataflow *dataflow.DataFlow, config settings.Config) ([]SubjectIn
 		}
 
 		for _, item := range inventoryOutput["report_items"] {
-			key := item.DataSubject + ":" + item.DataType
+			key := strings.ToUpper(item.DataSubject) + ":" + strings.ToUpper(item.DataType)
 			inventoryItem, ok := result[key]
 			if !ok {
 				// key not found, add a new item
@@ -182,7 +191,7 @@ func GetOutput(dataflow *dataflow.DataFlow, config settings.Config) ([]SubjectIn
 		}
 
 		for _, item := range result {
-			key := item.DataSubject + ":" + item.DataType
+			key := strings.ToUpper(item.DataSubject) + ":" + strings.ToUpper(item.DataType)
 			ruleFailure := ruleFailures[key]
 			inventoryItem := result[key]
 
@@ -190,6 +199,7 @@ func GetOutput(dataflow *dataflow.DataFlow, config settings.Config) ([]SubjectIn
 			inventoryItem.HighRiskFailureCount = ruleFailure.HighRiskFailureCount
 			inventoryItem.MediumRiskFailureCount = ruleFailure.MediumRiskFailureCount
 			inventoryItem.LowRiskFailureCount = ruleFailure.LowRiskFailureCount
+			inventoryItem.RulesPassedCount = localRuleCount - len(ruleFailure.TriggeredRules)
 
 			result[key] = inventoryItem
 		}
