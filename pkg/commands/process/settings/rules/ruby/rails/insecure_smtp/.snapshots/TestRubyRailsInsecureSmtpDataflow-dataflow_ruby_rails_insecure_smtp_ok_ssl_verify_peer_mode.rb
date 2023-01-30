@@ -7,6 +7,7 @@ data_types:
               line_number: 3
               field_name: email
               object_name: User
+              subject_name: User
     - name: Fullname
       detectors:
         - name: ruby
@@ -15,6 +16,7 @@ data_types:
               line_number: 3
               field_name: name
               object_name: User
+              subject_name: User
     - name: Passwords
       detectors:
         - name: ruby
@@ -23,6 +25,7 @@ data_types:
               line_number: 3
               field_name: password
               object_name: User
+              subject_name: User
 components: []
 
 

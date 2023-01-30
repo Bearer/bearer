@@ -7,6 +7,7 @@ data_types:
               line_number: 5
               field_name: email
               object_name: User
+              subject_name: User
     - name: Fullname
       detectors:
         - name: ruby
@@ -15,6 +16,7 @@ data_types:
               line_number: 5
               field_name: name
               object_name: User
+              subject_name: User
     - name: Passwords
       detectors:
         - name: ruby
@@ -23,6 +25,7 @@ data_types:
               line_number: 5
               field_name: password
               object_name: User
+              subject_name: User
 risks:
     - detector_id: ruby_lang_insecure_ftp
       locations:

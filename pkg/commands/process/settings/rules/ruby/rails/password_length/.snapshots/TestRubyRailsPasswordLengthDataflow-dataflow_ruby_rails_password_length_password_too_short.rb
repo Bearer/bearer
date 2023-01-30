@@ -7,6 +7,7 @@ data_types:
               line_number: 3
               field_name: password
               object_name: User
+              subject_name: User
 risks:
     - detector_id: ruby_rails_password_length
       locations:
