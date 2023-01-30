@@ -25,9 +25,10 @@ func (datatype ClassifiedDatatype) GetClassification() interface{} {
 }
 
 type Classification struct {
-	Name     string                          `json:"name" yaml:"name"`
-	DataType *db.DataType                    `json:"data_type,omitempty"`
-	Decision classify.ClassificationDecision `json:"decision" yaml:"decision"`
+	Name        string                          `json:"name" yaml:"name"`
+	SubjectName *string                         `json:"subject_name" yaml:"subject_name"`
+	DataType    *db.DataType                    `json:"data_type,omitempty"`
+	Decision    classify.ClassificationDecision `json:"decision" yaml:"decision"`
 }
 
 type Classifier struct {
@@ -100,6 +101,11 @@ func (classifier *Classifier) Classify(data ClassificationRequest) *ClassifiedDa
 	if matchedKnownPersonObject != nil {
 		// add data type to object
 		classifiedDatatype.Classification.DataType = &matchedKnownPersonObject.DataType
+		// add subject name if appropriate
+		if matchedKnownPersonObject.ActAsIdentifier {
+			classifiedDatatype.Classification.SubjectName = &matchedKnownPersonObject.SubjectName
+		}
+
 		return classifier.classifyKnownObject(classifiedDatatype, data.Value, data.DetectorType)
 	}
 
