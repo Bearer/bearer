@@ -89,7 +89,7 @@ func (detector *objectDetector) Name() string {
 func (detector *objectDetector) DetectAt(
 	node *tree.Node,
 	evaluator types.Evaluator,
-) ([]*types.Detection, error) {
+) ([]interface{}, error) {
 	log.Debug().Msgf("%s", node.Debug())
 	detections, err := detector.getobject(node, evaluator)
 	if len(detections) != 0 || err != nil {
@@ -117,7 +117,7 @@ func (detector *objectDetector) DetectAt(
 func (detector *objectDetector) getobject(
 	node *tree.Node,
 	evaluator types.Evaluator,
-) ([]*types.Detection, error) {
+) ([]interface{}, error) {
 	results, err := detector.objectPairQuery.MatchAt(node)
 	if err != nil {
 		return nil, err
@@ -129,7 +129,7 @@ func (detector *objectDetector) getobject(
 
 	var properties []*types.Detection
 	for _, result := range results {
-		nodeProperties, err := evaluator.ForNode(result["pair"], "property")
+		nodeProperties, err := evaluator.ForNode(result["pair"], "property", false)
 		if err != nil {
 			return nil, err
 		}
@@ -137,7 +137,7 @@ func (detector *objectDetector) getobject(
 		properties = append(properties, nodeProperties...)
 	}
 
-	return []*types.Detection{{
+	return []interface{}{&types.Detection{
 		MatchNode: node,
 		Data:      generictypes.Object{Properties: properties},
 	}}, nil
@@ -146,18 +146,18 @@ func (detector *objectDetector) getobject(
 func (detector *objectDetector) getAssigment(
 	node *tree.Node,
 	evaluator types.Evaluator,
-) ([]*types.Detection, error) {
+) ([]interface{}, error) {
 	result, err := detector.assignmentQuery.MatchOnceAt(node)
 	if result == nil || err != nil {
 		return nil, err
 	}
 
-	objects, err := evaluator.ForNode(result["right"], "object")
+	objects, err := evaluator.ForNode(result["right"], "object", true)
 	if err != nil {
 		return nil, err
 	}
 
-	var detections []*types.Detection
+	var detections []interface{}
 	for _, object := range objects {
 		objectData := object.Data.(generictypes.Object)
 
@@ -178,18 +178,18 @@ func (detector *objectDetector) getAssigment(
 func (detector *objectDetector) getVariableDeclaration(
 	node *tree.Node,
 	evaluator types.Evaluator,
-) ([]*types.Detection, error) {
+) ([]interface{}, error) {
 	result, err := detector.variableDeclarationQuery.MatchOnceAt(node)
 	if result == nil || err != nil {
 		return nil, err
 	}
 
-	objects, err := evaluator.ForNode(result["value"], "object")
+	objects, err := evaluator.ForNode(result["value"], "object", true)
 	if err != nil {
 		return nil, err
 	}
 
-	var detections []*types.Detection
+	var detections []interface{}
 	for _, object := range objects {
 		objectData := object.Data.(generictypes.Object)
 
@@ -207,7 +207,7 @@ func (detector *objectDetector) getVariableDeclaration(
 	return detections, nil
 }
 
-func (detector *objectDetector) getClass(node *tree.Node, evaluator types.Evaluator) ([]*types.Detection, error) {
+func (detector *objectDetector) getClass(node *tree.Node, evaluator types.Evaluator) ([]interface{}, error) {
 	result, err := detector.classNameQuery.MatchOnceAt(node)
 	if result == nil || err != nil {
 		return nil, err
@@ -219,35 +219,31 @@ func (detector *objectDetector) getClass(node *tree.Node, evaluator types.Evalua
 	}
 
 	for i := 0; i < node.ChildCount(); i++ {
-		detections, err := evaluator.ForNode(node.Child(i), "property")
+		detections, err := evaluator.ForNode(node.Child(i), "property", true)
 		if err != nil {
 			return nil, err
 		}
 		data.Properties = append(data.Properties, detections...)
 	}
 
-	return []*types.Detection{{
-		MatchNode:   node,
-		ContextNode: node,
-		Data:        data,
-	}}, nil
+	return []interface{}{data}, nil
 }
 
 func (detector *objectDetector) nameParentPairObject(
 	node *tree.Node,
 	evaluator types.Evaluator,
-) ([]*types.Detection, error) {
+) ([]interface{}, error) {
 	result, err := detector.parentPairQuery.MatchOnceAt(node)
 	if result == nil || err != nil {
 		return nil, err
 	}
 
-	objects, err := evaluator.ForNode(result["value"], "object")
+	objects, err := evaluator.ForNode(result["value"], "object", true)
 	if err != nil {
 		return nil, err
 	}
 
-	var detections []*types.Detection
+	var detections []interface{}
 	for _, object := range objects {
 		objectData := object.Data.(generictypes.Object)
 

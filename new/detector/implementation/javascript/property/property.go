@@ -41,7 +41,7 @@ func (detector *propertyDetector) Name() string {
 func (detector *propertyDetector) DetectAt(
 	node *tree.Node,
 	evaluator types.Evaluator,
-) ([]*types.Detection, error) {
+) ([]interface{}, error) {
 	// run hash pair query
 	result, err := detector.pairQuery.MatchOnceAt(node)
 	if err != nil {
@@ -52,10 +52,9 @@ func (detector *propertyDetector) DetectAt(
 		key := result["key"]
 		// { user: "admin_user"} || {"user": "admin_user"}
 		if key.Type() == "property_identifier" || key.Type() == "string" {
-			return []*types.Detection{{
-				MatchNode:   node,
-				ContextNode: node,
-				Data:        generictypes.Property{Name: result["key"].Content()},
+			return []interface{}{&types.Detection{
+				MatchNode: node,
+				Data:      generictypes.Property{Name: result["key"].Content()},
 			}}, nil
 		}
 	}
@@ -66,10 +65,9 @@ func (detector *propertyDetector) DetectAt(
 		return nil, err
 	}
 	if len(result) != 0 {
-		return []*types.Detection{{
-			MatchNode:   node,
-			ContextNode: node,
-			Data:        generictypes.Property{Name: result["name"].Content()},
+		return []interface{}{&types.Detection{
+			MatchNode: node,
+			Data:      generictypes.Property{Name: result["name"].Content()},
 		}}, nil
 	}
 

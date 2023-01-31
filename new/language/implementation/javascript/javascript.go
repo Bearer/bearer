@@ -215,3 +215,8 @@ func (implementation *javascriptImplementation) PatternIsAnchored(node *tree.Nod
 
 	return true
 }
+
+func (implementation *javascriptImplementation) DescendIntoDetectionNode(node *tree.Node) bool {
+	// TODO: implement this
+	return true
+}
