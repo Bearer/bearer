@@ -36,6 +36,6 @@ func (lang *Language) CompilePatternQuery(input string) (types.PatternQuery, err
 	return patternquery.Compile(lang, lang.implementation, input)
 }
 
-func (lang *Language) IsTerminalDetectionNode(node *tree.Node) bool {
-	return lang.implementation.IsTerminalDetectionNode(node)
+func (lang *Language) DescendIntoDetectionNode(node *tree.Node) bool {
+	return lang.implementation.DescendIntoDetectionNode(node)
 }

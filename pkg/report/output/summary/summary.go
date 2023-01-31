@@ -121,7 +121,7 @@ func GetOutput(dataflow *dataflow.DataFlow, config settings.Config) (map[string]
 					DetailedContext:   policyOutput.DetailedContext,
 				}
 
-				severity := findHighestSeverity(policyOutput.CategoryGroups, rule.Severity)
+				severity := FindHighestSeverity(policyOutput.CategoryGroups, rule.Severity)
 
 				result[severity] = append(result[severity], policyResult)
 			}
@@ -169,7 +169,7 @@ func BuildReportString(rules map[string]*settings.Rule, policyResults map[string
 	return reportStr
 }
 
-func findHighestSeverity(groups []string, severity map[string]string) string {
+func FindHighestSeverity(groups []string, severity map[string]string) string {
 	var severities []string
 	for _, group := range groups {
 		severities = append(severities, severity[group])

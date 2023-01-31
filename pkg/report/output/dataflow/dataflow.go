@@ -111,7 +111,10 @@ func GetOutput(input []interface{}, config settings.Config, isInternal bool) (*D
 			ruleName := string(castDetection.DetectorType)
 			customDetector, ok := config.Rules[ruleName]
 			if !ok {
-				return nil, fmt.Errorf("there is a custom detector in report that is not in the config %s", ruleName)
+				customDetector, ok = config.BuiltInRules[ruleName]
+				if !ok {
+					return nil, fmt.Errorf("custom detector not in config %s", ruleName)
+				}
 			}
 
 			switch customDetector.Type {

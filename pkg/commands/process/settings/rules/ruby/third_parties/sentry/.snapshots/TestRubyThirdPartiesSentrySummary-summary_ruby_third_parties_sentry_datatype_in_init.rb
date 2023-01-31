@@ -7,14 +7,8 @@ critical:
       filename: pkg/commands/process/settings/rules/ruby/third_parties/sentry/testdata/datatype_in_init.rb
       category_groups:
         - PII
-      parent_line_number: 1
-      parent_content: |-
-        Sentry.init do |config|
-          config.before_breadcrumb = lambda do |breadcrumb, hint|
-            breadcrumb.message = "Authenticated user #{current_user.email}"
-            breadcrumb
-          end
-        end
+      parent_line_number: 3
+      parent_content: 'breadcrumb.message = "Authenticated user #{current_user.email}"'
 
 
 --

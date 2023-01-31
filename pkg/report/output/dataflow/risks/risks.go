@@ -37,11 +37,12 @@ type datatypeHolder struct {
 }
 
 type fileHolder struct {
-	name       string
-	lineNumber int
-	parent     *schema.Parent
-	fieldName  string
-	objectName string
+	name        string
+	lineNumber  int
+	parent      *schema.Parent
+	fieldName   string
+	objectName  string
+	subjectName *string
 }
 
 func New(config settings.Config, isInternal bool) *Holder {
@@ -103,6 +104,7 @@ func (holder *Holder) AddSchema(detection detections.Detection) error {
 		holder.addDatatype(
 			string(detection.DetectorType),
 			classification.DataType,
+			classification.SubjectName,
 			detection.Source.Filename,
 			*detection.Source.LineNumber,
 			schema,
@@ -113,7 +115,7 @@ func (holder *Holder) AddSchema(detection detections.Detection) error {
 }
 
 // addDatatype adds detector to hash list and at the same time blocks duplicates
-func (holder *Holder) addDatatype(ruleName string, datatype *db.DataType, fileName string, lineNumber int, schema schema.Schema) {
+func (holder *Holder) addDatatype(ruleName string, datatype *db.DataType, subjectName *string, fileName string, lineNumber int, schema schema.Schema) {
 	if datatype == nil {
 		// FIXME: we end up with empty field Name and no datatype with the new code
 		// Might be related to the bug with the Unique Identifier classification
@@ -153,11 +155,12 @@ func (holder *Holder) addDatatype(ruleName string, datatype *db.DataType, fileNa
 	}
 
 	detectorDatatype.files[fileName][lineNumber] = &fileHolder{
-		name:       fileName,
-		lineNumber: lineNumber,
-		parent:     schema.Parent,
-		fieldName:  schema.FieldName,
-		objectName: schema.ObjectName,
+		name:        fileName,
+		lineNumber:  lineNumber,
+		parent:      schema.Parent,
+		fieldName:   schema.FieldName,
+		objectName:  schema.ObjectName,
+		subjectName: subjectName,
 	}
 }
 
@@ -193,11 +196,12 @@ func (holder *Holder) ToDataFlow() []interface{} {
 				sortedLocations := maputil.ToSortedSlice(locations)
 				for _, location := range sortedLocations {
 					constructedDatatype.Locations = append(constructedDatatype.Locations, types.RiskLocation{
-						Filename:   location.name,
-						LineNumber: location.lineNumber,
-						Parent:     location.parent,
-						FieldName:  location.fieldName,
-						ObjectName: location.objectName,
+						Filename:    location.name,
+						LineNumber:  location.lineNumber,
+						Parent:      location.parent,
+						FieldName:   location.fieldName,
+						ObjectName:  location.objectName,
+						SubjectName: location.subjectName,
 					})
 				}
 			}

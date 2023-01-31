@@ -10,7 +10,7 @@ import (
 func (detector *objectDetector) getProperties(
 	node *tree.Node,
 	evaluator types.Evaluator,
-) ([]*types.Detection, error) {
+) ([]interface{}, error) {
 	var objectParent *tree.Node
 	var objectProperty *tree.Node
 
@@ -81,17 +81,14 @@ func (detector *objectDetector) getProperties(
 	}
 
 	if objectParent != nil && objectProperty != nil {
-		return []*types.Detection{{
-			MatchNode:   node,
-			ContextNode: node,
-			Data: generictypes.Object{
-				Name: objectParent.Content(),
-				Properties: []*types.Detection{
-					{
-						MatchNode: node,
-						Data: generictypes.Property{
-							Name: objectProperty.Content(),
-						},
+		return []interface{}{generictypes.Object{
+			Name: objectParent.Content(),
+			Properties: []*types.Detection{
+				{
+					DetectorType: detector.Name(),
+					MatchNode:    node,
+					Data: generictypes.Property{
+						Name: objectProperty.Content(),
 					},
 				},
 			},

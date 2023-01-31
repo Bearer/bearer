@@ -8,7 +8,7 @@ languages:
   - ruby
 detectors:
   - schema_rb # built-in
-  - sql_lang_create_table
+  - sql_lang_create_table # built-in
 processors:
   - db_encrypted
   - rails_encrypted

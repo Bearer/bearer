@@ -7,6 +7,7 @@ data_types:
               line_number: 1
               field_name: email
               object_name: user
+              subject_name: User
     - name: Unique Identifier
       detectors:
         - name: ruby
@@ -28,15 +29,10 @@ risks:
                 content: session[:current_user] = user.email
               field_name: email
               object_name: user
+              subject_name: User
         - name: Unique Identifier
           stored: false
           locations:
-            - filename: pkg/commands/process/settings/rules/ruby/rails/session/testdata/datatype_in_session.rb
-              line_number: 1
-              parent:
-                line_number: 1
-                content: session[:current_user] = user.email
-              object_name: user
             - filename: pkg/commands/process/settings/rules/ruby/rails/session/testdata/datatype_in_session.rb
               line_number: 2
               parent:
@@ -44,6 +40,7 @@ risks:
                 content: session[:user_id] = current_user.user_id
               field_name: user_id
               object_name: current_user
+              subject_name: User
 components: []
 
 

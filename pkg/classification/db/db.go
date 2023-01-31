@@ -28,6 +28,9 @@ var dataTypeClassificationPatternsDir embed.FS
 //go:embed known_person_object_patterns
 var knownPersonObjectPatternsDir embed.FS
 
+//go:embed subject_mapping.json
+var subjectMappingFile embed.FS
+
 //go:embed category_grouping.json
 var categoryGroupingFile embed.FS
 
@@ -123,6 +126,7 @@ type KnownPersonObjectPattern struct {
 	ExcludeRegexp           string         `json:"exclude_regexp,omitempty"`
 	ExcludeRegexpMatcher    *regexp.Regexp `json:"exclude_regexp_matcher" yaml:"exclude_regexp_matcher"`
 	Category                string         `json:"category" yaml:"category"`
+	SubjectName             string         `json:"subject_name,omitempty" yaml:"subject_name,omitempty"`
 	ActAsIdentifier         bool           `json:"act_as_identifier" yaml:"act_as_identifier"`
 	IdentifierRegexpMatcher *regexp.Regexp `json:"identifier_regexp_matcher" yaml:"identifier_regexp_matcher"`
 }
@@ -347,6 +351,19 @@ func defaultKnownPersonObjectPatterns(dataTypes []DataType) []KnownPersonObjectP
 		handleError(err)
 	}
 
+	// read mapping
+	subjectMappingJson, err := subjectMappingFile.ReadFile("subject_mapping.json")
+	if err != nil {
+		handleError(err)
+	}
+
+	var subjectMapping map[string]string
+	rawBytes := []byte(subjectMappingJson)
+	err = json.Unmarshal(rawBytes, &subjectMapping)
+	if err != nil {
+		handleError(err)
+	}
+
 	for _, file := range files {
 		val, err := knownPersonObjectPatternsDir.ReadFile("known_person_object_patterns/" + file.Name())
 		if err != nil {
@@ -383,6 +400,9 @@ func defaultKnownPersonObjectPatterns(dataTypes []DataType) []KnownPersonObjectP
 			if err != nil {
 				handleError(err)
 			}
+
+			// add subject name from mapping, if available
+			knownPersonObjectPattern.SubjectName = subjectMapping[knownPersonObjectPattern.Category]
 		}
 
 		knownPersonObjectPatterns = append(knownPersonObjectPatterns, knownPersonObjectPattern)

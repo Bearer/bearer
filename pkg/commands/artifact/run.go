@@ -271,6 +271,15 @@ func (r *runner) Report(config settings.Config, report types.Report) (bool, erro
 		return reportPassed, nil
 	}
 
+	if config.Report.Report == flag.ReportPrivacy && config.Report.Format == flag.FormatEmpty {
+		// for privacy report, default report format is CSV
+		err := reportoutput.ReportCSV(report, logger, config)
+		if err != nil {
+			return false, fmt.Errorf("error generating report %w", err)
+		}
+		return true, nil
+	}
+
 	switch config.Report.Format {
 	case flag.FormatEmpty, flag.FormatJSON:
 		// default report format for is JSON

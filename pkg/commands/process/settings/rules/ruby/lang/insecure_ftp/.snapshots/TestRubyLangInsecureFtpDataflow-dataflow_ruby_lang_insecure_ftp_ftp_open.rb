@@ -1,7 +1,7 @@
 risks:
-    - detector_id: ruby_rails_insecure_ftp
+    - detector_id: ruby_lang_insecure_ftp
       locations:
-        - filename: pkg/commands/process/settings/rules/ruby/rails/insecure_ftp/testdata/ftp_open.rb
+        - filename: pkg/commands/process/settings/rules/ruby/lang/insecure_ftp/testdata/ftp_open.rb
           line_number: 3
           parent:
             line_number: 3
@@ -16,7 +16,7 @@ risks:
             $<!>Net::FTP.open() do
               $<_>
             end
-        - filename: pkg/commands/process/settings/rules/ruby/rails/insecure_ftp/testdata/ftp_open.rb
+        - filename: pkg/commands/process/settings/rules/ruby/lang/insecure_ftp/testdata/ftp_open.rb
           line_number: 3
           parent:
             line_number: 3
@@ -31,7 +31,7 @@ risks:
             $<!>Net::FTP.open() do
               $<_>
             end
-        - filename: pkg/commands/process/settings/rules/ruby/rails/insecure_ftp/testdata/ftp_open.rb
+        - filename: pkg/commands/process/settings/rules/ruby/lang/insecure_ftp/testdata/ftp_open.rb
           line_number: 3
           parent:
             line_number: 3
@@ -46,7 +46,7 @@ risks:
             $<!>Net::FTP.open() do
               $<_>
             end
-        - filename: pkg/commands/process/settings/rules/ruby/rails/insecure_ftp/testdata/ftp_open.rb
+        - filename: pkg/commands/process/settings/rules/ruby/lang/insecure_ftp/testdata/ftp_open.rb
           line_number: 3
           parent:
             line_number: 3
@@ -61,7 +61,7 @@ risks:
             $<!>Net::FTP.open() do
               $<_>
             end
-        - filename: pkg/commands/process/settings/rules/ruby/rails/insecure_ftp/testdata/ftp_open.rb
+        - filename: pkg/commands/process/settings/rules/ruby/lang/insecure_ftp/testdata/ftp_open.rb
           line_number: 3
           parent:
             line_number: 3

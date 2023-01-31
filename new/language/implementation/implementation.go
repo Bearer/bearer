@@ -75,8 +75,8 @@ type Implementation interface {
 	// it is natural for `$<ARG>`` to only match the first argument, but
 	// we wouldn't expect `other_call` to be the first expression in the block
 	PatternIsAnchored(node *tree.Node) bool
-	// IsTerminalDetectionNode returns whether detections should be returned
-	// for sub-nodes of the given node.
+	// DescendIntoDetectionNode returns whether a tree detection search should
+	// proceed down into the given node.
 	//
 	// eg. given Ruby code like this:
 	//   user = Struct.new(email: ..., address: ...)
@@ -84,5 +84,5 @@ type Implementation interface {
 	// `user` in `user.email` is unified with the assignment.
 	// But we don't want to see detections for the assignment when asking for the
 	// detections of `user.email`
-	IsTerminalDetectionNode(node *tree.Node) bool
+	DescendIntoDetectionNode(node *tree.Node) bool
 }
