@@ -7,7 +7,6 @@ import (
 	"io"
 	"os"
 	"regexp"
-	"sort"
 	"strings"
 
 	"github.com/bearer/curio/pkg/commands/process/settings"
@@ -66,10 +65,6 @@ func (detector *Detector) CompileRules(rulesConfig map[string]*settings.Rule) er
 
 	for ruleName, rule := range rulesConfig {
 		for _, lang := range rule.Languages {
-			if lang != "sql" {
-				continue
-			}
-
 			for _, rulePattern := range rule.Patterns {
 				compiledRule, err := detector.compileRule(rulePattern, lang, detector.paramIdGenerator)
 				if err != nil {
@@ -80,7 +75,6 @@ func (detector *Detector) CompileRules(rulesConfig map[string]*settings.Rule) er
 				compiledRule.Language = lang
 
 				compiledRule.RuleName = ruleName
-				compiledRule.Metavars = rule.Metavars
 				compiledRule.ParamParenting = rule.ParamParenting
 				compiledRule.DetectPresence = rule.DetectPresence
 				compiledRule.Pattern = rulePattern.Pattern
@@ -89,12 +83,6 @@ func (detector *Detector) CompileRules(rulesConfig map[string]*settings.Rule) er
 				detector.rulesGroupedByLang[lang] = append(detector.rulesGroupedByLang[lang], compiledRule)
 			}
 		}
-	}
-
-	for _, rules := range detector.rulesGroupedByLang {
-		sort.Slice(rules, func(i, j int) bool {
-			return strings.Compare(rules[i].RuleName, rules[j].RuleName) == -1
-		})
 	}
 
 	return nil
@@ -145,30 +133,6 @@ func (detector *Detector) ProcessFile(file *file.FileInfo, dir *file.Path, repor
 			}
 
 			return true, nil
-		case "ruby":
-			sitterLang := getLanguage(lang)
-			tree, err := parser.ParseFile(file, file.Path, sitterLang)
-			if err != nil {
-				return false, err
-			}
-
-			langDetector, err := detector.forLanguage(lang)
-			if err != nil {
-				return false, err
-			}
-
-			if err := langDetector.Annotate(tree); err != nil {
-				return false, err
-			}
-
-			for _, rule := range rules {
-				err := detector.executeRule(rule, tree, report, detector.idGenerator)
-				if err != nil {
-					return false, err
-				}
-			}
-
-			tree.Close()
 		}
 	}
 

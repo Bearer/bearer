@@ -12,7 +12,6 @@ import (
 	"github.com/bearer/curio/pkg/parser"
 	"github.com/bearer/curio/pkg/parser/nodeid"
 
-	createview "github.com/bearer/curio/pkg/report/create_view"
 	"github.com/bearer/curio/pkg/report/dependencies"
 	"github.com/bearer/curio/pkg/report/detections"
 	"github.com/bearer/curio/pkg/report/detectors"
@@ -67,21 +66,6 @@ func (report *Detectors) AddInterface(
 
 	classifiedDetection.Type = detections.TypeInterfaceClassified
 	report.Add(classifiedDetection)
-}
-
-func (report *Detectors) AddCreateView(
-	detectorType detectors.Type,
-	createview createview.View,
-) {
-	for _, field := range createview.Fields {
-		field.CommitSHA = report.Blamer.SHAForLine(field.Source.Filename, *field.Source.LineNumber)
-	}
-
-	for _, field := range createview.From {
-		field.CommitSHA = report.Blamer.SHAForLine(field.Source.Filename, *field.Source.LineNumber)
-	}
-
-	report.AddDetection(detections.TypeCreateView, detectorType, createview.Source, createview)
 }
 
 func (report *Detectors) AddDataType(detectionType detections.DetectionType, detectorType detectors.Type, idGenerator nodeid.Generator, values map[parser.NodeID]*datatype.DataType, parent *parser.Node) {

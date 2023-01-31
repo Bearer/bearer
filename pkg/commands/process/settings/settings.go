@@ -3,6 +3,8 @@ package settings
 import (
 	"embed"
 	"fmt"
+	"path/filepath"
+	"strings"
 
 	"github.com/rs/zerolog/log"
 	"gopkg.in/yaml.v2"
@@ -12,12 +14,13 @@ import (
 )
 
 type Config struct {
-	Worker   flag.WorkerOptions `mapstructure:"worker" json:"worker" yaml:"worker"`
-	Scan     flag.ScanOptions   `mapstructure:"scan" json:"scan" yaml:"scan"`
-	Report   flag.ReportOptions `mapstructure:"report" json:"report" yaml:"report"`
-	Policies map[string]*Policy `mapstructure:"policies" json:"policies" yaml:"policies"`
-	Target   string             `mapstructure:"target" json:"target" yaml:"target"`
-	Rules    map[string]*Rule   `mapstructure:"rules" json:"rules" yaml:"rules"`
+	Worker       flag.WorkerOptions `mapstructure:"worker" json:"worker" yaml:"worker"`
+	Scan         flag.ScanOptions   `mapstructure:"scan" json:"scan" yaml:"scan"`
+	Report       flag.ReportOptions `mapstructure:"report" json:"report" yaml:"report"`
+	Policies     map[string]*Policy `mapstructure:"policies" json:"policies" yaml:"policies"`
+	Target       string             `mapstructure:"target" json:"target" yaml:"target"`
+	Rules        map[string]*Rule   `mapstructure:"rules" json:"rules" yaml:"rules"`
+	BuiltInRules map[string]*Rule   `mapstructure:"built_in_rules" json:"built_in_rules" yaml:"built_in_rules"`
 }
 
 type PolicyLevel string
@@ -148,6 +151,9 @@ var defaultPolicies []byte
 //go:embed rules/*
 var rulesFs embed.FS
 
+//go:embed built_in_rules/*
+var builtInRulesFs embed.FS
+
 //go:embed policies/*
 var policiesFs embed.FS
 
@@ -164,6 +170,7 @@ func (rule *Rule) PolicyType() bool {
 
 func FromOptions(opts flag.Options) (Config, error) {
 	policies := DefaultPolicies()
+	builtInRules := BuiltInRules()
 
 	rules, err := loadRules(opts.ExternalRuleDir, opts.RuleOptions)
 	if err != nil {
@@ -185,11 +192,12 @@ func FromOptions(opts flag.Options) (Config, error) {
 	}
 
 	config := Config{
-		Worker:   opts.WorkerOptions,
-		Scan:     opts.ScanOptions,
-		Report:   opts.ReportOptions,
-		Policies: policies,
-		Rules:    rules,
+		Worker:       opts.WorkerOptions,
+		Scan:         opts.ScanOptions,
+		Report:       opts.ReportOptions,
+		Policies:     policies,
+		Rules:        rules,
+		BuiltInRules: builtInRules,
 	}
 
 	return config, nil
@@ -222,6 +230,90 @@ func DefaultPolicies() map[string]*Policy {
 	}
 
 	return policies
+}
+
+func BuiltInRules() (rules map[string]*Rule) {
+	rules = make(map[string]*Rule)
+
+	ruleDir, err := builtInRulesFs.ReadDir("built_in_rules")
+	if err != nil {
+		log.Fatal().Msgf("failed to read rules dir %s", err)
+	}
+
+	for _, langDir := range ruleDir {
+		lang := langDir.Name()
+
+		if filepath.Ext(langDir.Name()) != "" {
+			// not a directory; skip it
+			continue
+		}
+
+		subLangDirs, err := builtInRulesFs.ReadDir("built_in_rules/" + lang)
+		if err != nil {
+			log.Fatal().Msgf("failed to read built_in_rules/%s dir %e", lang, err)
+		}
+
+		for _, subLangDir := range subLangDirs {
+			subLang := subLangDir.Name()
+			dirEntries, err := builtInRulesFs.ReadDir("built_in_rules/" + lang + "/" + subLang)
+			if err != nil {
+				log.Fatal().Msgf("failed to read built_in_rules/%s/%s dir %e", lang, subLang, err)
+			}
+
+			for _, dirEntry := range dirEntries {
+				filename := dirEntry.Name()
+				ext := filepath.Ext(filename)
+
+				if ext != ".yaml" && ext != ".yml" {
+					continue
+				}
+
+				entry, err := builtInRulesFs.ReadFile("built_in_rules/" + lang + "/" + subLang + "/" + filename)
+				if err != nil {
+					log.Fatal().Msgf("failed to read built_in_rules/%s/%s/%s file %s", lang, subLang, filename, err)
+				}
+
+				var ruleDefinition *RuleDefinition
+				err = yaml.Unmarshal(entry, &ruleDefinition)
+				if err != nil {
+					log.Fatal().Msgf("failed to unmarshal built_in_rules/%s/%s/%s %s", lang, subLang, filename, err)
+				}
+
+				var ruleId string
+				var rule Rule
+				if subLang == "internal" {
+					ruleId = strings.TrimSuffix(filename, ext)
+				} else {
+					ruleId = ruleDefinition.Metadata.ID
+				}
+
+				rule = Rule{
+					Id:                 ruleId,
+					Type:               ruleDefinition.Type,
+					Trigger:            ruleDefinition.Trigger,
+					OmitParentContent:  ruleDefinition.OmitParentContent,
+					SkipDataTypes:      ruleDefinition.SkipDataTypes,
+					OnlyDataTypes:      ruleDefinition.OnlyDataTypes,
+					Severity:           ruleDefinition.Severity,
+					Description:        ruleDefinition.Metadata.Description,
+					RemediationMessage: ruleDefinition.Metadata.RemediationMessage,
+					Stored:             ruleDefinition.Stored,
+					Detectors:          ruleDefinition.Detectors,
+					Processors:         ruleDefinition.Processors,
+					AutoEncrytPrefix:   ruleDefinition.AutoEncrytPrefix,
+					DSRID:              ruleDefinition.Metadata.DSRID,
+					Languages:          ruleDefinition.Languages,
+					ParamParenting:     ruleDefinition.ParamParenting,
+					Patterns:           ruleDefinition.Patterns,
+					DetectPresence:     ruleDefinition.DetectPresence,
+				}
+
+				rules[ruleId] = &rule
+			}
+		}
+	}
+
+	return rules
 }
 
 func ProcessorRegoModuleText(processorName string) (string, error) {
