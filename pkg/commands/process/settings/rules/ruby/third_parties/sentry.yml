@@ -6,16 +6,120 @@ patterns:
       - variable: DATA_TYPE
         detection: datatype
   - pattern: |
+      Sentry.capture_message($<...>$<DATA_TYPE>$<...>)
+    filters:
+      - variable: DATA_TYPE
+        detection: datatype
+  - pattern: |
       Sentry.init do |$<CONFIG:identifier>|
         $<CONFIG>.before_breadcrumb = lambda do |$<BREADCRUMB:identifier>, $<_:identifier>|
-          $<BREADCRUMB>.message = $<DATA_TYPE>
+          $<!>$<BREADCRUMB>.message = $<DATA_TYPE>
         end
       end
     filters:
       - variable: DATA_TYPE
         detection: datatype
   - pattern: |
+      Sentry.set_context($<_>, $<...>$<DATA_TYPE>$<...>)
+    filters:
+      - variable: DATA_TYPE
+        detection: datatype
+  - pattern: |
+      Sentry.configure_scope do |$<SCOPE:identifier>|
+        $<!>$<SCOPE>.set_context($<_>, $<...>$<DATA_TYPE>$<...>)
+      end
+    filters:
+      - variable: DATA_TYPE
+        detection: datatype
+  - pattern: |
+      Sentry.with_scope do |$<SCOPE:identifier>|
+        $<!>$<SCOPE>.set_context($<_>, $<...>$<DATA_TYPE>$<...>)
+      end
+    filters:
+      - variable: DATA_TYPE
+        detection: datatype
+  - pattern: |
+      Sentry.configure_scope do |$<SCOPE:identifier>|
+        $<!>$<SCOPE>.set_extra($<_>, $<DATA_TYPE>)
+      end
+    filters:
+      - variable: DATA_TYPE
+        detection: datatype
+  - pattern: |
+      Sentry.with_scope do |$<SCOPE:identifier>|
+        $<!>$<SCOPE>.set_extra($<_>, $<DATA_TYPE>)
+      end
+    filters:
+      - variable: DATA_TYPE
+        detection: datatype
+  - pattern: |
+      Sentry.set_extras($<...>$<DATA_TYPE>$<...>)
+    filters:
+      - variable: DATA_TYPE
+        detection: datatype
+  - pattern: |
+      Sentry.configure_scope do |$<SCOPE:identifier>|
+        $<!>$<SCOPE>.set_extras($<...>$<DATA_TYPE>$<...>)
+      end
+    filters:
+      - variable: DATA_TYPE
+        detection: datatype
+  - pattern: |
+      Sentry.with_scope do |$<SCOPE:identifier>|
+        $<!>$<SCOPE>.set_extras($<...>$<DATA_TYPE>$<...>)
+      end
+    filters:
+      - variable: DATA_TYPE
+        detection: datatype
+  - pattern: |
+      Sentry.configure_scope do |$<SCOPE:identifier>|
+        $<!>$<SCOPE>.set_tag($<_>, $<DATA_TYPE>)
+      end
+    filters:
+      - variable: DATA_TYPE
+        detection: datatype
+  - pattern: |
+      Sentry.with_scope do |$<SCOPE:identifier>|
+        $<!>$<SCOPE>.set_tag($<_>, $<DATA_TYPE>)
+      end
+    filters:
+      - variable: DATA_TYPE
+        detection: datatype
+  - pattern: |
+      Sentry.set_tags($<...>$<DATA_TYPE>$<...>)
+    filters:
+      - variable: DATA_TYPE
+        detection: datatype
+  - pattern: |
+      Sentry.configure_scope do |$<SCOPE:identifier>|
+        $<!>$<SCOPE>.set_tags($<...>$<DATA_TYPE>$<...>)
+      end
+    filters:
+      - variable: DATA_TYPE
+        detection: datatype
+  - pattern: |
+      Sentry.with_scope do |$<SCOPE:identifier>|
+        $<!>$<SCOPE>.set_tags($<...>$<DATA_TYPE>$<...>)
+      end
+    filters:
+      - variable: DATA_TYPE
+        detection: datatype
+  - pattern: |
       Sentry.set_user($<...>$<DATA_TYPE>$<...>)
+    filters:
+      - variable: DATA_TYPE
+        detection: datatype
+  - pattern: |
+      Sentry.configure_scope do |$<SCOPE:identifier>|
+        $<!>$<SCOPE>.set_user($<...>$<DATA_TYPE>$<...>)
+      end
+    filters:
+      - variable: DATA_TYPE
+        detection: datatype
+  - pattern: |
+      Sentry.with_scope do |$<SCOPE:identifier>|
+        $<!>$<SCOPE>.set_user($<...>$<DATA_TYPE>$<...>)
+      end
     filters:
       - variable: DATA_TYPE
         detection: datatype

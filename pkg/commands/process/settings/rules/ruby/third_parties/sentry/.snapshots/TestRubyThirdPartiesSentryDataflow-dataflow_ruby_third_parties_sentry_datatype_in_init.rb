@@ -16,14 +16,8 @@ risks:
             - filename: pkg/commands/process/settings/rules/ruby/third_parties/sentry/testdata/datatype_in_init.rb
               line_number: 3
               parent:
-                line_number: 1
-                content: |-
-                    Sentry.init do |config|
-                      config.before_breadcrumb = lambda do |breadcrumb, hint|
-                        breadcrumb.message = "Authenticated user #{current_user.email}"
-                        breadcrumb
-                      end
-                    end
+                line_number: 3
+                content: 'breadcrumb.message = "Authenticated user #{current_user.email}"'
               field_name: email
               object_name: current_user
         - name: Unique Identifier
@@ -32,14 +26,8 @@ risks:
             - filename: pkg/commands/process/settings/rules/ruby/third_parties/sentry/testdata/datatype_in_init.rb
               line_number: 3
               parent:
-                line_number: 1
-                content: |-
-                    Sentry.init do |config|
-                      config.before_breadcrumb = lambda do |breadcrumb, hint|
-                        breadcrumb.message = "Authenticated user #{current_user.email}"
-                        breadcrumb
-                      end
-                    end
+                line_number: 3
+                content: 'breadcrumb.message = "Authenticated user #{current_user.email}"'
               object_name: current_user
 components: []
 

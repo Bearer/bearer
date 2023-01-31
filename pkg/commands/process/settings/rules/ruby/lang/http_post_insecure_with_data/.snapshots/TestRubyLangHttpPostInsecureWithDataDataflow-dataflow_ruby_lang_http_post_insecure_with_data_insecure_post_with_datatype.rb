@@ -29,15 +29,6 @@ risks:
                 line_number: 1
                 content: 'HTTParty.post("http://my.api.com/users/search", body: user.email)'
               object_name: user
-    - detector_id: ruby_lang_http_insecure
-      locations:
-        - filename: pkg/commands/process/settings/rules/ruby/lang/http_post_insecure_with_data/testdata/insecure_post_with_datatype.rb
-          line_number: 1
-          parent:
-            line_number: 1
-            content: 'HTTParty.post("http://my.api.com/users/search", body: user.email)'
-          content: |
-            $<CLIENT>.post($<INSECURE_URL>)
 components: []
 
 
