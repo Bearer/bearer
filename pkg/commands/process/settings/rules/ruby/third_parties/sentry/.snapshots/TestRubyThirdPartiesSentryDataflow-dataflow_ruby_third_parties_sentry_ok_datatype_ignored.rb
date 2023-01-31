@@ -7,6 +7,7 @@ data_types:
               line_number: 3
               field_name: user_id
               object_name: current_user
+              subject_name: User
 risks:
     - detector_id: ruby_third_parties_sentry
       data_types:
@@ -25,6 +26,7 @@ risks:
                     )
               field_name: user_id
               object_name: current_user
+              subject_name: User
 components: []
 
 
