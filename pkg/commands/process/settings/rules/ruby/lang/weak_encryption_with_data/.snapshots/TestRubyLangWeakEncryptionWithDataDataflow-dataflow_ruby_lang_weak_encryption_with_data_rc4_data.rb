@@ -55,22 +55,6 @@ risks:
             content: RC4.new("insecure")
           content: |
             RC4.new()
-    - detector_id: ruby_lang_weak_encryption
-      locations:
-        - filename: pkg/commands/process/settings/rules/ruby/lang/weak_encryption_with_data/testdata/rc4_data.rb
-          line_number: 1
-          parent:
-            line_number: 1
-            content: RC4.new("insecure").encrypt(user.password)
-          content: |
-            $<VAR>.$<METHOD>($<_>)
-        - filename: pkg/commands/process/settings/rules/ruby/lang/weak_encryption_with_data/testdata/rc4_data.rb
-          line_number: 4
-          parent:
-            line_number: 4
-            content: rc4_encrypt.encrypt!(user.password)
-          content: |
-            $<VAR>.$<METHOD>($<_>)
 components: []
 
 

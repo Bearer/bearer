@@ -62,22 +62,6 @@ risks:
             content: OpenSSL::PKey::DSA.new(2048)
           content: |
             OpenSSL::PKey::DSA.new()
-    - detector_id: ruby_lang_weak_encryption
-      locations:
-        - filename: pkg/commands/process/settings/rules/ruby/lang/weak_encryption_with_data/testdata/openssl_dsa_data.rb
-          line_number: 3
-          parent:
-            line_number: 3
-            content: dsa_encrypt.export(cipher, user.email)
-          content: |
-            $<VAR>.$<METHOD>($<_>)
-        - filename: pkg/commands/process/settings/rules/ruby/lang/weak_encryption_with_data/testdata/openssl_dsa_data.rb
-          line_number: 5
-          parent:
-            line_number: 5
-            content: OpenSSL::PKey::RSA.new(2048).to_pem(cipher, user.first_name)
-          content: |
-            $<VAR>.$<METHOD>($<_>)
 components: []
 
 
