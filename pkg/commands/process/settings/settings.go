@@ -12,12 +12,13 @@ import (
 )
 
 type Config struct {
-	Worker   flag.WorkerOptions `mapstructure:"worker" json:"worker" yaml:"worker"`
-	Scan     flag.ScanOptions   `mapstructure:"scan" json:"scan" yaml:"scan"`
-	Report   flag.ReportOptions `mapstructure:"report" json:"report" yaml:"report"`
-	Policies map[string]*Policy `mapstructure:"policies" json:"policies" yaml:"policies"`
-	Target   string             `mapstructure:"target" json:"target" yaml:"target"`
-	Rules    map[string]*Rule   `mapstructure:"rules" json:"rules" yaml:"rules"`
+	Worker       flag.WorkerOptions `mapstructure:"worker" json:"worker" yaml:"worker"`
+	Scan         flag.ScanOptions   `mapstructure:"scan" json:"scan" yaml:"scan"`
+	Report       flag.ReportOptions `mapstructure:"report" json:"report" yaml:"report"`
+	Policies     map[string]*Policy `mapstructure:"policies" json:"policies" yaml:"policies"`
+	Target       string             `mapstructure:"target" json:"target" yaml:"target"`
+	Rules        map[string]*Rule   `mapstructure:"rules" json:"rules" yaml:"rules"`
+	BuiltInRules map[string]*Rule   `mapstructure:"built_in_rules" json:"built_in_rules" yaml:"built_in_rules"`
 }
 
 type PolicyLevel string
@@ -148,6 +149,9 @@ var defaultPolicies []byte
 //go:embed rules/*
 var rulesFs embed.FS
 
+//go:embed built_in_rules/*
+var builtInRulesFs embed.FS
+
 //go:embed policies/*
 var policiesFs embed.FS
 
@@ -165,7 +169,7 @@ func (rule *Rule) PolicyType() bool {
 func FromOptions(opts flag.Options) (Config, error) {
 	policies := DefaultPolicies()
 
-	rules, err := loadRules(opts.ExternalRuleDir, opts.RuleOptions)
+	builtInRules, rules, err := loadRules(opts.ExternalRuleDir, opts.RuleOptions)
 	if err != nil {
 		return Config{}, err
 	}
@@ -185,11 +189,12 @@ func FromOptions(opts flag.Options) (Config, error) {
 	}
 
 	config := Config{
-		Worker:   opts.WorkerOptions,
-		Scan:     opts.ScanOptions,
-		Report:   opts.ReportOptions,
-		Policies: policies,
-		Rules:    rules,
+		Worker:       opts.WorkerOptions,
+		Scan:         opts.ScanOptions,
+		Report:       opts.ReportOptions,
+		Policies:     policies,
+		Rules:        rules,
+		BuiltInRules: builtInRules,
 	}
 
 	return config, nil

@@ -143,6 +143,11 @@ func (holder *Holder) addDatatype(classification *db.DataType, detectorName stri
 			storedFlag := true
 			lineEntry.stored = &storedFlag
 		}
+	} else if customDetector, isCustomDetector := holder.config.BuiltInRules[detectorName]; isCustomDetector {
+		if customDetector.Stored {
+			storedFlag := true
+			lineEntry.stored = &storedFlag
+		}
 	}
 }
 

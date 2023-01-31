@@ -10,7 +10,6 @@ import (
 	"github.com/bearer/curio/pkg/parser"
 	"github.com/bearer/curio/pkg/parser/nodeid"
 
-	createview "github.com/bearer/curio/pkg/report/create_view"
 	"github.com/bearer/curio/pkg/report/dependencies"
 	"github.com/bearer/curio/pkg/report/detections"
 	reportdetectors "github.com/bearer/curio/pkg/report/detectors"
@@ -141,19 +140,6 @@ func (report *InMemoryReport) AddDataType(
 ) {
 
 	datatype.ExportClassified(report, detectionType, detectorType, idGenerator, values, nil)
-}
-
-func (report *InMemoryReport) AddCreateView(
-	detectorType reportdetectors.Type,
-	createview createview.View,
-) {
-
-	report.CreateView = append(report.CreateView, &detections.Detection{
-		DetectorType: detectorType,
-		Value:        createview,
-		Source:       createview.Source,
-		Type:         detections.TypeCreateView,
-	})
 }
 
 func (report *InMemoryReport) AddInterface(

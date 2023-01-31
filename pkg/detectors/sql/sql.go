@@ -6,7 +6,6 @@ import (
 	"github.com/bearer/curio/pkg/parser/nodeid"
 	"github.com/bearer/curio/pkg/util/file"
 
-	createview "github.com/bearer/curio/pkg/detectors/sql/create_view"
 	reporttypes "github.com/bearer/curio/pkg/report"
 	schemadatatype "github.com/bearer/curio/pkg/report/schema/datatype"
 )
@@ -33,11 +32,6 @@ func (detector *detector) ProcessFile(file *file.FileInfo, dir *file.Path, repor
 		// microsoft sql
 		file.Language != "TSQL" {
 		return false, nil
-	}
-
-	err := createview.Detect(file, report, detector.idGenerator)
-	if err != nil {
-		return true, err
 	}
 
 	return true, nil
