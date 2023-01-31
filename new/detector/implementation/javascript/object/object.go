@@ -137,10 +137,7 @@ func (detector *objectDetector) getobject(
 		properties = append(properties, nodeProperties...)
 	}
 
-	return []interface{}{&types.Detection{
-		MatchNode: node,
-		Data:      generictypes.Object{Properties: properties},
-	}}, nil
+	return []interface{}{generictypes.Object{Properties: properties}}, nil
 }
 
 func (detector *objectDetector) getAssigment(
@@ -162,12 +159,9 @@ func (detector *objectDetector) getAssigment(
 		objectData := object.Data.(generictypes.Object)
 
 		if objectData.Name == "" {
-			detections = append(detections, &types.Detection{
-				MatchNode: node,
-				Data: generictypes.Object{
-					Name:       result["left"].Content(),
-					Properties: objectData.Properties,
-				},
+			detections = append(detections, generictypes.Object{
+				Name:       result["left"].Content(),
+				Properties: objectData.Properties,
 			})
 		}
 	}
@@ -194,13 +188,11 @@ func (detector *objectDetector) getVariableDeclaration(
 		objectData := object.Data.(generictypes.Object)
 
 		if objectData.Name == "" {
-			detections = append(detections, &types.Detection{
-				MatchNode: node,
-				Data: generictypes.Object{
-					Name:       result["name"].Content(),
-					Properties: objectData.Properties,
-				},
-			})
+			detections = append(detections, generictypes.Object{
+				Name:       result["name"].Content(),
+				Properties: objectData.Properties,
+			},
+			)
 		}
 	}
 
@@ -247,13 +239,11 @@ func (detector *objectDetector) nameParentPairObject(
 	for _, object := range objects {
 		objectData := object.Data.(generictypes.Object)
 
-		detections = append(detections, &types.Detection{
-			MatchNode: node,
-			Data: generictypes.Object{
-				Name:       result["key"].Content(),
-				Properties: objectData.Properties,
-			},
-		})
+		detections = append(detections, generictypes.Object{
+			Name:       result["key"].Content(),
+			Properties: objectData.Properties,
+		},
+		)
 	}
 
 	return detections, nil

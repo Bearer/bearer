@@ -52,10 +52,7 @@ func (detector *propertyDetector) DetectAt(
 		key := result["key"]
 		// { user: "admin_user"} || {"user": "admin_user"}
 		if key.Type() == "property_identifier" || key.Type() == "string" {
-			return []interface{}{&types.Detection{
-				MatchNode: node,
-				Data:      generictypes.Property{Name: result["key"].Content()},
-			}}, nil
+			return []interface{}{generictypes.Property{Name: result["key"].Content()}}, nil
 		}
 	}
 
@@ -65,10 +62,7 @@ func (detector *propertyDetector) DetectAt(
 		return nil, err
 	}
 	if len(result) != 0 {
-		return []interface{}{&types.Detection{
-			MatchNode: node,
-			Data:      generictypes.Property{Name: result["name"].Content()},
-		}}, nil
+		return []interface{}{generictypes.Property{Name: result["name"].Content()}}, nil
 	}
 
 	return nil, nil
