@@ -65,9 +65,6 @@ func (detector *Detector) CompileRules(rulesConfig map[string]*settings.Rule) er
 	detector.rulesGroupedByLang = make(map[string][]config.CompiledRule)
 
 	for ruleName, rule := range rulesConfig {
-		if rule.Disabled {
-			continue
-		}
 		for _, lang := range rule.Languages {
 			if lang != "sql" {
 				continue
