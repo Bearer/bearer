@@ -131,6 +131,7 @@ severity:
   PII: "critical"
   PHI: "medium"
   PD: "high"
+associated_recipe: "Sentry"
 skip_data_types:
   - "Unique Identifier"
 metadata:

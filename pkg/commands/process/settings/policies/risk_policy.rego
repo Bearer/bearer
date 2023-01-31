@@ -98,3 +98,18 @@ policy_failure contains item if {
 		"parent_content": location.parent.content,
 	}
 }
+
+# used by inventory report
+local_rule_failure contains item if {
+  some detector in local_failures
+	data_type = detector.data_types[_]
+
+  location = data_type.locations[_]
+	item := {
+    "name": data_type.name,
+		"category_groups": data.bearer.common.groups_for_datatype(data_type),
+    "subject_name": location.subject_name,
+    "line_number": location.line_number,
+    "rule_id": input.rule.id
+  }
+}
