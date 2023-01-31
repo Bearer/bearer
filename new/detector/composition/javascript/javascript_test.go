@@ -8,8 +8,11 @@ import (
 	"github.com/bearer/curio/new/detector/composition/testhelper"
 )
 
-//go:embed testdata/rule.yml
+//go:embed testdata/console_log.yml
 var consoleLogRule []byte
+
+//go:embed testdata/class_name.yml
+var classNameRule []byte
 
 func TestJavascriptObject(t *testing.T) {
 	testhelper.RunTest(t, map[string][]byte{
@@ -25,6 +28,6 @@ func TestJavascriptFlow(t *testing.T) {
 
 func TestJavascriptClass(t *testing.T) {
 	testhelper.RunTest(t, map[string][]byte{
-		"logger": consoleLogRule,
+		"class_name": classNameRule,
 	}, "testdata/testcases/class", javascript.New)
 }
