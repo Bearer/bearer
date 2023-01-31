@@ -14,7 +14,7 @@ type Query struct {
 	treeQuery       *tree.Query
 	paramToVariable map[string]string
 	equalParams     [][]string
-	paramToContent  map[string]string
+	paramToContent  map[string]map[string]string
 }
 
 func Compile(
@@ -79,17 +79,32 @@ func (query *Query) matchAndTranslateTreeResult(treeResult tree.QueryResult, roo
 	}
 
 	for _, equalParams := range query.equalParams {
-		value := treeResult[equalParams[0]].Content()
+		var equalContent []string
+		for _, equalParam := range equalParams {
+			if node, exists := treeResult[equalParam]; exists {
+				equalContent = append(equalContent, node.Content())
+			}
+		}
 
-		for _, param := range equalParams[1:] {
-			if treeResult[param].Content() != value {
+		if len(equalContent) < 2 {
+			continue
+		}
+
+		value := equalContent[0]
+		for _, content := range equalContent[1:] {
+			if content != value {
 				return nil
 			}
 		}
 	}
 
-	for param, content := range query.paramToContent {
-		if treeResult[param].Content() != content {
+	for param, typedContent := range query.paramToContent {
+		node, exists := treeResult[param]
+		if !exists {
+			continue
+		}
+
+		if content, typeMatched := typedContent[node.Type()]; !typeMatched || node.Content() != content {
 			return nil
 		}
 	}

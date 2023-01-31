@@ -75,6 +75,26 @@ type Implementation interface {
 	// it is natural for `$<ARG>`` to only match the first argument, but
 	// we wouldn't expect `other_call` to be the first expression in the block
 	PatternIsAnchored(node *tree.Node) bool
+	// PatternNodeTypes returns the types to use for a given node. This allows us
+	// to match using equivalent syntax without having to enumerate all the
+	// combinations in rules.
+	//
+	// eg. given a Ruby pattern like this:
+	//   call(verify_mode: OpenSSL::SSL::VERIFY_NONE)
+	// we want to match both of these code examples, despite differences in the
+	// way they parse:
+	//   call(verify_mode: OpenSSL::SSL::VERIFY_NONE)
+	//   call(:verify_mode => OpenSSL::SSL::VERIFY_NONE)
+	PatternNodeTypes(node *tree.Node) []string
+	// TranslatePatternContent converts the content of a pattern node to a
+	// different type. This is used when PatternNodeTypes returns multiple types
+	// for a leaf node.
+	//
+	// eg. given the situation described in the comment for PatternNodeTypes, we
+	// must match against the following content for the symbol:
+	//   call(verify_mode: OpenSSL::SSL::VERIFY_NONE)    -> verify_mode
+	//   call(:verify_mode => OpenSSL::SSL::VERIFY_NONE) -> :verify_mode
+	TranslatePatternContent(fromNodeType, toNodeType, content string) string
 	// DescendIntoDetectionNode returns whether a tree detection search should
 	// proceed down into the given node.
 	//

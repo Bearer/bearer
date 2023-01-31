@@ -1,8 +1,6 @@
 package tree
 
 import (
-	"errors"
-
 	sitter "github.com/smacker/go-tree-sitter"
 )
 
@@ -12,8 +10,6 @@ type Node struct {
 }
 
 type NodeID *sitter.Node
-
-var ErrTerminateWalk = errors.New("terminate walk")
 
 func (node *Node) Debug() string {
 	return node.sitterNode.String()
@@ -115,12 +111,7 @@ func (node *Node) Walk(visit func(node *Node, visitChildren func() error) error)
 		return nil
 	}
 
-	err := visit(node, visitChildren)
-	if err != nil && err != ErrTerminateWalk {
-		return err
-	}
-
-	return nil
+	return visit(node, visitChildren)
 }
 
 func (node *Node) UnifyWith(earlierNode *Node) {

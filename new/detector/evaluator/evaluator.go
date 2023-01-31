@@ -139,7 +139,7 @@ func (evaluator *evaluator) TreeHas(rootNode *langtree.Node, detectorType string
 		}
 
 		if hasDetection {
-			return langtree.ErrTerminateWalk
+			return nil
 		}
 
 		return visitChildren()

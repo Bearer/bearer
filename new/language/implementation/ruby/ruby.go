@@ -181,6 +181,41 @@ func (implementation *rubyImplementation) PatternIsAnchored(node *tree.Node) boo
 	return true
 }
 
+func (implementation *rubyImplementation) PatternNodeTypes(node *tree.Node) []string {
+	parent := node.Parent()
+
+	// Make these equivalent:
+	//   key: value
+	//   :key => value
+	if parent != nil &&
+		parent.Type() == "pair" &&
+		node.Equal(parent.ChildByFieldName("key")) &&
+		(node.Type() == "hash_key_symbol" || node.Type() == "simple_symbol") {
+		return []string{"hash_key_symbol", "simple_symbol"}
+	}
+
+	// Make these equivalent:
+	//  call do ... end
+	//  call { ... }
+	if node.Type() == "block" || node.Type() == "do_block" {
+		return []string{"block", "do_block"}
+	}
+
+	return []string{node.Type()}
+}
+
+func (implementation *rubyImplementation) TranslatePatternContent(fromNodeType, toNodeType, content string) string {
+	if fromNodeType == "hash_key_symbol" && toNodeType == "simple_symbol" {
+		return ":" + content
+	}
+
+	if fromNodeType == "simple_symbol" && toNodeType == "hash_key_symbol" {
+		return content[1:]
+	}
+
+	return content
+}
+
 func (implementation *rubyImplementation) DescendIntoDetectionNode(node *tree.Node) bool {
 	parent := node.Parent()
 

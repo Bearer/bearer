@@ -52,49 +52,7 @@ risks:
                   end
                 end
           content: |
-            $<!>Net::FTP.open() do
-              $<_>
-            end
-        - filename: pkg/commands/process/settings/rules/ruby/lang/insecure_ftp/testdata/ftp_open_with_datatype.rb
-          line_number: 3
-          parent:
-            line_number: 3
-            content: |-
-                Net::FTP.open("ftp.site.com") do |ftp|
-                  file = Tempfile.new("user_data")
-                  begin
-                    file << user.email
-                    file.close
-
-                    ftp.puttextfile(file.path, "/users/123.json")
-                  ensure
-                    file.close!
-                  end
-                end
-          content: |
-            $<!>Net::FTP.open() do
-              $<_>
-            end
-        - filename: pkg/commands/process/settings/rules/ruby/lang/insecure_ftp/testdata/ftp_open_with_datatype.rb
-          line_number: 3
-          parent:
-            line_number: 3
-            content: |-
-                Net::FTP.open("ftp.site.com") do |ftp|
-                  file = Tempfile.new("user_data")
-                  begin
-                    file << user.email
-                    file.close
-
-                    ftp.puttextfile(file.path, "/users/123.json")
-                  ensure
-                    file.close!
-                  end
-                end
-          content: |
-            $<!>Net::FTP.open() do
-              $<_>
-            end
+            Net::FTP.open()$<...>
 components: []
 
 
