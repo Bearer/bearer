@@ -74,6 +74,16 @@ func TestRubyLangHttpPostInsecureWithDataDataflow(t *testing.T) {
 	runRulesTest("ruby/lang/http_post_insecure_with_data", "dataflow", t)
 }
 
+func TestRubyLangInsecureFtpSummary(t *testing.T) {
+	t.Parallel()
+	runRulesTest("ruby/lang/insecure_ftp", "summary", t)
+}
+
+func TestRubyLangInsecureFtpDataflow(t *testing.T) {
+	t.Parallel()
+	runRulesTest("ruby/lang/insecure_ftp", "dataflow", t)
+}
+
 func TestRubyLangJwtSummary(t *testing.T) {
 	t.Parallel()
 	runRulesTest("ruby/lang/jwt", "summary", t)
@@ -142,16 +152,6 @@ func TestRubyRailsInsecureCommunicationSummary(t *testing.T) {
 func TestRubyRailsInsecureCommunicationDataflow(t *testing.T) {
 	t.Parallel()
 	runRulesTest("ruby/rails/insecure_communication", "dataflow", t)
-}
-
-func TestRubyRailsInsecureFtpSummary(t *testing.T) {
-	t.Parallel()
-	runRulesTest("ruby/rails/insecure_ftp", "summary", t)
-}
-
-func TestRubyRailsInsecureFtpDataflow(t *testing.T) {
-	t.Parallel()
-	runRulesTest("ruby/rails/insecure_ftp", "dataflow", t)
 }
 
 func TestRubyRailsInsecureSmtpSummary(t *testing.T) {

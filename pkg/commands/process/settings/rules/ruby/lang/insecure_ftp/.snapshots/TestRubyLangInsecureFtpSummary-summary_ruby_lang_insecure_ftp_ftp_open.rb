@@ -1,10 +1,10 @@
 low:
     - policy_name: ""
       policy_dsrid: DSR-2
-      policy_display_id: ruby_rails_insecure_ftp
+      policy_display_id: ruby_lang_insecure_ftp
       policy_description: Only communicate using SFTP connections.
       line_number: 3
-      filename: pkg/commands/process/settings/rules/ruby/rails/insecure_ftp/testdata/ftp_open.rb
+      filename: pkg/commands/process/settings/rules/ruby/lang/insecure_ftp/testdata/ftp_open.rb
       parent_line_number: 3
       parent_content: |-
         Net::FTP.open("example.com") do |ftp|
