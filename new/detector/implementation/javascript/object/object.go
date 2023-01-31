@@ -5,7 +5,6 @@ import (
 
 	"github.com/bearer/curio/new/detector/types"
 	"github.com/bearer/curio/new/language/tree"
-	"github.com/rs/zerolog/log"
 
 	generictypes "github.com/bearer/curio/new/detector/implementation/generic/types"
 	languagetypes "github.com/bearer/curio/new/language/types"
@@ -90,7 +89,6 @@ func (detector *objectDetector) DetectAt(
 	node *tree.Node,
 	evaluator types.Evaluator,
 ) ([]interface{}, error) {
-	log.Debug().Msgf("%s", node.Debug())
 	detections, err := detector.getobject(node, evaluator)
 	if len(detections) != 0 || err != nil {
 		return detections, err

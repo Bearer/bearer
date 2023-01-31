@@ -3,10 +3,7 @@ languages:
   - javascript
 patterns:
   - pattern: |
-      class $<DATA_TYPE> {
-        Encrypts(){
-        }
-      }
+      $<DATA_TYPE>
     filters:
       - variable: DATA_TYPE
         detection: datatype

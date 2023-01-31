@@ -11,7 +11,7 @@ import (
 //go:embed testdata/console_log.yml
 var consoleLogRule []byte
 
-//go:embed testdata/class_name.yml
+//go:embed testdata/class.yml
 var classNameRule []byte
 
 func TestJavascriptObject(t *testing.T) {

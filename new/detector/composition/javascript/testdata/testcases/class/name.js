@@ -1,3 +1,1 @@
-class User {
-	Encrypts() {}
-}
+class User {}
