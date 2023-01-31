@@ -2,26 +2,18 @@ package inventory
 
 import (
 	"encoding/json"
+	"fmt"
 	"strings"
 
 	"github.com/bearer/curio/pkg/classification/db"
 	"github.com/bearer/curio/pkg/commands/process/settings"
 	"github.com/bearer/curio/pkg/util/output"
 	"github.com/bearer/curio/pkg/util/rego"
-	"github.com/fatih/color"
 	"golang.org/x/exp/maps"
 	"golang.org/x/exp/slices"
 
 	"github.com/bearer/curio/pkg/report/output/dataflow"
 )
-
-var underline = color.New(color.Underline).SprintFunc()
-var severityColorFns = map[string]func(x ...interface{}) string{
-	settings.LevelCritical: color.New(color.FgRed).SprintFunc(),
-	settings.LevelHigh:     color.New(color.FgHiRed).SprintFunc(),
-	settings.LevelMedium:   color.New(color.FgYellow).SprintFunc(),
-	settings.LevelLow:      color.New(color.FgBlue).SprintFunc(),
-}
 
 type RuleInput struct {
 	RuleId         string             `json:"rule_id" yaml:"rule_id"`
@@ -66,6 +58,31 @@ type SubjectInventoryResult struct {
 	MediumRiskFailureCount   int    `json:"medium_risk_failure_count" yaml:"medium_risk_failure_count"`
 	LowRiskFailureCount      int    `json:"low_risk_failure_count" yaml:"low_risk_failure_count"`
 	RulesPassedCount         int    `json:"rules_passed_count" yaml:"rules_passed_count"`
+}
+
+func BuildCsvString(dataflow *dataflow.DataFlow, config settings.Config) (*strings.Builder, error) {
+	csvStr := &strings.Builder{}
+	csvStr.WriteString("Subject,Data Types,Detection Count,Critical Risk Failure,High Risk Failure,Medium Risk Failure,Low Risk Failure,RulesPassed\n")
+	result, err := GetOutput(dataflow, config)
+	if err != nil {
+		return csvStr, err
+	}
+
+	for _, item := range result {
+		itemArr := []string{
+			item.DataSubject,
+			item.DataType,
+			fmt.Sprint(item.DetectionCount),
+			fmt.Sprint(item.CriticalRiskFailureCount),
+			fmt.Sprint(item.HighRiskFailureCount),
+			fmt.Sprint(item.MediumRiskFailureCount),
+			fmt.Sprint(item.LowRiskFailureCount),
+			fmt.Sprint(item.RulesPassedCount),
+		}
+		csvStr.WriteString(strings.Join(itemArr, ",") + "\n")
+	}
+
+	return csvStr, nil
 }
 
 func GetOutput(dataflow *dataflow.DataFlow, config settings.Config) ([]SubjectInventoryResult, error) {

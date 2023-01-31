@@ -66,6 +66,15 @@ func ReportSummary(report types.Report, output *zerolog.Event, config settings.C
 	return
 }
 
+func ReportCSV(report types.Report, output *zerolog.Event, config settings.Config) error {
+	switch config.Report.Report {
+	case flag.ReportPrivacy:
+		return getPrivacyReportCsvOutput(report, output, config)
+	}
+
+	return fmt.Errorf("csv not supported for report type: %s", config.Report.Report)
+}
+
 func ReportJSON(report types.Report, output *zerolog.Event, config settings.Config) error {
 	outputDetections, err := getReportOutput(report, config)
 	if err != nil {
@@ -113,6 +122,21 @@ func getReportOutput(report types.Report, config settings.Config) (any, error) {
 	}
 
 	return nil, fmt.Errorf(`--report flag "%s" is not supported`, config.Report.Report)
+}
+
+func getPrivacyReportCsvOutput(report types.Report, output *zerolog.Event, config settings.Config) error {
+	dataflow, err := getDataflow(report, config, true)
+	if err != nil {
+		return err
+	}
+
+	csvString, err := inventory.BuildCsvString(dataflow, config)
+	if err != nil {
+		return err
+	}
+
+	output.Msg(csvString.String())
+	return nil
 }
 
 func getPrivacyReportOutput(report types.Report, config settings.Config) ([]inventory.SubjectInventoryResult, error) {
