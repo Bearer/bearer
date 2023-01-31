@@ -7,6 +7,7 @@ data_types:
               line_number: 1
               field_name: user_id
               object_name: user
+              subject_name: User
 risks:
     - detector_id: ruby_third_parties_new_relic
       data_types:
@@ -20,6 +21,7 @@ risks:
                 content: 'NewRelic::Agent.add_custom_attributes(user_id: user.user_id)'
               field_name: user_id
               object_name: user
+              subject_name: User
 components: []
 
 

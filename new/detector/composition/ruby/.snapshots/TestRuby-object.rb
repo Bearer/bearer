@@ -33,15 +33,35 @@
 									}
 								},
 								"Classification": {
-									"name": "name",
-									"data_type": {
-										"name": "Fullname",
-										"uuid": "1617291b-bc22-4267-ad5e-8054b2505958",
-										"category_uuid": "14124881-6b92-4fc5-8005-ea7c1c09592e"
-									},
+									"name": "user",
 									"decision": {
 										"state": "valid",
-										"reason": "known_pattern"
+										"reason": "valid_object_with_valid_properties"
+									}
+								},
+								"Properties": [
+									{
+										"Name": "name",
+										"Detection": {
+											"MatchNode": {},
+											"ContextNode": null,
+											"Data": {
+												"Name": "name"
+											}
+										},
+										"Classification": {
+											"name": "name",
+											"subject_name": "User",
+											"data_type": {
+												"name": "Fullname",
+												"uuid": "1617291b-bc22-4267-ad5e-8054b2505958",
+												"category_uuid": "14124881-6b92-4fc5-8005-ea7c1c09592e"
+											},
+											"decision": {
+												"state": "valid",
+												"reason": "known_pattern"
+											}
+										}
 									}
 								}
 							}

@@ -7,10 +7,12 @@ data_types:
               line_number: 2
               field_name: email
               object_name: User
+              subject_name: User
             - filename: pkg/commands/process/settings/rules/ruby/rails/default_encryption/testdata/application_level_encryption_missing/structure_sql/app/models/user.rb
               line_number: 2
               field_name: email
               object_name: User
+              subject_name: User
         - name: schema_rb
           locations:
             - filename: pkg/commands/process/settings/rules/ruby/rails/default_encryption/testdata/application_level_encryption_missing/schema_rb/db/schema.rb
@@ -29,6 +31,7 @@ data_types:
                       end
               field_name: email
               object_name: users
+              subject_name: User
         - name: sql_lang_create_table
           locations:
             - filename: pkg/commands/process/settings/rules/ruby/rails/default_encryption/testdata/application_level_encryption_missing/structure_sql/db/structure.sql
@@ -48,6 +51,7 @@ data_types:
                     )
               field_name: email
               object_name: users
+              subject_name: User
     - name: Fullname
       detectors:
         - name: schema_rb
@@ -67,6 +71,7 @@ data_types:
                       end
               field_name: name
               object_name: users
+              subject_name: User
         - name: sql_lang_create_table
           locations:
             - filename: pkg/commands/process/settings/rules/ruby/rails/default_encryption/testdata/application_level_encryption_missing/structure_sql/db/structure.sql
@@ -85,6 +90,7 @@ data_types:
                     )
               field_name: name
               object_name: users
+              subject_name: User
     - name: Passwords
       detectors:
         - name: schema_rb
@@ -107,6 +113,7 @@ data_types:
                       end
               field_name: encrypted_password
               object_name: users
+              subject_name: User
         - name: sql_lang_create_table
           locations:
             - filename: pkg/commands/process/settings/rules/ruby/rails/default_encryption/testdata/application_level_encryption_missing/structure_sql/db/structure.sql
@@ -125,6 +132,7 @@ data_types:
                     )
               field_name: password
               object_name: users
+              subject_name: User
 risks:
     - detector_id: ruby_rails_default_encryption
       locations:

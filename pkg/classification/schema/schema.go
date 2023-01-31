@@ -25,9 +25,10 @@ func (datatype ClassifiedDatatype) GetClassification() interface{} {
 }
 
 type Classification struct {
-	Name     string                          `json:"name" yaml:"name"`
-	DataType *db.DataType                    `json:"data_type,omitempty"`
-	Decision classify.ClassificationDecision `json:"decision" yaml:"decision"`
+	Name        string                          `json:"name" yaml:"name"`
+	SubjectName *string                         `json:"subject_name,omitempty" yaml:"subject_name,omitempty"`
+	DataType    *db.DataType                    `json:"data_type,omitempty"`
+	Decision    classify.ClassificationDecision `json:"decision" yaml:"decision"`
 }
 
 type Classifier struct {
@@ -98,9 +99,15 @@ func (classifier *Classifier) Classify(data ClassificationRequest) *ClassifiedDa
 
 	matchedKnownPersonObject := classifier.matchKnownPersonObjectPatterns(normalizedName, false)
 	if matchedKnownPersonObject != nil {
-		// add data type to object
-		classifiedDatatype.Classification.DataType = &matchedKnownPersonObject.DataType
-		return classifier.classifyKnownObject(classifiedDatatype, data.Value, data.DetectorType)
+		// FIXME: remove unimplemented fallback (possibly causing Unique Id bug)
+		// classifiedDatatype.Classification.DataType = &matchedKnownPersonObject.DataType
+
+		var subjectName *string
+		if matchedKnownPersonObject.SubjectName != "" {
+			subjectName = &matchedKnownPersonObject.SubjectName
+		}
+
+		return classifier.classifyKnownObject(classifiedDatatype, data.Value, data.DetectorType, subjectName)
 	}
 
 	// do we have an object with unknown or unknown extended properties?
@@ -220,31 +227,36 @@ func (classifier *Classifier) matchKnownPersonObjectPatterns(name string, matchA
 	return matchedPattern
 }
 
-func (classifier *Classifier) classifyKnownObject(classifiedDatatype *ClassifiedDatatype, detection *ClassificationRequestDetection, detectorType detectors.Type) *ClassifiedDatatype {
+func (classifier *Classifier) classifyKnownObject(
+	classifiedDatatype *ClassifiedDatatype,
+	detection *ClassificationRequestDetection,
+	detectorType detectors.Type,
+	subjectName *string,
+) *ClassifiedDatatype {
 	isJSDetection := classify.IsJSDetection(detectorType)
 
 	validProperties := false
 	for i, property := range classifiedDatatype.Properties {
 		if isJSDetection && classify.PropertyStopWordDetected(property.Classification.Name) {
-			classifiedDatatype.Properties[i] = classifyAsInvalid(detection.Properties[i], "stop_word")
+			classifiedDatatype.Properties[i] = classifyAsInvalid(detection.Properties[i], "stop_word", subjectName)
 			continue
 		}
 
 		matchedKnownObject := classifier.matchObjectPatterns(property.Classification.Name, detection.Properties[i].SimpleType, db.KnownObject)
 		if matchedKnownObject != nil {
 			validProperties = true
-			classifiedDatatype.Properties[i] = classifyAsValid(detection.Properties[i], classifier.datatypeFromPattern(matchedKnownObject), "known_pattern")
+			classifiedDatatype.Properties[i] = classifyAsValid(detection.Properties[i], classifier.datatypeFromPattern(matchedKnownObject), "known_pattern", subjectName)
 			continue
 		}
 
 		matchedKnownIdentifier := classifier.matchKnownPersonObjectPatterns(normalize_key.Normalize(property.Name), true)
 		if matchedKnownIdentifier != nil {
 			validProperties = true
-			classifiedDatatype.Properties[i] = classifyAsValid(detection.Properties[i], matchedKnownIdentifier.DataType, "known_database_identifier")
+			classifiedDatatype.Properties[i] = classifyAsValid(detection.Properties[i], matchedKnownIdentifier.DataType, "known_database_identifier", subjectName)
 			continue
 		}
 
-		classifiedDatatype.Properties[i] = classifyAsInvalid(detection.Properties[i], "invalid_property")
+		classifiedDatatype.Properties[i] = classifyAsInvalid(detection.Properties[i], "invalid_property", subjectName)
 
 	}
 
@@ -271,32 +283,32 @@ func (classifier *Classifier) classifyKnownObject(classifiedDatatype *Classified
 func (classifier *Classifier) classifyObjectWithUnknownProperties(classifiedDatatype *ClassifiedDatatype, detection *ClassificationRequestDetection, isJSDetection bool) *ClassifiedDatatype {
 	for i, property := range classifiedDatatype.Properties {
 		if isJSDetection && classify.PropertyStopWordDetected(normalize_key.Normalize(property.Name)) {
-			classifiedDatatype.Properties[i] = classifyAsInvalid(detection.Properties[i], "stop_word")
+			classifiedDatatype.Properties[i] = classifyAsInvalid(detection.Properties[i], "stop_word", nil)
 			continue
 		}
 
 		// check unknown object patterns
 		unknownObject := classifier.matchObjectPatterns(normalize_key.Normalize(property.Name), detection.Properties[i].SimpleType, db.UnknownObject)
 		if unknownObject != nil {
-			classifiedDatatype.Properties[i] = classifyAsValid(detection.Properties[i], classifier.datatypeFromPattern(unknownObject), "valid_unknown_pattern")
+			classifiedDatatype.Properties[i] = classifyAsValid(detection.Properties[i], classifier.datatypeFromPattern(unknownObject), "valid_unknown_pattern", nil)
 			continue
 		}
 
 		// check extended patterns
 		extendedUnknownObject := classifier.matchObjectPatterns(normalize_key.Normalize(property.Name), detection.Properties[i].SimpleType, db.ExtendedUnknownObject)
 		if extendedUnknownObject != nil {
-			classifiedDatatype.Properties[i] = classifyAsValid(detection.Properties[i], classifier.datatypeFromPattern(extendedUnknownObject), "valid_extended_pattern")
+			classifiedDatatype.Properties[i] = classifyAsValid(detection.Properties[i], classifier.datatypeFromPattern(extendedUnknownObject), "valid_extended_pattern", nil)
 			continue
 		}
 
 		// check identifier patterns
 		matchedKnownIdentifier := classifier.matchKnownPersonObjectPatterns(normalize_key.Normalize(property.Name), true)
 		if matchedKnownIdentifier != nil {
-			classifiedDatatype.Properties[i] = classifyAsValid(detection.Properties[i], matchedKnownIdentifier.DataType, "known_database_identifier")
+			classifiedDatatype.Properties[i] = classifyAsValid(detection.Properties[i], matchedKnownIdentifier.DataType, "known_database_identifier", nil)
 			continue
 		}
 
-		classifiedDatatype.Properties[i] = classifyAsInvalid(detection.Properties[i], "invalid_property")
+		classifiedDatatype.Properties[i] = classifyAsInvalid(detection.Properties[i], "invalid_property", nil)
 	}
 
 	classifiedDatatype.Classification.Decision = classify.ClassificationDecision{
@@ -311,24 +323,24 @@ func (classifier *Classifier) classifyObjectWithIdentifierProperties(classifiedD
 	associatedObjectProperties := false
 	for i, property := range classifiedDatatype.Properties {
 		if isJSDetection && classify.PropertyStopWordDetected(normalize_key.Normalize(property.Name)) {
-			classifiedDatatype.Properties[i] = classifyAsInvalid(detection.Properties[i], "stop_word")
+			classifiedDatatype.Properties[i] = classifyAsInvalid(detection.Properties[i], "stop_word", nil)
 			continue
 		}
 
 		matchedDBIdentifier := classifier.matchKnownPersonObjectPatterns(normalize_key.Normalize(property.Name), true)
 		if matchedDBIdentifier != nil {
-			classifiedDatatype.Properties[i] = classifyAsValid(detection.Properties[i], matchedDBIdentifier.DataType, "known_database_identifier")
+			classifiedDatatype.Properties[i] = classifyAsValid(detection.Properties[i], matchedDBIdentifier.DataType, "known_database_identifier", nil)
 			continue
 		}
 
 		matchedAssociatedObjectPattern := classifier.matchObjectPatterns(normalize_key.Normalize(property.Name), detection.Properties[i].SimpleType, db.AssociatedObject)
 		if matchedAssociatedObjectPattern != nil {
 			associatedObjectProperties = true
-			classifiedDatatype.Properties[i] = classifyAsValid(detection.Properties[i], classifier.datatypeFromPattern(matchedAssociatedObjectPattern), "valid_associated_object_pattern")
+			classifiedDatatype.Properties[i] = classifyAsValid(detection.Properties[i], classifier.datatypeFromPattern(matchedAssociatedObjectPattern), "valid_associated_object_pattern", nil)
 			continue
 		}
 
-		classifiedDatatype.Properties[i] = classifyAsInvalid(detection.Properties[i], "invalid_property")
+		classifiedDatatype.Properties[i] = classifyAsInvalid(detection.Properties[i], "invalid_property", nil)
 
 	}
 
@@ -407,18 +419,19 @@ func classifyObjectAsInvalid(D *ClassificationRequestDetection, reason string) *
 
 	// schema object did not pass initial checks ; mark all fields as invalid
 	for _, property := range D.Properties {
-		classifiedDatatype.Properties = append(classifiedDatatype.Properties, classifyAsInvalid(property, "belongs_to_invalid_object"))
+		classifiedDatatype.Properties = append(classifiedDatatype.Properties, classifyAsInvalid(property, "belongs_to_invalid_object", nil))
 	}
 
 	return classifiedDatatype
 }
 
-func classifyAsValid(D *ClassificationRequestDetection, datatype db.DataType, reason string) *ClassifiedDatatype {
+func classifyAsValid(D *ClassificationRequestDetection, datatype db.DataType, reason string, subjectName *string) *ClassifiedDatatype {
 	return &ClassifiedDatatype{
 		Name: D.Name,
 		Classification: Classification{
-			Name:     normalize_key.Normalize(D.Name),
-			DataType: &datatype,
+			Name:        normalize_key.Normalize(D.Name),
+			DataType:    &datatype,
+			SubjectName: subjectName,
 			Decision: classify.ClassificationDecision{
 				State:  classify.Valid,
 				Reason: reason,
@@ -427,11 +440,12 @@ func classifyAsValid(D *ClassificationRequestDetection, datatype db.DataType, re
 	}
 }
 
-func classifyAsInvalid(D *ClassificationRequestDetection, reason string) *ClassifiedDatatype {
+func classifyAsInvalid(D *ClassificationRequestDetection, reason string, subjectName *string) *ClassifiedDatatype {
 	return &ClassifiedDatatype{
 		Name: D.Name,
 		Classification: Classification{
-			Name: normalize_key.Normalize(D.Name),
+			Name:        normalize_key.Normalize(D.Name),
+			SubjectName: subjectName,
 			Decision: classify.ClassificationDecision{
 				State:  classify.Invalid,
 				Reason: reason,

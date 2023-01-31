@@ -7,6 +7,7 @@ data_types:
               line_number: 3
               field_name: password
               object_name: Student
+              subject_name: User
 components: []
 
 
