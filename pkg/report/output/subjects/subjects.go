@@ -1,4 +1,4 @@
-package inventory
+package subjects
 
 import (
 	"encoding/json"
@@ -10,9 +10,9 @@ import (
 	"github.com/bearer/curio/pkg/util/output"
 	"github.com/bearer/curio/pkg/util/rego"
 	"golang.org/x/exp/maps"
-	"golang.org/x/exp/slices"
 
 	"github.com/bearer/curio/pkg/report/output/dataflow"
+	"github.com/bearer/curio/pkg/report/output/summary"
 )
 
 type RuleInput struct {
@@ -38,18 +38,18 @@ type RuleFailureSummary struct {
 	TriggeredRules           map[string]bool `json:"triggered_rules" yaml:"triggered_rules"`
 }
 
-type SubjectInventoryInput struct {
+type InventoryInput struct {
 	Dataflow       *dataflow.DataFlow `json:"dataflow" yaml:"dataflow"`
 	DataCategories []db.DataCategory  `json:"data_categories" yaml:"data_categories"`
 }
 
-type SubjectInventoryOutput struct {
+type InventoryOutput struct {
 	DataType    string `json:"name,omitempty" yaml:"name"`
 	DataSubject string `json:"subject_name,omitempty" yaml:"subject_name"`
 	LineNumber  int    `json:"line_number,omitempty" yaml:"line_number"`
 }
 
-type SubjectInventoryResult struct {
+type InventoryResult struct {
 	DataSubject              string `json:"subject_name,omitempty" yaml:"subject_name"`
 	DataType                 string `json:"name,omitempty" yaml:"name"`
 	DetectionCount           int    `json:"detection_count" yaml:"detection_count"`
@@ -85,14 +85,14 @@ func BuildCsvString(dataflow *dataflow.DataFlow, config settings.Config) (*strin
 	return csvStr, nil
 }
 
-func GetOutput(dataflow *dataflow.DataFlow, config settings.Config) ([]SubjectInventoryResult, error) {
+func GetOutput(dataflow *dataflow.DataFlow, config settings.Config) ([]InventoryResult, error) {
 	if !config.Scan.Quiet {
 		output.StdErrLogger().Msgf("Evaluating rules")
 	}
 
 	bar := output.GetProgressBar(len(config.Rules), config, "rules")
 
-	result := make(map[string]SubjectInventoryResult)
+	result := make(map[string]InventoryResult)
 	ruleFailures := make(map[string]RuleFailureSummary)
 	localRuleCount := 0
 	for _, rule := range config.Rules {
@@ -137,7 +137,7 @@ func GetOutput(dataflow *dataflow.DataFlow, config settings.Config) ([]SubjectIn
 			}
 
 			for _, ruleOutputFailure := range ruleOutput["local_rule_failure"] {
-				key := ruleOutputFailure.DataSubject + ":" + strings.ToUpper(ruleOutputFailure.DataType)
+				key := buildKey(ruleOutputFailure.DataSubject, ruleOutputFailure.DataType)
 				ruleFailure, ok := ruleFailures[key]
 				if !ok {
 					// key not found; create a new failure obj
@@ -151,7 +151,7 @@ func GetOutput(dataflow *dataflow.DataFlow, config settings.Config) ([]SubjectIn
 				}
 
 				// count severity
-				switch findHighestSeverity(ruleOutputFailure.CategoryGroups, rule.Severity) {
+				switch summary.FindHighestSeverity(ruleOutputFailure.CategoryGroups, rule.Severity) {
 				case "critical":
 					ruleFailure.CriticalRiskFailureCount += 1
 				case "high":
@@ -174,9 +174,8 @@ func GetOutput(dataflow *dataflow.DataFlow, config settings.Config) ([]SubjectIn
 
 	// get inventory result
 	inventoryReportPolicy := config.Policies["inventory_report"]
-
 	rs, err := rego.RunQuery(inventoryReportPolicy.Query,
-		SubjectInventoryInput{
+		InventoryInput{
 			Dataflow:       dataflow,
 			DataCategories: db.DefaultWithContext(config.Scan.Context).DataCategories,
 		},
@@ -190,37 +189,29 @@ func GetOutput(dataflow *dataflow.DataFlow, config settings.Config) ([]SubjectIn
 			return nil, err
 		}
 
-		var inventoryOutput map[string][]SubjectInventoryOutput
+		var inventoryOutput map[string][]InventoryOutput
 		err = json.Unmarshal(jsonRes, &inventoryOutput)
 		if err != nil {
 			return nil, err
 		}
 
-		for _, item := range inventoryOutput["report_items"] {
-			key := item.DataSubject + ":" + strings.ToUpper(item.DataType)
+		for _, outputItem := range inventoryOutput["report_items"] {
+			key := buildKey(outputItem.DataSubject, outputItem.DataType)
 			inventoryItem, ok := result[key]
 			if !ok {
 				// key not found, add a new item
-				inventoryItem = SubjectInventoryResult{
-					DataSubject: item.DataSubject,
-					DataType:    item.DataType,
+				ruleFailure := ruleFailures[key]
+				inventoryItem = InventoryResult{
+					DataSubject:              outputItem.DataSubject,
+					DataType:                 outputItem.DataType,
+					CriticalRiskFailureCount: ruleFailure.CriticalRiskFailureCount,
+					HighRiskFailureCount:     ruleFailure.HighRiskFailureCount,
+					MediumRiskFailureCount:   ruleFailure.MediumRiskFailureCount,
+					LowRiskFailureCount:      ruleFailure.LowRiskFailureCount,
+					RulesPassedCount:         localRuleCount - len(ruleFailure.TriggeredRules),
 				}
 			}
 			inventoryItem.DetectionCount += 1
-
-			result[key] = inventoryItem
-		}
-
-		for _, item := range result {
-			key := item.DataSubject + ":" + strings.ToUpper(item.DataType)
-			ruleFailure := ruleFailures[key]
-			inventoryItem := result[key]
-
-			inventoryItem.CriticalRiskFailureCount = ruleFailure.CriticalRiskFailureCount
-			inventoryItem.HighRiskFailureCount = ruleFailure.HighRiskFailureCount
-			inventoryItem.MediumRiskFailureCount = ruleFailure.MediumRiskFailureCount
-			inventoryItem.LowRiskFailureCount = ruleFailure.LowRiskFailureCount
-			inventoryItem.RulesPassedCount = localRuleCount - len(ruleFailure.TriggeredRules)
 
 			result[key] = inventoryItem
 		}
@@ -229,21 +220,6 @@ func GetOutput(dataflow *dataflow.DataFlow, config settings.Config) ([]SubjectIn
 	return maps.Values(result), nil
 }
 
-func findHighestSeverity(groups []string, severity map[string]string) string {
-	var severities []string
-	for _, group := range groups {
-		severities = append(severities, severity[group])
-	}
-
-	if slices.Contains(severities, "critical") {
-		return settings.LevelCritical
-	} else if slices.Contains(severities, "high") {
-		return settings.LevelHigh
-	} else if slices.Contains(severities, "medium") {
-		return settings.LevelMedium
-	} else if slices.Contains(severities, "low") {
-		return settings.LevelLow
-	}
-
-	return severity["default"]
+func buildKey(dataSubject string, dataType string) string {
+	return dataSubject + ":" + strings.ToUpper(dataType)
 }

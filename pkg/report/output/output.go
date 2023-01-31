@@ -9,7 +9,7 @@ import (
 	"github.com/bearer/curio/pkg/commands/process/settings"
 	"github.com/bearer/curio/pkg/flag"
 	"github.com/bearer/curio/pkg/report/output/dataflow"
-	"github.com/bearer/curio/pkg/report/output/inventory"
+	"github.com/bearer/curio/pkg/report/output/subjects"
 	"github.com/bearer/curio/pkg/report/output/summary"
 	"github.com/google/uuid"
 
@@ -130,7 +130,7 @@ func getPrivacyReportCsvOutput(report types.Report, output *zerolog.Event, confi
 		return err
 	}
 
-	csvString, err := inventory.BuildCsvString(dataflow, config)
+	csvString, err := subjects.BuildCsvString(dataflow, config)
 	if err != nil {
 		return err
 	}
@@ -139,13 +139,13 @@ func getPrivacyReportCsvOutput(report types.Report, output *zerolog.Event, confi
 	return nil
 }
 
-func getPrivacyReportOutput(report types.Report, config settings.Config) ([]inventory.SubjectInventoryResult, error) {
+func getPrivacyReportOutput(report types.Report, config settings.Config) ([]subjects.InventoryResult, error) {
 	dataflow, err := getDataflow(report, config, true)
 	if err != nil {
 		return nil, err
 	}
 
-	return inventory.GetOutput(dataflow, config)
+	return subjects.GetOutput(dataflow, config)
 }
 
 func getSummaryReportOutput(report types.Report, config settings.Config) (map[string][]summary.PolicyResult, error) {
