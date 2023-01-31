@@ -11,7 +11,7 @@ report_items contains item if {
 
   item := {
     "name": data_type.name,
-    "object_name": location.object_name,
+    "subject_name": location.subject_name,
     "line_number": location.line_number
   }
 }

@@ -33,7 +33,7 @@ type RuleInput struct {
 type RuleOutput struct {
 	DataType       string   `json:"name,omitempty" yaml:"name"`
 	CategoryGroups []string `json:"category_groups,omitempty" yaml:"category_groups,omitempty"`
-	DataSubject    string   `json:"object_name,omitempty" yaml:"object_name"`
+	DataSubject    string   `json:"subject_name,omitempty" yaml:"subject_name"`
 	LineNumber     int      `json:"line_number,omitempty" yaml:"line_number"`
 	RuleId         string   `json:"rule_id,omitempty" yaml:"rule_id"`
 }
@@ -53,12 +53,12 @@ type SubjectInventoryInput struct {
 
 type SubjectInventoryOutput struct {
 	DataType    string `json:"name,omitempty" yaml:"name"`
-	DataSubject string `json:"object_name,omitempty" yaml:"object_name"`
+	DataSubject string `json:"subject_name,omitempty" yaml:"subject_name"`
 	LineNumber  int    `json:"line_number,omitempty" yaml:"line_number"`
 }
 
 type SubjectInventoryResult struct {
-	DataSubject              string `json:"object_name,omitempty" yaml:"object_name"`
+	DataSubject              string `json:"subject_name,omitempty" yaml:"subject_name"`
 	DataType                 string `json:"name,omitempty" yaml:"name"`
 	DetectionCount           int    `json:"detection_count" yaml:"detection_count"`
 	CriticalRiskFailureCount int    `json:"critical_risk_failure_count" yaml:"critical_risk_failure_count"`
@@ -120,7 +120,7 @@ func GetOutput(dataflow *dataflow.DataFlow, config settings.Config) ([]SubjectIn
 			}
 
 			for _, ruleOutputFailure := range ruleOutput["local_rule_failure"] {
-				key := strings.ToUpper(ruleOutputFailure.DataSubject) + ":" + strings.ToUpper(ruleOutputFailure.DataType)
+				key := ruleOutputFailure.DataSubject + ":" + strings.ToUpper(ruleOutputFailure.DataType)
 				ruleFailure, ok := ruleFailures[key]
 				if !ok {
 					// key not found; create a new failure obj
@@ -151,6 +151,10 @@ func GetOutput(dataflow *dataflow.DataFlow, config settings.Config) ([]SubjectIn
 		}
 	}
 
+	if !config.Scan.Quiet {
+		output.StdErrLogger().Msgf("Compiling inventory report")
+	}
+
 	// get inventory result
 	inventoryReportPolicy := config.Policies["inventory_report"]
 
@@ -176,7 +180,7 @@ func GetOutput(dataflow *dataflow.DataFlow, config settings.Config) ([]SubjectIn
 		}
 
 		for _, item := range inventoryOutput["report_items"] {
-			key := strings.ToUpper(item.DataSubject) + ":" + strings.ToUpper(item.DataType)
+			key := item.DataSubject + ":" + strings.ToUpper(item.DataType)
 			inventoryItem, ok := result[key]
 			if !ok {
 				// key not found, add a new item
@@ -191,7 +195,7 @@ func GetOutput(dataflow *dataflow.DataFlow, config settings.Config) ([]SubjectIn
 		}
 
 		for _, item := range result {
-			key := strings.ToUpper(item.DataSubject) + ":" + strings.ToUpper(item.DataType)
+			key := item.DataSubject + ":" + strings.ToUpper(item.DataType)
 			ruleFailure := ruleFailures[key]
 			inventoryItem := result[key]
 

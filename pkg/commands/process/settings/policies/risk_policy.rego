@@ -108,7 +108,7 @@ local_rule_failure contains item if {
 	item := {
     "name": data_type.name,
 		"category_groups": data.bearer.common.groups_for_datatype(data_type),
-    "object_name": location.object_name,
+    "subject_name": location.subject_name,
     "line_number": location.line_number,
     "rule_id": input.rule.id
   }
