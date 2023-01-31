@@ -12,6 +12,7 @@ import (
 	"github.com/bearer/curio/new/language/tree"
 	languagetypes "github.com/bearer/curio/new/language/types"
 	"github.com/bearer/curio/pkg/parser/nodeid"
+	"github.com/rs/zerolog/log"
 )
 
 type InputParams struct {
@@ -52,6 +53,8 @@ func Build(
 		return nil, err
 	}
 	defer tree.Close()
+
+	log.Debug().Msgf("tree is: %s", tree.RootNode().Debug())
 
 	if tree.RootNode().ChildCount() != 1 {
 		return nil, fmt.Errorf("expecting 1 node but got %d", tree.RootNode().ChildCount())

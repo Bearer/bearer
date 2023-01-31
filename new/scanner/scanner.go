@@ -37,6 +37,10 @@ func Setup(config *settings.Config, classifier *classification.Classifier) (err 
 			constructor: ruby.New,
 			name:        "ruby",
 		},
+		{
+			constructor: javascript.New,
+			name:        "javascript",
+		},
 	}
 
 	for _, instantiatior := range toInstantiate {

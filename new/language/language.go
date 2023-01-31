@@ -5,6 +5,7 @@ import (
 
 	"github.com/bearer/curio/new/language/base"
 	"github.com/bearer/curio/new/language/implementation"
+	"github.com/bearer/curio/new/language/implementation/javascript"
 	"github.com/bearer/curio/new/language/implementation/ruby"
 	"github.com/bearer/curio/new/language/types"
 )
@@ -22,6 +23,8 @@ func getImplementation(name string) (implementation.Implementation, error) {
 	switch name {
 	case "ruby":
 		return ruby.Get(), nil
+	case "javascript":
+		return javascript.Get(), nil
 	default:
 		return nil, fmt.Errorf("unsupported language '%s'", name)
 	}

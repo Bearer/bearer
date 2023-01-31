@@ -16,8 +16,6 @@ import (
 	"gopkg.in/yaml.v2"
 )
 
-var TrimPath = "testdata/testcases/"
-
 func RunTest(t *testing.T,
 	rules map[string][]byte,
 	testCasesPath string,
@@ -57,7 +55,7 @@ func RunTest(t *testing.T,
 			return nil
 		}
 
-		files = append(files, strings.TrimPrefix(path, TrimPath))
+		files = append(files, strings.TrimPrefix(path, testCasesPath))
 		return nil
 	})
 	if err != nil {
@@ -83,7 +81,10 @@ func RunTest(t *testing.T,
 	}
 
 	for _, testCase := range fileInfos {
-		t.Run(testCase.RelativePath, func(t *testing.T) {
+		ext := filepath.Ext(testCase.RelativePath)
+		testName := strings.TrimSuffix(testCase.RelativePath, ext) + ".json"
+
+		t.Run(testName, func(t *testing.T) {
 			customDetections, err := composition.DetectFromFile(testCase)
 			if err != nil {
 				t.Fatal(err)
