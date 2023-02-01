@@ -46,7 +46,6 @@ type Flags struct {
 	RuleFlagGroup    *RuleFlagGroup
 	ProcessFlagGroup *ProcessFlagGroup
 	ScanFlagGroup    *ScanFlagGroup
-	WorkerFlagGroup  *WorkerFlagGroup
 	GeneralFlagGroup *GeneralFlagGroup
 }
 
@@ -55,7 +54,6 @@ type Options struct {
 	RepoOptions
 	ReportOptions
 	RuleOptions
-	WorkerOptions
 	ScanOptions
 	GeneralOptions
 }
@@ -137,13 +135,6 @@ func getStringSlice(flag *Flag) []string {
 	return v
 }
 
-func getInt(flag *Flag) int {
-	if flag == nil {
-		return 0
-	}
-	return viper.GetInt(flag.ConfigName)
-}
-
 func getBool(flag *Flag) bool {
 	if flag == nil {
 		return false
@@ -172,9 +163,6 @@ func (f *Flags) groups() []FlagGroup {
 	}
 	if f.GeneralFlagGroup != nil {
 		groups = append(groups, f.GeneralFlagGroup)
-	}
-	if f.WorkerFlagGroup != nil {
-		groups = append(groups, f.WorkerFlagGroup)
 	}
 	if f.ProcessFlagGroup != nil {
 		groups = append(groups, f.ProcessFlagGroup)
@@ -264,10 +252,6 @@ func (f *Flags) ToOptions(args []string) (Options, error) {
 
 	if f.RuleFlagGroup != nil {
 		opts.RuleOptions = f.RuleFlagGroup.ToOptions(args)
-	}
-
-	if f.WorkerFlagGroup != nil {
-		opts.WorkerOptions = f.WorkerFlagGroup.ToOptions()
 	}
 
 	if f.ScanFlagGroup != nil {

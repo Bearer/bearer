@@ -15,14 +15,4 @@ scan:
     internal-domains: []
     quiet: false
     skip-path: []
-worker:
-    existing-worker: ""
-    file-size-max: 2000000
-    files-to-batch: 1
-    memory-max: 800000000
-    timeout: 10m0s
-    timeout-file-max: 30s
-    timeout-file-min: 5s
-    timeout-file-second-per-bytes: 10000
-    timeout-worker-online: 1m0s
 

@@ -196,7 +196,13 @@ func (r *runner) scanArtifact(ctx context.Context, opts flag.Options) (types.Rep
 
 // Run performs artifact scanning
 func Run(ctx context.Context, opts flag.Options, targetKind TargetKind) (err error) {
-	ctx, cancel := context.WithTimeout(ctx, opts.Timeout)
+	scanSettings, err := settings.FromOptions(opts)
+	scanSettings.Target = opts.Target
+	if err != nil {
+		return err
+	}
+
+	ctx, cancel := context.WithTimeout(ctx, scanSettings.Worker.Timeout)
 	defer cancel()
 
 	defer func() {
@@ -204,13 +210,6 @@ func Run(ctx context.Context, opts flag.Options, targetKind TargetKind) (err err
 			log.Warn().Msg("Increase --timeout value")
 		}
 	}()
-
-	scanSettings, err := settings.FromOptions(opts)
-	scanSettings.Target = opts.Target
-
-	if err != nil {
-		return err
-	}
 
 	r := NewRunner(ctx, scanSettings)
 	defer r.Close(ctx)

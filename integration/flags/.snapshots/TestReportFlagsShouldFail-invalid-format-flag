@@ -33,17 +33,6 @@ Scan Flags
 General Flags
       --config-file string   Load configuration from the specified path.
 
-Worker Flags
-      --existing-worker string              Specify the URL of an existing worker.
-      --file-size-max int                   Ignore files larger than the specified value. (default 2000000)
-      --files-to-batch int                  Specify the number of files to batch per worker. (default 1)
-      --memory-max int                      If the memory needed to scan a file surpasses the specified limit, skip the file. (default 800000000)
-      --timeout duration                    The maximum time alloted to complete the scan. (default 10m0s)
-      --timeout-file-max duration           Maximum timeout assigned for scanning each file. This config superseeds timeout-second-per-bytes. (default 30s)
-      --timeout-file-min duration           Minimum timeout assigned for scanning each file. This config superseeds timeout-second-per-bytes. (default 5s)
-      --timeout-file-second-per-bytes int   number of file size bytes producing a second of timeout assigned to scanning a file (default 10000)
-      --timeout-worker-online duration      Maximum time to wait for a worker process to come online. (default 1m0s)
-
 
 flag error: report flags error: invalid format argument; supported values: json, yaml
 
