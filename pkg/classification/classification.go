@@ -38,11 +38,19 @@ func NewClassifier(config *Config) (*Classifier, error) {
 		return nil, err
 	}
 
+	// apply subject mapping override, if present
+	var knownPersonObjectPatterns []db.KnownPersonObjectPattern
+	if config.Config.Scan.DataSubjectMapping != "" {
+		knownPersonObjectPatterns = db.DefaultWithMapping(config.Config.Scan.DataSubjectMapping).KnownPersonObjectPatterns
+	} else {
+		knownPersonObjectPatterns = db.Default().KnownPersonObjectPatterns
+	}
+
 	schemaClassifier := schema.New(
 		schema.Config{
 			DataTypes:                      db.Default().DataTypes,
 			DataTypeClassificationPatterns: db.Default().DataTypeClassificationPatterns,
-			KnownPersonObjectPatterns:      db.Default().KnownPersonObjectPatterns,
+			KnownPersonObjectPatterns:      knownPersonObjectPatterns,
 			Context:                        config.Config.Scan.Context,
 		},
 	)

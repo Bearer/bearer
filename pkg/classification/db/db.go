@@ -4,6 +4,7 @@ import (
 	"embed"
 	"encoding/json"
 	"log"
+	"os"
 	"regexp"
 	"strings"
 
@@ -132,21 +133,25 @@ type KnownPersonObjectPattern struct {
 }
 
 func Default() DefaultDB {
-	return defaultDB("")
+	return defaultDB("", "")
+}
+
+func DefaultWithMapping(subjectMappingPath string) DefaultDB {
+	return defaultDB("", subjectMappingPath)
 }
 
 func DefaultWithContext(context flag.Context) DefaultDB {
-	return defaultDB(context)
+	return defaultDB(context, "")
 }
 
-func defaultDB(context flag.Context) DefaultDB {
+func defaultDB(context flag.Context, subjectMappingPath string) DefaultDB {
 	dataTypes := defaultDataTypes()
 	return DefaultDB{
 		Recipes:                        defaultRecipes(),
 		DataTypes:                      dataTypes,
 		DataCategories:                 defaultDataCategories(context),
 		DataTypeClassificationPatterns: defaultDataTypeClassificationPatterns(dataTypes),
-		KnownPersonObjectPatterns:      defaultKnownPersonObjectPatterns(dataTypes),
+		KnownPersonObjectPatterns:      defaultKnownPersonObjectPatterns(dataTypes, subjectMappingPath),
 	}
 }
 
@@ -332,7 +337,7 @@ func defaultDataTypeClassificationPatterns(dataTypes []DataType) []DataTypeClass
 	return dataTypeClassificationPatterns
 }
 
-func defaultKnownPersonObjectPatterns(dataTypes []DataType) []KnownPersonObjectPattern {
+func defaultKnownPersonObjectPatterns(dataTypes []DataType, subjectMappingPath string) []KnownPersonObjectPattern {
 	knownPersonObjectPatterns := []KnownPersonObjectPattern{}
 
 	// "Identification" > "Unique Identifier" data type
@@ -352,7 +357,12 @@ func defaultKnownPersonObjectPatterns(dataTypes []DataType) []KnownPersonObjectP
 	}
 
 	// read mapping
-	subjectMappingJson, err := subjectMappingFile.ReadFile("subject_mapping.json")
+	var subjectMappingJson []byte
+	if subjectMappingPath != "" {
+		subjectMappingJson, err = os.ReadFile(subjectMappingPath)
+	} else {
+		subjectMappingJson, err = subjectMappingFile.ReadFile("subject_mapping.json")
+	}
 	if err != nil {
 		handleError(err)
 	}
