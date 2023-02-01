@@ -6,4 +6,5 @@ var (
 	BattleTestSHA = "devSHA"
 	Attempt       = "1"
 	Language      = "all"
+	S3Bucket      = "bearer-battle-test-reports"
 )

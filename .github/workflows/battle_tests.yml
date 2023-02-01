@@ -8,6 +8,7 @@ on:
         default: "5"
         type: choice
         options:
+          - 1
           - 5
           - 25
           - 100
@@ -35,8 +36,14 @@ on:
         default: "1"
         type: string
 
+      curio_release_id:
+        description: "release id"
+        default: ""
+        required: true
+        type: string
+
       curio_version:
-        description: "Version of curio to pick up (`tags/<tag_name>`, `<release_id>` or `latest`)"
+        description: "curio version for report"
         default: "latest"
         required: true
         type: string
@@ -70,18 +77,11 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-
-      - name: Retrieve latest Linux Artifact
+      - uses: robinraju/release-downloader@v1.7
         id: latest_artifact
-        uses: dsaltares/fetch-gh-release-asset@1.1.0
         with:
-          repo: "Bearer/curio"
-          version: ${{ inputs.curio_version }}
-          # version: "tags/v0.5.0"
-          # file: "curio_0.5.0_linux_amd64.tar.gz"
-          regex: true
-          file: "curio_.*_linux_amd64\\.tar\\.gz"
-
+          releaseId: ${{ inputs.curio_release_id }}
+          fileName: "*_linux_amd64.tar.gz"
       - name: Extract artifact
         run: |
           tar -xzvf curio_*_linux_amd64.tar.gz
@@ -97,10 +97,11 @@ jobs:
           file: battle_tests/Dockerfile
           tags: bearersh/battle-test:latest
           build-args: |
-            CURIO_VERSION=${{ steps.latest_artifact.outputs.version }}
+            CURIO_VERSION=${{ inputs.curio_version }}
             BATTLE_TEST_SHA=${{ github.sha }}
             ATTEMPT=${{ inputs.attempt }}
             LANGUAGE=${{ inputs.language }}
+            S3_BUCKET=bearer-battle-test-reports
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1

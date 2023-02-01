@@ -5,6 +5,7 @@ import (
 	_ "embed"
 	"encoding/json"
 	"fmt"
+	"strings"
 
 	"github.com/bearer/curio/battle_tests/build"
 	"github.com/rs/zerolog/log"
@@ -38,7 +39,9 @@ func UnmarshalRaw() []ItemWithLanguage {
 	}
 
 	for _, file := range files {
-		if build.Language != "all" && file.Name() != build.Language {
+		fileLanguage := strings.TrimSuffix(file.Name(), ".json")
+		if build.Language != "all" && fileLanguage != build.Language {
+			log.Debug().Msgf("Skipping %s repos", fileLanguage)
 			continue
 		}
 
