@@ -20,6 +20,7 @@ Rule Flags
 
 Scan Flags
       --context string                       Expand context of schema classification e.g., --context=health, to include data types particular to health
+      --data-subject-mapping string          Override default data subject mapping by providing a path to a custom mapping JSON file
       --debug                                Enable debug logs
       --disable-domain-resolution            Do not attempt to resolve detected domains during classification (default true)
       --domain-resolution-timeout duration   Set timeout when attempting to resolve detected domains during classification, e.g. --domain-resolution-timeout=3s (default 3s)
