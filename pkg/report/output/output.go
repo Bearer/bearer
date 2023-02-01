@@ -11,6 +11,7 @@ import (
 	"github.com/bearer/curio/pkg/report/output/dataflow"
 	"github.com/bearer/curio/pkg/report/output/subjects"
 	"github.com/bearer/curio/pkg/report/output/summary"
+	"github.com/bearer/curio/pkg/report/output/third_party"
 	"github.com/google/uuid"
 
 	"github.com/bearer/curio/pkg/report/output/detectors"
@@ -70,6 +71,8 @@ func ReportCSV(report types.Report, output *zerolog.Event, config settings.Confi
 	switch config.Report.Report {
 	case flag.ReportPrivacy:
 		return getPrivacyReportCsvOutput(report, output, config)
+	case flag.ReportThirdParty:
+		return getThirdPartyReportCsvOutput(report, output, config)
 	}
 
 	return fmt.Errorf("csv not supported for report type: %s", config.Report.Report)
@@ -117,6 +120,8 @@ func getReportOutput(report types.Report, config settings.Config) (any, error) {
 		return getSummaryReportOutput(report, config)
 	case flag.ReportPrivacy:
 		return getPrivacyReportOutput(report, config)
+	case flag.ReportThirdParty:
+		return getThirdPartyReportOutput(report, config)
 	case flag.ReportStats:
 		return reportStats(report, config)
 	}
@@ -146,6 +151,30 @@ func getPrivacyReportOutput(report types.Report, config settings.Config) ([]subj
 	}
 
 	return subjects.GetOutput(dataflow, config)
+}
+
+func getThirdPartyReportOutput(report types.Report, config settings.Config) ([]third_party.InventoryResult, error) {
+	dataflow, err := getDataflow(report, config, true)
+	if err != nil {
+		return nil, err
+	}
+
+	return third_party.GetOutput(dataflow, config)
+}
+
+func getThirdPartyReportCsvOutput(report types.Report, output *zerolog.Event, config settings.Config) error {
+	dataflow, err := getDataflow(report, config, true)
+	if err != nil {
+		return err
+	}
+
+	csvString, err := third_party.BuildCsvString(dataflow, config)
+	if err != nil {
+		return err
+	}
+
+	output.Msg(csvString.String())
+	return nil
 }
 
 func getSummaryReportOutput(report types.Report, config settings.Config) (map[string][]summary.PolicyResult, error) {
