@@ -76,12 +76,6 @@ func BuildCsvString(dataflow *dataflow.DataFlow, config settings.Config) (*strin
 }
 
 func GetOutput(dataflow *dataflow.DataFlow, config settings.Config) ([]InventoryResult, error) {
-	if !config.Scan.Quiet {
-		output.StdErrLogger().Msgf("Evaluating rules")
-	}
-
-	bar := output.GetProgressBar(len(config.Rules), config, "rules")
-
 	thirdPartyFailures := make(map[string]map[string]RuleFailureSummary)
 	thirdPartyRuleCount := make(map[string]int)
 	for _, rule := range config.Rules {
@@ -92,11 +86,6 @@ func GetOutput(dataflow *dataflow.DataFlow, config settings.Config) ([]Inventory
 		if rule.AssociatedRecipe == "" {
 			// no associated recipe
 			continue
-		}
-
-		err := bar.Add(1)
-		if err != nil {
-			output.StdErrLogger().Msgf("Policy %s failed to write progress bar %e", rule.Id, err)
 		}
 
 		thirdPartyRuleCount[rule.AssociatedRecipe] += 1
