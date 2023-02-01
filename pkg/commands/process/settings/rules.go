@@ -147,6 +147,7 @@ func buildRules(definitions map[string]RuleDefinition, enabledRules map[string]s
 		rules[id] = &Rule{
 			Id:                 id,
 			Type:               definition.Type,
+			AssociatedRecipe:   definition.Metadata.AssociatedRecipe,
 			Trigger:            definition.Trigger,
 			OmitParentContent:  definition.OmitParentContent,
 			SkipDataTypes:      definition.SkipDataTypes,

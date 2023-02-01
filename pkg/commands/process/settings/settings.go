@@ -46,6 +46,7 @@ type RuleMetadata struct {
 	Description        string `mapstructure:"description" json:"description" yaml:"description"`
 	RemediationMessage string `mapstructure:"remediation_message" json:"remediation_messafe" yaml:"remediation_messafe"`
 	DSRID              string `mapstructure:"dsr_id" json:"dsr_id" yaml:"dsr_id"`
+	AssociatedRecipe   string `mapstructure:"associated_recipe" json:"associated_recipe" yaml:"associated_recipe"`
 	ID                 string `mapstructure:"id" json:"id" yaml:"id"`
 }
 
@@ -92,6 +93,7 @@ type Auxiliary struct {
 
 type Rule struct {
 	Id                 string            `mapstructure:"id" json:"id,omitempty" yaml:"id,omitempty"`
+	AssociatedRecipe   string            `mapstructure:"associated_recipe" json:"associated_recipe" yaml:"associated_recipe"`
 	Type               string            `mapstructure:"type" json:"type,omitempty" yaml:"type,omitempty"`          // TODO: use enum value
 	Trigger            string            `mapstructure:"trigger" json:"trigger,omitempty" yaml:"trigger,omitempty"` // TODO: use enum value
 	DetailedContext    bool              `mapstructure:"detailed_context" json:"detailed_context,omitempty" yaml:"detailed_context,omitempty"`

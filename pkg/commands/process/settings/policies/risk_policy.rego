@@ -110,6 +110,7 @@ local_rule_failure contains item if {
 		"category_groups": data.bearer.common.groups_for_datatype(data_type),
     "subject_name": location.subject_name,
     "line_number": location.line_number,
-    "rule_id": input.rule.id
+    "rule_id": input.rule.id,
+    "third_party": input.rule.associated_recipe
   }
 }
