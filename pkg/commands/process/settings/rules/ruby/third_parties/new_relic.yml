@@ -27,6 +27,16 @@ skip_data_types:
   - "Unique Identifier"
 metadata:
   description: "Do not send sensitive data to New Relic."
-  remediation_message: ""
+  remediation_message: |
+    ## Description
+    Leaking sensitive data to third-party loggers is a common cause of data leaks and can lead to data breaches. This rule looks for instances of sensitive data sent to New Relic.
+
+    ## Remediations
+
+    When logging errors or events, ensure all sensitive data is removed.
+
+    ## Resources
+    - [New Relic Docs](https://docs.newrelic.com/)
+    - [Log obfuscation](https://docs.newrelic.com/docs/logs/ui-data/obfuscation-ui/)
   dsr_id: "DSR-1"
   id: "ruby_third_parties_new_relic"
