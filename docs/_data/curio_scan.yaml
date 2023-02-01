@@ -18,18 +18,10 @@ options:
       default_value: 3s
       usage: |
         Set timeout when attempting to resolve detected domains during classification, e.g. --domain-resolution-timeout=3s
-    - name: existing-worker
-      usage: Specify the URL of an existing worker.
     - name: external-rule-dir
       default_value: '[]'
       usage: |
         Specify directories paths that contain .yaml files with external rules configuration
-    - name: file-size-max
-      default_value: "2000000"
-      usage: Ignore files larger than the specified value.
-    - name: files-to-batch
-      default_value: "1"
-      usage: Specify the number of files to batch per worker.
     - name: force
       default_value: "false"
       usage: Disable the cache and runs the detections again
@@ -44,10 +36,6 @@ options:
       default_value: '[]'
       usage: |
         Define regular expressions for better classification of private or unreachable domains e.g. --internal-domains=".*.my-company.com,private.sh"
-    - name: memory-max
-      default_value: "800000000"
-      usage: |
-        If the memory needed to scan a file surpasses the specified limit, skip the file.
     - name: only-rule
       default_value: '[]'
       usage: |
@@ -68,24 +56,6 @@ options:
       default_value: '[]'
       usage: |
         Specify the comma-separated ids of the rules you would like to skip. Runs all other rules.
-    - name: timeout
-      default_value: 10m0s
-      usage: The maximum time alloted to complete the scan.
-    - name: timeout-file-max
-      default_value: 30s
-      usage: |
-        Maximum timeout assigned for scanning each file. This config superseeds timeout-second-per-bytes.
-    - name: timeout-file-min
-      default_value: 5s
-      usage: |
-        Minimum timeout assigned for scanning each file. This config superseeds timeout-second-per-bytes.
-    - name: timeout-file-second-per-bytes
-      default_value: "10000"
-      usage: |
-        number of file size bytes producing a second of timeout assigned to scanning a file
-    - name: timeout-worker-online
-      default_value: 1m0s
-      usage: Maximum time to wait for a worker process to come online.
 example: |4-
       # Scan a local project, including language-specific files
       $ curio scan /path/to/your_project

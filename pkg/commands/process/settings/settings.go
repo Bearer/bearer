@@ -3,6 +3,7 @@ package settings
 import (
 	"embed"
 	"fmt"
+	"time"
 
 	"github.com/rs/zerolog/log"
 	"gopkg.in/yaml.v2"
@@ -11,8 +12,34 @@ import (
 	"github.com/bearer/curio/pkg/util/rego"
 )
 
+var (
+	Workers                   = 1                 // The number of processing workers to spawn
+	Timeout                   = 10 * time.Minute  // "The maximum time alloted to complete the scan
+	TimeoutFileMinimum        = 5 * time.Second   // Minimum timeout assigned for scanning each file. This config superseeds timeout-second-per-bytes
+	TimeoutFileMaximum        = 30 * time.Second  // Maximum timeout assigned for scanning each file. This config superseeds timeout-second-per-bytes
+	TimeoutFileSecondPerBytes = 10 * 1000         // 10kb/s number of file size bytes producing a second of timeout assigned to scanning a file
+	TimeoutWorkerOnline       = 60 * time.Second  // Maximum time to wait for a worker process to come online
+	FileSizeMaximum           = 2 * 1000 * 1000   // 2MB Ignore files larger than the specified value
+	FilesToBatch              = 1                 // Specify the number of files to batch per worker
+	MemoryMaximum             = 800 * 1000 * 1000 // 800 MB If the memory needed to scan a file surpasses the specified limit, skip the file.
+	ExistingWorker            = ""                // Specify the URL of an existing worker
+)
+
+type WorkerOptions struct {
+	Workers                   int           `mapstructure:"workers" json:"workers" yaml:"workers"`
+	Timeout                   time.Duration `mapstructure:"timeout" json:"timeout" yaml:"timeout"`
+	TimeoutFileMinimum        time.Duration `mapstructure:"timeout-file-min" json:"timeout-file-min" yaml:"timeout-file-min"`
+	TimeoutFileMaximum        time.Duration `mapstructure:"timeout-file-max"  json:"timeout-file-max" yaml:"timeout-file-max"`
+	TimeoutFileSecondPerBytes int           `mapstructure:"timeout-file-second-per-bytes" json:"timeout-file-second-per-bytes" yaml:"timeout-file-second-per-bytes"`
+	TimeoutWorkerOnline       time.Duration `mapstructure:"timeout-worker-online" json:"timeout-worker-online" yaml:"timeout-worker-online"`
+	FileSizeMaximum           int           `mapstructure:"file-size-max" json:"file-size-max" yaml:"file-size-max"`
+	FilesToBatch              int           `mapstructure:"files-to-batch" json:"files-to-batch" yaml:"files-to-batch"`
+	MemoryMaximum             int           `mapstructure:"memory-max" json:"memory-max" yaml:"memory-max"`
+	ExistingWorker            string        `mapstructure:"existing-worker" json:"existing-worker" yaml:"existing-worker"`
+}
+
 type Config struct {
-	Worker       flag.WorkerOptions `mapstructure:"worker" json:"worker" yaml:"worker"`
+	Worker       WorkerOptions      `mapstructure:"worker" json:"worker" yaml:"worker"`
 	Scan         flag.ScanOptions   `mapstructure:"scan" json:"scan" yaml:"scan"`
 	Report       flag.ReportOptions `mapstructure:"report" json:"report" yaml:"report"`
 	Policies     map[string]*Policy `mapstructure:"policies" json:"policies" yaml:"policies"`
@@ -168,8 +195,24 @@ func (rule *Rule) PolicyType() bool {
 	return true
 }
 
+func defaultWorkerOptions() WorkerOptions {
+	return WorkerOptions{
+		Workers:                   Workers,
+		Timeout:                   Timeout,
+		TimeoutFileMinimum:        TimeoutFileMinimum,
+		TimeoutFileMaximum:        TimeoutFileMaximum,
+		TimeoutFileSecondPerBytes: TimeoutFileSecondPerBytes,
+		TimeoutWorkerOnline:       TimeoutWorkerOnline,
+		FilesToBatch:              FilesToBatch,
+		FileSizeMaximum:           FileSizeMaximum,
+		MemoryMaximum:             MemoryMaximum,
+		ExistingWorker:            ExistingWorker,
+	}
+}
+
 func FromOptions(opts flag.Options) (Config, error) {
 	policies := DefaultPolicies()
+	workerOptions := defaultWorkerOptions()
 
 	builtInRules, rules, err := loadRules(opts.ExternalRuleDir, opts.RuleOptions)
 	if err != nil {
@@ -191,7 +234,7 @@ func FromOptions(opts flag.Options) (Config, error) {
 	}
 
 	config := Config{
-		Worker:       opts.WorkerOptions,
+		Worker:       workerOptions,
 		Scan:         opts.ScanOptions,
 		Report:       opts.ReportOptions,
 		Policies:     policies,
