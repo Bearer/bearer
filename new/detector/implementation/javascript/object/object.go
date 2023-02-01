@@ -20,8 +20,8 @@ type objectDetector struct {
 	// class
 	classNameQuery *tree.Query
 	// properties
-	// callsQuery            *tree.Query
-	// elementReferenceQuery *tree.Query
+	memberExpressionQuery    *tree.Query
+	subscriptExpressionQuery *tree.Query
 }
 
 func New(lang languagetypes.Language) (types.Detector, error) {
@@ -58,17 +58,17 @@ func New(lang languagetypes.Language) (types.Detector, error) {
 		return nil, fmt.Errorf("error compiling class name query: %s", err)
 	}
 
-	// // user.name
-	// callsQuery, err := lang.CompileQuery(`(call receiver: (_) @receiver method: (identifier) @method) @root`)
-	// if err != nil {
-	// 	return nil, fmt.Errorf("error compiling call query: %s", err)
-	// }
+	// user.name
+	memberExpressionQuery, err := lang.CompileQuery(`(member_expression object: (_) @object property: (property_identifier) @property) @root`)
+	if err != nil {
+		return nil, fmt.Errorf("error compiling member expression query: %s", err)
+	}
 
-	// // user[:name]
-	// elementReferenceQuery, err := lang.CompileQuery(`(element_reference object: (_) @object (simple_symbol) @simple_symbol) @root`)
-	// if err != nil {
-	// 	return nil, fmt.Errorf("error compiling element reference query %s", err)
-	// }
+	// user[:name]
+	subscriptExpressionQuery, err := lang.CompileQuery(`(subscript_expression object: (_) @object index: (string) @index ) @root`)
+	if err != nil {
+		return nil, fmt.Errorf("error compiling subscript expression query %s", err)
+	}
 
 	return &objectDetector{
 		objectPairQuery:          objectPairQuery,
@@ -76,8 +76,8 @@ func New(lang languagetypes.Language) (types.Detector, error) {
 		variableDeclarationQuery: variableDeclarationQuery,
 		parentPairQuery:          parentPairQuery,
 		classNameQuery:           classNameQuery,
-		// callsQuery:            callsQuery,
-		// elementReferenceQuery: elementReferenceQuery,
+		memberExpressionQuery:    memberExpressionQuery,
+		subscriptExpressionQuery: subscriptExpressionQuery,
 	}, nil
 }
 
@@ -105,6 +105,11 @@ func (detector *objectDetector) DetectAt(
 	}
 
 	detections, err = detector.getClass(node, evaluator)
+	if len(detections) != 0 || err != nil {
+		return detections, err
+	}
+
+	detections, err = detector.getProperties(node, evaluator)
 	if len(detections) != 0 || err != nil {
 		return detections, err
 	}

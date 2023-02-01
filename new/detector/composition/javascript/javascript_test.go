@@ -20,6 +20,20 @@ func TestJavascriptObject(t *testing.T) {
 	}, "testdata/testcases/object", javascript.New)
 }
 
+func TestJavascriptObjectMemberExpression(t *testing.T) {
+	testhelper.RunTest(t, map[string][]byte{
+		"logger": consoleLogRule,
+	}, "testdata/testcases/object-member-expression", javascript.New)
+	// TODO: test case nested with ()
+}
+
+func TestJavascriptObjectSubscriptExpression(t *testing.T) {
+	testhelper.RunTest(t, map[string][]byte{
+		"logger": consoleLogRule,
+	}, "testdata/testcases/object-subscript-expression", javascript.New)
+	// TODO test case nested with ()
+}
+
 func TestJavascriptFlow(t *testing.T) {
 	testhelper.RunTest(t, map[string][]byte{
 		"logger": consoleLogRule,
