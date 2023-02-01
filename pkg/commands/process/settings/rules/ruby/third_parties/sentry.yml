@@ -131,7 +131,6 @@ severity:
   PII: "critical"
   PHI: "medium"
   PD: "high"
-associated_recipe: "Sentry"
 skip_data_types:
   - "Unique Identifier"
 metadata:
@@ -147,4 +146,5 @@ metadata:
     ## Resources
     - [Sentry Docs](https://docs.sentry.io/)
   dsr_id: "DSR-1"
+  associated_recipe: "Sentry"
   id: "ruby_third_parties_sentry"
