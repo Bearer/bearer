@@ -13,7 +13,7 @@ var (
 
 	ReportDetectors  = "detectors" // nodoc: internal report type
 	ReportDataFlow   = "dataflow"
-	ReportPrivacy    = "privacy"
+	ReportSubjects   = "subjects"
 	ReportThirdParty = "thirdparty"
 	ReportSummary    = "summary"
 	ReportStats      = "stats"
@@ -90,7 +90,7 @@ func (f *ReportFlagGroup) ToOptions() (ReportOptions, error) {
 	switch report {
 	case ReportDetectors:
 	case ReportDataFlow:
-	case ReportPrivacy:
+	case ReportSubjects:
 	case ReportThirdParty:
 	case ReportSummary:
 	case ReportStats:

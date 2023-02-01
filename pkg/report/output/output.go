@@ -69,8 +69,8 @@ func ReportSummary(report types.Report, output *zerolog.Event, config settings.C
 
 func ReportCSV(report types.Report, output *zerolog.Event, config settings.Config) error {
 	switch config.Report.Report {
-	case flag.ReportPrivacy:
-		return getPrivacyReportCsvOutput(report, output, config)
+	case flag.ReportSubjects:
+		return getSubjectsReportCsvOutput(report, output, config)
 	case flag.ReportThirdParty:
 		return getThirdPartyReportCsvOutput(report, output, config)
 	}
@@ -118,8 +118,8 @@ func getReportOutput(report types.Report, config settings.Config) (any, error) {
 		return getDataflow(report, config, false)
 	case flag.ReportSummary:
 		return getSummaryReportOutput(report, config)
-	case flag.ReportPrivacy:
-		return getPrivacyReportOutput(report, config)
+	case flag.ReportSubjects:
+		return getSubjectsReportOutput(report, config)
 	case flag.ReportThirdParty:
 		return getThirdPartyReportOutput(report, config)
 	case flag.ReportStats:
@@ -129,7 +129,7 @@ func getReportOutput(report types.Report, config settings.Config) (any, error) {
 	return nil, fmt.Errorf(`--report flag "%s" is not supported`, config.Report.Report)
 }
 
-func getPrivacyReportCsvOutput(report types.Report, output *zerolog.Event, config settings.Config) error {
+func getSubjectsReportCsvOutput(report types.Report, output *zerolog.Event, config settings.Config) error {
 	dataflow, err := getDataflow(report, config, true)
 	if err != nil {
 		return err
@@ -144,7 +144,7 @@ func getPrivacyReportCsvOutput(report types.Report, output *zerolog.Event, confi
 	return nil
 }
 
-func getPrivacyReportOutput(report types.Report, config settings.Config) ([]subjects.InventoryResult, error) {
+func getSubjectsReportOutput(report types.Report, config settings.Config) ([]subjects.InventoryResult, error) {
 	dataflow, err := getDataflow(report, config, true)
 	if err != nil {
 		return nil, err
