@@ -9,6 +9,7 @@ import (
 	"github.com/bearer/curio/pkg/commands/process/settings"
 	"github.com/bearer/curio/pkg/util/output"
 	"github.com/bearer/curio/pkg/util/rego"
+	"golang.org/x/exp/maps"
 
 	"github.com/bearer/curio/pkg/report/output/dataflow"
 	"github.com/bearer/curio/pkg/report/output/summary"
@@ -30,13 +31,13 @@ type RuleOutput struct {
 }
 
 type RuleFailureSummary struct {
-	DataSubject              string         `json:"subject_name,omitempty" yaml:"subject_name"`
-	DataTypes                []string       `json:"data_types" yaml:"data_types"`
-	CriticalRiskFailureCount int            `json:"critical_risk_failure_count" yaml:"critical_risk_failure_count"`
-	HighRiskFailureCount     int            `json:"high_risk_failure_count" yaml:"high_risk_failure_count"`
-	MediumRiskFailureCount   int            `json:"medium_risk_failure_count" yaml:"medium_risk_failure_count"`
-	LowRiskFailureCount      int            `json:"low_risk_failure_count" yaml:"low_risk_failure_count"`
-	TriggeredRulesCount      map[string]int `json:"triggered_rules" yaml:"triggered_rules"`
+	DataSubject              string          `json:"subject_name,omitempty" yaml:"subject_name"`
+	DataTypes                map[string]bool `json:"data_types" yaml:"data_types"`
+	CriticalRiskFailureCount int             `json:"critical_risk_failure_count" yaml:"critical_risk_failure_count"`
+	HighRiskFailureCount     int             `json:"high_risk_failure_count" yaml:"high_risk_failure_count"`
+	MediumRiskFailureCount   int             `json:"medium_risk_failure_count" yaml:"medium_risk_failure_count"`
+	LowRiskFailureCount      int             `json:"low_risk_failure_count" yaml:"low_risk_failure_count"`
+	TriggeredRulesCount      map[string]int  `json:"triggered_rules" yaml:"triggered_rules"`
 }
 
 type InventoryResult struct {
@@ -76,7 +77,12 @@ func BuildCsvString(dataflow *dataflow.DataFlow, config settings.Config) (*strin
 }
 
 func GetOutput(dataflow *dataflow.DataFlow, config settings.Config) ([]InventoryResult, error) {
+	if !config.Scan.Quiet {
+		output.StdErrLogger().Msgf("Evaluating rules")
+	}
+
 	thirdPartyFailures := make(map[string]map[string]RuleFailureSummary)
+	triggeredRules := make(map[string]bool)
 	thirdPartyRuleCount := make(map[string]int)
 	for _, rule := range config.Rules {
 		if !rule.PolicyType() {
@@ -129,6 +135,7 @@ func GetOutput(dataflow *dataflow.DataFlow, config settings.Config) ([]Inventory
 					// data subject key not found; create a new failure obj
 					ruleFailure = RuleFailureSummary{
 						DataSubject:              ruleOutputFailure.DataSubject,
+						DataTypes:                make(map[string]bool),
 						CriticalRiskFailureCount: 0,
 						HighRiskFailureCount:     0,
 						MediumRiskFailureCount:   0,
@@ -149,11 +156,15 @@ func GetOutput(dataflow *dataflow.DataFlow, config settings.Config) ([]Inventory
 					ruleFailure.LowRiskFailureCount += 1
 				}
 
-				// add data type to array
-				ruleFailure.DataTypes = append(ruleFailure.DataTypes, ruleOutputFailure.DataType)
+				// add data type to map
+				ruleFailure.DataTypes[ruleOutputFailure.DataType] = true
 
-				// increment triggered rules
-				ruleFailure.TriggeredRulesCount[ruleOutputFailure.ThirdParty] += 1
+				// increment triggered rules where necessary
+				_, ok = triggeredRules[ruleOutputFailure.RuleId+":"+ruleOutputFailure.ThirdParty]
+				if !ok {
+					triggeredRules[ruleOutputFailure.RuleId+":"+ruleOutputFailure.ThirdParty] = true
+					ruleFailure.TriggeredRulesCount[ruleOutputFailure.ThirdParty] += 1
+				}
 
 				thirdParty[ruleOutputFailure.DataSubject] = ruleFailure
 			}
@@ -190,7 +201,7 @@ func GetOutput(dataflow *dataflow.DataFlow, config settings.Config) ([]Inventory
 			inventoryItem = InventoryResult{
 				ThirdParty:               component.Name,
 				DataSubject:              ruleFailure.DataSubject,
-				DataTypes:                ruleFailure.DataTypes,
+				DataTypes:                maps.Keys(ruleFailure.DataTypes),
 				CriticalRiskFailureCount: ruleFailure.CriticalRiskFailureCount,
 				HighRiskFailureCount:     ruleFailure.HighRiskFailureCount,
 				MediumRiskFailureCount:   ruleFailure.MediumRiskFailureCount,
