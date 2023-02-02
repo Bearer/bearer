@@ -63,6 +63,12 @@ type Subject struct {
 	RulesPassedCount         int    `json:"rules_passed_count" yaml:"rules_passed_count"`
 }
 
+type ThirdPartyRuleCounter struct {
+	RuleIds         map[string]bool
+	Count           int
+	SubjectFailures map[string]map[string]bool
+}
+
 type ThirdParty struct {
 	ThirdParty               string   `json:"third_party,omitempty" yaml:"third_party"`
 	DataSubject              string   `json:"subject_name,omitempty" yaml:"subject_name"`
@@ -119,12 +125,6 @@ func BuildCsvString(dataflow *dataflow.DataFlow, config settings.Config) (*strin
 	}
 
 	return csvStr, nil
-}
-
-type ThirdPartyRuleCounter struct {
-	RuleIds         map[string]bool
-	Count           int
-	SubjectFailures map[string]map[string]bool
 }
 
 func GetOutput(dataflow *dataflow.DataFlow, config settings.Config) (*Report, error) {
@@ -284,18 +284,18 @@ func GetOutput(dataflow *dataflow.DataFlow, config settings.Config) (*Report, er
 	}
 
 	if !config.Scan.Quiet {
-		output.StdErrLogger().Msgf("Compiling inventory report")
+		output.StdErrLogger().Msgf("Compiling privacy report")
 	}
 
 	// get inventory result
 	subjectInventory := make(map[string]Subject)
-	inventoryReportPolicy := config.Policies["inventory_report"]
-	rs, err := rego.RunQuery(inventoryReportPolicy.Query,
+	privacyReportPolicy := config.Policies["privacy_report"]
+	rs, err := rego.RunQuery(privacyReportPolicy.Query,
 		Input{
 			Dataflow:       dataflow,
 			DataCategories: db.DefaultWithContext(config.Scan.Context).DataCategories,
 		},
-		inventoryReportPolicy.Modules.ToRegoModules())
+		privacyReportPolicy.Modules.ToRegoModules())
 	if err != nil {
 		return nil, err
 	}
@@ -305,13 +305,13 @@ func GetOutput(dataflow *dataflow.DataFlow, config settings.Config) (*Report, er
 			return nil, err
 		}
 
-		var inventoryOutput map[string][]Output
-		err = json.Unmarshal(jsonRes, &inventoryOutput)
+		var outputItems map[string][]Output
+		err = json.Unmarshal(jsonRes, &outputItems)
 		if err != nil {
 			return nil, err
 		}
 
-		for _, outputItem := range inventoryOutput["report_items"] {
+		for _, outputItem := range outputItems["items"] {
 			key := buildKey(outputItem.DataSubject, outputItem.DataType)
 			subject, ok := subjectInventory[key]
 			if !ok {
