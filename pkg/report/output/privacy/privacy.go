@@ -38,18 +38,18 @@ type RuleFailureSummary struct {
 	TriggeredRules           map[string]bool `json:"triggered_rules" yaml:"triggered_rules"`
 }
 
-type InventoryInput struct {
+type Input struct {
 	Dataflow       *dataflow.DataFlow `json:"dataflow" yaml:"dataflow"`
 	DataCategories []db.DataCategory  `json:"data_categories" yaml:"data_categories"`
 }
 
-type InventoryOutput struct {
+type Output struct {
 	DataType    string `json:"name,omitempty" yaml:"name"`
 	DataSubject string `json:"subject_name,omitempty" yaml:"subject_name"`
 	LineNumber  int    `json:"line_number,omitempty" yaml:"line_number"`
 }
 
-type InventoryResult struct {
+type Subject struct {
 	DataSubject              string `json:"subject_name,omitempty" yaml:"subject_name"`
 	DataType                 string `json:"name,omitempty" yaml:"name"`
 	DetectionCount           int    `json:"detection_count" yaml:"detection_count"`
@@ -60,6 +60,22 @@ type InventoryResult struct {
 	RulesPassedCount         int    `json:"rules_passed_count" yaml:"rules_passed_count"`
 }
 
+type ThirdParty struct {
+	ThirdParty               string   `json:"third_party,omitempty" yaml:"third_party"`
+	DataSubject              string   `json:"subject_name,omitempty" yaml:"subject_name"`
+	DataTypes                []string `json:"data_types,omitempty" yaml:"data_types"`
+	CriticalRiskFailureCount int      `json:"critical_risk_failure_count" yaml:"critical_risk_failure_count"`
+	HighRiskFailureCount     int      `json:"high_risk_failure_count" yaml:"high_risk_failure_count"`
+	MediumRiskFailureCount   int      `json:"medium_risk_failure_count" yaml:"medium_risk_failure_count"`
+	LowRiskFailureCount      int      `json:"low_risk_failure_count" yaml:"low_risk_failure_count"`
+	RulesPassedCount         int      `json:"rules_passed_count" yaml:"rules_passed_count"`
+}
+
+type Report struct {
+	Subjects   []Subject
+	ThirdParty []ThirdParty
+}
+
 func BuildCsvString(dataflow *dataflow.DataFlow, config settings.Config) (*strings.Builder, error) {
 	csvStr := &strings.Builder{}
 	csvStr.WriteString("Subject,Data Types,Detection Count,Critical Risk Failure,High Risk Failure,Medium Risk Failure,Low Risk Failure,RulesPassed\n")
@@ -68,7 +84,7 @@ func BuildCsvString(dataflow *dataflow.DataFlow, config settings.Config) (*strin
 		return csvStr, err
 	}
 
-	for _, item := range result {
+	for _, item := range result.Subjects {
 		itemArr := []string{
 			item.DataSubject,
 			item.DataType,
@@ -85,14 +101,16 @@ func BuildCsvString(dataflow *dataflow.DataFlow, config settings.Config) (*strin
 	return csvStr, nil
 }
 
-func GetOutput(dataflow *dataflow.DataFlow, config settings.Config) ([]InventoryResult, error) {
+func GetOutput(dataflow *dataflow.DataFlow, config settings.Config) (*Report, error) {
 	if !config.Scan.Quiet {
 		output.StdErrLogger().Msgf("Evaluating rules")
 	}
 
 	bar := output.GetProgressBar(len(config.Rules), config, "rules")
 
-	result := make(map[string]InventoryResult)
+	subjectInventory := make(map[string]Subject)
+	thirdPartyInventory := make(map[string]ThirdParty)
+
 	ruleFailures := make(map[string]RuleFailureSummary)
 	localRuleCount := 0
 	for _, rule := range config.Rules {
@@ -175,7 +193,7 @@ func GetOutput(dataflow *dataflow.DataFlow, config settings.Config) ([]Inventory
 	// get inventory result
 	inventoryReportPolicy := config.Policies["inventory_report"]
 	rs, err := rego.RunQuery(inventoryReportPolicy.Query,
-		InventoryInput{
+		Input{
 			Dataflow:       dataflow,
 			DataCategories: db.DefaultWithContext(config.Scan.Context).DataCategories,
 		},
@@ -189,7 +207,7 @@ func GetOutput(dataflow *dataflow.DataFlow, config settings.Config) ([]Inventory
 			return nil, err
 		}
 
-		var inventoryOutput map[string][]InventoryOutput
+		var inventoryOutput map[string][]Output
 		err = json.Unmarshal(jsonRes, &inventoryOutput)
 		if err != nil {
 			return nil, err
@@ -197,11 +215,11 @@ func GetOutput(dataflow *dataflow.DataFlow, config settings.Config) ([]Inventory
 
 		for _, outputItem := range inventoryOutput["report_items"] {
 			key := buildKey(outputItem.DataSubject, outputItem.DataType)
-			inventoryItem, ok := result[key]
+			subject, ok := subjectInventory[key]
 			if !ok {
 				// key not found, add a new item
 				ruleFailure := ruleFailures[key]
-				inventoryItem = InventoryResult{
+				subject = Subject{
 					DataSubject:              outputItem.DataSubject,
 					DataType:                 outputItem.DataType,
 					CriticalRiskFailureCount: ruleFailure.CriticalRiskFailureCount,
@@ -211,13 +229,15 @@ func GetOutput(dataflow *dataflow.DataFlow, config settings.Config) ([]Inventory
 					RulesPassedCount:         localRuleCount - len(ruleFailure.TriggeredRules),
 				}
 			}
-			inventoryItem.DetectionCount += 1
-
-			result[key] = inventoryItem
+			subject.DetectionCount += 1
+			subjectInventory[key] = subject
 		}
 	}
 
-	return maps.Values(result), nil
+	return &Report{
+		Subjects:   maps.Values(subjectInventory),
+		ThirdParty: maps.Values(thirdPartyInventory),
+	}, nil
 }
 
 func buildKey(dataSubject string, dataType string) string {

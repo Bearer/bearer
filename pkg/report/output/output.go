@@ -139,7 +139,7 @@ func getPrivacyReportCsvOutput(report types.Report, output *zerolog.Event, confi
 	return nil
 }
 
-func getPrivacyReportOutput(report types.Report, config settings.Config) ([]privacy.InventoryResult, error) {
+func getPrivacyReportOutput(report types.Report, config settings.Config) (*privacy.Report, error) {
 	dataflow, err := getDataflow(report, config, true)
 	if err != nil {
 		return nil, err
