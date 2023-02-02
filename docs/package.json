@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "eleventy --serve & npx tailwindcss -i _src/styles/tailwind.css -c _src/styles/tailwind.config.js -o _site/style.css --watch",
+    "start": "eleventy --serve --watch --incremental & npx tailwindcss -i _src/styles/tailwind.css -c _src/styles/tailwind.config.js -o _site/style.css --watch",
     "debug": "DEBUG=Eleventy* eleventy --serve & npx tailwindcss -i _src/styles/tailwind.css -c _src/styles/tailwind.config.js -o _site/style.css --watch",
     "build": "ELEVENTY_PRODUCTION=true eleventy && NODE_ENV=production npx tailwindcss -i _src/styles/tailwind.css -c _src/styles/tailwind.config.js -o _site/style.css --minify"
   },
