@@ -28,9 +28,12 @@ type RuleOutput struct {
 	DataSubject    string   `json:"subject_name,omitempty" yaml:"subject_name"`
 	LineNumber     int      `json:"line_number,omitempty" yaml:"line_number"`
 	RuleId         string   `json:"rule_id,omitempty" yaml:"rule_id"`
+	ThirdParty     string   `json:"third_party,omitempty" yaml:"third_party"`
 }
 
 type RuleFailureSummary struct {
+	DataSubject              string          `json:"subject_name,omitempty" yaml:"subject_name"`
+	DataTypes                map[string]bool `json:"data_types,omitempty" yaml:"data_types,omitempty"`
 	CriticalRiskFailureCount int             `json:"critical_risk_failure_count" yaml:"critical_risk_failure_count"`
 	HighRiskFailureCount     int             `json:"high_risk_failure_count" yaml:"high_risk_failure_count"`
 	MediumRiskFailureCount   int             `json:"medium_risk_failure_count" yaml:"medium_risk_failure_count"`
@@ -78,27 +81,50 @@ type Report struct {
 
 func BuildCsvString(dataflow *dataflow.DataFlow, config settings.Config) (*strings.Builder, error) {
 	csvStr := &strings.Builder{}
-	csvStr.WriteString("Subject,Data Types,Detection Count,Critical Risk Failure,High Risk Failure,Medium Risk Failure,Low Risk Failure,RulesPassed\n")
+	csvStr.WriteString("\nSubject,Data Types,Detection Count,Critical Risk Failure,High Risk Failure,Medium Risk Failure,Low Risk Failure,RulesPassed\n")
 	result, err := GetOutput(dataflow, config)
 	if err != nil {
 		return csvStr, err
 	}
 
-	for _, item := range result.Subjects {
-		itemArr := []string{
-			item.DataSubject,
-			item.DataType,
-			fmt.Sprint(item.DetectionCount),
-			fmt.Sprint(item.CriticalRiskFailureCount),
-			fmt.Sprint(item.HighRiskFailureCount),
-			fmt.Sprint(item.MediumRiskFailureCount),
-			fmt.Sprint(item.LowRiskFailureCount),
-			fmt.Sprint(item.RulesPassedCount),
+	for _, subject := range result.Subjects {
+		subjectArr := []string{
+			subject.DataSubject,
+			subject.DataType,
+			fmt.Sprint(subject.DetectionCount),
+			fmt.Sprint(subject.CriticalRiskFailureCount),
+			fmt.Sprint(subject.HighRiskFailureCount),
+			fmt.Sprint(subject.MediumRiskFailureCount),
+			fmt.Sprint(subject.LowRiskFailureCount),
+			fmt.Sprint(subject.RulesPassedCount),
 		}
-		csvStr.WriteString(strings.Join(itemArr, ",") + "\n")
+		csvStr.WriteString(strings.Join(subjectArr, ",") + "\n")
+	}
+
+	csvStr.WriteString("\n")
+	csvStr.WriteString("Third Party,Subject,Data Types,Critical Risk Failure,High Risk Failure,Medium Risk Failure,Low Risk Failure,RulesPassed\n")
+
+	for _, thirdParty := range result.ThirdParty {
+		thirdPartyArr := []string{
+			thirdParty.ThirdParty,
+			thirdParty.DataSubject,
+			"\"" + strings.Join(thirdParty.DataTypes, ",") + "\"",
+			fmt.Sprint(thirdParty.CriticalRiskFailureCount),
+			fmt.Sprint(thirdParty.HighRiskFailureCount),
+			fmt.Sprint(thirdParty.MediumRiskFailureCount),
+			fmt.Sprint(thirdParty.LowRiskFailureCount),
+			fmt.Sprint(thirdParty.RulesPassedCount),
+		}
+		csvStr.WriteString(strings.Join(thirdPartyArr, ",") + "\n")
 	}
 
 	return csvStr, nil
+}
+
+type ThirdPartyRuleCounter struct {
+	RuleIds         map[string]bool
+	Count           int
+	SubjectFailures map[string]map[string]bool
 }
 
 func GetOutput(dataflow *dataflow.DataFlow, config settings.Config) (*Report, error) {
@@ -108,14 +134,33 @@ func GetOutput(dataflow *dataflow.DataFlow, config settings.Config) (*Report, er
 
 	bar := output.GetProgressBar(len(config.Rules), config, "rules")
 
-	subjectInventory := make(map[string]Subject)
-	thirdPartyInventory := make(map[string]ThirdParty)
+	subjectRuleFailures := make(map[string]RuleFailureSummary)
+	thirdPartyRuleFailures := make(map[string]map[string]RuleFailureSummary)
 
-	ruleFailures := make(map[string]RuleFailureSummary)
-	localRuleCount := 0
+	localRuleCounter := 0
+	thirdPartyRulesCounter := make(map[string]ThirdPartyRuleCounter)
+
 	for _, rule := range config.Rules {
+
+		// increment counters
+
 		if rule.Trigger == "local" {
-			localRuleCount += 1
+			localRuleCounter += 1
+		}
+
+		if rule.AssociatedRecipe != "" {
+			thirdPartyRuleCounter, ok := thirdPartyRulesCounter[rule.AssociatedRecipe]
+			if !ok {
+				thirdPartyRuleCounter = ThirdPartyRuleCounter{
+					RuleIds:         make(map[string]bool),
+					SubjectFailures: make(map[string]map[string]bool),
+				}
+			}
+
+			thirdPartyRuleCounter.Count += 1
+			thirdPartyRuleCounter.RuleIds[rule.Id] = true
+
+			thirdPartyRulesCounter[rule.AssociatedRecipe] = thirdPartyRuleCounter
 		}
 
 		err := bar.Add(1)
@@ -128,7 +173,6 @@ func GetOutput(dataflow *dataflow.DataFlow, config settings.Config) (*Report, er
 		}
 
 		policy := config.Policies[rule.Type]
-
 		// Create a prepared query that can be evaluated.
 		rs, err := rego.RunQuery(policy.Query,
 			RuleInput{
@@ -155,11 +199,15 @@ func GetOutput(dataflow *dataflow.DataFlow, config settings.Config) (*Report, er
 			}
 
 			for _, ruleOutputFailure := range ruleOutput["local_rule_failure"] {
+
+				// update subject rule failures
+				ruleSeverity := summary.FindHighestSeverity(ruleOutputFailure.CategoryGroups, rule.Severity)
+
 				key := buildKey(ruleOutputFailure.DataSubject, ruleOutputFailure.DataType)
-				ruleFailure, ok := ruleFailures[key]
+				subjectRuleFailure, ok := subjectRuleFailures[key]
 				if !ok {
 					// key not found; create a new failure obj
-					ruleFailure = RuleFailureSummary{
+					subjectRuleFailure = RuleFailureSummary{
 						CriticalRiskFailureCount: 0,
 						HighRiskFailureCount:     0,
 						MediumRiskFailureCount:   0,
@@ -167,21 +215,70 @@ func GetOutput(dataflow *dataflow.DataFlow, config settings.Config) (*Report, er
 						TriggeredRules:           make(map[string]bool),
 					}
 				}
-
 				// count severity
-				switch summary.FindHighestSeverity(ruleOutputFailure.CategoryGroups, rule.Severity) {
+				switch ruleSeverity {
 				case "critical":
-					ruleFailure.CriticalRiskFailureCount += 1
+					subjectRuleFailure.CriticalRiskFailureCount += 1
 				case "high":
-					ruleFailure.HighRiskFailureCount += 1
+					subjectRuleFailure.HighRiskFailureCount += 1
 				case "medium":
-					ruleFailure.MediumRiskFailureCount += 1
+					subjectRuleFailure.MediumRiskFailureCount += 1
 				case "low":
-					ruleFailure.LowRiskFailureCount += 1
+					subjectRuleFailure.LowRiskFailureCount += 1
 				}
 
-				ruleFailure.TriggeredRules[ruleOutputFailure.RuleId] = true
-				ruleFailures[key] = ruleFailure
+				subjectRuleFailure.TriggeredRules[ruleOutputFailure.RuleId] = true
+				subjectRuleFailures[key] = subjectRuleFailure
+
+				// update third party failures
+
+				if rule.AssociatedRecipe == "" {
+					continue
+				}
+
+				thirdPartyFailure, ok := thirdPartyRuleFailures[ruleOutputFailure.ThirdParty]
+				if !ok {
+					// third party key not found; create empty map
+					thirdPartyFailure = make(map[string]RuleFailureSummary)
+					thirdPartyRuleFailures[ruleOutputFailure.ThirdParty] = thirdPartyFailure
+				}
+				thirdPartyDataSubject, ok := thirdPartyFailure[ruleOutputFailure.DataSubject]
+				if !ok {
+					// data subject key not found; create a new failure obj
+					thirdPartyDataSubject = RuleFailureSummary{
+						DataSubject:              ruleOutputFailure.DataSubject,
+						DataTypes:                make(map[string]bool),
+						CriticalRiskFailureCount: 0,
+						HighRiskFailureCount:     0,
+						MediumRiskFailureCount:   0,
+						LowRiskFailureCount:      0,
+					}
+				}
+
+				// count severity
+				switch ruleSeverity {
+				case "critical":
+					thirdPartyDataSubject.CriticalRiskFailureCount += 1
+				case "high":
+					thirdPartyDataSubject.HighRiskFailureCount += 1
+				case "medium":
+					thirdPartyDataSubject.MediumRiskFailureCount += 1
+				case "low":
+					thirdPartyDataSubject.LowRiskFailureCount += 1
+				}
+
+				// add data type to map
+				thirdPartyDataSubject.DataTypes[ruleOutputFailure.DataType] = true
+				thirdPartyRuleFailures[ruleOutputFailure.ThirdParty][ruleOutputFailure.DataSubject] = thirdPartyDataSubject
+
+				// increment counter
+				thirdPartyRuleCounter := thirdPartyRulesCounter[rule.AssociatedRecipe]
+				subjectFailure := thirdPartyRuleCounter.SubjectFailures[ruleOutputFailure.DataSubject]
+				if !ok {
+					subjectFailure = make(map[string]bool)
+				}
+				subjectFailure[ruleOutputFailure.RuleId] = true
+				thirdPartyRuleCounter.SubjectFailures[ruleOutputFailure.DataSubject] = subjectFailure
 			}
 		}
 	}
@@ -191,6 +288,7 @@ func GetOutput(dataflow *dataflow.DataFlow, config settings.Config) (*Report, er
 	}
 
 	// get inventory result
+	subjectInventory := make(map[string]Subject)
 	inventoryReportPolicy := config.Policies["inventory_report"]
 	rs, err := rego.RunQuery(inventoryReportPolicy.Query,
 		Input{
@@ -218,7 +316,7 @@ func GetOutput(dataflow *dataflow.DataFlow, config settings.Config) (*Report, er
 			subject, ok := subjectInventory[key]
 			if !ok {
 				// key not found, add a new item
-				ruleFailure := ruleFailures[key]
+				ruleFailure := subjectRuleFailures[key]
 				subject = Subject{
 					DataSubject:              outputItem.DataSubject,
 					DataType:                 outputItem.DataType,
@@ -226,7 +324,7 @@ func GetOutput(dataflow *dataflow.DataFlow, config settings.Config) (*Report, er
 					HighRiskFailureCount:     ruleFailure.HighRiskFailureCount,
 					MediumRiskFailureCount:   ruleFailure.MediumRiskFailureCount,
 					LowRiskFailureCount:      ruleFailure.LowRiskFailureCount,
-					RulesPassedCount:         localRuleCount - len(ruleFailure.TriggeredRules),
+					RulesPassedCount:         localRuleCounter - len(ruleFailure.TriggeredRules),
 				}
 			}
 			subject.DetectionCount += 1
@@ -234,9 +332,44 @@ func GetOutput(dataflow *dataflow.DataFlow, config settings.Config) (*Report, er
 		}
 	}
 
+	var thirdPartyInventory []ThirdParty
+	for _, component := range dataflow.Components {
+		if component.SubType != "third_party" {
+			continue
+		}
+
+		thirdPartyFailure, ok := thirdPartyRuleFailures[component.Name]
+		if !ok {
+			// no failures, therefore no associated data subjects
+			thirdPartyInventory = append(thirdPartyInventory, ThirdParty{
+				ThirdParty:               component.Name,
+				DataSubject:              "Unknown",
+				DataTypes:                []string{"Unknown"},
+				CriticalRiskFailureCount: 0,
+				HighRiskFailureCount:     0,
+				MediumRiskFailureCount:   0,
+				LowRiskFailureCount:      0,
+				RulesPassedCount:         0,
+			})
+		}
+
+		for _, ruleFailure := range thirdPartyFailure {
+			thirdPartyInventory = append(thirdPartyInventory, ThirdParty{
+				ThirdParty:               component.Name,
+				DataSubject:              ruleFailure.DataSubject,
+				DataTypes:                maps.Keys(ruleFailure.DataTypes),
+				CriticalRiskFailureCount: ruleFailure.CriticalRiskFailureCount,
+				HighRiskFailureCount:     ruleFailure.HighRiskFailureCount,
+				MediumRiskFailureCount:   ruleFailure.MediumRiskFailureCount,
+				LowRiskFailureCount:      ruleFailure.LowRiskFailureCount,
+				RulesPassedCount:         thirdPartyRulesCounter[component.Name].Count - len(thirdPartyRulesCounter[component.Name].SubjectFailures[ruleFailure.DataSubject]),
+			})
+		}
+	}
+
 	return &Report{
 		Subjects:   maps.Values(subjectInventory),
-		ThirdParty: maps.Values(thirdPartyInventory),
+		ThirdParty: thirdPartyInventory,
 	}, nil
 }
 
