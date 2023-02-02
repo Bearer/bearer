@@ -6,7 +6,6 @@ import (
 	"github.com/bearer/curio/new/detector/types"
 	"github.com/bearer/curio/new/language/tree"
 	"github.com/bearer/curio/pkg/util/stringutil"
-	"github.com/rs/zerolog/log"
 
 	generictypes "github.com/bearer/curio/new/detector/implementation/generic/types"
 	languagetypes "github.com/bearer/curio/new/language/types"
@@ -35,8 +34,6 @@ func (detector *stringDetector) DetectAt(
 		if node.AnonymousChild(0).Content() == "+" {
 			return concatenateChildren(node, evaluator)
 		}
-	default:
-		log.Debug().Msgf("got node: %s, with content: %s", node.Type(), node.Content())
 	}
 
 	return nil, nil
@@ -72,7 +69,7 @@ func concatenateChildren(node *tree.Node, evaluator types.Evaluator) ([]interfac
 func handleTemplateString(node *tree.Node, evaluator types.Evaluator) ([]interface{}, error) {
 	text := ""
 
-	node.EachPart(func(partText string) error {
+	err := node.EachPart(func(partText string) error {
 		text += partText
 		return nil
 	}, func(child *tree.Node) error {
@@ -80,7 +77,7 @@ func handleTemplateString(node *tree.Node, evaluator types.Evaluator) ([]interfa
 		return nil
 	})
 
-	return []interface{}{generictypes.String{Value: text}}, nil
+	return []interface{}{generictypes.String{Value: text}}, err
 }
 
 func (detector *stringDetector) Close() {}
