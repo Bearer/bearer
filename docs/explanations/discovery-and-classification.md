@@ -1,6 +1,5 @@
 ---
 title: How detection and classification works
-layout: layouts/doc.njk
 ---
 
 # Discovery and Classification

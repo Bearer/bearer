@@ -5,6 +5,9 @@ pagination:
   alias: rule
 permalink: "reference/rules/{{ rule.metadata.id | slug }}/"
 layout: layouts/doc.njk
+breadcrumbs:
+  - name: Rules
+    path: /reference/rules/
 eleventyComputed:
   title: "Rule - {{ rule.metadata.description }}"
 ---

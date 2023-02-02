@@ -1,0 +1,11 @@
+<div class="not-prose">
+  <ul class="breadcrumbs list-none flex mb-2">
+    {% for item in breadcrumbs %}
+      <li class="mr-2">
+        <a class="text-main hover:underline" href="{{item.path}}">
+          {{item.name}}
+        </a>
+      </li>
+    {% endfor %}
+  </ul>
+</div>

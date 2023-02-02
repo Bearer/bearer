@@ -119,6 +119,17 @@
   .dark .dark-icon {
     display: inline-block;
   }
+
+  .breadcrumbs li:not(:last-of-type)::after {
+    display: inline-block;
+    content: "";
+    width: 0;
+    height: 0;
+    margin-left: 0.25em;
+    border-top: 0.3em solid transparent;
+    border-bottom: 0.3em solid transparent;
+    border-left: 0.3em solid theme("colors.neutral.400");
+  }
 }
 
 @layer utilities {

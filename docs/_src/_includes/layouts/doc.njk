@@ -21,6 +21,9 @@ layout: layouts/base.njk
 	</nav>
 	<div class="grid col-span-4 gap-4 grid-cols-4">
 		<article class="order-last md:order-first prose prose-lg dark:prose-invert prose-headings:mb-4 prose-headings:mt-8 prose-h1:mt-0 col-span-4 md:col-span-3">
+			{% if breadcrumbs %}
+				{% include 'breadcrumbs.njk' %}
+			{% endif %}
 			{{ content | safe }}
 		</article>
 		<aside class="self-start col-span-3 sm:col-span-2 md:col-span-1 md:max-h-[80vh] md:top-heading-offset overflow-y-scroll dark:text-neutral-200 md:block md:sticky text-sm border-solid border-2 border-neutral-200 dark:border-neutral-500 rounded-md">
