@@ -21,6 +21,7 @@ import (
 	"github.com/bearer/curio/new/detector/implementation/javascript/property"
 	"github.com/bearer/curio/new/language"
 
+	stringdetector "github.com/bearer/curio/new/detector/implementation/javascript/string"
 	detectorset "github.com/bearer/curio/new/detector/set"
 	detectortypes "github.com/bearer/curio/new/detector/types"
 	languagetypes "github.com/bearer/curio/new/language/types"
@@ -55,10 +56,10 @@ func New(rules map[string]*settings.Rule, classifier *classification.Classifier)
 			constructor: property.New,
 			name:        "property detector",
 		},
-		// {
-		// 	constructor: stringdetector.New,
-		// 	name:        "string detector",
-		// },
+		{
+			constructor: stringdetector.New,
+			name:        "string detector",
+		},
 		{
 			constructor: insecureurl.New,
 			name:        "insecure url detector",

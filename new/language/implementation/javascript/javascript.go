@@ -18,7 +18,7 @@ import (
 )
 
 var (
-	variableLookupParents = []string{"pair", "arguments", "binary_expression", "template_string"}
+	variableLookupParents = []string{"pair", "arguments", "binary_expression"}
 
 	anonymousPatternNodeParentTypes = []string{}
 	patternMatchNodeContainerTypes  = []string{}
@@ -105,6 +105,7 @@ func (implementation *javascriptImplementation) AnalyzeFlow(rootNode *tree.Node)
 	})
 }
 
+// TODO: See if anything needs to be added here
 func (implementation *javascriptImplementation) ExtractPatternVariables(input string) (string, []patternquerytypes.Variable, error) {
 	nameIndex := patternQueryVariableRegex.SubexpIndex("name")
 	typesIndex := patternQueryVariableRegex.SubexpIndex("types")
@@ -144,6 +145,7 @@ func (implementation *javascriptImplementation) ExtractPatternVariables(input st
 	return replaced, params, nil
 }
 
+// TODO: See if anything needs to be added here
 func (implementation *javascriptImplementation) ExtractPatternMatchNode(input string) (string, int, error) {
 	inputBytes := []byte(input)
 	matches := matchNodeRegex.FindAllIndex(inputBytes, -1)
@@ -160,8 +162,8 @@ func (implementation *javascriptImplementation) ExtractPatternMatchNode(input st
 	return string(inputBytes[0:match[0]]) + string(inputBytes[match[1]:]), match[0], nil
 }
 
+// TODO: See if anything needs to be added here
 func produceDummyValue(i int, nodeType string) string {
-	// TODO: See if anything needs to be added here
 	switch nodeType {
 	case "identifier", "call":
 		return "curioVar" + fmt.Sprint(i)
@@ -170,27 +172,32 @@ func produceDummyValue(i int, nodeType string) string {
 	}
 }
 
+// TODO: See if anything needs to be added here
 func (implementation *javascriptImplementation) AnonymousPatternNodeParentTypes() []string {
 	return anonymousPatternNodeParentTypes
 }
 
+// TODO: See if anything needs to be added here
 func (implementation *javascriptImplementation) FindPatternMatchNode(input []byte) [][]int {
 	return matchNodeRegex.FindAllIndex(input, -1)
 }
 
+// TODO: See if anything needs to be added here
 func (implementation *javascriptImplementation) FindPatternUnanchoredPoints(input []byte) [][]int {
 	return ellipsisRegex.FindAllIndex(input, -1)
 }
 
+// TODO: See if anything needs to be added here
 func (implementation *javascriptImplementation) IsTerminalDetectionNode(node *tree.Node) bool {
-	// FIXME: implement this
 	return false
 }
 
+// TODO: See if anything needs to be added here
 func (implementation *javascriptImplementation) PatternMatchNodeContainerTypes() []string {
 	return patternMatchNodeContainerTypes
 }
 
+// TODO: See if anything needs to be added here
 func (implementation *javascriptImplementation) PatternIsAnchored(node *tree.Node) bool {
 	// FIXME: implement this
 	parent := node.Parent()
@@ -216,7 +223,7 @@ func (implementation *javascriptImplementation) PatternIsAnchored(node *tree.Nod
 	return true
 }
 
+// TODO: See if anything needs to be added here
 func (implementation *javascriptImplementation) DescendIntoDetectionNode(node *tree.Node) bool {
-	// TODO: implement this
 	return true
 }

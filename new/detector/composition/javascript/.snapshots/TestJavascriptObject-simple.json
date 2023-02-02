@@ -1,62 +1,44 @@
 [
 	{
-		"RuleName": "logger",
-		"File": {
-			"AbsolutePath": "/Users/vjeranfistric/go/src/github.com/bearer/curio/new/detector/composition/javascript/testdata/testcases/object/simple.js",
-			"RelativePath": "simple.js",
-			"FileInfo": {},
-			"IsGenerated": false,
-			"Extension": ".js",
-			"Base": "simple.js",
-			"IsConfiguration": false,
-			"IsDotFile": false,
-			"IsVendor": false,
-			"Language": "JavaScript",
-			"LanguageType": 2
-		},
-		"Detections": [
-			{
-				"MatchNode": {},
-				"ContextNode": null,
-				"Data": {
-					"Pattern": "console.log($\u003cDATA_TYPE\u003e)\n",
-					"Datatypes": [
-						{
-							"MatchNode": {},
-							"ContextNode": {},
-							"Data": {
-								"Name": "",
-								"Classification": {
-									"name": "",
-									"decision": {
-										"state": "invalid",
-										"reason": "blank_object_name"
+		"DetectorType": "logger",
+		"MatchNode": {},
+		"Data": {
+			"Pattern": "console.log($\u003cDATA_TYPE\u003e)\n",
+			"Datatypes": [
+				{
+					"DetectorType": "datatype",
+					"MatchNode": {},
+					"Data": {
+						"Name": "",
+						"Classification": {
+							"name": "",
+							"decision": {
+								"state": "invalid",
+								"reason": "blank_object_name"
+							}
+						},
+						"Properties": [
+							{
+								"Name": "user",
+								"Detection": {
+									"DetectorType": "property",
+									"MatchNode": {},
+									"Data": {
+										"Name": "user"
 									}
 								},
-								"Properties": [
-									{
-										"Name": "user",
-										"Detection": {
-											"MatchNode": {},
-											"ContextNode": {},
-											"Data": {
-												"Name": "user"
-											}
-										},
-										"Classification": {
-											"name": "user",
-											"decision": {
-												"state": "invalid",
-												"reason": "belongs_to_invalid_object"
-											}
-										}
+								"Classification": {
+									"name": "user",
+									"decision": {
+										"state": "invalid",
+										"reason": "belongs_to_invalid_object"
 									}
-								]
+								}
 							}
-						}
-					]
+						]
+					}
 				}
-			}
-		]
+			]
+		}
 	}
 ]
