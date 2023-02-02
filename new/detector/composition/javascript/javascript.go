@@ -6,8 +6,6 @@ import (
 
 	"golang.org/x/exp/slices"
 
-	// stringdetector "github.com/bearer/curio/new/detector/implementation/ruby/string"
-
 	"github.com/bearer/curio/pkg/classification"
 	"github.com/bearer/curio/pkg/commands/process/settings"
 	"github.com/bearer/curio/pkg/util/file"
@@ -86,7 +84,7 @@ func New(rules map[string]*settings.Rule, classifier *classification.Classifier)
 	detectors = append(detectors, detector)
 	composition.closers = append(composition.closers, detector.Close)
 
-	// instantiate custom ruby detectors
+	// instantiate custom javascript detectors
 	for ruleName, rule := range rules {
 		if !slices.Contains(rule.Languages, "javascript") {
 			continue
