@@ -97,6 +97,7 @@ func RunTest(t *testing.T,
 
 			cupaloy.SnapshotT(t, string(bytes))
 		})
-
 	}
+
+	composition.Close()
 }

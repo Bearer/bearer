@@ -253,7 +253,11 @@ func (detector *objectDetector) nameParentPairObject(
 }
 
 func (detector *objectDetector) Close() {
-	// detector.hashPairQuery.Close()
+	detector.objectPairQuery.Close()
 	detector.assignmentQuery.Close()
+	detector.variableDeclarationQuery.Close()
 	detector.parentPairQuery.Close()
+	detector.classNameQuery.Close()
+	detector.memberExpressionQuery.Close()
+	detector.subscriptExpressionQuery.Close()
 }

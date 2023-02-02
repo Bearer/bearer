@@ -8,7 +8,6 @@ import (
 	"github.com/bearer/curio/new/language/tree"
 	langtree "github.com/bearer/curio/new/language/tree"
 	languagetypes "github.com/bearer/curio/new/language/types"
-	"github.com/rs/zerolog/log"
 	"golang.org/x/exp/slices"
 )
 
@@ -47,8 +46,6 @@ func (evaluator *evaluator) ForTree(
 	followFlow bool,
 ) ([]*types.Detection, error) {
 	var result []*types.Detection
-
-	log.Debug().Msgf(rootNode.Debug())
 
 	if err := rootNode.Walk(func(node *langtree.Node, visitChildren func() error) error {
 		if !node.Equal(rootNode) && !evaluator.lang.DescendIntoDetectionNode(node) {
