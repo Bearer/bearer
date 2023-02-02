@@ -11,12 +11,11 @@ var (
 	FormatYAML  = "yaml"
 	FormatEmpty = ""
 
-	ReportDetectors  = "detectors" // nodoc: internal report type
-	ReportDataFlow   = "dataflow"
-	ReportPrivacy    = "privacy"
-	ReportThirdParty = "thirdparty"
-	ReportSummary    = "summary"
-	ReportStats      = "stats"
+	ReportDetectors = "detectors" // nodoc: internal report type
+	ReportDataFlow  = "dataflow"
+	ReportPrivacy   = "privacy"
+	ReportSummary   = "summary"
+	ReportStats     = "stats"
 )
 
 var ErrInvalidFormat = errors.New("invalid format argument; supported values: json, yaml")
@@ -91,7 +90,6 @@ func (f *ReportFlagGroup) ToOptions() (ReportOptions, error) {
 	case ReportDetectors:
 	case ReportDataFlow:
 	case ReportPrivacy:
-	case ReportThirdParty:
 	case ReportSummary:
 	case ReportStats:
 	default:

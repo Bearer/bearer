@@ -1,4 +1,4 @@
-package subjects
+package privacy
 
 import (
 	"encoding/json"

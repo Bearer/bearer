@@ -270,7 +270,7 @@ func (r *runner) Report(config settings.Config, report types.Report) (bool, erro
 			}
 			return reportPassed, nil
 		}
-		if config.Report.Report == flag.ReportPrivacy || config.Report.Report == flag.ReportThirdParty {
+		if config.Report.Report == flag.ReportPrivacy {
 			// for privacy report, default report format is CSV
 			err := reportoutput.ReportCSV(report, logger, config)
 			if err != nil {
