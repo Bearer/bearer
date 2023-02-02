@@ -37,7 +37,7 @@ async function fetchData(location) {
         groupedRules.push(dirData);
       }
     });
-    return { rules, groupedRules };
+    return rules;
   } catch (err) {
     throw err;
   }
@@ -70,6 +70,4 @@ async function fetchFile(location) {
 
 module.exports = async function () {
   return await fetchData("../pkg/commands/process/settings/rules/");
-
-  // return await fetchFile("../pkg/commands/process/settings/policies.yml");
 };

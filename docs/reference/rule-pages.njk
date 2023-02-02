@@ -1,6 +1,6 @@
 ---
 pagination:
-  data: rules.rules
+  data: rules
   size: 1
   alias: rule
 permalink: "reference/rules/{{ rule.metadata.id | slug }}/"
@@ -13,7 +13,21 @@ eleventyComputed:
 ---
 
 <h1>{{rule.metadata.description}}</h1>
-
+<ul class="not-prose list-none m-0 p-0">
+  <li>
+    <strong>Rule ID:</strong>
+    {{rule.metadata.id}}</li>
+  <li>
+    <strong>Data Security Risk ID:</strong>
+    {{rule.metadata.dsr_id}}</li>
+  <li>
+    <strong>Languages:</strong>
+    {{rule.languages}}</li>
+  <li>
+    <strong>Source:</strong>
+    <a class=" text-main dark:text-main-300 hover:underline" href="{{meta.sourcePath}}/blob/main/pkg/commands/process/settings/rules/{{rule.metadata.id | replace("_", "/")}}.yml">{{rule.name}}.yml</a>
+  </li>
+</ul>
 {% renderTemplate 'liquid,md',
 rule.metadata %}
 

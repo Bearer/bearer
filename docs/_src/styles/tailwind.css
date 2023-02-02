@@ -135,6 +135,9 @@
 @layer utilities {
 }
 
+.hidden {
+  display: none;
+}
 .open {
   display: block;
 }
