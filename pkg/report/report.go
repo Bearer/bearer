@@ -1,7 +1,6 @@
 package report
 
 import (
-	createview "github.com/bearer/curio/pkg/report/create_view"
 	"github.com/bearer/curio/pkg/report/dependencies"
 	"github.com/bearer/curio/pkg/report/detections"
 	"github.com/bearer/curio/pkg/report/detectors"
@@ -18,7 +17,6 @@ type Report interface {
 	detections.ReportDetection
 	schema.ReportSchema
 	datatype.ReportDataType
-	AddCreateView(detectorType detectors.Type, createView createview.View)
 	AddInterface(detectorType detectors.Type, data interfaces.Interface, source source.Source)
 	AddFramework(detectorType detectors.Type, frameworkType frameworks.Type, data interface{}, source source.Source)
 	AddDependency(detectorType detectors.Type, dependency dependencies.Dependency, source source.Source)

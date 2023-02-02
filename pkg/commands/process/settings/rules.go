@@ -11,26 +11,32 @@ import (
 	"gopkg.in/yaml.v3"
 )
 
-func loadRules(externalRuleDirs []string, options flag.RuleOptions) (map[string]*Rule, error) {
+func loadRules(externalRuleDirs []string, options flag.RuleOptions) (map[string]*Rule, map[string]*Rule, error) {
 	definitions := make(map[string]RuleDefinition)
+	builtInDefinitions := make(map[string]RuleDefinition)
 
 	if err := loadRuleDefinitions(definitions, rulesFs); err != nil {
-		return nil, fmt.Errorf("error loading default rules: %w", err)
+		return nil, nil, fmt.Errorf("error loading default rules: %s", err)
+	}
+
+	if err := loadRuleDefinitions(builtInDefinitions, builtInRulesFs); err != nil {
+		return nil, nil, fmt.Errorf("error loading default built-in rules: %s", err)
 	}
 
 	for _, dir := range externalRuleDirs {
 		if err := loadRuleDefinitions(definitions, os.DirFS(dir)); err != nil {
-			return nil, fmt.Errorf("error loading external rules from %s: %w", dir, err)
+			return nil, nil, fmt.Errorf("error loading external rules from %s: %w", dir, err)
 		}
 	}
 
 	if err := validateRuleOptionIDs(options, definitions); err != nil {
-		return nil, err
+		return nil, nil, err
 	}
 
-	enabledRules := getEnabledRules(options, definitions)
+	enabledRules := getEnabledRules(options, definitions, nil)
+	builtInRules := getEnabledRules(options, builtInDefinitions, enabledRules)
 
-	return buildRules(definitions, enabledRules), nil
+	return buildRules(builtInDefinitions, builtInRules), buildRules(definitions, enabledRules), nil
 }
 
 func loadRuleDefinitions(definitions map[string]RuleDefinition, dir fs.FS) error {
@@ -95,7 +101,7 @@ func validateRuleOptionIDs(options flag.RuleOptions, definitions map[string]Rule
 	return nil
 }
 
-func getEnabledRules(options flag.RuleOptions, definitions map[string]RuleDefinition) map[string]struct{} {
+func getEnabledRules(options flag.RuleOptions, definitions map[string]RuleDefinition, rules map[string]struct{}) map[string]struct{} {
 	enabledRules := make(map[string]struct{})
 
 	for _, definition := range definitions {
@@ -103,6 +109,10 @@ func getEnabledRules(options flag.RuleOptions, definitions map[string]RuleDefini
 
 		if definition.Disabled {
 			continue
+		}
+
+		for ruleId := range rules {
+			enabledRules[ruleId] = struct{}{}
 		}
 
 		if len(options.OnlyRule) > 0 && !options.OnlyRule[id] {
@@ -118,6 +128,7 @@ func getEnabledRules(options flag.RuleOptions, definitions map[string]RuleDefini
 		for _, dependencyID := range definition.Detectors {
 			enabledRules[dependencyID] = struct{}{}
 		}
+
 	}
 
 	return enabledRules
@@ -136,6 +147,7 @@ func buildRules(definitions map[string]RuleDefinition, enabledRules map[string]s
 		rules[id] = &Rule{
 			Id:                 id,
 			Type:               definition.Type,
+			AssociatedRecipe:   definition.Metadata.AssociatedRecipe,
 			Trigger:            definition.Trigger,
 			OmitParentContent:  definition.OmitParentContent,
 			SkipDataTypes:      definition.SkipDataTypes,

@@ -30,7 +30,7 @@ func TestFileList(t *testing.T) {
 			Input: input{
 				projectPath: filepath.Join("testdata", "happy_path", "standard"),
 				config: settings.Config{
-					Worker: flag.WorkerOptions{
+					Worker: settings.WorkerOptions{
 						FileSizeMaximum:           100000,
 						TimeoutFileSecondPerBytes: 1,
 					},
@@ -51,7 +51,7 @@ func TestFileList(t *testing.T) {
 					Scan: flag.ScanOptions{
 						SkipPath: []string{"users/admin.go"},
 					},
-					Worker: flag.WorkerOptions{
+					Worker: settings.WorkerOptions{
 						FileSizeMaximum:           100000,
 						TimeoutFileSecondPerBytes: 1,
 					},
@@ -72,7 +72,7 @@ func TestFileList(t *testing.T) {
 					Scan: flag.ScanOptions{
 						SkipPath: []string{"users"},
 					},
-					Worker: flag.WorkerOptions{
+					Worker: settings.WorkerOptions{
 						FileSizeMaximum:           100000,
 						TimeoutFileSecondPerBytes: 1,
 					},

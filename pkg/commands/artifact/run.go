@@ -196,7 +196,13 @@ func (r *runner) scanArtifact(ctx context.Context, opts flag.Options) (types.Rep
 
 // Run performs artifact scanning
 func Run(ctx context.Context, opts flag.Options, targetKind TargetKind) (err error) {
-	ctx, cancel := context.WithTimeout(ctx, opts.Timeout)
+	scanSettings, err := settings.FromOptions(opts)
+	scanSettings.Target = opts.Target
+	if err != nil {
+		return err
+	}
+
+	ctx, cancel := context.WithTimeout(ctx, scanSettings.Worker.Timeout)
 	defer cancel()
 
 	defer func() {
@@ -204,13 +210,6 @@ func Run(ctx context.Context, opts flag.Options, targetKind TargetKind) (err err
 			log.Warn().Msg("Increase --timeout value")
 		}
 	}()
-
-	scanSettings, err := settings.FromOptions(opts)
-	scanSettings.Target = opts.Target
-
-	if err != nil {
-		return err
-	}
 
 	r := NewRunner(ctx, scanSettings)
 	defer r.Close(ctx)
@@ -262,13 +261,23 @@ func (r *runner) Report(config settings.Config, report types.Report) (bool, erro
 		logger = outputhandler.PlainLogger(reportFile)
 	}
 
-	if config.Report.Report == flag.ReportSummary && config.Report.Format == flag.FormatEmpty {
-		// for policy report, default report format is NOT JSON
-		reportPassed, err := reportoutput.ReportSummary(report, logger, config)
-		if err != nil {
-			return false, fmt.Errorf("error generating report %w", err)
+	if config.Report.Format == flag.FormatEmpty {
+		if config.Report.Report == flag.ReportSummary {
+			// for policy report, default report format is NOT JSON
+			reportPassed, err := reportoutput.ReportSummary(report, logger, config)
+			if err != nil {
+				return false, fmt.Errorf("error generating report %w", err)
+			}
+			return reportPassed, nil
 		}
-		return reportPassed, nil
+		if config.Report.Report == flag.ReportPrivacy || config.Report.Report == flag.ReportThirdParty {
+			// for privacy report, default report format is CSV
+			err := reportoutput.ReportCSV(report, logger, config)
+			if err != nil {
+				return false, fmt.Errorf("error generating report %w", err)
+			}
+			return true, nil
+		}
 	}
 
 	switch config.Report.Format {

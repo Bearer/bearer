@@ -7,10 +7,12 @@ data_types:
               line_number: 2
               field_name: email
               object_name: user
+              subject_name: User
             - filename: pkg/commands/process/settings/rules/ruby/third_parties/sentry/testdata/datatype_in_set_tag.rb
               line_number: 6
               field_name: email
               object_name: user
+              subject_name: User
 risks:
     - detector_id: ruby_third_parties_sentry
       data_types:
@@ -24,6 +26,7 @@ risks:
                 content: scope.set_tag(:email, user.email)
               field_name: email
               object_name: user
+              subject_name: User
             - filename: pkg/commands/process/settings/rules/ruby/third_parties/sentry/testdata/datatype_in_set_tag.rb
               line_number: 6
               parent:
@@ -31,21 +34,7 @@ risks:
                 content: scope.set_tag(:email, user.email)
               field_name: email
               object_name: user
-        - name: Unique Identifier
-          stored: false
-          locations:
-            - filename: pkg/commands/process/settings/rules/ruby/third_parties/sentry/testdata/datatype_in_set_tag.rb
-              line_number: 2
-              parent:
-                line_number: 2
-                content: scope.set_tag(:email, user.email)
-              object_name: user
-            - filename: pkg/commands/process/settings/rules/ruby/third_parties/sentry/testdata/datatype_in_set_tag.rb
-              line_number: 6
-              parent:
-                line_number: 6
-                content: scope.set_tag(:email, user.email)
-              object_name: user
+              subject_name: User
 components: []
 
 

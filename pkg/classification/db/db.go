@@ -4,6 +4,7 @@ import (
 	"embed"
 	"encoding/json"
 	"log"
+	"os"
 	"regexp"
 	"strings"
 
@@ -27,6 +28,9 @@ var dataTypeClassificationPatternsDir embed.FS
 
 //go:embed known_person_object_patterns
 var knownPersonObjectPatternsDir embed.FS
+
+//go:embed subject_mapping.json
+var subjectMappingFile embed.FS
 
 //go:embed category_grouping.json
 var categoryGroupingFile embed.FS
@@ -123,26 +127,31 @@ type KnownPersonObjectPattern struct {
 	ExcludeRegexp           string         `json:"exclude_regexp,omitempty"`
 	ExcludeRegexpMatcher    *regexp.Regexp `json:"exclude_regexp_matcher" yaml:"exclude_regexp_matcher"`
 	Category                string         `json:"category" yaml:"category"`
+	SubjectName             string         `json:"subject_name,omitempty" yaml:"subject_name,omitempty"`
 	ActAsIdentifier         bool           `json:"act_as_identifier" yaml:"act_as_identifier"`
 	IdentifierRegexpMatcher *regexp.Regexp `json:"identifier_regexp_matcher" yaml:"identifier_regexp_matcher"`
 }
 
 func Default() DefaultDB {
-	return defaultDB("")
+	return defaultDB("", "")
+}
+
+func DefaultWithMapping(subjectMappingPath string) DefaultDB {
+	return defaultDB("", subjectMappingPath)
 }
 
 func DefaultWithContext(context flag.Context) DefaultDB {
-	return defaultDB(context)
+	return defaultDB(context, "")
 }
 
-func defaultDB(context flag.Context) DefaultDB {
+func defaultDB(context flag.Context, subjectMappingPath string) DefaultDB {
 	dataTypes := defaultDataTypes()
 	return DefaultDB{
 		Recipes:                        defaultRecipes(),
 		DataTypes:                      dataTypes,
 		DataCategories:                 defaultDataCategories(context),
 		DataTypeClassificationPatterns: defaultDataTypeClassificationPatterns(dataTypes),
-		KnownPersonObjectPatterns:      defaultKnownPersonObjectPatterns(dataTypes),
+		KnownPersonObjectPatterns:      defaultKnownPersonObjectPatterns(dataTypes, subjectMappingPath),
 	}
 }
 
@@ -328,7 +337,7 @@ func defaultDataTypeClassificationPatterns(dataTypes []DataType) []DataTypeClass
 	return dataTypeClassificationPatterns
 }
 
-func defaultKnownPersonObjectPatterns(dataTypes []DataType) []KnownPersonObjectPattern {
+func defaultKnownPersonObjectPatterns(dataTypes []DataType, subjectMappingPath string) []KnownPersonObjectPattern {
 	knownPersonObjectPatterns := []KnownPersonObjectPattern{}
 
 	// "Identification" > "Unique Identifier" data type
@@ -343,6 +352,24 @@ func defaultKnownPersonObjectPatterns(dataTypes []DataType) []KnownPersonObjectP
 		}
 	}
 	files, err := knownPersonObjectPatternsDir.ReadDir("known_person_object_patterns")
+	if err != nil {
+		handleError(err)
+	}
+
+	// read mapping
+	var subjectMappingJson []byte
+	if subjectMappingPath != "" {
+		subjectMappingJson, err = os.ReadFile(subjectMappingPath)
+	} else {
+		subjectMappingJson, err = subjectMappingFile.ReadFile("subject_mapping.json")
+	}
+	if err != nil {
+		handleError(err)
+	}
+
+	var subjectMapping map[string]string
+	rawBytes := []byte(subjectMappingJson)
+	err = json.Unmarshal(rawBytes, &subjectMapping)
 	if err != nil {
 		handleError(err)
 	}
@@ -383,6 +410,9 @@ func defaultKnownPersonObjectPatterns(dataTypes []DataType) []KnownPersonObjectP
 			if err != nil {
 				handleError(err)
 			}
+
+			// add subject name from mapping, if available
+			knownPersonObjectPattern.SubjectName = subjectMapping[knownPersonObjectPattern.Category]
 		}
 
 		knownPersonObjectPatterns = append(knownPersonObjectPatterns, knownPersonObjectPattern)

@@ -12,7 +12,6 @@ import (
 	"github.com/bearer/curio/pkg/parser"
 	"github.com/bearer/curio/pkg/parser/nodeid"
 
-	createview "github.com/bearer/curio/pkg/report/create_view"
 	"github.com/bearer/curio/pkg/report/dependencies"
 	"github.com/bearer/curio/pkg/report/detections"
 	"github.com/bearer/curio/pkg/report/detectors"
@@ -67,21 +66,6 @@ func (report *Detectors) AddInterface(
 
 	classifiedDetection.Type = detections.TypeInterfaceClassified
 	report.Add(classifiedDetection)
-}
-
-func (report *Detectors) AddCreateView(
-	detectorType detectors.Type,
-	createview createview.View,
-) {
-	for _, field := range createview.Fields {
-		field.CommitSHA = report.Blamer.SHAForLine(field.Source.Filename, *field.Source.LineNumber)
-	}
-
-	for _, field := range createview.From {
-		field.CommitSHA = report.Blamer.SHAForLine(field.Source.Filename, *field.Source.LineNumber)
-	}
-
-	report.AddDetection(detections.TypeCreateView, detectorType, createview.Source, createview)
 }
 
 func (report *Detectors) AddDataType(detectionType detections.DetectionType, detectorType detectors.Type, idGenerator nodeid.Generator, values map[parser.NodeID]*datatype.DataType, parent *parser.Node) {
@@ -167,24 +151,6 @@ func (report *Detectors) SchemaGroupEnd(idGenerator nodeid.Generator) {
 
 	classifiedDatatypes := make(map[parser.NodeID]*datatype.ClassifiedDatatype, 0)
 
-	// Classify child data types
-	for node, storedSchema := range report.StoredSchemas.Schemas {
-		source := storedSchema.Source
-		schema := storedSchema.Value
-
-		childName := schema.FieldName
-		value, ok := childDataTypes[childName].(*datatype.DataType)
-		if !ok {
-			continue
-		}
-
-		classificationRequest := classificationschema.ClassificationRequest{DetectorType: report.StoredSchemas.DetectorType, Value: value.ToClassificationRequestDetection(), Filename: source.Filename}
-		classification := report.Classifier.Schema.Classify(classificationRequest)
-
-		classifiedDatatypes[node.ID()] = datatype.BuildClassifiedDatatype(value, classification)
-	}
-
-	// Classify parent data type
 	parentClassificationRequest := classificationschema.ClassificationRequest{DetectorType: report.StoredSchemas.DetectorType, Value: parentDataType.ToClassificationRequestDetection(), Filename: report.StoredSchemas.ParentSchema.Source.Filename}
 	parentClassification := report.Classifier.Schema.Classify(parentClassificationRequest)
 	classifiedDatatypes[report.StoredSchemas.Node.ID()] = datatype.BuildClassifiedDatatype(parentDataType, parentClassification)

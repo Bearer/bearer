@@ -7,6 +7,7 @@ data_types:
               line_number: 2
               field_name: email
               object_name: user
+              subject_name: User
     - name: Physical Address
       detectors:
         - name: ruby
@@ -15,6 +16,7 @@ data_types:
               line_number: 1
               field_name: address
               object_name: user
+              subject_name: User
 components: []
 
 

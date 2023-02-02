@@ -56,7 +56,7 @@ type activeDetector struct {
 
 var customDetector = InitializedDetector{reportdetectors.DetectorCustom, custom.New(&nodeid.UUIDGenerator{})}
 
-func SetupCustomDetector(config map[string]*settings.Rule) error {
+func SetupLegacyDetector(config map[string]*settings.Rule) error {
 	detector := customDetector.Detector.(*custom.Detector)
 
 	return detector.CompileRules(config)

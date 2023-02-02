@@ -1,7 +1,10 @@
 package sync
 
 import (
+	"bytes"
 	"context"
+	"encoding/json"
+	"strings"
 	"time"
 
 	"github.com/bearer/curio/battle_tests/build"
@@ -11,6 +14,11 @@ import (
 	"github.com/bearer/curio/battle_tests/rediscli"
 	"github.com/bearer/curio/battle_tests/sheet"
 	"github.com/rs/zerolog/log"
+
+	"github.com/aws/aws-sdk-go/aws"
+	"github.com/aws/aws-sdk-go/aws/awserr"
+	"github.com/aws/aws-sdk-go/aws/session"
+	"github.com/aws/aws-sdk-go/service/s3/s3manager"
 )
 
 func GetDocumentID(sheetClient *sheet.GoogleSheets) (documentID string, err error) {
@@ -88,6 +96,15 @@ func DoWork(ctx context.Context, items []repodb.ItemWithLanguage, docID string, 
 				return
 			case metrics := <-metricsReport:
 				sheetClient.InsertMetricsMustPass(docID, metrics)
+
+				err := uploadReportToS3(build.S3Bucket, docID, metrics)
+				if err != nil {
+					if awsErr, ok := err.(awserr.Error); ok {
+						log.Error().Msgf("Failed to upload file to S3 code:%s message:%s", awsErr.Code(), awsErr.Message())
+					} else {
+						log.Error().Msgf("Failed to upload file to S3: %e", err)
+					}
+				}
 			}
 		}
 	}()
@@ -102,6 +119,43 @@ func WorkerOffline(docID string, sheetClient *sheet.GoogleSheets) error {
 	}
 
 	log.Debug().Msgf("worker count after offline %d...", workerCount)
+
+	return nil
+}
+
+func uploadReportToS3(bucketName string, documentID string, metrics *metricsscan.MetricsReport) error {
+	sess, err := session.NewSessionWithOptions(session.Options{
+		Profile: "default",
+		Config: aws.Config{
+			Region: aws.String("eu-west-1"),
+		},
+	})
+
+	if err != nil {
+		log.Error().Msgf("Failed to create AWS session: %e", err)
+		return err
+	}
+
+	data, err := json.Marshal(metrics)
+	if err != nil {
+		log.Error().Msgf("Failed to serialize metrics to JSON: %e", err)
+		return err
+	}
+
+	reader := bytes.NewReader(data)
+	uploader := s3manager.NewUploader(sess)
+	key_filename := strings.Replace(strings.Replace(metrics.URL, "https://", "", 1), "/", "_", -1) + ".json"
+	result, err := uploader.Upload(&s3manager.UploadInput{
+		Bucket: aws.String(bucketName),
+		Key:    aws.String(documentID + "/" + key_filename),
+		Body:   reader,
+	})
+
+	if err != nil {
+		return err
+	}
+
+	log.Debug().Msgf("S3 File Uploaded: %s", result.Location)
 
 	return nil
 }
