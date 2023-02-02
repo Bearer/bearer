@@ -13,7 +13,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@11ty/eleventy": "^2.0.0-canary.23",
+    "@11ty/eleventy": "^2.0.0-beta.3",
     "@11ty/eleventy-plugin-syntaxhighlight": "^4.1.0",
     "@tailwindcss/typography": "^0.5.7",
     "eleventy-plugin-toc": "^1.1.5",
