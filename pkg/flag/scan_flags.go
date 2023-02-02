@@ -52,6 +52,12 @@ var (
 		Value:      "",
 		Usage:      "Expand context of schema classification e.g., --context=health, to include data types particular to health",
 	}
+	DataSubjectMappingFlag = Flag{
+		Name:       "data-subject-mapping",
+		ConfigName: "scan.data_subject_mapping",
+		Value:      "",
+		Usage:      "Override default data subject mapping by providing a path to a custom mapping JSON file",
+	}
 	QuietFlag = Flag{
 		Name:       "quiet",
 		ConfigName: "scan.quiet",
@@ -79,6 +85,7 @@ type ScanFlagGroup struct {
 	DomainResolutionTimeoutFlag *Flag
 	InternalDomainsFlag         *Flag
 	ContextFlag                 *Flag
+	DataSubjectMappingFlag      *Flag
 	QuietFlag                   *Flag
 	ForceFlag                   *Flag
 	ExternalRuleDirFlag         *Flag
@@ -92,6 +99,7 @@ type ScanOptions struct {
 	DomainResolutionTimeout time.Duration `mapstructure:"domain-resolution-timeout" json:"domain-resolution-timeout" yaml:"domain-resolution-timeout"`
 	InternalDomains         []string      `mapstructure:"internal-domains" json:"internal-domains" yaml:"internal-domains"`
 	Context                 Context       `mapstructure:"context" json:"context" yaml:"context"`
+	DataSubjectMapping      string        `mapstructure:"data_subject_mapping" json:"data_subject_mapping" yaml:"data_subject_mapping"`
 	Quiet                   bool          `mapstructure:"quiet" json:"quiet" yaml:"quiet"`
 	Force                   bool          `mapstructure:"force" json:"force" yaml:"force"`
 	ExternalRuleDir         []string      `mapstructure:"external-rule-dir" json:"external-rule-dir" yaml:"external-rule-dir"`
@@ -105,6 +113,7 @@ func NewScanFlagGroup() *ScanFlagGroup {
 		DomainResolutionTimeoutFlag: &DomainResolutionTimeoutFlag,
 		InternalDomainsFlag:         &InternalDomainsFlag,
 		ContextFlag:                 &ContextFlag,
+		DataSubjectMappingFlag:      &DataSubjectMappingFlag,
 		QuietFlag:                   &QuietFlag,
 		ForceFlag:                   &ForceFlag,
 		ExternalRuleDirFlag:         &ExternalRuleDirFlag,
@@ -123,6 +132,7 @@ func (f *ScanFlagGroup) Flags() []*Flag {
 		f.DomainResolutionTimeoutFlag,
 		f.InternalDomainsFlag,
 		f.ContextFlag,
+		f.DataSubjectMappingFlag,
 		f.QuietFlag,
 		f.ForceFlag,
 		f.ExternalRuleDirFlag,
@@ -149,6 +159,7 @@ func (f *ScanFlagGroup) ToOptions(args []string) (ScanOptions, error) {
 		DomainResolutionTimeout: getDuration(f.DomainResolutionTimeoutFlag),
 		InternalDomains:         getStringSlice(f.InternalDomainsFlag),
 		Context:                 context,
+		DataSubjectMapping:      getString(f.DataSubjectMappingFlag),
 		Quiet:                   getBool(f.QuietFlag),
 		Force:                   getBool(f.ForceFlag),
 		Target:                  target,
