@@ -6,15 +6,16 @@ import (
 	"regexp"
 	"strings"
 
-	sitter "github.com/smacker/go-tree-sitter"
 	"github.com/smacker/go-tree-sitter/javascript"
 	"github.com/ssoroka/slice"
 	"golang.org/x/exp/slices"
 
 	"github.com/bearer/curio/new/language/implementation"
-	patternquerytypes "github.com/bearer/curio/new/language/patternquery/types"
 	"github.com/bearer/curio/new/language/tree"
 	"github.com/bearer/curio/pkg/util/regex"
+
+	patternquerytypes "github.com/bearer/curio/new/language/patternquery/types"
+	sitter "github.com/smacker/go-tree-sitter"
 )
 
 var (

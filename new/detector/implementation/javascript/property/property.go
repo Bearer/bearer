@@ -76,6 +76,7 @@ func (detector *propertyDetector) DetectAt(
 		return []interface{}{generictypes.Property{Name: result["name"].Content()}}, nil
 	}
 
+	// run method name query
 	return detector.getMethod(node, evaluator)
 }
 
