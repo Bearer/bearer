@@ -18,7 +18,7 @@
   "Contact": "User",
   "Contractor": "User",
   "Contributor": "User",
-  "Customer": "Customer",
+  "Customer": "User",
   "Developer": "User",
   "Doctor": "User",
   "Driver": "User",
