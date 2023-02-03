@@ -11,9 +11,10 @@ Examples:
 
 
 Report Flags
-  -f, --format string   Specify report format (json, yaml)
-      --output string   Specify the output path for the report.
-      --report string   Specify the type of report (summary, privacy). (default "summary")
+  -f, --format string     Specify report format (json, yaml)
+      --output string     Specify the output path for the report.
+      --report string     Specify the type of report (summary, privacy). (default "summary")
+      --severity string   Specify which severities are included in the report. (default "critical,high,medium,low")
 
 Rule Flags
       --only-rule strings   Specify the comma-separated ids of the rules you would like to run. Skips all other rules.
