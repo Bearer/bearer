@@ -25,6 +25,7 @@ var severityColorFns = map[string]func(x ...interface{}) string{
 	types.LevelHigh:     color.New(color.FgHiRed).SprintFunc(),
 	types.LevelMedium:   color.New(color.FgYellow).SprintFunc(),
 	types.LevelLow:      color.New(color.FgBlue).SprintFunc(),
+	types.LevelWarning:  color.New(color.FgCyan).SprintFunc(),
 }
 
 type PolicyInput struct {
@@ -192,6 +193,8 @@ func FindHighestSeverity(groups []string, severity map[string]string) string {
 		return types.LevelMedium
 	} else if slices.Contains(severities, "low") {
 		return types.LevelLow
+	} else if slices.Contains(severities, "warning") {
+		return types.LevelWarning
 	}
 
 	return severity["default"]
@@ -264,6 +267,14 @@ func writeSummaryToString(
 			sort.Strings(policyIds)
 			reportStr.WriteString(" (" + strings.Join(policyIds, ", ") + ")")
 		}
+	}
+	// warning count
+	warningCount := 0
+	reportStr.WriteString("\n" + formatSeverity(types.LevelWarning) + fmt.Sprint(warningCount))
+	if len(policyFailures[types.LevelWarning]) > 0 {
+		policyIds := maps.Keys(policyFailures[types.LevelWarning])
+		sort.Strings(policyIds)
+		reportStr.WriteString(" (" + strings.Join(policyIds, ", ") + ")")
 	}
 
 	reportStr.WriteString("\n")
