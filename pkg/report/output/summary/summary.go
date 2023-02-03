@@ -46,7 +46,7 @@ type PolicyOutput struct {
 	DetailedContext  string   `json:"detailed_context,omitempty" yaml:"detailed_context,omitempty"`
 }
 
-type PolicyResult struct {
+type Result struct {
 	PolicyName        string   `json:"policy_name" yaml:"policy_name"`
 	PolicyDSRID       string   `json:"policy_dsrid" yaml:"policy_dsrid"`
 	PolicyDisplayId   string   `json:"policy_display_id" yaml:"policy_display_id"`
@@ -60,9 +60,9 @@ type PolicyResult struct {
 	DetailedContext   string   `json:"detailed_context,omitempty" yaml:"detailed_context,omitempty"`
 }
 
-func GetOutput(dataflow *dataflow.DataFlow, config settings.Config) (map[string][]PolicyResult, error) {
+func GetOutput(dataflow *dataflow.DataFlow, config settings.Config) (map[string][]Result, error) {
 	// policy results grouped by severity (critical, high, ...)
-	result := make(map[string][]PolicyResult)
+	result := make(map[string][]Result)
 
 	if !config.Scan.Quiet {
 		output.StdErrLogger().Msgf("Evaluating rules")
@@ -109,7 +109,7 @@ func GetOutput(dataflow *dataflow.DataFlow, config settings.Config) (map[string]
 			}
 
 			for _, policyOutput := range policyResults["policy_failure"] {
-				policyResult := PolicyResult{
+				policyResult := Result{
 					PolicyDescription: rule.Description,
 					PolicyDisplayId:   rule.Id,
 					PolicyDSRID:       rule.DSRID,
@@ -132,7 +132,7 @@ func GetOutput(dataflow *dataflow.DataFlow, config settings.Config) (map[string]
 	return result, nil
 }
 
-func BuildReportString(rules map[string]*settings.Rule, policyResults map[string][]PolicyResult, withoutColor bool) *strings.Builder {
+func BuildReportString(rules map[string]*settings.Rule, results map[string][]Result, severityForFailure map[string]bool, withoutColor bool) (*strings.Builder, bool) {
 	reportStr := &strings.Builder{}
 	reportStr.WriteString("\n\nSummary Report\n")
 	reportStr.WriteString("\n=====================================")
@@ -144,30 +144,36 @@ func BuildReportString(rules map[string]*settings.Rule, policyResults map[string
 
 	writeRuleListToString(reportStr, rules)
 
-	policyFailures := map[string]map[string]bool{
+	failures := map[string]map[string]bool{
 		types.LevelCritical: make(map[string]bool),
 		types.LevelHigh:     make(map[string]bool),
 		types.LevelMedium:   make(map[string]bool),
 		types.LevelLow:      make(map[string]bool),
 	}
 
-	for _, policyLevel := range []string{
+	reportPassed := true
+	for _, severityLevel := range []string{
 		types.LevelCritical,
 		types.LevelHigh,
 		types.LevelMedium,
 		types.LevelLow,
 	} {
-		for _, policyFailure := range policyResults[policyLevel] {
-			policyFailures[policyLevel][policyFailure.PolicyDSRID] = true
-			writePolicyFailureToString(reportStr, policyFailure, policyLevel)
+		if severityForFailure[severityLevel] && len(results[severityLevel]) != 0 {
+			// fail the report if we have failures above the severity threshold
+			reportPassed = false
+		}
+
+		for _, failure := range results[severityLevel] {
+			failures[severityLevel][failure.PolicyDSRID] = true
+			writeFailureToString(reportStr, failure, severityLevel)
 		}
 	}
 
-	writeSummaryToString(reportStr, policyResults, len(rules), policyFailures)
+	writeSummaryToString(reportStr, results, len(rules), failures, severityForFailure)
 
 	color.NoColor = initialColorSetting
 
-	return reportStr
+	return reportStr, reportPassed
 }
 
 func FindHighestSeverity(groups []string, severity map[string]string) string {
@@ -209,8 +215,9 @@ func writeRuleListToString(
 
 func writeSummaryToString(
 	reportStr *strings.Builder,
-	policyResults map[string][]PolicyResult,
+	policyResults map[string][]Result,
 	policyCount int, policyFailures map[string]map[string]bool,
+	severityForFailure map[string]bool,
 ) {
 	reportStr.WriteString("\n=====================================")
 
@@ -222,63 +229,61 @@ func writeSummaryToString(
 		return
 	}
 
-	criticalCount := len(policyResults[types.LevelCritical])
-	highCount := len(policyResults[types.LevelHigh])
-	mediumCount := len(policyResults[types.LevelMedium])
-	lowCount := len(policyResults[types.LevelLow])
-
-	totalCount := criticalCount + highCount + mediumCount + lowCount
+	severityLevels := []string{types.LevelCritical, types.LevelHigh, types.LevelMedium, types.LevelLow}
+	failureCount := 0
+	failureBelowThresholdCount := 0
+	for _, severityLevel := range severityLevels {
+		if severityForFailure[severityLevel] {
+			failureCount += len(policyResults[severityLevel])
+			continue
+		}
+		failureBelowThresholdCount += len(policyResults[severityLevel])
+	}
 
 	reportStr.WriteString("\n\n")
-	reportStr.WriteString(color.RedString(fmt.Sprint(policyCount) + " checks, " + fmt.Sprint(totalCount) + " failures\n\n"))
 
-	// critical count
-	reportStr.WriteString(formatSeverity(types.LevelCritical) + fmt.Sprint(criticalCount))
-	if len(policyFailures[types.LevelCritical]) > 0 {
-		policyIds := maps.Keys(policyFailures[types.LevelCritical])
-		sort.Strings(policyIds)
-		reportStr.WriteString(" (" + strings.Join(policyIds, ", ") + ")")
+	summaryString := fmt.Sprint(policyCount) + " checks, " + fmt.Sprint(failureCount) + " failures"
+	if failureBelowThresholdCount > 0 {
+		summaryString += ", " + fmt.Sprint(failureBelowThresholdCount) + " failures below severity threshold"
 	}
-	// high count
-	reportStr.WriteString("\n" + formatSeverity(types.LevelHigh) + fmt.Sprint(highCount))
-	if len(policyFailures[types.LevelHigh]) > 0 {
-		policyIds := maps.Keys(policyFailures[types.LevelHigh])
-		sort.Strings(policyIds)
-		reportStr.WriteString(" (" + strings.Join(policyIds, ", ") + ")")
+	summaryString += "\n\n"
+
+	if failureCount > 0 {
+		reportStr.WriteString(color.RedString(summaryString))
+	} else {
+		reportStr.WriteString(summaryString)
 	}
-	// medium count
-	reportStr.WriteString("\n" + formatSeverity(types.LevelMedium) + fmt.Sprint(mediumCount))
-	if len(policyFailures[types.LevelMedium]) > 0 {
-		policyIds := maps.Keys(policyFailures[types.LevelMedium])
-		sort.Strings(policyIds)
-		reportStr.WriteString(" (" + strings.Join(policyIds, ", ") + ")")
-	}
-	// low count
-	reportStr.WriteString("\n" + formatSeverity(types.LevelLow) + fmt.Sprint(lowCount))
-	if len(policyFailures[types.LevelLow]) > 0 {
-		policyIds := maps.Keys(policyFailures[types.LevelLow])
-		sort.Strings(policyIds)
-		reportStr.WriteString(" (" + strings.Join(policyIds, ", ") + ")")
+
+	for i, severityLevel := range severityLevels {
+		if i > 0 {
+			reportStr.WriteString("\n")
+		}
+		reportStr.WriteString(formatSeverity(severityLevel) + fmt.Sprint(len(policyResults[severityLevel])))
+		if len(policyFailures[severityLevel]) > 0 {
+			policyIds := maps.Keys(policyFailures[severityLevel])
+			sort.Strings(policyIds)
+			reportStr.WriteString(" (" + strings.Join(policyIds, ", ") + ")")
+		}
 	}
 
 	reportStr.WriteString("\n")
 }
 
-func writePolicyFailureToString(reportStr *strings.Builder, policyFailure PolicyResult, policySeverity string) {
+func writeFailureToString(reportStr *strings.Builder, result Result, policySeverity string) {
 	reportStr.WriteString("\n\n")
 	reportStr.WriteString(formatSeverity(policySeverity))
-	reportStr.WriteString(policyFailure.PolicyDescription + " [" + policyFailure.PolicyDSRID + "]" + "\n")
-	reportStr.WriteString(color.HiBlackString("https://curio.sh/reference/rules/" + policyFailure.PolicyDisplayId + "\n"))
-	reportStr.WriteString(color.HiBlackString("To skip this rule, use the flag --skip-rule=" + policyFailure.PolicyDisplayId + "\n"))
+	reportStr.WriteString(result.PolicyDescription + " [" + result.PolicyDSRID + "]" + "\n")
+	reportStr.WriteString(color.HiBlackString("https://curio.sh/reference/rules/" + result.PolicyDisplayId + "\n"))
+	reportStr.WriteString(color.HiBlackString("To skip this rule, use the flag --skip-rule=" + result.PolicyDisplayId + "\n"))
 	reportStr.WriteString("\n")
-	if policyFailure.DetailedContext != "" {
-		reportStr.WriteString("Detected: " + policyFailure.DetailedContext + "\n")
+	if result.DetailedContext != "" {
+		reportStr.WriteString("Detected: " + result.DetailedContext + "\n")
 	}
-	reportStr.WriteString(color.HiBlueString("File: " + underline(policyFailure.Filename+":"+fmt.Sprint(policyFailure.LineNumber)) + "\n"))
+	reportStr.WriteString(color.HiBlueString("File: " + underline(result.Filename+":"+fmt.Sprint(result.LineNumber)) + "\n"))
 
-	if policyFailure.DetailedContext == "" {
+	if result.DetailedContext == "" {
 		reportStr.WriteString("\n")
-		reportStr.WriteString(highlightCodeExtract(policyFailure.Filename, policyFailure.LineNumber, policyFailure.ParentLineNumber, policyFailure.ParentContent))
+		reportStr.WriteString(highlightCodeExtract(result.Filename, result.LineNumber, result.ParentLineNumber, result.ParentContent))
 	}
 }
 
