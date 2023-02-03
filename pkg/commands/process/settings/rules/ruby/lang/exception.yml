@@ -1,0 +1,43 @@
+type: "risk"
+patterns:
+  - pattern: |
+      raise($<DATA_TYPE>)
+    filters:
+      - variable: DATA_TYPE
+        detection: datatype
+languages:
+  - ruby
+trigger: "local"
+severity:
+  default: "low"
+  PII: "critical"
+  PHI: "medium"
+  PD: "high"
+skip_data_types:
+  - "Unique Identifier"
+metadata:
+  description: "Do not send sensitive data to exceptions."
+  remediation_message: |
+    ## Description
+
+    Leaking sensitive data to an exception is a common cause of data leaks and can lead to data breaches. This rule looks for instances of sensitive data sent to exceptions.
+
+    ## Remediations
+
+    ❌ Avoid using sensitive data in logger messages:
+
+    ```ruby
+    raise CustomException.new(user.email)
+    ```
+
+    ✅ If you need to identify a user, ensure to use their unique identifier instead of their personal identifiable information:
+
+    ```ruby
+    raise CustomException.new(user.uuid)
+    ```
+    <!--
+    ## Resources
+    Coming soon.
+    -->
+  dsr_id: "DSR-5"
+  id: "ruby_lang_exception"
