@@ -8,6 +8,7 @@ import (
 
 	"github.com/bearer/curio/pkg/classification/db"
 	"github.com/bearer/curio/pkg/commands/process/settings"
+	"github.com/bearer/curio/pkg/types"
 	"github.com/bearer/curio/pkg/util/file"
 	"github.com/bearer/curio/pkg/util/output"
 	"github.com/bearer/curio/pkg/util/rego"
@@ -20,10 +21,10 @@ import (
 
 var underline = color.New(color.Underline).SprintFunc()
 var severityColorFns = map[string]func(x ...interface{}) string{
-	settings.LevelCritical: color.New(color.FgRed).SprintFunc(),
-	settings.LevelHigh:     color.New(color.FgHiRed).SprintFunc(),
-	settings.LevelMedium:   color.New(color.FgYellow).SprintFunc(),
-	settings.LevelLow:      color.New(color.FgBlue).SprintFunc(),
+	types.LevelCritical: color.New(color.FgRed).SprintFunc(),
+	types.LevelHigh:     color.New(color.FgHiRed).SprintFunc(),
+	types.LevelMedium:   color.New(color.FgYellow).SprintFunc(),
+	types.LevelLow:      color.New(color.FgBlue).SprintFunc(),
 }
 
 type PolicyInput struct {
@@ -144,17 +145,17 @@ func BuildReportString(rules map[string]*settings.Rule, policyResults map[string
 	writeRuleListToString(reportStr, rules)
 
 	policyFailures := map[string]map[string]bool{
-		settings.LevelCritical: make(map[string]bool),
-		settings.LevelHigh:     make(map[string]bool),
-		settings.LevelMedium:   make(map[string]bool),
-		settings.LevelLow:      make(map[string]bool),
+		types.LevelCritical: make(map[string]bool),
+		types.LevelHigh:     make(map[string]bool),
+		types.LevelMedium:   make(map[string]bool),
+		types.LevelLow:      make(map[string]bool),
 	}
 
 	for _, policyLevel := range []string{
-		settings.LevelCritical,
-		settings.LevelHigh,
-		settings.LevelMedium,
-		settings.LevelLow,
+		types.LevelCritical,
+		types.LevelHigh,
+		types.LevelMedium,
+		types.LevelLow,
 	} {
 		for _, policyFailure := range policyResults[policyLevel] {
 			policyFailures[policyLevel][policyFailure.PolicyDSRID] = true
@@ -176,13 +177,13 @@ func FindHighestSeverity(groups []string, severity map[string]string) string {
 	}
 
 	if slices.Contains(severities, "critical") {
-		return settings.LevelCritical
+		return types.LevelCritical
 	} else if slices.Contains(severities, "high") {
-		return settings.LevelHigh
+		return types.LevelHigh
 	} else if slices.Contains(severities, "medium") {
-		return settings.LevelMedium
+		return types.LevelMedium
 	} else if slices.Contains(severities, "low") {
-		return settings.LevelLow
+		return types.LevelLow
 	}
 
 	return severity["default"]
@@ -221,10 +222,10 @@ func writeSummaryToString(
 		return
 	}
 
-	criticalCount := len(policyResults[settings.LevelCritical])
-	highCount := len(policyResults[settings.LevelHigh])
-	mediumCount := len(policyResults[settings.LevelMedium])
-	lowCount := len(policyResults[settings.LevelLow])
+	criticalCount := len(policyResults[types.LevelCritical])
+	highCount := len(policyResults[types.LevelHigh])
+	mediumCount := len(policyResults[types.LevelMedium])
+	lowCount := len(policyResults[types.LevelLow])
 
 	totalCount := criticalCount + highCount + mediumCount + lowCount
 
@@ -232,30 +233,30 @@ func writeSummaryToString(
 	reportStr.WriteString(color.RedString(fmt.Sprint(policyCount) + " checks, " + fmt.Sprint(totalCount) + " failures\n\n"))
 
 	// critical count
-	reportStr.WriteString(formatSeverity(settings.LevelCritical) + fmt.Sprint(criticalCount))
-	if len(policyFailures[settings.LevelCritical]) > 0 {
-		policyIds := maps.Keys(policyFailures[settings.LevelCritical])
+	reportStr.WriteString(formatSeverity(types.LevelCritical) + fmt.Sprint(criticalCount))
+	if len(policyFailures[types.LevelCritical]) > 0 {
+		policyIds := maps.Keys(policyFailures[types.LevelCritical])
 		sort.Strings(policyIds)
 		reportStr.WriteString(" (" + strings.Join(policyIds, ", ") + ")")
 	}
 	// high count
-	reportStr.WriteString("\n" + formatSeverity(settings.LevelHigh) + fmt.Sprint(highCount))
-	if len(policyFailures[settings.LevelHigh]) > 0 {
-		policyIds := maps.Keys(policyFailures[settings.LevelHigh])
+	reportStr.WriteString("\n" + formatSeverity(types.LevelHigh) + fmt.Sprint(highCount))
+	if len(policyFailures[types.LevelHigh]) > 0 {
+		policyIds := maps.Keys(policyFailures[types.LevelHigh])
 		sort.Strings(policyIds)
 		reportStr.WriteString(" (" + strings.Join(policyIds, ", ") + ")")
 	}
 	// medium count
-	reportStr.WriteString("\n" + formatSeverity(settings.LevelMedium) + fmt.Sprint(mediumCount))
-	if len(policyFailures[settings.LevelMedium]) > 0 {
-		policyIds := maps.Keys(policyFailures[settings.LevelMedium])
+	reportStr.WriteString("\n" + formatSeverity(types.LevelMedium) + fmt.Sprint(mediumCount))
+	if len(policyFailures[types.LevelMedium]) > 0 {
+		policyIds := maps.Keys(policyFailures[types.LevelMedium])
 		sort.Strings(policyIds)
 		reportStr.WriteString(" (" + strings.Join(policyIds, ", ") + ")")
 	}
 	// low count
-	reportStr.WriteString("\n" + formatSeverity(settings.LevelLow) + fmt.Sprint(lowCount))
-	if len(policyFailures[settings.LevelLow]) > 0 {
-		policyIds := maps.Keys(policyFailures[settings.LevelLow])
+	reportStr.WriteString("\n" + formatSeverity(types.LevelLow) + fmt.Sprint(lowCount))
+	if len(policyFailures[types.LevelLow]) > 0 {
+		policyIds := maps.Keys(policyFailures[types.LevelLow])
 		sort.Strings(policyIds)
 		reportStr.WriteString(" (" + strings.Join(policyIds, ", ") + ")")
 	}
