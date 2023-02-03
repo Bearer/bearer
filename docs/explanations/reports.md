@@ -55,6 +55,8 @@ The privacy report provides useful information about how your codebase uses sens
 
 The data subjects portion displays information about each detected subject and any data types associated with it. It also provides statistics on total detections and any counts of rule failures associated with the data type. In the example below, the report detects 14 instances of user telephone numbers with no rule failures.
 
+_Note: These examples use JSON for readability, but the default format for the privacy report is CSV._
+
 ```json
 "Subjects": [
   {
@@ -69,6 +71,7 @@ The data subjects portion displays information about each detected subject and a
   }
 ]
 ```
+
 
 The third parties portion displays data subjects and types that are sent to or processed by known third-party services. In the example below, Curio detects a user email address sent to Sentry via the Sentry SDK and notes that a critical-risk-level rule has failed associated with this data point.
 
