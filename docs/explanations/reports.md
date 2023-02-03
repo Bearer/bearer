@@ -49,50 +49,54 @@ Summary reports are [currently available](/reference/supported-languages/) for R
 
 To run your first summary report, run `curio scan .` on your project directory. By default, the summary report is output in a human-readable format, but you can also output it as YAML or JSON by using the `--format yaml` or `--format json` flags.
 
-## Privacy Report
+## Privacy Report
 
 The privacy report provides useful information about how your codebase uses sensitive data, with an emphasis on data subjects and third parties.
 
 The data subjects portion displays information about each detected subject and any data types associated with it. It also provides statistics on total detections and any counts of rule failures associated with the data type. In the example below, the report detects 14 instances of user telephone numbers with no rule failures.
 
-```bash
-{
-  "subject_name": "User",
-  "name": "Telephone Number",
-  "detection_count": 14,
-  "critical_risk_failure_count": 0,
-  "high_risk_failure_count": 0,
-  "medium_risk_failure_count": 0,
-  "low_risk_failure_count": 0,
-  "rules_passed_count": 11
-}
+```json
+"Subjects": [
+  {
+    "subject_name": "User",
+    "name": "Telephone Number",
+    "detection_count": 14,
+    "critical_risk_failure_count": 0,
+    "high_risk_failure_count": 0,
+    "medium_risk_failure_count": 0,
+    "low_risk_failure_count": 0,
+    "rules_passed_count": 11
+  }
+]
 ```
 
 The third parties portion displays data subjects and types that are sent to or processed by known third-party services. In the example below, Curio detects a user email address sent to Sentry via the Sentry SDK and notes that a critical-risk-level rule has failed associated with this data point.
 
-```bash
-{
-  "third_party": "Sentry",
-  "subject_name": "User",
-  "data_types": [
-    "Email Address"
-  ],
-  "critical_risk_failure_count": 1,
-  "high_risk_failure_count": 0,
-  "medium_risk_failure_count": 0,
-  "low_risk_failure_count": 0,
-  "rules_passed_count": 0
-}
+```json
+"ThirdParty": [
+  {
+    "third_party": "Sentry",
+    "subject_name": "User",
+    "data_types": [
+      "Email Address"
+    ],
+    "critical_risk_failure_count": 1,
+    "high_risk_failure_count": 0,
+    "medium_risk_failure_count": 0,
+    "low_risk_failure_count": 0,
+    "rules_passed_count": 0
+  }
+]
 ```
 
 To run the privacy report, run `curio scan` with the `--report privacy` flag. By default, the privacy report is output in CSV format. To format as JSON, use the `--format json` flag.
 
-## Customizing data subjects
+### Customizing data subjects
 
-By default, Curio maps all subjects to ****“User”, but you can override this by supplying Curio with custom mappings. This is done by passing the path to a JSON file with the `--data-subject-mapping` flag when you run the privacy report. For example:
+By default, Curio maps all subjects to “User”, but you can override this by supplying Curio with custom mappings. This is done by passing the path to a JSON file with the `--data-subject-mapping` flag when you run the privacy report. For example:
 
 ```bash
 curio scan . --report=privacy --data-subject-mapping=/path/to/mappings.json
 ```
 
-The custom map file should follow the format used by [subject_mapping.json](https://github.com/Bearer/curio/blob/main/pkg/classification/db/subject_mapping.json). Replace a key’s value with the higher-level subject you’d like to associate it with. Some examples might include Customer, Employee, Client, Patient, etc.
+The custom map file should follow the format used by [subject_mapping.json](https://github.com/Bearer/curio/blob/main/pkg/classification/db/subject_mapping.json). Replace a key’s value with the higher-level subject you’d like to associate it with. Some examples might include Customer, Employee, Client, Patient, etc. Curio will use your replacement file instead of the default, so make sure to include any and all subjects you want reported.
