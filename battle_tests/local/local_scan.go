@@ -21,12 +21,12 @@ func main() {
 
 	select {
 	case <-ctx.Done():
-		log.Error().Msgf("error: %e")
+		log.Error().Msgf("error")
 		return
 	case metrics := <-metricsReport:
 		data, err := json.Marshal(metrics.PolicyBreaches)
 		if err != nil {
-			log.Error().Msgf("Failed to serialize metrics to JSON: %e", err)
+			log.Error().Msgf("Failed to serialize metrics to JSON: %s", err)
 			return
 		}
 		log.Debug().Msgf("result %s", string(data[:]))
