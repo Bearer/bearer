@@ -165,7 +165,9 @@ func BuildReportString(rules map[string]*settings.Rule, results map[string][]Res
 
 		for _, failure := range results[severityLevel] {
 			failures[severityLevel][failure.PolicyDSRID] = true
-			writeFailureToString(reportStr, failure, severityLevel)
+			if severityForFailure[severityLevel] {
+				writeFailureToString(reportStr, failure, severityLevel)
+			}
 		}
 	}
 
@@ -221,7 +223,6 @@ func writeSummaryToString(
 ) {
 	reportStr.WriteString("\n=====================================")
 
-	// give summary including counts
 	if len(policyResults) == 0 {
 		reportStr.WriteString("\n\n")
 		reportStr.WriteString(color.HiGreenString("SUCCESS\n\n"))
@@ -229,32 +230,27 @@ func writeSummaryToString(
 		return
 	}
 
-	severityLevels := []string{types.LevelCritical, types.LevelHigh, types.LevelMedium, types.LevelLow}
+	// give summary including counts
 	failureCount := 0
-	failureBelowThresholdCount := 0
-	for _, severityLevel := range severityLevels {
+	for _, severityLevel := range maps.Keys(severityForFailure) {
 		if severityForFailure[severityLevel] {
 			failureCount += len(policyResults[severityLevel])
 			continue
 		}
-		failureBelowThresholdCount += len(policyResults[severityLevel])
+	}
+
+	if failureCount == 0 {
+		reportStr.WriteString("\n\n")
+		reportStr.WriteString(color.HiGreenString("SUCCESS\n\n"))
+		reportStr.WriteString(fmt.Sprint(policyCount) + " checks were run and no failures were detected.\n\n")
+		return
 	}
 
 	reportStr.WriteString("\n\n")
 
-	summaryString := fmt.Sprint(policyCount) + " checks, " + fmt.Sprint(failureCount) + " failures"
-	if failureBelowThresholdCount > 0 {
-		summaryString += ", " + fmt.Sprint(failureBelowThresholdCount) + " failures below severity threshold"
-	}
-	summaryString += "\n\n"
+	reportStr.WriteString(color.RedString(fmt.Sprint(policyCount) + " checks, " + fmt.Sprint(failureCount) + " failures\n\n"))
 
-	if failureCount > 0 {
-		reportStr.WriteString(color.RedString(summaryString))
-	} else {
-		reportStr.WriteString(summaryString)
-	}
-
-	for i, severityLevel := range severityLevels {
+	for i, severityLevel := range maps.Keys(severityForFailure) {
 		if i > 0 {
 			reportStr.WriteString("\n")
 		}
