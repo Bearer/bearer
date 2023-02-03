@@ -1,4 +1,4 @@
-low:
+warning:
     - policy_name: ""
       policy_dsrid: DSR-7
       policy_display_id: ruby_lang_weak_encryption

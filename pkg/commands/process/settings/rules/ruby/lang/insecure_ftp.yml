@@ -14,10 +14,10 @@ languages:
   - ruby
 trigger: presence
 severity:
-  default: low # FIXME: warning
-  PHI: medium
-  PII: critical
-  PD: high
+  default: "warning"
+  PII: "critical"
+  PHI: "medium"
+  PD: "high"
 metadata:
   description: "Only communicate using SFTP connections."
   remediation_message: |

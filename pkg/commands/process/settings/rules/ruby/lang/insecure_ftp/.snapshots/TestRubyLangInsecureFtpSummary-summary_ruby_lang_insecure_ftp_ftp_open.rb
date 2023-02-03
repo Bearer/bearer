@@ -1,4 +1,4 @@
-low:
+warning:
     - policy_name: ""
       policy_dsrid: DSR-2
       policy_display_id: ruby_lang_insecure_ftp
