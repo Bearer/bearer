@@ -1,21 +1,23 @@
 const EleventyFetch = require("@11ty/eleventy-fetch");
 
 module.exports = async function () {
-  let repo = await EleventyFetch("https://api.github.com/repos/bearer/curio", {
-    duration: "1d",
-    type: "json",
-  });
+  // let repo = await EleventyFetch("https://api.github.com/repos/bearer/curio", {
+  //   duration: "1d",
+  //   type: "json",
+  // });
 
   let release = await EleventyFetch(
     "https://api.github.com/repos/bearer/curio/releases/latest",
     {
-      duration: "1d",
+      duration: "60m",
       type: "json",
     }
   );
-  console.log(repo.stargazers, release.tag_name);
   return {
-    stargazers: repo.stargazers_count,
-    version: release.tag_name,
+    // stargazers: repo.stargazers_count,
+    release: {
+      name: release.tag_name,
+      url: release.html_url,
+    },
   };
 };
