@@ -1,62 +1,44 @@
 [
 	{
-		"RuleName": "logger",
-		"File": {
-			"AbsolutePath": "/Users/vjeranfistric/go/src/github.com/bearer/curio/new/detector/composition/ruby/testdata/testcases/object.rb",
-			"RelativePath": "object.rb",
-			"FileInfo": {},
-			"IsGenerated": false,
-			"Extension": ".rb",
-			"Base": "object.rb",
-			"IsConfiguration": false,
-			"IsDotFile": false,
-			"IsVendor": false,
-			"Language": "Ruby",
-			"LanguageType": 2
-		},
-		"Detections": [
-			{
-				"MatchNode": {},
-				"ContextNode": null,
-				"Data": {
-					"Pattern": "logger.info($\u003cDATA_TYPE\u003e)\n",
-					"Datatypes": [
-						{
-							"MatchNode": {},
-							"ContextNode": {},
-							"Data": {
-								"Name": "",
-								"Classification": {
-									"name": "",
-									"decision": {
-										"state": "invalid",
-										"reason": "blank_object_name"
+		"DetectorType": "logger",
+		"MatchNode": {},
+		"Data": {
+			"Pattern": "logger.info($\u003cDATA_TYPE\u003e)\n",
+			"Datatypes": [
+				{
+					"DetectorType": "datatype",
+					"MatchNode": {},
+					"Data": {
+						"Name": "",
+						"Classification": {
+							"name": "",
+							"decision": {
+								"state": "invalid",
+								"reason": "blank_object_name"
+							}
+						},
+						"Properties": [
+							{
+								"Name": "name",
+								"Detection": {
+									"DetectorType": "property",
+									"MatchNode": {},
+									"Data": {
+										"Name": "name"
 									}
 								},
-								"Properties": [
-									{
-										"Name": "name",
-										"Detection": {
-											"MatchNode": {},
-											"ContextNode": {},
-											"Data": {
-												"Name": "name"
-											}
-										},
-										"Classification": {
-											"name": "name",
-											"decision": {
-												"state": "invalid",
-												"reason": "belongs_to_invalid_object"
-											}
-										}
+								"Classification": {
+									"name": "name",
+									"decision": {
+										"state": "invalid",
+										"reason": "belongs_to_invalid_object"
 									}
-								]
+								}
 							}
-						}
-					]
+						]
+					}
 				}
-			}
-		]
+			]
+		}
 	}
 ]
