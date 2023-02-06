@@ -77,14 +77,6 @@ The following are a list of available inputs and outputs:
 
 **Optional** Specify the comma-separated IDs of the rules to skip; runs all other rules.
 
-#### `only-detector`
-
-**Optional** Specify the comma-separated IDs of the detectors to run; skips all other detectors
-
-#### `skip-detector`
-
-**Optional** Specify the comma-separated IDs of the detectors to skip; runs all other detectors
-
 #### `skip-path`
 
 **Optional** Specify the comma-separated paths to skip. Supports wildcard syntax, e.g. `users/*.go,users/admin.sql`
