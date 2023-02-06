@@ -32,7 +32,7 @@ jobs:
       - uses: actions/checkout@v3
       - name: Run Report
         id: report
-        uses: bearer/curio-action@v0.1
+        uses: bearer/curio-action@v0.2
       - id: summary
         name: Display Summary
         uses: actions/github-script@v6
