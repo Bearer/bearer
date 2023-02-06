@@ -150,16 +150,12 @@ func BuildReportString(rules map[string]*settings.Rule, results map[string][]Res
 		types.LevelHigh:     make(map[string]bool),
 		types.LevelMedium:   make(map[string]bool),
 		types.LevelLow:      make(map[string]bool),
+		types.LevelWarning:  make(map[string]bool),
 	}
 
 	reportPassed := true
-	for _, severityLevel := range []string{
-		types.LevelCritical,
-		types.LevelHigh,
-		types.LevelMedium,
-		types.LevelLow,
-	} {
-		if severityForFailure[severityLevel] && len(results[severityLevel]) != 0 {
+	for _, severityLevel := range maps.Keys(severityForFailure) {
+		if severityLevel != types.LevelWarning && len(results[severityLevel]) != 0 {
 			// fail the report if we have failures above the severity threshold
 			reportPassed = false
 		}
@@ -185,15 +181,15 @@ func FindHighestSeverity(groups []string, severity map[string]string) string {
 		severities = append(severities, severity[group])
 	}
 
-	if slices.Contains(severities, "critical") {
+	if slices.Contains(severities, types.LevelCritical) {
 		return types.LevelCritical
-	} else if slices.Contains(severities, "high") {
+	} else if slices.Contains(severities, types.LevelHigh) {
 		return types.LevelHigh
-	} else if slices.Contains(severities, "medium") {
+	} else if slices.Contains(severities, types.LevelMedium) {
 		return types.LevelMedium
-	} else if slices.Contains(severities, "low") {
+	} else if slices.Contains(severities, types.LevelLow) {
 		return types.LevelLow
-	} else if slices.Contains(severities, "warning") {
+	} else if slices.Contains(severities, types.LevelWarning) {
 		return types.LevelWarning
 	}
 
@@ -235,7 +231,12 @@ func writeSummaryToString(
 
 	// give summary including counts
 	failureCount := 0
+	warningCount := 0
 	for _, severityLevel := range maps.Keys(severityForFailure) {
+		if severityLevel == types.LevelWarning {
+			warningCount += len(policyResults[severityLevel])
+			continue
+		}
 		if severityForFailure[severityLevel] {
 			failureCount += len(policyResults[severityLevel])
 			continue
@@ -244,8 +245,17 @@ func writeSummaryToString(
 
 	if failureCount == 0 {
 		reportStr.WriteString("\n\n")
-		reportStr.WriteString(color.HiGreenString("SUCCESS\n\n"))
-		reportStr.WriteString(fmt.Sprint(policyCount) + " checks were run and no failures were detected.\n\n")
+		if warningCount == 0 {
+			// no failures and no warnings : success
+			reportStr.WriteString(color.HiGreenString("SUCCESS\n\n"))
+			reportStr.WriteString(fmt.Sprint(policyCount) + " checks were run and no failures were detected.\n\n")
+			return
+		}
+
+		// warnings only
+		reportStr.WriteString(fmt.Sprint(policyCount) + " checks, " + fmt.Sprint(warningCount) + " warnings\n\n")
+		writeFailureSummaryToString(reportStr, types.LevelWarning, len(policyResults[types.LevelWarning]), policyFailures)
+		reportStr.WriteString("\n")
 		return
 	}
 
@@ -261,23 +271,20 @@ func writeSummaryToString(
 		if i > 0 {
 			reportStr.WriteString("\n")
 		}
-		reportStr.WriteString(formatSeverity(severityLevel) + fmt.Sprint(len(policyResults[severityLevel])))
-		if len(policyFailures[severityLevel]) > 0 {
-			policyIds := maps.Keys(policyFailures[severityLevel])
-			sort.Strings(policyIds)
-			reportStr.WriteString(" (" + strings.Join(policyIds, ", ") + ")")
-		}
-	}
-	// warning count
-	warningCount := 0
-	reportStr.WriteString("\n" + formatSeverity(types.LevelWarning) + fmt.Sprint(warningCount))
-	if len(policyFailures[types.LevelWarning]) > 0 {
-		policyIds := maps.Keys(policyFailures[types.LevelWarning])
-		sort.Strings(policyIds)
-		reportStr.WriteString(" (" + strings.Join(policyIds, ", ") + ")")
+
+		writeFailureSummaryToString(reportStr, severityLevel, len(policyResults[severityLevel]), policyFailures)
 	}
 
 	reportStr.WriteString("\n")
+}
+
+func writeFailureSummaryToString(reportStr *strings.Builder, severityLevel string, failureCount int, failures map[string]map[string]bool) {
+	reportStr.WriteString(formatSeverity(severityLevel) + fmt.Sprint(failureCount))
+	if len(failures[severityLevel]) > 0 {
+		policyIds := maps.Keys(failures[severityLevel])
+		sort.Strings(policyIds)
+		reportStr.WriteString(" (" + strings.Join(policyIds, ", ") + ")")
+	}
 }
 
 func writeFailureToString(reportStr *strings.Builder, result Result, policySeverity string) {
