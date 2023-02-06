@@ -251,6 +251,10 @@ func writeSummaryToString(
 	reportStr.WriteString(color.RedString(fmt.Sprint(policyCount) + " checks, " + fmt.Sprint(failureCount) + " failures\n\n"))
 
 	for i, severityLevel := range maps.Keys(severityForFailure) {
+		if !severityForFailure[severityLevel] {
+			continue
+		}
+
 		if i > 0 {
 			reportStr.WriteString("\n")
 		}
