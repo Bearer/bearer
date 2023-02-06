@@ -5,6 +5,7 @@ import (
 
 	"github.com/bearer/curio/new/detector/types"
 	"github.com/bearer/curio/new/language/tree"
+	"github.com/bearer/curio/pkg/util/stringutil"
 
 	generictypes "github.com/bearer/curio/new/detector/implementation/generic/types"
 	languagetypes "github.com/bearer/curio/new/language/types"
@@ -244,8 +245,14 @@ func (detector *objectDetector) nameParentPairObject(
 	for _, object := range objects {
 		objectData := object.Data.(generictypes.Object)
 
+		objectName := result["key"].Content()
+		objectNameNode := result["key"]
+		if objectNameNode.Type() == "string" {
+			objectName = stringutil.StripQuotes(objectName)
+		}
+
 		detections = append(detections, generictypes.Object{
-			Name:       result["key"].Content(),
+			Name:       objectName,
 			Properties: objectData.Properties,
 		},
 		)

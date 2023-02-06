@@ -5,6 +5,7 @@ import (
 
 	"github.com/bearer/curio/new/detector/types"
 	"github.com/bearer/curio/new/language/tree"
+	"github.com/bearer/curio/pkg/util/stringutil"
 	"github.com/rs/zerolog/log"
 
 	generictypes "github.com/bearer/curio/new/detector/implementation/generic/types"
@@ -62,8 +63,14 @@ func (detector *propertyDetector) DetectAt(
 
 	if len(result) != 0 {
 		key := result["key"]
-		// { user: "admin_user"} || {"user": "admin_user"}
-		if key.Type() == "property_identifier" || key.Type() == "string" {
+
+		// {"user": "admin_user"}
+		if key.Type() == "string" {
+			return []interface{}{generictypes.Property{Name: stringutil.StripQuotes(result["key"].Content())}}, nil
+		}
+
+		// { user: "admin_user"}
+		if key.Type() == "property_identifier" {
 			return []interface{}{generictypes.Property{Name: result["key"].Content()}}, nil
 		}
 	}
