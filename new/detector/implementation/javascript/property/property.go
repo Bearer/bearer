@@ -5,6 +5,7 @@ import (
 
 	"github.com/bearer/curio/new/detector/types"
 	"github.com/bearer/curio/new/language/tree"
+	"github.com/rs/zerolog/log"
 
 	generictypes "github.com/bearer/curio/new/detector/implementation/generic/types"
 	languagetypes "github.com/bearer/curio/new/language/types"
@@ -26,7 +27,7 @@ func New(lang languagetypes.Language) (types.Detector, error) {
 	// function getName(){}
 	functionNameQuery, err := lang.CompileQuery(`(function_declaration name: (identifier) @name) @root`)
 	if err != nil {
-		return nil, fmt.Errorf("error compiling class method query: %s", err)
+		return nil, fmt.Errorf("error compiling function name query: %s", err)
 	}
 
 	// class User {
@@ -90,23 +91,21 @@ func (detector *propertyDetector) getMethod(
 		return nil, err
 	}
 
+	log.Debug().Msgf("")
+
 	// fetch all arguments from constructor
-	if result["name"].Type() == "constructor" {
+	if result["name"].Content() == "constructor" {
 		properties := []interface{}{}
 
 		params := result["params"]
+
 		for i := 0; i < params.ChildCount(); i++ {
 			param := params.Child(i)
-			if param.Type() != "required_parameter" {
+			if param.Type() != "identifier" {
 				continue
 			}
 
-			identifier := param.ChildByFieldName("pattern")
-			if identifier == nil || identifier.Type() != "identifier" {
-				continue
-			}
-
-			properties = append(properties, generictypes.Property{Name: result["name"].Content()})
+			properties = append(properties, generictypes.Property{Name: param.Content()})
 		}
 
 		return properties, nil

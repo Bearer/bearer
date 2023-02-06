@@ -1,0 +1,43 @@
+type: "risk"
+patterns:
+  - pattern: |
+      localStorage.setItem($<DATA_TYPE>)
+    filters:
+      - variable: DATA_TYPE
+        detection: datatype
+languages:
+  - javascript
+trigger: "local"
+severity:
+  default: "low"
+  PII: "critical"
+  PHI: "medium"
+  PD: "high"
+skip_data_types:
+  - "Unique Identifier"
+metadata:
+  description: "Do not set sensitive data to session."
+  remediation_message: |
+    ## Description
+
+    Leaking sensitive data to loggers is a common cause of data leaks and can lead to data breaches. This rule looks for instances of sensitive data sent to loggers.
+
+    ## Remediations
+
+    ❌ Avoid using sensitive data in logger messages:
+
+    ```javascript
+    logger.info(`User is: ${user.email}`)
+    ```
+
+    ✅ If you need to identify a user, ensure to use their unique identifier instead of their personal identifiable information:
+
+    ```javascript
+    logger.info(`User is: ${user.uuid}`)
+    ```
+    <!--
+    ## Resources
+    Coming soon.
+    -->
+  dsr_id: "DSR-5"
+  id: "javascript_lang_logger"

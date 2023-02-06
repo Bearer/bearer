@@ -12,17 +12,59 @@
 						"Name": "User",
 						"Classification": {
 							"name": "user",
-							"data_type": {
-								"name": "Unique Identifier",
-								"uuid": "12d44ae0-1df7-4faf-9fb1-b46cc4b4dce9",
-								"category_uuid": "14124881-6b92-4fc5-8005-ea7c1c09592e"
-							},
 							"decision": {
-								"state": "invalid",
-								"reason": "valid_object_with_invalid_properties"
+								"state": "valid",
+								"reason": "valid_object_with_valid_properties"
 							}
 						},
-						"Properties": null
+						"Properties": [
+							{
+								"Name": "name",
+								"Detection": {
+									"DetectorType": "property",
+									"MatchNode": {},
+									"Data": {
+										"Name": "name"
+									}
+								},
+								"Classification": {
+									"name": "name",
+									"subject_name": "User",
+									"data_type": {
+										"name": "Fullname",
+										"uuid": "1617291b-bc22-4267-ad5e-8054b2505958",
+										"category_uuid": "14124881-6b92-4fc5-8005-ea7c1c09592e"
+									},
+									"decision": {
+										"state": "valid",
+										"reason": "known_pattern"
+									}
+								}
+							},
+							{
+								"Name": "city",
+								"Detection": {
+									"DetectorType": "property",
+									"MatchNode": {},
+									"Data": {
+										"Name": "city"
+									}
+								},
+								"Classification": {
+									"name": "city",
+									"subject_name": "User",
+									"data_type": {
+										"name": "Physical Address",
+										"uuid": "5a80a938-6fb2-4d9a-9c47-8d377e036506",
+										"category_uuid": "cef587dd-76db-430b-9e18-7b031e1a193b"
+									},
+									"decision": {
+										"state": "valid",
+										"reason": "known_pattern"
+									}
+								}
+							}
+						]
 					}
 				}
 			]
@@ -41,17 +83,59 @@
 						"Name": "User",
 						"Classification": {
 							"name": "user",
-							"data_type": {
-								"name": "Unique Identifier",
-								"uuid": "12d44ae0-1df7-4faf-9fb1-b46cc4b4dce9",
-								"category_uuid": "14124881-6b92-4fc5-8005-ea7c1c09592e"
-							},
 							"decision": {
-								"state": "invalid",
-								"reason": "valid_object_with_invalid_properties"
+								"state": "valid",
+								"reason": "valid_object_with_valid_properties"
 							}
 						},
-						"Properties": null
+						"Properties": [
+							{
+								"Name": "name",
+								"Detection": {
+									"DetectorType": "property",
+									"MatchNode": {},
+									"Data": {
+										"Name": "name"
+									}
+								},
+								"Classification": {
+									"name": "name",
+									"subject_name": "User",
+									"data_type": {
+										"name": "Fullname",
+										"uuid": "1617291b-bc22-4267-ad5e-8054b2505958",
+										"category_uuid": "14124881-6b92-4fc5-8005-ea7c1c09592e"
+									},
+									"decision": {
+										"state": "valid",
+										"reason": "known_pattern"
+									}
+								}
+							},
+							{
+								"Name": "city",
+								"Detection": {
+									"DetectorType": "property",
+									"MatchNode": {},
+									"Data": {
+										"Name": "city"
+									}
+								},
+								"Classification": {
+									"name": "city",
+									"subject_name": "User",
+									"data_type": {
+										"name": "Physical Address",
+										"uuid": "5a80a938-6fb2-4d9a-9c47-8d377e036506",
+										"category_uuid": "cef587dd-76db-430b-9e18-7b031e1a193b"
+									},
+									"decision": {
+										"state": "valid",
+										"reason": "known_pattern"
+									}
+								}
+							}
+						]
 					}
 				}
 			]

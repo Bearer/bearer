@@ -213,8 +213,10 @@ func (detector *objectDetector) getClass(node *tree.Node, evaluator types.Evalua
 		Properties: []*types.Detection{},
 	}
 
-	for i := 0; i < node.ChildCount(); i++ {
-		detections, err := evaluator.ForNode(node.Child(i), "property", true)
+	body := node.ChildByFieldName("body")
+
+	for i := 0; i < body.ChildCount(); i++ {
+		detections, err := evaluator.ForNode(body.Child(i), "property", true)
 		if err != nil {
 			return nil, err
 		}

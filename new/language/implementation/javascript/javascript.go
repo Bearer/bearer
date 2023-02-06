@@ -206,6 +206,8 @@ func (implementation *javascriptImplementation) PatternIsAnchored(node *tree.Nod
 		return true
 	}
 
+	/// functions, arrow functions, class bodies, class methods
+
 	// Class body
 	// if parent.Type() == "class_declaration" && !node.Equal(parent.ChildByFieldName("name")) {
 	// 	return false
@@ -226,5 +228,11 @@ func (implementation *javascriptImplementation) PatternIsAnchored(node *tree.Nod
 
 // TODO: See if anything needs to be added here
 func (implementation *javascriptImplementation) DescendIntoDetectionNode(node *tree.Node) bool {
+	// parent := node.Parent()
+
+	// if parent != nil && parent.Type() == "member_expression" && node.Equal(parent.ChildByFieldName("object")) {
+	// 	return slice.Contains(passThroughMethods, parent.ChildByFieldName("method").Content())
+	// }
+
 	return true
 }
