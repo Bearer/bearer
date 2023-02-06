@@ -11,15 +11,15 @@ var (
 	FormatYAML  = "yaml"
 	FormatEmpty = ""
 
-	ReportDetectors = "detectors" // nodoc: internal report type
-	ReportDataFlow  = "dataflow"
 	ReportPrivacy   = "privacy"
 	ReportSummary   = "summary"
-	ReportStats     = "stats"
+	ReportDetectors = "detectors" // nodoc: internal report type
+	ReportDataFlow  = "dataflow"  // nodoc: internal report type
+	ReportStats     = "stats"     // nodoc: internal report type
 )
 
 var ErrInvalidFormat = errors.New("invalid format argument; supported values: json, yaml")
-var ErrInvalidReport = errors.New("invalid report argument; supported values: summary, dataflow, stats")
+var ErrInvalidReport = errors.New("invalid report argument; supported values: summary, privacy")
 
 var (
 	FormatFlag = Flag{
@@ -33,7 +33,7 @@ var (
 		Name:       "report",
 		ConfigName: "report.report",
 		Value:      ReportSummary,
-		Usage:      "Specify the type of report (summary, dataflow, stats).",
+		Usage:      "Specify the type of report (summary, privacy).",
 	}
 	OutputFlag = Flag{
 		Name:       "output",
@@ -87,10 +87,11 @@ func (f *ReportFlagGroup) ToOptions() (ReportOptions, error) {
 
 	report := getString(f.Report)
 	switch report {
-	case ReportDetectors:
-	case ReportDataFlow:
 	case ReportPrivacy:
 	case ReportSummary:
+	// hidden flags for development use
+	case ReportDetectors:
+	case ReportDataFlow:
 	case ReportStats:
 	default:
 		return ReportOptions{}, ErrInvalidReport

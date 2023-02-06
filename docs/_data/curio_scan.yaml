@@ -50,7 +50,7 @@ options:
       usage: Suppress non-essential messages
     - name: report
       default_value: summary
-      usage: Specify the type of report (summary, dataflow, stats).
+      usage: Specify the type of report (summary, privacy).
     - name: skip-path
       default_value: '[]'
       usage: |
