@@ -14,7 +14,7 @@ async function fetchData(location) {
   let groupedRules = [];
   try {
     const dirs = await readdir(location);
-    // ex: looping through [ruby, gitleaks, sql]
+    // ex: looping through rules [ruby, gitleaks, sql]
     dirs.forEach(async (dir) => {
       const dirPath = path.join(rulesPath, dir);
       if (isDirectory(dirPath)) {
@@ -63,6 +63,7 @@ async function fetchFile(location) {
 
     return {
       name: path.basename(location, ".yml"),
+      location: location.substring(2),
       ...out,
     };
   });

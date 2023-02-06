@@ -27,7 +27,7 @@ eleventyComputed:
   {% endif %}
   <li>
     <strong>Source:</strong>
-    <a class=" text-main dark:text-main-300 hover:underline" href="{{meta.sourcePath}}/blob/main/pkg/commands/process/settings/rules/{{rule.metadata.id | replace("_", "/")}}.yml">{{rule.name}}.yml</a>
+    <a class=" text-main dark:text-main-300 hover:underline" href="{{meta.sourcePath}}/blob/main/{{rule.location}}">{{rule.name}}.yml</a>
   </li>
 </ul>
 {% renderTemplate 'liquid,md',
