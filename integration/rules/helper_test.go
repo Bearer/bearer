@@ -17,7 +17,6 @@ func buildRulesTestCase(name, reportType, ruleID, filename string) testhelper.Te
 	arguments := []string{
 		"scan",
 		filepath.Join("pkg", "commands", "process", "settings", "rules", filename),
-		"--debug",
 		"--report=" + reportType,
 		"--format=yaml",
 		"--only-rule=" + ruleID,

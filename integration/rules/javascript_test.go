@@ -11,3 +11,13 @@ func TestJavascriptLangLoggerDataflow(t *testing.T) {
 	t.Parallel()
 	runRulesTest("javascript/lang/logger", "dataflow", "javascript_lang_logger", t)
 }
+
+func TestJavascriptLangSessionSummary(t *testing.T) {
+	t.Parallel()
+	runRulesTest("javascript/lang/session", "summary", "javascript_session", t)
+}
+
+func TestJavascriptLangSessionDataflow(t *testing.T) {
+	t.Parallel()
+	runRulesTest("javascript/lang/session", "dataflow", "javascript_session", t)
+}

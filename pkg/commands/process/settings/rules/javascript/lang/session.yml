@@ -20,24 +20,13 @@ metadata:
   remediation_message: |
     ## Description
 
-    Leaking sensitive data to loggers is a common cause of data leaks and can lead to data breaches. This rule looks for instances of sensitive data sent to loggers.
+    Sensitive data should not be stored in localstorage session. This policy looks for any sensitive data stored within the localstorage.
 
     ## Remediations
+    ✅ To ensure session's data stays safe, ensure to use a database-based session storage:
 
-    ❌ Avoid using sensitive data in logger messages:
-
-    ```javascript
-    logger.info(`User is: ${user.email}`)
-    ```
-
-    ✅ If you need to identify a user, ensure to use their unique identifier instead of their personal identifiable information:
-
-    ```javascript
-    logger.info(`User is: ${user.uuid}`)
-    ```
     <!--
     ## Resources
     Coming soon.
-    -->
   dsr_id: "DSR-5"
-  id: "javascript_lang_logger"
+  id: "javascript_session"
