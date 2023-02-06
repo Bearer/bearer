@@ -3,12 +3,13 @@ module github.com/bearer/curio
 go 1.18
 
 require (
+	github.com/aws/aws-sdk-go v1.44.181
 	github.com/bradleyjkemp/cupaloy v2.3.0+incompatible
 	github.com/fatih/color v1.14.1
 	github.com/gertd/go-pluralize v0.2.1
 	github.com/ghodss/yaml v1.0.0
 	github.com/go-enry/go-enry/v2 v2.8.3
-	github.com/go-git/go-billy/v5 v5.4.0
+	github.com/go-git/go-billy/v5 v5.4.1
 	github.com/go-git/go-git/v5 v5.5.2
 	github.com/google/uuid v1.3.0
 	github.com/hhatto/gocloc v0.4.3
@@ -74,7 +75,6 @@ require (
 	github.com/Microsoft/go-winio v0.5.2 // indirect
 	github.com/ProtonMail/go-crypto v0.0.0-20221026131551-cf6655e29de4 // indirect
 	github.com/acomagu/bufpipe v1.0.3 // indirect
-	github.com/aws/aws-sdk-go v1.44.181 // indirect
 	github.com/cloudflare/circl v1.1.0 // indirect
 	github.com/emirpasic/gods v1.18.1 // indirect
 	github.com/fsnotify/fsnotify v1.6.0 // indirect
