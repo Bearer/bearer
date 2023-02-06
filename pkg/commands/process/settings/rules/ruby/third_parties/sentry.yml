@@ -1,4 +1,3 @@
-type: "risk"
 patterns:
   - pattern: |
       Sentry::Breadcrumb.new($<...>$<DATA_TYPE>$<...>)
@@ -125,12 +124,12 @@ patterns:
         detection: datatype
 languages:
   - ruby
-trigger: "local"
+trigger: local
 severity:
-  default: "low"
-  PII: "critical"
-  PHI: "medium"
-  PD: "high"
+  default: low
+  PII: critical
+  PHI: medium
+  PD: high
 skip_data_types:
   - "Unique Identifier"
 metadata:
@@ -145,6 +144,6 @@ metadata:
 
     ## Resources
     - [Sentry Docs](https://docs.sentry.io/)
-  dsr_id: "DSR-1"
-  associated_recipe: "Sentry"
-  id: "ruby_third_parties_sentry"
+  dsr_id: DSR-1
+  associated_recipe: Sentry
+  id: ruby_third_parties_sentry

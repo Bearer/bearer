@@ -1,4 +1,3 @@
-type: risk
 patterns:
   - pattern: |
       class $<_>
@@ -18,10 +17,10 @@ skip_data_types:
 auto_encrypt_prefix: encrypted_
 trigger: stored_data_types
 severity:
-  default: "low"
-  PII: "critical"
-  PHI: "medium"
-  PD: "high"
+  default: low
+  PII: critical
+  PHI: medium
+  PD: high
 metadata:
   description: "Force application-level encryption when processing sensitive data."
   remediation_message: |
@@ -35,5 +34,5 @@ metadata:
     ## Resources
     Coming soon.
     -->
-  dsr_id: "DSR-10"
-  id: "ruby_rails_default_encryption"
+  dsr_id: DSR-10
+  id: ruby_rails_default_encryption

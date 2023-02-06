@@ -11,6 +11,11 @@ import (
 	"gopkg.in/yaml.v3"
 )
 
+var (
+	defaultRuleType          = "risk"
+	defaultAuxiliaryRuleType = "verifier"
+)
+
 func loadRules(externalRuleDirs []string, options flag.RuleOptions) (map[string]*Rule, map[string]*Rule, error) {
 	definitions := make(map[string]RuleDefinition)
 	builtInDefinitions := make(map[string]RuleDefinition)
@@ -144,12 +149,16 @@ func buildRules(definitions map[string]RuleDefinition, enabledRules map[string]s
 			continue
 		}
 
+		ruleType := definition.Type
+		if len(ruleType) == 0 {
+			ruleType = defaultRuleType
+		}
+
 		rules[id] = &Rule{
 			Id:                 id,
-			Type:               definition.Type,
+			Type:               ruleType,
 			AssociatedRecipe:   definition.Metadata.AssociatedRecipe,
 			Trigger:            definition.Trigger,
-			OmitParentContent:  definition.OmitParentContent,
 			SkipDataTypes:      definition.SkipDataTypes,
 			OnlyDataTypes:      definition.OnlyDataTypes,
 			Severity:           definition.Severity,
@@ -163,18 +172,15 @@ func buildRules(definitions map[string]RuleDefinition, enabledRules map[string]s
 			Languages:          definition.Languages,
 			ParamParenting:     definition.ParamParenting,
 			Patterns:           definition.Patterns,
-			DetectPresence:     definition.DetectPresence,
 		}
 
 		for _, auxiliaryDefinition := range definition.Auxiliary {
 			rules[auxiliaryDefinition.Id] = &Rule{
-				Type:           auxiliaryDefinition.Type,
-				Languages:      auxiliaryDefinition.Languages,
+				Type:           defaultAuxiliaryRuleType,
+				Languages:      definition.Languages,
 				ParamParenting: auxiliaryDefinition.ParamParenting,
 				Patterns:       auxiliaryDefinition.Patterns,
 				Stored:         auxiliaryDefinition.Stored,
-				DetectPresence: auxiliaryDefinition.DetectPresence,
-				OmitParent:     auxiliaryDefinition.OmitParent,
 			}
 		}
 	}

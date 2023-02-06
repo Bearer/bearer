@@ -1,4 +1,3 @@
-type: "risk"
 patterns:
   - |
     Rails.application.configure do
@@ -14,12 +13,12 @@ patterns:
     end
 languages:
   - ruby
-trigger: "presence"
+trigger: presence
 severity:
-  default: "low" # FIXME: warning
-  PII: "critical"
-  PHI: "medium"
-  PD: "high"
+  default: low # FIXME: warning
+  PII: critical
+  PHI: medium
+  PD: high
 metadata:
   description: "Only communicate with secure SMTP connections."
   remediation_message: |
@@ -40,5 +39,5 @@ metadata:
     ## Resources
     Coming soon.
     -->
-  dsr_id: "DSR-2"
-  id: "ruby_rails_insecure_smtp"
+  dsr_id: DSR-2
+  id: ruby_rails_insecure_smtp

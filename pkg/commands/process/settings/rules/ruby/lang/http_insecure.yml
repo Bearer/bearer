@@ -1,4 +1,3 @@
-type: "risk"
 languages:
   - ruby
 patterns:
@@ -42,9 +41,9 @@ patterns:
           - Typhoeus
       - variable: INSECURE_URL
         detection: insecure_url
-trigger: "presence"
+trigger: presence
 severity:
-  default: "low"
+  default: low
 metadata:
   description: "Only communicate using HTTPS connections."
   remediation_message: |
@@ -69,5 +68,5 @@ metadata:
     ## Resources
     Coming soon.
     -->
-  dsr_id: "DSR-2"
-  id: "ruby_lang_http_insecure"
+  dsr_id: DSR-2
+  id: ruby_lang_http_insecure

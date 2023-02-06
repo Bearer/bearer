@@ -1,4 +1,3 @@
-type: "risk"
 patterns:
   - pattern: |
       NewRelic::Agent.add_custom_attributes($<...>$<DATA_TYPE>$<...>)
@@ -17,12 +16,12 @@ patterns:
         detection: datatype
 languages:
   - ruby
-trigger: "local"
+trigger: local
 severity:
-  default: "low"
-  PII: "critical"
-  PHI: "medium"
-  PD: "high"
+  default: low
+  PII: critical
+  PHI: medium
+  PD: high
 skip_data_types:
   - "Unique Identifier"
 metadata:
@@ -38,6 +37,6 @@ metadata:
     ## Resources
     - [New Relic Docs](https://docs.newrelic.com/)
     - [Log obfuscation](https://docs.newrelic.com/docs/logs/ui-data/obfuscation-ui/)
-  dsr_id: "DSR-1"
-  associated_recipe: "New Relic"
-  id: "ruby_third_parties_new_relic"
+  dsr_id: DSR-1
+  associated_recipe: New Relic
+  id: ruby_third_parties_new_relic

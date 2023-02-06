@@ -1,4 +1,3 @@
-type: "risk"
 patterns:
   - |
     Net::FTP.new()
@@ -17,12 +16,12 @@ patterns:
         detection: datatype
 languages:
   - ruby
-trigger: "presence"
+trigger: presence
 severity:
-  default: "low" # FIXME: warning
-  PII: "critical"
-  PHI: "medium"
-  PD: "high"
+  default: low # FIXME: warning
+  PHI: medium
+  PII: critical
+  PD: high
 metadata:
   description: "Only communicate using SFTP connections."
   remediation_message: |
@@ -43,5 +42,5 @@ metadata:
 
     ## Resources
     - [net-sftp](https://github.com/net-ssh/net-sftp)
-  dsr_id: "DSR-2"
-  id: "ruby_lang_insecure_ftp"
+  dsr_id: DSR-2
+  id: ruby_lang_insecure_ftp

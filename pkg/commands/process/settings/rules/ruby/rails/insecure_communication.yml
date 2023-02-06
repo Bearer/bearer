@@ -1,4 +1,3 @@
-type: "risk"
 patterns:
   - |
     Rails.application.configure do
@@ -6,10 +5,9 @@ patterns:
     end
 languages:
   - ruby
-trigger: "presence"
+trigger: presence
 severity:
-  default: "low" # FIXME: warning
-omit_parent_content: true
+  default: low # FIXME: warning
 metadata:
   description: "Force all incoming communication through SSL."
   remediation_message: |
@@ -17,7 +15,7 @@ metadata:
     When applications process sensitive data, they should default to always use SSL when available. This rule checks if force SSL is enabled at the application level.
 
     ### Remediations
-    This helps avoid attacks like [session hijacking](https://guides.rubyonrails.org/security.html#session-hijacking). More importantly, unencrypted HTTP communication sends all requests as plain text, meaning anyone listening in can see all the traffic and extract user data. 
+    This helps avoid attacks like [session hijacking](https://guides.rubyonrails.org/security.html#session-hijacking). More importantly, unencrypted HTTP communication sends all requests as plain text, meaning anyone listening in can see all the traffic and extract user data.
 
     While you want to avoid sending sensitive data whenever possible, it's unavoidable so protecting the connection is an important method of improving your rails application data security.
 
@@ -29,5 +27,5 @@ metadata:
 
     ## Resources
     - [Configuring Rails Applications - Ruby on Rails Guides](https://guides.rubyonrails.org/configuring.html#config-force-ssl)
-  dsr_id: "DSR-2"
-  id: "ruby_rails_insecure_communication"
+  dsr_id: DSR-2
+  id: ruby_rails_insecure_communication

@@ -6,10 +6,7 @@ low:
       line_number: 2
       filename: pkg/commands/process/settings/rules/ruby/rails/insecure_communication/testdata/no_datatypes.rb
       parent_line_number: 2
-      parent_content: |
-        Rails.application.configure do
-          $<!>config.force_ssl = false
-        end
+      parent_content: config.force_ssl = false
 
 
 --
