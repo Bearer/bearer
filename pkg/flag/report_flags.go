@@ -22,7 +22,7 @@ var (
 
 var ErrInvalidFormat = errors.New("invalid format argument; supported values: json, yaml")
 var ErrInvalidReport = errors.New("invalid report argument; supported values: summary, privacy")
-var ErrInvalidSeverity = errors.New("invalid severity argument; supported values: critical, high, medium, low")
+var ErrInvalidSeverity = errors.New("invalid severity argument; supported values: critical, high, medium, low, warning")
 
 var (
 	FormatFlag = Flag{
