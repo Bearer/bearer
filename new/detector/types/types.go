@@ -33,12 +33,6 @@ type Detector interface {
 	Close()
 }
 
-type CompositionDetection struct {
-	RuleName   string
-	File       *file.FileInfo
-	Detections []*Detection
-}
-
 type Composition interface {
 	DetectFromFile(file *file.FileInfo) ([]*Detection, error)
 	Close()
