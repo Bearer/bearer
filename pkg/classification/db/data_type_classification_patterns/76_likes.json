@@ -6,8 +6,7 @@
   "exclude_types": ["boolean"],
   "friendly_name": "Likes",
   "health_context_data_type_uuid": null,
-  "include_regexp": "\\b(likes?|votes?\\s?(up|down|count|comment|image|video|stor(y|ies)?))\\b",
-  "include_types": ["string"],
+  "include_regexp": "\\b(likes?|votes?\\s?(up|down|comment|image|video|stor(y|ies)?))\\b",
   "match_column": true,
   "match_object": false,
   "object_type": ["known", "unknown_extended"]

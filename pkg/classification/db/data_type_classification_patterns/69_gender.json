@@ -6,8 +6,7 @@
   "exclude_types": ["boolean"],
   "friendly_name": "Gender",
   "health_context_data_type_uuid": null,
-  "include_regexp": "\\b(gender|sex)\\z",
-  "include_types": ["string"],
+  "include_regexp": "\\b(gender|sex)$",
   "match_column": true,
   "match_object": false,
   "object_type": ["known", "unknown_extended"]

@@ -7,7 +7,6 @@
   "friendly_name": "Medication",
   "health_context_data_type_uuid": "bc91b4fb-3f72-4cae-b57b-ba538e4ff4e3",
   "include_regexp": "\\bmedications?\\b",
-  "include_types": ["string"],
   "match_column": true,
   "match_object": false,
   "object_type": ["known", "unknown_extended"]

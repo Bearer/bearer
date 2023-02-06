@@ -7,7 +7,6 @@
   "friendly_name": "Genetic",
   "health_context_data_type_uuid": "d442a6b7-bf22-4cc3-9cff-6be69e8b05c6",
   "include_regexp": "\\b.*genetic.*\\b",
-  "include_types": ["string"],
   "match_column": true,
   "match_object": false,
   "object_type": ["known", "unknown_extended"]

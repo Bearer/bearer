@@ -21,14 +21,18 @@ var objectStopWords = map[string]struct{}{
 	"filter":      {},
 	"memberships": {},
 }
+
 var propertyStopWords = map[string]struct{}{
 	"on click":      {},
 	"disable click": {},
 }
+
 var databaseDetectorTypes = map[string]struct{}{
-	"sql":   {},
-	"rails": {},
+	"sql_lang_create_table": {},
+	"rails":                 {},
+	"schema_rb":             {},
 }
+
 var expectedIdentifierDataTypeIds = map[string]struct{}{
 	"132": {}, // Unique Identifier
 	"13":  {}, // Device Identifier

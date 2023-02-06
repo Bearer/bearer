@@ -1,4 +1,4 @@
-([]testhelper.ClassificationResult) (len=39) {
+([]testhelper.ClassificationResult) (len=38) {
   (testhelper.ClassificationResult) {
     Name: (string) (len=25) "RepositorySystemHookEvent",
     Decision: (classify.ClassificationDecision) {
@@ -312,23 +312,6 @@
     Properties: (map[string]testhelper.ClassificationResult) (len=1) {
       (string) (len=18) "getDisplayNameLike": (testhelper.ClassificationResult) {
         Name: (string) (len=18) "getDisplayNameLike",
-        Decision: (classify.ClassificationDecision) {
-          State: (classify.ValidationState) (len=5) "valid",
-          Reason: (string) (len=13) "known_pattern"
-        },
-        Properties: (map[string]testhelper.ClassificationResult) <nil>
-      }
-    }
-  },
-  (testhelper.ClassificationResult) {
-    Name: (string) (len=10) "UserResult",
-    Decision: (classify.ClassificationDecision) {
-      State: (classify.ValidationState) (len=5) "valid",
-      Reason: (string) (len=34) "valid_object_with_valid_properties"
-    },
-    Properties: (map[string]testhelper.ClassificationResult) (len=1) {
-      (string) (len=14) "bbs_post_count": (testhelper.ClassificationResult) {
-        Name: (string) (len=14) "bbs_post_count",
         Decision: (classify.ClassificationDecision) {
           State: (classify.ValidationState) (len=5) "valid",
           Reason: (string) (len=13) "known_pattern"
@@ -1393,8 +1376,8 @@
       (string) (len=12) "voteup_count": (testhelper.ClassificationResult) {
         Name: (string) (len=12) "voteup_count",
         Decision: (classify.ClassificationDecision) {
-          State: (classify.ValidationState) (len=5) "valid",
-          Reason: (string) (len=13) "known_pattern"
+          State: (classify.ValidationState) (len=7) "invalid",
+          Reason: (string) (len=16) "invalid_property"
         },
         Properties: (map[string]testhelper.ClassificationResult) <nil>
       }

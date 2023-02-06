@@ -7,7 +7,6 @@
   "friendly_name": "Access Token",
   "health_context_data_type_uuid": null,
   "include_regexp": "\\b(access|auth)\\s?token\\b",
-  "include_types": ["string"],
   "match_column": true,
   "match_object": true,
   "object_type": ["known_data_object", "known"]

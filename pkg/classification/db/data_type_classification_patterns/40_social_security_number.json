@@ -7,7 +7,6 @@
   "friendly_name": "Social Security Number",
   "health_context_data_type_uuid": null,
   "include_regexp": "\\b(social.*security.*number|ssn|national.*insurance.*number|ni\\s?number)\\b",
-  "include_types": ["string"],
   "match_column": true,
   "match_object": false,
   "object_type": ["known", "unknown_extended", "unknown"]

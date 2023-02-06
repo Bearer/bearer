@@ -6,8 +6,7 @@
   "exclude_types": ["boolean"],
   "friendly_name": "Family Structure",
   "health_context_data_type_uuid": null,
-  "include_regexp": "\\Afamily\\z",
-  "include_types": ["string"],
+  "include_regexp": "^family$",
   "match_column": true,
   "match_object": false,
   "object_type": ["known", "unknown_extended", "unknown"]
