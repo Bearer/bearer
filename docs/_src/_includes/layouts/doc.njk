@@ -11,7 +11,7 @@ layout: layouts/base.njk
 					<ul class="ml-2">
 						{% for item in heading.items %}
 							<li>
-								<a class="hover:underline block" {% if currentUrl === item.url %}aria-current="page" {% endif %} href="{{item.url}}">{{item.name}}</a>
+								<a class="hover:underline block" {% if item.url in currentUrl %}aria-current="page" {% endif %} href="{{item.url}}">{{item.name}}</a>
 							</li>
 						{% endfor %}
 					</ul>
