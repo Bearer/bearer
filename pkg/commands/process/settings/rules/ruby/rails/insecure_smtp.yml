@@ -15,10 +15,10 @@ languages:
   - ruby
 trigger: presence
 severity:
-  default: "warning"
-  PII: "critical"
-  PHI: "medium"
-  PD: "high"
+  default: low # FIXME: warning
+  PII: critical
+  PHI: medium
+  PD: high
 metadata:
   description: "Only communicate with secure SMTP connections."
   remediation_message: |
