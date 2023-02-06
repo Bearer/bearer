@@ -9,7 +9,7 @@ import (
 	"gopkg.in/yaml.v3"
 
 	"github.com/bearer/curio/pkg/detectors/rails/cache"
-	"github.com/bearer/curio/pkg/detectors/rails/personal_data"
+	"github.com/bearer/curio/pkg/detectors/rails/schema_rb"
 	"github.com/bearer/curio/pkg/detectors/types"
 	"github.com/bearer/curio/pkg/parser/nodeid"
 	"github.com/bearer/curio/pkg/report"
@@ -78,7 +78,7 @@ func (detector *detector) ProcessFile(file *file.FileInfo, dir *file.Path, repor
 		// Allow "ruby" detector to process file
 		return false, nil
 	case rubyDatabaseSchemaPath:
-		if err := personal_data.ExtractFromDatabaseSchema(detector.idGenerator, file, report); err != nil {
+		if err := schema_rb.ExtractFromDatabaseSchema(detector.idGenerator, file, report); err != nil {
 			return false, err
 		}
 	default:
