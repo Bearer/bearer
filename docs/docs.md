@@ -14,6 +14,12 @@ New to Curio? Check out the [quickstart](/quickstart/) to scan your first projec
 
 Ready to dive in? Curio's [reports](/explanations/reports/) are your path to analyzing data security risks in your application. Check the [supported languages](/reference/supported-languages/), then view the [command reference](/reference/commands/) to configure Curio to your needs.
 
+## Guides
+
+Guides help you make the most of Curio so you can get up and running quickly.
+
+- [Using the GitHub action](/guides/github-action/)
+
 ## Explanations
 
 Explanations dive into the rational behind Curio and explain some of its heavier concepts.
