@@ -155,7 +155,7 @@ func BuildReportString(rules map[string]*settings.Rule, results map[string][]Res
 
 	reportPassed := true
 	for _, severityLevel := range maps.Keys(severityForFailure) {
-		if severityLevel != types.LevelWarning && len(results[severityLevel]) != 0 {
+		if severityForFailure[severityLevel] && severityLevel != types.LevelWarning && len(results[severityLevel]) != 0 {
 			// fail the report if we have failures above the severity threshold
 			reportPassed = false
 		}
