@@ -30,9 +30,9 @@ Curio's built-in rules aim to keep you protected from the top data security risk
 
 <ul class="flex flex-col gap-4 not-prose list-none p-0">
   {% for rule in rules | sortById %}
-    <li class="block rounded border-2 border-neutral-200 p-4 js-rule">
+    <li class="block rounded border-2 border-neutral-200 dark:border-code p-4 js-rule">
       <a href="/reference/rules/{{rule.metadata.id}}/">
-        <h2 class="font-bold text-main dark:text-main-400">{{rule.metadata.id}}</h2>
+        <h2 class="font-bold text-main dark:text-main-300">{{rule.metadata.id}}</h2>
         <p>
           {{rule.metadata.description}}
         </p>
@@ -40,9 +40,9 @@ Curio's built-in rules aim to keep you protected from the top data security risk
       <div>
         <ul class="flex gap-2 justify-end">
           {% if rule.languages %}
-            <li class=" text-xs py-2 px-4 rounded-full bg-neutral-200">{{rule.languages}}</li>
+            <li class=" text-xs py-2 px-4 rounded-full bg-neutral-200 dark:bg-code">{{rule.languages}}</li>
           {% endif %}
-          <li class=" text-xs py-2 px-4 rounded-full bg-neutral-200">{{rule.metadata.dsr_id}}</li>
+          <li class=" text-xs py-2 px-4 rounded-full bg-neutral-200 dark:bg-code">{{rule.metadata.dsr_id}}</li>
         </ul>
       </div>
     </li>
