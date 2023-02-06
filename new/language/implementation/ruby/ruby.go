@@ -190,3 +190,7 @@ func (implementation *rubyImplementation) DescendIntoDetectionNode(node *tree.No
 
 	return true
 }
+
+func (implementation *rubyImplementation) IsRootOfRuleQuery(node *tree.Node) bool {
+	return true
+}

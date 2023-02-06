@@ -238,3 +238,7 @@ func (implementation *javascriptImplementation) DescendIntoDetectionNode(node *t
 
 	return true
 }
+
+func (implementation *javascriptImplementation) IsRootOfRuleQuery(node *tree.Node) bool {
+	return !(node.Type() == "expression_statement")
+}

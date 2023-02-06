@@ -53,8 +53,18 @@ func Build(
 	}
 	defer tree.Close()
 
-	if tree.RootNode().ChildCount() != 1 {
-		return nil, fmt.Errorf("expecting 1 node but got %d", tree.RootNode().ChildCount())
+	root := tree.RootNode()
+
+	if root.ChildCount() != 1 {
+		return nil, fmt.Errorf("expecting 1 node but got %d", root.ChildCount())
+	}
+
+	for {
+		root = root.Child(0)
+
+		if langImplementation.IsRootOfRuleQuery(root) {
+			break
+		}
 	}
 
 	builder := builder{
@@ -66,7 +76,7 @@ func Build(
 		paramToContent:     make(map[string]string),
 	}
 
-	result, err := builder.build(tree.RootNode().Child(0))
+	result, err := builder.build(root)
 	if err != nil {
 		return nil, err
 	}

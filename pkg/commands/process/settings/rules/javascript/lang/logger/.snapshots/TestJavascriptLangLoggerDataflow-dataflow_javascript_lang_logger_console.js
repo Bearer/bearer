@@ -18,7 +18,7 @@ risks:
               line_number: 1
               parent:
                 line_number: 1
-                content: console.log(user.name);
+                content: console.log(user.name)
               field_name: name
               object_name: user
               subject_name: User

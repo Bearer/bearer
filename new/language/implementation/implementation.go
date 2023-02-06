@@ -85,4 +85,15 @@ type Implementation interface {
 	// But we don't want to see detections for the assignment when asking for the
 	// detections of `user.email`
 	DescendIntoDetectionNode(node *tree.Node) bool
+	// IsRootOfRuleQuery returns whether a node should be ignored or be a root
+	// of a custom rule query
+	//
+	// eg. given a javascript code like this:
+	//    const context = {
+	//    		email: "foo@domain.com",
+	//    }
+	//    logger.child(context).info(user.name);
+	// if we want to pull both datatypes inside `child()` as well as inside `info()`
+	// we want to ignore member_expressions as roots.
+	IsRootOfRuleQuery(node *tree.Node) bool
 }

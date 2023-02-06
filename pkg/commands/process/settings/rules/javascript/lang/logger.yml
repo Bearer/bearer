@@ -1,7 +1,7 @@
 type: "risk"
 patterns:
   - pattern: |
-      logger.$<METHOD>($<DATA_TYPE>)
+      $<LOG>.$<METHOD>($<DATA_TYPE>)
     filters:
       - variable: DATA_TYPE
         detection: datatype
@@ -12,18 +12,10 @@ patterns:
           - error
           - fatal
           - log
-  - pattern: |
-      log.$<METHOD>($<DATA_TYPE>)
-    filters:
-      - variable: DATA_TYPE
-        detection: datatype
-      - variable: METHOD
+      - variable: LOG
         values:
-          - warn
-          - info
-          - error
-          - fatal
           - log
+          - logger
   - pattern: |
       console.$<METHOD>($<DATA_TYPE>)
     filters:
@@ -31,17 +23,20 @@ patterns:
         detection: datatype
       - variable: METHOD
         values:
+          - warn
+          - info
           - error
           - log
           - table
-          - info
-          - warn
-  # fixme: bring elipsis support in javascript
-  # - pattern: |
-  #     logger.child($<DATA_TYPE>)$<...>
-  #   filters:
-  #     - variable: DATA_TYPE
-  #       detection: datatype
+  - pattern: |
+      $<LOG>.child($<DATA_TYPE>)
+    filters:
+      - variable: DATA_TYPE
+        detection: datatype
+      - variable: LOG
+        values:
+          - log
+          - logger
   - pattern: |
       $<VAR>.$<METHOD>($<DATA_TYPE>)
     filters:
@@ -60,8 +55,13 @@ auxiliary:
   - id: child_logger
     type: verifier
     patterns:
-      - |
-        logger.child()
+      - pattern: |
+          $<LOG>.child()
+        filters:
+          - variable: LOG
+            values:
+              - log
+              - logger
     languages:
       - javascript
 languages:

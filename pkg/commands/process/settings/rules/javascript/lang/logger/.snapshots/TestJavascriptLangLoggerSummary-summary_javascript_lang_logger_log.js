@@ -8,7 +8,7 @@ critical:
       category_groups:
         - PII
       parent_line_number: 1
-      parent_content: log.info(user.name);
+      parent_content: log.info(user.name)
 
 
 --

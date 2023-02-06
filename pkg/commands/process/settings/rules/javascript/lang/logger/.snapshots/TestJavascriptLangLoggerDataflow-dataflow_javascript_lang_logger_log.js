@@ -18,7 +18,7 @@ risks:
               line_number: 1
               parent:
                 line_number: 1
-                content: log.info(user.name);
+                content: log.info(user.name)
               field_name: name
               object_name: user
               subject_name: User
