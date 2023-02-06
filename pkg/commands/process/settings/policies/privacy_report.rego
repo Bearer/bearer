@@ -1,10 +1,10 @@
-package bearer.inventory_report
+package bearer.privacy_report
 
 import data.bearer.common
 
 import future.keywords
 
-report_items contains item if {
+items contains item if {
   some data_type in input.dataflow.data_types
   some detector in data_type.detectors
   some location in detector.locations

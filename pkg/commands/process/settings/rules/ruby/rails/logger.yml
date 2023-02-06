@@ -1,18 +1,25 @@
-type: "risk"
 patterns:
   - pattern: |
-      Rails.logger.info($<DATA_TYPE>)
+      Rails.logger.$<METHOD>($<DATA_TYPE>)
     filters:
       - variable: DATA_TYPE
         detection: datatype
+      - variable: METHOD
+        values:
+          # - debug
+          - info
+          - warn
+          - error
+          - fatal
+          - unknown
 languages:
   - ruby
-trigger: "local"
+trigger: local
 severity:
-  default: "low"
-  PII: "critical"
-  PHI: "medium"
-  PD: "high"
+  default: low
+  PII: critical
+  PHI: medium
+  PD: high
 skip_data_types:
   - "Unique Identifier"
 metadata:
@@ -37,5 +44,5 @@ metadata:
     ## Resources
     Coming soon.
     -->
-  dsr_id: "DSR-5"
-  id: "ruby_rails_logger"
+  dsr_id: DSR-5
+  id: ruby_rails_logger

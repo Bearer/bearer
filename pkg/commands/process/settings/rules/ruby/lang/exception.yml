@@ -1,17 +1,9 @@
 patterns:
   - pattern: |
-      logger.$<METHOD>($<DATA_TYPE>)
+      raise($<DATA_TYPE>)
     filters:
       - variable: DATA_TYPE
         detection: datatype
-      - variable: METHOD
-        values:
-          # - debug
-          - warn
-          - info
-          - error
-          - fatal
-          - log
 languages:
   - ruby
 trigger: local
@@ -21,30 +13,30 @@ severity:
   PHI: medium
   PD: high
 skip_data_types:
-  - "Unique Identifier"
+  - Unique Identifier
 metadata:
-  description: "Do not send sensitive data to loggers."
+  description: "Do not send sensitive data to exceptions."
   remediation_message: |
     ## Description
 
-    Leaking sensitive data to loggers is a common cause of data leaks and can lead to data breaches. This rule looks for instances of sensitive data sent to loggers.
+    Leaking sensitive data to an exception is a common cause of data leaks and can lead to data breaches. This rule looks for instances of sensitive data sent to exceptions.
 
     ## Remediations
 
     ❌ Avoid using sensitive data in logger messages:
 
     ```ruby
-    logger.info('User is: #{user.email}')
+    raise CustomException.new(user.email)
     ```
 
     ✅ If you need to identify a user, ensure to use their unique identifier instead of their personal identifiable information:
 
     ```ruby
-    logger.info('User is: #{user.uuid}')
+    raise CustomException.new(user.uuid)
     ```
     <!--
     ## Resources
     Coming soon.
     -->
   dsr_id: DSR-5
-  id: ruby_lang_logger
+  id: ruby_lang_exception

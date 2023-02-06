@@ -16,44 +16,36 @@ curio init
 This creates a config file in your current directory. Below is an annotated version of that file.
 
 ```yml
-# Detector settings
-detector:
-    # Specify the comma-separated ids of the detectors you would like to run. 
-    # Skips all other detectors.
-    only-detector: []
-    # Specify the comma-separated ids of the detectors you would like to skip. 
-    # Runs all other detectors.
-    skip-detector: []
-# Rule settings
-rule:
-    # Specify the comma-separated ids of the rules you would like to run. 
-    # Skips all other rules.
-    only-rule: []
-    # Specify the comma-separated ids of the rules you would like to skip. 
-    # Runs all other rules.
-    skip-rule: []
 # Report settings
 report:
     # Specify report format (json, yaml)
     format: ""
     # Specify the output path for the report.
     output: ""
-    # Specify the type of report (detectors, dataflow, summary, stats). 
+    # Specify the type of report (summary, privacy). 
     report: summary
+# Rule settings
+rule:
+    # Specify the comma-separated ids of the rules you would like to run; 
+    # skips all other rules.
+    only-rule: []
+    # Specify the comma-separated ids of the rules you would like to skip; 
+    # runs all other rules.
+    skip-rule: []
 # Scan settings
 scan:
     # Expand context of schema classification 
     # For example, "health" will include data types particular to health
     context: ""
+    # Override default data subject mapping by providing a path to a custom mapping JSON file
+    data-subject-mapping: ""
     # Enable debug logs
     debug: false
     # Do not attempt to resolve detected domains during classification.
     disable-domain-resolution: true
     # Set timeout when attempting to resolve detected domains during classification.
     domain-resolution-timeout: 3s
-    # Specify directories paths that contain .yaml files with external custom detectors configuration.
-    external-detector-dir: []
-    # Specify directories paths that contain .rego files with external rules configuration.
+    # Specify directories paths that contain yaml files with external rules configuration.
     external-rule-dir: []
     # Disable the cache and runs the detections again every time scan runs.
     force: false
@@ -68,4 +60,4 @@ scan:
 
 ## Utilizing a custom config
 
-By default, Curio will look for a `curio.yml` file in the project directory where the scan is run. Alternately, you can use the `--config-file` flag with the scan command to reference a config file that is outside the project directory.
+By default, Curio will look for a `curio.yml` file in the project directory where the scan is run. Alternatively, you can use the `--config-file` flag with the scan command to reference a config file that is outside the project directory.

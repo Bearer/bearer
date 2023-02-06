@@ -1,6 +1,6 @@
 
 --
-Error: flag error: report flags error: invalid report argument; supported values: summary, dataflow, stats
+Error: flag error: report flags error: invalid report argument; supported values: summary, privacy
 Usage:
    scan [flags] <path>
 Aliases:
@@ -13,7 +13,7 @@ Examples:
 Report Flags
   -f, --format string   Specify report format (json, yaml)
       --output string   Specify the output path for the report.
-      --report string   Specify the type of report (summary, dataflow, stats). (default "summary")
+      --report string   Specify the type of report (summary, privacy). (default "summary")
 
 Rule Flags
       --only-rule strings   Specify the comma-separated ids of the rules you would like to run. Skips all other rules.
@@ -35,5 +35,5 @@ General Flags
       --config-file string   Load configuration from the specified path.
 
 
-flag error: report flags error: invalid report argument; supported values: summary, dataflow, stats
+flag error: report flags error: invalid report argument; supported values: summary, privacy
 

@@ -7,11 +7,11 @@
       name: bearer.common
     - path: policies/risk_policy.rego
       name: bearer.risk_policy
-- type: inventory_report
+- type: privacy_report
   query: |
-    report_items = data.bearer.inventory_report.report_items
+    items = data.bearer.privacy_report.items
   modules:
     - path: policies/common.rego
       name: bearer.common
-    - path: policies/inventory_report.rego
-      name: bearer.inventory_report
+    - path: policies/privacy_report.rego
+      name: bearer.privacy_report

@@ -84,6 +84,16 @@ func TestRubyLangLoggerDataflow(t *testing.T) {
 	runRulesTest("ruby/lang/logger", "dataflow", "ruby_lang_logger", t)
 }
 
+func TestRubyLangExceptionSummary(t *testing.T) {
+	t.Parallel()
+	runRulesTest("ruby/lang/exception", "summary", "ruby_lang_exception", t)
+}
+
+func TestRubyLangExceptionDataflow(t *testing.T) {
+	t.Parallel()
+	runRulesTest("ruby/lang/exception", "dataflow", "ruby_lang_exception", t)
+}
+
 func TestRubyLangSslVerificationSummary(t *testing.T) {
 	t.Parallel()
 	runRulesTest("ruby/lang/ssl_verification", "summary", "ruby_lang_ssl_verification", t)

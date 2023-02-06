@@ -1,4 +1,3 @@
-type: "risk"
 patterns:
   - pattern: |
       Digest::SHA1.hexidigest()
@@ -79,39 +78,27 @@ patterns:
           - encrypt_block
           - decrypt_block
 languages:
-  - "ruby"
+  - ruby
 auxiliary:
-  - id: "rc4_init"
-    type: "verifier"
+  - id: rc4_init
     patterns:
       - |
         RC4.new()
-    languages:
-      - "ruby"
-  - id: "openssl_rsa_init"
-    type: "verifier"
+  - id: openssl_rsa_init
     patterns:
       - |
         OpenSSL::PKey::RSA.new()
-    languages:
-      - "ruby"
-  - id: "openssl_dsa_init"
-    type: "verifier"
+  - id: openssl_dsa_init
     patterns:
       - |
         OpenSSL::PKey::DSA.new()
-    languages:
-      - "ruby"
-  - id: "blowfish_init"
-    type: "verifier"
+  - id: blowfish_init
     patterns:
       - |
         Crypt::Blowfish.new()
-    languages:
-      - "ruby"
-trigger: "presence"
+trigger: presence
 severity:
-  default: "low" # FIXME: warning
+  default: low # FIXME: warning
 metadata:
   description: "Avoid weak encryption libraries."
   remediation_message: |
@@ -141,5 +128,5 @@ metadata:
 
     ## Resources
     - [BCrypt Explained](https://dev.to/sylviapap/bcrypt-explained-4k5c)
-  dsr_id: "DSR-7"
-  id: "ruby_lang_weak_encryption"
+  dsr_id: DSR-7
+  id: ruby_lang_weak_encryption

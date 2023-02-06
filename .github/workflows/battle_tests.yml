@@ -90,7 +90,7 @@ jobs:
           cp curio dist/
 
       - name: Build and push latest
-        uses: docker/build-push-action@v3
+        uses: docker/build-push-action@v4
         with:
           push: true
           context: .
