@@ -6,8 +6,7 @@
   "exclude_types": ["boolean"],
   "friendly_name": "National identity number",
   "health_context_data_type_uuid": null,
-  "include_regexp": "\\Anational\\s?(identity\\s?number|identifier)\\z",
-  "include_types": ["string"],
+  "include_regexp": "^national\\s?(identity\\s?number|identifier)$",
   "match_column": true,
   "match_object": false,
   "object_type": ["known", "unknown_extended", "unknown"]

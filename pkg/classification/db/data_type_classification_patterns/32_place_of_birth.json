@@ -7,7 +7,6 @@
   "friendly_name": "Place of birth",
   "health_context_data_type_uuid": null,
   "include_regexp": "\\b(place.*of.*birth)\\b",
-  "include_types": ["object", "string"],
   "match_column": true,
   "match_object": false,
   "object_type": ["known", "unknown_extended", "unknown"]

@@ -6,8 +6,7 @@
   "exclude_types": ["boolean"],
   "friendly_name": "Spoken Languages",
   "health_context_data_type_uuid": null,
-  "include_regexp": "\\b(spoken.*languages?|language)\\z",
-  "include_types": ["string"],
+  "include_regexp": "\\b(spoken.*languages?|language)$",
   "match_column": true,
   "match_object": false,
   "object_type": ["known", "unknown_extended"]

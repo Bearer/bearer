@@ -3,11 +3,10 @@
   "id": 2,
   "data_type_uuid": "22e24c62-82d3-4b72-827c-e261533331bd",
   "exclude_regexp": "\\b(.*notification|config(uration)?|template|enabled|accept|label|token|reminder|subject|body|handover|sent.by|settings?|id|voicemail.*|required)\\b",
-  "exclude_types": ["boolean", "date", "bool"],
+  "exclude_types": ["boolean", "date", "number"],
   "friendly_name": "Email Address",
   "health_context_data_type_uuid": null,
   "include_regexp": "\\b(.*email\\s?(address)?)\\b",
-  "include_types": ["object", "string"],
   "match_column": true,
   "match_object": false,
   "object_type": ["unknown"]

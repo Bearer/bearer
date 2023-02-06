@@ -7,7 +7,6 @@
   "friendly_name": "Mac address",
   "health_context_data_type_uuid": null,
   "include_regexp": "\\bmac\\s?address\\b",
-  "include_types": ["string"],
   "match_column": true,
   "match_object": false,
   "object_type": ["unknown"]

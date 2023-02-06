@@ -6,8 +6,7 @@
   "exclude_types": ["boolean"],
   "friendly_name": "Purchases",
   "health_context_data_type_uuid": null,
-  "include_regexp": "\\A(purchase|order|(purchase\\s?order)|tax|shipping|discount|paid)\\s?((sub)?total|shipping|number|vat|returns?)\\b",
-  "include_types": ["string"],
+  "include_regexp": "^(purchase|order|(purchase\\s?order)|tax|shipping|discount|paid)\\s?((sub)?total|shipping|number|vat|returns?)\\b",
   "match_column": true,
   "match_object": false,
   "object_type": ["known", "unknown_extended"]

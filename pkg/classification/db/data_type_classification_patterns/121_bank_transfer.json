@@ -7,7 +7,6 @@
   "friendly_name": "Bank Transfer",
   "health_context_data_type_uuid": null,
   "include_regexp": "\\b.*bank\\s?transfer.*\\b",
-  "include_types": ["string"],
   "match_column": false,
   "match_object": true,
   "object_type": ["known_data_object"]

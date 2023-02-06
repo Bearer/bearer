@@ -7,7 +7,6 @@
   "friendly_name": "Creditcard",
   "health_context_data_type_uuid": null,
   "include_regexp": "\\b(payment|direct)?(credit|debit)\\s?(card)?\\s?(account)?\\s?(number|holder|cvv|(expir(e|ation)(month|year)?))\\b",
-  "include_types": ["string"],
   "match_column": true,
   "match_object": true,
   "object_type": ["known_data_object", "known"]
