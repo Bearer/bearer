@@ -69,7 +69,7 @@ func concatenateChildren(node *tree.Node, evaluator types.Evaluator) ([]interfac
 func handleTemplateString(node *tree.Node, evaluator types.Evaluator) ([]interface{}, error) {
 	text := ""
 
-	err := node.EachPart(func(partText string) error {
+	err := node.EachContentPart(func(partText string) error {
 		text += partText
 		return nil
 	}, func(child *tree.Node) error {

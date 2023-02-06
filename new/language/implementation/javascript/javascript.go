@@ -193,13 +193,11 @@ func (implementation *javascriptImplementation) IsTerminalDetectionNode(node *tr
 	return false
 }
 
-// TODO: See if anything needs to be added here
 func (implementation *javascriptImplementation) PatternMatchNodeContainerTypes() []string {
 	return patternMatchNodeContainerTypes
 }
 
 func (implementation *javascriptImplementation) PatternIsAnchored(node *tree.Node) bool {
-	// FIXME: implement this
 	parent := node.Parent()
 	if parent == nil {
 		return true

@@ -67,7 +67,7 @@ func (node *Node) Child(i int) *Node {
 	return node.tree.wrap(node.sitterNode.Child(i))
 }
 
-func (node *Node) EachPart(onText func(text string) error, onChild func(child *Node) error) error {
+func (node *Node) EachContentPart(onText func(text string) error, onChild func(child *Node) error) error {
 	n := int(node.sitterNode.ChildCount())
 
 	start := node.sitterNode.StartByte()
