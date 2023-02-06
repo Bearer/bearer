@@ -198,7 +198,6 @@ func (implementation *javascriptImplementation) PatternMatchNodeContainerTypes()
 	return patternMatchNodeContainerTypes
 }
 
-// TODO: See if anything needs to be added here
 func (implementation *javascriptImplementation) PatternIsAnchored(node *tree.Node) bool {
 	// FIXME: implement this
 	parent := node.Parent()
@@ -206,22 +205,25 @@ func (implementation *javascriptImplementation) PatternIsAnchored(node *tree.Nod
 		return true
 	}
 
-	/// functions, arrow functions, class bodies, class methods
-
 	// Class body
-	// if parent.Type() == "class_declaration" && !node.Equal(parent.ChildByFieldName("name")) {
-	// 	return false
-	// }
+	if parent.Type() == "class_declaration" && !node.Equal(parent.ChildByFieldName("name")) {
+		return false
+	}
 
-	// // Block body
-	// if (parent.Type() == "do_block" || parent.Type() == "block") && !node.Equal(parent.ChildByFieldName("parameters")) {
-	// 	return false
-	// }
+	// arrow functions
+	if parent.Type() == "arrow_functions" && !node.Equal(parent.ChildByFieldName("parameters")) {
+		return false
+	}
 
-	// // Method body
-	// if parent.Type() == "method" && !node.Equal(parent.ChildByFieldName("name")) && !node.Equal(parent.ChildByFieldName("parameters")) {
-	// 	return false
-	// }
+	// function
+	if parent.Type() == "function_declaration" && !node.Equal(parent.ChildByFieldName("name")) && !node.Equal(parent.ChildByFieldName("parameters")) {
+		return false
+	}
+
+	// method
+	if parent.Type() == "method_definition" && !node.Equal(parent.ChildByFieldName("name")) && !node.Equal(parent.ChildByFieldName("parameters")) {
+		return false
+	}
 
 	return true
 }
