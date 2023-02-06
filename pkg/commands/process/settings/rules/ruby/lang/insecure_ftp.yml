@@ -14,7 +14,7 @@ languages:
   - ruby
 trigger: presence
 severity:
-  default: "warning"
+  default: "low" # FIXME: warning
   PII: "critical"
   PHI: "medium"
   PD: "high"

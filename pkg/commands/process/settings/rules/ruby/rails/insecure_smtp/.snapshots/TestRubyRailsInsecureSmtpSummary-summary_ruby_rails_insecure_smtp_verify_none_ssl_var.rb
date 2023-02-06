@@ -1,4 +1,4 @@
-warning:
+low:
     - policy_name: ""
       policy_dsrid: DSR-2
       policy_display_id: ruby_rails_insecure_smtp
