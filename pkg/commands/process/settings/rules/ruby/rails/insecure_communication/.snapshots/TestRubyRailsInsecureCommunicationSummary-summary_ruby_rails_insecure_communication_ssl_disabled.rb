@@ -8,10 +8,7 @@ low:
       category_groups:
         - PII
       parent_line_number: 7
-      parent_content: |
-        Rails.application.configure do
-          $<!>config.force_ssl = false
-        end
+      parent_content: config.force_ssl = false
 
 
 --

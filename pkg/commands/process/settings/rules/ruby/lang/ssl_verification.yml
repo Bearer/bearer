@@ -1,4 +1,3 @@
-type: "risk"
 patterns:
   - |
     Net::HTTP.start(:verify_mode => OpenSSL::SSL::VERIFY_NONE)$<...>
@@ -12,10 +11,9 @@ patterns:
     $<_>.verify_mode = OpenSSL::SSL::VERIFY_NONE
 languages:
   - ruby
-detect_presence: true
-trigger: "presence"
+trigger: presence
 severity:
-  default: "low" # FIXME: warning
+  default: low # FIXME: warning
 metadata:
   description: "Enable SSL Certificate Verification."
   remediation_message: |
@@ -46,5 +44,5 @@ metadata:
     ## Resources
     Coming soon.
     -->
-  dsr_id: "DSR-2"
-  id: "ruby_lang_ssl_verification"
+  dsr_id: DSR-2
+  id: ruby_lang_ssl_verification
