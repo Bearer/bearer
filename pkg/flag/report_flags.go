@@ -111,13 +111,7 @@ func (f *ReportFlagGroup) ToOptions() (ReportOptions, error) {
 	}
 
 	severity := getStringSlice(f.Severity)
-	// pre-define mapping to ensure ordering
-	severityMapping := map[string]bool{
-		types.LevelCritical: false,
-		types.LevelHigh:     false,
-		types.LevelMedium:   false,
-		types.LevelLow:      false,
-	}
+	severityMapping := make(map[string]bool)
 
 	for _, severityLevel := range severity {
 		switch severityLevel {
