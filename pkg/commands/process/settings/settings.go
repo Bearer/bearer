@@ -48,13 +48,6 @@ type Config struct {
 	BuiltInRules map[string]*Rule   `mapstructure:"built_in_rules" json:"built_in_rules" yaml:"built_in_rules"`
 }
 
-type PolicyLevel string
-
-var LevelCritical = "critical"
-var LevelHigh = "high"
-var LevelMedium = "medium"
-var LevelLow = "low"
-
 type Modules []*PolicyModule
 
 type Policy struct {

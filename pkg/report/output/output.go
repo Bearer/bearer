@@ -58,11 +58,11 @@ func ReportSummary(report types.Report, output *zerolog.Event, config settings.C
 	}
 
 	outputToFile := config.Report.Output != ""
-	reportStr := summary.BuildReportString(config.Rules, summaryResults, outputToFile)
+	severityForFailure := config.Report.Severity
+	reportStr, reportPassed := summary.BuildReportString(config.Rules, summaryResults, severityForFailure, outputToFile)
 
 	output.Msg(reportStr.String())
 
-	reportPassed = len(summaryResults) == 0
 	return
 }
 
@@ -148,7 +148,7 @@ func getPrivacyReportOutput(report types.Report, config settings.Config) (*priva
 	return privacy.GetOutput(dataflow, config)
 }
 
-func getSummaryReportOutput(report types.Report, config settings.Config) (map[string][]summary.PolicyResult, error) {
+func getSummaryReportOutput(report types.Report, config settings.Config) (map[string][]summary.Result, error) {
 	dataflow, err := getDataflow(report, config, true)
 	if err != nil {
 		return nil, err

@@ -51,6 +51,9 @@ options:
     - name: report
       default_value: summary
       usage: Specify the type of report (summary, privacy).
+    - name: severity
+      default_value: critical,high,medium,low
+      usage: Specify which severities are included in the report.
     - name: skip-path
       default_value: '[]'
       usage: |
