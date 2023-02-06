@@ -17,10 +17,7 @@ skip_data_types:
 auto_encrypt_prefix: encrypted_
 trigger: stored_data_types
 severity:
-  default: low
-  PII: critical
-  PHI: medium
-  PD: high
+  default: warning
 metadata:
   description: "Force application-level encryption when processing sensitive data."
   remediation_message: |

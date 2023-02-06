@@ -1,4 +1,4 @@
-critical:
+warning:
     - policy_name: ""
       policy_dsrid: DSR-10
       policy_display_id: ruby_rails_default_encryption
