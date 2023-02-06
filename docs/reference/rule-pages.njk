@@ -20,9 +20,11 @@ eleventyComputed:
   <li>
     <strong>Data Security Risk ID:</strong>
     {{rule.metadata.dsr_id}}</li>
-  <li>
-    <strong>Languages:</strong>
-    {{rule.languages}}</li>
+  {% if rule.languages %}
+    <li>
+      <strong>Languages:</strong>
+      {{rule.languages}}</li>
+  {% endif %}
   <li>
     <strong>Source:</strong>
     <a class=" text-main dark:text-main-300 hover:underline" href="{{meta.sourcePath}}/blob/main/pkg/commands/process/settings/rules/{{rule.metadata.id | replace("_", "/")}}.yml">{{rule.name}}.yml</a>
