@@ -66,17 +66,6 @@ patterns:
         values:
           - encrypt_block
           - decrypt_block
-  - pattern: |
-      $<VAR>.$<METHOD> {
-        $<_>
-      }
-    filters:
-      - variable: VAR
-        detection: blowfish_init
-      - variable: METHOD
-        values:
-          - encrypt_block
-          - decrypt_block
 languages:
   - ruby
 auxiliary:

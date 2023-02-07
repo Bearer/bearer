@@ -5,7 +5,7 @@ risks:
           line_number: 3
           parent:
             line_number: 3
-            content: 'openssl_verify_mode: OpenSSL::SSL::VERIFY_NONE'
+            content: :openssl_verify_mode => OpenSSL::SSL::VERIFY_NONE
           content: |
             Rails.application.configure do
               config.action_mailer.smtp_settings = {

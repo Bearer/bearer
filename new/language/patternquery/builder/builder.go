@@ -24,7 +24,7 @@ type Result struct {
 	Query           string
 	ParamToVariable map[string]string
 	EqualParams     [][]string
-	ParamToContent  map[string]string
+	ParamToContent  map[string]map[string]string
 }
 
 type builder struct {
@@ -33,8 +33,8 @@ type builder struct {
 	idGenerator        nodeid.Generator
 	inputParams        InputParams
 	variableToParams   map[string][]string
-	paramToContent     map[string]string
-	matchNodeFound     bool
+	paramToContent     map[string]map[string]string
+	matchNode          *tree.Node
 }
 
 func Build(
@@ -57,22 +57,28 @@ func Build(
 		return nil, fmt.Errorf("expecting 1 node but got %d", tree.RootNode().ChildCount())
 	}
 
+	matchNode := findMatchNode(
+		inputParams.MatchNodeOffset,
+		langImplementation.PatternMatchNodeContainerTypes(),
+		tree.RootNode(),
+	)
+	if matchNode == nil {
+		return nil, fmt.Errorf("match node not found")
+	}
+
 	builder := builder{
 		langImplementation: langImplementation,
 		stringBuilder:      strings.Builder{},
 		idGenerator:        &nodeid.IntGenerator{},
 		inputParams:        *inputParams,
 		variableToParams:   make(map[string][]string),
-		paramToContent:     make(map[string]string),
+		paramToContent:     make(map[string]map[string]string),
+		matchNode:          matchNode,
 	}
 
 	result, err := builder.build(tree.RootNode().Child(0))
 	if err != nil {
 		return nil, err
-	}
-
-	if !builder.matchNodeFound {
-		return nil, fmt.Errorf("match node not found")
 	}
 
 	return result, nil
@@ -81,8 +87,7 @@ func Build(
 func (builder *builder) build(rootNode *tree.Node) (*Result, error) {
 	builder.write("(")
 
-	err := builder.compileNode(rootNode, true, false)
-	if err != nil {
+	if err := builder.compileNode(rootNode, true, false); err != nil {
 		return nil, err
 	}
 
@@ -109,14 +114,6 @@ func (builder *builder) compileNode(node *tree.Node, isRoot bool, isLastChild bo
 		)
 	}
 
-	writeMatch := false
-	if !builder.matchNodeFound &&
-		node.StartByte() == builder.inputParams.MatchNodeOffset &&
-		!slices.Contains(builder.langImplementation.PatternMatchNodeContainerTypes(), node.Type()) {
-		builder.matchNodeFound = true
-		writeMatch = true
-	}
-
 	anchored := !isRoot && node.IsNamed() && builder.langImplementation.PatternIsAnchored(node)
 
 	if anchored && !slices.Contains(builder.inputParams.UnanchoredOffsets, node.StartByte()) {
@@ -137,7 +134,7 @@ func (builder *builder) compileNode(node *tree.Node, isRoot bool, isLastChild bo
 		builder.write(" .")
 	}
 
-	if writeMatch {
+	if node.Equal(builder.matchNode) {
 		builder.write(" @match")
 	}
 
@@ -173,28 +170,46 @@ func (builder *builder) compileAnonymousNode(node *tree.Node) {
 // Leaves match their type and content
 func (builder *builder) compileLeafNode(node *tree.Node) {
 	paramName := builder.newParam()
-	builder.paramToContent[paramName] = node.Content()
+	paramContent := make(map[string]string)
+	builder.paramToContent[paramName] = paramContent
 
-	builder.write("(")
-	builder.write(node.Type())
-	builder.write(") @")
+	builder.write("[")
+
+	for _, nodeType := range builder.langImplementation.PatternNodeTypes(node) {
+		paramContent[nodeType] = builder.langImplementation.TranslatePatternContent(
+			node.Type(),
+			nodeType, node.Content(),
+		)
+
+		builder.write(" (")
+		builder.write(nodeType)
+		builder.write(" )")
+	}
+
+	builder.write("] @")
 	builder.write(paramName)
 }
 
 // Nodes with children match their type and child nodes
 func (builder *builder) compileNodeWithChildren(node *tree.Node) error {
-	builder.write("(")
-	builder.write(node.Type())
+	builder.write("[")
 
-	for i := 0; i < node.ChildCount(); i++ {
-		builder.write(" ")
+	for _, nodeType := range builder.langImplementation.PatternNodeTypes(node) {
+		builder.write("(")
+		builder.write(nodeType)
 
-		if err := builder.compileNode(node.Child(i), false, i == node.ChildCount()-1); err != nil {
-			return err
+		for i := 0; i < node.ChildCount(); i++ {
+			builder.write(" ")
+
+			if err := builder.compileNode(node.Child(i), false, i == node.ChildCount()-1); err != nil {
+				return err
+			}
 		}
+
+		builder.write(")")
 	}
 
-	builder.write(")")
+	builder.write("]")
 
 	return nil
 }
@@ -208,7 +223,9 @@ func (builder *builder) processVariableToParams() (map[string]string, [][]string
 			equalParams = append(equalParams, paramNames)
 		}
 
-		paramToVariable[paramNames[0]] = variableName
+		for _, paramName := range paramNames {
+			paramToVariable[paramName] = variableName
+		}
 	}
 
 	return paramToVariable, equalParams
@@ -230,4 +247,22 @@ func (builder *builder) write(value string) {
 
 func (builder *builder) newParam() string {
 	return "param" + builder.idGenerator.GenerateId()
+}
+
+func findMatchNode(offset int, containerTypes []string, node *tree.Node) (matchNode *tree.Node) {
+	err := node.Walk(func(node *tree.Node, visitChildren func() error) error {
+		if node.StartByte() == offset && !slices.Contains(containerTypes, node.Type()) {
+			matchNode = node
+			return nil
+		}
+
+		return visitChildren()
+	})
+
+	// walk itself shouldn't trigger an error, and we aren't creating any
+	if err != nil {
+		panic(err)
+	}
+
+	return
 }

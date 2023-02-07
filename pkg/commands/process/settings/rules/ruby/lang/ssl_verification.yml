@@ -1,10 +1,6 @@
 patterns:
   - |
-    Net::HTTP.start(:verify_mode => OpenSSL::SSL::VERIFY_NONE)$<...>
-  - |
     Net::HTTP.start(verify_mode: OpenSSL::SSL::VERIFY_NONE)$<...>
-  - |
-    Net::HTTP.start($<...>{ :verify_mode => OpenSSL::SSL::VERIFY_NONE })$<...>
   - |
     Net::HTTP.start($<...>{ verify_mode: OpenSSL::SSL::VERIFY_NONE })$<...>
   - |

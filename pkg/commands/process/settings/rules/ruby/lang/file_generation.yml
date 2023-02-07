@@ -2,53 +2,42 @@ languages:
   - ruby
 patterns:
   - pattern: |
-      CSV.generate { |$<CSV_FILE:identifier>| $<CSV_FILE> << $<...>$<DATA_TYPE>$<...> }
+      $<FILE> << $<DATA_TYPE>
     filters:
+      - variable: FILE
+        detection: ruby_lang_file_generation_file
       - variable: DATA_TYPE
         detection: datatype
   - pattern: |
-      CSV.generate do |$<CSV_FILE:identifier>|
-        $<CSV_FILE> << $<...>$<DATA_TYPE>$<...>
-      end
+      $<FILE>.$<METHOD>($<...>$<DATA_TYPE>$<...>)
     filters:
+      - variable: FILE
+        detection: ruby_lang_file_generation_file
+      - variable: METHOD
+        values:
+          - puts
+          - write
       - variable: DATA_TYPE
         detection: datatype
-  - pattern: |
-      CSV.open { |$<CSV_FILE:identifier>| $<CSV_FILE> << $<...>$<DATA_TYPE>$<...> }
-    filters:
-      - variable: DATA_TYPE
-        detection: datatype
-  - pattern: |
-      File.open { |$<FILE:identifier>| $<FILE>.write $<...>$<DATA_TYPE>$<...> }
-    filters:
-      - variable: DATA_TYPE
-        detection: datatype
-  - pattern: |
-      IO.open { |$<IO_FILE:identifier>| $<IO_FILE>.puts $<...>$<DATA_TYPE>$<...> }
-    filters:
-      - variable: DATA_TYPE
-        detection: datatype
-  - pattern: |
-      CSV.open() do |$<CSV_FILE:identifier>|
-        $<CSV_FILE> << $<...>$<DATA_TYPE>$<...>
-      end
-    filters:
-      - variable: DATA_TYPE
-        detection: datatype
-  - pattern: |
-      File.open() do |$<FILE:identifier>|
-        $<FILE>.write $<...>$<DATA_TYPE>$<...>
-      end
-    filters:
-      - variable: DATA_TYPE
-        detection: datatype
-  - pattern: |
-      IO.open() do |$<IO_FILE:identifier>|
-        $<IO_FILE>.puts $<...>$<DATA_TYPE>$<...>
-      end
-    filters:
-      - variable: DATA_TYPE
-        detection: datatype
+auxiliary:
+  - id: ruby_lang_file_generation_file
+    patterns:
+      - |
+        CSV.generate()
+      - |
+        CSV.generate() { |$<!>$<_:identifier>| }
+      - |
+        CSV.open()
+      - |
+        CSV.open() { |$<!>$<_:identifier>| }
+      - |
+        File.open()
+      - |
+        File.open() { |$<!>$<_:identifier>| }
+      - |
+        IO.open()
+      - |
+        IO.open() { |$<!>$<_:identifier>| }
 trigger: local
 severity:
   default: low
