@@ -13,10 +13,12 @@ import (
 	"github.com/bearer/curio/pkg/util/output"
 	"github.com/bearer/curio/pkg/util/rego"
 	"github.com/fatih/color"
+	"github.com/hhatto/gocloc"
 	"golang.org/x/exp/maps"
 	"golang.org/x/exp/slices"
 
 	"github.com/bearer/curio/pkg/report/output/dataflow"
+	stats "github.com/bearer/curio/pkg/report/output/stats"
 )
 
 var underline = color.New(color.Underline).SprintFunc()
@@ -135,8 +137,12 @@ func GetOutput(dataflow *dataflow.DataFlow, config settings.Config) (map[string]
 	return result, nil
 }
 
-func BuildReportString(rules map[string]*settings.Rule, results map[string][]Result, severityForFailure map[string]bool, withoutColor bool) (*strings.Builder, bool) {
+func BuildReportString(config settings.Config, results map[string][]Result, lineOfCodeOutput *gocloc.Result, dataflow *dataflow.DataFlow) (*strings.Builder, bool) {
+	rules := config.Rules
+	withoutColor := config.Report.Output != ""
+	severityForFailure := config.Report.Severity
 	reportStr := &strings.Builder{}
+
 	reportStr.WriteString("\n\nSummary Report\n")
 	reportStr.WriteString("\n=====================================")
 
@@ -170,7 +176,18 @@ func BuildReportString(rules map[string]*settings.Rule, results map[string][]Res
 		}
 	}
 
-	writeSummaryToString(reportStr, results, len(rules), failures, severityForFailure)
+	if reportPassed {
+		reportStr.WriteString("\nNeed to add your own custom rule? Check out the guide: https://curio.sh/guides/custom-rule\n")
+	}
+
+	emptySumary := writeSummaryToString(reportStr, results, len(rules), failures, severityForFailure)
+
+	if emptySumary {
+		writeEmptySuccessToString(len(rules), reportStr)
+		writeStatsToString(reportStr, config, lineOfCodeOutput, dataflow)
+	}
+
+	reportStr.WriteString("\nNeed help or want to discuss the output? Join the Community https://discord.gg/eaHZBJUXRF\n")
 
 	color.NoColor = initialColorSetting
 
@@ -198,6 +215,23 @@ func FindHighestSeverity(groups []string, severity map[string]string) string {
 	return severity["default"]
 }
 
+func writeStatsToString(
+	reportStr *strings.Builder,
+	config settings.Config,
+	lineOfCodeOutput *gocloc.Result,
+	dataflow *dataflow.DataFlow,
+) {
+	statistics, err := stats.GetOutput(lineOfCodeOutput, dataflow, config)
+	if err != nil {
+		return
+	}
+	if stats.AnythingFoundFor(statistics) {
+		reportStr.WriteString("\nCurio found:\n")
+		stats.WriteStatsToString(reportStr, statistics)
+		reportStr.WriteString("\n")
+	}
+}
+
 func writeRuleListToString(
 	reportStr *strings.Builder,
 	rules map[string]*settings.Rule) {
@@ -216,19 +250,22 @@ func writeRuleListToString(
 	reportStr.WriteString(strings.Join(ruleList, ""))
 }
 
+func writeEmptySuccessToString(policyCount int, reportStr *strings.Builder) {
+	reportStr.WriteString("\n\n")
+	reportStr.WriteString(color.HiGreenString("SUCCESS\n\n"))
+	reportStr.WriteString(fmt.Sprint(policyCount) + " checks were run and no failures were detected. Great job! 👏\n")
+}
+
 func writeSummaryToString(
 	reportStr *strings.Builder,
 	policyResults map[string][]Result,
 	policyCount int, policyFailures map[string]map[string]bool,
 	severityForFailure map[string]bool,
-) {
+) bool {
 	reportStr.WriteString("\n=====================================")
 
 	if len(policyResults) == 0 {
-		reportStr.WriteString("\n\n")
-		reportStr.WriteString(color.HiGreenString("SUCCESS\n\n"))
-		reportStr.WriteString(fmt.Sprint(policyCount) + " checks were run and no failures were detected.\n\n")
-		return
+		return true
 	}
 
 	// give summary including counts
@@ -246,11 +283,7 @@ func writeSummaryToString(
 	}
 
 	if failureCount == 0 && warningCount == 0 {
-		// no failures and no warnings : success
-		reportStr.WriteString("\n\n")
-		reportStr.WriteString(color.HiGreenString("SUCCESS\n\n"))
-		reportStr.WriteString(fmt.Sprint(policyCount) + " checks were run and no failures were detected.\n\n")
-		return
+		return true
 	}
 
 	reportStr.WriteString("\n\n")
@@ -281,6 +314,8 @@ func writeSummaryToString(
 	}
 
 	reportStr.WriteString("\n")
+
+	return false
 }
 
 func writeFailureToString(reportStr *strings.Builder, result Result, policySeverity string) {

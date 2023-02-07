@@ -52,14 +52,17 @@ func ReportSummary(report types.Report, output *zerolog.Event, config settings.C
 		return
 	}
 
-	summaryResults, err := getSummaryReportOutput(report, config)
+	dataflow, err := getDataflow(report, config, true)
 	if err != nil {
 		return
 	}
 
-	outputToFile := config.Report.Output != ""
-	severityForFailure := config.Report.Severity
-	reportStr, reportPassed := summary.BuildReportString(config.Rules, summaryResults, severityForFailure, outputToFile)
+	summaryResults, err := summary.GetOutput(dataflow, config)
+	if err != nil {
+		return
+	}
+
+	reportStr, reportPassed := summary.BuildReportString(config, summaryResults, lineOfCodeOutput, dataflow)
 
 	output.Msg(reportStr.String())
 
@@ -108,13 +111,18 @@ func ReportYAML(report types.Report, output *zerolog.Event, config settings.Conf
 }
 
 func getReportOutput(report types.Report, config settings.Config) (any, error) {
+
 	switch config.Report.Report {
 	case flag.ReportDetectors:
 		return detectors.GetOutput(report, config)
 	case flag.ReportDataFlow:
 		return getDataflow(report, config, false)
 	case flag.ReportSummary:
-		return getSummaryReportOutput(report, config)
+		dataflow, err := getDataflow(report, config, true)
+		if err != nil {
+			return nil, err
+		}
+		return summary.GetOutput(dataflow, config)
 	case flag.ReportPrivacy:
 		return getPrivacyReportOutput(report, config)
 	case flag.ReportStats:
@@ -146,15 +154,6 @@ func getPrivacyReportOutput(report types.Report, config settings.Config) (*priva
 	}
 
 	return privacy.GetOutput(dataflow, config)
-}
-
-func getSummaryReportOutput(report types.Report, config settings.Config) (map[string][]summary.Result, error) {
-	dataflow, err := getDataflow(report, config, true)
-	if err != nil {
-		return nil, err
-	}
-
-	return summary.GetOutput(dataflow, config)
 }
 
 func getDataflow(report types.Report, config settings.Config, isInternal bool) (*dataflow.DataFlow, error) {

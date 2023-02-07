@@ -112,35 +112,21 @@ func getDataGroupNames(config settings.Config, dataTypes []DataType) []string {
 	return maputil.SortedStringKeys(dataGroups)
 }
 
-func GetPlaceholderOutput(inputgocloc *gocloc.Result, inputDataflow *dataflow.DataFlow, config settings.Config) (outputStr *strings.Builder, err error) {
-	outputStr = &strings.Builder{}
-	statistics, err := GetOutput(inputgocloc, inputDataflow, config)
+func AnythingFoundFor(statistics *Stats) bool {
+	return statistics.NumberOfDataTypes != 0 ||
+		statistics.NumberOfDatabases != 0 ||
+		statistics.NumberOfExternalAPIs != 0 ||
+		statistics.NumberOfInternalAPIs != 0
+}
 
+func WriteStatsToString(outputStr *strings.Builder, statistics *Stats) {
 	totalDataTypeOccurrences := 0
 	for _, dataType := range statistics.DataTypes {
 		totalDataTypeOccurrences += dataType.Occurrences
 	}
 
-	supportURL := "https://curio.sh/explanations/reports/"
-	outputStr.WriteString(fmt.Sprintf(`
-The policy report is not yet available for your stack. Learn more at %s`,
-		supportURL))
-
-	anythingFound :=
-		statistics.NumberOfDataTypes != 0 ||
-			statistics.NumberOfDatabases != 0 ||
-			statistics.NumberOfExternalAPIs != 0 ||
-			statistics.NumberOfInternalAPIs != 0
-	if anythingFound {
-		outputStr.WriteString(`
-
-Though this doesn’t mean the curious bear comes empty-handed, it found:
-`)
-	}
-
 	if statistics.NumberOfDataTypes != 0 {
-		outputStr.WriteString(fmt.Sprintf(`
-- %d unique data type(s), representing %d occurrences, including %s.`,
+		outputStr.WriteString(fmt.Sprintf(`- %d unique data type(s), representing %d occurrences, including %s.`,
 			statistics.NumberOfDataTypes,
 			totalDataTypeOccurrences,
 			strings.Join(statistics.DataGroups, ", ")))
@@ -172,6 +158,26 @@ Though this doesn’t mean the curious bear comes empty-handed, it found:
 - %d internal URL(s).`,
 			statistics.NumberOfInternalAPIs))
 	}
+}
+
+func GetPlaceholderOutput(inputgocloc *gocloc.Result, inputDataflow *dataflow.DataFlow, config settings.Config) (outputStr *strings.Builder, err error) {
+	outputStr = &strings.Builder{}
+	statistics, err := GetOutput(inputgocloc, inputDataflow, config)
+
+	supportURL := "https://curio.sh/explanations/reports/"
+	outputStr.WriteString(fmt.Sprintf(`
+The policy report is not yet available for your stack. Learn more at %s`,
+		supportURL))
+
+	if AnythingFoundFor(statistics) {
+		outputStr.WriteString(`
+
+Though this doesn’t mean the curious bear comes empty-handed, it found:
+
+`)
+	}
+
+	WriteStatsToString(outputStr, statistics)
 
 	suggestedCommand := color.New(color.Italic).Sprintf("curio scan %s --report dataflow", config.Target)
 	outputStr.WriteString(fmt.Sprintf(`
