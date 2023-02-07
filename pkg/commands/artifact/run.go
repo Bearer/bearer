@@ -219,7 +219,7 @@ func Run(ctx context.Context, opts flag.Options, targetKind TargetKind) (err err
 	case TargetFilesystem:
 		if report, err = r.ScanFilesystem(ctx, opts); err != nil {
 			if errors.Is(err, balancer.ErrFileListEmpty) {
-				output.StdOutLogger().Msgf("directory empty: %s", err)
+				outputhandler.StdOutLogger().Msgf("directory empty: %s", err)
 				os.Exit(0)
 				return
 			}
