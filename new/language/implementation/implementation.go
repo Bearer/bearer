@@ -106,3 +106,31 @@ type Implementation interface {
 	// detections of `user.email`
 	DescendIntoDetectionNode(node *tree.Node) bool
 }
+
+type Scope struct {
+	parent    *Scope
+	variables map[string]*tree.Node
+}
+
+func NewScope(parent *Scope) *Scope {
+	return &Scope{
+		parent:    parent,
+		variables: make(map[string]*tree.Node),
+	}
+}
+
+func (scope *Scope) Assign(name string, node *tree.Node) {
+	scope.variables[name] = node
+}
+
+func (scope *Scope) Lookup(name string) *tree.Node {
+	if node, exists := scope.variables[name]; exists {
+		return node
+	}
+
+	if scope.parent != nil {
+		return scope.parent.Lookup(name)
+	}
+
+	return nil
+}

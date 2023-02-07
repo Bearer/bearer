@@ -47,17 +47,17 @@ func Get() implementation.Implementation {
 	return &rubyImplementation{}
 }
 
-func (implementation *rubyImplementation) SitterLanguage() *sitter.Language {
+func (*rubyImplementation) SitterLanguage() *sitter.Language {
 	return ruby.GetLanguage()
 }
 
-func (implementation *rubyImplementation) AnalyzeFlow(rootNode *tree.Node) error {
-	scope := make(map[string]*tree.Node)
+func (*rubyImplementation) AnalyzeFlow(rootNode *tree.Node) error {
+	scope := implementation.NewScope(nil)
 
 	return rootNode.Walk(func(node *tree.Node, visitChildren func() error) error {
 		switch node.Type() {
 		case "method":
-			scope = make(map[string]*tree.Node)
+			scope = implementation.NewScope(nil)
 		case "assignment":
 			left := node.ChildByFieldName("left")
 			right := node.ChildByFieldName("right")
@@ -65,7 +65,7 @@ func (implementation *rubyImplementation) AnalyzeFlow(rootNode *tree.Node) error
 			if left.Type() == "identifier" {
 				err := visitChildren()
 
-				scope[left.Content()] = node
+				scope.Assign(left.Content(), node)
 				node.UnifyWith(right)
 
 				return err
@@ -78,18 +78,27 @@ func (implementation *rubyImplementation) AnalyzeFlow(rootNode *tree.Node) error
 
 			if slice.Contains(variableLookupParents, parent.Type()) ||
 				(parent.Type() == "call" && node.Equal(parent.ChildByFieldName("receiver"))) {
-				scopedNode := scope[node.Content()]
-				if scopedNode != nil {
+				if scopedNode := scope.Lookup(node.Content()); scopedNode != nil {
 					node.UnifyWith(scopedNode)
 				}
 			}
+
+			if parent.Type() == "block_parameters" {
+				scope.Assign(node.Content(), node)
+			}
+		case "block", "do_block":
+			previousScope := scope
+			scope = implementation.NewScope(scope)
+			err := visitChildren()
+			scope = previousScope
+			return err
 		}
 
 		return visitChildren()
 	})
 }
 
-func (implementation *rubyImplementation) ExtractPatternVariables(input string) (string, []patternquerytypes.Variable, error) {
+func (*rubyImplementation) ExtractPatternVariables(input string) (string, []patternquerytypes.Variable, error) {
 	nameIndex := patternQueryVariableRegex.SubexpIndex("name")
 	typesIndex := patternQueryVariableRegex.SubexpIndex("types")
 	i := 0
@@ -128,11 +137,11 @@ func (implementation *rubyImplementation) ExtractPatternVariables(input string) 
 	return replaced, params, nil
 }
 
-func (implementation *rubyImplementation) FindPatternMatchNode(input []byte) [][]int {
+func (*rubyImplementation) FindPatternMatchNode(input []byte) [][]int {
 	return matchNodeRegex.FindAllIndex(input, -1)
 }
 
-func (implementation *rubyImplementation) FindPatternUnanchoredPoints(input []byte) [][]int {
+func (*rubyImplementation) FindPatternUnanchoredPoints(input []byte) [][]int {
 	return ellipsisRegex.FindAllIndex(input, -1)
 }
 
@@ -145,15 +154,15 @@ func produceDummyValue(i int, nodeType string) string {
 	}
 }
 
-func (implementation *rubyImplementation) AnonymousPatternNodeParentTypes() []string {
+func (*rubyImplementation) AnonymousPatternNodeParentTypes() []string {
 	return anonymousPatternNodeParentTypes
 }
 
-func (implementation *rubyImplementation) PatternMatchNodeContainerTypes() []string {
+func (*rubyImplementation) PatternMatchNodeContainerTypes() []string {
 	return patternMatchNodeContainerTypes
 }
 
-func (implementation *rubyImplementation) PatternIsAnchored(node *tree.Node) bool {
+func (*rubyImplementation) PatternIsAnchored(node *tree.Node) bool {
 	if node.Type() == "pair" {
 		return false
 	}
@@ -181,7 +190,7 @@ func (implementation *rubyImplementation) PatternIsAnchored(node *tree.Node) boo
 	return true
 }
 
-func (implementation *rubyImplementation) PatternNodeTypes(node *tree.Node) []string {
+func (*rubyImplementation) PatternNodeTypes(node *tree.Node) []string {
 	parent := node.Parent()
 
 	// Make these equivalent:
@@ -204,7 +213,7 @@ func (implementation *rubyImplementation) PatternNodeTypes(node *tree.Node) []st
 	return []string{node.Type()}
 }
 
-func (implementation *rubyImplementation) TranslatePatternContent(fromNodeType, toNodeType, content string) string {
+func (*rubyImplementation) TranslatePatternContent(fromNodeType, toNodeType, content string) string {
 	if fromNodeType == "hash_key_symbol" && toNodeType == "simple_symbol" {
 		return ":" + content
 	}
@@ -216,7 +225,7 @@ func (implementation *rubyImplementation) TranslatePatternContent(fromNodeType, 
 	return content
 }
 
-func (implementation *rubyImplementation) DescendIntoDetectionNode(node *tree.Node) bool {
+func (*rubyImplementation) DescendIntoDetectionNode(node *tree.Node) bool {
 	parent := node.Parent()
 
 	if parent != nil && parent.Type() == "call" && node.Equal(parent.ChildByFieldName("receiver")) {
