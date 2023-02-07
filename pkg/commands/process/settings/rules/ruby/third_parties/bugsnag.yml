@@ -1,15 +1,15 @@
 patterns:
-  # - pattern: |
-  #     class <_>
-  #       def $<BEFORE_BUGSNAG_NOTIFY>($<EVENT>)
-  #         $EVENT.add_metadata($<...>$<DATA_TYPE>$<...>)
-  #       end
-  #     end
-  #   filters:
-  #     - variable: DATA_TYPE
-  #       detection: datatype
-  #     - variable: BEFORE_BUGSNAG_NOTIFY
-  #       detection: before_bugsnag_notify
+  - pattern: |
+      class $<_>
+        def $<BEFORE_BUGSNAG_NOTIFY>($<EVENT>)
+          $EVENT.add_metadata($<...>$<DATA_TYPE>$<...>)
+        end
+      end
+    filters:
+      - variable: DATA_TYPE
+        detection: datatype
+      - variable: BEFORE_BUGSNAG_NOTIFY
+        detection: before_bugsnag_notify
   - pattern: |
       Bugsnag.leave_breadcrumb($<...>$<DATA_TYPE>$<...>)
     filters:
@@ -34,11 +34,11 @@ severity:
   PD: high
 skip_data_types:
   - "Unique Identifier"
-# auxiliary:
-#   - id: before_bugsnag_notify
-#     patterns:
-#       - |
-#         before_bugsnag_notify :$<_>
+auxiliary:
+  - id: before_bugsnag_notify
+    patterns:
+      - |
+        before_bugsnag_notify :$<_>
 metadata:
   description: "Do not send sensitive data to Bugsnag."
   remediation_message: |

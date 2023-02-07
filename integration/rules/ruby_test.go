@@ -211,5 +211,15 @@ func TestRubyThirdPartiesBugsnagSummary(t *testing.T) {
 
 func TestRubyThirdPartiesBugsnagDataflow(t *testing.T) {
 	t.Parallel()
-	runRulesTest("ruby/third_parties/sentry", "dataflow", "ruby_third_parties_bugsnag", t)
+	runRulesTest("ruby/third_parties/bugsnag", "dataflow", "ruby_third_parties_bugsnag", t)
+}
+
+func TestRubyThirdPartiesHoneybadgerSummary(t *testing.T) {
+	t.Parallel()
+	runRulesTest("ruby/third_parties/honeybadger", "summary", "ruby_third_parties_honeybadger", t)
+}
+
+func TestRubyThirdPartiesHoneybadgerDataflow(t *testing.T) {
+	t.Parallel()
+	runRulesTest("ruby/third_parties/honeybadger", "dataflow", "ruby_third_parties_honeybadger", t)
 }

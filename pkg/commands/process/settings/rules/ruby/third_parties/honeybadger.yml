@@ -1,0 +1,49 @@
+patterns:
+  - pattern: |
+      Honeybadger.notify($<...>$<DATA_TYPE>$<...>)
+    filters:
+      - variable: DATA_TYPE
+        detection: datatype
+  - pattern: |
+      Honeybadger.context($<...>$<DATA_TYPE>$<...>)
+    filters:
+      - variable: DATA_TYPE
+        detection: datatype
+  - pattern: |
+      def to_honeybadger_context
+        $<DATA_TYPE>
+      end
+    filters:
+      - variable: DATA_TYPE
+        detection: datatype
+  - pattern: |
+      Honeybadger.add_breadcrumb($<...>$<DATA_TYPE>$<...>)
+    filters:
+      - variable: DATA_TYPE
+        detection: datatype
+languages:
+  - ruby
+trigger: local
+severity:
+  default: low
+  PII: critical
+  PHI: medium
+  PD: high
+skip_data_types:
+  - "Unique Identifier"
+metadata:
+  description: "Do not send sensitive data to Honeybadger."
+  remediation_message: |
+    ## Description
+    Leaking sensitive data to third-party loggers is a common cause of data leaks and can lead to data breaches. This rule looks for instances of sensitive data sent to Honeybadger.
+
+    ## Remediations
+
+    When logging errors or events, ensure all sensitive data is removed.
+
+    ## Resources
+    - [Honeybadger Docs](https://)
+    - [Log obfuscation](https://)
+  dsr_id: DSR-1
+  associated_recipe: Honeybadger
+  id: ruby_third_parties_honeybadger
