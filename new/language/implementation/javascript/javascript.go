@@ -212,13 +212,11 @@ func (implementation *javascriptImplementation) PatternIsAnchored(node *tree.Nod
 	return !slices.Contains(unAnchored, node.Type())
 }
 
-// TODO: See if anything needs to be added here
 func (implementation *javascriptImplementation) DescendIntoDetectionNode(node *tree.Node) bool {
-	// parent := node.Parent()
-
-	// if parent != nil && parent.Type() == "member_expression" && node.Equal(parent.ChildByFieldName("object")) {
-	// 	return slice.Contains(passThroughMethods, parent.ChildByFieldName("method").Content())
-	// }
+	parent := node.Parent()
+	if parent != nil && parent.Type() == "member_expression" && node.Equal(parent.ChildByFieldName("object")) {
+		return false
+	}
 
 	return true
 }
