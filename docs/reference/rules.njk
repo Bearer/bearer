@@ -13,7 +13,7 @@ Curio's built-in rules aim to keep you protected from the top data security risk
 
 <form action="" id="rule-search">
   <label for="search-input" class="font-bold">Search</label>
-  <input class="block w-full px-4 py-2 border-neutral-300 border-2 rounded" type="search" name="" id="search-input" placeholder="Try searching for DSR-2, encryption, etc.">
+  <input class="block w-full px-4 py-2 border-neutral-300 border-2 rounded dark:text-neutral-500" type="search" name="" id="search-input" placeholder="Try searching for DSR-2, encryption, etc.">
 
   <div class="flex gap-2 mt-4">
     <div>
@@ -51,7 +51,6 @@ Curio's built-in rules aim to keep you protected from the top data security risk
 
 <script>
   function compare(item, query, filters) {
-    console.log(filters.length)
     let source = item
       .innerHTML
       .toLowerCase();
