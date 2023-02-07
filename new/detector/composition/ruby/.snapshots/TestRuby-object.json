@@ -1,0 +1,44 @@
+[
+	{
+		"DetectorType": "logger",
+		"MatchNode": {},
+		"Data": {
+			"Pattern": "logger.info($\u003cDATA_TYPE\u003e)\n",
+			"Datatypes": [
+				{
+					"DetectorType": "datatype",
+					"MatchNode": {},
+					"Data": {
+						"Name": "",
+						"Classification": {
+							"name": "",
+							"decision": {
+								"state": "invalid",
+								"reason": "blank_object_name"
+							}
+						},
+						"Properties": [
+							{
+								"Name": "name",
+								"Detection": {
+									"DetectorType": "property",
+									"MatchNode": {},
+									"Data": {
+										"Name": "name"
+									}
+								},
+								"Classification": {
+									"name": "name",
+									"decision": {
+										"state": "invalid",
+										"reason": "belongs_to_invalid_object"
+									}
+								}
+							}
+						]
+					}
+				}
+			]
+		}
+	}
+]

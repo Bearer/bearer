@@ -1,29 +1,8 @@
 package integration_test
 
 import (
-	"fmt"
-	"path/filepath"
-	"strings"
 	"testing"
-
-	"github.com/bearer/curio/integration/internal/testhelper"
-	"github.com/bearer/curio/pkg/commands/process/settings/rules"
 )
-
-var rulesFs = &rules.Rules
-
-func buildRulesTestCase(name, reportType, ruleID, filename string) testhelper.TestCase {
-	arguments := []string{
-		"scan",
-		filepath.Join("pkg", "commands", "process", "settings", "rules", filename),
-		"--report=" + reportType,
-		"--format=yaml",
-		"--only-rule=" + ruleID,
-	}
-	options := testhelper.TestCaseOptions{}
-
-	return testhelper.NewTestCase(name, arguments, options)
-}
 
 func TestRubyLangCookiesSummary(t *testing.T) {
 	t.Parallel()
@@ -223,29 +202,4 @@ func TestRubyThirdPartiesSentrySummary(t *testing.T) {
 func TestRubyThirdPartiesSentryDataflow(t *testing.T) {
 	t.Parallel()
 	runRulesTest("ruby/third_parties/sentry", "dataflow", "ruby_third_parties_sentry", t)
-}
-
-func runRulesTest(folderPath, format, ruleID string, t *testing.T) {
-	snapshotDirectory := "../../pkg/commands/process/settings/rules/" + folderPath + "/.snapshots"
-	testdataDirEntries, err := rulesFs.ReadDir(fmt.Sprintf("%s/testdata", folderPath))
-	if err != nil {
-		t.Fatalf("failed to read rules/%s dir %e", folderPath, err)
-	}
-
-	dataflowTests := []testhelper.TestCase{}
-	for _, testdataFile := range testdataDirEntries {
-		name := testdataFile.Name()
-
-		testName := strings.Replace(fmt.Sprintf("%s_%s_%s", format, folderPath, name), "/", "_", -1)
-		dataflowTests = append(dataflowTests,
-			buildRulesTestCase(
-				testName,
-				format,
-				ruleID,
-				fmt.Sprintf("%s/testdata/%s", folderPath, name),
-			),
-		)
-	}
-
-	testhelper.RunTestsWithSnapshotSubdirectory(t, dataflowTests, snapshotDirectory)
 }

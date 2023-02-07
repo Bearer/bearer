@@ -1,1 +1,1 @@
-logger.info(user.name)
+logger.info({name: "mike"})

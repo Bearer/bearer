@@ -63,6 +63,45 @@ func (node *Node) Child(i int) *Node {
 	return node.tree.wrap(node.sitterNode.Child(i))
 }
 
+func (node *Node) EachContentPart(onText func(text string) error, onChild func(child *Node) error) error {
+	n := int(node.sitterNode.ChildCount())
+
+	start := node.sitterNode.StartByte()
+	end := start
+
+	emit := func() error {
+		if end <= start {
+			return nil
+		}
+
+		return onText(string(node.tree.input[start:end]))
+	}
+
+	for i := 0; i < n; i++ {
+		child := node.sitterNode.Child(i)
+		end = child.StartByte()
+
+		if err := emit(); err != nil {
+			return err
+		}
+
+		if child.IsNamed() {
+			if err := onChild(node.tree.wrap(child)); err != nil {
+				return err
+			}
+		}
+
+		start = child.EndByte()
+		end = start
+	}
+
+	if err := emit(); err != nil {
+		return err
+	}
+
+	return nil
+}
+
 func (node *Node) AnonymousChild(i int) *Node {
 	n := int(node.sitterNode.ChildCount())
 	k := 0

@@ -1,0 +1,83 @@
+[
+	{
+		"DetectorType": "logger",
+		"MatchNode": {},
+		"Data": {
+			"Pattern": "console.log($\u003cDATA_TYPE\u003e)\n",
+			"Datatypes": [
+				{
+					"DetectorType": "datatype",
+					"MatchNode": {},
+					"Data": {
+						"Name": "\"city\"",
+						"Classification": {
+							"name": "\"city\"",
+							"decision": {
+								"state": "invalid",
+								"reason": "unknown_data_object"
+							}
+						},
+						"Properties": [
+							{
+								"Name": "\"zip\"",
+								"Detection": {
+									"DetectorType": "object",
+									"MatchNode": {},
+									"Data": {
+										"Name": "\"zip\""
+									}
+								},
+								"Classification": {
+									"name": "\"zip\"",
+									"decision": {
+										"state": "",
+										"reason": ""
+									}
+								}
+							}
+						]
+					}
+				},
+				{
+					"DetectorType": "datatype",
+					"MatchNode": {},
+					"Data": {
+						"Name": "user",
+						"Classification": {
+							"name": "user",
+							"decision": {
+								"state": "valid",
+								"reason": "valid_object_with_valid_properties"
+							}
+						},
+						"Properties": [
+							{
+								"Name": "\"address\"",
+								"Detection": {
+									"DetectorType": "object",
+									"MatchNode": {},
+									"Data": {
+										"Name": "\"address\""
+									}
+								},
+								"Classification": {
+									"name": "\"address\"",
+									"subject_name": "User",
+									"data_type": {
+										"name": "Physical Address",
+										"uuid": "5a80a938-6fb2-4d9a-9c47-8d377e036506",
+										"category_uuid": "cef587dd-76db-430b-9e18-7b031e1a193b"
+									},
+									"decision": {
+										"state": "valid",
+										"reason": "known_pattern"
+									}
+								}
+							}
+						]
+					}
+				}
+			]
+		}
+	}
+]

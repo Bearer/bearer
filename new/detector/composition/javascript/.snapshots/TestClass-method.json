@@ -1,0 +1,50 @@
+[
+	{
+		"DetectorType": "class_name",
+		"MatchNode": {},
+		"Data": {
+			"Pattern": "$\u003cDATA_TYPE\u003e\n",
+			"Datatypes": [
+				{
+					"DetectorType": "datatype",
+					"MatchNode": {},
+					"Data": {
+						"Name": "User",
+						"Classification": {
+							"name": "user",
+							"decision": {
+								"state": "invalid",
+								"reason": "valid_object_with_invalid_properties"
+							}
+						},
+						"Properties": null
+					}
+				}
+			]
+		}
+	},
+	{
+		"DetectorType": "class_name",
+		"MatchNode": {},
+		"Data": {
+			"Pattern": "$\u003cDATA_TYPE\u003e\n",
+			"Datatypes": [
+				{
+					"DetectorType": "datatype",
+					"MatchNode": {},
+					"Data": {
+						"Name": "User",
+						"Classification": {
+							"name": "user",
+							"decision": {
+								"state": "invalid",
+								"reason": "valid_object_with_invalid_properties"
+							}
+						},
+						"Properties": null
+					}
+				}
+			]
+		}
+	}
+]

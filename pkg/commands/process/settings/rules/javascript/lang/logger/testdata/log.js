@@ -1,0 +1,1 @@
+log.info(user.name);
