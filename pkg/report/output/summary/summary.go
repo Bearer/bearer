@@ -25,6 +25,7 @@ var severityColorFns = map[string]func(x ...interface{}) string{
 	types.LevelHigh:     color.New(color.FgHiRed).SprintFunc(),
 	types.LevelMedium:   color.New(color.FgYellow).SprintFunc(),
 	types.LevelLow:      color.New(color.FgBlue).SprintFunc(),
+	types.LevelWarning:  color.New(color.FgCyan).SprintFunc(),
 }
 
 type PolicyInput struct {
@@ -149,16 +150,12 @@ func BuildReportString(rules map[string]*settings.Rule, results map[string][]Res
 		types.LevelHigh:     make(map[string]bool),
 		types.LevelMedium:   make(map[string]bool),
 		types.LevelLow:      make(map[string]bool),
+		types.LevelWarning:  make(map[string]bool),
 	}
 
 	reportPassed := true
-	for _, severityLevel := range []string{
-		types.LevelCritical,
-		types.LevelHigh,
-		types.LevelMedium,
-		types.LevelLow,
-	} {
-		if severityForFailure[severityLevel] && len(results[severityLevel]) != 0 {
+	for _, severityLevel := range maps.Keys(severityForFailure) {
+		if severityForFailure[severityLevel] && severityLevel != types.LevelWarning && len(results[severityLevel]) != 0 {
 			// fail the report if we have failures above the severity threshold
 			reportPassed = false
 		}
@@ -184,14 +181,16 @@ func FindHighestSeverity(groups []string, severity map[string]string) string {
 		severities = append(severities, severity[group])
 	}
 
-	if slices.Contains(severities, "critical") {
+	if slices.Contains(severities, types.LevelCritical) {
 		return types.LevelCritical
-	} else if slices.Contains(severities, "high") {
+	} else if slices.Contains(severities, types.LevelHigh) {
 		return types.LevelHigh
-	} else if slices.Contains(severities, "medium") {
+	} else if slices.Contains(severities, types.LevelMedium) {
 		return types.LevelMedium
-	} else if slices.Contains(severities, "low") {
+	} else if slices.Contains(severities, types.LevelLow) {
 		return types.LevelLow
+	} else if slices.Contains(severities, types.LevelWarning) {
+		return types.LevelWarning
 	}
 
 	return severity["default"]
@@ -232,14 +231,20 @@ func writeSummaryToString(
 
 	// give summary including counts
 	failureCount := 0
+	warningCount := 0
 	for _, severityLevel := range maps.Keys(severityForFailure) {
+		if severityLevel == types.LevelWarning {
+			warningCount += len(policyResults[severityLevel])
+			continue
+		}
 		if severityForFailure[severityLevel] {
 			failureCount += len(policyResults[severityLevel])
 			continue
 		}
 	}
 
-	if failureCount == 0 {
+	if failureCount == 0 && warningCount == 0 {
+		// no failures and no warnings : success
 		reportStr.WriteString("\n\n")
 		reportStr.WriteString(color.HiGreenString("SUCCESS\n\n"))
 		reportStr.WriteString(fmt.Sprint(policyCount) + " checks were run and no failures were detected.\n\n")
@@ -248,13 +253,20 @@ func writeSummaryToString(
 
 	reportStr.WriteString("\n\n")
 
-	reportStr.WriteString(color.RedString(fmt.Sprint(policyCount) + " checks, " + fmt.Sprint(failureCount) + " failures\n\n"))
+	if failureCount == 0 {
+		// only warnings
+		reportStr.WriteString(fmt.Sprint(policyCount) + " checks, " + fmt.Sprint(warningCount) + " warnings\n\n")
+	} else {
+		reportStr.WriteString(color.RedString(fmt.Sprint(policyCount) + " checks, " + fmt.Sprint(failureCount) + " failures, " + fmt.Sprint(warningCount) + " warnings\n\n"))
+	}
 
-	for i, severityLevel := range maps.Keys(severityForFailure) {
-		if !severityForFailure[severityLevel] {
-			continue
-		}
-
+	for i, severityLevel := range []string{
+		types.LevelCritical,
+		types.LevelHigh,
+		types.LevelMedium,
+		types.LevelLow,
+		types.LevelWarning,
+	} {
 		if i > 0 {
 			reportStr.WriteString("\n")
 		}

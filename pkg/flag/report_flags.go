@@ -17,12 +17,12 @@ var (
 	ReportDataFlow  = "dataflow"  // nodoc: internal report type
 	ReportStats     = "stats"     // nodoc: internal report type
 
-	DefaultSeverity = "critical,high,medium,low"
+	DefaultSeverity = "critical,high,medium,low,warning"
 )
 
 var ErrInvalidFormat = errors.New("invalid format argument; supported values: json, yaml")
 var ErrInvalidReport = errors.New("invalid report argument; supported values: summary, privacy")
-var ErrInvalidSeverity = errors.New("invalid severity argument; supported values: critical, high, medium, low")
+var ErrInvalidSeverity = errors.New("invalid severity argument; supported values: critical, high, medium, low, warning")
 
 var (
 	FormatFlag = Flag{
@@ -111,13 +111,7 @@ func (f *ReportFlagGroup) ToOptions() (ReportOptions, error) {
 	}
 
 	severity := getStringSlice(f.Severity)
-	// pre-define mapping to ensure ordering
-	severityMapping := map[string]bool{
-		types.LevelCritical: false,
-		types.LevelHigh:     false,
-		types.LevelMedium:   false,
-		types.LevelLow:      false,
-	}
+	severityMapping := make(map[string]bool)
 
 	for _, severityLevel := range severity {
 		switch severityLevel {
@@ -129,6 +123,8 @@ func (f *ReportFlagGroup) ToOptions() (ReportOptions, error) {
 			severityMapping[types.LevelMedium] = true
 		case types.LevelLow:
 			severityMapping[types.LevelLow] = true
+		case types.LevelWarning:
+			severityMapping[types.LevelWarning] = true
 		default:
 			return ReportOptions{}, ErrInvalidSeverity
 		}
