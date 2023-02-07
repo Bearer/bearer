@@ -213,10 +213,11 @@ func (implementation *javascriptImplementation) PatternIsAnchored(node *tree.Nod
 }
 
 func (implementation *javascriptImplementation) DescendIntoDetectionNode(node *tree.Node) bool {
-	parent := node.Parent()
-	if parent != nil && parent.Type() == "member_expression" && node.Equal(parent.ChildByFieldName("object")) {
-		return false
-	}
+	// FIXME: this breaks expected behaviour of tests
+	// parent := node.Parent()
+	// if parent != nil && parent.Type() == "member_expression" && node.Equal(parent.ChildByFieldName("object")) {
+	// 	return false
+	// }
 
 	return true
 }
