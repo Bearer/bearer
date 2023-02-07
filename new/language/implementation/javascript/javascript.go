@@ -224,3 +224,11 @@ func (implementation *javascriptImplementation) DescendIntoDetectionNode(node *t
 func (implementation *javascriptImplementation) IsRootOfRuleQuery(node *tree.Node) bool {
 	return !(node.Type() == "expression_statement")
 }
+
+func (implementation *javascriptImplementation) PatternNodeTypes(node *tree.Node) []string {
+	return []string{node.Type()}
+}
+
+func (implementation *javascriptImplementation) TranslatePatternContent(fromNodeType, toNodeType, content string) string {
+	return content
+}
