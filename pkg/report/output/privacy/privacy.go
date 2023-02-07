@@ -87,7 +87,7 @@ type Report struct {
 
 func BuildCsvString(dataflow *dataflow.DataFlow, config settings.Config) (*strings.Builder, error) {
 	csvStr := &strings.Builder{}
-	csvStr.WriteString("\nSubject,Data Types,Detection Count,Critical Risk Failure,High Risk Failure,Medium Risk Failure,Low Risk Failure,RulesPassed\n")
+	csvStr.WriteString("\nSubject,Data Types,Detection Count,Critical Risk Failure,High Risk Failure,Medium Risk Failure,Low Risk Failure,Rules Passed\n")
 	result, err := GetOutput(dataflow, config)
 	if err != nil {
 		return csvStr, err
@@ -108,7 +108,7 @@ func BuildCsvString(dataflow *dataflow.DataFlow, config settings.Config) (*strin
 	}
 
 	csvStr.WriteString("\n")
-	csvStr.WriteString("Third Party,Subject,Data Types,Critical Risk Failure,High Risk Failure,Medium Risk Failure,Low Risk Failure,RulesPassed\n")
+	csvStr.WriteString("Third Party,Subject,Data Types,Critical Risk Failure,High Risk Failure,Medium Risk Failure,Low Risk Failure,Rules Passed\n")
 
 	for _, thirdParty := range result.ThirdParty {
 		thirdPartyArr := []string{
