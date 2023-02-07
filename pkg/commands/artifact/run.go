@@ -23,7 +23,6 @@ import (
 	"github.com/bearer/curio/pkg/commands/process/worker/work"
 	"github.com/bearer/curio/pkg/flag"
 	reportoutput "github.com/bearer/curio/pkg/report/output"
-	"github.com/bearer/curio/pkg/util/output"
 	outputhandler "github.com/bearer/curio/pkg/util/output"
 
 	"github.com/bearer/curio/pkg/types"
@@ -43,6 +42,8 @@ type ScannerConfig struct {
 }
 
 type Runner interface {
+	// Cached returns true if cached data was used in scan
+	CacheUsed() bool
 	// ScanFilesystem scans a filesystem
 	ScanFilesystem(ctx context.Context, opts flag.Options) (types.Report, error)
 	// ScanRepository scans repository
@@ -154,6 +155,10 @@ func buildScanID(scanSettings settings.Config) (string, error) {
 	return scanID, nil
 }
 
+func (r *runner) CacheUsed() bool {
+	return r.reuseDetection
+}
+
 // Close closes everything
 func (r *runner) Close(ctx context.Context) error {
 	return nil
@@ -251,6 +256,7 @@ func Run(ctx context.Context, opts flag.Options, targetKind TargetKind) (err err
 }
 
 func (r *runner) Report(config settings.Config, report types.Report) (bool, error) {
+	cacheUsed := r.CacheUsed()
 	// if output is defined we want to write only to file
 	logger := outputhandler.StdOutLogger()
 	if config.Report.Output != "" {
@@ -261,6 +267,11 @@ func (r *runner) Report(config settings.Config, report types.Report) (bool, erro
 		logger = outputhandler.PlainLogger(reportFile)
 	}
 
+	if cacheUsed && !config.Scan.Quiet {
+		// output cached data warning at start of report
+		outputhandler.StdErrLogger().Msg("Using cached data")
+	}
+
 	if config.Report.Format == flag.FormatEmpty {
 		if config.Report.Report == flag.ReportSummary {
 			// for policy report, default report format is NOT JSON
@@ -268,6 +279,7 @@ func (r *runner) Report(config settings.Config, report types.Report) (bool, erro
 			if err != nil {
 				return false, fmt.Errorf("error generating report %w", err)
 			}
+			outputCachedDataWarning(cacheUsed, config.Scan.Quiet)
 			return reportPassed, nil
 		}
 		if config.Report.Report == flag.ReportPrivacy {
@@ -276,6 +288,7 @@ func (r *runner) Report(config settings.Config, report types.Report) (bool, erro
 			if err != nil {
 				return false, fmt.Errorf("error generating report %w", err)
 			}
+			outputCachedDataWarning(cacheUsed, config.Scan.Quiet)
 			return true, nil
 		}
 	}
@@ -293,5 +306,14 @@ func (r *runner) Report(config settings.Config, report types.Report) (bool, erro
 			return false, fmt.Errorf("error generating report %w", err)
 		}
 	}
+	outputCachedDataWarning(cacheUsed, config.Scan.Quiet)
 	return true, nil
+}
+
+func outputCachedDataWarning(cacheUsed bool, quietMode bool) {
+	if quietMode || !cacheUsed {
+		return
+	}
+
+	outputhandler.StdErrLogger().Msg("Cached data used (no code changes detected). Unexpected? Use --force to force a re-scan.\n")
 }
