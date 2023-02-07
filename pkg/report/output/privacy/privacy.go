@@ -81,8 +81,8 @@ type ThirdParty struct {
 }
 
 type Report struct {
-	Subjects   []Subject
-	ThirdParty []ThirdParty
+	Subjects   []Subject    `json:"subjects,omitempty" yaml:"subjects"`
+	ThirdParty []ThirdParty `json:"third_party,omitempty" yaml:"third_party"`
 }
 
 func BuildCsvString(dataflow *dataflow.DataFlow, config settings.Config) (*strings.Builder, error) {
