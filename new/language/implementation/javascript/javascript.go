@@ -203,27 +203,13 @@ func (implementation *javascriptImplementation) PatternIsAnchored(node *tree.Nod
 		return true
 	}
 
-	// Class body
-	if parent.Type() == "class_declaration" && !node.Equal(parent.ChildByFieldName("name")) {
-		return false
-	}
+	// Class body class_body
+	// arrow functions statement_block
+	// function statement_block
+	// method statement_blocks
+	unAnchored := []string{"statement_blocks", "class_body"}
 
-	// arrow functions
-	if parent.Type() == "arrow_functions" && !node.Equal(parent.ChildByFieldName("parameters")) {
-		return false
-	}
-
-	// function
-	if parent.Type() == "function_declaration" && !node.Equal(parent.ChildByFieldName("name")) && !node.Equal(parent.ChildByFieldName("parameters")) {
-		return false
-	}
-
-	// method
-	if parent.Type() == "method_definition" && !node.Equal(parent.ChildByFieldName("name")) && !node.Equal(parent.ChildByFieldName("parameters")) {
-		return false
-	}
-
-	return true
+	return !slices.Contains(unAnchored, node.Type())
 }
 
 // TODO: See if anything needs to be added here
