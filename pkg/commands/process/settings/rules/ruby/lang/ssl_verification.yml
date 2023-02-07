@@ -9,7 +9,7 @@ languages:
   - ruby
 trigger: presence
 severity:
-  default: "low" # FIXME: warning
+  default: low
 metadata:
   description: "Enable SSL Certificate Verification."
   remediation_message: |
