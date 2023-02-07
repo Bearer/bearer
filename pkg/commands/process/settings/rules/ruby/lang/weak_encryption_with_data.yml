@@ -93,19 +93,6 @@ patterns:
           - decrypt_block
       - variable: DATA_TYPE
         detection: datatype
-  - pattern: |
-      $<VAR>.$<METHOD> {
-        $<DATA_TYPE>
-      }
-    filters:
-      - variable: VAR
-        detection: blowfish_init
-      - variable: METHOD
-        values:
-          - encrypt_block
-          - decrypt_block
-      - variable: DATA_TYPE
-        detection: datatype
 languages:
   - ruby
 auxiliary:

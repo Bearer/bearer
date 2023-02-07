@@ -7,7 +7,6 @@
   "friendly_name": "Family health history",
   "health_context_data_type_uuid": "e5baa336-ba33-48e9-9e13-8691cffb06cf",
   "include_regexp": "\\b(family.*health.*history)\\b",
-  "include_types": ["string"],
   "match_column": true,
   "match_object": false,
   "object_type": ["known", "unknown_extended", "unknown"]

@@ -7,7 +7,6 @@
   "friendly_name": "Physical Address",
   "health_context_data_type_uuid": null,
   "include_regexp": "\\b(city|street|address|region|province)|((billing|shipping).*address)|((zip\\s?postal)|(zip|postal)\\s?code)\\b",
-  "include_types": ["string", "object"],
   "match_column": true,
   "match_object": false,
   "object_type": ["known", "unknown_extended"]

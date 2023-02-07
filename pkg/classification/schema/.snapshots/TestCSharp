@@ -1,4 +1,4 @@
-([]testhelper.ClassificationResult) (len=65) {
+([]testhelper.ClassificationResult) (len=64) {
   (testhelper.ClassificationResult) {
     Name: (string) (len=18) "EditForumPostModel",
     Decision: (classify.ClassificationDecision) {
@@ -483,8 +483,8 @@
       (string) (len=9) "VoteCount": (testhelper.ClassificationResult) {
         Name: (string) (len=9) "VoteCount",
         Decision: (classify.ClassificationDecision) {
-          State: (classify.ValidationState) (len=5) "valid",
-          Reason: (string) (len=22) "valid_extended_pattern"
+          State: (classify.ValidationState) (len=7) "invalid",
+          Reason: (string) (len=16) "invalid_property"
         },
         Properties: (map[string]testhelper.ClassificationResult) <nil>
       }
@@ -6086,127 +6086,6 @@
     }
   },
   (testhelper.ClassificationResult) {
-    Name: (string) (len=13) "WebEventCodes",
-    Decision: (classify.ClassificationDecision) {
-      State: (classify.ValidationState) (len=5) "valid",
-      Reason: (string) (len=36) "invalid_object_with_valid_properties"
-    },
-    Properties: (map[string]testhelper.ClassificationResult) (len=14) {
-      (string) (len=13) "AuditCodeBase": (testhelper.ClassificationResult) {
-        Name: (string) (len=13) "AuditCodeBase",
-        Decision: (classify.ClassificationDecision) {
-          State: (classify.ValidationState) (len=7) "invalid",
-          Reason: (string) (len=16) "invalid_property"
-        },
-        Properties: (map[string]testhelper.ClassificationResult) <nil>
-      },
-      (string) (len=17) "AuditCodeBaseLast": (testhelper.ClassificationResult) {
-        Name: (string) (len=17) "AuditCodeBaseLast",
-        Decision: (classify.ClassificationDecision) {
-          State: (classify.ValidationState) (len=7) "invalid",
-          Reason: (string) (len=16) "invalid_property"
-        },
-        Properties: (map[string]testhelper.ClassificationResult) <nil>
-      },
-      (string) (len=22) "AuditFileAuthorization": (testhelper.ClassificationResult) {
-        Name: (string) (len=22) "AuditFileAuthorization",
-        Decision: (classify.ClassificationDecision) {
-          State: (classify.ValidationState) (len=7) "invalid",
-          Reason: (string) (len=16) "invalid_property"
-        },
-        Properties: (map[string]testhelper.ClassificationResult) <nil>
-      },
-      (string) (len=29) "AuditFileAuthorizationFailure": (testhelper.ClassificationResult) {
-        Name: (string) (len=29) "AuditFileAuthorizationFailure",
-        Decision: (classify.ClassificationDecision) {
-          State: (classify.ValidationState) (len=7) "invalid",
-          Reason: (string) (len=16) "invalid_property"
-        },
-        Properties: (map[string]testhelper.ClassificationResult) <nil>
-      },
-      (string) (len=24) "AuditFormsAuthentication": (testhelper.ClassificationResult) {
-        Name: (string) (len=24) "AuditFormsAuthentication",
-        Decision: (classify.ClassificationDecision) {
-          State: (classify.ValidationState) (len=7) "invalid",
-          Reason: (string) (len=16) "invalid_property"
-        },
-        Properties: (map[string]testhelper.ClassificationResult) <nil>
-      },
-      (string) (len=31) "AuditFormsAuthenticationFailure": (testhelper.ClassificationResult) {
-        Name: (string) (len=31) "AuditFormsAuthenticationFailure",
-        Decision: (classify.ClassificationDecision) {
-          State: (classify.ValidationState) (len=7) "invalid",
-          Reason: (string) (len=16) "invalid_property"
-        },
-        Properties: (map[string]testhelper.ClassificationResult) <nil>
-      },
-      (string) (len=28) "AuditInvalidViewStateFailure": (testhelper.ClassificationResult) {
-        Name: (string) (len=28) "AuditInvalidViewStateFailure",
-        Decision: (classify.ClassificationDecision) {
-          State: (classify.ValidationState) (len=7) "invalid",
-          Reason: (string) (len=16) "invalid_property"
-        },
-        Properties: (map[string]testhelper.ClassificationResult) <nil>
-      },
-      (string) (len=29) "AuditMembershipAuthentication": (testhelper.ClassificationResult) {
-        Name: (string) (len=29) "AuditMembershipAuthentication",
-        Decision: (classify.ClassificationDecision) {
-          State: (classify.ValidationState) (len=5) "valid",
-          Reason: (string) (len=21) "valid_unknown_pattern"
-        },
-        Properties: (map[string]testhelper.ClassificationResult) <nil>
-      },
-      (string) (len=36) "AuditMembershipAuthenticationFailure": (testhelper.ClassificationResult) {
-        Name: (string) (len=36) "AuditMembershipAuthenticationFailure",
-        Decision: (classify.ClassificationDecision) {
-          State: (classify.ValidationState) (len=5) "valid",
-          Reason: (string) (len=21) "valid_unknown_pattern"
-        },
-        Properties: (map[string]testhelper.ClassificationResult) <nil>
-      },
-      (string) (len=29) "AuditUnhandledAccessException": (testhelper.ClassificationResult) {
-        Name: (string) (len=29) "AuditUnhandledAccessException",
-        Decision: (classify.ClassificationDecision) {
-          State: (classify.ValidationState) (len=7) "invalid",
-          Reason: (string) (len=16) "invalid_property"
-        },
-        Properties: (map[string]testhelper.ClassificationResult) <nil>
-      },
-      (string) (len=31) "AuditUnhandledSecurityException": (testhelper.ClassificationResult) {
-        Name: (string) (len=31) "AuditUnhandledSecurityException",
-        Decision: (classify.ClassificationDecision) {
-          State: (classify.ValidationState) (len=7) "invalid",
-          Reason: (string) (len=16) "invalid_property"
-        },
-        Properties: (map[string]testhelper.ClassificationResult) <nil>
-      },
-      (string) (len=21) "AuditUrlAuthorization": (testhelper.ClassificationResult) {
-        Name: (string) (len=21) "AuditUrlAuthorization",
-        Decision: (classify.ClassificationDecision) {
-          State: (classify.ValidationState) (len=7) "invalid",
-          Reason: (string) (len=16) "invalid_property"
-        },
-        Properties: (map[string]testhelper.ClassificationResult) <nil>
-      },
-      (string) (len=28) "AuditUrlAuthorizationFailure": (testhelper.ClassificationResult) {
-        Name: (string) (len=28) "AuditUrlAuthorizationFailure",
-        Decision: (classify.ClassificationDecision) {
-          State: (classify.ValidationState) (len=7) "invalid",
-          Reason: (string) (len=16) "invalid_property"
-        },
-        Properties: (map[string]testhelper.ClassificationResult) <nil>
-      },
-      (string) (len=12) "MiscCodeBase": (testhelper.ClassificationResult) {
-        Name: (string) (len=12) "MiscCodeBase",
-        Decision: (classify.ClassificationDecision) {
-          State: (classify.ValidationState) (len=7) "invalid",
-          Reason: (string) (len=16) "invalid_property"
-        },
-        Properties: (map[string]testhelper.ClassificationResult) <nil>
-      }
-    }
-  },
-  (testhelper.ClassificationResult) {
     Name: (string) (len=15) "W3PlayerWitcher",
     Decision: (classify.ClassificationDecision) {
       State: (classify.ValidationState) (len=5) "valid",
@@ -6644,8 +6523,8 @@
       (string) (len=12) "FriendsCount": (testhelper.ClassificationResult) {
         Name: (string) (len=12) "FriendsCount",
         Decision: (classify.ClassificationDecision) {
-          State: (classify.ValidationState) (len=5) "valid",
-          Reason: (string) (len=13) "known_pattern"
+          State: (classify.ValidationState) (len=7) "invalid",
+          Reason: (string) (len=16) "invalid_property"
         },
         Properties: (map[string]testhelper.ClassificationResult) <nil>
       },

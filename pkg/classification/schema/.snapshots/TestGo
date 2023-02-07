@@ -880,8 +880,8 @@
       (string) (len=12) "FriendsCount": (testhelper.ClassificationResult) {
         Name: (string) (len=12) "FriendsCount",
         Decision: (classify.ClassificationDecision) {
-          State: (classify.ValidationState) (len=5) "valid",
-          Reason: (string) (len=13) "known_pattern"
+          State: (classify.ValidationState) (len=7) "invalid",
+          Reason: (string) (len=16) "invalid_property"
         },
         Properties: (map[string]testhelper.ClassificationResult) <nil>
       },
@@ -1783,8 +1783,8 @@
       (string) (len=9) "AvatarURL": (testhelper.ClassificationResult) {
         Name: (string) (len=9) "AvatarURL",
         Decision: (classify.ClassificationDecision) {
-          State: (classify.ValidationState) (len=5) "valid",
-          Reason: (string) (len=13) "known_pattern"
+          State: (classify.ValidationState) (len=7) "invalid",
+          Reason: (string) (len=16) "invalid_property"
         },
         Properties: (map[string]testhelper.ClassificationResult) <nil>
       },

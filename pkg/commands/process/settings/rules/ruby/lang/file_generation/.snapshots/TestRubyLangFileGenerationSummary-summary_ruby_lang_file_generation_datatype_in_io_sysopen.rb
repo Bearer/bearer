@@ -7,11 +7,8 @@ critical:
       filename: pkg/commands/process/settings/rules/ruby/lang/file_generation/testdata/datatype_in_io_sysopen.rb
       category_groups:
         - PII
-      parent_line_number: 2
-      parent_content: |-
-        IO.open(fd,"w") do |a|
-          a.puts "Hello, #{user.full_name}!"
-        end
+      parent_line_number: 3
+      parent_content: 'a.puts "Hello, #{user.full_name}!"'
 
 
 --

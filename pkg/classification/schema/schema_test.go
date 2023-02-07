@@ -384,7 +384,7 @@ func TestSchemaObjectClassification(t *testing.T) {
 			Name: "Known object - database detection - with invalid properties",
 			Input: schema.ClassificationRequest{
 				Filename:     "db/schema.rb",
-				DetectorType: detectors.DetectorSQL,
+				DetectorType: detectors.DetectorSchemaRb,
 				Value: &schema.ClassificationRequestDetection{
 					Name:       "accounts",
 					SimpleType: reportschema.SimpleTypeObject,

@@ -7,7 +7,6 @@
   "friendly_name": "Symptom",
   "health_context_data_type_uuid": "8358b541-500f-4321-8ee9-89ce61e9459e",
   "include_regexp": "\\b(patient)?\\s?symptoms?\\b",
-  "include_types": ["string"],
   "match_column": true,
   "match_object": false,
   "object_type": ["associated", "known", "unknown", "unknown_extended"]

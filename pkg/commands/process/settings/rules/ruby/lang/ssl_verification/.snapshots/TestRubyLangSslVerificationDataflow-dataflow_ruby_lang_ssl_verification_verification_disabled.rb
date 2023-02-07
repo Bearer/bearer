@@ -17,7 +17,7 @@ risks:
                   Net::HTTP::Get.new uri
                 end
           content: |
-            Net::HTTP.start(:verify_mode => OpenSSL::SSL::VERIFY_NONE)$<...>
+            Net::HTTP.start(verify_mode: OpenSSL::SSL::VERIFY_NONE)$<...>
 components: []
 
 

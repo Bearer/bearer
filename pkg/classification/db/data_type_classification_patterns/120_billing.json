@@ -7,7 +7,6 @@
   "friendly_name": "Billing",
   "health_context_data_type_uuid": "c1704474-de02-40f0-8880-ece05fdbe9b5",
   "include_regexp": "\\b.*billing.*\\b",
-  "include_types": ["string"],
   "match_column": false,
   "match_object": true,
   "object_type": ["known_data_object"]

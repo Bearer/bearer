@@ -326,6 +326,7 @@ func defaultDataTypeClassificationPatterns(dataTypes []DataType) []DataTypeClass
 		for _, excludeType := range dataTypeClassificationPattern.ExcludeTypes {
 			dataTypeClassificationPattern.ExcludeTypesMapping[excludeType] = struct{}{}
 		}
+
 		dataTypeClassificationPattern.ObjectTypeMapping = map[string]struct{}{}
 		for _, objectType := range dataTypeClassificationPattern.ObjectType {
 			dataTypeClassificationPattern.ObjectTypeMapping[objectType] = struct{}{}

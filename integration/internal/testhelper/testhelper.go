@@ -67,7 +67,7 @@ func executeApp(t *testing.T, arguments []string) (string, error) {
 	select {
 	case <-timer.C:
 		cancel()
-		t.Fatalf("command failed to complete on time 'curio %s'", strings.Join(arguments, ""))
+		t.Fatalf("command failed to complete on time 'curio %s'", strings.Join(arguments, " "))
 	case <-commandFinished:
 		cancel()
 	}

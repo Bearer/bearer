@@ -7,7 +7,6 @@
   "friendly_name": "DNA code",
   "health_context_data_type_uuid": "13cc185a-c8e0-4f25-81fb-857b49cee141",
   "include_regexp": "\\b(dna(.*code)?)\\b",
-  "include_types": ["string"],
   "match_column": true,
   "match_object": false,
   "object_type": ["known", "unknown_extended", "unknown"]

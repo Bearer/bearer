@@ -11,8 +11,9 @@ import (
 	"github.com/bearer/curio/pkg/util/normalize_key"
 )
 
-var regexpIdentifierMatcher = regexp.MustCompile(`(uu)?id\z`)
-var regexpTimestampsMatcher = regexp.MustCompile(`\A(created|updated)\sat\z`)
+var regexpIdentifierMatcher = regexp.MustCompile(`(uu)?id$`)
+var globalExclusionMatcher = regexp.MustCompile(`\b((count$)|path\s?name|file\s?name|updated\s?at|content\s?type|url|file\s?size)`)
+var regexpTimestampsMatcher = regexp.MustCompile(`^(created|updated)\sat$`)
 
 type ClassifiedDatatype struct {
 	Name           string
@@ -66,12 +67,15 @@ func (classifier *Classifier) Classify(data ClassificationRequest) *ClassifiedDa
 	if classify.IsVendored(data.Filename) {
 		classifiedDatatype = classifyObjectAsInvalid(data.Value, classify.IncludedInVendorFolderReason)
 	}
+
 	if classify.IsPotentialDetector(data.DetectorType) {
 		classifiedDatatype = classifyObjectAsInvalid(data.Value, classify.PotentialDetectorReason)
 	}
+
 	if classify.ObjectStopWordDetected(normalizedName) {
 		classifiedDatatype = classifyObjectAsInvalid(data.Value, "stop_word")
 	}
+
 	if data.Value.Name == "" {
 		classifiedDatatype = classifyObjectAsInvalid(data.Value, "blank_object_name")
 	}
@@ -92,16 +96,15 @@ func (classifier *Classifier) Classify(data ClassificationRequest) *ClassifiedDa
 	}
 
 	classifiedDatatype = &ClassifiedDatatype{
-		Name:           data.Value.Name,
-		Classification: Classification{Name: normalize_key.Normalize(normalizedName)},
-		Properties:     properties,
+		Name: data.Value.Name,
+		Classification: Classification{
+			Name: normalize_key.Normalize(normalizedName),
+		},
+		Properties: properties,
 	}
 
 	matchedKnownPersonObject := classifier.matchKnownPersonObjectPatterns(normalizedName, false)
 	if matchedKnownPersonObject != nil {
-		// FIXME: remove unimplemented fallback (possibly causing Unique Id bug)
-		// classifiedDatatype.Classification.DataType = &matchedKnownPersonObject.DataType
-
 		var subjectName *string
 		if matchedKnownPersonObject.SubjectName != "" {
 			subjectName = &matchedKnownPersonObject.SubjectName
@@ -127,6 +130,7 @@ func (classifier *Classifier) Classify(data ClassificationRequest) *ClassifiedDa
 	if classify.IsDatabase(data.DetectorType) {
 		objectState = classify.Potential
 	}
+
 	classifiedDatatype.Classification.Decision = classify.ClassificationDecision{
 		State:  objectState,
 		Reason: "unknown_data_object",
@@ -173,24 +177,35 @@ func (classifier *Classifier) matchObjectPatterns(name string, simpleType string
 		if _, correctType := pattern.ObjectTypeMapping[string(objectType)]; !correctType {
 			continue
 		}
+
 		if !classifier.healthContext() && pattern.DataTypeUUID == "" {
 			continue
 		}
+
 		if !pattern.IncludeRegexpMatcher.MatchString(name) {
 			continue
 		}
+
 		if !classify.IsExpectedIdentifierDataTypeId(pattern.Id) && regexpIdentifierMatcher.MatchString(name) {
 			continue
 		}
+
 		if pattern.ExcludeRegexpMatcher != nil && pattern.ExcludeRegexpMatcher.MatchString(name) {
 			continue
 		}
+
+		if globalExclusionMatcher.MatchString(name) {
+			continue
+		}
+
 		if matchObject && !pattern.MatchObject {
 			continue
 		}
+
 		if _, isExcludedType := pattern.ExcludeTypesMapping[simpleType]; isExcludedType {
 			continue
 		}
+
 		if !matchObject && !pattern.MatchColumn {
 			continue
 		}
@@ -210,12 +225,19 @@ func (classifier *Classifier) matchKnownPersonObjectPatterns(name string, matchA
 		if matchAsIdentifier && !pattern.ActAsIdentifier {
 			continue
 		}
+
 		if !pattern.IncludeRegexpMatcher.MatchString(name) {
 			continue
 		}
+
 		if pattern.ExcludeRegexpMatcher != nil && pattern.ExcludeRegexpMatcher.MatchString(name) {
 			continue
 		}
+
+		if globalExclusionMatcher.MatchString(name) {
+			continue
+		}
+
 		if matchAsIdentifier && pattern.IdentifierRegexpMatcher != nil && !pattern.IdentifierRegexpMatcher.MatchString(name) {
 			continue
 		}
@@ -272,6 +294,7 @@ func (classifier *Classifier) classifyKnownObject(
 	if classify.IsDatabase(detectorType) {
 		objectState = classify.Potential
 	}
+
 	classifiedDatatype.Classification.Decision = classify.ClassificationDecision{
 		State:  objectState,
 		Reason: "valid_object_with_invalid_properties",

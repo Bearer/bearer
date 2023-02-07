@@ -5,7 +5,6 @@
   "friendly_name": "Identification",
   "health_context_data_type_uuid": null,
   "include_regexp": "\\b.*identification.*\\b",
-  "include_types": ["string"],
   "match_column": false,
   "match_object": true,
   "object_type": ["known_data_object"]

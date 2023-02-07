@@ -7,7 +7,6 @@
   "friendly_name": "Emails",
   "health_context_data_type_uuid": null,
   "include_regexp": "\\b(emails)|email\\s?(subject|body)\\b",
-  "include_types": ["string", "array", "object"],
   "match_column": true,
   "match_object": false,
   "object_type": ["known", "unknown_extended"]

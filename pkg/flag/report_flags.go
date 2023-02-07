@@ -2,9 +2,9 @@ package flag
 
 import (
 	"errors"
-)
 
-type Severity int
+	"github.com/bearer/curio/pkg/types"
+)
 
 var (
 	FormatJSON  = "json"
@@ -16,10 +16,13 @@ var (
 	ReportDetectors = "detectors" // nodoc: internal report type
 	ReportDataFlow  = "dataflow"  // nodoc: internal report type
 	ReportStats     = "stats"     // nodoc: internal report type
+
+	DefaultSeverity = "critical,high,medium,low,warning"
 )
 
 var ErrInvalidFormat = errors.New("invalid format argument; supported values: json, yaml")
 var ErrInvalidReport = errors.New("invalid report argument; supported values: summary, privacy")
+var ErrInvalidSeverity = errors.New("invalid severity argument; supported values: critical, high, medium, low, warning")
 
 var (
 	FormatFlag = Flag{
@@ -41,25 +44,34 @@ var (
 		Value:      "",
 		Usage:      "Specify the output path for the report.",
 	}
+	SeverityFlag = Flag{
+		Name:       "severity",
+		ConfigName: "report.severity",
+		Value:      DefaultSeverity,
+		Usage:      "Specify which severities are included in the report.",
+	}
 )
 
 type ReportFlagGroup struct {
-	Format *Flag
-	Report *Flag
-	Output *Flag
+	Format   *Flag
+	Report   *Flag
+	Output   *Flag
+	Severity *Flag
 }
 
 type ReportOptions struct {
-	Format string `mapstructure:"format" json:"format" yaml:"format"`
-	Report string `mapstructure:"report" json:"report" yaml:"report"`
-	Output string `mapstructure:"output" json:"output" yaml:"output"`
+	Format   string          `mapstructure:"format" json:"format" yaml:"format"`
+	Report   string          `mapstructure:"report" json:"report" yaml:"report"`
+	Output   string          `mapstructure:"output" json:"output" yaml:"output"`
+	Severity map[string]bool `mapstructure:"severity" json:"severity" yaml:"severity"`
 }
 
 func NewReportFlagGroup() *ReportFlagGroup {
 	return &ReportFlagGroup{
-		Format: &FormatFlag,
-		Report: &ReportFlag,
-		Output: &OutputFlag,
+		Format:   &FormatFlag,
+		Report:   &ReportFlag,
+		Output:   &OutputFlag,
+		Severity: &SeverityFlag,
 	}
 }
 
@@ -72,6 +84,7 @@ func (f *ReportFlagGroup) Flags() []*Flag {
 		f.Format,
 		f.Report,
 		f.Output,
+		f.Severity,
 	}
 }
 
@@ -97,9 +110,30 @@ func (f *ReportFlagGroup) ToOptions() (ReportOptions, error) {
 		return ReportOptions{}, ErrInvalidReport
 	}
 
+	severity := getStringSlice(f.Severity)
+	severityMapping := make(map[string]bool)
+
+	for _, severityLevel := range severity {
+		switch severityLevel {
+		case types.LevelCritical:
+			severityMapping[types.LevelCritical] = true
+		case types.LevelHigh:
+			severityMapping[types.LevelHigh] = true
+		case types.LevelMedium:
+			severityMapping[types.LevelMedium] = true
+		case types.LevelLow:
+			severityMapping[types.LevelLow] = true
+		case types.LevelWarning:
+			severityMapping[types.LevelWarning] = true
+		default:
+			return ReportOptions{}, ErrInvalidSeverity
+		}
+	}
+
 	return ReportOptions{
-		Format: format,
-		Report: report,
-		Output: getString(f.Output),
+		Format:   format,
+		Report:   report,
+		Output:   getString(f.Output),
+		Severity: severityMapping,
 	}, nil
 }

@@ -7,7 +7,6 @@
   "friendly_name": "Therapy",
   "health_context_data_type_uuid": null,
   "include_regexp": "\\b.*therapy.*\\b",
-  "include_types": ["string"],
   "match_column": true,
   "match_object": false,
   "object_type": ["known", "unknown_extended"]

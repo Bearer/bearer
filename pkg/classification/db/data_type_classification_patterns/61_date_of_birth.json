@@ -6,8 +6,7 @@
   "exclude_types": ["boolean"],
   "friendly_name": "Date of birth",
   "health_context_data_type_uuid": null,
-  "include_regexp": "\\b(date.*of.*birth|birth.*date)\\z",
-  "include_types": ["string", "date"],
+  "include_regexp": "\\b(date.*of.*birth|birth.*date)$",
   "match_column": true,
   "match_object": false,
   "object_type": ["unknown"]

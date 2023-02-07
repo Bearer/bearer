@@ -1,4 +1,4 @@
-package personal_data
+package schema_rb
 
 import (
 	"strings"
