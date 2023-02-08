@@ -1,0 +1,55 @@
+patterns:
+  - pattern: |
+      Datadog.configure do |$<CONFIG:identifier>|
+        $<!>$<CONFIG>.tags = $<DATA_TYPE>
+      end
+    filters:
+      - variable: DATA_TYPE
+        detection: datatype
+  - pattern: |
+      $<SPAN>.set_tag($<_>, $<DATA_TYPE>)
+    filters:
+      - variable: SPAN
+        detection: ruby_third_parties_datadog_span
+      - variable: DATA_TYPE
+        detection: datatype
+  - pattern: |
+      Datadog::Tracing.trace($<_>, $<...>$<DATA_TYPE>$<...>)$<...>
+    filters:
+      - variable: DATA_TYPE
+        detection: datatype
+languages:
+  - ruby
+auxiliary:
+  - id: ruby_third_parties_datadog_span
+    patterns:
+      - |
+        Datadog.configuration[$<_>][$<_>].active_span
+      - |
+        Datadog::Tracing.active_span
+      - |
+        Datadog::Tracing.trace() { |$<!>$<SPAN:identifier>$<...>| }
+trigger: local
+severity:
+  default: low
+  PII: critical
+  PHI: medium
+  PD: high
+skip_data_types:
+  - "Unique Identifier"
+metadata:
+  description: "Do not send sensitive data to Datadog."
+  remediation_message: |
+    ## Description
+    Leaking sensitive data to third-party loggers is a common cause of data leaks and can lead to data breaches. This rule looks for instances of sensitive data sent to Datadog.
+
+    ## Remediations
+
+    When logging errors or events, ensure all sensitive data is removed.
+
+    ## Resources
+    - [Datadog docs](https://docs.datadoghq.com)
+    - [Scrubbing data](https://docs.datadoghq.com/tracing/configure_data_security/?tab=mongodb#scrub-sensitive-data-from-your-spans)
+  dsr_id: DSR-1
+  associated_recipe: Datadog
+  id: ruby_third_parties_datadog

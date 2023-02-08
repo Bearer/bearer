@@ -153,6 +153,11 @@ func (builder *builder) compileNode(node *tree.Node, isRoot bool, isLastChild bo
 
 // variable nodes match their type and capture their content
 func (builder *builder) compileVariableNode(variable *types.Variable) {
+	if variable.Name == "_" {
+		builder.write("(_)")
+		return
+	}
+
 	paramName := builder.newParam()
 	builder.variableToParams[variable.Name] = append(builder.variableToParams[variable.Name], paramName)
 
