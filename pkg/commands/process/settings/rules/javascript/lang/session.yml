@@ -1,4 +1,4 @@
-type: "risk"
+type: risk
 patterns:
   - pattern: |
       localStorage.setItem($<DATA_TYPE>)

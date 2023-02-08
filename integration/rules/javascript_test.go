@@ -21,3 +21,8 @@ func TestJavascriptLangSessionDataflow(t *testing.T) {
 	t.Parallel()
 	runRulesTest("javascript/lang/session", "dataflow", "javascript_session", t)
 }
+
+func TestExpressSecureCookie(t *testing.T) {
+	t.Parallel()
+	runRulesTest("javascript/express/insecure_cookie", "dataflow", "express_insecure_cookie", t)
+}
