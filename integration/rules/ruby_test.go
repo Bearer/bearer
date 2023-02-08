@@ -253,3 +253,13 @@ func TestRubyThirdPartiesAirbrakeDataflow(t *testing.T) {
 	t.Parallel()
 	runRulesTest("ruby/third_parties/airbrake", "dataflow", "ruby_third_parties_airbrake", t)
 }
+
+func TestRubyThirdPartiesOpenTelemetrySummary(t *testing.T) {
+	t.Parallel()
+	runRulesTest("ruby/third_parties/open_telemetry", "summary", "ruby_third_parties_open_telemetry", t)
+}
+
+func TestRubyThirdPartiesOpenTelemetryDataflow(t *testing.T) {
+	t.Parallel()
+	runRulesTest("ruby/third_parties/open_telemetry", "dataflow", "ruby_third_parties_open_telemetry", t)
+}
