@@ -34,7 +34,7 @@ var (
 
 	// $<name:type> or $<name:type1|type2> or $<name>
 	patternQueryVariableRegex = regexp.MustCompile(`\$<(?P<name>[^>:!\.]+)(?::(?P<types>[^>]+))?>`)
-	allowedPatternQueryTypes  = []string{"identifier", "constant", "_", "call"}
+	allowedPatternQueryTypes  = []string{"identifier", "constant", "_", "call", "simple_symbol"}
 
 	matchNodeRegex = regexp.MustCompile(`\$<!>`)
 
@@ -149,6 +149,8 @@ func produceDummyValue(i int, nodeType string) string {
 	switch nodeType {
 	case "identifier", "call":
 		return "curioVar" + fmt.Sprint(i)
+	case "simple_symbol":
+		return ":curioVar" + fmt.Sprint(i)
 	default:
 		return "CurioVar" + fmt.Sprint(i)
 	}

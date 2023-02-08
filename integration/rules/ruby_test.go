@@ -206,7 +206,7 @@ func TestRubyThirdPartiesSentryDataflow(t *testing.T) {
 
 func TestRubyThirdPartiesBugsnagSummary(t *testing.T) {
 	t.Parallel()
-	runRulesTest("ruby/third_parties/sentry", "summary", "ruby_third_parties_bugsnag", t)
+	runRulesTest("ruby/third_parties/bugsnag", "summary", "ruby_third_parties_bugsnag", t)
 }
 
 func TestRubyThirdPartiesBugsnagDataflow(t *testing.T) {

@@ -1,7 +1,9 @@
 class ApplicationController < ActionController::Base
   before_bugsnag_notify :add_diagnostics_to_bugsnag
 
-  # Your controller code here
+  def foo
+    user.email
+  end
 
   private
 
