@@ -2,7 +2,7 @@ patterns:
   - pattern: |
       {
         cookie: {
-          secure: false
+          $<!>secure: false
         }
       }
 languages:
