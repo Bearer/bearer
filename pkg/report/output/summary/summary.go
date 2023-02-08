@@ -180,10 +180,10 @@ func BuildReportString(config settings.Config, results map[string][]Result, line
 		reportStr.WriteString("\nNeed to add your own custom rule? Check out the guide: https://curio.sh/guides/custom-rule\n")
 	}
 
-	emptySumary := writeSummaryToString(reportStr, results, len(rules), failures, severityForFailure)
+	noFailureSummary := checkAndWriteFailureSummaryToString(reportStr, results, len(rules), failures, severityForFailure)
 
-	if emptySumary {
-		writeEmptySuccessToString(len(rules), reportStr)
+	if noFailureSummary {
+		writeSuccessToString(len(rules), reportStr)
 		writeStatsToString(reportStr, config, lineOfCodeOutput, dataflow)
 	}
 
@@ -250,13 +250,13 @@ func writeRuleListToString(
 	reportStr.WriteString(strings.Join(ruleList, ""))
 }
 
-func writeEmptySuccessToString(policyCount int, reportStr *strings.Builder) {
+func writeSuccessToString(policyCount int, reportStr *strings.Builder) {
 	reportStr.WriteString("\n\n")
 	reportStr.WriteString(color.HiGreenString("SUCCESS\n\n"))
 	reportStr.WriteString(fmt.Sprint(policyCount) + " checks were run and no failures were detected. Great job! 👏\n")
 }
 
-func writeSummaryToString(
+func checkAndWriteFailureSummaryToString(
 	reportStr *strings.Builder,
 	policyResults map[string][]Result,
 	policyCount int, policyFailures map[string]map[string]bool,
