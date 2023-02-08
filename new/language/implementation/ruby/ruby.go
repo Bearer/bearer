@@ -77,6 +77,7 @@ func (*rubyImplementation) AnalyzeFlow(rootNode *tree.Node) error {
 			}
 
 			if slice.Contains(variableLookupParents, parent.Type()) ||
+				(parent.Type() == "assignment" && node.Equal(parent.ChildByFieldName("right"))) ||
 				(parent.Type() == "call" && node.Equal(parent.ChildByFieldName("receiver"))) {
 				if scopedNode := scope.Lookup(node.Content()); scopedNode != nil {
 					node.UnifyWith(scopedNode)
