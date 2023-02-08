@@ -6,6 +6,7 @@ import (
 	"github.com/bearer/curio/new/detector/types"
 	"github.com/bearer/curio/new/language/tree"
 	"github.com/bearer/curio/pkg/util/stringutil"
+	"github.com/rs/zerolog/log"
 
 	generictypes "github.com/bearer/curio/new/detector/implementation/generic/types"
 	languagetypes "github.com/bearer/curio/new/language/types"
@@ -48,19 +49,12 @@ func concatenateChildren(node *tree.Node, evaluator types.Evaluator) ([]interfac
 			continue
 		}
 
-		detections, err := evaluator.ForNode(child, "string", true)
+		childValue, err := getStringValue(child, evaluator)
 		if err != nil {
 			return nil, err
 		}
 
-		switch len(detections) {
-		case 0:
-			value += "*"
-		case 1:
-			value += detections[0].Data.(generictypes.String).Value
-		default:
-			return nil, fmt.Errorf("expected single string detection but got %d", len(detections))
-		}
+		value += childValue
 	}
 
 	return []interface{}{generictypes.String{Value: value}}, nil
@@ -73,11 +67,35 @@ func handleTemplateString(node *tree.Node, evaluator types.Evaluator) ([]interfa
 		text += partText
 		return nil
 	}, func(child *tree.Node) error {
-		text += "*"
+		childValue, err := getStringValue(child.Child(1), evaluator)
+		if err != nil {
+			return err
+		}
+
+		text += childValue
+
 		return nil
 	})
 
+	log.Debug().Msgf("node is %s", node.Debug())
+
 	return []interface{}{generictypes.String{Value: text}}, err
+}
+
+func getStringValue(node *tree.Node, evaluator types.Evaluator) (string, error) {
+	detections, err := evaluator.ForNode(node, "string", true)
+	if err != nil {
+		return "", err
+	}
+
+	switch len(detections) {
+	case 0:
+		return "*", nil
+	case 1:
+		return detections[0].Data.(generictypes.String).Value, nil
+	default:
+		return "", fmt.Errorf("expected single string detection but got %d", len(detections))
+	}
 }
 
 func (detector *stringDetector) Close() {}

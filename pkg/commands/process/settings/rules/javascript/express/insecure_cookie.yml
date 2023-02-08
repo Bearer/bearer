@@ -1,0 +1,23 @@
+patterns:
+  - pattern: |
+      {
+        cookie: {
+          $<!>secure: false
+        }
+      }
+languages:
+  - javascript
+trigger: presence
+severity:
+  default: "low"
+  PII: "critical"
+  PHI: "medium"
+  PD: "high"
+skip_data_types:
+  - "Unique Identifier"
+metadata:
+  description: "Ensure cookies are sent over https."
+  remediation_message: |
+    FIXME
+  dsr_id: "DSR-5"
+  id: "express_insecure_cookie"

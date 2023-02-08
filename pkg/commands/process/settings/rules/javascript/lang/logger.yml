@@ -1,4 +1,4 @@
-type: "risk"
+type: risk
 patterns:
   - pattern: |
       $<LOG>.$<METHOD>($<DATA_TYPE>)
