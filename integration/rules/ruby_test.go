@@ -184,6 +184,16 @@ func TestRubyRailsSessionDataflow(t *testing.T) {
 	runRulesTest("ruby/rails/session", "dataflow", "ruby_rails_session", t)
 }
 
+func TestRubyThirdPartiesDatadogSummary(t *testing.T) {
+	t.Parallel()
+	runRulesTest("ruby/third_parties/datadog", "summary", "ruby_third_parties_datadog", t)
+}
+
+func TestRubyThirdPartiesDatadogDataflow(t *testing.T) {
+	t.Parallel()
+	runRulesTest("ruby/third_parties/datadog", "dataflow", "ruby_third_parties_datadog", t)
+}
+
 func TestRubyThirdPartiesNewRelicSummary(t *testing.T) {
 	t.Parallel()
 	runRulesTest("ruby/third_parties/new_relic", "summary", "ruby_third_parties_new_relic", t)
