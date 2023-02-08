@@ -112,4 +112,4 @@ This will auto generate yaml files for any updated CLI arguments.
 
 ## Getting help
 
-If you need help getting set up, or are unsure how to navigate the codebase, join our [discord community](https://discord.gg/eaHZBJUXRF) and we'll be happy to point you in the right direction.
+If you need help getting set up, or are unsure how to navigate the codebase, join our [discord community]({{meta.links.discord}}) and we'll be happy to point you in the right direction.
