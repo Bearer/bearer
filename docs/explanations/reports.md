@@ -1,6 +1,5 @@
 ---
 title: Report Types
-layout: layouts/doc.njk
 ---
 
 # Report Types

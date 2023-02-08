@@ -119,11 +119,41 @@
   .dark .dark-icon {
     display: inline-block;
   }
+
+  .breadcrumbs li:not(:last-of-type)::after {
+    display: inline-block;
+    content: "";
+    width: 0;
+    height: 0;
+    margin-left: 0.25em;
+    border-top: 0.3em solid transparent;
+    border-bottom: 0.3em solid transparent;
+    border-left: 0.3em solid theme("colors.neutral.400");
+  }
+
+  /* checkboxes */
+
+  .filter-toggle {
+    @apply sr-only;
+  }
+
+  .toggle-label {
+    @apply rounded px-4 py-2 bg-neutral-200 text-neutral-400 border-2 border-solid border-transparent;
+  }
+  .filter-toggle:checked + .toggle-label {
+    @apply bg-main-400 dark:bg-main-300 text-neutral-100 border-main-400 dark:border-main-300;
+  }
+  .filter-toggle:focus + .toggle-label {
+    @apply border-neutral-300;
+  }
 }
 
 @layer utilities {
 }
 
+.hidden {
+  display: none;
+}
 .open {
   display: block;
 }

@@ -1,0 +1,4 @@
+{
+  "layout": "layouts/doc.njk",
+  "breadcrumbs": [{ "name": "Explanations", "path": "/explanations" }]
+}

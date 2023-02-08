@@ -14,7 +14,7 @@ async function fetchData(location) {
   let groupedRules = [];
   try {
     const dirs = await readdir(location);
-    // ex: looping through [ruby, gitleaks, sql]
+    // ex: looping through rules [ruby, gitleaks, sql]
     dirs.forEach(async (dir) => {
       const dirPath = path.join(rulesPath, dir);
       if (isDirectory(dirPath)) {
@@ -37,7 +37,7 @@ async function fetchData(location) {
         groupedRules.push(dirData);
       }
     });
-    return { rules, groupedRules };
+    return rules;
   } catch (err) {
     throw err;
   }
@@ -63,6 +63,7 @@ async function fetchFile(location) {
 
     return {
       name: path.basename(location, ".yml"),
+      location: location.substring(2),
       ...out,
     };
   });
@@ -70,6 +71,4 @@ async function fetchFile(location) {
 
 module.exports = async function () {
   return await fetchData("../pkg/commands/process/settings/rules/");
-
-  // return await fetchFile("../pkg/commands/process/settings/policies.yml");
 };
