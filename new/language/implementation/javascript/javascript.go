@@ -25,7 +25,7 @@ var (
 	patternMatchNodeContainerTypes  = []string{}
 
 	// $<name:type> or $<name:type1|type2> or $<name>
-	patternQueryVariableRegex = regexp.MustCompile(`\$<(?P<name>[^>:!]+)(?::(?P<types>[^>]+))?>`)
+	patternQueryVariableRegex = regexp.MustCompile(`\$<(?P<name>[^>:!\.]+)(?::(?P<types>[^>]+))?>`)
 	allowedPatternQueryTypes  = []string{"identifier", "property_identifier", "_", "member_expression"}
 
 	matchNodeRegex = regexp.MustCompile(`\$<!>`)

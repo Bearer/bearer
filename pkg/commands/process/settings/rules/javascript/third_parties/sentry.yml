@@ -1,0 +1,72 @@
+patterns:
+  - pattern: |
+      Sentry.addBreadcrumb($<DATA_TYPE>)
+    filters:
+      - variable: DATA_TYPE
+        detection: datatype
+  - pattern: |
+      Sentry.captureMessage($<DATA_TYPE>)
+    filters:
+      - variable: DATA_TYPE
+        detection: datatype
+  - pattern: |
+      Sentry.captureEvent($<DATA_TYPE>)
+    filters:
+      - variable: DATA_TYPE
+        detection: datatype
+  - pattern: |
+      Sentry.captureException($<DATA_TYPE>)
+    filters:
+      - variable: DATA_TYPE
+        detection: datatype
+  - pattern: |
+      $<SCOPE>.setExtra($<...>, $<DATA_TYPE>)
+    filters:
+      - variable: SCOPE
+        detection: javascript_third_parties_sentry_scope
+      - variable: DATA_TYPE
+        detection: datatype
+  - pattern: |
+      $<SCOPE>.setTag($<...>, $<DATA_TYPE>)
+    filters:
+      - variable: SCOPE
+        detection: javascript_third_parties_sentry_scope
+      - variable: DATA_TYPE
+        detection: datatype
+  - pattern: |
+      $<SCOPE>.setUser($<...>, $<DATA_TYPE>)
+    filters:
+      - variable: SCOPE
+        detection: javascript_third_parties_sentry_scope
+      - variable: DATA_TYPE
+        detection: datatype
+auxiliary:
+  - id: javascript_third_parties_sentry_scope
+    patterns:
+      - |
+        Sentry.configureScope(($<!>$<_:identifier>) => {})
+languages:
+  - javascript
+trigger: local
+severity:
+  default: low
+  PII: critical
+  PHI: medium
+  PD: high
+skip_data_types:
+  - "Unique Identifier"
+metadata:
+  description: "Do not send sensitive data to Sentry."
+  remediation_message: |
+    ## Description
+    Leaking sensitive data to third-party loggers is a common cause of data leaks and can lead to data breaches. This rule looks for instances of sensitive data sent to Sentry.
+
+    ## Remediations
+
+    When logging errors or events, ensure all sensitive data is removed.
+
+    ## Resources
+    - [Sentry Docs](https://docs.sentry.io/)
+  dsr_id: DSR-1
+  associated_recipe: Sentry
+  id: javascript_third_parties_sentry
