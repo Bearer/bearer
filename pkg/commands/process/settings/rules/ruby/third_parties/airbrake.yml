@@ -44,7 +44,7 @@ patterns:
         detection: datatype
   - pattern: |
       def to_airbrake
-        $<...>$<DATA_TYPE>$<...>
+        $<DATA_TYPE>
       end
     filters:
       - variable: DATA_TYPE
