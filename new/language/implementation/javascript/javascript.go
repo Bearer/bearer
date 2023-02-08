@@ -19,7 +19,7 @@ import (
 )
 
 var (
-	variableLookupParents = []string{"pair", "arguments", "binary_expression"}
+	variableLookupParents = []string{"pair", "arguments", "binary_expression", "member_expression", "template_substitution"}
 
 	anonymousPatternNodeParentTypes = []string{}
 	patternMatchNodeContainerTypes  = []string{}
@@ -207,7 +207,7 @@ func (implementation *javascriptImplementation) PatternIsAnchored(node *tree.Nod
 	// arrow functions statement_block
 	// function statement_block
 	// method statement_blocks
-	unAnchored := []string{"statement_blocks", "class_body"}
+	unAnchored := []string{"statement_blocks", "class_body", "pair"}
 
 	return !slices.Contains(unAnchored, node.Type())
 }
