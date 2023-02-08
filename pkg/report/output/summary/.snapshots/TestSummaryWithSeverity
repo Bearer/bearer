@@ -4,7 +4,7 @@
       PolicyName: (string) "",
       PolicyDSRID: (string) (len=5) "DSR-5",
       PolicyDisplayId: (string) (len=17) "ruby_rails_logger",
-      PolicyDescription: (string) (len=38) "Do not send sensitive data to loggers.",
+      PolicyDescription: (string) (len=44) "Do not send sensitive data to Rails loggers.",
       LineNumber: (int) 1,
       Filename: (string) (len=20) "pkg/datatype_leak.rb",
       CategoryGroups: ([]string) (len=2) {
@@ -20,7 +20,7 @@
       PolicyName: (string) "",
       PolicyDSRID: (string) (len=5) "DSR-5",
       PolicyDisplayId: (string) (len=17) "ruby_rails_logger",
-      PolicyDescription: (string) (len=38) "Do not send sensitive data to loggers.",
+      PolicyDescription: (string) (len=44) "Do not send sensitive data to Rails loggers.",
       LineNumber: (int) 2,
       Filename: (string) (len=20) "pkg/datatype_leak.rb",
       CategoryGroups: ([]string) (len=2) {

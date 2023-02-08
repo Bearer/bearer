@@ -1,0 +1,51 @@
+patterns:
+  - pattern: |
+      class $<_>
+        before_bugsnag_notify($<METHOD_NAME:simple_symbol>)
+
+        def $<METHOD_NAME>($<EVENT:identifier>)
+          $<EVENT>.add_metadata($<...>$<DATA_TYPE>$<...>)
+        end
+      end
+    filters:
+      - variable: DATA_TYPE
+        detection: datatype
+  - pattern: |
+      Bugsnag.leave_breadcrumb($<...>$<DATA_TYPE>$<...>)
+    filters:
+      - variable: DATA_TYPE
+        detection: datatype
+  - pattern: |
+      Bugsnag.notify($<...>$<DATA_TYPE>$<...>)
+    filters:
+      - variable: DATA_TYPE
+        detection: datatype
+  - pattern: |
+      Bugsnag.notify($<_>) do |$<EVENT:identifier>|
+        $<EVENT>.add_metadata($<...>$<DATA_TYPE>$<...>)
+      end
+languages:
+  - ruby
+trigger: local
+severity:
+  default: low
+  PII: critical
+  PHI: medium
+  PD: high
+skip_data_types:
+  - "Unique Identifier"
+metadata:
+  description: "Do not send sensitive data to Bugsnag."
+  remediation_message: |
+    ## Description
+    Leaking sensitive data to third-party loggers is a common cause of data leaks and can lead to data breaches. This rule looks for instances of sensitive data sent to Bugsnag.
+
+    ## Remediations
+
+    When logging errors or events, ensure all sensitive data is removed.
+
+    ## Resources
+    - [Bugsnag Docs](https://docs.bugsnag.com/platforms/ruby/rails/)
+  dsr_id: DSR-1
+  associated_recipe: Bugsnag
+  id: ruby_third_parties_bugsnag
