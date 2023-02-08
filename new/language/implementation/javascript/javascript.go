@@ -19,7 +19,7 @@ import (
 )
 
 var (
-	variableLookupParents = []string{"pair", "arguments", "binary_expression", "member_expression", "template_substitution"}
+	variableLookupParents = []string{"pair", "arguments", "binary_expression", "template_substitution"}
 
 	anonymousPatternNodeParentTypes = []string{}
 	patternMatchNodeContainerTypes  = []string{}
