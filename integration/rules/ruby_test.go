@@ -243,3 +243,13 @@ func TestRubyThirdPartiesHoneybadgerDataflow(t *testing.T) {
 	t.Parallel()
 	runRulesTest("ruby/third_parties/honeybadger", "dataflow", "ruby_third_parties_honeybadger", t)
 }
+
+func TestRubyThirdPartiesAirbrakeSummary(t *testing.T) {
+	t.Parallel()
+	runRulesTest("ruby/third_parties/airbrake", "summary", "ruby_third_parties_airbrake", t)
+}
+
+func TestRubyThirdPartiesAirbrakeDataflow(t *testing.T) {
+	t.Parallel()
+	runRulesTest("ruby/third_parties/airbrake", "dataflow", "ruby_third_parties_airbrake", t)
+}

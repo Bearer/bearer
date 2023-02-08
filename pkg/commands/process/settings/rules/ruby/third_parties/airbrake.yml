@@ -1,0 +1,74 @@
+languages:
+  - ruby
+patterns:
+  - pattern: |
+      Airbrake.$<METHOD>($<...>$<DATA_TYPE>$<...>)
+    filters:
+      - variable: DATA_TYPE
+        detection: datatype
+      - variable: METHOD
+        values:
+          - notify
+          - notify_sync
+          - notify_request
+          - notify_request_sync
+          - notify_query
+          - notify_query_sync
+          - notify_performance_breakdown
+          - notify_performance_breakdown_sync
+          - notify_queue
+          - notify_queue_sync
+  - pattern: |
+      Airbrake.$<METHOD>() do |$<NOTIFY:identifier>|
+        $<NOTIFY>[][] = $<DATA_TYPE>
+      end
+    filters:
+      - variable: DATA_TYPE
+        detection: datatype
+      - variable: METHOD
+        values:
+          - notify
+          - notify_sync
+          - notify_request
+          - notify_request_sync
+          - notify_query
+          - notify_query_sync
+          - notify_performance_breakdown
+          - notify_performance_breakdown_sync
+          - notify_queue
+          - notify_queue_sync
+  - pattern: |
+      Airbrake.merge_context($<...>$<DATA_TYPE>$<...>)
+    filters:
+      - variable: DATA_TYPE
+        detection: datatype
+  - pattern: |
+      def to_airbrake
+        $<...>$<DATA_TYPE>$<...>
+      end
+    filters:
+      - variable: DATA_TYPE
+        detection: datatype
+trigger: local
+severity:
+  default: low
+  PII: critical
+  PHI: medium
+  PD: high
+skip_data_types:
+  - "Unique Identifier"
+metadata:
+  description: "Do not send sensitive data to Airbrake."
+  remediation_message: |
+    ## Description
+    Leaking sensitive data to third-party loggers is a common cause of data leaks and can lead to data breaches. This rule looks for instances of sensitive data sent to Airbrake.
+
+    ## Remediations
+
+    When logging errors or events, ensure all sensitive data is removed.
+
+    ## Resources
+    - [Airbrake Docs](https://docs.airbrake.io/)
+  dsr_id: DSR-1
+  associated_recipe: Airbrake
+  id: ruby_third_parties_airbrake
