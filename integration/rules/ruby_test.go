@@ -194,6 +194,16 @@ func TestRubyThirdPartiesNewRelicDataflow(t *testing.T) {
 	runRulesTest("ruby/third_parties/new_relic", "dataflow", "ruby_third_parties_new_relic", t)
 }
 
+func TestRubyThirdPartiesRollbarSummary(t *testing.T) {
+	t.Parallel()
+	runRulesTest("ruby/third_parties/rollbar", "summary", "ruby_third_parties_rollbar", t)
+}
+
+func TestRubyThirdPartiesRollbarDataflow(t *testing.T) {
+	t.Parallel()
+	runRulesTest("ruby/third_parties/rollbar", "dataflow", "ruby_third_parties_rollbar", t)
+}
+
 func TestRubyThirdPartiesSentrySummary(t *testing.T) {
 	t.Parallel()
 	runRulesTest("ruby/third_parties/sentry", "summary", "ruby_third_parties_sentry", t)
