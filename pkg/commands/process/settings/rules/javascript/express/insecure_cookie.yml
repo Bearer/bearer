@@ -8,7 +8,7 @@ patterns:
   - pattern: |
       {
         cookie: {
-          $<!>httpOnly: false
+          $<!>httpOnly: true
         }
       }
 languages:

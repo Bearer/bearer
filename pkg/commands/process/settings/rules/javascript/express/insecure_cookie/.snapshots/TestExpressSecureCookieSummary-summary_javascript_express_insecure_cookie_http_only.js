@@ -6,7 +6,7 @@ low:
       line_number: 9
       filename: pkg/commands/process/settings/rules/javascript/express/insecure_cookie/testdata/http_only.js
       parent_line_number: 9
-      parent_content: 'httpOnly: false'
+      parent_content: 'httpOnly: true'
 
 
 --

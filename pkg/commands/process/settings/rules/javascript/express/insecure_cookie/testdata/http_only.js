@@ -6,7 +6,7 @@ app.use(
 	session({
 		cookie: {
 			domain: "example.com",
-			httpOnly: false,
+			httpOnly: true,
 		},
 	})
 );

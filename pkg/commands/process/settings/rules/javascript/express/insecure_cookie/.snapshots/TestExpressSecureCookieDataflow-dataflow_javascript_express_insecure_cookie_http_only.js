@@ -5,11 +5,11 @@ risks:
           line_number: 9
           parent:
             line_number: 9
-            content: 'httpOnly: false'
+            content: 'httpOnly: true'
           content: |
             {
               cookie: {
-                $<!>httpOnly: false
+                $<!>httpOnly: true
               }
             }
 components: []
