@@ -25,7 +25,7 @@ var (
 	patternMatchNodeContainerTypes  = []string{}
 
 	// $<name:type> or $<name:type1|type2> or $<name>
-	patternQueryVariableRegex = regexp.MustCompile(`\$<(?P<name>[^>:!]+)(?::(?P<types>[^>]+))?>`)
+	patternQueryVariableRegex = regexp.MustCompile(`\$<(?P<name>[^>:!\.]+)(?::(?P<types>[^>]+))?>`)
 	allowedPatternQueryTypes  = []string{"identifier", "property_identifier", "_", "member_expression"}
 
 	matchNodeRegex = regexp.MustCompile(`\$<!>`)
@@ -163,14 +163,8 @@ func (implementation *javascriptImplementation) ExtractPatternMatchNode(input st
 	return string(inputBytes[0:match[0]]) + string(inputBytes[match[1]:]), match[0], nil
 }
 
-// TODO: See if anything needs to be added here
 func produceDummyValue(i int, nodeType string) string {
-	switch nodeType {
-	case "identifier", "call":
-		return "curioVar" + fmt.Sprint(i)
-	default:
-		return "CurioVar" + fmt.Sprint(i)
-	}
+	return "CurioVar" + fmt.Sprint(i)
 }
 
 // TODO: See if anything needs to be added here

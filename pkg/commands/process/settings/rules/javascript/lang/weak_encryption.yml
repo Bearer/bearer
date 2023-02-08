@@ -14,12 +14,16 @@ auxiliary:
     type: verifier
     patterns:
       - pattern: |
-          crypto.$<METHOD>("md5")
+          crypto.$<METHOD>($<ALGORITHM>$<...>)
         filters:
           - variable: METHOD
             values:
               - createHmac
               - createHash
+          - variable: ALGORITHM
+            values:
+              - '"md5"'
+              - '"sha1"'
     languages:
       - javascript
 trigger: local

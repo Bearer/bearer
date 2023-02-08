@@ -134,7 +134,7 @@ func (builder *builder) compileNode(node *tree.Node, isRoot bool, isLastChild bo
 		builder.compileVariableNode(variable)
 	} else if !node.IsNamed() {
 		builder.compileAnonymousNode(node)
-	} else if node.ChildCount() == 0 {
+	} else if node.NamedChildCount() == 0 {
 		builder.compileLeafNode(node)
 	} else if err := builder.compileNodeWithChildren(node); err != nil {
 		return err
