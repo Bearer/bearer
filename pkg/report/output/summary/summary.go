@@ -125,7 +125,9 @@ func GetOutput(dataflow *dataflow.DataFlow, config settings.Config) (map[string]
 
 				severity := FindHighestSeverity(policyOutput.CategoryGroups, rule.Severity)
 
-				result[severity] = append(result[severity], policyResult)
+				if config.Report.Severity[severity] {
+					result[severity] = append(result[severity], policyResult)
+				}
 			}
 		}
 	}
