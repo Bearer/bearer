@@ -5,6 +5,12 @@ patterns:
           $<!>secure: false
         }
       }
+  - pattern: |
+      {
+        cookie: {
+          $<!>httpOnly: false
+        }
+      }
 languages:
   - javascript
 trigger: presence
