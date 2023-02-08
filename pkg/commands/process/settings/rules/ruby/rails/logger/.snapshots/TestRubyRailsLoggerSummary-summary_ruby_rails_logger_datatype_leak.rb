@@ -2,7 +2,7 @@ critical:
     - policy_name: ""
       policy_dsrid: DSR-5
       policy_display_id: ruby_rails_logger
-      policy_description: Do not send sensitive data to loggers.
+      policy_description: Do not send sensitive data to Rails loggers.
       line_number: 1
       filename: pkg/commands/process/settings/rules/ruby/rails/logger/testdata/datatype_leak.rb
       category_groups:

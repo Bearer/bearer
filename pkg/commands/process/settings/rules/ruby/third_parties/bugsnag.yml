@@ -45,8 +45,7 @@ metadata:
     When logging errors or events, ensure all sensitive data is removed.
 
     ## Resources
-    - [Bugsnag Docs](https://)
-    - [Log obfuscation](https://)
+    - [Bugsnag Docs](https://docs.bugsnag.com/platforms/ruby/rails/)
   dsr_id: DSR-1
   associated_recipe: Bugsnag
   id: ruby_third_parties_bugsnag

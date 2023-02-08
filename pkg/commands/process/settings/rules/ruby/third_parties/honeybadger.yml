@@ -42,8 +42,7 @@ metadata:
     When logging errors or events, ensure all sensitive data is removed.
 
     ## Resources
-    - [Honeybadger Docs](https://)
-    - [Log obfuscation](https://)
+    - [Honeybadger Docs](https://docs.honeybadger.io/lib/ruby/integration-guides/rails-exception-tracking/)
   dsr_id: DSR-1
   associated_recipe: Honeybadger
   id: ruby_third_parties_honeybadger
