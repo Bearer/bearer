@@ -8,11 +8,6 @@ def track_user(user)
   })
 end
 
-# add attributes at span creation
-Tracer.in_span("data leaking", attributes: { "current_user" => user.email, "date" => DateTime.now }) do |span|
-  puts "in the span block"
-end
-
 # set attributes
 current_span = OpenTelemetry::Trace.current_span
 users = [user.email, customer.email, admin_user.email]

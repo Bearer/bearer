@@ -17,24 +17,11 @@ critical:
       policy_dsrid: DSR-1
       policy_display_id: ruby_third_parties_open_telemetry
       policy_description: Do not send sensitive data to Open Telemetry.
-      line_number: 12
+      line_number: 13
       filename: pkg/commands/process/settings/rules/ruby/third_parties/open_telemetry/testdata/datatype_in_span_attributes.rb
       category_groups:
         - PII
-      parent_line_number: 12
-      parent_content: |-
-        Tracer.in_span("data leaking", attributes: { "current_user" => user.email, "date" => DateTime.now }) do |span|
-          puts "in the span block"
-        end
-    - policy_name: ""
-      policy_dsrid: DSR-1
-      policy_display_id: ruby_third_parties_open_telemetry
-      policy_description: Do not send sensitive data to Open Telemetry.
-      line_number: 18
-      filename: pkg/commands/process/settings/rules/ruby/third_parties/open_telemetry/testdata/datatype_in_span_attributes.rb
-      category_groups:
-        - PII
-      parent_line_number: 19
+      parent_line_number: 14
       parent_content: current_span.set_attribute("current_users", users)
 
 

@@ -31,6 +31,8 @@ auxiliary:
     patterns:
       - |
         OpenTelemetry::Trace.current_span
+      - |
+        $<_>.in_span() { |$<!>$<_:identifier>| }
 trigger: local
 severity:
   default: low

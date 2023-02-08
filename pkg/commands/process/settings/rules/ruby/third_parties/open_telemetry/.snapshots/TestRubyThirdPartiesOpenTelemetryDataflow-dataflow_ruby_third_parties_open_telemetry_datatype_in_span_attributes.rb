@@ -4,12 +4,7 @@ data_types:
         - name: ruby
           locations:
             - filename: pkg/commands/process/settings/rules/ruby/third_parties/open_telemetry/testdata/datatype_in_span_attributes.rb
-              line_number: 12
-              field_name: email
-              object_name: user
-              subject_name: User
-            - filename: pkg/commands/process/settings/rules/ruby/third_parties/open_telemetry/testdata/datatype_in_span_attributes.rb
-              line_number: 18
+              line_number: 13
               field_name: email
               object_name: user
               subject_name: User
@@ -29,20 +24,9 @@ risks:
           stored: false
           locations:
             - filename: pkg/commands/process/settings/rules/ruby/third_parties/open_telemetry/testdata/datatype_in_span_attributes.rb
-              line_number: 12
+              line_number: 13
               parent:
-                line_number: 12
-                content: |-
-                    Tracer.in_span("data leaking", attributes: { "current_user" => user.email, "date" => DateTime.now }) do |span|
-                      puts "in the span block"
-                    end
-              field_name: email
-              object_name: user
-              subject_name: User
-            - filename: pkg/commands/process/settings/rules/ruby/third_parties/open_telemetry/testdata/datatype_in_span_attributes.rb
-              line_number: 18
-              parent:
-                line_number: 19
+                line_number: 14
                 content: current_span.set_attribute("current_users", users)
               field_name: email
               object_name: admin_user
@@ -72,9 +56,9 @@ risks:
           content: |
             OpenTelemetry::Trace.current_span
         - filename: pkg/commands/process/settings/rules/ruby/third_parties/open_telemetry/testdata/datatype_in_span_attributes.rb
-          line_number: 17
+          line_number: 12
           parent:
-            line_number: 17
+            line_number: 12
             content: OpenTelemetry::Trace.current_span
           content: |
             OpenTelemetry::Trace.current_span
