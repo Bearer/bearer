@@ -214,6 +214,16 @@ func TestRubyThirdPartiesRollbarDataflow(t *testing.T) {
 	runRulesTest("ruby/third_parties/rollbar", "dataflow", "ruby_third_parties_rollbar", t)
 }
 
+func TestRubyThirdPartiesScoutAPMSummary(t *testing.T) {
+	t.Parallel()
+	runRulesTest("ruby/third_parties/scout_apm", "summary", "ruby_third_parties_scout_apm", t)
+}
+
+func TestRubyThirdPartiesScoutAPMDataflow(t *testing.T) {
+	t.Parallel()
+	runRulesTest("ruby/third_parties/scout_apm", "dataflow", "ruby_third_parties_scout_apm", t)
+}
+
 func TestRubyThirdPartiesSentrySummary(t *testing.T) {
 	t.Parallel()
 	runRulesTest("ruby/third_parties/sentry", "summary", "ruby_third_parties_sentry", t)

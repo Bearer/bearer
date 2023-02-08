@@ -1,0 +1,36 @@
+patterns:
+  - pattern: |
+      ScoutApm::Context.add_user($<...>$<DATA_TYPE>$<...>)
+    filters:
+      - variable: DATA_TYPE
+        detection: datatype
+  - pattern: |
+      ScoutApm::Context.add($<...>$<DATA_TYPE>$<...>)
+    filters:
+      - variable: DATA_TYPE
+        detection: datatype
+languages:
+  - ruby
+trigger: local
+severity:
+  default: low
+  PII: critical
+  PHI: medium
+  PD: high
+skip_data_types:
+  - "Unique Identifier"
+metadata:
+  description: "Do not send sensitive data to Scout APM."
+  remediation_message: |
+    ## Description
+    Leaking sensitive data to third-party loggers is a common cause of data leaks and can lead to data breaches. This rule looks for instances of sensitive data sent to Scout APM.
+
+    ## Remediations
+
+    When logging errors or events, ensure all sensitive data is removed.
+
+    ## Resources
+    - [Scout APM docs](https://scoutapm.com/docs/ruby)
+  dsr_id: DSR-1
+  associated_recipe: Scout APM
+  id: ruby_third_parties_scout_apm
