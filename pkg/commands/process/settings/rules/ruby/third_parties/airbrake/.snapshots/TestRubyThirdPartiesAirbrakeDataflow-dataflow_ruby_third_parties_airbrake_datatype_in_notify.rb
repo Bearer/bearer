@@ -39,6 +39,17 @@ risks:
               field_name: email
               object_name: user
               subject_name: User
+            - filename: pkg/commands/process/settings/rules/ruby/third_parties/airbrake/testdata/datatype_in_notify.rb
+              line_number: 8
+              parent:
+                line_number: 7
+                content: |-
+                    Airbrake.notify('App crashed') do |notice|
+                      notice[:params][:email] = customer.email
+                    end
+              field_name: email
+              object_name: customer
+              subject_name: User
         - name: Firstname
           stored: false
           locations:
