@@ -37,7 +37,7 @@ var orderedSeverityLevels = [5]string{
 	types.LevelWarning,
 }
 
-type PolicyInput struct {
+type Input struct {
 	PolicyId       string             `json:"policy_id" yaml:"policy_id"`
 	RuleId         string             `json:"rule_id" yaml:"rule_id"`
 	Rule           *settings.Rule     `json:"rule" yaml:"rule"`
@@ -45,7 +45,7 @@ type PolicyInput struct {
 	DataCategories []db.DataCategory  `json:"data_categories" yaml:"data_categories"`
 }
 
-type PolicyOutput struct {
+type Output struct {
 	ParentLineNumber int      `json:"parent_line_number,omitempty" yaml:"parent_line_number,omitempty"`
 	ParentContent    string   `json:"parent_content,omitempty" yaml:"parent_content,omitempty"`
 	LineNumber       int      `json:"line_number,omitempty" yaml:"line_number,omitempty"`
@@ -71,8 +71,8 @@ type Result struct {
 }
 
 func GetOutput(dataflow *dataflow.DataFlow, config settings.Config) (map[string][]Result, error) {
-	// policy results grouped by severity (critical, high, ...)
-	result := make(map[string][]Result)
+	// results grouped by severity (critical, high, ...)
+	summaryResults := make(map[string][]Result)
 
 	if !config.Scan.Quiet {
 		output.StdErrLogger().Msgf("Evaluating rules")
@@ -83,7 +83,7 @@ func GetOutput(dataflow *dataflow.DataFlow, config settings.Config) (map[string]
 	for _, rule := range config.Rules {
 		err := bar.Add(1)
 		if err != nil {
-			output.StdErrLogger().Msgf("Policy %s failed to write progress bar %e", rule.Id, err)
+			output.StdErrLogger().Msgf("Rule %s failed to write progress bar %e", rule.Id, err)
 		}
 
 		if !rule.PolicyType() {
@@ -94,7 +94,7 @@ func GetOutput(dataflow *dataflow.DataFlow, config settings.Config) (map[string]
 
 		// Create a prepared query that can be evaluated.
 		rs, err := rego.RunQuery(policy.Query,
-			PolicyInput{
+			Input{
 				RuleId:         rule.Id,
 				Rule:           rule,
 				Dataflow:       dataflow,
@@ -112,36 +112,36 @@ func GetOutput(dataflow *dataflow.DataFlow, config settings.Config) (map[string]
 				return nil, err
 			}
 
-			var policyResults map[string][]PolicyOutput
-			err = json.Unmarshal(jsonRes, &policyResults)
+			var results map[string][]Output
+			err = json.Unmarshal(jsonRes, &results)
 			if err != nil {
 				return nil, err
 			}
 
-			for _, policyOutput := range policyResults["policy_failure"] {
-				policyResult := Result{
+			for _, output := range results["policy_failure"] {
+				result := Result{
 					PolicyDescription: rule.Description,
 					PolicyDisplayId:   rule.Id,
 					PolicyDSRID:       rule.DSRID,
-					Filename:          policyOutput.Filename,
-					LineNumber:        policyOutput.LineNumber,
-					CategoryGroups:    policyOutput.CategoryGroups,
+					Filename:          output.Filename,
+					LineNumber:        output.LineNumber,
+					CategoryGroups:    output.CategoryGroups,
 					OmitParent:        rule.OmitParent,
-					ParentLineNumber:  policyOutput.ParentLineNumber,
-					ParentContent:     policyOutput.ParentContent,
-					DetailedContext:   policyOutput.DetailedContext,
+					ParentLineNumber:  output.ParentLineNumber,
+					ParentContent:     output.ParentContent,
+					DetailedContext:   output.DetailedContext,
 				}
 
-				severity := FindHighestSeverity(policyOutput.CategoryGroups, rule.Severity)
+				severity := FindHighestSeverity(result.CategoryGroups, rule.Severity)
 
 				if config.Report.Severity[severity] {
-					result[severity] = append(result[severity], policyResult)
+					summaryResults[severity] = append(summaryResults[severity], result)
 				}
 			}
 		}
 	}
 
-	return result, nil
+	return summaryResults, nil
 }
 
 func BuildReportString(config settings.Config, results map[string][]Result, lineOfCodeOutput *gocloc.Result, dataflow *dataflow.DataFlow) (*strings.Builder, bool) {
@@ -258,21 +258,22 @@ func writeRuleListToString(
 	reportStr.WriteString(strings.Join(ruleList, ""))
 }
 
-func writeSuccessToString(policyCount int, reportStr *strings.Builder) {
+func writeSuccessToString(ruleCount int, reportStr *strings.Builder) {
 	reportStr.WriteString("\n\n")
 	reportStr.WriteString(color.HiGreenString("SUCCESS\n\n"))
-	reportStr.WriteString(fmt.Sprint(policyCount) + " checks were run and no failures were detected. Great job! 👏\n")
+	reportStr.WriteString(fmt.Sprint(ruleCount) + " checks were run and no failures were detected. Great job! 👏\n")
 }
 
 func checkAndWriteFailureSummaryToString(
 	reportStr *strings.Builder,
-	policyResults map[string][]Result,
-	policyCount int, policyFailures map[string]map[string]bool,
+	results map[string][]Result,
+	ruleCount int,
+	failures map[string]map[string]bool,
 	severityForFailure map[string]bool,
 ) bool {
 	reportStr.WriteString("\n=====================================")
 
-	if len(policyResults) == 0 {
+	if len(results) == 0 {
 		return true
 	}
 
@@ -284,10 +285,10 @@ func checkAndWriteFailureSummaryToString(
 			continue
 		}
 		if severityLevel == types.LevelWarning {
-			warningCount += len(policyResults[severityLevel])
+			warningCount += len(results[severityLevel])
 			continue
 		}
-		failureCount += len(policyResults[severityLevel])
+		failureCount += len(results[severityLevel])
 	}
 
 	if failureCount == 0 && warningCount == 0 {
@@ -297,9 +298,9 @@ func checkAndWriteFailureSummaryToString(
 	reportStr.WriteString("\n\n")
 	if failureCount == 0 {
 		// only warnings
-		reportStr.WriteString(fmt.Sprint(policyCount) + " checks, " + fmt.Sprint(warningCount) + " warnings\n\n")
+		reportStr.WriteString(fmt.Sprint(ruleCount) + " checks, " + fmt.Sprint(warningCount) + " warnings\n\n")
 	} else {
-		reportStr.WriteString(color.RedString(fmt.Sprint(policyCount) + " checks, " + fmt.Sprint(failureCount) + " failures, " + fmt.Sprint(warningCount) + " warnings\n\n"))
+		reportStr.WriteString(color.RedString(fmt.Sprint(ruleCount) + " checks, " + fmt.Sprint(failureCount) + " failures, " + fmt.Sprint(warningCount) + " warnings\n\n"))
 	}
 
 	for i, severityLevel := range orderedSeverityLevels {
@@ -309,11 +310,11 @@ func checkAndWriteFailureSummaryToString(
 		if i > 0 {
 			reportStr.WriteString("\n")
 		}
-		reportStr.WriteString(formatSeverity(severityLevel) + fmt.Sprint(len(policyResults[severityLevel])))
-		if len(policyFailures[severityLevel]) > 0 {
-			policyIds := maps.Keys(policyFailures[severityLevel])
-			sort.Strings(policyIds)
-			reportStr.WriteString(" (" + strings.Join(policyIds, ", ") + ")")
+		reportStr.WriteString(formatSeverity(severityLevel) + fmt.Sprint(len(results[severityLevel])))
+		if len(failures[severityLevel]) > 0 {
+			ruleIds := maps.Keys(failures[severityLevel])
+			sort.Strings(ruleIds)
+			reportStr.WriteString(" (" + strings.Join(ruleIds, ", ") + ")")
 		}
 	}
 
@@ -322,9 +323,9 @@ func checkAndWriteFailureSummaryToString(
 	return false
 }
 
-func writeFailureToString(reportStr *strings.Builder, result Result, policySeverity string) {
+func writeFailureToString(reportStr *strings.Builder, result Result, severity string) {
 	reportStr.WriteString("\n\n")
-	reportStr.WriteString(formatSeverity(policySeverity))
+	reportStr.WriteString(formatSeverity(severity))
 	reportStr.WriteString(result.PolicyDescription + " [" + result.PolicyDSRID + "]" + "\n")
 	reportStr.WriteString(color.HiBlackString("https://curio.sh/reference/rules/" + result.PolicyDisplayId + "\n"))
 	reportStr.WriteString(color.HiBlackString("To skip this rule, use the flag --skip-rule=" + result.PolicyDisplayId + "\n"))
@@ -340,12 +341,12 @@ func writeFailureToString(reportStr *strings.Builder, result Result, policySever
 	}
 }
 
-func formatSeverity(policySeverity string) string {
-	severityColorFn, ok := severityColorFns[policySeverity]
+func formatSeverity(severity string) string {
+	severityColorFn, ok := severityColorFns[severity]
 	if !ok {
-		return strings.ToUpper(policySeverity)
+		return strings.ToUpper(severity)
 	}
-	return severityColorFn(strings.ToUpper(policySeverity + ": "))
+	return severityColorFn(strings.ToUpper(severity + ": "))
 }
 
 func highlightCodeExtract(fileName string, lineNumber int, extractStartLineNumber int, extract string) string {
