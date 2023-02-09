@@ -8,6 +8,7 @@ import (
 	"strings"
 
 	"github.com/bearer/curio/pkg/flag"
+	"golang.org/x/exp/maps"
 	"gopkg.in/yaml.v3"
 )
 
@@ -161,7 +162,7 @@ func buildRules(definitions map[string]RuleDefinition, enabledRules map[string]s
 			Trigger:            definition.Trigger,
 			SkipDataTypes:      definition.SkipDataTypes,
 			OnlyDataTypes:      definition.OnlyDataTypes,
-			Severity:           definition.Severity,
+			Severity:           mapSeverityKeysToCategories(definition.Severity),
 			Description:        definition.Metadata.Description,
 			RemediationMessage: definition.Metadata.RemediationMessage,
 			Stored:             definition.Stored,
@@ -186,4 +187,19 @@ func buildRules(definitions map[string]RuleDefinition, enabledRules map[string]s
 	}
 
 	return rules
+}
+
+func mapSeverityKeysToCategories(ruleSeverity map[string]string) map[string]string {
+	// translate data category attributes to data category names
+	for _, key := range maps.Keys(ruleSeverity) {
+		switch key {
+		case "PD":
+			ruleSeverity["Personal Data"] = ruleSeverity[key]
+		case "PD(S)":
+			ruleSeverity["Personal Data (Sensitive)"] = ruleSeverity[key]
+		default:
+		}
+	}
+
+	return ruleSeverity
 }
