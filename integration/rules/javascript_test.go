@@ -51,3 +51,13 @@ func TestJavascriptThirdPartySentryDataflow(t *testing.T) {
 	t.Parallel()
 	runRulesTest("javascript/third_parties/sentry", "dataflow", "javascript_third_parties_sentry", t)
 }
+
+func TestJavascriptLangExceptionSummary(t *testing.T) {
+	t.Parallel()
+	runRulesTest("javascript/lang/exception", "summary", "javascript_lang_exception", t)
+}
+
+func TestJavascriptLangExceptionDataflow(t *testing.T) {
+	t.Parallel()
+	runRulesTest("javascript/lang/exception", "dataflow", "javascript_lang_exception", t)
+}
