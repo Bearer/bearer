@@ -19,7 +19,13 @@ import (
 )
 
 var (
-	variableLookupParents = []string{"pair", "arguments", "binary_expression", "template_substitution", "array"}
+	variableLookupParents = []string{
+		"pair",
+		"arguments",
+		"binary_expression",
+		"template_substitution",
+		"array",
+	}
 
 	anonymousPatternNodeParentTypes = []string{}
 	patternMatchNodeContainerTypes  = []string{}
@@ -43,19 +49,19 @@ func (implementation *javascriptImplementation) SitterLanguage() *sitter.Languag
 	return javascript.GetLanguage()
 }
 
-func (implementation *javascriptImplementation) AnalyzeFlow(rootNode *tree.Node) error {
-	scope := make(map[string]*tree.Node)
+func (*javascriptImplementation) AnalyzeFlow(rootNode *tree.Node) error {
+	scope := implementation.NewScope(nil)
 
 	return rootNode.Walk(func(node *tree.Node, visitChildren func() error) error {
 		switch node.Type() {
-		case "function":
-			scope = make(map[string]*tree.Node)
 		// () => {}
-		case "arrow_function":
-			scope = make(map[string]*tree.Node)
 		// function getName() {}
-		case "method_definition":
-			scope = make(map[string]*tree.Node)
+		case "function", "arrow_function", "method_definition":
+			previousScope := scope
+			scope = implementation.NewScope(previousScope)
+			err := visitChildren()
+			scope = previousScope
+			return err
 		// user = ...
 		case "assignment_expression":
 			left := node.ChildByFieldName("left")
@@ -64,7 +70,7 @@ func (implementation *javascriptImplementation) AnalyzeFlow(rootNode *tree.Node)
 			if left.Type() == "identifier" {
 				err := visitChildren()
 
-				scope[left.Content()] = node
+				scope.Assign(left.Content(), node)
 				node.UnifyWith(right)
 
 				return err
@@ -79,7 +85,7 @@ func (implementation *javascriptImplementation) AnalyzeFlow(rootNode *tree.Node)
 			if name.Type() == "identifier" {
 				err := visitChildren()
 
-				scope[name.Content()] = node
+				scope.Assign(name.Content(), node)
 				node.UnifyWith(value)
 
 				return err
@@ -94,21 +100,20 @@ func (implementation *javascriptImplementation) AnalyzeFlow(rootNode *tree.Node)
 				(parent.Type() == "assignment_expression" && node.Equal(parent.ChildByFieldName("right"))) ||
 				(parent.Type() == "variable_declarator" && node.Equal(parent.ChildByFieldName("value"))) ||
 				(parent.Type() == "member_expression" && node.Equal(parent.ChildByFieldName("object"))) ||
+				(parent.Type() == "call_expression" && node.Equal(parent.ChildByFieldName("function"))) ||
 				(parent.Type() == "subscript_expression" && node.Equal(parent.ChildByFieldName("object"))) {
-				scopedNode := scope[node.Content()]
-				if scopedNode != nil {
+				if scopedNode := scope.Lookup(node.Content()); scopedNode != nil {
 					node.UnifyWith(scopedNode)
 				}
 			}
 
 			if parent.Type() == "formal_parameters" {
-				scope[node.Content()] = node
+				scope.Assign(node.Content(), node)
 			}
 		case "property_identifier":
 			parent := node.Parent()
 			if parent != nil && slice.Contains(variableLookupParents, parent.Type()) {
-				scopedNode := scope[node.Content()]
-				if scopedNode != nil {
+				if scopedNode := scope.Lookup(node.Content()); scopedNode != nil {
 					node.UnifyWith(scopedNode)
 				}
 			}
