@@ -124,4 +124,6 @@ func (detector *propertyDetector) getMethod(
 
 func (detector *propertyDetector) Close() {
 	detector.pairQuery.Close()
+	detector.functionNameQuery.Close()
+	detector.methodNameQuery.Close()
 }

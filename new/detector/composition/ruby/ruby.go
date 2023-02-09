@@ -121,6 +121,10 @@ func (composition *Composition) Close() {
 }
 
 func (composition *Composition) DetectFromFile(file *file.FileInfo) ([]*detectortypes.Detection, error) {
+	return composition.DetectFromFileWithTypes(file, composition.customDetectorTypes)
+}
+
+func (composition *Composition) DetectFromFileWithTypes(file *file.FileInfo, detectorTypes []string) ([]*detectortypes.Detection, error) {
 	if file.Language != "Ruby" {
 		return nil, nil
 	}
@@ -138,7 +142,7 @@ func (composition *Composition) DetectFromFile(file *file.FileInfo) ([]*detector
 	evaluator := evaluator.New(composition.lang, composition.detectorSet, tree, file.FileInfo.Name())
 
 	var result []*detectortypes.Detection
-	for _, detectorType := range composition.customDetectorTypes {
+	for _, detectorType := range detectorTypes {
 		detections, err := evaluator.ForTree(tree.RootNode(), detectorType, false)
 		if err != nil {
 			return nil, err
