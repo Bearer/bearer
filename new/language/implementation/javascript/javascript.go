@@ -191,6 +191,10 @@ func (implementation *javascriptImplementation) PatternMatchNodeContainerTypes()
 	return patternMatchNodeContainerTypes
 }
 
+func (*javascriptImplementation) PatternLeafContentTypes() []string {
+	return []string{"identifier", "property_identifier"}
+}
+
 func (implementation *javascriptImplementation) PatternIsAnchored(node *tree.Node) bool {
 	parent := node.Parent()
 	if parent == nil {

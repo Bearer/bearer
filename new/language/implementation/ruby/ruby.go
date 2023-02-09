@@ -157,6 +157,15 @@ func produceDummyValue(i int, nodeType string) string {
 	}
 }
 
+func (*rubyImplementation) PatternLeafContentTypes() []string {
+	return []string{
+		// identifiers
+		"identifier", "constant",
+		// datatypes/literals
+		"number", "string_content", "integer", "float", "boolean", "nil", "symbol", "hash_key_symbol",
+	}
+}
+
 func (*rubyImplementation) AnonymousPatternNodeParentTypes() []string {
 	return anonymousPatternNodeParentTypes
 }
