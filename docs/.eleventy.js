@@ -16,7 +16,9 @@ const mdSetup = markdownIt({ html: true })
 
 mdSetup.renderer.rules.code_inline = (tokens, idx, { langPrefix = "" }) => {
   const token = tokens[idx];
-  return `<code class="code-inline ${langPrefix}">${token.content}</code>`;
+  return `<code class="${langPrefix}">${mdSetup.utils.escapeHtml(
+    token.content
+  )}</code>`;
 };
 
 module.exports = function (eleventyConfig) {
