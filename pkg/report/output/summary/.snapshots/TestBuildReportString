@@ -5,38 +5,8 @@ Summary Report
 =====================================
 Checks: 
 
-- Avoid weak encryption libraries. - ruby_lang_weak_encryption [DSR-7/ruby_lang_weak_encryption]
-- Do not leak secrets in the codebase. - gitleaks [DSR-4/gitleaks]
-- Do not send sensitive data as HTTP GET parameters. - ruby_lang_http_get_params [DSR-2/ruby_lang_http_get_params]
-- Do not send sensitive data to Airbrake. - ruby_third_parties_airbrake [DSR-1/ruby_third_parties_airbrake]
-- Do not send sensitive data to Bugsnag. - ruby_third_parties_bugsnag [DSR-1/ruby_third_parties_bugsnag]
-- Do not send sensitive data to Datadog. - ruby_third_parties_datadog [DSR-1/ruby_third_parties_datadog]
-- Do not send sensitive data to Honeybadger. - ruby_third_parties_honeybadger [DSR-1/ruby_third_parties_honeybadger]
-- Do not send sensitive data to New Relic. - ruby_third_parties_new_relic [DSR-1/ruby_third_parties_new_relic]
-- Do not send sensitive data to Open Telemetry. - ruby_third_parties_open_telemetry [DSR-1/ruby_third_parties_open_telemetry]
 - Do not send sensitive data to Rails loggers. - ruby_rails_logger [DSR-5/ruby_rails_logger]
-- Do not send sensitive data to Rollbar. - ruby_third_parties_rollbar [DSR-1/ruby_third_parties_rollbar]
-- Do not send sensitive data to Scout APM. - ruby_third_parties_scout_apm [DSR-1/ruby_third_parties_scout_apm]
-- Do not send sensitive data to Sentry. - ruby_third_parties_sentry [DSR-1/ruby_third_parties_sentry]
-- Do not send sensitive data to exceptions. - ruby_lang_exception [DSR-5/ruby_lang_exception]
-- Do not send sensitive data to loggers. - javascript_lang_logger [DSR-5/javascript_lang_logger]
-- Do not send sensitive data to loggers. - ruby_lang_logger [DSR-5/ruby_lang_logger]
-- Do not set sensitive data to session. - javascript_session [DSR-5/javascript_session]
-- Do not store sensitive data in JWTs. - ruby_lang_jwt [DSR-3/ruby_lang_jwt]
-- Do not store sensitive data in cookies. - ruby_lang_cookies [DSR-3/ruby_lang_cookies]
-- Do not store sensitive data in session cookies. - ruby_rails_session [DSR-3/ruby_rails_session]
-- Do not use weak encryption libraries to encrypt sensitive data. - ruby_lang_weak_encryption_with_data [DSR-7/ruby_lang_weak_encryption_with_data]
-- Do not write sensitive data to static files. - ruby_lang_file_generation [DSR-4/ruby_lang_file_generation]
 - Enable SSL Certificate Verification. - ruby_lang_ssl_verification [DSR-2/ruby_lang_ssl_verification]
-- Enforce stronger password requirements. - ruby_rails_devise_password_length [DSR-8/ruby_rails_devise_password_length]
-- Enforce stronger password requirements. - ruby_rails_password_length [DSR-8/ruby_rails_password_length]
-- Ensure cookies are sent over https. - express_insecure_cookie [DSR-5/express_insecure_cookie]
-- Force all incoming communication through SSL. - ruby_rails_insecure_communication [DSR-2/ruby_rails_insecure_communication]
-- Force application-level encryption when processing sensitive data. - ruby_rails_default_encryption [DSR-10/ruby_rails_default_encryption]
-- Only communicate using HTTPS connections. - ruby_lang_http_insecure [DSR-2/ruby_lang_http_insecure]
-- Only communicate using SFTP connections. - ruby_lang_insecure_ftp [DSR-2/ruby_lang_insecure_ftp]
-- Only communicate with secure SMTP connections. - ruby_rails_insecure_smtp [DSR-2/ruby_rails_insecure_smtp]
-- Only send sensitive data through HTTPS connections. - ruby_lang_http_post_insecure_with_data [DSR-2/ruby_lang_http_post_insecure_with_data]
 
 
 CRITICAL: Do not send sensitive data to Rails loggers. [DSR-5]
@@ -56,7 +26,7 @@ File: config/application.rb:2
 
 =====================================
 
-41 checks, 2 failures, 0 warnings
+2 checks, 2 failures, 0 warnings
 
 CRITICAL: 1 (DSR-5)
 HIGH: 0

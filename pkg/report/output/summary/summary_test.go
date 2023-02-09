@@ -25,6 +25,13 @@ func TestBuildReportString(t *testing.T) {
 		},
 	})
 
+	// limit rules so that test doesn't fail just because
+	// new rules are added
+	config.Rules = map[string]*settings.Rule{
+		"ruby_lang_ssl_verification": config.Rules["ruby_lang_ssl_verification"],
+		"ruby_rails_logger":          config.Rules["ruby_rails_logger"],
+	}
+
 	if err != nil {
 		t.Fatalf("failed to generate config:%s", err)
 	}
