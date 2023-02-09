@@ -1,0 +1,36 @@
+patterns:
+  - pattern: |
+      fs.writeFile($<_>, $<DATA_TYPE>, $<...>)
+    filters:
+      - variable: DATA_TYPE
+        detection: datatype
+  - pattern: |
+      fs.writeFile($<_>, $<DATA_TYPE>, $<_>, ($<_>) => {})
+    filters:
+      - variable: DATA_TYPE
+        detection: datatype
+languages:
+  - javascript
+trigger: local
+severity:
+  default: low
+  PII: critical
+  PHI: medium
+  PD: high
+metadata:
+  description: "Do not write sensitive data to static files."
+  remediation_message: |
+    ## Description
+
+    It is not uncommon to generate logs, backups, or data exports to static file formats. This rule checks if code exists to write sensitive data to static files.
+
+    ## Remediations
+
+    Coming soon.
+
+    <!--
+    ## Resources
+    Coming soon.
+    -->
+  dsr_id: DSR-4
+  id: javascript_lang_file_generation

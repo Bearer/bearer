@@ -61,3 +61,13 @@ func TestJavascriptLangExceptionDataflow(t *testing.T) {
 	t.Parallel()
 	runRulesTest("javascript/lang/exception", "dataflow", "javascript_lang_exception", t)
 }
+
+func TestJavascriptLangFileGenerationSummary(t *testing.T) {
+	t.Parallel()
+	runRulesTest("javascript/lang/file_generation", "summary", "javascript_lang_file_generation", t)
+}
+
+func TestJavascriptLangFileGenerationDataflow(t *testing.T) {
+	t.Parallel()
+	runRulesTest("javascript/lang/file_generation", "dataflow", "javascript_lang_file_generation", t)
+}
