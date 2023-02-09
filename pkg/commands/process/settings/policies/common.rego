@@ -76,26 +76,6 @@ global_data_types contains data_type if {
 	contains(input.rule.only_data_types, data_type.name)
 }
 
-severity_of_datatype(data_type) := "critical" if {
-	some category in input.data_categories
-	category.uuid == data_type.category_uuid
-
-	some group in category.groups
-	group.uuid == sensitive_data_group_uuid
-}
-
-severity_of_datatype(data_type) := "high" if {
-	some category in input.data_categories
-	category.uuid == data_type.category_uuid
-
-	some group in category.groups
-	group.uuid == personal_data_group_uuid
-
-	every group_1 in category.groups {
-		group_1.uuid != sensitive_data_group_uuid
-	}
-}
-
 groups_for_datatype(data_type) := x if {
 	some category in input.data_categories
 	category.uuid == data_type.category_uuid
