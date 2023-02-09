@@ -27,7 +27,7 @@ var passThroughMethods = []string{
 }
 
 var (
-	variableLookupParents = []string{"pair", "argument_list", "interpolation"}
+	variableLookupParents = []string{"pair", "argument_list", "interpolation", "array"}
 
 	anonymousPatternNodeParentTypes = []string{"binary"}
 	patternMatchNodeContainerTypes  = []string{"argument_list"}
