@@ -10,9 +10,45 @@ import (
 	"github.com/bearer/curio/pkg/report/output/summary"
 	"github.com/bearer/curio/pkg/report/schema"
 	"github.com/bradleyjkemp/cupaloy"
+	"github.com/hhatto/gocloc"
 )
 
-func TestSummary(t *testing.T) {
+func TestBuildReportString(t *testing.T) {
+	config, err := generateConfig(flag.ReportOptions{
+		Report: "summary",
+		Severity: map[string]bool{
+			"critical": true,
+			"high":     true,
+			"medium":   true,
+			"low":      true,
+			"warning":  true,
+		},
+	})
+
+	if err != nil {
+		t.Fatalf("failed to generate config:%s", err)
+	}
+
+	dataflow := dummyDataflow()
+
+	results, err := summary.GetOutput(&dataflow, config)
+	if err != nil {
+		t.Fatalf("failed to generate summary output err:%s", err)
+	}
+
+	dummyGoclocLanguage := gocloc.Language{}
+	dummyGoclocResult := gocloc.Result{
+		Total:         &dummyGoclocLanguage,
+		Files:         map[string]*gocloc.ClocFile{},
+		Languages:     map[string]*gocloc.Language{},
+		MaxPathLength: 0,
+	}
+
+	stringBuilder, _ := summary.BuildReportString(config, results, &dummyGoclocResult, &dataflow)
+	cupaloy.SnapshotT(t, stringBuilder.String())
+}
+
+func TestGetOutput(t *testing.T) {
 	config, err := generateConfig(flag.ReportOptions{
 		Report: "summary",
 		Severity: map[string]bool{
@@ -38,7 +74,7 @@ func TestSummary(t *testing.T) {
 	cupaloy.SnapshotT(t, res)
 }
 
-func TestSummaryWithSeverity(t *testing.T) {
+func TestTestGetOutputWithSeverity(t *testing.T) {
 	config, err := generateConfig(flag.ReportOptions{
 		Report: "summary",
 		Severity: map[string]bool{
@@ -78,7 +114,28 @@ func generateConfig(reportOptions flag.ReportOptions) (settings.Config, error) {
 
 func dummyDataflow() dataflow.DataFlow {
 	subject := "User"
-	loggerRisk := types.RiskDetector{
+	riskLocation := types.RiskLocation{
+		Filename:    "config/application.rb",
+		LineNumber:  2,
+		FieldName:   "",
+		ObjectName:  "",
+		SubjectName: &subject,
+		Parent: &schema.Parent{
+			LineNumber: 2,
+			Content:    "http.verify_mode = OpenSSL::SSL::VERIFY_NONE",
+		},
+	}
+	lowRisk := types.RiskDetection{
+		DetectorID: "ruby_lang_ssl_verification",
+		Locations: []types.RiskDetectionLocation{
+			{
+				Content:      "http.verify_mode = OpenSSL::SSL::VERIFY_NONE",
+				RiskLocation: &riskLocation,
+			},
+		},
+	}
+
+	criticalRisk := types.RiskDetector{
 		DetectorID: "ruby_rails_logger",
 		DataTypes: []types.RiskDatatype{
 			{
@@ -100,64 +157,28 @@ func dummyDataflow() dataflow.DataFlow {
 					},
 				},
 			},
-			{
-				Name:         "Browsing Behavior",
-				Stored:       false,
-				UUID:         "c73ae276-b1b1-4b70-b6d5-ed73a83e87ed",
-				CategoryUUID: "8099225c-7e49-414f-aac2-e7045379bb40",
-				Locations: []types.RiskLocation{
-					{
-						Filename:    "pkg/datatype_leak.rb",
-						LineNumber:  2,
-						FieldName:   "browsing_behavior",
-						ObjectName:  "user",
-						SubjectName: &subject,
-						Parent: &schema.Parent{
-							LineNumber: 2,
-							Content:    "Rails.logger.info(user.browsing_behavior)",
-						},
-					},
-				},
-			},
 		},
 	}
 
-	risks := make([]interface{}, 1)
-	risks[0] = loggerRisk
+	// build risk []interface
+	risks := make([]interface{}, 2)
+	risks[0] = criticalRisk
+	risks[1] = lowRisk
 
 	return dataflow.DataFlow{
 		Datatypes: []types.Datatype{
 			{
 				Name:         "Email Address",
-				UUID:         "22e24c62-82d3-4b72-827c-e261533331bd",
-				CategoryUUID: "cef587dd-76db-430b-9e18-7b031e1a193b",
+				UUID:         "02bb0d3a-2c8c-4842-be1c-c057f0dccd63",
+				CategoryUUID: "dd88aee5-9d40-4ad2-8983-0c791ddec47c",
 				Detectors: []types.DatatypeDetector{
 					{
 						Name: "ruby",
 						Locations: []types.DatatypeLocation{
 							{
-								Filename:    "pkg/datatype_leak.rb",
+								Filename:    "app/model/user.rb",
 								LineNumber:  1,
 								FieldName:   "email",
-								ObjectName:  "user",
-								SubjectName: &subject,
-							},
-						},
-					},
-				},
-			},
-			{
-				Name:         "Browsing Behavior",
-				UUID:         "c73ae276-b1b1-4b70-b6d5-ed73a83e87ed",
-				CategoryUUID: "8099225c-7e49-414f-aac2-e7045379bb40",
-				Detectors: []types.DatatypeDetector{
-					{
-						Name: "ruby",
-						Locations: []types.DatatypeLocation{
-							{
-								Filename:    "pkg/datatype_leak.rb",
-								LineNumber:  2,
-								FieldName:   "browsing_behavior",
 								ObjectName:  "user",
 								SubjectName: &subject,
 							},
