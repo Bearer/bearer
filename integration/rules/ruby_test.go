@@ -194,6 +194,16 @@ func TestRubyThirdPartiesAlgoliaDataflow(t *testing.T) {
 	runRulesTest("ruby/third_parties/algolia", "dataflow", "ruby_third_parties_algolia", t)
 }
 
+func TestRubyThirdPartiesBigQuerySummary(t *testing.T) {
+	t.Parallel()
+	runRulesTest("ruby/third_parties/bigquery", "summary", "ruby_third_parties_bigquery", t)
+}
+
+func TestRubyThirdPartiesBigQueryDataflow(t *testing.T) {
+	t.Parallel()
+	runRulesTest("ruby/third_parties/bigquery", "dataflow", "ruby_third_parties_bigquery", t)
+}
+
 func TestRubyThirdPartiesDatadogSummary(t *testing.T) {
 	t.Parallel()
 	runRulesTest("ruby/third_parties/datadog", "summary", "ruby_third_parties_datadog", t)

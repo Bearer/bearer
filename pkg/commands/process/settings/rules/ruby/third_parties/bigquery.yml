@@ -1,0 +1,81 @@
+patterns:
+  - pattern: |
+      $<INSERTER>.insert($<...>$<DATA_TYPE>$<...>)$<...>
+    filters:
+      - either:
+        - variable: INSERTER
+          detection: ruby_third_parties_bigquery_dataset
+        - variable: INSERTER
+          detection: ruby_third_parties_bigquery_insert_async
+        - variable: INSERTER
+          detection: ruby_third_parties_bigquery_table
+      - either:
+        - variable: DATA_TYPE
+          detection: datatype
+languages:
+  - ruby
+auxiliary:
+  - id: ruby_third_parties_bigquery_client
+    patterns:
+      - |
+        Google::Cloud::Bigquery.new
+      - |
+        Google::Cloud::Bigquery.new()
+  - id: ruby_third_parties_bigquery_dataset
+    patterns:
+      - pattern: |
+          $<CLIENT>.dataset()
+        filters:
+          - variable: CLIENT
+            detection: ruby_third_parties_bigquery_client
+  - id: ruby_third_parties_bigquery_table
+    patterns:
+      - pattern: |
+          $<DATASET>.table()
+        filters:
+          - variable: DATASET
+            detection: ruby_third_parties_bigquery_dataset
+      - pattern: |
+          $<DATASET>.create_table()$<...>
+        filters:
+          - variable: DATASET
+            detection: ruby_third_parties_bigquery_dataset
+  - id: ruby_third_parties_bigquery_insert_async
+    patterns:
+      - pattern: |
+          $<DATASET>.insert_async()$<...>
+        filters:
+          - variable: DATASET
+            detection: ruby_third_parties_bigquery_dataset
+      - pattern: |
+          $<TABLE>.insert_async$<...>
+        filters:
+          - variable: TABLE
+            detection: ruby_third_parties_bigquery_table
+      - pattern: |
+          $<TABLE>.insert_async()$<...>
+        filters:
+          - variable: TABLE
+            detection: ruby_third_parties_bigquery_table
+trigger: local
+severity:
+  default: low
+  PII: critical
+  PHI: medium
+  PD: high
+skip_data_types:
+  - "Unique Identifier"
+metadata:
+  description: "Do not store sensitive data in BigQuery."
+  remediation_message: |
+    ## Description
+    Leaking sensitive data to third-party data tools is a common cause of data leaks and can lead to data breaches. This rule looks for instances of sensitive data sent to BigQuery.
+    <!--
+    ## Remediations
+    Coming soon.
+    -->
+    ## Resources
+    - [BigQuery docs](https://cloud.google.com/ruby/docs)
+  dsr_id: DSR-6
+  associated_recipe: Google Cloud BigQuery
+  id: ruby_third_parties_bigquery
