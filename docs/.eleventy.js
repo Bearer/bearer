@@ -16,7 +16,7 @@ const mdSetup = markdownIt({ html: true })
 
 mdSetup.renderer.rules.code_inline = (tokens, idx, { langPrefix = "" }) => {
   const token = tokens[idx];
-  return `<code class="code-inline ${langPrefix}">${mdSetup.utils.escapeHtml(
+  return `<code class="${langPrefix}">${mdSetup.utils.escapeHtml(
     token.content
   )}</code>`;
 };
