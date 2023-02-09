@@ -1,0 +1,47 @@
+patterns:
+  - pattern: |
+      $<VAR>.update($<DATA_TYPE>)
+    filters:
+      - variable: VAR
+        detection: create_hash
+      - variable: DATA_TYPE
+        detection: datatype
+languages:
+  - javascript
+auxiliary:
+  - id: create_hash
+    patterns:
+      - pattern: |
+          crypto.$<METHOD>($<ALGORITHM>$<...>)
+        filters:
+          - variable: METHOD
+            values:
+              - createHmac
+              - createHash
+          - variable: ALGORITHM
+            values:
+              - '"md5"'
+              - '"sha1"'
+trigger: local
+severity:
+  default: low
+  PII: critical
+  PHI: medium
+  PD: high
+skip_data_types:
+  - "Unique Identifier"
+metadata:
+  description: "Do not weak encrypt sensitive information"
+  remediation_message: |
+    ## Description
+
+    Sensitive data should be encrypted with strong encryption algorithms
+
+    ## Remediations
+    TODO
+
+    <!--
+    ## Resources
+    Coming soon.
+  dsr_id: "DSR-5"
+  id: "javascript_weak_encryption"

@@ -59,6 +59,17 @@ func (node *Node) ChildCount() int {
 	return int(node.sitterNode.ChildCount())
 }
 
+func (node *Node) NamedChildCount() int {
+	count := 0
+	for i := 0; i < int(node.sitterNode.ChildCount()); i++ {
+		if node.sitterNode.Child(i).IsNamed() {
+			count++
+		}
+	}
+
+	return count
+}
+
 func (node *Node) Child(i int) *Node {
 	return node.tree.wrap(node.sitterNode.Child(i))
 }

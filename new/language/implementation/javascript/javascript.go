@@ -175,14 +175,8 @@ func (implementation *javascriptImplementation) ExtractPatternMatchNode(input st
 	return string(inputBytes[0:match[0]]) + string(inputBytes[match[1]:]), match[0], nil
 }
 
-// TODO: See if anything needs to be added here
 func produceDummyValue(i int, nodeType string) string {
-	switch nodeType {
-	case "identifier", "call":
-		return "curioVar" + fmt.Sprint(i)
-	default:
-		return "CurioVar" + fmt.Sprint(i)
-	}
+	return "CurioVar" + fmt.Sprint(i)
 }
 
 // TODO: See if anything needs to be added here
@@ -207,6 +201,15 @@ func (implementation *javascriptImplementation) IsTerminalDetectionNode(node *tr
 
 func (implementation *javascriptImplementation) PatternMatchNodeContainerTypes() []string {
 	return patternMatchNodeContainerTypes
+}
+
+func (*javascriptImplementation) PatternLeafContentTypes() []string {
+	return []string{
+		// identifiers
+		"identifier", "property_identifier", "shorthand_property_identifier",
+		// datatypes/literals
+		"template_string", "string", "number", "null", "true", "false",
+	}
 }
 
 func (implementation *javascriptImplementation) PatternIsAnchored(node *tree.Node) bool {

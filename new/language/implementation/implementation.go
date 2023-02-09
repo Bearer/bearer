@@ -23,7 +23,7 @@ type Implementation interface {
 	// of the variables. Dummy values are needed to allow Tree Sitter to parse
 	// the pattern without error.
 	ExtractPatternVariables(input string) (string, []patternquerytypes.Variable, error)
-	// FindPatternUnanchoredPoints returns pairs of start and end offsets for the
+	// FindPatternMatchNode returns pairs of start and end offsets for the
 	// pattern match node. This is to allow different syntax for specifying the
 	// match node in different languages. There can only be one match node in a
 	// pattern, but multiple are supported here to avoid implementing the error
@@ -116,6 +116,7 @@ type Implementation interface {
 	// if we want to pull both datatypes inside `child()` as well as inside `info()`
 	// we want to ignore member_expressions as roots.
 	IsRootOfRuleQuery(node *tree.Node) bool
+	PatternLeafContentTypes() []string
 }
 
 type Scope struct {
