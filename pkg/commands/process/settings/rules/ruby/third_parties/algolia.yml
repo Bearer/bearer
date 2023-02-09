@@ -1,0 +1,49 @@
+patterns:
+  - pattern: |
+      $<INDEX>.$<METHOD>($<DATA_TYPE>$<...>)
+    filters:
+      - variable: INDEX
+        detection: ruby_third_parties_algolia_index
+      - variable: METHOD
+        values:
+          - save_object
+          - save_objects
+      - variable: DATA_TYPE
+        detection: datatype
+languages:
+  - ruby
+auxiliary:
+  - id: ruby_third_parties_algolia_client
+    patterns:
+      - |
+        Algolia::Search::Client.create()
+  - id: ruby_third_parties_algolia_index
+    patterns:
+      - pattern: |
+          $<CLIENT>.init_index()
+        filters:
+          - variable: CLIENT
+            detection: ruby_third_parties_algolia_client
+trigger: local
+severity:
+  default: low
+  PII: critical
+  PHI: medium
+  PD: high
+skip_data_types:
+  - "Unique Identifier"
+metadata:
+  description: "Do not store sensitive data in Algolia."
+  remediation_message: |
+    ## Description
+    TODO
+
+    ## Remediations
+
+    TODO
+
+    ## Resources
+    - [Algolia docs](https://www.algolia.com/doc/)
+  dsr_id: DSR-6
+  associated_recipe: Algolia
+  id: ruby_third_parties_algolia

@@ -97,7 +97,6 @@ func (path *Path) Exists() bool {
 	}
 
 	if err != nil {
-		log.Debug().Msgf("file '%s' doesn't exist", path.AbsolutePath)
 		return false
 	}
 
