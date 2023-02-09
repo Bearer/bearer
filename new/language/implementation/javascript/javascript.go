@@ -19,7 +19,7 @@ import (
 )
 
 var (
-	variableLookupParents = []string{"pair", "arguments", "binary_expression", "template_substitution"}
+	variableLookupParents = []string{"pair", "arguments", "binary_expression", "template_substitution", "array"}
 
 	anonymousPatternNodeParentTypes = []string{}
 	patternMatchNodeContainerTypes  = []string{}
@@ -201,6 +201,15 @@ func (implementation *javascriptImplementation) IsTerminalDetectionNode(node *tr
 
 func (implementation *javascriptImplementation) PatternMatchNodeContainerTypes() []string {
 	return patternMatchNodeContainerTypes
+}
+
+func (*javascriptImplementation) PatternLeafContentTypes() []string {
+	return []string{
+		// identifiers
+		"identifier", "property_identifier", "shorthand_property_identifier",
+		// datatypes/literals
+		"template_string", "string", "number", "null", "true", "false",
+	}
 }
 
 func (implementation *javascriptImplementation) PatternIsAnchored(node *tree.Node) bool {

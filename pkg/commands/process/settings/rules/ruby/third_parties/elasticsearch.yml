@@ -1,0 +1,57 @@
+patterns:
+  - pattern: |
+      $<CLIENT>.$<METHOD>(body: $<DATA_TYPE>)
+    filters:
+      - variable: CLIENT
+        detection: ruby_third_parties_elasticsearch_client
+      - variable: METHOD
+        values:
+          - bulk
+          - index
+          - update
+      - variable: DATA_TYPE
+        detection: datatype
+  - pattern: |
+      $<CLIENT>.$<METHOD>({ body: $<DATA_TYPE> })
+    filters:
+      - variable: CLIENT
+        detection: ruby_third_parties_elasticsearch_client
+      - variable: METHOD
+        values:
+          - bulk
+          - index
+          - update
+      - variable: DATA_TYPE
+        detection: datatype
+languages:
+  - ruby
+auxiliary:
+  - id: ruby_third_parties_elasticsearch_client
+    patterns:
+      - |
+        Elasticsearch::Client.new()
+      - |
+        Elasticsearch::Client.new
+trigger: local
+severity:
+  default: low
+  PII: critical
+  PHI: medium
+  PD: high
+skip_data_types:
+  - "Unique Identifier"
+metadata:
+  description: "Do not store sensitive data in Elasticsearch."
+  remediation_message: |
+    ## Description
+    TODO
+
+    ## Remediations
+
+    TODO
+
+    ## Resources
+    - [Elasticsearch docs](https://www.elastic.co/guide/en/elasticsearch/client/ruby-api/current/index.html)
+  dsr_id: DSR-6
+  associated_recipe: Elasticsearch
+  id: ruby_third_parties_elasticsearch

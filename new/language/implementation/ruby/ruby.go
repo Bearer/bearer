@@ -27,7 +27,7 @@ var passThroughMethods = []string{
 }
 
 var (
-	variableLookupParents = []string{"pair", "argument_list", "interpolation"}
+	variableLookupParents = []string{"pair", "argument_list", "interpolation", "array"}
 
 	anonymousPatternNodeParentTypes = []string{"binary"}
 	patternMatchNodeContainerTypes  = []string{"argument_list"}
@@ -154,6 +154,15 @@ func produceDummyValue(i int, nodeType string) string {
 		return ":curioVar" + fmt.Sprint(i)
 	default:
 		return "CurioVar" + fmt.Sprint(i)
+	}
+}
+
+func (*rubyImplementation) PatternLeafContentTypes() []string {
+	return []string{
+		// identifiers
+		"identifier", "constant",
+		// datatypes/literals
+		"number", "string_content", "integer", "float", "boolean", "nil", "symbol", "hash_key_symbol",
 	}
 }
 

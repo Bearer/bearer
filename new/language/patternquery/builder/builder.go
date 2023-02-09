@@ -184,6 +184,19 @@ func (builder *builder) compileAnonymousNode(node *tree.Node) {
 
 // Leaves match their type and content
 func (builder *builder) compileLeafNode(node *tree.Node) {
+	if !slices.Contains(builder.langImplementation.PatternLeafContentTypes(), node.Type()) {
+		builder.write("[")
+
+		for _, nodeType := range builder.langImplementation.PatternNodeTypes(node) {
+			builder.write(" (")
+			builder.write(nodeType)
+			builder.write(" )")
+		}
+
+		builder.write("]")
+		return
+	}
+
 	paramName := builder.newParam()
 	paramContent := make(map[string]string)
 	builder.paramToContent[paramName] = paramContent

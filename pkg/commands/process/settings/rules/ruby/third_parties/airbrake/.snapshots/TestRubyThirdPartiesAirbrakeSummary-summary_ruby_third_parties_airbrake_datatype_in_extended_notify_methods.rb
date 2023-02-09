@@ -1,8 +1,8 @@
 critical:
-    - policy_name: ""
-      policy_dsrid: DSR-1
-      policy_display_id: ruby_third_parties_airbrake
-      policy_description: Do not send sensitive data to Airbrake.
+    - rule_dsrid: DSR-1
+      rule_display_id: ruby_third_parties_airbrake
+      rule_description: Do not send sensitive data to Airbrake.
+      rule_documentation_url: https://curio.sh/reference/rules/ruby_third_parties_airbrake
       line_number: 3
       filename: pkg/commands/process/settings/rules/ruby/third_parties/airbrake/testdata/datatype_in_extended_notify_methods.rb
       category_groups:
@@ -15,10 +15,10 @@ critical:
           status_code: 200,
           timing: 123.45 # ms
         )
-    - policy_name: ""
-      policy_dsrid: DSR-1
-      policy_display_id: ruby_third_parties_airbrake
-      policy_description: Do not send sensitive data to Airbrake.
+    - rule_dsrid: DSR-1
+      rule_display_id: ruby_third_parties_airbrake
+      rule_description: Do not send sensitive data to Airbrake.
+      rule_documentation_url: https://curio.sh/reference/rules/ruby_third_parties_airbrake
       line_number: 9
       filename: pkg/commands/process/settings/rules/ruby/third_parties/airbrake/testdata/datatype_in_extended_notify_methods.rb
       category_groups:
@@ -31,10 +31,10 @@ critical:
           status_code: 200,
           timing: 123.45 # ms
         )
-    - policy_name: ""
-      policy_dsrid: DSR-1
-      policy_display_id: ruby_third_parties_airbrake
-      policy_description: Do not send sensitive data to Airbrake.
+    - rule_dsrid: DSR-1
+      rule_display_id: ruby_third_parties_airbrake
+      rule_description: Do not send sensitive data to Airbrake.
+      rule_documentation_url: https://curio.sh/reference/rules/ruby_third_parties_airbrake
       line_number: 17
       filename: pkg/commands/process/settings/rules/ruby/third_parties/airbrake/testdata/datatype_in_extended_notify_methods.rb
       category_groups:
@@ -47,10 +47,10 @@ critical:
           },
           request_id: 123
         )
-    - policy_name: ""
-      policy_dsrid: DSR-1
-      policy_display_id: ruby_third_parties_airbrake
-      policy_description: Do not send sensitive data to Airbrake.
+    - rule_dsrid: DSR-1
+      rule_display_id: ruby_third_parties_airbrake
+      rule_description: Do not send sensitive data to Airbrake.
+      rule_documentation_url: https://curio.sh/reference/rules/ruby_third_parties_airbrake
       line_number: 23
       filename: pkg/commands/process/settings/rules/ruby/third_parties/airbrake/testdata/datatype_in_extended_notify_methods.rb
       category_groups:
@@ -63,10 +63,10 @@ critical:
           },
           request_id: 123
         )
-    - policy_name: ""
-      policy_dsrid: DSR-1
-      policy_display_id: ruby_third_parties_airbrake
-      policy_description: Do not send sensitive data to Airbrake.
+    - rule_dsrid: DSR-1
+      rule_display_id: ruby_third_parties_airbrake
+      rule_description: Do not send sensitive data to Airbrake.
+      rule_documentation_url: https://curio.sh/reference/rules/ruby_third_parties_airbrake
       line_number: 31
       filename: pkg/commands/process/settings/rules/ruby/third_parties/airbrake/testdata/datatype_in_extended_notify_methods.rb
       category_groups:
@@ -78,10 +78,10 @@ critical:
           route: "/users/#{user.first_name}",
           query: 'SELECT * FROM foos'
         )
-    - policy_name: ""
-      policy_dsrid: DSR-1
-      policy_display_id: ruby_third_parties_airbrake
-      policy_description: Do not send sensitive data to Airbrake.
+    - rule_dsrid: DSR-1
+      rule_display_id: ruby_third_parties_airbrake
+      rule_description: Do not send sensitive data to Airbrake.
+      rule_documentation_url: https://curio.sh/reference/rules/ruby_third_parties_airbrake
       line_number: 36
       filename: pkg/commands/process/settings/rules/ruby/third_parties/airbrake/testdata/datatype_in_extended_notify_methods.rb
       category_groups:
@@ -93,10 +93,10 @@ critical:
           route: "/users/#{user.first_name}",
           query: 'SELECT * FROM foos'
         )
-    - policy_name: ""
-      policy_dsrid: DSR-1
-      policy_display_id: ruby_third_parties_airbrake
-      policy_description: Do not send sensitive data to Airbrake.
+    - rule_dsrid: DSR-1
+      rule_display_id: ruby_third_parties_airbrake
+      rule_description: Do not send sensitive data to Airbrake.
+      rule_documentation_url: https://curio.sh/reference/rules/ruby_third_parties_airbrake
       line_number: 43
       filename: pkg/commands/process/settings/rules/ruby/third_parties/airbrake/testdata/datatype_in_extended_notify_methods.rb
       category_groups:
@@ -109,10 +109,10 @@ critical:
           },
           request_id: 123
         )
-    - policy_name: ""
-      policy_dsrid: DSR-1
-      policy_display_id: ruby_third_parties_airbrake
-      policy_description: Do not send sensitive data to Airbrake.
+    - rule_dsrid: DSR-1
+      rule_display_id: ruby_third_parties_airbrake
+      rule_description: Do not send sensitive data to Airbrake.
+      rule_documentation_url: https://curio.sh/reference/rules/ruby_third_parties_airbrake
       line_number: 49
       filename: pkg/commands/process/settings/rules/ruby/third_parties/airbrake/testdata/datatype_in_extended_notify_methods.rb
       category_groups:
@@ -125,10 +125,10 @@ critical:
           },
           request_id: 123
         )
-    - policy_name: ""
-      policy_dsrid: DSR-1
-      policy_display_id: ruby_third_parties_airbrake
-      policy_description: Do not send sensitive data to Airbrake.
+    - rule_dsrid: DSR-1
+      rule_display_id: ruby_third_parties_airbrake
+      rule_description: Do not send sensitive data to Airbrake.
+      rule_documentation_url: https://curio.sh/reference/rules/ruby_third_parties_airbrake
       line_number: 57
       filename: pkg/commands/process/settings/rules/ruby/third_parties/airbrake/testdata/datatype_in_extended_notify_methods.rb
       category_groups:
@@ -142,10 +142,10 @@ critical:
           groups: { db: 24.0, view: 0.4 }, # ms
           timing: 123.45 # ms
         )
-    - policy_name: ""
-      policy_dsrid: DSR-1
-      policy_display_id: ruby_third_parties_airbrake
-      policy_description: Do not send sensitive data to Airbrake.
+    - rule_dsrid: DSR-1
+      rule_display_id: ruby_third_parties_airbrake
+      rule_description: Do not send sensitive data to Airbrake.
+      rule_documentation_url: https://curio.sh/reference/rules/ruby_third_parties_airbrake
       line_number: 64
       filename: pkg/commands/process/settings/rules/ruby/third_parties/airbrake/testdata/datatype_in_extended_notify_methods.rb
       category_groups:
@@ -159,10 +159,10 @@ critical:
           groups: { db: 24.0, view: 0.4 }, # ms
           timing: 123.45 # ms
         )
-    - policy_name: ""
-      policy_dsrid: DSR-1
-      policy_display_id: ruby_third_parties_airbrake
-      policy_description: Do not send sensitive data to Airbrake.
+    - rule_dsrid: DSR-1
+      rule_display_id: ruby_third_parties_airbrake
+      rule_description: Do not send sensitive data to Airbrake.
+      rule_documentation_url: https://curio.sh/reference/rules/ruby_third_parties_airbrake
       line_number: 73
       filename: pkg/commands/process/settings/rules/ruby/third_parties/airbrake/testdata/datatype_in_extended_notify_methods.rb
       category_groups:
@@ -175,10 +175,10 @@ critical:
           },
           request_id: 123
         )
-    - policy_name: ""
-      policy_dsrid: DSR-1
-      policy_display_id: ruby_third_parties_airbrake
-      policy_description: Do not send sensitive data to Airbrake.
+    - rule_dsrid: DSR-1
+      rule_display_id: ruby_third_parties_airbrake
+      rule_description: Do not send sensitive data to Airbrake.
+      rule_documentation_url: https://curio.sh/reference/rules/ruby_third_parties_airbrake
       line_number: 79
       filename: pkg/commands/process/settings/rules/ruby/third_parties/airbrake/testdata/datatype_in_extended_notify_methods.rb
       category_groups:
@@ -191,10 +191,10 @@ critical:
           },
           request_id: 123
         )
-    - policy_name: ""
-      policy_dsrid: DSR-1
-      policy_display_id: ruby_third_parties_airbrake
-      policy_description: Do not send sensitive data to Airbrake.
+    - rule_dsrid: DSR-1
+      rule_display_id: ruby_third_parties_airbrake
+      rule_description: Do not send sensitive data to Airbrake.
+      rule_documentation_url: https://curio.sh/reference/rules/ruby_third_parties_airbrake
       line_number: 101
       filename: pkg/commands/process/settings/rules/ruby/third_parties/airbrake/testdata/datatype_in_extended_notify_methods.rb
       category_groups:
@@ -207,10 +207,10 @@ critical:
           },
           job_id: 123
         )
-    - policy_name: ""
-      policy_dsrid: DSR-1
-      policy_display_id: ruby_third_parties_airbrake
-      policy_description: Do not send sensitive data to Airbrake.
+    - rule_dsrid: DSR-1
+      rule_display_id: ruby_third_parties_airbrake
+      rule_description: Do not send sensitive data to Airbrake.
+      rule_documentation_url: https://curio.sh/reference/rules/ruby_third_parties_airbrake
       line_number: 107
       filename: pkg/commands/process/settings/rules/ruby/third_parties/airbrake/testdata/datatype_in_extended_notify_methods.rb
       category_groups:

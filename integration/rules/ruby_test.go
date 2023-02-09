@@ -204,6 +204,16 @@ func TestRubyThirdPartiesDatadogDataflow(t *testing.T) {
 	runRulesTest("ruby/third_parties/datadog", "dataflow", "ruby_third_parties_datadog", t)
 }
 
+func TestRubyThirdPartiesElasticsearchSummary(t *testing.T) {
+	t.Parallel()
+	runRulesTest("ruby/third_parties/elasticsearch", "summary", "ruby_third_parties_elasticsearch", t)
+}
+
+func TestRubyThirdPartiesElasticsearchDataflow(t *testing.T) {
+	t.Parallel()
+	runRulesTest("ruby/third_parties/elasticsearch", "dataflow", "ruby_third_parties_elasticsearch", t)
+}
+
 func TestRubyThirdPartiesNewRelicSummary(t *testing.T) {
 	t.Parallel()
 	runRulesTest("ruby/third_parties/new_relic", "summary", "ruby_third_parties_new_relic", t)

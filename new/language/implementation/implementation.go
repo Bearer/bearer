@@ -116,6 +116,7 @@ type Implementation interface {
 	// if we want to pull both datatypes inside `child()` as well as inside `info()`
 	// we want to ignore member_expressions as roots.
 	IsRootOfRuleQuery(node *tree.Node) bool
+	PatternLeafContentTypes() []string
 }
 
 type Scope struct {

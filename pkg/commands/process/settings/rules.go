@@ -8,6 +8,7 @@ import (
 	"strings"
 
 	"github.com/bearer/curio/pkg/flag"
+	"golang.org/x/exp/maps"
 	"gopkg.in/yaml.v3"
 )
 
@@ -22,6 +23,12 @@ func loadRules(externalRuleDirs []string, options flag.RuleOptions) (map[string]
 
 	if err := loadRuleDefinitions(definitions, rulesFs); err != nil {
 		return nil, nil, fmt.Errorf("error loading default rules: %s", err)
+	}
+	// add default documentaiton urls for default rules
+	for id, definition := range definitions {
+		if definition.Metadata.DocumentationUrl == "" {
+			definitions[id].Metadata.DocumentationUrl = "https://curio.sh/reference/rules/" + id
+		}
 	}
 
 	if err := loadRuleDefinitions(builtInDefinitions, builtInRulesFs); err != nil {
@@ -161,7 +168,7 @@ func buildRules(definitions map[string]RuleDefinition, enabledRules map[string]s
 			Trigger:            definition.Trigger,
 			SkipDataTypes:      definition.SkipDataTypes,
 			OnlyDataTypes:      definition.OnlyDataTypes,
-			Severity:           definition.Severity,
+			Severity:           mapSeverityKeysToCategories(definition.Severity),
 			Description:        definition.Metadata.Description,
 			RemediationMessage: definition.Metadata.RemediationMessage,
 			Stored:             definition.Stored,
@@ -172,6 +179,7 @@ func buildRules(definitions map[string]RuleDefinition, enabledRules map[string]s
 			Languages:          definition.Languages,
 			ParamParenting:     definition.ParamParenting,
 			Patterns:           definition.Patterns,
+			DocumentationUrl:   definition.Metadata.DocumentationUrl,
 		}
 
 		for _, auxiliaryDefinition := range definition.Auxiliary {
@@ -186,4 +194,19 @@ func buildRules(definitions map[string]RuleDefinition, enabledRules map[string]s
 	}
 
 	return rules
+}
+
+func mapSeverityKeysToCategories(ruleSeverity map[string]string) map[string]string {
+	// translate data category attributes to data category names
+	for _, key := range maps.Keys(ruleSeverity) {
+		switch key {
+		case "PD":
+			ruleSeverity["Personal Data"] = ruleSeverity[key]
+		case "PD(S)":
+			ruleSeverity["Personal Data (Sensitive)"] = ruleSeverity[key]
+		default:
+		}
+	}
+
+	return ruleSeverity
 }

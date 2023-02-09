@@ -68,6 +68,7 @@ type RuleMetadata struct {
 	DSRID              string `mapstructure:"dsr_id" json:"dsr_id" yaml:"dsr_id"`
 	AssociatedRecipe   string `mapstructure:"associated_recipe" json:"associated_recipe" yaml:"associated_recipe"`
 	ID                 string `mapstructure:"id" json:"id" yaml:"id"`
+	DocumentationUrl   string `mapstructure:"documentation_url" json:"documentation_url" yaml:"documentation_url"`
 }
 
 type RuleDefinition struct {
@@ -87,7 +88,7 @@ type RuleDefinition struct {
 	OnlyDataTypes     []string          `mapstructure:"only_data_types" json:"only_data_types,omitempty" yaml:"only_data_types,omitempty"`
 	OmitParentContent bool              `mapstructure:"omit_parent_content" json:"omit_parent_content,omitempty" yaml:"omit_parent_content,omitempty"`
 	DetailedContext   bool              `mapstructure:"detailed_context" json:"detailed_context,omitempty" yaml:"detailed_context,omitempty"`
-	Metadata          RuleMetadata      `mapstructure:"metadata" json:"metadata" yaml:"metadata"`
+	Metadata          *RuleMetadata     `mapstructure:"metadata" json:"metadata" yaml:"metadata"`
 	Auxiliary         []Auxiliary       `mapstructure:"auxiliary" json:"auxiliary" yaml:"auxiliary"`
 }
 
@@ -130,6 +131,7 @@ type Rule struct {
 	DSRID              string            `mapstructure:"dsr_id" json:"dsr_id" yaml:"dsr_id"`
 	Languages          []string          `mapstructure:"languages" json:"languages" yaml:"languages"`
 	Patterns           []RulePattern     `mapstructure:"patterns" json:"patterns" yaml:"patterns"`
+	DocumentationUrl   string            `mapstructure:"documentation_url" json:"documentation_url" yaml:"documentation_url"`
 
 	// FIXME: remove after refactor of sql
 	Metavars       map[string]MetaVar `mapstructure:"metavars" json:"metavars" yaml:"metavars"`
