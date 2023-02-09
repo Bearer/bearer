@@ -192,7 +192,12 @@ func (implementation *javascriptImplementation) PatternMatchNodeContainerTypes()
 }
 
 func (*javascriptImplementation) PatternLeafContentTypes() []string {
-	return []string{"identifier", "property_identifier"}
+	return []string{
+		// identifiers
+		"identifier", "property_identifier", "shorthand_property_identifier",
+		// datatypes/literals
+		"template_string", "string", "number", "null", "true", "false",
+	}
 }
 
 func (implementation *javascriptImplementation) PatternIsAnchored(node *tree.Node) bool {
