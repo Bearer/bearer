@@ -29,6 +29,13 @@ var severityColorFns = map[string]func(x ...interface{}) string{
 	types.LevelLow:      color.New(color.FgBlue).SprintFunc(),
 	types.LevelWarning:  color.New(color.FgCyan).SprintFunc(),
 }
+var orderedSeverityLevels = [5]string{
+	types.LevelCritical,
+	types.LevelHigh,
+	types.LevelMedium,
+	types.LevelLow,
+	types.LevelWarning,
+}
 
 type PolicyInput struct {
 	PolicyId       string             `json:"policy_id" yaml:"policy_id"`
@@ -162,17 +169,18 @@ func BuildReportString(config settings.Config, results map[string][]Result, line
 	}
 
 	reportPassed := true
-	for _, severityLevel := range maps.Keys(severityForFailure) {
-		if severityForFailure[severityLevel] && severityLevel != types.LevelWarning && len(results[severityLevel]) != 0 {
+	for _, severityLevel := range orderedSeverityLevels {
+		if !severityForFailure[severityLevel] {
+			continue
+		}
+		if severityLevel != types.LevelWarning && len(results[severityLevel]) != 0 {
 			// fail the report if we have failures above the severity threshold
 			reportPassed = false
 		}
 
 		for _, failure := range results[severityLevel] {
 			failures[severityLevel][failure.PolicyDSRID] = true
-			if severityForFailure[severityLevel] {
-				writeFailureToString(reportStr, failure, severityLevel)
-			}
+			writeFailureToString(reportStr, failure, severityLevel)
 		}
 	}
 
@@ -295,13 +303,10 @@ func checkAndWriteFailureSummaryToString(
 		reportStr.WriteString(color.RedString(fmt.Sprint(policyCount) + " checks, " + fmt.Sprint(failureCount) + " failures, " + fmt.Sprint(warningCount) + " warnings\n\n"))
 	}
 
-	for i, severityLevel := range []string{
-		types.LevelCritical,
-		types.LevelHigh,
-		types.LevelMedium,
-		types.LevelLow,
-		types.LevelWarning,
-	} {
+	for i, severityLevel := range orderedSeverityLevels {
+		if !severityForFailure[severityLevel] {
+			continue
+		}
 		if i > 0 {
 			reportStr.WriteString("\n")
 		}
