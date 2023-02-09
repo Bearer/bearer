@@ -8,6 +8,7 @@ import (
 	"strings"
 
 	"github.com/bearer/curio/pkg/flag"
+	"github.com/rs/zerolog/log"
 	"golang.org/x/exp/maps"
 	"gopkg.in/yaml.v3"
 )
@@ -36,6 +37,11 @@ func loadRules(externalRuleDirs []string, options flag.RuleOptions) (map[string]
 	}
 
 	for _, dir := range externalRuleDirs {
+		if strings.HasPrefix(dir, "~/") {
+			dirname, _ := os.UserHomeDir()
+			dir = filepath.Join(dirname, dir[2:])
+		}
+		log.Debug().Msgf("loading external rules from: %s", dir)
 		if err := loadRuleDefinitions(definitions, os.DirFS(dir)); err != nil {
 			return nil, nil, fmt.Errorf("error loading external rules from %s: %w", dir, err)
 		}
