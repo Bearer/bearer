@@ -7,6 +7,7 @@ import (
 	"github.com/bearer/curio/new/language/tree"
 
 	generictypes "github.com/bearer/curio/new/detector/implementation/generic/types"
+	"github.com/bearer/curio/new/detector/implementation/ruby/common"
 	languagetypes "github.com/bearer/curio/new/language/types"
 )
 
@@ -18,7 +19,7 @@ type propertyDetector struct {
 
 func New(lang languagetypes.Language) (types.Detector, error) {
 	// { user: "admin_user" }
-	pairQuery, err := lang.CompileQuery(`(pair key: (hash_key_symbol) @key value: (_) @value) @root`)
+	pairQuery, err := lang.CompileQuery(`(pair key: (_) @key value: (_) @value) @root`)
 	if err != nil {
 		return nil, fmt.Errorf("error compiling pair query: %s", err)
 	}
@@ -57,21 +58,27 @@ func (detector *propertyDetector) DetectAt(
 		return nil, err
 	}
 
-	if len(result) != 0 {
-		return []interface{}{
-			generictypes.Property{Name: result["key"].Content()},
-		}, nil
+	if result != nil {
+		if key := common.GetLiteralKey(result["key"]); key != "" {
+			return []interface{}{
+				generictypes.Property{Name: key},
+			}, nil
+		}
 	}
 
 	// run accessor query
-	result, err = detector.accessorQuery.MatchOnceAt(node)
+	results, err := detector.accessorQuery.MatchAt(node)
 	if err != nil {
 		return nil, err
 	}
-	if len(result) != 0 {
-		return []interface{}{
-			generictypes.Property{Name: result["name"].Content()},
-		}, nil
+	if len(results) != 0 {
+		properties := make([]interface{}, len(results))
+
+		for i, result := range results {
+			properties[i] = generictypes.Property{Name: result["name"].Content()[1:]}
+		}
+
+		return properties, nil
 	}
 
 	// run method name query
@@ -79,7 +86,7 @@ func (detector *propertyDetector) DetectAt(
 	if err != nil {
 		return nil, err
 	}
-	if len(result) != 0 {
+	if result != nil {
 		return []interface{}{
 			generictypes.Property{Name: result["name"].Content()},
 		}, nil
@@ -90,4 +97,6 @@ func (detector *propertyDetector) DetectAt(
 
 func (detector *propertyDetector) Close() {
 	detector.pairQuery.Close()
+	detector.accessorQuery.Close()
+	detector.methodNameQuery.Close()
 }

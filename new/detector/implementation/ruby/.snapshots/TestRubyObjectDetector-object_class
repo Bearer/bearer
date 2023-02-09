@@ -1,0 +1,31 @@
+- position: "1:1"
+  content: |-
+    class A
+      attr_accessor :one, :two
+
+      def three
+      end
+
+      def four
+      end
+    end
+  data:
+    name: A
+    properties:
+        - detectortype: property
+          matchnode: {}
+          data:
+            name: one
+        - detectortype: property
+          matchnode: {}
+          data:
+            name: two
+        - detectortype: property
+          matchnode: {}
+          data:
+            name: three
+        - detectortype: property
+          matchnode: {}
+          data:
+            name: four
+

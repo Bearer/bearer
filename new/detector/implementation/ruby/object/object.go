@@ -7,6 +7,7 @@ import (
 	"github.com/bearer/curio/new/language/tree"
 
 	generictypes "github.com/bearer/curio/new/detector/implementation/generic/types"
+	"github.com/bearer/curio/new/detector/implementation/ruby/common"
 	languagetypes "github.com/bearer/curio/new/language/types"
 )
 
@@ -36,7 +37,7 @@ func New(lang languagetypes.Language) (types.Detector, error) {
 		return nil, fmt.Errorf("error compiling assignment query: %s", err)
 	}
 	// { user: <object> }
-	parentPairQuery, err := lang.CompileQuery(`(pair key: (hash_key_symbol) @key value: (_) @value) @root`)
+	parentPairQuery, err := lang.CompileQuery(`(pair key: (_) @key value: (_) @value) @root`)
 	if err != nil {
 		return nil, fmt.Errorf("error compiling parent pair query: %s", err)
 	}
@@ -55,7 +56,7 @@ func New(lang languagetypes.Language) (types.Detector, error) {
 	}
 
 	// user[:name]
-	elementReferenceQuery, err := lang.CompileQuery(`(element_reference object: (_) @object (simple_symbol) @simple_symbol) @root`)
+	elementReferenceQuery, err := lang.CompileQuery(`(element_reference object: (_) @object (_) @key) @root`)
 	if err != nil {
 		return nil, fmt.Errorf("error compiling element reference query %s", err)
 	}
@@ -187,6 +188,11 @@ func (detector *objectDetector) nameParentPairObject(
 		return nil, err
 	}
 
+	key := common.GetLiteralKey(result["key"])
+	if key == "" {
+		return nil, nil
+	}
+
 	objects, err := evaluator.ForNode(result["value"], "object", true)
 	if err != nil {
 		return nil, err
@@ -197,7 +203,7 @@ func (detector *objectDetector) nameParentPairObject(
 		objectData := object.Data.(generictypes.Object)
 
 		detectionsData = append(detectionsData, generictypes.Object{
-			Name:       result["key"].Content(),
+			Name:       key,
 			Properties: objectData.Properties,
 		})
 	}
@@ -209,4 +215,7 @@ func (detector *objectDetector) Close() {
 	detector.hashPairQuery.Close()
 	detector.assignmentQuery.Close()
 	detector.parentPairQuery.Close()
+	detector.classNameQuery.Close()
+	detector.callsQuery.Close()
+	detector.elementReferenceQuery.Close()
 }

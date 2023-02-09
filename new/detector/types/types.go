@@ -35,5 +35,6 @@ type Detector interface {
 
 type Composition interface {
 	DetectFromFile(file *file.FileInfo) ([]*Detection, error)
+	DetectFromFileWithTypes(file *file.FileInfo, detectorTypes []string) ([]*Detection, error)
 	Close()
 }
