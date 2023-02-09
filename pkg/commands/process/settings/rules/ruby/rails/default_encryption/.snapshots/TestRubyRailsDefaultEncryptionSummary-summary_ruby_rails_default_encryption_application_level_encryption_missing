@@ -1,8 +1,8 @@
 warning:
-    - policy_name: ""
-      policy_dsrid: DSR-10
-      policy_display_id: ruby_rails_default_encryption
-      policy_description: Force application-level encryption when processing sensitive data.
+    - rule_dsrid: DSR-10
+      rule_display_id: ruby_rails_default_encryption
+      rule_description: Force application-level encryption when processing sensitive data.
+      rule_documentation_url: https://curio.sh/reference/rules/ruby_rails_default_encryption
       line_number: 4
       filename: pkg/commands/process/settings/rules/ruby/rails/default_encryption/testdata/application_level_encryption_missing/schema_rb/db/schema.rb
       category_groups:
@@ -16,10 +16,10 @@ warning:
             t.datetime "created_at", null: false
             t.datetime "updated_at", null: false
           end
-    - policy_name: ""
-      policy_dsrid: DSR-10
-      policy_display_id: ruby_rails_default_encryption
-      policy_description: Force application-level encryption when processing sensitive data.
+    - rule_dsrid: DSR-10
+      rule_display_id: ruby_rails_default_encryption
+      rule_description: Force application-level encryption when processing sensitive data.
+      rule_documentation_url: https://curio.sh/reference/rules/ruby_rails_default_encryption
       line_number: 3
       filename: pkg/commands/process/settings/rules/ruby/rails/default_encryption/testdata/application_level_encryption_missing/structure_sql/db/structure.sql
       category_groups:
