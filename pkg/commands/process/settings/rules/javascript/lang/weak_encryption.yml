@@ -1,0 +1,51 @@
+type: risk
+patterns:
+  - pattern: |
+      $<VAR>.update($<DATA_TYPE>)
+    filters:
+      - variable: VAR
+        detection: create_hash
+      - variable: DATA_TYPE
+        detection: datatype
+languages:
+  - javascript
+auxiliary:
+  - id: create_hash
+    type: verifier
+    patterns:
+      - pattern: |
+          crypto.$<METHOD>($<ALGORITHM>$<...>)
+        filters:
+          - variable: METHOD
+            values:
+              - createHmac
+              - createHash
+          - variable: ALGORITHM
+            values:
+              - '"md5"'
+              - '"sha1"'
+    languages:
+      - javascript
+trigger: local
+severity:
+  default: low
+  PII: critical
+  PHI: medium
+  PD: high
+skip_data_types:
+  - "Unique Identifier"
+metadata:
+  description: "Do not set sensitive data to session."
+  remediation_message: |
+    ## Description
+
+    Sensitive data should not be stored in localstorage session. This policy looks for any sensitive data stored within the localstorage.
+
+    ## Remediations
+    ✅ To ensure session's data stays safe, ensure to use a database-based session storage:
+
+    <!--
+    ## Resources
+    Coming soon.
+  dsr_id: "DSR-5"
+  id: "javascript_weak_encryption"
