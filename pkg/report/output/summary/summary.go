@@ -280,14 +280,14 @@ func checkAndWriteFailureSummaryToString(
 	failureCount := 0
 	warningCount := 0
 	for _, severityLevel := range maps.Keys(severityForFailure) {
+		if !severityForFailure[severityLevel] {
+			continue
+		}
 		if severityLevel == types.LevelWarning {
 			warningCount += len(policyResults[severityLevel])
 			continue
 		}
-		if severityForFailure[severityLevel] {
-			failureCount += len(policyResults[severityLevel])
-			continue
-		}
+		failureCount += len(policyResults[severityLevel])
 	}
 
 	if failureCount == 0 && warningCount == 0 {
@@ -295,7 +295,6 @@ func checkAndWriteFailureSummaryToString(
 	}
 
 	reportStr.WriteString("\n\n")
-
 	if failureCount == 0 {
 		// only warnings
 		reportStr.WriteString(fmt.Sprint(policyCount) + " checks, " + fmt.Sprint(warningCount) + " warnings\n\n")
