@@ -86,11 +86,23 @@ func (implementation *javascriptImplementation) AnalyzeFlow(rootNode *tree.Node)
 			}
 		case "identifier":
 			parent := node.Parent()
-			if parent != nil && slice.Contains(variableLookupParents, parent.Type()) {
+			if parent == nil {
+				break
+			}
+
+			if slice.Contains(variableLookupParents, parent.Type()) ||
+				(parent.Type() == "assignment_expression" && node.Equal(parent.ChildByFieldName("right"))) ||
+				(parent.Type() == "variable_declarator" && node.Equal(parent.ChildByFieldName("value"))) ||
+				(parent.Type() == "member_expression" && node.Equal(parent.ChildByFieldName("object"))) ||
+				(parent.Type() == "subscript_expression" && node.Equal(parent.ChildByFieldName("object"))) {
 				scopedNode := scope[node.Content()]
 				if scopedNode != nil {
 					node.UnifyWith(scopedNode)
 				}
+			}
+
+			if parent.Type() == "formal_parameters" {
+				scope[node.Content()] = node
 			}
 		case "property_identifier":
 			parent := node.Parent()

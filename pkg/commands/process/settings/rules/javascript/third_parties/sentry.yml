@@ -1,50 +1,32 @@
 patterns:
   - pattern: |
-      Sentry.addBreadcrumb($<DATA_TYPE>)
+      Sentry.$<METHOD>($<...>$<DATA_TYPE>$<...>)
     filters:
       - variable: DATA_TYPE
         detection: datatype
+      - variable: METHOD
+        values:
+          - addBreadcrumb
+          - captureMessage
+          - captureEvent
+          - captureException
   - pattern: |
-      Sentry.captureMessage($<DATA_TYPE>)
-    filters:
-      - variable: DATA_TYPE
-        detection: datatype
-  - pattern: |
-      Sentry.captureEvent($<DATA_TYPE>)
-    filters:
-      - variable: DATA_TYPE
-        detection: datatype
-  - pattern: |
-      Sentry.captureException($<DATA_TYPE>)
-    filters:
-      - variable: DATA_TYPE
-        detection: datatype
-  - pattern: |
-      $<SCOPE>.setExtra($<...>, $<DATA_TYPE>)
+      $<SCOPE>.$<METHOD>($<...>$<DATA_TYPE>$<...>)
     filters:
       - variable: SCOPE
         detection: javascript_third_parties_sentry_scope
       - variable: DATA_TYPE
         detection: datatype
-  - pattern: |
-      $<SCOPE>.setTag($<...>, $<DATA_TYPE>)
-    filters:
-      - variable: SCOPE
-        detection: javascript_third_parties_sentry_scope
-      - variable: DATA_TYPE
-        detection: datatype
-  - pattern: |
-      $<SCOPE>.setUser($<...>, $<DATA_TYPE>)
-    filters:
-      - variable: SCOPE
-        detection: javascript_third_parties_sentry_scope
-      - variable: DATA_TYPE
-        detection: datatype
+      - variable: METHOD
+        values:
+          - setUser
+          - setTag
+          - setExtra
 auxiliary:
   - id: javascript_third_parties_sentry_scope
     patterns:
       - |
-        Sentry.configureScope(($<!>$<_:identifier>) => {})
+        Sentry.configureScope(($<!>$<_>) => {})
 languages:
   - javascript
 trigger: local
