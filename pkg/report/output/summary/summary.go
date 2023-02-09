@@ -251,7 +251,13 @@ func writeRuleListToString(
 		if !rule.PolicyType() {
 			continue
 		}
-		ruleList = append(ruleList, color.HiBlackString("- "+rule.Description+" - "+key+" ["+rule.DSRID+"/"+rule.Id+"]\n"))
+
+		ruleDSR := ""
+		if rule.DSRID != "" {
+			ruleDSR = " [" + rule.DSRID + "]"
+		}
+
+		ruleList = append(ruleList, color.HiBlackString("- "+rule.Description+" ("+rule.Id+")"+ruleDSR+"\n"))
 	}
 
 	sort.Strings(ruleList)
@@ -314,7 +320,9 @@ func checkAndWriteFailureSummaryToString(
 		if len(failures[severityLevel]) > 0 {
 			ruleIds := maps.Keys(failures[severityLevel])
 			sort.Strings(ruleIds)
-			reportStr.WriteString(" (" + strings.Join(ruleIds, ", ") + ")")
+			if len(ruleIds) > 0 {
+				reportStr.WriteString(" (" + strings.Join(ruleIds, ", ") + ")")
+			}
 		}
 	}
 
@@ -326,8 +334,14 @@ func checkAndWriteFailureSummaryToString(
 func writeFailureToString(reportStr *strings.Builder, result Result, severity string) {
 	reportStr.WriteString("\n\n")
 	reportStr.WriteString(formatSeverity(severity))
-	reportStr.WriteString(result.PolicyDescription + " [" + result.PolicyDSRID + "]" + "\n")
+	reportStr.WriteString(result.PolicyDescription)
+	if result.PolicyDSRID != "" {
+		reportStr.WriteString(" [" + result.PolicyDSRID + "]")
+	}
+	reportStr.WriteString("\n")
+	// dont show link if custom
 	reportStr.WriteString(color.HiBlackString("https://curio.sh/reference/rules/" + result.PolicyDisplayId + "\n"))
+
 	reportStr.WriteString(color.HiBlackString("To skip this rule, use the flag --skip-rule=" + result.PolicyDisplayId + "\n"))
 	reportStr.WriteString("\n")
 	if result.DetailedContext != "" {
