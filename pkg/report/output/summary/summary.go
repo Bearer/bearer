@@ -38,7 +38,6 @@ var orderedSeverityLevels = [5]string{
 }
 
 type Input struct {
-	PolicyId       string             `json:"policy_id" yaml:"policy_id"`
 	RuleId         string             `json:"rule_id" yaml:"rule_id"`
 	Rule           *settings.Rule     `json:"rule" yaml:"rule"`
 	Dataflow       *dataflow.DataFlow `json:"dataflow" yaml:"dataflow"`
@@ -57,17 +56,17 @@ type Output struct {
 }
 
 type Result struct {
-	PolicyName        string   `json:"policy_name" yaml:"policy_name"`
-	PolicyDSRID       string   `json:"policy_dsrid" yaml:"policy_dsrid"`
-	PolicyDisplayId   string   `json:"policy_display_id" yaml:"policy_display_id"`
-	PolicyDescription string   `json:"policy_description" yaml:"policy_description"`
-	LineNumber        int      `json:"line_number,omitempty" yaml:"line_number,omitempty"`
-	Filename          string   `json:"filename,omitempty" yaml:"filename,omitempty"`
-	CategoryGroups    []string `json:"category_groups,omitempty" yaml:"category_groups,omitempty"`
-	ParentLineNumber  int      `json:"parent_line_number,omitempty" yaml:"parent_line_number,omitempty"`
-	ParentContent     string   `json:"parent_content,omitempty" yaml:"parent_content,omitempty"`
-	OmitParent        bool     `json:"omit_parent,omitempty" yaml:"omit_parent,omitempty"`
-	DetailedContext   string   `json:"detailed_context,omitempty" yaml:"detailed_context,omitempty"`
+	RuleDSRID            string   `json:"rule_dsrid" yaml:"rule_dsrid"`
+	RuleDisplayId        string   `json:"rule_display_id" yaml:"rule_display_id"`
+	RuleDescription      string   `json:"rule_description" yaml:"rule_description"`
+	RuleDocumentationUrl string   `json:"rule_documentation_url" yaml:"rule_documentation_url"`
+	LineNumber           int      `json:"line_number,omitempty" yaml:"line_number,omitempty"`
+	Filename             string   `json:"filename,omitempty" yaml:"filename,omitempty"`
+	CategoryGroups       []string `json:"category_groups,omitempty" yaml:"category_groups,omitempty"`
+	ParentLineNumber     int      `json:"parent_line_number,omitempty" yaml:"parent_line_number,omitempty"`
+	ParentContent        string   `json:"parent_content,omitempty" yaml:"parent_content,omitempty"`
+	OmitParent           bool     `json:"omit_parent,omitempty" yaml:"omit_parent,omitempty"`
+	DetailedContext      string   `json:"detailed_context,omitempty" yaml:"detailed_context,omitempty"`
 }
 
 func GetOutput(dataflow *dataflow.DataFlow, config settings.Config) (map[string][]Result, error) {
@@ -120,16 +119,17 @@ func GetOutput(dataflow *dataflow.DataFlow, config settings.Config) (map[string]
 
 			for _, output := range results["policy_failure"] {
 				result := Result{
-					PolicyDescription: rule.Description,
-					PolicyDisplayId:   rule.Id,
-					PolicyDSRID:       rule.DSRID,
-					Filename:          output.Filename,
-					LineNumber:        output.LineNumber,
-					CategoryGroups:    output.CategoryGroups,
-					OmitParent:        rule.OmitParent,
-					ParentLineNumber:  output.ParentLineNumber,
-					ParentContent:     output.ParentContent,
-					DetailedContext:   output.DetailedContext,
+					RuleDescription:      rule.Description,
+					RuleDisplayId:        rule.Id,
+					RuleDSRID:            rule.DSRID,
+					RuleDocumentationUrl: rule.DocumentationUrl,
+					Filename:             output.Filename,
+					LineNumber:           output.LineNumber,
+					CategoryGroups:       output.CategoryGroups,
+					OmitParent:           rule.OmitParent,
+					ParentLineNumber:     output.ParentLineNumber,
+					ParentContent:        output.ParentContent,
+					DetailedContext:      output.DetailedContext,
 				}
 
 				severity := FindHighestSeverity(result.CategoryGroups, rule.Severity)
@@ -179,7 +179,7 @@ func BuildReportString(config settings.Config, results map[string][]Result, line
 		}
 
 		for _, failure := range results[severityLevel] {
-			failures[severityLevel][failure.PolicyDSRID] = true
+			failures[severityLevel][failure.RuleDSRID] = true
 			writeFailureToString(reportStr, failure, severityLevel)
 		}
 	}
@@ -251,7 +251,13 @@ func writeRuleListToString(
 		if !rule.PolicyType() {
 			continue
 		}
-		ruleList = append(ruleList, color.HiBlackString("- "+rule.Description+" - "+key+" ["+rule.DSRID+"/"+rule.Id+"]\n"))
+
+		ruleDSR := ""
+		if rule.DSRID != "" {
+			ruleDSR = " [" + rule.DSRID + "]"
+		}
+
+		ruleList = append(ruleList, color.HiBlackString("- "+rule.Description+" ("+rule.Id+")"+ruleDSR+"\n"))
 	}
 
 	sort.Strings(ruleList)
@@ -314,7 +320,9 @@ func checkAndWriteFailureSummaryToString(
 		if len(failures[severityLevel]) > 0 {
 			ruleIds := maps.Keys(failures[severityLevel])
 			sort.Strings(ruleIds)
-			reportStr.WriteString(" (" + strings.Join(ruleIds, ", ") + ")")
+			if len(ruleIds) > 0 {
+				reportStr.WriteString(" (" + strings.Join(ruleIds, ", ") + ")")
+			}
 		}
 	}
 
@@ -326,9 +334,17 @@ func checkAndWriteFailureSummaryToString(
 func writeFailureToString(reportStr *strings.Builder, result Result, severity string) {
 	reportStr.WriteString("\n\n")
 	reportStr.WriteString(formatSeverity(severity))
-	reportStr.WriteString(result.PolicyDescription + " [" + result.PolicyDSRID + "]" + "\n")
-	reportStr.WriteString(color.HiBlackString("https://curio.sh/reference/rules/" + result.PolicyDisplayId + "\n"))
-	reportStr.WriteString(color.HiBlackString("To skip this rule, use the flag --skip-rule=" + result.PolicyDisplayId + "\n"))
+	reportStr.WriteString(result.RuleDescription)
+	if result.RuleDSRID != "" {
+		reportStr.WriteString(" [" + result.RuleDSRID + "]")
+	}
+	reportStr.WriteString("\n")
+
+	if result.RuleDocumentationUrl != "" {
+		reportStr.WriteString(color.HiBlackString(result.RuleDocumentationUrl + "\n"))
+	}
+
+	reportStr.WriteString(color.HiBlackString("To skip this rule, use the flag --skip-rule=" + result.RuleDisplayId + "\n"))
 	reportStr.WriteString("\n")
 	if result.DetailedContext != "" {
 		reportStr.WriteString("Detected: " + result.DetailedContext + "\n")

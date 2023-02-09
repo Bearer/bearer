@@ -25,11 +25,20 @@ func TestBuildReportString(t *testing.T) {
 		},
 	})
 
-	// limit rules so that test doesn't fail just because
 	// new rules are added
+	customRule := &settings.Rule{
+		Id:          "custom_test_rule",
+		Description: "Its a test!",
+		DSRID:       "",
+		Type:        "risk",
+		Severity:    map[string]string{"default": "low"},
+	}
+
+	// limit rules so that test doesn't fail just because
 	config.Rules = map[string]*settings.Rule{
 		"ruby_lang_ssl_verification": config.Rules["ruby_lang_ssl_verification"],
 		"ruby_rails_logger":          config.Rules["ruby_rails_logger"],
+		"custom_test_rule":           customRule,
 	}
 
 	if err != nil {

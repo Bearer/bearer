@@ -23,6 +23,12 @@ func loadRules(externalRuleDirs []string, options flag.RuleOptions) (map[string]
 	if err := loadRuleDefinitions(definitions, rulesFs); err != nil {
 		return nil, nil, fmt.Errorf("error loading default rules: %s", err)
 	}
+	// add default documentaiton urls for default rules
+	for id, definition := range definitions {
+		if definition.Metadata.DocumentationUrl == "" {
+			definitions[id].Metadata.DocumentationUrl = "https://curio.sh/reference/rules/" + id
+		}
+	}
 
 	if err := loadRuleDefinitions(builtInDefinitions, builtInRulesFs); err != nil {
 		return nil, nil, fmt.Errorf("error loading default built-in rules: %s", err)
@@ -172,6 +178,7 @@ func buildRules(definitions map[string]RuleDefinition, enabledRules map[string]s
 			Languages:          definition.Languages,
 			ParamParenting:     definition.ParamParenting,
 			Patterns:           definition.Patterns,
+			DocumentationUrl:   definition.Metadata.DocumentationUrl,
 		}
 
 		for _, auxiliaryDefinition := range definition.Auxiliary {

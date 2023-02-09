@@ -5,8 +5,9 @@ Summary Report
 =====================================
 Checks: 
 
-- Do not send sensitive data to Rails loggers. - ruby_rails_logger [DSR-5/ruby_rails_logger]
-- Enable SSL Certificate Verification. - ruby_lang_ssl_verification [DSR-2/ruby_lang_ssl_verification]
+- Do not send sensitive data to Rails loggers. (ruby_rails_logger) [DSR-5]
+- Enable SSL Certificate Verification. (ruby_lang_ssl_verification) [DSR-2]
+- Its a test! (custom_test_rule)
 
 
 CRITICAL: Do not send sensitive data to Rails loggers. [DSR-5]
@@ -26,7 +27,7 @@ File: config/application.rb:2
 
 =====================================
 
-2 checks, 2 failures, 0 warnings
+3 checks, 2 failures, 0 warnings
 
 CRITICAL: 1 (DSR-5)
 HIGH: 0

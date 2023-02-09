@@ -1,8 +1,8 @@
 critical:
-    - policy_name: ""
-      policy_dsrid: DSR-1
-      policy_display_id: ruby_third_parties_honeybadger
-      policy_description: Do not send sensitive data to Honeybadger.
+    - rule_dsrid: DSR-1
+      rule_display_id: ruby_third_parties_honeybadger
+      rule_description: Do not send sensitive data to Honeybadger.
+      rule_documentation_url: https://curio.sh/reference/rules/ruby_third_parties_honeybadger
       line_number: 1
       filename: pkg/commands/process/settings/rules/ruby/third_parties/honeybadger/testdata/honeybadger_breadcrumb.rb
       category_groups:

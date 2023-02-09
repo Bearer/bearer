@@ -1,10 +1,10 @@
 (map[string][]summary.Result) (len=1) {
   (string) (len=8) "critical": ([]summary.Result) (len=1) {
     (summary.Result) {
-      PolicyName: (string) "",
-      PolicyDSRID: (string) (len=5) "DSR-5",
-      PolicyDisplayId: (string) (len=17) "ruby_rails_logger",
-      PolicyDescription: (string) (len=44) "Do not send sensitive data to Rails loggers.",
+      RuleDSRID: (string) (len=5) "DSR-5",
+      RuleDisplayId: (string) (len=17) "ruby_rails_logger",
+      RuleDescription: (string) (len=44) "Do not send sensitive data to Rails loggers.",
+      RuleDocumentationUrl: (string) (len=50) "https://curio.sh/reference/rules/ruby_rails_logger",
       LineNumber: (int) 1,
       Filename: (string) (len=20) "pkg/datatype_leak.rb",
       CategoryGroups: ([]string) (len=1) {
