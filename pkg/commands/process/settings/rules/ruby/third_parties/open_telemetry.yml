@@ -1,0 +1,57 @@
+patterns:
+  - pattern: |
+      $<VAR>.$<METHOD>($<...>$<DATA_TYPE>$<...>)
+    filters:
+      - variable: VAR
+        detection: open_telemetry_current_span
+      - variable: DATA_TYPE
+        detection: datatype
+      - variable: METHOD
+        values:
+          - add_event
+          - add_attributes
+          - set_attribute
+          - record_exception
+  - pattern: |
+      $<_>.in_span($<_>, $<...>$<DATA_TYPE>$<...>)$<...>
+    filters:
+      - variable: DATA_TYPE
+        detection: datatype
+  - pattern: |
+      $<VAR>.status = OpenTelemetry::Trace::Status.error($<...>$<DATA_TYPE>$<...>)
+    filters:
+      - variable: VAR
+        detection: open_telemetry_current_span
+      - variable: DATA_TYPE
+        detection: datatype
+languages:
+  - ruby
+auxiliary:
+  - id: open_telemetry_current_span
+    patterns:
+      - |
+        OpenTelemetry::Trace.current_span
+      - |
+        $<_>.in_span() { |$<!>$<_:identifier>| }
+trigger: local
+severity:
+  default: low
+  PII: critical
+  PHI: medium
+  PD: high
+skip_data_types:
+  - "Unique Identifier"
+metadata:
+  description: "Do not send sensitive data to Open Telemetry."
+  remediation_message: |
+    ## Description
+    Leaking sensitive data to third-party loggers is a common cause of data leaks and can lead to data breaches. This rule looks for instances of sensitive data sent to Open Telemetry.
+
+    ## Remediations
+
+    When logging errors or events, ensure all sensitive data is removed.
+
+    ## Resources
+    - [Open Telemetry Docs](https://opentelemetry.io/docs/)
+  dsr_id: DSR-1
+  id: ruby_third_parties_open_telemetry

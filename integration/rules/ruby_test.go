@@ -184,6 +184,16 @@ func TestRubyRailsSessionDataflow(t *testing.T) {
 	runRulesTest("ruby/rails/session", "dataflow", "ruby_rails_session", t)
 }
 
+func TestRubyThirdPartiesAlgoliaSummary(t *testing.T) {
+	t.Parallel()
+	runRulesTest("ruby/third_parties/algolia", "summary", "ruby_third_parties_algolia", t)
+}
+
+func TestRubyThirdPartiesAlgoliaDataflow(t *testing.T) {
+	t.Parallel()
+	runRulesTest("ruby/third_parties/algolia", "dataflow", "ruby_third_parties_algolia", t)
+}
+
 func TestRubyThirdPartiesDatadogSummary(t *testing.T) {
 	t.Parallel()
 	runRulesTest("ruby/third_parties/datadog", "summary", "ruby_third_parties_datadog", t)
@@ -262,4 +272,14 @@ func TestRubyThirdPartiesAirbrakeSummary(t *testing.T) {
 func TestRubyThirdPartiesAirbrakeDataflow(t *testing.T) {
 	t.Parallel()
 	runRulesTest("ruby/third_parties/airbrake", "dataflow", "ruby_third_parties_airbrake", t)
+}
+
+func TestRubyThirdPartiesOpenTelemetrySummary(t *testing.T) {
+	t.Parallel()
+	runRulesTest("ruby/third_parties/open_telemetry", "summary", "ruby_third_parties_open_telemetry", t)
+}
+
+func TestRubyThirdPartiesOpenTelemetryDataflow(t *testing.T) {
+	t.Parallel()
+	runRulesTest("ruby/third_parties/open_telemetry", "dataflow", "ruby_third_parties_open_telemetry", t)
 }

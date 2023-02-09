@@ -36,3 +36,13 @@ func TestExpressSecureCookieSummary(t *testing.T) {
 	t.Parallel()
 	runRulesTest("javascript/express/insecure_cookie", "summary", "express_insecure_cookie", t)
 }
+
+func TestJavascriptThirdPartySentrySummary(t *testing.T) {
+	t.Parallel()
+	runRulesTest("javascript/third_parties/sentry", "summary", "javascript_third_parties_sentry", t)
+}
+
+func TestJavascriptThirdPartySentryDataflow(t *testing.T) {
+	t.Parallel()
+	runRulesTest("javascript/third_parties/sentry", "dataflow", "javascript_third_parties_sentry", t)
+}
