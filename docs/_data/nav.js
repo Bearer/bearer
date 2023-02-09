@@ -1,11 +1,7 @@
 module.exports = [
   {
     name: "Get Started",
-    items: [
-      { name: "Quick Start", url: "/quickstart/" },
-
-      // { name: "Create a policy", url: "/create-a-policy/" },
-    ],
+    items: [{ name: "Quick Start", url: "/quickstart/" }],
   },
   {
     name: "Guides",
