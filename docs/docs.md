@@ -19,6 +19,7 @@ Ready to dive in? Curio's [reports](/explanations/reports/) are your path to ana
 Guides help you make the most of Curio so you can get up and running quickly.
 
 - [Using the GitHub action](/guides/github-action/)
+- [Create a custom rule](/guides/custom-rule/)
 
 ## Explanations
 
