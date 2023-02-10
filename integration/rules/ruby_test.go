@@ -293,3 +293,13 @@ func TestRubyThirdPartiesOpenTelemetryDataflow(t *testing.T) {
 	t.Parallel()
 	runRulesTest("ruby/third_parties/open_telemetry", "dataflow", "ruby_third_parties_open_telemetry", t)
 }
+
+func TestRubyThirdPartiesSegmentSummary(t *testing.T) {
+	t.Parallel()
+	runRulesTest("ruby/third_parties/segment", "summary", "ruby_third_parties_segment", t)
+}
+
+func TestRubyThirdPartiesSegmentDataflow(t *testing.T) {
+	t.Parallel()
+	runRulesTest("ruby/third_parties/segment", "dataflow", "ruby_third_parties_segment", t)
+}

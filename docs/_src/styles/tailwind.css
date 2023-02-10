@@ -70,9 +70,7 @@
   code {
     max-width: 100%;
   }
-  .code-inline {
-    @apply inline-block bg-code p-1 rounded-md leading-none font-mono m-0;
-  }
+
   /* ToC */
 
   .toc {

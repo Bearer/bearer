@@ -1,1 +1,4 @@
-{ "layout": "layouts/doc.njk" }
+{
+  "layout": "layouts/doc.njk",
+  "breadcrumbs": [{ "name": "Guides", "path": "/guides" }]
+}
