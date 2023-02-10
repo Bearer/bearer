@@ -113,7 +113,7 @@ func ScanRepository(repositoryUrl string, language string, reportingChan chan *M
 	metrics.NumberOfLineOfCode = float64(reportData.NumberOfLines)
 	metrics.DataTypes = reportData.DataTypes
 
-	if language == "ruby" {
+	if language == "ruby" || language == "javascript" {
 		// Run a policies scan
 		policiesOutput, _, err := scanner.Start("summary")
 		if err != nil {
