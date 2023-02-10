@@ -1,4 +1,4 @@
-low:
+high:
     - rule_dsrid: DSR-1
       rule_display_id: ruby_third_parties_segment
       rule_description: Do not send sensitive data to Segment.
