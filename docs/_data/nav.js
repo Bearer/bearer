@@ -1,11 +1,16 @@
 module.exports = [
   {
     name: "Get Started",
+    items: [{ name: "Quick Start", url: "/quickstart/" }],
+  },
+  {
+    name: "Guides",
     items: [
-      { name: "Quick Start", url: "/quickstart/" },
       { name: "Using the GitHub action", url: "/guides/github-action/" },
-
-      // { name: "Create a policy", url: "/create-a-policy/" },
+      {
+        name: "Create a custom rule",
+        url: "/guides/custom-rule/",
+      },
     ],
   },
   {

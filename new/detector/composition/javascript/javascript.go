@@ -122,6 +122,10 @@ func (composition *Composition) Close() {
 }
 
 func (composition *Composition) DetectFromFile(file *file.FileInfo) ([]*detectortypes.Detection, error) {
+	return composition.DetectFromFileWithTypes(file, composition.customDetectorTypes)
+}
+
+func (composition *Composition) DetectFromFileWithTypes(file *file.FileInfo, detectorTypes []string) ([]*detectortypes.Detection, error) {
 	if file.Language != "JavaScript" {
 		log.Debug().Msgf("file language is %s", file.Language)
 		return nil, nil
