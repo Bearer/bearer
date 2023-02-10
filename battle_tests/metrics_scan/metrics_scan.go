@@ -23,8 +23,8 @@ type ScanReport struct {
 
 type PolicyScanReport struct {
 	// PolicyName      string `json:"policy_name" yaml:"policy_name"`
-	PolicyDsrid     string `json:"policy_dsrid" yaml:"policy_dsrid"`
-	PolicyDisplayId string `json:"policy_display_id" yaml:"policy_display_id"`
+	PolicyDsrid     string `json:"rule_dsrid" yaml:"rule_dsrid"`
+	PolicyDisplayId string `json:"rule_display_id" yaml:"rule_display_id"`
 	// PolicyDescription string   `json:"policy_description" yaml:"policy_description"`
 	LineNumber     int      `json:"line_number,omitempty" yaml:"line_number,omitempty"`
 	Filename       string   `json:"filename,omitempty" yaml:"filename,omitempty"`
