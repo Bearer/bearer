@@ -52,6 +52,16 @@ func TestJavascriptJWTSummary(t *testing.T) {
 	runRulesTest("javascript/lang/jwt", "summary", "javascript_jwt", t)
 }
 
+func TestJavascriptHTTPInsecureDataflow(t *testing.T) {
+	t.Parallel()
+	runRulesTest("javascript/lang/http_insecure", "dataflow", "javascript_http_insecure", t)
+}
+
+func TestJavascriptHTTPInsecureSummary(t *testing.T) {
+	t.Parallel()
+	runRulesTest("javascript/lang/http_insecure", "summary", "javascript_http_insecure", t)
+}
+
 func TestJavascriptThirdPartySentrySummary(t *testing.T) {
 	t.Parallel()
 	runRulesTest("javascript/third_parties/sentry", "summary", "javascript_third_parties_sentry", t)
