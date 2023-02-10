@@ -44,11 +44,11 @@ metadata:
   description: "Do not store sensitive data in Elasticsearch."
   remediation_message: |
     ## Description
-    TODO
-
+    Leaking sensitive data to third-party data tools is a common cause of data leaks and can lead to data breaches. This rule looks for instances of sensitive data sent to Elasticsearch.
+    <!--
     ## Remediations
-
-    TODO
+    Coming soon.
+    -->
 
     ## Resources
     - [Elasticsearch docs](https://www.elastic.co/guide/en/elasticsearch/client/ruby-api/current/index.html)

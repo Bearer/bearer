@@ -85,7 +85,7 @@ metadata:
     logger.info(`User is: ${user.email}`)
     ```
 
-    ✅ If you need to identify a user, ensure to use their unique identifier instead of their personal identifiable information:
+    ✅ If you need to identify a user, use their unique identifier instead of their personal identifiable information:
 
     ```javascript
     logger.info(`User is: ${user.uuid}`)

@@ -38,13 +38,19 @@ metadata:
     Sensitive data should be encrypted with strong encryption algorithms like aes-256-cbc
 
     ## Remediations
-    var crypto = require("crypto");
 
-    var key = "secret key";
-    var encrypted = crypto.createHmac("es-256-cbc", key).update(user.password);
+    According to [OWASP](https://owasp.org/www-project-web-security-testing-guide/latest/4-Web_Application_Security_Testing/09-Testing_for_Weak_Cryptography/04-Testing_for_Weak_Encryption): MD5, RC4, DES, Blowfish, SHA1. 1024-bit RSA or DSA, 160-bit ECDSA (elliptic curves), 80/112-bit 2TDEA (two key triple DES) are considered as weak hash/encryption algorithms and therefor shouldn't be used.
 
-    <!--
+    ✅ Use stronger encryption algorithms when storing data.
+
+    ```javascript
+    const crypto = require("crypto");
+
+    const key = "secret key";
+    const encrypted = crypto.createHmac("es-256-cbc", key).update(user.password);
+    ```
+
     ## Resources
-    Coming soon.
+    - [NodeJS Crypto Module](https://nodejs.org/api/crypto.html#cryptocreatehmacalgorithm-key-options)
   dsr_id: "DSR-5"
   id: "javascript_weak_encryption"
