@@ -1,0 +1,37 @@
+patterns:
+  - pattern: |
+      $<ROWS> << $<DATA_TYPE>
+    filters:
+      - variable: ROWS
+        detection: ruby_third_parties_clickhouse_insert_rows
+      - variable: DATA_TYPE
+        detection: datatype
+languages:
+  - ruby
+auxiliary:
+  - id: ruby_third_parties_clickhouse_insert_rows
+    patterns:
+      - |
+        Clickhouse.connection.insert_rows() { |$<!>$<_:identifier>| }
+trigger: local
+severity:
+  default: low
+  PII: critical
+  PHI: medium
+  PD: high
+skip_data_types:
+  - "Unique Identifier"
+metadata:
+  description: "Do not store sensitive data in ClickHouse."
+  remediation_message: |
+    ## Description
+    Leaking sensitive data to third-party analytics tools is a common cause of data leaks and can lead to data breaches. This rule looks for instances of sensitive data sent to ClickHouse.
+
+    ## Remediations
+    When sending data to analytics libraries, ensure all sensitive data is removed.
+
+    ## Resources
+    - [ClickHouse docs](https://clickhouse.com/docs/en/intro/)
+  dsr_id: DSR-6
+  associated_recipe: ClickHouse
+  id: ruby_third_parties_clickhouse
