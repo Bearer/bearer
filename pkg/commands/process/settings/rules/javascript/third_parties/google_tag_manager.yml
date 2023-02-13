@@ -1,0 +1,52 @@
+patterns:
+  - pattern: |
+      dataLayer.push($<DATA_TYPE>)
+    filters:
+      - variable: DATA_TYPE
+        detection: datatype
+  - pattern: |
+      window.dataLayer.push($<DATA_TYPE>)
+    filters:
+      - variable: DATA_TYPE
+        detection: datatype
+languages:
+  - javascript
+trigger: local
+severity:
+  default: low
+  PII: critical
+  PHI: medium
+  PD: high
+metadata:
+  description: "Do not send sensitive data to google tag manager."
+  remediation_message: |
+    ## Description
+
+    Leaking sensitive data to third parties is a common cause of data leaks and can lead to data breaches. This rule looks for instances of leaking sensitive data to third parties using google tag manager.
+
+    ❌ Avoid sending sensitive data to third parties:
+
+    ```javascript
+    datalayer.push({
+      user: {
+        email: user.email
+      }
+    })
+    ```
+
+    ✅ If you need to identify a user, ensure to use their unique identifier instead of their personal identifiable information:
+
+    ```javascript
+    datalayer.push({
+      user: {
+        uuid: user.uuid
+      }
+    })
+    ```
+
+    <!--
+    ## Resources
+    Coming soon.
+    -->
+  dsr_id: DSR-1
+  id: "javascript_google_tag_manager"

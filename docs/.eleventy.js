@@ -9,6 +9,7 @@ const markdownItEmoji = require("markdown-it-emoji");
 const markdownItAnchor = require("markdown-it-anchor");
 const pluginTOC = require("eleventy-plugin-toc");
 const now = String(Date.now());
+const path = require("path");
 
 const mdSetup = markdownIt({ html: true })
   .use(markdownItEmoji)
@@ -51,6 +52,19 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addFilter("sortById", (arr) => {
     arr.sort((a, b) => (a.metadata.id > b.metadata.id ? 1 : -1));
     return arr;
+  });
+
+  eleventyConfig.addNunjucksGlobal("navHighlight", (parent, child) => {
+    const target = parent.split(path.sep).slice(1, -1);
+    const check = child.split(path.sep).slice(1, -1);
+    // handles individual rule pages highlighting "rule" in side nav
+    const isRule =
+      target.includes("rules") && check[check.length - 2] === "rules";
+    if (child === parent || isRule) {
+      return true;
+    } else {
+      return false;
+    }
   });
 
   return {

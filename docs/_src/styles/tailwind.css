@@ -6,6 +6,10 @@
   html {
     scroll-padding-top: 6.75rem;
   }
+
+  .wrap {
+    max-width: 96rem;
+  }
 }
 
 @layer components {

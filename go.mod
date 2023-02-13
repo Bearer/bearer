@@ -3,7 +3,7 @@ module github.com/bearer/curio
 go 1.18
 
 require (
-	github.com/aws/aws-sdk-go v1.44.181
+	github.com/aws/aws-sdk-go v1.44.199
 	github.com/bradleyjkemp/cupaloy v2.3.0+incompatible
 	github.com/fatih/color v1.14.1
 	github.com/gertd/go-pluralize v0.2.1
@@ -15,7 +15,7 @@ require (
 	github.com/hhatto/gocloc v0.4.3
 	github.com/jessevdk/go-flags v1.5.0
 	github.com/monochromegane/go-gitignore v0.0.0-20200626010858-205db1a8cc00
-	github.com/open-policy-agent/opa v0.48.0
+	github.com/open-policy-agent/opa v0.49.0
 	github.com/rs/zerolog v1.29.0
 	github.com/sabhiram/go-gitignore v0.0.0-20210923224102-525f6e181f06
 	github.com/schollz/progressbar/v3 v3.13.0
@@ -28,8 +28,8 @@ require (
 	github.com/wlredeye/jsonlines v0.0.0-20160904163743-36b5e1bd13d0
 	github.com/zricethezav/gitleaks/v8 v8.15.3
 	golang.org/x/exp v0.0.0-20221031165847-c99f073a8326
-	golang.org/x/mod v0.7.0
-	golang.org/x/net v0.5.0
+	golang.org/x/mod v0.8.0
+	golang.org/x/net v0.6.0
 )
 
 require (
@@ -58,7 +58,6 @@ require (
 	github.com/muesli/reflow v0.2.1-0.20210115123740-9e1d0d53df68 // indirect
 	github.com/muesli/termenv v0.11.1-0.20220204035834-5ac8409525e0 // indirect
 	github.com/petar-dambovaliev/aho-corasick v0.0.0-20211021192214-5ab2d9280aa9 // indirect
-	github.com/pkg/errors v0.9.1 // indirect
 	github.com/pmezard/go-difflib v1.0.0 // indirect
 	github.com/rcrowley/go-metrics v0.0.0-20200313005456-10cdbea86bc0 // indirect
 	github.com/rivo/uniseg v0.4.3 // indirect
@@ -68,7 +67,7 @@ require (
 	github.com/xeipuuv/gojsonreference v0.0.0-20180127040603-bd5ef7bd5415 // indirect
 	github.com/yashtewari/glob-intersection v0.1.0 // indirect
 	golang.org/x/sync v0.1.0 // indirect
-	golang.org/x/term v0.4.0 // indirect
+	golang.org/x/term v0.5.0 // indirect
 )
 
 require (
@@ -93,7 +92,7 @@ require (
 	golang.org/x/crypto v0.4.0 // indirect
 	google.golang.org/appengine v1.6.7 // indirect
 	google.golang.org/genproto v0.0.0-20221227171554-f9683d7f8bef // indirect
-	google.golang.org/grpc v1.52.0 // indirect
+	google.golang.org/grpc v1.52.3 // indirect
 	google.golang.org/protobuf v1.28.1 // indirect
 	gopkg.in/warnings.v0 v0.1.2 // indirect
 )
@@ -112,9 +111,9 @@ require (
 	github.com/spf13/pflag v1.0.5
 	github.com/spf13/viper v1.15.0
 	github.com/subosito/gotenv v1.4.2 // indirect
-	golang.org/x/oauth2 v0.4.0
-	golang.org/x/sys v0.4.0 // indirect
-	golang.org/x/text v0.6.0 // indirect
+	golang.org/x/oauth2 v0.5.0
+	golang.org/x/sys v0.5.0 // indirect
+	golang.org/x/text v0.7.0 // indirect
 	golang.org/x/xerrors v0.0.0-20220907171357-04be3eba64a2
 	google.golang.org/api v0.109.0
 	gopkg.in/ini.v1 v1.67.0 // indirect

@@ -2,7 +2,7 @@
 layout: layouts/base.njk
 ---
 {% set currentUrl = page.url %}
-<main class="max-w-7xl mx-auto flex flex-col sm:grid grid-cols-5 text-black dark:text-neutral-100 px-8 relative gap-4 pt-4">
+<main class="wrap mx-auto flex flex-col sm:grid grid-cols-5 text-black dark:text-neutral-100 px-8 relative gap-4 pt-4">
 	<nav class="hidden self-stretch top-heading-offset sm:revert sm:self-start sticky  col-span-1  bg-white dark:bg-neutral-600 z-10 pb-4" id="doc-nav" >
 		<ul>
 			{% for heading in nav %}
@@ -11,7 +11,7 @@ layout: layouts/base.njk
 					<ul class="ml-2">
 						{% for item in heading.items %}
 							<li>
-								<a class="hover:underline block" {% if item.url in currentUrl %}aria-current="page" {% endif %} href="{{item.url}}">{{item.name}}</a>
+								<a class="hover:underline block" {% if navHighlight(item.url, page.url) %}aria-current="page" {% endif %} href="{{item.url}}">{{item.name}}</a>
 							</li>
 						{% endfor %}
 					</ul>

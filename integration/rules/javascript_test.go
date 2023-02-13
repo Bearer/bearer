@@ -91,3 +91,13 @@ func TestJavascriptLangFileGenerationDataflow(t *testing.T) {
 	t.Parallel()
 	runRulesTest("javascript/lang/file_generation", "dataflow", "javascript_lang_file_generation", t)
 }
+
+func TestJavascriptGTMDataflow(t *testing.T) {
+	t.Parallel()
+	runRulesTest("javascript/third_parties/google_tag_manager", "dataflow", "javascript_google_tag_manager", t)
+}
+
+func TestJavascriptGTMSummary(t *testing.T) {
+	t.Parallel()
+	runRulesTest("javascript/third_parties/google_tag_manager", "summary", "javascript_google_tag_manager", t)
+}
