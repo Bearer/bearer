@@ -56,7 +56,7 @@ metadata:
     ❌ Avoid using unsecured outgoing HTTP communication, especially in the context of API calls:
 
     ```ruby
-    response = HTTParty.get('http://usecure-api.com')
+    response = HTTParty.get('http://insecure-api.com')
     ```
 
     ✅ Ensure to always connect though HTTPS:

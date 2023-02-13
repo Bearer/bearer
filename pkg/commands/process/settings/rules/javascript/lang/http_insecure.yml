@@ -1,0 +1,61 @@
+patterns:
+  - pattern: |
+      $<LIBRARY>.$<METHOD>($<INSECURE_URL>)
+    filters:
+      - variable: INSECURE_URL
+        detection: insecure_url
+      - variable: LIBRARY
+        values:
+          - axios
+          - http
+      - variable: METHOD
+        values:
+          - get
+          - post
+          - patch
+          - delete
+  - pattern: |
+      fetch($<INSECURE_URL>)
+    filters:
+      - variable: INSECURE_URL
+        detection: insecure_url
+  - pattern: |
+      $<REQUEST>.open($<_>, $<INSECURE_URL>);
+    filters:
+      - variable: INSECURE_URL
+        detection: insecure_url
+      - variable: REQUEST
+        values:
+          - req
+          - request
+          - xhttp
+languages:
+  - javascript
+trigger: presence
+severity:
+  default: low
+metadata:
+  description: "Only communicate using HTTPS connections."
+  remediation_message: |
+    ## Description
+
+    Applications processing sensitive data should only connect using HTTPS connections. This rule checks that all HTTP connections use HTTPS.
+
+    ❌ Avoid using unsecured outgoing HTTP communication, especially in the context of API calls:
+
+    ```javascript
+    const response = axios.get('http://insecure-api.com')
+    ```
+
+    ✅ Ensure to always connect though HTTPS:
+
+    ```javascript
+    const response = axios.get('https://secure-api.com')
+    ```
+
+    <!--
+    ## Resources
+    Coming soon.
+    -->
+  dsr_id: "DSR-5"
+  id: "javascript_http_insecure"
