@@ -23,9 +23,9 @@ auxiliary:
   - id: ruby_lang_file_generation_file
     patterns:
       - |
-        CSV.generate()
+        CSV.generate
       - |
-        CSV.generate() { |$<!>$<_:identifier>| }
+        CSV.generate { |$<!>$<_:identifier>| }
       - |
         CSV.open()
       - |
