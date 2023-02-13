@@ -91,3 +91,13 @@ func TestJavascriptGTMSummary(t *testing.T) {
 	t.Parallel()
 	runRulesTest("javascript/third_parties/google_tag_manager", "summary", "javascript_google_tag_manager", t)
 }
+
+func TestJavascriptGoogleAnalyticsDataflow(t *testing.T) {
+	t.Parallel()
+	runRulesTest("javascript/third_parties/google_analytics", "dataflow", "javascript_google_analytics", t)
+}
+
+func TestJavascriptGoogleAnalyticsSummary(t *testing.T) {
+	t.Parallel()
+	runRulesTest("javascript/third_parties/google_analytics", "summary", "javascript_google_analytics", t)
+}
