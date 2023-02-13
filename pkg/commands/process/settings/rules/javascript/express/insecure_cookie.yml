@@ -22,8 +22,17 @@ severity:
 skip_data_types:
   - "Unique Identifier"
 metadata:
-  description: "Ensure cookies are sent over https."
+  description: "Ensure cookies are sent over HTTPS."
   remediation_message: |
-    FIXME
+    ## Description
+    To make sure cookies don't open your application up to exploits or unauthorized access, don't use default cookie values and make sure to set security options appropriately.
+
+    ## Remediations
+    - Instead of the default cookie name, use generic names.
+    - Set cookie security values to use HTTP(S) instead of client-side javascript.
+    - Set `secure` values to `true` to force cookies to only send over HTTPS.
+
+    ## Resources
+    - [Express Security Best Practices](https://expressjs.com/en/advanced/best-practice-security.html#use-cookies-securely)
   dsr_id: "DSR-5"
   id: "express_insecure_cookie"

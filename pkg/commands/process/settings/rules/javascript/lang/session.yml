@@ -19,13 +19,27 @@ metadata:
   remediation_message: |
     ## Description
 
-    Sensitive data should not be stored in localstorage session. This policy looks for any sensitive data stored within the localstorage.
+    Sensitive data should not be stored in a `localStorage` session. This policy looks for any sensitive data stored within the localstorage.
 
     ## Remediations
-    ✅ To ensure session's data stays safe, ensure to use a database-based session storage:
+
+    It's best to avoid storing sensitive data in `localStorage` whenever possible. To keep session data safe, use a server-based session storage solution instead.
+
+    ❌ If you do need do store data in `localStorage`, avoid including sensitive data:
+
+    ```javascript
+    localStorage.setItem('user', email)
+    ```
+
+     ✅ Instead, use a unique identifier:
+
+    ```javascript
+    localStorage.setItem('user', user.uuid)
+    ```
 
     <!--
     ## Resources
     Coming soon.
+    -->
   dsr_id: "DSR-5"
   id: "javascript_session"

@@ -24,7 +24,7 @@ metadata:
 
     ## Remediations
 
-    ❌ Avoid storing sensitive data in JWT:
+    ❌ Avoid storing sensitive data in JWTs:
 
     ```javascript
       const jwt = require('jsonwebtoken');
@@ -41,5 +41,6 @@ metadata:
     <!--
     ## Resources
     Coming soon.
+    -->
   dsr_id: "DSR-5"
   id: "javascript_jwt"

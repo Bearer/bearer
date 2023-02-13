@@ -26,7 +26,7 @@ metadata:
 
     ## Remediations
 
-    Coming soon.
+    Avoid writing sensitive data to logs, backups, or exports whenever possible. Instead obfuscate and/or filter the data to exclude sensitive information.
 
     <!--
     ## Resources
