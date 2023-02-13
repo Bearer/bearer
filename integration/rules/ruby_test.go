@@ -303,3 +303,13 @@ func TestRubyThirdPartiesSegmentDataflow(t *testing.T) {
 	t.Parallel()
 	runRulesTest("ruby/third_parties/segment", "dataflow", "ruby_third_parties_segment", t)
 }
+
+func TestRubyThirdPartiesGoogleDataflowSummary(t *testing.T) {
+	t.Parallel()
+	runRulesTest("ruby/third_parties/google_dataflow", "summary", "ruby_third_parties_google_dataflow", t)
+}
+
+func TestRubyThirdPartiesGoogleDataflowDataflow(t *testing.T) {
+	t.Parallel()
+	runRulesTest("ruby/third_parties/google_dataflow", "dataflow", "ruby_third_parties_google_dataflow", t)
+}
