@@ -95,4 +95,4 @@ Exit code of the curio binary, 0 indicates a pass
 
 For more ways to use Curio, check out the different [report types](https://curio.sh/explanations/reports/), [available rules](https://curio.sh/reference/rules/), [supported data types](https://curio.sh/reference/datatypes/). 
 
-Have a question or need help? Join our [Discord community](https://discord.gg/eaHZBJUXRF) or [open an issue on GitHub](https://github.com/Bearer/curio/issues).
+Have a question or need help? Join our [Discord community]({{meta.links.discord}}) or [open an issue on GitHub]({{meta.links.issues}}).

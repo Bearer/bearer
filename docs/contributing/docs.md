@@ -29,4 +29,4 @@ npm start
 
 ## Getting help
 
-If you're unsure where to start, have questions, or need help contributing to the documentation, join our [community discord](https://discord.gg/eaHZBJUXRF) and we'll be happy to help out.
+If you're unsure where to start, have questions, or need help contributing to the documentation, join our [community discord]({{meta.links.discord}}) and we'll be happy to help out.

@@ -6,14 +6,14 @@ title: Add or update a recipe
 
 Recipes are part of how Curio makes connections between your code and other sources. These are things like data stores, APIs, and internal services. They work by providing information about endpoints, API base urls, package information, etc.
 
-Recipes are located at `curio/pkg/classification/db/recipes/`
+Recipes are located at `curio/pkg/classification/db/recipes/`.
 
-```
+```md
 .
-├—— pkg/
-│    └—— classification/
-│         └——  db/
-│               └——  recipes/
+├ pkg/
+│  └ classification/
+│       └  db/
+│           └  recipes/
 ```
 
 Each recipe consists of a `JSON` file containing the following properties:
