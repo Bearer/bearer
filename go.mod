@@ -15,7 +15,7 @@ require (
 	github.com/hhatto/gocloc v0.4.3
 	github.com/jessevdk/go-flags v1.5.0
 	github.com/monochromegane/go-gitignore v0.0.0-20200626010858-205db1a8cc00
-	github.com/open-policy-agent/opa v0.48.0
+	github.com/open-policy-agent/opa v0.49.0
 	github.com/rs/zerolog v1.29.0
 	github.com/sabhiram/go-gitignore v0.0.0-20210923224102-525f6e181f06
 	github.com/schollz/progressbar/v3 v3.13.0
@@ -58,7 +58,6 @@ require (
 	github.com/muesli/reflow v0.2.1-0.20210115123740-9e1d0d53df68 // indirect
 	github.com/muesli/termenv v0.11.1-0.20220204035834-5ac8409525e0 // indirect
 	github.com/petar-dambovaliev/aho-corasick v0.0.0-20211021192214-5ab2d9280aa9 // indirect
-	github.com/pkg/errors v0.9.1 // indirect
 	github.com/pmezard/go-difflib v1.0.0 // indirect
 	github.com/rcrowley/go-metrics v0.0.0-20200313005456-10cdbea86bc0 // indirect
 	github.com/rivo/uniseg v0.4.3 // indirect
@@ -93,7 +92,7 @@ require (
 	golang.org/x/crypto v0.4.0 // indirect
 	google.golang.org/appengine v1.6.7 // indirect
 	google.golang.org/genproto v0.0.0-20221227171554-f9683d7f8bef // indirect
-	google.golang.org/grpc v1.52.0 // indirect
+	google.golang.org/grpc v1.52.3 // indirect
 	google.golang.org/protobuf v1.28.1 // indirect
 	gopkg.in/warnings.v0 v0.1.2 // indirect
 )
