@@ -1,0 +1,31 @@
+patterns:
+  - pattern: |
+      gtag($<...>$<DATA_TYPE>$<...>)
+    filters:
+      - variable: DATA_TYPE
+        detection: datatype
+languages:
+  - javascript
+trigger: local
+severity:
+  default: low
+  PII: critical
+  PHI: medium
+  PD: high
+metadata:
+  description: "Do not send sensitive data to Google Analytics."
+  remediation_message: |
+    ## Description
+
+    Leaking sensitive data to third-party analytics tools is a common cause of data leaks and can lead to data breaches. This rule looks for instances of sensitive data sent to Google Analytics.
+
+    ## Remediations
+
+    When sending data to analytics libraries, ensure all sensitive data is removed.
+
+    <!--
+    ## Resources
+    Coming soon.
+    -->
+  dsr_id: DSR-1
+  id: "javascript_google_analytics"
