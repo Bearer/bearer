@@ -7,8 +7,8 @@ critical:
       filename: pkg/commands/process/settings/rules/ruby/third_parties/bigquery/testdata/datatype_in_insert_async.rb
       category_groups:
         - PII
-      parent_line_number: 10
-      parent_content: inserter.insert(rows)
+      parent_line_number: 8
+      parent_content: 'inserter.insert([{ first_name: user.first_name }])'
 
 
 --

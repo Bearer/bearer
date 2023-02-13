@@ -5,7 +5,7 @@ data_types:
           locations:
             - filename: pkg/commands/process/settings/rules/ruby/third_parties/bigquery/testdata/datatype_in_insert_async.rb
               line_number: 8
-              field_name: :first_name
+              field_name: first_name
               object_name: user
               subject_name: User
 risks:
@@ -17,8 +17,8 @@ risks:
             - filename: pkg/commands/process/settings/rules/ruby/third_parties/bigquery/testdata/datatype_in_insert_async.rb
               line_number: 8
               parent:
-                line_number: 10
-                content: inserter.insert(rows)
+                line_number: 8
+                content: 'inserter.insert([{ first_name: user.first_name }])'
               field_name: first_name
               object_name: user
               subject_name: User
