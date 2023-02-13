@@ -333,3 +333,13 @@ func TestRubyThirdPartiesGoogleAnalyticsDataflow(t *testing.T) {
 	t.Parallel()
 	runRulesTest("ruby/third_parties/google_analytics", "dataflow", "ruby_third_parties_google_analytics", t)
 }
+
+func TestRubyThirdPartiesClickHouseSummary(t *testing.T) {
+	t.Parallel()
+	runRulesTest("ruby/third_parties/clickhouse", "summary", "ruby_third_parties_clickhouse", t)
+}
+
+func TestRubyThirdPartiesClickHouseDataflow(t *testing.T) {
+	t.Parallel()
+	runRulesTest("ruby/third_parties/clickhouse", "dataflow", "ruby_third_parties_clickhouse", t)
+}
