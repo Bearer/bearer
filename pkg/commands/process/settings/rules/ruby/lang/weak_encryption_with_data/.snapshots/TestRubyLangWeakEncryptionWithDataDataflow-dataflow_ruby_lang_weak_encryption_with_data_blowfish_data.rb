@@ -61,6 +61,29 @@ risks:
               field_name: password
               object_name: user
               subject_name: User
+    - detector_id: blowfish_init
+      locations:
+        - filename: pkg/commands/process/settings/rules/ruby/lang/weak_encryption_with_data/testdata/blowfish_data.rb
+          line_number: 1
+          parent:
+            line_number: 1
+            content: Crypt::Blowfish.new("insecure")
+          content: |
+            Crypt::Blowfish.new()
+        - filename: pkg/commands/process/settings/rules/ruby/lang/weak_encryption_with_data/testdata/blowfish_data.rb
+          line_number: 5
+          parent:
+            line_number: 5
+            content: Crypt::Blowfish.new("insecure")
+          content: |
+            Crypt::Blowfish.new()
+        - filename: pkg/commands/process/settings/rules/ruby/lang/weak_encryption_with_data/testdata/blowfish_data.rb
+          line_number: 9
+          parent:
+            line_number: 9
+            content: Crypt::Blowfish.new("your-key")
+          content: |
+            Crypt::Blowfish.new()
 components: []
 
 

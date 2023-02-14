@@ -100,6 +100,20 @@ risks:
           content: |
             Datadog.configuration[$<_>][$<_>].active_span
         - filename: pkg/commands/process/settings/rules/ruby/third_parties/datadog/testdata/datatype_in_tags.rb
+          line_number: 9
+          parent:
+            line_number: 9
+            content: Datadog::Tracing.active_span
+          content: |
+            Datadog::Tracing.active_span
+        - filename: pkg/commands/process/settings/rules/ruby/third_parties/datadog/testdata/datatype_in_tags.rb
+          line_number: 10
+          parent:
+            line_number: 10
+            content: Datadog::Tracing.active_span
+          content: |
+            Datadog::Tracing.active_span
+        - filename: pkg/commands/process/settings/rules/ruby/third_parties/datadog/testdata/datatype_in_tags.rb
           line_number: 12
           parent:
             line_number: 12
