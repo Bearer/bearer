@@ -10,7 +10,9 @@ import (
 	languagetypes "github.com/bearer/curio/new/language/types"
 )
 
-type insecureURLDetector struct{}
+type insecureURLDetector struct {
+	types.DetectorBase
+}
 
 var insecureUrlPattern = regexp.MustCompile(`^http:`)
 

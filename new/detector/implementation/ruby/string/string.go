@@ -10,7 +10,9 @@ import (
 	languagetypes "github.com/bearer/curio/new/language/types"
 )
 
-type stringDetector struct{}
+type stringDetector struct {
+	types.DetectorBase
+}
 
 func New(lang languagetypes.Language) (types.Detector, error) {
 	return &stringDetector{}, nil

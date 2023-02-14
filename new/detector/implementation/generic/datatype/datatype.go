@@ -39,6 +39,7 @@ type Property struct {
 }
 
 type datatypeDetector struct {
+	types.DetectorBase
 	classifier *classificationschema.Classifier
 }
 

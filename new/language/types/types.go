@@ -17,5 +17,4 @@ type Language interface {
 	Parse(input string) (*tree.Tree, error)
 	CompileQuery(input string) (*tree.Query, error)
 	CompilePatternQuery(input string) (PatternQuery, error)
-	DescendIntoDetectionNode(node *tree.Node) bool
 }

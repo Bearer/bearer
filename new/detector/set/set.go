@@ -29,14 +29,23 @@ func New(detectors []types.Detector) (types.DetectorSet, error) {
 	}, nil
 }
 
+func (set *set) NestedDetections(detectorType string) (bool, error) {
+	detector, err := set.lookupDetector(detectorType)
+	if err != nil {
+		return false, err
+	}
+
+	return detector.NestedDetections(), nil
+}
+
 func (set *set) DetectAt(
 	node *tree.Node,
 	detectorType string,
 	evaluator types.Evaluator,
 ) ([]*types.Detection, error) {
-	detector, ok := set.detectors[detectorType]
-	if !ok {
-		return nil, fmt.Errorf("detector type '%s' not registered", detectorType)
+	detector, err := set.lookupDetector(detectorType)
+	if err != nil {
+		return nil, err
 	}
 
 	detectionsData, err := detector.DetectAt(node, evaluator)
@@ -54,4 +63,13 @@ func (set *set) DetectAt(
 	}
 
 	return detections, nil
+}
+
+func (set *set) lookupDetector(detectorType string) (types.Detector, error) {
+	detector, ok := set.detectors[detectorType]
+	if !ok {
+		return nil, fmt.Errorf("detector type '%s' not registered", detectorType)
+	}
+
+	return detector, nil
 }

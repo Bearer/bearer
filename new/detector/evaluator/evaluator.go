@@ -48,10 +48,6 @@ func (evaluator *evaluator) ForTree(
 	var result []*types.Detection
 
 	if err := rootNode.Walk(func(node *langtree.Node, visitChildren func() error) error {
-		if !node.Equal(rootNode) && !evaluator.lang.DescendIntoDetectionNode(node) {
-			return nil
-		}
-
 		detections, err := evaluator.nonUnifiedNodeDetections(node, detectorType)
 		if err != nil {
 			return err
@@ -67,6 +63,17 @@ func (evaluator *evaluator) ForTree(
 				}
 
 				result = append(result, unifiedNodeDetections...)
+			}
+		}
+
+		if len(detections) != 0 {
+			nestedDetections, err := evaluator.detectorSet.NestedDetections(detectorType)
+			if err != nil {
+				return err
+			}
+
+			if !nestedDetections {
+				return nil
 			}
 		}
 
@@ -132,10 +139,6 @@ func (evaluator *evaluator) TreeHas(rootNode *langtree.Node, detectorType string
 	var result bool
 
 	if err := rootNode.Walk(func(node *langtree.Node, visitChildren func() error) error {
-		if !node.Equal(rootNode) && !evaluator.lang.DescendIntoDetectionNode(node) {
-			return nil
-		}
-
 		detections, err := evaluator.nonUnifiedNodeDetections(node, detectorType)
 		if err != nil {
 			return err
