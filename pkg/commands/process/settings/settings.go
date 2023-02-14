@@ -141,9 +141,11 @@ type Rule struct {
 }
 
 type PatternFilter struct {
+	Not                *PatternFilter  `mapstructure:"not" json:"not" yaml:"not"`
 	Either             []PatternFilter `mapstructure:"either" json:"either" yaml:"either"`
 	Variable           string          `mapstructure:"variable" json:"variable" yaml:"variable"`
 	Detection          string          `mapstructure:"detection" json:"detection" yaml:"detection"`
+	Regex              *Regexp         `mapstructure:"regex" json:"regex" yaml:"regex"`
 	Values             []string        `mapstructure:"values" json:"values" yaml:"values"`
 	LessThan           *int            `mapstructure:"less_than" json:"less_than" yaml:"less_than"`
 	LessThanOrEqual    *int            `mapstructure:"less_than_or_equal" json:"less_than_or_equal" yaml:"less_than_or_equal"`
