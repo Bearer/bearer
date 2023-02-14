@@ -129,17 +129,33 @@ func (evaluator *evaluator) nonUnifiedNodeDetections(
 }
 
 func (evaluator *evaluator) TreeHas(rootNode *langtree.Node, detectorType string) (bool, error) {
-	hasDetection := false
+	var result bool
 
 	if err := rootNode.Walk(func(node *langtree.Node, visitChildren func() error) error {
-		var err error
-		hasDetection, err = evaluator.NodeHas(node, detectorType)
+		if !node.Equal(rootNode) && !evaluator.lang.DescendIntoDetectionNode(node) {
+			return nil
+		}
+
+		detections, err := evaluator.nonUnifiedNodeDetections(node, detectorType)
 		if err != nil {
 			return err
 		}
 
-		if hasDetection {
+		if len(detections) != 0 {
+			result = true
 			return nil
+		}
+
+		for _, unifiedNode := range node.UnifiedNodes() {
+			hasDetection, err := evaluator.TreeHas(unifiedNode, detectorType)
+			if err != nil {
+				return err
+			}
+
+			if hasDetection {
+				result = true
+				return nil
+			}
 		}
 
 		return visitChildren()
@@ -147,7 +163,7 @@ func (evaluator *evaluator) TreeHas(rootNode *langtree.Node, detectorType string
 		return false, err
 	}
 
-	return hasDetection, nil
+	return result, nil
 }
 
 func (evaluator *evaluator) NodeHas(node *langtree.Node, detectorType string) (bool, error) {
