@@ -111,3 +111,13 @@ func TestJavascriptGoogleAnalyticsSummary(t *testing.T) {
 	t.Parallel()
 	runRulesTest("javascript/third_parties/google_analytics", "summary", "javascript_google_analytics", t)
 }
+
+func TestJavascriptDataDogDataflow(t *testing.T) {
+	t.Parallel()
+	runRulesTest("javascript/third_parties/datadog", "dataflow", "javascript_third_parties_datadog", t)
+}
+
+func TestJavascriptDataDogSummary(t *testing.T) {
+	t.Parallel()
+	runRulesTest("javascript/third_parties/datadog", "summary", "javascript_third_parties_datadog", t)
+}
