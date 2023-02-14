@@ -1,0 +1,64 @@
+patterns:
+  - pattern: |
+      $<INDEX>.$<METHOD>($<DATA_TYPE>$<...>)
+    filters:
+      - variable: INDEX
+        detection: javascript_third_parties_algolia_index
+      - variable: METHOD
+        values:
+          - saveObject
+          - saveObjects
+      - variable: DATA_TYPE
+        detection: datatype
+  - pattern: |
+      $<CLIENT>.initIndex($<DATA_TYPE>)
+    filters:
+      - variable: CLIENT
+        detection: javascript_third_parties_algolia_client
+      - variable: DATA_TYPE
+        detection: datatype
+languages:
+  - javascript
+auxiliary:
+  - id: javascript_third_parties_algolia_module
+    patterns:
+      - |
+        require('algoliasearch')
+      - |
+        require("algoliasearch")
+  - id: javascript_third_parties_algolia_client
+    patterns:
+      - pattern: |
+          $<MODULE>($<_>, $<_>)
+        filters:
+          - variable: MODULE
+            detection: javascript_third_parties_algolia_module
+  - id: javascript_third_parties_algolia_index
+    patterns:
+      - pattern: |
+          $<CLIENT>.initIndex()
+        filters:
+          - variable: CLIENT
+            detection: javascript_third_parties_algolia_client
+trigger: local
+severity:
+  default: low
+  PII: critical
+  PHI: medium
+  PD: high
+skip_data_types:
+  - "Unique Identifier"
+metadata:
+  description: "Do not store sensitive data in Algolia."
+  remediation_message: |
+    ## Description
+    Leaking sensitive data to third-party data tools is a common cause of data leaks and can lead to data breaches. This rule looks for instances of sensitive data sent to Algolia.
+    <!--
+    ## Remediations
+    Coming soon.
+    -->
+    ## Resources
+    - [Algolia docs](https://www.algolia.com/doc/)
+  dsr_id: DSR-6
+  associated_recipe: Algolia
+  id: javascript_third_parties_algolia

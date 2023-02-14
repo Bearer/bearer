@@ -111,3 +111,13 @@ func TestJavascriptGoogleAnalyticsSummary(t *testing.T) {
 	t.Parallel()
 	runRulesTest("javascript/third_parties/google_analytics", "summary", "javascript_google_analytics", t)
 }
+
+func TestJavascriptAlgoliaDataflow(t *testing.T) {
+	t.Parallel()
+	runRulesTest("javascript/third_parties/algolia", "dataflow", "javascript_third_parties_algolia", t)
+}
+
+func TestJavascriptAlgoliaSummary(t *testing.T) {
+	t.Parallel()
+	runRulesTest("javascript/third_parties/algolia", "summary", "javascript_third_parties_algolia", t)
+}
