@@ -237,16 +237,6 @@ func (*rubyImplementation) TranslatePatternContent(fromNodeType, toNodeType, con
 	return content
 }
 
-func (*rubyImplementation) DescendIntoDetectionNode(node *tree.Node) bool {
-	parent := node.Parent()
-
-	if parent != nil && parent.Type() == "call" && node.Equal(parent.ChildByFieldName("receiver")) {
-		return slice.Contains(passThroughMethods, parent.ChildByFieldName("method").Content())
-	}
-
-	return true
-}
-
 func (implementation *rubyImplementation) IsRootOfRuleQuery(node *tree.Node) bool {
 	return true
 }

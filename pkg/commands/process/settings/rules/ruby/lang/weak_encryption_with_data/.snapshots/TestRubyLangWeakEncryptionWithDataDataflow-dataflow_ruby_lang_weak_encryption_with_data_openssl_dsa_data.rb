@@ -51,6 +51,15 @@ risks:
             content: OpenSSL::PKey::DSA.new(2048)
           content: |
             OpenSSL::PKey::DSA.new()
+    - detector_id: openssl_rsa_init
+      locations:
+        - filename: pkg/commands/process/settings/rules/ruby/lang/weak_encryption_with_data/testdata/openssl_dsa_data.rb
+          line_number: 5
+          parent:
+            line_number: 5
+            content: OpenSSL::PKey::RSA.new(2048)
+          content: |
+            OpenSSL::PKey::RSA.new()
 components: []
 
 

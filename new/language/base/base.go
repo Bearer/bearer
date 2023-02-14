@@ -35,7 +35,3 @@ func (lang *Language) CompileQuery(input string) (*tree.Query, error) {
 func (lang *Language) CompilePatternQuery(input string) (types.PatternQuery, error) {
 	return patternquery.Compile(lang, lang.implementation, input)
 }
-
-func (lang *Language) DescendIntoDetectionNode(node *tree.Node) bool {
-	return lang.implementation.DescendIntoDetectionNode(node)
-}

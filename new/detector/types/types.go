@@ -20,6 +20,7 @@ type Evaluator interface {
 }
 
 type DetectorSet interface {
+	NestedDetections(detectorType string) (bool, error)
 	DetectAt(
 		node *tree.Node,
 		detectorType string,
@@ -30,7 +31,14 @@ type DetectorSet interface {
 type Detector interface {
 	Name() string
 	DetectAt(node *tree.Node, evaluator Evaluator) ([]interface{}, error)
+	NestedDetections() bool
 	Close()
+}
+
+type DetectorBase struct{}
+
+func (*DetectorBase) NestedDetections() bool {
+	return true
 }
 
 type Composition interface {

@@ -95,16 +95,6 @@ type Implementation interface {
 	//   call(verify_mode: OpenSSL::SSL::VERIFY_NONE)    -> verify_mode
 	//   call(:verify_mode => OpenSSL::SSL::VERIFY_NONE) -> :verify_mode
 	TranslatePatternContent(fromNodeType, toNodeType, content string) string
-	// DescendIntoDetectionNode returns whether a tree detection search should
-	// proceed down into the given node.
-	//
-	// eg. given Ruby code like this:
-	//   user = Struct.new(email: ..., address: ...)
-	// 	 user.email
-	// `user` in `user.email` is unified with the assignment.
-	// But we don't want to see detections for the assignment when asking for the
-	// detections of `user.email`
-	DescendIntoDetectionNode(node *tree.Node) bool
 	// IsRootOfRuleQuery returns whether a node should be ignored or be a root
 	// of a custom rule query
 	//

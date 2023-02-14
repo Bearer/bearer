@@ -232,16 +232,6 @@ func (implementation *javascriptImplementation) PatternIsAnchored(node *tree.Nod
 	return !slices.Contains(unAnchored, node.Type())
 }
 
-func (implementation *javascriptImplementation) DescendIntoDetectionNode(node *tree.Node) bool {
-	// FIXME: this breaks expected behaviour of tests
-	// parent := node.Parent()
-	// if parent != nil && parent.Type() == "member_expression" && node.Equal(parent.ChildByFieldName("object")) {
-	// 	return false
-	// }
-
-	return true
-}
-
 func (implementation *javascriptImplementation) IsRootOfRuleQuery(node *tree.Node) bool {
 	return !(node.Type() == "expression_statement")
 }
