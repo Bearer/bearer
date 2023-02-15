@@ -1,0 +1,30 @@
+patterns:
+  - pattern: |
+      DD_RUM.init({
+          $<!>trackUserInteractions: true,
+        })
+  - pattern: |
+      window.DD_RUM.init({
+        $<!>trackUserInteractions: true,
+      })
+languages:
+  - javascript
+trigger: presence
+severity:
+  default: low
+metadata:
+  description: "Do not send sensitive data to Datadog."
+  remediation_message: |
+    ## Description
+    Sensitive and private data contained in your pages may be sent to datatdog to identify elements that a user interacted with.
+
+    ## Remediations
+
+    To control which information is sent to Datadog, manually set an action name, or implement a global scrubbing rule in the Datadog Browser SDK for RUM.
+
+    ## Resources
+    - [Datadog docs](https://docs.datadoghq.com)
+    - [Scrubbing data](https://docs.datadoghq.com/real_user_monitoring/browser/modifying_data_and_context/?tab=npm)
+  dsr_id: DSR-1
+  associated_recipe: Datadog
+  id: javascript_third_parties_datadog_browser
