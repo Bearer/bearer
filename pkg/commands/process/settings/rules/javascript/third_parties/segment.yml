@@ -1,0 +1,48 @@
+patterns:
+  - pattern: |
+      $<INSTANCE>.$<METHOD>($<...>$<DATA_TYPE>$<...>)
+    filters:
+      - variable: INSTANCE
+        detection: javascript_third_parties_segment_instance
+      - variable: DATA_TYPE
+        detection: datatype
+      - variable: METHOD
+        values:
+          - alias
+          - identify
+          - group
+          - page
+          - track
+auxiliary:
+  - id: javascript_third_parties_segment_instance
+    patterns:
+      - |
+        new Analytics()
+      - |
+        AnalyticsBrowser.load()
+languages:
+  - javascript
+trigger: local
+severity:
+  default: low
+  PII: critical
+  PHI: medium
+  PD: high
+skip_data_types:
+  - "Unique Identifier"
+metadata:
+  description: "Do not send sensitive data to Segment."
+  remediation_message: |
+    ## Description
+    Leaking sensitive data to third-party analytics tools is a common cause of data leaks and can lead to data breaches. This rule looks for instances of sensitive data sent to Segment.
+
+    ## Remediations
+
+    When sending data to analytics libraries, ensure all sensitive data is removed.
+
+    ## Resources
+    - [Segment Node.js docs](https://segment.com/docs/connections/sources/catalog/libraries/server/node/)
+    - [Segment JavaScript docs](https://segment.com/docs/connections/sources/catalog/libraries/website/javascript/)
+  dsr_id: DSR-1
+  associated_recipe: Segment
+  id: javascript_third_parties_segment
