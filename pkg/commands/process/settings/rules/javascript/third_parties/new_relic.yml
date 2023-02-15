@@ -1,0 +1,66 @@
+patterns:
+  - pattern: |
+      $<MODULE>.$<METHOD>($<_>, $<DATA_TYPE>)
+    filters:
+      - variable: DATA_TYPE
+        detection: datatype
+      - variable: MODULE
+        detection: javascript_new_relic_module
+      - variable: METHOD
+        values:
+          - noticeError
+          - setCustomAttribute
+  - pattern: |
+      $<MODULE>.$<METHOD>($<DATA_TYPE>, $<_>)
+    filters:
+      - variable: DATA_TYPE
+        detection: datatype
+      - variable: MODULE
+        detection: javascript_new_relic_module
+      - variable: METHOD
+        values:
+          - setPageViewName
+  - pattern: |
+      $<INTERACTION>.setAttribute($<_>, $<DATA_TYPE>)
+    filters:
+      - variable: DATA_TYPE
+        detection: datatype
+      - variable: INTERACTION
+        detection: javascript_new_relic_interaction
+languages:
+  - javascript
+auxiliary:
+  - id: javascript_new_relic_module
+    patterns:
+      - |
+        require("newrelic")
+      - |
+        require('newrelic')
+  - id: javascript_new_relic_interaction
+    patterns:
+      - pattern: |
+          $<MODULE>.interaction()
+        filters:
+        - variable: MODULE
+          detection: javascript_new_relic_module
+trigger: local
+severity:
+  default: low
+  PII: critical
+  PHI: medium
+  PD: high
+metadata:
+  description: "Do not send sensitive data to New Relic."
+  remediation_message: |
+    ## Description
+    Leaking sensitive data to third-party loggers is a common cause of data leaks and can lead to data breaches. This rule looks for instances of sensitive data sent to New Relic.
+
+    ## Remediations
+
+    When logging errors or events, ensure all sensitive data is removed.
+
+    ## Resources
+    - [New Relic Docs](https://docs.newrelic.com/)
+    - [Log obfuscation](https://docs.newrelic.com/docs/logs/ui-data/obfuscation-ui/)
+  dsr_id: DSR-1
+  id: "javascript_third_parties_new_relic"
