@@ -9,6 +9,10 @@ func TestRubyLangCookiesSummary(t *testing.T) {
 	runRulesTest("ruby/lang/cookies", "summary", "ruby_lang_cookies", t)
 }
 
+func TestRubyLangDeserializationOfUserInputSummary(t *testing.T) {
+	t.Parallel()
+	runRulesTest("ruby/lang/deserialization_of_user_input", "summary", "ruby_lang_deserialization_of_user_input", t)
+}
 func TestRubyLangFileGenerationSummary(t *testing.T) {
 	t.Parallel()
 	runRulesTest("ruby/lang/file_generation", "summary", "ruby_lang_file_generation", t)

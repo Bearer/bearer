@@ -16,21 +16,12 @@ import (
 	"github.com/bearer/curio/pkg/util/regex"
 )
 
-var passThroughMethods = []string{
-	"to_a",
-	"to_array",
-	"to_csv",
-	"to_h",
-	"to_hash",
-	"to_json",
-	"to_s",
-}
-
 var (
 	variableLookupParents = []string{"pair", "argument_list", "interpolation", "array", "binary"}
 
 	anonymousPatternNodeParentTypes = []string{"binary"}
-	patternMatchNodeContainerTypes  = []string{"argument_list"}
+	patternMatchNodeContainerTypes  = []string{"argument_list", "keyword_parameter", "optional_parameter"}
+	unanchoredPatternNodeTypes      = []string{"pair", "keyword_parameter"}
 
 	// $<name:type> or $<name:type1|type2> or $<name>
 	patternQueryVariableRegex = regexp.MustCompile(`\$<(?P<name>[^>:!\.]+)(?::(?P<types>[^>]+))?>`)
@@ -78,13 +69,17 @@ func (*rubyImplementation) AnalyzeFlow(rootNode *tree.Node) error {
 
 			if slice.Contains(variableLookupParents, parent.Type()) ||
 				(parent.Type() == "assignment" && node.Equal(parent.ChildByFieldName("right"))) ||
-				(parent.Type() == "call" && node.Equal(parent.ChildByFieldName("receiver"))) {
+				(parent.Type() == "call" && node.Equal(parent.ChildByFieldName("receiver"))) ||
+				(parent.Type() == "element_reference" && node.Equal(parent.ChildByFieldName("object"))) {
 				if scopedNode := scope.Lookup(node.Content()); scopedNode != nil {
 					node.UnifyWith(scopedNode)
 				}
 			}
 
-			if parent.Type() == "block_parameters" {
+			if parent.Type() == "method_parameters" ||
+				parent.Type() == "block_parameters" ||
+				(parent.Type() == "keyword_parameter" && node.Equal(parent.ChildByFieldName("name"))) ||
+				(parent.Type() == "optional_parameter" && node.Equal(parent.ChildByFieldName("name"))) {
 				scope.Assign(node.Content(), node)
 			}
 		case "block", "do_block":
@@ -175,7 +170,7 @@ func (*rubyImplementation) PatternMatchNodeContainerTypes() []string {
 }
 
 func (*rubyImplementation) PatternIsAnchored(node *tree.Node) bool {
-	if node.Type() == "pair" {
+	if slices.Contains(unanchoredPatternNodeTypes, node.Type()) {
 		return false
 	}
 

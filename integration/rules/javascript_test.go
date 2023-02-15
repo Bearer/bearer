@@ -81,3 +81,13 @@ func TestJavascriptElasticSearchSummary(t *testing.T) {
 	t.Parallel()
 	runRulesTest("javascript/third_parties/elasticsearch", "summary", "javascript_elasticsearch", t)
 }
+
+func TestJavascriptSegmentDataflow(t *testing.T) {
+	t.Parallel()
+	runRulesTest("javascript/third_parties/segment", "dataflow", "javascript_third_parties_segment", t)
+}
+
+func TestJavascriptSegmentSummary(t *testing.T) {
+	t.Parallel()
+	runRulesTest("javascript/third_parties/segment", "summary", "javascript_third_parties_segment", t)
+}
