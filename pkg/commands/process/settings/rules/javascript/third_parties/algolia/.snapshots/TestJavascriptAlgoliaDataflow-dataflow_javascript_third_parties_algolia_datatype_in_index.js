@@ -38,15 +38,6 @@ risks:
             content: myAlgolia.initIndex(company.bank_account_number)
           content: |
             $<CLIENT>.initIndex()
-    - detector_id: javascript_third_parties_algolia_module
-      locations:
-        - filename: pkg/commands/process/settings/rules/javascript/third_parties/algolia/testdata/datatype_in_index.js
-          line_number: 1
-          parent:
-            line_number: 1
-            content: require('algoliasearch')
-          content: |
-            require('algoliasearch')
 components: []
 
 

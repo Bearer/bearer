@@ -20,19 +20,16 @@ patterns:
 languages:
   - javascript
 auxiliary:
-  - id: javascript_third_parties_algolia_module
-    patterns:
-      - |
-        require('algoliasearch')
-      - |
-        require("algoliasearch")
   - id: javascript_third_parties_algolia_client
     patterns:
       - pattern: |
           $<MODULE>($<_>, $<_>)
         filters:
           - variable: MODULE
-            detection: javascript_third_parties_algolia_module
+            values:
+              - algoliasearch
+              - algolia
+              - client
   - id: javascript_third_parties_algolia_index
     patterns:
       - pattern: |

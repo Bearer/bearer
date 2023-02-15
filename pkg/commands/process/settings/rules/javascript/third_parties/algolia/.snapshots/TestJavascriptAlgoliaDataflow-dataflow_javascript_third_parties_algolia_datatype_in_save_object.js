@@ -75,15 +75,6 @@ risks:
             content: algoliasearch("123", "123")
           content: |
             $<MODULE>($<_>, $<_>)
-        - filename: pkg/commands/process/settings/rules/javascript/third_parties/algolia/testdata/datatype_in_save_object.js
-          line_number: 8
-          parent:
-            line_number: 8
-            content: |-
-                index
-                  .saveObject(userObj, { autoGenerateObjectIDIfNotExist: true })
-          content: |
-            $<MODULE>($<_>, $<_>)
     - detector_id: javascript_third_parties_algolia_index
       locations:
         - filename: pkg/commands/process/settings/rules/javascript/third_parties/algolia/testdata/datatype_in_save_object.js
@@ -93,15 +84,6 @@ risks:
             content: myAlgolia.initIndex("test_index")
           content: |
             $<CLIENT>.initIndex()
-    - detector_id: javascript_third_parties_algolia_module
-      locations:
-        - filename: pkg/commands/process/settings/rules/javascript/third_parties/algolia/testdata/datatype_in_save_object.js
-          line_number: 1
-          parent:
-            line_number: 1
-            content: require("algoliasearch")
-          content: |
-            require("algoliasearch")
 components: []
 
 
