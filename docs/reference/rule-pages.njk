@@ -19,21 +19,30 @@ eleventyComputed:
     <strong>Rule ID:</strong>
     {{rule.metadata.id}}</li>
   <li>
-    <strong>Data Security Risk ID:</strong>
-    {{rule.metadata.dsr_id}}</li>
+    <strong>OWASP ID:</strong>
+
+    <a href="{{ owasp.['{{owasp_id}}'] }}">{{rule.metadata.owasp_id}}</a>
+  </li>
   {% if rule.languages %}
     <li>
-      <strong>Languages:</strong>
-      {{rule.languages}}</li>
-  {% endif %}
-  <li>
-    <strong>Source:</strong>
-    <a class=" text-main dark:text-main-300 hover:underline" href="{{meta.sourcePath}}/blob/main/{{rule.location}}">{{rule.name}}.yml</a>
-  </li>
-</ul>
-{% renderTemplate 'liquid,md',
-rule.metadata %}
+      <strong>CWE ID:</strong>
+      <a href="https://cwe.mitre.org/data/definitions/{{rule.metadata.cwe_id}}.html">
+        {{rule.metadata.cwe_id}}
+      </a>
+    </li>
+    {% if rule.languages %}
+      <li>
+        <strong>Languages:</strong>
+        {{rule.languages}}</li>
+    {% endif %}
+    <li>
+      <strong>Source:</strong>
+      <a class=" text-main dark:text-main-300 hover:underline" href="{{meta.sourcePath}}/blob/main/{{rule.location}}">{{rule.name}}.yml</a>
+    </li>
+  </ul>
+  {% renderTemplate 'liquid,md',
+  rule.metadata %}
 
-{{remediation_message}}
+  {{remediation_message}}
 
-{% endrenderTemplate %}
+  {% endrenderTemplate %}
