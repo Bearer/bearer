@@ -113,25 +113,24 @@ func ScanRepository(repositoryUrl string, language string, reportingChan chan *M
 	metrics.NumberOfLineOfCode = float64(reportData.NumberOfLines)
 	metrics.DataTypes = reportData.DataTypes
 
-	if language == "ruby" || language == "javascript" {
-		// Run a policies scan
-		policiesOutput, _, err := scanner.Start("summary")
-		if err != nil {
-			log.Debug().Msgf("summary output failed: %s", err)
-			return
-		}
 
-		var policiesReportData map[string][]PolicyScanReport
-		err = json.Unmarshal(policiesOutput, &policiesReportData)
-		if err != nil {
-			log.Debug().Msgf("summary marshalling failed: %s", err)
-			log.Debug().Msg(string(policiesOutput[:]))
-			scanCrashedHandler(fmt.Errorf("got report response which errored %w", err))
-			return
-		}
-
-		metrics.PolicyBreaches = policiesReportData
+	// Run summary
+	policiesOutput, _, err := scanner.Start("summary")
+	if err != nil {
+		log.Debug().Msgf("summary output failed: %s", err)
+		return
 	}
+
+	var policiesReportData map[string][]PolicyScanReport
+	err = json.Unmarshal(policiesOutput, &policiesReportData)
+	if err != nil {
+		log.Debug().Msgf("summary marshalling failed: %s", err)
+		log.Debug().Msg(string(policiesOutput[:]))
+		scanCrashedHandler(fmt.Errorf("got report response which errored %w", err))
+		return
+	}
+
+	metrics.PolicyBreaches = policiesReportData
 
 	scanner.Cleanup()
 	reportingChan <- metrics
