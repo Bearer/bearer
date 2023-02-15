@@ -98,6 +98,7 @@ func (*javascriptImplementation) AnalyzeFlow(rootNode *tree.Node) error {
 
 			if slice.Contains(variableLookupParents, parent.Type()) ||
 				(parent.Type() == "assignment_expression" && node.Equal(parent.ChildByFieldName("right"))) ||
+				(parent.Type() == "new_expression" && node.Equal(parent.ChildByFieldName("constructor"))) ||
 				(parent.Type() == "variable_declarator" && node.Equal(parent.ChildByFieldName("value"))) ||
 				(parent.Type() == "member_expression" && node.Equal(parent.ChildByFieldName("object"))) ||
 				(parent.Type() == "call_expression" && node.Equal(parent.ChildByFieldName("function"))) ||
@@ -230,16 +231,6 @@ func (implementation *javascriptImplementation) PatternIsAnchored(node *tree.Nod
 	unAnchored := []string{"statement_blocks", "class_body", "pair"}
 
 	return !slices.Contains(unAnchored, node.Type())
-}
-
-func (implementation *javascriptImplementation) DescendIntoDetectionNode(node *tree.Node) bool {
-	// FIXME: this breaks expected behaviour of tests
-	// parent := node.Parent()
-	// if parent != nil && parent.Type() == "member_expression" && node.Equal(parent.ChildByFieldName("object")) {
-	// 	return false
-	// }
-
-	return true
 }
 
 func (implementation *javascriptImplementation) IsRootOfRuleQuery(node *tree.Node) bool {

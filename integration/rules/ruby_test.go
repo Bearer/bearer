@@ -194,6 +194,16 @@ func TestRubyThirdPartiesAlgoliaDataflow(t *testing.T) {
 	runRulesTest("ruby/third_parties/algolia", "dataflow", "ruby_third_parties_algolia", t)
 }
 
+func TestRubyThirdPartiesBigQuerySummary(t *testing.T) {
+	t.Parallel()
+	runRulesTest("ruby/third_parties/bigquery", "summary", "ruby_third_parties_bigquery", t)
+}
+
+func TestRubyThirdPartiesBigQueryDataflow(t *testing.T) {
+	t.Parallel()
+	runRulesTest("ruby/third_parties/bigquery", "dataflow", "ruby_third_parties_bigquery", t)
+}
+
 func TestRubyThirdPartiesDatadogSummary(t *testing.T) {
 	t.Parallel()
 	runRulesTest("ruby/third_parties/datadog", "summary", "ruby_third_parties_datadog", t)
@@ -322,4 +332,14 @@ func TestRubyThirdPartiesGoogleAnalyticsSummary(t *testing.T) {
 func TestRubyThirdPartiesGoogleAnalyticsDataflow(t *testing.T) {
 	t.Parallel()
 	runRulesTest("ruby/third_parties/google_analytics", "dataflow", "ruby_third_parties_google_analytics", t)
+}
+
+func TestRubyThirdPartiesClickHouseSummary(t *testing.T) {
+	t.Parallel()
+	runRulesTest("ruby/third_parties/clickhouse", "summary", "ruby_third_parties_clickhouse", t)
+}
+
+func TestRubyThirdPartiesClickHouseDataflow(t *testing.T) {
+	t.Parallel()
+	runRulesTest("ruby/third_parties/clickhouse", "dataflow", "ruby_third_parties_clickhouse", t)
 }

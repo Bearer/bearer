@@ -12,6 +12,7 @@ import (
 )
 
 type propertyDetector struct {
+	types.DetectorBase
 	pairQuery       *tree.Query
 	accessorQuery   *tree.Query
 	methodNameQuery *tree.Query

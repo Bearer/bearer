@@ -12,6 +12,7 @@ import (
 )
 
 type objectDetector struct {
+	types.DetectorBase
 	// Gathering properties
 	objectPairQuery *tree.Query
 	// Naming
@@ -19,7 +20,8 @@ type objectDetector struct {
 	variableDeclarationQuery *tree.Query
 	parentPairQuery          *tree.Query
 	// class
-	classNameQuery *tree.Query
+	classNameQuery   *tree.Query
+	constructorQuery *tree.Query
 	// properties
 	memberExpressionQuery    *tree.Query
 	subscriptExpressionQuery *tree.Query
@@ -59,6 +61,12 @@ func New(lang languagetypes.Language) (types.Detector, error) {
 		return nil, fmt.Errorf("error compiling class name query: %s", err)
 	}
 
+	// new User()
+	constructorQuery, err := lang.CompileQuery(`(new_expression constructor: (identifier) @name) @root`)
+	if err != nil {
+		return nil, fmt.Errorf("error compiling class name query: %s", err)
+	}
+
 	// user.name
 	memberExpressionQuery, err := lang.CompileQuery(`(member_expression object: (_) @object property: (property_identifier) @property) @root`)
 	if err != nil {
@@ -77,6 +85,7 @@ func New(lang languagetypes.Language) (types.Detector, error) {
 		variableDeclarationQuery: variableDeclarationQuery,
 		parentPairQuery:          parentPairQuery,
 		classNameQuery:           classNameQuery,
+		constructorQuery:         constructorQuery,
 		memberExpressionQuery:    memberExpressionQuery,
 		subscriptExpressionQuery: subscriptExpressionQuery,
 	}, nil
@@ -84,6 +93,10 @@ func New(lang languagetypes.Language) (types.Detector, error) {
 
 func (detector *objectDetector) Name() string {
 	return "object"
+}
+
+func (detector *objectDetector) NestedDetections() bool {
+	return false
 }
 
 func (detector *objectDetector) DetectAt(
@@ -106,6 +119,11 @@ func (detector *objectDetector) DetectAt(
 	}
 
 	detections, err = detector.getClass(node, evaluator)
+	if len(detections) != 0 || err != nil {
+		return detections, err
+	}
+
+	detections, err = detector.getConstructor(node, evaluator)
 	if len(detections) != 0 || err != nil {
 		return detections, err
 	}
@@ -222,6 +240,19 @@ func (detector *objectDetector) getClass(node *tree.Node, evaluator types.Evalua
 			return nil, err
 		}
 		data.Properties = append(data.Properties, detections...)
+	}
+
+	return []interface{}{data}, nil
+}
+
+func (detector *objectDetector) getConstructor(node *tree.Node, evaluator types.Evaluator) ([]interface{}, error) {
+	result, err := detector.constructorQuery.MatchOnceAt(node)
+	if result == nil || err != nil {
+		return nil, err
+	}
+
+	data := generictypes.Object{
+		Name: result["name"].Content(),
 	}
 
 	return []interface{}{data}, nil

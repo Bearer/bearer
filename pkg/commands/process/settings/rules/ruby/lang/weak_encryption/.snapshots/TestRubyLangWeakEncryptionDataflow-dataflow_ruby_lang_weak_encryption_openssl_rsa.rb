@@ -2,9 +2,23 @@ risks:
     - detector_id: openssl_rsa_init
       locations:
         - filename: pkg/commands/process/settings/rules/ruby/lang/weak_encryption/testdata/openssl_rsa.rb
+          line_number: 1
+          parent:
+            line_number: 1
+            content: OpenSSL::PKey::RSA.new(File.read('rsa.pem'))
+          content: |
+            OpenSSL::PKey::RSA.new()
+        - filename: pkg/commands/process/settings/rules/ruby/lang/weak_encryption/testdata/openssl_rsa.rb
           line_number: 4
           parent:
             line_number: 4
+            content: OpenSSL::PKey::RSA.new(2048)
+          content: |
+            OpenSSL::PKey::RSA.new()
+        - filename: pkg/commands/process/settings/rules/ruby/lang/weak_encryption/testdata/openssl_rsa.rb
+          line_number: 7
+          parent:
+            line_number: 7
             content: OpenSSL::PKey::RSA.new(2048)
           content: |
             OpenSSL::PKey::RSA.new()

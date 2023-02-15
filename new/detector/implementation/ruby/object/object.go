@@ -12,6 +12,7 @@ import (
 )
 
 type objectDetector struct {
+	types.DetectorBase
 	// Gathering properties
 	hashPairQuery *tree.Query
 	// Naming
@@ -73,6 +74,10 @@ func New(lang languagetypes.Language) (types.Detector, error) {
 
 func (detector *objectDetector) Name() string {
 	return "object"
+}
+
+func (detector *objectDetector) NestedDetections() bool {
+	return false
 }
 
 func (detector *objectDetector) DetectAt(

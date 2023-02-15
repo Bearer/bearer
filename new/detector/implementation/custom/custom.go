@@ -21,6 +21,7 @@ type Pattern struct {
 }
 
 type customDetector struct {
+	types.DetectorBase
 	detectorType string
 	patterns     []Pattern
 }
