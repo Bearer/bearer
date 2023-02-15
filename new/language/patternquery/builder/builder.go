@@ -140,12 +140,12 @@ func (builder *builder) compileNode(node *tree.Node, isRoot bool, isLastChild bo
 		return err
 	}
 
-	if anchored && isLastChild && !slices.Contains(builder.inputParams.UnanchoredOffsets, node.EndByte()) {
-		builder.write(" .")
-	}
-
 	if node.Equal(builder.matchNode) {
 		builder.write(" @match")
+	}
+
+	if anchored && isLastChild && !slices.Contains(builder.inputParams.UnanchoredOffsets, node.EndByte()) {
+		builder.write(" .")
 	}
 
 	return nil

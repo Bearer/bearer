@@ -1,0 +1,53 @@
+patterns:
+  - pattern: |
+      $<LIBRARY>.load($<USER_INPUT>$<...>)$<...>
+    filters:
+      - variable: LIBRARY
+        values:
+          - YAML
+          - Psych
+          - Syck
+          - JSON
+          - Oj
+          - Marshal
+      - variable: USER_INPUT
+        detection: ruby_lang_deserialization_of_user_input_user_input
+  - pattern: |
+      Marshal.restore($<USER_INPUT>$<...>)
+    filters:
+      - variable: USER_INPUT
+        detection: ruby_lang_deserialization_of_user_input_user_input
+  - pattern: |
+      Oj.object_load($<USER_INPUT>$<...>)$<...>
+    filters:
+      - variable: USER_INPUT
+        detection: ruby_lang_deserialization_of_user_input_user_input
+auxiliary:
+  - id: ruby_lang_deserialization_of_user_input_user_input
+    patterns:
+      - params
+      - request
+      - cookies
+      - | # AWS lambda
+        def $<_>($<!>event:, context:)
+        end
+languages:
+  - ruby
+trigger: presence
+severity:
+  default: high # FIXME
+metadata:
+  description: "Do not pass user input to unsafe deserialization methods."
+  remediation_message: |
+    ## Description
+
+    TODO
+
+    ## Remediations
+    TODO
+    <!--
+    ## Resources
+    Coming soon.
+    -->
+  dsr_id: DSR-? # FIXME
+  id: ruby_lang_deserialization_of_user_input
