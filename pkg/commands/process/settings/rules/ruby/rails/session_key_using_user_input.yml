@@ -1,0 +1,32 @@
+patterns:
+  - pattern: |
+      session[$<USER_INPUT>]
+    filters:
+      - variable: USER_INPUT
+        detection: ruby_rails_session_key_using_user_input_user_input
+auxiliary:
+  - id: ruby_rails_session_key_using_user_input_user_input
+    patterns:
+      - params
+      - request
+      - cookies
+languages:
+  - ruby
+trigger: presence
+severity:
+  default: high # FIXME
+metadata:
+  description: "Do not use user input in a session key."
+  remediation_message: |
+    ## Description
+
+    TODO
+
+    ## Remediations
+    TODO
+    <!--
+    ## Resources
+    Coming soon.
+    -->
+  dsr_id: DSR-? # FIXME
+  id: ruby_rails_session_key_using_user_input
