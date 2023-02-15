@@ -112,6 +112,16 @@ func TestJavascriptGoogleAnalyticsSummary(t *testing.T) {
 	runRulesTest("javascript/third_parties/google_analytics", "summary", "javascript_google_analytics", t)
 }
 
+func TestJavascriptReactGoogleAnalyticsDataflow(t *testing.T) {
+	t.Parallel()
+	runRulesTest("javascript/react/google_analytics", "dataflow", "javascript_react_google_analytics", t)
+}
+
+func TestJavascriptReactGoogleAnalyticsSummary(t *testing.T) {
+	t.Parallel()
+	runRulesTest("javascript/react/google_analytics", "summary", "javascript_react_google_analytics", t)
+}
+
 func TestJavascriptAlgoliaDataflow(t *testing.T) {
 	t.Parallel()
 	runRulesTest("javascript/third_parties/algolia", "dataflow", "javascript_third_parties_algolia", t)
@@ -140,4 +150,23 @@ func TestJavascriptDataDogBrowserDataflow(t *testing.T) {
 func TestJavascriptDataDogBrowserSummary(t *testing.T) {
 	t.Parallel()
 	runRulesTest("javascript/third_parties/datadog_browser", "summary", "javascript_third_parties_datadog_browser", t)
+}
+func TestJavascriptElasticSearchDataflow(t *testing.T) {
+	t.Parallel()
+	runRulesTest("javascript/third_parties/elasticsearch", "dataflow", "javascript_elasticsearch", t)
+}
+
+func TestJavascriptElasticSearchSummary(t *testing.T) {
+	t.Parallel()
+	runRulesTest("javascript/third_parties/elasticsearch", "summary", "javascript_elasticsearch", t)
+}
+
+func TestJavascriptSegmentDataflow(t *testing.T) {
+	t.Parallel()
+	runRulesTest("javascript/third_parties/segment", "dataflow", "javascript_third_parties_segment", t)
+}
+
+func TestJavascriptSegmentSummary(t *testing.T) {
+	t.Parallel()
+	runRulesTest("javascript/third_parties/segment", "summary", "javascript_third_parties_segment", t)
 }
