@@ -1,22 +1,28 @@
 patterns:
   - pattern: |
-      $<MODULE>.$<METHOD>($<_>, $<DATA_TYPE>)
+      $<CLIENT>.$<METHOD>($<_>, $<DATA_TYPE>)
     filters:
+      - variable: CLIENT
+        values:
+          - newrelic
+          - newRelic
+          - client
       - variable: DATA_TYPE
         detection: datatype
-      - variable: MODULE
-        detection: javascript_new_relic_module
       - variable: METHOD
         values:
           - noticeError
           - setCustomAttribute
   - pattern: |
-      $<MODULE>.$<METHOD>($<DATA_TYPE>, $<_>)
+      $<CLIENT>.$<METHOD>($<DATA_TYPE>, $<_>)
     filters:
+      - variable: CLIENT
+        values:
+          - newrelic
+          - newRelic
+          - client
       - variable: DATA_TYPE
         detection: datatype
-      - variable: MODULE
-        detection: javascript_new_relic_module
       - variable: METHOD
         values:
           - setPageViewName
@@ -30,19 +36,16 @@ patterns:
 languages:
   - javascript
 auxiliary:
-  - id: javascript_new_relic_module
-    patterns:
-      - |
-        require("newrelic")
-      - |
-        require('newrelic')
   - id: javascript_new_relic_interaction
     patterns:
       - pattern: |
-          $<MODULE>.interaction()
+          $<CLIENT>.interaction()
         filters:
-        - variable: MODULE
-          detection: javascript_new_relic_module
+          - variable: CLIENT
+            values:
+              - newrelic
+              - newRelic
+              - client
 trigger: local
 severity:
   default: low
