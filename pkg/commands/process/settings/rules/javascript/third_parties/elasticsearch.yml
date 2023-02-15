@@ -1,0 +1,34 @@
+patterns:
+  - pattern: |
+      $<CLIENT>.index($<...>$<DATA_TYPE>$<...>)
+    filters:
+      - variable: DATA_TYPE
+        detection: datatype
+      - variable: CLIENT
+        values:
+          - client
+          - elasticsearch
+          - es
+languages:
+  - javascript
+trigger: local
+severity:
+  default: low
+  PII: critical
+  PHI: medium
+  PD: high
+metadata:
+  description: "Do not send sensitive data to ElasticSearch."
+  remediation_message: |
+    ## Description
+
+    Leaking sensitive data to database is a common cause of data leaks and can lead to data breaches. This rule looks for instances of sensitive data sent to elasticsearch.
+
+    ## Remediations
+
+    <!--
+    ## Resources
+    Coming soon.
+    -->
+  dsr_id: DSR-1
+  id: "javascript_elasticsearch"
