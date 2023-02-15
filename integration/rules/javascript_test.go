@@ -131,3 +131,13 @@ func TestJavascriptDataDogSummary(t *testing.T) {
 	t.Parallel()
 	runRulesTest("javascript/third_parties/datadog", "summary", "javascript_third_parties_datadog", t)
 }
+
+func TestJavascriptDataDogBrowserDataflow(t *testing.T) {
+	t.Parallel()
+	runRulesTest("javascript/third_parties/datadog_browser", "dataflow", "javascript_third_parties_datadog_browser", t)
+}
+
+func TestJavascriptDataDogBrowserSummary(t *testing.T) {
+	t.Parallel()
+	runRulesTest("javascript/third_parties/datadog_browser", "summary", "javascript_third_parties_datadog_browser", t)
+}
