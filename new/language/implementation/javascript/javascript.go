@@ -98,6 +98,7 @@ func (*javascriptImplementation) AnalyzeFlow(rootNode *tree.Node) error {
 
 			if slice.Contains(variableLookupParents, parent.Type()) ||
 				(parent.Type() == "assignment_expression" && node.Equal(parent.ChildByFieldName("right"))) ||
+				(parent.Type() == "new_expression" && node.Equal(parent.ChildByFieldName("constructor"))) ||
 				(parent.Type() == "variable_declarator" && node.Equal(parent.ChildByFieldName("value"))) ||
 				(parent.Type() == "member_expression" && node.Equal(parent.ChildByFieldName("object"))) ||
 				(parent.Type() == "call_expression" && node.Equal(parent.ChildByFieldName("function"))) ||
