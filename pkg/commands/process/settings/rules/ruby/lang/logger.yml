@@ -47,4 +47,7 @@ metadata:
     Coming soon.
     -->
   dsr_id: DSR-5
+  cwe_id:
+    - 209
+    - 532
   id: ruby_lang_logger

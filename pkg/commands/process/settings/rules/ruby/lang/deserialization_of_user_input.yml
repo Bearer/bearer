@@ -50,4 +50,6 @@ metadata:
     Coming soon.
     -->
   dsr_id: DSR-? # FIXME
+  cwe_id:
+    - 502
   id: ruby_lang_deserialization_of_user_input

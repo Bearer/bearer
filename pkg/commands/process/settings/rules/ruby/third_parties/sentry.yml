@@ -145,5 +145,8 @@ metadata:
     ## Resources
     - [Sentry Docs](https://docs.sentry.io/)
   dsr_id: DSR-1
+  cwe_id:
+    - 200
+    - 201
   associated_recipe: Sentry
   id: ruby_third_parties_sentry

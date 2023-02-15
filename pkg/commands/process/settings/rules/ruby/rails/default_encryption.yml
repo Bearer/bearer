@@ -32,4 +32,6 @@ metadata:
     Coming soon.
     -->
   dsr_id: DSR-10
+  cwe_id:
+    - 313
   id: ruby_rails_default_encryption

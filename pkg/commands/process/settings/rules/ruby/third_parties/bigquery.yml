@@ -3,15 +3,15 @@ patterns:
       $<INSERTER>.insert($<...>$<DATA_TYPE>$<...>)$<...>
     filters:
       - either:
-        - variable: INSERTER
-          detection: ruby_third_parties_bigquery_dataset
-        - variable: INSERTER
-          detection: ruby_third_parties_bigquery_insert_async
-        - variable: INSERTER
-          detection: ruby_third_parties_bigquery_table
+          - variable: INSERTER
+            detection: ruby_third_parties_bigquery_dataset
+          - variable: INSERTER
+            detection: ruby_third_parties_bigquery_insert_async
+          - variable: INSERTER
+            detection: ruby_third_parties_bigquery_table
       - either:
-        - variable: DATA_TYPE
-          detection: datatype
+          - variable: DATA_TYPE
+            detection: datatype
 languages:
   - ruby
 auxiliary:
@@ -77,5 +77,8 @@ metadata:
     ## Resources
     - [BigQuery docs](https://cloud.google.com/ruby/docs)
   dsr_id: DSR-6
+  cwe_id:
+    - 200
+    - 201
   associated_recipe: Google Cloud BigQuery
   id: ruby_third_parties_bigquery

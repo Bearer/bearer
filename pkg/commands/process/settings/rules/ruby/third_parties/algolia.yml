@@ -44,5 +44,8 @@ metadata:
     ## Resources
     - [Algolia docs](https://www.algolia.com/doc/)
   dsr_id: DSR-6
+  cwe_id:
+    - 200
+    - 201
   associated_recipe: Algolia
   id: ruby_third_parties_algolia

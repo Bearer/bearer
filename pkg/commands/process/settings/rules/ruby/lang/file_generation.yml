@@ -71,4 +71,7 @@ metadata:
     Coming soon.
     -->
   dsr_id: DSR-4
+  cwe_id:
+    - 532
+    - 312
   id: ruby_lang_file_generation

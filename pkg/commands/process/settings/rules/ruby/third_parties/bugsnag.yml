@@ -47,5 +47,8 @@ metadata:
     ## Resources
     - [Bugsnag Docs](https://docs.bugsnag.com/platforms/ruby/rails/)
   dsr_id: DSR-1
+  cwe_id:
+    - 200
+    - 201
   associated_recipe: Bugsnag
   id: ruby_third_parties_bugsnag

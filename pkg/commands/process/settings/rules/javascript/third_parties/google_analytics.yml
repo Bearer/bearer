@@ -28,4 +28,7 @@ metadata:
     Coming soon.
     -->
   dsr_id: DSR-1
+  cwe_id:
+    - 200
+    - 201
   id: "javascript_google_analytics"

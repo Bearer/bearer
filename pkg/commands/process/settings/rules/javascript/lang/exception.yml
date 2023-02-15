@@ -58,4 +58,6 @@ metadata:
     Coming soon.
     -->
   dsr_id: DSR-5
+  cwe_id:
+    - 209
   id: javascript_lang_exception

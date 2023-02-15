@@ -53,4 +53,7 @@ metadata:
     ## Resources
     - [NodeJS Crypto Module](https://nodejs.org/api/crypto.html#cryptocreatehmacalgorithm-key-options)
   dsr_id: "DSR-5"
+  cwe_id:
+    - 331
+    - 326
   id: "javascript_weak_encryption"
