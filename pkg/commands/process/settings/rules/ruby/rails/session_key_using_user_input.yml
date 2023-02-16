@@ -14,7 +14,10 @@ languages:
   - ruby
 trigger: presence
 severity:
-  default: high # FIXME
+  default: low
+  PII: critical
+  PHI: medium
+  PD: high
 metadata:
   description: "Do not use user input in a session key."
   remediation_message: |

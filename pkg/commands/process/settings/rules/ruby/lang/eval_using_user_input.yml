@@ -39,7 +39,10 @@ languages:
   - ruby
 trigger: presence
 severity:
-  default: high # FIXME
+  default: low
+  PII: critical
+  PHI: medium
+  PD: high
 metadata:
   description: "Do not generate code using user input."
   remediation_message: |

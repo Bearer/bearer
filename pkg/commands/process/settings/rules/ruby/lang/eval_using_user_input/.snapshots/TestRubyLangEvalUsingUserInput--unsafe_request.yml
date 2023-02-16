@@ -1,4 +1,4 @@
-high:
+low:
     - rule_dsrid: DSR-?
       rule_display_id: ruby_lang_eval_using_user_input
       rule_description: Do not generate code using user input.
