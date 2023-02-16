@@ -40,5 +40,5 @@ metadata:
     -->
   dsr_id: DSR-5
   cwe_id:
-    - 209
+    - 210
   id: ruby_lang_exception

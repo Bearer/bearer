@@ -138,6 +138,5 @@ metadata:
     - [Google Dataflow Docs](https://cloud.google.com/ruby/docs/reference/google-cloud-dataflow/latest)
   dsr_id: DSR-1
   cwe_id:
-    - 200
     - 201
   id: ruby_third_parties_google_dataflow

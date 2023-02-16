@@ -42,5 +42,5 @@ metadata:
     -->
   dsr_id: DSR-2
   cwe_id:
-    - 319
+    - 295
   id: ruby_lang_ssl_verification

@@ -71,7 +71,6 @@ metadata:
     - [Airbrake Docs](https://docs.airbrake.io/)
   dsr_id: DSR-1
   cwe_id:
-    - 200
     - 201
   associated_recipe: Airbrake
   id: ruby_third_parties_airbrake

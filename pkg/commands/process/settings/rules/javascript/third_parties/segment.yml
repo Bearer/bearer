@@ -45,7 +45,6 @@ metadata:
     - [Segment JavaScript docs](https://segment.com/docs/connections/sources/catalog/libraries/website/javascript/)
   dsr_id: DSR-1
   cwe_id:
-    - 200
     - 201
   associated_recipe: Segment
   id: javascript_third_parties_segment

@@ -35,7 +35,6 @@ metadata:
     - [ClickHouse docs](https://clickhouse.com/docs/en/intro/)
   dsr_id: DSR-6
   cwe_id:
-    - 200
     - 201
   associated_recipe: ClickHouse
   id: ruby_third_parties_clickhouse

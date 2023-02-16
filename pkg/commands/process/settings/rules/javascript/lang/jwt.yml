@@ -44,5 +44,5 @@ metadata:
     -->
   dsr_id: "DSR-5"
   cwe_id:
-    - 315
+    - 312
   id: "javascript_jwt"

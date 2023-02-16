@@ -78,7 +78,6 @@ metadata:
     - [BigQuery docs](https://cloud.google.com/ruby/docs)
   dsr_id: DSR-6
   cwe_id:
-    - 200
     - 201
   associated_recipe: Google Cloud BigQuery
   id: ruby_third_parties_bigquery

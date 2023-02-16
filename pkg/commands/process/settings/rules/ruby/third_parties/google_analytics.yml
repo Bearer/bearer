@@ -42,7 +42,6 @@ metadata:
     - [Google Analytics docs](https://developers.google.com/analytics/devguides/reporting/)
   dsr_id: DSR-1
   cwe_id:
-    - 200
     - 201
   associated_recipe: Google Analytics
   id: ruby_third_parties_google_analytics

@@ -55,6 +55,5 @@ metadata:
     - [Open Telemetry Docs](https://opentelemetry.io/docs/)
   dsr_id: DSR-1
   cwe_id:
-    - 200
     - 201
   id: ruby_third_parties_open_telemetry

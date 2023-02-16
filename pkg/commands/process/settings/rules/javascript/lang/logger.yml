@@ -96,6 +96,6 @@ metadata:
     -->
   dsr_id: "DSR-5"
   cwe_id:
-    - 209
+    - 1295
     - 532
   id: "javascript_lang_logger"

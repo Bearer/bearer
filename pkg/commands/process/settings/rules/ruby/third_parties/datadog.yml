@@ -52,7 +52,6 @@ metadata:
     - [Scrubbing data](https://docs.datadoghq.com/tracing/configure_data_security/?tab=mongodb#scrub-sensitive-data-from-your-spans)
   dsr_id: DSR-1
   cwe_id:
-    - 200
     - 201
   associated_recipe: Datadog
   id: ruby_third_parties_datadog
