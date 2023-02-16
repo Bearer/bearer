@@ -34,5 +34,5 @@ metadata:
     -->
   dsr_id: DSR-4
   cwe_id:
-    - 312
+    - 313
   id: javascript_lang_file_generation

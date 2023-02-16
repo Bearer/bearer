@@ -73,6 +73,5 @@ metadata:
   dsr_id: DSR-4
   cwe_id:
     - 532
-    - 312
     - 313
   id: ruby_lang_file_generation
