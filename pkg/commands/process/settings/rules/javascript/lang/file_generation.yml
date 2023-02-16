@@ -33,4 +33,6 @@ metadata:
     Coming soon.
     -->
   dsr_id: DSR-4
+  cwe_id:
+    - 313
   id: javascript_lang_file_generation

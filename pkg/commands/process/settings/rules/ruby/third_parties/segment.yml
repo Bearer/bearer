@@ -41,5 +41,7 @@ metadata:
     ## Resources
     - [Segment docs](https://segment.com/docs/connections/sources/catalog/libraries/server/ruby/)
   dsr_id: DSR-1
+  cwe_id:
+    - 201
   associated_recipe: Segment
   id: ruby_third_parties_segment

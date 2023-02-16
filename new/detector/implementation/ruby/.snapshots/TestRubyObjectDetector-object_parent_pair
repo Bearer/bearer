@@ -12,28 +12,4 @@
           matchnode: {}
           data:
             name: parent
-- position: "2:3"
-  content: |-
-    "parent" => {
-        "hey" => "hi"
-      }
-  data:
-    name: parent
-    properties:
-        - detectortype: property
-          matchnode: {}
-          data:
-            name: hey
-- position: "2:15"
-  content: |-
-    {
-        "hey" => "hi"
-      }
-  data:
-    name: ""
-    properties:
-        - detectortype: property
-          matchnode: {}
-          data:
-            name: hey
 

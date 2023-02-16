@@ -44,5 +44,7 @@ metadata:
     ## Resources
     - [Honeybadger Docs](https://docs.honeybadger.io/lib/ruby/integration-guides/rails-exception-tracking/)
   dsr_id: DSR-1
+  cwe_id:
+    - 201
   associated_recipe: Honeybadger
   id: ruby_third_parties_honeybadger

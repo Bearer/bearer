@@ -95,4 +95,7 @@ metadata:
     Coming soon.
     -->
   dsr_id: "DSR-5"
+  cwe_id:
+    - 1295
+    - 532
   id: "javascript_lang_logger"

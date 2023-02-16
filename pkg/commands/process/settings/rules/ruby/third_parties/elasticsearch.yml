@@ -53,5 +53,7 @@ metadata:
     ## Resources
     - [Elasticsearch docs](https://www.elastic.co/guide/en/elasticsearch/client/ruby-api/current/index.html)
   dsr_id: DSR-6
+  cwe_id:
+    - 201
   associated_recipe: Elasticsearch
   id: ruby_third_parties_elasticsearch

@@ -39,4 +39,6 @@ metadata:
     Coming soon.
     -->
   dsr_id: DSR-3
+  cwe_id:
+    - 315
   id: ruby_lang_jwt

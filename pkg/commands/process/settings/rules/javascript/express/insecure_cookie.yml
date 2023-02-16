@@ -34,5 +34,8 @@ metadata:
 
     ## Resources
     - [Express Security Best Practices](https://expressjs.com/en/advanced/best-practice-security.html#use-cookies-securely)
-  dsr_id: "DSR-5"
+  dsr_id: "DSR-3"
+  cwe_id:
+    - 1004
+    - 614
   id: "express_insecure_cookie"

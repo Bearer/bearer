@@ -1,5 +1,5 @@
 low:
-    - rule_dsrid: DSR-5
+    - rule_dsrid: DSR-3
       rule_display_id: express_insecure_cookie
       rule_description: Ensure cookies are sent over HTTPS.
       rule_documentation_url: https://curio.sh/reference/rules/express_insecure_cookie
