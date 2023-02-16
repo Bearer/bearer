@@ -37,4 +37,5 @@ General Flags
 
 
 flag error: report flags error: invalid report argument; supported values: summary, privacy
+exit status 1
 

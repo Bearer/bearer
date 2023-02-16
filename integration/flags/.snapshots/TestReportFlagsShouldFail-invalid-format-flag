@@ -37,4 +37,5 @@ General Flags
 
 
 flag error: report flags error: invalid format argument; supported values: json, yaml
+exit status 1
 
