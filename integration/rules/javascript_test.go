@@ -96,3 +96,8 @@ func TestJavascriptNewRelicSummary(t *testing.T) {
 	t.Parallel()
 	runRulesTest("javascript/third_parties/new_relic", "summary", "javascript_third_parties_new_relic", t)
 }
+
+func TestJavascriptRollbarSummary(t *testing.T) {
+	t.Parallel()
+	runRulesTest("javascript/third_parties/rollbar", "summary", "javascript_rollbar", t)
+}
