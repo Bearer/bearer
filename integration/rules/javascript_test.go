@@ -91,3 +91,8 @@ func TestJavascriptSegmentSummary(t *testing.T) {
 	t.Parallel()
 	runRulesTest("javascript/third_parties/segment", "summary", "javascript_third_parties_segment", t)
 }
+
+func TestJavascriptRollbarSummary(t *testing.T) {
+	t.Parallel()
+	runRulesTest("javascript/third_parties/rollbar", "summary", "javascript_rollbar", t)
+}
