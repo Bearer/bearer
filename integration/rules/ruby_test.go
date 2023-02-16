@@ -22,6 +22,10 @@ func TestRubyLangFileGeneration(t *testing.T) {
 	getRunner(t).runTest(t, rubyRulesPath+"lang/file_generation")
 }
 
+func TestRubyLangFtpUsingUserInput(t *testing.T) {
+	getRunner(t).runTest(t, rubyRulesPath+"lang/ftp_using_user_input")
+}
+
 func TestRubyLangHttpGetParams(t *testing.T) {
 	getRunner(t).runTest(t, rubyRulesPath+"lang/http_get_params")
 }
