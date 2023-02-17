@@ -2,109 +2,86 @@ package integration_test
 
 import "testing"
 
+const javascriptRulesPath string = "../../pkg/commands/process/settings/rules/javascript/"
+
 func TestJavascriptLangLoggerSummary(t *testing.T) {
-	t.Parallel()
-	runRulesTest("javascript/lang/logger", "summary", "javascript_lang_logger", t)
+	getRunner(t).runTest(t, javascriptRulesPath+"lang/logger")
 }
 
 func TestJavascriptLangSessionSummary(t *testing.T) {
-	t.Parallel()
-	runRulesTest("javascript/lang/session", "summary", "javascript_session", t)
+	getRunner(t).runTest(t, javascriptRulesPath+"lang/session")
 }
 
 func TestJavascriptWeakEncryptionSummary(t *testing.T) {
-	t.Parallel()
-	runRulesTest("javascript/lang/weak_encryption", "summary", "javascript_weak_encryption", t)
-}
-
-func TestExpressSecureCookieSummary(t *testing.T) {
-	t.Parallel()
-	runRulesTest("javascript/express/insecure_cookie", "summary", "express_insecure_cookie", t)
+	getRunner(t).runTest(t, javascriptRulesPath+"lang/weak_encryption")
 }
 
 func TestJavascriptJWTSummary(t *testing.T) {
-	t.Parallel()
-	runRulesTest("javascript/lang/jwt", "summary", "javascript_jwt", t)
+	getRunner(t).runTest(t, javascriptRulesPath+"lang/jwt")
 }
 
 func TestJavascriptHTTPInsecureSummary(t *testing.T) {
-	t.Parallel()
-	runRulesTest("javascript/lang/http_insecure", "summary", "javascript_http_insecure", t)
-}
-
-func TestJavascriptThirdPartySentrySummary(t *testing.T) {
-	t.Parallel()
-	runRulesTest("javascript/third_parties/sentry", "summary", "javascript_third_parties_sentry", t)
+	getRunner(t).runTest(t, javascriptRulesPath+"lang/http_insecure")
 }
 
 func TestJavascriptLangExceptionSummary(t *testing.T) {
-	t.Parallel()
-	runRulesTest("javascript/lang/exception", "summary", "javascript_lang_exception", t)
+	getRunner(t).runTest(t, javascriptRulesPath+"lang/exception")
 }
 
 func TestJavascriptLangFileGenerationSummary(t *testing.T) {
-	t.Parallel()
-	runRulesTest("javascript/lang/file_generation", "summary", "javascript_lang_file_generation", t)
+	getRunner(t).runTest(t, javascriptRulesPath+"lang/file_generation")
 }
 
-func TestJavascriptGTMSummary(t *testing.T) {
-	t.Parallel()
-	runRulesTest("javascript/third_parties/google_tag_manager", "summary", "javascript_google_tag_manager", t)
-}
-
-func TestJavascriptGoogleAnalyticsSummary(t *testing.T) {
-	t.Parallel()
-	runRulesTest("javascript/third_parties/google_analytics", "summary", "javascript_google_analytics", t)
+func TestExpressSecureCookieSummary(t *testing.T) {
+	getRunner(t).runTest(t, javascriptRulesPath+"express/insecure_cookie")
 }
 
 func TestJavascriptReactGoogleAnalyticsSummary(t *testing.T) {
-	t.Parallel()
-	runRulesTest("javascript/react/google_analytics", "summary", "javascript_react_google_analytics", t)
+	getRunner(t).runTest(t, javascriptRulesPath+"react/google_analytics")
+}
+
+func TestJavascriptThirdPartySentrySummary(t *testing.T) {
+	getRunner(t).runTest(t, javascriptRulesPath+"third_parties/sentry")
+}
+
+func TestJavascriptGTMSummary(t *testing.T) {
+	getRunner(t).runTest(t, javascriptRulesPath+"third_parties/google_tag_manager")
+}
+
+func TestJavascriptGoogleAnalyticsSummary(t *testing.T) {
+	getRunner(t).runTest(t, javascriptRulesPath+"third_parties/google_analytics")
 }
 
 func TestJavascriptAlgoliaSummary(t *testing.T) {
-	t.Parallel()
-	runRulesTest("javascript/third_parties/algolia", "summary", "javascript_third_parties_algolia", t)
+	getRunner(t).runTest(t, javascriptRulesPath+"third_parties/algolia")
 }
 
 func TestJavascriptDataDogSummary(t *testing.T) {
-	t.Parallel()
-	runRulesTest("javascript/third_parties/datadog", "summary", "javascript_third_parties_datadog", t)
+	getRunner(t).runTest(t, javascriptRulesPath+"third_parties/datadog")
 }
 
 func TestJavascriptDataDogBrowserSummary(t *testing.T) {
-	t.Parallel()
-	runRulesTest("javascript/third_parties/datadog_browser", "summary", "javascript_third_parties_datadog_browser", t)
+	getRunner(t).runTest(t, javascriptRulesPath+"third_parties/datadog_browser")
 }
 
 func TestJavascriptElasticSearchSummary(t *testing.T) {
-	t.Parallel()
-	runRulesTest("javascript/third_parties/elasticsearch", "summary", "javascript_elasticsearch", t)
+	getRunner(t).runTest(t, javascriptRulesPath+"third_parties/elasticsearch")
 }
 
 func TestJavascriptSegmentDataflow(t *testing.T) {
-	t.Parallel()
-	runRulesTest("javascript/third_parties/segment", "dataflow", "javascript_third_parties_segment", t)
-}
-
-func TestJavascriptSegmentSummary(t *testing.T) {
-	t.Parallel()
-	runRulesTest("javascript/third_parties/segment", "summary", "javascript_third_parties_segment", t)
+	getRunner(t).runTest(t, javascriptRulesPath+"third_parties/segment")
 }
 
 func TestJavascriptNewRelicSummary(t *testing.T) {
-	t.Parallel()
-	runRulesTest("javascript/third_parties/new_relic", "summary", "javascript_third_parties_new_relic", t)
+	getRunner(t).runTest(t, javascriptRulesPath+"third_parties/new_relic")
 }
 
 func TestJavascriptRollbarSummary(t *testing.T) {
-	t.Parallel()
-	runRulesTest("javascript/third_parties/rollbar", "summary", "javascript_rollbar", t)
+	getRunner(t).runTest(t, javascriptRulesPath+"third_parties/rollbar")
 }
 
 func TestJavascriptHoneybadgerSummary(t *testing.T) {
-	t.Parallel()
-	runRulesTest("javascript/third_parties/honeybadger", "summary", "javascript_honeybadger", t)
+	getRunner(t).runTest(t, javascriptRulesPath+"third_parties/honeybadger")
 }
 
 func TestJavascriptAirbrakeSummary(t *testing.T) {

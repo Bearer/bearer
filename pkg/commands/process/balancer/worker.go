@@ -91,7 +91,7 @@ func (worker *Worker) Start() {
 	}
 	bar := output.GetProgressBar(len(worker.FileList), worker.config, "files")
 
-	reportFile, err := os.Create(worker.task.Definition.FilePath)
+	reportFile, err := os.Create(worker.task.Definition.ReportPath)
 	if err != nil {
 		worker.complete(err)
 		return
@@ -126,7 +126,7 @@ func (worker *Worker) Start() {
 			Definition: workertype.ProcessRequest{
 				Repository:             worker.task.Definition.Repository,
 				Files:                  work,
-				FilePath:               tmpReportFile,
+				ReportPath:             tmpReportFile,
 				BlameRevisionsFilePath: blameRevisionsFilePath,
 			},
 			Done: worker.chunkDone,

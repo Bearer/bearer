@@ -1,0 +1,24 @@
+critical:
+    - rule_dsrid: DSR-7
+      rule_display_id: ruby_lang_weak_encryption_with_data
+      rule_description: Do not use weak encryption libraries to encrypt sensitive data.
+      rule_documentation_url: https://curio.sh/reference/rules/ruby_lang_weak_encryption_with_data
+      line_number: 1
+      filename: digest_md5.rb
+      category_groups:
+        - PII
+      parent_line_number: 1
+      parent_content: Digest::MD5.hexdigest(user.address)
+low:
+    - rule_dsrid: DSR-7
+      rule_display_id: ruby_lang_weak_encryption
+      rule_description: Avoid weak encryption libraries.
+      rule_documentation_url: https://curio.sh/reference/rules/ruby_lang_weak_encryption
+      line_number: 1
+      filename: digest_md5.rb
+      category_groups:
+        - PII
+      parent_line_number: 1
+      parent_content: Digest::MD5.hexdigest(user.address)
+
+
