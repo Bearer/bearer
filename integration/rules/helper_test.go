@@ -35,7 +35,11 @@ func getRunner(t *testing.T) *Runner {
 		return runner
 	}
 
-	commands.ScanFlags.BindForConfigInit(commands.NewScanCommand())
+	err := commands.ScanFlags.BindForConfigInit(commands.NewScanCommand())
+	if err != nil {
+		t.Fatalf("failed to bind flags: %s", err)
+	}
+
 	configFlags, err := commands.ScanFlags.ToOptions([]string{})
 	if err != nil {
 		t.Fatalf("failed to generate default flags: %s", err)
@@ -99,13 +103,17 @@ func (runner *Runner) ScanSingleFile(t *testing.T, testDataPath string, fileRela
 		t.Fatalf("failed to get absolute path of report file: %s", err)
 	}
 
-	runner.worker.Scan(work.ProcessRequest{
+	err = runner.worker.Scan(work.ProcessRequest{
 		Files:      []work.File{fileRelativePath},
 		ReportPath: detectorsReportPath,
 		Repository: work.Repository{
 			Dir: testDataPath,
 		},
 	})
+
+	if err != nil {
+		t.Fatalf("failed to do scan %s", err)
+	}
 
 	outputBuffer := bytes.NewBuffer(nil)
 	logger := output.PlainLogger(outputBuffer)
